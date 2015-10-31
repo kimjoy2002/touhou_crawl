@@ -1,0 +1,37 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// 파일이름: event.h
+//
+// 내용: 이벤트 클래스 선언
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+#ifndef  __EVENT_H__
+#define  __EVENT_H__
+
+#include "common.h"
+#include "enum.h"
+
+enum event_list
+{
+	EVL_KISME=100,
+	EVL_SIGHT_P, //시야에 들어와야 생기는 P
+	EVL_FLOOR //땅이 된다
+};
+
+class events
+{
+public:
+	int id;
+	coord_def position;
+	event_type type;
+	int count;
+	bool prev_sight;
+
+	events();
+	events(int id_, coord_def position_, event_type type_, int count_ = -1);
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+	int action(int delay_);
+};
+#endif // __EVENT_H__

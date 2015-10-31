@@ -1,0 +1,138 @@
+﻿빌드 시작: 2015-04-10 오후 10:57:21
+     1>2 노드의 "C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\th_crawl\th_crawl.vcxproj" 프로젝트(build 대상)입니다.
+     1>InitializeBuildStatus:
+         "AlwaysCreate"이(가) 지정되었기 때문에 "Release\th_crawl.unsuccessfulbuild"을(를) 만들고 있습니다.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Astar.cpp Skill2.cpp action.cpp atifact.cpp book.cpp create_item.cpp create_mon.cpp d3dUtility.cpp d3dinit.cpp debuf.cpp display.cpp dump.cpp environment.cpp equip_action.cpp event.cpp floor.cpp god.cpp god_gift.cpp help.cpp item.cpp item_action.cpp iteminfor.cpp mainloop.cpp make_item.cpp makechar.cpp map.cpp map_file.cpp map_pattern.cpp moninfor.cpp monster.cpp player.cpp player_damage.cpp player_turnend.cpp projectile.cpp ring.cpp save.cpp scroll.cpp skill_use.cpp smoke.cpp speak.cpp spell.cpp spell_infor.cpp spell_use.cpp spellcard.cpp summon.cpp temple_pattern.cpp texture.cpp throw.cpp tile.cpp wiz.cpp
+         Astar.cpp
+         Skill2.cpp
+         action.cpp
+         atifact.cpp
+         book.cpp
+         create_item.cpp
+         create_mon.cpp
+         d3dUtility.cpp
+         d3dinit.cpp
+         debuf.cpp
+         display.cpp
+     1>display.cpp(88): warning C4351: 새로운 동작: 'display_manager::item_view' 배열의 요소가 기본으로 초기화됩니다.
+         dump.cpp
+         environment.cpp
+         equip_action.cpp
+         event.cpp
+         floor.cpp
+         god.cpp
+         god_gift.cpp
+         help.cpp
+         item.cpp
+         컴파일하고 있습니다...
+         item_action.cpp
+         iteminfor.cpp
+         mainloop.cpp
+         make_item.cpp
+         makechar.cpp
+         map.cpp
+         map_file.cpp
+         map_pattern.cpp
+         moninfor.cpp
+         monster.cpp
+         player.cpp
+     1>player.cpp(64): warning C4351: 새로운 동작: 'players::equipment' 배열의 요소가 기본으로 초기화됩니다.
+         player_damage.cpp
+         player_turnend.cpp
+         projectile.cpp
+         ring.cpp
+         save.cpp
+         scroll.cpp
+         skill_use.cpp
+         smoke.cpp
+         speak.cpp
+         컴파일하고 있습니다...
+         spell.cpp
+         spell_infor.cpp
+         spell_use.cpp
+         spellcard.cpp
+         summon.cpp
+         temple_pattern.cpp
+         texture.cpp
+         throw.cpp
+         tile.cpp
+         wiz.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\Release\th_crawl.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\th_crawl.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\Release\th_crawl.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\Release\th_crawl.lib" /MACHINE:X86 Release\action.obj
+         Release\Astar.obj
+         Release\atifact.obj
+         Release\beam.obj
+         Release\book.obj
+         Release\common.obj
+         Release\const.obj
+         Release\create_item.obj
+         Release\create_mon.obj
+         Release\d3dinit.obj
+         Release\d3dUtility.obj
+         Release\debuf.obj
+         Release\display.obj
+         Release\dump.obj
+         Release\environment.obj
+         Release\equip_action.obj
+         Release\event.obj
+         Release\floor.obj
+         Release\FSM.obj
+         Release\god.obj
+         Release\god_gift.obj
+         Release\help.obj
+         Release\item.obj
+         Release\iteminfor.obj
+         Release\item_action.obj
+         Release\key.obj
+         Release\mainloop.obj
+         Release\makechar.obj
+         Release\make_item.obj
+         Release\map.obj
+         Release\map_file.obj
+         Release\map_pattern.obj
+         Release\moninfor.obj
+         Release\monster.obj
+         Release\note.obj
+         Release\player.obj
+         Release\player_damage.obj
+         Release\player_turnend.obj
+         Release\pos.obj
+         Release\potion.obj
+         Release\projectile.obj
+         Release\rect.obj
+         Release\ring.obj
+         Release\save.obj
+         Release\scroll.obj
+         Release\skill.obj
+         Release\Skill2.obj
+         Release\skill_use.obj
+         Release\smoke.obj
+         Release\speak.obj
+         Release\spell.obj
+         Release\spellcard.obj
+         Release\spell_infor.obj
+         Release\spell_use.obj
+         Release\summon.obj
+         Release\temp.obj
+         Release\temple_pattern.obj
+         Release\texture.obj
+         Release\textureUtility.obj
+         Release\text_manager.obj
+         Release\throw.obj
+         Release\tile.obj
+         Release\weapon.obj
+         Release\wiz.obj
+         코드를 생성하고 있습니다.
+         코드를 생성했습니다.
+         th_crawl.vcxproj -> C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\Release\th_crawl.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\Release\th_crawl.exe.manifest" /manifest Release\th_crawl.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         "Release\th_crawl.unsuccessfulbuild" 파일을 삭제하고 있습니다.
+         "Release\th_crawl.lastbuildstate"에 연결(touching)하고 있습니다.
+     1>"C:\Users\kim\Documents\Visual Studio 2010\Projects\th_crawl\th_crawl\th_crawl.vcxproj" 프로젝트를 빌드했습니다(build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:10:12.67

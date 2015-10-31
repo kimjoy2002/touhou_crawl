@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BA93E3A2-8295-47E7-BC0A-590EAC696EA9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>th_crawl</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <EmbedManifest>true</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="action.cpp" />
+    <ClCompile Include="alchemy.cpp" />
+    <ClCompile Include="Astar.cpp" />
+    <ClCompile Include="atifact.cpp" />
+    <ClCompile Include="beam.cpp" />
+    <ClCompile Include="book.cpp" />
+    <ClCompile Include="common.cpp" />
+    <ClCompile Include="const.cpp" />
+    <ClCompile Include="create_item.cpp" />
+    <ClCompile Include="create_mon.cpp" />
+    <ClCompile Include="d3dinit.cpp" />
+    <ClCompile Include="d3dUtility.cpp" />
+    <ClCompile Include="debuf.cpp" />
+    <ClCompile Include="display.cpp" />
+    <ClCompile Include="dump.cpp" />
+    <ClCompile Include="environment.cpp" />
+    <ClCompile Include="equip_action.cpp" />
+    <ClCompile Include="event.cpp" />
+    <ClCompile Include="floor.cpp" />
+    <ClCompile Include="FSM.cpp" />
+    <ClCompile Include="god.cpp" />
+    <ClCompile Include="god_gift.cpp" />
+    <ClCompile Include="help.cpp" />
+    <ClCompile Include="item.cpp" />
+    <ClCompile Include="iteminfor.cpp" />
+    <ClCompile Include="item_action.cpp" />
+    <ClCompile Include="key.cpp" />
+    <ClCompile Include="mainloop.cpp" />
+    <ClCompile Include="makechar.cpp" />
+    <ClCompile Include="make_item.cpp" />
+    <ClCompile Include="map.cpp" />
+    <ClCompile Include="map_file.cpp" />
+    <ClCompile Include="map_pattern.cpp" />
+    <ClCompile Include="moninfor.cpp" />
+    <ClCompile Include="monster.cpp" />
+    <ClCompile Include="note.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="player_damage.cpp" />
+    <ClCompile Include="player_turnend.cpp" />
+    <ClCompile Include="pos.cpp" />
+    <ClCompile Include="potion.cpp" />
+    <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="rect.cpp" />
+    <ClCompile Include="ring.cpp" />
+    <ClCompile Include="save.cpp" />
+    <ClCompile Include="scroll.cpp" />
+    <ClCompile Include="skill.cpp" />
+    <ClCompile Include="Skill2.cpp" />
+    <ClCompile Include="skill_use.cpp" />
+    <ClCompile Include="smoke.cpp" />
+    <ClCompile Include="speak.cpp" />
+    <ClCompile Include="spell.cpp" />
+    <ClCompile Include="spellcard.cpp" />
+    <ClCompile Include="spell_infor.cpp" />
+    <ClCompile Include="spell_use.cpp" />
+    <ClCompile Include="summon.cpp" />
+    <ClCompile Include="swako.cpp" />
+    <ClCompile Include="temp.cpp" />
+    <ClCompile Include="temple_pattern.cpp" />
+    <ClCompile Include="tensi.cpp" />
+    <ClCompile Include="texture.cpp" />
+    <ClCompile Include="textureUtility.cpp" />
+    <ClCompile Include="text_manager.cpp" />
+    <ClCompile Include="throw.cpp" />
+    <ClCompile Include="tile.cpp" />
+    <ClCompile Include="tribe.cpp" />
+    <ClCompile Include="weapon.cpp" />
+    <ClCompile Include="wiz.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="alchemy.h" />
+    <ClInclude Include="Astar.h" />
+    <ClInclude Include="atifact.h" />
+    <ClInclude Include="beam.h" />
+    <ClInclude Include="book.h" />
+    <ClInclude Include="common.h" />
+    <ClInclude Include="const.h" />
+    <ClInclude Include="d3dUtility.h" />
+    <ClInclude Include="debuf.h" />
+    <ClInclude Include="display.h" />
+    <ClInclude Include="dump.h" />
+    <ClInclude Include="enum.h" />
+    <ClInclude Include="environment.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="Fliename.h" />
+    <ClInclude Include="floor.h" />
+    <ClInclude Include="FSM.h" />
+    <ClInclude Include="god.h" />
+    <ClInclude Include="item.h" />
+    <ClInclude Include="key.h" />
+    <ClInclude Include="map.h" />
+    <ClInclude Include="monster.h" />
+    <ClInclude Include="monster_texture.h" />
+    <ClInclude Include="mon_infor.h" />
+    <ClInclude Include="note.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="pos.h" />
+    <ClInclude Include="potion.h" />
+    <ClInclude Include="projectile.h" />
+    <ClInclude Include="rect.h" />
+    <ClInclude Include="ring.h" />
+    <ClInclude Include="save.h" />
+    <ClInclude Include="scroll.h" />
+    <ClInclude Include="skill.h" />
+    <ClInclude Include="skill_use.h" />
+    <ClInclude Include="smoke.h" />
+    <ClInclude Include="speak.h" />
+    <ClInclude Include="spellcard.h" />
+    <ClInclude Include="summon.h" />
+    <ClInclude Include="swako.h" />
+    <ClInclude Include="system.h" />
+    <ClInclude Include="tensi.h" />
+    <ClInclude Include="texture.h" />
+    <ClInclude Include="textureUtility.h" />
+    <ClInclude Include="throw.h" />
+    <ClInclude Include="tribe.h" />
+    <ClInclude Include="unit.h" />
+    <ClInclude Include="weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\dot\do.PNG" />
+    <None Include="data\dot\dr.PNG" />
+    <None Include="data\dot\fl.png" />
+    <None Include="data\dot\it.PNG" />
+    <None Include="data\dot\mf.png" />
+    <None Include="data\dot\mo.PNG" />
+    <None Include="data\dot\mw.png" />
+    <None Include="data\dot\pl.PNG" />
+    <None Include="data\dot\sight.PNG" />
+    <None Include="data\dot\te.PNG" />
+    <None Include="data\dot\up.PNG" />
+    <None Include="data\dot\wa.png" />
+    <None Include="data\floor.png" />
+    <None Include="data\item.PNG" />
+    <None Include="data\laser.PNG" />
+    <None Include="data\monster.png" />
+    <None Include="data\players.PNG" />
+    <None Include="data\test.png" />
+    <None Include="data\title.PNG" />
+    <None Include="data\title2.PNG" />
+    <None Include="data\title_0.PNG" />
+    <None Include="data\title_1.PNG" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1396,6 +1396,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_ARMOR:
 	case IVT_ARMOR_ENCHANT:
 	case IVT_SPELLCARD:
+	case IVT_CURSE_ENCHANT:
 		char temp[50];
 		sprintf_s(temp,50,"<인벤토리>  (아이템 갯수 %d / 51)", you.item_list.size()/*,you.item_weight,you.max_item_weight*/);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_NOCLIP,CL_normal);
@@ -1429,6 +1430,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_ARMOR:
 	case IVT_ARMOR_ENCHANT:
 	case IVT_SPELLCARD:
+	case IVT_CURSE_ENCHANT:
 		first = you.item_list.begin();
 		end = you.item_list.end();
 		break;
@@ -1482,6 +1484,8 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			continue;
 		if(item_vt == IVT_SPELLCARD && i != ITMS_SPELL)
 			continue;
+		if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
+			continue;
 
 
 		bool exist = false;
@@ -1501,7 +1505,10 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					continue;
 
 				if(item_vt == IVT_ARMOR_ENCHANT && !(*it).isEnhantable())
-					continue;
+					continue;				
+				if(item_vt == IVT_CURSE_ENCHANT && ( !(it->curse) || !(it->identify_curse)))
+					continue;				
+
 
 				if(!exist)
 				{

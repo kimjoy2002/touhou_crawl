@@ -143,7 +143,7 @@ void create_id_to_item(int id, int level)
 		index.push_back(makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(4)?0:(randA(3)?1:-1),&temp));
 		break;
 	case 7://흔한 방어구
-		index.push_back(makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1))),randA(4)?0:(randA(3)?1:-1),&temp));
+		index.push_back(makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1))),randA(4)?1:(randA(3)?1:-1),&temp));
 		break;
 	case 8://흔한 좋은 장신구
 		index.push_back(makeitem(1/*randA(4)*/?ITM_RING:ITM_SPELLCARD,1,&temp));

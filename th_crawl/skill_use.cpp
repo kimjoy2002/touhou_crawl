@@ -1485,7 +1485,109 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 {
 	return false;
 }
+bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
+{
+	view_item(IVT_CURSE_ENCHANT,"무슨 아이템을 고르시겠습니까?");
+	while(1)
+	{
+		int key_ = waitkeyinput(true);
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			changedisplay(DT_GAME);
+			list<item>::iterator it;
+			for(it = you.item_list.begin(); it != you.item_list.end();it++)
+			{
+				if((*it).id == key_)
+				{
+					if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) || ((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST))
+					{		
+						if(!it->isArtifact())
+						{
+							if(it->curse && it->identify_curse)
+							{
+								if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) && (it->value3 < 0 || it->value4 < 0))
+								{
+									int value3_ = it->value3, value4_ = it->value4;
+									if(value3_<0)
+										it->Enchant(ET_WEAPON, value3_*-2, 0);
+									if(value4_<0)
+										it->Enchant(ET_WEAPON,0, value4_*-2);
+									printlog("히나는 당신의 무기의 액땜을 해주었다.",true,false,false,CL_hina);
+									return true;	
+								}
+								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
+								{
+									if(it->value4<0)
+										it->Enchant(ET_ARMOR,0, it->value4*-2);
+									printlog("히나는 당신의 방어구의 액땜을 해주었다.",true,false,false,CL_hina);
+								
+									return true;	
 
+								}
+								else
+								{
+									printlog("마이너스 인챈트가 되어있는 아이템만 선택할 수 있다.",true,false,false,CL_normal);
+									return false;	
+								}
+							}
+							else
+							{
+								printlog("저주 걸려있는 아이템에만 사용할 수 있다.",true,false,false,CL_normal);
+								return false;	
+							}
+						}
+						else
+						{
+							printlog("아티펙트엔 사용할 수 없다.",true,false,false,CL_normal);
+							return false;	
+						}
+					}
+					else
+					{
+						printlog("올바르지 않은 대상이다.",true,false,false,CL_normal);
+						return false;	
+					}
+				}
+			}
+			printlog("존재하지 않는 아이템.",true,false,false,CL_normal);
+			return false;	
+		}
+		else if(key_ == VK_DOWN)//-----이동키-------
+		{
+			changemove(32);  //위
+		}
+		else if(key_ == VK_UP)
+		{
+			changemove(-32); //아래
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(-WindowHeight);
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(WindowHeight);
+		}						//-----이동키끝-------
+		else if(key_ == '*')
+			view_item(IVT_SELECT,"무슨 아이템을 고르시겠습니까?");
+		else if(key_ == VK_ESCAPE)
+			break;
+	}
+	changedisplay(DT_GAME);
+	return false;
+}
+bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
 
 
 int UseSkill(skill_list skill, bool short_, coord_def &target)
@@ -1651,12 +1753,16 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		return skill_swako_misyaguzi(power,short_,&you,target);
 		break;		
 	case SKL_HINA_1:
+		return skill_hina_plusminus(power,short_,&you,target);
 		break;
 	case SKL_HINA_2:
+		return skill_hina_curse_weapon(power,short_,&you,target);
 		break;
 	case SKL_HINA_3:
+		return skill_hina_curse_armour(power,short_,&you,target);
 		break;
 	case SKL_HINA_4:
+		return skill_hina_curse_ring(power,short_,&you,target);
 		break;
 	}
 	return 0;

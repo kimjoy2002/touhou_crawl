@@ -261,7 +261,7 @@ const char* SkillString(skill_list skill)
 	case SKL_SWAKO_MISYAGUZI:
 		return "미샤구지님 소환";
 	case SKL_HINA_1:
-		return "인챈트 역전";
+		return "액땜";
 	case SKL_HINA_2:
 		return "무기 저주(강화)";
 	case SKL_HINA_3:

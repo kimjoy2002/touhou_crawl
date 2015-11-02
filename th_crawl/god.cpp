@@ -433,6 +433,55 @@ bool GetGodAbility(int level, bool plus)
 		}
 		return false;
 	case GT_HINA:
+		
+		switch(level)
+		{
+		case 0:			
+			if(plus)
+			{
+				for(list<item>::iterator it = you.item_list.begin(); it != you.item_list.end() ; it++)
+				{
+					it->identify_curse = true;
+				}
+				printlog("당신은 이제 아이템의 저주를 탐지할 수 있다.",true,false,false,CL_hina);
+			}
+			break;
+		case 1:
+			you.Ability(SKL_HINA_1,true,!plus);
+			if(plus)
+				printlog("당신은 저주걸린 아이템의 마이너스 인챈트를 플러스로 바꿀 수 있다.",true,false,false,CL_hina);
+			else
+				printlog("더 이상 저주걸린 아이템의 인챈트를 역전할 수 없다.",true,false,false,CL_hina);
+			break;
+		case 2:
+			you.Ability(SKL_HINA_2,true,!plus);
+			if(plus)
+				printlog("당신은 무기에 저주를 걸어서 강력한 힘을 얻을 수 없다.",true,false,false,CL_hina);
+			else
+				printlog("더 이상 무기에 저주를 걸어서 힘을 얻을 수 없다.",true,false,false,CL_hina);
+			break;
+		case 3:
+			you.Ability(SKL_HINA_3,true,!plus);
+			if(plus)
+				printlog("당신은 방어구에 저주를 걸어서 모든 데미지를 반사시킬 수 있다.",true,false,false,CL_hina);
+			else
+				printlog("더 이상 방어구에 저주를 걸어서 데미지를 반사시킬 수 없다.",true,false,false,CL_hina);
+			break;
+		case 4:
+			you.Ability(SKL_HINA_4,true,!plus);
+			if(plus)
+				printlog("당신은 장신구에 저주를 걸어서 체력과 영력을 회복할 수 있다.",true,false,false,CL_hina);
+			else
+				printlog("더 이상 장신구에 저주를 걸어서 체력과 영력을 회복할 수 없다.",true,false,false,CL_hina);
+			break;
+		case 5:
+			if(plus)
+				printlog("당신은 이제 저주를 흩뿌리고 다닌다.",true,false,false,CL_hina);
+			else
+				printlog("더 이상 저주를 흩뿌리고 다니지 않는다.",true,false,false,CL_hina);
+			break;
+		}
+		return false;
 		return false;
 	case GT_YUKARI:
 		switch(level)
@@ -1553,7 +1602,7 @@ void GodInfor(god_type god)
 		printsub("",true,CL_normal);
 		break;
 	case GT_HINA:
-		printsub("카기야마 히나 - 숨어있는 액막이 인형 신",true,CL_magic);
+		printsub("카기야마 히나 - 숨어있는 액막이 인형 신",true,CL_hina);
 		printsub("",true,CL_normal);
 		printsub("히나는 액을 모아서 재앙을 방지하는 재앙신이다.",true,CL_normal);
 		printsub("그녀의 목적은 던전의 액을 모으는 것이므로 신도가 자신의 무기와 방어구에 액을 모으는 것을 좋아한다.",true,CL_normal);
@@ -1853,7 +1902,7 @@ void God_show()
 		}
 		break;
 	case GT_HINA:
-		if(level_ >= 0 && !you.punish[GT_HINA])
+		if(level_ >= 0)
 		{ 
 			printsub("당신은 시야내의 장비에 저주가 걸려있는지 확인하고 식별할 수 있다.                (패시브)",true,CL_hina);
 			printsub("",true,CL_normal);

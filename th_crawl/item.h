@@ -185,6 +185,7 @@ public:
 
 	void Identify();//걍식별
 	void autoIdentify();//장신구계열의 자동식별
+	void income_view(); //시야에 들어오다.
 
 	int action(int delay_);
 

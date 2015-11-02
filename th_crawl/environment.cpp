@@ -983,6 +983,7 @@ int environment::new_item_interupt()
 	{
 		if((*it).not_find && env[current_level].isInSight((*it).position))
 		{
+			(*it).income_view();
 			if(!Auto_Pick_Up(it)) //자동줍기가 아닐경우 
 			{
 				if(num_<=2)

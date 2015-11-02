@@ -668,6 +668,17 @@ void item::autoIdentify()
 		//Identify();
 	}
 }
+void item::income_view()
+{
+	if(you.god == GT_HINA && !you.punish[GT_HINA])
+	{
+		identify_curse = true;
+		if(curse)
+		{
+			Identify();
+		}
+	}
+}
 bool item::Curse(bool equip_,equip_type kind_)
 {
 	if(curse)
@@ -805,6 +816,7 @@ int item::action(int delay_)
 {
 	if(env[current_level].isInSight(position))
 	{
+		income_view();
 		prev_sight = true;
 		if(now_find)
 			not_find = false;

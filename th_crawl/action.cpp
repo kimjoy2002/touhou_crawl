@@ -560,6 +560,7 @@ int Player_Move(const coord_def &c)
 			for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
 			{
 				list<item>::iterator temp = it++;
+
 				if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
 				{
 					if(!Auto_Pick_Up(temp))

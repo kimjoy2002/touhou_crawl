@@ -1350,7 +1350,7 @@ void Pray()
 			if(type != DG_TEMPLE_BYAKUREN && type != DG_TEMPLE_EIRIN && type != DG_TEMPLE_KANAKO && type != DG_TEMPLE_SHIZUHA &&
 				type != DG_TEMPLE_MINORIKO && type != DG_TEMPLE_MIMA && type != DG_TEMPLE_YUUGI && type != DG_TEMPLE_SATORI  &&
 				type != DG_TEMPLE_TENSI && type != DG_TEMPLE_SHINKI && type != DG_TEMPLE_YUYUKO && type != DG_TEMPLE_YUKARI &&
-				type != DG_TEMPLE_SUWAKO
+				type != DG_TEMPLE_SUWAKO && type != DG_TEMPLE_HINA
 				)
 			{
 				printlog("이 신은 아직 당신을 받아들일 준비가 되어있지 않다.",true,false,false,CL_warning);

@@ -1649,6 +1649,14 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_SWAKO_MISYAGUZI:
 		return skill_swako_misyaguzi(power,short_,&you,target);
+		break;		
+	case SKL_HINA_1:
+		break;
+	case SKL_HINA_2:
+		break;
+	case SKL_HINA_3:
+		break;
+	case SKL_HINA_4:
 		break;
 	}
 	return 0;

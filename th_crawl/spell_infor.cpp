@@ -609,6 +609,23 @@ string GetSkillInfor(skill_list skill)
 	case SKL_SWAKO_MISYAGUZI:
 		text_ += "강력한 미샤구지님을 잠시동안 소환한다.\n";
 		break;
+	case SKL_HINA_1:
+		text_ += "저주가 걸려있는 장비의 마이너스 인챈트를 플러스로 바꾼다.\n";
+		text_ += "P의 소모를 제외한 별다른 비용은 들지 않는다.\n";
+		break;
+	case SKL_HINA_2:
+		text_ += "현재 들고있는 무기에 저주를 걸면서 일시적으로 힘이 강화된다.\n";
+		text_ += "들고있는 무기에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		break;
+	case SKL_HINA_3:
+		text_ += "현재 장착하고 있는 방어구에 저주를 걸면서 일시적으로 모든 데미지를 반사한다.\n";
+		text_ += "몸통 방어구에 저주를 걸때는 더욱 더 긴 지속시간을 가진다.\n";
+		text_ += "장착하고 있는 방어구에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		break;
+	case SKL_HINA_4:
+		text_ += "현재 장착하고 있는 장신구에 저주를 걸면서 체력과 영력을 회복한다.\n";
+		text_ += "장착하고 있는 장신구에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		break;
 	default:
 		text_ += "모르는 능력.\n";
 		break;

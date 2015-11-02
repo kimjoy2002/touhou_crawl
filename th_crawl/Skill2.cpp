@@ -63,6 +63,10 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUKARI_3:
 	case SKL_YUKARI_4:
 	case SKL_SWAKO_SLEEP:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);	
 	case SKL_SWAKO_TEMPLE:
 		return ((S_FLAG_IMMEDIATELY) & flag);		
@@ -147,6 +151,10 @@ int SkillLength(skill_list skill)
 	case SKL_SWAKO_RAIN:
 	case SKL_SWAKO_SLEEP:
 	case SKL_SWAKO_MISYAGUZI:	
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 	default:
 		return 0;
 	}
@@ -252,6 +260,14 @@ const char* SkillString(skill_list skill)
 		return "동면";
 	case SKL_SWAKO_MISYAGUZI:
 		return "미샤구지님 소환";
+	case SKL_HINA_1:
+		return "인챈트 역전";
+	case SKL_HINA_2:
+		return "무기 저주(강화)";
+	case SKL_HINA_3:
+		return "방어구 저주(반사)";
+	case SKL_HINA_4:
+		return "장신구 저주(회복)";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -301,6 +317,10 @@ int SkillCap(skill_list skill)
 	case SKL_SWAKO_RAIN:
 	case SKL_SWAKO_SLEEP:
 	case SKL_SWAKO_MISYAGUZI:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -347,6 +367,10 @@ int SkillNoise(skill_list skill)
 	case SKL_SWAKO_TOUGUE:
 	case SKL_SWAKO_CURSE:
 	case SKL_SWAKO_SUMMON_FLOG:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -365,7 +389,7 @@ int SkillNoise(skill_list skill)
 	case SKL_YUYUKO_3:
 	case SKL_YUKARI_4:	
 	case SKL_SWAKO_STATUE:
-	case SKL_SWAKO_MISYAGUZI:\
+	case SKL_SWAKO_MISYAGUZI:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -411,6 +435,10 @@ int SkillPow(skill_list skill)
 	case SKL_YUKARI_2:
 	case SKL_YUKARI_3:
 	case SKL_YUKARI_4:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		//신앙심으로 바꾸기
 		return you.piety;
 	case SKL_SIZUHA_1:
@@ -508,6 +536,10 @@ int SkillDiffer(skill_list skill)
 	case SKL_SWAKO_RAIN:
 	case SKL_SWAKO_SLEEP:
 	case SKL_SWAKO_MISYAGUZI:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -561,6 +593,10 @@ int SkillMana(skill_list skill)
 	case SKL_SWAKO_RAIN:
 	case SKL_SWAKO_SLEEP:
 	case SKL_SWAKO_MISYAGUZI:
+	case SKL_HINA_1:
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
@@ -922,6 +958,19 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-100,true);
 			you.PietyUpDown(-10);
 		}
+		return true;			
+	case SKL_HINA_1:
+		if(check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+			you.PowUpDown(-(10+randA(5)),true);
+		return true;
+	case SKL_HINA_2:
+	case SKL_HINA_3:
+	case SKL_HINA_4:
 		return true;	
 	case SKL_LEVITATION:
 		if(check_ && you.power<100)
@@ -1068,6 +1117,14 @@ const char* SkillCostString(skill_list skill)
 		return "(신앙, P 대량)";
 	case SKL_SWAKO_MISYAGUZI:
 		return "(신앙, P 대량)";
+	case SKL_HINA_1:
+		return "(P 소량)";
+	case SKL_HINA_2:
+		return "(저주)";
+	case SKL_HINA_3:
+		return "(저주)";
+	case SKL_HINA_4:
+		return "(저주)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

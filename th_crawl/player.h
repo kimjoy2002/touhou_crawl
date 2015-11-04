@@ -139,6 +139,10 @@ public:
 	bool player_move;//플레이어의 움직임이 있었다.
 	int explore_map; //탐험한 거리
 
+	char final_item; //마지막에 주운 템
+	int final_num; //마지막에 주운 템의 수량
+	
+
 	//int hunger;
 	//int hunger_per_turn;
 
@@ -438,6 +442,7 @@ void iteminfor_pick();
 void turn_skip();
 void escape();
 void iteminfor_discard();
+void fast_discard();
 void Eatting();
 void Drinking();
 //void Spelllcard_Declare();

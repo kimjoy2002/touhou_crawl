@@ -579,6 +579,9 @@ void MainLoop()
 		case 'd': //아이템버리기
 			iteminfor_discard();
 			break;
+		case 'D': //마지막에 먹은 아이템 버리기
+			fast_discard();
+			break;
 		case 'w': //무기장착
 			Equip_Weapon();
 			break;

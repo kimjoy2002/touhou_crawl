@@ -60,7 +60,8 @@ prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이�
 hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_aptit(10), skill_exper(0), 
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
-turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, auto_pickup(true), inter(IT_NONE), 
+turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
+final_item(0), final_num(0), auto_pickup(true), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),  s_mirror(0),
@@ -2354,6 +2355,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 						printlog(it->GetName(),true,false,false,it->item_color());
 					}
 					it->pick();
+					final_item = it->id;
+					final_num = t->num;
 					ReleaseMutex(mutx);
 					return 1;
 				//}
@@ -2393,6 +2396,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 				printlog((*t).GetName(),true,false,false,(*t).item_color());
 			}
 			t->pick();
+			final_item = t->id;
+			final_num = t->num;
 			ReleaseMutex(mutx);
 			return 1;
 		//}

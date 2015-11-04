@@ -201,6 +201,21 @@ void iteminfor_pick()
 }
 
 
+void discard(list<item>::iterator it, int number)
+{
+	item *temp2 = env[current_level].AddItem(you.position,&(*it),number);	
+	temp2->drop = true;
+	printlog("당신은 ",false,false,false,CL_normal);					
+	printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
+	printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);					
+	printlog("내려놓았다.",true,false,false,CL_normal);	
+	you.DeleteItem(it,number);
+	changedisplay(DT_GAME);
+	you.time_delay+=you.GetNormalDelay();
+	you.TurnEnd();
+}
+
+
 
 void iteminfor_discard()
 {
@@ -244,17 +259,7 @@ void iteminfor_discard()
 				{	
 					if(you.possibleunequip(temp))
 					{
-						int number = GetItemofNum(temp,end);
-						item *temp2 = env[current_level].AddItem(you.position,&(*temp),number);	
-						temp2->drop = true;
-						printlog("당신은 ",false,false,false,CL_normal);					
-						printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
-						printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);					
-						printlog("내려놓았다.",true,false,false,CL_normal);	
-						you.DeleteItem(temp,number);
-						changedisplay(DT_GAME);
-						you.time_delay+=you.GetNormalDelay();
-						you.TurnEnd();
+						discard(temp,GetItemofNum(temp,end));
 					}
 					else
 						break;
@@ -269,6 +274,20 @@ void iteminfor_discard()
 	changedisplay(DT_GAME);
 }
 
+void fast_discard()
+{
+	if(!you.final_item)
+		return;
+	for(list<item>::iterator it = you.item_list.begin();it != you.item_list.end();it++)
+	{
+		if(it->id == you.final_item)
+		{
+			discard(it,you.final_num);
+			you.final_item = 0;
+			return;
+		}
+	}
+}
 
 void Eatting()
 {

@@ -1269,6 +1269,34 @@ bool GodAccpect_turn(int turn)
 		}
 		return false;
 	case GT_HINA:
+		if(pietyLevel(you.piety) >= 5 && !you.punish[GT_HINA])
+		{
+			int curse_ = 0;
+			
+			for(equip_type i = ET_FIRST;i!=ET_LAST;i=(equip_type)(i+1))
+			{
+				if(you.equipment[i])
+				{
+					if(you.equipment[i]->curse)
+						curse_++;
+				}
+			}
+			if(randA(100)<80*curse_/ET_LAST)
+			{
+				dif_rect_iterator rit(you.position,4,true);
+				while(!rit.end())
+				{
+					coord_def check_pos_ = (*rit);
+					
+					if(env[current_level].isMove(check_pos_.x, check_pos_.y, false) && env[current_level].isInSight(check_pos_) && you.isSightnonblocked((*rit)))
+					{
+						env[current_level].MakeSmoke(*rit,img_fog_dark,SMT_CURSE,rand_int(6,8),0,&you);
+						break;
+					}
+					rit++;
+				}
+			}
+		}
 		return false;
 	case GT_YUKARI:
 		if(turn%10 == 0)

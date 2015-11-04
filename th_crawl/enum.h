@@ -226,6 +226,7 @@ enum smoke_type
 	SMT_SLOW,
 	SMT_TWIST,
 	SMT_WHIRLWIND,
+	SMT_CURSE,
 	SMT_MAX
 };
 

@@ -99,6 +99,8 @@ char* smoke::GetName()
 		return "트위스트";
 	case SMT_WHIRLWIND:
 		return "회오리바람";
+	case SMT_CURSE:
+		return "저주 구름";
 	default:
 		return 0;
 	}
@@ -150,6 +152,15 @@ bool smoke::effectSmoke(unit* unit_)
 				return_ = (unit_->SetSlow(randA(10))?true:return_);
 			return return_;
 		}
+	case SMT_CURSE:
+		if(!unit_->isplayer() || you.god != GT_HINA)
+		{
+			unit_->damage(attack_infor(randA_1(5),5,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("저주",false)), true);
+			bool return_ = unit_->SetPoison(rand_int(5,10), 150, true);
+			if(randA(7)>4)
+				return_ = (unit_->SetSlow(randA(10))?true:return_);
+			return return_;
+		}
 	}
 	return false;
 }
@@ -179,6 +190,9 @@ int smoke::danger(unit* unit_, bool first_)
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_WHIRLWIND:
 		danger_ = unit_->isplayer()?100:(unit_->GetId()!= MON_AYA?50:0);
+		return (danger_>prev_danger)?danger_:0;
+	case SMT_CURSE:
+		danger_ = unit_->isplayer()?(you.god == GT_HINA?0:50):25;
 		return (danger_>prev_danger)?danger_:0;
 	default:
 		return 0;

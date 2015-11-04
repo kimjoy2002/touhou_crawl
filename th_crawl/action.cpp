@@ -99,6 +99,12 @@ void auto_battle()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
+	if(100*you.GetHp()/you.GetMaxHp() <= 25)
+	{
+		printlog("자동전투하기엔 당신의 체력이 너무 적다.",true,false,false,CL_small_danger);
+		return;
+	}
+
 	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
 	if(mon_)
 	{		

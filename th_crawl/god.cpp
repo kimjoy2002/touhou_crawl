@@ -1130,6 +1130,12 @@ bool GodAccpect_Explore_100()
 	case GT_YUUGI:
 	case GT_SHIZUHA:
 	case GT_HINA:
+		if(40>randA(100))
+		{
+			you.PietyUpDown(1);
+			return true;
+		}
+		return false;
 	case GT_YUKARI:
 	case GT_EIRIN:
 	case GT_YUYUKO:
@@ -1141,6 +1147,7 @@ bool GodAccpect_Explore_100()
 			you.GiftCount(1);
 			return true;
 		}
+		return false;
 	case GT_TENSI:
 		if(20>randA(100))
 		{

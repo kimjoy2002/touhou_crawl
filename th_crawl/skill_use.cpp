@@ -1692,6 +1692,86 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 }
 bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target)
 {
+	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 고르시겠습니까?");
+	while(1)
+	{
+		int key_ = waitkeyinput(true);
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			changedisplay(DT_GAME);
+			list<item>::iterator it;
+			for(it = you.item_list.begin(); it != you.item_list.end();it++)
+			{
+				if((*it).id == key_)
+				{
+					if(((*it).type>=ITM_JEWELRY_FIRST && (*it).type<ITM_JEWELRY_LAST))
+					{		
+						for(equip_type i = ET_JEWELRY;i!=ET_JEWELRY_END;i=(equip_type)(i+1))
+						{
+							if(you.equipment[i] && you.equipment[i]->id == key_)
+							{
+								if(!it->curse && it->identify_curse)
+								{
+									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
+									if(it->Curse(true,i))
+									{										
+										int bonus_ = rand_int(10,15)+you.GetMaxHp()*rand_float(0.25f,0.35f);
+										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
+										printlog(before_name,false,false,false,CL_small_danger);	
+										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
+										printlog("검게 빛나면서 당신은 회복한다.",true,false,false,CL_small_danger);											
+										you.HpUpDown(bonus_,DR_NONE);										
+										you.MpUpDown(you.max_mp *rand_float(0.3f,0.4f));
+										return true;
+									}
+									else
+									{
+										printlog("이 장신구에는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+										return false;
+									}
+								}
+								else
+								{
+									printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+									return false;	
+								}
+							}
+						}
+						printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+						return false;	
+					}
+					else
+					{
+						printlog("장신구에만 사용이 가능하다.",true,false,false,CL_normal);
+						return false;	
+					}
+				}
+			}
+			printlog("존재하지 않는 아이템.",true,false,false,CL_normal);
+			return false;	
+		}
+		else if(key_ == VK_DOWN)//-----이동키-------
+		{
+			changemove(32);  //위
+		}
+		else if(key_ == VK_UP)
+		{
+			changemove(-32); //아래
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(-WindowHeight);
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(WindowHeight);
+		}						//-----이동키끝-------
+		else if(key_ == '*')
+			view_item(IVT_SELECT,"무슨 장신구를 고르시겠습니까?");
+		else if(key_ == VK_ESCAPE)
+			break;
+	}
+	changedisplay(DT_GAME);
 	return false;
 }
 

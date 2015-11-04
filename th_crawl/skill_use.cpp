@@ -1577,7 +1577,32 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def target)
-{
+{	
+	if(you.equipment[ET_WEAPON])
+	{
+		if(you.equipment[ET_WEAPON]->curse)
+		{
+			printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+			return false;
+		}
+		string before_name = you.equipment[ET_WEAPON]->GetName(); //저주받기전 이름
+		if(you.equipment[ET_WEAPON]->Curse(true,ET_WEAPON))
+		{
+			printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
+			printlog(before_name,false,false,false,CL_small_danger);	
+			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
+			printlog("검게 빛나면서 당신에게 신비한 힘이 들어온다.",true,false,false,CL_small_danger);		
+			you.SetMight(rand_int(80,100));
+			return true;
+		}
+		else
+		{
+			printlog("이 무기는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+			return false;
+		}
+
+	}
+	printlog("무기를 끼고 있어야 된다.",true,false,false,CL_normal);
 	return false;
 }
 bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)

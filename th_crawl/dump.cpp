@@ -134,6 +134,23 @@ bool Dump(int type)
 			case DR_HUNGRY:
 				fprintf_s(fp,"굶어죽었다.\n");
 				break;
+			case DR_MIRROR:
+				if(you.dead_order)
+				{
+					if(you.dead_order->order)
+					{
+						fprintf_s(fp,"%s", you.dead_order->order->GetName()->name.c_str());
+						fprintf_s(fp,"의 ");
+					}
+
+				}
+				fprintf_s(fp,"반사데미지로 죽었다.");
+				if(you.dead_order)
+				{
+					fprintf_s(fp,"(%d 데미지)\n", you.dead_order->damage);
+				}
+				break;
+
 			case DR_EFFECT:
 				fprintf_s(fp,"부작용에 의해 죽었다.\n");
 				break;

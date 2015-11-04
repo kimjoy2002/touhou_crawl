@@ -183,6 +183,7 @@ public:
 	int s_ghost;
 	int s_dimension;
 	int s_timestep;
+	int s_mirror;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -277,7 +278,7 @@ public:
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);
-	int HpUpDown(int value_,damage_reason reason);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = false);
 	int MpRecoverDelay(int delay_ = 0);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);
@@ -339,6 +340,7 @@ public:
 	bool SetGhost(int ghost_);
 	bool SetDimension(int dimension_);
 	bool SetTimeStep(int timestep_);
+	bool SetMirror(int mirror_);
 	bool SetKnifeCollect(int s_knife_collect_);
 	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};

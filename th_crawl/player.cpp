@@ -63,7 +63,7 @@ as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(fa
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, auto_pickup(true), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
- s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0), 
+ s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),  s_mirror(0),
  s_dimension(0), s_timestep(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -202,6 +202,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_drunken);
 	SaveData<int>(fp, s_catch);
 	SaveData<int>(fp, s_ghost);
+	SaveData<int>(fp, s_mirror);
 	SaveData<int>(fp, s_dimension);
 	SaveData<int>(fp, s_timestep);
 	
@@ -386,6 +387,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_ghost);
 	LoadData<int>(fp, s_dimension);
 	LoadData<int>(fp, s_timestep);
+	LoadData<int>(fp, s_mirror);
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
 	
@@ -922,11 +924,22 @@ interupt_type players::HpRecover(int delay_)
 	}
 	return IT_NONE;
 }
-int players::HpUpDown(int value_,damage_reason reason)
+int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	prev_hp = hp;
 	if(value_<0 && max_hp/2 <= -value_)
 		printlog("악! 이건 정말로 아프다!",true,false,false,CL_danger);
+
+	if(order_)
+	{
+		dead_order->name = *order_->GetName();
+		dead_order->damage = value_;
+		dead_order->max_damage = value_;
+		dead_order->order = order_;
+		dead_order->p_type = order_->GetParentType();
+		dead_order->accuracy = 99;
+		dead_order->type = ATT_NONE;
+	}
 
 	hp+= value_;
 	GodAccpect_HPUpDown(value_,reason);
@@ -1879,6 +1892,13 @@ bool players::SetTimeStep(int timestep_)
 {
 	s_timestep = timestep_;
 	return true;
+}
+bool players::SetMirror(int mirror_)
+{
+	printlog("당신은 모든 데미지를 반사한다.",false,false,false,CL_white_blue);
+	s_mirror = mirror_;
+	return true;
+
 }
 
 

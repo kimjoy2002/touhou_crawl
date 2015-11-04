@@ -748,7 +748,8 @@ enum damage_reason
 	DR_QUIT,
 	DR_EFFECT,
 	DR_ESCAPE,
-	DR_HUNGRY
+	DR_HUNGRY,
+	DR_MIRROR
 };
 
 

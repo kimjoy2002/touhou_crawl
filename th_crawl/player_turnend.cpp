@@ -529,7 +529,17 @@ interupt_type players::TurnEnd()
 			SetInter(IT_STAT);
 		}
 	}
-	
+	if(s_mirror)
+	{
+		s_mirror--;
+
+		if(!s_mirror)
+		{
+			printlog("데미지 반사가 끝났다.",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+
+	}
 	if(s_dimension)
 	{
 		s_dimension--;

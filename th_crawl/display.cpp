@@ -946,7 +946,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.s_dimension)
 			{
 				pfont->DrawTextA(pSprite,"차원고정", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_dimension>3?CL_yukari:CL_blue);
+				rc.left += fontDesc.Width*9;
+			}
+			if(you.s_mirror)
+			{
+				pfont->DrawTextA(pSprite,"반사", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 				rc.left += fontDesc.Width*5;
+
 			}
 			if(you.power<=200)
 			{

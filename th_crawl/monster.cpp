@@ -1963,7 +1963,7 @@ bool monster::HpRecover(int turn_)
 	}
 	return false;
 }
-int monster::HpUpDown(int value_,damage_reason reason)
+int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	hp+= value_;
 	if(hp >= max_hp)
@@ -1972,7 +1972,7 @@ int monster::HpUpDown(int value_,damage_reason reason)
 	}	
 	if(hp<=0)
 	{
-		dead(PRT_NEUTRAL,false);
+		dead(order_?order_->GetParentType():PRT_NEUTRAL,order_?true:false);
 	}
 	return value_;
 }

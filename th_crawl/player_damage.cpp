@@ -598,6 +598,11 @@ bool players::damage(attack_infor &a, bool perfect_)
 				HpUpDown(-damage_,DR_HITTING);
 
 				dead_order = NULL;
+				if(s_mirror && hp>0 && a.order)
+				{
+					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
+					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("º£ÀÏ¸µ",true)), true);
+				}
 				if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 				{
 					if(a.order)

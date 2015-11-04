@@ -114,6 +114,7 @@ public:
 	virtual bool SetMindReading(int mind_){return false;};
 	virtual bool SetTogleInvisible(bool off_){return false;};
 	virtual bool SetGhost(int ghost_)=0;
+	virtual bool SetMirror(int mirror_){return false;};
 	bool PositionSwap(unit *other){
 		coord_def temp_ = position;
 		SetXY(other->position);
@@ -154,7 +155,7 @@ public:
 	virtual float GetElecResist()=0;
 	virtual bool Blink(int time_)=0;
 	virtual attack_weapon_type GetAttackType()=0;
-	virtual int HpUpDown(int value_,damage_reason reason)=0;
+	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = false)=0;
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}
 	virtual bool isPassedBullet(unit* order){return false;}; //해당 총이 이 캐릭터에게 관통 가능한지.

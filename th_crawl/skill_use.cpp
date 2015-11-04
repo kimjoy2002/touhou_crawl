@@ -1607,6 +1607,87 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 }
 bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)
 {
+	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 고르시겠습니까?");
+	while(1)
+	{
+		int key_ = waitkeyinput(true);
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			changedisplay(DT_GAME);
+			list<item>::iterator it;
+			for(it = you.item_list.begin(); it != you.item_list.end();it++)
+			{
+				if((*it).id == key_)
+				{
+					if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST))
+					{		
+						for(equip_type i = ET_ARMOR;i!=ET_ARMOR_END;i=(equip_type)(i+1))
+						{
+							if(you.equipment[i] && you.equipment[i]->id == key_)
+							{
+								if(!it->curse && it->identify_curse)
+								{
+									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
+									if(it->Curse(true,i))
+									{
+										int time_ = rand_int(25,40);
+										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
+										printlog(before_name,false,false,false,CL_small_danger);	
+										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
+										printlog("검게 빛나면서 당신은 모든 데미지를 반사한다.",true,false,false,CL_small_danger);	
+										if(i == ET_ARMOR)	
+											time_*=3;
+										you.SetMirror(time_);
+										return true;
+									}
+									else
+									{
+										printlog("이 방어구에는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+										return false;	
+									}
+								}
+								else
+								{
+									printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+									return false;	
+								}
+							}
+						}
+						printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+						return false;	
+					}
+					else
+					{
+						printlog("방어구에만 사용이 가능하다.",true,false,false,CL_normal);
+						return false;	
+					}
+				}
+			}
+			printlog("존재하지 않는 아이템.",true,false,false,CL_normal);
+			return false;	
+		}
+		else if(key_ == VK_DOWN)//-----이동키-------
+		{
+			changemove(32);  //위
+		}
+		else if(key_ == VK_UP)
+		{
+			changemove(-32); //아래
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(-WindowHeight);
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(WindowHeight);
+		}						//-----이동키끝-------
+		else if(key_ == '*')
+			view_item(IVT_SELECT,"무슨 방어구를 고르시겠습니까?");
+		else if(key_ == VK_ESCAPE)
+			break;
+	}
+	changedisplay(DT_GAME);
 	return false;
 }
 bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target)

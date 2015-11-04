@@ -169,7 +169,7 @@ void auto_Move()
 	while(1)
 	{
 		bool back_ = false;
-		if(you.auto_pickup){
+		if(you.auto_pickup && !you.s_levitation){
 			vector<item*> close_item_vector_;
 			env[current_level].close_item(close_item_vector_);
 			for(int i=0;i < close_item_vector_.size(); i++)

@@ -1640,8 +1640,8 @@ void GodInfor(god_type god)
 		printsub("카기야마 히나 - 숨어있는 액막이 인형 신",true,CL_hina);
 		printsub("",true,CL_normal);
 		printsub("히나는 액을 모아서 재앙을 방지하는 재앙신이다.",true,CL_normal);
-		printsub("그녀의 목적은 던전의 액을 모으는 것이므로 신도가 자신의 무기와 방어구에 액을 모으는 것을 좋아한다.",true,CL_normal);
-		printsub("그녀를 돕게 되면 그녀는 재앙의 힘을 신도들을 위해서 사용하게 될 것이다.",true,CL_normal);
+		printsub("그녀로부터 액을 받아서 저주를 몸에 지니는 것으로 그녀의 권능을 얻을 수 있다.",true,CL_normal);
+		printsub("던전을 탐험하는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_SATORI:

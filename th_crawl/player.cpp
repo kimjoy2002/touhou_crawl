@@ -654,8 +654,15 @@ void players::youAttack(unit* unit_)
 				if(it->target->isLive() && it->isEnemyMonster((monster*)it->target))
 					break;	//해당적이 죽지않았으면서 적몬스터이면 구지 바꿀 필요가 없다. 
 			}
-			if(it->isEnemyMonster(&(*it)))
-				AttackedTarget(unit_);
+			if(!unit_->isplayer() && it->isEnemyMonster((monster*)unit_))
+			{
+				if(it->state.GetState() == MS_FOLLOW)
+				{							
+					it->FoundTarget(unit_,30);
+					it->state.SetState(MS_ATACK);
+				}
+
+			}
 	
 		}
 

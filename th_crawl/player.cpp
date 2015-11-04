@@ -2600,9 +2600,18 @@ bool players::Read(char id_)
 				WaitForSingleObject(mutx, INFINITE);
 				if((*it).type == ITM_SCROLL)
 				{
+
+					printarray(true,false,false,CL_normal,3,it->GetName().c_str(),it->GetNameInfor().name_to(true),"읽었다.");
+					bool pre_iden_ = iden_list.scroll_list[(*it).value1].iden == 3;
 					readscroll((scroll_type)(*it).value1);
 					if(iden_list.scroll_list[(*it).value1].iden == 3)
+					{
+						if(!pre_iden_)
+							printarray(true,false,false,CL_normal,3,"이것은 ",it->GetName().c_str(),it->GetNameInfor().name_type?"이다":"다.");
+
 						(*it).identify = true;
+
+					}
 					//if(!you.skill[SKT_SPELLCASTING].level)
 					//	SkillTraining(SKT_SPELLCASTING,1);
 					DeleteItem(it,1);

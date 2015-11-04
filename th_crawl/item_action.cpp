@@ -488,11 +488,15 @@ void Reading()
 					break;
 				}
 			}
-			else if(item_->type == ITM_SCROLL && you.Read(key_))
+			else if(item_->type == ITM_SCROLL)
 			{
-				you.time_delay += you.GetNormalDelay();
-				changedisplay(DT_GAME);
-				you.TurnEnd();
+				if(you.Read(key_))
+				{
+
+					you.time_delay += you.GetNormalDelay();
+					changedisplay(DT_GAME);
+					you.TurnEnd();
+				}	
 			}
 			break;
 		}

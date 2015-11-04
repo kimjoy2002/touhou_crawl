@@ -1216,7 +1216,7 @@ bool GodAccpect_turn(int turn)
 				}
 			}
 		}
-		if(turn%500 == 0)
+		if(turn%1000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
@@ -1238,26 +1238,26 @@ bool GodAccpect_turn(int turn)
 		return false;
 	case GT_MINORIKO:
 		{
-			if(turn%2000 == 0)
+			if(turn%3000 == 0)
 			{
 				you.PietyUpDown(-1);		
 			}
 		}
 		return false;
 	case GT_MIMA:
-		if(turn%500 == 0)
+		if(turn%1000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
 		return false;
 	case GT_SHINKI:
-		if(turn%500 == 0)
+		if(turn%1000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
 		return false;
 	case GT_YUUGI:
-		if(turn%500 == 0)
+		if(turn%1000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
@@ -1269,7 +1269,7 @@ bool GodAccpect_turn(int turn)
 				int rand_ = randA(1);
 				env[current_level].MakeFloorEffect(you.prev_position,&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,4+you.piety/10,&you);
 			}
-			if(turn%1000 == 0)
+			if(turn%2000 == 0)
 			{
 				you.PietyUpDown(-1);		
 			}
@@ -1335,13 +1335,13 @@ bool GodAccpect_turn(int turn)
 			}
 		}
 
-		if(turn%1500 == 0)
+		if(turn%3000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
 		return false;
 	case GT_EIRIN:
-		if(turn%3000 == 0)
+		if(turn%4500 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
@@ -1360,13 +1360,13 @@ bool GodAccpect_turn(int turn)
 				}
 			}
 		}
-		if(turn%500 == 0)
+		if(turn%1000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}
 		return false;
 	case GT_SATORI:
-		if(turn%2000 == 0)
+		if(turn%3000 == 0)
 		{
 			you.PietyUpDown(-1);		
 		}

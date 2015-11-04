@@ -16,6 +16,8 @@
 #include "god.h"
 
 
+extern HANDLE mutx;
+
 int GetSpellMlen(spell_list spell_)
 { 
 	switch(spell_)
@@ -1046,4 +1048,37 @@ void SpellUse()
 }
 
 
+
+
+void SpellView()
+{
+
+	if(you.currentSpellNum)
+	{
+		int i=0;
+		changedisplay(DT_SPELL);
+		while(1)
+		{
+			int key_ = waitkeyinput(true);
+			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+			{
+				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
+				if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+				{
+					WaitForSingleObject(mutx, INFINITE);
+					SetText() = GetSpellInfor((spell_list)spell_);
+					ReleaseMutex(mutx);
+					changedisplay(DT_TEXT);
+					waitkeyinput();
+					changedisplay(DT_SPELL);
+				}
+			}
+			else if(key_ == VK_ESCAPE)
+				break;
+		}
+		changedisplay(DT_GAME);
+	}
+	else
+		printlog("아직 알고있는 마법이 없다.",true,false,false,CL_normal);	
+}
 

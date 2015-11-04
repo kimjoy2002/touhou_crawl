@@ -169,6 +169,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
 void SpellUse();
+void SpellView();
 void SkillUse();
 
 

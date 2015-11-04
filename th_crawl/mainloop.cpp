@@ -688,6 +688,9 @@ void MainLoop()
 		case 'z':
 			SpellUse();
 			break;
+		case 'I':
+			SpellView();
+			break;
 		case 'a':
 			SkillUse();
 			break;

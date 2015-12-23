@@ -602,8 +602,9 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && !(*it).isUserAlly() && isMonsterSight((*it).position) )
+				if((*it).isLive() && !(*it).isUserAlly() && (*it).isView(this) && isMonsterSight((*it).position) )
 				{					
+					
 					FoundTarget(&(*it),30);
 					break;
 				}
@@ -1366,6 +1367,13 @@ bool monster::isView()
 		return false;
 	return true;
 }
+bool monster::isView(const monster* monster_info)
+{
+	if(!s_glow && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
+		return false;
+	return true;
+
+}
 bool monster::dead(parent_type reason_, bool message_)
 {
 	bool sight_ = false;
@@ -1460,7 +1468,7 @@ int monster::action(int delay_)
 
 
 
-	time_delay+=delay_;
+	time_delay+=delay_ * rand_int(9,11) / 10; //¿òÁ÷ÀÓ randomizing
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 	if(flag & M_FLAG_SUMMON && summon_time>=0)

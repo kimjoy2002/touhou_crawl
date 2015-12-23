@@ -1253,6 +1253,23 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(!you.s_timestep &&  abs(you.position.x - x_-8)<=8 && abs(you.position.y - y_-8)<=8)
 		{
 			you.image->draw(pSprite,(you.position.x-x_)*32.0f+20.0f,(you.position.y-y_)*32.0f+20.0f,255);
+			if( you.GetHp() != you.GetMaxHp())
+			{
+				float max_rate_= (1/3.0f);
+
+				int temp1_ = you.GetHp() *32 / you.GetMaxHp();
+				float hp_rate_ = (max_rate_ * temp1_);
+				int hp_offset_ = (temp1_+1)/2-16;
+
+				
+				int temp2_ = you.prev_hp *32 / you.GetMaxHp();
+				float p_hp_rate_ = (max_rate_ * temp2_);
+				int p_hp_offset_ = (temp2_+1)/2 -16;
+				
+				dot_floor.draw(pSprite,(you.position.x-x_)*32.0f+20.0f,(you.position.y-y_)*32.0f+36.0f,0.0f,max_rate_ * 32.0f,0.5f,255);
+				dot_monster.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+p_hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,p_hp_rate_,0.5f,255);
+				dot_item.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,hp_rate_,0.5f,255);
+			}
 		}
 		dot_player.draw(pSprite,GetDotX(you.position.x),GetDotY(you.position.y),255);
 	}

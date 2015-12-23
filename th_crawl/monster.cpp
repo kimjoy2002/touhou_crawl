@@ -602,8 +602,9 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && !(*it).isUserAlly() && isMonsterSight((*it).position) )
+				if((*it).isLive() && !(*it).isUserAlly() && (*it).isView(this) && isMonsterSight((*it).position) )
 				{					
+					
 					FoundTarget(&(*it),30);
 					break;
 				}
@@ -1365,6 +1366,13 @@ bool monster::isView()
 	if(!s_glow && s_invisible && !you.invisible_view && !s_ally)
 		return false;
 	return true;
+}
+bool monster::isView(const monster* monster_info)
+{
+	if(!s_glow && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
+		return false;
+	return true;
+
 }
 bool monster::dead(parent_type reason_, bool message_)
 {

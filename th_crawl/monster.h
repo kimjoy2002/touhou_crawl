@@ -140,6 +140,7 @@ public:
 	int atkmove(int is_sight);
 	int MoveToPos(coord_def pos_);
 	bool isView(); //당신이 볼 수 있는지.
+	bool isView(const monster* monster_info); //몬스터가 이 몹을 볼 수 있는지.
 	int calculate_damage(attack_type type_, int atk, int max_atk);
 	void print_damage_message(attack_infor &a, bool back_stab);
 	void print_no_damage_message(attack_infor &a);

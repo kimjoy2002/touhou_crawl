@@ -1257,12 +1257,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				float max_rate_= (1/3.0f);
 
-				int temp1_ = you.GetHp() *32 / you.GetMaxHp();
+				int temp1_ = max(0,you.GetHp()) *32 / you.GetMaxHp();
 				float hp_rate_ = (max_rate_ * temp1_);
 				int hp_offset_ = (temp1_+1)/2-16;
 
 				
-				int temp2_ = you.prev_hp *32 / you.GetMaxHp();
+				int temp2_ = max(0,you.prev_hp) *32 / you.GetMaxHp();
 				float p_hp_rate_ = (max_rate_ * temp2_);
 				int p_hp_offset_ = (temp2_+1)/2 -16;
 				

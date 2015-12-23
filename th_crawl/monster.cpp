@@ -1460,7 +1460,7 @@ int monster::action(int delay_)
 
 
 
-	time_delay+=delay_;
+	time_delay+=delay_ * rand_int(9,11) / 10; //¿òÁ÷ÀÓ randomizing
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 	if(flag & M_FLAG_SUMMON && summon_time>=0)

@@ -13,6 +13,26 @@
 map_infor map_list;
 
 
+bool environment::isFirstFloor(int level_)
+{
+	if( level_ == 0 || //?
+		level_ == TEMPLE_LEVEL ||
+		level_ == YOUKAI_MOUNTAIN_LEVEL ||
+		level_ == MISTY_LAKE_LEVEL ||
+		level_ == SCARLET_LEVEL ||
+		level_ == SCARLET_LIBRARY_LEVEL ||
+		level_ == SCARLET_UNDER_LEVEL ||
+		level_ == BAMBOO_LEVEL ||
+		level_ == EIENTEI_LEVEL ||
+		level_ == SUBTERRANEAN_LEVEL)
+		return true;
+	return false;
+	//if(level_<MAX_DUNGEUN_LEVEL-1 || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
+	//		|| (level_>=MISTY_LAKE_LEVEL && level_<MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL) 
+	//		|| (level_>=SCARLET_LEVEL && level_<SCARLET_LEVEL+MAX_SCARLET_LEVEL) )
+	//		return false;
+	//return true;
+}
 
 bool environment::isLastFloor(int level_)
 {
@@ -20,7 +40,12 @@ bool environment::isLastFloor(int level_)
 		level_ == TEMPLE_LEVEL ||
 		level_ == YOUKAI_MOUNTAIN_LAST_LEVEL ||
 		level_ == MISTY_LAKE_LAST_LEVEL ||
-		level_ == SCARLET_LEVEL_LAST_LEVEL)
+		level_ == SCARLET_LEVEL_LAST_LEVEL ||
+		level_ == SCARLET_LIBRARY_LEVEL_LAST_LEVEL ||
+		level_ == SCARLET_UNDER_LEVEL_LAST_LEVEL ||
+		level_ == BAMBOO_LEVEL_LAST_LEVEL ||
+		level_ == EIENTEI_LEVEL_LAST_LEVEL ||
+		level_ == SUBTERRANEAN_LEVEL_LAST_LEVEL)
 		return true;
 	return false;
 	//if(level_<MAX_DUNGEUN_LEVEL-1 || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
@@ -36,7 +61,12 @@ void initMap()
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,4));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(6,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
-	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
+	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
+	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	
+	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL+3);
+	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
+	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,rand_int(12,14));
+
 	map_list.god_num = 10;
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
@@ -409,7 +439,6 @@ void TempleMap(map_dummy* map, int temple_)
 	map->m_exit+=map->pos;
 }
 
-
 void map_dummy::patternSet()
 {
 	if(pattern == 0) //서브던전입구의 패턴 = 100+서브던전 | 제단패턴 = 100+서브던전갯수+제단모양
@@ -437,6 +466,23 @@ void map_dummy::patternSet()
 	else if(pattern == 100+SCARLET_M) //홍마관
 	{
 		PixedMap(this, scarlet_pattern(this));
+	}
+	
+	else if(pattern == 100+SCARLET_L) //도서관
+	{
+		PixedMap(this, scarlet_library_pattern(this));
+	}
+	else if(pattern == 100+SCARLET_U) //지하실
+	{
+		PixedMap(this, scarlet_under_pattern(this));
+	}
+	else if(pattern == 100+BAMBOO) //미궁의죽림
+	{
+		PixedMap(this, bamboo_pattern(this));
+	}
+	else if(pattern == 100+SUBTERRANEAN) //지저
+	{
+		PixedMap(this, subterranean_pattern(this));
 	}
 	else if(pattern >= 100+MAX_SUB_DUNGEON && pattern < 100+MAX_SUB_DUNGEON+GT_LAST)
 	{

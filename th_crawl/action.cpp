@@ -1088,7 +1088,12 @@ void Stair_move(bool down)
 	case DG_TEMPLE_STAIR:		
 	case DG_MISTY_LAKE_STAIR:
 	case DG_YOUKAI_MOUNTAIN_STAIR:
-	case DG_SCARLET_STAIR:
+	case DG_SCARLET_STAIR:					
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
 		if(!down)
 		{
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
@@ -1133,7 +1138,22 @@ void Stair_move(bool down)
 					break;
 				case DG_SCARLET_STAIR:
 					next_ = SCARLET_LEVEL;
-					break;
+					break;					
+				case DG_SCARLET_L_STAIR:
+					next_ = SCARLET_LIBRARY_LEVEL;
+					break;			
+				case DG_SCARLET_U_STAIR:
+					next_ = SCARLET_UNDER_LEVEL;
+					break;			
+				case DG_BAMBOO_STAIR:					
+					next_ = BAMBOO_LEVEL;
+					break;			
+				case DG_EIENTEI_STAIR:					
+					next_ = EIENTEI_LEVEL;
+					break;			
+				case DG_SUBTERRANEAN_STAIR:
+					next_ = SUBTERRANEAN_LEVEL;
+					break;		
 			}
 
 			env[next_].EnterMap(0,dq);
@@ -1230,6 +1250,22 @@ void Stair_move(bool down)
 			case SCARLET_LEVEL:
 				floor_return = map_list.dungeon_enter[SCARLET_M].floor;
 				pos_return = map_list.dungeon_enter[SCARLET_M].pos;
+				break;				
+			case SCARLET_LIBRARY_LEVEL:
+				floor_return = map_list.dungeon_enter[SCARLET_L].floor;
+				pos_return = map_list.dungeon_enter[SCARLET_L].pos;
+				break;
+			case SCARLET_UNDER_LEVEL: 
+				floor_return = map_list.dungeon_enter[SCARLET_U].floor;
+				pos_return = map_list.dungeon_enter[SCARLET_U].pos;
+				break;				
+			case BAMBOO_LEVEL: 
+				floor_return = map_list.dungeon_enter[BAMBOO].floor;
+				pos_return = map_list.dungeon_enter[BAMBOO].pos;
+				break;
+			case SUBTERRANEAN_LEVEL: 
+				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
+				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
 				break;
 			}
 			deque<monster*> dq;

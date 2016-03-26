@@ -2206,7 +2206,12 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_STAIR:							
 						case DG_MISTY_LAKE_STAIR:
 						case DG_YOUKAI_MOUNTAIN_STAIR:
-						case DG_SCARLET_STAIR:
+						case DG_SCARLET_STAIR:							
+						case DG_SCARLET_L_STAIR:
+						case DG_SCARLET_U_STAIR:
+						case DG_BAMBOO_STAIR:
+						case DG_EIENTEI_STAIR:
+						case DG_SUBTERRANEAN_STAIR:
 						case DG_TEMPLE_SHIKIEIKI:
 						case DG_TEMPLE_BYAKUREN:
 						case DG_TEMPLE_KANAKO:

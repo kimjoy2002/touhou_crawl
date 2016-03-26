@@ -202,6 +202,12 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		case YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL:
 		case SCARLET_LEVEL:
 		case SCARLET_LEVEL+MAX_SCARLET_LEVEL:
+		case SCARLET_LIBRARY_LEVEL:
+		case SCARLET_UNDER_LEVEL:
+		case BAMBOO_LEVEL:
+		case EIENTEI_LEVEL:
+		case SUBTERRANEAN_LEVEL:
+		case SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"´øÀü ÁøÇà: %s¿¡ µé¾î¼¹´Ù.",CurrentLevelString(floor));
@@ -1184,6 +1190,21 @@ char* CurrentLevelString(int level)
 		sprintf(temp,"¿ä±«ÀÇ»ê %dÃþ", level_+1-YOUKAI_MOUNTAIN_LEVEL);
 	else if(level_ >= SCARLET_LEVEL && level_ <= SCARLET_LEVEL+MAX_SCARLET_LEVEL)
 		sprintf(temp,"È«¸¶°ü %dÃþ", level_+1-SCARLET_LEVEL);
+	else if(level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL)
+		sprintf(temp,"È«¸¶°ü µµ¼­°ü");
+	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
+		sprintf(temp,"È«¸¶°ü ÁöÇÏ½Ç");
+	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
+		sprintf(temp,"¹Ì±ÃÀÇ Á×¸²");
+	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
+		sprintf(temp,"¿µ¿øÁ¤");
+	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
+		sprintf(temp,"ÁöÀú");
+	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
+		sprintf(temp,"ÀÛ¿­Áö¿ÁÅÍ");
+	else
+		sprintf(temp,"¾Ë¼ö¾ø´Â Ãþ");
+
 	return temp;
 }
 int GetLevelMonsterNum(int level, bool item_)

@@ -73,7 +73,13 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 64, 32, 96, 64, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-신전
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-안개
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-요괴산
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-홍마
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-홍마					
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마도서관
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마지하
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단죽림
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단영원정
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단지저
+
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
@@ -92,7 +98,16 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 64, 32, 96, 64, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//플로어 더미끝
-					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽40
+
+					
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+
+
+					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽50
 					textures(&texture_item01, 3, 255), //닫힌문
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//유리
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//석상
@@ -107,6 +122,13 @@ textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
 				textures(&texture_item01, 5, 255),//계단안개
 				textures(&texture_item01, 5, 255),//계단요괴
 				textures(&texture_item01, 5, 255),//계단홍마
+				textures(&texture_item01, 5, 255), //계단홍마도서관
+				textures(&texture_item01, 5, 255), //계단홍마지하
+				textures(&texture_item01, 5, 255), //계단죽림
+				textures(&texture_item01, 5, 255), //계단영원정
+				textures(&texture_item01, 5, 255), //계단지저
+
+
 				textures(&texture_item01, 6, 255),//계단
 				textures(&texture_item01, 120, 255), //시키
 				textures(&texture_item01, 121, 255), //뱌쿠렌
@@ -125,6 +147,14 @@ textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
 			    textures(&texture_item01, 134, 255), //텐시
 				textures(&texture_item01, 2, 255),
 				textures(&texture_item01, 2, 255),
+
+				
+				textures(&texture_item01, 2, 255),
+				textures(&texture_item01, 2, 255),
+				textures(&texture_item01, 2, 255),
+				textures(&texture_item01, 2, 255),
+				textures(&texture_item01, 2, 255),
+
 								
 				textures(&texture_item01, 2, 255),
 				textures(&texture_item01, 2, 255),

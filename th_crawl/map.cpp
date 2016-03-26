@@ -460,7 +460,7 @@ void common_map_make_last(int num,
 				{
 					env[num].stair_up[i-3].x = x;
 					env[num].stair_up[i-3].y = y;
-					if( num == MISTY_LAKE_LEVEL ||  num == YOUKAI_MOUNTAIN_LEVEL || num == SCARLET_LEVEL)
+					if( num != 0 && environment::isFirstFloor(num))
 						env[num].dgtile[x][y].tile = DG_RETURN_STAIR;
 					else
 						env[num].dgtile[x][y].tile = DG_UP_STAIR;
@@ -508,17 +508,26 @@ void map_algorithms01(int num)
 		}
 		for(int j=0;j<repeat;j++) //무한반복 제거용
 		{
-			bool success= true;
+			bool success= true;	
 			int r_size_x = rand_int(3,8);
 			int r_size_y = rand_int(3,8);
 			int m_size=5;
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
-			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_); //랜덤한 맵더미
 			
+			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_); //랜덤한 맵더미
+
 			vector<map_dummy*>::iterator it;
+			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
+			{
+				if((*it)->collution(temp_coord,temp->size_x,temp->size_y) || (*it)->plus_collution(temp_coord,temp->size_x,temp->size_y)) //맵더미충돌시엔 만들지 않음
+				{
+					success = false;
+					break;
+				}
+			}	
 			for (it=vec_map.begin();it!=vec_map.end();it++) 
 			{
-				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //맵더미충돌시엔 만들지 않음
+				if((*it)->collution(temp_coord,temp->size_x,temp->size_y) || (*it)->plus_collution(temp_coord,temp->size_x,temp->size_y)) //맵더미충돌시엔 만들지 않음
 				{
 					success = false;
 					break;
@@ -582,7 +591,7 @@ void map_algorithms02(int num, int piece)
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 			{
-				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //맵더미충돌시엔 만들지 않음
+				if((*it)->collution(temp_coord,temp->size_x,temp->size_y) || (*it)->plus_collution(temp_coord,temp->size_x,temp->size_y)) //맵더미충돌시엔 만들지 않음
 				{
 					success = false;
 					break;
@@ -813,7 +822,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			}
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 			{
-				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //맵더미충돌시엔 만들지 않음
+				if((*it)->collution(temp_coord,temp->size_x,temp->size_y) || (*it)->plus_collution(temp_coord,temp->size_x,temp->size_y)) //맵더미충돌시엔 만들지 않음
 				{
 					success = false;
 					break;

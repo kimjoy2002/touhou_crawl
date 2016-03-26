@@ -15,7 +15,12 @@ enum sub_dungeon
 	TEMPLE=0,
 	MISTY_LAKE,
 	YOUKAI_MOUNTAIN,
-	SCARLET_M,
+	SCARLET_M,	
+	SCARLET_L,
+	SCARLET_U,
+	BAMBOO,
+	//EIENTEI,
+	SUBTERRANEAN,
 	MAX_SUB_DUNGEON
 };
 enum valut_pattern
@@ -118,6 +123,14 @@ char* temple_pattern(map_dummy* map);
 char* misty_lake_pattern(map_dummy* map);
 char* youkai_mountain_pattern(map_dummy* map);
 char* scarlet_pattern(map_dummy* map);
+
+char* scarlet_library_pattern(map_dummy* map);
+char* scarlet_under_pattern(map_dummy* map);
+char* bamboo_pattern(map_dummy* map);
+char* subterranean_pattern(map_dummy* map);
+
+
+
 char* youkai_last_vault_pattern(map_dummy* map);
 char* scarlet_last_vault_pattern(map_dummy* map);
 char* altar_pattern(map_dummy* map, god_type god_);

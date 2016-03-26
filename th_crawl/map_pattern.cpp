@@ -216,6 +216,33 @@ char* youkai_mountain_pattern(map_dummy* map)
 	map->sp_tile_list.push_back(DG_YOUKAI_MOUNTAIN_STAIR);
 	return common_enter_pattern(map);
 }
+
+char* scarlet_library_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_SCARLET_L_STAIR);
+	return common_enter_pattern(map);
+}
+char* scarlet_under_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_SCARLET_U_STAIR);
+	return common_enter_pattern(map);
+}
+char* bamboo_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_BAMBOO_STAIR);
+	return common_enter_pattern(map);
+}
+char* subterranean_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_SUBTERRANEAN_STAIR);
+	return common_enter_pattern(map);
+}
+
+
 char* scarlet_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();

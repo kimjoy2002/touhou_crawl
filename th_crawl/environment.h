@@ -89,7 +89,8 @@ public:
 	list<floor_effect> floor_list;
 	list<events> event_list;
 
-
+	
+	static bool isFirstFloor(int level_);
 	static bool isLastFloor(int level_);
 
 	environment();

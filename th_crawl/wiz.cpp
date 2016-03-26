@@ -46,6 +46,81 @@ void wiz_mode()
 	case 'X':
 		you.GetExp(you.GetNeedExp(you.level-1) - you.exper);
 		break;
+	case '>': //다음층 이동
+		if(!environment::isLastFloor(current_level))
+		{
+			deque<monster*> dq;
+			env[current_level+1].EnterMap(0,dq);
+			you.resetLOS(false);
+		}
+		break;
+	case '<': //이전층 이동	
+		if(!environment::isFirstFloor(current_level))
+		{
+			deque<monster*> dq;
+			env[current_level-1].EnterMap(0,dq);
+			you.resetLOS(false);
+		}
+		break;
+	case 'G': //던전이동	
+		{
+		deque<monster*> dq;
+		dungeon_level next_ = TEMPLE_LEVEL;
+		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
+		printlog("T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
+		printlog("B - 홍마관도서관  U - 홍마관지하   A - 미궁의죽림  E - 영원정 ",true,false,false,CL_help);
+		printlog("H - 지령전",true,false,false,CL_help);
+		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
+		wizard_mode = true;
+		key_ = waitkeyinput();
+		switch(key_)
+		{
+			case 't':
+			case 'T':
+				next_ = TEMPLE_LEVEL;
+				break;
+			case 'l':
+			case 'L':
+				next_ = MISTY_LAKE_LEVEL;
+				break;
+			case 'm':
+			case 'M':
+				next_ = YOUKAI_MOUNTAIN_LEVEL;
+				break;
+			case 's':
+				next_ = SCARLET_LEVEL;
+				break;
+			case 'S':
+				next_ = SCARLET_LEVEL_LAST_LEVEL;
+				break;
+			case 'b':					
+			case 'B':
+				next_ = SCARLET_LIBRARY_LEVEL;
+				break;	
+			case 'u':		
+			case 'U':
+				next_ = SCARLET_UNDER_LEVEL;
+				break;
+			case 'a':			
+			case 'A':					
+				next_ = BAMBOO_LEVEL;
+				break;
+			case 'e':			
+			case 'E':					
+				next_ = EIENTEI_LEVEL;
+				break;
+			case 'h':			
+			case 'H':
+				next_ = SUBTERRANEAN_LEVEL;
+				break;
+			default:
+				return;
+		}
+		env[next_].EnterMap(0,dq);
+		printlog("계단을 내려왔다.",true,false,false,CL_normal);
+		you.resetLOS(false);
+		break;
+		}
 	case 'b':
 		you.Blink(40);
 		break;

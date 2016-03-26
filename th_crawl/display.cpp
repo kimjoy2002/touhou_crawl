@@ -1250,7 +1250,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	//플레이어 그리기
 	{
-		if(!you.s_timestep &&  abs(you.position.x - x_-8)<=8 && abs(you.position.y - y_-8)<=8)
+		if(!you.s_timestep && abs(you.position.x - x_-8)<=8 && abs(you.position.y - y_-8)<=8)
 		{
 			you.image->draw(pSprite,(you.position.x-x_)*32.0f+20.0f,(you.position.y-y_)*32.0f+20.0f,255);
 			if( you.GetHp() != you.GetMaxHp())

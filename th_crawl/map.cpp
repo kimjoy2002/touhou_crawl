@@ -152,6 +152,7 @@ void map_algorithms01(int num);
 void map_algorithms02(int num, int piece);
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num);
 void map_algorithms_library(int num);
+void map_algorithms_under(int num);
 void map_algorithms_temple(int num);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
@@ -189,6 +190,10 @@ void map_algorithms(int num)
 		else if(num == SCARLET_LIBRARY_LEVEL)
 		{
 			map_algorithms_library(num);
+		}
+		else if(num == SCARLET_UNDER_LEVEL)
+		{
+			map_algorithms_under(num);
 		}
 		else
 		{
@@ -918,6 +923,34 @@ void map_algorithms_library(int num)
 
 
 
+void map_algorithms_under(int num)
+{
+	for(int x = 0; x<DG_MAX_X; x++)
+	{	
+		for(int y=0; y<DG_MAX_Y; y++)
+		{
+			if((x-DG_MAX_X/2)*(x-DG_MAX_X/2) + (y-DG_MAX_Y/2)*(y-DG_MAX_Y/2) < 12*12)
+			{
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			}
+			else 
+				env[num].dgtile[x][y].tile = DG_WALL;
+		}
+	}
+
+
+	env[num].stair_up[0].x = DG_MAX_X/2-1;
+	env[num].stair_up[0].y = DG_MAX_Y/2+11;
+	env[num].dgtile[DG_MAX_X/2-1][DG_MAX_Y/2+11].tile = DG_RETURN_STAIR;
+
+	env[num].MakeEvent(15,coord_def(DG_MAX_X/2,DG_MAX_Y/2+29),EVT_SIGHT);
+
+	
+	if(!is_exist_named(MON_FLAN)){
+		env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		set_exist_named(MON_FLAN);
+	}
+}
 
 void map_algorithms_temple(int num)
 {

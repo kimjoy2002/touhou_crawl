@@ -83,7 +83,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
-		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;
+		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;		
+	case SPL_FLAN_BUSIN:
+		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_CONFUSE:
 	case SPL_SLOW:
 	case SPL_GLOW:
@@ -103,6 +105,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_STONE_TRAP:
 	case SPL_STONE_UPLIFT:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
+	case SPL_BURST:
+		return ((S_FLAG_SMITE) & flag);	
 	case SPL_FLAME:
 	case SPL_FROST:
 	case SPL_BURN:
@@ -173,6 +177,7 @@ int SpellLength(spell_list skill)
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_HASTE_OTHER:
 	case SPL_HEAL_OTHER:
+	case SPL_BURST:
 		return 8;
 	case SPL_FLAME:
 	case SPL_STING:
@@ -233,6 +238,7 @@ int SpellLength(spell_list skill)
 	case SPL_POISON_SKIN:
 	case SPL_STONE_FORM:
 	case SPL_KNIFE_COLLECT:
+	case SPL_FLAN_BUSIN:
 	default:
 		return 0;
 	}
@@ -394,6 +400,10 @@ const char* SpellString(spell_list skill)
 		return "무념무상의 경지";
 	case SPL_KNIFE_COLLECT:
 		return "탄막 회수";
+	case SPL_FLAN_BUSIN:
+		return "포 오브 어카인드";
+	case SPL_BURST:
+		return "폭파";
 	default:
 		return "알수없는 마법";
 	}
@@ -486,6 +496,9 @@ int SpellLevel(spell_list skill)
 		return 7;
 	case SPL_SPARK:
 		return 8;
+	case SPL_FLAN_BUSIN:
+	case SPL_BURST:
+		return 9;
 	default:
 		return 0;
 	}
@@ -568,10 +581,12 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_UFO:
 	case SPL_MEDICINE_CLOUD:
 	case SPL_KANAME_DRILL:
+	case SPL_FLAN_BUSIN:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
 	case SPL_CHAIN_LIGHTNING:
+	case SPL_BURST:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -747,6 +762,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_ALCHEMY):num==1?(SKT_EARTH):(SKT_ERROR);
 	case SPL_KNIFE_COLLECT:
 		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_FLAN_BUSIN:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_BURST:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -833,6 +852,8 @@ int SpellCap(spell_list skill)
 	case SPL_SPARK:
 	case SPL_SUMMON_UFO:
 	case SPL_STONE_FORM:
+	case SPL_FLAN_BUSIN:
+	case SPL_BURST:
 		return 200;
 	default:
 	case SPL_BLINK:

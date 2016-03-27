@@ -396,6 +396,7 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_THROW_NONE_MASSAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_BURST:
 		break;
 	}
 
@@ -466,6 +467,9 @@ void players::print_damage_message(attack_infor &a)
 		{
 			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다.");
 		}
+		break;
+	case ATT_BURST:
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다.");
 		break;
 	case ATT_CLOUD_NORMAL:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람에 휩쓸렸다.");

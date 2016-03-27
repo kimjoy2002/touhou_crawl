@@ -869,6 +869,7 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	switch(type)
 	{
 	case ATT_FIRE_BLAST:
+	case ATT_BURST:
 		image_ = &img_fog_fire[0];
 		break;
 	case ATT_COLD_BLAST:
@@ -1814,7 +1815,61 @@ bool skill_knife_collect(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_burst(int pow, bool short_, unit* order, coord_def target)
+{	
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
+	if(env[current_level].isMove(target.x, target.y))
+	{
+		vector<coord_def> vt_;
+		{
+			rect_iterator rit(target,1,1);
+			for(;!rit.end();rit++)
+			{
+				if(randA(randA(90))<pow || (*rit) == target)
+				{
+					if(env[current_level].isMove(rit->x,rit->y))
+					{
+						env[current_level].MakeEffect(*rit,&img_fog_fire[0],false);
+						vt_.push_back(*rit);
+					}
+				}
+			}
+		}
+		for(auto it = vt_.begin();it != vt_.end();it++)
+		{
+			if(env[current_level].isMove(it->x,it->y))
+			{
+				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
+				{
+					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) //ÇÃ¶ûÀº ¸é¿ª(³ªÁß¿¡ ÆøÆÈ¸é¿ªÃß°¡?)
+						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor("Æø¹ß",true)), true);
+				}
+
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		return true;
+	}
+	return false;
+}
+
+bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_=false;
+	
+	int i = 3; 
+	for(; i>0 ; i--)
+	{
+		if(BaseSummon(MON_FLAN_BUNSIN, rand_int(90,120), true, true, 2, order, target, SKD_SUMMON_FLAN, GetSummonMaxNumber(SPL_FLAN_BUSIN)))
+		{
+			return_ = true;
+		}
+	}
+	return return_;
+
+}
 void SetSpell(monster_index id, list<spell> *list)
 {
 	list->clear();
@@ -2059,6 +2114,13 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_SCHEMA_EYE:
 		list->push_back(spell(SPL_MAGIC_TANMAC,40));
 		break;
+	case MON_FLAN:
+		list->push_back(spell(SPL_FLAN_BUSIN,30));
+		list->push_back(spell(SPL_BURST,25));
+		break;
+	case MON_FLAN_BUNSIN:
+		list->push_back(spell(SPL_BURST,15));
+		break;
 	default:
 		break;
 	}
@@ -2214,6 +2276,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_stone_form(power,short_,order,target);
 	case SPL_KNIFE_COLLECT:
 		return skill_knife_collect(power,short_,order,target);
+	case SPL_FLAN_BUSIN:
+		return skill_summon_flandre(power,short_,order,target);
+	case SPL_BURST:
+		return skill_burst(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -2398,6 +2464,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_stone_form(power,short_,&you,target);
 	case SPL_KNIFE_COLLECT:
 		return skill_knife_collect(power,short_,&you,target);
+	case SPL_FLAN_BUSIN:
+		return skill_summon_flandre(power,short_,&you,target);
+	case SPL_BURST:
+		return skill_burst(power,short_,&you,target);
 	default:
 		return false;
 	}

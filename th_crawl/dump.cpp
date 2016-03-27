@@ -102,6 +102,7 @@ bool Dump(int type)
 						case ATT_FIRE:
 						case ATT_THROW_FIRE:
 						case ATT_CLOUD_FIRE:
+						case ATT_FIRE_BLAST:
 							if(you.dead_order->order)
 								fprintf_s(fp,"에 의해 ");
 							fprintf_s(fp,"불타죽었다,");
@@ -109,9 +110,15 @@ bool Dump(int type)
 						case ATT_COLD:
 						case ATT_THROW_COLD:
 						case ATT_CLOUD_COLD:
+						case ATT_COLD_BLAST: 
 							if(you.dead_order->order)
 								fprintf_s(fp,"에 의해 ");
 							fprintf_s(fp,"얼어죽었다.");
+							break;
+						case ATT_BURST:
+							if(you.dead_order->order)
+								fprintf_s(fp,"에 의해 ");
+							fprintf_s(fp,"터져죽었다.");
 							break;
 					}
 					fprintf_s(fp,"(%d 데미지)\n", you.dead_order->damage);

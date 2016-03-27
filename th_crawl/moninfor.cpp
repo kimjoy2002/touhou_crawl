@@ -532,6 +532,14 @@ string GetMonsterInfor(monster *it)
 		text_ += "움직일 수 는 없지만 유카리로의 지원 사격을 받을 수 있다.\n";
 		text_ += "체력이 낮은게 흠.\n";
 		break;
+	case MON_FLAN:
+		text_ += "홍마관에 살고있는 레밀리아의 여동생.\n";
+		text_ += "위험한 분위기가 흘러나오고있다. 정면승부는 피해야할지도 모른다.\n";
+		break;
+	case MON_FLAN_BUNSIN:
+		text_ += "플랑드르가 소환한 분신.\n";
+		text_ += "본체보단 약해보이지만 상당한 파워를 지닌 것 같다.\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

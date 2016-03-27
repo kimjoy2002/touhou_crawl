@@ -84,6 +84,8 @@ int GetSummonMaxNumber(spell_list skill)
 		return 8;
 	case SPL_SUMMON_UFO:
 		return 5;
+	case SPL_FLAN_BUSIN:
+		return 3;
 	default:
 		return -1;
 	}
@@ -116,6 +118,8 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_ZOMBIE_FAIRY;
 	case SPL_SUMMON_UFO:
 		return SKD_SUMMON_UFO;
+	case SPL_FLAN_BUSIN:
+		return SKD_SUMMON_FLAN;
 	default:
 		return SKD_OTHER;
 	}

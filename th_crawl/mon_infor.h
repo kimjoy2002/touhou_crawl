@@ -585,8 +585,15 @@ const mon_infor mondata[] = {
 
 	{MON_SCHEMA_EYE,4,1,name_infor("º¯¿ëÀ» º¸´Â ´«",true),&img_mons_schema_eye,30,0,12,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
-	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY,99,0,10}
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY,99,0,10},
 	
+	{MON_FLAN,21,7999,name_infor("ÇÃ¶ûµå¸£",false),&img_mons_default,230,10,15,
+	{31,28,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("ÈíÇ÷",true),name_infor("°ø°Ý",true),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,10},
+
+	{MON_FLAN_BUNSIN,21,0,name_infor("ÇÃ¶ûµå¸£ÀÇ ºÐ½Å",false),&img_mons_default,80,5,10,
+	{18,15,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("ÈíÇ÷",true),name_infor("°ø°Ý",true),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY,3,1,10}
 };
 
 

@@ -342,6 +342,14 @@ string GetSpellInfor(spell_list spell)
 		text_ += "지속시간중에는 던진 탄막이 자동으로 회수하는 편리한 기술.\n";
 		text_ += "명중 또한 소량 오른다.\n";
 		break;
+	case SPL_FLAN_BUSIN:
+		text_ += "플랑드르의 분신을 3체 만들어내는 스펠.\n";
+		text_ += "명중 또한 소량 오른다.\n";
+		break;
+	case SPL_BURST:
+		text_ += "적을 원거리에서 터트려버린다. 저항할수도 회피할수도 없다.\n";
+		text_ += "헬파이어\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

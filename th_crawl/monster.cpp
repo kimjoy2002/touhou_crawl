@@ -727,6 +727,7 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_THROW_NONE_MASSAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_BURST:
 		break;
 	}
 	return damage_;
@@ -789,6 +790,9 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			{
 				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù.");
 			}
+			break;
+		case ATT_BURST:
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Æø¹ßÇß´Ù.");
 			break;
 		case ATT_CLOUD_NORMAL:
 			break;

@@ -498,6 +498,8 @@ enum monster_index
 	MON_LITTLE_IMP, //마족 자코
 	MON_ENSLAVE_GHOST,
 	MON_SCHEMA_EYE,
+	MON_FLAN,
+	MON_FLAN_BUNSIN,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };
@@ -825,6 +827,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_NORMAL_BLAST, 
 	ATT_FIRE_BLAST, 
 	ATT_COLD_BLAST, 
+	ATT_BURST, 
 	ATT_VEILING,
 	ATT_RUSH, //카나코 돌진?
 	ATT_WALL, //벽에 부딪히다.

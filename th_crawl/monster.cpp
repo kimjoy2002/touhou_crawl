@@ -1433,6 +1433,25 @@ bool monster::dead(parent_type reason_, bool message_)
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
+		if(id == MON_MAGIC_BOOK)
+		{
+			item_infor t;
+			item *it2;
+			it2 = env[current_level].MakeItem(position,makeCustomBook(&t));
+			list<spell>::iterator it = spell_lists.begin();
+			if(it != spell_lists.end()){
+				it2->value1 = it->num;
+				it++;
+			}
+			if(it != spell_lists.end()){
+				it2->value2 = it->num;
+				it++;
+			}
+			if(it != spell_lists.end()){
+				it2->value3 = it->num;
+				it++;
+			}
+		}
 	}
 	if(flag & M_FLAG_UNIQUE)
 	{

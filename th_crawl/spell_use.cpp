@@ -1958,25 +1958,26 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_BLINK,50));
 		break;
 	case MON_MAGIC_BOOK:
-		switch(randA(4))
 		{
-		case 0:
-			list->push_back(spell(SPL_FIRE_BOLT,30));
-			break;
-		case 1:
-			list->push_back(spell(SPL_ICE_BOLT,30));
-			break;
-		case 2:
-			list->push_back(spell(SPL_VENOM_BOLT,30));
-			break;
-		case 3:
-			list->push_back(spell(SPL_LASER,30));
-			break;
-		case 4:
-			list->push_back(spell(SPL_WATER_CANNON,30));
-			break;
+			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER, SPL_WATER_CANNON,
+			SPL_STONE_ARROW, SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING
+			};
+			//주 공격스킬
+			int arr2_[] = {SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
+			SPL_HASTE, SPL_INVISIBLE, SPL_HYPNOSIS
+			};
+			//보조스킬
+
+			list->push_back(spell(arr_[randA(9)],30));
+			
+			if(randA(10)<4)
+			{
+				if(randA(10)<7)
+					list->push_back(spell(SPL_BLINK,15));
+				else
+					list->push_back(spell(arr2_[randA(7)],15));
+			}
 		}
-		list->push_back(spell(SPL_BLINK,30));
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
 		list->push_back(spell(randA(1)?SPL_INVISIBLE:SPL_HASTE,20));

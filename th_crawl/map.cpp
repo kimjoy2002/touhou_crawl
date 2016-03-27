@@ -9,6 +9,7 @@
 #include "map.h"
 #include "throw.h"
 #include "enum.h"
+#include "mon_infor.h"
 
 
 
@@ -150,6 +151,7 @@ void make_lake(int num, int repeat);
 void map_algorithms01(int num);
 void map_algorithms02(int num, int piece);
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num);
+void map_algorithms_library(int num);
 void map_algorithms_temple(int num);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
@@ -183,6 +185,10 @@ void map_algorithms(int num)
 		{
 			map_algorithms03(120,3,5,9, num);
 			make_lake(num, 100);
+		}
+		else if(num == SCARLET_LIBRARY_LEVEL)
+		{
+			map_algorithms_library(num);
 		}
 		else
 		{
@@ -851,6 +857,66 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 
 }
+
+void map_algorithms_library(int num)
+{
+	int d_x = 10, d_y = 10;
+	for(int x = 0; x<DG_MAX_X; x++)
+	{	
+		for(int y=0; y<DG_MAX_Y; y++)
+		{
+			if(abs(x-DG_MAX_X/2)<DG_MAX_X/2-d_x && abs(y-DG_MAX_Y/2)<DG_MAX_Y/2-d_y)
+			{
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			}
+			else 
+				env[num].dgtile[x][y].tile = DG_WALL;
+		}
+	}
+	int a_ = rand_int(0,1)*2-1;
+	int b_ = rand_int(0,1)*2-1;
+	int x_ = DG_MAX_X/2-(DG_MAX_X/2-d_x-1)*a_;
+	int y_ = DG_MAX_Y/2-(DG_MAX_Y/2-d_y-1)*b_;
+
+	env[num].stair_up[0].x = x_;
+	env[num].stair_up[0].y = y_;
+	env[num].dgtile[x_][y_].tile = DG_RETURN_STAIR;
+	//env[num].stair_up[1].x = DG_MAX_X/2;
+	//env[num].stair_up[1].y = DG_MAX_Y/2+29;
+	//env[num].dgtile[DG_MAX_X/2][DG_MAX_Y/2+29].tile = DG_RETURN_STAIR;
+	//env[num].stair_up[2].x = DG_MAX_X/2+1;
+	//env[num].stair_up[2].y = DG_MAX_Y/2+28;
+	//env[num].dgtile[DG_MAX_X/2+1][DG_MAX_Y/2+28].tile = DG_RETURN_STAIR;
+
+
+	for(int i = d_y+3; i < DG_MAX_Y-d_y; i+=3)
+	{
+		int length_ = rand_int(10,30);
+		int offset_= rand_int(0,length_);
+
+		for(int j =  d_x+3; j < DG_MAX_X-d_x-2; j++)
+		{
+			if(offset_%length_ >2)
+			{
+				if(!(abs(j-DG_MAX_X/2)<10 && abs(i-DG_MAX_Y/2)<5))
+				{
+					env[num].dgtile[j][i].tile = DG_WALL; //나중에 도서벽으로
+				}
+			}
+
+			offset_++;
+		}
+	}	
+	if(!is_exist_named(MON_PACHU)){
+		env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		set_exist_named(MON_PACHU);
+	}
+
+
+
+}
+
+
 
 
 void map_algorithms_temple(int num)

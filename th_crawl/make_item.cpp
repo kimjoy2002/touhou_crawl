@@ -62,6 +62,36 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t)
 	return (*t);
 }
 
+item_infor& makeCustomBook(item_infor* t)
+{
+	
+	t->value0 = 0;
+	
+	t->type = ITM_BOOK;
+	t->num = 1;
+	t->curse = false;
+	{
+		t->name2.name = "떨어진 마법책";
+		t->name2.name_type = true;
+		t->value0 = 0;
+		t->value1 = 0;
+		t->value2 = 0;
+		t->value3 = 0;
+		t->value4 = 0;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
+		t->is_pile = false;
+		t->can_throw = false;
+		t->image = &img_item_book[0];
+		t->name.name = "떨어진 마법책";
+		t->name.name_type = true;
+		t->weight = 5.0f;
+		t->value = 150;
+	}
+	return (*t);
+}
 item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 {
 	t->value0 = 0;

@@ -171,8 +171,8 @@ mon_group normal_group[] = //일반몹 그룹
 	
 	{ 52,  SCARLET_LEVEL+3,  SCARLET_LEVEL+3, 5,  30}, //추파카브라
 	
+	{ 47,  SCARLET_LIBRARY_LEVEL,  SCARLET_LIBRARY_LEVEL, 5,  20}, //도서관용 마법책
 	
-	//다음 46
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -221,7 +221,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	
 	
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
-	{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
+	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  60,  3}, //소악마
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
 	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  60,  4}, //사쿠야
@@ -627,7 +627,7 @@ void create_id_to_mon(int id, int level)
 		break;
 	case 63:
 		index.push_back(MON_DEAGAMA);
-		break;		
+		break;	
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;

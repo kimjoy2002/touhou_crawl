@@ -1845,7 +1845,7 @@ int monster::action(int delay_)
 							break;
 					}
 
-					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(100,(flag & M_FLAG_UNIQUE)?10:2)){//몬스터 말하기
+					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?33:2)){//몬스터 말하기
 						if(char* c_ = Get_Speak(id,this,MST_NORMAL))
 							printlog(c_,true,false,false,CL_speak);	
 					}

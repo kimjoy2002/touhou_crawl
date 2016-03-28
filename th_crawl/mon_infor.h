@@ -593,7 +593,25 @@ const mon_infor mondata[] = {
 
 	{MON_FLAN_BUNSIN,21,0,name_infor("ÇÃ¶ûµå¸£ÀÇ ºÐ½Å",false),&img_mons_default,80,5,10,
 	{18,15,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("ÈíÇ÷",true),name_infor("°ø°Ý",true),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY,3,1,10}
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY,3,1,10},
+
+	
+	{MON_RABIT_BOMB,9,20,name_infor("Åä³¢ ÀÚÆøº´",true),&img_mons_default,12,1,20,
+	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
+	
+	{MON_RABIT_SPEAR,11,54,name_infor("Åä³¢ Á×Ã¢º´",true),&img_mons_default,40,5,15,
+	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
+	
+	{MON_RABIT_SUPPORT,12,40,name_infor("Åä³¢ Áö¿øº´",true),&img_mons_default,30,3,15,
+	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,2,10},
+
+	{MON_RABIT_MAGIC,10,70,name_infor("Åä³¢ ¸¶¹ý»ç",true),&img_mons_default,35,2,20,
+	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10}
+
 };
 
 

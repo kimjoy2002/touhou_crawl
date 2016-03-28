@@ -182,7 +182,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		}
 	}
 	int dq_n=0;
-	if(!make)
+	if(!make || env[floor].isBamboo())
 	{
 		map_algorithms(floor);
 		if(!tutorial)
@@ -190,6 +190,10 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			create_mon(floor, GetLevelMonsterNum(floor,false));
 			create_item(floor,  GetLevelMonsterNum(floor,true));
 		}	
+
+	}
+	if(!make)
+	{
 		switch(floor)
 		{
 		case 4:
@@ -421,6 +425,8 @@ void environment::SummonClear(int map_id_)
 
 void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_, const string &name_)
 {
+	if(isBamboo())
+		return; //죽림에선 만들지 않는다.
 	WaitForSingleObject(mutx, INFINITE);
 	list<shadow>::iterator it;
 	for(it = shadow_list.begin();;it++)
@@ -1212,7 +1218,7 @@ int GetLevelMonsterNum(int level, bool item_)
 	int level_ = level>=0?level:current_level;
 	if(!item_)
 	{
-		if(level_ == TEMPLE_LEVEL)
+		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
 			return 0;
 		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 			return 7;
@@ -1220,7 +1226,7 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 9;
 	}
 	else{
-		if(level_ == TEMPLE_LEVEL)
+		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
 			return 0;
 		else
 			return 15;

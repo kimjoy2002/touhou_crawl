@@ -153,6 +153,7 @@ void map_algorithms02(int num, int piece);
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num);
 void map_algorithms_library(int num);
 void map_algorithms_under(int num);
+void map_algorithms_bamboo(int num);
 void map_algorithms_temple(int num);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
@@ -194,6 +195,10 @@ void map_algorithms(int num)
 		else if(num == SCARLET_UNDER_LEVEL)
 		{
 			map_algorithms_under(num);
+		}
+		else if(num == BAMBOO_LEVEL)
+		{
+			map_algorithms_bamboo(num);
 		}
 		else
 		{

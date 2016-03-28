@@ -188,6 +188,7 @@ public:
 	void income_view(); //시야에 들어오다.
 
 	int action(int delay_);
+	bool offsetmove(const coord_def &c);
 
 };
 

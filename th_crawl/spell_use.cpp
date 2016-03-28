@@ -22,6 +22,7 @@
 #include "debuf.h"
 #include "floor.h"
 #include "alchemy.h"
+#include "map.h"
 #include <algorithm>
 #include <math.h>
 
@@ -100,7 +101,17 @@ bool isBandAlly(monster* order, monster* other)
 			break;
 		}
 		return false;
-		break;
+	case MON_RABIT_SUPPORT:
+		switch(other->id)
+		{
+		case MON_RABIT_MAGIC:
+		case MON_RABIT_BOMB:
+		case MON_RABIT_SPEAR:
+			return true;
+		default:
+			break;
+		}
+		return false;
 	default:
 		break;
 	}
@@ -1870,6 +1881,78 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
+bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
+{
+	if(1)
+	{
+		
+		textures* t_ = &img_fog_fire[0];
+		{
+			dif_rect_iterator rit(order->position,2);
+		
+			for(;!rit.end();rit++)
+				if(env[current_level].isMove(rit->x,rit->y,true))
+				{
+					if(env[current_level].isSight(*rit) && you.isSightnonblocked(*rit))
+					{
+						env[current_level].MakeEffect(*rit,t_,false);
+					}
+				}
+		}
+		
+		{
+			dif_rect_iterator rit(order->position,2);
+		
+			for(;!rit.end();rit++)
+			{
+				if(env[current_level].isMove(rit->x,rit->y,true))
+				{
+					if(env[current_level].isInSight(*rit) && you.isSightnonblocked(*rit))
+					{
+						if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
+						{	
+							if(hit_ != order)
+							{
+								int att_ = randC(4,8+power/20);
+								int m_att_ = 4*(8+power/20);
+
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
+								hit_->damage(temp_att, true);
+							}
+						}
+					}
+				}
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		if(!order->isplayer())
+		{
+			monster* mon_ = (monster*)order;
+			mon_->dead(PRT_NEUTRAL,true);
+		}
+		else
+		{
+			attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
+			order->damage(temp_att, true);
+
+		}
+		return true;
+	}
+	return false;
+}
+bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
+{
+	if(env[current_level].isBamboo())
+	{
+		if(map_list.bamboo_rate<300)
+			map_list.bamboo_rate+=20;
+		printlog("Å« ³ªÆÈ¼Ò¸®°¡ Åä³¢µéÀ» ²ø¾î¸ðÀ¸°í ÀÖ´Ù.",false,false,false,CL_small_danger);
+		return true;
+	}
+	return false;
+
+}
 void SetSpell(monster_index id, list<spell> *list)
 {
 	list->clear();
@@ -2121,6 +2204,20 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_FLAN_BUNSIN:
 		list->push_back(spell(SPL_BURST,15));
 		break;
+	case MON_RABIT_BOMB:
+		list->push_back(spell(SPL_SUICIDE_BOMB,0));
+		break;
+	case MON_RABIT_SPEAR:
+		break;
+	case MON_RABIT_SUPPORT:
+		list->push_back(spell(SPL_RABBIT_HORN,30));
+		list->push_back(spell(SPL_HASTE_OTHER,30));
+		break;
+	case MON_RABIT_MAGIC:
+		list->push_back(spell(SPL_FROST,25));
+		list->push_back(spell(SPL_ICE_BOLT,20));
+		list->push_back(spell(SPL_BLINK,30));
+		break;
 	default:
 		break;
 	}
@@ -2280,6 +2377,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_summon_flandre(power,short_,order,target);
 	case SPL_BURST:
 		return skill_burst(power,short_,order,target);
+	case SPL_SUICIDE_BOMB:
+		return skill_suicide_bomb(power,short_,order,target);
+	case SPL_RABBIT_HORN:
+		return skill_rabbit_horn(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -2468,6 +2569,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_summon_flandre(power,short_,&you,target);
 	case SPL_BURST:
 		return skill_burst(power,short_,&you,target);
+	case SPL_SUICIDE_BOMB:
+		return skill_suicide_bomb(power,short_,&you,target);
+	case SPL_RABBIT_HORN:
+		return skill_rabbit_horn(power,short_,&you,target);
 	default:
 		return false;
 	}

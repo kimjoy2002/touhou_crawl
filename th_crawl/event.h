@@ -16,7 +16,8 @@ enum event_list
 {
 	EVL_KISME=100,
 	EVL_SIGHT_P, //시야에 들어와야 생기는 P
-	EVL_FLOOR //땅이 된다
+	EVL_FLOOR, //땅이 된다
+	EVL_BAMBOO //미궁의죽림
 };
 
 class events

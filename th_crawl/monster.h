@@ -135,9 +135,11 @@ public:
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
+	bool offsetmove(const coord_def &c);
 	bool OpenDoor(const coord_def &c);
 	int longmove();
 	int atkmove(int is_sight);
+	bool isHaveSpell(spell_list sp);
 	int MoveToPos(coord_def pos_);
 	bool isView(); //당신이 볼 수 있는지.
 	bool isView(const monster* monster_info); //몬스터가 이 몹을 볼 수 있는지.
@@ -145,7 +147,7 @@ public:
 	void print_damage_message(attack_infor &a, bool back_stab);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool dead(parent_type reason_, bool message_);
+	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
 	void special_action(int delay_);

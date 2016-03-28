@@ -61,19 +61,50 @@ bool smoke::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	return_ = image[time>2?(time%2?0:1):(time==1?3:2)].draw(pSprite, x_, y_,200);
 	return return_;
 }
-
+bool smoke::clear(const coord_def move_)
+{	
+	if(move_.x != 0 || move_.y != 0)
+	{
+		env[current_level].dgtile[position.x + move_.x][position.y + move_.y].flag |= FLAG_SMOKE;
+		env[current_level].dgtile[position.x + move_.x][position.y + move_.y].flag |= FLAG_SIGHT_SMOKE;
+		if(type == SMT_DARK)
+			env[current_level].dgtile[position.x + move_.x][position.y + move_.y].flag |= FLAG_DANGER;
+	}
+	env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_SMOKE;
+	env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_SIGHT_SMOKE;
+	if(type == SMT_DARK)
+		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_DANGER;
+	return true;
+}
 bool smoke::action(int delay_)
 {
+	if(time <= 0)
+		return false;
 	time--;
 	if(time<=0)
 	{
-		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_SMOKE;
-		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_SIGHT_SMOKE;
-		if(type == SMT_DARK)
-			env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_DANGER;
+		clear();
 		return false;
 	}
 	return true;
+}
+bool smoke::offsetmove(const coord_def &c)
+{	
+	if(c.x == 0 && c.y == 0)
+		return true;
+	coord_def temp = position + c;
+	if(temp.x >= 0 && temp.x < DG_MAX_X && temp.y >= 0 && temp.y < DG_MAX_Y )
+	{
+		clear(c);
+		position = temp;
+		return true;
+	}
+	else
+	{
+		clear();
+		time = 0;
+		return false;
+	}
 }
 char* smoke::GetName()
 {

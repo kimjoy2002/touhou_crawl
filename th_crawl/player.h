@@ -256,6 +256,7 @@ public:
 	coord_def GetDisplayPos();
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
+	bool offsetmove(const coord_def &c);
 	void youAttack(unit* unit_); //누군가를 공격하다.
 	bool OpenDoor(const coord_def &c);
 	int GetHp(){return hp;};

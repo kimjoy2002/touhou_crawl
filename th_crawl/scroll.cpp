@@ -196,6 +196,7 @@ void readscroll(scroll_type kind)
 		iden_list.scroll_list[kind].iden = 3;
 		return;
 	case SCT_MAPPING:
+		//죽림에서는 발동되지않는다.
 		return;
 	case SCT_ENCHANT_WEAPON_1:
 		if(enchant_weapon_1_scroll())

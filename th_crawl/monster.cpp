@@ -1096,7 +1096,12 @@ int monster::move(short_move x_mov, short_move y_mov)
 			for(int i=0;i<3;i++,num_++)
 				if(atk_type[i] == ATT_NONE)
 					break;
-			if(num_)
+			if(isHaveSpell(SPL_SUICIDE_BOMB))
+			{
+				MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
+				return 1;
+			}
+			else if(num_)
 			{
 				num_ = randA(num_-1);
 				attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
@@ -1118,7 +1123,12 @@ int monster::move(short_move x_mov, short_move y_mov)
 					for(int i=0;i<3;i++,num_++)
 						if(atk_type[i] == ATT_NONE)
 							break;
-					if(num_)
+					if(isHaveSpell(SPL_SUICIDE_BOMB))
+					{
+						MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
+						return 1;
+					}
+					else if(num_)
 					{
 						num_ = randA(num_-1);
 						attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
@@ -1168,6 +1178,18 @@ int monster::move(short_move x_mov, short_move y_mov)
 int monster::move(const coord_def &c)
 {
 	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)));
+}
+bool monster::offsetmove(const coord_def &c)
+{		
+	position += c;
+	target_pos += c;
+	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
+		return true;
+	else
+	{
+		dead(PRT_PLAYER, false, true);
+		return false;
+	}
 }
 bool monster::OpenDoor(const coord_def &c)
 {
@@ -1355,6 +1377,16 @@ int monster::atkmove(int is_sight)
 	}
 	return move_;
 }
+bool monster::isHaveSpell(spell_list sp)
+{
+	
+	for(list<spell>::iterator it=spell_lists.begin();it!=spell_lists.end();it++)
+	{
+		if(sp == (*it).num)
+			return true;
+	}
+	return false;
+}
 int monster::MoveToPos(coord_def pos_)
 {
 	int move_ = 0;
@@ -1378,7 +1410,7 @@ bool monster::isView(const monster* monster_info)
 	return true;
 
 }
-bool monster::dead(parent_type reason_, bool message_)
+bool monster::dead(parent_type reason_, bool message_, bool remove_)
 {
 	bool sight_ = false;
 	if(isYourShight())
@@ -1387,7 +1419,7 @@ bool monster::dead(parent_type reason_, bool message_)
 		env[current_level].MakeSilence(position, s_silence_range, false);
 	if(s_catch)	
 		you.SetCatch(NULL);
-	if(message_)
+	if(message_ && !remove_)
 	{
 		if(sight_)
 			printarray(true,false,false,CL_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"죽었다.");
@@ -1399,7 +1431,8 @@ bool monster::dead(parent_type reason_, bool message_)
 		}
 	}
 
-	env[current_level].SummonClear(map_id);
+	if(remove_)
+		env[current_level].SummonClear(map_id);
 
 
 
@@ -1422,7 +1455,7 @@ bool monster::dead(parent_type reason_, bool message_)
 			}
 		}
 	}
-	if(!(flag & M_FLAG_SUMMON))
+	if(!(flag & M_FLAG_SUMMON) && !remove_)
 	{
 		if(reason_ == PRT_PLAYER) //플레이어가 죽였다.
 		{
@@ -1457,13 +1490,15 @@ bool monster::dead(parent_type reason_, bool message_)
 			}
 		}
 	}
-	if(flag & M_FLAG_UNIQUE)
+	if(flag & M_FLAG_UNIQUE && !remove_)
 	{
 		char temp[200];
 		sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
-	GodAccpect_KillMonster(this,reason_);
+	if(!remove_)
+		GodAccpect_KillMonster(this,reason_);
+	hp = 0;
 	return true;
 }
 int monster::action(int delay_)
@@ -1862,6 +1897,8 @@ int monster::action(int delay_)
 		}
 		special_action(is_sight);
 		time_delay-=GetSpeed();
+		if(!isLive())
+			break;
 	}
 
 

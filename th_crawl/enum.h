@@ -267,6 +267,7 @@ enum event_type
 	EVT_APPROACH_SMALL, //근처에 도착했다. (밀착시)
 	EVT_APPROACH_MIDDLE, //근처에 도착했다. (적당히)
 	EVT_COUNT, //턴
+	EVT_ALWAYS, //항상
 	EVT_MAX
 };
 
@@ -500,6 +501,10 @@ enum monster_index
 	MON_SCHEMA_EYE,
 	MON_FLAN,
 	MON_FLAN_BUNSIN,
+	MON_RABIT_BOMB,
+	MON_RABIT_SPEAR,
+	MON_RABIT_SUPPORT,
+	MON_RABIT_MAGIC,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };

@@ -32,7 +32,7 @@ enum spell_list
 	SPL_HASTE_OTHER, SPL_HEAL_OTHER, SPL_MIND_BENDING,
 	SPL_STONE_PUNCH, SPL_STONE_ARROW, SPL_STONE_TRAP, SPL_STONE_UPLIFT, SPL_KANAME_DRILL,
 	SPL_DIAMOND_HARDNESS, SPL_POISON_SKIN, SPL_STONE_FORM,
-	SPL_KNIFE_COLLECT, SPL_FLAN_BUSIN, SPL_BURST,
+	SPL_KNIFE_COLLECT, SPL_FLAN_BUSIN, SPL_BURST, SPL_SUICIDE_BOMB,SPL_RABBIT_HORN,
 	SPL_MAX
 };
 
@@ -154,7 +154,6 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 void BaseBomb(coord_def pos, textures* t_, attack_infor& att_);
 int GetSpellBombRange(skill_list skill);//Æø¹ß³ÐÀÌ
 int GetSpellBombRange(spell_list spell);
-
 
 
 bool skill_elec_passive(int power, unit* order);

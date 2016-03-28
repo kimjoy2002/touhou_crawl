@@ -154,6 +154,12 @@ void auto_Move()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
+	if(env[current_level].isBamboo())
+	{
+		printlog("이 곳에서는 자동으로 탐색할 수 없어 보인다.",true,false,false,CL_small_danger);
+		while(!you.will_move.empty()){you.will_move.pop();}	
+		return;
+	}
 	if(you.s_confuse)
 	{
 		printlog("당신은 혼란스럽다.",true,false,false,CL_small_danger);

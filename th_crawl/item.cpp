@@ -857,6 +857,17 @@ int item::action(int delay_)
 	return 0;
 }
 
+bool item::offsetmove(const coord_def &c)
+{		
+	position += c;
+	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
+		return true;
+	else
+	{
+		env[current_level].DeleteItem(this);
+		return false;
+	}
+}
 
 
 const char* GetItemTypeSting(item_type_simple type)

@@ -15,7 +15,7 @@
 
 int EventOccur(int id, events* event_);
 
-
+void bamboo_count(int num);
 
 events::events()
 :id(0),position(),type(EVT_ABOVE),prev_sight(false)
@@ -79,6 +79,11 @@ int events::action(int delay_)
 			return 0;
 	}
 	if(type == EVT_APPROACH_MIDDLE && distan_coord(position,you.position)<=10)
+	{
+		if(EventOccur(id,this))
+			return 0;
+	}
+	if(type == EVT_ALWAYS)
 	{
 		if(EventOccur(id,this))
 			return 0;
@@ -221,6 +226,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_FLOOR;
 		}
 		return 1;
+	case EVL_BAMBOO:
+		{			
+			bamboo_count(current_level);
+		}
+		return 0;
 	default:
 		break;
 	}

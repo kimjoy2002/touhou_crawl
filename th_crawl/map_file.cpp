@@ -68,6 +68,8 @@ void initMap()
 	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,rand_int(12,14));
 
 	map_list.god_num = 10;
+	map_list.bamboo_count = 0;
+	map_list.bamboo_rate = 0;
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 		dq.push_back(i);

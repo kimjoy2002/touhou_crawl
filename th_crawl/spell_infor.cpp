@@ -350,6 +350,13 @@ string GetSpellInfor(spell_list spell)
 		text_ += "적을 원거리에서 터트려버린다. 저항할수도 회피할수도 없다.\n";
 		text_ += "헬파이어\n";
 		break;
+	case SPL_SUICIDE_BOMB:
+		text_ += "공격할시 자동으로 자폭한다.\n";
+		break;
+	case SPL_RABBIT_HORN:
+		text_ += "토끼가 큰 나팔을 이용하여 아군을 소집한다.\n";
+		text_ += "사용직후 잠시동안 죽림의 몬스터 리젠율이 오른다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

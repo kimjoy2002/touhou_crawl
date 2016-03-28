@@ -540,6 +540,22 @@ string GetMonsterInfor(monster *it)
 		text_ += "플랑드르가 소환한 분신.\n";
 		text_ += "본체보단 약해보이지만 상당한 파워를 지닌 것 같다.\n";
 		break;
+	case MON_RABIT_BOMB:
+		text_ += "폭탄을 매고 있는 토끼.\n";
+		text_ += "접근하면 매우 피해가 큰 자폭공격을 한다.\n";
+		break;
+	case MON_RABIT_SPEAR:
+		text_ += "죽창을 들고 있는 토끼.\n";
+		text_ += "죽창에 맞으면 요괴든 사람이든 치명상이다.\n";
+		break;
+	case MON_RABIT_SUPPORT:
+		text_ += "거대한 나팔을 들고 있는 토끼.\n";
+		text_ += "나팔을 통해서 주변의 토끼를 끌어모으고 있다.\n";
+		break;
+	case MON_RABIT_MAGIC:
+		text_ += "마법을 쓰는 토끼.\n";
+		text_ += "\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

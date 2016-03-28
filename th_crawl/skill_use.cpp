@@ -1280,6 +1280,11 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 {
 	if(order->isplayer())
 	{
+		if(env[current_level].isBamboo())
+		{
+			printlog("이 곳에서는 차원을 고정할 수 없다!",true,false,false,CL_small_danger);
+			return false;
+		}
 		you.god_value[0] = target.x;
 		you.god_value[1] = target.y;
 		you.SetDimension(rand_int(50,70));

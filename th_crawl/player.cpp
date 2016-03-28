@@ -643,6 +643,14 @@ int players::move(const coord_def &c)
 {
 	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)));
 }
+bool players::offsetmove(const coord_def &c)
+{		
+	position += c;
+	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
+		return true;
+	else
+		return false;
+}
 void players::youAttack(unit* unit_)
 {
 	for(auto it = env[current_level].mon_vector.begin();  it != env[current_level].mon_vector.end() ;it++)
@@ -2108,6 +2116,10 @@ interupt_type players::resetLOS(bool speak_)
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 
+				if(env[current_level].isBamboo())
+				{
+					env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
+				}
 			}
 			else
 			{
@@ -2125,6 +2137,10 @@ interupt_type players::resetLOS(bool speak_)
 					if(distan_coord(position,goal_)>64)
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
+						if(env[current_level].isBamboo())
+						{
+							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
+						}
 						intercept = true;
 						break;	
 					}
@@ -2173,6 +2189,10 @@ interupt_type players::resetLOS(bool speak_)
 					else if(i == RT_END - 1)
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
+						if(env[current_level].isBamboo())
+						{
+							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
+						}
 					}
 					else
 						intercept = false;

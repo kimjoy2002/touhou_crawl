@@ -43,6 +43,7 @@ public:
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
 	void prev_check();
 	bool action(int delay_);
+	bool offsetmove(const coord_def &c);
 	void onWalk(unit* unit_);
 	int danger(unit* unit_, bool first_ = true);
 

@@ -1091,7 +1091,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		{
 			if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
 			{
-				if(env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_))
+				if((env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_)))
 				{	
 					bool sight = true;	
 					int length_ = (i+x_-you.position.x)*(i+x_-you.position.x)+(j+y_-you.position.y)*(j+y_-you.position.y);
@@ -1123,7 +1123,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
-
+	
+	coord_def offset_ = coord_def();
+	if(env[current_level].isBamboo())
+	{
+		offset_.x = DG_MAX_X/2 - you.position.x;
+		offset_.y = DG_MAX_Y/2 - you.position.y;
+	}
 	//미니맵 그리기
 	{
 		for(int i=0;i<DG_MAX_X;i++)
@@ -1136,30 +1142,30 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					{
 					case DOT_FLOOR:
 						if(env[current_level].isExplore(i,j))
-							dot_floor.draw(pSprite,GetDotX(i),GetDotY(j),255);
+							dot_floor.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						else
-							dot_mapping_floor.draw(pSprite,GetDotX(i),GetDotY(j),255);
+							dot_mapping_floor.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_WALL:
 						if(env[current_level].isExplore(i,j))
-							dot_wall.draw(pSprite,GetDotX(i),GetDotY(j),255);
+							dot_wall.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						else
-							dot_mapping_wall.draw(pSprite,GetDotX(i),GetDotY(j),255);
+							dot_mapping_wall.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_DOOR:
-						dot_door.draw(pSprite,GetDotX(i),GetDotY(j),255);
+						dot_door.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_UP:
-						dot_up.draw(pSprite,GetDotX(i),GetDotY(j),255);
+						dot_up.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_DOWN:
-						dot_down.draw(pSprite,GetDotX(i),GetDotY(j),255);
+						dot_down.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_TEMPLE:
-						dot_temple.draw(pSprite,GetDotX(i),GetDotY(j),255);
+						dot_temple.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					case DOT_SEA:
-						dot_sea.draw(pSprite,GetDotX(i),GetDotY(j),255);
+						dot_sea.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
 					}
 				}
@@ -1203,7 +1209,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							}
 						}
 					}
-					dot_item.draw(pSprite,GetDotX((*temp).position.x),GetDotY((*temp).position.y),255);
+					dot_item.draw(pSprite,GetDotX((*temp).position.x+offset_.x),GetDotY((*temp).position.y+offset_.y),255);
 				}
 				many_item = false;
 				auto_pick_ = false;
@@ -1271,7 +1277,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				dot_item.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,hp_rate_,0.5f,255);
 			}
 		}
-		dot_player.draw(pSprite,GetDotX(you.position.x),GetDotY(you.position.y),255);
+		dot_player.draw(pSprite,GetDotX(you.position.x+offset_.x),GetDotY(you.position.y+offset_.y),255);
 	}
 
 
@@ -1293,7 +1299,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						pfont->DrawTextA(pSprite,(*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);	
 					}
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x),GetDotY((*it).position.y),255);
+				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
 			}
 			else if(it->isLive() &&	you.god == GT_SATORI && !you.punish[GT_SATORI] && pietyLevel(you.piety)>=3
 				&& GetPositionGap((*it).position.x, (*it).position.y, you.position.x, you.position.y) <= satori_sight()
@@ -1303,7 +1309,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					(*it).simple_draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x),GetDotY((*it).position.y),255);
+				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
 			}
 		}
 	}
@@ -1323,10 +1329,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			switch((*it).type)
 			{
 			case SWT_MONSTER:				
-				dot_monster.draw(pSprite,GetDotX((*it).position.x),GetDotY((*it).position.y),255);
+				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
 				break;
 			case SWT_ITEM:
-				dot_item.draw(pSprite,GetDotX((*it).position.x),GetDotY((*it).position.y),255);
+				dot_item.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
 				break;
 			}
 		}
@@ -1354,7 +1360,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 
 	{ //테두리
-		sight_rect.draw(pSprite,GetDotX(x_+8),GetDotY(y_+8),255);
+		if(!env[current_level].isBamboo())
+			sight_rect.draw(pSprite,GetDotX(x_+8),GetDotY(y_+8),255);
 	}
 
 

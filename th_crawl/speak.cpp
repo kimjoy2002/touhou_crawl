@@ -3136,6 +3136,13 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}		
 		break;
+	case MON_RABIT_SUPPORT:
+		if(type == MST_MAGIC)
+		{
+			sprintf(temp_speak,"%s%s³ªÆÈÀ» Èû²¯ ºÒ¾ú´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		}	
+		break;
 	default:
 		break;
 	}

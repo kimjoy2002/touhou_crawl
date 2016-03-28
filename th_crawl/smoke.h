@@ -30,7 +30,9 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
+	bool clear(const coord_def move_ = coord_def());
 	bool action(int delay_);
+	bool offsetmove(const coord_def &c);
 	int sight_inter();
 	char* GetName();
 	bool effectSmoke(unit* unit_);

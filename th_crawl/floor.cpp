@@ -106,6 +106,17 @@ bool floor_effect::action(int delay_)
 
 	return true;
 }
+bool floor_effect::offsetmove(const coord_def &c)
+{		
+	position += c;
+	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
+		return true;
+	else
+	{
+		time = 0;
+		return false;
+	}
+}
 void floor_effect::onWalk(unit* unit_)
 {
 	switch(type)

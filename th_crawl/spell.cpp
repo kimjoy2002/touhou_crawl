@@ -140,11 +140,13 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_BLINK:
 	case SPL_RECALL:
+	case SPL_RABBIT_HORN:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
 	case SPL_COLD_BRAND:
 	case SPL_POISON_BRAND:
+	case SPL_SUICIDE_BOMB: //이건 패시브
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
 	default:
 		return false;
@@ -239,6 +241,8 @@ int SpellLength(spell_list skill)
 	case SPL_STONE_FORM:
 	case SPL_KNIFE_COLLECT:
 	case SPL_FLAN_BUSIN:
+	case SPL_SUICIDE_BOMB:
+	case SPL_RABBIT_HORN:
 	default:
 		return 0;
 	}
@@ -404,6 +408,10 @@ const char* SpellString(spell_list skill)
 		return "포 오브 어카인드";
 	case SPL_BURST:
 		return "폭파";
+	case SPL_SUICIDE_BOMB:
+		return "자폭";
+	case SPL_RABBIT_HORN:
+		return "죽림의 나팔";
 	default:
 		return "알수없는 마법";
 	}
@@ -468,6 +476,7 @@ int SpellLevel(spell_list skill)
 	case SPL_LASER:
 	case SPL_STONE_UPLIFT:
 	case SPL_KNIFE_COLLECT:
+	case SPL_RABBIT_HORN:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -490,6 +499,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_UFO:
 	case SPL_KANAME_DRILL:
+	case SPL_SUICIDE_BOMB:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -587,6 +597,8 @@ int SpellNoise(spell_list skill)
 	case SPL_WHIRLWIND:
 	case SPL_CHAIN_LIGHTNING:
 	case SPL_BURST:
+	case SPL_SUICIDE_BOMB:
+	case SPL_RABBIT_HORN:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -766,6 +778,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_BURST:
 		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_SUICIDE_BOMB:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_RABBIT_HORN:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -854,6 +870,8 @@ int SpellCap(spell_list skill)
 	case SPL_STONE_FORM:
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
+	case SPL_SUICIDE_BOMB:
+	case SPL_RABBIT_HORN:
 		return 200;
 	default:
 	case SPL_BLINK:

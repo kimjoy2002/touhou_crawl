@@ -31,6 +31,12 @@ public:
 	char silence_count;
 	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0){};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
+	void init()
+	{
+		tile = DG_FLOOR;
+		flag = 0;
+		silence_count = 0;
+	}
 	bool isMove(bool fly_, bool swim_, bool no_ground_)
 	{
 		return ((!no_ground_ && tile<DG_NONE_MOVE )|| 
@@ -159,6 +165,8 @@ public:
 	{
 		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 			return false;
+		if(isBamboo())
+			return false;
 		dgtile[x_][y_].flag = dgtile[x_][y_].flag | FLAG_MAPPING;
 		return true;
 	}
@@ -216,6 +224,8 @@ public:
 
 	list<item>::iterator GetPositiontoitem(coord_def position_);
 	list<item>::iterator GetPositiontoitemend(coord_def position_);
+
+	bool isBamboo(){return floor == BAMBOO_LEVEL;};
 };
 
 

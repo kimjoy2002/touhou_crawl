@@ -44,8 +44,9 @@ void map_algorithms_bamboo(int num)
 	env[num].dgtile[x_][y_].tile = DG_FLOOR;
 
 
-	
+	env[num].ClearEvent();
 	env[num].MakeEvent(EVL_BAMBOO,coord_def(x_,y_),EVT_ALWAYS);
+	env[num].MakeEvent(23,coord_def(x_,y_),EVT_SIGHT);
 
 	map_list.bamboo_count=0;
 	map_list.bamboo_rate = 0;
@@ -82,12 +83,12 @@ void bamboo_count(int num)
 			{
 				if(offset_x  > i || offset_x  <= i - DG_MAX_X  || offset_y  > j || offset_y  <= j - DG_MAX_Y )
 				{  //새로 만들어야하는 맵	
-					if(randA(20000 - 9.5f*min(map_list.bamboo_count,2000))<1 )
+					if(randA(20000 - 9*min(map_list.bamboo_count,2000))<1 )
 					{
 						env[num].dgtile[i][j].tile = DG_EIENTEI_STAIR;
 
 					}
-					else if(randA(2000)<1)
+					else if(randA(4000)<1)
 					{
 						env[num].dgtile[i][j].tile = DG_RETURN_STAIR;
 						//map_list.bamboo_count;
@@ -201,7 +202,7 @@ void bamboo_count(int num)
 
 
 	map_list.bamboo_count++;
-	if(map_list.bamboo_count % 100 == 20)
+	if(map_list.bamboo_count % 70 == 20)
 		map_list.bamboo_rate = rand_int(20,120);
 	
 

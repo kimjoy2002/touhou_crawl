@@ -191,6 +191,7 @@ public:
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1);
 	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
+	void ClearEvent();
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t);
 	item* AddItem(const coord_def &c, item *t, int num_=0);

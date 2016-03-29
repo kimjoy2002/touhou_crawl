@@ -531,6 +531,10 @@ void environment::ClearEffect()
 	effect_list.clear();
 	ReleaseMutex(mutx);
 }
+void environment::ClearEvent()
+{
+	event_list.clear();
+}
 monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* mon_)
 {
 	if(env[current_level].isMove(c.x,c.y,mon_->isFly(),mon_->isSwim()) && !env[current_level].isMonsterPos(c.x,c.y) && you.position != c)

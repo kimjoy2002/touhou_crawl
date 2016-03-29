@@ -202,6 +202,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case 22:
 		printlog("여긴 분명 만들다 말았군. 못된 제작자 놈!",true,false,false,CL_help);
 		return 1;
+	case 23:
+		printlog("이 곳은 끔찍한 미궁이군! 출구를 찾아야 한다. 아니면 새로운 장소를 찾을지도..?",true,false,false,CL_small_danger);
+		return 1;
 
 
 	case EVL_KISME:

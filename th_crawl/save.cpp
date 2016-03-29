@@ -86,6 +86,8 @@ bool load_data(const char* path)
 }
 
 
+
+
 bool load_name(const char* path)
 {
 	if(GetFileAttributes(path) == -1)
@@ -99,10 +101,22 @@ bool load_name(const char* path)
 		fp = fopen(user_name_file.c_str(),"rt");
 		if(!fp)
 			return false;
-		int i=0;
+		int i=0,ii=0;		
+		int pass = 0;
 		for(char c = fgetc(fp); c!=EOF && c!='\n' && c!= '\0' && i<20;i++,c = fgetc(fp))
-			name[i] = c;
-		name[i] = '\0';
+		{
+			if(pass || ('0' <= c && c <='9') || ('A' <= c && c <='Z') || ('a' <= c && c <='z') || (c<0))
+			{
+				if(pass)
+					pass = false;
+				else if(c<0)
+					pass = true;
+				name[ii++] = c;
+			}
+			else
+				continue;
+		}
+		name[ii] = '\0';
 		WaitForSingleObject(mutx, INFINITE);
 		you.user_name.name = name;
 		ReleaseMutex(mutx);

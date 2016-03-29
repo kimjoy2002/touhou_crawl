@@ -21,6 +21,7 @@
 #include "skill_use.h"
 #include "note.h"
 #include "tribe.h"
+#include "network.h"
 
 
 
@@ -665,6 +666,9 @@ void MainLoop()
 			break;
 		case '@':
 			Simple_State_Show();
+			break;
+		case 'N':
+			//sendScore();
 			break;
 		case 'E':
 			Experience_Show();

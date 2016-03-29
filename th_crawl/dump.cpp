@@ -15,15 +15,43 @@
 #include "skill_use.h"
 #include "note.h"
 #include "god.h"
+#include "network.h"
 
 extern const char *version_string;
 
 
 
+
+
+
 extern display_manager DisplayManager;
+
+
+int caculScore()
+{
+	//경험치+룬하나당 50000점
+	int base = you.exper; //현재 19렙에 185000
+	base += 50000 * you.haveGoal();
+
+	if(you.dead_reason == DR_ESCAPE)
+	{ //클리어 했다.
+		base += 50000; //클리어 보너스 점수
+		double multi = 15*(10 * max(you.turn,5000) / (max(you.turn,5000)+20000));
+		multi = max(multi,1.2);
+		base*=multi;
+	}
+	if(!you.GetCharNameString()->empty()) //캐릭터 패널티
+	{		
+		base*=0.8;
+	}
+	return base;
+}
+
+
 bool Dump(int type)
 {
-	char temp[100];
+	char filename[100];
+	char sql_[256];
 	mkdir("morgue");
 	FILE *fp;  
 	struct tm *t;
@@ -31,149 +59,175 @@ bool Dump(int type)
 	time(&now);
 	t=localtime(&now);
 
-	sprintf_s(temp,100,"morgue/%s-%04d%02d%02d-%02d%02d%02d.txt",you.user_name.name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
-	fp = fopen(temp,"wt");
+	sprintf_s(filename,100,"morgue/%s-%04d%02d%02d-%02d%02d%02d.txt",you.user_name.name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
+	fp = fopen(filename,"wt");
 	
 	fprintf_s(fp,"동방크롤 %s 덤프 파일\n\n",version_string);
 	if(type == 1)
 	{
-		fprintf_s(fp,"레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n",you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str(),you.hp,you.max_hp);
+		char death_reason[64] = "";
+		char temp_reason[64];
+		fprintf_s(fp,"%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str(),you.hp,you.max_hp);
 		fprintf_s(fp,"             %s에서 ",CurrentLevelString());
 		switch(you.dead_reason)
 		{
 			case DR_NONE:
-				fprintf_s(fp,"알수없는 이유");
+				strncat(death_reason,"알수없는 이유",64);
 				if(you.dead_order)
 				{
-					fprintf_s(fp,"(%d 데미지", you.dead_order->damage);
+					sprintf_s(temp_reason,64,"(%d 데미지", you.dead_order->damage);
+					strncat(death_reason,temp_reason,64);
 					if(you.dead_order->order)
-						fprintf_s(fp,",%s", you.dead_order->order->GetName()->name.c_str());
-					fprintf_s(fp,")", you.dead_order->damage);
+					{
+						sprintf_s(temp_reason,64,",%s", you.dead_order->order->GetName()->name.c_str());
+						strncat(death_reason,temp_reason,64);
+
+					}
+					strncat(death_reason,")",64);
 				}
-				fprintf_s(fp,"에 의해 죽었다.\n");
+				strncat(death_reason,"에 의해 죽었다.",64);
 				break;
 			case DR_HITTING:
 				if(you.dead_order)
 				{
 					if(you.dead_order->order)
-						fprintf_s(fp,"%s", you.dead_order->order->GetName()->name.c_str());
+					{
+						sprintf_s(temp_reason,64,"%s", you.dead_order->order->GetName()->name.c_str());
+						strncat(death_reason,temp_reason,64);
+					}
 					switch(you.dead_order->type)
 					{
 						case ATT_NONE:
 						case ATT_SMITE:
 						default:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에 의해 ");
-							fprintf_s(fp,"죽었다.");
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"죽었다.",64);
 							break;
 						case ATT_NOISE:
 							if(you.dead_order->order)
-								fprintf_s(fp,"의 굉음에 의해 ");
-							fprintf_s(fp,"고막이 터져죽었다.");
+								strncat(death_reason,"의 굉음에 의해 ",64);
+							strncat(death_reason,"고막이 터져죽었다.",64);
 							break;
 						case ATT_NORMAL:
 						case ATT_S_POISON:
 						case ATT_NORMAL_HIT:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에게 ");
-							fprintf_s(fp,"맞아죽었다.");
+								strncat(death_reason,"에게 ",64);
+							strncat(death_reason,"맞아죽었다.",64);
 							break;
 						case ATT_VAMP:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에게 ");
-							fprintf_s(fp,"빨려죽었다.");
+								strncat(death_reason,"에게 ",64);
+							strncat(death_reason,"빨려죽었다.",64);
 							break;
 						case ATT_WALL:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에게 ");
+								strncat(death_reason,"에게 ",64);
 							else
-								fprintf_s(fp,"벽에 ");
-							fprintf_s(fp,"부딪혀 죽었다.");
+								strncat(death_reason,"벽에 ",64);
+							strncat(death_reason,"부딪혀 죽었다.",64);
 							break;
 						case ATT_STONE_TRAP:
-							fprintf_s(fp,"바위에 새끼발가락을 찧여 죽었다.");
+							strncat(death_reason,"바위에 새끼발가락을 찧여 죽었다.",64);
 							break;
 						case ATT_THROW_NORMAL:
 						case ATT_THROW_WATER:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에게 ");
-							fprintf_s(fp,"피탄당했다.");
+								strncat(death_reason,"에게 ",64);
+							strncat(death_reason,"피탄당했다.",64);
 							break;
 						case ATT_FIRE:
 						case ATT_THROW_FIRE:
 						case ATT_CLOUD_FIRE:
 						case ATT_FIRE_BLAST:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에 의해 ");
-							fprintf_s(fp,"불타죽었다,");
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"불타죽었다,",64);
 							break;
 						case ATT_COLD:
 						case ATT_THROW_COLD:
 						case ATT_CLOUD_COLD:
 						case ATT_COLD_BLAST: 
 							if(you.dead_order->order)
-								fprintf_s(fp,"에 의해 ");
-							fprintf_s(fp,"얼어죽었다.");
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"얼어죽었다.",64);
 							break;
 						case ATT_BURST:
 							if(you.dead_order->order)
-								fprintf_s(fp,"에 의해 ");
-							fprintf_s(fp,"터져죽었다.");
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"터져죽었다.",64);
 							break;
 					}
-					fprintf_s(fp,"(%d 데미지)\n", you.dead_order->damage);
+					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
+					strncat(death_reason,temp_reason,64);
 				}
 				else
-					fprintf_s(fp,"알수없는 데미지에 의해 죽었다.\n");
+					strncat(death_reason,"알수없는 데미지에 의해 죽었다.",64);
 				break;
 			case DR_POISON:
-				fprintf_s(fp,"독에 중독되어 죽었다.\n");
+				strncat(death_reason,"독에 중독되어 죽었다.",64);
 				break;
 			case DR_POTION:	
-				fprintf_s(fp,"물약에 의해\n");
-				if(you.dead_order)
-					fprintf_s(fp,"(%d 데미지)", you.dead_order->damage);
-				fprintf_s(fp,"에 의해 죽었다.\n");
+				strncat(death_reason,"물약에 의해",64);
+				if(you.dead_order){
+					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
+					strncat(death_reason,temp_reason,64);
+				}
+				strncat(death_reason,"에 의해 죽었다.",64);
 				break;
 			case DR_QUIT:
-				fprintf_s(fp,"게임을 포기했다.\n");
+				strncat(death_reason,"게임을 포기했다.",64);
 				break;
 			case DR_HUNGRY:
-				fprintf_s(fp,"굶어죽었다.\n");
+				strncat(death_reason,"굶어죽었다.",64);
 				break;
 			case DR_MIRROR:
 				if(you.dead_order)
 				{
 					if(you.dead_order->order)
 					{
-						fprintf_s(fp,"%s", you.dead_order->order->GetName()->name.c_str());
-						fprintf_s(fp,"의 ");
+						sprintf_s(temp_reason,64,"%s", you.dead_order->order->GetName()->name.c_str());
+						strncat(death_reason,temp_reason,64);
+						strncat(death_reason,"의 ",64);
 					}
 
 				}
-				fprintf_s(fp,"반사데미지로 죽었다.");
+				strncat(death_reason,"반사데미지로 죽었다.",64);
 				if(you.dead_order)
 				{
-					fprintf_s(fp,"(%d 데미지)\n", you.dead_order->damage);
+					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
+					strncat(death_reason,temp_reason,64);
 				}
 				break;
 
 			case DR_EFFECT:
-				fprintf_s(fp,"부작용에 의해 죽었다.\n");
+				strncat(death_reason,"부작용에 의해 죽었다.",64);
 				break;
 			case DR_ESCAPE:
-				if(you.haveGoal())
-					fprintf_s(fp,"%d개의 쪽지를 들고 탈출하는데 성공했다.\n", you.haveGoal());
+				if(you.haveGoal()){
+					sprintf_s(temp_reason,64,"%d개의 쪽지를 들고 탈출하는데 성공했다.", you.haveGoal());
+					strncat(death_reason,temp_reason,64);
+				}
 				else
-					fprintf_s(fp,"성과없이 탈출했다.\n");
+					strncat(death_reason,"성과없이 탈출했다.",64);
 				break;
 		}		
-		fprintf_s(fp,"             ");
+
+		fprintf_s(fp,"%s\n             ",death_reason);
 		fprintf_s(fp,"최종턴 %d\n\n",you.turn);
+		
+		sprintf_s(sql_,256,"'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'",you.user_name.name.c_str(),you.level,caculScore(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(),death_reason,
+			you.turn,(you.god == GT_NONE)?"":GetGodString(you.god),you.haveGoal(),version_string
+			);
+
 
 	}
 
 	fprintf_s(fp,"%s (%s %s %s)      턴: %d      ",you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(),you.turn);
+
+
+
 
 	if(you.god == GT_NONE)
 	{
@@ -368,5 +422,7 @@ bool Dump(int type)
 	}
 
 	fclose(fp);
+	if(type == 1)
+		sendScore(sql_,filename);
 	return true;
 }

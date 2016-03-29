@@ -299,9 +299,10 @@ enum dungeon_tile_flag
     FLAG_SIGHT_SMOKE = 1<<4, //시야를 가리는 연기
     FLAG_SILENCE = 1<<5, //사일런스범위?
     FLAG_DANGER = 1<<6, //자동탐색을 방해하는 요인이 있는가?
-    FLAG_NO_MONSTER = 1<<7, //몬스터리젠금지(계단포함)
+    FLAG_NO_MONSTER = 1<<7, //몬스터리젠금지
     FLAG_NO_ITEM = 1<<8, //아이템리젠금지
-    FLAG_MAPPING = 1<<9 //매핑된 지역
+    FLAG_MAPPING = 1<<9, //매핑된 지역
+    FLAG_NO_STAIR = 1<<10 //계단금지
 };
 
 

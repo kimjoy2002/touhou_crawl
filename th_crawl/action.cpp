@@ -1268,6 +1268,10 @@ void Stair_move(bool down)
 			case BAMBOO_LEVEL: 
 				floor_return = map_list.dungeon_enter[BAMBOO].floor;
 				pos_return = map_list.dungeon_enter[BAMBOO].pos;
+				break;			
+			case EIENTEI_LEVEL: 
+				floor_return = map_list.dungeon_enter[BAMBOO].floor;
+				pos_return = map_list.dungeon_enter[BAMBOO].pos;
 				break;
 			case SUBTERRANEAN_LEVEL: 
 				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;

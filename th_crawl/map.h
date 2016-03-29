@@ -28,6 +28,7 @@ enum valut_pattern
 	VP_FIRST=1000,
 	VP_YOUKAI_MOUNTAIN_LAST=VP_FIRST,
 	VP_SCARLET_LAST,
+	VP_EIENTEI_LAST,
 	VP_LAST
 };
 
@@ -135,4 +136,5 @@ char* subterranean_pattern(map_dummy* map);
 
 char* youkai_last_vault_pattern(map_dummy* map);
 char* scarlet_last_vault_pattern(map_dummy* map);
+char* eientei_vault_pattern(map_dummy* map);
 char* altar_pattern(map_dummy* map, god_type god_);

@@ -149,7 +149,7 @@ void map_dummy::SetExit(coord_def c)
 void make_lake(int num, int repeat);
 
 void map_algorithms01(int num);
-void map_algorithms02(int num, int piece);
+void map_algorithms02(int num, int piece, int weight);
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num);
 void map_algorithms_library(int num);
 void map_algorithms_under(int num);
@@ -165,7 +165,7 @@ void map_algorithms(int num)
 		if(num == 0)
 		{
 			//map_algorithms03(MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL);
-			map_algorithms02(num,0);
+			map_algorithms02(num,0,0);
 
 		}
 		else if(num<MAX_DUNGEUN_LEVEL)
@@ -173,7 +173,7 @@ void map_algorithms(int num)
 			if(randA(1))
 				map_algorithms01(num);
 			else
-				map_algorithms02(num,randA(10));
+				map_algorithms02(num,randA(10),0);
 		}
 		else if(num == TEMPLE_LEVEL)
 		{
@@ -181,7 +181,7 @@ void map_algorithms(int num)
 		}
 		else if(num >= YOUKAI_MOUNTAIN_LEVEL && num <= YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
 		{
-			map_algorithms02(num,10);
+			map_algorithms02(num,10,0);
 		}
 		else if(num >= MISTY_LAKE_LEVEL && num <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 		{
@@ -199,6 +199,10 @@ void map_algorithms(int num)
 		else if(num == BAMBOO_LEVEL)
 		{
 			map_algorithms_bamboo(num);
+		}
+		else if(num == EIENTEI_LEVEL)
+		{
+			map_algorithms02(num, 5,15);
 		}
 		else
 		{
@@ -238,6 +242,10 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == SCARLET_LEVEL_LAST_LEVEL)
 	{
 		vector_.push_back(VP_SCARLET_LAST);		
+	}
+	if(floor == EIENTEI_LEVEL_LAST_LEVEL)
+	{
+		vector_.push_back(VP_EIENTEI_LAST);		
 	}
 	return;
 }
@@ -470,7 +478,7 @@ void common_map_make_last(int num,
 		while(1)
 		{
 			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].tile == DG_FLOOR  && !(env[num].dgtile[x][y].flag & FLAG_NO_MONSTER) )
+			if(env[num].dgtile[x][y].tile == DG_FLOOR  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
 			{
 				if(i>2)
 				{
@@ -571,7 +579,7 @@ void map_algorithms01(int num)
 	true,true, true, true, randA(10));
 
 }
-void map_algorithms02(int num, int piece)
+void map_algorithms02(int num, int piece, int weight)
 {
 	vector<map_dummy*> vec_map;
 	vector<map_dummy*> vec_special_map;
@@ -601,9 +609,17 @@ void map_algorithms02(int num, int piece)
 			int r_size_x = rand_int(2+piece/3,4+piece/3);
 			int r_size_y = rand_int(2+piece/3,4+piece/3);
 			int m_size=5;
-			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);		
+			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);	
+			if(pattern_ == VP_EIENTEI_LAST)
+			{
+				temp_coord.x = DG_MAX_X/2;
+				temp_coord.y = DG_MAX_Y/2;
+			}
 			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //랜덤한 맵더미
 			
+			
+
+
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 			{
@@ -627,7 +643,7 @@ void map_algorithms02(int num, int piece)
 	}
 
 
-	for(int i=0;i<25-piece;i++)
+	for(int i=0;i<25-piece- weight;i++)
 	{
 		int j=0;
 		for(;j<20;j++) //무한반복 제거용
@@ -713,6 +729,11 @@ void map_algorithms02(int num, int piece)
 
 
 }
+
+
+
+
+
 
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num)
 {

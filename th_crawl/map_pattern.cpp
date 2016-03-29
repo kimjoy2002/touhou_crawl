@@ -53,7 +53,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_entrance.y = 0;
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 ###.###\
 ##...##\
@@ -70,7 +70,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_entrance.y = 0;
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 #####################\
 #.....#.....#.....###\
@@ -85,7 +85,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = 4;
 		map->m_exit.y = -map->size_y;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 #########.#\
 #.......#.#\
@@ -105,7 +105,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_entrance.y = 0;
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 ###.###\
 #.#.#.#\
@@ -122,7 +122,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 ===+===\
 =~=0=~=\
@@ -140,7 +140,7 @@ char* temple_pattern(map_dummy* map)
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			return  "\
 .........\
 ...~~~...\
@@ -163,7 +163,7 @@ char* temple_pattern(map_dummy* map)
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(-3,1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(-1,-1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(1,1)));
@@ -188,7 +188,7 @@ char* temple_pattern(map_dummy* map)
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			return  "\
 .........\
 .===.===.\
@@ -261,7 +261,7 @@ char* scarlet_pattern(map_dummy* map)
 			map->monster_list.push_back(mapdummy_mon(MON_MEIRIN,0,coord_def(0,2)));
 			set_exist_named(MON_MEIRIN);
 		}
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return  "\
 #######\
 #..0..#\
@@ -288,7 +288,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 		map->m_entrance.y = map->size_y;
 		map->m_exit.x = 0;
 		map->m_exit.y = map->size_y;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, 0);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
@@ -350,7 +350,7 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, 0);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,-4)));
@@ -392,4 +392,63 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 	}
 }
 
+char* eientei_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		{
+		
+		bool hw_ = randA(1);
+		map->size_x = 35;
+		map->size_y = 9;	
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+		map->flag = FLAG_NO_STAIR;//FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(28,2)));		
+		map->event_list.push_back(mapdummy_event(22,coord_def(28,2),EVT_SIGHT));
+
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-22,-6)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-20,-6)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-18,-6)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-16,-6)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-14,-6)));		
+		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-22,-2)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-20,-2)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-18,-2)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-16,-2)));		
+		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-14,-2)));	
+
+		return  "\
+.......................................................................\
+.......................................................................\
+.....####################==#########==###########################......\
+.....#......#.#.#.#.#.#.................#.......................#......\
+.....#......#+#+#+#+#+#.................#............##########+#......\
+.....#......+.........+.................+............#..........#......\
+.....#......#+#+#+#+#+#.................#............#..........#......\
+.....#......#.#.#.#.#.#.................#............#+##########......\
+.....##+#################==#########==################..........#......\
+.....#..........#....................................#..........#......\
+.....#..........#....................................#..........#......\
+.....#..........#...............~~~~~~~..............#..........#......\
+.....#####++#####..............~~~~~~~~~.............############......\
+..............................~~~~~~~~~~~..............................\
+...............................~~~~~~~~~...............................\
+................................~~~~~~~................................\
+.......................................................................\
+.......................................................................\
+.......................................................................";
+		break;
+		}
+	}
+}
 

@@ -361,18 +361,10 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 
 		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_MAID,0,coord_def(-6,-5)));		
 		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_LIBRARIAN,0,coord_def(-4,-5)));
-		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN,0,coord_def(-2,-6)));
-		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN,0,coord_def(2,-6)));		
 		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_LIBRARIAN,0,coord_def(4,-5)));
-		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_MAID,0,coord_def(6,-5)));		
-		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(-7,0)));
-		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(-6,0)));
-		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(7,0)));
-		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(6,0)));		
-		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_MAID,0,coord_def(-6,5)));		
+		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_MAID,0,coord_def(6,-5)));				
 		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_TEMP,0,coord_def(-1,7)));
 		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_TEMP,0,coord_def(1,7)));
-		map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_MAID,0,coord_def(6,5)));	
 		map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA,0,coord_def(0,5)));			
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(-3,1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(3,1)));	
@@ -399,3 +391,5 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 		break;
 	}
 }
+
+

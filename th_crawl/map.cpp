@@ -948,9 +948,13 @@ void map_algorithms_under(int num)
 	env[num].stair_up[0].y = DG_MAX_Y/2+11;
 	env[num].dgtile[DG_MAX_X/2-1][DG_MAX_Y/2+11].tile = DG_RETURN_STAIR;
 
-	env[num].MakeEvent(15,coord_def(DG_MAX_X/2,DG_MAX_Y/2+29),EVT_SIGHT);
+	env[num].MakeEvent(21,coord_def(DG_MAX_X/2-1,DG_MAX_Y/2+11),EVT_SIGHT);
 
 	
+	item_infor t;
+	makeitem(ITM_GOAL, 0, &t, 0);	
+	env[num].MakeItem(coord_def(DG_MAX_X/2,DG_MAX_Y/2-6),t);
+
 	if(!is_exist_named(MON_FLAN)){
 		env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
 		set_exist_named(MON_FLAN);

@@ -3268,7 +3268,9 @@ int players::haveGoal()
 	for(it = item_list.begin(); it != item_list.end();it++)
 	{
 		if(it->type == ITM_GOAL)
-			goal_++;
+		{
+			goal_+=it->num;
+		}
 	}
 	return goal_;
 }

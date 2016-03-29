@@ -397,7 +397,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->is_pile = false;
+		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_goal;
 		t->name.name = "축하 쪽지";

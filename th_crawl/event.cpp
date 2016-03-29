@@ -196,6 +196,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog("카나코는 말했다 : 튜토리얼은 여기서 끝이란다 사나에.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 실제 게임에서는 죽음을 두려워하지말거라!",true,false,false,CL_warning);
 		return 1;
+	case 21:
+		printlog("강력한 광기가 느껴진다. 지금이라도 도망쳐!",true,false,false,CL_small_danger);
+		return 1;
 
 
 	case EVL_KISME:

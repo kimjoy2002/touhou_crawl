@@ -275,6 +275,10 @@ textures img_mons_yumeko(&texture_monster01, 132, 255);
 textures img_mons_evil_eye(&texture_monster01, 133, 255);
 textures img_mons_little_imp(&texture_monster01, 134, 255);
 textures img_mons_schema_eye(&texture_monster01, 138, 255);
+textures img_mons_bomb_rabbit(&texture_monster01, 139, 255);
+textures img_mons_spear_rabbit(&texture_monster01, 140, 255);
+textures img_mons_support_rabbit(&texture_monster01, 141, 255);
+textures img_mons_magic_rabbit(&texture_monster01, 142, 255);
 
 
 textures img_named_rumia(&texture_monster01, 13, 255);
@@ -326,6 +330,10 @@ textures img_named_remilia(&texture_monster01, 98, 255);
 textures img_named_kasen(&texture_monster01, 103, 255);
 textures img_named_koishi(&texture_monster01, 113, 255);
 textures img_named_nue(&texture_monster01, 114, 255);
+textures img_named_flandre(&texture_monster01, 143, 255);
+textures img_named_tewi(&texture_monster01, 144, 255);
+textures img_named_clownpiece(&texture_monster01, 145, 255);
+textures img_named_doremi(&texture_monster01, 146, 255);
 
 
 
@@ -1278,7 +1286,23 @@ int texturetoint(textures* input)
 	else if(input == &img_effect_schema[1])
 		return 225;
 	else if(input == &img_effect_schema[2])
-		return 226;
+		return 226;	
+	else if(input == &img_mons_bomb_rabbit)
+		return 227;
+	else if(input == &img_mons_spear_rabbit)
+		return 228;
+	else if(input == &img_mons_support_rabbit)
+		return 229;
+	else if(input == &img_mons_magic_rabbit)
+		return 230;
+	else if(input == &img_named_flandre)
+		return 231;
+	else if(input == &img_named_tewi)
+		return 232;
+	else if(input == &img_named_clownpiece)
+		return 233;
+	else if(input == &img_named_doremi)
+		return 234;
 	else
 		return 0;
 }
@@ -1740,6 +1764,22 @@ textures* inttotexture(int input)
 		return &img_effect_schema[1];
 	case 226:
 		return &img_effect_schema[2];
+	case 227:
+		return &img_mons_bomb_rabbit;
+	case 228:
+		return &img_mons_spear_rabbit;
+	case 229:
+		return &img_mons_support_rabbit;
+	case 230:
+		return &img_mons_magic_rabbit;
+	case 231:
+		return &img_named_flandre;
+	case 232:
+		return &img_named_tewi;
+	case 233:
+		return &img_named_clownpiece;
+	case 234:
+		return &img_named_doremi;
 	default:
 		return &img_mons_default;
 	}

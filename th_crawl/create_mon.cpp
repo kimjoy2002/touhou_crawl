@@ -710,6 +710,9 @@ int get_unique_to_id(int m_id)
 	case MON_NUE: return 32;
 	case MON_FLAN: 
 	case MON_FLAN_BUNSIN: return 33;
+	case MON_TEWI:  return 34;
+	case MON_CLOWNPIECE:  return 35;
+	case MON_DOREMI:  return 36;
 	}
 }
 
@@ -1146,6 +1149,16 @@ void SetResistMonster(monster* mon)
 	case MON_FLAN_BUNSIN:
 		mon->fire_resist=1;
 		mon->poison_resist=1;
-		break;		
+		break;
+	case MON_TEWI:
+		break;
+	case MON_CLOWNPIECE:
+		mon->fire_resist=2;
+		break;
+	case MON_DOREMI:
+		mon->elec_resist=1;
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		break;
 	}
 }

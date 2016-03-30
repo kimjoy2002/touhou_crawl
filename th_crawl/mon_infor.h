@@ -585,33 +585,45 @@ const mon_infor mondata[] = {
 
 	{MON_SCHEMA_EYE,4,1,name_infor("º¯¿ëÀ» º¸´Â ´«",true),&img_mons_schema_eye,30,0,12,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
-	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY,99,0,10},
+	M_FLAG_NONE_MOVE  | M_FLAG_CAN_SEE_INVI  | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY,99,0,10},
 	
-	{MON_FLAN,21,7999,name_infor("ÇÃ¶ûµå¸£",false),&img_mons_default,230,10,15,
+	{MON_FLAN,21,7999,name_infor("ÇÃ¶ûµå¸£",false),&img_named_flandre,230,10,15,
 	{31,28,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("ÈíÇ÷",true),name_infor("°ø°Ý",true),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI  | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,10},
 
-	{MON_FLAN_BUNSIN,21,0,name_infor("ÇÃ¶ûµå¸£ÀÇ ºÐ½Å",false),&img_mons_default,80,5,10,
+	{MON_FLAN_BUNSIN,21,0,name_infor("ÇÃ¶ûµå¸£ÀÇ ºÐ½Å",false),&img_named_flandre,80,5,10,
 	{18,15,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("ÈíÇ÷",true),name_infor("°ø°Ý",true),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY,3,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI  | M_FLAG_FLY,3,1,10},
 
 	
-	{MON_RABIT_BOMB,9,20,name_infor("Åä³¢ ÀÚÆøº´",true),&img_mons_default,12,1,20,
+	{MON_RABIT_BOMB,9,20,name_infor("Åä³¢ ÀÚÆøº´",true),&img_mons_bomb_rabbit,12,1,20,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
 	
-	{MON_RABIT_SPEAR,11,54,name_infor("Åä³¢ Á×Ã¢º´",true),&img_mons_default,40,5,15,
+	{MON_RABIT_SPEAR,11,54,name_infor("Åä³¢ Á×Ã¢º´",true),&img_mons_spear_rabbit,35,5,15,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
-	{MON_RABIT_SUPPORT,12,40,name_infor("Åä³¢ Áö¿øº´",true),&img_mons_default,30,3,15,
+	{MON_RABIT_SUPPORT,12,40,name_infor("Åä³¢ Áö¿øº´",true),&img_mons_support_rabbit,25,3,15,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,2,10},
 
-	{MON_RABIT_MAGIC,10,70,name_infor("Åä³¢ ¸¶¹ý»ç",true),&img_mons_default,35,2,20,
+	{MON_RABIT_MAGIC,10,70,name_infor("Åä³¢ ¸¶¹ý»ç",false),&img_mons_magic_rabbit,30,2,20,
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
-	M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10}
+	M_FLAG_ANIMAL |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
 
+	
+	{MON_TEWI,13,550,name_infor("Å×À§",false),&img_named_tewi,60,3,22,
+	{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,8},
+
+	{MON_CLOWNPIECE,15,1220,name_infor("Å¬¶ó¿îÇÇ½º",false),&img_named_clownpiece,120,3,18,
+	{22,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("È¶ºÒ",true),name_infor(),name_infor()},
+	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,1,1,8},
+	
+	{MON_DOREMI,14,904,name_infor("µµ·¹¹Ì",false),&img_named_doremi,130,8,10,
+	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,3,1,12}
 };
 
 

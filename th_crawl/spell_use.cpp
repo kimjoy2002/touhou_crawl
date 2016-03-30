@@ -1946,8 +1946,11 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 	if(env[current_level].isBamboo())
 	{
 		if(map_list.bamboo_rate<300)
-			map_list.bamboo_rate+=20;
-		printlog("큰 나팔소리가 토끼들을 끌어모으고 있다.",false,false,false,CL_small_danger);
+			map_list.bamboo_rate+=order->GetId() == MON_TEWI?50:20;
+		if(order->GetId() == MON_TEWI)
+			printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
+		else
+			printlog("큰 나팔소리가 토끼들을 끌어모으고 있다.",false,false,false,CL_small_danger);
 		return true;
 	}
 	return false;
@@ -1998,7 +2001,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_BLINK,20));
 		break;
 	case MON_HUMAM_PRIEST:
-		list->push_back(spell(SPL_SMITE,25));
+		list->push_back(spell(SPL_SMITE,20));
 		list->push_back(spell(SPL_SELF_HEAL,10));
 		break;
 	case MON_CROW_TENGU:
@@ -2199,10 +2202,10 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_FLAN:
 		list->push_back(spell(SPL_FLAN_BUSIN,30));
-		list->push_back(spell(SPL_BURST,25));
+		list->push_back(spell(SPL_BURST,12));
 		break;
 	case MON_FLAN_BUNSIN:
-		list->push_back(spell(SPL_BURST,15));
+		list->push_back(spell(SPL_BURST,18));
 		break;
 	case MON_RABIT_BOMB:
 		list->push_back(spell(SPL_SUICIDE_BOMB,0));
@@ -2217,6 +2220,17 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_FROST,25));
 		list->push_back(spell(SPL_ICE_BOLT,20));
 		list->push_back(spell(SPL_BLINK,30));
+		break;
+	case MON_TEWI:
+		list->push_back(spell(SPL_RABBIT_HORN,20));
+		break;
+	case MON_CLOWNPIECE:
+		list->push_back(spell(SPL_FIRE_BALL,15));
+		list->push_back(spell(SPL_CONFUSE,10));
+		break;
+	case MON_DOREMI:
+		list->push_back(spell(SPL_ICE_BOLT,20));
+		list->push_back(spell(SPL_MIND_BENDING,20));
 		break;
 	default:
 		break;

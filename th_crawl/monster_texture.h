@@ -109,6 +109,11 @@ extern textures img_mons_evil_eye;
 extern textures img_mons_little_imp;
 extern textures img_mons_schema_eye;
 
+extern textures img_mons_bomb_rabbit;
+extern textures img_mons_spear_rabbit;
+extern textures img_mons_support_rabbit;
+extern textures img_mons_magic_rabbit;
+
 
 
 
@@ -163,6 +168,12 @@ extern textures img_named_remilia;
 extern textures img_named_kasen;
 extern textures img_named_koishi;
 extern textures img_named_nue;
+
+extern textures img_named_flandre;
+extern textures img_named_tewi;
+extern textures img_named_clownpiece;
+extern textures img_named_doremi;
+
 
 
 

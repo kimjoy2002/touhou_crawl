@@ -556,6 +556,18 @@ string GetMonsterInfor(monster *it)
 		text_ += "마법을 쓰는 토끼.\n";
 		text_ += "\n";
 		break;
+	case MON_TEWI:
+		text_ += "죽림에 지내고 있는 흰토끼. 행운을 불러다준다고 한다.\n";
+		text_ += "만날 수 있다면 죽림에서 길을 쉽게 찾을 수 있을 것 같다.\n";
+		break;
+	case MON_CLOWNPIECE:
+		text_ += "횃불을 들고 있는 지옥의 요정.\n";
+		text_ += "보고 있는 것만으로도 광기에 휩싸일 수 있다.\n";
+		break;
+	case MON_DOREMI:
+		text_ += "꿈을 먹는 꿈의 관리인으로 맥이다.\n";
+		text_ += "평소에는 꿈의 세계에 살고 있다. 당신을 꿈나라로 이끈다.\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

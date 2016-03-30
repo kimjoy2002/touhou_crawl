@@ -13,8 +13,8 @@
 
 
 
-map_dummy::map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_):
-pos(pos_),wall(wall_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),
+map_dummy::map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_,dungeon_tile_type wall_tex_):
+pos(pos_),wall(wall_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),floor_tex(floor_tex_),wall_tex(wall_tex_),
 connect_enter(false),connect_exit(false)
 {
 	//if(!pattern_)
@@ -122,7 +122,7 @@ void map_dummy::mask(environment& env_pointer)
 		{
 			if(tiles[i+size_x][j+size_y] != DG_NONE)
 			{
-				env_pointer.dgtile[i+pos.x][j+pos.y].tile = DG_WALL;
+				env_pointer.dgtile[i+pos.x][j+pos.y].tile = wall_tex;
 			}
 		}
 	}
@@ -133,28 +133,28 @@ void map_dummy::mask(environment& env_pointer)
 void map_dummy::SetEnter(coord_def c)
 {
 	if(wall)
-		tiles[m_entrance.x-pos.x+size_x][m_entrance.y-pos.y+size_y] = DG_WALL;
+		tiles[m_entrance.x-pos.x+size_x][m_entrance.y-pos.y+size_y] = wall_tex;
 	m_entrance = c;
-	tiles[m_entrance.x-pos.x+size_x][m_entrance.y-pos.y+size_y] = DG_FLOOR;
+	tiles[m_entrance.x-pos.x+size_x][m_entrance.y-pos.y+size_y] = floor_tex;
 }
 void map_dummy::SetExit(coord_def c)
 {
 	if(wall)
-		tiles[m_exit.x-pos.x+size_x][m_exit.y-pos.y+size_y] = DG_WALL;
+		tiles[m_exit.x-pos.x+size_x][m_exit.y-pos.y+size_y] = wall_tex;
 	m_exit = c;
-	tiles[m_exit.x-pos.x+size_x][m_exit.y-pos.y+size_y] = DG_FLOOR;
+	tiles[m_exit.x-pos.x+size_x][m_exit.y-pos.y+size_y] = floor_tex;
 }
 
 
 void make_lake(int num, int repeat);
 
-void map_algorithms01(int num);
-void map_algorithms02(int num, int piece, int weight);
-void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num);
-void map_algorithms_library(int num);
-void map_algorithms_under(int num);
-void map_algorithms_bamboo(int num);
-void map_algorithms_temple(int num);
+void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
 
@@ -165,48 +165,52 @@ void map_algorithms(int num)
 		if(num == 0)
 		{
 			//map_algorithms03(MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL);
-			map_algorithms02(num,0,0);
+			map_algorithms02(num,0,0,DG_FLOOR,DG_WALL);
 
 		}
 		else if(num<MAX_DUNGEUN_LEVEL)
 		{
 			if(randA(1))
-				map_algorithms01(num);
+				map_algorithms01(num,DG_FLOOR,DG_WALL);
 			else
-				map_algorithms02(num,randA(10),0);
+				map_algorithms02(num,randA(10),0,DG_FLOOR,DG_WALL);
 		}
 		else if(num == TEMPLE_LEVEL)
 		{
-			map_algorithms_temple(num);
+			map_algorithms_temple(num,DG_FLOOR,DG_WALL);
 		}
 		else if(num >= YOUKAI_MOUNTAIN_LEVEL && num <= YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
 		{
-			map_algorithms02(num,10,0);
+			map_algorithms02(num,10,0,DG_GRASS,DG_STONE_WALL);
 		}
 		else if(num >= MISTY_LAKE_LEVEL && num <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 		{
-			map_algorithms03(120,3,5,9, num);
+			map_algorithms03(120,3,5,9, num,DG_GRASS,DG_WALL);
 			make_lake(num, 100);
 		}
 		else if(num == SCARLET_LIBRARY_LEVEL)
 		{
-			map_algorithms_library(num);
+			map_algorithms_library(num,DG_FLOOR,DG_RED_WALL);
 		}
 		else if(num == SCARLET_UNDER_LEVEL)
 		{
-			map_algorithms_under(num);
+			map_algorithms_under(num,DG_FLOOR,DG_RED_WALL);
 		}
 		else if(num == BAMBOO_LEVEL)
 		{
-			map_algorithms_bamboo(num);
+			map_algorithms_bamboo(num,DG_GRASS,DG_BAMBOO_WALL);
 		}
 		else if(num == EIENTEI_LEVEL)
 		{
-			map_algorithms02(num, 5,15);
+			map_algorithms02(num, 5,15,DG_GRASS,DG_WALL);
+		}
+		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
+		{
+			map_algorithms01(num,DG_FLOOR,DG_RED_WALL);
 		}
 		else
 		{
-			map_algorithms01(num);
+			map_algorithms01(num,DG_FLOOR,DG_WALL);
 		}
 	}
 	else
@@ -330,7 +334,7 @@ void make_lake(int num, int repeat)
 
 
 
-void common_map_make_last(int num, 	
+void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex 	,
 	vector<map_dummy*> &vec_map,
 	vector<map_dummy*> &vec_special_map , 
 	bool check_room_mask_, bool first_path_, bool make_path_, bool make_wall_, int door_percent_)
@@ -424,7 +428,7 @@ void common_map_make_last(int num,
 
 	for(int i = 0;i<DG_MAX_X;i++)
 		for(int j = 0;j<DG_MAX_Y;j++)
-			env[num].dgtile[i][j].tile = DG_WALL; //´Ù½Ã ÀüºÎ º®À¸·Î
+			env[num].dgtile[i][j].tile = wall_tex; //´Ù½Ã ÀüºÎ º®À¸·Î
 
 
 	
@@ -440,7 +444,7 @@ void common_map_make_last(int num,
 			while(!path_stack.empty())
 			{
 				coord_def path_temp = path_stack.top();
-				env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ÀúÀåÇÑ µµ·Î¸¦ Ä¥ÇÏ±â
+				env[num].dgtile[path_temp.x][path_temp.y].tile = floor_tex; //ÀúÀåÇÑ µµ·Î¸¦ Ä¥ÇÏ±â
 				path_stack.pop();
 			}
 		}
@@ -478,7 +482,7 @@ void common_map_make_last(int num,
 		while(1)
 		{
 			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].tile == DG_FLOOR  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
+			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
 			{
 				if(i>2)
 				{
@@ -504,7 +508,7 @@ void common_map_make_last(int num,
 }
 
 
-void map_algorithms01(int num)
+void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
 	vector<map_dummy*> vec_special_map;
@@ -538,7 +542,7 @@ void map_algorithms01(int num)
 			int m_size=5;
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
 			
-			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
@@ -574,12 +578,13 @@ void map_algorithms01(int num)
 	}
 
 	common_map_make_last(num, 	
+	floor_tex,wall_tex,
 	vec_map,
 	vec_special_map, 
 	true,true, true, true, randA(10));
 
 }
-void map_algorithms02(int num, int piece, int weight)
+void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
 	vector<map_dummy*> vec_special_map;
@@ -615,7 +620,7 @@ void map_algorithms02(int num, int piece, int weight)
 				temp_coord.x = DG_MAX_X/2;
 				temp_coord.y = DG_MAX_Y/2;
 			}
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 			
 			
 
@@ -646,7 +651,7 @@ void map_algorithms02(int num, int piece, int weight)
 	for(int i=0;i<25-piece- weight;i++)
 	{
 		int j=0;
-		for(;j<20;j++) //¹«ÇÑ¹Ýº¹ Á¦°Å¿ë
+		for(;j<i==0?9999:20;j++) //¹«ÇÑ¹Ýº¹ Á¦°Å¿ë
 		{
 			bool success= true;
 			int next_x=0,next_y=0;
@@ -664,7 +669,7 @@ void map_algorithms02(int num, int piece, int weight)
 				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 
 			coord_def temp_coord(next_x,next_y);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,0); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,0,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			if(step)
 			{
@@ -721,7 +726,8 @@ void map_algorithms02(int num, int piece, int weight)
 	}
 
 	
-	common_map_make_last(num, 	
+	common_map_make_last(num, 
+	floor_tex,wall_tex,
 	vec_map,
 	vec_special_map, 
 	false,false, true, false, 11);
@@ -735,7 +741,7 @@ void map_algorithms02(int num, int piece, int weight)
 
 
 
-void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num)
+void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
 	vector<map_dummy*> vec_special_map;
@@ -769,7 +775,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 
 			coord_def temp_coord(next_x,next_y);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,1); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,1,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			if(step)
 			{
@@ -846,7 +852,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			int r_size_y = rand_int(3,8);
 			int m_size=20;
 			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 			
 			vector<map_dummy*>::iterator it;
 			for (it=vec_map.begin();it!=vec_map.end();it++) 
@@ -882,6 +888,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 	
 	common_map_make_last(num, 	
+	floor_tex,wall_tex,
 	vec_map,
 	vec_special_map, 
 	false,false, false, false, 11);
@@ -889,7 +896,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 }
 
-void map_algorithms_library(int num)
+void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	int d_x = 10, d_y = 10;
 	for(int x = 0; x<DG_MAX_X; x++)
@@ -898,10 +905,10 @@ void map_algorithms_library(int num)
 		{
 			if(abs(x-DG_MAX_X/2)<DG_MAX_X/2-d_x && abs(y-DG_MAX_Y/2)<DG_MAX_Y/2-d_y)
 			{
-				env[num].dgtile[x][y].tile = DG_FLOOR;
+				env[num].dgtile[x][y].tile = floor_tex;
 			}
 			else 
-				env[num].dgtile[x][y].tile = DG_WALL;
+				env[num].dgtile[x][y].tile = wall_tex;
 		}
 	}
 	int a_ = rand_int(0,1)*2-1;
@@ -931,7 +938,7 @@ void map_algorithms_library(int num)
 			{
 				if(!(abs(j-DG_MAX_X/2)<10 && abs(i-DG_MAX_Y/2)<5))
 				{
-					env[num].dgtile[j][i].tile = DG_WALL; //³ªÁß¿¡ µµ¼­º®À¸·Î
+					env[num].dgtile[j][i].tile = DG_BOOK_WALL;
 				}
 			}
 
@@ -949,7 +956,7 @@ void map_algorithms_library(int num)
 
 
 
-void map_algorithms_under(int num)
+void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	for(int x = 0; x<DG_MAX_X; x++)
 	{	
@@ -957,10 +964,10 @@ void map_algorithms_under(int num)
 		{
 			if((x-DG_MAX_X/2)*(x-DG_MAX_X/2) + (y-DG_MAX_Y/2)*(y-DG_MAX_Y/2) < 12*12)
 			{
-				env[num].dgtile[x][y].tile = DG_FLOOR;
+				env[num].dgtile[x][y].tile = floor_tex;
 			}
 			else 
-				env[num].dgtile[x][y].tile = DG_WALL;
+				env[num].dgtile[x][y].tile = wall_tex;
 		}
 	}
 
@@ -982,7 +989,7 @@ void map_algorithms_under(int num)
 	}
 }
 
-void map_algorithms_temple(int num)
+void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	for(int x = 0; x<DG_MAX_X; x++)
 	{	
@@ -990,14 +997,14 @@ void map_algorithms_temple(int num)
 		{
 			if((x-DG_MAX_X/2)*(x-DG_MAX_X/2) + (y-DG_MAX_Y/2)*(y-DG_MAX_Y/2) < 15*15)
 			{
-				env[num].dgtile[x][y].tile = DG_FLOOR;
+				env[num].dgtile[x][y].tile = floor_tex;
 			}
 			else if(abs(x-DG_MAX_X/2)<2 && y>DG_MAX_Y/2 && y<DG_MAX_Y/2+30)
 			{
-				env[num].dgtile[x][y].tile = DG_FLOOR;
+				env[num].dgtile[x][y].tile = floor_tex;
 			}
 			else 
-				env[num].dgtile[x][y].tile = DG_WALL;
+				env[num].dgtile[x][y].tile = wall_tex;
 		}
 	}
 

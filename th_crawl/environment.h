@@ -50,7 +50,6 @@ public:
 	void CloseDoor(){tile=DG_CLOSE_DOOR;};
 	bool isSight(){return (tile<DG_NONE_MOVE || tile >= DG_GLASS);};
 	bool isFloor(){return (tile>=DG_FLOOR && tile<=DG_FLOOR_END);};
-	bool isWall(){return (tile>=DG_WALL && tile<=DG_WALL_END);};
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
 	{

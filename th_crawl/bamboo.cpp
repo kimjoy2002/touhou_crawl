@@ -21,7 +21,7 @@ void bamboo_count(int num);
 
 
 
-void map_algorithms_bamboo(int num)
+void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	int d_x = 10, d_y = 10;
 	for(int x = 0; x<DG_MAX_X; x++)
@@ -30,10 +30,10 @@ void map_algorithms_bamboo(int num)
 		{
 			if(randA(10)>1)
 			{
-				env[num].dgtile[x][y].tile = DG_FLOOR;
+				env[num].dgtile[x][y].tile = floor_tex;
 			}
 			else 
-				env[num].dgtile[x][y].tile = DG_WALL;
+				env[num].dgtile[x][y].tile = wall_tex;
 		}
 	}
 	int x_ = DG_MAX_X/2;
@@ -41,7 +41,7 @@ void map_algorithms_bamboo(int num)
 
 	env[num].stair_up[0].x = x_;
 	env[num].stair_up[0].y = y_;
-	env[num].dgtile[x_][y_].tile = DG_FLOOR;
+	env[num].dgtile[x_][y_].tile = floor_tex;
 
 
 	env[num].ClearEvent();
@@ -96,12 +96,12 @@ void bamboo_count(int num)
 					else if(randA(10)>1)
 					{
 						env[num].dgtile[i][j].init();
-						env[num].dgtile[i][j].tile = DG_FLOOR;
+						env[num].dgtile[i][j].tile = DG_GRASS;
 					}
 					else 
 					{
 						env[num].dgtile[i][j].init();
-						env[num].dgtile[i][j].tile = DG_WALL;
+						env[num].dgtile[i][j].tile = DG_BAMBOO_WALL;
 					}
 				}
 				else

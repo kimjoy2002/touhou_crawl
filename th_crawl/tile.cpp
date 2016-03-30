@@ -16,10 +16,16 @@ dot_tile_type dungeon_tile::GetDot()
 	{
 	case DG_FLOOR:
 	case DG_FLOOR2:
+	case DG_GRASS:
 		return DOT_FLOOR;
 	case DG_WALL:
 	case DG_GLASS:
 	case DG_STATUE:
+	case DG_STONE_WALL:
+	case DG_RED_WALL:
+	case DG_BOOK_WALL:
+	case DG_BAMBOO_WALL:
+	case DG_METAL_WALL:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:

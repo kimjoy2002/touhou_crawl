@@ -95,13 +95,15 @@ public:
 	coord_def m_exit;
 	bool connect_enter;
 	bool connect_exit;
+	dungeon_tile_type floor_tex;
+	dungeon_tile_type wall_tex;
 
 	list<mapdummy_mon> monster_list;
 	list<mapdummy_item> item_list;
 	list<mapdummy_event> event_list;
 	vector<dungeon_tile_type> sp_tile_list;
 
-	map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_);
+	map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
 	~map_dummy();
 	void patternSet();
 	bool collution(const coord_def& point,int size_x_ = 0,int size_y_ = 0);

@@ -93,9 +93,9 @@ void baseMap(map_dummy* map)
 		for(int j = 0;j<map->size_y*2+1;j++)
 		{
 			if(map->wall && (i==0 || j==0 || i==map->size_x*2 || j==map->size_y*2))
-				map->tiles[i][j] = DG_WALL;
+				map->tiles[i][j] = map->wall_tex;
 			else
-				map->tiles[i][j] = DG_FLOOR;
+				map->tiles[i][j] = map->floor_tex;
 		}
 	}
 	if(randA(1))
@@ -118,8 +118,8 @@ void baseMap(map_dummy* map)
 		map->m_exit.x = (randA(1)?-map->size_x:map->size_x);
 		map->m_exit.y = rand_int(-map->size_y+1,map->size_y-1);
 	}
-	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = DG_FLOOR;
-	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = DG_FLOOR;
+	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = map->floor_tex;
+	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = map->floor_tex;
 
 	map->m_entrance+=map->pos;
 	map->m_exit+=map->pos;
@@ -135,11 +135,11 @@ void baseCircleMap(map_dummy* map)
 		for(int j = 0;j<map->size_y*2+1;j++)
 		{
 			if(map->wall && (i==0 || j==0 || i==map->size_x*2 || j==map->size_y*2))
-				map->tiles[i][j] = DG_WALL;
+				map->tiles[i][j] = map->wall_tex;
 			else if((i-map->size_x)*(i-map->size_x) + (j-map->size_y)*(j-map->size_y) > ((map->size_y>map->size_x)?map->size_y:map->size_x)*((map->size_y>map->size_x)?map->size_y:map->size_x))
 				map->tiles[i][j] = DG_NONE;
 			else
-				map->tiles[i][j] = DG_FLOOR;
+				map->tiles[i][j] = map->floor_tex;
 		}
 	}
 	if(randA(1))
@@ -162,8 +162,8 @@ void baseCircleMap(map_dummy* map)
 		map->m_exit.x = (randA(1)?-map->size_x:map->size_x);
 		map->m_exit.y = 0;
 	}
-	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = DG_FLOOR;
-	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = DG_FLOOR;
+	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = map->floor_tex;
+	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = map->floor_tex;
 
 	map->m_entrance+=map->pos;
 	map->m_exit+=map->pos;
@@ -193,10 +193,10 @@ void TempleEnterMap(map_dummy* map)
 			switch(temp[j])
 			{
 			case '.':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
 				break;
 			case '#':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->wall_tex;
 				break;
 			case '0':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_TEMPLE_STAIR;
@@ -239,10 +239,10 @@ void YoukaiEnterMap(map_dummy* map)
 			switch(temp[j])
 			{
 			case '.':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
 				break;
 			case '#':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->wall_tex;
 				break;
 			case '0':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_YOUKAI_MOUNTAIN_STAIR;
@@ -298,10 +298,10 @@ bool CommonValutMap(map_dummy* map, int pattern)
 			switch(temp[j])
 			{
 			case '.':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
 				break;
 			case '#':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->wall_tex;
 				break;
 			case 'O':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_TEMPLE_KANAKO;
@@ -344,10 +344,22 @@ bool PixedMap(map_dummy* map, char *temp)
 			switch(temp[j])
 			{
 			case '.':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
 				break;
 			case '#':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->wall_tex;
+				break;
+			case ',':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				break;
+			case '@':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
+				break;
+			case '$':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_METAL_WALL;
+				break;
+			case '[':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BAMBOO_WALL;
 				break;
 			case '+':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_CLOSE_DOOR;
@@ -432,8 +444,8 @@ void TempleMap(map_dummy* map, int temple_)
 		map->m_exit.x = (randA(1)?-map->size_x:map->size_x);
 		map->m_exit.y = rand_int(-map->size_y+1,map->size_y-1);
 	}
-	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = DG_FLOOR;
-	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = DG_FLOOR;
+	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = map->floor_tex;
+	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = map->floor_tex;
 
 	int x_=rand_int(1,map->size_x*2-1),y_=rand_int(1,map->size_y*2-1);
 	map->tiles[x_][y_] =(dungeon_tile_type)(DG_TEMPLE_FIRST+temple_);

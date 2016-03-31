@@ -105,7 +105,7 @@ string tribe_property::GetInfor()
 	case TPT_GHOST_FOOT:
 		return "당신의 망령이기에 다리가 없다.";
 	case TPT_CHEUKUMOGAMI:
-		return "당신의 본체는 도구이다.";
+		return "당신의 본체는 도구이다.(미구현)";
 	}
 	return "이 특성은 버그다.";
 }

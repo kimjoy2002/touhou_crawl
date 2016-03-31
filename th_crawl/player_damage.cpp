@@ -349,6 +349,7 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 	{
 	case ATT_NORMAL:
 	case ATT_NOISE:
+	case ATT_SPEAR:
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:
@@ -414,6 +415,7 @@ void players::print_damage_message(attack_infor &a)
 	switch(a.type)
 	{
 	case ATT_NORMAL:
+	case ATT_SPEAR:
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:

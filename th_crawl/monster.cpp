@@ -693,6 +693,7 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 	switch(type_)
 	{
 	case ATT_NORMAL:
+	case ATT_SPEAR:
 	case ATT_NOISE:
 	case ATT_FIRE:
 	case ATT_COLD:
@@ -742,6 +743,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		switch(a.type)
 		{
 		case ATT_NORMAL:
+		case ATT_SPEAR:
 		case ATT_FIRE:
 		case ATT_COLD:
 		case ATT_S_POISON:
@@ -858,6 +860,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	switch(a.type)
 	{
 	case ATT_NORMAL:
+	case ATT_SPEAR:
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:

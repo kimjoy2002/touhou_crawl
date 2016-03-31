@@ -1431,13 +1431,9 @@ void Pray()
 		{
 			printlog("당신은 제단에 기도를 드렸다.",true,false,false,CL_warning);
 			MoreWait();
-			if(type != DG_TEMPLE_BYAKUREN && type != DG_TEMPLE_EIRIN && type != DG_TEMPLE_KANAKO && type != DG_TEMPLE_SHIZUHA &&
-				type != DG_TEMPLE_MINORIKO && type != DG_TEMPLE_MIMA && type != DG_TEMPLE_YUUGI && type != DG_TEMPLE_SATORI  &&
-				type != DG_TEMPLE_TENSI && type != DG_TEMPLE_SHINKI && type != DG_TEMPLE_YUYUKO && type != DG_TEMPLE_YUKARI &&
-				type != DG_TEMPLE_SUWAKO && type != DG_TEMPLE_HINA
-				)
+			if(type == DG_TEMPLE_SHIKIEIKI)
 			{
-				printlog("이 신은 아직 당신을 받아들일 준비가 되어있지 않다.",true,false,false,CL_warning);
+				printlog("시키에이키는 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}
 			else
 			{

@@ -279,7 +279,7 @@ const mon_infor mondata[] = {
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR,0,0,10},
 
 	{MON_KATPA_SPEAR,9,130,name_infor("캇파 창병",true),&img_mons_new_kappa_spear,70,5,10,
-	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{20,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM,0,0,10},
 
 	{MON_KATPA_WATER_WIZARD,10,160,name_infor("캇파 수술사",false),&img_mons_new_kappa_wizard,45,4,10,
@@ -508,7 +508,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_INVISIBLE | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,3,1,7},
 	{MON_NUE,14,1140,name_infor("누에",false),&img_named_nue,140,10,6,
-	{18,25,0},{ATT_NORMAL,ATT_ELEC,ATT_NONE},{name_infor("공격",true),name_infor("공격",true),name_infor()},
+	{18,25,0},{ATT_SPEAR,ATT_ELEC,ATT_NONE},{name_infor("공격",true),name_infor("공격",true),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10},
 	{MON_SANPEI_FIGHTER,12,301,name_infor("산페이파이터",false),&img_mons_sanpei_fighter,120,15,6,
 	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("드릴",false),name_infor(),name_infor()},
@@ -601,7 +601,7 @@ const mon_infor mondata[] = {
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
 	
 	{MON_RABIT_SPEAR,11,40,name_infor("토끼 죽창병",true),&img_mons_spear_rabbit,35,5,15,
-	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{28,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
 	{MON_RABIT_SUPPORT,12,40,name_infor("토끼 지원병",true),&img_mons_support_rabbit,25,3,15,

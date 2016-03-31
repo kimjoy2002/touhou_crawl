@@ -817,6 +817,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 { //찾아보면 또 추가할거 있을듯
 	ATT_NONE = -1,
 	ATT_NORMAL=0,
+	ATT_SPEAR,
 	ATT_SMITE,
 	ATT_NOISE,
 	ATT_FIRE,

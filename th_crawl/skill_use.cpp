@@ -1037,7 +1037,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
-	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(120,180), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
+	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
 		if(randA(99)<=8)
@@ -1054,8 +1054,8 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
-	int id_ = randA(2)==0?MON_YUKI:(randA(1)?MON_MAI:MON_YUUGENMAGAN);
-	if(monster* mon_=BaseSummon(id_, rand_int(120,180), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
+	int id_ = randA(3)==0?MON_YUKI:(randA(2)==0?MON_MAI:randA(1)?MON_YUUGENMAGAN:MON_SARIEL);
+	if(monster* mon_=BaseSummon(id_, rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
 		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?11:8))

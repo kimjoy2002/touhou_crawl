@@ -112,6 +112,17 @@ bool isBandAlly(monster* order, monster* other)
 			break;
 		}
 		return false;
+	case MON_SARIEL:
+		switch(other->id)
+		{
+		case MON_SARA:
+		case MON_LUIZE:
+		case MON_ELIS:
+			return true;
+		default:
+			break;
+		}
+		return false;
 	default:
 		break;
 	}
@@ -2210,6 +2221,10 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_FIRE_BALL,25));
 		list->push_back(spell(SPL_FIRE_BOLT,25));
 		list->push_back(spell(SPL_SMITE,15));
+		break;
+	case MON_SARIEL:
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,30));
+		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_SCHEMA_EYE:
 		list->push_back(spell(SPL_MAGIC_TANMAC,40));

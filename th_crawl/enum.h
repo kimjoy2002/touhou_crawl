@@ -552,7 +552,6 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp에서 itemtosk
 	//SKT_POISON,
 	//SKT_ELEC,
 	SKT_EVOCATE,
-	SKT_INVOCATE,
 	SKT_MAX
 };
 

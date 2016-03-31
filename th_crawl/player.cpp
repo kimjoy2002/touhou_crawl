@@ -1371,7 +1371,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		{
 			remainSpellPoiont+=2;
 		}
-		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_EVOCATE || skill_ == SKT_INVOCATE)
+		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_EVOCATE)
 		{
 			//최대 마나는 나중에 손보자...
 			//일단 3렙마다 최대마나 1증가
@@ -1381,11 +1381,8 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 				{
 					if((skill[skill_].level > skill[SKT_EVOCATE].level) || skill_ == SKT_EVOCATE)
 					{
-						if((skill[skill_].level > skill[SKT_INVOCATE].level) || skill_ == SKT_INVOCATE)
-						{
-							mp++;
-							max_mp++;
-						}
+						mp++;
+						max_mp++;
 					}
 				}
 			}
@@ -2816,7 +2813,6 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(tutorial)
 	{
 		gift_count=30;
-		you.GiveSkillExp(SKT_INVOCATE,310,true);
 	}
 	return true;
 

@@ -394,10 +394,9 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(1,STAT_DEX);
 		MakeStartItem(SIT_GOHEY,0);
 		MakeStartItem(SIT_ROBE,1);
-		you.GiveSkillExp(SKT_MACE,60,false);
-		you.GiveSkillExp(SKT_FIGHT,30,false);
-		you.GiveSkillExp(SKT_DODGE,20,false);
-		you.GiveSkillExp(SKT_INVOCATE,120,false);
+		you.GiveSkillExp(SKT_MACE,120,false);
+		you.GiveSkillExp(SKT_FIGHT,60,false);
+		you.GiveSkillExp(SKT_DODGE,50,false);
 		if(name_.compare("사나에") == 0) //레이무는 믿지않는다.
 			you.Belief(GT_SUWAKO,35,false);
 		else if(name_.compare("레이무")) //레이무는 믿지않는다.
@@ -649,10 +648,9 @@ void SetJob(job_type select_, string name_)
 			MakeStartItem(SIT_ARMOUR_0,1);
 		else
 			MakeStartItem(SIT_ROBE,1);
-		you.GiveSkillExp(SKT_FIGHT,60,false);
+		you.GiveSkillExp(SKT_FIGHT,90,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.GiveSkillExp(SKT_INVOCATE,30,false);
 		break;
 	case JOB_ASSASSIN:
 		you.max_hp+=2;
@@ -673,14 +671,13 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(3,STAT_STR);
 		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
-		you.GiveSkillExp(WeaponSelect(0),20,false);
+		you.GiveSkillExp(WeaponSelect(0),80,false);
 		MakeStartItem(SIT_ROBE,1);
 		MakeStartItem(SIT_FOOD,2);
 		MakeStartItem(SIT_FOOD,2);
 		MakeStartItem(SIT_FOOD,2);
 		you.GiveSkillExp(SKT_FIGHT,120,false);
-		you.GiveSkillExp(SKT_DODGE,20,false);
-		you.GiveSkillExp(SKT_INVOCATE,60,false);
+		you.GiveSkillExp(SKT_DODGE,40,false);
 		break;
 	case JOB_MADE:
 		you.max_hp+=2;		
@@ -782,8 +779,8 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		if(aptit_)
 		{
 			you.skill[SKT_FIGHT].aptit +=2;
-			you.skill[SKT_EVOCATE].aptit +=2;
-			you.skill[SKT_INVOCATE].aptit +=2;
+			you.skill[SKT_DODGE].aptit +=1;
+			you.skill[SKT_EVOCATE].aptit +=3;
 		}
 		else
 		{		

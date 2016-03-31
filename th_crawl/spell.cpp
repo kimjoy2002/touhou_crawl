@@ -639,13 +639,13 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_SLOW:
 		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SMITE:
-		return num==0?(SKT_INVOCATE):num==1?(SKT_ERROR):(SKT_ERROR);
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_FLAME:
 		return num==0?(SKT_FIRE):num==1?(SKT_CONJURE):(SKT_ERROR);
 	case SPL_SUMMON_BUG:
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SELF_HEAL:
-		return num==0?(SKT_INVOCATE):num==1?(SKT_ERROR):(SKT_ERROR);
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_BLINK:
 		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_BURN:
@@ -725,7 +725,7 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_WATER_CANNON:
 		return num==0?(SKT_COLD):num==1?(SKT_CONJURE):(SKT_ERROR);	
 	case SPL_KYOKO_SMITE:
-		return num==0?(SKT_INVOCATE):num==1?(SKT_ERROR):(SKT_ERROR);	
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);	
 	case SPL_SUMMON_OPTION:
 		return num==0?(SKT_SUMMON):num==1?(SKT_CONJURE):(SKT_ERROR);
 	case SPL_SUMMON_GOLEM:

@@ -1238,11 +1238,10 @@ void map_algorithms_tuto01(int num)
 
 	env[num].dgtile[37][33].tile = DG_TEMPLE_KANAKO;
 
-	you.GiveSkillExp(SKT_FIGHT,30,false);
+	you.GiveSkillExp(SKT_FIGHT,90,false);
 	you.GiveSkillExp(SKT_MACE,45,false);
 	you.GiveSkillExp(SKT_TANMAC,70,false);
 	you.GiveSkillExp(SKT_DODGE,50,false);
-	you.GiveSkillExp(SKT_INVOCATE,60,false);
 }
 
 void map_algorithms_tuto02(int num)

@@ -414,7 +414,6 @@ int SkillPow(skill_list skill)
 	case SKL_EIRIN_0:
 	case SKL_EIRIN_1:
 	case SKL_EIRIN_2:
-		return you.skill[SKT_INVOCATE].level*5;
 	case SKL_BYAKUREN_1:
 	case SKL_BYAKUREN_2:
 	case SKL_MINORIKO_1:
@@ -476,18 +475,6 @@ int SkillDiffer(skill_list skill)
 {
 	switch(skill)
 	{
-	case SKL_KANAKO_1:
-		return SkillDiffer_simple(-4,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
-	case SKL_KANAKO_2:
-		return SkillDiffer_simple(-2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
-	case SKL_KANAKO_3:
-		return SkillDiffer_simple(1,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
-	case SKL_EIRIN_0:
-		return SkillDiffer_simple(-6,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
-	case SKL_EIRIN_1:
-		return SkillDiffer_simple(-2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
-	case SKL_EIRIN_2:
-		return SkillDiffer_simple(2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_LEVITATION:
 		return SkillDiffer_simple(-4,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_INVISIBLE:
@@ -498,6 +485,18 @@ int SkillDiffer(skill_list skill)
 	case SKL_BYAKUREN_2:		
 		return 100;
 		//return SkillDiffer_simple(1,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
+	case SKL_KANAKO_1:
+		//return SkillDiffer_simple(-4,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_KANAKO_2:
+		//return SkillDiffer_simple(-2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_KANAKO_3:
+		//return SkillDiffer_simple(1,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_EIRIN_0:
+		//return SkillDiffer_simple(-6,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_EIRIN_1:
+		//return SkillDiffer_simple(-2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_EIRIN_2:
+		//return SkillDiffer_simple(2,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:

@@ -17,7 +17,7 @@ void sendScore(const char *c, const char *file)
 	NetClient client;
 
 	client.StartUp();
-	client.Connect("192.168.219.5",12345);
+	client.Connect("182.222.104.167",12345);
 	packet data;
 	strcpy(data.str,"hello world"); 
 	data.str[11] = 0;

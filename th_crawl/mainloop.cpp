@@ -31,7 +31,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver0.4";
+const char *version_string = "ver0.5";
 
 
 void Initialize();
@@ -354,8 +354,8 @@ void charter_selete()
 			SetText() += " 보너스) +2,+2 빗자루, 팔괘로(미구현), 영력의 반지, 파괴의 마법책\n\n\n";
 			SetText() += "c - 인간 무녀 사나에\n\n";
 			SetText() += " : 고위력 & 광범위 작렬형. 스와코님의 말씀대로!\n";
-			SetText() += " 적성보너스) 전투적성 +2, 발동적성 +2, 기도적성 +2\n";
-			SetText() += " 보너스)  대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.(미구현)\n\n\n";
+			SetText() += " 적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3\n";
+			SetText() += " 보너스)  대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.\n\n\n";
 			SetText() += "d - 백랑텐구 전사 모미지\n\n";
 			SetText() += " : 자동탐색 & 자동공격형. O와 TAB이 당신을 지켜줄지어니\n";
 			SetText() += " 적성보너스) 장검적성 +1\n";
@@ -712,7 +712,7 @@ void MainLoop()
 			break;
 		case '&': //위자드모드!
 			//waitkeyinput();
-			wiz_mode();
+			//wiz_mode();
 			break;
 		case 0x8B:
 			auto_pick_onoff();

@@ -3438,18 +3438,18 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			(*it).identify = true;
 		}
 	}
-	else if((*it).type == ITM_SPELLCARD && where_ == ET_NECK)
-	{	
-		if(!(*it).identify)
-			(*it).identify = true;
-		(*it).autoIdentify();
-		//bool iden_ = equipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
-		//if(iden_ && !(*it).identify)
-		//	(*it).identify = true;
-		//(*it).autoIdentify();
-		//if(!(*it).identify)
-		//	unidenequipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
-	}
+	//else if((*it).type == ITM_SPELLCARD && where_ == ET_NECK)
+	//{	
+	//	if(!(*it).identify)
+	//		(*it).identify = true;
+	//	(*it).autoIdentify();
+	//	//bool iden_ = equipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
+	//	//if(iden_ && !(*it).identify)
+	//	//	(*it).identify = true;
+	//	//(*it).autoIdentify();
+	//	//if(!(*it).identify)
+	//	//	unidenequipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
+	//}
 	
 	if((*it).isArtifact())
 	{

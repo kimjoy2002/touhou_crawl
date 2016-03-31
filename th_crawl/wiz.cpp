@@ -38,6 +38,15 @@ void wiz_mode()
 		//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
 		MakeCloud(you.position, img_fog_fire, SMT_FIRE, rand_int(8,10), rand_int(8,12), 0,5, &you);
 		break;
+	case 'A':
+		{
+			item_infor t;
+			makeitem(ITM_RING, 0, &t, RGT_GRAZE);
+			makeitem(ITM_RING, 0, &t, RGT_GRAZE);	
+			env[current_level].MakeItem(you.position,t);
+
+			break;
+		}
 	case 'H':
 		you.HpUpDown(you.max_hp,DR_EFFECT);
 		you.MpUpDown(you.max_mp);

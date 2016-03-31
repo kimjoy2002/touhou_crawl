@@ -351,7 +351,7 @@ void charter_selete()
 			SetText() += "b - 인간 마법사 마리사\n\n";
 			SetText() += " : 무한관통 & 상시공격형. 탄막은 파워! 보이자마자 죽이자!\n";
 			SetText() += " 적성보너스) 주문시전적성 +2, 파괴마법적성 +3, 회피적성 +1\n";
-			SetText() += " 보너스) +2,+2 빗자루, 팔괘로(미구현), 영력의 반지, 파괴의 마법책\n\n\n";
+			SetText() += " 보너스) +2,+2 빗자루, 영력의 반지, 파괴의 마법책\n\n\n";
 			SetText() += "c - 인간 무녀 사나에\n\n";
 			SetText() += " : 고위력 & 광범위 작렬형. 스와코님의 말씀대로!\n";
 			SetText() += " 적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3\n";
@@ -712,7 +712,7 @@ void MainLoop()
 			break;
 		case '&': //위자드모드!
 			//waitkeyinput();
-			//wiz_mode();
+			wiz_mode();
 			break;
 		case 0x8B:
 			auto_pick_onoff();

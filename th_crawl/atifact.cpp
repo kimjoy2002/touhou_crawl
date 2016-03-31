@@ -270,10 +270,13 @@ bool effectartifact(ring_type kind, int value)
 		you.ResistUpDown(value,RST_INVISIBLE);
 		return false;
 	case RGT_GRAZE:
-		{
-			int temp = you.Ability(SKL_GRAZE_OFF,false,true);
-			you.Ability(SKL_GRAZE,false,value<=0,value>0?(temp>0?temp+1:0):0);
-			if(value<=0 && temp == 1 && you.s_graze)
+		{	
+			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //그레이즈 해제를 삭제하고 수를 리턴
+			temp += you.Ability(SKL_GRAZE,false,true); //그레이즈 발동도 해제하고 수를 리턴
+
+			temp+=value;
+			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_graze)
 			{
 				you.s_graze=0; 
 			}

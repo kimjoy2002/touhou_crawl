@@ -2195,7 +2195,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_BLINK,10));
 		break;
 	case MON_LUIZE:
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,35));
+		list->push_back(spell(SPL_ICE_BOLT,25));
 		list->push_back(spell(SPL_SELF_HEAL,20));
 		break;
 	case MON_YUUGENMAGAN:

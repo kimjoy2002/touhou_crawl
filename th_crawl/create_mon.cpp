@@ -1135,10 +1135,11 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_SARA:
+		mon->fire_resist=3;
 		mon->poison_resist=1;
 		break;
 	case MON_LUIZE:
-		mon->ice_resist=1;
+		mon->ice_resist=3;
 		break;
 	case MON_YUKI:
 		mon->fire_resist=3;

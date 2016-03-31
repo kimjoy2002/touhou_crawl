@@ -66,11 +66,11 @@ enum monster_flag
 */
 const mon_infor mondata[] = {
 	{MON_REIMUYUKKURI,2,4,name_infor("윳쿠리레이무",false),&img_mons_reimu_yukkuri,25,0,5,
-	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
 	{MON_REIMUYUKKURI,2,70,name_infor("윳쿠리레이무",false),&img_mons_reimu_yukkuri,25,0,5,
-	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
 	{MON_RAT,1,1,name_infor("쥐",false),&img_mons_rat,10,0,6,
@@ -106,11 +106,11 @@ const mon_infor mondata[] = {
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10},
 
 	{MON_SPIDER,3,11,name_infor("거미",false),&img_mons_spider,18,1,10,
-	{2,2,4},{ATT_NORMAL,ATT_NORMAL,ATT_S_POISON},{name_infor("공격",true),name_infor("공격",true),name_infor("독니",false)},
+	{2,2,3},{ATT_NORMAL,ATT_NORMAL,ATT_S_POISON},{name_infor("공격",true),name_infor("공격",true),name_infor("독니",false)},
 	M_FLAG_ANIMAL,0,1,10},
 
 	{MON_SNAKE,4,16,name_infor("뱀",true),&img_mons_snake,22,1,10,
-	{5,3,0},{ATT_S_POISON,ATT_NORMAL,ATT_NONE},{name_infor("공격",true),name_infor("공격",true),name_infor()},
+	{4,3,0},{ATT_S_POISON,ATT_NORMAL,ATT_NONE},{name_infor("공격",true),name_infor("공격",true),name_infor()},
 	M_FLAG_ANIMAL,0,1,7},
 
 	{MON_KATPA,2,7,name_infor("캇파",false),&img_mons_new_kappa,20,2,10,
@@ -178,7 +178,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 
 	{MON_FIREFLY,2,5,name_infor("반딧불이",false),&img_mons_firefly,18,1,10,
-	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10},
 
 	{MON_BUTTERFLY,1,0,name_infor("나비",false),&img_mons_butterfly,5,1,20,
@@ -254,7 +254,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,10,10},
 
 	{MON_MARISAYUKKURI,8,70,name_infor("윳쿠리마리사",false),&img_mons_marisa_yukkuri,70,2,5,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
 	{MON_AYAYUKKURI,12,210,name_infor("키메이마루",false),&img_mons_aya_yukkuri,65,0,16,
@@ -404,7 +404,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON,99,1,10},
 	
 	{MON_UNZAN_PUNCH,13,1,name_infor("운잔의 주먹",true),&img_named_unzan_punch[0],30,0,6,
-	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("스매쉬",false),name_infor(),name_infor()},
+	{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("스매쉬",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY  | M_FLAG_PASSED_ALLY,99,1,15},
 	
 	{MON_PACHU,12,923,name_infor("파츄리",false),&img_named_pachu,70,1,5,
@@ -600,8 +600,8 @@ const mon_infor mondata[] = {
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
 	
-	{MON_RABIT_SPEAR,11,54,name_infor("토끼 죽창병",true),&img_mons_spear_rabbit,35,5,15,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_RABIT_SPEAR,11,40,name_infor("토끼 죽창병",true),&img_mons_spear_rabbit,35,5,15,
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
 	{MON_RABIT_SUPPORT,12,40,name_infor("토끼 지원병",true),&img_mons_support_rabbit,25,3,15,

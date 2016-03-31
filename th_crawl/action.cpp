@@ -916,7 +916,7 @@ void Close_door()
 		int close_= 0;
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
 		{				
-			printlog("¹®À» ´Ý¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("¹®À» ´Ý¾Ò´Ù. ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
 		}

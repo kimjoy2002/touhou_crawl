@@ -2549,6 +2549,11 @@ bool players::Drink(char id_)
 				if(!you.isequip(it))
 				{
 					drinkpotion((potion_type)(*it).value1);
+					
+					if(iden_list.potion_list[(*it).value1].iden == false)
+					{		
+						printarray(false,false,false,CL_normal,3,"이것은 ",potion_iden_string[(*it).value1],"물약이다. ");		
+					}
 					iden_list.potion_list[(*it).value1].iden = true;
 					(*it).identify = true;
 					DeleteItem(it,1);

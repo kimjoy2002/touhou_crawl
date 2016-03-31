@@ -528,6 +528,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	float evasion = 0.0f;
 	float shield_ = 0.0f;
 	bool graze_ = false;
+	
 
 	if(s_timestep) //완전 무적이 됨
 		return false;
@@ -570,6 +571,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		sprintf_s(temp,50,"a-%d A-%d, H-%d hit-%d%%",a.damage,a.max_damage,a.accuracy,(int)(100-evasion*100));
 		printlog(temp,true,false,false,CL_danger);
 	}
+	you.SetInter(IT_DAMAGE);
 
 	{//실드 공식
      //breaking 기본 30

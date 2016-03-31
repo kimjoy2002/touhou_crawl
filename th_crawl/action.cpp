@@ -249,6 +249,7 @@ void long_rest()
 		case IT_TELE:
 		case IT_SMOKE:
 		case IT_EVENT:
+		case IT_DAMAGE:
 			return;
 		default:
 			break;
@@ -306,6 +307,7 @@ bool stack_move(bool auto_)
 		case IT_TELE:
 		case IT_SMOKE:
 		case IT_EVENT:
+		case IT_DAMAGE:
 			return false;
 		default:
 			break;

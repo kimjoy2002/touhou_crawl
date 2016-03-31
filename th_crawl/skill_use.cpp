@@ -1317,7 +1317,7 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 	{		
 		env[current_level].dgtile[order->position.x][order->position.y].tile = DG_TEMPLE_SUWAKO;
 		printlog("당신은 발밑에 스와코님의 신전을 세웠다. 신앙심이 풍족해지는 것을 느꼈다.",true,false,false,CL_swako);
-		you.PietyUpDown(2+randA(1));
+		you.PietyUpDown(2+randA(2));
 		return true;
 	}
 	else

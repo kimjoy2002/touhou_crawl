@@ -285,8 +285,11 @@ bool effectartifact(ring_type kind, int value)
 	case RGT_LEVITATION:
 		{
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true);
-			you.Ability(SKL_LEVITATION,false,value<=0,value>0?(temp>0?temp+1:0):0);
-			if(value<=0 && temp == 1 && you.s_levitation)
+			temp += you.Ability(SKL_LEVITATION,false,true);
+
+			temp+=value;
+			you.Ability(you.s_levitation?SKL_LEVITATION_OFF:SKL_LEVITATION,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_levitation)
 			{
 				you.s_levitation=0; 
 			}
@@ -295,10 +298,13 @@ bool effectartifact(ring_type kind, int value)
 	case RGT_INVISIBLE:
 		{
 			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true);
-			you.Ability(SKL_INVISIBLE,false,value<=0,value>0?(temp>0?temp+1:0):0);
-			if(value<=0 && temp == 1 && you.s_invisible)
+			temp += you.Ability(SKL_INVISIBLE,false,true);
+
+			temp+=value;
+			you.Ability(you.s_invisible?SKL_INVISIBLE_OFF:SKL_INVISIBLE,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_invisible)
 			{
-				you.s_invisible=0;
+				you.s_levitation=0; 
 			}
 			return true;
 		}

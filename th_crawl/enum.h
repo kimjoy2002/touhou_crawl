@@ -155,6 +155,7 @@ enum interupt_type //아래로갈수록 인터럽트 우선순위가 증가한다.
 	IT_TELE,
 	IT_SMOKE,
 	IT_MAP_DANGER,
+	IT_DAMAGE,
 	IT_EVENT
 };
 

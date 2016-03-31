@@ -345,7 +345,7 @@ void Drinking()
 				changedisplay(DT_GAME);
 				if(you.god == GT_EIRIN)
 				{
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 						you.GiftCount(1);

@@ -694,7 +694,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("카나코는 당신의 살생을 기뻐했다.",true,false,false,CL_help);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.GiftCount(1);
 						you.PietyUpDown(1);
@@ -718,7 +718,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("스와코는 당신의 살생을 기뻐했다.",true,false,false,CL_swako);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 					}
@@ -764,7 +764,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("미마는 당신의 살생을 기뻐했다.",false,false,false,CL_green);
-					if(randA(4)<2)
+					if(randA(5)<3)
 					{
 						you.PietyUpDown(1);
 						return true;
@@ -792,7 +792,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("유우기는 당신의 승리를 기뻐했다.",true,false,false,CL_yuigi);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 						return true;
@@ -826,7 +826,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 						return true;
@@ -845,7 +845,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 						return true;
@@ -861,7 +861,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{
 				if(!mon_->isUserAlly())
 				{ //적일때
-					if(randA(4)==0)
+					if(randA(3)==0)
 					{
 						printlog("에이린은 당신의 강함에 관심을 가졌다.",true,false,false,CL_small_danger);
 						you.PietyUpDown(1);
@@ -914,7 +914,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
-					if(randA(1))
+					if(randA(2))
 					{
 						you.PietyUpDown(1);
 						return true;
@@ -939,7 +939,7 @@ bool GodAccpect_GetPitem()
 	switch(you.god)
 	{
 	case GT_MINORIKO:		
-		if(randA(2))
+		if(randA(3))
 		{
 			you.GiftCount(1);
 			you.PietyUpDown(1);
@@ -1088,7 +1088,7 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	switch(you.god)
 	{
 	case GT_BYAKUREN:
-		if(skill_ >= SKT_SPELLCASTING && skill_ <= SKT_ALCHEMY && value>randA(50))
+		if(skill_ >= SKT_SPELLCASTING && skill_ <= SKT_ALCHEMY && value>randA(40))
 		{
 			you.PietyUpDown(1);
 			you.GiftCount(1);
@@ -1130,7 +1130,7 @@ bool GodAccpect_Explore_100()
 	case GT_YUUGI:
 	case GT_SHIZUHA:
 	case GT_HINA:
-		if(40>randA(100))
+		if(60>randA(100))
 		{
 			you.PietyUpDown(1);
 			return true;
@@ -1141,7 +1141,7 @@ bool GodAccpect_Explore_100()
 	case GT_YUYUKO:
 		return false;
 	case GT_SATORI:
-		if(36>randA(100))
+		if(50>randA(100))
 		{
 			you.PietyUpDown(1);
 			you.GiftCount(1);

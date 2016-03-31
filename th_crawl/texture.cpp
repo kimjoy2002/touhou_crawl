@@ -123,15 +123,15 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
 				textures(&texture_item01, 5, 255),//계단내
 				textures(&texture_item01, 6, 255),//계단올
-				textures(&texture_item01, 5, 255),//계단신전
-				textures(&texture_item01, 5, 255),//계단안개
-				textures(&texture_item01, 5, 255),//계단요괴
-				textures(&texture_item01, 5, 255),//계단홍마
-				textures(&texture_item01, 5, 255), //계단홍마도서관
-				textures(&texture_item01, 5, 255), //계단홍마지하
-				textures(&texture_item01, 5, 255), //계단죽림
-				textures(&texture_item01, 5, 255), //계단영원정
-				textures(&texture_item01, 5, 255), //계단지저
+				textures(&texture_item01, 213, 255),//계단신전
+				textures(&texture_item01, 213, 255),//계단안개
+				textures(&texture_item01, 213, 255),//계단요괴
+				textures(&texture_item01, 213, 255),//계단홍마
+				textures(&texture_item01, 213, 255), //계단홍마도서관
+				textures(&texture_item01, 213, 255), //계단홍마지하
+				textures(&texture_item01, 213, 255), //계단죽림
+				textures(&texture_item01, 213, 255), //계단영원정
+				textures(&texture_item01, 213, 255), //계단지저
 
 
 				textures(&texture_item01, 6, 255),//계단
@@ -407,6 +407,7 @@ textures img_item_book[] = {textures(&texture_item01, 140, 255)
 
 
 textures img_item_goal(&texture_item01, 135, 255);
+textures img_item_rune(&texture_item01, 214, 255);
 
 textures img_item_ring(&texture_item01, 15, 255);
 
@@ -1303,6 +1304,8 @@ int texturetoint(textures* input)
 		return 233;
 	else if(input == &img_named_doremi)
 		return 234;
+	else if(input == &img_item_rune)
+		return 235;
 	else
 		return 0;
 }
@@ -1780,6 +1783,8 @@ textures* inttotexture(int input)
 		return &img_named_clownpiece;
 	case 234:
 		return &img_named_doremi;
+	case 235:
+		return &img_item_rune;
 	default:
 		return &img_mons_default;
 	}

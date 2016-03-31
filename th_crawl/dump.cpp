@@ -206,7 +206,7 @@ bool Dump(int type)
 				break;
 			case DR_ESCAPE:
 				if(you.haveGoal()){
-					sprintf_s(temp_reason,64,"%d개의 쪽지를 들고 탈출하는데 성공했다.", you.haveGoal());
+					sprintf_s(temp_reason,64,"%d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
 					strncat(death_reason,temp_reason,64);
 				}
 				else

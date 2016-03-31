@@ -399,9 +399,9 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value6 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
-		t->image = &img_item_goal;
-		t->name.name = "ÃàÇÏ ÂÊÁö";
-		t->name.name_type = false;
+		t->image = &img_item_rune;
+		t->name.name = "·é";
+		t->name.name_type = true;
 		t->weight = 1.0f;
 		t->value = 10000;
 		break;		

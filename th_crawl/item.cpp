@@ -808,7 +808,7 @@ void item::pick()
 	prev_sight = false;
 	if(type == ITM_GOAL && value1 ==0)
 	{
-		printlog("당신은 축하 쪽지를 주웠다. 던전1층으로 가지고 올라가라",true,false,false,CL_good);
+		printlog("당신은 룬을 주웠다. 던전1층으로 가지고 올라가면 승리한다!",true,false,false,CL_good);
 		value1++;
 	}
 }

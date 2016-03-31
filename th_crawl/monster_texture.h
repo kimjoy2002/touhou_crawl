@@ -254,6 +254,7 @@ extern textures img_item_sweet_potato;
 
 extern textures img_item_scroll;
 extern textures img_item_goal;
+extern textures img_item_rune;
 
 extern textures img_tanmac_bill[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_amulet[]; //0씀

@@ -80,6 +80,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_GOLEM:
 	case SPL_SUMMON_UNZAN:
 	case SPL_SUMMON_UFO:
+	case SPL_SUMMON_LESSOR_DEMON:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
@@ -243,6 +244,7 @@ int SpellLength(spell_list skill)
 	case SPL_FLAN_BUSIN:
 	case SPL_SUICIDE_BOMB:
 	case SPL_RABBIT_HORN:
+	case SPL_SUMMON_LESSOR_DEMON:
 	default:
 		return 0;
 	}
@@ -412,6 +414,8 @@ const char* SpellString(spell_list skill)
 		return "자폭";
 	case SPL_RABBIT_HORN:
 		return "죽림의 나팔";
+	case SPL_SUMMON_LESSOR_DEMON:
+		return "악마 소환";
 	default:
 		return "알수없는 마법";
 	}
@@ -486,6 +490,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_HASTE_OTHER:
 	case SPL_HEAL_OTHER:
+	case SPL_SUMMON_LESSOR_DEMON:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -592,6 +597,7 @@ int SpellNoise(spell_list skill)
 	case SPL_MEDICINE_CLOUD:
 	case SPL_KANAME_DRILL:
 	case SPL_FLAN_BUSIN:
+	case SPL_SUMMON_LESSOR_DEMON:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -782,6 +788,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_RABBIT_HORN:
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_SUMMON_LESSOR_DEMON:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -863,6 +871,7 @@ int SpellCap(spell_list skill)
 	case SPL_HASTE_OTHER:
 	case SPL_HEAL_OTHER:
 	case SPL_KANAME_DRILL:
+	case SPL_SUMMON_LESSOR_DEMON:
 		return 150;
 	case SPL_SUMMON_SEKIBANKI:
 	case SPL_SPARK:

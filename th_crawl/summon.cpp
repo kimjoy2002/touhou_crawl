@@ -85,7 +85,9 @@ int GetSummonMaxNumber(spell_list skill)
 	case SPL_SUMMON_UFO:
 		return 5;
 	case SPL_FLAN_BUSIN:
-		return 3;
+		return 3;		
+	case SPL_SUMMON_LESSOR_DEMON:
+		return 3;		
 	default:
 		return -1;
 	}
@@ -120,6 +122,8 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_UFO;
 	case SPL_FLAN_BUSIN:
 		return SKD_SUMMON_FLAN;
+	case SPL_SUMMON_LESSOR_DEMON:
+		return SKD_SUMMON_LESSOR_DEMON;
 	default:
 		return SKD_OTHER;
 	}

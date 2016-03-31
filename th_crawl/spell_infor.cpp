@@ -357,6 +357,9 @@ string GetSpellInfor(spell_list spell)
 		text_ += "토끼가 큰 나팔을 이용하여 아군을 소집한다.\n";
 		text_ += "사용직후 잠시동안 죽림의 몬스터 리젠율이 오른다.\n";
 		break;
+	case SPL_SUMMON_LESSOR_DEMON:
+		text_ += "마계의 약한 악마를 소환한다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

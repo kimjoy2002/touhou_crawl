@@ -1945,8 +1945,8 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isBamboo())
 	{
-		if(map_list.bamboo_rate<order->GetId() == MON_TEWI?400:300)
-			map_list.bamboo_rate+=order->GetId() == MON_TEWI?40:20;
+		if(map_list.bamboo_rate<((order->GetId() == MON_TEWI)?400:300))
+			map_list.bamboo_rate+=order->GetId() == (MON_TEWI?40:20);
 		if(order->GetId() == MON_TEWI)
 			printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
 		else
@@ -1955,6 +1955,20 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 
+}
+bool skill_summon_lessor_demon(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_=false;
+	
+	int i = 1; 
+	for(; i>0 ; i--)
+	{
+		if(monster *mon_ = BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(60,120), true, false, 2, order, target, SKD_SUMMON_LESSOR_DEMON, GetSummonMaxNumber(SPL_SUMMON_LESSOR_DEMON)))
+		{
+			return_ = true;
+		}
+	}
+	return return_;
 }
 void SetSpell(monster_index id, list<spell> *list)
 {
@@ -2127,12 +2141,12 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(randA(1)?SPL_VENOM_BOLT:SPL_FIRE_BALL,10));		
 		break;
 	case MON_HOBGOBRIN_TEMP:
-		list->push_back(spell(SPL_SUMMON_GOLEM,20)); //악마소환으로 바꾸기
-		list->push_back(spell(SPL_SUMMON_BIRD,20));
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,20)); //악마소환으로 바꾸기
+		//list->push_back(spell(SPL_SUMMON_BIRD,20));
 		list->push_back(spell(SPL_SMITE,10));
 		break;
 	case MON_KOAKUMA:
-		list->push_back(spell(SPL_SUMMON_GOLEM,20)); //악마소환으로 바꾸기
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,10)); //악마소환으로 바꾸기
 		list->push_back(spell(SPL_FIRE_BOLT,15));
 		list->push_back(spell(SPL_BLINK,20));
 		break;
@@ -2225,7 +2239,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_RABBIT_HORN,15));
 		break;
 	case MON_CLOWNPIECE:
-		list->push_back(spell(SPL_FIRE_BALL,8));
+		list->push_back(spell(SPL_FIRE_BALL,10));
 		list->push_back(spell(SPL_CONFUSE,5));
 		break;
 	case MON_DOREMI:
@@ -2395,6 +2409,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_suicide_bomb(power,short_,order,target);
 	case SPL_RABBIT_HORN:
 		return skill_rabbit_horn(power,short_,order,target);
+	case SPL_SUMMON_LESSOR_DEMON:
+		return skill_summon_lessor_demon(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -2587,6 +2603,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_suicide_bomb(power,short_,&you,target);
 	case SPL_RABBIT_HORN:
 		return skill_rabbit_horn(power,short_,&you,target);
+	case SPL_SUMMON_LESSOR_DEMON:
+		return skill_summon_lessor_demon(power,short_,&you,target);	
 	default:
 		return false;
 	}

@@ -1431,7 +1431,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
-	if(remove_)
+	if(!remove_)
 		env[current_level].SummonClear(map_id);
 
 

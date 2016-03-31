@@ -43,6 +43,7 @@ enum start_item_type
 	SIT_THROWING_KNIFE,
 	SIT_TANMAC,
 	SIT_SPECIAL_TANMAC,
+	SIT_MIGHT_POTION,
 	SIT_TEST_POTION,
 	SIT_TEST_RING,
 	SIT_TEST_SCROLL
@@ -302,6 +303,16 @@ void MakeStartItem(start_item_type select_, int num)
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);	
 		break;
+	case SIT_MIGHT_POTION:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_MIGHT));
+		it->Identify();
+		you.additem(it,false);
+		env[current_level].DeleteItem(it);	
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_MIGHT));
+		it->Identify();
+		you.additem(it,false);
+		env[current_level].DeleteItem(it);	
+		break;
 	case SIT_TEST_POTION:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_ALCOHOL));
 		you.additem(it,false);
@@ -349,7 +360,7 @@ void SetJob(job_type select_, string name_)
 			{
 				MakeStartItem(SIT_ARMOUR_1,1);
 				MakeStartItem(SIT_MIDDLE_SHIELD,2);		
-				MakeStartItem(SIT_TEST_POTION,3);	
+				//MakeStartItem(SIT_TEST_POTION,3);	
 
 			}
 			else
@@ -454,10 +465,11 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(2,STAT_DEX);
 		MakeStartItem(SIT_AXE,0);
 		MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_MIGHT_POTION,2);	
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_AXE,60,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.GiveSkillExp(SKT_ARMOUR,30,false);
+		you.GiveSkillExp(SKT_ARMOUR,30,false);	
 		break;
 	case JOB_FIRE_WIZARD:
 		you.max_hp-=1;
@@ -648,6 +660,7 @@ void SetJob(job_type select_, string name_)
 			MakeStartItem(SIT_ARMOUR_0,1);
 		else
 			MakeStartItem(SIT_ROBE,1);
+		you.Belief(GT_TENSI,35,false);
 		you.GiveSkillExp(SKT_FIGHT,90,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
@@ -671,12 +684,13 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(3,STAT_STR);
 		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
-		you.GiveSkillExp(WeaponSelect(0),80,false);
+		you.GiveSkillExp(WeaponSelect(0),60,false);
 		MakeStartItem(SIT_ROBE,1);
 		MakeStartItem(SIT_FOOD,2);
 		MakeStartItem(SIT_FOOD,2);
 		MakeStartItem(SIT_FOOD,2);
-		you.GiveSkillExp(SKT_FIGHT,120,false);
+		you.Belief(GT_MINORIKO,35,false);
+		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,40,false);
 		break;
 	case JOB_MADE:

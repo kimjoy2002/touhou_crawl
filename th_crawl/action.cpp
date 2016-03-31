@@ -661,7 +661,7 @@ void Search()
 		case 'v':
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{
-				if(!unit_->isplayer() && unit_->isView())
+				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
 				{
 					SetText() = GetMonsterInfor((monster*)unit_);
 					changedisplay(DT_TEXT);
@@ -816,6 +816,18 @@ void Wide_Search()
 				you.search_pos = up_distans.front().pos;
 				up_distans.push_back(up_distans.front());
 				up_distans.pop_front();
+			}
+			break;
+		case 'v': 
+			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
+			{
+				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
+				{
+					SetText() = GetMonsterInfor((monster*)unit_);
+					changedisplay(DT_TEXT);
+					waitkeyinput();
+					changedisplay(DT_GAME);
+				}
 			}
 			break;
 		case '.': 

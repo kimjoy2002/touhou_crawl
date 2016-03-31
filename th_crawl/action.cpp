@@ -131,7 +131,12 @@ void auto_battle()
 }
 
 void auto_Move()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	you.search = false;
 	/*if(you.GetHunger() == HT_STARVING)	
 	{
@@ -1875,7 +1880,12 @@ void Experience_Show()
 
 
 void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
-{	
+{		
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	//if(you.skill[SKT_SPELLCASTING].level == 0)
 	//{
 	//	printlog("당신은 아직 주문을 배울 수 없다!",true,false,false,CL_normal);

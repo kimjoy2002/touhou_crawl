@@ -314,8 +314,8 @@ void charter_selete()
 		WaitForSingleObject(mutx, INFINITE);
 		SetText() = "무슨 모드로 시작할거야?\n\n\n";
 
-		SetText() += "a - 동방 캐릭터로 시작하기\n\n";
-		SetText() += "b - 직접 캐릭터 생성하기\n\n";
+		SetText() += "a - 동방 캐릭터로 시작하기 (EASY)\n\n";
+		SetText() += "b - 직접 캐릭터 생성하기 (NORMAL)\n\n";
 		ReleaseMutex(mutx);
 		
 		while(1)

@@ -423,7 +423,7 @@ textures img_item_sweet_potato(&texture_item01, 182, 255);
 textures img_effect_select(&texture_item01, 1, 255);
 textures img_effect_slience(&texture_item01, 111, 255);
 textures img_effect_auto_pick(&texture_item01, 143, 255);
-
+textures img_effect_lunatic(&texture_dungeon01, 288, 0, 320, 32, 255);
 textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
 

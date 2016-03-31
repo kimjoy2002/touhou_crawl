@@ -208,9 +208,10 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  9,  13,  10,  3}, //파르시
 	{  22,  9,  13,  20,  3}, //츠쿠모
 	{  23,  9,  13,  10,  3}, //오린
-	{  24,  9,  13,  30,  3}, //이치린
 	{  31,  9,  13,  30,  3}, //코이시
-	{  32,  9,  13,  30,  3}, //누에
+	{  24,  10,  13,  30,  3}, //이치린
+	{  32,  10,  13,  30,  3}, //누에
+	{  35,  10,  13,  30,  3}, //클라운피스
 
 	//안개호수
 	{  3, MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  40,  3}, //치르노
@@ -871,6 +872,18 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 32:
 		index.push_back(MON_NUE);
+		break;
+	case 33:
+		index.push_back(MON_FLAN);
+		break;
+	case 34:
+		index.push_back(MON_TEWI);
+		break;
+	case 35:
+		index.push_back(MON_CLOWNPIECE);
+		break;
+	case 36:
+		index.push_back(MON_DOREMI);
 		break;
 	}
 

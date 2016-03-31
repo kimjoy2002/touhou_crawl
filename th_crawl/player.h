@@ -187,7 +187,8 @@ public:
 	int s_ghost;
 	int s_dimension;
 	int s_timestep;
-	int s_mirror;
+	int s_mirror;	
+	int s_lunatic;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -341,6 +342,7 @@ public:
 	bool SetAutumn(int autumn_);
 	bool SetWind(int s_wind_);
 	bool SetDrunken(int s_drunken_);
+	bool SetLunatic(int s_lunatic_);
 	bool SetCatch(monster* unit_);
 	bool SetGhost(int ghost_);
 	bool SetDimension(int dimension_);

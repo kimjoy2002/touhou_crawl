@@ -1952,6 +1952,12 @@ void monster::special_action(int delay_)
 			you.SetSick(10);
 		}
 		break;
+	case MON_CLOWNPIECE:
+		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0)
+		{
+			you.SetLunatic(rand_int(5,15));
+		}
+		break;
 	case MON_RED_UFO:
 	case MON_GREEN_UFO:
 	case MON_BLUE_UFO:

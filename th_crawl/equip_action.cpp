@@ -15,6 +15,12 @@
 
 void Equip_Weapon()
 {
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 무기를 바꿀 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+
 	view_item(IVT_EQ_WEAPON,"무슨 무기를 장착하시겠습니까?");
 	while(1)
 	{
@@ -58,6 +64,11 @@ void Equip_Weapon()
 
 void Equip_Armor()
 {
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 방어구를 바꿀 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	view_item(IVT_EQ_ARMOR,"무슨 방어구를 장착하겠습니까?");
 	while(1)
 	{
@@ -94,7 +105,12 @@ void Equip_Armor()
 
 
 void Unequip_Armor()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 방어구를 벗을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 벗겠습니까?");
 	while(1)
 	{
@@ -133,7 +149,12 @@ void Unequip_Armor()
 
 
 void Equip_Jewelry()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 반지를 낄 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	view_item(IVT_EQ_JEWELRY,"무슨 장신구를 장착하겠습니까?");
 	while(1)
 	{
@@ -170,7 +191,12 @@ void Equip_Jewelry()
 
 
 void Unequip_Jewelry()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 반지를 벗을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 벗겠습니까?");
 	while(1)
 	{

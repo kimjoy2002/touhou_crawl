@@ -797,7 +797,12 @@ list<item>::iterator ThrowSelect()
 }
 
 void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	beam_iterator beam(you.position,you.position);
 	projectile_infor infor(8,true,false);
 	int short_ = 0;
@@ -824,7 +829,12 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
 
 
 void Select_Throw()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	list<item>::iterator it = ThrowSelect();
 	Quick_Throw(it!=you.item_list.end()?it:you.GetThrowIter(),you.GetTargetIter());
 }

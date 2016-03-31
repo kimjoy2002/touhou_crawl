@@ -932,6 +932,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"음주", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
 				rc.left += fontDesc.Width*5;
 			}
+			if(you.s_lunatic)
+			{
+				pfont->DrawTextA(pSprite,"광기", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				rc.left += fontDesc.Width*5;
+			}
 			if(you.s_catch)
 			{
 				pfont->DrawTextA(pSprite,"잡기", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_yuigi);
@@ -1363,6 +1368,39 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(!env[current_level].isBamboo())
 			sight_rect.draw(pSprite,GetDotX(x_+8),GetDotY(y_+8),255);
 	}
+
+
+
+
+	//광기
+	if(you.s_lunatic)
+	{
+		int x_ = you.GetDisplayPos().x-8;
+		int y_ = you.GetDisplayPos().y-8;
+		for(int i=0;i<17;i++)
+		{
+			for(int j=0;j<17;j++)
+			{
+				if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
+				{
+					if((env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_)))
+					{	
+						bool sight = true;	
+					
+						//if(!env[current_level].isExplore(i+x_,j+y_))
+						img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+							
+							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+
 
 
 	//텍스트(위쪽에 숏로그)그리기

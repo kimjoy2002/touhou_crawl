@@ -285,6 +285,15 @@ interupt_type players::TurnEnd()
 			SetInter(IT_STAT);
 		}
 	}
+	if(s_lunatic)
+	{
+		s_lunatic--;
+		if(!s_lunatic)
+		{
+			printlog("´ç½ÅÀÇ ±¤±â´Â ³¡³µ´Ù.",false,false,false,CL_white_blue);
+			SetInter(IT_STAT);
+		}
+	}
 	if(alchemy_time)
 	{
 

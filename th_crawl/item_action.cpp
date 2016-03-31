@@ -20,7 +20,12 @@ string GetItemInfor(item *it);
 
 
 void PickUp()
-{	
+{		
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 무언가를 주울 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	if(you.s_levitation)
 	{
 		printlog("당신은 땅에 손이 닿지 않는다.",true,false,false,CL_normal);
@@ -218,7 +223,12 @@ void discard(list<item>::iterator it, int number)
 
 
 void iteminfor_discard()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	int i=0;
 	view_item(IVT_DISCARD,"무슨 아이템을 버리겠습니까?");
 	while(1)
@@ -275,7 +285,12 @@ void iteminfor_discard()
 }
 
 void fast_discard()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	if(!you.final_item)
 		return;
 	for(list<item>::iterator it = you.item_list.begin();it != you.item_list.end();it++)
@@ -290,7 +305,12 @@ void fast_discard()
 }
 
 void Eatting()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 먹을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
 	{
 		printlog("당신은 이미 풀파워다!",true,false,false,CL_normal);
@@ -333,6 +353,11 @@ void Eatting()
 
 void Drinking()
 {
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 마실 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	view_item(IVT_POTION,"무엇을 마시겠습니까?");
 	while(1)
 	{
@@ -401,7 +426,12 @@ void Drinking()
 //}
 
 void Spelllcard_Evoke()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	int i=0;
 	view_item(IVT_SPELLCARD,"무슨 아이템을 발동하시겠습니까?");
 	while(1)
@@ -444,7 +474,12 @@ void Spelllcard_Evoke()
 	changedisplay(DT_GAME);
 }
 void Reading()
-{
+{	
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 읽을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	if(env[current_level].isSilence(you.position))
 	{
 		printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);

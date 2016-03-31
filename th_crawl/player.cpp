@@ -64,8 +64,8 @@ turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, 
 final_item(0), final_num(0), auto_pickup(true), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
- s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),  s_mirror(0),
- s_dimension(0), s_timestep(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+ s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
+ s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
@@ -203,9 +203,12 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_drunken);
 	SaveData<int>(fp, s_catch);
 	SaveData<int>(fp, s_ghost);
-	SaveData<int>(fp, s_mirror);
 	SaveData<int>(fp, s_dimension);
 	SaveData<int>(fp, s_timestep);
+	SaveData<int>(fp, s_mirror);
+	SaveData<int>(fp, s_lunatic);
+
+	
 	
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -389,6 +392,10 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_dimension);
 	LoadData<int>(fp, s_timestep);
 	LoadData<int>(fp, s_mirror);
+	LoadData<int>(fp, s_lunatic);
+
+
+
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
 	
@@ -1875,6 +1882,25 @@ bool players::SetDrunken(int s_drunken_)
 		s_drunken = 100;
 	return true;
 }
+
+bool players::SetLunatic(int s_lunatic_)
+{
+	if(!s_lunatic_)
+		return false;
+	if(confuse_resist>0)
+		return false;
+	if(!s_lunatic)
+		printlog("´ç½ÅÀº ±¤±â¿¡ ÈÛ½Î¿´´Ù.",false,false,false,CL_danger);
+	else
+	{
+		//printlog("´ç½ÅÀº ´õ¿í ´õ ¹ÌÃÆ´Ù.",false,false,false,CL_warning);
+	}
+	s_lunatic += s_lunatic_;
+	if(s_lunatic>20)
+		s_lunatic = 20;
+	return true;
+}
+
 bool players::SetCatch(monster* unit_)
 {
 	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)

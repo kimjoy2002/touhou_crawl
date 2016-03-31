@@ -3342,16 +3342,25 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				sprintf(temp_speak,"%s%s외쳤다. \"요정들아! 좀 더 속도를 올려서 가자!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 2:		
-				sprintf(temp_speak,"%s%s외쳤다. \"여긴 예전에 비하면 훨씬 살기 좋은데!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				if(you.s_lunatic)
+					sprintf(temp_speak,"%s%s외쳤다. \"그거 좋은 표정이야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				else
+					sprintf(temp_speak,"%s%s외쳤다. \"여긴 예전에 비하면 훨씬 살기 좋은데!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 3:		
 				sprintf(temp_speak,"%s%s외쳤다. \"꺄하하!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 4:		
-				sprintf(temp_speak,"%s%s외쳤다. \"이 횃불을 보고도 미치지않을 수 있을까?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				if(you.s_lunatic)
+					sprintf(temp_speak,"%s%s외쳤다. \"그래 미쳐있는게 보기 좋다구!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				else
+					sprintf(temp_speak,"%s%s외쳤다. \"이 횃불을 보고도 미치지않을 수 있을까?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 5:		
-				sprintf(temp_speak,"%s%s외쳤다. \"이미 늦었어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				if(you.s_lunatic)
+					sprintf(temp_speak,"%s%s외쳤다. \"이미 넌 미쳐있는거야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				else
+					sprintf(temp_speak,"%s%s외쳤다. \"곧 미치게될거야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		}

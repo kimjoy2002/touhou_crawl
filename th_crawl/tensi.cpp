@@ -119,7 +119,7 @@ int GetHazard()
 					danger_*=1.5f; //스마이트몹은 대체로 위험도가 높다.
 
 				if((*it).s_confuse || (*it).s_paralyse || (*it).s_fear) //혼란 마비 공포는 거의 위험도를 높이지않음.
-					danger_ *= 0.1f;
+					danger_ *= 0.05f;
 				if((*it).s_slow)
 					danger_ *= 0.5f;
 				if((*it).s_haste)
@@ -147,7 +147,7 @@ int GetHazard()
 	if(you.s_paralyse)
 		total_danger_ *= 5;
 	
-	if(you.s_confuse)
+	if(you.s_confuse || you.s_lunatic)
 		total_danger_ *= 3;
 
 	if(you.s_slow)

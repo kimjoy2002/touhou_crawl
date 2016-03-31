@@ -70,7 +70,7 @@ int players::GetAttack(bool max_)
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
 	}
-	if(s_might)
+	if(s_might || s_lunatic)
 		max_atk_+=randA_1(10);	
 	
 	if(!equipment[ET_WEAPON] && alchemy_buff == ALCT_STONE_FORM)
@@ -253,7 +253,7 @@ int players::GetThrowAttack(const item* it, bool max_)
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
 	}
-	if(s_might)
+	if(s_might || s_lunatic)
 		max_atk_+=randA_1(10);
 	int atk_ = rand_int((int)round(min_atk_),(int)round(max_atk_));
 	return max_?(int)round(max_atk_):atk_;

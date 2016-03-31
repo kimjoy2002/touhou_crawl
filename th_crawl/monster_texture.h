@@ -284,7 +284,7 @@ extern textures img_fog_slow[];
 extern textures img_effect_select;
 extern textures img_effect_slience;
 extern textures img_effect_auto_pick;
-
+extern textures img_effect_lunatic;
 
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_rock_trap;

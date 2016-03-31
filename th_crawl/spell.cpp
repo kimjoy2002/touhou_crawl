@@ -968,7 +968,11 @@ void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
 void SpellUse()
 {
-
+	if(you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 마법은 쓸 수 없다!",true,false,false,CL_danger);
+		return;
+	}
 	if(you.currentSpellNum)
 	{
 		if(env[current_level].isSilence(you.position))

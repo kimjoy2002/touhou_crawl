@@ -13,6 +13,7 @@
 #include "smoke.h"
 #include "floor.h"
 #include "rect.h"
+#include "mon_infor.h"
 
 
 void map_algorithms_bamboo(int num);
@@ -83,13 +84,15 @@ void bamboo_count(int num)
 			{
 				if(offset_x  > i || offset_x  <= i - DG_MAX_X  || offset_y  > j || offset_y  <= j - DG_MAX_Y )
 				{  //새로 만들어야하는 맵	
-					if(randA(20000 - 9*min(map_list.bamboo_count,2000))<1 )
+					if(randA(20000 - 9*min(map_list.bamboo_count,2000))<(map_list.bamboo_tewi?2:1))
 					{
+						env[num].dgtile[i][j].init();
 						env[num].dgtile[i][j].tile = DG_EIENTEI_STAIR;
 
 					}
-					else if(randA(4000)<1)
+					else if(randA(map_list.bamboo_tewi?2000:4000)<1)
 					{
+						env[num].dgtile[i][j].init();
 						env[num].dgtile[i][j].tile = DG_RETURN_STAIR;
 						//map_list.bamboo_count;
 					}
@@ -128,7 +131,13 @@ void bamboo_count(int num)
 		{
 			if((*it).isLive())
 			{
-				(*it).offsetmove(coord_def(offset_x,offset_y));
+				if((*it).offsetmove(coord_def(offset_x,offset_y)) == false)
+				{
+					if(it->id == MON_TEWI)
+					{
+						unset_exist_named(MON_TEWI);
+					}
+				}
 			}
 		}
 		//안개
@@ -156,6 +165,27 @@ void bamboo_count(int num)
 		//list<events> event_list;
 
 
+	}
+
+	if(randA(500)<1)
+	{
+		
+		if(!is_exist_named(MON_TEWI)){
+			dif_rect_iterator rit(you.position,12,true);
+			while(!rit.end())
+			{
+				coord_def check_pos_ = (*rit);
+
+				if(env[num].isMove(check_pos_.x, check_pos_.y, false) && !env[num].isInSight(check_pos_))
+				{
+					monster *temp = env[num].AddMonster(MON_TEWI,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+					temp->state.SetState(MS_NORMAL);
+					set_exist_named(MON_TEWI);
+					break;
+				}
+				rit++;
+			}
+		}
 	}
 
 	if(randA(1000)<map_list.bamboo_rate)

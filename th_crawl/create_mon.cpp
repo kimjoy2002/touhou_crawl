@@ -290,6 +290,20 @@ void set_exist_named(monster_index m_id_) //네임드를 출현확정(벌트등으로)
 	int id_ = get_unique_to_id(m_id_);
 	unique_list.push_back(unique_infor(id_,-1));
 }
+void unset_exist_named(monster_index m_id_) //네임드를 다시 출현할 수 있는 상태로
+{
+	for(auto it = unique_list.begin();  it !=  unique_list.end(); it++)
+	{ //기존에 있으면 지워버린다.
+		if(it->id == get_unique_to_id(m_id_))
+		{
+			unique_list.erase(it);
+			break;
+		}
+	}
+}
+
+
+
 
 
 void create_mon(int floor, int num_)

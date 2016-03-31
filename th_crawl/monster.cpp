@@ -18,6 +18,7 @@
 #include "smoke.h"
 #include "floor.h"
 #include "note.h"
+#include "map.h"
 
 
 
@@ -363,6 +364,10 @@ void monster::FirstContact()
 {
 	if(!first_contact)
 		return;
+	if(id == MON_TEWI)
+	{
+		map_list.bamboo_tewi = true;
+	}
 	if(!(flag & M_FLAG_SUMMON))
 	{
 		GodAccpect_First_contact();
@@ -1190,7 +1195,7 @@ bool monster::offsetmove(const coord_def &c)
 		return true;
 	else
 	{
-		dead(PRT_PLAYER, false, true);
+		dead(PRT_NEUTRAL, false, true);
 		return false;
 	}
 }

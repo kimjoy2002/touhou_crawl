@@ -49,6 +49,7 @@ public:
 	int god_num;
 	int bamboo_count;
 	int bamboo_rate;
+	bool bamboo_tewi;
 };
 
 

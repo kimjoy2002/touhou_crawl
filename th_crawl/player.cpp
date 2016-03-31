@@ -647,7 +647,10 @@ bool players::offsetmove(const coord_def &c)
 {		
 	position += c;
 	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
+	{
+		resetLOS(false);
 		return true;
+	}
 	else
 		return false;
 }

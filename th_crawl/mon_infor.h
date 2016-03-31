@@ -629,7 +629,8 @@ const mon_infor mondata[] = {
 
 bool is_exist_named(monster_index id); //해당 네임드가 출현확정되어있는지
 void set_exist_named(monster_index id); //네임드를 출현확정(벌트등으로)
-	
+void unset_exist_named(monster_index id);
+
 void create_mon(int floor, int num_);
 void init_monster();
 

@@ -1913,8 +1913,8 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 						{	
 							if(hit_ != order)
 							{
-								int att_ = randC(4,8+power/20);
-								int m_att_ = 4*(8+power/20);
+								int att_ = randC(4,13+power/20);
+								int m_att_ = 4*(13+power/20);
 
 								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
 								hit_->damage(temp_att, true);

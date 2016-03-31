@@ -1945,8 +1945,8 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isBamboo())
 	{
-		if(map_list.bamboo_rate<300)
-			map_list.bamboo_rate+=order->GetId() == MON_TEWI?50:20;
+		if(map_list.bamboo_rate<order->GetId() == MON_TEWI?400:300)
+			map_list.bamboo_rate+=order->GetId() == MON_TEWI?40:20;
 		if(order->GetId() == MON_TEWI)
 			printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
 		else

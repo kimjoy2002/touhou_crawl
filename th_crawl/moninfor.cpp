@@ -559,6 +559,8 @@ string GetMonsterInfor(monster *it)
 	case MON_TEWI:
 		text_ += "죽림에 지내고 있는 흰토끼. 행운을 불러다준다고 한다.\n";
 		text_ += "만날 수 있다면 죽림에서 길을 쉽게 찾을 수 있을 것 같다.\n";
+		text_ += "큰 외침으로 주변의 토끼를 끌어모으며 지원병보다 끌어모으는 수가 많다.\n";
+		text_ += "전투능력은 약하지만 냅둘 경우 토끼의 수가 어마어마하게 불어날 수 있다.\n";
 		break;
 	case MON_CLOWNPIECE:
 		text_ += "횃불을 들고 있는 지옥의 요정.\n";

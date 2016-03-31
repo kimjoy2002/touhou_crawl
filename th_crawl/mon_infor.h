@@ -614,7 +614,7 @@ const mon_infor mondata[] = {
 
 	
 	{MON_TEWI,13,550,name_infor("테위",false),&img_named_tewi,60,3,22,
-	{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,8},
 
 	{MON_CLOWNPIECE,15,1220,name_infor("클라운피스",false),&img_named_clownpiece,120,3,18,

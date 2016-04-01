@@ -11,12 +11,20 @@ bool is_little_endian()
 }
 
 
+void cccc(char *b, int s, char k)
+{
+	for(int i = 0; i < s; i++)
+		b[i]^=k;
+}
+
+
 
 void sendScore(const char *c, const char *file)
 {
 	NetClient client;
 
 	client.StartUp();
+	//client.Connect("127.0.0.1",12345);
 	client.Connect("182.222.104.167",12345);
 	packet data;
 	strcpy(data.str,"hello world"); 
@@ -91,6 +99,8 @@ int NetClient::SendBuf(void *buf,int len)
     char *cbuf = (char*)buf;
     int trans = 0;
     int re = 0;
+	cccc(cbuf,len,21);
+
     while(trans<len)
     {
         re =send(Socket,cbuf+trans,len-trans,0);

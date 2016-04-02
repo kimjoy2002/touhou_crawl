@@ -240,6 +240,54 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			bamboo_count(current_level);
 		}
 		return 0;
+	case EVL_LUNATICTIME:
+		{			
+			for(int i=-3;i<=3;i++)
+			{
+				if(i!=0)	
+					env[current_level].dgtile[event_->position.x+i][event_->position.y+1].tile = DG_FLOOR;
+			}
+			for(int i = 0; i<5 ; i++)
+			{
+				for(int j = 0; j<2; j++)
+				{
+					env[current_level].dgtile[event_->position.x+4*(j*2-1)][event_->position.y+i*2].tile = DG_OPEN_DOOR;
+				}
+			}
+			
+			for(int i = 0; i<3 ; i++)
+			{
+				for(int j = 0; j<3; j++)
+				{
+					if(i!=1 || j!=1)
+						env[current_level].dgtile[event_->position.x-1+i][event_->position.y+4+j].tile = DG_GLASS;
+				}
+			}
+			printlog("It's LUNATIC TIME!!",true,false,false,CL_small_danger);
+			env[current_level].MakeNoise(event_->position,16,NULL);
+			you.resetLOS();
+			MoreWait();
+		}
+		return 1;
+	case EVL_KOGASA:
+		{
+			dif_rect_iterator rit(you.position,2);
+			int i = 1; 
+			for(;!rit.end() && i> 0;rit++)
+			{
+				if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
+				{
+					printlog("하늘에서 코가사가 떨어졌다!",true,false,false,CL_small_danger);
+					monster *mon_ = env[current_level].AddMonster(MON_KOGASA,M_FLAG_EVENT,(*rit));
+					MoreWait();
+					printlog("...그러나 코가사는 땅바닥에 머리부터 부딪혔다.",true,false,false,CL_normal);
+					mon_->SetConfuse(5+randA(5));
+					mon_->hp = mon_->hp*2/3;
+					i--;
+				}
+			}
+		}
+		return 1;
 	default:
 		break;
 	}

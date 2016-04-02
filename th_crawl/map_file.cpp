@@ -352,6 +352,9 @@ bool PixedMap(map_dummy* map, char *temp)
 			case ',':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
 				break;
+			case '_':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_GRASS;
+				break;
 			case '@':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
 				break;
@@ -459,12 +462,17 @@ void TempleMap(map_dummy* map, int temple_)
 void map_dummy::patternSet()
 {
 	if(pattern == 0) //서브던전입구의 패턴 = 100+서브던전 | 제단패턴 = 100+서브던전갯수+제단모양
-	{
+					//10이상 100미만: 10에 floor를 더한 만큼의 층에서의 통상특수패턴
+	{				//결정되는 패턴 1000+
 		baseMap(this);
 	}
 	else if(pattern == 1)
 	{
 		baseCircleMap(this);
+	}
+	else if(pattern >= 10 && pattern < 100)
+	{
+		PixedMap(this, common_base_pattern(pattern-10, this));
 	}
 	else if(pattern == 100+TEMPLE) //교회
 	{

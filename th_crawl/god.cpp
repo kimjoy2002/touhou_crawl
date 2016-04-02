@@ -1752,7 +1752,7 @@ void God_show()
 			printsub("당신은 카나코님의 힘으로 돌진할 수 있다.                    (영력, 신앙)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_KANAKO])
+		if(level_ >= 3 && !you.punish[GT_KANAKO])
 		{
 			printsub("당신은 카나코님의 기둥을 구현할 수 있다.                    (영력, 신앙)",true,CL_help);
 			printsub("",true,CL_normal);
@@ -1825,12 +1825,12 @@ void God_show()
 	case GT_MIMA:
 		if(level_ >= 0 && !you.punish[GT_MIMA])
 		{ 
-			printsub("신앙심에 비례해서 최대마나가 올라간다.                                     (패시브)",true,CL_green);
+			printsub("신앙심에 비례해서 최대영력이 올라간다.                                     (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.punish[GT_MIMA])
 		{
-			printsub("적을 죽였을때 적의 세기에 따라 마나를 얻을 수 있다.                        (패시브)",true,CL_green);
+			printsub("적을 죽였을때 적의 세기에 따라 영력을 얻을 수 있다.                        (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.punish[GT_MIMA])

@@ -9,6 +9,7 @@
 #include "map.h"
 #include "throw.h"
 #include "mon_infor.h"
+#include "event.h"
 
 
 
@@ -36,6 +37,268 @@ char* common_enter_pattern(map_dummy* map)
 		break;
 	}
 }
+
+
+
+char* common_base_pattern(int floor_, map_dummy* map)
+{
+	while(1)
+	{
+
+		switch(randA(9))
+		{
+		default:
+		case 0:
+			map->size_x = 5;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = -2;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 2;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+###########\
++.###.....#\
+#.###.###.#\
+#.###.###.#\
+#.###.###.#\
+#.....###.+\
+###########";
+			break;
+		case 1:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 4;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#.#.#.#.#\
+.#.#.#.#.\
+#.#.#.#.#\
+.#.#.#.#.\
+#.#.#.#.#\
+.#.#.#.#.\
+#.#.#.#.#\
+.#.#.#.#.\
+#.#.#.#.#";
+			}
+		case 2:
+			{
+				bool hw_ = randA(1);
+				map->size_x = 5;
+				map->size_y = 5;	
+				map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+				return  "\
+...........\
+...___.....\
+..__~___...\
+.._~_~~__..\
+..__~~~__..\
+.._~~[~~__.\
+.._~~~~_~_.\
+..__~_____.\
+...___.....\
+...........\
+...........";
+				break;		
+			}
+		case 3:
+			{
+				if(is_exist_named(MON_CLOWNPIECE))
+					break;
+				if(floor_ < 9)
+					break;
+				map->size_x = 6;
+				map->size_y = 5;	
+				map->m_entrance.x = 0;
+				map->m_entrance.y = map->size_y;
+				map->m_exit.x = 0;
+				map->m_exit.y = map->size_y;
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+				if(!is_exist_named(MON_CLOWNPIECE)){
+					map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE,0,coord_def(0,1)));
+					set_exist_named(MON_CLOWNPIECE);
+				}
+				for(int i = 0; i<5 ; i++)
+				{
+					for(int j = 0; j<2; j++)
+					{
+						int id_ = (randA(5)==0?MON_FAIRY_RED_COMMANDER:randA(1)?(randA(1)?MON_FAIRY_BLUE:MON_FAIRY_BLUE_MAGICIAN):(randA(1)?MON_FAIRY_GREEN:MON_FAIRY_GREEN_WARRIOR));
+						map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(5*(j*2-1),-4+i*2)));
+					}
+				}
+				map->event_list.push_back(mapdummy_event(EVL_LUNATICTIME,coord_def(0,-4),EVT_SIGHT));
+				return  "\
+#############\
+#.#.......#.#\
+######+######\
+#.#.......#.#\
+###.......###\
+#.#..###..#.#\
+###..#.#..###\
+#.#..###..#.#\
+###.......###\
+#.#.......#.#\
+######+######";
+				break;	
+			}
+		case 4:
+			map->size_x = 8;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = rand_int(-1,1);
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = rand_int(-1,1);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#################\
+~~~~~~~~~~~~~~~~~\
+.................\
+.................\
+.................\
+~~~~~~~~~~~~~~~~~\
+#################";
+			break;
+		case 5:
+			{
+				bool hw_ = randA(1);
+				map->size_x = 2;
+				map->size_y = 2;	
+				map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+				return  "\
+.....\
+.$$$.\
+.$$$.\
+.$$$.\
+.....";			
+			}
+		case 6:
+			{
+				if(floor_ < 9)
+					break;
+				if(is_exist_named(MON_WAKASAGI) && (is_exist_named(MON_KEGERO) || is_exist_named(MON_SEKIBANKI)))
+					break;
+				bool hw_ = randA(1);
+				map->size_x = 3;
+				map->size_y = 3;	
+				map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+				if(!is_exist_named(MON_WAKASAGI)){
+					map->monster_list.push_back(mapdummy_mon(MON_WAKASAGI,0,coord_def(0,2)));
+					set_exist_named(MON_WAKASAGI);
+				}
+				if(!is_exist_named(MON_KEGERO)){
+					map->monster_list.push_back(mapdummy_mon(MON_KEGERO,0,coord_def(0,0)));
+					set_exist_named(MON_KEGERO);
+				}
+				else if(!is_exist_named(MON_SEKIBANKI)){
+					map->monster_list.push_back(mapdummy_mon(MON_SEKIBANKI,0,coord_def(0,0)));
+					set_exist_named(MON_SEKIBANKI);
+				}
+
+				return  "\
+.......\
+.~~~~~.\
+.~...~.\
+.~...~.\
+.~...~.\
+.~~~~~.\
+.......";			
+			}
+		case 7:
+			{
+				if(floor_ < 4)
+					break;
+				if(is_exist_named(MON_KYOUKO) && is_exist_named(MON_MISTIA))
+					break;
+				map->size_x = 4;
+				map->size_y = 3;	
+				map->m_entrance.x = 0;
+				map->m_entrance.y = map->size_y;
+				map->m_exit.x = 0;
+				map->m_exit.y = map->size_y;
+				map->flag = FLAG_NO_STAIR;
+				if(!is_exist_named(MON_KYOUKO)){
+					map->monster_list.push_back(mapdummy_mon(MON_KYOUKO,0,coord_def(-1,-1)));
+					set_exist_named(MON_KYOUKO);
+				}
+				if(!is_exist_named(MON_MISTIA)){
+					map->monster_list.push_back(mapdummy_mon(MON_MISTIA,0,coord_def(1,-1)));
+					set_exist_named(MON_MISTIA);
+				}
+
+				return  "\
+$$$$$$$$$\
+$$.....$$\
+$...$...$\
+$.......$\
+$.......$\
+$$.....$$\
+$$$...$$$";			
+			}
+		case 8:
+			map->size_x = 2;
+			map->size_y = 5;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = -map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##\
+##.##";
+			break;
+		case 9:
+			{
+				map->size_x = 2;
+				map->size_y = 2;	
+				map->m_entrance.x = map->size_x;
+				map->m_entrance.y = -map->size_y;
+				map->m_exit.x = -map->size_x;
+				map->m_exit.y = map->size_y;
+				if(!is_exist_named(MON_KOGASA) && (floor_ == 1 || floor_ == 2)){
+					map->event_list.push_back(mapdummy_event(EVL_KOGASA,coord_def(0,0),EVT_APPROACH_SMALL));
+					set_exist_named(MON_KOGASA);
+				}
+				return  "\
+####.\
+#....\
+#...#\
+#...#\
+..###";			
+			}
+		}
+	}
+}
+
 
 
 

@@ -712,7 +712,7 @@ void MainLoop()
 			break;
 		case '&': //위자드모드!
 			//waitkeyinput();
-			//wiz_mode();
+			wiz_mode();
 			break;
 		case 0x8B:
 			auto_pick_onoff();

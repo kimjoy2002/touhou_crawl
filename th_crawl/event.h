@@ -17,7 +17,9 @@ enum event_list
 	EVL_KISME=100,
 	EVL_SIGHT_P, //시야에 들어와야 생기는 P
 	EVL_FLOOR, //땅이 된다
-	EVL_BAMBOO //미궁의죽림
+	EVL_BAMBOO, //미궁의죽림
+	EVL_LUNATICTIME, //루나틱 타임!
+	EVL_KOGASA //키스메를 따라하는 코가사
 };
 
 class events

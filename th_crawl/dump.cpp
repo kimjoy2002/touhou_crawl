@@ -33,7 +33,7 @@ int caculScore()
 	int base = you.exper; //현재 19렙에 185000
 	base += 50000 * you.haveGoal();
 
-	if(you.dead_reason == DR_ESCAPE)
+	if(you.dead_reason == DR_ESCAPE && you.haveGoal())
 	{ //클리어 했다.
 		base += 50000; //클리어 보너스 점수
 		double multi = 15*(10 * max(you.turn,5000) / (max(you.turn,5000)+20000));

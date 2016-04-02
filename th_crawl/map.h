@@ -125,6 +125,7 @@ extern map_infor map_list;
 
 void initMap();
 void map_algorithms(int num);
+char* common_base_pattern(int floor_, map_dummy* map);
 char* temple_pattern(map_dummy* map);
 char* misty_lake_pattern(map_dummy* map);
 char* youkai_mountain_pattern(map_dummy* map);

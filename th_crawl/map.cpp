@@ -251,6 +251,10 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	{
 		vector_.push_back(VP_EIENTEI_LAST);		
 	}
+	if(floor == 0 && randA(1))
+	{ //Å×½ºÆ®
+		vector_.push_back(10+floor);	
+	}
 	return;
 }
 

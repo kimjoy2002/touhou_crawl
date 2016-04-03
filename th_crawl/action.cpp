@@ -2040,6 +2040,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 }	
 void shout()
 {	
+	if(env[current_level].isSilence(you.position))
+	{
+		printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
+		return;
+	}
 	int rare_shout = 0;
 	string shout_ = "소리 지르기";
 	if(randA(10)<1)

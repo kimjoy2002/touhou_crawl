@@ -808,7 +808,7 @@ int players::GetSpellSuccess(int spell_)
 	if(you.as_penalty>0)
 	{
 		if(!(you.god == GT_BYAKUREN && !you.punish[GT_BYAKUREN] && pietyLevel(you.piety)>=3) || (as_penalty > GetPenaltyMinus(1)))
-			differ_ += as_penalty;
+			differ_ += as_penalty*2;
 	}
 
 	success_ = max(0,(success_-differ_<=14)?(success_-differ_)*(2*14+(success_-differ_-1)*-1.07)/2:99);

@@ -39,6 +39,11 @@ interupt_type players::TurnEnd()
 		delay_ = delay_*0.7f;
 	else if(s_slow && !(s_haste || alchemy_buff == ALCT_HASTE))
 		delay_ = delay_*1.5f;
+
+	if(GetStatPanalty()) //½ºÅÈÆÐ³ÎÆ¼
+	{
+		delay_ = delay_*2.0f;
+	}
 	if(s_frozen)
 		delay_+=s_frozen*delay_/10;
 	if(as_penalty > GetPenaltyMinus(3))

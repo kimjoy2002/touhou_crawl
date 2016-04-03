@@ -299,7 +299,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={30, 10, WindowWidth, WindowHeight};
 	char temp[100];
-	sprintf_s(temp,100,"%s (%s %s %s)",you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
+	sprintf_s(temp,100,"%s (%d레벨 %s %s %s)",you.user_name.name.c_str(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 	rc.left += 300;
 	sprintf_s(temp,100,"턴: %d",you.turn);	
@@ -906,6 +906,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				//rc.left += fontDesc.Width*(13+(you.as_penalty>9?1:0));	
 				rc.left = 32*16+50;
 				rc.top +=fontDesc.Height;
+			}
+			if(you.GetStatPanalty())
+			{
+				pfont->DrawTextA(pSprite,"스탯패널티", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				rc.left += fontDesc.Width*11;
 			}
 			if(you.s_spellcard)
 			{
@@ -1729,6 +1734,9 @@ void changemove(int var)
 	WaitForSingleObject(mutx, INFINITE);
 	switch(DisplayManager.state)
 	{
+		case DT_TEXT:
+			DisplayManager.move = CutSelect(0, DisplayManager.max_y, DisplayManager.move+var);
+			break;
 		case DT_LOG:
 		case DT_SUB_TEXT:
 		case DT_ITEM:

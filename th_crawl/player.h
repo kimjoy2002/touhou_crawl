@@ -260,6 +260,7 @@ public:
 	bool offsetmove(const coord_def &c);
 	void youAttack(unit* unit_); //누군가를 공격하다.
 	bool OpenDoor(const coord_def &c);
+	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
 	int GetHp(){return hp;};
 	int GetMaxHp(){return max_hp;};
 	int GetAttack(bool max);

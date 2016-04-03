@@ -147,10 +147,10 @@ bool smoke::effectSmoke(unit* unit_)
 	default:
 		return false;
 	case SMT_FIRE:
-		unit_->damage(attack_infor(rand_int(10,25),25,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("È­¿° ±¸¸§",true)), true);
+		unit_->damage(attack_infor(rand_int(10,20),25,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("È­¿° ±¸¸§",true)), true);
 		return true;
 	case SMT_COLD:
-		unit_->damage(attack_infor(rand_int(10,25),25,99,NULL,parent,ATT_CLOUD_COLD,name_infor("³Ã±â ±¸¸§",true)), true);
+		unit_->damage(attack_infor(rand_int(10,20),25,99,NULL,parent,ATT_CLOUD_COLD,name_infor("³Ã±â ±¸¸§",true)), true);
 		unit_->SetFrozen(randA_1(7));
 		return true;
 	case SMT_TWIST:

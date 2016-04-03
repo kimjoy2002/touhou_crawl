@@ -580,7 +580,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	 //만약 그레이즈가능한 공격일 경우 5을 뺀다.
      // (SH / breaking+SH)의 확률로 가드!
 	 //단 실드가 통하지 않는 공격일경우 최종확률이 0이됨(나중에 넣기)
-		float breaking = 30;
+		float breaking = 45;
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
 			breaking -= 5;
 		shield_ = (float)sh/(sh+breaking);

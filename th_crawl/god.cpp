@@ -1129,6 +1129,7 @@ bool GodAccpect_Explore_100()
 	case GT_SHINKI:
 	case GT_YUUGI:
 	case GT_SHIZUHA:
+		return false;
 	case GT_HINA:
 		if(60>randA(100))
 		{

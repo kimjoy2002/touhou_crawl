@@ -161,7 +161,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_POISON_NEEDLE;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->num = (select_ != -1)?20:rand_int(5,20);
+		t->num = (select_ != -1)?20:rand_int(1,8);
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);

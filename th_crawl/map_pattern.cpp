@@ -284,7 +284,7 @@ $$$...$$$";
 				map->m_entrance.y = -map->size_y;
 				map->m_exit.x = -map->size_x;
 				map->m_exit.y = map->size_y;
-				if(!is_exist_named(MON_KOGASA) && (floor_ == 1 || floor_ == 2)){
+				if(!is_exist_named(MON_KOGASA) && (floor_ >= 1 && floor_ <= 4)){
 					map->event_list.push_back(mapdummy_event(EVL_KOGASA,coord_def(0,0),EVT_APPROACH_SMALL));
 					set_exist_named(MON_KOGASA);
 				}

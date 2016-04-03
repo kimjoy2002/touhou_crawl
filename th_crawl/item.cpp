@@ -366,7 +366,10 @@ const D3DCOLOR item::item_color()
 		}
 	}
 	if(isArtifact())
-		return_ = CL_normal;
+	{
+		if(return_ != CL_danger)
+			return_ = CL_normal;
+	}
 
 	return return_;
 }

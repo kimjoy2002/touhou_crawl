@@ -566,7 +566,7 @@ const mon_infor mondata[] = {
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("傍拜",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_FLY,4,1,10},
 
-	{MON_MAGICAL_STAR,4,1,name_infor("可记",true),&img_mons_option,30,0,12,
+	{MON_MAGICAL_STAR,4,1,name_infor("可记",true),&img_mons_option,10,0,5,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("傍拜",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY,99,0,5},
 

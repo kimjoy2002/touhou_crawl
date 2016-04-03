@@ -105,6 +105,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_KYOKO_SMITE:
 	case SPL_STONE_TRAP:
 	case SPL_STONE_UPLIFT:
+	case SPL_FREEZE:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_BURST:
 		return ((S_FLAG_SMITE) & flag);	
@@ -112,7 +113,6 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_FROST:
 	case SPL_BURN:
 	case SPL_FROZEN:
-	case SPL_FREEZE:
 	case SPL_STING:
 	case SPL_MAGIC_TANMAC:
 	case SPL_FIRE_BALL:
@@ -842,10 +842,10 @@ int SpellCap(spell_list skill)
 	case SPL_STONE_TRAP:
 	case SPL_POISON_SKIN:
 	case SPL_KNIFE_COLLECT:
+	case SPL_FREEZE:
 		return 75;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_SMITE:
-	case SPL_FREEZE:
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
 	case SPL_WATER_CANNON:

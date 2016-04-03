@@ -399,13 +399,18 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 }
 bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 {
-	beam_iterator beam(order->position,order->position);
-	if(CheckThrowPath(order->position,target,beam))
-	{
-		beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("³Ã±â",false));
-		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
-		throwtanmac(19,beam,temp_infor,NULL);
+	//beam_iterator beam(order->position,order->position);
+	//if(CheckThrowPath(order->position,target,beam))
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{	
+		attack_infor temp_att(randC(2,12+pow/6),2*(12+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+		target_unit->damage(temp_att, true);
+		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+		//if(short_)
+		//	temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		//throwtanmac(19,beam,temp_infor,NULL);
 		return true;
 	}
 	return false;
@@ -1308,7 +1313,7 @@ bool skill_summon_option(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(monster *mon_ = BaseSummon(MON_MAGICAL_STAR, rand_int(30,60), true, false, 2, order, target, SKD_SUMMON_OPTION, GetSummonMaxNumber(SPL_SUMMON_OPTION)))
 		{
-			mon_->LevelUpdown(pow/20);
+			mon_->LevelUpdown(pow/20,5.0f);
 			return_ = true;
 		}
 	}

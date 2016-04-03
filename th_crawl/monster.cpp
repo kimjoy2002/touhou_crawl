@@ -728,40 +728,6 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 
 	switch(type_)
 	{
-	case ATT_FIRE:
-		bonus_damage = damage_*0.75f;
-		damage_ -= bonus_damage;
-		bonus_damage *= GetFireResist();
-		break;
-	case ATT_COLD:
-		bonus_damage = damage_*0.75f;
-		damage_ -= bonus_damage;
-		bonus_damage *= GetColdResist();
-		break;
-	}
-	damage_ += bonus_damage;
-
-	switch(type_)
-	{
-	case ATT_THROW_FIRE:
-	case ATT_CLOUD_FIRE:
-	case ATT_FIRE_BLAST:
-	case ATT_COLD_BLAST: 
-		damage_ *= GetFireResist();
-		break;
-	case ATT_THROW_COLD:
-	case ATT_CLOUD_COLD:
-	case ATT_THROW_FREEZING:
-		damage_ *= GetColdResist();
-		break;
-	case ATT_THROW_WEAK_POISON:
-	case ATT_THROW_MIDDLE_POISON:
-	case ATT_THROW_STRONG_POISON:
-		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
-		break;
-	}
-	switch(type_)
-	{
 	case ATT_NORMAL:
 	case ATT_SPEAR:
 	case ATT_NOISE:
@@ -799,6 +765,40 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
 	case ATT_BURST:
+		break;
+	}
+	switch(type_)
+	{
+	case ATT_FIRE:
+		bonus_damage = damage_*0.75f;
+		damage_ -= bonus_damage;
+		bonus_damage *= GetFireResist();
+		break;
+	case ATT_COLD:
+		bonus_damage = damage_*0.75f;
+		damage_ -= bonus_damage;
+		bonus_damage *= GetColdResist();
+		break;
+	}
+	damage_ += bonus_damage;
+
+	switch(type_)
+	{
+	case ATT_THROW_FIRE:
+	case ATT_CLOUD_FIRE:
+	case ATT_FIRE_BLAST:
+	case ATT_COLD_BLAST: 
+		damage_ *= GetFireResist();
+		break;
+	case ATT_THROW_COLD:
+	case ATT_CLOUD_COLD:
+	case ATT_THROW_FREEZING:
+		damage_ *= GetColdResist();
+		break;
+	case ATT_THROW_WEAK_POISON:
+	case ATT_THROW_MIDDLE_POISON:
+	case ATT_THROW_STRONG_POISON:
+		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
 		break;
 	}
 	return damage_;

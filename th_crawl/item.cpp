@@ -479,7 +479,10 @@ equip_type item::GetArmorType()
 
 bool item::SameItem(const item &item_)
 {
-	return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
+	if(type == ITM_GOAL)
+		return (type == item_.type && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
+	else
+		return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
 }
 float item::GetStabPercent()
 {

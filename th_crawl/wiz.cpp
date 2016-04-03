@@ -93,8 +93,10 @@ void wiz_mode()
 				next_ = MISTY_LAKE_LEVEL;
 				break;
 			case 'm':
-			case 'M':
 				next_ = YOUKAI_MOUNTAIN_LEVEL;
+				break;
+			case 'M':
+				next_ = YOUKAI_MOUNTAIN_LAST_LEVEL;
 				break;
 			case 's':
 				next_ = SCARLET_LEVEL;

@@ -288,6 +288,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 		}
 		return 1;
+	case EVL_NOISE:
+		{			
+			env[current_level].MakeNoise(event_->position,8,NULL);
+		}
+		return 1;
 	default:
 		break;
 	}

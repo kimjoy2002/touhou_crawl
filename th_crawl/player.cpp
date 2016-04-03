@@ -3101,7 +3101,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				case 1:
 					break;
 				case 2:
-					printlog("불편한 방어구는 당신의 명중에 영향을 준다 . ",true,false,false,CL_warning);
+					printlog("불편한 방어구는 당신의 명중에 영향을 준다. ",true,false,false,CL_warning);
 					break;
 				case 3:
 					printlog("불편한 방어구는 당신의 이동속도와 명중에 영향을 준다. ",true,false,false,CL_small_danger);

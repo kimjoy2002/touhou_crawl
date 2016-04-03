@@ -32,6 +32,9 @@ bool isGodTemple(int id_, god_type god_)
 	case 12:
 		//스와코
 		return (god_ == GT_SUWAKO);
+	case 15:
+		//스와코
+		return (!is_exist_named(MON_CIRNO) && god_ == GT_SUWAKO);
 	case 14:
 		//미노리코
 		return (god_ == GT_MINORIKO);
@@ -58,7 +61,7 @@ bool isGodTemple(int id_, god_type god_)
 	}
 }
 
-int GetMaxAlter(){return 15;};
+int GetMaxAlter(){return 16;};
 
 char* real_altar_pattern(map_dummy* map, int id_)
 {
@@ -426,6 +429,37 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......\
 .......\
 .......";
+			break;
+		}
+	case 15: //치르노에 징벌을 가하는 스와코
+		{
+			map->size_x = 5;
+			map->size_y = 3;	
+			map->m_entrance.x = rand_int(1-map->size_x,map->size_x-1);
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = rand_int(1-map->size_x,map->size_x-1);
+			map->m_exit.y = -map->size_y;
+						
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_SUWAKO);
+
+
+			if(!is_exist_named(MON_CIRNO)){
+				map->monster_list.push_back(mapdummy_mon(MON_CIRNO,M_FLAG_NETURALY,coord_def(0,-1)));
+				set_exist_named(MON_CIRNO);
+			}
+			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(2,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(-2,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(0,0)));
+			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
+			return  "\
+#.........#\
+#.=======.#\
+#.=.~.~.=.#\
+#.=~.~.~=.#\
+#.=======.#\
+#....0....#\
+###########";
 			break;
 		}
 	}

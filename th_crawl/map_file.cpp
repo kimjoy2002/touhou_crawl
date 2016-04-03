@@ -78,6 +78,7 @@ void initMap()
 	{
 		map_list.temple[dq[i]].set(false,0,0,rand_int(1,5));
 	}
+	//map_list.temple[GT_SUWAKO].set(false,0,0,0);
 }
 
 

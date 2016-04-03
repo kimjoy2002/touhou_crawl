@@ -54,7 +54,8 @@ enum monster_flag
 	M_FLAG_NONE_MOVE = 1<<16, //움직이지 않는다.
 	M_FLAG_UNHARM = 1<<17, //무해한가?
 	M_FLAG_INVISIBLE = 1<<18, //영구 투명
-	M_FLAG_ANIMAL = 1<<19  //동물
+	M_FLAG_ANIMAL = 1<<19, //동물
+	M_FLAG_NETURALY = 1<<20  //중립. 그러나 원본크롤과는 약간 다르다. 플레이어에겐 적대적이나 몹끼리 싸움
 };
 
 
@@ -66,11 +67,11 @@ enum monster_flag
 */
 const mon_infor mondata[] = {
 	{MON_REIMUYUKKURI,2,4,name_infor("윳쿠리레이무",false),&img_mons_reimu_yukkuri,25,0,5,
-	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
 	{MON_REIMUYUKKURI,2,70,name_infor("윳쿠리레이무",false),&img_mons_reimu_yukkuri,25,0,5,
-	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
 	{MON_RAT,1,1,name_infor("쥐",false),&img_mons_rat,10,0,6,

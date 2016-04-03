@@ -21,10 +21,10 @@ char* common_enter_pattern(map_dummy* map)
 	case 0:
 		map->size_x = 3;
 		map->size_y = 3;	
-		map->m_entrance.x = -map->size_x;
-		map->m_entrance.y = 0;
-		map->m_exit.x = map->size_x;
-		map->m_exit.y = 0;
+		map->m_entrance.x = 0;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = map->size_y;
 		/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 		return  "\
 #######\
@@ -45,7 +45,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	while(1)
 	{
 
-		switch(randA(9))
+		switch(randA(10))
 		{
 		default:
 		case 0:
@@ -112,7 +112,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 ...........";
 				break;		
 			}
-		case 3:
+		case 3: //루나틱 타임
 			{
 				if(is_exist_named(MON_CLOWNPIECE))
 					break;
@@ -187,11 +187,11 @@ char* common_base_pattern(int floor_, map_dummy* map)
 .$$$.\
 .....";			
 			}
-		case 6:
+		case 6: //풀뿌리 요괴 네트워크
 			{
 				if(floor_ < 9)
 					break;
-				if(is_exist_named(MON_WAKASAGI) && (is_exist_named(MON_KEGERO) || is_exist_named(MON_SEKIBANKI)))
+				if(!(is_exist_named(MON_WAKASAGI) && (is_exist_named(MON_KEGERO) || is_exist_named(MON_SEKIBANKI))))
 					break;
 				bool hw_ = randA(1);
 				map->size_x = 3;
@@ -224,11 +224,11 @@ char* common_base_pattern(int floor_, map_dummy* map)
 .~~~~~.\
 .......";			
 			}
-		case 7:
+		case 7: //쿄코미스치 콘서트
 			{
 				if(floor_ < 4)
 					break;
-				if(is_exist_named(MON_KYOUKO) && is_exist_named(MON_MISTIA))
+				if(is_exist_named(MON_KYOUKO) || is_exist_named(MON_MISTIA))
 					break;
 				map->size_x = 4;
 				map->size_y = 3;	
@@ -276,7 +276,7 @@ $$$...$$$";
 ##.##\
 ##.##";
 			break;
-		case 9:
+		case 9: //코가사 급습
 			{
 				map->size_x = 2;
 				map->size_y = 2;	
@@ -295,6 +295,48 @@ $$$...$$$";
 #...#\
 ..###";			
 			}
+		case 10: //요정대전쟁
+			if(is_exist_named(MON_SUNNY)|| is_exist_named(MON_CIRNO))
+			{
+				break;
+			}
+			map->size_x = 6;
+			map->size_y = 5;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y =  map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			if(!is_exist_named(MON_CIRNO)){
+				map->monster_list.push_back(mapdummy_mon(MON_CIRNO,M_FLAG_NETURALY,coord_def(-3,-1)));
+				set_exist_named(MON_CIRNO);
+			}
+			if(!is_exist_named(MON_STAR)){
+				map->monster_list.push_back(mapdummy_mon(MON_STAR,0,coord_def(3,1)));
+				set_exist_named(MON_STAR);
+			}
+			if(!is_exist_named(MON_LUNAR)){
+				map->monster_list.push_back(mapdummy_mon(MON_LUNAR,0,coord_def(3,0)));
+				set_exist_named(MON_LUNAR);
+			}
+			if(!is_exist_named(MON_SUNNY)){
+				map->monster_list.push_back(mapdummy_mon(MON_SUNNY,0,coord_def(2,1)));
+				set_exist_named(MON_SUNNY);
+			}
+			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
+			return  "\
+#############\
+#...........#\
+#.====+====.#\
+#.=.......=.#\
+#.=.......=.#\
+#.=.......=.#\
+#.=.......=.#\
+#.=========.#\
+#...........#\
+#...........#\
+######+######";
+			break;
 		}
 	}
 }

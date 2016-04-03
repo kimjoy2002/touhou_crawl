@@ -74,6 +74,8 @@ public:
 	int s_ghost;
 	int s_fear;
 	int s_mind_reading;
+	int s_lunatic;
+	int s_neutrality;
 
 	int summon_time;
 	parent_type summon_parent;
@@ -180,6 +182,8 @@ public:
 	bool SetSwift(int swift_);
 	bool SetFear(int fear_);
 	bool SetMindReading(int mind_);
+	bool SetLunatic(int lunatic_);
+	bool SetNeutrality(int s_neutrality_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;
@@ -201,6 +205,7 @@ public:
 	bool isPassedBullet(unit* order);//이 공격이 관통되는지
 	bool isAllyMonster(const monster* monster_info); //이 몹이 아군인지
 	bool isUserAlly() const; //유저에 친밀한가?
+	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지
 	bool isMonsterSight(coord_def c);//해당 위치에 "몬스터"의 시야에 들어왔는가?
 	bool CanChase();
 	parent_type GetParentType();

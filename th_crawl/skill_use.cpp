@@ -514,7 +514,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		switch(waitkeyinput())
 		{
 		case 'Y':
-		case 'N':
+		case 'y':
 			break;
 		default:
 			printlog("취소하였다. 신중하게 생각하도록!",true,false,false,CL_help);

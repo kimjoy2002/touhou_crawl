@@ -36,7 +36,7 @@ monster::monster()
 ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRAL),s_tele(0), s_might(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0) ,s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
-s_fear(0), s_mind_reading(0),
+s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	sm_info(), state(MS_NORMAL), direction(0)
@@ -95,6 +95,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_ghost);
 	SaveData<int>(fp, s_fear);
 	SaveData<int>(fp, s_mind_reading);
+	SaveData<int>(fp, s_lunatic);
+	SaveData<int>(fp, s_neutrality);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -180,6 +182,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_ghost);
 	LoadData<int>(fp, s_fear);
 	LoadData<int>(fp, s_mind_reading);
+	LoadData<int>(fp, s_lunatic);
+	LoadData<int>(fp, s_neutrality);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -261,6 +265,8 @@ void monster::init()
 	s_ghost = 0;
 	s_fear=0;
 	s_mind_reading =0;
+	s_lunatic=0;
+	s_neutrality=0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -337,6 +343,10 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 			target = &you;
 			target_pos = you.position;
 			state.SetState(MS_ATACK);
+		}
+		if(flag & M_FLAG_NETURALY)
+		{
+			s_neutrality = 1;
 		}
 	}
 	SetResistMonster(this);
@@ -514,7 +524,13 @@ void monster::TurnLoad()
 		s_ghost-=temp_turn;
 	else
 		s_ghost =0;
-
+	
+	if(s_lunatic-temp_turn>0)
+		s_lunatic-=temp_turn;
+	else
+		s_lunatic =0;
+	
+		
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -607,7 +623,7 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && !(*it).isUserAlly() && (*it).isView(this) && isMonsterSight((*it).position) )
+				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && isMonsterSight((*it).position) )
 				{					
 					
 					FoundTarget(&(*it),30);
@@ -618,11 +634,60 @@ void monster::CheckSightNewTarget()
 	}
 	else
 	{
+		unit* prev_target_ = target;
+		int distant_ = 999;//적일땐 거리가 중요하다.
+		if(target)
+		{//적이 이미 있는 경우
+			if(!target->isplayer())
+			{
+				if(target->isLive() && isEnemyMonster((monster*)target))
+				{
+					distant_ = distan_coord(target->position, position);	//해당적이 죽지않았으면서 적몬스터이면 구지 바꿀 필요가 없다. 
+					distant_ = max(1,distant_-1); //뭔가에 막혀있으면 우선순위가 낮아짐 구현하기
+				}
+				else
+					prev_target_ = NULL;
+			}
+			else
+			{
+				distant_ = distan_coord(target->position, position);
+				distant_ = max(1,distant_-4);
+			}
+		}
+
+		{ //여기부터 시야내 몬스터찾기 시작
+			vector<monster>::iterator it;
+			it = env[current_level].mon_vector.begin();
+			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
+			{
+				if((*it).isLive() && isEnemyMonster(&(*it))  && (*it).isView(this) && isMonsterSight((*it).position) )
+				{
+					if(distan_coord(it->position, position) < distant_)
+					{
+						prev_target_ = &(*it);
+						distant_ = distan_coord(it->position, position);
+					}
+				}
+			}
+		}
+
+
+
 		if(env[current_level].isInSight(position) && !you.s_timestep)
 		{
-				FoundTarget(&you,30);
-
+			if(state.GetState() == MS_ATACK ||  you_detect())
+			{
+				int temp = distan_coord(you.position, position)-30+(isSightnonblocked(you.position)?0:60);
+				if(distant_ == 999 || temp  < distant_)
+				{
+					prev_target_ = &you;
+					distant_ = distan_coord(you.position, position)-3;
+				}
+			}
 		}
+
+		if(prev_target_)
+			FoundTarget(prev_target_,30);
 	}
 }
 bool monster::ReturnEnemy()
@@ -1520,14 +1585,12 @@ int monster::action(int delay_)
 	}
 	else
 	{
-
 		if(you.god == GT_SATORI && !you.punish[GT_SATORI] && pietyLevel(you.piety)>=3 &&
 			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight())
 		{
 			env[current_level].magicmapping(position.x,position.y);
 			env[current_level].ClearShadow(position, SWT_MONSTER);
 		}
-
 	}
 
 	bool player_invisible = (you.s_invisible || you.togle_invisible) && !(flag & M_FLAG_CAN_SEE_INVI); //플레이어를 못보게될때
@@ -1793,7 +1856,9 @@ int monster::action(int delay_)
 				}
 				else
 				{
-					state.StateTransition(MSI_LOST);
+					CheckSightNewTarget();
+					if(!target)
+						state.StateTransition(MSI_LOST);
 				}
 			}
 
@@ -1814,7 +1879,10 @@ int monster::action(int delay_)
 			{
 			case MS_NORMAL:
 				longmove();
-				sightcheck(is_sight);
+				if(randA(9)) //보통은 플레이어만 찾는다.(빠른 처리를 위해)
+					sightcheck(is_sight);
+				else
+					CheckSightNewTarget();
 				break;
 			case MS_SLEEP:
 			case MS_REST:
@@ -1845,7 +1913,8 @@ int monster::action(int delay_)
 				}
 				else if(is_sight && !player_invisible && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
-					FoundTarget( &you,30);
+					CheckSightNewTarget();
+					//FoundTarget(&you,30);
 					if(flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.punish[GT_SHINKI] && pietyLevel(you.piety)>=3)
 					{
 						//신키는 소환수를 방해한다.
@@ -1862,10 +1931,13 @@ int monster::action(int delay_)
 				else if(!isUserAlly())
 				{//적인데 시야안에 없거나 플레이어가 보이지 않는 상태
 					if(memory_time>0)
+					{
+						CheckSightNewTarget();
 						memory_time--;
+					}
 					else
 					{
-						target = NULL;						
+						target = NULL;
 						state.StateTransition(MSI_LOST);
 					}
 				}
@@ -1930,9 +2002,12 @@ int monster::action(int delay_)
 }
 void monster::sightcheck(bool is_sight_)
 {	
-	if(!isUserAlly() && is_sight_ && you_detect())//시야 안에 있을때 스텔스 체크
+	if(!isUserAlly() )
 	{
-		FoundTarget( &you,30);
+		if(is_sight_ && you_detect())//시야 안에 있을때 스텔스 체크
+		{
+			FoundTarget(&you,30);
+		}
 	}
 }
 
@@ -2403,6 +2478,7 @@ bool monster::SetFear(int fear_)
 		s_fear = 50;
 	return true;
 }
+
 bool monster::SetMindReading(int mind_)
 {
 	if(!mind_)
@@ -2424,6 +2500,27 @@ bool monster::SetMindReading(int mind_)
 	}
 	return true;
 }
+bool monster::SetLunatic(int lunatic_)
+{
+	if(!lunatic_)
+		return false;
+	if(isYourShight())
+	{
+		if(!s_lunatic)
+			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다.");
+	}
+	s_lunatic += lunatic_;
+	if(s_lunatic>20)
+		s_lunatic = 20;
+	return true;
+}
+
+bool monster::SetNeutrality(int s_neutrality_)
+{
+	s_neutrality += s_neutrality_;
+	return true;
+}
+
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -2528,9 +2625,17 @@ bool monster::isYourShight()
 bool monster::isEnemyMonster(const monster* monster_info)
 {
 	if(isUserAlly() && monster_info->isUserAlly())
+	{
+		if(s_lunatic)
+			return true;
 		return false;
+	}
 	if(!isUserAlly() && !(monster_info->isUserAlly()))
+	{
+		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
+			return true;
 		return false;
+	}
 	return true;
 }
 bool monster::isPassedBullet(unit* order)
@@ -2568,14 +2673,58 @@ bool monster::isPassedBullet(unit* order)
 bool monster::isAllyMonster(const monster* monster_info)
 {
 	if(isUserAlly() && monster_info->isUserAlly())
+	{
+		if(s_lunatic)
+			return false;
 		return true;
+	}
 	if(!isUserAlly() && !(monster_info->isUserAlly()))
+	{
+		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
+			return false;
 		return true;
+	}
 	return false;
 }
 bool monster::isUserAlly() const
 {
 	return s_ally;
+}
+bool monster::isSightnonblocked(coord_def c)
+{
+	bool intercept = false;
+	for(int i=RT_BEGIN;i!=RT_END;i++)
+	{
+		int length_ = 8;
+		beam_iterator it(position,c,(round_type)i);
+		while(!intercept && !it.end())
+		{
+						
+			coord_def check_pos_ = (*it);
+
+			if(length_ == 0) //시야가 다 달았다.
+			{
+				intercept = true;
+				break;
+			}
+			if(!env[current_level].isMove(check_pos_,true,true))
+			{
+				intercept = true;
+				break;
+			}
+			it++;
+			length_--;
+		}
+		if(intercept == false)
+			break;
+		else if(i == RT_END - 1)
+		{
+			return false; //공격불가능한 위치
+		}
+		else
+			intercept = false;
+	}
+	return true;
 }
 bool monster::isMonsterSight(coord_def c)
 {	
@@ -2639,7 +2788,11 @@ int monster::GetSpeed()
 int monster::GetAttack(int num_, bool max_)
 {
 	int atk_ = randA(atk[num_]);
-	return max_?atk[num_]:atk_;
+	if(max_)
+		atk_ = atk[num_];
+	if(s_lunatic || s_might)
+		atk_ *= 1.5f;
+	return atk_;
 }
 int monster::GetHit()
 {
@@ -2724,6 +2877,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_FEAR;
 	if(s_confuse)
 		temp = MSS_CONFUSE;
+	if(s_lunatic)
+		temp = MSS_LUNATIC;
 	if(state.GetState() == MS_SLEEP ||state.GetState() == MS_REST)
 		temp = MSS_SLEEP;
 	if(s_paralyse)
@@ -2933,6 +3088,13 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_mind_reading)
 		{
 			sprintf(string_,"간파");
+			return true;
+		}
+		return false;
+	case MSS_LUNATIC:
+		if(s_lunatic)
+		{
+			sprintf(string_,"광기");
 			return true;
 		}
 		return false;

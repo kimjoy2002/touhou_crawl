@@ -19,7 +19,8 @@ enum event_list
 	EVL_FLOOR, //땅이 된다
 	EVL_BAMBOO, //미궁의죽림
 	EVL_LUNATICTIME, //루나틱 타임!
-	EVL_KOGASA //키스메를 따라하는 코가사
+	EVL_KOGASA, //키스메를 따라하는 코가사
+	EVL_NOISE//소음
 };
 
 class events

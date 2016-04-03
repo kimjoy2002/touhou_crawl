@@ -655,7 +655,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 	for(int i=0;i<25-piece- weight;i++)
 	{
 		int j=0;
-		for(;j<i==0?9999:20;j++) //무한반복 제거용
+		for(;j<(i==0?9999:20);j++) //무한반복 제거용
 		{
 			bool success= true;
 			int next_x=0,next_y=0;

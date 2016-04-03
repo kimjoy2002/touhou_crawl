@@ -428,7 +428,7 @@ const mon_infor mondata[] = {
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
 	
-	{MON_HOBGOBRIN_TEMP,13,210,name_infor("È©°íºí¸° ¾Ç¸¶¼ú»ç",true),&img_mons_hobgobrin_temp,70,0,6,
+	{MON_HOBGOBRIN_TEMP,13,210,name_infor("È©°íºí¸° ¾Ç¸¶¼ú»ç",false),&img_mons_hobgobrin_temp,70,0,6,
 	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
 	

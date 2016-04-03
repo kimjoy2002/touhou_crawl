@@ -21,10 +21,10 @@ char* common_enter_pattern(map_dummy* map)
 	case 0:
 		map->size_x = 3;
 		map->size_y = 3;	
-		map->m_entrance.x = 0;
-		map->m_entrance.y = map->size_y;
-		map->m_exit.x = 0;
-		map->m_exit.y = map->size_y;
+		map->m_entrance.x = map->size_x;
+		map->m_entrance.y = 0;
+		map->m_exit.x = -map->size_x;
+		map->m_exit.y = 0;
 		/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 		return  "\
 #######\

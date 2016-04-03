@@ -389,7 +389,7 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
 		int damage_ = 13+pow/5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,16+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
+		beam_infor temp_infor(randC(1,damage_),damage_,16+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		throwtanmac(19,beam,temp_infor,NULL); 

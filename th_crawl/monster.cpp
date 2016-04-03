@@ -1031,7 +1031,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				}
 			}
 			if(a.type == ATT_THROW_FREEZING)
-				SetFrozen(randA_1(10));
+			{
+				int frozen_ = randA_1(10);
+				frozen_*=GetColdResist();
+				SetFrozen(frozen_);
+			}
 			if(s_veiling)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)

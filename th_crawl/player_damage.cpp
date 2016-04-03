@@ -629,7 +629,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 				if(a.type == ATT_THROW_STRONG_POISON)
 					SetPoison(70+randA(20), 150, true);
 				if(a.type == ATT_THROW_FREEZING)
-					SetFrozen(randA_1(10));
+				{
+					int frozen_ = randA_1(10);
+					frozen_*=GetColdResist();
+					SetFrozen(frozen_);
+
+				}
 				//SkillTraining(SKT_ARMOUR,3);
 			}
 			else

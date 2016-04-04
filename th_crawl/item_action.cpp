@@ -297,8 +297,11 @@ void fast_discard()
 	{
 		if(it->id == you.final_item)
 		{
-			discard(it,you.final_num);
-			you.final_item = 0;
+			if(you.possibleunequip(it))
+			{
+				discard(it,you.final_num);
+				you.final_item = 0;
+			}
 			return;
 		}
 	}

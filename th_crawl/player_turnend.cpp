@@ -228,7 +228,7 @@ interupt_type players::TurnEnd()
 		{
 			printlog("민첩이 원래대로 돌아왔다.",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_DEX);
-			EvUpDown(-5);
+			EvUpDown(0,-5);
 			SetInter(IT_STAT);
 		}
 	}

@@ -214,7 +214,7 @@ int players::ReSetASPanlty()
 		panlty_ += panlty2_;
 	}
 	as_penalty = panlty_;
-	EvUpDown(prev_panlty_-as_penalty);
+	EvUpDown(0,prev_panlty_-as_penalty);
 	return panlty_;
 }
 int players::GetPenaltyMinus(int level_)

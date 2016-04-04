@@ -1514,16 +1514,16 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 								{
 									int value4_ = it->value4;
 									//if(value3_<0)
-									//	it->Enchant(ET_WEAPON, value3_*-2, 0);
+									//	it->Enchant(ET_WEAPON, value3_*-2);
 									if(value4_<0)
-										it->Enchant(ET_WEAPON,0, value4_*-2);
+										it->Enchant(ET_WEAPON,value4_*-2);
 									printlog("히나는 당신의 무기의 액땜을 해주었다.",true,false,false,CL_hina);
 									return true;	
 								}
 								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
 								{
 									if(it->value4<0)
-										it->Enchant(ET_ARMOR,0, it->value4*-2);
+										it->Enchant(ET_ARMOR,it->value4*-2);
 									printlog("히나는 당신의 방어구의 액땜을 해주었다.",true,false,false,CL_hina);
 								
 									return true;	

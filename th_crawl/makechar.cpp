@@ -768,7 +768,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			(*it).identify = true;
 			(*it).identify_curse = true;
 			//it->value3 = 2;
-			it->value4 = 2;
+			it->Enchant(ET_WEAPON, 2);
 			you.additem(it,false);
 			you.equip('a'+1,ET_WEAPON,false);
 			env[current_level].DeleteItem(it);
@@ -821,13 +821,13 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		{
 			if(you.equipment[ET_WEAPON]){
 				//you.equipment[ET_WEAPON]->value3 = 2;
-				you.equipment[ET_WEAPON]->value4 = 2;
+				you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 2);
 			}
 			if(you.equipment[ET_ARMOR]){
-				you.equipment[ET_ARMOR]->value4 = 2;
+				you.equipment[ET_ARMOR]->Enchant(ET_ARMOR, 2);
 			}
 			if(you.equipment[ET_SHIELD]){
-				you.equipment[ET_SHIELD]->value4 = 2;
+				you.equipment[ET_SHIELD]->Enchant(ET_SHIELD, 2);
 			}
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));	
 			it->Identify();

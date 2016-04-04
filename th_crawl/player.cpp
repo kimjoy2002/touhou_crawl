@@ -58,7 +58,7 @@ void name_infor::LoadDatas(FILE *fp)
 players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_aptit(10), skill_exper(0), 
-ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
+ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
@@ -119,6 +119,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, real_ac);
 	SaveData<int>(fp, bonus_ac);
 	SaveData<int>(fp, real_ev);
+	SaveData<int>(fp, bonus_ev);	
 	SaveData<int>(fp, real_sh);
 	SaveData<int>(fp, bonus_sh);
 	SaveData<int>(fp, s_str);
@@ -284,6 +285,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, real_ac);
 	LoadData<int>(fp, bonus_ac);
 	LoadData<int>(fp, real_ev);
+	LoadData<int>(fp, bonus_ev);	
 	LoadData<int>(fp, real_sh);
 	LoadData<int>(fp, bonus_sh);
 	LoadData<int>(fp, s_str);
@@ -1065,10 +1067,12 @@ int players::AcUpDown(int value_, int bonus_)
 	ac = (int)temp_ac+bonus_ac; 
 	return ac;
 }
-int players::EvUpDown(int value_)
+int players::EvUpDown(int value_, int bonus_)
 {
 	real_ev += value_;
-	ev = real_ev>0?real_ev:0;
+	bonus_ev += bonus_;
+	int size_ = -2*GetProperty(TPT_SIZE);
+	ev = 3+size_+ real_ev*(8+s_dex)/(32.0f-size_) + bonus_ev;
 	return ev;
 }
 int players::ShUpDown(int value_, int bonus_)
@@ -1112,7 +1116,7 @@ void players::UpDownBuff(stat_up stat_, int value_)
 		ShUpDown(0,value_);
 		break;
 	case BUFFSTAT_EV:
-		EvUpDown(value_);
+		EvUpDown(0,value_);
 		break;
 	case BUFFSTAT_ACC:
 	case BUFFSTAT_DAM:
@@ -1200,6 +1204,7 @@ bool players::StatUpDown(int value_, stat_type stat_, bool temp_)
 		if(!temp_)
 			m_dex+=value_;
 		ShUpDown(0,0);
+		EvUpDown(0,0);
 		break;
 	case STAT_INT:
 		s_int+=value_;
@@ -1374,7 +1379,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		else if(skill_ == SKT_DODGE)
 		{
 			//EvUpDown((level<=5?level%3==1:(level<=12?level%2==0:(level<=20?level%3:(1))))); 뭐에쓰려고한거지
-			EvUpDown(1);
+			EvUpDown(1,0);
 		}
 		else if(skill_ == SKT_ARMOUR)
 		{
@@ -1554,7 +1559,7 @@ bool players::SetAgility(int agility_)
 	{
 		printlog("당신은 민첩해졌다.",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_DEX);
-		EvUpDown(5);
+		EvUpDown(0,5);
 	}
 	else
 	{

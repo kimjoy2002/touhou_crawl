@@ -41,8 +41,7 @@ void wiz_mode()
 	case 'A':
 		{
 			item_infor t;
-			makeitem(ITM_RING, 0, &t, RGT_GRAZE);
-			makeitem(ITM_RING, 0, &t, RGT_GRAZE);	
+			makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_ARMOUR);
 			env[current_level].MakeItem(you.position,t);
 
 			break;

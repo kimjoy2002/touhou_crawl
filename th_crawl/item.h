@@ -180,7 +180,7 @@ public:
 
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();
-	bool Enchant(equip_type kind_, int acc_, int atk_);
+	bool Enchant(equip_type kind_, int acc_);
 	void pick();
 
 	void Identify();//°Á½Äº°

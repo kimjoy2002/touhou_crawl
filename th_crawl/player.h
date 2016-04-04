@@ -98,6 +98,7 @@ public:
 	int real_ac;
 	int bonus_ac;
 	int real_ev;
+	int bonus_ev;
 	int real_sh;
 	int bonus_sh;
 	int s_str;
@@ -291,7 +292,7 @@ public:
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);
 	int AcUpDown(int value_, int bonus_);
-	int EvUpDown(int value_);
+	int EvUpDown(int value_, int bonus_);
 	int ShUpDown(int value_, int bonus_);
 	int MRUpDown(int value_)
 	{

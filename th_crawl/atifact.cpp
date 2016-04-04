@@ -320,7 +320,7 @@ bool effectartifact(ring_type kind, int value)
 		you.AcUpDown(0,value);
 		return true;
 	case RGT_EV:
-		you.EvUpDown(value);
+		you.EvUpDown(0,value);
 		return true;
 	case RGT_CONFUSE_RESIS:
 		you.ResistUpDown(value,RST_CONFUSE);

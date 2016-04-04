@@ -746,7 +746,7 @@ bool item::isEnhantable()
 	}
 	return false;
 }
-bool item::Enchant(equip_type kind_, int acc_, int atk_)
+bool item::Enchant(equip_type kind_, int acc_)
 {
 	bool enchant_ = curse?true:false; //저주걸린템은 무조건 인챈트
 
@@ -761,12 +761,6 @@ bool item::Enchant(equip_type kind_, int acc_, int atk_)
 			enchant_ = true;
 			acc_--;
 		}
-		while(atk_ && value4<9)
-		{
-			value4++;
-			enchant_ = true;
-			atk_--;
-		}		
 	}
 	else if(kind_ == ET_ARMOR && (type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST))
 	{
@@ -788,23 +782,19 @@ bool item::Enchant(equip_type kind_, int acc_, int atk_)
 		while(acc_ && value4<max_enchant) //높을수록 확률 낮추기
 		{
 			value4++;
-			if(type != ITM_ARMOR_SHIELD)
-				you.AcUpDown(0,1);
+			if(type != ITM_ARMOR_SHIELD) 
+			{
+				if(you.equipment[GetArmorType()] == this)
+					you.AcUpDown(0,1);
+			}
 			else
-				you.ShUpDown(0,1);
+			{
+				if(you.equipment[GetArmorType()] == this)
+					you.ShUpDown(0,1);
+			}
 
 			enchant_ = true;
 			acc_--;
-		}
-		while(atk_ && value4<max_enchant)
-		{
-			value4++;
-			if(type != ITM_ARMOR_SHIELD)
-				you.AcUpDown(0,1);
-			else
-				you.ShUpDown(0,1);
-			enchant_ = true;
-			atk_--;
 		}
 	}
 	return enchant_;

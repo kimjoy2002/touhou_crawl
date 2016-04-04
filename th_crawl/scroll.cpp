@@ -507,7 +507,7 @@ bool enchant_weapon_1_scroll()
 	if(you.equipment[ET_WEAPON])
 	{
 		string before_name = you.equipment[ET_WEAPON]->GetName();
-		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1, 0))
+		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
 			printlog("장착하고 있던 ",false,false,false,CL_good);	
 			printlog(before_name,false,false,false,CL_good);	
@@ -535,7 +535,7 @@ bool enchant_weapon_2_scroll()
 	if(you.equipment[ET_WEAPON])
 	{
 		string before_name = you.equipment[ET_WEAPON]->GetName();
-		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 0, 1))
+		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
 			printlog("장착하고 있던 ",false,false,false,CL_good);	
 			printlog(before_name,false,false,false,CL_good);	
@@ -575,7 +575,7 @@ bool enchant_armour_scroll()
 			if(item_)
 			{
 				string before_name = item_->GetName();
-				if(item_->Enchant(ET_ARMOR, 1, 0))
+				if(item_->Enchant(ET_ARMOR, 1))
 				{
 					printlog(before_name,false,false,false,CL_good);	
 					printlog(item_->GetNameInfor().name_do(true),false,false,false,CL_good);

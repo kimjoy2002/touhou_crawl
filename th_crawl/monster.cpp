@@ -2038,6 +2038,12 @@ void monster::special_action(int delay_)
 			you.SetSick(10);
 		}
 		break;
+	case MON_TEWI:
+		if(env[current_level].isInSight(position) && hp<max_hp/2 && randA(3) == 0)
+		{
+			SetFear(rand_int(20,40));
+		}
+		break;
 	case MON_CLOWNPIECE:
 		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0)
 		{

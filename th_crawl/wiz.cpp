@@ -147,7 +147,7 @@ void wiz_mode()
 		env[current_level].dgtile[you.position.x][you.position.y].tile = (dungeon_tile_type) rand_int(DG_TEMPLE_FIRST,DG_TEMPLE_LAST);
 		break;
 	case 'M':
-		if(monster* mon_=BaseSummon(MON_KOISHI, 100, true, false, 2, &you, you.position, SKD_OTHER, -1))
+		if(monster* mon_=BaseSummon(MON_TEWI, 100, true, false, 2, &you, you.position, SKD_OTHER, -1))
 		{
 			mon_->flag &= ~M_FLAG_SUMMON;
 			mon_->ReturnEnemy();

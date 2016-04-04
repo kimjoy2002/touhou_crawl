@@ -2130,8 +2130,8 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_MAGIC_BOOK:
 		{
-			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER, SPL_WATER_CANNON,
-			SPL_STONE_ARROW, SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING
+			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
+			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING
 			};
 			//주 공격스킬
 			int arr2_[] = {SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
@@ -2139,7 +2139,7 @@ void SetSpell(monster_index id, list<spell> *list)
 			};
 			//보조스킬
 
-			list->push_back(spell(arr_[randA(9)],30));
+			list->push_back(spell(arr_[randA(8)],30));
 			
 			if(randA(10)<4)
 			{

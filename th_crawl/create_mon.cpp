@@ -962,6 +962,9 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
+	case MON_GREEN_MOOK:
+		mon->poison_resist=1;
+		break;
 	case MON_KOGASA:
 		mon->ice_resist=1;
 		mon->fire_resist=1;
@@ -989,6 +992,16 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=1;
 		break;
 	case MON_YAMAME:		
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		break;
+	case MON_NAZRIN:
+		mon->poison_resist=1;
+		break;
+	case MON_DAUZING:
+		mon->elec_resist=3;
+		mon->ice_resist=3;
+		mon->fire_resist=3;
 		mon->poison_resist=1;
 		break;
 	case MON_YOSIKA:
@@ -1023,6 +1036,7 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_ICHIRIN:
 		mon->fire_resist=1;
+		mon->poison_resist=1;
 		mon->elec_resist=1;
 		break;
 	case MON_UNZAN:
@@ -1036,6 +1050,15 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist=2;
 		mon->ice_resist=2;
 		mon->fire_resist=2;
+		mon->poison_resist=1;
+		break;
+	case MON_MAGIC_BOOK:
+		mon->elec_resist=2;
+		mon->ice_resist=2;
+		mon->fire_resist=2;
+		mon->poison_resist=1;
+		break;
+	case MON_HOBGOBRIN_MAID:
 		mon->poison_resist=1;
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:

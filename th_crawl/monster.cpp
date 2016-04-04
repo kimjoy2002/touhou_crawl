@@ -625,9 +625,11 @@ void monster::CheckSightNewTarget()
 			{
 				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && isMonsterSight((*it).position) )
 				{					
-					
-					FoundTarget(&(*it),30);
-					break;
+					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position) )
+					{
+						FoundTarget(&(*it),30);
+						break;
+					}
 				}
 			}
 		}
@@ -1877,6 +1879,11 @@ int monster::action(int delay_)
 			if(state.GetState() == MS_ATACK && isUserAlly() && target == &you)
 			{
 				state.SetState(MS_FOLLOW);
+			}
+			if((flag & M_FLAG_SUMMON)  && isUserAlly() && !env[current_level].isInSight(target_pos) )
+			{
+				state.SetState(MS_FOLLOW);
+
 			}
 
 			switch(state.GetState())

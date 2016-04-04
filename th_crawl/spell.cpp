@@ -116,9 +116,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_STING:
 	case SPL_MAGIC_TANMAC:
 	case SPL_FIRE_BALL:
-	case SPL_WATER_CANNON:
 	case SPL_STONE_ARROW: 
 	case SPL_KANAME_DRILL:
+	case SPL_WATER_CANNON:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SHOCK:
 		return (S_FLAG_SPEAK | S_FLAG_DIREC  | S_FLAG_RANGE_ATTACK) & flag;

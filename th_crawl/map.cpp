@@ -1159,7 +1159,7 @@ void map_algorithms_tuto01(int num)
 	t.is_pile = false;
 	t.value1 = 4;
 	t.value2 = 7;
-	t.value3 = 1;
+	t.value3 = 0;
 	t.value4 = 1;
 	t.value5 = 0;
 	t.value6 = 0;

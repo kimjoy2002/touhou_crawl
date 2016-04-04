@@ -124,7 +124,7 @@ int players::GetHit()
 		skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
 		if(skill_>SKT_ERROR)
 		{
-			hit_ += equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value3 + skill[skill_].level/3;
+			hit_ += equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + skill[skill_].level/3;
 		}
 		else
 		{

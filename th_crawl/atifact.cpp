@@ -360,7 +360,7 @@ void MakeArtifact(item* item_, int good_bad_)
 	if(item_->type>=ITM_WEAPON_FIRST && item_->type<ITM_WEAPON_LAST)
 	{
 		item_->value4 = randA(9)+randA(3)+randA(3)-4;
-		item_->value3 = randA(9)+randA(3)+randA(3)-4;
+		//item_->value3 = randA(9)+randA(3)+randA(3)-4;
 	}		
 	if(item_->type>=ITM_ARMOR_FIRST && item_->type< ITM_ARMOR_LAST)
 	{

@@ -284,8 +284,8 @@ void kanako_gift()
 
 	item_infor t;
 	item* it = env[current_level].MakeItem(you.position,makeitem((item_type)result_weapon, 1, &t));
-	it->value3 += rand_int(-1,6);
-	it->value4 += rand_int(-2,4);
+	//it->value3 += rand_int(-1,6);
+	it->value4 += rand_int(-2,6);
 	if(!it->value5 && randA(2)>1)
 		it->value5 = randA_1(WB_MAX-1);
 	if(randA(3) == 0)

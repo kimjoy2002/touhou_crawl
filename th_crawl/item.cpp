@@ -196,7 +196,8 @@ string item::GetName(int num_)
 		if(identify)
 		{
 			char temp2[20];
-			sprintf(temp2,"%c%d,%c%d ",value3>=0?'+':'-',abs(value3),value4>=0?'+':'-',abs(value4));
+			//sprintf(temp2,"%c%d,%c%d ",value3>=0?'+':'-',abs(value3),value4>=0?'+':'-',abs(value4));
+			sprintf(temp2,"%c%d ",value4>=0?'+':'-',abs(value4));
 			temp += temp2;
 		}
 		else if(!value6 && second_name.name.size())
@@ -432,7 +433,7 @@ bool item::isRightType(equip_type type_)
 	switch(type_)
 	{
 	case ET_WEAPON:
-		return true;
+		return (type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST);
 	case ET_THROW:
 		return true;
 	case ET_ARMOR:
@@ -717,7 +718,7 @@ bool item::isEnhantable()
 			return true;
 		if(isArtifact())
 			return false;
-		if(value3<9 || value4<9)
+		if(value4<9)
 			return true;
 	}	
 	else if((type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST))
@@ -754,9 +755,9 @@ bool item::Enchant(equip_type kind_, int acc_, int atk_)
 
 	if(kind_ == ET_WEAPON && (type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST))
 	{
-		while(acc_ && value3<9) //³ôÀ»¼ö·Ï È®·ü ³·Ãß±â
+		while(acc_ && value4<9)
 		{
-			value3++;
+			value4++;
 			enchant_ = true;
 			acc_--;
 		}

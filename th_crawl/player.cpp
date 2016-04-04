@@ -3040,6 +3040,9 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			ReleaseMutex(mutx);
 			return 0;
 		}
+		//자동식별 추가
+		(*it).Identify();
+
 		equip_stat_change(&(*it), type_, true);
 		equipment[type_] = &(*it);
 		ReSetASPanlty();

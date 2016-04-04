@@ -137,9 +137,9 @@ public:
 	
 	int value2; //value2 - 무기,탄막-공격력 방어구,방패-EV  음식-만복도 링-수치 스펠카드-사용
 
-	int value3;	//value3 - 무기-명중+ 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 스펠카드-사용예측횟수
+	int value3;	//value3 - 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 스펠카드-사용예측횟수
 	
-	int value4; //value4 - 무기-공격+ 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 
+	int value4; //value4 - 무기-인챈트 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 
 
 	int value5;	//value5 - 무기-속성 음식-pow상승치
 	

@@ -144,7 +144,7 @@ void MakeStartItem(start_item_type select_, int num)
 	case SIT_GOHEY:
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,1,1,0,0,13,7,false,name_infor("고헤이",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 5));	
-		it->value3 = 1;
+		//it->value3 = 1;
 		it->value4 = 1;
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -155,8 +155,8 @@ void MakeStartItem(start_item_type select_, int num)
 	case SIT_SICKLE:
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,1,1,0,0,13,7,false,name_infor("창",true),name_infor("",true),4.0f,70));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 15));	
-		it->value3 = 2;
-		it->value4 = 0;
+		//it->value3 = 2;
+		it->value4 = 3;
 		it->curse = true;
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -286,7 +286,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_THROWING_KNIFE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 15));
-		it->value3 = 2;
+		//it->value3 = 2;
 		it->value4 = 2;
 		it->identify = true;
 		it->identify_curse = true;
@@ -767,7 +767,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 15));	
 			(*it).identify = true;
 			(*it).identify_curse = true;
-			it->value3 = 2;
+			//it->value3 = 2;
 			it->value4 = 2;
 			you.additem(it,false);
 			you.equip('a'+1,ET_WEAPON,false);
@@ -820,7 +820,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		else
 		{
 			if(you.equipment[ET_WEAPON]){
-				you.equipment[ET_WEAPON]->value3 = 2;
+				//you.equipment[ET_WEAPON]->value3 = 2;
 				you.equipment[ET_WEAPON]->value4 = 2;
 			}
 			if(you.equipment[ET_ARMOR]){

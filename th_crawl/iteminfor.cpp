@@ -372,10 +372,8 @@ string GetItemInfor(item *it)
 					text_ += "현재 있는 층의 맵을 밝혀주는 두루마리.\n";
 					break;
 				case SCT_ENCHANT_WEAPON_1:
-					text_ += "현재 장착되어있는 무기의 명중력을 강화시킬 수 있다. 또한 저주도 없애준다.\n";
-					break;
 				case SCT_ENCHANT_WEAPON_2:
-					text_ += "현재 장착되어있는 무기의 공격력을 강화시킬 수 있다. 또한 저주도 없애준다.\n";
+					text_ += "현재 장착되어있는 무기의 공격력과 명중력을 강화시킬 수 있다. 또한 저주도 없애준다.\n";
 					break;
 				case SCT_ENCHANT_ARMOUR:
 					text_ += "선택한 방어구의 방어력을 강화시킬 수 있다. 또한 저주도 없애준다.\n";

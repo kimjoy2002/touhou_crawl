@@ -104,7 +104,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	{
 		int rune_ = abs(t->value4*3);
 
-		if(randA_1(10)<rune_)
+		if(rune_)
 		{
 			t->name2.name = "룬이 새겨진 ";
 			t->name2.name_type = true;
@@ -421,8 +421,7 @@ int baditem(const item_infor *item_) //randA(9)+1<=리턴값일때 저주걸림
 {
 	if(item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST)
 	{
-		if(1-item_->value3*2-item_->value4*2>0)
-			return 1-item_->value3*4-item_->value4*4;
+		return 1-item_->value4*4;
 	}
 	else if(item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST)
 	{
@@ -518,14 +517,14 @@ item_infor& CustomSimpleItem(item_infor* t, item_type type, int num, bool curse,
 void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 {
 	t->value0 = 0;
-	t->value3 = randA(2)?0:randA(4*good_bad);
-	t->value4 = randA(2)?0:randA(4*good_bad);
+	//t->value3 = randA(1)?0:randA(5*good_bad);
+	t->value4 = randA(1)?0:randA(5*good_bad);
 	t->value5 = (good_bad>0 && randA(2)>1)?randA_1(WB_MAX-1):0;
 	t->name2.name = "";
 	t->name2.name_type = true;
-	int rune_ = abs(t->value3+t->value4)+(t->value5?6:0);
+	int rune_ = abs(t->value3)+abs(t->value4)+abs(t->value5);
 
-	if(randA_1(10)<rune_)
+	if(rune_)
 	{
 		t->name2.name = "룬이 새겨진 ";
 		t->name2.name_type = true;		

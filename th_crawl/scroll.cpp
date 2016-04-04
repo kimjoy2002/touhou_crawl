@@ -45,8 +45,8 @@ const char *scroll_iden_string[SCT_MAX]=
 	"저주해제의 ",
 	"순간이동의 ",
 	"지형탐지의 ",
-	"무기명중강화의 ",
-	"무기공격강화의 ",
+	"무기강화의 ",
+	"무기강화의 ",
 	"방어구강화의 ",
 	"안개의 ",
 	"저주탐지의 ",
@@ -78,8 +78,8 @@ scroll_type goodbadscroll(int good_bad)
 {
 	if(good_bad==2)
 	{
-		scroll_type list_[6] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1, SCT_ENCHANT_WEAPON_2, SCT_ENCHANT_ARMOUR, SCT_FOG, SCT_SOUL_SHOT};
-		return list_[randA(5)];
+		scroll_type list_[5] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1/*SCT_ENCHANT_WEAPON_2*/, SCT_ENCHANT_ARMOUR, SCT_FOG, SCT_SOUL_SHOT};
+		return list_[randA(4)];
 	}
 	else if(good_bad==3)
 	{
@@ -153,9 +153,9 @@ void readscroll(scroll_type kind)
 		return;
 	case SCT_IDENTIFY:
 		ReleaseMutex(mutx);
+		iden_list.scroll_list[kind].iden = 3;
 		if(identity_scroll())
 		{
-			iden_list.scroll_list[kind].iden = 3;
 		}
 		else if(iden_list.scroll_list[kind].iden != 3)
 			iden_list.scroll_list[kind].iden =  2;
@@ -166,6 +166,7 @@ void readscroll(scroll_type kind)
 		iden_list.scroll_list[kind].iden = 3;
 		return;
 	case SCT_CURSE_WEAPON:		
+		iden_list.scroll_list[kind].iden = 3;
 		if(curse_weapon_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -174,6 +175,7 @@ void readscroll(scroll_type kind)
 			iden_list.scroll_list[kind].iden =  1;
 		return;
 	case SCT_CURSE_ARMOUR:		
+		iden_list.scroll_list[kind].iden = 3;
 		if(curse_armour_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -182,6 +184,7 @@ void readscroll(scroll_type kind)
 			iden_list.scroll_list[kind].iden =  1;
 		return;
 	case SCT_REMOVE_CURSE:
+		iden_list.scroll_list[kind].iden = 3;
 		if(remove_curse_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -192,13 +195,14 @@ void readscroll(scroll_type kind)
 	case SCT_BLINK:
 		ReleaseMutex(mutx);
 		blink_scroll();
-		WaitForSingleObject(mutx, INFINITE);
 		iden_list.scroll_list[kind].iden = 3;
+		WaitForSingleObject(mutx, INFINITE);
 		return;
 	case SCT_MAPPING:
 		//죽림에서는 발동되지않는다.
 		return;
 	case SCT_ENCHANT_WEAPON_1:
+		iden_list.scroll_list[kind].iden = 3;
 		if(enchant_weapon_1_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -207,6 +211,7 @@ void readscroll(scroll_type kind)
 			iden_list.scroll_list[kind].iden =  1;
 		return;
 	case SCT_ENCHANT_WEAPON_2:
+		iden_list.scroll_list[kind].iden = 3;
 		if(enchant_weapon_2_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -216,6 +221,7 @@ void readscroll(scroll_type kind)
 		return;
 	case SCT_ENCHANT_ARMOUR:
 		ReleaseMutex(mutx);
+		iden_list.scroll_list[kind].iden = 3;
 		if(enchant_armour_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -233,6 +239,7 @@ void readscroll(scroll_type kind)
 		iden_list.scroll_list[kind].iden = 3;
 		return;
 	case SCT_CURSE_JEWELRY:
+		iden_list.scroll_list[kind].iden = 3;
 		if(curse_jewelry_scroll())
 		{
 			iden_list.scroll_list[kind].iden = 3;
@@ -245,6 +252,7 @@ void readscroll(scroll_type kind)
 		iden_list.scroll_list[kind].iden = 3;
 		return;
 	case SCT_SOUL_SHOT://추가
+		iden_list.scroll_list[kind].iden = 3;
 		if(you.power >= 100)
 		{
 			ReleaseMutex(mutx);
@@ -504,7 +512,7 @@ bool enchant_weapon_1_scroll()
 			printlog("장착하고 있던 ",false,false,false,CL_good);	
 			printlog(before_name,false,false,false,CL_good);	
 			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_good);
-			printlog("초록색으로 빛났다.",true,false,false,CL_good);
+			printlog("빨강색으로 빛났다.",true,false,false,CL_good);
 			you.equipment[ET_WEAPON]->curse = false;
 			you.equipment[ET_WEAPON]->identify_curse = true;
 			return true;

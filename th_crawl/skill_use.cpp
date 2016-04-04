@@ -1510,11 +1510,11 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 						{
 							if(it->curse && it->identify_curse)
 							{
-								if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) && (it->value3 < 0 || it->value4 < 0))
+								if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) && (it->value4 < 0))
 								{
-									int value3_ = it->value3, value4_ = it->value4;
-									if(value3_<0)
-										it->Enchant(ET_WEAPON, value3_*-2, 0);
+									int value4_ = it->value4;
+									//if(value3_<0)
+									//	it->Enchant(ET_WEAPON, value3_*-2, 0);
 									if(value4_<0)
 										it->Enchant(ET_WEAPON,0, value4_*-2);
 									printlog("히나는 당신의 무기의 액땜을 해주었다.",true,false,false,CL_hina);

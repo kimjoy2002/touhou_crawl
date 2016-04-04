@@ -34,9 +34,9 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	
 	
 	{2,0,7,70,1}, //초반 잘나오는 좋은 물약들
-	{3,0,7,60,1}, //초반 잘나오는 좋은 두루마리들
+	{3,0,7,80,1}, //초반 잘나오는 좋은 두루마리들
 	{4,0,7,15,1}, //초반 잘나오는 나쁜 물약들
-	{5,0,7,15,1}, //초반 잘나오는 나쁜 두루마리들
+	//{5,0,7,15,1}, //초반 잘나오는 나쁜 두루마리들
 	{6,0,7,80,1}, //초반용 무기
 	{7,0,7,20,1}, //초반용 방어구
 	{8,0,7,15,1}, //초반용 좋은 반지, 아뮬렛들
@@ -52,9 +52,9 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{25,2,SCARLET_LEVEL_LAST_LEVEL,3,1}, //책
 	
 	{13,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 물약들
-	{14,5,SCARLET_LEVEL_LAST_LEVEL,60,1}, //중반 잘나오는 좋은 두루마리들
+	{14,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 두루마리들
 	{15,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반 잘나오는 나쁜 물약들
-	{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반 잘나오는 나쁜 두루마리들
+	//{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반 잘나오는 나쁜 두루마리들
 	{17,5,SCARLET_LEVEL_LAST_LEVEL,80,1}, //중반용 무기들(가끔 저주)
 	{18,5,SCARLET_LEVEL_LAST_LEVEL,20,1}, //중반용 방어구
 	{19,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반용 좋은 반지, 아뮬렛들
@@ -140,7 +140,7 @@ void create_id_to_item(int id, int level)
 		index.push_back(makeitem(ITM_SCROLL,-1,&temp));
 		break;
 	case 6: //흔한 무기
-		index.push_back(makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(4)?0:(randA(3)?1:-1),&temp));
+		index.push_back(makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(6)?0:(randA(3)?1:-1),&temp));
 		break;
 	case 7://흔한 방어구
 		index.push_back(makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1))),randA(4)?1:(randA(3)?1:-1),&temp));

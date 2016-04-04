@@ -285,22 +285,19 @@ void SetTribe(tribe_type select_)
 		you.StatUpDown(1,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		you.SetProperty(TPT_SIZE,-1);
-
 		break;
 	case TRI_CROWTENGU:
-		you.SetProperty(TPT_HP,1);
 		you.StatUpDown(-1,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		you.SetProperty(TPT_FLY,1);
 		break;
 	case TRI_WOLFTENGU:
-		you.SetProperty(TPT_HP,2);
+		you.SetProperty(TPT_HP,1);
 		you.StatUpDown(2,STAT_STR);
 		you.StatUpDown(-1,STAT_INT);
 		you.StatUpDown(-1,STAT_DEX);
 		break;
 	case TRI_KAPPA:
-		you.SetProperty(TPT_HP,1);
 		you.SetProperty(TPT_SWIM,1);
 		break;
 	case TRI_CHEUKUMOGAMI:

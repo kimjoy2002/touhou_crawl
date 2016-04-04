@@ -2469,7 +2469,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 				printlog(" - ",false,false,false,(*t).item_color());
 				printlog((*t).GetName(),true,false,false,(*t).item_color());
 			}
-			t->pick();
+			it_temp->pick();
 			final_item = t->id;
 			final_num = t->num;
 			ReleaseMutex(mutx);

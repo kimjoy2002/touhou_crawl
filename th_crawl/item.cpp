@@ -571,10 +571,10 @@ bool item::isiden()
 }
 bool item::isautopick()
 {
-	if(throw_item)
-		return true;
 	if(drop)
 		return false;
+	if(throw_item)
+		return true;
 	switch(type)
 	{
 	case ITM_POTION:

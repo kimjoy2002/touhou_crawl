@@ -596,12 +596,13 @@ int SkillMana(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_SATORI_1:
+	case SKL_SATORI_2:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
 	case SKL_KANAKO_1:
 	case SKL_LEVITATION:
-	case SKL_SATORI_1:
 	case SKL_YUYUKO_1:
 	case SKL_YUKARI_1:
 	case SKL_SWAKO_JUMP:
@@ -618,7 +619,6 @@ int SkillMana(skill_list skill)
 		return 4;
 	case SKL_EIRIN_2:
 	case SKL_MINORIKO_2:
-	case SKL_SATORI_2:
 	case SKL_YUYUKO_3:
 		return 5;
 	case SKL_KANAKO_3:
@@ -654,11 +654,15 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-(20+randA(10)),true);
 		return true;	
 	case SKL_SATORI_1:
-	case SKL_BYAKUREN_1:
+		if(!check_)
+			you.PietyUpDown(-1);
 	case SKL_SIZUHA_1:
 		if(!check_)
 			you.PietyUpDown(-2);
-		return true;		
+		return true;	
+	case SKL_BYAKUREN_1:
+		if(!check_)
+			you.PietyUpDown(-3);	
 	case SKL_MINORIKO_1:
 		if(check_ && you.power<100)
 		{
@@ -672,7 +676,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		return true;
 	case SKL_KANAKO_1:
 		if(!check_)
-			you.PietyUpDown(-3);
+			you.PietyUpDown(-2);
 		return true;
 	case SKL_KANAKO_2:
 	case SKL_BYAKUREN_2:

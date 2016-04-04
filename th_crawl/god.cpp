@@ -2066,7 +2066,7 @@ void God_show()
 		}
 		if(level_ >= 1 && !you.punish[GT_SATORI])
 		{ 
-			printsub("당신은 상대의 트라우마를 끌어낼 수 있다.                    (영력, 신앙)",true,CL_danger);
+			printsub("당신은 상대의 트라우마를 끌어낼 수 있다.                          (신앙)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.punish[GT_SATORI])
@@ -2081,7 +2081,7 @@ void God_show()
 		}
 		if(level_ >= 4 && !you.punish[GT_SATORI])
 		{ 
-			printsub("적 한명의 생각을 완벽하게 독파할 수 있다.                   (턴수, 신앙)",true,CL_danger);
+			printsub("적 한명의 생각을 완벽하게 독파할 수 있다.                   (시간, 신앙)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.punish[GT_SATORI])

@@ -706,7 +706,15 @@ bool players::OpenDoor(const coord_def &c)
 		return 0;
 	}
 }
-
+void players::CalcuHP()
+{
+	int fight_=skill[SKT_FIGHT].level;
+	int level_=level;
+	int aptit_=10+GetProperty(TPT_HP);
+	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(11*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
+	hp = hp*next_hp_/max_hp;
+	max_hp = next_hp_;
+}
 int players::GetThrowDelay(item_type type_)
 {
 	return 10;
@@ -1361,8 +1369,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		}
 		if(skill_ == SKT_FIGHT)
 		{
-			hp += level/5+1;
-			max_hp += level/5+1;
+			CalcuHP();
 		}
 		else if(skill_ == SKT_DODGE)
 		{
@@ -2082,8 +2089,7 @@ void players::LevelUp()
 			}
 		}
 	}
-	max_hp += 4;
-	hp += 4;
+	CalcuHP();
 	max_mp += 1;
 	mp += 1;
 	if(level % 3 == 0)
@@ -2095,11 +2101,6 @@ void players::LevelUp()
 
 
 	remainSpellPoiont++;
-	if(level%5==0)
-	{
-		max_hp += skill[SKT_FIGHT].level;
-		hp += skill[SKT_FIGHT].level;
-	}
 	LevelUpTribe(level);
 
 	{

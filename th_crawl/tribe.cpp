@@ -67,6 +67,26 @@ string tribe_property::GetName()
 		return "유령다리";
 	case TPT_CHEUKUMOGAMI:
 		return "츠쿠모가미";
+	case TPT_HP:
+		{
+			switch(value)
+			{
+			case 3:
+				return "체력적성(+30%)";
+			case 2:
+				return "체력적성(+20%)";
+			case 1:
+				return "체력적성(+10%)";
+			case -1:
+				return "체력적성(-10%)";
+			case -2:
+				return "체력적성(-20%)";
+			case -3:
+				return "체력적성(-30%)";
+			default:
+				return "버그사이즈";
+			}
+		}
 	}
 	return "버그특성";
 }
@@ -106,6 +126,26 @@ string tribe_property::GetInfor()
 		return "당신의 망령이기에 다리가 없다.";
 	case TPT_CHEUKUMOGAMI:
 		return "당신의 본체는 도구이다.(미구현)";
+	case TPT_HP:
+		{
+			switch(value)
+			{
+			case 3:
+				return "당신은 매우 튼튼하다.(체력 +30%)";
+			case 2:
+				return "당신은 꽤 튼튼하다.(체력 +20%)";
+			case 1:
+				return "당신은 튼튼하다.(체력 +10%)";
+			case -1:
+				return "당신은 연약하다.(체력 -10%)";
+			case -2:
+				return "당신은 꽤 연약하다.(체력 -20%)";
+			case -3:
+				return "당신은 매우 연약하다.(체력 -30%)";
+			default:
+				return "버그사이즈";
+			}
+		}
 	}
 	return "이 특성은 버그다.";
 }
@@ -145,6 +185,8 @@ string tribe_property::GetDetail()
 		return "다리방어구를 낄 수 없다.";
 	case TPT_CHEUKUMOGAMI:
 		return "당신의 본체인 도구는 버릴 수 없다.\n당신의 본체를 손에 들고 있으면 그 장비와 연관된 스킬이 5증가하는 보너스를 받는다.";
+	case TPT_HP:
+		return "당신은 유전적으로 체력이 결정되어있다.\n최종 체력치가 수치만큼 곱해진다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -174,7 +216,7 @@ void tribe_property::gain(bool gain_)
 			you.Ability(SKL_LEVITATION,false,value<=0,value>0?(temp>0?temp+1:0):0);
 			if(value<=0 && temp == 1 && you.s_levitation)
 			{
-				you.s_levitation=0; 
+				you.s_levitation=0;
 			}
 			return;
 		}
@@ -230,16 +272,15 @@ void SetTribe(tribe_type select_)
 	switch(select_)
 	{
 	case TRI_HUMAN:
-
 		break;
 	case TRI_WIZARD:
-		you.max_hp-=2;
+		you.SetProperty(TPT_HP,-2);
 		you.max_mp+=1;
 		you.StatUpDown(-2,STAT_STR);
 		you.StatUpDown(2,STAT_INT);
 		break;
 	case TRI_FAIRY:
-		you.max_hp-=2;
+		you.SetProperty(TPT_HP,-3);
 		you.StatUpDown(-2,STAT_STR);
 		you.StatUpDown(1,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
@@ -247,30 +288,30 @@ void SetTribe(tribe_type select_)
 
 		break;
 	case TRI_CROWTENGU:
-		you.max_hp+=1;
+		you.SetProperty(TPT_HP,1);
 		you.StatUpDown(-1,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		you.SetProperty(TPT_FLY,1);
 		break;
 	case TRI_WOLFTENGU:
-		you.max_hp+=2;
+		you.SetProperty(TPT_HP,2);
 		you.StatUpDown(2,STAT_STR);
 		you.StatUpDown(-1,STAT_INT);
 		you.StatUpDown(-1,STAT_DEX);
 		break;
 	case TRI_KAPPA:
-		you.max_hp+=1;
+		you.SetProperty(TPT_HP,1);
 		you.SetProperty(TPT_SWIM,1);
 		break;
 	case TRI_CHEUKUMOGAMI:
-		you.max_hp-=1;
+		you.SetProperty(TPT_HP,-1);
 		you.StatUpDown(-1,STAT_STR);
 		you.StatUpDown(1,STAT_DEX);
 		you.SetProperty(TPT_POISON_RESIST,1);
 		you.SetProperty(TPT_CHEUKUMOGAMI,1);
 		break;
 	case TRI_ONI:
-		you.max_hp+=3;
+		you.SetProperty(TPT_HP,3);
 		you.StatUpDown(3,STAT_STR);
 		you.StatUpDown(-2,STAT_INT);
 		you.StatUpDown(-1,STAT_DEX);
@@ -310,11 +351,6 @@ void LevelUpTribe(int level_)
 		}
 		you.max_mp++;
 		you.mp++;
-		if(level_%3 != 0)
-		{
-			you.max_hp--;
-			you.hp--;
-		}
 		break;
 	case TRI_FAIRY:
 		if(level_%5 == 0)
@@ -334,21 +370,11 @@ void LevelUpTribe(int level_)
 		{
 			(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX));
 		}
-		if(level_%3 == 0)
-		{
-			you.max_hp++;
-			you.hp++;
-		}
 		break;
 	case TRI_WOLFTENGU:
 		if(level_%4 == 0)
 		{
 			you.StatUpDown(1,STAT_STR);
-		}
-		if(level_%2 == 0)
-		{
-			you.max_hp++;
-			you.hp++;
 		}
 		if(level_%3 == 0)
 		{
@@ -361,26 +387,14 @@ void LevelUpTribe(int level_)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
 		}
-		if(level_%3 == 0)
-		{
-			you.max_hp++;
-			you.hp++;
-		}
 		break;
 	case TRI_CHEUKUMOGAMI:
-		if(level_%3 == 0)
-		{
-			you.max_hp--;
-			you.hp--;
-		}
 		break;
 	case TRI_ONI:
 		if(level_%3 == 0)
 		{
 			you.StatUpDown(1,STAT_STR);
 		}
-		you.max_hp++;
-		you.hp++;
 		if(level_%2 == 0)
 		{
 			you.max_mp--;

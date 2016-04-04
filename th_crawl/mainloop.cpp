@@ -492,6 +492,7 @@ void charter_selete()
 		SetJob(you.job,you.char_name.name);
 		TouhouPlayerble(you.char_name.name, false);
 		/*Test_char_init(item_, bonus);*/
+		you.CalcuHP();
 		Initialize();
 	}
 	else if(tutorial)
@@ -501,6 +502,7 @@ void charter_selete()
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
+		you.CalcuHP();
 		env[current_level].EnterMap(0,deque<monster*>());	
 		printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);

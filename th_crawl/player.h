@@ -148,7 +148,7 @@ public:
 
 	stack<coord_def> will_move; //움직이는 경로
 
-	bool auto_pickup;
+	int auto_pickup;
 
 	interupt_type inter;
 
@@ -473,7 +473,7 @@ void Experience_Show();
 //bool Eat_Power();
 void run_spell();
 void shout();
-void auto_pick_onoff();
+void auto_pick_onoff(bool auto_);
 
 void wiz_mode();
 

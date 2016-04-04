@@ -1054,8 +1054,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
 						printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
-						if(!isView() && env[current_level].isInSight(position) && !you.auto_pickup)
-							auto_pick_onoff();
+						if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
+							auto_pick_onoff(true);
 					}
 				}
 
@@ -1503,8 +1503,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		else if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
 			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
-			if(!isView() && env[current_level].isInSight(position) && !you.auto_pickup)
-				auto_pick_onoff();
+			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
+				auto_pick_onoff(true);
 		}
 	}
 
@@ -1797,8 +1797,8 @@ int monster::action(int delay_)
 					else
 					{
 						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_to(true),"투명이 풀리면서 모습을 드러냈다.");
-						if(!you.auto_pickup)
-							auto_pick_onoff();
+						if(you.auto_pickup==0)
+							auto_pick_onoff(true);
 					}
 				}
 			}
@@ -2417,8 +2417,8 @@ bool monster::SetInvisible(int invisible_)
 		else
 		{
 			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"투명해지면서 사라졌다.");
-			if(you.auto_pickup)
-				auto_pick_onoff();
+			if(you.auto_pickup>0)
+				auto_pick_onoff(true);
 		}
 	}
 	return true;

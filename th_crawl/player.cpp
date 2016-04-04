@@ -61,7 +61,7 @@ hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_re
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
-final_item(0), final_num(0), auto_pickup(true), inter(IT_NONE), 
+final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
@@ -170,7 +170,7 @@ void players::SaveDatas(FILE *fp)
 
 	//SaveData<int>(fp, hunger);
 	//SaveData<int>(fp, hunger_per_turn);
-	SaveData<bool>(fp, auto_pickup);
+	SaveData<int>(fp, auto_pickup);
 	SaveData<interupt_type>(fp, inter);
 	SaveData<int>(fp, s_poison);
 	SaveData<int>(fp, s_tele);
@@ -356,7 +356,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp,explore_map);
 	//LoadData<int>(fp, hunger);
 	//LoadData<int>(fp, hunger_per_turn);
-	LoadData<bool>(fp, auto_pickup);
+	LoadData<int>(fp, auto_pickup);
 	LoadData<interupt_type>(fp, inter);
 	LoadData<int>(fp, s_poison);
 	LoadData<int>(fp, s_tele);
@@ -1223,6 +1223,8 @@ bool players::ResistUpDown(int value_, resist_type resist_)
 		break;
 	case RST_INVISIBLE:
 		invisible_view += value_;
+		if(you.auto_pickup==0)
+				auto_pick_onoff(true);
 		break;
 	case RST_POWER:
 		power_keep += value_;

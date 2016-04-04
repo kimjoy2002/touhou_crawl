@@ -675,15 +675,15 @@ bool players::damage(attack_infor &a, bool perfect_)
 		}
 		if(a.order)
 		{
-			if(!a.order->isView() && you.auto_pickup)
-				auto_pick_onoff();
+			if(!a.order->isView() && you.auto_pickup>0)
+				auto_pick_onoff(true);
 		}
 		return false;
 	}
 	if(a.order)
 	{
-		if(!a.order->isView() && you.auto_pickup)
-			auto_pick_onoff();
+		if(!a.order->isView() && you.auto_pickup>0)
+			auto_pick_onoff(true);
 	}
 	return true;
 }

@@ -715,7 +715,7 @@ void MainLoop()
 			wiz_mode();
 			break;
 		case 0x8B:
-			auto_pick_onoff();
+			auto_pick_onoff(false);
 			break;
 		case '?'://µµ¿ò¸»
 			Help_Show();

@@ -180,7 +180,7 @@ void auto_Move()
 	while(1)
 	{
 		bool back_ = false;
-		if(you.auto_pickup && !you.s_levitation){
+		if(you.auto_pickup>0 && !you.s_levitation){
 			vector<item*> close_item_vector_;
 			env[current_level].close_item(close_item_vector_);
 			for(int i=0;i < close_item_vector_.size(); i++)
@@ -328,7 +328,7 @@ bool stack_move(bool auto_)
 		}
 		else if(item_interupt_<-1){
 			//오토무빙일 경우 경로를 종료.
-			if(auto_ && you.auto_pickup){
+			if(auto_ && you.auto_pickup>0){
 				while(!you.will_move.empty()){you.will_move.pop();}
 				return true;
 			}
@@ -543,7 +543,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 }
 bool Auto_Pick_Up(list<item>::iterator it)
 {
-	if(!you.auto_pickup)
+	if(!(you.auto_pickup>0))
 		return false;
 	if(!it->isautopick())
 		return false;
@@ -2150,16 +2150,16 @@ void shout()
 	}
 }
 
-void auto_pick_onoff()
+void auto_pick_onoff(bool auto_)
 {
-	if(!you.auto_pickup)
+	if((you.auto_pickup==0) || (!auto_ && you.auto_pickup==-1))
 	{
 		printlog("자동 줍기를 활성화했다.",true,false,false,CL_normal);
-		you.auto_pickup = true;
+		you.auto_pickup = 1;
 	}
 	else
 	{
 		printlog("자동 줍기를 해제했다.",true,false,false,CL_small_danger);
-		you.auto_pickup = false;
+		you.auto_pickup = auto_?0:-1;
 	}
 }

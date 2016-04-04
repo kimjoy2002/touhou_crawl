@@ -1135,7 +1135,7 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	return return_;
 }
 
-int monster::move(short_move x_mov, short_move y_mov)
+int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 {	
 	if(!x_mov && !y_mov)
 		return 0;
@@ -1163,8 +1163,10 @@ int monster::move(short_move x_mov, short_move y_mov)
 				return 0;
 		}
 
-		if(you.position.x  == position.x+x_mov && you.position.y  == position.y+y_mov)
+		if((you.position.x  == position.x+x_mov && you.position.y  == position.y+y_mov))
 		{
+			if(only_move)
+				return 0;
 			if(you.s_timestep)
 				return 0;
 			if(isUserAlly())
@@ -1194,8 +1196,10 @@ int monster::move(short_move x_mov, short_move y_mov)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
-				if((*it).isEnemyMonster(this) || s_confuse) //利老锭
+				if(((*it).isEnemyMonster(this) || s_confuse)) //利老锭
 				{
+					if(only_move)
+						return 0;
 					if(flag & M_FLAG_NO_ATK)
 						return 1;
 					int num_=0;
@@ -1254,9 +1258,9 @@ int monster::move(short_move x_mov, short_move y_mov)
 		return 0;
 	}
 }
-int monster::move(const coord_def &c)
+int monster::move(const coord_def &c, bool only_move)
 {
-	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)));
+	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)), only_move);
 }
 bool monster::offsetmove(const coord_def &c)
 {		
@@ -1303,7 +1307,7 @@ bool monster::OpenDoor(const coord_def &c)
 
 int monster::longmove()
 {
-	if(move(inttodirec(direction,position.x,position.y)))
+	if(move(inttodirec(direction,position.x,position.y), false))
 	{
 		if(randA(30)==1)
 			direction = rand_int(0,7);
@@ -1347,7 +1351,7 @@ int monster::longmove()
 	//}
 	return true;
 }
-int monster::atkmove(int is_sight)
+int monster::atkmove(int is_sight, bool only_move)
 {
 	int move_ = 0;
 	
@@ -1357,7 +1361,7 @@ int monster::atkmove(int is_sight)
 			target_pos = target->position;
 	}
 
-	if(!s_confuse && !s_mute && !s_fear)
+	if(!only_move && !s_confuse && !s_mute && !s_fear)
 	{
 		if(target && target->position == target_pos)
 		{
@@ -1397,14 +1401,14 @@ int monster::atkmove(int is_sight)
 			{
 				if(sm_info.parent_map_id == it->map_id)
 				{
-					move_ = MoveToPos(it->position);
+					move_ = MoveToPos(it->position, only_move);
 					break;
 				}
 			}
 		}
 		else if(sm_info.parent_map_id == -2)
 		{
-			move_ = MoveToPos(you.position);
+			move_ = MoveToPos(you.position, only_move);
 		}
 
 	}
@@ -1421,12 +1425,12 @@ int monster::atkmove(int is_sight)
 		}
 		coord_def c = target_pos-position;
 		if(!s_fear)
-			move_ = MoveToPos(target_pos);
+			move_ = MoveToPos(target_pos, only_move);
 		if(s_fear)
 		{
 			int x_ =  (target_pos.x-position.x)>0?-1:(target_pos.x-position.x)<0?1:0;
 			int y_ =  (target_pos.y-position.y)>0?-1:(target_pos.y-position.y)<0?1:0;
-			move_ = MoveToPos(position+coord_def(x_,y_));
+			move_ = MoveToPos(position+coord_def(x_,y_), only_move);
 			if(!move_)
 			{
 				s_fear = 0;
@@ -1466,13 +1470,13 @@ bool monster::isHaveSpell(spell_list sp)
 	}
 	return false;
 }
-int monster::MoveToPos(coord_def pos_)
+int monster::MoveToPos(coord_def pos_, bool only_move)
 {
 	int move_ = 0;
 	close_beam_iterator it(position,pos_);
 	for(;!it.end() && !move_;it++)
 	{
-		move_ = move((*it));
+		move_ = move((*it), only_move);
 	}
 	return move_;
 }
@@ -1970,7 +1974,7 @@ int monster::action(int delay_)
 					{
 						if(sm_info.parent_map_id == it->map_id)
 						{
-							MoveToPos(it->position);
+							MoveToPos(it->position, false);
 							break;
 						}
 					}
@@ -1981,7 +1985,7 @@ int monster::action(int delay_)
 					}
 				}
 				else
-					MoveToPos(you.position);				
+					MoveToPos(you.position, false);				
 				sightcheck(is_sight);
 				break;
 			}

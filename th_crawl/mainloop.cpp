@@ -507,7 +507,7 @@ void charter_selete()
 		printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
-		you.resetLOS(false);
+		//you.resetLOS(false);
 	}
 	changedisplay(DT_GAME);
 	saveexit = true;
@@ -519,7 +519,7 @@ void Initialize()
 	env[current_level].EnterMap(0,deque<monster*>());
 
 	printlog("환상향에 온걸 환영한다!",true,false,false,CL_normal);
-	you.resetLOS(false);
+	//you.resetLOS(false);
 
 }
 

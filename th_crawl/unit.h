@@ -77,9 +77,9 @@ public:
 	virtual void SetY(int y_){position.y = y_;};
 	virtual void SetXY(int x_, int y_){position.set(x_,y_);};
 	virtual void SetXY(coord_def pos_){SetXY(pos_.x,pos_.y);};
-	virtual int move(short_move x_mov, short_move y_mov)=0;
+	//virtual int move(short_move x_mov, short_move y_mov)=0;
 	//특정위치로 이동하기
-	virtual int move(const coord_def &c)=0;
+	//virtual int move(const coord_def &c)=0;
 	virtual bool offsetmove(const coord_def &c) = 0; //offset에 따라 위화감없이 맵을 이동한다. 리턴은 true는 성공 false는 맵을 벗어남
 	virtual bool isLive()=0;
 	virtual bool isFly()=0;

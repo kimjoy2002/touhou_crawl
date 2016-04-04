@@ -250,6 +250,16 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			temp_unit->Teleport();
 
 	}
+	
+	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+	{
+		if(it->isLive() && env[current_level].isInSight(it->position))
+		{
+			it->atkmove(true,true);
+			it->atkmove(true,true);
+		}
+	}
+
 
 	if(!dq.empty())
 	{
@@ -273,6 +283,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	}
 	if(floor && !tutorial)
 		SaveFile();
+	you.resetLOS(false);
 }
 
 

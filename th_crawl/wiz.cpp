@@ -60,7 +60,7 @@ void wiz_mode()
 		{
 			deque<monster*> dq;
 			env[current_level+1].EnterMap(0,dq);
-			you.resetLOS(false);
+			//you.resetLOS(false);
 		}
 		break;
 	case '<': //이전층 이동	
@@ -68,7 +68,7 @@ void wiz_mode()
 		{
 			deque<monster*> dq;
 			env[current_level-1].EnterMap(0,dq);
-			you.resetLOS(false);
+			//you.resetLOS(false);
 		}
 		break;
 	case 'G': //던전이동	
@@ -129,7 +129,7 @@ void wiz_mode()
 		}
 		env[next_].EnterMap(0,dq);
 		printlog("계단을 내려왔다.",true,false,false,CL_normal);
-		you.resetLOS(false);
+		//you.resetLOS(false);
 		break;
 		}
 	case 'b':

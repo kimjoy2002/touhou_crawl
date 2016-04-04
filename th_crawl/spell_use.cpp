@@ -1497,7 +1497,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(5,9+pow/20),5*(9+pow/20),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("스파크",false));
+		beam_infor temp_infor(randC(5,9+pow/20),5*(9+pow/20),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
 		ThrowSector(rand_int(10,15),beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;

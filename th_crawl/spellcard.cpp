@@ -318,29 +318,32 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			if(CheckThrowPath(you.position,target,beam)){
 				beam_infor temp_infor(randC(3,3+power/12),3*(3+power/12),99,&you,you.GetParentType(),SpellcardLength(kind),8,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("바람",true));
 				ThrowSector(25,beam,temp_infor,SpellcardSector(SPC_V_AIR),[&](coord_def c_){
-					if(unit* unit_ = env[current_level].isMonsterPos(c_.x,c_.y))
+					if(unit* unit_ = env[current_level].isMonsterPos(c_.x,c_.y) )
 					{
-						coord_def push_(c_-you.position+c_);
-						beam_iterator beam(c_,push_);
+						if( you.isSightnonblocked(c_))
+						{
+							coord_def push_(c_-you.position+c_);
+							beam_iterator beam(c_,push_);
 
-						int knockback = 1+randA(3);
-						int real_knock_ = 0;
-						while(knockback)
-						{
-							if(env[current_level].isMove(coord_def(beam->x,beam->y),unit_->isFly(),unit_->isSwim(),false))
+							int knockback = 1+randA(3);
+							int real_knock_ = 0;
+							while(knockback)
 							{
-								if(!env[current_level].isMonsterPos(beam->x,beam->y))
+								if(env[current_level].isMove(coord_def(beam->x,beam->y),unit_->isFly(),unit_->isSwim(),false))
 								{
-									unit_->SetXY(coord_def(beam->x,beam->y));
-									real_knock_++;
+									if(!env[current_level].isMonsterPos(beam->x,beam->y))
+									{
+										unit_->SetXY(coord_def(beam->x,beam->y));
+										real_knock_++;
+									}
 								}
+								beam++;
+								knockback--;
 							}
-							beam++;
-							knockback--;
-						}
-						if(real_knock_)
-						{
-							printarray(false,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"바람에 밀려나갔다.");
+							if(real_knock_)
+							{
+								printarray(false,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"바람에 밀려나갔다.");
+							}
 						}
 					}
 				},true);

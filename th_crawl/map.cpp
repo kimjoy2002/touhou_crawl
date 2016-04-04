@@ -255,6 +255,11 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	{ //Å×½ºÆ®
 		vector_.push_back(10+floor);	
 	}
+	//if(floor==0)
+	//{
+	//	for(int i=0;i<5;i++)
+	//		vector_.push_back(100+MAX_SUB_DUNGEON+GT_SATORI);
+	//}
 	return;
 }
 

@@ -526,7 +526,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 					if(infor_.type1 == BMT_NORMAL || infor_.type2 == BMT_WALL)
 						env[current_level].ClearEffect();
 				}	
-				if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos))
+				if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos) && you.isSightnonblocked(it->pos))
 				{
 					path = 10*GetPosToDirec(beam.start_pos(),it->pos);
 					if(graphic_type)
@@ -679,7 +679,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 		int temp_len_ = 1;
 		for(auto it = vec_.begin();it!=vec_.end();it++)
 		{
-			if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos))
+			if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos) && you.isSightnonblocked(it->pos))
 			{
 				if(set)
 					env[current_level].dgtile[it->pos.x][it->pos.y].flag = env[current_level].dgtile[it->pos.x][it->pos.y].flag | FLAG_LIGHT;

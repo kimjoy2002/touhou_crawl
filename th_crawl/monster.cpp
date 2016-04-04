@@ -1525,6 +1525,9 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			if(you.god_value[0] == map_id && you.god_value[1] == current_level)
 			{
+				char temp[200];
+				sprintf_s(temp,200,"%s%sÁ×¾ú´Ù.",name.name.c_str(),name.name_do(true));
+				AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
 				you.god_value[0] = 0;
 				you.god_value[1] = 0;
 			}
@@ -1579,9 +1582,9 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		sprintf_s(temp,200,"³×ÀÓµå %s%s Á×¿´´Ù.",name.name.c_str(),name.name_to());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
+	hp = 0;
 	if(!remove_)
 		GodAccpect_KillMonster(this,reason_);
-	hp = 0;
 	return true;
 }
 int monster::action(int delay_)

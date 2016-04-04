@@ -715,6 +715,7 @@ void players::CalcuHP()
 	int aptit_=10+GetProperty(TPT_HP);
 	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(11*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
 	hp = hp*next_hp_/max_hp;
+	prev_hp = hp;
 	max_hp = next_hp_;
 }
 int players::GetThrowDelay(item_type type_)

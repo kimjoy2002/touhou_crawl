@@ -17,6 +17,7 @@
 #include "floor.h"
 #include "tensi.h"
 #include "swako.h"
+#include "note.h"
 
 
 extern HANDLE mutx;
@@ -891,6 +892,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
 					if(mon2_)
 					{
+
 						mon2_->id = MON_ENSLAVE_GHOST;
 						mon2_->name.name += "의 영혼";
 						mon2_->name.name_type = true;
@@ -906,6 +908,10 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						
 						//그러나 레벨은 내려간다.
 						mon2_->LevelUpdown(-2);
+
+						char temp[200];
+						sprintf_s(temp,200,"%s%s구속했다.",mon_->name.name.c_str(),mon_->name.name_to(true));
+						AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
 					}
 				}
 			}

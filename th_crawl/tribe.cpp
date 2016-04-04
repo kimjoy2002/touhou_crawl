@@ -172,9 +172,9 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 1:
-				return "로브 이외의 몸통 방어구를 입을 수 없다.";
+				return "로브 이외의 몸통 방어구를 입을 수 없다.\n또한 당신의 큰 사이즈는 또한 회피에 패널티를 준다.";
 			case -1:
-				return "로브 이외의 몸통 방어구를 입을 수 없다.";
+				return "로브 이외의 몸통 방어구를 입을 수 없다.\n그러나 당신의 작은 사이즈는 회피에 보너스를 준다.";
 			default:
 				return "로브 이외의 몸통 방어구를 못입긴 개뿔 버그다.\n제작자에게 신고하자.";
 			}
@@ -362,8 +362,6 @@ void LevelUpTribe(int level_)
 			you.max_mp++;
 			you.mp++;
 		}
-		you.max_hp--;
-		you.hp--;
 		break;
 	case TRI_CROWTENGU:
 		if(level_%5 == 0)

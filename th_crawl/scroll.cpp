@@ -76,12 +76,7 @@ bool skill_soul_shot(int power, unit* order, coord_def target);
 
 scroll_type goodbadscroll(int good_bad)
 {
-	if(good_bad==1)
-	{
-		scroll_type list_[4] = {SCT_TELEPORT, SCT_IDENTIFY, SCT_REMOVE_CURSE, SCT_DETECT_CURSE};
-		return list_[randA(3)];
-	}
-	else if(good_bad==2)
+	if(good_bad==2)
 	{
 		scroll_type list_[6] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1, SCT_ENCHANT_WEAPON_2, SCT_ENCHANT_ARMOUR, SCT_FOG, SCT_SOUL_SHOT};
 		return list_[randA(5)];
@@ -91,11 +86,16 @@ scroll_type goodbadscroll(int good_bad)
 		scroll_type list_[1] = {SCT_SILENCE};
 		return list_[randA(0)];
 	}
+	else //if(good_bad==1)
+	{
+		scroll_type list_[3] = {SCT_TELEPORT, SCT_IDENTIFY, SCT_REMOVE_CURSE/*SCT_DETECT_CURSE*/};
+		return list_[randA(2)];
+	}/*
 	else
 	{
 		scroll_type list_[4] = {SCT_NONE, SCT_CURSE_WEAPON, SCT_CURSE_ARMOUR, SCT_CURSE_JEWELRY};
 		return list_[randA(3)];
-	}
+	}*/
 
 
 }

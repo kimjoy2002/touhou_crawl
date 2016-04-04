@@ -686,7 +686,7 @@ void monster::CheckSightNewTarget()
 			}
 		}
 
-		if(prev_target_)
+		if(prev_target_ && isMonsterSight(prev_target_->position))
 			FoundTarget(prev_target_,30);
 	}
 }
@@ -1351,7 +1351,7 @@ int monster::atkmove(int is_sight)
 	
 	if(target || memory_time)
 	{
-		if(target && !target->isplayer())
+		if(target && !(target->isplayer()))
 			target_pos = target->position;
 	}
 
@@ -1410,12 +1410,12 @@ int monster::atkmove(int is_sight)
 	{
 		if(!target)
 		{
-			if(distan_coord(you.position,position)<=5)
-			{
-				target_pos = you.position;
-				if(memory_time<10)
-					memory_time = 10;
-			}
+			//if(distan_coord(you.position,position)<=5)
+			//{
+			//	target_pos = you.position;
+			//	if(memory_time<10)
+			//		memory_time = 10;
+			//}
 		}
 		coord_def c = target_pos-position;
 		if(!s_fear)
@@ -2748,7 +2748,7 @@ bool monster::isMonsterSight(coord_def c)
 			{
 				intercept = true;
 				break;
-			}
+			}		
 			it++;
 			length_--;
 		}

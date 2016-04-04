@@ -1471,7 +1471,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_SPELLCARD:
 	case IVT_CURSE_ENCHANT:
 		char temp[50];
-		sprintf_s(temp,50,"<인벤토리>  (아이템 갯수 %d / 51)", you.item_list.size()/*,you.item_weight,you.max_item_weight*/);
+		sprintf_s(temp,50,"<인벤토리>  (아이템 갯수 %d / 52)", you.item_list.size()/*,you.item_weight,you.max_item_weight*/);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;
 		break;

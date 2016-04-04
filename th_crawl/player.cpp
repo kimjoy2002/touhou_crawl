@@ -2427,7 +2427,23 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 			}
 		}
 	}
-	for(it = item_list.begin(); it != item_list.end() && num != 'Z';it++,num++)
+	//for(;num == 'Z';num++)
+	//{
+	//	bool check_ = false;
+	//	for(it = item_list.begin(); it != item_list.end() ;it++)
+	//	{
+	//		if((*it).id == num)
+	//		{
+	//			check_ = true;
+	//			break;
+	//		}
+	//	}
+	//	if(check_ == false)
+	//		break;
+	//	if(num=='z')
+	//		num = 'A'-1;
+	//}
+	for(it = item_list.begin(); it != item_list.end() && num != 'Z'+1;it++,num++)
 	{
 		if((*it).id != num)
 			break;

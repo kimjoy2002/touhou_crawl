@@ -405,6 +405,12 @@ bool GetGodAbility(int level, bool plus)
 	case GT_SHIZUHA:
 		switch(level)
 		{
+			case 0:
+				if(plus)
+					printlog("시즈하는 잠에서 깬 적들이 외치는 확률을 크게 줄여준다.",true,false,false,CL_autumn);
+				else
+					printlog("더 이상 시즈하는 적의 외침을 줄여주지 않는다.",true,false,false,CL_autumn);
+				break;
 			case 1:
 				if(plus)
 					printlog("당신은 은밀하게 움직일 수 있는 단풍의 발자취를 남긴다.",true,false,false,CL_autumn);
@@ -1916,6 +1922,11 @@ void God_show()
 		}
 		break;
 	case GT_SHIZUHA:
+		if(level_ >= 0 && !you.punish[GT_SHIZUHA])
+		{
+			printsub("시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.         (패시브)",true,CL_autumn);
+			printsub("",true,CL_normal);
+		}
 		if(level_ >= 1 && !you.punish[GT_SHIZUHA])
 		{
 			printsub("당신은 움직이거나 적을 죽였을때 단풍잎의 자취를 남긴다.         (패시브)",true,CL_autumn);

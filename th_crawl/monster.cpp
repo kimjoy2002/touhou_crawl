@@ -1962,7 +1962,10 @@ int monster::action(int delay_)
 				if(is_sight && you_detect())//시야 안에 있을때 스텔스 체크
 				{
 					FoundTarget(&you,30);
-					if(flag & M_FLAG_SPEAK && randA(1) && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
+					int percent_ = 1;
+					if(you.god == GT_SHIZUHA && !you.punish[GT_SHIZUHA] )
+						percent_ = 4;
+					if(flag & M_FLAG_SPEAK && randA(percent_)==0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 					{
 						if(char* c_ = Get_Speak(id,this,MST_FOUND)){
 							printlog(c_,true,false,false,CL_speak);

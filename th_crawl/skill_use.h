@@ -34,6 +34,8 @@ enum spell_list
 	SPL_DIAMOND_HARDNESS, SPL_POISON_SKIN, SPL_STONE_FORM,
 	SPL_KNIFE_COLLECT, SPL_FLAN_BUSIN, SPL_BURST, SPL_SUICIDE_BOMB,SPL_RABBIT_HORN,
 	SPL_SUMMON_LESSOR_DEMON,
+	SPL_LUMINUS_STRIKE, SPL_FIRE_STORM, SPL_BLIZZARD, SPL_PERFERT_FREEZE, SPL_DRAW_POWER, SPL_ANIMAL_CHANGE,
+	SPL_FIELD_VIOLET, SPL_TIME_PARADOX, SPL_PRIVATE_SQ, SPL_CONTROLED_BLINK, SPL_THE_WORLD,
 	SPL_MAX
 };
 
@@ -152,7 +154,7 @@ void SkillUseTraning(skill_list skill);
 const char* SkillCostString(skill_list skill);//코스트표현문장
 
 monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range_, unit* order, coord_def target, SUMMON_KIND kind_, int max_num_);
-void BaseBomb(coord_def pos, textures* t_, attack_infor& att_);
+void BaseBomb(coord_def pos, textures* t_, attack_infor& att_, unit* except_ = NULL);
 int GetSpellBombRange(skill_list skill);//폭발넓이
 int GetSpellBombRange(spell_list spell);
 

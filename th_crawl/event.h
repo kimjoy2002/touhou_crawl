@@ -20,7 +20,8 @@ enum event_list
 	EVL_BAMBOO, //미궁의죽림
 	EVL_LUNATICTIME, //루나틱 타임!
 	EVL_KOGASA, //키스메를 따라하는 코가사
-	EVL_NOISE//소음
+	EVL_NOISE,//소음
+	EVL_VIOLET//필드 바이올렛
 };
 
 class events
@@ -36,6 +37,7 @@ public:
 	events(int id_, coord_def position_, event_type type_, int count_ = -1);
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
+	int start();
 	int action(int delay_);
 };
 #endif // __EVENT_H__

@@ -261,19 +261,25 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 								break;
 							}
 							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("¹°¾à",true));
-							coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
+							
+							for(int i=0;i<(order->GetParadox()?2:1);i++)
 							{
-								for(int i=-1;i<=1;i++)
-									for(int j=-1;j<=1;j++)
-										if(env[current_level].isMove(pos.x+i,pos.y+j,true))
-											env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),t_,false);
-								for(int i=-1;i<=1;i++)
-									for(int j=-1;j<=1;j++)
-											env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),t_,smoke_,rand_int(7+power/8,20+power/8),0,&you);
-								Sleep(300);
-								env[current_level].ClearEffect();
+								coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
+								{
+									for(int i=-1;i<=1;i++)
+										for(int j=-1;j<=1;j++)
+											if(env[current_level].isMove(pos.x+i,pos.y+j,true))
+												env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),t_,false);
+									for(int i=-1;i<=1;i++)
+										for(int j=-1;j<=1;j++)
+												env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),t_,smoke_,rand_int(7+power/8,20+power/8),0,&you);
+									Sleep(300);
+									env[current_level].ClearEffect();
 
+								}
 							}
+							order->SetParadox(0); 
+							
 							you.DeleteItem(it,1);
 							return true;	
 
@@ -886,7 +892,7 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 			for(;!rit.end();rit++)
 				if(env[current_level].isMove(rit->x,rit->y,true))
 				{
-					if(env[current_level].isSight(*rit) && you.isSightnonblocked(*rit))
+					if(env[current_level].isInSight(*rit) && you.isSightnonblocked(*rit))
 					{
 						env[current_level].MakeEffect(*rit,t_,false);
 					}
@@ -1333,7 +1339,10 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¹°ÃÑ",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
-		throwtanmac(14,beam,temp_infor,NULL);
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+			throwtanmac(14,beam,temp_infor,NULL);
+		order->SetParadox(0); 
 		return true;
 	}
 	return false;

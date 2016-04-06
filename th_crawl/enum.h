@@ -264,6 +264,7 @@ enum smoke_type
 	SMT_TWIST,
 	SMT_WHIRLWIND,
 	SMT_CURSE,
+	SMT_BLIZZARD,
 	SMT_MAX
 };
 
@@ -309,7 +310,8 @@ enum dungeon_tile_flag
     FLAG_NO_MONSTER = 1<<7, //몬스터리젠금지
     FLAG_NO_ITEM = 1<<8, //아이템리젠금지
     FLAG_MAPPING = 1<<9, //매핑된 지역
-    FLAG_NO_STAIR = 1<<10 //계단금지
+    FLAG_NO_STAIR = 1<<10, //계단금지
+    FLAG_VIOLET = 1<<11 //필드 바이올렛
 };
 
 
@@ -773,6 +775,9 @@ enum book_list
 	BOOK_TRANSITION,
 	BOOK_TENSI,
 	BOOK_TEST_ANNIHILATE,
+	BOOK_DEBUF,
+	BOOK_MAID_ULTI,
+	BOOK_ICE_ULTI,
 	BOOK_LAST
 };
 
@@ -830,7 +835,6 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_THROW_FIRE,
 	ATT_THROW_COLD,
 	ATT_THROW_WATER,
-	ATT_THROW_FREEZING,
 	ATT_THROW_WEAK_POISON,
 	ATT_THROW_MIDDLE_POISON,
 	ATT_THROW_STRONG_POISON,
@@ -843,6 +847,9 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_NORMAL_BLAST, 
 	ATT_FIRE_BLAST, 
 	ATT_COLD_BLAST, 
+	ATT_FIRE_PYSICAL_BLAST, 
+	ATT_COLD_PYSICAL_BLAST, 
+	ATT_THROW_FREEZING,
 	ATT_BURST, 
 	ATT_VEILING,
 	ATT_RUSH, //카나코 돌진?

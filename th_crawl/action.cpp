@@ -525,6 +525,8 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 		s += dungeon_tile_tribe_type_string[env[current_level].dgtile[you.search_pos.x][you.search_pos.y].tile];
 		if(env[current_level].isSilence(you.search_pos))
 			s += " (정적)";
+		if(env[current_level].isViolet(you.search_pos))
+			s += " (바이올렛필드)";
 		floor_effect* floor_ = env[current_level].isFloorEffectPos(you.search_pos.x,you.search_pos.y);
 		if(env[current_level].isInSight(coord_def(you.search_pos.x,you.search_pos.y)) && floor_)
 		{
@@ -590,7 +592,7 @@ int Player_Move(const coord_def &c)
 					}
 					else
 					{
-						PickUpNum(temp,1);
+						PickUpNum(temp,1,false);
 						pick_ups = true;
 					}
 				}
@@ -1060,6 +1062,7 @@ bool warning(dungeon_tile_type type, bool down)
 			switch(waitkeyinput())
 			{
 			case 'Y':
+			case 'y':
 				enterlog();
 				return true;
 			case 'N':
@@ -1076,6 +1079,7 @@ bool warning(dungeon_tile_type type, bool down)
 			switch(waitkeyinput())
 			{
 			case 'Y':
+			case 'y':
 				enterlog();
 				return true;
 			case 'N':

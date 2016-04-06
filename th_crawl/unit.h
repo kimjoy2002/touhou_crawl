@@ -116,6 +116,7 @@ public:
 	virtual bool SetTogleInvisible(bool off_){return false;};
 	virtual bool SetGhost(int ghost_)=0;
 	virtual bool SetMirror(int mirror_){return false;};
+	virtual bool SetParadox(int s_paradox_){return false;};
 	bool PositionSwap(unit *other){
 		coord_def temp_ = position;
 		SetXY(other->position);
@@ -140,6 +141,7 @@ public:
 	virtual int GetLevel()=0;
 	virtual int GetInvisible() = 0;
 	virtual int GetSaved() = 0;
+	virtual int GetParadox(){return 0;}
 	virtual bool isSaveSummoner(unit* order){return false;};
 	virtual int GetWalkDelay(){return 10;};
 	virtual bool GetMindReading(){return false;};
@@ -161,6 +163,7 @@ public:
 	virtual bool isUserAlly() const {return false;}
 	virtual bool isPassedBullet(unit* order){return false;}; //해당 총이 이 캐릭터에게 관통 가능한지.
 	virtual parent_type GetParentType() = 0;
+	virtual bool isSightnonblocked(coord_def c) = 0;//보이는 이 위치가 실제로 공격가능한지?(유리벽)
 };
 
 

@@ -146,6 +146,7 @@ bool Dump(int type)
 						case ATT_THROW_FIRE:
 						case ATT_CLOUD_FIRE:
 						case ATT_FIRE_BLAST:
+						case ATT_FIRE_PYSICAL_BLAST: 
 							if(you.dead_order->order)
 								strncat(death_reason,"에 의해 ",64);
 							strncat(death_reason,"불타죽었다.",64);
@@ -154,6 +155,7 @@ bool Dump(int type)
 						case ATT_THROW_COLD:
 						case ATT_CLOUD_COLD:
 						case ATT_COLD_BLAST: 
+						case ATT_COLD_PYSICAL_BLAST: 
 							if(you.dead_order->order)
 								strncat(death_reason,"에 의해 ",64);
 							strncat(death_reason,"얼어죽었다.",64);

@@ -21,6 +21,8 @@ const char *imgfile_title[MAX_TITLE] =
 	"./data/title2.png",
 	"./data/title_0.png",
 	"./data/title_1.png",
+	"./data/title_3.png",
+	"./data/title_4.png",
 };
 
 
@@ -424,6 +426,7 @@ textures img_effect_select(&texture_item01, 1, 255);
 textures img_effect_slience(&texture_item01, 111, 255);
 textures img_effect_auto_pick(&texture_item01, 143, 255);
 textures img_effect_lunatic(&texture_dungeon01, 288, 0, 320, 32, 255);
+textures img_effect_freeze(&texture_dungeon01, 320, 0, 352, 32, 255);
 textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
 
@@ -584,9 +587,13 @@ textures img_tanmac_rock_big[] = {textures(&texture_item01, 200, 255),
 							    textures(&texture_item01, 207, 255)
 };
 
+textures img_blizzard[] = {textures(&texture_item01, 215, 255),
+							    textures(&texture_item01, 216, 255),
+								textures(&texture_item01, 217, 255),
+								textures(&texture_item01, 218, 255)};
 
 
-textures img_laser[] = {textures(&texture_laser, 0, 0, 32, 32, 255),
+;textures img_laser[] = {textures(&texture_laser, 0, 0, 32, 32, 255),
 							    textures(&texture_laser, 32, 0, 64, 32, 255),
 							    textures(&texture_laser, 64, 0, 96, 32, 255),
 							    textures(&texture_laser, 96, 0, 128, 32, 255),
@@ -654,6 +661,7 @@ textures img_state_scary(&texture_item01, 32, 255);
 textures img_state_ally(&texture_item01, 108, 255);
 textures img_state_summon(&texture_item01, 109, 255);
 textures img_state_haste(&texture_item01, 110, 255);
+textures img_state_lunatic(&texture_item01, 219, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 3, 3, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 3, 3, 255);
@@ -1306,6 +1314,8 @@ int texturetoint(textures* input)
 		return 234;
 	else if(input == &img_item_rune)
 		return 235;
+	else if(input == &img_blizzard[0])
+		return 236;
 	else
 		return 0;
 }
@@ -1785,6 +1795,8 @@ textures* inttotexture(int input)
 		return &img_named_doremi;
 	case 235:
 		return &img_item_rune;
+	case 236:
+		return &img_blizzard[0];
 	default:
 		return &img_mons_default;
 	}
@@ -1815,6 +1827,8 @@ textures* statetotexture(monster_state_simple state_)
 		return &img_state_haste;
 	case MSS_FEAR:
 		return &img_state_scary;
+	case MSS_LUNATIC:
+		return &img_state_lunatic;
 	default:
 		return &img_state_sleep;
 	}

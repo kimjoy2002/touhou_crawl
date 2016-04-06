@@ -25,6 +25,7 @@ events::events()
 events::events(int id_, coord_def position_, event_type type_, int count_)
 :id(id_),position(position_),type(type_),prev_sight(false), count(count_)
 {
+	start();
 }
 
 
@@ -48,6 +49,21 @@ void events::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, prev_sight);
 }
 
+int events::start()
+{	
+	switch(id)
+	{
+	case EVL_VIOLET:
+		{
+			int violet_range = min(10, (count+1) / 2) ;
+			env[current_level].MakeViolet(position, violet_range, true);
+		}
+		break;
+	default:
+		break;
+	}
+	return 0;
+}
 int events::action(int delay_)
 {
 	bool is_sight = false;
@@ -293,6 +309,22 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].MakeNoise(event_->position,8,NULL);
 		}
 		return 1;
+	case EVL_VIOLET:
+		{
+			int prev_range = min(10, (event_->count+2) / 2) ;
+			int violet_range = min(10, (event_->count+1) / 2) ;
+			if(event_->count<=0)
+			{		
+				env[current_level].MakeViolet(event_->position, prev_range, false);
+				return 1;
+			}
+			else if(prev_range != violet_range)
+			{
+				env[current_level].MakeViolet(event_->position, prev_range, false);
+				env[current_level].MakeViolet(event_->position, violet_range, true);
+			}
+		}
+		return 0;
 	default:
 		break;
 	}

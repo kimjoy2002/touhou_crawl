@@ -55,7 +55,8 @@ enum monster_flag
 	M_FLAG_UNHARM = 1<<17, //무해한가?
 	M_FLAG_INVISIBLE = 1<<18, //영구 투명
 	M_FLAG_ANIMAL = 1<<19, //동물
-	M_FLAG_NETURALY = 1<<20  //중립. 그러나 원본크롤과는 약간 다르다. 플레이어에겐 적대적이나 몹끼리 싸움
+	M_FLAG_NETURALY = 1<<20,  //중립. 그러나 원본크롤과는 약간 다르다. 플레이어에겐 적대적이나 몹끼리 싸움
+	M_FLAG_NONE_STAIR = 1<<21
 };
 
 

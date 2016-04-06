@@ -54,6 +54,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MON_TANMAC_MIDDLE:
 	case SPL_MON_WATER_GUN:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_LUMINUS_STRIKE:
+		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CONFUSE_CLOUD:
 		return ((S_FLAG_CLOUD | S_FLAG_SPEAK) & flag);
 	case SPL_POISON_CLOUD:
@@ -93,6 +95,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_TELEPORT_OTHER: 
 	case SPL_HYPNOSIS:
 	case SPL_SELF_INJURY:
+	case SPL_ANIMAL_CHANGE:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;
 	case SPL_MIND_BENDING:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
@@ -106,10 +109,14 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_STONE_TRAP:
 	case SPL_STONE_UPLIFT:
 	case SPL_FREEZE:
+	case SPL_FIRE_STORM:
+	case SPL_BLIZZARD: 
+	case SPL_FIELD_VIOLET:
+	case SPL_CONTROLED_BLINK: 
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_BURST:
 		return ((S_FLAG_SMITE) & flag);	
-	case SPL_FLAME:
+	case SPL_FLAME:		
 	case SPL_FROST:
 	case SPL_BURN:
 	case SPL_FROZEN:
@@ -142,6 +149,11 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_BLINK:
 	case SPL_RECALL:
 	case SPL_RABBIT_HORN:
+	case SPL_PERFERT_FREEZE: 
+	case SPL_DRAW_POWER:
+	case SPL_TIME_PARADOX: 
+	case SPL_PRIVATE_SQ: 
+	case SPL_THE_WORLD:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
@@ -181,8 +193,12 @@ int SpellLength(spell_list skill)
 	case SPL_HASTE_OTHER:
 	case SPL_HEAL_OTHER:
 	case SPL_BURST:
+	case SPL_BLIZZARD: 
+	case SPL_PERFERT_FREEZE: 
+	case SPL_PRIVATE_SQ:
+	case SPL_CONTROLED_BLINK:  
 		return 8;
-	case SPL_FLAME:
+	case SPL_FLAME:	
 	case SPL_STING:
 	case SPL_ICE_BOLT:
 	case SPL_POISON_CLOUD:
@@ -190,6 +206,9 @@ int SpellLength(spell_list skill)
 	case SPL_LASER:
 	case SPL_SPARK:
 	case SPL_STONE_UPLIFT:
+	case SPL_LUMINUS_STRIKE:
+	case SPL_FIRE_STORM:
+	case SPL_FIELD_VIOLET:
 		return 7;
 	case SPL_TWIST:
 	case SPL_FIRE_BOLT:
@@ -205,6 +224,7 @@ int SpellLength(spell_list skill)
 	case SPL_FIRE_WALL:
 	case SPL_WHIRLWIND:
 	case SPL_STONE_TRAP:
+	case SPL_ANIMAL_CHANGE:
 		return 5;
 	case SPL_BURN:
 	case SPL_FREEZE:
@@ -245,6 +265,9 @@ int SpellLength(spell_list skill)
 	case SPL_SUICIDE_BOMB:
 	case SPL_RABBIT_HORN:
 	case SPL_SUMMON_LESSOR_DEMON:
+	case SPL_DRAW_POWER:
+	case SPL_TIME_PARADOX: 
+	case SPL_THE_WORLD:
 	default:
 		return 0;
 	}
@@ -273,7 +296,7 @@ const char* SpellString(spell_list skill)
 	case SPL_SMITE:
 		return "강타";
 	case SPL_FLAME:
-		return "화염의 탄막";
+		return "화염의 탄막";	
 	case SPL_SUMMON_BUG:
 		return "곤충 소환";
 	case SPL_SELF_HEAL:
@@ -416,6 +439,28 @@ const char* SpellString(spell_list skill)
 		return "죽림의 나팔";
 	case SPL_SUMMON_LESSOR_DEMON:
 		return "악마 소환";
+	case SPL_LUMINUS_STRIKE:
+		return "루미너스 스트라이크";
+	case SPL_FIRE_STORM:
+		return "화염 폭풍";
+	case SPL_BLIZZARD: 
+		return "블리자드";
+	case SPL_PERFERT_FREEZE: 
+		return "퍼펙트 프리즈";
+	case SPL_DRAW_POWER:
+		return "상단회수";
+	case SPL_ANIMAL_CHANGE:
+		return "강제동물변화";
+	case SPL_FIELD_VIOLET:
+		return "필드울트라바이올렛";
+	case SPL_TIME_PARADOX: 
+		return "타임 패러독스";
+	case SPL_PRIVATE_SQ: 
+		return "프라이빗 스퀘어";
+	case SPL_CONTROLED_BLINK: 
+		return "컨트롤드 블링크";
+	case SPL_THE_WORLD:
+		return "더 월드";
 	default:
 		return "알수없는 마법";
 	}
@@ -436,7 +481,7 @@ int SpellLevel(spell_list skill)
 	case SPL_HYPNOSIS:
 	case SPL_STONE_PUNCH:
 		return 1;
-	case SPL_FLAME:
+	case SPL_FLAME:	
 	case SPL_SELF_HEAL:
 	case SPL_BLINK:
 	case SPL_MON_WATER_GUN:
@@ -455,6 +500,7 @@ int SpellLevel(spell_list skill)
 	case SPL_MIND_BENDING:
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:
+	case SPL_DRAW_POWER:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -481,6 +527,7 @@ int SpellLevel(spell_list skill)
 	case SPL_STONE_UPLIFT:
 	case SPL_KNIFE_COLLECT:
 	case SPL_RABBIT_HORN:
+	case SPL_TIME_PARADOX: 
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -491,6 +538,7 @@ int SpellLevel(spell_list skill)
 	case SPL_HASTE_OTHER:
 	case SPL_HEAL_OTHER:
 	case SPL_SUMMON_LESSOR_DEMON:
+	case SPL_ANIMAL_CHANGE:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -505,14 +553,22 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_UFO:
 	case SPL_KANAME_DRILL:
 	case SPL_SUICIDE_BOMB:
+	case SPL_PRIVATE_SQ: 
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
+	case SPL_LUMINUS_STRIKE:
+	case SPL_CONTROLED_BLINK: 
+	case SPL_FIELD_VIOLET:
 		return 7;
 	case SPL_SPARK:
+	case SPL_BLIZZARD: 
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
+	case SPL_FIRE_STORM:
+	case SPL_PERFERT_FREEZE: 
+	case SPL_THE_WORLD:
 		return 9;
 	default:
 		return 0;
@@ -538,11 +594,12 @@ int SpellNoise(spell_list skill)
 	case SPL_SILENCE:
 	case SPL_STONE_PUNCH:
 	case SPL_STONE_TRAP:
+	case SPL_DRAW_POWER:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
 	case SPL_STING:
-	case SPL_FLAME:
+	case SPL_FLAME:	
 	case SPL_MON_WATER_GUN:
 	case SPL_FROST:
 	case SPL_CURE_POISON:
@@ -561,6 +618,10 @@ int SpellNoise(spell_list skill)
 	case SPL_POISON_SKIN:
 	case SPL_STONE_FORM:
 	case SPL_KNIFE_COLLECT:
+	case SPL_ANIMAL_CHANGE:
+	case SPL_TIME_PARADOX: 
+	case SPL_PRIVATE_SQ: 
+	case SPL_THE_WORLD:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -598,6 +659,9 @@ int SpellNoise(spell_list skill)
 	case SPL_KANAME_DRILL:
 	case SPL_FLAN_BUSIN:
 	case SPL_SUMMON_LESSOR_DEMON:
+	case SPL_LUMINUS_STRIKE:
+	case SPL_FIELD_VIOLET:
+	case SPL_CONTROLED_BLINK: 
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -605,9 +669,12 @@ int SpellNoise(spell_list skill)
 	case SPL_BURST:
 	case SPL_SUICIDE_BOMB:
 	case SPL_RABBIT_HORN:
+	case SPL_BLIZZARD: 
+	case SPL_PERFERT_FREEZE: 
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
+	case SPL_FIRE_STORM:
 		return 16; //굉장한 소음
 	default:
 		return 0;
@@ -647,7 +714,7 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_SMITE:
 		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_FLAME:
-		return num==0?(SKT_FIRE):num==1?(SKT_CONJURE):(SKT_ERROR);
+		return num==0?(SKT_FIRE):num==1?(SKT_CONJURE):(SKT_ERROR);	
 	case SPL_SUMMON_BUG:
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SELF_HEAL:
@@ -790,6 +857,28 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SUMMON_LESSOR_DEMON:
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_LUMINUS_STRIKE:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_FIRE_STORM:
+		return num==0?(SKT_FIRE):num==1?(SKT_CONJURE):(SKT_ERROR);
+	case SPL_BLIZZARD: 
+		return num==0?(SKT_COLD):num==1?(SKT_CONJURE):(SKT_ERROR);
+	case SPL_PERFERT_FREEZE: 
+		return num==0?(SKT_COLD):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_DRAW_POWER:
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_ANIMAL_CHANGE:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_FIELD_VIOLET:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_TIME_PARADOX: 
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_PRIVATE_SQ: 
+		return num==0?(SKT_MENTAL):num==1?(SKT_TRANS):(SKT_ERROR);
+	case SPL_CONTROLED_BLINK: 
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_THE_WORLD:
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -821,7 +910,8 @@ int SpellCap(spell_list skill)
 	case SPL_VEILING:
 	case SPL_SUMMON_OPTION:
 	case SPL_STONE_ARROW: 
-	case SPL_DIAMOND_HARDNESS:
+	case SPL_DIAMOND_HARDNESS:	
+	case SPL_DRAW_POWER:
 		return 50;
 	case SPL_CONFUSE:
 	case SPL_SLOW:
@@ -872,6 +962,7 @@ int SpellCap(spell_list skill)
 	case SPL_HEAL_OTHER:
 	case SPL_KANAME_DRILL:
 	case SPL_SUMMON_LESSOR_DEMON:
+	case SPL_TIME_PARADOX: 
 		return 150;
 	case SPL_SUMMON_SEKIBANKI:
 	case SPL_SPARK:
@@ -881,6 +972,15 @@ int SpellCap(spell_list skill)
 	case SPL_BURST:
 	case SPL_SUICIDE_BOMB:
 	case SPL_RABBIT_HORN:
+	case SPL_LUMINUS_STRIKE:
+	case SPL_FIRE_STORM:
+	case SPL_BLIZZARD: 
+	case SPL_PERFERT_FREEZE: 
+	case SPL_ANIMAL_CHANGE:
+	case SPL_FIELD_VIOLET:
+	case SPL_PRIVATE_SQ: 
+	case SPL_CONTROLED_BLINK: 
+	case SPL_THE_WORLD:
 		return 200;
 	default:
 	case SPL_BLINK:

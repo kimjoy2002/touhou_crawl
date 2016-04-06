@@ -41,6 +41,7 @@ float FPS = 0;
 extern bool widesearch; //X커맨드용
 
 
+int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
 
 //
@@ -912,6 +913,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"스탯패널티", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
 				rc.left += fontDesc.Width*11;
 			}
+			if(you.s_trans_panalty)
+			{
+				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=3?CL_bad:(you.s_trans_panalty<10?CL_warning:CL_small_danger));
+				rc.left += fontDesc.Width*11;
+			}
 			if(you.s_spellcard)
 			{
 				pfont->DrawTextA(pSprite,"스펠카드", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_spellcard>5?CL_white_blue:CL_blue);
@@ -964,6 +970,18 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left += fontDesc.Width*5;
 
 			}
+			if(you.s_paradox)
+			{
+				pfont->DrawTextA(pSprite,"패러독스", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
+				rc.left += fontDesc.Width*9;
+			}
+			if(you.s_the_world)
+			{
+				pfont->DrawTextA(pSprite,"시간정지", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_the_world>1?CL_white_blue:CL_blue);
+				rc.left += fontDesc.Width*9;
+			}
+			
+
 			if(you.power<=200)
 			{
 				pfont->DrawTextA(pSprite,"파워부족", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.power<=100?CL_danger:CL_warning);
@@ -1128,7 +1146,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(128,128,128));
 
 					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_SILENCE)
-						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(128,255,255,255));
+						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(128,0,255,255));
+					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_VIOLET)
+						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(128,255,128,255));
 				}
 			}
 		}
@@ -1378,7 +1398,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 	//광기
-	if(you.s_lunatic)
+	if(you.s_lunatic || map_effect)
 	{
 		int x_ = you.GetDisplayPos().x-8;
 		int y_ = you.GetDisplayPos().y-8;
@@ -1393,7 +1413,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						bool sight = true;	
 					
 						//if(!env[current_level].isExplore(i+x_,j+y_))
-						img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+						if(map_effect==1)
+							img_effect_freeze.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+						else if(you.s_lunatic)
+							img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 							
 							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
 					}

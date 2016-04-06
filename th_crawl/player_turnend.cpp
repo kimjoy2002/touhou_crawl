@@ -48,6 +48,10 @@ interupt_type players::TurnEnd()
 		delay_+=s_frozen*delay_/10;
 	if(as_penalty > GetPenaltyMinus(3))
 		delay_ *= 2;
+
+
+	if(s_the_world>1)
+		delay_ = 0;
 	prev_action = ACTT_NONE;
 
 
@@ -90,12 +94,16 @@ interupt_type players::TurnEnd()
 
 
 	ReleaseMutex(mutx);
-	env[current_level].ActionSmoke(delay_);
+	if(you.s_the_world<=1)
+		env[current_level].ActionSmoke(delay_);
 	env[current_level].ActionFloor(delay_);
-	env[current_level].ActionMonsterSpecial(delay_);
-	if(env[current_level].ActionSmokeEffect())
+	if(you.s_the_world<=1)
 	{
-		inter = IT_SMOKE;
+		env[current_level].ActionMonsterSpecial(delay_);
+		if(env[current_level].ActionSmokeEffect())
+		{
+			inter = IT_SMOKE;
+		}
 	}
 	WaitForSingleObject(mutx, INFINITE);
 	SetInter(resetLOS());
@@ -290,6 +298,8 @@ interupt_type players::TurnEnd()
 			SetInter(IT_STAT);
 		}
 	}
+	if(env[current_level].isViolet(you.position))
+		you.SetLunatic(2);
 	if(s_lunatic)
 	{
 		s_lunatic--;
@@ -576,7 +586,26 @@ interupt_type players::TurnEnd()
 			SetInter(IT_STAT);
 		}
 	}
+	if(s_paradox)
+	{
+		s_paradox--;
+		if(s_paradox == 0)
+		{			
+			printlog("도플갱어가 사라졌다.",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	if(s_the_world)
+	{
+		s_the_world--;
 
+		if(s_the_world == 1)
+		{
+			printlog("그리고 시간은 움직이기 시작한다...",false,false,false,CL_small_danger);
+			SetInter(IT_STAT);
+		}
+
+	}
 
 	if(!s_sick)
 	{

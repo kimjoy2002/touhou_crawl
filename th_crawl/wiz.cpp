@@ -41,7 +41,7 @@ void wiz_mode()
 	case 'A':
 		{
 			item_infor t;
-			makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_ARMOUR);
+			makeitem(ITM_SPELL, 0, &t, SPC_V_EARTH);
 			env[current_level].MakeItem(you.position,t);
 
 			break;

@@ -275,6 +275,7 @@ extern textures img_fog_cold[];
 extern textures img_fog_dark[];
 extern textures img_fog_poison[];
 extern textures img_fog_slow[];
+extern textures img_blizzard[];
 
 
 
@@ -285,6 +286,7 @@ extern textures img_effect_select;
 extern textures img_effect_slience;
 extern textures img_effect_auto_pick;
 extern textures img_effect_lunatic;
+extern textures img_effect_freeze;
 
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_rock_trap;

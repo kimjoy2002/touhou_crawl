@@ -190,6 +190,9 @@ public:
 	int s_timestep;
 	int s_mirror;	
 	int s_lunatic;
+	int s_paradox;
+	int s_trans_panalty;
+	int s_the_world;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -351,13 +354,19 @@ public:
 	bool SetDimension(int dimension_);
 	bool SetTimeStep(int timestep_);
 	bool SetMirror(int mirror_);
+	bool SetParadox(int s_paradox_);
+	bool SetTransPanalty(int s_trans_panalty_);
+	bool SetTheWorld(int s_the_world_);
 	bool SetKnifeCollect(int s_knife_collect_);
 	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
 	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true 리턴은 기존의 버프가 있어서 덮어씌웠다.
 	bool SetProperty(tribe_proper_type type_, int value_);
+
+	
 	int GetInvisible();
 	int GetSaved(){return true;};
+	int GetParadox(){return s_paradox;}
 	int GetResist();
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
@@ -441,7 +450,7 @@ void Wide_Search(); //넓은범위를 탐색한다.
 void PickUp(); //줍기
 void PickUpAll(list<item>::iterator it);
 void PickUpSelect(list<item>::iterator it, int num);
-void PickUpNum(list<item>::iterator it, int num);
+void PickUpNum(list<item>::iterator it, int num, bool no_delay);
 int isPick(const item *t); //1 리턴이 ok. 마이너스가 안됨
 void iteminfor(bool gameover = false);
 void iteminfor_pick();

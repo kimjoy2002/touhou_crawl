@@ -65,7 +65,7 @@ final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE),
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
- s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+ s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
@@ -208,7 +208,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_timestep);
 	SaveData<int>(fp, s_mirror);
 	SaveData<int>(fp, s_lunatic);
-
+	SaveData<int>(fp, s_paradox);
+	SaveData<int>(fp, s_trans_panalty);
+	SaveData<int>(fp, s_the_world);
 	
 	
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -395,7 +397,10 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_timestep);
 	LoadData<int>(fp, s_mirror);
 	LoadData<int>(fp, s_lunatic);
-
+	LoadData<int>(fp, s_paradox);
+	LoadData<int>(fp, s_trans_panalty);
+	LoadData<int>(fp, s_the_world);
+	
 
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -538,6 +543,63 @@ int players::move(short_move x_mov, short_move y_mov)
 
 	if(1)//env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly()))
 	{
+		if(env[current_level].isSmokePos(move_x_,move_y_))
+		{
+			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
+			if(hp<temp_smoke->danger(this))
+			{		
+				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
+				bool loop_ = true;
+				while(loop_)
+				{
+					switch(waitkeyinput())
+					{
+					case 'Y':
+					case 'y':
+						loop_ = false;
+						enterlog();
+						break;
+					case 'N':
+					case 'n':
+					case VK_ESCAPE:
+						loop_ = false;
+						printlog("위험해!",true,false,false,CL_normal);
+						return 0;
+					default:
+						break;
+					}
+				}
+			}
+		}
+		if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(move_x_,move_y_))
+		{
+			if(hp<temp_floor->danger(this))
+			{
+				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
+				bool loop_ = true;
+				while(loop_)
+				{
+					switch(waitkeyinput())
+					{
+					case 'Y':
+					case 'y':
+						loop_ = false;
+						enterlog();
+						break;
+					case 'N':
+					case 'n':
+					case VK_ESCAPE:
+						loop_ = false;
+						printlog("위험해!",true,false,false,CL_normal);
+						return 0;
+					default:
+						break;
+					}
+				}
+			}
+		}
+
+
 		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 		{
 			if((*it).isLive() && (*it).position.x == move_x_ && (*it).position.y == move_y_)
@@ -713,7 +775,7 @@ void players::CalcuHP()
 	int fight_=skill[SKT_FIGHT].level;
 	int level_=level;
 	int aptit_=10+GetProperty(TPT_HP);
-	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(11*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
+	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(9*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
 	hp = hp*next_hp_/max_hp;
 	prev_hp = hp;
 	max_hp = next_hp_;
@@ -1910,7 +1972,7 @@ bool players::SetLunatic(int s_lunatic_)
 	{
 		//printlog("당신은 더욱 더 미쳤다.",false,false,false,CL_warning);
 	}
-	s_lunatic += s_lunatic_;
+	s_lunatic = s_lunatic_;
 	if(s_lunatic>20)
 		s_lunatic = 20;
 	return true;
@@ -1957,8 +2019,44 @@ bool players::SetMirror(int mirror_)
 	return true;
 
 }
+bool players::SetParadox(int s_paradox_)
+{
+	if(s_paradox_)
+		printlog("당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다.",true,false,false,CL_white_blue);
+	s_paradox = s_paradox_;
+	return true;
 
+}
 
+bool players::SetTransPanalty(int s_trans_panalty_)
+{
+	if(!s_trans_panalty_)
+		return false;
+
+	if(s_trans_panalty_<3)
+		printlog("약간의 시공간 부작용을 받았다.",true,false,false,CL_bad);
+	else if(s_trans_panalty_<6)
+		printlog("상당한 시공간 부작용을 받았다.",true,false,false,CL_normal);
+	else
+		printlog("어마어마한 시공간 부작용을 받았다.",true,false,false,CL_small_danger);
+	s_trans_panalty += s_trans_panalty_;
+	return true;
+}
+bool players::SetTheWorld(int s_the_world_)
+{
+	if(!s_the_world_)
+		return false;
+	if(!s_the_world)
+		printlog("더 월드!",false,false,false,CL_white_blue);
+	else
+	{
+		//printlog("당신은 더욱 더 미쳤다.",false,false,false,CL_warning);
+	}
+	s_the_world = s_the_world_;
+	if(s_the_world>20)
+		s_the_world = 20;
+	return true;
+}
 bool players::SetBuff(stat_up stat_, buff_type id_, int value_, int turn_)
 {
 	if(id_ != BUFF_DUPLE){
@@ -2396,7 +2494,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 	if(t->type == ITM_FOOD && t->value1 == 0)
 	{
 		PowUpDown(t->value5);
-		printlog("P가 증가했다.",false,false,false,CL_normal);
+		if(speak_)
+			printlog("P가 증가했다.",false,false,false,CL_normal);
 		ReleaseMutex(mutx);
 		GodAccpect_GetPitem();
 		return 1;
@@ -2921,7 +3020,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 	if((*it).can_throw)
 	{
 		int type_ = 0;
-		int pentan_ = s_wind?8:1;;
+		int pentan_ = s_wind?8:1;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
 		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),8,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
 		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST )
@@ -2941,10 +3040,13 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			int length_ = ceil(sqrt(pow((float)abs(you.position.x-target_pos_.x),2)+pow((float)abs(you.position.y-target_pos_.y),2)));
 	
 			temp_infor.length = length_;
-			coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
-			int power_ = skill[SKT_TANMAC].level*5;
-			attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("물보라",false));
-			BaseBomb(c_,&img_fog_cold[0],temp_att);
+			for(int i=0;i<(you.GetParadox()?2:1);i++)
+			{
+				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
+				int power_ = skill[SKT_TANMAC].level*5;
+				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("물보라",false));
+				BaseBomb(c_,&img_fog_cold[0],temp_att);
+			}
 		}
 		else
 		{
@@ -2952,9 +3054,12 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		
 			if(short_)
 				temp_infor.length = length_;
-			throwtanmac(type_,beam,temp_infor,&(*it));
+			for(int i=0;i<(you.GetParadox()?2:1);i++)
+			{
+				throwtanmac(type_,beam,temp_infor,&(*it));
+			}
 		}
-
+		you.SetParadox(0);
 
 
 		time_delay += GetThrowDelay((*it).type);

@@ -50,7 +50,7 @@ void PickUp()
 	if(num)
 	{
 		if(num==1)
-			PickUpNum(first_it,1);
+			PickUpNum(first_it,1,false);
 		else
 			PickUpSelect(first_it,num);
 
@@ -101,7 +101,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 					}
 					break;
 				case 'a':
-					PickUpNum(temp,num);
+					PickUpNum(temp,num,false);
 					return;
 				case '*':
 				case '?':
@@ -117,7 +117,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 		}
 	}
 }
-void PickUpNum(list<item>::iterator it, int num)
+void PickUpNum(list<item>::iterator it, int num, bool no_delay)
 {
 	while(num>0)
 	{
@@ -125,11 +125,14 @@ void PickUpNum(list<item>::iterator it, int num)
 		if(num>1) it++;
 		if(isPick(&(*temp)))
 		{
-			if(you.additem(&(*temp)))
+			if(you.additem(&(*temp),!no_delay))
 			{
 				env[current_level].DeleteItem(temp);
-				you.time_delay+=you.GetNormalDelay();
-				you.TurnEnd();
+				if(!no_delay)
+				{
+					you.time_delay+=you.GetNormalDelay();
+					you.TurnEnd();
+				}
 			}
 			else
 				return;

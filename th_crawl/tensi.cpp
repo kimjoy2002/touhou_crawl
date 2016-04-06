@@ -165,7 +165,8 @@ int GetHazard()
 		total_danger_ *=  3.0f-2.0f*((float)you.hp)/you.max_hp;
 
 
-
+	if(you.s_the_world)
+		total_danger_ *= 0.1f;
 
 	return (int)total_danger_;
 }

@@ -87,27 +87,38 @@ int players::GetAttack(bool max_)
 
 	int atk_ = rand_int((int)round(min_atk_),(int)round(max_atk_));
 
+	int cacul_max_ = max_atk_;
 	
 	if(alchemy_buff == ALCT_STONE_FIST)
 	{
 		atk_+=randA_1(10);	
+		cacul_max_ += 10;
 	}
 
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5)//¼Ó¼ººê·£µåÃ³¸®
 	{
 		atk_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
+		cacul_max_ += GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
 	}
 	
+
+	
+	if(wizard_mode && !max_)
+	{		
+		char temp[50];
+		sprintf_s(temp,50,"[¸Æµ© %d]",cacul_max_);
+		printlog(temp,false,false,false,CL_help);
+	}
 
 
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE)
 	{ //´Ü°Ë ¾Ï½À º¸³Ê½º
-		max_atk_+=10;
-		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.05f);
+		max_atk_+=(skill[skill_].level+skill[SKT_STEALTH].level)*2;
+		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
 	}
 	else
-		max_atk_*=(1+skill[SKT_STEALTH].level*0.05f);
+		max_atk_*=(1+skill[SKT_STEALTH].level*0.1f);
 	
 	//	max_atk_*=equipment[ET_WEAPON]->GetStabPercent();
 
@@ -321,6 +332,8 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
+	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_COLD_PYSICAL_BLAST:
 	case ATT_THROW_FIRE:
 	case ATT_THROW_FREEZING:
 	case ATT_THROW_COLD:
@@ -398,6 +411,12 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_THROW_ELEC:
 		damage_ *= GetElecResist();
 		break;
+	case ATT_FIRE_PYSICAL_BLAST:
+		damage_ = damage_/2.0f + damage_*GetFireResist()/2.0f;
+		break;
+	case ATT_COLD_PYSICAL_BLAST:
+		damage_ = damage_/2.0f + damage_*GetColdResist()/2.0f;
+		break;
 	}
 
 	if(alchemy_buff == ALCT_STONE_FORM)
@@ -465,11 +484,15 @@ void players::print_damage_message(attack_infor &a)
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
+	case ATT_FIRE_PYSICAL_BLAST:
 		if(a.order)
 		{
 			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù.");
 		}
 		break;
+	case ATT_COLD_PYSICAL_BLAST:
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´«º¸¶ó¿¡ ÈÖ¸»·È´Ù.");
+		break;			
 	case ATT_BURST:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Æø¹ßÇß´Ù.");
 		break;

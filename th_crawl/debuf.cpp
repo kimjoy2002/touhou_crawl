@@ -85,6 +85,10 @@ int GetDebufPower(spell_list skill, int power_)
 		return power_/2;
 	case SPL_MIND_BENDING:
 		return power_/2-10;
+	case SPL_ANIMAL_CHANGE:
+		return power_/2;
+	case SPL_PRIVATE_SQ:
+		return power_/2+10;
 	default:
 		return power_/2;
 	}

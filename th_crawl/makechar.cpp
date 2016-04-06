@@ -786,6 +786,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			env[current_level].DeleteItem(it);
 
 			you.mp = you.max_mp;
+			//테스트		
 		}
 	}
 	else if(name_.compare("사나에")==0)

@@ -367,6 +367,11 @@ bool monster::ChangeMonster( int id_, int flag_)
 	SetMonster(map_id,id_,flag_,summon_time,position,false);
 	if(summon_)
 		flag |= M_FLAG_SUMMON;
+	if(flag & M_FLAG_ALLY)
+	{
+		s_ally = -1;
+		state.SetState(MS_FOLLOW);
+	}
 	hp = hp_per_ * max_hp;
 	return true;
 }
@@ -404,6 +409,19 @@ void monster::FirstContact()
 			
 		}
 	}
+	if(wizard_mode)
+	{		
+		char temp[200];
+		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect())/(you.GetStealth()+1);
+		if(detect_<0 || detect_>1.0f)
+			detect_ = 1.0f;
+		int length__ = max(abs(you.position.x-position.x),abs(you.position.y-position.y));
+		for(int i = 0; i < length__; i++)
+			percent_ *= 1.0f-detect_;
+		sprintf_s(temp,200,"들킬확률-RandB(%d,%d) 즉%f%% (최종 암살 성공율%f%%)",you.GetStealth(),GetDetect(),100.0f*detect_, percent_*100.0f);
+		printlog(temp,true,false,false,CL_danger);
+	}
+
 	first_contact = false;
 }
 void monster::TurnSave()
@@ -653,7 +671,7 @@ void monster::CheckSightNewTarget()
 			else
 			{
 				distant_ = distan_coord(target->position, position);
-				distant_ = max(1,distant_-4);
+				distant_ = max(s_lunatic?2:1,distant_-(s_lunatic?1:30));
 			}
 		}
 
@@ -662,7 +680,7 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && isEnemyMonster(&(*it))  && (*it).isView(this) && isMonsterSight((*it).position) )
+				if((*it).isLive() && &(*it) != this && isEnemyMonster(&(*it))  && (*it).isView(this) && isMonsterSight((*it).position) )
 				{
 					if(distan_coord(it->position, position) < distant_)
 					{
@@ -679,7 +697,7 @@ void monster::CheckSightNewTarget()
 		{
 			if(state.GetState() == MS_ATACK ||  you_detect())
 			{
-				int temp = distan_coord(you.position, position)-30+(isSightnonblocked(you.position)?0:60);
+				int temp = distan_coord(you.position, position)-(s_lunatic?0:30)+(isSightnonblocked(you.position)?0:60);
 				if(distant_ == 999 || temp  < distant_)
 				{
 					prev_target_ = &you;
@@ -746,6 +764,8 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
+	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_COLD_PYSICAL_BLAST: 
 	case ATT_THROW_FIRE:
 	case ATT_THROW_COLD:
 	case ATT_THROW_WATER:
@@ -801,6 +821,12 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
 		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
+		break;
+	case ATT_FIRE_PYSICAL_BLAST:
+		damage_ = damage_/2.0f + damage_*GetFireResist()/2.0f;
+		break;
+	case ATT_COLD_PYSICAL_BLAST:
+		damage_ = damage_/2.0f + damage_*GetColdResist()/2.0f;
 		break;
 	}
 	return damage_;
@@ -860,11 +886,15 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_FIRE_BLAST:
 		case ATT_COLD_BLAST: 
 		case ATT_NORMAL_BLAST:
+		case ATT_FIRE_PYSICAL_BLAST:
 			if(a.order)
 			{
 				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다.");
 			}
 			break;
+		case ATT_COLD_PYSICAL_BLAST:
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"눈보라에 휘말렸다.");
+			break;			
 		case ATT_BURST:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다.");
 			break;
@@ -1003,11 +1033,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(it->isSaveSummoner(this))
 				{
-					char temp[128];
+					if(sight_)
+					{
+						char temp[128];
+						sprintf_s(temp,128,"%s%s %s%s 감쌌다!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
+						printlog(temp,true,false,false,CL_magic);
+					}
 					PositionSwap(&(*it));
-					sprintf_s(temp,128,"%s%s %s%s 감쌌다!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
-
-					printlog(temp,true,false,false,CL_magic);
 					return it->damage(a,perfect_);
 					break;
 				}
@@ -1028,7 +1060,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					a.order->HpUpDown(damage_/3,DR_EFFECT);	
-					printarray(true,false,false,CL_normal,4,name_.name.c_str(),name_.name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
+					if(sight_)
+						printarray(true,false,false,CL_normal,4,name_.name.c_str(),name_.name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
 			
 				}
 			}
@@ -1078,7 +1111,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		if(a.type == ATT_THROW_WEAK_POISON)
 		{
-			SetPoison(20+randA(10), 50, false);
+			SetPoison(10+randA(10), 50, false);
 			SetPoisonReason(a.p_type);
 		}
 		if(a.type == ATT_THROW_MIDDLE_POISON)
@@ -1123,7 +1156,8 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	{
 		if(monster_state_simple state_ = GetSimpleState())
 		{
-			return_ = statetotexture(state_)->draw(pSprite,x_,y_,255);
+			if(statetotexture(state_))
+				return_ = statetotexture(state_)->draw(pSprite,x_,y_,255);
 		}
 	}
 	if(return_)
@@ -1361,7 +1395,7 @@ int monster::atkmove(int is_sight, bool only_move)
 			target_pos = target->position;
 	}
 
-	if(!only_move && !s_confuse && !s_mute && !s_fear)
+	if(!only_move && !s_confuse && !s_mute && !s_fear && !s_lunatic)
 	{
 		if(target && target->position == target_pos)
 		{
@@ -1506,7 +1540,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		if(sight_)
 			printarray(true,false,false,CL_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"죽었다.");
-		else if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
+		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON))
 		{
 			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
 			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
@@ -1839,6 +1873,21 @@ int monster::action(int delay_)
 				}
 			}
 		}
+		
+		if(env[current_level].isViolet(position))
+			SetLunatic(2);
+		if(s_lunatic)
+		{
+			s_lunatic--;
+			if(is_sight && isView())
+			{
+				if(!s_lunatic)
+				{
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 미치지 않았다.");
+				}
+			}
+		}
+
 
 		if(!s_paralyse)
 		{
@@ -1913,7 +1962,7 @@ int monster::action(int delay_)
 				if(is_sight && you_detect())//시야 안에 있을때 스텔스 체크
 				{
 					FoundTarget(&you,30);
-					if(flag & M_FLAG_SPEAK && /*randA(1) && */(env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
+					if(flag & M_FLAG_SPEAK && randA(1) && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 					{
 						if(char* c_ = Get_Speak(id,this,MST_FOUND)){
 							printlog(c_,true,false,false,CL_speak);
@@ -2542,7 +2591,7 @@ bool monster::SetLunatic(int lunatic_)
 		if(!s_lunatic)
 			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다.");
 	}
-	s_lunatic += lunatic_;
+	s_lunatic = lunatic_;
 	if(s_lunatic>20)
 		s_lunatic = 20;
 	return true;
@@ -2640,7 +2689,7 @@ int monster::GetResist()
 {
 	return 40+level * 9 + (resist+1) * 20;
 }
-bool monster::you_detect()
+int monster::GetDetect()
 {
 	int detect_ = 10+level*(2+sense);
 	if((you.s_invisible || you.togle_invisible) && !(flag & M_FLAG_CAN_SEE_INVI)) //투명?
@@ -2648,8 +2697,12 @@ bool monster::you_detect()
 	if(you.s_autumn)
 		detect_ -= 40;
 	if(detect_<=0)
-		return false;
-	return randB(you.GetStealth(),detect_);
+		return 0;
+	return detect_;
+}
+bool monster::you_detect()
+{
+	return randB(you.GetStealth(),GetDetect());
 }
 bool monster::isYourShight()
 {
@@ -2800,11 +2853,13 @@ bool monster::CanChase()
 		return false;
 	if(s_mind_reading && s_ally && flag & M_FLAG_ANIMAL)
 		return false;
+	if( flag & M_FLAG_NONE_STAIR)
+		return false;
 	return true;	
 }
 parent_type monster::GetParentType()
 {
-	return isUserAlly()?PRT_ALLY:PRT_ENEMY;
+	return (isUserAlly() || s_lunatic)?PRT_ALLY:PRT_ENEMY;
 }
 bool monster::isUnique()
 {

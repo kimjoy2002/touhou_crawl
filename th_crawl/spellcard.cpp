@@ -248,7 +248,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),16,&you,you.GetParentType(),SpellcardLength(kind),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("화염",true));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
-				throwtanmac(16,beam,temp_infor,NULL);
+				
+				for(int i=0;i<(you.GetParadox()?2:1);i++)
+					throwtanmac(16,beam,temp_infor,NULL);
+				you.SetParadox(0); 
 				return true;
 			}
 			return false;	
@@ -260,7 +263,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),16,&you,you.GetParentType(),SpellcardLength(kind),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉기",true));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
-				throwtanmac(22,beam,temp_infor,NULL);
+				
+				for(int i=0;i<(you.GetParadox()?2:1);i++)
+					throwtanmac(22,beam,temp_infor,NULL);
+				you.SetParadox(0); 
 				return true;
 			}
 			return false;	
@@ -277,37 +283,43 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				beam_infor temp_infor(randC(2,4+power/8),2*(4+power/8),10,&you,you.GetParentType(),SpellcardLength(kind),1,BMT_WALL,ATT_THROW_NORMAL,name_infor("암석탄",true));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
-				coord_def pos = throwtanmac(26,beam,temp_infor,NULL);
-				if(env[current_level].dgtile[pos.x][pos.y].isBreakable())
+				
+				for(int i=0;i<(you.GetParadox()?2:1);i++)
 				{
-					for(int i=-1;i<=1;i++)
-						for(int j=-1;j<=1;j++)
-							env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_fog_normal[0],false);
-					for(int i=-1;i<=1;i++)
+					coord_def pos = throwtanmac(26,beam,temp_infor,NULL);
+					if(env[current_level].dgtile[pos.x][pos.y].isBreakable())
 					{
-						for(int j=-1;j<=1;j++)
+						for(int i=-1;i<=1;i++)
+							for(int j=-1;j<=1;j++)
+								env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_fog_normal[0],false);
+						for(int i=-1;i<=1;i++)
 						{
-							if(env[current_level].isMove(pos.x+i,pos.y+j,true))
+							for(int j=-1;j<=1;j++)
 							{
-								if(env[current_level].isInSight(coord_def(pos.x+i,pos.y+j)))
+								if(env[current_level].isMove(pos.x+i,pos.y+j,true))
 								{
-									if(unit* hit_ = env[current_level].isMonsterPos(pos.x+i,pos.y+j))
+									if(env[current_level].isInSight(coord_def(pos.x+i,pos.y+j)))
 									{
-										attack_infor temp_att(randC(3,5+power/8),3*(5+power/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("암석파편",true));
-										hit_->damage(temp_att, true);
+										if(unit* hit_ = env[current_level].isMonsterPos(pos.x+i,pos.y+j))
+										{
+											attack_infor temp_att(randC(3,5+power/8),3*(5+power/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("암석파편",true));
+											hit_->damage(temp_att, true);
+										}
 									}
 								}
-							}
-							else
-							{
-								if(env[current_level].dgtile[pos.x+i][pos.y+j].isBreakable())
-									env[current_level].dgtile[pos.x+i][pos.y+j].tile = DG_FLOOR;
+								else
+								{
+									if(env[current_level].dgtile[pos.x+i][pos.y+j].isBreakable())
+										env[current_level].dgtile[pos.x+i][pos.y+j].tile = DG_FLOOR;
+								}
 							}
 						}
 					}
+					Sleep(300);
+					env[current_level].ClearEffect();
+					you.resetLOS();
 				}
-				Sleep(300);
-				env[current_level].ClearEffect();
+				you.SetParadox(0); 				
 				return true;
 			}
 			return false;	
@@ -317,37 +329,45 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
 				beam_infor temp_infor(randC(3,3+power/12),3*(3+power/12),99,&you,you.GetParentType(),SpellcardLength(kind),8,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("바람",true));
-				ThrowSector(25,beam,temp_infor,SpellcardSector(SPC_V_AIR),[&](coord_def c_){
-					if(unit* unit_ = env[current_level].isMonsterPos(c_.x,c_.y) )
-					{
-						if( you.isSightnonblocked(c_))
+			
+				
+				for(int i=0;i<(you.GetParadox()?2:1);i++)
+				{
+					ThrowSector(25,beam,temp_infor,SpellcardSector(SPC_V_AIR),[&](coord_def c_){
+						if(unit* unit_ = env[current_level].isMonsterPos(c_.x,c_.y) )
 						{
-							coord_def push_(c_-you.position+c_);
-							beam_iterator beam(c_,push_);
+							if( you.isSightnonblocked(c_))
+							{
+								coord_def push_(c_-you.position+c_);
+								beam_iterator beam(c_,push_);
 
-							int knockback = 1+randA(3);
-							int real_knock_ = 0;
-							while(knockback)
-							{
-								if(env[current_level].isMove(coord_def(beam->x,beam->y),unit_->isFly(),unit_->isSwim(),false))
+								int knockback = 1+randA(3);
+								int real_knock_ = 0;
+								while(knockback)
 								{
-									if(!env[current_level].isMonsterPos(beam->x,beam->y))
+									if(env[current_level].isMove(coord_def(beam->x,beam->y),unit_->isFly(),unit_->isSwim(),false))
 									{
-										unit_->SetXY(coord_def(beam->x,beam->y));
-										real_knock_++;
+										if(!env[current_level].isMonsterPos(beam->x,beam->y))
+										{
+											unit_->SetXY(coord_def(beam->x,beam->y));
+											real_knock_++;
+										}
 									}
+									beam++;
+									knockback--;
 								}
-								beam++;
-								knockback--;
-							}
-							if(real_knock_)
-							{
-								printarray(false,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"바람에 밀려나갔다.");
+								if(real_knock_)
+								{
+									printarray(false,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"바람에 밀려나갔다.");
+								}
 							}
 						}
-					}
-				},true);
-				enterlog();
+					},true);
+					enterlog();
+				}
+				you.SetParadox(0); 
+				
+				
 				return true;
 			}
 			return false;	

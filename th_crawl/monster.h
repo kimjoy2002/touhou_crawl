@@ -199,6 +199,7 @@ public:
 	bool Blink(int time_);
 	bool Teleport();
 	int GetResist();
+	int GetDetect();
 	bool you_detect(); //당신을 감지했는지
 	bool isYourShight();
 	bool isEnemyMonster(const monster* monster_info); //이 몹이 적인지

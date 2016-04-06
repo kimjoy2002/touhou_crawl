@@ -132,6 +132,8 @@ char* smoke::GetName()
 		return "회오리바람";
 	case SMT_CURSE:
 		return "저주 구름";
+	case SMT_BLIZZARD:
+		return "블리자드";
 	default:
 		return 0;
 	}
@@ -192,6 +194,9 @@ bool smoke::effectSmoke(unit* unit_)
 				return_ = (unit_->SetSlow(randA(10))?true:return_);
 			return return_;
 		}
+	case SMT_BLIZZARD:
+		unit_->damage(attack_infor(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor("블리자드",false)), true);
+		return true;
 	}
 	return false;
 }
@@ -224,6 +229,9 @@ int smoke::danger(unit* unit_, bool first_)
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_CURSE:
 		danger_ = unit_->isplayer()?(you.god == GT_HINA?0:50):25;
+		return (danger_>prev_danger)?danger_:0;
+	case SMT_BLIZZARD:
+		danger_ = unit_->isplayer()?999:60+60*unit_->GetColdResist();
 		return (danger_>prev_danger)?danger_:0;
 	default:
 		return 0;

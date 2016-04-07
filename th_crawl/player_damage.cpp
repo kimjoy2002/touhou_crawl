@@ -21,6 +21,7 @@
 #include "weapon.h"
 #include "alchemy.h"
 #include "throw.h"
+#include "tensi.h"
 
 
 extern HANDLE mutx;
@@ -98,7 +99,7 @@ int players::GetAttack(bool max_)
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5)//속성브랜드처리
 	{
 		atk_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
-		cacul_max_ += GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
+		cacul_max_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,cacul_max_);
 	}
 	
 
@@ -112,7 +113,7 @@ int players::GetAttack(bool max_)
 
 
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE)
+	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
 	{ //단검 암습 보너스
 		max_atk_+=(2+skill[skill_].level+skill[SKT_STEALTH].level)*2;
 		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
@@ -307,7 +308,7 @@ attack_weapon_type players::GetAttackType()
 
 
 
-int players::calculate_damage(attack_type type_, int atk, int max_atk)
+int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 {	
 	int damage_ = atk;
 	
@@ -323,6 +324,10 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 	case ATT_COLD:
 	case ATT_S_POISON:
 	case ATT_VAMP:
+	case ATT_CURSE:
+	case ATT_WEATHER:
+	case ATT_AUTUMN:
+	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
 	case ATT_CLOUD_NORMAL:
 	case ATT_VEILING:
@@ -385,6 +390,9 @@ int players::calculate_damage(attack_type type_, int atk, int max_atk)
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
+	case ATT_WEATHER:
+		type_ = GetWeatherType(this, damage_, bonus_damage);
+		break;
 	}
 	damage_ += bonus_damage;
 
@@ -435,10 +443,12 @@ void players::print_damage_message(attack_infor &a)
 	{
 	case ATT_NORMAL:
 	case ATT_SPEAR:
-	case ATT_FIRE:
-	case ATT_COLD:
 	case ATT_S_POISON:
 	case ATT_VAMP:
+	case ATT_CURSE:
+	case ATT_WEATHER:
+	case ATT_AUTUMN:
+	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
 	case ATT_THROW_FIRE:
 	case ATT_THROW_COLD:
@@ -452,6 +462,18 @@ void players::print_damage_message(attack_infor &a)
 		if(a.order)
 		{
 			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중했다.");
+		}
+		break;
+	case ATT_FIRE:
+		if(a.order)
+		{
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 불타올랐다.");
+		}
+		break;
+	case ATT_COLD:
+		if(a.order)
+		{
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 얼어붙었다.");
 		}
 		break;
 	case ATT_NORMAL_HIT:		
@@ -643,21 +665,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			
 					}
 				}
-				if(a.type == ATT_S_POISON && randA(1))
-					SetPoison(15+randA(10), 50, false);
-				if(a.type == ATT_THROW_WEAK_POISON)
-					SetPoison(20+randA(10), 50, false);
-				if(a.type == ATT_THROW_MIDDLE_POISON)
-					SetPoison(40+randA(15), 100, false);
-				if(a.type == ATT_THROW_STRONG_POISON)
-					SetPoison(70+randA(20), 150, true);
-				if(a.type == ATT_THROW_FREEZING)
-				{
-					int frozen_ = randA_1(10);
-					frozen_*=GetColdResist();
-					SetFrozen(frozen_);
 
-				}
 				//SkillTraining(SKT_ARMOUR,3);
 			}
 			else
@@ -665,6 +673,35 @@ bool players::damage(attack_infor &a, bool perfect_)
 				print_no_damage_message(a);
 				//SkillTraining(SKT_ARMOUR,2);
 			}
+
+			
+			if(a.type == ATT_S_POISON && randA(1))
+				SetPoison(15+randA(10), 50, false);
+			if(a.type == ATT_THROW_WEAK_POISON)
+				SetPoison(20+randA(10), 50, false);
+			if(a.type == ATT_THROW_MIDDLE_POISON)
+				SetPoison(40+randA(15), 100, false);
+			if(a.type == ATT_THROW_STRONG_POISON)
+				SetPoison(70+randA(20), 150, true);
+			if(a.type == ATT_THROW_FREEZING)
+			{
+				int frozen_ = randA_1(10);
+				frozen_*=GetColdResist();
+				SetFrozen(frozen_);
+
+			}
+			if(a.type == ATT_CURSE && randA(1))
+			{	
+				SetPoison(15+randA(25), 150, true);
+				if(randA(3)==1)
+					SetSlow(10+randA(10));
+				SetPoisonReason(a.p_type);
+			}
+			if(a.type == ATT_CHOAS)
+			{
+				GetChoas(this,damage_);
+			}
+
 			if(s_veiling && hp>0)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)

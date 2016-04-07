@@ -1386,7 +1386,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor("±²À½",false));
 		target_unit->damage(temp_att, true);
 		if(randA(10)==0)
-			target_unit->SetConfuse(rand_int(5,12));
+			target_unit->SetConfuse(rand_int(3,6));
 		return true;
 	}
 	return false;

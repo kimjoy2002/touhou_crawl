@@ -82,7 +82,10 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 			break;
 		case WB_POISON:
 			att_type = ATT_THROW_WEAK_POISON;
-			break;
+			break;		
+		case WB_CURSE:		
+		case WB_WEATHER	:
+		case WB_AUTUMN:
 		default:
 			break;
 	}

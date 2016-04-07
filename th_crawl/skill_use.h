@@ -60,6 +60,7 @@ enum skill_list
 	SKL_MINORIKO_2,
 	SKL_SIZUHA_1,
 	SKL_SIZUHA_2,
+	SKL_SIZUHA_3,
 	SKL_YUUGI_1,
 	SKL_YUUGI_2,
 	SKL_YUUGI_3,
@@ -95,6 +96,7 @@ enum skill_list
 	SKL_HINA_2,
 	SKL_HINA_3,
 	SKL_HINA_4,
+	SKL_HINA_5,
 	SKL_MAX
 };
 

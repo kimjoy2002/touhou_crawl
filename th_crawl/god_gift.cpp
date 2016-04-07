@@ -287,7 +287,7 @@ void kanako_gift()
 	//it->value3 += rand_int(-1,6);
 	it->value4 += rand_int(-2,6);
 	if(!it->value5 && randA(2)>1)
-		it->value5 = randA_1(WB_MAX-1);
+		it->value5 = GetNewBrand(0); //카나코는 신의 브랜드는 선물하지 않는다.
 	if(randA(3) == 0)
 		MakeArtifact(it,1);
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);

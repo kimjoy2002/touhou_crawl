@@ -18,6 +18,7 @@
 #include "smoke.h"
 #include "floor.h"
 #include "note.h"
+#include "tensi.h"
 #include "map.h"
 
 
@@ -739,7 +740,7 @@ bool monster::isSwim()
 {
 	return (flag & M_FLAG_SWIM);
 }
-int monster::calculate_damage(attack_type type_, int atk, int max_atk, int back_stab)
+int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back_stab)
 {
 	int damage_ = back_stab==3?max_atk:back_stab>=1?max(randA(max_atk),atk):atk;
 
@@ -755,6 +756,10 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk, int back_
 	case ATT_S_POISON:
 	case ATT_THROW_NORMAL:
 	case ATT_VAMP:
+	case ATT_CURSE:
+	case ATT_WEATHER:
+	case ATT_AUTUMN:
+	case ATT_CHOAS:
 	case ATT_CLOUD_NORMAL:
 	case ATT_VEILING:
 	case ATT_RUSH:
@@ -791,14 +796,17 @@ int monster::calculate_damage(attack_type type_, int atk, int max_atk, int back_
 	switch(type_)
 	{
 	case ATT_FIRE:
-		bonus_damage = damage_*0.75f;
+		bonus_damage = damage_*0.25f;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
-		bonus_damage = damage_*0.75f;
+		bonus_damage = damage_*0.25f;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
+		break;
+	case ATT_WEATHER:
+		type_ = GetWeatherType(this, damage_, bonus_damage);
 		break;
 	}
 	damage_ += bonus_damage;
@@ -841,10 +849,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		{
 		case ATT_NORMAL:
 		case ATT_SPEAR:
-		case ATT_FIRE:
-		case ATT_COLD:
 		case ATT_S_POISON:
 		case ATT_VAMP:
+		case ATT_CURSE:
+		case ATT_WEATHER:
+		case ATT_AUTUMN:
+		case ATT_CHOAS:
 		case ATT_THROW_NORMAL:
 		case ATT_THROW_FIRE:
 		case ATT_THROW_COLD:
@@ -856,6 +866,14 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		default:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다.");
+			break;
+		case ATT_FIRE:
+			if(a.order)
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다.");
+			break;
+		case ATT_COLD:
+			if(a.order)
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다.");
 			break;
 		case ATT_NORMAL_HIT:			
 			if(a.order)
@@ -966,6 +984,10 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_COLD:
 	case ATT_S_POISON:
 	case ATT_VAMP:
+	case ATT_CURSE:
+	case ATT_WEATHER:
+	case ATT_AUTUMN:
+	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
 	case ATT_THROW_FIRE:
 	case ATT_THROW_COLD:
@@ -1009,10 +1031,23 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			back_stab = 1;
 
 	}
-	if(back_stab ==2 && randA(1))
-		back_stab = 0; //절반의 확률로 2레벨 암습은 실패
-	if(back_stab ==1 && randA(3))
+	if(a.type == ATT_AUTUMN && back_stab == 0)
+	{
+		if(a.order && a.order->isplayer())
+		{
+			if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE )
+			{
+				back_stab = 1;
+			}
+		}
+	}
+	if(back_stab<=1 && GetMindReading() && a.order == &you)
+		back_stab = 2; //간파시 암습가능
+	if(back_stab == 2 && randA(3))
 		back_stab = 0; //75%의 확률로 2레벨 암습은 실패
+	if(back_stab == 1 && randA(9))
+		back_stab = 0; //90% 1레벨 암습은 실패
+
 
 
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage, back_stab);
@@ -1044,7 +1079,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	if(wizard_mode)
 	{		
 		char temp[50];
-		sprintf_s(temp,50,"ra-%d a-%d A-%d, H-%d hit-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
+		sprintf_s(temp,50,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
 		printlog(temp,true,false,false,CL_help);
 	}
 
@@ -1146,6 +1181,16 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		{
 			SetPoison(70+randA(20), 150, true);
 			SetPoisonReason(a.p_type);
+		}
+		if(a.type == ATT_CURSE && randA(1))
+		{	
+			SetPoison(15+randA(25), 150, true);
+			if(randA(3)==1)
+				SetSlow(10+randA(10));
+		}
+		if(a.type == ATT_CHOAS)
+		{
+			GetChoas(this,damage_);
 		}
 
 

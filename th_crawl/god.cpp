@@ -437,6 +437,16 @@ bool GetGodAbility(int level, bool plus)
 				else
 					printlog("더 이상 당신은 단풍 위에서 빠르게 움직일 수 없다.",true,false,false,CL_autumn);
 				break;
+			case 6:
+				if(you.god_value[0]==0)
+				{
+					you.Ability(SKL_SIZUHA_3,true,!plus);
+					if(plus)
+						printlog("당신은 딱 한번 당신의 무기에 단풍의 힘을 불어넣을 수 있다.",true,false,false,CL_autumn);
+					else
+						printlog("더 이상 당신은 당신의 무기에 단풍의 힘을 불어넣을 수 없다.",true,false,false,CL_autumn);
+				}
+				break;
 		}
 		return false;
 	case GT_HINA:
@@ -486,6 +496,16 @@ bool GetGodAbility(int level, bool plus)
 				printlog("당신은 이제 저주를 흩뿌리고 다닌다.",true,false,false,CL_hina);
 			else
 				printlog("더 이상 저주를 흩뿌리고 다니지 않는다.",true,false,false,CL_hina);
+			break;
+		case 6:
+			if(you.god_value[0]==0)
+			{
+				you.Ability(SKL_HINA_5,true,!plus);
+				if(plus)
+					printlog("당신은 딱 한번 당신의 무기에 저주의 힘을 불어넣을 수 있다.",true,false,false,CL_hina);
+				else
+					printlog("더 이상 당신은 당신의 무기에 저주의 힘을 불어넣을 수 없다.",true,false,false,CL_hina);
+			}
 			break;
 		}
 		return false;
@@ -1391,7 +1411,7 @@ bool GodAccpect_turn(int turn)
 			{
 				you.GiftCount(2);
 			}
-			else if(randA(19)==0)
+			else if(randA(10)==0)
 			{
 				you.GiftCount(1);
 			}
@@ -1949,6 +1969,11 @@ void God_show()
 			printsub("당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.             (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
+		if(level_ >= 6 && you.god_value[0]==0 && !you.punish[GT_SHIZUHA])
+		{
+			printsub("당신은 딱 한번 당신의 무기에 단풍브랜드를 부여할 수 있다.       (한번만)",true,CL_autumn);
+			printsub("",true,CL_normal);
+		}
 		break;
 	case GT_HINA:
 		if(level_ >= 0)
@@ -1979,6 +2004,11 @@ void God_show()
 		if(level_ >= 5 && !you.punish[GT_HINA])
 		{ 
 			printsub("당신은 저주된 아이템을 끼고 있으면 저주를 흩뿌리고 다닌다.                       (패시브)",true,CL_hina);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 6 && you.god_value[0]==0 && !you.punish[GT_HINA])
+		{
+			printsub("당신은 딱 한번 당신의 무기에 저주브랜드를 부여할 수 있다.						   (한번만)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		break;

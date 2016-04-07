@@ -14,6 +14,7 @@
 
 #include "spellcard.h"
 #include "skill_use.h"
+#include "weapon.h"
 
 bool wizard_mode = false;
 
@@ -136,7 +137,23 @@ void wiz_mode()
 		break;
 	case 's':
 		//skill_summon_bug(10,false,&you,you.position);		
-		//evoke_spellcard(SPC_V_NORMAL_INVISIBLE, 50+you.level*5);
+		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
+		{
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"독을 떨어뜨리기 시작했다.");
+			you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
+			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+30;
+		}
+		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
+		{
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 독이 진해졌다.");
+			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+30;
+			if(you.equipment[ET_WEAPON]->value6>50)
+				you.equipment[ET_WEAPON]->value6 = 50;
+		}
+		else
+		{
+			printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
+		}
 		break;
 	case 'w':
 		//skill_summon_bug(100,&you,you.position);		

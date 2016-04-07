@@ -54,6 +54,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_BYAKUREN_2:
 	case SKL_SIZUHA_1:
 	case SKL_SIZUHA_2:
+	case SKL_SIZUHA_3:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
 	case SKL_YUUGI_1:
@@ -67,6 +68,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);	
 	case SKL_SWAKO_TEMPLE:
 		return ((S_FLAG_IMMEDIATELY) & flag);		
@@ -132,6 +134,7 @@ int SkillLength(skill_list skill)
 	case SKL_BYAKUREN_2:
 	case SKL_SIZUHA_1:
 	case SKL_SIZUHA_2:
+	case SKL_SIZUHA_3:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
 	case SKL_NONE:
@@ -155,6 +158,7 @@ int SkillLength(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
 	default:
 		return 0;
 	}
@@ -195,6 +199,8 @@ const char* SkillString(skill_list skill)
 		return "광기의 낙엽";
 	case SKL_SIZUHA_2:
 		return "단풍 방어구";
+	case SKL_SIZUHA_3:
+		return "단풍의 무기 부여";
 	case SKL_MINORIKO_1:
 		return "능력치 회복";
 	case SKL_MINORIKO_2:
@@ -268,6 +274,8 @@ const char* SkillString(skill_list skill)
 		return "방어구 저주(반사)";
 	case SKL_HINA_4:
 		return "장신구 저주(회복)";
+	case SKL_HINA_5:
+		return "저주의 무기 부여";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -287,6 +295,7 @@ int SkillCap(skill_list skill)
 	case SKL_BYAKUREN_2:
 	case SKL_SIZUHA_1:
 	case SKL_SIZUHA_2:
+	case SKL_SIZUHA_3:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
 	case SKL_YUUGI_1:
@@ -321,6 +330,7 @@ int SkillCap(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -350,11 +360,13 @@ int SkillNoise(skill_list skill)
 	case SKL_INVISIBLE:
 	case SKL_SIZUHA_1:
 	case SKL_SIZUHA_2:
+	case SKL_SIZUHA_3:
 	case SKL_YUUGI_1:
 	case SKL_SATORI_2:
 	case SKL_YUKARI_3:
 	case SKL_SWAKO_TEMPLE:
 	case SKL_SWAKO_SLEEP:
+	case SKL_HINA_5:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -418,6 +430,7 @@ int SkillPow(skill_list skill)
 	case SKL_BYAKUREN_2:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
+	case SKL_SIZUHA_3:
 	case SKL_YUUGI_1:
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -438,6 +451,7 @@ int SkillPow(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
 		//신앙심으로 바꾸기
 		return you.piety;
 	case SKL_SIZUHA_1:
@@ -506,6 +520,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_LEVITATION_OFF:
 	case SKL_INVISIBLE_OFF:
 	case SKL_SIZUHA_2:
+	case SKL_SIZUHA_3:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
 	case SKL_YUUGI_1:
@@ -541,6 +556,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -572,6 +588,10 @@ int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3)
 	success_ = max(0,(success_-differ<=14)?(success_-differ)*(2*14+(success_-differ-1)*-1.07)/2:99);
 	return success_;
 }
+
+
+
+
 int SkillMana(skill_list skill)
 {
 	switch(skill)
@@ -598,6 +618,8 @@ int SkillMana(skill_list skill)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+	case SKL_HINA_5:
+	case SKL_SIZUHA_3:
 	case SKL_SATORI_1:
 	case SKL_SATORI_2:
 		return 0;		
@@ -878,6 +900,13 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if(!check_)
 			you.PietyUpDown(-5);
 		return true;
+	case SKL_SIZUHA_3:
+		if(check_ && !you.equipment[ET_WEAPON])
+		{
+			printlog("무기를 끼고 사용하여야 한다.",true,false,false,CL_small_danger);	
+			return false;
+		}
+		return true;
 	case SKL_SATORI_2:
 		if(!check_)
 			you.PietyUpDown(-5);
@@ -976,6 +1005,13 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_HINA_2:
 	case SKL_HINA_3:
 	case SKL_HINA_4:
+		return true;
+	case SKL_HINA_5:
+		if(check_ && !you.equipment[ET_WEAPON])
+		{
+			printlog("무기를 끼고 사용하여야 한다.",true,false,false,CL_small_danger);	
+			return false;
+		}
 		return true;	
 	case SKL_LEVITATION:
 		if(check_ && you.power<100)
@@ -1072,6 +1108,8 @@ const char* SkillCostString(skill_list skill)
 		return "(영력 4, 신앙)";
 	case SKL_SIZUHA_2:
 		return "(신앙)";
+	case SKL_SIZUHA_3:
+		return "(한번만)";
 	case SKL_LEVITATION:
 		return "(영력 2, P 소량)";
 	case SKL_INVISIBLE:
@@ -1130,6 +1168,8 @@ const char* SkillCostString(skill_list skill)
 		return "(저주)";
 	case SKL_HINA_4:
 		return "(저주)";
+	case SKL_HINA_5:
+		return "(한번만)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

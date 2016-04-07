@@ -17,9 +17,13 @@ enum weapon_brand
 	WB_FIRE,
 	WB_COLD,
 	WB_POISON,
+	WB_CURSE,
+	WB_WEATHER,
+	WB_AUTUMN,
 	WB_MAX
 };
 
+int GetNewBrand(int rare_weigth_); //브랜드가 나올 확률
 int GetPulsDamage(weapon_brand brand, int damage);
 int GetAttType(weapon_brand brand);
 const char* GetBrandString(weapon_brand brand, bool artifact_);

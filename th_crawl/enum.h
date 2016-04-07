@@ -829,6 +829,10 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_COLD,
 	ATT_ELEC,
 	ATT_S_POISON,
+	ATT_CURSE,
+	ATT_WEATHER,
+	ATT_AUTUMN,
+	ATT_CHOAS,
 	ATT_VAMP,
 	ATT_THROW_NORMAL, //여기부터 그레이즈가 됨
 	ATT_THROW_NONE_MASSAGE,

@@ -194,6 +194,7 @@ bool smoke::effectSmoke(unit* unit_)
 				return_ = (unit_->SetSlow(randA(10))?true:return_);
 			return return_;
 		}
+		return false;
 	case SMT_BLIZZARD:
 		unit_->damage(attack_infor(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor("블리자드",false)), true);
 		return true;

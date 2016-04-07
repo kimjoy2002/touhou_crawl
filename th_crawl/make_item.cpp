@@ -519,7 +519,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value0 = 0;
 	//t->value3 = randA(1)?0:randA(5*good_bad);
 	t->value4 = randA(1)?0:randA(5*good_bad);
-	t->value5 = (good_bad>0 && randA(2)>1)?randA_1(WB_MAX-1):0;
+	t->value5 = (good_bad>0 && randA(2)>1)?GetNewBrand(15):0;
 	t->name2.name = "";
 	t->name2.name_type = true;
 	int rune_ = abs(t->value3)+abs(t->value4)+abs(t->value5);

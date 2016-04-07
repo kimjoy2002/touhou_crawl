@@ -3537,6 +3537,15 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			case WB_POISON:			
 				printlog("무기에서 독이 떨어지기 시작했다.",true,false,false,CL_white_blue);	
 				break;
+			case WB_CURSE:		
+				printlog("무기는 저주의 힘으로 가득 차있다.",true,false,false,CL_hina);	
+				break;
+			case WB_WEATHER	:
+				printlog("무기에서 비상의 기운이 뿜어져나온다.",true,false,false,CL_tensi);	
+				break;
+			case WB_AUTUMN:
+				printlog("무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.",true,false,false,CL_autumn);	
+				break;
 			default:			
 				printlog("이 무기는 버그를 내뿜고있다.",true,false,false,CL_danger);	
 				break;		
@@ -3561,6 +3570,15 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 					break;		
 				case WB_POISON:			
 					printlog("더이상 무기에서 독이 떨어지지 않는다.",true,false,false,CL_normal);	
+					break;
+				case WB_CURSE:		
+					printlog("무기에서 저주의 힘이 약해졌다.",true,false,false,CL_normal);	
+					break;
+				case WB_WEATHER	:
+					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다.",true,false,false,CL_normal);	
+					break;
+				case WB_AUTUMN:
+					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
 					break;
 				default:			
 					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	

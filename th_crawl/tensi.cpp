@@ -17,6 +17,7 @@
 #include "potion.h"
 #include "rect.h"
 #include "alchemy.h"
+#include "weapon.h"
 
 extern bool wizard_mode;
 
@@ -443,7 +444,24 @@ void tensi_burst(int good_)
 }
 
 
-
+void tensi_weapon(int doing_)
+{
+	if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
+	{
+		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"비상의 기운이 뿜어져나온다.");
+		you.equipment[ET_WEAPON]->value5 = WB_WEATHER;
+		you.equipment[ET_WEAPON]->value6 = (70+randA(50))*(doing_>0?doing_*2:1);
+	}
+	else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_WEATHER && you.equipment[ET_WEAPON]->value6>0)
+	{
+		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 비상의 힘이 길어졌다.");
+		you.equipment[ET_WEAPON]->value6 += (90+randA(50))*(doing_>0?doing_:1);
+	}
+	else
+	{
+		printlog("그러나 아무일도 일어나지 않았다.",true,false,false,CL_normal);
+	}
+}
 
 void tensi_action()
 {
@@ -484,27 +502,30 @@ void tensi_action()
 	{
 		if(100+randA(5000)<randA(you.CheckTension()))
 		{ //텐시의 포텐셜 폭발!			
-			switch(randA(3)){
+			switch(randA(4)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
 			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //텐시는 전투를 좋아하기때문에 텔포는 많이 안쓴다.
+			case 4:doing_ = 3; action_ =  TENSI_WEAPON; break;
 			}
 		}
 		else if(randA(500)<randA(you.CheckTension()))
 		{ //그럭저럭 좋은일
 			
-			switch(randA(2)){
+			switch(randA(3)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_BURST; break;
+			case 3:doing_ = 2; action_ =  TENSI_WEAPON; break;
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()))
 		{ //괜찮네
-			switch(randA(1)){
+			switch(randA(2)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
+			case 2:doing_ = 1; action_ =  TENSI_WEAPON; break;
 			}
 		}
 		else
@@ -586,10 +607,82 @@ void tensi_action()
 		}
 		tensi_burst(doing_);
 		break;
+	case TENSI_WEAPON:
+		if(wizard_mode)
+		{
+			char temp[256];
+			sprintf_s(temp,256,"텐시: 비상의검. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		}
+		tensi_weapon(doing_);
+		break;
 	}
 }
 
 
+
+attack_type GetWeatherType(unit* unit_, int damage_, int &bonus_damage_)
+{
+	int type_ = randA_1((int)WTL_MAX);
+	if(randA(2)==0)
+		type_ = WTL_NONE;
+	switch(type_)
+	{
+	case WTL_FIRE:
+		bonus_damage_ +=  unit_->GetFireResist()*(damage_/3);
+		type_ = ATT_FIRE;
+		break;
+	case WTL_COLD:
+		bonus_damage_ += unit_->GetColdResist()*damage_/3;
+		type_ = ATT_COLD;
+		break;
+	case WTL_EARTH:
+		bonus_damage_ += 9;
+		type_ = ATT_NORMAL;
+		break;
+	case WTL_AIR:
+		bonus_damage_ += unit_->GetElecResist()*randA(27);
+		type_ = ATT_ELEC;
+		break;
+	case WTL_POISON:
+		type_ = ATT_S_POISON;
+		break;
+	case WTL_CHOAS:
+		type_ = ATT_CHOAS;
+		break;
+	default:
+		type_ = ATT_NORMAL;
+		break;
+	}
+	return (attack_type)type_;
+}
+
+
+int GetChoas(unit* unit_, int damage_)
+{	
+	switch(randA(5))
+	{
+	case 0://WTL_CONFUSE,
+		unit_->SetConfuse(5+randA(10));
+		break;
+	case 1://WTL_MUTE,
+		unit_->SetMute(5+randA(10));
+		break;
+	case 2://WTL_GLOW,
+		unit_->SetGlow(5+randA(10));
+		break;
+	case 3://WTL_TELE,
+		unit_->SetTele(rand_int(3,6));
+		break;
+	case 4://WTL_SICK,
+		unit_->SetSick(20+randA(30));
+		break;
+	case 5://WTL_PARA,
+		unit_->SetParalyse(2+randA(5));
+		break;
+	}
+	return 0;
+}
 
 const char* tensi_talk(bool good_, tensi_do_list list_)
 {
@@ -858,6 +951,25 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			case 2:
 				return "텐시: 이건 어떨까?";
 			}
+		case TENSI_WEAPON:
+			switch(randA(6))
+			{
+			case 0:
+				return "당신의 손에 붉은 기운이 모이기 시작했다.";
+			case 1:
+				return "텐시: 무기가 볼품없잖아?";
+			case 2:
+				return "텐시: 조금만 빌려주는거야!";
+			case 3:
+				return "텐시: 이젠 누구에게도 지지않을걸?";
+			case 4:
+				return "텐시: 몰래 빌려주는거니까 누구에게 말하지마!";
+			case 5:
+				return "텐시: 꼭 돌려줘야해?";
+			case 6:
+				return "텐시: 들키면 이쿠에게 혼나니깐...";
+			}
+
 		}
 
 	}

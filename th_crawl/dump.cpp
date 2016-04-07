@@ -117,6 +117,10 @@ bool Dump(int type)
 						case ATT_NORMAL:
 						case ATT_S_POISON:
 						case ATT_NORMAL_HIT:
+						case ATT_CURSE:
+						case ATT_WEATHER:
+						case ATT_AUTUMN:
+						case ATT_CHOAS:
 							if(you.dead_order->order)
 								strncat(death_reason,"에게 ",64);
 							strncat(death_reason,"맞아죽었다.",64);

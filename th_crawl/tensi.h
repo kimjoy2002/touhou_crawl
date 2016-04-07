@@ -17,9 +17,25 @@ enum tensi_do_list
 	TENSI_TELE,
 	TENSI_EARTHQUAKE,
 	TENSI_MUNYUM,
-	TENSI_BURST
-
+	TENSI_BURST,
+	TENSI_WEAPON
 };
+
+enum weather_list
+{
+	WTL_NONE=0,
+	WTL_FIRE,
+	WTL_COLD,
+	WTL_EARTH,
+	WTL_AIR,
+	WTL_POISON,
+	WTL_CHOAS,
+	WTL_MAX
+};
+enum attack_type;
+class unit;
+attack_type GetWeatherType(unit* unit_, int damage_, int &bonus_damage_);
+int GetChoas(unit* unit_, int damage_);
 
 int GetHazard(); //현재의 위험도를 계산
 void tensi_action();

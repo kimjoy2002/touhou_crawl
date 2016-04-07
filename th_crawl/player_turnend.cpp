@@ -158,6 +158,15 @@ interupt_type players::TurnEnd()
 					break;		
 				case WB_POISON:			
 					printlog("더이상 무기에서 독이 떨어지지 않는다.",true,false,false,CL_normal);	
+					break;	
+				case WB_CURSE:		
+					printlog("무기에서 저주의 힘이 약해졌다.",true,false,false,CL_normal);	
+					break;
+				case WB_WEATHER	:
+					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다.",true,false,false,CL_normal);	
+					break;
+				case WB_AUTUMN:
+					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
 					break;
 				default:			
 					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	

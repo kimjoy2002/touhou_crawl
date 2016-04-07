@@ -306,7 +306,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,10},
 
-	{MON_KYOUKO,6,100,name_infor("ÄìÄÚ",false),&img_named_kyouko,35,1,12,
+	{MON_KYOUKO,6,100,name_infor("ÄìÄÚ",false),&img_named_kyouko,30,1,12,
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10},
 

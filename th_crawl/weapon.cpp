@@ -9,8 +9,22 @@
 
 #include "weapon.h"
 #include "enum.h"
+#include "common.h"
 
 
+int GetNewBrand(int rare_weigth_)
+{
+	if(randA(99)>=rare_weigth_)
+	{
+		return randA(2)==0?WB_FIRE:(randA(1)==0?WB_COLD:WB_POISON);
+	}
+	else
+	{
+		return randA(2)==0?WB_CURSE:(randA(1)==0?WB_AUTUMN:WB_WEATHER);
+	}
+	return WB_NORMAL;
+
+}
 
 int GetPulsDamage(weapon_brand brand, int damage)
 {
@@ -39,6 +53,15 @@ int GetAttType(weapon_brand brand)
 		case WB_POISON:
 			att_type = ATT_S_POISON;
 			break;
+		case WB_CURSE:	
+			att_type = ATT_CURSE;		
+			break;
+		case WB_WEATHER:
+			att_type = ATT_WEATHER;
+			break;
+		case WB_AUTUMN:
+			att_type = ATT_AUTUMN;
+			break;
 		default:
 			break;
 	}
@@ -53,7 +76,13 @@ const char* GetBrandString(weapon_brand brand, bool artifact_)
 		case WB_COLD:
 			return !artifact_?"³Ã±âÀÇ ":"³Ã±â";
 		case WB_POISON:
-			return !artifact_?"¸Íµ¶ÀÇ ":"¸Íµ¶";
+			return !artifact_?"¸Íµ¶ÀÇ ":"¸Íµ¶";	
+		case WB_CURSE:		
+			return !artifact_?"ÀúÁÖÀÇ ":"ÀúÁÖ";	
+		case WB_WEATHER	:
+			return !artifact_?"ºñ»óÀÇ ":"ºñ»ó";	
+		case WB_AUTUMN:
+			return !artifact_?"´ÜÇ³ÀÇ ":"´ÜÇ³";	
 		default:
 			return !artifact_?"¾Ë¼ö¾ø´Â ":"¹ö±×";	
 	}	

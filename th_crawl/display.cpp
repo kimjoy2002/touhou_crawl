@@ -875,9 +875,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);		
 		rc.left -= fontDesc.Width*14;
 		rc.top += fontDesc.Height;
-		sprintf_s(temp,128,"남은스킬경험치: %d",you.skill_exper);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.top += fontDesc.Height;
+		//sprintf_s(temp,128,"남은스킬경험치: %d",you.skill_exper);
+		//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		//rc.top += fontDesc.Height;
 
 		{ //상태이상 표시!
 			/*const char *state_str;*/

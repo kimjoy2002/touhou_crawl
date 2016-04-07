@@ -24,6 +24,7 @@ extern int armour_stat[5][3];
 enum start_item_type
 {
 	SIT_SHORTBLADE=0,
+	SIT_LONGBLADE1,
 	SIT_LONGBLADE,
 	SIT_MACE,
 	SIT_AXE,
@@ -62,11 +63,12 @@ skill_type WeaponSelect(int num)
 		SetText() += "b - µµ³¢\n";
 		SetText() += "c - µÐ±â\n";
 		SetText() += "d - Ã¢\n";
+		SetText() += "e - Àå°Ë\n";
 
 		while(1)
 		{
 			int select = waitkeyinput(true);
-			if(select>='a' && select<='d')
+			if(select>='a' && select<='e')
 			{
 				switch(select)
 				{
@@ -82,6 +84,9 @@ skill_type WeaponSelect(int num)
 				case 'd':
 					MakeStartItem(SIT_SPEAR,num);
 					return SKT_SPEAR;
+				case 'e':
+					MakeStartItem(SIT_LONGBLADE1,num);
+					return SKT_LONGBLADE;
 				}
 				break;
 			}
@@ -99,6 +104,14 @@ void MakeStartItem(start_item_type select_, int num)
 	case SIT_SHORTBLADE:
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SHORTBLADE,&img_item_weapon_dagger,1,false,false,4,7,0,0,0,0,10,5,false,name_infor("´ë°Å",false),name_infor("",true),2.0f,50));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 5));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equip('a'+num,ET_WEAPON,false);
+		env[current_level].DeleteItem(it);
+		break;
+	case SIT_LONGBLADE1:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 5));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);

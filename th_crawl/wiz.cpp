@@ -76,7 +76,7 @@ void wiz_mode()
 		deque<monster*> dq;
 		dungeon_level next_ = TEMPLE_LEVEL;
 		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
-		printlog("T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
+		printlog("D - 던전 T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
 		printlog("B - 홍마관도서관  U - 홍마관지하   A - 미궁의죽림  E - 영원정 ",true,false,false,CL_help);
 		printlog("H - 지령전",true,false,false,CL_help);
 		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
@@ -84,6 +84,10 @@ void wiz_mode()
 		key_ = waitkeyinput();
 		switch(key_)
 		{
+			case 'd':
+			case 'D':
+				next_ = (dungeon_level)0;
+				break;
 			case 't':
 			case 'T':
 				next_ = TEMPLE_LEVEL;

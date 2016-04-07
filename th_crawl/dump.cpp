@@ -29,14 +29,15 @@ extern display_manager DisplayManager;
 
 int caculScore()
 {
-	//경험치+룬하나당 50000점
-	int base = you.exper; //현재 19렙에 185000
-	base += 50000 * you.haveGoal();
+	//경험치+룬하나당 500000점
+	int base = you.exper * 99; //현재 19렙에 185000
+	base += 5000000 * you.haveGoal();
+
 
 	if(you.dead_reason == DR_ESCAPE && you.haveGoal())
 	{ //클리어 했다.
-		base += 50000; //클리어 보너스 점수
-		double multi = 15*(10 * max(you.turn,5000) / (max(you.turn,5000)+20000));
+		base += 500000; //클리어 보너스 점수
+		double multi = 2 * (max(you.turn,5000) +10000)/ (max(you.turn,5000)) - min(you.turn,200000)/200000;
 		multi = max(multi,1.2);
 		base*=multi;
 	}
@@ -44,6 +45,7 @@ int caculScore()
 	{		
 		base*=0.8;
 	}
+	base/=2;
 	return base;
 }
 

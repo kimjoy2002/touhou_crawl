@@ -239,6 +239,10 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
+	if(floor != 0 && randA(1))
+	{ //테스트
+		vector_.push_back(10+floor);	
+	}
 	if(floor == YOUKAI_MOUNTAIN_LAST_LEVEL)
 	{
 		vector_.push_back(VP_YOUKAI_MOUNTAIN_LAST);			
@@ -250,10 +254,6 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == EIENTEI_LEVEL_LAST_LEVEL)
 	{
 		vector_.push_back(VP_EIENTEI_LAST);		
-	}
-	if(floor != 0 && randA(1))
-	{ //테스트
-		vector_.push_back(10+floor);	
 	}
 	//if(floor==0)
 	//{
@@ -539,7 +539,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 		if(!special_enter.empty())
 		{
 			special_ = true;
-			repeat = 99999;//특수패턴은 (거의)무한반복시킴
+			repeat = 9999;//특수패턴은 (거의)무한반복시킴
 			pattern_ = special_enter.back();
 			special_enter.pop_back();
 		}
@@ -613,7 +613,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 		if(!special_enter.empty())
 		{
 			special_ = true;
-			repeat = 99999;//특수패턴은 (거의)무한반복시킴
+			repeat = 9999;//특수패턴은 (거의)무한반복시킴
 			pattern_ = special_enter.back();
 			special_enter.pop_back();
 		}
@@ -850,7 +850,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 		if(!special_enter.empty())
 		{
 			special_ = true;
-			repeat = 99999;//특수패턴은 (거의)무한반복시킴
+			repeat = 9999;//특수패턴은 (거의)무한반복시킴
 			pattern_ = special_enter.back();
 			special_enter.pop_back();
 		}

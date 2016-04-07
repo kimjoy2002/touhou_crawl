@@ -751,6 +751,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 				you.additem(it,false);
 				env[current_level].DeleteItem(it);	
 			}
+			you.skill[SKT_TANMAC].onoff = true;
 		}
 	}
 
@@ -785,6 +786,9 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.equip('a'+3,ET_LEFT,false);
 			env[current_level].DeleteItem(it);
 
+			
+			you.skill[SKT_TRANS].onoff = false;
+
 			you.mp = you.max_mp;
 			//Å×½ºÆ®		
 		}
@@ -809,6 +813,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it->Identify();
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);	
+			you.skill[SKT_EVOCATE].onoff = true;
 		}
 
 	}

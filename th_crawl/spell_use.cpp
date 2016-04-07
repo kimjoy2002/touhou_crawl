@@ -1516,7 +1516,7 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 						break;		
 				num_ = randA(num_-1);
 
-				int damage_ = 13 + mon_->GetAttack(num_,true);
+				int damage_ = 10 + mon_->GetAttack(num_,true);
 				damage_ = (damage_ + randA(damage_))/2;
 				damage_*=2.0f;
 				attack_infor temp_att(damage_,2.0f*mon_->GetAttack(num_,true),

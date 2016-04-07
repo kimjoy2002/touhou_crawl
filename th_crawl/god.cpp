@@ -812,7 +812,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if(pietyLevel(you.piety) >=1)
 		{
 			rand_rect_iterator rit(mon_->position,2,2);
-			int i = randA(3); 
+			int i = randA(1+pietyLevel(you.piety)); 
 			for(;!rit.end() && i> 0;rit++)
 			{
 				if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y))
@@ -1924,7 +1924,7 @@ void God_show()
 	case GT_SHIZUHA:
 		if(level_ >= 0 && !you.punish[GT_SHIZUHA])
 		{
-			printsub("시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.         (패시브)",true,CL_autumn);
+			printsub("시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.           (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.punish[GT_SHIZUHA])

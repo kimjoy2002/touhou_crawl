@@ -114,7 +114,7 @@ int players::GetAttack(bool max_)
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE)
 	{ //단검 암습 보너스
-		max_atk_+=(skill[skill_].level+skill[SKT_STEALTH].level)*2;
+		max_atk_+=(2+skill[skill_].level+skill[SKT_STEALTH].level)*2;
 		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
 	}
 	else

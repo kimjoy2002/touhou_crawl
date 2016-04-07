@@ -428,12 +428,15 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 					{
 						percent_ = percent_*(percent_-1)/2;
 					}
-					else
+					else if(percent_<=200)
 					{
 						percent_-= 101;
 						percent_ = 5050+percent_*(199-percent_)/2;
-
 					}			
+					else 
+					{
+						percent_ =  10000;
+					}
 					if(it->s_mind_reading)
 						percent_ = 0;
 

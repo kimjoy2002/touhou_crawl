@@ -428,6 +428,7 @@ public:
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
 	bool isView(){return true;};
+	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	
 	bool isSightnonblocked(coord_def c);//보이는 이 위치가 실제로 공격가능한지?(유리벽)
 	parent_type GetParentType();

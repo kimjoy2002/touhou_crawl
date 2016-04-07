@@ -41,7 +41,7 @@ void wiz_mode()
 	case 'A':
 		{
 			item_infor t;
-			makeitem(ITM_SPELL, 0, &t, SPC_V_EARTH);
+			makeitem(ITM_SPELL, 0, &t, SPC_V_INVISIBLE);
 			env[current_level].MakeItem(you.position,t);
 
 			break;
@@ -135,7 +135,7 @@ void wiz_mode()
 		you.Blink(40);
 		break;
 	case 's':
-		skill_summon_bug(10,false,&you,you.position);		
+		//skill_summon_bug(10,false,&you,you.position);		
 		//evoke_spellcard(SPC_V_NORMAL_INVISIBLE, 50+you.level*5);
 		break;
 	case 'w':
@@ -146,8 +146,9 @@ void wiz_mode()
 		env[current_level].dgtile[you.position.x][you.position.y].tile = (dungeon_tile_type) rand_int(DG_TEMPLE_FIRST,DG_TEMPLE_LAST);
 		break;
 	case 'M':
-		if(monster* mon_=BaseSummon(MON_TEWI, 100, true, false, 2, &you, you.position, SKD_OTHER, -1))
+		if(monster* mon_=BaseSummon(MON_TEWI, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 		{
+			mon_->state.SetState(MS_SLEEP);
 			mon_->flag &= ~M_FLAG_SUMMON;
 			mon_->ReturnEnemy();
 		}

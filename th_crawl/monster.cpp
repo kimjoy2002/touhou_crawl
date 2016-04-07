@@ -412,7 +412,7 @@ void monster::FirstContact()
 	if(wizard_mode)
 	{		
 		char temp[200];
-		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect())/(you.GetStealth()+1);
+		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect()+1)/(you.GetStealth()+1);
 		if(detect_<0 || detect_>1.0f)
 			detect_ = 1.0f;
 		int length__ = max(abs(you.position.x-position.x),abs(you.position.y-position.y));
@@ -693,7 +693,7 @@ void monster::CheckSightNewTarget()
 
 
 
-		if(env[current_level].isInSight(position) && !you.s_timestep)
+		if(env[current_level].isInSight(position) && you.isView(this) && !you.s_timestep)
 		{
 			if(state.GetState() == MS_ATACK ||  you_detect())
 			{
@@ -739,10 +739,9 @@ bool monster::isSwim()
 {
 	return (flag & M_FLAG_SWIM);
 }
-int monster::calculate_damage(attack_type type_, int atk, int max_atk)
+int monster::calculate_damage(attack_type type_, int atk, int max_atk, int back_stab)
 {
-	bool back_stab = (type_ < ATT_THROW_NORMAL && state.GetState() == MS_SLEEP || state.GetState() == MS_REST);
-	int damage_ = back_stab?max_atk/**2*/:atk;
+	int damage_ = back_stab==3?max_atk:back_stab>=1?max(randA(max_atk),atk):atk;
 
 	int bonus_damage = 0;
 
@@ -995,12 +994,35 @@ void monster::print_no_damage_message(attack_infor &a)
 
 bool monster::damage(attack_infor &a, bool perfect_)
 {
-	bool back_stab = (a.type < ATT_THROW_NORMAL && state.GetState() == MS_SLEEP || state.GetState() == MS_REST);
-	int damage_ = calculate_damage(a.type,a.damage,a.max_damage);
+	int back_stab = 0;
+	if(a.type < ATT_THROW_NORMAL)
+	{ //백스탭레벨  3-맥스데미지 2-간간히 크리데미지 1-아주 드문 크리데미지
+		if(state.GetState() == MS_SLEEP || state.GetState() == MS_REST)
+			back_stab = 3;
+		else if(s_confuse || s_fear || s_paralyse)
+			back_stab = 2;
+		else if(a.order && !(a.order)->isView(this))
+		{ //투명일때 조건
+			back_stab = 2;
+		}		
+		else if(s_lunatic)
+			back_stab = 1;
+
+	}
+	if(back_stab ==2 && randA(1))
+		back_stab = 0; //절반의 확률로 2레벨 암습은 실패
+	if(back_stab ==1 && randA(3))
+		back_stab = 0; //75%의 확률로 2레벨 암습은 실패
+
+
+	int damage_ = calculate_damage(a.type,a.damage,a.max_damage, back_stab);
 	int accuracy_ = a.accuracy;
 	bool sight_ = isYourShight();
 	bool graze_ = false;
 	
+
+
+
 	if(s_graze && randA(3) == 0)
 	{
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
@@ -1016,16 +1038,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	name_infor name_;
 	if(a.order)
 		name_ = (*a.order->GetName());
+	int percent_ = min(100,max(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
 
-	int percent_ = min(100,max(10,55+(accuracy_-ev)*(accuracy_>ev?3.5f:3)));
+
 	if(wizard_mode)
 	{		
 		char temp[50];
-		sprintf_s(temp,50,"a-%d A-%d, H-%d hit-%d%%",a.damage,a.max_damage,a.accuracy,percent_);
+		sprintf_s(temp,50,"ra-%d a-%d A-%d, H-%d hit-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
 		printlog(temp,true,false,false,CL_help);
 	}
 
-	if((randA(100) <= percent_ && !graze_) || back_stab || perfect_)
+	if((randA(100) <= percent_ && !graze_) || back_stab == 3 || perfect_)
 	{
 		if(s_saved){
 			auto it = env[current_level].mon_vector.begin();
@@ -1111,7 +1134,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		if(a.type == ATT_THROW_WEAK_POISON)
 		{
-			SetPoison(10+randA(10), 50, false);
+			SetPoison(10+randA(15), 50, false);
 			SetPoisonReason(a.p_type);
 		}
 		if(a.type == ATT_THROW_MIDDLE_POISON)
@@ -1640,7 +1663,6 @@ int monster::action(int delay_)
 		}
 	}
 
-	bool player_invisible = (you.s_invisible || you.togle_invisible) && !(flag & M_FLAG_CAN_SEE_INVI); //플레이어를 못보게될때
 
 
 
@@ -1893,14 +1915,18 @@ int monster::action(int delay_)
 		{
 			if(target) //투명몹을 상대할때
 			{	
-				if(target->isplayer() && player_invisible)
+				if(!target->isView(this))
 				{
 					target = NULL;
+
 				}
-				else if(!target->isplayer() && target->GetInvisible() && !(flag & M_FLAG_CAN_SEE_INVI))
-				{
-					target = NULL;
-				}
+				//if(target->isplayer() && player_invisible)
+				//{
+				//}
+				//else if(!target->isplayer() && target->GetInvisible() && !(flag & M_FLAG_CAN_SEE_INVI))
+				//{
+				//	target = NULL;
+				//}
 			}
 			if(!s_sick)
 				HpRecover();
@@ -1981,7 +2007,7 @@ int monster::action(int delay_)
 					target = NULL;						
 					state.StateTransition(MSI_LOST);
 				}
-				else if(is_sight && !player_invisible && !isUserAlly())
+				else if(is_sight && you.isView(this) && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
 					CheckSightNewTarget();
 					//FoundTarget(&you,30);
@@ -1992,7 +2018,7 @@ int monster::action(int delay_)
 							break;
 					}
 
-					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?33:2)){//몬스터 말하기
+					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?33:3)){//몬스터 말하기
 						
 						if(s_confuse || s_lunatic)
 						{
@@ -2614,13 +2640,19 @@ bool monster::AttackedTarget(unit *order_)
 		{
 			//if(back_stab)
 			//	you.SkillTraining(SKT_BACKSTAB,1);
-			if(state.GetState() != MS_ATACK)
+			if(state.GetState() != MS_ATACK || !target)
+			{
 				target = &you;
+				target_pos = you.position;
+			}
 		}
 		else
 		{
-			if(state.GetState() != MS_ATACK)
+			if(state.GetState() != MS_ATACK || !target)
+			{
 				target = order_;
+				target_pos = order_->position;
+			}
 			memory_time=30;
 		}
 		state.StateTransition(MSI_ATACKED);
@@ -2694,8 +2726,8 @@ int monster::GetResist()
 }
 int monster::GetDetect()
 {
-	int detect_ = 10+level*(2+sense);
-	if((you.s_invisible || you.togle_invisible) && !(flag & M_FLAG_CAN_SEE_INVI)) //투명?
+	int detect_ = 10+level*(1.5f+sense);
+	if(!you.isView(this))
 		detect_ -= (you.s_invisible>10 || you.togle_invisible)?70:20;
 	if(you.s_autumn)
 		detect_ -= 40;
@@ -2889,6 +2921,15 @@ int monster::GetHit()
 {
 	int hit_ = level/3+8;
 	return hit_;
+}
+int monster::GetEv()
+{
+	int ev_ = ev;
+	if(s_confuse)
+		ev_/=2;
+	if(s_paralyse)
+		ev_ = 0;
+	return ev_;
 }
 bool monster::isSaveSummoner(unit* order)
 {

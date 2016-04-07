@@ -87,6 +87,7 @@ public:
 	virtual bool damage(attack_infor &a, bool perfect_)=0;
 	virtual bool isplayer()=0;
 	virtual bool isView()=0;
+	virtual bool isView(const monster* monster_info)=0;
 	virtual bool isYourShight()=0;
 	virtual bool SetPoisonReason(parent_type type_)=0;
 	virtual bool SetPoison(int poison_, int max_, bool strong_)=0;

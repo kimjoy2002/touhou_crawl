@@ -906,19 +906,19 @@ int players::GetStealth()
 			switch(equipment[ET_ARMOR]->type)
 			{
 			case ITM_ARMOR_BODY_ROBE:
-				stealth_ += 100;
+				stealth_ += 200;
 				break;
 			case ITM_ARMOR_BODY_ARMOUR_0:
-				stealth_ += 60;
+				stealth_ += 170;
 				break;
 			case ITM_ARMOR_BODY_ARMOUR_1:
-				stealth_ += 40;
+				stealth_ += 140;
 				break;
 			case ITM_ARMOR_BODY_ARMOUR_2:
-				stealth_ += 15;
+				stealth_ += 110;
 				break;
 			case ITM_ARMOR_BODY_ARMOUR_3:
-				stealth_ += 10;
+				stealth_ += 80;
 				break;
 			}
 		}
@@ -1199,12 +1199,15 @@ int players::PowDecreaseDelay(int delay_)
 		power_decre/=2;
 	}
 
-	if(s_haste || s_invisible || togle_invisible)
+	if(s_haste)
 	{
 		if(s_haste)
-			power_decre/=power_keep?1.5:2;
+			power_decre/=power_keep?5:20;
+	}
+	if(s_invisible || togle_invisible)
+	{
 		if(s_invisible || togle_invisible)
-			power_decre/=power_keep?1.5:2;
+			power_decre/=power_keep?5:20;
 	}
 	return power_decre;
 }
@@ -1645,6 +1648,7 @@ bool players::SetHaste(int haste_)
 		printlog("당신의 가속은 좀 더 길어졌다.",false,false,false,CL_white_blue);
 	}
 	s_haste += haste_;
+	power_decre = 0;
 	if(s_haste>100)
 		s_haste = 100;
 	return true;
@@ -1840,6 +1844,7 @@ bool players::SetInvisible(int invisible_)
 		printlog("당신은 더 오래 투명해졌다.",false,false,false,CL_white_blue);
 	}
 	s_invisible += invisible_;
+	power_decre = 0;
 	if(s_invisible>100)
 		s_invisible = 100;
 	return true;
@@ -1852,6 +1857,7 @@ bool players::SetTogleInvisible(bool off_)
 	}
 	else{
 		togle_invisible = true;
+		power_decre = 0;
 		return true;
 	}
 }
@@ -2091,7 +2097,7 @@ int players::GetInvisible()
 }
 int players::GetResist()
 {
-	return level * 6 + 100+magic_resist;
+	return level * 9 + 100+magic_resist;
 }
 int players::GetProperty(tribe_proper_type type_)
 {
@@ -3661,6 +3667,12 @@ float players::GetElecResist()
 		return 1.0f;
 }
 
+bool players::isView(const monster* monster_info)
+{
+	if((you.s_invisible || you.togle_invisible) && !(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?
+		return false;
+	return true;
+}
 
 
 skill_type itemtoskill(item_type type_)

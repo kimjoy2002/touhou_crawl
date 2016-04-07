@@ -68,29 +68,29 @@ int GetDebufPower(spell_list skill, int power_)
 	switch(skill)
 	{
 	case SPL_CONFUSE:
-		return power_/2;
+		return power_-10;
 	case SPL_SLOW:
-		return power_/2;
+		return power_-10;
 	case SPL_GLOW:
-		return power_/2;
+		return power_-10;
 	case SPL_TELEPORT_OTHER:
-		return power_/2;
+		return power_-10;
 	case SPL_HYPNOSIS:
-		return power_/2+20;
+		return power_+10;
 	case SPL_MUTE:
-		return power_/2;
+		return power_-10;
 	case SPL_SELF_INJURY:
-		return power_/2+20;
+		return power_;
 	case SPL_CHARM:
-		return power_/2;
+		return power_;
 	case SPL_MIND_BENDING:
-		return power_/2-10;
+		return power_-20;
 	case SPL_ANIMAL_CHANGE:
-		return power_/2;
+		return power_-20;
 	case SPL_PRIVATE_SQ:
-		return power_/2+10;
+		return power_;
 	default:
-		return power_/2;
+		return power_-10;
 	}
 }
 int GetDebufPower(skill_list skill, int power_)
@@ -98,10 +98,10 @@ int GetDebufPower(skill_list skill, int power_)
 	switch(skill)
 	{
 	case SKL_SIZUHA_1:
-		return power_/2;
+		return power_;
 	case SKL_SATORI_1:
-		return power_/2;
+		return power_;
 	default:
-		return power_/2;
+		return power_;
 	}
 }

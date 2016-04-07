@@ -484,6 +484,10 @@ int SkillDiffer(skill_list skill)
 		//return SkillDiffer_simple(-3,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
 	case SKL_BYAKUREN_2:		
 		return 100;
+		
+	case SKL_SIZUHA_1: //µð¹öÇÁ
+	case SKL_SATORI_1:
+
 		//return SkillDiffer_simple(1,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
 	case SKL_KANAKO_1:
 		//return SkillDiffer_simple(-4,SKT_INVOCATE,SKT_ERROR,SKT_ERROR);
@@ -501,7 +505,6 @@ int SkillDiffer(skill_list skill)
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
 	case SKL_INVISIBLE_OFF:
-	case SKL_SIZUHA_1: //½Å¾Ó½Éºñ·Ê ¼º°øÀ²·Î ¹Ù²Þ?
 	case SKL_SIZUHA_2:
 	case SKL_MINORIKO_1:
 	case SKL_MINORIKO_2:
@@ -510,7 +513,6 @@ int SkillDiffer(skill_list skill)
 	case SKL_YUUGI_3:
 	case SKL_YUUGI_4:
 	case SKL_YUUGI_5:
-	case SKL_SATORI_1:
 	case SKL_SATORI_2:
 	case SKL_SHINKI_1:	
 	case SKL_SHINKI_2:	
@@ -607,6 +609,7 @@ int SkillMana(skill_list skill)
 	case SKL_YUKARI_1:
 	case SKL_SWAKO_JUMP:
 	case SKL_SWAKO_TOUGUE:
+	case SKL_INVISIBLE:
 		return 2;
 	case SKL_KANAKO_2:
 	case SKL_MINORIKO_1:
@@ -623,7 +626,6 @@ int SkillMana(skill_list skill)
 		return 5;
 	case SKL_KANAKO_3:
 		return 4;
-	case SKL_INVISIBLE:
 	case SKL_YUKARI_4:
 		return 6;
 	case SKL_GRAZE_OFF:
@@ -991,7 +993,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			return false;
 		}
 		if(!check_)
-			you.PowUpDown(-(8+randA(10)),true);
+			you.PowUpDown(-(20+randA(10)),true);
 		return true;
 	case SKL_NONE:
 	case SKL_GRAZE:

@@ -1457,11 +1457,11 @@ int monster::atkmove(int is_sight, bool only_move)
 {
 	int move_ = 0;
 	
-	if(target || memory_time)
-	{
-		if(target && !(target->isplayer()))
-			target_pos = target->position;
-	}
+	//if(target || memory_time)
+	//{
+	//	if(target && !(target->isplayer()))
+	//		target_pos = target->position;
+	//}
 
 	if(!only_move && !s_confuse && !s_mute && !s_fear && !s_lunatic)
 	{
@@ -1538,9 +1538,11 @@ int monster::atkmove(int is_sight, bool only_move)
 				s_fear = 0;
 			}
 		}
-		else if(target_pos == position && target)
-			target_pos = target->position;
-		else if(target_pos == position && !target)
+		//else if(target_pos == position && target)
+		//{
+		//	target_pos = target->position;
+		//}
+		else if(target_pos == position/* && !target*/)
 		{
 			target_pos = target_pos+c;
 			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))

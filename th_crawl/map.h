@@ -20,7 +20,13 @@ enum sub_dungeon
 	SCARLET_U,
 	BAMBOO,
 	//EIENTEI,
-	SUBTERRANEAN,
+	SUBTERRANEAN,	
+	YUKKURI_D,
+	DEPTH,
+	DREAM_D,
+	//MOON_D,
+	PANDEMONIUM,
+	HAKUREI_D,
 	MAX_SUB_DUNGEON
 };
 enum valut_pattern
@@ -135,6 +141,13 @@ char* scarlet_library_pattern(map_dummy* map);
 char* scarlet_under_pattern(map_dummy* map);
 char* bamboo_pattern(map_dummy* map);
 char* subterranean_pattern(map_dummy* map);
+
+char* yukkuri_pattern(map_dummy* map);
+char* depth_pattern(map_dummy* map);
+char* dream_pattern(map_dummy* map);
+char* pandemonium_pattern(map_dummy* map);
+char* hakurei_pattern(map_dummy* map);
+
 
 
 

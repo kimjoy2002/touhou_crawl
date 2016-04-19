@@ -43,6 +43,12 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
 		return DOT_DOWN;
 	case DG_TEMPLE_SHIKIEIKI:
 	case DG_TEMPLE_BYAKUREN:

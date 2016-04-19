@@ -870,10 +870,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.top += fontDesc.Height;
 		sprintf_s(temp,128,"%s",CurrentLevelString());
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*14;
+		rc.left += fontDesc.Width*15;
 		sprintf_s(temp,128,"턴: %g (%g)",you.real_turn/10.0f, you.prev_real_turn/10.0f);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);		
-		rc.left -= fontDesc.Width*14;
+		rc.left -= fontDesc.Width*15;
 		rc.top += fontDesc.Height;
 		//sprintf_s(temp,128,"남은스킬경험치: %d",you.skill_exper);
 		//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);

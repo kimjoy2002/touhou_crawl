@@ -546,6 +546,37 @@ char* subterranean_pattern(map_dummy* map)
 	map->sp_tile_list.push_back(DG_SUBTERRANEAN_STAIR);
 	return common_enter_pattern(map);
 }
+char* yukkuri_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_YUKKURI_STAIR);
+	return common_enter_pattern(map);
+}
+char* depth_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_DEPTH_STAIR);
+	return common_enter_pattern(map);
+}
+char* dream_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_DREAM_STAIR);
+	return common_enter_pattern(map);
+}
+char* pandemonium_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_PANDEMONIUM_STAIR);
+	return common_enter_pattern(map);
+}
+char* hakurei_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_HAKUREI_STAIR);
+	return common_enter_pattern(map);
+}
+
 
 
 char* scarlet_pattern(map_dummy* map)

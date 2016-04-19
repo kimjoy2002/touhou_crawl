@@ -198,7 +198,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		{
 		case 4:
 		case 9:
-		case MAX_DUNGEUN_LEVEL-1:
+		case MAX_DUNGEUN_LEVEL:
 		case TEMPLE_LEVEL:
 		case MISTY_LAKE_LEVEL:
 		case MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL:
@@ -212,6 +212,14 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		case EIENTEI_LEVEL:
 		case SUBTERRANEAN_LEVEL:
 		case SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL:
+		case YUKKURI_LEVEL:
+		case YUKKURI_LEVEL+MAX_YUKKURI_LEVEL:
+		case DEPTH_LEVEL:
+		case DREAM_LEVEL:
+		case MOON_LEVEL:
+		case PANDEMONIUM_LEVEL:
+		case HAKUREI_LEVEL:
+		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"´øÀü ÁøÇà: %s¿¡ µé¾î¼¹´Ù.",CurrentLevelString(floor));
@@ -1252,9 +1260,21 @@ char* CurrentLevelString(int level)
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
 		sprintf(temp,"¿µ¿øÁ¤");
 	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf(temp,"ÁöÀú");
+		sprintf(temp,"ÁöÀú %dÃþ", level_+1-SUBTERRANEAN_LEVEL);
 	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf(temp,"ÀÛ¿­Áö¿ÁÅÍ");
+		sprintf(temp,"ÀÛ¿­Áö¿ÁÅÍ");	
+	else if(level_ >= YUKKURI_LEVEL && level_ <=  YUKKURI_LAST_LEVEL)
+		sprintf(temp,"ÀµÄí¸®µÕÁö %dÃþ", level_+1-YUKKURI_LEVEL);
+	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)
+		sprintf(temp,"Áü½Â±æ %dÃþ", level_+1-DEPTH_LEVEL);
+	else if(level_ >= DREAM_LEVEL && level_ <=  DREAM_LAST_LEVEL)
+		sprintf(temp,"²ÞÀÇ ¼¼°è");
+	else if(level_ >= MOON_LEVEL && level_ <=  MOON_LAST_LEVEL)
+		sprintf(temp,"´ÞÀÇ µµ½Ã");
+	else if(level_ >= PANDEMONIUM_LEVEL && level_ <=  PANDEMONIUM_LAST_LEVEL)
+		sprintf(temp,"¸¶°è");
+	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
+		sprintf(temp,"ÇÏÄí·¹ÀÌ %dÃþ", level_+1-HAKUREI_LEVEL);
 	else
 		sprintf(temp,"¾Ë¼ö¾ø´Â Ãþ");
 

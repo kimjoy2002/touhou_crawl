@@ -1195,6 +1195,12 @@ void Stair_move(bool down)
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:		
+	case DG_PANDEMONIUM_STAIR:	
+	case DG_HAKUREI_STAIR:
 		if(!down)
 		{
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
@@ -1259,7 +1265,25 @@ void Stair_move(bool down)
 					break;			
 				case DG_SUBTERRANEAN_STAIR:
 					next_ = SUBTERRANEAN_LEVEL;
-					break;		
+					break;
+				case DG_YUKKURI_STAIR:
+					next_ = YUKKURI_LEVEL;
+					break;					
+				case DG_DEPTH_STAIR:
+					next_ = DEPTH_LEVEL;
+					break;			
+				case DG_DREAM_STAIR:
+					next_ = DREAM_LEVEL;
+					break;			
+				case DG_MOON_STAIR:					
+					next_ = MOON_LEVEL;
+					break;			
+				case DG_PANDEMONIUM_STAIR:					
+					next_ = PANDEMONIUM_LEVEL;
+					break;			
+				case DG_HAKUREI_STAIR:
+					next_ = HAKUREI_LEVEL;
+					break;			
 			}
 
 			env[next_].EnterMap(0,dq);
@@ -1384,6 +1408,30 @@ void Stair_move(bool down)
 			case SUBTERRANEAN_LEVEL: 
 				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
 				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
+				break;
+			case YUKKURI_LEVEL:
+				floor_return = map_list.dungeon_enter[YUKKURI_D].floor;
+				pos_return = map_list.dungeon_enter[YUKKURI_D].pos;
+				break;				
+			case DEPTH_LEVEL:
+				floor_return = map_list.dungeon_enter[DEPTH].floor;
+				pos_return = map_list.dungeon_enter[DEPTH].pos;
+				break;	
+			case DREAM_LEVEL:
+				floor_return = map_list.dungeon_enter[DREAM_D].floor;
+				pos_return = map_list.dungeon_enter[DREAM_D].pos;
+				break;	
+			case MOON_LEVEL:
+				floor_return = map_list.dungeon_enter[DREAM_D].floor;
+				pos_return = map_list.dungeon_enter[DREAM_D].pos;
+				break;
+			case PANDEMONIUM_LEVEL:
+				floor_return = map_list.dungeon_enter[PANDEMONIUM].floor;
+				pos_return = map_list.dungeon_enter[PANDEMONIUM].pos;
+				break;
+			case HAKUREI_LEVEL:
+				floor_return = map_list.dungeon_enter[HAKUREI_D].floor;
+				pos_return = map_list.dungeon_enter[HAKUREI_D].pos;
 				break;
 			}
 			deque<monster*> dq;

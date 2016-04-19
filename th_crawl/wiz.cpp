@@ -85,8 +85,10 @@ void wiz_mode()
 		switch(key_)
 		{
 			case 'd':
-			case 'D':
 				next_ = (dungeon_level)0;
+				break;
+			case 'D':
+				next_ = MAX_DUNGEUN_LEVEL;
 				break;
 			case 't':
 			case 'T':

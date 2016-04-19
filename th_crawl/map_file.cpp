@@ -24,10 +24,17 @@ bool environment::isFirstFloor(int level_)
 		level_ == SCARLET_UNDER_LEVEL ||
 		level_ == BAMBOO_LEVEL ||
 		level_ == EIENTEI_LEVEL ||
-		level_ == SUBTERRANEAN_LEVEL)
+		level_ == SUBTERRANEAN_LEVEL ||		
+		level_ == YUKKURI_LEVEL ||
+		level_ == DEPTH_LEVEL ||
+		level_ == DREAM_LEVEL ||
+		level_ == MOON_LEVEL ||
+		level_ == PANDEMONIUM_LEVEL ||
+		level_ == HAKUREI_LEVEL
+		)
 		return true;
 	return false;
-	//if(level_<MAX_DUNGEUN_LEVEL-1 || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
+	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
 	//		|| (level_>=MISTY_LAKE_LEVEL && level_<MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL) 
 	//		|| (level_>=SCARLET_LEVEL && level_<SCARLET_LEVEL+MAX_SCARLET_LEVEL) )
 	//		return false;
@@ -36,7 +43,7 @@ bool environment::isFirstFloor(int level_)
 
 bool environment::isLastFloor(int level_)
 {
-	if( level_ == MAX_DUNGEUN_LEVEL-1 || //?
+	if( level_ == MAX_DUNGEUN_LEVEL || //?
 		level_ == TEMPLE_LEVEL ||
 		level_ == YOUKAI_MOUNTAIN_LAST_LEVEL ||
 		level_ == MISTY_LAKE_LAST_LEVEL ||
@@ -45,10 +52,16 @@ bool environment::isLastFloor(int level_)
 		level_ == SCARLET_UNDER_LEVEL_LAST_LEVEL ||
 		level_ == BAMBOO_LEVEL_LAST_LEVEL ||
 		level_ == EIENTEI_LEVEL_LAST_LEVEL ||
-		level_ == SUBTERRANEAN_LEVEL_LAST_LEVEL)
+		level_ == SUBTERRANEAN_LEVEL_LAST_LEVEL ||
+		level_ == YUKKURI_LAST_LEVEL ||
+		level_ == DEPTH_LAST_LEVEL ||
+		level_ == DREAM_LAST_LEVEL ||
+		level_ == MOON_LAST_LEVEL ||
+		level_ == PANDEMONIUM_LAST_LEVEL ||
+		level_ == HAKUREI_LAST_LEVEL)
 		return true;
 	return false;
-	//if(level_<MAX_DUNGEUN_LEVEL-1 || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
+	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
 	//		|| (level_>=MISTY_LAKE_LEVEL && level_<MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL) 
 	//		|| (level_>=SCARLET_LEVEL && level_<SCARLET_LEVEL+MAX_SCARLET_LEVEL) )
 	//		return false;
@@ -63,9 +76,18 @@ void initMap()
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
 	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	
-	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL+3);
+	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
 	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
-	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,rand_int(12,14));
+	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
+
+
+
+	map_list.dungeon_enter[YUKKURI_D].set(false,0,0,YOUKAI_MOUNTAIN_LAST_LEVEL);	
+	map_list.dungeon_enter[DEPTH].set(false,0,0,MAX_DUNGEUN_LEVEL);	
+	map_list.dungeon_enter[DREAM_D].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
+	//map_list.dungeon_enter[MOON_D].set(false,0,0,rand_int(10,13));
+	map_list.dungeon_enter[PANDEMONIUM].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
+	map_list.dungeon_enter[HAKUREI_D].set(false,0,0,DEPTH_LAST_LEVEL);
 
 	map_list.god_num = 10;
 	map_list.bamboo_count = 0;
@@ -510,6 +532,28 @@ void map_dummy::patternSet()
 	{
 		PixedMap(this, subterranean_pattern(this));
 	}
+	else if(pattern == 100+YUKKURI_D) //ÀµÄí¸®
+	{
+		PixedMap(this, yukkuri_pattern(this));
+	}
+	else if(pattern == 100+DEPTH) //Áü½Â±æ
+	{
+		PixedMap(this, depth_pattern(this));
+	}
+	else if(pattern == 100+DREAM_D) //²ÞÀÇ¼¼°è
+	{
+		PixedMap(this, dream_pattern(this));
+	}
+	else if(pattern == 100+PANDEMONIUM) //¸¶°è
+	{
+		PixedMap(this, pandemonium_pattern(this));
+	}
+	else if(pattern == 100+HAKUREI_D) //ÇÏÄí·¹ÀÌ
+	{
+		PixedMap(this, hakurei_pattern(this));
+	}
+	
+	
 	else if(pattern >= 100+MAX_SUB_DUNGEON && pattern < 100+MAX_SUB_DUNGEON+GT_LAST)
 	{
 		if(randA(3))

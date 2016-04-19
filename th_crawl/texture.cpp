@@ -134,7 +134,13 @@ textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
 				textures(&texture_item01, 213, 255), //계단죽림
 				textures(&texture_item01, 213, 255), //계단영원정
 				textures(&texture_item01, 213, 255), //계단지저
-
+				
+				textures(&texture_item01, 213, 255),//계단윳쿠리
+				textures(&texture_item01, 213, 255), //계단짐승길
+				textures(&texture_item01, 213, 255), //계단꿈
+				textures(&texture_item01, 213, 255), //계단달
+				textures(&texture_item01, 213, 255), //계단마계
+				textures(&texture_item01, 213, 255), //계단히쿠레이
 
 				textures(&texture_item01, 6, 255),//계단
 				textures(&texture_item01, 120, 255), //시키
@@ -152,14 +158,6 @@ textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
 				textures(&texture_item01, 132, 255), //유유코
 			    textures(&texture_item01, 133, 255), //사토리
 			    textures(&texture_item01, 134, 255), //텐시
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-
-				
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
 				textures(&texture_item01, 2, 255),
 
 								

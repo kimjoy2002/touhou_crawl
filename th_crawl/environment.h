@@ -104,6 +104,7 @@ public:
 	~environment();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
+	bool MakeMap(bool return_); //return_ 은 되돌아오는 계단일때 전용(이때는 대나무숲을 만들지 않는다.)
 	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0));
 	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false)
 	{		

@@ -171,18 +171,9 @@ void environment::LoadDatas(FILE *fp)
 
 
 }
-
-void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
+bool environment::MakeMap(bool return_)
 {
-	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-	{
-		if(it->isLive())
-		{
-			it->TurnSave();
-		}
-	}
-	int dq_n=0;
-	if(!make || env[floor].isBamboo())
+	if(!make || (env[floor].isBamboo() && !return_))
 	{
 		map_algorithms(floor);
 		if(!tutorial)
@@ -228,14 +219,29 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			break;
 		}
 		make = true;
+		return true;
 	}
+	return false;
+}
+void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
+{
+	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+	{
+		if(it->isLive())
+		{
+			it->TurnSave();
+		}
+	}
+	int dq_n=0;
+	
+	MakeMap(false);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;
 	if(you.s_silence)
 		env[current_level].MakeSilence(you.position, you.s_silence_range, false);
 	current_level = floor;
 	if(num_>=0 && num_ <3)
-		you.SetXY(prev_level>floor?stair_down[num_]:stair_up[num_]);
+		you.SetXY((prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
 	else
 		you.SetXY(pos_);
 	you.prev_position = you.position;

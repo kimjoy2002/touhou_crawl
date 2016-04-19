@@ -76,9 +76,9 @@ void wiz_mode()
 		deque<monster*> dq;
 		dungeon_level next_ = TEMPLE_LEVEL;
 		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
-		printlog("D - 던전 T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
-		printlog("B - 홍마관도서관  U - 홍마관지하   A - 미궁의죽림  E - 영원정 ",true,false,false,CL_help);
-		printlog("H - 지령전",true,false,false,CL_help);
+		printlog("D - 던전     T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
+		printlog("B - 홍마관도서관   U - 홍마관지하   A - 미궁의죽림  E - 영원정   Y - 윳쿠리둥지 ",true,false,false,CL_help);
+		printlog("P - 짐승길  H - 지령전  R - 꿈의 세계 O - 달의 세계  K - 마계  Z - 하쿠레이신사",true,false,false,CL_help);
 		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
 		wizard_mode = true;
 		key_ = waitkeyinput();
@@ -95,8 +95,10 @@ void wiz_mode()
 				next_ = TEMPLE_LEVEL;
 				break;
 			case 'l':
-			case 'L':
 				next_ = MISTY_LAKE_LEVEL;
+				break;
+			case 'L':
+				next_ = MISTY_LAKE_LAST_LEVEL;
 				break;
 			case 'm':
 				next_ = YOUKAI_MOUNTAIN_LEVEL;
@@ -126,10 +128,42 @@ void wiz_mode()
 			case 'E':					
 				next_ = EIENTEI_LEVEL;
 				break;
-			case 'h':			
-			case 'H':
+			case 'h':	
 				next_ = SUBTERRANEAN_LEVEL;
-				break;
+				break;		
+			case 'H':
+				next_ = SUBTERRANEAN_LEVEL_LAST_LEVEL;
+				break;	
+			case 'y':	
+				next_ = YUKKURI_LEVEL;
+				break;	
+			case 'Y':
+				next_ = YUKKURI_LAST_LEVEL;
+				break;	
+			case 'p':	
+				next_ = DEPTH_LEVEL;
+				break;	
+			case 'P':
+				next_ = DEPTH_LAST_LEVEL;
+				break;	
+			case 'r':	
+			case 'R':	
+				next_ = DREAM_LEVEL;
+				break;	
+			case 'o':	
+			case 'O':
+				next_ = MOON_LEVEL;
+				break;					
+			case 'k':	
+			case 'K':
+				next_ = PANDEMONIUM_LEVEL;
+				break;	
+			case 'z':	
+				next_ = HAKUREI_LEVEL;
+				break;	
+			case 'Z':
+				next_ = HAKUREI_LAST_LEVEL;
+				break;	
 			default:
 				return;
 		}

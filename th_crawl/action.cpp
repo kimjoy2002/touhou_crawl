@@ -1371,66 +1371,83 @@ void Stair_move(bool down)
 				you.SetCatch(NULL);
 			int floor_return=0;
 			coord_def pos_return(0,0);
+
+			
 			switch(current_level)
 			{
 			case TEMPLE_LEVEL:
 				floor_return = map_list.dungeon_enter[TEMPLE].floor;
+				env[floor_return].MakeMap(true); //역행시 서브던전 입구를 찾기 위해 미리 만든다.
 				pos_return = map_list.dungeon_enter[TEMPLE].pos;
 				break;
 			case MISTY_LAKE_LEVEL:
 				floor_return = map_list.dungeon_enter[MISTY_LAKE].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[MISTY_LAKE].pos;
 				break;
 			case YOUKAI_MOUNTAIN_LEVEL:
 				floor_return = map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos;
 				break;
 			case SCARLET_LEVEL:
 				floor_return = map_list.dungeon_enter[SCARLET_M].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SCARLET_M].pos;
 				break;				
 			case SCARLET_LIBRARY_LEVEL:
 				floor_return = map_list.dungeon_enter[SCARLET_L].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SCARLET_L].pos;
 				break;
 			case SCARLET_UNDER_LEVEL: 
 				floor_return = map_list.dungeon_enter[SCARLET_U].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SCARLET_U].pos;
 				break;				
 			case BAMBOO_LEVEL: 
 				floor_return = map_list.dungeon_enter[BAMBOO].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[BAMBOO].pos;
 				break;			
 			case EIENTEI_LEVEL: 
 				floor_return = map_list.dungeon_enter[BAMBOO].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[BAMBOO].pos;
 				break;
 			case SUBTERRANEAN_LEVEL: 
 				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
 				break;
 			case YUKKURI_LEVEL:
 				floor_return = map_list.dungeon_enter[YUKKURI_D].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[YUKKURI_D].pos;
 				break;				
 			case DEPTH_LEVEL:
 				floor_return = map_list.dungeon_enter[DEPTH].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[DEPTH].pos;
 				break;	
 			case DREAM_LEVEL:
 				floor_return = map_list.dungeon_enter[DREAM_D].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[DREAM_D].pos;
 				break;	
 			case MOON_LEVEL:
 				floor_return = map_list.dungeon_enter[DREAM_D].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[DREAM_D].pos;
 				break;
 			case PANDEMONIUM_LEVEL:
 				floor_return = map_list.dungeon_enter[PANDEMONIUM].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[PANDEMONIUM].pos;
 				break;
 			case HAKUREI_LEVEL:
 				floor_return = map_list.dungeon_enter[HAKUREI_D].floor;
+				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[HAKUREI_D].pos;
 				break;
 			}

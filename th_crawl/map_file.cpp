@@ -412,9 +412,9 @@ bool PixedMap(map_dummy* map, char *temp)
 				if(map->sp_tile_list[temp[j]-'0']>= DG_SUB_STAIR_FIRST && map->sp_tile_list[temp[j]-'0'] < DG_SUB_STAIR_MAX)
 				{//특수 지형이 만약 서브던젼 계단입구일 경우
 					int stiar_enter_ = map->sp_tile_list[temp[j]-'0'] - DG_SUB_STAIR_FIRST;
-					if(stiar_enter_>=PANDEMONIUM)
-						stiar_enter_--;
 					if(stiar_enter_>=SUBTERRANEAN)
+						stiar_enter_--;
+					if(stiar_enter_>=PANDEMONIUM)
 						stiar_enter_--;
 					map_list.dungeon_enter[stiar_enter_].detected = true;
 					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);

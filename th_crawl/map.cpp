@@ -10,6 +10,7 @@
 #include "throw.h"
 #include "enum.h"
 #include "mon_infor.h"
+#include "event.h"
 
 
 
@@ -114,7 +115,7 @@ void map_dummy::make_door(environment& env_pointer)
 	env_pointer.dgtile[m_entrance.x][m_entrance.y].tile = DG_CLOSE_DOOR;
 	env_pointer.dgtile[m_exit.x][m_exit.y].tile = DG_CLOSE_DOOR;
 }
-void map_dummy::mask(environment& env_pointer)
+void map_dummy::mask(environment& env_pointer, bool wall_)
 {
 	for(int i = -size_x;i<=size_x;i++)
 	{
@@ -122,12 +123,45 @@ void map_dummy::mask(environment& env_pointer)
 		{
 			if(tiles[i+size_x][j+size_y] != DG_NONE)
 			{
-				env_pointer.dgtile[i+pos.x][j+pos.y].tile = wall_tex;
+				if(wall_ || (i != -size_x && i != size_x && j != size_y && j != -size_y))
+					env_pointer.dgtile[i+pos.x][j+pos.y].tile = wall_tex;
 			}
 		}
 	}
 	env_pointer.dgtile[m_entrance.x][m_entrance.y].tile = DG_FLOOR2;
 	env_pointer.dgtile[m_exit.x][m_exit.y].tile = DG_FLOOR2;
+}
+void map_dummy::eventmapmake(environment& env_pointer, int count, bool wall_)
+{
+	for(int i = -size_x;i<=size_x;i++)
+	{
+		for(int j = -size_y;j<=size_y;j++)
+		{			
+			if(i+pos.x<0 || i+pos.x>DG_MAX_X||j+pos.y<0 || j+pos.y>DG_MAX_X)
+			{
+				break;
+			}
+			else if(tiles[i+size_x][j+size_y] != DG_NONE)
+			{
+				env_pointer.MakeEvent(EVL_FLOOR, pos+coord_def(i,j), EVT_COUNT,count);
+				//env_pointer.dgtile[i+pos.x][j+pos.y].tile = tiles[i+size_x][j+size_y];
+				if(flag)
+					env_pointer.dgtile[i+pos.x][j+pos.y].flag |= flag;
+			}
+		}
+	}
+	//for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
+	//{
+	//	env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+	//}
+	//for(list<mapdummy_item>::iterator it = item_list.begin();it!=item_list.end();it++)
+	//{
+	//	env_pointer.MakeItem(it->pos+pos,it->id);
+	//}
+	//for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
+	//{
+	//	env_pointer.MakeEvent(it->id,it->position+pos,it->type);
+	//}
 }
 
 void map_dummy::SetEnter(coord_def c)
@@ -207,6 +241,10 @@ void map_algorithms(int num)
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
 		{
 			map_algorithms01(num,DG_FLOOR,DG_RED_WALL);
+		}
+		else if(num == DREAM_LEVEL)
+		{			
+			map_algorithms02(num,3,-40,DG_FLOOR,DG_WALL);
 		}
 		else
 		{
@@ -517,6 +555,202 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 }
 
 
+void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex 	,
+	vector<map_dummy*> &vec_map,
+	vector<map_dummy*> &vec_special_map , 
+	bool check_room_mask_, bool first_path_, bool make_path_, bool make_wall_, int door_percent_)
+{
+	const int divide_ = 5;
+	const int dream_count_ = 300;
+	vector<map_dummy*>::iterator it=vec_map.begin();
+
+	
+	stack<coord_def> path_stack[divide_];
+
+	
+	map_dummy*  temp=vec_map.front();
+
+
+	for(int i = 0 ; i < divide_; i++)
+	{
+		vector<map_dummy*>::iterator it2=it;
+		
+		for(int k = 0;k<DG_MAX_X;k++)
+		{
+			for(int h = 0;h<DG_MAX_Y;h++)
+			{
+				env[num].dgtile[k][h].tile = floor_tex;
+			}
+		}
+
+
+
+		
+		{
+			int j =0;
+			for(;it!=vec_map.end();it++)  //방들을 마스크주기
+			{
+				if(check_room_mask_ || !make_path_)
+					(*it)->mask(env[num],false);
+				j++;
+				if(i != divide_ -1 && j>vec_map.size()/divide_)
+				{
+					if(i == 0)	
+						temp = (*it);
+					it++;
+					break;
+				}
+			}
+		}
+
+		
+		int j =0;
+		for(;it2!=vec_map.end();it2++) 
+		{
+			if(PathSearch(temp->GetEntrance(),(*it2)->GetExit(),path_stack[i],ST_MAP,num))//방에 걸린 마스크를 피해서 경로저장
+			{
+				if(!check_room_mask_)
+					path_stack[i].push((*it2)->GetEntrance());
+				(*it2)->SetConnectExit(true);
+				temp->SetConnectEnter(true);
+			}
+			else
+			{
+
+				temp = (*it2);
+			}
+			temp = (*it2);
+			if(!make_path_)
+				break;
+			j++;
+			if(i != divide_ -1 &&   j>vec_map.size()/divide_)
+			{
+				temp = (*it2);
+				it2++;
+				break;
+			}
+		}		
+	}
+
+	
+	first_path_ = true;
+	
+	for(int k = 0;k<DG_MAX_X;k++)
+	{
+		for(int h = 0;h<DG_MAX_Y;h++)
+		{
+			env[num].dgtile[k][h].tile = wall_tex; //다시 전부 벽으로
+		}
+	}
+
+
+	
+	bool make_room_ = true;
+	do
+	{
+		if(!make_room_)
+			first_path_ = true;
+
+
+		if(make_path_ && first_path_)
+		{
+			for(int i = 0 ; i < divide_ ; i++)
+			{
+				while(!path_stack[i].empty())
+				{
+					coord_def path_temp = path_stack[i].top();
+					if(i==0)
+						env[num].dgtile[path_temp.x][path_temp.y].tile = floor_tex; //저장한 도로를 칠하기
+					else 
+						env[num].MakeEvent(EVL_FLOOR, path_temp, EVT_COUNT,dream_count_*i);
+					path_stack[i].pop();
+				}
+			}
+		}
+
+		if(make_room_)
+		{
+			int percent_ = door_percent_;
+			it=vec_map.begin();
+			for(int i = 0 ; i < divide_ ; i++)
+			{
+				int j =0;
+				for(;it!=vec_map.end();it++) 
+				{//방을 만든다.
+					if(i==0)
+						(*it)->make_map(env[num],make_wall_);
+					else
+					{
+						(*it)->eventmapmake(env[num],i*dream_count_,make_wall_);
+						
+						for(int k = rand_int(0,3); k >0 ; k--)
+						{
+							env[num].MakeEvent(EVL_DREAM_MONSTER, (*it)->pos, EVT_COUNT,dream_count_*i);
+						}
+
+					}
+					j++;
+					if(i != divide_ -1 &&   j>vec_map.size()/divide_)
+					{
+						it++;
+						break;
+					}
+				}
+			}
+			make_room_ = false;
+		}
+
+	}while(!first_path_);
+	//
+	//for(it=vec_special_map.begin();it!=vec_special_map.end();it++) 
+	//{//방을 만든다.
+	//	(*it)->make_map(env[num], false);
+	//}
+
+	//
+	//for (it=vec_special_map.begin();it!=vec_special_map.end();it++)
+	//	delete *it;
+	for(int k=0;k<divide_;k++)
+		env[num].MakeEvent(EVL_DREAM_MESSAGE, coord_def(0,0), EVT_COUNT,dream_count_*(k+1));
+	
+	for (it=vec_map.begin();it!=vec_map.end();it++)
+		delete *it;
+
+	
+	
+	for(int i=0;i<6;i++)
+	{
+		while(1)
+		{
+			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
+			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
+			{
+				if(i>2)
+				{
+					env[num].stair_up[i-3].x = x;
+					env[num].stair_up[i-3].y = y;
+					/*if( num != 0 && environment::isFirstFloor(num))
+						env[num].dgtile[x][y].tile = DG_RETURN_STAIR;
+					else
+						env[num].dgtile[x][y].tile = DG_UP_STAIR;*/
+				}
+				else
+				{
+					env[num].stair_down[i].x = x;
+					env[num].stair_down[i].y = y;
+					//if(!environment::isLastFloor(num))
+					//	env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
+				}
+				break;
+			}
+		}
+	}
+}
+
+
+
+
+
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
@@ -585,13 +819,11 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			}
 		}
 	}
-
-	common_map_make_last(num, 	
-	floor_tex,wall_tex,
-	vec_map,
-	vec_special_map, 
-	true,true, true, true, randA(10));
-
+		common_map_make_last(num, 	
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map, 
+		true,true, true, true, randA(10));
 }
 void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
@@ -735,11 +967,18 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 	}
 
 	
-	common_map_make_last(num, 
-	floor_tex,wall_tex,
-	vec_map,
-	vec_special_map, 
-	false,false, true, false, 11);
+	if(num == DREAM_LEVEL)
+		dream_map_make_last(num, 	
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map, 
+		false,true, true, false, randA(10));
+	else
+		common_map_make_last(num, 
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map, 
+		false,false, true, false, 11);
 
 
 

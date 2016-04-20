@@ -117,7 +117,8 @@ public:
 	bool plus_collution(const coord_def& point,int size_x_,int size_y_);
 	void make_map(environment& env_pointer, bool wall_ = true);
 	void make_door(environment& env_pointer);
-	void mask(environment& env_pointer);
+	void mask(environment& env_pointer, bool wall_ = true);
+	void eventmapmake(environment& env_pointer, int count, bool wall_ = true);
 	void SetEnter(coord_def c);
 	void SetExit(coord_def c);
 	coord_def GetEntrance(){return m_entrance;};

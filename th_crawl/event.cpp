@@ -325,6 +325,78 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 		}
 		return 0;
+	case EVL_DREAM_MONSTER:
+		{		
+			int arr_[] = {MON_MOOK,/* MON_BLUE_UFO,*///달토끼, //맥, //악몽의조각, //
+			};
+			rand_rect_iterator rit(event_->position,3,3);
+			int mon_id_ = arr_[randA(1)];
+			int i = mon_id_==MON_BLUE_UFO?3:1; 
+			for(;!rit.end() && i> 0;rit++)
+			{
+				if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
+				{
+					monster *mon_ = env[current_level].AddMonster(mon_id_,0,(*rit));
+					i--;
+				}
+			}
+		}
+		return 1;
+	case EVL_DREAM_MESSAGE:
+		{
+			int i = 0;
+			for(list<events>::iterator it = env[current_level].event_list.begin();it != env[current_level].event_list.end() ; it++)
+			{
+				if(it->id == EVL_DREAM_MESSAGE)
+					i++;
+			}
+			switch(i)
+			{
+			case 5:
+				you.resetLOS();
+				printlog("꿈의 세계가 넓어지기 시작한다! 자고 있던 몹들이 깨어났다!",true,false,false,CL_danger);
+				MoreWait();
+				break;
+			case 4:
+				you.resetLOS();
+				printlog("꿈의 세계가 넓어지고 있다!",true,false,false,CL_danger);
+				MoreWait();
+				break;
+			case 3:
+				you.resetLOS();
+				printlog("꿈의 세계가 또 다시 넓어졌다! 몹들이 당신을 눈치챘다!",true,false,false,CL_danger);
+				MoreWait();
+				break;
+			case 2:
+				you.resetLOS();
+				printlog("꿈의 세계는 거의 대부분 열렸다! 곧 몬스터가 들끓기 시작한다!",true,false,false,CL_danger);
+				MoreWait();
+				break;
+			case 1:
+				for(int k = 3;k<DG_MAX_X-3;k++)
+				{
+					for(int h = 3;h<DG_MAX_Y-3;h++)
+					{
+						if(env[current_level].dgtile[k][h].tile == DG_WALL)
+							env[current_level].dgtile[k][h].tile = DG_FLOOR;
+					}
+				}
+				you.resetLOS();
+				while(1)
+				{
+					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+					if(!env[current_level].isInSight(coord_def(x_,y_)) && env[current_level].dgtile[x_][y_].isFloor()  && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_STAIR) )
+					{
+						env[current_level].dgtile[x_][y_].tile = DG_MOON_STAIR;
+						break;
+					}
+				}
+				printlog("꿈의 세계는 완전히 개방되었다! 달로 가는 포탈이 어디선가 열렸다!",true,false,false,CL_danger);
+				MoreWait();
+				break;
+			}
+		}
+		return 1;
 	default:
 		break;
 	}

@@ -21,7 +21,9 @@ enum event_list
 	EVL_LUNATICTIME, //루나틱 타임!
 	EVL_KOGASA, //키스메를 따라하는 코가사
 	EVL_NOISE,//소음
-	EVL_VIOLET//필드 바이올렛
+	EVL_VIOLET,//필드 바이올렛
+	EVL_DREAM_MONSTER,//드림방 몬스터 생성
+	EVL_DREAM_MESSAGE //꿈의 세계가 펼쳐진다.
 };
 
 class events

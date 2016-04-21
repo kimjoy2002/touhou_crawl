@@ -15,6 +15,7 @@
 #include "spellcard.h"
 #include "skill_use.h"
 #include "weapon.h"
+#include "map.h"
 
 bool wizard_mode = false;
 
@@ -203,7 +204,7 @@ void wiz_mode()
 		env[current_level].dgtile[you.position.x][you.position.y].tile = (dungeon_tile_type) rand_int(DG_TEMPLE_FIRST,DG_TEMPLE_LAST);
 		break;
 	case 'M':
-		if(monster* mon_=BaseSummon(MON_RUMIA, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+		if(monster* mon_=BaseSummon(MON_SANGHAI, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 		{
 			mon_->state.SetState(MS_SLEEP);
 			mon_->flag &= ~M_FLAG_SUMMON;
@@ -214,6 +215,94 @@ void wiz_mode()
 		you.PietyUpDown(10);
 		you.GiftCount(10);
 		break;
+	case 'C':
+		{
+			for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if(it->isLive())
+					it->dead(PRT_PLAYER,false);
+			}
+			for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
+			{
+				it->position = you.position;
+			}
+		}
+	case 'E':
+		{
+			int prevexp_=0, exp_ = 0;
+			for(int i = 0; i <= map_list.dungeon_enter[MISTY_LAKE].floor; i++)
+			{
+				env[i].MakeMap(true);				
+				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+			}
+			exp_ = you.exper;
+			char temp[200];
+			sprintf_s(temp,200,"일반던전 %d층까지 레벨:%d (경험치양 %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
+			printlog(temp,true,false,false,CL_normal);
+			prevexp_ = exp_;
+				 
+			for(int i = MISTY_LAKE_LEVEL; i <= MISTY_LAKE_LAST_LEVEL; i++)
+			{
+				env[i].MakeMap(true);				
+				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+			}
+			exp_ = you.exper;
+			sprintf_s(temp,200,"안개호수클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+			printlog(temp,true,false,false,CL_normal);
+			prevexp_ = exp_;
+
+
+			for(int i = map_list.dungeon_enter[MISTY_LAKE].floor+1; i <= MAX_DUNGEUN_LEVEL; i++)
+			{
+				env[i].MakeMap(true);				
+				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+			}
+			exp_ = you.exper;
+			sprintf_s(temp,200,"남은던전 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+			printlog(temp,true,false,false,CL_normal);
+			prevexp_ = exp_;
+
+
+			for(int i = YOUKAI_MOUNTAIN_LEVEL; i <= YOUKAI_MOUNTAIN_LAST_LEVEL; i++)
+			{
+				env[i].MakeMap(true);				
+				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+			}
+			exp_ = you.exper;
+			sprintf_s(temp,200,"요괴의산 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+			printlog(temp,true,false,false,CL_normal);
+			prevexp_ = exp_;
+
+			for(int i = SCARLET_LEVEL; i <= SCARLET_LEVEL_LAST_LEVEL; i++)
+			{
+				env[i].MakeMap(true);				
+				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+			}
+			exp_ = you.exper;
+			sprintf_s(temp,200,"홍마관 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+			printlog(temp,true,false,false,CL_normal);
+			prevexp_ = exp_;
+		}
 	default:
 		printlog("없는 명령어",true,false,false,CL_help);
 		break;

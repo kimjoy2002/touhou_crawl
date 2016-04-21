@@ -1414,6 +1414,13 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		return false;
 	}
 	int need_exp = need_skill_exp(skill[skill_].level,AptCal(skill[skill_].aptit));
+
+	if(need_exp == -1)
+	{
+		you.skill[skill_].onoff = false;
+		return false;
+	}
+
 	int up_point = (exp_*10)/exp_to_skill_exp(skill[skill_].level);
 	if(up_point<0)
 		up_point = 0;
@@ -1426,12 +1433,17 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		int exp_pool = (skill[skill_].exper - need_exp)*exp_to_skill_exp(skill[skill_].level)/10;
 		skill[skill_].level+=1;
 		skill[skill_].exper = need_exp;
+		if(skill[skill_].level == 27)
+		{			
+			you.skill[skill_].onoff = false;
+		}
+
 		if(speak_)
 		{
 			enterlog();
 			sprintf_s(temp,50,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_),skill[skill_].level);
 			printlog(temp,true,false,false,CL_good);
-			if(skill[skill_].level == 1 || skill[skill_].level % 5 == 0)
+			if(skill[skill_].level == 1 || skill[skill_].level % 5 == 0 || skill[skill_].level == 27)
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"스킬 %s의 레벨업. 스킬레벨 %d",skill_string(skill_),skill[skill_].level);

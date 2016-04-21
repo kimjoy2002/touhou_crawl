@@ -265,16 +265,22 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	{
 		for(i = 0;i<1;i++)
 		{
-			sprintf_s(temp,100,"%c %c %8s %3d",sk_char++,(you.skill[skt].onoff?'+':'-'),skill_string((skill_type)skt),you.skill[skt].level);
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, 1/*you.skill[skt].level*/?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_none);
+
+			sprintf_s(temp,100,"%c %c %8s %3d",you.skill[skt].level==27?' ':sk_char,(you.skill[skt].level==27?' ':(you.skill[skt].onoff?'+':'-')),skill_string((skill_type)skt),you.skill[skt].level);
+			sk_char++;
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.skill[skt].level<27?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_warning);
 			rc.left += 150;
 			//if(move ==0)
+			if(you.skill[skt].level<27)
 				sprintf_s(temp,100,"(%2d%%)",GetSkillPercent(you.skill[skt]));
+			else 
+				sprintf_s(temp,100,"");
+
 			//else if(move == 1)
 			//	sprintf_s(temp,100,"%d",you.skill[skt].aptit);
 			//else
 			//	sprintf_s(temp,100,"%d",you.skill[skt].exper);
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, 1/*you.skill[skt].level*/?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_none);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.skill[skt].level<27?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_warning);
 			rc.left += 50;
 						
 			sprintf_s(temp,100,"%3d",you.skill[skt].aptit);

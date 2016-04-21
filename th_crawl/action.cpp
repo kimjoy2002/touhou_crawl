@@ -1512,7 +1512,7 @@ void skill_view()
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
-			if(num<SKT_MAX /*&& you.skill[num].level*/)
+			if(num<SKT_MAX && you.skill[num].level < 27)
 			{
 				you.skill[num].onoff = !you.skill[num].onoff;
 			}

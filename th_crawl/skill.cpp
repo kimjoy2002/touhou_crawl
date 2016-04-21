@@ -75,6 +75,7 @@ int AptCal(int aptitu_)
 int need_skill_exp(int level, int aptit)
 { 
 	if(level<0) return 0;
+	else if(level == 27) return -1;
 	return (200+(level)*(80+(level-1)*20))*aptit/100;
 }
 

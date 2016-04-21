@@ -3463,6 +3463,30 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}		
 		break;
+	case MON_LETTY:
+		break;
+	case MON_YORIHIME:
+		break;
+	case MON_TOYOHIME:
+		break;
+	case MON_UTSUHO:
+		break;
+	case MON_SUIKA:
+		break;
+	case MON_REIMU:
+		break;
+	case MON_ALICE:
+		break;
+	case MON_SEIRAN:
+		break;
+	case MON_RINGO:
+		break;
+	case MON_UDONGE:
+		break;
+	case MON_KAGUYA:
+		break;
+	case MON_MOKOU:
+		break;
 	default:
 		break;
 	}
@@ -3476,9 +3500,6 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		sprintf(temp_speak,"%s%sÈ¥¶õ½º·¯¿ö ÇÏ°íÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 		return temp_speak;
 	}
-	else
-	{
-		sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_do(true));
-		return temp_speak;
-	}
+	sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_do(true));
+	return temp_speak;
 }

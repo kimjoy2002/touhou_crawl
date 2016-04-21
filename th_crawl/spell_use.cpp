@@ -2686,6 +2686,72 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_ICE_BOLT,20));
 		list->push_back(spell(SPL_MIND_BENDING,20));
 		break;
+	case MON_FAIRY_HERO:
+		break;
+	case MON_FAIRY_SOCERER:
+		break;
+	case MON_FAIRY_SUN_FLOWER:
+		break;
+	case MON_MOON_RABIT_SUPPORT:
+		break;
+	case MON_MOON_RABIT_ATTACK:
+		break;
+	case MON_MOON_RABIT_ELITE:
+		break;
+	case MON_MAC:
+		break;
+	case MON_NIGHTMARE:
+		break;
+	case MON_LUNATIC:
+		break;
+	case MON_HAUNT:
+		break;
+	case MON_FIRE_CAR:
+		break;
+	case MON_HELL_SPIDER:
+		break;
+	case MON_BLOOD_HAUNT:
+		break;
+	case MON_HELL_HOUND:
+		break;
+	case MON_DESIRE:
+		break;
+	case MON_FLOWER_TANK:
+		break;
+	case MON_EVIL_EYE_TANK:
+		break;
+	case MON_SNOW_GIRL:
+		break;
+	case MON_LETTY:
+		break;
+	case MON_YORIHIME:
+		break;
+	case MON_TOYOHIME:
+		break;
+	case MON_UTSUHO:
+		break;
+	case MON_SUIKA:
+		break;
+	case MON_REIMU:
+		break;
+	case MON_ALICE:
+		break;
+	case MON_SEIRAN:
+		break;
+	case MON_RINGO:
+		break;
+	case MON_UDONGE:
+		break;
+	case MON_KAGUYA:
+		break;
+	case MON_MOKOU:
+		break;
+	case MON_NESI:
+		break;
+	case MON_SANGHAI:
+		break;
+	case MON_HOURAI:
+		break;
 	default:
 		break;
 	}

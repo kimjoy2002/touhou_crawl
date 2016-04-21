@@ -570,6 +570,144 @@ string GetMonsterInfor(monster *it)
 		text_ += "꿈을 먹는 꿈의 관리인으로 맥이다.\n";
 		text_ += "평소에는 꿈의 세계에 살고 있다. 당신을 꿈나라로 이끈다.\n";
 		break;
+	case MON_FAIRY_HERO:
+		text_ += "장난치기를 좋아하는 요정. 자주 몰려다니는 것 같다.\n";
+		text_ += "그녀는 요정 중에서도 검술의 달인, 더이상 단순한 요정이라고 생각하면 위험하다.\n";
+		break;
+	case MON_FAIRY_SOCERER:
+		text_ += "장난치기를 좋아하는 요정. 자주 몰려다니는 것 같다.\n";
+		text_ += "만물의 이치를 깨달은 요정. 그녀의 마법은 이미 요정의 한계를 벗어났다.\n";
+		break;
+	case MON_FAIRY_SUN_FLOWER:
+		text_ += "장난치기를 좋아하는 요정. 자주 몰려다니는 것 같다.\n";
+		text_ += "해바라기를 들고있는 귀여운 요정. 다른 요정들을 통솔한다.\n";
+		text_ += "요정들이 그 큰 해바라기를 중심으로 모이게되어 요정의 리더로 취급받는다.\n";
+		break;
+	case MON_MOON_RABIT_SUPPORT:
+		text_ += "달에서 온갖 잡일을 맡고 있는 달토끼.\n";
+		text_ += "정보원으로서 활동중이다. 직접적인 전투보단 부대원과의 통신, 정보교환이 목적이다.\n";
+		break;
+	case MON_MOON_RABIT_ATTACK:
+		text_ += "달에서 온갖 잡일을 맡고 있는 달토끼.\n";
+		text_ += "정찰과 탐색이 목적으로 달토끼들 중에서도 가장 험한 일을 맡고 있다.\n";
+		break;
+	case MON_MOON_RABIT_ELITE:
+		text_ += "달에서 온갖 잡일을 맡고 있는 달토끼.\n";
+		text_ += "대체로 오합지졸인 달토끼들중에서도 엘리트, 달의 도시의 경비를 맡고 있다.\n";
+		break;
+	case MON_MAC:
+		text_ += "꿈을 먹고 산다는 요괴 맥.\n";
+		text_ += "생긴 것은 개미핥기처럼 생겼다. 꿈의 세계에선 꽤나 강적.\n";
+		break;
+	case MON_NIGHTMARE:
+		text_ += "악몽이 모여 만들어진 무언가.\n";
+		text_ += "사람들의 영력을 흡수하며 공포와 파괴를 일삼는다.\n";
+		break;
+	case MON_LUNATIC:
+		text_ += "광기가 모여 만들어진 무언가.\n";
+		text_ += "만나는 상대를 광기에 휩싸이게 한다. 광기가 쌓이면 정상적인 행동이 불가능하다.\n";
+		text_ += "단순히 무언가를 때려부수는것이라면 광기의 상태가 더욱 효과적일지도.\n";
+		break;
+	case MON_HAUNT:
+		text_ += "원한이 모여서 만들어진 원령.\n";
+		text_ += "무엇보다도 유령보다 위협적이다.\n";
+		break;
+	case MON_FIRE_CAR:
+		text_ += "지저의 화차. 시체를 운반한다고도 한다.\n";
+		text_ += "바퀴에 화염이 뿜어져나오고있다. 가까이가면 화상을 입을 것 같다.\n";
+		break;
+	case MON_HELL_SPIDER:
+		text_ += "거미의 요괴의 일종인 츠지구모.\n";
+		text_ += "물리면 심한 독과 병을 동반한다. 강을 오염시키기도한다.\n";
+		break;
+	case MON_BLOOD_HAUNT:
+		text_ += "지저의 피의 연못에 물들어버린 원령.\n";
+		text_ += "체력을 깍아먹는 피의 저주는 어떤 갑옷으로도 날렵한 움직임도 막을 수 없다.\n";
+		break;
+	case MON_HELL_HOUND:
+		text_ += "지저에서 살고 있는 개. 그냥 개와는 조금 다를지도.\n";
+		text_ += "울부짖는 소리로 아군 개를 끌어 모은다. 무시하고 냅두면 어마어마하게 불어난다.\n";
+		break;
+	case MON_DESIRE:
+		text_ += "욕망이 뭉쳐져서 구현화된 덩어리.\n";
+		break;
+	case MON_FLOWER_TANK:
+		text_ += "누군가 만들어낸 전차.\n";
+		text_ += "꽤 강력한 대포를 발사한다.\n";
+		break;
+	case MON_EVIL_EYE_TANK:
+		text_ += "마계의 무언가를 본따 만든듯한 전차.\n";
+		text_ += "우습게 생긴 겉보기와 달리 어마어마한 위력을 지녔다.\n";
+		break;
+	case MON_SNOW_GIRL:
+		text_ += "눈을 조종할 수 있는 설녀.\n";
+		text_ += "가까이가기만 해도 춥다.\n";
+		break;
+	case MON_LETTY:
+		text_ += "눈을 조종할 수 있는 설녀.\n";
+		text_ += "얼음의 요정과는 차원이 다르지만 주변에서는 그렇게 생각하지않는듯하다.\n";
+		break;
+	case MON_YORIHIME:
+		text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 여동생.\n";
+		text_ += "신령을 자신의 몸에 깃들게하여 신의 힘을 쓰는 능력을 가지고 있다.\n";
+		break;
+	case MON_TOYOHIME:
+		text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 언니.\n";
+		text_ += "바다와 산을 연결할 수 있는 능력을 지녔다.\n";
+		text_ += "달의 최신병기인 부채로 적을 소립자 레벨로 분해 할 수 있다.\n";
+		break;
+	case MON_UTSUHO:
+		text_ += "지저에 살던 지옥까마귀중 하나였지만 야타가라스의 힘을 받았다.\n";
+		text_ += "신의 힘으로 핵에너지를 다룰 수 있게 되었다.\n";
+		text_ += "다만 본체가 멍청해서인지 지상을 침략하려는 시도도 있었다.\n";
+		break;
+	case MON_SUIKA:
+		text_ += "신사에 들러붙어 살고있는 오니. 항상 술에 취해있다.\n";
+		text_ += "슈텐도지로 작은 체형과 달리 어마어마한 괴력을 지녔다.\n";
+		text_ += "밀도를 조절하여 커지기도 작아지기도 자유자재.\n";
+		break;
+	case MON_REIMU:
+		text_ += "그 유명한 하쿠레이의 무녀다.\n";
+		text_ += "음양옥을 훔쳤다는 당신을 쫓기위해 날라왔다.\n";
+		text_ += "도망쳐! 분노한 그녀에겐 그 어떤 공격도 통하지않는다구!\n";
+		break;
+	case MON_ALICE:
+		text_ += "마법의 숲에 살고 있던 칠색의 인형술사.\n";
+		text_ += "인형을 이용하면서 전투를 하는 두뇌파.\n";
+		text_ += "전력을 다하진 않는 듯 보인다.\n";
+		break;
+	case MON_SEIRAN:
+		text_ += "달토끼 조사부대, 이글래빗의 척후병을 맡고있는 달토끼.\n";
+		text_ += "항상 궂은일을 떠맡는 것 같아서 불만이 많아 보인다.\n";
+		break;
+	case MON_RINGO:
+		text_ += "달토끼 조사부대, 이글래빗의 정보병을 맡고있는 달토끼.\n";
+		text_ += "정보를 취급하는 편한 직책을 맡고 있다. 경단을 먹을수록 강해진다.\n";
+		break;
+	case MON_UDONGE:
+		text_ += "달에서 도망쳐나온 달토끼, 일명 탈영병.\n";
+		text_ += "광기를 다루는 능력을 지녔다. 달토끼중에서는 상당한 실력자.\n";
+		text_ += "현재는 지상의 영원정에서 살고 있다.\n";
+		break;
+	case MON_KAGUYA:
+		text_ += "달에서 살고 있었지만 봉래의 약을 사용한 죄인이 된 공주.\n";
+		text_ += "영원과 수유를 다룰 수 있는 능력을 가지고 있다.\n";
+		break;
+	case MON_MOKOU:
+		text_ += "봉래의 약을 먹고 불사의 몸을 가진 인간.\n";
+		text_ += "죽고 싶어도 죽지 못하고 살고 있다.\n";
+		text_ += "현재는 자신의 원수인 카구야와 싸우는 것을 낙으로 살아가고 있다.\n";
+		break;
+	case MON_NESI:
+		text_ += "도시전설을 기반으로 캇파들이 만들어낸 인공물이다.\n";
+		text_ += "도시전설을 믿지 않는 캇파들이 만든 물건이지만 그것에 귀신이 쓰인적도...\n";
+		break;
+	case MON_SANGHAI:
+		text_ += "바카쟈네노?\n";
+		break;
+	case MON_HOURAI:
+		text_ += "앨리스의 인형중 하나인 봉래인형\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

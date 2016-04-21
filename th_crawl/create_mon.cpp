@@ -729,6 +729,18 @@ int get_unique_to_id(int m_id)
 	case MON_TEWI:  return 34;
 	case MON_CLOWNPIECE:  return 35;
 	case MON_DOREMI:  return 36;
+	case MON_LETTY:  return 37;
+	case MON_YORIHIME:  return 38;
+	case MON_TOYOHIME:  return 39;
+	case MON_UTSUHO:  return 40;
+	case MON_SUIKA:  return 41;
+	case MON_REIMU:  return 42;
+	case MON_ALICE:  return 43;
+	case MON_SEIRAN:  return 44;
+	case MON_RINGO:  return 45;
+	case MON_UDONGE:  return 46;
+	case MON_KAGUYA:  return 47;
+	case MON_MOKOU:  return 48;
 	}
 }
 
@@ -1211,6 +1223,72 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist=1;
 		mon->ice_resist=1;
 		mon->poison_resist=1;
+		break;		
+	case MON_FAIRY_HERO:
+		break;
+	case MON_FAIRY_SOCERER:
+		break;
+	case MON_FAIRY_SUN_FLOWER:
+		break;
+	case MON_MOON_RABIT_SUPPORT:
+		break;
+	case MON_MOON_RABIT_ATTACK:
+		break;
+	case MON_MOON_RABIT_ELITE:
+		break;
+	case MON_MAC:
+		break;
+	case MON_NIGHTMARE:
+		break;
+	case MON_LUNATIC:
+		break;
+	case MON_HAUNT:
+		break;
+	case MON_FIRE_CAR:
+		break;
+	case MON_HELL_SPIDER:
+		break;
+	case MON_BLOOD_HAUNT:
+		break;
+	case MON_HELL_HOUND:
+		break;
+	case MON_DESIRE:
+		break;
+	case MON_FLOWER_TANK:
+		break;
+	case MON_EVIL_EYE_TANK:
+		break;
+	case MON_SNOW_GIRL:
+		break;
+	case MON_LETTY:
+		break;
+	case MON_YORIHIME:
+		break;
+	case MON_TOYOHIME:
+		break;
+	case MON_UTSUHO:
+		break;
+	case MON_SUIKA:
+		break;
+	case MON_REIMU:
+		break;
+	case MON_ALICE:
+		break;
+	case MON_SEIRAN:
+		break;
+	case MON_RINGO:
+		break;
+	case MON_UDONGE:
+		break;
+	case MON_KAGUYA:
+		break;
+	case MON_MOKOU:
+		break;
+	case MON_NESI:
+		break;
+	case MON_SANGHAI:
+		break;
+	case MON_HOURAI:
 		break;
 	}
 }

@@ -116,6 +116,7 @@ public:
 	virtual bool SetMindReading(int mind_){return false;};
 	virtual bool SetTogleInvisible(bool off_){return false;};
 	virtual bool SetGhost(int ghost_)=0;
+	virtual bool SetLunatic(int s_lunatic_)=0;
 	virtual bool SetMirror(int mirror_){return false;};
 	virtual bool SetParadox(int s_paradox_){return false;};
 	virtual bool SetCommunication(int s_communication_){return false;};

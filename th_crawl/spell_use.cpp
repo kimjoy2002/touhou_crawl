@@ -2627,10 +2627,46 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{
+		int damage_ = 14+power/8;
+		int reduce_damage_ = damage_;
+		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
+		{
+			reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
+			you.MpUpDown(rand_int(-4,-7));
+		}
+		else //몬스터는 저항력으로 따짐
+		{
+			monster *mon_ = (monster*)target_unit;
+			reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
+		}
+		attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
+		target_unit->damage(temp_att, true);
+		return true;
+	}
 	return false;
 }
 bool skill_insane(int power, bool short_, unit* order, coord_def target)
 {
+	if(unit* hit_mon = DebufBeam(SPL_INSANE, order, target))
+	{
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_INSANE,power)))
+		{
+			int time_ = rand_int(5,10)+power/5;
+			if(hit_mon->isplayer())
+				time_ = time_/2;
+			hit_mon->SetLunatic(time_);
+		}
+		else if(hit_mon->isYourShight())
+		{					
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		}
+		hit_mon->AttackedTarget(order);
+		return true;
+	}
 	return false;
 }
 bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)

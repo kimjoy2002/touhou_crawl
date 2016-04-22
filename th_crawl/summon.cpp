@@ -88,6 +88,12 @@ int GetSummonMaxNumber(spell_list skill)
 		return 3;		
 	case SPL_SUMMON_LESSOR_DEMON:
 		return 3;		
+	case SPL_SUMMON_DREAM:
+		return 5;
+	case SPL_DOLLS_WAR:
+		return 2;
+	case SPL_FAKE_DOLLS_WAR:
+		return 1;
 	default:
 		return -1;
 	}
@@ -124,6 +130,12 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_FLAN;
 	case SPL_SUMMON_LESSOR_DEMON:
 		return SKD_SUMMON_LESSOR_DEMON;
+	case SPL_SUMMON_DREAM:
+		return SKD_SUMMON_DREAM;
+	case SPL_DOLLS_WAR:
+		return SKD_SUMMON_DOLLS_WAR;
+	case SPL_FAKE_DOLLS_WAR:
+		return SKD_SUMMON_FAKE_DOLLS_WAR;
 	default:
 		return SKD_OTHER;
 	}

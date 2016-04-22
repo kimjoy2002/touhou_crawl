@@ -802,8 +802,12 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			
 			you.skill[SKT_TRANS].onoff = false;
 
+
 			you.mp = you.max_mp;
 			//테스트		
+			//you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			//you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			//you.Memorize(SPL_DOLLS_WAR,true);		
 		}
 	}
 	else if(name_.compare("사나에")==0)

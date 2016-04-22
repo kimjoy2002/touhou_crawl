@@ -219,11 +219,15 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	else if(!SpellFlagCheck(skill, S_FLAG_SMITE))
 	{
 		beam_iterator beam(order->position,order->position);
+		
+		int max_length_ = SpellFlagCheck(skill, S_FLAG_PENETRATE)?SpellLength(skill):beam.GetMaxLength();
 		if(!CheckThrowPath(order->position,target, beam))
 			return false;
 		
-		for(beam.init();!beam.end();beam++)
+		for(beam.init();max_length_>0/*!beam.end()*/;beam++)
 		{
+			if(!env[current_level].isMove((*beam),true,true))
+				break;
 			unit *temp = env[current_level].isMonsterPos((*beam).x,(*beam).y);
 			if(temp)
 			{			
@@ -240,6 +244,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 
 				}
 			}
+			max_length_--;
 		}
 	}
 	else if(SpellFlagCheck(skill, S_FLAG_SMITE))
@@ -2450,12 +2455,38 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)
-{
-	return false;
+{	
+	bool return_=false;	
+	int i = 1; 
+	for(; i>0 ; i--)
+	{
+		if(monster *mon_ = BaseSummon(MON_SANGHAI, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
+		{
+			return_ = true;
+		}	
+		if(monster *mon_ = BaseSummon(MON_HOURAI, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
+		{
+			order->SetSaved(true);
+			return_ = true;
+		}
+	}
+	return return_;
 }
 bool skill_fake_dolls_war(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_=false;	
+	int i = 1; 
+	for(; i>0 ; i--)
+	{
+		int id_ = randA(1)?MON_FAKE_SANGHAI:MON_FAKE_HOURAI;
+		if(monster *mon_ = BaseSummon(id_, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_FAKE_DOLLS_WAR, GetSummonMaxNumber(SPL_FAKE_DOLLS_WAR)))
+		{
+			if(id_ == MON_HOURAI)
+				order->SetSaved(true);
+			return_ = true;
+		}
+	}
+	return return_;
 }
 
 bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
@@ -2860,7 +2891,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_HOURAI:
 	case MON_FAKE_HOURAI:
-		list->push_back(spell(SPL_LASER,20));
+		list->push_back(spell(SPL_LASER,60));
 		break;
 	default:
 		break;

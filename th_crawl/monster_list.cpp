@@ -638,9 +638,9 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	0,0,1,10},
 
-	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_default,120,10,10,
+	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_default,12000,10,10,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI,99,1,9},
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_MOVE,99,1,9},
 	
 	{MON_EVIL_EYE_TANK,25,5043,name_infor("이블 아이 전차",false),&img_mons_default,150,20,10,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -702,20 +702,20 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM,99,1,10},
 	
-	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_default,60,1,20,
+	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_default,80,5,22,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY,99,1,7},
 	
 	{MON_HOURAI,15,1,name_infor("봉래 인형",true),&img_mons_default,120,20,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,12},
+	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,10},
 	
-	{MON_FAKE_SANGHAI,9,1,name_infor("모조 상해 인형",true),&img_mons_default,35,1,15,
+	{MON_FAKE_SANGHAI,9,1,name_infor("모조 상해 인형",true),&img_mons_default,40,5,17,
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY,99,1,7},
 	
 	{MON_FAKE_HOURAI,9,1,name_infor("모조 봉래 인형",true),&img_mons_default,80,15,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,12}
+	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,10}
 
 };

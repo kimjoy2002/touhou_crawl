@@ -422,10 +422,10 @@ monster* environment::AddMonster_Summon(int id_, int flag_, coord_def position_,
 			{
 				sort(temp_list_.begin(), temp_list_.end(), 
 					[](monster* lt,monster* rt){
-					return lt->GetMapId() > lt->GetMapId();
+					return lt->GetMapId() > rt->GetMapId();
 				});
-
-				for(int i = temp_list_.size() - mon_->sm_info.max_num; i > 0 ; i--)
+				int remain_ = temp_list_.size() - mon_->sm_info.max_num;
+				for(int i = temp_list_.size() - 1; remain_ > 0 ; remain_--)
 				{
 					temp_list_[i]->summon_time = 0;
 				}

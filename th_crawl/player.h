@@ -315,7 +315,7 @@ public:
 	void print_damage_message(attack_infor &a);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool GetExp(int exper_);
+	bool GetExp(int exper_, bool speak_ = true);
 	int GetNeedExp(int level_);
 	bool GiveSkillExp(skill_type skill_, int exp_, bool speak_ = true);
 	bool SkillTraining(skill_type skill_, int percent_); // (1/percent_)%
@@ -373,7 +373,7 @@ public:
 	bool Teleport();
 	bool Blink(int time_);
 	bool control_blink(const coord_def &c);
-	void LevelUp();
+	void LevelUp(bool speak_);
 	const name_infor* GetName(){return &name;};
 	const string* GetNameString(){return &(name.name);};
 	const name_infor* GetCharName(){return &char_name;};

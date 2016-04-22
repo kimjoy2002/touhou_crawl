@@ -638,12 +638,13 @@ void monster::CheckSightNewTarget()
 
 					
 		{ //여기부터 시야내 몬스터찾기 시작
+
 			vector<monster>::iterator it;
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && isMonsterSight((*it).position) )
-				{					
+				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && ((env[current_level].isInSight((*it).position) && (flag & M_FLAG_SUMMON) ) || isMonsterSight((*it).position)) )
+				{
 					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position) )
 					{
 						FoundTarget(&(*it),30);
@@ -683,10 +684,17 @@ void monster::CheckSightNewTarget()
 			{
 				if((*it).isLive() && &(*it) != this && isEnemyMonster(&(*it))  && (*it).isView(this) && isMonsterSight((*it).position) )
 				{
-					if(distan_coord(it->position, position) < distant_)
+
+					
+					int check_dis_ = distan_coord(it->position, position);
+					if((*it).id == MON_FAKE_HOURAI || (*it).id == MON_HOURAI )
+						check_dis_ = max(s_lunatic?1:0,check_dis_-(s_lunatic?1:30));
+
+
+					if(check_dis_ <= distant_)
 					{
 						prev_target_ = &(*it);
-						distant_ = distan_coord(it->position, position);
+						distant_ = check_dis_;
 					}
 				}
 			}
@@ -698,7 +706,7 @@ void monster::CheckSightNewTarget()
 		{
 			if(state.GetState() == MS_ATACK ||  you_detect())
 			{
-				int temp = distan_coord(you.position, position)-(s_lunatic?0:30)+(isSightnonblocked(you.position)?0:60);
+				int temp = max(s_lunatic?1:0,distan_coord(you.position, position)-(s_lunatic?0:30)+(isSightnonblocked(you.position)?0:60));
 				if(distant_ == 999 || temp  < distant_)
 				{
 					prev_target_ = &you;
@@ -2048,6 +2056,10 @@ int monster::action(int delay_)
 				}
 				break;
 			case MS_ATACK:
+				if(isUserAlly() && target && memory_time)
+				{
+					target_pos = target->position;
+				}
 				if(you.s_timestep && (target == &you || !target) && !isUserAlly())
 				{
 					memory_time = 0;

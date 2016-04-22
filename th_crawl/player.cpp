@@ -1385,14 +1385,14 @@ bool players::UnidenResistUpDown(int value_, resist_type resist_)
 //}
 
 
-bool players::GetExp(int exper_)
+bool players::GetExp(int exper_, bool speak_)
 {
 	bool level_up_ = false;
 	exper += exper_;
 	skill_exper += exper_;
 	while(GetNeedExp(level-1) >=0 && GetNeedExp(level-1) <= exper)
 	{
-		LevelUp();
+		LevelUp(speak_);
 		level_up_ = true;
 	}
 	SkillTraining();
@@ -2173,42 +2173,55 @@ bool players::control_blink(const coord_def &c)
 	}
 	return false;
 }
-void players::LevelUp()
+void players::LevelUp(bool speak_)
 {
 	level++;
+	if(speak_)
 	{
 		char temp[50];
 		sprintf_s(temp,50,"당신의 레벨이 올랐다! 레벨 %d",you.level);
 		printlog(temp,true,false,false,CL_good);
+		MoreWait();
 	}
-	MoreWait();
 	if(level%3 == 0)
 	{
-		bool end_ = false;
-		printlog("당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능",true,false,false,CL_help);
-		while(!end_)
+		if(speak_)
 		{
-			switch(waitkeyinput())
+			bool end_ = false;
+			printlog("당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능",true,false,false,CL_help);
+			while(!end_)
 			{
-			case 'S':
-			case 's':
-				you.StatUpDown(1,STAT_STR);
-				printlog("강력해졌다.",true,false,false,CL_good);
-				end_ = true;
-				break;
-			case 'D':
-			case 'd':
-				you.StatUpDown(1,STAT_DEX);
-				printlog("민첩해졌다.",true,false,false,CL_good);
-				end_ = true;
-				break;
-			case 'I':
-			case 'i':
-				you.StatUpDown(1,STAT_INT);
-				printlog("똑똑해졌다.",true,false,false,CL_good);
-				end_ = true;
-				break;
+				switch(waitkeyinput())
+				{
+				case 'S':
+				case 's':
+					you.StatUpDown(1,STAT_STR);
+					printlog("강력해졌다.",true,false,false,CL_good);
+					end_ = true;
+					break;
+				case 'D':
+				case 'd':
+					you.StatUpDown(1,STAT_DEX);
+					printlog("민첩해졌다.",true,false,false,CL_good);
+					end_ = true;
+					break;
+				case 'I':
+				case 'i':
+					you.StatUpDown(1,STAT_INT);
+					printlog("똑똑해졌다.",true,false,false,CL_good);
+					end_ = true;
+					break;
+				}
 			}
+		}
+		else
+		{
+			if(you.s_str > you.s_dex && you.s_str > you.s_int)
+				you.StatUpDown(1,STAT_STR);
+			else if(you.s_dex > you.s_str && you.s_dex > you.s_int)
+				you.StatUpDown(1,STAT_DEX);
+			else
+				you.StatUpDown(1,STAT_INT);
 		}
 	}
 	CalcuHP();
@@ -2224,7 +2237,8 @@ void players::LevelUp()
 
 	remainSpellPoiont++;
 	LevelUpTribe(level);
-
+	
+	if(speak_)
 	{
 		char temp[200];
 		sprintf_s(temp,200,"레벨업 : 레벨 %2d. HP: %4d/%4d , MP: %4d/%4d", level,hp,max_hp,mp,max_mp);

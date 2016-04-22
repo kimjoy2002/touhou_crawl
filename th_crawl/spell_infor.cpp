@@ -457,6 +457,7 @@ string GetSpellInfor(spell_list spell)
 	case SPL_DOLLS_WAR:
 		text_ += "근접과 공격에 강력한 상해인형과 원거리와 방어에 특화된 봉래인형을 같이 소환한다.\n";
 		text_ += "상해인형은 빠르게 적을 공격하고 봉래인형은 적들의 어그로를 효과적으로 끌어모은다.\n";
+		text_ += "공격뿐만 아니라 소환사가 취약한 소환술의 약점을 확실하게 보완하는 공방일체 소환술.\n";
 		break;
 	case SPL_FAKE_DOLLS_WAR:
 		text_ += "상해인형이나 봉래인형을 소환한다.\n";

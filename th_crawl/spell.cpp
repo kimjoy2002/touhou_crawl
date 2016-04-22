@@ -1131,11 +1131,11 @@ int SpellDiffer(int level)
 	case 6:
 		return 11;
 	case 7:
-		return 13;
+		return 14;
 	case 8:
-		return 16;
+		return 17;
 	case 9:
-		return 20;
+		return 21;
 	default:
 		return 99;
 	}

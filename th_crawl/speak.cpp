@@ -3463,6 +3463,26 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}		
 		break;
+	case MON_HELL_HOUND:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%sÂ¢¾ú´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_do(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%sÇÏ´ÃÀ» ÇâÇØ ±æ°Ô ¿ïºÎÂ¢¾ú´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
+		break;
 	case MON_LETTY:
 		break;
 	case MON_YORIHIME:

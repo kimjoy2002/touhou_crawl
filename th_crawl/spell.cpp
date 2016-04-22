@@ -1186,6 +1186,9 @@ bool SpellAiCondition(spell_list skill, const monster *mon)
 		return (mon->s_silence?false:true);
 	case SPL_TELEPORT_SELF:
 		return (mon->hp>mon->max_hp*0.2f || mon->s_tele?false:true);
+	case SPL_MOON_COMMUNICATION:
+	case SPL_CALL_HOUND:
+		return (mon->s_exhausted?false:true);
 	default:
 		return true;
 	}

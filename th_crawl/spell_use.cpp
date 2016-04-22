@@ -2684,7 +2684,23 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(!order)
+		return false;
+	if(order->isplayer())
+		return false;
+
+	monster *mon_ = (monster*)order;
+
+	if(mon_->flag & M_FLAG_SUMMON)
+		return false;
+
+	if(!env[current_level].isInSight(target))
+		return false;
+	if(order->GetExhausted())
+		return false;
+
+	order->SetCommunication(rand_int(2,4));
+	return true;
 }
 bool skill_canon(int power, bool short_, unit* order, coord_def target)
 {

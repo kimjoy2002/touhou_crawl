@@ -20,6 +20,7 @@
 #include "note.h"
 #include "tensi.h"
 #include "map.h"
+#include "rect.h"
 
 
 
@@ -2005,12 +2006,47 @@ int monster::action(int delay_)
 				s_exhausted = rand_int(40,50);
 			}
 
-			if(monster* mon_=BaseSummon(MON_MOON_RABIT_ATTACK, rand_int(20,30), false, false, 2, this, position, SKD_OTHER, -1))
+
+			switch(id)
 			{
-				if(!isUserAlly())
+			case MON_MOON_RABIT_SUPPORT:
+				if(monster* mon_=BaseSummon(MON_MOON_RABIT_ATTACK, rand_int(20,30), false, false, 2, this, position, SKD_OTHER, -1))
 				{
-					mon_->flag &= ~M_FLAG_SUMMON;
+					if(!isUserAlly())
+					{
+						mon_->flag &= ~M_FLAG_SUMMON;
+					}
 				}
+				break;
+			case MON_HELL_HOUND:
+				if(target)
+				{
+					dif_rect_iterator rit(target->position,8,true);
+					while(!rit.end())
+					{
+						coord_def check_pos_ = (*rit);
+						int temp_ = pow((float)abs(check_pos_.x-target->position.x),2)+pow((float)abs(check_pos_.y-target->position.y),2);
+						if(temp_>49 && env[current_level].isMove(check_pos_.x, check_pos_.y, false) && (!target->isplayer() || env[current_level].isInSight(check_pos_)) 
+							&& target->isSightnonblocked((*rit)))
+						{
+
+							if(monster* mon_=BaseSummon(MON_HELL_HOUND, rand_int(20,30), false, false, 2, this, check_pos_, SKD_OTHER, -1))
+							{
+								mon_->SetExhausted(rand_int(5,50));
+								mon_->AttackedTarget(target);
+								if(!isUserAlly())
+								{
+									mon_->flag &= ~M_FLAG_SUMMON;
+								}
+							}
+							break;
+						}
+						rit++;
+					}
+				}
+				break;
+			default:
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다.");
 			}
 		}
 		else if(!s_paralyse)
@@ -2747,7 +2783,20 @@ bool monster::SetCommunication(int s_communication_)
 	if(isYourShight())
 	{
 		if(!s_communication)
-			printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다.");
+		{
+			switch(id)
+			{
+			case MON_MOON_RABIT_SUPPORT:
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다.");
+				break;
+			case MON_HELL_HOUND:
+				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다.");
+				break;
+			default:
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다.");
+			}
+
+		}
 	}
 	s_communication = s_communication_;
 	return true;
@@ -3361,7 +3410,7 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_COMMUNICATION:
 		if(s_communication)
 		{
-			sprintf(string_,"전파송신");
+			sprintf(string_,"동료부르기");
 			return true;
 		}
 		return false;

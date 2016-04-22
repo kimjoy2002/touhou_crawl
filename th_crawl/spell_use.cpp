@@ -2675,6 +2675,13 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
+		if(order && target_unit->isplayer())
+		{
+			printarray(true,false,false,CL_danger,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),target_unit->GetName()->name_to(true),"뚫어지게 응시했다.");
+
+		}
+
+
 		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
 		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor("피의 응시",false));
 		target_unit->damage(temp_att, true);

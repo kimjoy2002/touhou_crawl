@@ -2500,6 +2500,16 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_moon_communication(int power, bool short_, unit* order, coord_def target)
 {
+	if(!order)
+		return false;
+	if(order->isplayer())
+		return false;
+
+	monster *mon_ = (monster*)order;
+
+	if(mon_->flag & M_FLAG_SUMMON)
+		return false;
+
 	if(!env[current_level].isInSight(target))
 		return false;
 	if(order->GetExhausted())
@@ -2528,7 +2538,92 @@ bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(order->GetExhausted())
+		return false;
+	vector<int> list_;
+	string speak_; 
+	switch(randA(6))
+	{
+	case 0: //¿äÁ¤
+		list_.push_back(MON_FAIRY_GREEN_WARRIOR);
+		list_.push_back(MON_FAIRY_BLUE_MAGICIAN);
+		list_.push_back(MON_FAIRY_SOCERER);
+		list_.push_back(MON_FAIRY_SUN_FLOWER);
+		list_.push_back(MON_FAIRY_HERO);
+		speak_ = "¾È°³ÀÇ È£¼öÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 1: //¿ä±«»ê
+		list_.push_back(MON_WOLF_TENGU);
+		list_.push_back(MON_YAMABUSH_TENGU);
+		list_.push_back(MON_HANATACA_TENGU);
+		list_.push_back(MON_KATPA_WATER_WIZARD);
+		list_.push_back(MON_KATPA_SPEAR);
+		speak_ = "¿ä±«ÀÇ »êÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 2: //È«¸¶°ü
+		list_.push_back(MON_HOBGOBRIN_MAID);
+		list_.push_back(MON_HOBGOBRIN_LIBRARIAN);
+		list_.push_back(MON_HOBGOBRIN_TEMP);
+		list_.push_back(MON_MAID_FAIRY);
+		list_.push_back(MON_CHUPARCABRA);
+		speak_ = "È«¸¶°üÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 3: //ÀµÄí¸®
+		list_.push_back(MON_REIMUYUKKURI);
+		list_.push_back(MON_MARISAYUKKURI);
+		list_.push_back(MON_AYAYUKKURI);
+		list_.push_back(MON_REMILIAYUKKURI);
+		list_.push_back(MON_ALICEYUKKURI);
+		list_.push_back(MON_YOUMUYUKKURI);
+		speak_ = "ÀµÄí¸® µÕÁöÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 4: //Á×¸²
+		list_.push_back(MON_RABIT_BOMB);
+		list_.push_back(MON_RABIT_SPEAR);
+		list_.push_back(MON_RABIT_SPEAR);
+		list_.push_back(MON_RABIT_SUPPORT);
+		list_.push_back(MON_RABIT_MAGIC);
+		list_.push_back(MON_RABIT_SPEAR);
+		speak_ = "¹Ì±ÃÀÇ Á×¸²ÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 5: //ÁöÀú
+		list_.push_back(MON_HAUNT);
+		list_.push_back(MON_FIRE_CAR);
+		list_.push_back(MON_HELL_SPIDER);
+		list_.push_back(MON_BLOOD_HAUNT);
+		list_.push_back(MON_HELL_CROW);
+		speak_ = "ÁöÀúÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	case 6: //¸¶°è
+		list_.push_back(MON_SARA);
+		list_.push_back(MON_LUIZE);
+		list_.push_back(MON_ELIS);
+		list_.push_back(MON_EVIL_EYE);
+		list_.push_back(MON_LITTLE_IMP);
+		speak_ = "¸¶°èÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
+		break;
+	}
+
+
+	bool return_=false;	
+	int i = 5; 
+	for(; i>0 ; i--)
+	{
+		int id_ = list_[randA(list_.size()-1)];
+		if(monster *mon_ = BaseSummon(id_, rand_int(30,60), true, false, 2, order, target, SKD_SUMMON_DREAM, GetSummonMaxNumber(SPL_SUMMON_DREAM)))
+		{
+			return_ = true;
+		}
+	}
+	if(return_)
+	{
+		order->SetExhausted(rand_int(20,30));
+		if(order && env[current_level].isInSight(order->position))
+			printarray(true,false,false,CL_magic,3,order->GetName()->name.c_str(),order->GetName()->name_is(true),speak_.c_str());
+
+	}
+
+	return return_;
 }
 bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 {
@@ -2909,7 +3004,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_MAC:
 		list->push_back(spell(SPL_SUMMON_DREAM,30));
-		list->push_back(spell(SPL_BLINK,30));
+		list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_NIGHTMARE:
 		list->push_back(spell(SPL_MANA_DRAIN,20));

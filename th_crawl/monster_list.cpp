@@ -602,7 +602,7 @@ const mon_infor mondata[] = {
 	{39,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10},
 	
-	{MON_MAC,12,1230,name_infor("¸Æ",true),&img_mons_default,80,5,12,
+	{MON_MAC,12,1230,name_infor("¸Æ",true),&img_mons_default,60,5,12,
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,2,10},
 	

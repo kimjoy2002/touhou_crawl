@@ -813,6 +813,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_NONE_MASSAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_BLOOD:
 	case ATT_BURST:
 		break;
 	}
@@ -906,6 +907,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			if(a.order)
 			{
 				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다.");
+			}
+			break;
+		case ATT_BLOOD:	
+			if(a.order)
+			{
+				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 피가 터져나왔다.");
 			}
 			break;
 		case ATT_NOISE:

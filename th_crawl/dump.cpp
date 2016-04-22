@@ -106,6 +106,11 @@ bool Dump(int type)
 								strncat(death_reason,"에 의해 ",64);
 							strncat(death_reason,"죽었다.",64);
 							break;
+						case ATT_BLOOD:
+							if(you.dead_order->order)
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"피를 토하며 죽었다.",64);
+							break;
 						case ATT_NOISE:
 							if(you.dead_order->order)
 								strncat(death_reason,"의 굉음에 의해 ",64);

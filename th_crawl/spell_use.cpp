@@ -2671,6 +2671,15 @@ bool skill_insane(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{
+		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
+		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor("피의 응시",false));
+		target_unit->damage(temp_att, true);
+		return true;
+	}
 	return false;
 }
 bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
@@ -3057,7 +3066,7 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_HELL_SPIDER:
 		break;
 	case MON_BLOOD_HAUNT:
-		list->push_back(spell(SPL_BLOOD_SMITE,25));
+		list->push_back(spell(SPL_BLOOD_SMITE,15));
 		break;
 	case MON_HELL_HOUND:
 		list->push_back(spell(SPL_CALL_HOUND,15));

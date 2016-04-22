@@ -2662,6 +2662,8 @@ bool monster::SetLunatic(int lunatic_)
 {
 	if(!lunatic_)
 		return false;
+	if(confuse_resist>0)
+		return false;
 	if(isYourShight())
 	{
 		if(!s_lunatic)

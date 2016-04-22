@@ -745,7 +745,7 @@ char* eientei_vault_pattern(map_dummy* map)
 		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 
-		map->flag = FLAG_NO_STAIR;//FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, 0);
 		map->item_list.push_back(mapdummy_item(t,coord_def(28,2)));		

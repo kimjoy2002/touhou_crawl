@@ -204,7 +204,7 @@ void wiz_mode()
 		env[current_level].dgtile[you.position.x][you.position.y].tile = (dungeon_tile_type) rand_int(DG_TEMPLE_FIRST,DG_TEMPLE_LAST);
 		break;
 	case 'M':
-		if(monster* mon_=BaseSummon(MON_SANGHAI, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+		if(monster* mon_=BaseSummon(MON_UDONGE, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 		{
 			mon_->state.SetState(MS_SLEEP);
 			mon_->flag &= ~M_FLAG_SUMMON;
@@ -227,6 +227,7 @@ void wiz_mode()
 				it->position = you.position;
 			}
 		}
+		break;
 	case 'E':
 		{
 			int prevexp_=0, exp_ = 0;
@@ -303,6 +304,7 @@ void wiz_mode()
 			printlog(temp,true,false,false,CL_normal);
 			prevexp_ = exp_;
 		}
+		break;
 	default:
 		printlog("없는 명령어",true,false,false,CL_help);
 		break;

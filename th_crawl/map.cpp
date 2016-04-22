@@ -238,6 +238,33 @@ void map_algorithms(int num)
 		{
 			map_algorithms02(num, 5,15,DG_GRASS,DG_WALL);
 		}
+		else if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+		{
+			map_algorithms01(num,DG_FLOOR,DG_WALL);
+		}
+		else if(num >= YUKKURI_LEVEL && num <= YUKKURI_LAST_LEVEL)
+		{
+			map_algorithms03(120,3,5,9, num,DG_GRASS,DG_WALL);
+		}
+		else if(num >= DEPTH_LEVEL && num <= DEPTH_LAST_LEVEL)
+		{
+			if(randA(1))
+				map_algorithms01(num,DG_FLOOR,DG_WALL);
+			else
+				map_algorithms02(num,randA(10),0,DG_FLOOR,DG_WALL);
+		}
+		else if(num == MOON_LEVEL)
+		{
+			map_algorithms01(num,DG_FLOOR,DG_WALL);
+		}
+		else if(num >= HAKUREI_LEVEL && num >= HAKUREI_LAST_LEVEL)
+		{
+			map_algorithms01(num,DG_FLOOR,DG_WALL);
+		}
+		else if(num == PANDEMONIUM_LEVEL)
+		{
+			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
+		}
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
 		{
 			map_algorithms01(num,DG_FLOOR,DG_RED_WALL);

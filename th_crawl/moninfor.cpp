@@ -752,6 +752,11 @@ string GetMonsterInfor(monster *it)
 		else if(it->elec_resist>=3)
 			text_ += "절연이다.\n";
 	}
+	if(it->confuse_resist)
+	{
+		if(it->confuse_resist>0)
+			text_ += "혼란과 광기에 대해 면역이 있다.\n";
+	}
 	if(it->speed != 10)
 	{
 		if(it->speed<=5)

@@ -87,10 +87,20 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 36,  9,  14,  5, 10}, //키메이마루
 
 	{ 37,  10,  14,  5, 30}, //레밀리아 윳쿠리
-	{ 43,  10,  14,  5, 30}, //아오오니
+	{ 53,  10,  14,  5, 30}, //매	
+	{ 54,  10,  14,  5, 30}, //호랑이
 
-	{ 34,  11,  14,  10, 30}, //오니
+	
+	{ 58,  11,  14,  5, 30}, //벤토라 1기
+	{ 34,  11,  14,  5, 30}, //오니
 	{ 42,  11,  14,  10, 30}, //텐구부대
+
+
+	{ 43,  12,  14,  5, 30}, //아오오니
+	{ 55,  12,  14,  5, 30}, //뇌수
+	
+	{ 56,  13,  14,  5, 30}, //용
+
 	
 	//YOUKAI_MOUNTAIN_LEVEL
 
@@ -113,10 +123,15 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  2,  5}, //캇파2~3
 	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 1,  5}, //캇파창병
 	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 10}, //개구리
+	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 15}, //버섯요괴
 		
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 13}, //깃발 요정 호위부대
 	
 	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 5, 13}, //큰두꺼비
+	{ 65,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 1, 20}, //요정영웅부대
+
+	{ 66,  MISTY_LAKE_LEVEL+4,  MISTY_LAKE_LEVEL+4, 1, 20}, //요정소서러
+	{ 67,  MISTY_LAKE_LEVEL+4,  MISTY_LAKE_LEVEL+4, 1, 25}, //요정해바라기
 
 	//YOUKAI_MOUNTAIN_LEVEL
 
@@ -161,19 +176,114 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 소부대 
 	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 3,  16}, //홉고블린 서기
 	{ 47,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 3,  20}, //마법책
-	{ 52,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  10}, //추파카브라
-	{ 60,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  20}, //흡혈박쥐
+	{ 52,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  30}, //추파카브라
+	{ 62,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  20}, //흡혈박쥐
 	
 	{ 48,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 소부대 
 	{ 49,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 메이드2기
 	{ 50,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 서기
 	{ 47,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  20}, //마법책
 	{ 37,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  30}, //레밀리아 윳쿠리
+	{ 60,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  30}, //홉고블린 악마술사
 	
 	{ 52,  SCARLET_LEVEL+3,  SCARLET_LEVEL+3, 5,  30}, //추파카브라
 	
 	{ 47,  SCARLET_LIBRARY_LEVEL,  SCARLET_LIBRARY_LEVEL, 5,  20}, //도서관용 마법책
 	
+
+	//영원정
+	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  30}, //토끼들
+
+
+	//지저
+	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  30}, //제등요괴
+	{ 68,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  28}, //요정대부대
+	{ 62,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  20}, //흡혈박쥐
+	{ 60,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+4, 2,  30}, //홉고블린 악마술사
+	{ 76,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //원령때
+	{ 78,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //츠지구모
+	{ 34,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //오니
+
+	{ 79,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //핏빛원령
+	{ 43,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //아오오니
+	{ 32,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL+4, 7,  30}, //고양이
+
+	{ 80,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥개
+
+	{ 77,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 3,  30}, //화차
+	{ 34,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //오니
+	{ 43,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //아오오니
+
+	{ 85,  SUBTERRANEAN_LEVEL+4,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥까마귀	
+	
+	{ 76,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //원령때
+	{ 85,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥까마귀
+	{ 77,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //화차
+
+	//윳쿠리굴
+	{ 2,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2,  1}, //레이무윳쿠리
+	{ 35, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2, 2}, //마리사윳쿠리
+	{ 36, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //키메이마루
+	{ 37, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //레밀리아윳쿠리
+	{ 97, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //윳쿠리앨리스
+	{ 98, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //윳쿠리요우무
+
+
+
+	//짐승길
+	{ 68,  DEPTH_LEVEL,  DEPTH_LEVEL+2, 10,  28}, //요정대부대
+	{ 64,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  25}, //동물3형제
+	{ 86,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  20}, //너구리
+	{ 83,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //설녀
+	{ 84,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //나마즈
+	{ 87,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //제등요괴
+	{ 34,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  30}, //오니
+	{ 43,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  30}, //아오오니
+	{ 56,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  35}, //용
+	{ 59,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  35}, //벤토라
+
+	
+	//꿈의 세계
+	{ 73,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //맥
+	{ 74,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //악몽
+	{ 75,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //광기
+	{ 59,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //벤토라
+	{ 69,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //달토끼 지원병
+	{ 70,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //달토끼 척후병
+	//아래는 희귀한 확률로 나오는
+	{ 89,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //마족들
+	{ 68,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //요정들
+	{ 83,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //설녀
+	{ 95,  DREAM_LEVEL,  DREAM_LEVEL, 2,  30}, //토끼들
+	{ 42,  DREAM_LEVEL,  DREAM_LEVEL, 2, 30}, //텐구부대
+
+	//달의 세계
+	{ 75,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //광기
+	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 지원병
+	{ 70,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 척후병
+	{ 72,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 엘리트
+
+	
+	//판데모니엄
+	{ 89,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 50,  35}, //3티어마족+자코
+	{ 90,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 10,  35}, //유겐마간
+	{ 91,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 10,  35}, //유키
+	{ 92,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 10,  35}, //마이
+	{ 93,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 10,  35}, //사리엘
+	{ 74,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 5,  35}, //악몽
+	{ 79,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 5,  35}, //피빛원령
+	
+
+	//하쿠레이 신사
+	{ 56,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //용
+	{ 81,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //플라워 전차
+	{ 96,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  30}, //오니패거리
+	{ 86,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 5,  20}, //너구리
+	{ 90,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //유겐마간
+	{ 83,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //설녀
+	{ 77,  HAKUREI_LEVEL+2,  HAKUREI_LAST_LEVEL, 10,  35}, //화차
+	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  35}, //이블 전차
+	{ 88, HAKUREI_LAST_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //음양옥
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -181,54 +291,73 @@ mon_group normal_group[] = //일반몹 그룹
 
 mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 {
-	{  0,  1,  3,  40,  1}, //루미아
-	{  1,  2,  4,  40,  1}, //리글
-	{  2,  4,  6,  40,  2}, //미스티아
-	{  3,  7,  10,  40,  3}, //치르노
-	{  4,  8,  12,  10,  3}, //메디슨
-	{  5,  5,  8,  40,  2}, //대요정
-	{  6,  1,  3,  40,  1}, //키스메
-	{  7,  6,  9,  40,  3}, //첸
-	{  8,  3,  5,  40,  2}, //코가사
-	{  9,  2,  4,  40,  2}, //삼월정
-	{  10, 2,  4,  40,  2}, //쿄코
+	{  0,  1,  3,  35,  1}, //루미아
+	{  1,  2,  4,  35,  1}, //리글
+	{  2,  4,  6,  35,  2}, //미스티아
+	{  3,  7,  10,  35,  3}, //치르노
+	{  4,  8,  12,  20,  3}, //메디슨
+	{  5,  5,  8,  35,  2}, //대요정
+	{  6,  1,  3,  35,  1}, //키스메
+	{  7,  6,  9,  35,  3}, //첸
+	{  44,  6,  9,  30,  3}, //세이란
+	{  8,  3,  5,  35,  2}, //코가사
+	{  9,  2,  4,  35,  2}, //삼월정
+	{  10, 2,  4,  30,  2}, //쿄코
 	{  11,  1,  6,  5,  2}, //지그문트
-	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
-	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
-	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
-	//{  13,  YOUKAI_MOUNTAIN_LEVEL+4,  YOUKAI_MOUNTAIN_LEVEL+4,  100,  5}, //아야(현재버젼에선 벌트로 등장. 벌트 삭제후 다시 추가)
-	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
-	{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리
 	
-	{  15,  9,  13,  10,  3}, //야마메
-	{  16,  7,  10,  10,  3}, //나즈린
-	{  17,  9,  13,  10,  3}, //요시카
-	{  18,  9,  13,  20,  3}, //세키반키
-	{  20,  9,  13,  10,  3}, //카게로
-	{  21,  9,  13,  10,  3}, //파르시
-	{  22,  9,  13,  20,  3}, //츠쿠모
-	{  23,  9,  13,  10,  3}, //오린
-	{  31,  9,  13,  30,  3}, //코이시
-	{  24,  10,  13,  30,  3}, //이치린
-	{  32,  10,  13,  30,  3}, //누에
-	{  35,  10,  13,  30,  3}, //클라운피스
+	{  15,  9,  14,  15,  3}, //야마메
+	{  16,  7,  11,  15,  3}, //나즈린
+	{  17,  9,  14,  15,  3}, //요시카
+	{  18,  9,  14,  15,  3}, //세키반키
+	{  20,  9,  14,  15,  3}, //카게로
+	{  21,  9,  14,  10,  3}, //파르시
+	{  22,  9,  14,  20,  3}, //츠쿠모
+	{  31,  9,  14,  25,  3}, //코이시
+	{  35,  11,  14,  15,  3}, //클라운피스
+	{  37,  11,  14,  15,  3}, //레티
 
 	//안개호수
 	{  3, MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  40,  3}, //치르노
 	{  5, MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  40,  2}, //대요정
 	{  9, MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  40,  2}, //삼월정
 	{  14,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  40,  2}, //빙어
-	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  20,  2}, //세키반키
+	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 	{  21,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  10,  3}, //파르시
 	
+	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
+	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
+	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
+	//{  13,  YOUKAI_MOUNTAIN_LEVEL+4,  YOUKAI_MOUNTAIN_LEVEL+4,  100,  5}, //아야(현재버젼에선 벌트로 등장. 벌트 삭제후 다시 추가)
+	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
+	{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리
+
 	
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
-	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  60,  3}, //소악마
+	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
-	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  60,  4}, //사쿠야
+	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  50,  4}, //사쿠야
 	//{  29,  SCARLET_LEVEL+4,  SCARLET_LEVEL+4,  60,  5}, //레밀리아 아마 벌트 고정
+	
+	
+	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
+	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
+	{ 21,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+3, 20,  28}, //파르시 
+	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
 
+	{ 18,  YUKKURI_LEVEL, YUKKURI_LAST_LEVEL-1, 20,  28}, //세키반키
+	{  21,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1,  5,  3}, //파르시
+
+	
+	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  3}, //오린
+	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //누에
+	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //클라운피스
+	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
+	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //이치린
+	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
+	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //앨리스
+	
+	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -473,7 +602,7 @@ void create_id_to_mon(int id, int level)
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
 			index.push_back(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
 		for(int rand_ = randA(2)?1:2, i=0;i<rand_;i++)
-		index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
+			index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
 		break;
 	case 22:
 		for(int rand_ =rand_int(0,2), i=0;i<rand_;i++)
@@ -628,7 +757,7 @@ void create_id_to_mon(int id, int level)
 		index.push_back(MON_RED_UFO);
 		break;
 	case 59:
-		for(int rand_ =rand_int(3,5), i=0;i<rand_;i++)
+		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
 		index.push_back(randA(2)?(randA(1)?MON_RED_UFO:MON_BLUE_UFO):MON_GREEN_UFO);
 		break;
 	case 60:
@@ -644,6 +773,158 @@ void create_id_to_mon(int id, int level)
 	case 63:
 		index.push_back(MON_DEAGAMA);
 		break;	
+	case 64:
+		index.push_back(MON_EAGLE);
+		for(int rand_ =rand_int(0,1), i=0;i<rand_;i++)
+			index.push_back(MON_TIGER);
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
+			index.push_back(MON_RAIJUU);
+		break;
+	case 65:		
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
+			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
+			index.push_back(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER));
+		index.push_back(MON_FAIRY_HERO);
+		break;
+	case 66:
+		index.push_back(MON_FAIRY_SOCERER);
+		break;	
+	case 67:		
+		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
+			index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
+		index.push_back(MON_FAIRY_SUN_FLOWER);
+		break;
+	case 68:
+		index.push_back(MON_FAIRY_HERO);
+		index.push_back(MON_FAIRY_SOCERER);
+		index.push_back(MON_FAIRY_SUN_FLOWER);
+		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
+			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
+			index.push_back(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER));
+		break;	
+	case 69:
+		index.push_back(MON_MOON_RABIT_SUPPORT);
+		break;
+	case 70:
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
+			index.push_back(MON_MOON_RABIT_ATTACK);
+		break;
+	case 71:
+		index.push_back(MON_MOON_RABIT_ELITE);
+		break;		
+	case 72:
+		if(randA(3)==0)
+			index.push_back(MON_MOON_RABIT_SUPPORT);
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
+			index.push_back(MON_MOON_RABIT_ATTACK);
+		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
+			index.push_back(MON_MOON_RABIT_ELITE);
+		break;	
+	case 73:
+		index.push_back(MON_MAC);
+		break;	
+	case 74:
+		index.push_back(MON_NIGHTMARE);
+		break;	
+	case 75:
+		index.push_back(MON_LUNATIC);
+		break;	
+	case 76:
+		for(int rand_ =rand_int(3,6), i=0;i<rand_;i++)
+			index.push_back(MON_HAUNT);
+		break;
+	case 77:
+		index.push_back(MON_FIRE_CAR);
+		break;	
+	case 78:
+		index.push_back(MON_HELL_SPIDER);
+		break;	
+	case 79:
+		index.push_back(MON_BLOOD_HAUNT);
+		break;	
+	case 80:
+		index.push_back(MON_HELL_HOUND);
+		if(randA(4)==0)
+		{
+			for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
+				index.push_back(MON_HELL_HOUND);
+		}
+		break;	
+	case 81:
+		index.push_back(MON_FLOWER_TANK);
+		break;	
+	case 82:
+		index.push_back(MON_EVIL_EYE_TANK);
+		break;	
+	case 83:
+		index.push_back(MON_SNOW_GIRL);
+		break;	
+	case 84:
+		index.push_back(MON_NAMAZ);
+		break;	
+	case 85:
+		for(int rand_ =rand_int(3,6), i=0;i<rand_;i++)
+			index.push_back(MON_HELL_CROW);
+		break;	
+	case 86:
+		index.push_back(MON_RACCON);
+		break;	
+	case 87:
+		index.push_back(MON_LANTERN_YOUKAI);
+		break;
+	case 88:
+		index.push_back(MON_YINYAN);
+		break;
+	case 89:
+		if(randA(2)==0)
+		{
+			for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+				index.push_back(MON_LITTLE_IMP);
+		}
+		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
+			index.push_back(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS);
+		break;
+	case 90:
+		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+			index.push_back(MON_EVIL_EYE);
+		index.push_back(MON_YUUGENMAGAN);
+		break;
+	case 91:
+		index.push_back(MON_YUKI);
+		break;
+	case 92:
+		index.push_back(MON_MAI);
+		break;
+	case 93:
+		index.push_back(MON_SARIEL);
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
+			index.push_back(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS);
+		break;
+	case 94:
+		index.push_back(MON_MUSHROOM);
+		break;
+	case 95:
+		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+			index.push_back(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB);
+		if(randA(3)==0)
+		{
+			index.push_back(MON_RABIT_SUPPORT);
+		}
+		break;
+	case 96:
+		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
+			index.push_back(randA(1)?MON_ONI:MON_BLUE_ONI);
+		break;
+	case 97:
+		index.push_back(MON_ALICEYUKKURI);
+		break;
+	case 98:
+		index.push_back(MON_YOUMUYUKKURI);
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -897,6 +1178,42 @@ void create_id_to_unique(int id, int level)
 	case 36:
 		index.push_back(MON_DOREMI);
 		break;
+	case 37:
+		index.push_back(MON_LETTY);
+		break;
+	case 38: //달의도시 고정네임드
+		index.push_back(MON_YORIHIME);
+		break;
+	case 39: //달의도시 고정네임드
+		index.push_back(MON_TOYOHIME);
+		break;
+	case 40: //지령전 고정네임드
+		index.push_back(MON_UTSUHO);
+		break;
+	case 41:
+		index.push_back(MON_SUIKA);
+		break;
+	case 42: //최종보스
+		index.push_back(MON_REIMU);
+		break;
+	case 43:
+		index.push_back(MON_ALICE);
+		break;
+	case 44:
+		index.push_back(MON_SEIRAN);
+		break;
+	case 45:
+		index.push_back(MON_RINGO);
+		break;
+	case 46: //영원정 고정
+		index.push_back(MON_UDONGE);
+		break;
+	case 47: //영원정 고정
+		index.push_back(MON_KAGUYA);
+		break;
+	case 48:
+		index.push_back(MON_MOKOU);
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -1015,6 +1332,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=3;
 		mon->fire_resist=3;
 		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_YOSIKA:
 		mon->elec_resist=1;
@@ -1069,6 +1387,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=2;
 		mon->fire_resist=2;
 		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_HOBGOBRIN_MAID:
 		mon->poison_resist=1;
@@ -1113,6 +1432,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=3;
 		mon->fire_resist=3;
 		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;		
 	case MON_RED_UFO:
 		mon->fire_resist=2;
@@ -1132,6 +1452,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=2;
 		mon->fire_resist=1;
 		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_DEAGAMA:
 		mon->poison_resist=1;
@@ -1227,68 +1548,139 @@ void SetResistMonster(monster* mon)
 	case MON_FAIRY_HERO:
 		break;
 	case MON_FAIRY_SOCERER:
+		mon->ice_resist=1;
 		break;
 	case MON_FAIRY_SUN_FLOWER:
+		mon->fire_resist=1;
 		break;
 	case MON_MOON_RABIT_SUPPORT:
+		mon->confuse_resist=1;
 		break;
 	case MON_MOON_RABIT_ATTACK:
+		mon->confuse_resist=1;
 		break;
 	case MON_MOON_RABIT_ELITE:
+		mon->confuse_resist=1;
 		break;
 	case MON_MAC:
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_NIGHTMARE:
+		mon->elec_resist=2;
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_LUNATIC:
+		mon->elec_resist=2;
+		mon->fire_resist=1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_HAUNT:
+		mon->fire_resist=1;
+		mon->poison_resist=1;
 		break;
 	case MON_FIRE_CAR:
+		mon->ice_resist=-1;
+		mon->fire_resist=3;
+		mon->poison_resist=1;
 		break;
 	case MON_HELL_SPIDER:
+		mon->ice_resist=1;
+		mon->poison_resist=1;
 		break;
 	case MON_BLOOD_HAUNT:
+		mon->elec_resist=1;
+		mon->fire_resist=1;
+		mon->poison_resist=1;
 		break;
 	case MON_HELL_HOUND:
+		mon->fire_resist=1;
 		break;
 	case MON_DESIRE:
 		break;
 	case MON_FLOWER_TANK:
+		mon->ice_resist=1;
+		mon->elec_resist=2;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_EVIL_EYE_TANK:
+		mon->ice_resist=1;
+		mon->elec_resist=3;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_SNOW_GIRL:
+		mon->ice_resist=3;
+		mon->fire_resist=-1;
 		break;
 	case MON_LETTY:
+		mon->ice_resist=3;
+		mon->fire_resist=-1;
+		mon->poison_resist=1;
 		break;
 	case MON_YORIHIME:
+		mon->ice_resist=2;
+		mon->elec_resist=2;
+		mon->confuse_resist=1;
 		break;
 	case MON_TOYOHIME:
+		mon->ice_resist=2;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_UTSUHO:
+		mon->poison_resist=1;
+		mon->fire_resist=3;
 		break;
 	case MON_SUIKA:
+		mon->fire_resist=2;
 		break;
 	case MON_REIMU:
 		break;
 	case MON_ALICE:
+		mon->elec_resist=1;
+		mon->poison_resist=1;
 		break;
 	case MON_SEIRAN:
+		mon->confuse_resist=1;
 		break;
 	case MON_RINGO:
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_UDONGE:
+		mon->elec_resist=1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_KAGUYA:
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_MOKOU:
+		mon->fire_resist=3;
 		break;
 	case MON_NESI:
+		mon->fire_resist=2;
+		mon->ice_resist=2;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_SANGHAI:
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	case MON_HOURAI:
+		mon->elec_resist=1;
+		mon->fire_resist=1;
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
 		break;
 	}
 }

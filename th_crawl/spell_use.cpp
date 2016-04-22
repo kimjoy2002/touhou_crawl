@@ -586,7 +586,7 @@ bool skill_self_heal(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_blink(int pow, bool short_, unit* order, coord_def target)
 {
-	if(you.god == GT_YUKARI)
+	if(you.god == GT_YUKARI && order->isplayer())
 	{
 						
 		printlog("유카리는 위험한 전이마법을 금지하고있다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
@@ -603,7 +603,7 @@ bool skill_blink(int pow, bool short_, unit* order, coord_def target)
 		}
 	}
 	order->Blink(25);
-	if(you.god == GT_YUKARI)
+	if(you.god == GT_YUKARI && order->isplayer())
 	{
 		printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
 		you.PietyUpDown(-5);
@@ -1501,12 +1501,14 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 
 				if(mon_->state.GetState() == MS_SLEEP)
 				{//자고있는데 자해할리가
-					printlog("자고 있는 몹은 자해할 수 없다.",true,false,false,CL_normal);
+					if(order->isplayer())
+						printlog("자고 있는 몹은 자해할 수 없다.",true,false,false,CL_normal);
 					return false; 
 				}
 				if(mon_->flag & M_FLAG_NO_ATK){ //공격못하는애가 자해할리가
 					
-					printlog("이 몬스터는 스스로를 공격할 수 없다.",true,false,false,CL_normal);	
+					if(order->isplayer())
+						printlog("이 몬스터는 스스로를 공격할 수 없다.",true,false,false,CL_normal);	
 					return false;
 				}
 
@@ -1829,7 +1831,8 @@ bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(!env[current_level].isMove(target.x,target.y,floor_effect::isFly(FLOORT_STONE),floor_effect::isSwim(FLOORT_STONE),floor_effect::isNoGround(FLOORT_STONE)))
 		{
-			printlog("이 위치에는 깔 수 없다.",true,false,false,CL_normal);
+			if(order->isplayer())
+				printlog("이 위치에는 깔 수 없다.",true,false,false,CL_normal);
 			return false;
 		}
 
@@ -2150,7 +2153,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 					{
 						if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
 						{	
-							if(hit_ != order)
+							if(1/*hit_ != order*/)
 							{
 								int att_ = randC(9,10+power/20);
 								int m_att_ = 9*(10+power/20);
@@ -2325,7 +2328,8 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 	{
 		if((*it).id == EVL_VIOLET)
 		{
-			printarray(true,false,false,CL_normal,1,"층마다 1개의 파장만 조종할 수 있다.");
+			if(order->isplayer())
+				printarray(true,false,false,CL_normal,1,"층마다 1개의 파장만 조종할 수 있다.");
 			return false;
 		}
 	}
@@ -2689,68 +2693,104 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_FAIRY_HERO:
 		break;
 	case MON_FAIRY_SOCERER:
+		list->push_back(spell(SPL_ICE_BOLT,20));
+		list->push_back(spell(SPL_FIRE_BOLT,20));
 		break;
 	case MON_FAIRY_SUN_FLOWER:
+		list->push_back(spell(SPL_SMITE,15));
+		list->push_back(spell(SPL_HASTE_OTHER,30));
+		//HASTE아더가 아니라 한번에 LOS 가속으로 바꾸자
+		list->push_back(spell(SPL_HEAL_OTHER,20));
+		//HEAL 범위로
+		list->push_back(spell(SPL_HASTE,10));
 		break;
 	case MON_MOON_RABIT_SUPPORT:
+		//아군 토끼들을 끌어들이는 마법
+		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_MOON_RABIT_ATTACK:
 		break;
 	case MON_MOON_RABIT_ELITE:
+		//원거리 총을 쏜다.
 		break;
 	case MON_MAC:
+		//쉐도우 크리처 비슷한 소환
 		break;
 	case MON_NIGHTMARE:
+		list->push_back(spell(SPL_SMITE,15));
+		//근접은 마나드레인
 		break;
 	case MON_LUNATIC:
+		//타겟팅 광기(저항가능)
 		break;
 	case MON_HAUNT:
 		break;
 	case MON_FIRE_CAR:
+		list->push_back(spell(SPL_FIRE_BALL,25));
+		list->push_back(spell(SPL_FIRE_BOLT,20));
 		break;
 	case MON_HELL_SPIDER:
 		break;
 	case MON_BLOOD_HAUNT:
+		//체력 10%를 깍는 스마이트
 		break;
 	case MON_HELL_HOUND:
+		//헬하운드를 소환함
 		break;
 	case MON_DESIRE:
 		break;
 	case MON_FLOWER_TANK:
+		list->push_back(spell(SPL_LASER,30));
 		break;
 	case MON_EVIL_EYE_TANK:
+		//대포발사
 		break;
 	case MON_SNOW_GIRL:
+		list->push_back(spell(SPL_FREEZE,20));
+		list->push_back(spell(SPL_COLD_BEAM,15));
 		break;
 	case MON_LETTY:
+		list->push_back(spell(SPL_FREEZE,25));
+		list->push_back(spell(SPL_ICE_CLOUD,15));
 		break;
 	case MON_YORIHIME:
 		break;
 	case MON_TOYOHIME:
+		list->push_back(spell(SPL_ICE_BOLT,15));
+		list->push_back(spell(SPL_BLIZZARD,20));
 		break;
 	case MON_UTSUHO:
+		list->push_back(spell(SPL_FIRE_STORM,6));
+		list->push_back(spell(SPL_HASTE,15));
 		break;
 	case MON_SUIKA:
 		break;
 	case MON_REIMU:
 		break;
 	case MON_ALICE:
+		//상해,봉래인형 소환
 		break;
 	case MON_SEIRAN:
 		break;
 	case MON_RINGO:
+		//아군 토끼들을 끌어들이는 마법
+		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_UDONGE:
+		list->push_back(spell(SPL_MIND_BENDING,15));
+		list->push_back(spell(SPL_FIELD_VIOLET,15));
 		break;
 	case MON_KAGUYA:
 		break;
 	case MON_MOKOU:
 		break;
 	case MON_NESI:
+		list->push_back(spell(SPL_WATER_CANNON,30));
 		break;
 	case MON_SANGHAI:
 		break;
 	case MON_HOURAI:
+		list->push_back(spell(SPL_LASER,20));
 		break;
 	default:
 		break;
@@ -2918,16 +2958,27 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_SUMMON_LESSOR_DEMON:
 		return skill_summon_lessor_demon(power,short_,order,target);	
 	case SPL_LUMINUS_STRIKE:
+		return skill_luminus_strike(power,short_,order,target);
 	case SPL_FIRE_STORM:
+		return skill_fire_storm(power,short_,order,target);
 	case SPL_BLIZZARD: 
+		return skill_blizzard(power,short_,order,target);
 	case SPL_PERFERT_FREEZE: 
+		return skill_perfect_freeze(power,short_,order,target);
 	case SPL_DRAW_POWER:
+		return skill_draw_power(power,short_,order,target);
 	case SPL_ANIMAL_CHANGE:
+		return skill_animal_change(power,short_,order,target);
 	case SPL_FIELD_VIOLET:
+		return skill_field_violet(power,short_,order,target);
 	case SPL_TIME_PARADOX: 
+		return skill_time_paradox(power,short_,order,target);
 	case SPL_PRIVATE_SQ: 
+		return skill_private_sq(power,short_,order,target);
 	case SPL_CONTROLED_BLINK: 
-	case SPL_THE_WORLD:
+		return skill_controled_blink(power,short_,order,target);
+	case SPL_THE_WORLD:	
+		return skill_the_world(power,short_,order,target);
 	default:
 		return false;
 	}

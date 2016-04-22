@@ -778,6 +778,8 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:
+	case ATT_M_POISON:
+	case ATT_SICK:
 	case ATT_THROW_NORMAL:
 	case ATT_VAMP:
 	case ATT_CURSE:
@@ -880,6 +882,8 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_NORMAL:
 		case ATT_SPEAR:
 		case ATT_S_POISON:
+		case ATT_M_POISON:
+		case ATT_SICK:
 		case ATT_VAMP:
 		case ATT_CURSE:
 		case ATT_WEATHER:
@@ -1020,6 +1024,8 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:
+	case ATT_M_POISON:
+	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_CURSE:
 	case ATT_WEATHER:
@@ -1202,6 +1208,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.type == ATT_S_POISON && randA(1))
 		{
 			SetPoison(15+randA(10), 50, false);
+			SetPoisonReason(a.p_type);
+		}
+		if(a.type == ATT_M_POISON && randA(1))
+		{
+			SetPoison(40+randA(15), 100, false);
+			SetPoisonReason(a.p_type);
+		}
+		if(a.type == ATT_SICK && randA(1))
+		{
+			SetPoison(40+randA(15), 100, false);
+			SetSick(rand_int(10,20));
 			SetPoisonReason(a.p_type);
 		}
 		if(a.type == ATT_THROW_WEAK_POISON)

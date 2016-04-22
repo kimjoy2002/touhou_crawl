@@ -899,6 +899,8 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_COLD,
 	ATT_ELEC,
 	ATT_S_POISON,
+	ATT_M_POISON,
+	ATT_SICK,
 	ATT_CURSE,
 	ATT_WEATHER,
 	ATT_AUTUMN,

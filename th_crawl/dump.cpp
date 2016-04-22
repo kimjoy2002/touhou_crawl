@@ -123,6 +123,8 @@ bool Dump(int type)
 							break;
 						case ATT_NORMAL:
 						case ATT_S_POISON:
+						case ATT_M_POISON:
+						case ATT_SICK:
 						case ATT_NORMAL_HIT:
 						case ATT_CURSE:
 						case ATT_WEATHER:

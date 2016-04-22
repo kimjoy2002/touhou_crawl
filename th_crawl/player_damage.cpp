@@ -323,6 +323,8 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_FIRE:
 	case ATT_COLD:
 	case ATT_S_POISON:
+	case ATT_M_POISON:
+	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_CURSE:
 	case ATT_WEATHER:
@@ -453,6 +455,8 @@ void players::print_damage_message(attack_infor &a)
 	case ATT_NORMAL:
 	case ATT_SPEAR:
 	case ATT_S_POISON:
+	case ATT_M_POISON:
+	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_CURSE:
 	case ATT_WEATHER:
@@ -693,6 +697,14 @@ bool players::damage(attack_infor &a, bool perfect_)
 			
 			if(a.type == ATT_S_POISON && randA(1))
 				SetPoison(15+randA(10), 50, false);
+			if(a.type == ATT_M_POISON && randA(1))
+				SetPoison(40+randA(15), 100, false);
+			if(a.type == ATT_SICK && randA(1))
+			{
+
+				SetPoison(40+randA(15), 100, false);
+				SetSick(rand_int(10,20));
+			}
 			if(a.type == ATT_THROW_WEAK_POISON)
 				SetPoison(20+randA(10), 50, false);
 			if(a.type == ATT_THROW_MIDDLE_POISON)

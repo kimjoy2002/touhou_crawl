@@ -103,7 +103,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,0,10},
 
 	{MON_MEDICINE,9,1066,name_infor("메디슨",true),&img_named_medicine,70,2,10,
-	{8,12,0},{ATT_S_POISON,ATT_S_POISON,ATT_NONE},{name_infor("독기",false),name_infor("독기",false),name_infor()},
+	{8,12,0},{ATT_S_POISON,ATT_M_POISON,ATT_NONE},{name_infor("독기",false),name_infor("독기",false),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10},
 
 	{MON_DIEFAIRY,6,570,name_infor("대요정",true),&img_named_diefairy,50,0,15,
@@ -289,7 +289,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_SPEAK | M_FLAG_CANT_GROUND,0,1,10},
 
 	{MON_YAMAME,8,854,name_infor("야마메",false),&img_named_yamame,90,3,6,
-	{15,16,24},{ATT_NORMAL,ATT_NONE,ATT_S_POISON},{name_infor("공격",true),name_infor("공격",true),name_infor("독기",false)},
+	{15,16,24},{ATT_NORMAL,ATT_NONE,ATT_SICK},{name_infor("공격",true),name_infor("공격",true),name_infor("독기",false)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10},
 	
 	{MON_NAZRIN,7,570,name_infor("나즈린",true),&img_named_nazrin,45,0,8,
@@ -417,7 +417,7 @@ const mon_infor mondata[] = {
 	M_FLAG_SPEAK | M_FLAG_ANIMAL ,0,1,10},
 	
 	{MON_RAIJUU,10,950,name_infor("뇌수",false),&img_mons_raijuu,60,1,12,
-	{18,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{18,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,8},
 	
 	{MON_DRAGON_BABY,15,1260,name_infor("용의 새끼",false),&img_mons_dragon_baby,90,10,6,
@@ -623,7 +623,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,8},
 	
 	{MON_HELL_SPIDER,11,782,name_infor("츠지구모",false),&img_mons_default,80,5,10,
-	{25,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor("독니",false),name_infor(),name_infor()},
+	{25,0,0},{ATT_SICK,ATT_NONE,ATT_NONE},{name_infor("독니",false),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10},
 	
 	{MON_BLOOD_HAUNT,12,835,name_infor("핏빛 원령",true),&img_mons_default,95,0,12,

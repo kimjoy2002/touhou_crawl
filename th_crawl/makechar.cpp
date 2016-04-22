@@ -805,9 +805,9 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 			you.mp = you.max_mp;
 			//테스트		
-			//you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			//you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			//you.Memorize(SPL_DOLLS_WAR,true);		
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.Memorize(SPL_FIRE_SPREAD,true);		
 		}
 	}
 	else if(name_.compare("사나에")==0)

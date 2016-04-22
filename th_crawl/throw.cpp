@@ -529,7 +529,8 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 					if(infor_.type1 == BMT_NORMAL || infor_.type2 == BMT_WALL)
 						env[current_level].ClearEffect();
 				}	
-				if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos) && you.isSightnonblocked(it->pos))
+				if(env[current_level].isMove(it->pos,true) && (!infor_.order || !infor_.order->isplayer() || env[current_level].isInSight(it->pos)) 
+					&& (!infor_.order ||  infor_.order->isSightnonblocked(it->pos)))
 				{
 					path = 10*GetPosToDirec(beam.start_pos(),it->pos);
 					if(graphic_type)

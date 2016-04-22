@@ -35,6 +35,8 @@ float GetSpellSector(spell_list spell_)
 	{
 	case SPL_SPARK:
 		return 0.5f;
+	case SPL_FIRE_SPREAD:
+		return 0.4f;
 	default:
 		break;
 	}
@@ -1188,6 +1190,7 @@ bool SpellAiCondition(spell_list skill, const monster *mon)
 		return (mon->hp>mon->max_hp*0.2f || mon->s_tele?false:true);
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CALL_HOUND:
+	case SPL_FIRE_SPREAD:
 		return (mon->s_exhausted?false:true);
 	default:
 		return true;

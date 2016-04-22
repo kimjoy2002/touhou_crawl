@@ -89,6 +89,7 @@ bool isBandAlly(monster* order, monster* other)
 	switch(order->id)
 	{
 	case MON_FAIRY_RED_COMMANDER:
+	case MON_FAIRY_SUN_FLOWER:
 		if(other->flag & M_FLAG_FAIRY)
 			return true;
 		else
@@ -121,6 +122,18 @@ bool isBandAlly(monster* order, monster* other)
 		case MON_SARA:
 		case MON_LUIZE:
 		case MON_ELIS:
+			return true;
+		default:
+			break;
+		}
+		return false;
+	case MON_MOON_RABIT_SUPPORT:
+	case MON_RINGO:
+		switch(other->id)
+		{
+		case MON_MOON_RABIT_ATTACK:
+		case MON_MOON_RABIT_ELITE:
+		case MON_SEIRAN:
 			return true;
 		default:
 			break;
@@ -185,7 +198,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 				beam_iterator beam(order->position,order->position);
 				if(!CheckThrowPath(order->position,it->position, beam))
 					continue;
-				if(!SpellFlagCheck(skill, S_FLAG_SMITE))
+				if(!SpellFlagCheck(skill, S_FLAG_SMITE) && !SpellFlagCheck(skill, S_FLAG_IMMEDIATELY))
 				{		
 					bool beam_ok_ = true;
 					for(beam.init();!beam.end();beam++)
@@ -1763,7 +1776,8 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 	monster* final_target = target_mon_list.back();
 	
 	final_target->HpUpDown(rand_int(2+pow/10,10+pow/5),DR_NONE);
-	printarray(true,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"회복되었다.");
+	if(env[current_level].isInSight(final_target->position))
+		printarray(true,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"회복되었다.");
 
 	return true;
 
@@ -2415,12 +2429,74 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 }
 
 bool skill_haste_all(int power, bool short_, unit* order, coord_def target)
-{
-	return false;
+{	
+	if(order->isplayer())
+		return false;
+	monster* mon_order = (monster*)order;
+
+	vector<monster*> target_mon_list;
+
+
+	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if(&(*it) != order && it->isLive() && isBandAlly(mon_order,&(*it)) && mon_order->isMonsterSight(it->position)/* &&
+			(it->s_haste == 0)*/)
+		{
+			beam_iterator beam(order->position,order->position);
+			if(!CheckThrowPath(order->position,it->position, beam))
+				continue;
+			{
+				target_mon_list.push_back(&(*it));
+			}
+		}
+	}
+	if(target_mon_list.empty())
+		return false;
+	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+
+	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
+	{
+		monster* final_target = (*it);
+		final_target->SetHaste(rand_int(20+power/3,40+power/3));
+	}
+
+	return true;
 }
 bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(order->isplayer())
+		return false;
+	monster* mon_order = (monster*)order;
+
+	vector<monster*> target_mon_list;
+
+
+	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if(&(*it) != order && it->isLive() && isBandAlly(mon_order,&(*it)) && mon_order->isMonsterSight(it->position) &&
+			(it->hp < it->max_hp))
+		{
+			beam_iterator beam(order->position,order->position);
+			if(!CheckThrowPath(order->position,it->position, beam))
+				continue;
+			{
+				target_mon_list.push_back(&(*it));			
+			}
+		}
+	}
+	if(target_mon_list.empty())
+		return false;
+	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+	
+	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
+	{
+		monster* final_target = (*it);	
+		final_target->HpUpDown(rand_int(2+power/10,10+power/5),DR_NONE);		
+		if(env[current_level].isInSight(final_target->position))
+			printarray(false,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"회복되었다.");
+	}
+
+	return true;
 }
 bool skill_moon_communication(int power, bool short_, unit* order, coord_def target)
 {
@@ -2868,6 +2944,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_ALICE:
 		list->push_back(spell(SPL_DOLLS_WAR,50));
+		list->push_back(spell(SPL_TELEPORT_SELF,10));
 		break;
 	case MON_SEIRAN:
 		break;

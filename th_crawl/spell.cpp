@@ -158,6 +158,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_KNIFE_COLLECT:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_HASTE_ALL:
+		return ((S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
 	case SPL_HEAL_ALL:
 		return ((S_FLAG_HEAL | S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
 	case SPL_BLINK:

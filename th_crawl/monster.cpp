@@ -805,6 +805,11 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		if(damage_<0)
 			damage_ = 0;
 		break;
+	case ATT_AC_REDUCE_BLAST:
+		damage_ -= randA(ac/2);
+		if(damage_<0)
+			damage_ = 0;
+		break;
 	case ATT_ELEC:
 	case ATT_THROW_ELEC:
 		damage_ *= GetElecResist();
@@ -934,6 +939,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_FIRE_BLAST:
 		case ATT_COLD_BLAST: 
 		case ATT_NORMAL_BLAST:
+		case ATT_AC_REDUCE_BLAST:
 		case ATT_FIRE_PYSICAL_BLAST:
 			if(a.order)
 			{

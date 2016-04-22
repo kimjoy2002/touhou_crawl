@@ -638,9 +638,9 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	0,0,1,10},
 
-	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_default,12000,10,10,
+	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_default,120,10,10,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_MOVE,99,1,9},
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI,99,1,9},
 	
 	{MON_EVIL_EYE_TANK,25,5043,name_infor("이블 아이 전차",false),&img_mons_default,150,20,10,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

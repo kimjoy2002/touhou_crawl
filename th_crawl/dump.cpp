@@ -153,6 +153,12 @@ bool Dump(int type)
 								strncat(death_reason,"에게 ",64);
 							strncat(death_reason,"피탄당했다.",64);
 							break;
+						case ATT_NORMAL_BLAST:
+						case ATT_AC_REDUCE_BLAST:
+							if(you.dead_order->order)
+								strncat(death_reason,"에게 ",64);
+							strncat(death_reason,"폭사당했다.",64);
+							break;
 						case ATT_FIRE:
 						case ATT_THROW_FIRE:
 						case ATT_CLOUD_FIRE:

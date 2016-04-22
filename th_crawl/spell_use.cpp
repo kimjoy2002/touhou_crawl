@@ -974,7 +974,8 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	case ATT_COLD_PYSICAL_BLAST:
 		image_ = &img_fog_cold[0];
 		break;		
-	case ATT_NORMAL_BLAST:
+	case ATT_NORMAL_BLAST:		
+	case ATT_AC_REDUCE_BLAST:
 		image_ = &img_fog_normal[0];
 		break;
 	}
@@ -993,7 +994,7 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	{
 		for(int j=-1*size;j<=size;j++)
 		{				
-			if(abs(i)*abs(j)<ball_size && (env[current_level].isInSight(target+i)) && env[current_level].isMove(target.x+i,target.y+j,true))
+			if(abs(i)*abs(j)<ball_size && (!order->isplayer() || env[current_level].isInSight(target+i)) && env[current_level].isMove(target.x+i,target.y+j,true))
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(target.x+i,target.y+j))
 				{	
@@ -2711,6 +2712,22 @@ bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_canon(int power, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	length_ = min(length_,SpellLength(SPL_CANNON));
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("대포알",true));
+
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+		{
+			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
+			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("대포알",true));
+			BaseBomb(pos, &img_fog_normal[0],temp_att,order);
+		}
+		order->SetParadox(0); 
+		return true;
+	}
 	return false;
 }
 bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)

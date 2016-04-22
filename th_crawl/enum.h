@@ -919,6 +919,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_CLOUD_COLD,
 	ATT_CLOUD_NORMAL,
 	ATT_NORMAL_BLAST, 
+	ATT_AC_REDUCE_BLAST, 
 	ATT_FIRE_BLAST, 
 	ATT_COLD_BLAST, 
 	ATT_FIRE_PYSICAL_BLAST, 

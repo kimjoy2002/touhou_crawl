@@ -365,6 +365,14 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 			if(damage_<0)
 				damage_ = 0;
 		}
+		break;		
+	case ATT_AC_REDUCE_BLAST:
+		{
+			float percent_ = 1.0f;
+			int ac_dec=0;
+			for(int i = ac/2; i>0; i--)
+				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+		}
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
@@ -511,6 +519,7 @@ void players::print_damage_message(attack_infor &a)
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ªœ¡∑«— πŸ¿ß∏¶ π‚æ“¥Ÿ.");
 		break;
 	case ATT_NORMAL_BLAST:
+	case ATT_AC_REDUCE_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
 	case ATT_FIRE_PYSICAL_BLAST:

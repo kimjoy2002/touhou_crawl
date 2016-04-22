@@ -2409,6 +2409,67 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+bool skill_haste_all(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_moon_communication(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_insane(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_canon(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_fake_dolls_war(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+
+
+
+
+
+
+
 
 void SetSpell(monster_index id, list<spell> *list)
 {
@@ -2471,6 +2532,9 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_STAR:
 		list->push_back(spell(SPL_HASTE,25));
+		break;
+	case MON_ALICEYUKKURI:
+		list->push_back(spell(SPL_FAKE_DOLLS_WAR,30));
 		break;
 	case MON_KATPA_WATER_WIZARD:
 		list->push_back(spell(SPL_FROST,20));
@@ -2576,9 +2640,9 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
 		list->push_back(spell(randA(1)?SPL_INVISIBLE:SPL_HASTE,20));
-		list->push_back(spell(randA(1)?SPL_FROST:SPL_FLAME,20));
+		list->push_back(spell(SPL_MAGIC_TANMAC,20));
 		list->push_back(spell(randA(1)?SPL_CONFUSE:SPL_SLOW,10));
-		list->push_back(spell(randA(1)?SPL_VENOM_BOLT:SPL_FIRE_BALL,10));		
+		list->push_back(spell(SPL_VENOM_BOLT,15));		
 		break;
 	case MON_HOBGOBRIN_TEMP:
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,20)); //악마소환으로 바꾸기
@@ -2628,6 +2692,12 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_SUMMON_UFO,20));	
 		list->push_back(spell(SPL_CHAIN_LIGHTNING,20));
 		break;	
+	case MON_NAMAZ:
+		list->push_back(spell(SPL_STONE_UPLIFT,20));
+		break;	
+	case MON_LANTERN_YOUKAI:
+		list->push_back(spell(SPL_FIRE_SPREAD,30));
+		break;
 	case MON_EVIL_EYE:
 		list->push_back(spell(SPL_SHOCK,10));
 		break;
@@ -2698,30 +2768,27 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_FAIRY_SUN_FLOWER:
 		list->push_back(spell(SPL_SMITE,15));
-		list->push_back(spell(SPL_HASTE_OTHER,30));
-		//HASTE아더가 아니라 한번에 LOS 가속으로 바꾸자
-		list->push_back(spell(SPL_HEAL_OTHER,20));
-		//HEAL 범위로
-		list->push_back(spell(SPL_HASTE,10));
+		list->push_back(spell(SPL_HASTE_ALL,15));
+		list->push_back(spell(SPL_HEAL_ALL,20));
 		break;
 	case MON_MOON_RABIT_SUPPORT:
-		//아군 토끼들을 끌어들이는 마법
+		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
 		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_MOON_RABIT_ATTACK:
 		break;
 	case MON_MOON_RABIT_ELITE:
-		//원거리 총을 쏜다.
+		list->push_back(spell(SPL_MOON_GUN,40));
 		break;
 	case MON_MAC:
-		//쉐도우 크리처 비슷한 소환
+		list->push_back(spell(SPL_SUMMON_DREAM,30));
+		list->push_back(spell(SPL_BLINK,30));
 		break;
 	case MON_NIGHTMARE:
-		list->push_back(spell(SPL_SMITE,15));
-		//근접은 마나드레인
+		list->push_back(spell(SPL_MANA_DRAIN,20));
 		break;
 	case MON_LUNATIC:
-		//타겟팅 광기(저항가능)
+		list->push_back(spell(SPL_INSANE,20));
 		break;
 	case MON_HAUNT:
 		break;
@@ -2732,18 +2799,19 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_HELL_SPIDER:
 		break;
 	case MON_BLOOD_HAUNT:
-		//체력 10%를 깍는 스마이트
+		list->push_back(spell(SPL_BLOOD_SMITE,25));
 		break;
 	case MON_HELL_HOUND:
-		//헬하운드를 소환함
+		list->push_back(spell(SPL_CALL_HOUND,15));
 		break;
 	case MON_DESIRE:
 		break;
 	case MON_FLOWER_TANK:
 		list->push_back(spell(SPL_LASER,30));
+		list->push_back(spell(SPL_LUMINUS_STRIKE,15));
 		break;
 	case MON_EVIL_EYE_TANK:
-		//대포발사
+		list->push_back(spell(SPL_CANNON,15));
 		break;
 	case MON_SNOW_GIRL:
 		list->push_back(spell(SPL_FREEZE,20));
@@ -2768,12 +2836,12 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_REIMU:
 		break;
 	case MON_ALICE:
-		//상해,봉래인형 소환
+		list->push_back(spell(SPL_DOLLS_WAR,50));
 		break;
 	case MON_SEIRAN:
 		break;
 	case MON_RINGO:
-		//아군 토끼들을 끌어들이는 마법
+		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
 		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_UDONGE:
@@ -2788,8 +2856,10 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_WATER_CANNON,30));
 		break;
 	case MON_SANGHAI:
+	case MON_FAKE_SANGHAI:
 		break;
 	case MON_HOURAI:
+	case MON_FAKE_HOURAI:
 		list->push_back(spell(SPL_LASER,20));
 		break;
 	default:
@@ -2978,7 +3048,33 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_CONTROLED_BLINK: 
 		return skill_controled_blink(power,short_,order,target);
 	case SPL_THE_WORLD:	
-		return skill_the_world(power,short_,order,target);
+		return skill_the_world(power,short_,order,target);	
+	case SPL_HASTE_ALL:
+		return skill_haste_all(power,short_,order,target);
+	case SPL_HEAL_ALL:	
+		return skill_heal_all(power,short_,order,target);	
+	case SPL_MOON_COMMUNICATION:
+		return skill_moon_communication(power,short_,order,target);	
+	case SPL_MOON_GUN:
+		return skill_moon_gun(power,short_,order,target);	
+	case SPL_SUMMON_DREAM:
+		return skill_summon_dream(power,short_,order,target);	
+	case SPL_MANA_DRAIN:
+		return skill_mana_drain(power,short_,order,target);	
+	case SPL_INSANE:
+		return skill_insane(power,short_,order,target);	
+	case SPL_BLOOD_SMITE:
+		return skill_blood_smite(power,short_,order,target);	
+	case SPL_CALL_HOUND:
+		return skill_call_hound(power,short_,order,target);	
+	case SPL_CANNON:
+		return skill_canon(power,short_,order,target);	
+	case SPL_DOLLS_WAR:
+		return skill_dolls_war(power,short_,order,target);	
+	case SPL_FAKE_DOLLS_WAR:
+		return skill_fake_dolls_war(power,short_,order,target);	
+	case SPL_FIRE_SPREAD:
+		return skill_fire_spread(power,short_,order,target);	
 	default:
 		return false;
 	}
@@ -3194,7 +3290,33 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_CONTROLED_BLINK: 
 		return skill_controled_blink(power,short_,&you,target);
 	case SPL_THE_WORLD:	
-		return skill_the_world(power,short_,&you,target);
+		return skill_the_world(power,short_,&you,target);	
+	case SPL_HASTE_ALL:
+		return skill_haste_all(power,short_,&you,target);
+	case SPL_HEAL_ALL:	
+		return skill_heal_all(power,short_,&you,target);	
+	case SPL_MOON_COMMUNICATION:
+		return skill_moon_communication(power,short_,&you,target);	
+	case SPL_MOON_GUN:
+		return skill_moon_gun(power,short_,&you,target);	
+	case SPL_SUMMON_DREAM:
+		return skill_summon_dream(power,short_,&you,target);	
+	case SPL_MANA_DRAIN:
+		return skill_mana_drain(power,short_,&you,target);	
+	case SPL_INSANE:
+		return skill_insane(power,short_,&you,target);	
+	case SPL_BLOOD_SMITE:
+		return skill_blood_smite(power,short_,&you,target);	
+	case SPL_CALL_HOUND:
+		return skill_call_hound(power,short_,&you,target);	
+	case SPL_CANNON:
+		return skill_canon(power,short_,&you,target);	
+	case SPL_DOLLS_WAR:
+		return skill_dolls_war(power,short_,&you,target);	
+	case SPL_FAKE_DOLLS_WAR:
+		return skill_fake_dolls_war(power,short_,&you,target);	
+	case SPL_FIRE_SPREAD:
+		return skill_fire_spread(power,short_,&you,target);	
 	default:
 		return false;
 	}

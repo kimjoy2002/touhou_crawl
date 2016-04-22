@@ -1671,11 +1671,13 @@ void SetResistMonster(monster* mon)
 		mon->confuse_resist=1;
 		break;
 	case MON_SANGHAI:
+	case MON_FAKE_SANGHAI:
 		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
 	case MON_HOURAI:
+	case MON_FAKE_HOURAI:
 		mon->elec_resist=1;
 		mon->fire_resist=1;
 		mon->ice_resist=1;

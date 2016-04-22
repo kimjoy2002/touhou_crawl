@@ -53,6 +53,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MON_TANMAC_SMALL:
 	case SPL_MON_TANMAC_MIDDLE:
 	case SPL_MON_WATER_GUN:
+	case SPL_MOON_GUN:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_LUMINUS_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
@@ -72,6 +73,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_VENOM_BOLT:
 	case SPL_LASER:
 	case SPL_SPARK:
+	case  SPL_FIRE_SPREAD:
 		return (S_FLAG_PENETRATE | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SUMMON_BUG:
 	case SPL_SUMMON_PENDULUM:
@@ -83,6 +85,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_UNZAN:
 	case SPL_SUMMON_UFO:
 	case SPL_SUMMON_LESSOR_DEMON:
+	case SPL_SUMMON_DREAM:
+	case SPL_DOLLS_WAR:
+	case SPL_FAKE_DOLLS_WAR:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
@@ -99,6 +104,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;
 	case SPL_MIND_BENDING:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_INSANE:
+		return (S_FLAG_DEBUF) & flag;
 	case SPL_MUTE:		
 	case SPL_CHARM:
 		return (S_FLAG_NO_COM | S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;		
@@ -115,6 +122,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_CONTROLED_BLINK: 
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_BURST:
+	case SPL_MANA_DRAIN:	
+	case SPL_BLOOD_SMITE:
 		return ((S_FLAG_SMITE) & flag);	
 	case SPL_FLAME:		
 	case SPL_FROST:
@@ -127,6 +136,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_KANAME_DRILL:
 	case SPL_WATER_CANNON:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_CANNON:
+		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SHOCK:
 		return (S_FLAG_SPEAK | S_FLAG_DIREC  | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CHAIN_LIGHTNING:
@@ -146,6 +157,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_STONE_FORM:
 	case SPL_KNIFE_COLLECT:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
+	case SPL_HASTE_ALL:
+	case SPL_HEAL_ALL:
+		return ((S_FLAG_HEAL | S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
 	case SPL_BLINK:
 	case SPL_RECALL:
 	case SPL_RABBIT_HORN:
@@ -154,7 +168,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_TIME_PARADOX: 
 	case SPL_PRIVATE_SQ: 
 	case SPL_THE_WORLD:
+	case SPL_CALL_HOUND:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
+	case SPL_MOON_COMMUNICATION:
+		return (S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
 	case SPL_COLD_BRAND:
@@ -197,6 +214,10 @@ int SpellLength(spell_list skill)
 	case SPL_PERFERT_FREEZE: 
 	case SPL_PRIVATE_SQ:
 	case SPL_CONTROLED_BLINK:  
+	case SPL_MOON_GUN:
+	case SPL_MANA_DRAIN:
+	case SPL_INSANE:
+	case SPL_BLOOD_SMITE:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -209,6 +230,7 @@ int SpellLength(spell_list skill)
 	case SPL_LUMINUS_STRIKE:
 	case SPL_FIRE_STORM:
 	case SPL_FIELD_VIOLET:
+	case SPL_CANNON:
 		return 7;
 	case SPL_TWIST:
 	case SPL_FIRE_BOLT:
@@ -217,6 +239,7 @@ int SpellLength(spell_list skill)
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_STONE_ARROW: 
 	case SPL_KANAME_DRILL:
+	case  SPL_FIRE_SPREAD:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -268,6 +291,13 @@ int SpellLength(spell_list skill)
 	case SPL_DRAW_POWER:
 	case SPL_TIME_PARADOX: 
 	case SPL_THE_WORLD:
+	case SPL_HASTE_ALL:
+	case SPL_HEAL_ALL:
+	case SPL_MOON_COMMUNICATION:
+	case SPL_SUMMON_DREAM:
+	case SPL_CALL_HOUND:
+	case SPL_DOLLS_WAR:
+	case SPL_FAKE_DOLLS_WAR:
 	default:
 		return 0;
 	}
@@ -461,6 +491,32 @@ const char* SpellString(spell_list skill)
 		return "컨트롤드 블링크";
 	case SPL_THE_WORLD:
 		return "더 월드";
+	case SPL_HASTE_ALL:
+		return "단체 가속";
+	case SPL_HEAL_ALL:
+		return "단체 회복";
+	case SPL_MOON_COMMUNICATION:
+		return "전파 수신";
+	case SPL_MOON_GUN:
+		return "달의 총";
+	case SPL_SUMMON_DREAM:
+		return "꿈의 소환";
+	case SPL_MANA_DRAIN:
+		return "영력흡수";
+	case SPL_INSANE:
+		return "광기";
+	case SPL_BLOOD_SMITE:
+		return "피의 응시";
+	case SPL_CALL_HOUND:
+		return "동료부르기";
+	case SPL_CANNON:
+		return "거대 대포";
+	case SPL_DOLLS_WAR:
+		return "돌즈워";
+	case SPL_FAKE_DOLLS_WAR:
+		return "모조 돌즈워";
+	case SPL_FIRE_SPREAD:
+		return "화염 분출";
 	default:
 		return "알수없는 마법";
 	}
@@ -539,6 +595,8 @@ int SpellLevel(spell_list skill)
 	case SPL_HEAL_OTHER:
 	case SPL_SUMMON_LESSOR_DEMON:
 	case SPL_ANIMAL_CHANGE:
+	case SPL_INSANE:
+	case SPL_FAKE_DOLLS_WAR:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -554,22 +612,33 @@ int SpellLevel(spell_list skill)
 	case SPL_KANAME_DRILL:
 	case SPL_SUICIDE_BOMB:
 	case SPL_PRIVATE_SQ: 
+	case SPL_MOON_COMMUNICATION:
+	case SPL_MANA_DRAIN:
+	case SPL_BLOOD_SMITE:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
 	case SPL_LUMINUS_STRIKE:
 	case SPL_CONTROLED_BLINK: 
 	case SPL_FIELD_VIOLET:
+	case SPL_MOON_GUN:
+	case SPL_SUMMON_DREAM:
+	case SPL_CALL_HOUND:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
+	case SPL_DOLLS_WAR:
+	case SPL_HASTE_ALL:
+	case SPL_HEAL_ALL:
+	case SPL_CANNON:
+	case SPL_FIRE_SPREAD:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
 	case SPL_FIRE_STORM:
 	case SPL_PERFERT_FREEZE: 
 	case SPL_THE_WORLD:
-		return 9;
+		return 9;	
 	default:
 		return 0;
 	}
@@ -595,6 +664,7 @@ int SpellNoise(spell_list skill)
 	case SPL_STONE_PUNCH:
 	case SPL_STONE_TRAP:
 	case SPL_DRAW_POWER:
+	case SPL_MANA_DRAIN:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -622,6 +692,9 @@ int SpellNoise(spell_list skill)
 	case SPL_TIME_PARADOX: 
 	case SPL_PRIVATE_SQ: 
 	case SPL_THE_WORLD:
+	case SPL_MOON_COMMUNICATION:
+	case SPL_INSANE:
+	case SPL_BLOOD_SMITE:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -662,6 +735,12 @@ int SpellNoise(spell_list skill)
 	case SPL_LUMINUS_STRIKE:
 	case SPL_FIELD_VIOLET:
 	case SPL_CONTROLED_BLINK: 
+	case SPL_HASTE_ALL:
+	case SPL_HEAL_ALL:
+	case SPL_MOON_GUN:
+	case SPL_SUMMON_DREAM:
+	case SPL_DOLLS_WAR:
+	case SPL_FAKE_DOLLS_WAR:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -671,6 +750,9 @@ int SpellNoise(spell_list skill)
 	case SPL_RABBIT_HORN:
 	case SPL_BLIZZARD: 
 	case SPL_PERFERT_FREEZE: 
+	case SPL_CALL_HOUND:
+	case SPL_CANNON:
+	case SPL_FIRE_SPREAD:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -878,7 +960,33 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_CONTROLED_BLINK: 
 		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_THE_WORLD:
-		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_HASTE_ALL:
+		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_HEAL_ALL:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_MOON_COMMUNICATION:
+		return num==0?(SKT_MENTAL):num==1?(SKT_SUMMON):(SKT_ERROR);
+	case SPL_MOON_GUN:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_SUMMON_DREAM:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_MANA_DRAIN:
+		return num==0?(SKT_CONJURE):num==1?(SKT_MENTAL):(SKT_ERROR);
+	case SPL_INSANE:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_BLOOD_SMITE:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_CALL_HOUND:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_CANNON:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_DOLLS_WAR:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_FAKE_DOLLS_WAR:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_FIRE_SPREAD:
+		return num==0?(SKT_FIRE):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -981,6 +1089,19 @@ int SpellCap(spell_list skill)
 	case SPL_PRIVATE_SQ: 
 	case SPL_CONTROLED_BLINK: 
 	case SPL_THE_WORLD:
+	case SPL_HASTE_ALL:
+	case SPL_HEAL_ALL:
+	case SPL_MOON_COMMUNICATION:
+	case SPL_MOON_GUN:
+	case SPL_SUMMON_DREAM:
+	case SPL_MANA_DRAIN:
+	case SPL_INSANE:
+	case SPL_BLOOD_SMITE:
+	case SPL_CALL_HOUND:
+	case SPL_CANNON:
+	case SPL_DOLLS_WAR:
+	case SPL_FAKE_DOLLS_WAR:
+	case SPL_FIRE_SPREAD:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1014,7 +1135,7 @@ int SpellDiffer(int level)
 	case 8:
 		return 16;
 	case 9:
-		return 19;
+		return 20;
 	default:
 		return 99;
 	}

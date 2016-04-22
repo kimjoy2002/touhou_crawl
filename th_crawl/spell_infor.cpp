@@ -414,6 +414,57 @@ string GetSpellInfor(spell_list spell)
 		text_ += "잠시간 모든 시간을 멈추고 일방적으로 행동할 수 있다. 공격도 가능하다.\n";
 		text_ += "어마어마한 시공부작용을 받는다. 연속으로 쓰는건 무리가 있다.\n";
 		break;
+	case SPL_HASTE_ALL:
+		text_ += "시야 내의 아군들에게 가속을 전부 부여한다.\n";
+		break;
+	case SPL_HEAL_ALL:
+		text_ += "시야 내의 아군들을 모두 회복시킨다.\n";
+		break;
+	case SPL_MOON_COMMUNICATION:
+		text_ += "전파를 통신하여 아군 달토끼들을 불러모은다.\n";
+		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다.\n";
+		text_ += "소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
+		break;
+	case SPL_MOON_GUN:
+		text_ += "달토끼: 짜증나는 원시적 공격이로군! 모두 죽어라!\n";
+		text_ += "달의 기술을 집결하여 만든 총을 쏜다.\n";
+		text_ += "달의 하이테크치고는 겉모양은 별거 아닌거처럼 보인다.\n";
+		break;
+	case SPL_SUMMON_DREAM:
+		text_ += "꿈을 구현화시켜 다양한 장소에서의 몬스터들을 소환하는 맥 특유의 기술.\n";
+		text_ += "특정 장소에서 나오는 몬스터들이 한번에 여럿 소환된다.\n";
+		break;
+	case SPL_MANA_DRAIN:
+		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하면서 데미지를 주는 스마이트형 공격.\n";
+		text_ += "특이하게 지능이 낮으면 받는 데미지가 높아진다.\n";
+		break;
+	case SPL_INSANE:
+		text_ += "대상을 미치게 만들어버린다. 저항하지 못한 상대는 광기에 빠진다.\n";
+		text_ += "마법저항으로 저항할 수 있다.\n";
+		break;
+	case SPL_BLOOD_SMITE:
+		text_ += "대상의 최대 체력에 비례한 저항불가능한 스마이트형 공격.\n";
+		text_ += "최대체력이 높을수록 데미지가 커지고 데미지 반감이 되지 않으므로 전사에게도 위험하다.\n";
+		break;
+	case SPL_CALL_HOUND:
+		text_ += "주변의 개들을 끌어모으는 울부짖음을 외친다.\n";
+		text_ += "모인 개들도 다시 동료를 끌어 모을 수 있으니 되도록 빠르게 처리해야한다.\n";
+		break;
+	case SPL_CANNON:
+		text_ += "거대한 대포알을 쏴서 폭발후 회피불가능한 데미지를 준다.\n";
+		text_ += "방어력을 어느정도 관통한다.\n";
+		break;
+	case SPL_DOLLS_WAR:
+		text_ += "근접과 공격에 강력한 상해인형과 원거리와 방어에 특화된 봉래인형을 같이 소환한다.\n";
+		text_ += "상해인형은 빠르게 적을 공격하고 봉래인형은 적들의 어그로를 효과적으로 끌어모은다.\n";
+		break;
+	case SPL_FAKE_DOLLS_WAR:
+		text_ += "상해인형이나 봉래인형을 소환한다.\n";
+		text_ += "모조기때문에 원조의 인형보단 훨씬 약하다.\n";
+		break;
+	case SPL_FIRE_SPREAD:
+		text_ += "전방에 부채꼴모양으로 화염의 구름을 흩뿌린다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

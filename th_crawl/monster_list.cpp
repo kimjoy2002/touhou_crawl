@@ -708,6 +708,14 @@ const mon_infor mondata[] = {
 	
 	{MON_HOURAI,15,1,name_infor("봉래 인형",true),&img_mons_default,120,20,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,12},
+	
+	{MON_FAKE_SANGHAI,9,1,name_infor("모조 상해 인형",true),&img_mons_default,35,1,15,
+	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY,99,1,7},
+	
+	{MON_FAKE_HOURAI,9,1,name_infor("모조 봉래 인형",true),&img_mons_default,80,15,2,
+	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,12}
 
 };

@@ -350,14 +350,14 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
 		text_ += "홍마관에 새롭게 고용되었다. 가사를 돕는 요정으로 생김새는 무섭게 생겼다.\n";
-		text_ += "도서관의 수많은 책을 관리하기 위해 사서로 고용된 홉고블린이다.\n";
-		text_ += "그에게 마법은 전문분야까지는 아니지만 던전에 오는 무식한 플레이어들을 학살하기에는 충분해보인다.\n";
+		text_ += "도서관의 수많은 책을 관리하기 위해 사서로 고용된 홉고블린이다. 특히 독마법을 잘 다룬다.\n";
+		text_ += "그에게 마법은 전문분야까지는 아니지만 무식한 칩입자를 학살하기에는 충분해보인다.\n";
 		break;
 	case MON_HOBGOBRIN_TEMP:
 		text_ += "홍마관에 새롭게 고용되었다. 가사를 돕는 요정으로 생김새는 무섭게 생겼다.\n";
-		text_ += "약해보이지만 그는 사실 한때 최강의 몬스터로 몽둥이와 함께 흉폭한 데미지와\n";
-		text_ += "던전을 탐험하는 초보자를 학살하는 최고의 플레이어 살인율을 자랑했다고 한다.\n";
-		text_ += "환상향에 온걸 환영하네!\n";
+		text_ += "그는 꾸준한 연구를 통하여 마계와 환상향을 잇는 포탈을 만드는데 성공했다.\n";
+		text_ += "그는 이제 마족 소환의 전문가로 무시무시한 악마들을 고용할 것이다.\n";
+		text_ += "사실 속으로는 마족 관광 회사를 열어 관광객을 소환하는것이라고 한다.\n";
 		break;
 	case MON_MAID_FAIRY:
 		text_ += "홍마관에 일하고 있는 요정. 별다른 도움은 안되고 있다.\n";
@@ -398,8 +398,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "강력한 전기를 발산하며 독을 품고 있다.\n";
 		break;
 	case MON_DRAGON_BABY:
-		text_ += "조그만 쥐처럼 생긴 뇌수. 귀엽게 생겼지만 위험하다.\n";
-		text_ += "강력한 전기를 발산하며 독을 품고 있다.\n";
+		text_ += "환상향에서도 희귀한 편인 용이지만 새끼 용이다.\n";
+		text_ += "새끼라고 무시했다간 뜨거운 맛을 보게될 것이다.\n";
 		break;
 	case MON_KASEN:
 		text_ += "환상향에 살고 있는 선인. 오니일지도 모른다는 공공연한 비밀이 있다.\n";
@@ -701,12 +701,20 @@ string GetMonsterInfor(monster *it)
 	case MON_NESI:
 		text_ += "도시전설을 기반으로 캇파들이 만들어낸 인공물이다.\n";
 		text_ += "도시전설을 믿지 않는 캇파들이 만든 물건이지만 그것에 귀신이 쓰인적도...\n";
+		text_ += "거대한 물대포를 쏴댄다. 물밖으로 이동할수는 없다.\n";
 		break;
 	case MON_SANGHAI:
 		text_ += "바카쟈네노?\n";
 		break;
 	case MON_HOURAI:
 		text_ += "앨리스의 인형중 하나인 봉래인형\n";
+		text_ += "방패를 들고 시전자를 보호하면서 원거리 레이저를 쏜다.\n";
+		break;
+	case MON_FAKE_SANGHAI:
+		text_ += "겉보기엔 상해 인형처럼 보이지만 뭔가 어설프다.\n";
+		break;
+	case MON_FAKE_HOURAI:
+		text_ += "겉보기엔 봉래 인형처럼 보이지만 뭔가 어설프다.\n";
 		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";

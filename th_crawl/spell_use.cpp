@@ -2500,10 +2500,30 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_moon_communication(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(!env[current_level].isInSight(target))
+		return false;
+	if(order->GetExhausted())
+		return false;
+
+	order->SetCommunication(rand_int(2,4));
+	return true;
 }
 bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = 6+power/8;
+		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ÃÑ¾Ë",true));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)	
+			throwtanmac(19,beam,temp_infor,NULL);
+		order->SetParadox(0);
+		return true;
+	}
 	return false;
 }
 bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)

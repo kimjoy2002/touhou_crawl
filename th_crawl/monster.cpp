@@ -37,7 +37,7 @@ monster::monster()
 ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRAL),s_tele(0), s_might(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0) ,s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
-s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0),
+s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	sm_info(), state(MS_NORMAL), direction(0)
@@ -98,6 +98,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_mind_reading);
 	SaveData<int>(fp, s_lunatic);
 	SaveData<int>(fp, s_neutrality);
+	SaveData<int>(fp, s_communication);
+	SaveData<int>(fp, s_exhausted);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -185,6 +187,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_mind_reading);
 	LoadData<int>(fp, s_lunatic);
 	LoadData<int>(fp, s_neutrality);
+	LoadData<int>(fp, s_communication);
+	LoadData<int>(fp, s_exhausted);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -268,6 +272,8 @@ void monster::init()
 	s_mind_reading =0;
 	s_lunatic=0;
 	s_neutrality=0;
+	s_communication=0;
+	s_exhausted=0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -549,7 +555,16 @@ void monster::TurnLoad()
 	else
 		s_lunatic =0;
 	
-		
+	if(s_communication-temp_turn>0)
+		s_communication-=temp_turn;
+	else
+		s_communication =0;
+
+	if(s_exhausted-temp_turn>0)
+		s_exhausted-=temp_turn;
+	else
+		s_exhausted =0;
+
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -1965,8 +1980,33 @@ int monster::action(int delay_)
 			}
 		}
 
+		if(s_exhausted)
+		{
+			s_exhausted--;
+		}
 
-		if(!s_paralyse)
+
+
+
+
+
+		if(s_communication)
+		{
+			s_communication--;
+			if(!s_communication)
+			{
+				s_exhausted = rand_int(40,50);
+			}
+
+			if(monster* mon_=BaseSummon(MON_MOON_RABIT_ATTACK, rand_int(20,30), false, false, 2, this, position, SKD_OTHER, -1))
+			{
+				if(!isUserAlly())
+				{
+					mon_->flag &= ~M_FLAG_SUMMON;
+				}
+			}
+		}
+		else if(!s_paralyse)
 		{
 			if(target) //투명몹을 상대할때
 			{	
@@ -2693,6 +2733,26 @@ bool monster::SetNeutrality(int s_neutrality_)
 	return true;
 }
 
+bool monster::SetCommunication(int s_communication_)
+{
+	if(!s_communication_)
+		return false;
+	if(isYourShight())
+	{
+		if(!s_communication)
+			printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다.");
+	}
+	s_communication = s_communication_;
+	return true;
+}
+bool monster::SetExhausted(int s_exhausted_)
+{
+	if(!s_exhausted_)
+		return false;
+	s_exhausted = s_exhausted_;
+	return true;
+}
+
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -3288,6 +3348,13 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_lunatic)
 		{
 			sprintf(string_,"광기");
+			return true;
+		}
+		return false;
+	case MSS_COMMUNICATION:
+		if(s_communication)
+		{
+			sprintf(string_,"전파송신");
 			return true;
 		}
 		return false;

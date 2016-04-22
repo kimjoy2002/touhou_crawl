@@ -76,6 +76,8 @@ public:
 	int s_mind_reading;
 	int s_lunatic;
 	int s_neutrality;
+	int s_communication;
+	int s_exhausted;
 
 	int summon_time;
 	parent_type summon_parent;
@@ -184,6 +186,8 @@ public:
 	bool SetMindReading(int mind_);
 	bool SetLunatic(int lunatic_);
 	bool SetNeutrality(int s_neutrality_);
+	bool SetCommunication(int s_communication_);
+	bool SetExhausted(int s_exhausted_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;
@@ -220,6 +224,7 @@ public:
 	bool isSaveSummoner(unit* order);
 	int GetWalkDelay(){return GetSpeed();};
 	bool GetMindReading(){return (s_mind_reading!=0);};
+	int GetExhausted(){return s_exhausted;};
 	int GetPoisonResist(){return poison_resist;};
 	float GetFireResist();
 	float GetColdResist();

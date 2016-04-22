@@ -118,6 +118,8 @@ public:
 	virtual bool SetGhost(int ghost_)=0;
 	virtual bool SetMirror(int mirror_){return false;};
 	virtual bool SetParadox(int s_paradox_){return false;};
+	virtual bool SetCommunication(int s_communication_){return false;};
+	virtual bool SetExhausted(int s_exhausted_){return false;};
 	bool PositionSwap(unit *other){
 		coord_def temp_ = position;
 		SetXY(other->position);
@@ -146,6 +148,7 @@ public:
 	virtual bool isSaveSummoner(unit* order){return false;};
 	virtual int GetWalkDelay(){return 10;};
 	virtual bool GetMindReading(){return false;};
+	virtual int GetExhausted(){return 0;};
 
 
 	virtual int GetResist() = 0;

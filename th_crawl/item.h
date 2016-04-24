@@ -210,7 +210,7 @@ int GetItemofNum(list<item>::iterator it,list<item>::iterator it2);
 list<item>::iterator GetKeytoItem(char key_);
 
 void init_identify();
-
+item_infor& CreateFloorItem(int floor, item_infor* item_);
 void create_item(int floor, int num_);
 
 

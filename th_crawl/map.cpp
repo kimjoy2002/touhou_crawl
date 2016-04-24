@@ -14,8 +14,8 @@
 
 
 
-map_dummy::map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_,dungeon_tile_type wall_tex_):
-pos(pos_),wall(wall_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),floor_tex(floor_tex_),wall_tex(wall_tex_),
+map_dummy::map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_,dungeon_tile_type wall_tex_):
+floor(floor_), pos(pos_),wall(wall_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),floor_tex(floor_tex_),wall_tex(wall_tex_),
 connect_enter(false),connect_exit(false)
 {
 	//if(!pattern_)
@@ -100,7 +100,15 @@ void map_dummy::make_map(environment& env_pointer, bool wall_)
 	}
 	for(list<mapdummy_item>::iterator it = item_list.begin();it!=item_list.end();it++)
 	{
-		env_pointer.MakeItem(it->pos+pos,it->id);
+		item* item_ = env_pointer.MakeItem(it->pos+pos,it->id);
+		
+		if((*it).id.artifact)
+		{
+			if((item_->type>=ITM_WEAPON_FIRST && item_->type< ITM_WEAPON_LAST)||(item_->type>=ITM_ARMOR_FIRST && item_->type< ITM_ARMOR_LAST)||(item_->type>=ITM_JEWELRY_FIRST && item_->type< ITM_JEWELRY_LAST))
+			{ //¾ÆÆ¼ÆåÆ® ¸¸µé±â
+					MakeArtifact(item_,item_->curse?-1:1);
+			}
+		}
 	}
 	for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
 	{
@@ -242,9 +250,13 @@ void map_algorithms(int num)
 		{
 			map_algorithms01(num,DG_FLOOR,DG_WALL);
 		}
-		else if(num >= YUKKURI_LEVEL && num <= YUKKURI_LAST_LEVEL)
+		else if(num >= YUKKURI_LEVEL && num < YUKKURI_LAST_LEVEL)
 		{
-			map_algorithms03(70,3,4,9, num,DG_GRASS,DG_WALL);
+			map_algorithms03(70,3,4,12, num,DG_GRASS,DG_WALL);
+		}
+		else if(num == YUKKURI_LAST_LEVEL)
+		{
+			map_algorithms03(80,5,7,12, num,DG_GRASS,DG_WALL);
 		}
 		else if(num >= DEPTH_LEVEL && num <= DEPTH_LAST_LEVEL)
 		{
@@ -310,7 +322,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
-	if(floor != 0 && randA(1))
+	if(floor != 0 && randA(1) && floor != YUKKURI_LAST_LEVEL)
 	{ //Å×½ºÆ®
 		vector_.push_back(10+floor);	
 	}
@@ -337,6 +349,10 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == PANDEMONIUM_LEVEL+3)
 	{
 		vector_.push_back(VP_PANDEMONIUM_3_LAST);		
+	}
+	if(floor == YUKKURI_LAST_LEVEL)
+	{
+		vector_.push_back(VP_YUKKURI_LAST);		
 	}
 	//if(floor==0)
 	//{
@@ -839,7 +855,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			int m_size=5;
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
 			
-			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
@@ -915,7 +931,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 				temp_coord.x = DG_MAX_X/2;
 				temp_coord.y = DG_MAX_Y/2;
 			}
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 			
 			
 
@@ -964,7 +980,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 
 			coord_def temp_coord(next_x,next_y);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,0,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,0,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			if(step)
 			{
@@ -1077,7 +1093,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 
 			coord_def temp_coord(next_x,next_y);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,1,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
+			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,1,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 
 			if(step)
 			{
@@ -1154,7 +1170,12 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			int r_size_y = rand_int(3,8);
 			int m_size=20;
 			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);		
-			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
+
+			if(j==0 && pattern_ == VP_YUKKURI_LAST)
+				temp_coord = coord_def(DG_MAX_X/2, DG_MAX_Y/2);
+
+
+			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //·£´ýÇÑ ¸Ê´õ¹Ì
 			
 			vector<map_dummy*>::iterator it;
 			for (it=vec_map.begin();it!=vec_map.end();it++) 

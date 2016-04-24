@@ -189,9 +189,12 @@ char* common_base_pattern(int floor_, map_dummy* map)
 			}
 		case 6: //Ç®»Ñ¸® ¿ä±« ³×Æ®¿öÅ©
 			{
-				if(floor_ < 9)
+				if(!((floor_ >= 10 && floor_ <=MAX_DUNGEUN_LEVEL) ||
+					(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL) ||
+					(floor_ >= EIENTEI_LEVEL && floor_ <=EIENTEI_LEVEL_LAST_LEVEL) ||
+					(floor_ >= DEPTH_LEVEL && floor_ <=DEPTH_LAST_LEVEL)))
 					break;
-				if(!(is_exist_named(MON_WAKASAGI) && (is_exist_named(MON_KEGERO) || is_exist_named(MON_SEKIBANKI))))
+				if((is_exist_named(MON_WAKASAGI) || (is_exist_named(MON_KEGERO) && is_exist_named(MON_SEKIBANKI))))
 					break;
 				bool hw_ = randA(1);
 				map->size_x = 3;
@@ -962,4 +965,76 @@ $$$$=.=...=.=$$$$";
 		break;
 	}
 }
+
+
+
+
+	
+char* yukkuri_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 15;
+		map->size_y = 13;
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(3,3)));
+		int mon_num_ = 5;
+		while(mon_num_)
+		{
+			coord_def c_(rand_int(2,-2),rand_int(1,-4));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				map->monster_list.push_back(mapdummy_mon(randA(1)?MON_ALICEYUKKURI:MON_YOUMUYUKKURI,0,c_));
+				mon_num_--;
+			}
+		}
+		return  "\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................\
+.........$...........$.........\
+..........$.........$..........\
+...........$.......$...........\
+........$$$$$.....$$$$$........\
+.......$$iii$.....$iii$$.......\
+......$.$iii$.....$iii$.$......\
+......$.$iii$.....$iii$.$......\
+.........$$$$.....$$$$.........\
+...............................\
+...........$$$$$$$$$...........\
+............$iiiii.$...........\
+............$iiiiii$...........\
+.............$iiiii$...........\
+..............$$$$$............\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................";	
+		break;
+	}
+}
+
+
 

@@ -1359,8 +1359,8 @@ int GetLevelMonsterNum(int level, bool item_)
 		else
 			return 9;
 	}
-	else{
-		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
+	else{ //æ∆¿Ã≈€
+		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL)
 			return 0;
 		else
 			return 15;

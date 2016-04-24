@@ -311,6 +311,8 @@ bool CommonValutMap(map_dummy* map, int pattern)
 	case VP_PANDEMONIUM_3_LAST:
 		temp = pandemonium_shinki_last_vault_pattern(map);
 		break;
+	case VP_YUKKURI_LAST:
+		temp = yukkuri_last_vault_pattern(map);
 	default:
 		return false;
 	}
@@ -404,7 +406,16 @@ bool PixedMap(map_dummy* map, char *temp)
 				break;
 			case '~':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_SEA;
-				break;				
+				break;	
+			case 'i': //각 던전에서 드랍되는 아이템을 넣음
+				{
+					item_infor t;
+					CreateFloorItem(map->floor,&t);
+					map->item_list.push_back(mapdummy_item(t,coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y)));
+					map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
+				}
+				break;	
+
 			case '0':
 			case '1':
 			case '2':
@@ -598,6 +609,9 @@ void map_dummy::patternSet()
 			break;
 		case VP_PANDEMONIUM_3_LAST:
 			PixedMap(this, pandemonium_shinki_last_vault_pattern(this));
+			break;
+		case VP_YUKKURI_LAST:
+			PixedMap(this, yukkuri_last_vault_pattern(this));
 			break;
 		default:
 			baseMap(this);

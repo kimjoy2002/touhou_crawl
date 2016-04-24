@@ -38,6 +38,7 @@ enum valut_pattern
 	VP_PANDEMONIUM_1_LAST,
 	VP_PANDEMONIUM_2_LAST,
 	VP_PANDEMONIUM_3_LAST,
+	VP_YUKKURI_LAST,
 	VP_LAST
 };
 
@@ -96,6 +97,7 @@ class map_dummy
 public:
 	coord_def pos;
 	bool wall;
+	int floor;
 	int size_x;
 	int size_y;
 	int pattern;
@@ -113,7 +115,7 @@ public:
 	list<mapdummy_event> event_list;
 	vector<dungeon_tile_type> sp_tile_list;
 
-	map_dummy(coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
+	map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
 	~map_dummy();
 	void patternSet();
 	bool collution(const coord_def& point,int size_x_ = 0,int size_y_ = 0);
@@ -161,4 +163,5 @@ char* eientei_vault_pattern(map_dummy* map);
 char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
 char* pandemonium_ice_last_vault_pattern(map_dummy* map);
 char* pandemonium_shinki_last_vault_pattern(map_dummy* map);
+char* yukkuri_last_vault_pattern(map_dummy* map);
 char* altar_pattern(map_dummy* map, god_type god_);

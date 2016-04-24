@@ -23,7 +23,9 @@ enum event_list
 	EVL_NOISE,//소음
 	EVL_VIOLET,//필드 바이올렛
 	EVL_DREAM_MONSTER,//드림방 몬스터 생성
-	EVL_DREAM_MESSAGE //꿈의 세계가 펼쳐진다.
+	EVL_DREAM_MESSAGE, //꿈의 세계가 펼쳐진다.
+	EVL_AGRO, //모든 몹이 플레이어에게 어그로가 끌린다.
+	EVL_REGEN //몹의 리젠 (꿈의 세계).
 };
 
 class events

@@ -327,10 +327,10 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 0;
 	case EVL_DREAM_MONSTER:
 		{		
-			int arr_[] = {MON_MOOK,/* MON_BLUE_UFO,*///달토끼, //맥, //악몽의조각, //
+			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT
 			};
 			rand_rect_iterator rit(event_->position,3,3);
-			int mon_id_ = arr_[randA(1)];
+			int mon_id_ = arr_[randA(5)];
 			int i = mon_id_==MON_BLUE_UFO?3:1; 
 			for(;!rit.end() && i> 0;rit++)
 			{
@@ -381,22 +381,61 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 							env[current_level].dgtile[k][h].tile = DG_FLOOR;
 					}
 				}
-				you.resetLOS();
+				{
+					for(int i = 0;i<DG_MAX_X;i++)
+						for(int j = 0;j<DG_MAX_Y;j++)
+							env[current_level].dgtile[i][j].flag = env[current_level].dgtile[i][j].flag | FLAG_MAPPING;
+				}
 				while(1)
 				{
 					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
 					if(!env[current_level].isInSight(coord_def(x_,y_)) && env[current_level].dgtile[x_][y_].isFloor()  && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_STAIR) )
 					{
 						env[current_level].dgtile[x_][y_].tile = DG_MOON_STAIR;
+						env[current_level].stair_vector.push_back(stair_info(coord_def(x_,y_),MOON_LEVEL));
 						break;
 					}
 				}
+				you.resetLOS();
 				printlog("꿈의 세계는 완전히 개방되었다! 달로 가는 포탈이 어디선가 열렸다!",true,false,false,CL_danger);
 				MoreWait();
+				env[current_level].MakeEvent(EVL_REGEN, coord_def(0,0), EVT_ALWAYS,30);
 				break;
 			}
 		}
 		return 1;
+	case EVL_AGRO:
+		if(event_->count <=0)
+		{
+			for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+			{
+				if(it->isLive())
+				{
+					it->AttackedTarget(&you);
+				}
+			}
+		}
+		return 1;
+	case EVL_REGEN:
+		if(randA(10)==0)
+		{			
+			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT
+			};
+			int mon_id_ = arr_[randA(5)];
+			
+			while(1)
+			{
+				int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+				if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_) && !env[current_level].isInSight(coord_def(x_,y_)))
+				{
+					monster *mon_ = env[current_level].AddMonster(mon_id_,0,coord_def(x_,y_));
+					mon_->AttackedTarget(&you);
+					break;
+				}
+			}
+
+		}
+		return 0;
 	default:
 		break;
 	}

@@ -289,6 +289,7 @@ void map_algorithms(int num)
 		}
 		else if(num == DREAM_LEVEL)
 		{			
+			env[num].ClearFloor();
 			map_algorithms02(num,3,-40,DG_FLOOR,DG_WALL);
 		}
 		else
@@ -713,7 +714,7 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 		}
 	}
 
-
+	
 	
 	bool make_room_ = true;
 	do
@@ -737,6 +738,10 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 				}
 			}
 		}
+		
+		for(int k=0;k<divide_;k++)
+			env[num].MakeEvent(EVL_AGRO, coord_def(0,0), EVT_COUNT,dream_count_*(k+1));
+
 
 		if(make_room_)
 		{

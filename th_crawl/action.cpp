@@ -1061,6 +1061,23 @@ bool warning(dungeon_tile_type type, bool down)
 	
 	switch(type)
 	{
+	case DG_YUKKURI_STAIR:
+		if(down)
+		{
+			printlog("여긴 정말 위험해보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			switch(waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				enterlog();
+				return true;
+			case 'N':
+			default:
+				printlog(" 현명하군!",true,false,false,CL_help);
+				return false;
+			}
+		}
+		break;
 	case DG_SCARLET_U_STAIR:
 		if(down)
 		{
@@ -1095,30 +1112,64 @@ bool warning(dungeon_tile_type type, bool down)
 			}
 		}
 		break;
-	case DG_SUBTERRANEAN_STAIR:
+	case DG_PANDEMONIUM_STAIR:
 		if(down)
 		{
-			printlog("아직 지저의 문은 열리지 않았다... ",false,false,false,CL_normal);
-			switch(randA(4))
+			printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			switch(waitkeyinput())
 			{
-			case 0:
-			printlog("미구현으로 보인다.",true,false,false,CL_normal);
-			break;
-			case 1:
-			printlog("제작자의 게으름으로 보인다.",true,false,false,CL_normal);
-			break;
-			case 2:
-			printlog("여긴 포기하는게 좋겠군.",true,false,false,CL_normal);
-			break;
-			case 3:
-			printlog("제작자는 근성이 없군.",true,false,false,CL_normal);
-			break;
-			case 4:
-			printlog("언젠간 추가될거야.",true,false,false,CL_normal);
-			break;
+			case 'Y':
+			case 'y':
+				enterlog();
+				return true;
+			case 'N':
+			default:
+				printlog(" 좋은 선택이야!",true,false,false,CL_help);
+				return false;
 			}
-			return false;
 		}
+		break;
+	case DG_DREAM_STAIR:
+		if(down)
+		{
+			printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			switch(waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				enterlog();
+				return true;
+			case 'N':
+			default:
+				printlog(" 좋은 선택이야!",true,false,false,CL_help);
+				return false;
+			}
+		}
+		break;
+	case DG_SUBTERRANEAN_STAIR:
+		//if(down)
+		//{
+		//	printlog("아직 지저의 문은 열리지 않았다... ",false,false,false,CL_normal);
+		//	switch(randA(4))
+		//	{
+		//	case 0:
+		//	printlog("미구현으로 보인다.",true,false,false,CL_normal);
+		//	break;
+		//	case 1:
+		//	printlog("제작자의 게으름으로 보인다.",true,false,false,CL_normal);
+		//	break;
+		//	case 2:
+		//	printlog("여긴 포기하는게 좋겠군.",true,false,false,CL_normal);
+		//	break;
+		//	case 3:
+		//	printlog("제작자는 근성이 없군.",true,false,false,CL_normal);
+		//	break;
+		//	case 4:
+		//	printlog("언젠간 추가될거야.",true,false,false,CL_normal);
+		//	break;
+		//	}
+		//	return false;
+		//}
 		break;
 	}
 	return true;

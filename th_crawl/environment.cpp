@@ -173,7 +173,7 @@ void environment::LoadDatas(FILE *fp)
 }
 bool environment::MakeMap(bool return_)
 {
-	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium()) && !return_))
+	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL) && !return_))
 	{
 		map_algorithms(floor);
 		if(!tutorial)
@@ -1374,6 +1374,8 @@ int GetLevelMonsterNum(int level, bool item_)
 	{
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
 			return 0;
+		else if(level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL)
+			return 6;
 		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 			return 7;
 		else

@@ -167,7 +167,7 @@ bool smoke::effectSmoke(unit* unit_)
 		return false;
 	case SMT_POISON:
 		{
-			bool return_ = unit_->SetPoison(rand_int(10,25), 150, false);
+			bool return_ = unit_->SetPoison(rand_int(10,15), 150, false);
 			unit_->SetPoisonReason(parent);
 			return return_;
 		}

@@ -257,6 +257,9 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 95,  DREAM_LEVEL,  DREAM_LEVEL, 2,  30}, //토끼들
 	{ 42,  DREAM_LEVEL,  DREAM_LEVEL, 2, 30}, //텐구부대
 
+
+
+
 	//달의 세계
 	{ 75,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //광기
 	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 지원병
@@ -273,6 +276,24 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 74,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 5,  35}, //악몽
 	{ 79,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 5,  35}, //피빛원령
 	
+
+	//법계 (법계는 무슨 차이가 있지?
+	{ 89,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 60,  35}, //3티어마족+자코
+	{ 93,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  35}, //사리엘
+	{ 59,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  35}, //벤토라
+	{ 74,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  35}, //악몽
+	{ 79,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  35}, //피빛원령
+
+	//빙설세계	
+	{ 99,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 70,  35}, //루이즈의 비중이 높아지는
+	{ 91,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 15,  35}, //유키
+	{ 83,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 6,  35}, //설녀
+	{ 74,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 3,  35}, //악몽
+
+	//판데모니엄
+	{ 89,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 60,  35}, //3티어마족+자코
+	{ 91,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 5,  35}, //유키
+	{ 92,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 15,  35}, //마이
 
 	//하쿠레이 신사
 	{ 56,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //용
@@ -924,6 +945,15 @@ void create_id_to_mon(int id, int level)
 		break;
 	case 98:
 		index.push_back(MON_YOUMUYUKKURI);
+		break;
+	case 99:
+		if(randA(2)==0)
+		{
+			for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+				index.push_back(MON_LITTLE_IMP);
+		}
+		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
+			index.push_back(randA(4)?MON_LUIZE:randA(1)?MON_SARA:MON_ELIS);
 		break;
 	}
 

@@ -263,6 +263,12 @@ void map_algorithms(int num)
 		}
 		else if(num == PANDEMONIUM_LEVEL)
 		{
+			env[num].ClearFloor();
+			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
+		}
+		else if(num>PANDEMONIUM_LEVEL && num<=PANDEMONIUM_LAST_LEVEL)
+		{
+			env[num].ClearFloor();
 			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
 		}
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
@@ -319,6 +325,18 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == EIENTEI_LEVEL_LAST_LEVEL)
 	{
 		vector_.push_back(VP_EIENTEI_LAST);		
+	}
+	if(floor == PANDEMONIUM_LEVEL+1)
+	{
+		vector_.push_back(VP_PANDEMONIUM_1_LAST);		
+	}
+	if(floor == PANDEMONIUM_LEVEL+2)
+	{
+		vector_.push_back(VP_PANDEMONIUM_2_LAST);		
+	}
+	if(floor == PANDEMONIUM_LEVEL+3)
+	{
+		vector_.push_back(VP_PANDEMONIUM_3_LAST);		
 	}
 	//if(floor==0)
 	//{
@@ -562,10 +580,13 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 				{
 					env[num].stair_up[i-3].x = x;
 					env[num].stair_up[i-3].y = y;
-					if( num != 0 && environment::isFirstFloor(num))
-						env[num].dgtile[x][y].tile = DG_RETURN_STAIR;
-					else
-						env[num].dgtile[x][y].tile = DG_UP_STAIR;
+					if ( !env[num].isPandemonium() || randA(4)==0)
+					{
+						if( num != 0 && environment::isFirstFloor(num))
+							env[num].dgtile[x][y].tile = DG_RETURN_STAIR;
+						else
+							env[num].dgtile[x][y].tile = DG_UP_STAIR;
+					}
 				}
 				else
 				{
@@ -573,6 +594,12 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 					env[num].stair_down[i].y = y;
 					if(!environment::isLastFloor(num))
 						env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
+					else if(env[num].isPandemonium())
+					{
+						env[num].dgtile[x][y].tile = DG_PANDEMONIUM_STAIR;	
+						env[num].stair_vector.push_back(stair_info(coord_def(x,y),PANDEMONIUM_LEVEL));
+					}
+					
 				}
 				break;
 			}

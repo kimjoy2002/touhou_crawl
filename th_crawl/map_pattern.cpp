@@ -788,3 +788,178 @@ char* eientei_vault_pattern(map_dummy* map)
 	}
 }
 
+char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		map->size_x = 8;
+		map->size_y = 8;	
+		map->m_entrance.x = 0;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = map->size_y;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(2,-3)));
+		map->sp_tile_list.push_back(DG_TEMPLE_BYAKUREN);
+		if(!is_exist_named(MON_NAZRIN)){
+			map->monster_list.push_back(mapdummy_mon(MON_NAZRIN,0,coord_def(-5,6)));
+			set_exist_named(MON_NAZRIN);
+		}
+		if(!is_exist_named(MON_ICHIRIN)){
+			map->monster_list.push_back(mapdummy_mon(MON_ICHIRIN,0,coord_def(-5,-5)));
+			set_exist_named(MON_ICHIRIN);
+		}
+		int mon_num_ = 10;
+		int yugen_ = 2;
+		while(mon_num_)
+		{
+			coord_def c_(rand_int(-2,2),rand_int(0,2));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				map->monster_list.push_back(mapdummy_mon((yugen_--)>0?MON_YUUGENMAGAN:randA(1)?MON_ELIS:MON_SARA,0,c_));
+				mon_num_--;
+			}
+		}
+		return  "\
+$$$$$$$$$$$$$$$$$\
+$$$...........$$$\
+$$.............$$\
+$.....$$$$$$....$\
+$....$$....$$...$\
+$...$$...$..$...$\
+$...$....$$.$...$\
+$...$...0...$...$\
+$...$.......$...$\
+$...$......$$...$\
+$...$.....$$$...$\
+$...$...........$\
+$...$$..........$\
+$....$$$........$\
+$$.....$$$.....$$\
+$$$......$$...$$$\
+$$$$$$$...$$$$$$$";	
+		break;
+	}
+}
+
+
+
+
+
+char* pandemonium_ice_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		map->size_x = 10;
+		map->size_y = 7;	
+		map->m_entrance.x = 0;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = -map->size_y;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(0,-1)));
+		map->monster_list.push_back(mapdummy_mon(MON_YUKI,0,coord_def(-3,-1)));	
+		map->monster_list.push_back(mapdummy_mon(MON_YUKI,0,coord_def(-3,1)));	
+		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,-1)));	
+		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,1)));		
+	
+		return  "\
+##~~~~~~~..~~~~~~~~##\
+#~~~~~~~.~~~~~~~~~~~#\
+~~~~~~~.~~~~~~~~~~~~~\
+~~~~~~.~~~~~~~~~~~~~~\
+~~~~~...........~~~~~\
+~~~~..$$$$$$$$$..~~~~\
+~~~~.$$.......$$.~~~~\
+~~~~.$.........$.~~~~\
+~~~~.$$.......$$.~~~~\
+~~~~..$$$$+$$$$..~~~~\
+~~~~~...........~~~~~\
+~~~~~~~~~~~~~~.~~~~~~\
+~~~~~~~~~~~~~.~~~~~~~\
+#~~~~~~~~~~~.~~~~~~~#\
+##~~~~~~~~..~~~~~~~##";
+		break;
+	}
+}
+
+
+
+char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		map->size_x = 8;
+		map->size_y = 10;	
+		map->m_entrance.x = 0;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = map->size_y;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(0,-6)));
+		map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
+		if(!is_exist_named(MON_YUMEKO)){
+			map->monster_list.push_back(mapdummy_mon(MON_YUMEKO,0,coord_def(0,-4)));
+			set_exist_named(MON_YUMEKO);
+		}
+		map->monster_list.push_back(mapdummy_mon(MON_YUKI,0,coord_def(-3,-1)));	
+		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,-1)));	
+		int mon_num_ = 6;
+		while(mon_num_)
+		{
+			int hw_ = randA(1);
+			coord_def c_(hw_?rand_int(4,7):rand_int(-4,-7),rand_int(6,8));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				map->monster_list.push_back(mapdummy_mon(randA(1)?MON_SARA:MON_LUIZE,0,c_));
+				mon_num_--;
+			}
+		}
+		return  "\
+$$$$$$$$$$$$$$$$$\
+$.##.........##.$\
+$...##.....##...$\
+$#....$$$$$....#$\
+$.##.$$.0.$$.##.$\
+$...$$.....$$...$\
+$.##.........##.$\
+$#..$$.....$$..#$\
+$....$$$.$$$....$\
+$..=...=.=...=..$\
+$..=...=.=...=..$\
+$..=...=.=...=..$\
+$..=...=.=...=..$\
+$...=.=...=.=...$\
+$...=.=...=.=...$\
+$...=.=...=.=...$\
+$....=.....=....$\
+$....=.....=....$\
+$....=.....=....$\
+$...=.=...=.=...$\
+$$$$=.=...=.=$$$$";	
+		break;
+	}
+}
+

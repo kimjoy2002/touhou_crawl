@@ -35,6 +35,9 @@ enum valut_pattern
 	VP_YOUKAI_MOUNTAIN_LAST=VP_FIRST,
 	VP_SCARLET_LAST,
 	VP_EIENTEI_LAST,
+	VP_PANDEMONIUM_1_LAST,
+	VP_PANDEMONIUM_2_LAST,
+	VP_PANDEMONIUM_3_LAST,
 	VP_LAST
 };
 
@@ -155,4 +158,7 @@ char* hakurei_pattern(map_dummy* map);
 char* youkai_last_vault_pattern(map_dummy* map);
 char* scarlet_last_vault_pattern(map_dummy* map);
 char* eientei_vault_pattern(map_dummy* map);
+char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
+char* pandemonium_ice_last_vault_pattern(map_dummy* map);
+char* pandemonium_shinki_last_vault_pattern(map_dummy* map);
 char* altar_pattern(map_dummy* map, god_type god_);

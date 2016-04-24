@@ -53,6 +53,7 @@ public:
 	bool isSight(){return (tile<DG_NONE_MOVE || tile >= DG_GLASS);};
 	bool isFloor(){return (tile>=DG_FLOOR && tile<=DG_FLOOR_END);};
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
+	bool isStair(){return (tile>=DG_DOWN_STAIR && tile<=DG_RETURN_STAIR);};
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
 	{
 		bool temp;
@@ -193,7 +194,9 @@ public:
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1);
 	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
+	void ClearAllShadow();
 	void ClearEvent();
+	void ClearFloor();
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t);
 	item* AddItem(const coord_def &c, item *t, int num_=0);
@@ -231,6 +234,7 @@ public:
 	list<item>::iterator GetPositiontoitemend(coord_def position_);
 
 	bool isBamboo(){return floor == BAMBOO_LEVEL;};
+	int isPandemonium(){return (floor >= PANDEMONIUM_LEVEL && floor <= PANDEMONIUM_LAST_LEVEL)?floor-PANDEMONIUM_LEVEL+1:0;};
 };
 
 

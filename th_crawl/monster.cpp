@@ -1166,6 +1166,16 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			
 				}
 			}
+			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )
+			{
+				for(int i=-1;i<=1;i++){
+					for(int j=-1;j<=1;j++){
+							env[current_level].MakeSmoke(coord_def(position.x+i,position.y+j),img_fog_poison,SMT_POISON,rand_int(3,6),0,this);
+					}
+				}
+			}
+
+
 			if(a.type == ATT_THROW_FREEZING)
 			{
 				int frozen_ = randA_1(10);

@@ -29,7 +29,7 @@ bool environment::isFirstFloor(int level_)
 		level_ == DEPTH_LEVEL ||
 		level_ == DREAM_LEVEL ||
 		level_ == MOON_LEVEL ||
-		level_ == PANDEMONIUM_LEVEL ||
+		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)||
 		level_ == HAKUREI_LEVEL
 		)
 		return true;
@@ -57,7 +57,7 @@ bool environment::isLastFloor(int level_)
 		level_ == DEPTH_LAST_LEVEL ||
 		level_ == DREAM_LAST_LEVEL ||
 		level_ == MOON_LAST_LEVEL ||
-		level_ == PANDEMONIUM_LAST_LEVEL ||
+		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL )||
 		level_ == HAKUREI_LAST_LEVEL)
 		return true;
 	return false;
@@ -301,6 +301,15 @@ bool CommonValutMap(map_dummy* map, int pattern)
 		break;
 	case VP_EIENTEI_LAST:
 		temp = eientei_vault_pattern(map);
+		break;
+	case VP_PANDEMONIUM_1_LAST:
+		temp = pandemonium_baykuren_last_vault_pattern(map);
+		break;
+	case VP_PANDEMONIUM_2_LAST:
+		temp = pandemonium_ice_last_vault_pattern(map);
+		break;
+	case VP_PANDEMONIUM_3_LAST:
+		temp = pandemonium_shinki_last_vault_pattern(map);
 		break;
 	default:
 		return false;
@@ -580,6 +589,15 @@ void map_dummy::patternSet()
 		case VP_EIENTEI_LAST:
 			PixedMap(this, eientei_vault_pattern(this));
 			//temp = youkai_last_vault_pattern(map);
+			break;
+		case VP_PANDEMONIUM_1_LAST:
+			PixedMap(this, pandemonium_baykuren_last_vault_pattern(this));
+			break;
+		case VP_PANDEMONIUM_2_LAST:
+			PixedMap(this, pandemonium_ice_last_vault_pattern(this));
+			break;
+		case VP_PANDEMONIUM_3_LAST:
+			PixedMap(this, pandemonium_shinki_last_vault_pattern(this));
 			break;
 		default:
 			baseMap(this);

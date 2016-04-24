@@ -226,8 +226,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "매우 힘이 강하고 호전적이다.\n";
 		break;
 	case MON_MUSHROOM:
-		text_ += "걸어다니는 요괴 물약.\n";
-		text_ += "포자 공격을 통해 독이나 혼란을 건다.\n";
+		text_ += "걸어다니는 요괴 버섯.\n";
+		text_ += "가까이선 독공격을 하고 공격받을 경우 포자가 터져서 독포자가 새어나온다.\n";
 		break;
 	case MON_KYOUKO:
 		text_ += "메아리를 울리는 야마비코 요괴 카소다니 쿄코.\n";
@@ -480,7 +480,7 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_YUUGENMAGAN:
 		text_ += "다섯개의 눈으로 이루어진 마계의 생물. 기괴하게 생겼다.\n";
-		text_ += "상대에게 전기 공격을 가한다.\n";
+		text_ += "상대에게 무시무시한 전기 공격을 가한다.\n";
 		break;
 	case MON_ELIS:
 		text_ += "마계에 살고있는 악마. 박쥐의 날개를 달고 있다.\n";
@@ -491,9 +491,11 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_SARA:
 		text_ += "마계의 문지기. 탄막을 뿌릴땐 빙글빙글 도는 것 같다.\n";
+		text_ += "위력적인 화염속성의 근접 공격을 한다.\n";
 		break;
 	case MON_LUIZE:
 		text_ += "마계에 살고있다. 여행을 좋아해서 가끔 인간계로 놀러오는 것 같다.\n";
+		text_ += "멀리서 위력적인 냉기 마법을 사용한다.\n";
 		break;
 	case MON_YUKI:
 		text_ += "마계의 빙설세계에 살고있다. 강력한 화염을 사용한다.\n";
@@ -569,6 +571,7 @@ string GetMonsterInfor(monster *it)
 	case MON_DOREMI:
 		text_ += "꿈을 먹는 꿈의 관리인으로 맥이다.\n";
 		text_ += "평소에는 꿈의 세계에 살고 있다. 당신을 꿈나라로 이끈다.\n";
+		text_ += "다양한 장소에 있던 위협적인 환상을 소환한다.\n";
 		break;
 	case MON_FAIRY_HERO:
 		text_ += "장난치기를 좋아하는 요정. 자주 몰려다니는 것 같다.\n";
@@ -594,10 +597,12 @@ string GetMonsterInfor(monster *it)
 	case MON_MOON_RABIT_ELITE:
 		text_ += "달에서 온갖 잡일을 맡고 있는 달토끼.\n";
 		text_ += "대체로 오합지졸인 달토끼들중에서도 엘리트, 달의 도시의 경비를 맡고 있다.\n";
+		text_ += "빠른 속도로 동료를 불러모은다. 소환물이 아니기때문에 본체를 잡아도 사라지지않는다.\n";
 		break;
 	case MON_MAC:
 		text_ += "꿈을 먹고 산다는 요괴 맥.\n";
 		text_ += "생긴 것은 개미핥기처럼 생겼다. 꿈의 세계에선 꽤나 강적.\n";
+		text_ += "다양한 장소에 있던 위협적인 환상을 소환한다.\n";
 		break;
 	case MON_NIGHTMARE:
 		text_ += "악몽이 모여 만들어진 무언가.\n";
@@ -606,7 +611,7 @@ string GetMonsterInfor(monster *it)
 	case MON_LUNATIC:
 		text_ += "광기가 모여 만들어진 무언가.\n";
 		text_ += "만나는 상대를 광기에 휩싸이게 한다. 광기가 쌓이면 정상적인 행동이 불가능하다.\n";
-		text_ += "단순히 무언가를 때려부수는것이라면 광기의 상태가 더욱 효과적일지도.\n";
+		text_ += "단순히 무언가를 때려부수는것이라면 광기의 상태가 더욱 효과적일지도 모른다.\n";
 		break;
 	case MON_HAUNT:
 		text_ += "원한이 모여서 만들어진 원령.\n";

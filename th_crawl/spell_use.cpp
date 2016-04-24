@@ -1192,7 +1192,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 							env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_fog_poison[0],false);
 				for(int i=-1;i<=1;i++)
 					for(int j=-1;j<=1;j++)
-							env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,&you);
+							env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
 
 				Sleep(300);
 				env[current_level].ClearEffect();
@@ -3032,15 +3032,15 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_YUUGENMAGAN:
 		list->push_back(spell(SPL_CHAIN_LIGHTNING,50));
 		break;
-	case MON_YUKI:		
-		list->push_back(spell(SPL_ICE_CLOUD,25));
-		list->push_back(spell(SPL_ICE_BOLT,25));
-		list->push_back(spell(SPL_HASTE,15));
-		break;
-	case MON_MAI:		
+	case MON_YUKI:
 		list->push_back(spell(SPL_FIRE_BALL,25));
 		list->push_back(spell(SPL_FIRE_BOLT,25));
 		list->push_back(spell(SPL_SMITE,15));
+		break;
+	case MON_MAI:	
+		list->push_back(spell(SPL_ICE_CLOUD,25));
+		list->push_back(spell(SPL_ICE_BOLT,25));
+		list->push_back(spell(SPL_HASTE,15));	
 		break;
 	case MON_SARIEL:
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,30));

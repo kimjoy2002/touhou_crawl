@@ -173,7 +173,7 @@ void environment::LoadDatas(FILE *fp)
 }
 bool environment::MakeMap(bool return_)
 {
-	if(!make || (env[floor].isBamboo() && !return_))
+	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium()) && !return_))
 	{
 		map_algorithms(floor);
 		if(!tutorial)
@@ -209,6 +209,9 @@ bool environment::MakeMap(bool return_)
 		case DREAM_LEVEL:
 		case MOON_LEVEL:
 		case PANDEMONIUM_LEVEL:
+		case PANDEMONIUM_LEVEL+1:
+		case PANDEMONIUM_LEVEL+2:
+		case PANDEMONIUM_LEVEL+3:
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
 			{
@@ -275,7 +278,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	}
 
 
-	if(!dq.empty())
+	if(!dq.empty() && !env[floor].isPandemonium())
 	{
 		dif_rect_iterator dit(you.position, 3);
 		for(;!dit.end();dit++)
@@ -303,12 +306,20 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 
 int environment::isStair(int x_, int y_)
 {
+	if(!dgtile[x_][y_].isStair())
+		return 0;
+
 	for(int i=0;i<3;i++)
 	{
 		if(stair_down[i].x == x_ && stair_down[i].y == y_)
 			return (i+1);
 		if(stair_up[i].x == x_ && stair_up[i].y == y_)
 			return -(i+1);
+	}
+	for(vector<stair_info>::iterator it = stair_vector.begin(); it != stair_vector.end(); it++)
+	{
+		if(x_ == it->pos.x && y_ == it->pos.y )
+			return 5; //임시
 	}
 	return 0;
 }
@@ -556,9 +567,53 @@ void environment::ClearEffect()
 	effect_list.clear();
 	ReleaseMutex(mutx);
 }
+void environment::ClearAllShadow()
+{
+	WaitForSingleObject(mutx, INFINITE);
+	shadow_list.clear();
+	ReleaseMutex(mutx);
+}
 void environment::ClearEvent()
 {
 	event_list.clear();
+}
+void environment::ClearFloor()
+{
+	for(int x = 0; x<DG_MAX_X; x++)
+	{	
+		for(int y=0; y<DG_MAX_Y; y++)
+		{
+			dgtile[x][y].tile = DG_FLOOR;
+			dgtile[x][y].flag = 0;
+			dgtile[x][y].silence_count = 0;
+			dgtile[x][y].violet_count = 0;
+		}
+	}
+	stair_vector.clear();
+	ClearEffect();
+	ClearAllShadow();
+	ClearEvent();
+	{
+		vector<monster>::iterator it;
+		it = mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
+		{
+			if((*it).isLive())
+			{
+				(*it).dead(PRT_NEUTRAL, false, true);
+			}
+		}
+	}
+	{
+		list<item>::iterator it;
+		for(it = item_list.begin();it != item_list.end();)
+		{
+			list<item>::iterator temp = it++;
+			DeleteItem(temp);
+		}
+	}
+	floor_list.clear();
+	//make = false;
 }
 monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* mon_)
 {
@@ -1277,8 +1332,14 @@ char* CurrentLevelString(int level)
 		sprintf(temp,"꿈의 세계");
 	else if(level_ >= MOON_LEVEL && level_ <=  MOON_LAST_LEVEL)
 		sprintf(temp,"달의 도시");
-	else if(level_ >= PANDEMONIUM_LEVEL && level_ <=  PANDEMONIUM_LAST_LEVEL)
+	else if(level_ == PANDEMONIUM_LEVEL)
 		sprintf(temp,"마계");
+	else if(level_ == PANDEMONIUM_LEVEL+1)
+		sprintf(temp,"법계");
+	else if(level_ == PANDEMONIUM_LEVEL+2)
+		sprintf(temp,"빙결세계");
+	else if(level_ == PANDEMONIUM_LEVEL+3)
+		sprintf(temp,"판데모니엄");
 	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
 		sprintf(temp,"하쿠레이 %d층", level_+1-HAKUREI_LEVEL);
 	else

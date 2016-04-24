@@ -146,7 +146,7 @@ void bamboo_count(int num)
 			(*it).offsetmove(coord_def(offset_x,offset_y));
 		}
 		//쉐도우는 쓰지않는다.
-		env[num].ClearShadow();
+		env[num].ClearAllShadow();
 		//아이템		(범위에 벗어나면 삭제도 된다.)
 		for(list<item>::iterator it =  env[num].item_list.begin();it !=  env[num].item_list.end() ;)
 		{

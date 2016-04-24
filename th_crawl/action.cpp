@@ -758,6 +758,7 @@ void Wide_Search()
 						if((env[current_level].isExplore(env[current_level].stair_down[i].x,env[current_level].stair_down[i].y) ||
 							env[current_level].isMapping(env[current_level].stair_down[i].x,env[current_level].stair_down[i].y)
 							)
+							&& env[current_level].isStair(env[current_level].stair_down[i].x,env[current_level].stair_down[i].y)
 							&& env[current_level].stair_down[i] != you.position
 							&& PathSearch(you.position,env[current_level].stair_down[i],stacks,ST_NORMAL))
 						{
@@ -808,6 +809,8 @@ void Wide_Search()
 					if((env[current_level].isExplore(env[current_level].stair_up[i].x,env[current_level].stair_up[i].y)  ||
 						env[current_level].isMapping(env[current_level].stair_up[i].x,env[current_level].stair_up[i].y)
 						)
+						&& env[current_level].isStair(env[current_level].stair_up[i].x,env[current_level].stair_up[i].y)
+
 						&& env[current_level].stair_up[i] != you.position
 						&& PathSearch(you.position,env[current_level].stair_up[i],stacks,ST_NORMAL))
 					{
@@ -1280,6 +1283,21 @@ void Stair_move(bool down)
 					break;			
 				case DG_PANDEMONIUM_STAIR:					
 					next_ = PANDEMONIUM_LEVEL;
+					{
+						if(randA(3)==1)
+						{
+							int rare_ = rand_int(1,MAX_PANDEMONIUM_LEVEL);
+							for(int i = 0 ; i < MAX_PANDEMONIUM_LEVEL; i++)
+							{
+								int temp_=(PANDEMONIUM_LEVEL+((rare_+i)%MAX_PANDEMONIUM_LEVEL)+1);
+								if(env[temp_].make == false)
+								{
+									next_ = (dungeon_level)temp_;
+									break;
+								}
+							}
+						}
+					}
 					break;			
 				case DG_HAKUREI_STAIR:
 					next_ = HAKUREI_LEVEL;

@@ -244,7 +244,7 @@ void map_algorithms(int num)
 		}
 		else if(num >= YUKKURI_LEVEL && num <= YUKKURI_LAST_LEVEL)
 		{
-			map_algorithms03(120,3,5,9, num,DG_GRASS,DG_WALL);
+			map_algorithms03(70,3,4,9, num,DG_GRASS,DG_WALL);
 		}
 		else if(num >= DEPTH_LEVEL && num <= DEPTH_LAST_LEVEL)
 		{

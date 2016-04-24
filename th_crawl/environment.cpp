@@ -237,13 +237,26 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	}
 	int dq_n=0;
 	
-	MakeMap(false);
+	bool first_ = MakeMap(false);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;
 	if(you.s_silence)
 		env[current_level].MakeSilence(you.position, you.s_silence_range, false);
 	current_level = floor;
-	if(num_>=0 && num_ <3)
+
+	if(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
+	{
+		while(1)
+		{
+			int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+			if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
+			{
+				you.SetXY(x_,y_);
+				break;
+			}
+		}
+	}
+	else if(num_>=0 && num_ <3)
 		you.SetXY((prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
 	else
 		you.SetXY(pos_);
@@ -301,6 +314,13 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	if(floor && !tutorial)
 		SaveFile();
 	you.resetLOS(false);
+
+	if(first_ && current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
+	{
+		printlog("이 곳에는 강력한 기운이 느껴진다. 룬이 이 층에 존재한다!",true,false,false,CL_danger);
+		MoreWait();
+	}
+	
 }
 
 
@@ -1362,6 +1382,8 @@ int GetLevelMonsterNum(int level, bool item_)
 	else{ //아이템
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL)
 			return 0;
+		if(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
+			return 9;
 		else
 			return 15;
 	}

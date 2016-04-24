@@ -286,7 +286,7 @@ mon_group normal_group[] = //일반몹 그룹
 
 	//빙설세계	
 	{ 99,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 70,  35}, //루이즈의 비중이 높아지는
-	{ 91,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 15,  35}, //유키
+	{ 92,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 15,  35}, //마이
 	{ 83,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 6,  35}, //설녀
 	{ 74,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 3,  35}, //악몽
 

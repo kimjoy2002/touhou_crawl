@@ -52,6 +52,20 @@ int GetHazard()
 					danger_ = 500+70*((*it).level - you.level); //약간 약하다
 				//나머지는 거의 의미없는 수준 위험도 1만 준다.
 
+				if(danger_ < 1)
+					danger_ = 1;
+
+				if((*it).level>10)//레벨이 10이상이면 다양한 특수능력때문에 만렙에게도 약간씩 위협을 준다.
+					danger_ += 100; //최소 위협치 100
+				if((*it).level>13)
+					danger_ += 100;
+				if((*it).level>15)
+					danger_ += 100;
+				if((*it).level>20)
+					danger_ += 100;
+
+
+
 				if(!you.isSightnonblocked(it->position))
 					danger_ = 1;
 				//벽등에 막혀있다.

@@ -267,7 +267,8 @@ void map_algorithms(int num)
 		}
 		else if(num == MOON_LEVEL)
 		{
-			map_algorithms01(num,DG_FLOOR,DG_WALL);
+			//map_algorithms01(num,DG_FLOOR,DG_WALL);
+			map_algorithms01(num,DG_FLOOR,DG_SEA);
 		}
 		else if(num >= HAKUREI_LEVEL && num >= HAKUREI_LAST_LEVEL)
 		{
@@ -354,6 +355,10 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == YUKKURI_LAST_LEVEL)
 	{
 		vector_.push_back(VP_YUKKURI_LAST);		
+	}
+	if(floor == MOON_LAST_LEVEL)
+	{
+		vector_.push_back(VP_MOON_LAST);		
 	}
 	//if(floor==0)
 	//{

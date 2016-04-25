@@ -916,7 +916,7 @@ char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, 0);
-		map->item_list.push_back(mapdummy_item(t,coord_def(0,-6)));
+		map->item_list.push_back(mapdummy_item(t,coord_def(0,-9)));
 		map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
 		if(!is_exist_named(MON_YUMEKO)){
 			map->monster_list.push_back(mapdummy_mon(MON_YUMEKO,0,coord_def(0,-4)));
@@ -942,7 +942,7 @@ char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 		}
 		return  "\
 $$$$$$$$$$$$$$$$$\
-$.##iiiiiiiii##.$\
+$.##iiii.iiii##.$\
 $...##iiiii##...$\
 $#....$$$$$....#$\
 $.##.$$.0.$$.##.$\
@@ -1038,3 +1038,70 @@ char* yukkuri_last_vault_pattern(map_dummy* map)
 
 
 
+
+
+
+
+
+
+char* moon_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, 0);
+		map->item_list.push_back(mapdummy_item(t,coord_def(5*(randA(1)*2-1),5*(randA(1)*2-1))));
+		if(!is_exist_named(MON_YORIHIME)){
+			map->monster_list.push_back(mapdummy_mon(MON_YORIHIME,0,coord_def(1,0)));
+			set_exist_named(MON_YORIHIME);
+		}
+		if(!is_exist_named(MON_TOYOHIME)){
+			map->monster_list.push_back(mapdummy_mon(MON_TOYOHIME,0,coord_def(-1,0)));
+			set_exist_named(MON_TOYOHIME);
+		}
+		int mon_num_ = 4;
+		while(mon_num_)
+		{
+			coord_def c_(rand_int(4,-4),rand_int(2,-2));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				map->monster_list.push_back(mapdummy_mon(MON_MOON_RABIT_ELITE,0,c_));
+				mon_num_--;
+			}
+		}
+		return  "\
+...............\
+.$$$.......$$$.\
+.$.$$$$+$$$$.$.\
+.$$.........$$.\
+..$.........$..\
+..$.........$..\
+..$.........$..\
+..+.........+..\
+..$.........$..\
+..$.........$..\
+..$.........$..\
+.$$.........$$.\
+.$.$$$$+$$$$.$.\
+.$$$.......$$$.\
+...............";	
+		break;
+	}
+}

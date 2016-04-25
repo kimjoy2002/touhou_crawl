@@ -590,7 +590,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,2,10},
 	
-	{MON_MOON_RABIT_SUPPORT,9,675,name_infor("달토끼 지원병",true),&img_mons_default,69,5,8,
+	{MON_MOON_RABIT_SUPPORT,9,675,name_infor("달토끼 지원병",true),&img_mons_default,49,5,8,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10},
 	
@@ -630,7 +630,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 	
-	{MON_HELL_HOUND,9,434,name_infor("지옥개",false),&img_mons_default,65,1,15,
+	{MON_HELL_HOUND,9,434,name_infor("지옥개",false),&img_mons_default,55,1,15,
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("물기",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10},
 	

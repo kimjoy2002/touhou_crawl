@@ -3114,8 +3114,8 @@ void SetSpell(monster_index id, list<spell> *list)
 	case MON_HAUNT:
 		break;
 	case MON_FIRE_CAR:
-		list->push_back(spell(SPL_FIRE_BALL,25));
-		list->push_back(spell(SPL_FIRE_BOLT,20));
+		//list->push_back(spell(SPL_FIRE_BALL,25));
+		//list->push_back(spell(SPL_FIRE_BOLT,20));
 		break;
 	case MON_HELL_SPIDER:
 		break;

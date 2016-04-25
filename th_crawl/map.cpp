@@ -446,8 +446,67 @@ void make_lake(int num, int repeat)
 	}
 }
 
+void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex 	,
+	vector<map_dummy*> &vec_map,
+	vector<map_dummy*> &vec_special_map, int door_percent_)
+{
+
+	
+	for(int i = 0;i<DG_MAX_X;i++)
+	{
+		for(int j = 0;j<DG_MAX_Y;j++)
+		{
+			int offset_ = 4;
+			if(i<offset_ || i>=DG_MAX_X-offset_ || j < offset_ || j>=DG_MAX_Y-offset_)
+				env[num].dgtile[i][j].tile = wall_tex; //다시 전부 벽으로
+			else
+				env[num].dgtile[i][j].tile = floor_tex; //다시 전부 벽으로
+		}
+	}
+	
+	for(auto it = vec_special_map.begin(); it != vec_special_map.end() ; it++)
+		vec_map.push_back(*it);
+
+	for(auto it=vec_map.begin();it!=vec_map.end();it++) 
+	{//방을 만든다.
+		(*it)->make_map(env[num],true);
+		if(!(*it)->pattern && randA(10)>=door_percent_)
+			(*it)->make_door(env[num]);
+	}
+
+	
+	for (auto it=vec_map.begin();it!=vec_map.end();it++)
+		delete *it;
+
+	
+	for(int i=0;i<6;i++)
+	{
+		while(1)
+		{
+			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
+			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
+			{
+				if(i>2)
+				{
+					env[num].stair_up[i-3].x = x;
+					env[num].stair_up[i-3].y = y;
+					env[num].dgtile[x][y].tile = DG_RETURN_STAIR;
+				}
+				else
+				{
+					env[num].stair_down[i].x = x;
+					env[num].stair_down[i].y = y;
+					if(!environment::isLastFloor(num))
+						env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
+					
+				}
+				break;
+			}
+		}
+	}
 
 
+}
 void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex 	,
 	vector<map_dummy*> &vec_map,
 	vector<map_dummy*> &vec_special_map , 
@@ -899,6 +958,15 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			}
 		}
 	}
+
+
+	if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+		hell_map_make_last(num, 	
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map, 
+		randA(10));
+	else
 		common_map_make_last(num, 	
 		floor_tex,wall_tex,
 		vec_map,

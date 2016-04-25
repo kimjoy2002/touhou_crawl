@@ -553,7 +553,7 @@ const mon_infor mondata[] = {
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
 	
-	{MON_RABIT_SPEAR,11,340,name_infor("Åä³¢ Á×Ã¢º´",true),&img_mons_spear_rabbit,35,5,15,
+	{MON_RABIT_SPEAR,11,240,name_infor("Åä³¢ Á×Ã¢º´",true),&img_mons_spear_rabbit,35,5,15,
 	{28,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
@@ -594,7 +594,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10},
 	
-	{MON_MOON_RABIT_ATTACK,13,1034,name_infor("´ÞÅä³¢ Ã´ÈÄº´",true),&img_mons_default,90,10,6,
+	{MON_MOON_RABIT_ATTACK,12,334,name_infor("´ÞÅä³¢ Ã´ÈÄº´",true),&img_mons_default,85,10,6,
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,1,10},
 
@@ -630,7 +630,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 	
-	{MON_HELL_HOUND,9,434,name_infor("Áö¿Á°³",false),&img_mons_default,55,1,15,
+	{MON_HELL_HOUND,9,254,name_infor("Áö¿Á°³",false),&img_mons_default,55,1,15,
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("¹°±â",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10},
 	

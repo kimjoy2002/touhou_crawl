@@ -2229,6 +2229,11 @@ int monster::action(int delay_)
 					memory_time=30;
 				}
 				atkmove(is_sight);
+				if(!is_sight && env[current_level].isInSight(position))
+				{ //플레이어를 발견하게된다.
+					if(target == &you)
+						FoundTarget(target,30);
+				}
 				break;
 			case MS_FOLLOW:
 				if(you.s_timestep && sm_info.parent_map_id < 0)

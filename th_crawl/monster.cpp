@@ -1121,9 +1121,12 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	if(wizard_mode)
 	{		
-		char temp[50];
-		sprintf_s(temp,50,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
-		printlog(temp,true,false,false,CL_help);
+		if(damage_>0)
+		{
+			char temp[50];
+			sprintf_s(temp,50,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
+			printlog(temp,true,false,false,CL_help);
+		}
 	}
 
 	if((randA(100) <= percent_ && !graze_) || back_stab == 3 || perfect_)

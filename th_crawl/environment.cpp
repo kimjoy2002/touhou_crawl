@@ -1384,6 +1384,8 @@ int GetLevelMonsterNum(int level, bool item_)
 	else{ //¾ÆÀÌÅÛ
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL)
 			return 0;
+		if(level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+			return 0;
 		if(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 9;
 		else

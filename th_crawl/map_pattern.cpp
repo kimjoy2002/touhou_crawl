@@ -1105,3 +1105,79 @@ char* moon_last_vault_pattern(map_dummy* map)
 		break;
 	}
 }
+
+
+
+
+	
+char* subterranean_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		{
+			bool hw_ = randA(1);
+			map->size_x = 15;
+			map->size_y = 13;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			bool item_ = randA(2);
+			{
+				item_infor t;
+				makeitem(ITM_GOAL, 0, &t, 0);
+				map->item_list.push_back(mapdummy_item(t,item_==0?coord_def(0,5):(item_==1?coord_def(5,-4):coord_def(-5,-4))));		
+			}
+			{
+				item_infor t;
+				makeitem(ITM_POTION, 0, &t);
+				map->item_list.push_back(mapdummy_item(t,item_==2?coord_def(0,5):(item_==0?coord_def(5,-4):coord_def(-5,-4))));
+			}
+			{
+				item_infor t;
+				makeitem(ITM_POTION, 0, &t);
+				map->item_list.push_back(mapdummy_item(t,item_==1?coord_def(0,5):(item_==2?coord_def(5,-4):coord_def(-5,-4))));
+			}
+
+			if(!is_exist_named(MON_UTSUHO)){
+				map->monster_list.push_back(mapdummy_mon(MON_UTSUHO,0,coord_def(0,0)));
+				set_exist_named(MON_UTSUHO);
+			}
+
+			return  "\
+...............................\
+...............................\
+...............................\
+............#######............\
+..........##.......##..........\
+.........#...........#.........\
+........#.$$$.....$$$.#........\
+.......#.$$i$$...$$i$$.#.......\
+.......#.$iii$$.$$iii$.#.......\
+......#.$$.i..$.$..i.$$.#......\
+......#.$ii....$....ii$.#......\
+......#.$i....$.$....i$.#......\
+......#.$$$$$$...$$$$$$.#......\
+......#.......$.$.......#......\
+......#......$.$.$......#......\
+......#.....$$...$$.....#......\
+.......#...$$.....$$...#.......\
+.......#..$$iiiiiii$$..#.......\
+........#.$$$ii.ii$$$.#........\
+.........#..$$$$$$$..#.........\
+..........##.......##..........\
+............#######............\
+...............................\
+...............................\
+...............................\
+...............................\
+...............................";	
+		break;
+		}
+	}
+}

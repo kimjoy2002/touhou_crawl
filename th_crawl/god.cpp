@@ -1475,7 +1475,7 @@ void Pray()
 				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
-				printsub("신도가 되려면 Y키를, 취소하려면 N키를, 자세한 설명이 필요하면 ?키를 누른다.",true,CL_help);
+				printsub("신도가 되려면 Y키를, 취소하려면 N키를 누른다.",true,CL_help);
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);
 				bool ok_= true;

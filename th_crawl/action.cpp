@@ -373,14 +373,14 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	{	
 		deletelog();
 		if(!wide)
-			printlog("(명령어: v - 설명   . - 탐색   ? - 도움말(미구현))",true,false,true,CL_help);	
+			printlog("(명령어: v - 설명   . - 탐색)",true,false,true,CL_help);	
 		else
-			printlog("(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기  ? - 도움말(미구현))",true,false,true,CL_help);	
+			printlog("(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기)",true,false,true,CL_help);	
 
 	}
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
 	{
-		printlog("(명령어: v - 설명   ? - 도움말(미구현))",true,false,true,CL_help);	
+		printlog("(명령어: v - 설명)",true,false,true,CL_help);	
 	}
 	else
 		deletelog();

@@ -53,7 +53,7 @@ void Help_Show()
 			printsub("x      - 근처 조사                                 % - 자세한 캐릭터 정보",true,CL_normal);
 			printsub("s또는. - 1턴 넘기기                                ^ - 신앙 정보",true,CL_normal);
 			printsub("X      - 맵을 조사                                 \\ - 식별된 아이템 정보",true,CL_normal);
-			printsub("<,>    - 계단 오르기/내려가기                      A - 캐릭터 특성 확인(미구현)",true,CL_normal);
+			printsub("<,>    - 계단 오르기/내려가기                      A - 캐릭터 특성 확인",true,CL_normal);
 			printsub("O,C    - 문 열기/닫기                              [ - 입고있는 장비 표시",true,CL_normal);
 			printsub("ctrl-O - 던전 정보(미구현)                         } - 현재 무기 표시",true,CL_normal);
 			printsub("                                                   \" - 현재 장신구 표시",true,CL_normal);

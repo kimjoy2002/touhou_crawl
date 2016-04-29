@@ -410,6 +410,7 @@ public:
 	int isequip(list<item>::iterator it);
 	int isequip(item* item_);
 	int haveGoal();
+	int haveOrb();
 	bool unequip(equip_type type_);
 	bool unequiparmor(char id_);
 	bool unequipjewerly(char id_);

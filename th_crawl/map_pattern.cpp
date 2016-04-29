@@ -1175,3 +1175,83 @@ char* subterranean_last_vault_pattern(map_dummy* map)
 		}
 	}
 }
+
+
+
+char* hakurei_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		{
+			map->size_x = 9;
+			map->size_y = 9;
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = -2;
+			map->m_exit.x = -map->size_x;
+			map->m_exit.y = -2;
+
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			{
+				item_infor t;
+				makeitem(ITM_ORB, 0, &t, 0);
+				map->item_list.push_back(mapdummy_item(t,coord_def(-4,-2)));		
+			}
+
+			
+			int mon_num_ = 2;
+			while(mon_num_)
+			{
+				coord_def c_(rand_int(-1,-7),rand_int(0,5));
+				auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+					[c_](mapdummy_mon &v)->bool{
+						return v.pos == c_;
+					}
+				);
+				if(it == map->monster_list.end())
+				{
+					map->monster_list.push_back(mapdummy_mon(MON_EVIL_EYE_TANK,0,c_));
+					mon_num_--;
+				}
+			}
+
+			mon_num_ = 2;
+			while(mon_num_)
+			{
+				coord_def c_(rand_int(1,7),rand_int(0,-5));
+				auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+					[c_](mapdummy_mon &v)->bool{
+						return v.pos == c_;
+					}
+				);
+				if(it == map->monster_list.end())
+				{
+					map->monster_list.push_back(mapdummy_mon(MON_EVIL_EYE_TANK,0,c_));
+					mon_num_--;
+				}
+			}
+			return  "\
+#####$$$$$$$$$#####\
+###$$$.......$$$###\
+##$$...........$$##\
+#$$.............$$#\
+#$...............$#\
+$$...............$$\
+$..$$$$$..........$\
+..$$...$$.........$\
+$$$.....$$.......$$\
+$$.......$.......$$\
+$$.......$$.....$.$\
+$.........$$...$$.$\
+$..........$$$$$..$\
+$$...............$$\
+#$...............$#\
+#$$.............$$#\
+##$$...........$$##\
+###$$$.......$$$###\
+#####$$$$$$$$$#####";	
+		break;
+		}
+	}
+}

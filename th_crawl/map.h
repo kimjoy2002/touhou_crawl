@@ -41,6 +41,7 @@ enum valut_pattern
 	VP_YUKKURI_LAST,
 	VP_MOON_LAST,
 	VP_SUBTERRANEAN_LAST,
+	VP_HAKUREI_LAST,
 	VP_LAST
 };
 
@@ -168,4 +169,5 @@ char* pandemonium_shinki_last_vault_pattern(map_dummy* map);
 char* yukkuri_last_vault_pattern(map_dummy* map);
 char* moon_last_vault_pattern(map_dummy* map);
 char* subterranean_last_vault_pattern(map_dummy* map);
+char* hakurei_last_vault_pattern(map_dummy* map);
 char* altar_pattern(map_dummy* map, god_type god_);

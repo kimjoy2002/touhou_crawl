@@ -216,7 +216,6 @@ const char *item_book_string = "책";
 const char *item_miscellaneous_string = "그외";
 const char *item_goal_string = "중요";
 
-
 const int level_up_value[] = {
 	10, 
 	30,		//20	2

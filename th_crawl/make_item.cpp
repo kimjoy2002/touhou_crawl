@@ -404,7 +404,22 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->name.name_type = true;
 		t->weight = 1.0f;
 		t->value = 10000;
-		break;		
+		break;
+	case ITM_ORB:
+		t->value1 = 0;
+		t->value2 = 0;
+		t->value3 = 0;
+		t->value4 = 0;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->is_pile = true;
+		t->can_throw = false;
+		t->image = &img_mons_yinyan;
+		t->name.name = "À½¾ç¿Á";
+		t->name.name_type = true;
+		t->weight = 1.0f;
+		t->value = 10000;
+		break;
 	default:
 		break;
 	}

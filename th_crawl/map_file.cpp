@@ -320,6 +320,8 @@ bool CommonValutMap(map_dummy* map, int pattern)
 	case VP_SUBTERRANEAN_LAST:
 		temp = subterranean_last_vault_pattern(map);
 		break;
+	case VP_HAKUREI_LAST:
+		temp = hakurei_last_vault_pattern(map);
 	default:
 		return false;
 	}
@@ -625,6 +627,9 @@ void map_dummy::patternSet()
 			break;
 		case VP_SUBTERRANEAN_LAST:
 			PixedMap(this, subterranean_last_vault_pattern(this));
+			break;
+		case VP_HAKUREI_LAST:
+			PixedMap(this, hakurei_last_vault_pattern(this));
 			break;
 		default:
 			baseMap(this);

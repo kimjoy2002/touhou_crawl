@@ -3475,6 +3475,20 @@ int players::haveGoal()
 	}
 	return goal_;
 }
+int players::haveOrb()
+{
+	int goal_ = 0;
+	list<item>::iterator it;
+	for(it = item_list.begin(); it != item_list.end();it++)
+	{
+		if(it->type == ITM_ORB)
+		{
+			goal_+=it->num;
+		}
+	}
+	return goal_;
+	
+}
 bool players::unequip(equip_type type_)
 {
 	if(equipment[type_])

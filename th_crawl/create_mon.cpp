@@ -304,7 +304,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 83,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //설녀
 	{ 77,  HAKUREI_LEVEL+2,  HAKUREI_LAST_LEVEL, 10,  35}, //화차
 	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  35}, //이블 전차
-	{ 88, HAKUREI_LAST_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //음양옥
+	//{ 88, HAKUREI_LAST_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //음양옥
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };

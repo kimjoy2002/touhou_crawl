@@ -34,7 +34,7 @@ int caculScore()
 	base += 5000000 * you.haveGoal();
 
 
-	if(you.dead_reason == DR_ESCAPE && you.haveGoal())
+	if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 	{ //클리어 했다.
 		base += 500000; //클리어 보너스 점수
 		double multi = 2 * (max(you.turn,5000) +10000)/ (max(you.turn,5000)) - min(you.turn,200000)/200000;
@@ -231,8 +231,12 @@ bool Dump(int type)
 				strncat(death_reason,"부작용에 의해 죽었다.",64);
 				break;
 			case DR_ESCAPE:
-				if(you.haveGoal()){
-					sprintf_s(temp_reason,64,"%d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
+				if(you.haveOrb()){
+					sprintf_s(temp_reason,64,"음양옥과 %d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
+					strncat(death_reason,temp_reason,64);
+				}
+				else if(you.haveOrb()){
+					sprintf_s(temp_reason,64,"%d개의 룬만 들고 도망쳤다.", you.haveGoal());
 					strncat(death_reason,temp_reason,64);
 				}
 				else

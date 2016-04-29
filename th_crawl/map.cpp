@@ -364,6 +364,11 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	{
 		vector_.push_back(VP_SUBTERRANEAN_LAST);		
 	}
+	if(floor == HAKUREI_LAST_LEVEL)
+	{
+		vector_.push_back(VP_HAKUREI_LAST);
+
+	}
 	//if(floor==0)
 	//{
 	//	for(int i=0;i<5;i++)

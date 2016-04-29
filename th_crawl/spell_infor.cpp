@@ -54,7 +54,7 @@ string GetSpellInfor(spell_list spell)
 		text_ += "저항할 확률이 있다.\n";
 		break;
 	case SPL_SLOW:
-		text_ += "적에게 일시적으로 감속을 거는 정신계열마법. 감속에 걸리면 모든 행동이 2배로 느려진다.\n";
+		text_ += "적에게 일시적으로 감속을 거는 정신계열마법. 감속에 걸리면 모든 행동이 1.6배로 느려진다.\n";
 		text_ += "저항할 확률이 있다.\n";
 		break;
 	case SPL_SELF_HEAL:	
@@ -83,7 +83,7 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_FREEZE:
 		text_ += "짧은 범위안 1명의 적 주변의 공기를 순식간에 냉동시키는 마법.\n";
-		text_ += "피할 수 없으며 추가로 상대를 얼려 속도를 느리게하는 추가 효과가 있다.\n";
+		text_ += "피할 수 없으며 추가로 상대를 얼려 이동속도를 느리게하는 추가 효과가 있다.\n";
 		break;
 	case SPL_STING:
 		text_ += "마법으로 독침을 구현하여 탄막으로 발사하는 독속성 기초마법.\n";

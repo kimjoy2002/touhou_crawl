@@ -44,8 +44,7 @@ interupt_type players::TurnEnd()
 	{
 		delay_ = delay_*2.0f;
 	}
-	if(s_frozen)
-		delay_+=s_frozen*delay_/10;
+
 	if(as_penalty > GetPenaltyMinus(3))
 		delay_ *= 2;
 

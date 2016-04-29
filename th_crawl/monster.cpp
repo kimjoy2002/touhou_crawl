@@ -3146,7 +3146,7 @@ attack_weapon_type monster::GetAttackType()
 }
 int monster::GetSpeed()
 {
-	return (s_haste?0.7f:1)*(s_slow?1.5f:1)*speed+s_frozen*speed/10;;
+	return (s_haste?0.7f:1)*(s_slow?1.5f:1)*speed+(s_frozen+2)*speed/30;;
 }
 int monster::GetAttack(int num_, bool max_)
 {

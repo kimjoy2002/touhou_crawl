@@ -2109,7 +2109,7 @@ int players::GetInvisible()
 }
 int players::GetResist()
 {
-	return level * 9 + 100+magic_resist;
+	return level * 5 + 100+magic_resist;
 }
 int players::GetProperty(tribe_proper_type type_)
 {

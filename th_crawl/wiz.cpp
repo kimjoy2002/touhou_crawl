@@ -212,11 +212,11 @@ void wiz_mode()
 		}
 		break;
 	case 'm':
-		if(monster* mon_=BaseSummon(MON_HELL_HOUND, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+		if(monster* mon_=BaseSummon(MON_LUNATIC, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 		{
 			mon_->state.SetState(MS_SLEEP);
 			mon_->flag &= ~M_FLAG_SUMMON;
-			//mon_->ReturnEnemy();
+			mon_->ReturnEnemy();
 		}
 		break;
 	case '^':

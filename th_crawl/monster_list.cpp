@@ -278,7 +278,6 @@ const mon_infor mondata[] = {
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,8},
 
-	
 	{MON_TEST_KATPA,2,50,name_infor("캇파",false),&img_mons_katpa,20,2,5,
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_SWIM,0,1,10},

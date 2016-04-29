@@ -3197,7 +3197,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
 {
-	int power=min(SpellCap(skill),(order->level-3)*5);
+	int power=max(0,min(SpellCap(skill),(order->level-3)*5));
 	if(pow_ != -1)
 		power = pow_;
 	switch(skill)

@@ -74,7 +74,7 @@ int GetDebufPower(spell_list skill, int power_)
 	case SPL_GLOW:
 		return power_-10;
 	case SPL_TELEPORT_OTHER:
-		return power_-10;
+		return power_;
 	case SPL_HYPNOSIS:
 		return power_+10;
 	case SPL_MUTE:
@@ -90,7 +90,7 @@ int GetDebufPower(spell_list skill, int power_)
 	case SPL_PRIVATE_SQ:
 		return power_;
 	case SPL_INSANE:
-		return power_;
+		return power_+10;
 	default:
 		return power_-10;
 	}

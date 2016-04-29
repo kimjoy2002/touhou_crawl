@@ -3174,6 +3174,8 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_FIELD_VIOLET,15));
 		break;
 	case MON_KAGUYA:
+		list->push_back(spell(SPL_SUMMON_OPTION,15));
+		list->push_back(spell(SPL_MANA_DRAIN,15));
 		break;
 	case MON_MOKOU:
 		break;

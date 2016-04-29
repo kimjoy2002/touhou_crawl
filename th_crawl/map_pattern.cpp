@@ -748,6 +748,9 @@ char* eientei_vault_pattern(map_dummy* map)
 		map->item_list.push_back(mapdummy_item(t,coord_def(28,2)));		
 		map->event_list.push_back(mapdummy_event(22,coord_def(28,2),EVT_SIGHT));
 
+
+
+
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-22,-6)));		
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-20,-6)));		
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-18,-6)));		
@@ -759,6 +762,18 @@ char* eientei_vault_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-18,-2)));		
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-16,-2)));		
 		map->monster_list.push_back(mapdummy_mon(randA(4)==0?MON_RABIT_BOMB:randA(2)?MON_RABIT_SPEAR:MON_RABIT_MAGIC,0,coord_def(-14,-2)));	
+
+		
+		if(!is_exist_named(MON_UDONGE)){
+			map->monster_list.push_back(mapdummy_mon(MON_UDONGE,0,coord_def(-6,-3)));
+			set_exist_named(MON_UDONGE);
+		}		
+		if(!is_exist_named(MON_KAGUYA)){
+			map->monster_list.push_back(mapdummy_mon(MON_KAGUYA,0,coord_def(23,1)));
+			set_exist_named(MON_KAGUYA);
+		}
+
+
 
 		return  "\
 .......................................................................\

@@ -691,7 +691,7 @@ const mon_infor mondata[] = {
 	
 	{MON_KAGUYA,18,3437,name_infor("카구야",false),&img_mons_default,202,20,1,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,12},
 	
 	{MON_MOKOU,16,2735,name_infor("모코우",false),&img_mons_default,180,6,15,
 	{50,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

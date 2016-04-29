@@ -1753,9 +1753,19 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	}
 	if(flag & M_FLAG_UNIQUE && !remove_)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
+		{
+			char temp[200];
+			sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
+			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+		}
+		else
+		{
+			char temp[200];
+			sprintf_s(temp,200,"네임드 %s%s 죽었다.",name.name.c_str(),name.name_to());
+			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+
+		}
 	}
 	hp = 0;
 	if(!remove_)

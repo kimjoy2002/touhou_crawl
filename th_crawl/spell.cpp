@@ -65,8 +65,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MEDICINE_CLOUD:
 	case SPL_ICE_CLOUD:
 	case SPL_TWIST:
-	case SPL_WHIRLWIND:
 		return ((S_FLAG_CLOUD | S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
+	case SPL_WHIRLWIND:
+		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
 	case SPL_FIRE_WALL:
 		return ((S_FLAG_CLOUD | S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_NO_COM | S_FLAG_NO_TARGET) & flag);	
 	case SPL_COLD_BEAM:

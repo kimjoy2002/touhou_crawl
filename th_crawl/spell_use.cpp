@@ -1315,9 +1315,49 @@ bool skill_teleport_self(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 {
+
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
-		MakeCloud(target, img_fog_normal, SMT_WHIRLWIND, rand_int(8,10), 3+pow/20,0,5, order);
+		
+		if(env[current_level].isInSight(target))
+			printlog("회오리가 휘몰아친다! ",false,false,false,CL_normal);
+		{
+			dif_rect_iterator rit(target,1);
+		
+			for(;!rit.end();rit++)
+			{
+				if(env[current_level].isMove(rit->x,rit->y,true))
+				{
+					if((!order->isplayer() || env[current_level].isInSight(*rit)) && order->isSightnonblocked(*rit))
+					{
+						for(list<smoke>::iterator it = env[current_level].smoke_list.begin();it != env[current_level].smoke_list.end() ;it++)
+						{
+							if(it->position.x == rit->x && it->position.y == rit->y)
+							{
+								WaitForSingleObject(mutx, INFINITE);
+								it->clear();
+								env[current_level].smoke_list.erase(it);
+								ReleaseMutex(mutx);
+								break;
+							}
+						}
+						//if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
+						//{	
+						//	if(hit_ != order)
+						//	{
+						//		int att_ = randC(9,10+power/20);
+						//		int m_att_ = 9*(10+power/20);
+
+						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("화염폭풍",true));
+						//		hit_->damage(temp_att, true);
+						//	}
+						//}
+						env[current_level].MakeSmoke((*rit), img_fog_normal, SMT_WHIRLWIND, 3+pow/20,  0, order);
+					}
+				}
+			}
+		}
+		env[current_level].ClearEffect();
 		return true;
 	}
 	return false;
@@ -2088,10 +2128,13 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(map_list.bamboo_rate<((order->GetId() == MON_TEWI)?400:300))
 			map_list.bamboo_rate+=order->GetId() == (MON_TEWI?40:20);
-		if(order->GetId() == MON_TEWI)
-			printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
-		else
-			printlog("큰 나팔소리가 토끼들을 끌어모으고 있다.",false,false,false,CL_small_danger);
+		if(order && env[current_level].isInSight(order->position))
+		{
+			if(order->GetId() == MON_TEWI)
+				printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
+			else
+				printlog("큰 나팔소리가 토끼들을 끌어모으고 있다.",false,false,false,CL_small_danger);
+		}
 		return true;
 	}
 	return false;
@@ -2161,7 +2204,8 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 				}
 		}
 		
-		printlog("화염폭풍이 터졌다!",false,false,false,CL_normal);
+		if(env[current_level].isInSight(target))
+			printlog("화염폭풍이 터졌다!",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2197,7 +2241,8 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
-		printlog("눈보라가 휘몰아친다! ",false,false,false,CL_normal);
+		if(env[current_level].isInSight(target))
+			printlog("눈보라가 휘몰아친다! ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2234,7 +2279,6 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -2353,7 +2397,8 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 			return false;
 		}
 	}
-	printlog("보라색의 파장이 생겨났다! ",false,false,false,CL_normal);
+	if(env[current_level].isInSight(target))
+		printlog("보라색의 파장이 생겨났다! ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+power/10);
 	return true;
 }

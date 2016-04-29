@@ -149,10 +149,10 @@ bool smoke::effectSmoke(unit* unit_)
 	default:
 		return false;
 	case SMT_FIRE:
-		unit_->damage(attack_infor(rand_int(10,20),25,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("화염 구름",true)), true);
+		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("화염 구름",true)), true);
 		return true;
 	case SMT_COLD:
-		unit_->damage(attack_infor(rand_int(10,20),25,99,NULL,parent,ATT_CLOUD_COLD,name_infor("냉기 구름",true)), true);
+		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_COLD,name_infor("냉기 구름",true)), true);
 		unit_->SetFrozen(randA_1(7));
 		return true;
 	case SMT_TWIST:
@@ -161,7 +161,7 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_WHIRLWIND:
 		if(unit_->GetId() != MON_AYA && unit_->GetId() != MON_CROW_TENGU && unit_->GetId() != MON_YAMABUSH_TENGU && unit_->GetId() != MON_HANATACA_TENGU)
 		{
-			unit_->damage(attack_infor(randA_1(30),20,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("회오리바람",true)), true);
+			unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("회오리바람",true)), true);
 			return true;
 		}
 		return false;

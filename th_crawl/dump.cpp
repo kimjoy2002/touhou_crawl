@@ -43,7 +43,7 @@ int caculScore()
 	}
 	if(!you.GetCharNameString()->empty()) //캐릭터 패널티
 	{		
-		base*=0.8;
+		base*=0.7;
 	}
 	base/=2;
 	return base;

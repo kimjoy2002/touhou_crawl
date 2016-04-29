@@ -765,6 +765,11 @@ void TouhouPlayerble(const string name_, bool aptit_)
 				env[current_level].DeleteItem(it);	
 			}
 			you.skill[SKT_TANMAC].onoff = true;
+
+			
+
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 	}
 
@@ -804,10 +809,9 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 
 			you.mp = you.max_mp;
-			//테스트		
+
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.Memorize(SPL_FIRE_SPREAD,true);		
 		}
 	}
 	else if(name_.compare("사나에")==0)
@@ -831,6 +835,11 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);	
 			you.skill[SKT_EVOCATE].onoff = true;
+
+
+			
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -867,9 +876,13 @@ void TouhouPlayerble(const string name_, bool aptit_)
 				it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_MIGHT));
 				it->Identify();
 				you.additem(it,false);
-				env[current_level].DeleteItem(it);	
-				set_exist_named(MON_MOMIZI);
+				env[current_level].DeleteItem(it);				
 			}
+			set_exist_named(MON_MOMIZI);	
+
+
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			
 		}
 	}

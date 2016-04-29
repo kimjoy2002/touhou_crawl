@@ -1395,7 +1395,7 @@ bool players::GetExp(int exper_, bool speak_)
 		LevelUp(speak_);
 		level_up_ = true;
 	}
-	SkillTraining();
+	SkillTraining(speak_);
 	return level_up_;
 }
 int players::GetNeedExp(int level_)
@@ -1515,7 +1515,7 @@ bool players::SkillTraining(skill_type skill_, int percent_)
 	}
 	return false;
 }
-bool players::SkillTraining()
+bool players::SkillTraining(bool speak)
 {
 	int sum = 0, exp;
 	for(int i = 0; i < SKT_MAX; i++)
@@ -1543,7 +1543,7 @@ bool players::SkillTraining()
 			{
 				remain_exp -= exper_;
 				skill_exper -= exper_;
-				GiveSkillExp((skill_type)i,exper_);
+				GiveSkillExp((skill_type)i,exper_,speak);
 			}
 		}
 	}

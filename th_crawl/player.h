@@ -319,7 +319,7 @@ public:
 	int GetNeedExp(int level_);
 	bool GiveSkillExp(skill_type skill_, int exp_, bool speak_ = true);
 	bool SkillTraining(skill_type skill_, int percent_); // (1/percent_)%
-	bool SkillTraining();
+	bool SkillTraining(bool speak);
 	bool SetPoisonReason(parent_type type_){return false;};
 	bool SetPoison(int poison_, int max_, bool strong_);
 	bool SetTele(int tele_);

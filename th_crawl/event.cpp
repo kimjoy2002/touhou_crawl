@@ -436,6 +436,26 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 		}
 		return 0;
+	case EVL_REGEN2:
+		if(randA(50)==0)
+		{			
+			int arr_[] = { MON_HELL_SPIDER, MON_BLOOD_HAUNT, MON_LANTERN_YOUKAI, MON_HELL_HOUND, MON_ONI, MON_BLUE_ONI
+			};
+			int mon_id_ = arr_[randA(5)];
+			
+			while(1)
+			{
+				int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+				if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_) && !env[current_level].isInSight(coord_def(x_,y_)))
+				{
+					monster *mon_ = env[current_level].AddMonster(mon_id_,0,coord_def(x_,y_));
+					mon_->state.SetState(MS_NORMAL);
+					break;
+				}
+			}
+
+		}
+		return 0;
 	default:
 		break;
 	}

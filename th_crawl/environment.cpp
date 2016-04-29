@@ -182,6 +182,13 @@ bool environment::MakeMap(bool return_)
 			create_item(floor,  GetLevelMonsterNum(floor,true));
 		}	
 
+		if(floor>=SUBTERRANEAN_LEVEL && floor <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+		{ //지저에선 모두 깨어있다.
+			for(auto it = env[floor].mon_vector.begin();it!= env[floor].mon_vector.end(); it++)
+			{
+				it->state.SetState(MS_NORMAL);
+			}
+		}
 	}
 	if(!make)
 	{

@@ -970,11 +970,16 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 
 
 	if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+	{
 		hell_map_make_last(num, 	
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
 		randA(10));
+
+		
+		env[num].MakeEvent(EVL_REGEN2, coord_def(0,0), EVT_ALWAYS,300);
+	}
 	else
 		common_map_make_last(num, 	
 		floor_tex,wall_tex,

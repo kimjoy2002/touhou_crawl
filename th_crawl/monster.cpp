@@ -369,7 +369,7 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 	if(flag & M_FLAG_INVISIBLE)
 		s_invisible = -1;
 	
-	SetSpell((monster_index)id_, &spell_lists);
+	SetSpell((monster_index)id_, &spell_lists,&random_spell);
 	return true;
 }	
 bool monster::ChangeMonster( int id_, int flag_)

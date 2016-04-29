@@ -2558,7 +2558,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 						printlog(" - ",false,false,false,it->item_color());
 						printlog(it->GetName(),true,false,false,it->item_color());
 					}
-					it->pick();
+					t->pick();
 					final_item = it->id;
 					final_num = t->num;
 					ReleaseMutex(mutx);

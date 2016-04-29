@@ -1171,6 +1171,21 @@ bool warning(dungeon_tile_type type, bool down)
 		//	return false;
 		//}
 		break;
+	case DG_HAKUREI_STAIR:
+		if(down)
+		{
+			if(you.haveGoal()<3)
+			{
+				printlog("이 곳을 들어가기위해선 3개의 룬이 필요하다!",true,false,false,CL_normal);
+				return false;
+			}
+			else 
+			{
+				printlog("당신은 3개의 룬을 입구에 꽂았다. 소음을 일으키며 문이 열렸다!",true,false,false,CL_normal);
+				MoreWait();
+			}
+		}
+		break;
 	}
 	return true;
 }

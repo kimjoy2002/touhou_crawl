@@ -543,6 +543,93 @@ int players::move(short_move x_mov, short_move y_mov)
 
 	if(1)//env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly()))
 	{
+
+		monster* mon_ = (monster*)env[current_level].isMonsterPos(move_x_,move_y_,this);
+
+
+
+		if(mon_)
+		{
+			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
+			{
+				if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
+				{
+					PositionSwap(mon_);								
+					printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
+					return 2;
+				}
+				else
+					return 0;
+			}
+			attack_type brand_ = ATT_NORMAL;
+			if(equipment[ET_WEAPON])
+				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
+			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
+			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
+			{	
+				skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
+				//if(skill_>SKT_ERROR)
+				//{
+				//	SkillTraining(skill_,3);					
+				//}
+				if(!equipment[ET_WEAPON]->identify)
+				{
+					if(randB(1000,5+skill[skill_].level))
+					{	
+						equipment[ET_WEAPON]->identify = true;
+						char temp[2];
+						sprintf(temp,"%c",equipment[ET_WEAPON]->id);
+						printlog(temp,false,false,false,equipment[ET_WEAPON]->item_color());
+						printlog(" - ",false,false,false,equipment[ET_WEAPON]->item_color());
+						printlog(equipment[ET_WEAPON]->GetName(),false,false,false,equipment[ET_WEAPON]->item_color());
+						printlog("(장착)",true,false,false,CL_normal);
+					}
+				}
+			}
+
+
+
+			if(mon_->damage(temp_att))
+			{
+				if(mon_->isLive()&& you.god == GT_YUUGI && !you.punish[GT_YUUGI] && pietyLevel(you.piety)>=2 && randA(10) == 0)
+				{
+					printarray(false,false,false,CL_yuigi,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_to(true),"잡았다.");
+					you.SetCatch(mon_);
+				}
+				if(alchemy_buff == ALCT_STONE_FIST)
+				{
+					alchemy_buff = ALCT_NONE;
+					alchemy_time = 0;
+				}
+			}
+			youAttack(mon_);
+			if(mon_->isLive() && you.GetProperty(TPT_HORN))
+			{
+				int attack_ = 8;
+				int hit_ = 12+level/3;
+				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
+				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
+					attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
+					mon_->damage(temp_att, false);
+				}
+			}
+			if(s_wind)
+			{					
+				for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
+				{
+					unit *unit_ = env[current_level].isMonsterPos(rlt->x,rlt->y,&you);
+					if(unit_ && unit_ != mon_ && !mon_->isUserAlly())
+					{
+						unit_->damage(temp_att, false);
+
+					}
+				}
+			}
+
+
+			time_delay += GetAtkDelay();
+			return 1;
+		}
 		if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
@@ -598,93 +685,6 @@ int players::move(short_move x_mov, short_move y_mov)
 				}
 			}
 		}
-
-
-		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-		{
-			if((*it).isLive() && (*it).position.x == move_x_ && (*it).position.y == move_y_)
-			{
-				if((*it).isUserAlly() && !((*it).flag & M_FLAG_NONE_MOVE))
-				{
-					if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
-					{
-						PositionSwap(&(*it));								
-						printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
-						return 2;
-					}
-					else
-						return 0;
-				}
-				attack_type brand_ = ATT_NORMAL;
-				if(equipment[ET_WEAPON])
-					brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
-				attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
-				if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-				{	
-					skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
-					//if(skill_>SKT_ERROR)
-					//{
-					//	SkillTraining(skill_,3);					
-					//}
-					if(!equipment[ET_WEAPON]->identify)
-					{
-						if(randB(1000,5+skill[skill_].level))
-						{	
-							equipment[ET_WEAPON]->identify = true;
-							char temp[2];
-							sprintf(temp,"%c",equipment[ET_WEAPON]->id);
-							printlog(temp,false,false,false,equipment[ET_WEAPON]->item_color());
-							printlog(" - ",false,false,false,equipment[ET_WEAPON]->item_color());
-							printlog(equipment[ET_WEAPON]->GetName(),false,false,false,equipment[ET_WEAPON]->item_color());
-							printlog("(장착)",true,false,false,CL_normal);
-						}
-					}
-				}
-
-
-
-				if((*it).damage(temp_att))
-				{
-					if((*it).isLive()&& you.god == GT_YUUGI && !you.punish[GT_YUUGI] && pietyLevel(you.piety)>=2 && randA(10) == 0)
-					{
-						printarray(false,false,false,CL_yuigi,3,it->GetName()->name.c_str(),it->GetName()->name_to(true),"잡았다.");
-						you.SetCatch(&(*it));
-					}
-					if(alchemy_buff == ALCT_STONE_FIST)
-					{
-						alchemy_buff = ALCT_NONE;
-						alchemy_time = 0;
-					}
-				}
-				youAttack(&(*it));
-				if((*it).isLive() && you.GetProperty(TPT_HORN))
-				{
-					int attack_ = 8;
-					int hit_ = 12+level/3;
-					if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
-					{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
-						attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
-						(*it).damage(temp_att, false);
-					}
-				}
-				if(s_wind)
-				{					
-					for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
-					{
-						unit *unit_ = env[current_level].isMonsterPos(rlt->x,rlt->y,&you);
-						if(unit_ && unit_ != &(*it) && !(*it).isUserAlly())
-						{
-							unit_->damage(temp_att, false);
-
-						}
-					}
-				}
-
-
-				time_delay += GetAtkDelay();
-				return 1;
-			}
-		}	
 		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
 		{
 			SetXY(coord_def(move_x_,move_y_));

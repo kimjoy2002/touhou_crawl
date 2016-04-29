@@ -746,7 +746,7 @@ bool monster::ReturnEnemy()
 }
 const name_infor* monster::GetName()
 {
-	if(!isView())
+	if(!isView() && you.hp > 0)
 		return &string_that;
 	return &name;
 }

@@ -595,7 +595,21 @@ bool players::damage(attack_infor &a, bool perfect_)
 	float evasion = 0.0f;
 	float shield_ = 0.0f;
 	bool graze_ = false;
-	
+
+	if(a.type < ATT_THROW_NORMAL)
+	{
+		if(s_paralyse)
+			damage_ *= 1.5f;
+		else if(s_confuse)
+			damage_ *= 1.2f;
+		else if(a.order && !(a.order)->isView())
+		{ //투명일때 조건
+			damage_ *= 1.5f;
+		}
+	}
+
+
+
 
 	if(s_timestep) //완전 무적이 됨
 		return false;

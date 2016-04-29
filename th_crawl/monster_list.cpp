@@ -457,7 +457,7 @@ const mon_infor mondata[] = {
 		
 	
 	{MON_KOISHI,13,3880,name_infor("코이시",false),&img_named_koishi,70,3,18,
-	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_INVISIBLE | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,3,1,7},
 	{MON_NUE,14,4140,name_infor("누에",false),&img_named_nue,140,10,6,
 	{18,25,0},{ATT_SPEAR,ATT_ELEC,ATT_NONE},{name_infor("공격",true),name_infor("공격",true),name_infor()},

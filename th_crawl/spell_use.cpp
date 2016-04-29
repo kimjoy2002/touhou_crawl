@@ -2792,8 +2792,9 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 
 
 
-void SetSpell(monster_index id, list<spell> *list)
+void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 {
+	(*random_spell) = false;
 	list->clear();
 	switch(id)
 	{
@@ -2803,6 +2804,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		list->push_back(spell(SPL_MON_TANMAC_SMALL,40));
 		break;
 	case MON_FAIRY_BLUE_MAGICIAN:
+		(*random_spell) = true;
 		list->push_back(spell(randA(1)?SPL_FROST:SPL_FLAME,40));
 		list->push_back(spell(SPL_BLINK,15));
 		break;
@@ -2939,6 +2941,7 @@ void SetSpell(monster_index id, list<spell> *list)
 		break;
 	case MON_MAGIC_BOOK:
 		{
+			(*random_spell) = true;
 			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
 			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE
 			};
@@ -2960,9 +2963,9 @@ void SetSpell(monster_index id, list<spell> *list)
 		}
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
-		list->push_back(spell(randA(1)?SPL_INVISIBLE:SPL_HASTE,20));
+		list->push_back(spell(SPL_INVISIBLE,5));
 		list->push_back(spell(SPL_MAGIC_TANMAC,20));
-		list->push_back(spell(randA(1)?SPL_CONFUSE:SPL_SLOW,10));
+		list->push_back(spell(SPL_SLOW,10));
 		list->push_back(spell(SPL_VENOM_BOLT,15));		
 		break;
 	case MON_HOBGOBRIN_TEMP:

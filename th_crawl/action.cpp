@@ -29,6 +29,7 @@
 #include "throw.h"
 
 
+extern HANDLE mutx;
 
 
 
@@ -635,6 +636,40 @@ int Player_Move(const coord_def &c)
 	return move_type;
 }
 
+void search_monspell_view(monster* mon_)
+{
+	bool loop_ = true;
+					
+	while(loop_)
+	{
+		loop_ = false;
+		WaitForSingleObject(mutx, INFINITE);
+		SetText() = GetMonsterInfor(mon_);
+		ReleaseMutex(mutx);
+		changedisplay(DT_TEXT);
+		int key_ = waitkeyinput(true);
+						
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
+			for(auto it = mon_->spell_lists.begin();it != mon_->spell_lists.end();it++)
+			{
+				if(num == 0)
+				{
+					WaitForSingleObject(mutx, INFINITE);
+					SetText() = GetSpellInfor((spell_list)it->num);
+					ReleaseMutex(mutx);
+					changedisplay(DT_TEXT);
+					waitkeyinput();
+					loop_ = true;
+					break;
+				}
+				num--;
+			}
+							
+		}
+	}
+}
 void Search()
 {
 	you.search_pos = you.position;
@@ -672,10 +707,8 @@ void Search()
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{
 				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
-				{
-					SetText() = GetMonsterInfor((monster*)unit_);
-					changedisplay(DT_TEXT);
-					waitkeyinput();
+				{					
+					search_monspell_view((monster*)unit_);
 					changedisplay(DT_GAME);
 				}
 			}
@@ -700,6 +733,7 @@ struct stair_struct
 	stair_struct():pos(0,0),dis(999999){};
 	stair_struct(coord_def pos_,int dis_):pos(pos_),dis(dis_){};
 };
+
 
 void Wide_Search()
 {
@@ -836,9 +870,7 @@ void Wide_Search()
 			{
 				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
 				{
-					SetText() = GetMonsterInfor((monster*)unit_);
-					changedisplay(DT_TEXT);
-					waitkeyinput();
+					search_monspell_view((monster*)unit_);
 					changedisplay(DT_GAME);
 				}
 			}

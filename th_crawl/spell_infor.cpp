@@ -24,15 +24,12 @@ string GetSpellInfor(spell_list spell)
 		text_ += "존재하지 않는 마법이다.\n";
 		break;
 	case SPL_MON_TANMAC_SMALL:
-		text_ += "몬스터용 마법이다.\n";
 		text_ += "작은 탄막을 발사한다.\n";
 		break;
 	case SPL_MON_TANMAC_MIDDLE:
-		text_ += "몬스터용 마법이다.\n";
 		text_ += "적당한 탄막을 발사한다.\n";
 		break;
 	case SPL_MON_WATER_GUN:
-		text_ += "몬스터용 마법이다.\n";
 		text_ += "물총을 발사한다.\n";
 		break;
 	case SPL_FLAME:
@@ -42,15 +39,15 @@ string GetSpellInfor(spell_list spell)
 		text_ += "작은 냉기를 탄막으로 날린다.\n";
 		break;	
 	case SPL_MEDICINE_CLOUD:
-		text_ += "메디슨 전용 마법이다. 은방울꽃의 독이 주 성분\n";
+		text_ += "콘파로~ 콘파로~ 은방울꽃의 독이 주 성분\n";
 		text_ += "이 독에 갇히면 이동속도가 느려지고 중독상태가 된다.\n";
 		break;
 	case SPL_COLD_BEAM:
-		text_ += "치르노 전용 마법이다. 공기를 일직선으로 얼려서 상대에게 타격을 준다.\n";
+		text_ += "공기를 일직선으로 얼려서 상대에게 타격을 준다.\n";
 		text_ += "냉기구름도 생기기도 한다.\n";
 		break;
 	case SPL_SUMMON_BUG:
-		text_ += "리글 전용 마법이다. 작은 곤충들을 소환해낸다.\n";
+		text_ += "작은 곤충들을 소환해낸다.\n";
 		break;
 	case SPL_CONFUSE:
 		text_ += "적에게 일시적으로 혼란을 거는 정신계열마법. 혼란에 빠진 상대는 자신의 의지대로 움직이지 못한다.\n";
@@ -61,7 +58,7 @@ string GetSpellInfor(spell_list spell)
 		text_ += "저항할 확률이 있다.\n";
 		break;
 	case SPL_SELF_HEAL:	
-		text_ += "몬스터 전용 마법이다. 자신을 약간 치료한다.\n";
+		text_ += "자신을 약간 치료한다.\n";
 		break;
 	case SPL_BLINK:
 		text_ += "짧은 거리를 순식간에 이동하는 전이계열마법.\n";
@@ -69,7 +66,7 @@ string GetSpellInfor(spell_list spell)
 		text_ += "공간이동제어가 있을 경우, 방향을 지정하여 이동하는 위치를 대략 정할 수 있다.\n";
 		break;
 	case SPL_SMITE:
-		text_ += "몬스터 전용 마법이다. 상대방에게 천벌을 내린다. 시야안에 있기만 하면 성공하며 피할 수 없다.\n";
+		text_ += "상대방에게 천벌을 내린다. 시야안에 있기만 하면 성공하며 피할 수 없다.\n";
 		break;
 	case SPL_BURN:
 		text_ += "짧은거리의 상대방을 불꽃으로 태워버리는 화염속성 기초마법.\n";
@@ -158,10 +155,10 @@ string GetSpellInfor(spell_list spell)
 		text_ += "연금술로 인한 가속이지만 다른 방법으로 얻는 가속과 중첩되진 않는다.\n";
 		break;
 	case SPL_SILENCE:
-		text_ += "주의의 소음을 없애는 날씨마법. 주변의 소리를 내는 행동을 금지한다.\n";
+		text_ += "주의의 소음을 없애는 마법. 주변의 소리를 내는 행동을 금지한다.\n";
 		text_ += "마법사용, 권능사용, 두루마리 읽기등이 금지된다. \n";
 		text_ += "소리가 사라져 부자연스럽기때문에 은밀에 오히려 악영향을 준다. \n";
-		text_ += "날씨 마법은 사용하면 범위안에 효과를 주지만 시간이 지나면 범위가 줄어든다.\n";
+		text_ += "사용하면 범위안에 효과를 주지만 시간이 지나면 범위가 줄어든다.\n";
 		break;
 	case SPL_SWIFT:
 		text_ += "잠시동안 빠른 이동속도를 가지게 된다.\n";
@@ -215,8 +212,8 @@ string GetSpellInfor(spell_list spell)
 		text_ += "자신에게 공간이동을 거는 마법. 바로 공간이동 되지 않고 약간의 딜레이가 있다.\n";
 		break;
 	case SPL_WHIRLWIND:
-		text_ += "아야 전용 마법이다. 강한 회오리 바람을 상대위치에 생성시킨다.\n";
-		text_ += "지속적인 데미지를 준다. 아야는 이 바람에 면역이 있다.\n";
+		text_ += "강한 회오리 바람을 상대위치에 생성시킨다.\n";
+		text_ += "지속적인 데미지를 준다. 시전자인 아야는 이 바람에 면역이 있다.\n";
 		break;
 	case SPL_SUMMON_PENDULUM:
 		text_ += "펜듈럼을 소환한다.\n";
@@ -290,11 +287,11 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_HASTE_OTHER:
 		text_ += "아군을 가속시키는 마법.\n";
-		text_ += "근처의 아군에 가속을 걸어준다.(몬스터 전용)\n";
+		text_ += "근처의 아군에 가속을 걸어준다.\n";
 		break;
 	case SPL_HEAL_OTHER:
 		text_ += "아군을 회복시키는 마법.\n";
-		text_ += "근처의 아군을 회복시킨다.(몬스터 전용)\n";
+		text_ += "근처의 아군을 회복시킨다.\n";
 		break;
 	case SPL_MIND_BENDING:
 		text_ += "파장을 담은 탄막을 발사하여 맞은 상대의 파장을 굽힌다.\n";
@@ -344,11 +341,10 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_FLAN_BUSIN:
 		text_ += "플랑드르의 분신을 3체 만들어내는 스펠.\n";
-		text_ += "명중 또한 소량 오른다.\n";
+		text_ += "분신들은 본체보다 약하지만 폭파스펠을 똑같이 쓸 수 있다.\n";
 		break;
 	case SPL_BURST:
 		text_ += "적을 원거리에서 터트려버린다. 저항할수도 회피할수도 없다.\n";
-		text_ += "헬파이어\n";
 		break;
 	case SPL_SUICIDE_BOMB:
 		text_ += "공격할시 자동으로 자폭한다.\n";
@@ -426,9 +422,9 @@ string GetSpellInfor(spell_list spell)
 		text_ += "소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
 		break;
 	case SPL_MOON_GUN:
-		text_ += "달토끼: 짜증나는 원시적 공격이로군! 모두 죽어라!\n";
 		text_ += "달의 기술을 집결하여 만든 총을 쏜다.\n";
 		text_ += "달의 하이테크치고는 겉모양은 별거 아닌거처럼 보인다.\n";
+		text_ += "짜증나는 원시적 공격이로군!\n";
 		break;
 	case SPL_SUMMON_DREAM:
 		text_ += "꿈을 구현화시켜 다양한 장소에서의 몬스터들을 소환하는 맥 특유의 기술.\n";

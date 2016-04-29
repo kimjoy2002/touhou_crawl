@@ -314,15 +314,9 @@ $$$...$$$";
 				map->monster_list.push_back(mapdummy_mon(MON_CIRNO,M_FLAG_NETURALY,coord_def(-3,-1)));
 				set_exist_named(MON_CIRNO);
 			}
-			if(!is_exist_named(MON_STAR)){
-				map->monster_list.push_back(mapdummy_mon(MON_STAR,0,coord_def(3,1)));
-				set_exist_named(MON_STAR);
-			}
-			if(!is_exist_named(MON_LUNAR)){
-				map->monster_list.push_back(mapdummy_mon(MON_LUNAR,0,coord_def(3,0)));
-				set_exist_named(MON_LUNAR);
-			}
 			if(!is_exist_named(MON_SUNNY)){
+				map->monster_list.push_back(mapdummy_mon(MON_STAR,0,coord_def(3,1)));
+				map->monster_list.push_back(mapdummy_mon(MON_LUNAR,0,coord_def(3,0)));
 				map->monster_list.push_back(mapdummy_mon(MON_SUNNY,0,coord_def(2,1)));
 				set_exist_named(MON_SUNNY);
 			}

@@ -8,6 +8,9 @@
 
 #include "monster.h"
 #include "mon_infor.h"
+#include "skill_use.h"
+#include "player.h"
+#include "debuf.h"
 
 extern HANDLE mutx;
 
@@ -38,7 +41,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "썩은 고기를 좋아하고 무리지어다니는 까마귀다.\n";
 		break;
 	case MON_CRANE:
-		text_ += "망함.\n";
+		text_ += "던전이 만들어지기도 전에 있었던 존재이다.\n";
+		text_ += "아무도 알아주지않아서 멸종되었다고 하는 종이다.\n";
+		text_ += "변덕이 생긴다면 2호가 나올지도 몰라!\n";
 		break;
 	case MON_SPIDER:
 		text_ += "다리가 8개 달린 징그러운 거미다.\n";
@@ -799,6 +804,62 @@ string GetMonsterInfor(monster *it)
 	{
 		text_ += "\n\n이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다.\n";
 	}
+
+	if(!it->spell_lists.empty())
+	{
+		text_ += "\n\n\n사용하는 마법\n\n";
+
+
+		if(it->random_spell)
+		{
+			text_ += "이 몬스터의 마법은 고정되어있지 않다. 무슨 마법을 쓸지 몰라!\n";
+		}
+		else
+		{
+			int i = 0;
+			char temp[100];
+			for(auto its = it->spell_lists.begin(); its != it->spell_lists.end(); its++)
+			{
+				char sp_char = (i<27)?('a'+i):('A'+i-27);
+				spell_list spell_ = (spell_list)its->num;
+			
+				sprintf_s(temp,100,"%c - %s",sp_char,SpellString(spell_));
+				text_+=temp;
+				if(SpellFlagCheck(spell_, S_FLAG_DEBUF))
+				{
+					int value_ = GetDebufPower(spell_, min(SpellCap(spell_),(it->level-3)*5));
+					int percent_ = you.GetResist() - value_;
+					if(percent_ <= 1)
+					{
+						percent_ = 0;
+					}
+					else if(percent_<=101)
+					{
+						percent_ = percent_*(percent_-1)/2;
+					}
+					else if(percent_<=200)
+					{
+						percent_-= 101;
+						percent_ = 5050+percent_*(199-percent_)/2;
+					}			
+					else 
+					{
+						percent_ =  10000;
+					}
+
+					sprintf_s(temp,100," (%.0f%%)",(10000-percent_)/100.0f);
+					text_+=temp;
+
+				}
+
+				text_ += "\n";
+				i++;
+			}
+		}
+
+	}
+
+
 	return text_;
 
 }

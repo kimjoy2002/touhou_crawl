@@ -168,7 +168,7 @@ bool skill_elec_passive(int power, unit* order);
 
 
 
-void SetSpell(monster_index id, list<spell> *list);
+void SetSpell(monster_index id, list<spell> *list, bool* random_spell);
 
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_ = -1);

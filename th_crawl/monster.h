@@ -108,6 +108,7 @@ public:
 
 	FSMclass state;
 	list<spell> spell_lists;
+	bool random_spell; //이 몬스터가 고정된 스펠셋을 들고있지않다.
 
 	monster();
 	void SaveDatas(FILE *fp);

@@ -41,7 +41,7 @@ s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
-	sm_info(), state(MS_NORMAL), direction(0)
+	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
 {	
 	base_state_setup(state,MS_SLEEP);
 }
@@ -131,6 +131,9 @@ void monster::SaveDatas(FILE *fp)
 	{
 		SaveData<spell>(fp,(*it));
 	}
+	SaveData<bool>(fp, random_spell);	
+
+	
 }
 void monster::LoadDatas(FILE *fp)
 {
@@ -223,6 +226,7 @@ void monster::LoadDatas(FILE *fp)
 		LoadData<spell>(fp, temp);
 		spell_lists.push_back(temp);
 	}
+	LoadData<bool>(fp, random_spell);	
 }
 void monster::ReTarget()
 {
@@ -296,6 +300,7 @@ void monster::init()
 	direction =0;
 	state.SetState(MS_SLEEP);
 	spell_lists.clear();
+	random_spell = false;
 }
 bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_)
 {
@@ -364,7 +369,6 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 	if(flag & M_FLAG_INVISIBLE)
 		s_invisible = -1;
 	
-
 	SetSpell((monster_index)id_, &spell_lists);
 	return true;
 }	

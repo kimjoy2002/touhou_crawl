@@ -76,11 +76,10 @@ void wiz_mode()
 		{
 		deque<monster*> dq;
 		dungeon_level next_ = TEMPLE_LEVEL;
-		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
 		printlog("D - 던전     T - 신전      L - 안개의 호수     M - 요괴의 산     S - 홍마관",true,false,false,CL_help);
 		printlog("B - 홍마관도서관   U - 홍마관지하   A - 미궁의죽림  E - 영원정   Y - 윳쿠리둥지 ",true,false,false,CL_help);
 		printlog("P - 짐승길  H - 지령전  R - 꿈의 세계 O - 달의 세계  K - 마계  Z - 하쿠레이신사",true,false,false,CL_help);
-		printlog("어느 던전으로 이동해볼까?",true,false,false,CL_help);
+		printlog("어느 던전으로 이동해볼까?",false,false,false,CL_help);
 		wizard_mode = true;
 		key_ = waitkeyinput();
 		switch(key_)
@@ -166,8 +165,10 @@ void wiz_mode()
 				next_ = HAKUREI_LAST_LEVEL;
 				break;	
 			default:
+				printlog(" 취소",true,false,false,CL_help);
 				return;
 		}
+		enterlog();
 		env[next_].EnterMap(0,dq);
 		printlog("계단을 내려왔다.",true,false,false,CL_normal);
 		//you.resetLOS(false);
@@ -200,8 +201,84 @@ void wiz_mode()
 		//skill_summon_bug(100,&you,you.position);		
 		you.SetBuff((stat_up)rand_int(BUFFSTAT_STR,BUFFSTAT_EV),BUFF_DUPLE,rand_int(-3,3),10);
 		break;
-	case 'p':
-		env[current_level].dgtile[you.position.x][you.position.y].tile = (dungeon_tile_type) rand_int(DG_TEMPLE_FIRST,DG_TEMPLE_LAST);
+	case 'p':			
+		{
+		dungeon_tile_type next_ = DG_TEMPLE_FIRST;
+		printlog("X - 시키에이키     B - 뱌쿠렌      K - 카나코     W - 스와코     A - 미노리코",true,false,false,CL_help);
+		printlog("M - 미마           P - 신키        G - 유우기     Z - 시즈하     H - 히나 ",true,false,false,CL_help);
+		printlog("Y - 유카리         E - 에이린      U - 유유코     S - 사토리     T - 텐시",true,false,false,CL_help);
+		printlog("어떤 신전을 만들까?",false,false,false,CL_help);
+		wizard_mode = true;
+		key_ = waitkeyinput();
+		switch(key_)
+		{
+			case 'x':
+			case 'X':
+				next_ = DG_TEMPLE_SHIKIEIKI;
+				break;
+			case 'b':
+			case 'B':
+				next_ = DG_TEMPLE_BYAKUREN;
+				break;
+			case 'k':
+			case 'K':
+				next_ = DG_TEMPLE_KANAKO;
+				break;
+			case 'w':
+			case 'W':
+				next_ = DG_TEMPLE_SUWAKO;
+				break;
+			case 'a':
+			case 'A':
+				next_ = DG_TEMPLE_MINORIKO;
+				break;
+			case 'm':
+			case 'M':
+				next_ = DG_TEMPLE_MIMA;
+				break;
+			case 'p':
+			case 'P':
+				next_ = DG_TEMPLE_SHINKI;
+				break;
+			case 'g':
+			case 'G':
+				next_ = DG_TEMPLE_YUUGI;
+				break;
+			case 'z':
+			case 'Z':
+				next_ = DG_TEMPLE_SHIZUHA;
+				break;
+			case 'h':
+			case 'H':
+				next_ = DG_TEMPLE_HINA;
+				break;
+			case 'y':
+			case 'Y':
+				next_ = DG_TEMPLE_YUKARI;
+				break;
+			case 'e':
+			case 'E':
+				next_ = DG_TEMPLE_EIRIN;
+				break;
+			case 'u':
+			case 'U':
+				next_ = DG_TEMPLE_YUYUKO;
+				break;
+			case 's':
+			case 'S':
+				next_ = DG_TEMPLE_SATORI;
+				break;
+			case 't':
+			case 'T':
+				next_ = DG_TEMPLE_TENSI;
+				break;
+			default:
+				printlog(" 취소",true,false,false,CL_help);
+				return;
+		}
+		enterlog();
+		env[current_level].dgtile[you.position.x][you.position.y].tile = next_;
+		}
 		break;
 	case 'M':
 		if(monster* mon_=BaseSummon(MON_AYA, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))

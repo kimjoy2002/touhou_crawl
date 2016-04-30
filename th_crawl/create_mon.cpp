@@ -997,8 +997,8 @@ int get_unique_to_id(int m_id)
 	{
 	default: return -1;
 	case MON_RUMIA:return 0;
-	case MON_MISTIA: return 1;
-	case MON_WRIGGLE: return 2;
+	case MON_WRIGGLE: return 1;
+	case MON_MISTIA: return 2;
 	case MON_CIRNO: return 3;
 	case MON_MEDICINE: return 4;
 	case MON_DIEFAIRY: return 5;

@@ -29,6 +29,8 @@ enum tribe_proper_type
 	TPT_GHOST_FOOT,
 	TPT_CHEUKUMOGAMI,
 	TPT_HP,
+	TPT_INVISIBLE,
+	TPT_POWER_SAVE,
 	TPT_MAX
 };
 

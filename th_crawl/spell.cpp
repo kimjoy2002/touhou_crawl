@@ -1258,6 +1258,7 @@ void SpellUse()
 								//	you.SkillTraining(SpellSchool(spell_,2),2);
 								//you.HungerApply(-you.GetSpellHungry(spell_));
 								you.time_delay += you.GetSpellDelay();
+								you.SetBattleCount(30);
 								Noise(you.position,SpellNoise(spell_));
 								you.TurnEnd();
 							}
@@ -1288,6 +1289,7 @@ void SpellUse()
 								//if(SpellSchool(spell_,2)!=SKT_ERROR)
 								//	you.SkillTraining(SpellSchool(spell_,2),2);
 								//you.HungerApply(-you.GetSpellHungry(spell_));
+								you.SetBattleCount(30);
 								you.time_delay += you.GetSpellDelay();
 								Noise(you.position,SpellNoise(spell_));
 								you.TurnEnd();
@@ -1311,6 +1313,7 @@ void SpellUse()
 							//if(SpellSchool(spell_,2)!=SKT_ERROR)
 							//	you.SkillTraining(SpellSchool(spell_,2),2);
 							//you.HungerApply(-you.GetSpellHungry(spell_));
+							you.SetBattleCount(30);
 							you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
 							Noise(you.position,SpellNoise(spell_));
 							you.TurnEnd();

@@ -370,6 +370,7 @@ enum tribe_type
 	TRI_HALFYOKAI,
 	TRI_WRAITH,
 	TRI_VAMPIRE,
+	TRI_YOKAI, //네임드용이니깐 항상뒤에
 	TRI_MAX
 };
 

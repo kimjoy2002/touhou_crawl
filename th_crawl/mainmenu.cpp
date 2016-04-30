@@ -227,6 +227,13 @@ bool select_named(int value_)
 		you.char_name.name_type = false;
 		you.image = &img_play_momizi;
 		break;
+	case 4:
+		you.tribe = TRI_YOKAI;
+		you.job = JOB_ASSASSIN;
+		you.char_name.name = "코이시";
+		you.char_name.name_type = false;
+		you.image = &img_named_koishi;
+		break;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() += "\n\n\nKill Them All!\n";
@@ -273,6 +280,7 @@ void start_mainmenu()
 	temp += "b - 인간 마법사 마리사\n\n";
 	temp += "c - 인간 무녀 사나에\n\n";
 	temp += "d - 백랑텐구 전사 모미지\n\n";	
+	temp += "e - 요괴 암살자 코이시\n\n";	
 	m_mgr.menu_puls(2,temp);
 	temp = " : 안티패턴 초 유도형. 비겁한 호밍무녀로 모든 적을 섬멸하자!\n";
 	temp += " 적성보너스) 탄막적성 +3, 회피적성 +3\n";
@@ -298,11 +306,19 @@ void start_mainmenu()
 	temp += " 초보자팁) tab은 자동공격, o는 자동탐색으로 편하게 진행 가능합니다. 위기엔 q로 포션을 마시세요.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(2,'d',2,temp,true,select_named,3);
+	temp = " : 본포! 당신의 뒤에 있어요. 무의식의 힘으로 모두 암살해라!\n";
+	temp += " 적성보너스) 단검적성 +2, 정신마법정석 +2\n";
+	temp += " 보너스) 영구투명특성, 파워보존특성\n\n";
+	temp += " 초보자팁) 전투중이 아닐땐 항상 투명이 된 상태입니다. 조심하세요! 전투중에는 투명이 풀립니다.\n";
+	temp += " 자고있는 상대를 찌르면 암습과 단검스킬에 비례해서 치명적인 큰 데미지가 들어갑니다.\n";	
+	temp += " x를 누른 상태에서 몬스터위에 커서를 두고 v를 누르면 정보가 뜹니다. 투명보기가 있는지 확인하세요!\n\n\n";	
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(2,'e',2,temp,true,select_named,4);
 	m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 	
 	temp = "종족을 선택합니다.\n\n\n";
-	for(int i=0;i<TRI_MAX;i++)
+	for(int i=0;i<TRI_MAX-1;i++)
 	{
 		char tempchar[64];
 		sprintf_s(tempchar,"%c - %s",'a'+i,tribe_type_string[i]);
@@ -313,7 +329,7 @@ void start_mainmenu()
 			for(int j=0;j<remain_num_;j++)
 				temp += " ";
 		}
-		if(i%2 == 1 || i == TRI_MAX-1)
+		if(i%2 == 1 || i == TRI_MAX-2)
 		{
 			temp += "\n";
 		}
@@ -370,7 +386,7 @@ void start_mainmenu()
 		{
 			for(int j=0;j<remain_num_;j++)
 				temp += " ";
-		}			
+		}
 		if(i%2 == 1 || i == JOB_MAX-1)
 		{
 			temp += "\n";

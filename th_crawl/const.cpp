@@ -22,7 +22,8 @@ const char *tribe_type_string[TRI_MAX]=
 	"¿À´Ï",
 	"¹Ý¿ä",
 	"¸Á·É",
-	"ÈíÇ÷±Í"
+	"ÈíÇ÷±Í",
+	"¿ä±«"
 };
 const bool tribe_string_back[TRI_MAX]=
 {
@@ -36,6 +37,7 @@ const bool tribe_string_back[TRI_MAX]=
 	false,
 	false,
 	true,
+	false,
 	false
 };
 

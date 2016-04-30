@@ -822,7 +822,8 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
 			if(unit_)
 				you.youAttack(unit_);
 			if(you.Throw(it,you.search_pos,short_==2,beam))
-			{
+			{				
+				you.SetBattleCount(30);
 				//you.SkillTraining(SKT_TANMAC,2);
 				you.TurnEnd();
 			}

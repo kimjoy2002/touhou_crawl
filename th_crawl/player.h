@@ -210,6 +210,7 @@ public:
 	int invisible_view;
 	int power_keep;
 	bool togle_invisible; //스펠카드로만 얻는 투명
+	int battle_count; //전투중이다. 공격하면 100부터 시작
 
 	int uniden_poison_resist;
 	int uniden_fire_resist;
@@ -341,6 +342,8 @@ public:
 	bool SetInvisible(int invisible_);
 	bool SetSaved(int saved){return true;};
 	bool SetTogleInvisible(bool off_);
+	bool SetBattleCount(int count_);
+	void ChangeBattleCount(bool on_); //배틀카운터가 켜지거나 꺼질때 처리 
 	bool SetSwift(int swift_);
 	bool SetManaRegen(int mana_regen_);
 	bool SetSuperMan(int superman_);

@@ -66,7 +66,7 @@ s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_conf
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
-teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false),
+teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
@@ -226,7 +226,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, confuse_resist);
 	SaveData<int>(fp, invisible_view);	
 	SaveData<int>(fp, power_keep);
-	SaveData<bool>(fp, togle_invisible);	
+	SaveData<bool>(fp, togle_invisible);
+	SaveData<int>(fp, battle_count);
 	SaveData<int>(fp, uniden_poison_resist);
 	SaveData<int>(fp, uniden_fire_resist);
 	SaveData<int>(fp, uniden_ice_resist);
@@ -415,7 +416,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, confuse_resist);
 	LoadData<int>(fp, invisible_view);
 	LoadData<int>(fp, power_keep);
-	LoadData<bool>(fp, togle_invisible);	
+	LoadData<bool>(fp, togle_invisible);
+	LoadData<int>(fp, battle_count);		
 	LoadData<int>(fp, uniden_poison_resist);
 	LoadData<int>(fp, uniden_fire_resist);
 	LoadData<int>(fp, uniden_ice_resist);
@@ -602,6 +604,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					alchemy_time = 0;
 				}
 			}
+			you.SetBattleCount(30);
 			youAttack(mon_);
 			if(mon_->isLive() && you.GetProperty(TPT_HORN))
 			{
@@ -1875,6 +1878,32 @@ bool players::SetTogleInvisible(bool off_)
 		return true;
 	}
 }
+bool players::SetBattleCount(int count_)
+{
+	if(count_<0)
+		return false;
+	if(battle_count == 0 && count_>0)
+	{
+		ChangeBattleCount(true);
+	}
+	else if(battle_count>0 && count_ ==0)
+	{
+		ChangeBattleCount(false);
+	}
+	battle_count = count_;
+	return true;
+}
+void players::ChangeBattleCount(bool on_)
+{
+	//배틀카운터 자체는 바뀌지않은 상태임을 유의한다.
+	if(GetProperty(TPT_INVISIBLE))
+	{
+		if(on_)
+			you.SetTogleInvisible(true);
+		else
+			you.SetTogleInvisible(false);
+	}
+}
 bool players::SetSwift(int swift_)
 {
 	if(!swift_)
@@ -2070,7 +2099,6 @@ bool players::SetTheWorld(int s_the_world_)
 		printlog("더 월드!",false,false,false,CL_white_blue);
 	else
 	{
-		//printlog("당신은 더욱 더 미쳤다.",false,false,false,CL_warning);
 	}
 	s_the_world = s_the_world_;
 	if(s_the_world>20)

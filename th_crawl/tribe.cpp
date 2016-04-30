@@ -87,6 +87,10 @@ string tribe_property::GetName()
 				return "버그사이즈";
 			}
 		}
+	case TPT_INVISIBLE:
+		return "영구투명";
+	case TPT_POWER_SAVE:
+		return "파워보존";
 	}
 	return "버그특성";
 }
@@ -146,6 +150,10 @@ string tribe_property::GetInfor()
 				return "버그사이즈";
 			}
 		}
+	case TPT_INVISIBLE:
+		return "무의식인 당신은 항상 투명해져있다.";
+	case TPT_POWER_SAVE:
+		return "당신은 P의 자연소모가 느리다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -187,6 +195,10 @@ string tribe_property::GetDetail()
 		return "당신의 본체인 도구는 버릴 수 없다.\n당신의 본체를 손에 들고 있으면 그 장비와 연관된 스킬이 5증가하는 보너스를 받는다.";
 	case TPT_HP:
 		return "당신은 유전적으로 체력이 결정되어있다.\n최종 체력치가 수치만큼 곱해진다.";
+	case TPT_INVISIBLE:
+		return "비전투중일때는 당신은 상시 투명을 유지한다.\n만약 당신이 공격을 시도하면 투명이 풀린다.";
+	case TPT_POWER_SAVE:
+		return "턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -229,6 +241,12 @@ void tribe_property::gain(bool gain_)
 	case TPT_GHOST_FOOT:
 		return;
 	case TPT_CHEUKUMOGAMI:
+		return;
+	case TPT_INVISIBLE:
+		you.SetTogleInvisible(false);
+		return;
+	case TPT_POWER_SAVE:		
+		you.ResistUpDown(1,RST_POWER);
 		return;
 	}
 }

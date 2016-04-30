@@ -615,6 +615,15 @@ interupt_type players::TurnEnd()
 
 	}
 
+	if(battle_count)
+	{
+		battle_count--;
+		if(battle_count == 0)
+		{
+			ChangeBattleCount(false);
+		}
+	}
+
 	if(!s_sick)
 	{
 		if(HpRecover(delay_) && inter == IT_NONE)

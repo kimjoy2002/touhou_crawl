@@ -71,6 +71,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 			if(fail_)
 				return true;
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
+			you.SetBattleCount(30);
 			if(unit_)
 				you.youAttack(unit_);
 			if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))

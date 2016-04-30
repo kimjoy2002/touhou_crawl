@@ -1254,6 +1254,7 @@ void SkillUse()
 										you.mp -= SkillMana(skill_);
 									SkillUseTraning(skill_);
 									Noise(you.position , SkillNoise(skill_));
+									you.SetBattleCount(30);
 									you.time_delay += you.GetNormalDelay();
 									you.TurnEnd();
 								}
@@ -1274,6 +1275,7 @@ void SkillUse()
 								}
 								SkillUseTraning(skill_);
 								Noise(you.position , SkillNoise(skill_));
+								you.SetBattleCount(30);
 								you.time_delay += you.GetNormalDelay();
 								you.TurnEnd();
 							}		

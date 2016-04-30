@@ -775,7 +775,7 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 				printlog("적에게 저먼 스플렉스를 걸 지면이 부족하다.",true,false,false,CL_normal);
 				return false;	
 			}
-			if(!env[current_level].isMonsterPos(target.x,target.y,order))
+			if(env[current_level].isMonsterPos(offset_.x,offset_.y,order))
 			{
 				printlog("저먼 스플렉스를 쓰는데 방해되는 누군가가 있다.",true,false,false,CL_normal);
 				return false;	

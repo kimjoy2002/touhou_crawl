@@ -268,7 +268,7 @@ void map_algorithms(int num)
 		else if(num == MOON_LEVEL)
 		{
 			//map_algorithms01(num,DG_FLOOR,DG_WALL);
-			map_algorithms01(num,DG_FLOOR,DG_SEA);
+			map_algorithms02(num,10,0,DG_FLOOR,DG_SEA);
 		}
 		else if(num >= HAKUREI_LEVEL && num >= HAKUREI_LAST_LEVEL)
 		{
@@ -282,7 +282,7 @@ void map_algorithms(int num)
 		else if(num>PANDEMONIUM_LEVEL && num<=PANDEMONIUM_LAST_LEVEL)
 		{
 			env[num].ClearFloor();
-			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
+			map_algorithms02(num,5,0,DG_FLOOR,DG_WALL);
 		}
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
 		{

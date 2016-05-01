@@ -627,7 +627,7 @@ string GetMonsterInfor(monster *it)
 		text_ += "바퀴에 화염이 뿜어져나오고있다. 가까이가면 화상을 입을 것 같다.\n";
 		break;
 	case MON_HELL_SPIDER:
-		text_ += "거미의 요괴의 일종인 츠지구모.\n";
+		text_ += "거미의 요괴의 일종인 츠치구모.\n";
 		text_ += "물리면 심한 독과 병을 동반한다. 강을 오염시키기도한다.\n";
 		break;
 	case MON_BLOOD_HAUNT:

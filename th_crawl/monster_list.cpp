@@ -621,7 +621,7 @@ const mon_infor mondata[] = {
 	{40,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,8},
 	
-	{MON_HELL_SPIDER,11,782,name_infor("츠지구모",false),&img_mons_default,80,5,10,
+	{MON_HELL_SPIDER,11,782,name_infor("츠치구모",false),&img_mons_default,80,5,10,
 	{25,0,0},{ATT_SICK,ATT_NONE,ATT_NONE},{name_infor("독니",false),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10},
 	

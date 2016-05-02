@@ -113,6 +113,26 @@ extern textures img_mons_bomb_rabbit;
 extern textures img_mons_spear_rabbit;
 extern textures img_mons_support_rabbit;
 extern textures img_mons_magic_rabbit;
+extern textures img_mons_fairy_green_hero;
+extern textures img_mons_fairy_green_socerer;
+extern textures img_mons_fairy_green_himawari;
+extern textures img_mons_moon_rabbit_attack;
+extern textures img_mons_moon_rabbit_supporter;
+extern textures img_mons_moon_rabbit_elite;
+extern textures img_mons_mac;
+extern textures img_mons_nightmare;
+extern textures img_mons_lunatic;
+extern textures img_mons_haunt[];
+extern textures img_mons_fire_car;
+extern textures img_mons_hell_spider;
+extern textures img_mons_blood_haunt;
+extern textures img_mons_hell_dog;
+extern textures img_mons_flower_tank[];
+extern textures img_mons_evil_eye_tank;
+extern textures img_mons_snow_girl;
+extern textures img_mons_sanghai[];
+extern textures img_mons_hourai[];
+extern textures img_mons_nesi;
 
 
 
@@ -175,6 +195,17 @@ extern textures img_named_clownpiece;
 extern textures img_named_doremi;
 
 
+extern textures img_named_seiran;
+extern textures img_named_ringo;
+extern textures img_named_letty;
+extern textures img_named_yorihime;
+extern textures img_named_toyohime;
+extern textures img_named_utsuho;
+extern textures img_named_suika;
+extern textures img_named_reimu;
+extern textures img_named_alice;
+extern textures img_named_udonge;
+extern textures img_named_kaguya;
 
 
 

@@ -155,6 +155,7 @@ item_infor& CreateFloorItem(int floor, item_infor* item_)
 			rand_ -= (*it)->percent;
 	
 	}
+	return (*item_);
 
 }
 

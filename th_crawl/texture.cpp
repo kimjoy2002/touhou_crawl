@@ -281,6 +281,61 @@ textures img_mons_support_rabbit(&texture_monster01, 141, 255);
 textures img_mons_magic_rabbit(&texture_monster01, 142, 255);
 
 
+textures img_named_seiran(&texture_monster01, 147, 255);
+textures img_named_ringo(&texture_monster01, 148, 255);
+textures img_mons_fairy_green_hero(&texture_monster01, 149, 255);
+textures img_mons_fairy_green_socerer(&texture_monster01, 150, 255);
+textures img_mons_fairy_green_himawari(&texture_monster01, 151, 255);
+textures img_mons_moon_rabbit_attack(&texture_monster01, 152, 255);
+textures img_mons_moon_rabbit_supporter(&texture_monster01, 153, 255);
+textures img_mons_moon_rabbit_elite(&texture_monster01, 154, 255);
+textures img_mons_mac(&texture_monster01, 155, 255);
+textures img_mons_nightmare(&texture_monster01, 156, 255);
+textures img_mons_lunatic(&texture_monster01, 157, 255);
+textures img_mons_haunt[] = 
+{
+	textures(&texture_monster01, 158, 255),
+	textures(&texture_monster01, 159, 255),
+	textures(&texture_monster01, 160, 255)
+};
+textures img_mons_fire_car(&texture_monster01, 161, 255);
+textures img_mons_hell_spider(&texture_monster01, 162, 255);
+textures img_mons_blood_haunt(&texture_monster01, 163, 255);
+textures img_mons_hell_dog(&texture_monster01, 164, 255);
+textures img_mons_flower_tank[] = 
+{
+	textures(&texture_monster01, 165, 255),
+	textures(&texture_monster01, 166, 255)
+};
+textures img_mons_evil_eye_tank(&texture_monster01, 167, 255);
+textures img_mons_snow_girl(&texture_monster01, 168, 255);
+textures img_named_letty(&texture_monster01, 169, 255);
+textures img_named_yorihime(&texture_monster01, 170, 255);
+textures img_named_toyohime(&texture_monster01, 171, 255);
+textures img_named_utsuho(&texture_monster01, 172, 255);
+textures img_named_suika(&texture_monster01, 173, 255);
+textures img_named_reimu(&texture_monster01, 174, 255);
+textures img_named_alice(&texture_monster01, 175, 255);
+textures img_named_udonge(&texture_monster01, 176, 255);
+textures img_named_kaguya(&texture_monster01, 177, 255);
+textures img_mons_nesi(&texture_monster01, 178, 255);
+textures img_mons_sanghai[] = 
+{
+	textures(&texture_monster01, 179, 255),
+	textures(&texture_monster01, 181, 255)
+};
+textures img_mons_hourai[] = 
+{
+	textures(&texture_monster01, 180, 255),
+	textures(&texture_monster01, 182, 255)
+};
+
+
+
+
+
+
+
 textures img_named_rumia(&texture_monster01, 13, 255);
 textures img_named_mistia(&texture_monster01, 14, 255);
 textures img_named_wriggle(&texture_monster01, 15, 255);
@@ -1314,6 +1369,78 @@ int texturetoint(textures* input)
 		return 235;
 	else if(input == &img_blizzard[0])
 		return 236;
+	else if(input == &img_named_seiran)
+		return 237;
+	else if(input == &img_named_ringo)
+		return 238;
+	else if(input == &img_mons_fairy_green_hero)
+		return 239;
+	else if(input == &img_mons_fairy_green_socerer)
+		return 240;
+	else if(input == &img_mons_fairy_green_himawari)
+		return 241;
+	else if(input == &img_mons_moon_rabbit_attack)
+		return 242;
+	else if(input == &img_mons_moon_rabbit_supporter)
+		return 243;
+	else if(input == &img_mons_moon_rabbit_elite)
+		return 244;
+	else if(input == &img_mons_mac)
+		return 245;
+	else if(input == &img_mons_nightmare)
+		return 246;
+	else if(input == &img_mons_lunatic)
+		return 247;
+	else if(input == &img_mons_haunt[0])
+		return 248;
+	else if(input == &img_mons_haunt[1])
+		return 249;
+	else if(input == &img_mons_haunt[2])
+		return 250;
+	else if(input == &img_mons_fire_car)
+		return 251;
+	else if(input == &img_mons_hell_spider)
+		return 252;
+	else if(input == &img_mons_blood_haunt)
+		return 253;
+	else if(input == &img_mons_hell_dog)
+		return 254;
+	else if(input == &img_mons_flower_tank[0])
+		return 255;
+	else if(input == &img_mons_flower_tank[1])
+		return 256;
+	else if(input == &img_mons_evil_eye_tank)
+		return 257;
+	else if(input == &img_mons_snow_girl)
+		return 258;
+	else if(input == &img_named_letty)
+		return 259;
+	else if(input == &img_named_yorihime)
+		return 260;
+	else if(input == &img_named_toyohime)
+		return 261;
+	else if(input == &img_named_utsuho)
+		return 262;
+	else if(input == &img_named_suika)
+		return 263;
+	else if(input == &img_named_reimu)
+		return 264;
+	else if(input == &img_named_alice)
+		return 265;
+	else if(input == &img_named_udonge)
+		return 266;
+	else if(input == &img_named_kaguya)
+		return 267;
+	else if(input == &img_mons_nesi)
+		return 268;
+	else if(input == &img_mons_sanghai[0])
+		return 269;
+	else if(input == &img_mons_sanghai[1])
+		return 270;
+	else if(input == &img_mons_hourai[0])
+		return 271;
+	else if(input == &img_mons_hourai[1])
+		return 272;
 	else
 		return 0;
 }
@@ -1795,6 +1922,78 @@ textures* inttotexture(int input)
 		return &img_item_rune;
 	case 236:
 		return &img_blizzard[0];
+	case 237:
+		return &img_named_seiran;
+	case 238:
+		return &img_named_ringo;
+	case 239:
+		return &img_mons_fairy_green_hero;
+	case 240:
+		return &img_mons_fairy_green_socerer;
+	case 241:
+		return &img_mons_fairy_green_himawari;
+	case 242:
+		return &img_mons_moon_rabbit_attack;
+	case 243:
+		return &img_mons_moon_rabbit_supporter;
+	case 244:
+		return &img_mons_moon_rabbit_elite;
+	case 245:
+		return &img_mons_mac;
+	case 246:
+		return &img_mons_nightmare;
+	case 247:
+		return &img_mons_lunatic;
+	case 248:
+		return &img_mons_haunt[0];
+	case 249:
+		return &img_mons_haunt[1];
+	case 250:
+		return &img_mons_haunt[2];
+	case 251:
+		return &img_mons_fire_car;
+	case 252:
+		return &img_mons_hell_spider;
+	case 253:
+		return &img_mons_blood_haunt;
+	case 254:
+		return &img_mons_hell_dog;
+	case 255:
+		return &img_mons_flower_tank[0];
+	case 256:
+		return &img_mons_flower_tank[1];
+	case 257:
+		return &img_mons_evil_eye_tank;
+	case 258:
+		return &img_mons_snow_girl;
+	case 259:
+		return &img_named_letty;
+	case 260:
+		return &img_named_yorihime;
+	case 261:
+		return &img_named_toyohime;
+	case 262:
+		return &img_named_utsuho;
+	case 263:
+		return &img_named_suika;
+	case 264:
+		return &img_named_reimu;
+	case 265:
+		return &img_named_alice;
+	case 266:
+		return &img_named_udonge;
+	case 267:
+		return &img_named_kaguya;
+	case 268:
+		return &img_mons_nesi;
+	case 269:
+		return &img_mons_sanghai[0];
+	case 270:
+		return &img_mons_sanghai[1];
+	case 271:
+		return &img_mons_hourai[0];
+	case 272:
+		return &img_mons_hourai[1];
 	default:
 		return &img_mons_default;
 	}

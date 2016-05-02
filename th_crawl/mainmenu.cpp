@@ -459,7 +459,7 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'p',5,temp,true,select_job,15);
 	temp = "광신도: 특정 신에 광적인 믿음을 가지고 있는 신자들.\n";
-	temp += "텐시를 믿고 시작한다.\n\n\n";
+	temp += "텐시 또는 유카리를 믿고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'q',5,temp,true,select_job,16);
 	temp = "암살자: 은신술과 암살의 대가들로 적을 비겁하게 기습한다.\n";

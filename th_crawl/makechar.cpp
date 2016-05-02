@@ -95,6 +95,32 @@ skill_type WeaponSelect(int num)
 }
 
 
+god_type FanaticSelect()
+{
+		SetText() = "누구의 광신도가 될건가?\n\n\n";
+		SetText() += "a - 텐시\n";
+		SetText() += "b - 유카리\n";
+
+		while(1)
+		{
+			int select = waitkeyinput(true);
+			if(select>='a' && select<='b')
+			{
+				switch(select)
+				{
+				case 'a':
+					return GT_TENSI;
+				case 'b':
+					return GT_YUKARI;
+				}
+				break;
+			}
+		}
+		return GT_TENSI;
+}
+
+
+
 void MakeStartItem(start_item_type select_, int num)
 {
 	item_infor t;
@@ -673,7 +699,7 @@ void SetJob(job_type select_, string name_)
 			MakeStartItem(SIT_ARMOUR_0,1);
 		else
 			MakeStartItem(SIT_ROBE,1);
-		you.Belief(GT_TENSI,35,false);
+		you.Belief(FanaticSelect(),35,false);
 		you.GiveSkillExp(SKT_FIGHT,90,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);

@@ -216,6 +216,8 @@ extern textures img_play_marisa;
 extern textures img_play_sanae;
 extern textures img_play_momizi;
 extern textures img_play_normal;
+extern textures img_play_yamame;
+extern textures img_play_mokou[];
 
 extern textures img_item_armor_robe;
 extern textures img_item_armor_cloak;

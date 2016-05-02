@@ -54,12 +54,14 @@ public:
 	bool isFloor(){return (tile>=DG_FLOOR && tile<=DG_FLOOR_END);};
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
 	bool isStair(){return (tile>=DG_DOWN_STAIR && tile<=DG_RETURN_STAIR);};
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
+	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color, int count_)
 	{
 		bool temp;
 		temp = img_dungeon01[tile].draw(pSprite,x,y,color);
 		if(temp && tile>= DG_FLOOR_OBJECT && tile<=DG_OBJECT_END)
-			temp = img_dungeon_object[tile-DG_FLOOR_OBJECT].draw(pSprite,x,y,color);
+		{
+			temp = img_dungeon_object[tile-DG_FLOOR_OBJECT][count_%3].draw(pSprite,x,y,color);
+		}
 		return temp;
 	}
 	dot_tile_type GetDot();

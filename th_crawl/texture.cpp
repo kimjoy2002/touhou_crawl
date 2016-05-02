@@ -122,55 +122,55 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_item01, 167, 255)
 };
 
-textures img_dungeon_object[] = {textures(&texture_item01, 4, 255),
-				textures(&texture_item01, 5, 255),//계단내
-				textures(&texture_item01, 6, 255),//계단올
-				textures(&texture_item01, 213, 255),//계단신전
-				textures(&texture_item01, 213, 255),//계단안개
-				textures(&texture_item01, 213, 255),//계단요괴
-				textures(&texture_item01, 213, 255),//계단홍마
-				textures(&texture_item01, 213, 255), //계단홍마도서관
-				textures(&texture_item01, 213, 255), //계단홍마지하
-				textures(&texture_item01, 213, 255), //계단죽림
-				textures(&texture_item01, 213, 255), //계단영원정
-				textures(&texture_item01, 213, 255), //계단지저
+textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255)},
+				{textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255)},//계단내
+				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단올
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단신전
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단안개
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단요괴
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단홍마
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단홍마도서관
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단홍마지하
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단죽림
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단영원정
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단지저
 				
-				textures(&texture_item01, 213, 255),//계단윳쿠리
-				textures(&texture_item01, 213, 255), //계단짐승길
-				textures(&texture_item01, 213, 255), //계단꿈
-				textures(&texture_item01, 213, 255), //계단달
-				textures(&texture_item01, 213, 255), //계단마계
-				textures(&texture_item01, 213, 255), //계단히쿠레이
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단윳쿠리
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단짐승길
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단꿈
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단달
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단마계
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단히쿠레이
 
-				textures(&texture_item01, 6, 255),//계단
-				textures(&texture_item01, 120, 255), //시키
-				textures(&texture_item01, 121, 255), //뱌쿠렌
-				textures(&texture_item01, 122, 255), //카나코
-				textures(&texture_item01, 123, 255), //스와코
-				textures(&texture_item01, 124, 255), //미노리코
-				textures(&texture_item01, 125, 255), //미마
-				textures(&texture_item01, 126, 255), //신키
-				textures(&texture_item01, 127, 255),  //유우기
-				textures(&texture_item01, 128, 255), //시즈하
-			    textures(&texture_item01, 129, 255), //히나
-			    textures(&texture_item01, 130, 255), //유카리
-			    textures(&texture_item01, 131, 255), //에이린
-				textures(&texture_item01, 132, 255), //유유코
-			    textures(&texture_item01, 133, 255), //사토리
-			    textures(&texture_item01, 134, 255), //텐시
-				textures(&texture_item01, 2, 255),
+				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단
+				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)}, //시키
+				{textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255)}, //뱌쿠렌
+				{textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255)}, //카나코
+				{textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255)}, //스와코
+				{textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255)}, //미노리코
+				{textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255)}, //미마
+				{textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255)}, //신키
+				{textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255)},  //유우기
+				{textures(&texture_item01, 128, 255),textures(&texture_item01, 220, 255),textures(&texture_item01, 221, 255)}, //시즈하
+			    {textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255)}, //히나
+			    {textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255)}, //유카리
+			    {textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255)}, //에이린
+				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //유유코
+			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //사토리
+			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 
 								
-				textures(&texture_item01, 2, 255), //벽
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 2, 255),
-				textures(&texture_item01, 168, 255),
-				textures(&texture_item01, 174, 255),
-				textures(&texture_item01, 2, 255)
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //벽
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255)},
+				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
 };
 
 
@@ -398,6 +398,12 @@ textures img_play_marisa(&texture_players01, 1, 255);
 textures img_play_sanae(&texture_players01, 2, 255);
 textures img_play_momizi(&texture_players01, 3, 255);
 textures img_play_normal(&texture_players01, 4, 255);
+textures img_play_yamame(&texture_players01, 5, 255);
+textures img_play_mokou[] = {
+		textures(&texture_players01, 6, 255),
+		textures(&texture_players01, 7, 255),
+		textures(&texture_players01, 8, 255)
+};
 
 
 textures img_item_armor_robe(&texture_item01, 7, 255);
@@ -1441,6 +1447,14 @@ int texturetoint(textures* input)
 		return 271;
 	else if(input == &img_mons_hourai[1])
 		return 272;
+	else if(input == &img_play_yamame)
+		return 273;
+	else if(input == &img_play_mokou[0])
+		return 274;
+	else if(input == &img_play_mokou[1])
+		return 275;
+	else if(input == &img_play_mokou[2])
+		return 276;
 	else
 		return 0;
 }
@@ -1994,6 +2008,14 @@ textures* inttotexture(int input)
 		return &img_mons_hourai[0];
 	case 272:
 		return &img_mons_hourai[1];
+	case 273:
+		return &img_play_yamame;
+	case 274:
+		return &img_play_mokou[0];
+	case 275:
+		return &img_play_mokou[1];
+	case 276:
+		return &img_play_mokou[2];
 	default:
 		return &img_mons_default;
 	}

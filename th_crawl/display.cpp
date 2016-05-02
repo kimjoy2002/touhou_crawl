@@ -1143,13 +1143,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					}
 					
 					if(!env[current_level].isExplore(i+x_,j+y_))
-						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
+						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255),you.turn);
 					else if(env[current_level].dgtile[i+x_][j+y_].flag & FLAG_LIGHT)
-						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,0));
+						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,0),you.turn);
 					else if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && sight)
-						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255));
+						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255),you.turn);
 					else
-						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(128,128,128));
+						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(128,128,128),you.turn);
 
 					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_SILENCE)
 						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(128,0,255,255));

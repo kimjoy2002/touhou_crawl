@@ -2119,9 +2119,8 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
-			order->damage(temp_att, true);
-
+			//attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
+			//order->damage(temp_att, true);
 		}
 		return true;
 	}

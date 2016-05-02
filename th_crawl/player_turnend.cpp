@@ -764,18 +764,10 @@ interupt_type players::SetInter(interupt_type inter_)
 	return inter;
 }
 
-void GameOver()
-{			
-	if(game_over)
-		return;
 
-	if(you.dead_reason != DR_ESCAPE)
-		printlog("죽었다...",true,false,false,CL_normal);
-	else
-		printlog("던전을 탈출했다.",true,false,false,CL_normal);
 
-	printlog("------------다음장------------",true,false,false,CL_normal);
-
+void deadlog()
+{
 	{
 		char temp[200];	
 		if(you.dead_order && you.dead_order->order)
@@ -792,6 +784,21 @@ void GameOver()
 			sprintf_s(temp,200,"죽었다.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
+}
+
+void GameOver()
+{			
+	if(game_over)
+		return;
+
+	if(you.dead_reason != DR_ESCAPE)
+		printlog("죽었다...",true,false,false,CL_normal);
+	else
+		printlog("던전을 탈출했다.",true,false,false,CL_normal);
+
+	printlog("------------다음장------------",true,false,false,CL_normal);
+
+	deadlog();
 
 
 	if(!tutorial)

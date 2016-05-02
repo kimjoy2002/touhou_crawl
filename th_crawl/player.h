@@ -373,6 +373,7 @@ public:
 	int GetResist();
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
+	int DeleteProperty(tribe_proper_type type_);
 	bool Teleport();
 	bool Blink(int time_);
 	bool control_blink(const coord_def &c);

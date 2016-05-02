@@ -933,4 +933,22 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
+	else if(name_.compare("¸ðÄÚ¿ì")==0)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_FIGHT].aptit +=2;
+			you.skill[SKT_FIRE].aptit +=2;
+		}
+		else
+		{					
+			you.SetProperty(TPT_9_LIFE,1);
+			you.SetProperty(TPT_18_LIFE,1);
+
+
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
+
+	}
 }

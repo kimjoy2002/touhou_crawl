@@ -1033,6 +1033,8 @@ interupt_type players::HpRecover(int delay_)
 	}
 	return IT_NONE;
 }
+bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
+void deadlog();
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	prev_hp = hp;
@@ -1058,15 +1060,38 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 	}	
 	if(hp<=0)
 	{
-		if(wizard_mode)
+		if(GetProperty(TPT_9_LIFE))
 		{
+			
+			deadlog();
+			printlog("리저렉션!",true,false,false,CL_white_blue);
+			skill_suicide_bomb(level*8,false,&you,position);
+			MoreWait();
+			hp = max_hp;
+			mp = max_mp;
+			image = &img_play_mokou[1];
+			DeleteProperty(TPT_9_LIFE);
+		}
+		else if(GetProperty(TPT_18_LIFE))
+		{			
+			deadlog();
+			printlog("리저렉션!",true,false,false,CL_white_blue);
+			skill_suicide_bomb(level*8,false,&you,position);
+			MoreWait();
+			hp = max_hp;
+			mp = max_mp;
+			image = &img_play_mokou[2];
+			DeleteProperty(TPT_18_LIFE);
+		}
+		else if(wizard_mode)
+		{
+			MoreWait();
 			printlog("죽어?",true,false,false,CL_help);
 			wizard_mode = true;
 			int key_ = waitkeyinput();
 			switch(key_)
 			{
 			case 'Y':
-			case 'y':
 				break;
 			default:
 				hp = max_hp;
@@ -2151,7 +2176,22 @@ int players::GetProperty(tribe_proper_type type_)
 	for(auto it = property_vector.begin(); it != property_vector.end(); it++)
 	{
 		if(it->id == type_)
+		{
 			return it->value;
+		}
+	}
+	return 0;
+}
+int players::DeleteProperty(tribe_proper_type type_)
+{
+	for(auto it = property_vector.begin(); it != property_vector.end(); it++)
+	{
+		if(it->id == type_)
+		{
+			int temp = it->value;
+			property_vector.erase(it);
+			return temp;
+		}
 	}
 	return 0;
 }
@@ -2259,6 +2299,20 @@ void players::LevelUp(bool speak_)
 				you.StatUpDown(1,STAT_INT);
 		}
 	}
+
+	if(level == 9 && GetProperty(TPT_9_LIFE))
+	{
+		printlog("당신은 충분히 성장하여 부활능력을 하나 잃었다.",true,false,false,CL_small_danger);
+		image = &img_play_mokou[1];
+		DeleteProperty(TPT_9_LIFE);
+	}
+	if(level == 18 && GetProperty(TPT_18_LIFE))
+	{
+		printlog("당신은 충분히 성장하여 부활능력을 모두 잃었다.",true,false,false,CL_small_danger);
+		image = &img_play_mokou[2];
+		DeleteProperty(TPT_18_LIFE);
+	}
+
 	CalcuHP();
 	max_mp += 1;
 	mp += 1;

@@ -31,6 +31,8 @@ enum tribe_proper_type
 	TPT_HP,
 	TPT_INVISIBLE,
 	TPT_POWER_SAVE,
+	TPT_9_LIFE,
+	TPT_18_LIFE,
 	TPT_MAX
 };
 

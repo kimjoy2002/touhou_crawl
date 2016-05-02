@@ -91,6 +91,10 @@ string tribe_property::GetName()
 		return "영구투명";
 	case TPT_POWER_SAVE:
 		return "파워보존";
+	case TPT_9_LIFE:
+		return "리저렉션";
+	case TPT_18_LIFE:
+		return "리저렉션";
 	}
 	return "버그특성";
 }
@@ -154,6 +158,10 @@ string tribe_property::GetInfor()
 		return "무의식인 당신은 항상 투명해져있다.";
 	case TPT_POWER_SAVE:
 		return "당신은 P의 자연소모가 느리다.";
+	case TPT_9_LIFE:
+		return "당신은 9레벨이전에 한번 부활할 수 있다.";
+	case TPT_18_LIFE:
+		return "당신은 18레벨이전에 한번 부활할 수 있다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -199,6 +207,10 @@ string tribe_property::GetDetail()
 		return "비전투중일때는 당신은 상시 투명을 유지한다.\n만약 당신이 공격을 시도하면 투명이 풀린다.";
 	case TPT_POWER_SAVE:
 		return "턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.";
+	case TPT_9_LIFE:
+		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 9가 되면 사라진다.";
+	case TPT_18_LIFE:
+		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 18이 되면 사라진다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }

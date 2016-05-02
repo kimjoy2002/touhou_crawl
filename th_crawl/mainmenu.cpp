@@ -234,6 +234,13 @@ bool select_named(int value_)
 		you.char_name.name_type = false;
 		you.image = &img_named_koishi;
 		break;
+	case 5:
+		you.tribe = TRI_HUMAN;
+		you.job = JOB_MONK;
+		you.char_name.name = "모코우";
+		you.char_name.name_type = false;
+		you.image = &img_play_mokou[0];
+		break;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() += "\n\n\nKill Them All!\n";
@@ -275,12 +282,12 @@ void start_mainmenu()
 	m_mgr.menu_input_puls(1,VK_ESCAPE,0,"",false,NULL,0);
 
 	
-	temp = "캐릭터를 선택합니다.\n\n\n\n";
-	temp += "a - 인간 무녀 레이무\n\n";
-	temp += "b - 인간 마법사 마리사\n\n";
+	temp = "캐릭터를 선택합니다. (모든 동방 캐릭터는 레벨3부터 시작합니다)\n\n\n\n";
+	temp += "a - 인간 무녀 레이무             e - 요괴 암살자 코이시\n\n";
+	temp += "b - 인간 마법사 마리사           f - 인간 격투가 모코우\n\n";
 	temp += "c - 인간 무녀 사나에\n\n";
 	temp += "d - 백랑텐구 전사 모미지\n\n";	
-	temp += "e - 요괴 암살자 코이시\n\n";	
+	temp += "\n\n";	
 	m_mgr.menu_puls(2,temp);
 	temp = " : 안티패턴 초 유도형. 비겁한 호밍무녀로 모든 적을 섬멸하자!\n";
 	temp += " 적성보너스) 탄막적성 +3, 회피적성 +3\n";
@@ -314,6 +321,13 @@ void start_mainmenu()
 	temp += " x를 누른 상태에서 몬스터위에 커서를 두고 v를 누르면 정보가 뜹니다. 투명보기가 있는지 확인하세요!\n\n\n";	
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(2,'e',2,temp,true,select_named,4);
+	temp = " : 격열! 인간 인페르노. 죽어도 살아나서 돌파하라!\n";
+	temp += " 적성보너스) 전투적성 +2, 화염마법정석 +2\n";
+	temp += " 보너스) 2번까지 부활가능(9레벨, 18레벨에 다다르면 삭제)\n\n";
+	temp += " 초보자팁) 죽어도 2번에 한해서 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n";
+	temp += " 죽지않고 9레벨, 18레벨에 다다르면 부활능력이 1개씩 사라집니다. 그러니 죽는 것에 두려워하지마세요!\n\n\n";	
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(2,'f',2,temp,true,select_named,5);
 	m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 	

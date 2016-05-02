@@ -117,7 +117,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 		}
 	}
 }
-void PickUpNum(list<item>::iterator it, int num, bool no_delay)
+bool PickUpNum(list<item>::iterator it, int num, bool no_delay)
 {
 	while(num>0)
 	{
@@ -130,15 +130,20 @@ void PickUpNum(list<item>::iterator it, int num, bool no_delay)
 				env[current_level].DeleteItem(temp);
 				if(!no_delay)
 				{
+					bool item_delete= false;
 					you.time_delay+=you.GetNormalDelay();
-					you.TurnEnd();
+					you.TurnEnd(&item_delete);
+					if(item_delete)
+						return true; //아이템을 줍는 도중 아이템이 삭제되었다.
 				}
+				return true;
 			}
 			else
-				return;
+				return false;
 			num--;
 		}
 	}
+	return false;
 }
 
 int isPick(const item* t)
@@ -194,6 +199,8 @@ void iteminfor_pick()
 						env[current_level].DeleteItem(temp);
 						you.time_delay+=you.GetNormalDelay();
 						you.TurnEnd();
+						it = env[current_level].GetPositiontoitem(you.position);
+						end = env[current_level].GetPositiontoitemend(you.position);
 					}
 					else
 						break;

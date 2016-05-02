@@ -1105,7 +1105,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 
 
-	if(s_graze && randA(3) == 0)
+	if(s_graze && randA(5) == 0)
 	{
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
 			graze_ = true;
@@ -1169,7 +1169,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				{
 					a.order->HpUpDown(damage_/3,DR_EFFECT);	
 					if(sight_)
-						printarray(true,false,false,CL_normal,4,name_.name.c_str(),name_.name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
+						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
 			
 				}
 			}
@@ -3173,7 +3173,7 @@ int monster::GetEv()
 }
 bool monster::isSaveSummoner(unit* order)
 {
-	if(id == MON_DAUZING){
+	if(id == MON_DAUZING || id == MON_HOURAI || id == MON_FAKE_HOURAI){
 		if(distan_coord(position, order->position) <=2)
 		{
 			if(sm_info.parent_map_id == order->GetMapId() && randA(1)){

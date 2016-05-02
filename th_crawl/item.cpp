@@ -863,7 +863,7 @@ int item::action(int delay_)
 	}
 
 	prev_position = position;
-	return 0;
+	return 1;
 }
 
 bool item::offsetmove(const coord_def &c)

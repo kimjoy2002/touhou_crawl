@@ -385,7 +385,7 @@ public:
 	vector<monster>::iterator GetTargetIter();
 	interupt_type resetLOS(bool speak_ = true);
 	void MakeLOSPattern();
-	interupt_type TurnEnd(); //0은 딱히일없고, 1이상부터 인터럽트
+	interupt_type TurnEnd(bool *item_delete_ = NULL); //0은 딱히일없고, 1이상부터 인터럽트
 	bool TraningStealth();
 	int additem(item *t, bool speak_ = true);
 	bool DeleteItem(const list<item>::iterator it, int num_ = 0);
@@ -455,7 +455,7 @@ void Wide_Search(); //넓은범위를 탐색한다.
 void PickUp(); //줍기
 void PickUpAll(list<item>::iterator it);
 void PickUpSelect(list<item>::iterator it, int num);
-void PickUpNum(list<item>::iterator it, int num, bool no_delay);
+bool PickUpNum(list<item>::iterator it, int num, bool no_delay);
 int isPick(const item *t); //1 리턴이 ok. 마이너스가 안됨
 void iteminfor(bool gameover = false);
 void iteminfor_pick();

@@ -75,6 +75,9 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 	if(resist_[RST_ICE] && target_->ice_resist<=1)
 		return true;
 
+	if(!resist_[RST_POISON] && !resist_[RST_ELEC] && !resist_[RST_FIRE] && !resist_[RST_ICE])
+		return true; //무속성공격
+
 	return false; 
 
 }
@@ -233,9 +236,9 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	{
 		beam_iterator beam(order->position,order->position);
 		
-		int max_length_ = SpellFlagCheck(skill, S_FLAG_PENETRATE)?SpellLength(skill):beam.GetMaxLength();
 		if(!CheckThrowPath(order->position,target, beam))
 			return false;
+		int max_length_ = SpellFlagCheck(skill, S_FLAG_PENETRATE)?SpellLength(skill):beam.GetMaxLength();
 		
 		for(beam.init();max_length_>0/*!beam.end()*/;beam++)
 		{
@@ -308,7 +311,9 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 		{
 			int flag_=M_FLAG_SUMMON;
 			if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
+			{
 				flag_ |= M_FLAG_ALLY;
+			}
 			summon_info s_(order->GetMapId(),kind_,max_num_);
 			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //파워에 따라서 조정하기
 			//unit* unit_ = env[current_level].isMonsterPos(target.x,target.y,order);
@@ -328,7 +333,7 @@ bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(1+pow/3),1+pow/3,17,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randA_1(2+pow/3),2+pow/3,17,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -344,7 +349,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,8+pow/8),2*(8+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -377,7 +382,7 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,12+pow/6),12+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("불꽃",true));
+		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("불꽃",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -411,7 +416,7 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,8+pow/6),8+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
+		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -428,8 +433,8 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
-		int damage_ = 13+pow/5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,16+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
+		int damage_ = 14+pow/5-mon_panlty_;
+		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -448,7 +453,7 @@ bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{	
-		attack_infor temp_att(randC(2,12+pow/6),2*(12+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
+		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
 		target_unit->damage(temp_att, true);
 		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("냉기",false));
 		//if(short_)
@@ -463,7 +468,7 @@ bool skill_sting(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,5+pow/6),5+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor("독탄막",true));
+		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor("독탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -524,7 +529,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,4+pow/9),3*(4+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉동빔",true));
+		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉동빔",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -653,7 +658,7 @@ bool skill_smite(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
-		attack_infor temp_att(randA_1(10+pow/8),10+pow/8,99,order,order->GetParentType(),ATT_SMITE,name_infor("강타",false));
+		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor("강타",false));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -796,7 +801,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randA_1(9+power/6),9+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -856,7 +861,7 @@ bool skill_elec_passive(int power, unit* order)
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randA_1(8+power/6),8+power/6,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randA_1(9+power/6),9+power/6,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -922,7 +927,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randC(2,9+power*3/10),2*(9+power*3/10),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randC(2,9+power*3/9),2*(9+power*3/9),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		if(ThrowShock(21,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -1087,7 +1092,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int mon_panlty_ = order->isplayer()?0:1;//몬스터가 쓸때 패널티
-		int damage_ = 5+pow/3-mon_panlty_;
+		int damage_ = 6+pow/3-mon_panlty_;
 		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
@@ -1111,7 +1116,7 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("화염구",false));
+			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("화염구",false));
 			BaseBomb(pos, &img_fog_fire[0],temp_att);
 		}
 		order->SetParadox(0); 
@@ -1125,7 +1130,7 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
-		int damage_ = 9+pow/7-mon_panlty_;
+		int damage_ = 9+pow/6-mon_panlty_;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("화염",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -1143,7 +1148,7 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
-		int damage_ = 9+pow/7-mon_panlty_;
+		int damage_ = 9+pow/6-mon_panlty_;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉기",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -1160,7 +1165,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,6+pow/7),3*(6+pow/7),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor("맹독",false));
+		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor("맹독",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1648,7 +1653,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(5,9+pow/20),5*(9+pow/20),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
+		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
 		ThrowSector(rand_int(10,15),beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
@@ -1828,7 +1833,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(12+pow/25),12+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -1873,7 +1878,7 @@ bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
-		int damage_ = 17+pow/5.5-mon_panlty_;
+		int damage_ = 19+pow/5.5-mon_panlty_;
 		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("돌멩이",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -1959,7 +1964,7 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,15+pow/6),3*(15+pow/6),13+pow/20,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
+		beam_infor temp_infor(randC(3,16+pow/5.5),3*(16+pow/5.5),13+pow/20,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2162,7 +2167,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{		
 		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//몬스터가 쓸때 패널티
-		int damage_ = (11+power/6)*mon_panlty_;
+		int damage_ = (13+power/6)*mon_panlty_;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("광탄",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -2294,7 +2299,7 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
-			int att_ = 12+pow/15;
+			int att_ = 13+pow/15;
 				
 			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
 			it->damage(temp_att, true);
@@ -2677,7 +2682,7 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
-		int damage_ = 14+power/8;
+		int damage_ = 20+power/8;
 		int reduce_damage_ = damage_;
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
@@ -2802,7 +2807,7 @@ bool skill_fake_dolls_war(int power, bool short_, unit* order, coord_def target)
 		int id_ = randA(1)?MON_FAKE_SANGHAI:MON_FAKE_HOURAI;
 		if(monster *mon_ = BaseSummon(id_, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_FAKE_DOLLS_WAR, GetSummonMaxNumber(SPL_FAKE_DOLLS_WAR)))
 		{
-			if(id_ == MON_HOURAI)
+			if(id_ == MON_FAKE_HOURAI)
 				order->SetSaved(true);
 			return_ = true;
 		}
@@ -2902,11 +2907,11 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_HASTE,25));
 		break;
 	case MON_ALICEYUKKURI:
-		list->push_back(spell(SPL_FAKE_DOLLS_WAR,30));
+		list->push_back(spell(SPL_FAKE_DOLLS_WAR,40));
 		break;
 	case MON_KATPA_WATER_WIZARD:
-		list->push_back(spell(SPL_FROST,20));
-		list->push_back(spell(SPL_ICE_BOLT,10));
+		list->push_back(spell(SPL_FROST,15));
+		list->push_back(spell(SPL_ICE_BOLT,20));
 		list->push_back(spell(SPL_BLINK,10));
 		list->push_back(spell(SPL_INVISIBLE,7));
 		break;
@@ -2946,7 +2951,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_NITORI:
-		list->push_back(spell(SPL_WATER_CANNON,20));
+		list->push_back(spell(SPL_WATER_CANNON,30));
 		list->push_back(spell(SPL_INVISIBLE,15));
 		list->push_back(spell(SPL_MON_WATER_GUN,25));
 		break;
@@ -3009,9 +3014,9 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
 		list->push_back(spell(SPL_INVISIBLE,5));
-		list->push_back(spell(SPL_MAGIC_TANMAC,20));
+		list->push_back(spell(SPL_MAGIC_TANMAC,15));
 		list->push_back(spell(SPL_SLOW,10));
-		list->push_back(spell(SPL_VENOM_BOLT,15));		
+		list->push_back(spell(SPL_VENOM_BOLT,20));		
 		break;
 	case MON_HOBGOBRIN_TEMP:
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,20)); //악마소환으로 바꾸기
@@ -3137,8 +3142,8 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_FAIRY_SUN_FLOWER:
 		list->push_back(spell(SPL_SMITE,15));
-		list->push_back(spell(SPL_HASTE_ALL,15));
-		list->push_back(spell(SPL_HEAL_ALL,20));
+		list->push_back(spell(SPL_HASTE_ALL,20));
+		list->push_back(spell(SPL_HEAL_ALL,25));
 		break;
 	case MON_MOON_RABIT_SUPPORT:
 		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
@@ -3168,7 +3173,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 	case MON_HELL_SPIDER:
 		break;
 	case MON_BLOOD_HAUNT:
-		list->push_back(spell(SPL_BLOOD_SMITE,15));
+		list->push_back(spell(SPL_BLOOD_SMITE,30));
 		break;
 	case MON_HELL_HOUND:
 		list->push_back(spell(SPL_CALL_HOUND,15));
@@ -3180,7 +3185,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_LUMINUS_STRIKE,15));
 		break;
 	case MON_EVIL_EYE_TANK:
-		list->push_back(spell(SPL_CANNON,15));
+		list->push_back(spell(SPL_CANNON,30));
 		break;
 	case MON_SNOW_GIRL:
 		list->push_back(spell(SPL_FREEZE,20));
@@ -3244,7 +3249,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
 {
-	int power=max(0,min(SpellCap(skill),(order->level-3)*5));
+	int power=max(0,min(SpellCap(skill),(order->level-3)*8));
 	if(pow_ != -1)
 		power = pow_;
 	switch(skill)

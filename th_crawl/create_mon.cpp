@@ -106,7 +106,7 @@ mon_group normal_group[] = //일반몹 그룹
 
 	
 	
-	{ 15,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10,  5}, //초록요정2 파랑요정1 빨강요정1
+	{ 15,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  8,  5}, //초록요정2 파랑요정1 빨강요정1
 	{ 21,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10,  8}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10, 13}, //깃발 요정 호위부대
 	{  3,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  1}, //초록요정 1
@@ -114,24 +114,24 @@ mon_group normal_group[] = //일반몹 그룹
 	{  6,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  3}, //파랑요정 1
 	{  7,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  2}, //초록요정 2~3
 	{  0,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //모옥 1
-	{ 29,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  5}, //주황모옥
-	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  2,  5}, //초록모옥
-	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  2,  5}, //회색모옥
+	{ 29,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  5}, //주황모옥
+	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  5}, //초록모옥
+	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  5}, //회색모옥
 	
 	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  8}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 13}, //깃발 요정 호위부대
 	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  2,  5}, //캇파2~3
-	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 1,  5}, //캇파창병
-	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 10}, //개구리
-	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 15}, //버섯요괴
+	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 2,  5}, //캇파창병
+	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 10}, //개구리
+	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 15}, //버섯요괴
 		
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 13}, //깃발 요정 호위부대
+	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 2, 20}, //요정영웅부대
 	
 	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 5, 13}, //큰두꺼비
-	{ 65,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 1, 20}, //요정영웅부대
 
-	{ 66,  MISTY_LAKE_LEVEL+4,  MISTY_LAKE_LEVEL+4, 1, 20}, //요정소서러
-	{ 67,  MISTY_LAKE_LEVEL+4,  MISTY_LAKE_LEVEL+4, 1, 25}, //요정해바라기
+	{ 66,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 20}, //요정소서러
+	{ 67,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 25}, //요정해바라기
 
 	//YOUKAI_MOUNTAIN_LEVEL
 
@@ -169,7 +169,7 @@ mon_group normal_group[] = //일반몹 그룹
 	
 	//SCARLET_LEVEL
 	{ 51,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 15,  6}, //메이드요정3~4
-	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 15,  16}, //홉고블린 소부대 
+	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+2, 15,  16}, //홉고블린 소부대 
 	{ 49,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 메이드2기
 	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 1,  16}, //홉고블린 서기
 	

@@ -596,8 +596,14 @@ int Player_Move(const coord_def &c)
 					}
 					else
 					{
-						PickUpNum(temp,1,false);
+						if(!PickUpNum(temp,1,false))
+							break;
 						pick_ups = true;
+						{ //아이템을 주울때 P가 사라지면 튕길 가능성이 있다.
+							it = env[current_level].item_list.begin();
+							num = 0;
+						}
+
 					}
 				}
 				else if(num)
@@ -1147,17 +1153,20 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_PANDEMONIUM_STAIR:
 		if(down)
 		{
-			printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
-			switch(waitkeyinput())
+			if(!(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL))
 			{
-			case 'Y':
-			case 'y':
-				enterlog();
-				return true;
-			case 'N':
-			default:
-				printlog(" 좋은 선택이야!",true,false,false,CL_help);
-				return false;
+				printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+				switch(waitkeyinput())
+				{
+				case 'Y':
+				case 'y':
+					enterlog();
+					return true;
+				case 'N':
+				default:
+					printlog(" 좋은 선택이야!",true,false,false,CL_help);
+					return false;
+				}
 			}
 		}
 		break;

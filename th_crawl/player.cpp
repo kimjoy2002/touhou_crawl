@@ -563,6 +563,11 @@ int players::move(short_move x_mov, short_move y_mov)
 				else
 					return 0;
 			}
+			else if(mon_->isUserAlly() && (mon_->flag & M_FLAG_NONE_MOVE))
+			{
+				printlog("이동할 수 없다.",true,false,false,CL_normal);
+				return 0;
+			}
 			attack_type brand_ = ATT_NORMAL;
 			if(equipment[ET_WEAPON])
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
@@ -621,7 +626,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
 				{
 					unit *unit_ = env[current_level].isMonsterPos(rlt->x,rlt->y,&you);
-					if(unit_ && unit_ != mon_ && !mon_->isUserAlly())
+					if(unit_ && unit_ != mon_ && !unit_->isUserAlly())
 					{
 						unit_->damage(temp_att, false);
 
@@ -2139,7 +2144,7 @@ int players::GetInvisible()
 }
 int players::GetResist()
 {
-	return level * 5 + 100+magic_resist;
+	return level * 6 + 100+magic_resist;
 }
 int players::GetProperty(tribe_proper_type type_)
 {

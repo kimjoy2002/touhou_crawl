@@ -54,7 +54,7 @@ const mon_infor mondata[] = {
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,7},
 
-	{MON_CRANE,5,116,name_infor("두루미",false),&img_mons_crane,33,3,10,
+	{MON_CRANE,5,116,name_infor("두루미",false),&img_mons_crane,30,3,10,
 	{8,8,20},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor("공격",true),name_infor("공격",true),name_infor("쪼기",false)},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10},
 
@@ -127,7 +127,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 
 	{MON_HUMAM_SAMURI,8,210,name_infor("사무라이",false),&img_mons_human_samuri,50,6,8,
-	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 
 	{MON_FIREFLY,2,5,name_infor("반딧불이",false),&img_mons_firefly,18,1,10,
@@ -206,25 +206,25 @@ const mon_infor mondata[] = {
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,10,10},
 
-	{MON_MARISAYUKKURI,8,470,name_infor("윳쿠리마리사",false),&img_mons_marisa_yukkuri,70,2,5,
+	{MON_MARISAYUKKURI,8,270,name_infor("윳쿠리마리사",false),&img_mons_marisa_yukkuri,70,2,5,
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15},
 
-	{MON_AYAYUKKURI,12,810,name_infor("키메이마루",false),&img_mons_aya_yukkuri,65,0,16,
+	{MON_AYAYUKKURI,12,610,name_infor("키메이마루",false),&img_mons_aya_yukkuri,65,0,16,
 	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,1,1,4},
 
-	{MON_REMILIAYUKKURI,14,1440,name_infor("윳쿠리레미랴",false),&img_mons_remila_yukkuri,60,5,12,
-	{18,27,0},{ATT_VAMP,ATT_VAMP,ATT_NONE},{name_infor("물기",false),name_infor("물기",false),name_infor()},
+	{MON_REMILIAYUKKURI,14,1040,name_infor("윳쿠리레미랴",false),&img_mons_remila_yukkuri,60,5,12,
+	{18,30,0},{ATT_VAMP,ATT_VAMP,ATT_NONE},{name_infor("물기",false),name_infor("물기",false),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,3,1,8}, //나중에 흡혈 공격으로 바꿈
 
-	{MON_ALICEYUKKURI,11,960,name_infor("윳쿠리앨리스",false),&img_mons_alice_yukkuri,100,7,5,
+	{MON_ALICEYUKKURI,11,660,name_infor("윳쿠리앨리스",false),&img_mons_alice_yukkuri,100,7,5,
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,1,0,15},
 
-	{MON_YOUMUYUKKURI,15,1340,name_infor("윳쿠리요우무",false),&img_mons_default,90,10,10,
-	{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_SPEAK,0,0,9}, //나중에 천천히 추가
+	{MON_YOUMUYUKKURI,15,840,name_infor("윳쿠리요우무",false),&img_mons_default,90,10,10,
+	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,0,0,9}, //나중에 천천히 추가
 
 
 	{MON_YAMABIKO,9,562,name_infor("야마비코",false),&img_mons_yamabiko,75,2,10,
@@ -232,12 +232,12 @@ const mon_infor mondata[] = {
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR,0,0,10},
 
 	{MON_KATPA_SPEAR,9,730,name_infor("캇파 창병",true),&img_mons_new_kappa_spear,70,5,10,
-	{20,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{24,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM,0,0,10},
 
 	{MON_KATPA_WATER_WIZARD,10,860,name_infor("캇파 수술사",false),&img_mons_new_kappa_wizard,45,4,10,
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM,1,0,10},
+	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM | M_FLAG_CAN_SEE_INVI,1,0,10},
 
 	{MON_YAMABUSH_TENGU,11,1062,name_infor("야마부시텐구",false),&img_mons_yamabush_tengu,60,3,10,
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -293,7 +293,7 @@ const mon_infor mondata[] = {
 	
 	{MON_NAZRIN,7,570,name_infor("나즈린",true),&img_named_nazrin,45,0,8,
 	{14,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,1,10},
 
 	{MON_DAUZING,10,1,name_infor("펜듈럼",true),&img_mons_dauzing,80,8,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -356,7 +356,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON,99,1,10},
 	
 	{MON_UNZAN_PUNCH,13,1,name_infor("운잔의 주먹",true),&img_named_unzan_punch[0],30,0,6,
-	{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("스매쉬",false),name_infor(),name_infor()},
+	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("스매쉬",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY  | M_FLAG_PASSED_ALLY,99,1,15},
 	
 	{MON_PACHU,12,1923,name_infor("파츄리",false),&img_named_pachu,70,1,5,
@@ -372,24 +372,24 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
 	{MON_HOBGOBRIN_MAID,8,692,name_infor("홉고블린 메이드",false),&img_mons_hobgobrin_maid,80,6,6,
-	{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
 
 	{MON_HOBGOBRIN_LIBRARIAN,11,1120,name_infor("홉고블린 사서",false),&img_mons_hobgobrin_librarian,70,1,10,
-	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
+	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,1,10},
 	
 	{MON_HOBGOBRIN_TEMP,13,1510,name_infor("홉고블린 악마술사",false),&img_mons_hobgobrin_temp,70,0,6,
 	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,1,10},
 	
-	{MON_MAID_FAIRY,7,171,name_infor("요정 메이드",false),&img_mons_maid_fairy,32,1,12,
-	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_MAID_FAIRY,8,171,name_infor("요정 메이드",false),&img_mons_maid_fairy,32,1,12,
+	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10},
 	
 	{MON_CHUPARCABRA,12,1384,name_infor("추파카브라",false),&img_mons_chuparcabra,122,3,14,
 	{23,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,7},
+	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,1,7},
 	
 	{MON_KOAKUMA,11,1615,name_infor("소악마",false),&img_named_koakuma,60,1,6,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -409,7 +409,7 @@ const mon_infor mondata[] = {
 	
 	{MON_EAGLE,9,921,name_infor("거대 매",false),&img_mons_eagle,80,1,10,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10},
+	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,0,1,10},
 	
 	{MON_TIGER,11,1180,name_infor("호랑이",false),&img_mons_tiger,93,3,6,
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -421,7 +421,7 @@ const mon_infor mondata[] = {
 	
 	{MON_DRAGON_BABY,15,1260,name_infor("용의 새끼",false),&img_mons_dragon_baby,90,10,6,
 	{14,14,27},{ATT_NORMAL,ATT_NONE,ATT_FIRE},{name_infor("공격",true),name_infor("공격",true),name_infor("물기",false)},
-	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL,1,1,10},
+	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,1,1,10},
 	
 	{MON_KASEN,16,5872,name_infor("카센",true),&img_named_kasen,150,5,6,
 	{38,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -513,8 +513,8 @@ const mon_infor mondata[] = {
 	{MON_MAI,14,2432,name_infor("마이",false),&img_mons_mai,130,8,15,
 	{25,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10},		
-	{MON_YUMEKO,16,5672,name_infor("유메코",false),&img_mons_yumeko,180,3,16,
-	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_YUMEKO,19,5672,name_infor("유메코",false),&img_mons_yumeko,250,3,16,
+	{60,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE  | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_FLY,4,1,10},
 
 	{MON_MAGICAL_STAR,4,1,name_infor("옵션",true),&img_mons_option,10,0,5,
@@ -709,11 +709,11 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,10},
 	
-	{MON_FAKE_SANGHAI,9,1,name_infor("모조 상해 인형",true),&img_mons_sanghai[1],40,5,17,
-	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_FAKE_SANGHAI,12,1,name_infor("모조 상해 인형",true),&img_mons_sanghai[1],60,5,17,
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY,99,1,7},
 	
-	{MON_FAKE_HOURAI,9,1,name_infor("모조 봉래 인형",true),&img_mons_hourai[1],80,15,2,
+	{MON_FAKE_HOURAI,12,1,name_infor("모조 봉래 인형",true),&img_mons_hourai[1],90,15,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY ,99,1,10}
 

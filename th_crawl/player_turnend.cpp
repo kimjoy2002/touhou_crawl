@@ -29,7 +29,7 @@ extern players you;
 extern HANDLE mutx;
 
 
-interupt_type players::TurnEnd()
+interupt_type players::TurnEnd(bool *item_delete_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	inter = IT_NONE;
@@ -118,7 +118,11 @@ interupt_type players::TurnEnd()
 			prev_real_turn+=delay_;
 	}
 	ReleaseMutex(mutx);
-	env[current_level].ActionItem(delay_);
+	if(env[current_level].ActionItem(delay_))
+	{//아이템이 도중 삭제되었다.
+		if(item_delete_)
+			(*item_delete_) = true;
+	}
 	if(env[current_level].ActionEvent(delay_))
 			SetInter(IT_EVENT);
 	WaitForSingleObject(mutx, INFINITE);

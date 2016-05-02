@@ -853,16 +853,19 @@ bool environment::ActionSmokeEffect()
 	return false;
 }
 
-void environment::ActionItem(int delay_)
+bool environment::ActionItem(int delay_)
 {
+	bool stop_ = false;
 	list<item>::iterator it;
 	it = item_list.begin();
 	for(;it != item_list.end() ;)
 	{
 		item *temp = &(*it);
 		it++;
-		temp->action(delay_);
+		if(!temp->action(delay_))
+			stop_ = true;
 	}
+	return stop_;
 }
 bool environment::DisableMove(coord_def pos_, bool view_)
 {
@@ -1385,6 +1388,10 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 6;
 		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 			return 7;
+		else if(level_ >= YUKKURI_LEVEL && level_ <= YUKKURI_LAST_LEVEL)
+			return 20;
+		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
+			return 15;
 		else
 			return 9;
 	}
@@ -1394,9 +1401,9 @@ int GetLevelMonsterNum(int level, bool item_)
 		if(level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 			return 0;
 		if(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
-			return 9;
+			return 8;
 		else
-			return 15;
+			return 12;
 	}
 
 }

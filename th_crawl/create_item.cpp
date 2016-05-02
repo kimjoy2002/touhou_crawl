@@ -39,7 +39,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	//{5,0,7,15,1}, //초반 잘나오는 나쁜 두루마리들
 	{6,0,7,80,1}, //초반용 무기
 	{7,0,7,20,1}, //초반용 방어구
-	{8,0,7,15,1}, //초반용 좋은 반지, 아뮬렛들
+	{8,0,7,10,1}, //초반용 좋은 반지, 아뮬렛들
 	{9,0,7,1,1}, //초반용 나쁜 반지, 아뮬렛들
 	{10,0,7,3,1}, //초반용 방패
 	{11,0,7,0,1}, //초반용 빈칸
@@ -57,7 +57,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	//{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반 잘나오는 나쁜 두루마리들
 	{17,5,SCARLET_LEVEL_LAST_LEVEL,80,1}, //중반용 무기들(가끔 저주)
 	{18,5,SCARLET_LEVEL_LAST_LEVEL,20,1}, //중반용 방어구
-	{19,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반용 좋은 반지, 아뮬렛들
+	{19,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{20,5,SCARLET_LEVEL_LAST_LEVEL,1,1}, //중반용 나쁜 반지, 아뮬렛들
 	{22,5,SCARLET_LEVEL_LAST_LEVEL,3,1}, //중반용 방패
 	{23,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //중반용 빈칸
@@ -72,7 +72,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{14,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 두루마리들
 	{17,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //중반용 무기들(가끔 저주)
 	{18,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //중반용 방어구
-	{19,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //중반용 좋은 반지, 아뮬렛들
+	{19,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //잡 탄막들
 	{1,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{25,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,15,1}, //책
@@ -89,7 +89,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{14,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //중반 잘나오는 좋은 두루마리들
 	{17,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //중반용 무기들(가끔 저주)
 	{18,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //중반용 방어구
-	{19,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //중반용 좋은 반지, 아뮬렛들
+	{19,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //잡 탄막들
 	{1,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{21,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,5,1}, //음식

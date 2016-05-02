@@ -211,7 +211,7 @@ public:
 	void ActionFloor(int delay_);
 	bool ActionEvent(int delay_);
 	bool ActionSmokeEffect();
-	void ActionItem(int delay_);
+	bool ActionItem(int delay_);
 	bool DisableMove(coord_def pos_, bool view_ = false); //이 위치의 모든 물체는 행동할 수 없다.
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);

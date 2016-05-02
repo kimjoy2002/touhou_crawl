@@ -47,7 +47,7 @@ int players::GetAttack(bool max_)
 		if(skill_>SKT_ERROR)
 		{
 			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/15.0f+skill[skill_].level/20.0f+base_atk_/6.0f);
-			min_atk_ = min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
+			min_atk_ = 0;//min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
 		}
 		else //여기는 버그 처리. 데미지가 없으면 버그임을 알수있음
 		{
@@ -115,7 +115,7 @@ int players::GetAttack(bool max_)
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
 	{ //단검 암습 보너스
-		max_atk_+=(2+skill[skill_].level+skill[SKT_STEALTH].level)*2;
+		max_atk_+=(2+(skill[skill_].level+skill[SKT_STEALTH].level)/2)*2;
 		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
 	}
 	else
@@ -615,7 +615,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		return false;
 
 	
-	if(s_graze && randA(3) == 0)
+	if(s_graze && randA(5) == 0)
 	{
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
 			graze_ = true;
@@ -659,9 +659,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	 //만약 그레이즈가능한 공격일 경우 5을 뺀다.
      // (SH / breaking+SH)의 확률로 가드!
 	 //단 실드가 통하지 않는 공격일경우 최종확률이 0이됨(나중에 넣기)
-		float breaking = 45;
+		float breaking = 75;
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
-			breaking -= 5;
+			breaking -= 15;
 		shield_ = (float)sh/(sh+breaking);
 		if(a.type >= ATT_NO_GUARD)
 			shield_ = 0;
@@ -695,7 +695,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					if(a.order)
 					{
 						a.order->HpUpDown(damage_/3,DR_EFFECT);	
-						printarray(true,false,false,CL_normal,4,a.name.name.c_str(),a.name.name_is(),  name_.name.c_str(),"의 체력을 흡수했다.");
+						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true),  name.name.c_str(),"의 체력을 흡수했다.");
 			
 					}
 				}

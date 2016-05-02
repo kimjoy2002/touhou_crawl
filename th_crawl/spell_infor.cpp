@@ -568,7 +568,7 @@ string GetSkillInfor(skill_list skill)
 		break;
 	case SKL_SIZUHA_1:
 		text_ += "단풍의 위에 서있는 적들에게 광기를 불어넣는다.\n";
-		text_ += "단풍 위에 있는 적들에게 MR을 비교하여 혼란을 전부 건다.\n";
+		text_ += "단풍 위에 있는 적들에게 마법저항을 비교하여 혼란을 전부 건다.\n";
 		break;
 	case SKL_SIZUHA_2:
 		text_ += "당신이 끼고 있는 아티펙트가 아닌 몸통 방어구를 단풍 방어구로 바꾼다.\n";

@@ -561,7 +561,7 @@ string GetItemInfor(item *it)
 					text_ += "증감 되는 수치는 반지에 적혀진 숫자와 같다.\n";
 					break;
 				case RGT_CONFUSE_RESIS:
-					text_ += "착용시 혼란에 저항이 생기는 반지.\n";
+					text_ += "착용시 혼란과 광기에 저항이 생기는 반지.\n";
 					break;
 				case RGT_ELEC_RESIS:
 					text_ += "착용시 전기저항이 올라가는 반지.\n";

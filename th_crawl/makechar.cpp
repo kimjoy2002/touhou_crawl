@@ -899,6 +899,8 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			
 			you.SetProperty(TPT_INVISIBLE,1);
 			you.SetProperty(TPT_POWER_SAVE,1);
+
+			you.skill[SKT_TANMAC].onoff = false;
 			
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

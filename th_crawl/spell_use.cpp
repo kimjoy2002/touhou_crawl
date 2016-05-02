@@ -3211,13 +3211,14 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_ALICE:
 		list->push_back(spell(SPL_DOLLS_WAR,50));
-		list->push_back(spell(SPL_TELEPORT_SELF,10));
+		list->push_back(spell(SPL_TELEPORT_SELF,30));
 		break;
 	case MON_SEIRAN:
 		break;
 	case MON_RINGO:
 		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
 		list->push_back(spell(SPL_HASTE_OTHER,15));
+		list->push_back(spell(SPL_SELF_HEAL,15));
 		break;
 	case MON_UDONGE:
 		list->push_back(spell(SPL_MIND_BENDING,15));

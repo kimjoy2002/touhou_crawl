@@ -24,7 +24,6 @@
 #include "spellcard.h"
 #include "alchemy.h"
 #include "tensi.h"
-extern bool wizard_mode;
 extern players you;
 extern HANDLE mutx;
 
@@ -649,7 +648,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	//SetInter(HungerApply());
 	WaitForSingleObject(mutx, INFINITE);
 	tension_turn = false;
-	if(wizard_mode)
+	if(wiz_list.wizard_mode)
 		CheckTension();
 	enterlog();
 

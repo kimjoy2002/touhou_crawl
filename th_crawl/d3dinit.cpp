@@ -151,6 +151,7 @@ bool Setup()
 	init_identify();
 	init_monster();
 	initMap();
+	wiz_list.wizard_mode = false;
 	return true;
 }
 

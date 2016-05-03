@@ -255,4 +255,14 @@ bool Auto_Pick_Up(list<item>::iterator it);
 void SaveFile();
 void LoadFile();
 
+
+
+class wiz_infor
+{
+public:
+	bool wizard_mode;
+};
+
+extern wiz_infor wiz_list;
+
 #endif // __ENVIRONMENT_H__

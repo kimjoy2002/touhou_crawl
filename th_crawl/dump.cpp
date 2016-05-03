@@ -69,6 +69,12 @@ bool Dump(int type)
 	{
 		char death_reason[64] = "";
 		char temp_reason[64];
+
+		if(wiz_list.wizard_mode)
+		{
+			fprintf_s(fp,"*위자드 모드*\n");
+
+		}
 		fprintf_s(fp,"%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str(),you.hp,you.max_hp);
 		fprintf_s(fp,"             %s에서 ",CurrentLevelString());
 		switch(you.dead_reason)
@@ -452,7 +458,7 @@ bool Dump(int type)
 	}
 
 	fclose(fp);
-	if(type == 1)
+	if(type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
 	return true;
 }

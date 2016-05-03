@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <math.h>
 
-extern bool wizard_mode;
 extern HANDLE mutx;
 extern int map_effect;
 
@@ -3476,7 +3475,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		printlog("당신은 마법 주문에 실패했다.",true,false,false,CL_normal);
 		return true;
 	}
-	if(wizard_mode)
+	if(wiz_list.wizard_mode)
 	{
 		char temp[50];
 		sprintf_s(temp,50,"스펠파워 %d / %d",power,SpellCap(skill));

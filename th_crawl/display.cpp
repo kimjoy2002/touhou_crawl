@@ -22,7 +22,6 @@
 #include "tribe.h"
 #include "alchemy.h"
 #include "tensi.h"
-extern bool wizard_mode;
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -631,8 +630,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*7;
 		pfont->DrawTextA(pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+
+		if(wiz_list.wizard_mode)
+		{
+			rc.left = 32*16+180;			
+			pfont->DrawTextA(pSprite,"*위자드 모드*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+
+		}
 		rc.top += fontDesc.Height;
-		rc.left -= fontDesc.Width*7;
+		rc.left = 32*16+50;
 		pfont->DrawTextA(pSprite,tribe_type_string[you.tribe], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*(strlen(tribe_type_string[you.tribe])+1);
 		pfont->DrawTextA(pSprite,job_type_string[you.job], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -894,7 +900,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,state_str, -1, &rc, DT_SINGLELINE | DT_NOCLIP,hunger==HT_STARVING?CL_danger:(hunger<=HT_HUNGRY?CL_warning:CL_good));
 				rc.left += fontDesc.Width*(strlen(state_str)+1);				
 			}*/
-			if(wizard_mode)
+			if(wiz_list.wizard_mode)
 			{
 				sprintf_s(temp,128,"위험도(%d)",you.tension_gauge);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_small_danger);

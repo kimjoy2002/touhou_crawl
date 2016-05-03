@@ -1270,6 +1270,7 @@ void SaveFile()
 		SaveData<unique_infor>(fp, (*it));
 	}
 	SaveData<map_infor>(fp,map_list);
+	SaveData<wiz_infor>(fp,wiz_list);
 	save_note.SaveDatas(fp);
 	fclose(fp);
 	//printlog("저장했습니다.",true,false,false,CL_normal);
@@ -1303,6 +1304,7 @@ void LoadFile()
 		unique_list.push_back(temp);
 	}
 	LoadData<map_infor>(fp,map_list);
+	LoadData<wiz_infor>(fp,wiz_list);
 	save_note.LoadDatas(fp);
 
 	fclose(fp);

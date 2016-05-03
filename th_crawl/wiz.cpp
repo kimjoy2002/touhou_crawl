@@ -17,382 +17,433 @@
 #include "weapon.h"
 #include "map.h"
 
-bool wizard_mode = false;
+
+extern HANDLE mutx;
+wiz_infor wiz_list;
 
 
 bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
 
 void wiz_mode()
 {
-	printlog("<위자드모드> 어느 명령어?",true,false,false,CL_help);
-	wizard_mode = true;
-	int key_ = waitkeyinput();
-	switch(key_)
+
+	if(wiz_list.wizard_mode != true)
 	{
-	case 'D': //맵밝히기
-		for(int i = 0;i<DG_MAX_X;i++)
-			for(int j = 0;j<DG_MAX_Y;j++)
-				env[current_level].dgtile[i][j].flag = env[current_level].dgtile[i][j].flag | FLAG_MAPPING;
-		break;
-	case 'f': //연기
-		//for(int i = -1;i<2;i++)
-		//	for(int j = -1;j<2;j++)
-		//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
-		MakeCloud(you.position, img_fog_fire, SMT_FIRE, rand_int(8,10), rand_int(8,12), 0,5, &you);
-		break;
-	case 'A':
-		{
-			item_infor t;
-			makeitem(ITM_SPELL, 0, &t, SPC_V_INVISIBLE);
-			env[current_level].MakeItem(you.position,t);
 
+		
+		printlog("#### 경고! 위자드모드는 점수등록이 안되며 재미를 큰폭으로 떨어뜨립니다. ### ",true,false,false,CL_danger);
+		printlog("진짜로 킬꺼야? (Y/N) ",false,false,false,CL_danger);
+
+		
+		int key_ = waitkeyinput();
+		switch(key_)
+		{
+		case 'Y':
+			enterlog();
 			break;
+		default:
+			printlog("위자드모드를 취소",false,false,false,CL_help);
+			return;
 		}
-	case 'H':
-		you.HpUpDown(you.max_hp,DR_EFFECT);
-		you.MpUpDown(you.max_mp);
-		you.PowUpDown(500,true);
-		break;
-	case 'X':
-		you.GetExp(you.GetNeedExp(you.level-1) - you.exper);
-		break;
-	case '>': //다음층 이동
-		if(!environment::isLastFloor(current_level))
-		{
-			deque<monster*> dq;
-			env[current_level+1].EnterMap(0,dq);
-			//you.resetLOS(false);
-		}
-		break;
-	case '<': //이전층 이동	
-		if(!environment::isFirstFloor(current_level))
-		{
-			deque<monster*> dq;
-			env[current_level-1].EnterMap(0,dq);
-			//you.resetLOS(false);
-		}
-		break;
-	case 'G': //던전이동	
-		{
-		deque<monster*> dq;
-		dungeon_level next_ = TEMPLE_LEVEL;
-		printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관",true,false,false,CL_help);
-		printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ",true,false,false,CL_help);
-		printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사",true,false,false,CL_help);
-		printlog("어느 던전으로 이동해볼까?",false,false,false,CL_help);
-		wizard_mode = true;
-		key_ = waitkeyinput();
-		switch(key_)
-		{
-			case 'd':
-				next_ = (dungeon_level)0;
-				break;
-			case 'D':
-				next_ = MAX_DUNGEUN_LEVEL;
-				break;
-			case 't':
-			case 'T':
-				next_ = TEMPLE_LEVEL;
-				break;
-			case 'l':
-				next_ = MISTY_LAKE_LEVEL;
-				break;
-			case 'L':
-				next_ = MISTY_LAKE_LAST_LEVEL;
-				break;
-			case 'm':
-				next_ = YOUKAI_MOUNTAIN_LEVEL;
-				break;
-			case 'M':
-				next_ = YOUKAI_MOUNTAIN_LAST_LEVEL;
-				break;
-			case 's':
-				next_ = SCARLET_LEVEL;
-				break;
-			case 'S':
-				next_ = SCARLET_LEVEL_LAST_LEVEL;
-				break;
-			case 'b':					
-			case 'B':
-				next_ = SCARLET_LIBRARY_LEVEL;
-				break;	
-			case 'u':		
-			case 'U':
-				next_ = SCARLET_UNDER_LEVEL;
-				break;
-			case 'a':			
-			case 'A':					
-				next_ = BAMBOO_LEVEL;
-				break;
-			case 'e':			
-			case 'E':					
-				next_ = EIENTEI_LEVEL;
-				break;
-			case 'h':	
-				next_ = SUBTERRANEAN_LEVEL;
-				break;		
-			case 'H':
-				next_ = SUBTERRANEAN_LEVEL_LAST_LEVEL;
-				break;	
-			case 'y':	
-				next_ = YUKKURI_LEVEL;
-				break;	
-			case 'Y':
-				next_ = YUKKURI_LAST_LEVEL;
-				break;	
-			case 'p':	
-				next_ = DEPTH_LEVEL;
-				break;	
-			case 'P':
-				next_ = DEPTH_LAST_LEVEL;
-				break;	
-			case 'r':	
-			case 'R':	
-				next_ = DREAM_LEVEL;
-				break;	
-			case 'o':	
-			case 'O':
-				next_ = MOON_LEVEL;
-				break;					
-			case 'k':	
-			case 'K':
-				next_ = PANDEMONIUM_LEVEL;
-				break;	
-			case 'z':	
-				next_ = HAKUREI_LEVEL;
-				break;	
-			case 'Z':
-				next_ = HAKUREI_LAST_LEVEL;
-				break;	
-			default:
-				printlog(" 취소",true,false,false,CL_help);
-				return;
-		}
-		enterlog();
-		env[next_].EnterMap(0,dq);
-		printlog("계단을 내려왔다.",true,false,false,CL_normal);
-		//you.resetLOS(false);
-		break;
-		}
-	case 'b':
-		you.Blink(40);
-		break;
-	case 's':
-		//skill_summon_bug(10,false,&you,you.position);		
-		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
-		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"독을 떨어뜨리기 시작했다.");
-			you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
-			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+30;
-		}
-		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
-		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 독이 진해졌다.");
-			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+30;
-			if(you.equipment[ET_WEAPON]->value6>50)
-				you.equipment[ET_WEAPON]->value6 = 50;
-		}
-		else
-		{
-			printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
-		}
-		break;
-	case 'w':
-		//skill_summon_bug(100,&you,you.position);		
-		you.SetBuff((stat_up)rand_int(BUFFSTAT_STR,BUFFSTAT_EV),BUFF_DUPLE,rand_int(-3,3),10);
-		break;
-	case 'p':			
-		{
-		dungeon_tile_type next_ = DG_TEMPLE_FIRST;
-		printlog("X - 시키에이키     B - 뱌쿠렌      K - 카나코     W - 스와코     A - 미노리코",true,false,false,CL_help);
-		printlog("M - 미마           P - 신키        G - 유우기     Z - 시즈하     H - 히나 ",true,false,false,CL_help);
-		printlog("Y - 유카리         E - 에이린      U - 유유코     S - 사토리     T - 텐시",true,false,false,CL_help);
-		printlog("어떤 신전을 만들까?",false,false,false,CL_help);
-		wizard_mode = true;
-		key_ = waitkeyinput();
-		switch(key_)
-		{
-			case 'x':
-			case 'X':
-				next_ = DG_TEMPLE_SHIKIEIKI;
-				break;
-			case 'b':
-			case 'B':
-				next_ = DG_TEMPLE_BYAKUREN;
-				break;
-			case 'k':
-			case 'K':
-				next_ = DG_TEMPLE_KANAKO;
-				break;
-			case 'w':
-			case 'W':
-				next_ = DG_TEMPLE_SUWAKO;
-				break;
-			case 'a':
-			case 'A':
-				next_ = DG_TEMPLE_MINORIKO;
-				break;
-			case 'm':
-			case 'M':
-				next_ = DG_TEMPLE_MIMA;
-				break;
-			case 'p':
-			case 'P':
-				next_ = DG_TEMPLE_SHINKI;
-				break;
-			case 'g':
-			case 'G':
-				next_ = DG_TEMPLE_YUUGI;
-				break;
-			case 'z':
-			case 'Z':
-				next_ = DG_TEMPLE_SHIZUHA;
-				break;
-			case 'h':
-			case 'H':
-				next_ = DG_TEMPLE_HINA;
-				break;
-			case 'y':
-			case 'Y':
-				next_ = DG_TEMPLE_YUKARI;
-				break;
-			case 'e':
-			case 'E':
-				next_ = DG_TEMPLE_EIRIN;
-				break;
-			case 'u':
-			case 'U':
-				next_ = DG_TEMPLE_YUYUKO;
-				break;
-			case 's':
-			case 'S':
-				next_ = DG_TEMPLE_SATORI;
-				break;
-			case 't':
-			case 'T':
-				next_ = DG_TEMPLE_TENSI;
-				break;
-			default:
-				printlog(" 취소",true,false,false,CL_help);
-				return;
-		}
-		enterlog();
-		env[current_level].dgtile[you.position.x][you.position.y].tile = next_;
-		}
-		break;
-	case 'M':
-		if(monster* mon_=BaseSummon(MON_AYA, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-		{
-			mon_->state.SetState(MS_SLEEP);
-			mon_->flag &= ~M_FLAG_SUMMON;
-			mon_->ReturnEnemy();
-		}
-		break;
-	case 'm':
-		if(monster* mon_=BaseSummon(MON_FIRE_CAR, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-		{
-			mon_->state.SetState(MS_SLEEP);
-			mon_->flag &= ~M_FLAG_SUMMON;
-			mon_->ReturnEnemy();
-		}
-		break;
-	case '^':
-		you.PietyUpDown(10);
-		you.GiftCount(10);
-		break;
-	case 'C':
-		{
-			for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
-			{
-				if(it->isLive())
-					it->dead(PRT_PLAYER,false);
-			}
-			for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
-			{
-				it->position = you.position;
-			}
-		}
-		break;
-	case 'E':
-		{
-			int prevexp_=0, exp_ = 0;
-			for(int i = 0; i <= map_list.dungeon_enter[MISTY_LAKE].floor; i++)
-			{
-				env[i].MakeMap(true);				
-				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-				{
-					if(it->isLive())
-						it->dead(PRT_PLAYER,false);
-				}
-			}
-			exp_ = you.exper;
-			char temp[200];
-			sprintf_s(temp,200,"일반던전 %d층까지 레벨:%d (경험치양 %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
-			printlog(temp,true,false,false,CL_normal);
-			prevexp_ = exp_;
-				 
-			for(int i = MISTY_LAKE_LEVEL; i <= MISTY_LAKE_LAST_LEVEL; i++)
-			{
-				env[i].MakeMap(true);				
-				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-				{
-					if(it->isLive())
-						it->dead(PRT_PLAYER,false);
-				}
-			}
-			exp_ = you.exper;
-			sprintf_s(temp,200,"안개호수클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-			printlog(temp,true,false,false,CL_normal);
-			prevexp_ = exp_;
 
-
-			for(int i = map_list.dungeon_enter[MISTY_LAKE].floor+1; i <= MAX_DUNGEUN_LEVEL; i++)
-			{
-				env[i].MakeMap(true);				
-				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-				{
-					if(it->isLive())
-						it->dead(PRT_PLAYER,false);
-				}
-			}
-			exp_ = you.exper;
-			sprintf_s(temp,200,"남은던전 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-			printlog(temp,true,false,false,CL_normal);
-			prevexp_ = exp_;
-
-
-			for(int i = YOUKAI_MOUNTAIN_LEVEL; i <= YOUKAI_MOUNTAIN_LAST_LEVEL; i++)
-			{
-				env[i].MakeMap(true);				
-				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-				{
-					if(it->isLive())
-						it->dead(PRT_PLAYER,false);
-				}
-			}
-			exp_ = you.exper;
-			sprintf_s(temp,200,"요괴의산 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-			printlog(temp,true,false,false,CL_normal);
-			prevexp_ = exp_;
-
-			for(int i = SCARLET_LEVEL; i <= SCARLET_LEVEL_LAST_LEVEL; i++)
-			{
-				env[i].MakeMap(true);				
-				for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-				{
-					if(it->isLive())
-						it->dead(PRT_PLAYER,false);
-				}
-			}
-			exp_ = you.exper;
-			sprintf_s(temp,200,"홍마관 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-			printlog(temp,true,false,false,CL_normal);
-			prevexp_ = exp_;
-		}
-		break;
-	default:
-		printlog("없는 명령어",true,false,false,CL_help);
-		break;
 	}
 
+
+
+	printlog("<위자드모드> 어느 명령어?  ( ? - 도움말 )",true,false,false,CL_help);
+	wiz_list.wizard_mode = true;
+	while(1)
+	{
+		int key_ = waitkeyinput();
+	
+		changedisplay(DT_GAME);
+		switch(key_)
+		{
+		case 'D': //맵밝히기
+			for(int i = 0;i<DG_MAX_X;i++)
+				for(int j = 0;j<DG_MAX_Y;j++)
+					env[current_level].dgtile[i][j].flag = env[current_level].dgtile[i][j].flag | FLAG_MAPPING;
+			break;
+		case 'f': //연기
+			//for(int i = -1;i<2;i++)
+			//	for(int j = -1;j<2;j++)
+			//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
+			MakeCloud(you.position, img_fog_fire, SMT_FIRE, rand_int(8,10), rand_int(8,12), 0,5, &you);
+			break;
+		case 'A':
+			{
+				item_infor t;
+				makeitem(ITM_SPELL, 0, &t, SPC_V_INVISIBLE);
+				env[current_level].MakeItem(you.position,t);
+
+				break;
+			}
+		case 'H':
+			you.HpUpDown(you.max_hp,DR_EFFECT);
+			you.MpUpDown(you.max_mp);
+			you.PowUpDown(500,true);
+			break;
+		case 'X':
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper);
+			break;
+		case '>': //다음층 이동
+			if(!environment::isLastFloor(current_level))
+			{
+				deque<monster*> dq;
+				env[current_level+1].EnterMap(0,dq);
+				//you.resetLOS(false);
+			}
+			break;
+		case '<': //이전층 이동	
+			if(!environment::isFirstFloor(current_level))
+			{
+				deque<monster*> dq;
+				env[current_level-1].EnterMap(0,dq);
+				//you.resetLOS(false);
+			}
+			break;
+		case 'G': //던전이동	
+			{
+			deque<monster*> dq;
+			dungeon_level next_ = TEMPLE_LEVEL;
+			printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관",true,false,false,CL_help);
+			printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ",true,false,false,CL_help);
+			printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사",true,false,false,CL_help);
+			printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)",false,false,false,CL_help);
+			wiz_list.wizard_mode = true;
+			key_ = waitkeyinput();
+			switch(key_)
+			{
+				case 'd':
+					next_ = (dungeon_level)0;
+					break;
+				case 'D':
+					next_ = MAX_DUNGEUN_LEVEL;
+					break;
+				case 't':
+				case 'T':
+					next_ = TEMPLE_LEVEL;
+					break;
+				case 'l':
+					next_ = MISTY_LAKE_LEVEL;
+					break;
+				case 'L':
+					next_ = MISTY_LAKE_LAST_LEVEL;
+					break;
+				case 'm':
+					next_ = YOUKAI_MOUNTAIN_LEVEL;
+					break;
+				case 'M':
+					next_ = YOUKAI_MOUNTAIN_LAST_LEVEL;
+					break;
+				case 's':
+					next_ = SCARLET_LEVEL;
+					break;
+				case 'S':
+					next_ = SCARLET_LEVEL_LAST_LEVEL;
+					break;
+				case 'b':					
+				case 'B':
+					next_ = SCARLET_LIBRARY_LEVEL;
+					break;	
+				case 'u':		
+				case 'U':
+					next_ = SCARLET_UNDER_LEVEL;
+					break;
+				case 'a':			
+				case 'A':					
+					next_ = BAMBOO_LEVEL;
+					break;
+				case 'e':			
+				case 'E':					
+					next_ = EIENTEI_LEVEL;
+					break;
+				case 'h':	
+					next_ = SUBTERRANEAN_LEVEL;
+					break;		
+				case 'H':
+					next_ = SUBTERRANEAN_LEVEL_LAST_LEVEL;
+					break;	
+				case 'y':	
+					next_ = YUKKURI_LEVEL;
+					break;	
+				case 'Y':
+					next_ = YUKKURI_LAST_LEVEL;
+					break;	
+				case 'p':	
+					next_ = DEPTH_LEVEL;
+					break;	
+				case 'P':
+					next_ = DEPTH_LAST_LEVEL;
+					break;	
+				case 'r':	
+				case 'R':	
+					next_ = DREAM_LEVEL;
+					break;	
+				case 'o':	
+				case 'O':
+					next_ = MOON_LEVEL;
+					break;					
+				case 'k':	
+				case 'K':
+					next_ = PANDEMONIUM_LEVEL;
+					break;	
+				case 'z':	
+					next_ = HAKUREI_LEVEL;
+					break;	
+				case 'Z':
+					next_ = HAKUREI_LAST_LEVEL;
+					break;	
+				default:
+					printlog(" 취소",true,false,false,CL_help);
+					return;
+			}
+			enterlog();
+			env[next_].EnterMap(0,dq);
+			printlog("계단을 내려왔다.",true,false,false,CL_normal);
+			//you.resetLOS(false);
+			break;
+			}
+		case 'b':
+			you.Blink(40);
+			break;
+		case 's':
+			//skill_summon_bug(10,false,&you,you.position);		
+			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
+			{
+				printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"독을 떨어뜨리기 시작했다.");
+				you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
+				you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+30;
+			}
+			else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
+			{
+				printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 독이 진해졌다.");
+				you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+30;
+				if(you.equipment[ET_WEAPON]->value6>50)
+					you.equipment[ET_WEAPON]->value6 = 50;
+			}
+			else
+			{
+				printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
+			}
+			break;
+		case 'w':
+			//skill_summon_bug(100,&you,you.position);		
+			you.SetBuff((stat_up)rand_int(BUFFSTAT_STR,BUFFSTAT_EV),BUFF_DUPLE,rand_int(-3,3),10);
+			break;
+		case 'p':			
+			{
+			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
+			printlog("X - 시키에이키     B - 뱌쿠렌      K - 카나코     W - 스와코     A - 미노리코",true,false,false,CL_help);
+			printlog("M - 미마           P - 신키        G - 유우기     Z - 시즈하     H - 히나 ",true,false,false,CL_help);
+			printlog("Y - 유카리         E - 에이린      U - 유유코     S - 사토리     T - 텐시",true,false,false,CL_help);
+			printlog("어떤 신전을 만들까?",false,false,false,CL_help);
+			wiz_list.wizard_mode = true;
+			key_ = waitkeyinput();
+			switch(key_)
+			{
+				case 'x':
+				case 'X':
+					next_ = DG_TEMPLE_SHIKIEIKI;
+					break;
+				case 'b':
+				case 'B':
+					next_ = DG_TEMPLE_BYAKUREN;
+					break;
+				case 'k':
+				case 'K':
+					next_ = DG_TEMPLE_KANAKO;
+					break;
+				case 'w':
+				case 'W':
+					next_ = DG_TEMPLE_SUWAKO;
+					break;
+				case 'a':
+				case 'A':
+					next_ = DG_TEMPLE_MINORIKO;
+					break;
+				case 'm':
+				case 'M':
+					next_ = DG_TEMPLE_MIMA;
+					break;
+				case 'p':
+				case 'P':
+					next_ = DG_TEMPLE_SHINKI;
+					break;
+				case 'g':
+				case 'G':
+					next_ = DG_TEMPLE_YUUGI;
+					break;
+				case 'z':
+				case 'Z':
+					next_ = DG_TEMPLE_SHIZUHA;
+					break;
+				case 'h':
+				case 'H':
+					next_ = DG_TEMPLE_HINA;
+					break;
+				case 'y':
+				case 'Y':
+					next_ = DG_TEMPLE_YUKARI;
+					break;
+				case 'e':
+				case 'E':
+					next_ = DG_TEMPLE_EIRIN;
+					break;
+				case 'u':
+				case 'U':
+					next_ = DG_TEMPLE_YUYUKO;
+					break;
+				case 's':
+				case 'S':
+					next_ = DG_TEMPLE_SATORI;
+					break;
+				case 't':
+				case 'T':
+					next_ = DG_TEMPLE_TENSI;
+					break;
+				default:
+					printlog(" 취소",true,false,false,CL_help);
+					return;
+			}
+			enterlog();
+			env[current_level].dgtile[you.position.x][you.position.y].tile = next_;
+			}
+			break;
+		case 'M':
+			if(monster* mon_=BaseSummon(MON_AYA, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			{
+				mon_->state.SetState(MS_SLEEP);
+				mon_->flag &= ~M_FLAG_SUMMON;
+				mon_->ReturnEnemy();
+			}
+			break;
+		case 'm':
+			if(monster* mon_=BaseSummon(MON_FIRE_CAR, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			{
+				mon_->state.SetState(MS_SLEEP);
+				mon_->flag &= ~M_FLAG_SUMMON;
+				mon_->ReturnEnemy();
+			}
+			break;
+		case '^':
+			you.PietyUpDown(10);
+			you.GiftCount(10);
+			break;
+		case 'C':
+			{
+				for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if(it->isLive())
+						it->dead(PRT_PLAYER,false);
+				}
+				for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
+				{
+					it->position = you.position;
+				}
+			}
+			break;
+		case 'E':
+			{
+				int prevexp_=0, exp_ = 0;
+				for(int i = 0; i <= map_list.dungeon_enter[MISTY_LAKE].floor; i++)
+				{
+					env[i].MakeMap(true);				
+					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+					{
+						if(it->isLive())
+							it->dead(PRT_PLAYER,false);
+					}
+				}
+				exp_ = you.exper;
+				char temp[200];
+				sprintf_s(temp,200,"일반던전 %d층까지 레벨:%d (경험치양 %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
+				printlog(temp,true,false,false,CL_normal);
+				prevexp_ = exp_;
+				 
+				for(int i = MISTY_LAKE_LEVEL; i <= MISTY_LAKE_LAST_LEVEL; i++)
+				{
+					env[i].MakeMap(true);				
+					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+					{
+						if(it->isLive())
+							it->dead(PRT_PLAYER,false);
+					}
+				}
+				exp_ = you.exper;
+				sprintf_s(temp,200,"안개호수클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+				printlog(temp,true,false,false,CL_normal);
+				prevexp_ = exp_;
+
+
+				for(int i = map_list.dungeon_enter[MISTY_LAKE].floor+1; i <= MAX_DUNGEUN_LEVEL; i++)
+				{
+					env[i].MakeMap(true);				
+					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+					{
+						if(it->isLive())
+							it->dead(PRT_PLAYER,false);
+					}
+				}
+				exp_ = you.exper;
+				sprintf_s(temp,200,"남은던전 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+				printlog(temp,true,false,false,CL_normal);
+				prevexp_ = exp_;
+
+
+				for(int i = YOUKAI_MOUNTAIN_LEVEL; i <= YOUKAI_MOUNTAIN_LAST_LEVEL; i++)
+				{
+					env[i].MakeMap(true);				
+					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+					{
+						if(it->isLive())
+							it->dead(PRT_PLAYER,false);
+					}
+				}
+				exp_ = you.exper;
+				sprintf_s(temp,200,"요괴의산 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+				printlog(temp,true,false,false,CL_normal);
+				prevexp_ = exp_;
+
+				for(int i = SCARLET_LEVEL; i <= SCARLET_LEVEL_LAST_LEVEL; i++)
+				{
+					env[i].MakeMap(true);				
+					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
+					{
+						if(it->isLive())
+							it->dead(PRT_PLAYER,false);
+					}
+				}
+				exp_ = you.exper;
+				sprintf_s(temp,200,"홍마관 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
+				printlog(temp,true,false,false,CL_normal);
+				prevexp_ = exp_;
+			}
+			break;
+		case '?'://도움말
+
+			WaitForSingleObject(mutx, INFINITE);
+			deletesub();
+			printsub("                             --- 위자드모드 커맨드 목록 ---",true,CL_normal);
+			printsub("",true,CL_normal);
+			printsub(" X      - 1레벨업                         ",true,CL_normal);
+			printsub(" H      - 체력 영력 파워 회복             ",true,CL_normal);
+			printsub(" G      - 장소이동                         ",true,CL_normal);
+			printsub(" p      - 제단 생성                       ",true,CL_normal);
+			printsub(" ^      - 신앙심 10증가                   ",true,CL_normal);
+			printsub(" >      - 읽기(두루마리,책)               ",true,CL_normal);
+			printsub(" <      - 마시기(물약)                    ",true,CL_normal);
+			printsub(" D      - 매직맵핑                        ",true,CL_normal);
+			printsub(" b      - 블링크                          ",true,CL_normal);
+			printsub("                                         ",true,CL_normal);
+			printsub(" 이외의 커맨드는 불안정하니 비추천        ",true,CL_normal);
+			changedisplay(DT_SUB_TEXT);
+			ReleaseMutex(mutx);
+			continue;
+		default:
+			printlog("없는 명령어",true,false,false,CL_help);
+			break;
+		}
+	return;
+	}
 }

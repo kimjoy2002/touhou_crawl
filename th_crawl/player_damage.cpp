@@ -29,7 +29,6 @@ skill_type itemtoskill(item_type type_);
 
 
 
-extern bool wizard_mode;
 
 
 
@@ -104,7 +103,7 @@ int players::GetAttack(bool max_)
 	
 
 	
-	if(wizard_mode && !max_)
+	if(wiz_list.wizard_mode && !max_)
 	{		
 		char temp[50];
 		sprintf_s(temp,50,"[¸Æµ© %d]",cacul_max_);
@@ -646,7 +645,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			evasion = 0.95f;
 	}
 
-	if(wizard_mode)
+	if(wiz_list.wizard_mode)
 	{		
 		char temp[50];
 		sprintf_s(temp,50,"a-%d A-%d, H-%d hit-%d%%",a.damage,a.max_damage,a.accuracy,(int)(100-evasion*100));

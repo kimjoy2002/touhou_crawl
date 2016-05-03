@@ -36,7 +36,6 @@
 players you;
 extern HANDLE mutx;
 skill_type itemtoskill(item_type type_);
-extern bool wizard_mode;
 extern bool widesearch; //Xд©╦г╣Е©К
 
 void name_infor::SaveDatas(FILE *fp)
@@ -1083,11 +1082,11 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			image = &img_play_mokou[2];
 			DeleteProperty(TPT_18_LIFE);
 		}
-		else if(wizard_mode)
+		else if(wiz_list.wizard_mode)
 		{
 			MoreWait();
-			printlog("ав╬Н?",true,false,false,CL_help);
-			wizard_mode = true;
+			printlog("ав╬Н? (Y/N)",true,false,false,CL_help);
+			wiz_list.wizard_mode = true;
 			int key_ = waitkeyinput();
 			switch(key_)
 			{

@@ -19,7 +19,6 @@
 #include "alchemy.h"
 #include "weapon.h"
 
-extern bool wizard_mode;
 
 const char* tensi_talk(bool good_, tensi_do_list list_);
 
@@ -325,7 +324,7 @@ void tensi_tele(bool good_)
 	}
 	else
 	{
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 			printlog("≈ŸΩ√ ≈⁄∑π∆˜∆Æ Ω«∆–",true,false,false,CL_tensi);
 		you.Teleport();
 	}
@@ -479,7 +478,7 @@ void tensi_weapon(int doing_)
 
 void tensi_action()
 {
-	if(wizard_mode)
+	if(wiz_list.wizard_mode)
 	{
 		char temp[256];
 
@@ -560,7 +559,7 @@ void tensi_action()
 	switch(action_)
 	{
 	case TENSI_NOTHING:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: æ∆π´¿œµµæ»«‘. ≈Ÿº« %d", you.CheckTension());
@@ -568,7 +567,7 @@ void tensi_action()
 		}
 		break;
 	case TENSI_POTION:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: ∆˜º«. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -577,7 +576,7 @@ void tensi_action()
 		tensi_potion(doing_>0);
 		break;
 	case TENSI_SUMMON:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: º“»Ø. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -586,7 +585,7 @@ void tensi_action()
 		tensi_summon(doing_);
 		break;
 	case TENSI_TELE:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: ≈⁄∑π∆˜∆Æ. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -595,7 +594,7 @@ void tensi_action()
 		tensi_tele(doing_);
 		break;
 	case TENSI_EARTHQUAKE:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: ¡ˆ¡¯. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -604,7 +603,7 @@ void tensi_action()
 		tensi_earthquake(doing_);
 		break;
 	case TENSI_MUNYUM:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: π´≥‰π´ªÛ. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -613,7 +612,7 @@ void tensi_action()
 		tensi_munyum(doing_);
 		break;
 	case TENSI_BURST:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: ∆¯πﬂ. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);
@@ -622,7 +621,7 @@ void tensi_action()
 		tensi_burst(doing_);
 		break;
 	case TENSI_WEAPON:
-		if(wizard_mode)
+		if(wiz_list.wizard_mode)
 		{
 			char temp[256];
 			sprintf_s(temp,256,"≈ŸΩ√: ∫ÒªÛ¿«∞À. ≈Ÿº« %d «‡µø %d", you.CheckTension(), doing_);

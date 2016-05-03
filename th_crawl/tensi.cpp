@@ -214,7 +214,7 @@ void tensi_summon(int good_)
 	vector<int> summon_vector;
 
 
-	if(you.level<=4)
+	if(you.level<=5)
 	{
 		summon_vector.push_back(MON_MOOK);
 		summon_vector.push_back(MON_CROW);
@@ -222,33 +222,49 @@ void tensi_summon(int good_)
 		summon_vector.push_back(MON_SPIDER);
 		summon_vector.push_back(MON_FIREFLY);
 	}
-	else if(you.level<=7)
+	else if(you.level<=10)
 	{
 		summon_vector.push_back(MON_SNAKE);
 		summon_vector.push_back(MON_CRANE);
 		summon_vector.push_back(MON_BAKEKASA);
 		summon_vector.push_back(MON_FROG);
 	}
-	else if(you.level<=9)
+	else if(you.level<=14)
 	{
 		summon_vector.push_back(MON_FROG);
 		summon_vector.push_back(MON_BLACK_CAT);
 		summon_vector.push_back(MON_EAGLE);
 		summon_vector.push_back(MON_YAMABIKO);
 	}
-	else if(you.level<=11)
+	else if(you.level<=16)
 	{
 		summon_vector.push_back(MON_TIGER);
 		summon_vector.push_back(MON_RAIJUU);
 		summon_vector.push_back(MON_EAGLE);
 		summon_vector.push_back(MON_AYAYUKKURI);
 	}
-	else/* if(you.level<=14)*/
+	else if(you.level<=20)
 	{
 		summon_vector.push_back(MON_AYAYUKKURI);
 		summon_vector.push_back(MON_REMILIAYUKKURI);
 		summon_vector.push_back(MON_RED_UFO);
 		summon_vector.push_back(MON_GREEN_UFO);
+		summon_vector.push_back(MON_ONI);
+	}
+	else if(you.level<=24)
+	{
+		summon_vector.push_back(MON_DRAGON_BABY);
+		summon_vector.push_back(MON_YOUMUYUKKURI);
+		summon_vector.push_back(MON_NAMAZ);
+		summon_vector.push_back(MON_FLOWER_TANK);
+		summon_vector.push_back(MON_ONI);
+	}
+	else
+	{
+		summon_vector.push_back(MON_DRAGON_BABY);
+		summon_vector.push_back(MON_YOUMUYUKKURI);
+		summon_vector.push_back(MON_NAMAZ);
+		summon_vector.push_back(MON_FLOWER_TANK);
 		summon_vector.push_back(MON_ONI);
 	}
 

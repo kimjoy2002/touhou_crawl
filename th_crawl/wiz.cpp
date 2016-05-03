@@ -42,7 +42,7 @@ void wiz_mode()
 			enterlog();
 			break;
 		default:
-			printlog("위자드모드를 취소",false,false,false,CL_help);
+			printlog("위자드모드를 취소",true,false,false,CL_help);
 			return;
 		}
 
@@ -311,7 +311,7 @@ void wiz_mode()
 			}
 			break;
 		case 'M':
-			if(monster* mon_=BaseSummon(MON_AYA, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			if(monster* mon_=BaseSummon(MON_LETTY, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{
 				mon_->state.SetState(MS_SLEEP);
 				mon_->flag &= ~M_FLAG_SUMMON;

@@ -1371,9 +1371,9 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				sprintf(temp_speak,"%s%s외쳤다. \"어라? 나와 찾는 물건이 같은거야?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 2:
-				if(0) //플레이어가 (룬)을 1개이상 들고 있을때
+				if(you.haveGoal()) //플레이어가 (룬)을 1개이상 들고 있을때
 				{
-					sprintf(temp_speak,"%s%s외쳤다. \"다우징이 반응하고있어... (룬)을 가지고 있는건가?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf(temp_speak,"%s%s외쳤다. \"다우징이 반응하고있어... 룬을 가지고 있는건가?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				}
 				else
 				{
@@ -2474,7 +2474,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=SUBTERRANEAN_LEVEL && current_level<SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL) {					
+				else if(current_level>=SUBTERRANEAN_LEVEL && current_level<=SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL) {					
 					switch(randA(5))
 					{
 					case 0:
@@ -2494,6 +2494,150 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 						return temp_speak;
 					case 5:
 						sprintf(temp_speak,"%s%s외쳤다. \"지저에서 얼마나 버틸 수 있을까?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=YUKKURI_LEVEL && current_level<=YUKKURI_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"저 이상하게 생긴 생물체들은 뭐지?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"얘네들은 걱정없이 사는 것 같아 부러워.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"얘네들 의외로 쎄잖아. 머리만 있는데! 부러워.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"왠지 맛있는 냄새가 나...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"이렇게 보고있으니 좀 징그럽네.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"윳쿠리라고 하는거야? 너무 시끄러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=DEPTH_LEVEL && current_level<=DEPTH_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"벌써 여기까지 온거야? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"여기선 온갖 요괴들이 잔뜩 있어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"이상한 세계로 가는 포탈들이 잔뜩 있어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"여긴 지저로 가는 통로도 있어. 네가 갈 수 있는 곳은 아니겠지만!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"유에프오라고? 왠지 미스테리해서 부러워.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"오니? 왜 오니들이 지상에 이렇게 많이 올라와있는거지?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=DREAM_LEVEL && current_level<=DREAM_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"여기는 꿈의 세계라고 하는 거 같은데, 나는 꿈을 꾸고 있는건가?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"개미핥기처럼 보여도 엄청 쎄구나! 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"꿈의 세계란 어디로든 갈 수 있는거야? 편리해보여서 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"글쎄, 저 둥둥떠다니는 유령은 뭐지? 처음 보는걸.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"아까부터 내 영력이 바닥이야! 영력은 안쓰지만\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"좀 전에 이 쪽은 막혀있었는데!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=MOON_LEVEL && current_level<=MOON_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"이 엄청나게 많은 물은 뭐지? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"이상한 토끼들에게 쫓기고 있어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"모두 하이테크라서 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"달이라고? 내가 달에 온거야?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"아까부터 머리가 어지러운데.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"이럴줄 알았으면 비행을 배워두는건데\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=PANDEMONIUM_LEVEL && current_level<=PANDEMONIUM_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"마계라고? 은근히 잘 발전되어있네! 부러워.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"똑같이 생긴 애들이 많은거같아. 내 착각인거겠지?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"좀 전에 길을 물어봤는데 운이라고 하더라고, 이게 말이 돼?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"이상한 눈알들은 적아군 할거없이 마구 공격해, 미쳤다고!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"마계도 살기 좋은거처럼 보이는데, 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"마계는 정말 넓네. 그 거대함이 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+				}
+				else if(current_level>=HAKUREI_LEVEL && current_level<=HAKUREI_LAST_LEVEL) {					
+					switch(randA(5))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"신사라고 들었더니 요괴 천지잖아!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"벌써 룬을 그만큼 모은거야? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"이상한 탱크들때문에 도망쳐왔어. 탱크 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"난 음양옥이 이정도로 고생해야될 물건인지 잘 모르겠는데\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"음양옥은 대체 뭐지? 룬은 대체 뭐야?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"여기까지 온 그 강함, 순수하게 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					}				
 					break;
@@ -3484,24 +3628,249 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}		
 		break;
 	case MON_LETTY:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(4))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"흑막 등장~\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"뭐? 뚱뚱하다고? 아직도 그런 얘기를!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"지하는 서늘해서 좋단말이야. 지저는 너무 뜨겁지만.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:		
+				if(you.god == GT_SHIZUHA || you.god == GT_MINORIKO)
+					sprintf(temp_speak,"%s%s외쳤다. \"가을은 이미 끝난지 오래야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				else
+					sprintf(temp_speak,"%s%s외쳤다. \"겨울의 힘을 보여줄게!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:		
+				if(you.god == GT_SHIZUHA || you.god == GT_MINORIKO)
+					sprintf(temp_speak,"%s%s외쳤다. \"가을이 뭐가 좋은거지? 이해할수가 없단말이야.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				else
+					sprintf(temp_speak,"%s%s외쳤다. \"그렇게 얕보지않는게 좋을텐데 말이지.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"벌써 봄인거야?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"안돼! 겨울은 아직 끝나지않았어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s혼란스러워 하고있다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%s주문을 외웠다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
 		break;
 	case MON_YORIHIME:
 		break;
 	case MON_TOYOHIME:
 		break;
 	case MON_UTSUHO:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(5))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"칩입자 발견! 핵융합로의 반응을 정지하고 칩입자를 제거한다.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"퓨전하지않을래?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"복잡한건 모르겠지만 일단 한방 터트리면 되는거 아니야?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:		
+				sprintf(temp_speak,"%s%s외쳤다. \"큰거 한방 나간다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:		
+				sprintf(temp_speak,"%s%s외쳤다. \"너를 쓰러트린 다음엔 지상에 도전할꺼야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 5:		
+				sprintf(temp_speak,"%s%s외쳤다. \"핵에너지로 흔적도 없이 녹아버려!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"우뉴?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"핵반응 제어불능! 제어불능!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s이곳저곳에 탄막을 쏘고있다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%s제어봉을 타겟을 향해 조준했다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
 		break;
 	case MON_SUIKA:
 		break;
 	case MON_REIMU:
 		break;
 	case MON_ALICE:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(4))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"새로운 인형을 시험해보기 딱 좋겠어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"탄막은 브레인이지, 당연한 얘기를 하고 있어\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"전력을 다할거라고 생각해? 뒤가 없는건 질색이야.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:		
+				sprintf(temp_speak,"%s%s외쳤다. \"술사는 불필요한 전투를 하지않는다. 소환술사의 기본이야.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:		
+				sprintf(temp_speak,"%s%s외쳤다. \"몇몇 사람들은 인형보다 내 군화를 더 무서워하는거같아...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"얼른 도망쳐야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"제대로 인형을 조종할수가 없어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s혼란스러워 하고있다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%s주문을 외웠다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
 		break;
 	case MON_SEIRAN:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(4))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"지금부터 정화활동에 들어간다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"일단 쏜다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"여기는 세이란, 적과 접촉했다.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:		
+				sprintf(temp_speak,"%s%s외쳤다. \"이글래빗의 척후병 세이란, 타겟과 접촉, 정화를 실시한다.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:		
+				sprintf(temp_speak,"%s%s투덜거렸다. \"월급도 적지, 일은 고달프지...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"메이데이! 메이데이!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"달토끼 부대는 왜 지원이 안오는거야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s혼란스러워 하고있다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
 		break;
 	case MON_RINGO:
 		break;
 	case MON_UDONGE:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(4))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"내 눈을 보고 미치지않을 수 있을까?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"지상의 토끼들은 별로 도움이 되지않아, 내가 나선다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"이 길을 지나칠 순 없어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:		
+				sprintf(temp_speak,"%s%s외쳤다. \"네가 보고있는 것은 진짜가 아니야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:		
+				sprintf(temp_speak,"%s%s외쳤다. \"나도 3체로 분신하거나 환각을 걸거나 하고싶었어...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"어째서 내가 혼란스러운거지?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"이럴리가... 나는 광기에 걸리지않을텐데\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s혼란스러워 하고있다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%s눈에서 광기를 내보냈다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
 		break;
 	case MON_KAGUYA:
 		break;

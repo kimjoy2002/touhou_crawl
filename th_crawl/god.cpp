@@ -782,6 +782,17 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		}
 		return false;
 	case GT_MINORIKO:
+		if(mon_->id == MON_LETTY &&  !(mon_->flag & M_FLAG_SUMMON))
+		{
+			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
+			{
+				if(!mon_->isUserAlly())
+				{ //적일때
+					printlog("미노리코는 흥분한 상태로 외쳤다.\"바로 그거야!\"",true,false,false,CL_warning);
+					you.PietyUpDown(5);
+				}
+			}
+		}
 		return false;
 	case GT_MIMA:
 		if(!(mon_->flag & M_FLAG_SUMMON))
@@ -852,7 +863,13 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{
 				if(!mon_->isUserAlly())
 				{ //적일때
-					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
+					if(mon_->id == MON_LETTY)
+					{
+						printlog("시즈하는 박수를 쳤다.\"훌륭해\"",true,false,false,CL_autumn);
+						you.PietyUpDown(4);
+					}
+					else
+						printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
 					if(randA(2))
 					{
 						you.PietyUpDown(1);

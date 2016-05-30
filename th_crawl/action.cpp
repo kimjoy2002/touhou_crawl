@@ -1463,15 +1463,35 @@ void Stair_move(bool down)
 		}
 		else
 		{
-			printlog("정말로 던전을 탈출하시겠습니까? (y/n)",true,false,false,CL_help);
-			int direc = waitkeyinput(true);
-			if(direc == 'y' || direc == 'Y')
-			{
+
+
+			if(you.haveOrb())
+			{				
 				you.dead_reason = DR_ESCAPE;
 				GameOver();
 				break;
 			}
-			printlog("계속 탐험하도록!",true,false,false,CL_normal);			
+			else
+			{
+				if(you.haveGoal())
+				{
+					printlog("음양옥을 줍기전까진, 당신은 게임 패배로 인정될거야. 그래도 나갈거야?(Y/N)",true,false,false,CL_danger);
+				}
+				else
+				{
+					printlog("정말로 던전을 탈출하겠습니까?(Y/N)",true,false,false,CL_normal);
+
+				}				
+				
+				int direc = waitkeyinput(true);
+				if(direc == 'Y')
+				{
+					you.dead_reason = DR_ESCAPE;
+					GameOver();
+					break;
+				}
+				printlog("계속 탐험하도록!",true,false,false,CL_normal);	
+			}
 		}
 		break;
 		

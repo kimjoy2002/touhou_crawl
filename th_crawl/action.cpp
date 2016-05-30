@@ -1540,11 +1540,11 @@ void Stair_move(bool down)
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[BAMBOO].pos;
 				break;
-			case SUBTERRANEAN_LEVEL: 
-				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
-				break;
+			//case SUBTERRANEAN_LEVEL: 
+			//	floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
+			//	env[floor_return].MakeMap(true);
+			//	pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
+			//	break;
 			case YUKKURI_LEVEL:
 				floor_return = map_list.dungeon_enter[YUKKURI_D].floor;
 				env[floor_return].MakeMap(true);
@@ -1576,6 +1576,13 @@ void Stair_move(bool down)
 				pos_return = map_list.dungeon_enter[HAKUREI_D].pos;
 				break;
 			}
+			if(current_level>=SUBTERRANEAN_LEVEL && current_level<=SUBTERRANEAN_LEVEL_LAST_LEVEL)
+			{
+				floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
+				env[floor_return].MakeMap(true);
+				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
+			}
+
 			deque<monster*> dq;
 			for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
 			{

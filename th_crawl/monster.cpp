@@ -1137,7 +1137,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			auto it = env[current_level].mon_vector.begin();
 			for( ;it != env[current_level].mon_vector.end();it++)
 			{
-				if(it->isSaveSummoner(this))
+				if(it->isLive() && it->isSaveSummoner(this))
 				{
 					if(sight_)
 					{

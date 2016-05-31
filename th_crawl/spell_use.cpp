@@ -3163,7 +3163,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_MAC:
 		list->push_back(spell(SPL_SUMMON_DREAM,30));
-		list->push_back(spell(SPL_BLINK,15));
+		//list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_NIGHTMARE:
 		list->push_back(spell(SPL_MANA_DRAIN,20));

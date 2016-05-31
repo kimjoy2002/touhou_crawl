@@ -644,6 +644,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			{		
 				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
 				bool loop_ = true;
+				you.SetInter(IT_SMOKE);
 				while(loop_)
 				{
 					switch(waitkeyinput())
@@ -671,6 +672,8 @@ int players::move(short_move x_mov, short_move y_mov)
 			{
 				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
 				bool loop_ = true;
+				
+				you.SetInter(IT_SMOKE);
 				while(loop_)
 				{
 					switch(waitkeyinput())

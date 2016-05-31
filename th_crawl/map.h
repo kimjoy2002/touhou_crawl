@@ -59,6 +59,7 @@ class map_infor
 public:
 	pos_infor dungeon_enter[MAX_SUB_DUNGEON];
 	pos_infor temple[GT_LAST];
+	int tutorial;
 	int god_num;
 	int bamboo_count;
 	int bamboo_rate;

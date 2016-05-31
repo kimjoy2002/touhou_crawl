@@ -243,7 +243,9 @@ public:
 
 extern int current_level;
 extern environment env[];
-extern bool tutorial;
+bool isTutorial();
+bool isNormalGame();
+bool isArena();
 
 float GetDotX(int x);
 float GetDotY(int y);

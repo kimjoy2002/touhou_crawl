@@ -1470,7 +1470,7 @@ void Pray()
 	{
 		enterlog();
 		dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
-		if(type == DG_TEMPLE_SUWAKO && tutorial && !you.s_poison)
+		if(type == DG_TEMPLE_SUWAKO && isTutorial() && !you.s_poison)
 		{
 			printlog("스와코는 말했다 : 던전에서 죽는다고 진짜 죽는건 아니야. 모든 기록은 사라지지만.",true,false,false,CL_warning);
 			printlog("스와코는 말했다 : 그래서 크롤의 세계에선 죽는 것도 일이란다! 다음에 보자 사나에!",true,false,false,CL_warning);
@@ -1535,7 +1535,7 @@ void Pray()
 		//	printlog("카나코는 말했다 : 이것은 신앙을 모을 기회입니다.",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_SUWAKO:
-		//	if(!tutorial || you.s_poison)
+		//	if(isNormalGame() || you.s_poison)
 		//	{
 		//		printlog("스와코는 말했다 : 아하하, 재미있어졌어.",true,false,false,CL_warning);
 		//	}

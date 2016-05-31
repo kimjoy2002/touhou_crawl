@@ -16,6 +16,7 @@
 int EventOccur(int id, events* event_);
 
 void bamboo_count(int num);
+void arena_event(int num);
 
 events::events()
 :id(0),position(),type(EVT_ABOVE),prev_sight(false)
@@ -454,6 +455,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				}
 			}
 
+		}
+		return 0;
+	case EVL_ARENA:
+		{			
+			arena_event(current_level);
 		}
 		return 0;
 	default:

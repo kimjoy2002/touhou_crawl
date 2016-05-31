@@ -264,7 +264,7 @@ unsigned int WINAPI GameLoop(void *arg)
 	}
 	__finally
 	{
-		if(saveexit && !tutorial)
+		if(saveexit && isNormalGame())
 			SaveFile();
 		g_ThreadCnt--;
 	}

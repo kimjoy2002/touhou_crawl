@@ -181,7 +181,7 @@ bool checkSavefile(int value_)
 
 bool tutorials(int value_)
 {
-	tutorial = true;
+	map_list.tutorial = GM_TUTORIAL;
 	you.image = &img_play_sanae;
 	you.char_name.name = "사나에";
 	you.tribe = TRI_HUMAN;
@@ -194,6 +194,32 @@ bool tutorials(int value_)
 	printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
 	return true;
 }
+
+
+bool sprint1s(int value_)
+{
+	map_list.tutorial = GM_SPRINT1_AREANA;
+	you.image = &img_play_sanae;
+	you.char_name.name = "사나에";
+	you.tribe = TRI_HUMAN;
+	you.job = JOB_SHAMAN;
+	SetTribe(you.tribe);
+	you.CalcuHP();
+	env[current_level].EnterMap(0,deque<monster*>());	
+	
+	item_infor t;
+	item *it;
+	it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));	
+	it->Identify();
+	you.additem(it,false);
+	you.equip('a',ET_LEFT,false);
+	env[current_level].DeleteItem(it);
+
+	printlog("아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!",true,false,false,CL_help);
+	printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버!",true,false,false,CL_help);
+	return true;
+}
+
 bool select_named(int value_)
 {
 	switch( value_ )
@@ -268,10 +294,12 @@ void start_mainmenu()
 	
 	temp = "간단 메뉴.\n\n\n";
 	temp += "a - 게임시작\n";
-	temp += "b - 튜토리얼";
+	temp += "b - 튜토리얼\n";
+	temp += "c - 스프린트1";
 	m_mgr.menu_puls(0,temp);
 	m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 	m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
+	m_mgr.menu_input_puls(0,'c',0,"",false,sprint1s,0);
 	
 	temp = "무슨 모드로 시작할거야?\n\n\n";
 	temp += "a - 동방 캐릭터로 시작하기 (EASY)\n\n";

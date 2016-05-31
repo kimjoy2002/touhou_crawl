@@ -507,21 +507,21 @@ void charter_selete()
 	//			continue;
 
 
-	if(tutorial)
-	{
-		you.image = &img_play_sanae;
-		you.char_name.name = "사나에";
-		you.tribe = TRI_HUMAN;
-		you.job = JOB_SHAMAN;
-		SetTribe(you.tribe);
-		you.CalcuHP();
-		env[current_level].EnterMap(0,deque<monster*>());	
-		printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
-		printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
-		printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
-		//you.resetLOS(false);
-	}
-	else if(!saveexit)
+	//if(isTutorial())
+	//{
+	//	//you.image = &img_play_sanae;
+	//	//you.char_name.name = "사나에";
+	//	//you.tribe = TRI_HUMAN;
+	//	//you.job = JOB_SHAMAN;
+	//	//SetTribe(you.tribe);
+	//	//you.CalcuHP();
+	//	//env[current_level].EnterMap(0,deque<monster*>());	
+	//	//printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
+	//	//printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
+	//	//printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
+	//	////you.resetLOS(false);
+	//}
+	if(isNormalGame() && !saveexit)
 	{
 		char temp[200];
 		sprintf_s(temp,200,"%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
@@ -713,7 +713,7 @@ void MainLoop()
 			Pray();
 			break;
 		case '#':
-			if(!tutorial && Dump(0))
+			if(isNormalGame() && Dump(0))
 				printlog("덤프에 성공했습니다.",true,false,false,CL_normal);
 			break;
 		case 'Z':

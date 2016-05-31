@@ -315,6 +315,11 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 			}
 			summon_info s_(order->GetMapId(),kind_,max_num_);
 			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //파워에 따라서 조정하기
+
+			if(order && !order->isplayer())
+			{
+				mon_->SetNeutrality(((monster*)order)->s_neutrality);
+			}
 			//unit* unit_ = env[current_level].isMonsterPos(target.x,target.y,order);
 			if(mon_ && targeting_){
 				if(env[current_level].isInSight((*rit)))
@@ -1294,6 +1299,8 @@ bool skill_recall(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
 {
+	if(isArena())
+		return false;
 	if(unit* hit_mon = DebufBeam(SPL_TELEPORT_OTHER, order, target))
 	{
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TELEPORT_OTHER,pow)))
@@ -1312,6 +1319,8 @@ bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_teleport_self(int pow, bool short_, unit* order, coord_def target)
 {
+	if(isArena())
+		return false;
 	order->SetTele(rand_int(3,6));
 	return true;
 }

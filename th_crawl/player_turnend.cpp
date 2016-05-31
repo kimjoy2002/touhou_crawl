@@ -800,7 +800,7 @@ void GameOver()
 	deadlog();
 
 
-	if(!tutorial)
+	if(isNormalGame())
 	{
 		for(list<item>::iterator it = you.item_list.begin(); it != you.item_list.end();it++)
 		{
@@ -819,7 +819,7 @@ void GameOver()
 			break;
 		}
 	}
-	if(!tutorial)
+	if(isNormalGame())
 		iteminfor(true);
 	game_over = true;
 }

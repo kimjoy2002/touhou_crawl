@@ -69,6 +69,23 @@ bool environment::isLastFloor(int level_)
 }
 
 
+bool isTutorial()
+{
+	return map_list.tutorial == GM_TUTORIAL;
+}
+
+bool isNormalGame()
+{
+	return map_list.tutorial == GM_NORMAL;
+}
+
+bool isArena()
+{
+	
+	return map_list.tutorial == GM_SPRINT1_AREANA;
+
+}
+
 void initMap()
 {
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,4));
@@ -92,6 +109,7 @@ void initMap()
 	map_list.god_num = 10;
 	map_list.bamboo_count = 0;
 	map_list.bamboo_rate = 0;
+	map_list.tutorial = 0;
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 		dq.push_back(i);

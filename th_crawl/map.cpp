@@ -199,10 +199,11 @@ void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
+void map_algorithms_arena(int num);
 
 void map_algorithms(int num)
 {
-	if(!tutorial)
+	if(isNormalGame())
 	{
 		if(num == 0)
 		{
@@ -298,13 +299,17 @@ void map_algorithms(int num)
 			map_algorithms01(num,DG_FLOOR,DG_WALL);
 		}
 	}
-	else
+	else if(isTutorial())
 	{
 		if(num == 0 )
 			map_algorithms_tuto01(num);
 		else
 			map_algorithms_tuto02(num);
 
+	}
+	else //¾Æ·¹³ª1
+	{
+		map_algorithms_arena(num);
 	}
 }
 
@@ -1442,9 +1447,13 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 		float y = round((float)DG_MAX_Y/2+cos(i*24.0f/180.0f*D3DX_PI)*-10.0f);
 		env[num].dgtile[(int)x][(int)y].tile = (dungeon_tile_type)(DG_TEMPLE_SHIKIEIKI+i);
 	}
-
-
 }
+
+
+
+
+
+
 
 
 

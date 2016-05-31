@@ -25,8 +25,9 @@
 
 environment env[MAXLEVEL];
 int current_level=0;
-bool tutorial = false;
 extern HANDLE mutx;
+
+
 
 
 void stair_info::SaveDatas(FILE *fp)
@@ -176,7 +177,7 @@ bool environment::MakeMap(bool return_)
 	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL) && !return_))
 	{
 		map_algorithms(floor);
-		if(!tutorial)
+		if(isNormalGame())
 		{
 			create_mon(floor, GetLevelMonsterNum(floor,false));
 			create_item(floor,  GetLevelMonsterNum(floor,true));
@@ -318,7 +319,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			it->TurnLoad();
 		}
 	}
-	if(floor && !tutorial)
+	if(floor && isNormalGame())
 		SaveFile();
 	you.resetLOS(false);
 
@@ -1334,7 +1335,11 @@ char* CurrentLevelString(int level)
 {
 	static char temp[30];
 	int level_ = level>=0?level:current_level;
-	if(level_<TEMPLE_LEVEL)
+
+
+	if(isArena())
+		sprintf(temp,"아레나");
+	else if(level_<TEMPLE_LEVEL)
 		sprintf(temp,"던전 %d층", level_+1);
 	else if(level_ == TEMPLE_LEVEL)
 		sprintf(temp,"신전");

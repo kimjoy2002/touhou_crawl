@@ -1678,7 +1678,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	if(message_ && !remove_)
 	{
 		if(sight_)
-			printarray(true,false,false,CL_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"죽었다.");
+			printarray(false,false,false,CL_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"죽었다. ");
 		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON))
 		{
 			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
@@ -1689,8 +1689,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	if(!remove_)
 		env[current_level].SummonClear(map_id);
+	
+	hp = 0;
 
-
+	
+	if(isArena())
+		return true;
 
 	if(id == MON_ENSLAVE_GHOST)
 	{
@@ -1714,6 +1718,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			}
 		}
 	}
+
+
 	if(!(flag & M_FLAG_SUMMON) && !remove_)
 	{
 		if(reason_ == PRT_PLAYER) //플레이어가 죽였다.
@@ -1765,7 +1771,6 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 		}
 	}
-	hp = 0;
 	if(!remove_)
 		GodAccpect_KillMonster(this,reason_);
 	return true;
@@ -2330,7 +2335,7 @@ void monster::special_action(int delay_)
 		}
 		break;
 	case MON_YAMAME:
-		if(env[current_level].isInSight(position) && randA(2) == 0)
+		if(env[current_level].isInSight(position) && randA(2) == 0 && !isArena())
 		{
 			you.SetSick(10);
 		}
@@ -2342,7 +2347,7 @@ void monster::special_action(int delay_)
 		}
 		break;
 	case MON_CLOWNPIECE:
-		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0)
+		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0 && !isArena())
 		{
 			you.SetLunatic(rand_int(5,15));
 		}
@@ -2833,7 +2838,7 @@ bool monster::SetLunatic(int lunatic_)
 
 bool monster::SetNeutrality(int s_neutrality_)
 {
-	s_neutrality += s_neutrality_;
+	s_neutrality = s_neutrality_;
 	return true;
 }
 
@@ -2975,6 +2980,8 @@ int monster::GetDetect()
 }
 bool monster::you_detect()
 {
+	if(isArena())
+		return false;
 	return randB(you.GetStealth(),GetDetect());
 }
 bool monster::isYourShight()

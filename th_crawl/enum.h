@@ -10,6 +10,14 @@
 #define  __ENUM_H__
 
 
+enum game_mode
+{
+	GM_NORMAL=0,
+	GM_TUTORIAL,
+	GM_SPRINT1_AREANA
+};
+
+
 enum dungeon_level
 {
 	MAX_YOUKAI_MOUNTAIN_LEVEL=3,

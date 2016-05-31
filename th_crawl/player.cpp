@@ -3088,8 +3088,8 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	}
 	GetGodAbility(0, true);
-	PietyUpDown(tutorial?160:piety_,true);
-	if(tutorial)
+	PietyUpDown(isTutorial()?160:piety_,true);
+	if(isTutorial())
 	{
 		gift_count=30;
 	}
@@ -3821,6 +3821,9 @@ float players::GetElecResist()
 
 bool players::isView(const monster* monster_info)
 {
+	
+	if(isArena())
+		return false;
 	if((you.s_invisible || you.togle_invisible) && !(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //≈ı∏Ì?
 		return false;
 	return true;

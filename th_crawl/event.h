@@ -26,7 +26,8 @@ enum event_list
 	EVL_DREAM_MESSAGE, //²ÞÀÇ ¼¼°è°¡ ÆîÃÄÁø´Ù.
 	EVL_AGRO, //¸ðµç ¸÷ÀÌ ÇÃ·¹ÀÌ¾î¿¡°Ô ¾î±×·Î°¡ ²ø¸°´Ù.
 	EVL_REGEN, //¸÷ÀÇ ¸®Á¨ (²ÞÀÇ ¼¼°è).
-	EVL_REGEN2 //¸÷ÀÇ ¸®Á¨ (ÁöÀú).
+	EVL_REGEN2, //¸÷ÀÇ ¸®Á¨ (ÁöÀú).
+	EVL_ARENA //¾Æ·¹³ª
 };
 
 class events

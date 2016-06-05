@@ -2418,6 +2418,8 @@ bool skill_time_paradox(int power, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		if(!randA(9))
+			you.SetTransPanalty(1);
 		you.SetParadox(rand_int(20,30)+power/4);
 	}
 	return true;
@@ -2441,6 +2443,8 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 			it->AttackedTarget(order);			
 		}
 	}
+	if(!randA(4))
+		you.SetTransPanalty(1);
 	return true;
 }
 
@@ -2467,6 +2471,8 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.control_blink(you.search_pos))
 	{
+		you.SetTransPanalty(rand_int(1,2));
+
 		if(you.god == GT_YUKARI)
 		{
 			printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
@@ -2481,6 +2487,7 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		you.SetTransPanalty(rand_int(4,6));
 		you.SetTheWorld(rand_int(5+power/50,max(10,6+power/30)));
 	}
 	return true;

@@ -56,7 +56,7 @@ void name_infor::LoadDatas(FILE *fp)
 
 players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
-hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_aptit(10), skill_exper(0), 
+hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), 
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
@@ -110,6 +110,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, power_decre);
 	SaveData<int>(fp, level);
 	SaveData<int>(fp, exper);
+	SaveData<int>(fp, exper_recovery);
 	SaveData<int>(fp, exper_aptit);
 	SaveData<int>(fp, skill_exper);
 	SaveData<int>(fp, ac);
@@ -279,6 +280,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, power_decre);
 	LoadData<int>(fp, level);
 	LoadData<int>(fp, exper);
+	LoadData<int>(fp, exper_recovery);	
 	LoadData<int>(fp, exper_aptit);
 	LoadData<int>(fp, skill_exper);
 	LoadData<int>(fp, ac);
@@ -883,6 +885,12 @@ int players::GetSpellSuccess(int spell_)
 		success_ += 2;
 
 
+	if(you.s_trans_panalty && (s1_ == SKT_TRANS || s2_ == SKT_TRANS || s3_ == SKT_TRANS))
+	{
+		success_ -= you.s_trans_panalty;
+	}
+
+
 	success_+=s_int/5.0f+skill[SKT_SPELLCASTING].level/2;
 
 	//if(equipment[ET_ARMOR])
@@ -1427,6 +1435,7 @@ bool players::GetExp(int exper_, bool speak_)
 	bool level_up_ = false;
 	exper += exper_;
 	skill_exper += exper_;
+	ExpRecovery(exper_);
 	while(GetNeedExp(level-1) >=0 && GetNeedExp(level-1) <= exper)
 	{
 		LevelUp(speak_);
@@ -1434,6 +1443,27 @@ bool players::GetExp(int exper_, bool speak_)
 	}
 	SkillTraining(speak_);
 	return level_up_;
+}
+void players::ExpRecovery(int exper_)
+{	
+	exper_recovery -= exper_;
+	if(exper_recovery<=0)
+	{//일정 경험치를 먹어서 경험치 회복이 이루어짐
+		//남은 경험치의 10% 가량을 먹을때마다 1씩
+		//초반엔 빠르게 오르므로 그 수치도 많은편(+10 상수치 플러스)
+		exper_recovery = GetNeedExp(max(level-2,0))/10+10;
+
+
+		//여기부터 경험치를 먹으면 생기는 일
+		if(s_trans_panalty) //시공부작용의 감소
+			s_trans_panalty--;
+
+		if(wiz_list.wizard_mode)
+		{
+			printlog("일정량의 스킬 경험치 획득",true,false,false,CL_help);
+		}
+
+	}
 }
 int players::GetNeedExp(int level_)
 {
@@ -2116,7 +2146,7 @@ bool players::SetTransPanalty(int s_trans_panalty_)
 
 	if(s_trans_panalty_<3)
 		printlog("약간의 시공간 부작용을 받았다.",true,false,false,CL_bad);
-	else if(s_trans_panalty_<6)
+	else if(s_trans_panalty_<5)
 		printlog("상당한 시공간 부작용을 받았다.",true,false,false,CL_normal);
 	else
 		printlog("어마어마한 시공간 부작용을 받았다.",true,false,false,CL_small_danger);

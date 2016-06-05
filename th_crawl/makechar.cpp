@@ -838,6 +838,9 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+
+			
+			you.Memorize(SPL_CONTROLED_BLINK,true);		
 		}
 	}
 	else if(name_.compare("»ç³ª¿¡")==0)

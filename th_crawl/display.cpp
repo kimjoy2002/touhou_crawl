@@ -927,7 +927,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_trans_panalty)
 			{
-				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=3?CL_bad:(you.s_trans_panalty<10?CL_warning:CL_small_danger));
+				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=2?CL_bad:(you.s_trans_panalty<5?CL_warning:CL_small_danger));
 				rc.left += fontDesc.Width*11;
 			}
 			if(you.s_spellcard)

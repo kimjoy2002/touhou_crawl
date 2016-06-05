@@ -90,6 +90,7 @@ public:
 	int power_decre;
 	int level;
 	int exper;
+	int exper_recovery;
 	int exper_aptit;
 	int skill_exper;
 	int ac;
@@ -317,6 +318,7 @@ public:
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
 	bool GetExp(int exper_, bool speak_ = true);
+	void ExpRecovery(int exper_);
 	int GetNeedExp(int level_);
 	bool GiveSkillExp(skill_type skill_, int exp_, bool speak_ = true);
 	bool SkillTraining(skill_type skill_, int percent_); // (1/percent_)%

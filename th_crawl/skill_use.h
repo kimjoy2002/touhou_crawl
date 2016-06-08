@@ -123,7 +123,8 @@ enum skill_flag
 	S_FLAG_SUKIMA = 1<<16, //스키마용
 	S_FLAG_RECT = 1<<17, //사각형 시야
 	S_FLAG_NO_TARGET = 1<<18, //몬스터를 타겟으로 잡지않는다.
-	S_FLAG_UNSIGHT = 1<<19 //시야에 가려도 사용가능.
+	S_FLAG_UNSIGHT = 1<<19, //시야에 가려도 사용가능.
+	S_FLAG_GOD = 1<<20 //신의 스킬
 };
 
 float GetSpellSector(spell_list spell_);

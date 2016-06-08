@@ -14,6 +14,7 @@
 #include "skill_use.h"
 #include "monster_texture.h"
 #include "spellcard.h"
+#include "dump.h"
 
 extern HANDLE mutx;
 string GetItemInfor(item *it);
@@ -380,6 +381,7 @@ void Drinking()
 			if(you.Drink(key_))
 			{			
 				you.time_delay += you.GetNormalDelay();
+				you.doingActionDump(DACT_USE, "물약");
 				changedisplay(DT_GAME);
 				if(you.god == GT_EIRIN)
 				{
@@ -455,6 +457,7 @@ void Spelllcard_Evoke()
 			changedisplay(DT_GAME);
 			if(you.Evoke(key_))
 			{
+				
 				you.time_delay += you.GetNormalDelay();
 				you.TurnEnd();
 			}
@@ -540,7 +543,7 @@ void Reading()
 			{
 				if(you.Read(key_))
 				{
-
+					you.doingActionDump(DACT_USE, "두루마리");
 					you.time_delay += you.GetNormalDelay();
 					changedisplay(DT_GAME);
 					you.TurnEnd();

@@ -14,6 +14,7 @@
 #include "mon_infor.h"
 #include "projectile.h"
 #include "god.h"
+#include "dump.h"
 
 
 extern HANDLE mutx;
@@ -1248,7 +1249,8 @@ void SpellUse()
 							if(PlayerUseSpell(spell_, false, target_))
 							{	
 								GodAccpect_UseSpell(spell_);
-								you.MpUpDown(-SpellLevel(spell_));	
+								you.MpUpDown(-SpellLevel(spell_));									
+								you.doingActionDump(DACT_SPELL, SpellString(spell_));
 								//you.SkillTraining(SKT_SPELLCASTING,5);		
 								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
 								//	you.SkillTraining(SpellSchool(spell_,0),2);
@@ -1281,6 +1283,7 @@ void SpellUse()
 							{		
 								GodAccpect_UseSpell(spell_);
 								you.MpUpDown(-SpellLevel(spell_));	
+								you.doingActionDump(DACT_SPELL, SpellString(spell_));
 /*								you.SkillTraining(SKT_SPELLCASTING,5);	*/	
 								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
 								//	you.SkillTraining(SpellSchool(spell_,0),2);
@@ -1305,6 +1308,7 @@ void SpellUse()
 						{
 							GodAccpect_UseSpell(spell_);
 							you.MpUpDown(-SpellLevel(spell_));	
+							you.doingActionDump(DACT_SPELL, SpellString(spell_));
 							//you.SkillTraining(SKT_SPELLCASTING,5);		
 							//if(SpellSchool(spell_,0)!=SKT_ERROR)		
 							//	you.SkillTraining(SpellSchool(spell_,0),2);

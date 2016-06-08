@@ -13,6 +13,7 @@
 #include "environment.h"
 #include "mon_infor.h"
 #include "projectile.h"
+#include "dump.h"
 extern HANDLE mutx;
 
 
@@ -21,32 +22,32 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	switch(skill)
 	{
 	case SKL_KANAKO_2:
-		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON | S_FLAG_GOD) & flag);
 	case SKL_KANAKO_1:
 	case SKL_YUYUKO_3:
-		return ((S_FLAG_SPEAK) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_DIGGING:
-		return ((S_FLAG_SPEAK | S_FLAG_UNSIGHT) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_UNSIGHT | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_WATER_GUN:
 	case SKL_SWAKO_TOUGUE:
-		return 0;
+		return (S_FLAG_GOD & flag);
 	case SKL_EIRIN_0:
-		return ((S_FLAG_SPEAK | S_FLAG_CLOUD) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_CLOUD | S_FLAG_GOD) & flag);
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
 	case SKL_SATORI_2:
 	case SKL_YUYUKO_1:
 	case SKL_SWAKO_CURSE:
 	case SKL_SWAKO_STATUE:
-		return ((S_FLAG_SPEAK | S_FLAG_SMITE) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
-		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET) & flag);		
+		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
 	case SKL_YUKARI_2:
-		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUKIMA) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUKIMA | S_FLAG_GOD) & flag);
 	case SKL_YUKARI_1:
-		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON | S_FLAG_SUKIMA) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON | S_FLAG_SUKIMA | S_FLAG_GOD) & flag);
 	case SKL_SATORI_1:
-		return ((S_FLAG_SPEAK | S_FLAG_DEBUF | S_FLAG_SMITE) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_DEBUF | S_FLAG_SMITE | S_FLAG_GOD) & flag);
 	case SKL_KANAKO_3:
 	case SKL_EIRIN_1:
 	case SKL_EIRIN_2:
@@ -69,24 +70,25 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_HINA_3:
 	case SKL_HINA_4:
 	case SKL_HINA_5:
-		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);	
+		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);	
 	case SKL_SWAKO_TEMPLE:
-		return ((S_FLAG_IMMEDIATELY) & flag);		
+		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);		
 	case SKL_SHINKI_1:
 	case SKL_SHINKI_2:
 	case SKL_SHINKI_3:
 	case SKL_SWAKO_SUMMON_FLOG:
 	case SKL_SWAKO_RAIN:
 	case SKL_SWAKO_MISYAGUZI:
-		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_SUMMON) & flag);
+		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_SUMMON | S_FLAG_GOD) & flag);
+	case SKL_YUYUKO_ON:
+	case SKL_YUYUKO_OFF:
+		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_GRAZE:
 	case SKL_LEVITATION:
 	case SKL_INVISIBLE:
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
 	case SKL_INVISIBLE_OFF:
-	case SKL_YUYUKO_ON:
-	case SKL_YUYUKO_OFF:
 		return ((S_FLAG_IMMEDIATELY) & flag);
 	case SKL_NONE:
 	default:
@@ -1252,6 +1254,8 @@ void SkillUse()
 									SkillPlusCost(skill_,false);
 									if(SkillMana(skill_))
 										you.mp -= SkillMana(skill_);
+												
+									you.doingActionDump(SkillFlagCheck(skill_, S_FLAG_GOD)?DACT_INVOKE:DACT_EVOKE, SkillString(skill_));
 									SkillUseTraning(skill_);
 									Noise(you.position , SkillNoise(skill_));
 									you.SetBattleCount(30);
@@ -1273,6 +1277,8 @@ void SkillUse()
 									if(SkillMana(skill_))
 										you.mp -= SkillMana(skill_);
 								}
+
+								you.doingActionDump(SkillFlagCheck(skill_, S_FLAG_GOD)?DACT_INVOKE:DACT_EVOKE, SkillString(skill_));
 								SkillUseTraning(skill_);
 								Noise(you.position , SkillNoise(skill_));
 								you.SetBattleCount(30);

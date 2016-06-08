@@ -19,9 +19,10 @@
 extern class monster;
 extern class beam_iterator;
 extern class tribe_property;
+extern class action_class;
 extern enum tribe_proper_type;
 extern enum ALCHEMY_LIST;
-
+extern enum dump_action_type;
 
 enum stat_up //스탯버프는 따로 두지않는다. 겹칠 가능성을 위해
 {
@@ -64,6 +65,7 @@ struct buff_class
 	buff_class(stat_up stat_, buff_type id_, int value_, int turn_):stat(stat_),id(id_),value(value_),turn(turn_){};
 
 };
+
 
 
 class players: public unit
@@ -126,6 +128,7 @@ public:
 	list<buff_class> buff_list;
 	list<item> item_list;
 	vector<tribe_property> property_vector;
+	vector<action_class> action_vector;
 
 	float item_weight;
 	float max_item_weight;
@@ -306,6 +309,7 @@ public:
 	}
 	int CheckTension();
 	void UpDownBuff(stat_up stat_, int value_);
+	void doingActionDump(dump_action_type type_, string name_);
 	int PowDecreaseDelay(int delay_ = 0);
 	interupt_type PowDecrease(int delay_);
 	int PowUpDown(int value_, bool big_ = false);

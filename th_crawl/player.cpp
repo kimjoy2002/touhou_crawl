@@ -31,6 +31,7 @@
 #include "alchemy.h"
 #include "tensi.h"
 #include "swako.h"
+#include "dump.h"
 
 
 players you;
@@ -153,6 +154,11 @@ void players::SaveDatas(FILE *fp)
 		(*it).SaveDatas(fp);
 	}
 	
+	SaveData<int>(fp, action_vector.size());
+	for(auto it=action_vector.begin();it!=action_vector.end();it++)
+	{
+		(*it).SaveDatas(fp);
+	}
 
 	SaveData<float>(fp, item_weight);
 	SaveData<float>(fp, max_item_weight);
@@ -333,6 +339,16 @@ void players::LoadDatas(FILE *fp)
 		property_vector.push_back(temp);
 	}
 
+	
+	LoadData<int>(fp, size_);
+	for(int i = 0; i < size_; i++)
+	{
+		action_class temp;
+		temp.LoadDatas(fp);
+		action_vector.push_back(temp);
+	}
+
+	
 
 	LoadData<float>(fp, item_weight);
 	LoadData<float>(fp, max_item_weight);
@@ -574,27 +590,18 @@ int players::move(short_move x_mov, short_move y_mov)
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
 			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
 			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-			{	
-				skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
-				//if(skill_>SKT_ERROR)
-				//{
-				//	SkillTraining(skill_,3);					
-				//}
-				if(!equipment[ET_WEAPON]->identify)
-				{
-					if(randB(1000,5+skill[skill_].level))
-					{	
-						equipment[ET_WEAPON]->identify = true;
-						char temp[2];
-						sprintf(temp,"%c",equipment[ET_WEAPON]->id);
-						printlog(temp,false,false,false,equipment[ET_WEAPON]->item_color());
-						printlog(" - ",false,false,false,equipment[ET_WEAPON]->item_color());
-						printlog(equipment[ET_WEAPON]->GetName(),false,false,false,equipment[ET_WEAPON]->item_color());
-						printlog("(장착)",true,false,false,CL_normal);
-					}
-				}
+			{					
+				doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
+				//나중에 무기 이름으로 바꾸기
 			}
-
+			else if(!equipment[ET_WEAPON])
+			{
+				doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
+			}
+			else
+			{
+				doingActionDump(DACT_MELEE, "엉터리");
+			}
 
 
 			if(mon_->damage(temp_att))
@@ -1231,6 +1238,27 @@ void players::UpDownBuff(stat_up stat_, int value_)
 		//미구현
 		break;
 	}
+}
+void players::doingActionDump(dump_action_type type_, string name_)
+{
+	
+	for(auto it=action_vector.begin();it!=action_vector.end();it++)
+	{
+		if(it->type == type_ && it->name.compare(name_) == 0){
+			it->plus(level);
+			return;
+		}
+	}
+	auto it=action_vector.begin();
+	for(;it!=action_vector.end();it++)
+	{
+		if(it->type > type_)
+			break;
+
+	}
+
+	action_vector.insert(it, action_class(type_,name_,level));
+	return;
 }
 int players::PowDecreaseDelay(int delay_)
 {
@@ -2919,6 +2947,8 @@ bool players::Evoke(char id_)
 					(*it).value1--;
 					(*it).value3++;//사용예측 횟수를 늘린다.
 					ReleaseMutex(mutx);
+					
+					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;
 				}
 			}
@@ -3219,6 +3249,9 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			}
 		}
 		you.SetParadox(0);
+
+				
+		doingActionDump(DACT_SHOOT, (*it).name.name);
 
 
 		time_delay += GetThrowDelay((*it).type);

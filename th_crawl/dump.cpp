@@ -15,7 +15,9 @@
 #include "skill_use.h"
 #include "note.h"
 #include "god.h"
+#include "dump.h"
 #include "network.h"
+#include "save.h"
 
 extern const char *version_string;
 
@@ -25,6 +27,57 @@ extern const char *version_string;
 
 
 extern display_manager DisplayManager;
+
+
+action_class::action_class():type(DACT_MELEE),name()
+{
+	for(int i=0;i<27;i++)
+		num[i] = 0;
+
+}
+
+action_class::action_class(dump_action_type type_, string name_, int level_)
+	:type(type_), name(name_)
+{
+	for(int i=0;i<27;i++)
+		num[i] = 0;
+	num[level_-1] = 1;
+}
+
+void action_class::SaveDatas(FILE *fp)
+{
+	SaveData<dump_action_type>(fp, type);
+	
+	char temp[100];
+	sprintf(temp,"%s",name.c_str());
+	SaveData<char>(fp,*temp, strlen(temp)+1);
+
+	for(int i=0;i<27;i++)
+		SaveData<int>(fp, num[i]);	
+}
+void action_class::LoadDatas(FILE *fp)
+{	
+	LoadData<dump_action_type>(fp, type);
+
+	char temp[100];
+	LoadData<char>(fp, *temp);
+	name = temp;
+
+	for(int i=0;i<27;i++)
+		LoadData<int>(fp, num[i]);	
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 int caculScore()
@@ -456,9 +509,67 @@ bool Dump(int type)
 	{
 		fprintf_s(fp,"%8d|%-18s|%s\n",it->turn,it->place.c_str(),it->text.c_str());
 	}
+	fprintf_s(fp,"\n\n\n");
+	
+	fprintf_s(fp,"%-26s","  ");
+	for(int i=0;i<9;i++)
+		fprintf_s(fp,"│ %2d-%2d",1+i*3,3+i*3);
+	fprintf_s(fp,"┃  합계\n");
+
+
+
+	dump_action_type type_ = DACT_NONE;
+	for(auto it = you.action_vector.begin(); it != you.action_vector.end(); it++)
+	{
+		int total_ = 0;
+		if(it->type != type_)
+		{
+			type_ = it->type;
+
+			fprintf_s(fp,"%-4s----------------------",GetDumpActionString(type_));
+			for(int i=0;i<9;i++)
+				fprintf_s(fp,"┼------");
+			fprintf_s(fp,"╂───\n");
+		}
+
+		fprintf_s(fp,"%26s",it->name.c_str());
+		for(int i=0;i<9;i++)
+		{
+			int add_ = it->num[0+i*3]+it->num[1+i*3]+it->num[2+i*3];
+			fprintf_s(fp,"│%6d",add_);
+			total_ += add_;
+		}
+
+		fprintf_s(fp,"┃%6d\n",total_);
+	}
+
+
+
+
 
 	fclose(fp);
 	if(type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
 	return true;
+}
+const char* GetDumpActionString(dump_action_type type_)
+{
+	switch(type_)
+	{
+	case DACT_MELEE:
+		return "근접";
+	case DACT_SHOOT:
+		return "탄막";
+	case DACT_SPELL:
+		return "마법";
+	case DACT_INVOKE:
+		return "권능";
+	case DACT_EVOKE:
+		return "발동";
+	case DACT_USE:
+		return "소모";
+	default:
+		return "기타";
+	}
+
 }

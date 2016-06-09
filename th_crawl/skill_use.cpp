@@ -29,6 +29,7 @@
 
 
 extern HANDLE mutx;
+extern bool widesearch; //X커맨드용
 
 bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 {
@@ -1291,6 +1292,30 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 			printlog("이 곳에서는 차원을 고정할 수 없다!",true,false,false,CL_small_danger);
 			return false;
 		}
+		you.search_pos = target;
+		widesearch = true;
+		you.search = true;
+
+	
+		printlog("이 위치로 차원을 고정할까? (Y/N)",false,false,false,CL_danger);
+		switch(waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			enterlog();
+			break;
+		case 'N':
+		default:
+			printlog(" 취소!",true,false,false,CL_normal);
+			widesearch = false;
+			you.search = false;
+			return false;
+		}
+
+
+		widesearch = false;
+		you.search = false;
+
 		you.god_value[0] = target.x;
 		you.god_value[1] = target.y;
 		you.SetDimension(rand_int(50,70));

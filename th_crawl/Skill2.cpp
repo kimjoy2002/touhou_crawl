@@ -39,6 +39,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUYUKO_1:
 	case SKL_SWAKO_CURSE:
 	case SKL_SWAKO_STATUE:
+	case SKL_YUKARI_4:
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
 		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
@@ -63,7 +64,6 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUUGI_5:
 	case SKL_YUYUKO_2:
 	case SKL_YUKARI_3:
-	case SKL_YUKARI_4:
 	case SKL_SWAKO_SLEEP:
 	case SKL_HINA_1:
 	case SKL_HINA_2:
@@ -119,6 +119,7 @@ int SkillLength(skill_list skill)
 	case SKL_SWAKO_CURSE:
 	case SKL_SWAKO_DIGGING:
 	case SKL_SWAKO_STATUE:
+	case SKL_YUKARI_4:	
 		return 8;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -150,7 +151,6 @@ int SkillLength(skill_list skill)
 	case SKL_YUYUKO_OFF:
 	case SKL_YUYUKO_2:
 	case SKL_YUKARI_3:
-	case SKL_YUKARI_4:	
 	case SKL_SWAKO_TEMPLE:
 	case SKL_SWAKO_SUMMON_FLOG:
 	case SKL_SWAKO_RAIN:

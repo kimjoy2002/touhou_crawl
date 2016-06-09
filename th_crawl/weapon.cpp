@@ -99,3 +99,32 @@ const char* GetBrandString(weapon_brand brand, bool artifact_)
 	}	
 
 }
+
+
+const char* GetBrandInfor(weapon_brand brand)
+{
+	switch(brand)
+	{
+		case WB_FIRE:
+			return "이 무기는 화염으로 덮여있다. 데미지에 1/3의 추가 화염 데미지를 더한다.";
+		case WB_COLD:
+			return "이 무기는 냉기가 휘감겨있다. 데미지에 1/3의 추가 화염 데미지를 더한다.";
+		case WB_POISON:
+			return "이 무기는 맹독이 발라져있다. 공격한 적을 중독시킨다.";
+		case WB_CURSE:		
+			return "이 무기는 저주가 뿜어져나오고 있다. 공격한 적에 저항할 수 없는 독과 일정확률로 감속을 건다.";
+		case WB_WEATHER	:
+			return "공격한 적에 예측할 수 없는 다양한 효과를 낸다. 나쁜 효과는 나오지 않는다.";
+		case WB_AUTUMN:
+			return "이 무기는 단검 수준의 암습이 가능하게 되고 이미 단검인 경우엔 깨어난 적도 암습할 수 있다.";
+		case WB_MANA_REGEN:
+			return "들고있는것만으로 영력의 회복속도를 늘려준다. 단, 한번이라도 영력이 가득차야 효과를 발휘한다.";
+		case WB_FAST_CAST:
+			return "이 무기는 들고있는것만으로도 당신의 모든 마법 영창시간을 80%로 줄여준다.";
+		case WB_PROTECT:
+			return "이 무기는 들고있는것만으로도 당신의 AC를 5 증가시켜준다.";
+		default:
+			return "이 무기는 버그의 브랜드를 두르고 있다. 신고하세요!";	
+	}	
+
+}

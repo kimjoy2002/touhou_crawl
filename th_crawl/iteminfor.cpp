@@ -13,6 +13,7 @@
 #include "beam.h"
 #include "monster_texture.h"
 #include "skill_use.h"
+#include "weapon.h"
 
 extern HANDLE mutx;
 
@@ -124,6 +125,16 @@ string GetItemInfor(item *it)
 			//	text_ += "화살을 걸고 멀리 있는 적에게 날릴 수 있는 활이다. 화살이 없으면 의미가 없다.\n";
 			//	break;
 			}
+
+
+			
+			if(it->value5 && it->value6)
+			{
+				text_ += "\n\n";
+				text_ += GetBrandInfor((weapon_brand)it->value5);
+				text_ += "\n";
+			}
+
 			char temp[100];
 			sprintf(temp,"\n공격력 : %d       명중력 : %d",it->value2,it->value1);
 			text_ += temp;
@@ -620,6 +631,10 @@ string GetItemInfor(item *it)
 		text_ += "버그템이다. 제작자에게 신고하자.\n";
 		break;
 	}
+
+
+
+
 	if(it->isArtifact() && it->identify)
 	{
 		text_ += "\n\n";
@@ -629,8 +644,6 @@ string GetItemInfor(item *it)
 			text_ += "\n";
 		}
 	}
-
-
 
 	//char temp[100];
 	//if(!it->is_pile || it->num == 1)

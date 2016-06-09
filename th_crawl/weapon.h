@@ -20,6 +20,9 @@ enum weapon_brand
 	WB_CURSE,
 	WB_WEATHER,
 	WB_AUTUMN,
+	WB_MANA_REGEN,
+	WB_FAST_CAST,
+	WB_PROTECT,
 	WB_MAX
 };
 

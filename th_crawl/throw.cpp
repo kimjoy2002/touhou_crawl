@@ -86,6 +86,9 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 		case WB_CURSE:		
 		case WB_WEATHER	:
 		case WB_AUTUMN:
+		case WB_MANA_REGEN:
+		case WB_FAST_CAST:
+		case WB_PROTECT:
 		default:
 			break;
 	}

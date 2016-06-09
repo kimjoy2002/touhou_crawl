@@ -65,7 +65,7 @@ final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE),
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
- s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+ s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
@@ -217,7 +217,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_paradox);
 	SaveData<int>(fp, s_trans_panalty);
 	SaveData<int>(fp, s_the_world);
-	
+	SaveData<int>(fp, s_mana_delay);
 	
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -418,8 +418,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_paradox);
 	LoadData<int>(fp, s_trans_panalty);
 	LoadData<int>(fp, s_the_world);
+	LoadData<int>(fp, s_mana_delay);	
 	
-
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
@@ -805,6 +805,8 @@ int players::GetThrowDelay(item_type type_)
 }
 int players::GetSpellDelay()
 {
+	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5 == WB_FAST_CAST)
+		return 8;
 	return 10;
 }
 int players::GetNormalDelay()
@@ -1125,7 +1127,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 	}
 	return value_;
 }
-int players::MpRecoverDelay(int delay_)
+int players::MpRecoverDelay(int delay_,bool set_)
 {
 	float base_ =  (((float)rand_int(80,120))/(max_mp/4+7.0f)+delay_)*10;
 
@@ -1142,7 +1144,15 @@ int players::MpRecoverDelay(int delay_)
 	}
 
 
-	mp_recov +=  1000.0f/cacul_ + rand_float(0,0.99f);
+	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5 == WB_MANA_REGEN && !you.s_mana_delay)
+	{
+		cacul_ +=30;
+	}
+
+	if(set_)
+		mp_recov =  1000.0f/cacul_ + rand_float(0,0.99f);
+	else
+		mp_recov +=  1000.0f/cacul_ + rand_float(0,0.99f);
 
 	return mp_recov;
 }
@@ -1156,6 +1166,8 @@ interupt_type players::MpRecover(int delay_)
 			bool already_ = (mp == max_mp);
 			MpUpDown(1);
 			MpRecoverDelay(0);
+			
+
 			if(mp == max_mp && !already_)
 				return IT_MP_RECOVER;
 		}
@@ -2201,6 +2213,15 @@ bool players::SetTheWorld(int s_the_world_)
 	s_the_world = s_the_world_;
 	if(s_the_world>20)
 		s_the_world = 20;
+	return true;
+}
+bool players::SetManaDelay(int s_mana_delay_)
+{
+	if(!s_mana_delay_)
+		return false;
+
+	s_mana_delay = s_mana_delay_;
+
 	return true;
 }
 bool players::SetBuff(stat_up stat_, buff_type id_, int value_, int turn_)
@@ -3761,6 +3782,17 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			case WB_AUTUMN:
 				printlog("무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.",true,false,false,CL_autumn);	
 				break;
+			case WB_MANA_REGEN:
+				SetManaDelay(1);
+				printlog("영력의 흐름이 느껴진다. 익숙해지려면 시간이 걸릴 것 같다.",true,false,false,CL_white_blue);	
+				break;
+			case WB_FAST_CAST:
+				printlog("머리회전이 빨라진 느낌이 든다.",true,false,false,CL_white_blue);	
+				break;
+			case WB_PROTECT:
+				AcUpDown(0,5);
+				printlog("보호받는 기분이 든다.",true,false,false,CL_white_blue);	
+				break;
 			default:			
 				printlog("이 무기는 버그를 내뿜고있다.",true,false,false,CL_danger);	
 				break;		
@@ -3794,6 +3826,16 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 					break;
 				case WB_AUTUMN:
 					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
+					break;
+				case WB_MANA_REGEN:
+					printlog("영력의 흐름이 사라졌다.",true,false,false,CL_white_blue);	
+					break;
+				case WB_FAST_CAST:
+					printlog("머리회전이 다시 둔해졌다.",true,false,false,CL_white_blue);	
+					break;
+				case WB_PROTECT:
+					AcUpDown(0,-5);
+					printlog("보호가 사라졌다.",true,false,false,CL_white_blue);	
 					break;
 				default:			
 					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	

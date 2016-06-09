@@ -201,6 +201,7 @@ public:
 	int s_paradox;
 	int s_trans_panalty;
 	int s_the_world;
+	int s_mana_delay;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -300,7 +301,7 @@ public:
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);
 	int HpUpDown(int value_,damage_reason reason, unit *order_ = false);
-	int MpRecoverDelay(int delay_ = 0);
+	int MpRecoverDelay(int delay_ = 0,bool set_ = false);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);
 	int AcUpDown(int value_, int bonus_);
@@ -370,6 +371,7 @@ public:
 	bool SetParadox(int s_paradox_);
 	bool SetTransPanalty(int s_trans_panalty_);
 	bool SetTheWorld(int s_the_world_);
+	bool SetManaDelay(int s_mana_delay_);
 	bool SetKnifeCollect(int s_knife_collect_);
 	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};

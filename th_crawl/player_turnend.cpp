@@ -170,6 +170,16 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				case WB_AUTUMN:
 					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
 					break;
+				case WB_MANA_REGEN:
+					printlog("영력의 흐름이 사라졌다.",true,false,false,CL_white_blue);	
+					break;
+				case WB_FAST_CAST:
+					printlog("머리회전이 다시 둔해졌다.",true,false,false,CL_white_blue);	
+					break;
+				case WB_PROTECT:
+					AcUpDown(0,-5);
+					printlog("보호가 사라졌다.",true,false,false,CL_white_blue);	
+					break;
 				default:			
 					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	
 					break;		
@@ -634,11 +644,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if(MpRecover(delay_) && inter == IT_NONE)
 		SetInter(IT_MP_RECOVER);
+	
+
 	PowDecrease(delay_);
 	if(god != GT_NONE)
 		god_turn++;
 	ReleaseMutex(mutx);
 	GodAccpect_turn(god_turn);
+	
+	if(mp == max_mp)
+	{
+		s_mana_delay = 0;
+		MpRecoverDelay(0,true);
+	}
+
+
 	WaitForSingleObject(mutx, INFINITE);
 	prev_position.set(position.x,position.y);
 	TraningStealth();

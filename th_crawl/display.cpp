@@ -992,6 +992,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"시간정지", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_the_world>1?CL_white_blue:CL_blue);
 				rc.left += fontDesc.Width*9;
 			}
+			if(you.s_mana_delay)
+			{
+				pfont->DrawTextA(pSprite,"영력회복지연", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+				rc.left += fontDesc.Width*13;
+
+			}
 			
 
 			if(you.power<=200)

@@ -237,9 +237,9 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 1:
 			if(plus)
-				printlog("당신은 최대 파워일때 체력과 마나회복속도가 빨라진다.",true,false,false,CL_warning);
+				printlog("당신은 파워가 높을수록 체력과 마나회복속도가 빨라진다.",true,false,false,CL_warning);
 			else
-				printlog("더 이상 최대 파워일때 체력과 마나회복속도가 빨라지지않는다.",true,false,false,CL_warning);
+				printlog("더 이상 체력과 마나회복속도가 빨라지지않는다.",true,false,false,CL_warning);
 			break;
 		case 2:
 			you.Ability(SKL_MINORIKO_1,true,!plus);
@@ -1848,7 +1848,7 @@ void God_show()
 		}
 		if(level_ >= 1 && !you.punish[GT_MINORIKO])
 		{
-			printsub("미노리코는 당신이 최대 파워일때 체력과 마나회복속도가 빨라진다.            (패시브)",true,CL_warning);
+			printsub("당신이 파워가 가득차있을수록 체력과 마나회복속도가 빨라진다.               (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.punish[GT_MINORIKO])

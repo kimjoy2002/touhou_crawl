@@ -1018,10 +1018,10 @@ int players::HpRecoverDelay(int delay_)
 	//10일때 20이 되어야하니까 10->5
 	float cacul_ = 1000.0f/base_; //100턴당 회복량.
 
-	if(god == GT_MINORIKO && power >= 500 && !punish[GT_MINORIKO] && pietyLevel(piety)>=1)
+	if(god == GT_MINORIKO && !punish[GT_MINORIKO] && pietyLevel(piety)>=1)
 	{
 		int piety_ = (pietyLevel(you.piety)+1)/2;
-		cacul_ += piety_*6+(piety_*6*max_hp/100.f);
+		cacul_ += (piety_*5+(piety_*5*max_hp/100.f))*max(power-200,0)/300;
 	}
 	if(god == GT_YUUGI && !punish[GT_YUUGI] && s_drunken )
 	{
@@ -1133,10 +1133,10 @@ int players::MpRecoverDelay(int delay_)
 		cacul_ +=100;
 
 	
-	if(you.god == GT_MINORIKO && power >= 500 && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=1)
+	if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=1)
 	{
 		int piety_ = pietyLevel(you.piety);
-		cacul_ += piety_*2+(piety_*max_mp/40.f);
+		cacul_ += piety_*2+(piety_*max_mp/40.f)*max(power-200,0)/300;
 	}
 
 

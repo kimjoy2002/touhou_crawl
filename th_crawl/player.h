@@ -37,6 +37,8 @@ enum stat_up //스탯버프는 따로 두지않는다. 겹칠 가능성을 위해
 	BUFFSTAT_EV,
 	BUFFSTAT_ACC,
 	BUFFSTAT_DAM,
+	BUFFSTAT_RF,
+	BUFFSTAT_RC,
 	BUFFSTAT_MAX
 };
 
@@ -46,6 +48,8 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_TEST=0,
 	BUFF_YUKARI,
 	BUFF_SUWAKO,
+	BUFF_MINORIKO_RF,
+	BUFF_MINORIKO_RC,
 	BUFF_MAX
 };
 enum action_type

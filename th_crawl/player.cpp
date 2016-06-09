@@ -982,6 +982,8 @@ int players::GetBuffOk(stat_up stat_)
 	case BUFFSTAT_EV:
 	case BUFFSTAT_ACC:
 	case BUFFSTAT_DAM:
+	case BUFFSTAT_RF:
+	case BUFFSTAT_RC:
 		return value_;
 		break;
 	}
@@ -1237,6 +1239,12 @@ void players::UpDownBuff(stat_up stat_, int value_)
 	case BUFFSTAT_DAM:
 		//미구현
 		break;
+	case BUFFSTAT_RF:
+		you.ResistUpDown(value_,RST_FIRE);
+		break;
+	case BUFFSTAT_RC:
+		you.ResistUpDown(value_,RST_ICE);
+		break;
 	}
 }
 void players::doingActionDump(dump_action_type type_, string name_)
@@ -1311,20 +1319,20 @@ int players::PowUpDown(int value_, bool big_)
 	else if(power<0)
 		power = 0;
 
-	if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=5)
-	{
-		if(full_power_ && !(power>=500))
-		{			
-			you.ResistUpDown(-1,RST_FIRE);
-			you.ResistUpDown(-1,RST_ICE);
-		}
-		else if(!full_power_ && power>=500)
-		{
-			
-			you.ResistUpDown(1,RST_FIRE);
-			you.ResistUpDown(1,RST_ICE);
-		}
-	}
+	//if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=5)
+	//{
+	//	if(full_power_ && !(power>=500))
+	//	{			
+	//		you.ResistUpDown(-1,RST_FIRE);
+	//		you.ResistUpDown(-1,RST_ICE);
+	//	}
+	//	else if(!full_power_ && power>=500)
+	//	{
+	//		
+	//		you.ResistUpDown(1,RST_FIRE);
+	//		you.ResistUpDown(1,RST_ICE);
+	//	}
+	//}
 
 	return power;
 }
@@ -2836,6 +2844,13 @@ bool players::Eat(char id_)
 					printlog("음식을 먹기 시작했다.",true,false,false,CL_bad);
 					time_delay += you.GetNormalDelay();
 					TurnEnd();
+					
+					if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=5)
+					{
+						int rand_num_ =  rand_int(80,100);
+						you.SetBuff(BUFFSTAT_RF,BUFF_MINORIKO_RF,1,rand_num_);
+						you.SetBuff(BUFFSTAT_RC,BUFF_MINORIKO_RC,1,rand_num_);
+					}
 					if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=3)
 					{
 						you.MpUpDown(2+(*it).value5/30+randA(3+(*it).value5/10));

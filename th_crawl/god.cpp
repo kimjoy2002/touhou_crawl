@@ -252,7 +252,7 @@ bool GetGodAbility(int level, bool plus)
 			if(plus)
 				printlog("당신은 이제 음식을 빨리 먹을 수 있고 마나를 조금 회복한다.",true,false,false,CL_warning);
 			else
-				printlog("더이상 음식을 빨리 먹지 못한다.",true,false,false,CL_warning);
+				printlog("더 이상 음식을 빨리 먹지 못한다.",true,false,false,CL_warning);
 			break;
 		case 4:
 			you.Ability(SKL_MINORIKO_2,true,!plus);
@@ -262,15 +262,15 @@ bool GetGodAbility(int level, bool plus)
 				printlog("더 이상 음식으로 체력을 회복할 수 없다.",true,false,false,CL_warning);
 			break;
 		case 5:
-			if(you.power>=500)
-			{			
-				you.ResistUpDown(plus,RST_FIRE);
-				you.ResistUpDown(plus,RST_ICE);
-			}
+			//if(you.power>=500)
+			//{			
+			//	you.ResistUpDown(plus,RST_FIRE);
+			//	you.ResistUpDown(plus,RST_ICE);
+			//}
 			if(plus)
-				printlog("당신은 이제 최대 파워일때 화염과 냉기에 강하다.",true,false,false,CL_warning);
+				printlog("당신은 이제 음식을 먹은 직후 화염과 냉기에 강해진다.",true,false,false,CL_warning);
 			else
-				printlog("더이상 최대 파워일때 화염과 냉기에 강하지않다.",true,false,false,CL_warning);
+				printlog("더 이상 음식을 먹어도 화염과 냉기에 강하지않다.",true,false,false,CL_warning);
 			break;
 		}
 		return false;
@@ -1868,7 +1868,7 @@ void God_show()
 		}
 		if(level_ >= 5 && !you.punish[GT_MINORIKO])
 		{
-			printsub("미노리코는 당신이 최대 파워일때 불,냉기저항을 1단계 준다.                  (패시브)",true,CL_warning);
+			printsub("미노리코는 당신이 음식을 먹은 직후 일시적으로 불,냉기저항을 1단계 준다.    (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		break;

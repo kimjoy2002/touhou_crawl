@@ -1046,6 +1046,23 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left += fontDesc.Width*9;	
 			}
 
+		
+			{
+				int rf_ = you.GetBuffOk(BUFFSTAT_RF);
+				int rc_ = you.GetBuffOk(BUFFSTAT_RC);
+				if(rf_)
+				{			
+					sprintf_s(temp,128,"È­Àú%s",rf_>0?"+":"-");				 
+					pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,rf_>0?CL_good:CL_danger);
+					rc.left += fontDesc.Width*6;	
+				}
+				if(rc_)
+				{				
+					sprintf_s(temp,128,"³ÃÀú%s",rc_>0?"+":"-");	
+					pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,rc_>0?CL_good:CL_danger);
+					rc.left += fontDesc.Width*6;	
+				}
+			}
 
 
 			if(you.s_confuse)

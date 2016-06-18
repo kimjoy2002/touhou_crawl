@@ -18,6 +18,7 @@
 #include "throw.h"
 #include "weapon.h"
 #include "spellcard.h"
+#include "armour.h"
 #include <algorithm>
 
 extern HANDLE mutx;
@@ -100,16 +101,16 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	t->curse = false;
 	t->name2.name = "";
 	t->name2.name_type = true;
-	if((t->type>=ITM_ARMOR_FIRST && t->type< ITM_ARMOR_LAST))
-	{
-		int rune_ = abs(t->value4*3);
+	//if((t->type>=ITM_ARMOR_FIRST && t->type< ITM_ARMOR_LAST))
+	//{
+	//	int rune_ = abs(t->value4*3);
 
-		if(rune_)
-		{
-			t->name2.name = "·éÀÌ »õ°ÜÁø ";
-			t->name2.name_type = true;
-		}
-	}
+	//	if(rune_)
+	//	{
+	//		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+	//		t->name2.name_type = true;
+	//	}
+	//}
 	switch(type)
 	{
 	case ITM_WEAPON_SHORTBLADE:
@@ -122,80 +123,12 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	case ITM_THROW_TANMAC:
 		MakeTanmac(t,select_);
 		break;
-	case ITM_ARMOR_BODY_ROBE:
-		t->value1 = armour_stat[0][0];
-		t->value2 = armour_stat[0][1];
-		t->value3 = armour_stat[0][2];
-		t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_robe;
-		t->name.name = "¹«³àº¹";
-		t->name.name_type = true;
-		t->weight = 6.0f;
-		t->value = 40;
-		break;		
 	case ITM_ARMOR_BODY_ARMOUR_0:
-		t->value1 = armour_stat[1][0];
-		t->value2 = armour_stat[1][1];
-		t->value3 = armour_stat[1][2];
-		t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_armour_0;
-		t->name.name = "°æ°©¿Ê";
-		t->name.name_type = true;
-		t->weight = 10.0f;
-		t->value = 80;
-		break;
 	case ITM_ARMOR_BODY_ARMOUR_1:
-		t->value1 = armour_stat[2][0];
-		t->value2 = armour_stat[2][1];
-		t->value3 = armour_stat[2][2];
-		t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_armour_1;
-		t->name.name = "Áß°£ Áß°©¿Ê";
-		t->name.name_type = true;
-		t->weight = 12.0f;
-		t->value = 100;
-		break;
 	case ITM_ARMOR_BODY_ARMOUR_2:
-		t->value1 = armour_stat[3][0];
-		t->value2 = armour_stat[3][1];
-		t->value3 = armour_stat[3][2];
-		t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_armour_2;
-		t->name.name = "µÎ²¨¿î Áß°©¿Ê";
-		t->name.name_type = true;
-		t->weight = 15.0f;
-		t->value = 200;
-		break;
 	case ITM_ARMOR_BODY_ARMOUR_3:
-		t->value1 = armour_stat[4][0];
-		t->value2 = armour_stat[4][1];
-		t->value3 = armour_stat[4][2];
-		t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_armour_3;
-		t->name.name = "ÆÇ±Ý°©¿Ê";
-		t->name.name_type = true;
-		t->weight = 20.0f;
-		t->value = 40;
+		MakeBaseArmour(select_==-1?GetRandomArmourType(good_bad):(armour_kind)select_, (material_kind)(type-ITM_ARMOR_BODY_ARMOUR_0), t);
+		MakeArmourEnchant(good_bad, t);
 		break;
 	case ITM_ARMOR_SHIELD:
 		ShieldMake(type, good_bad, t);
@@ -917,7 +850,7 @@ item_type RandomItemType()
 	if(i<10)
 		return RandomWeapon();
 	else if(i<20)
-		return ITM_ARMOR_BODY_ROBE;
+		return ITM_ARMOR_BODY_ARMOUR_0;
 	else if(i<21)
 		return ITM_ARMOR_SHIELD;
 	else if(i<22)

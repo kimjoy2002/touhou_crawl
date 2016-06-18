@@ -14,6 +14,7 @@
 #include "monster_texture.h"
 #include "skill_use.h"
 #include "weapon.h"
+#include "armour.h"
 
 extern HANDLE mutx;
 
@@ -180,33 +181,63 @@ string GetItemInfor(item *it)
 			text_ += temp;
 		}
 		break;
-	case ITM_ARMOR_BODY_ROBE:
 	case ITM_ARMOR_BODY_ARMOUR_0:
 	case ITM_ARMOR_BODY_ARMOUR_1:
 	case ITM_ARMOR_BODY_ARMOUR_2:
 	case ITM_ARMOR_BODY_ARMOUR_3:
 		{
+			switch(it->value5)
+			{
+			case AMK_NORMAL:
+				break;
+			case AMK_MIKO:
+				text_ += "무녀들이 입는 옷.\n";
+				text_ += "신의 가호를 받아서 정신을 보호해준다. 입고있는 동안 혼란저항이 생긴다.\n\n";
+				break;
+			case AMK_WING:
+				text_ += "용궁의 사자들이 입는다는 날개옷.\n";
+				text_ += "전기를 흘려보내는 특징을 가지고 있다. 입고있는 동안 전기저항이 생긴다.\n\n";
+				break;
+			case AMK_KAPPA:
+				text_ += "캇파들이 유니폼처럼 입고 있는 파란색 옷이다.\n";
+				text_ += "강의 추위에도 견딜 수 있게 디자인 되어있다. 입고있는 동안 냉기저항이 생긴다.\n\n";
+				break;
+			case AMK_FIRE:
+				text_ += "불쥐의 기운이 서려있는 옷이다.\n";
+				text_ += "뜨거운 열에도 견딜 수 있을 것 같다. 입고있는 동안 화염저항이 생긴다.\n\n";
+				break;
+			case AMK_MAID:
+				text_ += "홍마관의 메이드들이 입는 옷.\n";
+				text_ += "홍마관 도서관표 특수한 마법적 처리가 되어있다. 입고있는 동안 마법저항이 올라간다.\n\n";
+				break;
+			case AMK_POISON:
+				text_ += "은방울 꽃밭의 인형이 입고 있던 옷이지만 꽤 사이즈가 커서 입을 수 있을 것 같다.\n";
+				text_ += "은방울 꽃의 기운이 당신을 보호해준다. 입고있는 동안 독저항이 생긴다.\n\n";
+				break;
+			}
 			switch(it->type)
 			{
-			case ITM_ARMOR_BODY_ROBE:
+			case ITM_ARMOR_BODY_ARMOUR_0:
 				text_ += "움직이기 편하게 천으로 되어있는 옷.\n";
 				text_ += "잦은 그레이즈에도 끄덕없는 질긴 옷감으로 되어있다!\n";
 				break;
-			case ITM_ARMOR_BODY_ARMOUR_0:
-				text_ += "질긴 재질로 되어있는 옷.\n";
-				text_ += "천보단 움직이기 불편하지만 경갑옷에 속한다.\n";
-				break;
 			case ITM_ARMOR_BODY_ARMOUR_1:
+				text_ += "질긴 재질로 되어있는 옷.\n";
+				text_ += "천보단 움직이기 불편하지만 꽤 가볍다.\n";
+				break;
 			case ITM_ARMOR_BODY_ARMOUR_2:
+				text_ += "사슬로 얽혀있는 갑옷.\n";
+				text_ += "꽤 단단하지만 판금으로된 갑옷보다는 못하다.\n";
+				break;
 			case ITM_ARMOR_BODY_ARMOUR_3:
-				text_ += "이것은 중갑옷이다.\n";
+				text_ += "강철로 된 판금을 덧댄 갑옷.\n";
 				text_ += "마법과 움직임을 방해하지만 당신의 안전을 책임진다.\n";
 				break;
 			}
 			char temp[100];
-			sprintf(temp,"방어력 : %d   기본패널티 : %d   최소패널티 : %d\n\n",it->value1,it->value2,it->value3);
+			sprintf(temp,"\n\n방어력 : %d   기본패널티 : %d   최소패널티 : %d\n\n",it->value1,it->value2,it->value3);
 			text_ += temp;
-			sprintf(temp,"패널티는 갑옷스킬을 올릴수록 줄어듭니다. 최소패널티이하로는 줄일수 없습니다.\n\n");
+			sprintf(temp,"\n\n패널티는 갑옷스킬을 올릴수록 줄어듭니다. 최소패널티이하로는 줄일수 없습니다.\n\n");
 			text_ += temp;
 			sprintf(temp,"합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
 			text_ += temp;

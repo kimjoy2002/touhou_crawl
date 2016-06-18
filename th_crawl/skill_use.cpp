@@ -496,14 +496,14 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		}
 		switch(you.equipment[ET_ARMOR]->type)
 		{
-		case ITM_ARMOR_BODY_ROBE:
+		case ITM_ARMOR_BODY_ARMOUR_0:
 			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
 			printlog("(단풍방어구로 강화시 방어 +2, 은밀보너스 아주 많이)",true,false,true,CL_help);
 			break;
-		case ITM_ARMOR_BODY_ARMOUR_0:
-			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-			printlog("(단풍방어구로 강화시 방어 +2, 갑옷패널티 -1, 은밀보너스 많이)",true,false,true,CL_help);
-			break; 
+		//case ITM_ARMOR_BODY_ARMOUR_0:
+		//	printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
+		//	printlog("(단풍방어구로 강화시 방어 +2, 갑옷패널티 -1, 은밀보너스 많이)",true,false,true,CL_help);
+		//	break; 
 		case ITM_ARMOR_BODY_ARMOUR_1:
 			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
 			printlog("(단풍방어구로 강화시 방어 +2, 갑옷패널티 -1, 최소갑옷패널티 -1, 은밀보너스 중간)",true,false,true,CL_help);
@@ -536,18 +536,18 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 
 		switch(you.equipment[ET_ARMOR]->type)
 		{
-		case ITM_ARMOR_BODY_ROBE:
+		case ITM_ARMOR_BODY_ARMOUR_0:
 			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[0];			
 			you.equipment[ET_ARMOR]->value1+=2;		
 			you.equipment[ET_ARMOR]->value2-=0;	
 			you.equipment[ET_ARMOR]->value3-=0;//3,0,0
 			break;
-		case ITM_ARMOR_BODY_ARMOUR_0:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];			
-			you.equipment[ET_ARMOR]->value1+=2;	
-			you.equipment[ET_ARMOR]->value2+=1;	
-			you.equipment[ET_ARMOR]->value3+=0;//5,-1,0
-			break; 
+		//case ITM_ARMOR_BODY_ARMOUR_0:
+		//	you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];			
+		//	you.equipment[ET_ARMOR]->value1+=2;	
+		//	you.equipment[ET_ARMOR]->value2+=1;	
+		//	you.equipment[ET_ARMOR]->value3+=0;//5,-1,0
+		//	break; 
 		case ITM_ARMOR_BODY_ARMOUR_1:
 			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[2];			
 			you.equipment[ET_ARMOR]->value1+=2;

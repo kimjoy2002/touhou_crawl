@@ -126,7 +126,7 @@ void Test_char_init(item_type item_, int bonus)
 	}
 
 
-	t.type = ITM_ARMOR_BODY_ROBE;
+	t.type = ITM_ARMOR_BODY_ARMOUR_0;
 	t.num = 1;
 	t.curse = false;
 	t.value1 = 1;

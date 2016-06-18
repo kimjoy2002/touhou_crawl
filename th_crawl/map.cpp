@@ -1598,7 +1598,7 @@ void map_algorithms_tuto01(int num)
 	env[num].MakeItem(coord_def(16,18),t);
 
 	
-	t.type = ITM_ARMOR_BODY_ROBE;
+	t.type = ITM_ARMOR_BODY_ARMOUR_0;
 	t.num = 1;
 	t.curse = false;
 	t.value1 = 1;

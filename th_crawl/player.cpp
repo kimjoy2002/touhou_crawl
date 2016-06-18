@@ -32,6 +32,7 @@
 #include "tensi.h"
 #include "swako.h"
 #include "dump.h"
+#include "armour.h"
 
 
 players you;
@@ -934,11 +935,9 @@ int players::GetStealth()
 		{
 			switch(equipment[ET_ARMOR]->type)
 			{
-			case ITM_ARMOR_BODY_ROBE:
-				stealth_ += 200;
-				break;
 			case ITM_ARMOR_BODY_ARMOUR_0:
-				stealth_ += 170;
+				stealth_ += 200;
+				//stealth_ += 170;
 				break;
 			case ITM_ARMOR_BODY_ARMOUR_1:
 				stealth_ += 140;
@@ -3857,12 +3856,17 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 		{
 			AcUpDown((*it).value1 * plus_, (*it).value4 * plus_);
 			//EvUpDown((*it).value2 * 1.5f * plus_);
+			if(where_ == ET_ARMOR)
+				equipArmour((armour_kind)(*it).value5, plus_);
+
 
 			if(where_ == ET_ARMOR && !strncmp((*it).name.name.c_str(),"´ÜÇ³",4))
 			{
 				ResistUpDown(-1*plus_,RST_FIRE);
 			}
 		}
+
+
 		it->identify = true;
 	}
 	else if((*it).type == ITM_RING && (where_ == ET_LEFT || where_ == ET_RIGHT))

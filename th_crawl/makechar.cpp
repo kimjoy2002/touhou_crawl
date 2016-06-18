@@ -16,6 +16,7 @@
 #include "weapon.h"
 #include "mon_infor.h"
 #include "tribe.h"
+#include "armour.h"
 
 
 
@@ -36,7 +37,6 @@ enum start_item_type
 	SIT_CLOAK,
 	SIT_ARMOUR_0,
 	SIT_ARMOUR_1,
-	SIT_ARMOUR_2,
 	SIT_SMALL_SHIELD,
 	SIT_MIDDLE_SHIELD,
 	SIT_FOOD,
@@ -212,7 +212,8 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_ROBE:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ROBE,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -229,7 +230,8 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_ARMOUR_0:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("°æ°©¿Ê",true),name_infor("",true),6.0f,40));
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_1, 0, &t, AMK_NORMAL));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("°æ°©¿Ê",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -237,20 +239,13 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_ARMOUR_1:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_1,&img_item_armor_armour_1,1,false,false,armour_stat[2][0],armour_stat[2][1],armour_stat[2][2],0,0,0,0,0,false,name_infor("Áß°£ Áß°©¿Ê",true),name_infor("",true),6.0f,40));
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_2, 0, &t, AMK_NORMAL));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_1,&img_item_armor_armour_1,1,false,false,armour_stat[2][0],armour_stat[2][1],armour_stat[2][2],0,0,0,0,0,false,name_infor("Áß°£ Áß°©¿Ê",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
 		you.equiparmor('a'+num,false);
 		env[current_level].DeleteItem(it);
-		break;
-	case SIT_ARMOUR_2:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_2,&img_item_armor_armour_2,1,false,false,armour_stat[3][0],armour_stat[3][1],armour_stat[3][2],0,0,0,0,0,false,name_infor("µÎ²¨¿î Áß°©¿Ê",true),name_infor("",true),6.0f,40));
-		(*it).identify = true;
-		(*it).identify_curse = true;
-		you.additem(it,false);
-		you.equiparmor('a'+num,false);
-		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_SMALL_SHIELD:
 		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield,1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("³ª¹«¹æÆÐ",false),name_infor("",true),3.0f,30));

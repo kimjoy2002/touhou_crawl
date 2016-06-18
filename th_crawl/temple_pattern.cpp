@@ -158,7 +158,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			item_infor t;			
 			WeaponMake(ITM_WEAPON_MACE, 0, &t, 1);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
-			makeitem(ITM_ARMOR_BODY_ROBE, 0, &t, 0);
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, 0);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			return  "\
 #######\

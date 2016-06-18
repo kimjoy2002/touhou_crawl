@@ -141,7 +141,7 @@ public:
 	
 	int value4; //value4 - 무기-인챈트 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 
 
-	int value5;	//value5 - 무기-속성 음식-pow상승치
+	int value5;	//value5 - 무기-속성 방어구-저항 음식-pow상승치
 	
 	int value6; //value6 - 속성인챈트 시간. 0이면 미확인.-1이면 식별+무한, 양수면 식별+유한
 

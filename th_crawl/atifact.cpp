@@ -366,9 +366,6 @@ void MakeArtifact(item* item_, int good_bad_)
 	{
 		item_->value4 = randA(item_->value1)+randA(2)+randA(2)-2;
 	}
-
-
-
 	
 	item_->second_name.name = "¾ÆÆ¼ÆåÆ® ";
 	item_->second_name.name_type = false;

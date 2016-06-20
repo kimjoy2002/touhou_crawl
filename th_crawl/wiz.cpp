@@ -73,7 +73,7 @@ void wiz_mode()
 		case 'A':
 			{
 				item_infor t;
-				makeitem(ITM_SPELL, 0, &t, SPC_V_INVISIBLE);
+				makeitem(ITM_RING, 0, &t, RGT_MAGIC_RESIS);
 				env[current_level].MakeItem(you.position,t);
 
 				break;

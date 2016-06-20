@@ -329,7 +329,7 @@ bool effectartifact(ring_type kind, int value)
 		you.ResistUpDown(value,RST_ELEC);
 		break;
 	case RGT_MAGIC_RESIS:
-		you.MRUpDown(20+value*20);
+		you.MRUpDown((value>0?1:-1)*(20+abs(value)*20));
 		break;
 	}
 	return false;

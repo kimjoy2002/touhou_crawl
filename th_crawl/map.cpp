@@ -11,6 +11,7 @@
 #include "enum.h"
 #include "mon_infor.h"
 #include "event.h"
+#include "armour.h"
 
 
 
@@ -1598,26 +1599,29 @@ void map_algorithms_tuto01(int num)
 	env[num].MakeItem(coord_def(16,18),t);
 
 	
-	t.type = ITM_ARMOR_BODY_ARMOUR_0;
-	t.num = 1;
-	t.curse = false;
-	t.value1 = 1;
-	t.value2 = 0;
-	t.value3 = 0;
-	t.value4 = 0;
-	t.value5 = 0;
-	t.value6 = 0;
-	t.is_pile = false;
-	t.can_throw = false;
-	t.name.name = "¹«³àº¹";
-	t.image = &img_item_armor_robe_sanae;
-	t.name.name_type = true;
-	t.name2.name = "";
-	t.name2.name_type = true;
-	t.weight = 6.0f;
-	t.value = 40;
-	env[num].MakeItem(coord_def(18,18),t);
-
+	//t.type = ITM_ARMOR_BODY_ARMOUR_0;
+	//t.num = 1;
+	//t.curse = false;
+	//t.value1 = 1;
+	//t.value2 = 0;
+	//t.value3 = 0;
+	//t.value4 = 0;
+	//t.value5 = 0;
+	//t.value6 = 0;
+	//t.is_pile = false;
+	//t.can_throw = false;
+	//t.name.name = "¹«³àº¹";
+	//t.image = &img_item_armor_robe_sanae;
+	//t.name.name_type = true;
+	//t.name2.name = "";
+	//t.name2.name_type = true;
+	//t.weight = 6.0f;
+	//t.value = 40;
+	
+	{
+		item* i = env[num].MakeItem(coord_def(18,18),makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));
+		i->image = &img_item_armor_robe_sanae;
+	}
 	
 
 	env[num].AddMonster(MON_EVENT_MOOK,0,coord_def(25,18));

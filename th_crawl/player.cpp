@@ -3361,7 +3361,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 	}
 
-	if(type_ == ET_ARMOR && it->type >= ITM_ARMOR_BODY_ARMOUR_0 && it->type <= ITM_ARMOR_BODY_ARMOUR_3 )
+	if(type_ == ET_ARMOR && it->type >= ITM_ARMOR_BODY_ARMOUR_1 && it->type <= ITM_ARMOR_BODY_ARMOUR_3 )
 	{
 		int your_size_ = GetProperty(TPT_SIZE);
 		if(your_size_>0)

@@ -10,6 +10,7 @@
 #include "throw.h"
 #include "mon_infor.h"
 #include "event.h"
+#include "armour.h"
 
 void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type = -1);
 
@@ -158,7 +159,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			item_infor t;			
 			WeaponMake(ITM_WEAPON_MACE, 0, &t, 1);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
-			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, 0);
+			makeitem((item_type)randA(ITM_ARMOR_BODY_ARMOUR_3), 0, &t, AMK_MIKO);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			return  "\
 #######\

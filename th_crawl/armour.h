@@ -6,8 +6,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <string>
+
 struct item_infor;
 
+
+using namespace std;
 
 enum armour_kind
 {
@@ -18,6 +22,7 @@ enum armour_kind
 	AMK_FIRE, //ºÒÁãÀÇ¿Ê (È­¿°ÀúÇ×)
 	AMK_MAID, //¸ŞÀÌµå¿Ê (¸¶¹ıÀúÇ×)
 	AMK_POISON, //ÀÎÇü¿Ê(µ¶ÀúÇ×)
+	AMK_AUTUMN, //´ÜÇ³¿Ê(Å« Àº¹Ğ)
 	AMK_MAX
 };
 
@@ -40,6 +45,7 @@ enum armour_value
 	AMV_MIN_EV
 };
 
+string GetMaterialString(material_kind kind_);
 void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t);
 void MakeArmourEnchant(int good_bad, item_infor* t);
 void equipArmour(armour_kind type, int value);

@@ -26,6 +26,7 @@
 #include "throw.h"
 #include "projectile.h"
 #include "event.h"
+#include "armour.h"
 
 
 extern HANDLE mutx;
@@ -489,34 +490,15 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			printlog("아티펙트는 변화할 수 없다.",true,false,false,CL_normal);
 			return false;
 		}
-		if(!strncmp(you.equipment[ET_ARMOR]->name.name.c_str(),"단풍",4))
+		if(you.equipment[ET_ARMOR]->value5 == AMK_AUTUMN)
 		{
-			printlog("당신은 이미 단풍 방어구를 끼고 있다.",true,false,false,CL_normal);
+			printlog("이 아이템은 이미 단풍으로 되어있다.",true,false,false,CL_normal);
 			return false;
 		}
-		switch(you.equipment[ET_ARMOR]->type)
-		{
-		case ITM_ARMOR_BODY_ARMOUR_0:
-			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-			printlog("(단풍방어구로 강화시 방어 +2, 은밀보너스 아주 많이)",true,false,true,CL_help);
-			break;
-		//case ITM_ARMOR_BODY_ARMOUR_0:
-		//	printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-		//	printlog("(단풍방어구로 강화시 방어 +2, 갑옷패널티 -1, 은밀보너스 많이)",true,false,true,CL_help);
-		//	break; 
-		case ITM_ARMOR_BODY_ARMOUR_1:
-			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-			printlog("(단풍방어구로 강화시 방어 +2, 갑옷패널티 -1, 최소갑옷패널티 -1, 은밀보너스 중간)",true,false,true,CL_help);
-			break;
-		case ITM_ARMOR_BODY_ARMOUR_2:
-			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-			printlog("(단풍방어구로 강화시 방어 +3, 갑옷패널티 -2, 최소갑옷패널티 -2, 은밀보너스 조금)",true,false,true,CL_help);
-			break;
-		case ITM_ARMOR_BODY_ARMOUR_3:
-			printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까? 화염엔 약해집니다! (y/n)");
-			printlog("(단풍방어구로 강화시 방어 +3, 갑옷패널티 -4, 최소갑옷패널티 -2. 은밀보너스 미량)",true,false,true,CL_help);
-			break;
-		}
+			
+		
+		printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까?(y/n)");
+		
 		
 		switch(waitkeyinput())
 		{
@@ -527,48 +509,33 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			printlog("취소하였다. 신중하게 생각하도록!",true,false,false,CL_help);
 			return false;
 		}
+		
+		equipArmour((armour_kind)you.equipment[ET_ARMOR]->value5, -1);
 
-		you.equipment[ET_ARMOR]->name.name = "단풍 "+you.equipment[ET_ARMOR]->name.name;
+		you.equipment[ET_ARMOR]->value5=AMK_AUTUMN;
+
+		equipArmour((armour_kind)you.equipment[ET_ARMOR]->value5, 1);
 
 		
-		
+		you.equipment[ET_ARMOR]->name.name = GetMaterialString((material_kind)(you.equipment[ET_ARMOR]->type-ITM_ARMOR_BODY_ARMOUR_0));
+		you.equipment[ET_ARMOR]->name.name += " 단풍옷";
 
 
 		switch(you.equipment[ET_ARMOR]->type)
 		{
 		case ITM_ARMOR_BODY_ARMOUR_0:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[0];			
-			you.equipment[ET_ARMOR]->value1+=2;		
-			you.equipment[ET_ARMOR]->value2-=0;	
-			you.equipment[ET_ARMOR]->value3-=0;//3,0,0
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];		
 			break;
-		//case ITM_ARMOR_BODY_ARMOUR_0:
-		//	you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];			
-		//	you.equipment[ET_ARMOR]->value1+=2;	
-		//	you.equipment[ET_ARMOR]->value2+=1;	
-		//	you.equipment[ET_ARMOR]->value3+=0;//5,-1,0
-		//	break; 
 		case ITM_ARMOR_BODY_ARMOUR_1:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[2];			
-			you.equipment[ET_ARMOR]->value1+=2;
-			you.equipment[ET_ARMOR]->value2+=1;	
-			you.equipment[ET_ARMOR]->value3+=1;//8,-3,0
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[2];	
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_2:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[3];			
-			you.equipment[ET_ARMOR]->value1+=3;
-			you.equipment[ET_ARMOR]->value2+=2;	
-			you.equipment[ET_ARMOR]->value3+=2;//12,-5,-1
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[3];		
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_3:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[4];			
-			you.equipment[ET_ARMOR]->value1+=3;
-			you.equipment[ET_ARMOR]->value2+=4;	
-			you.equipment[ET_ARMOR]->value3+=2;//15,-7,-2
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[4];		
 			break;
 		}
-		you.ReSetASPanlty();
-		you.ResistUpDown(-1,RST_FIRE);
 		printlog("당신의 방어구는 커다란 단풍잎으로 변했다!",true,false,false,CL_normal);
 	}
 	else

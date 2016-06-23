@@ -214,6 +214,10 @@ string GetItemInfor(item *it)
 				text_ += "은방울 꽃밭의 인형이 입고 있던 옷이지만 꽤 사이즈가 커서 입을 수 있을 것 같다.\n";
 				text_ += "은방울 꽃의 기운이 당신을 보호해준다. 입고있는 동안 독저항이 생긴다.\n\n";
 				break;
+			case AMK_AUTUMN:
+				text_ += "단풍으로 만들어진 옷. 의외로 제대로된 옷이다.\n";
+				text_ += "시즈하를 믿고있을때 주변의 풍경에 동화되어서 은밀이 급격하게 올라간다.\n\n";
+				break;
 			}
 			switch(it->type)
 			{

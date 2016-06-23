@@ -931,25 +931,8 @@ int players::GetStealth()
 	int stealth_ = s_dex*3+skill[SKT_STEALTH].level*15+(s_agility?50:0);
 	if(equipment[ET_ARMOR])
 	{
-		if(!strncmp(equipment[ET_ARMOR]->name.name.c_str(),"단풍",4))
-		{
-			switch(equipment[ET_ARMOR]->type)
-			{
-			case ITM_ARMOR_BODY_ARMOUR_0:
-				stealth_ += 200;
-				//stealth_ += 170;
-				break;
-			case ITM_ARMOR_BODY_ARMOUR_1:
-				stealth_ += 140;
-				break;
-			case ITM_ARMOR_BODY_ARMOUR_2:
-				stealth_ += 110;
-				break;
-			case ITM_ARMOR_BODY_ARMOUR_3:
-				stealth_ += 80;
-				break;
-			}
-		}
+		if(you.god == GT_SHIZUHA && equipment[ET_ARMOR]->value5 == AMK_AUTUMN)
+			stealth_ += 150;
 	}
 	stealth_ += 50*GetProperty(TPT_STEALTH);
 	stealth_ -= you.as_penalty*10; //은밀 감소

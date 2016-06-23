@@ -8,7 +8,7 @@
 
 #include "armour.h"
 #include "item.h"
-#include "monster_texture.h""
+#include "monster_texture.h"
 #include "player.h"
 
 
@@ -132,6 +132,14 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;	
+	case AMK_AUTUMN:
+		t->image = &img_item_autumn_armour[material+1];
+		t->name.name = GetMaterialString(material);
+		t->name.name += " ´ÜÇ³¿Ê";
+		t->name.name_type = true;
+		t->weight = 6.0f*(material*0.5+1);
+		t->value = 80+(material*20);
+		break;	
 	}
 }
 
@@ -144,7 +152,7 @@ armour_kind GetRandomArmourType(int good_bad)
 	if(randA(good_bad>0?2:(good_bad==0?3:4)))
 		return AMK_NORMAL;
 
-	return (armour_kind) randA(AMK_MAX-1);
+	return (armour_kind) randA(AMK_POISON);
 
 }
 
@@ -184,6 +192,8 @@ void equipArmour(armour_kind type, int value)
 	case AMK_POISON:
 		you.ResistUpDown(value,RST_POISON);
 		break;	
+	case AMK_AUTUMN:
+		break;		
 	}
 
 }

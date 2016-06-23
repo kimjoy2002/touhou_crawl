@@ -34,6 +34,8 @@ enum start_item_type
 	SIT_SICKLE,
 	SIT_BROOM,
 	SIT_ROBE,
+	SIT_MIKO,
+	SIT_MAID,
 	SIT_CLOAK,
 	SIT_ARMOUR_0,
 	SIT_ARMOUR_1,
@@ -213,6 +215,24 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ROBE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equiparmor('a'+num,false);
+		env[current_level].DeleteItem(it);	
+		break;
+	case SIT_MIKO:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equiparmor('a'+num,false);
+		env[current_level].DeleteItem(it);	
+		break;
+	case SIT_MAID:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MAID));	
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -438,7 +458,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(-2,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		MakeStartItem(SIT_GOHEY,0);
-		MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_MIKO,1);
 		you.GiveSkillExp(SKT_MACE,120,false);
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,50,false);
@@ -730,7 +750,7 @@ void SetJob(job_type select_, string name_)
 	case JOB_MADE:
 		you.max_hp+=2;		
 		MakeStartItem(SIT_BROOM,0);
-		MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_MAID,1);
 		MakeStartItem(SIT_BOOK,2);
 		MakeStartItem(SIT_THROWING_KNIFE,3);
 		MakeStartItem(SIT_THROWING_KNIFE,4);

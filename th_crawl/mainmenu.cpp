@@ -445,7 +445,7 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'b',5,temp,true,select_job,1);
 	temp = "무녀: 카나코의 무녀로 카나코의 힘을 사용하여 전투하는 근접전투 직업이다.\n";
-	temp += "무기로는 고헤이(둔기)를 들며 카나코를 믿고 시작한다.\n\n\n";
+	temp += "무기로는 고헤이(둔기)를 들며 무녀복과 카나코를 믿고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'c',5,temp,true,select_job,2);
 	temp = "검투사: 원거리와 근접을 골고루 챙기는 하이브리드 회피형전사.\n";
@@ -513,7 +513,7 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'s',5,temp,true,select_job,18);
 	temp = "메이드: 단검정도 던지는건 메이드의 기본 소양 아닌가요?\n";
-	temp += "빗자루와 4개의 투척용 나이프와 메이드의 기본소양을 들고 시작한다.\n\n\n";
+	temp += "빗자루와 4개의 투척용 나이프와 메이드의 복, 그리고 메이드의 기본소양을 들고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'t',5,temp,true,select_job,19);
 	temp = "실종자: 우연히 환상향에 흘러들어가버린 우리들이다?\n";

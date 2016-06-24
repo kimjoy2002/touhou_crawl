@@ -199,8 +199,6 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t);
 item_infor& CustomItem(item_infor* t, item_type type, textures* graphic, int num, bool pile_, bool curse, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, bool throw_, name_infor name_, name_infor name2_, float weight, int value);
 item_infor& CustomSimpleItem(item_infor* t, item_type type, int num, bool curse, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8);
 int baditem(const item_infor *item_);
-item_type RandomItemType();
-
 const char* GetItemTypeSting(item_type_simple type);
 
 

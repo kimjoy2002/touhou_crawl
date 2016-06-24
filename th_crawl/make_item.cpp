@@ -133,66 +133,6 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	case ITM_ARMOR_SHIELD:
 		ShieldMake(type, good_bad, t);
 		break;
-	case ITM_ARMOR_HEAD:
-		t->value1 = 1;
-		t->value2 = 0;
-		t->value3 = 0;
-		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_helmet;
-		t->name.name = "¸®º»";
-		t->name.name_type = true;
-		t->weight = 5.0f;
-		t->value = 70;
-		break;
-	case ITM_ARMOR_CLOAK:
-		t->value1 = 1;
-		t->value2 = 0;
-		t->value3 = 0;
-		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_cloak;
-		t->name.name = "¸ÁÅä";
-		t->name.name_type = false;
-		t->weight = 3.0f;
-		t->value = 70;
-		break;
-	case ITM_ARMOR_GLOVE:
-		t->value1 = 1;
-		t->value2 = 0;
-		t->value3 = 0;
-		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_glove;
-		t->name.name = "Àå°©";
-		t->name.name_type = true;
-		t->weight = 2.0f;
-		t->value = 70;
-		break;
-	case ITM_ARMOR_BOOT:
-		t->value1 = 1;
-		t->value2 = 0;
-		t->value3 = 0;
-		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
-		t->value5 = 0;
-		t->value6 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->image = &img_item_armor_boot;
-		t->name.name = "½Å¹ß";
-		t->name.name_type = true;
-		t->weight = 4.0f;
-		t->value = 70;
-		break;
 	case ITM_RING:
 		t->value1 = select_!=-1?select_:(int)goodbadring(good_bad);
 		if(isRingGotValue((ring_type)t->value1))
@@ -840,40 +780,6 @@ void ShieldMake(item_type type, int good_bad, item_infor* t)
 }
 
 
-
-
-
-item_type RandomItemType()
-{
-	int i = randA(85);
-	
-	if(i<10)
-		return RandomWeapon();
-	else if(i<20)
-		return ITM_ARMOR_BODY_ARMOUR_0;
-	else if(i<21)
-		return ITM_ARMOR_SHIELD;
-	else if(i<22)
-		return ITM_ARMOR_HEAD;
-	else if(i<23)
-		return ITM_ARMOR_CLOAK;
-	else if(i<24)
-		return ITM_ARMOR_GLOVE;
-	else if(i<25)
-		return ITM_ARMOR_BOOT;
-	else if(i<40)
-		return ITM_POTION;
-	else if(i<55)
-		return ITM_SCROLL;
-	else if(i<60)
-		return ITM_RING;
-	else if(i<70)
-		return ITM_SPELLCARD;
-	else if(i<75)
-		return ITM_THROW_TANMAC;
-	else
-		return ITM_FOOD;
-}
 
 
 

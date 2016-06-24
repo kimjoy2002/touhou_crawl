@@ -276,33 +276,6 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		break;
 		}
-	case ITM_ARMOR_HEAD:
-	case ITM_ARMOR_CLOAK:
-	case ITM_ARMOR_GLOVE:
-	case ITM_ARMOR_BOOT:
-		{
-			switch(it->type)
-			{
-			case ITM_ARMOR_HEAD:
-				text_ += "머리에 달 수 있는 리본. 패션의 기본\n";
-				break;
-			case ITM_ARMOR_CLOAK:
-				text_ += "몸에 두르는 폼나는 망토.\n";
-				break;
-			case ITM_ARMOR_GLOVE:
-				text_ += "손에 낄 수 있는 장갑이다. 장갑에 저주가 걸려있으면 반지를 빼고 낄 수 없다.\n";
-				break;
-			case ITM_ARMOR_BOOT:
-				text_ += "발을 보호하는 신발. 던전의 바닥을 맨발로 다니고 싶지않으면 꼭 착용하자.\n";
-				break;
-			}
-			char temp[100];
-			sprintf(temp,"방어력 : %d",it->value1);
-			text_ += temp;
-			sprintf(temp,"\n\n이 아이템은 +2까지 인챈트가 가능하다.");
-			text_ += temp;
-		}
-		break;
 	case ITM_POTION:
 		{
 			if(iden_list.potion_list[it->value1].iden)

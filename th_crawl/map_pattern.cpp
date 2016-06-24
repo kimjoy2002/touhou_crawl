@@ -1136,7 +1136,7 @@ char* subterranean_last_vault_pattern(map_dummy* map)
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			bool item_ = randA(2);
+			int item_ = randA(2);
 			{
 				item_infor t;
 				makeitem(ITM_GOAL, 0, &t, 0);

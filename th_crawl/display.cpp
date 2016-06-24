@@ -460,7 +460,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//resist_ = you.poison_resist - you.uniden_poison_resist;
 	//sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
-	rc.left += 150;
+	/*rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
@@ -571,7 +571,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
-
+	*/
 		
 
 	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //여기엔 돈이

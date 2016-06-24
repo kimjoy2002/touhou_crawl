@@ -3424,7 +3424,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			printlog(" (ÀåÂø)",true,false,false,(*it).item_color());
 
 			
-			if(type_ == ET_ARMOR && strncmp((*it).name.name.c_str(),"´ÜÇ³",4))
+			if(type_ == ET_ARMOR)
 				time_delay += 5*you.GetNormalDelay();
 			else if(type_ >= ET_SHIELD && type_ < ET_LAST)
 				time_delay += 3*you.GetNormalDelay();
@@ -3673,7 +3673,7 @@ bool players::unequip(equip_type type_)
 		}
 		WaitForSingleObject(mutx, INFINITE);
 		equip_stat_change(equipment[type_], type_, false);
-		if(type_ == ET_ARMOR && strncmp(equipment[ET_ARMOR]->name.name.c_str(),"´ÜÇ³",4))
+		if(type_ == ET_ARMOR)
 			time_delay += 5*you.GetNormalDelay();
 		else if(type_ >= ET_SHIELD && type_ < ET_LAST)
 			time_delay += 3*you.GetNormalDelay();

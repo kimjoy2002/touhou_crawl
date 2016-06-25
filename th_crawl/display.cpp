@@ -747,8 +747,14 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			sprintf_s(temp,128,"%4d (%2d)",you.s_str,you.m_str);
 		
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_STR);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:(you.s_str != you.m_str)?CL_warning:CL_STAT);
-		rc.left = 32*16+50;
+		{
+			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
+				you.s_stat_boost==1?CL_white_puple:
+				temp_buff_value_<0?CL_small_danger:
+				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			rc.left = 32*16+50;
+		}
 
 		rc.top += fontDesc.Height;
 		left_ = sprintf_s(temp,128,"EV:");
@@ -771,8 +777,14 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		else
 			sprintf_s(temp,128,"%4d (%2d)",you.s_dex,you.m_dex);
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_DEX);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:(you.s_dex != you.m_dex)?CL_warning:CL_STAT);
-		rc.left = 32*16+50;
+		{
+			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
+				you.s_stat_boost==2?CL_white_puple:
+				temp_buff_value_<0?CL_small_danger:
+				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			rc.left = 32*16+50;
+		}
 
 		rc.top += fontDesc.Height;
 		left_ = sprintf_s(temp,128,"SH:");
@@ -795,8 +807,16 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		else
 			sprintf_s(temp,128,"%4d (%2d)",you.s_int,you.m_int);
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_INT);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:(you.s_int != you.m_int)?CL_warning:CL_STAT);
-		rc.left = 32*16+50;
+
+		
+		{
+			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
+				you.s_stat_boost==3?CL_white_puple:
+				temp_buff_value_<0?CL_small_danger:
+				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			rc.left = 32*16+50;
+		}
 
 		rc.top += fontDesc.Height;
 		sprintf_s(temp,128,"무기: ");
@@ -998,6 +1018,16 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left += fontDesc.Width*13;
 
 			}
+			if(you.s_eirin_poison_time)
+			{				
+				D3DCOLOR color_ = you.s_eirin_poison_time>11?CL_small_danger:CL_danger;
+				sprintf_s(temp,128,"부작용(%d)",you.s_eirin_poison);
+				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+				rc.left += fontDesc.Width*(1+strlen(temp));
+			}
+
+
+
 			
 
 			if(you.power<=200)

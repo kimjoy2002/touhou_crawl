@@ -27,6 +27,7 @@
 #include "projectile.h"
 #include "event.h"
 #include "armour.h"
+#include "god.h"
 
 
 extern HANDLE mutx;
@@ -328,102 +329,66 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		bool end_ = false;
-		stat_type prev = STAT_STR, next = STAT_STR;
+		int stat_ = 0;
 		//어디서부터
-		printlog("줄이고 싶은 스탯을 고르세요. (S)tr - 힘  (D)ex - 민첩  (I)nt - 지능 ",false,false,false,CL_help);
+		printlog("어느 능력치로 몰아줄거지? (S)tr - 힘  (D)ex - 민첩  (I)nt - 지능 (N) - 제거",true,false,false,CL_help);
 		while(!end_)
 		{
 			switch(waitkeyinput())
 			{
 			case 'S':
-				prev= STAT_STR;
-				printlog("==> 힘",true,false,false,CL_help);
+				stat_ = 1;
 				end_ = true;
 				break;
 			case 'D':
-				prev= STAT_DEX;
-				printlog("==> 민첩",true,false,false,CL_help);
+				stat_ = 2;
 				end_ = true;
 				break;
 			case 'I':
-				prev= STAT_INT;
-				printlog("==> 지능",true,false,false,CL_help);
+				stat_ = 3;
+				end_ = true;
+				break;
+			case 'N':
+				stat_ = 0;
 				end_ = true;
 				break;
 			case VK_ESCAPE:
-				enterlog();
 				printlog("취소하였다. 신중하게 생각하도록!",true,false,false,CL_help);
 				return false;
 			}
 		}
-		end_ = false;
-		//그다음 어디로?
-		printlog("어느 스탯으로 옮깁니까?",false,false,false,CL_help);
-		if(prev != STAT_STR)
-			printlog(" (S)tr - 힘 ",false,false,false,CL_help);
-		if(prev != STAT_DEX)
-			printlog(" (D)ex - 민첩 ",false,false,false,CL_help);
-		if(prev != STAT_INT)
-			printlog(" (I)nt - 지능 ",false,false,false,CL_help);
-		while(!end_)
+
+		if(you.s_stat_boost == stat_)
 		{
-			switch(waitkeyinput())
-			{
-			case 'S':
-				if(prev != STAT_STR)
-				{
-					next = STAT_STR;
-					end_ = true;
-					printlog("==> 힘",true,false,false,CL_help);
-				}
-				break;
-			case 'D':
-				if(prev != STAT_DEX)
-				{
-					next = STAT_DEX;
-					end_ = true;
-					printlog("==> 민첩",true,false,false,CL_help);
-				}
-				break;
-			case 'I':
-				if(prev != STAT_INT)
-				{
-					next = STAT_INT;
-					end_ = true;
-					printlog("==> 지능",true,false,false,CL_help);
-				}
-				break;
-			case VK_ESCAPE:
-				enterlog();
-				printlog("취소하였다. 신중하게 생각하도록!",true,false,false,CL_help);
-				return false;
-			}
+			if(stat_)
+				printlog("당신은 이미 그 능력치로 개조되어있다!",false,false,false,CL_normal);
+			else
+				printlog("당신은 개조되어있는 몸이 아니다!",false,false,false,CL_normal);
+
+			return false;
 		}
-		you.StatUpDown(-1,prev);
-		you.StatUpDown(1,next);
-		printarray(false,false,false,CL_good,4,prev==STAT_STR?"힘":(prev==STAT_DEX?"민첩":"지능"),"에서 ",next==STAT_STR?"힘":(next==STAT_DEX?"민첩":"지능"),"으로 스탯을 움직였다. ");
-		printlog("반작용을 느꼈다.",true,false,false,CL_small_danger);
-		int damage = rand_int(10,40);
-		if(damage >= you.hp)
-			damage = you.hp-1;
-		you.HpUpDown(-damage,DR_EFFECT);
-		randA(2)?(randA(1)?you.StatUpDown(-1,STAT_STR,true):you.StatUpDown(-1,STAT_DEX,true)):you.StatUpDown(-1,STAT_INT,true);
-		for(int i=0;i<3;i++)				
-			if(!randA(2))
-				randA(2)?(randA(1)?you.StatUpDown(-1,STAT_STR,true):you.StatUpDown(-1,STAT_DEX,true)):you.StatUpDown(-1,STAT_INT,true);
+
+
+		you.SetStatBoost(stat_, max(1,pietyLevel(you.piety)-1));
+		if(stat_)
+			printarray(true,false,false,CL_good,3,"에이린이 당신의 몸을 더욱 ",stat_==1?"강력":(stat_==2?"민첩":"똑똑"),"해지도록 개조하였다!");
+		else
+		{
+			printlog("에이린은 당신의 몸을 원래대로 되돌렸다. ",false,false,false,CL_help);
+			printlog("아마도...",false,false,false,CL_small_danger);
+		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		printlog("당신은 완벽하게 재생되었다! 그 부작용으로 최대체력과 최대마나가 줄어들었다.",false,false,false,CL_help);
-		you.max_hp -= you.max_hp * rand_int(2,11-pow/15)/100;
-		you.max_mp -= rand_int(1,3-pow/50);
-		you.HpUpDown(you.max_hp,DR_EFFECT);
-		you.MpUpDown(you.max_mp);
+		printlog("당신은 에이린의 임시 수혈로 회복되었다.",true,false,false,CL_help);
+		printlog("이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!",true,false,false,CL_danger);
+		you.SetEirinHeal(you.max_hp*rand_int(70,80)/100);
 	}
 	return true;
 }

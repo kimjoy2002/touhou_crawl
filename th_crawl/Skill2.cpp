@@ -190,9 +190,9 @@ const char* SkillString(skill_list skill)
 	case SKL_EIRIN_0:
 		return "물약 던지기";
 	case SKL_EIRIN_1:
-		return "인체실험";
+		return "신체개조";
 	case SKL_EIRIN_2:
-		return "신체재생";
+		return "긴급수혈";
 	case SKL_BYAKUREN_1:
 		return "지력강화";
 	case SKL_BYAKUREN_2:
@@ -914,11 +914,6 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PietyUpDown(-5);
 		return true;
 	case SKL_EIRIN_1:
-		if(check_ && you.hp <  you.max_hp * 0.1f)
-		{
-			printlog("이 권능을 사용하기엔 체력이 너무 적다.",true,false,false,CL_small_danger);	
-			return false;
-		}
 		if(!check_)
 			you.PietyUpDown(-5);
 		return true;
@@ -928,8 +923,16 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			printlog("이미 체력이 가득 차 있다.",true,false,false,CL_normal);	
 			return false;
 		}
+		if(check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			return false;
+		}
 		if(!check_)
-			you.PietyUpDown(-15);
+		{
+			you.PowUpDown(-100,true);
+			you.PietyUpDown(-10);
+		}
 		return true;		
 	case SKL_YUUGI_1:
 		if(!check_)
@@ -1101,9 +1104,9 @@ const char* SkillCostString(skill_list skill)
 	case SKL_EIRIN_0:
 		return "(물약, P 약간)";
 	case SKL_EIRIN_1:
-		return "(고통, 신앙)";
+		return "(신앙)";
 	case SKL_EIRIN_2:
-		return "(고통, 영력 5, 신앙)";	
+		return "(영력 5, 신앙, P 대량)";	
 	case SKL_MINORIKO_2:
 		return "(음식, 영력 5, P 대량, 신앙)";	
 	case SKL_SIZUHA_1:

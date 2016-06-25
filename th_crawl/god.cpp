@@ -574,6 +574,8 @@ bool GetGodAbility(int level, bool plus)
 				printlog("더 이상 독물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
 			break;
 		case 2:
+			if(you.s_stat_boost)
+				you.SetStatBoost(you.s_stat_boost, 1);
 			you.Ability(SKL_EIRIN_0,true,!plus);
 			if(plus)
 				printlog("당신은 물약을 던질 수 있다. 이제 능력치감소물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
@@ -581,24 +583,34 @@ bool GetGodAbility(int level, bool plus)
 				printlog("더 이상 물약을 던질 수 없다. 능력치감소물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
 			break;
 		case 3:
+			if(you.s_stat_boost)
+				you.SetStatBoost(you.s_stat_boost, 2);
 			you.Ability(SKL_EIRIN_1,true,!plus);
 			if(plus)
-				printlog("당신은 인체실험을 할 수 있다. 당신은 이제 혼란물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog("당신은 신체개조를 할 수 있다. 당신은 이제 혼란물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
 			else
-				printlog("더이상 인체실험을 할 수 없다. 더 이상 혼란물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog("더 이상 신체개조를 할 수 없다. 더 이상 혼란물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
 			break;
 		case 4:
+			if(you.s_stat_boost)
+				you.SetStatBoost(you.s_stat_boost, 3);
 			if(plus)
 				printlog("당신은 감속물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
 			else
 				printlog("더 이상 감속물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
 			break;
 		case 5:
+			if(you.s_stat_boost)
+				you.SetStatBoost(you.s_stat_boost, 4);
 			you.Ability(SKL_EIRIN_2,true,!plus);
 			if(plus)
-				printlog("이제 신체재생이 가능하다. 이제 마비물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog("이제 긴급수혈이 가능하다. 이제 마비물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
 			else
-				printlog("더이상 신체재생을 할 수 없다. 더 이상 마비물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog("더이상 긴급수혈을 할 수 없다. 더 이상 마비물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+			break;
+		case 6:
+			if(you.s_stat_boost)
+				you.SetStatBoost(you.s_stat_boost, 5);
 			break;
 		}
 		return false;
@@ -2091,12 +2103,12 @@ void God_show()
 		}
 		if(level_ >= 3 && !you.punish[GT_EIRIN])
 		{
-			printsub("당신은 인체실험을 통해 능력치를 조절할 수 있다.             (고통, 신앙)",true,CL_small_danger);
+			printsub("당신은 신체개조를 통해 능력치를 조절할 수 있다.                   (신앙)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.punish[GT_EIRIN])
 		{
-			printsub("당신은 부작용을 대가로 완벽하게 몸을 재생할 수 있다.  (고통, 영력, 신앙)",true,CL_small_danger);
+			printsub("당신은 부작용을 대가로 몸을 재생할 수 있다.              (P, 영력, 신앙)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		break;

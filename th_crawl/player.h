@@ -202,6 +202,10 @@ public:
 	int s_trans_panalty;
 	int s_the_world;
 	int s_mana_delay;
+	int s_stat_boost;
+	int s_stat_boost_value;
+	int s_eirin_poison;
+	int s_eirin_poison_time;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -377,6 +381,8 @@ public:
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
 	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true 리턴은 기존의 버프가 있어서 덮어씌웠다.
 	bool SetProperty(tribe_proper_type type_, int value_);
+	bool SetStatBoost(int sdi_, int value_);
+	bool SetEirinHeal(int value_);
 
 	
 	int GetInvisible();

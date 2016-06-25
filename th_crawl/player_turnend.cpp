@@ -514,6 +514,36 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+
+	if(s_eirin_poison_time)
+	{
+		s_eirin_poison_time--;
+		if(s_eirin_poison_time == 11)
+		{			
+			printlog("치유로 인한 부작용이 시작되었다!",true,false,false,CL_danger);
+			enterlog();
+			SetInter(IT_STAT);
+		}
+		if(s_eirin_poison_time>0 && s_eirin_poison_time<=10)
+		{
+			int damage_ = min(s_eirin_poison,(s_eirin_poison/s_eirin_poison_time+1));
+			HpUpDown(-damage_,DR_EFFECT);
+			s_eirin_poison -= damage_;
+			SetInter(IT_POISON);		
+			if(s_eirin_poison<=0)
+			{
+				s_eirin_poison = 0;
+				s_eirin_poison_time = 0;
+			}
+		}
+		//s_eirin_poison;
+	}
+
+
+
+
+
+
 	if(s_slaying)
 	{
 		s_slaying = 0;
@@ -799,6 +829,8 @@ void deadlog()
 			sprintf_s(temp,200,"던전을 탈출했다.");
 		else if(you.dead_reason == DR_POISON)
 			sprintf_s(temp,200,"독에 중독되어 죽었다.");
+		else if(you.dead_reason == DR_EFFECT)
+			sprintf_s(temp,200,"부작용에 의해 죽었다.");
 		else
 			sprintf_s(temp,200,"죽었다.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);

@@ -66,7 +66,9 @@ final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE),
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
- s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+ s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
+ s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0),
+ alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
@@ -219,6 +221,11 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_trans_panalty);
 	SaveData<int>(fp, s_the_world);
 	SaveData<int>(fp, s_mana_delay);
+	SaveData<int>(fp, s_stat_boost);
+	SaveData<int>(fp, s_stat_boost_value);
+	SaveData<int>(fp, s_eirin_poison);
+	SaveData<int>(fp, s_eirin_poison_time);
+
 	
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -420,6 +427,10 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_trans_panalty);
 	LoadData<int>(fp, s_the_world);
 	LoadData<int>(fp, s_mana_delay);	
+	LoadData<int>(fp, s_stat_boost);
+	LoadData<int>(fp, s_stat_boost_value);
+	LoadData<int>(fp, s_eirin_poison);
+	LoadData<int>(fp, s_eirin_poison_time);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -2233,6 +2244,44 @@ bool players::SetProperty(tribe_proper_type type_, int value_)
 	property_vector.push_back(tribe_property(type_, value_));
 	property_vector.back().gain(true);
 	return true;
+}
+bool players::SetStatBoost(int sdi_, int value_)
+{
+	if(s_stat_boost)
+	{
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==1?-2:1),STAT_STR);
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==2?-2:1),STAT_DEX);
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==3?-2:1),STAT_INT);
+	}
+	//이전 스탯보너스 되돌리기
+
+	s_stat_boost = sdi_;
+	s_stat_boost_value = value_;
+
+	
+	if(s_stat_boost)
+	{
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==1?2:-1),STAT_STR);
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==2?2:-1),STAT_DEX);
+		you.StatUpDown(s_stat_boost_value*(s_stat_boost==3?2:-1),STAT_INT);
+	}
+	return true;
+
+}
+bool players::SetEirinHeal(int value_)
+{
+
+	int real_value_ = min(max_hp-hp, value_);
+	
+	//수치만큼 힐하기
+	
+	you.HpUpDown(real_value_,DR_EFFECT);
+
+	s_eirin_poison += real_value_;
+	s_eirin_poison_time = rand_int(100,200);
+
+	return true;
+
 }
 int players::GetInvisible()
 {

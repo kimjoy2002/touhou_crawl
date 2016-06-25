@@ -181,7 +181,7 @@ void auto_Move()
 	while(1)
 	{
 		bool back_ = false;
-		if(you.auto_pickup>0 && !you.s_levitation){
+		if(you.auto_pickup>0){
 			vector<item*> close_item_vector_;
 			env[current_level].close_item(close_item_vector_);
 			for(int i=0;i < close_item_vector_.size(); i++)
@@ -554,8 +554,6 @@ bool Auto_Pick_Up(list<item>::iterator it)
 	if(!it->isautopick())
 		return false;
 	if(you.s_confuse)
-		return false;
-	if(you.s_levitation)
 		return false;
 	if(env[current_level].insight_mon(MET_ENEMY))
 		return false;
@@ -1241,12 +1239,6 @@ void Stair_move(bool down)
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
 			break;
 		}
-		if(you.s_levitation)
-		{
-			printlog("당신은 떠있기에 계단 아래로 내려갈 수 없다.",true,false,false,CL_normal);
-			return;
-		}
-
 
 
 
@@ -1315,11 +1307,6 @@ void Stair_move(bool down)
 		{
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
 			break;
-		}
-		if(you.s_levitation)
-		{
-			printlog("당신은 떠있기에 계단 아래로 내려갈 수 없다.",true,false,false,CL_normal);
-			return;
 		}
 		{
 			if(!warning(type, down))

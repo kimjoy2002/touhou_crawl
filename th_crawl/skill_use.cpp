@@ -148,7 +148,7 @@ bool skill_turn_levitation(int pow, bool short_, unit* order, coord_def target)
 		return true;
 	}
 	else if(order->isplayer() && you.s_levitation)
-		printlog("이미 부유도중에 사용할 수 없다.",true,false,false,CL_normal);	
+		printlog("이미 비행도중에 사용할 수 없다.",true,false,false,CL_normal);	
 
 	return false;
 }
@@ -156,7 +156,7 @@ bool skill_off_levitation(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		printlog("부유를 멈췄다.",true,false,false,CL_normal);
+		printlog("비행을 멈췄다.",true,false,false,CL_normal);
 		you.s_levitation = 0;
 		int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 		you.Ability(SKL_LEVITATION,false,false,temp);

@@ -27,11 +27,6 @@ void PickUp()
 		printlog("광기에 휩싸인 상태로 무언가를 주울 수 없다!",true,false,false,CL_danger);
 		return;
 	}
-	if(you.s_levitation)
-	{
-		printlog("당신은 땅에 손이 닿지 않는다.",true,false,false,CL_normal);
-		return;
-	}
 	int num=0;
 	list<item>::iterator it, first_it;
 	for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)

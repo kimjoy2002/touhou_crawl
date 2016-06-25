@@ -1123,7 +1123,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_levitation)
 			{
-				pfont->DrawTextA(pSprite,"부유", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_levitation>10?CL_white_blue:CL_blue);
+				pfont->DrawTextA(pSprite,"비행", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_levitation>10?CL_white_blue:CL_blue);
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_glow)

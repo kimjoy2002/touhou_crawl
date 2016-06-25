@@ -129,8 +129,7 @@ string GetSpellInfor(spell_list spell)
 		text_ += "모티브는 이쿠의 뇌운극어라는 설이...\n";
 		break;
 	case SPL_LEVITATION:
-		text_ += "전극을 이용하여 일시적인 부유상태가 되는 마법. 깊은물같은 지형을 통과할 수 있게 된다.\n";
-		text_ += "부유상태가 풀리기 전까진 물건을 집거나 계단을 내려갈 수 없게 된다.(올라갈 순 있다.)\n";
+		text_ += "전극을 이용하여 일시적인 비행상태가 되는 마법. 깊은물같은 지형을 통과할 수 있게 된다.\n";
 		break;
 	case SPL_GLOW:
 		text_ += "조명으로 적을 비춘다. 조명으로 비춰진 적은 일시적으로 회피가 감소한다.\n";
@@ -529,11 +528,10 @@ string GetSkillInfor(skill_list skill)
 		text_ += "그레이즈 상태를 없앤다.\n";
 		break;
 	case SKL_LEVITATION:
-		text_ += "일시적인 부유상태가 된다. 깊은물같은 지형을 통과할 수 있게 된다.\n";
-		text_ += "부유상태가 풀리기 전까진 물건을 집거나 계단을 내려갈 수 없게 된다.(올라갈 순 있다.)\n";
+		text_ += "일시적인 비행 상태가 된다. 깊은물같은 지형을 통과할 수 있게 된다.\n";
 		break;
 	case SKL_LEVITATION_OFF:
-		text_ += "부유 상태를 없앤다.\n";
+		text_ += "비행 상태를 없앤다.\n";
 		break;
 	case SKL_INVISIBLE:
 		text_ += "일시적 투명화할 수 있는 능력. 투명상태에서는 상대에게 들킬 확률이 현저히 줄어든다.\n";

@@ -180,9 +180,9 @@ const char* SkillString(skill_list skill)
 	case SKL_GRAZE_OFF:
 		return "그레이즈 해제";
 	case SKL_LEVITATION:
-		return "부유 발동";
+		return "비행 발동";
 	case SKL_LEVITATION_OFF:
-		return "부유 해제";
+		return "비행 해제";
 	case SKL_INVISIBLE:
 		return "투명 발동";
 	case SKL_INVISIBLE_OFF:

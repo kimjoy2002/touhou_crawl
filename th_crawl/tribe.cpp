@@ -180,7 +180,7 @@ string tribe_property::GetDetail()
 	case TPT_STEALTH:
 		return "은밀도가 오른다.";
 	case TPT_FLY:
-		return "부유를 능력을 통해 키고 끌 수 있다.";
+		return "비행을 능력을 통해 키고 끌 수 있다.";
 	case TPT_SWIM:
 		return "깊은 물에서도 평지처럼 이동해 다닐 수 있다.";
 	case TPT_SIZE:

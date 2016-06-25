@@ -122,7 +122,7 @@ const char* GetAtifactString(ring_type ring_, int value_)
 		sprintf_s(temp,32,"+그레이즈");
 		break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,32,"+부유");
+		sprintf_s(temp,32,"+비행");
 		break;
 	case RGT_INVISIBLE:
 		sprintf_s(temp,32,"+투명");
@@ -204,7 +204,7 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 		sprintf_s(temp,128,"그레이즈를 발동할 수 있다.");
 		break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,128,"부유를 발동할 수 있다.");
+		sprintf_s(temp,128,"비행을 발동할 수 있다.");
 		break;
 	case RGT_INVISIBLE:
 		sprintf_s(temp,128,"투명을 발동할 수 있다.");

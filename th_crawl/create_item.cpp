@@ -47,6 +47,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,2,4,2,1},//아티펙트무기
 	{28,2,4,2,1},//아티펙트방어구
 	{29,2,4,2,1},//아티펙트반지
+	{30,2,4,1,1},//발동템
 
 	{25,2,SCARLET_LEVEL_LAST_LEVEL,3,1}, //책
 	
@@ -65,6 +66,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트무기
 	{28,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트반지
+	{30,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//발동템
 	
 	//지저
 	{13,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 물약들
@@ -80,6 +82,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트무기
 	{28,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트방어구
 	{29,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트반지
+	{30,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,5,1},//발동템
 
 
 	//윳쿠리
@@ -96,6 +99,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트무기
 	{28,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트방어구
 	{29,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트반지
+	{30,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,25,1},//발동템
 
 
 	
@@ -114,6 +118,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트무기
 	{28,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트반지
+	{30,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//발동템
 
 
 	//판데모니엄
@@ -131,6 +136,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{27,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트무기
 	{28,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트반지
+	{30,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//발동템
 	
 
 	{-1,0,0,0,0}
@@ -300,6 +306,9 @@ item_infor& id_to_item(int id, item_infor* item_)
 	case 29://아티펙트 반지
 		makeitem(ITM_RING,randA(9)?1:-1,item_);
 		item_->artifact = true;
+		break;
+	case 30://발동템
+		makeitem(ITM_MISCELLANEOUS,1,item_);
 		break;
 	default:
 		break;

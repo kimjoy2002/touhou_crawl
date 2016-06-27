@@ -15,6 +15,7 @@
 #include "skill_use.h"
 #include "weapon.h"
 #include "armour.h"
+#include "evoke.h"
 
 extern HANDLE mutx;
 
@@ -621,8 +622,36 @@ string GetItemInfor(item *it)
 		}
 		break;
 	case ITM_MISCELLANEOUS:
-		text_ += "잡다한 물건들.\n";
+		{
+			switch(it->value1)
+			{
+			case EVK_PAGODA:
+				text_ += "누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n";
+				text_ += "발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n";
+				break;
+			case EVK_AIR_SCROLL:
+				text_ += "어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n";
+				text_ += "발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n";
+				break;
+			case EVK_DREAM_SOUL:
+				text_ += "꿈의 세계에서 해메고있던 영혼이다.\n";
+				text_ += "사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n";
+				text_ += "어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n";
+				break;
+			default:
+				text_ += "버그를 담은 발동템이다.\n";
+				break;
+			}
+			text_ += "\n\n";					
+			text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
+			text_ += "V키로 파워를 소모하여 발동할 수 있다.\n\n";
+			char temp[100];
+			sprintf(temp,"이 발동템을 사용할때마다 필요한 파워: %d.%02d\n",Evokeusepower((evoke_kind)it->value1,true)/100,Evokeusepower((evoke_kind)it->value1,true)%100);
+			text_ += temp;
+
+		}
 		break;
+
 	case ITM_GOAL:
 		text_ += "이것은 각종 던전을 정복한 증거인 룬이다. \n";
 		text_ += "3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n";

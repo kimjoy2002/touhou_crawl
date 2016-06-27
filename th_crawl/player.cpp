@@ -33,6 +33,7 @@
 #include "swako.h"
 #include "dump.h"
 #include "armour.h"
+#include "evoke.h"
 
 
 players you;
@@ -3015,6 +3016,17 @@ bool players::Evoke(char id_)
 					(*it).value3++;//»ç¿ë¿¹Ãø È½¼ö¸¦ ´Ã¸°´Ù.
 					ReleaseMutex(mutx);
 					
+					you.doingActionDump(DACT_EVOKE, (*it).name.name);
+					return true;
+				}
+				return false;
+			}
+			if((*it).type == ITM_MISCELLANEOUS)
+			{
+				ReleaseMutex(mutx);
+
+				if(evoke_evokable((evoke_kind)(*it).value1))
+				{					
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;
 				}

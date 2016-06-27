@@ -50,7 +50,7 @@ const mon_infor mondata[] = {
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_CANT_NETURAL,0,0,10},
 
-	{MON_CROW,1,15,name_infor("±î¸¶±Í",false),&img_mons_crow,17,0,8,
+	{MON_CROW,2,4,name_infor("±î¸¶±Í",false),&img_mons_crow,17,0,8,
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,7},
 
@@ -471,8 +471,8 @@ const mon_infor mondata[] = {
 	{MON_DEAGAMA,12,800,name_infor("Å«µÎ²¨ºñ",false),&img_mons_dagama,90,10,2,
 	{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_SWIM,3,1,10},
-	{MON_RABBIT,1,1,name_infor("Åä³¢",false),&img_mons_rabit,10,0,6,
-	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
+	{MON_RABBIT,3,5,name_infor("Åä³¢",false),&img_mons_rabit,20,0,15,
+	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_CANT_NETURAL,0,1,10},
 	{MON_YOKAI_RABBIT,1,1,name_infor("¿ä±« Åä³¢",false),&img_mons_youkai_rabit,10,0,6,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},

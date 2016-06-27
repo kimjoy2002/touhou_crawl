@@ -2327,10 +2327,13 @@ void monster::special_action(int delay_)
 				env[current_level].MakeSmoke(coord_def(i+position.x,j+position.y),img_fog_dark,SMT_DARK,rand_int(3,4),0,this);
 		break;
 	case MON_FIRE_CAR:
-		for(int i = -1;i<2;i++){
-			for(int j = -1;j<2;j++){
-				if(i!=0 || j!=0)
-					env[current_level].MakeSmoke(coord_def(i+position.x,j+position.y),img_fog_fire,SMT_FIRE,1,0,this);
+		if(!isUserAlly())
+		{
+			for(int i = -1;i<2;i++){
+				for(int j = -1;j<2;j++){
+					if(i!=0 || j!=0)
+						env[current_level].MakeSmoke(coord_def(i+position.x,j+position.y),img_fog_fire,SMT_FIRE,1,0,this);
+				}
 			}
 		}
 		break;

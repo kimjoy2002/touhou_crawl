@@ -208,6 +208,89 @@ struct coord_def
     }
 };
 
+
+template <typename T>
+class random_extraction
+{
+	vector<T> value;
+	vector<int> percent;
+	int max_percent;
+
+	
+	T pop_base(bool pop_)
+	{
+		if(value.empty())
+			return T();
+
+
+		int per_ = randA(max_percent-1);
+		auto it = value.begin();
+		auto it2 = percent.begin();
+		for(; it2 !=  percent.end() ;it++,it2++)
+		{
+			if(per_<(*it2))
+			{
+				T temp = (*it);
+				if(pop_)
+				{
+					max_percent -= (*it2);
+					value.erase(it);
+					percent.erase(it2);
+				}
+				return temp;
+			}
+			else
+			{
+				per_-=(*it2);
+			}
+		}
+		return value[0];
+	}
+
+
+
+public:
+	random_extraction():max_percent(0){};
+	
+	int GetSize()
+	{
+		return value.size();
+	}
+	int GetMaxPercent()
+	{
+		return max_percent;
+	}
+
+	int push(T value_, int percent_ = 1) //하나를 넣으면서 
+	{
+		if(percent_<=0)
+			return max_percent;
+		value.push_back(value_);
+		percent.push_back(percent_);
+		max_percent+=percent_;
+		return max_percent;
+	}
+	
+	T pop() //하나를 꺼내면서 목록에서 제거
+	{
+		return pop_base(true);
+	}
+	
+	T choice() //하나를 선택만 함
+	{
+		return pop_base(false);
+	}
+
+};
+
+
+
+
+
+
+
+
+
 int distan_coord(const coord_def& a, const coord_def& b);
 
 

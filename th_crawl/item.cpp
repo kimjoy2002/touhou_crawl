@@ -268,6 +268,10 @@ string item::GetName(int num_)
 			temp += temp2;
 		}
 	}
+	if(type==ITM_MISCELLANEOUS)
+	{
+		temp += " {발동}";
+	}
 	
 	if(isArtifact() && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
 	{ //아티펙트!

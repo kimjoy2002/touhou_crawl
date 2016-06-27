@@ -130,7 +130,7 @@ int GetPosToDirec(const coord_def &start, const coord_def &target)
 			return 3;
 		}
 	}
-	int angle = GetPositionToAngle(start.x,start.y,target.x,target.y);
+	int angle = (int) GetPositionToAngle(start.x,start.y,target.x,target.y);
 	angle = (angle+360)%360;
 	return GetAngleToDirec(angle);
 }
@@ -182,7 +182,7 @@ float GetCenterY()
 
 float round(float x)
 {
-   return ((x>0) ? floor(x+.5) : ceil(x-.5));
+   return ((x>0) ? floor(x+.5f) : ceil(x-.5f));
 }
 float round_down(float x)
 {

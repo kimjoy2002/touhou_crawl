@@ -1643,7 +1643,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			continue;
 		if( (item_vt == IVT_EQ_JEWELRY || item_vt == IVT_UEQ_JEWELRY ) && i != ITMS_JEWELRY)
 			continue;
-		if(item_vt == IVT_SPELLCARD && i != ITMS_SPELL)
+		if(item_vt == IVT_SPELLCARD && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS)
 			continue;
 		if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
 			continue;

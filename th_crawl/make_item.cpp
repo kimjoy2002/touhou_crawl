@@ -19,6 +19,7 @@
 #include "weapon.h"
 #include "spellcard.h"
 #include "armour.h"
+#include "evoke.h"
 #include <algorithm>
 
 extern HANDLE mutx;
@@ -262,6 +263,9 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->weight = 5.0f;
 			t->value = static_book_list[book].value;
 		}
+		break;
+	case ITM_MISCELLANEOUS:	
+		MakeEvokeItem(t,select_);
 		break;
 	case ITM_GOAL:
 		t->value1 = 0;

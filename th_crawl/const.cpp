@@ -215,7 +215,7 @@ const char *item_scroll_string = "두루마리";
 const char *item_spell_string = "스펠카드";
 const char *item_jewelry_string = "장신구";
 const char *item_book_string = "책";
-const char *item_miscellaneous_string = "그외";
+const char *item_miscellaneous_string = "발동";
 const char *item_goal_string = "중요";
 
 const int level_up_value[] = {

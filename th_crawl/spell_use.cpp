@@ -2136,7 +2136,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
-	if(env[current_level].isBamboo())
+	if(env[current_level].isBamboo() && order && !order->isUserAlly())
 	{
 		if(map_list.bamboo_rate<((order->GetId() == MON_TEWI)?400:300))
 			map_list.bamboo_rate+=order->GetId() == (MON_TEWI?40:20);

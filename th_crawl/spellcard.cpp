@@ -29,11 +29,11 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		return false;
 	}
 
-	if(you.power < Spellcardusepower(kind,true))
-	{
-		printlog("스펠을 선언하기엔 당신의 P가 모자란다.",true,false,false,CL_small_danger);	
-		return false;
-	}
+	//if(you.power < Spellcardusepower(kind,true))
+	//{
+	//	printlog("스펠을 선언하기엔 당신의 P가 모자란다.",true,false,false,CL_small_danger);	
+	//	return false;
+	//}
 
 
 

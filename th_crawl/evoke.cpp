@@ -201,7 +201,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		{
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
-				beam_infor temp_infor(randC(3,3+level_),3*(3+level_),16,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
+				beam_infor temp_infor(randC(3,4+level_*2/3),3*(4+level_*2/3),16,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 				
@@ -265,6 +265,12 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 
 
 	random_extraction<int> mon_list_;
+
+	int num_ = rand_int(1,3)+randA(level_/13);
+
+	if(num_ == 1)
+		level_ = min(27,level_ + 5);
+
 
 	switch(branch_)
 	{
@@ -399,7 +405,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 
 
 	
-	for(int i = rand_int(2,3)+randA(level_/13); i > 0; i--)
+	for(int i = num_; i > 0; i--)
 		list_.push_back(mon_list_.choice());
 	return msg_;
 }

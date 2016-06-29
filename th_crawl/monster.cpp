@@ -2338,19 +2338,19 @@ void monster::special_action(int delay_)
 		}
 		break;
 	case MON_YAMAME:
-		if(env[current_level].isInSight(position) && randA(2) == 0 && !isArena())
+		if(env[current_level].isInSight(position) && randA(2) == 0 && !isArena() && !isUserAlly())
 		{
 			you.SetSick(10);
 		}
 		break;
 	case MON_TEWI:
-		if(env[current_level].isInSight(position) && hp<max_hp/2 && randA(3) == 0)
+		if(env[current_level].isInSight(position) && hp<max_hp/2 && randA(3) == 0 && !isUserAlly())
 		{
 			SetFear(rand_int(20,40));
 		}
 		break;
 	case MON_CLOWNPIECE:
-		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0 && !isArena())
+		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(4) == 0 && !isArena() && !isUserAlly())
 		{
 			you.SetLunatic(rand_int(5,15));
 		}

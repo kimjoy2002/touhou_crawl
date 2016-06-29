@@ -2838,7 +2838,10 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("ºÒ¹Ù´Ù",false));
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
-			env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(3,10)+power/10,  0, order);
+			if(order->isSightnonblocked(c_))
+			{
+				env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(3,10)+power/10,  0, order);
+			}
 		},false);
 
 		if(order && !order->isplayer())

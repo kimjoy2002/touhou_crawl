@@ -1377,7 +1377,13 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 		env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
 		set_exist_named(MON_PACHU);
 	}
+	
 
+	for(int i=rand_int(4,7); i >0; i--)
+	{		
+		item_infor t;
+		env[num].MakeItem(coord_def(DG_MAX_X/2+rand_int(-9,9),DG_MAX_Y/2+rand_int(-4,4)),makeitem(ITM_BOOK, 0, &t));
+	}
 
 
 }

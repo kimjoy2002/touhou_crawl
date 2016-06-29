@@ -354,6 +354,8 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 											real_knock_++;
 										}
 									}
+									else
+										break;
 									beam++;
 									knockback--;
 								}

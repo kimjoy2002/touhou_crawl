@@ -1434,6 +1434,8 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 							real_knock_++;
 						}
 					}
+					else
+						break;
 					beam++;
 					knockback--;
 				}

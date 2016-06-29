@@ -248,7 +248,22 @@ void arena_event(int num)
 			else
 			{
 				AddNote(you.turn,CurrentLevelString(),"오답... 우측팀의 승리다",CL_danger);
-				map_list.bamboo_count = 121;
+				map_list.god_num++;
+				if(map_list.god_num<3)
+				{
+					char temp[200];
+					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
+					printlog(temp,true,false,false,CL_danger);
+					sprintf_s(temp,200,"남은 기회 %d",3-map_list.god_num);
+					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
+					map_list.bamboo_count = -10;
+				}
+				else
+				{
+					printlog("오답이다!",true,false,false,CL_danger);
+					map_list.bamboo_count = 121;
+				}
+		
 
 			}
 			map_list.bamboo_rate = 1;
@@ -265,7 +280,21 @@ void arena_event(int num)
 			else
 			{
 				AddNote(you.turn,CurrentLevelString(),"오답... 좌측팀의 승리다",CL_danger);
-				map_list.bamboo_count = 121;
+				map_list.god_num++;
+				if(map_list.god_num<3)
+				{
+					char temp[200];
+					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
+					printlog(temp,true,false,false,CL_danger);
+					sprintf_s(temp,200,"남은 기회 %d",3-map_list.god_num);
+					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
+					map_list.bamboo_count = -10;
+				}
+				else
+				{
+					printlog("오답이다!",true,false,false,CL_danger);
+					map_list.bamboo_count = 121;
+				}
 
 			}
 			map_list.bamboo_rate = 2;
@@ -358,6 +387,6 @@ void map_algorithms_arena(int num)
 	
 	env[num].stair_up[0].x = DG_MAX_X/2;
 	env[num].stair_up[0].y = DG_MAX_Y/2+5;
-
+	map_list.god_num=0;
 	env[num].MakeEvent(EVL_ARENA,coord_def(0,0),EVT_ALWAYS);
 }

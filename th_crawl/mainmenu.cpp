@@ -232,7 +232,7 @@ bool sprint1s(int value_)
 	env[current_level].DeleteItem(it);
 
 	printlog("아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!",true,false,false,CL_help);
-	printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버!",true,false,false,CL_help);
+	printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버! 기회는 3번...",true,false,false,CL_help);
 	return true;
 }
 

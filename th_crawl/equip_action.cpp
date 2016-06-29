@@ -51,7 +51,10 @@ void Equip_Weapon()
 			view_item(IVT_SELECT,"무슨 무기를 장착하시겠습니까?");
 		else if(key_ == '-')
 		{
-			you.unequip(ET_WEAPON);
+			if(!you.unequip(ET_WEAPON))
+			{				
+				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+			}
 			break;
 		}
 		else if(key_ == VK_ESCAPE)

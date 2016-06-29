@@ -261,7 +261,7 @@ void wiz_mode()
 			//skill_summon_bug(10,false,&you,you.position);		
 			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact())
 			{
-				you.equipment[ET_WEAPON]->value5 = WB_PROTECT;
+				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 				you.equipment[ET_WEAPON]->value6 = -1;
 			}
 			else

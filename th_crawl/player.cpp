@@ -3826,7 +3826,8 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			case WB_POISON:			
 				printlog("무기에서 독이 떨어지기 시작했다.",true,false,false,CL_white_blue);	
 				break;
-			case WB_CURSE:		
+			case WB_CURSE:
+				(*it).Curse(true,ET_WEAPON);
 				printlog("무기는 저주의 힘으로 가득 차있다.",true,false,false,CL_hina);	
 				break;
 			case WB_WEATHER	:

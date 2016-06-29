@@ -245,7 +245,7 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(6)?0:(randA(3)?1:-1),item_);
 		break;
 	case 7://흔한 방어구
-		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1))),randA(4)?1:(randA(3)?1:-1),item_);
+		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(4)?1:(randA(3)?1:-1),item_);
 		break;
 	case 8://흔한 좋은 장신구
 		makeitem(1/*randA(4)*/?ITM_RING:ITM_SPELLCARD,1,item_);
@@ -300,7 +300,7 @@ item_infor& id_to_item(int id, item_infor* item_)
 		item_->artifact = true;
 		break;
 	case 28://아티펙트 방어구
-		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1))),randA(2)?0:(randA(3)?1:-1),item_);
+		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(2)?0:(randA(3)?1:-1),item_);
 		item_->artifact = true;
 		break;
 	case 29://아티펙트 반지

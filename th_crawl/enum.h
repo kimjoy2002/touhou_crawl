@@ -660,7 +660,7 @@ enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ c
 	ITM_ARMOR_BODY_ARMOUR_2,
 	ITM_ARMOR_BODY_ARMOUR_3,
 	ITM_ARMOR_BODY_LAST,
-	ITM_ARMOR_SHIELD,
+	ITM_ARMOR_SHIELD = ITM_ARMOR_BODY_LAST,
 	ITM_ARMOR_LAST,
 
 	ITM_POTION,

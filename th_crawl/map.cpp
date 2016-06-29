@@ -12,6 +12,8 @@
 #include "mon_infor.h"
 #include "event.h"
 #include "armour.h"
+#include "evoke.h"
+
 
 
 
@@ -200,6 +202,7 @@ void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
+void map_algorithms_tuto03(int num);
 void map_algorithms_arena(int num);
 
 void map_algorithms(int num)
@@ -300,13 +303,17 @@ void map_algorithms(int num)
 			map_algorithms01(num,DG_FLOOR,DG_WALL);
 		}
 	}
-	else if(isTutorial())
+	else if(map_list.tutorial == GM_TUTORIAL)
 	{
 		if(num == 0 )
 			map_algorithms_tuto01(num);
 		else
 			map_algorithms_tuto02(num);
 
+	}
+	else if(map_list.tutorial == GM_TUTORIAL2)
+	{
+		map_algorithms_tuto03(num);
 	}
 	else //아레나1
 	{
@@ -1672,6 +1679,13 @@ void map_algorithms_tuto01(int num)
 	you.GiveSkillExp(SKT_DODGE,50,false);
 }
 
+
+
+
+
+
+
+
 void map_algorithms_tuto02(int num)
 {
 	for(int x = 0; x<DG_MAX_X; x++)
@@ -1707,4 +1721,117 @@ void map_algorithms_tuto02(int num)
 	env[num].stair_up[1].y = 31;
 	env[num].dgtile[36][31].tile = DG_UP_STAIR;
 
+}
+
+
+
+
+
+void map_algorithms_tuto03(int num)
+{
+	
+	item_infor t;
+
+	for(int x = 0; x<DG_MAX_X; x++)
+	{	
+		for(int y=0; y<DG_MAX_Y; y++)
+		{
+
+			if(x==10 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==16 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==22 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==28 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==34 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==40 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==46 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==52 && y==7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==53 && y==7) //계단
+				env[num].dgtile[x][y].tile = DG_UP_STAIR;
+			
+			
+			else if(x>=5 && x <=9 && y>=5 && y<=9) //첫째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+
+			else if(x>=11 && x <=15 && y>=5 && y<=9) //둘째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			
+			else if(x>=17 && x <=21 && y>=5 && y<=9) //셋째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			
+			else if(x>=23 && x <=27 && y>=5 && y<=9) //넷째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			
+			else if(x>=29 && x <=33 && y>=5 && y<=9) //다섯째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+
+			
+			else if(x>=35 && x <=39 && y>=5 && y<=9) //여섯째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			
+			else if(x>=41 && x <=45 && y>=5 && y<=9) //일곱째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+			
+			else if(x>=47 && x <=51 && y>=5 && y<=9) //여덟째방
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+
+			
+			else if(x>=5 && x <=53 && y==7) //길목
+				env[num].dgtile[x][y].tile = DG_FLOOR;
+
+
+
+			else
+				env[num].dgtile[x][y].tile = DG_WALL;
+		}
+	}
+
+
+
+
+	
+	env[num].stair_up[0].x = 7;
+	env[num].stair_up[0].y = 7;
+
+	
+
+	env[num].MakeEvent(24,coord_def(7,7),EVT_SIGHT);
+
+	env[num].MakeEvent(25,coord_def(13,7),EVT_SIGHT);	
+	env[num].MakeItem(coord_def(12,7),makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 10));
+	env[num].MakeItem(coord_def(14,7),makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 30));
+	
+	env[num].MakeEvent(26,coord_def(19,7),EVT_SIGHT);
+	env[num].MakeItem(coord_def(18,7),makeitem(ITM_ARMOR_BODY_ARMOUR_2, 0, &t, 0));
+	env[num].MakeItem(coord_def(20,7),makeitem(ITM_ARMOR_SHIELD, 0, &t, 0));
+
+	env[num].MakeEvent(27,coord_def(25,7),EVT_SIGHT);
+
+	env[num].MakeEvent(28,coord_def(31,7),EVT_SIGHT);
+	env[num].MakeItem(coord_def(30,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_BILL));
+	env[num].MakeItem(coord_def(32,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_POISON_NEEDLE));
+	
+	env[num].MakeEvent(29,coord_def(37,7),EVT_SIGHT);
+	env[num].MakeEvent(EVL_SIGHT_P,coord_def(37,6),EVT_SIGHT);
+	env[num].MakeEvent(EVL_SIGHT_P,coord_def(37,8),EVT_SIGHT);	
+
+	env[num].MakeEvent(30,coord_def(43,7),EVT_SIGHT);
+	env[num].MakeItem(coord_def(42,7),makeitem(ITM_SPELL, 0, &t, SPC_V_FIRE));
+	env[num].MakeItem(coord_def(44,7),makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
+	
+	env[num].MakeEvent(31,coord_def(49,7),EVT_SIGHT);
+	env[num].MakeItem(coord_def(48,7),makeitem(ITM_GOAL, 0, &t, 0));
+	env[num].MakeItem(coord_def(50,7),makeitem(ITM_ORB, 0, &t, 0));
+
+
+	
+	env[num].stair_up[1].x = 53;
+	env[num].stair_up[1].y = 7;
 }

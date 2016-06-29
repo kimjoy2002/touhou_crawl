@@ -14,6 +14,7 @@ enum game_mode
 {
 	GM_NORMAL=0,
 	GM_TUTORIAL,
+	GM_TUTORIAL2,
 	GM_SPRINT1_AREANA
 };
 

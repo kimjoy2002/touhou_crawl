@@ -196,6 +196,22 @@ bool tutorials(int value_)
 }
 
 
+bool tutorial2(int value_)
+{
+	map_list.tutorial = GM_TUTORIAL2;
+	you.image = &img_play_sanae;
+	you.char_name.name = "사나에";
+	you.tribe = TRI_HUMAN;
+	you.job = JOB_SHAMAN;
+	SetTribe(you.tribe);
+	you.CalcuHP();
+	env[current_level].EnterMap(0,deque<monster*>());	
+	printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
+	printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
+	return true;
+}
+
+
 bool sprint1s(int value_)
 {
 	map_list.tutorial = GM_SPRINT1_AREANA;
@@ -292,15 +308,19 @@ void start_mainmenu()
 	menu_manager m_mgr;
 	string temp;
 	
-	temp = "간단 메뉴.\n\n\n";
+	temp = "메인 게임\n\n";
 	temp += "a - 게임시작\n";
-	temp += "b - 튜토리얼\n";
-	temp += "c - 스프린트1";
+	temp += "b - 튜토리얼(초심자)\n";
+	temp += "c - 튜토리얼(돌죽경험자용, 임시)\n";	
+	temp += "\n\n미니 게임\n\n";
+	temp += "d - 아레나";
 	m_mgr.menu_puls(0,temp);
 	m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 	m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
-	m_mgr.menu_input_puls(0,'c',0,"",false,sprint1s,0);
+	m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
+	m_mgr.menu_input_puls(0,'d',0,"",false,sprint1s,0);
 	
+
 	temp = "무슨 모드로 시작할거야?\n\n\n";
 	temp += "a - 동방 캐릭터로 시작하기 (EASY)\n\n";
 	temp += "b - 직접 캐릭터 생성하기 (NORMAL)\n\n";

@@ -24,7 +24,8 @@
 
 extern HANDLE mutx;
 void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type = -1);
-void ShieldMake(item_type type, int good_bad, item_infor* t);
+void ShieldMake(item_type type, int good_bad, item_infor* t, int select_
+	);
 
 int armour_stat[5][3] =
 {{1,0,0},
@@ -132,7 +133,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		MakeArmourEnchant(good_bad, t);
 		break;
 	case ITM_ARMOR_SHIELD:
-		ShieldMake(type, good_bad, t);
+		ShieldMake(type, good_bad, t,select_);
 		break;
 	case ITM_RING:
 		t->value1 = select_!=-1?select_:(int)goodbadring(good_bad);
@@ -720,7 +721,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 
 
 
-void ShieldMake(item_type type, int good_bad, item_infor* t)
+void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 {
 	t->value0 = 0;
 	t->value3 = 0;
@@ -728,7 +729,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t)
 	t->is_pile = false;
 	t->name2.name = "";
 	t->name2.name_type = true;
-	int i = randA_1(30);
+	int i = select_!=-1?select_:randA_1(30);
 	if(i<=20)
 	{
 		t->value1 = 3;

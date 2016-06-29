@@ -1529,8 +1529,8 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		you.skill[skill_].onoff = false;
 		return false;
 	}
-
-	int up_point = (exp_*10)/exp_to_skill_exp(skill[skill_].level);
+	int exp_panalty = exp_to_skill_exp(skill[skill_].level);
+	int up_point = (exp_*10)/exp_panalty;
 	if(up_point<0)
 		up_point = 0;
 	skill[skill_].exper += up_point;
@@ -1539,7 +1539,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	if(need_exp <= skill[skill_].exper)
 	{
 		char temp[50];
-		int exp_pool = (skill[skill_].exper - need_exp)*exp_to_skill_exp(skill[skill_].level)/10;
+		int exp_pool = (skill[skill_].exper - need_exp)*exp_panalty/10;
 		skill[skill_].level+=1;
 		skill[skill_].exper = need_exp;
 		if(skill[skill_].level == 27)

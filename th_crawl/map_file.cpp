@@ -71,7 +71,7 @@ bool environment::isLastFloor(int level_)
 
 bool isTutorial()
 {
-	return map_list.tutorial == GM_TUTORIAL;
+	return map_list.tutorial == GM_TUTORIAL || map_list.tutorial == GM_TUTORIAL2;
 }
 
 bool isNormalGame()

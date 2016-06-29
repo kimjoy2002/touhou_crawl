@@ -41,12 +41,16 @@ bool summon_check(coord_def c, unit* order, bool fly_, bool swim_)
 	if(env[current_level].isMonsterPos(c.x,c.y)) 
 		return false; //이미 몬스터가 있는 위치는 소환 X
 
-
+	
+	//막히지않은곳
+	if(order && !order->isSightnonblocked(c))
+		return false;
 
 	if(order == &you)
 	{//소환사가 플레이어라면
 		if(!env[current_level].isInSight(c)) //시야내에서만 소환된다.
 			return false;
+
 	}
 	else if(!order->isplayer())
 	{//소환사가 몬스터라면
@@ -54,9 +58,6 @@ bool summon_check(coord_def c, unit* order, bool fly_, bool swim_)
 		if(!((monster*)order)->isMonsterSight(c))
 			return false;
 
-		//막히지않은곳
-		if(!((monster*)order)->isSightnonblocked(c))
-			return false;
 	}
 	return true;
 

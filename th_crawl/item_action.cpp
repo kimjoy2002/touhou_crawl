@@ -443,7 +443,7 @@ void Spelllcard_Evoke()
 		return;
 	}
 	int i=0;
-	view_item(IVT_SPELLCARD,"무슨 아이템을 발동하시겠습니까?");
+	view_item(IVT_EVOKE,"무슨 아이템을 발동하시겠습니까?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);

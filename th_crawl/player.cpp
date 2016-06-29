@@ -3013,6 +3013,8 @@ bool players::Evoke(char id_)
 					}
 					iden_list.spellcard_list[(*it).value2].iden = 2;
 					(*it).value1--;
+					if((*it).value3<0)
+						(*it).value3 = 0;
 					(*it).value3++;//사용예측 횟수를 늘린다.
 					ReleaseMutex(mutx);
 					
@@ -3056,9 +3058,16 @@ bool players::Read(char id_)
 				if((*it).type == ITM_SCROLL)
 				{
 
-					printarray(true,false,false,CL_normal,3,it->GetName().c_str(),it->GetNameInfor().name_to(true),"읽었다.");
-					bool pre_iden_ = iden_list.scroll_list[(*it).value1].iden == 3;
-					readscroll((scroll_type)(*it).value1);
+					printarray(true,false,false,CL_normal,3,it->GetName(-2).c_str(),it->GetNameInfor().name_to(true),"읽었다.");
+					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
+					bool use_ = readscroll((scroll_type)(*it).value1, pre_iden_);
+					
+					if(!use_)
+					{		
+						ReleaseMutex(mutx);
+						return false;		
+					}
+
 					if(iden_list.scroll_list[(*it).value1].iden == 3)
 					{
 						if(!pre_iden_)
@@ -3069,6 +3078,7 @@ bool players::Read(char id_)
 					}
 					//if(!you.skill[SKT_SPELLCASTING].level)
 					//	SkillTraining(SKT_SPELLCASTING,1);
+
 					DeleteItem(it,1);
 					enterlog();
 					ReleaseMutex(mutx);
@@ -3078,7 +3088,7 @@ bool players::Read(char id_)
 				{
 					printlog("이건 읽을 수 없다.",true,false,false,CL_normal);
 					ReleaseMutex(mutx);
-					return true;		
+					return false;		
 				}							
 			}
 			else

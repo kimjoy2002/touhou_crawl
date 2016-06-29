@@ -218,6 +218,7 @@ public:
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);
 	bool MakeNoise(coord_def center_, int length_, const unit* excep_);
+	bool MakeMapping(int percent_);
 	bool MakeMapping(coord_def center_, int length_, bool passed_, int percent_);
 	bool isSilence(coord_def pos_);
 	bool isViolet(coord_def pos_);

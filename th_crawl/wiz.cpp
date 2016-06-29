@@ -72,11 +72,42 @@ void wiz_mode()
 			break;
 		case 'A':
 			{
-				item_infor t;
-				makeitem(ITM_MISCELLANEOUS, 0, &t, -1);
-				env[current_level].MakeItem(you.position,t);
+				
+				printlog("s-스크롤",true,false,false,CL_help);
+				printlog("어느 아이템을 얻어볼까? (베타판)",false,false,false,CL_help);
+				key_ = waitkeyinput();
+				switch(key_)
+				{
+				case 's':
+					{
+						int list[] = {SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
+							SCT_BLINK,SCT_MAPPING,SCT_ENCHANT_WEAPON_1,	SCT_ENCHANT_ARMOUR,SCT_FOG,SCT_DETECT_CURSE,
+							SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING};
+						enterlog();
+						printlog("a-텔포 b-식별 c-낙서 d-무기저주 e-방어구저주 f-저주해제 g-순간이동 h-마법지도",true,false,false,CL_help);
+						printlog("i-무기강화 j-방어구강화 k-연기 l-저주감지 m-장신구저주 n-정적 o-영격 p-스펠충전",true,false,false,CL_help);
+						printlog("어느 스크롤을 얻어볼까?",false,false,false,CL_help);
+						key_ = waitkeyinput();
+						if(key_ >= 'a' && key_ <= 'p')
+						{
+							for(int i=0;i<10;i++)
+							{
+								item_infor t;
+								makeitem(ITM_SCROLL, 0, &t,  list[key_-'a']);
+								env[current_level].MakeItem(you.position,t);
+								enterlog();
+							}
+						}
+						else{
+							printlog(" 취소",true,false,false,CL_help);
+						}
+					}
+					return;
+				default:
+					printlog(" 취소",true,false,false,CL_help);
+					return;
+				}
 
-				break;
 			}
 		case 'H':
 			you.HpUpDown(you.max_hp,DR_EFFECT);
@@ -110,7 +141,6 @@ void wiz_mode()
 			printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ",true,false,false,CL_help);
 			printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사",true,false,false,CL_help);
 			printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)",false,false,false,CL_help);
-			wiz_list.wizard_mode = true;
 			key_ = waitkeyinput();
 			switch(key_)
 			{
@@ -420,11 +450,12 @@ void wiz_mode()
 			printsub("",true,CL_normal);
 			printsub(" X      - 1레벨업                         ",true,CL_normal);
 			printsub(" H      - 체력 영력 파워 회복             ",true,CL_normal);
-			printsub(" G      - 장소이동                         ",true,CL_normal);
+			printsub(" G      - 장소이동                        ",true,CL_normal);
 			printsub(" p      - 제단 생성                       ",true,CL_normal);
 			printsub(" ^      - 신앙심 10증가                   ",true,CL_normal);
-			printsub(" >      - 읽기(두루마리,책)               ",true,CL_normal);
-			printsub(" <      - 마시기(물약)                    ",true,CL_normal);
+			printsub(" >      - 아랫층으로 내려가기             ",true,CL_normal);
+			printsub(" <      - 윗층으로 올라가기               ",true,CL_normal);
+			printsub(" A      - 아이템생성(베타)                ",true,CL_normal);
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);
 			printsub("                                         ",true,CL_normal);

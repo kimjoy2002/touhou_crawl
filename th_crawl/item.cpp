@@ -185,7 +185,7 @@ string item::GetName(int num_)
 				temp += curse?"저주받은 ":"저주받지않은 ";
 		}
 	}
-	if(is_pile && num >1)
+	if(is_pile && num >1 && num_ != -2)
 	{
 		char buf[20]; 
 		sprintf(buf,"%d개의 ",num_!=-1?num_!=0?num_:num:num);
@@ -262,8 +262,11 @@ string item::GetName(int num_)
 			char temp2[32];
 			if(value3>0)
 				sprintf_s(temp2,32,"(사용횟수: %d)",value3);
-			else
+			else if(value3 == -1)
 				sprintf_s(temp2,32,"(비어있음)");
+			else if(value3 == -2)
+				sprintf_s(temp2,32,"(충전됨)");
+
 
 			temp += temp2;
 		}
@@ -617,6 +620,16 @@ bool item::isautopick()
 bool item::isArtifact()
 {
 	return !atifact_vector.empty();
+}
+bool item::isChargable()
+{
+	if(type == ITM_SPELL)
+	{
+		if(value1<SpellcardMaxCharge((spellcard_evoke_type)value2))
+			return true;
+	}
+	return false;
+
 }
 void item::Identify()
 {

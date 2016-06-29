@@ -13,6 +13,7 @@
 #include "unit.h"
 #include "texture.h"
 #include "atifact.h"
+#include "scroll.h"
 
 class item;
 
@@ -135,7 +136,7 @@ public:
 	
 	int value1; //value1 - 무기,탄막-명중력 방어구-AC 방패-SH 음식,물약,스크롤,링-종류 책-마법 스펠카드-횟수 발동템-종류
 	
-	int value2; //value2 - 무기,탄막-공격력 방어구,방패-EV  음식-만복도 링-수치 스펠카드-사용
+	int value2; //value2 - 무기,탄막-공격력 방어구,방패-EV  음식-만복도 링-수치 스펠카드-종류
 
 	int value3;	//value3 - 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 스펠카드-사용예측횟수
 	
@@ -177,6 +178,7 @@ public:
 	bool isiden();
 	bool isautopick();
 	bool isArtifact();
+	bool isChargable();
 
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();

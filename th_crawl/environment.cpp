@@ -959,8 +959,49 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 	}
 	return true;
 }
+bool environment::MakeMapping(int percent_)
+{
+	if(isBamboo())
+		return false;
+
+	for(int i = 0;i < DG_MAX_X;i++)
+	{
+		
+		for(int j = 0;j < DG_MAX_Y; j++)
+		{
+			bool seeing = env[current_level].isSight(coord_def(i,j));
+
+			if(!seeing)
+			{	
+				for(int x=-1; x<=1;x++)
+				{
+					for(int y=-1; y<=1;y++)
+					{
+						if(env[current_level].isSight(coord_def(i+x,j+y)))
+						{
+							seeing = true;
+							x=2;
+							y=2;
+						}
+
+					}
+				}			
+			}
+			
+			if(seeing && percent_>randA(99))
+				magicmapping(i,j);
+		}
+	}
+
+	return true;
+	
+}
 bool environment::MakeMapping(coord_def center_, int length_, bool passed_, int percent_)
 {
+	
+	if(isBamboo())
+		return false;
+
 	set<coord_def> cd_set;
 	cd_set.insert(center_);
 	for(int i=-length_; i<=length_; i++)

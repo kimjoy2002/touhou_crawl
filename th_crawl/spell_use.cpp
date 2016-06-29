@@ -3145,8 +3145,8 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_CONFUSE,5));
 		break;
 	case MON_DOREMI:
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_MIND_BENDING,20));
+		list->push_back(spell(SPL_SUMMON_DREAM,40));
+		list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_FAIRY_HERO:
 		break;

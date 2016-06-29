@@ -302,7 +302,7 @@ void arena_event(int num)
 	if(map_list.bamboo_count == 130)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"당신의 기록은 %d레벨이다. 다음에 더욱 높은 레벨에 도전하도록!",you.level);
+		sprintf_s(temp,200,"당신의 기록은 %d레벨이다. 다음에 더욱 높은 레벨에 도전하도록! (?:로 기록확인)",you.level);
 		printlog(temp,true,false,false,CL_help);
 		sprintf_s(temp,200,"당신의 기록은 %d레벨이다.",you.level);
 		AddNote(you.turn,CurrentLevelString(),temp,CL_danger);

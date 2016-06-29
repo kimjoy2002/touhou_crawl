@@ -16,6 +16,7 @@
 #include "skill_use.h"
 #include "weapon.h"
 #include "map.h"
+#include "evoke.h"
 
 
 extern HANDLE mutx;
@@ -73,7 +74,7 @@ void wiz_mode()
 		case 'A':
 			{
 				
-				printlog("s-스크롤",true,false,false,CL_help);
+				printlog("s-스크롤 e-발동템",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까? (베타판)",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -97,6 +98,25 @@ void wiz_mode()
 								env[current_level].MakeItem(you.position,t);
 								enterlog();
 							}
+						}
+						else{
+							printlog(" 취소",true,false,false,CL_help);
+						}
+					}
+					return;
+				case 'e':
+					{
+						int list[] = {EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL};	
+						enterlog();
+						printlog("a-보탑 b-에어두루마리 c-몽혼",true,false,false,CL_help);
+						printlog("어느 발동템을 얻어볼까?",false,false,false,CL_help);
+						key_ = waitkeyinput();
+						if(key_ >= 'a' && key_ <= 'c')
+						{
+							item_infor t;
+							makeitem(ITM_MISCELLANEOUS, 0, &t,  list[key_-'a']);
+							env[current_level].MakeItem(you.position,t);
+							enterlog();
 						}
 						else{
 							printlog(" 취소",true,false,false,CL_help);

@@ -55,6 +55,7 @@ void MakeEvokeItem(item_infor* t, int kind_)
 bool EvokeFlagCheck(evoke_kind skill, skill_flag flag);
 int EvokeLength(evoke_kind skill);
 float EvokeSector(evoke_kind skill);
+int EvokeSuccece(evoke_kind skill);
 bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target);
 
 
@@ -73,7 +74,11 @@ bool evoke_evokable(evoke_kind kind)
 		return false;
 	}
 
-
+	if(randA(99) >= EvokeSuccece(kind))
+	{		
+		printlog("아무런 일도 일어나지 않았다.",true,false,false,CL_normal);	
+		return true;
+	}
 
 	int i=0;
 	if(EvokeFlagCheck(kind, S_FLAG_DIREC))
@@ -180,6 +185,18 @@ float EvokeSector(evoke_kind skill)
 	default:
 		return 0;
 	}
+}
+int EvokeSuccece(evoke_kind skill)
+{
+	switch(skill)
+	{
+	case EVK_AIR_SCROLL:
+		return 30+you.skill[SKT_EVOCATE].level*7;
+	default:
+		return 100;
+	}
+
+
 }
 string DreamSoulMonster(vector<int>& list_, int level_);
 

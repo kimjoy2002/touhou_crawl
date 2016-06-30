@@ -3000,13 +3000,13 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_LASER,15));
 		break;
 	case MON_PACHU:
-		list->push_back(spell(SPL_HASTE,20));
-		list->push_back(spell(SPL_FIRE_BOLT,15));
-		list->push_back(spell(SPL_ICE_BOLT,15));
-		list->push_back(spell(SPL_VENOM_BOLT,15));
-		list->push_back(spell(SPL_CHAIN_LIGHTNING,15));
-		list->push_back(spell(SPL_WATER_CANNON,30));
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_HASTE,15));
+		list->push_back(spell(SPL_FIRE_BOLT,10));
+		list->push_back(spell(SPL_ICE_BOLT,10));
+		list->push_back(spell(SPL_VENOM_BOLT,10));
+		list->push_back(spell(SPL_CHAIN_LIGHTNING,10));
+		list->push_back(spell(SPL_WATER_CANNON,20));
+		list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_MAGIC_BOOK:
 		{

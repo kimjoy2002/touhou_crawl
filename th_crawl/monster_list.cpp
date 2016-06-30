@@ -39,7 +39,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 
 	{MON_FAIRY_RED,3,5,name_infor("대장 요정",true),&img_mons_fairy_red,21,2,6,
-	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 
 	{MON_MOOK,1,2,name_infor("모옥",true),&img_mons_mook,5,0,10,
@@ -51,7 +51,7 @@ const mon_infor mondata[] = {
 	M_FLAG_FLY | M_FLAG_CANT_NETURAL,0,0,10},
 
 	{MON_CROW,2,4,name_infor("까마귀",false),&img_mons_crow,17,0,8,
-	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,7},
 
 	{MON_CRANE,5,116,name_infor("두루미",false),&img_mons_crane,30,3,10,

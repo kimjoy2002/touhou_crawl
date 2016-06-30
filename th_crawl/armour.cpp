@@ -80,6 +80,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_mons_default;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " Æò»ó¿Ê";
+		t->value2 +=(material>=MTK_LEATHER)?((material>=MTK_CHAIN)?2:1):0;
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 40+(material*20);

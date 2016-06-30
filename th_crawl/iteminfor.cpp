@@ -190,6 +190,9 @@ string GetItemInfor(item *it)
 			switch(it->value5)
 			{
 			case AMK_NORMAL:
+				text_ += "평상시에 입는 편한 옷.\n";
+				text_ += "천이 아닌 재질의 갑옷 기본패널티가 상당히 내려간다. \n";
+				text_ += "그러나 최소패널티는 다른 옷과 동일하므로 갑옷에 익숙해지면 이점이 없어진다.\n\n";				 
 				break;
 			case AMK_MIKO:
 				text_ += "무녀들이 입는 옷.\n";

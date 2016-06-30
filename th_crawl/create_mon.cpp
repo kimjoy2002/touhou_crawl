@@ -637,10 +637,8 @@ void create_id_to_mon(int id, int level)
 		index.push_back(MON_FIREFLY);
 		break;
 	case 24:
-		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
 			index.push_back(MON_HUMAM_MAN);
-		if(randA(4)<1)
-			index.push_back(randA(1)?MON_HUMAM_PRIEST:MON_HUMAM_YINYANG);
 		break;
 	case 25:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)

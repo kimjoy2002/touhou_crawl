@@ -627,6 +627,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 		accuracy_/=3; //이 대상은 간파한 상대다.
 	}
 
+	if(a.order && !isView((monster*)a.order))
+	{
+		accuracy_-=5;
+	}
+
+
 
 	{//회피률 계산공식
 	//최종회피률 :  edit_ev/(edit_ev+accuracy_)

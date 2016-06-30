@@ -1114,6 +1114,19 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		accuracy_+=5; //빛날경우 명중 증가
 	if(GetMindReading() && a.order == &you)
 		accuracy_+=10; //간파당했다.
+	if(a.order)
+	{
+		if(a.order->isplayer() && !isView())
+		{
+			accuracy_ -=5;
+		}
+
+		if(!a.order->isplayer() && !isView((monster*)a.order))
+		{
+			accuracy_ -=5;
+		}
+	}
+
 
 	name_infor name_;
 	if(a.order)

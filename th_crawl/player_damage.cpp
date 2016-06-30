@@ -159,7 +159,7 @@ int players::GetHit()
 
 	if(as_penalty > GetPenaltyMinus(1))
 	{//만약 방어패널티때문에 명중이 내려갈 경우
-		hit_ -= as_penalty-GetPenaltyMinus(1); 
+		hit_ -= as_penalty; 
 	}
 	return hit_;
 }

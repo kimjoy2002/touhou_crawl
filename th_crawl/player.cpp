@@ -1024,7 +1024,6 @@ int players::HpRecoverDelay(int delay_)
 	if(god == GT_YUUGI && !punish[GT_YUUGI] && s_drunken )
 	{
 		cacul_ += 100.0f;
-
 	}
 
 

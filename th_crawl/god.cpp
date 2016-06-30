@@ -237,9 +237,9 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 1:
 			if(plus)
-				printlog("당신은 파워가 높을수록 체력과 마나회복속도가 빨라진다.",true,false,false,CL_warning);
+				printlog("당신은 파워가 높을수록 체력과 영력회복속도가 빨라진다.",true,false,false,CL_warning);
 			else
-				printlog("더 이상 체력과 마나회복속도가 빨라지지않는다.",true,false,false,CL_warning);
+				printlog("더 이상 체력과 영력회복속도가 빨라지지않는다.",true,false,false,CL_warning);
 			break;
 		case 2:
 			you.Ability(SKL_MINORIKO_1,true,!plus);
@@ -250,7 +250,7 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		case 3:
 			if(plus)
-				printlog("당신은 이제 음식을 빨리 먹을 수 있고 마나를 조금 회복한다.",true,false,false,CL_warning);
+				printlog("당신은 이제 음식을 빨리 먹을 수 있고 영력을 조금 회복한다.",true,false,false,CL_warning);
 			else
 				printlog("더 이상 음식을 빨리 먹지 못한다.",true,false,false,CL_warning);
 			break;
@@ -280,16 +280,16 @@ bool GetGodAbility(int level, bool plus)
 			case 0:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("당신은 최대마나가 신앙심에 비례해서 증가한다.",true,false,false,CL_green);
+					printlog("당신은 최대영력이 신앙심에 비례해서 증가한다.",true,false,false,CL_green);
 				else
-					printlog("당신의 최대마나는 감소했다.",true,false,false,CL_green);
+					printlog("당신의 최대영력은 감소했다.",true,false,false,CL_green);
 				break;
 			case 1:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("당신은 적을 죽였을때 마나를 얻는다.",true,false,false,CL_green);
+					printlog("당신은 적을 죽였을때 영력을 얻는다.",true,false,false,CL_green);
 				else
-					printlog("더 이상 적을 죽였을때 마나를 얻지 못한다.",true,false,false,CL_green);
+					printlog("더 이상 적을 죽였을때 영력을 얻지 못한다.",true,false,false,CL_green);
 				break;
 			case 2:
 				you.max_mp+=plus;
@@ -1860,7 +1860,7 @@ void God_show()
 		}
 		if(level_ >= 1 && !you.punish[GT_MINORIKO])
 		{
-			printsub("당신이 파워가 가득차있을수록 체력과 마나회복속도가 빨라진다.               (패시브)",true,CL_warning);
+			printsub("당신이 파워가 가득차있을수록 체력과 영력회복속도가 빨라진다.               (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.punish[GT_MINORIKO])
@@ -1870,7 +1870,7 @@ void God_show()
 		}
 		if(level_ >= 3 && !you.punish[GT_MINORIKO])
 		{ //이때부터 고구마 선물을 해준다.
-			printsub("당신은 음식을 더 빨리 먹을 수 있고 먹을때 마나도 조금 회복한다.            (패시브)",true,CL_warning);
+			printsub("당신은 음식을 더 빨리 먹을 수 있고 먹을때 영력도 조금 회복한다.            (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.punish[GT_MINORIKO])

@@ -411,13 +411,12 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 {
 	t->value0 = 0;
 	//t->value3 = randA(1)?0:randA(5*good_bad);
-	t->value4 = randA(1)?0:randA(5*good_bad);
+	t->value4 = good_bad?randA_1(5)*(good_bad>=0?1:-1):0;
 	t->value5 = (good_bad>0 && randA(2)>1)?GetNewBrand(15):0;
 	t->name2.name = "";
 	t->name2.name_type = true;
-	int rune_ = abs(t->value3)+abs(t->value4)+abs(t->value5);
 
-	if(rune_)
+	if(good_bad)
 	{
 		t->name2.name = "·éÀÌ »õ°ÜÁø ";
 		t->name2.name_type = true;		
@@ -725,10 +724,18 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 {
 	t->value0 = 0;
 	t->value3 = 0;
-	t->value4 = (randA(3)==1?randA_1(randA_1(2))*(good_bad>=0?1:-1):0);
+	t->value4 = good_bad?randA_1(randA_1(3))*(good_bad>=0?1:-1):0;
 	t->is_pile = false;
 	t->name2.name = "";
 	t->name2.name_type = true;
+	
+	if(good_bad)
+	{
+		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+		t->name2.name_type = true;		
+	}
+
+
 	int i = select_!=-1?select_:randA_1(30);
 	if(i<=20)
 	{

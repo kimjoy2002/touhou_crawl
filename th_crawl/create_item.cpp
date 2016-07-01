@@ -260,10 +260,10 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem(ITM_SCROLL,-1,item_);
 		break;
 	case 6: //흔한 무기
-		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(6)?0:(randA(3)?1:-1),item_);
+		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(8)?0:(randA(3)?1:-1),item_);
 		break;
 	case 7://흔한 방어구
-		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(4)?1:(randA(3)?1:-1),item_);
+		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(6)?0:(randA(3)?1:-1),item_);
 		break;
 	case 8://흔한 좋은 장신구
 		makeitem(1/*randA(4)*/?ITM_RING:ITM_SPELLCARD,1,item_);
@@ -289,10 +289,10 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem(ITM_SCROLL,randA(3)?-1:-2,item_);
 		break;
 	case 17: //중반 무기 - 고침
-		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(3)?0:(randA(3)?1:-1),item_);
+		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(4)?0:(randA(6)?1:-1),item_);
 		break;
 	case 18://중반 방어구 - 고침
-		makeitem((item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1),randA(3)?0:(randA(3)?1:-1),item_);
+		makeitem((item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1),randA(4)?0:(randA(6)?1:-1),item_);
 		break;
 	case 19://중반 좋은 장신구
 		makeitem(/*randA(4)*/1?ITM_RING:ITM_SPELLCARD,randA(2)?2:1,item_);
@@ -304,7 +304,7 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem(ITM_FOOD,0,item_);
 		break;
 	case 22://중반 방패
-		makeitem(ITM_ARMOR_SHIELD,randA(3)?0:(randA(3)?1:-1),item_);
+		makeitem(ITM_ARMOR_SHIELD,randA(4)?0:(randA(6)?1:-1),item_);
 		break;
 	case 25://책
 		makeitem(ITM_BOOK,0,item_);

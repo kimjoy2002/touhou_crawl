@@ -163,10 +163,13 @@ armour_kind GetRandomArmourType(int good_bad)
 
 void MakeArmourEnchant(int good_bad, item_infor* t)
 {
-	if(good_bad==0)
-		return;
+	t->value4 = good_bad?rand_int(1,t->value1/2)*(good_bad>=0?1:-1):0;
 
-	t->value4 = (randA(2)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
+	if(good_bad)
+	{
+		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+		t->name2.name_type = true;
+	}
 
 }
 void equipArmour(armour_kind type, int value)

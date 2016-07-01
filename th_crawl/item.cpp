@@ -205,12 +205,20 @@ string item::GetName(int num_)
 			temp += second_name.name;
 		}
 	}
-	if(type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST && identify)
+	if(type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST)
 	{		
-		char temp2[10];
-		sprintf(temp2,"%c%d ",value4>=0?'+':'-',abs(value4));
-		temp += temp2;
+		if(identify)
+		{
+			char temp2[10];
+			sprintf(temp2,"%c%d ",value4>=0?'+':'-',abs(value4));
+			temp += temp2;
+		}
+		else if(second_name.name.size())
+		{
+			temp += second_name.name;
+		}
 	}
+
 	if(type==ITM_POTION)
 		temp += iden_list.potion_list[value1].iden?potion_iden_string[value1]:potion_uniden_string[iden_list.potion_list[value1].color];
 	if(type==ITM_SCROLL)

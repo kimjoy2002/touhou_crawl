@@ -301,7 +301,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 81,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //플라워 전차
 	{ 96,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  30}, //오니패거리
 	{ 86,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 5,  20}, //너구리
-	{ 90,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //유겐마간
+	//{ 90,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 3,  35}, //유겐마간
 	{ 83,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //설녀
 	{ 77,  HAKUREI_LEVEL+2,  HAKUREI_LAST_LEVEL, 10,  35}, //화차
 	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  35}, //이블 전차
@@ -777,7 +777,7 @@ void create_id_to_mon(int id, int level)
 		index.push_back(MON_RED_UFO);
 		break;
 	case 59:
-		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
 		index.push_back(randA(2)?(randA(1)?MON_RED_UFO:MON_BLUE_UFO):MON_GREEN_UFO);
 		break;
 	case 60:
@@ -1487,11 +1487,10 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_NAMAZ:
-		mon->fire_resist=1;
 		mon->elec_resist=1;
 		break;
 	case MON_HELL_CROW:
-		mon->fire_resist=3;
+		mon->fire_resist=2;
 		break;
 	case MON_LANTERN_YOUKAI:
 		mon->fire_resist=3;
@@ -1509,8 +1508,6 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_ELIS:
 		mon->elec_resist=1;
-		mon->ice_resist=1;
-		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
 	case MON_SARIEL:
@@ -1520,11 +1517,11 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_SARA:
-		mon->fire_resist=3;
+		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
 	case MON_LUIZE:
-		mon->ice_resist=3;
+		mon->ice_resist=1;
 		break;
 	case MON_YUKI:
 		mon->fire_resist=3;

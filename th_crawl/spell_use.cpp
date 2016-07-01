@@ -931,7 +931,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randC(2,9+power*3/9),2*(9+power*3/9),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randC(2,7+power*1/4),2*(7+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		if(ThrowShock(21,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -3086,7 +3086,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_CHAIN_LIGHTNING,20));
 		break;	
 	case MON_NAMAZ:
-		list->push_back(spell(SPL_STONE_UPLIFT,20));
+		list->push_back(spell(SPL_STONE_UPLIFT,10));
 		break;	
 	case MON_LANTERN_YOUKAI:
 		list->push_back(spell(SPL_FIRE_SPREAD,30));
@@ -3112,7 +3112,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 	case MON_MAI:	
 		list->push_back(spell(SPL_ICE_CLOUD,25));
 		list->push_back(spell(SPL_ICE_BOLT,25));
-		list->push_back(spell(SPL_HASTE,15));	
+		list->push_back(spell(SPL_SELF_HEAL,15));
 		break;
 	case MON_SARIEL:
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,30));

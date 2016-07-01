@@ -23,6 +23,7 @@ const char *imgfile_title[MAX_TITLE] =
 	"./data/title_1.png",
 	"./data/title_3.png",
 	"./data/title_4.png",
+	"./data/title_5.png",
 };
 
 

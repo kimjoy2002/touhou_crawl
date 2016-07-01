@@ -461,6 +461,19 @@ string GetSpellInfor(spell_list spell)
 	case SPL_FIRE_SPREAD:
 		text_ += "전방에 부채꼴모양으로 화염의 구름을 흩뿌린다.\n";
 		break;
+	case SPL_STASIS:
+		text_ += "대상의 전이를 방해한다. 일정시간 전이불가 디버프를 건다.\n";
+		break;
+	case SPL_JUMP_ATTACK:
+		text_ += "거리가 떨어져있는 적에게 순식간에 접근한다.\n";
+		break;
+	case SPL_ALERT_NOISE: 
+		text_ += "주변의 몬스터들을 깨우는 아주 큰 소음을 낸다.\n";
+		break;
+	case SPL_SUMMON_NAMAZ:
+		text_ += "해당 위치에 거대한 나마즈를 낙하시킨다.\n";
+		text_ += "낙하엔 일정시간이 걸리며 떨어진 위치에 큰 폭발이 일어난다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

@@ -2854,6 +2854,32 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 }
 
 
+bool skill_stasis(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
+{
+	if(order && !order->isplayer())
+	{
+		order->SetExhausted(rand_int(3,10));
+	}
+	return false;
+}
+bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
+{
+	{
+		if(order && !order->isplayer())
+		{
+			order->SetExhausted(rand_int(10,20));
+		}
+	}
+	return false;
+}
+bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
 
 
 
@@ -2927,6 +2953,9 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_ALICEYUKKURI:
 		list->push_back(spell(SPL_FAKE_DOLLS_WAR,40));
+		break;
+	case MON_YAMABIKO:
+		list->push_back(spell(SPL_ALERT_NOISE,25));
 		break;
 	case MON_KATPA_WATER_WIZARD:
 		list->push_back(spell(SPL_FROST,15));
@@ -3471,7 +3500,11 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_FAKE_DOLLS_WAR:
 		return skill_fake_dolls_war(power,short_,order,target);	
 	case SPL_FIRE_SPREAD:
-		return skill_fire_spread(power,short_,order,target);	
+		return skill_fire_spread(power,short_,order,target);			
+	case SPL_STASIS:
+	case SPL_JUMP_ATTACK:
+	case SPL_ALERT_NOISE: 
+	case SPL_SUMMON_NAMAZ:
 	default:
 		return false;
 	}
@@ -3714,6 +3747,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_fake_dolls_war(power,short_,&you,target);	
 	case SPL_FIRE_SPREAD:
 		return skill_fire_spread(power,short_,&you,target);	
+	case SPL_STASIS:
+	case SPL_JUMP_ATTACK:
+	case SPL_ALERT_NOISE: 
+	case SPL_SUMMON_NAMAZ:
 	default:
 		return false;
 	}

@@ -95,6 +95,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
+	case SPL_SUMMON_NAMAZ:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;		
 	case SPL_FLAN_BUSIN:
 		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
@@ -105,6 +106,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_HYPNOSIS:
 	case SPL_SELF_INJURY:
 	case SPL_ANIMAL_CHANGE:
+	case SPL_STASIS:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;
 	case SPL_MIND_BENDING:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
@@ -142,6 +144,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CANNON:
 		return (S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_JUMP_ATTACK:
+		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SHOCK:
 		return (S_FLAG_SPEAK | S_FLAG_DIREC  | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CHAIN_LIGHTNING:
@@ -174,6 +178,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_PRIVATE_SQ: 
 	case SPL_THE_WORLD:
 	case SPL_CALL_HOUND:
+	case SPL_ALERT_NOISE: 
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 		return (S_FLAG_IMMEDIATELY) & flag;	
@@ -223,6 +228,7 @@ int SpellLength(spell_list skill)
 	case SPL_MANA_DRAIN:
 	case SPL_INSANE:
 	case SPL_BLOOD_SMITE:
+	case SPL_STASIS:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -245,6 +251,7 @@ int SpellLength(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_KANAME_DRILL:
 	case  SPL_FIRE_SPREAD:
+	case SPL_SUMMON_NAMAZ:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -253,6 +260,7 @@ int SpellLength(spell_list skill)
 	case SPL_WHIRLWIND:
 	case SPL_STONE_TRAP:
 	case SPL_ANIMAL_CHANGE:
+	case SPL_JUMP_ATTACK:
 		return 5;
 	case SPL_BURN:
 	case SPL_FREEZE:
@@ -303,8 +311,9 @@ int SpellLength(spell_list skill)
 	case SPL_CALL_HOUND:
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
+	case SPL_ALERT_NOISE: 
 	default:
-		return 0;
+		return 0;		
 	}
 }
 
@@ -522,6 +531,14 @@ const char* SpellString(spell_list skill)
 		return "모조 돌즈워";
 	case SPL_FIRE_SPREAD:
 		return "화염 분출";
+	case SPL_STASIS:
+		return "체크메이트";
+	case SPL_JUMP_ATTACK:
+		return "도약공격";
+	case SPL_ALERT_NOISE: 
+		return "경고의 메아리";
+	case SPL_SUMMON_NAMAZ:
+		return "나마즈 소환";
 	default:
 		return "알수없는 마법";
 	}
@@ -575,6 +592,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SELF_INJURY:
 	case SPL_STONE_TRAP:
 	case SPL_POISON_SKIN:
+	case SPL_ALERT_NOISE: 
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -602,6 +620,8 @@ int SpellLevel(spell_list skill)
 	case SPL_ANIMAL_CHANGE:
 	case SPL_INSANE:
 	case SPL_FAKE_DOLLS_WAR:
+	case SPL_STASIS:
+	case SPL_JUMP_ATTACK:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -629,6 +649,7 @@ int SpellLevel(spell_list skill)
 	case SPL_MOON_GUN:
 	case SPL_SUMMON_DREAM:
 	case SPL_CALL_HOUND:
+	case SPL_SUMMON_NAMAZ:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -688,7 +709,6 @@ int SpellNoise(spell_list skill)
 	case SPL_FIRE_WALL:
 	case SPL_MIND_BENDING:
 	case SPL_STONE_ARROW: 
-	case SPL_STONE_UPLIFT:
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_POISON_SKIN:
 	case SPL_STONE_FORM:
@@ -700,6 +720,8 @@ int SpellNoise(spell_list skill)
 	case SPL_MOON_COMMUNICATION:
 	case SPL_INSANE:
 	case SPL_BLOOD_SMITE:
+	case SPL_STASIS:
+	case SPL_JUMP_ATTACK:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -746,6 +768,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_DREAM:
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
+	case SPL_SUMMON_NAMAZ:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -758,11 +781,14 @@ int SpellNoise(spell_list skill)
 	case SPL_CALL_HOUND:
 	case SPL_CANNON:
 	case SPL_FIRE_SPREAD:
+	case SPL_STONE_UPLIFT:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
 		return 16; //굉장한 소음
+	case SPL_ALERT_NOISE: 
+		return 24; //대형소음
 	default:
 		return 0;
 	}
@@ -992,6 +1018,14 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_FIRE_SPREAD:
 		return num==0?(SKT_FIRE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_STASIS:
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_JUMP_ATTACK:
+		return num==0?(SKT_AIR):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_ALERT_NOISE: 
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_SUMMON_NAMAZ:
+		return num==0?(SKT_SUMMON):num==1?(SKT_EARTH):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1107,6 +1141,10 @@ int SpellCap(spell_list skill)
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
 	case SPL_FIRE_SPREAD:
+	case SPL_STASIS:
+	case SPL_JUMP_ATTACK:
+	case SPL_ALERT_NOISE: 
+	case SPL_SUMMON_NAMAZ:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1193,6 +1231,8 @@ bool SpellAiCondition(spell_list skill, const monster *mon)
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CALL_HOUND:
 	case SPL_FIRE_SPREAD:
+	case SPL_ALERT_NOISE: 
+	case SPL_JUMP_ATTACK:
 		return (mon->s_exhausted?false:true);
 	default:
 		return true;

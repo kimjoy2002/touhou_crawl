@@ -2199,7 +2199,7 @@ int monster::action(int delay_)
 					{
 						if(char* c_ = Get_Speak(id,this,MST_FOUND)){
 							printlog(c_,true,false,false,CL_speak);
-							Noise(position,5,this);
+							Noise(position,12,this);
 						}
 					}	
 				}

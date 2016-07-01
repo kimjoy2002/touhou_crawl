@@ -2297,7 +2297,7 @@ void shout()
 			printlog(shout_,true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 10);
+		Noise(you.position, 12);
 		break;
 	case 'a':	
 		{
@@ -2323,7 +2323,7 @@ void shout()
 					printlog("공격!",true,false,false,CL_normal);
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
-					Noise(you.position, 8);
+					Noise(you.position, 12);
 				}
 			}
 			break;
@@ -2341,19 +2341,19 @@ void shout()
 		printlog("멈춰!",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 8);
+		Noise(you.position, 12);
 		break;
 	case 'w':
 		printlog("기다려!(미구현)",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 8);
+		Noise(you.position, 12);
 		break;
 	case 'f':
 		printlog("따라와!(미구현)",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 8);
+		Noise(you.position, 12);
 		break;
 	default:
 		printlog("아무것도 외치지 않았다.",true,false,false,CL_normal);

@@ -499,7 +499,7 @@ void save_mode()
 	{
 
 		
-		printlog("#### 경고! 이 모드는 점수등록이 안됩니다! 세이브가 삭제되지않습니다! ### ",true,false,false,CL_danger);
+		printlog("#### 경고! 이 모드는 온라인점수등록이 안됩니다! 치트로 취급됩니다! ### ",true,false,false,CL_danger);
 		printlog("#### 세이브는 층이동시, 수동저장시에 저장됩니다. ### ",true,false,false,CL_danger);
 		printlog("진짜로 킬꺼야? (Y/N) ",false,false,false,CL_danger);
 			

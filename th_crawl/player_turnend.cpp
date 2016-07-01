@@ -216,12 +216,22 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			int damage_;
 			damage_ = HpUpDown(-poison_damage(s_poison),DR_POISON);
 			if(damage_==-1)
+			{
 				printlog("독의 데미지를 받고 있다.",false,false,false,CL_normal);
+				if(hp<30)					
+					SetInter(IT_POISON);
+			}
 			else if(damage_>=-4)
+			{
 				printlog("심한 독의 데미지를 받고 있다.",false,false,false,CL_small_danger);
+				if(hp<100)					
+					SetInter(IT_POISON);
+			}
 			else
+			{
 				printlog("매우 심한 독의 데미지를 받고 있다.",false,false,false,CL_danger);
-			SetInter(IT_POISON);
+				SetInter(IT_POISON);
+			}
 		}
 		s_poison--;
 		if(!s_poison)

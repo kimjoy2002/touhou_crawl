@@ -290,7 +290,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			rc.left += 250;
 			if(sk_char == 'z'+1)
 				sk_char = 'A';
-			if(sk_char == 'p')
+			if(sk_char == 'm')
 			{
 				rc.left = 800;
 				rc.top = 50-fontDesc.Height;

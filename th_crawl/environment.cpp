@@ -272,7 +272,6 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	if(you.s_silence)
 		env[current_level].MakeSilence(you.position, you.s_silence_range, true);
 
-	ReleaseMutex(mutx);
 	if(monster* temp_unit = (monster*)isMonsterPos(you.position.x,you.position.y,&you))
 	{	
 		dif_rect_iterator dit(you.position, 3);
@@ -297,6 +296,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			it->atkmove(true,true);
 		}
 	}
+	ReleaseMutex(mutx);
 
 
 	if(!dq.empty() && !env[floor].isPandemonium())

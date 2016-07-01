@@ -3836,8 +3836,8 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				printlog("무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.",true,false,false,CL_autumn);	
 				break;
 			case WB_MANA_REGEN:
-				SetManaDelay(1);
-				printlog("영력의 흐름이 느껴진다. 익숙해지려면 시간이 걸릴 것 같다.",true,false,false,CL_white_blue);	
+				//SetManaDelay(1);
+				printlog("영력의 흐름이 느껴진다.",true,false,false,CL_white_blue);	
 				break;
 			case WB_FAST_CAST:
 				printlog("머리회전이 빨라진 느낌이 든다.",true,false,false,CL_white_blue);	

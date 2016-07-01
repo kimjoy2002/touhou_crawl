@@ -118,7 +118,7 @@ const char* GetBrandInfor(weapon_brand brand)
 		case WB_AUTUMN:
 			return "이 무기는 단검 수준의 암습이 가능하게 되고 이미 단검인 경우엔 깨어난 적도 암습할 수 있다.";
 		case WB_MANA_REGEN:
-			return "들고있는것만으로 영력의 회복속도를 늘려준다. 단, 한번이라도 영력이 가득차야 효과를 발휘한다.";
+			return "들고있는것만으로 영력의 회복속도를 늘려준다.";
 		case WB_FAST_CAST:
 			return "이 무기는 들고있는것만으로도 당신의 모든 마법 영창시간을 80%로 줄여준다.";
 		case WB_PROTECT:

@@ -419,7 +419,7 @@ void monster::FirstContact()
 			
 		}
 	}
-	if(wiz_list.wizard_mode)
+	if(wiz_list.wizard_mode == 1)
 	{		
 		char temp[200];
 		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect()+1)/(you.GetStealth()+1);
@@ -1134,7 +1134,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	int percent_ = min(100,max(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
 
 
-	if(wiz_list.wizard_mode)
+	if(wiz_list.wizard_mode == 1)
 	{		
 		if(damage_>0)
 		{

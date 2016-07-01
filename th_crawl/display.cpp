@@ -631,11 +631,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.left += fontDesc.Width*7;
 		pfont->DrawTextA(pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 
-		if(wiz_list.wizard_mode)
+		if(wiz_list.wizard_mode == 1)
 		{
 			rc.left = 32*16+180;			
 			pfont->DrawTextA(pSprite,"*위자드 모드*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
-
+		}
+		else if(wiz_list.wizard_mode == 2)
+		{
+			rc.left = 32*16+180;			
+			pfont->DrawTextA(pSprite,"*세이브 보존*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 		}
 		rc.top += fontDesc.Height;
 		rc.left = 32*16+50;
@@ -920,7 +924,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,state_str, -1, &rc, DT_SINGLELINE | DT_NOCLIP,hunger==HT_STARVING?CL_danger:(hunger<=HT_HUNGRY?CL_warning:CL_good));
 				rc.left += fontDesc.Width*(strlen(state_str)+1);				
 			}*/
-			if(wiz_list.wizard_mode)
+			if(wiz_list.wizard_mode == 1)
 			{
 				sprintf_s(temp,128,"위험도(%d)",you.tension_gauge);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_small_danger);

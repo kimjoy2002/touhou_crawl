@@ -698,7 +698,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	//SetInter(HungerApply());
 	WaitForSingleObject(mutx, INFINITE);
 	tension_turn = false;
-	if(wiz_list.wizard_mode)
+	if(wiz_list.wizard_mode == 1)
 		CheckTension();
 	enterlog();
 
@@ -860,7 +860,8 @@ void GameOver()
 		}
 		WaitForSingleObject(mutx, INFINITE);
 		Dump(1);
-		delete_file();
+		if(wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT)
+			delete_file();
 		ReleaseMutex(mutx);
 	}
 	while(1)

@@ -1099,11 +1099,10 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			image = &img_play_mokou[2];
 			DeleteProperty(TPT_18_LIFE);
 		}
-		else if(wiz_list.wizard_mode)
+		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
 			printlog("죽어? (Y/N)",true,false,false,CL_help);
-			wiz_list.wizard_mode = true;
 			int key_ = waitkeyinput();
 			switch(key_)
 			{
@@ -1501,7 +1500,7 @@ void players::ExpRecovery(int exper_)
 		if(s_trans_panalty) //시공부작용의 감소
 			s_trans_panalty--;
 
-		if(wiz_list.wizard_mode)
+		if(wiz_list.wizard_mode == 1)
 		{
 			printlog("일정량의 스킬 경험치 획득",true,false,false,CL_help);
 		}

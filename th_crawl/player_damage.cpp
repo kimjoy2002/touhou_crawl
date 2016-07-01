@@ -103,7 +103,7 @@ int players::GetAttack(bool max_)
 	
 
 	
-	if(wiz_list.wizard_mode && !max_)
+	if(wiz_list.wizard_mode == 1 && !max_)
 	{		
 		char temp[50];
 		sprintf_s(temp,50,"[¸Æµ© %d]",cacul_max_);

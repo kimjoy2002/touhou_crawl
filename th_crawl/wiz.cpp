@@ -28,7 +28,7 @@ bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
 void wiz_mode()
 {
 
-	if(wiz_list.wizard_mode != true)
+	if(wiz_list.wizard_mode != 1)
 	{
 
 		
@@ -52,7 +52,7 @@ void wiz_mode()
 
 
 	printlog("<위자드모드> 어느 명령어?  ( ? - 도움말 )",true,false,false,CL_help);
-	wiz_list.wizard_mode = true;
+	wiz_list.wizard_mode = 1;
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -489,4 +489,58 @@ void wiz_mode()
 		}
 	return;
 	}
+}
+
+
+void save_mode()
+{
+	
+	if(wiz_list.wizard_mode == 0)
+	{
+
+		
+		printlog("#### 경고! 이 모드는 점수등록이 안됩니다! 세이브가 삭제되지않습니다! ### ",true,false,false,CL_danger);
+		printlog("#### 세이브는 층이동시, 수동저장시에 저장됩니다. ### ",true,false,false,CL_danger);
+		printlog("진짜로 킬꺼야? (Y/N) ",false,false,false,CL_danger);
+			
+		int key_ = waitkeyinput();
+		switch(key_)
+		{
+		case 'Y':
+			enterlog();
+			break;
+		default:
+			printlog("세이브보존모드를 취소",true,false,false,CL_help);
+			return;
+		}
+
+
+		wiz_list.wizard_mode = 2;
+	}
+	else if(wiz_list.wizard_mode == 1)
+	{		
+		printlog("위자드모드에서 세이브보존모드로 이동하더라도 점수등록은 되지않습니다.",true,false,false,CL_danger);
+		printlog("바꿀꺼야? (Y/N) ",false,false,false,CL_danger);
+
+
+		int key_ = waitkeyinput();
+		switch(key_)
+		{
+		case 'Y':
+			enterlog();
+			break;
+		default:
+			printlog("취소",true,false,false,CL_help);
+			return;
+		}
+
+		wiz_list.wizard_mode = 2;
+	}
+	else  if(wiz_list.wizard_mode == 2)
+	{	
+		printlog("이미 당신은 세이브보존모드다. 이 모드에선 세이브파일이 삭제되지않는다. ",true,false,false,CL_normal);
+	}
+
+	return;
+
 }

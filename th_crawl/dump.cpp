@@ -123,10 +123,13 @@ bool Dump(int type)
 		char death_reason[64] = "";
 		char temp_reason[64];
 
-		if(wiz_list.wizard_mode)
+		if(wiz_list.wizard_mode == 1)
 		{
 			fprintf_s(fp,"*위자드 모드*\n");
-
+		}
+		else if(wiz_list.wizard_mode == 2)
+		{
+			fprintf_s(fp,"*세이브 보존*\n");
 		}
 		fprintf_s(fp,"%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str(),you.hp,you.max_hp);
 		fprintf_s(fp,"             %s에서 ",CurrentLevelString());

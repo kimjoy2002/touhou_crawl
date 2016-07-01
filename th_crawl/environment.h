@@ -263,7 +263,7 @@ void LoadFile();
 class wiz_infor
 {
 public:
-	bool wizard_mode;
+	int wizard_mode;
 };
 
 extern wiz_infor wiz_list;

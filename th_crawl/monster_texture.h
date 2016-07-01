@@ -133,6 +133,7 @@ extern textures img_mons_snow_girl;
 extern textures img_mons_sanghai[];
 extern textures img_mons_hourai[];
 extern textures img_mons_nesi;
+extern textures img_mons_youmu_yukkuri;
 
 
 
@@ -232,8 +233,17 @@ extern textures img_item_armor_armour_3;
 
 extern textures img_item_autumn_armour[];
 
+extern textures img_item_armor_relec;
+extern textures img_item_armor_rcold;
+extern textures img_item_armor_rfire;
+extern textures img_item_armor_rmagic;
+extern textures img_item_armor_rpois;
 
 
+extern textures img_item_evo_pagoda;
+extern textures img_item_evo_air_scroll;
+extern textures img_item_evo_dream_soul;
+extern textures img_item_evo_hammer;
 
 
 extern textures img_item_weapon_gohey;

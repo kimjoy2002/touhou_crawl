@@ -222,7 +222,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK,1,0,15},
 
-	{MON_YOUMUYUKKURI,15,840,name_infor("윳쿠리요우무",false),&img_mons_default,90,10,10,
+	{MON_YOUMUYUKKURI,15,840,name_infor("윳쿠리요우무",false),&img_mons_youmu_yukkuri,90,10,10,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,0,0,9}, //나중에 천천히 추가
 

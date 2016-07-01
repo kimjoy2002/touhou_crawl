@@ -40,7 +40,9 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	t->value6 = 0;
 	t->is_pile = false;
 	t->can_throw = false;
-	t->image = &img_mons_default;
+	t->image = kind_==EVK_PAGODA?&img_item_evo_pagoda:
+	kind_==EVK_AIR_SCROLL?&img_item_evo_air_scroll:
+	kind_==EVK_DREAM_SOUL?&img_item_evo_dream_soul:&img_mons_default;
 	t->name.name = evoke_string[kind_];
 	t->name.name_type = evoke_string_is[kind_];
 	t->weight = 1.0f;

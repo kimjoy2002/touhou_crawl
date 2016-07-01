@@ -76,10 +76,12 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 
 	switch(type)
 	{
-	case AMK_NORMAL:		
-		t->image = &img_mons_default;
+	case AMK_NORMAL:
+		t->image = material==MTK_PLATE?&img_item_armor_armour_3:
+			material==MTK_CHAIN?&img_item_armor_armour_2:
+			material==MTK_LEATHER?&img_item_armor_armour_1:&img_item_armor_armour_0;
 		t->name.name = GetMaterialString(material);
-		t->name.name += " Æò»ó¿Ê";
+		t->name.name += " ÀÏ¹Ý¿Ê";
 		t->value2 +=(material>=MTK_LEATHER)?((material>=MTK_CHAIN)?2:1):0;
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
@@ -94,7 +96,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 80+(material*20);
 		break;		
 	case AMK_WING:
-		t->image = &img_mons_default;
+		t->image = &img_item_armor_relec;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ³¯°³¿Ê";
 		t->name.name_type = true;
@@ -102,7 +104,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 80+(material*20);
 		break;		
 	case AMK_KAPPA:
-		t->image = &img_mons_default;
+		t->image = &img_item_armor_rcold;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " Ä±ÆÄ¿Ê";
 		t->name.name_type = true;
@@ -110,7 +112,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 80+(material*20);
 		break;		
 	case AMK_FIRE:
-		t->image = &img_mons_default;
+		t->image = &img_item_armor_rfire;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ºÒÁã¿Ê";
 		t->name.name_type = true;
@@ -118,7 +120,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 80+(material*20);
 		break;		
 	case AMK_MAID:
-		t->image = &img_mons_default;
+		t->image = &img_item_armor_rmagic;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ¸ÞÀÌµå¿Ê";
 		t->name.name_type = true;
@@ -126,7 +128,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 80+(material*20);
 		break;		
 	case AMK_POISON:
-		t->image = &img_mons_default;
+		t->image = &img_item_armor_rpois;
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ÀÎÇü¿Ê";
 		t->name.name_type = true;

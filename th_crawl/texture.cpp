@@ -330,6 +330,7 @@ textures img_mons_hourai[] =
 	textures(&texture_monster01, 182, 255)
 };
 
+textures img_mons_youmu_yukkuri(&texture_monster01, 183, 255);
 
 
 
@@ -425,6 +426,19 @@ textures img_item_autumn_armour[] =
 	textures(&texture_item01, 179, 255),
 	textures(&texture_item01, 180, 255)
 };
+
+
+textures img_item_armor_relec(&texture_item01, 223, 255);
+textures img_item_armor_rcold(&texture_item01, 224, 255);
+textures img_item_armor_rfire(&texture_item01, 225, 255);
+textures img_item_armor_rmagic(&texture_item01, 226, 255);
+textures img_item_armor_rpois(&texture_item01, 227, 255);
+
+
+textures img_item_evo_pagoda(&texture_item01, 228, 255);
+textures img_item_evo_air_scroll(&texture_item01, 229, 255);
+textures img_item_evo_dream_soul(&texture_item01, 230, 255);
+textures img_item_evo_hammer(&texture_item01, 231, 255);
 
 
 
@@ -1454,7 +1468,27 @@ int texturetoint(textures* input)
 	else if(input == &img_play_mokou[1])
 		return 275;
 	else if(input == &img_play_mokou[2])
-		return 276;
+		return 276;	
+	else if(input == &img_item_armor_relec)
+		return 277;
+	else if(input == &img_item_armor_rcold)
+		return 278;
+	else if(input == &img_item_armor_rfire)
+		return 279;
+	else if(input == &img_item_armor_rmagic)
+		return 280;
+	else if(input == &img_item_armor_rpois)
+		return 281;
+	if(input == &img_item_evo_pagoda)
+		return 282;
+	else if(input == &img_item_evo_air_scroll)
+		return 283;
+	else if(input == &img_item_evo_dream_soul)
+		return 284;
+	else if(input == &img_item_evo_hammer)
+		return 285;	
+	else if(input == &img_mons_youmu_yukkuri)
+		return 286;		
 	else
 		return 0;
 }
@@ -2015,7 +2049,27 @@ textures* inttotexture(int input)
 	case 275:
 		return &img_play_mokou[1];
 	case 276:
-		return &img_play_mokou[2];
+		return &img_play_mokou[2];		
+	case 277:
+		return &img_item_armor_relec;
+	case 278:
+		return &img_item_armor_rcold;
+	case 279:
+		return &img_item_armor_rfire;
+	case 280:
+		return &img_item_armor_rmagic;
+	case 281:
+		return &img_item_armor_rpois;
+	case 282:
+		return &img_item_evo_pagoda;
+	case 283:
+		return &img_item_evo_air_scroll;
+	case 284:
+		return &img_item_evo_dream_soul;
+	case 285:	
+		return &img_item_evo_hammer;
+	case 286:	
+		return &img_mons_youmu_yukkuri;
 	default:
 		return &img_mons_default;
 	}

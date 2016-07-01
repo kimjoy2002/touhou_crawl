@@ -588,6 +588,8 @@ int players::move(short_move x_mov, short_move y_mov)
 				{
 					PositionSwap(mon_);								
 					printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
+					time_delay += GetWalkDelay();//이동속도만큼 이동
+					prev_action = ACTT_WALK;
 					return 2;
 				}
 				else

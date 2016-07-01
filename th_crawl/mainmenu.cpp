@@ -404,7 +404,7 @@ void start_mainmenu()
 	temp = "마법사: 종족으로서의 마법사. 근접전투에 약하고 마법을 잘 다룬다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'b',4,temp,true,select_char,1);
-	temp = "요정: 원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 갑옷을 입지 못한다.\n\n\n";
+	temp = "요정: 원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 무거운 갑옷을 입지 못한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'c',4,temp,true,select_char,2);
 	temp = "카라스텐구: 비행이 가능. 괜찮은 전투능력과 좋은 대기마법 적성을 가졌다.\n\n\n";
@@ -421,14 +421,13 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'g',4,temp,true,select_char,6);
 	temp = "오니: 높은 전투력을 가지고있으나 무기와 마법은 잘 다루지 못한다.\n";
-	temp += "몸집이 커서 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.\n\n\n";
+	temp += "몸집이 커서 무거운 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'h',4,temp,true,select_char,7);
 	temp = "반요: 미구현이야!\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'i',4,temp,true,select_char,8);
 	temp = "망령: 냉기저항과 독저항을 들고 시작하고 높은 은신치를 가졌다.\n";
-	temp += "대신에 낮은 전투력과 신발을 낄 수 없게 된다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'j',4,temp,true,select_char,9);
 	temp = "뱀파이어: 미구현이야!\n\n\n";

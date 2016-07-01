@@ -69,7 +69,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{30,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//발동템
 
 
-	{13,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,100,1}, //중반 잘나오는 좋은 물약들
+	{13,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,90,1}, //중반 잘나오는 좋은 물약들
 	{14,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 두루마리들
 	{15,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,25,1}, //중반 잘나오는 나쁜 물약들
 	{17,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //중반용 무기들(가끔 저주)

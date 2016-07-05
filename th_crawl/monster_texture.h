@@ -311,6 +311,11 @@ extern textures img_tanmac_poison_small[]; //0¾¸
 extern textures img_tanmac_air[]; //0
 extern textures img_tanmac_rock_small[]; //0¾¸
 extern textures img_tanmac_rock_big[];
+extern textures img_tanmac_small[6][4];
+
+
+
+extern textures img_laser_small[];
 
 extern textures img_fog_normal[];
 extern textures img_fog_fire[];
@@ -319,6 +324,8 @@ extern textures img_fog_dark[];
 extern textures img_fog_poison[];
 extern textures img_fog_slow[];
 extern textures img_blizzard[];
+extern textures img_fog_tonado[];
+extern textures img_blast[];
 
 
 

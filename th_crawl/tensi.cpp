@@ -430,7 +430,7 @@ void tensi_burst(int good_)
 					{
 						if(env[current_level].isMove(rit->x,rit->y))
 						{
-							env[current_level].MakeEffect(*rit,&img_fog_normal[0],false);
+							env[current_level].MakeEffect(*rit,&img_blast[randA(5)],false);
 							vt_.push_back(*rit);
 						}
 					}

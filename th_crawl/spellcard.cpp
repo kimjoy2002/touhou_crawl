@@ -292,7 +292,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 					{
 						for(int i=-1;i<=1;i++)
 							for(int j=-1;j<=1;j++)
-								env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_fog_normal[0],false);
+								env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_blast[1],false);
 						for(int i=-1;i<=1;i++)
 						{
 							for(int j=-1;j<=1;j++)

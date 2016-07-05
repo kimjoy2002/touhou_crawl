@@ -660,45 +660,110 @@ textures img_tanmac_rock_big[] = {textures(&texture_item01, 200, 255),
 							    textures(&texture_item01, 206, 255),
 							    textures(&texture_item01, 207, 255)
 };
-
+textures img_tanmac_small[6][4] =
+{
+	{textures(&texture_laser, 36, 255),textures(&texture_laser, 37, 255),textures(&texture_laser, 38, 255), textures(&texture_laser, 39, 255)},
+	{textures(&texture_laser, 40, 255),textures(&texture_laser, 41, 255),textures(&texture_laser, 42, 255), textures(&texture_laser, 43, 255)},
+	{textures(&texture_laser, 44, 255),textures(&texture_laser, 45, 255),textures(&texture_laser, 46, 255), textures(&texture_laser, 47, 255)},
+	{textures(&texture_laser, 48, 255),textures(&texture_laser, 49, 255),textures(&texture_laser, 50, 255), textures(&texture_laser, 51, 255)},
+	{textures(&texture_laser, 52, 255),textures(&texture_laser, 53, 255),textures(&texture_laser, 54, 255), textures(&texture_laser, 55, 255)},
+	{textures(&texture_laser, 56, 255),textures(&texture_laser, 57, 255),textures(&texture_laser, 58, 255), textures(&texture_laser, 59, 255)}
+};
 textures img_blizzard[] = {textures(&texture_item01, 215, 255),
 							    textures(&texture_item01, 216, 255),
 								textures(&texture_item01, 217, 255),
 								textures(&texture_item01, 218, 255)};
 
 
-;textures img_laser[] = {textures(&texture_laser, 0, 0, 32, 32, 255),
-							    textures(&texture_laser, 32, 0, 64, 32, 255),
-							    textures(&texture_laser, 64, 0, 96, 32, 255),
-							    textures(&texture_laser, 96, 0, 128, 32, 255),
-								textures(&texture_laser, 128, 0, 160, 32, 255),
-							    textures(&texture_laser, 160, 0, 192, 32, 255),
-							    textures(&texture_laser, 192, 0, 224, 32, 255),
-							    textures(&texture_laser, 224, 0, 256, 32, 255),
-								textures(&texture_laser, 256, 0, 288, 32, 255),
-								textures(&texture_laser, 288, 0, 320, 32, 255),
-							    textures(&texture_laser, 320, 0, 352, 32, 255),
-							    textures(&texture_laser, 352, 0, 384, 32, 255),
-								textures(&texture_laser, 384, 0, 416, 32, 255),
-								textures(&texture_laser, 416, 0, 448, 32, 255),
-							    textures(&texture_laser, 448, 0, 480, 32, 255),
-							    textures(&texture_laser, 480, 0, 512, 32, 255),
-								textures(&texture_laser, 0, 32, 32, 64, 255),
-							    textures(&texture_laser, 32, 32, 64, 64, 255),
-							    textures(&texture_laser, 64, 32, 96, 64, 255),
-							    textures(&texture_laser, 96, 32, 128, 64, 255),
-								textures(&texture_laser, 128, 32, 160, 64, 255),
-							    textures(&texture_laser, 160, 32, 192, 64, 255),
-							    textures(&texture_laser, 192, 32, 224, 64, 255),
-							    textures(&texture_laser, 224, 32, 256, 64, 255),
-								textures(&texture_laser, 256, 32, 288, 64, 255),
-								textures(&texture_laser, 288, 32, 320, 64, 255),
-							    textures(&texture_laser, 320, 32, 352, 64, 255),
-							    textures(&texture_laser, 352, 32, 384, 64, 255),
-								textures(&texture_laser, 384, 32, 416, 64, 255),
-								textures(&texture_laser, 416, 32, 448, 64, 255),
-							    textures(&texture_laser, 448, 32, 480, 64, 255),
-							    textures(&texture_laser, 480, 32, 512, 64, 255)
+textures img_fog_tonado[] = {textures(&texture_laser, 96, 255),
+							    textures(&texture_laser, 97, 255),
+								textures(&texture_laser, 98, 255),
+								textures(&texture_laser, 99, 255)};
+textures img_blast[] = {textures(&texture_laser, 100, 255),
+							    textures(&texture_laser, 101, 255),
+								textures(&texture_laser, 102, 255),
+								textures(&texture_laser, 103, 255),
+								textures(&texture_laser, 104, 255),
+								textures(&texture_laser, 105, 255)};
+
+
+textures img_laser[] = {textures(&texture_laser, 0, 255),
+							    textures(&texture_laser, 1, 255),
+							    textures(&texture_laser, 2, 255),
+							    textures(&texture_laser, 3, 255),
+								textures(&texture_laser, 4, 255),
+							    textures(&texture_laser, 5, 255),
+							    textures(&texture_laser, 6, 255),
+							    textures(&texture_laser, 7, 255),
+								textures(&texture_laser, 8, 255),
+								textures(&texture_laser, 9, 255),
+							    textures(&texture_laser, 10, 255),
+							    textures(&texture_laser, 11, 255),
+								textures(&texture_laser, 12, 255),
+								textures(&texture_laser, 13, 255),
+							    textures(&texture_laser, 14, 255),
+							    textures(&texture_laser, 15, 255),
+								textures(&texture_laser, 16, 255),
+							    textures(&texture_laser, 17, 255),
+							    textures(&texture_laser, 18, 255),
+							    textures(&texture_laser, 19, 255),
+								textures(&texture_laser, 20, 255),
+							    textures(&texture_laser, 21, 255),
+							    textures(&texture_laser, 22, 255),
+							    textures(&texture_laser, 23, 255),
+								textures(&texture_laser, 24, 255),
+								textures(&texture_laser, 25, 255),
+							    textures(&texture_laser, 26, 255),
+							    textures(&texture_laser, 27, 255),
+								textures(&texture_laser, 28, 255),
+								textures(&texture_laser, 29, 255),
+							    textures(&texture_laser, 30, 255),
+							    textures(&texture_laser, 31, 255)
+};
+
+
+
+
+
+textures img_thunder[] = {textures(&texture_laser, 64, 255),
+							    textures(&texture_laser, 65, 255),
+							    textures(&texture_laser, 66, 255),
+							    textures(&texture_laser, 67, 255),
+								textures(&texture_laser, 68, 255),
+							    textures(&texture_laser, 69, 255),
+							    textures(&texture_laser, 70, 255),
+							    textures(&texture_laser, 71, 255),
+								textures(&texture_laser, 72, 255),
+								textures(&texture_laser, 73, 255),
+							    textures(&texture_laser, 74, 255),
+							    textures(&texture_laser, 75, 255),
+								textures(&texture_laser, 76, 255),
+								textures(&texture_laser, 77, 255),
+							    textures(&texture_laser, 78, 255),
+							    textures(&texture_laser, 79, 255),
+								textures(&texture_laser, 80, 255),
+							    textures(&texture_laser, 81, 255),
+							    textures(&texture_laser, 82, 255),
+							    textures(&texture_laser, 83, 255),
+								textures(&texture_laser, 84, 255),
+							    textures(&texture_laser, 85, 255),
+							    textures(&texture_laser, 86, 255),
+							    textures(&texture_laser, 87, 255),
+								textures(&texture_laser, 88, 255),
+								textures(&texture_laser, 89, 255),
+							    textures(&texture_laser, 90, 255),
+							    textures(&texture_laser, 91, 255),
+								textures(&texture_laser, 92, 255),
+								textures(&texture_laser, 93, 255),
+							    textures(&texture_laser, 94, 255),
+							    textures(&texture_laser, 95, 255)
+
+};
+textures img_laser_small[] = {
+	textures(&texture_laser, 32, 255),
+	textures(&texture_laser, 33, 255),
+	textures(&texture_laser, 34, 255),
+	textures(&texture_laser, 35, 255)
 };
 
 textures img_effect_autumn_leave[] = {
@@ -706,8 +771,11 @@ textures img_effect_autumn_leave[] = {
 	textures(&texture_item01, 170, 255),
 	textures(&texture_item01, 171, 255),
 	textures(&texture_item01, 172, 255)
-	
 };
+
+
+
+
 textures img_effect_rock_trap(&texture_item01, 183, 255);
 
 textures img_effect_rock_uplift[] = {
@@ -1490,6 +1558,26 @@ int texturetoint(textures* input)
 		return 285;	
 	else if(input == &img_mons_youmu_yukkuri)
 		return 286;		
+	else if(input == &img_laser_small[0])
+		return 287;	
+	else if(input == &img_tanmac_small[0][0])
+		return 288;
+	else if(input == &img_tanmac_small[1][0])
+		return 289;
+	else if(input == &img_tanmac_small[2][0])
+		return 290;
+	else if(input == &img_tanmac_small[3][0])
+		return 291;
+	else if(input == &img_tanmac_small[4][0])
+		return 292;
+	else if(input == &img_tanmac_small[5][0])
+		return 293;
+	else if(input == &img_fog_tonado[0])
+		return 294;
+	else if(input == &img_blast[0])
+		return 295;
+	else if(input == &img_thunder[0])
+		return 296;
 	else
 		return 0;
 }
@@ -2071,6 +2159,26 @@ textures* inttotexture(int input)
 		return &img_item_evo_hammer;
 	case 286:	
 		return &img_mons_youmu_yukkuri;
+	case 287:
+		return &img_laser_small[0];
+	case 288:
+		return &img_tanmac_small[0][0];
+	case 289:
+		return &img_tanmac_small[1][0];
+	case 290:
+		return &img_tanmac_small[2][0];
+	case 291:
+		return &img_tanmac_small[3][0];
+	case 292:
+		return &img_tanmac_small[4][0];
+	case 293:
+		return &img_tanmac_small[5][0];
+	case 294:
+		return &img_fog_tonado[0];
+	case 295:
+		return &img_blast[0];
+	case 296:
+		return &img_thunder[0];
 	default:
 		return &img_mons_default;
 	}

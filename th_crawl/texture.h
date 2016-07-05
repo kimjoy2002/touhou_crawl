@@ -73,7 +73,7 @@ extern textures img_dungeon_object[][3];
 extern textures img_monster01[];
 extern textures img_item01[];
 extern textures img_laser[];
-
+extern textures img_thunder[];
 
 
 

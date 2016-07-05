@@ -225,7 +225,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 				
 				for(int i=0;i<(you.GetParadox()?2:1);i++)
-					throwtanmac(rand_int(10,15),beam,temp_infor,NULL);
+					throwtanmac(29,beam,temp_infor,NULL);
 				you.SetParadox(0); 
 				return true;
 			}

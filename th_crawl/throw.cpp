@@ -289,7 +289,24 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_item_potion[0];
 	case 28:
 		return &img_tanmac_rock_big[direc];
-
+	case 29:
+		return &img_laser_small[direc%4];
+	case 30:
+	case 31:
+	case 32:
+	case 33:
+	case 34:
+	case 35:
+		return &img_tanmac_small[type-30][direc%4];
+	case 36:
+	case 37:
+	case 38:
+	case 39:
+	case 40:
+	case 41:
+		return &img_blast[type-36];
+	case 42:
+		return &img_thunder[PathToNum(path)];
 	}
 }
 

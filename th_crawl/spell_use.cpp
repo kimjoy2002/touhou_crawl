@@ -341,7 +341,7 @@ bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(rand_int(10,15),beam,temp_infor,NULL);
+			throwtanmac(rand_int(30,35),beam,temp_infor,NULL);
 		order->SetParadox(0);	
 		return true;
 	}
@@ -375,7 +375,7 @@ bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(14,beam,temp_infor,NULL);
+			throwtanmac(34,beam,temp_infor,NULL);
 		order->SetParadox(0);
 		return true;
 	}
@@ -523,7 +523,7 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 				printlog("구름이 존재하는 곳에 사용할 수 없습니다.",true,false,false,CL_small_danger);
 			return false;
 		}
-		env[current_level].MakeSmoke(target, img_fog_normal, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
+		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
 		return true;
 	}
 	return false;
@@ -932,7 +932,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 	if(hit_mon)
 	{
 		beam_infor temp_infor(randC(2,7+power*1/4),2*(7+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
-		if(ThrowShock(21,(*start),hit_mon->position,temp_infor))
+		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
 			direc = next_direc;
@@ -971,21 +971,21 @@ bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target
 bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* order, name_infor bomb_name, coord_def target)
 {
 	//target을 중심으로 터지도록 바꿈..
-	textures* image_ = &img_fog_fire[0];
+	textures* image_ = &img_blast[0];
 	switch(type)
 	{
 	case ATT_FIRE_BLAST:
 	case ATT_BURST:
 	case ATT_FIRE_PYSICAL_BLAST:
-		image_ = &img_fog_fire[0];
+		image_ = &img_blast[0];
 		break;
 	case ATT_COLD_BLAST:
 	case ATT_COLD_PYSICAL_BLAST:
-		image_ = &img_fog_cold[0];
+		image_ = &img_blast[4];
 		break;		
 	case ATT_NORMAL_BLAST:		
 	case ATT_AC_REDUCE_BLAST:
-		image_ = &img_fog_normal[0];
+		image_ = &img_blast[2];
 		break;
 	}
 	int ball_size = size*size;
@@ -1102,7 +1102,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(rand_int(10,15),beam,temp_infor,NULL);	
+			throwtanmac(rand_int(30,35),beam,temp_infor,NULL);	
 		order->SetParadox(0);
 		return true;
 	}
@@ -1121,7 +1121,7 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 		{
 			coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
 			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("화염구",false));
-			BaseBomb(pos, &img_fog_fire[0],temp_att);
+			BaseBomb(pos, &img_blast[0],temp_att);
 		}
 		order->SetParadox(0); 
 		return true;
@@ -1365,7 +1365,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
-						env[current_level].MakeSmoke((*rit), img_fog_normal, SMT_WHIRLWIND, 3+pow/20,  0, order);
+						env[current_level].MakeSmoke((*rit), img_fog_tonado, SMT_WHIRLWIND, 3+pow/20,  0, order);
 					}
 				}
 			}
@@ -1664,7 +1664,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
-		ThrowSector(rand_int(10,15),beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
+		ThrowSector(38,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
 	}
@@ -1943,7 +1943,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 						t_ =  &img_effect_rock_uplift[0];
 					if(env[current_level].isMove(rit->x,rit->y))
 					{
-						env[current_level].MakeEffect(*rit,&img_fog_normal[0],false);
+						env[current_level].MakeEffect(*rit,&img_blast[1],false);
 						env[current_level].MakeEffect(*rit,t_,false);
 						vt_.push_back(*rit);
 					}
@@ -2037,7 +2037,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 				{
 					if(env[current_level].isMove(rit->x,rit->y))
 					{
-						env[current_level].MakeEffect(*rit,&img_fog_fire[0],false);
+						env[current_level].MakeEffect(*rit,&img_blast[0],false);
 						vt_.push_back(*rit);
 					}
 				}
@@ -2082,7 +2082,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 	if(1)
 	{
 		
-		textures* t_ = &img_fog_fire[0];
+		textures* t_ = &img_blast[0];
 		{
 			dif_rect_iterator rit(order->position,2);
 		
@@ -2190,7 +2190,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 			if(max_len_ >= 3)
 			{
 				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor("폭발",true));
-				BaseBomb(pos, &img_effect_tanmac_middle[2],temp_att,hit_mon);
+				BaseBomb(pos, &img_blast[2],temp_att,hit_mon);
 			}
 		}
 		order->SetParadox(0); 
@@ -2204,7 +2204,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
-		textures* t_ = &img_fog_fire[0];
+		textures* t_ = &img_blast[0];
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2789,7 +2789,7 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 		{
 			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
 			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("대포알",true));
-			BaseBomb(pos, &img_fog_normal[0],temp_att,order);
+			BaseBomb(pos, &img_blast[5],temp_att,order);
 		}
 		order->SetParadox(0); 
 		return true;

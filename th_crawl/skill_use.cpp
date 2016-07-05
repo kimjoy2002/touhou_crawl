@@ -196,7 +196,7 @@ bool skill_soul_shot(int power, unit* order, coord_def target)
 	for(int i=-2;i<=2;i++)
 		for(int j=-2;j<=2;j++)
 			if(abs(i)+abs(j)<4 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
-				env[current_level].MakeEffect(coord_def(order->position.x+i,order->position.y+j),&img_fog_slow[0],false);
+				env[current_level].MakeEffect(coord_def(order->position.x+i,order->position.y+j),&img_blast[3],false);
 	for(int i=-2;i<=2;i++)
 	{
 		for(int j=-2;j<=2;j++)
@@ -765,7 +765,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 					break;
 				}
 				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
-				BaseBomb(final_, &img_fog_normal[0],temp_att);
+				BaseBomb(final_, &img_blast[2],temp_att);
 
 				
 				mon_->flag = temp_flag;
@@ -818,7 +818,7 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 	printlog("삼보필살! ",false,false,false,CL_yuigi);
 	for(int i = 0; i < 3; i++)
 	{
-		textures* t_ = i==0?&img_fog_cold[0]:i==1?&img_fog_slow[0]:&img_fog_fire[0];
+		textures* t_ = i==0?&img_blast[4]:i==1?&img_blast[3]:&img_blast[0];
 		{
 			dif_rect_iterator rit(order->position,2+i);
 		

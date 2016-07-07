@@ -33,6 +33,8 @@ enum tribe_proper_type
 	TPT_POWER_SAVE,
 	TPT_9_LIFE,
 	TPT_18_LIFE,
+	TPT_SPEED,
+	TPT_CLAW,
 	TPT_MAX
 };
 

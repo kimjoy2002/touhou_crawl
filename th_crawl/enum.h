@@ -367,7 +367,7 @@ enum dungeon_size
 
 //종족
 enum tribe_type
-{//인간,마법사,요정,카라스텐구,백랑텐구,캇파,반요,츠구모가미,흡혈귀,오니,사신, 달토끼, 천인, 용궁의사자, 유령, 망령, 소령
+{//인간,마법사,요정,카라스텐구,백랑텐구,캇파,네코마타,반요,츠구모가미,흡혈귀,오니,사신, 달토끼, 천인, 용궁의사자, 유령, 망령, 소령
 	TRI_FIRST = 0,
 	TRI_HUMAN = 0,
 	TRI_WIZARD,
@@ -375,6 +375,7 @@ enum tribe_type
 	TRI_CROWTENGU,
 	TRI_WOLFTENGU,
 	TRI_KAPPA,
+	TRI_NECOMATA,
 	TRI_CHEUKUMOGAMI,
 	TRI_ONI,
 	TRI_HALFYOKAI,

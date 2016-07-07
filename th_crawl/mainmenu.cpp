@@ -417,22 +417,26 @@ void start_mainmenu()
 	temp += "불과 대지마법을 제외한 괜찮은 마법 적성을 가졌다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'f',4,temp,true,select_char,5);
-	temp = "츠구모가미: 미구현이야!\n\n\n";
+	temp = "네코마타: 빠른 이동속도를 지녔고, 손톱이 자라있어 맨손격투에 강하다.\n";
+	temp += "체력이 약하고 무기,갑옷,방패는 잘 다루지 못한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'g',4,temp,true,select_char,6);
+	temp = "츠구모가미: 미구현이야!\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(3,'h',4,temp,true,select_char,6);
 	temp = "오니: 높은 전투력을 가지고있으나 무기와 마법은 잘 다루지 못한다.\n";
 	temp += "몸집이 커서 무거운 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
-	m_mgr.menu_input_puls(3,'h',4,temp,true,select_char,7);
+	m_mgr.menu_input_puls(3,'i',4,temp,true,select_char,7);
 	temp = "반요: 미구현이야!\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
-	m_mgr.menu_input_puls(3,'i',4,temp,true,select_char,8);
+	m_mgr.menu_input_puls(3,'j',4,temp,true,select_char,8);
 	temp = "망령: 냉기저항과 독저항을 들고 시작하고 높은 은신치를 가졌다.\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
-	m_mgr.menu_input_puls(3,'j',4,temp,true,select_char,9);
+	m_mgr.menu_input_puls(3,'k',4,temp,true,select_char,9);
 	temp = "뱀파이어: 미구현이야!\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
-	m_mgr.menu_input_puls(3,'k',4,temp,true,select_char,10);
+	m_mgr.menu_input_puls(3,'l',4,temp,true,select_char,10);
 	m_mgr.menu_input_puls(3,VK_ESCAPE,2,"",false,NULL,0);
 
 	

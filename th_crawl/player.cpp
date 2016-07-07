@@ -831,6 +831,10 @@ int players::GetNormalDelay()
 int players::GetWalkDelay()
 {
 	int speed_ = s_superman?3:(speed-(s_swift?2:0));
+	if(GetProperty(TPT_SPEED)==1)
+		speed_ = speed_*8/10;
+	else if(GetProperty(TPT_SPEED)==-1)
+		speed_ = speed_*12/10;
 	if(speed_<3)
 		speed_ = 3;
 	if(as_penalty>GetPenaltyMinus(2))

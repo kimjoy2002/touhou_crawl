@@ -95,6 +95,20 @@ string tribe_property::GetName()
 		return "리저렉션";
 	case TPT_18_LIFE:
 		return "리저렉션";
+	case TPT_SPEED:
+		{
+			switch(value)
+			{
+			case 1:
+				return "민첩함";
+			case -1:
+				return "둔함";
+			default:
+				return "버그이속";
+			}
+		}
+	case TPT_CLAW:
+		return "손톱";
 	}
 	return "버그특성";
 }
@@ -162,6 +176,32 @@ string tribe_property::GetInfor()
 		return "당신은 9레벨이전에 한번 부활할 수 있다.";
 	case TPT_18_LIFE:
 		return "당신은 18레벨이전에 한번 부활할 수 있다.";
+	case TPT_SPEED:
+		{
+			switch(value)
+			{
+			case 1:
+				return "당신은 이동속도가 빠르다.";
+			case -1:
+				return "당신은 이동속도는 느리다.";
+			default:
+				return "버그이속";
+			}
+		}
+	case TPT_CLAW:
+		{
+			switch(value)
+			{
+			case 3:
+				return "당신은 손톱이 아주 길다.";
+			case 2:
+				return "당신은 손톱이 상당히 길다.";
+			case 1:
+				return "당신은 손톱이 길다.";
+			default:
+				return "버그손톱";
+			}
+		}
 	}
 	return "이 특성은 버그다.";
 }
@@ -211,6 +251,20 @@ string tribe_property::GetDetail()
 		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 9가 되면 사라진다.";
 	case TPT_18_LIFE:
 		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 18이 되면 사라진다.";
+	case TPT_SPEED:
+		{
+			switch(value)
+			{
+			case 1:
+				return "당신의 이동속도는 빠르다.\n이동시 다른 종족보다 80%의 딜레이만을 가진다.";
+			case -1:
+				return "당신의 이동속도는 느리다.\n이동시 다른 종족보다 120%의 딜레이를 가진다.";
+			default:
+				return "당신의 이동속도는 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+			}
+		}
+	case TPT_CLAW:
+		return "당신은 손톱이 길게 나있다.\n맨손격투시 추가 데미지를 준다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -330,6 +384,13 @@ void SetTribe(tribe_type select_)
 	case TRI_KAPPA:
 		you.SetProperty(TPT_SWIM,1);
 		break;
+	case TRI_NECOMATA:
+		you.StatUpDown(-2,STAT_STR);
+		you.StatUpDown(2,STAT_DEX);
+		you.SetProperty(TPT_HP,-2);
+		you.SetProperty(TPT_SPEED,1);
+		you.SetProperty(TPT_CLAW,1);
+		break;
 	case TRI_CHEUKUMOGAMI:
 		you.SetProperty(TPT_HP,-1);
 		you.StatUpDown(-1,STAT_STR);
@@ -411,6 +472,17 @@ void LevelUpTribe(int level_)
 		if(level_%5 == 0)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
+		break;
+	case TRI_NECOMATA:
+		if(level_%5 == 0)
+		{
+			you.StatUpDown(1,STAT_DEX);
+		}
+		if(level_%5 == 0)
+		{
+			you.max_mp--;
+			you.mp--;
 		}
 		break;
 	case TRI_CHEUKUMOGAMI:

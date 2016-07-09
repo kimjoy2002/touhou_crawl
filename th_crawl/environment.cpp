@@ -944,7 +944,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			{
 				if(!env[current_level].isMove((*it2),true,true))
 				{
-					block_length_-=3;
+					block_length_-=2;
 					break;
 				}
 				it2++;

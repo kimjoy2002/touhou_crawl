@@ -590,7 +590,7 @@ void tribe_property::gain(bool gain_)
 		you.SetTogleInvisible(false);
 		return;
 	case TPT_POWER_SAVE:
-		you.ResistUpDown(1,RST_POWER);
+		you.ResistUpDown(value_,RST_POWER);
 		return;	
 	case TPT_9_LIFE:
 		return;

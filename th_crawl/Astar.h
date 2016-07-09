@@ -46,7 +46,7 @@ typedef struct searchnode
 }searchnode;
 
 
-bool PathSearch(const coord_def& start,const coord_def&  goal, stack<coord_def>& will_move, search_type type, int floor_ = current_level);
+bool PathSearch(const coord_def& start,const coord_def&  goal, stack<coord_def>& will_move, search_type type, int floor_ = current_level, bool alway_fly_= false, bool alway_swim_= false);
 
 extern searchnode astar_node[DG_MAX_X][DG_MAX_Y];
 

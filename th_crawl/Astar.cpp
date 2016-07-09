@@ -53,12 +53,12 @@ bool list_search(list<searchnode*>& queues,searchnode* data)
 	return false;
 }
 
-bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& will_move, search_type type, int floor_)
+bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& will_move, search_type type, int floor_, bool alway_fly_, bool alway_swim_)
 {
 	coord_def ano_goal = start;
 	bool is_mapping = env[floor_].isMapping(goal.x,goal.y);
 	bool is_explore = (env[floor_].isExplore(goal.x,goal.y) || type >= ST_MONSTER_NORMAL || type == ST_SEARCH);
-	bool is_move = (env[floor_].isMove(goal.x,goal.y) || type == ST_SEARCH);
+	bool is_move = (env[floor_].isMove(goal.x,goal.y,alway_fly_,alway_swim_) || type == ST_SEARCH);
 	if(!((is_explore || is_mapping) && is_move))
 	{
 		return false;
@@ -71,7 +71,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 		{
 			if((*it) ==	goal)
 				continue;
-			if(env[floor_].isMove(it->x,it->y))
+			if(env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_))
 			{
 				not_good = false;
 				break;
@@ -125,7 +125,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				bool is_mapping = env[floor_].isMapping(it->x,it->y);
 				bool is_explore = (env[floor_].isExplore(it->x,it->y) || type >= ST_MONSTER_NORMAL);
 				bool is_door = (env[floor_].isDoor(it->x,it->y) && type < ST_MONSTER_NORMAL);//열수있는 문이냐
-				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y) || is_door));
+				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_) || is_door));
 				if(!is_move)
 				{
 					if(type == ST_SEARCH && !is_explore && ano_goal ==  start)

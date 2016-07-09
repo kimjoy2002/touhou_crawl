@@ -188,7 +188,7 @@ void auto_Move()
 			{
 				item* sight_item = close_item_vector_[i];
 
-				if(!PathSearch(you.position,sight_item->position,you.will_move,ST_NORMAL))
+				if(!PathSearch(you.position,sight_item->position,you.will_move,ST_NORMAL,current_level,false,you.isSwim()))
 				{
 				}
 				else{

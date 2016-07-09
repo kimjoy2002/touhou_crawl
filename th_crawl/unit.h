@@ -163,6 +163,7 @@ public:
 	virtual float GetFireResist(bool cloud_ = false)=0;
 	virtual float GetColdResist(bool cloud_ = false)=0;
 	virtual float GetElecResist(bool cloud_ = false)=0;
+	virtual bool GetCloudResist(){return false;};
 	virtual bool Blink(int time_)=0;
 	virtual attack_weapon_type GetAttackType()=0;
 	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = false)=0;

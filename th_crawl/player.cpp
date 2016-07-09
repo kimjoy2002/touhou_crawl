@@ -1057,6 +1057,10 @@ int players::HpRecoverDelay(int delay_)
 	{
 		cacul_ += 40*GetProperty(TPT_REGEN);
 	}
+	else if(GetProperty(TPT_REGEN)<0)
+	{
+		cacul_ *= 0.7f;
+	}
 
 
 
@@ -1180,6 +1184,10 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	if(GetProperty(TPT_MP_REGEN)>0)
 	{
 		cacul_ +=15*GetProperty(TPT_MP_REGEN)-5;
+	}
+	else if(GetProperty(TPT_MP_REGEN)<0)
+	{
+		cacul_ *= 0.7f;
 	}
 
 
@@ -1335,12 +1343,12 @@ int players::PowDecreaseDelay(int delay_)
 	if(s_haste)
 	{
 		if(s_haste)
-			power_decre/=power_keep?5:20;
+			power_decre/=power_keep>0?5:(power_keep<0?30:20);
 	}
 	if(s_invisible || togle_invisible)
 	{
 		if(s_invisible || togle_invisible)
-			power_decre/=power_keep?5:20;
+			power_decre/=power_keep>0?5:(power_keep<0?30:20);
 	}
 	return power_decre;
 }
@@ -3462,7 +3470,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 	}
 
-	if(type_ == ET_ARMOR && it->type >= ITM_ARMOR_BODY_ARMOUR_1 && it->type <= ITM_ARMOR_BODY_ARMOUR_3 )
+	if(type_ == ET_ARMOR && it->type >= ITM_ARMOR_BODY_ARMOUR_2 && it->type <= ITM_ARMOR_BODY_ARMOUR_3 )
 	{
 		int your_size_ = GetProperty(TPT_SIZE);
 		if(your_size_>0)
@@ -4012,6 +4020,7 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 }
 float players::GetFireResist(bool cloud_)
 {
+	float return_ =  1.0f;
 	if(cloud_)
 	{
 		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 0)
@@ -4019,23 +4028,26 @@ float players::GetFireResist(bool cloud_)
 			return 0;
 		}		
 	}
-
-
 	if(fire_resist <= -2)
-		return 2;
+		return_ *= 2;
 	else if(fire_resist == -1)
-		return 1.5f;
+		return_ *= 1.5f;
 	else if(fire_resist == 1)
-		return 0.5f;
+		return_ *= 0.5f;
 	else if(fire_resist == 2)
-		return 0.2f;
+		return_ *= 0.25f;
 	else if(fire_resist >= 3)
-		return 0.1f;
-	else
-		return 1;
+		return_ *= 0.125f;
+
+
+	if(GetCloudResist())
+		return_ *= 0.5f;
+
+	return return_;
 }
 float players::GetColdResist(bool cloud_)
 {
+	float return_ =  1.0f;
 	if(cloud_)
 	{
 		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 1)
@@ -4043,22 +4055,26 @@ float players::GetColdResist(bool cloud_)
 			return 0;
 		}		
 	}
-
 	if(ice_resist <= -2)
-		return 2;
+		return_ *= 2;
 	else if(ice_resist == -1)
-		return 1.5f;
+		return_ *= 1.5f;
 	else if(ice_resist == 1)
-		return 0.5f;
+		return_ *= 0.5f;
 	else if(ice_resist == 2)
-		return 0.2f;
+		return_ *= 0.25f;
 	else if(ice_resist >= 3)
-		return 0.1f;
-	else
-		return 1;
+		return_ *= 0.125f;
+
+
+	if(GetCloudResist())
+		return_ *= 0.5f;
+
+	return return_;
 }
 float players::GetElecResist(bool cloud_)
 {
+	float return_ =  1.0f;
 	if(cloud_)
 	{
 		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 2)
@@ -4066,20 +4082,29 @@ float players::GetElecResist(bool cloud_)
 			return 0;
 		}		
 	}
-	
 	if(elec_resist <= -2)
-		return 2;
+		return_ *= 2;
 	else if(elec_resist == -1)
-		return 1.5f;
+		return_ *= 1.5f;
 	else if(elec_resist == 1)
-		return 0.5f;
+		return_ *= 0.5f;
 	else if(elec_resist == 2)
-		return 0.2f;
+		return_ *= 0.25f;
 	else if(elec_resist >= 3)
-		return 0.1f;
-	else
-		return 1;
+		return_ *= 0.125f;
+
+
+	if(GetCloudResist())
+		return_ *= 0.5f;
+
+	return return_;
 }
+bool players::GetCloudResist()
+{
+	return GetProperty(TPT_CLOUD_RESIST);
+}
+
+
 void players::burstCloud(int kind_, int rate_)
 {	
 	textures *t_ = img_fog_normal;

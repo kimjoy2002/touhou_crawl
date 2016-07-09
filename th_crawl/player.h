@@ -447,6 +447,7 @@ public:
 	float GetFireResist(bool cloud_ = false);
 	float GetColdResist(bool cloud_ = false);
 	float GetElecResist(bool cloud_ = false);
+	bool GetCloudResist();
 	void burstCloud(int kind_, int rate_);
 	bool isEnemyMonster(const monster* monster_info);
 	bool isUserAlly() const {return true;}

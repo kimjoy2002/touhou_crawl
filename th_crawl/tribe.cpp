@@ -90,7 +90,17 @@ string tribe_property::GetName()
 	case TPT_INVISIBLE:
 		return "영구투명";
 	case TPT_POWER_SAVE:
-		return "파워보존";
+		{
+			switch(value)
+			{
+			case 1:
+				return "파워보존";
+			case -1:
+				return "피에 굶주림";
+			default:
+				return "버그파워";
+			}
+		}
 	case TPT_9_LIFE:
 		return "리저렉션";
 	case TPT_18_LIFE:
@@ -118,7 +128,17 @@ string tribe_property::GetName()
 	case TPT_FUR:
 		return "푹신한 털";
 	case TPT_REGEN:
-		return "재생력";	
+		{
+			switch(value)
+			{
+			case 1:
+				return "강한 재생력";	
+			case -1:
+				return "약한 재생력";
+			default:
+				return "버그재생";
+			}
+		}
 	case TPT_SLAY:
 		return "전투감각";
 	case TPT_CONFUSE_ATTACK:
@@ -142,7 +162,17 @@ string tribe_property::GetName()
 	case TPT_FORCE_OF_NATURE:
 		return "자연의 힘";
 	case TPT_MP_REGEN:
-		return "영력 회복";
+		{
+			switch(value)
+			{
+			case 1:
+				return "영력 회복 증가";
+			case -1:
+				return "영력 회복 감소";
+			default:
+				return "버그영력회복";
+			}
+		}
 	case TPT_CONFUSE_RESIST:
 		return "혼란 저항";
 	case TPT_SPELL_POWER:
@@ -153,6 +183,8 @@ string tribe_property::GetName()
 		return "피의 마법";
 	case TPT_TORMENT:
 		return "지옥의 고통";
+	case TPT_CLOUD_RESIST:
+		return "구름 저항";
 	}
 	return "버그특성";
 }
@@ -217,7 +249,20 @@ string tribe_property::GetInfor()
 	case TPT_POISON_RESIST:
 		return "당신은 독에 강하다.";
 	case TPT_STEALTH:
-		return "당신은 은밀하게 움직인다.";
+		{
+			switch(value)
+			{
+			case 3:
+				return "당신은 은밀하게 움직인다.(+3)";
+			case 2:
+				return "당신은 은밀하게 움직인다.(+2)";
+			case 1:
+				return "당신은 은밀하게 움직인다.(+1)";
+			case -1:
+			default:
+				return "버그은밀";
+			}
+		}	
 	case TPT_FLY:
 		return "당신은 큰 날개를 가졌다.";
 	case TPT_SWIM:
@@ -239,7 +284,7 @@ string tribe_property::GetInfor()
 	case TPT_GHOST_FOOT:
 		return "당신의 망령이기에 다리가 없다.";
 	case TPT_CHEUKUMOGAMI:
-		return "당신의 본체는 도구이다.(미구현)";
+		return "당신의 본체는 도구이다.";
 	case TPT_HP:
 		{
 			switch(value)
@@ -263,7 +308,17 @@ string tribe_property::GetInfor()
 	case TPT_INVISIBLE:
 		return "무의식인 당신은 항상 투명해져있다.";
 	case TPT_POWER_SAVE:
-		return "당신은 P의 자연소모가 느리다.";
+		{
+			switch(value)
+			{
+			case 1:
+				return "당신은 P의 자연소모가 느리다.";
+			case -1:
+				return "당신은 P에 굶주려 있다.";
+			default:
+				return "버그파워";
+			}
+		}
 	case TPT_9_LIFE:
 		return "당신은 9레벨이전에 한번 부활할 수 있다.";
 	case TPT_18_LIFE:
@@ -312,6 +367,8 @@ string tribe_property::GetInfor()
 				return "당신은 체력 재생력이 높다.(+2)";
 			case 1:
 				return "당신은 체력 재생력이 높다.(+1)";
+			case -1:
+				return "당신은 체력 재생력이 낮다.(-1)";
 			default:
 				return "버그재생력";
 			}
@@ -336,6 +393,8 @@ string tribe_property::GetInfor()
 		{
 			switch(value)
 			{
+			case 3:
+				return "당신은 아주 단단한 비늘로 덮여있다. (AC+9)";
 			case 2:
 				return "당신은 두꺼운 비늘로 덮여있다. (AC+6)";
 			case 1:
@@ -358,6 +417,8 @@ string tribe_property::GetInfor()
 				return "당신은 영력 재생력이 높다.(+2)";
 			case 1:
 				return "당신은 영력 재생력이 높다.(+1)";
+			case -1:
+				return "당신은 영력 재생력이 낮다.(-1)";
 			default:
 				return "버그재생력";
 			}
@@ -372,6 +433,8 @@ string tribe_property::GetInfor()
 		return "당신은 영력이 없어도 피를 이용하여 마법을 쓸 수 있다.";
 	case TPT_TORMENT:
 		return "당신은 지옥의 고통을 불러올 수 있다.";
+	case TPT_CLOUD_RESIST:
+		return "당신은 구름에 영향을 적게 받는다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -442,7 +505,7 @@ string tribe_property::GetDetail()
 	case TPT_POISON_RESIST:
 		return "독 저항이 증가한다.";
 	case TPT_STEALTH:
-		return "은밀도가 오른다.";
+		return "은밀도가 오른다. 은밀한 정도는 수치만큼 곱해진다.";
 	case TPT_FLY:
 		return "비행을 능력을 통해 키고 끌 수 있다.";
 	case TPT_SWIM:
@@ -462,15 +525,25 @@ string tribe_property::GetDetail()
 	case TPT_HORN:
 		return "뿔에 의한 박치기 공격이 추가된다.\n매 공격마다 일정확률로 박치기가 나가며 맨손으로 싸울때 더 높은 확률로 나간다.";
 	case TPT_GHOST_FOOT:
-		return "다리방어구를 낄 수 없다. (과거엔 그랬다)";
+		return "당신의 다리는 무처럼 생겼다.\n";
 	case TPT_CHEUKUMOGAMI:
 		return "당신의 본체인 도구는 버릴 수 없다.\n당신의 본체를 손에 들고 있으면 그 장비와 연관된 스킬이 5증가하는 보너스를 받는다.";
 	case TPT_HP:
 		return "당신은 유전적으로 체력이 결정되어있다.\n최종 체력치가 수치만큼 곱해진다.";
 	case TPT_INVISIBLE:
 		return "비전투중일때는 당신은 상시 투명을 유지한다.\n만약 당신이 공격을 시도하면 투명이 풀린다.";
-	case TPT_POWER_SAVE:
-		return "턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.";
+	case TPT_POWER_SAVE:		
+		{
+			switch(value)
+			{
+			case 1:
+				return "턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.";
+			case -1:
+				return "턴이 지남에 따라 소모되는 P의 자연 감소율이 증가한다.\n또한 가속과 투명에 의한 P 소모폭도 증가한다.";
+			default:
+				return "버그파워";
+			}
+		}
 	case TPT_9_LIFE:
 		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 9가 되면 사라진다.";
 	case TPT_18_LIFE:
@@ -498,7 +571,19 @@ string tribe_property::GetDetail()
 	case TPT_FUR:
 		return "방어력이 3증가하고 냉기에 대한 저항을 1단계 얻는다.";
 	case TPT_REGEN:
-		return "체력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+		{
+			switch(value)
+			{
+			case 3:
+			case 2:
+			case 1:
+				return "체력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+			case -1:
+				return "체력 재생력이 낮다.\n마이너스 수치가 높을수록 회복력이 느려진다.";
+			default:
+				return "체력 재생력이 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+			}
+		}
 	case TPT_SLAY:
 		return "+6의 전투력 보너스와 방패 수치에 보너스를 받는다.";
 	case TPT_CONFUSE_ATTACK:
@@ -519,6 +604,8 @@ string tribe_property::GetDetail()
 		{
 			switch(value)
 			{
+			case 3:
+				return "아주 단단한 비늘에 의해 방어력이 9 증가한다.";
 			case 2:
 				return "두꺼운 비늘에 의해 방어력이 6 증가한다.";
 			case 1:
@@ -532,7 +619,19 @@ string tribe_property::GetDetail()
 	case TPT_FORCE_OF_NATURE:
 		return "근접공격에 대해 용의 특성으로 발현되어있는 속성으로 반격을 한다.\n만약 해당 속성에 면역이 없는 적이면 저항할 수 없는 감속을 건다.";
 	case TPT_MP_REGEN:
-		return "영력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+		{
+			switch(value)
+			{
+			case 3:
+			case 2:
+			case 1:
+				return "영력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+			case -1:
+				return "영력 재생력이 낮다.\n마이너스 수치가 높을수록 회복력이 느려진다.";
+			default:
+				return "영력 재생력이 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+			}
+		}
 	case TPT_CONFUSE_RESIST:
 		return "혼란에 대한 저항력이 생긴다.\n또한 광기에도 면역이 된다.";
 	case TPT_SPELL_POWER:
@@ -543,6 +642,8 @@ string tribe_property::GetDetail()
 		return "영력이 부족할때 마법을 사용하면 영력의 2배만큼 체력을 소모하여 마법을 쓸 수 있다.";
 	case TPT_TORMENT:
 		return "파워를 1칸 소모하여 시야내의 있는 모든 적의 각각의 체력을 절반으로 한다.";
+	case TPT_CLOUD_RESIST:
+		return "자연현상 그 자체인 당신은 각종 구름의 영향을 적게 받는다.\n구름으로 인해 받는 데미지가 절반이 된다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -673,6 +774,8 @@ void tribe_property::gain(bool gain_)
 	case TPT_TORMENT:
 		you.Ability(SKL_TORMENT,true,!gain_);
 		return;
+	case TPT_CLOUD_RESIST:
+		return;
 	}
 }
 
@@ -728,6 +831,10 @@ void SetTribe(tribe_type select_)
 		you.StatUpDown(1,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		you.SetProperty(TPT_SIZE,-1);
+		you.SetProperty(TPT_REGEN,1);
+		you.SetProperty(TPT_MP_REGEN,1);
+		you.SetProperty(TPT_STEALTH,1);	
+		you.SetProperty(TPT_CLOUD_RESIST,1);		
 		break;
 	case TRI_CROWTENGU:
 		you.StatUpDown(-1,STAT_INT);
@@ -739,8 +846,10 @@ void SetTribe(tribe_type select_)
 		you.StatUpDown(2,STAT_STR);
 		you.StatUpDown(-1,STAT_INT);
 		you.StatUpDown(-1,STAT_DEX);
+		you.SetProperty(TPT_JAW,1);
 		break;
 	case TRI_KAPPA:
+		you.SetProperty(TPT_HP,-1);
 		you.SetProperty(TPT_SWIM,1);
 		break;
 	case TRI_NECOMATA:
@@ -750,12 +859,21 @@ void SetTribe(tribe_type select_)
 		you.SetProperty(TPT_SPEED,1);
 		you.SetProperty(TPT_CLAW,1);
 		break;
+	case TRI_OARFISH:
+		you.SetProperty(TPT_HP,2);
+		you.SetProperty(TPT_SPEED,-1);
+		you.SetProperty(TPT_SWIM,1);
+		you.SetProperty(TPT_ELEC_RESIST,1);
+		you.SetProperty(TPT_SCALE,1);
+		break;
 	case TRI_CHEUKUMOGAMI:
 		you.SetProperty(TPT_HP,-1);
-		you.StatUpDown(-1,STAT_STR);
+		you.StatUpDown(1,STAT_STR);
+		you.StatUpDown(-2,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
+		you.SetProperty(TPT_SIZE,-1);
 		you.SetProperty(TPT_POISON_RESIST,1);
-		you.SetProperty(TPT_CHEUKUMOGAMI,1);
+		//you.SetProperty(TPT_CHEUKUMOGAMI,1);
 		break;
 	case TRI_ONI:
 		you.SetProperty(TPT_HP,3);
@@ -776,12 +894,19 @@ void SetTribe(tribe_type select_)
 		//you.half_youkai[3]=1;
 		break;
 	case TRI_WRAITH:
+		you.SetProperty(TPT_HP,1);
 		you.SetProperty(TPT_COLD_RESIST,1);
-		you.SetProperty(TPT_STEALTH,1);
+		you.SetProperty(TPT_STEALTH,2);
 		you.SetProperty(TPT_POISON_RESIST,1);
 		you.SetProperty(TPT_GHOST_FOOT,1);
 		break;
 	case TRI_VAMPIRE:
+		you.SetProperty(TPT_HP,1);
+		you.SetProperty(TPT_REGEN,2);
+		you.SetProperty(TPT_MP_REGEN,-1);
+		you.SetProperty(TPT_POWER_SAVE,-1);
+		you.SetProperty(TPT_EYE,1);
+		you.SetProperty(TPT_BLOOD_MAGIC,1);
 		break;
 	}
 	for(int i=0;i<SKT_MAX;i++)
@@ -851,8 +976,40 @@ void LevelUpTribe(int level_)
 			you.max_mp--;
 			you.mp--;
 		}
+		if(level_ == 15)
+		{
+			printlog("당신에게 푹신푹신한 털이 자라났다.",true,false,false,CL_small_danger);
+			you.SetProperty(TPT_FUR,1);
+		}
+		break;
+	case TRI_OARFISH:
+		if(level_%5 == 0)
+		{
+			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
+		if(level_ == 9)
+		{
+			printlog("당신의 비늘이 단단해졌다.",true,false,false,CL_small_danger);
+			you.DeleteProperty(TPT_SCALE);
+			you.SetProperty(TPT_SCALE,2);
+		}
+		if(level_ == 18)
+		{
+			printlog("당신의 비늘이 더욱 단단해졌다.",true,false,false,CL_small_danger);
+			you.DeleteProperty(TPT_SCALE);
+			you.SetProperty(TPT_SCALE,3);
+		}
 		break;
 	case TRI_CHEUKUMOGAMI:
+		if(level_%5 == 0)
+		{
+			(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX));
+		}
+		if(level_%5 == 0)
+		{
+			you.max_mp--;
+			you.mp--;
+		}
 		break;
 	case TRI_ONI:
 		if(level_%3 == 0)
@@ -1131,6 +1288,11 @@ void LevelUpTribe(int level_)
 	case TRI_WRAITH:
 		break;
 	case TRI_VAMPIRE:
+		if(level_%5 == 0)
+		{
+			you.max_mp--;
+			you.mp--;
+		}
 		break;
 	}
 }

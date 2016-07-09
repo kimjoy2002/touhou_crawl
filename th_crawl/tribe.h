@@ -57,6 +57,7 @@ enum tribe_proper_type
 	TPT_FINGER_MAGIC,
 	TPT_BLOOD_MAGIC,
 	TPT_TORMENT,
+	TPT_CLOUD_RESIST,
 	TPT_MAX
 };
 

@@ -504,6 +504,9 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_COLD_PYSICAL_BLAST:
 		damage_ = damage_/2.0f + damage_*GetColdResist()/2.0f;
 		break;
+	case ATT_CLOUD_NORMAL:
+		damage_ *= GetCloudResist()?0.5f:1.0f;
+		break;
 	}
 
 	if(alchemy_buff == ALCT_STONE_FORM)

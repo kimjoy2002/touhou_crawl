@@ -71,7 +71,9 @@ public:
 	virtual const name_infor* GetName()=0;
 	virtual const string* GetNameString()=0;
 	virtual int GetHp()=0;
-	virtual int GetMaxHp()=0;
+	virtual int GetMaxHp()=0;	
+	virtual int GetAttack(bool max_)=0;
+	virtual int GetHit()=0;
 	virtual coord_def GetPrevPos()=0;
 	virtual void SetX(int x_){position.x = x_;};
 	virtual void SetY(int y_){position.y = y_;};
@@ -158,12 +160,13 @@ public:
 		return GetMindReading()?true:(GetResist() - power < randC(2,100));
 	}
 	virtual int GetPoisonResist()=0;
-	virtual float GetFireResist()=0;
-	virtual float GetColdResist()=0;
-	virtual float GetElecResist()=0;
+	virtual float GetFireResist(bool cloud_ = false)=0;
+	virtual float GetColdResist(bool cloud_ = false)=0;
+	virtual float GetElecResist(bool cloud_ = false)=0;
 	virtual bool Blink(int time_)=0;
 	virtual attack_weapon_type GetAttackType()=0;
 	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = false)=0;
+	virtual bool isEnemyUnit(unit* unit_info){return unit_info->isUserAlly();};
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}
 	virtual bool isPassedBullet(unit* order){return false;}; //해당 총이 이 캐릭터에게 관통 가능한지.

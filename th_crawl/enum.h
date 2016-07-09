@@ -300,6 +300,7 @@ enum smoke_type
 	SMT_FOG,
 	SMT_FIRE,
 	SMT_COLD,
+	SMT_ELEC,
 	SMT_DARK,
 	SMT_POISON,
 	SMT_CONFUSE,
@@ -903,6 +904,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_NO_GUARD,//여기부터 폭발형(실드로 가드가 안된다.)
 	ATT_CLOUD_FIRE = ATT_NO_GUARD, 
 	ATT_CLOUD_COLD,
+	ATT_CLOUD_ELEC,
 	ATT_CLOUD_NORMAL,
 	ATT_NORMAL_BLAST, 
 	ATT_AC_REDUCE_BLAST, 

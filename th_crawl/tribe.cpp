@@ -108,7 +108,51 @@ string tribe_property::GetName()
 			}
 		}
 	case TPT_CLAW:
-		return "손톱";
+		return "손톱";		
+	case TPT_JAW:
+		return "강한 턱";	
+	case TPT_FOOT:
+		return "강한 다리";
+	case TPT_EYE:
+		return "뛰어난 눈";
+	case TPT_FUR:
+		return "푹신한 털";
+	case TPT_REGEN:
+		return "재생력";	
+	case TPT_SLAY:
+		return "전투감각";
+	case TPT_CONFUSE_ATTACK:
+		return "허찌르기";
+	case TPT_MAGIC_RESIST:
+		return "마법저항";
+	case TPT_SKIN_AC:
+		return "강한 피부";
+	case TPT_STR:
+		return "힘증가";
+	case TPT_EV:
+		return "회피증가";
+	case TPT_CLOUD:
+		return "구름 컨트롤";
+	case TPT_BREATH:
+		return "브레스";
+	case TPT_SCALE:
+		return "비늘";
+	case TPT_GRAZE_CONTROL:
+		return "공기의 흐름";
+	case TPT_FORCE_OF_NATURE:
+		return "자연의 힘";
+	case TPT_MP_REGEN:
+		return "영력 회복";
+	case TPT_CONFUSE_RESIST:
+		return "혼란 저항";
+	case TPT_SPELL_POWER:
+		return "강화 마법";
+	case TPT_FINGER_MAGIC:
+		return "손짓 마법";
+	case TPT_BLOOD_MAGIC:
+		return "피의 마법";
+	case TPT_TORMENT:
+		return "지옥의 고통";
 	}
 	return "버그특성";
 }
@@ -117,11 +161,59 @@ string tribe_property::GetInfor()
 	switch(id)
 	{
 	case TPT_FIRE_RESIST:
-		return "당신은 화염에 강하다.";
+		{
+			switch(value)
+			{
+			case 3:
+			case 2:
+				return "당신은 화염에 아주 강하다.";
+			case 1:
+				return "당신은 화염에 강하다.";
+			case -1:
+				return "당신은 화염에 약하다";
+			case -2:
+			case -3:
+				return "당신은 화염에 아주 약하다";
+			default:
+				return "버그화염저항";
+			}
+		}
 	case TPT_COLD_RESIST:
-		return "당신은 냉기에 강하다.";
+		{
+			switch(value)
+			{
+			case 3:
+			case 2:
+				return "당신은 냉기에 아주 강하다.";
+			case 1:
+				return "당신은 냉기에 강하다.";
+			case -1:
+				return "당신은 냉기에 약하다";
+			case -2:
+			case -3:
+				return "당신은 냉기에 아주 약하다";
+			default:
+				return "버그냉기저항";
+			}
+		}
 	case TPT_ELEC_RESIST:
-		return "당신은 전기에 강하다.";
+		{
+			switch(value)
+			{
+			case 3:
+			case 2:
+				return "당신은 전기에 아주 강하다.";
+			case 1:
+				return "당신은 전기에 강하다.";
+			case -1:
+				return "당신은 전기에 약하다";
+			case -2:
+			case -3:
+				return "당신은 전기에 아주 약하다";
+			default:
+				return "버그전기저항";
+			}
+		}
 	case TPT_POISON_RESIST:
 		return "당신은 독에 강하다.";
 	case TPT_STEALTH:
@@ -201,7 +293,85 @@ string tribe_property::GetInfor()
 			default:
 				return "버그손톱";
 			}
-		}
+		}	
+	case TPT_JAW:
+		return "당신은 강한 턱을 지녔다.";	
+	case TPT_FOOT:
+		return "당신은 도약하기 충분한 강한 다리를 지녔다.";
+	case TPT_EYE:
+		return "당신은 뛰어난 눈을 가졌다.";
+	case TPT_FUR:
+		return "당신은 푹신한 털로 덮여있다. (AC+3, 냉기저항 1단계)";
+	case TPT_REGEN:
+		{
+			switch(value)
+			{
+			case 3:
+				return "당신은 체력 재생력이 높다.(+3)";
+			case 2:
+				return "당신은 체력 재생력이 높다.(+2)";
+			case 1:
+				return "당신은 체력 재생력이 높다.(+1)";
+			default:
+				return "버그재생력";
+			}
+		}	
+	case TPT_SLAY:
+		return "당신은 공격과 방패를 다루는 전투감각이 뛰어나다.";
+	case TPT_CONFUSE_ATTACK:
+		return "당신의 공격은 가끔 상대의 허를 찌른다.";
+	case TPT_MAGIC_RESIST:
+		return "당신은 마법저항력이 높다.";
+	case TPT_SKIN_AC:
+		return "당신은 강한 피부를 지녔다. (AC+5)";
+	case TPT_STR:
+		return "당신은 강한 힘을 지녔다.(힘+5)";
+	case TPT_EV:
+		return "당신은 초월적인 회피재능이 있다. (EV+10)";
+	case TPT_CLOUD:
+		return "당신은 구름을 몰고 다닌다.";
+	case TPT_BREATH:
+		return "당신은 브레스를 쏠 수 있다.";
+	case TPT_SCALE:
+		{
+			switch(value)
+			{
+			case 2:
+				return "당신은 두꺼운 비늘로 덮여있다. (AC+6)";
+			case 1:
+				return "당신은 비늘로 덮여있다. (AC+3)";
+			default:
+				return "버그비늘";
+			}
+		}	
+	case TPT_GRAZE_CONTROL:
+		return "당신은 공기의 흐름을 다루는 것에 능하다. (그레이즈강화)";
+	case TPT_FORCE_OF_NATURE:
+		return "당신은 몸에 자연의 힘을 두르고 있다.";
+	case TPT_MP_REGEN:
+		{
+			switch(value)
+			{
+			case 3:
+				return "당신은 영력 재생력이 높다.(+3)";
+			case 2:
+				return "당신은 영력 재생력이 높다.(+2)";
+			case 1:
+				return "당신은 영력 재생력이 높다.(+1)";
+			default:
+				return "버그재생력";
+			}
+		}	
+	case TPT_CONFUSE_RESIST:
+		return "당신은 혼란에 저항이 있다.";
+	case TPT_SPELL_POWER:
+		return "당신이 쓰는 마법의 힘은 강력해진다.";
+	case TPT_FINGER_MAGIC:
+		return "당신은 손짓으로 마법을 쓸 수 있다.";
+	case TPT_BLOOD_MAGIC:
+		return "당신은 영력이 없어도 피를 이용하여 마법을 쓸 수 있다.";
+	case TPT_TORMENT:
+		return "당신은 지옥의 고통을 불러올 수 있다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -210,11 +380,65 @@ string tribe_property::GetDetail()
 	switch(id)
 	{
 	case TPT_FIRE_RESIST:
-		return "화염 저항이 1단계 증가한다.";
+		{
+			switch(value)
+			{
+			case 3:
+				return "화염 저항이 3단계 증가한다.";
+			case 2:
+				return "화염 저항이 2단계 증가한다.";
+			case 1:
+				return "화염 저항이 1단계 증가한다.";
+			case -1:
+				return "화염 저항이 1단계 감소한다.";
+			case -2:
+				return "화염 저항이 2단계 감소한다.";
+			case -3:
+				return "화염 저항이 3단계 감소한다.";
+			default:
+				return "버그화염저항";
+			}
+		}
 	case TPT_COLD_RESIST:
-		return "냉기 저항이 1단계 증가한다.";
+		{
+			switch(value)
+			{
+			case 3:
+				return "냉기 저항이 3단계 증가한다.";
+			case 2:
+				return "냉기 저항이 2단계 증가한다.";
+			case 1:
+				return "냉기 저항이 1단계 증가한다.";
+			case -1:
+				return "냉기 저항이 1단계 감소한다.";
+			case -2:
+				return "냉기 저항이 2단계 감소한다.";
+			case -3:
+				return "냉기 저항이 3단계 감소한다.";
+			default:
+				return "버그냉기저항";
+			}
+		}
 	case TPT_ELEC_RESIST:
-		return "전기 저항이 증가한다.";
+		{
+			switch(value)
+			{
+			case 3:
+				return "전기 저항이 3단계 증가한다.";
+			case 2:
+				return "전기 저항이 2단계 증가한다.";
+			case 1:
+				return "전기 저항이 1단계 증가한다.";
+			case -1:
+				return "전기 저항이 1단계 감소한다.";
+			case -2:
+				return "전기 저항이 2단계 감소한다.";
+			case -3:
+				return "전기 저항이 3단계 감소한다.";
+			default:
+				return "버그전기저항";
+			}
+		}
 	case TPT_POISON_RESIST:
 		return "독 저항이 증가한다.";
 	case TPT_STEALTH:
@@ -256,15 +480,69 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 1:
-				return "당신의 이동속도는 빠르다.\n이동시 다른 종족보다 80%의 딜레이만을 가진다.";
+				return "이동시 다른 종족보다 80%의 딜레이만을 가진다.";
 			case -1:
-				return "당신의 이동속도는 느리다.\n이동시 다른 종족보다 120%의 딜레이를 가진다.";
+				return "이동시 다른 종족보다 120%의 딜레이를 가진다.";
 			default:
-				return "당신의 이동속도는 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return "이동속도는 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
 			}
 		}
 	case TPT_CLAW:
-		return "당신은 손톱이 길게 나있다.\n맨손격투시 추가 데미지를 준다.";
+		return "맨손격투시 추가 데미지를 준다.";
+	case TPT_JAW:
+		return "매 공격마다 일정확률로 깨물기 공격이 들어간다.";	
+	case TPT_FOOT:
+		return "파워를 사용하여 적에게 순식간에 점프해서 접근할 수 있다.\n연속 사용은 불가능하다.";
+	case TPT_EYE:
+		return "투명한 적을 볼 수 있다.";
+	case TPT_FUR:
+		return "방어력이 3증가하고 냉기에 대한 저항을 1단계 얻는다.";
+	case TPT_REGEN:
+		return "체력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+	case TPT_SLAY:
+		return "+6의 전투력 보너스와 방패 수치에 보너스를 받는다.";
+	case TPT_CONFUSE_ATTACK:
+		return "근접공격시 가끔 상대의 허를 찔러서 혼란에 빠뜨린다.\n";
+	case TPT_MAGIC_RESIST:
+		return "마법저항력이 증가한다.";
+	case TPT_SKIN_AC:
+		return "방어력이 5 증가한다.";
+	case TPT_STR:
+		return "힘이 5 증가한다.";
+	case TPT_EV:
+		return "회피가 10 증가한다.";
+	case TPT_CLOUD:
+		return "용의 특성으로 발현되어있는 속성 구름에 면역이다.\n또한 공격당할때 해당 속성의 구름을 흩뿌린다.\n";
+	case TPT_BREATH:
+		return "당신은 용의 특성으로 발현되어있는 속성 브레스를 쏠 수 있다.";
+	case TPT_SCALE:
+		{
+			switch(value)
+			{
+			case 2:
+				return "두꺼운 비늘에 의해 방어력이 6 증가한다.";
+			case 1:
+				return "비늘에 의해 방어력이 3 증가한다.";
+			default:
+				return "버그비늘";
+			}
+		}	
+	case TPT_GRAZE_CONTROL:
+		return "그레이즈를 발동할 수 있고\n 그레이즈의 효율이 2배로 증가한다.";
+	case TPT_FORCE_OF_NATURE:
+		return "근접공격에 대해 용의 특성으로 발현되어있는 속성으로 반격을 한다.\n만약 해당 속성에 면역이 없는 적이면 저항할 수 없는 감속을 건다.";
+	case TPT_MP_REGEN:
+		return "영력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+	case TPT_CONFUSE_RESIST:
+		return "혼란에 대한 저항력이 생긴다.\n또한 광기에도 면역이 된다.";
+	case TPT_SPELL_POWER:
+		return "모든 마법의 파워가 1.3배가 된다.";
+	case TPT_FINGER_MAGIC:
+		return "마법 사용에 의한 소음이 70%로 줄어든다.\n침묵에서도 마법을 사용할 수 있다.";
+	case TPT_BLOOD_MAGIC:
+		return "영력이 부족할때 마법을 사용하면 영력의 2배만큼 체력을 소모하여 마법을 쓸 수 있다.";
+	case TPT_TORMENT:
+		return "파워를 1칸 소모하여 시야내의 있는 모든 적의 각각의 체력을 절반으로 한다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -311,8 +589,89 @@ void tribe_property::gain(bool gain_)
 	case TPT_INVISIBLE:
 		you.SetTogleInvisible(false);
 		return;
-	case TPT_POWER_SAVE:		
+	case TPT_POWER_SAVE:
 		you.ResistUpDown(1,RST_POWER);
+		return;	
+	case TPT_9_LIFE:
+		return;
+	case TPT_18_LIFE:
+		return;
+	case TPT_SPEED:
+		return;
+	case TPT_CLAW:
+		return;
+	case TPT_JAW:
+		return;
+	case TPT_FOOT:
+		you.Ability(SKL_JUMPING_ATTACK,true,!gain_);
+		return;
+	case TPT_EYE:
+		you.ResistUpDown(value_,RST_INVISIBLE);
+		return;
+	case TPT_FUR:
+		you.AcUpDown(0,value_>0?3:-3);		
+		you.ResistUpDown(value_,RST_ICE);
+		return;
+	case TPT_REGEN:
+		return;
+	case TPT_SLAY:
+		you.ShUpDown(0, 0);
+		return;
+	case TPT_CONFUSE_ATTACK:
+		return;
+	case TPT_MAGIC_RESIST:
+		you.MRUpDown((value_>0?40:-40));
+		return;
+	case TPT_SKIN_AC:
+		you.AcUpDown(0,value_>0?5:-5);	
+		return;
+	case TPT_STR:
+		you.StatUpDown(value_>0?6:-6, STAT_STR);
+		return;
+	case TPT_EV:
+		you.EvUpDown(0,value_>0?10:-10);
+		return;
+	case TPT_CLOUD:
+		return;
+	case TPT_BREATH:
+		you.Ability(SKL_BREATH,true,!gain_);
+		return;
+	case TPT_SCALE:
+		you.AcUpDown(0,value_*3);	
+		return;
+	case TPT_GRAZE_CONTROL:
+		{	
+			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //그레이즈 해제를 삭제하고 수를 리턴
+			temp += you.Ability(SKL_GRAZE,false,true); //그레이즈 발동도 해제하고 수를 리턴
+
+			temp+=value;
+
+			if(!you.s_graze)
+				you.SetGraze(-1);
+			//int temp = you.Ability(SKL_GRAZE,false,true,1);
+			//you.Ability(SKL_GRAZE_OFF,false,false,temp);
+			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_graze)
+			{
+				you.s_graze=0; 
+			}
+		}
+		return;
+	case TPT_FORCE_OF_NATURE:
+		return;
+	case TPT_MP_REGEN:
+		return;
+	case TPT_CONFUSE_RESIST:
+		you.ResistUpDown(value_,RST_CONFUSE);
+		return;
+	case TPT_SPELL_POWER:
+		return;
+	case TPT_FINGER_MAGIC:
+		return;
+	case TPT_BLOOD_MAGIC:
+		return;
+	case TPT_TORMENT:
+		you.Ability(SKL_TORMENT,true,!gain_);
 		return;
 	}
 }
@@ -407,6 +766,14 @@ void SetTribe(tribe_type select_)
 		you.SetProperty(TPT_HORN,1);
 		break;
 	case TRI_HALFYOKAI:
+		you.half_youkai[0]=randA(3);
+		you.half_youkai[1]=randA(2);
+		you.half_youkai[2]=randA(2);
+		you.half_youkai[3]=randA(1);
+		//you.half_youkai[0]=3;
+		//you.half_youkai[1]=1;
+		//you.half_youkai[2]=1;
+		//you.half_youkai[3]=1;
 		break;
 	case TRI_WRAITH:
 		you.SetProperty(TPT_COLD_RESIST,1);
@@ -502,6 +869,263 @@ void LevelUpTribe(int level_)
 		if(level_%5 == 0)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
+		if(level_ == 5)
+		{
+			switch(you.half_youkai[0])
+			{
+			case 0:
+				printlog("당신에겐 수인의 피가 흐르고 있다! 당신의 특성은 전사에 적합하다.",true,false,false,CL_small_danger);
+				printlog("당신에게 손톱이 자라났다.",true,false,false,CL_small_danger);
+				you.SetProperty(TPT_CLAW,1);
+				break;
+			case 1:
+				printlog("당신에겐 오니의 피가 흐르고 있다! 당신의 특성은 강한 맷집으로 이어진다.",true,false,false,CL_small_danger);
+				printlog("당신에게 뿔이 자라났다.",true,false,false,CL_small_danger);
+				you.SetProperty(TPT_HORN,1);
+				break;
+			case 2:
+				printlog("당신에겐 용의 피가 흐르고 있다! 당신의 특성은 속성을 다루는데 능숙하다.",true,false,false,CL_small_danger);
+				printlog("당신에게 비늘이 자라났다.",true,false,false,CL_small_danger);
+				you.SetProperty(TPT_SCALE,1);
+				break;
+			case 3:
+				printlog("당신에겐 악마의 피가 흐르고 있다! 당신의 특성은 마법사용에 집중된다.",true,false,false,CL_small_danger);
+				printlog("당신은 마나재생력이 빨라졌다.",true,false,false,CL_small_danger);
+				you.SetProperty(TPT_MP_REGEN,1);
+				break;
+			}
+		}
+		if(level_ == 10)
+		{
+			switch(you.half_youkai[0])
+			{
+			case 0:
+				switch(you.half_youkai[1])
+				{
+				case 0:	
+					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 강한 턱이 자라났다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_JAW,1);
+					break;
+				case 1:
+					printlog("수인의 혈통이 더욱 강해졌다. 당신의 다리는 도약할수있을만큼 강해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FOOT,1);
+					break;
+				case 2:
+					printlog("수인의 혈통이 더욱 강해졌다. 당신의 시력이 좋아졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_EYE,1);
+					break;
+				}	
+				break;
+			case 1:
+				switch(you.half_youkai[1])
+				{
+				case 0:	
+					printlog("오니의 혈통이 더욱 강해졌다. 당신은 튼튼해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_HP,1);
+					break;
+				case 1:
+					printlog("오니의 혈통이 더욱 강해졌다. 당신은 독에 저항이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_POISON_RESIST,1);
+					break;
+				case 2:
+					printlog("오니의 혈통이 더욱 강해졌다. 당신은 마법저항이 높아졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_MAGIC_RESIST,1);
+					break;
+				}	
+				break;
+			case 2:
+				switch(you.half_youkai[1])
+				{
+				case 0:	
+					printlog("용의 혈통이 더욱 강해졌다. 당신은 화염에 저항이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FIRE_RESIST,1);
+					break;
+				case 1:
+					printlog("용의 혈통이 더욱 강해졌다. 당신은 냉기에 저항이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_COLD_RESIST,1);
+					break;
+				case 2:
+					printlog("용의 혈통이 더욱 강해졌다. 당신은 전기에 저항이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_ELEC_RESIST,1);
+					break;
+				}	
+				break;
+			case 3:
+				switch(you.half_youkai[1])
+				{
+				case 0:	
+					printlog("악마의 혈통이 더욱 강해졌다. 당신에 큰 날개가 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FLY,1);
+					break;
+				case 1:
+					printlog("악마의 혈통이 더욱 강해졌다. 당신은 명석해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_CONFUSE_RESIST,1);
+					break;
+				case 2:
+					printlog("악마의 혈통이 더욱 강해졌다. 당신은 은밀해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_STEALTH,1);
+					break;
+				}	
+				break;
+			}
+		}
+		
+		if(level_ == 15)
+		{
+			switch(you.half_youkai[0])
+			{
+			case 0:
+				switch(you.half_youkai[2])
+				{
+				case 0:	
+					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 푹신푹신한 털이 자라났다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FUR,1);
+					break;
+				case 1:
+					printlog("수인의 혈통이 더욱 강해졌다. 당신의 발이 빨라졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_SPEED,1);
+					break;
+				case 2:
+					printlog("수인의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_REGEN,1);
+					break;
+				}	
+				break;
+			case 1:
+				switch(you.half_youkai[2])
+				{
+				case 0:	
+					printlog("오니의 혈통이 더욱 강해졌다. 당신의 피부는 단단해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_SKIN_AC,1);
+					break;
+				case 1:
+					printlog("오니의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_REGEN,1);
+					break;
+				case 2:
+					printlog("오니의 혈통이 더욱 강해졌다. 당신은 엄청난 힘이 생겼다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_STR,1);
+					break;
+				}	
+				break;
+			case 2:
+				switch(you.half_youkai[2])
+				{
+				case 0:	
+					printlog("용의 혈통이 더욱 강해졌다. 당신은 구름을 몰고 다닌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_CLOUD,1);
+					break;
+				case 1:
+					printlog("용의 혈통이 더욱 강해졌다. 당신은 입에서 브레스를 쏠 수 있다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_BREATH,1);
+					break;
+				case 2:
+					printlog("용의 혈통이 더욱 강해졌다. 당신의 비늘은 더욱 두꺼워졌다.",true,false,false,CL_small_danger);
+					you.DeleteProperty(TPT_SCALE);
+					you.SetProperty(TPT_SCALE,2);
+					switch(you.half_youkai[1])
+					{
+					case 0:
+						you.DeleteProperty(TPT_FIRE_RESIST);
+						you.SetProperty(TPT_FIRE_RESIST,2);			
+						break;
+					case 1:
+						you.DeleteProperty(TPT_COLD_RESIST);
+						you.SetProperty(TPT_COLD_RESIST,2);
+						break;
+					case 2:		
+						you.DeleteProperty(TPT_ELEC_RESIST);		
+						you.SetProperty(TPT_ELEC_RESIST,2);
+						break;
+					}
+					break;
+				}	
+				break;
+			case 3:
+				switch(you.half_youkai[2])
+				{
+				case 0:	
+					printlog("악마의 혈통이 더욱 강해졌다. 당신의 마법은 더욱 강력해졌다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_SPELL_POWER,1);
+					break;
+				case 1:
+					printlog("악마의 혈통이 더욱 강해졌다. 당신은 손짓만으로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FINGER_MAGIC,1);
+					break;
+				case 2:
+					printlog("악마의 혈통이 더욱 강해졌다. 당신은 자신의 피로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_BLOOD_MAGIC,1);
+					break;
+				}	
+				break;
+			}
+		}
+		
+		if(level_ == 20)
+		{
+			switch(you.half_youkai[0])
+			{
+			case 0:
+				switch(you.half_youkai[3])
+				{
+				case 0:	
+					printlog("수인의 마지막 특성이 발현되었다. 당신은 동물적인 전투감각을 깨우쳤다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_SLAY,1);
+					break;
+				case 1:
+					printlog("수인의 마지막 특성이 발현되었다. 당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_CONFUSE_ATTACK,1);
+					break;
+				}	
+				break;
+			case 1:
+				switch(you.half_youkai[3])
+				{
+				case 0:	
+					printlog("오니의 마지막 특성이 발현되었다. 당신은 놀랄만큼 튼튼해졌다.",true,false,false,CL_small_danger);
+					if(you.half_youkai[1]==0)
+					{
+						you.DeleteProperty(TPT_HP);
+						you.SetProperty(TPT_HP,3);
+					}
+					else
+						you.SetProperty(TPT_HP,2);
+					break;
+				case 1:
+					printlog("오니의 마지막 특성이 발현되었다. 당신은 초월적인 회피재능에 눈을 떴다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_EV,1);
+					break;
+				}	
+				break;
+			case 2:
+				switch(you.half_youkai[3])
+				{
+				case 0:	
+					printlog("용의 마지막 특성이 발현되었다. 당신은 공기의 흐름을 다룰 수 있게 되었다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_GRAZE_CONTROL,1);
+					break;
+				case 1:
+					printlog("용의 마지막 특성이 발현되었다. 당신은 자연의 힘을 몸에 두르게 되었다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_FORCE_OF_NATURE,1);
+					break;
+				}	
+				break;
+			case 3:
+				switch(you.half_youkai[3])
+				{
+				case 0:	
+					printlog("악마의 마지막 특성이 발현되었다. 당신은 초월적인 영력회복속도를 얻었다.",true,false,false,CL_small_danger);
+					you.DeleteProperty(TPT_MP_REGEN);
+					you.SetProperty(TPT_MP_REGEN,3);
+					break;
+				case 1:
+					printlog("악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.",true,false,false,CL_small_danger);
+					you.SetProperty(TPT_TORMENT,1);
+					break;
+				}	
+				break;
+			}
 		}
 		break;
 	case TRI_WRAITH:

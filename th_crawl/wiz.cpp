@@ -74,7 +74,7 @@ void wiz_mode()
 		case 'A':
 			{
 				
-				printlog("s-스크롤 e-발동템",true,false,false,CL_help);
+				printlog("s-스크롤 e-발동템 r-반지",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까? (베타판)",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -115,6 +115,29 @@ void wiz_mode()
 						{
 							item_infor t;
 							makeitem(ITM_MISCELLANEOUS, 0, &t,  list[key_-'a']);
+							env[current_level].MakeItem(you.position,t);
+							enterlog();
+						}
+						else{
+							printlog(" 취소",true,false,false,CL_help);
+						}
+					}
+					return;
+				case 'r':
+					{
+						int list[] = {RGT_STR,RGT_DEX,RGT_INT,RGT_HUNGRY,RGT_FULL,RGT_TELEPORT,RGT_POISON_RESIS,
+							RGT_FIRE_RESIS,	RGT_ICE_RESIS,RGT_SEE_INVISIBLE,RGT_GRAZE,RGT_LEVITATION,RGT_INVISIBLE,
+							RGT_MANA,RGT_MAGACIAN,RGT_AC,RGT_EV,RGT_CONFUSE_RESIS,	RGT_ELEC_RESIS,RGT_MAGIC_RESIS};
+						enterlog();
+						printlog("a-힘 b-민첩 c-지능 d-허기 e-만복도 f-공간이동 g-독저항 h-화염저항",true,false,false,CL_help);
+						printlog("i-냉기저항 j-투명보기 k-그레이즈 l-비행 m-투명 n-영력 o-마법사 p-방어",true,false,false,CL_help);
+						printlog("q-회피 r-혼란저항 s-전기저항 t-마법저항",true,false,false,CL_help);
+						printlog("어느 스크롤을 얻어볼까?",false,false,false,CL_help);
+						key_ = waitkeyinput();
+						if(key_ >= 'a' && key_ <= 't')
+						{
+							item_infor t;
+							makeitem(ITM_RING, 0, &t,  list[key_-'a']);
 							env[current_level].MakeItem(you.position,t);
 							enterlog();
 						}
@@ -353,11 +376,11 @@ void wiz_mode()
 			}
 			break;
 		case 'M':
-			if(monster* mon_=BaseSummon(MON_YAMAME, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			if(monster* mon_=BaseSummon(MON_KEGERO, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{
 				mon_->state.SetState(MS_SLEEP);
 				mon_->flag &= ~M_FLAG_SUMMON;
-				//mon_->ReturnEnemy();
+				mon_->ReturnEnemy();
 			}
 			break;
 		case 'm':

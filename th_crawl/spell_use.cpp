@@ -2860,11 +2860,48 @@ bool skill_stasis(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 {
-	if(order && !order->isplayer())
+	if(!order)
+		return false;
+	unit* unit_ = (monster*)env[current_level].isMonsterPos(target.x,target.y);
+	if(!unit_ && order->isEnemyUnit(unit_)) 
 	{
-		order->SetExhausted(rand_int(3,10));
+		if(order->isplayer())
+			printlog("적 몬스터를 대상으로 써야한다.",true,false,false,CL_normal);	
+		return false; //해당 위치에 몬스터가 없다.
 	}
-	return false;
+	if(order->position.distance_from(unit_->position)<=1)
+	{		
+		if(order->isplayer())
+			printlog("밀착한 대상에는 사용할 수 없다.",true,false,false,CL_normal);	
+		return false; //해당 위치에 몬스터가 없다.
+	}
+
+
+
+	rand_rect_iterator rit(target,1,1,true);
+	//rand_rect_iterator rit(target,range_,range_);
+	while(!rit.end())
+	{
+		if(env[current_level].isMove(rit->x, rit->y, false, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && env[current_level].isInSight(*rit))
+		{
+			order->SetXY((*rit));
+			
+			if(env[current_level].isInSight((*rit)))
+				printarray(false,false,false,CL_normal,4,order->GetName()->name.c_str(),order->GetName()->name_is(true),unit_->GetName()->name.c_str(),"에게 도약했다.");
+
+			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor("도약",true));
+			unit_->damage(temp_att,false);
+			if(order)
+			{
+				order->SetExhausted(rand_int(3,10));
+			}
+			return true;
+		}
+		rit++;
+	}
+	if(order->isplayer())
+		printlog("그곳으론 도약할 수 없다.",true,false,false,CL_normal);	
+	return false; //해당 위치에 몬스터가 없다.
 }
 bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
 {
@@ -3002,6 +3039,9 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_WATER_CANNON,30));
 		list->push_back(spell(SPL_INVISIBLE,15));
 		list->push_back(spell(SPL_MON_WATER_GUN,25));
+		break;
+	case MON_KEGERO:		
+		list->push_back(spell(SPL_JUMP_ATTACK,25));
 		break;
 	case MON_BENBEN:
 		list->push_back(spell(SPL_SLOW,20));
@@ -3503,6 +3543,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_fire_spread(power,short_,order,target);			
 	case SPL_STASIS:
 	case SPL_JUMP_ATTACK:
+		return skill_jump_attack(power,short_,order,target);
 	case SPL_ALERT_NOISE: 
 	case SPL_SUMMON_NAMAZ:
 	default:
@@ -3748,7 +3789,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_FIRE_SPREAD:
 		return skill_fire_spread(power,short_,&you,target);	
 	case SPL_STASIS:
+		return false;
 	case SPL_JUMP_ATTACK:
+		return skill_jump_attack(power,short_,&you,target);
 	case SPL_ALERT_NOISE: 
 	case SPL_SUMMON_NAMAZ:
 	default:

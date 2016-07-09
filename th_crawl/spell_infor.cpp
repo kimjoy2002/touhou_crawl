@@ -768,6 +768,19 @@ string GetSkillInfor(skill_list skill)
 		text_ += "저주브랜드가 붙은 무기는 저항이 불가능한 독데미지를 적에게 줄 수 있고\n";
 		text_ += "일정 확률로 감속 효과를 준다.\n";
 		break;		
+	case SKL_JUMPING_ATTACK: 
+		text_ += "사거리 안에 든 목표 주변 8타일로 순식간에 접근하며 공격한다.\n";
+		text_ += "단, 밀착한 대상으론 쓸 수 없다.\n";
+		text_ += "사용후 일정시간 피로가 쌓여서 연속 사용은 안된다.\n";
+		break;
+	case SKL_BREATH:
+		text_ += "발현된 용의 속성에 맞는 브레스를 일직선으로 발사한다.\n";
+		text_ += "사용후 일정시간 피로가 쌓여서 연속 사용은 안된다.\n";
+		break;
+	case SKL_TORMENT:
+		text_ += "시야내의 있는 적들의 체력을 절반으로 만들어버리는 무서운 기술.\n";
+		text_ += "당신이 악마의 피를 이어받고있기때문에, 당신은 이 피해로부터 면역이다.\n";
+		break;
 	default:
 		text_ += "모르는 능력.\n";
 		break;

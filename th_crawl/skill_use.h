@@ -100,6 +100,9 @@ enum skill_list
 	SKL_HINA_3,
 	SKL_HINA_4,
 	SKL_HINA_5,
+	SKL_JUMPING_ATTACK,
+	SKL_BREATH,
+	SKL_TORMENT,
 	SKL_MAX
 };
 
@@ -125,7 +128,8 @@ enum skill_flag
 	S_FLAG_RECT = 1<<17, //사각형 시야
 	S_FLAG_NO_TARGET = 1<<18, //몬스터를 타겟으로 잡지않는다.
 	S_FLAG_UNSIGHT = 1<<19, //시야에 가려도 사용가능.
-	S_FLAG_GOD = 1<<20 //신의 스킬
+	S_FLAG_GOD = 1<<20, //신의 스킬
+	S_FLAG_DELAYED = 1<<21, //피로가 쌓이면 쓸 수 없다.
 };
 
 float GetSpellSector(spell_list spell_);

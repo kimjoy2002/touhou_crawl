@@ -207,6 +207,7 @@ public:
 	int GetDetect();
 	bool you_detect(); //당신을 감지했는지
 	bool isYourShight();
+	bool isEnemyUnit(unit* unit_info);
 	bool isEnemyMonster(const monster* monster_info); //이 몹이 적인지
 	bool isPassedBullet(unit* order);//이 공격이 관통되는지
 	bool isAllyMonster(const monster* monster_info); //이 몹이 아군인지
@@ -218,6 +219,7 @@ public:
 	bool isUnique();
 	attack_weapon_type GetAttackType();
 	int GetSpeed();
+	int GetAttack(bool max_);
 	int GetAttack(int num_, bool max_);
 	int GetHit();
 	int GetEv();
@@ -227,9 +229,9 @@ public:
 	bool GetMindReading(){return (s_mind_reading!=0);};
 	int GetExhausted(){return s_exhausted;};
 	int GetPoisonResist(){return poison_resist;};
-	float GetFireResist();
-	float GetColdResist();
-	float GetElecResist();
+	float GetFireResist(bool cloud_ = false);
+	float GetColdResist(bool cloud_ = false);
+	float GetElecResist(bool cloud_ = false);
 	monster_state_simple GetSimpleState();
 	bool GetStateString(monster_state_simple state_, char* string_);
 	bool isplayer(){return false;};

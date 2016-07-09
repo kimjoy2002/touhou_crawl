@@ -38,7 +38,7 @@ skill_type itemtoskill(item_type type_);
 int players::GetAttack(bool max_)
 {
 	float base_atk_ = s_str/3.0f+ s_dex/6.0f;
-	float max_atk_=0, min_atk_=0;
+	float max_atk_=0, min_atk_=0, stab_atk_=0;
 	skill_type skill_ = SKT_MACE;
 
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
@@ -73,6 +73,11 @@ int players::GetAttack(bool max_)
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
 	}
+
+	stab_atk_ = max_atk_;
+
+
+
 	if(s_might || s_lunatic)
 		max_atk_+=randA_1(10);	
 	
@@ -83,6 +88,10 @@ int players::GetAttack(bool max_)
 	if(s_slaying)
 	{
 		max_atk_+=s_slaying;
+	}
+	if(GetProperty(TPT_SLAY))
+	{
+		max_atk_+=6;
 	}
 	
 	if(max_atk_<min_atk_)
@@ -114,15 +123,20 @@ int players::GetAttack(bool max_)
 	}
 
 
+	float plus_max_atk = max_atk_ - stab_atk_;
+
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
 	{ //단검 암습 보너스
-		max_atk_+=(2+(skill[skill_].level+skill[SKT_STEALTH].level)/2)*2;
-		max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
+		stab_atk_+=(2+(skill[skill_].level+skill[SKT_STEALTH].level)/2)*2;
+		stab_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
 	}
 	else
-		max_atk_*=(1+skill[SKT_STEALTH].level*0.1f);
+		stab_atk_*=(1+skill[SKT_STEALTH].level*0.1f);
 	
+
+	max_atk_ = stab_atk_ + plus_max_atk;
+
 	//	max_atk_*=equipment[ET_WEAPON]->GetStabPercent();
 
 
@@ -157,6 +171,10 @@ int players::GetHit()
 	if(s_knife_collect)
 	{
 		hit_+=5;
+	}
+	if(GetProperty(TPT_SLAY))
+	{
+		hit_+=6;
 	}
 
 
@@ -380,6 +398,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
+	case ATT_CLOUD_ELEC:
 	case ATT_ELEC:
 	case ATT_THROW_ELEC:
 	case ATT_THROW_NONE_MASSAGE:
@@ -413,15 +432,19 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	switch(type_)
 	{
 	case ATT_THROW_FIRE:
-	case ATT_CLOUD_FIRE:
 	case ATT_FIRE_BLAST:
 		damage_ *= GetFireResist();
 		break;
+	case ATT_CLOUD_FIRE:
+		damage_ *= GetFireResist(true);
+		break;
 	case ATT_THROW_COLD:
-	case ATT_CLOUD_COLD:
 	case ATT_THROW_FREEZING:
 	case ATT_COLD_BLAST: 
 		damage_ *= GetColdResist();
+		break;
+	case ATT_CLOUD_COLD:
+		damage_ *= GetColdResist(true);
 		break;
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
@@ -431,6 +454,9 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_ELEC:
 	case ATT_THROW_ELEC:
 		damage_ *= GetElecResist();
+		break;
+	case ATT_CLOUD_ELEC:
+		damage_ *= GetElecResist(true);
 		break;
 	case ATT_FIRE_PYSICAL_BLAST:
 		damage_ = damage_/2.0f + damage_*GetFireResist()/2.0f;
@@ -521,6 +547,9 @@ void players::print_damage_message(attack_infor &a)
 	case ATT_CLOUD_COLD:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다.");
 		break;
+	case ATT_CLOUD_ELEC:
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+		break;
 	case ATT_STONE_TRAP:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다.");
 		break;
@@ -576,6 +605,7 @@ void players::print_no_damage_message(attack_infor &a)
 		case ATT_THROW_NONE_MASSAGE:	
 		case ATT_CLOUD_FIRE:
 		case ATT_CLOUD_COLD:
+		case ATT_CLOUD_ELEC:
 		case ATT_CLOUD_NORMAL:
 		case ATT_ELEC:
 		case ATT_VEILING:
@@ -617,7 +647,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		return false;
 
 	
-	if(s_graze && randA(5) == 0)
+	if(s_graze && randA(GetProperty(TPT_GRAZE_CONTROL)?2:5) == 0)
 	{
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
 			graze_ = true;
@@ -654,7 +684,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			evasion = 0.95f;
 	}
 
-	if(wiz_list.wizard_mode)
+	if(wiz_list.wizard_mode == 1)
 	{		
 		char temp[50];
 		sprintf_s(temp,50,"a-%d A-%d, H-%d hit-%d%%",a.damage,a.max_damage,a.accuracy,(int)(100-evasion*100));
@@ -693,6 +723,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 				HpUpDown(-damage_,DR_HITTING);
 
 				dead_order = NULL;
+
+				if(GetProperty(TPT_CLOUD) && damage_ > randA(2))
+				{
+					int max_num_ = min(10,damage_*40/max_hp);
+					burstCloud(half_youkai[1], rand_int(max(0,max_num_-2),max_num_));
+				}
 				if(s_mirror && hp>0 && a.order)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
@@ -761,6 +797,34 @@ bool players::damage(attack_infor &a, bool perfect_)
 					s_value_veiling = 0;
 				}
 			}
+			if(GetProperty(TPT_FORCE_OF_NATURE) && hp>0 && randA(1))
+			{
+				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				{
+					switch(half_youkai[1])
+					{
+					case 0:
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor("화염",true)), true);
+						if(a.order->GetFireResist()>=1.0f){
+							a.order->SetSlow(10+randA(5));
+						}
+						break;
+					case 1:
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor("냉기",false)), true);
+						if(a.order->GetColdResist()>=1.0f){
+							a.order->SetSlow(10+randA(5));
+						}
+						break;
+					case 2:
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor("전격",true)), true);
+						if(a.order->GetElecResist()>=1.0f){
+							a.order->SetSlow(10+randA(5));
+						}
+						break;
+					}
+				}
+			}
+				
 		}
 		else
 		{

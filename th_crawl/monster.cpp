@@ -21,6 +21,7 @@
 #include "tensi.h"
 #include "map.h"
 #include "rect.h"
+#include "tribe.h"
 
 
 
@@ -820,6 +821,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
+	case ATT_CLOUD_ELEC:
 	case ATT_THROW_NONE_MASSAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
@@ -848,15 +850,22 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	switch(type_)
 	{
 	case ATT_THROW_FIRE:
-	case ATT_CLOUD_FIRE:
 	case ATT_FIRE_BLAST:
-	case ATT_COLD_BLAST: 
 		damage_ *= GetFireResist();
 		break;
+	case ATT_CLOUD_FIRE:
+		damage_ *= GetFireResist(true);
+		break;
 	case ATT_THROW_COLD:
-	case ATT_CLOUD_COLD:
 	case ATT_THROW_FREEZING:
+	case ATT_COLD_BLAST: 
 		damage_ *= GetColdResist();
+		break;
+	case ATT_CLOUD_COLD:
+		damage_ *= GetColdResist(true);
+		break;
+	case ATT_CLOUD_ELEC:		
+		damage_ *= GetElecResist(true);
 		break;
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
@@ -938,7 +947,10 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			break;
 		case ATT_CLOUD_COLD:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다.");
-			break;			
+			break;		
+		case ATT_CLOUD_ELEC:
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+			break;				
 		case ATT_STONE_TRAP:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다.");
 			break;			
@@ -1048,6 +1060,7 @@ void monster::print_no_damage_message(attack_infor &a)
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
+	case ATT_CLOUD_ELEC:
 	case ATT_CLOUD_NORMAL:
 	case ATT_ELEC:
 	case ATT_VEILING:
@@ -1273,6 +1286,23 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.type == ATT_CHOAS)
 		{
 			GetChoas(this,damage_);
+		}
+		
+		if(a.type == ATT_CHOAS)
+		{
+			GetChoas(this,damage_);
+		}
+		if(damage_ && a.order == &you)
+		{
+			if(a.type >= ATT_NORMAL && a.type < ATT_THROW_NORMAL && you.GetProperty(TPT_CONFUSE_ATTACK) && randA(4) == 0)
+			{
+				if(!confuse_resist)
+				{
+					printarray(false,false,false,CL_normal,3,"당신의 공격이 ",GetName()->name.c_str(),"의 허를 찔렀다! ");
+					SetConfuse(rand_int(2,4));
+				}
+			}
+
 		}
 
 
@@ -3004,6 +3034,17 @@ bool monster::isYourShight()
 {
 	return ((env[current_level].isInSight(position)) && isView());
 }
+bool monster::isEnemyUnit(unit* unit_info)
+{
+	if(unit_info->isplayer())
+	{
+		return !isUserAlly();
+	}
+	else
+	{
+		return isEnemyMonster((monster*)unit_info);
+	}
+}
 bool monster::isEnemyMonster(const monster* monster_info)
 {
 	if(isUserAlly() && monster_info->isUserAlly())
@@ -3169,6 +3210,20 @@ int monster::GetSpeed()
 {
 	return (s_haste?0.7f:1)*(s_slow?1.5f:1)*speed+(s_frozen+2)*speed/30;;
 }
+int monster::GetAttack(bool max_)
+{
+	int num_=0;
+	for(int i=0;i<3;i++,num_++)
+		if(atk_type[i] == ATT_NONE)
+			break;
+
+	if(num_ == 0)
+		return 0;				
+
+	num_ = randA(num_-1);
+
+	return GetAttack(num_, max_);
+}
 int monster::GetAttack(int num_, bool max_)
 {
 	int atk_ = randA(atk[num_]);
@@ -3212,7 +3267,7 @@ bool monster::isSaveSummoner(unit* order)
 	}
 	return false;
 }
-float monster::GetFireResist()
+float monster::GetFireResist(bool cloud_)
 {
 	if(fire_resist <= -2)
 		return 2;
@@ -3227,7 +3282,7 @@ float monster::GetFireResist()
 	else
 		return 1;
 }
-float monster::GetColdResist()
+float monster::GetColdResist(bool cloud_)
 {
 	if(ice_resist <= -2)
 		return 2;
@@ -3242,7 +3297,7 @@ float monster::GetColdResist()
 	else
 		return 1;
 }
-float monster::GetElecResist()
+float monster::GetElecResist(bool cloud_)
 {
 	if(elec_resist == 1)
 		return 2.0f/3.0f;

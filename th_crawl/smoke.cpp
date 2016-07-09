@@ -118,6 +118,8 @@ char* smoke::GetName()
 		return "화염 구름";
 	case SMT_COLD:
 		return "냉기 구름";
+	case SMT_ELEC:
+		return "전기 구름";
 	case SMT_DARK:
 		return "암흑 구름";
 	case SMT_POISON:
@@ -154,6 +156,9 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_COLD:
 		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_COLD,name_infor("냉기 구름",true)), true);
 		unit_->SetFrozen(randA_1(7));
+		return true;
+	case SMT_ELEC:
+		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_ELEC,name_infor("전기 구름",true)), true);
 		return true;
 	case SMT_TWIST:
 		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("트위스트",false)), true);
@@ -213,10 +218,13 @@ int smoke::danger(unit* unit_, bool first_)
 	switch(type)
 	{
 	case SMT_FIRE:
-		danger_ = unit_->isplayer()?999:80*unit_->GetFireResist();
+		danger_ = unit_->isplayer()?999*unit_->GetFireResist(true):80*unit_->GetFireResist(true);
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_COLD:
-		danger_ = unit_->isplayer()?999:80*unit_->GetColdResist();
+		danger_ = unit_->isplayer()?999*unit_->GetColdResist(true):80*unit_->GetColdResist(true);
+		return (danger_>prev_danger)?danger_:0;
+	case SMT_ELEC:
+		danger_ = unit_->isplayer()?999*unit_->GetElecResist(true):80*unit_->GetElecResist(true);
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_POISON:
 	case SMT_SLOW:

@@ -241,6 +241,11 @@ bool Dump(int type)
 								strncat(death_reason,"에 의해 ",64);
 							strncat(death_reason,"얼어죽었다.",64);
 							break;
+						case ATT_CLOUD_ELEC:
+							if(you.dead_order->order)
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"감전되어죽었다.",64);
+							break;
 						case ATT_BURST:
 							if(you.dead_order->order)
 								strncat(death_reason,"에 의해 ",64);
@@ -346,18 +351,18 @@ bool Dump(int type)
 		fprintf_s(fp,"%c) %s\n",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
 	else
 		fprintf_s(fp,"없음\n");
-
-	resist_ = you.poison_resist;
+	
+	resist_ = you.elec_resist;
 	resist2_ = you.power_keep;
-	fprintf_s(fp,"독저항  : %c          파워유지: %c           몸통: " ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"전기저항: %c %c %c      파워유지: %c           몸통: " ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.equipment[ET_ARMOR])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
 	else
 		fprintf_s(fp,"없음\n");
 
-
-	resist_ = you.elec_resist;
-	fprintf_s(fp,"전기저항: %c                                방패: ",resist_>=1?'+':(resist_<=-1?'-':'.'));
+	
+	resist_ = you.poison_resist;
+	fprintf_s(fp,"독저항  : %c                                방패: ",resist_>=1?'+':(resist_<=-1?'-':'.'));
 	if(you.equipment[ET_SHIELD])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
 	else

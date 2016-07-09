@@ -85,6 +85,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		punish[i]=0;
 	for(int i=0;i<5;i++)
 		god_value[i]=0;
+	for(int i=0;i<4;i++)
+		half_youkai[i]=0;
 	for(int i=0;i<ET_LAST;i++)
 		equipment[i] = NULL;
 
@@ -264,7 +266,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, *punish, GT_LAST);
 	SaveData<int>(fp, god_turn);
 	SaveData<int>(fp, *god_value, 5);
-	SaveData<int>(fp, suwako_meet); 
+	SaveData<int>(fp, suwako_meet);
+	SaveData<int>(fp, *half_youkai, 4);	
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 }
 void players::LoadDatas(FILE *fp)
@@ -470,6 +473,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, god_turn);
 	LoadData<int>(fp, *god_value);
 	LoadData<int>(fp, suwako_meet);
+	LoadData<int>(fp, *half_youkai);
 	{
 		char temp_id_=0;
 		item *temp_ = NULL;
@@ -641,6 +645,16 @@ int players::move(short_move x_mov, short_move y_mov)
 				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
 				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
 					attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
+					mon_->damage(temp_att, false);
+				}
+			}
+			if(mon_->isLive() && you.GetProperty(TPT_JAW))
+			{
+				int attack_ = 10;
+				int hit_ = 12+level/3;
+				if(randA(3)<1)
+				{
+					attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("깨물기",false));
 					mon_->damage(temp_att, false);
 				}
 			}
@@ -875,6 +889,13 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 
 
 	power_*=s_int/10.0f;
+
+	
+	if(GetProperty(TPT_SPELL_POWER)>0)
+	{
+		power_*=1.3f;
+	}
+
 	return power_;
 }
 int players::GetSpellSuccess(int spell_)
@@ -1032,6 +1053,12 @@ int players::HpRecoverDelay(int delay_)
 		cacul_ += 100.0f;
 	}
 
+	if(GetProperty(TPT_REGEN)>0)
+	{
+		cacul_ += 40*GetProperty(TPT_REGEN);
+	}
+
+
 
 	hp_recov +=  1000.0f/cacul_ + rand_float(0,0.99f);
 
@@ -1142,10 +1169,21 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	}
 
 
+
+
+
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5 == WB_MANA_REGEN && !you.s_mana_delay)
 	{
-		cacul_ +=30;
+		cacul_ +=25;
 	}
+	
+	if(GetProperty(TPT_MP_REGEN)>0)
+	{
+		cacul_ +=15*GetProperty(TPT_MP_REGEN)-5;
+	}
+
+
+
 
 	if(set_)
 		mp_recov =  1000.0f/cacul_ + rand_float(0,0.99f);
@@ -1207,6 +1245,10 @@ int players::ShUpDown(int value_, int bonus_)
 	real_sh += value_;
 	bonus_sh += bonus_;
 	float temp_sh = (float)real_sh*(1.0f+(s_dex/5.0f+skill[SKT_SHIELD].level)/15.0f);
+	if(GetProperty(TPT_SLAY))
+	{
+		temp_sh *= 1.2f;
+	}
 	sh = (int)temp_sh+bonus_sh;
 	return sh;
 }
@@ -2314,6 +2356,7 @@ int players::DeleteProperty(tribe_proper_type type_)
 		if(it->id == type_)
 		{
 			int temp = it->value;
+			it->gain(false);
 			property_vector.erase(it);
 			return temp;
 		}
@@ -2438,7 +2481,6 @@ void players::LevelUp(bool speak_)
 		DeleteProperty(TPT_18_LIFE);
 	}
 
-	CalcuHP();
 	max_mp += 1;
 	mp += 1;
 	if(level % 3 == 0)
@@ -2451,6 +2493,7 @@ void players::LevelUp(bool speak_)
 
 	remainSpellPoiont++;
 	LevelUpTribe(level);
+	CalcuHP();
 	
 	if(speak_)
 	{
@@ -3967,8 +4010,17 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 	}
 
 }
-float players::GetFireResist()
+float players::GetFireResist(bool cloud_)
 {
+	if(cloud_)
+	{
+		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 0)
+		{			
+			return 0;
+		}		
+	}
+
+
 	if(fire_resist <= -2)
 		return 2;
 	else if(fire_resist == -1)
@@ -3982,8 +4034,16 @@ float players::GetFireResist()
 	else
 		return 1;
 }
-float players::GetColdResist()
+float players::GetColdResist(bool cloud_)
 {
+	if(cloud_)
+	{
+		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 1)
+		{			
+			return 0;
+		}		
+	}
+
 	if(ice_resist <= -2)
 		return 2;
 	else if(ice_resist == -1)
@@ -3997,14 +4057,67 @@ float players::GetColdResist()
 	else
 		return 1;
 }
-float players::GetElecResist()
+float players::GetElecResist(bool cloud_)
 {
-	if(elec_resist>0)
-		return 1.0f/3.0f;
+	if(cloud_)
+	{
+		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 2)
+		{			
+			return 0;
+		}		
+	}
+	
+	if(elec_resist <= -2)
+		return 2;
+	else if(elec_resist == -1)
+		return 1.5f;
+	else if(elec_resist == 1)
+		return 0.5f;
+	else if(elec_resist == 2)
+		return 0.2f;
+	else if(elec_resist >= 3)
+		return 0.1f;
 	else
-		return 1.0f;
+		return 1;
 }
+void players::burstCloud(int kind_, int rate_)
+{	
+	textures *t_ = img_fog_normal;
+	smoke_type smoke_ = SMT_FOG;
+	switch(kind_)
+	{
+	case 0:
+		smoke_ = SMT_FIRE;
+		t_ = img_fog_fire;
+		break;
+	case 1:
+		smoke_ = SMT_COLD;
+		t_ = img_fog_cold;
+		break;
+	case 2:
+		smoke_ = SMT_ELEC;
+		t_ = img_thunder;
+		break;
+	default:
+		return;
+	}
 
+	for(int i = 0; i < rate_; i++)
+	{
+		dif_rect_iterator rit(you.position,4,true);
+		while(!rit.end())
+		{
+			coord_def check_pos_ = (*rit);
+					
+			if(check_pos_ != you.position && env[current_level].isMove(check_pos_.x, check_pos_.y, false) && env[current_level].isInSight(check_pos_) && you.isSightnonblocked((*rit)))
+			{
+				env[current_level].MakeSmoke(*rit,t_,smoke_,rand_int(6,8),0,&you);
+				break;
+			}
+			rit++;
+		}
+	}
+}
 bool players::isView(const monster* monster_info)
 {
 	

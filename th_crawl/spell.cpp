@@ -15,6 +15,7 @@
 #include "projectile.h"
 #include "god.h"
 #include "dump.h"
+#include "tribe.h"
 
 
 extern HANDLE mutx;
@@ -1247,6 +1248,7 @@ void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
 void SpellUse()
 {
+	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 마법은 쓸 수 없다!",true,false,false,CL_danger);
@@ -1254,7 +1256,7 @@ void SpellUse()
 	}
 	if(you.currentSpellNum)
 	{
-		if(env[current_level].isSilence(you.position))
+		if(!you.GetProperty(TPT_FINGER_MAGIC) && silence_)
 		{
 			printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
 			return;
@@ -1264,6 +1266,7 @@ void SpellUse()
 			printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
 			return;
 		}
+		bool blood_ = false;
 		int i=0;
 		changedisplay(DT_SPELL);
 		while(1)
@@ -1276,8 +1279,16 @@ void SpellUse()
 				{
 					if(SpellLevel(spell_)>you.mp)
 					{
-						printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
-						break;
+						if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.hp)
+						{
+							printlog("당신은 피를 대가로 마법을 영창했다!",true,false,false,CL_danger);	
+							blood_ = true;
+						}
+						else
+						{
+							printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
+							break;
+						}
 					}
 					if(SpellFlagCheck(spell_, S_FLAG_DIREC))
 					{
@@ -1289,7 +1300,10 @@ void SpellUse()
 							if(PlayerUseSpell(spell_, false, target_))
 							{	
 								GodAccpect_UseSpell(spell_);
-								you.MpUpDown(-SpellLevel(spell_));									
+								if(blood_)
+									you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
+								else
+									you.MpUpDown(-SpellLevel(spell_));									
 								you.doingActionDump(DACT_SPELL, SpellString(spell_));
 								//you.SkillTraining(SKT_SPELLCASTING,5);		
 								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
@@ -1301,7 +1315,8 @@ void SpellUse()
 								//you.HungerApply(-you.GetSpellHungry(spell_));
 								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
 								you.SetBattleCount(30);
-								Noise(you.position,SpellNoise(spell_));
+								if(!silence_)
+									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 								you.TurnEnd();
 							}
 						}
@@ -1322,7 +1337,10 @@ void SpellUse()
 							if(PlayerUseSpell(spell_, short_==2, you.search_pos))
 							{		
 								GodAccpect_UseSpell(spell_);
-								you.MpUpDown(-SpellLevel(spell_));	
+								if(blood_)
+									you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
+								else
+									you.MpUpDown(-SpellLevel(spell_));	
 								you.doingActionDump(DACT_SPELL, SpellString(spell_));
 /*								you.SkillTraining(SKT_SPELLCASTING,5);	*/	
 								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
@@ -1334,7 +1352,8 @@ void SpellUse()
 								//you.HungerApply(-you.GetSpellHungry(spell_));
 								you.SetBattleCount(30);
 								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
-								Noise(you.position,SpellNoise(spell_));
+								if(!silence_)
+									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 								you.TurnEnd();
 							}
 						}
@@ -1347,7 +1366,10 @@ void SpellUse()
 						if(PlayerUseSpell(spell_, false, you.position))
 						{
 							GodAccpect_UseSpell(spell_);
-							you.MpUpDown(-SpellLevel(spell_));	
+							if(blood_)
+								you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
+							else
+								you.MpUpDown(-SpellLevel(spell_));	
 							you.doingActionDump(DACT_SPELL, SpellString(spell_));
 							//you.SkillTraining(SKT_SPELLCASTING,5);		
 							//if(SpellSchool(spell_,0)!=SKT_ERROR)		
@@ -1359,7 +1381,8 @@ void SpellUse()
 							//you.HungerApply(-you.GetSpellHungry(spell_));
 							you.SetBattleCount(30);
 							you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
-							Noise(you.position,SpellNoise(spell_));
+							if(!silence_)	
+								Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 							you.TurnEnd();
 						}		
 						break;

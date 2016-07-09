@@ -1819,6 +1819,74 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+bool skill_breath(int power, bool short_, unit* order, coord_def target)
+{
+	if(!order || !order->isplayer())
+		return false;
+
+
+	string str_ = "브레스";
+	attack_type type_ = ATT_THROW_COLD;
+	int graphic_ = 36;
+
+	switch(you.half_youkai[1])
+	{
+	case 0:
+		str_ = "화염 브레스";
+		type_ = ATT_THROW_FIRE;
+		graphic_ = 36;
+		break;
+	case 1:
+		str_ = "냉기 브레스";
+		type_ = ATT_THROW_COLD;
+		graphic_ = 40;
+		break;
+	case 2:
+		str_ = "전격 브레스";
+		type_ = ATT_THROW_ELEC;
+		graphic_ = 38;
+		break;
+	}
+
+
+	beam_iterator beam(order->position,order->position);
+	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	length_ = min(length_,SkillLength(SKL_BREATH));
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = 9+power/6;
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),20,order,order->GetParentType(),SkillLength(SKL_BREATH),8,BMT_PENETRATE,type_,name_infor(str_,false));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+			throwtanmac(graphic_,beam,temp_infor,NULL);
+		order->SetParadox(0); 
+		return true;
+	}
+	return false;
+
+}
+bool skill_torment(int pow, bool short_, unit* order, coord_def target)
+{
+	printlog("당신은 지옥의 고통을 불렀다!",true,false,false,CL_normal);
+	
+	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
+	{	
+		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
+		{
+			it->hp=it->hp/2;	
+			it->AttackedTarget(order);
+			//int att_ = 13+pow/15;
+			//	
+			//attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
+			//it->damage(temp_att, true);			
+		}
+	}
+	return true;
+}
+
+bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 int UseSkill(skill_list skill, bool short_, coord_def &target)
 {
@@ -1999,6 +2067,15 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_HINA_5:
 		return hina_curse_bread(power,short_,&you,target);
+		break;
+	case SKL_JUMPING_ATTACK:
+		return skill_jump_attack(power,short_,&you, target);
+		break;
+	case SKL_BREATH:
+		return skill_breath(power,short_,&you, target);
+		break;
+	case SKL_TORMENT:
+		return skill_torment(power,short_,&you, target);
 		break;
 	}
 	return 0;

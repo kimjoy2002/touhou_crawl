@@ -1458,5 +1458,6 @@ int GetLevelMonsterNum(int level, bool item_)
 
 void Noise(coord_def center_, int length_, const unit* excep_)
 {
+
 	env[current_level].MakeNoise(center_,length_,excep_);
 }

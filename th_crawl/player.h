@@ -252,6 +252,7 @@ public:
 	int god_turn;
 	int god_value[5];//이건 신에 따라 적절한 수치로 이용
 	int suwako_meet; //스와코를 믿은적이 있는지
+	int half_youkai[4];//반요 변이 수치
 
 	bool sight_reset;
 	int target;
@@ -443,9 +444,10 @@ public:
 	int GetLevel(){return level;};
 	bool isplayer(){return true;};
 	int GetPoisonResist(){return poison_resist;};
-	float GetFireResist();
-	float GetColdResist();
-	float GetElecResist();
+	float GetFireResist(bool cloud_ = false);
+	float GetColdResist(bool cloud_ = false);
+	float GetElecResist(bool cloud_ = false);
+	void burstCloud(int kind_, int rate_);
 	bool isEnemyMonster(const monster* monster_info);
 	bool isUserAlly() const {return true;}
 	bool isMemorizeSpell(int spell_);

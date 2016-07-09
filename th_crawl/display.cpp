@@ -407,9 +407,8 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
-
-	resist_ = you.poison_resist - you.uniden_poison_resist;
-	sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	resist_ = you.elec_resist - you.uniden_elec_resist;
+	sprintf_s(temp,100,"전기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.power_keep- you.uniden_power_keep;
@@ -432,9 +431,9 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
-
-	resist_ = you.elec_resist - you.uniden_elec_resist;
-	sprintf_s(temp,100,"전기저항: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	
+	resist_ = you.poison_resist - you.uniden_poison_resist;
+	sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);

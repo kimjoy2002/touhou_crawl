@@ -924,7 +924,7 @@ int players::GetSpellSuccess(int spell_)
 	if(s_clever)
 		success_+=2;
 	if(magician_bonus)
-		success_+=2;
+		success_+=2*magician_bonus;
 	if(s_drunken)
 		success_-=2;
 	if(you.god == GT_BYAKUREN && !you.punish[GT_BYAKUREN] && pietyLevel(you.piety)>=4 && SpellFlagCheck((spell_list)spell_ ,S_FLAG_BUF))

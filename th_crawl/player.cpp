@@ -924,7 +924,7 @@ int players::GetSpellSuccess(int spell_)
 	if(s_clever)
 		success_+=2;
 	if(magician_bonus)
-		success_+=2*magician_bonus;
+		success_+=1+1*magician_bonus;
 	if(s_drunken)
 		success_-=2;
 	if(you.god == GT_BYAKUREN && !you.punish[GT_BYAKUREN] && pietyLevel(you.piety)>=4 && SpellFlagCheck((spell_list)spell_ ,S_FLAG_BUF))
@@ -940,7 +940,7 @@ int players::GetSpellSuccess(int spell_)
 	}
 
 
-	success_+=s_int/5.0f+skill[SKT_SPELLCASTING].level/2;
+	success_+=s_int/6.0f+skill[SKT_SPELLCASTING].level/4;
 
 	//if(equipment[ET_ARMOR])
 	//{

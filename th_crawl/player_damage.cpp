@@ -168,10 +168,6 @@ int players::GetHit()
 	{
 		hit_+=s_slaying;
 	}
-	if(s_knife_collect)
-	{
-		hit_+=5;
-	}
 	if(GetProperty(TPT_SLAY))
 	{
 		hit_+=6;
@@ -287,6 +283,24 @@ int players::GetThrowAttack(const item* it, bool max_)
 	}
 	if(s_might || s_lunatic)
 		max_atk_+=randA_1(10);
+
+
+	
+	max_atk_+=dam_plus;
+	if(s_slaying)
+	{
+		max_atk_+=s_slaying;
+	}
+	if(GetProperty(TPT_SLAY))
+	{
+		max_atk_+=6;
+	}
+
+	
+	if(max_atk_<min_atk_)
+		max_atk_ = min_atk_;
+
+
 	int atk_ = rand_int((int)round(min_atk_),(int)round(max_atk_));
 	return max_?(int)round(max_atk_):atk_;
 }
@@ -297,6 +311,28 @@ int players::GetThrowHit(const item* it)
 	int hit_ = 3+s_dex/3;	
 
 	hit_ += it->value1 + it->value3 + skill[SKT_TANMAC].level/2;
+	
+	if(s_knife_collect)
+	{
+		hit_+=5;
+	}
+	
+	hit_+=acc_plus;
+	if(s_slaying)
+	{
+		hit_+=s_slaying;
+	}
+	if(GetProperty(TPT_SLAY))
+	{
+		hit_+=6;
+	}
+
+
+	if(as_penalty > GetPenaltyMinus(1))
+	{//만약 방어패널티때문에 명중이 내려갈 경우
+		hit_ -= as_penalty; 
+	}
+
 
 	return hit_;
 }

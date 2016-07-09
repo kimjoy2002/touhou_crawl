@@ -780,6 +780,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_NOISE:
 	case ATT_FIRE:
 	case ATT_COLD:
+	case ATT_ELEC:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
@@ -815,10 +816,6 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		if(damage_<0)
 			damage_ = 0;
 		break;
-	case ATT_ELEC:
-	case ATT_THROW_ELEC:
-		damage_ *= GetElecResist();
-		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
@@ -837,6 +834,11 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
+		bonus_damage = damage_*0.25f;
+		damage_ -= bonus_damage;
+		bonus_damage *= GetColdResist();
+		break;
+	case ATT_ELEC:
 		bonus_damage = damage_*0.25f;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
@@ -863,6 +865,9 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		break;
 	case ATT_CLOUD_COLD:
 		damage_ *= GetColdResist(true);
+		break;
+	case ATT_THROW_ELEC:
+		damage_ *= GetElecResist();
 		break;
 	case ATT_CLOUD_ELEC:		
 		damage_ *= GetElecResist(true);

@@ -670,7 +670,7 @@ attack_type GetWeatherType(unit* unit_, int damage_, int &bonus_damage_)
 		type_ = ATT_NORMAL;
 		break;
 	case WTL_AIR:
-		bonus_damage_ += unit_->GetElecResist()*randA(27);
+		bonus_damage_ += unit_->GetElecResist()*damage_/3;
 		type_ = ATT_ELEC;
 		break;
 	case WTL_POISON:

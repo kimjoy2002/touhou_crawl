@@ -342,6 +342,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_SPEAR:
 	case ATT_FIRE:
 	case ATT_COLD:
+	case ATT_ELEC:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
@@ -399,7 +400,6 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
-	case ATT_ELEC:
 	case ATT_THROW_ELEC:
 	case ATT_THROW_NONE_MASSAGE:
 	case ATT_STONE_TRAP:
@@ -421,6 +421,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
+		break;
+	case ATT_ELEC:
+		bonus_damage = damage_/3;
+		damage_ -= bonus_damage;
+		bonus_damage *= GetElecResist();
 		break;
 	case ATT_WEATHER:
 		type_ = GetWeatherType(this, damage_, bonus_damage);
@@ -451,7 +456,6 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_STRONG_POISON:
 		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
 		break;
-	case ATT_ELEC:
 	case ATT_THROW_ELEC:
 		damage_ *= GetElecResist();
 		break;

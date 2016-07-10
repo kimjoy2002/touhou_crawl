@@ -84,7 +84,54 @@ item::item(const coord_def &c, const item_infor &t)
 	value8 = t.value8;
 
 }
-
+void item_infor::SaveDatas(FILE *fp)
+{
+	name.SaveDatas(fp);
+	name2.SaveDatas(fp);	
+	SaveData<int>(fp, texturetoint(image));	
+	SaveData<item_type>(fp, type);
+	SaveData<float>(fp, weight);
+	SaveData<int>(fp, value);
+	SaveData<bool>(fp, is_pile);
+	SaveData<int>(fp, num);	
+	SaveData<bool>(fp, can_throw);	
+	SaveData<int>(fp, value0);
+	SaveData<int>(fp, value1);
+	SaveData<int>(fp, value2);
+	SaveData<int>(fp, value3);
+	SaveData<int>(fp, value4);
+	SaveData<int>(fp, value5);
+	SaveData<int>(fp, value6);
+	SaveData<int>(fp, value7);
+	SaveData<int>(fp, value8);	
+	SaveData<bool>(fp, curse);
+	SaveData<bool>(fp, artifact);
+}
+void item_infor::LoadDatas(FILE *fp)
+{
+	name.LoadDatas(fp);
+	name2.LoadDatas(fp);	
+	int it;
+	LoadData<int>(fp, it);
+	image = inttotexture(it);
+	LoadData<item_type>(fp, type);
+	LoadData<float>(fp, weight);
+	LoadData<int>(fp, value);
+	LoadData<bool>(fp, is_pile);
+	LoadData<int>(fp, num);	
+	LoadData<bool>(fp, can_throw);	
+	LoadData<int>(fp, value0);
+	LoadData<int>(fp, value1);
+	LoadData<int>(fp, value2);
+	LoadData<int>(fp, value3);
+	LoadData<int>(fp, value4);
+	LoadData<int>(fp, value5);
+	LoadData<int>(fp, value6);
+	LoadData<int>(fp, value7);
+	LoadData<int>(fp, value8);	
+	LoadData<bool>(fp, curse);
+	LoadData<bool>(fp, artifact);
+}
 void item::SaveDatas(FILE *fp)
 {
 	name.SaveDatas(fp);

@@ -131,7 +131,12 @@ void monster::SaveDatas(FILE *fp)
 		SaveData<spell>(fp,(*it));
 	}
 	SaveData<bool>(fp, random_spell);	
-
+	
+	SaveData<int>(fp, item_lists.size());
+	for(auto it=item_lists.begin();it!=item_lists.end();it++)
+	{
+		(*it).SaveDatas(fp);
+	}
 	
 }
 void monster::LoadDatas(FILE *fp)
@@ -226,6 +231,15 @@ void monster::LoadDatas(FILE *fp)
 		spell_lists.push_back(temp);
 	}
 	LoadData<bool>(fp, random_spell);	
+	
+	size_=0;
+	LoadData<int>(fp, size_);
+	for(int i = 0; i < size_; i++)
+	{
+		item_infor temp;
+		temp.LoadDatas(fp);
+		item_lists.push_back(temp);
+	}
 }
 void monster::ReTarget()
 {
@@ -300,6 +314,7 @@ void monster::init()
 	state.SetState(MS_SLEEP);
 	spell_lists.clear();
 	random_spell = false;
+	item_lists.clear();
 }
 bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_)
 {
@@ -368,7 +383,7 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 	if(flag & M_FLAG_INVISIBLE)
 		s_invisible = -1;
 	
-	SetSpell((monster_index)id_, &spell_lists,&random_spell);
+	SetSpell((monster_index)id_, &spell_lists,&item_lists,&random_spell);
 	return true;
 }	
 bool monster::ChangeMonster( int id_, int flag_)
@@ -1786,25 +1801,33 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
-		if(id == MON_MAGIC_BOOK)
+		if(!item_lists.empty())
 		{
-			item_infor t;
-			item *it2;
-			it2 = env[current_level].MakeItem(position,makeCustomBook(&t));
-			list<spell>::iterator it = spell_lists.begin();
-			if(it != spell_lists.end()){
-				it2->value1 = it->num;
-				it++;
-			}
-			if(it != spell_lists.end()){
-				it2->value2 = it->num;
-				it++;
-			}
-			if(it != spell_lists.end()){
-				it2->value3 = it->num;
-				it++;
+			for(auto it = item_lists.begin(); it != item_lists.end(); it++)
+			{
+				item *it2;
+				it2 = env[current_level].MakeItem(position,(*it));;
 			}
 		}
+		//if(id == MON_MAGIC_BOOK)
+		//{
+		//	item_infor t;
+		//	item *it2;
+		//	it2 = env[current_level].MakeItem(position,makeCustomBook(&t));
+		//	list<spell>::iterator it = spell_lists.begin();
+		//	if(it != spell_lists.end()){
+		//		it2->value1 = it->num;
+		//		it++;
+		//	}
+		//	if(it != spell_lists.end()){
+		//		it2->value2 = it->num;
+		//		it++;
+		//	}
+		//	if(it != spell_lists.end()){
+		//		it2->value3 = it->num;
+		//		it++;
+		//	}
+		//}
 	}
 	if(flag & M_FLAG_UNIQUE && !remove_)
 	{

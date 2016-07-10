@@ -437,7 +437,7 @@ void SetJob(job_type select_, string name_)
 			}
 			else
 			{
-				MakeStartItem(SIT_ROBE,1);
+				MakeStartItem(SIT_ARMOUR_0,1);
 				//MakeStartItem(SIT_CLOAK,2);
 				MakeStartItem(SIT_MIDDLE_SHIELD,3);	
 			}
@@ -491,10 +491,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(2,STAT_DEX);
 		you.GiveSkillExp(WeaponSelect(0),60,false);
-		if(!you.GetProperty(TPT_SIZE))
-			MakeStartItem(SIT_ARMOUR_0,1);
-		else
-			MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_ARMOUR_0,1);
 		MakeStartItem(SIT_SMALL_SHIELD,2);
 		MakeStartItem(SIT_TANMAC,3);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
@@ -517,10 +514,7 @@ void SetJob(job_type select_, string name_)
 		you.max_hp+=1;
 		you.max_mp+=1;
 		you.GiveSkillExp(WeaponSelect(0),30,false);
-		if(!you.GetProperty(TPT_SIZE))
-			MakeStartItem(SIT_ARMOUR_0,1);
-		else
-			MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_ARMOUR_0,1);
 		MakeStartItem(SIT_BOOK,2);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
 		you.GiveSkillExp(SKT_DODGE,20,false);
@@ -728,10 +722,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(2,STAT_DEX);
 		you.GiveSkillExp(WeaponSelect(0),60,false);
-		if(!you.GetProperty(TPT_SIZE))
-			MakeStartItem(SIT_ARMOUR_0,1);
-		else
-			MakeStartItem(SIT_ROBE,1);
+		MakeStartItem(SIT_ARMOUR_0,1);
 		you.Belief(FanaticSelect(),35,false);
 		you.GiveSkillExp(SKT_FIGHT,90,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);

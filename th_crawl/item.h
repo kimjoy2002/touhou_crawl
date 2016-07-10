@@ -49,6 +49,10 @@ struct item_infor
 	item_infor(item* item_);
 	item_infor(item* item_, int num_);
 
+	
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+
 };
 
 

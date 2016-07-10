@@ -2924,7 +2924,7 @@ bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 
 
 
-void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
+void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list_, bool* random_spell)
 {
 	(*random_spell) = false;
 	list->clear();
@@ -3079,6 +3079,8 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		break;
 	case MON_MAGIC_BOOK:
 		{
+			item_infor t;
+			makeCustomBook(&t);
 			(*random_spell) = true;
 			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
 			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE
@@ -3089,15 +3091,25 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 			};
 			//보조스킬
 
-			list->push_back(spell(arr_[randA(9)],25));
+			int add_ = arr_[randA(9)];
+			list->push_back(spell(add_,25));
+			t.value1 = add_;
 			
 			if(randA(10)<4)
 			{
 				if(randA(10)<7)
+				{
 					list->push_back(spell(SPL_BLINK,15));
+					t.value2 = SPL_BLINK;
+				}
 				else
-					list->push_back(spell(arr2_[randA(7)],15));
+				{
+					add_ = arr2_[randA(7)];
+					list->push_back(spell(add_,15));
+					t.value2 = add_;
+				}
 			}
+			item_list_->push_back(t);
 		}
 		break;
 	case MON_HOBGOBRIN_LIBRARIAN:

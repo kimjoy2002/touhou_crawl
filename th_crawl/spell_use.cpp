@@ -2948,7 +2948,7 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_MON_WATER_GUN,90));
 		break;
 	case MON_KYOUKO:
-		list->push_back(spell(SPL_KYOKO_SMITE,50));
+		list->push_back(spell(SPL_KYOKO_SMITE,35));
 		break;
 	case MON_CIRNO:
 		list->push_back(spell(SPL_COLD_BEAM,15));
@@ -3005,10 +3005,10 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_SMITE,20));
 		list->push_back(spell(SPL_SELF_HEAL,10));
 		break;
-	case MON_SIGMUND:
+	case MON_FORTUNE_TELLER:
 		list->push_back(spell(SPL_FLAME,20));
 		list->push_back(spell(SPL_CONFUSE,10));
-		list->push_back(spell(SPL_INVISIBLE,20));
+		list->push_back(spell(SPL_INVISIBLE,7));
 		list->push_back(spell(SPL_MAGIC_TANMAC,20));
 		break;
 	case MON_AYA:
@@ -3327,6 +3327,8 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 	case MON_HOURAI:
 	case MON_FAKE_HOURAI:
 		list->push_back(spell(SPL_LASER,60));
+		break;
+	case MON_TOKIKO:
 		break;
 	default:
 		break;

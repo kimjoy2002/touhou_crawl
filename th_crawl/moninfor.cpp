@@ -239,8 +239,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "최근들어 메아리가 단순히 소리가 반사되는 물리현상이라는 미신이 유행해 허무함을 느껴 불문에 귀의했다.\n";
 		text_ += "소리를 반사시키는 정도의 능력을 가지고 있다.\n";
 		break;
-	case MON_SIGMUND:
-		text_ += "SIGMUND WILL KILL YOU!\n";
+	case MON_FORTUNE_TELLER:
+		text_ += "본래 인간이었다가 스스로 술법을 통해 요괴로 변하였다.\n";
+		text_ += "이번만큼은 퇴치당하지않기위해 힘껏 살아가고있다.\n";
 		break;
 	case MON_WOLF_TENGU:
 		text_ += "요괴의 산에 사는 백랑텐구. 경비를 맡고 있는 텐구다.\n";
@@ -725,6 +726,11 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_FAKE_HOURAI:
 		text_ += "겉보기엔 봉래 인형처럼 보이지만 뭔가 어설프다.\n";
+		break;
+	case MON_TOKIKO:
+		text_ += "굉장히 어려운 책을 들고있는 요괴 소녀다. 토키코라고 불러두자.\n";
+		text_ += "책을 읽는 것을 방해한거에 굉장히 화를 내고 있는 것 같다.\n";
+		text_ += "그녀를 격추시키면 들고 있는 책을 빼앗을 수 있을것 같다.\n";
 		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";

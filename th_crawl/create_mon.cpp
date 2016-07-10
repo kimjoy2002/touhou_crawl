@@ -1007,7 +1007,7 @@ int get_unique_to_id(int m_id)
 	case MON_KOGASA: return 8;
 	case MON_SUNNY:case MON_LUNAR:case MON_STAR: return 9;
 	case MON_KYOUKO: return 10;
-	case MON_SIGMUND: return 11;
+	case MON_FORTUNE_TELLER: return 11;
 	case MON_MOMIZI: return 12;
 	case MON_AYA: return 13;
 	case MON_WAKASAGI: return 14;
@@ -1052,6 +1052,7 @@ int get_unique_to_id(int m_id)
 	case MON_UDONGE:  return 46;
 	case MON_KAGUYA:  return 47;
 	case MON_MOKOU:  return 48;
+	case MON_TOKIKO: return 49;
 	}
 }
 
@@ -1109,7 +1110,7 @@ void create_id_to_unique(int id, int level)
 		index.push_back(MON_KYOUKO);
 		break;
 	case 11:
-		index.push_back(MON_SIGMUND);
+		index.push_back(MON_FORTUNE_TELLER);
 		break;
 	case 12:
 		index.push_back(MON_MOMIZI);
@@ -1243,6 +1244,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 48:
 		index.push_back(MON_MOKOU);
+		break;
+	case 49:
+		index.push_back(MON_TOKIKO);
 		break;
 	}
 
@@ -1710,6 +1714,9 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
+		break;
+	case MON_TOKIKO:
+		mon->poison_resist=-1;
 		break;
 	}
 }

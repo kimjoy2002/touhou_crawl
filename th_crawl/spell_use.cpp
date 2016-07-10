@@ -2964,14 +2964,14 @@ void SetSpell(monster_index id, list<spell> *list, bool* random_spell)
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,60));
 		break;
 	case MON_HUMAM_YINYANG:
-		list->push_back(spell(SPL_FLAME,15));
-		list->push_back(spell(SPL_FROST,15));
+		list->push_back(spell(SPL_FLAME,12));
+		list->push_back(spell(SPL_FROST,12));
 		list->push_back(spell(SPL_CONFUSE,5));
 		list->push_back(spell(SPL_SLOW,5));
 		list->push_back(spell(SPL_BLINK,20));
 		break;
 	case MON_HUMAM_PRIEST:
-		list->push_back(spell(SPL_SMITE,20));
+		list->push_back(spell(SPL_SMITE,15));
 		list->push_back(spell(SPL_SELF_HEAL,10));
 		break;
 	case MON_CROW_TENGU:

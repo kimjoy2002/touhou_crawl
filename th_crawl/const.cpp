@@ -13,7 +13,7 @@
 const char *tribe_type_string[TRI_MAX]=
 {
 	"인간",
-	"마법사",
+	"마녀",
 	"요정",
 	"카라스텐구",
 	"백랑텐구",
@@ -71,11 +71,13 @@ const char *job_type_string[JOB_MAX]=
 	"암살자",
 	"농부",
 	"메이드",
+	"기술자",
 	"실종자"
 };
 
 const bool job_string_back[JOB_MAX]=
 {
+	false,
 	false,
 	false,
 	false,

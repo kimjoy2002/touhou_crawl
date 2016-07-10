@@ -17,6 +17,8 @@
 #include "mon_infor.h"
 #include "tribe.h"
 #include "armour.h"
+#include "evoke.h"
+
 
 
 
@@ -34,6 +36,7 @@ enum start_item_type
 	SIT_SICKLE,
 	SIT_BROOM,
 	SIT_ROBE,
+	SIT_KAPPA_ROBE,
 	SIT_MIKO,
 	SIT_MAID,
 	SIT_ARMOUR_0,
@@ -46,6 +49,7 @@ enum start_item_type
 	SIT_TANMAC,
 	SIT_SPECIAL_TANMAC,
 	SIT_MIGHT_POTION,
+	SIT_RECHARGING_SCROLL,
 	SIT_TEST_POTION,
 	SIT_TEST_RING,
 	SIT_TEST_SCROLL
@@ -221,6 +225,15 @@ void MakeStartItem(start_item_type select_, int num)
 		you.equiparmor('a'+num,false);
 		env[current_level].DeleteItem(it);	
 		break;
+	case SIT_KAPPA_ROBE:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_KAPPA));	
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equiparmor('a'+num,false);
+		env[current_level].DeleteItem(it);	
+		break;
 	case SIT_MIKO:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));	
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
@@ -362,6 +375,12 @@ void MakeStartItem(start_item_type select_, int num)
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);	
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_MIGHT));
+		it->Identify();
+		you.additem(it,false);
+		env[current_level].DeleteItem(it);	
+		break;
+	case SIT_RECHARGING_SCROLL:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_SCROLL, 0, &t, SCT_CHARGING));
 		it->Identify();
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);	
@@ -761,6 +780,29 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(SKT_TANMAC,60,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
 		break;
+	case JOB_ENGINEER:
+		you.max_hp+=2;
+		you.StatUpDown(2,STAT_STR);
+		you.StatUpDown(-3,STAT_INT);
+		you.StatUpDown(1,STAT_DEX);
+		
+		if(name_.compare("니토리"))
+		{			
+			you.GiveSkillExp(WeaponSelect(0),60,false);
+			MakeStartItem(SIT_ROBE,1);
+		}
+		else
+		{
+			MakeStartItem(SIT_MACE,0);
+			you.GiveSkillExp(SKT_MACE,60,false);
+			MakeStartItem(SIT_KAPPA_ROBE,1);			
+		}
+
+		MakeStartItem(SIT_RECHARGING_SCROLL,2);
+		you.GiveSkillExp(SKT_FIGHT,40,false);
+		you.GiveSkillExp(SKT_DODGE,40,false);
+		you.GiveSkillExp(SKT_EVOCATE,60,false);
+		break;
 	case JOB_MISSING:
 		you.max_mp+=1;
 		MakeStartItem(SIT_AXE,0);
@@ -961,6 +1003,25 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		{					
 			you.SetProperty(TPT_9_LIFE,1);
 			you.SetProperty(TPT_18_LIFE,1);
+
+
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
+
+	}
+	else if(name_.compare("니토리")==0)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_MACE].aptit +=2;
+			you.skill[SKT_EVOCATE].aptit +=1;
+		}
+		else
+		{					
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
+			you.additem(it,false);
+			env[current_level].DeleteItem(it);
 
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

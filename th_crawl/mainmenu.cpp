@@ -283,6 +283,13 @@ bool select_named(int value_)
 		you.char_name.name_type = false;
 		you.image = &img_play_mokou[0];
 		break;
+	case 6:
+		you.tribe = TRI_KAPPA;
+		you.job = JOB_ENGINEER;
+		you.char_name.name = "니토리";
+		you.char_name.name_type = false;
+		you.image = &img_named_nitori;
+		break;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() += "\n\n\nKill Them All!\n";
@@ -333,7 +340,7 @@ void start_mainmenu()
 	temp = "캐릭터를 선택합니다. (모든 동방 캐릭터는 레벨3부터 시작합니다)\n\n\n\n";
 	temp += "a - 인간 무녀 레이무             e - 요괴 암살자 코이시\n\n";
 	temp += "b - 인간 마법사 마리사           f - 인간 격투가 모코우\n\n";
-	temp += "c - 인간 무녀 사나에\n\n";
+	temp += "c - 인간 무녀 사나에             g - 캇파 기술자 니토리\n\n";
 	temp += "d - 백랑텐구 전사 모미지\n\n";	
 	temp += "\n\n";	
 	m_mgr.menu_puls(2,temp);
@@ -376,6 +383,13 @@ void start_mainmenu()
 	temp += " 죽지않고 9레벨, 18레벨에 다다르면 부활능력이 1개씩 사라집니다. 그러니 죽는 것에 두려워하지마세요!\n\n\n";	
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(2,'f',2,temp,true,select_named,5);
+	temp = " : 태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!\n";
+	temp += " 적성보너스) 둔기적성 +2  발동적성 +1\n";
+	temp += " 보너스) 천 캇파옷과 보탑을 들고 시작한다.\n\n";
+	temp += " 초보자팁) V를 이용하여 발동템을 사용 가능합니다. 보탑은 일직선 레이저를 발사합니다.\n";
+	temp += " 발동템은 영구템이지만 P의 소모가 격렬하니 남용은 금물입니다. 위험한 적과 싸울때 사용합시다.\n\n\n";	
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(2,'g',2,temp,true,select_named,6);
 	m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 	
@@ -401,7 +415,7 @@ void start_mainmenu()
 	temp = "인간: 평범한 스탯과 평범한 적성. 레벨업이 빠르다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'a',4,temp,true,select_char,0);
-	temp = "마법사: 종족으로서의 마법사. 근접전투에 약하고 마법을 잘 다룬다.\n\n\n";
+	temp = "마녀: 종족으로서의 마법사. 근접전투에 약하고 마법을 잘 다룬다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'b',4,temp,true,select_char,1);
 	temp = "요정: 원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 무거운 갑옷을 입지 못한다.\n";
@@ -552,10 +566,14 @@ void start_mainmenu()
 	temp += "빗자루와 4개의 투척용 나이프와 메이드의 복, 그리고 메이드의 기본소양을 들고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'t',5,temp,true,select_job,19);
-	temp = "실종자: 우연히 환상향에 흘러들어가버린 우리들이다?\n";
-	temp += "미구현. 하지마세요.\n\n\n";
+	temp = "기술자: 도구를 잘 다루는 만능 기술자.\n";
+	temp += "선택한 무기와 약한 스펠카드와(미구현) 스펠카드 충전의 두루마리를 들고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'u',5,temp,true,select_job,20);
+	temp = "실종자: 우연히 환상향에 흘러들어가버린 우리들이다?\n";
+	temp += "미구현.\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(4,'v',5,temp,true,select_job,21);
 	m_mgr.menu_input_puls(4,VK_ESCAPE,3,"",false,NULL,0);
 
 

@@ -450,9 +450,9 @@ void SetJob(job_type select_, string name_)
 			MakeStartItem(SIT_SMALL_SHIELD,2);
 
 		}
-		you.GiveSkillExp(SKT_FIGHT,50,false);
-		you.GiveSkillExp(SKT_ARMOUR,60,false);
-		you.GiveSkillExp(SKT_SHIELD,30,false);
+		you.GiveSkillExp(SKT_FIGHT,30,false);
+		you.GiveSkillExp(SKT_ARMOUR,70,false);
+		you.GiveSkillExp(SKT_SHIELD,60,false);
 		break;
 	case JOB_WIZARD:
 		you.max_hp-=2;

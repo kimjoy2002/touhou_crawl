@@ -134,6 +134,7 @@ extern textures img_mons_sanghai[];
 extern textures img_mons_hourai[];
 extern textures img_mons_nesi;
 extern textures img_mons_youmu_yukkuri;
+extern textures img_mons_tokiko;
 
 
 
@@ -326,6 +327,7 @@ extern textures img_fog_slow[];
 extern textures img_blizzard[];
 extern textures img_fog_tonado[];
 extern textures img_blast[];
+extern textures img_fog_thunder[];
 
 
 

@@ -4190,7 +4190,7 @@ void players::burstCloud(int kind_, int rate_)
 		break;
 	case 2:
 		smoke_ = SMT_ELEC;
-		t_ = img_thunder;
+		t_ = img_fog_thunder;
 		break;
 	default:
 		return;

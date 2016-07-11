@@ -332,6 +332,7 @@ textures img_mons_hourai[] =
 };
 
 textures img_mons_youmu_yukkuri(&texture_monster01, 183, 255);
+textures img_mons_tokiko(&texture_monster01, 184, 255);
 
 
 
@@ -685,6 +686,11 @@ textures img_blast[] = {textures(&texture_laser, 100, 255),
 								textures(&texture_laser, 103, 255),
 								textures(&texture_laser, 104, 255),
 								textures(&texture_laser, 105, 255)};
+
+textures img_fog_thunder[] = {textures(&texture_item01, 232, 255),
+							    textures(&texture_item01, 234, 255),
+								textures(&texture_item01, 235, 255),
+								textures(&texture_item01, 236, 255)};
 
 
 textures img_laser[] = {textures(&texture_laser, 0, 255),
@@ -1578,6 +1584,10 @@ int texturetoint(textures* input)
 		return 295;
 	else if(input == &img_thunder[0])
 		return 296;
+	else if(input == &img_mons_tokiko)
+		return 297;
+	else if(input == &img_fog_thunder[0])
+		return 298;
 	else
 		return 0;
 }
@@ -2179,6 +2189,10 @@ textures* inttotexture(int input)
 		return &img_blast[0];
 	case 296:
 		return &img_thunder[0];
+	case 297:
+		return &img_mons_tokiko;
+	case 298:
+		return &img_fog_thunder[0];
 	default:
 		return &img_mons_default;
 	}

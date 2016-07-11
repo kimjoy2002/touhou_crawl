@@ -756,6 +756,7 @@ enum spellcard_evoke_type
 	SPC_V_EARTH,
 	SPC_V_AIR,
 	SPC_V_INVISIBLE,
+	SPC_V_PARALYSE,
 	SPC_V_MAX
 };
 

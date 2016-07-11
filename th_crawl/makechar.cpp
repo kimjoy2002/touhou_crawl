@@ -380,10 +380,11 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_RECHARGING_SCROLL:
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_SCROLL, 0, &t, SCT_CHARGING));
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, SPC_V_ICE));
+		it->value1 = 9;
 		it->Identify();
 		you.additem(it,false);
-		env[current_level].DeleteItem(it);	
+		env[current_level].DeleteItem(it);		
 		break;
 	case SIT_TEST_POTION:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_ALCOHOL));

@@ -567,7 +567,7 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'t',5,temp,true,select_job,19);
 	temp = "기술자: 도구를 잘 다루는 만능 기술자.\n";
-	temp += "선택한 무기와 약한 스펠카드와(미구현) 스펠카드 충전의 두루마리를 들고 시작한다.\n\n\n";
+	temp += "선택한 무기와 냉기 스펠카드를 들고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'u',5,temp,true,select_job,20);
 	temp = "실종자: 우연히 환상향에 흘러들어가버린 우리들이다?\n";

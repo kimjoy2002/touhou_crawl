@@ -15,6 +15,7 @@
 #include "mon_infor.h"
 #include "floor.h"
 #include "debuf.h"
+#include "spellcard.h"
 
 
 
@@ -23,7 +24,7 @@
 void throwstring(list<item>::iterator it, projectile_infor* infor_)
 {
 	deletelog();
-	if(infor_->spell == -2)
+	if(infor_->spell == -2 || infor_->spell == -3)
 	{
 		printlog("목표를 정하세요.",true,false,true,CL_help);
 		//printlog(it!=you.item_list.end()?it->GetName():"발사물이 없습니다.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
@@ -54,19 +55,25 @@ bool refreshPath(const coord_def &c, beam_iterator& beam, list<item>::iterator i
 	throwstring(it, infor_);
 	if(infor_->smite)
 		paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
-	if(infor_->skill == false && SpellFlagCheck((spell_list)infor_->spell, S_FLAG_DEBUF))
+	if(infor_->spell == -2 && SpellcardFlagCheck((spellcard_evoke_type)infor_->spell, S_FLAG_DEBUF))
 	{		
 		spell_list sp_ = (spell_list)infor_->spell;
 		int power_=min(SpellCap(sp_),you.GetSpellPower(SpellSchool(sp_,0),SpellSchool(sp_,1),SpellSchool(sp_,2)));
 		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
 	}
-	else if(infor_->skill == true && SkillFlagCheck((skill_list)infor_->spell, S_FLAG_DEBUF))
+	else if(infor_->spell > -2 && infor_->skill == false && SpellFlagCheck((spell_list)infor_->spell, S_FLAG_DEBUF))
+	{		
+		spell_list sp_ = (spell_list)infor_->spell;
+		int power_=min(SpellCap(sp_),you.GetSpellPower(SpellSchool(sp_,0),SpellSchool(sp_,1),SpellSchool(sp_,2)));
+		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
+	}
+	else if(infor_->spell > -2 && infor_->skill == true && SkillFlagCheck((skill_list)infor_->spell, S_FLAG_DEBUF))
 	{
 		skill_list sp_ = (skill_list)infor_->spell;
 		int power_=min(SkillCap(sp_),SkillPow(sp_));
 		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
 	}
-	else if(infor_->skill == true && infor_->spell == SKL_SATORI_2)
+	else if(infor_->spell > -2 && infor_->skill == true && infor_->spell == SKL_SATORI_2)
 	{
 		Search_Move(c, false, VT_SATORI);
 		

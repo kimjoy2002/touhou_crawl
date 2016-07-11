@@ -11,8 +11,9 @@
 #include "projectile.h"
 #include "environment.h"
 #include "throw.h"
-#include "throw.h"
+#include "debuf.h"
 
+int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
 
 bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag);
@@ -180,11 +181,11 @@ int SpellcardMaxCharge(spellcard_evoke_type skill)
 	switch(skill)
 	{
 	case SPC_V_FIRE:
-		return 9;
+		return 18;
 	case SPC_V_ICE:
-		return 9;
+		return 18;
 	case SPC_V_EARTH:
-		return 9;
+		return 18;
 	case SPC_V_AIR:
 		return 9;
 	case SPC_V_INVISIBLE:

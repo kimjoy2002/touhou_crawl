@@ -13,6 +13,7 @@
 #include "player.h"
 
 struct item_infor;
+enum skill_flag;
 
 //
 //bool declare_spellcard(spellcard_declare_type kind, int power);
@@ -27,5 +28,7 @@ int SpellcardMaxCharge(spellcard_evoke_type skill);
 
 bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* order, name_infor bomb_name, coord_def target);
 bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int count);
+
+bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag);
 
 #endif // __SPELLCARD_H__

@@ -686,7 +686,7 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,30),false);
 		you.GiveSkillExp(SKT_ALCHEMY,30,false);
-		you.Memorize(SPL_STING,true);		
+		you.Memorize(SPL_STONE_PUNCH,true);		
 		break;
 	case JOB_PSYCHOLOGIST:
 		you.max_hp-=1;

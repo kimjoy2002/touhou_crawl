@@ -538,8 +538,8 @@ void start_mainmenu()
 	temp += "전이의 마법책과 몇개의 탄막을 들고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'m',5,temp,true,select_job,12);
-	temp = "연금술사: 독과 연금술을 사용하는 마법사 겸 연금술사.\n";
-	temp += "초보 연금술사의 책을 들고 독침을 배우고 시작한다.\n\n\n";
+	temp = "연금술사: 연금술을 사용하여 근접전투를 하는 마법사 겸 연금술사.\n";
+	temp += "초보 연금술사의 책을 들고 돌주먹을 배우고 시작한다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'n',5,temp,true,select_job,13);
 	temp = "심리학자: 상대를 조종하는 심리마법을 배우는 디버프에 능한 마법사.\n";

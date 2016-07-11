@@ -68,7 +68,7 @@ s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_conf
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
- s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0),
+ s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
  alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -228,7 +228,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_stat_boost_value);
 	SaveData<int>(fp, s_eirin_poison);
 	SaveData<int>(fp, s_eirin_poison_time);
-
+	SaveData<int>(fp, s_exhausted);
+	SaveData<int>(fp, s_stasis);
 	
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -435,6 +436,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_stat_boost_value);
 	LoadData<int>(fp, s_eirin_poison);
 	LoadData<int>(fp, s_eirin_poison_time);
+	LoadData<int>(fp, s_exhausted);
+	LoadData<int>(fp, s_stasis);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -2338,6 +2341,27 @@ bool players::SetEirinHeal(int value_)
 	return true;
 
 }
+bool players::SetExhausted(int s_exhausted_)
+{
+	s_exhausted = s_exhausted_;
+	return true;
+}
+
+bool players::SetStasis(int s_stasis_)
+{
+	if(!s_stasis_)
+		return false;
+	if(!s_drunken)
+		printlog("당신은 전이를 방해받았다.",false,false,false,CL_small_danger);
+	else
+	{
+		printlog("당신의 전이 방해는 더욱 길어졌다.",false,false,false,CL_small_danger);
+	}
+	s_stasis += s_stasis_;
+	if(s_stasis>100)
+		s_stasis = 100;
+	return true;
+}
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -2423,6 +2447,51 @@ bool players::control_blink(const coord_def &c)
 		return true;
 	}
 	return false;
+}
+bool players::Tele_check(bool preiden_, bool ctele_)
+{
+	//이 함수는 의도적으로 전이를 하려할때 경고메시지 혹은 취소 시키는 용도로 쓴다.
+	//true는 이 전이를 허용한것, false는 비 허용
+	
+			
+	
+	if(s_stasis)
+	{
+		printlog("당신은 전이방해도중에 전이를 사용할 수 없다.",true,false,false,CL_normal);
+		return false;
+	}
+
+	if(you.god == GT_YUKARI)
+	{
+		if(!preiden_)
+		{				
+			printlog("유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.",true,false,false,CL_small_danger);
+		}		
+		else
+		{
+			changedisplay(DT_GAME);
+			printlog("유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+			switch(waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				enterlog();
+				if(you.god == GT_YUKARI)
+				{
+					printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
+					you.PietyUpDown(-5);
+				}
+				break;
+			case 'N':
+			default:
+				printlog(" 취소하였다.",true,false,false,CL_normal);
+				return false;
+			}
+		}
+	}
+
+
+	return true;
 }
 void players::LevelUp(bool speak_)
 {

@@ -548,9 +548,20 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		//s_eirin_poison;
 	}
-
-
-
+	
+	if(s_exhausted)
+	{
+		s_exhausted--;
+	}	
+	if(s_stasis)
+	{
+		s_stasis--;
+		if(!s_stasis)
+		{
+			printlog("전이 방해가 풀렸다.",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
 
 
 

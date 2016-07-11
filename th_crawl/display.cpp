@@ -948,6 +948,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"스탯패널티", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
 				rc.left += fontDesc.Width*11;
 			}
+			if(you.s_exhausted)
+			{
+				pfont->DrawTextA(pSprite,"피로", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+				rc.left += fontDesc.Width*5;
+			}
 			if(you.s_trans_panalty)
 			{
 				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=2?CL_bad:(you.s_trans_panalty<5?CL_warning:CL_small_danger));
@@ -1027,6 +1032,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				sprintf_s(temp,128,"부작용(%d)",you.s_eirin_poison);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 				rc.left += fontDesc.Width*(1+strlen(temp));
+			}
+			if(you.s_stasis)
+			{				
+				D3DCOLOR color_ = CL_danger;
+				sprintf_s(temp,128,"전이불가");
+				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+				rc.left += fontDesc.Width*9;
 			}
 
 

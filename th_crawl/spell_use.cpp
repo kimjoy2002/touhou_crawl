@@ -613,28 +613,10 @@ bool skill_self_heal(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_blink(int pow, bool short_, unit* order, coord_def target)
 {
-	if(you.god == GT_YUKARI && order->isplayer())
-	{
-						
-		printlog("유카리는 위험한 전이마법을 금지하고있다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-			enterlog();
-			break;
-		case 'N':
-		default:
-			printlog(" 취소하였다.",true,false,false,CL_normal);
-			return false;
-		}
-	}
+	if(!order->Tele_check(true, false))
+		return false;
 	order->Blink(25);
-	if(you.god == GT_YUKARI && order->isplayer())
-	{
-		printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
-		you.PietyUpDown(-5);
-	}
+
 	return true;
 }
 bool skill_cure_poison(int pow, bool short_, unit* order, coord_def target)
@@ -2454,32 +2436,12 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 {
 	if(!order->isplayer())
 		return false;
-	if(you.god == GT_YUKARI)
-	{
-						
-		printlog("유카리는 위험한 전이마법을 금지하고있다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-			enterlog();
-			break;
-		case 'N':
-		default:
-			printlog(" 취소하였다.",true,false,false,CL_normal);
-			return false;
-		}
-	}
+	if(!order->Tele_check(true, true))
+		return false;
 
 	if(you.control_blink(you.search_pos))
 	{
 		you.SetTransPanalty(rand_int(1,2));
-
-		if(you.god == GT_YUKARI)
-		{
-			printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
-			you.PietyUpDown(-5);
-		}
 		return true;
 	}
 	return false;
@@ -2856,6 +2818,19 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 
 bool skill_stasis(int power, bool short_, unit* order, coord_def target)
 {
+	if(unit* hit_mon = DebufBeam(SPL_STASIS, order, target))
+	{
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_STASIS,power)))
+		{
+			hit_mon->SetStasis(rand_int(10,40));
+		}
+		else if(hit_mon->isYourShight())
+		{					
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		}
+		hit_mon->AttackedTarget(order);
+		return true;
+	}
 	return false;
 }
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
@@ -3134,7 +3109,8 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 	case MON_SAKUYA:		
 		list->push_back(spell(SPL_HASTE,20));
 		list->push_back(spell(SPL_SLOW,10));
-		list->push_back(spell(SPL_TELEPORT_OTHER,5));
+		list->push_back(spell(SPL_STASIS,15));
+		list->push_back(spell(SPL_TELEPORT_SELF,10));
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,25));
 		list->push_back(spell(SPL_BLINK,20));
 		break;
@@ -3567,6 +3543,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_FIRE_SPREAD:
 		return skill_fire_spread(power,short_,order,target);			
 	case SPL_STASIS:
+		return skill_stasis(power,short_,order,target);	
 	case SPL_JUMP_ATTACK:
 		return skill_jump_attack(power,short_,order,target);
 	case SPL_ALERT_NOISE: 
@@ -3588,6 +3565,11 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	if(!you.isSightnonblocked(target))
 	{
 		printlog("여긴 막혀있다.",true,false,false,CL_normal);	
+		return false;
+	}
+	if(SpellFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
+	{
+		printlog("이 마법을 쓰기엔 피로가 쌓였다.",true,false,false,CL_normal);	
 		return false;
 	}
 	if(randA_1(100) > you.GetSpellSuccess(skill))
@@ -3814,7 +3796,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_FIRE_SPREAD:
 		return skill_fire_spread(power,short_,&you,target);	
 	case SPL_STASIS:
-		return false;
+		return skill_stasis(power,short_,&you,target);	
 	case SPL_JUMP_ATTACK:
 		return skill_jump_attack(power,short_,&you,target);
 	case SPL_ALERT_NOISE: 

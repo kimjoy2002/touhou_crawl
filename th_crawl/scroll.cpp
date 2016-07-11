@@ -144,18 +144,10 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 	case SCT_TELEPORT:		
 		{
 		iden_list.scroll_list[kind].iden = 3;
-		if(you.god == GT_YUKARI)
-		{
-			if(!pre_iden_)
-			{				
-				printlog("유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.",true,false,false,CL_small_danger);
-			}
-			else
-			{
-				printlog("유카리는 당신의 위험한 전이도구 사용에 분노했다!",true,false,false,CL_small_danger);
-				you.PietyUpDown(-5);
-			}
-		}
+		ReleaseMutex(mutx);
+		if(!you.Tele_check(pre_iden_, false))
+			return false;
+		WaitForSingleObject(mutx, INFINITE);
 		bool return_ = you.SetTele(rand_int(3,6));
 		return return_;
 		}
@@ -501,17 +493,15 @@ bool blink_scroll(bool pre_iden_)
 			break;
 		case VK_RETURN:
 			if(is_move)
-			{
+			{				
+				if(!you.Tele_check(pre_iden_, true))
+				{
+					deletelog();
+					you.search = false;
+					return false;
+				}
 				if(you.control_blink(you.search_pos))
 				{
-					
-					if(you.god == GT_YUKARI)
-					{
-						printlog("유카리는 당신의 위험한 전이도구 사용에 분노했다!",true,false,false,CL_small_danger);
-						you.PietyUpDown(-5);
-					}
-
-
 					you.search = false;
 					deletelog();
 					return true;

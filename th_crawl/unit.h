@@ -123,6 +123,7 @@ public:
 	virtual bool SetParadox(int s_paradox_){return false;};
 	virtual bool SetCommunication(int s_communication_){return false;};
 	virtual bool SetExhausted(int s_exhausted_){return false;};
+	virtual bool SetStasis(int s_stasis_){return false;};
 	bool PositionSwap(unit *other){
 		coord_def temp_ = position;
 		SetXY(other->position);
@@ -165,6 +166,7 @@ public:
 	virtual float GetElecResist(bool cloud_ = false)=0;
 	virtual bool GetCloudResist(){return false;};
 	virtual bool Blink(int time_)=0;
+	virtual bool Tele_check(bool preiden_, bool ctele_){return true;};
 	virtual attack_weapon_type GetAttackType()=0;
 	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = false)=0;
 	virtual bool isEnemyUnit(unit* unit_info){return unit_info->isUserAlly();};

@@ -206,6 +206,8 @@ public:
 	int s_stat_boost_value;
 	int s_eirin_poison;
 	int s_eirin_poison_time;
+	int s_exhausted;
+	int s_stasis;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -384,6 +386,8 @@ public:
 	bool SetProperty(tribe_proper_type type_, int value_);
 	bool SetStatBoost(int sdi_, int value_);
 	bool SetEirinHeal(int value_);
+	bool SetExhausted(int s_exhausted_);
+	bool SetStasis(int s_stasis_);
 
 	
 	int GetInvisible();
@@ -392,10 +396,12 @@ public:
 	int GetResist();
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
+	int GetExhausted(){return s_exhausted;};
 	int DeleteProperty(tribe_proper_type type_);
 	bool Teleport();
 	bool Blink(int time_);
 	bool control_blink(const coord_def &c);
+	bool Tele_check(bool preiden_, bool ctele_);
 	void LevelUp(bool speak_);
 	const name_infor* GetName(){return &name;};
 	const string* GetNameString(){return &(name.name);};

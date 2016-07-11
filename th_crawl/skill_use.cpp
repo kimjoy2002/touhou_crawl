@@ -1862,6 +1862,10 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 			throwtanmac(graphic_,beam,temp_infor,NULL);
 		order->SetParadox(0); 
+		if(order)
+		{
+			order->SetExhausted(rand_int(3,10));
+		}
 		return true;
 	}
 	return false;
@@ -1897,6 +1901,11 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		return 0;		
 	}
 	
+	if(SkillFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
+	{
+		printlog("이 기술을 쓰기엔 피로가 쌓였다.",true,false,false,CL_normal);	
+		return false;
+	}
 	if(randA_1(100) > SkillDiffer(skill))
 	{
 		printlog("당신은 스킬 사용에 실패했다.",true,false,false,CL_normal);

@@ -625,7 +625,6 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp에서 itemtosk
 	//SKT_BACKSTAB,
 	//SKT_TRAP,
 	SKT_SPELLCASTING,
-	//SKT_ENCHARM,
 	SKT_FIRE,
 	SKT_COLD,
 	SKT_EARTH,
@@ -635,9 +634,6 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp에서 itemtosk
 	SKT_MENTAL,
 	SKT_SUMMON,
 	SKT_TRANS,
-	//SKT_WATER,
-	//SKT_POISON,
-	//SKT_ELEC,
 	SKT_EVOCATE,
 	SKT_MAX
 };

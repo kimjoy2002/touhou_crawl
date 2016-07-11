@@ -3341,6 +3341,15 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 		list->push_back(spell(SPL_LASER,60));
 		break;
 	case MON_TOKIKO:
+		{
+			int arr_[] = {BOOK_TEST_ANNIHILATE,BOOK_DEBUF,BOOK_MAID_ULTI,BOOK_ICE_ULTI,BOOK_SUMMON_ULTI};
+			//보조스킬
+			int add_ = arr_[randA(4)];
+
+			item_infor t;
+			makeitem(ITM_BOOK,0,&t,add_);
+			item_list_->push_back(t);
+		}
 		break;
 	default:
 		break;

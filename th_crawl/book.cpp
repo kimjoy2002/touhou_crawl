@@ -53,7 +53,6 @@ string random_book_list[RANDOM_BOOK_NUM]=
 };
 
 
-
 book_list SchoolToBook(skill_type skill_)
 {
 	switch(skill_)
@@ -65,8 +64,8 @@ book_list SchoolToBook(skill_type skill_)
 		}
 	case SKT_MENTAL:
 		{
-			book_list list_[3] = {BOOK_STALKING,BOOK_HEX,BOOK_PSYCHOLOGIST_BASE};
-			return list_[randA(2)];
+			book_list list_[4] = {BOOK_STALKING,BOOK_HEX,BOOK_PSYCHOLOGIST_BASE,BOOK_DEBUF};
+			return list_[randA(3)];
 		}
 	case SKT_CONJURE:
 		{
@@ -80,8 +79,8 @@ book_list SchoolToBook(skill_type skill_)
 		}
 	case SKT_COLD:
 		{
-			book_list list_[1] = {BOOK_COLD_BASE};
-			return list_[randA(0)];
+			book_list list_[2] = {BOOK_COLD_BASE,BOOK_ICE_ULTI};
+			return list_[randA(1)];
 		}
 	case SKT_EARTH:
 		{
@@ -95,26 +94,14 @@ book_list SchoolToBook(skill_type skill_)
 		}
 	case SKT_SUMMON:
 		{
-			book_list list_[1] = {BOOK_SUMMON_BASE};
-			return list_[randA(0)];
+			book_list list_[2] = {BOOK_SUMMON_BASE,BOOK_SUMMON_ULTI};
+			return list_[randA(1)];
 		}
-	//case SKT_POISON:
-	//	{
-	//		book_list list_[2] = {BOOK_POISON_BASE,BOOK_CLOUD};
-	//		return list_[randA(1)];
-	//	}
-	//case SKT_ELEC:
-	//	{
-	//		book_list list_[1] = {BOOK_SHOCK};
-	//		return list_[randA(0)];
-	//	}
 	case SKT_TRANS:
 		{
-			book_list list_[1] = {BOOK_TRANSITION};
-			return list_[randA(0)];
+			book_list list_[2] = {BOOK_TRANSITION,BOOK_MAID_ULTI};
+			return list_[randA(1)];
 		}
-	//case SKT_ALCHEMY:
-	//case SKT_WATER:
 	default:
 		{
 			return (book_list)randA(BOOK_LAST-1);

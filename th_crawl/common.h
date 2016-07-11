@@ -290,10 +290,6 @@ public:
 
 
 
-
-
-
-
 int distan_coord(const coord_def& a, const coord_def& b);
 
 

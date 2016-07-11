@@ -34,9 +34,9 @@ const char *potion_uniden_string[PT_MAX]=
 const char *potion_iden_string[PT_MAX]=
 {
 	"그냥 ",
-	"치료 ",
+	"치유 ",
 	"독 ",
-	"상처치료 ",
+	"체력회복 ",
 	"힘 ",
 	"가속 ",
 	"혼란 ",

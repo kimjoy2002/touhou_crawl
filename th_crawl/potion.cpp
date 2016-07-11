@@ -116,7 +116,7 @@ void drinkpotion(potion_type kind)
 		//you.HungerApply(50);
 		return;
 	case PT_HEAL:
-		printlog("치료가 되는 것을 느꼈다.",false,false,false,CL_normal);
+		printlog("치유가 되는 것을 느꼈다.",false,false,false,CL_normal);
 		you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
 		//you.HungerApply(50);
 		you.s_confuse = 0;
@@ -144,7 +144,7 @@ void drinkpotion(potion_type kind)
 			return;	
 		}
 	case PT_HEAL_WOUND:
-		printlog("상처가 치료가 되는 것을 느꼈다.",false,false,false,CL_normal);
+		printlog("체력이 회복되는 되는 것을 느꼈다.",false,false,false,CL_normal);
 		you.HpUpDown(15+bonus*5+randA_1(30+bonus*15),DR_POTION);
 		//you.HungerApply(50);
 		return;

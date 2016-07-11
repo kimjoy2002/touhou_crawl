@@ -2255,6 +2255,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 		}
 		Sleep(300);
 		env[current_level].ClearEffect();
+		env[current_level].MakeNoise(target,16,NULL);	
 		return true;
 	}
 	return false;
@@ -2970,7 +2971,8 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 		Sleep(300);
-		env[current_level].ClearEffect();		
+		env[current_level].ClearEffect();	
+		env[current_level].MakeNoise(target,12,NULL);		
 		BaseSummon(MON_NAMAZ, rand_int(20,40)+power/5, false, false, 2, order, target, SKD_SUMMON_NAMAZ, GetSummonMaxNumber(SPL_SUMMON_NAMAZ));
 		return true;
 	}

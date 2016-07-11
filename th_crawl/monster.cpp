@@ -38,7 +38,7 @@ ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRA
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), time_delay(0), 
+	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
 {	
@@ -107,6 +107,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, ice_resist);
 	SaveData<int>(fp, elec_resist);
 	SaveData<int>(fp, confuse_resist);
+	SaveData<int>(fp, wind_resist);
 	SaveData<int>(fp, time_delay);
 	SaveData<int>(fp, speed);
 	SaveData<int>(fp, memory_time);
@@ -204,6 +205,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, ice_resist);
 	LoadData<int>(fp, elec_resist);
 	LoadData<int>(fp, confuse_resist);
+	LoadData<int>(fp, wind_resist);
 	LoadData<int>(fp, time_delay);
 	LoadData<int>(fp, speed);
 	LoadData<int>(fp, memory_time);
@@ -299,6 +301,7 @@ void monster::init()
 	ice_resist = 0;
 	elec_resist = 0;
 	confuse_resist = 0;
+	wind_resist = 0;
 	time_delay = 0;
 	speed = 0; 
 	memory_time = 0; 
@@ -806,6 +809,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_AUTUMN:
 	case ATT_CHOAS:
 	case ATT_CLOUD_NORMAL:
+	case ATT_CLOUD_CURSE:
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:
@@ -899,7 +903,9 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		damage_ = damage_/2.0f + damage_*GetColdResist()/2.0f;
 		break;
 	case ATT_CLOUD_NORMAL:
-		damage_ *= GetCloudResist()?0.5f:1.0f;
+		damage_ *= GetCloudResist()?0.0f:1.0f;
+		break;
+	case ATT_CLOUD_CURSE:
 		break;
 	}
 	return damage_;
@@ -994,6 +1000,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Æø¹ßÇß´Ù.");
 			break;
 		case ATT_CLOUD_NORMAL:
+		case ATT_CLOUD_CURSE:
 			break;
 		case ATT_VEILING:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷ °©¿Ê¿¡ º£¿´´Ù.");
@@ -1085,6 +1092,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
 	case ATT_CLOUD_NORMAL:
+	case ATT_CLOUD_CURSE:
 	case ATT_ELEC:
 	case ATT_VEILING:
 	case ATT_RUSH:
@@ -3338,6 +3346,10 @@ float monster::GetElecResist(bool cloud_)
 		return 0;
 	else
 		return 1;
+}
+bool monster::GetCloudResist()
+{
+	return wind_resist;
 }
 
 monster_state_simple monster::GetSimpleState()

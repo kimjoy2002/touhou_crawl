@@ -719,5 +719,5 @@ const mon_infor mondata[] = {
 	
 	{MON_TOKIKO,11,1205,name_infor("책읽는 요괴",false),&img_mons_default,92,1,15,
 	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,8},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 };

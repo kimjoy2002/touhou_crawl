@@ -781,6 +781,11 @@ string GetMonsterInfor(monster *it)
 		if(it->confuse_resist>0)
 			text_ += "혼란과 광기에 대해 면역이 있다.\n";
 	}
+	if(it->wind_resist)
+	{
+		if(it->wind_resist>0)
+			text_ += "회오리 바람에 면역이 있다.\n";
+	}
 	if(it->speed != 10)
 	{
 		if(it->speed<=5)

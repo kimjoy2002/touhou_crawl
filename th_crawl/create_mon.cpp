@@ -314,37 +314,40 @@ mon_group normal_group[] = //일반몹 그룹
 mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 {
 	{  0,  1,  3,  35,  1}, //루미아
-	{  1,  2,  4,  35,  1}, //리글
-	{  2,  4,  6,  35,  2}, //미스티아
-	{  3,  7,  10,  35,  3}, //치르노
-	{  4,  8,  12,  20,  3}, //메디슨
-	{  5,  5,  8,  35,  2}, //대요정
 	{  6,  1,  3,  35,  1}, //키스메
-	{  7,  6,  9,  35,  3}, //첸
-	{  44,  6,  9,  30,  3}, //세이란
-	{  8,  3,  5,  35,  2}, //코가사
+	{  11,  1,  6,  5,  2}, //지그문트
+	{  1,  2,  4,  35,  1}, //리글
 	{  9,  2,  4,  35,  2}, //삼월정
 	{  10, 2,  4,  30,  2}, //쿄코
-	{  11,  1,  6,  5,  2}, //지그문트
+	{  8,  3,  5,  35,  2}, //코가사
+	{  2,  4,  6,  35,  2}, //미스티아
+	{  5,  5,  8,  35,  2}, //대요정
+	{  7,  6,  9,  35,  3}, //첸
+	{  44,  6,  9,  30,  3}, //세이란
+	{  3,  7,  10,  35,  3}, //치르노
+	{  16,  7,  11,  15,  3}, //나즈린
+	{  4,  8,  12,  20,  3}, //메디슨
 	
 	{  15,  9,  14,  15,  3}, //야마메
-	{  16,  7,  11,  15,  3}, //나즈린
 	{  17,  9,  14,  15,  3}, //요시카
 	{  18,  9,  14,  15,  3}, //세키반키
 	{  20,  9,  14,  15,  3}, //카게로
 	{  21,  9,  14,  10,  3}, //파르시
 	{  22,  9,  14,  20,  3}, //츠쿠모
 	{  31,  9,  14,  25,  3}, //코이시
+	{  49,  9,  14,  15,  3}, //책읽는요괴(토키코)
 	{  35,  11,  14,  15,  3}, //클라운피스
 	{  37,  11,  14,  15,  3}, //레티
 
 	//안개호수
-	{  3, MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  40,  3}, //치르노
-	{  5, MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  40,  2}, //대요정
 	{  9, MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  40,  2}, //삼월정
 	{  14,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  40,  2}, //빙어
-	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
+	{  5, MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  40,  2}, //대요정
+	{  3, MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  40,  3}, //치르노
 	{  21,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  10,  3}, //파르시
+	{  18,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
+	{  49,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //책읽는요괴(토키코)
+	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 	
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
@@ -1307,6 +1310,7 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_MISTIA:
 		mon->poison_resist=-1;
+		mon->wind_resist=1;
 		break;
 	case MON_MEDICINE:
 		mon->ice_resist=1;
@@ -1333,6 +1337,9 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
+	case MON_CROW_TENGU:
+		mon->wind_resist=1;
+		break;
 	case MON_ONI:
 		mon->fire_resist=1;
 		break;
@@ -1342,14 +1349,21 @@ void SetResistMonster(monster* mon)
 	case MON_KATPA_WATER_WIZARD:
 		mon->ice_resist=1;
 		break;
+	case MON_YAMABUSH_TENGU:
+		mon->wind_resist=1;
+		break;
 	case MON_HANATACA_TENGU:
 		mon->poison_resist=1;
+		mon->wind_resist=1;
 		break;
 	case MON_BLUE_ONI:
 		mon->ice_resist=1;
 		break;
 	case MON_MUSHROOM:
 		mon->poison_resist=1;
+		break;
+	case MON_AYA:
+		mon->wind_resist=1;
 		break;
 	case MON_WAKASAGI:
 		mon->ice_resist=1;
@@ -1716,6 +1730,7 @@ void SetResistMonster(monster* mon)
 		mon->confuse_resist=1;
 		break;
 	case MON_TOKIKO:
+		mon->wind_resist=1;
 		mon->poison_resist=-1;
 		break;
 	}

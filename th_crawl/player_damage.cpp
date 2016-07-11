@@ -389,6 +389,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
 	case ATT_CLOUD_NORMAL:
+	case ATT_CLOUD_CURSE:
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:
@@ -505,6 +506,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		damage_ = damage_/2.0f + damage_*GetColdResist()/2.0f;
 		break;
 	case ATT_CLOUD_NORMAL:
+	case ATT_CLOUD_CURSE:
 		damage_ *= GetCloudResist()?0.5f:1.0f;
 		break;
 	}
@@ -615,6 +617,9 @@ void players::print_damage_message(attack_infor &a)
 	case ATT_CLOUD_NORMAL:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷¿¡ ÈÛ¾µ·È´Ù.");
 		break;
+	case ATT_CLOUD_CURSE:
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ÀúÁÖ¹Þ°íÀÖ´Ù.");
+		break;
 	case ATT_VEILING:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷ °©¿Ê¿¡ º£¿´´Ù.");
 		break;		
@@ -650,6 +655,7 @@ void players::print_no_damage_message(attack_infor &a)
 		case ATT_CLOUD_COLD:
 		case ATT_CLOUD_ELEC:
 		case ATT_CLOUD_NORMAL:
+		case ATT_CLOUD_CURSE:
 		case ATT_ELEC:
 		case ATT_VEILING:
 		case ATT_RUSH:

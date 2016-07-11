@@ -246,6 +246,16 @@ bool Dump(int type)
 								strncat(death_reason,"에 의해 ",64);
 							strncat(death_reason,"감전되어죽었다.",64);
 							break;
+						case ATT_CLOUD_NORMAL:
+							if(you.dead_order->order)
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"바람에 휩쓸려 죽었다.",64);
+							break;
+						case ATT_CLOUD_CURSE:
+							if(you.dead_order->order)
+								strncat(death_reason,"에 의해 ",64);
+							strncat(death_reason,"저주받아 죽었다.",64);
+							break;
 						case ATT_BURST:
 							if(you.dead_order->order)
 								strncat(death_reason,"에 의해 ",64);

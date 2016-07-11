@@ -89,6 +89,7 @@ public:
 	int ice_resist;
 	int elec_resist;
 	int confuse_resist;
+	int wind_resist;
 
 
 	int time_delay; //누적되어있는시간
@@ -236,6 +237,7 @@ public:
 	float GetFireResist(bool cloud_ = false);
 	float GetColdResist(bool cloud_ = false);
 	float GetElecResist(bool cloud_ = false);
+	bool GetCloudResist();
 	monster_state_simple GetSimpleState();
 	bool GetStateString(monster_state_simple state_, char* string_);
 	bool isplayer(){return false;};

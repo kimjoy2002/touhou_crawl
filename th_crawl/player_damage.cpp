@@ -229,8 +229,8 @@ int players::ReSetASPanlty()
 	{ //아머의 패널티
 		int panlty2_ = -armor_->value2;
 		panlty2_ -= skill[SKT_ARMOUR].level/3;
-		if(panlty2_ < armor_->value3)
-			panlty2_ = armor_->value3;
+		if(panlty2_ < -armor_->value3)
+			panlty2_ = -armor_->value3;
 		panlty_ += panlty2_;
 	}	
 	if(shield_)

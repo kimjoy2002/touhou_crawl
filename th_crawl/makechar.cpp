@@ -439,7 +439,7 @@ void SetJob(job_type select_, string name_)
 			{
 				MakeStartItem(SIT_ARMOUR_0,1);
 				//MakeStartItem(SIT_CLOAK,2);
-				MakeStartItem(SIT_MIDDLE_SHIELD,3);	
+				MakeStartItem(SIT_MIDDLE_SHIELD,2);	
 			}
 		}
 		else

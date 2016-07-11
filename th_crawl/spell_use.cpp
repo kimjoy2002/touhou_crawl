@@ -2217,7 +2217,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 			dif_rect_iterator rit(target,2);
 		
 			for(;!rit.end();rit++)
-				if(env[current_level].isMove(rit->x,rit->y,true))
+				if(env[current_level].isMove(rit->x,rit->y,true) && env[current_level].PostoCheckSight(target, (*rit), 3))
 				{
 					if((!order->isplayer() || env[current_level].isInSight(*rit)) && order->isSightnonblocked(*rit))
 					{
@@ -2233,7 +2233,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 		
 			for(;!rit.end();rit++)
 			{
-				if(env[current_level].isMove(rit->x,rit->y,true))
+				if(env[current_level].isMove(rit->x,rit->y,true) && env[current_level].PostoCheckSight(target, (*rit), 3))
 				{
 					if((!order->isplayer() || env[current_level].isInSight(*rit)) && order->isSightnonblocked(*rit))
 					{

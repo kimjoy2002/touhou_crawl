@@ -763,9 +763,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
-			print_damage_message(a);
 			if(damage_)
 			{
+				print_damage_message(a);
 				enterlog();
 				a.damage = damage_;
 				dead_order = &a;

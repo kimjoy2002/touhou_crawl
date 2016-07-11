@@ -164,12 +164,8 @@ bool smoke::effectSmoke(unit* unit_)
 		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("트위스트",false)), true);
 		return true;
 	case SMT_WHIRLWIND:
-		if(unit_->GetId() != MON_AYA && unit_->GetId() != MON_CROW_TENGU && unit_->GetId() != MON_YAMABUSH_TENGU && unit_->GetId() != MON_HANATACA_TENGU)
-		{
-			unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("회오리바람",true)), true);
-			return true;
-		}
-		return false;
+		unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("회오리바람",true)), true);
+		return true;
 	case SMT_POISON:
 		{
 			bool return_ = unit_->SetPoison(rand_int(10,15), 150, false);

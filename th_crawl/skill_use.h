@@ -142,6 +142,7 @@ int SpellCap(spell_list skill);
 int SpellLevel(spell_list skill);
 int SpellNoise(spell_list skill);
 int SpellSpeed(spell_list skill);
+int Spellsize(spell_list skill);
 int SpellDiffer(int level);
 int SpellHunger(int level);
 skill_type SpellSchool(spell_list skill, int num);

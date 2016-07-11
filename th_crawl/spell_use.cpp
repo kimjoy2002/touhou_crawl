@@ -268,6 +268,32 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 		if(!CheckThrowPath(order->position,target, beam))
 			return false;
 	}
+	
+	if(Spellsize(skill))
+	{
+		int size_ = Spellsize(skill);
+		rect_iterator rit(target,size_,size_);
+
+		while(!rit.end())
+		{
+
+			unit *temp = env[current_level].isMonsterPos((*rit).x, (*rit).y, order);
+			if(temp)
+			{	
+				if(temp->isLive() && !temp->isEnemyMonster(order) /*&& !temp->isPassedBullet(order)*/)
+				{
+					if(temp->isplayer() || isMonsterhurtSpell(order,(monster*)temp,skill))
+					{
+						return false;
+					}
+
+				}
+			}
+			rit++;
+		}
+		
+	}
+
 	return true;
 }
 
@@ -2933,8 +2959,8 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 					{	
 						if(1/*hit_ != order*/)
 						{
-							int att_ = randC(8,5+power/40);
-							int m_att_ = 8*(5+power/40);
+							int att_ = randC(8,6+power/30);
+							int m_att_ = 8*(6+power/30);
 
 							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Ãæ°İÆÄ",false));
 							hit_->damage(temp_att, true);

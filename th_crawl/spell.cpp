@@ -805,6 +805,22 @@ int SpellSpeed(spell_list skill)
 	return 10;
 	//}
 }
+int Spellsize(spell_list skill)
+{	
+	switch(skill)
+	{
+	case SPL_FIRE_STORM:
+		return 2;
+	case SPL_FIRE_BALL:
+	case SPL_BURST:
+	case SPL_ICE_CLOUD:
+	case SPL_STONE_UPLIFT:
+	case SPL_POISON_CLOUD:
+		return 1;
+	default:
+		return 0;
+	}
+}
 skill_type SpellSchool(spell_list skill, int num)
 {
 	switch(skill)

@@ -275,7 +275,7 @@ void tensi_summon(int good_)
 		int i = randC(abs(good_),3); 
 		for(;!rit.end() && i> 0;rit++)
 		{
-			if(summon_check(coord_def(rit->x,rit->y), &you, false, false))
+			if(summon_check(coord_def(rit->x,rit->y), you.position, false, false))
 			{
 				int flag_=M_FLAG_SUMMON;
 				if(good_>0)

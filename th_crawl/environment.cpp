@@ -959,6 +959,52 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 	}
 	return true;
 }
+bool environment::PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_)
+{
+	//나중에 시야처리 루틴은 전부 이걸 호출하도록하자
+	bool intercept = false;
+	for(int i=RT_BEGIN;i!=RT_END;i++)
+	{
+		int length_ = lengths_;
+		beam_iterator it(center_,target_,(round_type)i);
+		while(!intercept && !it.end())
+		{
+						
+			coord_def check_pos_ = (*it);
+						
+			if(s_dimension_)
+			{
+				if(abs(you.god_value[0] - check_pos_.x)>8)
+					check_pos_.x += (you.god_value[0] - check_pos_.x)>0?17:-17;
+				if(abs(you.god_value[1] - check_pos_.y)>8)
+					check_pos_.y += (you.god_value[1] - check_pos_.y)>0?17:-17;
+			}
+
+
+			if(length_ == 0) //시야가 다 달았다.
+			{
+				intercept = true;
+				break;
+			}
+			if(!isMove(check_pos_,true,true))
+			{
+				intercept = true;
+				break;
+			}
+			it++;
+			length_--;
+		}
+		if(intercept == false)
+			break;
+		else if(i == RT_END - 1)
+		{
+			return false; 
+		}
+		else
+			intercept = false;
+	}
+	return true;
+}
 bool environment::MakeMapping(int percent_)
 {
 	if(isBamboo())

@@ -12,11 +12,13 @@
 #include "rect.h"
 #include "key.h"
 #include "mon_infor.h"
+#include "skill_use.h"
 
 int EventOccur(int id, events* event_);
 
 void bamboo_count(int num);
 void arena_event(int num);
+bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
 
 events::events()
 :id(0),position(),type(EVT_ABOVE),prev_sight(false)
@@ -495,6 +497,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_ARENA:
 		{			
 			arena_event(current_level);
+		}
+		return 0;
+	case EVL_NAMAZ:
+		{	
+			int power=min(SpellCap(SPL_SUMMON_NAMAZ),you.GetSpellPower(SpellSchool(SPL_SUMMON_NAMAZ,0),SpellSchool(SPL_SUMMON_NAMAZ,1),SpellSchool(SPL_SUMMON_NAMAZ,2)));	
+			skill_summon_namaz2(power, false, &you, event_->position);
+			return 1;
 		}
 		return 0;
 	default:

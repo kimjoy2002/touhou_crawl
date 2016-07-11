@@ -33,7 +33,7 @@ void summon_info::LoadDatas(FILE *fp)
 	LoadData<int>(fp, max_num);
 }
 
-bool summon_check(coord_def c, unit* order, bool fly_, bool swim_)
+bool summon_check(coord_def c, coord_def order, bool fly_, bool swim_)
 { //현재 소환되는 위치가 소환사의 거리와 확인하는 함수
 	if(!env[current_level].isMove(c.x, c.y, fly_, swim_))
 		return false; //움직일수없는 위치는 소환 x
@@ -43,22 +43,22 @@ bool summon_check(coord_def c, unit* order, bool fly_, bool swim_)
 
 	
 	//막히지않은곳
-	if(order && !order->isSightnonblocked(c))
+	if(!env[current_level].PostoCheckSight(order, c, 8))
 		return false;
 
-	if(order == &you)
-	{//소환사가 플레이어라면
-		if(!env[current_level].isInSight(c)) //시야내에서만 소환된다.
-			return false;
+	//if(order == &you)
+	//{//소환사가 플레이어라면
+	//	if(!env[current_level].isInSight(c)) //시야내에서만 소환된다.
+	//		return false;
 
-	}
-	else if(!order->isplayer())
-	{//소환사가 몬스터라면
-		//몬스터의 시야를 확인한다.		
-		if(!((monster*)order)->isMonsterSight(c))
-			return false;
+	//}
+	//else if(!order->isplayer())
+	//{//소환사가 몬스터라면
+	//	//몬스터의 시야를 확인한다.		
+	//	if(!((monster*)order)->isMonsterSight(c))
+	//		return false;
 
-	}
+	//}
 	return true;
 
 }
@@ -100,6 +100,8 @@ int GetSummonMaxNumber(spell_list skill)
 	case SPL_DOLLS_WAR:
 		return 2;
 	case SPL_FAKE_DOLLS_WAR:
+		return 1;
+	case SPL_SUMMON_NAMAZ:
 		return 1;
 	default:
 		return -1;
@@ -143,6 +145,8 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_DOLLS_WAR;
 	case SPL_FAKE_DOLLS_WAR:
 		return SKD_SUMMON_FAKE_DOLLS_WAR;
+	case SPL_SUMMON_NAMAZ:
+		return SKD_SUMMON_NAMAZ;
 	default:
 		return SKD_OTHER;
 	}

@@ -38,7 +38,8 @@ enum SUMMON_KIND
 	SKD_SUMMON_LESSOR_DEMON,
 	SKD_SUMMON_DREAM,
 	SKD_SUMMON_DOLLS_WAR,
-	SKD_SUMMON_FAKE_DOLLS_WAR
+	SKD_SUMMON_FAKE_DOLLS_WAR,
+	SKD_SUMMON_NAMAZ
 };
 
 class summon_info
@@ -64,7 +65,7 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 };
-bool summon_check(coord_def c, unit* order, bool fly_, bool swim_); //이 위치에 소환해도 되는가?
+bool summon_check(coord_def c, coord_def order, bool fly_, bool swim_); //이 위치에 소환해도 되는가?
 int GetSummonMaxNumber(spell_list skill);//최대소환갯수
 SUMMON_KIND GetSummonKind(spell_list skill);
 bool IsIndepend_summoner(SUMMON_KIND skill);//그것은 소환사의죽음에 따라 사라지는가?

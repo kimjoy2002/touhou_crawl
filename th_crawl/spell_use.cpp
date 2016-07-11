@@ -306,7 +306,7 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 	//rand_rect_iterator rit(target,range_,range_);
 	while(!rit.end())
 	{
-		if(summon_check(coord_def(rit->x,rit->y), order, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
+		if(summon_check(coord_def(rit->x,rit->y), target, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
 		{
 			int flag_=M_FLAG_SUMMON;
 			if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
@@ -2890,6 +2890,64 @@ bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 {
+	for(list<events>::iterator it = env[current_level].event_list.begin(); it != env[current_level].event_list.end(); it++)
+	{
+		if((*it).id == EVL_NAMAZ)
+		{
+			if(order->isplayer())
+				printarray(true,false,false,CL_normal,1,"층마다 1개의 나마즈만 떨어뜨릴 수 있다.");
+			return false;
+		}
+	}
+	if(env[current_level].isInSight(target))
+		printlog("하늘에서 바람 소리가 들리고있다! ",false,false,false,CL_normal);
+	env[current_level].MakeEvent(EVL_NAMAZ,coord_def(target.x,target.y),EVT_COUNT,4);
+	return true;
+}
+bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
+{
+	int length_ = 2;
+	if(env[current_level].isMove(target.x, target.y, true))
+	{
+		textures* t_ = &img_blast[1];
+		{
+			dif_rect_iterator rit(target,length_);
+		
+			for(;!rit.end();rit++)
+				if(env[current_level].isMove(rit->x,rit->y,true) && env[current_level].PostoCheckSight(target, (*rit), length_+1))
+				{
+					env[current_level].MakeEffect(*rit,t_,false);
+				}
+		}
+		
+		if(env[current_level].isInSight(target))
+			printlog("거대한 나마즈가 떨어졌다! ",false,false,false,CL_normal);
+		{
+			dif_rect_iterator rit(target,length_);
+		
+			for(;!rit.end();rit++)
+			{
+				if(env[current_level].isMove(rit->x,rit->y,true) && env[current_level].PostoCheckSight(target, (*rit), length_+1))
+				{
+					if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
+					{	
+						if(1/*hit_ != order*/)
+						{
+							int att_ = randC(8,5+power/40);
+							int m_att_ = 8*(5+power/40);
+
+							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
+							hit_->damage(temp_att, true);
+						}
+					}
+				}
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();		
+		BaseSummon(MON_NAMAZ, rand_int(20,40)+power/5, false, false, 2, order, target, SKD_SUMMON_NAMAZ, GetSummonMaxNumber(SPL_SUMMON_NAMAZ));
+		return true;
+	}
 	return false;
 }
 
@@ -3547,7 +3605,9 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_JUMP_ATTACK:
 		return skill_jump_attack(power,short_,order,target);
 	case SPL_ALERT_NOISE: 
+		return true;
 	case SPL_SUMMON_NAMAZ:
+		return skill_summon_namaz(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -3800,7 +3860,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_JUMP_ATTACK:
 		return skill_jump_attack(power,short_,&you,target);
 	case SPL_ALERT_NOISE: 
+		return true;
 	case SPL_SUMMON_NAMAZ:
+		return skill_summon_namaz(power,short_,&you,target);
 	default:
 		return false;
 	}

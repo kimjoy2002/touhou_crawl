@@ -74,7 +74,7 @@ void wiz_mode()
 		case 'A':
 			{
 				
-				printlog("s-스크롤 e-발동템 r-반지",true,false,false,CL_help);
+				printlog("s-스크롤 e-발동템 r-반지 b-책",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까? (베타판)",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -144,6 +144,13 @@ void wiz_mode()
 						else{
 							printlog(" 취소",true,false,false,CL_help);
 						}
+					}
+					return;
+				case 'b':
+					{
+						item_infor t;
+						makeitem(ITM_BOOK, 0, &t,  -1);
+						env[current_level].MakeItem(you.position,t);
 					}
 					return;
 				default:

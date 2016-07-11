@@ -27,7 +27,8 @@ enum event_list
 	EVL_AGRO, //모든 몹이 플레이어에게 어그로가 끌린다.
 	EVL_REGEN, //몹의 리젠 (꿈의 세계).
 	EVL_REGEN2, //몹의 리젠 (지저).
-	EVL_ARENA //아레나
+	EVL_ARENA, //아레나
+	EVL_NAMAZ //나마즈  떨구기
 };
 
 class events

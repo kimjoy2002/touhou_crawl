@@ -2063,6 +2063,8 @@ void players::ChangeBattleCount(bool on_)
 			you.SetTogleInvisible(true);
 		else
 			you.SetTogleInvisible(false);
+		
+		SetInter(IT_STAT);
 	}
 }
 bool players::SetSwift(int swift_)

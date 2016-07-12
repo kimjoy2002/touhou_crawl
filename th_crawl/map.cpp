@@ -382,11 +382,14 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 		vector_.push_back(VP_HAKUREI_LAST);
 
 	}
-	//if(floor==0)
-	//{
-	//	for(int i=0;i<5;i++)
-	//		vector_.push_back(100+MAX_SUB_DUNGEON+GT_SATORI);
-	//}
+	if(0)
+	{
+		for(int i=0;i<10;i++)
+		{
+			vector_.push_back(100+MAX_SUB_DUNGEON+(1?GT_YUKARI:GT_YUYUKO));
+			//vector_.push_back(10+floor);
+		}
+	}
 	return;
 }
 

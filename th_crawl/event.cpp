@@ -13,6 +13,7 @@
 #include "key.h"
 #include "mon_infor.h"
 #include "skill_use.h"
+#include "floor.h"
 
 int EventOccur(int id, events* event_);
 
@@ -135,7 +136,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 3:
 		printlog("카나코는 말했다 : ,나 g를 눌러서 아이템을 주워서 장착해보렴.",true,false,false,CL_warning);
-		printlog("카나코는 말했다 : w키로 무기, W키로 방어구장착, i키는 설명, d키는 버리기야.",true,false,false,CL_warning);\
+		printlog("카나코는 말했다 : w키로 무기, W키로 방어구장착, i키는 설명, d키는 버리기야.",true,false,false,CL_warning);
 		return 1;
 	case 4:
 		printlog("카나코는 말했다 : 크롤은 언제나 전투의 연속이지, 공격은 직접 부딪히면 돼.",true,false,false,CL_warning);
@@ -504,6 +505,90 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			int power=min(SpellCap(SPL_SUMMON_NAMAZ),you.GetSpellPower(SpellSchool(SPL_SUMMON_NAMAZ,0),SpellSchool(SPL_SUMMON_NAMAZ,1),SpellSchool(SPL_SUMMON_NAMAZ,2)));	
 			skill_summon_namaz2(power, false, &you, event_->position);
 			return 1;
+		}
+		return 0;
+	case EVL_KOISHI:
+		{		
+			if(event_->count==-1)
+			{
+				event_->type = EVT_ALWAYS;
+				event_->count = 11;
+			}
+			if(event_->count==10)
+			{
+				enterlog();
+				printlog("나, 메리씨",true,false,false,CL_small_danger);
+				MoreWait();
+				you.SetInter(IT_EVENT);
+			}			
+			if(event_->count==5)
+			{
+				enterlog();
+				printlog("지금, 당신의",true,false,false,CL_small_danger);
+				MoreWait();
+				you.SetInter(IT_EVENT);
+			}				
+			if(event_->count==0)
+			{
+				
+				dif_rect_iterator rit(you.position,2);
+				int i = 1; 
+				for(;!rit.end() && i> 0;rit++)
+				{
+					if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
+					{
+						enterlog();
+						printlog("등 뒤에 있어",true,false,false,CL_danger);
+						MoreWait();
+						monster *mon_ = env[current_level].AddMonster(MON_KOISHI,M_FLAG_EVENT,(*rit));
+						mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //코이시는 떨어지고 바로 공격하지않는다.
+						mon_->SetHaste(20+randA(20));
+						return 1;
+					}
+				}
+				enterlog();
+				printlog("... 보이지 않는 곳에 있어",true,false,false,CL_small_danger); //코이시 등장실패
+				MoreWait();
+				return 1;
+			}
+		}
+		return 0;
+	case EVL_KYOKO:
+		{
+			monster *kyoko_ = env[current_level].AddMonster(MON_KYOUKO,M_FLAG_EVENT,coord_def(0,-5)+event_->position);
+			
+			for(int i=rand_int(2,4);i>0;i--)
+			{
+				item_infor temp;
+				env[current_level].MakeItem(coord_def(rand_int(-1,1),rand_int(-5,-3))+event_->position,makePitem(MON_HUMAM_MAN, 1, &temp));
+			}
+
+			dif_rect_iterator rit(coord_def(0,-3)+event_->position,1);
+			int i = rand_int(2,4); 
+			for(;!rit.end() && i> 0;rit++)
+			{
+				if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
+				{
+					monster *mon_ = env[current_level].AddMonster(MON_HUMAM_MAN,M_FLAG_EVENT | M_FLAG_NETURALY,(*rit));
+					mon_->hp = mon_->hp*rand_int(3,9)/10;
+					mon_->FoundTarget(kyoko_, 30);
+					mon_->s_fear = 20+randA(20);
+					i--;
+				}
+			}
+			kyoko_->CheckSightNewTarget();
+		}		
+		return 1;
+	case EVL_AUTUMN:
+		{
+			int rand_ = randA(1);
+			env[current_level].MakeFloorEffect(event_->position,&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,rand_int(50,100),NULL);
+		}
+		return 1;
+	case EVL_SUKIMA:
+		{
+			textures* t_ = &img_effect_schema[randA(2)];
+			env[current_level].MakeFloorEffect(event_->position,t_,t_,FLOORT_SCHEMA,2,NULL);
 		}
 		return 0;
 	default:

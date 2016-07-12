@@ -28,7 +28,11 @@ enum event_list
 	EVL_REGEN, //몹의 리젠 (꿈의 세계).
 	EVL_REGEN2, //몹의 리젠 (지저).
 	EVL_ARENA, //아레나
-	EVL_NAMAZ //나마즈  떨구기
+	EVL_NAMAZ, //나마즈  떨구기
+	EVL_KOISHI,
+	EVL_KYOKO, //공포의 쿄코
+	EVL_AUTUMN, //단풍
+	EVL_SUKIMA //스키마
 };
 
 class events

@@ -59,10 +59,22 @@ bool isGodTemple(int id_, god_type god_)
 		return (god_ != GT_MIMA && god_ != GT_SHINKI);
 	case 4:
 		return (god_ == GT_KANAKO || god_ == GT_SUWAKO);
+	case 16:
+		//유유코
+		return !is_exist_named(MON_MISTIA) && (god_ == GT_YUYUKO);
+	case 17:
+		//시즈하
+		return (god_ == GT_SHIZUHA);	
+	case 18:
+		//유기
+		return (god_ == GT_YUUGI);	
+	case 19:
+		//유카리
+		return (god_ == GT_YUKARI);
 	}
 }
 
-int GetMaxAlter(){return 16;};
+int GetMaxAlter(){return 20;};
 
 char* real_altar_pattern(map_dummy* map, int id_)
 {
@@ -461,6 +473,123 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.=======.#\
 #....0....#\
 ###########";
+			break;
+		}
+	case 16: //유유코식단
+		{
+			map->size_x = 3;
+			map->size_y = 2;	
+			map->m_entrance.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->m_exit.y = map->size_y;
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_YUYUKO);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			if(!is_exist_named(MON_MISTIA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_MISTIA,0,coord_def(0,-1)));
+				set_exist_named(MON_MISTIA);
+			}
+			else 
+			{
+				map->monster_list.push_back(mapdummy_mon(MON_RABBIT,0,coord_def(0,-1)));
+			}
+			return  "\
+#######\
+#.=.=.#\
+#.===.#\
+#..0..#\
+#.....#";
+			break;
+		}
+	case 17: //시즈하 단풍제단
+		{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+						
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_SHIZUHA);
+			int i = rand_int(6,8);
+			while(i)
+			{
+				coord_def c_(rand_int(-2,2),rand_int(-2,2));
+				if(c_.x == 0 && c_.y == 0)
+					continue;
+				map->event_list.push_back(mapdummy_event(EVL_AUTUMN,c_,EVT_SIGHT));
+				i--;
+			}
+			return  "\
+.......\
+.......\
+.......\
+...0...\
+.......\
+.......\
+.......";
+			break;
+		}
+	case 18: //유우기 싸움
+		{
+			map->size_x = 5;
+			map->size_y = 4;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = rand_int(-map->size_y+1,map->size_y-1);
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = rand_int(-map->size_y,map->size_y);
+						
+			map->monster_list.push_back(mapdummy_mon(MON_ONI,0,coord_def(0,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_BLUE_ONI,M_FLAG_NETURALY,coord_def(0,-1)));
+
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);
+			return  "\
+###########\
+.....0.....\
+..=======..\
+..=.....=..\
+..=.....=..\
+..=.....=..\
+..=======..\
+...........\
+###########";
+			break;
+		}
+	case 19: //유카리 스키마 제단
+		{
+			map->size_x = 2;
+			map->size_y = 6;	
+			map->m_entrance.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->m_exit.y = map->size_y;
+						
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_YUKARI);
+			for(int i = -5; i <=5; i+=2)
+			{
+				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(-1,i),EVT_APPROACH_SMALL));
+				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(1,i),EVT_APPROACH_SMALL));
+			}
+			return  "\
+#####\
+#.0.#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#\
+#...#";
 			break;
 		}
 	}

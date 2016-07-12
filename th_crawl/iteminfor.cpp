@@ -458,9 +458,6 @@ string GetItemInfor(item *it)
 				case SPC_V_INVISIBLE:
 					text_ += "사용한 사람을 투명하게 만드는 스펠카드다.\n";
 					break;
-				case SPC_V_PARALYSE:
-					text_ += "당한 상대를 마비를 거는 스펠카드다.\n";
-					break;
 				default:
 					text_ += "버그의 스펠카드다.\n";
 					break;

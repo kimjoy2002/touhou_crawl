@@ -10,6 +10,8 @@
 #include "throw.h"
 #include "mon_infor.h"
 #include "event.h"
+#include "evoke.h"
+
 
 
 
@@ -45,7 +47,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	while(1)
 	{
 
-		switch(randA(10))
+		switch(randA(21))
 		{
 		default:
 		case 0:
@@ -299,6 +301,8 @@ $$$...$$$";
 ..###";			
 			}
 		case 10: //요정대전쟁
+			if(floor_ < 5)
+				break;
 			if(is_exist_named(MON_SUNNY)|| is_exist_named(MON_CIRNO))
 			{
 				break;
@@ -333,6 +337,253 @@ $$$...$$$";
 #...........#\
 #...........#\
 ######+######";
+			break;
+		case 11:
+			map->size_x = 4;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#########\
+##.....##\
+#...#...#\
+...###...\
+#...#...#\
+##.....##\
+#########";
+			break;
+		case 12:
+			{
+			map->size_x = 3;
+			map->size_y = 3;	
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+.......\
+...$...\
+...$...\
+.$$$$$.\
+...$...\
+...$...\
+.......";
+			break;
+			}
+		case 13:
+			map->size_x = 4;
+			map->size_y = 4;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+####.####\
+#.#.#.#.#\
+##.....##\
+#.......#\
+##.....##\
+#.......#\
+##.....##\
+#.#.#.#.#\
+####.####";
+			break;
+		case 14:
+			map->size_x = 4;
+			map->size_y = 6;	
+			map->m_entrance.x = rand_int(-3,-1);
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = rand_int(1,3);
+			map->m_exit.y = map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#...#####\
+##...####\
+###...###\
+####...##\
+#####...#\
+####...##\
+###...###\
+##...####\
+#...#####\
+##...####\
+###...###\
+####...##\
+#####...#";
+			break;
+		case 15:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 6;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI,0,coord_def(3,-1)));	
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+..[.[........\
+...[[...####.\
+........#..#.\
+..~~~...##+#.\
+.~~~~~.......\
+..~~~...[[...\
+.............";
+			break;
+			}
+		case 16:
+			map->size_x = 4;
+			map->size_y = 4;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = -map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+####+####\
+#.......#\
+#.......#\
+#.......#\
+####....#\
+#..#....#\
+#..+....#\
+#..#....#\
+#########";
+			break;
+		case 17:
+			{
+			map->size_x = 3;
+			map->size_y = 3;	
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+.......\
+.#+###.\
+.#.+.+.\
+.###+#.\
+.+.+.#.\
+.###+#.\
+.......";
+			break;
+			}
+		case 18:
+			map->size_x = 4;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#########\
+#.......#\
+#.$$$$$.#\
+..$......\
+#.$$$$$.#\
+#.......#\
+#########";
+			break;
+		case 19:
+			map->size_x = 7;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = rand_int(-1,1);
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = rand_int(-1,1);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+###############\
+....=.....=....\
+.=..=..=..=..=.\
+.=.....=.....=.\
+.=..=..=..=..=.\
+....=.....=....\
+###############";
+			break;
+		case 20: //보탑을 찾은 나즈린
+			{
+			if(floor_ < 7)
+				break;
+			if(is_exist_named(MON_NAZRIN))
+				break;
+			map->size_x = 4;
+			map->size_y = 4;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			if(!is_exist_named(MON_NAZRIN)){
+				map->monster_list.push_back(mapdummy_mon(MON_NAZRIN,0,coord_def(0,-2)));
+				set_exist_named(MON_NAZRIN);
+			}
+			
+			item_infor t;
+			makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA);
+			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));		
+
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+#########\
+#.......#\
+#.......#\
+#..===..#\
+#..=.=..#\
+#..===..#\
+#.......#\
+#.......#\
+####+####";
+			break;
+			}
+		case 21: //공포의 쿄코
+			if(!(floor_ >= 3 && floor_ <= 5))
+				break;
+			if(is_exist_named(MON_KYOUKO))
+				break;
+			map->size_x = 4;
+			map->size_y = 7;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			if(!is_exist_named(MON_KYOUKO)){
+				map->event_list.push_back(mapdummy_event(EVL_KYOKO,coord_def(0,0),EVT_SIGHT));
+				set_exist_named(MON_KYOUKO);
+			}
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+#########\
+#$$$$$$$#\
+#$$...$$#\
+#$.....$#\
+#$.....$#\
+#$$...$$#\
+###...###\
+###...###\
+###...###\
+###...###\
+###...###\
+###...###\
+###...###\
+###...###\
+####+####";
 			break;
 		}
 	}

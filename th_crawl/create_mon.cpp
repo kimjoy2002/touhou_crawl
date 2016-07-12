@@ -1195,7 +1195,17 @@ void create_id_to_unique(int id, int level)
 		index.push_back(MON_DRAGON_BABY);
 		break;	
 	case 31:
-		index.push_back(MON_KOISHI);
+		if(randA(5)==0)
+		{
+			int x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+			while(!env[level].isMove(x_,y_) || (env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
+			{
+				x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+			}			
+			env[level].MakeEvent(EVL_KOISHI,coord_def(x_,y_),EVT_APPROACH_SMALL);
+		}
+		else
+			index.push_back(MON_KOISHI);
 		break;
 	case 32:
 		index.push_back(MON_NUE);

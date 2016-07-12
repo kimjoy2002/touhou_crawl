@@ -2217,7 +2217,8 @@ int monster::action(int delay_)
 				}
 				else
 				{
-					CheckSightNewTarget();
+					if(!s_fear)
+						CheckSightNewTarget();
 					if(!target)
 						state.StateTransition(MSI_LOST);
 				}
@@ -2286,7 +2287,8 @@ int monster::action(int delay_)
 				}
 				else if(is_sight && you.isView(this) && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
-					CheckSightNewTarget();
+					if(!s_fear)
+						CheckSightNewTarget();
 					//FoundTarget(&you,30);
 					if(flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.punish[GT_SHINKI] && pietyLevel(you.piety)>=3)
 					{
@@ -2314,7 +2316,8 @@ int monster::action(int delay_)
 				{//적인데 시야안에 없거나 플레이어가 보이지 않는 상태
 					if(memory_time>0)
 					{
-						CheckSightNewTarget();
+						if(!s_fear)
+							CheckSightNewTarget();
 						memory_time--;
 					}
 					else

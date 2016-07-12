@@ -1286,12 +1286,27 @@ void LevelUpTribe(int level_)
 		}
 		break;
 	case TRI_WRAITH:
+		if(level_%5 == 0)
+		{
+			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
 		break;
 	case TRI_VAMPIRE:
 		if(level_%5 == 0)
 		{
 			you.max_mp--;
 			you.mp--;
+		}
+		break;
+	case TRI_YOKAI:
+		if(level_%5 == 0)
+		{
+			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
+		if(level_ == 15 && you.char_name.name.compare("코이시")==0)
+		{
+			printlog("당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
+			you.SetProperty(TPT_CONFUSE_ATTACK,1);
 		}
 		break;
 	}

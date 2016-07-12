@@ -993,6 +993,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 		else
 		{					
+			you.SetProperty(TPT_HP,2);
 			you.SetProperty(TPT_9_LIFE,1);
 			you.SetProperty(TPT_18_LIFE,1);
 

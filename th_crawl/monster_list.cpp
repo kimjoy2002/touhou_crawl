@@ -431,8 +431,8 @@ const mon_infor mondata[] = {
 	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
-	{MON_YAMAWARO_WAWRRIOR,9,943,name_infor("야마와로 돌격병",true),&img_mons_yamawaro_warrior,80,5,6,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_YAMAWARO_WAWRRIOR,9,943,name_infor("야마와로 돌격병",true),&img_mons_yamawaro_warrior,75,5,6,
+	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 	
 	{MON_YAMAWARO_FLAG,11,1110,name_infor("야마와로 깃발병",true),&img_mons_yamawaro_flag,60,7,5,
@@ -443,15 +443,15 @@ const mon_infor mondata[] = {
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_CANT_NETURAL ,99,0,10},
 	
-	{MON_RED_UFO,12,1280,name_infor("레드 벤토라",false),&img_mons_red_ufo,85,5,10,
+	{MON_RED_UFO,12,1280,name_infor("레드 벤토라",false),&img_mons_red_ufo,76,5,10,
 	{25,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
 	
-	{MON_GREEN_UFO,12,1280,name_infor("그린 벤토라",false),&img_mons_green_ufo,85,5,10,
+	{MON_GREEN_UFO,12,1280,name_infor("그린 벤토라",false),&img_mons_green_ufo,76,5,10,
 	{25,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
 		
-	{MON_BLUE_UFO,12,1280,name_infor("블루 벤토라",false),&img_mons_blue_ufo,85,5,10,
+	{MON_BLUE_UFO,12,1280,name_infor("블루 벤토라",false),&img_mons_blue_ufo,76,5,10,
 	{25,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
 		
@@ -601,15 +601,15 @@ const mon_infor mondata[] = {
 	{39,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10},
 	
-	{MON_MAC,12,1230,name_infor("맥",true),&img_mons_mac,60,5,12,
+	{MON_MAC,12,1230,name_infor("맥",true),&img_mons_mac,60,5,10,
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,2,10},
 	
-	{MON_NIGHTMARE,15,1712,name_infor("악몽의 조각",true),&img_mons_nightmare,80,12,5,
+	{MON_NIGHTMARE,15,1712,name_infor("악몽의 조각",true),&img_mons_nightmare,70,12,5,
 	{31,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 	
-	{MON_LUNATIC,13,1374,name_infor("광기의 조각",true),&img_mons_lunatic,100,12,5,
+	{MON_LUNATIC,13,1374,name_infor("광기의 조각",true),&img_mons_lunatic,90,12,5,
 	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 	
@@ -625,7 +625,7 @@ const mon_infor mondata[] = {
 	{25,0,0},{ATT_SICK,ATT_NONE,ATT_NONE},{name_infor("독니",false),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10},
 	
-	{MON_BLOOD_HAUNT,12,835,name_infor("핏빛 원령",true),&img_mons_blood_haunt,65,0,12,
+	{MON_BLOOD_HAUNT,12,835,name_infor("핏빛 원령",true),&img_mons_blood_haunt,55,0,12,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 	
@@ -637,7 +637,7 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CANT_NETURAL,0,1,10},
 
-	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_flower_tank[1],120,10,10,
+	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_flower_tank[1],90,10,10,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI,99,1,9},
 	

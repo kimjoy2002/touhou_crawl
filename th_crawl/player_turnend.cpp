@@ -48,7 +48,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		delay_ *= 2;
 
 
-	if(s_the_world>1)
+	if(s_the_world!=0)
 		delay_ = 0;
 	prev_action = ACTT_NONE;
 
@@ -92,10 +92,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 
 	ReleaseMutex(mutx);
-	if(you.s_the_world<=1)
+	if(you.s_the_world==0 || you.s_the_world==1)
 		env[current_level].ActionSmoke(delay_);
 	env[current_level].ActionFloor(delay_);
-	if(you.s_the_world<=1)
+	if(you.s_the_world==0 || you.s_the_world==1)
 	{
 		env[current_level].ActionMonsterSpecial(delay_);
 		if(env[current_level].ActionSmokeEffect())

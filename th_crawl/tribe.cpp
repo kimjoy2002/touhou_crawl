@@ -888,9 +888,9 @@ void SetTribe(tribe_type select_)
 		you.half_youkai[1]=randA(2);
 		you.half_youkai[2]=randA(2);
 		you.half_youkai[3]=randA(1);
-		you.half_youkai[0]=2;
-		you.half_youkai[1]=2;
-		you.half_youkai[2]=0;
+		//you.half_youkai[0]=2;
+		//you.half_youkai[1]=2;
+		//you.half_youkai[2]=0;
 		//you.half_youkai[3]=1;
 		break;
 	case TRI_WRAITH:

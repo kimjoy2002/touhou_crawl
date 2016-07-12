@@ -1017,7 +1017,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_the_world)
 			{
-				pfont->DrawTextA(pSprite,"시간정지", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_the_world>1?CL_white_blue:CL_blue);
+				pfont->DrawTextA(pSprite,"시간정지", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_the_world>1?CL_white_blue:you.s_the_world<0?CL_normal:CL_blue);
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_mana_delay)

@@ -518,7 +518,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	return damage_;
 
 }
-void players::print_damage_message(attack_infor &a)
+void players::print_damage_message(attack_infor &a, bool damaged_)
 {
 	name_infor name_;
 	if(a.order)
@@ -587,13 +587,16 @@ void players::print_damage_message(attack_infor &a)
 		}
 		break;
 	case ATT_CLOUD_FIRE:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다.");
 		break;
 	case ATT_CLOUD_COLD:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다.");
 		break;
 	case ATT_CLOUD_ELEC:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
 		break;
 	case ATT_STONE_TRAP:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다.");
@@ -615,10 +618,12 @@ void players::print_damage_message(attack_infor &a)
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다.");
 		break;
 	case ATT_CLOUD_NORMAL:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람에 휩쓸렸다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람에 휩쓸렸다.");
 		break;
 	case ATT_CLOUD_CURSE:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"저주받고있다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"저주받고있다.");
 		break;
 	case ATT_VEILING:
 		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람 갑옷에 베였다.");
@@ -637,7 +642,8 @@ void players::print_damage_message(attack_infor &a)
 		}
 		break;
 	case ATT_ELEC:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+		if(damaged_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
 		break;
 	case ATT_THROW_NONE_MASSAGE:
 		break;
@@ -763,9 +769,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
+			print_damage_message(a,damage_!=0);
 			if(damage_)
 			{
-				print_damage_message(a);
 				enterlog();
 				a.damage = damage_;
 				dead_order = &a;

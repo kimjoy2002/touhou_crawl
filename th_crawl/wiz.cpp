@@ -382,6 +382,16 @@ void wiz_mode()
 			env[current_level].dgtile[you.position.x][you.position.y].tile = next_;
 			}
 			break;
+		case 'W':
+			if(you.s_the_world)
+			{				
+				you.s_the_world = 0;
+			}
+			else
+			{
+				you.s_the_world = -1;
+			}
+			break;
 		case 'M':
 			if(monster* mon_=BaseSummon(MON_TOKIKO, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{
@@ -506,6 +516,7 @@ void wiz_mode()
 			printsub(" >      - 아랫층으로 내려가기             ",true,CL_normal);
 			printsub(" <      - 윗층으로 올라가기               ",true,CL_normal);
 			printsub(" A      - 아이템생성(베타)                ",true,CL_normal);
+			printsub(" W      - 시간정지                        ",true,CL_normal);
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);
 			printsub("                                         ",true,CL_normal);

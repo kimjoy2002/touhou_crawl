@@ -697,9 +697,9 @@ const mon_infor mondata[] = {
 	{50,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10},
 	
-	{MON_NESI,15,1604,name_infor("네시",false),&img_mons_default,120,9,9,
+	{MON_NESI,15,1604,name_infor("네시",false),&img_mons_nesi,120,9,9,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM,99,1,10},
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_CANT_GROUND,99,1,10},
 	
 	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_sanghai[0],80,5,22,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

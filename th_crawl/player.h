@@ -330,7 +330,7 @@ public:
 	bool UnidenResistUpDown(int value_, resist_type resist_);
 	//interupt_type HungerApply(int hunger_ = 0);
 	int calculate_damage(attack_type &type_, int atk, int max_atk);
-	void print_damage_message(attack_infor &a);
+	void print_damage_message(attack_infor &a, bool damaged_);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
 	bool GetExp(int exper_, bool speak_ = true);

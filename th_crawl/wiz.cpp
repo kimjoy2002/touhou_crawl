@@ -72,13 +72,37 @@ void wiz_mode()
 			MakeCloud(you.position, img_fog_fire, SMT_FIRE, rand_int(8,10), rand_int(80,120), 0,5, &you);
 			break;
 		case 'A':
-			{
-				
-				printlog("s-스크롤 e-발동템 r-반지 b-책",true,false,false,CL_help);
-				printlog("어느 아이템을 얻어볼까? (베타판)",false,false,false,CL_help);
+			{				
+				printlog("p-포션 s-스크롤 e-발동템 r-반지 b-책",true,false,false,CL_help);
+				printlog("어느 아이템을 얻어볼까?",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
 				{
+				case 'p':
+					{
+						int list[] = {PT_WATER,	PT_HEAL, PT_POISON,	PT_HEAL_WOUND, PT_MIGHT, PT_HASTE, PT_CONFUSE, 
+							PT_SLOW, PT_PARALYSIS, PT_CLEVER, PT_AGILITY, PT_MAGIC, PT_LEVETATION, PT_POWER, 
+							PT_DOWN_STAT, PT_RECOVER_STAT, PT_ALCOHOL};
+						enterlog();
+						printlog("a-물 b-치유 c-독 d-체력회복 e-힘 f-가속 g-혼란 h-감속 i-마비",true,false,false,CL_help);
+						printlog("j-지능 k-민첩 l-영력 m-비행 n-파워 o-능력치감소 p-능력치회복 q-술",true,false,false,CL_help);
+						printlog("어느 포션을 얻어볼까?",false,false,false,CL_help);
+						key_ = waitkeyinput();
+						if(key_ >= 'a' && key_ <= 'q')
+						{
+							for(int i=0;i<10;i++)
+							{
+								item_infor t;
+								makeitem(ITM_POTION, 0, &t,  list[key_-'a']);
+								env[current_level].MakeItem(you.position,t);
+								enterlog();
+							}
+						}
+						else{
+							printlog(" 취소",true,false,false,CL_help);
+						}
+					}
+					return;
 				case 's':
 					{
 						int list[] = {SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
@@ -132,7 +156,7 @@ void wiz_mode()
 						printlog("a-힘 b-민첩 c-지능 d-허기 e-만복도 f-공간이동 g-독저항 h-화염저항",true,false,false,CL_help);
 						printlog("i-냉기저항 j-투명보기 k-그레이즈 l-비행 m-투명 n-영력 o-마법사 p-방어",true,false,false,CL_help);
 						printlog("q-회피 r-혼란저항 s-전기저항 t-마법저항",true,false,false,CL_help);
-						printlog("어느 스크롤을 얻어볼까?",false,false,false,CL_help);
+						printlog("어느 반지를 얻어볼까?",false,false,false,CL_help);
 						key_ = waitkeyinput();
 						if(key_ >= 'a' && key_ <= 't')
 						{

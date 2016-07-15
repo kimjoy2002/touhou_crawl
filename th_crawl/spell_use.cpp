@@ -1659,7 +1659,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(rand_int(10,15),beam,temp_infor,NULL);
+			throwtanmac(29,beam,temp_infor,NULL);
 		order->SetParadox(0); 
 		return true;
 	}

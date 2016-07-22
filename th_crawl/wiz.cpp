@@ -155,7 +155,7 @@ void wiz_mode()
 						enterlog();
 						printlog("a-힘 b-민첩 c-지능 d-허기 e-만복도 f-공간이동 g-독저항 h-화염저항",true,false,false,CL_help);
 						printlog("i-냉기저항 j-투명보기 k-그레이즈 l-비행 m-투명 n-영력 o-마법사 p-방어",true,false,false,CL_help);
-						printlog("q-회피 r-혼란저항 s-전기저항 t-마법저항",true,false,false,CL_help);
+						printlog("q-회피 r-혼란저항 s-전기저항 t-마법저항 !-아티펙트",true,false,false,CL_help);
 						printlog("어느 반지를 얻어볼까?",false,false,false,CL_help);
 						key_ = waitkeyinput();
 						if(key_ >= 'a' && key_ <= 't')
@@ -164,6 +164,16 @@ void wiz_mode()
 							makeitem(ITM_RING, 0, &t,  list[key_-'a']);
 							env[current_level].MakeItem(you.position,t);
 							enterlog();
+						}
+						else if(key_ == '!')
+						{
+							item_infor t;
+							makeitem(ITM_RING,randA(9)?1:-1,&t);
+							t.artifact = true;
+							item *it_ = env[current_level].MakeItem(you.position,t);
+							MakeArtifact(it_,it_->curse?-1:1);
+							enterlog();
+
 						}
 						else{
 							printlog(" 취소",true,false,false,CL_help);

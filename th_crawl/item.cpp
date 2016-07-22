@@ -271,16 +271,28 @@ string item::GetName(int num_)
 		temp += iden_list.potion_list[value1].iden?potion_iden_string[value1]:potion_uniden_string[iden_list.potion_list[value1].color];
 	if(type==ITM_SCROLL)
 		temp += iden_list.scroll_list[value1].iden == 3?scroll_iden_string[value1]:scroll_uniden_string[iden_list.scroll_list[value1].type];
-	if(type==ITM_RING && !isArtifact())
+	if(type==ITM_RING)
 	{			
-		if(isRingGotValue((ring_type)value1) && iden_list.ring_list[value1].iden == 2 && identify)
+		if(!isArtifact())
 		{
-			char temp2[10];
-			sprintf_s(temp2,10,"%c%d ",value2>=0?'+':'-',abs(value2));
-			temp += temp2;
+			if(isRingGotValue((ring_type)value1) && iden_list.ring_list[value1].iden == 2 && identify)
+			{
+				char temp2[10];
+				sprintf_s(temp2,10,"%c%d ",value2>=0?'+':'-',abs(value2));
+				temp += temp2;
+			}
+			temp += iden_list.ring_list[value1].iden == 2 ?ring_iden_string[value1]:ring_uniden_string[iden_list.ring_list[value1].type];	
 		}
-		temp += iden_list.ring_list[value1].iden == 2 ?ring_iden_string[value1]:ring_uniden_string[iden_list.ring_list[value1].type];
+		else if(second_name.name.size())
+		{
+			temp += second_name.name;
+		}
 	}
+	
+
+
+
+
 	if(type==ITM_SPELL)
 	{
 		if(iden_list.spellcard_list[value2].iden == 2)
@@ -924,11 +936,11 @@ int item::action(int delay_)
 
 		if(!identify)
 		{
-			if(type==ITM_POTION && iden_list.scroll_list[value1].iden)
+			if(type==ITM_POTION && iden_list.potion_list[value1].iden)
 				identify = true;
 			else if(type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 3)
 				identify = true;
-			else if(type==ITM_RING && iden_list.scroll_list[value1].iden == 2 && !isRingGotValue((ring_type)value1))
+			else if(type==ITM_RING && !isArtifact() && iden_list.ring_list[value1].iden == 2 && !isRingGotValue((ring_type)value1))
 				identify = true;
 			//else if(type==ITM_SPELLCARD && iden_list.scroll_list[value1].iden == 2 && !isAmuletGotValue((amulet_type)value1))
 			//	identify = true;

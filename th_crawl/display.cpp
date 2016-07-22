@@ -751,10 +751,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_STR);
 		{
-			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
-				you.s_stat_boost==1?CL_white_puple:
+			D3DCOLOR color_ = 
+				you.s_str<=0?CL_danger:
+				temp_buff_value_>0?CL_white_blue:
 				temp_buff_value_<0?CL_small_danger:
-				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
+				you.s_stat_boost==1?CL_white_puple:
+				(you.s_str != you.m_str)?CL_warning:CL_STAT;
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
@@ -781,9 +783,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			sprintf_s(temp,128,"%4d (%2d)",you.s_dex,you.m_dex);
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_DEX);
 		{
-			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
-				you.s_stat_boost==2?CL_white_puple:
+			D3DCOLOR color_ = 
+				you.s_dex<=0?CL_danger:
+				temp_buff_value_>0?CL_white_blue:
 				temp_buff_value_<0?CL_small_danger:
+				you.s_stat_boost==2?CL_white_puple:
 				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
@@ -813,10 +817,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		
 		{
-			D3DCOLOR color_ = temp_buff_value_>0?CL_white_blue:
-				you.s_stat_boost==3?CL_white_puple:
+			D3DCOLOR color_ =
+				you.s_int<=0?CL_danger:
+				temp_buff_value_>0?CL_white_blue:
 				temp_buff_value_<0?CL_small_danger:
-				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
+				you.s_stat_boost==3?CL_white_puple:
+				(you.s_int != you.m_int)?CL_warning:CL_STAT;
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}

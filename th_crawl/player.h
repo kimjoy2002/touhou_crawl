@@ -440,7 +440,7 @@ public:
 	int isequip(item* item_);
 	int haveGoal();
 	int haveOrb();
-	bool unequip(equip_type type_);
+	bool unequip(equip_type type_, bool force_=false);
 	bool unequiparmor(char id_);
 	bool unequipjewerly(char id_);
 	void equip_stat_change(item *it, equip_type where_, bool equip_bool);

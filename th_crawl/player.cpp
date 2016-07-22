@@ -643,7 +643,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			youAttack(mon_);
 			if(mon_->isLive() && you.GetProperty(TPT_HORN))
 			{
-				int attack_ = 8;
+				int attack_ = 10;
 				int hit_ = 12+level/3;
 				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
 				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
@@ -3565,7 +3565,11 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		printlog("당신은 다리가 없다!",true,false,false,CL_normal);
 		return 0;
 	}
-	
+	if(type_ == ET_GLOVE &&GetProperty(TPT_CLAW) )
+	{
+		printlog("당신의 손톱때문에 장갑을 낄 수 없다!",true,false,false,CL_normal);
+		return 0;
+	}
 
 
 	WaitForSingleObject(mutx, INFINITE);
@@ -3858,11 +3862,11 @@ int players::haveOrb()
 	return goal_;
 	
 }
-bool players::unequip(equip_type type_)
+bool players::unequip(equip_type type_, bool force_)
 {
 	if(equipment[type_])
 	{
-		if(equipment[type_]->curse && (type_ != ET_WEAPON || (equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type < ITM_WEAPON_LAST)))
+		if(!force_ && equipment[type_]->curse && (type_ != ET_WEAPON || (equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type < ITM_WEAPON_LAST)))
 		{
 			if(!equipment[type_]->identify_curse)
 				equipment[type_]->identify_curse = true;
@@ -3870,18 +3874,22 @@ bool players::unequip(equip_type type_)
 		}
 		WaitForSingleObject(mutx, INFINITE);
 		equip_stat_change(equipment[type_], type_, false);
-		if(type_ == ET_ARMOR)
-			time_delay += 5*you.GetNormalDelay();
-		else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
-			time_delay += 3*you.GetNormalDelay();
-		else
-			time_delay += you.GetNormalDelay();
-		printlog(equipment[type_]->GetName(),false,false,false,equipment[type_]->item_color());
-		printarray(true,false,false,CL_normal,2,equipment[type_]->GetNameInfor().name_to(true),"벗었다.");
+		if(!force_)
+		{
+			if(type_ == ET_ARMOR)
+				time_delay += 5*you.GetNormalDelay();
+			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
+				time_delay += 3*you.GetNormalDelay();
+			else
+				time_delay += you.GetNormalDelay();
+			printlog(equipment[type_]->GetName(),false,false,false,equipment[type_]->item_color());
+			printarray(true,false,false,CL_normal,2,equipment[type_]->GetNameInfor().name_to(true),"벗었다.");
+		}
 		equipment[type_] = NULL;
 		ReSetASPanlty();
 		ReleaseMutex(mutx);
-		TurnEnd();
+		if(!force_)
+			TurnEnd();
 	}
 	return true;
 }

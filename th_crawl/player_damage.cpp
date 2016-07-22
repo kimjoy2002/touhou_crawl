@@ -60,7 +60,7 @@ int players::GetAttack(bool max_)
 		skill_ = SKT_UNWEAPON;
 		max_atk_ = base_atk_+skill[skill_].level;
 		if(GetProperty(TPT_CLAW)>0)
-			max_atk_ += 2*GetProperty(TPT_CLAW);
+			max_atk_ += 3*GetProperty(TPT_CLAW);
 		min_atk_ = 0;
 	}
 	else

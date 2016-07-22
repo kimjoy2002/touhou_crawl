@@ -561,7 +561,7 @@ string tribe_property::GetDetail()
 			}
 		}
 	case TPT_CLAW:
-		return "맨손격투시 추가 데미지를 준다.";
+		return "맨손격투시 추가 데미지를 준다.\n장갑을 낄 수 없게 된다.";
 	case TPT_JAW:
 		return "매 공격마다 일정확률로 깨물기 공격이 들어간다.";	
 	case TPT_FOOT:
@@ -682,8 +682,22 @@ void tribe_property::gain(bool gain_)
 	case TPT_SIZE:
 		return;
 	case TPT_HORN:
+		if(you.equipment[ET_HELMET])
+		{
+			if(you.unequip(ET_HELMET, true))
+			{
+				printlog("당신이 쓰고있던 머리방어구가 벗겨졌다!",true,false,false,CL_danger);
+			}
+		}
 		return;
 	case TPT_GHOST_FOOT:
+		if(you.equipment[ET_BOOTS])
+		{
+			if(you.unequip(ET_BOOTS,true))
+			{
+				printlog("당신이 쓰고있던 다리방어구가 벗겨졌다!",true,false,false,CL_danger);
+			}
+		}
 		return;
 	case TPT_CHEUKUMOGAMI:
 		return;
@@ -700,6 +714,13 @@ void tribe_property::gain(bool gain_)
 	case TPT_SPEED:
 		return;
 	case TPT_CLAW:
+		if(you.equipment[ET_GLOVE])
+		{
+			if(you.unequip(ET_GLOVE,true))
+			{
+				printlog("당신이 쓰고있던 손방어구가 벗겨졌다!",true,false,false,CL_danger);
+			}
+		}
 		return;
 	case TPT_JAW:
 		return;

@@ -745,6 +745,26 @@ bool curse_jewelry_scroll(bool pre_iden_)
 }
 bool recharging_scroll(bool pre_iden_)
 {
+	bool ok_ = false;
+	for(auto it = you.item_list.begin();it != you.item_list.end(); it++)
+	{
+		if((*it).isSimpleType(ITMS_SPELL) && (*it).isChargable())
+		{
+			ok_ = true;
+			break;
+		}
+	}
+	if(!ok_)
+	{
+		printlog("당신의 소지품에 충전할 수 있는 스펠카드가 없다.",true,false,false,CL_normal);
+		if(pre_iden_)
+			return false;
+		else
+			return true;
+	}
+
+
+
 	if(iden_list.scroll_list[SCT_CHARGING].iden == 3)
 		view_item(IVT_SPELLCARD,"무슨 스펠카드를 충전하시겠습니까?");
 	else

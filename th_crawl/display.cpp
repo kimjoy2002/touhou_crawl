@@ -425,7 +425,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_ARMOR, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
@@ -449,7 +449,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_SHIELD, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
@@ -473,7 +473,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_HELMET, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
@@ -496,7 +496,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_CLOAK, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
@@ -519,7 +519,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_GLOVE, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
@@ -542,7 +542,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_BOOTS, false)?"없음":"착용불가");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;

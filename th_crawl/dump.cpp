@@ -368,7 +368,7 @@ bool Dump(int type)
 	if(you.equipment[ET_ARMOR])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_ARMOR, false)?"없음\n":"착용불가\n");
 
 	
 	resist_ = you.poison_resist;
@@ -376,31 +376,31 @@ bool Dump(int type)
 	if(you.equipment[ET_SHIELD])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");	
+		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"없음\n":"착용불가\n");	
 
 	fprintf_s(fp,"                                           머리: ");
 	if(you.equipment[ET_HELMET])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_HELMET, false)?"없음\n":"착용불가\n");
 
 	fprintf_s(fp,"                                           망토: ");
 	if(you.equipment[ET_CLOAK])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_CLOAK, false)?"없음\n":"착용불가\n");
 
 	fprintf_s(fp,"                                           손  : ");
 	if(you.equipment[ET_GLOVE])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_GLOVE, false)?"없음\n":"착용불가\n");
 
 	fprintf_s(fp,"                                           발  : ");
 	if(you.equipment[ET_BOOTS])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_BOOTS, false)?"없음\n":"착용불가\n");
 
 	fprintf_s(fp,"                                           목걸이  : ");
 	if(you.equipment[ET_NECK])

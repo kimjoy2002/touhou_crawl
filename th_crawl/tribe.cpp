@@ -272,9 +272,9 @@ string tribe_property::GetInfor()
 			switch(value)
 			{
 			case 1:
-				return "당신은 몸집이 커서 갑옷이 몸에 안 맞는다.";
+				return "당신은 몸집이 커서 큰 갑옷이 몸에 안 맞는다.";
 			case -1:
-				return "당신은 몸집이 작아서 갑옷이 몸에 안 맞는다.";
+				return "당신은 몸집이 작아서 큰 갑옷이 몸에 안 맞는다.";
 			default:
 				return "당신은 몸집이 버그다.";
 			}
@@ -515,11 +515,11 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 1:
-				return "천 이외의 몸통 방어구를 입을 수 없다.\n또한 당신의 큰 사이즈는 또한 회피에 패널티를 준다.";
+				return "천과 가죽 이외의 몸통 방어구를 입을 수 없다.\n또한 당신의 큰 사이즈는 또한 회피에 패널티를 준다.";
 			case -1:
-				return "천 이외의 몸통 방어구를 입을 수 없다.\n그러나 당신의 작은 사이즈는 회피에 보너스를 준다.";
+				return "천과 가죽 이외의 몸통 방어구를 입을 수 없다.\n그러나 당신의 작은 사이즈는 회피에 보너스를 준다.";
 			default:
-				return "천 이외의 몸통 방어구를 못입긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return "천과 가죽 이외의 몸통 방어구를 못입긴 개뿔 버그다.\n제작자에게 신고하자.";
 			}
 		}
 	case TPT_HORN:

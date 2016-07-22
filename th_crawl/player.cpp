@@ -3555,21 +3555,8 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			return 0;
 		}
 	}
-	if(type_ == ET_HELMET &&GetProperty(TPT_HORN) )
-	{
-		printlog("당신의 뿔이 이 장비를 쓰는걸 방해한다.",true,false,false,CL_normal);
+	if(!isImpossibeEquip(type_, true))
 		return 0;
-	}
-	if(type_ == ET_BOOTS &&GetProperty(TPT_GHOST_FOOT) )
-	{
-		printlog("당신은 다리가 없다!",true,false,false,CL_normal);
-		return 0;
-	}
-	if(type_ == ET_GLOVE &&GetProperty(TPT_CLAW) )
-	{
-		printlog("당신의 손톱때문에 장갑을 낄 수 없다!",true,false,false,CL_normal);
-		return 0;
-	}
 
 
 	WaitForSingleObject(mutx, INFINITE);
@@ -3861,6 +3848,28 @@ int players::haveOrb()
 	}
 	return goal_;
 	
+}
+bool players::isImpossibeEquip(equip_type type_, bool massage_)
+{
+	if(type_ == ET_HELMET && GetProperty(TPT_HORN) )
+	{
+		if(massage_)
+			printlog("당신의 뿔이 이 장비를 쓰는걸 방해한다.",true,false,false,CL_normal);
+		return false;
+	}
+	if(type_ == ET_BOOTS &&GetProperty(TPT_GHOST_FOOT) )
+	{
+		if(massage_)
+			printlog("당신은 다리가 없다!",true,false,false,CL_normal);
+		return false;
+	}
+	if(type_ == ET_GLOVE &&GetProperty(TPT_CLAW) )
+	{
+		if(massage_)
+			printlog("당신의 손톱때문에 장갑을 낄 수 없다!",true,false,false,CL_normal);
+		return false;
+	}
+	return true;
 }
 bool players::unequip(equip_type type_, bool force_)
 {

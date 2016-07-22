@@ -523,9 +523,9 @@ string tribe_property::GetDetail()
 			}
 		}
 	case TPT_HORN:
-		return "뿔에 의한 박치기 공격이 추가된다.\n매 공격마다 일정확률로 박치기가 나가며 맨손으로 싸울때 더 높은 확률로 나간다.";
+		return "뿔에 의한 박치기 공격이 추가된다.\n매 공격마다 일정확률로 박치기가 나가며 맨손으로 싸울때 더 높은 확률로 나간다.\n머리방어구를 착용할 수 없다.";
 	case TPT_GHOST_FOOT:
-		return "당신의 다리는 무처럼 생겼다.\n";
+		return "당신의 다리는 유령처럼 존재하지않는다.\n다리방어구를 착용할 수 없다.";
 	case TPT_CHEUKUMOGAMI:
 		return "당신의 본체인 도구는 버릴 수 없다.\n당신의 본체를 손에 들고 있으면 그 장비와 연관된 스킬이 5증가하는 보너스를 받는다.";
 	case TPT_HP:

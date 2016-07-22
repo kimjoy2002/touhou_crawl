@@ -3555,7 +3555,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			return 0;
 		}
 	}
-	/*if(type_ == ET_HELMET &&GetProperty(TPT_HORN) )
+	if(type_ == ET_HELMET &&GetProperty(TPT_HORN) )
 	{
 		printlog("당신의 뿔이 이 장비를 쓰는걸 방해한다.",true,false,false,CL_normal);
 		return 0;
@@ -3564,7 +3564,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 	{
 		printlog("당신은 다리가 없다!",true,false,false,CL_normal);
 		return 0;
-	}*/
+	}
 	
 
 
@@ -3623,7 +3623,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			
 			if(type_ == ET_ARMOR)
 				time_delay += 5*you.GetNormalDelay();
-			else if(type_ >= ET_SHIELD && type_ < ET_LAST)
+			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
 				time_delay += 3*you.GetNormalDelay();
 			else
 				time_delay += you.GetNormalDelay();
@@ -3872,7 +3872,7 @@ bool players::unequip(equip_type type_)
 		equip_stat_change(equipment[type_], type_, false);
 		if(type_ == ET_ARMOR)
 			time_delay += 5*you.GetNormalDelay();
-		else if(type_ >= ET_SHIELD && type_ < ET_LAST)
+		else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
 			time_delay += 3*you.GetNormalDelay();
 		else
 			time_delay += you.GetNormalDelay();

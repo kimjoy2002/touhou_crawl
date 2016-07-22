@@ -29,6 +29,7 @@ struct item_group
 item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 {
 	{0,0,SCARLET_LEVEL_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,0,SCARLET_LEVEL_LAST_LEVEL,5,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{21,0,SCARLET_LEVEL_LAST_LEVEL,2,1}, //음식
 	
 	
@@ -87,7 +88,6 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 
 	
 
-
 	//윳쿠리
 	{13,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //중반 잘나오는 좋은 물약들
 	{14,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //중반 잘나오는 좋은 두루마리들
@@ -95,6 +95,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{18,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //중반용 방어구
 	{19,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{21,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,5,1}, //음식
 	{22,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,5,1}, //중반용 방패
 	{25,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //책
@@ -114,6 +115,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{18,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //중반용 방어구
 	{19,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{25,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //책
 	{26,DEPTH_LEVEL,DEPTH_LAST_LEVEL,3,1}, //스펠카드
 	{21,DEPTH_LEVEL,DEPTH_LAST_LEVEL,5,1}, //음식
@@ -131,6 +133,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{18,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //중반용 방어구
 	{19,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{25,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,15,1}, //책
 	{26,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1}, //스펠카드
 	{21,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,5,1}, //음식
@@ -148,6 +151,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{18,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //중반용 방어구
 	{19,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
 	{25,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //책
 	{26,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,3,1}, //스펠카드
 	{21,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,5,1}, //음식
@@ -247,6 +251,9 @@ item_infor& id_to_item(int id, item_infor* item_)
 	{
 	case 0:
 		makeitem(ITM_THROW_TANMAC, 0,item_);
+		break;
+	case 1:
+		makeitem((item_type)rand_int(ITM_ARMOR_HEAD,ITM_ARMOR_BOOT),rand_int(2,-1),item_);
 		break;
 	case 2: //굿 초반물약
 		makeitem(ITM_POTION,randA(1)>0?1:(randA(60)?2:3),item_);

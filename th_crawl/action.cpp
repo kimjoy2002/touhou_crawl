@@ -1906,7 +1906,7 @@ void Armour_Show()
 	{
 		printlog("없음",true,false,true,CL_normal);
 	}	
-	/*
+	
 	printlog("머리: ",false,false,true,CL_normal);
 	if(you.equipment[ET_HELMET])
 	{
@@ -1950,7 +1950,7 @@ void Armour_Show()
 	else
 	{
 		printlog("없음",true,false,true,CL_normal);
-	}*/
+	}
 
 
 }

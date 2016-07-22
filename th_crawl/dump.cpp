@@ -377,7 +377,7 @@ bool Dump(int type)
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
 	else
 		fprintf_s(fp,"없음\n");	
-/*
+
 	fprintf_s(fp,"                                           머리: ");
 	if(you.equipment[ET_HELMET])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
@@ -400,13 +400,13 @@ bool Dump(int type)
 	if(you.equipment[ET_BOOTS])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");*/
+		fprintf_s(fp,"없음\n");
 
-	/*fprintf_s(fp,"                                           목걸이  : ");
+	fprintf_s(fp,"                                           목걸이  : ");
 	if(you.equipment[ET_NECK])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
 	else
-		fprintf_s(fp,"없음\n");	*/	
+		fprintf_s(fp,"없음\n");		
 
 	fprintf_s(fp,"                                           왼반지  : ");
 	if(you.equipment[ET_LEFT])

@@ -502,6 +502,14 @@ bool item::isRightType(equip_type type_)
 		return (type>=ITM_ARMOR_BODY_FIRST && type<ITM_ARMOR_BODY_LAST);
 	case ET_SHIELD:
 		return (type == ITM_ARMOR_SHIELD);
+	case ET_HELMET:
+		return (type == ITM_ARMOR_HEAD);
+	case ET_CLOAK:
+		return (type == ITM_ARMOR_CLOAK);
+	case ET_GLOVE:
+		return (type == ITM_ARMOR_GLOVE);
+	case ET_BOOTS:
+		return (type == ITM_ARMOR_BOOT);
 	case ET_NECK:
 		return (type == ITM_SPELLCARD);
 	case ET_LEFT:
@@ -518,6 +526,14 @@ equip_type item::GetArmorType()
 		return ET_ARMOR;
 	else if(type == ITM_ARMOR_SHIELD)
 		return ET_SHIELD;
+	else if(type == ITM_ARMOR_HEAD)
+		return ET_HELMET;
+	else if(type == ITM_ARMOR_CLOAK)
+		return ET_CLOAK;
+	else if(type == ITM_ARMOR_GLOVE)
+		return ET_GLOVE;
+	else if(type == ITM_ARMOR_BOOT)
+		return ET_BOOTS;
 	else if(type == ITM_SPELLCARD)
 		return ET_NECK;
 	else

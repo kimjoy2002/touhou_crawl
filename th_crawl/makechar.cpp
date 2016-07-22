@@ -39,6 +39,7 @@ enum start_item_type
 	SIT_KAPPA_ROBE,
 	SIT_MIKO,
 	SIT_MAID,
+	SIT_CLOAK,
 	SIT_ARMOUR_0,
 	SIT_ARMOUR_1,
 	SIT_SMALL_SHIELD,
@@ -252,15 +253,15 @@ void MakeStartItem(start_item_type select_, int num)
 		you.equiparmor('a'+num,false);
 		env[current_level].DeleteItem(it);	
 		break;
-	//case SIT_CLOAK:
-	//	it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_CLOAK, 0, &t, -1));	
-	//	it->value4 = 0;
-	//	it->curse = false;
-	//	it->Identify();
-	//	you.additem(it,false);
-	//	you.equip('a'+num,ET_CLOAK,false);
-	//	env[current_level].DeleteItem(it);
-	//	break;
+	case SIT_CLOAK:
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_CLOAK, 0, &t, -1));	
+		it->value4 = 0;
+		it->curse = false;
+		it->Identify();
+		you.additem(it,false);
+		you.equip('a'+num,ET_CLOAK,false);
+		env[current_level].DeleteItem(it);
+		break;
 	case SIT_ARMOUR_0:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_1, 0, &t, AMK_NORMAL));	
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("°æ°©¿Ê",true),name_infor("",true),6.0f,40));
@@ -439,8 +440,8 @@ void SetJob(job_type select_, string name_)
 			else
 			{
 				MakeStartItem(SIT_ARMOUR_0,1);
-				//MakeStartItem(SIT_CLOAK,2);
-				MakeStartItem(SIT_MIDDLE_SHIELD,2);	
+				MakeStartItem(SIT_CLOAK,2);
+				MakeStartItem(SIT_MIDDLE_SHIELD,3);	
 			}
 		}
 		else
@@ -825,13 +826,13 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 		else
 		{	
-			//it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_HEAD, 0, &t, -1));	
-			//it->value4 = 0;
-			//it->curse = false;
-			//it->Identify();
-			//you.additem(it,false);
-			//you.equip('a'+2,ET_HELMET,false);
-			//env[current_level].DeleteItem(it);
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_HEAD, 0, &t, -1));	
+			it->value4 = 0;
+			it->curse = false;
+			it->Identify();
+			you.additem(it,false);
+			you.equip('a'+2,ET_HELMET,false);
+			env[current_level].DeleteItem(it);
 			for(int i = 0; i <4; i++)
 			{
 				it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t, TMT_AMULET));

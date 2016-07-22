@@ -978,6 +978,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.SetProperty(TPT_POWER_SAVE,1);
 
 			you.skill[SKT_TANMAC].onoff = false;
+			set_exist_named(MON_KOISHI);	
 			
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
@@ -996,6 +997,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.SetProperty(TPT_HP,2);
 			you.SetProperty(TPT_9_LIFE,1);
 			you.SetProperty(TPT_18_LIFE,1);
+			set_exist_named(MON_MOKOU);	
 
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
@@ -1015,6 +1017,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);
+			set_exist_named(MON_NITORI);	
 
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

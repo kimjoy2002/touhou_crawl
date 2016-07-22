@@ -19,6 +19,7 @@
 #include "book.h"
 #include "spellcard.h"
 #include "note.h"
+#include "tribe.h"
 
 
 
@@ -428,10 +429,27 @@ const D3DCOLOR item::item_color()
 			return_ = curse?CL_danger:CL_good;
 		}
 	}
+
 	if(isArtifact())
 	{
 		if(return_ != CL_danger)
 			return_ = CL_normal;
+	}
+	if((type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST) && !you.isImpossibeEquip(GetArmorType(),false))
+	{
+		return_ = CL_bad;
+	}
+	if(GetArmorType() == ET_ARMOR && type >= ITM_ARMOR_BODY_ARMOUR_2 && type <= ITM_ARMOR_BODY_ARMOUR_3 )
+	{
+		int your_size_ = you.GetProperty(TPT_SIZE);
+		if(your_size_>0)
+		{
+			return_ = CL_bad;
+		}
+		else if(your_size_<0)
+		{
+			return_ = CL_bad;
+		}
 	}
 
 	return return_;

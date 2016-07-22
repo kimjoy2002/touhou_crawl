@@ -322,7 +322,7 @@ string item::GetName(int num_)
 		if(identify)
 		{
 			char temp2[32];
-			sprintf_s(temp2,32,"(%d)",value1);
+			sprintf_s(temp2,32,"(%d/%d)",value1,SpellcardMaxCharge((spellcard_evoke_type)value2));
 			temp += temp2;
 		}
 		if(!identify && value3)

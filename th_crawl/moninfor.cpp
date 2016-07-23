@@ -805,7 +805,9 @@ string GetMonsterInfor(monster *it)
 			text_ += "하늘을 날 수 있다.\n";
 	if(it->flag & M_FLAG_CAN_SEE_INVI)
 			text_ += "투명을 볼 수 있다.\n";
-
+	if(it->flag & M_FLAG_INANIMATE)
+			text_ += "무생물이다.\n";
+	
 	if(it->resist >= 99)
 			text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
 

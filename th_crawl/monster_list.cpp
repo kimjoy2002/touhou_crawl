@@ -297,7 +297,7 @@ const mon_infor mondata[] = {
 
 	{MON_DAUZING,10,1,name_infor("펜듈럼",true),&img_mons_dauzing,80,8,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_FLY | M_FLAG_CANT_NETURAL,99,0,8},
+	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,8},
 	
 	{MON_YOSIKA,9,960,name_infor("요시카",false),&img_named_yosika,150,1,3,
 	{22,30,30},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor("깨물기",false),name_infor("깨물기",false)},
@@ -365,7 +365,7 @@ const mon_infor mondata[] = {
 	
 	{MON_MAGIC_BOOK,10,830,name_infor("마법서",false),&img_mons_magic_book[0],50,0,13,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_FLY | M_FLAG_NO_ATK,99,1,8},
+	M_FLAG_FLY | M_FLAG_NO_ATK | M_FLAG_INANIMATE,99,1,8},
 	 
 	{MON_HOBGOBRIN,6,142,name_infor("홉고블린",true),&img_mons_hobgobrin,40,1,6,
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -441,19 +441,19 @@ const mon_infor mondata[] = {
 		
 	{MON_ONBASIRA,1,1,name_infor("온바시라",true),&img_mons_onbasira,60,10,0,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_CANT_NETURAL ,99,0,10},
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10},
 	
 	{MON_RED_UFO,12,1280,name_infor("레드 벤토라",false),&img_mons_red_ufo,76,5,10,
 	{25,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
+	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9},
 	
 	{MON_GREEN_UFO,12,1280,name_infor("그린 벤토라",false),&img_mons_green_ufo,76,5,10,
 	{25,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
+	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9},
 		
 	{MON_BLUE_UFO,12,1280,name_infor("블루 벤토라",false),&img_mons_blue_ufo,76,5,10,
 	{25,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,1,1,9},
+	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9},
 		
 	
 	{MON_KOISHI,13,3880,name_infor("코이시",false),&img_named_koishi,70,3,18,
@@ -464,7 +464,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10},
 	{MON_SANPEI_FIGHTER,12,1601,name_infor("산페이파이터",false),&img_mons_sanpei_fighter,120,15,6,
 	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("드릴",false),name_infor(),name_infor()},
-	M_FLAG_FLY,99,1,8},
+	M_FLAG_FLY | M_FLAG_INANIMATE,99,1,8},
 	{MON_VAMPIER_BAT,9,824,name_infor("흡혈 박쥐",false),&img_mons_vamp_bat,60,0,20,
 	{14,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_ANIMAL,0,1,5},
@@ -491,7 +491,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10},
 	{MON_YINYAN,30,8000,name_infor("음양옥",true),&img_mons_yinyan,300,0,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL,99,2,9},
+	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,2,9},
 	{MON_YUUGENMAGAN,14,2432,name_infor("유겐마간",true),&img_mons_yugenmagan,100,12,10,
 	{15,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,99,1,10},
@@ -519,11 +519,11 @@ const mon_infor mondata[] = {
 
 	{MON_MAGICAL_STAR,4,1,name_infor("옵션",true),&img_mons_option,10,0,5,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL,99,0,5},
+	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,5},
 
 	{MON_GOLEM,8,1,name_infor("골렘",true),&img_mons_golem,80,10,0,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_CANT_NETURAL,99,0,10},
+	M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10},
 	{MON_EVIL_EYE,3,15,name_infor("이블아이",false),&img_mons_evil_eye,20,0,8,
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY,0,1,10},
@@ -537,7 +537,7 @@ const mon_infor mondata[] = {
 
 	{MON_SCHEMA_EYE,4,1,name_infor("변용을 보는 눈",true),&img_mons_schema_eye,30,0,12,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NONE_MOVE  | M_FLAG_CAN_SEE_INVI  | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL,99,0,10},
+	M_FLAG_NONE_MOVE  | M_FLAG_CAN_SEE_INVI  | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10},
 	
 	{MON_FLAN,21,12999,name_infor("플랑드르",false),&img_named_flandre,230,10,15,
 	{31,28,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor("흡혈",true),name_infor("공격",true),name_infor()},
@@ -639,11 +639,11 @@ const mon_infor mondata[] = {
 
 	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_flower_tank[1],90,10,10,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI,99,1,9},
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,9},
 	
 	{MON_EVIL_EYE_TANK,25,5043,name_infor("이블 아이 전차",false),&img_mons_evil_eye_tank,150,20,10,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI,99,2,9},
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,2,9},
 	
 	{MON_SNOW_GIRL,14,1464,name_infor("설녀",false),&img_mons_snow_girl,77,2,16,
 	{27,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -703,19 +703,19 @@ const mon_infor mondata[] = {
 	
 	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_sanghai[0],80,5,22,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL,99,1,7},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,1,7},
 	
 	{MON_HOURAI,15,1,name_infor("봉래 인형",true),&img_mons_hourai[0],120,20,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL ,99,1,10},
+	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,1,10},
 	
 	{MON_FAKE_SANGHAI,12,1,name_infor("모조 상해 인형",true),&img_mons_sanghai[1],60,5,17,
 	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL,99,1,7},
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,1,7},
 	
 	{MON_FAKE_HOURAI,12,1,name_infor("모조 봉래 인형",true),&img_mons_hourai[1],90,15,2,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL ,99,1,10},
+	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,1,10},
 	
 	{MON_TOKIKO,11,1205,name_infor("책읽는 요괴",false),&img_mons_tokiko,92,1,15,
 	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

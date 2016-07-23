@@ -2847,14 +2847,20 @@ bool monster::SetGhost(int ghost_)
 {
 	if(!ghost_)
 		return false;
+	if(flag & M_FLAG_INANIMATE)
+	{		
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다.");	
+		return false;
+	}
+
 	if(flag & M_FLAG_SUMMON)
 	{
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true)," 이미 종속되어있다.");	
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"이미 종속되어있다.");	
 		return false;
 	}
 	if(isYourShight())
 	{
-		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"의 영혼이 붙잡혔다.");
+		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"의 영혼이 붙잡혔다. 지속시간내로 잡으면 당신의 동료가 된다.");
 	}
 	s_ghost += ghost_;
 	if(s_ghost>100)

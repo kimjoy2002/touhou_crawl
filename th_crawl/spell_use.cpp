@@ -2431,7 +2431,7 @@ bool skill_time_paradox(int power, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		if(!randA(9))
+		if(!randA(5))
 			you.SetTransPanalty(1);
 		you.SetParadox(rand_int(20,30)+power/4);
 	}

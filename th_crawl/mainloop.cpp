@@ -718,7 +718,7 @@ void MainLoop()
 			Pray();
 			break;
 		case '#':
-			if(isNormalGame() && Dump(0))
+			if(isNormalGame() && Dump(0,NULL))
 				printlog("덤프에 성공했습니다.",true,false,false,CL_normal);
 			break;
 		case 'Z':

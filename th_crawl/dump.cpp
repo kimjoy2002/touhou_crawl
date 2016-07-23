@@ -103,7 +103,11 @@ int caculScore()
 }
 
 
-bool Dump(int type)
+
+
+
+
+bool Dump(int type, string *filename_)
 {
 	char filename[100];
 	char sql_[256];
@@ -312,7 +316,7 @@ bool Dump(int type)
 					sprintf_s(temp_reason,64,"음양옥과 %d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
 					strncat(death_reason,temp_reason,64);
 				}
-				else if(you.haveOrb()){
+				else if(you.haveGoal()){
 					sprintf_s(temp_reason,64,"%d개의 룬만 들고 도망쳤다.", you.haveGoal());
 					strncat(death_reason,temp_reason,64);
 				}
@@ -568,6 +572,12 @@ bool Dump(int type)
 	fclose(fp);
 	if(type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
+	if(filename_)
+	{
+		(*filename_) = filename;
+
+	}
+
 	return true;
 }
 const char* GetDumpActionString(dump_action_type type_)

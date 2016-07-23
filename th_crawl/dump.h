@@ -39,7 +39,7 @@ public:
 const char* GetDumpActionString(dump_action_type type_);
 
 
-bool Dump(int type);
+bool Dump(int type, string *filename_);
 
 
 #endif // __DUMP_H__

@@ -2438,7 +2438,7 @@ void monster::special_action(int delay_)
 	case MON_CLOWNPIECE:
 		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
 		{
-			you.SetLunatic(rand_int(5,15));
+			you.SetLunatic(rand_int(5,10));
 		}
 		break;
 	case MON_RED_UFO:

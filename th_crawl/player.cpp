@@ -3242,11 +3242,11 @@ bool players::Memorize(int spell_, bool immediately)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	
-	if(you.skill[SKT_SPELLCASTING].level == 0)
-	{
-		printlog("당신은 아직 주문을 배울 수 없다!",true,false,false,CL_normal);
-		return false;
-	}
+	//if(you.skill[SKT_SPELLCASTING].level == 0)
+	//{
+	//	printlog("당신은 아직 주문을 배울 수 없다!",true,false,false,CL_normal);
+	//	return false;
+	//}
 	if(!immediately && you.level<skill_level_)
 	{
 		printlog("이 주문을 배우기엔 레벨이 모자란다.",true,false,false,CL_normal);

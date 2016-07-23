@@ -811,10 +811,10 @@ bool players::CanMemorizeSpell(int spell_)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	
-	if(you.skill[SKT_SPELLCASTING].level == 0)
-	{
-		return false;
-	}
+	//if(you.skill[SKT_SPELLCASTING].level == 0)
+	//{
+	//	return false;
+	//}
 	if(you.level<skill_level_)
 	{
 		return false;

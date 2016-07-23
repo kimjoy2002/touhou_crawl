@@ -179,7 +179,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case 12:
 	you.GiveSkillExp(SKT_SPELLCASTING,20,true);
 	you.GiveSkillExp(SKT_CONJURE,100,true);
-		printlog("카나코는 말했다 : 마법을 배우려면 주문시전스킬이 1렙이상 필요하지.",true,false,false,CL_warning);
+		printlog("카나코는 말했다 : 마법을 배우려면 책에서 주문을 먼저 배워야하지.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 일단 책을 주워서 M키로 마법의탄막을 배워보자.",true,false,false,CL_warning);\
 		return 1;
 	case 13:

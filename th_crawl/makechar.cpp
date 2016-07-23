@@ -332,9 +332,6 @@ void MakeStartItem(start_item_type select_, int num)
 			case JOB_PSYCHOLOGIST:
 				book_ = BOOK_PSYCHOLOGIST_BASE;
 				break;
-			case JOB_WARP_WIZARD:
-				book_ = BOOK_TRANSITION;
-				break;
 			case JOB_ALCHEMIST:
 				book_ = BOOK_ALCHMIST_BASE;
 				break;
@@ -658,23 +655,6 @@ void SetJob(job_type select_, string name_)
 	//	you.GiveSkillExp(SKT_AIR,60,false);
 	//	you.Memorize(SPL_SHOCK,true);
 	//	break;
-	case JOB_WARP_WIZARD:
-		you.max_hp+=2;
-		you.max_mp+=1;
-		you.StatUpDown(-1,STAT_STR);
-		you.StatUpDown(1,STAT_INT);
-		you.StatUpDown(1,STAT_DEX);
-		you.GiveSkillExp(WeaponSelect(0),60,false);
-		MakeStartItem(SIT_ROBE,1);
-		MakeStartItem(SIT_BOOK,2);
-		MakeStartItem(SIT_TANMAC,4);
-		you.GiveSkillExp(SKT_FIGHT,20,false);
-		you.GiveSkillExp(SKT_ARMOUR,20,false);
-		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.GiveSkillExp(SKT_TANMAC,30,false);
-		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
-		you.GiveSkillExp(SKT_TRANS,60,false);
-		break;
 	case JOB_ALCHEMIST:
 		you.max_hp+=2;
 		you.max_mp+=1;
@@ -767,11 +747,12 @@ void SetJob(job_type select_, string name_)
 		MakeStartItem(SIT_THROWING_KNIFE,4);
 		MakeStartItem(SIT_THROWING_KNIFE,5);
 		MakeStartItem(SIT_THROWING_KNIFE,6);
-		you.GiveSkillExp(SKT_FIGHT,60,false);
+		you.GiveSkillExp(SKT_FIGHT,30,false);
 		you.GiveSkillExp(SKT_MACE,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_TANMAC,60,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.GiveSkillExp(SKT_TRANS,30,false);
 		break;
 	case JOB_ENGINEER:
 		you.max_hp+=2;

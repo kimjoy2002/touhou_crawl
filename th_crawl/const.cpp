@@ -63,7 +63,6 @@ const char *job_type_string[JOB_MAX]=
 	"소환술사",
 	//"독술사",
 	//"전기술사",
-	"전이술사",
 	"연금술사",
 	"심리학자",
 	"사신",
@@ -77,7 +76,6 @@ const char *job_type_string[JOB_MAX]=
 
 const bool job_string_back[JOB_MAX]=
 {
-	false,
 	false,
 	false,
 	false,

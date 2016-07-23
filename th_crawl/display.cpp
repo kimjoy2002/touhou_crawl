@@ -1225,7 +1225,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					if(!env[current_level].isExplore(i+x_,j+y_))
 						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255),you.turn);
 					else if(env[current_level].dgtile[i+x_][j+y_].flag & FLAG_LIGHT)
-						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,0),you.turn);
+					{
+						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255),you.turn);
+						img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,100);
+					}
 					else if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && sight)
 						env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255),you.turn);
 					else

@@ -483,7 +483,7 @@ const char* SpellString(spell_list skill)
 	case SPL_RABBIT_HORN:
 		return "죽림의 나팔";
 	case SPL_SUMMON_LESSOR_DEMON:
-		return "악마 소환";
+		return "마족 소환";
 	case SPL_LUMINUS_STRIKE:
 		return "루미너스 스트라이크";
 	case SPL_FIRE_STORM:

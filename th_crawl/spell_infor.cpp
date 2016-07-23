@@ -353,7 +353,7 @@ string GetSpellInfor(spell_list spell)
 		text_ += "사용직후 잠시동안 죽림의 몬스터 리젠율이 오른다.\n";
 		break;
 	case SPL_SUMMON_LESSOR_DEMON:
-		text_ += "마계의 약한 악마를 소환한다.\n";
+		text_ += "마계의 약한 마족을 소환한다.\n";
 		break;
 	case SPL_LUMINUS_STRIKE:
 		text_ += "그레이즈 되지않는한 필중이며 빠르고 강력한 무속성 구체를 발사한다.\n";

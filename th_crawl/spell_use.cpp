@@ -3641,13 +3641,109 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	}
 }
 
+bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite)
+{
+	
+	if(pos == target && !self)
+	{
+		printlog("자살할거야?",true,false,false,CL_small_danger);	
+		return false;
+	}
+	beam_iterator beam(pos,target);
+
+	
+	if(size)
+	{
+		bool warning_ = false;
+		for(beam.init();!beam.end();)
+		{
+			auto temp_beam = beam++;
+			//스마이트형이 아닌경우 부딪히면 터지기 마련이다.
+			bool block_ = false;
+			if(!env[current_level].isMove(*(beam),true))
+			{
+				beam = temp_beam;
+				target = (*beam);
+				block_ = true;
+			}
+
+		
+			for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+			{
+				if((*it).isLive() && (*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y &&
+					!(*it).isPassedBullet(&you)
+					)
+				{
+					beam = temp_beam;
+					target = (*beam);
+					block_ = true;
+					break;
+				}
+			}
+			if(block_)
+			{
+				break;
+			}
+		}
+
+		if(size == 1)
+		{
+			rect_iterator rit(target,1,1);
+			for(;!rit.end();rit++)
+			{
+				if((*rit) == you.position)
+				{
+					warning_ = true;
+					break;
+				}
+			}
+
+		}
+		if(size == 2)
+		{		
+			dif_rect_iterator rit(target,2);
+			for(;!rit.end();rit++)
+			{
+				if((*rit) == you.position)
+				{
+					warning_ = true;
+					break;
+				}
+			}
+		}
+
+		if(warning_)
+		{
+			printlog("이 공격은 당신에게 피해를 줄 것이다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+			switch(waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				enterlog();
+				break;
+			case 'N':
+			default:
+				printlog(" 취소하였다.",true,false,false,CL_normal);
+				return false;
+			}
+
+		}
+	}
+
+
+
+	return true;
+}
+
+
+
+
 
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 {
 	int power=min(SpellCap(skill),you.GetSpellPower(SpellSchool(skill,0),SpellSchool(skill,1),SpellSchool(skill,2)));
-	if(target == you.position && !SpellFlagCheck(skill,S_FLAG_SEIF) && !SpellFlagCheck(skill, S_FLAG_IMMEDIATELY))
+	if(!CheckSucide(you.position,target,SpellFlagCheck(skill,S_FLAG_SEIF) || SpellFlagCheck(skill, S_FLAG_IMMEDIATELY),Spellsize(skill),SpellFlagCheck(skill,S_FLAG_SMITE)))
 	{
-		printlog("자살할거야?",true,false,false,CL_small_danger);	
 		return false;
 	}
 	if(!you.isSightnonblocked(target))

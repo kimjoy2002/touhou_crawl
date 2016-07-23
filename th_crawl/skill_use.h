@@ -180,6 +180,7 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_ = -1);
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
+bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
 void SpellUse();
 void SpellView();

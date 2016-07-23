@@ -3423,6 +3423,13 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 	//저주받은 템은 던질 수 없다!
 	if((*it).can_throw)
 	{
+
+		bool kiku_ = ((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER);
+		
+		if(!CheckSucide(you.position, target_pos_, false,kiku_?1:0 , false))
+			return false;
+
+
 		int type_ = 0;
 		int pentan_ = s_wind?8:1;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
@@ -3438,7 +3445,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 				temp_infor.type2 = GetWeapontoTanmac((weapon_brand)(*it).value5);
 		}
 
-		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER)
+		if(kiku_)
 		{ //키쿠이치 컴프레서 전용
 
 			int length_ = ceil(sqrt(pow((float)abs(you.position.x-target_pos_.x),2)+pow((float)abs(you.position.y-target_pos_.y),2)));

@@ -1048,7 +1048,7 @@ void LevelUpTribe(int level_)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
 		}
-		if(level_ == 5)
+		if(level_ == 4)
 		{
 			switch(you.half_youkai[0])
 			{
@@ -1074,7 +1074,7 @@ void LevelUpTribe(int level_)
 				break;
 			}
 		}
-		if(level_ == 10)
+		if(level_ == 9)
 		{
 			switch(you.half_youkai[0])
 			{
@@ -1149,7 +1149,7 @@ void LevelUpTribe(int level_)
 			}
 		}
 		
-		if(level_ == 15)
+		if(level_ == 13)
 		{
 			switch(you.half_youkai[0])
 			{
@@ -1240,7 +1240,7 @@ void LevelUpTribe(int level_)
 			}
 		}
 		
-		if(level_ == 20)
+		if(level_ == 18)
 		{
 			switch(you.half_youkai[0])
 			{

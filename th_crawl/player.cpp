@@ -1574,6 +1574,8 @@ void players::ExpRecovery(int exper_)
 }
 int players::GetNeedExp(int level_)
 {
+	if(level_<0)
+		return 0;
 	return level_up_value[level_]*exper_aptit/100;
 }
 bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)

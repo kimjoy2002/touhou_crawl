@@ -908,6 +908,20 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		rc.left -= fontDesc.Width*6;
 
+
+
+
+		
+		rc.top += fontDesc.Height;
+		sprintf_s(temp,128,"다음레벨까지:");
+		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*14;
+		
+		sprintf_s(temp,128,"%d%%",(you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)));
+		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
+		rc.left -= fontDesc.Width*14;
+
+
 		rc.top += fontDesc.Height;
 		sprintf_s(temp,128,"%s",CurrentLevelString());
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);

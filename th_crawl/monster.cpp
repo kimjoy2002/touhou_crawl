@@ -1142,6 +1142,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage, back_stab);
 	int accuracy_ = a.accuracy;
 	bool sight_ = isYourShight();
+	bool only_invisible_ = ((env[current_level].isInSight(position)) && !isView());
 	bool graze_ = false;
 	
 
@@ -1196,7 +1197,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(it->isLive() && it->isSaveSummoner(this))
 				{
-					if(sight_)
+					if(sight_ || only_invisible_)
 					{
 						char temp[128];
 						sprintf_s(temp,128,"%s%s %s%s 감쌌다!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
@@ -1209,7 +1210,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			}
 		}
 
-		if(sight_)
+		if(sight_ || only_invisible_)
 		{
 			print_damage_message(a, back_stab);
 		}
@@ -1223,7 +1224,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					a.order->HpUpDown(damage_/3,DR_EFFECT);	
-					if(sight_)
+					if(sight_ || only_invisible_)
 						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
 			
 				}
@@ -1273,7 +1274,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		else
 		{
-			if(sight_)
+			if(sight_ || only_invisible_)
 				print_no_damage_message(a);
 		}
 		//독은 데미지를 주지않아도 들어가야함
@@ -1342,7 +1343,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	}
 	else
 	{
-		if(a.order && sight_)
+		if(a.order && (sight_ || only_invisible_))
 		{			
 			if(!graze_)
 				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"빗나갔다.");

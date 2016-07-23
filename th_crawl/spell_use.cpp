@@ -1329,6 +1329,8 @@ bool skill_teleport_self(int pow, bool short_, unit* order, coord_def target)
 {
 	if(isArena())
 		return false;
+	if(!order->Tele_check(true, false))
+		return false;
 	order->SetTele(rand_int(3,6));
 	return true;
 }

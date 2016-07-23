@@ -806,9 +806,11 @@ void SetJob(job_type select_, string name_)
 	}
 	you.skill_exper = 25;
 	you.hp=you.max_hp;
-	you.prev_hp = you.hp;
+	you.prev_hp[0] = you.hp;
+	you.prev_hp[1] = you.hp;
 	you.mp=you.max_mp;
-	you.prev_mp = you.mp;
+	you.prev_mp[0] = you.mp;
+	you.prev_mp[1] = you.mp;
 }
 
 

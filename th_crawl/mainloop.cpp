@@ -550,7 +550,6 @@ void Initialize()
 }
 
 
-
 void MainLoop()
 {
 	int a=0,b=0;
@@ -565,7 +564,12 @@ void MainLoop()
 			continue;
 		}
 
-		switch(waitkeyinput())
+
+		int char_ = waitkeyinput();
+
+		you.prev_hp[1] = you.hp;
+		you.prev_mp[1] = you.mp;
+		switch(char_)
 		{
 		case 'j':
 			Move(coord_def(you.position.x,you.position.y-1));  //À§
@@ -574,6 +578,7 @@ void MainLoop()
 			Move(coord_def(you.position.x,you.position.y+1)); //¾Æ·¡
 			break;
 		case 'h':
+			you.maybeAction();
 			Move(coord_def(you.position.x-1,you.position.y)); //¿ÞÂÊ
 			break;
 		case 'l':
@@ -756,6 +761,8 @@ void MainLoop()
 			break;
 		case VK_TAB:
 			auto_battle();
+			break;
+		default:
 			break;
 		}
 	}

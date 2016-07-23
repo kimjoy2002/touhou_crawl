@@ -667,9 +667,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*14;
 		{
-			int Hp_bar = max(you.hp*18/you.max_hp,you.prev_hp*18/you.max_hp);
-			int s_Hp_bar = min(you.hp*18/you.max_hp,you.prev_hp*18/you.max_hp);
-			D3DCOLOR color_ = (you.hp*18/you.max_hp>you.prev_hp*18/you.max_hp)?CL_dark_good:CL_danger;
+			int Hp_bar = max(you.hp*18/you.max_hp,you.prev_hp[0]*18/you.max_hp);
+			int s_Hp_bar = min(you.hp*18/you.max_hp,you.prev_hp[0]*18/you.max_hp);
+			D3DCOLOR color_ = (you.hp*18/you.max_hp>you.prev_hp[0]*18/you.max_hp)?CL_dark_good:CL_danger;
 
 			for(i = 0;i<s_Hp_bar;i++)
 			{
@@ -1387,7 +1387,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int hp_offset_ = (temp1_+1)/2-16;
 
 				
-				int temp2_ = max(0,you.prev_hp) *32 / you.GetMaxHp();
+				int temp2_ = max(0,you.prev_hp[0]) *32 / you.GetMaxHp();
 				float p_hp_rate_ = (max_rate_ * temp2_);
 				int p_hp_offset_ = (temp2_+1)/2 -16;
 				

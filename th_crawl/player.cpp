@@ -59,7 +59,7 @@ void name_infor::LoadDatas(FILE *fp)
 
 players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
-hp(10), prev_hp(10), max_hp(10), hp_recov(0), mp(0),prev_mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), 
+hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), 
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
@@ -75,6 +75,10 @@ uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_ele
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
 {
+	for(int i=0;i<2;i++)
+		prev_hp[i] = hp;
+	for(int i=0;i<2;i++)
+		prev_mp[i] = mp;
 	for(int i=0;i<52;i++)
 		MemorizeSpell[i] = 0;
 	for(int i=0;i<27;i++)
@@ -288,11 +292,13 @@ void players::LoadDatas(FILE *fp)
 	LoadData<tribe_type>(fp, tribe);
 	LoadData<job_type>(fp, job);
 	LoadData<int>(fp, hp);
-	prev_hp = hp;
+	prev_hp[0] = hp;
+	prev_hp[1] = hp;
 	LoadData<int>(fp, max_hp);
 	LoadData<int>(fp, hp_recov);
 	LoadData<int>(fp, mp);
-	prev_mp = mp;
+	prev_mp[0] = mp;
+	prev_mp[1] = mp;
 	LoadData<int>(fp, max_mp);
 	LoadData<int>(fp, mp_recov);
 	LoadData<int>(fp, power);
@@ -540,6 +546,11 @@ void players::SetXY(int x_, int y_)
 void players::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
+}
+void players::maybeAction()
+{
+	you.prev_hp[0] = you.prev_hp[1];
+	you.prev_mp[0] = you.prev_mp[1];
 }
 coord_def players::GetDisplayPos()
 {
@@ -828,7 +839,6 @@ void players::CalcuHP()
 	int aptit_=10+GetProperty(TPT_HP);
 	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(9*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
 	hp = hp*next_hp_/max_hp;
-	prev_hp = hp;
 	max_hp = next_hp_;
 }
 int players::GetThrowDelay(item_type type_)
@@ -1091,7 +1101,6 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
 void deadlog();
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
-	prev_hp = hp;
 	if(value_<0 && max_hp/2 <= -value_)
 		printlog("악! 이건 정말로 아프다!",true,false,false,CL_danger);
 
@@ -1223,7 +1232,6 @@ interupt_type players::MpRecover(int delay_)
 }
 int players::MpUpDown(int value_)
 {
-	prev_mp = mp;
 	mp+= value_;
 	if(mp >= max_mp)
 	{

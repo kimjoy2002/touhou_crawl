@@ -85,11 +85,11 @@ public:
 	job_type job;
 
 	int hp;
-	int prev_hp;
+	int prev_hp[2];
 	int max_hp;
 	int hp_recov;
 	int mp;
-	int prev_mp;
+	int prev_mp[2];
 	int max_mp;
 	int mp_recov;
 	int power;
@@ -275,6 +275,7 @@ public:
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
 	void SetXY(coord_def pos_);
+	void maybeAction();
 	coord_def GetDisplayPos();
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);

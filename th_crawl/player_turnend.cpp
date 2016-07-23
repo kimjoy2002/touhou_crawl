@@ -30,6 +30,7 @@ extern HANDLE mutx;
 
 interupt_type players::TurnEnd(bool *item_delete_)
 {
+	you.maybeAction();
 	WaitForSingleObject(mutx, INFINITE);
 	inter = IT_NONE;
 	env[current_level].CheckFloor();
@@ -729,6 +730,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		you.time_delay += you.GetNormalDelay();
 		SetInter(TurnEnd());
 	}
+	
 	return inter;
 }
 bool players::TraningStealth()

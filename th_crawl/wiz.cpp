@@ -73,7 +73,7 @@ void wiz_mode()
 			break;
 		case 'A':
 			{				
-				printlog("p-포션 s-스크롤 e-발동템 r-반지 b-책",true,false,false,CL_help);
+				printlog("p-포션 s-스크롤 e-발동템 r-반지 b-책 a-방어구",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까?",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -186,6 +186,17 @@ void wiz_mode()
 						item_infor t;
 						makeitem(ITM_BOOK, 0, &t,  -1);
 						env[current_level].MakeItem(you.position,t);
+					}
+					return;
+				case 'a':
+					{
+						item_infor t;
+						makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(2)?0:(randA(3)?1:-1),&t);
+						if(randA(1))	
+							t.artifact = true;
+						item *it_ =env[current_level].MakeItem(you.position,t);
+						if(t.artifact)
+							MakeArtifact(it_,it_->curse?-1:1);
 					}
 					return;
 				default:

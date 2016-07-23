@@ -201,5 +201,4 @@ void equipArmour(armour_kind type, int value)
 	case AMK_AUTUMN:
 		break;		
 	}
-
 }

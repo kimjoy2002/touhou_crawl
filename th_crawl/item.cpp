@@ -20,6 +20,7 @@
 #include "spellcard.h"
 #include "note.h"
 #include "tribe.h"
+#include "armour.h"
 
 
 
@@ -359,6 +360,15 @@ string item::GetName(int num_)
 			{			
 				arti_ += GetAtifactString((ring_type)value1,value2);
 				base_ = true;
+			}
+			if(type >= ITM_ARMOR_BODY_FIRST && type < ITM_ARMOR_BODY_LAST)
+			{
+				int t_ = ArmourExceptopn((armour_kind)value5);
+				if(t_ != -1)
+				{
+					arti_ += GetAtifactString((ring_type)t_,1);
+					base_ = true;
+				}
 			}
 			for(auto it = atifact_vector.begin(); it != atifact_vector.end(); it++)
 			{

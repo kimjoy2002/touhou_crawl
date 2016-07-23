@@ -10,6 +10,7 @@
 #include "ring.h"
 #include "skill_use.h"
 #include "save.h"
+#include "armour.h"
 
 atifact_infor::atifact_infor(int kind_, int value_)
 	:kind(kind_), value(value_)
@@ -337,12 +338,44 @@ bool effectartifact(ring_type kind, int value)
 
 
 
+int ArmourExceptopn(armour_kind type)
+{	
+	switch(type)
+	{
+	case AMK_NORMAL:		
+		break;		
+	case AMK_MIKO:
+		return RGT_CONFUSE_RESIS;
+	case AMK_WING:
+		return RGT_ELEC_RESIS;
+	case AMK_KAPPA:
+		return RGT_ICE_RESIS;
+	case AMK_FIRE:
+		return RGT_FIRE_RESIS;
+	case AMK_MAID:
+		return RGT_MAGIC_RESIS;
+	case AMK_POISON:
+		return RGT_POISON_RESIS;
+	case AMK_AUTUMN:
+		break;		
+	}
+	return -1;
+}
+
+
+
 void MakeArtifact(item* item_, int good_bad_)
 {
 	int num_ = 1+randA(1+randA(3));
 	deque<int> temp;
 	for(int i=0; i<RGT_MAX; i++)
 	{
+		if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
+		{
+			if(ArmourExceptopn((armour_kind)item_->value5) == i)
+				continue;
+		}
+
 		temp.push_back(i);
 	}
 	random_shuffle(temp.begin(),temp.end());

@@ -90,7 +90,7 @@ int GetDebufPower(spell_list skill, int power_)
 	case SPL_PRIVATE_SQ:
 		return power_;
 	case SPL_INSANE:
-		return power_+10;
+		return power_+20;
 	case SPL_STASIS:
 		return power_+20;
 	default:

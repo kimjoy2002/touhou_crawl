@@ -765,7 +765,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 					break;
 				}
 				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Ãæ°ÝÆÄ",false));
-				BaseBomb(final_, &img_blast[2],temp_att);
+				BaseBomb(final_, &img_blast[2],temp_att,&you);
 
 				
 				mon_->flag = temp_flag;

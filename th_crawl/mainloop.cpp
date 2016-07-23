@@ -578,7 +578,6 @@ void MainLoop()
 			Move(coord_def(you.position.x,you.position.y+1)); //¾Æ·¡
 			break;
 		case 'h':
-			you.maybeAction();
 			Move(coord_def(you.position.x-1,you.position.y)); //¿ÞÂÊ
 			break;
 		case 'l':

@@ -469,13 +469,13 @@ bool Dump(int type, string *filename_)
 
 	fprintf_s(fp,"\n\n\n기억하고 있는 주문들\n");
 	if(you.currentSpellNum)
-		fprintf_s(fp,"\n%-34s %-20s","마법이름","학파");
+		fprintf_s(fp,"\n%-34s %-20s %s","마법이름","학파","실패율");
 	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSpell[i])
 		{
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
-			fprintf_s(fp,"\n%c - %-30s %-20s",i<26?'a'+i:'A'+(i-26),SpellString(spell_),GetSpellSchoolString(spell_).c_str());
+			fprintf_s(fp,"\n%c - %-30s %-20s %-3d%%",i<26?'a'+i:'A'+(i-26),SpellString(spell_),GetSpellSchoolString(spell_).c_str(),100-you.GetSpellSuccess(spell_));
 		}
 	}
 	if(you.currentSpellNum)

@@ -150,7 +150,7 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left += 200;
 	pfont->DrawTextA(pSprite,"학파", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
-	pfont->DrawTextA(pSprite,"성공률", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	pfont->DrawTextA(pSprite,"실패율", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 150;
 	pfont->DrawTextA(pSprite,"레벨", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
@@ -166,7 +166,7 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			rc.left += 200;
 			pfont->DrawTextA(pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left = 450;
-			sprintf_s(temp,100,"%-3d%%",you.GetSpellSuccess(spell_));
+			sprintf_s(temp,100,"%-3d%%",100-you.GetSpellSuccess(spell_));
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += 150;
 			sprintf_s(temp,100,"%d",SpellLevel(spell_));

@@ -3276,7 +3276,13 @@ bool players::Memorize(int spell_, bool immediately)
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
 	you.remainSpellPoiont-=skill_level_;
-	you.MemorizeSpell[currentSpellNum++] = spell_;
+	for(int i = 0; i < 52; i++){
+		if(!you.MemorizeSpell[i]){
+			you.MemorizeSpell[i] = spell_;
+			break;
+		}
+	}
+	currentSpellNum++;
 	return true;
 }
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)

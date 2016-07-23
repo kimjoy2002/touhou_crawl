@@ -13,6 +13,7 @@
 #include "throw.h"
 #include "spellcard.h"
 #include "environment.h"
+#include "skill_use.h"
 #include <algorithm>
 extern HANDLE mutx;
 
@@ -34,7 +35,8 @@ char *scroll_uniden_string[SCT_MAX]=
 	"LVIWBAA가 써있는 ",
 	"RWMVXCO가 써있는 ",
 	"OFQXLFE가 써있는 ",
-	"DQFQEFS가 써있는 "
+	"DQFQEFS가 써있는 ",
+	"BAHJDQU가 써있는 "
 };
 
 const char *scroll_iden_string[SCT_MAX]=
@@ -55,7 +57,8 @@ const char *scroll_iden_string[SCT_MAX]=
 	"장신구저주의 ",
 	"정적의 ",
 	"영격 ",
-	"스펠카드충전의 "
+	"스펠카드충전의 ",
+	"망각의 "
 };
 
 
@@ -74,6 +77,7 @@ bool curse_jewelry_scroll(bool pre_iden_);
 bool skill_silence(int pow, bool short_, unit* order, coord_def target);
 bool skill_soul_shot(int power, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_);
+bool amnesia_scroll(bool pre_iden_);
 
 
 
@@ -82,9 +86,9 @@ scroll_type goodbadscroll(int good_bad)
 {
 	if(good_bad==2)
 	{
-		scroll_type list_[6] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1/*SCT_ENCHANT_WEAPON_2*/, SCT_ENCHANT_ARMOUR, SCT_FOG,
-			SCT_CHARGING, SCT_MAPPING};
-		return list_[randA(5)];
+		scroll_type list_[7] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1/*SCT_ENCHANT_WEAPON_2*/, SCT_ENCHANT_ARMOUR, SCT_FOG,
+			SCT_CHARGING, SCT_MAPPING,SCT_AMNESIA};
+		return list_[randA(6)];
 	}
 	else if(good_bad==3)
 	{
@@ -123,6 +127,7 @@ int isGoodScroll(scroll_type kind)
 	case SCT_DETECT_CURSE:
 	case SCT_SILENCE:
 	case SCT_CHARGING:
+	case SCT_AMNESIA:
 		return 1;
 	case SCT_NONE:
 		return 0;
@@ -278,6 +283,14 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = recharging_scroll(pre_iden_);
+		WaitForSingleObject(mutx, INFINITE);
+		return return_;
+		}
+	case SCT_AMNESIA:
+		{
+		ReleaseMutex(mutx);
+		iden_list.scroll_list[kind].iden = 3;
+		bool return_ = amnesia_scroll(pre_iden_);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
@@ -823,6 +836,63 @@ bool recharging_scroll(bool pre_iden_)
 		}
 	}
 	changedisplay(DT_GAME);
+	if(pre_iden_){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+bool amnesia_scroll(bool pre_iden_)
+{
+	
+
+	if(you.currentSpellNum)
+	{
+		int i=0;
+		changedisplay(DT_SPELL);
+		while(1)
+		{
+			int key_ = waitkeyinput(true);
+			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+			{
+				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
+				if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+				{				
+					
+					changedisplay(DT_GAME);
+					printarray(true,false,false,CL_help,2,SpellString(spell_)," 마법을 잊겠습니까? (Y/N)");
+					switch(waitkeyinput())
+					{
+					case 'Y':
+					case 'y':
+						{
+							changedisplay(DT_GAME);
+							WaitForSingleObject(mutx, INFINITE);
+							you.MemorizeSpell[num] = 0;
+							you.remainSpellPoiont+=SpellLevel(spell_);
+							you.currentSpellNum--;
+							ReleaseMutex(mutx);
+							printarray(true,false,false,CL_normal,3,"당신은 ",SpellString(spell_)," 마법을 잊었다.");	
+							return true;
+						}
+					case 'N':
+					default:
+						changedisplay(DT_SPELL);
+						break;
+					}
+				}
+			}
+			else if(key_ == VK_ESCAPE)
+				break;
+		}
+		changedisplay(DT_GAME);
+	}
+	else
+	{
+		printlog("아직 알고있는 마법이 없다.",true,false,false,CL_normal);	
+	}
+
 	if(pre_iden_){
 		return false;
 	}

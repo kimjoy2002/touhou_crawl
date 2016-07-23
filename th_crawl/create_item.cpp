@@ -111,7 +111,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{13,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 물약들
 	{14,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 두루마리들
 	{15,DEPTH_LEVEL,DEPTH_LAST_LEVEL,30,1}, //중반 잘나오는 나쁜 물약들
-	{17,DEPTH_LEVEL,DEPTH_LAST_LEVEL,80,1}, //중반용 무기들(가끔 저주)
+	{17,DEPTH_LEVEL,DEPTH_LAST_LEVEL,50,1}, //중반용 무기들(가끔 저주)
 	{18,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //중반용 방어구
 	{19,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //잡 탄막들
@@ -124,7 +124,23 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 정렬)
 	{28,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트반지
 	{30,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//발동템
-
+	
+	//달의도시
+	{13,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 물약들
+	{14,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 두루마리들
+	{17,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //중반용 무기들(가끔 저주)
+	{18,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //중반용 방어구
+	{19,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
+	{0,MOON_LEVEL,MOON_LAST_LEVEL,20,1}, //잡 탄막들
+	{1,MOON_LEVEL,MOON_LAST_LEVEL,25,1}, //기타방어구들(장갑, 부츠, 망토등)
+	{25,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //책
+	{26,MOON_LEVEL,MOON_LAST_LEVEL,3,1}, //스펠카드
+	{21,MOON_LEVEL,MOON_LAST_LEVEL,5,1}, //음식
+	{22,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //중반용 방패
+	{27,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//아티펙트무기
+	{28,MOON_LEVEL,MOON_LAST_LEVEL,20,1},//아티펙트방어구
+	{29,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//아티펙트반지
+	{30,MOON_LEVEL,MOON_LAST_LEVEL,3,1},//발동템
 	
 	//지저
 	{13,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 물약들

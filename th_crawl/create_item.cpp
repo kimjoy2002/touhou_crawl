@@ -326,8 +326,13 @@ item_infor& id_to_item(int id, item_infor* item_)
 		item_->artifact = true;
 		break;
 	case 28://아티펙트 방어구
-		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(2)?0:(randA(3)?1:-1),item_);
-		item_->artifact = true;
+		{
+			item_type atype_ = (item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1);
+			if(randA(1)==0)
+				atype_ = (item_type)rand_int(ITM_ARMOR_HEAD,ITM_ARMOR_BOOT);
+			makeitem(atype_,randA(2)?0:(randA(3)?1:-1),item_);
+			item_->artifact = true;
+		}
 		break;
 	case 29://아티펙트 반지
 		makeitem(ITM_RING,randA(9)?1:-1,item_);

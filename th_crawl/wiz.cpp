@@ -191,7 +191,10 @@ void wiz_mode()
 				case 'a':
 					{
 						item_infor t;
-						makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(2)?0:(randA(3)?1:-1),&t);
+						item_type atype_ = (item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1);
+						if(randA(1)==0)
+							atype_ = (item_type)rand_int(ITM_ARMOR_HEAD,ITM_ARMOR_BOOT);
+						makeitem(atype_,randA(2)?0:(randA(3)?1:-1),&t);
 						if(randA(1))	
 							t.artifact = true;
 						item *it_ =env[current_level].MakeItem(you.position,t);

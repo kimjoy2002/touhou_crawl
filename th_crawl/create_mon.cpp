@@ -64,16 +64,16 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 30,  3,  9,  5,  5}, //회색모옥
 
 	
-	{ 21,  4,  11,  10,  8}, //요정 전사사격 호위부대
 	{ 25,  4,  6,  20, 10}, //인간부대(중간)
 	{ 29,  4,  7,  10,  5}, //주황모옥
 
-
-	{ 22,  5,  12,  10, 13}, //깃발 요정 호위부대
+	
+	{ 21,  5,  11,  10,  8}, //요정 전사사격 호위부대
 	{ 35,  5,  14,  5, 10}, //마리사윳쿠리
 	{ 30,  5,  9,  10,  5}, //회색모옥
 
 	
+	{ 22,  6,  12,  10, 13}, //깃발 요정 호위부대
 	{ 32,  6,  14,  15, 10}, //고양이
 	
 	{ 31,  7,  14,  20, 10}, //개구리
@@ -627,8 +627,8 @@ void create_id_to_mon(int id, int level)
 	case 21:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
 			index.push_back(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
-		for(int rand_ = randA(2)?1:2, i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
+		for(int rand_ = randA(3)?1:2, i=0;i<rand_;i++)
+			index.push_back(randA(2)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
 		break;
 	case 22:
 		for(int rand_ =rand_int(0,2), i=0;i<rand_;i++)

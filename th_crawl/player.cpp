@@ -3638,7 +3638,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
 				time_delay += 3*you.GetNormalDelay();
 			else
-				time_delay += you.GetNormalDelay();
+				time_delay += you.GetNormalDelay()/2;
 
 
 			if(type_ == ET_ARMOR)
@@ -3911,7 +3911,7 @@ bool players::unequip(equip_type type_, bool force_)
 			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
 				time_delay += 3*you.GetNormalDelay();
 			else
-				time_delay += you.GetNormalDelay();
+				time_delay += you.GetNormalDelay()/2;
 			printlog(equipment[type_]->GetName(),false,false,false,equipment[type_]->item_color());
 			printarray(true,false,false,CL_normal,2,equipment[type_]->GetNameInfor().name_to(true),"¹þ¾ú´Ù.");
 		}

@@ -89,7 +89,7 @@ bool isArena()
 void initMap()
 {
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,4));
-	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(8,10));
+	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
 	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	

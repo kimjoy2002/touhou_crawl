@@ -2902,7 +2902,16 @@ int players::additem(item *t, bool speak_) //1ÀÌ»óÀÌ ¼º°ø, 0ÀÌÇÏ°¡ ½ÇÆĞ
 						sprintf(temp,"%c",it->id);
 						printlog(temp,false,false,false,it->item_color());
 						printlog(" - ",false,false,false,it->item_color());
-						printlog(it->GetName(),true,false,false,it->item_color());
+						printlog(it->GetName(),false,false,false,it->item_color());
+
+						if(t->num)
+						{
+							printlog(" (",false,false,false,CL_normal);
+							char temp[16];
+							sprintf(temp,"%d",t->num);
+							printlog(temp,false,false,false,CL_normal);
+							printlog("°³ È¹µæ)",true,false,false,CL_normal);
+						}
 					}
 					t->pick();
 					final_item = it->id;

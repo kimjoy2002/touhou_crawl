@@ -1843,10 +1843,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
 			char temp[200];
-			if(s_ghost)
-				sprintf_s(temp,200,"네임드 %s%s 구속했다.",name.name.c_str(),name.name_to());
-			else
-				sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
+			sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 		}
 		else

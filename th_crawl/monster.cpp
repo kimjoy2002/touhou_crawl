@@ -450,7 +450,12 @@ void monster::FirstContact()
 		sprintf_s(temp,200,"들킬확률-RandB(%d,%d) 즉%f%% (최종 암살 성공율%f%%)",you.GetStealth(),GetDetect(),100.0f*detect_, percent_*100.0f);
 		printlog(temp,true,false,false,CL_danger);
 	}
-
+	if(flag & M_FLAG_UNIQUE && !(flag & M_FLAG_SUMMON) && id != MON_ENSLAVE_GHOST )
+	{		
+		char temp[200];
+		sprintf_s(temp,200,"네임드 %s%s 발견했다.",name.name.c_str(),name.name_to());
+		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+	}
 	first_contact = false;
 }
 void monster::TurnSave()

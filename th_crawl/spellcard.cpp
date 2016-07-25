@@ -316,12 +316,18 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 								}
 							}
 						}
+						env[current_level].MakeNoise(target,8,NULL);		
+					}
+					else if(!env[current_level].dgtile[pos.x][pos.y].isMove(true,true,false))
+					{
+						printarray(true,false,false,CL_normal,3,"암석탄이 ",dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile],"에 부딪혔지만 미동도 하지 않았다.");
+						env[current_level].MakeNoise(target,8,NULL);	
 					}
 					Sleep(300);
 					env[current_level].ClearEffect();
 					you.resetLOS();
 				}
-				you.SetParadox(0); 				
+				you.SetParadox(0); 		
 				return true;
 			}
 			return false;	

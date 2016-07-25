@@ -953,19 +953,19 @@ void Close_door()
 				door_num = 1;
 				break;
 			case 'y':
-				temp = coord_def(you.position.x-1,you.position.y+1);
-				door_num = 1;
-				break;
-			case 'u':
-				temp = coord_def(you.position.x+1,you.position.y+1);
-				door_num = 1;
-				break;
-			case 'b':
 				temp = coord_def(you.position.x-1,you.position.y-1);
 				door_num = 1;
 				break;
-			case 'n':
+			case 'u':
 				temp = coord_def(you.position.x+1,you.position.y-1);
+				door_num = 1;
+				break;
+			case 'b':
+				temp = coord_def(you.position.x-1,you.position.y+1);
+				door_num = 1;
+				break;
+			case 'n':
+				temp = coord_def(you.position.x+1,you.position.y+1);
 				door_num = 1;
 				break;
 			}
@@ -1037,19 +1037,19 @@ void Open_door()
 				door_num = 1;
 				break;
 			case 'y':
-				temp = coord_def(you.position.x-1,you.position.y+1);
-				door_num = 1;
-				break;
-			case 'u':
-				temp = coord_def(you.position.x+1,you.position.y+1);
-				door_num = 1;
-				break;
-			case 'b':
 				temp = coord_def(you.position.x-1,you.position.y-1);
 				door_num = 1;
 				break;
-			case 'n':
+			case 'u':
 				temp = coord_def(you.position.x+1,you.position.y-1);
+				door_num = 1;
+				break;
+			case 'b':
+				temp = coord_def(you.position.x-1,you.position.y+1);
+				door_num = 1;
+				break;
+			case 'n':
+				temp = coord_def(you.position.x+1,you.position.y+1);
 				door_num = 1;
 				break;
 			}

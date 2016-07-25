@@ -53,6 +53,73 @@ string random_book_list[RANDOM_BOOK_NUM]=
 };
 
 
+
+
+
+const char* GetBookInfor(book_list book_)
+{
+	switch(book_)
+	{
+	default:
+	case BOOK_CUSTOM_BOOK:
+		return "다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n";
+	case BOOK_FIRE_BASE:
+		return "화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_COLD_BASE:
+		return "냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_POISON_BASE:
+		return "독에 대한 기초적인 마법이 들어 있는 책\n독마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_WIZARD_BASE:
+		return "다양하고 가성비 좋은 저레벨 마법들이 들어 있는 책\n고레벨은 없지만 구성이 알차다.\n";
+	case BOOK_EARTH_BASE:
+		return "대지에 대한 기초적인 마법이 들어 있는 책\n대지마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_AIR_BASE:
+		return "대기에 대한 기초적인 마법이 들어 있는 책\n대기마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_SUMMON_BASE:
+		return "소환에 대한 기초적인 마법이 들어 있는 책\n소환마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_ALCHMIST_BASE:
+		return "연금술을 가르치는 책\n마법을 통해서 간단한 연금술을 시험해볼 수 있는 것 같다.\n";
+	case BOOK_PSYCHOLOGIST_BASE:
+		return "정신을 조종하는 기초적인 마법이 들어 있는 책\n심리마법에 입문하고 싶은 당신에게 추천\n";
+	case BOOK_BRAND_BASE:
+		return "초보 마전사를 위해 만들어진 마법책\n전사들에게 유용한 마법들로 구성이 되어있다.\n";
+	case BOOK_MAID_BASE:
+		return "메이드들이 기본적으로 가져야할 소양이라고 적혀있다. 홍마관에서 배포중이다.\n메이드의 길은 멀고도 험하다.\n";
+	case BOOK_SHOCK:
+		return "다양한 전기마법이 적혀있는 마법책\n만지기만해도 짜릿짜릿하다.\n";
+	case BOOK_PRACTICE:
+		return "간단한 원소연습을 할 수 있게 되어있는 마법책\n하지만 빅토리댄스는 이제 없다고!\n";
+	case BOOK_SUB:
+		return "다양한 보조마법이 적혀있는 마법책.\n마법사 입문에 좋아보인다.\n";
+	case BOOK_STALKING:
+		return "마법암살자를 꿈꾸는 사람들을 위한 마법책\n아직은 마법이 모자라보인다.\n";
+	case BOOK_CLOUD:
+		return "구름을 만드는 노하우가 적혀있는 마법책\n왠지 책도 축축해보인다.\n";
+	case BOOK_CONJURE:
+		return "강력한 파괴의 기초 마법이 적혀있는 책\n탄막은 파워!\n";
+	case BOOK_HEX:
+		return "정신마법계열의 마법이 적혀있는 책\n요괴들은 정신공격에 약하다고들 한다.\n";
+	case BOOK_DEFENSE:
+		return "다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n";
+	case BOOK_ENCHANT:
+		return "핵심 마법만 적혀있는 마법책\n당신을 숙련된 마법사로 이끌어 준다.\n";
+	case BOOK_TRANSITION:
+		return "전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n";
+	case BOOK_TENSI:
+		return "불량천인 텐시가 직접 자필한 마법책\n예측불가인 그녀지만 그녀의 대지를 다루는 기술은 배울만하다.\n";
+	case BOOK_TEST_ANNIHILATE:
+		return "미마가 적은 궁극의 파괴술서\n모든 파괴법사가 꿈꾸고있는 그 책이다.\n";
+	case BOOK_DEBUF:
+		return "지저세계에 살고있는 사토리가 적은 정신을 지배하는 법\n왠지 책에게 마음을 읽히고 있는 듯한 느낌이다.\n";
+	case BOOK_MAID_ULTI:
+		return "홍마관의 메이드장이 유능한 메이드를 길러내기 위해 만들었다는 그 책이다.\n홍마관엔 사쿠야이외에 유능한 메이드가 없을뿐더러 아무도 책을 이해하지 못했기에 전설로만 남겨진 책이다.\n마법 뿐만이 아니라 청소하는 법, 빨래하는 법등이 부록으로 적혀있다.\n";
+	case BOOK_ICE_ULTI:
+		return "호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적인 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n";
+	case BOOK_SUMMON_ULTI:
+		return "마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n";
+	}
+}
+
 book_list SchoolToBook(skill_type skill_)
 {
 	switch(skill_)

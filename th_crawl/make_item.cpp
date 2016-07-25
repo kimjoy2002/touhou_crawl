@@ -76,7 +76,7 @@ item_infor& makeCustomBook(item_infor* t)
 	{
 		t->name2.name = "떨어진 마법책";
 		t->name2.name_type = true;
-		t->value0 = 0;
+		t->value0 = BOOK_CUSTOM_BOOK;
 		t->value1 = 0;
 		t->value2 = 0;
 		t->value3 = 0;

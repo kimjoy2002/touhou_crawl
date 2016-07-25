@@ -810,7 +810,8 @@ enum amulet_type
 
 enum book_list
 {
-	BOOK_FIRST,
+	BOOK_CUSTOM_BOOK=-2,
+	BOOK_FIRST=0,
 	BOOK_FIRE_BASE=BOOK_FIRST,
 	BOOK_COLD_BASE,
 	BOOK_POISON_BASE,

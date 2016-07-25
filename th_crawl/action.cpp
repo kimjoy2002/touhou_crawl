@@ -2129,6 +2129,10 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 				iden_list.books_list[it->value0] = true;
 				it->identify = true;
 			}
+			if(it->value0==-2)
+			{
+				it->identify = true;
+			}
 			if(it->value1 != SPL_NONE && !you.isMemorizeSpell(it->value1))
 				set_skill.insert(it->value1);
 			if(it->value2 != SPL_NONE && !you.isMemorizeSpell(it->value2))

@@ -512,6 +512,10 @@ void Reading()
 					iden_list.books_list[item_->value0] = true;
 					item_->identify = true;
 				}
+				if(item_->value0==-2)
+				{					
+					item_->identify = true;
+				}
 				while(1)
 				{
 					WaitForSingleObject(mutx, INFINITE);

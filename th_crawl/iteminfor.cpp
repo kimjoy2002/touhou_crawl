@@ -16,6 +16,7 @@
 #include "weapon.h"
 #include "armour.h"
 #include "evoke.h"
+#include "book.h"
 
 extern HANDLE mutx;
 
@@ -641,7 +642,9 @@ string GetItemInfor(item *it)
 		break;
 	case ITM_BOOK:
 		{
-			text_ += "Ã¥ÀÌ´Ù.\n\n\n";
+
+			text_ += GetBookInfor((book_list)it->value0);
+			text_ += "\n\n";
 			if(it->identify)
 			{
 				char temp[100], sp_char='a';

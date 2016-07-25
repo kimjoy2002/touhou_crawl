@@ -36,6 +36,8 @@ const int RANDOM_BOOK_NUM=7;
 extern book_infor static_book_list[BOOK_LAST]; 
 extern string random_book_list[RANDOM_BOOK_NUM];
 
+
+const char* GetBookInfor(book_list book_);
 book_list SchoolToBook(skill_type skill_);
 
 

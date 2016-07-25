@@ -686,7 +686,7 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 				{
 					env[num].stair_up[i-3].x = x;
 					env[num].stair_up[i-3].y = y;
-					if ( !env[num].isPandemonium() || randA(4)==0)
+					if ( !env[num].isPandemonium() || (randA(4)==0 || (i == 3 && num != PANDEMONIUM_LEVEL)))
 					{
 						if( num != 0 && environment::isFirstFloor(num))
 							env[num].dgtile[x][y].tile = DG_RETURN_STAIR;

@@ -1573,6 +1573,9 @@ void Stair_move(bool down)
 				pos_return = map_list.dungeon_enter[DREAM_D].pos;
 				break;
 			case PANDEMONIUM_LEVEL:
+			case PANDEMONIUM_LEVEL+1:
+			case PANDEMONIUM_LEVEL+2:
+			case PANDEMONIUM_LEVEL+3:
 				floor_return = map_list.dungeon_enter[PANDEMONIUM].floor;
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[PANDEMONIUM].pos;

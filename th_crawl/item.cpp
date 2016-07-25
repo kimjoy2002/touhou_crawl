@@ -669,6 +669,26 @@ bool item::isiden()
 		return identify && identify_curse && iden_list.ring_list[value1].iden == 2;
 
 	}
+	else if(type >= ITM_THROW_FIRST && type <= ITM_THROW_LAST)
+	{
+		return true;
+	}
+	else if(type == ITM_FOOD)
+	{
+		return true;
+	}
+	else if(type == ITM_MISCELLANEOUS)
+	{
+		return true;
+	}
+
+	else if(type == ITM_GOAL ||	type == ITM_ORB)
+	{
+		return true;
+	}
+
+
+
 	return (identify && identify_curse);
 }
 bool item::isautopick()

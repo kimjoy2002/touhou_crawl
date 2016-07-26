@@ -915,13 +915,13 @@ void GameOver()
 			ReleaseMutex(mutx);
 			deletesub();
 			changedisplay(DT_SUB_TEXT);
-			for(int i=0;i<25;i++)
+			for(int i=0;i<26;i++)
 			{
 				fgets(temp,256,fp);
 				//fscanf(fp,"%s",temp);				
 				printsub(temp,true,CL_normal);
 			}			
-			entersub();
+			printsub("",true,CL_magic);
 			if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 			{
 				if(wiz_list.wizard_mode == 1)

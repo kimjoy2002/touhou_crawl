@@ -617,6 +617,39 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
+	rc.top += fontDesc.Height;
+
+
+
+	
+	string rune_temp;
+	
+	rune_temp = "·é:";
+	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
+	{		
+		if(you.rune[i])
+		{
+			if(i!=0)
+				rune_temp += ", ";
+			rune_temp += rune_string[i];
+		}
+	}
+	pfont->DrawTextA(pSprite,rune_temp.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left = 30;
+	rc.top += fontDesc.Height;
+	
+	if(you.rune[RUNE_HAKUREI_ORB])
+	{
+		pfont->DrawTextA(pSprite,"À½¾ç¿Á", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	}
+	else
+	{				
+	}
+	rc.left = 30;
+	rc.top += fontDesc.Height;
+
+
+
 }
 
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)

@@ -423,6 +423,27 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
 	else
 		fprintf_s(fp,"없음\n");
+	
+	fprintf_s(fp,"\n룬:");
+	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
+	{		
+		if(you.rune[i])
+		{
+			if(i!=0)
+				fprintf_s(fp,", ");
+			fprintf_s(fp,"%s",rune_string[i]);
+		}
+	}
+	fprintf_s(fp,"\n");
+	if(you.rune[RUNE_HAKUREI_ORB])
+	{
+		fprintf_s(fp,"음양옥\n");
+	}
+	else
+	{				
+		fprintf_s(fp,"\n");
+	}
+	
 
 
 	fprintf_s(fp,"\n\n당신은 %s에 있다.\n",CurrentLevelString());

@@ -91,6 +91,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		god_value[i]=0;
 	for(int i=0;i<4;i++)
 		half_youkai[i]=0;
+	for(int i=0;i<RUNE_MAX;i++)
+		rune[i]=0;
 	for(int i=0;i<ET_LAST;i++)
 		equipment[i] = NULL;
 
@@ -273,6 +275,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, *god_value, 5);
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	
+	SaveData<int>(fp, *rune, RUNE_MAX);		
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 }
 void players::LoadDatas(FILE *fp)
@@ -483,6 +486,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, *god_value);
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
+	LoadData<int>(fp, *rune);		
 	{
 		char temp_id_=0;
 		item *temp_ = NULL;
@@ -2885,6 +2889,31 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		return 1;
 	}
 
+	if(t->type == ITM_GOAL)
+	{
+		char temp[200];
+		sprintf_s(temp,200,"당신은 %s의 룬을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",rune_string[t->value1]);
+		printlog(temp,true,false,false,CL_good);
+		sprintf_s(temp,200,"%s의 룬을 얻었다.",rune_string[t->value1]);
+		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
+		rune[t->value1]++;
+		ReleaseMutex(mutx);
+		return 1;
+	}
+	if(t->type == ITM_ORB)
+	{
+		
+		printlog("당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다!",true,false,false,CL_good);
+		char temp[200];
+		sprintf_s(temp,200,"음양옥을 얻었다.");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
+		ReleaseMutex(mutx);
+		rune[RUNE_HAKUREI_ORB]++;
+		return 1;
+	}
+
+
+
 	if(t->is_pile)
 	{
 		for(it = item_list.begin(); it != item_list.end() ;it++)
@@ -3857,27 +3886,21 @@ int players::isequip(item* item_)
 int players::haveGoal()
 {
 	int goal_ = 0;
-	list<item>::iterator it;
-	for(it = item_list.begin(); it != item_list.end();it++)
+	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{
-		if(it->type == ITM_GOAL)
-		{
-			goal_+=it->num;
-		}
+
+		if(rune[i]>0)
+			goal_++;
 	}
+
 	return goal_;
 }
 int players::haveOrb()
 {
 	int goal_ = 0;
-	list<item>::iterator it;
-	for(it = item_list.begin(); it != item_list.end();it++)
-	{
-		if(it->type == ITM_ORB)
-		{
-			goal_+=it->num;
-		}
-	}
+
+	if(rune[RUNE_HAKUREI_ORB])
+		goal_++;
 	return goal_;
 	
 }

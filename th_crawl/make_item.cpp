@@ -329,7 +329,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		MakeEvokeItem(t,select_);
 		break;
 	case ITM_GOAL:
-		t->value1 = 0;
+		t->value1 = select_;
 		t->value2 = 0;
 		t->value3 = 0;
 		t->value4 = 0;

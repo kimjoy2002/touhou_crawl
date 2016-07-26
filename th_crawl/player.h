@@ -255,6 +255,7 @@ public:
 	int god_value[5];//이건 신에 따라 적절한 수치로 이용
 	int suwako_meet; //스와코를 믿은적이 있는지
 	int half_youkai[4];//반요 변이 수치
+	int rune[RUNE_MAX];
 
 	bool sight_reset;
 	int target;
@@ -510,6 +511,7 @@ void view_log();
 void skill_view();
 void stat_view();
 void Help_Show();
+void rune_Show();
 void Iden_Show();
 void Weapon_Show();
 void Armour_Show();

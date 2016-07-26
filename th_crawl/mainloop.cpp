@@ -693,6 +693,9 @@ void MainLoop()
 		case '[':
 			Armour_Show();
 			break;
+		case ']':
+			rune_Show();
+			break;
 		case '\"':
 			Amulet_Show();
 			break;

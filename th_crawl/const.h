@@ -27,6 +27,7 @@ extern const char *dungeon_tile_tribe_type_string[]; //타일스트링
 
 extern const char *state_string[]; //상태이상스트링
 
+extern const char *rune_string[];
 
 
 

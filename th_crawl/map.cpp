@@ -1417,7 +1417,7 @@ void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 
 	
 	item_infor t;
-	makeitem(ITM_GOAL, 0, &t, 0);	
+	makeitem(ITM_GOAL, 0, &t, RUNE_SCARLET_UNDER);	
 	env[num].MakeItem(coord_def(DG_MAX_X/2,DG_MAX_Y/2-6),t);
 
 	if(!is_exist_named(MON_FLAN)){
@@ -1836,7 +1836,7 @@ void map_algorithms_tuto03(int num)
 	env[num].MakeItem(coord_def(44,7),makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
 	
 	env[num].MakeEvent(31,coord_def(49,7),EVT_SIGHT);
-	env[num].MakeItem(coord_def(48,7),makeitem(ITM_GOAL, 0, &t, 0));
+	env[num].MakeItem(coord_def(48,7),makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN));
 	env[num].MakeItem(coord_def(50,7),makeitem(ITM_ORB, 0, &t, 0));
 
 

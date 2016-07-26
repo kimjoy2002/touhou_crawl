@@ -1685,6 +1685,56 @@ void stat_view()
 }
 
 
+void rune_Show()
+{
+	int remain = 10;
+	SetText() = "  <얻어야할 룬>\n\n\n";
+
+
+
+	for(int i = 0; i<RUNE_HAKUREI_ORB;i++)
+	{
+		remain = 10;
+		remain -= strlen(rune_string[i]);
+		for(;remain>0;remain--)
+			SetText() += " ";
+		SetText() += rune_string[i];
+		SetText() += "의 룬 :";
+
+
+		if(you.rune[i])
+		{
+			SetText() += " 획득";
+		}
+		else
+		{
+			SetText() += " X";
+		}
+		SetText() += "\n\n";
+	}
+	SetText() += "\n\n\n";
+	
+	if(you.rune[RUNE_HAKUREI_ORB])
+	{
+		SetText() += "음양옥을 얻었습니다! 탈출하세요!\n";
+	}
+	else
+	{
+		SetText() += "아직 음양옥을 얻지 못했습니다.\n\n";
+		SetText() += "룬을 3개이상먹으면 음양옥이 있는 하쿠레이 신사의 문이 열립니다.";
+	}
+
+
+	
+	changedisplay(DT_TEXT);
+
+	while(1)
+	{
+		int key_ = waitkeyinput(true);		
+		break;
+	}
+	changedisplay(DT_GAME);
+}
 
 
 

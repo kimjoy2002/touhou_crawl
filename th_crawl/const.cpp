@@ -179,6 +179,20 @@ const char *state_string[] =
 	"과식"
 };
 
+const char *rune_string[] =
+{	
+	"홍마관",
+	"요괴산",
+	"플랑드르",
+	"윳쿠리",
+	"영원정",
+	"지저",
+	"달",
+	"빙결세계",
+	"법계",
+	"판데모니엄",
+	"음양옥"
+};
 
 const D3DCOLOR CL_normal = D3DCOLOR_RGBA(255, 255, 255, 255);
 const D3DCOLOR CL_bad = D3DCOLOR_RGBA(100, 100, 100, 255);

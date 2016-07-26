@@ -875,7 +875,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 		if(!is_exist_named(MON_AYA)){
 			map->monster_list.push_back(mapdummy_mon(MON_AYA,0,coord_def(0,0)));
@@ -930,7 +930,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN);
 		map->item_list.push_back(mapdummy_item(t,coord_def(5*(randA(1)*2-1),5*(randA(1)*2-1))));
 
 		if(!is_exist_named(MON_NITORI)){
@@ -1000,7 +1000,7 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_SCARLET);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,-4)));
 		if(!is_exist_named(MON_REMILIA)){
 			map->monster_list.push_back(mapdummy_mon(MON_REMILIA,0,coord_def(0,-2)));
@@ -1059,7 +1059,7 @@ char* eientei_vault_pattern(map_dummy* map)
 
 		map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_EIENTEI);
 		map->item_list.push_back(mapdummy_item(t,coord_def(28,2)));		
 		//map->event_list.push_back(mapdummy_event(22,coord_def(28,2),EVT_SIGHT));
 
@@ -1129,7 +1129,7 @@ char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_PANDEMONIUM_MAGIC);
 		map->item_list.push_back(mapdummy_item(t,coord_def(2,-3)));
 		map->sp_tile_list.push_back(DG_TEMPLE_BYAKUREN);
 		if(!is_exist_named(MON_NAZRIN)){
@@ -1196,7 +1196,7 @@ char* pandemonium_ice_last_vault_pattern(map_dummy* map)
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_PANDEMONIUM_ICE);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,-1)));
 		map->monster_list.push_back(mapdummy_mon(MON_YUKI,0,coord_def(-3,-1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_YUKI,0,coord_def(-3,1)));	
@@ -1239,7 +1239,7 @@ char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_PANDEMONIUM_SHINKI);
 		map->item_list.push_back(mapdummy_item(t,coord_def(0,-9)));
 		map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
 		if(!is_exist_named(MON_YUMEKO)){
@@ -1311,7 +1311,7 @@ char* yukkuri_last_vault_pattern(map_dummy* map)
 
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_YUKKURI);
 		map->item_list.push_back(mapdummy_item(t,coord_def(3,3)));
 		int mon_num_ = 5;
 		while(mon_num_)
@@ -1385,7 +1385,7 @@ char* moon_last_vault_pattern(map_dummy* map)
 
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, 0);
+		makeitem(ITM_GOAL, 0, &t, RUNE_MOON);
 		map->item_list.push_back(mapdummy_item(t,coord_def(5*(randA(1)*2-1),5*(randA(1)*2-1))));
 		if(!is_exist_named(MON_YORIHIME)){
 			map->monster_list.push_back(mapdummy_mon(MON_YORIHIME,0,coord_def(1,0)));
@@ -1454,7 +1454,7 @@ char* subterranean_last_vault_pattern(map_dummy* map)
 			int item_ = randA(2);
 			{
 				item_infor t;
-				makeitem(ITM_GOAL, 0, &t, 0);
+				makeitem(ITM_GOAL, 0, &t, RUNE_SUBTERRANEAN);
 				map->item_list.push_back(mapdummy_item(t,item_==0?coord_def(0,6):(item_==1?coord_def(5,-3):coord_def(-5,-3))));		
 			}
 			{

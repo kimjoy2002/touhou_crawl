@@ -2140,6 +2140,628 @@ void Experience_Show()
 //	return false;
 //}
 
+void dungeonView()
+{
+	char temp[32];
+	char blank[32];
+	sprintf_s(blank,32,"            ");
+
+	int floor_ = 0;
+	deletesub();
+	WaitForSingleObject(mutx, INFINITE);
+	printsub("",true,CL_normal);
+	printsub("",true,CL_normal);
+	printsub("",true,CL_normal);
+	printsub("",true,CL_normal);
+	printsub(blank,false,CL_warning);
+	printsub("<´øÀü ÁøÇàµµ>",true,CL_warning);
+	printsub("",true,CL_normal);
+	printsub("",true,CL_normal);
+	printsub(blank,false,CL_warning);
+	printsub("´øÀü ",false,CL_warning);
+	for(int i=0;i<=MAX_DUNGEUN_LEVEL;i++)
+	{
+		if(env[i].make)
+			floor_++;
+		else
+			break;
+	}	
+	sprintf_s(temp,32,"(%2d/%2d)",floor_,MAX_DUNGEUN_LEVEL+1);
+	printsub(temp,true,CL_normal);
+	printsub(blank,false,CL_warning);
+	printsub("¦¢",true,CL_normal);
+	if(floor_>=3) //½ÅÀüµîÀå
+	{
+		if(map_list.dungeon_enter[TEMPLE].detected)
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("½ÅÀü ",false,CL_warning);			
+			sprintf_s(temp,32,"(%2d/%2d) ",env[TEMPLE_LEVEL].make?1:0,1);
+			printsub(temp,false,CL_normal);
+				
+			sprintf_s(temp,32,"´øÀü %dÃþ",map_list.dungeon_enter[TEMPLE].floor+1);
+			printsub(temp,true,CL_help);
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+		}
+		else
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("½ÅÀü ",false,CL_bad);
+			printsub("´øÀü 3Ãþ~6Ãþ",true,CL_STAT);
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+		}
+	}	
+	if(floor_>=8) //¾È°³ÀÇÈ£¼ö
+	{
+		if(map_list.dungeon_enter[MISTY_LAKE].detected)
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("¾È°³ÀÇ È£¼ö ",false,CL_warning);
+			int floor2_ = 0;	
+			for(int i=MISTY_LAKE_LEVEL;i<=MISTY_LAKE_LAST_LEVEL;i++)
+			{
+				if(env[i].make)
+					floor2_++;
+				else
+					break;
+			}
+			sprintf_s(temp,32,"(%2d/%2d) ",floor2_,MAX_MISTY_LAKE_LEVEL+1);
+			printsub(temp,false,CL_normal);
+				
+			sprintf_s(temp,32,"´øÀü %dÃþ",map_list.dungeon_enter[MISTY_LAKE].floor+1);
+			printsub(temp,true,CL_help);
+
+			if(floor2_>=2) //¿ä±«ÀÇ»ê
+			{
+				if(map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected)
+				{
+					printsub(blank,false,CL_warning);
+					printsub("¦¢¦§",false,CL_normal);
+					printsub("¿ä±«ÀÇ »ê ",false,CL_warning);
+					int floor3_ = 0;	
+					for(int i=YOUKAI_MOUNTAIN_LEVEL;i<=YOUKAI_MOUNTAIN_LAST_LEVEL;i++)
+					{
+						if(env[i].make)
+							floor3_++;
+						else
+							break;
+					}
+					sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_YOUKAI_MOUNTAIN_LEVEL+1);
+					printsub(temp,false,CL_normal);
+				
+					sprintf_s(temp,32,"¾È°³ÀÇ È£¼ö %dÃþ  ",map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor+1-MISTY_LAKE_LEVEL);
+					printsub(temp,false,CL_help);
+
+					//***·éÀÖÀ½
+					sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_YOUKAI_MOUNTAIN]);
+					printsub(temp,true,you.rune[RUNE_YOUKAI_MOUNTAIN]?CL_magic:CL_bad);
+					//***·é³¡
+
+					if(floor3_>=MAX_YOUKAI_MOUNTAIN_LEVEL+1) //ÀµÄí¸®±¼
+					{
+						if(map_list.dungeon_enter[YUKKURI_D].detected)
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦¢¦¢¦¦",false,CL_normal);
+							printsub("ÀµÄí¸®µÕÁö ",false,CL_warning);
+							int floor4_ = 0;	
+							for(int i=YUKKURI_LEVEL;i<=YUKKURI_LAST_LEVEL;i++)
+							{
+								if(env[i].make)
+									floor4_++;
+								else
+									break;
+							}
+							sprintf_s(temp,32,"(%2d/%2d) ",floor4_,MAX_YUKKURI_LEVEL+1);
+							printsub(temp,false,CL_normal);
+				
+							sprintf_s(temp,32,"¿ä±«ÀÇ »ê %dÃþ  ",map_list.dungeon_enter[YUKKURI_D].floor+1-YOUKAI_MOUNTAIN_LEVEL);
+							printsub(temp,false,CL_help);
+
+							//***·éÀÖÀ½
+							sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_YUKKURI]);
+							printsub(temp,true,you.rune[RUNE_YUKKURI]?CL_magic:CL_bad);
+							//***·é³¡
+
+							printsub(blank,false,CL_warning);
+							printsub("¦¢¦¢",true,CL_normal);
+						}
+						else
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦¢¦¢¦¦",false,CL_normal);
+							printsub("ÀµÄí¸®µÕÁö ",false,CL_bad);
+							printsub("¿ä±«ÀÇ »ê 4Ãþ",true,CL_STAT);
+							printsub(blank,false,CL_warning);
+							printsub("¦¢¦¢",true,CL_normal);
+						}
+					}
+					else
+					{
+						printsub(blank,false,CL_warning);
+						printsub("¦¢¦¢",true,CL_normal);
+					}
+				}
+				else
+				{
+					printsub(blank,false,CL_warning);
+					printsub("¦¢¦§",false,CL_normal);
+					printsub("¿ä±«ÀÇ »ê ",false,CL_bad);
+					printsub("¾È°³ÀÇ È£¼ö 2Ãþ~3Ãþ",true,CL_STAT);
+					printsub(blank,false,CL_warning);
+					printsub("¦¢",true,CL_normal);
+				}
+
+
+				
+				if(floor2_>=4) //È«¸¶°ü
+				{
+					if(map_list.dungeon_enter[SCARLET_M].detected)
+					{
+						printsub(blank,false,CL_warning);
+						printsub("¦¢¦¦",false,CL_normal);
+						printsub("È«¸¶°ü ",false,CL_warning);
+						int floor3_ = 0;	
+						for(int i=SCARLET_LEVEL;i<=SCARLET_LEVEL_LAST_LEVEL;i++)
+						{
+							if(env[i].make)
+								floor3_++;
+							else
+								break;
+						}
+						sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_SCARLET_LEVEL+1);
+						printsub(temp,false,CL_normal);
+				
+						sprintf_s(temp,32,"¾È°³ÀÇ È£¼ö %dÃþ  ",map_list.dungeon_enter[SCARLET_M].floor+1-MISTY_LAKE_LEVEL);
+						printsub(temp,false,CL_help);
+
+						//***·éÀÖÀ½
+						sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_SCARLET]);
+						printsub(temp,true,you.rune[RUNE_SCARLET]?CL_magic:CL_bad);
+						//***·é³¡
+						
+						if(floor3_>=2) //µµ¼­°ü
+						{
+							if(map_list.dungeon_enter[SCARLET_L].detected)
+							{
+								printsub(blank,false,CL_warning);
+								printsub("¦¢¡¡¦§",false,CL_normal);
+								printsub("È«¸¶°ü µµ¼­°ü ",false,CL_warning);
+				
+								sprintf_s(temp,32,"È«¸¶°ü %dÃþ  ",map_list.dungeon_enter[SCARLET_L].floor+1-SCARLET_LEVEL);
+								printsub(temp,true,CL_help);
+							}
+							else
+							{
+								printsub(blank,false,CL_warning);
+								printsub("¦¢¡¡¦§",false,CL_normal);
+								printsub("È«¸¶°ü µµ¼­°ü ",false,CL_bad);
+								printsub("È«¸¶°ü 2Ãþ~3Ãþ",true,CL_STAT);
+							}
+						}
+						if(floor3_>=4) //ÁöÇÏ½Ç
+						{
+							if(map_list.dungeon_enter[SCARLET_U].detected)
+							{
+								printsub(blank,false,CL_warning);
+								printsub("¦¢¡¡¦¦",false,CL_normal);
+								printsub("È«¸¶°ü ÁöÇÏ½Ç ",false,CL_warning);
+				
+
+								sprintf_s(temp,32,"È«¸¶°ü %dÃþ  ",map_list.dungeon_enter[SCARLET_U].floor+1-SCARLET_LEVEL);
+								printsub(temp,false,CL_help);
+
+								//***·éÀÖÀ½
+								sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_SCARLET_UNDER]);
+								printsub(temp,true,you.rune[RUNE_SCARLET_UNDER]?CL_magic:CL_bad);
+								//***·é³¡
+							}
+							else
+							{
+								printsub(blank,false,CL_warning);
+								printsub("¦¢¡¡¦¦",false,CL_normal);
+								printsub("È«¸¶°ü ÁöÇÏ½Ç ",false,CL_bad);
+								printsub("È«¸¶°ü 4Ãþ",true,CL_STAT);
+							}
+						}
+
+						printsub(blank,false,CL_warning);
+						printsub("¦¢",true,CL_normal);
+					}
+					else
+					{
+						printsub(blank,false,CL_warning);
+						printsub("¦¢¦¦",false,CL_normal);
+						printsub("È«¸¶°ü ",false,CL_bad);
+						printsub("¾È°³ÀÇ È£¼ö 4Ãþ~5Ãþ",true,CL_STAT);
+						printsub(blank,false,CL_warning);
+						printsub("¦¢",true,CL_normal);
+					}
+
+				}
+
+			}
+			else
+			{
+				printsub(blank,false,CL_warning);
+				printsub("¦¢",true,CL_normal);
+			}
+		}
+		else
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("¾È°³ÀÇ È£¼ö ",false,CL_bad);
+			printsub("´øÀü 8Ãþ~10Ãþ",true,CL_STAT);
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+		}
+	}
+	
+	if(floor_>=11) //¹Ì±ÃÀÇ Á×¸²
+	{
+		if(map_list.dungeon_enter[BAMBOO].detected)
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("¹Ì±ÃÀÇ Á×¸² ",false,CL_warning);
+				
+			sprintf_s(temp,32,"´øÀü %dÃþ  ",map_list.dungeon_enter[BAMBOO].floor+1);
+			printsub(temp,true,CL_help);
+
+			{
+				if(env[EIENTEI_LEVEL].make)
+				{
+					printsub(blank,false,CL_warning);
+					printsub("¦¢¦¦",false,CL_normal);
+					printsub("¿µ¿øÁ¤ ",false,CL_warning);
+				
+					sprintf_s(temp,32,"¹Ì±ÃÀÇ Á×¸²  ");
+					printsub(temp,false,CL_help);
+
+					//***·éÀÖÀ½
+					sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_EIENTEI]);
+					printsub(temp,true,you.rune[RUNE_EIENTEI]?CL_magic:CL_bad);
+					//***·é³¡
+				}
+				else
+				{
+					printsub(blank,false,CL_warning);
+					printsub("¦¢¦¦",false,CL_normal);
+					printsub("¿µ¿øÁ¤ ",false,CL_bad);
+					printsub("¹Ì±ÃÀÇ Á×¸²",true,CL_STAT);
+				}
+			}
+
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+		}
+		else
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¦§",false,CL_normal);
+			printsub("¹Ì±ÃÀÇ Á×¸² ",false,CL_bad);
+			printsub("´øÀü 11Ãþ~14Ãþ",true,CL_STAT);
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+		}
+	}
+
+
+
+
+	
+	if(floor_==MAX_DUNGEUN_LEVEL+1) //Áü½Â±æ
+	{
+		if(map_list.dungeon_enter[DEPTH].detected)
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¿ä±«Áü½Â±æ ",false,CL_warning);
+				
+			
+			int floor2_ = 0;	
+			for(int i=DEPTH_LEVEL;i<=DEPTH_LAST_LEVEL;i++)
+			{
+				if(env[i].make)
+					floor2_++;
+				else
+					break;
+			}
+			sprintf_s(temp,32,"(%2d/%2d) ",floor2_,MAX_DEPTH_LEVEL+1);
+			printsub(temp,false,CL_normal);
+
+			sprintf_s(temp,32,"´øÀü %dÃþ  ",map_list.dungeon_enter[DEPTH].floor+1);
+			printsub(temp,true,CL_help);
+
+			printsub(blank,false,CL_warning);
+			printsub("¦¢",true,CL_normal);
+
+			bool see_[3];
+
+			for(int i = 0 ; i < 3; i++)
+				see_[i]=false;
+			if(floor2_>=2)
+			{
+				for(int level_=0;level_<floor2_+1;level_++)
+				{
+					bool unsee = (level_ == floor2_);
+					if(!see_[0] && ((map_list.dungeon_enter[DREAM_D].detected && 					
+						map_list.dungeon_enter[DREAM_D].floor - DEPTH_LEVEL == level_)  || 
+						unsee))//²ÞÀÇ ¼¼°è
+					{
+
+						if(map_list.dungeon_enter[DREAM_D].detected)
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("²ÞÀÇ ¼¼°è ",false,CL_warning);
+				
+							sprintf_s(temp,32,"Áü½Â±æ %dÃþ  ",map_list.dungeon_enter[DREAM_D].floor+1-DEPTH_LEVEL);
+							printsub(temp,true,CL_help);
+						
+							if(env[DREAM_LEVEL].make)
+							{
+								if(env[MOON_LEVEL].make) //´ÞÀÇ µµ½Ã
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("´ÞÀÇ µµ½Ã ",false,CL_warning);
+				
+									sprintf_s(temp,32,"²ÞÀÇ ¼¼°è  ");
+									printsub(temp,false,CL_help);
+
+									//***·éÀÖÀ½
+									sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_MOON]);
+									printsub(temp,true,you.rune[RUNE_MOON]?CL_magic:CL_bad);
+									//***·é³¡
+								}
+								else
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("´ÞÀÇ µµ½Ã ",false,CL_bad);
+									printsub("²ÞÀÇ ¼¼°è ",true,CL_STAT);
+								}
+							}
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						else
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("²ÞÀÇ ¼¼°è ",false,CL_bad);
+							printsub("Áü½Â±æ 2Ãþ~4Ãþ",true,CL_STAT);
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						see_[0] = true;
+					}
+
+					if(!see_[1] && ((map_list.dungeon_enter[SUBTERRANEAN].detected && 					
+						map_list.dungeon_enter[SUBTERRANEAN].floor - DEPTH_LEVEL == level_)  || 
+						unsee))//ÁöÀú
+					{
+						if(map_list.dungeon_enter[SUBTERRANEAN].detected)
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("ÁöÀú ",false,CL_warning);
+							int floor3_ = 0;	
+							for(int i=SUBTERRANEAN_LEVEL;i<=SUBTERRANEAN_LEVEL_LAST_LEVEL;i++)
+							{
+								if(env[i].make)
+									floor3_++;
+								else
+									break;
+							}
+							sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_SUBTERRANEAN_LEVEL+1);
+							printsub(temp,false,CL_normal);
+				
+							sprintf_s(temp,32,"Áü½Â±æ %dÃþ  ",map_list.dungeon_enter[SUBTERRANEAN].floor+1-DEPTH_LEVEL);
+							printsub(temp,true,CL_help);
+
+							if(env[SUBTERRANEAN_LEVEL].make)
+							{
+								if(env[SUBTERRANEAN_LEVEL_LAST_LEVEL].make) //ÀÛ¿­Áö¿ÁÅÍ
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("ÀÛ¿­Áö¿ÁÅÍ ",false,CL_warning);
+				
+									sprintf_s(temp,32,"ÁöÀú ÃÖÇÏÃþ  ");
+									printsub(temp,false,CL_help);
+
+									//***·éÀÖÀ½
+									sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_SUBTERRANEAN]);
+									printsub(temp,true,you.rune[RUNE_SUBTERRANEAN]?CL_magic:CL_bad);
+									//***·é³¡
+								}
+								else
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("ÀÛ¿­Áö¿ÁÅÍ ",false,CL_bad);
+									printsub("ÁöÀú ÃÖÇÏÃþ ",true,CL_STAT);
+								}
+							}
+
+
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						else
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("ÁöÀú ",false,CL_bad);
+							printsub("Áü½Â±æ 2Ãþ~4Ãþ",true,CL_STAT);
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						see_[1] = true;
+					}
+
+
+					if(!see_[2] && ((map_list.dungeon_enter[PANDEMONIUM].detected && 					
+						map_list.dungeon_enter[PANDEMONIUM].floor - DEPTH_LEVEL == level_)  || 
+						unsee))//¸¶°è
+					{
+						if(map_list.dungeon_enter[PANDEMONIUM].detected)
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("¸¶°è ",false,CL_warning);
+				
+							sprintf_s(temp,32,"Áü½Â±æ %dÃþ  ",map_list.dungeon_enter[PANDEMONIUM].floor+1-DEPTH_LEVEL);
+							printsub(temp,true,CL_help);
+
+							if(env[PANDEMONIUM_LEVEL].make)
+							{
+								if(env[PANDEMONIUM_LEVEL+1].make) //¹ý°è
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦§",false,CL_normal);
+									printsub("¹ý°è ",false,CL_warning);
+				
+									sprintf_s(temp,32,"¸¶°è  ");
+									printsub(temp,false,CL_help);
+
+									//***·éÀÖÀ½
+									sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_PANDEMONIUM_MAGIC]);
+									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_MAGIC]?CL_magic:CL_bad);
+									//***·é³¡
+								}
+								else
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦§",false,CL_normal);
+									printsub("¹ý°è ",false,CL_bad);
+									printsub("¸¶°è ",true,CL_STAT);
+								}
+								if(env[PANDEMONIUM_LEVEL+2].make) //ºù°á¼¼°è
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦§",false,CL_normal);
+									printsub("ºù°á¼¼°è ",false,CL_warning);
+				
+									sprintf_s(temp,32,"¸¶°è  ");
+									printsub(temp,false,CL_help);
+
+									//***·éÀÖÀ½
+									sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_PANDEMONIUM_ICE]);
+									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_ICE]?CL_magic:CL_bad);
+									//***·é³¡
+								}
+								else
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦§",false,CL_normal);
+									printsub("ºù°á¼¼°è ",false,CL_bad);
+									printsub("¸¶°è ",true,CL_STAT);
+								}
+								if(env[PANDEMONIUM_LEVEL+3].make) //ÆÇµ¥¸ð´Ï¾ö
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("ÆÇµ¥¸ð´Ï¾ö ",false,CL_warning);
+				
+									sprintf_s(temp,32,"¸¶°è  ");
+									printsub(temp,false,CL_help);
+
+									//***·éÀÖÀ½
+									sprintf_s(temp,32,"*%sÀÇ ·é* ",rune_string[RUNE_PANDEMONIUM_SHINKI]);
+									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_SHINKI]?CL_magic:CL_bad);
+									//***·é³¡
+								}
+								else
+								{
+									printsub(blank,false,CL_warning);
+									printsub("¦¢¦¦",false,CL_normal);
+									printsub("ÆÇµ¥¸ð´Ï¾ö ",false,CL_bad);
+									printsub("¸¶°è ",true,CL_STAT);
+								}
+							}
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						else
+						{
+							printsub(blank,false,CL_warning);
+							printsub("¦§",false,CL_normal);
+							printsub("¸¶°è ",false,CL_bad);
+							printsub("Áü½Â±æ 2Ãþ~4Ãþ",true,CL_STAT);
+							printsub(blank,false,CL_warning);
+							printsub("¦¢",true,CL_normal);
+						}
+						see_[2] = true;
+					}
+				}
+			}
+
+			if(floor2_ >= MAX_DEPTH_LEVEL+1)
+			{
+				if(map_list.dungeon_enter[HAKUREI_D].detected)
+				{
+					printsub(blank,false,CL_warning);
+					printsub("ÇÏÄí·¹ÀÌ½Å»ç ",false,CL_warning);
+					int floor4_ = 0;	
+					for(int i=HAKUREI_LEVEL;i<=HAKUREI_LAST_LEVEL;i++)
+					{
+						if(env[i].make)
+							floor4_++;
+						else
+							break;
+					}
+					sprintf_s(temp,32,"(%2d/%2d) ",floor4_,MAX_HAKUREI_LEVEL+1);
+					printsub(temp,false,CL_normal);
+				
+					sprintf_s(temp,32,"Áü½Â±æ %dÃþ  ",map_list.dungeon_enter[HAKUREI_D].floor+1-DEPTH_LEVEL);
+					printsub(temp,false,CL_help);
+
+					//***·éÀÖÀ½
+					sprintf_s(temp,32,"*À½¾ç¿Á* ",rune_string[RUNE_HAKUREI_ORB]);
+					printsub(temp,true,you.rune[RUNE_HAKUREI_ORB]?CL_danger:CL_bad);
+					//***·é³¡
+				}
+				else
+				{
+					printsub(blank,false,CL_warning);
+					printsub("ÇÏÄí·¹ÀÌ½Å»ç ",false,CL_bad);
+					printsub("Áü½Â±æ 5Ãþ",true,CL_STAT);
+				}
+			}
+		}
+		else
+		{
+			printsub(blank,false,CL_warning);
+			printsub("¿ä±«Áü½Â±æ ",false,CL_bad);
+			printsub("´øÀü 15Ãþ",true,CL_STAT);
+		}
+
+
+
+
+	}
+
+
+	
+	ReleaseMutex(mutx);
+	
+	changedisplay(DT_SUB_TEXT);
+	waitkeyinput(true);
+	changedisplay(DT_GAME);
+	deletesub();
+
+}
+
+
+
 
 
 

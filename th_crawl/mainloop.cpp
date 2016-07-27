@@ -639,6 +639,9 @@ void MainLoop()
 		case 0x88: //컨트롤P - 로그
 			view_log();
 			break;
+		case 15: //컨트롤o
+			dungeonView();
+			break;
 		case 'e': //먹기
 			Eatting();
 			break;

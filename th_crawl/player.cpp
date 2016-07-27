@@ -34,10 +34,12 @@
 #include "dump.h"
 #include "armour.h"
 #include "evoke.h"
+#include "map.h"
 
 
 players you;
 extern HANDLE mutx;
+extern map_infor map_list;
 skill_type itemtoskill(item_type type_);
 extern bool widesearch; //X커맨드용
 
@@ -2768,6 +2770,53 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_YUYUKO:
 						case DG_TEMPLE_SATORI:
 						case DG_TEMPLE_TENSI:
+							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
+							{								
+							case DG_TEMPLE_STAIR:									
+								map_list.dungeon_enter[TEMPLE].detected = true;
+								break;
+							case DG_MISTY_LAKE_STAIR:									
+								map_list.dungeon_enter[MISTY_LAKE].detected = true;
+								break;
+							case DG_YOUKAI_MOUNTAIN_STAIR:	
+								map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
+								break;
+							case DG_SCARLET_STAIR:	
+								map_list.dungeon_enter[SCARLET_M].detected = true;		
+								break;				
+							case DG_SCARLET_L_STAIR:
+								map_list.dungeon_enter[SCARLET_L].detected = true;		
+								break;				
+							case DG_SCARLET_U_STAIR:
+								map_list.dungeon_enter[SCARLET_U].detected = true;		
+								break;				
+							case DG_BAMBOO_STAIR:
+								map_list.dungeon_enter[BAMBOO].detected = true;		
+								break;				
+							case DG_EIENTEI_STAIR:	
+								break;				
+							case DG_SUBTERRANEAN_STAIR:
+								map_list.dungeon_enter[SUBTERRANEAN].detected = true;		
+								break;
+							case DG_YUKKURI_STAIR:
+								map_list.dungeon_enter[YUKKURI_D].detected = true;		
+								break;
+							case DG_DEPTH_STAIR:
+								map_list.dungeon_enter[DEPTH].detected = true;		
+								break;
+							case DG_DREAM_STAIR:
+								map_list.dungeon_enter[DREAM_D].detected = true;		
+								break;
+							case DG_MOON_STAIR:				
+								break;
+							case DG_PANDEMONIUM_STAIR:
+								map_list.dungeon_enter[PANDEMONIUM].detected = true;		
+								break;	
+							case DG_HAKUREI_STAIR:
+								map_list.dungeon_enter[HAKUREI_D].detected = true;		
+								break;
+							}
+
 							if(speak_)
 							{
 								printlog(dungeon_tile_tribe_type_string[env[current_level].dgtile[check_pos_.x][check_pos_.y].tile],false,false,false,CL_normal);

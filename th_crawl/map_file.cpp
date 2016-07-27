@@ -88,7 +88,7 @@ bool isArena()
 
 void initMap()
 {
-	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,4));
+	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,5));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
@@ -241,7 +241,7 @@ void TempleEnterMap(map_dummy* map)
 				break;
 			case '0':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_TEMPLE_STAIR;
-				map_list.dungeon_enter[TEMPLE].detected = true;
+				//map_list.dungeon_enter[TEMPLE].detected = true;
 				map_list.dungeon_enter[TEMPLE].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);
 				map_list.dungeon_enter[TEMPLE].pos += map->pos;
 				break;
@@ -287,7 +287,7 @@ void YoukaiEnterMap(map_dummy* map)
 				break;
 			case '0':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_YOUKAI_MOUNTAIN_STAIR;
-				map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
+				//map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
 				map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);
 				map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos += map->pos;
 				break;
@@ -463,7 +463,7 @@ bool PixedMap(map_dummy* map, char *temp)
 						stiar_enter_--;
 					if(stiar_enter_>=PANDEMONIUM)
 						stiar_enter_--;
-					map_list.dungeon_enter[stiar_enter_].detected = true;
+					//map_list.dungeon_enter[stiar_enter_].detected = true;
 					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);
 					map_list.dungeon_enter[stiar_enter_].pos += map->pos;
 				}
@@ -526,7 +526,7 @@ void TempleMap(map_dummy* map, int temple_)
 
 	int x_=rand_int(1,map->size_x*2-1),y_=rand_int(1,map->size_y*2-1);
 	map->tiles[x_][y_] =(dungeon_tile_type)(DG_TEMPLE_FIRST+temple_);
-	map_list.temple[temple_].detected = true;
+	//map_list.temple[temple_].detected = true;
 	map_list.temple[temple_].pos = coord_def(x_,y_);
 
 	map->m_entrance+=map->pos;

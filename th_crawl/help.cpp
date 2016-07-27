@@ -58,7 +58,7 @@ void Help_Show()
 			printsub("                                                   E - 경험치 표시",true,CL_normal);
 			printsub("                                                   m - 스킬창 표시",true,CL_normal);
 			printsub("<아이템관련>                                       ] - 획득한 룬 표시",true,CL_normal);
-			printsub("i      - 가지고 있는 아이템                        ctrl-O - 던전 정보",true,CL_normal);
+			printsub("i      - 가지고 있는 아이템                        ctrl-O - 던전 진행도 표시",true,CL_normal);
 			printsub("g또는, - 떨어져있는 아이템줍기                     ",true,CL_normal);
 			printsub("d      - 아이템버리기                              ",true,CL_normal);
 			printsub("D      - 가장 최근에 얻은 아이템버리기             <비게임 커맨드>",true,CL_normal);

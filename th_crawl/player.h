@@ -519,6 +519,7 @@ void Amulet_Show();
 void Simple_State_Show();
 void Experience_Show();
 //bool Eat_Power();
+void dungeonView();
 void run_spell();
 void shout();
 void auto_pick_onoff(bool auto_);

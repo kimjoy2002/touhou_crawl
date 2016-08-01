@@ -2263,7 +2263,7 @@ bool god_punish(god_type god)
 	{
 		printarray(true,false,false,CL_small_danger,1,"***징벌!***");
 	}
-	switch(you.god)
+	switch(god)
 	{
 	case GT_ERROR:
 		break;
@@ -2272,6 +2272,27 @@ bool god_punish(god_type god)
 	case GT_SHIKIEIKI:
 		break;
 	case GT_BYAKUREN:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,50);//마나흡수
+			rand_.push(1,25);//스탯드레인
+			rand_.push(2,25);//슬로우
+			switch(rand_.pop())
+			{
+			case 0:				
+				you.MpUpDown(-you.max_mp);
+				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 영력이 흡수되었다!");
+				break;
+			case 1:
+				(randA(1)?you.StatUpDown(-rand_int(1,5),STAT_STR,true):you.StatUpDown(-rand_int(3,7),STAT_INT,true));
+				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 스탯이 감소되었다!");
+				break;
+			case 2:
+				you.SetSlow(rand_int(80,100));
+				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신은 느려졌다!");
+				break;
+			}
+		}
 		break;
 	case GT_KANAKO:
 		break;

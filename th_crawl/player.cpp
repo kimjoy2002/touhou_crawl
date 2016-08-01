@@ -973,6 +973,8 @@ int players::GetSpellSuccess(int spell_)
 	}
 
 	success_ = max(0,(success_-differ_<=14)?(success_-differ_)*(2*14+(success_-differ_-1)*-1.07)/2:99);
+	if(you.GetPunish(GT_BYAKUREN))
+		success_ = success_*95/100;
 	return success_;
 
 }
@@ -2445,7 +2447,7 @@ int players::GetResist()
 }
 bool players::GetPunish(god_type god_)
 {
-	return punish[god_].punish;
+	return punish[god_].number;
 }
 int players::GetProperty(tribe_proper_type type_)
 {

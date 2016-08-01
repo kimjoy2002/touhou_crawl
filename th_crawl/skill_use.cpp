@@ -1917,7 +1917,8 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	char temp[200];
 	sprintf_s(temp,200,"%s%s ¹ö·È´Ù.",GetGodString(you.god),GetGodString_is(you.god)?"À»":"¸¦");
 	AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
-
+	
+	you.Ability(SKL_ABANDON_GOD,true,true);
 	you.god = GT_NONE;	
 
 

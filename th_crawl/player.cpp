@@ -1573,6 +1573,38 @@ void players::ExpRecovery(int exper_)
 		if(s_trans_panalty) //시공부작용의 감소
 			s_trans_panalty--;
 
+		
+		random_extraction<int> recover_;
+		if(s_str != m_str)
+			recover_.push(0,1);
+		if(s_dex != m_dex)
+			recover_.push(1,1);
+		if(s_int != m_int)
+			recover_.push(2,1);
+
+		if(recover_.GetSize())
+		{
+			switch(recover_.pop())
+			{
+			case 0:
+				s_str++;
+				printlog("잃어버린 힘이 회복되었다.",false,false,false,CL_blue);
+				break;
+			case 1:
+				s_dex++;
+				printlog("잃어버린 민첩이 회복되었다.",false,false,false,CL_blue);
+				break;
+			case 2:
+				s_int++;
+				printlog("잃어버린 지능이 회복되었다.",false,false,false,CL_blue);
+				break;
+			}
+		}
+
+
+
+
+
 		if(wiz_list.wizard_mode == 1)
 		{
 			printlog("일정량의 스킬 경험치 획득",true,false,false,CL_help);

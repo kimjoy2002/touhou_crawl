@@ -1305,9 +1305,9 @@ void SkillUse()
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
-			if( (key_ >= 'a' && key_ <= 'z'))
+			if( (key_ >= 'a' && key_ <= 'z') ||  (key_ >= 'A' && key_ <= 'Z'))
 			{
-				int num = (key_-'a');
+				int num = (key_ >= 'A' && key_ <= 'Z')?(key_-'A'+26):(key_-'a');
 				if(skill_list skill_ = (skill_list)you.MemorizeSkill[num])
 				{
 					if(!GetDisplayMove()) //스킬사용

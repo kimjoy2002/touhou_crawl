@@ -255,8 +255,8 @@ public:
 	int remainSpellPoiont;
 	int currentSpellNum;
 
-	int MemorizeSkill[26];
-	int MemorizeSkill_num[26];
+	int MemorizeSkill[52];
+	int MemorizeSkill_num[52];
 	int currentSkillNum;
 
 	god_type god;

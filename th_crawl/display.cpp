@@ -223,12 +223,12 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	pfont->DrawTextA(pSprite,"¼º°ø·ü", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
-	for(int i=0;i<26;i++)
+	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSkill[i])
 		{
 			skill_list skill_ = (skill_list)you.MemorizeSkill[i];
-			char sp_char = ('a'+i);
+			char sp_char = i>=26?('A'+i-26):('a'+i);
 			sprintf_s(temp,100,"%c      - %s",sp_char,SkillString(skill_));
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += 250;

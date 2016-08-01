@@ -83,9 +83,9 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		prev_mp[i] = mp;
 	for(int i=0;i<52;i++)
 		MemorizeSpell[i] = 0;
-	for(int i=0;i<27;i++)
+	for(int i=0;i<52;i++)
 		MemorizeSkill[i] = 0;
-	for(int i=0;i<27;i++)
+	for(int i=0;i<52;i++)
 		MemorizeSkill_num[i] = 0;
 	//for(int i=0;i<GT_LAST;i++)
 	//	punish[i]=0;
@@ -3444,7 +3444,7 @@ bool players::Memorize(int spell_, bool immediately)
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 {
 	int set_=-1;
-	for(int i=(god_?0:5);i<26;i++)
+	for(int i=(skill_==SKL_ABANDON_GOD?26+'Q'-'A':(god_?0:5));i<52;i++)
 	{
 		if(MemorizeSkill[i] == skill_)
 		{
@@ -3454,7 +3454,7 @@ int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 	}
 	if(set_ == -1 && !unset_)
 	{
-		for(int i=(god_?0:5);i<26;i++)
+		for(int i=(skill_==SKL_ABANDON_GOD?26+'Q'-'A':(god_?0:5));i<52;i++)
 		{
 			if(!MemorizeSkill[i])
 			{

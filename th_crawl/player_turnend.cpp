@@ -724,13 +724,20 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		CheckTension();
 	enterlog();
 
+
+
 	ReleaseMutex(mutx);
+
+	CheckPunish(delay_);
+
 	if(s_paralyse)
 	{
 		you.time_delay += you.GetNormalDelay();
 		SetInter(TurnEnd());
 	}
 	
+
+
 	return inter;
 }
 bool players::TraningStealth()

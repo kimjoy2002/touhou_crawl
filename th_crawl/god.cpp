@@ -761,7 +761,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					{
 						you.PietyUpDown(1);
 					}
-					if(!you.punish[GT_SUWAKO] && pietyLevel(you.piety)>=2)
+					if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
 					{
 						switch(you.god_value[1])
 						{
@@ -819,7 +819,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						you.PietyUpDown(1);
 						return true;
 					}
-					if(!you.punish[GT_MIMA] && pietyLevel(you.piety)>=1)
+					if(!you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=1)
 					{
 						if(randA(120) < you.piety)
 						{
@@ -1017,7 +1017,7 @@ bool GodAccpect_GetPitem()
 	case GT_SHINKI:	
 		if(1)
 		{
-			if(!you.punish[GT_SHINKI] && pietyLevel(you.piety)>=5)
+			if(!you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=5)
 			{
 				int hp_ = rand_int(you.max_hp*9/100,you.max_hp*18/100)+1;
 				printlog("회복되었다.",false,false,false,CL_normal);
@@ -1052,7 +1052,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_KANAKO:
 		break;
 	case GT_SUWAKO:		
-		if(!you.punish[GT_SUWAKO] && pietyLevel(you.piety)>=2)
+		if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
 		{
 			switch(you.god_value[1])
 			{
@@ -1286,7 +1286,7 @@ bool GodAccpect_turn(int turn)
 	case GT_SUWAKO:
 		{	
 
-			if(you.god == GT_SUWAKO && !you.punish[GT_SUWAKO] && pietyLevel(you.piety)>=2 &&
+			if(you.god == GT_SUWAKO && !you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2 &&
 			you.god_value[1] == SWAKO_2_SWIM)
 			{
 				auto tile_ = env[current_level].dgtile[you.position.x][you.position.y].tile;
@@ -1338,7 +1338,7 @@ bool GodAccpect_turn(int turn)
 		}
 		return false;
 	case GT_HINA:
-		if(pietyLevel(you.piety) >= 5 && !you.punish[GT_HINA])
+		if(pietyLevel(you.piety) >= 5 && !you.GetPunish(GT_HINA))
 		{
 			int curse_ = 0;
 			
@@ -1782,71 +1782,71 @@ void God_show()
 	case GT_SHIKIEIKI:
 		break;
 	case GT_BYAKUREN:
-		if(level_ >= 1 && !you.punish[GT_BYAKUREN])
+		if(level_ >= 1 && !you.GetPunish(GT_BYAKUREN))
 		{
 			printsub("히지리는 당신이 배울 수 있는 마법레벨의 한계를 늘린다.                     (패시브)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_BYAKUREN])
+		if(level_ >= 2 && !you.GetPunish(GT_BYAKUREN))
 		{
 			printsub("당신은 순간적으로 지능을 강화시킬 수 있다.                                   (신앙)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_BYAKUREN])
+		if(level_ >= 3 && !you.GetPunish(GT_BYAKUREN))
 		{
 			printsub("당신은 근력이 강화되어 낮은 수준의 갑옷패널티의 마법실패율을 무시한다.     (패시브)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_BYAKUREN])
+		if(level_ >= 4 && !you.GetPunish(GT_BYAKUREN))
 		{
 			printsub("히지리는 당신의 강화 마법들을 보조해준다.                                  (패시브)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_BYAKUREN])
+		if(level_ >= 5 && !you.GetPunish(GT_BYAKUREN))
 		{
 			printsub("당신은 순간적으로 각력을 강화시킬 수 있다.                             (영력, 신앙)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_KANAKO:
-		if(level_ >= 1 && !you.punish[GT_KANAKO])
+		if(level_ >= 1 && !you.GetPunish(GT_KANAKO))
 		{
 			printsub("당신은 카나코님의 힘으로 돌진할 수 있다.                    (영력, 신앙)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_KANAKO])
+		if(level_ >= 3 && !you.GetPunish(GT_KANAKO))
 		{
 			printsub("당신은 카나코님의 기둥을 구현할 수 있다.                    (영력, 신앙)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_KANAKO])
+		if(level_ >= 5 && !you.GetPunish(GT_KANAKO))
 		{
 			printsub("당신은 카나코님의 바람의 힘을 휘감을 수 있다.               (영력, 신앙)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SUWAKO:
-		if(level_ >= 1 && !you.punish[GT_SUWAKO])
+		if(level_ >= 1 && !you.GetPunish(GT_SUWAKO))
 		{
 			printsub(GetSwakoString1((swako_1_power)you.god_value[0], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_SUWAKO])
+		if(level_ >= 2 && !you.GetPunish(GT_SUWAKO))
 		{
 			printsub(GetSwakoString2((swako_2_power)you.god_value[1], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_SUWAKO])
+		if(level_ >= 3 && !you.GetPunish(GT_SUWAKO))
 		{
 			printsub(GetSwakoString3((swako_3_power)you.god_value[2], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_SUWAKO])
+		if(level_ >= 4 && !you.GetPunish(GT_SUWAKO))
 		{
 			printsub(GetSwakoString4((swako_4_power)you.god_value[3], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_SUWAKO])
+		if(level_ >= 5 && !you.GetPunish(GT_SUWAKO))
 		{
 			printsub(GetSwakoString5((swako_5_power)you.god_value[4], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
@@ -1858,147 +1858,147 @@ void God_show()
 			printsub("파워가 가득차도 음식을 먹을 수 있고 최대 파워를 오래 유지할 수 있다.       (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_MINORIKO])
+		if(level_ >= 1 && !you.GetPunish(GT_MINORIKO))
 		{
 			printsub("당신이 파워가 가득차있을수록 체력과 영력회복속도가 빨라진다.               (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_MINORIKO])
+		if(level_ >= 2 && !you.GetPunish(GT_MINORIKO))
 		{
 			printsub("미노리코는 당신에게 걸린 상태이상과 능력저하를 회복시켜준다.              (P, 신앙)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_MINORIKO])
+		if(level_ >= 3 && !you.GetPunish(GT_MINORIKO))
 		{ //이때부터 고구마 선물을 해준다.
 			printsub("당신은 음식을 더 빨리 먹을 수 있고 먹을때 영력도 조금 회복한다.            (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_MINORIKO])
+		if(level_ >= 4 && !you.GetPunish(GT_MINORIKO))
 		{
 			printsub("미노리코는 당신이 가진 음식을 소모하여 체력을 크게 회복할 수 있다.  (P, 음식, 신앙)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_MINORIKO])
+		if(level_ >= 5 && !you.GetPunish(GT_MINORIKO))
 		{
 			printsub("미노리코는 당신이 음식을 먹은 직후 일시적으로 불,냉기저항을 1단계 준다.    (패시브)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_MIMA:
-		if(level_ >= 0 && !you.punish[GT_MIMA])
+		if(level_ >= 0 && !you.GetPunish(GT_MIMA))
 		{ 
 			printsub("신앙심에 비례해서 최대영력이 올라간다.                                     (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_MIMA])
+		if(level_ >= 1 && !you.GetPunish(GT_MIMA))
 		{
 			printsub("적을 죽였을때 적의 세기에 따라 영력을 얻을 수 있다.                        (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_MIMA])
+		if(level_ >= 2 && !you.GetPunish(GT_MIMA))
 		{
 			printsub("미마는 파괴술이 들어간 마법의 위력을 증가시킨다.                           (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_MIMA])
+		if(level_ >= 4 && !you.GetPunish(GT_MIMA))
 		{
 			printsub("미마는 파괴술이 들어간 마법의 성공율을 증가시킨다.                         (패시브)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHINKI:
-		if(level_ >= 1 && !you.punish[GT_SHINKI])
+		if(level_ >= 1 && !you.GetPunish(GT_SHINKI))
 		{ 
 			printsub("당신은 하급 마족 무리를 소환할 수 있다.                                    (P, 신앙)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_SHINKI])
+		if(level_ >= 2 && !you.GetPunish(GT_SHINKI))
 		{ 
 			printsub("당신은 중급 마족을 소환할 수 있다.                                         (P, 신앙)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_SHINKI])
+		if(level_ >= 3 && !you.GetPunish(GT_SHINKI))
 		{ 
 			printsub("적대적인 소환수의 행동을 일정확률로 방해한다.                               (패시브)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_SHINKI])
+		if(level_ >= 4 && !you.GetPunish(GT_SHINKI))
 		{ 
 			printsub("당신은 상급 마족을 소환할 수 있다.                                         (P, 신앙)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_SHINKI])
+		if(level_ >= 5 && !you.GetPunish(GT_SHINKI))
 		{ 
 			printsub("당신은 P를 주울때마다 체력과 영력이 차오른다.                               (패시브)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUUGI:
-		if(level_ >= 0 && !you.punish[GT_YUUGI])
+		if(level_ >= 0 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("취기가 오른 상태에서 약간의 체력회복력과 높은 회피를 얻는다.                (패시브)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_YUUGI])
+		if(level_ >= 1 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("물약 1개를 술로 바꿔서 마실 수 있다.                                    (물약, 신앙)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_YUUGI])
+		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("전투중 가끔 상대를 잡는다. 잡으면 잡기기술을 신앙소모없이 쓸 수 있다.       (패시브)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_YUUGI])
+		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("상대를 잡아 저먼 스플렉스를 걸 수 있다.                                    (P, 신앙)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_YUUGI])
+		if(level_ >= 3 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("상대를 잡아 집어 던질 수 있다.                                             (P, 신앙)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_YUUGI])
+		if(level_ >= 4 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("주변의 상대를 침묵시키는 강력한 포효를 할 수 있다.                         (P, 신앙)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_YUUGI])
+		if(level_ >= 5 && !you.GetPunish(GT_YUUGI))
 		{ 
 			printsub("오니의 궁극기, 삼보필살을 쓸 수 있다.                                      (P, 신앙)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHIZUHA:
-		if(level_ >= 0 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 0 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.           (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 1 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 움직이거나 적을 죽였을때 단풍잎의 자취를 남긴다.         (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 			printsub("단풍 위를 걸으면 매우 은밀하게 움직일 수 있다.                  (패시브) ",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 2 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 단풍 위에 서있는 모든 적에 혼란을 걸 수 있다.        (영력, 신앙)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 3 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 방어구를 단풍방어구로 바꿀 수 있다.                        (신앙)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 4 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.             (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 6 && you.god_value[0]==0 && !you.punish[GT_SHIZUHA])
+		if(level_ >= 6 && you.god_value[0]==0 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 딱 한번 당신의 무기에 단풍브랜드를 부여할 수 있다.       (한번만)",true,CL_autumn);
 			printsub("",true,CL_normal);
@@ -2010,71 +2010,71 @@ void God_show()
 			printsub("당신은 시야내의 장비에 저주가 걸려있는지 확인하고 식별할 수 있다.                (패시브)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_HINA])
+		if(level_ >= 1 && !you.GetPunish(GT_HINA))
 		{ 
 			printsub("당신은 장착중인 저주가 걸린 장비의 마이너스 인챈트를 플러스로 바꿀 수 있다.           (P)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_HINA])
+		if(level_ >= 2 && !you.GetPunish(GT_HINA))
 		{ 
 			printsub("당신은 무기에 잠시동안 저주의 힘을 담아 강화 시킬 수 있다.                         (저주)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_HINA])
+		if(level_ >= 3 && !you.GetPunish(GT_HINA))
 		{ 
 			printsub("당신은 방어구에 잠시동안 저주의 힘을 담아 모든 공격을 반사시킬 수 있다.            (저주)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_HINA])
+		if(level_ >= 4 && !you.GetPunish(GT_HINA))
 		{ 
 			printsub("당신은 장신구에 잠시동안 저주의 힘을 담아 생명력을 치유 할 수 있다.                (저주)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_HINA])
+		if(level_ >= 5 && !you.GetPunish(GT_HINA))
 		{ 
 			printsub("당신은 저주된 아이템을 끼고 있으면 저주를 흩뿌리고 다닌다.                       (패시브)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 6 && you.god_value[0]==0 && !you.punish[GT_HINA])
+		if(level_ >= 6 && you.god_value[0]==0 && !you.GetPunish(GT_HINA))
 		{
 			printsub("당신은 딱 한번 당신의 무기에 저주브랜드를 부여할 수 있다.						   (한번만)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUKARI:
-		if(level_ >= 0 && !you.punish[GT_YUKARI])
+		if(level_ >= 0 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("틈새가 당신을 지켜본다.                                         (패시브)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_YUKARI])
+		if(level_ >= 1 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("당신은 일정 데미지를 입으면 공간이동이 일어난다.                (패시브)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_YUKARI])
+		if(level_ >= 2 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("당신은 틈새로부터 사격지원을 받을 수 있다.                  (영력, 신앙)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_YUKARI])
+		if(level_ >= 3 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("당신은 틈새를 타고다닐 수 있다.                             (영력, 신앙)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_YUKARI])
+		if(level_ >= 4 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("당신은 결계를 만들 수 있다.                                 (영력, 신앙)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_YUKARI])
+		if(level_ >= 5 && !you.GetPunish(GT_YUKARI))
 		{
 			printsub("당신은 잠시동안 차원을 고정시킬 수 있다.                    (영력, 신앙)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_EIRIN:
-		if(!you.punish[GT_EIRIN])
+		if(!you.GetPunish(GT_EIRIN))
 		{
 			printsub("에이린은 물약들의 효과를 상승시켜준다.                          (패시브)",true,CL_small_danger);
 			printsub("",true,CL_normal);
@@ -2096,78 +2096,78 @@ void God_show()
 				printsub("",true,CL_normal);
 			}
 		}
-		if(level_ >= 2 && !you.punish[GT_EIRIN])
+		if(level_ >= 2 && !you.GetPunish(GT_EIRIN))
 		{
 			printsub("당신의 물약을 던질 수 있다.                                    (P, 물약)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_EIRIN])
+		if(level_ >= 3 && !you.GetPunish(GT_EIRIN))
 		{
 			printsub("당신은 신체개조를 통해 능력치를 조절할 수 있다.                   (신앙)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_EIRIN])
+		if(level_ >= 5 && !you.GetPunish(GT_EIRIN))
 		{
 			printsub("당신은 부작용을 대가로 몸을 재생할 수 있다.              (P, 영력, 신앙)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUYUKO:
-		if(level_ >= 1 && !you.punish[GT_YUYUKO])
+		if(level_ >= 1 && !you.GetPunish(GT_YUYUKO))
 		{ 
 			printsub("당신은 유령을 불러들인다.                                      (패시브)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_YUYUKO])
+		if(level_ >= 2 && !you.GetPunish(GT_YUYUKO))
 		{ 
 			printsub("원하는 위치에 유령들을 보낼 수 있다.                          (P, 영력)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_YUYUKO])
+		if(level_ >= 3 && !you.GetPunish(GT_YUYUKO))
 		{ 
 			printsub("잠시동안 유령을 불러들이는 빈도를 높힐 수 있다.            (신앙, 영력)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_YUYUKO])
+		if(level_ >= 5 && !you.GetPunish(GT_YUYUKO))
 		{ 
 			printsub("적 한명의 영혼을 잡을 수 있다.                             (신앙, 영력)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SATORI:
-		if(level_ >= 0 && !you.punish[GT_SATORI])
+		if(level_ >= 0 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("당신은 투명을 볼 수 있다.                                       (패시브)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 1 && !you.punish[GT_SATORI])
+		if(level_ >= 1 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("당신은 상대의 트라우마를 끌어낼 수 있다.                          (신앙)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 2 && !you.punish[GT_SATORI])
+		if(level_ >= 2 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("당신은 적의 기억속에서 맵의 형태를 읽어낸다.                    (패시브)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 3 && !you.punish[GT_SATORI])
+		if(level_ >= 3 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("당신은 몹의 기척을 탐지할 수 있다.                              (패시브)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 4 && !you.punish[GT_SATORI])
+		if(level_ >= 4 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("적 한명의 생각을 완벽하게 독파할 수 있다.                   (시간, 신앙)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 5 && !you.punish[GT_SATORI])
+		if(level_ >= 5 && !you.GetPunish(GT_SATORI))
 		{ 
 			printsub("사토리는 가끔 당신에게 먹이를 준다. 위험할수록 자주 준다.       (패시브)",true,CL_danger);
 			printsub("",true,CL_normal); 
 		}
 		break;
 	case GT_TENSI:
-		if(level_ >= 0 && !you.punish[GT_TENSI])
+		if(level_ >= 0 && !you.GetPunish(GT_TENSI))
 		{ 
 			printsub("텐시의 행동은 예측할 수 없다!                                           ",true,CL_tensi);
 			printsub("",true,CL_normal);
@@ -2246,6 +2246,52 @@ bool God_pray(const list<item>::iterator it)
 			you.GiftCount(it->num * 1);
 			return true;
 		}
+		break;
+	case GT_YUYUKO:
+		break;
+	case GT_SATORI:
+		break;
+	case GT_TENSI:
+		break;
+	}
+	return false;		
+}
+bool god_punish(god_type god)
+{
+
+	if(wiz_list.wizard_mode == 1)
+	{
+		printarray(true,false,false,CL_small_danger,1,"***징벌!***");
+	}
+	switch(you.god)
+	{
+	case GT_ERROR:
+		break;
+	case GT_NONE:
+		break;
+	case GT_SHIKIEIKI:
+		break;
+	case GT_BYAKUREN:
+		break;
+	case GT_KANAKO:
+		break;
+	case GT_SUWAKO:
+		break;
+	case GT_MINORIKO:
+		break;
+	case GT_MIMA:
+		break;
+	case GT_SHINKI:
+		break;
+	case GT_YUUGI:
+		break;
+	case GT_SHIZUHA:
+		break;
+	case GT_HINA:
+		break;
+	case GT_YUKARI:
+		break;
+	case GT_EIRIN:
 		break;
 	case GT_YUYUKO:
 		break;

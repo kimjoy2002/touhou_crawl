@@ -781,6 +781,11 @@ string GetSkillInfor(skill_list skill)
 		text_ += "시야내의 있는 적들의 체력을 절반으로 만들어버리는 무서운 기술.\n";
 		text_ += "당신이 악마의 피를 이어받고있기때문에, 당신은 이 피해로부터 면역이다.\n";
 		break;
+	case SKL_ABANDON_GOD:
+		text_ += "당신이 믿고 있는 신을 버립니다.\n";
+		text_ += "신을 버린 순간 신에게 얻은 권능과 이점이 사라지며 신의 분노를 사게됩니다.\n";
+		text_ += "당신이 신의 분노를 사는 동안엔 신의 징벌을 받게 됩니다. 많은 시간이 지나면 징벌은 사라집니다.\n";
+		break;
 	default:
 		text_ += "모르는 능력.\n";
 		break;

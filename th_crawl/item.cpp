@@ -810,7 +810,7 @@ void item::autoIdentify()
 }
 void item::income_view()
 {
-	if(you.god == GT_HINA && !you.punish[GT_HINA])
+	if(you.god == GT_HINA && !you.GetPunish(GT_HINA))
 	{
 		identify_curse = true;
 		if(curse)

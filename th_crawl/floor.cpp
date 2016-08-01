@@ -67,7 +67,7 @@ void floor_effect::prev_check()
 	switch(type)
 	{
 	case FLOORT_AUTUMN:
-		if(you.position == position && you.god == GT_SHIZUHA && !you.punish[GT_SHIZUHA])
+		if(you.position == position && you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA))
 		{
 			if(you.prev_action == ACTT_WALK && pietyLevel(you.piety) >= 4){
 				you.time_delay *= 0.7;
@@ -91,7 +91,7 @@ bool floor_effect::action(int delay_)
 	switch(type)
 	{
 	case FLOORT_AUTUMN:
-		if(you.position == position && you.god == GT_SHIZUHA && !you.punish[GT_SHIZUHA])
+		if(you.position == position && you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA))
 		{
 			you.SetAutumn(1);
 			if(you.prev_action == ACTT_WALK && pietyLevel(you.piety) >= 4){

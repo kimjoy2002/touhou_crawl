@@ -28,6 +28,7 @@
 #include "event.h"
 #include "armour.h"
 #include "god.h"
+#include "note.h"
 
 
 extern HANDLE mutx;
@@ -1890,6 +1891,40 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+
+bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
+{
+	printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
+	switch(waitkeyinput())
+	{
+	case 'Y':
+	case 'y':
+		enterlog();
+		break;
+	case 'N':
+	default:
+		printlog(" 취소!",true,false,false,CL_normal);
+		return false;
+	}
+	
+	
+	
+	printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ","버렸다. 당신의 신은 분노했다!");
+	
+	
+	you.punish[you.god].number=30;
+	
+	char temp[200];
+	sprintf_s(temp,200,"%s%s 버렸다.",GetGodString(you.god),GetGodString_is(you.god)?"을":"를");
+	AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+
+	you.god = GT_NONE;	
+
+
+	return true;
+}
+
+
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 int UseSkill(skill_list skill, bool short_, coord_def &target)
@@ -2085,6 +2120,9 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_TORMENT:
 		return skill_torment(power,short_,&you, target);
+		break;
+	case SKL_ABANDON_GOD:
+		return skill_abandon_god(power,short_,&you, target);
 		break;
 	}
 	return 0;

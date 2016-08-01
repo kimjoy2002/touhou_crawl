@@ -87,8 +87,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<27;i++)
 		MemorizeSkill_num[i] = 0;
-	for(int i=0;i<GT_LAST;i++)
-		punish[i]=0;
+	//for(int i=0;i<GT_LAST;i++)
+	//	punish[i]=0;
 	for(int i=0;i<5;i++)
 		god_value[i]=0;
 	for(int i=0;i<4;i++)
@@ -272,7 +272,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<god_type>(fp, god);
 	SaveData<int>(fp, gift_count);
 	SaveData<int>(fp, piety);
-	SaveData<int>(fp, *punish, GT_LAST);
+	SaveData<punish_struct>(fp, *punish, GT_LAST);
 	SaveData<int>(fp, god_turn);
 	SaveData<int>(fp, *god_value, 5);
 	SaveData<int>(fp, suwako_meet);
@@ -483,7 +483,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<god_type>(fp, god);
 	LoadData<int>(fp, gift_count);
 	LoadData<int>(fp, piety);
-	LoadData<int>(fp, *punish);
+	LoadData<punish_struct>(fp, *punish);
 	LoadData<int>(fp, god_turn);
 	LoadData<int>(fp, *god_value);
 	LoadData<int>(fp, suwako_meet);
@@ -512,7 +512,7 @@ bool players::isLive()
 }
 bool players::isSwim()
 {
-	if(god == GT_SUWAKO && !punish[GT_SUWAKO] && pietyLevel(piety)>=2 &&
+	if(god == GT_SUWAKO && !GetPunish(GT_SUWAKO) && pietyLevel(piety)>=2 &&
 		god_value[1] == SWAKO_2_SWIM)
 		return true;
 	if(GetProperty(TPT_SWIM))
@@ -645,7 +645,7 @@ int players::move(short_move x_mov, short_move y_mov)
 
 			if(mon_->damage(temp_att))
 			{
-				if(mon_->isLive()&& you.god == GT_YUUGI && !you.punish[GT_YUUGI] && pietyLevel(you.piety)>=2 && randA(10) == 0)
+				if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
 				{
 					printarray(false,false,false,CL_yuigi,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_to(true),"잡았다.");
 					you.SetCatch(mon_);
@@ -902,7 +902,7 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	if(s_clever)
 		power_+=4;
 
-	if(you.god == GT_MIMA && !you.punish[GT_MIMA] && pietyLevel(you.piety)>=2 &&
+	if(you.god == GT_MIMA && !you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=2 &&
 		(s1_ == SKT_CONJURE || s2_ == SKT_CONJURE || s3_ == SKT_CONJURE))
 		power_+=4;
 
@@ -946,9 +946,9 @@ int players::GetSpellSuccess(int spell_)
 		success_+=1+1*magician_bonus;
 	if(s_drunken)
 		success_-=2;
-	if(you.god == GT_BYAKUREN && !you.punish[GT_BYAKUREN] && pietyLevel(you.piety)>=4 && SpellFlagCheck((spell_list)spell_ ,S_FLAG_BUF))
+	if(you.god == GT_BYAKUREN && !you.GetPunish(GT_BYAKUREN) && pietyLevel(you.piety)>=4 && SpellFlagCheck((spell_list)spell_ ,S_FLAG_BUF))
 		success_ += 2;
-	if(you.god == GT_MIMA && !you.punish[GT_MIMA] && pietyLevel(you.piety)>=2 &&
+	if(you.god == GT_MIMA && !you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=2 &&
 		(s1_ == SKT_CONJURE || s2_ == SKT_CONJURE || s3_ == SKT_CONJURE))
 		success_ += 2;
 
@@ -968,7 +968,7 @@ int players::GetSpellSuccess(int spell_)
 	//}
 	if(you.as_penalty>0)
 	{
-		if(!(you.god == GT_BYAKUREN && !you.punish[GT_BYAKUREN] && pietyLevel(you.piety)>=3) || (as_penalty > GetPenaltyMinus(1)))
+		if(!(you.god == GT_BYAKUREN && !you.GetPunish(GT_BYAKUREN) && pietyLevel(you.piety)>=3) || (as_penalty > GetPenaltyMinus(1)))
 			differ_ += as_penalty*2;
 	}
 
@@ -1062,12 +1062,12 @@ int players::HpRecoverDelay(int delay_)
 	//10일때 20이 되어야하니까 10->5
 	float cacul_ = 1000.0f/base_; //100턴당 회복량.
 
-	if(god == GT_MINORIKO && !punish[GT_MINORIKO] && pietyLevel(piety)>=1)
+	if(god == GT_MINORIKO && !GetPunish(GT_MINORIKO) && pietyLevel(piety)>=1)
 	{
 		int piety_ = (pietyLevel(you.piety)+1)/2;
 		cacul_ += (piety_*5+(piety_*5*max_hp/100.f))*max(power-200,0)/300;
 	}
-	if(god == GT_YUUGI && !punish[GT_YUUGI] && s_drunken )
+	if(god == GT_YUUGI && !GetPunish(GT_YUUGI) && s_drunken )
 	{
 		cacul_ += 100.0f;
 	}
@@ -1184,7 +1184,7 @@ int players::MpRecoverDelay(int delay_,bool set_)
 		cacul_ +=100;
 
 	
-	if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=1)
+	if(you.god == GT_MINORIKO && !you.GetPunish(GT_MINORIKO) && pietyLevel(you.piety)>=1)
 	{
 		int piety_ = pietyLevel(you.piety);
 		cacul_ += piety_*2+(piety_*max_mp/40.f)*max(power-200,0)/300;
@@ -1396,7 +1396,7 @@ int players::PowUpDown(int value_, bool big_)
 	else if(power<0)
 		power = 0;
 
-	//if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=5)
+	//if(you.god == GT_MINORIKO && !you.GetPunish(GT_MINORIKO) && pietyLevel(you.piety)>=5)
 	//{
 	//	if(full_power_ && !(power>=500))
 	//	{			
@@ -1564,7 +1564,7 @@ void players::ExpRecovery(int exper_)
 	{//일정 경험치를 먹어서 경험치 회복이 이루어짐
 		//남은 경험치의 10% 가량을 먹을때마다 1씩
 		//초반엔 빠르게 오르므로 그 수치도 많은편(+10 상수치 플러스)
-		exper_recovery = GetNeedExp(max(level-2,0))/10+10;
+		exper_recovery = GetNeedExp(max(level-2,0))/8+10;
 
 
 		//여기부터 경험치를 먹으면 생기는 일
@@ -1576,7 +1576,62 @@ void players::ExpRecovery(int exper_)
 			printlog("일정량의 스킬 경험치 획득",true,false,false,CL_help);
 		}
 
+		for(int i=0;i<GT_LAST;i++)
+		{
+			if(punish[i].number && !punish[i].punish)
+			{
+				//god_punish((god_type)i);
+				punish[i].punish = true;
+/*
+				if(punish[i]==0)
+				{
+
+					
+					printarray(true,false,false,CL_white_blue,4,"당신은 ", GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터 ":"로부터 ","용서받았다.");
+	
+	
+					char temp[200];
+					sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
+					AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+
+
+				}*/
+			}
+		}
+
 	}
+}
+void players::CheckPunish(int delay_)
+{
+	for(int i=0;i<GT_LAST;i++)
+	{
+		if(punish[i].number)
+		{
+			punish[i].turn -= delay_;
+			if(punish[i].turn<=0)
+			{
+				if(punish[i].punish)
+				{					
+					god_punish((god_type)i);
+					SetInter(IT_EVENT);
+					punish[i].punish = false;
+					punish[i].number--;
+
+					if(punish[i].number == 0)
+					{						
+						printarray(true,false,false,CL_white_blue,4,"당신은 ", GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터 ":"로부터 ","용서받았다.");
+	
+						char temp[200];
+						sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
+						AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+					}
+
+				}
+				punish[i].turn = rand_int(500,100);
+			}
+		}
+	}
+
 }
 int players::GetNeedExp(int level_)
 {
@@ -2388,6 +2443,10 @@ int players::GetResist()
 {
 	return level * 6 + 100+magic_resist;
 }
+bool players::GetPunish(god_type god_)
+{
+	return punish[god_].punish;
+}
 int players::GetProperty(tribe_proper_type type_)
 {
 	for(auto it = property_vector.begin(); it != property_vector.end(); it++)
@@ -3121,13 +3180,13 @@ bool players::Eat(char id_)
 					time_delay += you.GetNormalDelay();
 					TurnEnd();
 					
-					if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=5)
+					if(you.god == GT_MINORIKO && !you.GetPunish(GT_MINORIKO) && pietyLevel(you.piety)>=5)
 					{
 						int rand_num_ =  rand_int(80,100);
 						you.SetBuff(BUFFSTAT_RF,BUFF_MINORIKO_RF,1,rand_num_);
 						you.SetBuff(BUFFSTAT_RC,BUFF_MINORIKO_RC,1,rand_num_);
 					}
-					if(you.god == GT_MINORIKO && !you.punish[GT_MINORIKO] && pietyLevel(you.piety)>=3)
+					if(you.god == GT_MINORIKO && !you.GetPunish(GT_MINORIKO) && pietyLevel(you.piety)>=3)
 					{
 						you.MpUpDown(2+(*it).value5/30+randA(3+(*it).value5/10));
 					}
@@ -3468,6 +3527,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 		sprintf_s(temp,200,"%s의 신도가 되었다.",GetGodString(god));
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	}
+	you.Ability(SKL_ABANDON_GOD,true,false);
 	GetGodAbility(0, true);
 	PietyUpDown(isTutorial()?160:piety_,true);
 	if(isTutorial())
@@ -3513,7 +3573,7 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 {
 	if(god_ == GT_NONE)
 		god_ = god;
-	punish[god_] = absolutely_?punish_:punish_+punish[god_];
+	punish[god_].punish = absolutely_?punish_:punish_+punish[god_].punish;
 	char temp[100];
 	sprintf_s(temp,100,"%s의 분노를 느꼈다.",GetGodString(god_));
 	printlog(temp,true,false,false,CL_danger);

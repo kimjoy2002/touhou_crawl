@@ -90,6 +90,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_LEVITATION_OFF:
 	case SKL_INVISIBLE_OFF:
 	case SKL_TORMENT:
+	case SKL_ABANDON_GOD:
 		return ((S_FLAG_IMMEDIATELY) & flag);
 	case SKL_NONE:
 	case SKL_BREATH:
@@ -170,6 +171,7 @@ int SkillLength(skill_list skill)
 	case SKL_HINA_4:
 	case SKL_HINA_5:
 	case SKL_TORMENT:
+	case SKL_ABANDON_GOD:
 	default:
 		return 0;
 	}
@@ -293,6 +295,8 @@ const char* SkillString(skill_list skill)
 		return "브레스";
 	case SKL_TORMENT:
 		return "지옥의 고통";
+	case SKL_ABANDON_GOD:
+		return "신을 버리기";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -363,6 +367,7 @@ int SkillCap(skill_list skill)
 	case SKL_NONE:
 	case SKL_JUMPING_ATTACK:
 	case SKL_TORMENT:
+	case SKL_ABANDON_GOD:
 	default:
 		return 0;
 	}
@@ -387,6 +392,7 @@ int SkillNoise(skill_list skill)
 	case SKL_SWAKO_TEMPLE:
 	case SKL_SWAKO_SLEEP:
 	case SKL_HINA_5:
+	case SKL_ABANDON_GOD:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -493,6 +499,7 @@ int SkillPow(skill_list skill)
 	case SKL_JUMPING_ATTACK:
 	case SKL_BREATH:
 	case SKL_TORMENT:
+	case SKL_ABANDON_GOD:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -586,6 +593,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_JUMPING_ATTACK:
 	case SKL_BREATH:
 	case SKL_TORMENT:
+	case SKL_ABANDON_GOD:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -653,6 +661,7 @@ int SkillMana(skill_list skill)
 	case SKL_SATORI_2:
 	case SKL_JUMPING_ATTACK:
 	case SKL_BREATH:
+	case SKL_ABANDON_GOD:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
@@ -1102,6 +1111,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_INVISIBLE_OFF:
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
+	case SKL_ABANDON_GOD:
 	default:
 		return true;
 	}
@@ -1247,6 +1257,7 @@ const char* SkillCostString(skill_list skill)
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
 	case SKL_INVISIBLE_OFF:
+	case SKL_ABANDON_GOD:
 	default:
 		return "(없음)";
 	}

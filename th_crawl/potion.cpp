@@ -270,7 +270,7 @@ void drinkpotion(potion_type kind)
 	case PT_ALCOHOL:
 		{
 			int turn_ = rand_int(30,50)+bonus*30;
-			if(you.god == GT_YUUGI && !you.punish[GT_YUUGI])
+			if(you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI))
 				you.SetBuff(BUFFSTAT_EV, BUFF_DUPLE, 10, turn_);
 			you.SetDrunken(turn_);
 		}

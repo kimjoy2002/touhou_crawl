@@ -70,6 +70,18 @@ struct buff_class
 
 };
 
+struct punish_struct
+{
+	int number;
+	int turn;
+	bool punish;	
+	punish_struct():number(0),turn(0),punish(false){};
+	punish_struct(int number_, int turn_, bool punish_):number(number_),turn(turn_),punish(punish_){};
+};
+
+
+
+
 
 
 class players: public unit
@@ -250,7 +262,7 @@ public:
 	god_type god;
 	int piety;
 	int gift_count;
-	int punish[GT_LAST];
+	punish_struct punish[GT_LAST];
 	int god_turn;
 	int god_value[5];//이건 신에 따라 적절한 수치로 이용
 	int suwako_meet; //스와코를 믿은적이 있는지
@@ -337,6 +349,7 @@ public:
 	bool damage(attack_infor &a, bool perfect_ = false);
 	bool GetExp(int exper_, bool speak_ = true);
 	void ExpRecovery(int exper_);
+	void CheckPunish(int delay_);
 	int GetNeedExp(int level_);
 	bool GiveSkillExp(skill_type skill_, int exp_, bool speak_ = true);
 	bool SkillTraining(skill_type skill_, int percent_); // (1/percent_)%
@@ -399,6 +412,7 @@ public:
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
 	int GetExhausted(){return s_exhausted;};
+	bool GetPunish(god_type god_);
 	int DeleteProperty(tribe_proper_type type_);
 	bool Teleport();
 	bool Blink(int time_);

@@ -1687,6 +1687,8 @@ void stat_view()
 
 void rune_Show()
 {
+	if(!isNormalGame())
+		return;
 	int remain = 10;
 	SetText() = "  <¾ò¾î¾ßÇÒ ·é>\n\n\n";
 
@@ -2142,6 +2144,9 @@ void Experience_Show()
 
 void dungeonView()
 {
+	if(!isNormalGame())
+		return;
+
 	char temp[32];
 	char blank[32];
 	sprintf_s(blank,32,"            ");

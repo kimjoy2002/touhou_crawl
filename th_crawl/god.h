@@ -38,6 +38,7 @@ bool GetGodAbility(int level, bool plus);
 void GodInfor(god_type god);
 void God_show();
 bool God_pray(const list<item>::iterator it);
+bool god_punish(god_type god);
 
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
 bool GodAccpect_GetPitem();

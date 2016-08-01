@@ -415,7 +415,7 @@ void monster::FirstContact()
 	if(!(flag & M_FLAG_SUMMON))
 	{
 		GodAccpect_First_contact();
-		if(you.god == GT_SATORI && !you.punish[GT_SATORI] && pietyLevel(you.piety)>=2  &&  id != MON_KOISHI)
+		if(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=2  &&  id != MON_KOISHI)
 		{
 			int num_ = rand_int(1,pietyLevel(you.piety)-1);
 			int max_size_ = 8;
@@ -1874,7 +1874,7 @@ int monster::action(int delay_)
 	}
 	else
 	{
-		if(you.god == GT_SATORI && !you.punish[GT_SATORI] && pietyLevel(you.piety)>=3 &&
+		if(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
 			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight())
 		{
 			env[current_level].magicmapping(position.x,position.y);
@@ -2269,7 +2269,7 @@ int monster::action(int delay_)
 				{
 					FoundTarget(&you,30);
 					int percent_ = 1;
-					if(you.god == GT_SHIZUHA && !you.punish[GT_SHIZUHA] )
+					if(you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA) )
 						percent_ = 4;
 					if(flag & M_FLAG_SPEAK && randA(percent_)==0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 					{
@@ -2296,7 +2296,7 @@ int monster::action(int delay_)
 					if(!s_fear)
 						CheckSightNewTarget();
 					//FoundTarget(&you,30);
-					if(flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.punish[GT_SHINKI] && pietyLevel(you.piety)>=3)
+					if(flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=3)
 					{
 						//신키는 소환수를 방해한다.
 						if(randA(1))
@@ -2384,7 +2384,7 @@ int monster::action(int delay_)
 		prev_sight = true;
 	else if(prev_sight)
 	{
-		if(isView() && !(you.god == GT_SATORI && !you.punish[GT_SATORI] && pietyLevel(you.piety)>=3 &&
+		if(isView() && !(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
 			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight()))
 			env[current_level].MakeShadow(prev_position,image);
 		prev_sight = false;

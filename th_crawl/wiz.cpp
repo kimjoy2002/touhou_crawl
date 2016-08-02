@@ -17,6 +17,7 @@
 #include "weapon.h"
 #include "map.h"
 #include "evoke.h"
+#include "god.h"
 
 
 extern HANDLE mutx;
@@ -550,6 +551,9 @@ void wiz_mode()
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 			}
+			break;
+		case 'B':
+			god_punish(you.god);
 			break;
 		case '?'://µµ¿ò¸»
 

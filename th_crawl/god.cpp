@@ -2380,6 +2380,46 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_SUWAKO:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,50);//저주
+			rand_.push(1,50);//개구리
+			switch(rand_.pop())
+			{
+			case 0:	
+				{
+					you.SetSlow(rand_int(4,20));
+					you.SetPoison(rand_int(30,50)+randA(you.level*10),300,true);
+					rand_rect_iterator rit(you.position,1,1);
+					int smoke_ = rand_int(2,5);
+					for(int i = 0; !rit.end() && i < smoke_;rit++)
+					{
+						if(env[current_level].isMove(rit->x, rit->y, true))
+						{
+							env[current_level].MakeSmoke(*rit,img_fog_dark,SMT_FOG,rand_int(6,12),0,NULL);
+							i++;
+						}
+					}
+					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_FOG,rand_int(6,12),0,&you);
+					printarray(true,false,false,CL_swako,1,"스와코는 당신에게 저주를 내렸다!");
+				}
+				break;
+			case 1:
+				{
+					int i = rand_int(2,4)+randA(you.level/6); 
+					for(; i>0 ; i--)
+					{
+						if(monster *mon_ = BaseSummon((you.level > 10 && randA(3)==1)?MON_DEAGAMA:MON_FROG, rand_int(60,120), true, true, 2, NULL, you.position, SKD_OTHER, -1))
+						{
+							if(you.level>5)
+								mon_->LevelUpdown(you.level-5);
+						}
+					}
+					printarray(true,false,false,CL_swako,1,"스와코는 당신에게 적대적인 개구리 무리를 선물했다!");
+				}
+				break;
+			}
+		}
 		break;
 	case GT_MINORIKO:
 		break;

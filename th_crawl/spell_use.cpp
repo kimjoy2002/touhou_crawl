@@ -335,11 +335,15 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 		if(summon_check(coord_def(rit->x,rit->y), target, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
 		{
 			int flag_=M_FLAG_SUMMON;
-			if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
+			if(order)
 			{
-				flag_ |= M_FLAG_ALLY;
+				if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
+				{
+					flag_ |= M_FLAG_ALLY;
+				}
 			}
-			summon_info s_(order->GetMapId(),kind_,max_num_);
+
+			summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
 			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //파워에 따라서 조정하기
 
 			if(order && !order->isplayer())

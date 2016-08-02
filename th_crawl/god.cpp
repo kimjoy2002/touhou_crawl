@@ -1258,6 +1258,22 @@ bool GodAccpect_First_contact()
 }
 bool GodAccpect_turn(int turn)
 {
+	if(you.GetPunish(GT_KANAKO))
+	{		
+		{		
+			for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+			{
+				if(it->isLive() && it->GetId() == MON_ONBASIRA && !it->isUserAlly() && distan_coord(you.position,it->position) <= 2)
+				{
+					you.SetSlaying(-3);
+				}
+			}
+		}
+	}
+
+
+
+
 	switch(you.god)
 	{
 	case GT_ERROR:
@@ -2295,6 +2311,73 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_KANAKO:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,33);//건신초래돌
+			rand_.push(1,33);//온바시라
+			rand_.push(2,33);//몹 리콜
+			switch(rand_.pop())
+			{
+			case 0:	
+				{
+					printarray(true,false,false,CL_help,1,"카나코는 당신에게 강력한 일격을 날렸다!");
+					int damage_ = you.GetHp()*rand_int(40,80)/100;
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("건신초래 돌",true));
+					you.damage(temp_att, true);
+
+
+				}	
+				break;
+			case 1:
+				{
+					for(int i = randA(3)+1; i>0 ; i--)
+					{
+						BaseSummon(MON_ONBASIRA, rand_int(10,30), true, false, 2, NULL, you.position, SKD_OTHER, -1);
+					}
+					printarray(true,false,false,CL_help,1,"카나코는 당신에게 온바시라를 꽂았다!");
+					env[current_level].MakeNoise(you.position,16,NULL);
+					break;
+				}
+			case 2:
+				{
+					int max_ = rand_int(3,5);
+					deque<monster*> dq;
+					for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+					{
+						if(it->isLive() && !it->isUserAlly())
+						{
+							dq.push_back(&(*it));
+							max_--;
+							if(!max_)
+								break;
+						}
+					}
+					random_shuffle(dq.begin(),dq.end());
+					dif_rect_iterator rit(you.position,2,true);
+					if(!dq.empty())
+					{							
+						printarray(true,false,false,CL_help,1,"카나코는 당신을 전투로 강제로 이끌었다!");
+						for(int i = 0;!rit.end() && i < dq.size();rit++)
+						{
+							if(env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
+							{
+								dq[i]->SetXY(rit->x,rit->y);
+								if(dq[i]->isYourShight())
+								{
+									dq[i]->AttackedTarget(&you);
+								}
+								i++;
+							}
+						}
+					}
+					else
+					{
+						printarray(true,false,false,CL_help,1,"카나코는 당신을 전투로 이끌려했지만 적당한 적이 없었다.");
+					}
+				}
+				break;
+			}
+		}
 		break;
 	case GT_SUWAKO:
 		break;

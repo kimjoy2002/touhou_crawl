@@ -695,6 +695,14 @@ int players::move(short_move x_mov, short_move y_mov)
 			time_delay += GetAtkDelay();
 			return 1;
 		}
+		if(s_slaying<0)
+		{//온바시라 방해!			
+			printlog("움직일수 없다! 온바시라가 당신을 고정시키고있다!",true,false,false,CL_danger);
+			return 0;
+		}
+
+
+
 		if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);

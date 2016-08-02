@@ -702,6 +702,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if(god != GT_NONE)
 		god_turn++;
 	ReleaseMutex(mutx);
+	CheckPunish(delay_);
 	GodAccpect_turn(god_turn);
 	
 	if(mp == max_mp)
@@ -728,7 +729,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 	ReleaseMutex(mutx);
 
-	CheckPunish(delay_);
 
 	if(s_paralyse)
 	{

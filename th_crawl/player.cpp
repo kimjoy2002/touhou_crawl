@@ -913,6 +913,11 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	if(you.god == GT_MIMA && !you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=2 &&
 		(s1_ == SKT_CONJURE || s2_ == SKT_CONJURE || s3_ == SKT_CONJURE))
 		power_+=4;
+	if(you.GetPunish(GT_MIMA))
+	{
+		power_/=2;
+	}
+
 
 
 	power_*=s_int/10.0f;

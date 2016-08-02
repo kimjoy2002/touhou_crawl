@@ -397,6 +397,8 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
+	case ATT_ELEC_BLAST:
+	case ATT_POISON_BLAST:
 	case ATT_FIRE_PYSICAL_BLAST:
 	case ATT_COLD_PYSICAL_BLAST:
 	case ATT_THROW_FIRE:
@@ -491,9 +493,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_POISON_BLAST:
 		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
 		break;
 	case ATT_THROW_ELEC:
+	case ATT_ELEC_BLAST:
 		damage_ *= GetElecResist();
 		break;
 	case ATT_CLOUD_ELEC:
@@ -606,6 +610,8 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
 	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_ELEC_BLAST:
+	case ATT_POISON_BLAST:
 		if(a.order)
 		{
 			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù.");
@@ -823,6 +829,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if(a.type == ATT_THROW_MIDDLE_POISON)
 				SetPoison(40+randA(15), 100, false);
 			if(a.type == ATT_THROW_STRONG_POISON)
+				SetPoison(70+randA(20), 150, true);
+			if(a.type == ATT_POISON_BLAST)
 				SetPoison(70+randA(20), 150, true);
 			if(a.type == ATT_THROW_FREEZING)
 			{

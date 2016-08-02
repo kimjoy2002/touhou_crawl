@@ -822,6 +822,8 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
 	case ATT_COLD_BLAST: 
+	case ATT_ELEC_BLAST:
+	case ATT_POISON_BLAST:
 	case ATT_FIRE_PYSICAL_BLAST:
 	case ATT_COLD_PYSICAL_BLAST: 
 	case ATT_THROW_FIRE:
@@ -891,6 +893,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		damage_ *= GetColdResist(true);
 		break;
 	case ATT_THROW_ELEC:
+	case ATT_ELEC_BLAST:
 		damage_ *= GetElecResist();
 		break;
 	case ATT_CLOUD_ELEC:		
@@ -899,6 +902,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_POISON_BLAST:
 		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
 		break;
 	case ATT_FIRE_PYSICAL_BLAST:
@@ -993,6 +997,8 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_NORMAL_BLAST:
 		case ATT_AC_REDUCE_BLAST:
 		case ATT_FIRE_PYSICAL_BLAST:
+		case ATT_ELEC_BLAST:
+		case ATT_POISON_BLAST:
 			if(a.order)
 			{
 				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù.");
@@ -1310,6 +1316,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			SetPoisonReason(a.p_type);
 		}
 		if(a.type == ATT_THROW_STRONG_POISON)
+		{
+			SetPoison(70+randA(20), 150, true);
+			SetPoisonReason(a.p_type);
+		}
+		if(a.type == ATT_POISON_BLAST)
 		{
 			SetPoison(70+randA(20), 150, true);
 			SetPoisonReason(a.p_type);

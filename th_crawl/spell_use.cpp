@@ -997,7 +997,11 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 		break;		
 	case ATT_NORMAL_BLAST:		
 	case ATT_AC_REDUCE_BLAST:
+	case ATT_ELEC_BLAST:
 		image_ = &img_blast[2];
+		break;
+	case ATT_POISON_BLAST:
+		image_ = &img_blast[3];
 		break;
 	}
 	int ball_size = size*size;
@@ -3767,6 +3771,12 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		printlog("당신은 마법 주문에 실패했다.",true,false,false,CL_normal);
 		return true;
 	}
+	if(you.GetPunish(GT_MIMA))
+	{
+		printlog("미마는 당신이 쓰는 마법의 위력을 반감시켰다!",true,false,false,CL_green);
+
+	}
+
 	if(wiz_list.wizard_mode == 1)
 	{
 		char temp[50];

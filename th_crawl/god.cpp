@@ -2451,6 +2451,70 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_MIMA:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,33);//폭발
+			switch(rand_.pop())
+			{
+			case 0:	
+				{
+					string str_ = "마법";
+					textures* tex_ = &img_blast[2];
+					attack_type type_ = ATT_NORMAL_BLAST;
+					int damage_ = 15+you.level*5;
+					switch(randA(5))
+					{
+					case 0:
+						{
+						str_ = "화염 마법";
+						tex_ = &img_blast[0];
+						type_ = ATT_FIRE_BLAST;
+						break;
+						}
+					case 1:
+						{
+						str_ = "암석 마법";
+						tex_ = &img_blast[1];
+						type_ = ATT_NORMAL_BLAST;
+						damage_ = damage_*4/5;
+						break;
+					case 2:
+						str_ = "전기 마법";
+						tex_ = &img_blast[2];
+						type_ = ATT_ELEC_BLAST;
+						break;
+						}
+					case 3:
+						{
+						str_ = "맹독 마법";
+						tex_ = &img_blast[3];
+						type_ = ATT_POISON_BLAST;
+						damage_ = damage_*4/5;
+						break;
+						}
+					case 4:
+						{
+						str_ = "냉기 마법";
+						tex_ = &img_blast[4];
+						type_ = ATT_COLD_BLAST;
+						break;
+						}
+					case 5:
+						{
+						str_ = "마력";
+						tex_ = &img_blast[5];
+						type_ = ATT_COLD_BLAST;
+						damage_ = damage_*3/5;
+						break;
+						}
+					}
+					printarray(true,false,false,CL_green,3,"미마가 강력한 ",str_.c_str(),"을 당신에 겨냥했다!");
+					attack_infor temp_att(randC(3,damage_/3),damage_,99,NULL,PRT_ENEMY,type_,name_infor(str_.c_str(),true));
+					BaseBomb(you.position, tex_,temp_att);
+				}	
+				break;
+			}
+		}
 		break;
 	case GT_SHINKI:
 		break;

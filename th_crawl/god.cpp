@@ -2422,6 +2422,33 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_MINORIKO:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,50);//파워절반
+			rand_.push(1,25);//체력감소와 병
+			rand_.push(2,25);//능력치감소
+			switch(rand_.pop())
+			{
+			case 0:				
+				you.PowUpDown(-min(you.power,500)/2,true);
+				printarray(true,false,false,CL_warning,1,"미노리코는 당신의 배고픔을 가속시켰다!");
+				break;
+			case 1:
+				{
+					you.hp=max(1,you.hp/2);	
+					you.SetSick(rand_int(80,120));
+					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 건강을 빼앗아갔다!");
+					break;
+				}
+			case 2:
+				{
+					for(int i=0;i<3;i++)
+						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
+					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 능력치를 깍아내렸다!");
+					break;
+				}
+			}
+		}
 		break;
 	case GT_MIMA:
 		break;

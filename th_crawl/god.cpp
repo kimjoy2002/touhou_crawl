@@ -2547,8 +2547,6 @@ bool god_punish(god_type god)
 						int demon_ = lowmidhigh_[perenct_.choice()].choice();
 						if(monster *mon_ = BaseSummon(demon_, rand_int(90,120), true, true, 2, NULL, you.position, SKD_OTHER, -1))
 						{
-							if(you.level>5)
-								mon_->LevelUpdown(you.level-5);
 						}
 					}
 					printarray(true,false,false,CL_white_puple,1,"신키가 적대적인 마계인을 창조해냈다!");
@@ -2558,6 +2556,51 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_YUUGI:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,25);//술
+			rand_.push(1,25);//자이언트 스윙
+			rand_.push(2,50);//오니 소환
+			switch(rand_.pop())
+			{
+			case 0:			
+				printarray(true,false,false,CL_yuigi,1,"유우기가 강한 술을 당신에게 강제로 먹였다!");	
+				you.SetConfuse(rand_int(9,30));
+				you.SetDrunken(rand_int(50,100));
+				break;
+			case 1:
+				{
+					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 집어던졌다!");
+					you.Blink(40);
+					int damage_ = you.GetHp()*rand_int(30,60)/100;
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("자이언트스윙",true));
+					you.damage(temp_att, true);
+				}
+				break;
+			case 2:
+				{
+					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 벌하기위해 동료 오니들을 불러냈다!");
+					random_extraction<int> oni_;
+					oni_.push(MON_ONI);
+					oni_.push(MON_BLUE_ONI);
+					int i = rand_int(1+you.level/10,1+you.level/5);
+					for(; i>0 ; i--)
+					{
+						int time_ = rand_int(40,60);
+						if(monster *mon_ = BaseSummon(oni_.choice(), time_, true, true, 2, NULL, you.position, SKD_OTHER, -1))
+						{
+							if(randA(99)<max(0,200-you.level*30))
+								mon_->SetSlow(time_);
+							if(randA(99)<max(0,you.level*4-28))
+								mon_->SetMight(time_);
+							if(randA(99)<max(0,you.level*5-65))
+								mon_->SetHaste(time_);
+						}
+					}
+				}
+				break;
+			}
+		}
 		break;
 	case GT_SHIZUHA:
 		break;

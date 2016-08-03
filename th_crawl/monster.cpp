@@ -3464,6 +3464,14 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 			return false;
 	case MSS_SCARY:
 		return false;
+	case MSS_MIGHT:
+		if(s_might)
+		{
+			sprintf(string_,"Èû°­È­");
+			return true;
+		}
+		else
+			return false;
 	case MSS_HASTE:
 		if(s_haste && !s_slow)
 		{

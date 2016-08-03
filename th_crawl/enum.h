@@ -961,6 +961,7 @@ enum monster_state_simple //표시용 상태
 	MSS_CONFUSE,
 	MSS_POISON,
 	MSS_SCARY,
+	MSS_MIGHT,
 	MSS_HASTE,
 	MSS_SLOW,
 	MSS_SMOKE_ABOVE,

@@ -2517,6 +2517,45 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_SHINKI:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,100);//악마소환
+			switch(rand_.pop())
+			{
+			case 0:
+				{
+					random_extraction<int> lowmidhigh_[3],perenct_;
+					lowmidhigh_[0].push(MON_EVIL_EYE);
+					lowmidhigh_[0].push(MON_LITTLE_IMP);
+					lowmidhigh_[1].push(MON_LUIZE);
+					lowmidhigh_[1].push(MON_ELIS);
+					lowmidhigh_[1].push(MON_SARA);
+					lowmidhigh_[2].push(MON_YUKI);
+					lowmidhigh_[2].push(MON_MAI);
+					lowmidhigh_[2].push(MON_YUUGENMAGAN);
+
+					if(you.level<15)	
+						perenct_.push(0,30-you.level*2);
+					perenct_.push(1,3+you.level);
+					if(you.level>13)	
+						perenct_.push(2,you.level*3-40);
+
+
+					int i = rand_int(1,3+you.level/9);
+					for(; i>0 ; i--)
+					{
+						int demon_ = lowmidhigh_[perenct_.choice()].choice();
+						if(monster *mon_ = BaseSummon(demon_, rand_int(90,120), true, true, 2, NULL, you.position, SKD_OTHER, -1))
+						{
+							if(you.level>5)
+								mon_->LevelUpdown(you.level-5);
+						}
+					}
+					printarray(true,false,false,CL_white_puple,1,"신키가 적대적인 마계인을 창조해냈다!");
+				}
+				break;
+			}
+		}
 		break;
 	case GT_YUUGI:
 		break;

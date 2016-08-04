@@ -214,11 +214,11 @@ bool GetGodAbility(int level, bool plus)
 		case 0:
 			if(you.suwako_meet == 0)
 			{
-				you.god_value[0] = randA(SWAKO_1_LAST-1);
-				you.god_value[1] = randA(SWAKO_2_LAST-1);
-				you.god_value[2] = randA(SWAKO_3_LAST-1);
-				you.god_value[3] = randA(SWAKO_4_LAST-1);
-				you.god_value[4] = randA(SWAKO_5_LAST-1 -2);
+				you.god_value[GT_SUWAKO][0] = randA(SWAKO_1_LAST-1);
+				you.god_value[GT_SUWAKO][1] = randA(SWAKO_2_LAST-1);
+				you.god_value[GT_SUWAKO][2] = randA(SWAKO_3_LAST-1);
+				you.god_value[GT_SUWAKO][3] = randA(SWAKO_4_LAST-1);
+				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1 -2);
 				//다른 신을 믿고오면 you.god_value가 초기화될수도 있어... 어쩌지
 				you.suwako_meet = 1;
 			}
@@ -438,7 +438,7 @@ bool GetGodAbility(int level, bool plus)
 					printlog("더 이상 당신은 단풍 위에서 빠르게 움직일 수 없다.",true,false,false,CL_autumn);
 				break;
 			case 6:
-				if(you.god_value[0]==0)
+				if(you.god_value[GT_SHIZUHA][0]==0)
 				{
 					you.Ability(SKL_SIZUHA_3,true,!plus);
 					if(plus)
@@ -498,7 +498,7 @@ bool GetGodAbility(int level, bool plus)
 				printlog("더 이상 저주를 흩뿌리고 다니지 않는다.",true,false,false,CL_hina);
 			break;
 		case 6:
-			if(you.god_value[0]==0)
+			if(you.god_value[GT_HINA][0]==0)
 			{
 				you.Ability(SKL_HINA_5,true,!plus);
 				if(plus)
@@ -763,7 +763,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					}
 					if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
 					{
-						switch(you.god_value[1])
+						switch(you.god_value[GT_SUWAKO][1])
 						{
 						case SWAKO_2_KILL_HP:
 							if(randA(200) < you.piety)
@@ -932,11 +932,11 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if(mon_->s_ghost)
 			{
-				if(you.god_value[0])
+				if(you.god_value[GT_YUYUKO][0])
 				{
-					for(auto it = env[you.god_value[1]].mon_vector.begin();it != env[you.god_value[1]].mon_vector.end();it++)
+					for(auto it = env[you.god_value[GT_YUYUKO][1]].mon_vector.begin();it != env[you.god_value[GT_YUYUKO][1]].mon_vector.end();it++)
 					{
-						if(it->isLive() && it->map_id == you.god_value[0])
+						if(it->isLive() && it->map_id == you.god_value[GT_YUYUKO][0])
 						{
 							it->summon_time = 0;
 						}
@@ -952,8 +952,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						mon2_->name.name += "의 영혼";
 						mon2_->name.name_type = true;
 						printarray(true,false,false,CL_normal,3,mon_->name.name.c_str(),mon_->name.name_do()," 당신의 동료가 되었다.");
-						you.god_value[0] = mon2_->map_id;
-						you.god_value[1] = current_level;
+						you.god_value[GT_YUYUKO][0] = mon2_->map_id;
+						you.god_value[GT_YUYUKO][1] = current_level;
 
 						//유령화되면 냉기저항1단계증가
 						if(mon2_->ice_resist<=2)
@@ -1054,7 +1054,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_SUWAKO:		
 		if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
 		{
-			switch(you.god_value[1])
+			switch(you.god_value[GT_SUWAKO][1])
 			{
 			case SWAKO_2_DEAD_PROTECT:
 				if(randA(9)<4 && you.hp <= 0 && value_ < 0)
@@ -1311,7 +1311,7 @@ bool GodAccpect_turn(int turn)
 		{	
 
 			if(you.god == GT_SUWAKO && !you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2 &&
-			you.god_value[1] == SWAKO_2_SWIM)
+			you.god_value[GT_SUWAKO][1] == SWAKO_2_SWIM)
 			{
 				auto tile_ = env[current_level].dgtile[you.position.x][you.position.y].tile;
 				if(tile_ == DG_SEA)
@@ -1402,10 +1402,10 @@ bool GodAccpect_turn(int turn)
 
 					if(you.s_dimension)
 					{
-						if(abs(you.god_value[0] - check_pos_.x)>8)
-							check_pos_.x += (you.god_value[0] - check_pos_.x)>0?17:-17;
-						if(abs(you.god_value[1] - check_pos_.y)>8)
-							check_pos_.y += (you.god_value[1] - check_pos_.y)>0?17:-17;
+						if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
+							check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
+						if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
+							check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
 					}
 
 
@@ -1859,27 +1859,27 @@ void God_show()
 	case GT_SUWAKO:
 		if(level_ >= 1 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString1((swako_1_power)you.god_value[0], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			printsub(GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString2((swako_2_power)you.god_value[1], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			printsub(GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString3((swako_3_power)you.god_value[2], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			printsub(GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString4((swako_4_power)you.god_value[3], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			printsub(GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString5((swako_5_power)you.god_value[4], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			printsub(GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR),true,CL_swako);
 			printsub("",true,CL_normal);
 		}
 		break;
@@ -2029,7 +2029,7 @@ void God_show()
 			printsub("당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.             (패시브)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 6 && you.god_value[0]==0 && !you.GetPunish(GT_SHIZUHA))
+		if(level_ >= 6 && you.god_value[GT_SHIZUHA][0]==0 && !you.GetPunish(GT_SHIZUHA))
 		{
 			printsub("당신은 딱 한번 당신의 무기에 단풍브랜드를 부여할 수 있다.       (한번만)",true,CL_autumn);
 			printsub("",true,CL_normal);
@@ -2066,7 +2066,7 @@ void God_show()
 			printsub("당신은 저주된 아이템을 끼고 있으면 저주를 흩뿌리고 다닌다.                       (패시브)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 6 && you.god_value[0]==0 && !you.GetPunish(GT_HINA))
+		if(level_ >= 6 && you.god_value[GT_HINA][0]==0 && !you.GetPunish(GT_HINA))
 		{
 			printsub("당신은 딱 한번 당신의 무기에 저주브랜드를 부여할 수 있다.						   (한번만)",true,CL_hina);
 			printsub("",true,CL_normal);

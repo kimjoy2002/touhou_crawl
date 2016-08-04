@@ -115,7 +115,7 @@ public:
 			return false;
 		if(you.s_dimension)
 		{			
-			if(abs(x_ - you.god_value[0])>8 || abs(y_ - you.god_value[1])>8)
+			if(abs(x_ - you.god_value[GT_YUKARI][0])>8 || abs(y_ - you.god_value[GT_YUKARI][1])>8)
 				return false; //차원고정의 범위 밖에 있다.
 		}
 

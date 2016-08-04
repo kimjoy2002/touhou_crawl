@@ -655,8 +655,8 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 				env[prev_floor_].MakeSilence(mon_->position, mon_->s_silence_range, false);
 			if(temp->id == MON_ENSLAVE_GHOST && you.god == GT_YUYUKO)
 			{	
-				you.god_value[0] = temp->map_id;
-				you.god_value[1] = current_level;
+				you.god_value[GT_YUYUKO][0] = temp->map_id;
+				you.god_value[GT_YUYUKO][1] = current_level;
 			}
 			mon_->hp = 0;
 			env[prev_floor_].SummonClear(mon_->map_id);
@@ -872,7 +872,7 @@ bool environment::DisableMove(coord_def pos_, bool view_)
 {
 	if(you.s_dimension)
 	{
-		if(abs(pos_.x - you.god_value[0])>8 || abs(pos_.y - you.god_value[1])>8)
+		if(abs(pos_.x - you.god_value[GT_YUKARI][0])>8 || abs(pos_.y - you.god_value[GT_YUKARI][1])>8)
 			return true; //차원고정의 범위 밖에 있다.
 	}
 	return false;
@@ -974,9 +974,9 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 						
 			if(s_dimension_)
 			{
-				if(abs(you.god_value[0] - check_pos_.x)>8)
+				if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
 					check_pos_.x += (you.god_value[0] - check_pos_.x)>0?17:-17;
-				if(abs(you.god_value[1] - check_pos_.y)>8)
+				if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
 					check_pos_.y += (you.god_value[1] - check_pos_.y)>0?17:-17;
 			}
 

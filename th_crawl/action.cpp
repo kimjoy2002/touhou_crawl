@@ -352,19 +352,19 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	int return_ = 1;
 	if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + 8)
-		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[0] + 8))
+		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + 8))
 		you.search_pos.x++;
 	else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - 8)
-		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[0] - 8))
+		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - 8))
 		you.search_pos.x--;
 	if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + 8)
-		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[1] + 8))
+		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + 8))
 		you.search_pos.y++;
 	else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - 8)
-		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[1] - 8))
+		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - 8))
 		you.search_pos.y--;
 
 

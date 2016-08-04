@@ -1046,18 +1046,18 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		
 		int j=0;
 		
-		if(you.god_value[0])
+		if(you.god_value[GT_YUYUKO][0])
 		{
-			for(auto it = env[you.god_value[1]].mon_vector.begin(); j == 0 && it != env[you.god_value[1]].mon_vector.end();it++)
+			for(auto it = env[you.god_value[GT_YUYUKO][1]].mon_vector.begin(); j == 0 && it != env[you.god_value[GT_YUYUKO][1]].mon_vector.end();it++)
 			{
-				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.god_value[0])
+				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.god_value[GT_YUYUKO][0])
 				{
 					dif_rect_iterator rit(target,2);
 					for(; j == 0 && !rit.end();rit++)
 					{
 						if(env[current_level].isMove(rit->x, rit->y,it->isFly(),it->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
 						{
-							if(you.god_value[1] == current_level)
+							if(you.god_value[GT_YUYUKO][1] == current_level)
 							{
 								it->SetXY(rit->x,rit->y);
 								if(unit_){
@@ -1067,7 +1067,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 							}
 							else
 							{								
-								if(env[current_level].movingfloor((*rit), you.god_value[1], &(*it)))
+								if(env[current_level].movingfloor((*rit), you.god_value[GT_YUYUKO][1], &(*it)))
 								{
 									j++;
 								}
@@ -1250,8 +1250,8 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		widesearch = false;
 		you.search = false;
 
-		you.god_value[0] = target.x;
-		you.god_value[1] = target.y;
+		you.god_value[GT_YUKARI][0] = target.x;
+		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(50,70));
 		printlog("차원이 고정되었다!",false,false,false,CL_white_blue);
 		return true;
@@ -1778,7 +1778,7 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
 		printlog("시즈하: 유용하게 쓰도록!",true,false,false,CL_autumn);
-		you.god_value[0] = 1;
+		you.god_value[GT_SHIZUHA][0] = 1;
 		you.Ability(SKL_SIZUHA_3,true,true);
 	}
 	else
@@ -1810,7 +1810,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
 		printlog("히나: 유용하게 쓰도록!",true,false,false,CL_hina);
-		you.god_value[0] = 1;
+		you.god_value[GT_HINA][0] = 1;
 		you.Ability(SKL_HINA_5,true,true);
 	}
 	else

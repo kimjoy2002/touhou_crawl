@@ -265,7 +265,7 @@ public:
 	int gift_count;
 	punish_struct punish[GT_LAST];
 	int god_turn;
-	int god_value[5];//이건 신에 따라 적절한 수치로 이용
+	int god_value[GT_LAST][5];//이건 신에 따라 적절한 수치로 이용
 	int suwako_meet; //스와코를 믿은적이 있는지
 	int half_youkai[4];//반요 변이 수치
 	int rune[RUNE_MAX];

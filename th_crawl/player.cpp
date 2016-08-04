@@ -89,8 +89,9 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		MemorizeSkill_num[i] = 0;
 	//for(int i=0;i<GT_LAST;i++)
 	//	punish[i]=0;
-	for(int i=0;i<5;i++)
-		god_value[i]=0;
+	for(int i=0;i<GT_LAST;i++)
+		for(int j=0;j<5;j++)
+			god_value[i][j]=0;
 	for(int i=0;i<4;i++)
 		half_youkai[i]=0;
 	for(int i=0;i<RUNE_MAX;i++)
@@ -274,7 +275,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, piety);
 	SaveData<punish_struct>(fp, *punish, GT_LAST);
 	SaveData<int>(fp, god_turn);
-	SaveData<int>(fp, *god_value, 5);
+	for(int i=0;i<GT_LAST;i++)
+		SaveData<int>(fp, *(god_value[i]), 5);
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	
 	SaveData<int>(fp, *rune, RUNE_MAX);		
@@ -485,7 +487,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, piety);
 	LoadData<punish_struct>(fp, *punish);
 	LoadData<int>(fp, god_turn);
-	LoadData<int>(fp, *god_value);
+	for(int i=0;i<GT_LAST;i++)
+		LoadData<int>(fp, *(god_value[i]));
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
 	LoadData<int>(fp, *rune);		
@@ -513,7 +516,7 @@ bool players::isLive()
 bool players::isSwim()
 {
 	if(god == GT_SUWAKO && !GetPunish(GT_SUWAKO) && pietyLevel(piety)>=2 &&
-		god_value[1] == SWAKO_2_SWIM)
+		god_value[GT_SUWAKO][1] == SWAKO_2_SWIM)
 		return true;
 	if(GetProperty(TPT_SWIM))
 		return true;
@@ -566,7 +569,7 @@ coord_def players::GetDisplayPos()
 	}
 	else
 	{
-		return coord_def(god_value[0],god_value[1]);
+		return coord_def(god_value[GT_SUWAKO][0],god_value[GT_SUWAKO][1]);
 	}
 }
 int players::move(short_move x_mov, short_move y_mov)
@@ -587,13 +590,13 @@ int players::move(short_move x_mov, short_move y_mov)
 	
 	if(you.s_dimension)
 	{
-		if(abs(move_x_ - you.god_value[0])>8)
+		if(abs(move_x_ - you.god_value[GT_YUKARI][0])>8)
 		{
-			    move_x_ +=move_x_ - you.god_value[0]>0?-17:17;
+			    move_x_ +=move_x_ - you.god_value[GT_YUKARI][0]>0?-17:17;
 		}
-		if(abs(move_y_ - you.god_value[1])>8)
+		if(abs(move_y_ - you.god_value[GT_YUKARI][1])>8)
 		{
-			    move_y_ +=move_y_ - you.god_value[1]>0?-17:17;
+			    move_y_ +=move_y_ - you.god_value[GT_YUKARI][1]>0?-17:17;
 		}
 	}
 
@@ -2796,10 +2799,10 @@ interupt_type players::resetLOS(bool speak_)
 						
 						if(you.s_dimension && out_of_sight)
 						{
-							if(abs(you.god_value[0] - check_pos_.x)>8)
-								check_pos_.x += (you.god_value[0] - check_pos_.x)>0?17:-17;
-							if(abs(you.god_value[1] - check_pos_.y)>8)
-								check_pos_.y += (you.god_value[1] - check_pos_.y)>0?17:-17;
+							if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
+								check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
+							if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
+								check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
 						}
 
 
@@ -2842,10 +2845,10 @@ interupt_type players::resetLOS(bool speak_)
 						
 					//if(you.s_dimension && out_of_sight)
 					//{
-					//	if(abs(you.god_value[0] - check_pos_.x)>8)
-					//		check_pos_.x += (you.god_value[0] - check_pos_.x)>0?-17:17;
-					//	if(abs(you.god_value[1] - check_pos_.y)>8)
-					//		check_pos_.y += (you.god_value[1] - check_pos_.y)>0?-17:17;
+					//	if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
+					//		check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?-17:17;
+					//	if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
+					//		check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?-17:17;
 					//}
 					
 

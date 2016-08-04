@@ -256,7 +256,7 @@ bool GetSwakoAbility(int level, bool plus)
 	switch(level)
 	{
 	case 1:
-		switch(you.god_value[0])
+		switch(you.god_value[GT_SUWAKO][0])
 		{
 		case SWAKO_1_JUMP:	
 			you.Ability(SKL_SWAKO_JUMP,true,!plus);
@@ -272,12 +272,12 @@ bool GetSwakoAbility(int level, bool plus)
 			break;
 		}
 		if(plus)
-			printlog(GetSwakoString1((swako_1_power)you.god_value[0],SWAKO_GET_STRING),true,false,false,CL_swako);	
+			printlog(GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0],SWAKO_GET_STRING),true,false,false,CL_swako);	
 		else
-			printlog(GetSwakoString1((swako_1_power)you.god_value[0],SWAKO_UNGET_STRING),true,false,false,CL_swako);
+			printlog(GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 2:
-		switch(you.god_value[1])
+		switch(you.god_value[GT_SUWAKO][1])
 		{
 		case SWAKO_2_KILL_HP:	
 			break;
@@ -291,12 +291,12 @@ bool GetSwakoAbility(int level, bool plus)
 			break;
 		}
 		if(plus)
-			printlog(GetSwakoString2((swako_2_power)you.god_value[1],SWAKO_GET_STRING),true,false,false,CL_swako);	
+			printlog(GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1],SWAKO_GET_STRING),true,false,false,CL_swako);	
 		else
-			printlog(GetSwakoString2((swako_2_power)you.god_value[1],SWAKO_UNGET_STRING),true,false,false,CL_swako);
+			printlog(GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 3:
-		switch(you.god_value[2])
+		switch(you.god_value[GT_SUWAKO][2])
 		{
 		case SWAKO_3_CURSE:	
 			you.Ability(SKL_SWAKO_CURSE,true,!plus);
@@ -312,12 +312,12 @@ bool GetSwakoAbility(int level, bool plus)
 			break;
 		}
 		if(plus)
-			printlog(GetSwakoString3((swako_3_power)you.god_value[2],SWAKO_GET_STRING),true,false,false,CL_swako);	
+			printlog(GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2],SWAKO_GET_STRING),true,false,false,CL_swako);	
 		else
-			printlog(GetSwakoString3((swako_3_power)you.god_value[2],SWAKO_UNGET_STRING),true,false,false,CL_swako);
+			printlog(GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 4:
-		switch(you.god_value[3])
+		switch(you.god_value[GT_SUWAKO][3])
 		{
 		case SWAKO_4_COLD_RESIST:	
 			you.ResistUpDown(plus?1:-1,RST_ICE);
@@ -336,12 +336,12 @@ bool GetSwakoAbility(int level, bool plus)
 			break;
 		}
 		if(plus)
-			printlog(GetSwakoString4((swako_4_power)you.god_value[3],SWAKO_GET_STRING),true,false,false,CL_swako);	
+			printlog(GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3],SWAKO_GET_STRING),true,false,false,CL_swako);	
 		else
-			printlog(GetSwakoString4((swako_4_power)you.god_value[3],SWAKO_UNGET_STRING),true,false,false,CL_swako);
+			printlog(GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 5:
-		switch(you.god_value[4])
+		switch(you.god_value[GT_SUWAKO][4])
 		{
 		case SWAKO_5_RAIN:	
 			you.Ability(SKL_SWAKO_RAIN,true,!plus);
@@ -355,12 +355,12 @@ bool GetSwakoAbility(int level, bool plus)
 		case SWAKO_5_SWAKO_HAT:
 			return true;
 		}
-		if((swako_5_power)you.god_value[4] != SWAKO_5_SWAKO_HAT)
+		if((swako_5_power)you.god_value[GT_SUWAKO][4] != SWAKO_5_SWAKO_HAT)
 		{
 			if(plus)
-				printlog(GetSwakoString5((swako_5_power)you.god_value[4],SWAKO_GET_STRING),true,false,false,CL_swako);	
+				printlog(GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4],SWAKO_GET_STRING),true,false,false,CL_swako);	
 			else
-				printlog(GetSwakoString5((swako_5_power)you.god_value[4],SWAKO_UNGET_STRING),true,false,false,CL_swako);
+				printlog(GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		}
 		break;
 	}

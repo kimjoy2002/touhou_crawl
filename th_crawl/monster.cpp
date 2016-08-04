@@ -1791,19 +1791,19 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		if(summon_time == -1)
 		{
-			if(you.god_value[0] == map_id && you.god_value[1] == current_level)
+			if(you.god_value[GT_YUYUKO][0] == map_id && you.god_value[GT_YUYUKO][1] == current_level)
 			{
 				char temp[200];
 				sprintf_s(temp,200,"%s%sÁ×¾ú´Ù.",name.name.c_str(),name.name_do(true));
 				AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
-				you.god_value[0] = 0;
-				you.god_value[1] = 0;
+				you.god_value[GT_YUYUKO][0] = 0;
+				you.god_value[GT_YUYUKO][1] = 0;
 			}
 			else
 			{
 				char temp[200];
 				sprintf_s(temp,200,"you god_value(%d, %d) mon value(%d, %d)",
-					you.god_value[0] ,you.god_value[1],
+					you.god_value[GT_YUYUKO][0] ,you.god_value[GT_YUYUKO][1],
 					map_id, current_level);
 				printarray(true,false,false,CL_danger,3,"¡Ø¿µÈ¥±¸¼Ó ¹ö±× : ",GetName()->name.c_str(), temp);
 			}

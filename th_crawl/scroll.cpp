@@ -433,6 +433,7 @@ bool curse_armour_scroll(bool pre_iden_)
 
 bool remove_curse_scroll(bool pre_iden_)
 {
+
 	bool iden_ = false;
 	for(int i = ET_FIRST; i<ET_LAST ; i++)
 	{
@@ -441,7 +442,13 @@ bool remove_curse_scroll(bool pre_iden_)
 			if(you.equipment[i]->isRightType((equip_type)i))
 			{	
 				if(you.equipment[i]->curse)
-				{
+				{		
+					if(iden_==false && you.GetPunish(GT_HINA) && randA(2))
+					{
+						printlog("히나가 당신의 액땜을 방해했다! ",false,false,false,CL_hina);						
+						printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+						return true;
+					}
 					you.equipment[i]->curse = false;
 					you.equipment[i]->identify_curse = true;
 					iden_ = true;

@@ -2658,6 +2658,76 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_HINA:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,25);//액
+			rand_.push(1,50);//장비액
+			rand_.push(2,25);//혼란
+			switch(rand_.pop())
+			{
+			case 0:		
+				{
+					you.SetSlow(rand_int(4,20));
+					you.SetPoison(rand_int(20,40)+randA(you.level*8),200,true);
+					rand_rect_iterator rit(you.position,1,1);
+					int smoke_ = rand_int(3,7);
+					for(int i = 0; !rit.end() && i < smoke_;rit++)
+					{
+						if(env[current_level].isMove(rit->x, rit->y, true))
+						{
+							env[current_level].MakeSmoke(*rit,img_fog_dark,SMT_CURSE,rand_int(6,12),0,NULL);
+							i++;
+						}
+					}
+					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_CURSE,rand_int(6,12),0,&you);
+					printarray(true,false,false,CL_hina,1,"히나는 액을 당신에게 직접 주입했다!");
+				}
+				break;
+			case 1:
+				{
+					bool curse_ = false;
+					deque<int> dq;
+					for(int i=ET_FIRST;i<ET_LAST;i++)
+					{
+						if(i != ET_THROW)
+							dq.push_back(i);
+					}	
+					random_shuffle(dq.begin(),dq.end());
+					printarray(false,false,false,CL_hina,1,"히나는 당신의 장비에 액을 주입했다! ");
+
+
+					for(int i = 0; i<dq.size() ; i++)
+					{
+						if(you.equipment[dq[i]])
+						{
+							string before_name = you.equipment[dq[i]]->GetName(); //저주받기전 이름
+							if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
+							{
+								enterlog();
+								printlog("장착하고 있던 ",false,false,false,CL_small_danger);		
+								printlog(before_name,false,false,false,CL_small_danger);	
+								printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
+								printlog("검게 빛났다.",true,false,false,CL_small_danger);		
+								curse_ = true;
+								break;
+							}
+						}
+					}
+					if(!curse_)
+					{
+						printarray(true,false,false,CL_hina,1,"그러나 아무일도 일어나지 않았다.");
+
+					}
+				}
+				break;
+			case 2:
+				{
+					printarray(true,false,false,CL_autumn,1,"히나는 당신을 빙빙 돌렸다!");	
+					you.SetConfuse(rand_int(12,45), true);
+					break;
+				}
+			}
+		}
 		break;
 	case GT_YUKARI:
 		break;

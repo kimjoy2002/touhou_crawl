@@ -2837,6 +2837,27 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_YUYUKO:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,50);//유령
+			switch(rand_.pop())
+			{
+			case 0:
+				{
+					int i = rand_int(2+randA(you.level/10),5)+randA(you.level/3); 
+					for(; i>0 ; i--)
+					{
+						if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(20,50), true, true, 4, NULL, you.position, SKD_OTHER, -1))
+						{
+							mon_->LevelUpdown(you.level-1,4.0f,1.5f);
+							mon_->image = &img_mons_ghost[randA(2)];
+						}
+					}
+					printarray(true,false,false,CL_yuyuko,1,"유유코는 당신의 주변에 유령을 끌어모았다!");
+				}
+				break;
+			}
+		}
 		break;
 	case GT_SATORI:
 		break;

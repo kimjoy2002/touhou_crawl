@@ -1674,7 +1674,10 @@ void players::CheckPunish(int delay_)
 						printarray(true,false,false,CL_white_blue,4,"당신은 ", GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터 ":"로부터 ","용서받았다.");
 	
 						char temp[200];
-						sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
+						if(you.god==GT_SATORI)
+							sprintf_s(temp,200,"%s%s 포기했다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"은":"는");
+						else
+							sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
 						AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
 					}
 

@@ -1910,7 +1910,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	
 	
 	
-	printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ","버렸다. 당신의 신은 분노했다!");
+	printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ",you.god==GT_SATORI?"버렸다.":"버렸다. 당신의 신은 분노했다!");
 	
 	
 	you.punish[you.god].number=30;

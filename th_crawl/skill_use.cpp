@@ -1163,8 +1163,9 @@ bool skill_yukari_supporter(int power, bool short_, unit* order, coord_def targe
 		{
 			if(hit_eff->type == FLOORT_SCHEMA)
 			{
-				if(BaseSummon(MON_SCHEMA_EYE, 40+randA_1(power/10), true, false, 0, order, target, SKD_OTHER, -1))
+				if(monster *mon_ = BaseSummon(MON_SCHEMA_EYE, 40+randA_1(power/10), true, false, 0, order, target, SKD_OTHER, -1))
 				{
+					mon_->LevelUpdown(you.level,3);
 					hit_eff->time = 0;
 					return true;
 				}

@@ -142,6 +142,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_STONE_ARROW: 
 	case SPL_KANAME_DRILL:
 	case SPL_WATER_CANNON:
+	case SPL_SCHEMA_TANMAC:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CANNON:
 		return (S_FLAG_RANGE_ATTACK) & flag;
@@ -230,6 +231,7 @@ int SpellLength(spell_list skill)
 	case SPL_INSANE:
 	case SPL_BLOOD_SMITE:
 	case SPL_STASIS:
+	case SPL_SCHEMA_TANMAC:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -539,7 +541,9 @@ const char* SpellString(spell_list skill)
 	case SPL_ALERT_NOISE: 
 		return "경고의 메아리";
 	case SPL_SUMMON_NAMAZ:
-		return "나마즈 소환";
+		return "나마즈 소환";		
+	case SPL_SCHEMA_TANMAC:
+		return "경계 탄막";
 	default:
 		return "알수없는 마법";
 	}
@@ -558,7 +562,8 @@ int SpellLevel(spell_list skill)
 	case SPL_VEILING:
 	case SPL_MAGIC_TANMAC:
 	case SPL_HYPNOSIS:
-	case SPL_STONE_PUNCH:
+	case SPL_STONE_PUNCH:	
+	case SPL_SCHEMA_TANMAC:
 		return 1;
 	case SPL_FLAME:	
 	case SPL_SELF_HEAL:
@@ -691,7 +696,8 @@ int SpellNoise(spell_list skill)
 	case SPL_STONE_PUNCH:
 	case SPL_STONE_TRAP:
 	case SPL_DRAW_POWER:
-	case SPL_MANA_DRAIN:
+	case SPL_MANA_DRAIN:	
+	case SPL_SCHEMA_TANMAC:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1043,7 +1049,9 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_ALERT_NOISE: 
 		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SUMMON_NAMAZ:
-		return num==0?(SKT_SUMMON):num==1?(SKT_EARTH):(SKT_ERROR);
+		return num==0?(SKT_SUMMON):num==1?(SKT_EARTH):(SKT_ERROR);	
+	case SPL_SCHEMA_TANMAC:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1163,6 +1171,7 @@ int SpellCap(spell_list skill)
 	case SPL_JUMP_ATTACK:
 	case SPL_ALERT_NOISE: 
 	case SPL_SUMMON_NAMAZ:
+	case SPL_SCHEMA_TANMAC:
 		return 200;
 	default:
 	case SPL_BLINK:

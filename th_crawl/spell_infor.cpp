@@ -474,6 +474,10 @@ string GetSpellInfor(spell_list spell)
 		text_ += "해당 위치에 거대한 나마즈를 낙하시킨다.\n";
 		text_ += "낙하엔 일정시간이 걸리며 떨어진 위치에 큰 폭발이 일어난다.\n";
 		break;
+	case SPL_SCHEMA_TANMAC:
+		text_ += "경계 저편에서 날라오는 탄막.\n";
+		text_ += "높은 레벨에서의 스키마는 더욱 강력한 탄막을 발사한다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

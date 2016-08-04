@@ -2991,6 +2991,23 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 
 
 
+bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = order?1+order->GetLevel():6;
+		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Åº¸·",true));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+			throwtanmac(randA(2)?(randA(1)?19:20):17,beam,temp_infor,NULL);	
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
 
 
 
@@ -3272,7 +3289,7 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 		list->push_back(spell(SPL_HASTE_OTHER,15));
 		break;
 	case MON_SCHEMA_EYE:
-		list->push_back(spell(SPL_MAGIC_TANMAC,40));
+		list->push_back(spell(SPL_SCHEMA_TANMAC,40));
 		break;
 	case MON_FLAN:
 		list->push_back(spell(SPL_FLAN_BUSIN,30));
@@ -3646,6 +3663,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return true;
 	case SPL_SUMMON_NAMAZ:
 		return skill_summon_namaz(power,short_,order,target);
+	case SPL_SCHEMA_TANMAC:
+		return skill_schema_tanmac(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -4003,6 +4022,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return true;
 	case SPL_SUMMON_NAMAZ:
 		return skill_summon_namaz(power,short_,&you,target);
+	case SPL_SCHEMA_TANMAC:
+		return skill_schema_tanmac(power,short_,&you,target);
 	default:
 		return false;
 	}

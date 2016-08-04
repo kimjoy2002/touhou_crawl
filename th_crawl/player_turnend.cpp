@@ -60,10 +60,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_tele == 1 || (teleport_curse && !randA(100)))
 		{
 			Teleport();
-			if(env[current_level].isInSight(position))
-				printlog("당신은 약간 공간이 어긋난 것을 눈치챘다.",false,false,false,CL_normal);
-			else
-				printlog("갑자기 당신 주변이 변화했다.",false,false,false,CL_normal);
+			printlog("갑자기 당신 주변이 변화했다.",false,false,false,CL_normal);
 			SetInter(IT_TELE);
 		}
 		if(s_tele)

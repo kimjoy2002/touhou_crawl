@@ -535,7 +535,7 @@ const mon_infor mondata[] = {
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_CANT_NETURAL,0,0,12},
 
-	{MON_SCHEMA_EYE,4,1,name_infor("변용을 보는 눈",true),&img_mons_schema_eye,30,0,12,
+	{MON_SCHEMA_EYE,1,1,name_infor("변용을 보는 눈",true),&img_mons_schema_eye,10,0,12,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NONE_MOVE  | M_FLAG_CAN_SEE_INVI  | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10},
 	

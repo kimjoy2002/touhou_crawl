@@ -2730,6 +2730,80 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_YUKARI:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,25);//공간이동
+			rand_.push(1,50);//장비액
+			rand_.push(2,25);//혼란
+			switch(rand_.pop())
+			{
+			case 0:		
+				{
+					you.SetConfuse(rand_int(6,18), true);
+					you.Teleport();
+					printarray(true,false,false,CL_yukari,1,"유카리는 당신을 강제로 텔레포트 시켰다!");
+				}
+				break;
+			case 1:
+				{					
+					you.SetStasis(rand_int(20,30));
+					int max_ = rand_int(2,3);
+					deque<monster*> dq;
+					for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+					{
+						if(it->isLive() && !it->isUserAlly())
+						{
+							dq.push_back(&(*it));
+							max_--;
+							if(!max_)
+								break;
+						}
+					}
+					random_shuffle(dq.begin(),dq.end());
+					dif_rect_iterator rit(you.position,2,true);
+					if(!dq.empty())
+					{							
+						printarray(true,false,false,CL_yukari,1,"유카리는 당신의 주변에 몹들을 강제로 이동시켰다!");
+						for(int i = 0;!rit.end() && i < dq.size();rit++)
+						{
+							if(env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
+							{
+
+								dq[i]->SetXY(rit->x,rit->y);
+								textures* t_ = &img_effect_schema[randA(2)];
+								env[current_level].MakeFloorEffect(coord_def(rit->x,rit->y),t_,t_,FLOORT_SCHEMA,rand_int(20,30),&you);
+
+								if(dq[i]->isYourShight())
+								{
+									dq[i]->AttackedTarget(&you);
+								}
+								i++;
+							}
+						}
+					}
+					else
+					{
+						printarray(true,false,false,CL_yukari,1,"유카리는 당신의 공간이동을 막았다!");
+					}
+				}
+				break;
+			case 2:
+				{
+
+					printarray(true,false,false,CL_yukari,1,"유카리는 당신을 감시하는 이형의 눈을 소환했다!");
+					int i = rand_int(2+you.level/8,3+you.level/5);
+					for(; i>0 ; i--)
+					{
+						int time_ = rand_int(40,60);
+						if(monster *mon_ = BaseSummon(MON_SCHEMA_EYE, time_, true, true, 3, NULL, you.position, SKD_OTHER, -1))
+						{
+							mon_->LevelUpdown(you.level,3);
+						}
+					}
+					break;
+				}
+			}
+		}
 		break;
 	case GT_EIRIN:
 		break;

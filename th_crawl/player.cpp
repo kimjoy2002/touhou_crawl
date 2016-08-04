@@ -1007,8 +1007,13 @@ int players::GetStealth()
 		if(you.god == GT_SHIZUHA && equipment[ET_ARMOR]->value5 == AMK_AUTUMN)
 			stealth_ += 150;
 	}
+
 	stealth_ += 50*GetProperty(TPT_STEALTH);
 	stealth_ -= you.as_penalty*10; //은밀 감소
+	if(you.GetPunish(GT_SHIZUHA))
+	{
+		stealth_ /= 2;
+	}
 	return stealth_;
 }	
 int players::GetBuffOk(stat_up stat_)
@@ -1949,11 +1954,11 @@ bool players::SetHaste(int haste_)
 		s_haste = 100;
 	return true;
 }
-bool players::SetConfuse(int confuse_)
+bool players::SetConfuse(int confuse_, bool strong_)
 {
 	if(!confuse_)
 		return false;
-	if(confuse_resist>0)
+	if(!strong_ && confuse_resist>0)
 		return false;
 	confuse_ /= 3; //플레이어는 혼란시간이 적다
 

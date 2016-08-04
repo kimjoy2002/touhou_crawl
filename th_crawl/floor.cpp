@@ -98,6 +98,11 @@ bool floor_effect::action(int delay_)
 				you.time_delay *= 0.7;
 			}
 		}
+		if(you.position == position && you.GetPunish(GT_SHIZUHA))
+		{
+			you.SetAutumn(-1);
+			you.SetBuff(BUFFSTAT_RF,BUFF_AUTUMN_RF,-1,1);
+		}
 		break;
 	case FLOORT_NORMAL:
 	default:
@@ -131,7 +136,16 @@ void floor_effect::onWalk(unit* unit_)
 				/*return true;*/
 		//	}
 		//}
-		break;
+		break;		
+	case FLOORT_AUTUMN:
+		if(unit_->isplayer() && you.GetPunish(GT_SHIZUHA))
+		{
+			env[current_level].MakeNoise(you.position,20,NULL);
+			
+			if(!you.s_autumn)
+				printarray(true,false,false,CL_autumn,1,"´ÜÇ³ÀÙÀ» ¹âÀ»¶§ ¹Ù½º¶ô°Å¸®´Â ½Ã²ô·¯¿î ¼Ò¸®°¡ ³µ´Ù.");
+		}
+		break;	
 	case FLOORT_NORMAL:
 	default:
 		break;

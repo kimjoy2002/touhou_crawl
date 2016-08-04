@@ -98,7 +98,7 @@ public:
 	virtual bool SetClever(int clever_)=0;
 	virtual bool SetAgility(int agility_)=0;
 	virtual bool SetHaste(int haste_)=0;
-	virtual bool SetConfuse(int confuse_)=0;
+	virtual bool SetConfuse(int confuse_, bool strong_ = false)=0;
 	virtual bool SetSlow(int slow_)=0;
 	virtual bool SetFrozen(int frozen_)=0;
 	virtual bool SetCharm(int charm_){return false;};

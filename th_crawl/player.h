@@ -50,6 +50,7 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_SUWAKO,
 	BUFF_MINORIKO_RF,
 	BUFF_MINORIKO_RC,
+	BUFF_AUTUMN_RF,
 	BUFF_MAX
 };
 enum action_type
@@ -361,7 +362,7 @@ public:
 	bool SetClever(int clever_);
 	bool SetAgility(int agility_);
 	bool SetHaste(int haste_);
-	bool SetConfuse(int confuse_);
+	bool SetConfuse(int confuse_, bool strong_=false);
 	bool SetSlow(int slow_);
 	bool SetFrozen(int frozen_);
 	bool SetElec(int elec_);

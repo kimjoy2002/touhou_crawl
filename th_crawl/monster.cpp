@@ -2621,11 +2621,11 @@ bool monster::SetHaste(int haste_)
 		s_haste = 100;
 	return true;
 }
-bool monster::SetConfuse(int confuse_)
+bool monster::SetConfuse(int confuse_, bool strong_)
 {	
 	if(!confuse_)
 		return false;
-	if(confuse_resist>0)
+	if(!strong_ && confuse_resist>0)
 		return false;
 
 	if(isYourShight())

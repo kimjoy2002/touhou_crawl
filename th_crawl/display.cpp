@@ -1016,9 +1016,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"스펠카드", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_spellcard>5?CL_white_blue:CL_blue);
 				rc.left += fontDesc.Width*9;	
 			}
-			if(you.s_autumn)
+			if(you.s_autumn>0)
 			{
-				pfont->DrawTextA(pSprite,"공기화", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_autumn);
+				pfont->DrawTextA(pSprite,"공기화", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_autumn>0?CL_autumn:CL_danger);
 				rc.left += fontDesc.Width*7;
 			}
 			if(you.s_wind)

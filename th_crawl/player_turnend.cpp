@@ -78,7 +78,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(temp->turn>0){
 			temp->turn--;
 		}
-		else{
+		if(temp->turn<=0)
+		{
 			UpDownBuff(temp->stat,-1*temp->value);
 			buff_list.erase(temp);
 		}
@@ -89,6 +90,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if(s_autumn>0)
 	{
 		s_autumn --;
+	}
+	else if(s_autumn<0)
+	{
+		s_autumn++;
 	}
 
 

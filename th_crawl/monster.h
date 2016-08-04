@@ -171,7 +171,7 @@ public:
 	bool SetClever(int clever_);
 	bool SetAgility(int agility_);
 	bool SetHaste(int haste_);
-	bool SetConfuse(int confuse_);
+	bool SetConfuse(int confuse_, bool strong_=false);
 	bool SetSlow(int slow_);
 	bool SetFrozen(int frozen_);
 	bool SetCharm(int charm_);

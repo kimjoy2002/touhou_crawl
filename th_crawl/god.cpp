@@ -1270,6 +1270,14 @@ bool GodAccpect_turn(int turn)
 			}
 		}
 	}
+	if(you.GetPunish(GT_SHIZUHA))
+	{
+		if(turn>1 && you.prev_position != you.position)
+		{
+			int rand_ = randA(1);
+			env[current_level].MakeFloorEffect(you.prev_position,&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,15,&you);
+		}
+	}
 
 
 
@@ -1310,7 +1318,6 @@ bool GodAccpect_turn(int turn)
 					you.SetBuff(BUFFSTAT_EV,BUFF_SUWAKO,8,2);
 				else
 					you.SetBuff(BUFFSTAT_EV,BUFF_SUWAKO,0,2);
-
 			}
 		}
 		return false;
@@ -2511,6 +2518,7 @@ bool god_punish(god_type god)
 					printarray(true,false,false,CL_green,3,"미마가 강력한 ",str_.c_str(),"을 당신에 겨냥했다!");
 					attack_infor temp_att(randC(3,damage_/3),damage_,99,NULL,PRT_ENEMY,type_,name_infor(str_.c_str(),true));
 					BaseBomb(you.position, tex_,temp_att);
+					env[current_level].MakeNoise(you.position,12,NULL);
 				}	
 				break;
 			}
@@ -2603,6 +2611,51 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_SHIZUHA:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,33);//혼란
+			rand_.push(1,33);//암습
+			rand_.push(2,33);//슬로우
+			switch(rand_.pop())
+			{
+			case 0:			
+				printarray(true,false,false,CL_autumn,1,"시즈하는 당신에 광기의 낙엽을 흩날렸다!");	
+				you.SetConfuse(rand_int(12,45), true);
+				break;
+			case 1:
+				{				
+					rand_rect_iterator rit(you.position,2,2);
+					int i = 5+randA(5); 
+					for(;!rit.end() && i> 0;rit++)
+					{
+						if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y))
+						{	
+							int rand_ = randA(1);
+							env[current_level].MakeFloorEffect(coord_def(rit->x,rit->y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,rand_int(20,30),&you);
+						}
+						i--;
+					}
+					int rand_ = randA(1);
+					env[current_level].MakeFloorEffect(coord_def(you.position.x,you.position.y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,3+you.piety/20,&you);
+	
+					printarray(true,false,false,CL_autumn,1,"시즈하가 당신의 등 뒤를 찔렀다!");
+					int damage_ = you.GetHp()*rand_int(30,60)/100;
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("암습",true));
+					you.damage(temp_att, true);
+					you.SetBuff(BUFFSTAT_RF,BUFF_AUTUMN_RF,-1,1);
+				}
+				break;
+			case 2:
+				{
+					printarray(true,false,false,CL_autumn,1,"시즈하가 엄청난 소음과 함께 당신을 지목했다!");
+					env[current_level].MakeNoise(you.position,30,NULL);
+					int time_ = rand_int(40,60);
+					you.SetGlow(time_);
+					you.SetSlow(time_);
+				}
+				break;
+			}
+		}
 		break;
 	case GT_HINA:
 		break;

@@ -688,6 +688,7 @@ enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ c
 	ITM_MISCELLANEOUS,
 	ITM_GOAL,
 	ITM_ORB,
+	ITM_SATORI,
 	ITM_LAST
 };
 
@@ -709,6 +710,7 @@ enum item_type_simple
 	ITMS_BOOK,
 	ITMS_MISCELLANEOUS,
 	ITMS_GOAL,
+	ITMS_OTHER,
 	ITMS_LAST
 };
 

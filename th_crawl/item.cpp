@@ -525,6 +525,9 @@ bool item::isSimpleType(item_type_simple type_)
 	case ITMS_GOAL:
 		return (type==ITM_GOAL || type==ITM_ORB);
 		break;
+	case ITMS_OTHER:
+		return (type==ITM_SATORI);
+		break;
 	default:
 		return false;
 		break;
@@ -683,6 +686,10 @@ bool item::isiden()
 	}
 
 	else if(type == ITM_GOAL ||	type == ITM_ORB)
+	{
+		return true;
+	}
+	else if(type == ITM_SATORI)
 	{
 		return true;
 	}
@@ -1047,6 +1054,9 @@ const char* GetItemTypeSting(item_type_simple type)
 		break;
 	case ITMS_GOAL:
 		return item_goal_string;
+		break;
+	case ITMS_OTHER:
+		return item_other_string;
 		break;
 	default:
 		return item_miscellaneous_string;

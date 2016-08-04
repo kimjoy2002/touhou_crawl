@@ -70,6 +70,7 @@ extern const char *item_jewelry_string;
 extern const char *item_book_string;
 extern const char *item_miscellaneous_string;
 extern const char *item_goal_string;
+extern const char *item_other_string;
 
 
 extern const int level_up_value[];

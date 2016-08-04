@@ -358,6 +358,21 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->weight = 1.0f;
 		t->value = 10000;
 		break;
+	case ITM_SATORI:
+		t->value1 = 0;
+		t->value2 = 0;
+		t->value3 = 0;
+		t->value4 = 0;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->is_pile = true;
+		t->can_throw = false;
+		t->image = &img_item_goal;
+		t->name.name = "실종 포스터";
+		t->name.name_type = false;
+		t->weight = 1.0f;
+		t->value = 1;
+		break;
 	default:
 		break;
 	}

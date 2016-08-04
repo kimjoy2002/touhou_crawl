@@ -235,6 +235,9 @@ const char *item_jewelry_string = "장신구";
 const char *item_book_string = "책";
 const char *item_miscellaneous_string = "발동";
 const char *item_goal_string = "중요";
+const char *item_other_string = "기타";
+
+
 
 const int level_up_value[] = {
 	10, 

@@ -703,6 +703,10 @@ string GetItemInfor(item *it)
 		text_ += "어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n";
 		text_ += "특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n";
 		break;
+	case ITM_SATORI:
+		text_ += "\"잃어버린 애완동물을 찾습니다. - 코메이지 사토리\"라고 적혀있는 종이다.\n";
+		text_ += "당신의 사진이 붙어있다...\n";
+		break;
 	default:
 		text_ += "버그템이다. 제작자에게 신고하자.\n";
 		break;

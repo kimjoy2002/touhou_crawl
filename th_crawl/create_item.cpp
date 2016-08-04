@@ -188,6 +188,16 @@ item_infor& id_to_item(int id, item_infor* item_);
 item_infor& CreateFloorItem(int floor, item_infor* item_)
 {
 	int i = 0, total=0;
+
+	if(you.GetPunish(GT_SATORI) && randA(9)==0)
+	{
+		//사토리 징벌중엔 강제로 몇개의 템이 애완동물 포스터가 된다.
+		id_to_item(31, item_);
+		return (*item_);
+	}
+
+
+
 	vector<item_group*> group;
 	group.reserve(128);
 	while(item_index[i].id != -1)
@@ -246,6 +256,17 @@ void create_item(int floor, int num_)
 	{
 		int rand_ = randA_1(total);
 		vector<item_group*>::iterator it;
+
+		
+		if(you.GetPunish(GT_SATORI) && randA(9)==0)
+		{
+			//사토리 징벌중엔 강제로 몇개의 템이 애완동물 포스터가 된다.
+			create_id_to_item(31, floor);
+			continue;
+		}
+
+
+
 		for(it = group.begin(); it != group.end(); it++)
 		{
 			if(rand_<=(*it)->percent)
@@ -356,6 +377,9 @@ item_infor& id_to_item(int id, item_infor* item_)
 		break;
 	case 30://발동템
 		makeitem(ITM_MISCELLANEOUS,1,item_);
+		break;
+	case 31://사토리
+		makeitem(ITM_SATORI,1,item_);
 		break;
 	default:
 		break;

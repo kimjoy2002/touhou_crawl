@@ -3590,17 +3590,40 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 		PietyUpDown(0,true);
 	god = god_;
 	god_turn = 0;
-	if(speak_)
+	if(god == GT_SATORI)
+	{
+		if(you.punish[god].number)
+			printlog("사토리는 당신과의 재회를 기뻐했다.",true,false,false,CL_help);
+		else
+			printlog("사토리의 애완동물이 되었다.",true,false,false,CL_help);	
+
+	}
+	else if(speak_)
 	{
 		char temp[100];
 		sprintf_s(temp,100,"%s의 신도가 되었다.",GetGodString(god));	
 		printlog(temp,true,false,false,CL_help);	
 	}
+	if(god == GT_SATORI)
+	{
+		if(you.punish[god].number)
+			AddNote(you.turn,CurrentLevelString(),"사토리와 재회했다.",CL_help);
+		else
+			AddNote(you.turn,CurrentLevelString(),"사토리의 애완동물이 되었다.",CL_help);
+
+	}
+	else
 	{
 		char temp[200];
 		sprintf_s(temp,200,"%s의 신도가 되었다.",GetGodString(god));
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	}
+	you.punish[god].number = 0;
+	you.punish[god].punish = false;
+
+
+
+
 	you.Ability(SKL_ABANDON_GOD,true,false);
 	GetGodAbility(0, true);
 	PietyUpDown(isTutorial()?160:piety_,true);

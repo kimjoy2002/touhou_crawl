@@ -1516,7 +1516,15 @@ void Pray()
 		{
 			printlog("당신은 제단에 기도를 드렸다.",true,false,false,CL_warning);
 			MoreWait();
-			if(type == DG_TEMPLE_SHIKIEIKI)
+
+
+			if(type != DG_TEMPLE_SATORI && you.GetPunish((god_type)(type-DG_TEMPLE_FIRST)))
+			{
+				printarray(true,false,false,CL_warning,3,GetGodString((god_type)(type-DG_TEMPLE_FIRST)),GetGodString_is((god_type)(type-DG_TEMPLE_FIRST))?"은 ":"는 ","아직 당신을 용서하지않았다.");
+
+
+			}
+			else if(type == DG_TEMPLE_SHIKIEIKI)
 			{
 				printlog("시키에이키는 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}

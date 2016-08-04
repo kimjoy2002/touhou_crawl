@@ -505,7 +505,7 @@ const char* SpellString(spell_list skill)
 	case SPL_PRIVATE_SQ: 
 		return "프라이빗 스퀘어";
 	case SPL_CONTROLED_BLINK: 
-		return "컨트롤드 블링크";
+		return "제어 순간이동";
 	case SPL_THE_WORLD:
 		return "더 월드";
 	case SPL_HASTE_ALL:

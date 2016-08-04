@@ -1926,8 +1926,24 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	sprintf_s(temp,200,"%s%s ¹ö·È´Ù.",GetGodString(you.god),GetGodString_is(you.god)?"À»":"¸¦");
 	AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
 	
+
+	
+	for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
+		GetGodAbility(level_, false);
+
+
+
+
 	you.Ability(SKL_ABANDON_GOD,true,true);
+
+
+
+
+
 	you.god = GT_NONE;	
+
+
+
 
 
 	return true;

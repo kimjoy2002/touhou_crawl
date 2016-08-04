@@ -1895,7 +1895,12 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
+	bool sanae_ = !you.char_name.name.compare("사나에") && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
+
+	if(sanae_)
+		printlog("신을 버리면 당신의 신앙심은 전부 사라질것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
+	else
+		printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
 	switch(waitkeyinput())
 	{
 	case 'Y':
@@ -1908,12 +1913,14 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 		return false;
 	}
 	
+	if(sanae_)
+		printarray(true,false,false,CL_danger,7,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ","버렸다. ",GetGodString(you.god),GetGodString_is(you.god)?"은 ":"는 ","당신의 독립을 눈물을 머금고 이해했다.");
+	else	
+		printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ",you.god==GT_SATORI?"버렸다.":"버렸다. 당신의 신은 분노했다!");
 	
 	
-	printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ",you.god==GT_SATORI?"버렸다.":"버렸다. 당신의 신은 분노했다!");
-	
-	
-	you.punish[you.god].number=30;
+	if(!sanae_)
+		you.punish[you.god].number=30;
 	
 	char temp[200];
 	sprintf_s(temp,200,"%s%s 버렸다.",GetGodString(you.god),GetGodString_is(you.god)?"을":"를");

@@ -507,12 +507,12 @@ void tensi_action()
 	int doing_ = 0;
 	tensi_do_list action_ = TENSI_NOTHING;
 
-	if(you.CheckTension() < randA(100))
+	if(you.CheckTension() < randA(100) || you.GetPunish(GT_TENSI))
 	{
 
 		int rand_ = randA(99);
 
-		if(rand_>44)
+		if(rand_>44+(you.GetPunish(GT_TENSI)?50:0))
 		{
 			action_ = TENSI_NOTHING;
 		}

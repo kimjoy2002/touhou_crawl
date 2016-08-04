@@ -2847,7 +2847,7 @@ bool god_punish(god_type god)
 					int i = rand_int(2+randA(you.level/10),5)+randA(you.level/3); 
 					for(; i>0 ; i--)
 					{
-						if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(20,50), true, true, 4, NULL, you.position, SKD_OTHER, -1))
+						if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(20,40), true, true, 4, NULL, you.position, SKD_OTHER, -1))
 						{
 							mon_->LevelUpdown(you.level-1,4.0f,1.5f);
 							mon_->image = &img_mons_ghost[randA(2)];
@@ -2862,6 +2862,7 @@ bool god_punish(god_type god)
 	case GT_SATORI:
 		break;
 	case GT_TENSI:
+		tensi_action();
 		break;
 	}
 	return false;		

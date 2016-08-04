@@ -389,7 +389,7 @@ bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 	{
 		printlog("당신은 에이린의 임시 수혈로 회복되었다.",true,false,false,CL_help);
 		printlog("이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!",true,false,false,CL_danger);
-		you.SetEirinHeal(you.max_hp*rand_int(70,80)/100);
+		you.SetEirinHeal(you.max_hp*rand_int(70,80)/100,false);
 	}
 	return true;
 }

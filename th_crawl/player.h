@@ -401,7 +401,7 @@ public:
 	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true 리턴은 기존의 버프가 있어서 덮어씌웠다.
 	bool SetProperty(tribe_proper_type type_, int value_);
 	bool SetStatBoost(int sdi_, int value_);
-	bool SetEirinHeal(int value_);
+	bool SetEirinHeal(int value_, bool punish_);
 	bool SetExhausted(int s_exhausted_);
 	bool SetStasis(int s_stasis_);
 

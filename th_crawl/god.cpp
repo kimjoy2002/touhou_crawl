@@ -2806,6 +2806,35 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_EIRIN:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,66);//물약먹이기
+			rand_.push(1,33);//강제실험
+			switch(rand_.pop())
+			{
+			case 0:
+				{
+					random_extraction<potion_type> potion_;	
+					potion_.push(PT_DOWN_STAT);
+					potion_.push(PT_PARALYSIS);
+					potion_.push(PT_SLOW);
+					potion_.push(PT_CONFUSE);
+					potion_.push(PT_POISON);
+					potion_type p_ = potion_.choice();
+					printarray(true,false,false,CL_small_danger,3,"에이린은 당신에게 억지로 ",potion_iden_string[p_],"물약을 먹였다!");
+					drinkpotion(p_);
+				}
+				break;
+			case 1:
+				{
+					printarray(true,false,false,CL_small_danger,1,"에이린이 당신의 몸에 강제로 실험을 했다!");
+					you.SetEirinHeal(you.max_hp*rand_int(70,80)/100,true);
+					for(int i=0;i<3;i++)
+						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
+				}
+				break;
+			}
+		}
 		break;
 	case GT_YUYUKO:
 		break;

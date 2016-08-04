@@ -2451,14 +2451,22 @@ bool players::SetStatBoost(int sdi_, int value_)
 	return true;
 
 }
-bool players::SetEirinHeal(int value_)
+bool players::SetEirinHeal(int value_, bool punish_)
 {
 
 	int real_value_ = min(max_hp-hp, value_);
 	
 	//수치만큼 힐하기
-	
-	you.HpUpDown(real_value_,DR_EFFECT);
+
+	if(!punish_)
+	{	
+		you.HpUpDown(real_value_,DR_EFFECT);
+
+	}
+	else
+	{
+		real_value_ = value_;
+	}
 
 	s_eirin_poison += real_value_;
 	s_eirin_poison_time = rand_int(100,200);
@@ -3287,14 +3295,25 @@ bool players::Drink(char id_)
 			{
 				if(!you.isequip(it))
 				{
-					drinkpotion((potion_type)(*it).value1);
+					if(!you.GetPunish(GT_EIRIN) || randA(1))
+					{
+						drinkpotion((potion_type)(*it).value1);
 					
-					if(iden_list.potion_list[(*it).value1].iden == false)
-					{		
-						printarray(false,false,false,CL_normal,3,"이것은 ",potion_iden_string[(*it).value1],"물약이다. ");		
+						if(iden_list.potion_list[(*it).value1].iden == false)
+						{		
+							printarray(false,false,false,CL_normal,3,"이것은 ",potion_iden_string[(*it).value1],"물약이다. ");		
+						}
+						iden_list.potion_list[(*it).value1].iden = true;
+						(*it).identify = true;
 					}
-					iden_list.potion_list[(*it).value1].iden = true;
-					(*it).identify = true;
+					else
+					{
+						printarray(true,false,false,CL_small_danger,1,"에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!");
+
+						
+						drinkpotion(PT_WATER);
+					}
+
 					DeleteItem(it,1);
 					enterlog();
 					ReleaseMutex(mutx);

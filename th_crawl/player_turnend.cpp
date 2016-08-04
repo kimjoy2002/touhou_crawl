@@ -392,6 +392,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	ReleaseMutex(mutx);
 	if(s_elec)
 	{
 		int power_=min(SpellCap(SPL_SHOCK),you.GetSpellPower(SpellSchool(SPL_SHOCK,0),SpellSchool(SPL_SHOCK,1),SpellSchool(SPL_SHOCK,2)));
@@ -406,6 +407,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	WaitForSingleObject(mutx, INFINITE);
 	if(s_paralyse)
 	{
 		s_paralyse--;
@@ -527,7 +529,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
-
+	
+	ReleaseMutex(mutx);
 	if(s_eirin_poison_time)
 	{
 		s_eirin_poison_time--;
@@ -552,6 +555,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		//s_eirin_poison;
 	}
 	
+	WaitForSingleObject(mutx, INFINITE);
+
 	if(s_exhausted)
 	{
 		s_exhausted--;

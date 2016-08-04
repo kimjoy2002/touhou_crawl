@@ -108,7 +108,7 @@ int isGoodPotion(potion_type kind)
 
 void drinkpotion(potion_type kind)
 {
-	int bonus = (you.god == GT_EIRIN)?1:0;
+	int bonus = (you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN))?1:0;
 	switch(kind)
 	{
 	case PT_WATER:
@@ -133,7 +133,7 @@ void drinkpotion(potion_type kind)
 				you.equipment[ET_LEFT]->Identify();
 			else if(you.equipment[ET_RIGHT] && you.equipment[ET_RIGHT]->value1 == RGT_POISON_RESIS)
 				you.equipment[ET_RIGHT]->Identify();
-			if(you.god == GT_EIRIN && pietyLevel(you.piety)>=1 && ok_)
+			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
 				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger); 
@@ -165,7 +165,7 @@ void drinkpotion(potion_type kind)
 				you.equipment[ET_LEFT]->Identify();
 			if(you.equipment[ET_RIGHT] && you.equipment[ET_RIGHT]->value1 == RGT_CONFUSE_RESIS)
 				you.equipment[ET_RIGHT]->Identify();
-			if(you.god == GT_EIRIN && pietyLevel(you.piety)>=3 && ok_)
+			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=3 && ok_)
 			{
 				enterlog();
 				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger);  
@@ -181,7 +181,7 @@ void drinkpotion(potion_type kind)
 			bool ok_= false;
 			ok_ = you.SetSlow(time_);
 			//you.HungerApply(50);
-			if(you.god == GT_EIRIN && pietyLevel(you.piety)>=1 && ok_)
+			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
 				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",true,false,false,CL_small_danger); 
@@ -194,7 +194,7 @@ void drinkpotion(potion_type kind)
 			bool ok_= false;
 			ok_ = you.SetParalyse(randA_1(7-bonus*5));
 			//you.HungerApply(50);
-			if(you.god == GT_EIRIN && pietyLevel(you.piety)>=5 && ok_)
+			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=5 && ok_)
 			{
 				enterlog();
 				printlog("에이린은 물약으로부터의 마비를 막아주고 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger);  
@@ -233,7 +233,7 @@ void drinkpotion(potion_type kind)
 			printlog("이 물약은 구역질이 난다.",false,false,false,CL_normal);
 			int rand_ = randA_1(3);
 			randA(2)?(randA(1)?you.StatUpDown(-rand_,STAT_STR,true):you.StatUpDown(-rand_,STAT_DEX,true)):you.StatUpDown(-rand_,STAT_INT,true);
-			if(you.god == GT_EIRIN && pietyLevel(you.piety)>=2)
+			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=2)
 			{
 				enterlog();
 				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger); 

@@ -1,4 +1,5 @@
 #include "network.h"
+#include "replay.h"
 bool is_little_endian()
 {
 	const int x = 1;
@@ -117,33 +118,48 @@ bool NetClient::SendFile(const char* c,const char* name)
 {
 	if(!ok)
 		return 0;
-	char fname[256];
-	FILE *fp;  
+	char fname[256],fname2[256];
+	FILE *fp, *fp2;  
 	memset(fname,0,256);
 	sprintf_s(fname,256,name);
+	memset(fname2,0,256);
+	sprintf_s(fname2,256,"%s",ReplayClass.replay_string.c_str());
 	fp = fopen(fname,"rb");
+	fp2 = fopen(fname2,"rb");
 
-	if(fp == 0)
+	if(fp == 0 || fp2 == 0)
         return false;  
  
-    int len = 0;
+    int len = 0,len2=0;
 	fseek(fp,0,SEEK_END);
     len = ftell(fp);
     fseek(fp,0,SEEK_SET);
+	fseek(fp2,0,SEEK_END);
+    len2 = ftell(fp2);
+    fseek(fp2,0,SEEK_SET);
    
     char buf[1024];
     char fstring[256];
-    char fsize[64];
+    char fsize[64], fsize2[64];
 	memset(fstring,0,256);
 	memset(fsize,0,64);
+	memset(fsize2,0,64);
 	//strcpy(fname,"이름없음-20160329-043601.txt");
 	strcpy(fname+strlen(fname),"\0");
+	strcpy(fname2+strlen(fname2),"\0");
 	sprintf_s(fstring,256,c);
 	strcpy(fstring+strlen(fstring),"\0");
 	SendBuf(fstring,256);
 	SendBuf(fname,256);
 	sprintf(fsize,"%d",len);
     SendBuf(fsize,64);
+	
+
+	SendBuf(fname2,256);
+	sprintf(fsize2,"%d",len2);
+    SendBuf(fsize2,64);
+
+
 
     while(len>1024)
     {
@@ -159,6 +175,23 @@ bool NetClient::SendFile(const char* c,const char* name)
         fread(buf,1,len,fp);
         SendBuf(buf,len);
     }
+
+    while(len2>1024)
+    {
+        fread(buf,1,1024,fp2);
+        if(SendBuf(buf,1024) == -1)
+        {
+            return false;
+        }
+        len2 -=1024;
+    }
+    if(len2>0)
+    {
+        fread(buf,1,len2,fp2);
+        SendBuf(buf,len2);
+    }
+	fclose(fp);
+	fclose(fp2);
     return true;
 }
 void NetClient::Close()

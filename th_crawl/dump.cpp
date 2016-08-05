@@ -18,6 +18,7 @@
 #include "dump.h"
 #include "network.h"
 #include "save.h"
+#include "replay.h"
 
 extern const char *version_string;
 
@@ -109,6 +110,10 @@ int caculScore()
 
 bool Dump(int type, string *filename_)
 {
+	if(ReplayClass.ReplayMode())
+		return false;
+
+
 	char filename[100];
 	char sql_[256];
 	mkdir("morgue");

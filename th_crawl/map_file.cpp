@@ -8,6 +8,7 @@
 
 #include "map.h"
 #include "throw.h"
+#include "rand_shuffle.h"
 #include <algorithm>
 
 map_infor map_list;
@@ -109,11 +110,12 @@ void initMap()
 	map_list.god_num = 10;
 	map_list.bamboo_count = 0;
 	map_list.bamboo_rate = 0;
-	map_list.tutorial = 0;
+	//map_list.tutorial = 0;
+	map_list.bamboo_tewi = false;
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 		dq.push_back(i);
-	random_shuffle(dq.begin(),dq.end());
+	rand_shuffle(dq.begin(),dq.end());
 	for(int i=0;i<GT_LAST-map_list.god_num;i++)
 	{
 		map_list.temple[dq[i]].set(false,0,0,rand_int(1,5));

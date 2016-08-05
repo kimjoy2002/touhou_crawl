@@ -8,6 +8,7 @@
 #include "save.h"
 #include "environment.h"
 #include "key.h"
+#include "replay.h"
 
 extern bool saveexit;
 extern HANDLE mutx;
@@ -24,7 +25,8 @@ void delete_file()
 }
 void saveandexit()
 {
-	PostQuitMessage(0);
+	if(!ReplayClass.ReplayMode())
+		PostQuitMessage(0);
 }
 void saveandcheckexit()
 {
@@ -34,8 +36,9 @@ void saveandcheckexit()
 		switch(waitkeyinput())
 		{
 		case 'Y':
-			enterlog();
-			PostQuitMessage(0);
+			enterlog();	
+			if(!ReplayClass.ReplayMode())
+				PostQuitMessage(0);
 			return;
 		case 'N':
 			printlog("종료를 취소.",true,false,false,CL_help);

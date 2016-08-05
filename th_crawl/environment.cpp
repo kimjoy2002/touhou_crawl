@@ -19,6 +19,7 @@
 #include "floor.h"
 #include "note.h"
 #include "beam.h"
+#include "replay.h"
 #include <set>
 
 
@@ -1339,7 +1340,10 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 
 
 void SaveFile()
-{
+{ 
+	if(ReplayClass.ReplayMode())
+		return;
+
 	if(game_over)
 		return;
 	WaitForSingleObject(mutx, INFINITE);
@@ -1360,6 +1364,11 @@ void SaveFile()
 	SaveData<map_infor>(fp,map_list);
 	SaveData<wiz_infor>(fp,wiz_list);
 	save_note.SaveDatas(fp);
+
+	ReplayClass.SaveDatas(fp);
+
+
+
 	fclose(fp);
 	//printlog("저장했습니다.",true,false,false,CL_normal);
 
@@ -1394,6 +1403,11 @@ void LoadFile()
 	LoadData<map_infor>(fp,map_list);
 	LoadData<wiz_infor>(fp,wiz_list);
 	save_note.LoadDatas(fp);
+	
+	ReplayClass.LoadDatas(fp);
+
+	
+
 
 	fclose(fp);
 

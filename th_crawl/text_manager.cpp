@@ -150,9 +150,11 @@ void printarray(bool enter_, bool log_, bool temp_, D3DCOLOR color_, int num_, .
 }
 
 
-void printsub(string text_, bool enter_, D3DCOLOR color_)
+int printsub(string text_, bool enter_, D3DCOLOR color_)
 {
 	DisplayManager.text_sub.add_text(text_, enter_, false, false, color_);
+
+	return text_.size();
 }
 void deletesub()
 {
@@ -167,7 +169,7 @@ void entersub()
 	ReleaseMutex(mutx);
 }
 
-void printarraysub(bool enter_, D3DCOLOR color_, int num_, ...)
+int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...)
 {
 	va_list ap;
 	string temp;
@@ -177,7 +179,7 @@ void printarraysub(bool enter_, D3DCOLOR color_, int num_, ...)
 		temp+=va_arg(ap,char*);
 	}
 	va_end(ap);
-	printlog(temp, enter_, false, false, color_);
+	return printsub(temp, enter_, color_);
 }
 
 

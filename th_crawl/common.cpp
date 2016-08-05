@@ -1,11 +1,69 @@
 
 
 #include "common.h"
+#include "map.h"
+
+#include <random>
+#include <ctime>
+#include <iostream>
+
+using namespace std;
 
 
 extern POINT MousePoint;
 
-unsigned int random_number = 10;
+extern map_infor map_list;
+
+FILE *fpfpfp = NULL; 
+int linelin =0;
+
+
+std::mt19937 rand_engine;
+
+
+
+
+void test_rand(const char* tt)
+{
+
+	char test_test[256], test_test2[256];
+	
+
+	if(!fpfpfp)
+	{
+		fpfpfp = fopen("replay/test_random2.txt","rt"); 
+
+
+	}
+	if(fpfpfp)
+		fgets(test_test,256,fpfpfp);
+	linelin++;
+
+	FILE *fp;  
+	fp = fopen("replay/test_random.txt","at");
+	
+	fprintf(fp,"|%30s|%ud\n",tt,map_list.random_number);
+	
+	sprintf(test_test2,"|%30s|%ud\n",tt,map_list.random_number);
+	fclose(fp);
+
+
+
+	if(strcmp(test_test,test_test2))
+	{
+			linelin+=2;
+			
+			linelin--;
+			linelin--;
+
+	}
+}
+
+void rand_seed(unsigned int seed_)
+{
+	rand_engine.seed((unsigned long)(seed_));
+
+}
 
 int LoopSelect(int min, int max, int cur)
 {
@@ -44,6 +102,11 @@ int CutSelect(int min, int max, int cur)
 }
 float rand_float(float min, float max)
 {
+	//char temp_str[64];
+	//sprintf_s(temp_str,64,"rand_float(%f,%f)",min,max);
+	//test_rand(temp_str);
+
+
 	if(min == max)
 		return min;
 
@@ -55,13 +118,24 @@ float rand_float(float min, float max)
 	}
 	//min = (float)(random_number % (int)((max - min)*100 + 1)) /100 + min;
 	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
-	min = (float)(rand() % (int)((max - min)*100 + 1)) /100 + min;
+	rand_seed(map_list.random_number);
+	int rand_ = rand_engine();
+	min = (float)(rand_ % (int)((max - min)*100 + 1)) /100 + min;
+	map_list.random_number = rand_;
+	
+	//min = (float)(map_list.random_number % (int)((max - min)*100 + 1)) /100 + min;
 
 	return min;
 }
 
 int rand_int(int min, int max)
 {
+	//char temp_str[64];
+	//sprintf_s(temp_str,64,"rand_int(%d,%d)",min,max);
+	//test_rand(temp_str);
+
+
+
 	if(min == max)
 		return min;
 
@@ -72,10 +146,12 @@ int rand_int(int min, int max)
 		max = temp;
 	}
 	//min = (random_number % (max - min+1)) + min;
-
-	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
-	min = (rand() % (max - min+1)) + min;
-
+	
+	rand_seed(map_list.random_number);
+	int rand_ = rand_engine();
+	min = (rand_engine() % (max - min+1)) + min;
+	map_list.random_number = rand_;
+	//map_list.random_number = (((map_list.random_number*214013L + 2531011L)>>16)&0x7fff);
 
 	return min;
 }

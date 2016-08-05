@@ -15,6 +15,7 @@
 #include "note.h"
 #include "tribe.h"
 #include "network.h"
+#include "replay.h"
 
 
 extern bool saveexit;
@@ -171,6 +172,9 @@ public:
 
 bool checkSavefile(int value_)
 {
+	if(ReplayClass.ReplayMode() == true)
+		return false;
+
 	if(load_data(save_file.c_str()))
 	{		
 		saveexit = true;
@@ -182,16 +186,6 @@ bool checkSavefile(int value_)
 bool tutorials(int value_)
 {
 	map_list.tutorial = GM_TUTORIAL;
-	you.image = &img_play_sanae;
-	you.char_name.name = "사나에";
-	you.tribe = TRI_HUMAN;
-	you.job = JOB_SHAMAN;
-	SetTribe(you.tribe);
-	you.CalcuHP();
-	env[current_level].EnterMap(0,deque<monster*>());	
-	printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
-	printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
-	printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
 	return true;
 }
 
@@ -199,15 +193,6 @@ bool tutorials(int value_)
 bool tutorial2(int value_)
 {
 	map_list.tutorial = GM_TUTORIAL2;
-	you.image = &img_play_sanae;
-	you.char_name.name = "사나에";
-	you.tribe = TRI_HUMAN;
-	you.job = JOB_SHAMAN;
-	SetTribe(you.tribe);
-	you.CalcuHP();
-	env[current_level].EnterMap(0,deque<monster*>());	
-	printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
-	printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
 	return true;
 }
 
@@ -215,24 +200,6 @@ bool tutorial2(int value_)
 bool sprint1s(int value_)
 {
 	map_list.tutorial = GM_SPRINT1_AREANA;
-	you.image = &img_play_sanae;
-	you.char_name.name = "사나에";
-	you.tribe = TRI_HUMAN;
-	you.job = JOB_SHAMAN;
-	SetTribe(you.tribe);
-	you.CalcuHP();
-	env[current_level].EnterMap(0,deque<monster*>());	
-	
-	item_infor t;
-	item *it;
-	it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));	
-	it->Identify();
-	you.additem(it,false);
-	you.equip('a',ET_LEFT,false);
-	env[current_level].DeleteItem(it);
-
-	printlog("아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!",true,false,false,CL_help);
-	printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버! 기회는 3번...",true,false,false,CL_help);
 	return true;
 }
 
@@ -310,6 +277,9 @@ bool select_job(int value_)
 	return true;
 }
 
+bool replay_menu(int value_);
+
+
 void start_mainmenu()
 {
 	menu_manager m_mgr;
@@ -321,11 +291,14 @@ void start_mainmenu()
 	temp += "c - 튜토리얼(돌죽경험자용, 임시)\n";	
 	temp += "\n\n미니 게임\n\n";
 	temp += "d - 아레나";
+	temp += "\n\n\n\n";
+	temp += "R - 리플레이";
 	m_mgr.menu_puls(0,temp);
 	m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 	m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
 	m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
 	m_mgr.menu_input_puls(0,'d',0,"",false,sprint1s,0);
+	m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 	
 
 	temp = "무슨 모드로 시작할거야?\n\n\n";

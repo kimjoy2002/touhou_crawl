@@ -20,6 +20,7 @@
 #include "spellcard.h"
 #include "armour.h"
 #include "evoke.h"
+#include "rand_shuffle.h"
 #include <algorithm>
 
 extern HANDLE mutx;
@@ -916,7 +917,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		deque<int> dq;
 		for(int i=0;i<PT_MAX;i++)
 			dq.push_back(i);
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<PT_MAX;i++)
 		{
 			iden_list.potion_list[i].color = dq[i];
@@ -927,7 +928,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		deque<int> dq;
 		for(int i=0;i<SCT_MAX;i++)
 			dq.push_back(i);
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<SCT_MAX;i++)
 		{
 			iden_list.scroll_list[i].type = dq[i];
@@ -937,7 +938,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		deque<int> dq;
 		for(int i=0;i<RGT_MAX;i++)
 			dq.push_back(i);
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<RGT_MAX;i++)
 		{
 			iden_list.ring_list[i].type = dq[i];
@@ -947,7 +948,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		deque<int> dq;
 		for(int i=0;i<AMT_MAX;i++)
 			dq.push_back(i);
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<AMT_MAX;i++)
 		{
 			iden_list.amulet_list[i].type = dq[i];

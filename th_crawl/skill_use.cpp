@@ -29,6 +29,7 @@
 #include "armour.h"
 #include "god.h"
 #include "note.h"
+#include "rand_shuffle.h"
 
 
 extern HANDLE mutx;
@@ -1087,7 +1088,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 				dq.push_back(&(*it));
 			}
 		}
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		dif_rect_iterator rit(target,2);
 		for(int i = 0;!rit.end() && i < dq.size();rit++)
 		{

@@ -22,6 +22,7 @@
 #include "map.h"
 #include "rect.h"
 #include "tribe.h"
+#include "rand_shuffle.h"
 
 
 
@@ -1582,7 +1583,7 @@ int monster::longmove()
 				dq.push_back(i);
 		if(dq.size() == 7)
 			dq.push_back(direction);
-		random_shuffle(dq.begin(),dq.end());
+		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<8;i++)
 		{
 			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND)) //나는 몹은 2번째인자
@@ -1710,7 +1711,7 @@ int monster::atkmove(int is_sight, bool only_move)
 				deque<int> dq;
 				for(int i=0;i<8;i++)
 					dq.push_back(i);
-				random_shuffle(dq.begin(),dq.end());
+				rand_shuffle(dq.begin(),dq.end());
 				for(int i=0;i<8;i++)
 				{
 					if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))

@@ -15,10 +15,19 @@
 #include <math.h>
 using namespace std;
 
+
+
+
 struct coord_def;
 
 int LoopSelect(int min, int max, int cur);
 int CutSelect(int min, int max, int cur);
+
+
+
+void rand_seed(unsigned int seed_);
+
+
 
 float rand_float(float min, float max);
 

@@ -14,6 +14,7 @@
 #include "spellcard.h"
 #include "environment.h"
 #include "skill_use.h"
+#include "rand_shuffle.h"
 #include <algorithm>
 extern HANDLE mutx;
 
@@ -404,7 +405,7 @@ bool curse_armour_scroll(bool pre_iden_)
 	deque<int> dq;
 	for(int i=ET_ARMOR;i<ET_ARMOR_END;i++)
 		dq.push_back(i);
-	random_shuffle(dq.begin(),dq.end());
+	rand_shuffle(dq.begin(),dq.end());
 
 	for(int i = 0; i<dq.size() ; i++)
 	{
@@ -737,7 +738,7 @@ bool curse_jewelry_scroll(bool pre_iden_)
 	deque<int> dq;
 	for(int i=ET_JEWELRY;i<ET_JEWELRY_END;i++)
 		dq.push_back(i);
-	random_shuffle(dq.begin(),dq.end());
+	rand_shuffle(dq.begin(),dq.end());
 
 	for(int i = 0; i<dq.size() ; i++)
 	{

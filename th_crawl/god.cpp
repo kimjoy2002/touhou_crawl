@@ -18,6 +18,7 @@
 #include "tensi.h"
 #include "swako.h"
 #include "note.h"
+#include "rand_shuffle.h"
 
 
 extern HANDLE mutx;
@@ -2367,7 +2368,7 @@ bool god_punish(god_type god)
 								break;
 						}
 					}
-					random_shuffle(dq.begin(),dq.end());
+					rand_shuffle(dq.begin(),dq.end());
 					dif_rect_iterator rit(you.position,2,true);
 					if(!dq.empty())
 					{							
@@ -2700,7 +2701,7 @@ bool god_punish(god_type god)
 						if(i != ET_THROW)
 							dq.push_back(i);
 					}	
-					random_shuffle(dq.begin(),dq.end());
+					rand_shuffle(dq.begin(),dq.end());
 					printarray(false,false,false,CL_hina,1,"히나는 당신의 장비에 액을 주입했다! ");
 
 
@@ -2767,7 +2768,7 @@ bool god_punish(god_type god)
 								break;
 						}
 					}
-					random_shuffle(dq.begin(),dq.end());
+					rand_shuffle(dq.begin(),dq.end());
 					dif_rect_iterator rit(you.position,2,true);
 					if(!dq.empty())
 					{							

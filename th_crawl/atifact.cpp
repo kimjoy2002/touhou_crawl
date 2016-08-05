@@ -11,6 +11,7 @@
 #include "skill_use.h"
 #include "save.h"
 #include "armour.h"
+#include "rand_shuffle.h"
 
 atifact_infor::atifact_infor(int kind_, int value_)
 	:kind(kind_), value(value_)
@@ -378,7 +379,7 @@ void MakeArtifact(item* item_, int good_bad_)
 
 		temp.push_back(i);
 	}
-	random_shuffle(temp.begin(),temp.end());
+	rand_shuffle(temp.begin(),temp.end());
 	for(int i = 0; i < num_ ; i++)
 	{
 		if(item_->value1 != temp[i] || item_->type != ITM_RING)

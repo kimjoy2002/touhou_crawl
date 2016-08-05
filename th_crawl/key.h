@@ -9,7 +9,7 @@
 #ifndef  __KEY_H__
 #define  __KEY_H__
 
-int waitkeyinput(bool direction_ = false);
+int waitkeyinput(bool direction_ = false, bool immedity_ = false);
 int MoreWait();
 bool isKeyinput();
 

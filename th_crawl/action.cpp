@@ -27,6 +27,16 @@
 #include "projectile.h"
 #include "spellcard.h"
 #include "throw.h"
+#include "rand_shuffle.h"
+
+#include <algorithm>
+#include <random>
+#include <iterator>
+#include <ctime>
+#include <iostream>
+
+using namespace std;
+using namespace std::tr1;
 
 
 extern HANDLE mutx;
@@ -262,7 +272,7 @@ void long_rest()
 		}
 		if(env[current_level].insight_mon(MET_ENEMY))
 			return;
-		if(isKeyinput())
+		if(waitkeyinput(false, true))
 			return;
 	}
 	printlog("ÈÞ½Ä ¿Ï·á",true,false,false,CL_normal);
@@ -276,7 +286,7 @@ bool stack_move(bool auto_)
 		int right_move = 0;
 		coord_def temp = you.will_move.top();
 
-		if(isKeyinput())
+		if(waitkeyinput(false, true))
 			return false;
 		if(env[current_level].insight_mon(MET_ENEMY))
 		{
@@ -1229,6 +1239,11 @@ bool warning(dungeon_tile_type type, bool down)
 	return true;
 }
 
+
+
+
+
+
 void Stair_move(bool down)
 {
 	switch(dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile)
@@ -1270,7 +1285,7 @@ void Stair_move(bool down)
 							dq.push_back(&(*it));
 						}
 					}
-					random_shuffle(dq.begin(),dq.end());
+					rand_shuffle(dq.begin(),dq.end());
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					you.time_delay += you.GetNormalDelay();
@@ -1330,7 +1345,7 @@ void Stair_move(bool down)
 					dq.push_back(&(*it));
 				}
 			}
-			random_shuffle(dq.begin(),dq.end());
+			rand_shuffle(dq.begin(),dq.end());
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
 			dungeon_level next_ = TEMPLE_LEVEL;
@@ -1437,7 +1452,7 @@ void Stair_move(bool down)
 							dq.push_back(&(*it));
 						}
 					}
-					random_shuffle(dq.begin(),dq.end());
+					rand_shuffle(dq.begin(),dq.end());
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					env[current_level-1].EnterMap(i,dq);
@@ -1601,7 +1616,7 @@ void Stair_move(bool down)
 					dq.push_back(&(*it));
 				}
 			}
-			random_shuffle(dq.begin(),dq.end());
+			rand_shuffle(dq.begin(),dq.end());
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
 			env[floor_return].EnterMap(-1,dq,pos_return);

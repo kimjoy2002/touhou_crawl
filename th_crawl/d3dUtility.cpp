@@ -8,6 +8,7 @@
 
 #include "d3dUtility.h"
 #include "environment.h"
+#include "replay.h"
 
 
 
@@ -264,8 +265,20 @@ unsigned int WINAPI GameLoop(void *arg)
 	}
 	__finally
 	{
-		if(saveexit && isNormalGame())
+		if(saveexit && isNormalGame() && !ReplayClass.ReplayMode())
 			SaveFile();
+		else if(isArena())
+		{
+			{
+				char temp[256];
+				sprintf_s(temp,256,"아레나 레벨 %d",you.level);
+				ReplayClass.StopReplay(temp);
+			}
+		}
+		else if(!isNormalGame())
+		{
+			ReplayClass.DeleteRpy();
+		}
 		g_ThreadCnt--;
 	}
 	return 0;
@@ -274,7 +287,6 @@ unsigned int WINAPI GameLoop(void *arg)
 
 unsigned int WINAPI GameInnerLoop()
 {
-	srand((unsigned int)time(NULL));
 	charter_selete();
 	MainLoop();
 	return 0;

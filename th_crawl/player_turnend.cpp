@@ -24,6 +24,7 @@
 #include "spellcard.h"
 #include "alchemy.h"
 #include "tensi.h"
+#include "replay.h"
 extern players you;
 extern HANDLE mutx;
 
@@ -874,10 +875,42 @@ void deadlog()
 	}
 }
 
+int caculScore();
+
+
 void GameOver()
 {			
+
+	bool replay_mode_ = ReplayClass.ReplayMode();
+	
+
 	if(game_over)
 		return;
+
+	if(isNormalGame())
+	{
+		char temp[256];
+		sprintf_s(temp,256,"%d    레벨 %d의 %s %s %s \"%s\"",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str());
+
+
+		ReplayClass.StopReplay(temp);
+
+	}
+	else if(isArena())
+	{
+		{
+			char temp[256];
+			sprintf_s(temp,256,"아레나 레벨 %d",you.level);
+			ReplayClass.StopReplay(temp);
+		}
+	}
+	else
+	{
+		ReplayClass.DeleteRpy();
+	}
+
+
+
 
 	if(you.dead_reason != DR_ESCAPE)
 		printlog("죽었다...",true,false,false,CL_normal);
@@ -888,6 +921,7 @@ void GameOver()
 
 	deadlog();
 	string dump_;
+	bool dump_ok = false;
 
 	if(isNormalGame())
 	{
@@ -896,8 +930,9 @@ void GameOver()
 			it->Identify();
 		}
 		WaitForSingleObject(mutx, INFINITE);
-		Dump(1,&dump_);
-		if(wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT)
+		if(!replay_mode_)
+			dump_ok = Dump(1,&dump_);
+		if((wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT) && !replay_mode_)
 			delete_file();
 		ReleaseMutex(mutx);
 
@@ -918,92 +953,95 @@ void GameOver()
 		iteminfor(true);
 		waitkeyinput(true);
 		changedisplay(DT_GAME);
-		
-		FILE *fp = fopen(dump_.c_str(),"rt");
+	
 
-		if(fp)
+		if(dump_ok)
 		{
-			char temp[256];
+			FILE *fp = fopen(dump_.c_str(),"rt");
+
+			if(fp)
+			{
+				char temp[256];
 			
-			WaitForSingleObject(mutx, INFINITE);
-			ReleaseMutex(mutx);
-			deletesub();
-			changedisplay(DT_SUB_TEXT);
-			for(int i=0;i<26;i++)
-			{
-				fgets(temp,256,fp);
-				//fscanf(fp,"%s",temp);				
-				printsub(temp,true,CL_normal);
-			}			
-			printsub("",true,CL_magic);
-			if(you.dead_reason == DR_ESCAPE && you.haveOrb())
-			{
-				if(wiz_list.wizard_mode == 1)
-					printsub("플레이해주셔서 감사합니다! 다음엔 위자드모드없이 도전해봅시다!",true,CL_magic);
-				else if(wiz_list.wizard_mode == 2)
-					printsub("플레이해주셔서 감사합니다! 다음엔 세이브없이 도전해봅시다!",true,CL_magic);
+				WaitForSingleObject(mutx, INFINITE);
+				ReleaseMutex(mutx);
+				deletesub();
+				changedisplay(DT_SUB_TEXT);
+				for(int i=0;i<26;i++)
+				{
+					fgets(temp,256,fp);
+					//fscanf(fp,"%s",temp);				
+					printsub(temp,true,CL_normal);
+				}			
+				printsub("",true,CL_magic);
+				if(you.dead_reason == DR_ESCAPE && you.haveOrb())
+				{
+					if(wiz_list.wizard_mode == 1)
+						printsub("플레이해주셔서 감사합니다! 다음엔 위자드모드없이 도전해봅시다!",true,CL_magic);
+					else if(wiz_list.wizard_mode == 2)
+						printsub("플레이해주셔서 감사합니다! 다음엔 세이브없이 도전해봅시다!",true,CL_magic);
+					else
+						printsub("클리어 축하드립니다! 그리고 플레이해주셔서 감사합니다!",true,CL_magic);
+				}
 				else
-					printsub("클리어 축하드립니다! 그리고 플레이해주셔서 감사합니다!",true,CL_magic);
-			}
-			else
-			{
-				switch(randA(9))
 				{
-				default:
-				case 0:
-					printsub("죽음은 또 하나의 시작이다!",true,CL_magic);
-					break;
-				case 1:
-					printsub("패배는 성공의 어머니다!",true,CL_magic);
-					break;
-				case 2:
-					printsub("LOSING IS FUN!",true,CL_magic);
-					break;
-				case 3:
-					printsub("포기하지마라!",true,CL_magic);
-					break;
-				case 4:
-					printsub("지는것을 두려워하지마라!",true,CL_magic);
-					break;
-				case 5:
-					printsub("죽음에도 배울 것이 있다!",true,CL_magic);
-					break;
-				case 6:
-					printsub("실패는 성공의 과정일 뿐이다!",true,CL_magic);
-					break;
-				case 7:
-					printsub("좌절감이 사나에를 키운다!",true,CL_magic);
-					break;
-				case 8:
-					printsub("경험이 자산이다!",true,CL_magic);
-					break;
-				case 9:
-					printsub("경험은 사라지지않는다!",true,CL_magic);
-					break;
+					switch(randA(9))
+					{
+					default:
+					case 0:
+						printsub("죽음은 또 하나의 시작이다!",true,CL_magic);
+						break;
+					case 1:
+						printsub("패배는 성공의 어머니다!",true,CL_magic);
+						break;
+					case 2:
+						printsub("LOSING IS FUN!",true,CL_magic);
+						break;
+					case 3:
+						printsub("포기하지마라!",true,CL_magic);
+						break;
+					case 4:
+						printsub("지는것을 두려워하지마라!",true,CL_magic);
+						break;
+					case 5:
+						printsub("죽음에도 배울 것이 있다!",true,CL_magic);
+						break;
+					case 6:
+						printsub("실패는 성공의 과정일 뿐이다!",true,CL_magic);
+						break;
+					case 7:
+						printsub("좌절감이 사나에를 키운다!",true,CL_magic);
+						break;
+					case 8:
+						printsub("경험이 자산이다!",true,CL_magic);
+						break;
+					case 9:
+						printsub("경험은 사라지지않는다!",true,CL_magic);
+						break;
+					}
 				}
-			}
-			printsub("",true,CL_help);
-			printsub("기록은 게임의 morgue폴더에 저장되어있습니다.",true,CL_help);
-			printsub("",true,CL_help);
-			printsub("종료하시려면 Enter나 ESC를 누르세요.",true,CL_help);
-			bool end_ = false;
-			while(!end_)
-			{
-				int key_ = waitkeyinput(true);
-				switch(key_)
+				printsub("",true,CL_help);
+				printsub("기록은 게임의 morgue폴더에 저장되어있습니다.",true,CL_help);
+				printsub("",true,CL_help);
+				printsub("종료하시려면 Enter나 ESC를 누르세요.",true,CL_help);
+				bool end_ = false;
+				while(!end_)
 				{
-				default:
-					break;
-				case VK_RETURN:
-				case VK_ESCAPE:
-					end_ = true;
-					break;
+					int key_ = waitkeyinput(true);
+					switch(key_)
+					{
+					default:
+						break;
+					case VK_RETURN:
+					case VK_ESCAPE:
+						end_ = true;
+						break;
+					}
 				}
+				fclose(fp);
 			}
-			fclose(fp);
+
 		}
-
-
 
 
 	}

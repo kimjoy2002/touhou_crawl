@@ -35,10 +35,10 @@ HANDLE endmutx;
 
 
 
-extern unsigned int random_number;
 extern display_manager DisplayManager;
 
 extern void init_identify();
+
 
 
 
@@ -90,7 +90,7 @@ bool Setup()
 	}
 
 	D3DXMatrixIdentity(&g_BaseMatrix);
-
+	map_list.random_number = (unsigned int)time(NULL);
 
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
 	if(!texture_title.loadingEX(Device))
@@ -146,12 +146,10 @@ bool Setup()
 	endmutx=CreateMutex(NULL, FALSE, NULL);
 	mutx=CreateMutex(NULL, FALSE, NULL);
 	DisplayManager.Getfontinfor();
-
-	init_state();
-	init_identify();
-	init_monster();
-	initMap();
-	wiz_list.wizard_mode = 0;
+	
+	map_list.random_number = (unsigned long)time(NULL);	
+	srand((unsigned int)map_list.random_number);
+	//rand_seed(map_list.random_number);
 	return true;
 }
 
@@ -213,8 +211,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   PSTR cmdLine,
 				   int showCmd)
 {
-	srand((unsigned int)time(NULL));
-	random_number = (unsigned int)time(NULL);
+	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D(hinstance,
 		W_WIDTH, W_HEIGHT, true, D3DDEVTYPE_HAL, &Device))
 	{

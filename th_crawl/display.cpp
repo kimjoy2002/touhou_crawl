@@ -22,6 +22,7 @@
 #include "tribe.h"
 #include "alchemy.h"
 #include "tensi.h"
+#include "replay.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -662,8 +663,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*7;
 		pfont->DrawTextA(pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-
-		if(wiz_list.wizard_mode == 1)
+		
+		if(ReplayClass.play)
+		{
+			rc.left = 32*16+180;			
+			pfont->DrawTextA(pSprite,"*리플레이 중*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, wiz_list.wizard_mode == 1?CL_help:(wiz_list.wizard_mode == 2?CL_magic:CL_warning));
+		}
+		else if(wiz_list.wizard_mode == 1)
 		{
 			rc.left = 32*16+180;			
 			pfont->DrawTextA(pSprite,"*위자드 모드*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
@@ -673,6 +679,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			rc.left = 32*16+180;			
 			pfont->DrawTextA(pSprite,"*세이브 보존*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 		}
+
+
+
+
 		rc.top += fontDesc.Height;
 		rc.left = 32*16+50;
 		pfont->DrawTextA(pSprite,tribe_type_string[you.tribe], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);

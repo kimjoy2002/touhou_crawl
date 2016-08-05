@@ -25,6 +25,7 @@
 #include "map.h"
 #include "event.h"
 #include "key.h"
+#include "rand_shuffle.h"
 #include <algorithm>
 #include <math.h>
 
@@ -1292,7 +1293,7 @@ bool skill_recall(int pow, bool short_, unit* order, coord_def target)
 			dq.push_back(&(*it));
 		}
 	}
-	random_shuffle(dq.begin(),dq.end());
+	rand_shuffle(dq.begin(),dq.end());
 	dif_rect_iterator rit(order->position,2);
 	int j=0;
 	for(int i = 0;!rit.end() && i < dq.size();rit++)
@@ -1792,7 +1793,7 @@ bool skill_haste_other(int pow, bool short_, unit* order, coord_def target)
 	}
 	if(target_mon_list.empty())
 		return false;
-	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+	rand_shuffle(target_mon_list.begin(),target_mon_list.end());
 
 	monster* final_target = target_mon_list.back();
 
@@ -1845,7 +1846,7 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 	}
 	if(target_mon_list.empty())
 		return false;
-	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+	rand_shuffle(target_mon_list.begin(),target_mon_list.end());
 
 	monster* final_target = target_mon_list.back();
 	
@@ -2518,7 +2519,7 @@ bool skill_haste_all(int power, bool short_, unit* order, coord_def target)
 	}
 	if(target_mon_list.empty())
 		return false;
-	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+	rand_shuffle(target_mon_list.begin(),target_mon_list.end());
 
 	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
 	{
@@ -2552,7 +2553,7 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 	}
 	if(target_mon_list.empty())
 		return false;
-	random_shuffle(target_mon_list.begin(),target_mon_list.end());
+	rand_shuffle(target_mon_list.begin(),target_mon_list.end());
 	
 	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
 	{

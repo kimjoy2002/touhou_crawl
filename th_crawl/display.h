@@ -97,10 +97,10 @@ void deletelog();
 void enterlog();
 void printarray(bool enter_, bool log_, bool temp_, D3DCOLOR color_, int num_, ...);
 
-void printsub(string text_, bool enter_, D3DCOLOR color_);
+int printsub(string text_, bool enter_, D3DCOLOR color_);
 void deletesub();
 void entersub();
-void printarraysub(bool enter_, D3DCOLOR color_, int num_, ...);
+int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...);
 
 void SetSpellSight(int sight, int sight_type_);
 

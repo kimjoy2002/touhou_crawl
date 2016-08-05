@@ -64,6 +64,7 @@ public:
 	int bamboo_count;
 	int bamboo_rate;
 	bool bamboo_tewi;
+	unsigned int random_number;
 };
 
 

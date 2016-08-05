@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "rect.h"
+#include "rand_shuffle.h"
 #include <algorithm>
 
 
@@ -61,7 +62,7 @@ start(start_),current(0),x_size(x_size_),y_size(y_size_)
 				dq.push_back(coord_def(i+start.x,j+start.y));
 		}
 	}
-	random_shuffle(dq.begin(),dq.end());
+	rand_shuffle(dq.begin(),dq.end());
 }
 coord_def rand_rect_iterator::operator *() const
 {
@@ -109,7 +110,7 @@ start(start_),current(0),distan(distan_)
 				temp.push_back(coord_def(i+start.x,j+start.y));
 		}
 	}
-	random_shuffle(temp.begin(),temp.end());
+	rand_shuffle(temp.begin(),temp.end());
 	for(unsigned int i=0;i<temp.size();i++)
 		dq.push_back(temp[i]);
 	if(!random_)

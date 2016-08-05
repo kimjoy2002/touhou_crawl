@@ -9,6 +9,7 @@
 #include "const.h"
 #include "display.h"
 #include "key.h"
+#include "replay.h"
 #include <conio.h>
 #include <windows.h> 
 
@@ -19,8 +20,24 @@ bool game_over= false;
 bool shift_check = false;
 bool ctrl_check = false;
 
-int waitkeyinput(bool direction_)
+
+bool isKeyinput()
 {
+	MSG msg;
+	return PeekMessage(&msg,NULL,0,0,PM_REMOVE);
+}
+
+int waitkeyinput_inter(bool direction_, bool immedity_)
+{
+	if(immedity_)
+	{
+		if(isKeyinput())
+			return 1;
+		else
+			return 0;
+	}
+
+
 	MSG msg;
 	if(game_over)
 		throw 0;
@@ -136,6 +153,50 @@ int waitkeyinput(bool direction_)
 	return 0;
 }
 
+
+
+int waitkeyinput(bool direction_, bool immedity_)
+{
+
+	if(ReplayClass.auto_key == false)
+	{
+		DWORD time_ = timeGetTime();
+
+		int return_ = waitkeyinput_inter(direction_,immedity_);
+	
+		DWORD time2_ = timeGetTime();
+
+		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_), return_);
+
+		return return_;
+	}
+	else
+	{
+		DWORD delay_;
+		int return_;
+		MSG msg;
+		PeekMessage(&msg,NULL,0,0,PM_REMOVE);
+		if(game_over || msg.message == WM_QUIT)
+		{
+			throw 0;
+		}
+		if(ReplayClass.LoadReplayInput(&delay_,&return_))
+		{		
+			if(delay_>0)
+			{
+				for(int i = 0; i <min(1000,delay_); i++)
+					Sleep(1);
+			}
+
+			return return_;
+		}
+		else
+			return 0;
+	}
+}
+
+
+
 int MoreWait()
 {
 	printlog("----------´ÙÀ½Àå----------",true,false,true,CL_normal);
@@ -149,10 +210,4 @@ int MoreWait()
 	}
 	deletelog();
 	return true;
-}
-bool isKeyinput()
-{
-	MSG msg;
-	return PeekMessage(&msg,NULL,0,0,PM_REMOVE);
-
 }

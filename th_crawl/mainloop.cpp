@@ -291,6 +291,7 @@ void charter_selete()
 	}
 	
 	init_state();
+	map_list.tutorial = GM_TITLE;
 
 	start_mainmenu();
 
@@ -301,7 +302,8 @@ void charter_selete()
 		initMap();
 		wiz_list.wizard_mode = 0;
 	}
-
+	if(map_list.tutorial == GM_TITLE)
+		map_list.tutorial = GM_NORMAL;
 
 
 	if(isNormalGame() && !saveexit)

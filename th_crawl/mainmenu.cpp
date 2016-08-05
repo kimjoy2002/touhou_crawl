@@ -176,7 +176,7 @@ bool checkSavefile(int value_)
 		return false;
 
 	if(load_data(save_file.c_str()))
-	{		
+	{
 		saveexit = true;
 		return true;
 	}

@@ -12,6 +12,7 @@
 
 enum game_mode
 {
+	GM_TITLE=-1,
 	GM_NORMAL=0,
 	GM_TUTORIAL,
 	GM_TUTORIAL2,

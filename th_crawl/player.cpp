@@ -1370,26 +1370,30 @@ void players::doingActionDump(dump_action_type type_, string name_)
 }
 int players::PowDecreaseDelay(int delay_)
 {
-	power_decre += (rand_int(25,30)+delay_)*10;
+	int up_ = (rand_int(25,30)+delay_)*10;
 	if(power_keep>0)
 	{
-		power_decre*=2;
+		up_*=2;
 	}
 	else if(power_keep<0)
 	{
-		power_decre/=2;
+		up_/=2;
 	}
 
 	if(s_haste)
 	{
 		if(s_haste)
-			power_decre/=power_keep>0?5:(power_keep<0?30:20);
+			up_/=up_>0?5:(up_<0?30:20);
 	}
 	if(s_invisible || togle_invisible)
 	{
 		if(s_invisible || togle_invisible)
-			power_decre/=power_keep>0?5:(power_keep<0?30:20);
+			up_/=up_>0?5:(up_<0?30:20);
 	}
+	if(up_<0)
+		up_ = 1;
+	
+	power_decre += up_;
 	return power_decre;
 }
 interupt_type players::PowDecrease(int delay_)

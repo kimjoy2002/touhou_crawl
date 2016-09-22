@@ -3,7 +3,7 @@
 
 th_crawl/th_crawl.*
 th_crawl/*.txt
-th_crawl/replay/*.rpy
+th_crawl/replay/*
 Debug/
 morgue/
 Release/

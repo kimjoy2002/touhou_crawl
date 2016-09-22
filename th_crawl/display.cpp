@@ -1615,6 +1615,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
+
+
+	if(ReplayClass.play)
+	{
+		RECT rc={50, 400, WindowWidth, WindowHeight};
+		pfont->DrawTextA(pSprite,"리플레이 모드중", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		rc.top += fontDesc.Height;	
+		pfont->DrawTextA(pSprite,"(z-일시정지 x-보통속도 c-배속)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+	}
+
+
 }
 void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {

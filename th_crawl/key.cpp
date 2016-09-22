@@ -19,6 +19,7 @@ extern HWND hwnd;
 bool game_over= false;
 bool shift_check = false;
 bool ctrl_check = false;
+int replay_speed = 1;
 
 
 bool isKeyinput()
@@ -176,6 +177,39 @@ int waitkeyinput(bool direction_, bool immedity_)
 		int return_;
 		MSG msg;
 		PeekMessage(&msg,NULL,0,0,PM_REMOVE);
+		if(msg.message == WM_CHAR)
+		{
+			switch(msg.wParam)
+			{
+			case 'x':
+				replay_speed = 1;
+				break;
+			case 'c':
+				replay_speed = 0;
+				break;
+			case 'z':
+				while(1)
+				{
+					GetMessage(&msg,0,0,0);
+
+					if(msg.message == WM_CHAR)
+					{
+						if(msg.wParam == 'z' || msg.wParam == 'x' || msg.wParam == 'c')
+						{
+							if(msg.wParam == 'x')
+								replay_speed = 1;
+							else if(msg.wParam == 'c')
+								replay_speed = 0;
+							break;
+						}
+					}
+					if(msg.message == WM_QUIT)
+						break;
+				}
+				break;
+			}
+		}
+
 		if(game_over || msg.message == WM_QUIT)
 		{
 			throw 0;
@@ -184,7 +218,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 		{		
 			if(delay_>0)
 			{
-				for(int i = 0; i <min(1000,delay_); i++)
+				for(int i = 0; i <(replay_speed==1?min(1000,delay_):0); i++)
 					Sleep(1);
 			}
 

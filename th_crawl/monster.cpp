@@ -2315,7 +2315,7 @@ int monster::action(int delay_)
 							break;
 					}
 
-					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?33:3)){//몬스터 말하기
+					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?66:3)){//몬스터 말하기
 						
 						if(s_confuse || s_lunatic)
 						{

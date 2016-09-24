@@ -618,7 +618,7 @@ string GetSkillInfor(skill_list skill)
 	case SKL_YUUGI_3:
 		text_ += "밀착한 상대를 들어올려 멀리 던져버린다.\n";
 		text_ += "던진 위치엔 큰 충격파가 일어나 날라간 상대 주위로 범위 데미지를 준다.\n";
-		text_ += "너무 가까이 던지면 던진 플레이어도 데미지를 입을 수 있다.\n";
+		text_ += "플레이어는 이 충격파에 면역이 되어있다.\n";
 		text_ += "만약 잡고있는 상태라면 해당 상대에겐 신앙심 소모없이 기술을 사용할 수 있다.\n";
 		break;		
 	case SKL_YUUGI_4:

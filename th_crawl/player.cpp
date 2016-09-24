@@ -3356,7 +3356,7 @@ bool players::Evoke(char id_)
 			WaitForSingleObject(mutx, INFINITE);
 			if((*it).type == ITM_SPELL)
 			{
-				if(((*it).identify || (*it).value3 == -1) && !(*it).value1)
+				if(((*it).identify || (*it).value3 == -1) && (*it).value1 <= 0)
 				{
 					printlog("남은 횟수가 없다.",true,false,false,CL_normal);
 					ReleaseMutex(mutx);

@@ -74,7 +74,7 @@ void wiz_mode()
 			break;
 		case 'A':
 			{				
-				printlog("p-포션 s-스크롤 e-발동템 r-반지 b-책 a-방어구",true,false,false,CL_help);
+				printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까?",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -141,6 +141,25 @@ void wiz_mode()
 						{
 							item_infor t;
 							makeitem(ITM_MISCELLANEOUS, 0, &t,  list[key_-'a']);
+							env[current_level].MakeItem(you.position,t);
+							enterlog();
+						}
+						else{
+							printlog(" 취소",true,false,false,CL_help);
+						}
+					}
+					return;
+				case 'v':
+					{
+						int list[] = {SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE};	
+						enterlog();
+						printlog("a-화염 b-냉기 c-대지 d-대기 e-투명",true,false,false,CL_help);
+						printlog("어느 스펠카드를 얻어볼까?",false,false,false,CL_help);
+						key_ = waitkeyinput();
+						if(key_ >= 'a' && key_ <= 'e')
+						{
+							item_infor t;
+							makeitem(ITM_SPELL, 0, &t,  list[key_-'a']);
 							env[current_level].MakeItem(you.position,t);
 							enterlog();
 						}

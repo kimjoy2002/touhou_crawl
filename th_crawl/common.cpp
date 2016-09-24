@@ -119,7 +119,7 @@ float rand_float(float min, float max)
 	//min = (float)(random_number % (int)((max - min)*100 + 1)) /100 + min;
 	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
 	rand_seed(map_list.random_number);
-	int rand_ = rand_engine();
+	int rand_ = abs((int)rand_engine());
 	min = (float)(rand_ % (int)((max - min)*100 + 1)) /100 + min;
 	map_list.random_number = rand_;
 	

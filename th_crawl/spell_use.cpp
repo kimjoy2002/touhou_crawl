@@ -1201,7 +1201,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
-	length_ = min(length_,SpellLength(SPL_FIRE_BALL));
+	length_ = min(length_,SpellLength(SPL_CONFUSE_CLOUD));
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		beam_infor temp_infor(0,0,10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("æ«√Î≈∫",true));

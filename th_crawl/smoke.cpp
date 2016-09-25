@@ -175,7 +175,7 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_CONFUSE:
 		{
 			bool return_ = false;
-			if(unit_->GetPoisonResist()<=0)
+			if(unit_->GetPoisonResist()<=0 && randA(20) < max(20-unit_->GetLevel(),1))
 				return_ = unit_->SetConfuse(randA(10));
 			return return_;
 		}

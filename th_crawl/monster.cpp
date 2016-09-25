@@ -3010,6 +3010,23 @@ bool monster::AttackedTarget(unit *order_)
 			}
 			memory_time=30;
 		}
+		if(state.GetState() == MS_SLEEP) //자고있을때 깨어나면서 외칠 수 있음
+		{			
+			int percent_ = 1;
+			if(you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA) )
+				percent_ = 4;
+			if(flag & M_FLAG_SPEAK && randA(percent_)==0 && !env[current_level].isSilence(position))
+			{
+				Noise(position,12,this);
+				if(env[current_level].isInSight(position))
+				{
+					if(char* c_ = Get_Speak(id,this,MST_FOUND)){
+						printlog(c_,true,false,false,CL_speak);
+					}
+				}
+			}	
+		}
+
 		state.StateTransition(MSI_ATACKED);
 	}
 	else

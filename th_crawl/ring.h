@@ -22,6 +22,7 @@ extern const char *amulet_iden_string[AMT_MAX];
 int isRingGotValue(ring_type ring_);
 ring_type goodbadring(int good_bad);
 int isGoodRing(ring_type kind, int value);
+int isPickableRIng(ring_type kind); //2개이상 집어도 되는 링
 bool equipring(ring_type kind, int value); //리턴값: 식별시 true 미식별시 false
 bool unidenequipring(ring_type kind, int value);
 

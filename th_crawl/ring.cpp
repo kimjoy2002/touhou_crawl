@@ -132,6 +132,32 @@ int isGoodRing(ring_type kind, int value)
 	}
 	return 1;
 }
+int isPickableRIng(ring_type kind)
+{
+	switch(kind)
+	{
+	case RGT_STR:
+	case RGT_DEX:
+	case RGT_INT:
+	case RGT_FIRE_RESIS:
+	case RGT_ICE_RESIS:
+	case RGT_MANA:
+	case RGT_MAGACIAN:
+	case RGT_ELEC_RESIS:
+	case RGT_MAGIC_RESIS:
+		return 1;
+	case RGT_FULL:
+	case RGT_POISON_RESIS:
+	case RGT_SEE_INVISIBLE:
+	case RGT_GRAZE:
+	case RGT_LEVITATION:
+	case RGT_INVISIBLE:
+	case RGT_TELEPORT:
+	case RGT_HUNGRY:
+		return -1;
+	}
+	return 1;
+}
 
 
 bool equipring(ring_type kind, int value)

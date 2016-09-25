@@ -741,7 +741,10 @@ bool item::isautopick()
 		{	
 			if(isGoodRing((ring_type)value1,identify?value2:1)>0)
 			{
-				return true;
+				if(isPickableRIng((ring_type)value1)>0)
+					return true;
+				else
+					return false;
 			}
 			else
 				return false;

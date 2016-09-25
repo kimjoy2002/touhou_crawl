@@ -3089,6 +3089,10 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}
+	if(t->type == ITM_BOOK)
+	{
+		t->Identify(); //책은 항상 줍자마자 식별
+	}
 
 
 

@@ -267,7 +267,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->num = rand_int(1,3);
 			t->image = &img_item_sweet_potato;
 			t->name.name = "°í±¸¸¶";
-			t->name.name_type = true;
+			t->name.name_type = false;
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;

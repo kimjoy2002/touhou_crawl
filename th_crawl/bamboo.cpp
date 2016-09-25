@@ -15,6 +15,7 @@
 #include "rect.h"
 #include "mon_infor.h"
 
+extern HANDLE mutx;
 
 void map_algorithms_bamboo(int num);
 void bamboo_count(int num);
@@ -66,6 +67,7 @@ void bamboo_count(int num)
 
 	if(offset_x || offset_y) //밖을 벗어남
 	{
+		WaitForSingleObject(mutx, INFINITE);
 		//움직여야할것. 맵타일, 몬스터위치, 오브젝트위치, 몹의 타겟팅?
 		dungeon_tile tempdgtile[DG_MAX_X][DG_MAX_Y];
 		for(int i = 0; i < DG_MAX_X; i++)
@@ -163,7 +165,8 @@ void bamboo_count(int num)
 		}
 		//이벤트는... 필요없어?
 		//list<events> event_list;
-
+		
+		ReleaseMutex(mutx);
 
 	}
 
@@ -191,26 +194,24 @@ void bamboo_count(int num)
 	if(randA(1000)<map_list.bamboo_rate)
 	{ //몬스터를 생성하기시작한다.
 		
-		int rand_ = randA(100);
-		int percent_[] = {5,60,15,20};
-		int id_ = MON_RABIT_SPEAR;
+		random_extraction<int> percent_;
+		percent_.push(MON_RABIT_BOMB,5+max(map_list.bamboo_count/50-10,0));//파밍방지 폭탄병의 수가 점점 많아진다
 
-		if(map_list.bamboo_rate>100)
-		{ //토끼들이 많아지면 지원병은 적어짐
-			percent_[1] = 65;
-			percent_[2] = 5;
-			percent_[3] = 25;
+		if(map_list.bamboo_rate<=200)
+		{
+			percent_.push(MON_RABIT_SPEAR,60);//창병
+			percent_.push(MON_RABIT_SUPPORT,15);//지원병
+			percent_.push(MON_RABIT_MAGIC,20);//마법사
 		}
-		
-		if(rand_<percent_[0])
-			id_ = MON_RABIT_BOMB;
-		else if(rand_<percent_[0]+percent_[1])
-			id_ = MON_RABIT_SPEAR;
-		else if(rand_<percent_[0]+percent_[1]+percent_[2])
-			id_ = MON_RABIT_SUPPORT;
-		else if(rand_<percent_[0]+percent_[1]+percent_[2]+percent_[3])
-			id_ = MON_RABIT_MAGIC;
-			
+		else
+		{ //토끼들이 많아지면 지원병은 적어짐
+			percent_.push(MON_RABIT_SPEAR,65);//창병
+			percent_.push(MON_RABIT_SUPPORT,5);//지원병
+			percent_.push(MON_RABIT_MAGIC,25);//마법사
+
+		}
+		int id_ = percent_.pop();
+
 
 		dif_rect_iterator rit(you.position,12,true);
 		while(!rit.end())
@@ -220,6 +221,11 @@ void bamboo_count(int num)
 			if(env[num].isMove(check_pos_.x, check_pos_.y, false) && !env[num].isInSight(check_pos_))
 			{
 				monster *temp = env[num].AddMonster(id_,0,*rit);
+				if(id_ == MON_RABIT_BOMB)
+				{
+					int level_up_ = min(max(map_list.bamboo_count/300-2,0),10);
+					temp->LevelUpdown(level_up_);
+				}
 				temp->state.SetState(MS_NORMAL);
 				break;
 			}
@@ -233,7 +239,11 @@ void bamboo_count(int num)
 
 	map_list.bamboo_count++;
 	if(map_list.bamboo_count % 120 == 20)
-		map_list.bamboo_rate = rand_int(60,120);
+	{
+		int grade_ = min(map_list.bamboo_count/20,200); //시간이 흐를수록 점점 죽림이 거세진다
+		map_list.bamboo_rate = rand_int(60,120)+grade_;
+
+	}
 	
 
 }

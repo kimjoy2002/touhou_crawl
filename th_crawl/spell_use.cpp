@@ -2159,8 +2159,8 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isBamboo() && order && !order->isUserAlly())
 	{
-		if(map_list.bamboo_rate<((order->GetId() == MON_TEWI)?400:300))
-			map_list.bamboo_rate+=order->GetId() == (MON_TEWI?40:20);
+		if(map_list.bamboo_rate<((order->GetId() == MON_TEWI)?400:350))
+			map_list.bamboo_rate+=(order->GetId() == MON_TEWI)?35:20;
 		if(order && env[current_level].isInSight(order->position))
 		{
 			if(order->GetId() == MON_TEWI)

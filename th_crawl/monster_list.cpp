@@ -548,7 +548,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI  | M_FLAG_FLY | M_FLAG_CANT_NETURAL,3,1,10},
 
 	
-	{MON_RABIT_BOMB,9,220,name_infor("Åä³¢ ÀÚÆøº´",true),&img_mons_bomb_rabbit,12,1,20,
+	{MON_RABIT_BOMB,9,10,name_infor("Åä³¢ ÀÚÆøº´",true),&img_mons_bomb_rabbit,12,1,20,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9},
 	

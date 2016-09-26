@@ -450,7 +450,7 @@ void tensi_burst(int good_)
 								if(att_ >= hit_->GetHp())
 									att_ = hit_->GetHp()-1;
 							}
-							attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
+							attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("ÅÙ½Ã",false));
 							hit_->damage(temp_att, true);
 						}
 					}

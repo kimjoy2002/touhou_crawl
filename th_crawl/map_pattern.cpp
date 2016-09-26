@@ -1144,7 +1144,7 @@ char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
 		int yugen_ = 2;
 		while(mon_num_)
 		{
-			coord_def c_(rand_int(-2,2),rand_int(0,2));
+			coord_def c_(rand_int(-2,2),rand_int(-1,1));
 			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
 				[c_](mapdummy_mon &v)->bool{
 					return v.pos == c_;

@@ -475,7 +475,8 @@ void MainLoop()
 			view_log();
 			break;
 		case 15: //컨트롤o
-			dungeonView();
+			if(isNormalGame())
+				dungeonView();
 			break;
 		case 'e': //먹기
 			Eatting();

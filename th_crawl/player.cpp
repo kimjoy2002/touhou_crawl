@@ -1442,6 +1442,8 @@ int players::PowUpDown(int value_, bool big_)
 }
 bool players::StatUpDown(int value_, stat_type stat_, bool temp_)
 {
+	if(value_ == 0)
+		return false;
 	switch(stat_)
 	{
 	case STAT_STR:

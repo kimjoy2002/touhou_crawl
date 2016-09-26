@@ -166,17 +166,22 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(you.MemorizeSpell[i])
 		{
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
+			int miscast_level_ = SpellMiscastingLevel(SpellLevel(spell_), 100-you.GetSpellSuccess(spell_));
+			D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
+				(miscast_level_==2?CL_small_danger:
+				(miscast_level_==1?CL_warning:CL_STAT)));
+
 			char sp_char = (i<26)?('a'+i):('A'+i-26);
 			sprintf_s(temp,100,"%c      - %s",sp_char,SpellString(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left += 200;
-			pfont->DrawTextA(pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			pfont->DrawTextA(pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left = 450;
 			sprintf_s(temp,100,"%-3d%%",100-you.GetSpellSuccess(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left += 150;
 			sprintf_s(temp,100,"%d",SpellLevel(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.top += fontDesc.Height;
 			rc.left = 50;
 

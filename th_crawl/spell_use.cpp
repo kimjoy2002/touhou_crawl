@@ -3671,6 +3671,25 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	}
 }
 
+bool CheckDangerSpell(int danger_)
+{	
+	if(danger_>=3)
+	{
+		printlog("이 마법은 사용하기엔 너무 위험하다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+		switch(waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			enterlog();
+			break;
+		case 'N':
+		default:
+			printlog(" 현명하군.",true,false,false,CL_normal);
+			return false;
+		}
+	}
+	return true;
+}
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite)
 {
 	
@@ -3772,6 +3791,11 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 {
 	int power=min(SpellCap(skill),you.GetSpellPower(SpellSchool(skill,0),SpellSchool(skill,1),SpellSchool(skill,2)));
+	
+	if(!CheckDangerSpell(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill))))
+	{
+		return false;
+	}
 	if(!CheckSucide(you.position,target,SpellFlagCheck(skill,S_FLAG_SEIF) || SpellFlagCheck(skill, S_FLAG_IMMEDIATELY),Spellsize(skill),SpellFlagCheck(skill,S_FLAG_SMITE)))
 	{
 		return false;
@@ -3789,6 +3813,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	if(randA_1(100) > you.GetSpellSuccess(skill))
 	{
 		printlog("당신은 마법 주문에 실패했다.",true,false,false,CL_normal);
+		SpellMiscasting(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill)));
 		return true;
 	}
 	if(you.GetPunish(GT_MIMA))

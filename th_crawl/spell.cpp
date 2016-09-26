@@ -1210,6 +1210,65 @@ int SpellDiffer(int level)
 		return 99;
 	}
 }
+int SpellMiscastingLevel(int level_, int fail_)
+{
+	switch(level_)
+	{
+	case 1:
+		return 0;
+	case 2:
+		return                           (fail_>=27?1:0);
+	case 3:
+		return              (fail_>=56?2:(fail_>=24?1:0));
+	case 4:
+		return (fail_>=70?3:(fail_>=49?2:(fail_>=21?1:0)));
+	case 5:
+		return (fail_>=60?3:(fail_>=42?2:(fail_>=18?1:0)));
+	case 6:
+		return (fail_>=50?3:(fail_>=35?2:(fail_>=15?1:0)));
+	case 7:
+		return (fail_>=40?3:(fail_>=28?2:(fail_>=12?1:0)));
+	case 8:
+		return (fail_>=30?3:(fail_>=21?2:(fail_>=9?1:0)));
+	case 9:
+		return (fail_>=20?3:(fail_>=14?2:(fail_>=6?1:0)));
+	default:
+		return 0;
+	}
+}
+int SpellMiscasting(int miscasting_level_)
+{
+	random_extraction<int> rand_;
+	rand_.push(0);
+	if(miscasting_level_>=1)	
+		rand_.push(1);
+	if(miscasting_level_>=2)	
+		rand_.push(2);
+	if(miscasting_level_>=3)	
+		rand_.push(3);
+
+
+
+	switch(rand_.pop())
+	{
+	case 0:
+	default:
+		return 0;
+	case 1:
+		printlog("마법 부작용으로 가벼운 현기증을 느꼈다.",true,false,false,CL_small_danger);
+		you.StatUpDown(-1,STAT_INT,true);
+		return 1;
+	case 2:
+		printlog("마법 부작용으로 머리에 심한 두통을 느꼈다.",true,false,false,CL_small_danger);
+		you.StatUpDown(-rand_int(2,3),STAT_INT,true);
+		return 2;
+	case 3:
+		printlog("마법 부작용으로 머리에 끔찍한 손상이 왔다.",true,false,false,CL_small_danger);
+		you.StatUpDown(-rand_int(4,7),STAT_INT,true);
+		return 3;
+
+	}
+}
 int SpellHunger(int level)
 {
 	switch(level)

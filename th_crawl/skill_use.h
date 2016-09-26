@@ -145,6 +145,8 @@ int SpellNoise(spell_list skill);
 int SpellSpeed(spell_list skill);
 int Spellsize(spell_list skill);
 int SpellDiffer(int level);
+int SpellMiscastingLevel(int level_, int fail_);
+int SpellMiscasting(int miscasting_level_);
 int SpellHunger(int level);
 skill_type SpellSchool(spell_list skill, int num);
 bool SpellAiCondition(spell_list skill, const monster *mon); //인공지능이 마법을 쓰는 추가 조건(true가 사용가능 false가 사용불가)
@@ -181,6 +183,7 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_ = -1);
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
+bool CheckDangerSpell(int danger_);
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
 void SpellUse();

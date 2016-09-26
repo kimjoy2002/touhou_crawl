@@ -2848,6 +2848,12 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 	char sp_char='a';
 	for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
 	{
+
+		int miscast_level_ = SpellMiscastingLevel(SpellLevel((spell_list)it->second), 100-you.GetSpellSuccess((spell_list)it->second));
+		D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
+			(miscast_level_==2?CL_small_danger:
+			(miscast_level_==1?CL_warning:CL_STAT)));
+
 		char temp[500];
 		int i = 0;
 		i += sprintf_s(temp,500,"       %c      - %s",sp_char,SpellString((spell_list)it->second));
@@ -2867,7 +2873,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 		for(;i<600/7;i++)
 			temp[i] = ' ';
 		i += sprintf_s(temp+i,500-i,"%d",SpellLevel((spell_list)it->second));
-		printsub(temp,true,you.CanMemorizeSpell(it->second)?CL_STAT:CL_bad);
+		printsub(temp,true,you.CanMemorizeSpell(it->second)?spell_color_:CL_bad);
 		if(sp_char=='z')
 			sp_char = 'A';
 		else if(sp_char=='Z')

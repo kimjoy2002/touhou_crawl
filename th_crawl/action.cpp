@@ -2807,7 +2807,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 	}
 	for(int i=0;i<1;i++)
 		printsub("",true,CL_STAT); 
-	printsub("       단축키 - 이름               학파                          성공률              레벨",true,CL_STAT);
+	printsub("       단축키 - 이름               학파                          실패율              레벨",true,CL_STAT);
 	set<int> set_skill;
 	multimap<int,int> map_skill;
 
@@ -2844,7 +2844,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 		}
 	}
 	for (set<int>::iterator it=set_skill.begin();it!=set_skill.end();it++) 
-		map_skill.insert(pair<int,int>(-you.GetSpellSuccess((*it)),(*it)));
+		map_skill.insert(pair<int,int>(100-you.GetSpellSuccess((*it)),(*it)));
 
 	char sp_char='a';
 	for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
@@ -2864,7 +2864,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 		}
 		for(;i<450/7;i++)
 			temp[i] = ' ';
-		i += sprintf_s(temp+i,500-i,"%3d%%",-it->first);
+		i += sprintf_s(temp+i,500-i,"%3d%%",it->first);
 		for(;i<600/7;i++)
 			temp[i] = ' ';
 		i += sprintf_s(temp+i,500-i,"%d",SpellLevel((spell_list)it->second));

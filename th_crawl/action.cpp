@@ -1195,7 +1195,7 @@ bool warning(dungeon_tile_type type, bool down)
 						return true;
 					case 'N':
 					default:
-						printlog(" 좋은 선택이야!",true,false,false,CL_help);
+						printlog(" OK!",true,false,false,CL_help);
 						return false;
 					}
 				}

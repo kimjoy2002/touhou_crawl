@@ -332,6 +332,64 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	
 }
 
+bool environment::magicmapping(int x_, int y_)
+{
+	if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
+		return false;
+	if(isBamboo())
+		return false;
+
+		
+	switch(dgtile[x_][y_].tile)
+	{								
+	case DG_TEMPLE_STAIR:									
+		map_list.dungeon_enter[TEMPLE].detected = true;
+		break;
+	case DG_MISTY_LAKE_STAIR:									
+		map_list.dungeon_enter[MISTY_LAKE].detected = true;
+		break;
+	case DG_YOUKAI_MOUNTAIN_STAIR:	
+		map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
+		break;
+	case DG_SCARLET_STAIR:	
+		map_list.dungeon_enter[SCARLET_M].detected = true;		
+		break;				
+	case DG_SCARLET_L_STAIR:
+		map_list.dungeon_enter[SCARLET_L].detected = true;		
+		break;				
+	case DG_SCARLET_U_STAIR:
+		map_list.dungeon_enter[SCARLET_U].detected = true;		
+		break;				
+	case DG_BAMBOO_STAIR:
+		map_list.dungeon_enter[BAMBOO].detected = true;		
+		break;				
+	case DG_EIENTEI_STAIR:	
+		break;				
+	case DG_SUBTERRANEAN_STAIR:
+		map_list.dungeon_enter[SUBTERRANEAN].detected = true;		
+		break;
+	case DG_YUKKURI_STAIR:
+		map_list.dungeon_enter[YUKKURI_D].detected = true;		
+		break;
+	case DG_DEPTH_STAIR:
+		map_list.dungeon_enter[DEPTH].detected = true;		
+		break;
+	case DG_DREAM_STAIR:
+		map_list.dungeon_enter[DREAM_D].detected = true;		
+		break;
+	case DG_MOON_STAIR:				
+		break;
+	case DG_PANDEMONIUM_STAIR:
+		map_list.dungeon_enter[PANDEMONIUM].detected = true;		
+		break;	
+	case DG_HAKUREI_STAIR:
+		map_list.dungeon_enter[HAKUREI_D].detected = true;		
+		break;
+	}
+
+	dgtile[x_][y_].flag = dgtile[x_][y_].flag | FLAG_MAPPING;
+	return true;
+}
 
 int environment::isStair(int x_, int y_)
 {

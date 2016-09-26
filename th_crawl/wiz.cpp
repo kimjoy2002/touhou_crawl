@@ -64,7 +64,7 @@ void wiz_mode()
 		case 'D': //¸Ê¹àÈ÷±â
 			for(int i = 0;i<DG_MAX_X;i++)
 				for(int j = 0;j<DG_MAX_Y;j++)
-					env[current_level].dgtile[i][j].flag = env[current_level].dgtile[i][j].flag | FLAG_MAPPING;
+					env[current_level].magicmapping(i,j);
 			break;
 		case 'f': //¿¬±â
 			//for(int i = -1;i<2;i++)

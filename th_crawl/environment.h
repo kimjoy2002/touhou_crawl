@@ -166,15 +166,7 @@ public:
 	}
 	int isStair(int x_, int y_); //실제 계단번지수에 +1을해서 리턴함(※올라가는 계단은 마이너스곱함)
 
-	bool magicmapping(int x_, int y_)
-	{
-		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
-			return false;
-		if(isBamboo())
-			return false;
-		dgtile[x_][y_].flag = dgtile[x_][y_].flag | FLAG_MAPPING;
-		return true;
-	}
+	bool magicmapping(int x_, int y_);
 	bool OpenDoor(int x_,int y_)
 	{
 		if(dgtile[x_][y_].isCloseDoor())

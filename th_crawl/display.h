@@ -83,6 +83,7 @@ public:
 	void item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
+	void start_spellview(char* message_);
 	void start_itemview(item_view_type type, char* message_);
 };
 
@@ -108,6 +109,7 @@ void SetSpellSight(int sight, int sight_type_);
 void SetDisplayTexture(textures *texture_);
 
 void view_item(item_view_type type, char* message_ = "무슨 아이템을 고르겠습니까?");
+void view_spell(char* message_);
 void CheckKey(char key_, int num_ = 0);
 void AllCheckKey();
 #endif // __DISPLAY_H__

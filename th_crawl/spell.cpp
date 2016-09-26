@@ -1293,8 +1293,10 @@ void SpellUse()
 			return;
 		}
 		bool blood_ = false;
+		bool use_ = true;
 		int i=0;
-		changedisplay(DT_SPELL);
+		view_spell("사용할 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+		//changedisplay(DT_SPELL);
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -1303,33 +1305,101 @@ void SpellUse()
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
 				if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
 				{
-					if(SpellLevel(spell_)>you.mp)
+					if(use_)
 					{
-						if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.hp)
+						if(SpellLevel(spell_)>you.mp)
 						{
-							printlog("당신은 피를 대가로 마법을 영창했다!",true,false,false,CL_danger);	
-							blood_ = true;
+							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.hp)
+							{
+								printlog("당신은 피를 대가로 마법을 영창했다!",true,false,false,CL_danger);	
+								blood_ = true;
+							}
+							else
+							{
+								printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
+								break;
+							}
 						}
-						else
+						if(SpellFlagCheck(spell_, S_FLAG_DIREC))
 						{
-							printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
+							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
+							changedisplay(DT_GAME);
+							coord_def target_;
+							if(Direc_Throw(&target_))
+							{
+								if(PlayerUseSpell(spell_, false, target_))
+								{	
+									GodAccpect_UseSpell(spell_);
+									if(blood_)
+										you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
+									else
+										you.MpUpDown(-SpellLevel(spell_));									
+									you.doingActionDump(DACT_SPELL, SpellString(spell_));
+									//you.SkillTraining(SKT_SPELLCASTING,5);		
+									//if(SpellSchool(spell_,0)!=SKT_ERROR)		
+									//	you.SkillTraining(SpellSchool(spell_,0),2);
+									//if(SpellSchool(spell_,1)!=SKT_ERROR)
+									//	you.SkillTraining(SpellSchool(spell_,1),2);
+									//if(SpellSchool(spell_,2)!=SKT_ERROR)
+									//	you.SkillTraining(SpellSchool(spell_,2),2);
+									//you.HungerApply(-you.GetSpellHungry(spell_));
+									you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
+									you.SetBattleCount(30);
+									if(!silence_)
+										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
+									you.TurnEnd();
+								}
+							}
 							break;
+
 						}
-					}
-					if(SpellFlagCheck(spell_, S_FLAG_DIREC))
-					{
-						SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
-						changedisplay(DT_GAME);
-						coord_def target_;
-						if(Direc_Throw(&target_))
+						else if(!SpellFlagCheck(spell_, S_FLAG_IMMEDIATELY))
 						{
-							if(PlayerUseSpell(spell_, false, target_))
-							{	
+							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
+							changedisplay(DT_GAME);
+							beam_iterator beam(you.position,you.position);
+							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
+							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_)))
+							{
+								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
+								if(unit_)
+									you.youAttack(unit_);
+								if(PlayerUseSpell(spell_, short_==2, you.search_pos))
+								{		
+									GodAccpect_UseSpell(spell_);
+									if(blood_)
+										you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
+									else
+										you.MpUpDown(-SpellLevel(spell_));	
+									you.doingActionDump(DACT_SPELL, SpellString(spell_));
+	/*								you.SkillTraining(SKT_SPELLCASTING,5);	*/	
+									//if(SpellSchool(spell_,0)!=SKT_ERROR)		
+									//	you.SkillTraining(SpellSchool(spell_,0),2);
+									//if(SpellSchool(spell_,1)!=SKT_ERROR)
+									//	you.SkillTraining(SpellSchool(spell_,1),2);
+									//if(SpellSchool(spell_,2)!=SKT_ERROR)
+									//	you.SkillTraining(SpellSchool(spell_,2),2);
+									//you.HungerApply(-you.GetSpellHungry(spell_));
+									you.SetBattleCount(30);
+									you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
+									if(!silence_)
+										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
+									you.TurnEnd();
+								}
+							}
+							SetSpellSight(0,0);
+							break;
+						}			
+						else if(SpellFlagCheck(spell_, S_FLAG_IMMEDIATELY))
+						{
+							changedisplay(DT_GAME);
+							if(PlayerUseSpell(spell_, false, you.position))
+							{
 								GodAccpect_UseSpell(spell_);
 								if(blood_)
 									you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
 								else
-									you.MpUpDown(-SpellLevel(spell_));									
+									you.MpUpDown(-SpellLevel(spell_));	
 								you.doingActionDump(DACT_SPELL, SpellString(spell_));
 								//you.SkillTraining(SKT_SPELLCASTING,5);		
 								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
@@ -1339,80 +1409,43 @@ void SpellUse()
 								//if(SpellSchool(spell_,2)!=SKT_ERROR)
 								//	you.SkillTraining(SpellSchool(spell_,2),2);
 								//you.HungerApply(-you.GetSpellHungry(spell_));
-								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
 								you.SetBattleCount(30);
-								if(!silence_)
+								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
+								if(!silence_)	
 									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 								you.TurnEnd();
-							}
+							}		
+							break;
 						}
-						break;
+					}
+					else
+					{
+						int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
+						if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+						{
+							WaitForSingleObject(mutx, INFINITE);
+							SetText() = GetSpellInfor((spell_list)spell_);
+							ReleaseMutex(mutx);
+							changedisplay(DT_TEXT);
+							waitkeyinput();
 
-					}
-					else if(!SpellFlagCheck(spell_, S_FLAG_IMMEDIATELY))
-					{
-						SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
-						changedisplay(DT_GAME);
-						beam_iterator beam(you.position,you.position);
-						projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
-						if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_)))
-						{
-							unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
-							if(unit_)
-								you.youAttack(unit_);
-							if(PlayerUseSpell(spell_, short_==2, you.search_pos))
-							{		
-								GodAccpect_UseSpell(spell_);
-								if(blood_)
-									you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
-								else
-									you.MpUpDown(-SpellLevel(spell_));	
-								you.doingActionDump(DACT_SPELL, SpellString(spell_));
-/*								you.SkillTraining(SKT_SPELLCASTING,5);	*/	
-								//if(SpellSchool(spell_,0)!=SKT_ERROR)		
-								//	you.SkillTraining(SpellSchool(spell_,0),2);
-								//if(SpellSchool(spell_,1)!=SKT_ERROR)
-								//	you.SkillTraining(SpellSchool(spell_,1),2);
-								//if(SpellSchool(spell_,2)!=SKT_ERROR)
-								//	you.SkillTraining(SpellSchool(spell_,2),2);
-								//you.HungerApply(-you.GetSpellHungry(spell_));
-								you.SetBattleCount(30);
-								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
-								if(!silence_)
-									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
-								you.TurnEnd();
-							}
+							view_spell("설명을 볼 마법을 선택하세요. ( ?키로 마법을 사용 )");
+							//changedisplay(DT_SPELL);
 						}
-						SetSpellSight(0,0);
-						break;
-					}			
-					else if(SpellFlagCheck(spell_, S_FLAG_IMMEDIATELY))
-					{
-						changedisplay(DT_GAME);
-						if(PlayerUseSpell(spell_, false, you.position))
-						{
-							GodAccpect_UseSpell(spell_);
-							if(blood_)
-								you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
-							else
-								you.MpUpDown(-SpellLevel(spell_));	
-							you.doingActionDump(DACT_SPELL, SpellString(spell_));
-							//you.SkillTraining(SKT_SPELLCASTING,5);		
-							//if(SpellSchool(spell_,0)!=SKT_ERROR)		
-							//	you.SkillTraining(SpellSchool(spell_,0),2);
-							//if(SpellSchool(spell_,1)!=SKT_ERROR)
-							//	you.SkillTraining(SpellSchool(spell_,1),2);
-							//if(SpellSchool(spell_,2)!=SKT_ERROR)
-							//	you.SkillTraining(SpellSchool(spell_,2),2);
-							//you.HungerApply(-you.GetSpellHungry(spell_));
-							you.SetBattleCount(30);
-							you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
-							if(!silence_)	
-								Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
-							you.TurnEnd();
-						}		
-						break;
 					}
+				}
+			}
+			else if(key_ == '?')
+			{
+				if(use_)
+				{
+					view_spell("설명을 볼 마법을 선택하세요. ( ?키로 마법을 사용 )");
+					use_ = false;
+				}
+				else
+				{					
+					view_spell("사용할 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+					use_ = true;
 				}
 			}
 			else if(key_ == VK_ESCAPE)
@@ -1433,7 +1466,9 @@ void SpellView()
 	if(you.currentSpellNum)
 	{
 		int i=0;
-		changedisplay(DT_SPELL);
+		
+		view_spell("설명을 볼 마법을 선택하세요.");
+		//changedisplay(DT_SPELL);
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -1447,7 +1482,9 @@ void SpellView()
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();
-					changedisplay(DT_SPELL);
+
+					view_spell("설명을 볼 마법을 선택하세요.");
+					//changedisplay(DT_SPELL);
 				}
 			}
 			else if(key_ == VK_ESCAPE)

@@ -147,6 +147,11 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	RECT rc={50, 50, WindowWidth, WindowHeight};
 	char temp[100];
 	char sp_char = (i<27)?('a'+i):('A'+i-27);
+	
+	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
+	rc.top += fontDesc.Height*2;
+
+
 	pfont->DrawTextA(pSprite,"단축키 - 이름", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
 	pfont->DrawTextA(pSprite,"학파", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -1891,7 +1896,14 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-
+void display_manager::start_spellview(char* message_)
+{
+	WaitForSingleObject(mutx, INFINITE);
+	state = DT_SPELL;
+	move = 0;
+	item_view_message = message_;
+	ReleaseMutex(mutx);
+}
 
 
 void display_manager::start_itemview(item_view_type type, char* message_)
@@ -1952,6 +1964,10 @@ int GetDisplayMove()
 void view_item(item_view_type type, char* message_)
 {
 	DisplayManager.start_itemview(type, message_);
+}
+void view_spell(char* message_)
+{
+	DisplayManager.start_spellview(message_);
 }
 
 void CheckKey(char key_, int num_)

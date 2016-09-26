@@ -858,7 +858,8 @@ bool amnesia_scroll(bool pre_iden_)
 	if(you.currentSpellNum)
 	{
 		int i=0;
-		changedisplay(DT_SPELL);
+		view_spell("잊을 마법을 선택하세요. ( ?키로 설명을 볼 수 있다. )");
+		//changedisplay(DT_SPELL);
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -886,7 +887,8 @@ bool amnesia_scroll(bool pre_iden_)
 						}
 					case 'N':
 					default:
-						changedisplay(DT_SPELL);
+						view_spell("잊을 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+						//changedisplay(DT_SPELL);
 						break;
 					}
 				}

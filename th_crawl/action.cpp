@@ -1177,6 +1177,30 @@ bool warning(dungeon_tile_type type, bool down)
 				}
 			}
 		}
+		//break; 없음 판데모니엄도 이어짐
+	case DG_RETURN_STAIR:
+		if(current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
+		{
+			
+			if((type == DG_PANDEMONIUM_STAIR && down ) || (type == DG_RETURN_STAIR && !down ) )
+			{
+				if(!you.rune[RUNE_PANDEMONIUM_ICE + current_level - PANDEMONIUM_LEVEL - 1])
+				{
+					printlog("여기서 빠져나가면 이 층의 룬은 다신 얻을 수 없다. 정말로 나갈거야?(Y/N)",false,false,false,CL_danger);
+					switch(waitkeyinput())
+					{
+					case 'Y':
+					case 'y':
+						enterlog();
+						return true;
+					case 'N':
+					default:
+						printlog(" 좋은 선택이야!",true,false,false,CL_help);
+						return false;
+					}
+				}
+			}
+		}
 		break;
 	case DG_DREAM_STAIR:
 		if(down)
@@ -1194,31 +1218,6 @@ bool warning(dungeon_tile_type type, bool down)
 				return false;
 			}
 		}
-		break;
-	case DG_SUBTERRANEAN_STAIR:
-		//if(down)
-		//{
-		//	printlog("아직 지저의 문은 열리지 않았다... ",false,false,false,CL_normal);
-		//	switch(randA(4))
-		//	{
-		//	case 0:
-		//	printlog("미구현으로 보인다.",true,false,false,CL_normal);
-		//	break;
-		//	case 1:
-		//	printlog("제작자의 게으름으로 보인다.",true,false,false,CL_normal);
-		//	break;
-		//	case 2:
-		//	printlog("여긴 포기하는게 좋겠군.",true,false,false,CL_normal);
-		//	break;
-		//	case 3:
-		//	printlog("제작자는 근성이 없군.",true,false,false,CL_normal);
-		//	break;
-		//	case 4:
-		//	printlog("언젠간 추가될거야.",true,false,false,CL_normal);
-		//	break;
-		//	}
-		//	return false;
-		//}
 		break;
 	case DG_HAKUREI_STAIR:
 		if(down)

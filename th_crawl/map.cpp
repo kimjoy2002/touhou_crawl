@@ -281,6 +281,7 @@ void map_algorithms(int num)
 		}
 		else if(num == PANDEMONIUM_LEVEL)
 		{
+			env[num].AllySafeClear(map_list.dungeon_enter[PANDEMONIUM].floor, map_list.dungeon_enter[PANDEMONIUM].pos);
 			env[num].ClearFloor();
 			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
 		}

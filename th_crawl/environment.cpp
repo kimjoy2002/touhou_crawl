@@ -606,6 +606,31 @@ void environment::ClearEvent()
 {
 	event_list.clear();
 }
+void environment::AllySafeClear(int new_floor_, coord_def pos_)
+{
+	if(new_floor_ == floor)
+		return;
+	if(you.god == GT_YUYUKO)
+	{ //망령이 존재하는가 확인
+		for(auto it = mon_vector.begin();it != mon_vector.end();it++)
+		{
+			if(it->isLive() && (*it).isUserAlly() && it->map_id == you.god_value[GT_YUYUKO][0])
+			{//망령이 있으면 new_floor_로 돌려보낸다.
+				rand_rect_iterator rect_(pos_,2,2);				
+				while(!rect_.end())
+				{
+					if(env[new_floor_].movingfloor((*rect_), floor, &(*it)))
+						break;
+					rect_++;
+				}
+
+			}
+
+
+		}
+
+	}
+}
 void environment::ClearFloor()
 {
 	for(int x = 0; x<DG_MAX_X; x++)
@@ -646,9 +671,9 @@ void environment::ClearFloor()
 }
 monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* mon_)
 {
-	if(env[current_level].isMove(c.x,c.y,mon_->isFly(),mon_->isSwim()) && !env[current_level].isMonsterPos(c.x,c.y) && you.position != c)
+	if(isMove(c.x,c.y,mon_->isFly(),mon_->isSwim()) && !isMonsterPos(c.x,c.y) && you.position != c)
 	{
-		if(monster* temp = env[current_level].AddMonster(mon_, c))
+		if(monster* temp = AddMonster(mon_, c))
 		{/*
 			if(temp->s_silence)
 				env[current_level].MakeSilence(temp->position, temp->s_silence_range, true);*/
@@ -657,7 +682,7 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 			if(temp->id == MON_ENSLAVE_GHOST && you.god == GT_YUYUKO)
 			{	
 				you.god_value[GT_YUYUKO][0] = temp->map_id;
-				you.god_value[GT_YUYUKO][1] = current_level;
+				you.god_value[GT_YUYUKO][1] = floor;
 			}
 			mon_->hp = 0;
 			env[prev_floor_].SummonClear(mon_->map_id);

@@ -1398,6 +1398,59 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	return return_;
 }
 
+bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
+{
+	if(num_<=0)
+		return false;
+
+	if(state.GetState() == MS_ATACK)
+	{//공격상태이면서
+		if(target)
+		{//타겟이 정해져있고
+			if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))<=1)
+			{//타겟과 거리가 1칸미만일때
+				rand_rect_iterator new_pos_(target->position,1,1,true);
+
+				while(!new_pos_.end())
+				{
+					if(max(abs(position.x - new_pos_->x),abs(position.y -  new_pos_->y))<=1)
+					{//움직일수있는 위치
+						if(env[current_level].isMove(new_pos_->x, new_pos_->y, isFly(), isSwim(),flag & M_FLAG_CANT_GROUND))
+						{ //이동할수있는 위치다.				
+							unit *unit_ = env[current_level].isMonsterPos(new_pos_->x, new_pos_->y);
+							if(unit_)
+							{//비킬 수 있는 유닛인지
+								if(unit_ != this && !unit_->isplayer() && ((monster*)unit_)->isAllyMonster(this))
+								{
+									if(!((monster*)unit_)->smartmove(x_mov,y_mov, num_-1)){ //비키지 못함
+										
+										new_pos_++;
+										continue;
+									}
+								}
+								else
+								{
+									new_pos_++;
+									continue;
+								}
+							}
+
+							//움직일 수 있으면 움직인다.
+							SetXY(coord_def(new_pos_->x,new_pos_->y));
+							time_delay+=GetSpeed();
+							return true;
+						}
+
+					}
+					new_pos_++;
+				}
+			}
+
+		}
+	}
+	return false;
+}
+
 int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 {	
 	if(!x_mov && !y_mov)
@@ -1486,11 +1539,15 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 				else
 				{
-					if((*it).isAllyMonster(this))
+					if((*it).isAllyMonster(this) && randA(4) == 0)
 					{
-						return 0;
+						if(!(*it).smartmove(x_mov, y_mov, 2))
+						{
+							return 0;
+						}
 					}
-					return 0;
+					else
+						return 0;
 				}
 			}
 		}

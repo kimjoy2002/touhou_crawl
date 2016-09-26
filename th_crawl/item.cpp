@@ -422,6 +422,12 @@ const D3DCOLOR item::item_color()
 		{
 			int color_ = isGoodScroll((scroll_type)value1);
 			return_ = (color_ == 3)?CL_magic:((color_ == 2)?CL_warning:((color_ == 1)?CL_help:((color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:(CL_STAT)))));
+			
+			if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
+			{
+				return_ = CL_danger;
+			}
+		
 		}
 		break;
 	case ITM_RING:
@@ -723,7 +729,11 @@ bool item::isautopick()
 	case ITM_SCROLL:
 		if(iden_list.scroll_list[value1].iden == 3)
 		{	
-			if(isGoodScroll((scroll_type)value1)>0)
+			if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
+			{
+				return false;
+			}
+			else if(isGoodScroll((scroll_type)value1)>0)
 			{
 				return true;
 			}

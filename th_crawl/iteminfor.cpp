@@ -367,7 +367,7 @@ string GetItemInfor(item *it)
 					text_ += "힘 지능 민첩중 무작위 능력치가 일시적으로 감소된다. 시간이 지나면 되돌아 온다.\n";
 					break;
 				case PT_RECOVER_STAT:
-					text_ += "마시면 일시적으로 잃어버린 능력치를 바로 회복시켜주는 물약.\n";
+					text_ += "마시면 일시적으로 잃어버린 능력치를 일정량 회복시켜주는 물약.\n";
 					break;
 				case PT_ALCOHOL:
 					text_ += "이것은 술이다. 마시면 취한다.\n";

@@ -108,9 +108,19 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 
-
-					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽50
+					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽60
 					textures(&texture_dungeon01, 32, 0, 64, 32, 255),//돌벽
 					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//붉은벽
 					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//책장
@@ -159,7 +169,20 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //유유코
 			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //사토리
 			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
+				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)}, //세이자				
+				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //릴리
+
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+
+
 
 								
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //벽

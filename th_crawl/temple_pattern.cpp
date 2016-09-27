@@ -14,6 +14,19 @@
 
 void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type = -1);
 
+dungeon_tile_type randomTemple()
+{
+	random_extraction<dungeon_tile_type> rand_;
+	
+	for(int i=0;i<GT_LAST;i++)
+	{
+		if(i != GT_SHIKIEIKI && i != GT_SEIJA) //세이자는 무조건 나온다.
+			rand_.push((dungeon_tile_type)i);
+	}
+	
+	return rand_.pop();
+}
+
 
 bool isGodTemple(int id_, god_type god_)
 {
@@ -217,7 +230,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			int i = 3;
 			while(i)
 			{
-				dungeon_tile_type dg_t_ = (dungeon_tile_type)(DG_TEMPLE_FIRST+randA(DG_TEMPLE_LAST-DG_TEMPLE_FIRST));
+				dungeon_tile_type dg_t_ = randomTemple();
 				auto it = find(map->sp_tile_list.begin(), map->sp_tile_list.end(),dg_t_);
 				if(it != map->sp_tile_list.end())
 					continue;

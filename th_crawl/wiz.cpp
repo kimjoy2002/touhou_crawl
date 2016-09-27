@@ -375,18 +375,18 @@ void wiz_mode()
 		case 'p':			
 			{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
-			printlog("X - 시키에이키     B - 뱌쿠렌      K - 카나코     W - 스와코     A - 미노리코",true,false,false,CL_help);
-			printlog("M - 미마           P - 신키        G - 유우기     Z - 시즈하     H - 히나 ",true,false,false,CL_help);
-			printlog("Y - 유카리         E - 에이린      U - 유유코     S - 사토리     T - 텐시",true,false,false,CL_help);
+			printlog("B - 뱌쿠렌      K - 카나코     W - 스와코     A - 미노리코",true,false,false,CL_help);
+			printlog("M - 미마       P - 신키    G - 유우기   Z - 시즈하   H - 히나    Y - 유카리 ",true,false,false,CL_help);
+			printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    J - 세이자   L - 릴리",true,false,false,CL_help);
 			printlog("어떤 신전을 만들까?",false,false,false,CL_help);
 			wiz_list.wizard_mode = true;
 			key_ = waitkeyinput();
 			switch(key_)
 			{
-				case 'x':
-				case 'X':
-					next_ = DG_TEMPLE_SHIKIEIKI;
-					break;
+				//case 'x':
+				//case 'X':
+				//	next_ = DG_TEMPLE_SHIKIEIKI;
+				//	break;
 				case 'b':
 				case 'B':
 					next_ = DG_TEMPLE_BYAKUREN;
@@ -443,6 +443,12 @@ void wiz_mode()
 				case 'T':
 					next_ = DG_TEMPLE_TENSI;
 					break;
+				case 'j':
+				case 'J':
+					case DG_TEMPLE_SEIJA:
+				case 'L':
+				case 'l':
+					case DG_TEMPLE_LILLY:
 				default:
 					printlog(" 취소",true,false,false,CL_help);
 					return;

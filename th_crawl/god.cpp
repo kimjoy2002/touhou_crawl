@@ -61,6 +61,10 @@ const char* GetGodString(god_type god)
 		return "사토리";
 	case GT_TENSI:
 		return "텐시";
+	case GT_SEIJA:
+		return "세이자";
+	case GT_LILLY:
+		return "릴리";
 	}
 	return "모름";
 }
@@ -101,6 +105,10 @@ bool GetGodString_is(god_type god)
 	case GT_SATORI:
 		return false;
 	case GT_TENSI:
+		return false;
+	case GT_SEIJA:
+		return false;
+	case GT_LILLY:
 		return false;
 	}
 	return true;
@@ -710,6 +718,10 @@ bool GetGodAbility(int level, bool plus)
 		return false;
 	case GT_TENSI:
 		return false;
+	case GT_SEIJA:
+		return false;
+	case GT_LILLY:
+		return false;
 	}
 	return false;
 }
@@ -993,6 +1005,10 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		return false;
 	case GT_TENSI:
 		return false;
+	case GT_SEIJA:
+		return false;
+	case GT_LILLY:
+		return false;
 	}
 	return false;
 }
@@ -1038,6 +1054,8 @@ bool GodAccpect_GetPitem()
 	case GT_SATORI:
 	case GT_BYAKUREN:
 	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
 		return false;
 	}
 	return false;
@@ -1105,6 +1123,8 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_SATORI:
 	case GT_BYAKUREN:
 	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
 		return false;
 	}
 	return false;
@@ -1141,6 +1161,9 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_SATORI:
 	case GT_BYAKUREN:
 	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
+		return false;
 		return false;
 	}
 	return false;
@@ -1172,6 +1195,8 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	case GT_YUYUKO:
 	case GT_SATORI:
 	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
 		return false;
 	}
 	return false;
@@ -1217,6 +1242,9 @@ bool GodAccpect_Explore_100()
 			you.GiftCount(1);
 		}
 		return false;
+	case GT_SEIJA:
+	case GT_LILLY:
+		return false;
 	}
 	return false;
 }
@@ -1253,6 +1281,9 @@ bool GodAccpect_First_contact()
 				you.GiftCount(2);
 			}
 		}
+		return false;
+	case GT_SEIJA:
+	case GT_LILLY:
 		return false;
 	}
 	return false;
@@ -1469,6 +1500,9 @@ bool GodAccpect_turn(int turn)
 				you.GiftCount(1);
 			}
 		}
+		return false;
+	case GT_SEIJA:
+	case GT_LILLY:
 		return false;
 	}
 	return false;
@@ -1773,6 +1807,28 @@ void GodInfor(god_type god)
 		printsub("그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.",true,CL_normal);
 		printsub("그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.",true,CL_normal);
 		printsub("마법스킬들에 경험치를 투자하는 것으로 신앙심을 벌 수 있다.",true,CL_normal);
+		printsub("",true,CL_normal);
+		break;
+	case GT_SEIJA:
+		printsub("키진 세이자 - 역습의 아마노자쿠",true,CL_seija);
+		printsub("",true,CL_normal);
+		printsub("세이자는 공개수배되어있는 아마노쟈쿠로 다양한 물건들을 들고 도망중이다.",true,CL_seija);
+		printsub("세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.",true,CL_seija);
+		printsub("현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.",true,CL_seija);
+		printsub("그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고",true,CL_seija);
+		printsub("그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.",true,CL_seija);
+		printsub("그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.",true,CL_seija);
+		printsub("",true,CL_normal);
+		break;
+	case GT_LILLY:
+		printsub("릴리 화이트 - 봄을 나르는 요정",true,CL_lilly);
+		printsub("",true,CL_lilly);
+		printsub("릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.",true,CL_lilly);
+		printsub("그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.",true,CL_lilly);
+		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_lilly);
+		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_lilly);
+		printsub("릴리 화이트는 무슨 이유에서인지 스펠카드를 쓰는 것을 증오하므로 믿게되면 스펠카드를 쓸 수 없게 된다.",true,CL_lilly);
+		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_lilly);
 		printsub("",true,CL_normal);
 		break;
 	default:
@@ -2205,6 +2261,10 @@ void God_show()
 			printsub("",true,CL_normal);
 		}
 		break;
+	case GT_SEIJA:
+		break;
+	case GT_LILLY:
+		break;
 	}
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);
@@ -2284,6 +2344,10 @@ bool God_pray(const list<item>::iterator it)
 	case GT_SATORI:
 		break;
 	case GT_TENSI:
+		break;
+	case GT_SEIJA:
+		break;
+	case GT_LILLY:
 		break;
 	}
 	return false;		
@@ -2872,6 +2936,10 @@ bool god_punish(god_type god)
 		break;
 	case GT_TENSI:
 		tensi_action();
+		break;
+	case GT_SEIJA:
+		break;
+	case GT_LILLY:
 		break;
 	}
 	return false;		

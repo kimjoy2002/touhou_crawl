@@ -114,12 +114,16 @@ void initMap()
 	map_list.bamboo_tewi = false;
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
-		dq.push_back(i);
+	{
+		if(i != GT_SHIKIEIKI && i != GT_SEIJA) //세이자는 무조건 나온다.
+			dq.push_back(i);
+	}
 	rand_shuffle(dq.begin(),dq.end());
 	for(int i=0;i<GT_LAST-map_list.god_num;i++)
 	{
 		map_list.temple[dq[i]].set(false,0,0,rand_int(1,5));
 	}
+	map_list.temple[GT_SEIJA].set(false,0,0,rand_int(1,5));
 	//map_list.temple[GT_SUWAKO].set(false,0,0,0);
 }
 

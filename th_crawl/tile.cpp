@@ -65,6 +65,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_TEMPLE_YUYUKO:
 	case DG_TEMPLE_SATORI:
 	case DG_TEMPLE_TENSI:
+	case DG_TEMPLE_SEIJA:
+	case DG_TEMPLE_LILLY:
 		return DOT_TEMPLE;		
 	case DG_SEA:
 		return DOT_SEA;

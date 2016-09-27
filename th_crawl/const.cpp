@@ -151,11 +151,20 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"유유코의 요괴벚꽃 제단",
 	"사토리의 제3의눈 제단",
 	"텐시의 요석 제단",
+	"세이자의 역전 제단",	
+	"릴리의 해바라기 제단",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
+	"",
 	"",
 
 
-
-	"돌벽",//50
+	"돌벽",//60
 	"돌벽",
 	"붉은벽",
 	"책장",
@@ -219,6 +228,8 @@ const D3DCOLOR CL_yuyuko = D3DCOLOR_RGBA(255, 200, 255, 255);
 const D3DCOLOR CL_yukari = D3DCOLOR_RGBA(255, 128, 255, 255);
 const D3DCOLOR CL_swako = D3DCOLOR_RGBA(125, 200, 255, 255);
 const D3DCOLOR CL_autumn = D3DCOLOR_RGBA(255, 128, 39, 255);
+const D3DCOLOR CL_seija = D3DCOLOR_RGBA(255, 255, 255, 255);
+const D3DCOLOR CL_lilly = D3DCOLOR_RGBA(255, 255, 255, 255);
 
 
 const name_infor string_that("그것",true);

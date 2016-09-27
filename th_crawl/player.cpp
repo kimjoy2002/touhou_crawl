@@ -2901,6 +2901,8 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_YUYUKO:
 						case DG_TEMPLE_SATORI:
 						case DG_TEMPLE_TENSI:
+						case DG_TEMPLE_SEIJA:
+						case DG_TEMPLE_LILLY:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 							{								
 							case DG_TEMPLE_STAIR:									

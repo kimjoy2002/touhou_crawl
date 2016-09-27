@@ -1461,11 +1461,21 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 
 	env[num].MakeEvent(15,coord_def(DG_MAX_X/2,DG_MAX_Y/2+29),EVT_SIGHT);
 
+
+
+	random_extraction<dungeon_tile_type> temple_;
+	
+	for(int i=DG_TEMPLE_SHIKIEIKI;i<=DG_TEMPLE_LAST;i++)
+	{
+		if(i != DG_TEMPLE_SHIKIEIKI && i != DG_TEMPLE_SEIJA)
+			temple_.push((dungeon_tile_type)i);
+	}
+
 	for(int i=0; i<15; i++)
 	{
 		float x = round((float)DG_MAX_X/2+sin(i*24.0f/180.0f*D3DX_PI)*10.0f);
 		float y = round((float)DG_MAX_Y/2+cos(i*24.0f/180.0f*D3DX_PI)*-10.0f);
-		env[num].dgtile[(int)x][(int)y].tile = (dungeon_tile_type)(DG_TEMPLE_SHIKIEIKI+i);
+		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
 	}
 }
 

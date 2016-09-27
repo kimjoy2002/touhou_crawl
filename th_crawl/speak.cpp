@@ -2256,6 +2256,58 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 						return temp_speak;
 					}				
 					break;
+			case GT_SEIJA:
+					switch(randA(0))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"그 지명수배 아마노자쿠를 믿는거야? 취향 참 특이하네\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"너와 싸우면 무슨일이 생길지몰라! 저리가!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"그런 신을 믿으면서 잘도 여기까지왔네. 그 운이 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"넌 항상 신을 믿으면서 스릴 넘치겠네. 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"비상의 검은 부러워! 하지만 신을 믿고싶진 않아.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"너 머리위에 돌이 떨어지는거 안보여? 그 둔함이 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 6:
+						sprintf(temp_speak,"%s%s외쳤다. \"땅이 흔들리잖아. 그 통제불능 신에게 말해서 어떻게 좀 해보라고!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
+			case GT_LILLY:
+					switch(randA(0))
+					{
+					case 0:
+						sprintf(temp_speak,"%s%s외쳤다. \"요정들은 생각없이 사는 것 같아서 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 1:
+						sprintf(temp_speak,"%s%s외쳤다. \"너와 싸우면 무슨일이 생길지몰라! 저리가!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 2:
+						sprintf(temp_speak,"%s%s외쳤다. \"그런 신을 믿으면서 잘도 여기까지왔네. 그 운이 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 3:
+						sprintf(temp_speak,"%s%s외쳤다. \"넌 항상 신을 믿으면서 스릴 넘치겠네. 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 4:
+						sprintf(temp_speak,"%s%s외쳤다. \"비상의 검은 부러워! 하지만 신을 믿고싶진 않아.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 5:
+						sprintf(temp_speak,"%s%s외쳤다. \"너 머리위에 돌이 떨어지는거 안보여? 그 둔함이 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					case 6:
+						sprintf(temp_speak,"%s%s외쳤다. \"땅이 흔들리잖아. 그 통제불능 신에게 말해서 어떻게 좀 해보라고!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}				
+					break;
 				}
 				break;				
 			case 2:

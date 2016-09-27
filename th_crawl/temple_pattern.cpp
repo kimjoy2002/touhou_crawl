@@ -557,7 +557,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.y = rand_int(-map->size_y,map->size_y);
 						
 			map->monster_list.push_back(mapdummy_mon(MON_ONI,0,coord_def(0,-1)));
-			map->monster_list.push_back(mapdummy_mon(MON_BLUE_ONI,M_FLAG_NETURALY,coord_def(0,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_BLUE_ONI,M_FLAG_NETURALY,coord_def(0,1)));
 
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);

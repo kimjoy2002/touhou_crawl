@@ -439,6 +439,7 @@ public:
 	bool Memorize(int spell, bool immediately = false);
 	int Ability(int skill_, bool god_, bool unset_, int immediately = 0);
 	bool Belief(god_type god_, int piety_, bool speak_=true);
+	bool StepUpDownPiety(int level_);
 	bool PietyUpDown(int piety_, bool absolutely_ = false);
 	bool GiftCount(int value_);
 	bool PunishUpDown(int punish_, god_type god_ = GT_NONE, bool absolutely_ = false);

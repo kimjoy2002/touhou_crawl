@@ -19,6 +19,7 @@
 #include "swako.h"
 #include "note.h"
 #include "rand_shuffle.h"
+#include "seija.h"
 
 
 extern HANDLE mutx;
@@ -228,7 +229,6 @@ bool GetGodAbility(int level, bool plus)
 				you.god_value[GT_SUWAKO][2] = randA(SWAKO_3_LAST-1);
 				you.god_value[GT_SUWAKO][3] = randA(SWAKO_4_LAST-1);
 				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1 -2);
-				//다른 신을 믿고오면 you.god_value가 초기화될수도 있어... 어쩌지
 				you.suwako_meet = 1;
 			}
 			break;
@@ -1012,6 +1012,36 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	}
 	return false;
 }
+bool GodAccpect_Entering()
+{
+	switch(you.god)
+	{
+	case GT_MINORIKO:
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_SHIKIEIKI:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MIMA:
+	case GT_SHINKI:	
+	case GT_YUUGI:
+	case GT_SHIZUHA:
+	case GT_HINA:
+	case GT_YUKARI:
+	case GT_EIRIN:
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_BYAKUREN:
+	case GT_TENSI:
+		return false;
+	case GT_SEIJA:
+		printlog(seija_talk(GT_NONE, 0),true,false,false,CL_seija);
+		return true;
+	case GT_LILLY:
+		return false;
+	}
+	return false;
+}
 bool GodAccpect_GetPitem()
 {
 	switch(you.god)
@@ -1243,6 +1273,36 @@ bool GodAccpect_Explore_100()
 		}
 		return false;
 	case GT_SEIJA:
+	case GT_LILLY:
+		return false;
+	}
+	return false;
+}
+bool GodAccpect_Exp_get()
+{
+	switch(you.god)
+	{
+	case GT_BYAKUREN:
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_SHIKIEIKI:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MINORIKO:
+	case GT_MIMA:
+	case GT_SHINKI:
+	case GT_YUUGI:
+	case GT_SHIZUHA:
+	case GT_HINA:
+	case GT_YUKARI:
+	case GT_EIRIN:
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_TENSI:
+		return false;
+	case GT_SEIJA:
+		you.GiftCount(1);
+		return true;
 	case GT_LILLY:
 		return false;
 	}
@@ -1812,7 +1872,7 @@ void GodInfor(god_type god)
 	case GT_SEIJA:
 		printsub("키진 세이자 - 역습의 아마노자쿠",true,CL_seija);
 		printsub("",true,CL_normal);
-		printsub("세이자는 공개수배되어있는 아마노쟈쿠로 다양한 물건들을 들고 도망중이다.",true,CL_seija);
+		printsub("세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.",true,CL_seija);
 		printsub("세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.",true,CL_seija);
 		printsub("현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.",true,CL_seija);
 		printsub("그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고",true,CL_seija);

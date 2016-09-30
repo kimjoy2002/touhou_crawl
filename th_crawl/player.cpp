@@ -1592,8 +1592,8 @@ void players::ExpRecovery(int exper_)
 	if(exper_recovery<=0)
 	{//일정 경험치를 먹어서 경험치 회복이 이루어짐
 		//남은 경험치의 10% 가량을 먹을때마다 1씩
-		//초반엔 빠르게 오르므로 그 수치도 많은편(+10 상수치 플러스)
-		exper_recovery = GetNeedExp(max(level-2,0))/8+10;
+		//초반엔 빠르게 오르므로 그 수치도 많은편(+15 상수치 플러스)
+		exper_recovery = (GetNeedExp(max(level-1,0)) - GetNeedExp(max(level-2,0)))/7+15;
 
 
 		//여기부터 경험치를 먹으면 생기는 일
@@ -1639,6 +1639,7 @@ void players::ExpRecovery(int exper_)
 
 		for(int i=0;i<GT_LAST;i++)
 		{
+
 			if(punish[i].number && !punish[i].punish)
 			{
 				//god_punish((god_type)i);
@@ -1659,6 +1660,7 @@ void players::ExpRecovery(int exper_)
 				}*/
 			}
 		}
+		GodAccpect_Exp_get();
 
 	}
 }
@@ -3584,12 +3586,23 @@ int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 }
 bool players::Belief(god_type god_, int piety_, bool speak_)
 {
+
 	if(god_<GT_FIRST || god_>=GT_LAST)
 	{
 		if(speak_)
 			printlog("존재하지 않는 신입니다.",true,false,false,CL_danger);
 		return false;
 	}
+
+	
+	if(you.god_value[GT_SEIJA][0] == 1)
+	{		
+		if(speak_)
+			printlog("배신자에겐 입교란 없다!",true,false,false,CL_danger);
+		return false;
+	}
+
+
 	if(god != GT_NONE)
 	{
 		if(god == god_)
@@ -3619,6 +3632,9 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 		sprintf_s(temp,100,"%s의 신도가 되었다.",GetGodString(god));	
 		printlog(temp,true,false,false,CL_help);	
 	}
+
+
+
 	if(god == GT_SATORI)
 	{
 		if(you.punish[god].number)
@@ -3635,19 +3651,50 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 	you.punish[god].number = 0;
 	you.punish[god].punish = false;
+	
+	gift_count = GetGodGiftTime(god);
 
+	GodAccpect_Entering();
+
+
+	if(god == GT_SEIJA)
+	{
+		you.god_value[GT_SEIJA][0] = 1;
+	}
 
 
 
 	you.Ability(SKL_ABANDON_GOD,true,false);
 	GetGodAbility(0, true);
-	PietyUpDown(isTutorial()?160:piety_,true);
+	PietyUpDown((isTutorial() || god == GT_SEIJA)?160:piety_,true);
 	if(isTutorial())
 	{
 		gift_count=30;
 	}
+
+
+
 	return true;
 
+}
+bool players::StepUpDownPiety(int level_)
+{
+	while(level_)
+	{
+		int prev_ = pietyLevel(piety);
+		int next_ = prev_;
+		
+		if((prev_ == 0 && level_ < 0) || (prev_ == 6 && level_ > 0))
+			break;
+
+		while(prev_ == next_)
+		{
+			PietyUpDown(level_>0?1:-1);
+			next_ = pietyLevel(piety);
+		}
+		return true;
+	}
+	return false;
 }
 bool players::PietyUpDown(int piety_, bool absolutely_)
 {
@@ -3685,7 +3732,7 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 {
 	if(god_ == GT_NONE)
 		god_ = god;
-	punish[god_].punish = absolutely_?punish_:punish_+punish[god_].punish;
+	punish[god_].number = absolutely_?punish_:punish_+punish[god_].number;
 	char temp[100];
 	sprintf_s(temp,100,"%s의 분노를 느꼈다.",GetGodString(god_));
 	printlog(temp,true,false,false,CL_danger);

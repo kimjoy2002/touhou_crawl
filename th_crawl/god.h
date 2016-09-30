@@ -41,11 +41,13 @@ bool God_pray(const list<item>::iterator it);
 bool god_punish(god_type god);
 
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
+bool GodAccpect_Entering();
 bool GodAccpect_GetPitem();
 bool GodAccpect_HPUpDown(int value_,damage_reason reason);
 bool GodAccpect_UseSpell(spell_list spell_);
 bool GodAccpect_Practice(int value, skill_type skill_);
 bool GodAccpect_Explore_100();
+bool GodAccpect_Exp_get();
 bool GodAccpect_First_contact();
 bool GodAccpect_turn(int turn);
 

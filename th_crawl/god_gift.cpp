@@ -19,6 +19,7 @@
 #include "weapon.h"
 #include "note.h"
 #include "tensi.h"
+#include "seija.h"
 
 
 
@@ -59,6 +60,10 @@ int GetGodGiftTime(god_type god)
 		return 30;
 	case GT_EIRIN:
 		return 15;
+	case GT_SEIJA:
+		return 10;
+	case GT_LILLY:
+		return 0;
 	}
 	return 0;
 }
@@ -118,7 +123,11 @@ bool GodGift(god_type god, int piety)
 			eirin_gift();
 			return true;
 		}
-		return false; 
+		return false;
+	case GT_SEIJA:
+		return seija_gift();
+	case GT_LILLY:
+		return false;
 	}
 	return false;
 }

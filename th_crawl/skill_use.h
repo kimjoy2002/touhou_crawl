@@ -104,6 +104,7 @@ enum skill_list
 	SKL_BREATH,
 	SKL_TORMENT,
 	SKL_ABANDON_GOD,
+	SKL_SEIJA_GIFT,
 	SKL_MAX
 };
 

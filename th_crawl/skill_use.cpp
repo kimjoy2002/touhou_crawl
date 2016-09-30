@@ -30,6 +30,7 @@
 #include "god.h"
 #include "note.h"
 #include "rand_shuffle.h"
+#include "seija.h"
 
 
 extern HANDLE mutx;
@@ -1921,7 +1922,9 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	
 	
 	if(!sanae_)
-		you.punish[you.god].number=30;
+	{
+		you.PunishUpDown(30, you.god , true);
+	}
 	
 	char temp[200];
 	sprintf_s(temp,200,"%s%s 버렸다.",GetGodString(you.god),GetGodString_is(you.god)?"을":"를");
@@ -1950,7 +1953,160 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
+{
+	int loop_ = true;
+	god_type next_ = GT_NONE;
+	while(loop_)
+	{
+		printlog("세이자: 어느 신으로부터 훔친 선물을 줄까? (선택시 자세한 설명이 표시됨)",true,false,false,CL_seija);
 
+		string s_;
+		printlog("B - 뱌쿠렌     K - 카나코  W - 스와코   A - 미노리코",true,false,false,CL_help);
+		printlog("M - 미마       P - 신키    G - 유우기   Z - 시즈하  H - 히나     Y - 유카리 ",true,false,false,CL_help);
+		printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    L - 릴리",true,false,false,CL_help);
+		printlog("어떤 신의 보물을 달라고할까?",false,false,false,CL_help);
+		int key_ = waitkeyinput();
+	
+		switch(key_)
+		{
+			case 'b':
+			case 'B':
+				next_ = GT_BYAKUREN;
+				s_ = "뱌쿠렌을 선택시 무작위 마법책을 몇권 받습니다. 뱌쿠렌로부터 징벌상태가 됩니다!";
+				break;
+			case 'k':
+			case 'K':
+				next_ = GT_KANAKO;
+				s_ = "카나코를 선택시 무작위 무기를 여럿을 받습니다. 카나코로부터 징벌상태가 됩니다!";
+				break;
+			case 'w':
+			case 'W':
+				next_ = GT_SUWAKO;
+				s_ = "스와코를 선택시. 스와코로부터 징벌상태가 됩니다!";
+				break;
+			case 'a':
+			case 'A':
+				next_ = GT_MINORIKO;
+				s_ = "미노리코를 선택시 다수의 고구마를 받습니다. 미노리코로부터 징벌상태가 됩니다!";
+				break;
+			case 'm':
+			case 'M':
+				next_ = GT_MIMA;
+				s_ = "미마를 선택시 미마의 봉인서를 받습니다. 미마로부터 징벌상태가 됩니다!";
+				break;
+			case 'p':
+			case 'P':
+				next_ = GT_SHINKI;
+				s_ = "신키를 선택시 . 신키로부터 징벌상태가 됩니다!";
+				break;
+			case 'g':
+			case 'G':
+				next_ = GT_YUUGI;
+				s_ = "유우기를 선택시 무작위 방어구를 여럿 받습니다. 유우기로부터 징벌상태가 됩니다!";
+				break;
+			case 'z':
+			case 'Z':
+				next_ = GT_SHIZUHA;
+				s_ = "시즈하를 선택시 단풍브랜드의 무기를 받습니다. 시즈하로부터 징벌상태가 됩니다!";
+				break;
+			case 'h':
+			case 'H':
+				next_ = GT_HINA;
+				s_ = "히나를 선택시 무작위 장신구를 여럿 받습니다. 히나로부터 징벌상태가 됩니다!";
+				break;
+			case 'y':
+			case 'Y':
+				next_ = GT_YUKARI;
+				s_ = "유카리를 선택시 공간이동 소모품여럿을 받습니다. 유카리로부터 징벌상태가 됩니다!";
+				break;
+			case 'e':
+			case 'E':
+				next_ = GT_EIRIN;
+				s_ = "에이린을 선택시 무작위 물약 더미를 받습니다. 에이린로부터 징벌상태가 됩니다!";
+				break;
+			case 'u':
+			case 'U':
+				next_ = GT_YUYUKO;
+				s_ = "유유코를 선택시. 유유코로부터 징벌상태가 됩니다!";
+				break;
+			case 's':
+			case 'S':
+				next_ = GT_SATORI;
+				s_ = "사토리를 선택시. 사토리로부터 징벌상태가 됩니다!";
+				break;
+			case 't':
+			case 'T':
+				next_ = GT_TENSI;
+				s_ = "텐시를 선택시 무작위 아이템을 여럿 받습니다. 텐시로부터 징벌상태가 됩니다!";
+				break;
+			case 'L':
+			case 'l':
+				next_ = GT_LILLY;
+				s_ = "릴리를 선택시. 릴리로부터 징벌상태가 됩니다!";
+				break;
+			default:
+				printlog(" 마음이 변하기전에 고르는게 좋을걸?",true,false,false,CL_small_danger);
+				return false;
+		}
+		enterlog();
+
+		printlog(s_,true,false,false,CL_small_danger);
+		printlog("이 신의 보물을 요구하겠습니까? (Y/N)",true,false,false,CL_help);
+		switch(waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			loop_ = false;
+			break;
+		case 'N':
+		default:
+			loop_ = true;
+			break;
+		}
+
+	}
+
+	
+	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	
+	char temp[200];
+	sprintf_s(temp,200,"세이자에게 선물을 받았다.");
+	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+	MoreWait();
+
+	switch(next_)
+	{
+	case GT_NONE:
+	case GT_BYAKUREN:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MINORIKO:
+	case GT_MIMA:
+	case GT_SHINKI:
+	case GT_YUUGI:
+	case GT_SHIZUHA:
+	case GT_HINA:
+	case GT_YUKARI:
+	case GT_EIRIN:
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_TENSI:
+	case GT_LILLY:
+		break;
+	}
+
+	you.PunishUpDown(GetGodGiftTime(GT_SEIJA)-1,next_);
+	you.gift_count = GetGodGiftTime(GT_SEIJA);
+	
+	
+	printlog(seija_talk(next_, 7-pietyLevel(you.piety)),true,false,false,CL_seija);
+
+	you.StepUpDownPiety(-1);
+	you.Ability(SKL_SEIJA_GIFT,true,true);
+	return true;
+}
+	
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 int UseSkill(skill_list skill, bool short_, coord_def &target)
@@ -2149,6 +2305,9 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_ABANDON_GOD:
 		return skill_abandon_god(power,short_,&you, target);
+		break;
+	case SKL_SEIJA_GIFT:
+		return skill_seija_gift(power,short_,&you, target);
 		break;
 	}
 	return 0;

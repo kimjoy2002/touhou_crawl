@@ -438,7 +438,7 @@ void start_mainmenu()
 	temp += "연금술은 잘 못다루는 편이고 소환술 적성이 높다. 투명보기가 있고 P의 자연소모가 빠른 편이다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'m',4,temp,true,select_char,12);
-	m_mgr.menu_input_puls(3,VK_ESCAPE,2,"",false,NULL,0);
+	m_mgr.menu_input_puls(3,VK_ESCAPE,1,"",false,NULL,0);
 
 	
 	temp = "직업을 선택합니다.\n\n\n";

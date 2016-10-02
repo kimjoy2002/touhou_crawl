@@ -1935,7 +1935,11 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
 		GetGodAbility(level_, false);
 
-
+	
+	if(you.god == GT_SATORI)
+	{
+		you.god_value[GT_SATORI][0] = 1;
+	}
 
 
 	you.Ability(SKL_ABANDON_GOD,true,true);
@@ -1967,7 +1971,8 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    L - 릴리",true,false,false,CL_help);
 		printlog("어떤 신의 보물을 달라고할까?",false,false,false,CL_help);
 		int key_ = waitkeyinput();
-	
+
+
 		switch(key_)
 		{
 			case 'b':
@@ -1983,7 +1988,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			case 'w':
 			case 'W':
 				next_ = GT_SUWAKO;
-				s_ = "스와코를 선택시. 스와코로부터 징벌상태가 됩니다!";
+				s_ = "스와코를 선택시 스펠카드를 몇개 받습니다. 스와코로부터 징벌상태가 됩니다!";
 				break;
 			case 'a':
 			case 'A':
@@ -1998,7 +2003,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			case 'p':
 			case 'P':
 				next_ = GT_SHINKI;
-				s_ = "신키를 선택시 . 신키로부터 징벌상태가 됩니다!";
+				s_ = "신키를 선택시 영격두루마리 소량을 받습니다. 신키로부터 징벌상태가 됩니다!";
 				break;
 			case 'g':
 			case 'G':
@@ -2028,12 +2033,12 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			case 'u':
 			case 'U':
 				next_ = GT_YUYUKO;
-				s_ = "유유코를 선택시. 유유코로부터 징벌상태가 됩니다!";
+				s_ = "유유코를 선택시 무작위 발동템을 받습니다. 유유코로부터 징벌상태가 됩니다!";
 				break;
 			case 's':
 			case 'S':
 				next_ = GT_SATORI;
-				s_ = "사토리를 선택시. 사토리로부터 징벌상태가 됩니다!";
+				s_ = "사토리를 선택시 식별두루마리 여럿을 받습니다. 사토리로부터 징벌상태가 됩니다!";
 				break;
 			case 't':
 			case 'T':
@@ -2043,7 +2048,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			case 'L':
 			case 'l':
 				next_ = GT_LILLY;
-				s_ = "릴리를 선택시. 릴리로부터 징벌상태가 됩니다!";
+				s_ = "릴리를 선택시 탄막뭉치를 받습니다. 릴리로부터 징벌상태가 됩니다!";
 				break;
 			default:
 				printlog(" 마음이 변하기전에 고르는게 좋을걸?",true,false,false,CL_small_danger);
@@ -2067,6 +2072,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	}
 
+	seija_real_gift(next_);
 	
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 	
@@ -2103,7 +2109,26 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	printlog(seija_talk(next_, 7-pietyLevel(you.piety)),true,false,false,CL_seija);
 
 	you.StepUpDownPiety(-1);
+	
+	if(pietyLevel(you.piety) == 0)
+	{
+
+		printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"으로부터 ":"로부터 ","버려졌다.");
+		
+		char temp[200];
+		sprintf_s(temp,200,"%s%s 버려졌다.",GetGodString(you.god),GetGodString_is(you.god)?"으로부터":"로부터");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+	
+		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
+			GetGodAbility(level_, false);	
+
+		you.Ability(SKL_ABANDON_GOD,true,true);
+		you.god = GT_NONE;	
+
+	}
+
 	you.Ability(SKL_SEIJA_GIFT,true,true);
+
 	return true;
 }
 	

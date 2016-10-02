@@ -55,6 +55,12 @@ int satori_sight();
 
 void Pray();
 
+void minoriko_gift(bool speak_);
+void byakuren_gift(bool speak_);
+void kanako_gift(bool speak_);
+void armour_gift(bool speak_);
+void jewelry_gift(bool speak_);
+void eirin_gift(bool speak_);
 
 
 #endif // __GOD_H__

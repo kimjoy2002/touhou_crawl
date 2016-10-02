@@ -20,15 +20,14 @@
 #include "note.h"
 #include "tensi.h"
 #include "seija.h"
+#include "armour.h"
+#include "ring.h"
+
 
 
 
 extern HANDLE mutx;
 
-void minoriko_gift();
-void byakuren_gift();
-void kanako_gift();
-void eirin_gift();
 
 int GetGodGiftTime(god_type god)
 {	
@@ -78,7 +77,7 @@ bool GodGift(god_type god, int piety)
 	case GT_MINORIKO:
 		if(pietyLevel(you.piety)>=3)
 		{
-			minoriko_gift();
+			minoriko_gift(true);
 			return true;
 		}
 		return false;
@@ -104,14 +103,14 @@ bool GodGift(god_type god, int piety)
 	case GT_BYAKUREN:
 		if(pietyLevel(you.piety)>=5)
 		{
-			byakuren_gift();
+			byakuren_gift(true);
 			return true;
 		}
 		return false;
 	case GT_KANAKO:
 		if(pietyLevel(you.piety)>=5)
 		{
-			kanako_gift();
+			kanako_gift(true);
 			return true;
 		}
 		return false;
@@ -120,7 +119,7 @@ bool GodGift(god_type god, int piety)
 	case GT_EIRIN:
 		if(pietyLevel(you.piety)>=3)
 		{
-			eirin_gift();
+			eirin_gift(true);
 			return true;
 		}
 		return false;
@@ -149,20 +148,23 @@ struct compare {
 	bool operator()(const temp_class &a,const temp_class &b) const
 	{return (a.level != b.level)?a.level < b.level:a.exp<a.exp;}
 };
-void minoriko_gift()
+void minoriko_gift(bool speak_)
 {	
 	item_infor t;
 	env[current_level].MakeItem(you.position,makeitem(ITM_FOOD, 0, &t, 1));
 	
-	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
-	char temp[200];
-	sprintf_s(temp,200,"미노리코에게 선물을 받았다.");
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		char temp[200];
+		sprintf_s(temp,200,"미노리코에게 선물을 받았다.");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
-	MoreWait();
+		MoreWait();
+	}
 }
-void byakuren_gift()
+void byakuren_gift(bool speak_)
 {
 	int gift_book = -1;
 	for(int i = 0; i < 40 && gift_book == -1; i++)
@@ -190,13 +192,16 @@ void byakuren_gift()
 	item_infor t;
 	env[current_level].MakeItem(you.position,makeitem(ITM_BOOK, 0, &t, gift_book));
 	
-	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
-	char temp[200];
-	sprintf_s(temp,200,"뱌쿠렌에게 선물을 받았다.");
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		char temp[200];
+		sprintf_s(temp,200,"뱌쿠렌에게 선물을 받았다.");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
-	MoreWait();
+		MoreWait();
+	}
 }
 
 void mima_gift(book_list book_)
@@ -268,51 +273,150 @@ void satori_gift()
 
 
 
-void kanako_gift()
+void kanako_gift(bool speak_)
 {
-	int result_weapon = SKT_SHORTBLADE;
-	int total = 0;
-	int percent[SKT_SPEAR - SKT_SHORTBLADE+1];
-	for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
-	{
-		percent[i-SKT_SHORTBLADE] = you.skill[i].level+1;
-		total += percent[i-SKT_SHORTBLADE];
-	}
-
-	total = randA_1(total);
+	
+	random_extraction<int> rand_;
 
 	for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
 	{
-		if(total<=percent[i-SKT_SHORTBLADE])
-		{
-			result_weapon = i-SKT_SHORTBLADE;
-			break;
-		}
-		total -= percent[i-SKT_SHORTBLADE];
+		rand_.push(i-SKT_SHORTBLADE,you.skill[i].level+1);
 	}
 
 	item_infor t;
-	item* it = env[current_level].MakeItem(you.position,makeitem((item_type)result_weapon, 1, &t));
+	item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(rand_.pop()), 1, &t));
 	//it->value3 += rand_int(-1,6);
 	it->value4 += rand_int(-2,6);
 	if(!it->value5 && randA(2)>1)
 		it->value5 = GetNewBrand(0); //카나코는 신의 브랜드는 선물하지 않는다.
 	if(randA(3) == 0)
 		MakeArtifact(it,1);
-	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
-	char temp[200];
-	sprintf_s(temp,200,"카나코에게 선물을 받았다.");
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		char temp[200];
+		sprintf_s(temp,200,"카나코에게 선물을 받았다.");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
-	MoreWait();
+		MoreWait();
+	}
 
 }
 
 
+void armour_gift(bool speak_)
+{
+	random_extraction<int> rand_;
+	rand_.push(0,5); //아머
+	rand_.push(1,you.skill[SKT_SHIELD].level>=1?3:1); //방패
+	rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
+	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
+	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
+	rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
+	
+
+	int armour_ = rand_.pop();
+	switch(armour_)
+	{
+	case 0:
+		{
+			//회피스킬이 갑옷스킬의 2배이상이거나 갑옷이 5레벨미만
+			bool dodge_ = (you.skill[SKT_DODGE].level>you.skill[SKT_ARMOUR].level*2 || you.skill[SKT_ARMOUR].level < 5);
+			//갑옷스킬이 회피스킬의 2배이상이거나 갑옷이 15레벨이상
+			bool heavy_ = (you.skill[SKT_ARMOUR].level>you.skill[SKT_DODGE].level*2 || you.skill[SKT_ARMOUR].level >= 15);
+			random_extraction<int> rand2_;
+
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //로브
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //가죽
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //체인
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //판금
+	
+			int select_ = rand2_.pop();
+			item_infor t;
+			item* it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
+
+			//it->value4 += randA(randA(it->value1/2)); //추가 인챈트
+			if(randA(1)) //50%
+				MakeArtifact(it,1);
+		}
+		break;
+	case 1:
+		{
+			random_extraction<int> rand2_;
+
+			rand2_.push(0,you.skill[SKT_SHIELD].level<=5?5:1); //버클러
+			rand2_.push(28,you.skill[SKT_SHIELD].level>=10?5:1); //실드
+			rand2_.push(30,you.skill[SKT_SHIELD].level>=20?10:1); //카이트
+			
+			int select_ = rand2_.pop();
+			
+			item_infor t;
+			item* it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
+						
+			if(randA(1)) //50%
+				MakeArtifact(it,1);
+		}
+		break;
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+		{
+			random_extraction<int> rand2_;		
+			
+			item_infor t;
+			item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
+
+			if(randA(1)) //50%
+				MakeArtifact(it,1);
+		}
+		break;
+	}
 
 
-void eirin_gift()
+
+
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+
+		MoreWait();
+	}
+}
+
+void jewelry_gift(bool speak_)
+{
+	random_extraction<int> rand_;
+
+	for(int i = 0; i < RGT_MAX; i++)
+	{
+		if(isGoodRing((ring_type)i,1))
+		{			
+			rand_.push(i,iden_list.ring_list[i].iden == 2?1:20); //식별된것은 확률이 확 줄어듬
+		}
+	}
+	
+	item_infor t;
+	item* it = env[current_level].MakeItem(you.position,makeitem(ITM_RING, 1, &t,rand_.pop()));
+
+	if(randA(2)) //66%
+		MakeArtifact(it,1);
+
+	it->identify_curse = true;
+	it->curse = true;
+	//이 함수는 히나의 선물이기때문에 저주가 걸린다.
+
+
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+
+		MoreWait();
+	}
+}
+
+void eirin_gift(bool speak_)
 {
 	potion_type type_= goodbadpotion(randA(5)<2?-1:randA(2)>1?1:(randA(60)?2:3));
 	int num = 1;
@@ -328,11 +432,14 @@ void eirin_gift()
 	item_infor t;
 	for(int i=0;i<num;i++)
 		env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t,(int)type_));
-	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	if(speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 	
-	char temp[200];
-	sprintf_s(temp,200,"에이린에게 선물을 받았다.");
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		char temp[200];
+		sprintf_s(temp,200,"에이린에게 선물을 받았다.");
+		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
-	MoreWait();
+		MoreWait();
+	}
 }

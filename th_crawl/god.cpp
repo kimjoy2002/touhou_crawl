@@ -719,6 +719,29 @@ bool GetGodAbility(int level, bool plus)
 	case GT_TENSI:
 		return false;
 	case GT_SEIJA:
+		if(level>=1 && level<=5) //세이자 스탯 뻥
+		{			
+			you.StatUpDown(plus?2:-2,STAT_STR);
+			you.StatUpDown(plus?2:-2,STAT_INT);
+			you.StatUpDown(plus?2:-2,STAT_DEX);
+		}
+		switch(level)
+		{
+		case 3:
+			you.Ability(SKL_SEIJA_1,true,!plus);
+			if(plus)
+				printlog("당신은 위치를 뒤집을 수 있다.",true,false,false,CL_seija);
+			else
+				printlog("더 이상 위치를 뒤집을 수 없다.",true,false,false,CL_seija);
+			break;
+		case 5:
+			you.Ability(SKL_SEIJA_2,true,!plus);
+			if(plus)
+				printlog("당신은 이제 모두의 시야를 뒤집을 수 있다.",true,false,false,CL_seija);
+			else
+				printlog("더 이상 모두의 시야를 뒤집을 수 없다.",true,false,false,CL_seija);
+			break;
+		}
 		return false;
 	case GT_LILLY:
 		return false;
@@ -2322,6 +2345,21 @@ void God_show()
 		}
 		break;
 	case GT_SEIJA:
+		if(level_ >= 1 && !you.GetPunish(GT_SEIJA))
+		{ 
+			printsub("당신은 세이자로부터 스탯을 강화받고있다.                        (패시브)",true,CL_seija);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 3 && !you.GetPunish(GT_SEIJA))
+		{ 
+			printsub("원하는 상대방과 위치를 뒤집을 수 있다.                               (P)",true,CL_seija);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 5 && !you.GetPunish(GT_SEIJA))
+		{ 
+			printsub("모든 적, 아군의 시야를 뒤집을 수 있다.                               (P)",true,CL_seija);
+			printsub("",true,CL_normal);
+		}
 		break;
 	case GT_LILLY:
 		break;
@@ -2998,6 +3036,15 @@ bool god_punish(god_type god)
 		tensi_action();
 		break;
 	case GT_SEIJA:
+		{
+			god_type god_ = GT_SEIJA;
+				
+			while(god_ == GT_SEIJA || god_ == GT_SATORI)
+				god_ = (god_type)rand_int(GT_BYAKUREN,GT_LILLY);
+			printarray(true,false,false,CL_seija,3,"세이자는 당신과 ",GetGodString(god_),"의 관계를 이간질했다!");
+			
+			you.PunishUpDown(rand_int(3,4),god_);
+		}
 		break;
 	case GT_LILLY:
 		break;

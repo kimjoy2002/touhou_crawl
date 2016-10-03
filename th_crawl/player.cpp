@@ -3601,6 +3601,10 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 			printlog("배신자에겐 입교란 없다!",true,false,false,CL_danger);
 		return false;
 	}
+	if(god == GT_SEIJA && you.level >= 10)
+	{
+		printlog("세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.",true,false,false,CL_small_danger);
+	}
 
 
 	if(god != GT_NONE)

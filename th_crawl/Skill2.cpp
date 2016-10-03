@@ -40,6 +40,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_SWAKO_CURSE:
 	case SKL_SWAKO_STATUE:
 	case SKL_YUKARI_4:
+	case SKL_SEIJA_1:
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
 		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
@@ -70,6 +71,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_HINA_3:
 	case SKL_HINA_4:
 	case SKL_HINA_5:
+	case SKL_SEIJA_2:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);	
 	case SKL_SWAKO_TEMPLE:
 		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);		
@@ -130,6 +132,7 @@ int SkillLength(skill_list skill)
 	case SKL_SWAKO_STATUE:
 	case SKL_YUKARI_4:	
 	case SKL_BREATH:
+	case SKL_SEIJA_1:
 		return 8;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -174,6 +177,7 @@ int SkillLength(skill_list skill)
 	case SKL_TORMENT:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_SEIJA_2:
 	default:
 		return 0;
 	}
@@ -301,6 +305,10 @@ const char* SkillString(skill_list skill)
 		return "신을 버리기";
 	case SKL_SEIJA_GIFT:
 		return "보물 받기";
+	case SKL_SEIJA_1:
+		return "위치 뒤집기";
+	case SKL_SEIJA_2:
+		return "천하전복";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -357,6 +365,8 @@ int SkillCap(skill_list skill)
 	case SKL_HINA_4:
 	case SKL_HINA_5:
 	case SKL_BREATH:
+	case SKL_SEIJA_1:
+	case SKL_SEIJA_2:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -417,6 +427,7 @@ int SkillNoise(skill_list skill)
 	case SKL_HINA_4:
 	case SKL_JUMPING_ATTACK:
 	case SKL_BREATH:
+	case SKL_SEIJA_1:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -441,6 +452,7 @@ int SkillNoise(skill_list skill)
 	case SKL_SWAKO_DIGGING:
 	case SKL_SWAKO_RAIN:
 	case SKL_TORMENT:
+	case SKL_SEIJA_2:
 		return 12;
 	case SKL_YUUGI_5:
 		return 16;
@@ -507,6 +519,8 @@ int SkillPow(skill_list skill)
 	case SKL_TORMENT:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_SEIJA_1:
+	case SKL_SEIJA_2:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -602,6 +616,8 @@ int SkillDiffer(skill_list skill)
 	case SKL_TORMENT:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_SEIJA_1:
+	case SKL_SEIJA_2:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -671,6 +687,8 @@ int SkillMana(skill_list skill)
 	case SKL_BREATH:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_SEIJA_1:
+	case SKL_SEIJA_2:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
@@ -1113,6 +1131,26 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-100,true);
 		}
 		return true;
+	case SKL_SEIJA_1:
+		if(check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+			you.PowUpDown(-(20+randA(15)),true);
+		return true;
+	case SKL_SEIJA_2:
+		if(check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+		{
+			you.PowUpDown(-100,true);
+		}
+		return true;
 	case SKL_NONE:
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
@@ -1260,6 +1298,10 @@ const char* SkillCostString(skill_list skill)
 		return "(P 소량)";
 	case SKL_TORMENT:
 		return "(영력 6, P 대량)";
+	case SKL_SEIJA_1:
+		return "(P 약간)";
+	case SKL_SEIJA_2:
+		return "(P 대량)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

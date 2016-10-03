@@ -1940,9 +1940,12 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	{
 		you.god_value[GT_SATORI][0] = 1;
 	}
+	if(you.god == GT_SEIJA)		
+		printlog(seija_talk(GT_NONE, 7),true,false,false,CL_seija);
 
 
 	you.Ability(SKL_ABANDON_GOD,true,true);
+
 
 
 
@@ -2131,7 +2134,58 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	return true;
 }
-	
+
+bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
+{
+	if(unit* hit_mon = env[current_level].isMonsterPos(target.x,target.y,order))
+	{	
+		hit_mon->SetXY(you.position.x,you.position.y);
+		you.SetXY(target.x,target.y);
+		
+		printarray(true,false,false,CL_normal,4,"당신은 ", hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_and(true),"자리를 뒤집었다.");
+		hit_mon->AttackedTarget(order);
+		return true;
+	}
+	return false;
+}
+
+
+bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
+{
+	bool ok_ = false;
+	int enter_ = 0;
+	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if(it->isLive() && env[current_level].isInSight(it->position))
+		{
+			int offset_ = min(4,max(-4,(you.level - it->level)));
+			if(!ok_)
+				printlog("세이자는 모두의 시야를 뒤집어버렸다.",true,false,false,CL_normal);
+
+			it->SetConfuse(rand_int(20+2*offset_,5),true);
+			it->hp = max(1,it->hp*rand_float(0.3f,0.7f));
+			enter_++;
+			if(enter_==3)
+			{
+				enterlog();
+				enter_ = 0;
+			}
+			ok_ = true;
+		}
+	}
+	if(ok_)
+	{
+		return true;
+	}
+	else
+	{
+		printlog("시야내에 뒤집어버릴 상대가 없다.",true,false,false,CL_normal);
+		return false;	
+	}
+	return false;
+}
+
+
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 int UseSkill(skill_list skill, bool short_, coord_def &target)
@@ -2333,6 +2387,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_SEIJA_GIFT:
 		return skill_seija_gift(power,short_,&you, target);
+		break;
+	case SKL_SEIJA_1:
+		return skill_seija_1(power,short_,&you, target);
+		break;
+	case SKL_SEIJA_2:
+		return skill_seija_2(power,short_,&you, target);
 		break;
 	}
 	return 0;

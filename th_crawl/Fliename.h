@@ -8,7 +8,7 @@
 #ifndef  __FILENAME_H__
 #define  __FILENAME_H__
 
-#define MAX_TITLE 7
+#define MAX_TITLE 5
 
 const char imgfile_dungeon01[] = "./data/floor.png";
 

@@ -19,8 +19,8 @@ const char *imgfile_title[MAX_TITLE] =
 {
 	"./data/title.png",
 	"./data/title2.png",
-	"./data/title_0.png",
-	"./data/title_1.png",
+	//"./data/title_0.png",
+	//"./data/title_1.png",
 	"./data/title_3.png",
 	"./data/title_4.png",
 	"./data/title_5.png",

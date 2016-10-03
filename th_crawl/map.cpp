@@ -725,7 +725,7 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 	bool check_room_mask_, bool first_path_, bool make_path_, bool make_wall_, int door_percent_)
 {
 	const int divide_ = 5;
-	const int dream_count_ = 300;
+	const int dream_count_ = 200;
 	vector<map_dummy*>::iterator it=vec_map.begin();
 
 	

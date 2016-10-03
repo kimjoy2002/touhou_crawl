@@ -2075,6 +2075,15 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	}
 
+	if(you.god_value[GT_SEIJA][1] &= 1 << next_)
+	{
+		printlog("이미 한번 보물을 받았던 신이다.",true,false,false,CL_normal);
+		return false;
+	}
+
+
+
+
 	seija_real_gift(next_);
 	
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
@@ -2108,7 +2117,10 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	you.PunishUpDown(GetGodGiftTime(GT_SEIJA)-1,next_);
 	you.gift_count = GetGodGiftTime(GT_SEIJA);
 	
-	
+	//중복선물방지
+	you.god_value[GT_SEIJA][1] |= 1 << next_;  
+
+
 	printlog(seija_talk(next_, 7-pietyLevel(you.piety)),true,false,false,CL_seija);
 
 	you.StepUpDownPiety(-1);

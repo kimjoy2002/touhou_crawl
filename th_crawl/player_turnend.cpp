@@ -983,43 +983,6 @@ void GameOver()
 					else
 						printsub("클리어 축하드립니다! 그리고 플레이해주셔서 감사합니다!",true,CL_magic);
 				}
-				else
-				{
-					switch(randA(9))
-					{
-					default:
-					case 0:
-						printsub("죽음은 또 하나의 시작이다!",true,CL_magic);
-						break;
-					case 1:
-						printsub("패배는 성공의 어머니다!",true,CL_magic);
-						break;
-					case 2:
-						printsub("LOSING IS FUN!",true,CL_magic);
-						break;
-					case 3:
-						printsub("포기하지마라!",true,CL_magic);
-						break;
-					case 4:
-						printsub("지는것을 두려워하지마라!",true,CL_magic);
-						break;
-					case 5:
-						printsub("죽음에도 배울 것이 있다!",true,CL_magic);
-						break;
-					case 6:
-						printsub("실패는 성공의 과정일 뿐이다!",true,CL_magic);
-						break;
-					case 7:
-						printsub("좌절감이 사나에를 키운다!",true,CL_magic);
-						break;
-					case 8:
-						printsub("경험이 자산이다!",true,CL_magic);
-						break;
-					case 9:
-						printsub("경험은 사라지지않는다!",true,CL_magic);
-						break;
-					}
-				}
 				printsub("",true,CL_help);
 				printsub("기록은 게임의 morgue폴더에 저장되어있습니다.",true,CL_help);
 				printsub("",true,CL_help);

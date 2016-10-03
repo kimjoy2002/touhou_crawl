@@ -126,48 +126,74 @@ book_list SchoolToBook(skill_type skill_)
 	{
 	case SKT_ALCHEMY:
 		{
-			book_list list_[5] = {BOOK_BRAND_BASE,BOOK_SUB,BOOK_DEFENSE,BOOK_ENCHANT,BOOK_ALCHMIST_BASE};
-			return list_[randA(4)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_BRAND_BASE,10);
+			list_.push(BOOK_SUB,10);
+			list_.push(BOOK_DEFENSE,10);
+			list_.push(BOOK_ENCHANT,10);
+			list_.push(BOOK_ALCHMIST_BASE,10);
+			return list_.pop();
 		}
 	case SKT_MENTAL:
 		{
-			book_list list_[4] = {BOOK_STALKING,BOOK_HEX,BOOK_PSYCHOLOGIST_BASE,BOOK_DEBUF};
-			return list_[randA(3)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_STALKING,10);
+			list_.push(BOOK_HEX,10);
+			list_.push(BOOK_PSYCHOLOGIST_BASE,10);
+			list_.push(BOOK_DEBUF,3);
+			return list_.pop();
 		}
 	case SKT_CONJURE:
 		{
-			book_list list_[4] = {BOOK_FIRE_BASE,BOOK_COLD_BASE,BOOK_CLOUD,BOOK_SHOCK};
-			return list_[randA(3)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_FIRE_BASE,10);
+			list_.push(BOOK_COLD_BASE,10);
+			list_.push(BOOK_CLOUD,10);
+			list_.push(BOOK_SHOCK,10);
+			list_.push(BOOK_TEST_ANNIHILATE,2);
+			return list_.pop();
 		}
 	case SKT_FIRE:
 		{
-			book_list list_[1] = {BOOK_FIRE_BASE};
-			return list_[randA(0)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_FIRE_BASE,10);
+			return list_.pop();
 		}
 	case SKT_COLD:
 		{
-			book_list list_[2] = {BOOK_COLD_BASE,BOOK_ICE_ULTI};
-			return list_[randA(1)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_COLD_BASE,10);
+			list_.push(BOOK_ICE_ULTI,3);
+			return list_.pop();
 		}
 	case SKT_EARTH:
 		{
-			book_list list_[2] = {BOOK_EARTH_BASE,BOOK_TENSI};
-			return list_[randA(0)];			
+			random_extraction<book_list> list_;
+			list_.push(BOOK_EARTH_BASE,10);
+			list_.push(BOOK_TENSI,3);
+			return list_.pop();			
 		}
 	case SKT_AIR:
 		{
-			book_list list_[3] = {BOOK_AIR_BASE,BOOK_DEFENSE,BOOK_CLOUD};
-			return list_[randA(2)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_AIR_BASE,10);
+			list_.push(BOOK_DEFENSE,10);
+			list_.push(BOOK_CLOUD,10);
+			return list_.pop();
 		}
 	case SKT_SUMMON:
 		{
-			book_list list_[2] = {BOOK_SUMMON_BASE,BOOK_SUMMON_ULTI};
-			return list_[randA(1)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_SUMMON_BASE,10);
+			list_.push(BOOK_SUMMON_ULTI,3);
+			return list_.pop();
 		}
 	case SKT_TRANS:
 		{
-			book_list list_[2] = {BOOK_TRANSITION,BOOK_MAID_ULTI};
-			return list_[randA(1)];
+			random_extraction<book_list> list_;
+			list_.push(BOOK_TRANSITION,10);
+			list_.push(BOOK_MAID_ULTI,3);
+			return list_.pop();
 		}
 	default:
 		{

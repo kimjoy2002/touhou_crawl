@@ -108,6 +108,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	you.search_pos = you.position;
 	you.search = true;
 	bool sukima_ = (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_SUKIMA):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_SUKIMA);
+	bool other_buff_ = (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_OTHER_BUF):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_OTHER_BUF);
 	bool rect_ = (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_RECT):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_RECT);
 	bool no_target_ = (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_NO_TARGET):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_NO_TARGET);
 
@@ -147,7 +148,6 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 
 	if(!no_target_ && it2 == env[current_level].mon_vector.end())
 	{
-		
 		if(sukima_)
 		{
 			for(auto it3=env[current_level].floor_list.begin(); it3 != env[current_level].floor_list.end(); it3++)
@@ -170,7 +170,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		{
 			for(it2=env[current_level].mon_vector.begin(); it2 != env[current_level].mon_vector.end(); it2++)
 			{
-				if((*it2).isLive() && (*it2).isYourShight() && !(*it2).isUserAlly())
+				if((*it2).isLive() && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) )
 				{
 					int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);
 					if(length_<3)

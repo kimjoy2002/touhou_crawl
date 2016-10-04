@@ -2197,6 +2197,22 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
 
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
@@ -2405,6 +2421,18 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_SEIJA_2:
 		return skill_seija_2(power,short_,&you, target);
+		break;
+	case SKL_LILLY_1:
+		return skill_lilly_1(power,short_,&you, target);
+		break;
+	case SKL_LILLY_2:
+		return skill_lilly_2(power,short_,&you, target);
+		break;
+	case SKL_LILLY_3:
+		return skill_lilly_3(power,short_,&you, target);
+		break;
+	case SKL_LILLY_4:
+		return skill_lilly_4(power,short_,&you, target);
 		break;
 	}
 	return 0;

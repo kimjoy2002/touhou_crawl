@@ -277,6 +277,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, god_turn);
 	for(int i=0;i<GT_LAST;i++)
 		SaveData<int>(fp, *(god_value[i]), 5);
+	SaveData<lilly_ally>(fp, *lilly_allys, 5);	
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	
 	SaveData<int>(fp, *rune, RUNE_MAX);		
@@ -489,6 +490,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, god_turn);
 	for(int i=0;i<GT_LAST;i++)
 		LoadData<int>(fp, *(god_value[i]));
+	LoadData<lilly_ally>(fp, *lilly_allys);	
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
 	LoadData<int>(fp, *rune);		

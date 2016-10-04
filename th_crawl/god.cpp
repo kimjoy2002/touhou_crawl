@@ -744,6 +744,37 @@ bool GetGodAbility(int level, bool plus)
 		}
 		return false;
 	case GT_LILLY:
+		switch(level)
+		{
+		case 1:
+			you.Ability(SKL_LILLY_1,true,!plus);
+			if(plus)
+				printlog("당신은 이제 요정들을 동료로 권유할 수 있다.",true,false,false,CL_lilly);
+			else
+				printlog("더 이상 요정을 동료로 권유할 수 없다.",true,false,false,CL_lilly);
+			break;
+		case 2:
+			you.Ability(SKL_LILLY_2,true,!plus);
+			if(plus)
+				printlog("당신은 이제 요정들을 근처로 호출할 수 있다.",true,false,false,CL_lilly);
+			else
+				printlog("더 이상 요정을 호출할 수 없다.",true,false,false,CL_lilly);
+			break;
+		case 3:
+			you.Ability(SKL_LILLY_3,true,!plus);
+			if(plus)
+				printlog("당신은 이제 요정을 치유 할 수 있다.",true,false,false,CL_lilly);
+			else
+				printlog("더 이상 요정을 치유 할 수 없다.",true,false,false,CL_lilly);
+			break;
+		case 5:
+			you.Ability(SKL_LILLY_4,true,!plus);
+			if(plus)
+				printlog("당신은 이제 일시적으로 자신의 힘을 요정들에게 나눠줄 수 있다.",true,false,false,CL_lilly);
+			else
+				printlog("더 이상 요정대전쟁을 벌일 수 없다.",true,false,false,CL_lilly);
+			break;
+		}
 		return false;
 	}
 	return false;
@@ -2362,6 +2393,26 @@ void God_show()
 		}
 		break;
 	case GT_LILLY:
+		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
+		{ 
+			printsub("당신은 요정들을 동료로 권유할 수 있다.                            (없음)",true,CL_lilly);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 2 && !you.GetPunish(GT_LILLY))
+		{ 
+			printsub("당신은 요정들을 근처로 호출할 수 있다.                            (영력)",true,CL_lilly);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 3 && !you.GetPunish(GT_LILLY))
+		{ 
+			printsub("당신은 동료 요정을 치유할 수 있다.                             (P, 영력)",true,CL_lilly);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 5 && !you.GetPunish(GT_LILLY))
+		{ 
+			printsub("당신은 요정들에게 힘을 나눠줄 수 있다.                         (P, 영력)",true,CL_lilly);
+			printsub("",true,CL_normal);
+		}
 		break;
 	}
 	changedisplay(DT_SUB_TEXT);

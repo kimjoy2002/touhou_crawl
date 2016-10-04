@@ -81,6 +81,16 @@ struct punish_struct
 };
 
 
+struct lilly_ally
+{
+	int map_id;
+	int floor;
+	int level;
+	int exp;
+	int id;
+	
+	lilly_ally():map_id(0),floor(0),level(0),exp(0),id(0){};
+};
 
 
 
@@ -266,6 +276,7 @@ public:
 	punish_struct punish[GT_LAST];
 	int god_turn;
 	int god_value[GT_LAST][5];//이건 신에 따라 적절한 수치로 이용
+	lilly_ally lilly_allys[5]; //릴리의 동료
 	int suwako_meet; //스와코를 믿은적이 있는지
 	int half_youkai[4];//반요 변이 수치
 	int rune[RUNE_MAX];

@@ -1344,6 +1344,11 @@ bool GodAccpect_Explore_100()
 	case GT_SEIJA:
 		return false;
 	case GT_LILLY:
+		if(50>randA(100))
+		{
+			you.PietyUpDown(1);
+			return true;
+		}
 		if(5>randA(100))
 		{			
 			random_extraction<int> rand_;
@@ -1968,24 +1973,25 @@ void GodInfor(god_type god)
 	case GT_SEIJA:
 		printsub("키진 세이자 - 역습의 아마노자쿠",true,CL_seija);
 		printsub("",true,CL_normal);
-		printsub("세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.",true,CL_seija);
-		printsub("세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.",true,CL_seija);
-		printsub("현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.",true,CL_seija);
-		printsub("그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고",true,CL_seija);
-		printsub("그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.",true,CL_seija);
-		printsub("그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.",true,CL_seija);
+		printsub("세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.",true,CL_normal);
+		printsub("세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.",true,CL_normal);
+		printsub("현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.",true,CL_normal);
+		printsub("그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고",true,CL_normal);
+		printsub("그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.",true,CL_normal);
+		printsub("그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_LILLY:
 		printsub("릴리 화이트 - 봄을 나르는 요정",true,CL_lilly);
 		printsub("",true,CL_lilly);
-		printsub("릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.",true,CL_lilly);
-		printsub("그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.",true,CL_lilly);
-		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_lilly);
-		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_lilly);
-		printsub("당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. ",true,CL_lilly);
-		printsub("릴리 화이트는 무슨 이유에서인지 스펠카드를 쓰는 것을 증오하므로 믿게되면 스펠카드를 쓸 수 없게 된다.",true,CL_lilly);
-		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_lilly);
+		printsub("릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.",true,CL_normal);
+		printsub("그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.",true,CL_normal);
+		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_normal);
+		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_normal);
+		printsub("당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. ",true,CL_normal);
+		printsub("릴리 화이트는 무슨 이유에서인지 스펠카드를 쓰는 것을 증오하므로 믿게되면 스펠카드를 쓸 수 없게 된다.",true,CL_normal);
+		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_normal);
+		printsub("릴리화이트는 이 세상을 탐험하는 것을 좋아한다.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	default:

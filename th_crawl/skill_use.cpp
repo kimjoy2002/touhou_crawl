@@ -2252,7 +2252,6 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 					}
 				}
 
-				int name_ = randA(getMaxFairyName()-1);
 				int person_ = randA(FP_MAX-1);
 
 				you.lilly_allys[i].id = hit_mon->id;
@@ -2260,7 +2259,19 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				you.lilly_allys[i].floor = current_level;
 				you.lilly_allys[i].level = hit_mon->level;
 				you.lilly_allys[i].exp = hit_mon->level<=1?0:level_up_value[hit_mon->level-2];
-				you.lilly_allys[i].name = name_;
+				bool name_ok = false;
+				while(!name_ok)
+				{
+					name_ok = true;
+					you.lilly_allys[i].name = randA(getMaxFairyName()-1);
+					for(int j=0;j<5;j++)
+					{
+						if(i != j && you.god_value[GT_LILLY][j] && you.lilly_allys[i].name == you.lilly_allys[j].name) 
+						{
+							name_ok = false;
+						}
+					}
+				}
 				you.lilly_allys[i].personality = person_;
 				you.lilly_allys[i].cooldown = 0;
 				
@@ -2270,10 +2281,10 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 
 				if(!(hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
 				{
-					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"자신의 이름이 ",fairy_name[name_].name.c_str(),fairy_name[name_].name_type?"이라고 ":"라고 ","소개했다.");
+					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"자신의 이름이 ",fairy_name[you.lilly_allys[i].name].name.c_str(),fairy_name[you.lilly_allys[i].name].name_type?"이라고 ":"라고 ","소개했다.");
 		
-					hit_mon->name.name = fairy_name[name_].name;
-					hit_mon->name.name_type = fairy_name[name_].name_type;
+					hit_mon->name.name = fairy_name[you.lilly_allys[i].name].name;
+					hit_mon->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
 
 				}
 

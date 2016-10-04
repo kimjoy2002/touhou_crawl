@@ -1975,6 +1975,7 @@ void GodInfor(god_type god)
 		printsub("그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.",true,CL_lilly);
 		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_lilly);
 		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_lilly);
+		printsub("당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. ",true,CL_lilly);
 		printsub("릴리 화이트는 무슨 이유에서인지 스펠카드를 쓰는 것을 증오하므로 믿게되면 스펠카드를 쓸 수 없게 된다.",true,CL_lilly);
 		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_lilly);
 		printsub("",true,CL_normal);
@@ -2427,6 +2428,53 @@ void God_show()
 		}
 		break;
 	case GT_LILLY:
+		if(level_ >= 1 )
+		{ 
+			printsub("===당신의 동료 요정===",true,CL_lilly);
+			printsub("",true,CL_normal);
+			for(int i = 0; i < min(5,level_); i++)
+			{
+				char temp[100];
+				sprintf_s(temp,100,"%d번째 동료: ",i+1);
+				printsub(temp,false,CL_warning);
+				if(you.god_value[GT_LILLY][i])
+				{
+					int lenght_ =0;
+					if(mondata[you.lilly_allys[i].id].flag & M_FLAG_UNIQUE)
+					{
+						lenght_ = sprintf_s(temp,100,"%s ",mondata[you.lilly_allys[i].id].name.name.c_str());
+						printsub(temp,false,CL_normal);
+					}
+					else
+					{
+						lenght_ = sprintf_s(temp,100,"%s(%s) ",fairy_name[you.lilly_allys[i].name].name.c_str(),mondata[you.lilly_allys[i].id].name.name.c_str());
+						printsub(temp,false,CL_normal);
+					}
+					for(;lenght_<25;lenght_++)
+						printsub(" ",false,CL_normal);
+					lenght_ += printsub("레벨: ",false,CL_warning);
+					sprintf_s(temp,100,"%2d",you.lilly_allys[i].level);
+					lenght_ += printsub(temp,false,CL_normal);
+
+					for(;lenght_<40;lenght_++)
+						printsub(" ",false,CL_normal);
+					printsub("상태: ",false,CL_warning);
+					sprintf_s(temp,100,"%s",you.god_value[GT_LILLY][i]==1?"생존":"부활대기중");
+					printsub(temp,true,you.god_value[GT_LILLY][i]==1?CL_white_blue:CL_danger);
+				}
+				else
+				{
+					printsub("공석",true,CL_bad);
+				}
+			}
+			printsub("",true,CL_normal);
+			printsub("",true,CL_normal);
+		}
+		if(level_ >= 0 && !you.GetPunish(GT_LILLY))
+		{ 
+			printsub("요정에 경험치를 나눠주며 죽은 요정도 경험치를 먹으면 부활한다.  (패시브)",true,CL_lilly);
+			printsub("",true,CL_normal);
+		}
 		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
 		{ 
 			printsub("당신은 요정들을 동료로 권유할 수 있다.                            (없음)",true,CL_lilly);

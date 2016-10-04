@@ -1578,12 +1578,16 @@ bool players::UnidenResistUpDown(int value_, resist_type resist_)
 bool players::GetExp(int exper_, bool speak_)
 {
 	bool level_up_ = false;
-	exper += exper_;
-	skill_exper += exper_;
+
+	
 	if(you.god == GT_LILLY)
 	{
+		exper_ = max(1,exper_*0.7f);
 		GetFairyExp(max(1,exper_/2));
 	}
+
+	exper += exper_;
+	skill_exper += exper_;
 	ExpRecovery(exper_);
 	while(GetNeedExp(level-1) >=0 && GetNeedExp(level-1) <= exper)
 	{

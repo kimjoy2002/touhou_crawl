@@ -229,7 +229,7 @@ const D3DCOLOR CL_yukari = D3DCOLOR_RGBA(255, 128, 255, 255);
 const D3DCOLOR CL_swako = D3DCOLOR_RGBA(125, 200, 255, 255);
 const D3DCOLOR CL_autumn = D3DCOLOR_RGBA(255, 128, 39, 255);
 const D3DCOLOR CL_seija = D3DCOLOR_RGBA(153, 128, 255, 255);
-const D3DCOLOR CL_lilly = D3DCOLOR_RGBA(255, 255, 255, 255);
+const D3DCOLOR CL_lilly = D3DCOLOR_RGBA(255, 210, 233, 255);
 
 
 const name_infor string_that("±×°Í",true);

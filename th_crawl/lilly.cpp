@@ -385,7 +385,7 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			sprintf(temp_speak,"%s%s외쳤다. \"돌격 앞으로!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf(temp_speak,"%s%s말했다. \"내가 돌아왔다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf(temp_speak,"%s%s말했다. \"이젠 걱정마! 내가 돌아왔어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -471,6 +471,7 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 
 void GetFairyExp(int exp)
 {
+	int enter_ = 0;
 	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
 	{
 		for(int i = 0; i<5;i++)
@@ -488,7 +489,11 @@ void GetFairyExp(int exp)
 						while(you.lilly_allys[i].level> it->level)
 						{
 							it->LevelUpdown(1,6.0f,1.0f);
-							printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"강해졌다. ");
+							if(it->isYourShight())
+							{
+								printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"강해졌다. ");
+								enter_++;
+							}
 						}
 
 						int prev_id = it->id;
@@ -534,12 +539,27 @@ void GetFairyExp(int exp)
 						if(prev_id != it->id)
 						{						
 							you.lilly_allys[i].id = it->id;
-							printarray(false,false,false,CL_normal,6,"그동안 쌓은 경험으로 ",mondata[prev_id].name.name.c_str(),"에서 ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"되었다.");
-							enterlog();
+							if(!(it->flag & M_FLAG_UNIQUE))
+							{
+								it->name.name = fairy_name[you.lilly_allys[i].name].name;
+								it->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
+							}
+							if(it->isYourShight())
+							{
+								if(enter_>0)
+								{
+									enterlog();
+									enter_ = 0;
+								}
+								printarray(true,false,false,CL_normal,6,"그동안 쌓은 경험으로 ",mondata[prev_id].name.name.c_str(),"에서 ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"되었다.");
+								
+							}
 						}					
 					}
 				}
 			}
+			if(enter_>=4)
+				enterlog();
 		}
 	}
 	enterlog();

@@ -1652,8 +1652,21 @@ void players::ExpRecovery(int exper_)
 							if(env[current_level].isMove(rit->x, rit->y,true,false) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
 							{								
 								monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id,M_FLAG_ALLY,coord_def(rit->x,rit->y));
-								printarray(true,false,false,CL_lilly,3,mon_->name.name.c_str(),mon_->name.name_is(true),"부활했다!");
-								printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE),true,false,false,CL_normal);
+								if(!(mon_->flag & M_FLAG_UNIQUE))
+								{
+									mon_->name.name = fairy_name[you.lilly_allys[i].name].name;
+									mon_->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
+								}
+								if(mon_->isYourShight())
+								{
+									printarray(true,false,false,CL_lilly,3,mon_->name.name.c_str(),mon_->name.name_is(true),"부활했다!");
+									printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE),true,false,false,CL_normal);
+								}
+								while(you.lilly_allys[i].level > mon_->level)
+								{
+									mon_->LevelUpdown(1,6.0f,1.0f);
+								}
+
 								you.lilly_allys[i].map_id = mon_->map_id;
 								you.lilly_allys[i].floor = current_level;
 								you.god_value[GT_LILLY][i] = 1;

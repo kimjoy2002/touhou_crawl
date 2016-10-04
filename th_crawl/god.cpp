@@ -20,6 +20,7 @@
 #include "note.h"
 #include "rand_shuffle.h"
 #include "seija.h"
+#include "lilly.h"
 
 
 extern HANDLE mutx;
@@ -1333,7 +1334,34 @@ bool GodAccpect_Explore_100()
 		}
 		return false;
 	case GT_SEIJA:
+		return false;
 	case GT_LILLY:
+		if(10>randA(100))
+		{			
+			random_extraction<int> rand_;
+			rand_.push(0);
+			rand_.push(1);
+			rand_.push(2);
+			rand_.push(3);
+			rand_.push(4);
+			for(int i = 0; i<5;i++)
+			{
+				int next_ = rand_.pop();
+				if(you.god_value[GT_LILLY][next_] == 1)
+				{
+					for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
+					{
+						if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)))
+						{
+							//TODO: 나중에 사일런스범위면 대사를 안치도록하기
+							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_NORMAL),true,false,false,CL_normal);
+							return true;
+						}
+					}
+				}
+			}
+
+		}
 		return false;
 	}
 	return false;

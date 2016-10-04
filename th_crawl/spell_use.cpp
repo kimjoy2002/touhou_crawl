@@ -89,6 +89,10 @@ bool isBandAlly(monster* order, monster* other)
 	//나중엔 자리를 바꿀 수 있는지 등도 고려
 	//현재는 버프만 적용이므로 버프쓰는 몹만 고려
 
+	if(!order->isAllyMonster(other)) //애초에 아군이 아니면 버프를 주지 못함.
+		return false;
+
+
 	switch(order->id)
 	{
 	case MON_FAIRY_RED_COMMANDER:

@@ -761,10 +761,14 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		case 2:
 			you.Ability(SKL_LILLY_1,true,!plus);
+			if(plus)
+				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
 			break;
 		case 3:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_3,true,!plus);
+			if(plus)
+				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
 			if(plus)
 				printlog("당신은 이제 요정을 치유 할 수 있다.",true,false,false,CL_lilly);
 			else
@@ -772,10 +776,14 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		case 4:
 			you.Ability(SKL_LILLY_1,true,!plus);
+			if(plus)
+				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
 			break;
 		case 5:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_4,true,!plus);
+			if(plus)
+				printlog("당신은 마지막 동료가 될 요정을 권유할 수 있다.",true,false,false,CL_lilly);
 			if(plus)
 				printlog("당신은 이제 일시적으로 자신의 힘을 요정들에게 나눠줄 수 있다.",true,false,false,CL_lilly);
 			else

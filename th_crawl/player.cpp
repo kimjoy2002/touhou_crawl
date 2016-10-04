@@ -35,6 +35,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "map.h"
+#include "lilly.h"
 
 
 players you;
@@ -1579,6 +1580,10 @@ bool players::GetExp(int exper_, bool speak_)
 	bool level_up_ = false;
 	exper += exper_;
 	skill_exper += exper_;
+	if(you.god == GT_LILLY)
+	{
+		GetFairyExp(max(1,exper_/2));
+	}
 	ExpRecovery(exper_);
 	while(GetNeedExp(level-1) >=0 && GetNeedExp(level-1) <= exper)
 	{

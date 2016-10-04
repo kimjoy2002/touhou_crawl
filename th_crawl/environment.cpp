@@ -742,6 +742,15 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 				you.god_value[GT_YUYUKO][0] = temp->map_id;
 				you.god_value[GT_YUYUKO][1] = floor;
 			}
+			for(int i = 0; i<5; i++)
+			{
+				if(you.god_value[GT_LILLY][i] && you.lilly_allys[i].map_id == mon_->map_id && you.lilly_allys[i].floor == prev_floor_ )
+				{
+					you.lilly_allys[i].map_id = temp->map_id;
+					you.lilly_allys[i].floor = floor;
+				}
+			}
+
 			mon_->hp = 0;
 			env[prev_floor_].SummonClear(mon_->map_id);
 			return temp;

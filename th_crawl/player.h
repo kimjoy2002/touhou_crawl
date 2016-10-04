@@ -88,8 +88,10 @@ struct lilly_ally
 	int level;
 	int exp;
 	int id;
+	int name;
+	int personality;
 	
-	lilly_ally():map_id(0),floor(0),level(0),exp(0),id(0){};
+	lilly_ally():map_id(0),floor(0),level(0),exp(0),id(0),name(0),personality(0){};
 };
 
 

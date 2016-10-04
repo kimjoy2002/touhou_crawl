@@ -31,6 +31,7 @@
 #include "note.h"
 #include "rand_shuffle.h"
 #include "seija.h"
+#include "lilly.h"
 
 
 extern HANDLE mutx;
@@ -2199,10 +2200,167 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 
 bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 {
+	for(int i = 0; i < 5; i++)
+	{
+		if(!you.god_value[GT_LILLY][i])
+		{
+			if(pietyLevel(you.piety) <= i)
+			{
+				printlog("요정을 동료로 더 권유하려면 신앙심을 더 높여야된다.",true,false,false,CL_normal);
+				return false;	
+			}
+
+			
+			if(monster* hit_mon =(monster*)env[current_level].isMonsterPos(target.x,target.y,order))
+			{	
+
+
+				if(hit_mon->flag & M_FLAG_SUMMON)
+				{
+					printlog("소환된 몬스터는 권유할 수 없다.",true,false,false,CL_normal);
+					return false;	
+				}
+				if(!(hit_mon->flag & M_FLAG_FAIRY))
+				{
+					printlog("요정이 아니면 권유할 수 없다.",true,false,false,CL_normal);
+					return false;	
+				}
+				if(hit_mon->id == MON_ZOMBIE_FAIRY)
+				{
+					printlog("이 요정은 좀비로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
+					return false;
+				}
+				if(hit_mon->id == MON_MAID_FAIRY)
+				{
+					printlog("이 요정은 메이드로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
+					return false;
+				}
+				if(hit_mon->level > you.level)
+				{
+					char temp[100];
+					sprintf_s(temp,100,"이 요정을 권유하려면 %d레벨이상이 되어야한다.",hit_mon->level);
+					printlog(temp,true,false,false,CL_normal);
+					return false;
+				}
+				
+				for(int j = 0; j < 5; j++)
+				{
+					if((you.lilly_allys[j].map_id == hit_mon->map_id && you.lilly_allys[j].floor == current_level) || hit_mon->flag & M_FLAG_ALLY)
+					{
+						printlog("이 요정은 이미 당신의 동료다.",true,false,false,CL_normal);
+						return false;
+					}
+				}
+
+				int name_ = randA(getMaxFairyName()-1);
+				int person_ = randA(FP_MAX-1);
+
+				you.lilly_allys[i].id = hit_mon->id;
+				you.lilly_allys[i].map_id = hit_mon->map_id;
+				you.lilly_allys[i].floor = current_level;
+				you.lilly_allys[i].level = hit_mon->level;
+				you.lilly_allys[i].exp = hit_mon->level<=1?0:level_up_value[hit_mon->level-2];
+				you.lilly_allys[i].name = name_;
+				you.lilly_allys[i].personality = person_;
+
+				hit_mon->flag |= M_FLAG_ALLY;
+				hit_mon->s_ally = -1;
+				hit_mon->state.SetState(MS_FOLLOW);
+
+				if(!(hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
+				{
+					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"자신의 이름이 ",fairy_name[name_].name.c_str(),fairy_name[name_].name_type?"이라고 ":"라고 ","소개했다.");
+		
+					hit_mon->name.name = fairy_name[name_].name;
+					hit_mon->name.name_type = fairy_name[name_].name_type;
+
+				}
+
+
+				printlog(fairy_speak(hit_mon, person_, FS_ENTER),true,false,false,CL_normal);
+				
+				you.god_value[GT_LILLY][i] = 1;
+
+
+				
+				you.Ability(SKL_LILLY_1,true,true);
+				return true;
+			}
+			else
+			{
+				printlog("여기엔 몬스터가 없다.",true,false,false,CL_normal);
+				return false;	
+			}
+		}
+	}
+
+	
+	printlog("더 이상의 권유는 할 수 없다.",true,false,false,CL_normal);	
+	you.Ability(SKL_LILLY_1,true,true);
 	return false;
 }
 bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 {
+	if(!order->isplayer())
+		return false;
+		
+	int j=0;
+		
+	
+	for(int i = 0; i < 5; i++)
+	{
+		if(you.god_value[GT_LILLY][i])
+		{
+			int k = 0;
+			for(auto it = env[you.lilly_allys[i].floor].mon_vector.begin(); k == 0 && it != env[you.lilly_allys[i].floor].mon_vector.end();it++)
+			{
+				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[i].map_id)
+				{
+					dif_rect_iterator rit(target,2);
+					for(; k == 0 && !rit.end();rit++)
+					{
+						if(env[current_level].isMove(rit->x, rit->y,it->isFly(),it->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
+						{
+							if(you.lilly_allys[i].floor == current_level)
+							{
+								it->SetXY(rit->x,rit->y);
+								it->state.SetState(MS_FOLLOW);
+								k=1;
+								j++;
+							}
+							else
+							{								
+								if(env[current_level].movingfloor((*rit), you.lilly_allys[i].floor, &(*it)))
+								{
+									it->state.SetState(MS_FOLLOW);
+									k=1;
+									j++;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+
+
+
+
+	if(j>0)
+	{
+		printarray(true,false,false,CL_normal,1,"요정들을 자신의 주변으로 호출했다!");
+		return true;
+	}
+	else
+	{
+		printarray(true,false,false,CL_normal,1,"요정이 없다.");
+		return false;
+	}
+
+
 	return false;
 }
 bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)

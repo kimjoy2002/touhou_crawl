@@ -2146,10 +2146,10 @@ int monster::action(int delay_)
 				if(!s_invisible)
 				{
 					if(prev_view_)
-						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"투명이 풀렸다.");
+						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"투명이 풀렸다.");
 					else
 					{
-						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_to(true),"투명이 풀리면서 모습을 드러냈다.");
+						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"투명이 풀리면서 모습을 드러냈다.");
 						if(you.auto_pickup==0)
 							auto_pick_onoff(true);
 					}

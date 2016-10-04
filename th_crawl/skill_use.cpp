@@ -2281,9 +2281,19 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				printlog(fairy_speak(hit_mon, person_, FS_ENTER),true,false,false,CL_normal);
 				
 				you.god_value[GT_LILLY][i] = 1;
-
-
 				
+				if((hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
+				{
+				char temp[200];
+				sprintf_s(temp,200,"%s%s동료가 되었다.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
+				AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
+				}
+				else{					
+					char temp[200];
+					sprintf_s(temp,200,"%s(%s)%s동료가 되었다.",hit_mon->name.name.c_str(),mondata[hit_mon->id].name.name.c_str(),hit_mon->name.name_do(true));
+					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
+				}
+
 				you.Ability(SKL_LILLY_1,true,true);
 				return true;
 			}

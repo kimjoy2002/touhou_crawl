@@ -83,6 +83,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s마음을 굳게 먹은듯하다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s반갑게 인사를 했다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 	case MON_SUNNY:
 		switch(type)
@@ -115,6 +118,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			return temp_speak;
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"진짜 팀워크를 보여주겠어!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s외쳤다. \"써니 도착!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -150,6 +156,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"나도 할땐 한다고!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"아픈건 싫어...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	case MON_STAR:
@@ -184,6 +193,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s말했다. \"요정들의 진정한 공포를 보여주는거야!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"겨우 돌아왔어. 다음엔 조심하지않으면...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	case MON_CIRNO:		
@@ -217,6 +229,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"이런건 나 혼자서도 충분해!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s외쳤다. \"방금전엔 실수였어! 방금 그 녀석은 어디야??\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	case MON_CLOWNPIECE:
@@ -249,6 +264,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			return temp_speak;
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"잇츠! 루나틱 타임!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"웰컴!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -294,6 +312,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"요정을 위하여!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"요정은 죽지않아!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	case FP_SHY:
@@ -326,6 +347,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			return temp_speak;
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s말했다. \"...열심히 해볼게!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"부활할 수 있어도 죽는건 싫어...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -360,6 +384,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s외쳤다. \"돌격 앞으로!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"내가 돌아왔다!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	case FP_COLD:
@@ -391,7 +418,10 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			sprintf(temp_speak,"%s%s말했다. \"좋아. 힘을 빌려줄게\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf(temp_speak,"%s%s말했다. \"여기선 이 작전대로 하자\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf(temp_speak,"%s%s말했다. \"알겠어 그 작전대로 하자\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"방금 전엔 실수였어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -426,6 +456,9 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 		case FS_FAIRY_WAR:
 			sprintf(temp_speak,"%s%s말했다. \"새로운 놀이야? 나도 낄래 낄래!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak,"%s%s말했다. \"아직 안 끝났지? 계속 놀자!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
 		}
 		break;
 	}
@@ -442,66 +475,69 @@ void GetFairyExp(int exp)
 	{
 		for(int i = 0; i<5;i++)
 		{
-			if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[i].map_id && current_level == you.lilly_allys[i].floor)
-			{				
-				you.lilly_allys[i].exp += exp;
+			if(you.god_value[GT_LILLY][i] == 1)
+			{
+				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[i].map_id && current_level == you.lilly_allys[i].floor)
+				{				
+					you.lilly_allys[i].exp += exp;
 
-				while(level_up_value[you.lilly_allys[i].level-1] <= you.lilly_allys[i].exp)
-				{
-					you.lilly_allys[i].level++;
-
-					while(you.lilly_allys[i].level> it->level)
+					while(level_up_value[you.lilly_allys[i].level-1] <= you.lilly_allys[i].exp)
 					{
-						it->LevelUpdown(1,6.0f,1.0f);
-						printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"강해졌다. ");
-					}
+						you.lilly_allys[i].level++;
 
-					int prev_id = it->id;
-					switch(it->id)
-					{
-					case MON_FAIRY_GREEN:
-						if(it->level >= 5)
+						while(you.lilly_allys[i].level> it->level)
 						{
-							it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
+							it->LevelUpdown(1,6.0f,1.0f);
+							printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"강해졌다. ");
 						}
-						break;
-					case MON_FAIRY_BLUE:
-						if(it->level >= 7)
+
+						int prev_id = it->id;
+						switch(it->id)
 						{
-							it->ChangeMonster(MON_FAIRY_BLUE_MAGICIAN,M_FLAG_ALLY);
+						case MON_FAIRY_GREEN:
+							if(it->level >= 5)
+							{
+								it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
+							}
+							break;
+						case MON_FAIRY_BLUE:
+							if(it->level >= 7)
+							{
+								it->ChangeMonster(MON_FAIRY_BLUE_MAGICIAN,M_FLAG_ALLY);
+							}
+							break;
+						case MON_FAIRY_RED:
+							if(it->level >= 8)
+							{
+								it->ChangeMonster(MON_FAIRY_RED_COMMANDER,M_FLAG_ALLY);
+							}
+							break;
+						case MON_FAIRY_GREEN_WARRIOR:
+							if(it->level >= 12)
+							{
+								it->ChangeMonster(MON_FAIRY_HERO,M_FLAG_ALLY);
+							}
+							break;
+						case MON_FAIRY_BLUE_MAGICIAN:
+							if(it->level >= 10)
+							{
+								it->ChangeMonster(MON_FAIRY_SOCERER,M_FLAG_ALLY);
+							}
+							break;
+						case MON_FAIRY_RED_COMMANDER:
+							if(it->level >= 13)
+							{
+								it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
+							}
+							break;
 						}
-						break;
-					case MON_FAIRY_RED:
-						if(it->level >= 8)
-						{
-							it->ChangeMonster(MON_FAIRY_RED_COMMANDER,M_FLAG_ALLY);
-						}
-						break;
-					case MON_FAIRY_GREEN_WARRIOR:
-						if(it->level >= 12)
-						{
-							it->ChangeMonster(MON_FAIRY_HERO,M_FLAG_ALLY);
-						}
-						break;
-					case MON_FAIRY_BLUE_MAGICIAN:
-						if(it->level >= 10)
-						{
-							it->ChangeMonster(MON_FAIRY_SOCERER,M_FLAG_ALLY);
-						}
-						break;
-					case MON_FAIRY_RED_COMMANDER:
-						if(it->level >= 13)
-						{
-							it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
-						}
-						break;
+						if(prev_id != it->id)
+						{						
+							you.lilly_allys[i].id = it->id;
+							printarray(false,false,false,CL_normal,6,"그동안 쌓은 경험으로 ",mondata[prev_id].name.name.c_str(),"에서 ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"되었다.");
+							enterlog();
+						}					
 					}
-					if(prev_id != it->id)
-					{						
-						you.lilly_allys[i].id = it->id;
-						printarray(false,false,false,CL_normal,6,"그동안 쌓은 경험으로 ",mondata[prev_id].name.name.c_str(),"에서 ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"되었다.");
-						enterlog();
-					}					
 				}
 			}
 		}

@@ -1867,6 +1867,18 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			}
 		}
 	}
+	for(int i = 0; i < 5; i++)
+	{
+		if(you.god_value[GT_LILLY][i] == 1)
+		{
+			if(you.lilly_allys[i].map_id == map_id && you.lilly_allys[i].floor == current_level)
+			{
+				you.god_value[GT_LILLY][i] = 2;
+				you.lilly_allys[i].cooldown = rand_int(1,3); //부활준비
+			}
+		}
+	}
+
 
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_)

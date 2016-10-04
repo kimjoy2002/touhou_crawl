@@ -34,7 +34,8 @@ enum FAIRY_SPEAK
 {
 	FS_NORMAL,
 	FS_ENTER,
-	FS_FAIRY_WAR
+	FS_FAIRY_WAR,
+	FS_REVIVE
 };
 
 int getMaxFairyName();

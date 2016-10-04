@@ -2262,7 +2262,8 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				you.lilly_allys[i].exp = hit_mon->level<=1?0:level_up_value[hit_mon->level-2];
 				you.lilly_allys[i].name = name_;
 				you.lilly_allys[i].personality = person_;
-
+				you.lilly_allys[i].cooldown = 0;
+				
 				hit_mon->flag |= M_FLAG_ALLY;
 				hit_mon->s_ally = -1;
 				hit_mon->state.SetState(MS_FOLLOW);

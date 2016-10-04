@@ -681,13 +681,10 @@ void environment::AllySafeClear(int new_floor_, coord_def pos_)
 						break;
 					rect_++;
 				}
-
 			}
-
-
 		}
-
 	}
+
 }
 void environment::ClearFloor()
 {

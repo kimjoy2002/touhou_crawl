@@ -1874,7 +1874,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			if(you.lilly_allys[i].map_id == map_id && you.lilly_allys[i].floor == current_level)
 			{
 				you.god_value[GT_LILLY][i] = 2;
-				you.lilly_allys[i].cooldown = rand_int(1,3); //부활준비
+				you.lilly_allys[i].cooldown = rand_int(2,4); //부활준비
 			}
 		}
 	}

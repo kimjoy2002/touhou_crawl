@@ -1336,7 +1336,7 @@ bool GodAccpect_Explore_100()
 	case GT_SEIJA:
 		return false;
 	case GT_LILLY:
-		if(10>randA(100))
+		if(5>randA(100))
 		{			
 			random_extraction<int> rand_;
 			rand_.push(0);

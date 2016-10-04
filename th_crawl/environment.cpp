@@ -684,7 +684,30 @@ void environment::AllySafeClear(int new_floor_, coord_def pos_)
 			}
 		}
 	}
-
+	if(you.god == GT_LILLY)
+	{ //요정의 존재 확인
+		
+		for(int i = 0; i<5;i++)
+		{		
+			if(you.god_value[GT_LILLY][i] == 1)
+			{
+				for(auto it = mon_vector.begin();it != mon_vector.end();it++)
+				{
+					if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[i].map_id && floor == you.lilly_allys[i].floor)
+					{
+						rand_rect_iterator rect_(pos_,2,2);				
+						while(!rect_.end())
+						{
+							if(env[new_floor_].movingfloor((*rect_), floor, &(*it)))
+								break;
+							rect_++;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 void environment::ClearFloor()
 {

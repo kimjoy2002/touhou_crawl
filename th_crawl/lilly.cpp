@@ -493,6 +493,8 @@ void GetFairyExp(int exp)
 							{
 								printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"강해졌다. ");
 								enter_++;
+								if(enter_>=4)
+									enterlog();
 							}
 						}
 
@@ -558,8 +560,6 @@ void GetFairyExp(int exp)
 					}
 				}
 			}
-			if(enter_>=4)
-				enterlog();
 		}
 	}
 	enterlog();

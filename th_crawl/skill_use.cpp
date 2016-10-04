@@ -2357,7 +2357,7 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printarray(true,false,false,CL_normal,1,"요정이 없다.");
+		printarray(true,false,false,CL_normal,1,"호출할 요정이 없다.");
 		return false;
 	}
 

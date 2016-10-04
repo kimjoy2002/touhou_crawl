@@ -20,8 +20,8 @@ dungeon_tile_type randomTemple()
 	
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SHIKIEIKI && i != GT_SEIJA) //세이자는 무조건 나온다.
-			rand_.push((dungeon_tile_type)i);
+		if(i != GT_SHIKIEIKI && i != GT_SEIJA)
+			rand_.push((dungeon_tile_type)(i+DG_TEMPLE_SHIKIEIKI));
 	}
 	
 	return rand_.pop();

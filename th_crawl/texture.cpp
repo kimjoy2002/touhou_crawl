@@ -169,7 +169,7 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //유유코
 			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //사토리
 			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
-				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)}, //세이자				
+				{textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255)}, //세이자				
 				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //릴리
 
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
@@ -712,9 +712,9 @@ textures img_blast[] = {textures(&texture_laser, 100, 255),
 								textures(&texture_laser, 105, 255)};
 
 textures img_fog_thunder[] = {textures(&texture_item01, 232, 255),
-							    textures(&texture_item01, 234, 255),
-								textures(&texture_item01, 235, 255),
-								textures(&texture_item01, 236, 255)};
+							    textures(&texture_item01, 233, 255),
+								textures(&texture_item01, 234, 255),
+								textures(&texture_item01, 235, 255)};
 
 
 textures img_laser[] = {textures(&texture_laser, 0, 255),

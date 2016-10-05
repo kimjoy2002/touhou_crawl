@@ -70,7 +70,7 @@ void wiz_mode()
 			//for(int i = -1;i<2;i++)
 			//	for(int j = -1;j<2;j++)
 			//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
-			MakeCloud(you.position, img_fog_fire, SMT_FIRE, rand_int(8,10), rand_int(80,120), 0,5, &you);
+			MakeCloud(you.position, img_fog_thunder, SMT_ELEC, rand_int(8,10), rand_int(80,120), 0,5, &you);
 			break;
 		case 'A':
 			{				

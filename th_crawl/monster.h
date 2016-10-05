@@ -198,7 +198,7 @@ public:
 	bool SetNeutrality(int s_neutrality_);
 	bool SetCommunication(int s_communication_);
 	bool SetExhausted(int s_exhausted_);
-	bool SetForceStrong(bool force_, int turn_);
+	bool SetForceStrong(bool force_, int turn_, bool speak_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

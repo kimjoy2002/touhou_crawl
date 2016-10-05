@@ -420,7 +420,7 @@ public:
 	bool SetEirinHeal(int value_, bool punish_);
 	bool SetExhausted(int s_exhausted_);
 	bool SetStasis(int s_stasis_);
-	bool SetForceStrong(bool force_, int turn_);
+	bool SetForceStrong(bool force_, int turn_, bool speak_);
 	
 	int GetInvisible();
 	int GetSaved(){return true;};

@@ -3088,12 +3088,12 @@ bool monster::SetExhausted(int s_exhausted_)
 	s_exhausted = s_exhausted_;
 	return true;
 }
-bool monster::SetForceStrong(bool force_, int turn_)
+bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 {
 	if(!turn_)
 		return false;
 	
-	if(isYourShight())
+	if(isYourShight() && speak_)
 	{
 		if(!force_)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"약화되었다.");
@@ -3103,6 +3103,7 @@ bool monster::SetForceStrong(bool force_, int turn_)
 
 	force_strong = force_;
 	force_turn = turn_;
+	return true;
 }
 
 bool monster::AttackedTarget(unit *order_)

@@ -1944,6 +1944,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	if(you.god == GT_SEIJA)		
 		printlog(seija_talk(GT_NONE, 7),true,false,false,CL_seija);
 
+	GodAccpect_Abandon(you.god);
 
 	you.Ability(SKL_ABANDON_GOD,true,true);
 
@@ -2448,7 +2449,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_FAIRY_WAR),true,false,false,CL_normal);
 					}
 					speak_ = true;
-					it->SetForceStrong(true, rand_int(40,60));
+					it->SetForceStrong(true, rand_int(40,60),true);
 					break;
 				}
 			}
@@ -2457,7 +2458,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	enterlog();
 	if(speak_)
 	{
-		you.SetForceStrong(false, rand_int(20,40));
+		you.SetForceStrong(false, rand_int(20,40),true);
 		return true;
 	}
 

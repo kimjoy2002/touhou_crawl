@@ -2577,20 +2577,24 @@ bool players::SetStasis(int s_stasis_)
 	return true;
 }
 
-bool players::SetForceStrong(bool force_, int turn_)
+bool players::SetForceStrong(bool force_, int turn_, bool speak_)
 {
 	if(!turn_)
 		return false;
 	
-	if(!force_)
-		printlog("당신은 공격과 마법의 위력이 대폭 감소했다.",false,false,false,CL_small_danger);
-	else
+	if(speak_)
 	{
-		printlog("당신의 공격과 마법의 위력은 대폭 증가했다.",false,false,false,CL_white_blue);
+		if(!force_)
+			printlog("당신은 공격과 마법의 위력이 대폭 감소했다.",false,false,false,CL_small_danger);
+		else
+		{
+			printlog("당신의 공격과 마법의 위력은 대폭 증가했다.",false,false,false,CL_white_blue);
+		}
 	}
 
 	force_strong = force_;
 	force_turn = turn_;
+	return true;
 }
 int players::GetInvisible()
 {

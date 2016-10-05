@@ -1448,6 +1448,57 @@ bool GodAccpect_First_contact()
 	}
 	return false;
 }
+bool GodAccpect_Abandon(god_type god)
+{
+	switch(god)
+	{
+	case GT_BYAKUREN:
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_SHIKIEIKI:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MINORIKO:
+	case GT_MIMA:
+	case GT_SHINKI:
+	case GT_YUUGI:
+	case GT_SHIZUHA:
+	case GT_HINA:
+	case GT_YUKARI:
+	case GT_EIRIN:
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_TENSI:
+	case GT_SEIJA:
+		return false;
+	case GT_LILLY:		
+		{
+			int k = 0;
+			for(int i = 0; i < 5; i++)
+			{
+				if(you.god_value[GT_LILLY][i] == 1)
+				{
+					for(auto it = env[you.lilly_allys[i].floor].mon_vector.begin(); it != env[you.lilly_allys[i].floor].mon_vector.end();it++)
+					{
+						if(it->isLive() && it->isUserAlly() && it->map_id == you.lilly_allys[i].map_id)
+						{
+							it->ReturnEnemy();
+							k++;
+							break;
+						}
+					}
+				}
+
+			}
+			if(k>0)
+			{
+				printarray(true,false,false,CL_danger,1,"릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!");
+			}
+		}
+		return false;
+	}
+	return false;
+}
 bool GodAccpect_turn(int turn)
 {
 	if(you.GetPunish(GT_KANAKO))
@@ -3193,6 +3244,70 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_LILLY:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,35);//약화
+			rand_.push(1,65);//요정소환
+			switch(rand_.pop())
+			{
+			case 0:		
+				{
+					you.SetForceStrong(false, rand_int(20,40),true);
+					printarray(true,false,false,CL_lilly,1,"릴리는 당신의 힘을 빼앗았다!");
+				}
+				break;
+			case 1:
+				{
+					random_extraction<int> id_;
+					id_.push(MON_FAIRY_GREEN,50);
+					id_.push(MON_FAIRY_BLUE,30);
+					id_.push(MON_FAIRY_RED,20);
+					int i =rand_int(3,5); 
+					for(; i>0 ; i--)
+					{
+						int level_ =rand_int(rand_int(1,you.level),you.level); 
+
+						if(monster *mon_ = BaseSummon(id_.choice(), rand_int(60,120), true, true, 3, NULL, you.position, SKD_OTHER, -1))
+						{						
+							while(level_ > mon_->level)
+							{
+								mon_->LevelUpdown(1,6.0f,1.0f);
+								switch(mon_->id)
+								{
+								case MON_FAIRY_GREEN:
+									if(mon_->level >= 5)
+										mon_->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,0);
+									break;
+								case MON_FAIRY_BLUE:
+									if(mon_->level >= 7)
+										mon_->ChangeMonster(MON_FAIRY_BLUE_MAGICIAN,0);
+									break;
+								case MON_FAIRY_RED:
+									if(mon_->level >= 8)
+										mon_->ChangeMonster(MON_FAIRY_RED_COMMANDER,0);
+									break;
+								case MON_FAIRY_GREEN_WARRIOR:
+									if(mon_->level >= 12)
+										mon_->ChangeMonster(MON_FAIRY_HERO,0);
+									break;
+								case MON_FAIRY_BLUE_MAGICIAN:
+									if(mon_->level >= 10)
+										mon_->ChangeMonster(MON_FAIRY_SOCERER,0);
+									break;
+								case MON_FAIRY_RED_COMMANDER:
+									if(mon_->level >= 13)
+										mon_->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,0);
+									break;
+								}
+							}
+							mon_->SetForceStrong(true, 100,false);
+						}
+					}
+					printarray(true,false,false,CL_lilly,1,"릴리는 당신에게 적대적인 요정의 무리를 소환했다!");
+				}
+				break;
+			}
+		}
 		break;
 	}
 	return false;		

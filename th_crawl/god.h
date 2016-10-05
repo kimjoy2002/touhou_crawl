@@ -49,6 +49,7 @@ bool GodAccpect_Practice(int value, skill_type skill_);
 bool GodAccpect_Explore_100();
 bool GodAccpect_Exp_get();
 bool GodAccpect_First_contact();
+bool GodAccpect_Abandon(god_type god);
 bool GodAccpect_turn(int turn);
 
 int satori_sight();

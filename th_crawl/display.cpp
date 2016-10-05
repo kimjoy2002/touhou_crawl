@@ -1123,6 +1123,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 				rc.left += fontDesc.Width*9;
 			}
+			if(you.force_turn)
+			{				
+				D3DCOLOR color_ = you.force_strong?CL_white_blue:CL_danger;
+				sprintf_s(temp,128,you.force_strong?"강화":"약화");
+				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+				rc.left += fontDesc.Width*5;
+			}
 
 
 

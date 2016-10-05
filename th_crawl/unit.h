@@ -124,6 +124,7 @@ public:
 	virtual bool SetCommunication(int s_communication_){return false;};
 	virtual bool SetExhausted(int s_exhausted_){return false;};
 	virtual bool SetStasis(int s_stasis_){return false;};
+	virtual bool SetForceStrong(bool force_, int turn_){return false;};
 	bool PositionSwap(unit *other){
 		coord_def temp_ = position;
 		SetXY(other->position);

@@ -3460,9 +3460,17 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
 {
-	int power=max(0,min(SpellCap(skill),(order->level-3)*8));
+	int power=(order->level-3)*8;
 	if(pow_ != -1)
 		power = pow_;
+	if(order->force_turn)
+	{
+		if(order->force_strong)
+			power *= 2;
+		else
+			power /= 2;
+	}
+	power=max(0,min(SpellCap(skill),power));
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
@@ -3797,8 +3805,11 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 {
-	int power=min(SpellCap(skill),you.GetSpellPower(SpellSchool(skill,0),SpellSchool(skill,1),SpellSchool(skill,2)));
+	int power=you.GetSpellPower(SpellSchool(skill,0),SpellSchool(skill,1),SpellSchool(skill,2));
 	
+	
+	power=min(SpellCap(skill),max(0,power));
+
 	if(!CheckDangerSpell(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill))))
 	{
 		return false;

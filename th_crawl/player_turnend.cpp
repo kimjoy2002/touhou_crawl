@@ -571,7 +571,16 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	if(force_turn)
+	{
+		force_turn--;
+		if(!force_turn)
+		{
+			printlog("위력이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
 
+	}
 
 
 	if(s_slaying)

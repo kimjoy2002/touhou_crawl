@@ -234,6 +234,8 @@ public:
 	int s_eirin_poison_time;
 	int s_exhausted;
 	int s_stasis;
+	bool force_strong; //강화/약화(위력 2배 1/2배)
+	int force_turn; //강화/약화턴
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -418,7 +420,7 @@ public:
 	bool SetEirinHeal(int value_, bool punish_);
 	bool SetExhausted(int s_exhausted_);
 	bool SetStasis(int s_stasis_);
-
+	bool SetForceStrong(bool force_, int turn_);
 	
 	int GetInvisible();
 	int GetSaved(){return true;};

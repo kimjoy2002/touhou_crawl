@@ -2424,6 +2424,45 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 {
+	bool speak_ = false;
+
+	random_extraction<int> rand_;
+	rand_.push(0);
+	rand_.push(1);
+	rand_.push(2);
+	rand_.push(3);
+	rand_.push(4);
+	for(int i = 0; i<5;i++)
+	{
+		int next_ = rand_.pop();
+		if(you.god_value[GT_LILLY][next_] == 1)
+		{
+			for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
+			{
+				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)))
+				{
+					if(!speak_)
+					{ 
+						printarray(true,false,false,CL_lilly,1,"당신은 자신의 힘을 요정들에게 나눠주었다!");
+						if(it->CanSpeak())
+							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_FAIRY_WAR),true,false,false,CL_normal);
+					}
+					speak_ = true;
+					it->SetForceStrong(true, rand_int(40,60));
+					break;
+				}
+			}
+		}
+	}
+	enterlog();
+	if(speak_)
+	{
+		you.SetForceStrong(false, rand_int(20,40));
+		return true;
+	}
+
+	
+	printarray(true,false,false,CL_normal,1,"주변에 힘을 전달할 동료 요정이 없다.");
 	return false;
 }
 

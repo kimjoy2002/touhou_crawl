@@ -93,7 +93,17 @@ int players::GetAttack(bool max_)
 	{
 		max_atk_+=6;
 	}
-	
+	if(you.force_turn)
+	{
+		if(you.force_strong)
+			max_atk_*=2;
+		else
+			max_atk_/=2;
+	}
+
+
+
+
 	if(max_atk_<min_atk_)
 		max_atk_ = min_atk_;
 
@@ -294,6 +304,13 @@ int players::GetThrowAttack(const item* it, bool max_)
 	if(GetProperty(TPT_SLAY))
 	{
 		max_atk_+=6;
+	}
+	if(you.force_turn)
+	{
+		if(you.force_strong)
+			max_atk_*=2;
+		else
+			max_atk_/=2;
 	}
 
 	

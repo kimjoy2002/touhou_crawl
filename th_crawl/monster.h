@@ -79,6 +79,8 @@ public:
 	int s_neutrality;
 	int s_communication;
 	int s_exhausted;
+	bool force_strong; //강화/약화(위력 2배 1/2배)
+	int force_turn; //강화/약화턴
 
 	int summon_time;
 	parent_type summon_parent;
@@ -196,6 +198,7 @@ public:
 	bool SetNeutrality(int s_neutrality_);
 	bool SetCommunication(int s_communication_);
 	bool SetExhausted(int s_exhausted_);
+	bool SetForceStrong(bool force_, int turn_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

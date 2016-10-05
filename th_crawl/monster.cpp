@@ -39,6 +39,7 @@ ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRA
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
+ force_strong(false), force_turn(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
@@ -101,6 +102,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_neutrality);
 	SaveData<int>(fp, s_communication);
 	SaveData<int>(fp, s_exhausted);
+	SaveData<bool>(fp, force_strong);
+	SaveData<int>(fp, force_turn);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -199,6 +202,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_neutrality);
 	LoadData<int>(fp, s_communication);
 	LoadData<int>(fp, s_exhausted);
+	LoadData<bool>(fp, force_strong);
+	LoadData<int>(fp, force_turn);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -295,6 +300,8 @@ void monster::init()
 	s_neutrality=0;
 	s_communication=0;
 	s_exhausted=0;
+	force_strong=false;
+	force_turn=0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -592,7 +599,11 @@ void monster::TurnLoad()
 		s_exhausted-=temp_turn;
 	else
 		s_exhausted =0;
-
+	
+	if(force_turn-temp_turn>0)
+		force_turn-=temp_turn;
+	else
+		force_turn =0;
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -2222,7 +2233,21 @@ int monster::action(int delay_)
 		{
 			s_exhausted--;
 		}
-
+		
+		if(force_turn)
+		{
+			force_turn--;
+			if(is_sight && isView())
+			{
+				if(!force_turn)
+				{
+					if(force_strong)
+						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 강화가 끝났다. ");
+					else
+						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 약화가 끝났다. ");
+				}
+			}
+		}
 
 
 
@@ -2979,7 +3004,7 @@ bool monster::SetFear(int fear_)
 	if(isYourShight())
 	{
 		if(!s_fear)
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다.");
 	}
 	s_fear += fear_;
 	if(s_fear>50)
@@ -3017,7 +3042,7 @@ bool monster::SetLunatic(int lunatic_)
 	if(isYourShight())
 	{
 		if(!s_lunatic)
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다.");
 	}
 	s_lunatic = lunatic_;
 	if(s_lunatic>20)
@@ -3062,6 +3087,22 @@ bool monster::SetExhausted(int s_exhausted_)
 		return false;
 	s_exhausted = s_exhausted_;
 	return true;
+}
+bool monster::SetForceStrong(bool force_, int turn_)
+{
+	if(!turn_)
+		return false;
+	
+	if(isYourShight())
+	{
+		if(!force_)
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"약화되었다.");
+		else
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"강화되었다.");
+	}
+
+	force_strong = force_;
+	force_turn = turn_;
 }
 
 bool monster::AttackedTarget(unit *order_)
@@ -3391,6 +3432,13 @@ int monster::GetAttack(int num_, bool max_)
 		atk_ = atk[num_];
 	if(s_lunatic || s_might)
 		atk_ *= 1.5f;
+	if(force_turn)
+	{
+		if(force_strong)
+			atk_*=2;
+		else
+			atk_/=2;
+	}
 	return atk_;
 }
 int monster::GetHit()
@@ -3722,6 +3770,16 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_communication)
 		{
 			sprintf(string_,"동료부르기");
+			return true;
+		}
+		return false;
+	case MSS_FORCE:
+		if(force_turn)
+		{
+			if(force_strong)
+				sprintf(string_,"강화");
+			else				
+				sprintf(string_,"약화");
 			return true;
 		}
 		return false;

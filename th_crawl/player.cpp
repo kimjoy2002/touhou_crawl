@@ -72,6 +72,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
+force_strong(false), force_turn(0),
  alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -240,7 +241,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_eirin_poison_time);
 	SaveData<int>(fp, s_exhausted);
 	SaveData<int>(fp, s_stasis);
-	
+	SaveData<bool>(fp, force_strong);
+	SaveData<int>(fp, force_turn);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -453,6 +455,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_eirin_poison_time);
 	LoadData<int>(fp, s_exhausted);
 	LoadData<int>(fp, s_stasis);
+	LoadData<bool>(fp, force_strong);
+	LoadData<int>(fp, force_turn);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -919,6 +923,15 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	if(you.god == GT_MIMA && !you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=2 &&
 		(s1_ == SKT_CONJURE || s2_ == SKT_CONJURE || s3_ == SKT_CONJURE))
 		power_+=4;
+
+	
+	if(you.force_turn)
+	{
+		if(you.force_strong)
+			power_ *= 2;
+		else
+			power_ /= 2;
+	}
 	if(you.GetPunish(GT_MIMA))
 	{
 		power_/=2;
@@ -2562,6 +2575,22 @@ bool players::SetStasis(int s_stasis_)
 	if(s_stasis>100)
 		s_stasis = 100;
 	return true;
+}
+
+bool players::SetForceStrong(bool force_, int turn_)
+{
+	if(!turn_)
+		return false;
+	
+	if(!force_)
+		printlog("당신은 공격과 마법의 위력이 대폭 감소했다.",false,false,false,CL_small_danger);
+	else
+	{
+		printlog("당신의 공격과 마법의 위력은 대폭 증가했다.",false,false,false,CL_white_blue);
+	}
+
+	force_strong = force_;
+	force_turn = turn_;
 }
 int players::GetInvisible()
 {

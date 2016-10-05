@@ -1059,6 +1059,7 @@ int get_unique_to_id(int m_id)
 	case MON_TOZIKO: return 50;
 	case MON_FUTO: return 51;
 	case MON_MAMIZO: return 52;
+	case MON_SEIGA: return 53;
 	}
 }
 
@@ -1272,6 +1273,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 52:
 		index.push_back(MON_MAMIZO);
+		break;
+	case 53:
+		index.push_back(MON_SEIGA);
 		break;
 	}
 
@@ -1765,5 +1769,9 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_MAMIZO:
 		break;
+	case MON_SEIGA:
+		mon->poison_resist=1;
+		break;
+
 	}
 }

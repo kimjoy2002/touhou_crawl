@@ -4398,6 +4398,56 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}		
 		break;
+	case MON_SEIGA:
+		if(type == MST_NORMAL)
+		{
+			switch(randA(1))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s외쳤다. \"재밌는 분이네요. 어디 실력을 시험해볼까요?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s외쳤다. \"새로운 술법의 실험대가 필요했는데, 딱 좋을때 오셨어요.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:		
+				sprintf(temp_speak,"%s%s외쳤다. \"시해선에 관심이 있으세요? 제가 도와드리죠.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:	
+				sprintf(temp_speak,"%s%s외쳤다. \"강시도 잘 보면 귀엽다고요. 강시가 되보시는건 어떤가요?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:
+				sprintf(temp_speak,"%s%s외쳤다. \"제 요시카는 꽤 튼튼하답니다. 몇번이고 상대해보셔도 좋아요.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 5:		
+				sprintf(temp_speak,"%s%s외쳤다. \"강한 힘이 보고 싶을뿐이에요. 한번 겨뤄볼까요?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_CONFUSE)
+		{
+			switch(randA(2))
+			{
+			case 0:		
+				sprintf(temp_speak,"%s%s혼란하고 있다. \"제법이시네요...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:		
+				sprintf(temp_speak,"%s%s혼란하고 있다. \"연단으로 단련한 저를 이렇게 몰아붙이시다니...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak,"%s%s바닥에 구멍을 뚫으려고 시도했다",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if(type == MST_MAGIC)
+		{
+			switch(randA(0))
+			{
+			case 0:
+				sprintf(temp_speak,"%s%s술법을 부렸다.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}		
+		break;
 	default:
 		break;
 	}

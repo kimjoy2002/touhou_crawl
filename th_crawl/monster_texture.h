@@ -138,6 +138,7 @@ extern textures img_mons_tokiko;
 extern textures img_mons_toziko;
 extern textures img_mons_futo;
 extern textures img_mons_mamizo;
+extern textures img_mons_seiga;
 
 
 

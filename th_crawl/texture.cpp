@@ -360,6 +360,7 @@ textures img_mons_tokiko(&texture_monster01, 184, 255);
 textures img_mons_toziko(&texture_monster01, 185, 255);
 textures img_mons_futo(&texture_monster01, 186, 255);
 textures img_mons_mamizo(&texture_monster01, 187, 255);
+textures img_mons_seiga(&texture_monster01, 188, 255);
 
 
 
@@ -1697,6 +1698,8 @@ int texturetoint(textures* input)
 		return 325;
 	else if(input == &img_mons_mamizo)
 		return 326;
+	else if(input == &img_mons_seiga)
+		return 327;
 	else
 		return 0;
 }
@@ -2358,6 +2361,8 @@ textures* inttotexture(int input)
 		return &img_mons_futo;
 	case 326:
 		return &img_mons_mamizo;
+	case 327:
+		return &img_mons_seiga;
 	default:
 		return &img_mons_default;
 	}

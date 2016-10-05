@@ -3017,8 +3017,9 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 
 
 
-void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list_, bool* random_spell)
+void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
+	list<spell> *list =  &(mon_->spell_lists);
 	(*random_spell) = false;
 	list->clear();
 	switch(id)
@@ -3187,7 +3188,9 @@ void SetSpell(monster_index id, list<spell> *list, vector<item_infor> *item_list
 			int add_ = arr_[randA(9)];
 			list->push_back(spell(add_,25));
 			t.value1 = add_;
-			
+			int color_ = randA(3);
+			mon_->image = &img_mons_magic_book[color_];
+			t.image = &img_item_book[color_];
 			if(randA(10)<4)
 			{
 				if(randA(10)<7)

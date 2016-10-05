@@ -44,9 +44,9 @@ book_infor static_book_list[BOOK_LAST]=
 string random_book_list[RANDOM_BOOK_NUM]=
 {
 	"빨간 커버의 책",
+	"초록 커버의 책",
 	"파란 커버의 책",
 	"노란 커버의 책",
-	"초록 커버의 책",
 	"분홍 커버의 책",
 	"주황 커버의 책",
 	"보라 커버의 책"

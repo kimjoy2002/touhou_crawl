@@ -31,6 +31,7 @@ TextureFile texture_dungeon01(imgfile_dungeon01);
 TextureFile texture_monster01(imgfile_monster01);
 TextureFile texture_players01(imgfile_players01);
 TextureFile texture_item01(imgfile_item01);
+TextureFile texture_item02(imgfile_item02);
 TextureFile texture_laser(imgfile_laser);
 TextureFile texture_test(imgfile_test);
 TextureFile texture_dot_floor(imgfile_dot_floor);
@@ -497,12 +498,37 @@ textures img_item_weapon_kiteshield(&texture_item01, 55, 255);
 textures img_item_food_bread(&texture_item01, 0, 255);
 textures img_item_food_p_item(&texture_item01, 63, 255);
 
-textures img_item_potion[] = {textures(&texture_item01, 13, 255)
+textures img_item_potion[] = {textures(&texture_item02, 0, 255),
+	textures(&texture_item02, 1, 255),
+	textures(&texture_item02, 2, 255),
+	textures(&texture_item02, 3, 255),
+	textures(&texture_item02, 4, 255),
+	textures(&texture_item02, 5, 255),
+	textures(&texture_item02, 6, 255),
+	textures(&texture_item02, 7, 255),
+	textures(&texture_item02, 8, 255),
+	textures(&texture_item02, 9, 255),
+	textures(&texture_item02, 10, 255),
+	textures(&texture_item02, 11, 255),
+	textures(&texture_item02, 12, 255),
+	textures(&texture_item02, 13, 255),
+	textures(&texture_item02, 14, 255),
+	textures(&texture_item02, 15, 255),
+	textures(&texture_item02, 16, 255),
+	textures(&texture_item02, 17, 255),
+	textures(&texture_item02, 18, 255),
+	textures(&texture_item02, 19, 255)
 };
 
 textures img_item_scroll(&texture_item01, 14, 255);
 
-textures img_item_book[] = {textures(&texture_item01, 140, 255)
+textures img_item_book[] = {textures(&texture_item02, 32, 255),
+	textures(&texture_item02, 33, 255),
+	textures(&texture_item02, 34, 255),
+	textures(&texture_item02, 35, 255),
+	textures(&texture_item02, 36, 255),
+	textures(&texture_item02, 37, 255),
+	textures(&texture_item02, 38, 255)
 };
 
 
@@ -1612,6 +1638,57 @@ int texturetoint(textures* input)
 		return 297;
 	else if(input == &img_fog_thunder[0])
 		return 298;
+	else if(input == &img_item_potion[1])
+		return 299;
+	else if(input == &img_item_potion[2])
+		return 300;
+	else if(input == &img_item_potion[3])
+		return 301;
+	else if(input == &img_item_potion[4])
+		return 302;
+	else if(input == &img_item_potion[5])
+		return 303;
+	else if(input == &img_item_potion[6])
+		return 304;
+	else if(input == &img_item_potion[7])
+		return 305;
+	else if(input == &img_item_potion[8])
+		return 306;
+	else if(input == &img_item_potion[9])
+		return 307;
+	else if(input == &img_item_potion[10])
+		return 308;
+	else if(input == &img_item_potion[11])
+		return 309;
+	else if(input == &img_item_potion[12])
+		return 310;
+	else if(input == &img_item_potion[13])
+		return 311;
+	else if(input == &img_item_potion[14])
+		return 312;
+	else if(input == &img_item_potion[15])
+		return 313;
+	else if(input == &img_item_potion[16])
+		return 314;
+	else if(input == &img_item_potion[17])
+		return 315;
+	else if(input == &img_item_potion[18])
+		return 316;
+	else if(input == &img_item_potion[19])
+		return 317;
+	else if(input == &img_item_book[1])
+		return 318;
+	else if(input == &img_item_book[2])
+		return 319;
+	else if(input == &img_item_book[3])
+		return 320;
+	else if(input == &img_item_book[4])
+		return 321;
+	else if(input == &img_item_book[5])
+		return 322;
+	else if(input == &img_item_book[6])
+		return 323;
+	
 	else
 		return 0;
 }
@@ -2216,7 +2293,57 @@ textures* inttotexture(int input)
 	case 297:
 		return &img_mons_tokiko;
 	case 298:
-		return &img_fog_thunder[0];
+		return &img_fog_thunder[0];		
+	case 299:
+		return &img_item_potion[1];
+	case 300:
+		return &img_item_potion[2];
+	case 301:
+		return &img_item_potion[3];
+	case 302:
+		return &img_item_potion[4];
+	case 303:
+		return &img_item_potion[5];
+	case 304:
+		return &img_item_potion[6];
+	case 305:
+		return &img_item_potion[7];
+	case 306:
+		return &img_item_potion[8];
+	case 307:
+		return &img_item_potion[9];
+	case 308:
+		return &img_item_potion[10];
+	case 309:
+		return &img_item_potion[11];
+	case 310:
+		return &img_item_potion[12];
+	case 311:
+		return &img_item_potion[13];
+	case 312:
+		return &img_item_potion[14];
+	case 313:
+		return &img_item_potion[15];
+	case 314:
+		return &img_item_potion[16];
+	case 315:
+		return &img_item_potion[17];
+	case 316:
+		return &img_item_potion[18];
+	case 317:
+		return &img_item_potion[19];		
+	case 318:
+		return &img_item_book[1];
+	case 319:
+		return &img_item_book[2];
+	case 320:
+		return &img_item_book[3];
+	case 321:
+		return &img_item_book[4];
+	case 322:
+		return &img_item_book[5];
+	case 323:
+		return &img_item_book[6];
 	default:
 		return &img_mons_default;
 	}

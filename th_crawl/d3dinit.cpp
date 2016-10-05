@@ -106,6 +106,8 @@ bool Setup()
 		return false;
 	if(!texture_item01.loadingEX(Device))
 		return false;
+	if(!texture_item02.loadingEX(Device))
+		return false;
 	if(!texture_laser.loadingEX(Device))
 		return false;
 	if(!texture_test.loadingEX(Device))

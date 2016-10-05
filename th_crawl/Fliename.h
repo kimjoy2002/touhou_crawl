@@ -17,6 +17,7 @@ const char imgfile_monster01[] = "./data/monster.png";
 const char imgfile_players01[] = "./data/players.png";
 
 const char imgfile_item01[] = "./data/item.png";
+const char imgfile_item02[] = "./data/item2.png";
 
 const char imgfile_laser[] = "./data/laser.png";
 const char imgfile_test[] = "./data/test.png";

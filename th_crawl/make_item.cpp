@@ -282,7 +282,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value6 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
-		t->image = &img_item_potion[0];
+		t->image = &img_item_potion[iden_list.potion_list[t->value1].color];
 		t->name.name = "¹°¾à";
 		t->name.name_type = true;
 		t->weight = 4.0f;
@@ -306,7 +306,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	case ITM_BOOK:
 		{
 			int book= select_!=-1?select_:rand_int(BOOK_FIRST,BOOK_LAST-1);	
-			t->name2.name = random_book_list[randA(RANDOM_BOOK_NUM-1)];
+			int color_ = randA(RANDOM_BOOK_NUM-1);
+			t->name2.name = random_book_list[color_];
 			t->name2.name_type = true;
 			t->value0 = book;
 			t->value1 = static_book_list[book].spell[0];
@@ -319,7 +320,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value8 = static_book_list[book].spell[7];
 			t->is_pile = false;
 			t->can_throw = false;
-			t->image = &img_item_book[0];
+			t->image = &img_item_book[color_];
 			t->name.name = static_book_list[book].name;
 			t->name.name_type = static_book_list[book].name_back;
 			t->weight = 5.0f;

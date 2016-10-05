@@ -2336,7 +2336,7 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 			int k = 0;
 			for(auto it = env[you.lilly_allys[i].floor].mon_vector.begin(); k == 0 && it != env[you.lilly_allys[i].floor].mon_vector.end();it++)
 			{
-				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[i].map_id)
+				if(it->isLive() && it->map_id == you.lilly_allys[i].map_id)
 				{
 					dif_rect_iterator rit(target,2);
 					for(; k == 0 && !rit.end();rit++)

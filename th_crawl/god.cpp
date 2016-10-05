@@ -1433,6 +1433,7 @@ bool GodAccpect_First_contact()
 		{
 			you.GiftCount(1);
 		}
+		return false;
 	case GT_TENSI:
 		if(1)
 		{

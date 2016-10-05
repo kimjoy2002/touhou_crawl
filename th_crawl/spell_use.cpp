@@ -3450,6 +3450,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			item_list_->push_back(t);
 		}
 		break;
+	case MON_TOZIKO:
+		break;
+	case MON_FUTO:
+		break;
+	case MON_MAMIZO:
+		break;
 	default:
 		break;
 	}

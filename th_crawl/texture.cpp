@@ -357,6 +357,9 @@ textures img_mons_hourai[] =
 
 textures img_mons_youmu_yukkuri(&texture_monster01, 183, 255);
 textures img_mons_tokiko(&texture_monster01, 184, 255);
+textures img_mons_toziko(&texture_monster01, 185, 255);
+textures img_mons_futo(&texture_monster01, 186, 255);
+textures img_mons_mamizo(&texture_monster01, 187, 255);
 
 
 
@@ -1687,8 +1690,13 @@ int texturetoint(textures* input)
 	else if(input == &img_item_book[5])
 		return 322;
 	else if(input == &img_item_book[6])
-		return 323;
-	
+		return 323;	
+	else if(input == &img_mons_toziko)
+		return 324;
+	else if(input == &img_mons_futo)
+		return 325;
+	else if(input == &img_mons_mamizo)
+		return 326;
 	else
 		return 0;
 }
@@ -2344,6 +2352,12 @@ textures* inttotexture(int input)
 		return &img_item_book[5];
 	case 323:
 		return &img_item_book[6];
+	case 324:
+		return &img_mons_toziko;
+	case 325:
+		return &img_mons_futo;
+	case 326:
+		return &img_mons_mamizo;
 	default:
 		return &img_mons_default;
 	}

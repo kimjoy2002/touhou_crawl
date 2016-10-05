@@ -4227,6 +4227,12 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}
 		break;
+	case MON_TOZIKO:
+		break;
+	case MON_FUTO:
+		break;
+	case MON_MAMIZO:
+		break;
 	default:
 		break;
 	}

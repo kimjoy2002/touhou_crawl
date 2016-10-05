@@ -135,6 +135,9 @@ extern textures img_mons_hourai[];
 extern textures img_mons_nesi;
 extern textures img_mons_youmu_yukkuri;
 extern textures img_mons_tokiko;
+extern textures img_mons_toziko;
+extern textures img_mons_futo;
+extern textures img_mons_mamizo;
 
 
 

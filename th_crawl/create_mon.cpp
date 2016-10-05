@@ -1056,6 +1056,9 @@ int get_unique_to_id(int m_id)
 	case MON_KAGUYA:  return 47;
 	case MON_MOKOU:  return 48;
 	case MON_TOKIKO: return 49;
+	case MON_TOZIKO: return 50;
+	case MON_FUTO: return 51;
+	case MON_MAMIZO: return 52;
 	}
 }
 
@@ -1260,6 +1263,15 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 49:
 		index.push_back(MON_TOKIKO);
+		break;
+	case 50:
+		index.push_back(MON_TOZIKO);
+		break;
+	case 51:
+		index.push_back(MON_FUTO);
+		break;
+	case 52:
+		index.push_back(MON_MAMIZO);
 		break;
 	}
 
@@ -1742,6 +1754,16 @@ void SetResistMonster(monster* mon)
 	case MON_TOKIKO:
 		mon->wind_resist=1;
 		mon->poison_resist=-1;
+		break;
+	case MON_TOZIKO:
+		mon->elec_resist=3;
+		mon->ice_resist=1;
+		mon->poison_resist=1;
+		break;
+	case MON_FUTO:
+		mon->fire_resist=1;
+		break;
+	case MON_MAMIZO:
 		break;
 	}
 }

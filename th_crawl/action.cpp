@@ -363,19 +363,19 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + 8)
 		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + 8))
-		you.search_pos.x++;
+		you.search_pos.x+= c.x - you.position.x;
 	else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - 8)
 		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - 8))
-		you.search_pos.x--;
+		you.search_pos.x-= you.position.x - c.x ;
 	if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + 8)
 		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + 8))
-		you.search_pos.y++;
+		you.search_pos.y+= c.y - you.position.y;
 	else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
 		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - 8)
 		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - 8))
-		you.search_pos.y--;
+		you.search_pos.y-= you.position.y -c.y;
 
 
 
@@ -794,6 +794,30 @@ void Wide_Search()
 			break;
 		case 'u':
 			Move(coord_def(you.position.x+1,you.position.y-1));
+			break;
+		case 'J':
+			Move(coord_def(you.position.x,you.position.y-8));  //위
+			break;
+		case 'K':
+			Move(coord_def(you.position.x,you.position.y+8)); //아래
+			break;
+		case 'H':
+			Move(coord_def(you.position.x-8,you.position.y)); //왼쪽
+			break;
+		case 'L':
+			Move(coord_def(you.position.x+8,you.position.y)); //오른쪽
+			break;
+		case 'B':
+			Move(coord_def(you.position.x-8,you.position.y+8));
+			break;
+		case 'N':
+			Move(coord_def(you.position.x+8,you.position.y+8));
+			break;
+		case 'Y':
+			Move(coord_def(you.position.x-8,you.position.y-8));
+			break;
+		case 'U':
+			Move(coord_def(you.position.x+8,you.position.y-8));
 			break;
 		case '>':
 			if(down_distans.empty())

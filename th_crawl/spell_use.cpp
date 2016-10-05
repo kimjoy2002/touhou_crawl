@@ -3014,7 +3014,40 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_change(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
 
+bool skill_unluck(int power, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(order && target_unit)
+	{
+		if( target_unit->isplayer())
+		{
+			you.SetUnluck(3);
+
+			printarray(false,false,false,CL_small_danger,4,order->GetName()->name.c_str(),order->GetName()->name_do(true),target_unit->GetName()->name.c_str(),"의 운기를 조작했다. ");
+			
+			if(you.s_unluck<=3)
+				printlog("약간의 불행이 느껴졌다.",false,false,false,CL_small_danger);
+			else if(you.s_unluck<=6)
+				printlog("상당히 불행해진 것 같다.",false,false,false,CL_small_danger);
+			else
+				printlog("세상의 악의가 느껴진다!",false,false,false,CL_danger);
+
+			return true;
+		}
+		else
+		{
+			printarray(true,false,false,CL_small_danger,7,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),"의 운기를 조작했다.",target_unit->GetName()->name.c_str(),target_unit->GetName()->name_is(true),"왠지 불행해보인다.");
+			return true;
+		}
+	}
+	return false;
+}
 
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -3453,6 +3486,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_TOZIKO:
 		break;
 	case MON_FUTO:
+		list->push_back(spell(SPL_FIRE_BALL,15));
+		list->push_back(spell(SPL_UNLUCK,25));
 		break;
 	case MON_MAMIZO:
 		break;
@@ -3687,6 +3722,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_summon_namaz(power,short_,order,target);
 	case SPL_SCHEMA_TANMAC:
 		return skill_schema_tanmac(power,short_,order,target);
+	case SPL_CHANGE:
+		return skill_change(power,short_,order,target);
+	case SPL_UNLUCK:
+		return skill_unluck(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -4074,6 +4113,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_summon_namaz(power,short_,&you,target);
 	case SPL_SCHEMA_TANMAC:
 		return skill_schema_tanmac(power,short_,&you,target);
+	case SPL_CHANGE:
+		return skill_change(power,short_,&you,target);
+	case SPL_UNLUCK:
+		return skill_unluck(power,short_,&you,target);
 	default:
 		return false;
 	}

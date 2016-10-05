@@ -1761,7 +1761,7 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_FUTO:
-		mon->fire_resist=1;
+		mon->fire_resist=2;
 		break;
 	case MON_MAMIZO:
 		break;

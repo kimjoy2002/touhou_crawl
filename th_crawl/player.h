@@ -236,6 +236,7 @@ public:
 	int s_stasis;
 	bool force_strong; //강화/약화(위력 2배 1/2배)
 	int force_turn; //강화/약화턴
+	int s_unluck;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -421,6 +422,7 @@ public:
 	bool SetExhausted(int s_exhausted_);
 	bool SetStasis(int s_stasis_);
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
+	bool SetUnluck(int s_unluck_);
 	
 	int GetInvisible();
 	int GetSaved(){return true;};

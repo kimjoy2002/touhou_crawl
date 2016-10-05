@@ -1186,6 +1186,24 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"π´≥‰π´ªÛ", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
 				rc.left += fontDesc.Width*9;	
 			}
+			if(you.s_unluck > 0)
+			{
+				if(you.s_unluck <= 3)
+				{
+					pfont->DrawTextA(pSprite,"»‰", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+					rc.left += fontDesc.Width*3;	
+				}
+				else if(you.s_unluck <= 6)
+				{
+					pfont->DrawTextA(pSprite,"¥Î»‰", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_small_danger);
+					rc.left += fontDesc.Width*5;	
+				}
+				else
+				{
+					pfont->DrawTextA(pSprite,"∫“∏Í", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+					rc.left += fontDesc.Width*5;	
+				}
+			}
 
 		
 			{

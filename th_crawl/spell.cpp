@@ -126,7 +126,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_FIRE_STORM:
 	case SPL_BLIZZARD: 
 	case SPL_FIELD_VIOLET:
-	case SPL_CONTROLED_BLINK: 
+	case SPL_CONTROLED_BLINK:  
+	case SPL_UNLUCK:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_BURST:
 	case SPL_MANA_DRAIN:	
@@ -183,6 +184,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_ALERT_NOISE: 
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
+	case SPL_CHANGE:
 		return (S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
@@ -232,6 +234,7 @@ int SpellLength(spell_list skill)
 	case SPL_BLOOD_SMITE:
 	case SPL_STASIS:
 	case SPL_SCHEMA_TANMAC:
+	case SPL_UNLUCK:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -315,6 +318,7 @@ int SpellLength(spell_list skill)
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
 	case SPL_ALERT_NOISE: 
+	case SPL_CHANGE:
 	default:
 		return 0;		
 	}
@@ -544,6 +548,10 @@ const char* SpellString(spell_list skill)
 		return "나마즈 소환";		
 	case SPL_SCHEMA_TANMAC:
 		return "경계 탄막";
+	case SPL_CHANGE:
+		return "둔갑술";
+	case SPL_UNLUCK:
+		return "파국의 개문";
 	default:
 		return "알수없는 마법";
 	}
@@ -646,6 +654,7 @@ int SpellLevel(spell_list skill)
 	case SPL_MOON_COMMUNICATION:
 	case SPL_MANA_DRAIN:
 	case SPL_BLOOD_SMITE:
+	case SPL_CHANGE:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -664,6 +673,7 @@ int SpellLevel(spell_list skill)
 	case SPL_HEAL_ALL:
 	case SPL_CANNON:
 	case SPL_FIRE_SPREAD:
+	case SPL_UNLUCK:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -698,6 +708,8 @@ int SpellNoise(spell_list skill)
 	case SPL_DRAW_POWER:
 	case SPL_MANA_DRAIN:	
 	case SPL_SCHEMA_TANMAC:
+	case SPL_CHANGE:
+	case SPL_UNLUCK:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1052,6 +1064,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_SUMMON):num==1?(SKT_EARTH):(SKT_ERROR);	
 	case SPL_SCHEMA_TANMAC:
 		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_CHANGE:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_UNLUCK:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);	
 	default:
 		return SKT_ERROR;
 	}
@@ -1172,6 +1188,8 @@ int SpellCap(spell_list skill)
 	case SPL_ALERT_NOISE: 
 	case SPL_SUMMON_NAMAZ:
 	case SPL_SCHEMA_TANMAC:
+	case SPL_CHANGE:
+	case SPL_UNLUCK:
 		return 200;
 	default:
 	case SPL_BLINK:

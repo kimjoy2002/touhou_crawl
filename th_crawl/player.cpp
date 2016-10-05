@@ -1664,7 +1664,8 @@ void players::ExpRecovery(int exper_)
 								if(mon_->isYourShight())
 								{
 									printarray(true,false,false,CL_lilly,3,mon_->name.name.c_str(),mon_->name.name_is(true),"부활했다!");
-									printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE),true,false,false,CL_normal);
+									if(mon_->CanSpeak())
+										printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE),true,false,false,CL_normal);
 								}
 								while(you.lilly_allys[i].level > mon_->level)
 								{

@@ -1815,6 +1815,14 @@ bool monster::isView(const monster* monster_info)
 	return true;
 
 }
+bool monster::CanSpeak()
+{
+	if((!env[current_level].isSilence(position))  && flag & M_FLAG_SPEAK)
+	{
+		return true;
+	}
+	return false;
+}
 bool monster::dead(parent_type reason_, bool message_, bool remove_)
 {
 	bool sight_ = false;

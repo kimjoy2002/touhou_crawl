@@ -1364,9 +1364,8 @@ bool GodAccpect_Explore_100()
 				{
 					for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
 					{
-						if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)))
+						if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)) && it->CanSpeak())
 						{
-							//TODO: 나중에 사일런스범위면 대사를 안치도록하기
 							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_NORMAL),true,false,false,CL_normal);
 							return true;
 						}

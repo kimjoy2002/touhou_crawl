@@ -2288,8 +2288,8 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 
 				}
 
-
-				printlog(fairy_speak(hit_mon, person_, FS_ENTER),true,false,false,CL_normal);
+				if(hit_mon->CanSpeak())
+					printlog(fairy_speak(hit_mon, person_, FS_ENTER),true,false,false,CL_normal);
 				
 				you.god_value[GT_LILLY][i] = 1;
 				

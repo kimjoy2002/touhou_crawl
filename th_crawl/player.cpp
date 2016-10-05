@@ -1078,7 +1078,7 @@ int players::GetBuffOk(stat_up stat_)
 //}
 int players::HpRecoverDelay(int delay_)
 {
-	float base_ = (((float)rand_int(270,330))/(min(max_hp,50)+7.0f)+delay_)*10;
+	float base_ = (((float)rand_int(270,330))/(min(max_hp,40)+7.0f)+delay_)*10;
 
 	//ex 20이면 20턴당 1회복 100턴간 5회복
 	//10이번 100턴간 10회복

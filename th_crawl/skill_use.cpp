@@ -2387,7 +2387,40 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 {
+	
+	if(monster* hit_mon =(monster*)env[current_level].isMonsterPos(target.x,target.y,order))
+	{	
+		
+		for(int i = 0; i < 5; i++)
+		{
+			if(you.god_value[GT_LILLY][i]==1)
+			{
+				if(hit_mon->isLive() && hit_mon->id == you.lilly_allys[i].id && hit_mon->map_id == you.lilly_allys[i].map_id)
+				{
+					if(hit_mon->hp >= hit_mon->max_hp)
+					{
+						printarray(true,false,false,CL_normal,1,"이 요정은 이미 체력이 가득 차있다.");
+						return false;
+					}
+					if(!hit_mon->isUserAlly())
+					{						
+						printarray(true,false,false,CL_normal,1,"이 요정은 지금 당신에게 적대적이다.");
+						return false;
+					}
+					
+					hit_mon->HpUpDown(max(1,hit_mon->max_hp*rand_int(10,35)/100),DR_NONE);
+					printarray(true,false,false,CL_lilly,3,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"봄의 기운을 받아 체력이 회복되었다.");
+		
+					return true;
+				}
+			}
+		}	
+	}
+	
+	
+	printarray(true,false,false,CL_normal,1,"동료 요정을 대상으로 선택해야한다.");
 	return false;
+
 }
 bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 {

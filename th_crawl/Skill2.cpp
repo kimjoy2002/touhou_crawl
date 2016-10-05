@@ -1198,7 +1198,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			return false;
 		}
 		if(!check_)
-			you.PowUpDown(-(10+randA(10)),true);
+			you.PowUpDown(-(20+randA(15)),true);
 		return true;
 	case SKL_LILLY_4:
 		if(check_ && you.power<100)
@@ -1367,7 +1367,7 @@ const char* SkillCostString(skill_list skill)
 	case SKL_LILLY_2:
 		return "(영력 2)";
 	case SKL_LILLY_3:
-		return "(영력 3, P 소량)";
+		return "(영력 3, P 약간)";
 	case SKL_LILLY_4:
 		return "(영력 5, P 대량)";
 	case SKL_YUYUKO_ON:

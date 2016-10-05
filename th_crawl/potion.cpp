@@ -247,17 +247,17 @@ void drinkpotion(potion_type kind)
 		{
 			bool up_ = false;
 			printlog("¿Ã π∞æ‡ø°º± ±Ú≤˚«— ∏¿¿Ã ≥≠¥Ÿ.",false,false,false,CL_normal);
-			if(you.s_str != you.m_str)
+			if(you.s_str < you.m_str)
 			{
 				you.StatUpDown(min(you.m_str-you.s_str,rand_int(1,5)),STAT_STR,true);
 				up_ = true;
 			}
-			if(you.s_dex != you.m_dex)
+			if(you.s_dex < you.m_dex)
 			{
 				you.StatUpDown(min(you.m_dex-you.s_dex,rand_int(1,5)),STAT_DEX,true);
 				up_ = true;
 			}
-			if(you.s_int != you.m_int)
+			if(you.s_int < you.m_int)
 			{
 				you.StatUpDown(min(you.m_int-you.s_int,rand_int(1,5)),STAT_INT,true);
 				up_ = true;

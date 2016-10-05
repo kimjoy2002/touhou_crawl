@@ -1613,11 +1613,11 @@ void players::ExpRecovery(int exper_)
 
 		
 		random_extraction<int> recover_;
-		if(s_str != m_str)
+		if(s_str < m_str)
 			recover_.push(0,1);
-		if(s_dex != m_dex)
+		if(s_dex < m_dex)
 			recover_.push(1,1);
-		if(s_int != m_int)
+		if(s_int < m_int)
 			recover_.push(2,1);
 
 		if(recover_.GetSize())

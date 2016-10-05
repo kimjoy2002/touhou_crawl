@@ -276,17 +276,17 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 	}
 	{
-		if(s_str != m_str && randA_1(20000) <= delay_)
+		if(s_str < m_str && randA_1(20000) <= delay_)
 		{
 			s_str++;
 			printlog("잃어버린 힘이 회복되었다.",false,false,false,CL_blue);
 		}	
-		else if(s_dex != m_dex && randA_1(20000) <= delay_)
+		else if(s_dex < m_dex && randA_1(20000) <= delay_)
 		{
 			s_dex++;
 			printlog("잃어버린 민첩이 회복되었다.",false,false,false,CL_blue);
 		}
-		else if(s_int != m_int && randA_1(20000) <= delay_)
+		else if(s_int < m_int && randA_1(20000) <= delay_)
 		{
 			s_int++;
 			printlog("잃어버린 지능이 회복되었다.",false,false,false,CL_blue);

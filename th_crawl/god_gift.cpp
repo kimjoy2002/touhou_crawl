@@ -243,15 +243,15 @@ void satori_gift()
 	}
 	if(randA(4)==0)
 	{//능력치회복
-		if(you.s_str != you.m_str)
+		if(you.s_str < you.m_str)
 		{
 			you.StatUpDown(you.m_str-you.s_str,STAT_STR,true);
 		}
-		if(you.s_dex != you.m_dex)
+		if(you.s_dex < you.m_dex)
 		{
 			you.StatUpDown(you.m_dex-you.s_dex,STAT_DEX,true);
 		}
-		if(you.s_int != you.m_int)
+		if(you.s_int < you.m_int)
 		{
 			you.StatUpDown(you.m_int-you.s_int,STAT_INT,true);
 		}

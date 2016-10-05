@@ -236,11 +236,19 @@ int SpellcardLength(spellcard_evoke_type skill)
 
 bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def &target)
 {
+	if(you.god == GT_LILLY)
+	{
+		printlog("릴리 화이트는 스펠카드의 존재를 증오한다! 스펠카드의 발동을 막았다.",true,false,false,CL_danger);	
+		printlog("아무 일도 일어나지 않았다.",true,false,false,CL_normal);	
+		
+		return true;
+	}
 	if(target == you.position && !SpellcardFlagCheck(kind,S_FLAG_SEIF) && !SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		printlog("자살할거야?",true,false,false,CL_small_danger);	
 		return false;
 	}
+
 	switch(kind)
 	{
 	case SPC_V_FIRE:

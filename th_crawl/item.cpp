@@ -427,7 +427,10 @@ const D3DCOLOR item::item_color()
 			{
 				return_ = CL_danger;
 			}
-		
+			if(you.god == GT_LILLY && (value1 == SCT_CHARGING))
+			{
+				return_ = CL_bad;
+			}		
 		}
 		break;
 	case ITM_RING:
@@ -436,6 +439,12 @@ const D3DCOLOR item::item_color()
 			int color_ = isGoodRing((ring_type)value1, identify?value2:1);
 			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_STAT);
 		}
+		break;
+	case ITM_SPELL:
+		if(you.god == GT_LILLY)
+		{
+			return_ = CL_bad;
+		}	
 		break;
 	case ITM_SPELLCARD:
 		//if(iden_list.amulet_list[value1].iden == 2)
@@ -729,7 +738,11 @@ bool item::isautopick()
 	case ITM_SCROLL:
 		if(iden_list.scroll_list[value1].iden == 3)
 		{	
-			if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
+			if(you.god == GT_LILLY && value1 == SCT_CHARGING)
+			{
+				return false;
+			}	
+			else if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
 			{
 				return false;
 			}
@@ -742,7 +755,11 @@ bool item::isautopick()
 		}
 		else
 			return true;
-	case ITM_SPELL:
+	case ITM_SPELL:		
+		if(you.god == GT_LILLY)
+		{
+			return false;
+		}	
 		return true;
 	case ITM_SPELLCARD:
 		return true;

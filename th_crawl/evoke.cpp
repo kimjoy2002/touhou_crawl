@@ -212,7 +212,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		return false;
 	}
 	int level_ = you.skill[SKT_EVOCATE].level;
-
+	level_ = max(level_,you.level/3 + you.skill[SKT_EVOCATE].level*2/3);
 	
 	switch(kind)
 	{

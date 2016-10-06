@@ -2296,9 +2296,9 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				
 				if((hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
 				{
-				char temp[200];
-				sprintf_s(temp,200,"%s%s동료가 되었다.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
-				AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
+					char temp[200];
+					sprintf_s(temp,200,"%s%s동료가 되었다.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
+					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
 				}
 				else{					
 					char temp[200];
@@ -2307,6 +2307,41 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				}
 
 				you.Ability(SKL_LILLY_1,true,true);
+
+				if(hit_mon->id == MON_SUNNY || hit_mon->id == MON_LUNAR || hit_mon->id == MON_STAR)
+				{//삼월정 특수 대사!					
+					for(auto it = env[you.lilly_allys[i].floor].mon_vector.begin(); it != env[you.lilly_allys[i].floor].mon_vector.end();it++)
+					{
+						if(it->isLive() && (it->id == MON_SUNNY || hit_mon->id == MON_LUNAR || hit_mon->id == MON_STAR) &&
+							!(*it).isUserAlly()  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)) && it->CanSpeak())
+						{
+
+							switch(it->id)
+							{
+							case MON_SUNNY:
+								if(hit_mon->id == MON_LUNAR)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"포기가 빠르다고 루나!\"");
+								else if(hit_mon->id == MON_STAR)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"스타?!\"");
+								break;
+							case MON_LUNAR:
+								if(hit_mon->id == MON_SUNNY)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"써니? 농담이지?\"");
+								else if(hit_mon->id == MON_STAR)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"어? 스타, 진심이야?\"");
+								break;
+							case MON_STAR:
+								if(hit_mon->id == MON_SUNNY)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"우릴 배신하는거야 써니?\"");
+								else if(hit_mon->id == MON_LUNAR)
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"속지마 루나!\"");
+							}
+						}
+					}
+				}
+
+
+
 				return true;
 			}
 			else

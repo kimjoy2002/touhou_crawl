@@ -398,7 +398,7 @@ void start_mainmenu()
 	temp = "카라스텐구: 비행이 가능. 괜찮은 전투능력과 좋은 대기마법 적성을 가졌다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'d',4,temp,true,select_char,3);
-	temp = "백랑텐구: 10%높은체력, 높은 근접 전투 적성을 가졌다. 마법은 잘 못 다룬다.\n";
+	temp = "백랑텐구: 10% 높은체력, 높은 근접 전투 적성을 가졌다. 마법은 잘 못 다룬다.\n";
 	temp += "강한 턱 변이를 들고 시작해 근접공격에서 추가공격을 할 수 있다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(3,'e',4,temp,true,select_char,4);

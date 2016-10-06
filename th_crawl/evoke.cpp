@@ -141,7 +141,7 @@ int Evokeusepower(evoke_kind skill, bool max_)
 	switch(skill)
 	{
 	case EVK_PAGODA:
-		return 10;
+		return 5;
 	case EVK_AIR_SCROLL:
 		return 50;
 	case EVK_DREAM_SOUL:

@@ -392,6 +392,18 @@ attack_weapon_type players::GetAttackType()
 int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 {	
 	int damage_ = atk;
+
+	if(s_unluck>3 && randA(s_unluck>6?10:20)==0)
+	{
+		//대흉이상에선 최대 데미지를 맞을 확률이 존재한다.
+		//대흉5%  불멸 10%		
+		if(wiz_list.wizard_mode == 1)
+		{	
+			printlog("풀다이스!",true,false,false,CL_danger);
+		}
+		damage_ = max_atk;
+
+	}
 	
 	int bonus_damage = 0;
 	

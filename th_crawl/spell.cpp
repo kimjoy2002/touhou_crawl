@@ -897,11 +897,13 @@ int SpellNoise(spell_list skill)
 
 int SpellSpeed(spell_list skill)
 {
-	//switch(skill)
-	//{
-	//default:
-	return 10;
-	//}
+	switch(skill)
+	{
+	case SPL_AIR_STRIKE:
+		return 5;
+	default:
+		return 10;
+	}
 }
 int Spellsize(spell_list skill)
 {	

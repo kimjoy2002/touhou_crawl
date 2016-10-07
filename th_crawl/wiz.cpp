@@ -471,7 +471,7 @@ void wiz_mode()
 			break;
 		case '!':
 			{
-				you.Memorize(SPL_THUNDER,true);
+				you.Memorize(SPL_AIR_STRIKE,true);
 			}
 			break;
 		case 'M':

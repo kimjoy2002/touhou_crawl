@@ -1669,7 +1669,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,7+pow/8),2*(7+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
+		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3124,6 +3124,19 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = 2*(9+power/8);
+		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("바람의 탄환",true));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+			throwtanmac(25,beam,temp_infor,NULL);
+		order->SetParadox(0); 
+		return true;
+	}
 	return false;
 }
 bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)

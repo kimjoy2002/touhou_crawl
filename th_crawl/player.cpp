@@ -1654,6 +1654,16 @@ void players::ExpRecovery(int exper_)
 			}
 		}
 
+		
+		if(s_unluck)
+		{
+			s_unluck--;
+			if(!s_unluck)
+			{
+				printlog("당신의 운세는 정상으로 돌아왔다.",true,false,false,CL_blue);
+			}
+
+		}
 
 		if(you.god == GT_LILLY)
 		{

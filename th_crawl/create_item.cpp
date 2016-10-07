@@ -195,6 +195,16 @@ item_infor& CreateFloorItem(int floor, item_infor* item_)
 		id_to_item(31, item_);
 		return (*item_);
 	}
+	if(you.s_unluck>3 && randA(you.s_unluck>6?6:12)==0)
+	{
+		//대흉이상의 불운에선 확률적으로 나쁜템이 잔뜩 나온다.
+		random_extraction<int> rand_;
+		rand_.push(4);//나쁜포션
+		rand_.push(9);//나쁜반지
+		id_to_item(rand_.pop(), item_);
+		return (*item_);
+	}
+
 
 
 

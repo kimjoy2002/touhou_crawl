@@ -182,6 +182,10 @@ int players::GetHit()
 	{
 		hit_+=6;
 	}
+	if(s_unluck) //명중다운
+	{
+		hit_-=s_unluck>6?9:(s_unluck>3?7:5);
+	}
 
 
 	if(as_penalty > GetPenaltyMinus(1))
@@ -342,6 +346,10 @@ int players::GetThrowHit(const item* it)
 	if(GetProperty(TPT_SLAY))
 	{
 		hit_+=6;
+	}
+	if(s_unluck) //명중다운
+	{
+		hit_-=s_unluck>6?9:(s_unluck>3?7:5);
 	}
 
 

@@ -919,6 +919,7 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	if(num)
 		power_/=num;
 	power_+=skill[SKT_SPELLCASTING].level/2;
+
 	if(s_clever)
 		power_+=4;
 
@@ -948,6 +949,10 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	{
 		power_*=1.3f;
 	}
+
+
+	power_*=1.5f; //마법인헨서 기본으로 딸려있도록
+
 
 	return power_;
 }

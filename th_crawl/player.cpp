@@ -1658,6 +1658,24 @@ void players::ExpRecovery(int exper_)
 		if(s_unluck)
 		{
 			s_unluck--;
+
+			if(s_unluck>6 && randA(1)) //불멸에서 50%의 확률로 UFO가 떨어진다.
+			{
+				random_extraction<int> ufo_;
+				ufo_.push(MON_RED_UFO);
+				ufo_.push(MON_BLUE_UFO);
+				ufo_.push(MON_GREEN_UFO);
+				int i = rand_int(2,3);
+				for(; i>0 ; i--)
+				{
+					int time_ = rand_int(20,60);
+					if(monster *mon_ = BaseSummon(ufo_.choice(), time_, true, true, 2, NULL, you.position, SKD_OTHER, -1))
+					{
+					}
+				}
+				printlog("이럴수가! 하늘에서 UFO가 떨어졌다!",true,false,false,CL_danger);
+				enterlog();
+			}
 			if(!s_unluck)
 			{
 				printlog("당신의 운세는 정상으로 돌아왔다.",true,false,false,CL_blue);

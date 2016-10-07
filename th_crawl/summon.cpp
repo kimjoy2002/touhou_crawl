@@ -103,6 +103,10 @@ int GetSummonMaxNumber(spell_list skill)
 		return 1;
 	case SPL_SUMMON_NAMAZ:
 		return 1;
+	case SPL_SUMMON_RACOON:
+		return 3;		
+	case SPL_SUMMON_YOUKAI:
+		return 3;		
 	default:
 		return -1;
 	}
@@ -147,6 +151,10 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_FAKE_DOLLS_WAR;
 	case SPL_SUMMON_NAMAZ:
 		return SKD_SUMMON_NAMAZ;
+	case SPL_SUMMON_RACOON:
+		return SKD_SUMMON_RACOON;
+	case SPL_SUMMON_YOUKAI:
+		return SKD_SUMMON_YOUKAI;
 	default:
 		return SKD_OTHER;
 	}

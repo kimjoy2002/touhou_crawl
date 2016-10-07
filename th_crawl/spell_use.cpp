@@ -3141,7 +3141,20 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_=false;
+	dif_rect_iterator rit(order->position,2);
+	int id_ = MON_RACCON;
+	int time_ = rand_int(20,30)+randA(power);
+
+	int pow_ = power/3+randA(power*2/3);
+	int i = 3;
+
+	for(; i>0 ; i--)
+	{
+		if(BaseSummon(id_, time_, true, false, 2, order, target, SKD_SUMMON_RACOON, GetSummonMaxNumber(SPL_SUMMON_RACOON)))
+			return_ = true;
+	}
+	return return_;
 }
 bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
 {
@@ -3628,6 +3641,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_UNLUCK,25));
 		break;
 	case MON_MAMIZO:
+		list->push_back(spell(SPL_SUMMON_RACOON,25));
 		break;
 	default:
 		break;

@@ -672,7 +672,6 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_GOLEM:
 	case SPL_CHARM:
 	case SPL_LASER:
-	case SPL_STONE_UPLIFT:
 	case SPL_KNIFE_COLLECT:
 	case SPL_RABBIT_HORN:
 	case SPL_TIME_PARADOX: 
@@ -695,6 +694,7 @@ int SpellLevel(spell_list skill)
 	case SPL_JUMP_ATTACK:
 	case SPL_THUNDER:
 	case SPL_EMERALD_CITY:
+	case SPL_STONE_UPLIFT:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -1066,7 +1066,7 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_STONE_TRAP:
 		return num==0?(SKT_EARTH):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_STONE_UPLIFT:
-		return num==0?(SKT_EARTH):num==1?(SKT_ALCHEMY):(SKT_ERROR);
+		return num==0?(SKT_EARTH):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_KANAME_DRILL:
 		return num==0?(SKT_EARTH):num==1?(SKT_CONJURE):(SKT_ERROR);
 	case SPL_DIAMOND_HARDNESS:

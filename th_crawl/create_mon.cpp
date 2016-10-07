@@ -377,6 +377,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
 	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //앨리스
+	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //후토
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 

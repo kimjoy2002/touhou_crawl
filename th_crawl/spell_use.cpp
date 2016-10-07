@@ -3087,6 +3087,60 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 }
 
 
+bool skill_thunder(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_mamizo_evade(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_shatter(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_autumn_blade(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_philosophers_stone(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -3765,7 +3819,33 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_CHANGE:
 		return skill_change(power,short_,order,target);
 	case SPL_UNLUCK:
-		return skill_unluck(power,short_,order,target);
+		return skill_unluck(power,short_,order,target);	
+	case SPL_THUNDER:
+		return skill_thunder(power,short_,order,target);	
+	case SPL_AIR_STRIKE:
+		return skill_air_strike(power,short_,order,target);	
+	case SPL_SUMMON_RACOON:
+		return skill_summon_racoon(power,short_,order,target);	
+	case SPL_SUMMON_YOUKAI:
+		return skill_summon_youkai(power,short_,order,target);	
+	case SPL_MAMIZO_EVADE:
+		return skill_mamizo_evade(power,short_,order,target);	
+	case SPL_MACRO_BURST:
+		return skill_macro_burst(power,short_,order,target);	
+	case SPL_SHATTER:
+		return skill_shatter(power,short_,order,target);	
+	case SPL_SUMMON_YOSHIKA:
+		return skill_summon_yoshika(power,short_,order,target);	
+	case SPL_NESY_CANNON:
+		return skill_nesy_cannon(power,short_,order,target);	
+	case SPL_MERMAID_SONG:
+		return skill_mermaid_song(power,short_,order,target);	
+	case SPL_EMERALD_CITY:
+		return skill_emerald_city(power,short_,order,target);	
+	case SPL_AUTUMN_BLADE:
+		return skill_autumn_blade(power,short_,order,target);	
+	case SPL_PHILOSOPHERS_STONE:
+		return skill_philosophers_stone(power,short_,order,target);	
 	default:
 		return false;
 	}
@@ -4156,7 +4236,33 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_CHANGE:
 		return skill_change(power,short_,&you,target);
 	case SPL_UNLUCK:
-		return skill_unluck(power,short_,&you,target);
+		return skill_unluck(power,short_,&you,target);	
+	case SPL_THUNDER:
+		return skill_thunder(power,short_,&you,target);	
+	case SPL_AIR_STRIKE:
+		return skill_air_strike(power,short_,&you,target);	
+	case SPL_SUMMON_RACOON:
+		return skill_summon_racoon(power,short_,&you,target);	
+	case SPL_SUMMON_YOUKAI:
+		return skill_summon_youkai(power,short_,&you,target);	
+	case SPL_MAMIZO_EVADE:
+		return skill_mamizo_evade(power,short_,&you,target);	
+	case SPL_MACRO_BURST:
+		return skill_macro_burst(power,short_,&you,target);	
+	case SPL_SHATTER:
+		return skill_shatter(power,short_,&you,target);	
+	case SPL_SUMMON_YOSHIKA:
+		return skill_summon_yoshika(power,short_,&you,target);	
+	case SPL_NESY_CANNON:
+		return skill_nesy_cannon(power,short_,&you,target);	
+	case SPL_MERMAID_SONG:
+		return skill_mermaid_song(power,short_,&you,target);	
+	case SPL_EMERALD_CITY:
+		return skill_emerald_city(power,short_,&you,target);	
+	case SPL_AUTUMN_BLADE:
+		return skill_autumn_blade(power,short_,&you,target);	
+	case SPL_PHILOSOPHERS_STONE:
+		return skill_philosophers_stone(power,short_,&you,target);	
 	default:
 		return false;
 	}

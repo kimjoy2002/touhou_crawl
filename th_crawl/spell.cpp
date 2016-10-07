@@ -93,6 +93,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_DREAM:
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
+	case SPL_SUMMON_RACOON:
+	case SPL_SUMMON_YOUKAI:
+	case SPL_SUMMON_YOSHIKA:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
@@ -128,7 +131,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_FIELD_VIOLET:
 	case SPL_CONTROLED_BLINK:  
 	case SPL_UNLUCK:
+	case SPL_THUNDER:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
+	case SPL_MERMAID_SONG:
+		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
 	case SPL_BURST:
 	case SPL_MANA_DRAIN:	
 	case SPL_BLOOD_SMITE:
@@ -144,11 +150,15 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_KANAME_DRILL:
 	case SPL_WATER_CANNON:
 	case SPL_SCHEMA_TANMAC:
+	case SPL_AIR_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CANNON:
+	case SPL_NESY_CANNON:
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_MACRO_BURST:
+		return (S_FLAG_CLOUD | S_FLAG_SPEAK | S_FLAG_DIREC ) & flag;
 	case SPL_SHOCK:
 		return (S_FLAG_SPEAK | S_FLAG_DIREC  | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CHAIN_LIGHTNING:
@@ -167,6 +177,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_POISON_SKIN:
 	case SPL_STONE_FORM:
 	case SPL_KNIFE_COLLECT:
+	case SPL_AUTUMN_BLADE:
+	case SPL_PHILOSOPHERS_STONE:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_HASTE_ALL:
 		return ((S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
@@ -182,6 +194,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_THE_WORLD:
 	case SPL_CALL_HOUND:
 	case SPL_ALERT_NOISE: 
+	case SPL_SHATTER:
+	case SPL_EMERALD_CITY:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
@@ -191,6 +205,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_COLD_BRAND:
 	case SPL_POISON_BRAND:
 	case SPL_SUICIDE_BOMB: //이건 패시브
+	case SPL_MAMIZO_EVADE: //이건 패시브
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
 	default:
 		return false;
@@ -235,6 +250,7 @@ int SpellLength(spell_list skill)
 	case SPL_STASIS:
 	case SPL_SCHEMA_TANMAC:
 	case SPL_UNLUCK:
+	case SPL_MERMAID_SONG:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -248,6 +264,7 @@ int SpellLength(spell_list skill)
 	case SPL_FIRE_STORM:
 	case SPL_FIELD_VIOLET:
 	case SPL_CANNON:
+	case SPL_NESY_CANNON:
 		return 7;
 	case SPL_TWIST:
 	case SPL_FIRE_BOLT:
@@ -257,6 +274,8 @@ int SpellLength(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_FIRE_SPREAD:
 	case SPL_SUMMON_NAMAZ:
+	case SPL_THUNDER:
+	case SPL_AIR_STRIKE:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -319,6 +338,15 @@ int SpellLength(spell_list skill)
 	case SPL_FAKE_DOLLS_WAR:
 	case SPL_ALERT_NOISE: 
 	case SPL_CHANGE:
+	case SPL_SUMMON_RACOON:
+	case SPL_SUMMON_YOUKAI:
+	case SPL_MAMIZO_EVADE:
+	case SPL_MACRO_BURST:
+	case SPL_SHATTER:
+	case SPL_SUMMON_YOSHIKA:
+	case SPL_EMERALD_CITY:
+	case SPL_AUTUMN_BLADE:
+	case SPL_PHILOSOPHERS_STONE:
 	default:
 		return 0;		
 	}
@@ -552,6 +580,32 @@ const char* SpellString(spell_list skill)
 		return "둔갑술";
 	case SPL_UNLUCK:
 		return "파국의 개문";
+	case SPL_THUNDER:
+		return "용신의 번개";
+	case SPL_AIR_STRIKE:
+		return "질풍선";
+	case SPL_SUMMON_RACOON:
+		return "너구리 탄막변화";
+	case SPL_SUMMON_YOUKAI:
+		return "백귀야행";
+	case SPL_MAMIZO_EVADE:
+		return "이승지장변화";
+	case SPL_MACRO_BURST:
+		return "매크로버스트";
+	case SPL_SHATTER:
+		return "분쇄";
+	case SPL_SUMMON_YOSHIKA:
+		return "강령 요시카";
+	case SPL_NESY_CANNON:
+		return "네시 물대포";
+	case SPL_MERMAID_SONG:
+		return "인어의 노래";
+	case SPL_EMERALD_CITY:
+		return "에메랄드 시티";
+	case SPL_AUTUMN_BLADE:
+		return "어텀 블레이드";
+	case SPL_PHILOSOPHERS_STONE:
+		return "현자의 돌";
 	default:
 		return "알수없는 마법";
 	}
@@ -607,6 +661,7 @@ int SpellLevel(spell_list skill)
 	case SPL_STONE_TRAP:
 	case SPL_POISON_SKIN:
 	case SPL_ALERT_NOISE: 
+	case SPL_MERMAID_SONG:
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -621,6 +676,8 @@ int SpellLevel(spell_list skill)
 	case SPL_KNIFE_COLLECT:
 	case SPL_RABBIT_HORN:
 	case SPL_TIME_PARADOX: 
+	case SPL_AIR_STRIKE:
+	case SPL_NESY_CANNON:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -636,6 +693,8 @@ int SpellLevel(spell_list skill)
 	case SPL_FAKE_DOLLS_WAR:
 	case SPL_STASIS:
 	case SPL_JUMP_ATTACK:
+	case SPL_THUNDER:
+	case SPL_EMERALD_CITY:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -655,6 +714,8 @@ int SpellLevel(spell_list skill)
 	case SPL_MANA_DRAIN:
 	case SPL_BLOOD_SMITE:
 	case SPL_CHANGE:
+	case SPL_MAMIZO_EVADE:
+	case SPL_SUMMON_YOSHIKA:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -665,6 +726,9 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_DREAM:
 	case SPL_CALL_HOUND:
 	case SPL_SUMMON_NAMAZ:
+	case SPL_SUMMON_RACOON:
+	case SPL_SUMMON_YOUKAI:
+	case SPL_AUTUMN_BLADE:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -674,13 +738,16 @@ int SpellLevel(spell_list skill)
 	case SPL_CANNON:
 	case SPL_FIRE_SPREAD:
 	case SPL_UNLUCK:
+	case SPL_MACRO_BURST:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
 	case SPL_FIRE_STORM:
 	case SPL_PERFERT_FREEZE: 
 	case SPL_THE_WORLD:
-		return 9;	
+	case SPL_SHATTER:
+	case SPL_PHILOSOPHERS_STONE:
+		return 9;
 	default:
 		return 0;
 	}
@@ -710,6 +777,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SCHEMA_TANMAC:
 	case SPL_CHANGE:
 	case SPL_UNLUCK:
+	case SPL_MAMIZO_EVADE:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -741,6 +809,8 @@ int SpellNoise(spell_list skill)
 	case SPL_BLOOD_SMITE:
 	case SPL_STASIS:
 	case SPL_JUMP_ATTACK:
+	case SPL_AIR_STRIKE:
+	case SPL_SUMMON_YOSHIKA:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -788,6 +858,13 @@ int SpellNoise(spell_list skill)
 	case SPL_DOLLS_WAR:
 	case SPL_FAKE_DOLLS_WAR:
 	case SPL_SUMMON_NAMAZ:
+	case SPL_SUMMON_RACOON:
+	case SPL_SUMMON_YOUKAI:
+	case SPL_MACRO_BURST:
+	case SPL_NESY_CANNON:
+	case SPL_MERMAID_SONG:
+	case SPL_EMERALD_CITY:
+	case SPL_AUTUMN_BLADE:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -801,12 +878,15 @@ int SpellNoise(spell_list skill)
 	case SPL_CANNON:
 	case SPL_FIRE_SPREAD:
 	case SPL_STONE_UPLIFT:
+	case SPL_THUNDER:
+	case SPL_PHILOSOPHERS_STONE:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
+	case SPL_SHATTER:
 		return 24; //대형소음
 	default:
 		return 0;
@@ -1068,6 +1148,32 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);	
 	case SPL_UNLUCK:
 		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_THUNDER:
+		return num==0?(SKT_AIR):num==1?(SKT_CONJURE):(SKT_ERROR);	
+	case SPL_AIR_STRIKE:
+		return num==0?(SKT_AIR):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_SUMMON_RACOON:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_SUMMON_YOUKAI:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_MAMIZO_EVADE:
+		return num==0?(SKT_TRANS):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_MACRO_BURST:
+		return num==0?(SKT_AIR):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_SHATTER:
+		return num==0?(SKT_EARTH):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_SUMMON_YOSHIKA:
+		return num==0?(SKT_SUMMON):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_NESY_CANNON:
+		return num==0?(SKT_CONJURE):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_MERMAID_SONG:
+		return num==0?(SKT_MENTAL):num==1?(SKT_ERROR):(SKT_ERROR);	
+	case SPL_EMERALD_CITY:
+		return num==0?(SKT_EARTH):num==1?(SKT_ALCHEMY):(SKT_ERROR);
+	case SPL_AUTUMN_BLADE:
+		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_PHILOSOPHERS_STONE:
+		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1152,6 +1258,9 @@ int SpellCap(spell_list skill)
 	case SPL_KANAME_DRILL:
 	case SPL_SUMMON_LESSOR_DEMON:
 	case SPL_TIME_PARADOX: 
+	case SPL_THUNDER:
+	case SPL_AIR_STRIKE:
+	case SPL_EMERALD_CITY:
 		return 150;
 	case SPL_SUMMON_SEKIBANKI:
 	case SPL_SPARK:
@@ -1190,6 +1299,16 @@ int SpellCap(spell_list skill)
 	case SPL_SCHEMA_TANMAC:
 	case SPL_CHANGE:
 	case SPL_UNLUCK:
+	case SPL_SUMMON_RACOON:
+	case SPL_SUMMON_YOUKAI:
+	case SPL_MAMIZO_EVADE:
+	case SPL_MACRO_BURST:
+	case SPL_SHATTER:
+	case SPL_SUMMON_YOSHIKA:
+	case SPL_NESY_CANNON:
+	case SPL_MERMAID_SONG:
+	case SPL_AUTUMN_BLADE:
+	case SPL_PHILOSOPHERS_STONE:
 		return 200;
 	default:
 	case SPL_BLINK:

@@ -1403,6 +1403,7 @@ int GetSpellBombRange(spell_list spell)
 	case SPL_CONFUSE_CLOUD:
 	case SPL_STONE_TRAP:
 	case SPL_STONE_UPLIFT:
+	case SPL_THUNDER:
 		return 1;
 	default:
 		break;

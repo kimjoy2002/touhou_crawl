@@ -915,6 +915,7 @@ int Spellsize(spell_list skill)
 	case SPL_STONE_UPLIFT:
 	case SPL_POISON_CLOUD:
 	case SPL_CONFUSE_CLOUD:
+	case SPL_THUNDER:
 		return 1;
 	default:
 		return 0;

@@ -3089,6 +3089,37 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 
 bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 {
+	if(env[current_level].isMove(target.x, target.y))
+	{
+		vector<coord_def> vt_;
+		{
+			rect_iterator rit(target,1,1);
+			for(;!rit.end();rit++)
+			{
+				if(randA(randA(600))<power+100 || (*rit) == target)
+				{
+					if(env[current_level].isMove(rit->x,rit->y))
+					{
+						env[current_level].MakeEffect(*rit,&img_blast[2],false);
+						vt_.push_back(*rit);
+					}
+				}
+			}
+		}
+		for(auto it = vt_.begin();it != vt_.end();it++)
+		{
+			if(env[current_level].isMove(it->x,it->y))
+			{
+				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
+				{
+					hit_->damage(attack_infor(randC(3,13+power/9),3*(13+power/9),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("¹ø°³",false)), true);
+				}
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		return true;
+	}
 	return false;
 }
 bool skill_air_strike(int power, bool short_, unit* order, coord_def target)

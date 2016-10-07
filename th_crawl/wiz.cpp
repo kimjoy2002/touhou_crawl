@@ -469,6 +469,11 @@ void wiz_mode()
 				you.s_the_world = -1;
 			}
 			break;
+		case '!':
+			{
+				you.Memorize(SPL_THUNDER,true);
+			}
+			break;
 		case 'M':
 			if(monster* mon_=BaseSummon(MON_RACCON, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{

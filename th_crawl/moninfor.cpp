@@ -476,6 +476,7 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_RACCON:
 		text_ += "누군가로 둔갑하기 좋아하는 너구리요괴.\n";
+		text_ += "주변에 무언가가 있으면 그 무언가로 변신할지도 모른다.\n";
 		break;
 	case MON_LANTERN_YOUKAI:
 		text_ += "제등의 모양을 하고 있는 츠쿠모가미의 요괴.\n";

@@ -3016,7 +3016,44 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_change(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(order->isplayer())
+		return false;
+	monster* mon_order = (monster*)order;
+
+	if(mon_order->id == MON_ENSLAVE_GHOST)
+		return false;
+
+	vector<int> target_mon_list;
+
+
+	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if(&(*it) != order && it->isLive() && !it->isUserAlly() && mon_order->isMonsterSight(it->position) &&
+			it->id != MON_RACCON && it->id != MON_MAMIZO && it->level + (it->flag & M_FLAG_UNIQUE?3:0) >= mon_order->level)
+		{ //아군이면서 둔갑 너구리가 아닐때 자기보다 레벨이 높을때 변신가능.
+			beam_iterator beam(order->position,order->position);
+			target_mon_list.push_back(it->id);
+		}
+	}
+	if(target_mon_list.empty())
+		return false;
+	
+	sort(target_mon_list.begin(), target_mon_list.end(),[&](const int &lf, const int &rf)
+	{
+		return mondata[lf].level + (mondata[lf].flag & M_FLAG_UNIQUE?3:0) > mondata[rf].level + (mondata[rf].flag & M_FLAG_UNIQUE?3:0);
+	}); //레벨이 높은 순서대로 나열(네임드는 레벨 보정치를 3 높게 잡음)
+	
+	if(env[current_level].isInSight(mon_order->position))
+		printarray(true,false,false,CL_magic,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),mondata[target_mon_list[0]].name.name.c_str(),mondata[target_mon_list[0]].name.name_by(true),"둔갑하였다!");
+			
+	mon_order->ChangeMonster(target_mon_list[0],0);
+	mon_order->flag &= ~M_FLAG_UNIQUE; //유니크 태그는 지운다.
+
+	mon_order->name.name = "둔갑한 " + mon_order->name.name;
+	
+	mon_order->s_changed = rand_int(20,30);//둔갑턴
+
+	return true;
 }
 
 bool skill_unluck(int power, bool short_, unit* order, coord_def target)
@@ -3299,6 +3336,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_NAMAZ:
 		list->push_back(spell(SPL_STONE_UPLIFT,10));
 		break;	
+	case MON_RACCON:
+		list->push_back(spell(SPL_CHANGE,30));
+		break;
 	case MON_LANTERN_YOUKAI:
 		list->push_back(spell(SPL_FIRE_SPREAD,25));
 		break;

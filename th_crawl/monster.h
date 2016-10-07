@@ -81,6 +81,7 @@ public:
 	int s_exhausted;
 	bool force_strong; //강화/약화(위력 2배 1/2배)
 	int force_turn; //강화/약화턴
+	int s_changed; //둔갑시간. 시간이 지나면 너구리로 돌아온다.
 
 	int summon_time;
 	parent_type summon_parent;

@@ -1318,6 +1318,12 @@ int SpellHunger(int level)
 
 bool SpellAiCondition(spell_list skill, const monster *mon)
 {
+	if(mon->s_changed && SpellFlagCheck(skill,S_FLAG_SUMMON))
+	{
+		return false;
+	}
+
+
 	switch(skill)
 	{
 	case SPL_GRAZE:

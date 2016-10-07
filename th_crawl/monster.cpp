@@ -39,7 +39,7 @@ ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRA
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
- force_strong(false), force_turn(0),
+ force_strong(false), force_turn(0), s_changed(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
@@ -104,6 +104,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_exhausted);
 	SaveData<bool>(fp, force_strong);
 	SaveData<int>(fp, force_turn);
+	SaveData<int>(fp, s_changed);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -204,6 +205,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_exhausted);
 	LoadData<bool>(fp, force_strong);
 	LoadData<int>(fp, force_turn);
+	LoadData<int>(fp, s_changed);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -302,6 +304,7 @@ void monster::init()
 	s_exhausted=0;
 	force_strong=false;
 	force_turn=0;
+	s_changed=0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -604,6 +607,8 @@ void monster::TurnLoad()
 		force_turn-=temp_turn;
 	else
 		force_turn =0;
+
+	//s_changed 둔갑은 다른 층에 지나와도 시간 리셋이 안되게(처리가 귀찮)
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -1699,11 +1704,13 @@ int monster::atkmove(int is_sight, bool only_move)
 			list<spell>::iterator it = spell_lists.begin();
 			for(;it != spell_lists.end();it++)
 			{
-				if(randA_1(100)<=it->percent)
+				spell_list id_ = (spell_list)(it->num);
+				int percent_ = it->percent;
+				if(randA_1(100)<=percent_)
 				{
-					if(isMonSafeSkill((spell_list)it->num,this,target_pos))
+					if(isMonSafeSkill(id_,this,target_pos))
 					{
-						if(SpellFlagCheck((spell_list)it->num,S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
+						if(SpellFlagCheck(id_,S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
 						{
 							if(env[current_level].isSilence(position))
 								continue;
@@ -1712,9 +1719,9 @@ int monster::atkmove(int is_sight, bool only_move)
 							if( c_  && (env[current_level].isInSight(position)))
 								printlog(c_,true,false,false,CL_magic);
 						}
-						if(MonsterUseSpell((spell_list)it->num,false,this,SpellFlagCheck((spell_list)it->num,S_FLAG_IMMEDIATELY)?position:target_pos))
+						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
 						{
-							Noise(position,SpellNoise((spell_list)it->num),this);
+							Noise(position,SpellNoise(id_),this); //스펠을 사용한후 다른 몬스터로 둔갑할 수 있어. it을 사용하면 안됨
 							return true;
 						}
 					}
@@ -1843,6 +1850,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		env[current_level].MakeSilence(position, s_silence_range, false);
 	if(s_catch)	
 		you.SetCatch(NULL);
+	if(s_changed) //죽으면 너구리로 돌아옴
+	{
+		ChangeMonster(MON_RACCON,0);
+	}
+
+
+
 	if(message_ && !remove_)
 	{
 		if(sight_)
@@ -2248,7 +2262,19 @@ int monster::action(int delay_)
 				}
 			}
 		}
-
+		if(s_changed)
+		{
+			s_changed--;
+			if(!s_changed)
+			{
+				if(is_sight && isView())
+				{
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"둔갑이 풀려서 너구리로 돌아왔다.");
+				}
+				ChangeMonster(MON_RACCON,0);
+			}
+		}
+		
 
 
 
@@ -3781,6 +3807,13 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 				sprintf(string_,"강화");
 			else				
 				sprintf(string_,"약화");
+			return true;
+		}
+		return false;
+	case MSS_CHANGED:
+		if(s_changed)
+		{
+			sprintf(string_,"둔갑중");
 			return true;
 		}
 		return false;

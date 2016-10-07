@@ -896,7 +896,8 @@ void create_id_to_mon(int id, int level)
 			index.push_back(MON_HELL_CROW);
 		break;	
 	case 86:
-		index.push_back(MON_RACCON);
+		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
+			index.push_back(MON_RACCON);
 		break;	
 	case 87:
 		index.push_back(MON_LANTERN_YOUKAI);

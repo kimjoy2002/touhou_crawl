@@ -297,7 +297,7 @@ void map_algorithms(int num)
 		else if(num == DREAM_LEVEL)
 		{			
 			env[num].ClearFloor();
-			map_algorithms02(num,3,-40,DG_FLOOR,DG_WALL);
+			map_algorithms02(num,3,-40,DG_DREAM_FLOOR,DG_WALL);
 		}
 		else
 		{

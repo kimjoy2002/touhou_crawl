@@ -106,7 +106,7 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"지면",
 	"지면",
 	"지면",
-	"",
+	"지면",
 	"",//5
 	"",
 	"",

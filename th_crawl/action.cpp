@@ -3098,7 +3098,7 @@ void auto_pick_onoff(bool auto_)
 	}
 	else
 	{
-		printlog("자동 줍기를 해제했다.",true,false,false,CL_small_danger);
+		printlog("자동 줍기를 해제했다. (Ctrl + a 키로 다시 활성화 가능)",true,false,false,CL_small_danger);
 		you.auto_pickup = auto_?0:-1;
 	}
 }

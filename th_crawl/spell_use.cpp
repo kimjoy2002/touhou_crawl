@@ -2332,11 +2332,10 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
-			int att_ = 13+pow/15;
-				
-			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+			int att_ = 10+pow/7;				
+			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor("³Ã±â",false));
 			it->damage(temp_att, true);
-			
+			it->SetFrozen(randA(30));			
 		}
 	}
 	map_effect = 0;
@@ -3265,7 +3264,38 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	printarray(false,false,false,CL_normal,1,"Ä«-Å©·¡½¬! ");
+	map_effect = 2;
+	Sleep(500);
+	
+	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
+	{	
+		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
+		{
+			int damage_ = 5*(3+power/5);
+			if(it->isFly())
+				damage_ /= 3;
+			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ÁöÁø",true));
+			it->damage(temp_att, true);			
+		}
+	}
+	
+	int max_length=8;
+	
+	for(int i = -max_length; i <=max_length;i++)
+	{
+		for(int j = -max_length; j <= max_length;j++)
+		{		
+			coord_def pos_ = target+coord_def(i,j);
+			if(env[current_level].isInSight(pos_) && env[current_level].dgtile[pos_.x][pos_.y].isBreakable() && randA(2) == 0)
+			{
+				env[current_level].dgtile[pos_.x][pos_.y].tile = DG_FLOOR;
+			}
+		}
+	}
+	map_effect = 0;
+	you.resetLOS();
+	return true;
 }
 bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 {

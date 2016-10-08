@@ -471,7 +471,7 @@ void wiz_mode()
 			break;
 		case '!':
 			{
-				you.Memorize(SPL_MACRO_BURST,true);
+				you.Memorize(SPL_PERFERT_FREEZE,true);
 			}
 			break;
 		case 'M':

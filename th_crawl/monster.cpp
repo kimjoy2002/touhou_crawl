@@ -1211,8 +1211,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	{		
 		if(damage_>0)
 		{
-			char temp[50];
-			sprintf_s(temp,50,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
+			char temp[100];
+			sprintf_s(temp,100,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
 			printlog(temp,true,false,false,CL_help);
 		}
 	}

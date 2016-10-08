@@ -1608,7 +1608,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							img_effect_freeze.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 						else if(you.s_lunatic)
 							img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
-							
+						else if(map_effect==2)
+							img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
 					}
 				}

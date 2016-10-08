@@ -274,7 +274,6 @@ int SpellLength(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_FIRE_SPREAD:
 	case SPL_SUMMON_NAMAZ:
-	case SPL_THUNDER:
 	case SPL_AIR_STRIKE:
 		return 6;
 	case SPL_FIRE_BALL:
@@ -286,6 +285,7 @@ int SpellLength(spell_list skill)
 	case SPL_ANIMAL_CHANGE:
 	case SPL_JUMP_ATTACK:
 	case SPL_KANAME_DRILL:
+	case SPL_THUNDER:
 		return 5;
 	case SPL_BURN:
 	case SPL_FREEZE:

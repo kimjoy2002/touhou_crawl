@@ -734,7 +734,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10},
 
-	{MON_SEIGA,17,6205,name_infor("곽청아",false),&img_mons_seiga,170,10,8,
+	{MON_SEIGA,17,6205,name_infor("세이가",false),&img_mons_seiga,170,10,8,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12}	
 };

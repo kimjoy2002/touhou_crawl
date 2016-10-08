@@ -3352,6 +3352,22 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¼ö¾Ð",true));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+		{			
+			coord_def temp = throwtanmac(22,beam,temp_infor,NULL);
+		}
+		order->SetParadox(0); 
+		
+		return true;
+	}
 	return false;
 }
 bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
@@ -3786,7 +3802,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_MOKOU:
 		break;
 	case MON_NESI:
-		list->push_back(spell(SPL_WATER_CANNON,30));
+		list->push_back(spell(SPL_NESY_CANNON,30));
 		break;
 	case MON_SANGHAI:
 	case MON_FAKE_SANGHAI:

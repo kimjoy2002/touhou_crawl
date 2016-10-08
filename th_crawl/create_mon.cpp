@@ -1281,6 +1281,7 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 53:
 		index.push_back(MON_SEIGA);
+		index.push_back(MON_YOSIKA);
 		break;
 	}
 

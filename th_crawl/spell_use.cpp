@@ -3158,7 +3158,22 @@ bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_=false;
+	dif_rect_iterator rit(order->position,2);
+	int time_ = rand_int(10,30)+randA(power)/2;
+	random_extraction<int> rand_;
+	rand_.push(MON_ONI,2);
+	rand_.push(MON_BLUE_ONI,2);
+	rand_.push(MON_LANTERN_YOUKAI,3);
+	rand_.push(MON_SNOW_GIRL,3);
+
+	int i = 1;
+	for(; i>0 ; i--)
+	{
+		if(BaseSummon(rand_.choice(), time_, true, false, 2, order, target, SKD_SUMMON_YOUKAI, GetSummonMaxNumber(SPL_SUMMON_YOUKAI)))
+			return_ = true;
+	}
+	return return_;
 }
 bool skill_mamizo_evade(int power, bool short_, unit* order, coord_def target)
 {
@@ -3642,6 +3657,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_MAMIZO:
 		list->push_back(spell(SPL_SUMMON_RACOON,25));
+		list->push_back(spell(SPL_SUMMON_YOUKAI,15));
 		break;
 	default:
 		break;

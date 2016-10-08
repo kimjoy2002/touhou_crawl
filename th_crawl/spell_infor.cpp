@@ -509,7 +509,7 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_SUMMON_YOUKAI:
 		text_ += "다양한 강력한 요괴를 불러내는 마법.\n";
-		text_ += "오니, 제등요괴, 설녀들이 소환된다. 한번에 한명씩 소환이 가능하다\n";
+		text_ += "오니, 제등요괴, 설녀가 소환된다. 한번에 하나씩 소환이 가능하다\n";
 		break;
 	case SPL_MAMIZO_EVADE:
 		text_ += "공격을 받으면 자동으로 지장으로 변하여 공격을 피하는 마미조의 둔갑술.\n";

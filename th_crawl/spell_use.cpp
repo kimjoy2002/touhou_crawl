@@ -3181,6 +3181,86 @@ bool skill_mamizo_evade(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 {
+	unit *hit_mon=NULL;
+	int direc = (GetPosToDirec(order->position, target) + 4)%8;
+	int max_length=6;
+	
+	random_extraction<coord_def> result_;
+	for(int i = -max_length; i <=max_length;i++)
+	{
+		for(int j = -max_length; j <= max_length;j++)
+		{			
+			coord_def goal_ = order->position+coord_def(i,j);
+			int length_ = pow((float)i,2)+pow((float)j,2);
+
+			if(!length_ || length_ > max_length*max_length || length_ < 2*2 )
+				continue;
+			beam_iterator beam(order->position,order->position);
+			
+			if(!CheckThrowPath(order->position,goal_, beam))//경로가 제대로 안 세워질경우 실패
+				continue;
+
+			int direc2 = GetPosToDirec(order->position, goal_);
+			direc2 = min((direc-direc2+8)%8,(direc2-direc+8)%8);
+			if(direc2>=2)
+				continue;
+			
+			if(env[current_level].isMove(goal_))
+				result_.push(goal_);
+		}
+
+	}
+
+	if(result_.GetSize() == 0)
+	{
+		printarray(true,false,false,CL_normal,1,"이 마법을 사용하기위해선 뒤에 충분한 공간이 필요하다.");
+		return false;
+	}
+
+
+	if(env[current_level].isMove(target.x, target.y))
+	{
+		vector<coord_def> vt_;
+		{
+			rect_iterator rit(target,1,1);
+			for(;!rit.end();rit++)
+			{
+				if(/*randA(randA(600))<power+100*/1 || (*rit) == target)
+				{
+					if(env[current_level].isMove(rit->x,rit->y))
+					{
+						env[current_level].MakeEffect(*rit,&img_blast[4],false);
+						vt_.push_back(*rit);
+					}
+				}
+			}
+		}
+		
+		printarray(true,false,false,CL_normal,1,"강력한 돌풍을 동반한 발돋움과 함께 뒤쪽으로 도약했다!");
+
+		for(auto it = vt_.begin();it != vt_.end();it++)
+		{
+			if(env[current_level].isMove(it->x,it->y))
+			{
+				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y,&you))
+				{
+					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("매크로 버스트",false)), true);
+					
+				}
+				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		
+		you.SetXY(result_.pop());
+		return true;
+	}
+	else{
+		
+		printarray(true,false,false,CL_normal,1,"발을 딛을 공간이 부족하다.");
+		return false;
+	}
 	return false;
 }
 bool skill_shatter(int power, bool short_, unit* order, coord_def target)

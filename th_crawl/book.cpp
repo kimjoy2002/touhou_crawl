@@ -37,7 +37,10 @@ book_infor static_book_list[BOOK_LAST]=
 	book_infor("정신 지배학",true,BOOK_DEBUF,1500,SPL_ANIMAL_CHANGE,SPL_PRIVATE_SQ,SPL_INVISIBLE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("메이드 비전서",false,BOOK_MAID_ULTI,1500,SPL_PRIVATE_SQ,SPL_CONTROLED_BLINK,SPL_THE_WORLD,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("얼음요정 비전서",false,BOOK_ICE_ULTI,1500,SPL_PRIVATE_SQ,SPL_ICE_BOLT,SPL_ICE_CLOUD,SPL_BLIZZARD,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("앨리스의 마도서",false,BOOK_SUMMON_ULTI,1500,SPL_SUMMON_UFO,SPL_SUMMON_YOUKAI,SPL_SUMMON_NAMAZ,SPL_DOLLS_WAR,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
+	book_infor("앨리스의 마도서",false,BOOK_SUMMON_ULTI,1500,SPL_SUMMON_UFO,SPL_SUMMON_YOUKAI,SPL_SUMMON_NAMAZ,SPL_DOLLS_WAR,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("텐구의 활극 만화",false,BOOK_AIR_ULTI,1500,SPL_VEILING,SPL_TWIST,SPL_AIR_STRIKE,SPL_MACRO_BURST,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("마그눔 오푸스",false,BOOK_ALCHMY_ULTI,1500,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
+
 	//텐구의 마법책 (대기마법들을 추가) 질풍선과 매크로버스트는 필수
 };
 
@@ -117,6 +120,10 @@ const char* GetBookInfor(book_list book_)
 		return "호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적인 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n";
 	case BOOK_SUMMON_ULTI:
 		return "마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n";
+	case BOOK_AIR_ULTI:
+		return "텐구가 주인공인 박진감 넘치는 모험 만화.\n 내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n";
+	case BOOK_ALCHMY_ULTI:
+		return "어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n";
 	}
 }
 
@@ -132,6 +139,7 @@ book_list SchoolToBook(skill_type skill_)
 			list_.push(BOOK_DEFENSE,10);
 			list_.push(BOOK_ENCHANT,10);
 			list_.push(BOOK_ALCHMIST_BASE,10);
+			list_.push(BOOK_ALCHMY_ULTI,5);			
 			return list_.pop();
 		}
 	case SKT_MENTAL:
@@ -179,6 +187,8 @@ book_list SchoolToBook(skill_type skill_)
 			list_.push(BOOK_AIR_BASE,10);
 			list_.push(BOOK_DEFENSE,10);
 			list_.push(BOOK_CLOUD,10);
+			list_.push(BOOK_AIR_ULTI,5);
+			
 			return list_.pop();
 		}
 	case SKT_SUMMON:

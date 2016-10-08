@@ -3372,6 +3372,35 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 {
+	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(order && hit_mon)
+	{
+		if(hit_mon->isplayer())
+		{
+			if(you.confuse_resist>0)
+			{
+				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+				return true;
+			}
+
+
+			beam_iterator beam(hit_mon->position,order->position);
+			if(CheckThrowPath(hit_mon->position,order->position,beam))
+			{
+				beam.init();
+
+				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_mon->isFly(),hit_mon->isSwim(),false))
+				{
+					hit_mon->SetXY(*beam);
+					hit_mon->AttackedTarget(order);
+					printarray(true,false,false,CL_normal,4,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),order->GetName()->name.c_str(),"의 노래소리에 끌려 걸어갔다.");
+					return true;
+				}
+			}
+			return true;
+		}
+	}
 	return false;
 }
 bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
@@ -3484,7 +3513,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BLINK,20));
 		break;
 	case MON_WAKASAGI:
-		list->push_back(spell(SPL_FROST,30));
+		list->push_back(spell(SPL_MERMAID_SONG,25));
 		list->push_back(spell(SPL_COLD_BEAM,15));
 		list->push_back(spell(SPL_CONFUSE,10));
 		break;

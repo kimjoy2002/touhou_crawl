@@ -948,7 +948,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randC(2,7+power*1/4),2*(7+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -974,7 +974,7 @@ bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target
 		{
 			break;
 		}
-		power =  power*4/5;
+		power =  power*9/10;
 		hit_ = true;
 		if(chain--<1)
 			break;
@@ -3112,7 +3112,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,13+power/9),3*(13+power/9),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("번개",false)), true);
+					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("번개",false)), true);
 				}
 			}
 		}
@@ -3650,6 +3650,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		}
 		break;
 	case MON_TOZIKO:
+		list->push_back(spell(SPL_THUNDER,20));
 		break;
 	case MON_FUTO:
 		list->push_back(spell(SPL_FIRE_BALL,15));

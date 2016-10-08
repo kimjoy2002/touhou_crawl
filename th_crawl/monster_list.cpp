@@ -722,8 +722,8 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 
 	
-	{MON_TOZIKO,11,1205,name_infor("토지코",false),&img_mons_toziko,92,1,15,
-	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_TOZIKO,15,3905,name_infor("토지코",false),&img_mons_toziko,115,5,15,
+	{29,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor("전격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 
 	{MON_FUTO,16,4605,name_infor("후토",false),&img_mons_futo,130,1,20,

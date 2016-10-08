@@ -3430,7 +3430,7 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					int damage_ = 12+power/6;
+					int damage_ = 10+power/6;
 					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("¿¡¸Þ¶öµå",false)), true);
 				}
 

@@ -3720,9 +3720,17 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		{
 			list->push_back(spell(SPL_TWIST,15));
 			list->push_back(spell(SPL_VEILING,15));
-			int arr_[] = {BOOK_TEST_ANNIHILATE,BOOK_DEBUF,BOOK_MAID_ULTI,BOOK_ICE_ULTI,BOOK_SUMMON_ULTI};
-			//보조스킬
-			int add_ = arr_[randA(4)];
+			random_extraction<int> arr_;
+			
+			arr_.push(BOOK_TEST_ANNIHILATE);
+			arr_.push(BOOK_DEBUF);
+			arr_.push(BOOK_MAID_ULTI);
+			arr_.push(BOOK_ICE_ULTI);
+			arr_.push(BOOK_SUMMON_ULTI);
+			arr_.push(BOOK_AIR_ULTI);
+			arr_.push(BOOK_ALCHMY_ULTI);
+
+			int add_ = arr_.pop();
 
 			item_infor t;
 			makeitem(ITM_BOOK,0,&t,add_);

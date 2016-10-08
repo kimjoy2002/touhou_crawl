@@ -1223,7 +1223,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			auto it = env[current_level].mon_vector.begin();
 			for( ;it != env[current_level].mon_vector.end();it++)
 			{
-				if(it->isLive() && it->isSaveSummoner(this))
+				if(it->isLive() && env[current_level].dgtile[position.x][position.y].isMove(it->isFly(),it->isSwim(),false) && it->isSaveSummoner(this))
 				{
 					if(sight_ || only_invisible_)
 					{
@@ -1311,6 +1311,24 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 				dead(a.p_type, !(a.order));
 			}
+
+			
+
+			if(id == MON_SEIGA && randA(3) )
+			{ //세이가는 공격을 당하면 숨을 수 있는 벽에 숨는다.
+				rand_rect_iterator rect_(position,1,1);
+				while(!rect_.end())
+				{
+					if(!env[current_level].dgtile[(*rect_).x][(*rect_).y].isMove(true,true,false))
+					{
+						SetXY((*rect_));
+						PlusTimeDelay(-2*GetSpeed());
+						break;
+					}
+					rect_++;
+				}
+			}
+
 
 		}
 		else
@@ -1466,7 +1484,7 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 
 							//움직일 수 있으면 움직인다.
 							SetXY(coord_def(new_pos_->x,new_pos_->y));
-							time_delay+=GetSpeed();
+							PlusTimeDelay(-GetSpeed());
 							return true;
 						}
 
@@ -3500,7 +3518,7 @@ bool monster::isSaveSummoner(unit* order)
 	if(id == MON_DAUZING || id == MON_HOURAI || id == MON_FAKE_HOURAI){
 		if(distan_coord(position, order->position) <=2)
 		{
-			if(sm_info.parent_map_id == order->GetMapId() && randA(1)){
+			if(sm_info.parent_map_id == order->GetMapId() && randA(2)){
 				return true;
 			}
 		}
@@ -3509,6 +3527,14 @@ bool monster::isSaveSummoner(unit* order)
 		if(distan_coord(position, order->position) <=2)
 		{
 			if(sm_info.parent_map_id == order->GetMapId() && randA(5)==0){
+				return true;
+			}
+		}
+	}
+	if(id == MON_YOSIKA){
+		if(distan_coord(position, order->position) <=2)
+		{
+			if(sm_info.parent_map_id == order->GetMapId() && randA(2)==0){
 				return true;
 			}
 		}

@@ -299,7 +299,7 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,8},
 	
-	{MON_YOSIKA,9,960,name_infor("요시카",false),&img_named_yosika,150,1,3,
+	{MON_YOSIKA,9,0,name_infor("요시카",false),&img_named_yosika,150,1,3,
 	{22,30,30},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor("깨물기",false),name_infor("깨물기",false)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,0,10},
 	
@@ -734,7 +734,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10},
 
-	{MON_SEIGA,11,1205,name_infor("세이가",false),&img_mons_seiga,92,1,15,
-	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10}	
+	{MON_SEIGA,17,6205,name_infor("곽청아",false),&img_mons_seiga,170,10,8,
+	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12}	
 };

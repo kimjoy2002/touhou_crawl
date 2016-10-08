@@ -329,7 +329,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  4,  8,  12,  20,  3}, //메디슨
 	
 	{  15,  9,  14,  15,  3}, //야마메
-	{  17,  9,  14,  15,  3}, //요시카
+	//{  17,  9,  14,  15,  3}, //요시카
 	{  18,  9,  14,  15,  3}, //세키반키
 	{  20,  9,  14,  15,  3}, //카게로
 	{  21,  9,  14,  10,  3}, //파르시
@@ -379,6 +379,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //앨리스
 	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //토지코
 	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //후토
+	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //세이가
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  20,  3}, //마미조
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 

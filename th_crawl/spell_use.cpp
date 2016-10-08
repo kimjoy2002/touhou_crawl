@@ -146,6 +146,10 @@ bool isBandAlly(monster* order, monster* other)
 			break;
 		}
 		return false;
+	case MON_SEIGA:
+		if(other->id == MON_YOSIKA)
+			return true;
+		break;
 	default:
 		break;
 	}
@@ -3299,7 +3303,52 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(!order || order->isplayer())
+		return false;
+
+	monster* seiga_ = (monster*)order;
+	monster* yosika = NULL;
+	for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+	{
+		if(it->isLive() && it->id == MON_YOSIKA)
+		{
+			if( !seiga_->isMonsterSight((it->position)))
+				return false;//이미 요시카가 시야내면 구지 호출할필요가 없ㅇ므
+			yosika = &(*it);
+			break;
+		}
+	}
+	if(yosika)
+	{
+
+		dif_rect_iterator rit(order->position,2);
+		if(env[current_level].isMove(rit->x, rit->y, yosika->isFly(), yosika->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) && seiga_->isMonsterSight((*rit)) && seiga_->position != (*rit))
+		{
+			yosika->SetXY(rit->x,rit->y);
+			seiga_->SetSaved(true);
+			if(yosika->isYourShight())
+			{
+				printarray(true,false,false,CL_normal,4,yosika->GetName()->name.c_str(),yosika->GetName()->name_is(true),seiga_->GetName()->name.c_str(),"의 옆으로 불려왔다.");
+			}
+		}
+	}
+	else
+	{
+		if(monster* mon_=BaseSummon(MON_YOSIKA, 100, false, false, 2, order, order->position, SKD_OTHER, -1))
+		{
+			mon_->flag &= ~M_FLAG_SUMMON;
+			mon_->flag &= ~M_FLAG_UNIQUE;
+			seiga_->SetSaved(true);
+			//mon_->ReturnEnemy();
+			if(mon_->isYourShight())
+			{
+				printarray(true,false,false,CL_normal,5,seiga_->GetName()->name.c_str(),seiga_->name.name_is(true),mon_->name.name.c_str(),mon_->name.name_to(true),"부활시켰다!");
+			}
+		}
+	}
+
+
+	return true;
 }
 bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 {
@@ -3779,6 +3828,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUMMON_YOUKAI,15));
 		list->push_back(spell(SPL_MAMIZO_EVADE,0));		
 		break;
+	case MON_SEIGA:
+		list->push_back(spell(SPL_SUMMON_YOSHIKA,40));
+		list->push_back(spell(SPL_HASTE_OTHER,25));
+		break;	
 	default:
 		break;
 	}

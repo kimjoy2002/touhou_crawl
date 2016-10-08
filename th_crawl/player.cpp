@@ -609,7 +609,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 	}
 
-	if(1)//env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly()))
+	if(env[current_level].isMove(position.x+x_mov,position.y+y_mov,true))
 	{
 
 		monster* mon_ = (monster*)env[current_level].isMonsterPos(move_x_,move_y_,this);

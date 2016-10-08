@@ -1438,7 +1438,7 @@ int SpellHunger(int level)
 }
 
 
-bool SpellAiCondition(spell_list skill, const monster *mon)
+bool SpellAiCondition(spell_list skill, monster *mon)
 {
 	if(mon->s_changed && SpellFlagCheck(skill,S_FLAG_SUMMON))
 	{
@@ -1466,6 +1466,20 @@ bool SpellAiCondition(spell_list skill, const monster *mon)
 	case SPL_ALERT_NOISE: 
 	case SPL_JUMP_ATTACK:
 		return (mon->s_exhausted?false:true);
+	case SPL_SUMMON_YOSHIKA:
+		{
+
+			for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+			{
+				if(it->isLive() && it->id == MON_YOSIKA)
+				{
+					if(mon->isMonsterSight((it->position)))
+						return false;
+
+				}
+			}
+			return true;
+		}
 	default:
 		return true;
 	}

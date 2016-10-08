@@ -159,7 +159,7 @@ int SpellMiscastingLevel(int level_, int fail_);
 int SpellMiscasting(int miscasting_level_);
 int SpellHunger(int level);
 skill_type SpellSchool(spell_list skill, int num);
-bool SpellAiCondition(spell_list skill, const monster *mon); //인공지능이 마법을 쓰는 추가 조건(true가 사용가능 false가 사용불가)
+bool SpellAiCondition(spell_list skill, monster *mon); //인공지능이 마법을 쓰는 추가 조건(true가 사용가능 false가 사용불가)
 
 
 

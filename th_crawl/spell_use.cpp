@@ -3658,6 +3658,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_MAMIZO:
 		list->push_back(spell(SPL_SUMMON_RACOON,25));
 		list->push_back(spell(SPL_SUMMON_YOUKAI,15));
+		list->push_back(spell(SPL_MAMIZO_EVADE,0));		
 		break;
 	default:
 		break;

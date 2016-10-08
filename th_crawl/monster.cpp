@@ -1237,6 +1237,18 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				}
 			}
 		}
+		
+		if(back_stab != 3 && isHaveSpell(SPL_MAMIZO_EVADE) && randA(4) == 0)
+		{ //20%의 확률로 공격을 무효하고 블링크			
+			if(sight_ || only_invisible_)
+			{
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),name.name_is(true),"지장으로 변화하여 공격을 피했다!");
+			}
+			Blink(10);
+			return false;
+		}
+
+
 
 		if(sight_ || only_invisible_)
 		{
@@ -1246,6 +1258,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(damage_)
 		{
 			enterlog();
+			
 			hp-=damage_;
 			if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 			{

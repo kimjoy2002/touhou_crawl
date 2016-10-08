@@ -846,6 +846,13 @@ textures img_effect_rock_uplift[] = {
 	textures(&texture_item01, 212, 255)	
 };
 
+textures img_effect_emerald_uplift[] = {
+	textures(&texture_item01, 237, 255),
+	textures(&texture_item01, 238, 255)
+};
+
+
+
 textures img_effect_schema[] = {
 	textures(&texture_monster01, 135, 255),
 	textures(&texture_monster01, 136, 255),
@@ -1700,6 +1707,10 @@ int texturetoint(textures* input)
 		return 326;
 	else if(input == &img_mons_seiga)
 		return 327;
+	else if(input == &img_effect_emerald_uplift[0])
+		return 328;
+	else if(input == &img_effect_emerald_uplift[1])
+		return 329;
 	else
 		return 0;
 }
@@ -2363,6 +2374,10 @@ textures* inttotexture(int input)
 		return &img_mons_mamizo;
 	case 327:
 		return &img_mons_seiga;
+	case 328:
+		return &img_effect_emerald_uplift[0];
+	case 329:
+		return &img_effect_emerald_uplift[1];
 	default:
 		return &img_mons_default;
 	}

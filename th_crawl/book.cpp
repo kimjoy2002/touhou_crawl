@@ -18,7 +18,7 @@ book_infor static_book_list[BOOK_LAST]=
 	book_infor("초보 대지술사의 마법책",true,BOOK_EARTH_BASE,30,SPL_STONE_PUNCH,SPL_STONE_ARROW,SPL_STONE_TRAP,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("초보 대기술사의 마법책",true,BOOK_AIR_BASE,300,SPL_SHOCK,SPL_LEVITATION, SPL_TWIST,SPL_DISCHARGE,SPL_THUNDER,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("초보 소환술사의 마법책",true,BOOK_SUMMON_BASE,300,SPL_SUMMON_MOOK,SPL_SUMMON_OPTION,SPL_SUMMON_BIRD,SPL_SUMMON_GOLEM,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("초보 연금술사의 마법책",true,BOOK_ALCHMIST_BASE,300,SPL_STONE_PUNCH,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SUMMON_GOLEM,SPL_VENOM_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("초보 연금술사의 마법책",true,BOOK_ALCHMIST_BASE,300,SPL_STONE_PUNCH,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SUMMON_GOLEM,SPL_EMERALD_CITY,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("초보 심리학자의 마법책",true,BOOK_PSYCHOLOGIST_BASE,300,SPL_HYPNOSIS, SPL_MIND_BENDING, SPL_MUTE, SPL_SELF_INJURY, SPL_CHARM,SPL_NONE ,SPL_NONE,SPL_NONE),
 	book_infor("초보 마법전사의 마법책",true,BOOK_BRAND_BASE,400,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SILENCE,SPL_HASTE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("메이드의 기본소양",true,BOOK_MAID_BASE,400,SPL_BLINK,SPL_SUMMON_OPTION,SPL_KNIFE_COLLECT,SPL_TIME_PARADOX,SPL_PRIVATE_SQ,SPL_NONE,SPL_NONE,SPL_NONE),
@@ -30,18 +30,17 @@ book_infor static_book_list[BOOK_LAST]=
 	book_infor("파괴의 마법책",true,BOOK_CONJURE,700,SPL_MAGIC_TANMAC,SPL_SUMMON_OPTION,SPL_LASER,SPL_FIRE_BOLT,SPL_ICE_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),	
 	book_infor("매혹의 마법책",true,BOOK_HEX,400,SPL_GLOW,SPL_MUTE,SPL_CONFUSE,SPL_CHARM,SPL_SILENCE,SPL_INVISIBLE,SPL_NONE,SPL_NONE),
 	book_infor("방어의 마법책",true,BOOK_DEFENSE,600,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_CURE_POISON,SPL_DISCHARGE,SPL_SILENCE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE),	
-	book_infor("강화 주술서",false,BOOK_ENCHANT,700,SPL_DRAW_POWER,SPL_DIAMOND_HARDNESS,SPL_FIRE_BALL,SPL_SILENCE,SPL_HASTE,SPL_SUMMON_UFO,SPL_NONE,SPL_NONE),
+	book_infor("풍수지리학 개요",false,BOOK_ENCHANT,700,SPL_AIR_STRIKE,SPL_FREEZE,SPL_STONE_UPLIFT,SPL_FIRE_BALL,SPL_HASTE,SPL_SUMMON_UFO,SPL_NONE,SPL_NONE),
 	book_infor("전이의 마법책",true,BOOK_TRANSITION,500,SPL_DRAW_POWER,SPL_BLINK,SPL_TELEPORT_OTHER,SPL_TELEPORT_SELF,SPL_RECALL,SPL_KNIFE_COLLECT,SPL_NONE,SPL_NONE),	
 	book_infor("텐시의 비전서",false,BOOK_TENSI,1000,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_STONE_FORM,SPL_SUMMON_NAMAZ,SPL_SHATTER,SPL_NONE,SPL_NONE,SPL_NONE),	
 	book_infor("미마의 봉인서",false,BOOK_TEST_ANNIHILATE,1500,SPL_LUMINUS_STRIKE,SPL_SPARK,SPL_FIRE_STORM,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("정신 지배학",true,BOOK_DEBUF,1500,SPL_ANIMAL_CHANGE,SPL_PRIVATE_SQ,SPL_INVISIBLE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("메이드 비전서",false,BOOK_MAID_ULTI,1500,SPL_PRIVATE_SQ,SPL_CONTROLED_BLINK,SPL_THE_WORLD,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("얼음요정 비전서",false,BOOK_ICE_ULTI,1500,SPL_PRIVATE_SQ,SPL_ICE_BOLT,SPL_ICE_CLOUD,SPL_BLIZZARD,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("얼음요정 비전서",false,BOOK_ICE_ULTI,1500,SPL_ICE_BOLT,SPL_ICE_CLOUD,SPL_BLIZZARD,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("앨리스의 마도서",false,BOOK_SUMMON_ULTI,1500,SPL_SUMMON_UFO,SPL_SUMMON_YOUKAI,SPL_SUMMON_NAMAZ,SPL_DOLLS_WAR,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
 	book_infor("텐구의 활극 만화",false,BOOK_AIR_ULTI,1500,SPL_VEILING,SPL_TWIST,SPL_AIR_STRIKE,SPL_MACRO_BURST,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("마그눔 오푸스",false,BOOK_ALCHMY_ULTI,1500,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
-
-	//텐구의 마법책 (대기마법들을 추가) 질풍선과 매크로버스트는 필수
+	book_infor("마그눔 오푸스",false,BOOK_ALCHMY_ULTI,1500,SPL_EMERALD_CITY,SPL_STONE_FORM,SPL_AUTUMN_BLADE,SPL_PHILOSOPHERS_STONE, SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
+	
 };
 
 string random_book_list[RANDOM_BOOK_NUM]=
@@ -105,7 +104,7 @@ const char* GetBookInfor(book_list book_)
 	case BOOK_DEFENSE:
 		return "다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n";
 	case BOOK_ENCHANT:
-		return "핵심 마법만 적혀있는 마법책\n당신을 숙련된 마법사로 이끌어 준다.\n";
+		return "풍수지리에 해박한 모노노베노 후토가 편찬한 책.\n바람을 다루는 것부터 대지를 일으키는 일, 물을 다루면서 운기를 다루는 법이 적혀있다\n 왜인지 방화하는 법에 대한 세세한 부록이 끼워져있다.\n";
 	case BOOK_TRANSITION:
 		return "전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n";
 	case BOOK_TENSI:
@@ -137,7 +136,7 @@ book_list SchoolToBook(skill_type skill_)
 			list_.push(BOOK_BRAND_BASE,10);
 			list_.push(BOOK_SUB,10);
 			list_.push(BOOK_DEFENSE,10);
-			list_.push(BOOK_ENCHANT,10);
+			list_.push(BOOK_ENCHANT,2);
 			list_.push(BOOK_ALCHMIST_BASE,10);
 			list_.push(BOOK_ALCHMY_ULTI,5);			
 			return list_.pop();
@@ -165,6 +164,7 @@ book_list SchoolToBook(skill_type skill_)
 		{
 			random_extraction<book_list> list_;
 			list_.push(BOOK_FIRE_BASE,10);
+			list_.push(BOOK_ENCHANT,2);
 			return list_.pop();
 		}
 	case SKT_COLD:
@@ -172,6 +172,7 @@ book_list SchoolToBook(skill_type skill_)
 			random_extraction<book_list> list_;
 			list_.push(BOOK_COLD_BASE,10);
 			list_.push(BOOK_ICE_ULTI,3);
+			list_.push(BOOK_ENCHANT,2);
 			return list_.pop();
 		}
 	case SKT_EARTH:
@@ -179,6 +180,7 @@ book_list SchoolToBook(skill_type skill_)
 			random_extraction<book_list> list_;
 			list_.push(BOOK_EARTH_BASE,10);
 			list_.push(BOOK_TENSI,3);
+			list_.push(BOOK_ENCHANT,2);
 			return list_.pop();			
 		}
 	case SKT_AIR:
@@ -187,6 +189,7 @@ book_list SchoolToBook(skill_type skill_)
 			list_.push(BOOK_AIR_BASE,10);
 			list_.push(BOOK_DEFENSE,10);
 			list_.push(BOOK_CLOUD,10);
+			list_.push(BOOK_ENCHANT,2);
 			list_.push(BOOK_AIR_ULTI,5);
 			
 			return list_.pop();
@@ -195,6 +198,7 @@ book_list SchoolToBook(skill_type skill_)
 		{
 			random_extraction<book_list> list_;
 			list_.push(BOOK_SUMMON_BASE,10);
+			list_.push(BOOK_ENCHANT,2);
 			list_.push(BOOK_SUMMON_ULTI,3);
 			return list_.pop();
 		}

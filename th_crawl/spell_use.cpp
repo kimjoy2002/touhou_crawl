@@ -3405,6 +3405,41 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 {
+	if(env[current_level].isMove(target.x, target.y))
+	{
+		vector<coord_def> vt_;
+		{
+			rect_iterator rit(order->position,1,1);
+			for(;!rit.end();rit++)
+			{
+				if((*rit) != target)
+				{
+					textures* t_ = &img_effect_emerald_uplift[randA(1)];
+					if(env[current_level].isMove(rit->x,rit->y))
+					{
+						env[current_level].MakeEffect(*rit,&img_blast[3],false);
+						env[current_level].MakeEffect(*rit,t_,false);
+						vt_.push_back(*rit);
+					}
+				}
+			}
+		}
+		for(auto it = vt_.begin();it != vt_.end();it++)
+		{
+			if(env[current_level].isMove(it->x,it->y))
+			{
+				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
+				{
+					int damage_ = 12+power/6;
+					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("¿¡¸Þ¶öµå",false)), true);
+				}
+
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		return true;
+	}
 	return false;
 }
 bool skill_autumn_blade(int power, bool short_, unit* order, coord_def target)

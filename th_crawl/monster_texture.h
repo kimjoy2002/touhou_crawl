@@ -348,6 +348,7 @@ extern textures img_effect_gold;
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_rock_trap;
 extern textures img_effect_rock_uplift[];
+extern textures img_effect_emerald_uplift[];
 extern textures img_effect_schema[];
 
 extern textures img_effect_tanmac_middle[];

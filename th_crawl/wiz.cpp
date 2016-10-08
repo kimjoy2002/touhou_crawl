@@ -471,7 +471,7 @@ void wiz_mode()
 			break;
 		case '!':
 			{
-				you.Memorize(SPL_PERFERT_FREEZE,true);
+				you.Memorize(SPL_EMERALD_CITY,true);
 			}
 			break;
 		case 'M':

@@ -471,7 +471,7 @@ void wiz_mode()
 			break;
 		case '!':
 			{
-				you.Memorize(SPL_EMERALD_CITY,true);
+				you.Memorize(SPL_AUTUMN_BLADE,true);
 			}
 			break;
 		case 'M':

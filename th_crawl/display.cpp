@@ -1186,6 +1186,16 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"무념무상", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
 				rc.left += fontDesc.Width*9;	
 			}
+			if(you.alchemy_buff == ALCT_AUTUMN_BLADE)
+			{				
+				pfont->DrawTextA(pSprite,"블레이드", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
+				rc.left += fontDesc.Width*9;	
+			}
+			if(you.alchemy_buff == ALCT_PHILOSOPHERS_STONE)
+			{				
+				pfont->DrawTextA(pSprite,"현자의돌", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
+				rc.left += fontDesc.Width*9;	
+			}
 			if(you.s_unluck > 0)
 			{
 				if(you.s_unluck <= 3)

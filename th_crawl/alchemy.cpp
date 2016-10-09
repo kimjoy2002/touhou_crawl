@@ -54,6 +54,10 @@ int Getalchemytime(ALCHEMY_LIST list_)
 		break;
 	case ALCT_STONE_FORM:
 		break;
+	case ALCT_AUTUMN_BLADE:
+		break;
+	case ALCT_PHILOSOPHERS_STONE:
+		break;
 	}
 	return 100;
 }
@@ -77,6 +81,12 @@ void alchemyalmostoff(ALCHEMY_LIST list_)
 		break;
 	case ALCT_STONE_FORM:
 		printlog("무념무상의 경지가 끝나간다.",false,false,false,CL_blue);
+		break;
+	case ALCT_AUTUMN_BLADE:
+		printlog("손에 감긴 연금술의 힘이 약해지고있다.",false,false,false,CL_blue);
+		break;
+	case ALCT_PHILOSOPHERS_STONE:
+		printlog("현자의 돌은 거의 사라져가고있다.",false,false,false,CL_blue);
 		break;
 	}
 }
@@ -117,6 +127,18 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 			printlog("당신은 무념무상의 경지에 이르렀다.",true,false,false,CL_white_blue);
 		else
 			printlog("당신의 무념무상의 경지는 끝났다.",false,false,false,CL_blue);
+		break;
+	case ALCT_AUTUMN_BLADE:
+		if(onoff_)
+			printlog("당신은 손에 톱니를 새겨넣었다.",true,false,false,CL_white_blue);
+		else
+			printlog("당신의 톱니는 사라졌다.",false,false,false,CL_blue);
+		break;
+	case ALCT_PHILOSOPHERS_STONE:
+		if(onoff_)
+			printlog("당신은 현자의 돌을 연성해냈다.",true,false,false,CL_white_blue);
+		else
+			printlog("당신의 현자의 돌은 이윽고 사라졌다.",false,false,false,CL_blue);
 		break;
 
 	}

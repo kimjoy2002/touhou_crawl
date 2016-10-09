@@ -893,7 +893,7 @@ int players::GetWalkDelay()
 	if(as_penalty>GetPenaltyMinus(2))
 		speed_ += 1+as_penalty/2;
 	if(alchemy_buff == ALCT_STONE_FORM)
-		speed_ *= 1.5f;
+		speed_ *= 1.3f;
 	if(s_frozen)
 		speed_+=(s_frozen+1)*speed_/20;
 	return speed_;

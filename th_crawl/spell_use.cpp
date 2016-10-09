@@ -3444,10 +3444,20 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_autumn_blade(int power, bool short_, unit* order, coord_def target)
 {
+	if(order == &you)
+	{
+		you.SetAlchemyBuff(ALCT_AUTUMN_BLADE,rand_int(30,50)+power/3);
+		return true;
+	}
 	return false;
 }
 bool skill_philosophers_stone(int power, bool short_, unit* order, coord_def target)
 {
+	if(order == &you)
+	{
+		you.SetAlchemyBuff(ALCT_PHILOSOPHERS_STONE,rand_int(30,50)+power/3);
+		return true;
+	}
 	return false;
 }
 

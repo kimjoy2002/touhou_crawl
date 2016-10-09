@@ -100,6 +100,10 @@ int players::GetAttack(bool max_)
 		else
 			max_atk_/=2;
 	}
+	if(alchemy_buff == ALCT_AUTUMN_BLADE)
+	{
+		max_atk_ *= 3;
+	}
 
 
 

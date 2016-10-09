@@ -886,7 +886,7 @@ bool skill_elec_passive(int power, unit* order)
 
 	if(hit_mon)
 	{
-		beam_infor temp_infor(randA_1(9+power/6),9+power/6,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect();

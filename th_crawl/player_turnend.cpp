@@ -397,10 +397,11 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if(s_elec)
 	{
 		int power_=min(SpellCap(SPL_SHOCK),you.GetSpellPower(SpellSchool(SPL_SHOCK,0),SpellSchool(SPL_SHOCK,1),SpellSchool(SPL_SHOCK,2)));
-		ReleaseMutex(mutx);
+
+		//WaitForSingleObject(mutx, INFINITE);
 		if(randA(5)<2)
 			skill_elec_passive(power_,&you);
-		WaitForSingleObject(mutx, INFINITE);
+		//ReleaseMutex(mutx);
 		s_elec--;
 		if(!s_elec)
 		{

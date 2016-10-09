@@ -1222,7 +1222,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 }
 int players::MpRecoverDelay(int delay_,bool set_)
 {
-	float base_ =  (((float)rand_int(80,120))/(max_mp/4+7.0f)+delay_)*10;
+	float base_ =  (((float)rand_int(80,120))/(max(max_mp,10)/4+7.0f)+delay_)*10;
 
 	float cacul_ = 1000/base_; //100턴당 회복량.
 

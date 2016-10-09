@@ -1811,7 +1811,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 {
 	if(!speak_)
 	{
-		you.skill[skill_].onoff = true;
+		you.skill[skill_].onoff = 1;
 	}
 	if(skill_ == SKT_ERROR)
 	{
@@ -1822,7 +1822,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 
 	if(need_exp == -1)
 	{
-		you.skill[skill_].onoff = false;
+		you.skill[skill_].onoff = 0;
 		return false;
 	}
 	int exp_panalty = exp_to_skill_exp(skill[skill_].level);
@@ -1840,7 +1840,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		skill[skill_].exper = need_exp;
 		if(skill[skill_].level == 27)
 		{			
-			you.skill[skill_].onoff = false;
+			you.skill[skill_].onoff = 0;
 		}
 
 		if(speak_)
@@ -1904,7 +1904,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 }
 bool players::SkillTraining(skill_type skill_, int percent_)
 {
-	if(randA((percent_*(skill[skill_].onoff?1:10))-1)>0)
+	if(randA((percent_*(skill[skill_].onoff>=1?1:10))-1)>0)
 		return false;
 	int exper_ = exp_to_skill_exp(skill[skill_].level);
 	if(exper_>skill_exper) //남은 경험치가 필요경험치보다 적을때
@@ -1926,7 +1926,7 @@ bool players::SkillTraining(bool speak)
 	for(int i = 0; i < SKT_MAX; i++)
 	{
 		if(skill[i].onoff){
-			sum++;
+			sum+=skill[i].onoff;
 		}
 	}
 	if(sum == 0)
@@ -1935,6 +1935,8 @@ bool players::SkillTraining(bool speak)
 	for(int i = 0; i < SKT_MAX; i++)
 	{
 		int remain_exp = exp;
+		if(skill[i].onoff==2)
+			remain_exp *= 2;
 		while(skill[i].onoff && remain_exp>0){
 			int exper_ = exp_to_skill_exp(skill[i].level);
 			if(exper_>remain_exp) //남은 경험치가 필요경험치보다 적을때

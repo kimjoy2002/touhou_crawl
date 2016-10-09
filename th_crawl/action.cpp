@@ -1694,7 +1694,7 @@ void skill_view()
 			int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
 			if(num<SKT_MAX && you.skill[num].level < 27)
 			{
-				you.skill[num].onoff = !you.skill[num].onoff;
+				you.skill[num].onoff = (you.skill[num].onoff+1)%3;
 			}
 		}
 		else if(key_ == '!')

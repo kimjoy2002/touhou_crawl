@@ -17,8 +17,8 @@ typedef struct skill_exp_infor
 	int level;
 	int exper;
 	int aptit;
-	bool onoff;
-	skill_exp_infor():level(0), exper(0), aptit(100), onoff(false)
+	int onoff;
+	skill_exp_infor():level(0), exper(0), aptit(100), onoff(0)
 	{}
 }skill_exp_infor;
 

@@ -822,7 +822,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 				you.additem(it,false);
 				env[current_level].DeleteItem(it);	
 			}
-			you.skill[SKT_TANMAC].onoff = true;
+			you.skill[SKT_TANMAC].onoff = 1;
 
 			
 
@@ -863,7 +863,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			env[current_level].DeleteItem(it);
 
 			
-			you.skill[SKT_TRANS].onoff = false;
+			you.skill[SKT_TRANS].onoff = 1;
 
 
 			you.mp = you.max_mp;
@@ -895,7 +895,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it->Identify();
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);	
-			you.skill[SKT_EVOCATE].onoff = true;
+			you.skill[SKT_EVOCATE].onoff = 1;
 
 
 			
@@ -961,7 +961,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.SetProperty(TPT_INVISIBLE,1);
 			you.SetProperty(TPT_POWER_SAVE,1);
 
-			you.skill[SKT_TANMAC].onoff = false;
+			you.skill[SKT_TANMAC].onoff = 1;
 			set_exist_named(MON_KOISHI);	
 			
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

@@ -276,9 +276,9 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i<1;i++)
 		{
 
-			sprintf_s(temp,100,"%c %c %8s %3d",you.skill[skt].level==27?' ':sk_char,(you.skill[skt].level==27?' ':(you.skill[skt].onoff?'+':'-')),skill_string((skill_type)skt),you.skill[skt].level);
+			sprintf_s(temp,100,"%c %c %8s %3d",you.skill[skt].level==27?' ':sk_char,(you.skill[skt].level==27?' ':(you.skill[skt].onoff==2?'*':(you.skill[skt].onoff==1?'+':'-'))),skill_string((skill_type)skt),you.skill[skt].level);
 			sk_char++;
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.skill[skt].level<27?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_warning);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.skill[skt].level<27?(you.skill[skt].onoff==2?CL_normal:(you.skill[skt].onoff==1?CL_STAT:CL_bad)):CL_warning);
 			rc.left += 150;
 			//if(move ==0)
 			if(you.skill[skt].level<27)
@@ -290,7 +290,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			//	sprintf_s(temp,100,"%d",you.skill[skt].aptit);
 			//else
 			//	sprintf_s(temp,100,"%d",you.skill[skt].exper);
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.skill[skt].level<27?(you.skill[skt].onoff?CL_STAT:CL_bad):CL_warning);
+			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.skill[skt].level<27?(you.skill[skt].onoff==2?CL_normal:(you.skill[skt].onoff==1?CL_STAT:CL_bad)):CL_warning);
 			rc.left += 50;
 						
 			sprintf_s(temp,100,"%3d",you.skill[skt].aptit);

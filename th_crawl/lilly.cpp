@@ -12,6 +12,7 @@
 #include "monster.h"
 #include "environment.h"
 #include "mon_infor.h"
+#include "skill_use.h"
 
 
 int getMaxFairyName(){return 20;};
@@ -535,6 +536,30 @@ void GetFairyExp(int exp)
 							if(it->level >= 13)
 							{
 								it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
+							}
+							break;
+						case MON_SUNNY:
+							if(it->level == 13)
+							{
+								it->spell_lists.push_back(spell(SPL_LASER,20));
+							}
+							break;
+						case MON_LUNAR:
+							if(it->level == 13)
+							{
+								it->spell_lists.push_back(spell(SPL_SMITE,20));
+							}
+							break;
+						case MON_STAR:
+							if(it->level == 13)
+							{
+								it->spell_lists.push_back(spell(SPL_HASTE_OTHER,20));
+							}
+							break;
+						case MON_DIEFAIRY:
+							if(it->level == 13)
+							{
+								it->spell_lists.push_back(spell(SPL_HEAL_OTHER,20));
 							}
 							break;
 						}

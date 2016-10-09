@@ -1718,6 +1718,25 @@ void players::ExpRecovery(int exper_)
 								while(you.lilly_allys[i].level > mon_->level)
 								{
 									mon_->LevelUpdown(1,6.0f,1.0f);
+									switch(mon_->id)
+									{									
+										case MON_SUNNY:
+											if(mon_->level == 13)
+												mon_->spell_lists.push_back(spell(SPL_LASER,20));
+											break;
+										case MON_LUNAR:
+											if(mon_->level == 13)
+												mon_->spell_lists.push_back(spell(SPL_SMITE,20));
+											break;
+										case MON_STAR:
+											if(mon_->level == 13)
+												mon_->spell_lists.push_back(spell(SPL_HASTE_OTHER,20));
+											break;
+										case MON_DIEFAIRY:
+											if(mon_->level == 13)
+												mon_->spell_lists.push_back(spell(SPL_HEAL_OTHER,20));
+											break;
+									}
 								}
 
 								you.lilly_allys[i].map_id = mon_->map_id;

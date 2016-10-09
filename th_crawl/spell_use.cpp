@@ -97,6 +97,10 @@ bool isBandAlly(monster* order, monster* other)
 	{
 	case MON_FAIRY_RED_COMMANDER:
 	case MON_FAIRY_SUN_FLOWER:
+	case MON_SUNNY:
+	case MON_LUNAR:
+	case MON_STAR:
+	case MON_DIEFAIRY:
 		if(other->flag & M_FLAG_FAIRY)
 			return true;
 		else

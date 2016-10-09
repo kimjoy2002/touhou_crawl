@@ -3622,7 +3622,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			makeCustomBook(&t);
 			(*random_spell) = true;
 			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
-			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE
+			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE,
+			SPL_AIR_STRIKE
 			};
 			//주 공격스킬
 			int arr2_[] = {SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
@@ -3630,7 +3631,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			};
 			//보조스킬
 
-			int add_ = arr_[randA(9)];
+			int add_ = arr_[randA(10)];
 			list->push_back(spell(add_,25));
 			t.value1 = add_;
 			int color_ = randA(3);

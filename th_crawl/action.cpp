@@ -1684,31 +1684,47 @@ void view_log()
 
 void skill_view()
 {
-	changedisplay(DT_SKILL);
+	view_skill("");
 	int move_ = 1;
-	while(1)
+	bool ok_ = false;
+	do
 	{
-		int key_ = waitkeyinput(true);
-		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		while(1)
 		{
-			int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
-			if(num<SKT_MAX && you.skill[num].level < 27)
+			int key_ = waitkeyinput(true);
+			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
-				you.skill[num].onoff = (you.skill[num].onoff+1)%3;
+				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
+				if(num<SKT_MAX && you.skill[num].level < 27)
+				{
+					you.skill[num].onoff = (you.skill[num].onoff+1)%3;
+				}
+			}
+			else if(key_ == '!')
+			{
+				changemove(move_);
+				move_ = move_==1?-1:1;
+			}
+			else if(!key_)
+			{
+
+			}
+			else
+				break;
+		}
+		for(int i = 0; i < SKT_MAX; i++)
+		{
+			if(you.skill[i].onoff >= 1)
+			{
+				ok_ = true;
+				break;	
 			}
 		}
-		else if(key_ == '!')
-		{
-			changemove(move_);
-			move_ = move_==1?-1:1;
-		}
-		else if(!key_)
-		{
-
-		}
-		else
-			break;
+		if(ok_==false)
+			view_skill("최소한 하나의 스킬을 켜야됩니다!");
 	}
+	while(!ok_);
+
 	changedisplay(DT_GAME);
 }
 void stat_view()

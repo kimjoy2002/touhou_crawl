@@ -311,6 +311,12 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.top += fontDesc.Height;
 		skt++;
 	}
+
+	rc.left = 50;	
+	rc.top += fontDesc.Height*3;
+	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
+	rc.top += fontDesc.Height*2;
+
 }
 void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
@@ -1946,6 +1952,15 @@ void display_manager::start_spellview(char* message_)
 	ReleaseMutex(mutx);
 }
 
+void display_manager::start_skillview(char* message_)
+{
+	WaitForSingleObject(mutx, INFINITE);
+	state = DT_SKILL;
+	move = 0;
+	item_view_message = message_;
+	ReleaseMutex(mutx);
+}
+
 
 void display_manager::start_itemview(item_view_type type, char* message_)
 {
@@ -2009,6 +2024,10 @@ void view_item(item_view_type type, char* message_)
 void view_spell(char* message_)
 {
 	DisplayManager.start_spellview(message_);
+}
+void view_skill(char* message_)
+{
+	DisplayManager.start_skillview(message_);
 }
 
 void CheckKey(char key_, int num_)

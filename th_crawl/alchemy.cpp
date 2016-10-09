@@ -8,6 +8,7 @@
 
 #include "alchemy.h"
 #include "player.h"
+#include "skill_use.h"
 
 
 
@@ -135,8 +136,13 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 			printlog("당신의 톱니는 사라졌다.",false,false,false,CL_blue);
 		break;
 	case ALCT_PHILOSOPHERS_STONE:
+		you.Ability(SKL_PHILOSOPHERS_1,false,!onoff_);
+		you.Ability(SKL_PHILOSOPHERS_2,false,!onoff_);
+		you.Ability(SKL_PHILOSOPHERS_3,false,!onoff_);
+		you.Ability(SKL_PHILOSOPHERS_4,false,!onoff_);
+		you.Ability(SKL_PHILOSOPHERS_5,false,!onoff_);
 		if(onoff_)
-			printlog("당신은 현자의 돌을 연성해냈다.",true,false,false,CL_white_blue);
+			printlog("당신은 현자의 돌을 연성해냈다. (a키로 추가 마법을 사용가능)",true,false,false,CL_white_blue);
 		else
 			printlog("당신의 현자의 돌은 이윽고 사라졌다.",false,false,false,CL_blue);
 		break;

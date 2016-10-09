@@ -2504,6 +2504,14 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
+
+bool skill_fire_ball(int power, bool short_, unit* order, coord_def target);
+bool skill_water_cannon(int power, bool short_, unit* order, coord_def target);
+bool skill_air_strike(int power, bool short_, unit* order, coord_def target);	
+bool skill_emerald_city(int power, bool short_, unit* order, coord_def target);
+bool skill_stone_uplift(int power, bool short_, unit* order, coord_def target);
+
+
 int UseSkill(skill_list skill, bool short_, coord_def &target)
 {
 	int power=min(SkillCap(skill),SkillPow(skill));
@@ -2721,6 +2729,50 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_LILLY_4:
 		return skill_lilly_4(power,short_,&you, target);
+		break;
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
+		{
+			power=you.GetSpellPower(SKT_ALCHEMY,SKT_ERROR,SKT_ERROR);
+	
+			int size_ = (skill == SKL_PHILOSOPHERS_1 || skill == SKL_PHILOSOPHERS_5)?1:0;
+			if(!CheckSucide(you.position,target,SkillFlagCheck(skill,S_FLAG_SEIF) || SkillFlagCheck(skill, S_FLAG_IMMEDIATELY),size_,SkillFlagCheck(skill,S_FLAG_SMITE)))
+			{
+				return false;
+			}
+			
+			if(you.GetPunish(GT_MIMA))
+			{
+				printlog("미마는 당신이 쓰는 마법의 위력을 반감시켰다!",true,false,false,CL_green);
+			}
+			if(wiz_list.wizard_mode == 1)
+			{
+				char temp[50];
+				sprintf_s(temp,50,"스펠파워 %d / %d",power,SkillCap(skill));
+				printlog(temp,true,false,false,CL_help);
+			}
+
+			switch(skill)
+			{
+			case SKL_PHILOSOPHERS_1:
+				return skill_fire_ball(power,short_,&you,target);
+				break;
+			case SKL_PHILOSOPHERS_2:
+				return skill_water_cannon(power,short_,&you,target);
+				break;
+			case SKL_PHILOSOPHERS_3:
+				return skill_air_strike(power,short_,&you,target);	
+				break;
+			case SKL_PHILOSOPHERS_4:
+				return skill_emerald_city(power,short_,&you,target);
+				break;
+			case SKL_PHILOSOPHERS_5:
+				return skill_stone_uplift(power,short_,&you,target);
+			}
+		}
 		break;
 	}
 	return 0;

@@ -4207,6 +4207,9 @@ bool CheckDangerSpell(int danger_)
 	}
 	return true;
 }
+bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam);
+
+
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite)
 {
 	
@@ -4217,7 +4220,11 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 	}
 	beam_iterator beam(pos,target);
 
-	
+	CheckThrowPath(pos,target,beam);
+
+
+
+
 	if(size)
 	{
 		bool warning_ = false;
@@ -4339,7 +4346,6 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	if(you.GetPunish(GT_MIMA))
 	{
 		printlog("미마는 당신이 쓰는 마법의 위력을 반감시켰다!",true,false,false,CL_green);
-
 	}
 
 	if(wiz_list.wizard_mode == 1)

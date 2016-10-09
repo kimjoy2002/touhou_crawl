@@ -77,7 +77,15 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_SEIJA_2:
 	case SKL_LILLY_2:
 	case SKL_LILLY_4:
-		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);	
+		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:	
+	case SKL_PHILOSOPHERS_3:
+		return (S_FLAG_RANGE_ATTACK) & flag;
+	case SKL_PHILOSOPHERS_4:
+		return (S_FLAG_IMMEDIATELY) & flag;
+	case SKL_PHILOSOPHERS_5:
+		return (S_FLAG_SMITE) & flag;
 	case SKL_SWAKO_TEMPLE:
 		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);		
 	case SKL_SHINKI_1:
@@ -120,10 +128,15 @@ int SkillLength(skill_list skill)
 	case SKL_JUMPING_ATTACK:
 		return 4;
 	case SKL_SWAKO_TOUGUE:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
 		return 5;
+	case SKL_PHILOSOPHERS_3:
+		return 6;
 	case SKL_KANAKO_1:
 	case SKL_EIRIN_0:
 	case SKL_YUUGI_3_THROW:
+	case SKL_PHILOSOPHERS_5:
 		return 7;
 	case SKL_SATORI_1:
 	case SKL_SATORI_2:
@@ -187,6 +200,7 @@ int SkillLength(skill_list skill)
 	case SKL_SEIJA_2:
 	case SKL_LILLY_2:
 	case SKL_LILLY_4:
+	case SKL_PHILOSOPHERS_4:
 	default:
 		return 0;
 	}
@@ -326,6 +340,16 @@ const char* SkillString(skill_list skill)
 		return "봄의 치유";
 	case SKL_LILLY_4:
 		return "요정대전쟁";
+	case SKL_PHILOSOPHERS_1:
+		return "화-화염구";
+	case SKL_PHILOSOPHERS_2:
+		return "수-워터캐논";
+	case SKL_PHILOSOPHERS_3:
+		return "목-질풍선";
+	case SKL_PHILOSOPHERS_4:
+		return "금-에메랄드 시티";
+	case SKL_PHILOSOPHERS_5:
+		return "토-지반 융기";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -388,6 +412,11 @@ int SkillCap(skill_list skill)
 	case SKL_LILLY_2:
 	case SKL_LILLY_3:
 	case SKL_LILLY_4:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -452,6 +481,7 @@ int SkillNoise(skill_list skill)
 	case SKL_BREATH:
 	case SKL_SEIJA_1:
 	case SKL_LILLY_3:
+	case SKL_PHILOSOPHERS_3:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -472,17 +502,21 @@ int SkillNoise(skill_list skill)
 	case SKL_SWAKO_STATUE:
 	case SKL_SWAKO_MISYAGUZI:
 	case SKL_LILLY_4:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_4:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
 	case SKL_SWAKO_RAIN:
 	case SKL_TORMENT:
 	case SKL_SEIJA_2:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_5:
 		return 12;
 	case SKL_YUUGI_5:
 		return 16;
 	case SKL_YUYUKO_ON:	
-	case SKL_YUYUKO_OFF:	
+	case SKL_YUYUKO_OFF:
 	default:
 		return 0;
 	}
@@ -564,6 +598,11 @@ int SkillPow(skill_list skill)
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
 	default:
 		return 0;
 	}
@@ -651,6 +690,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_LILLY_2:
 	case SKL_LILLY_3:
 	case SKL_LILLY_4:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -726,6 +770,12 @@ int SkillMana(skill_list skill)
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
+		return 2;
 	case SKL_KANAKO_1:
 	case SKL_LEVITATION:
 	case SKL_YUYUKO_1:
@@ -1220,6 +1270,11 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUYUKO_OFF:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
 	default:
 		return true;
 	}
@@ -1370,6 +1425,12 @@ const char* SkillCostString(skill_list skill)
 		return "(영력 3, P 약간)";
 	case SKL_LILLY_4:
 		return "(영력 5, P 대량)";
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_2:
+	case SKL_PHILOSOPHERS_3:
+	case SKL_PHILOSOPHERS_4:
+	case SKL_PHILOSOPHERS_5:
+		return "(영력 2)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
@@ -1389,6 +1450,8 @@ int GetSpellBombRange(skill_list skill)
 	{		
 	case SKL_YUUGI_3_THROW:
 	case SKL_EIRIN_0:
+	case SKL_PHILOSOPHERS_1:
+	case SKL_PHILOSOPHERS_5:
 		return 1;
 	default:
 		break;

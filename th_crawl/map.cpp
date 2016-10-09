@@ -1385,7 +1385,7 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 	}
 	
 
-	for(int i=rand_int(4,7); i >0; i--)
+	for(int i=rand_int(6,9); i >0; i--)
 	{		
 		item_infor t;
 		env[num].MakeItem(coord_def(DG_MAX_X/2+rand_int(-9,9),DG_MAX_Y/2+rand_int(-4,4)),makeitem(ITM_BOOK, 0, &t));

@@ -48,7 +48,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	while(1)
 	{
 
-		switch(37/*randA(21)*/)
+		switch(randA(37))
 		{
 		default:
 		case 0:

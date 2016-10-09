@@ -383,7 +383,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 		vector_.push_back(VP_HAKUREI_LAST);
 
 	}
-	if(1)
+	if(0)
 	{
 		for(int i=0;i<10;i++)
 		{

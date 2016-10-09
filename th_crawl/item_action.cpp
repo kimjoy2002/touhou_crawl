@@ -484,6 +484,8 @@ void Spelllcard_Evoke()
 	}
 	changedisplay(DT_GAME);
 }
+
+void memorize_action(int spell_);
 void Reading()
 {	
 	if(you.s_lunatic)
@@ -529,8 +531,16 @@ void Reading()
 						{	
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
+							SetText() += "\n\n";
+							SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
 							ReleaseMutex(mutx);
-							waitkeyinput();
+							int memory_ = waitkeyinput();
+
+							if(memory_ == 'm')
+							{
+								memorize_action(spell_);
+								return;
+							}
 							continue;
 						}	
 					}

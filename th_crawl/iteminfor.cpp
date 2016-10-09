@@ -24,6 +24,47 @@ extern HANDLE mutx;
 
 string GetItemInfor(item *it);
 
+void memorize_action(int spell_)
+{
+	changedisplay(DT_GAME);
+	if(spell_ == SPL_NONE)
+		printlog("존재하지 않는 스펠입니다.",true,false,false,CL_normal);
+	else
+	{		
+		bool ok_ = true;
+		while(ok_)
+		{
+			printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
+			printlog(" 주문을 익히시겠습니까? (y/n)",false,false,false,CL_help);
+			char temp[128];
+			sprintf_s(temp,128," [마법실패율: %d%% 남은 마법 레벨: %d]",100-you.GetSpellSuccess(spell_),you.remainSpellPoiont);
+
+			printlog(temp,true,false,false,CL_warning);
+			switch(waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				you.Memorize(spell_);
+				ok_ = false;
+				break;
+			case 'N':
+			case 'n':
+			case VK_ESCAPE:
+				printlog("취소했다.",true,false,false,CL_help);
+				ok_ = false;
+				break;
+			default:
+				printlog("Y와 N중에 선택해주세요.",true,false,false,CL_help);
+				break;
+			}
+		}
+	}
+	return;
+
+}
+
+
+
 void iteminfor(bool gameover)
 {
 	view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");
@@ -50,8 +91,16 @@ void iteminfor(bool gameover)
 							{	
 								WaitForSingleObject(mutx, INFINITE);
 								SetText() = GetSpellInfor((spell_list)spell_);
+								SetText() += "\n\n";
+								SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
 								ReleaseMutex(mutx);
-								waitkeyinput();
+								int memory_ = waitkeyinput();
+
+								if(memory_ == 'm')
+								{
+									memorize_action(spell_);
+									return;
+								}
 								continue;
 							}	
 						}

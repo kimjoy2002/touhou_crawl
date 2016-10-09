@@ -548,7 +548,7 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_AUTUMN_BLADE:
 		text_ += "연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n";
-		text_ += "사용중엔 모든 근접공격 데미지가 4배가 되는 심플한 기술.\n";
+		text_ += "사용중엔 모든 근접공격 데미지가 3배가 되는 심플하면서 강력한 마법.\n";
 		break;
 	case SPL_PHILOSOPHERS_STONE:
 		text_ += "연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n";
@@ -567,7 +567,7 @@ string GetSpellInfor(spell_list spell)
 		SpellSchool(spell,2) == SKT_ALCHEMY)	
 		&& SpellFlagCheck(spell, S_FLAG_BUF))
 	{		
-		text_ += "이 마법은 연금술 버프이다. 연금술 버프끼리는 중첩되지않는다.\n";
+		text_ += "이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n";
 		text_ += "다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n";
 	}
 

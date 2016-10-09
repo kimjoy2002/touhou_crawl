@@ -2806,6 +2806,8 @@ void dungeonView()
 
 
 
+void memorize_action(int spell_);
+
 
 
 void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
@@ -2923,6 +2925,10 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 					break;
 				}
 			}
+			
+
+			memorize_action(spell_);
+			/*
 			changedisplay(DT_GAME);
 			if(spell_ == SPL_NONE)
 				printlog("존재하지 않는 스펠입니다.",true,false,false,CL_normal);
@@ -2950,7 +2956,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 						break;
 					}
 				}
-			}
+			}*/
 			break;
 		}
 		else if(key_ == VK_UP)

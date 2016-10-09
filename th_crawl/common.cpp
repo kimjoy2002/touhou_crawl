@@ -210,6 +210,29 @@ int GetPosToDirec(const coord_def &start, const coord_def &target)
 	angle = (angle+360)%360;
 	return GetAngleToDirec(angle);
 }
+coord_def GetDirecToPos(int pos_)
+{
+	switch((pos_+8)%8)
+	{
+	case 7:
+		return coord_def(-1,-1);
+	case 0:
+		return coord_def(0,-1);
+	case 1:
+		return coord_def(1,-1);
+	case 6:
+		return coord_def(-1,0);
+	case 2:
+		return coord_def(1,0);
+	case 5:
+		return coord_def(-1,1);
+	case 4:
+		return coord_def(0,1);
+	case 3:
+		return coord_def(1,1);
+	}
+	return coord_def(0,0);
+}
 int GetAngleToDirec(int angle)
 {
 	if(angle>=22 && angle <67)

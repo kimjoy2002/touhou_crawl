@@ -591,6 +591,68 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].MakeFloorEffect(event_->position,t_,t_,FLOORT_SCHEMA,2,NULL);
 		}
 		return 0;
+	case EVL_RUN_FAIRY:
+		{
+			monster *sunny_ = env[current_level].AddMonster(MON_SUNNY,M_FLAG_EVENT,coord_def(1,0)+event_->position);
+			monster *star_ = env[current_level].AddMonster(MON_STAR,M_FLAG_EVENT,coord_def(-1,0)+event_->position);
+			monster *lunar_ = env[current_level].AddMonster(MON_LUNAR,M_FLAG_EVENT,coord_def(0,0)+event_->position);
+			
+			sunny_->s_fear = 30+randA(20);
+			star_->s_fear = 30+randA(20);
+			lunar_->s_fear = 30+randA(20);
+			char temp[100];
+			sprintf(temp,"%s%s외쳤다. \"도망쳐!\"",star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
+			printlog(temp,true,false,false,CL_speak);
+
+			sunny_->SetInvisible(10);
+			lunar_->s_confuse = 5;
+			star_->SetHaste(10);
+			
+		}
+		return 1;
+	case EVL_SCALET_TRAP:
+		{
+			env[current_level].dgtile[event_->position.x-4][event_->position.y+1].tile = DG_OPEN_DOOR;
+			env[current_level].dgtile[event_->position.x-2][event_->position.y+1].tile = DG_OPEN_DOOR;
+			env[current_level].dgtile[event_->position.x-4][event_->position.y-1].tile = DG_OPEN_DOOR;
+			env[current_level].dgtile[event_->position.x-2][event_->position.y-1].tile = DG_OPEN_DOOR;
+			
+			env[current_level].dgtile[event_->position.x+1][event_->position.y].tile = DG_GLASS;
+			
+			printlog("방어마법진작동. 칩입자를 처단하라!",true,false,false,CL_small_danger);
+			env[current_level].MakeNoise(event_->position,8,NULL);
+		}
+		return 1;
+	case EVL_KOGASATIME:
+		{			
+			for(int i=-3;i<=3;i++)
+			{
+				if(i!=0)	
+					env[current_level].dgtile[event_->position.x+i][event_->position.y+1].tile = DG_FLOOR;
+			}
+			for(int i = 0; i<5 ; i++)
+			{
+				for(int j = 0; j<2; j++)
+				{
+					env[current_level].dgtile[event_->position.x+4*(j*2-1)][event_->position.y+i*2].tile = DG_OPEN_DOOR;
+				}
+			}
+			
+			for(int i = 0; i<3 ; i++)
+			{
+				for(int j = 0; j<3; j++)
+				{
+					if(i!=1 || j!=1)
+						env[current_level].dgtile[event_->position.x-1+i][event_->position.y+4+j].tile = DG_GLASS;
+				}
+			}
+			printlog("It's SURPRISE TIME!!",true,false,false,CL_small_danger);
+			env[current_level].MakeNoise(event_->position,16,NULL);
+			you.resetLOS();
+			MoreWait();
+			printlog("...그러나 코가사는 무언가 잘못되었음을 느꼈다.",true,false,false,CL_normal);
+		}
+		return 1;
 	default:
 		break;
 	}

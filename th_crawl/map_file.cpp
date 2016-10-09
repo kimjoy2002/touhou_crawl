@@ -437,6 +437,12 @@ bool PixedMap(map_dummy* map, char *temp)
 			case '=':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_GLASS;
 				break;
+			case '&':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_STATUE;
+				break;
+			case 'E':
+				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BOOK_WALL;
+				break;				
 			case '~':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_SEA;
 				break;	

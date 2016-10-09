@@ -32,7 +32,10 @@ enum event_list
 	EVL_KOISHI,
 	EVL_KYOKO, //공포의 쿄코
 	EVL_AUTUMN, //단풍
-	EVL_SUKIMA //스키마
+	EVL_SUKIMA, //스키마
+	EVL_RUN_FAIRY, //도망치는 삼월정
+	EVL_SCALET_TRAP, //홍마관 트랩
+	EVL_KOGASATIME //코가사 타임!
 };
 
 class events

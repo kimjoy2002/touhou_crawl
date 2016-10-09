@@ -1799,10 +1799,18 @@ int monster::atkmove(int is_sight, bool only_move)
 		{
 			int x_ =  (target_pos.x-position.x)>0?-1:(target_pos.x-position.x)<0?1:0;
 			int y_ =  (target_pos.y-position.y)>0?-1:(target_pos.y-position.y)<0?1:0;
-			move_ = MoveToPos(position+coord_def(x_,y_), only_move);
-			if(!move_)
+			int direc_ = GetPosToDirec(position, position+coord_def(x_,y_));
+			int arr_[] = {0,-1,1,-2,2};
+			for(int i=0;i<5;i++)
 			{
-				s_fear = 0;
+				move_ = MoveToPos(position+GetDirecToPos(direc_+arr_[i]), only_move);
+				if(!move_ && i==4)
+				{
+					s_fear = 0;
+				}
+				else if(move_)
+					break;
+
 			}
 		}
 		//else if(target_pos == position && target)
@@ -2481,7 +2489,7 @@ int monster::action(int delay_)
 							if(char* c_ = Get_Speak(id,this,MST_CONFUSE))
 								printlog(c_,true,false,false,CL_speak);	
 						}
-						else
+						else if(!s_fear)
 						{
 							if(char* c_ = Get_Speak(id,this,MST_NORMAL))
 								printlog(c_,true,false,false,CL_speak);	

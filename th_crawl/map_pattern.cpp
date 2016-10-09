@@ -14,6 +14,7 @@
 
 
 
+dungeon_tile_type randomTemple();
 
 char* common_enter_pattern(map_dummy* map)
 {
@@ -47,7 +48,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	while(1)
 	{
 
-		switch(randA(21))
+		switch(37/*randA(21)*/)
 		{
 		default:
 		case 0:
@@ -118,7 +119,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 			{
 				if(is_exist_named(MON_CLOWNPIECE))
 					break;
-				if(floor_ < 9)
+				if(floor_ < 9 || floor_ > 15)
 					break;
 				map->size_x = 6;
 				map->size_y = 5;	
@@ -585,6 +586,400 @@ $$$...$$$";
 ###...###\
 ####+####";
 			break;
+		case 22:
+			{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+.......\
+..~~~..\
+.~~~~~.\
+.~~~~~.\
+.~~~~~.\
+..~~~..\
+.......";
+			break;
+			}
+		case 23:
+			{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 2;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->flag = FLAG_NO_ITEM;
+			return  "\
+.......\
+.$$$$$.\
+.$iii$.\
+.$===$.\
+.......";
+			break;
+			}
+		case 24:
+			{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+...#...\
+...#...\
+...#...\
+###+###\
+...#...\
+...#...\
+...#...";
+			break;
+			}
+		case 25:
+			{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 4;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+...........\
+..~~~~~~~..\
+..~~~~~~~..\
+.~~~..~~~~.\
+.~~~....~~.\
+.~~~~..~~~.\
+..~~~~~~~..\
+..~~~~~~~..\
+...........";
+			break;
+			}
+		case 26: //UFO그리기
+			{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 2;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+			
+			int id_ = MON_RED_UFO;
+			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(-1,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(0,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(1,0)));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+.......\
+.=====.\
+.=...=.\
+.=====.\
+.......";
+			break;
+			}
+		case 27: //도망쳐 페어리
+			if(!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			if(is_exist_named(MON_SUNNY))
+			{
+				break;
+			}
+			map->size_x = 3;
+			map->size_y = 2;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			if(!is_exist_named(MON_SUNNY)){
+				map->event_list.push_back(mapdummy_event(EVL_RUN_FAIRY,coord_def(0,0),EVT_SIGHT));
+				set_exist_named(MON_SUNNY);
+				set_exist_named(MON_STAR);
+				set_exist_named(MON_LUNAR);
+			}
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+#######\
+#.....#\
++.....+\
+#.....#\
+#######";
+			break;
+		case 28: //홍마관 책 트랩
+			{
+			if(!(floor_ >= SCARLET_LEVEL && floor_ <= SCARLET_LEVEL_LAST_LEVEL))
+				break;
+			
+			map->size_x = 4;
+			map->size_y = 3;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = -map->size_x;
+			map->m_exit.y = 0;
+
+			map->event_list.push_back(mapdummy_event(EVL_SCALET_TRAP,coord_def(1,0),EVT_ABOVE));
+			map->monster_list.push_back(mapdummy_mon(MON_GOLEM,0,coord_def(-1,-2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GOLEM,0,coord_def(-3,-2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GOLEM,0,coord_def(-1,2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GOLEM,0,coord_def(-3,2)));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			item_infor t;
+			makeitem(ITM_BOOK, 0, &t, -1);
+			map->item_list.push_back(mapdummy_item(t,coord_def(3,0)));	
+			return  "\
+#########\
+#.#.#####\
+#########\
+........#\
+#########\
+#.#.#####\
+#########";
+			break;
+			}
+		case 29: //요괴의산 수족관
+			{
+			if(!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
+				break;	
+
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			
+			if(!is_exist_named(MON_WAKASAGI)){
+				map->monster_list.push_back(mapdummy_mon(MON_WAKASAGI,0,coord_def(0,0)));
+				set_exist_named(MON_WAKASAGI);
+			}
+			else
+			{
+				map->monster_list.push_back(mapdummy_mon(MON_NESI,0,coord_def(0,0)));
+
+			}
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			return  "\
+.......\
+.=====.\
+.=~~~=.\
+.=~~~=.\
+.=~~~=.\
+.=====.\
+.......";
+			break;
+			}
+		case 30: //코가사 타임
+			{
+				if(is_exist_named(MON_KOGASA))
+					break;
+				if(floor_ < 5 || floor_ > 12)
+					break;
+				map->size_x = 6;
+				map->size_y = 5;	
+				map->m_entrance.x = 0;
+				map->m_entrance.y = map->size_y;
+				map->m_exit.x = 0;
+				map->m_exit.y = map->size_y;
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+				if(!is_exist_named(MON_KOGASA)){
+					map->monster_list.push_back(mapdummy_mon(MON_KOGASA,0,coord_def(0,1)));
+					set_exist_named(MON_KOGASA);
+				}
+				for(int i = 0; i<5 ; i++)
+				{
+					for(int j = 0; j<2; j++)
+					{
+						if(randA(2)==1)
+							map->monster_list.push_back(mapdummy_mon(MON_BAKEKASA,0,coord_def(5*(j*2-1),-4+i*2)));
+					}
+				}
+				map->event_list.push_back(mapdummy_event(EVL_KOGASATIME,coord_def(0,-4),EVT_SIGHT));
+				return  "\
+#############\
+#.#.......#.#\
+######+######\
+#.#.......#.#\
+###.......###\
+#.#..###..#.#\
+###..#.#..###\
+#.#..###..#.#\
+###.......###\
+#.#.......#.#\
+######+######";
+				break;	
+			}
+		case 31:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+.......\
+.#.#.#.\
+.......\
+.#.#.#.\
+.......\
+.#.#.#.\
+.......";
+			break;
+			}
+		case 32:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#######\
+#.....#\
+#.....#\
+#.....#\
+#.....#\
+#.&.&.#\
+###.###";
+			break;
+			}
+		case 33:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 2;	
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#######\
+EEEEEEE\
+.......\
+EEEEEEE\
+#######";
+			break;
+			}
+		case 34:
+			{
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 3;	
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = -map->size_y;
+			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+			return  "\
+#E.E#\
+#E.E#\
+#E.E#\
+#E.E#\
+#E.E#\
+#E.E#\
+#E.E#";
+			break;
+			}
+		case 35:
+			{
+				bool hw_ = randA(1);
+				map->size_x = 2;
+				map->size_y = 3;	
+				map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+				return  "\
+.....\
+.~~~.\
+.~~~.\
+.~~~.\
+..&..\
+.....\
+.....";			
+			}
+		case 36: //숨겨진 보물창고
+			{
+				if(floor_ < 5)
+					break;
+				map->size_x = 4;
+				map->size_y = 2;
+				map->m_entrance.x = 0;
+				map->m_entrance.y = -map->size_y;
+				map->m_exit.x = 0;
+				map->m_exit.y = -map->size_y;
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+				for(int i =0;i<3;i++)
+				{
+					item_infor t;
+					makeitem(ITM_BOOK, 0, &t, -1);
+					map->item_list.push_back(mapdummy_item(t,coord_def(rand_int(-2,2),rand_int(-1,0))));	
+				}
+
+				return  "\
+####&####\
+#E.....E#\
+#E.....E#\
+#EEEEEEE#\
+#########";			
+			}
+		case 37:
+			{
+				bool hw_ = randA(1);
+				map->size_x = 2;
+				map->size_y = 2;	
+				map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+				map->sp_tile_list.push_back(randomTemple());
+				return  "\
+.....\
+.###.\
+.#0#.\
+.#&#.\
+.....";			
+			}
 		}
 	}
 }

@@ -40,6 +40,7 @@ float GetPositionToAngle2(float start_x, float start_y, float target_x, float ta
 float GetBaseAngle(float angle);
 
 int GetPosToDirec(const coord_def &start, const coord_def &target);
+coord_def GetDirecToPos(int pos_);
 int GetAngleToDirec(int angle);
 
 float GetPositionGap(float start_x, float start_y, float target_x, float target_y);

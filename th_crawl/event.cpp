@@ -232,7 +232,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog("모든 무기는 한손무기라고 생각하고 사용해주세요.",true,false,false,CL_warning);
 		return 1;
 	case 26:
-		printlog("방어구는 방패와 몸통방어구만 존재합니다.",true,false,false,CL_warning);
+		printlog("몸통방어구엔 재질과 종류로 나뉘어있고 그외엔 보조방어구와 방패가 있습니다.",true,false,false,CL_warning);
 		printlog("갑옷엔 재질에 따라 장비패널티가 존재하여 합산되어 우측창에 표시됩니다.",true,false,false,CL_warning);
 		return 1;
 	case 27:

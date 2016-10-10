@@ -269,6 +269,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 rese
 	DG_BAMBOO_WALL,
 	DG_WALL_END = DG_BAMBOO_WALL,
 	DG_METAL_WALL,
+	DG_WALL2,
+	DG_WALL3,
 	DG_CLOSE_DOOR,
 	DG_GLASS,
 	DG_STATUE,

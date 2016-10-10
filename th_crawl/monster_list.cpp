@@ -329,11 +329,11 @@ const mon_infor mondata[] = {
 	
 	{MON_BENBEN,6,520,name_infor("벤벤",true),&img_named_benben,60,3,3,
 	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_NONE_STAIR,2,1,10},
 	
 	{MON_YATHASI,6,520,name_infor("야츠하시",false),&img_named_yathasi,50,0,8,
 	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_NONE_STAIR,2,1,10},
 	
 	{MON_ORIN,13,2310,name_infor("오린",true),&img_named_orin,95,1,12,
 	{29,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

@@ -1939,6 +1939,39 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			}
 		}
 	}
+
+	if(id == MON_YATHASI || id == MON_BENBEN)
+	{
+		bool benben_ = (id == MON_BENBEN);
+		for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
+		{
+			if(it->isLive() && ((it->id == MON_YATHASI && benben_) || (it->id == MON_BENBEN && !benben_)))
+			{				
+				if(it->isYourShight())
+				{
+					printarray(true,false,false,CL_small_danger,3,it->name.name.c_str(),it->name.name_is(true),"분노에 소리쳤다. 자신의 능력에 각성하였다!");
+				}
+				else
+				{
+					printarray(true,false,false,CL_small_danger,1,"멀리서 분노에 찬 비명을 들었다.");
+				}
+				it->LevelUpdown(5,5.0f,0.0f);
+
+				if(it->id == MON_YATHASI)
+				{
+					it->spell_lists.push_back(spell(SPL_INVISIBLE,20));
+				}
+				else if(it->id == MON_BENBEN)
+				{
+					it->spell_lists.push_back(spell(SPL_HASTE,20));
+				}
+				break;
+			}
+		}
+	}
+
+
+
 	for(int i = 0; i < 5; i++)
 	{
 		if(you.god_value[GT_LILLY][i] == 1)

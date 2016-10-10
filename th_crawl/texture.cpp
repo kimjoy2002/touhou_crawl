@@ -127,6 +127,8 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//책장
 					textures(&texture_dungeon01, 224, 0, 256, 32, 255),//대나무
 					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//철벽
+					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//벽2
+					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//벽3
 					textures(&texture_item01, 3, 255), //닫힌문
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//유리
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//석상

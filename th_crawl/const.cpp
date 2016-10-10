@@ -170,6 +170,8 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"책장",
 	"밀집된대나무",
 	"철벽",
+	"벽",
+	"벽",
 	"닫힌문",
 	"유리",
 	"석상",

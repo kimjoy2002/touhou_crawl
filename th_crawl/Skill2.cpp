@@ -775,7 +775,7 @@ int SkillMana(skill_list skill)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
-		return 2;
+		return 1;
 	case SKL_KANAKO_1:
 	case SKL_LEVITATION:
 	case SKL_YUYUKO_1:
@@ -1430,7 +1430,7 @@ const char* SkillCostString(skill_list skill)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
-		return "(영력 2)";
+		return "(영력 1)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

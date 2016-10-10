@@ -474,7 +474,7 @@ void wiz_mode()
 				you.Memorize(SPL_DISCHARGE,true);
 			}
 			break;
-		case 'M':
+		/*case 'M':
 			if(monster* mon_=BaseSummon(MON_LUNAR, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{
 				mon_->state.SetState(MS_SLEEP);
@@ -507,9 +507,10 @@ void wiz_mode()
 				mon_->flag &= ~M_FLAG_SUMMON;
 				mon_->ReturnEnemy();
 			}
-			break;
+			break;*/
 		case '^':
-			you.PietyUpDown(10);
+			if(you.god != GT_SEIJA)
+				you.PietyUpDown(10);
 			you.GiftCount(10);
 			break;
 		case 'C':

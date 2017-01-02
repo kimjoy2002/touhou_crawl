@@ -53,7 +53,7 @@ float GetCenterX();
 
 float GetCenterY();
 
-float round(float x);
+//float round(float x);
 
 float round_down(float x);
 

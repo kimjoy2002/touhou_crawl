@@ -2253,7 +2253,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 					}
 				}
 
-				int person_ = randA(FP_MAX-1);
+				int person_ = randA(FP_NORMALS-1);
 
 				you.lilly_allys[i].id = hit_mon->id;
 				you.lilly_allys[i].map_id = hit_mon->map_id;

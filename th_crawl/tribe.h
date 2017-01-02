@@ -13,7 +13,7 @@
 
 using namespace std;
 
-extern enum tribe_type;
+enum tribe_type;
 
 enum tribe_proper_type
 {

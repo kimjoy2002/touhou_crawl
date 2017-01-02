@@ -1528,7 +1528,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù. \"ÀµÄí¸®¶õ »ı¸íÃ¼... ´ëÃ¼ ¹¹ÇÏ´Â ³ğµéÀÌÁö?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 7:
-				sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù. \"ÀÌÀü¿¡ %¿¡°Ô ÀµÄí¸®·Î ¿ÀÇØ¹Ş¾Ò´Ù...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true),tribe_type_string[randA(TRI_MAX-1)]);
+				sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù. \"ÀÌÀü¿¡ %s¿¡°Ô ÀµÄí¸®·Î ¿ÀÇØ¹Ş¾Ò´Ù...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true),tribe_type_string[randA(TRI_MAX-1)]);
 				return temp_speak;
 			case 8:
 				sprintf(temp_speak,"%s%s¿ÜÃÆ´Ù. \"±× ´©±¸¶óµµ ³ª¸¦ µÎ·Á¿öÇÏÁö!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
@@ -4263,7 +4263,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				sprintf(temp_speak,"%s%sÈ¥¶õÇÏ°í ÀÖ´Ù. \"¶Ç ÈÄÅä ³×³ğÀÇ ÁşÀÎ°¡!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 2:
-				sprintf(temp_speak,"%s%sÇÏ´Ã¿¡ Àü±â¸¦ ³»»Õ°í ÀÖ´Ù.");
+				sprintf(temp_speak,"%s%sÇÏ´Ã¿¡ Àü±â¸¦ ³»»Õ°í ÀÖ´Ù.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		}

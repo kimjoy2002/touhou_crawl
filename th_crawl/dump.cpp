@@ -513,7 +513,7 @@ bool Dump(int type, string *filename_)
 	if(you.currentSpellNum)
 		fprintf_s(fp,"\n\n당신은 %d개의 마법을 배우고 있으며 %d의 마법 레벨이 남았다.\n",you.currentSpellNum,you.remainSpellPoiont);
 	else
-		fprintf_s(fp,"\n당신은 마법을 배우고 있지 않다.\n",you.currentSpellNum,you.remainSpellPoiont);
+		fprintf_s(fp,"\n당신은 마법을 배우고 있지 않다.\n");
 
 
 
@@ -550,7 +550,7 @@ bool Dump(int type, string *filename_)
 			fprintf_s(fp,"%s", (*it)->text.c_str());
 			if((*it)->enter)
 			{
-				fprintf_s(fp,"\n", (*it)->text.c_str());
+				fprintf_s(fp,"\n");
 			}
 		}
 	}

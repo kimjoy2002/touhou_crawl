@@ -1531,7 +1531,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					(*it).draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
 					if((*it).isUnique() || (*it).image == &img_mons_default)
 					{
-						RECT rc={((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f-10.0f, WindowWidth, WindowHeight};
+						RECT rc={(LONG)(((*it).position.x-x_)*32.0f+20.0f),(LONG)(((*it).position.y-y_)*32.0f-10.0f), (LONG)WindowWidth, (LONG)WindowHeight};
 						rc.left -= fontDesc.Width*(*it).GetName()->name.size()/2;
 						pfont->DrawTextA(pSprite,(*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);	
 					}
@@ -1664,7 +1664,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		float x = 0, y = 0;
 		for(;it != text_log.text_list.end();it++)
 		{			
-			RECT rc={x, y, 32/**16+16*/, y+fontDesc.Height};
+			RECT rc={ (LONG)x, (LONG)y, 32/**16+16*/, (LONG)(y+fontDesc.Height)};
 			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{
@@ -1883,7 +1883,7 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		float x = 0, y = 0;
 		for(i = 0;i < view_length && it != text_log.text_list.end();it++)
 		{			
-			RECT rc={x, y, x+(*it)->text.length()*fontDesc.Width, y+fontDesc.Height};
+			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
 			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{
@@ -1927,7 +1927,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		float x = 0, y = 0;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{			
-			RECT rc={x, y, x+(*it)->text.length()*fontDesc.Width, y+fontDesc.Height};
+			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
 			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{

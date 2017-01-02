@@ -279,10 +279,10 @@ float GetCenterY()
 	return (float)WindowHeight/2;
 }
 
-float round(float x)
+/*float round(float x)
 {
    return ((x>0) ? floor(x+.5f) : ceil(x-.5f));
-}
+}*/
 float round_down(float x)
 {
    return ((x>0) ? floor(x+0.25f) : ceil(x-0.75f));

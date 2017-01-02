@@ -22,7 +22,7 @@ extern name_infor fairy_name[];
 
 enum FAIRY_PERSONAL
 {
-	FP_NORMAL,
+	FP_NORMALS,
 	FP_SHY,
 	FP_BRAVE,
 	FP_COLD,

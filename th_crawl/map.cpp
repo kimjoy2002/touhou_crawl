@@ -154,7 +154,7 @@ void map_dummy::eventmapmake(environment& env_pointer, int count, bool wall_)
 			}
 			else if(tiles[i+size_x][j+size_y] != DG_NONE)
 			{
-				env_pointer.MakeEvent(EVL_FLOOR, pos+coord_def(i,j), EVT_COUNT,count);
+				env_pointer.MakeEvent(EVL_DREAM_FLOOR, pos+coord_def(i,j), EVT_COUNT,count);
 				//env_pointer.dgtile[i+pos.x][j+pos.y].tile = tiles[i+size_x][j+size_y];
 				if(flag)
 					env_pointer.dgtile[i+pos.x][j+pos.y].flag |= flag;
@@ -826,7 +826,7 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 					if(i==0)
 						env[num].dgtile[path_temp.x][path_temp.y].tile = floor_tex; //저장한 도로를 칠하기
 					else 
-						env[num].MakeEvent(EVL_FLOOR, path_temp, EVT_COUNT,dream_count_*i);
+						env[num].MakeEvent(EVL_DREAM_FLOOR, path_temp, EVT_COUNT,dream_count_*i);
 					path_stack[i].pop();
 				}
 			}

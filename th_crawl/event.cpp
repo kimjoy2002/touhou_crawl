@@ -290,6 +290,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_FLOOR;
 		}
 		return 1;
+	case EVL_DREAM_FLOOR:
+	{
+		env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_DREAM_FLOOR;
+	}
+	return 1;
 	case EVL_BAMBOO:
 		{			
 			bamboo_count(current_level);
@@ -416,8 +421,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				{
 					for(int h = 3;h<DG_MAX_Y-3;h++)
 					{
-						if(env[current_level].dgtile[k][h].tile == DG_WALL)
-							env[current_level].dgtile[k][h].tile = DG_FLOOR;
+						if(env[current_level].dgtile[k][h].tile == DG_WALL2)
+							env[current_level].dgtile[k][h].tile = DG_DREAM_FLOOR;
 					}
 				}
 				{

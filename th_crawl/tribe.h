@@ -58,6 +58,7 @@ enum tribe_proper_type
 	TPT_BLOOD_MAGIC,
 	TPT_TORMENT,
 	TPT_CLOUD_RESIST,
+	TPT_SEE_INVI,
 	TPT_MAX
 };
 

@@ -795,6 +795,7 @@ void SetJob(job_type select_, string name_)
 }
 
 
+bool skill_lilly_1(int power, bool short_, unit* order, coord_def target);
 
 void TouhouPlayerble(const string name_, bool aptit_)
 {
@@ -1007,6 +1008,87 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
+	}
+	else if (name_.compare("써니") == 0 || name_.compare("스타") == 0 || name_.compare("루나") == 0)
+	{
+		if (aptit_)
+		{
+			if (name_.compare("써니") == 0) {
+				you.skill[SKT_SPELLCASTING].aptit += 1;
+				you.skill[SKT_CONJURE].aptit += 2;
 
+			}
+			if (name_.compare("스타") == 0) {
+				you.skill[SKT_FIGHT].aptit += 1;
+				you.skill[SKT_DODGE].aptit += 1;
+				you.skill[SKT_ALCHEMY].aptit += 1;
+			}
+			if (name_.compare("루나") == 0) {
+				you.skill[SKT_SHORTBLADE].aptit += 1;
+				you.skill[SKT_STEALTH].aptit += 1;
+				you.skill[SKT_MENTAL].aptit += 1;
+			}
+		}
+		else
+		{
+			set_exist_named(MON_SUNNY);
+			set_exist_named(MON_STAR);
+			set_exist_named(MON_LUNAR);
+
+			you.GetExp(you.GetNeedExp(you.level - 1) - you.exper, false);
+			you.GetExp(you.GetNeedExp(you.level - 1) - you.exper, false);
+
+			you.Belief(GT_LILLY, 55, false);
+
+
+
+			if (name_.compare("써니") == 0) {
+
+
+
+
+			}
+			if (name_.compare("스타") == 0) {
+				
+				you.SetProperty(TPT_SEE_INVI, 1);
+
+
+
+			}
+			if (name_.compare("루나") == 0) {
+				for (int i = 0; i < 5; i++)
+				{
+					it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SILENCE));
+					it->Identify();
+					you.additem(it, false);
+					env[current_level].DeleteItem(it);
+				}
+
+			}
+
+
+			vector<int> temp;
+			if (name_.compare("써니") != 0)
+				temp.push_back(MON_SUNNY);
+			if (name_.compare("스타") != 0)
+				temp.push_back(MON_STAR);
+			if (name_.compare("루나") != 0)
+				temp.push_back(MON_LUNAR);
+			
+
+			for(int i = 0; i< 2;i++)
+			{
+				you.god_value[GT_LILLY][i] = 2;
+				you.lilly_allys[i].id = temp[i];
+				you.lilly_allys[i].map_id = -2;
+				you.lilly_allys[i].floor = 0;
+				you.lilly_allys[i].level = 3;
+				you.lilly_allys[i].exp = level_up_value[3 - 2];
+				you.lilly_allys[i].personality =  0;
+				you.lilly_allys[i].cooldown = 0;
+
+				you.Ability(SKL_LILLY_1, true, true);
+			}
+		}
 	}
 }

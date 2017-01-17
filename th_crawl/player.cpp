@@ -1617,6 +1617,85 @@ bool players::GetExp(int exper_, bool speak_)
 	SkillTraining(speak_);
 	return level_up_;
 }
+
+void players::FairyRevive(bool speak_)
+{
+
+
+	if (you.god == GT_LILLY)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (you.god_value[GT_LILLY][i] == 2)
+			{
+				you.lilly_allys[i].cooldown--;
+				if (you.lilly_allys[i].cooldown <= 0)
+				{
+					//부활!					
+					dif_rect_iterator rit(you.position, 2);
+					for (; !rit.end(); rit++)
+					{
+						if (env[current_level].isMove(rit->x, rit->y, true, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
+						{
+							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY, coord_def(rit->x, rit->y));
+							if (!(mon_->flag & M_FLAG_UNIQUE))
+							{
+								mon_->name.name = fairy_name[you.lilly_allys[i].name].name;
+								mon_->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
+							}
+							if (mon_->isYourShight() && speak_)
+							{
+								printarray(true, false, false, CL_lilly, 3, mon_->name.name.c_str(), mon_->name.name_is(true), "부활했다!");
+								if (mon_->CanSpeak())
+									printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE), true, false, false, CL_normal);
+							}
+							if (mon_->id == MON_LUNAR && you.char_name.name.compare("써니") == 0) {
+								mon_->spell_lists.clear();
+								mon_->spell_lists.push_back(spell(SPL_SELF_HEAL, 25));
+							}
+							while (you.lilly_allys[i].level > mon_->level)
+							{
+								mon_->LevelUpdown(1, 6.0f, 1.0f);
+								switch (mon_->id)
+								{
+								case MON_SUNNY:
+									if (mon_->level == 13)
+										mon_->spell_lists.push_back(spell(SPL_LASER, 20));
+									break;
+								case MON_LUNAR:							
+									if (mon_->level == 13)
+										mon_->spell_lists.push_back(spell(SPL_SMITE, 20));
+									break;
+								case MON_STAR:
+									if (mon_->level == 13)
+										mon_->spell_lists.push_back(spell(SPL_HASTE_OTHER, 20));
+									break;
+								case MON_DIEFAIRY:
+									if (mon_->level == 13)
+										mon_->spell_lists.push_back(spell(SPL_HEAL_OTHER, 20));
+									break;
+								}
+							}
+
+							you.lilly_allys[i].map_id = mon_->map_id;
+							you.lilly_allys[i].floor = current_level;
+							you.god_value[GT_LILLY][i] = 1;
+							break;
+						}
+					}
+
+
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
 void players::ExpRecovery(int exper_)
 {	
 	exper_recovery -= exper_;
@@ -1688,69 +1767,7 @@ void players::ExpRecovery(int exper_)
 
 		}
 
-		if(you.god == GT_LILLY)
-		{
-			for(int i = 0; i < 5; i++)
-			{
-				if(you.god_value[GT_LILLY][i] == 2)
-				{
-					you.lilly_allys[i].cooldown--;
-					if(you.lilly_allys[i].cooldown<=0)
-					{
-						//부활!					
-						dif_rect_iterator rit(you.position,2);
-						for(; !rit.end();rit++)
-						{
-							if(env[current_level].isMove(rit->x, rit->y,true,false) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
-							{								
-								monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id,M_FLAG_ALLY,coord_def(rit->x,rit->y));
-								if(!(mon_->flag & M_FLAG_UNIQUE))
-								{
-									mon_->name.name = fairy_name[you.lilly_allys[i].name].name;
-									mon_->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
-								}
-								if(mon_->isYourShight())
-								{
-									printarray(true,false,false,CL_lilly,3,mon_->name.name.c_str(),mon_->name.name_is(true),"부활했다!");
-									if(mon_->CanSpeak())
-										printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE),true,false,false,CL_normal);
-								}
-								while(you.lilly_allys[i].level > mon_->level)
-								{
-									mon_->LevelUpdown(1,6.0f,1.0f);
-									switch(mon_->id)
-									{									
-										case MON_SUNNY:
-											if(mon_->level == 13)
-												mon_->spell_lists.push_back(spell(SPL_LASER,20));
-											break;
-										case MON_LUNAR:
-											if(mon_->level == 13)
-												mon_->spell_lists.push_back(spell(SPL_SMITE,20));
-											break;
-										case MON_STAR:
-											if(mon_->level == 13)
-												mon_->spell_lists.push_back(spell(SPL_HASTE_OTHER,20));
-											break;
-										case MON_DIEFAIRY:
-											if(mon_->level == 13)
-												mon_->spell_lists.push_back(spell(SPL_HEAL_OTHER,20));
-											break;
-									}
-								}
-
-								you.lilly_allys[i].map_id = mon_->map_id;
-								you.lilly_allys[i].floor = current_level;
-								you.god_value[GT_LILLY][i] = 1;
-								break;
-							}
-						}
-
-
-					}
-				}
-			}
-		}
+		FairyRevive(true);
 
 
 		if(wiz_list.wizard_mode == 1)

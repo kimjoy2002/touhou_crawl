@@ -203,6 +203,40 @@ bool sprint1s(int value_)
 	return true;
 }
 
+bool select_fairy(int value_)
+{
+
+	switch (value_)
+	{
+	case 0:
+	default:
+		you.tribe = TRI_FAIRY;
+		you.job = JOB_WIZARD;
+		you.char_name.name = "써니";
+		you.char_name.name_type = false;
+		you.image = &img_named_sunny;
+		break;
+	case 1:
+		you.tribe = TRI_FAIRY;
+		you.job = JOB_CRUSADER;
+		you.char_name.name = "스타";
+		you.char_name.name_type = false;
+		you.image = &img_named_star;
+		break;
+	case 2:
+		you.tribe = TRI_FAIRY;
+		you.job = JOB_ASSASSIN;
+		you.char_name.name = "루나";
+		you.char_name.name_type = false;
+		you.image = &img_named_lunar;
+		break;
+	}
+	WaitForSingleObject(mutx, INFINITE);
+	SetText() += "\n\n\nKill Them All!\n";
+	ReleaseMutex(mutx);
+	Sleep(300);
+	return true;
+}
 bool select_named(int value_)
 {
 	switch( value_ )
@@ -257,6 +291,8 @@ bool select_named(int value_)
 		you.char_name.name_type = false;
 		you.image = &img_named_nitori;
 		break;
+	case 7:
+		return false;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() += "\n\n\nKill Them All!\n";
@@ -314,7 +350,7 @@ void start_mainmenu()
 	temp += "a - 인간 무녀 레이무             e - 요괴 암살자 코이시\n\n";
 	temp += "b - 인간 마법사 마리사           f - 인간 격투가 모코우\n\n";
 	temp += "c - 인간 무녀 사나에             g - 캇파 기술자 니토리\n\n";
-	temp += "d - 백랑텐구 전사 모미지\n\n";	
+	temp += "d - 백랑텐구 전사 모미지         k - 요정 삼월정\n\n";	
 	temp += "\n\n";	
 	m_mgr.menu_puls(2,temp);
 	temp = " : 안티패턴 초 유도형. 비겁한 호밍무녀로 모든 적을 섬멸하자!\n";
@@ -363,6 +399,13 @@ void start_mainmenu()
 	temp += " 발동템은 영구템이지만 P의 소모가 격렬하니 남용은 금물입니다. 위험한 적과 싸울때 사용합시다.\n\n\n";	
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(2,'g',2,temp,true,select_named,6);
+	temp = " : 요정대전쟁! 빛의 삼요정. 혼자보단 같이 싸워라!\n";
+	temp += " 보너스) 릴리를 믿고 다른 두 요정과 동료가 되어 시작한다.\n\n\n";
+	temp += " 초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n";
+	temp += " a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n";
+	temp += " 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(2, 'k', 5, temp, true, select_named, 7);
 	m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 	
@@ -545,6 +588,38 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'u',5,temp,true,select_job,20);
 	m_mgr.menu_input_puls(4,VK_ESCAPE,3,"",false,NULL,0);
+
+	temp = "캐릭터를 선택합니다. \n\n\n\n";
+	temp += "a - 요정 마법사 써니\n\n";
+	temp += "b - 요정 마전사 스타\n\n";
+	temp += "c - 요정 암살자 루나\n\n";
+	temp += "\n\n\n";
+	m_mgr.menu_puls(5, temp);
+	temp = "써니: 3요정중 빛을 다루는 햇빛의 요정.\n\n\n";
+	temp += " 적성보너스) 주문시전적성 +1, 파괴마법적성 +2 \n";
+	temp += " 보너스) 루나가 침묵마법 대신 소회복을 들고 시작한다.\n\n";
+	temp += " 초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.\n";
+	temp += " 위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.\n";
+	temp += " 만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(5,'a',6,temp,true,select_fairy,0);
+	temp = "스타: 3요정중 기척을 감지하는 별빛의 요정.\n\n\n";
+	temp += " 적성보너스) 전투적성 +1, 회피적성 +1, 연금술적성 +1 \n";
+	temp += " 보너스) 투명보기 특성을 가지고 시작한다.\n\n";
+	temp += " 초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.\n";
+	temp += " 위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.\n";
+	temp += " 만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(5,'b',6,temp,true, select_fairy,1);
+	temp = "루나: 3요정중 소리를 지우는 달빛의 요정.\n\n\n";
+	temp += " 적성보너스) 단검적성+1, 은밀적성 +1, 정신마법적성 +1\n";
+	temp += " 보너스) 침묵 두루마리를 5장 들고 시작한다.\n\n";
+	temp += " 초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.\n";
+	temp += " 위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.\n";
+	temp += " 만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.\n\n\n";
+	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
+	m_mgr.menu_input_puls(5, 'c', 6, temp, true, select_fairy, 2);
+
 
 
 

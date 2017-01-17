@@ -365,7 +365,8 @@ public:
 	void print_damage_message(attack_infor &a, bool damaged_);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool GetExp(int exper_, bool speak_ = true);
+	bool GetExp(int exper_, bool speak_ = true); 
+	void FairyRevive(bool speak_);
 	void ExpRecovery(int exper_);
 	void CheckPunish(int delay_);
 	int GetNeedExp(int level_);

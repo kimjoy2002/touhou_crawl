@@ -381,7 +381,7 @@ void Initialize()
 
 	printlog("환상향에 온걸 환영한다!",true,false,false,CL_normal);
 	//you.resetLOS(false);
-
+	you.FairyRevive(false);
 }
 
 

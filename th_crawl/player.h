@@ -267,6 +267,7 @@ public:
 
 	int total_skill_exp;
 	skill_exp_infor skill[SKT_MAX];
+	int bonus_skill[SKT_MAX];
 
 	int MemorizeSpell[52];
 	int remainSpellPoiont;
@@ -360,6 +361,7 @@ public:
 	bool StatUpDown(int value_, stat_type stat_, bool temp_ = false);
 	bool ResistUpDown(int value_, resist_type resist_);
 	bool UnidenResistUpDown(int value_, resist_type resist_);
+	void BonusSkillUpDown(int skill_, int value_);
 	//interupt_type HungerApply(int hunger_ = 0);
 	int calculate_damage(attack_type &type_, int atk, int max_atk);
 	void print_damage_message(attack_infor &a, bool damaged_);
@@ -433,6 +435,7 @@ public:
 	int GetProperty(tribe_proper_type type_);
 	int GetExhausted(){return s_exhausted;};
 	bool GetPunish(god_type god_);
+	int GetSkillLevel(int skill_, bool bonus_);
 	int DeleteProperty(tribe_proper_type type_);
 	bool Teleport();
 	bool Blink(int time_);

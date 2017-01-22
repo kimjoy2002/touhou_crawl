@@ -172,7 +172,7 @@ void byakuren_gift(bool speak_)
 		vector<temp_class> q;
 		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
 		{
-			q.push_back(temp_class(you.skill[j].level,you.skill[j].exper,j));
+			q.push_back(temp_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
 		}
 		sort(q.begin(),q.end(),compare());
 		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
@@ -280,7 +280,7 @@ void kanako_gift(bool speak_)
 
 	for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
 	{
-		rand_.push(i-SKT_SHORTBLADE,you.skill[i].level+1);
+		rand_.push(i-SKT_SHORTBLADE, you.GetSkillLevel(i, true)+1);
 	}
 
 	item_infor t;
@@ -309,7 +309,7 @@ void armour_gift(bool speak_)
 {
 	random_extraction<int> rand_;
 	rand_.push(0,5); //아머
-	rand_.push(1,you.skill[SKT_SHIELD].level>=1?3:1); //방패
+	rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=1?3:1); //방패
 	rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
 	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
 	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
@@ -322,9 +322,9 @@ void armour_gift(bool speak_)
 	case 0:
 		{
 			//회피스킬이 갑옷스킬의 2배이상이거나 갑옷이 5레벨미만
-			bool dodge_ = (you.skill[SKT_DODGE].level>you.skill[SKT_ARMOUR].level*2 || you.skill[SKT_ARMOUR].level < 5);
+			bool dodge_ = (you.GetSkillLevel(SKT_DODGE, true)>you.GetSkillLevel(SKT_ARMOUR, true)*2 || you.GetSkillLevel(SKT_ARMOUR, true) < 5);
 			//갑옷스킬이 회피스킬의 2배이상이거나 갑옷이 15레벨이상
-			bool heavy_ = (you.skill[SKT_ARMOUR].level>you.skill[SKT_DODGE].level*2 || you.skill[SKT_ARMOUR].level >= 15);
+			bool heavy_ = (you.GetSkillLevel(SKT_ARMOUR, true)>you.GetSkillLevel(SKT_DODGE, true) *2 || you.GetSkillLevel(SKT_ARMOUR, true) >= 15);
 			random_extraction<int> rand2_;
 
 			rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //로브
@@ -345,9 +345,9 @@ void armour_gift(bool speak_)
 		{
 			random_extraction<int> rand2_;
 
-			rand2_.push(0,you.skill[SKT_SHIELD].level<=5?5:1); //버클러
-			rand2_.push(28,you.skill[SKT_SHIELD].level>=10?5:1); //실드
-			rand2_.push(30,you.skill[SKT_SHIELD].level>=20?10:1); //카이트
+			rand2_.push(0, you.GetSkillLevel(SKT_SHIELD, true) <=5?5:1); //버클러
+			rand2_.push(28, you.GetSkillLevel(SKT_SHIELD, true) >=10?5:1); //실드
+			rand2_.push(30, you.GetSkillLevel(SKT_SHIELD, true) >=20?10:1); //카이트
 			
 			int select_ = rand2_.pop();
 			

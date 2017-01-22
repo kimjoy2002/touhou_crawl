@@ -125,6 +125,7 @@ int isGoodRing(ring_type kind, int value)
 	case RGT_MAGACIAN:
 	case RGT_ELEC_RESIS:
 	case RGT_MAGIC_RESIS:
+	case RGT_SKILL_UP:
 		return 1;
 	case RGT_TELEPORT:
 	case RGT_HUNGRY:

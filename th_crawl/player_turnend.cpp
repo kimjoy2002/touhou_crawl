@@ -761,7 +761,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 bool players::TraningStealth()
 {	
 	int panlty = equipment[ET_ARMOR]?-equipment[ET_ARMOR]->value2:0;
-	//bool bonus = (skill[SKT_BACKSTAB].level > skill[SKT_STEALTH].level);
 	if(!randA((200+150*panlty)/*/(bonus?2:1)*/))
 	{
 		//SkillTraining(SKT_STEALTH,1);

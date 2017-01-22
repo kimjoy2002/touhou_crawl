@@ -10,7 +10,7 @@
 #define  __SEIJA_H__
 
 
-extern enum god_type;
+enum god_type;
 
 bool seija_gift();
 

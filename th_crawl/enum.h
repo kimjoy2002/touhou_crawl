@@ -803,7 +803,9 @@ enum ring_type
 	RGT_CONFUSE_RESIS,
 	RGT_ELEC_RESIS,
 	RGT_MAGIC_RESIS,
-	RGT_MAX
+	RGT_MAX,
+	RGT_SKILL_UP = RGT_MAX,
+	RGT_MAX_ATIFACT,
 };
 
 enum amulet_type

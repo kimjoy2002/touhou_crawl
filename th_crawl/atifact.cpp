@@ -69,6 +69,17 @@ int GetAtifactValue(ring_type ring_, int good_bad_)
 		return a_>0?(randA(4)?1:(randA(10)?2:3)):-1;
 	case RGT_MAGIC_RESIS:
 		return randA(2)?1:rand_int(2,3);
+	case RGT_SKILL_UP:
+		{
+			int skill_ = 0;
+			do
+			{
+				skill_ = randA(SKT_MAX - 1);
+			} while (skill_ == SKT_FIGHT || skill_ == SKT_SPELLCASTING || skill_ == SKT_DODGE ||
+				skill_ == SKT_ARMOUR || skill_ == SKT_SHIELD || skill_ == SKT_EVOCATE);
+			skill_ += randA_1(4) * 100;
+			return skill_;
+		}
 	}
 	return 1;
 }
@@ -150,6 +161,8 @@ const char* GetAtifactString(ring_type ring_, int value_)
 	case RGT_MAGIC_RESIS:
 		sprintf_s(temp,32,"마법저항");
 		break;
+	case RGT_SKILL_UP:
+		sprintf_s(temp, 32, "%s+%d", skill_string((skill_type)(value_ %100)), value_/100);
 	}
 	return temp;
 }
@@ -232,6 +245,10 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 	case RGT_MAGIC_RESIS:
 		sprintf_s(temp,128,"마법 저항이 생긴다.(%d)",20+value_*20);
 		break;
+	case RGT_SKILL_UP:
+		sprintf_s(temp, 128, "지정된 스킬레벨이 올라간다.(%s+%d)", skill_string((skill_type)(value_ % 100)), value_ / 100);
+		break;
+
 	}
 	return temp;
 }
@@ -333,6 +350,13 @@ bool effectartifact(ring_type kind, int value)
 	case RGT_MAGIC_RESIS:
 		you.MRUpDown((value>0?1:-1)*(20+abs(value)*20));
 		break;
+	case RGT_SKILL_UP:
+	{
+		int value_ = abs(value);
+		you.BonusSkillUpDown(value_ % 100, (value>0?1:-1) *value_ / 100);
+
+	}
+		break;
 	}
 	return false;
 }
@@ -369,7 +393,7 @@ void MakeArtifact(item* item_, int good_bad_)
 {
 	int num_ = 1+randA(1+randA(3));
 	deque<int> temp;
-	for(int i=0; i<RGT_MAX; i++)
+	for(int i=0; i<RGT_MAX_ATIFACT; i++)
 	{
 		if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
 		{

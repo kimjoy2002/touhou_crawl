@@ -465,7 +465,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 					turn_ = max(1,turn_-you.level/4);
 
 					if(turn_>=20 || it->id == MON_KOISHI)
-						sprintf_s(temp,64,"ºÒ°¡´É",turn_);
+						sprintf_s(temp,64,"ºÒ°¡´É");
 					else
 						sprintf_s(temp,64,"%dÅÏ",turn_);
 
@@ -1695,7 +1695,7 @@ void skill_view()
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
-				if(num<SKT_MAX && you.skill[num].level < 27)
+				if (num < SKT_MAX && you.GetSkillLevel(num,false) < 27)
 				{
 					you.skill[num].onoff = (you.skill[num].onoff+1)%3;
 				}
@@ -2784,7 +2784,7 @@ void dungeonView()
 					printsub(temp,false,CL_help);
 
 					//***·éÀÖÀ½
-					sprintf_s(temp,32,"*À½¾ç¿Á* ",rune_string[RUNE_HAKUREI_ORB]);
+					sprintf_s(temp,32,"*%s* ",rune_string[RUNE_HAKUREI_ORB]);
 					printsub(temp,true,you.rune[RUNE_HAKUREI_ORB]?CL_danger:CL_bad);
 					//***·é³¡
 				}

@@ -493,8 +493,9 @@ bool Dump(int type, string *filename_)
 	int skt = 0;
 	while(skt < SKT_MAX)
 	{
-		if(you.skill[skt].level)
-			fprintf_s(fp,"  %4s %3d (%d%%)\n",skill_string((skill_type)skt),you.skill[skt].level,GetSkillPercent(you.skill[skt]));
+		if (you.GetSkillLevel(skt, false)) {
+			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
+		}
 		skt++;
 	}
 

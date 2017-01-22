@@ -83,6 +83,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		prev_hp[i] = hp;
 	for(int i=0;i<2;i++)
 		prev_mp[i] = mp;
+	for (int i = 0; i<SKT_MAX; i++)
+		bonus_skill[i] = 0;
 	for(int i=0;i<52;i++)
 		MemorizeSpell[i] = 0;
 	for(int i=0;i<52;i++)
@@ -267,7 +269,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, uniden_invisible_view);
 	SaveData<int>(fp, uniden_power_keep);
 	SaveData<int>(fp, total_skill_exp);
-	SaveData<skill_exp_infor>(fp, *skill, SKT_MAX);	
+	SaveData<skill_exp_infor>(fp, *skill, SKT_MAX);
+	SaveData<int>(fp, *bonus_skill, SKT_MAX);
 	SaveData<int>(fp, *MemorizeSpell,52);
 	SaveData<int>(fp, remainSpellPoiont);
 	SaveData<int>(fp, currentSpellNum);
@@ -484,6 +487,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, uniden_power_keep);
 	LoadData<int>(fp, total_skill_exp);
 	LoadData<skill_exp_infor>(fp, *skill);
+	LoadData<int>(fp, *bonus_skill);
 	LoadData<int>(fp, *MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
@@ -860,7 +864,7 @@ bool players::OpenDoor(const coord_def &c)
 }
 void players::CalcuHP()
 {
-	int fight_=skill[SKT_FIGHT].level;
+	int fight_= GetSkillLevel(SKT_FIGHT, true);
 	int level_=level;
 	int aptit_=10+GetProperty(TPT_HP);
 	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(9*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
@@ -903,22 +907,22 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	int power_ = 0, num = 0;
 	if(s1_ != -1)
 	{
-		power_ += 2*skill[s1_].level;
+		power_ += 2* GetSkillLevel(s1_, true);
 		num++;
 	}	
 	if(s2_ != -1)
 	{
-		power_ += 2*skill[s2_].level;
+		power_ += 2* GetSkillLevel(s2_, true);
 		num++;
 	}
 	if(s3_ != -1)
 	{
-		power_ += 2*skill[s3_].level;
+		power_ += 2* GetSkillLevel(s3_, true);
 		num++;
 	}
 	if(num)
 		power_/=num;
-	power_+=skill[SKT_SPELLCASTING].level/2;
+	power_+= GetSkillLevel(SKT_SPELLCASTING, true)/2;
 
 	if(s_clever)
 		power_+=4;
@@ -964,17 +968,17 @@ int players::GetSpellSuccess(int spell_)
 	int differ_ = SpellDiffer(SpellLevel((spell_list)spell_));
 	if(s1_ != -1)
 	{
-		success_ += skill[s1_].level;
+		success_ += GetSkillLevel(s1_, true);
 		num++;
 	}	
 	if(s2_ != -1)
 	{
-		success_ += skill[s2_].level;
+		success_ += GetSkillLevel(s2_, true);
 		num++;
 	}
 	if(s3_ != -1)
 	{
-		success_ += skill[s3_].level;
+		success_ += GetSkillLevel(s3_, true);
 		num++;
 	}
 	if(num)
@@ -998,7 +1002,7 @@ int players::GetSpellSuccess(int spell_)
 	}
 
 
-	success_+=s_int/6.0f+skill[SKT_SPELLCASTING].level/4;
+	success_+=s_int/6.0f+ GetSkillLevel(SKT_SPELLCASTING, true)/4;
 
 	//if(equipment[ET_ARMOR])
 	//{
@@ -1020,14 +1024,14 @@ int players::GetSpellSuccess(int spell_)
 int players::GetSpellHungry(int spell_)
 {
 	int hungry_ = SpellHunger(SpellLevel((spell_list)spell_));
-	hungry_ -= s_int*skill[SKT_SPELLCASTING].level;
+	hungry_ -= s_int*GetSkillLevel(SKT_SPELLCASTING, true);
 	if(hungry_<0)
 		hungry_=0;
 	return hungry_;
 }
 int players::GetStealth()
 {
-	int stealth_ = s_dex*3+skill[SKT_STEALTH].level*15+(s_agility?50:0);
+	int stealth_ = s_dex*3+ GetSkillLevel(SKT_STEALTH, true)*15+(s_agility?50:0);
 	if(equipment[ET_ARMOR])
 	{
 		if(you.god == GT_SHIZUHA && equipment[ET_ARMOR]->value5 == AMK_AUTUMN)
@@ -1299,7 +1303,7 @@ int players::AcUpDown(int value_, int bonus_)
 {
 	real_ac += value_;
 	bonus_ac += bonus_;
-	float temp_ac = (float)real_ac*(1.0f+skill[SKT_ARMOUR].level/15.0f);
+	float temp_ac = (float)real_ac*(1.0f+ GetSkillLevel(SKT_ARMOUR, true)/15.0f);
 	ac = (int)temp_ac+bonus_ac; 
 	return ac;
 }
@@ -1315,7 +1319,7 @@ int players::ShUpDown(int value_, int bonus_)
 {
 	real_sh += value_;
 	bonus_sh += bonus_;
-	float temp_sh = (float)real_sh*(1.0f+(s_dex/5.0f+skill[SKT_SHIELD].level)/15.0f);
+	float temp_sh = (float)real_sh*(1.0f+(s_dex/5.0f+ GetSkillLevel(SKT_SHIELD, true))/15.0f);
 	if(GetProperty(TPT_SLAY))
 	{
 		temp_sh *= 1.2f;
@@ -1548,6 +1552,10 @@ bool players::UnidenResistUpDown(int value_, resist_type resist_)
 		break;
 	}
 	return true;
+}
+void players::BonusSkillUpDown(int skill_, int value_)
+{
+	bonus_skill[skill_] += value_;
 }
 //interupt_type players::HungerApply(int hunger_)
 //{
@@ -1854,14 +1862,14 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		printlog("스킬경험치에 에러가 발생했습니다.",true,false,false,CL_danger);
 		return false;
 	}
-	int need_exp = need_skill_exp(skill[skill_].level,AptCal(skill[skill_].aptit));
+	int need_exp = need_skill_exp(GetSkillLevel(skill_, false),AptCal(skill[skill_].aptit));
 
 	if(need_exp == -1)
 	{
 		you.skill[skill_].onoff = 0;
 		return false;
 	}
-	int exp_panalty = exp_to_skill_exp(skill[skill_].level);
+	int exp_panalty = exp_to_skill_exp(GetSkillLevel(skill_, false));
 	int up_point = (exp_*10)/exp_panalty;
 	if(up_point<0)
 		up_point = 0;
@@ -1874,7 +1882,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		int exp_pool = (skill[skill_].exper - need_exp)*exp_panalty/10;
 		skill[skill_].level+=1;
 		skill[skill_].exper = need_exp;
-		if(skill[skill_].level == 27)
+		if(skill[skill_].level >= 27)
 		{			
 			you.skill[skill_].onoff = 0;
 		}
@@ -1918,11 +1926,11 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		{
 			//최대 마나는 나중에 손보자...
 			//일단 3렙마다 최대마나 1증가
-			if(skill[skill_].level % 3 == 0)
+			if(GetSkillLevel(skill_, false) % 3 == 0)
 			{
-				if((skill[skill_].level > skill[SKT_SPELLCASTING].level) || skill_ == SKT_SPELLCASTING)
+				if((GetSkillLevel(skill_, false) > GetSkillLevel(SKT_SPELLCASTING, false)) || skill_ == SKT_SPELLCASTING)
 				{
-					if((skill[skill_].level > skill[SKT_EVOCATE].level) || skill_ == SKT_EVOCATE)
+					if((skill[skill_].level > GetSkillLevel(SKT_EVOCATE, false)) || skill_ == SKT_EVOCATE)
 					{
 						mp++;
 						max_mp++;
@@ -1942,7 +1950,7 @@ bool players::SkillTraining(skill_type skill_, int percent_)
 {
 	if(randA((percent_*(skill[skill_].onoff>=1?1:10))-1)>0)
 		return false;
-	int exper_ = exp_to_skill_exp(skill[skill_].level);
+	int exper_ = exp_to_skill_exp(GetSkillLevel(skill_, false));
 	if(exper_>skill_exper) //남은 경험치가 필요경험치보다 적을때
 	{
 		if(1 > skill_exper*10/exper_) //경험치 업이 의미없을때
@@ -1974,7 +1982,7 @@ bool players::SkillTraining(bool speak)
 		if(skill[i].onoff==2)
 			remain_exp *= 2;
 		while(skill[i].onoff && remain_exp>0){
-			int exper_ = exp_to_skill_exp(skill[i].level);
+			int exper_ = exp_to_skill_exp(GetSkillLevel(i, false));
 			if(exper_>remain_exp) //남은 경험치가 필요경험치보다 적을때
 			{
 				if(1 > remain_exp*10/exper_) //경험치 업이 의미없을때				
@@ -2687,6 +2695,17 @@ int players::GetResist()
 bool players::GetPunish(god_type god_)
 {
 	return punish[god_].number;
+}
+int players::GetSkillLevel(int skill_, bool bonus_)
+{
+	int return_ = skill[skill_].level;
+
+	if (bonus_) {
+		return_+=bonus_skill[skill_];
+	}
+	if (return_ > 27)
+		return_ = 27;
+	return return_;	
 }
 int players::GetProperty(tribe_proper_type type_)
 {
@@ -3540,7 +3559,7 @@ bool players::Evoke(char id_)
 					return false;	
 				}
 				ReleaseMutex(mutx);
-				int bonus_pow_ = 20+max(you.level*3+skill[SKT_EVOCATE].level*2 , skill[SKT_EVOCATE].level*5);
+				int bonus_pow_ = 20+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*2 , GetSkillLevel(SKT_EVOCATE, true) *5);
 				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2))
 				{
 					WaitForSingleObject(mutx, INFINITE);
@@ -3947,7 +3966,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
 				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
-				int power_ = skill[SKT_TANMAC].level*5;
+				int power_ = GetSkillLevel(SKT_TANMAC, true)*5;
 				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("물보라",false));
 				BaseBomb(c_,&img_fog_cold[0],temp_att);
 			}

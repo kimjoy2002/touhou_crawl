@@ -590,7 +590,7 @@ int SkillPow(skill_list skill)
 		return you.piety;
 	case SKL_LEVITATION:
 	case SKL_INVISIBLE:
-		return you.skill[SKT_EVOCATE].level*5;
+		return you.GetSkillLevel(SKT_EVOCATE, true) *5;
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
@@ -707,17 +707,17 @@ int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3)
 	float success_ = 0;
 	if(s1 != -1)
 	{
-		success_ += you.skill[s1].level;
+		success_ += you.GetSkillLevel(s1, true);
 		num++;
 	}	
 	if(s2 != -1)
 	{
-		success_ += you.skill[s2].level;
+		success_ += you.GetSkillLevel(s2, true);
 		num++;
 	}
 	if(s3 != -1)
 	{
-		success_ += you.skill[s3].level;
+		success_ += you.GetSkillLevel(s3, true);
 		num++;
 	}
 	if(num)

@@ -193,7 +193,7 @@ int EvokeSuccece(evoke_kind skill)
 	switch(skill)
 	{
 	case EVK_AIR_SCROLL:
-		return 30+you.skill[SKT_EVOCATE].level*7;
+		return 30+ you.GetSkillLevel(SKT_EVOCATE, true)*7;
 	default:
 		return 100;
 	}
@@ -211,8 +211,8 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		printlog("자살할거야?",true,false,false,CL_small_danger);	
 		return false;
 	}
-	int level_ = you.skill[SKT_EVOCATE].level;
-	level_ = max(level_,you.level/3 + you.skill[SKT_EVOCATE].level*2/3);
+	int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
+	level_ = max(level_,you.level/3 + you.GetSkillLevel(SKT_EVOCATE, true)*2/3);
 	
 	switch(kind)
 	{

@@ -82,7 +82,7 @@ void seija_real_gift(int key_)
 
 					for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
 					{
-						rand_.push(i,you.skill[j].level>15?15:(you.skill[j].level>1?5:1));
+						rand_.push(i, you.GetSkillLevel(j, false)>15?15:(you.GetSkillLevel(j, false)>1?5:1));
 					}
 					book_list book_ = BOOK_FIRST;
 					for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
@@ -159,7 +159,7 @@ void seija_real_gift(int key_)
 
 				for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
 				{
-					rand_.push(i-SKT_SHORTBLADE,you.skill[i].level+1);
+					rand_.push(i-SKT_SHORTBLADE, you.GetSkillLevel(i, false) +1);
 				}
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(rand_.pop()), randA(2)?1:0, &t));

@@ -46,7 +46,7 @@ int players::GetAttack(bool max_)
 		skill_ = itemtoskill(equipment[ET_WEAPON]->type);
 		if(skill_>SKT_ERROR)
 		{
-			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/15.0f+skill[skill_].level/20.0f+base_atk_/6.0f);
+			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/15.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
 			min_atk_ = 0;//min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
 		}
 		else //여기는 버그 처리. 데미지가 없으면 버그임을 알수있음
@@ -58,7 +58,7 @@ int players::GetAttack(bool max_)
 	else if(!equipment[ET_WEAPON]) //맨손임
 	{
 		skill_ = SKT_UNWEAPON;
-		max_atk_ = base_atk_+skill[skill_].level;
+		max_atk_ = base_atk_+ GetSkillLevel(skill_, true);
 		if(GetProperty(TPT_CLAW)>0)
 			max_atk_ += 3*GetProperty(TPT_CLAW);
 		min_atk_ = 0;
@@ -142,11 +142,11 @@ int players::GetAttack(bool max_)
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
 	{ //단검 암습 보너스
-		stab_atk_+=(2+(skill[skill_].level+skill[SKT_STEALTH].level)/2)*2;
-		stab_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1f);
+		stab_atk_+=(2+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))/2)*2;
+		stab_atk_*=(1+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))*0.1f);
 	}
 	else
-		stab_atk_*=(1+skill[SKT_STEALTH].level*0.1f);
+		stab_atk_*=(1+ GetSkillLevel(SKT_STEALTH, true)*0.1f);
 	
 
 	max_atk_ = stab_atk_ + plus_max_atk;
@@ -160,13 +160,13 @@ int players::GetAttack(bool max_)
 
 int players::GetHit()
 {
-	int hit_ = 3+s_dex/2+skill[SKT_FIGHT].level/2;
+	int hit_ = 3+s_dex/2+ GetSkillLevel(SKT_FIGHT, true)/2;
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
 		skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
 		if(skill_>SKT_ERROR)
 		{
-			hit_ += equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + skill[skill_].level/3;
+			hit_ += equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + GetSkillLevel(skill_, true)/3;
 		}
 		else
 		{
@@ -204,7 +204,7 @@ int players::GetAtkDelay()
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
 		float real_delay_ = max((equipment[ET_WEAPON]->value8) , 
-			(equipment[ET_WEAPON]->value7-you.skill[itemtoskill(equipment[ET_WEAPON]->type)].level/2.0f));
+			(equipment[ET_WEAPON]->value7- GetSkillLevel(itemtoskill(equipment[ET_WEAPON]->type), true)/2.0f));
 		delay_ = real_delay_+rand_float(0.99f,0.0f);
 	}
 	else if(equipment[ET_WEAPON])
@@ -214,30 +214,6 @@ int players::GetAtkDelay()
 
 }
 
-//int players::GetArmourPanlty()
-//{
-//	if(equipment[ET_ARMOR])
-//	{
-//		float panlty = -equipment[ET_ARMOR]->value2;
-//		panlty -= skill[SKT_ARMOUR].level/2;
-//		if(panlty<0)
-//			panlty = 0;
-//		return (int)panlty;
-//	}
-//	else
-//		return 0;
-//}
-//int players::GetShieldPanlty()
-//{
-//	if(equipment[ET_SHIELD])
-//	{
-//		float panlty = -equipment[ET_SHIELD]->value2;
-//		panlty -= skill[SKT_SHIELD].level/3;
-//		return (int)panlty;
-//	}
-//	else
-//		return 0;
-//}
 int players::ReSetASPanlty()
 {
 	const item* armor_ = equipment[ET_ARMOR], *shield_ = equipment[ET_SHIELD];
@@ -246,7 +222,7 @@ int players::ReSetASPanlty()
 	if(armor_)
 	{ //아머의 패널티
 		int panlty2_ = -armor_->value2;
-		panlty2_ -= skill[SKT_ARMOUR].level/3;
+		panlty2_ -= GetSkillLevel(SKT_ARMOUR, true)/3;
 		if(panlty2_ < -armor_->value3)
 			panlty2_ = -armor_->value3;
 		panlty_ += panlty2_;
@@ -254,7 +230,7 @@ int players::ReSetASPanlty()
 	if(shield_)
 	{
 		int panlty2_ = -shield_->value2;
-		panlty2_ -= skill[SKT_SHIELD].level/3;
+		panlty2_ -= GetSkillLevel(SKT_SHIELD, true)/3;
 		if(panlty2_ < shield_->value3)
 			panlty2_ = shield_->value3;
 		panlty_ += panlty2_;
@@ -285,14 +261,14 @@ int players::GetThrowAttack(const item* it, bool max_)
 	
 	if(!(it->type>=ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
-		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+skill[SKT_TANMAC].level/15.0f+it->value4/10.0f);
+		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true)/15.0f+it->value4/10.0f);
 	}
 	else
 	{
-		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+skill[SKT_TANMAC].level/15.0f);
+		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true) /15.0f);
 	}
 
-	min_atk_ = min(it->value2/2,skill[SKT_TANMAC].level/4);
+	min_atk_ = min(it->value2/2, GetSkillLevel(SKT_TANMAC, true) /4);
 
 	if(power <= 200)
 	{
@@ -335,7 +311,7 @@ int players::GetThrowHit(const item* it)
 {
 	int hit_ = 3+s_dex/3;	
 
-	hit_ += it->value1 + it->value3 + skill[SKT_TANMAC].level/2;
+	hit_ += it->value1 + it->value3 + GetSkillLevel(SKT_TANMAC, true) /2;
 	
 	if(s_knife_collect)
 	{

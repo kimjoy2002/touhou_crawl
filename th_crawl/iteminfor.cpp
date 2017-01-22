@@ -190,7 +190,7 @@ string GetItemInfor(item *it)
 			char temp[100];
 			sprintf(temp,"\n공격력 : %d       명중력 : %d",it->value2,it->value1);
 			text_ += temp;
-			sprintf(temp,"\n현재공격속도 : %g%%    ( 기본공격속도 : %d0%%       최소공격속도 : %d0%% )",max((it->value8) , (it->value7-you.skill[ski_].level/2.0f))*10,it->value7,it->value8);
+			sprintf(temp,"\n현재공격속도 : %g%%    ( 기본공격속도 : %d0%%       최소공격속도 : %d0%% )",max((it->value8) , (it->value7- you.GetSkillLevel(ski_, true)/2.0f))*10,it->value7,it->value8);
 			text_ += temp;
 			if(it->throw_item)
 			{
@@ -318,7 +318,7 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		sprintf(temp,"패널티는 방패스킬을 올릴수록 줄어듭니다. 최소패널티이하로는 줄일수 없습니다.\n\n");
 		text_ += temp;
-		sprintf(temp,"합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n", you.s_str/4);
+		sprintf(temp,"합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
 		text_ += temp;
 		sprintf(temp,"합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
 		text_ += temp;

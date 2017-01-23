@@ -826,6 +826,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_SICK:
 	case ATT_THROW_NORMAL:
 	case ATT_VAMP:
+	case ATT_LUNATIC:
 	case ATT_CURSE:
 	case ATT_WEATHER:
 	case ATT_AUTUMN:
@@ -951,6 +952,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_M_POISON:
 		case ATT_SICK:
 		case ATT_VAMP:
+		case ATT_LUNATIC:
 		case ATT_CURSE:
 		case ATT_WEATHER:
 		case ATT_AUTUMN:
@@ -1097,6 +1099,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_COLD:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
+	case ATT_LUNATIC:
 	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_CURSE:
@@ -1270,6 +1273,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			
 				}
 			}
+			if (a.type == ATT_LUNATIC && randA(2) == 0) {
+				SetLunatic(rand_int(3, 8));
+			}
 			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )
 			{
 				for(int i=-1;i<=1;i++){
@@ -1278,7 +1284,6 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					}
 				}
 			}
-
 
 			if(a.type == ATT_THROW_FREEZING)
 			{

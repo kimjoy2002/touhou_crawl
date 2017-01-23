@@ -400,6 +400,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_M_POISON:
 	case ATT_SICK:
 	case ATT_VAMP:
+	case ATT_LUNATIC:
 	case ATT_CURSE:
 	case ATT_WEATHER:
 	case ATT_AUTUMN:
@@ -552,6 +553,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_M_POISON:
 	case ATT_SICK:
 	case ATT_VAMP:
+	case ATT_LUNATIC:
 	case ATT_CURSE:
 	case ATT_WEATHER:
 	case ATT_AUTUMN:
@@ -820,6 +822,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true),  name.name.c_str(),"의 체력을 흡수했다.");
 			
 					}
+				}
+				if (a.type == ATT_LUNATIC && randA(2) == 0) {
+					SetLunatic(rand_int(3,8));	
 				}
 
 				//SkillTraining(SKT_ARMOUR,3);

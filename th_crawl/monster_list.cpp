@@ -570,7 +570,7 @@ const mon_infor mondata[] = {
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,8},
 
 	{MON_CLOWNPIECE,15,3220,name_infor("클라운피스",false),&img_named_clownpiece,120,3,18,
-	{22,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor("횃불",true),name_infor(),name_infor()},
+	{22,22,0},{ATT_FIRE,ATT_LUNATIC,ATT_NONE},{name_infor("횃불",true),name_infor(),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,1,1,8},
 	
 	{MON_DOREMI,14,3904,name_infor("도레미",false),&img_named_doremi,130,8,10,
@@ -610,7 +610,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 	
 	{MON_LUNATIC,13,1374,name_infor("광기의 조각",true),&img_mons_lunatic,90,12,5,
-	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{26,0,0},{ATT_LUNATIC,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10},
 	
 	{MON_HAUNT,7,254,name_infor("원령",true),&img_mons_haunt[0],30,3,15,

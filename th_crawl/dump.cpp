@@ -201,6 +201,7 @@ bool Dump(int type, string *filename_)
 						case ATT_WEATHER:
 						case ATT_AUTUMN:
 						case ATT_CHOAS:
+						case ATT_LUNATIC:
 							if(you.dead_order->order)
 								strncat(death_reason,"에게 ",64);
 							strncat(death_reason,"맞아죽었다.",64);

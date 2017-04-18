@@ -540,6 +540,44 @@ textures img_item_book[] = {textures(&texture_item02, 32, 255),
 };
 
 
+textures img_item_potion_kind[] = { textures(&texture_item02, 48, 255),
+textures(&texture_item02, 49, 255),
+textures(&texture_item02, 50, 255),
+textures(&texture_item02, 51, 255),
+textures(&texture_item02, 52, 255),
+textures(&texture_item02, 53, 255),
+textures(&texture_item02, 54, 255),
+textures(&texture_item02, 55, 255),
+textures(&texture_item02, 56, 255),
+textures(&texture_item02, 57, 255),
+textures(&texture_item02, 58, 255),
+textures(&texture_item02, 59, 255),
+textures(&texture_item02, 60, 255),
+textures(&texture_item02, 61, 255),
+textures(&texture_item02, 62, 255),
+textures(&texture_item02, 63, 255),
+textures(&texture_item02, 64, 255) };
+
+textures img_item_scroll_kind[] = { textures(&texture_item02, 80, 255),
+textures(&texture_item02, 81, 255),
+textures(&texture_item02, 82, 255),
+textures(&texture_item02, 83, 255),
+textures(&texture_item02, 84, 255),
+textures(&texture_item02, 85, 255),
+textures(&texture_item02, 86, 255),
+textures(&texture_item02, 87, 255),
+textures(&texture_item02, 88, 255),
+textures(&texture_item02, 89, 255),
+textures(&texture_item02, 90, 255),
+textures(&texture_item02, 91, 255),
+textures(&texture_item02, 92, 255),
+textures(&texture_item02, 93, 255),
+textures(&texture_item02, 94, 255),
+textures(&texture_item02, 95, 255),
+textures(&texture_item02, 96, 255),
+textures(&texture_item02, 97, 255) };
+
+
 textures img_item_goal(&texture_item01, 135, 255);
 textures img_item_rune(&texture_item01, 214, 255);
 

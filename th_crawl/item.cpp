@@ -496,8 +496,21 @@ const D3DCOLOR item::item_color()
 
 bool item::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 {
-	if(image)
-		return image->draw(pSprite, x_, y_,255);
+	if (image) {
+		bool return_ = image->draw(pSprite, x_, y_, 255);
+		if (type == ITM_POTION) {
+			if (iden_list.potion_list[value1].iden) {
+				img_item_potion_kind[min(PT_MAX-1,max(0,value1))].draw(pSprite, x_, y_, 255);
+			}
+
+		}
+		else if (type == ITM_SCROLL) {
+			if (iden_list.scroll_list[value1].iden == 3) {
+				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+			}
+		}
+		return return_;
+	}
 	else
 		return false;
 }

@@ -1851,7 +1851,8 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp+=(*it).GetName().c_str();
 				if(equip)
 					temp += (equip==1?"(ÀåÂø)":(equip==2?"(¿Þ¼Õ)":"(¿À¸¥¼Õ)"));
-				(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
+				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
+				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
 				pfont->DrawTextA(pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
 				rc.top += 32;
 			}

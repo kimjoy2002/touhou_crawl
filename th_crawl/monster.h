@@ -244,6 +244,7 @@ public:
 	float GetColdResist(bool cloud_ = false);
 	float GetElecResist(bool cloud_ = false);
 	bool GetCloudResist();
+	bool isSimpleState(monster_state_simple state_);
 	monster_state_simple GetSimpleState();
 	bool GetStateString(monster_state_simple state_, char* string_);
 	bool isplayer(){return false;};

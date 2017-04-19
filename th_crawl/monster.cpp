@@ -1435,10 +1435,17 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
 	if(return_)
 	{
-		if(monster_state_simple state_ = GetSimpleState())
+
+		int offset_ = 0;
+		for (monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss = (monster_state_simple)(mss + 1))
 		{
-			if(statetotexture(state_))
-				return_ = statetotexture(state_)->draw(pSprite,x_,y_,255);
+			if (isSimpleState(mss))
+			{
+				if (statetotexture(mss)) {
+					return_ = statetotexture(mss)->draw(pSprite, x_ + offset_, y_, 255);
+					offset_ -= 5;
+				}
+			}
 		}
 	}
 	if(return_)
@@ -3633,6 +3640,36 @@ bool monster::GetCloudResist()
 	return wind_resist;
 }
 
+bool monster::isSimpleState(monster_state_simple state_)
+{
+	monster_state_simple temp = MSS_NONE;
+	switch (state_)
+	{
+		case MSS_WANDERING:
+			return (state.GetState() == MS_NORMAL) || (state.GetState() == MS_ATACK && target != &you);
+		case MSS_SLOW:
+			return (s_slow != 0) && s_haste == 0;
+		case MSS_HASTE:
+			return (s_haste != 0) && s_slow == 0;
+		case MSS_POISON:
+			return (s_poison != 0);
+		case MSS_FEAR:
+			return (s_fear != 0);
+		case MSS_CONFUSE:
+			return (s_confuse != 0);
+		case MSS_LUNATIC:
+			return (s_lunatic != 0);
+		case MSS_SLEEP:
+			return (state.GetState() == MS_SLEEP || state.GetState() == MS_REST);
+		case MSS_PARALYSE:
+			return (s_paralyse != 0);
+		case MSS_SUMMON:
+			return ((flag & M_FLAG_SUMMON) != 0);
+		case MSS_ALLY:
+			return (isUserAlly());
+	}
+	return false;
+}
 monster_state_simple monster::GetSimpleState()
 {
 	monster_state_simple temp = MSS_NONE;
@@ -3641,7 +3678,9 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_WANDERING;
 	if(state.GetState() == MS_ATACK && target != &you)
 		temp = MSS_WANDERING;
-	if(s_haste)
+	if((s_slow != 0) && s_haste == 0)
+		temp = MSS_SLOW;
+	if((s_haste != 0) && s_slow == 0)
 		temp = MSS_HASTE;
 	if(s_poison)
 		temp = MSS_POISON;

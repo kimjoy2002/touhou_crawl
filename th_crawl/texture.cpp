@@ -913,6 +913,7 @@ textures img_state_ally(&texture_item01, 108, 255);
 textures img_state_summon(&texture_item01, 109, 255);
 textures img_state_haste(&texture_item01, 110, 255);
 textures img_state_lunatic(&texture_item01, 219, 255);
+textures img_state_slow(&texture_item01, 239, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 3, 3, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 3, 3, 255);
@@ -2438,6 +2439,8 @@ textures* statetotexture(monster_state_simple state_)
 		return &img_state_confuse;
 	case MSS_POISON:
 		return &img_state_poison;
+	case MSS_SLOW:
+		return &img_state_slow;
 	case MSS_PARALYSE:
 		return &img_state_paralysis;
 	case MSS_SCARY:

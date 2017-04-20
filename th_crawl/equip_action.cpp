@@ -185,7 +185,7 @@ void Equip_Jewelry()
 			changemove(WindowHeight);
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 장신를 장착하겠습니까?");
+			view_item(IVT_SELECT,"무슨 장신구를 장착하겠습니까?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

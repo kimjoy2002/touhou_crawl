@@ -4224,7 +4224,7 @@ bool players::equipjewerly(char id_)
 			equip_type type_ = ET_JEWELRY;
 			if((*it).isring())
 			{
-				if(equipment[ET_LEFT] && equipment[ET_RIGHT])
+				if(equipment[ET_LEFT] && equipment[ET_RIGHT] && (!equipment[ET_LEFT]->curse && !equipment[ET_RIGHT]->curse))
 				{
 					char temp[2];
 					changedisplay(DT_GAME);
@@ -4257,6 +4257,17 @@ bool players::equipjewerly(char id_)
 							return 0;
 						}								
 					}
+				}
+				else if (equipment[ET_LEFT] && equipment[ET_RIGHT]) {
+					if (equipment[ET_LEFT]->curse && equipment[ET_RIGHT]->curse) {
+						printlog("모든 아이템이 저주에 걸려있다.", true, false, false, CL_normal);
+						return 0;
+					}
+					else if (equipment[ET_LEFT]->curse)
+						type_ = ET_RIGHT;
+					else if (equipment[ET_RIGHT]->curse)
+						type_ = ET_LEFT;
+
 				}
 				else if(equipment[ET_LEFT])
 					type_ = ET_RIGHT;

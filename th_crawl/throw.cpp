@@ -17,6 +17,7 @@
 #include "skill_use.h"
 #include "rect.h"
 #include "weapon.h"
+#include "option_manager.h"
 
 
 int GetTanmacGraphicType(tanmac_type type)
@@ -805,11 +806,11 @@ list<item>::iterator ThrowSelect()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 던지겠습니까?");

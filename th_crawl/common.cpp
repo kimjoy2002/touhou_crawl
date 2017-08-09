@@ -2,6 +2,7 @@
 
 #include "common.h"
 #include "map.h"
+#include "option_manager.h"
 
 #include <random>
 #include <ctime>
@@ -261,22 +262,22 @@ float GetPositionGap(float start_x, float start_y, float target_x, float target_
 
 float GetMaxX()
 {
-	return (float)WindowWidth;
+	return (float)option_mg.getWidth();
 }
 
 float GetMaxY()
 {
-	return (float)WindowHeight;
+	return (float)option_mg.getHeight();
 }
 
 float GetCenterX()
 {
-	return (float)WindowWidth/2;
+	return (float)option_mg.getWidth()/2;
 }
 
 float GetCenterY()
 {
-	return (float)WindowHeight/2;
+	return (float)option_mg.getHeight()/2;
 }
 
 /*float round(float x)

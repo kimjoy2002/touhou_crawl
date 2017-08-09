@@ -15,6 +15,7 @@
 #include "environment.h"
 #include "skill_use.h"
 #include "rand_shuffle.h"
+#include "option_manager.h"
 #include <algorithm>
 extern HANDLE mutx;
 
@@ -337,11 +338,11 @@ bool identity_scroll(bool pre_iden_)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 		{	
@@ -692,11 +693,11 @@ bool enchant_armour_scroll(bool pre_iden_)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 		{	
@@ -825,11 +826,11 @@ bool recharging_scroll(bool pre_iden_)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 		{	

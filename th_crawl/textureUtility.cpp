@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "textureUtility.h"
+#include "option_manager.h"
 
 
 //
@@ -37,8 +38,8 @@ bool TextureRotate(float z)
 
 bool TexturePosition(float x, float y)
 {
-	x /= W_WIDTH/2;
-	y /= -W_HEIGHT/2;
+	x /= option_mg.getWidth()/2;
+	y /= -option_mg.getHeight()/2;
 	D3DXMATRIXA16 MatrixA;
 	D3DXMatrixIdentity(&MatrixA);
 	D3DXMatrixTranslation(&MatrixA, x, y, 0.0f);

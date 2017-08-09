@@ -12,6 +12,7 @@
 #include "player.h"
 #include "beam.h"
 #include "monster_texture.h"
+#include "option_manager.h"
 
 void Equip_Weapon()
 {
@@ -41,11 +42,11 @@ void Equip_Weapon()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 무기를 장착하시겠습니까?");
@@ -92,11 +93,11 @@ void Equip_Armor()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 방어구를 장착하겠습니까?");
@@ -135,11 +136,11 @@ void Unequip_Armor()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 방어구를 벗겠습니까?");
@@ -178,11 +179,11 @@ void Equip_Jewelry()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 장신구를 장착하겠습니까?");
@@ -220,11 +221,11 @@ void Unequip_Jewelry()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 장신구를 벗겠습니까?");

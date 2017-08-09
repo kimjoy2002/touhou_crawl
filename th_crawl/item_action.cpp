@@ -15,6 +15,7 @@
 #include "monster_texture.h"
 #include "spellcard.h"
 #include "dump.h"
+#include "option_manager.h"
 
 extern HANDLE mutx;
 string GetItemInfor(item *it);
@@ -170,11 +171,11 @@ void iteminfor_pick()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if( key_ == ',' )
 		{
@@ -254,11 +255,11 @@ void iteminfor_discard()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if((key_ >= '0' && key_ <= '9'))
 		{
@@ -345,11 +346,11 @@ void Eatting()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 먹겠습니까?");
@@ -400,11 +401,11 @@ void Drinking()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 마시겠습니까?");
@@ -469,11 +470,11 @@ void Spelllcard_Evoke()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 발동하시겠습니까?");
@@ -570,11 +571,11 @@ void Reading()
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 읽겠습니까?");

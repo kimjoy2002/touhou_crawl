@@ -34,8 +34,6 @@
 #pragma warning (disable:4018)
 #pragma warning (disable:4996)
 
-const int W_WIDTH = WindowWidth;
-const int W_HEIGHT = WindowHeight;
 
 
 //

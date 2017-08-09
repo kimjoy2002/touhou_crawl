@@ -303,8 +303,5 @@ public:
 int distan_coord(const coord_def& a, const coord_def& b);
 
 
-//윈도우 정보
-const int WindowWidth = 800;
-const int WindowHeight = 600;
 
 #endif // __COMMON_H__

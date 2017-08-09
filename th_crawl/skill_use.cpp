@@ -32,6 +32,7 @@
 #include "rand_shuffle.h"
 #include "seija.h"
 #include "lilly.h"
+#include "option_manager.h"
 
 
 extern HANDLE mutx;
@@ -311,11 +312,11 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 			}
 			else if(key_ == VK_PRIOR)
 			{
-				changemove(-WindowHeight);
+				changemove(-option_mg.getHeight());
 			}
 			else if(key_ == VK_NEXT)
 			{
-				changemove(WindowHeight);
+				changemove(option_mg.getHeight());
 			}						//-----이동키끝-------
 			else if(key_ == '*')
 				view_item(IVT_SELECT,"무엇을 던지겠습니까?");
@@ -624,11 +625,11 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무엇을 사용하시겠습니까?");
@@ -681,11 +682,11 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 			}
 			else if(key_ == VK_PRIOR)
 			{
-				changemove(-WindowHeight);
+				changemove(-option_mg.getHeight());
 			}
 			else if(key_ == VK_NEXT)
 			{
-				changemove(WindowHeight);
+				changemove(option_mg.getHeight());
 			}						//-----이동키끝-------
 			else if(key_ == '*')
 				view_item(IVT_SELECT,"무엇을 사용하겠습니까?");
@@ -1538,11 +1539,11 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 아이템을 고르시겠습니까?");
@@ -1661,11 +1662,11 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 방어구를 고르시겠습니까?");
@@ -1745,11 +1746,11 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,"무슨 장신구를 고르시겠습니까?");

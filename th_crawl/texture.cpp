@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "Fliename.h"
 
+#include "option_manager.h"
 #include "enum.h"
 
 
@@ -1012,7 +1013,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, int alphas)
 {
 	if(!texture)
 		return true;
-	D3DXVECTOR3 Pos(W_WIDTH/2, W_HEIGHT/2, 0);
+	D3DXVECTOR3 Pos(option_mg.getWidth()/2, option_mg.getHeight()/2, 0);
 	D3DXVECTOR3 center((float)(rect.right-rect.left)/2, (float)(rect.bottom-rect.top)/2, 0);
 
 	if(FAILED(pSprite->Draw(texture->pTexture, &rect, &center, &Pos, D3DCOLOR_RGBA(255,255,255,alphas))))
@@ -1081,7 +1082,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, RECT rc, int alphas)
 {
 	if(!texture)
 		return true;
-	D3DXVECTOR3 Pos(W_WIDTH/2, W_HEIGHT/2, 0);
+	D3DXVECTOR3 Pos(option_mg.getWidth()/2, option_mg.getHeight()/2, 0);
 	D3DXVECTOR3 center((float)(rc.right-rc.left)/2, (float)(rc.bottom-rc.top)/2, 0);
 
 	if(FAILED(pSprite->Draw(texture->pTexture, &rc, &center, &Pos, D3DCOLOR_RGBA(255,255,255,alphas))))

@@ -18,6 +18,7 @@
 #include "smoke.h"
 #include "god.h"
 #include "floor.h"
+#include "option_manager.h"
 #include "const.h"
 #include "tribe.h"
 #include "alchemy.h"
@@ -96,7 +97,7 @@ item_view_message("무슨 아이템을 고르겠습니까?"), image(NULL), log_length(1), mo
 void display_manager::Getfontinfor()
 {
 	g_pfont->GetDesc(&fontDesc);
-	log_length = (WindowHeight-50) / fontDesc.Height;
+	log_length = (option_mg.getHeight()-50) / fontDesc.Height;
 }
 void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
@@ -138,13 +139,13 @@ void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	if(image)
 		image->draw(pSprite,255);
-	RECT rc={50, 50-move, WindowWidth, WindowHeight};
+	RECT rc={50, 50-move, option_mg.getWidth(), option_mg.getHeight()};
 	pfont->DrawTextA(pSprite,text.c_str(), -1, &rc, DT_NOCLIP,D3DCOLOR_XRGB(200,200,200));
 }
 void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {	
 	int i=0;
-	RECT rc={50, 50, WindowWidth, WindowHeight};
+	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
 	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	
@@ -191,7 +192,7 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {	
-	RECT rc={50, 50, WindowWidth, WindowHeight};
+	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[256];
 	int i =0;
 	if(you.property_vector.empty())
@@ -217,7 +218,7 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {	
 	int i=0;
-	RECT rc={50, 50, WindowWidth, WindowHeight};
+	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
 	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	if(move == 0)
@@ -255,7 +256,7 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 	rc.left = 50;
-	rc.top = WindowHeight - fontDesc.Height*3;
+	rc.top = option_mg.getHeight() - fontDesc.Height*3;
 	{	
 		if(move == 0)
 			sprintf_s(temp,100,"!나 ?를 눌러서 설명을 볼 수 있습니다.");
@@ -267,7 +268,7 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
-	RECT rc={50, 50, WindowWidth, WindowHeight};
+	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
 	int skt = 0, i=0;
 	char sk_char = 'a';
@@ -326,7 +327,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
-	RECT rc={30, 10, WindowWidth, WindowHeight};
+	RECT rc={30, 10, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
 	sprintf_s(temp,100,"%s (%d레벨 %s %s %s)",you.user_name.name.c_str(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
@@ -679,7 +680,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	{
 		int i=0;
-		RECT rc={32*16+50, 10, WindowWidth, WindowHeight};
+		RECT rc={32*16+50, 10, option_mg.getWidth(), option_mg.getHeight()};
 		char temp[128];
 		sprintf_s(temp,128,"%d레벨",you.level);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -1537,7 +1538,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					(*it).draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
 					if((*it).isUnique() || (*it).image == &img_mons_default)
 					{
-						RECT rc={(LONG)(((*it).position.x-x_)*32.0f+20.0f),(LONG)(((*it).position.y-y_)*32.0f-10.0f), (LONG)WindowWidth, (LONG)WindowHeight};
+						RECT rc={(LONG)(((*it).position.x-x_)*32.0f+20.0f),(LONG)(((*it).position.y-y_)*32.0f-10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight()};
 						rc.left -= fontDesc.Width*(*it).GetName()->name.size()/2;
 						pfont->DrawTextA(pSprite,(*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);	
 					}
@@ -1687,7 +1688,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	if(ReplayClass.play)
 	{
-		RECT rc={50, 400, WindowWidth, WindowHeight};
+		RECT rc={50, 400, option_mg.getWidth(), option_mg.getHeight()};
 		pfont->DrawTextA(pSprite,"리플레이 모드중", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;	
 		pfont->DrawTextA(pSprite,"(z-일시정지 x-보통속도 c-배속)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
@@ -1697,7 +1698,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
-	RECT rc={30, 10-move, WindowWidth, WindowHeight};
+	RECT rc={30, 10-move, option_mg.getWidth(), option_mg.getHeight()};
 	string s;
 	switch(item_vt)
 	{
@@ -1859,7 +1860,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 	rc.top+=move+64;
-	max_y = (rc.top-WindowHeight>0?rc.top-WindowHeight:0);
+	max_y = (rc.top-option_mg.getHeight()>0?rc.top-option_mg.getHeight():0);
 }
 
 void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)

@@ -15,6 +15,7 @@
 #include "stdlib.h"
 #include "time.h"
 #include "FSM.h"
+#include "option_manager.h"
 
 
 //
@@ -215,7 +216,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 {
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D(hinstance,
-		W_WIDTH, W_HEIGHT, true, D3DDEVTYPE_HAL, &Device))
+		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
 	{
 		::MessageBox(0, "InitD3D() - FAILED", 0, 0);
 		return 0;

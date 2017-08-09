@@ -17,6 +17,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "book.h"
+#include "option_manager.h"
 
 extern HANDLE mutx;
 
@@ -122,11 +123,11 @@ void iteminfor(bool gameover)
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == VK_ESCAPE || (key_ == VK_RETURN && gameover))
 			break;

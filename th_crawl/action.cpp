@@ -28,6 +28,7 @@
 #include "spellcard.h"
 #include "throw.h"
 #include "rand_shuffle.h"
+#include "option_manager.h"
 
 #include <algorithm>
 #include <random>
@@ -1930,7 +1931,7 @@ void Iden_Show()//※주의) 이 함수는 발로 코딩했습니다.
 		return;
 	}
 	changedisplay(DT_TEXT);
-	line = line*DisplayManager.fontDesc.Height + 50 - WindowHeight;
+	line = line*DisplayManager.fontDesc.Height + 50 - option_mg.getHeight();
 	if(line<0)
 		line = 0;
 	DisplayManager.max_y = line;
@@ -1948,11 +1949,11 @@ void Iden_Show()//※주의) 이 함수는 발로 코딩했습니다.
 		}
 		else if(key_ == VK_PRIOR)
 		{
-			changemove(-WindowHeight);
+			changemove(-option_mg.getHeight());
 		}
 		else if(key_ == VK_NEXT)
 		{
-			changemove(WindowHeight);
+			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else
 			break;

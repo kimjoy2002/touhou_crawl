@@ -17,28 +17,33 @@ optionManager::optionManager(string fileName) {
 	if (stat(fileName.c_str(), &stStat) == -1){
 		createNewFile(fileName);
 	}
-	else {
+	{
 
 		TCHAR szBuf[MAX_STR_SIZE] = { 0, };
 
 		GetPrivateProfileString(_T("config"), _T("name"), _T("이름없음"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		name = TCHARToString(szBuf);
 
-		//GetPrivateProfileString(_T("config"), _T("height"), _T("600"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		//height = _tstoi(szBuf);
+		GetPrivateProfileString(_T("config"), _T("height"), _T("600"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		height = _tstoi(szBuf);
 
-		//GetPrivateProfileString(_T("config"), _T("width"), _T("800"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		GetPrivateProfileString(_T("config"), _T("width"), _T("800"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
 	}
-	height = 600;
-	width = 800;
 }
 
 void optionManager::createNewFile(string fileName) {
 	CString strString = _T("이름없음");
 	TCHAR  *tchr = (TCHAR*)(LPCTSTR)strString;
-
 	WritePrivateProfileString(_T("config"), _T("name"), tchr, fileName.c_str());
+
+	strString = _T("600");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("height"), tchr, fileName.c_str());
+
+	strString = _T("800");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
 
 }
 

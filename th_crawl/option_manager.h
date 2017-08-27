@@ -30,8 +30,10 @@ public:
 
 	void createNewFile(string fileName);
 
-	int getHeight() { return height; };
-	int getWidth() { return width; };
+	int getHeight() { return 600; };
+	int getWidth() { return 800; };
+	int getHeightCommon() { return height; };
+	int getWidthCommon() { return width; };
 
 
 private:

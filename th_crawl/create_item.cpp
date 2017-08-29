@@ -321,10 +321,10 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(6)?0:(randA(3)?1:-1),item_);
 		break;
 	case 8://흔한 좋은 장신구
-		makeitem(1/*randA(4)*/?ITM_RING:ITM_SPELLCARD,1,item_);
+		makeitem(randA(6)?ITM_RING:ITM_AMULET,1,item_);
 		break;
 	case 9://흔한 나쁜 장신구
-		makeitem(1/*randA(4)*/?ITM_RING:ITM_SPELLCARD,-1,item_);
+		makeitem(ITM_RING,-1,item_);
 		break;
 	case 10://흔한 방패
 		makeitem(ITM_ARMOR_SHIELD,randA(4)?0:(randA(3)?1:-1),item_);
@@ -350,10 +350,10 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem((item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1),randA(4)?0:(randA(6)?1:-1),item_);
 		break;
 	case 19://중반 좋은 장신구
-		makeitem(/*randA(4)*/1?ITM_RING:ITM_SPELLCARD,randA(2)?2:1,item_);
+		makeitem(randA(4)?ITM_RING:ITM_AMULET,randA(2)?2:1,item_);
 		break;
 	case 20://중반 나쁜 장신구
-		makeitem(/*randA(4)*/1?ITM_RING:ITM_SPELLCARD,randA(1)?-2:-1,item_);
+		makeitem(ITM_RING,randA(1)?-2:-1,item_);
 		break;
 	case 21://음식
 		makeitem(ITM_FOOD,0,item_);

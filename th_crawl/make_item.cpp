@@ -233,9 +233,20 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->weight = 2.0f;
 		t->value = 200;
 		break;
-	case ITM_SPELLCARD:
-		//createSpellCard(good_bad,select_,t);
-		//spellcard.cpp에서
+	case ITM_AMULET:
+		t->value1 = select_ != -1 ? select_ : (int)goodbadamulet(good_bad);
+		t->value2 = 0;
+		t->value3 = 0;
+		t->value4 = 0;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->is_pile = false;
+		t->can_throw = false;
+		t->image = &img_item_amulet;
+		t->name.name = "부적";
+		t->name.name_type = false;
+		t->weight = 1.0f;
+		t->value = 200;
 		break;
 	case ITM_FOOD:
 		switch(select_!=-1?select_:randA(1))
@@ -398,7 +409,7 @@ int baditem(const item_infor *item_) //randA(9)+1<=리턴값일때 저주걸림
 		if(1-item_->value4*2>0)
 			return 1-item_->value4*6;
 	}
-	else if(item_->type == ITM_SPELLCARD)
+	else if(item_->type == ITM_AMULET)
 	{
 		return 0;
 		//if(isAmuletGotValue((amulet_type)item_->value1) && item_->value2<0)
@@ -897,7 +908,7 @@ item_type RandomItemType()
 	else if(i<60)
 		return ITM_RING;
 	else if(i<70)
-		return ITM_SPELLCARD;
+		return ITM_AMULET;
 	else if(i<75)
 		return ITM_THROW_TANMAC;
 	else

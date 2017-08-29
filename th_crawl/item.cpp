@@ -299,15 +299,9 @@ string item::GetName(int num_)
 		if(iden_list.spellcard_list[value2].iden == 2)
 			temp+=SpellcardName((spellcard_evoke_type)value2);
 	}
-	if(type==ITM_SPELLCARD)
+	if(type==ITM_AMULET)
 	{
-		//if(isAmuletGotValue((amulet_type)value1) && iden_list.amulet_list[value1].iden == 2 && identify)
-		//{
-		//	char temp2[10];
-		//	sprintf(temp2,"%c%d ",value2>=0?'+':'-',abs(value2));
-		//	temp += temp2;
-		//}
-		//temp += iden_list.amulet_list[value1].iden == 2 ?amulet_iden_string[value1]:amulet_uniden_string[iden_list.amulet_list[value1].type];
+		temp += iden_list.amulet_list[value1].iden == 2 ?amulet_iden_string[value1]:amulet_uniden_string[iden_list.amulet_list[value1].type];
 	}
 	if(!isArtifact() && type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 	{
@@ -446,12 +440,12 @@ const D3DCOLOR item::item_color()
 			return_ = CL_bad;
 		}	
 		break;
-	case ITM_SPELLCARD:
-		//if(iden_list.amulet_list[value1].iden == 2)
-		//{
-		//	int color_ = isGoodAmulet((amulet_type)value1, identify?value2:1);
-		//	return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_normal);
-		//}
+	case ITM_AMULET:
+		if(iden_list.amulet_list[value1].iden == 2)
+		{
+			int color_ = isGoodAmulet((amulet_type)value1, identify?value2:1);
+			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_normal);
+		}
 		break;
 	}
 	if(((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && second_name.name.size() && !identify)
@@ -582,7 +576,7 @@ bool item::isRightType(equip_type type_)
 	case ET_BOOTS:
 		return (type == ITM_ARMOR_BOOT);
 	case ET_NECK:
-		return (type == ITM_SPELLCARD);
+		return (type == ITM_AMULET);
 	case ET_LEFT:
 	case ET_RIGHT:
 		return (type == ITM_RING);
@@ -605,7 +599,7 @@ equip_type item::GetArmorType()
 		return ET_GLOVE;
 	else if(type == ITM_ARMOR_BOOT)
 		return ET_BOOTS;
-	else if(type == ITM_SPELLCARD)
+	else if(type == ITM_AMULET)
 		return ET_NECK;
 	else
 		return ET_WEAPON;
@@ -774,7 +768,7 @@ bool item::isautopick()
 			return false;
 		}	
 		return true;
-	case ITM_SPELLCARD:
+	case ITM_AMULET:
 		return true;
 	case ITM_RING:
 		if(iden_list.ring_list[value1].iden == 2)
@@ -828,11 +822,11 @@ void item::Identify()
 	case ITM_SPELL:		
 		iden_list.spellcard_list[value2].iden = 2;
 		break;
-	case ITM_SPELLCARD:
-		//iden_list.amulet_list[value1].iden = 2;
-		//if(!prev_iden && you.isequip(this))
-			//unidenequipamulet((amulet_type)value1, value2*(-1));
-		//you.auto_equip_iden();
+	case ITM_AMULET:
+		iden_list.amulet_list[value1].iden = 2;
+		if(!prev_iden && you.isequip(this))
+			unidenequipamulet((amulet_type)value1, value2*(-1));
+		you.auto_equip_iden();
 		break;
 	case ITM_SCROLL:
 		iden_list.scroll_list[value1].iden = 3;
@@ -853,9 +847,9 @@ void item::autoIdentify()
 		if(iden_list.ring_list[value1].iden == 2)
 			Identify();
 	}
-	if(type == ITM_SPELLCARD)
+	if(type == ITM_AMULET)
 	{
-		//Identify();
+		Identify();
 	}
 }
 void item::income_view()

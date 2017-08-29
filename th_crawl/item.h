@@ -14,6 +14,7 @@
 #include "texture.h"
 #include "atifact.h"
 #include "scroll.h"
+#include "amulet.h"
 
 class item;
 

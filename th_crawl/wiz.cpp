@@ -74,7 +74,7 @@ void wiz_mode()
 			break;
 		case 'A':
 			{				
-				printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구",true,false,false,CL_help);
+				printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구 R-목걸이",true,false,false,CL_help);
 				printlog("어느 아이템을 얻어볼까?",false,false,false,CL_help);
 				key_ = waitkeyinput();
 				switch(key_)
@@ -222,6 +222,27 @@ void wiz_mode()
 							MakeArtifact(it_,it_->curse?-1:1);
 					}
 					return;
+				case 'R':
+				{
+					int list[] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE, 
+						AMT_WEATHER, AMT_POPULAR, AMT_OCCULT};
+					enterlog();
+					printlog("a-완전무결 b-삼라결계 c-각부 d-신앙 e-전파 f-신령 g-그레이즈 h-기질", true, false, false, CL_help);
+					printlog("i-인기 j-오컬트", true, false, false, CL_help);
+					printlog("어느 부적을 얻어볼까?", false, false, false, CL_help);
+					key_ = waitkeyinput();
+					if (key_ >= 'a' && key_ <= 'j')
+					{
+						item_infor t;
+						makeitem(ITM_AMULET, 0, &t, list[key_ - 'a']);
+						env[current_level].MakeItem(you.position, t);
+						enterlog();
+					}
+					else {
+						printlog(" 취소", true, false, false, CL_help);
+					}
+				}
+				return;
 				default:
 					printlog(" 취소",true,false,false,CL_help);
 					return;

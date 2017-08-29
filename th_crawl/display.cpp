@@ -894,6 +894,25 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 
 		rc.top += fontDesc.Height;
+
+
+		sprintf_s(temp, 128, "부적: ");
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width * 6;
+
+		if (you.equipment[ET_NECK])
+		{
+			sprintf_s(temp, 128, "%c) %s", you.equipment[ET_NECK]->id, you.equipment[ET_NECK]->GetName().c_str());
+			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
+		}
+		else
+		{
+			sprintf_s(temp, 128, "없음");
+			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		}
+		rc.left = 32 * 16 + 50;
+		rc.top += fontDesc.Height;
+
 		sprintf_s(temp,128,"무기: ");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*6;

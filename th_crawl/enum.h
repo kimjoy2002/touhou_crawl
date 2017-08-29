@@ -686,7 +686,7 @@ enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ c
 	ITM_SPELL,
 
 	ITM_JEWELRY_FIRST,
-	ITM_SPELLCARD = ITM_JEWELRY_FIRST,
+	ITM_AMULET = ITM_JEWELRY_FIRST,
 	ITM_RING,
 	ITM_JEWELRY_LAST,
 
@@ -806,20 +806,6 @@ enum ring_type
 	RGT_MAX,
 	RGT_SKILL_UP = RGT_MAX,
 	RGT_MAX_ATIFACT,
-};
-
-enum amulet_type
-{
-	//AMT_AC = 0,
-	//AMT_EV,
-	//AMT_CONFUSE_RESIS,
-	//AMT_INACCURACY,
-	//AMT_POWER_KEEP,
-	AMT_FIRE=0,
-	AMT_COLD,
-	AMT_LIGHTNING,
-	AMT_INVISIBLE,
-	AMT_MAX
 };
 
 enum book_list

@@ -529,6 +529,7 @@ textures img_item_potion[] = {textures(&texture_item02, 0, 255),
 	textures(&texture_item02, 19, 255)
 };
 
+
 textures img_item_scroll(&texture_item01, 14, 255);
 
 textures img_item_book[] = {textures(&texture_item02, 32, 255),
@@ -578,6 +579,18 @@ textures(&texture_item02, 95, 255),
 textures(&texture_item02, 96, 255),
 textures(&texture_item02, 97, 255) };
 
+
+textures img_item_amulet_kind[] = { textures(&texture_item02, 112, 255),
+textures(&texture_item02, 113, 255),
+textures(&texture_item02, 114, 255),
+textures(&texture_item02, 115, 255),
+textures(&texture_item02, 116, 255),
+textures(&texture_item02, 117, 255),
+textures(&texture_item02, 118, 255),
+textures(&texture_item02, 119, 255),
+textures(&texture_item02, 120, 255),
+textures(&texture_item02, 121, 255)
+};
 
 textures img_item_goal(&texture_item01, 135, 255);
 textures img_item_rune(&texture_item01, 214, 255);

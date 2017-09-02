@@ -290,6 +290,7 @@ extern textures img_item_scroll;
 extern textures img_item_book[];
 extern textures img_item_potion_kind[];
 extern textures img_item_scroll_kind[];
+extern textures img_item_amulet_kind[];
 extern textures img_item_ring;
 
 extern textures img_item_amulet;

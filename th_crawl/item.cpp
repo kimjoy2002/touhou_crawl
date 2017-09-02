@@ -503,6 +503,11 @@ bool item::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
 			}
 		}
+		else if (type == ITM_AMULET) {
+			if (iden_list.amulet_list[value1].iden) {
+				img_item_amulet_kind[min(AMT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+			}
+		}
 		return return_;
 	}
 	else

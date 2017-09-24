@@ -95,7 +95,12 @@ struct lilly_ally
 	lilly_ally():map_id(0),floor(0),level(0),exp(0),id(0),name(0),personality(0),cooldown(0){};
 };
 
-
+struct current_max
+{
+	int value;
+	int maxi;
+	current_max(int _value, int _maxi) :value(_value), maxi(_maxi) {};
+};
 
 
 class players: public unit
@@ -125,6 +130,7 @@ public:
 	int exper_recovery;
 	int exper_aptit;
 	int skill_exper;
+	current_max system_exp;
 	int ac;
 	int ev;
 	int sh;
@@ -367,8 +373,9 @@ public:
 	void print_damage_message(attack_infor &a, bool damaged_);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool GetExp(int exper_, bool speak_ = true); 
+	bool GetExp(int exper_, bool speak_ = true);
 	void FairyRevive(bool speak_);
+	int getAmuletPercent();
 	void ExpRecovery(int exper_);
 	void CheckPunish(int delay_);
 	int GetNeedExp(int level_);

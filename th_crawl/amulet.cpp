@@ -63,3 +63,11 @@ bool unidenequipamulet(amulet_type kind, int value)
 {
 	return false;
 }
+float getAmuletCharge(amulet_type kind)
+{
+	return 1.0f;
+}
+bool isCanCharge(amulet_type kind)
+{
+	return true;
+}

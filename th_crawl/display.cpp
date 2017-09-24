@@ -902,7 +902,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		if (you.equipment[ET_NECK])
 		{
-			sprintf_s(temp, 128, "%c) %s", you.equipment[ET_NECK]->id, you.equipment[ET_NECK]->GetName().c_str());
+			item* _item = you.equipment[ET_NECK];
+			char temp2[64];
+			if (_item->type == ITM_AMULET)
+			{
+				sprintf_s(temp2, 64, "%s%s", iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], _item->name.name.c_str());
+			}
+			sprintf_s(temp, 128, "%c) %s (%d%%)", you.equipment[ET_NECK]->id, temp2, you.getAmuletPercent());
 			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
 		}
 		else

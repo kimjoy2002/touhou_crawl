@@ -36,5 +36,7 @@ amulet_type goodbadamulet(int good_bad);
 int isGoodAmulet(amulet_type kind, int value);
 bool equipamulet(amulet_type kind, int value); //리턴값: 식별시 true 미식별시 false
 bool unidenequipamulet(amulet_type kind, int value); //리턴값: 식별시 true 미식별시 false
+float getAmuletCharge(amulet_type kind);
+bool isCanCharge(amulet_type kind);
 
 #endif // __AMULET_H__

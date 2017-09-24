@@ -338,6 +338,12 @@ string item::GetName(int num_)
 	{
 		temp += " {발동}";
 	}
+	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
+	{
+		char temp2[32];
+		sprintf_s(temp2, 32, " (%d%%)", you.getAmuletPercent());
+		temp += temp2;
+	}
 	
 	if(isArtifact() && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
 	{ //아티펙트!

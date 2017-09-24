@@ -62,7 +62,7 @@ void name_infor::LoadDatas(FILE *fp)
 
 players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
-hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), 
+hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
@@ -133,6 +133,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, exper_recovery);
 	SaveData<int>(fp, exper_aptit);
 	SaveData<int>(fp, skill_exper);
+	SaveData<current_max>(fp, system_exp);
 	SaveData<int>(fp, ac);
 	SaveData<int>(fp, ev);
 	SaveData<int>(fp, sh);
@@ -323,6 +324,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, exper_recovery);	
 	LoadData<int>(fp, exper_aptit);
 	LoadData<int>(fp, skill_exper);
+	LoadData<current_max>(fp, system_exp);
 	LoadData<int>(fp, ac);
 	LoadData<int>(fp, ev);
 	LoadData<int>(fp, sh);
@@ -1699,13 +1701,32 @@ void players::FairyRevive(bool speak_)
 	}
 }
 
-
-
-
-
+int players::getAmuletPercent()
+{
+	return 100 * (system_exp.maxi - system_exp.value) / system_exp.maxi;
+}
 
 void players::ExpRecovery(int exper_)
-{	
+{
+	if (system_exp.value > 0) {
+		system_exp.value -= exper_;
+		if (system_exp.value <= 0) {
+			system_exp.value = 0;
+			item* _item = you.equipment[ET_NECK];
+			char temp2[64];
+			if (_item && _item->type == ITM_AMULET){
+				if (isCanCharge((amulet_type)_item->value1)) {
+					printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
+				}
+				else {
+					printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+				}
+			}
+			
+
+		}
+
+	}
 	exper_recovery -= exper_;
 	if(exper_recovery<=0)
 	{//일정 경험치를 먹어서 경험치 회복이 이루어짐
@@ -1718,7 +1739,7 @@ void players::ExpRecovery(int exper_)
 		if(s_trans_panalty) //시공부작용의 감소
 			s_trans_panalty--;
 
-		
+
 		random_extraction<int> recover_;
 		if(s_str < m_str)
 			recover_.push(0,1);
@@ -4100,6 +4121,12 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				alchemy_buff = ALCT_NONE;
 				alchemy_time = 0;
 			}
+		}
+		if (type_ == ET_NECK)
+		{
+			system_exp.value = (GetNeedExp(max(level - 1, 0)) - GetNeedExp(max(level - 2, 0))) + 10;
+			system_exp.value *= getAmuletCharge((amulet_type)(*it).value1);
+			system_exp.maxi = system_exp.value;
 		}
 
 		if(type_ != ET_WEAPON || ((*it).type >= ITM_WEAPON_FIRST && (*it).type < ITM_WEAPON_LAST)) //무기를 장착했을때

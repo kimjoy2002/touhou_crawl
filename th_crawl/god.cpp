@@ -67,6 +67,12 @@ const char* GetGodString(god_type god)
 		return "세이자";
 	case GT_LILLY:
 		return "릴리";
+	case GT_MIKO:
+		return "미코";
+	case GT_OKINA:
+		return "오키나";
+	case GT_JUNKO:
+		return "순호";
 	}
 	return "모름";
 }
@@ -111,6 +117,12 @@ bool GetGodString_is(god_type god)
 	case GT_SEIJA:
 		return false;
 	case GT_LILLY:
+		return false;
+	case GT_MIKO:
+		return false;
+	case GT_OKINA:
+		return false;
+	case GT_JUNKO:
 		return false;
 	}
 	return true;
@@ -791,6 +803,21 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		}
 		return false;
+	case GT_MIKO:
+		switch (level)
+		{
+		}
+		return false;
+	case GT_OKINA:
+		switch (level)
+		{
+		}
+		return false;
+	case GT_JUNKO:
+		switch (level)
+		{
+		}
+		return false;
 	}
 	return false;
 }
@@ -1078,6 +1105,12 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		return false;
 	case GT_LILLY:
 		return false;
+	case GT_MIKO:
+		return false;
+	case GT_OKINA:
+		return false;
+	case GT_JUNKO:
+		return false;
 	}
 	return false;
 }
@@ -1107,6 +1140,9 @@ bool GodAccpect_Entering()
 		printlog(seija_talk(GT_NONE, 0),true,false,false,CL_seija);
 		return true;
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1155,6 +1191,9 @@ bool GodAccpect_GetPitem()
 	case GT_TENSI:
 	case GT_SEIJA:
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1224,6 +1263,9 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_TENSI:
 	case GT_SEIJA:
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1262,7 +1304,9 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_TENSI:
 	case GT_SEIJA:
 	case GT_LILLY:
-		return false;
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1296,6 +1340,9 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	case GT_TENSI:
 	case GT_SEIJA:
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1375,6 +1422,10 @@ bool GodAccpect_Explore_100()
 
 		}
 		return false;
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
+		return false;
 	}
 	return false;
 }
@@ -1404,6 +1455,9 @@ bool GodAccpect_Exp_get()
 		you.GiftCount(1);
 		return true;
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1445,6 +1499,9 @@ bool GodAccpect_First_contact()
 		return false;
 	case GT_SEIJA:
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1496,6 +1553,10 @@ bool GodAccpect_Abandon(god_type god)
 				printarray(true,false,false,CL_danger,1,"릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!");
 			}
 		}
+		return false;
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1715,6 +1776,9 @@ bool GodAccpect_turn(int turn)
 		return false;
 	case GT_SEIJA:
 	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
 		return false;
 	}
 	return false;
@@ -1771,9 +1835,9 @@ void Pray()
 
 
 			}
-			else if(type == DG_TEMPLE_SHIKIEIKI)
+			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO || type == DG_TEMPLE_OKINA || type == DG_TEMPLE_JUNKO)
 			{
-				printlog("시키에이키는 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
+				printlog("이 신들은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}
 			else
 			{
@@ -2044,6 +2108,15 @@ void GodInfor(god_type god)
 		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_normal);
 		printsub("릴리화이트는 이 세상을 탐험하는 것을 좋아한다.",true,CL_normal);
 		printsub("",true,CL_normal);
+		break;
+	case GT_MIKO:
+		printsub("토요사토미미노 미코", true, CL_danger);
+		break;
+	case GT_OKINA:
+		printsub("마타라 오키나", true, CL_danger);
+		break;
+	case GT_JUNKO:
+		printsub("순호", true, CL_danger);
 		break;
 	default:
 		printsub("버그신",true,CL_danger);
@@ -2561,6 +2634,87 @@ void God_show()
 			printsub("",true,CL_normal);
 		}
 		break;
+	case GT_MIKO:
+		if (level_ >= 0 && !you.GetPunish(GT_MIKO))
+		{
+			printsub("알 수 없는 능력                                                 (패시브)", true, CL_miko);
+			printsub("", true, CL_normal);
+		}
+		break;
+	case GT_OKINA:
+		if (level_ >= 0 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 자유자재로 문의 이동과 투시가 가능하다.                  (패시브)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 1 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 원하는 벽에 문을 만들 수 있다.                           (P, 영력)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 2 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 문을 강제로 닫고 잠글 수 있다.                              (신앙)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 3 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 적의 등뒤로 이동할 수 있다.                                (신앙)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 4 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 크레이지 백댄서를 불러올 수 있다.                          (신앙)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 5 && !you.GetPunish(GT_OKINA))
+		{
+			printsub("당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.            (신앙)", true, CL_okina);
+			printsub("", true, CL_normal);
+		}
+		break;
+	case GT_JUNKO:
+		if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
+		{
+			printsub("순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.             (패시브)", true, CL_junko);
+			printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, CL_small_danger);
+			printsub(" └2단계: 당신은 일부 스크롤의 효과를 받지 않는다.", true, CL_small_danger);
+			printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, CL_small_danger);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
+		{
+			printsub("당신은 단순하지만 강력한 탄막을 날릴 수 있다.                  (P, 영력)", true, CL_junko);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
+		{
+			printsub("당신은 순수한 힘을 얻을 수 있다.                                  (신앙)", true, CL_junko);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
+		{
+			printsub("당신은 순수한 살의를 얻을 수 있다.                                (신앙)", true, CL_junko);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
+		{
+			printsub("당신은 순호의 축복으로 영구적으로 순화할 수 있다.                 (신앙)", true, CL_junko);
+			printsub("", true, CL_normal);
+			//순화시 순화패널티 3이 영구적용
+			//올스탯 +5. 그러나 기존권능을 사용할 수 없게 됨
+			//그리고 아래 등장하는 순화중 3개가 랜덤으로 나옴
+
+			//순화목록
+			
+			//스킬순화: 적성0이상의 스킬 1개를 선택하여 적성과 상관없이 스킬레벨이 항상 캐릭터레벨과 동일하도록 변화합니다.
+			//저항순화 - 속성 하나에 대해서 완전한 면역이 됩니다.
+			//마력순화 - 영력와 체력을 동일화하고 재생력이 증가합니다.
+			//파워순화 - 항상 풀파워 모드가 됩니다.
+			//생명순화 - 당신의 생명력은 순화되어 추가 생명을 2개 얻습니다. 당신이 봉래인이면 나오지 않습니다.
+			//장비순화 - 당신이 선택한 무기, 방어구의 강화치를 강화최대치 + 5로 바꿉니다.아티펙트도 가능합니다.
+		}
+		break;
 	}
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);
@@ -2644,6 +2798,12 @@ bool God_pray(const list<item>::iterator it)
 	case GT_SEIJA:
 		break;
 	case GT_LILLY:
+		break;
+	case GT_MIKO:
+		break;
+	case GT_OKINA:
+		break;
+	case GT_JUNKO:
 		break;
 	}
 	return false;		
@@ -3309,6 +3469,12 @@ bool god_punish(god_type god)
 				break;
 			}
 		}
+		break;
+	case GT_MIKO:
+		break;
+	case GT_OKINA:
+		break;
+	case GT_JUNKO:
 		break;
 	}
 	return false;		

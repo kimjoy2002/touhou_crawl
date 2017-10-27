@@ -175,10 +175,10 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
 				{textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255)}, //세이자				
 				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //릴리
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //미코
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //오키나
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //순호
 
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},

@@ -27,9 +27,9 @@ void note_dummy::SaveDatas(FILE *fp)
 {
 	SaveData<int>(fp, turn);
 	char temp[200];
-	sprintf(temp,"%s",place.c_str());
+	sprintf_s(temp, sizeof(temp), "%s", place.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
-	sprintf(temp,"%s",text.c_str());
+	sprintf_s(temp, sizeof(temp), "%s", text.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 	SaveData<D3DCOLOR>(fp, color);
 }

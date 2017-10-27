@@ -1835,9 +1835,9 @@ void Pray()
 
 
 			}
-			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO || type == DG_TEMPLE_OKINA || type == DG_TEMPLE_JUNKO)
+			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO || type == DG_TEMPLE_JUNKO)
 			{
-				printlog("이 신들은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
+				printlog("이 신은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}
 			else
 			{

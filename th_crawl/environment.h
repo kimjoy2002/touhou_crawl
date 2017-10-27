@@ -135,6 +135,11 @@ public:
 	{
 		if(c.x<0 || c.x>=DG_MAX_X || c.y<0 || c.y>=DG_MAX_Y)
 			return false;
+		if (you.god == GT_OKINA && !you.GetPunish(GT_OKINA)) {
+			if (dgtile[c.x][c.y].isCloseDoor()) {
+				return true;
+			}
+		}
 		return dgtile[c.x][c.y].isSight();
 	}
 	bool isExplore(int x_,int y_)

@@ -1004,7 +1004,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
-		true,true, true, true, randA(10));
+		true,true, true, true, you.god == GT_OKINA ? 0 : randA(10));
 }
 void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
@@ -1153,13 +1153,13 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
-		false,true, true, false, randA(10));
+		false, true, true, false, you.god == GT_OKINA ? 0 : randA(10));
 	else
 		common_map_make_last(num, 
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
-		false,false, true, false, 11);
+		false, false, true, false, 11);
 
 
 
@@ -1325,7 +1325,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 	floor_tex,wall_tex,
 	vec_map,
 	vec_special_map, 
-	false,false, false, false, 11);
+	false, false, false, false, 11);
 
 
 }

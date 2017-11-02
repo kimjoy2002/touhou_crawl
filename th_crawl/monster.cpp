@@ -3340,6 +3340,12 @@ bool monster::you_detect()
 {
 	if(isArena())
 		return false;
+	if (you.god == GT_OKINA) {
+		//오키나라면 문으로 투과할땐 보이지 않아야 함
+		if (isMonsterSight(you.position, true) == false)
+			return false;
+	}
+
 	return randB(you.GetStealth(),GetDetect());
 }
 bool monster::isYourShight()
@@ -3461,7 +3467,7 @@ bool monster::isSightnonblocked(coord_def c)
 	}
 	return true;
 }
-bool monster::isMonsterSight(coord_def c)
+bool monster::isMonsterSight(coord_def c, boolean okina)
 {	
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
@@ -3475,7 +3481,7 @@ bool monster::isMonsterSight(coord_def c)
 				intercept = true;
 				break;
 			}
-			if(!env[current_level].isSight((*it)))
+			if (!env[current_level].isSight((*it)) || (okina && env[current_level].isCloseDoor(it->x, it->y)))
 			{
 				intercept = true;
 				break;

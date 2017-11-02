@@ -25,6 +25,8 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON | S_FLAG_GOD) & flag);
 	case SKL_KANAKO_1:
 	case SKL_YUYUKO_3:
+	case SKL_OKINA_1:
+	case SKL_OKINA_3:
 		return ((S_FLAG_SPEAK | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_DIGGING:
 		return ((S_FLAG_SPEAK | S_FLAG_UNSIGHT | S_FLAG_GOD) & flag);
@@ -42,6 +44,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUKARI_4:
 	case SKL_SEIJA_1:
 	case SKL_LILLY_1:
+	case SKL_OKINA_2: //문전용으로 변경
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
 		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
@@ -77,6 +80,8 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_SEIJA_2:
 	case SKL_LILLY_2:
 	case SKL_LILLY_4:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
@@ -112,7 +117,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_BREATH:
 		return ((S_FLAG_DELAYED) & flag);
 	case SKL_JUMPING_ATTACK:
-		return ((S_FLAG_SMITE |S_FLAG_DELAYED) & flag);
+		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
 	default:
 		return false;
 	}
@@ -132,6 +137,7 @@ int SkillLength(skill_list skill)
 	case SKL_PHILOSOPHERS_2:
 		return 5;
 	case SKL_PHILOSOPHERS_3:
+	case SKL_OKINA_3:
 		return 6;
 	case SKL_KANAKO_1:
 	case SKL_EIRIN_0:
@@ -153,6 +159,8 @@ int SkillLength(skill_list skill)
 	case SKL_SEIJA_1:
 	case SKL_LILLY_1:
 	case SKL_LILLY_3:
+	case SKL_OKINA_1:
+	case SKL_OKINA_2:
 		return 8;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -201,6 +209,8 @@ int SkillLength(skill_list skill)
 	case SKL_LILLY_2:
 	case SKL_LILLY_4:
 	case SKL_PHILOSOPHERS_4:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 	default:
 		return 0;
 	}
@@ -350,6 +360,16 @@ const char* SkillString(skill_list skill)
 		return "금-에메랄드 시티";
 	case SKL_PHILOSOPHERS_5:
 		return "토-지반 융기";
+	case SKL_OKINA_1:
+		return "문 생성";
+	case SKL_OKINA_2:
+		return "문 잠그기";
+	case SKL_OKINA_3:
+		return "인투 백도어";
+	case SKL_OKINA_4:
+		return "크레이지 백댄서즈";
+	case SKL_OKINA_5:
+		return "강제탈출 백도어";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -417,6 +437,11 @@ int SkillCap(skill_list skill)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_OKINA_1:
+	case SKL_OKINA_2:
+	case SKL_OKINA_3:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -461,6 +486,10 @@ int SkillNoise(skill_list skill)
 	case SKL_SEIJA_GIFT:
 	case SKL_LILLY_1:
 	case SKL_LILLY_2:
+	case SKL_OKINA_1:
+	case SKL_OKINA_3:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -482,6 +511,7 @@ int SkillNoise(skill_list skill)
 	case SKL_SEIJA_1:
 	case SKL_LILLY_3:
 	case SKL_PHILOSOPHERS_3:
+	case SKL_OKINA_2:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -558,6 +588,11 @@ int SkillPow(skill_list skill)
 	case SKL_HINA_3:
 	case SKL_HINA_4:
 	case SKL_HINA_5:
+	case SKL_OKINA_1:
+	case SKL_OKINA_2:
+	case SKL_OKINA_3:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 		//신앙심으로 바꾸기
 		return you.piety;
 	case SKL_SIZUHA_1:
@@ -695,6 +730,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_OKINA_1:
+	case SKL_OKINA_2:
+	case SKL_OKINA_3:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -767,6 +807,7 @@ int SkillMana(skill_list skill)
 	case SKL_SEIJA_1:
 	case SKL_SEIJA_2:
 	case SKL_LILLY_1:
+	case SKL_OKINA_4:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 		return 1;
@@ -784,12 +825,15 @@ int SkillMana(skill_list skill)
 	case SKL_SWAKO_TOUGUE:
 	case SKL_INVISIBLE:
 	case SKL_LILLY_2:
+	case SKL_OKINA_1:
+	case SKL_OKINA_2:
 		return 2;
 	case SKL_KANAKO_2:
 	case SKL_MINORIKO_1:
 	case SKL_YUYUKO_2:
 	case SKL_YUKARI_3:
 	case SKL_LILLY_3:
+	case SKL_OKINA_3:
 		return 3;
 	case SKL_BYAKUREN_2:
 	case SKL_SIZUHA_1:
@@ -804,6 +848,7 @@ int SkillMana(skill_list skill)
 		return 4;
 	case SKL_YUKARI_4:
 	case SKL_TORMENT:
+	case SKL_OKINA_5:
 		return 6;
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
@@ -1261,6 +1306,33 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-100,true);
 		}
 		return true;
+	case SKL_OKINA_1:
+		if (check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+		{
+			you.PowUpDown(-(25 + randA(10)), true);
+		}
+		return true;
+	case SKL_OKINA_2:
+		if (!check_)
+			you.PietyUpDown(-2);
+		return true;
+	case SKL_OKINA_3:
+		if (!check_)
+			you.PietyUpDown(-3);
+		return true;
+	case SKL_OKINA_4:
+		if (!check_)
+			you.PietyUpDown(-5);
+		return true;
+	case SKL_OKINA_5:
+		if (!check_)
+			you.PietyUpDown(-15);
+		return true;
 	case SKL_NONE:
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
@@ -1431,6 +1503,16 @@ const char* SkillCostString(skill_list skill)
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
 		return "(영력 1)";
+	case SKL_OKINA_1:
+		return "(영력 2, P 약간)";
+	case SKL_OKINA_2:
+		return "(영력 2, 신앙)";
+	case SKL_OKINA_3:
+		return "(영력 3, 신앙)";
+	case SKL_OKINA_4:
+		return "(신앙)";
+	case SKL_OKINA_5:
+		return "(영력 6, 신앙)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

@@ -811,6 +811,19 @@ bool GetGodAbility(int level, bool plus)
 	case GT_OKINA:
 		switch (level)
 		{
+		case 0:
+			if (plus)
+				printlog("당신은 이제 문을 자유자재로 넘나들며 투시할 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 문을 자유자재로 드나들 수 없다.", true, false, false, CL_okina);
+			break;
+		case 1:
+			you.Ability(SKL_OKINA_1, true, !plus);
+			if (plus)
+				printlog("당신은 이제 원하는 벽에 문을 만들 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 문을 만들어 낼 수 없다.", true, false, false, CL_okina);
+			break;
 		}
 		return false;
 	case GT_JUNKO:
@@ -2654,22 +2667,22 @@ void God_show()
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 문을 강제로 닫고 잠글 수 있다.                              (신앙)", true, CL_okina);
+			printsub("당신은 문을 강제로 닫고 잠글 수 있다.                        (신앙, 영력)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 3 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 적의 등뒤로 이동할 수 있다.                                (신앙)", true, CL_okina);
+			printsub("당신은 적의 등뒤로 이동할 수 있다.                           (신앙, 영력)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 4 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 크레이지 백댄서를 불러올 수 있다.                          (신앙)", true, CL_okina);
+			printsub("당신은 크레이지 백댄서를 불러올 수 있다.                           (신앙)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 5 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.            (신앙)", true, CL_okina);
+			printsub("당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.       (신앙, 영력)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		break;

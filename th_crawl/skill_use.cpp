@@ -2503,6 +2503,70 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+
+
+bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		if (env[current_level].dgtile[target.x][target.y].isBreakable() && !env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
+
+
+			beam_iterator beam(order->position, order->position);
+			if (CheckThrowPath(order->position, target, beam))
+			{
+				beam.init();
+				while (!beam.end())
+				{
+					beam_iterator temp = beam;
+					temp++;
+					unit *unit_ = env[current_level].isMonsterPos(temp->x, temp->y, &you);
+					if (unit_)
+					{
+						printlog("사이에 장애물이 있다.", true, false, false, CL_normal);
+						return false;
+					}
+					beam++;
+				}
+
+				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 벽으로 만들었다.");
+				env[current_level].dgtile[target.x][target.y].tile = DG_CLOSE_DOOR;
+				return true;
+			}
+			else {
+				printlog("사이에 장애물이 있다.", true, false, false, CL_normal);
+				return false;
+			}
+
+		}
+		else {
+			printlog("벽을 대상으로 써야 한다.", true, false, false, CL_normal);
+			return false; //해당 위치에 몬스터가 없다.
+
+		}
+	}
+	return false;
+}
+bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+
+
+
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 
@@ -2774,6 +2838,21 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 				return skill_stone_uplift(power,short_,&you,target);
 			}
 		}
+		break;
+	case SKL_OKINA_1:
+		return skill_okina_1(power, short_, &you, target);
+		break;
+	case SKL_OKINA_2:
+		return skill_okina_2(power, short_, &you, target);
+		break;
+	case SKL_OKINA_3:
+		return skill_okina_3(power, short_, &you, target);
+		break;
+	case SKL_OKINA_4:
+		return skill_okina_4(power, short_, &you, target);
+		break;
+	case SKL_OKINA_5:
+		return skill_okina_5(power, short_, &you, target);
 		break;
 	}
 	return 0;

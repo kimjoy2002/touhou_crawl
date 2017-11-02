@@ -908,6 +908,16 @@ string GetSkillInfor(skill_list skill)
 		text_ += "전투패널티는 명중과 공격이 내려가고 스펠파워가 절반이 된다.\n";
 		text_ += "신앙심의 소모는 없지만 P를 1칸 소모한다.\n";
 		break;
+	case SKL_OKINA_1:
+		text_ += "시야내에서 지정한 파괴가능 벽을 문으로 만든다.\n";
+		text_ += "시전 위치와 플레이어의 사이에 적이라던지 장해물이 있으면 만들 수 없다.\n";
+		text_ += "만들어진 문은 닫힌 상태로 생성되며 다른 문과 같이 투시와 이동과 함께 여닫는게 가능하다.\n";
+		text_ += "이 권능은 소음이 없으므로 몰래 적의 등뒤를 살피는 것이 가능하다.\n";
+		break;
+	case SKL_OKINA_2:
+	case SKL_OKINA_3:
+	case SKL_OKINA_4:
+	case SKL_OKINA_5:
 	default:
 		text_ += "모르는 능력.\n";
 		break;

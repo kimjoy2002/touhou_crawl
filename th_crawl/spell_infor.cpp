@@ -922,6 +922,11 @@ string GetSkillInfor(skill_list skill)
 		text_ += "잠긴지 일정시간이 되면 원래대로 돌아오면서 평범한 문으로 바뀐다.\n";
 		break;
 	case SKL_OKINA_3:
+		text_ += "지정한 적의 등 뒤에 문을 만들어 순식간에 이동한다.\n";
+		text_ += "이동하는데는 소리도 없이 이동하며 이동하는 적의 주의도 분산시킬 수 있다.\n";
+		text_ += "적의 등 뒤에 파괴가능한 지형이면 강제로 문을 만들어 이동할 수 있으나\n";
+		text_ += "적의 뒤에 다른 적이 있어서 문을 만들 수 없는 경우엔 사용이 불가능하다.\n";
+		break;
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
 	default:

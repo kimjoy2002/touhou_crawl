@@ -831,6 +831,13 @@ bool GetGodAbility(int level, bool plus)
 			else
 				printlog("더 이상 문을 강제로 닫을 수 없다.", true, false, false, CL_okina);
 			break;
+		case 3:
+			you.Ability(SKL_OKINA_3, true, !plus);
+			if (plus)
+				printlog("당신은 이제 적의 등 뒤에 백도어를 만들어 이동할 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 적의 등뒤에 백도어를 만들 수 없다.", true, false, false, CL_okina);
+			break;
 		}
 		return false;
 	case GT_JUNKO:

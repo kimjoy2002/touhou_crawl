@@ -915,6 +915,12 @@ string GetSkillInfor(skill_list skill)
 		text_ += "이 권능은 소음이 없으므로 몰래 적의 등뒤를 살피는 것이 가능하다.\n";
 		break;
 	case SKL_OKINA_2:
+		text_ += "시야내에서 지정한 문을 신의 힘으로 잠가버린다.\n";
+		text_ += "만약 열려있다면 닫히고 문 위에 누군가 있었다면 밀쳐내면서 약한 데미지와 혼란을 준다.\n";
+		text_ += "이렇게 잠겨진 문은 누구도 통과할 수 없으며 심지어 신도조차 드나드는건 할 수 없다.\n";
+		text_ += "대신 이렇게 만들어진 문은 적의 공격대상이 되며 일정 데미지를 받으면 다시 열리게 된다.\n";
+		text_ += "잠긴지 일정시간이 되면 원래대로 돌아오면서 평범한 문으로 바뀐다.\n";
+		break;
 	case SKL_OKINA_3:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:

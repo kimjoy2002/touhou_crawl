@@ -2549,6 +2549,60 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 {
+	if (order->isplayer())
+	{
+		unit *unit_ = env[current_level].isMonsterPos(target.x, target.y, &you);
+		if (unit_ && unit_->GetId() == MON_CLOSE_DOOR) {
+			printlog("이미 잠겨있는 문이다.", false, false, false, CL_normal);
+			return false;
+		}
+
+		if (env[current_level].dgtile[target.x][target.y].isOpenDoor() || env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
+
+			if (unit_) {
+
+				rand_rect_iterator rit(unit_->position, 1, 1, true);
+				while (!rit.end()) {
+					unit* unit_hit_ = NULL; //부딪힌 적
+					bool hit_ = false; //부딪혔다!
+
+					hit_ = !env[current_level].isMove(coord_def(rit->x, rit->y), unit_->isFly(), unit_->isSwim(), false);
+					unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);
+
+					if (!hit_ && !unit_hit_) {
+						//움직일수도있을때
+						printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "문에 밀쳐져 튕겨나갔다!");
+						unit_->SetXY(rit->x, rit->y);
+						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor("문", true));
+						unit_->damage(temp_att, true);
+						unit_->SetConfuse(5+randA(5));
+						unit_->PlusTimeDelay(-unit_->GetWalkDelay()); //1턴 행동을 쉰다.
+						break;
+					}
+
+					rit++;
+					if (rit.end()) {
+						printarray(true, false, false, CL_normal, 4, "밀쳐낼 자리가 없어서 문 위에 있는 ", unit_->GetName()->name.c_str(), unit_->GetName()->name_to(true), "밀쳐낼 수 없다.");
+						return false;
+					}
+				}
+
+			}
+			env[current_level].dgtile[target.x][target.y].tile = DG_FLOOR;
+			//적이 서있으면 강제로 비키도록 한다.
+			
+			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
+			{
+				mon_->LevelUpdown(you.level, 6);
+				printarray(true, false, false, CL_okina, 1, "당신은 문을 강제로 단단하게 잠갔다!");
+				return true;
+			}
+		}
+		else {
+			printlog("문을 대상으로 사용해야 한다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
 	return false;
 }
 bool skill_okina_3(int power, bool short_, unit* order, coord_def target)

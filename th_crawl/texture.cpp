@@ -366,6 +366,7 @@ textures img_mons_toziko(&texture_monster01, 185, 255);
 textures img_mons_futo(&texture_monster01, 186, 255);
 textures img_mons_mamizo(&texture_monster01, 187, 255);
 textures img_mons_seiga(&texture_monster01, 188, 255);
+textures img_mons_close_door(&texture_item01, 3, 255);
 
 
 
@@ -1766,8 +1767,10 @@ int texturetoint(textures* input)
 		return 327;
 	else if(input == &img_effect_emerald_uplift[0])
 		return 328;
-	else if(input == &img_effect_emerald_uplift[1])
+	else if (input == &img_effect_emerald_uplift[1])
 		return 329;
+	else if (input == &img_mons_close_door)
+		return 330;
 	else
 		return 0;
 }
@@ -2435,6 +2438,8 @@ textures* inttotexture(int input)
 		return &img_effect_emerald_uplift[0];
 	case 329:
 		return &img_effect_emerald_uplift[1];
+	case 330:
+		return &img_mons_close_door;
 	default:
 		return &img_mons_default;
 	}

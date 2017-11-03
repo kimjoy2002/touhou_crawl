@@ -58,7 +58,8 @@ enum monster_flag
 	M_FLAG_NETURALY = 1<<20,  //중립. 그러나 원본크롤과는 약간 다르다. 플레이어에겐 적대적이나 몹끼리 싸움
 	M_FLAG_NONE_STAIR = 1<<21,
 	M_FLAG_CANT_NETURAL = 1<<22, //자연적으로 생성될수 없는. 아레나에서 나올 수 없는 몹
-	M_FLAG_INANIMATE = 1<<23 //무생물
+	M_FLAG_INANIMATE = 1<<23, //무생물
+	M_FLAG_NO_STATE = 1<<24 //상태 표시 안됨
 };
 
 

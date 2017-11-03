@@ -614,6 +614,7 @@ enum monster_index
 	MON_FUTO,
 	MON_MAMIZO,
 	MON_SEIGA,
+	MON_CLOSE_DOOR,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };

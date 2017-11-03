@@ -25,9 +25,10 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_SUMMON | S_FLAG_GOD) & flag);
 	case SKL_KANAKO_1:
 	case SKL_YUYUKO_3:
-	case SKL_OKINA_1:
 	case SKL_OKINA_3:
 		return ((S_FLAG_SPEAK | S_FLAG_GOD) & flag);
+	case SKL_OKINA_1:
+		return ((S_FLAG_SPEAK | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_DIGGING:
 		return ((S_FLAG_SPEAK | S_FLAG_UNSIGHT | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_WATER_GUN:
@@ -44,8 +45,9 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUKARI_4:
 	case SKL_SEIJA_1:
 	case SKL_LILLY_1:
-	case SKL_OKINA_2: //문전용으로 변경
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
+	case SKL_OKINA_2: //문전용으로 변경
+		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
 		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
 	case SKL_YUKARI_2:

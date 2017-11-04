@@ -2998,9 +2998,9 @@ bool monster::SetSick(int sick_)
 	if(isYourShight())
 	{
 		if(!s_sick)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"병에 걸렸다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"병에 걸렸다. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 병은 심해졌다.");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 병은 심해졌다. ");
 	}
 	s_sick += sick_;
 	if(s_sick>200)
@@ -3014,9 +3014,9 @@ bool monster::SetVeiling(int veiling_, int value_)
 	if(isYourShight())
 	{
 		if(!s_veiling)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람을 감쌌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람을 감쌌다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"감싸는 바람이 강해졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"감싸는 바람이 강해졌다. ");
 	}
 	s_veiling += veiling_;
 	s_value_veiling = value_;
@@ -3043,13 +3043,13 @@ bool monster::SetInvisible(int invisible_)
 		if(isYourShight())
 		{
 			if(!prev_invisible_)
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"투명하게 변한다.");
+				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"투명하게 변한다. ");
 			else
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"더욱 투명하게 변한다.");
+				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"더욱 투명하게 변한다. ");
 		}
 		else
 		{
-			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"투명해지면서 사라졌다.");
+			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"투명해지면서 사라졌다. ");
 			if(you.auto_pickup>0)
 				auto_pick_onoff(true);
 		}
@@ -3063,9 +3063,9 @@ bool monster::SetMute(int mute_)
 	if(isYourShight())
 	{
 		if(!s_mute)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벙어리가 되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벙어리가 되었다. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 침묵이 길어졌다.");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 침묵이 길어졌다. ");
 	}
 	s_mute += mute_;
 	if(s_mute>100)
@@ -3078,18 +3078,18 @@ bool monster::SetGhost(int ghost_)
 		return false;
 	if(flag & M_FLAG_INANIMATE)
 	{		
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다.");	
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다. ");	
 		return false;
 	}
 
 	if(flag & M_FLAG_SUMMON)
 	{
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"이미 종속되어있다.");	
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"이미 종속되어있다. ");	
 		return false;
 	}
 	if(isYourShight())
 	{
-		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"의 영혼이 붙잡혔다. 지속시간내로 잡으면 당신의 동료가 된다.");
+		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"의 영혼이 붙잡혔다. 지속시간내로 잡으면 당신의 동료가 된다. ");
 	}
 	s_ghost += ghost_;
 	if(s_ghost>100)
@@ -3114,7 +3114,7 @@ bool monster::SetFear(int fear_)
 	if(isYourShight())
 	{
 		if(!s_fear)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다. ");
 	}
 	s_fear += fear_;
 	if(s_fear>50)
@@ -3130,9 +3130,9 @@ bool monster::SetMindReading(int mind_)
 	{
 		if(!s_mind_reading){			
 			if(flag & M_FLAG_ANIMAL)
-				printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 생각을 알게되어 친해졌다.");
+				printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 생각을 알게되어 친해졌다. ");
 			else
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마음을 간파당했다.");
+				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마음을 간파당했다. ");
 		}
 	}
 	s_mind_reading = mind_;
@@ -3152,7 +3152,7 @@ bool monster::SetLunatic(int lunatic_)
 	if(isYourShight())
 	{
 		if(!s_lunatic)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다. ");
 	}
 	s_lunatic = lunatic_;
 	if(s_lunatic>20)
@@ -3177,13 +3177,13 @@ bool monster::SetCommunication(int s_communication_)
 			switch(id)
 			{
 			case MON_MOON_RABIT_SUPPORT:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다.");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다. ");
 				break;
 			case MON_HELL_HOUND:
-				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다.");
+				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다. ");
 				break;
 			default:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다.");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다. ");
 			}
 
 		}
@@ -3206,9 +3206,9 @@ bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 	if(isYourShight() && speak_)
 	{
 		if(!force_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"약화되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"약화되었다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"강화되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"강화되었다. ");
 	}
 
 	force_strong = force_;
@@ -3312,9 +3312,9 @@ bool monster::Teleport()
 			SetXY(x_, y_);
 			bool curr_sight_ = isYourShight();
 			if(prev_sight_ && !curr_sight_)
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공간이동을 통해 시야에서 사라졌다.");
+				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공간이동을 통해 시야에서 사라졌다. ");
 			else if(!prev_sight_ && curr_sight_)
-				printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_do(true),"갑자기 나타났다.");
+				printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_do(true),"갑자기 나타났다. ");
 
 			return true;
 		}

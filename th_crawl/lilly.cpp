@@ -535,7 +535,7 @@ void GetFairyExp(int exp)
 						case MON_FAIRY_RED_COMMANDER:
 							if(it->level >= 13)
 							{
-								it->ChangeMonster(MON_FAIRY_GREEN_WARRIOR,M_FLAG_ALLY);
+								it->ChangeMonster(MON_FAIRY_SUN_FLOWER,M_FLAG_ALLY);
 							}
 							break;
 						case MON_SUNNY:

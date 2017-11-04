@@ -443,7 +443,7 @@ const D3DCOLOR item::item_color()
 		if(iden_list.amulet_list[value1].iden == 2)
 		{
 			int color_ = isGoodAmulet((amulet_type)value1, identify?value2:1);
-			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_normal);
+			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger: CL_STAT);
 		}
 		break;
 	}

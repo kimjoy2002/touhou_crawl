@@ -1189,9 +1189,9 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		if (equipment[ET_NECK] && equipment[ET_NECK]->value1 == AMT_PERFECT && getAmuletPercent() >= 100)
 		{
 			deadlog();
+			MoreWait();
 			resurectionlog("완전 무결의 부적");
 			printlog("그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!", true, false, false, CL_white_blue);
-			MoreWait();
 			hp = max_hp;
 			mp = max_mp;
 			for (list<item>::iterator it = item_list.begin(); it != item_list.end(); it++)
@@ -4174,15 +4174,15 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		return 0;
 
 
-	WaitForSingleObject(mutx, INFINITE);
 	if((*it).isRightType(type_))
 	{
 		if(!unequip(type_))
 		{
-			printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
-			ReleaseMutex(mutx);
+			if (equipment[type_] && equipment[type_]->curse)
+				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
 			return 0;
 		}
+		WaitForSingleObject(mutx, INFINITE);
 		//자동식별 추가
 		(*it).Identify();
 
@@ -4505,6 +4505,27 @@ bool players::unequip(equip_type type_, bool force_)
 				equipment[type_]->identify_curse = true;
 			return false;
 		}
+
+		if (type_ == ET_NECK && getAmuletPercent() > 0)
+		{
+			printlog("정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)", true, false, false, CL_small_danger);
+			bool repeat_ = true;
+			while (repeat_)
+			{
+				switch (waitkeyinput())
+				{
+				case 'Y':
+				case 'y':
+					repeat_ = false;
+					break;
+				case 'N':
+				case 'n':
+					printlog("계속하도록. ", false, false, false, CL_normal);
+					return false;
+				}
+			}
+		}
+
 		WaitForSingleObject(mutx, INFINITE);
 		equip_stat_change(equipment[type_], type_, false);
 		if(!force_)
@@ -4535,7 +4556,8 @@ bool players::unequiparmor(char id_)
 		{
 			if(!unequip(i))
 			{
-				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+				if(equipment[i]->curse)
+					printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
 				return 0;
 			}
 			return 1;
@@ -4551,15 +4573,16 @@ bool players::unequipjewerly(char id_)
 	{
 		if(equipment[i] && equipment[i]->id == id_)
 		{
-			if(s_spellcard && equipment[i]->isRightType(ET_NECK))
+			/*if(s_spellcard && equipment[i]->isRightType(ET_NECK))
 			{
 				printlog("스펠카드 선언중엔 스펠카드 탈착이 불가능하다.",true,false,false,CL_normal);
 				return 0;
-			}
+			}*/
 
 			if(!unequip(i))
 			{
-				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+				if (equipment[i]->curse)
+					printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
 				return 0;
 			}
 			return 1;

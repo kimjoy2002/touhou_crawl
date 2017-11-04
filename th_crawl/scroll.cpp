@@ -78,7 +78,7 @@ bool detect_curse_scroll(bool pre_iden_);
 bool curse_jewelry_scroll(bool pre_iden_);
 bool skill_silence(int pow, bool short_, unit* order, coord_def target);
 bool skill_soul_shot(int power, unit* order, coord_def target);
-bool recharging_scroll(bool pre_iden_);
+bool recharging_scroll(bool pre_iden_, bool ablity_);
 bool amnesia_scroll(bool pre_iden_);
 
 
@@ -200,7 +200,7 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 	case SCT_MAPPING:
 		 {
-			 iden_list.scroll_list[kind].iden = 3;			
+			 iden_list.scroll_list[kind].iden = 3;
 			if(env[current_level].isBamboo())
 			{				
 				printlog("지형탐지는 미궁의 죽림에선 효과를 보지 못한다.",true,false,false,CL_normal);
@@ -284,7 +284,7 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		{
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
-		bool return_ = recharging_scroll(pre_iden_);
+		bool return_ = recharging_scroll(pre_iden_, false);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
@@ -765,7 +765,7 @@ bool curse_jewelry_scroll(bool pre_iden_)
 		return true;
 	}
 }
-bool recharging_scroll(bool pre_iden_)
+bool recharging_scroll(bool pre_iden_, bool ablity_)
 {
 	bool ok_ = false;
 	for(auto it = you.item_list.begin();it != you.item_list.end(); it++)
@@ -787,7 +787,7 @@ bool recharging_scroll(bool pre_iden_)
 
 
 
-	if(iden_list.scroll_list[SCT_CHARGING].iden == 3)
+	if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
 		view_item(IVT_SPELLCARD,"무슨 스펠카드를 충전하시겠습니까?");
 	else
 		view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
@@ -834,7 +834,7 @@ bool recharging_scroll(bool pre_iden_)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 		{	
-			if(iden_list.scroll_list[SCT_CHARGING].iden == 3)
+			if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
 				view_item(IVT_SPELLCARD,"무슨 스펠카드를 충전하시겠습니까?");
 			else
 				view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");

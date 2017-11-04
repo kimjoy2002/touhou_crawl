@@ -184,6 +184,7 @@ public:
 	bool isautopick();
 	bool isArtifact();
 	bool isChargable();
+	bool isEvokable();
 
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();

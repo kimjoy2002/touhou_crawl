@@ -23,6 +23,7 @@ extern class action_class;
 extern enum tribe_proper_type;
 extern enum ALCHEMY_LIST;
 extern enum dump_action_type;
+extern enum amulet_type;
 
 enum stat_up //스탯버프는 따로 두지않는다. 겹칠 가능성을 위해
 {
@@ -476,6 +477,8 @@ public:
 	item* GetItem(char id_);
 	list<item>::iterator GetItemIterator(char id_);
 	void auto_equip_iden();
+	bool isGrazeAmulet();
+	void resetAmuletPercent(amulet_type type_);
 	bool equip(char id_, equip_type type_, bool speak_ = true);
 	bool equip(list<item>::iterator &it, equip_type type_, bool speak_ = true);
 	bool equiparmor(char id_, bool speak_ = true);

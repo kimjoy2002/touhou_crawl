@@ -21,6 +21,7 @@
 #include "note.h"
 #include "tribe.h"
 #include "armour.h"
+#include "amulet.h"
 
 
 
@@ -813,6 +814,18 @@ bool item::isChargable()
 	{
 		if(value1<SpellcardMaxCharge((spellcard_evoke_type)value2))
 			return true;
+	}
+	return false;
+
+}
+bool item::isEvokable()
+{
+	if (type == ITM_SPELL || type == ITMS_MISCELLANEOUS)
+		return true;
+	if (type == ITM_AMULET) {
+		if (isCanEvoke((amulet_type)value1) && you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
+			return true;
+		}
 	}
 	return false;
 

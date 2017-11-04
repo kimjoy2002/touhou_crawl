@@ -135,6 +135,10 @@ bool skill_off_graze(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		if (you.isGrazeAmulet()) {
+			printlog("아뮬렛의 힘에 의해 그레이즈는 종료 시킬 수 없다.", true, false, false, CL_normal);
+			return false;
+		}
 		printlog("그레이즈를 멈췄다.",true,false,false,CL_normal);
 		you.s_graze = 0;
 		int temp = you.Ability(SKL_GRAZE_OFF,false,true,1);

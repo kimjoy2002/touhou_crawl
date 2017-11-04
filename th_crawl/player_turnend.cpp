@@ -884,6 +884,14 @@ void deadlog()
 	}
 }
 
+
+void resurectionlog(char* reason)
+{
+	char temp[200];
+	sprintf_s(temp, 200, "%s에 의해서 부활했다.", reason);
+	AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+}
+
 int caculScore();
 
 

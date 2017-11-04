@@ -31,8 +31,8 @@ char *ring_uniden_string[RGT_MAX]=
 	"비취",
 	"금",
 	"은",
-	"에메랄드 ",
-	"상아 "
+	"에메랄드 "
+	//"상아 "
 };
 
 const char *ring_iden_string[RGT_MAX]=
@@ -47,7 +47,7 @@ const char *ring_iden_string[RGT_MAX]=
 	"화염저항의 ",
 	"냉기저항의 ",
 	"투명감지의 ",
-	"그레이즈 ",
+	//"그레이즈 ",
 	"비행 ",
 	"투명 ",
 	"영력 ",
@@ -74,7 +74,7 @@ ring_type goodbadring(int good_bad)
 	if(good_bad>=0)
 	{
 		ring_type list_[18] = {RGT_STR, RGT_DEX, RGT_INT, RGT_FULL,RGT_POISON_RESIS,RGT_FIRE_RESIS,RGT_ICE_RESIS,
-		RGT_SEE_INVISIBLE,RGT_GRAZE,RGT_LEVITATION,RGT_INVISIBLE,RGT_MANA,RGT_MAGACIAN,RGT_AC, RGT_EV, RGT_CONFUSE_RESIS,
+		RGT_SEE_INVISIBLE/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,RGT_MANA,RGT_MAGACIAN,RGT_AC, RGT_EV, RGT_CONFUSE_RESIS,
 		RGT_ELEC_RESIS, RGT_MAGIC_RESIS
 		};
 		return list_[randA(17)];
@@ -101,7 +101,7 @@ int isGoodRing(ring_type kind, int value)
 	case RGT_FIRE_RESIS:
 	case RGT_ICE_RESIS:
 	case RGT_SEE_INVISIBLE:
-	case RGT_GRAZE:
+	//case RGT_GRAZE:
 	case RGT_LEVITATION:
 	case RGT_INVISIBLE:
 	case RGT_MANA:
@@ -133,7 +133,7 @@ int isPickableRIng(ring_type kind)
 	case RGT_FULL:
 	case RGT_POISON_RESIS:
 	case RGT_SEE_INVISIBLE:
-	case RGT_GRAZE:
+	//case RGT_GRAZE:
 	case RGT_LEVITATION:
 	case RGT_INVISIBLE:
 	case RGT_TELEPORT:
@@ -194,14 +194,14 @@ bool equipring(ring_type kind, int value)
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 1;
 		break;
-	case RGT_GRAZE:
+	/*case RGT_GRAZE:
 		{
 			if(value>0)
 				printlog("탄막을 피하는 감각이 날카로워짐을 느꼈다.",true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
-		}
+		}*/
 	case RGT_LEVITATION:
 		{
 			if(value>0)

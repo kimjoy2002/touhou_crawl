@@ -56,7 +56,7 @@ int GetAtifactValue(ring_type ring_, int good_bad_)
 	case RGT_TELEPORT:
 	case RGT_POISON_RESIS:
 	case RGT_SEE_INVISIBLE:
-	case RGT_GRAZE:
+	//case RGT_GRAZE:
 	case RGT_LEVITATION:
 	case RGT_INVISIBLE:
 	case RGT_MANA:
@@ -131,9 +131,9 @@ const char* GetAtifactString(ring_type ring_, int value_)
 	case RGT_SEE_INVISIBLE:
 		sprintf_s(temp,32,"투명감지");
 		break;
-	case RGT_GRAZE:
-		sprintf_s(temp,32,"+그레이즈");
-		break;
+	//case RGT_GRAZE:
+	//	sprintf_s(temp,32,"+그레이즈");
+	//	break;
 	case RGT_LEVITATION:
 		sprintf_s(temp,32,"+비행");
 		break;
@@ -215,9 +215,9 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 	case RGT_SEE_INVISIBLE:
 		sprintf_s(temp,128,"투명을 감지할 수 있다.");
 		break;
-	case RGT_GRAZE:
-		sprintf_s(temp,128,"그레이즈를 발동할 수 있다.");
-		break;
+	//case RGT_GRAZE:
+	//	sprintf_s(temp,128,"그레이즈를 발동할 수 있다.");
+	//	break;
 	case RGT_LEVITATION:
 		sprintf_s(temp,128,"비행을 발동할 수 있다.");
 		break;
@@ -288,19 +288,19 @@ bool effectartifact(ring_type kind, int value)
 	case RGT_SEE_INVISIBLE:
 		you.ResistUpDown(value,RST_INVISIBLE);
 		return false;
-	case RGT_GRAZE:
+	/*case RGT_GRAZE:
 		{	
 			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //그레이즈 해제를 삭제하고 수를 리턴
 			temp += you.Ability(SKL_GRAZE,false,true); //그레이즈 발동도 해제하고 수를 리턴
 
 			temp+=value;
 			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
-			if(temp <= 0 && you.s_graze)
+			if(temp <= 0 && you.s_graze && !you.isGrazeAmulet())
 			{
 				you.s_graze=0; 
 			}
 			return true;
-		}
+		}*/
 	case RGT_LEVITATION:
 		{
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true);

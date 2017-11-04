@@ -393,7 +393,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_TEST_RING:
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_GRAZE));		
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_AC));		
 		//it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0,1,&t));	
 		//MakeArtifact(it,1);
 		you.additem(it,false);

@@ -778,8 +778,8 @@ void tribe_property::gain(bool gain_)
 				you.SetGraze(-1);
 			//int temp = you.Ability(SKL_GRAZE,false,true,1);
 			//you.Ability(SKL_GRAZE_OFF,false,false,temp);
-			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
-			if(temp <= 0 && you.s_graze)
+			you.Ability((you.s_graze || you.isGrazeAmulet())?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_graze && !you.isGrazeAmulet())
 			{
 				you.s_graze=0; 
 			}

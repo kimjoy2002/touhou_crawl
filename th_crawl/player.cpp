@@ -1123,7 +1123,9 @@ int players::HpRecoverDelay(int delay_)
 	{
 		cacul_ += 100.0f;
 	}
-
+	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
+		cacul_ += max_hp/2;
+	}
 	if(GetProperty(TPT_REGEN)>0)
 	{
 		cacul_ += 40*GetProperty(TPT_REGEN);
@@ -1157,6 +1159,7 @@ interupt_type players::HpRecover(int delay_)
 }
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
 void deadlog();
+void resurectionlog(char* reason);
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	if(value_<0 && max_hp/2 <= -value_)
@@ -1181,10 +1184,27 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 	}	
 	if(hp<=0)
 	{
-		if(GetProperty(TPT_9_LIFE))
+		if (equipment[ET_NECK] && equipment[ET_NECK]->value1 == AMT_PERFECT && getAmuletPercent() >= 100)
 		{
-			
 			deadlog();
+			resurectionlog("완전 무결의 부적");
+			printlog("그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!", true, false, false, CL_white_blue);
+			MoreWait();
+			hp = max_hp;
+			mp = max_mp;
+			for (list<item>::iterator it = item_list.begin(); it != item_list.end(); it++)
+			{
+				if (&(*it) == equipment[ET_NECK]) {
+					you.resetAmuletPercent((amulet_type)equipment[ET_NECK]->value1);
+					DeleteItem(it);
+					break;
+				}
+			}
+		}
+		else if(GetProperty(TPT_9_LIFE))
+		{
+			deadlog();
+			resurectionlog("리저렉션");
 			printlog("리저렉션!",true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
 			MoreWait();
@@ -1196,6 +1216,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(GetProperty(TPT_18_LIFE))
 		{			
 			deadlog();
+			resurectionlog("리저렉션");
 			printlog("리저렉션!",true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
 			MoreWait();
@@ -1713,19 +1734,18 @@ void players::ExpRecovery(int exper_)
 		if (system_exp.value <= 0) {
 			system_exp.value = 0;
 			item* _item = you.equipment[ET_NECK];
-			char temp2[64];
 			if (_item && _item->type == ITM_AMULET){
-				if (isCanCharge((amulet_type)_item->value1)) {
-					printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
-				}
-				else {
-					printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+				chargingFinish((amulet_type)_item->value1, 1);
+				if (system_exp.value <= 0) {
+					if (isCanCharge((amulet_type)_item->value1)) {
+						printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
+					}
+					else {
+						printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+					}
 				}
 			}
-			
-
 		}
-
 	}
 	exper_recovery -= exper_;
 	if(exper_recovery<=0)
@@ -3608,10 +3628,41 @@ bool players::Evoke(char id_)
 				ReleaseMutex(mutx);
 
 				if(evoke_evokable((evoke_kind)(*it).value1))
-				{					
+				{
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;
 				}
+			}
+			if ((*it).type == ITM_AMULET)
+			{
+				if (equipment[ET_NECK] != &(*it))
+				{
+					printlog("끼고있는 부적만을 발동할 수 있다.", true, false, false, CL_normal);
+					ReleaseMutex(mutx);
+					return false;
+				}
+				if (!isCanEvoke((amulet_type)(*it).value1))
+				{
+					printlog("이 부적은 발동할 수 있는 부적이 아니다.", true, false, false, CL_normal);
+					ReleaseMutex(mutx);
+					return false;
+				}
+				if (you.getAmuletPercent() < 100)
+				{
+					printlog("부적의 충전율이 100%가 되어야 발동할 수 있다.", true, false, false, CL_normal);
+					ReleaseMutex(mutx);
+					return false;
+				}
+				ReleaseMutex(mutx);
+				if (evokeAmulet((amulet_type)(*it).value1)) {
+					you.doingActionDump(DACT_EVOKE, (*it).name.name);
+					resetAmuletPercent((amulet_type)(*it).value1);
+					return true;
+				}
+				else
+					return false;
+
+
 			}
 			else
 			{
@@ -4067,6 +4118,22 @@ void players::auto_equip_iden()
 		}
 	}
 }
+bool players::isGrazeAmulet()
+{
+	if (equipment[ET_NECK]) {
+		if (equipment[ET_NECK]->value1 == AMT_GRAZE && getAmuletPercent() >= 100) {
+			return true;
+		}
+	}
+	return false;
+}
+void players::resetAmuletPercent(amulet_type type_)
+{
+	system_exp.value = (GetNeedExp(max(level - 1, 0)) - GetNeedExp(max(level - 2, 0))) + 10;
+	system_exp.value *= getAmuletCharge(type_);
+	system_exp.maxi = system_exp.value;
+	chargingFinish(type_, -1);
+}
 bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 {
 	for(equip_type i = ET_FIRST;i!=ET_LAST;i=(equip_type)(i+1))
@@ -4124,9 +4191,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 		if (type_ == ET_NECK)
 		{
-			system_exp.value = (GetNeedExp(max(level - 1, 0)) - GetNeedExp(max(level - 2, 0))) + 10;
-			system_exp.value *= getAmuletCharge((amulet_type)(*it).value1);
-			system_exp.maxi = system_exp.value;
+			resetAmuletPercent((amulet_type)(*it).value1);
 		}
 
 		if(type_ != ET_WEAPON || ((*it).type >= ITM_WEAPON_FIRST && (*it).type < ITM_WEAPON_LAST)) //무기를 장착했을때

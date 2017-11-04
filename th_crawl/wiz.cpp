@@ -18,6 +18,7 @@
 #include "map.h"
 #include "evoke.h"
 #include "god.h"
+#include "tribe.h"
 
 
 extern HANDLE mutx;
@@ -171,15 +172,15 @@ void wiz_mode()
 				case 'r':
 					{
 						int list[] = {RGT_STR,RGT_DEX,RGT_INT,RGT_HUNGRY,RGT_FULL,RGT_TELEPORT,RGT_POISON_RESIS,
-							RGT_FIRE_RESIS,	RGT_ICE_RESIS,RGT_SEE_INVISIBLE,RGT_GRAZE,RGT_LEVITATION,RGT_INVISIBLE,
+							RGT_FIRE_RESIS,	RGT_ICE_RESIS,RGT_SEE_INVISIBLE/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,
 							RGT_MANA,RGT_MAGACIAN,RGT_AC,RGT_EV,RGT_CONFUSE_RESIS,	RGT_ELEC_RESIS,RGT_MAGIC_RESIS};
 						enterlog();
 						printlog("a-힘 b-민첩 c-지능 d-허기 e-만복도 f-공간이동 g-독저항 h-화염저항",true,false,false,CL_help);
-						printlog("i-냉기저항 j-투명보기 k-그레이즈 l-비행 m-투명 n-영력 o-마법사 p-방어",true,false,false,CL_help);
-						printlog("q-회피 r-혼란저항 s-전기저항 t-마법저항 !-아티펙트",true,false,false,CL_help);
+						printlog("i-냉기저항 j-투명보기 k-비행 l-투명 m-영력 n-마법사 o-방어",true,false,false,CL_help);
+						printlog("p-회피 q-혼란저항 r-전기저항 s-마법저항 !-아티펙트",true,false,false,CL_help);
 						printlog("어느 반지를 얻어볼까?",false,false,false,CL_help);
 						key_ = waitkeyinput();
-						if(key_ >= 'a' && key_ <= 't')
+						if(key_ >= 'a' && key_ <= 's')
 						{
 							item_infor t;
 							makeitem(ITM_RING, 0, &t,  list[key_-'a']);
@@ -253,6 +254,28 @@ void wiz_mode()
 			you.HpUpDown(you.max_hp,DR_EFFECT);
 			you.MpUpDown(you.max_mp);
 			you.PowUpDown(500,true);
+			break;
+		case 'g':
+			printlog("용의 마지막 특성이 발현되었다. 당신은 공기의 흐름을 다룰 수 있게 되었다.", true, false, false, CL_small_danger);
+			you.SetProperty(TPT_GRAZE_CONTROL, 1);
+			break;
+		case 'P':
+			you.system_exp.value = 0;
+			if (you.system_exp.value <= 0) {
+				you.system_exp.value = 0;
+				item* _item = you.equipment[ET_NECK];
+				if (_item && _item->type == ITM_AMULET) {
+					chargingFinish((amulet_type)_item->value1, 1);
+					if (you.system_exp.value <= 0) {
+						if (isCanCharge((amulet_type)_item->value1)) {
+							printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
+						}
+						else {
+							printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+						}
+					}
+				}
+			}
 			break;
 		case 'X':
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper);
@@ -527,6 +550,9 @@ void wiz_mode()
 			if(you.god != GT_SEIJA)
 				you.PietyUpDown(10);
 			you.GiftCount(10);
+			break;
+		case 'o':
+			you.hp = 1;
 			break;
 		case 'C':
 			{

@@ -582,6 +582,20 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 
 	}
+	if (s_super_graze)
+	{
+		s_super_graze--;
+		if (!s_super_graze)
+		{
+			printlog("당신의 근성 회피는 끝났다.", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+		if (s_super_graze == 3)
+		{
+			printlog("당신의 근성 회피가 끝나가고있다.", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
 
 
 	if(s_slaying)

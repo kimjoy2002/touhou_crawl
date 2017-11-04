@@ -173,7 +173,8 @@ bool evokeAmulet(amulet_type kind)
 		return recharging_scroll(true, true);
 		break;
 	case AMT_GRAZE:
-		//근성회피 추가
+		you.SetSuperGraze(rand_int(10, 15));
+		printlog("당신은 순간적으로 회피에 모든 신경을 쏟는다!", false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
 		printlog("당신은 체력을 회복했다. ", false, false, false, CL_normal);

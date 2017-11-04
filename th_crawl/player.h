@@ -244,6 +244,7 @@ public:
 	bool force_strong; //강화/약화(위력 2배 1/2배)
 	int force_turn; //강화/약화턴
 	int s_unluck;
+	int s_super_graze;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -434,6 +435,7 @@ public:
 	bool SetStasis(int s_stasis_);
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
 	bool SetUnluck(int s_unluck_);
+	bool SetSuperGraze(int s_super_graze_);
 	
 	int GetInvisible();
 	int GetSaved(){return true;};
@@ -442,6 +444,7 @@ public:
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
 	int GetExhausted(){return s_exhausted;};
+	int GetSuperGraze() { return s_super_graze; };
 	bool GetPunish(god_type god_);
 	int GetSkillLevel(int skill_, bool bonus_);
 	int DeleteProperty(tribe_proper_type type_);

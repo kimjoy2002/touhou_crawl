@@ -707,6 +707,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 	float evasion = 0.0f;
 	float shield_ = 0.0f;
 	bool graze_ = false;
+	if (accuracy_ >= 99)
+		perfect_ = true;
 
 	if(a.type < ATT_THROW_NORMAL)
 	{
@@ -790,7 +792,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	name_infor name_;
 	if(a.order)	
 		name_ = (*a.order->GetName());
-	if((randA(1000)>=evasion*1000 && !graze_ ) || perfect_)
+	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze) || perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
@@ -922,9 +924,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	}
 	else
 	{
-		if(a.order)
+		if (a.order)
 		{
-			if(!graze_)
+			if (!graze_ || you.s_super_graze)
 				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"피했다.");
 			else 
 				printarray(true,false,false,a.order->isView()?CL_normal:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"그레이즈 했다.");

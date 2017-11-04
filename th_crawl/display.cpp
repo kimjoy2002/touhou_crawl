@@ -1074,6 +1074,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"피로", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
 				rc.left += fontDesc.Width*5;
 			}
+			if (you.s_super_graze)
+			{
+				pfont->DrawTextA(pSprite, "근성회피", -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_super_graze>3? CL_normal :CL_white_blue);
+				rc.left += fontDesc.Width * 9;
+
+			}
 			if(you.s_trans_panalty)
 			{
 				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=2?CL_bad:(you.s_trans_panalty<5?CL_warning:CL_small_danger));
@@ -1302,7 +1308,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite,"발광", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
 				rc.left += fontDesc.Width*5;	
 			}
-			if(you.s_graze)
+			if(you.s_graze && !you.s_super_graze)
 			{
 				pfont->DrawTextA(pSprite,"그레이즈", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_graze<0?CL_normal:you.s_graze>10?CL_white_blue:CL_blue);
 				rc.left += fontDesc.Width*9;	

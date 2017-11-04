@@ -72,7 +72,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
-force_strong(false), force_turn(0), s_unluck(0),
+force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0),
  alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -246,7 +246,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_stasis);
 	SaveData<bool>(fp, force_strong);
 	SaveData<int>(fp, force_turn);
-	SaveData<int>(fp, s_unluck);	
+	SaveData<int>(fp, s_unluck);
+	SaveData<int>(fp, s_super_graze);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -463,7 +464,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_stasis);
 	LoadData<bool>(fp, force_strong);
 	LoadData<int>(fp, force_turn);
-	LoadData<int>(fp, s_unluck);	
+	LoadData<int>(fp, s_unluck);
+	LoadData<int>(fp, s_super_graze);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -2723,6 +2725,12 @@ bool players::SetUnluck(int s_unluck_)
 	s_unluck += s_unluck_;
 	if(s_unluck > 10)
 		s_unluck = 10;
+	return true;
+}
+
+bool players::SetSuperGraze(int s_super_graze_)
+{
+	s_super_graze += s_super_graze_;
 	return true;
 }
 int players::GetInvisible()

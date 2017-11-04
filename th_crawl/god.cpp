@@ -2040,7 +2040,6 @@ void GodInfor(god_type god)
 		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_normal);
 		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_normal);
 		printsub("당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. ",true,CL_normal);
-		printsub("릴리 화이트는 무슨 이유에서인지 스펠카드를 쓰는 것을 증오하므로 믿게되면 스펠카드를 쓸 수 없게 된다.",true,CL_normal);
 		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_normal);
 		printsub("릴리화이트는 이 세상을 탐험하는 것을 좋아한다.",true,CL_normal);
 		printsub("",true,CL_normal);

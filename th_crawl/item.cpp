@@ -428,10 +428,6 @@ const D3DCOLOR item::item_color()
 			{
 				return_ = CL_danger;
 			}
-			if(you.god == GT_LILLY && (value1 == SCT_CHARGING))
-			{
-				return_ = CL_bad;
-			}		
 		}
 		break;
 	case ITM_RING:
@@ -442,10 +438,6 @@ const D3DCOLOR item::item_color()
 		}
 		break;
 	case ITM_SPELL:
-		if(you.god == GT_LILLY)
-		{
-			return_ = CL_bad;
-		}	
 		break;
 	case ITM_AMULET:
 		if(iden_list.amulet_list[value1].iden == 2)

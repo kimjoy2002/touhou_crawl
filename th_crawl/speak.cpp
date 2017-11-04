@@ -4448,6 +4448,40 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}		
 		break;
+	case MON_MURASA:
+		break;
+	case MON_KEINE:
+		break;
+	case MON_KEINE2:
+		break;
+	case MON_YOUMU:
+		break;
+	case MON_LYRICA:
+		break;
+	case MON_MERLIN:
+		break;
+	case MON_LUNASA:
+		break;
+	case MON_KOMACHI:
+		break;
+	case MON_IKU:
+		break;
+	case MON_LARVA:
+		break;
+	case MON_NEMUNO:
+		break;
+	case MON_AUNN:
+		break;
+	case MON_NARUMI:
+		break;
+	case MON_MAI2:
+		break;
+	case MON_SATONO:
+		break;
+	case MON_KOKORO:
+		break;
+	case MON_SUMIREKO:
+		break;
 	default:
 		break;
 	}

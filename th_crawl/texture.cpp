@@ -425,6 +425,33 @@ textures img_named_flandre(&texture_monster01, 143, 255);
 textures img_named_tewi(&texture_monster01, 144, 255);
 textures img_named_clownpiece(&texture_monster01, 145, 255);
 textures img_named_doremi(&texture_monster01, 146, 255);
+textures img_named_murasa(&texture_monster01, 189, 255);
+textures img_named_keine(&texture_monster01, 191, 255);
+textures img_named_keine2(&texture_monster01, 192, 255);
+textures img_named_youmu(&texture_monster01, 193, 255);
+textures img_named_lyrica(&texture_monster01, 194, 255);
+textures img_named_merlin(&texture_monster01, 195, 255);
+textures img_named_lunasa(&texture_monster01, 196, 255);
+textures img_named_komachi(&texture_monster01, 197, 255);
+textures img_named_iku(&texture_monster01, 200, 255);
+textures img_named_larva(&texture_monster01, 201, 255);
+textures img_named_nemuno(&texture_monster01, 202, 255);
+textures img_named_aunn(&texture_monster01, 203, 255);
+textures img_named_narumi(&texture_monster01, 204, 255);
+textures img_named_mai(&texture_monster01, 205, 255);
+textures img_named_satono(&texture_monster01, 206, 255);
+textures img_named_kokoro[] =
+{
+	textures(&texture_monster01, 208, 255),
+	textures(&texture_monster01, 209, 255),
+	textures(&texture_monster01, 210, 255),
+	textures(&texture_monster01, 211, 255)
+};
+textures img_named_sumireko(&texture_monster01, 215, 255);
+
+
+
+
 
 
 
@@ -1768,6 +1795,46 @@ int texturetoint(textures* input)
 		return 328;
 	else if(input == &img_effect_emerald_uplift[1])
 		return 329;
+	else if (input == &img_named_murasa)
+		return 330;
+	else if (input == &img_named_keine)
+		return 331;
+	else if (input == &img_named_keine2)
+		return 332;
+	else if (input == &img_named_youmu)
+		return 333;
+	else if (input == &img_named_lyrica)
+		return 334;
+	else if (input == &img_named_merlin)
+		return 335;
+	else if (input == &img_named_lunasa)
+		return 336;
+	else if (input == &img_named_komachi)
+		return 337;
+	else if (input == &img_named_iku)
+		return 338;
+	else if (input == &img_named_larva)
+		return 339;
+	else if (input == &img_named_nemuno)
+		return 340;
+	else if (input == &img_named_aunn)
+		return 341;
+	else if (input == &img_named_narumi)
+		return 342;
+	else if (input == &img_named_mai)
+		return 343;
+	else if (input == &img_named_satono)
+		return 344;
+	else if (input == &img_named_kokoro[0])
+		return 345;
+	else if (input == &img_named_kokoro[1])
+		return 346;
+	else if (input == &img_named_kokoro[2])
+		return 347;
+	else if (input == &img_named_kokoro[3])
+		return 348;
+	else if (input == &img_named_sumireko)
+		return 349;
 	else
 		return 0;
 }
@@ -2435,6 +2502,46 @@ textures* inttotexture(int input)
 		return &img_effect_emerald_uplift[0];
 	case 329:
 		return &img_effect_emerald_uplift[1];
+	case 330:
+		return &img_named_murasa;
+	case 331:
+		return &img_named_keine;
+	case 332:
+		return &img_named_keine2;
+	case 333:
+		return &img_named_youmu;
+	case 334:
+		return &img_named_lyrica;
+	case 335:
+		return &img_named_merlin;
+	case 336:
+		return &img_named_lunasa;
+	case 337:
+		return &img_named_komachi;
+	case 338:
+		return &img_named_iku;
+	case 339:
+		return &img_named_larva;
+	case 340:
+		return &img_named_nemuno;
+	case 341:
+		return &img_named_aunn;
+	case 342:
+		return &img_named_narumi;
+	case 343:
+		return &img_named_mai;
+	case 344:
+		return &img_named_satono;
+	case 345:
+		return &img_named_kokoro[0];
+	case 346:
+		return &img_named_kokoro[1];
+	case 347:
+		return &img_named_kokoro[2];
+	case 348:
+		return &img_named_kokoro[3];
+	case 349:
+		return &img_named_sumireko;
 	default:
 		return &img_mons_default;
 	}

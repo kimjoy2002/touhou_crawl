@@ -212,6 +212,23 @@ extern textures img_named_reimu;
 extern textures img_named_alice;
 extern textures img_named_udonge;
 extern textures img_named_kaguya;
+extern textures img_named_murasa;
+extern textures img_named_keine;
+extern textures img_named_keine2;
+extern textures img_named_youmu;
+extern textures img_named_lyrica;
+extern textures img_named_merlin;
+extern textures img_named_lunasa;
+extern textures img_named_komachi;
+extern textures img_named_iku;
+extern textures img_named_larva;
+extern textures img_named_nemuno;
+extern textures img_named_aunn;
+extern textures img_named_narumi;
+extern textures img_named_mai;
+extern textures img_named_satono;
+extern textures img_named_kokoro[4];
+extern textures img_named_sumireko;
 
 
 

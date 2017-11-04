@@ -751,6 +751,58 @@ string GetMonsterInfor(monster *it)
 		text_ += "자신의 재미를 위해서면 어떤 일이든 하는 성격으로 이번의 표적은 바로 당신인듯 하다.\n";
 		text_ += "당신이 죽어서 강시가 될지, 아니면 술법의 실험대가 될지는 그녀만이 알 것이다.\n";
 		break;
+	case MON_MURASA:
+		text_ += "배유령의 요괴. 배를 침몰 시키는 능력을 지녔다.\n";
+		text_ += "무거워 보이는 듯한 닻을 던져 공격해온다. 닻에 맞게되면 이동이 봉인 당한다.\n";
+		break;
+	case MON_KEINE:
+		text_ += "\n";
+		break;
+	case MON_KEINE2:
+		text_ += "\n";
+		break;
+	case MON_YOUMU:
+		text_ += "\n";
+		break;
+	case MON_LYRICA:
+		text_ += "\n";
+		break;
+	case MON_MERLIN:
+		text_ += "\n";
+		break;
+	case MON_LUNASA:
+		text_ += "\n";
+		break;
+	case MON_KOMACHI:
+		text_ += "\n";
+		break;
+	case MON_IKU:
+		text_ += "\n";
+		break;
+	case MON_LARVA:
+		text_ += "\n";
+		break;
+	case MON_NEMUNO:
+		text_ += "\n";
+		break;
+	case MON_AUNN:
+		text_ += "\n";
+		break;
+	case MON_NARUMI:
+		text_ += "\n";
+		break;
+	case MON_MAI2:
+		text_ += "\n";
+		break;
+	case MON_SATONO:
+		text_ += "\n";
+		break;
+	case MON_KOKORO:
+		text_ += "\n";
+		break;
+	case MON_SUMIREKO:
+		text_ += "\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

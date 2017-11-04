@@ -758,7 +758,7 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_MERLIN,1,1,name_infor("¸Þ¸¦¶û",false),&img_named_merlin,1,0,0,
+	{ MON_MERLIN,1,1,name_infor("¸Þ¸¦¶û",true),&img_named_merlin,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
@@ -782,7 +782,7 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_AUNN,1,1,name_infor("¾Æ¿õ",false),&img_named_aunn,1,0,0,
+	{ MON_AUNN,1,1,name_infor("¾Æ¿õ",true),&img_named_aunn,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 

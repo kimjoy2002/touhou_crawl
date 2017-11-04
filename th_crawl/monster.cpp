@@ -3646,7 +3646,7 @@ bool monster::isSimpleState(monster_state_simple state_)
 	switch (state_)
 	{
 		case MSS_WANDERING:
-			return (state.GetState() == MS_NORMAL) || (state.GetState() == MS_ATACK && target != &you);
+			return (!isUserAlly() && state.GetState() == MS_NORMAL) || (!isUserAlly() && state.GetState() == MS_ATACK && target != &you);
 		case MSS_SLOW:
 			return (s_slow != 0) && s_haste == 0;
 		case MSS_HASTE:
@@ -3676,7 +3676,7 @@ monster_state_simple monster::GetSimpleState()
 
 	if(state.GetState() == MS_NORMAL)
 		temp = MSS_WANDERING;
-	if(state.GetState() == MS_ATACK && target != &you)
+	if(!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
 		temp = MSS_WANDERING;
 	if((s_slow != 0) && s_haste == 0)
 		temp = MSS_SLOW;

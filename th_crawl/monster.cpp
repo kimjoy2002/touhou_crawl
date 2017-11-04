@@ -967,49 +967,49 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_STRONG_POISON:
 		default:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다.");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다. ");
 			break;
 		case ATT_FIRE:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다.");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다. ");
 			break;
 		case ATT_COLD:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다.");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다. ");
 			break;
 		case ATT_NORMAL_HIT:			
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 들어갔다.");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 들어갔다. ");
 			break;
 		case ATT_SMITE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다.");
+				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
 			}
 			break;
 		case ATT_BLOOD:	
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 피가 터져나왔다.");
+				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 피가 터져나왔다. ");
 			}
 			break;
 		case ATT_NOISE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,3,"굉음이 ",GetName()->name.c_str(),"의 달팽이관을 강타했다.");
+				printarray(false,false,false,CL_normal,3,"굉음이 ",GetName()->name.c_str(),"의 달팽이관을 강타했다. ");
 			}
 			break;
 		case ATT_CLOUD_FIRE:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다. ");
 			break;
 		case ATT_CLOUD_COLD:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다. ");
 			break;		
 		case ATT_CLOUD_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
 			break;				
 		case ATT_STONE_TRAP:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다. ");
 			break;			
 		case ATT_FIRE_BLAST:
 		case ATT_COLD_BLAST: 
@@ -1020,39 +1020,39 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_POISON_BLAST:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다.");
+				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다. ");
 			}
 			break;
 		case ATT_COLD_PYSICAL_BLAST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"눈보라에 휘말렸다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"눈보라에 휘말렸다. ");
 			break;			
 		case ATT_BURST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다. ");
 			break;
 		case ATT_CLOUD_NORMAL:
 		case ATT_CLOUD_CURSE:
 			break;
 		case ATT_VEILING:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람 갑옷에 베였다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람 갑옷에 베였다. ");
 			break;
 		case ATT_RUSH:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"맞았다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"맞았다. ");
 			break;
 		case ATT_WALL:			
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"부딪혔다.");
+				printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"부딪혔다. ");
 			}
 			else
 			{
-				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다.");
+				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다. ");
 			}
 			break;
 		case ATT_ELEC:
 			if(!GetElecResist())
 				break;
 		case ATT_THROW_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
 			break;
 		case ATT_THROW_NONE_MASSAGE:
 			break;
@@ -1065,24 +1065,24 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			switch(a.order->GetAttackType())
 			{	
 			case AWT_SHORTBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 꿰뚫었다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 꿰뚫었다. ");
 				break;
 			case AWT_LONGBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 잘라냈다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 잘라냈다. ");
 				break;
 			case AWT_MACE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 내리쳤다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 내리쳤다. ");
 				break;
 			case AWT_AXE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 찍었다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 찍었다. ");
 				break;
 			case AWT_SPEAR:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),name.name.c_str(),name.name_to(true),"뒤에서 꿰뚫었다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),name.name.c_str(),name.name_to(true),"뒤에서 꿰뚫었다. ");
 				break;
 			case AWT_UNARMOUR:
 			case AWT_NONE:
 			default:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 기습했다.");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 기습했다. ");
 				break;
 			}
 		}

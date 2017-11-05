@@ -489,10 +489,10 @@ bool blink_scroll(bool pre_iden_)
 	{
 		switch(waitkeyinput())
 		{
-		case 'j':
+		case 'k':
 			is_move = Search_Move(coord_def(you.position.x,you.position.y-1), false,VT_BLINK);  //À§
 			break;
-		case 'k':
+		case 'j':
 			is_move = Search_Move(coord_def(you.position.x,you.position.y+1), false,VT_BLINK); //¾Æ·¡
 			break;
 		case 'h':

@@ -198,10 +198,10 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	{
 		switch(waitkeyinput())
 		{
-		case 'j':
+		case 'k':
 			good_path = refreshPath(coord_def(you.position.x,you.position.y-1), beam, it, infor_, m_len_, sector_);
 			break;
-		case 'k':
+		case 'j':
 			good_path = refreshPath(coord_def(you.position.x,you.position.y+1), beam, it, infor_, m_len_, sector_);
 			break;
 		case 'h':
@@ -376,10 +376,10 @@ bool Direc_Throw(coord_def* c)
 		int key_=waitkeyinput();
 		switch(key_)
 		{
-		case 'j':
+		case 'k':
 			(*c) = coord_def(you.position.x,you.position.y-1);
 			return true;
-		case 'k':
+		case 'j':
 			(*c) = coord_def(you.position.x,you.position.y+1);
 			return true;
 		case 'h':

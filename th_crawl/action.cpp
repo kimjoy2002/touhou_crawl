@@ -694,10 +694,10 @@ void Search()
 	{
 		switch(waitkeyinput())
 		{
-		case 'j':
+		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //위
 			break;
-		case 'k':
+		case 'j':
 			Move(coord_def(you.position.x,you.position.y+1)); //아래
 			break;
 		case 'h':
@@ -772,10 +772,10 @@ void Wide_Search()
 		case '8':
 		case '9':
 			break;
-		case 'j':
+		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //위
 			break;
-		case 'k':
+		case 'j':
 			Move(coord_def(you.position.x,you.position.y+1)); //아래
 			break;
 		case 'h':
@@ -796,10 +796,10 @@ void Wide_Search()
 		case 'u':
 			Move(coord_def(you.position.x+1,you.position.y-1));
 			break;
-		case 'J':
+		case 'K':
 			Move(coord_def(you.position.x,you.position.y-8));  //위
 			break;
-		case 'K':
+		case 'J':
 			Move(coord_def(you.position.x,you.position.y+8)); //아래
 			break;
 		case 'H':
@@ -971,11 +971,11 @@ void Close_door()
 		{
 			switch(waitkeyinput())
 			{
-			case 'j':
+			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
 				door_num = 1;
 				break;
-			case 'k':
+			case 'j':
 				temp = coord_def(you.position.x,you.position.y+1);
 				door_num = 1;
 				break;
@@ -1055,11 +1055,11 @@ void Open_door()
 		{
 			switch(waitkeyinput())
 			{
-			case 'j':
+			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
 				door_num = 1;
 				break;
-			case 'k':
+			case 'j':
 				temp = coord_def(you.position.x,you.position.y+1);
 				door_num = 1;
 				break;

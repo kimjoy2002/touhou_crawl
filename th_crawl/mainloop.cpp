@@ -406,10 +406,10 @@ void MainLoop()
 		you.prev_mp[1] = you.mp;
 		switch(char_)
 		{
-		case 'j':
+		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //À§
 			break;
-		case 'k':
+		case 'j':
 			Move(coord_def(you.position.x,you.position.y+1)); //¾Æ·¡
 			break;
 		case 'h':

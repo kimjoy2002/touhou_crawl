@@ -74,11 +74,11 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			{
 			case '8':
 				if(direction_ || shift_check) break; //원래는 if(direction_)만있었는데 뭔가 꼬임
-				return (shift_check)?'*':'j';
+				return (shift_check)?'*':'k';
 			case VK_UP:
 			case VK_NUMPAD8:
 				if(direction_) return VK_UP;
-				return 'j';
+				return 'k';
 				break;
 			case '4':
 				if(direction_ || shift_check) break;
@@ -98,11 +98,11 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 				break;
 			case '2':
 				if(direction_ || shift_check) break;
-				return (shift_check)?'@':'k';
+				return (shift_check)?'@':'j';
 			case VK_DOWN:
 			case VK_NUMPAD2:	
 				if(direction_) return VK_DOWN;
-				return 'k';
+				return 'j';
 				break;			
 			case '1':		
 				if(direction_ || shift_check) break;

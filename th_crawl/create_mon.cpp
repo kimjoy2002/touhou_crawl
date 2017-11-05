@@ -349,7 +349,8 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  18,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 	{  49,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //책읽는요괴(토키코)
 	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
-	
+
+	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
@@ -357,7 +358,8 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
 	//{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리(현재버젼에선 벌트로 등장)
 
-	
+
+	{ 57,  SCARLET_LEVEL , SCARLET_LEVEL + 3,  20,  4 }, //프리즘리버
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
@@ -1074,6 +1076,9 @@ int get_unique_to_id(int m_id)
 	case MON_KEINE:
 	case MON_KEINE2: return 55;
 	case MON_YOUMU: return 56;
+	case MON_LYRICA:
+	case MON_MERLIN:
+	case MON_LUNASA:  return 57;
 	}
 }
 
@@ -1300,6 +1305,11 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 56:
 		index.push_back(MON_YOUMU);
+		break;
+	case 57:
+		index.push_back(MON_LYRICA);
+		index.push_back(MON_MERLIN);
+		index.push_back(MON_LUNASA);
 		break;
 	}
 
@@ -1815,6 +1825,13 @@ void SetResistMonster(monster* mon)
 	case MON_YOUMU:
 		mon->ice_resist = 1;
 		mon->poison_resist = 1;
+		break;
+	case MON_LYRICA:
+	case MON_MERLIN:
+	case MON_LUNASA:
+		mon->elec_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	}
 }

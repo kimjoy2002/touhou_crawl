@@ -3958,6 +3958,18 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BLINK, 20));
 		list->push_back(spell(SPL_SLOW, 15));
 		break;
+	case MON_LYRICA:
+		list->push_back(spell(SPL_LASER, 35));
+		list->push_back(spell(SPL_BLINK, 20));
+		break;
+	case MON_MERLIN:
+		list->push_back(spell(SPL_CONFUSE, 35));
+		list->push_back(spell(SPL_BLINK, 20));
+		break;
+	case MON_LUNASA:
+		list->push_back(spell(SPL_SLOW, 35));
+		list->push_back(spell(SPL_BLINK, 20));
+		break;
 	default:
 		break;
 	}

@@ -200,8 +200,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end(); it++)
 		{
 			if((you.position.x-it->position.x)*(you.position.x-it->position.x)+(you.position.y-it->position.y)*(you.position.y-it->position.y)<=2)
-			{					
-				it->SetPoison(5+randA(5), 50, false);
+			{		
+				if(!it->isUserAlly())
+					it->SetPoison(5+randA(5), 50, false);
 			}
 		}
 	}

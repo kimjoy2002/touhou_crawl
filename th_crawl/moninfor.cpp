@@ -767,7 +767,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "평소보다 행동 속도가 급격히 빨라졌고 특히 그녀의 뿔에 박히면 상처없이는 지나갈 수 없을 것이다.\n";
 		break;
 	case MON_YOUMU:
-		text_ += "\n";
+		text_ += "반인 반령의 정원사로서 백옥루를 지키는 경호원이기도 하다.\n";
+		text_ += "발이 빠르고 공격이 아주 빠르기때문에 순식간에 적과 거리를 좁혀서 베어낸다.\n";
 		break;
 	case MON_LYRICA:
 		text_ += "\n";

@@ -747,12 +747,12 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,3,10 },
 
 	{ MON_KEINE2,15,4212,name_infor("백택 케이네",false),&img_named_keine2,140,0,15,
-	{ 30,45,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor("공격",true),name_infor("박치기",false),name_infor() },
+	{ 30,30,55 },{ ATT_NORMAL,ATT_NORMAL,ATT_NORMAL },{ name_infor("공격",true), name_infor("공격",true), name_infor("박치기",false) },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE  | M_FLAG_SPEAK,1,0,7 },
 
-	{ MON_YOUMU,1,1,name_infor("요우무",false),&img_named_youmu,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_YOUMU,21,9465,name_infor("요우무",false),&img_named_youmu,250,0,20,
+	{ 38,46,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor("백루검",true),name_infor("루관검",true),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,5 },
 		
 	{ MON_LYRICA,1,1,name_infor("리리카",false),&img_named_lyrica,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

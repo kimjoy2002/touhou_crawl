@@ -384,6 +384,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //세이가
 	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  20 }, //무라사
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  20,  3}, //마미조
+	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  20,  3 }, //요우무
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
@@ -1072,6 +1073,7 @@ int get_unique_to_id(int m_id)
 	case MON_MURASA: return 54;
 	case MON_KEINE:
 	case MON_KEINE2: return 55;
+	case MON_YOUMU: return 56;
 	}
 }
 
@@ -1295,6 +1297,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 55:
 		index.push_back(MON_KEINE);
+		break;
+	case 56:
+		index.push_back(MON_YOUMU);
 		break;
 	}
 
@@ -1806,6 +1811,10 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_KEINE2:
 		mon->confuse_resist = 1;
+		break;
+	case MON_YOUMU:
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
 		break;
 	}
 }

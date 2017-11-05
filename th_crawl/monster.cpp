@@ -2461,9 +2461,9 @@ int monster::action(int delay_)
 					state.SetState(MS_FOLLOW);
 				}
 			}
-
-			if(state.GetState() == MS_ATACK && isUserAlly() && target == &you)
+			if(state.GetState() == MS_ATACK && isUserAlly() && (target == NULL ||target == &you))
 			{
+				target = &you;
 				state.SetState(MS_FOLLOW);
 			}
 			if((flag & M_FLAG_SUMMON)  && isUserAlly() && !env[current_level].isInSight(target_pos) )

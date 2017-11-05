@@ -1013,10 +1013,19 @@ int players::GetSpellSuccess(int spell_)
 	//	differ_ -= min(0,equipment[ET_ARMOR]->value2+(!GetArmourPanlty()?1:0));
 	//	differ_ += 2*max(0,GetArmourPanlty()-1);
 	//}
-	if(you.as_penalty>0)
+	if (you.as_penalty > 0)
 	{
-		if(!(you.god == GT_BYAKUREN && !you.GetPunish(GT_BYAKUREN) && pietyLevel(you.piety)>=3) || (as_penalty > GetPenaltyMinus(1)))
-			differ_ += as_penalty*2;
+		if (!(you.god == GT_BYAKUREN && !you.GetPunish(GT_BYAKUREN) && pietyLevel(you.piety) >= 3) || (as_penalty > GetPenaltyMinus(1)))
+		{
+			if (as_penalty > GetPenaltyMinus(1)) {
+				differ_ += as_penalty * 2;
+			}
+			else {
+				//갑옷 방해도가 낮을때는 마법방해가 그정도로 높지않음
+				differ_ += as_penalty;
+			}
+
+		}
 	}
 
 	success_ = max(0,(success_-differ_<=14)?(success_-differ_)*(2*14+(success_-differ_-1)*-1.07)/2:99);

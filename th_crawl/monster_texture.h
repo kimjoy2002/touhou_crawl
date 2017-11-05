@@ -140,6 +140,16 @@ extern textures img_mons_futo;
 extern textures img_mons_mamizo;
 extern textures img_mons_seiga;
 
+extern textures img_mons_anchor;
+extern textures img_mons_mask_angry;
+extern textures img_mons_mask_sad;
+extern textures img_mons_mask_happy;
+extern textures img_mons_trash[4];
+extern textures img_mons_occult_long;
+extern textures img_mons_occult_disk;
+extern textures img_mons_occult_small;
+extern textures img_mons_occult_kunekune;
+
 
 
 

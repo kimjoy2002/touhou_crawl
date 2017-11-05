@@ -100,6 +100,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_SUMMON_NAMAZ:
+	case SPL_SUMMON_ANCHOR:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;		
 	case SPL_FLAN_BUSIN:
 		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
@@ -275,6 +276,7 @@ int SpellLength(spell_list skill)
 	case SPL_FIRE_SPREAD:
 	case SPL_SUMMON_NAMAZ:
 	case SPL_AIR_STRIKE:
+	case SPL_SUMMON_ANCHOR:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -606,6 +608,8 @@ const char* SpellString(spell_list skill)
 		return "어텀 블레이드";
 	case SPL_PHILOSOPHERS_STONE:
 		return "현자의 돌";
+	case SPL_SUMMON_ANCHOR:
+		return "침몰 앵커";
 	default:
 		return "알수없는 마법";
 	}
@@ -695,6 +699,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THUNDER:
 	case SPL_EMERALD_CITY:
 	case SPL_STONE_UPLIFT:
+	case SPL_SUMMON_ANCHOR:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -880,6 +885,7 @@ int SpellNoise(spell_list skill)
 	case SPL_STONE_UPLIFT:
 	case SPL_THUNDER:
 	case SPL_PHILOSOPHERS_STONE:
+	case SPL_SUMMON_ANCHOR:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1177,6 +1183,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_PHILOSOPHERS_STONE:
 		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
+	case SPL_SUMMON_ANCHOR:
+		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1240,6 +1248,7 @@ int SpellCap(spell_list skill)
 	case SPL_KYOKO_SMITE:
 	case SPL_MUTE:
 	case SPL_STONE_UPLIFT:
+	case SPL_SUMMON_ANCHOR:
 		return 100;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:

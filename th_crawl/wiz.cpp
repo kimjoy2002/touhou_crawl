@@ -552,6 +552,14 @@ void wiz_mode()
 				  }
 			}
 			break;
+		case '.':
+			for (int i = randA(3) + 1; i>0; i--)
+			{
+				BaseSummon(MON_ONBASIRA, rand_int(10, 30), true, false, 2, NULL, you.position, SKD_OTHER, -1);
+			}
+			printarray(true, false, false, CL_help, 1, "카나코는 당신에게 온바시라를 꽂았다!");
+			env[current_level].MakeNoise(you.position, 16, NULL);
+			break;
 		case '^':
 			if(you.god != GT_SEIJA)
 				you.PietyUpDown(10);

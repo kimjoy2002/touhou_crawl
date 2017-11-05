@@ -28,6 +28,25 @@
 extern players you;
 extern HANDLE mutx;
 
+bool CheckMonsterPassive(int turn)
+{
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (you.GetPunish(GT_KANAKO))
+		{
+			if (it->isLive() && it->GetId() == MON_ONBASIRA && !it->isUserAlly() && distan_coord(you.position, it->position) <= 2)
+			{
+				you.SetSlaying(-3);
+				you.SetNoneMove(1);
+			}
+		}
+		if (it->isLive() && it->GetId() == MON_ANCHOR && !it->isUserAlly() && distan_coord(you.position, it->position) <= 2)
+		{
+			you.SetNoneMove(1);
+		}
+	}
+	return true;
+}
 
 interupt_type players::TurnEnd(bool *item_delete_)
 {
@@ -603,6 +622,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		s_slaying = 0;
 	}
+	if (s_none_move)
+	{
+		s_none_move = 0;
+	}
 	if(s_spellcard)
 	{
 		s_spellcard--;
@@ -737,6 +760,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	ReleaseMutex(mutx);
 	CheckPunish(delay_);
 	GodAccpect_turn(god_turn);
+	CheckMonsterPassive(god_turn);
 	
 	if(mp == max_mp)
 	{

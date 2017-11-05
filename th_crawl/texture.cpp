@@ -367,6 +367,22 @@ textures img_mons_futo(&texture_monster01, 186, 255);
 textures img_mons_mamizo(&texture_monster01, 187, 255);
 textures img_mons_seiga(&texture_monster01, 188, 255);
 
+textures img_mons_anchor(&texture_monster01, 190, 255);
+textures img_mons_mask_angry(&texture_monster01, 212, 255);
+textures img_mons_mask_sad(&texture_monster01, 213, 255);
+textures img_mons_mask_happy(&texture_monster01, 214, 255);
+textures img_mons_trash[] =
+{
+	textures(&texture_monster01, 216, 255),
+	textures(&texture_monster01, 217, 255),
+	textures(&texture_monster01, 218, 255),
+	textures(&texture_monster01, 219, 255)
+};
+
+textures img_mons_occult_long(&texture_monster01, 220, 255);
+textures img_mons_occult_disk(&texture_monster01, 221, 255);
+textures img_mons_occult_small(&texture_monster01, 222, 255);
+textures img_mons_occult_kunekune(&texture_monster01, 223, 255);
 
 
 
@@ -1835,6 +1851,30 @@ int texturetoint(textures* input)
 		return 348;
 	else if (input == &img_named_sumireko)
 		return 349;
+	else if (input == &img_mons_anchor)
+		return 350;
+	else if (input == &img_mons_mask_angry)
+		return 351;
+	else if (input == &img_mons_mask_sad)
+		return 352;
+	else if (input == &img_mons_mask_happy)
+		return 353;
+	else if (input == &img_mons_trash[0])
+		return 354;
+	else if (input == &img_mons_trash[1])
+		return 355;
+	else if (input == &img_mons_trash[2])
+		return 356;
+	else if (input == &img_mons_trash[3])
+		return 357;
+	else if (input == &img_mons_occult_long)
+		return 358;
+	else if (input == &img_mons_occult_disk)
+		return 359;
+	else if (input == &img_mons_occult_small)
+		return 360;
+	else if (input == &img_mons_occult_kunekune)
+		return 361;
 	else
 		return 0;
 }
@@ -2542,6 +2582,30 @@ textures* inttotexture(int input)
 		return &img_named_kokoro[3];
 	case 349:
 		return &img_named_sumireko;
+	case 350:
+		return &img_mons_anchor;
+	case 351:
+		return &img_mons_mask_angry;
+	case 352:
+		return &img_mons_mask_sad;
+	case 353:
+		return &img_mons_mask_happy;
+	case 354:
+		return &img_mons_trash[0];
+	case 355:
+		return &img_mons_trash[1];
+	case 356:
+		return &img_mons_trash[2];
+	case 357:
+		return &img_mons_trash[3];
+	case 358:
+		return &img_mons_occult_long;
+	case 359:
+		return &img_mons_occult_disk;
+	case 360:
+		return &img_mons_occult_small;
+	case 361:
+		return &img_mons_occult_kunekune;
 	default:
 		return &img_mons_default;
 	}

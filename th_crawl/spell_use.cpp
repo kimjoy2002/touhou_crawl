@@ -3470,8 +3470,22 @@ bool skill_philosophers_stone(int power, bool short_, unit* order, coord_def tar
 	}
 	return false;
 }
+bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
 
-
+	int i = 1;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
+		{
+			if (env[current_level].isInSight(target))
+				printlog("°Å´ëÇÑ ´éÀÌ ¹Ù´Ú¿¡ ¹ÚÇû´Ù! ", false, false, false, CL_normal);
+			return_ = true;
+		}
+	}
+	return return_;
+}
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -3932,7 +3946,13 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SEIGA:
 		list->push_back(spell(SPL_SUMMON_YOSHIKA,40));
 		list->push_back(spell(SPL_HASTE_OTHER,25));
-		break;	
+		break;
+	case MON_MURASA:
+		list->push_back(spell(SPL_SUMMON_ANCHOR, 40));
+		list->push_back(spell(SPL_ICE_BOLT, 10));
+		list->push_back(spell(SPL_ICE_CLOUD, 25));
+		list->push_back(spell(SPL_BLINK, 15));
+		break;
 	default:
 		break;
 	}
@@ -4194,6 +4214,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_autumn_blade(power,short_,order,target);	
 	case SPL_PHILOSOPHERS_STONE:
 		return skill_philosophers_stone(power,short_,order,target);	
+	case SPL_SUMMON_ANCHOR:
+		return skill_summon_anchor(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4616,7 +4638,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_AUTUMN_BLADE:
 		return skill_autumn_blade(power,short_,&you,target);	
 	case SPL_PHILOSOPHERS_STONE:
-		return skill_philosophers_stone(power,short_,&you,target);	
+		return skill_philosophers_stone(power,short_,&you,target);
+	case SPL_SUMMON_ANCHOR:
+		return skill_summon_anchor(power, short_, &you, target);
 	default:
 		return false;
 	}

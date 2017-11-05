@@ -753,7 +753,8 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_MURASA:
 		text_ += "배유령의 요괴. 배를 침몰 시키는 능력을 지녔다.\n";
-		text_ += "무거워 보이는 듯한 닻을 던져 공격해온다. 닻에 맞게되면 이동이 봉인 당한다.\n";
+		text_ += "당신을 침몰시키려고 수단과 방법을 가리지않고 공격해올 것이다.\n";
+		text_ += "강력한 냉기와 무거워 보이는 듯한 닻을 던져 공격해온다.\n";
 		break;
 	case MON_KEINE:
 		text_ += "\n";
@@ -801,6 +802,34 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_SUMIREKO:
+		text_ += "\n";
+		break;
+	case MON_ANCHOR:
+		text_ += "바닥에 단단히 박힌 닻이다. 옆에 있는 것만으로도 불가사의한 힘에 의해서\n";
+		text_ += "움직임이 봉인당한다. 빠져나가기 위해선 닻이 사라지거나 부셔야 빠져나갈 수 있을 것 같다.\n";
+		break;
+	case MON_MASK_ANGRY:
+		text_ += "\n";
+		break;
+	case MON_MASK_SAD:
+		text_ += "\n";
+		break;
+	case MON_MASK_HAPPY:
+		text_ += "\n";
+		break;
+	case MON_TRASH:
+		text_ += "\n";
+		break;
+	case MON_OCCULT_LONG:
+		text_ += "\n";
+		break;
+	case MON_OCCULT_DISK:
+		text_ += "\n";
+		break;
+	case MON_OCCULT_SMALL:
+		text_ += "\n";
+		break;
+	case MON_KUNEKUNE:
 		text_ += "\n";
 		break;
 	default:

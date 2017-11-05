@@ -557,6 +557,11 @@ string GetSpellInfor(spell_list spell)
 		text_ += "시전후 a를 통한 능력사용으로 속성 마법을 사용가능하다.\n";
 		text_ += "이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n";
 		break;
+	case SPL_SUMMON_ANCHOR:
+		text_ += "목표로 한 적의 바로 근처에 거대한 닻을 떨어뜨린다.\n";
+		text_ += "닻 자체에는 데미지나 공격기능이 없지만 닻에 꽂힌 상대는 움직임을 봉인당한다.\n";
+		text_ += "움직이기위해서는 먼저 닻을 파괴하던지 닻이 자연스럽게 사라질때까지 기다려야한다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

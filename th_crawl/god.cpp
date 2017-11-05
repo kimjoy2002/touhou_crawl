@@ -1502,18 +1502,6 @@ bool GodAccpect_Abandon(god_type god)
 }
 bool GodAccpect_turn(int turn)
 {
-	if(you.GetPunish(GT_KANAKO))
-	{		
-		{		
-			for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
-			{
-				if(it->isLive() && it->GetId() == MON_ONBASIRA && !it->isUserAlly() && distan_coord(you.position,it->position) <= 2)
-				{
-					you.SetSlaying(-3);
-				}
-			}
-		}
-	}
 	if(you.GetPunish(GT_SHIZUHA))
 	{
 		if(turn>1 && you.prev_position != you.position)

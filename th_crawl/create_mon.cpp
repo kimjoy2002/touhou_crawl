@@ -380,11 +380,13 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //토지코
 	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //후토
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //세이가
+	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  20 }, //무라사
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  20,  3}, //마미조
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
 	{ 21,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+3, 20,  28}, //파르시 
+	{ 54,  SUBTERRANEAN_LEVEL+2, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //무라사
 	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
 
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
@@ -1065,6 +1067,7 @@ int get_unique_to_id(int m_id)
 	case MON_FUTO: return 51;
 	case MON_MAMIZO: return 52;
 	case MON_SEIGA: return 53;
+	case MON_MURASA: return 54;
 	}
 }
 
@@ -1282,6 +1285,9 @@ void create_id_to_unique(int id, int level)
 	case 53:
 		index.push_back(MON_SEIGA);
 		index.push_back(MON_YOSIKA);
+		break;
+	case 54:
+		index.push_back(MON_MURASA);
 		break;
 	}
 
@@ -1778,6 +1784,15 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_SEIGA:
 		mon->poison_resist=1;
+		break;
+	case MON_MURASA:
+		mon->ice_resist = 2;
+		break;
+	case MON_ANCHOR:
+		mon->ice_resist = 3;
+		mon->fire_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 
 	}

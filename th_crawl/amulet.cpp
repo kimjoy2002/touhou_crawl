@@ -71,7 +71,24 @@ bool unidenequipamulet(amulet_type kind, int value)
 }
 float getAmuletCharge(amulet_type kind)
 {
-	return 1.0f;
+	switch (kind)
+	{
+	case AMT_PERFECT:
+		return 2.0f;
+	case AMT_POPULAR:
+		return 1.5f;
+	case AMT_BLOSSOM:
+	case AMT_TIMES:
+	case AMT_FAITH:
+	case AMT_SPIRIT:
+	case AMT_GRAZE:
+	case AMT_OCCULT:
+	case AMT_WEATHER:
+		return 1.0f;
+	case AMT_WAVE:
+		return 0.5f;
+
+	}
 }
 bool isCanCharge(amulet_type kind)
 {

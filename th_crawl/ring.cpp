@@ -71,13 +71,22 @@ int isRingGotValue(ring_type ring_)
 
 ring_type goodbadring(int good_bad)
 {
-	if(good_bad>=0)
+	if (good_bad == 1)
 	{
-		ring_type list_[18] = {RGT_STR, RGT_DEX, RGT_INT, RGT_FULL,RGT_POISON_RESIS,RGT_FIRE_RESIS,RGT_ICE_RESIS,
+		ring_type list_[6] = { RGT_POISON_RESIS,RGT_FIRE_RESIS,RGT_ICE_RESIS,RGT_ELEC_RESIS, RGT_MAGIC_RESIS, RGT_SEE_INVISIBLE };
+		ring_type list2_[11] = { RGT_STR, RGT_DEX, RGT_INT,RGT_FULL/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,RGT_MANA,RGT_MAGACIAN,RGT_AC, RGT_EV, RGT_CONFUSE_RESIS};
+		if(randA(2)>0)
+			return list_[randA(5)];
+		else 
+			return list2_[randA(10)];
+	}
+	else if(good_bad>=0)
+	{
+		ring_type list_[17] = {RGT_STR, RGT_DEX, RGT_INT, RGT_FULL,RGT_POISON_RESIS,RGT_FIRE_RESIS,RGT_ICE_RESIS,
 		RGT_SEE_INVISIBLE/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,RGT_MANA,RGT_MAGACIAN,RGT_AC, RGT_EV, RGT_CONFUSE_RESIS,
 		RGT_ELEC_RESIS, RGT_MAGIC_RESIS
 		};
-		return list_[randA(17)];
+		return list_[randA(16)];
 	}
 	else
 	{

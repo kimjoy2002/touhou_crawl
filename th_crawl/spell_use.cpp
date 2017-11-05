@@ -3953,6 +3953,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_ICE_CLOUD, 25));
 		list->push_back(spell(SPL_BLINK, 15));
 		break;
+	case MON_KEINE:
+		list->push_back(spell(SPL_LASER, 35));
+		list->push_back(spell(SPL_BLINK, 20));
+		list->push_back(spell(SPL_SLOW, 15));
+		break;
 	default:
 		break;
 	}

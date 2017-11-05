@@ -547,7 +547,6 @@ void wiz_mode()
 				  {
 					  mon_->state.SetState(MS_SLEEP);
 					  mon_->flag &= ~M_FLAG_SUMMON;
-					  mon_->hp = 10;
 					  mon_->ReturnEnemy();
 				  }
 			}

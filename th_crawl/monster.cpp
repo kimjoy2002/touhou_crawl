@@ -2634,68 +2634,80 @@ void monster::sightcheck(bool is_sight_)
 void monster::special_action(int delay_)
 {
 
-	switch(id)
+	switch (id)
 	{
 	case MON_RUMIA:
-		for(int i = -1;i<2;i++)
-			for(int j = -1;j<2;j++)
-				env[current_level].MakeSmoke(coord_def(i+position.x,j+position.y),img_fog_dark,SMT_DARK,rand_int(3,4),0,this);
+		for (int i = -1; i < 2; i++)
+			for (int j = -1; j < 2; j++)
+				env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, this);
 		break;
 	case MON_FIRE_CAR:
-		if(!isUserAlly())
+		if (!isUserAlly())
 		{
-			for(int i = -1;i<2;i++){
-				for(int j = -1;j<2;j++){
-					if(i!=0 || j!=0)
-						env[current_level].MakeSmoke(coord_def(i+position.x,j+position.y),img_fog_fire,SMT_FIRE,1,0,this);
+			for (int i = -1; i < 2; i++) {
+				for (int j = -1; j < 2; j++) {
+					if (i != 0 || j != 0)
+						env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_fire, SMT_FIRE, 1, 0, this);
 				}
 			}
 		}
 		break;
 	case MON_YAMAME:
-		if(env[current_level].isInSight(position) && randA(2) == 0 && !isArena() && !isUserAlly())
+		if (env[current_level].isInSight(position) && randA(2) == 0 && !isArena() && !isUserAlly())
 		{
 			you.SetSick(10);
 		}
 		break;
 	case MON_TEWI:
-		if(env[current_level].isInSight(position) && hp<max_hp/2 && randA(3) == 0 && !isUserAlly())
+		if (env[current_level].isInSight(position) && hp < max_hp / 2 && randA(3) == 0 && !isUserAlly())
 		{
-			SetFear(rand_int(20,40));
+			SetFear(rand_int(20, 40));
 		}
 		break;
 	case MON_CLOWNPIECE:
-		if(env[current_level].isInSight(position) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
+		if (env[current_level].isInSight(position) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
 		{
-			you.SetLunatic(rand_int(5,10));
+			you.SetLunatic(rand_int(5, 10));
 		}
 		break;
 	case MON_RED_UFO:
 	case MON_GREEN_UFO:
 	case MON_BLUE_UFO:
-		if(randA(10)==0){
-			ChangeMonster(randA(2)?randA(1)?MON_RED_UFO:MON_GREEN_UFO:MON_BLUE_UFO,0);
+		if (randA(10) == 0) {
+			ChangeMonster(randA(2) ? randA(1) ? MON_RED_UFO : MON_GREEN_UFO : MON_BLUE_UFO, 0);
 		}
 		break;
 	case MON_SEKIBANKI:
-		if(env[current_level].isInSight(position) && randA(2)==0 &&
+		if (env[current_level].isInSight(position) && randA(2) == 0 &&
 			state.GetState() == MS_ATACK && !s_mute)
 		{
-			if(!env[current_level].isSilence(position)  && flag & M_FLAG_SPEAK){
+			if (!env[current_level].isSilence(position) && flag & M_FLAG_SPEAK) {
 				enterlog();
-				char* c_ = Get_Speak(id,this,MST_MAGIC);
-				if( c_  && (env[current_level].isInSight(position)))
-					printlog(c_,true,false,false,CL_magic);
+				char* c_ = Get_Speak(id, this, MST_MAGIC);
+				if (c_ && (env[current_level].isInSight(position)))
+					printlog(c_, true, false, false, CL_magic);
 			}
-			MonsterUseSpell(SPL_SUMMON_SEKIBANKI, false,this,target_pos,200);
-			ChangeMonster(MON_SEKIBANKI_BODY,0);
+			MonsterUseSpell(SPL_SUMMON_SEKIBANKI, false, this, target_pos, 200);
+			ChangeMonster(MON_SEKIBANKI_BODY, 0);
 		}
 	case MON_SEKIBANKI_BODY:
-		if(!(env[current_level].isInSight(position)) && randA(2)==0)
+		if (!(env[current_level].isInSight(position)) && randA(2) == 0)
 		{
 			env[current_level].SummonClear(map_id);
-			ChangeMonster(MON_SEKIBANKI,0);
+			ChangeMonster(MON_SEKIBANKI, 0);
 		}
+	case MON_KEINE:
+		if (hp <= max_hp / 2) {
+			if (env[current_level].isInSight(position))
+				printlog("체력을 잃은 케이네가 백택으로 변화하였다! ", true, false, false, CL_magic);
+			ChangeMonster(MON_KEINE2, 0);
+		}
+		break;
+	case MON_KEINE2:
+		if (hp == max_hp) {
+			ChangeMonster(MON_KEINE, 0);
+		}
+		break;
 	default:
 		break;
 	}

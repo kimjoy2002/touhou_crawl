@@ -738,17 +738,17 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12},
 
-	{ MON_MURASA,17, 6510,name_infor("무라사",false),&img_named_murasa,150,5,12,
+	{ MON_MURASA,17, 6510,name_infor("무라사",false),&img_named_murasa,160,5,12,
 	{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_SPEAK,1,1,10},
 
-	{ MON_KEINE,1,1,name_infor("케이네",false),&img_named_keine,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_KEINE,15,4212,name_infor("케이네",false),&img_named_keine,140,10,5,
+	{ 14,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,3,10 },
 
-	{ MON_KEINE2,1,1,name_infor("백택 케이네",false),&img_named_keine2,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_KEINE2,15,4212,name_infor("백택 케이네",false),&img_named_keine2,140,0,15,
+	{ 30,45,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor("공격",true),name_infor("박치기",false),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE  | M_FLAG_SPEAK,1,0,7 },
 
 	{ MON_YOUMU,1,1,name_infor("요우무",false),&img_named_youmu,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

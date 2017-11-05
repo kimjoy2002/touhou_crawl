@@ -338,6 +338,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  49,  9,  14,  15,  3}, //책읽는요괴(토키코)
 	{  35,  11,  14,  15,  3}, //클라운피스
 	{  37,  11,  14,  15,  3}, //레티
+	{ 55,  13,  14, 10,  5 }, //케이네
 
 	//안개호수
 	{  9, MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  40,  2}, //삼월정
@@ -373,6 +374,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  3}, //오린
 	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //누에
 	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //클라운피스
+	{ 55,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28 }, //케이네
 	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
 	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
@@ -1068,6 +1070,8 @@ int get_unique_to_id(int m_id)
 	case MON_MAMIZO: return 52;
 	case MON_SEIGA: return 53;
 	case MON_MURASA: return 54;
+	case MON_KEINE:
+	case MON_KEINE2: return 55;
 	}
 }
 
@@ -1288,6 +1292,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 54:
 		index.push_back(MON_MURASA);
+		break;
+	case 55:
+		index.push_back(MON_KEINE);
 		break;
 	}
 
@@ -1794,6 +1801,11 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
-
+	case MON_KEINE:
+		mon->confuse_resist = 1;
+		break;
+	case MON_KEINE2:
+		mon->confuse_resist = 1;
+		break;
 	}
 }

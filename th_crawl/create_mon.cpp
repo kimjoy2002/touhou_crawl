@@ -387,12 +387,14 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  20 }, //무라사
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  20,  3}, //마미조
 	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  20,  3 }, //요우무
+	{ 58,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 20,  28 }, //코마치
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
 	{ 21,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+3, 20,  28}, //파르시 
-	{ 54,  SUBTERRANEAN_LEVEL+2, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //무라사
 	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
+	{ 54,  SUBTERRANEAN_LEVEL + 2, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //무라사
+	{ 58,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //코마치
 
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
 
@@ -1079,6 +1081,7 @@ int get_unique_to_id(int m_id)
 	case MON_LYRICA:
 	case MON_MERLIN:
 	case MON_LUNASA:  return 57;
+	case MON_KOMACHI:  return 58;
 	}
 }
 
@@ -1310,6 +1313,9 @@ void create_id_to_unique(int id, int level)
 		index.push_back(MON_LYRICA);
 		index.push_back(MON_MERLIN);
 		index.push_back(MON_LUNASA);
+		break;
+	case 58:
+		index.push_back(MON_KOMACHI);
 		break;
 	}
 
@@ -1832,6 +1838,10 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist = 1;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_KOMACHI:
+		mon->fire_resist = 1;
+		mon->poison_resist = 1;
 		break;
 	}
 }

@@ -649,17 +649,31 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		//}
 	}
 
-	if(s_swift)
+	if(s_swift>0)
 	{
 		s_swift--;
 		if(!s_swift)
 		{
-			printlog("당신은 더이상 다리가 빠르지않다.",false,false,false,CL_blue);
+			printlog("당신은 더 이상 다리가 빠르지않다.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_swift == 10)
 		{
 			printlog("당신의 다리가 무거워지고있다.",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	if (s_swift<0)
+	{
+		s_swift++;
+		if (!s_swift)
+		{
+			printlog("당신은 더 이상 다리가 느리지않다.", false, false, false, CL_white_blue);
+			SetInter(IT_STAT);
+		}
+		if (s_swift == -5)
+		{
+			printlog("당신의 다리가 돌아오고 있다.", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}

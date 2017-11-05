@@ -3486,6 +3486,49 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
+bool skill_reaper_met(int power, bool short_, unit* order, coord_def target) 
+{
+	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (order && hit_mon)
+	{
+		beam_iterator beam(order->position, hit_mon->position);
+		if (CheckThrowPath(order->position, hit_mon->position, beam))
+		{
+			beam.init();
+
+			if (env[current_level].isMove(coord_def(beam->x, beam->y), hit_mon->isFly(), hit_mon->isSwim(), false))
+			{
+				hit_mon->SetXY(*beam);
+				hit_mon->AttackedTarget(order);
+				printarray(true, false, false, CL_normal, 4, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), order->GetName()->name.c_str(), "에게 빨려들어갔다. ");
+				hit_mon->SetSwift(rand_int(-30,-20));
+				return true;
+			}
+		}
+	}
+	return false;
+
+}
+
+bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->GetExhausted())
+		return false;
+	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
+	if (order && hit_mon)
+	{
+		int damage_ = hit_mon->GetHp() / 2;
+		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true),"당신을 향해 낫을 내리쳤다.");
+		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor("얼마없는 여생", true)), true);
+		if (order)
+		{
+			order->SetExhausted(rand_int(10, 15));
+		}
+		return true;
+	}
+	return false;
+}
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -3970,6 +4013,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 35));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
+	case MON_KOMACHI:
+		list->push_back(spell(SPL_REAPER_MET, 40));
+		list->push_back(spell(SPL_AFTERLITE, 20));
+		break;
 	default:
 		break;
 	}
@@ -4233,6 +4280,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_philosophers_stone(power,short_,order,target);	
 	case SPL_SUMMON_ANCHOR:
 		return skill_summon_anchor(power, short_, order, target);
+	case SPL_REAPER_MET:
+		return skill_reaper_met(power, short_, order, target);
+	case SPL_AFTERLITE:
+		return skill_afterlife(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4658,6 +4709,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_philosophers_stone(power,short_,&you,target);
 	case SPL_SUMMON_ANCHOR:
 		return skill_summon_anchor(power, short_, &you, target);
+	case SPL_REAPER_MET:
+		return skill_reaper_met(power, short_, &you, target);
+	case SPL_AFTERLITE:
+		return skill_afterlife(power, short_, &you, target);
 	default:
 		return false;
 	}

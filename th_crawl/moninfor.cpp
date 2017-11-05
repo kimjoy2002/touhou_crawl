@@ -780,7 +780,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_KOMACHI:
-		text_ += "\n";
+		text_ += "삼도천의 뱃사공인 오노즈카 코마치로 언제나 땡땡이를 치러 외출한다.\n";
+		text_ += "그녀의 움직임은 느긋하고 둔하지만 거리를 조절하는 능력을 이용한 전투에선 속도는 중요치않아보인다.\n";
 		break;
 	case MON_IKU:
 		text_ += "\n";

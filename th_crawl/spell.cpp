@@ -101,7 +101,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_SUMMON_NAMAZ:
 	case SPL_SUMMON_ANCHOR:
-		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;		
+		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;
 	case SPL_FLAN_BUSIN:
 		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_CONFUSE:
@@ -139,7 +139,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_BURST:
 	case SPL_MANA_DRAIN:	
 	case SPL_BLOOD_SMITE:
-		return ((S_FLAG_SMITE) & flag);	
+	case SPL_AFTERLITE:
+		return ((S_FLAG_SMITE) & flag);
+	case SPL_REAPER_MET:
+		return ((S_FLAG_SMITE | S_FLAG_CLOSE_DANGER)& flag);
 	case SPL_FLAME:		
 	case SPL_FROST:
 	case SPL_BURN:
@@ -252,6 +255,7 @@ int SpellLength(spell_list skill)
 	case SPL_SCHEMA_TANMAC:
 	case SPL_UNLUCK:
 	case SPL_MERMAID_SONG:
+	case SPL_REAPER_MET:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -288,6 +292,7 @@ int SpellLength(spell_list skill)
 	case SPL_JUMP_ATTACK:
 	case SPL_KANAME_DRILL:
 	case SPL_THUNDER:
+	case SPL_AFTERLITE:
 		return 5;
 	case SPL_BURN:
 	case SPL_FREEZE:
@@ -610,6 +615,10 @@ const char* SpellString(spell_list skill)
 		return "현자의 돌";
 	case SPL_SUMMON_ANCHOR:
 		return "침몰 앵커";
+	case SPL_REAPER_MET:
+		return "사신의마중 체험판";
+	case SPL_AFTERLITE:
+		return "얼마없는 여생";
 	default:
 		return "알수없는 마법";
 	}
@@ -734,6 +743,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_RACOON:
 	case SPL_SUMMON_YOUKAI:
 	case SPL_AUTUMN_BLADE:
+	case SPL_REAPER_MET:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -752,6 +762,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THE_WORLD:
 	case SPL_SHATTER:
 	case SPL_PHILOSOPHERS_STONE:
+	case SPL_AFTERLITE:
 		return 9;
 	default:
 		return 0;
@@ -816,6 +827,7 @@ int SpellNoise(spell_list skill)
 	case SPL_JUMP_ATTACK:
 	case SPL_AIR_STRIKE:
 	case SPL_SUMMON_YOSHIKA:
+	case SPL_REAPER_MET:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -870,6 +882,7 @@ int SpellNoise(spell_list skill)
 	case SPL_MERMAID_SONG:
 	case SPL_EMERALD_CITY:
 	case SPL_AUTUMN_BLADE:
+	case SPL_AFTERLITE:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1185,6 +1198,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num==0?(SKT_ALCHEMY):num==1?(SKT_ERROR):(SKT_ERROR);
 	case SPL_SUMMON_ANCHOR:
 		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_REAPER_MET:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_TRANS) : (SKT_ERROR);
+	case SPL_AFTERLITE:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1321,6 +1338,8 @@ int SpellCap(spell_list skill)
 	case SPL_MERMAID_SONG:
 	case SPL_AUTUMN_BLADE:
 	case SPL_PHILOSOPHERS_STONE:
+	case SPL_REAPER_MET:
+	case SPL_AFTERLITE:
 		return 200;
 	default:
 	case SPL_BLINK:

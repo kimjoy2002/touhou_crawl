@@ -750,7 +750,7 @@ const mon_infor mondata[] = {
 	{ 30,30,55 },{ ATT_NORMAL,ATT_NORMAL,ATT_NORMAL },{ name_infor("공격",true), name_infor("공격",true), name_infor("박치기",false) },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE  | M_FLAG_SPEAK,1,0,7 },
 
-	{ MON_YOUMU,21,9465,name_infor("요우무",false),&img_named_youmu,250,0,20,
+	{ MON_YOUMU,21,9465,name_infor("요우무",false),&img_named_youmu,230,0,20,
 	{ 38,46,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor("백루검",true),name_infor("루관검",true),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,5 },
 
@@ -767,9 +767,9 @@ const mon_infor mondata[] = {
 	{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
-	{ MON_KOMACHI,1,1,name_infor("코마치",false),&img_named_komachi,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_KOMACHI,21,9218,name_infor("코마치",false),&img_named_komachi,310,10,3,
+	{ 40,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("낫",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,0,13},
 
 	{ MON_IKU,1,1,name_infor("이쿠",false),&img_named_iku,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

@@ -1335,8 +1335,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_swift)
 			{
-				pfont->DrawTextA(pSprite,"脚加", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_swift>10?CL_white_blue:CL_blue);
-				rc.left += fontDesc.Width*5;	
+				pfont->DrawTextA(pSprite, you.s_swift>0?"脚加":"捞加皑家", -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_swift>10?CL_white_blue:(you.s_swift>0?CL_blue:CL_danger));
+				rc.left += fontDesc.Width*(you.s_swift>0?5:9);
 			}
 			if(you.s_superman)
 			{

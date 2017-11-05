@@ -893,7 +893,7 @@ int players::GetNormalDelay()
 }
 int players::GetWalkDelay()
 {
-	int speed_ = s_superman?3:(speed-(s_swift?2:0));
+	int speed_ = s_superman?3:(speed-(s_swift>0?2:(s_swift<0?-6:0)));
 	if(GetProperty(TPT_SPEED)==1)
 		speed_ = speed_*8/10;
 	else if(GetProperty(TPT_SPEED)==-1)
@@ -2408,20 +2408,39 @@ void players::ChangeBattleCount(bool on_)
 }
 bool players::SetSwift(int swift_)
 {
-	if(!swift_)
+	if (!swift_)
 		return false;
-	if(s_superman)
+	if (s_superman)
 		return false;
 
-	if(!s_swift)
-		printlog("당신은 다리가 빨라졌다.",false,false,false,CL_white_blue);
+	if (!s_swift) {
+		if (swift_>0) {
+			printlog("당신은 다리가 빨라졌다.", false, false, false, CL_white_blue);
+		}
+		else {
+			printlog("당신은 다리가 느려졌다.", false, false, false, CL_small_danger);
+		}
+	}
 	else
 	{
-		printlog("당신은 더 오래 달릴 수 있다.",false,false,false,CL_white_blue);
+		if (swift_ > 0) {
+			if(s_swift > 0)
+				printlog("당신은 더 오래 달릴 수 있다.", false, false, false, CL_white_blue);
+			else 
+				printlog("당신은 느린 걸음을 고쳐세웠다.", false, false, false, CL_white_blue);
+		}
+		else {
+			if (s_swift > 0)
+				printlog("당신은 가볍던 발이 무거워진 것을 느꼈다.", false, false, false, CL_small_danger);
+			else
+				printlog("당신은 다리가 더욱 느려졌다.", false, false, false, CL_small_danger);
+		}
 	}
 	s_swift += swift_;
 	if(s_swift>100)
 		s_swift = 100;
+	if (s_swift<-100)
+		s_swift = -100;
 	return true;
 }
 bool players::SetManaRegen(int mana_regen_)

@@ -37,8 +37,14 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 	//이 마법이 이 몬스터에게 제대로 듣는지
 	//true면 되도록 마법을 쓰는걸 피한다.
 	//false면 무시하고 쏜다. (공격이 안 듣거나 자신에 비해서 너무 약하거나)
+	boolean danger_ = false;
+	if (use_->isUserAlly() && target_->isUserAlly()) {
+		//만약 아군과 적이 모두 아군이면 사용을 안한다.
+		//(릴리같은 경우 자살공격을 방지하기 위함)
+		danger_ = true;
+	}
 
-	if(use_->level - target_->level >= 5)
+	if(use_->level - target_->level >= 5 && !danger_)
 		return false; //레벨차이가 심하게 난다. 신경쓰지않는다.
 
 	bool resist_[RST_TYPE_MAX];
@@ -68,11 +74,11 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 	//각 속성공격에 해당되는데 해당 저항이 없는 경우 위험한 공격임
 	if(resist_[RST_POISON] && target_->poison_resist<=0)
 		return true;
-	if(resist_[RST_ELEC] && target_->elec_resist<=1)
+	if(resist_[RST_ELEC] && target_->elec_resist<=danger_ ?2:1)
 		return true;
-	if(resist_[RST_FIRE] && target_->fire_resist<=1)
+	if(resist_[RST_FIRE] && target_->fire_resist<=danger_?2:1)
 		return true;
-	if(resist_[RST_ICE] && target_->ice_resist<=1)
+	if(resist_[RST_ICE] && target_->ice_resist<=danger_ ?2:1)
 		return true;
 
 	if(!resist_[RST_POISON] && !resist_[RST_ELEC] && !resist_[RST_FIRE] && !resist_[RST_ICE])

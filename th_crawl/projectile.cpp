@@ -343,7 +343,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			break;
 		case VK_RETURN:
 			paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_); 
-			if(good_path || sukima_)
+			if (good_path || sukima_ || no_target_)
 			{
 				deletelog();
 				you.search = false;

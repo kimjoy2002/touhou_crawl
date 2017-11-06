@@ -89,6 +89,7 @@ float getAmuletCharge(amulet_type kind)
 		return 0.5f;
 
 	}
+	return 1.0f;
 }
 bool isCanCharge(amulet_type kind)
 {

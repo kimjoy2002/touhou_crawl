@@ -577,6 +577,7 @@ int Player_Move(const coord_def &c)
 {
 	int move_type; //0은 이동불가. 1은 이동하진 않음(주로 공격). 2는 이동했음
 	bool pick_ups = false;
+	coord_def tempPos = you.position;
 	if(move_type = you.move(c))
 	{
 		if(move_type != 1) //한칸이라도 이동했을때
@@ -642,6 +643,20 @@ int Player_Move(const coord_def &c)
 				{
 					printlog("여기엔 여러개의 물건이 있다.",true,false,false,CL_normal);
 				}
+			}
+
+
+
+			if (you.god == GT_OKINA && !you.GetPunish(GT_OKINA)) {
+				//오키나면 지나온 문은 자동으로 닫음
+				if (env[current_level].isDoor(tempPos.x, tempPos.y)){
+					int close_ = 0;
+					if ((close_ = env[current_level].CloseDoor(tempPos.x, tempPos.y)) == 1)
+					{
+						//문을 닫고 할게 있나?
+					}
+				}
+
 			}
 		}
 		you.TurnEnd();
@@ -1092,7 +1107,7 @@ void Open_door()
 	}
 	if(door_num==1)
 	{
-		if(!you.OpenDoor(temp))
+		if(!you.OpenDoor(temp, false))
 		{
 			printlog("그곳엔 열 수 있는 것이 없다!",true,false,false,CL_normal);
 		}		

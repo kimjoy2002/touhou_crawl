@@ -8,6 +8,7 @@
 
 #include "option_manager.h"
 #include <stdio.h>
+#include <sys/stat.h>
 
 optionManager option_mg("./config.ini");
 

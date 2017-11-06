@@ -1304,8 +1304,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order)
 				{
-					if(sight_)
-						printarray(true,false,false,CL_danger,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"죽였다.");
+					if (sight_) {
+						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), id == MON_CLOSE_DOOR ? "부셨다." :  "죽였다.");
+					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
 						printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
@@ -1433,7 +1434,7 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 {
 	bool return_ = false;
 	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
-	if(return_)
+	if (return_ && !(flag & M_FLAG_NO_STATE))
 	{
 
 		int offset_ = 0;
@@ -1908,10 +1909,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 
 
-	if(message_ && !remove_)
+	if (message_ && !remove_)
 	{
-		if(sight_)
-			printarray(false,false,false,CL_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"죽었다. ");
+		if (sight_){
+			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "죽었다. ");
+
+		}
 		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON))
 		{
 			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
@@ -2091,10 +2094,16 @@ int monster::action(int delay_)
 		if((summon_time--)<=0)
 		{
 			hp = 0;
-			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-			if(is_sight)
-				printarray(true,false,false,CL_bad,3,GetName()->name.c_str(),GetName()->name_is(true),"연기 속으로 사라졌다.");
-			
+			if (id == MON_CLOSE_DOOR) {
+				env[current_level].dgtile[position.x][position.y].tile = DG_CLOSE_DOOR;
+				if (is_sight)
+					printarray(true, false, false, CL_okina, 3, GetName()->name.c_str(), GetName()->name_is(true), "평범한 문으로 돌아왔다.");
+			}
+			else {
+				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+				if (is_sight)
+					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "연기 속으로 사라졌다.");
+			}
 			env[current_level].SummonClear(map_id);
 			return 0;
 		}
@@ -3352,6 +3361,12 @@ bool monster::you_detect()
 {
 	if(isArena())
 		return false;
+	if (you.god == GT_OKINA) {
+		//오키나라면 문으로 투과할땐 보이지 않아야 함
+		if (isMonsterSight(you.position, true) == false)
+			return false;
+	}
+
 	return randB(you.GetStealth(),GetDetect());
 }
 bool monster::isYourShight()
@@ -3473,7 +3488,7 @@ bool monster::isSightnonblocked(coord_def c)
 	}
 	return true;
 }
-bool monster::isMonsterSight(coord_def c)
+bool monster::isMonsterSight(coord_def c, boolean okina)
 {	
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
@@ -3487,7 +3502,7 @@ bool monster::isMonsterSight(coord_def c)
 				intercept = true;
 				break;
 			}
-			if(!env[current_level].isSight((*it)))
+			if (!env[current_level].isSight((*it)) || (okina && env[current_level].isCloseDoor(it->x, it->y)))
 			{
 				intercept = true;
 				break;

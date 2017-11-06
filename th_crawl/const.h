@@ -59,6 +59,9 @@ extern const D3DCOLOR CL_swako;
 extern const D3DCOLOR CL_autumn;
 extern const D3DCOLOR CL_seija;
 extern const D3DCOLOR CL_lilly;
+extern const D3DCOLOR CL_miko;
+extern const D3DCOLOR CL_okina;
+extern const D3DCOLOR CL_junko;
 extern const name_infor string_that;
 extern const name_infor string_something;
 

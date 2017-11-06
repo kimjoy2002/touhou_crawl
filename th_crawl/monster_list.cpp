@@ -738,6 +738,10 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12},
 
+	{ MON_CLOSE_DOOR, 1, 0, name_infor("잠긴 문", true), &img_mons_close_door, 1, 10, 0,
+	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 },
+
 	{ MON_MURASA,17, 6510,name_infor("무라사",false),&img_named_murasa,160,5,12,
 	{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_SPEAK,1,1,10},

@@ -175,10 +175,10 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
 				{textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255)}, //세이자				
 				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //릴리
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //미코
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //오키나
+				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //순호
 
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
@@ -366,6 +366,7 @@ textures img_mons_toziko(&texture_monster01, 185, 255);
 textures img_mons_futo(&texture_monster01, 186, 255);
 textures img_mons_mamizo(&texture_monster01, 187, 255);
 textures img_mons_seiga(&texture_monster01, 188, 255);
+textures img_mons_close_door(&texture_item01, 3, 255);
 
 textures img_mons_anchor(&texture_monster01, 190, 255);
 textures img_mons_mask_angry(&texture_monster01, 212, 255);
@@ -1875,7 +1876,8 @@ int texturetoint(textures* input)
 		return 360;
 	else if (input == &img_mons_occult_kunekune)
 		return 361;
-	else
+	else if (input == &img_mons_close_door)
+		return 362;	else
 		return 0;
 }
 
@@ -2606,7 +2608,8 @@ textures* inttotexture(int input)
 		return &img_mons_occult_small;
 	case 361:
 		return &img_mons_occult_kunekune;
-	default:
+	case 362:
+		return &img_mons_close_door;	default:
 		return &img_mons_default;
 	}
 }

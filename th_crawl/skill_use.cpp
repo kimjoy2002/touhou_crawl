@@ -2507,6 +2507,171 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+
+
+bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		if (env[current_level].dgtile[target.x][target.y].isBreakable() && !env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
+
+
+			beam_iterator beam(order->position, order->position);
+			if (CheckThrowPath(order->position, target, beam))
+			{
+				beam.init();
+				while (!beam.end())
+				{
+					beam_iterator temp = beam;
+					temp++;
+					unit *unit_ = env[current_level].isMonsterPos(temp->x, temp->y, &you);
+					if (unit_)
+					{
+						printlog("사이에 장애물이 있다.", true, false, false, CL_normal);
+						return false;
+					}
+					beam++;
+				}
+
+				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 벽으로 만들었다.");
+				env[current_level].dgtile[target.x][target.y].tile = DG_CLOSE_DOOR;
+				return true;
+			}
+			else {
+				printlog("사이에 장애물이 있다.", true, false, false, CL_normal);
+				return false;
+			}
+
+		}
+		else {
+			printlog("벽을 대상으로 써야 한다.", true, false, false, CL_normal);
+			return false; //해당 위치에 몬스터가 없다.
+
+		}
+	}
+	return false;
+}
+bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		unit *unit_ = env[current_level].isMonsterPos(target.x, target.y, &you);
+		if (unit_ && unit_->GetId() == MON_CLOSE_DOOR) {
+			printlog("이미 잠겨있는 문이다.", false, false, false, CL_normal);
+			return false;
+		}
+
+		if (env[current_level].dgtile[target.x][target.y].isOpenDoor() || env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
+
+			if (unit_) {
+
+				rand_rect_iterator rit(unit_->position, 1, 1, true);
+				while (!rit.end()) {
+					unit* unit_hit_ = NULL; //부딪힌 적
+					bool hit_ = false; //부딪혔다!
+
+					hit_ = !env[current_level].isMove(coord_def(rit->x, rit->y), unit_->isFly(), unit_->isSwim(), false);
+					unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);
+
+					if (!hit_ && !unit_hit_) {
+						//움직일수도있을때
+						printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "문에 밀쳐져 튕겨나갔다!");
+						unit_->SetXY(rit->x, rit->y);
+						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor("문", true));
+						unit_->damage(temp_att, true);
+						unit_->SetConfuse(5+randA(5));
+						unit_->PlusTimeDelay(-unit_->GetWalkDelay()); //1턴 행동을 쉰다.
+						break;
+					}
+
+					rit++;
+					if (rit.end()) {
+						printarray(true, false, false, CL_normal, 4, "밀쳐낼 자리가 없어서 문 위에 있는 ", unit_->GetName()->name.c_str(), unit_->GetName()->name_to(true), "밀쳐낼 수 없다.");
+						return false;
+					}
+				}
+
+			}
+			env[current_level].dgtile[target.x][target.y].tile = DG_FLOOR;
+			//적이 서있으면 강제로 비키도록 한다.
+			
+			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
+			{
+				mon_->LevelUpdown(you.level, 6);
+				printarray(true, false, false, CL_okina, 1, "당신은 문을 강제로 단단하게 잠갔다!");
+				return true;
+			}
+		}
+		else {
+			printlog("문을 대상으로 사용해야 한다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+	return false;
+}
+bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		monster* this_unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y, &you);
+		if (!this_unit_ || this_unit_->isUserAlly())
+		{
+			printlog("적 몬스터를 대상으로 써야한다.", true, false, false, CL_normal);
+			return false; //해당 위치에 몬스터가 없다.
+		}
+
+		beam_iterator beam(order->position, order->position);
+		if (CheckThrowPath(order->position, target, beam))
+		{
+			while (!beam.end() && !env[current_level].isMonsterPos(beam->x, beam->y, &you))
+			{
+				beam++;
+			}
+
+			unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
+			if (!unit_) {
+				printlog("해당 적에게 올바른 경로를 설정할 수 없다.", true, false, false, CL_danger);
+				return false;
+			}
+
+			beam++;
+
+			unit *unit2_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
+			if (unit2_) {
+				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
+				return false;
+			}
+			if (!env[current_level].dgtile[beam->x][beam->y].isMove(you.isFly(), you.isSwim(), false) &&
+				!env[current_level].dgtile[beam->x][beam->y].isBreakable()
+				)
+			{
+				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
+				return false;
+			}
+
+			env[current_level].dgtile[beam->x][beam->y].tile = DG_OPEN_DOOR;
+			you.SetXY(beam->x, beam->y);
+			unit_->LostTarget();
+			printlog("적의 등 뒤의 문으로 빠져나왔다!", true, false, false, CL_okina);
+			return true;
+		}
+		printlog("사이에 장애물이 있다.", true, false, false, CL_normal);
+		return false;
+	}
+	return false;
+}
+bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+
+
+
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 
@@ -2778,6 +2943,21 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 				return skill_stone_uplift(power,short_,&you,target);
 			}
 		}
+		break;
+	case SKL_OKINA_1:
+		return skill_okina_1(power, short_, &you, target);
+		break;
+	case SKL_OKINA_2:
+		return skill_okina_2(power, short_, &you, target);
+		break;
+	case SKL_OKINA_3:
+		return skill_okina_3(power, short_, &you, target);
+		break;
+	case SKL_OKINA_4:
+		return skill_okina_4(power, short_, &you, target);
+		break;
+	case SKL_OKINA_5:
+		return skill_okina_5(power, short_, &you, target);
 		break;
 	}
 	return 0;

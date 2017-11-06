@@ -322,7 +322,7 @@ public:
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
 	void youAttack(unit* unit_); //누군가를 공격하다.
-	bool OpenDoor(const coord_def &c);
+	bool OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
 	void CalcuHP();
 	int GetHp(){return hp;};

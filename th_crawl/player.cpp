@@ -783,6 +783,10 @@ int players::move(short_move x_mov, short_move y_mov)
 				}
 			}
 		}
+		if (env[current_level].isDoor(move_x_, move_y_))
+		{
+			coord_def temp(move_x_, move_y_);
+		}
 		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
 		{
 			SetXY(coord_def(move_x_,move_y_));
@@ -793,19 +797,35 @@ int players::move(short_move x_mov, short_move y_mov)
 	}
 	if(env[current_level].isDoor(move_x_,move_y_))
 	{
-		coord_def temp(move_x_,move_y_);
-		return OpenDoor(temp);
+		coord_def temp(move_x_, move_y_);
+		if (you.god == GT_OKINA && !you.GetPunish(GT_OKINA)) {
+			OpenDoor(temp, true);
+			if (s_slaying<0)
+			{//온바시라 방해!			
+				printlog("움직일수 없다! 온바시라가 당신을 고정시키고있다!", true, false, false, CL_danger);
+				return 0;
+			}
+			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim()))
+			{
+				SetXY(coord_def(move_x_, move_y_));
+				time_delay += GetWalkDelay();//이동속도만큼 이동
+				prev_action = ACTT_WALK;
+				return 2;
+			}
+		}
+		else {
+			return OpenDoor(temp, false);
+		}
 	}
-	else
-	{
-		if(s_confuse || (s_drunken && drunken_==0))
+	else {
+		if (s_confuse || (s_drunken && drunken_ == 0))
 		{
-			printlog("아얏!",true,false,false,CL_normal);
+			printlog("아얏!", true, false, false, CL_normal);
 			time_delay += GetWalkDelay();
 			return 1;
 		}
-		return 0;
 	}
+	return 0;
 }
 
 int players::move(const coord_def &c)
@@ -850,14 +870,16 @@ void players::youAttack(unit* unit_)
 
 }
 
-bool players::OpenDoor(const coord_def &c)
+bool players::OpenDoor(const coord_def &c, bool no_turn)
 {
 	if(env[current_level].isDoor(c.x,c.y))
 	{
 		if(env[current_level].OpenDoor(c.x,c.y))
 		{
-			printlog("문을 열었다.",false,false,false,CL_normal);
-			time_delay += GetWalkDelay();
+			if (no_turn == false) {
+				printlog("문을 열었다.", false, false, false, CL_normal);
+				time_delay += GetWalkDelay();
+			}
 			return 1;
 		}
 		else
@@ -3175,6 +3197,9 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_TENSI:
 						case DG_TEMPLE_SEIJA:
 						case DG_TEMPLE_LILLY:
+						case DG_TEMPLE_MIKO:
+						case DG_TEMPLE_OKINA:
+						case DG_TEMPLE_JUNKO:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 							{								
 							case DG_TEMPLE_STAIR:									

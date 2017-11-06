@@ -1329,7 +1329,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		return true;
 	case SKL_OKINA_4:
 		if (!check_)
-			you.PietyUpDown(-5);
+			you.PietyUpDown(-4);
 		return true;
 	case SKL_OKINA_5:
 		if (!check_)

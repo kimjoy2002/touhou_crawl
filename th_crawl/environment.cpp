@@ -896,7 +896,7 @@ void environment::ActionMonsterSpecial(int delay_)
 	{
 		if((*it).isLive() && !DisableMove(it->position))
 		{
-			(*it).special_action(delay_);
+			(*it).special_action(delay_, true);
 		}
 	}
 }

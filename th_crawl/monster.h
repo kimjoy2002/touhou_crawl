@@ -165,7 +165,7 @@ public:
 	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
-	void special_action(int delay_);
+	void special_action(int delay_, bool smoke_);
 	bool SetPoisonReason(parent_type type_);
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();

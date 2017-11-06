@@ -2662,7 +2662,72 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	int num_ = 1;
+	int id_ = MON_MAI2;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("어느 백댄서를 호출하시겠습니까?", true, false, false, CL_help);
+		printlog("a - 테이레이다 마이: 뒤에서 춤추는 것으로 체력을 회복시켜준다.", true, false, false, CL_okina);
+		printlog("b -   니시다 사토노: 뒤에서 춤추는 것으로 영력을 회복시켜준다.", true, false, false, CL_okina);
+		printlog("c -   백댄서즈 소환: 두명을 모두 소환한다. (신앙심소모 2배)", true, false, false, CL_okina);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			id_ = MON_MAI2;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			id_ = MON_SATONO;
+			loop_ = false;
+			break;
+		case 'c':
+		case 'C':
+			num_ = 2;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+
+
+	bool return_ = false;
+	monster* speak_ = NULL;
+	for (int i = 0; i < num_; i++) {
+		if (monster* mon_ = BaseSummon(id_, rand_int(40, 50), true, false, 2, order, target, id_ == MON_MAI2 ? SKD_SUMMON_MAI : SKD_SUMMON_SATONO, 1))
+		{
+			if (mon_)
+				return_ = true;
+			mon_->LevelUpdown(you.level, 6);
+			printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+			if (!speak_ && mon_->isLive() && (*mon_).isUserAlly() && env[current_level].isInSight(coord_def(mon_->position.x, mon_->position.y)) && mon_->CanSpeak()) {
+					speak_ = mon_;
+			}
+		}
+		if (num_ == 2)
+		{
+			id_ = MON_SATONO;
+			you.PietyUpDown(-4);
+		}
+	}
+
+	enterlog();
+	if (speak_)
+	{
+		if (speak_->GetId() == MON_MAI2) {
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"그럼 바로 응원을 시작하겠어!\"");
+		}
+		else if (speak_->GetId() == MON_SATONO) {
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"뒤에서 응원할게!\"");
+		}
+	}
+
+	return return_;
 }
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {

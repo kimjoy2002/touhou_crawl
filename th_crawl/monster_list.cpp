@@ -760,16 +760,16 @@ const mon_infor mondata[] = {
 
 	{ MON_LYRICA,13,1624,name_infor("리리카",false),&img_named_lyrica,68,1,15,
 	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	//메를랑과 루나사는 디버프를 위한 HD 보정
 	{ MON_MERLIN,16,1642,name_infor("메를랑",true),&img_named_merlin,72,5,5,
 	{ 12,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	{ MON_LUNASA,17,1890,name_infor("루나사",false),&img_named_lunasa,81,2,10,
 	{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	{ MON_KOMACHI,21,9218,name_infor("코마치",false),&img_named_komachi,310,10,3,
 	{ 40,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("낫",true),name_infor(),name_infor() },

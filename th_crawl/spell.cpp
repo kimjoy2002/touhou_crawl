@@ -45,7 +45,6 @@ float GetSpellSector(spell_list spell_)
 	return 0.0f;
 }
 
-
 bool SpellFlagCheck(spell_list skill, skill_flag flag)
 {
 	switch(skill)
@@ -96,6 +95,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_RACOON:
 	case SPL_SUMMON_YOUKAI:
 	case SPL_SUMMON_YOSHIKA:
+	case SPL_SUMMON_TRASH:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
@@ -133,6 +133,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_CONTROLED_BLINK:  
 	case SPL_UNLUCK:
 	case SPL_THUNDER:
+	case SPL_PSYCHOKINESIS:
+	case SPL_TRASH_RUSH:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_MERMAID_SONG:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
@@ -200,6 +202,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
 	case SPL_EMERALD_CITY:
+	case SPL_PRISM_CALL:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
@@ -256,6 +259,7 @@ int SpellLength(spell_list skill)
 	case SPL_UNLUCK:
 	case SPL_MERMAID_SONG:
 	case SPL_REAPER_MET:
+	case SPL_TRASH_RUSH:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -293,6 +297,7 @@ int SpellLength(spell_list skill)
 	case SPL_KANAME_DRILL:
 	case SPL_THUNDER:
 	case SPL_AFTERLITE:
+	case SPL_PSYCHOKINESIS:
 		return 5;
 	case SPL_BURN:
 	case SPL_FREEZE:
@@ -354,6 +359,8 @@ int SpellLength(spell_list skill)
 	case SPL_EMERALD_CITY:
 	case SPL_AUTUMN_BLADE:
 	case SPL_PHILOSOPHERS_STONE:
+	case SPL_PRISM_CALL:
+	case SPL_SUMMON_TRASH:
 	default:
 		return 0;		
 	}
@@ -619,6 +626,14 @@ const char* SpellString(spell_list skill)
 		return "사신의마중 체험판";
 	case SPL_AFTERLITE:
 		return "얼마없는 여생";
+	case SPL_PRISM_CALL:
+		return "프리즘 콘체르토";
+	case SPL_PSYCHOKINESIS:
+		return "텔레키네시스";
+	case SPL_SUMMON_TRASH:
+		return "어번 사이코키네시스";
+	case SPL_TRASH_RUSH:
+		return "어번 사이코키네시스 사출";
 	default:
 		return "알수없는 마법";
 	}
@@ -675,6 +690,7 @@ int SpellLevel(spell_list skill)
 	case SPL_POISON_SKIN:
 	case SPL_ALERT_NOISE: 
 	case SPL_MERMAID_SONG:
+	case SPL_PRISM_CALL:
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -709,6 +725,8 @@ int SpellLevel(spell_list skill)
 	case SPL_EMERALD_CITY:
 	case SPL_STONE_UPLIFT:
 	case SPL_SUMMON_ANCHOR:
+	case SPL_PSYCHOKINESIS:
+	case SPL_SUMMON_TRASH:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -754,6 +772,7 @@ int SpellLevel(spell_list skill)
 	case SPL_FIRE_SPREAD:
 	case SPL_UNLUCK:
 	case SPL_MACRO_BURST:
+	case SPL_TRASH_RUSH:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -794,6 +813,7 @@ int SpellNoise(spell_list skill)
 	case SPL_CHANGE:
 	case SPL_UNLUCK:
 	case SPL_MAMIZO_EVADE:
+	case SPL_PRISM_CALL:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -828,6 +848,7 @@ int SpellNoise(spell_list skill)
 	case SPL_AIR_STRIKE:
 	case SPL_SUMMON_YOSHIKA:
 	case SPL_REAPER_MET:
+	case SPL_PSYCHOKINESIS:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -883,6 +904,7 @@ int SpellNoise(spell_list skill)
 	case SPL_EMERALD_CITY:
 	case SPL_AUTUMN_BLADE:
 	case SPL_AFTERLITE:
+	case SPL_SUMMON_TRASH:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -899,6 +921,7 @@ int SpellNoise(spell_list skill)
 	case SPL_THUNDER:
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_SUMMON_ANCHOR:
+	case SPL_TRASH_RUSH:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1202,6 +1225,14 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_TRANS) : (SKT_ERROR);
 	case SPL_AFTERLITE:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
+	case SPL_PRISM_CALL:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_PSYCHOKINESIS:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_MENTAL) : (SKT_ERROR);
+	case SPL_SUMMON_TRASH:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_TRASH_RUSH:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1340,6 +1371,10 @@ int SpellCap(spell_list skill)
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_REAPER_MET:
 	case SPL_AFTERLITE:
+	case SPL_PRISM_CALL:
+	case SPL_PSYCHOKINESIS:
+	case SPL_SUMMON_TRASH:
+	case SPL_TRASH_RUSH:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1508,6 +1543,18 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 			}
 			return true;
 		}
+	case SPL_PRISM_CALL:
+	{
+		for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (mon != &(*it)  && it->isLive() && (it->id == MON_LYRICA || it->id == MON_MERLIN || it->id == MON_LUNASA))
+			{
+				if (!mon->isMonsterSight((it->position)))
+					return true;
+			}
+		}
+		return false;
+	}
 	default:
 		return true;
 	}

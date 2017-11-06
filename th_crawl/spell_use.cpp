@@ -3529,6 +3529,56 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
+bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
+{
+
+	if (order->isplayer())
+		return false;
+	monster* mon_ = (monster*)order;
+
+	printlog("프리즘 콘체르토! ", false, false, false, CL_normal);
+	deque<monster*> dq;
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (&(*it) != mon_ && it->isLive() && mon_->isAllyMonster(&(*it)) &&
+			(it->GetId() == MON_LYRICA || it->GetId() == MON_MERLIN || it->GetId() == MON_LUNASA))
+		{
+			dq.push_back(&(*it));
+		}
+	}
+	rand_shuffle(dq.begin(), dq.end());
+	dif_rect_iterator rit(order->position, 2);
+	int j = 0;
+	for (int i = 0; !rit.end() && i < dq.size(); rit++)
+	{
+		if (env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
+		{
+			dq[i]->SetXY(rit->x, rit->y);
+			if (dq[i]->isYourShight())
+			{
+				printarray(false, false, false, CL_normal, 3, dq[i]->GetName()->name.c_str(), dq[i]->GetName()->name_is(true), "합주에 참가하였다. ");
+				j++;
+				if (j % 3 == 0)
+					enterlog();
+			}
+			i++;
+		}
+	}
+	return true;
+}
+bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_summon_trash(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -4002,14 +4052,17 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 15));
 		break;
 	case MON_LYRICA:
+		list->push_back(spell(SPL_PRISM_CALL, 30));
 		list->push_back(spell(SPL_LASER, 35));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_MERLIN:
+		list->push_back(spell(SPL_PRISM_CALL, 30));
 		list->push_back(spell(SPL_CONFUSE, 35));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_LUNASA:
+		list->push_back(spell(SPL_PRISM_CALL, 30));
 		list->push_back(spell(SPL_SLOW, 35));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
@@ -4017,6 +4070,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_REAPER_MET, 40));
 		list->push_back(spell(SPL_AFTERLITE, 20));
 		break;
+	case MON_SUMIREKO:
+
 	default:
 		break;
 	}
@@ -4284,6 +4339,14 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_reaper_met(power, short_, order, target);
 	case SPL_AFTERLITE:
 		return skill_afterlife(power, short_, order, target);
+	case SPL_PRISM_CALL:
+		return skill_prism_call(power, short_, order, target);
+	case SPL_PSYCHOKINESIS:
+		return skill_psychokinesis(power, short_, order, target);
+	case SPL_SUMMON_TRASH:
+		return skill_summon_trash(power, short_, order, target);
+	case SPL_TRASH_RUSH:
+		return skill_trash_rush(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4713,6 +4776,14 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_reaper_met(power, short_, &you, target);
 	case SPL_AFTERLITE:
 		return skill_afterlife(power, short_, &you, target);
+	case SPL_PRISM_CALL:
+		return skill_prism_call(power, short_, &you, target);
+	case SPL_PSYCHOKINESIS:
+		return skill_psychokinesis(power, short_, &you, target);
+	case SPL_SUMMON_TRASH:
+		return skill_summon_trash(power, short_, &you, target);
+	case SPL_TRASH_RUSH:
+		return skill_trash_rush(power, short_, &you, target);
 	default:
 		return false;
 	}

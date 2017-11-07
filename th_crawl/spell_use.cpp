@@ -200,7 +200,13 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 			{
 				if(it->isLive() && it->sm_info.parent_map_id == order->map_id && it->sm_info.summon_id == GetSummonKind(skill))
 				{
-					i++;
+					if (skill == SPL_SUMMON_TRASH) {
+						if (order->isMonsterSight(it->position))
+							i++;
+					}
+					else {
+						i++;
+					}
 				}
 			}
 			if(i >= GetSummonMaxNumber(skill))
@@ -3474,19 +3480,19 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 
-	int i = 1;
-	for (; i>0; i--)
+int i = 1;
+for (; i > 0; i--)
+{
+	if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
 	{
-		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
-		{
-			if (env[current_level].isInSight(target))
-				printlog("거대한 닻이 바닥에 박혔다! ", false, false, false, CL_normal);
-			return_ = true;
-		}
+		if (env[current_level].isInSight(target))
+			printlog("거대한 닻이 바닥에 박혔다! ", false, false, false, CL_normal);
+		return_ = true;
 	}
-	return return_;
 }
-bool skill_reaper_met(int power, bool short_, unit* order, coord_def target) 
+return return_;
+}
+bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 {
 	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -3502,7 +3508,7 @@ bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
 				printarray(true, false, false, CL_normal, 4, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), order->GetName()->name.c_str(), "에게 빨려들어갔다. ");
-				hit_mon->SetSwift(rand_int(-30,-20));
+				hit_mon->SetSwift(rand_int(-30, -20));
 				return true;
 			}
 		}
@@ -3519,7 +3525,7 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 	if (order && hit_mon)
 	{
 		int damage_ = hit_mon->GetHp() / 2;
-		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true),"당신을 향해 낫을 내리쳤다.");
+		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "당신을 향해 낫을 내리쳤다.");
 		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor("얼마없는 여생", true)), true);
 		if (order)
 		{
@@ -3568,15 +3574,112 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if (!target_unit->isplayer()) {
+			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
+				if (order->isplayer()) {
+					printlog("이 대상은 움직이지 못하기 때문에 텔레키네시스를 사용할 수 없다.", true, false, false, CL_normal);
+				}
+				return false; //이동불가인 적엔 사용 불가
+			}
+		}
+		target_unit->Blink(25);
+		printarray(true, false, false, CL_normal, 3, target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true), "염동력에 의해 튕겨져나갔다. ");
+		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor("염동력", true));
+		target_unit->damage(temp_att, true);
+		return true;
+	}
 	return false;
 }
 bool skill_summon_trash(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_ = false;
+	int id_ = MON_TRASH;
+	int time_ = rand_int(30, 50);
+
+	int i = GetSummonMaxNumber(SPL_SUMMON_TRASH);
+
+	for (; i>0; i--)
+	{
+		if (monster* mon_ = BaseSummon(id_, time_, true, true, 3, order, target, SKD_SUMMON_TRASH, GetSummonMaxNumber(SPL_SUMMON_TRASH))) {
+
+			mon_->image = &img_mons_trash[randA(3)];
+			return_ = true;
+		}
+	}
+	return return_;
 }
 bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if (order->isplayer())
+		return false;
+	monster* mon_ = (monster*) order;
+
+	random_extraction<monster*> monster_list;
+
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && it->sm_info.parent_map_id == mon_->map_id && it->sm_info.summon_id == GetSummonKind(SPL_SUMMON_TRASH))
+		{
+			if (mon_->isMonsterSight(it->position)) {
+				beam_iterator beam(it->position, target);
+				if (CheckThrowPath(it->position, target, beam)) {
+					beam.init();
+					int len_ = 0;
+					while (!beam.end())
+					{
+						unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
+						if (unit_)
+						{
+							break;
+						}
+						len_++;
+						beam++;
+					}
+					if (beam.end() && len_ != 0) {
+						monster_list.push(&(*it));
+					}
+				}
+
+			}
+		}
+	}
+
+	int max_ = 0;
+	//최대 4개까지 날림
+	for (int i = 0; i < 4 && monster_list.GetSize() != 0; i++) {
+		if (max_ == 0) {
+			printlog("쓰레기 더미가 날라오기 시작한다!", true, false, false, CL_normal);
+		}
+
+
+		monster *trash = monster_list.pop();
+		int damage_ = (13 + power / 16);
+		beam_iterator beam(trash->position, target);
+		beam_infor temp_infor(randC(1, damage_), damage_, 99, order, order->GetParentType(), 8, 1, BMT_PENETRATE, ATT_THROW_NORMAL, trash->name);
+		coord_def final_ = throwtanmac(trash->image, beam, temp_infor, NULL);
+		max_++;
+
+		dif_rect_iterator rit(target, 3);
+
+		for (; !rit.end(); rit++)
+		{
+			if (!env[current_level].isMove(rit->x, rit->y))
+				continue; //움직일수없는 위치	
+			if (env[current_level].isMonsterPos(rit->x, rit->y))
+				continue; //이미 몬스터가 있는 위치
+
+			trash->SetXY(*rit);
+			break;
+		}
+	}
+	if(max_)
+		return true;
+	else	
+		return false;
 }
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -4071,7 +4174,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_AFTERLITE, 20));
 		break;
 	case MON_SUMIREKO:
-
+		list->push_back(spell(SPL_SUMMON_TRASH, 30));
+		list->push_back(spell(SPL_TRASH_RUSH, 20));
+		list->push_back(spell(SPL_PSYCHOKINESIS, 20));
+		list->push_back(spell(SPL_BLINK, 30));
 	default:
 		break;
 	}

@@ -373,21 +373,22 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1,  5,  3}, //파르시
 
 	
-	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  3}, //오린
-	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //누에
-	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28}, //클라운피스
-	{ 55,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 30,  28 }, //케이네
+	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  3}, //오린
+	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28}, //누에
+	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28}, //클라운피스
+	{ 55,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28 }, //케이네
 	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
-	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //이치린
+	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
-	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //앨리스
-	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //토지코
-	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  30,  3}, //후토
-	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //세이가
-	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  20 }, //무라사
-	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  20,  3}, //마미조
-	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  20,  3 }, //요우무
-	{ 58,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 20,  28 }, //코마치
+	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //앨리스
+	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //토지코
+	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //후토
+	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //세이가
+	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  20 }, //무라사
+	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  15,  3}, //마미조
+	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  15,  3 }, //요우무
+	{ 58,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //코마치
+	{ 59,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //스미레코
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
@@ -397,6 +398,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 58,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //코마치
 
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
+	{ 59,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  20,  3 }, //스미레코
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -1082,6 +1084,7 @@ int get_unique_to_id(int m_id)
 	case MON_MERLIN:
 	case MON_LUNASA:  return 57;
 	case MON_KOMACHI:  return 58;
+	case MON_SUMIREKO:  return 59;
 	}
 }
 
@@ -1316,6 +1319,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 58:
 		index.push_back(MON_KOMACHI);
+		break;
+	case 59:
+		index.push_back(MON_SUMIREKO);
 		break;
 	}
 

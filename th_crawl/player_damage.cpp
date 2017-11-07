@@ -411,6 +411,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:
+	case ATT_PSYCHO:
 	case ATT_NORMAL_HIT:	
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
@@ -666,6 +667,9 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다. ");
 		}
 		break;
+	case ATT_PSYCHO:
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
+		break;
 	case ATT_ELEC:
 		if(damaged_)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
@@ -692,6 +696,7 @@ void players::print_no_damage_message(attack_infor &a)
 		case ATT_RUSH:
 		case ATT_WALL:
 		case ATT_STONE_TRAP:
+		case ATT_PSYCHO:
 			break;
 		default:
 		case ATT_NORMAL_HIT:	

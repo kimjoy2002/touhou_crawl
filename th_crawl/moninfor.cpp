@@ -822,7 +822,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_SUMIREKO:
-		text_ += "\n";
+		text_ += "초능력이 특기인 비봉클럽 초대회장인 우사미 스미레코.\n";
+		text_ += "그녀는 본래 환상향의 주민이 아니지만 꿈을 통하여 환상향에 오는 것이 가능하다.\n";
+		text_ += "이 세계에서 그녀는 초능력을 이용하여 당신을 쓰레기더미에 파묻어버리려 할 것이다!\n";
 		break;
 	case MON_ANCHOR:
 		text_ += "바닥에 단단히 박힌 닻이다. 옆에 있는 것만으로도 불가사의한 힘에 의해서\n";
@@ -838,7 +840,7 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_TRASH:
-		text_ += "\n";
+		text_ += "염력에 의해 부유하는 단순한 쓰레기다. 그러나 걸치적거린다. 치우려면 상당히 시간이 걸릴 것 같다.\n";
 		break;
 	case MON_OCCULT_LONG:
 		text_ += "\n";

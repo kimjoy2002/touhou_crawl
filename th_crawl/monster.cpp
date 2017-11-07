@@ -836,6 +836,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:
+	case ATT_PSYCHO:
 	case ATT_NORMAL_HIT:
 	case ATT_NORMAL_BLAST:
 	case ATT_FIRE_BLAST:
@@ -1048,6 +1049,9 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다. ");
 			}
 			break;
+		case ATT_PSYCHO:
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
+			break;
 		case ATT_ELEC:
 			if(!GetElecResist())
 				break;
@@ -1124,6 +1128,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_CLOUD_ELEC:
 	case ATT_CLOUD_NORMAL:
 	case ATT_CLOUD_CURSE:
+	case ATT_PSYCHO:
 	case ATT_ELEC:
 	case ATT_VEILING:
 	case ATT_RUSH:
@@ -2101,7 +2106,7 @@ int monster::action(int delay_)
 			}
 			else {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-				if (is_sight)
+				if (is_sight && id != MON_TRASH)
 					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "연기 속으로 사라졌다.");
 			}
 			env[current_level].SummonClear(map_id);

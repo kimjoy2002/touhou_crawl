@@ -807,9 +807,9 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_SUMIREKO,1,1,name_infor("스미레코",false),&img_named_sumireko,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_SUMIREKO,20,9429,name_infor("스미레코",false),&img_named_sumireko,200,1,15,
+	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	{ MON_ANCHOR,1,1,name_infor("닻",true),&img_mons_anchor,100,15,0,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
@@ -827,9 +827,9 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_TRASH,1,1,name_infor("쓰레기 더미 ",false),&img_mons_trash[0],1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_TRASH,1,1,name_infor("쓰레기 더미",false),&img_mons_trash[0],100,10,0,
+	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10 },
 
 	{ MON_OCCULT_LONG,1,1,name_infor("팔척귀신",true),&img_mons_occult_long,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

@@ -961,6 +961,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_RUSH, //카나코 돌진?
 	ATT_WALL, //벽에 부딪히다.
 	ATT_STONE_TRAP, //벽에 부딪히다.
+	ATT_PSYCHO, //벽에 부딪히다.
 	ATT_NORMAL_HIT,
 	ATT_MAX
 };

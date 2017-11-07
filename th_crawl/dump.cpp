@@ -218,6 +218,9 @@ bool Dump(int type, string *filename_)
 								strncat(death_reason,"벽에 ",64);
 							strncat(death_reason,"부딪혀 죽었다.",64);
 							break;
+						case ATT_PSYCHO:
+							strncat(death_reason, "염동력에 의해 날라가 죽었다.", 64);
+							break;
 						case ATT_STONE_TRAP:
 							strncat(death_reason,"바위에 새끼발가락을 찧여 죽었다.",64);
 							break;

@@ -577,7 +577,6 @@ string GetSpellInfor(spell_list spell)
 	case SPL_PSYCHOKINESIS:
 		text_ += "염동력을 이용하여 지정한 상대를 튕겨내면서 데미지를 준다\n";
 		text_ += "선택한 대상을 무작위한 방향으로 날려버리면서 물리 데미지를 준다.\n";
-		text_ += "방향은 랜덤이지만 자신과 멀어지는 방향으로 날라갈 가능성이 높다.\n";
 		break;
 	case SPL_SUMMON_TRASH:
 		text_ += "주변의 쓰레기들을 모아서 하늘에 부유시키는 기술.\n";

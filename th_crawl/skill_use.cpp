@@ -988,7 +988,7 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
-		if(randA(99)<=8)
+		if(randA(99)<=3)
 		{
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			
@@ -1006,7 +1006,7 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	if(monster* mon_=BaseSummon(id_, rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
-		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?11:8))
+		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			

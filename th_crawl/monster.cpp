@@ -1767,7 +1767,7 @@ int monster::atkmove(int is_sight, bool only_move)
 	//		target_pos = target->position;
 	//}
 
-	if(!only_move && !s_confuse && (!s_mute || (flag & M_FLAG_SILENCE)) && !s_fear && !s_lunatic)
+	if(!only_move && !s_confuse && !s_fear && !s_lunatic)
 	{
 		if(target && target->position == target_pos)
 		{
@@ -1782,7 +1782,7 @@ int monster::atkmove(int is_sight, bool only_move)
 					{
 						if (SpellFlagCheck(id_, S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
 						{
-							if (env[current_level].isSilence(position))
+							if (env[current_level].isSilence(position) || s_mute)
 							{
 								if (!(flag & M_FLAG_SILENCE))
 									continue;

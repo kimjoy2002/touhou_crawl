@@ -595,25 +595,31 @@ string GetSpellInfor(spell_list spell)
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;
 	}
-	
-	if((SpellSchool(spell,0) == SKT_ALCHEMY || 
-		SpellSchool(spell,1) == SKT_ALCHEMY ||
-		SpellSchool(spell,2) == SKT_ALCHEMY)	
+	text_ += "\n";
+
+	if ((SpellSchool(spell, 0) == SKT_ALCHEMY ||
+		SpellSchool(spell, 1) == SKT_ALCHEMY ||
+		SpellSchool(spell, 2) == SKT_ALCHEMY)
 		&& SpellFlagCheck(spell, S_FLAG_BUF))
-	{		
+	{
 		text_ += "이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n";
 		text_ += "다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n";
 	}
 
-	if(SpellFlagCheck(spell, S_FLAG_SUMMON))
-	{		
-		if(GetSummonMaxNumber(spell)>0)
+	if (SpellFlagCheck(spell, S_FLAG_SUMMON))
+	{
+		if (GetSummonMaxNumber(spell) > 0)
 		{
 			char c_temp[128];
-			sprintf_s(c_temp,128,"이 마법은 최대 %d마리까지 소환수를 소환할 수 있다.\n",GetSummonMaxNumber(spell));
+			sprintf_s(c_temp, 128, "이 마법은 최대 %d마리까지 소환수를 소환할 수 있다.\n", GetSummonMaxNumber(spell));
 			text_ += c_temp;
 		}
 	}
+	if (!SpellFlagCheck(spell, S_FLAG_SPEAK))
+	{
+		text_ += "이 마법은 침묵 상태에서도 사용이 가능하다.\n";
+	}
+
 	text_ += "\n\n";
 
 	text_ += '0'+SpellLevel(spell);

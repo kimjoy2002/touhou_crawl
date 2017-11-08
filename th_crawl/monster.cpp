@@ -2722,6 +2722,27 @@ void monster::special_action(int delay_)
 			ChangeMonster(MON_KEINE, 0);
 		}
 		break;
+	case MON_KOKORO1:
+	case MON_KOKORO2:
+	case MON_KOKORO3:
+	{
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() &&
+				((it->id == MON_MASK_ANGRY && id == MON_KOKORO1) ||
+				(it->id == MON_MASK_SAD && id == MON_KOKORO2) ||
+					(it->id == MON_MASK_HAPPY && id == MON_KOKORO3)
+					)) {
+
+				return;
+			}
+		}
+
+		SetExhausted(rand_int(4, 8));
+		ChangeMonster(MON_KOKORO, 0);
+
+
+	}
 	default:
 		break;
 	}

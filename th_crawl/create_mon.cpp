@@ -385,6 +385,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //후토
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //세이가
 	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  20 }, //무라사
+	{ 60,  DEPTH_LEVEL + 1,  DEPTH_LAST_LEVEL,  15,  3 }, //코코로
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  15,  3}, //마미조
 	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  15,  3 }, //요우무
 	{ 58,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //코마치
@@ -1085,6 +1086,7 @@ int get_unique_to_id(int m_id)
 	case MON_LUNASA:  return 57;
 	case MON_KOMACHI:  return 58;
 	case MON_SUMIREKO:  return 59;
+	case MON_KOKORO:  return 60;
 	}
 }
 
@@ -1323,6 +1325,10 @@ void create_id_to_unique(int id, int level)
 	case 59:
 		index.push_back(MON_SUMIREKO);
 		break;
+	case 60:
+		index.push_back(MON_KOKORO);
+		break;
+
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -1855,6 +1861,30 @@ void SetResistMonster(monster* mon)
 	case MON_KOMACHI:
 		mon->fire_resist = 1;
 		mon->poison_resist = 1;
+		break;
+	case MON_KOKORO:
+		mon->poison_resist = 1;
+		break;
+	case MON_KOKORO1:
+		mon->fire_resist = 3;
+		mon->poison_resist = 1;
+		break;
+	case MON_KOKORO2:
+		mon->ice_resist = 3;
+		mon->poison_resist = 1;
+		break;
+	case MON_KOKORO3:
+		mon->elec_resist = 3;
+		mon->poison_resist = 1;
+		break;
+	case MON_MASK_ANGRY:
+	case MON_MASK_SAD:
+	case MON_MASK_HAPPY:
+		mon->elec_resist = 3;
+		mon->fire_resist = 3;
+		mon->ice_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	}
 }

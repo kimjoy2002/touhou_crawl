@@ -819,7 +819,13 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_KOKORO:
-		text_ += "\n";
+	case MON_KOKORO1:
+	case MON_KOKORO2:
+	case MON_KOKORO3:
+		text_ += "가면에 세월이 흘러서 요괴가 된 가면의 츠쿠모가미 요괴다\n";
+		text_ += "표정은 무표정하지만 끼고있는 가면에 따라 다양한 감정을 지니고 있다.\n";
+		text_ += "상대에 맞춰서 가면을 바꿔끼면서 전술을 바꿔가고 있다.\n";
+		text_ += "끼고 있는 가면에 따라 사용하는 마법과 속성저항이 달라지니 주의하자.\n";
 		break;
 	case MON_SUMIREKO:
 		text_ += "초능력이 특기인 비봉클럽 초대회장인 우사미 스미레코.\n";
@@ -831,13 +837,19 @@ string GetMonsterInfor(monster *it)
 		text_ += "움직임이 봉인당한다. 빠져나가기 위해선 닻이 사라지거나 부셔야 빠져나갈 수 있을 것 같다.\n";
 		break;
 	case MON_MASK_ANGRY:
-		text_ += "\n";
+		text_ += "코코로가 꺼내든 가면. 분노한 오니의 얼굴을 하고 있으며 불같은 기운이 느껴진다.\n";
+		text_ += "코코로는 이 가면으로부터 힘을 얻고 있는 것 같다.\n";
+		text_ += "상황에 따라서 가면을 먼저 파괴하는 것도 가능해보인다.\n";
 		break;
 	case MON_MASK_SAD:
-		text_ += "\n";
+		text_ += "코코로가 꺼내든 가면. 슬퍼하는 할아버지의 얼굴이며 차가운 한기가 느껴진다.\n";
+		text_ += "코코로는 이 가면으로부터 힘을 얻고 있는 것 같다.\n";
+		text_ += "상황에 따라서 가면을 먼저 파괴하는 것도 가능해보인다.\n";
 		break;
 	case MON_MASK_HAPPY:
-		text_ += "\n";
+		text_ += "코코로가 꺼내든 가면. 기뻐하는 여인의 모습이며 짜릿한 감정이 느껴진다.\n";
+		text_ += "코코로는 이 가면으로부터 힘을 얻고 있는 것 같다.\n";
+		text_ += "상황에 따라서 가면을 먼저 파괴하는 것도 가능해보인다.\n";
 		break;
 	case MON_TRASH:
 		text_ += "염력에 의해 부유하는 단순한 쓰레기다. 그러나 걸치적거린다. 치우려면 상당히 시간이 걸릴 것 같다.\n";

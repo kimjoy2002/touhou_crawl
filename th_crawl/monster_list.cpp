@@ -771,7 +771,7 @@ const mon_infor mondata[] = {
 	{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
-	{ MON_KOMACHI,21,9218,name_infor("코마치",false),&img_named_komachi,310,10,3,
+	{ MON_KOMACHI,21,9218,name_infor("코마치",false),&img_named_komachi,310,15,3,
 	{ 40,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("낫",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,0,13},
 
@@ -803,29 +803,41 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_KOKORO,1,1,name_infor("코코로",false),&img_named_kokoro[0],1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_KOKORO,17,1,name_infor("코코로",false),&img_named_kokoro[0],170,9,12,
+	{ 20,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+
+	{ MON_KOKORO1,17,1,name_infor("코코로",false),&img_named_kokoro[1],170,9,12,
+	{ 30,0,0 },{ ATT_FIRE,ATT_NONE,ATT_NONE },{ name_infor("부채",false),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+
+	{ MON_KOKORO2,17,1,name_infor("코코로",false),&img_named_kokoro[2],170,9,12,
+	{ 30,0,0 },{ ATT_COLD,ATT_NONE,ATT_NONE },{ name_infor("부채",false),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+
+	{ MON_KOKORO3,17,1,name_infor("코코로",false),&img_named_kokoro[3],170,9,12,
+	{ 30,0,0 },{ ATT_ELEC,ATT_NONE,ATT_NONE },{ name_infor("부채",false),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	{ MON_SUMIREKO,20,9429,name_infor("스미레코",false),&img_named_sumireko,200,1,15,
 	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 },
 
 	{ MON_ANCHOR,1,1,name_infor("닻",true),&img_mons_anchor,100,15,0,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10 },
 
-	{ MON_MASK_ANGRY,1,1,name_infor("분노의 가면",true),&img_mons_mask_angry,1,0,0,
+	{ MON_MASK_ANGRY,10,1,name_infor("분노의 가면",true),&img_mons_mask_angry,50,0,20,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_FLY,1,1,10 },
 
-	{ MON_MASK_SAD,1,1,name_infor("슬픔의 가면",true),&img_mons_mask_sad,1,0,0,
+	{ MON_MASK_SAD,10,1,name_infor("슬픔의 가면",true),&img_mons_mask_sad,50,0,20,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_FLY,1,1,10 },
 
-	{ MON_MASK_HAPPY,1,1,name_infor("기쁨의 가면",true),&img_mons_mask_happy,1,0,0,
+	{ MON_MASK_HAPPY,10,1,name_infor("기쁨의 가면",true),&img_mons_mask_happy,50,0,20,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_FLY,1,1,10 },
 
 	{ MON_TRASH,1,1,name_infor("쓰레기 더미",false),&img_mons_trash[0],100,10,0,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },

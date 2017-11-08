@@ -3681,6 +3681,25 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 	else	
 		return false;
 }
+bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->GetExhausted())
+		return false;
+	if (order->isplayer())
+		return false;
+	monster* mon_ = (monster*)order;
+
+	int id_ = randA(2) ? randA(1) ? MON_KOKORO1 : MON_KOKORO2 : MON_KOKORO3;
+	int mask_ = id_ == MON_KOKORO1 ? MON_MASK_ANGRY: id_ == MON_KOKORO2 ? MON_MASK_SAD: MON_MASK_HAPPY;
+
+	mon_->ChangeMonster(id_, 0);
+	printarray(true, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), id_ == MON_KOKORO1 ?"ºÐ³ë": id_ == MON_KOKORO2 ?"½½ÇÄ":"±â»Ý","ÀÇ °¡¸éÀ» Âø¿ëÇß´Ù. ");
+	if (monster* mask_mon_ = BaseSummon(mask_, rand_int(80,100), true, true, 2, order, target, SKD_SUMMON_MASK, GetSummonMaxNumber(SPL_KOKORO_CHANGE))) {
+
+	}
+	return true;
+}
+
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -4178,6 +4197,19 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_TRASH_RUSH, 20));
 		list->push_back(spell(SPL_PSYCHOKINESIS, 20));
 		list->push_back(spell(SPL_BLINK, 30));
+		break;
+	case MON_KOKORO:
+		list->push_back(spell(SPL_KOKORO_CHANGE, 50));
+		break;
+	case MON_KOKORO1:
+		list->push_back(spell(SPL_FIRE_BOLT, 40));
+		break;
+	case MON_KOKORO2:
+		list->push_back(spell(SPL_ICE_BOLT, 40));
+		break;
+	case MON_KOKORO3:
+		list->push_back(spell(SPL_CHAIN_LIGHTNING, 40));
+		break;
 	default:
 		break;
 	}
@@ -4453,6 +4485,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_summon_trash(power, short_, order, target);
 	case SPL_TRASH_RUSH:
 		return skill_trash_rush(power, short_, order, target);
+	case SPL_KOKORO_CHANGE:
+		return skill_kokoro_roulette(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4890,6 +4924,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_summon_trash(power, short_, &you, target);
 	case SPL_TRASH_RUSH:
 		return skill_trash_rush(power, short_, &you, target);
+	case SPL_KOKORO_CHANGE:
+		return skill_kokoro_roulette(power, short_, &you, target);
 	default:
 		return false;
 	}

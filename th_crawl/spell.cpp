@@ -206,6 +206,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
+	case SPL_KOKORO_CHANGE:
 		return (S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
@@ -361,6 +362,7 @@ int SpellLength(spell_list skill)
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_PRISM_CALL:
 	case SPL_SUMMON_TRASH:
+	case SPL_KOKORO_CHANGE:
 	default:
 		return 0;		
 	}
@@ -634,6 +636,8 @@ const char* SpellString(spell_list skill)
 		return "어번 사이코키네시스";
 	case SPL_TRASH_RUSH:
 		return "어번 사이코키네시스 사출";
+	case SPL_KOKORO_CHANGE:
+		return "코코로 룰렛";
 	default:
 		return "알수없는 마법";
 	}
@@ -748,6 +752,7 @@ int SpellLevel(spell_list skill)
 	case SPL_CHANGE:
 	case SPL_MAMIZO_EVADE:
 	case SPL_SUMMON_YOSHIKA:
+	case SPL_KOKORO_CHANGE:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -849,6 +854,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_YOSHIKA:
 	case SPL_REAPER_MET:
 	case SPL_PSYCHOKINESIS:
+	case SPL_KOKORO_CHANGE:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1233,6 +1239,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_TRASH_RUSH:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_KOKORO_CHANGE:
+		return num == 0 ? (SKT_ALCHEMY) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1375,6 +1383,7 @@ int SpellCap(spell_list skill)
 	case SPL_PSYCHOKINESIS:
 	case SPL_SUMMON_TRASH:
 	case SPL_TRASH_RUSH:
+	case SPL_KOKORO_CHANGE:
 		return 200;
 	default:
 	case SPL_BLINK:

@@ -798,7 +798,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "그녀의 움직임은 느긋하고 둔하지만 거리를 조절하는 능력을 이용한 전투에선 속도는 중요치않아보인다.\n";
 		break;
 	case MON_IKU:
-		text_ += "\n";
+		text_ += "용궁의 사자인 나가에 이쿠로 평소에는 느긋하게 하늘을 헤엄쳐다닌다.\n";
+		text_ += "그러나 분노하게되면 온 몸에서 전기를 만들어서 적을 감전시킨다.\n";
 		break;
 	case MON_LARVA:
 		text_ += "\n";

@@ -373,18 +373,19 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1,  5,  3}, //파르시
 
 	
-	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  3}, //오린
-	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28}, //누에
-	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28}, //클라운피스
-	{ 55,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 25,  28 }, //케이네
+	{ 23,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 20,  3}, //오린
+	{ 32,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 20,  28}, //누에
+	{ 35,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 20,  28}, //클라운피스
+	{ 55,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL, 20,  28 }, //케이네
 	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
-	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //이치린
+	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
-	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //앨리스
-	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //토지코
-	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  25,  3}, //후토
+	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //앨리스
+	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //토지코
+	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //후토
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //세이가
 	{ 54,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  20 }, //무라사
+	{ 61,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  20 }, //이쿠
 	{ 60,  DEPTH_LEVEL + 1,  DEPTH_LAST_LEVEL,  15,  3 }, //코코로
 	{ 52,  DEPTH_LEVEL+2,  DEPTH_LAST_LEVEL,  15,  3}, //마미조
 	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  15,  3 }, //요우무
@@ -1087,6 +1088,7 @@ int get_unique_to_id(int m_id)
 	case MON_KOMACHI:  return 58;
 	case MON_SUMIREKO:  return 59;
 	case MON_KOKORO:  return 60;
+	case MON_IKU:  return 61;
 	}
 }
 
@@ -1328,7 +1330,9 @@ void create_id_to_unique(int id, int level)
 	case 60:
 		index.push_back(MON_KOKORO);
 		break;
-
+	case 61:
+		index.push_back(MON_IKU);
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -1885,6 +1889,10 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_IKU:
+		mon->elec_resist = 3;
+		mon->poison_resist = 1;
 		break;
 	}
 }

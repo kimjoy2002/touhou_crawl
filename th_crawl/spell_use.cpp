@@ -3715,6 +3715,24 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 	return true;
 }
 
+bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int mon_panlty_ = order->isplayer() ? 0 : 2;//몬스터가 쓸때 패널티
+		int damage_ = 11 + pow / 6 - mon_panlty_;
+		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor("번개", false));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		for (int i = 0; i<(order->GetParadox() ? 2 : 1); i++)
+			throwtanmac(38, beam, temp_infor, NULL);
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -3983,7 +4001,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SELF_HEAL,15));
 		break;
 	case MON_YUUGENMAGAN:
-		list->push_back(spell(SPL_CHAIN_LIGHTNING,30));
+		list->push_back(spell(SPL_THUNDER_BOLT,30));
 		break;
 	case MON_YUKI:
 		list->push_back(spell(SPL_FIRE_BALL,20));
@@ -4223,7 +4241,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_ICE_BOLT, 40));
 		break;
 	case MON_KOKORO3:
-		list->push_back(spell(SPL_CHAIN_LIGHTNING, 40));
+		list->push_back(spell(SPL_THUNDER_BOLT, 40));
+		break;
+	case MON_IKU:
+		list->push_back(spell(SPL_THUNDER, 25));
+		list->push_back(spell(SPL_THUNDER_BOLT, 30));
 		break;
 	default:
 		break;
@@ -4502,6 +4524,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_trash_rush(power, short_, order, target);
 	case SPL_KOKORO_CHANGE:
 		return skill_kokoro_roulette(power, short_, order, target);
+	case SPL_THUNDER_BOLT:
+		return skill_thunder_bolt(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4941,6 +4965,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_trash_rush(power, short_, &you, target);
 	case SPL_KOKORO_CHANGE:
 		return skill_kokoro_roulette(power, short_, &you, target);
+	case SPL_THUNDER_BOLT:
+		return skill_thunder_bolt(power, short_, &you, target);
 	default:
 		return false;
 	}

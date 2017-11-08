@@ -591,6 +591,10 @@ string GetSpellInfor(spell_list spell)
 		text_ += "가면의 색에 따라서 코코로의 속성이 결정된다. 상대 유리한 속성이 선택될 가능성이 높아진다.\n";
 		text_ += "속성이 정해진 후엔 같이 떠다니는 가면이 파괴되면 다시 원상태로 돌아온다.\n";
 		break;
+	case SPL_THUNDER_BOLT:
+		text_ += "거대한 번개의 탄환을 발사하는 강력한 번개계열 공격마법.\n";
+		text_ += "적을 관통하는 특징이 있다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

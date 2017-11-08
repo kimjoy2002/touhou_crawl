@@ -744,15 +744,15 @@ const mon_infor mondata[] = {
 
 	{ MON_MURASA,17, 6510,name_infor("무라사",false),&img_named_murasa,160,5,12,
 	{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_SPEAK,1,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_SPEAK,1,1,10},
 
 	{ MON_KEINE,15,4212,name_infor("케이네",false),&img_named_keine,140,10,5,
 	{ 14,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,3,10 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,3,3,10 },
 
 	{ MON_KEINE2,15,4212,name_infor("백택 케이네",false),&img_named_keine2,140,0,15,
 	{ 30,30,55 },{ ATT_NORMAL,ATT_NORMAL,ATT_NORMAL },{ name_infor("공격",true), name_infor("공격",true), name_infor("박치기",false) },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE  | M_FLAG_SPEAK,1,0,7 },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,0,7 },
 
 	{ MON_YOUMU,21,9465,name_infor("요우무",false),&img_named_youmu,230,0,20,
 	{ 38,46,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor("백루검",true),name_infor("루관검",true),name_infor() },
@@ -773,11 +773,11 @@ const mon_infor mondata[] = {
 
 	{ MON_KOMACHI,21,9218,name_infor("코마치",false),&img_named_komachi,310,15,3,
 	{ 40,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("낫",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,0,13},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,3,0,13},
 
-	{ MON_IKU,1,1,name_infor("이쿠",false),&img_named_iku,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_IKU,15,4162,name_infor("이쿠",false),&img_named_iku,85,10,20,
+	{ 20,30,0 },{ ATT_NORMAL,ATT_ELEC,ATT_NONE },{ name_infor("공격",true),name_infor("옷깃",true),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
 	{ MON_LARVA,1,1,name_infor("라바",false),&img_named_larva,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

@@ -78,6 +78,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_LASER:
 	case SPL_SPARK:
 	case  SPL_FIRE_SPREAD:
+	case SPL_THUNDER_BOLT:
 		return (S_FLAG_PENETRATE | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SUMMON_BUG:
 	case SPL_SUMMON_PENDULUM:
@@ -275,6 +276,7 @@ int SpellLength(spell_list skill)
 	case SPL_FIELD_VIOLET:
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
+	case SPL_THUNDER_BOLT:
 		return 7;
 	case SPL_TWIST:
 	case SPL_FIRE_BOLT:
@@ -638,6 +640,8 @@ const char* SpellString(spell_list skill)
 		return "어번 사이코키네시스 사출";
 	case SPL_KOKORO_CHANGE:
 		return "코코로 룰렛";
+	case SPL_THUNDER_BOLT:
+		return "썬더볼트";
 	default:
 		return "알수없는 마법";
 	}
@@ -753,6 +757,7 @@ int SpellLevel(spell_list skill)
 	case SPL_MAMIZO_EVADE:
 	case SPL_SUMMON_YOSHIKA:
 	case SPL_KOKORO_CHANGE:
+	case SPL_THUNDER_BOLT:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -928,6 +933,7 @@ int SpellNoise(spell_list skill)
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_SUMMON_ANCHOR:
 	case SPL_TRASH_RUSH:
+	case SPL_THUNDER_BOLT:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1241,6 +1247,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_KOKORO_CHANGE:
 		return num == 0 ? (SKT_ALCHEMY) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THUNDER_BOLT:
+		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1384,6 +1392,7 @@ int SpellCap(spell_list skill)
 	case SPL_SUMMON_TRASH:
 	case SPL_TRASH_RUSH:
 	case SPL_KOKORO_CHANGE:
+	case SPL_THUNDER_BOLT:
 		return 200;
 	default:
 	case SPL_BLINK:

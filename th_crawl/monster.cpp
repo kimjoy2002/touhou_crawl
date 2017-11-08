@@ -39,7 +39,7 @@ ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRA
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
- force_strong(false), force_turn(0), s_changed(0),
+force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
@@ -105,6 +105,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, force_strong);
 	SaveData<int>(fp, force_turn);
 	SaveData<int>(fp, s_changed);
+	SaveData<int>(fp, s_invincibility);
+	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -206,6 +208,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, force_strong);
 	LoadData<int>(fp, force_turn);
 	LoadData<int>(fp, s_changed);
+	LoadData<int>(fp, s_invincibility);
+	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -304,7 +308,9 @@ void monster::init()
 	s_exhausted=0;
 	force_strong=false;
 	force_turn=0;
-	s_changed=0;
+	s_changed = 0;
+	s_invincibility = 0;
+	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -609,6 +615,15 @@ void monster::TurnLoad()
 		force_turn =0;
 
 	//s_changed 둔갑은 다른 층에 지나와도 시간 리셋이 안되게(처리가 귀찮)
+
+	if (s_invincibility != -1)
+	{
+		if (s_invincibility - temp_turn > 0)
+			s_invincibility -= temp_turn;
+		else
+			s_invincibility = 0;
+	}
+
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -1218,6 +1233,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			sprintf_s(temp,100,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
 			printlog(temp,true,false,false,CL_help);
 		}
+	}
+
+	if (s_invincibility) {
+		damage_ = 0;
 	}
 
 	if((randA(100) <= percent_ && !graze_) || back_stab == 3 || perfect_)
@@ -2113,7 +2132,7 @@ int monster::action(int delay_)
 	{
 		if(s_poison)
 		{
-			if(poison_percent(s_poison))
+			if (poison_percent(s_poison) && !s_invincibility)
 			{
 				hp -= randA_1(3)*poison_damage(s_poison);
 				if(hp<=0)
@@ -2367,9 +2386,19 @@ int monster::action(int delay_)
 				ChangeMonster(MON_RACCON,0);
 			}
 		}
-		
 
+		if (s_invincibility > 0)
+		{
 
+			s_invincibility--;
+			if (!s_invincibility)
+			{
+				if (is_sight && isView())
+				{
+					printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 무적이 아니다.");
+				}
+			}
+		}
 
 
 		if(s_communication)
@@ -2828,6 +2857,9 @@ bool monster::HpRecover(int turn_)
 }
 int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
+	if (s_invincibility) {
+		return 0;
+	}
 	hp+= value_;
 	if(hp >= max_hp)
 	{
@@ -3285,6 +3317,22 @@ bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 	return true;
 }
 
+bool monster::SetInvincibility(int s_invincibility_, bool speak_)
+{
+	if (!s_invincibility_)
+		return false;
+	if (isYourShight() && speak_)
+	{
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "무적상태가 되었다. ");
+	}
+	s_invincibility = s_invincibility_;
+	return true;
+}
+bool monster::SetDebufPlus(int s_debuf_)
+{
+	debuf_boost =  s_debuf_;
+	return debuf_boost;
+}
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -4013,6 +4061,13 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_changed)
 		{
 			sprintf(string_,"둔갑중");
+			return true;
+		}
+		return false;
+	case MSS_INVINCIBILITY:
+		if (s_invincibility)
+		{
+			sprintf(string_, "무적");
 			return true;
 		}
 		return false;

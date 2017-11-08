@@ -204,6 +204,7 @@ void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
 void map_algorithms_tuto03(int num);
 void map_algorithms_arena(int num);
+void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 
 void map_algorithms(int num)
 {
@@ -275,7 +276,7 @@ void map_algorithms(int num)
 			//map_algorithms01(num,DG_FLOOR,DG_WALL);
 			map_algorithms02(num,10,0,DG_FLOOR,DG_SEA);
 		}
-		else if(num >= HAKUREI_LEVEL && num >= HAKUREI_LAST_LEVEL)
+		else if(num >= HAKUREI_LEVEL && num <= HAKUREI_LAST_LEVEL)
 		{
 			map_algorithms01(num,DG_FLOOR,DG_WALL);
 		}
@@ -298,6 +299,10 @@ void map_algorithms(int num)
 		{			
 			env[num].ClearFloor();
 			map_algorithms02(num,3,-40,DG_DREAM_FLOOR,DG_WALL2);
+		}
+		else if (num == OKINA_LEVEL)
+		{
+			map_algorithms_okina(num, DG_FLOOR, DG_METAL_WALL);
 		}
 		else
 		{
@@ -1477,6 +1482,34 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 		float y = round((float)DG_MAX_Y/2+cos(i*24.0f/180.0f*D3DX_PI)*-10.0f);
 		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
 	}
+}
+void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
+{
+
+	for (int x = 0; x<DG_MAX_X; x++)
+	{
+		for (int y = 0; y<DG_MAX_Y; y++)
+		{
+			if (((x - DG_MAX_X / 2) > -7 && (x - DG_MAX_X / 2) < 7) && 
+				((y - DG_MAX_Y / 2) > -7 && (y - DG_MAX_Y / 2) < 7))
+			{
+				env[num].dgtile[x][y].tile = floor_tex;
+			}
+			else
+				env[num].dgtile[x][y].tile = wall_tex;
+		}
+	}
+
+	env[num].stair_up[0].x = DG_MAX_X / 2;
+	env[num].stair_up[0].y = DG_MAX_Y / 2;
+	env[num].dgtile[DG_MAX_X / 2][DG_MAX_Y / 2].tile = DG_RETURN_STAIR;
+
+	env[num].dgtile[DG_MAX_X / 2][DG_MAX_Y / 2 - 4].tile = DG_TEMPLE_OKINA;
+
+
+
+	env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
+	env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
 }
 
 

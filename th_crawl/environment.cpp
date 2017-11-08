@@ -297,7 +297,6 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			it->atkmove(true,true);
 		}
 	}
-	ReleaseMutex(mutx);
 
 
 	if(!dq.empty() && !env[floor].isPandemonium())
@@ -313,6 +312,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 				break;
 		}
 	}
+	ReleaseMutex(mutx);
 	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 		if(it->isLive())
@@ -1592,6 +1592,8 @@ char* CurrentLevelString(int level)
 		sprintf(temp,"판데모니엄");
 	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
 		sprintf(temp,"하쿠레이 %d층", level_+1-HAKUREI_LEVEL);
+	else if (level_ == OKINA_LEVEL)
+		sprintf(temp, "문 뒤의 세계");
 	else
 		sprintf(temp,"알수없는 층");
 

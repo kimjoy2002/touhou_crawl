@@ -2511,6 +2511,10 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 
 bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 {
+	if (current_level == OKINA_LEVEL){
+		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		return false;
+	}
 	if (order->isplayer())
 	{
 		if (env[current_level].dgtile[target.x][target.y].isBreakable() && !env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
@@ -2611,6 +2615,10 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 {
+	if (current_level == OKINA_LEVEL){
+		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		return false;
+	}
 	if (order->isplayer())
 	{
 		monster* this_unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y, &you);
@@ -2641,7 +2649,9 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
 				return false;
 			}
-			if (!env[current_level].dgtile[beam->x][beam->y].isMove(you.isFly(), you.isSwim(), false) &&
+			if (!(env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
+				env[current_level].dgtile[order->position.x][order->position.y].isDoor() ||
+				env[current_level].dgtile[order->position.x][order->position.y].isTemple()) &&
 				!env[current_level].dgtile[beam->x][beam->y].isBreakable()
 				)
 			{
@@ -2662,6 +2672,10 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 {
+	if (current_level == OKINA_LEVEL){
+		printlog("이 곳에서는 백댄서를 소환할 필요가 없다.", true, false, false, CL_normal);
+		return false;
+	}
 	int num_ = 1;
 	int id_ = MON_MAI2;
 	bool loop_ = true;
@@ -2731,7 +2745,46 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if (current_level == OKINA_LEVEL){
+		printlog("이 곳은 이미 뒷 문의 세계다.", true, false, false, CL_normal);
+		return false;
+	}
+
+	if (env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
+		env[current_level].dgtile[order->position.x][order->position.y].isDoor() ||
+		env[current_level].dgtile[order->position.x][order->position.y].isTemple()) {
+		env[current_level].dgtile[order->position.x][order->position.y].tile = DG_OPEN_DOOR;
+	}
+	else {
+		printlog("이 곳에는 문을 열만한 공간이 없다!", true, false, false, CL_normal);
+		return false;
+	}
+
+	//log에 오키나레벨로 도착함을 저장
+	deque<monster*> dq;
+	printlog("당신은 등 뒤의 문을 열고 도망쳤다!", true, false, false, CL_okina);
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && distan_coord(it->position, you.position) <= 2 && it->CanChase())
+		{
+			dq.push_back(&(*it));
+		}
+	}
+	rand_shuffle(dq.begin(), dq.end());
+	MoreWait();
+	you.god_value[GT_OKINA][0] = current_level;
+	you.god_value[GT_OKINA][1] = you.position.x;
+	you.god_value[GT_OKINA][2] = you.position.y;
+	env[OKINA_LEVEL].EnterMap(0, dq);
+	printarray(true, false, false, CL_normal, 2, "이 곳은 문 뒤의 세계다. ", randA(2)?randA(1)?
+		"푹 쉬다 가도록! ":"환영하네! ":"여기는 안전해보인다. ");
+
+
+	char temp2[200];
+	sprintf_s(temp2, 200, "%s로 도망쳤다.", CurrentLevelString(current_level));
+	AddNote(you.turn, CurrentLevelString(current_level), temp2, CL_normal);
+	//you.resetLOS(false);
+	return true;
 }
 
 

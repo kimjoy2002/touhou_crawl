@@ -84,6 +84,9 @@ enum dungeon_level
 
 	HAKUREI_LEVEL,
 	HAKUREI_LAST_LEVEL = HAKUREI_LEVEL + MAX_HAKUREI_LEVEL,
+
+	OKINA_LEVEL,
+
 	MAXLEVEL
 
 };
@@ -1019,6 +1022,7 @@ enum monster_state_simple //표시용 상태
 	MSS_COMMUNICATION,
 	MSS_FORCE,
 	MSS_CHANGED,
+	MSS_INVINCIBILITY,
 	MSS_MAX
 };
 

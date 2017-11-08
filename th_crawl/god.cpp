@@ -845,6 +845,13 @@ bool GetGodAbility(int level, bool plus)
 			else
 				printlog("더 이상 크레이지 백댄서즈를 호출할 수 없다.", true, false, false, CL_okina);
 			break;
+		case 5:
+			you.Ability(SKL_OKINA_5, true, !plus);
+			if (plus)
+				printlog("당신은 이제 등 뒤의 문을 열고 도망칠 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 등 뒤의 문으로 도망칠 수 없다.", true, false, false, CL_okina);
+			break;
 		}
 		return false;
 	case GT_JUNKO:

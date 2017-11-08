@@ -82,6 +82,8 @@ public:
 	bool force_strong; //강화/약화(위력 2배 1/2배)
 	int force_turn; //강화/약화턴
 	int s_changed; //둔갑시간. 시간이 지나면 너구리로 돌아온다.
+	int s_invincibility;
+	int debuf_boost;
 
 	int summon_time;
 	parent_type summon_parent;
@@ -200,6 +202,8 @@ public:
 	bool SetCommunication(int s_communication_);
 	bool SetExhausted(int s_exhausted_);
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
+	bool SetInvincibility(int s_invincibility, bool speak_);
+	bool SetDebufPlus(int s_debuf_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

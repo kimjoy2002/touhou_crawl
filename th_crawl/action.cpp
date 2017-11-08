@@ -1646,6 +1646,15 @@ void Stair_move(bool down)
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
 			}
+			if (current_level == OKINA_LEVEL) {
+				floor_return = you.god_value[GT_OKINA][0];// map_list.dungeon_enter[SUBTERRANEAN].floor;
+				env[floor_return].MakeMap(true);
+				pos_return = coord_def(you.god_value[GT_OKINA][1], you.god_value[GT_OKINA][2]);//map_list.dungeon_enter[SUBTERRANEAN].pos;
+				//floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
+				//env[floor_return].MakeMap(true);
+				//pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
+
+			}
 
 			deque<monster*> dq;
 			for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)

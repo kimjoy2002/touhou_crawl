@@ -1767,7 +1767,7 @@ int monster::atkmove(int is_sight, bool only_move)
 	//		target_pos = target->position;
 	//}
 
-	if(!only_move && !s_confuse && !s_mute && !s_fear && !s_lunatic)
+	if(!only_move && !s_confuse && (!s_mute || (flag & M_FLAG_SILENCE)) && !s_fear && !s_lunatic)
 	{
 		if(target && target->position == target_pos)
 		{
@@ -1780,14 +1780,20 @@ int monster::atkmove(int is_sight, bool only_move)
 				{
 					if(isMonSafeSkill(id_,this,target_pos))
 					{
-						if(SpellFlagCheck(id_,S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
+						if (SpellFlagCheck(id_, S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
 						{
-							if(env[current_level].isSilence(position))
-								continue;
-							enterlog();
-							char* c_ = Get_Speak(id,this,MST_MAGIC);
-							if( c_  && (env[current_level].isInSight(position)))
-								printlog(c_,true,false,false,CL_magic);
+							if (env[current_level].isSilence(position))
+							{
+								if (!(flag & M_FLAG_SILENCE))
+									continue;
+							}
+							else
+							{
+								enterlog();
+								char* c_ = Get_Speak(id, this, MST_MAGIC);
+								if (c_ && (env[current_level].isInSight(position)))
+									printlog(c_, true, false, false, CL_magic);
+							}
 						}
 						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
 						{

@@ -944,6 +944,8 @@ string GetMonsterInfor(monster *it)
 	
 	if(it->resist >= 99)
 			text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
+	if (it->flag & M_FLAG_SILENCE)
+		text_ += "침묵된 상태에서도 마법이 사용가능하다.\n";
 
 
 	

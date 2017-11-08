@@ -59,7 +59,8 @@ enum monster_flag
 	M_FLAG_NONE_STAIR = 1<<21,
 	M_FLAG_CANT_NETURAL = 1<<22, //자연적으로 생성될수 없는. 아레나에서 나올 수 없는 몹
 	M_FLAG_INANIMATE = 1<<23, //무생물
-	M_FLAG_NO_STATE = 1<<24 //상태 표시 안됨
+	M_FLAG_NO_STATE = 1<<24, //상태 표시 안됨
+	M_FLAG_SILENCE = 1 << 25 //침묵에 면역이다.
 };
 
 

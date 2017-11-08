@@ -1467,6 +1467,8 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 {
 	if(num_<=0)
 		return false;
+	if (flag & M_FLAG_NONE_MOVE)
+		return false;
 
 	if(state.GetState() == MS_ATACK)
 	{//공격상태이면서
@@ -1604,7 +1606,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 				else
 				{
-					if((*it).isAllyMonster(this) && randA(4) == 0)
+					if(!(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
 					{
 						if(!(*it).smartmove(x_mov, y_mov, 2))
 						{

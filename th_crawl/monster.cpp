@@ -584,11 +584,13 @@ void monster::TurnLoad()
 	else
 		s_mute =0;
 
-	if(s_fear-temp_turn>0)
-		s_fear-=temp_turn;
-	else
-		s_fear =0;
-	
+	if (s_fear != -1) {
+		if (s_fear - temp_turn > 0)
+			s_fear -= temp_turn;
+		else
+			s_fear = 0;
+	}
+
 	if(s_ghost-temp_turn>0)
 		s_ghost-=temp_turn;
 	else
@@ -1836,7 +1838,7 @@ int monster::atkmove(int is_sight, bool only_move)
 			for(int i=0;i<5;i++)
 			{
 				move_ = MoveToPos(position+GetDirecToPos(direc_+arr_[i]), only_move);
-				if(!move_ && i==4)
+				if (!move_ && i == 4 && s_fear > 0)
 				{
 					s_fear = 0;
 				}
@@ -1933,10 +1935,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		if (sight_){
 			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "죽었다. ");
 
+			if (s_fear != -1) {
+				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
+			}
 		}
-		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON))
+		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear != -1)
 		{
-			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
+			printlog("경험이 증가하는 것을 느꼈다. ",true,false,false,CL_normal);
 			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 				auto_pick_onoff(true);
 		}
@@ -2022,11 +2027,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_)
 	{
-		if(reason_ == PRT_PLAYER) //플레이어가 죽였다.
+		if (reason_ == PRT_PLAYER && s_fear != -1) //플레이어가 죽였다.
 		{
 			you.GetExp(exper);
 		}
-		else if(reason_ == PRT_ALLY) //동맹이 죽였다.
+		else if (reason_ == PRT_ALLY && s_fear != -1) //동맹이 죽였다.
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}
@@ -2325,7 +2330,7 @@ int monster::action(int delay_)
 			}
 		}
 		
-		if(s_fear)
+		if(s_fear > 0)
 		{
 			s_fear--;
 		}
@@ -2635,6 +2640,11 @@ int monster::action(int delay_)
 		}
 		special_action(is_sight, false);
 		time_delay-=GetSpeed();
+		if (!is_sight && s_fear == -1) {
+			//전의상실한 몬스터는 시야밖에 나가면 사라짐
+			dead(PRT_NEUTRAL, false, true);
+		}
+
 		if(!isLive())
 			break;
 	}
@@ -3210,16 +3220,29 @@ bool monster::SetSwift(int swift_)
 }
 bool monster::SetFear(int fear_)
 {
-	if(!fear_)
+	if (!fear_ && s_fear == -1)
 		return false;
-	if(isYourShight())
+	if (fear_ == -1)
 	{
-		if(!s_fear)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다. ");
+		if (isYourShight())
+		{
+			if (!s_fear)
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질려서 전의를 완전 상실했다. ");
+		}
+
+		s_fear = fear_;
 	}
-	s_fear += fear_;
-	if(s_fear>50)
-		s_fear = 50;
+	else
+	{
+		if (isYourShight())
+		{
+			if (!s_fear)
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질렸다. ");
+		}
+		s_fear += fear_;
+		if (s_fear > 50)
+			s_fear = 50;
+	}
 	return true;
 }
 
@@ -4022,7 +4045,10 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_FEAR:
 		if(s_fear)
 		{
-			sprintf(string_,"공포");
+			if (s_fear>0)
+				sprintf(string_,"공포");
+			else
+				sprintf(string_, "전의상실");
 			return true;
 		}
 		return false;

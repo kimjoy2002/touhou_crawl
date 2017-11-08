@@ -888,11 +888,21 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 			return false;
 		}
 
-		if(hit_mon->CalcuateMR(GetDebufPower(SKL_SATORI_1,power)))
+		//if(hit_mon->CalcuateMR(GetDebufPower(SKL_SATORI_1,power)))
+		int percent_ = randC(2, 100);
+		int debuf_pow = GetDebufPower(SKL_SATORI_1, power);
+		int base = (hit_mon->GetResist() - debuf_pow);
+		int base2 = (hit_mon->GetResist() - (debuf_pow-30));
+		
+		if (hit_mon->GetMindReading() || base2 < percent_)
 		{
-			
-
-			hit_mon->SetFear(rand_int(15,20));
+			hit_mon->SetFear(-1);
+			you.GetExp(((monster*)hit_mon)->exper / 2);
+			env[current_level].SummonClear(((monster*)hit_mon)->map_id);
+		}
+		else if (base < percent_)
+		{
+			hit_mon->SetFear(rand_int(25,40));
 		}
 		else if(hit_mon->isYourShight())
 		{					

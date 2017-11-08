@@ -3689,7 +3689,22 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 		return false;
 	monster* mon_ = (monster*)order;
 
-	int id_ = randA(2) ? randA(1) ? MON_KOKORO1 : MON_KOKORO2 : MON_KOKORO3;
+	random_extraction<int> rand_kokoro;
+	rand_kokoro.push(MON_KOKORO1, (you.fire_resist <=0?100:
+		(you.fire_resist == 1 ? 30 :
+		(you.fire_resist == 2 ? 10 : 1
+		))));
+	rand_kokoro.push(MON_KOKORO2, (you.ice_resist <= 0 ? 100 :
+		(you.ice_resist == 1 ? 30 :
+		(you.ice_resist == 2 ? 10 : 1
+		))));
+	rand_kokoro.push(MON_KOKORO3, (you.elec_resist <= 0 ? 100 :
+		(you.elec_resist == 1 ? 30 :
+		(you.elec_resist == 2 ? 10 : 1
+		))));
+		
+
+	int id_ = rand_kokoro.pop();
 	int mask_ = id_ == MON_KOKORO1 ? MON_MASK_ANGRY: id_ == MON_KOKORO2 ? MON_MASK_SAD: MON_MASK_HAPPY;
 
 	mon_->ChangeMonster(id_, 0);

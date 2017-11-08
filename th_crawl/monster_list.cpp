@@ -779,9 +779,9 @@ const mon_infor mondata[] = {
 	{ 20,30,0 },{ ATT_NORMAL,ATT_ELEC,ATT_NONE },{ name_infor("공격",true),name_infor("옷깃",true),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_LARVA,1,1,name_infor("라바",false),&img_named_larva,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_LARVA,6,1,name_infor("라바",false),&img_named_larva,35,2,7,
+	{ 7,0,0 },{ ATT_S_POISON,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
 	{ MON_NEMUNO,1,1,name_infor("네무노",false),&img_named_nemuno,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

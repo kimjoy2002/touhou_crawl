@@ -2198,7 +2198,7 @@ bool players::SetConfuse(int confuse_, bool strong_)
 		return false;
 	if(!strong_ && confuse_resist>0)
 		return false;
-	confuse_ /= 3; //플레이어는 혼란시간이 적다
+	confuse_ /= 2; //플레이어는 혼란시간이 적다
 
 
 	if(!s_confuse)
@@ -2209,8 +2209,8 @@ bool players::SetConfuse(int confuse_, bool strong_)
 		confuse_ /=2;
 	}
 	s_confuse += confuse_;
-	if(s_confuse>10)
-		s_confuse = 10;
+	if(s_confuse>20)
+		s_confuse = 20;
 	return true;
 }
 bool players::SetSlow(int slow_)

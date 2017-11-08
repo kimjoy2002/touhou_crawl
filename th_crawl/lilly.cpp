@@ -271,6 +271,42 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			return temp_speak;
 		}
 		break;
+	case MON_LARVA:
+		switch (type)
+		{
+		case FS_NORMAL:
+			switch (randA(5))
+			{
+			case 0:
+				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:
+				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:
+				sprintf(temp_speak, "%s%s당신에게 ", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 4:
+				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 5:
+				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		case FS_ENTER:
+			sprintf(temp_speak, "%s%s외쳤다. \"!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_FAIRY_WAR:
+			sprintf(temp_speak, "%s%s외쳤다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		case FS_REVIVE:
+			sprintf(temp_speak, "%s%s외쳤다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			return temp_speak;
+		}
+		break;
 	default:
 		break;
 	}
@@ -560,6 +596,12 @@ void GetFairyExp(int exp)
 							if(it->level == 13)
 							{
 								it->spell_lists.push_back(spell(SPL_HEAL_OTHER,20));
+							}
+							break;
+						case MON_LARVA:
+							if (it->level == 13)
+							{
+								it->spell_lists.push_back(spell(SPL_VENOM_BOLT, 20));
 							}
 							break;
 						}

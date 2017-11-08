@@ -802,7 +802,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "그러나 분노하게되면 온 몸에서 전기를 만들어서 적을 감전시킨다.\n";
 		break;
 	case MON_LARVA:
-		text_ += "\n";
+		text_ += "나비의 요정으로 등에 나비의 날개가 달려있는 요정(곤충?)이다.\n";
+		text_ += "인분을 퍼뜨리는 능력을 가지고 있어서 건드리면 독이나 혼란을 유발하는 가루를 떨어뜨린다.\n";
+		text_ += "가까이서 건드리지않고 멀리서 건드리거나, 독저항을 가져야 인분가루에 당하지 않는다.\n";
 		break;
 	case MON_NEMUNO:
 		text_ += "\n";

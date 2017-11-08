@@ -1281,6 +1281,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			if (a.type == ATT_LUNATIC && randA(2) == 0) {
 				SetLunatic(rand_int(3, 8));
 			}
+			if (id == MON_LARVA)
+			{
+				if (a.order) {
+					if (distan_coord(position, a.order->position) <= 2)
+					{
+						smoke_type could_ = randA(1) ? SMT_POISON : SMT_CONFUSE;
+						env[current_level].MakeSmoke(a.order->position, could_==SMT_POISON?img_fog_poison: img_fog_poison, could_, rand_int(5, 7), 0, this);
+					}
+
+				}
+			}
 			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )
 			{
 				for(int i=-1;i<=1;i++){

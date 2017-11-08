@@ -1604,6 +1604,25 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 					}
 					return 0;
 				}
+				else if (id == MON_SUMIREKO && !it->isplayer() && it->isAllyMonster(this))
+				{
+					if (distan_coord(position, target_pos) > 16)
+					{
+						//스미레코 특별 기술
+						//스미레코는 상대와 거리가 멀어지면 자신이 소환한 쓰레기더미와 자리 교환이 가능하다.
+						if (it->sm_info.parent_map_id == map_id &&
+							it->sm_info.summon_id == GetSummonKind(SPL_SUMMON_TRASH))
+						{
+							it->SetXY(coord_def(position.x, position.y));
+							SetXY(coord_def(position.x + x_mov, position.y + y_mov));
+							return 2;
+						}
+						else
+							return 0;
+					}
+					else
+						return 0;
+				}
 				else
 				{
 					if(!(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)

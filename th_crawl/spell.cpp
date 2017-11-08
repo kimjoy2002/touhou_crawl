@@ -1564,6 +1564,19 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		}
 		return false;
 	}
+	case SPL_TRASH_RUSH:
+	{
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && it->sm_info.parent_map_id == mon->map_id && it->sm_info.summon_id == GetSummonKind(SPL_SUMMON_TRASH))
+			{
+				if (mon->isMonsterSight(it->position)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	default:
 		return true;
 	}

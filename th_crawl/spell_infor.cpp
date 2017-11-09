@@ -595,6 +595,10 @@ string GetSpellInfor(spell_list spell)
 		text_ += "거대한 번개의 탄환을 발사하는 강력한 번개계열 공격마법.\n";
 		text_ += "적을 관통하는 특징이 있다.\n";
 		break;
+	case SPL_SANTUARY:
+		text_ += "사용시 넓은 범위에 성역을 펼친다. 이 성역안에선 어느 데미지도 무효로 되서 입지 않는다.\n";
+		text_ += "시간이 흐를수록 성역의 범위는 점차 좁아진다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

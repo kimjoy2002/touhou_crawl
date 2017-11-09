@@ -204,6 +204,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SHATTER:
 	case SPL_EMERALD_CITY:
 	case SPL_PRISM_CALL:
+	case SPL_SANTUARY:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
@@ -365,6 +366,7 @@ int SpellLength(spell_list skill)
 	case SPL_PRISM_CALL:
 	case SPL_SUMMON_TRASH:
 	case SPL_KOKORO_CHANGE:
+	case SPL_SANTUARY:
 	default:
 		return 0;		
 	}
@@ -642,6 +644,8 @@ const char* SpellString(spell_list skill)
 		return "ÄÚÄÚ·Î ·ê·¿";
 	case SPL_THUNDER_BOLT:
 		return "½ã´õº¼Æ®";
+	case SPL_SANTUARY:
+		return "¼º¿ª";
 	default:
 		return "¾Ë¼ö¾ø´Â ¸¶¹ı";
 	}
@@ -792,6 +796,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SHATTER:
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_AFTERLITE:
+	case SPL_SANTUARY:
 		return 9;
 	default:
 		return 0;
@@ -938,6 +943,7 @@ int SpellNoise(spell_list skill)
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
+	case SPL_SANTUARY:
 		return 16; //±²ÀåÇÑ ¼ÒÀ½
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1249,6 +1255,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_ALCHEMY) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_THUNDER_BOLT:
 		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
+	case SPL_SANTUARY:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1393,6 +1401,7 @@ int SpellCap(spell_list skill)
 	case SPL_TRASH_RUSH:
 	case SPL_KOKORO_CHANGE:
 	case SPL_THUNDER_BOLT:
+	case SPL_SANTUARY:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1586,6 +1595,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		}
 		return false;
 	}
+	case SPL_SANTUARY:
+		return (mon->hp>mon->max_hp*0.3f ? false : true);
 	default:
 		return true;
 	}

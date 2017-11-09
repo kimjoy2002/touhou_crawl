@@ -340,7 +340,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  35,  11,  14,  15,  3}, //클라운피스
 	{  37,  11,  14,  15,  3}, //레티
 	{ 55,  13,  14, 10,  5 }, //케이네
-
+	
 	//안개호수
 	{  9, MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  40,  2}, //삼월정
 	{ 62, MISTY_LAKE_LEVEL ,  MISTY_LAKE_LEVEL + 2,  40,  2 }, //라바
@@ -353,6 +353,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
+	{ 63,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //네무노
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
@@ -1092,6 +1093,7 @@ int get_unique_to_id(int m_id)
 	case MON_KOKORO:  return 60;
 	case MON_IKU:  return 61;
 	case MON_LARVA:  return 62;
+	case MON_NEMUNO:  return 63;
 	}
 }
 
@@ -1338,6 +1340,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 62:
 		index.push_back(MON_LARVA);
+		break;
+	case 63:
+		index.push_back(MON_NEMUNO);
 		break;
 	}
 

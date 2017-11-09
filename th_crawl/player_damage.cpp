@@ -801,7 +801,13 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
+			if (env[current_level].isSanctuary(position))
+			{
+				//성역에선 모든 데미지가 0
+				damage_ = 0;
+			}
 			print_damage_message(a,damage_!=0);
+
 			if(damage_)
 			{
 				enterlog();

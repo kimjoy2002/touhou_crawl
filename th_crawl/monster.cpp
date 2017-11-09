@@ -1284,6 +1284,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			Blink(10);
 			return false;
 		}
+		if (env[current_level].isSanctuary(position))
+		{
+			//성역에선 모든 데미지가 0
+			damage_ = 0;
+		}
 
 
 

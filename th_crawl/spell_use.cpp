@@ -1128,9 +1128,16 @@ bool skill_silence(int pow, bool short_, unit* order, coord_def target)
 }
 bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 {
+	if (order && order->GetExhausted())
+		return false;
 	if (env[current_level].isInSight(target))
 		printlog("성역이 펼쳐졌다! ", false, false, false, CL_warning);
 	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
+
+	if (order && !order->isplayer())
+	{
+		order->SetExhausted(rand_int(20, 35));
+	}
 	return true;
 }
 bool skill_swift(int pow, bool short_, unit* order, coord_def target)
@@ -3487,17 +3494,17 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 
-int i = 1;
-for (; i > 0; i--)
-{
-	if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
+	int i = 1;
+	for (; i > 0; i--)
 	{
-		if (env[current_level].isInSight(target))
-			printlog("거대한 닻이 바닥에 박혔다! ", false, false, false, CL_normal);
-		return_ = true;
+		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
+		{
+			if (env[current_level].isInSight(target))
+				printlog("거대한 닻이 바닥에 박혔다! ", false, false, false, CL_normal);
+			return_ = true;
+		}
 	}
-}
-return return_;
+	return return_;
 }
 bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 {
@@ -3746,348 +3753,348 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	list<spell> *list =  &(mon_->spell_lists);
 	(*random_spell) = false;
 	list->clear();
-	switch(id)
+	switch (id)
 	{
 	case MON_FAIRY_GREEN:
 		break;
 	case MON_FAIRY_BLUE:
-		list->push_back(spell(SPL_MON_TANMAC_SMALL,40));
+		list->push_back(spell(SPL_MON_TANMAC_SMALL, 40));
 		break;
 	case MON_FAIRY_BLUE_MAGICIAN:
 		(*random_spell) = true;
-		list->push_back(spell(randA(1)?SPL_FROST:SPL_FLAME,40));
-		list->push_back(spell(SPL_BLINK,15));
+		list->push_back(spell(randA(1) ? SPL_FROST : SPL_FLAME, 40));
+		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_FAIRY_RED_COMMANDER:
-		list->push_back(spell(SPL_HASTE_OTHER,20));
-		list->push_back(spell(SPL_HEAL_OTHER,20));
+		list->push_back(spell(SPL_HASTE_OTHER, 20));
+		list->push_back(spell(SPL_HEAL_OTHER, 20));
 		break;
 	case MON_KATPA_GUN:
-		list->push_back(spell(SPL_MON_WATER_GUN,90));
+		list->push_back(spell(SPL_MON_WATER_GUN, 90));
 		break;
 	case MON_KYOUKO:
-		list->push_back(spell(SPL_KYOKO_SMITE,35));
+		list->push_back(spell(SPL_KYOKO_SMITE, 35));
 		break;
 	case MON_CIRNO:
-		list->push_back(spell(SPL_COLD_BEAM,15));
+		list->push_back(spell(SPL_COLD_BEAM, 15));
 		break;
 	case MON_WRIGGLE:
-		list->push_back(spell(SPL_SUMMON_BUG,20));
+		list->push_back(spell(SPL_SUMMON_BUG, 20));
 		break;
 	case MON_MEDICINE:
-		list->push_back(spell(SPL_MEDICINE_CLOUD,30));
+		list->push_back(spell(SPL_MEDICINE_CLOUD, 30));
 		break;
 	case MON_DIEFAIRY:
-		list->push_back(spell(SPL_BLINK,20));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,60));
+		list->push_back(spell(SPL_BLINK, 20));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 60));
 		break;
 	case MON_HUMAM_YINYANG:
-		list->push_back(spell(SPL_FLAME,12));
-		list->push_back(spell(SPL_FROST,12));
-		list->push_back(spell(SPL_CONFUSE,5));
-		list->push_back(spell(SPL_SLOW,5));
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_FLAME, 12));
+		list->push_back(spell(SPL_FROST, 12));
+		list->push_back(spell(SPL_CONFUSE, 5));
+		list->push_back(spell(SPL_SLOW, 5));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_HUMAM_PRIEST:
-		list->push_back(spell(SPL_SMITE,15));
-		list->push_back(spell(SPL_SELF_HEAL,10));
+		list->push_back(spell(SPL_SMITE, 15));
+		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
 	case MON_CROW_TENGU:
-		list->push_back(spell(SPL_GRAZE,30));
-		list->push_back(spell(SPL_VEILING,20));
+		list->push_back(spell(SPL_GRAZE, 30));
+		list->push_back(spell(SPL_VEILING, 20));
 		break;
 	case MON_SUNNY:
-		list->push_back(spell(SPL_GLOW,10));
-		list->push_back(spell(SPL_INVISIBLE,20));
+		list->push_back(spell(SPL_GLOW, 10));
+		list->push_back(spell(SPL_INVISIBLE, 20));
 		break;
 	case MON_LUNAR:
-		list->push_back(spell(SPL_SILENCE,25));
+		list->push_back(spell(SPL_SILENCE, 25));
 		break;
 	case MON_STAR:
-		list->push_back(spell(SPL_HASTE,25));
+		list->push_back(spell(SPL_HASTE, 25));
 		break;
 	case MON_ALICEYUKKURI:
-		list->push_back(spell(SPL_FAKE_DOLLS_WAR,40));
+		list->push_back(spell(SPL_FAKE_DOLLS_WAR, 40));
 		break;
 	case MON_YAMABIKO:
-		list->push_back(spell(SPL_ALERT_NOISE,25));
+		list->push_back(spell(SPL_ALERT_NOISE, 25));
 		break;
 	case MON_KATPA_WATER_WIZARD:
-		list->push_back(spell(SPL_FROST,15));
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_BLINK,10));
-		list->push_back(spell(SPL_INVISIBLE,7));
+		list->push_back(spell(SPL_FROST, 15));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_BLINK, 10));
+		list->push_back(spell(SPL_INVISIBLE, 7));
 		break;
 	case MON_YAMABUSH_TENGU:
-		list->push_back(spell(SPL_HASTE,20));
-		list->push_back(spell(SPL_SMITE,20));
-		list->push_back(spell(SPL_SELF_HEAL,10));
+		list->push_back(spell(SPL_HASTE, 20));
+		list->push_back(spell(SPL_SMITE, 20));
+		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
 	case MON_FORTUNE_TELLER:
-		list->push_back(spell(SPL_FLAME,20));
-		list->push_back(spell(SPL_CONFUSE,10));
-		list->push_back(spell(SPL_INVISIBLE,7));
-		list->push_back(spell(SPL_MAGIC_TANMAC,20));
+		list->push_back(spell(SPL_FLAME, 20));
+		list->push_back(spell(SPL_CONFUSE, 10));
+		list->push_back(spell(SPL_INVISIBLE, 7));
+		list->push_back(spell(SPL_MAGIC_TANMAC, 20));
 		break;
 	case MON_AYA:
-		list->push_back(spell(SPL_HASTE,30));
-		list->push_back(spell(SPL_WHIRLWIND,20));
-		list->push_back(spell(SPL_GRAZE,20));
-		list->push_back(spell(SPL_VEILING,20));
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_HASTE, 30));
+		list->push_back(spell(SPL_WHIRLWIND, 20));
+		list->push_back(spell(SPL_GRAZE, 20));
+		list->push_back(spell(SPL_VEILING, 20));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_WAKASAGI:
-		list->push_back(spell(SPL_MERMAID_SONG,25));
-		list->push_back(spell(SPL_COLD_BEAM,15));
-		list->push_back(spell(SPL_CONFUSE,10));
+		list->push_back(spell(SPL_MERMAID_SONG, 25));
+		list->push_back(spell(SPL_COLD_BEAM, 15));
+		list->push_back(spell(SPL_CONFUSE, 10));
 		break;
 	case MON_NAZRIN:
-		list->push_back(spell(SPL_SUMMON_PENDULUM,30));
-		list->push_back(spell(SPL_MAGIC_TANMAC,20));	
+		list->push_back(spell(SPL_SUMMON_PENDULUM, 30));
+		list->push_back(spell(SPL_MAGIC_TANMAC, 20));
 		break;
 	case MON_SEKIBANKI_BODY:
-		list->push_back(spell(SPL_SUMMON_SEKIBANKI,15));
+		list->push_back(spell(SPL_SUMMON_SEKIBANKI, 15));
 		break;
 	case MON_SEKIBANKI_HEAD:
-		list->push_back(spell(SPL_FLAME,15));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,10));
-		list->push_back(spell(SPL_BLINK,15));
+		list->push_back(spell(SPL_FLAME, 15));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 10));
+		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_NITORI:
-		list->push_back(spell(SPL_WATER_CANNON,30));
-		list->push_back(spell(SPL_INVISIBLE,15));
-		list->push_back(spell(SPL_MON_WATER_GUN,25));
+		list->push_back(spell(SPL_WATER_CANNON, 30));
+		list->push_back(spell(SPL_INVISIBLE, 15));
+		list->push_back(spell(SPL_MON_WATER_GUN, 25));
 		break;
-	case MON_KEGERO:		
-		list->push_back(spell(SPL_JUMP_ATTACK,25));
+	case MON_KEGERO:
+		list->push_back(spell(SPL_JUMP_ATTACK, 25));
 		break;
 	case MON_BENBEN:
-		list->push_back(spell(SPL_SLOW,20));
-		list->push_back(spell(SPL_BLINK,20));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,30));
+		list->push_back(spell(SPL_SLOW, 20));
+		list->push_back(spell(SPL_BLINK, 20));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 30));
 		break;
 	case MON_YATHASI:
-		list->push_back(spell(SPL_CONFUSE,20));
-		list->push_back(spell(SPL_BLINK,20));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,30));
+		list->push_back(spell(SPL_CONFUSE, 20));
+		list->push_back(spell(SPL_BLINK, 20));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 30));
 		break;
 	case MON_ORIN:
-		list->push_back(spell(SPL_FIRE_BALL,20));
-		list->push_back(spell(SPL_GRAZE,20));
-		list->push_back(spell(SPL_SUMMON_ZOMBIE_FAIRY,10));
+		list->push_back(spell(SPL_FIRE_BALL, 20));
+		list->push_back(spell(SPL_GRAZE, 20));
+		list->push_back(spell(SPL_SUMMON_ZOMBIE_FAIRY, 10));
 		break;
 	case MON_ORIN_CAT:
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_ICHIRIN:
-		list->push_back(spell(SPL_SUMMON_UNZAN,50));
+		list->push_back(spell(SPL_SUMMON_UNZAN, 50));
 		break;
 	case MON_UNZAN:
-		list->push_back(spell(SPL_SUMMON_UNZAN_PUNCH,40));
-		list->push_back(spell(SPL_LASER,15));
+		list->push_back(spell(SPL_SUMMON_UNZAN_PUNCH, 40));
+		list->push_back(spell(SPL_LASER, 15));
 		break;
 	case MON_PACHU:
-		list->push_back(spell(SPL_HASTE,15));
-		list->push_back(spell(SPL_FIRE_BOLT,10));
-		list->push_back(spell(SPL_ICE_BOLT,10));
-		list->push_back(spell(SPL_VENOM_BOLT,10));
-		list->push_back(spell(SPL_CHAIN_LIGHTNING,10));
-		list->push_back(spell(SPL_WATER_CANNON,20));
-		list->push_back(spell(SPL_BLINK,15));
+		list->push_back(spell(SPL_HASTE, 15));
+		list->push_back(spell(SPL_FIRE_BOLT, 10));
+		list->push_back(spell(SPL_ICE_BOLT, 10));
+		list->push_back(spell(SPL_VENOM_BOLT, 10));
+		list->push_back(spell(SPL_CHAIN_LIGHTNING, 10));
+		list->push_back(spell(SPL_WATER_CANNON, 20));
+		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_MAGIC_BOOK:
-		{
-			item_infor t;
-			makeCustomBook(&t);
-			(*random_spell) = true;
-			int arr_[] = {SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
-			SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE,
-			SPL_AIR_STRIKE
-			};
-			//주 공격스킬
-			int arr2_[] = {SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
-			SPL_HASTE, SPL_INVISIBLE, SPL_HYPNOSIS
-			};
-			//보조스킬
+	{
+		item_infor t;
+		makeCustomBook(&t);
+		(*random_spell) = true;
+		int arr_[] = { SPL_FIRE_BOLT, SPL_ICE_BOLT, SPL_VENOM_BOLT, SPL_LASER,SPL_STONE_ARROW,
+		SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE,
+		SPL_AIR_STRIKE
+		};
+		//주 공격스킬
+		int arr2_[] = { SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
+		SPL_HASTE, SPL_INVISIBLE, SPL_HYPNOSIS
+		};
+		//보조스킬
 
-			int add_ = arr_[randA(10)];
-			list->push_back(spell(add_,25));
-			t.value1 = add_;
-			int color_ = randA(3);
-			mon_->image = &img_mons_magic_book[color_];
-			t.image = &img_item_book[color_];
-			if(randA(10)<4)
+		int add_ = arr_[randA(10)];
+		list->push_back(spell(add_, 25));
+		t.value1 = add_;
+		int color_ = randA(3);
+		mon_->image = &img_mons_magic_book[color_];
+		t.image = &img_item_book[color_];
+		if (randA(10) < 4)
+		{
+			if (randA(10) < 7)
 			{
-				if(randA(10)<7)
-				{
-					list->push_back(spell(SPL_BLINK,15));
-					t.value2 = SPL_BLINK;
-				}
-				else
-				{
-					add_ = arr2_[randA(7)];
-					list->push_back(spell(add_,15));
-					t.value2 = add_;
-				}
+				list->push_back(spell(SPL_BLINK, 15));
+				t.value2 = SPL_BLINK;
 			}
-			item_list_->push_back(t);
+			else
+			{
+				add_ = arr2_[randA(7)];
+				list->push_back(spell(add_, 15));
+				t.value2 = add_;
+			}
 		}
-		break;
+		item_list_->push_back(t);
+	}
+	break;
 	case MON_HOBGOBRIN_LIBRARIAN:
-		list->push_back(spell(SPL_INVISIBLE,5));
-		list->push_back(spell(SPL_MAGIC_TANMAC,15));
-		list->push_back(spell(SPL_SLOW,10));
-		list->push_back(spell(SPL_VENOM_BOLT,15));		
+		list->push_back(spell(SPL_INVISIBLE, 5));
+		list->push_back(spell(SPL_MAGIC_TANMAC, 15));
+		list->push_back(spell(SPL_SLOW, 10));
+		list->push_back(spell(SPL_VENOM_BOLT, 15));
 		break;
 	case MON_HOBGOBRIN_TEMP:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,15)); //악마소환으로 바꾸기
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 15)); //악마소환으로 바꾸기
 		//list->push_back(spell(SPL_SUMMON_BIRD,20));
-		list->push_back(spell(SPL_SMITE,10));
+		list->push_back(spell(SPL_SMITE, 10));
 		break;
 	case MON_KOAKUMA:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,10)); //악마소환으로 바꾸기
-		list->push_back(spell(SPL_FIRE_BOLT,15));
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 10)); //악마소환으로 바꾸기
+		list->push_back(spell(SPL_FIRE_BOLT, 15));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
-	case MON_MAID_FAIRY:		
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,25));
+	case MON_MAID_FAIRY:
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
 		break;
-	case MON_SAKUYA:		
-		list->push_back(spell(SPL_HASTE,20));
-		list->push_back(spell(SPL_SLOW,10));
-		list->push_back(spell(SPL_STASIS,15));
-		list->push_back(spell(SPL_TELEPORT_SELF,10));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,25));
-		list->push_back(spell(SPL_BLINK,20));
+	case MON_SAKUYA:
+		list->push_back(spell(SPL_HASTE, 20));
+		list->push_back(spell(SPL_SLOW, 10));
+		list->push_back(spell(SPL_STASIS, 15));
+		list->push_back(spell(SPL_TELEPORT_SELF, 10));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_REMILIA:
-		list->push_back(spell(SPL_HASTE,25));		
+		list->push_back(spell(SPL_HASTE, 25));
 		break;
 	case MON_DRAGON_BABY:
-		list->push_back(spell(SPL_FIRE_BOLT,20));		
+		list->push_back(spell(SPL_FIRE_BOLT, 20));
 		break;
 	case MON_KASEN:
-		list->push_back(spell(SPL_SUMMON_BIRD,30));
+		list->push_back(spell(SPL_SUMMON_BIRD, 30));
 		break;
 	case MON_YAMAWARO_NINJA:
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE,30));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 30));
 		break;
-	case MON_YAMAWARO_FLAG:		
-		list->push_back(spell(SPL_SELF_HEAL,20));
-		list->push_back(spell(SPL_HASTE_OTHER,20));
+	case MON_YAMAWARO_FLAG:
+		list->push_back(spell(SPL_SELF_HEAL, 20));
+		list->push_back(spell(SPL_HASTE_OTHER, 20));
 		break;
 	case MON_MAGICAL_STAR:
-		list->push_back(spell(SPL_MAGIC_TANMAC,15));
+		list->push_back(spell(SPL_MAGIC_TANMAC, 15));
 		break;
 	case MON_KOISHI:
-		list->push_back(spell(SPL_HYPNOSIS,30));
-		list->push_back(spell(SPL_SELF_INJURY,20));
-		list->push_back(spell(SPL_BLINK,20));
+		list->push_back(spell(SPL_HYPNOSIS, 30));
+		list->push_back(spell(SPL_SELF_INJURY, 20));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_NUE:
-		list->push_back(spell(SPL_SUMMON_UFO,20));	
-		list->push_back(spell(SPL_CHAIN_LIGHTNING,20));
-		break;	
+		list->push_back(spell(SPL_SUMMON_UFO, 20));
+		list->push_back(spell(SPL_CHAIN_LIGHTNING, 20));
+		break;
 	case MON_NAMAZ:
-		list->push_back(spell(SPL_STONE_UPLIFT,10));
-		break;	
+		list->push_back(spell(SPL_STONE_UPLIFT, 10));
+		break;
 	case MON_RACCON:
-		list->push_back(spell(SPL_CHANGE,30));
+		list->push_back(spell(SPL_CHANGE, 30));
 		break;
 	case MON_LANTERN_YOUKAI:
-		list->push_back(spell(SPL_FIRE_SPREAD,25));
+		list->push_back(spell(SPL_FIRE_SPREAD, 25));
 		break;
 	case MON_EVIL_EYE:
-		list->push_back(spell(SPL_SHOCK,10));
+		list->push_back(spell(SPL_SHOCK, 10));
 		break;
 	case MON_ELIS:
-		list->push_back(spell(SPL_BLINK,10));
+		list->push_back(spell(SPL_BLINK, 10));
 		break;
 	case MON_LUIZE:
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_SELF_HEAL,15));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_SELF_HEAL, 15));
 		break;
 	case MON_YUUGENMAGAN:
-		list->push_back(spell(SPL_THUNDER_BOLT,30));
+		list->push_back(spell(SPL_THUNDER_BOLT, 30));
 		break;
 	case MON_YUKI:
-		list->push_back(spell(SPL_FIRE_BALL,20));
-		list->push_back(spell(SPL_FIRE_BOLT,20));
-		list->push_back(spell(SPL_SMITE,10));
+		list->push_back(spell(SPL_FIRE_BALL, 20));
+		list->push_back(spell(SPL_FIRE_BOLT, 20));
+		list->push_back(spell(SPL_SMITE, 10));
 		break;
-	case MON_MAI:	
-		list->push_back(spell(SPL_ICE_CLOUD,20));
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_SELF_HEAL,10));
+	case MON_MAI:
+		list->push_back(spell(SPL_ICE_CLOUD, 20));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
 	case MON_SARIEL:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON,25));
-		list->push_back(spell(SPL_HASTE_OTHER,15));
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 25));
+		list->push_back(spell(SPL_HASTE_OTHER, 15));
 		break;
 	case MON_SCHEMA_EYE:
-		list->push_back(spell(SPL_SCHEMA_TANMAC,40));
+		list->push_back(spell(SPL_SCHEMA_TANMAC, 40));
 		break;
 	case MON_FLAN:
-		list->push_back(spell(SPL_FLAN_BUSIN,30));
-		list->push_back(spell(SPL_BURST,12));
+		list->push_back(spell(SPL_FLAN_BUSIN, 30));
+		list->push_back(spell(SPL_BURST, 12));
 		break;
 	case MON_FLAN_BUNSIN:
-		list->push_back(spell(SPL_BURST,18));
+		list->push_back(spell(SPL_BURST, 18));
 		break;
 	case MON_RABIT_BOMB:
-		list->push_back(spell(SPL_SUICIDE_BOMB,0));
+		list->push_back(spell(SPL_SUICIDE_BOMB, 0));
 		break;
 	case MON_RABIT_SPEAR:
 		break;
 	case MON_RABIT_SUPPORT:
-		list->push_back(spell(SPL_RABBIT_HORN,25));
-		list->push_back(spell(SPL_HASTE_OTHER,30));
+		list->push_back(spell(SPL_RABBIT_HORN, 25));
+		list->push_back(spell(SPL_HASTE_OTHER, 30));
 		break;
 	case MON_RABIT_MAGIC:
-		list->push_back(spell(SPL_FROST,25));
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_BLINK,30));
+		list->push_back(spell(SPL_FROST, 25));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_BLINK, 30));
 		break;
 	case MON_TEWI:
-		list->push_back(spell(SPL_RABBIT_HORN,15));
+		list->push_back(spell(SPL_RABBIT_HORN, 15));
 		break;
 	case MON_CLOWNPIECE:
-		list->push_back(spell(SPL_FIRE_BALL,10));
-		list->push_back(spell(SPL_CONFUSE,5));
+		list->push_back(spell(SPL_FIRE_BALL, 10));
+		list->push_back(spell(SPL_CONFUSE, 5));
 		break;
 	case MON_DOREMI:
-		list->push_back(spell(SPL_SUMMON_DREAM,40));
-		list->push_back(spell(SPL_BLINK,15));
+		list->push_back(spell(SPL_SUMMON_DREAM, 40));
+		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_FAIRY_HERO:
 		break;
 	case MON_FAIRY_SOCERER:
-		list->push_back(spell(SPL_ICE_BOLT,20));
-		list->push_back(spell(SPL_FIRE_BOLT,20));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_FIRE_BOLT, 20));
 		break;
 	case MON_FAIRY_SUN_FLOWER:
-		list->push_back(spell(SPL_SMITE,15));
-		list->push_back(spell(SPL_HASTE_ALL,20));
-		list->push_back(spell(SPL_HEAL_ALL,25));
+		list->push_back(spell(SPL_SMITE, 15));
+		list->push_back(spell(SPL_HASTE_ALL, 20));
+		list->push_back(spell(SPL_HEAL_ALL, 25));
 		break;
 	case MON_MOON_RABIT_SUPPORT:
-		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
-		list->push_back(spell(SPL_HASTE_OTHER,15));
+		list->push_back(spell(SPL_MOON_COMMUNICATION, 20));
+		list->push_back(spell(SPL_HASTE_OTHER, 15));
 		break;
 	case MON_MOON_RABIT_ATTACK:
 		break;
 	case MON_MOON_RABIT_ELITE:
-		list->push_back(spell(SPL_MOON_GUN,30));
+		list->push_back(spell(SPL_MOON_GUN, 30));
 		break;
 	case MON_MAC:
-		list->push_back(spell(SPL_SUMMON_DREAM,25));
+		list->push_back(spell(SPL_SUMMON_DREAM, 25));
 		//list->push_back(spell(SPL_BLINK,15));
 		break;
 	case MON_NIGHTMARE:
-		list->push_back(spell(SPL_MANA_DRAIN,20));
+		list->push_back(spell(SPL_MANA_DRAIN, 20));
 		break;
 	case MON_LUNATIC:
-		list->push_back(spell(SPL_INSANE,20));
+		list->push_back(spell(SPL_INSANE, 20));
 		break;
 	case MON_HAUNT:
 		break;
@@ -4098,109 +4105,109 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_HELL_SPIDER:
 		break;
 	case MON_BLOOD_HAUNT:
-		list->push_back(spell(SPL_BLOOD_SMITE,25));
+		list->push_back(spell(SPL_BLOOD_SMITE, 25));
 		break;
 	case MON_HELL_HOUND:
-		list->push_back(spell(SPL_CALL_HOUND,15));
+		list->push_back(spell(SPL_CALL_HOUND, 15));
 		break;
 	case MON_DESIRE:
 		break;
 	case MON_FLOWER_TANK:
-		list->push_back(spell(SPL_LASER,25));
-		list->push_back(spell(SPL_LUMINUS_STRIKE,15));
+		list->push_back(spell(SPL_LASER, 25));
+		list->push_back(spell(SPL_LUMINUS_STRIKE, 15));
 		break;
 	case MON_EVIL_EYE_TANK:
-		list->push_back(spell(SPL_CANNON,25));
+		list->push_back(spell(SPL_CANNON, 25));
 		break;
 	case MON_SNOW_GIRL:
-		list->push_back(spell(SPL_FREEZE,20));
-		list->push_back(spell(SPL_COLD_BEAM,15));
+		list->push_back(spell(SPL_FREEZE, 20));
+		list->push_back(spell(SPL_COLD_BEAM, 15));
 		break;
 	case MON_LETTY:
-		list->push_back(spell(SPL_FREEZE,25));
-		list->push_back(spell(SPL_ICE_CLOUD,15));
+		list->push_back(spell(SPL_FREEZE, 25));
+		list->push_back(spell(SPL_ICE_CLOUD, 15));
 		break;
 	case MON_YORIHIME:
 		break;
 	case MON_TOYOHIME:
-		list->push_back(spell(SPL_ICE_BOLT,15));
-		list->push_back(spell(SPL_BLIZZARD,20));
+		list->push_back(spell(SPL_ICE_BOLT, 15));
+		list->push_back(spell(SPL_BLIZZARD, 20));
 		break;
 	case MON_UTSUHO:
-		list->push_back(spell(SPL_FIRE_STORM,6));
-		list->push_back(spell(SPL_HASTE,15));
+		list->push_back(spell(SPL_FIRE_STORM, 6));
+		list->push_back(spell(SPL_HASTE, 15));
 		break;
 	case MON_SUIKA:
 		break;
 	case MON_REIMU:
 		break;
 	case MON_ALICE:
-		list->push_back(spell(SPL_DOLLS_WAR,40));
-		list->push_back(spell(SPL_TELEPORT_SELF,30));
+		list->push_back(spell(SPL_DOLLS_WAR, 40));
+		list->push_back(spell(SPL_TELEPORT_SELF, 30));
 		break;
 	case MON_SEIRAN:
 		break;
 	case MON_RINGO:
-		list->push_back(spell(SPL_MOON_COMMUNICATION,20));
-		list->push_back(spell(SPL_HASTE_OTHER,15));
-		list->push_back(spell(SPL_SELF_HEAL,15));
+		list->push_back(spell(SPL_MOON_COMMUNICATION, 20));
+		list->push_back(spell(SPL_HASTE_OTHER, 15));
+		list->push_back(spell(SPL_SELF_HEAL, 15));
 		break;
 	case MON_UDONGE:
-		list->push_back(spell(SPL_MIND_BENDING,15));
-		list->push_back(spell(SPL_FIELD_VIOLET,15));
+		list->push_back(spell(SPL_MIND_BENDING, 15));
+		list->push_back(spell(SPL_FIELD_VIOLET, 15));
 		break;
 	case MON_KAGUYA:
-		list->push_back(spell(SPL_SUMMON_OPTION,15));
-		list->push_back(spell(SPL_MANA_DRAIN,15));
+		list->push_back(spell(SPL_SUMMON_OPTION, 15));
+		list->push_back(spell(SPL_MANA_DRAIN, 15));
 		break;
 	case MON_MOKOU:
 		break;
 	case MON_NESI:
-		list->push_back(spell(SPL_NESY_CANNON,30));
+		list->push_back(spell(SPL_NESY_CANNON, 30));
 		break;
 	case MON_SANGHAI:
 	case MON_FAKE_SANGHAI:
 		break;
 	case MON_HOURAI:
 	case MON_FAKE_HOURAI:
-		list->push_back(spell(SPL_LASER,60));
+		list->push_back(spell(SPL_LASER, 60));
 		break;
 	case MON_TOKIKO:
-		{
-			list->push_back(spell(SPL_TWIST,15));
-			list->push_back(spell(SPL_VEILING,15));
-			random_extraction<int> arr_;
-			
-			arr_.push(BOOK_TEST_ANNIHILATE);
-			arr_.push(BOOK_DEBUF);
-			arr_.push(BOOK_MAID_ULTI);
-			arr_.push(BOOK_ICE_ULTI);
-			arr_.push(BOOK_SUMMON_ULTI);
-			arr_.push(BOOK_AIR_ULTI);
-			arr_.push(BOOK_ALCHMY_ULTI);
+	{
+		list->push_back(spell(SPL_TWIST, 15));
+		list->push_back(spell(SPL_VEILING, 15));
+		random_extraction<int> arr_;
 
-			int add_ = arr_.pop();
+		arr_.push(BOOK_TEST_ANNIHILATE);
+		arr_.push(BOOK_DEBUF);
+		arr_.push(BOOK_MAID_ULTI);
+		arr_.push(BOOK_ICE_ULTI);
+		arr_.push(BOOK_SUMMON_ULTI);
+		arr_.push(BOOK_AIR_ULTI);
+		arr_.push(BOOK_ALCHMY_ULTI);
 
-			item_infor t;
-			makeitem(ITM_BOOK,0,&t,add_);
-			item_list_->push_back(t);
-		}
-		break;
+		int add_ = arr_.pop();
+
+		item_infor t;
+		makeitem(ITM_BOOK, 0, &t, add_);
+		item_list_->push_back(t);
+	}
+	break;
 	case MON_TOZIKO:
-		list->push_back(spell(SPL_THUNDER,20));
+		list->push_back(spell(SPL_THUNDER, 20));
 		break;
 	case MON_FUTO:
-		list->push_back(spell(SPL_FIRE_BALL,15));
-		list->push_back(spell(SPL_UNLUCK,25));
+		list->push_back(spell(SPL_FIRE_BALL, 15));
+		list->push_back(spell(SPL_UNLUCK, 25));
 		break;
 	case MON_MAMIZO:
-		list->push_back(spell(SPL_SUMMON_RACOON,25));
-		list->push_back(spell(SPL_SUMMON_YOUKAI,15));
-		list->push_back(spell(SPL_MAMIZO_EVADE,0));		
+		list->push_back(spell(SPL_SUMMON_RACOON, 25));
+		list->push_back(spell(SPL_SUMMON_YOUKAI, 15));
+		list->push_back(spell(SPL_MAMIZO_EVADE, 0));
 		break;
 	case MON_SEIGA:
-		list->push_back(spell(SPL_SUMMON_YOSHIKA,40));
-		list->push_back(spell(SPL_HASTE_OTHER,25));
+		list->push_back(spell(SPL_SUMMON_YOSHIKA, 40));
+		list->push_back(spell(SPL_HASTE_OTHER, 25));
 		break;
 	case MON_MURASA:
 		list->push_back(spell(SPL_SUMMON_ANCHOR, 40));
@@ -4254,6 +4261,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_THUNDER, 25));
 		list->push_back(spell(SPL_THUNDER_BOLT, 30));
 		break;
+	case MON_NEMUNO:
+	{
+		list->push_back(spell(SPL_SANTUARY, 35));
+		item_infor t;
+		makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY);
+		item_list_->push_back(t);
+		break;
+	}
 	default:
 		break;
 	}
@@ -4538,6 +4553,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_kokoro_roulette(power, short_, order, target);
 	case SPL_THUNDER_BOLT:
 		return skill_thunder_bolt(power, short_, order, target);
+	case SPL_SANTUARY:
+		return skill_santuary(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -4979,6 +4996,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_kokoro_roulette(power, short_, &you, target);
 	case SPL_THUNDER_BOLT:
 		return skill_thunder_bolt(power, short_, &you, target);
+	case SPL_SANTUARY:
+		return skill_santuary(power, short_, &you, target);
 	default:
 		return false;
 	}

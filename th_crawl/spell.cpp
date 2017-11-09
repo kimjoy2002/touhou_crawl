@@ -1555,6 +1555,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_FIRE_SPREAD:
 	case SPL_ALERT_NOISE: 
 	case SPL_JUMP_ATTACK:
+	case SPL_AFTERLITE:
+	case SPL_KOKORO_CHANGE:
 		return (mon->s_exhausted?false:true);
 	case SPL_SUMMON_YOSHIKA:
 		{
@@ -1596,7 +1598,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return false;
 	}
 	case SPL_SANTUARY:
-		return (mon->hp>mon->max_hp*0.3f ? false : true);
+		return (mon->s_exhausted ? false : (mon->hp>mon->max_hp*0.3f ? false : true));
 	default:
 		return true;
 	}

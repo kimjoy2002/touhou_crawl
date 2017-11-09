@@ -38,7 +38,8 @@ char *scroll_uniden_string[SCT_MAX]=
 	"RWMVXCO가 써있는 ",
 	"OFQXLFE가 써있는 ",
 	"DQFQEFS가 써있는 ",
-	"BAHJDQU가 써있는 "
+	"BAHJDQU가 써있는 ",
+	"WQGOKOU가 써있는 ",
 };
 
 const char *scroll_iden_string[SCT_MAX]=
@@ -60,7 +61,8 @@ const char *scroll_iden_string[SCT_MAX]=
 	"정적의 ",
 	"영격 ",
 	"스펠카드충전의 ",
-	"망각의 "
+	"망각의 ",
+	"성역의 "
 };
 
 
@@ -75,9 +77,10 @@ bool enchant_weapon_2_scroll(bool pre_iden_);
 bool enchant_armour_scroll(bool pre_iden_);
 bool fog_scroll(bool pre_iden_);
 bool detect_curse_scroll(bool pre_iden_);
-bool curse_jewelry_scroll(bool pre_iden_);
+bool curse_jewelry_scroll(bool pre_iden_); 
 bool skill_silence(int pow, bool short_, unit* order, coord_def target);
 bool skill_soul_shot(int power, unit* order, coord_def target);
+bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_);
 bool amnesia_scroll(bool pre_iden_);
 
@@ -94,8 +97,8 @@ scroll_type goodbadscroll(int good_bad)
 	}
 	else if(good_bad==3)
 	{
-		scroll_type list_[2] = {SCT_SILENCE,SCT_SOUL_SHOT};
-		return list_[randA(1)];
+		scroll_type list_[3] = {SCT_SILENCE,SCT_SOUL_SHOT,SCT_SANTUARY};
+		return list_[randA(2)];
 	}
 	else //if(good_bad==1)
 	{
@@ -115,6 +118,7 @@ int isGoodScroll(scroll_type kind)
 	switch(kind)
 	{
 	case SCT_SOUL_SHOT:
+	case SCT_SANTUARY:
 		return 3;
 	case SCT_TELEPORT:
 	case SCT_IDENTIFY:
@@ -280,6 +284,23 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 		return true;
 		}
+	case SCT_SANTUARY:
+	{
+		iden_list.scroll_list[kind].iden = 3;
+		if (you.power >= 100)
+		{
+			ReleaseMutex(mutx);
+			changedisplay(DT_GAME);
+			you.PowUpDown(-100, true);
+			skill_santuary(75, false, &you, you.position);
+			WaitForSingleObject(mutx, INFINITE);
+		}
+		else
+		{
+			printlog("아무 일도 일어나지않았다.", true, false, false, CL_normal);
+		}
+		return true;
+	}
 	case SCT_CHARGING:
 		{
 		ReleaseMutex(mutx);

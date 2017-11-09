@@ -34,6 +34,7 @@ enum scroll_type
 	SCT_SOUL_SHOT,
 	SCT_CHARGING,
 	SCT_AMNESIA,
+	SCT_SANTUARY,
 	SCT_MAX
 };
 

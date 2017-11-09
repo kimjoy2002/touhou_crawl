@@ -1399,6 +1399,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(80,0,255,255));
 					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_VIOLET)
 						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(80,255,128,255));
+					if (env[current_level].isInSight(coord_def(i + x_, j + y_)) && env[current_level].dgtile[i + x_][j + y_].flag & FLAG_SANCTUARY)
+						img_effect_slience.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 255, 255, 0));
 				}
 			}
 		}

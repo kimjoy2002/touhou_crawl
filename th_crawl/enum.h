@@ -364,7 +364,8 @@ enum dungeon_tile_flag
     FLAG_NO_ITEM = 1<<8, //아이템리젠금지
     FLAG_MAPPING = 1<<9, //매핑된 지역
     FLAG_NO_STAIR = 1<<10, //계단금지
-    FLAG_VIOLET = 1<<11 //필드 바이올렛
+    FLAG_VIOLET = 1<<11, //필드 바이올렛
+	FLAG_SANCTUARY = 1 << 12 //성역
 };
 
 

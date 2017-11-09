@@ -621,7 +621,8 @@ textures(&texture_item02, 93, 255),
 textures(&texture_item02, 94, 255),
 textures(&texture_item02, 95, 255),
 textures(&texture_item02, 96, 255),
-textures(&texture_item02, 97, 255) };
+textures(&texture_item02, 97, 255),
+textures(&texture_item02, 98, 255) };
 
 
 textures img_item_amulet_kind[] = { textures(&texture_item02, 112, 255),

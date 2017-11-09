@@ -1038,9 +1038,32 @@ bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 		}
 	}
 	return true;
-	
 }
 
+bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
+{
+	length_++;
+	for (int i = -length_ / 2; i <= length_ / 2; i++) //나중에 원형반복자만들면 고치기?
+	{
+		for (int j = -length_ / 2; j <= length_ / 2; j++)
+		{
+			if (i*i + j*j <= length_*length_ / 4)
+			{
+				if (on_)
+					dgtile[center_.x + i][center_.y + j].santuary_count++;
+				else if (dgtile[center_.x + i][center_.y + j].santuary_count>0)
+					dgtile[center_.x + i][center_.y + j].santuary_count--;
+
+				if (dgtile[center_.x + i][center_.y + j].santuary_count)
+					dgtile[center_.x + i][center_.y + j].flag |= FLAG_SANCTUARY;
+				else
+					dgtile[center_.x + i][center_.y + j].flag &= ~FLAG_SANCTUARY;
+			}
+		}
+	}
+	return true;
+
+}
 
 
 bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
@@ -1230,6 +1253,10 @@ bool environment::isSilence(coord_def pos_)
 bool environment::isViolet(coord_def pos_)
 {
 	return dgtile[pos_.x][pos_.y].flag & FLAG_VIOLET;
+}
+bool environment::isSanctuary(coord_def pos_)
+{
+	return dgtile[pos_.x][pos_.y].flag & FLAG_SANCTUARY;
 }
 unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 {

@@ -30,6 +30,7 @@ public:
 	int flag;
 	char silence_count;
 	char violet_count;
+	char santuary_count;
 	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0){};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
 	void init()
@@ -215,12 +216,14 @@ public:
 	bool DisableMove(coord_def pos_, bool view_ = false); //이 위치의 모든 물체는 행동할 수 없다.
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);
+	bool MakeSantuary(coord_def center_, int length_, bool on_);
 	bool MakeNoise(coord_def center_, int length_, const unit* excep_);
 	bool PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_=false);
 	bool MakeMapping(int percent_);
 	bool MakeMapping(coord_def center_, int length_, bool passed_, int percent_);
 	bool isSilence(coord_def pos_);
 	bool isViolet(coord_def pos_);
+	bool isSanctuary(coord_def pos_);
 	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//해당 위치에 이미 몬스터가 있냐 ㅇ벗냐
 	bool isSmokePos(int x_,int y_, bool only_fog = false);//해당 위치에 구름이 있냐 없냐(only_fog는 시야를 가리는 구름만 찾는다.)	
 	floor_effect* isFloorEffectPos(int x_,int y_, const floor_effect* excep_ = NULL);

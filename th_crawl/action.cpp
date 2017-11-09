@@ -542,6 +542,8 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 			s += " (정적)";
 		if(env[current_level].isViolet(you.search_pos))
 			s += " (바이올렛필드)";
+		if (env[current_level].isSanctuary(you.search_pos))
+			s += " (성역)";
 		floor_effect* floor_ = env[current_level].isFloorEffectPos(you.search_pos.x,you.search_pos.y);
 		if(env[current_level].isInSight(coord_def(you.search_pos.x,you.search_pos.y)) && floor_)
 		{

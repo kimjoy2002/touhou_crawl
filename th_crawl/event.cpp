@@ -63,6 +63,12 @@ int events::start()
 			env[current_level].MakeViolet(position, violet_range, true);
 		}
 		break;
+	case EVL_SANTUARY:
+	{
+		int santuary_range = min(10, (count + 1) / 2);
+		env[current_level].MakeSantuary(position, santuary_range, true);
+	}
+	break;
 	default:
 		break;
 	}
@@ -369,6 +375,22 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 		}
 		return 0;
+	case EVL_SANTUARY:
+	{
+		int prev_range = min(10, (event_->count + 2) / 2);
+		int santuary_range = min(10, (event_->count + 1) / 2);
+		if (event_->count <= 0)
+		{
+			env[current_level].MakeSantuary(event_->position, prev_range, false);
+			return 1;
+		}
+		else if (prev_range != santuary_range)
+		{
+			env[current_level].MakeSantuary(event_->position, prev_range, false);
+			env[current_level].MakeSantuary(event_->position, santuary_range, true);
+		}
+	}
+	return 0;
 	case EVL_DREAM_MONSTER:
 		{		
 			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT

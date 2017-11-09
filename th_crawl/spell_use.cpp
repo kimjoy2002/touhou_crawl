@@ -1126,6 +1126,13 @@ bool skill_silence(int pow, bool short_, unit* order, coord_def target)
 	order->SetSilence(rand_int(20,30)+pow/10,(4+pow/50)*2);
 	return true;
 }
+bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
+{
+	if (env[current_level].isInSight(target))
+		printlog("성역이 펼쳐졌다! ", false, false, false, CL_warning);
+	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
+	return true;
+}
 bool skill_swift(int pow, bool short_, unit* order, coord_def target)
 {
 	order->SetSwift(rand_int(30,50)+pow/2);

@@ -109,14 +109,14 @@ void wiz_mode()
 			{
 				int list[] = { SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
 					SCT_BLINK,SCT_MAPPING,SCT_ENCHANT_WEAPON_1,	SCT_ENCHANT_ARMOUR,SCT_FOG,SCT_DETECT_CURSE,
-					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA };
+					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA, SCT_SANTUARY };
 				enterlog();
 				printlog("a-텔포 b-식별 c-낙서 d-무기저주 e-방어구저주 f-저주해제 g-순간이동 h-마법지도", true, false, false, CL_help);
 				printlog("i-무기강화 j-방어구강화 k-연기 l-저주감지 m-장신구저주 n-정적 o-영격 p-스펠충전", true, false, false, CL_help);
-				printlog("q-망각", true, false, false, CL_help);
+				printlog("q-망각 r-성역", true, false, false, CL_help);
 				printlog("어느 스크롤을 얻어볼까?", false, false, false, CL_help);
 				key_ = waitkeyinput();
-				if (key_ >= 'a' && key_ <= 'q')
+				if (key_ >= 'a' && key_ <= 'r')
 				{
 					for (int i = 0; i < 10; i++)
 					{

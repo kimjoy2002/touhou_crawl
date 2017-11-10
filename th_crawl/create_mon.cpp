@@ -313,20 +313,20 @@ mon_group normal_group[] = //일반몹 그룹
 
 mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 {
-	{  0,  1,  3,  35,  1}, //루미아
-	{  6,  1,  3,  35,  1}, //키스메
+	{  0,  1,  3,  30,  1}, //루미아
+	{  6,  1,  3,  30,  1}, //키스메
 	{  11,  1,  6,  5,  2}, //지그문트
-	{  1,  2,  4,  35,  1}, //리글
-	{  9,  2,  4,  35,  2}, //삼월정
-	{  10, 2,  4,  30,  2}, //쿄코
-	{  8,  3,  5,  35,  2}, //코가사
-	{  2,  4,  6,  35,  2}, //미스티아
-	{  7,  6,  9,  35,  3}, //첸
+	{  1,  2,  4,  30,  1}, //리글
+	{  9,  2,  4,  30,  2}, //삼월정
+	{  10, 2,  4,  25,  2}, //쿄코
+	{  8,  3,  5,  30,  2}, //코가사
+	{  2,  4,  6,  30,  2}, //미스티아
+	{  7,  6,  9,  30,  3}, //첸
 	{  44,  6,  9,  30,  3}, //세이란
-	{  5,  7,  8,  35,  2}, //대요정
-	{ 62,  7,  10,  35,  2 }, //라바
-	{  16,  7,  11,  15,  3}, //나즈린
-	{  3,  8,  10,  35,  3}, //치르노
+	{  5,  7,  8,  30,  2}, //대요정
+	{ 62,  7,  10,  30,  2 }, //라바
+	{  16,  7,  11,  20,  3}, //나즈린
+	{  3,  8,  10,  30,  3}, //치르노
 	{  4,  8,  12,  20,  3}, //메디슨
 	
 	{  15,  9,  14,  15,  3}, //야마메
@@ -343,8 +343,8 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	
 	//안개호수
 	{  9, MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  40,  2}, //삼월정
-	{ 62, MISTY_LAKE_LEVEL ,  MISTY_LAKE_LEVEL + 2,  40,  2 }, //라바
-	{  14,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  40,  2}, //빙어
+	{ 62, MISTY_LAKE_LEVEL ,  MISTY_LAKE_LEVEL + 2,  30,  2 }, //라바
+	{  14,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  30,  2}, //빙어
 	{  5, MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  40,  2}, //대요정
 	{  3, MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  40,  3}, //치르노
 	{  21,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  10,  3}, //파르시
@@ -353,7 +353,6 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
-	{ 63,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //네무노
 	{ 65,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //나루미
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모

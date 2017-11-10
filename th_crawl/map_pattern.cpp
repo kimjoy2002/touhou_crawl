@@ -45,10 +45,22 @@ char* common_enter_pattern(map_dummy* map)
 
 char* common_base_pattern(int floor_, map_dummy* map)
 {
-	while(1)
-	{
 
-		switch(/*randA(10)?38:0*/randA(38))
+	random_extraction<int> randomPattern;
+	//randomPattern.push(0, 1);
+	//randomPattern.push(40, 100);
+	for (int i = 0; i <= 40; i++)
+	{
+		int base_pe = 1;
+		if (i == 39)
+			base_pe = 5; //네무노지형보정
+		randomPattern.push(i,base_pe);
+	}
+	while(randomPattern.GetSize())
+	{
+		
+
+		switch(randomPattern.pop())
 		{
 		default:
 		case 0:
@@ -982,42 +994,87 @@ EEEEEEE\
 			}
 		case 38: //나루미 고정지형
 			{
-			if (is_exist_named(MON_NARUMI))
-				break;
-			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
-				break;
-			map->size_x = 3;
-			map->size_y = 3;
-			map->m_entrance.x = -map->size_x;
-			map->m_entrance.y = 0;
-			map->m_exit.x = map->size_x;
-			map->m_exit.y = 0;
-			if (!is_exist_named(MON_NARUMI)) {
-				map->monster_list.push_back(mapdummy_mon(MON_NARUMI, 0, coord_def(2, 2)));
-				set_exist_named(MON_NARUMI);
+				if (is_exist_named(MON_NARUMI))
+					break;
+				if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
+					break;
+				map->size_x = 3;
+				map->size_y = 3;
+				map->m_entrance.x = -map->size_x;
+				map->m_entrance.y = 0;
+				map->m_exit.x = map->size_x;
+				map->m_exit.y = 0;
+				if (!is_exist_named(MON_NARUMI)) {
+					map->monster_list.push_back(mapdummy_mon(MON_NARUMI, 0, coord_def(2, 2)));
+					set_exist_named(MON_NARUMI);
+				}
+				return  "\
+TTT.TTT\
+TB...BT\
+T..~..T\
+..~~~..\
+T..~..T\
+TB....T\
+TTT.TTT";
 			}
-			return  "\
-TTT.TTT\
-TB...BT\
-T..~..T\
-..~~~..\
-T..~..T\
-TB....T\
-TTT.TTT";
-			}/*
-		case 39: //나루미 고정지형
+		case 39: //네무노 고정지형
 			{
-
-
-			return  "\
-TTT.TTT\
-TB...BT\
-T..~..T\
-..~~~..\
-T..~..T\
-TB....T\
-TTT.TTT";
-			}*/
+				if (is_exist_named(MON_NEMUNO))
+					break;
+				if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LEVEL+3))
+					break;
+				map->size_x = 6;
+				map->size_y = 2;
+				map->m_entrance.x = map->size_x;
+				map->m_entrance.y = 0;
+				map->m_exit.x = map->size_x;
+				map->m_exit.y = 0;
+				if (!is_exist_named(MON_NEMUNO)) {
+					map->monster_list.push_back(mapdummy_mon(MON_NEMUNO, 0, coord_def(-4, 0)));
+					set_exist_named(MON_NEMUNO);
+				}
+				map->flag = FLAG_NO_STAIR;
+				return  "\
+$$$$$TTTTTTTT\
+$...$TTT.TTTT\
+$...+.T.T.TT.\
+$...$T.TTT..T\
+$$$$$TTTTTTTT";
+			}
+		case 40: //라바 고정지형
+			{
+				if (is_exist_named(MON_LARVA))
+					break;
+				if (!((floor_ >= 7 && floor_ <= 10) ||
+					(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LEVEL + 2)))
+					break;
+				bool hw_ = randA(1);
+				map->size_x = 3;
+				map->size_y = 3;
+				map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+				map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+				hw_ = randA(1);
+				map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+				map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+				if (!is_exist_named(MON_LARVA)) {
+					map->monster_list.push_back(mapdummy_mon(MON_LARVA, 0, coord_def(0, 0)));
+					set_exist_named(MON_LARVA);
+				}
+				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(-1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(-1, 1)));
+				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, 1)));
+				return  "\
+..._...\
+.T___T.\
+._____.\
+_______\
+._____.\
+.T___T.\
+..._...";
+				break;
+			}
 		}
 	}
 }

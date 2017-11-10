@@ -89,6 +89,23 @@ bool isGodTemple(int id_, god_type god_)
 
 int GetMaxAlter(){return 20;};
 
+
+void makeAunnTemple(map_dummy* map, coord_def c)
+{
+	//아운은 랜덤하게 제단 생성 맵에 끼어들어서 그 지역을 수호한다.
+
+	if (is_exist_named(MON_AUNN))
+		return;
+	if (randA(99) < 1) 
+	{//확률 1% (그러나 실제로 신전은 16개정도 생기므로 대략 15%정도 확률로 아운이 등장한다.
+		if (!is_exist_named(MON_AUNN)) {
+			map->monster_list.push_back(mapdummy_mon(MON_AUNN, 0, c));
+			set_exist_named(MON_AUNN);
+		}
+	}
+}
+
+
 char* real_altar_pattern(map_dummy* map, int id_)
 {
 	switch(id_)
@@ -101,6 +118,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
+		makeAunnTemple(map,coord_def(0, 0));
 		return  "\
 ###+###\
 #..#..#\
@@ -116,6 +134,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_entrance.y = 0;
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
+		makeAunnTemple(map, coord_def(0, 0));
 		return  "\
 #######\
 #0+....\
@@ -131,6 +150,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 .#.#.#.\
@@ -162,6 +182,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->monster_list.push_back(mapdummy_mon(MON_DIEFAIRY,0,coord_def(0,-1)));
 				set_exist_named(MON_DIEFAIRY);
 			}
+			makeAunnTemple(map, coord_def(0, 1));
 			return  "\
 #######\
 #0=.=1#\
@@ -186,6 +207,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			makeitem((item_type)randA(ITM_ARMOR_BODY_ARMOUR_3), 0, &t, AMK_MIKO);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 #######\
 #.###.#\
@@ -206,6 +228,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			makeAunnTemple(map, coord_def(0, 2));
 			return  "\
 .......\
 .......\
@@ -237,6 +260,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->sp_tile_list.push_back(dg_t_);
 				i--;
 			}
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 ...1...\
@@ -258,6 +282,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.push_back(DG_TEMPLE_MIMA);
 			map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			makeAunnTemple(map, coord_def(0, 1));
 			return  "\
 #######\
 #.1.2.#\
@@ -276,12 +301,12 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.y = map->size_y;
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_SATORI);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_WHITE_CAT:randA(1)?MON_BLACK_CAT:MON_ORANGE_CAT,0,coord_def(-3,-1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_WHITE_CAT:randA(1)?MON_BLACK_CAT:MON_ORANGE_CAT,0,coord_def(-1,1)));
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(1,-1)));
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(3,1)));
-			
+			makeAunnTemple(map, coord_def(0, 3));
 			return  "\
 #############\
 #.=========.#\
@@ -289,9 +314,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.=......~=.#\
 #.=.......=.#\
 #.=========.#\
-#.....0.....#\
-#...........#\
-#...........#";
+#.....0.....#";
 			break;
 		}
 	case 9: //뱌쿠렌 책 선물
@@ -309,6 +332,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			item_infor t;			
 			makeitem(ITM_BOOK, 0, &t, 0);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .....\
 ..0..\
@@ -337,6 +361,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->item_list.push_back(mapdummy_item(t,coord_def(1,1)));
 			makeitem(ITM_POTION, -1, &t);
 			map->item_list.push_back(mapdummy_item(t,coord_def(2,1)));
+			makeAunnTemple(map, coord_def(0, -1));
 			return  "\
 #.....#\
 #..0..#\
@@ -365,6 +390,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->event_list.push_back(mapdummy_event(EVL_SIGHT_P,c_,EVT_SIGHT));
 				i--;
 			}
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 .......\
@@ -388,6 +414,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 						
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_SUWAKO);
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 .#.~#~.\
@@ -411,6 +438,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 						
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_HINA);
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .............\
 .............\
@@ -447,6 +475,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->item_list.push_back(mapdummy_item(t,c_));
 				i--;
 			}
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 .......\
@@ -478,6 +507,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(-2,0)));
 			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(0,0)));
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
+			makeAunnTemple(map, coord_def(0, -3));
 			return  "\
 #.........#\
 #.=======.#\
@@ -507,6 +537,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			{
 				map->monster_list.push_back(mapdummy_mon(MON_RABBIT,0,coord_def(0,-1)));
 			}
+			makeAunnTemple(map, coord_def(0, 1));
 			return  "\
 #######\
 #.=.=.#\
@@ -537,6 +568,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->event_list.push_back(mapdummy_event(EVL_AUTUMN,c_,EVT_SIGHT));
 				i--;
 			}
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 .......\
 .......\
@@ -561,6 +593,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);
+			makeAunnTemple(map, coord_def(0, -3));
 			return  "\
 ###########\
 .....0.....\
@@ -589,6 +622,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(-1,i),EVT_APPROACH_SMALL));
 				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(1,i),EVT_APPROACH_SMALL));
 			}
+			makeAunnTemple(map, coord_def(0, 0));
 			return  "\
 #####\
 #.0.#\

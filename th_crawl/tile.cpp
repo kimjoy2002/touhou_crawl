@@ -29,6 +29,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_METAL_WALL:
 	case DG_WALL2:
 	case DG_WALL3:
+	case DG_TREE:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:

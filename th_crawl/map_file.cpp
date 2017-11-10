@@ -433,6 +433,9 @@ bool PixedMap(map_dummy* map, char *temp)
 			case '[':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BAMBOO_WALL;
 				break;
+			case 'T':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_TREE;
+				break;
 			case '+':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_CLOSE_DOOR;
 				break;	
@@ -441,6 +444,9 @@ bool PixedMap(map_dummy* map, char *temp)
 				break;
 			case '&':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_STATUE;
+				break;
+			case 'B':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_STATUE2;
 				break;
 			case 'E':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BOOK_WALL;

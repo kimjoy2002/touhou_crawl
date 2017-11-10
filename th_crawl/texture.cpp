@@ -57,7 +57,8 @@ TextureFile texture_title(imgfile_title[0]);
 
 textures img_title(&texture_title, 0, 0, 512, 512, 255);
 
-textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+textures img_dungeon01[] = {
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //땅1
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),
@@ -67,11 +68,13 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //문열림 15
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단
@@ -82,37 +85,9 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마도서관
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마지하
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단죽림
+
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단영원정
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단지저
-
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//플로어 더미끝
-
-					
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
@@ -122,22 +97,52 @@ textures img_dungeon01[] = {textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//플로어 더미끝		
+
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),					
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽60
 					textures(&texture_dungeon01, 32, 0, 64, 32, 255),//돌벽
 					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//붉은벽
 					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//책장
 					textures(&texture_dungeon01, 224, 0, 256, 32, 255),//대나무
+
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//나무
 					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//철벽
 					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//벽2
 					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//벽3
 					textures(&texture_item01, 3, 255), //닫힌문
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//유리
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//석상
-					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//바다
-					textures(&texture_item01, 167, 255)
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
+					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//바다
 };
 
-textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255)},
+textures img_dungeon_object[][3] = {
+				{textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255)},
 				{textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255)},//계단내
 				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단올
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단신전
@@ -147,18 +152,18 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단홍마도서관
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단홍마지하
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단죽림
+				
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단영원정
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단지저
-				
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//계단윳쿠리
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단짐승길
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단꿈
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단달
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단마계
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단히쿠레이
-
 				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단
 				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)}, //시키
+
 				{textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255)}, //뱌쿠렌
 				{textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255)}, //카나코
 				{textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255)}, //스와코
@@ -169,7 +174,8 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 				{textures(&texture_item01, 128, 255),textures(&texture_item01, 220, 255),textures(&texture_item01, 221, 255)}, //시즈하
 			    {textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255)}, //히나
 			    {textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255)}, //유카리
-			    {textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255)}, //에이린
+			    
+				{textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255)}, //에이린
 				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //유유코
 			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //사토리
 			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //텐시
@@ -178,28 +184,27 @@ textures img_dungeon_object[][3] = {{textures(&texture_item01, 4, 255),textures(
 				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //미코
 				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //오키나
 				{ textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255), textures(&texture_item01, 222, 255) }, //순호
-
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 
-
-
-								
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //벽
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+
+				{textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255) },		
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255)},
 				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
+				{textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
 };
 
@@ -366,7 +371,7 @@ textures img_mons_toziko(&texture_monster01, 185, 255);
 textures img_mons_futo(&texture_monster01, 186, 255);
 textures img_mons_mamizo(&texture_monster01, 187, 255);
 textures img_mons_seiga(&texture_monster01, 188, 255);
-textures img_mons_close_door(&texture_item01, 3, 255);
+textures img_mons_close_door(&texture_item02, 162, 255);
 
 textures img_mons_anchor(&texture_monster01, 190, 255);
 textures img_mons_mask_angry(&texture_monster01, 212, 255);

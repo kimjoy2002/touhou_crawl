@@ -48,7 +48,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	while(1)
 	{
 
-		switch(randA(37))
+		switch(/*randA(10)?38:0*/randA(38))
 		{
 		default:
 		case 0:
@@ -980,6 +980,44 @@ EEEEEEE\
 .#&#.\
 .....";			
 			}
+		case 38: //나루미 고정지형
+			{
+			if (is_exist_named(MON_NARUMI))
+				break;
+			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
+				break;
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			if (!is_exist_named(MON_NARUMI)) {
+				map->monster_list.push_back(mapdummy_mon(MON_NARUMI, 0, coord_def(2, 2)));
+				set_exist_named(MON_NARUMI);
+			}
+			return  "\
+TTT.TTT\
+TB...BT\
+T..~..T\
+..~~~..\
+T..~..T\
+TB....T\
+TTT.TTT";
+			}/*
+		case 39: //나루미 고정지형
+			{
+
+
+			return  "\
+TTT.TTT\
+TB...BT\
+T..~..T\
+..~~~..\
+T..~..T\
+TB....T\
+TTT.TTT";
+			}*/
 		}
 	}
 }

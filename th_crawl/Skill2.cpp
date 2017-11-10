@@ -371,7 +371,7 @@ const char* SkillString(skill_list skill)
 	case SKL_OKINA_4:
 		return "크레이지 백댄서즈";
 	case SKL_OKINA_5:
-		return "강제탈출 백도어";
+		return "백도어 긴급탈출";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -1329,7 +1329,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		return true;
 	case SKL_OKINA_4:
 		if (!check_)
-			you.PietyUpDown(-5);
+			you.PietyUpDown(-4);
 		return true;
 	case SKL_OKINA_5:
 		if (!check_)

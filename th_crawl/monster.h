@@ -54,6 +54,7 @@ public:
 	parent_type poison_reason;
 	int s_tele;
 	int s_might;
+	int s_clever;
 	int s_haste;
 	int s_confuse;
 	int s_slow;
@@ -82,6 +83,8 @@ public:
 	bool force_strong; //강화/약화(위력 2배 1/2배)
 	int force_turn; //강화/약화턴
 	int s_changed; //둔갑시간. 시간이 지나면 너구리로 돌아온다.
+	int s_invincibility;
+	int debuf_boost;
 
 	int summon_time;
 	parent_type summon_parent;
@@ -165,7 +168,7 @@ public:
 	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
-	void special_action(int delay_);
+	void special_action(int delay_, bool smoke_);
 	bool SetPoisonReason(parent_type type_);
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();
@@ -200,6 +203,8 @@ public:
 	bool SetCommunication(int s_communication_);
 	bool SetExhausted(int s_exhausted_);
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
+	bool SetInvincibility(int s_invincibility, bool speak_);
+	bool SetDebufPlus(int s_debuf_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

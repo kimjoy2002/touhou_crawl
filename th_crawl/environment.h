@@ -54,7 +54,8 @@ public:
 	bool isSight(){return (tile<DG_NONE_MOVE || tile >= DG_GLASS);};
 	bool isFloor(){return (tile>=DG_FLOOR && tile<=DG_FLOOR_END);};
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
-	bool isStair(){return (tile>=DG_DOWN_STAIR && tile<=DG_RETURN_STAIR);};
+	bool isStair(){ return (tile >= DG_DOWN_STAIR && tile <= DG_RETURN_STAIR); };
+	bool isTemple(){ return (tile >= DG_TEMPLE_FIRST && tile <= DG_TEMPLE_LAST); };
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color, int count_)
 	{
 		bool temp;

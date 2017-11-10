@@ -31,8 +31,9 @@ bool environment::isFirstFloor(int level_)
 		level_ == DREAM_LEVEL ||
 		level_ == MOON_LEVEL ||
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)||
-		level_ == HAKUREI_LEVEL
-		)
+		level_ == HAKUREI_LEVEL ||
+		level_ == OKINA_LEVEL
+		) 
 		return true;
 	return false;
 	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
@@ -59,7 +60,8 @@ bool environment::isLastFloor(int level_)
 		level_ == DREAM_LAST_LEVEL ||
 		level_ == MOON_LAST_LEVEL ||
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL )||
-		level_ == HAKUREI_LAST_LEVEL)
+		level_ == HAKUREI_LAST_LEVEL ||
+		level_ == OKINA_LEVEL)
 		return true;
 	return false;
 	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 

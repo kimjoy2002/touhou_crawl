@@ -888,11 +888,21 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 			return false;
 		}
 
-		if(hit_mon->CalcuateMR(GetDebufPower(SKL_SATORI_1,power)))
+		//if(hit_mon->CalcuateMR(GetDebufPower(SKL_SATORI_1,power)))
+		int percent_ = randC(2, 100);
+		int debuf_pow = GetDebufPower(SKL_SATORI_1, power);
+		int base = (hit_mon->GetResist() - debuf_pow);
+		int base2 = (hit_mon->GetResist() - (debuf_pow-30));
+		
+		if (hit_mon->GetMindReading() || base2 < percent_)
 		{
-			
-
-			hit_mon->SetFear(rand_int(15,20));
+			hit_mon->SetFear(-1);
+			you.GetExp(((monster*)hit_mon)->exper / 2);
+			env[current_level].SummonClear(((monster*)hit_mon)->map_id);
+		}
+		else if (base < percent_)
+		{
+			hit_mon->SetFear(rand_int(25,40));
 		}
 		else if(hit_mon->isYourShight())
 		{					
@@ -988,7 +998,7 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
-		if(randA(99)<=8)
+		if(randA(99)<=3)
 		{
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			
@@ -1006,7 +1016,7 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	if(monster* mon_=BaseSummon(id_, rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
-		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?11:8))
+		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			
@@ -2511,6 +2521,10 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 
 bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 {
+	if (current_level == OKINA_LEVEL){
+		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		return false;
+	}
 	if (order->isplayer())
 	{
 		if (env[current_level].dgtile[target.x][target.y].isBreakable() && !env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
@@ -2611,6 +2625,10 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 {
+	if (current_level == OKINA_LEVEL){
+		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		return false;
+	}
 	if (order->isplayer())
 	{
 		monster* this_unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y, &you);
@@ -2641,7 +2659,9 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
 				return false;
 			}
-			if (!env[current_level].dgtile[beam->x][beam->y].isMove(you.isFly(), you.isSwim(), false) &&
+			if (!(env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
+				env[current_level].dgtile[order->position.x][order->position.y].isDoor() ||
+				env[current_level].dgtile[order->position.x][order->position.y].isTemple()) &&
 				!env[current_level].dgtile[beam->x][beam->y].isBreakable()
 				)
 			{
@@ -2662,11 +2682,119 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if (current_level == OKINA_LEVEL){
+		printlog("이 곳에서는 백댄서를 소환할 필요가 없다.", true, false, false, CL_normal);
+		return false;
+	}
+	int num_ = 1;
+	int id_ = MON_MAI2;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("어느 백댄서를 호출하시겠습니까?", true, false, false, CL_help);
+		printlog("a - 테이레이다 마이: 뒤에서 춤추는 것으로 체력을 회복시켜준다.", true, false, false, CL_okina);
+		printlog("b -   니시다 사토노: 뒤에서 춤추는 것으로 영력을 회복시켜준다.", true, false, false, CL_okina);
+		printlog("c -   백댄서즈 소환: 두명을 모두 소환한다. (신앙심소모 2배)", true, false, false, CL_okina);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			id_ = MON_MAI2;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			id_ = MON_SATONO;
+			loop_ = false;
+			break;
+		case 'c':
+		case 'C':
+			num_ = 2;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+
+
+	bool return_ = false;
+	monster* speak_ = NULL;
+	for (int i = 0; i < num_; i++) {
+		if (monster* mon_ = BaseSummon(id_, rand_int(40, 50), true, false, 2, order, target, id_ == MON_MAI2 ? SKD_SUMMON_MAI : SKD_SUMMON_SATONO, 1))
+		{
+			if (mon_)
+				return_ = true;
+			mon_->LevelUpdown(you.level, 6);
+			printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+			if (!speak_ && mon_->isLive() && (*mon_).isUserAlly() && env[current_level].isInSight(coord_def(mon_->position.x, mon_->position.y)) && mon_->CanSpeak()) {
+					speak_ = mon_;
+			}
+		}
+		if (num_ == 2)
+		{
+			id_ = MON_SATONO;
+			you.PietyUpDown(-4);
+		}
+	}
+
+	enterlog();
+	if (speak_)
+	{
+		if (speak_->GetId() == MON_MAI2) {
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"그럼 바로 응원을 시작하겠어!\"");
+		}
+		else if (speak_->GetId() == MON_SATONO) {
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"뒤에서 응원할게!\"");
+		}
+	}
+
+	return return_;
 }
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if (current_level == OKINA_LEVEL){
+		printlog("이 곳은 이미 뒷 문의 세계다.", true, false, false, CL_normal);
+		return false;
+	}
+
+	if (env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
+		env[current_level].dgtile[order->position.x][order->position.y].isDoor() ||
+		env[current_level].dgtile[order->position.x][order->position.y].isTemple()) {
+		env[current_level].dgtile[order->position.x][order->position.y].tile = DG_OPEN_DOOR;
+	}
+	else {
+		printlog("이 곳에는 문을 열만한 공간이 없다!", true, false, false, CL_normal);
+		return false;
+	}
+
+	//log에 오키나레벨로 도착함을 저장
+	deque<monster*> dq;
+	printlog("당신은 등 뒤의 문을 열고 도망쳤다!", true, false, false, CL_okina);
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && distan_coord(it->position, you.position) <= 2 && it->CanChase())
+		{
+			dq.push_back(&(*it));
+		}
+	}
+	rand_shuffle(dq.begin(), dq.end());
+	MoreWait();
+	you.god_value[GT_OKINA][0] = current_level;
+	you.god_value[GT_OKINA][1] = you.position.x;
+	you.god_value[GT_OKINA][2] = you.position.y;
+	env[OKINA_LEVEL].EnterMap(0, dq);
+	printarray(true, false, false, CL_normal, 2, "이 곳은 문 뒤의 세계다. ", randA(2)?randA(1)?
+		"푹 쉬다 가도록! ":"환영하네! ":"여기는 안전해보인다. ");
+
+
+	char temp2[200];
+	sprintf_s(temp2, 200, "%s로 도망쳤다.", CurrentLevelString(current_level));
+	AddNote(you.turn, CurrentLevelString(current_level), temp2, CL_normal);
+	//you.resetLOS(false);
+	return true;
 }
 
 

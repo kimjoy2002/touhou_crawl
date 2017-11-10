@@ -717,6 +717,9 @@ int players::move(short_move x_mov, short_move y_mov)
 			time_delay += GetAtkDelay();
 			return 1;
 		}
+
+
+
 		if(s_none_move)
 		{//온바시라 방해!			
 			printlog("움직일수 없다! 무엇인가 당신을 고정시키고있다!",true,false,false,CL_danger);
@@ -785,7 +788,21 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 		if (env[current_level].isDoor(move_x_, move_y_))
 		{
-			coord_def temp(move_x_, move_y_);
+			if (you.GetPunish(GT_OKINA) && GetHazard()>=100 && randA(1))
+			{
+				env[current_level].dgtile[move_x_][move_y_].tile = DG_FLOOR;
+				//적이 서있으면 강제로 비키도록 한다.
+
+				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
+				{
+					mon_->LevelUpdown(you.level, 6);
+					printlog("오키나가 문을 잠가버렸다!", true, false, false, CL_small_danger);
+					return true;
+				}
+
+				time_delay += GetWalkDelay();//이동속도만큼 이동
+				return 1;
+			}
 		}
 		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
 		{

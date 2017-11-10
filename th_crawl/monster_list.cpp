@@ -740,7 +740,7 @@ const mon_infor mondata[] = {
 
 	{ MON_CLOSE_DOOR, 1, 0, name_infor("잠긴 문", true), &img_mons_close_door, 1, 10, 0,
 	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
-	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 },
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 },
 
 	{ MON_MURASA,17, 6510,name_infor("무라사",false),&img_named_murasa,160,5,12,
 	{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
@@ -795,13 +795,13 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_MAI2,1,1,name_infor("마이",false),&img_named_mai,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_MAI2,1,0,name_infor("마이",false),&img_named_mai,10,1,12,
+	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_NO_ATK | M_FLAG_UNIQUE | M_FLAG_CANT_NETURAL | M_FLAG_CONFUSE | M_FLAG_FLY | M_FLAG_SPEAK, 1, 1, 10 },
 
-	{ MON_SATONO,1,1,name_infor("사토노",false),&img_named_satono,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_SATONO,1,0,name_infor("사토노",false),&img_named_satono,10,1,12,
+	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_NO_ATK | M_FLAG_UNIQUE | M_FLAG_CANT_NETURAL | M_FLAG_CONFUSE | M_FLAG_FLY | M_FLAG_SPEAK, 1, 1, 10 },
 
 	{ MON_KOKORO,17,1,name_infor("코코로",false),&img_named_kokoro[0],170,9,12,
 	{ 20,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

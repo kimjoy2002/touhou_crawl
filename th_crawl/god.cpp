@@ -838,6 +838,20 @@ bool GetGodAbility(int level, bool plus)
 			else
 				printlog("더 이상 적의 등뒤에 백도어를 만들 수 없다.", true, false, false, CL_okina);
 			break;
+		case 4:
+			you.Ability(SKL_OKINA_4, true, !plus);
+			if (plus)
+				printlog("당신은 이제 크레이지 백댄서즈를 호출할 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 크레이지 백댄서즈를 호출할 수 없다.", true, false, false, CL_okina);
+			break;
+		case 5:
+			you.Ability(SKL_OKINA_5, true, !plus);
+			if (plus)
+				printlog("당신은 이제 등 뒤의 문을 열고 도망칠 수 있다.", true, false, false, CL_okina);
+			else
+				printlog("더 이상 등 뒤의 문으로 도망칠 수 없다.", true, false, false, CL_okina);
+			break;
 		}
 		return false;
 	case GT_JUNKO:
@@ -1135,6 +1149,21 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_MIKO:
 		return false;
 	case GT_OKINA:
+		if (!(mon_->flag & M_FLAG_SUMMON))
+		{
+			if (type_ == PRT_PLAYER)
+			{
+				if (!mon_->isUserAlly())
+				{ //적일때
+					printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	case GT_JUNKO:
 		return false;
@@ -1792,7 +1821,13 @@ bool GodAccpect_turn(int turn)
 	case GT_SEIJA:
 	case GT_LILLY:
 	case GT_MIKO:
+		return false;
 	case GT_OKINA:
+		if (turn % 1000 == 0)
+		{
+			you.PietyUpDown(-1);
+		}
+		return false;
 	case GT_JUNKO:
 		return false;
 	}
@@ -2127,7 +2162,15 @@ void GodInfor(god_type god)
 		printsub("토요사토미미노 미코", true, CL_danger);
 		break;
 	case GT_OKINA:
-		printsub("마타라 오키나", true, CL_danger);
+		printsub("마타라 오키나", true, CL_okina);
+		printsub("", true, CL_okina);
+		printsub("마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.", true, CL_okina);
+		printsub("그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.", true, CL_okina);
+		printsub("그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.", true, CL_okina);
+		printsub("문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.", true, CL_okina);
+		printsub("또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.", true, CL_okina);
+		printsub("그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.", true, CL_okina);
+		printsub("", true, CL_okina);
 		break;
 	case GT_JUNKO:
 		printsub("순호", true, CL_danger);
@@ -3487,6 +3530,61 @@ bool god_punish(god_type god)
 	case GT_MIKO:
 		break;
 	case GT_OKINA:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0, 50);//마이, 사토노 소환
+			rand_.push(1, 50);//체력, 영력감소
+			switch (rand_.pop())
+			{
+			case 0:
+				{
+					int isYourSight = 0;
+					deque<monster*> dq;
+					for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+					{
+						if (it->isLive() && !it->isUserAlly())
+						{
+							if (it->isYourShight()){
+								isYourSight++;
+							}
+						}
+					}
+
+					if (isYourSight)
+					{
+						printarray(true, false, false, CL_okina, 1, "오키나는 백댄서를 불러냈다!");
+
+						int time_ = rand_int(40, 60);
+						if (monster *mon_ = BaseSummon(MON_MAI2, time_, true, true, 3, NULL, you.position, SKD_OTHER, -1))
+						{
+							mon_->LevelUpdown(you.level, 6);
+						}
+						if (monster *mon_ = BaseSummon(MON_SATONO, time_, true, true, 3, NULL, you.position, SKD_OTHER, -1))
+						{
+							mon_->LevelUpdown(you.level, 6);
+						}
+						break;
+					}
+					else
+					{
+						//아무도 시야내에 없으면 백댄서를 부르지않는다(의미가 없음)
+						you.HpUpDown(-you.max_hp / 2, DR_EFFECT);
+						you.MpUpDown(-you.max_mp / 2);
+						printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
+						break;
+					}
+				}
+				break;
+			case 1:
+				{
+					you.HpUpDown(-you.max_hp/2, DR_EFFECT);
+					you.MpUpDown(-you.max_mp/2);
+					printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
+					break;
+				}
+				break;
+			}
+		}
 		break;
 	case GT_JUNKO:
 		break;

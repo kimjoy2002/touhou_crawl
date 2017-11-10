@@ -565,7 +565,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_eirin_poison_time>0 && s_eirin_poison_time<=10)
 		{
 			int damage_ = min(s_eirin_poison,(s_eirin_poison/s_eirin_poison_time+1));
-			HpUpDown(-damage_,DR_EFFECT);
+			HpUpDown(hp <= damage_ ? -(hp - 1) : -damage_, DR_EFFECT);
 			s_eirin_poison -= damage_;
 			SetInter(IT_POISON);		
 			if(s_eirin_poison<=0)

@@ -35,11 +35,11 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 
 monster::monster() 
 : map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_sight(false),
-ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRAL),s_tele(0), s_might(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0) ,s_ally(0),
+ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
- force_strong(false), force_turn(0), s_changed(0),
+force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
@@ -77,6 +77,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<parent_type>(fp, poison_reason);
 	SaveData<int>(fp, s_tele);
 	SaveData<int>(fp, s_might);
+	SaveData<int>(fp, s_clever);
 	SaveData<int>(fp, s_haste);
 	SaveData<int>(fp, s_confuse);
 	SaveData<int>(fp, s_slow);
@@ -105,6 +106,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, force_strong);
 	SaveData<int>(fp, force_turn);
 	SaveData<int>(fp, s_changed);
+	SaveData<int>(fp, s_invincibility);
+	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, poison_resist);
@@ -178,6 +181,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<parent_type>(fp, poison_reason);
 	LoadData<int>(fp, s_tele);
 	LoadData<int>(fp, s_might);
+	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_haste);
 	LoadData<int>(fp, s_confuse);
 	LoadData<int>(fp, s_slow);
@@ -206,6 +210,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, force_strong);
 	LoadData<int>(fp, force_turn);
 	LoadData<int>(fp, s_changed);
+	LoadData<int>(fp, s_invincibility);
+	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
 	LoadData<int>(fp, poison_resist);
@@ -277,6 +283,7 @@ void monster::init()
 	poison_reason = PRT_NEUTRAL;
 	s_tele = 0;
 	s_might = 0;
+	s_clever = 0;
 	s_haste = 0;
 	s_confuse = 0;
 	s_slow = 0;
@@ -304,7 +311,9 @@ void monster::init()
 	s_exhausted=0;
 	force_strong=false;
 	force_turn=0;
-	s_changed=0;
+	s_changed = 0;
+	s_invincibility = 0;
+	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	poison_resist = 0;
@@ -486,6 +495,11 @@ void monster::TurnLoad()
 	else
 		s_might = 0;
 
+	if (s_clever - temp_turn > 0)
+		s_clever -= temp_turn;
+	else
+		s_clever = 0;
+
 	if(s_tele-temp_turn>0)
 		s_tele-=temp_turn;
 	else
@@ -578,11 +592,13 @@ void monster::TurnLoad()
 	else
 		s_mute =0;
 
-	if(s_fear-temp_turn>0)
-		s_fear-=temp_turn;
+	if (s_fear != -1) {
+		if (s_fear - temp_turn > 0)
+			s_fear -= temp_turn;
 	else
-		s_fear =0;
-	
+			s_fear = 0;
+	}
+
 	if(s_ghost-temp_turn>0)
 		s_ghost-=temp_turn;
 	else
@@ -609,6 +625,15 @@ void monster::TurnLoad()
 		force_turn =0;
 
 	//s_changed 둔갑은 다른 층에 지나와도 시간 리셋이 안되게(처리가 귀찮)
+
+	if (s_invincibility != -1)
+	{
+		if (s_invincibility - temp_turn > 0)
+			s_invincibility -= temp_turn;
+		else
+			s_invincibility = 0;
+	}
+
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -1225,6 +1250,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 	}
 
+	if (s_invincibility) {
+		damage_ = 0;
+	}
+
 	if((randA(100) <= percent_ && !graze_) || back_stab == 3 || perfect_)
 	{
 		if(s_saved){
@@ -1787,6 +1816,11 @@ int monster::atkmove(int is_sight, bool only_move)
 			{
 				spell_list id_ = (spell_list)(it->num);
 				int percent_ = it->percent;
+				if (s_clever  && percent_<90){
+					percent_ = percent_*1.5f;
+					if (percent_ > 90)
+						percent_ = 90;
+				}
 				if(randA_1(100)<=percent_)
 				{
 					if(isMonSafeSkill(id_,this,target_pos))
@@ -1817,7 +1851,7 @@ int monster::atkmove(int is_sight, bool only_move)
 		}
 	}
 
-	if(flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON )
+	if (flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON)
 	{
 		if(sm_info.parent_map_id >= 0)
 		{
@@ -1860,7 +1894,7 @@ int monster::atkmove(int is_sight, bool only_move)
 			for(int i=0;i<5;i++)
 			{
 				move_ = MoveToPos(position+GetDirecToPos(direc_+arr_[i]), only_move);
-				if(!move_ && i==4)
+				if (!move_ && i == 4 && s_fear > 0)
 				{
 					s_fear = 0;
 				}
@@ -1957,10 +1991,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		if (sight_){
 			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "죽었다. ");
 
+			if (s_fear != -1) {
+				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
 		}
-		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON))
+		}
+		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear != -1)
 		{
-			printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
+			printlog("경험이 증가하는 것을 느꼈다. ",true,false,false,CL_normal);
 			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 				auto_pick_onoff(true);
 		}
@@ -2046,11 +2083,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_)
 	{
-		if(reason_ == PRT_PLAYER) //플레이어가 죽였다.
+		if (reason_ == PRT_PLAYER && s_fear != -1) //플레이어가 죽였다.
 		{
 			you.GetExp(exper);
 		}
-		else if(reason_ == PRT_ALLY) //동맹이 죽였다.
+		else if (reason_ == PRT_ALLY && s_fear != -1) //동맹이 죽였다.
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}
@@ -2156,7 +2193,7 @@ int monster::action(int delay_)
 	{
 		if(s_poison)
 		{
-			if(poison_percent(s_poison))
+			if (poison_percent(s_poison) && !s_invincibility)
 			{
 				hp -= randA_1(3)*poison_damage(s_poison);
 				if(hp<=0)
@@ -2182,6 +2219,15 @@ int monster::action(int delay_)
 			{
 				if(!s_might)
 					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 힘이 강하지 않다.");
+			}
+		}
+		if (s_clever)
+		{
+			s_clever--;
+			if (is_sight && isView())
+			{
+				//if (!s_clever)
+				//	printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 이 강하지 않다.");
 			}
 		}
 		if(s_tele)
@@ -2349,7 +2395,7 @@ int monster::action(int delay_)
 			}
 		}
 		
-		if(s_fear)
+		if(s_fear > 0)
 		{
 			s_fear--;
 		}
@@ -2410,9 +2456,19 @@ int monster::action(int delay_)
 				ChangeMonster(MON_RACCON,0);
 			}
 		}
-		
 
+		if (s_invincibility > 0)
+		{
 
+			s_invincibility--;
+			if (!s_invincibility)
+			{
+				if (is_sight && isView())
+				{
+					printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 무적이 아니다.");
+				}
+			}
+		}
 
 
 		if(s_communication)
@@ -2647,8 +2703,13 @@ int monster::action(int delay_)
 				break;
 			}
 		}
-		special_action(is_sight);
+		special_action(is_sight, false);
 		time_delay-=GetSpeed();
+		if (!is_sight && s_fear == -1) {
+			//전의상실한 몬스터는 시야밖에 나가면 사라짐
+			dead(PRT_NEUTRAL, false, true);
+		}
+
 		if(!isLive())
 			break;
 	}
@@ -2683,17 +2744,20 @@ void monster::sightcheck(bool is_sight_)
 	}
 }
 
-void monster::special_action(int delay_)
+void monster::special_action(int delay_, bool smoke_)
 {
 
 	switch (id)
 	{
 	case MON_RUMIA:
+		if (smoke_){
 		for (int i = -1; i < 2; i++)
 			for (int j = -1; j < 2; j++)
 				env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, this);
+		}
 		break;
 	case MON_FIRE_CAR:
+		if (smoke_){
 		if (!isUserAlly())
 		{
 			for (int i = -1; i < 2; i++) {
@@ -2703,33 +2767,43 @@ void monster::special_action(int delay_)
 				}
 			}
 		}
+		}
 		break;
 	case MON_YAMAME:
+		if (!smoke_){
 		if (env[current_level].isInSight(position) && randA(2) == 0 && !isArena() && !isUserAlly())
 		{
 			you.SetSick(10);
 		}
 		break;
+		}
 	case MON_TEWI:
+		if (!smoke_){
 		if (env[current_level].isInSight(position) && hp < max_hp / 2 && randA(3) == 0 && !isUserAlly())
 		{
 			SetFear(rand_int(20, 40));
 		}
 		break;
+		}
 	case MON_CLOWNPIECE:
+		if (!smoke_){
 		if (env[current_level].isInSight(position) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
 		{
 			you.SetLunatic(rand_int(5, 10));
 		}
 		break;
+		}
 	case MON_RED_UFO:
 	case MON_GREEN_UFO:
 	case MON_BLUE_UFO:
+		if (!smoke_){
 		if (randA(10) == 0) {
 			ChangeMonster(randA(2) ? randA(1) ? MON_RED_UFO : MON_GREEN_UFO : MON_BLUE_UFO, 0);
 		}
 		break;
+		}
 	case MON_SEKIBANKI:
+		if (!smoke_){
 		if (env[current_level].isInSight(position) && randA(2) == 0 &&
 			state.GetState() == MS_ATACK && !s_mute)
 		{
@@ -2742,24 +2816,31 @@ void monster::special_action(int delay_)
 			MonsterUseSpell(SPL_SUMMON_SEKIBANKI, false, this, target_pos, 200);
 			ChangeMonster(MON_SEKIBANKI_BODY, 0);
 		}
+		}
 	case MON_SEKIBANKI_BODY:
+		if (!smoke_){
 		if (!(env[current_level].isInSight(position)) && randA(2) == 0)
 		{
 			env[current_level].SummonClear(map_id);
 			ChangeMonster(MON_SEKIBANKI, 0);
 		}
+		}
 	case MON_KEINE:
+		if (!smoke_){
 		if (hp <= max_hp / 2) {
 			if (env[current_level].isInSight(position))
 				printlog("체력을 잃은 케이네가 백택으로 변화하였다! ", true, false, false, CL_magic);
 			ChangeMonster(MON_KEINE2, 0);
 		}
 		break;
+		}
 	case MON_KEINE2:
+		if (!smoke_){
 		if (hp == max_hp) {
 			ChangeMonster(MON_KEINE, 0);
 		}
 		break;
+		}
 	case MON_KOKORO1:
 	case MON_KOKORO2:
 	case MON_KOKORO3:
@@ -2779,8 +2860,38 @@ void monster::special_action(int delay_)
 		SetExhausted(rand_int(4, 8));
 		ChangeMonster(MON_KOKORO, 0);
 
-
+		break;
 	}
+	case MON_MAI2:
+		if (!smoke_){
+			if (env[current_level].isInSight(position) && !isArena() && isUserAlly())
+			{
+				you.HpUpDown(rand_int(2, 3), DR_NONE);
+			}
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8*8 && isMonsterSight(it->position)){
+					int heal = it->max_hp / 10;
+					it->HpUpDown(heal, DR_NONE);
+				}
+			}
+			break;
+		}
+	case MON_SATONO:
+		if (!smoke_){
+			if (env[current_level].isInSight(position) && !isArena() && isUserAlly())
+			{
+				you.MpUpDown(randA(3) ? 1 : rand_int(1, 2));
+			}
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8 * 8 && isMonsterSight(it->position)){
+					it->SetClever(2);
+					//it->MpUpDown(randA(3) ? 1 : rand_int(1, 2));
+				}
+			}
+			break;
+		}
 	default:
 		break;
 	}
@@ -2844,6 +2955,9 @@ bool monster::HpRecover(int turn_)
 }
 int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
+	if (s_invincibility) {
+		return 0;
+	}
 	hp+= value_;
 	if(hp >= max_hp)
 	{
@@ -2897,7 +3011,12 @@ bool monster::SetMight(int might_)
 }
 bool monster::SetClever(int clever_)
 {
+	if (!clever_)
 	return false;
+	s_clever = clever_;
+	if (s_clever>100)
+		s_clever = 100;
+	return true;
 }
 bool monster::SetAgility(int agility_)
 {
@@ -3194,16 +3313,29 @@ bool monster::SetSwift(int swift_)
 }
 bool monster::SetFear(int fear_)
 {
-	if(!fear_)
+	if (!fear_ && s_fear == -1)
 		return false;
-	if(isYourShight())
+	if (fear_ == -1)
 	{
-		if(!s_fear)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공포에 질렸다. ");
+		if (isYourShight())
+		{
+			if (!s_fear)
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질려서 전의를 완전 상실했다. ");
 	}
+
+		s_fear = fear_;
+	}
+	else
+	{
+		if (isYourShight())
+		{
+			if (!s_fear)
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질렸다. ");
+		}
 	s_fear += fear_;
-	if(s_fear>50)
+		if (s_fear > 50)
 		s_fear = 50;
+	}
 	return true;
 }
 
@@ -3301,6 +3433,22 @@ bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 	return true;
 }
 
+bool monster::SetInvincibility(int s_invincibility_, bool speak_)
+{
+	if (!s_invincibility_)
+		return false;
+	if (isYourShight() && speak_)
+	{
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "무적상태가 되었다. ");
+	}
+	s_invincibility = s_invincibility_;
+	return true;
+}
+bool monster::SetDebufPlus(int s_debuf_)
+{
+	debuf_boost =  s_debuf_;
+	return debuf_boost;
+}
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -3747,7 +3895,7 @@ bool monster::isSimpleState(monster_state_simple state_)
 		case MSS_FEAR:
 			return (s_fear != 0);
 		case MSS_CONFUSE:
-			return (s_confuse != 0);
+			return (s_confuse != 0 && (flag & M_FLAG_CONFUSE) == 0);
 		case MSS_LUNATIC:
 			return (s_lunatic != 0);
 		case MSS_SLEEP:
@@ -3777,7 +3925,7 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_POISON;
 	if(s_fear)
 		temp = MSS_FEAR;
-	if(s_confuse)
+	if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
 		temp = MSS_CONFUSE;
 	if(s_lunatic)
 		temp = MSS_LUNATIC;
@@ -3832,7 +3980,7 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		else
 			return false;
 	case MSS_CONFUSE:
-		if(s_confuse)
+		if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
 		{
 			sprintf(string_,"혼란");
 			return true;
@@ -3853,6 +4001,14 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_might)
 		{
 			sprintf(string_,"힘강화");
+			return true;
+		}
+		else
+			return false;
+	case MSS_CLEVER:
+		if (s_clever)
+		{
+			sprintf(string_, "영력강화");
 			return true;
 		}
 		else
@@ -3882,7 +4038,7 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		}
 		return false;
 	case MSS_SUMMON:
-		if(flag & M_FLAG_SUMMON)
+		if(flag & M_FLAG_SUMMON )
 		{
 			sprintf(string_,"소환");
 			return true;
@@ -3990,7 +4146,10 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_FEAR:
 		if(s_fear)
 		{
+			if (s_fear>0)
 			sprintf(string_,"공포");
+			else
+				sprintf(string_, "전의상실");
 			return true;
 		}
 		return false;
@@ -4029,6 +4188,13 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_changed)
 		{
 			sprintf(string_,"둔갑중");
+			return true;
+		}
+		return false;
+	case MSS_INVINCIBILITY:
+		if (s_invincibility)
+		{
+			sprintf(string_, "무적");
 			return true;
 		}
 		return false;

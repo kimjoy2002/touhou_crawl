@@ -35,7 +35,7 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 
 monster::monster() 
 : map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_sight(false),
-ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0),poison_reason(PRT_NEUTRAL),s_tele(0), s_might(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0) ,s_ally(0),
+ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
@@ -77,6 +77,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<parent_type>(fp, poison_reason);
 	SaveData<int>(fp, s_tele);
 	SaveData<int>(fp, s_might);
+	SaveData<int>(fp, s_clever);
 	SaveData<int>(fp, s_haste);
 	SaveData<int>(fp, s_confuse);
 	SaveData<int>(fp, s_slow);
@@ -180,6 +181,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<parent_type>(fp, poison_reason);
 	LoadData<int>(fp, s_tele);
 	LoadData<int>(fp, s_might);
+	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_haste);
 	LoadData<int>(fp, s_confuse);
 	LoadData<int>(fp, s_slow);
@@ -281,6 +283,7 @@ void monster::init()
 	poison_reason = PRT_NEUTRAL;
 	s_tele = 0;
 	s_might = 0;
+	s_clever = 0;
 	s_haste = 0;
 	s_confuse = 0;
 	s_slow = 0;
@@ -491,6 +494,11 @@ void monster::TurnLoad()
 		s_might-=temp_turn;
 	else
 		s_might = 0;
+
+	if (s_clever - temp_turn > 0)
+		s_clever -= temp_turn;
+	else
+		s_clever = 0;
 
 	if(s_tele-temp_turn>0)
 		s_tele-=temp_turn;
@@ -1771,6 +1779,11 @@ int monster::atkmove(int is_sight, bool only_move)
 			{
 				spell_list id_ = (spell_list)(it->num);
 				int percent_ = it->percent;
+				if (s_clever  && percent_<90){
+					percent_ = percent_*1.5f;
+					if (percent_ > 90)
+						percent_ = 90;
+				}
 				if(randA_1(100)<=percent_)
 				{
 					if(isMonSafeSkill(id_,this,target_pos))
@@ -2163,6 +2176,15 @@ int monster::action(int delay_)
 			{
 				if(!s_might)
 					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 힘이 강하지 않다.");
+			}
+		}
+		if (s_clever)
+		{
+			s_clever--;
+			if (is_sight && isView())
+			{
+				//if (!s_clever)
+				//	printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 이 강하지 않다.");
 			}
 		}
 		if(s_tele)
@@ -2799,7 +2821,8 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
-				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8 && isMonsterSight(it->position)){
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8 * 8 && isMonsterSight(it->position)){
+					it->SetClever(2);
 					//it->MpUpDown(randA(3) ? 1 : rand_int(1, 2));
 				}
 			}
@@ -2924,7 +2947,12 @@ bool monster::SetMight(int might_)
 }
 bool monster::SetClever(int clever_)
 {
-	return false;
+	if (!clever_)
+		return false;
+	s_clever = clever_;
+	if (s_clever>100)
+		s_clever = 100;
+	return true;
 }
 bool monster::SetAgility(int agility_)
 {
@@ -3909,6 +3937,14 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_might)
 		{
 			sprintf(string_,"힘강화");
+			return true;
+		}
+		else
+			return false;
+	case MSS_CLEVER:
+		if (s_clever)
+		{
+			sprintf(string_, "영력강화");
 			return true;
 		}
 		else

@@ -54,6 +54,7 @@ public:
 	parent_type poison_reason;
 	int s_tele;
 	int s_might;
+	int s_clever;
 	int s_haste;
 	int s_confuse;
 	int s_slow;

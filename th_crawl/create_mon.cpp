@@ -354,6 +354,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
 	{ 63,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //네무노
+	{ 65,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //나루미
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
@@ -363,6 +364,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 
 
 	{ 57,  SCARLET_LEVEL , SCARLET_LEVEL + 3,  20,  4 }, //프리즘리버
+	{ 65,  SCARLET_LEVEL , SCARLET_LEVEL + 3,  20,  4 }, //나루미
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
@@ -1094,6 +1096,8 @@ int get_unique_to_id(int m_id)
 	case MON_IKU:  return 61;
 	case MON_LARVA:  return 62;
 	case MON_NEMUNO:  return 63;
+	case MON_AUNN:  return 64;
+	case MON_NARUMI:  return 65;
 	}
 }
 
@@ -1343,6 +1347,12 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 63:
 		index.push_back(MON_NEMUNO);
+		break;
+	case 65:
+		index.push_back(MON_AUNN);
+		break;
+	case 66:
+		index.push_back(MON_NARUMI);
 		break;
 	}
 
@@ -1912,6 +1922,10 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist = 2;
 		mon->fire_resist = 1;
 		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		break;
+	case MON_NARUMI:
+		mon->elec_resist = 3;
 		mon->poison_resist = 1;
 		break;
 	}

@@ -818,7 +818,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "공격은 그렇게 강하진않지만 생각 이상으로 터프한 체력과 저항을 가졌다.\n";
 		break;
 	case MON_NARUMI:
-		text_ += "\n";
+		text_ += "마법의 숲의 지상보살상에 마력이 깃들어 태어난 마법사.\n";
+		text_ += "단단한 골렘같은 존재로서 체력은 적은 편이지만 아주 단단하여 쉽게 파괴하기 힘들다.\n";
 		break;
 	case MON_MAI2:
 		text_ += "마타라 오키나의 충실한 부하로 뒤에서 춤을 추는 것으로 주변의 능력을 올려주는 능력을 가지고 있다.\n";

@@ -2031,6 +2031,8 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
+		if (!order->isplayer()) //카나메드릴은 너무 쎄서 몬스터 보정이 좀 더 필요
+			pow *= 0.7f;
 		beam_infor temp_infor(randC(3,20+pow/4.5),3*(20+pow/4.5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -4269,6 +4271,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		item_list_->push_back(t);
 		break;
 	}
+	case MON_NARUMI:
+		list->push_back(spell(SPL_STONE_ARROW, 20));
+		list->push_back(spell(SPL_KANAME_DRILL, 10));
+		break;
 	default:
 		break;
 	}

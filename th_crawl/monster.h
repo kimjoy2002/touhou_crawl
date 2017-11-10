@@ -40,6 +40,7 @@ public:
 	int hp_recov;
 	int max_hp;
 	coord_def prev_position;
+	coord_def first_position;
 	bool prev_sight;
 	int ac;
 	int ev;
@@ -105,7 +106,7 @@ public:
 
 	int delay_turn; //다른층으로 도망친 턴. 이 턴만큼 회복등등...
 
-	stack<coord_def> will_move;
+	list<coord_def> will_move;
 	unit* target;
 	int temp_target_map_id; //로딩시 임시로 타겟팅의 아이디를 저장한다.(몬스터 로딩은 선후를 알 수 없으니!)
 	coord_def target_pos;
@@ -130,6 +131,7 @@ public:
 	bool ChangeMonster(int id_, int flag_);
 	void FirstContact();
 	coord_def GetPrevPos(){return prev_position;};
+	coord_def GetFirstPos() { return first_position; };
 	int GetHp(){return hp;};
 	int GetMaxHp(){return max_hp;};
 	void TurnSave();//다른층으로 도망쳤다.
@@ -140,6 +142,7 @@ public:
 	void SetXY(coord_def pos_);
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);
 	void FoundTarget(unit* unit_, int time_);
+	int FoundTime();
 	void CheckSightNewTarget();
 	bool ReturnEnemy();
 	const name_infor* GetName();

@@ -1079,7 +1079,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 							{
 								it->SetXY(rit->x,rit->y);
 								if(unit_){
-									it->FoundTarget(unit_,30);
+									it->FoundTarget(unit_,it->FoundTime());
 								}
 								j++;
 							}
@@ -1113,7 +1113,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 			{
 				dq[i]->SetXY(rit->x,rit->y);
 				if(dq[i] && unit_){
-					dq[i]->FoundTarget( unit_,30);
+					dq[i]->FoundTarget( unit_,dq[i]->FoundTime());
 				}
 				j++;
 				i++;

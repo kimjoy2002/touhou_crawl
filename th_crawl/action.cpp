@@ -3092,7 +3092,7 @@ void shout()
 							if(it->isLive() && it->isUserAlly() && env[current_level].isInSight(it->position) && target != &(*it))
 							{
 							
-								it->FoundTarget(target,30);
+								it->FoundTarget(target, it->FoundTime());
 								it->state.SetState(MS_ATACK);
 							}
 						}

@@ -598,7 +598,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				{
 					monster *mon_ = env[current_level].AddMonster(MON_HUMAM_MAN,M_FLAG_EVENT | M_FLAG_NETURALY,(*rit));
 					mon_->hp = mon_->hp*rand_int(3,9)/10;
-					mon_->FoundTarget(kyoko_, 30);
+					mon_->FoundTarget(kyoko_, mon_->FoundTime());
 					mon_->s_fear = 20+randA(20);
 					i--;
 				}

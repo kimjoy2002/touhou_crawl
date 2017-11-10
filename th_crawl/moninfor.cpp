@@ -813,7 +813,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "그녀를 죽이면 이러한 성역을 만들어내는 방법을 얻어낼지도...?\n";
 		break;
 	case MON_AUNN:
-		text_ += "\n";
+		text_ += "신사를 수호하는 코마이누로 멋대로 신사나 절에 눌러앉아서 그 지역을 수호한다.\n";
+		text_ += "항상 신앙을 모을법한 제단근처에서 멋대로 등장하여 제단을 지킨다.\n";
+		text_ += "공격은 그렇게 강하진않지만 생각 이상으로 터프한 체력과 저항을 가졌다.\n";
 		break;
 	case MON_NARUMI:
 		text_ += "\n";

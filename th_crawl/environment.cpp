@@ -1088,7 +1088,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			if(distan_coord((*it).position, center_) <= block_length_*block_length_)
 			{
 				(*it).target_pos = center_;
-				(*it).memory_time = 30;
+				(*it).memory_time = (*it).FoundTime();
 				(*it).state.StateTransition(MSI_NOISE);
 			}
 		}

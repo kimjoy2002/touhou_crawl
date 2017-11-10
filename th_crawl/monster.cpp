@@ -34,7 +34,7 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 
 
 monster::monster() 
-: map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_sight(false),
+: map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
 ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
@@ -61,6 +61,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, max_hp);
 	SaveData<int>(fp, prev_position.x);
 	SaveData<int>(fp, prev_position.y);
+	SaveData<int>(fp, first_position.x);
+	SaveData<int>(fp, first_position.y);
 	SaveData<bool>(fp, prev_sight);
 	SaveData<int>(fp, ac);
 	SaveData<int>(fp, ev);
@@ -121,7 +123,15 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, memory_time);
 	SaveData<bool>(fp, first_contact);	
 	SaveData<int>(fp, delay_turn);
-	//SaveData<int>(fp, will_move); //구현힘듬
+
+	SaveData<int>(fp, will_move.size());
+
+	for (int i = will_move.size(); i > 0; i--) {
+		coord_def pop_ = will_move.front();
+		SaveData<int>(fp, pop_.x);
+		SaveData<int>(fp, pop_.y);
+		will_move.pop_front();
+	}
 	//SaveData<int>(fp, target);  //마찬가지이유
 	//temp_target_map_id 이 변수는 저장할 필요가 없다.
 	if(target)
@@ -165,6 +175,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, max_hp);
 	LoadData<int>(fp, prev_position.x);
 	LoadData<int>(fp, prev_position.y);
+	LoadData<int>(fp, first_position.x);
+	LoadData<int>(fp, first_position.y);
 	LoadData<bool>(fp, prev_sight);
 	LoadData<int>(fp, ac);
 	LoadData<int>(fp, ev);
@@ -225,6 +237,18 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, memory_time);
 	LoadData<bool>(fp, first_contact);	
 	LoadData<int>(fp, delay_turn);
+
+
+
+	int size_ = 0;
+	LoadData<int>(fp, size_);
+
+	for (int i = size_; i > 0; i--) {
+		coord_def pop_;
+		LoadData<int>(fp, pop_.x);
+		LoadData<int>(fp, pop_.y);
+		will_move.push_back(pop_);
+	}
 	//LoadData<int>(fp, will_move);
 	//LoadData<int>(fp, target); 타겟 변수는 여기서 호출하진 않는다.
 	LoadData<int>(fp, temp_target_map_id);
@@ -238,7 +262,7 @@ void monster::LoadDatas(FILE *fp)
 	monster_state ms_;
 	LoadData<monster_state>(fp, ms_);
 	state.SetState(ms_);
-	int size_=0;
+	size_=0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -273,6 +297,8 @@ void monster::init()
 	max_hp=0;
 	prev_position.x = 0;
 	prev_position.y = 0;
+	first_position.x = 0;
+	first_position.y = 0;
 	prev_sight = false;
 	ac = 0;
 	ev = 0;
@@ -328,7 +354,7 @@ void monster::init()
 	first_contact = true;
 	delay_turn = 0;
 	while(!will_move.empty())
-		will_move.pop();
+		will_move.pop_back();
 	target = NULL;
 	temp_target_map_id = -1;
 	target_pos.x = 0;
@@ -381,6 +407,7 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 				state.SetState(MS_ATACK);
 		}
 		SetXY(position_);
+		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
 			s_ally = -1;
@@ -710,6 +737,10 @@ void monster::FoundTarget(unit* unit_, int time_)
 	target_pos = unit_->position;
 	state.StateTransition(MSI_FOUND);
 }
+int monster::FoundTime()
+{
+	return (flag & M_FLAG_SHIELD) ? 10 : 30;
+}
 void monster::CheckSightNewTarget()
 {
 	if(isUserAlly())
@@ -731,7 +762,7 @@ void monster::CheckSightNewTarget()
 				{
 					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position) )
 					{
-						FoundTarget(&(*it),30);
+						FoundTarget(&(*it), FoundTime());
 						break;
 					}
 				}
@@ -800,7 +831,7 @@ void monster::CheckSightNewTarget()
 		}
 
 		if(prev_target_ && isMonsterSight(prev_target_->position))
-			FoundTarget(prev_target_,30);
+			FoundTarget(prev_target_, FoundTime());
 	}
 }
 bool monster::ReturnEnemy()
@@ -2585,99 +2616,141 @@ int monster::action(int delay_)
 
 			}
 
-			switch(state.GetState())
+			switch (state.GetState())
 			{
 			case MS_NORMAL:
 				longmove();
-				if(randA(9)) //보통은 플레이어만 찾는다.(빠른 처리를 위해)
+				if (flag & M_FLAG_SHIELD) {
+					if (distan_coord(position, first_position) > 8 * 8)
+					{
+						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
+						stack<coord_def> will_move_;
+						will_move.clear();
+						if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
+						{
+							while (!will_move_.empty())
+							{
+								will_move.push_front(will_move_.top());
+								will_move_.pop();
+							}
+							state.StateTransition(MSI_SEARCH);
+						}
+						else {
+							first_position = position;
+						}
+					}
+				}
+				if (randA(9)) //보통은 플레이어만 찾는다.(빠른 처리를 위해)
 					sightcheck(is_sight);
 				else
 					CheckSightNewTarget();
 				break;
 			case MS_SLEEP:
 			case MS_REST:
-				if(isUserAlly())
+				if (isUserAlly())
 				{
 					state.SetState(MS_FOLLOW);
 					break;
 				}
 				target = NULL;
-				if(is_sight && you_detect())//시야 안에 있을때 스텔스 체크
+				if (is_sight && you_detect())//시야 안에 있을때 스텔스 체크
 				{
-					FoundTarget(&you,30);
+					FoundTarget(&you, FoundTime());
 					int percent_ = 1;
-					if(you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA) )
+					if (you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA))
 						percent_ = 4;
-					if(flag & M_FLAG_SPEAK && randA(percent_)==0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
+					if (flag & M_FLAG_SPEAK && randA(percent_) == 0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 					{
-						if(char* c_ = Get_Speak(id,this,MST_FOUND)){
-							printlog(c_,true,false,false,CL_speak);
-							Noise(position,12,this);
+						if (char* c_ = Get_Speak(id, this, MST_FOUND)) {
+							printlog(c_, true, false, false, CL_speak);
+							Noise(position, 12, this);
 						}
-					}	
+					}
 				}
 				break;
 			case MS_ATACK:
-				if(isUserAlly() && target && memory_time)
+				if (isUserAlly() && target && memory_time)
 				{
 					target_pos = target->position;
 				}
-				if(you.s_timestep && (target == &you || !target) && !isUserAlly())
+				if (you.s_timestep && (target == &you || !target) && !isUserAlly())
 				{
 					memory_time = 0;
-					target = NULL;						
+					target = NULL;
 					state.StateTransition(MSI_LOST);
 				}
-				else if(is_sight && you.isView(this) && !isUserAlly())
+				else if (is_sight && you.isView(this) && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
-					if(!s_fear)
+					if (!s_fear)
 						CheckSightNewTarget();
-					//FoundTarget(&you,30);
-					if(flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=3)
+					//FoundTarget(&you,FoundTime());
+					if (flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.GetPunish(GT_SHINKI) && pietyLevel(you.piety) >= 3)
 					{
 						//신키는 소환수를 방해한다.
-						if(randA(1))
+						if (randA(1))
 							break;
 					}
 
-					if(flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000,(flag & M_FLAG_UNIQUE)?66:3)){//몬스터 말하기
-						
-						if(s_confuse || s_lunatic)
+					if (flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000, (flag & M_FLAG_UNIQUE) ? 66 : 3)) {//몬스터 말하기
+
+						if (s_confuse || s_lunatic)
 						{
-							if(char* c_ = Get_Speak(id,this,MST_CONFUSE))
-								printlog(c_,true,false,false,CL_speak);	
+							if (char* c_ = Get_Speak(id, this, MST_CONFUSE))
+								printlog(c_, true, false, false, CL_speak);
 						}
-						else if(!s_fear)
+						else if (!s_fear)
 						{
-							if(char* c_ = Get_Speak(id,this,MST_NORMAL))
-								printlog(c_,true,false,false,CL_speak);	
+							if (char* c_ = Get_Speak(id, this, MST_NORMAL))
+								printlog(c_, true, false, false, CL_speak);
 						}
 					}
 
 				}
-				else if(!isUserAlly())
+				else if (!isUserAlly())
 				{//적인데 시야안에 없거나 플레이어가 보이지 않는 상태
-					if(memory_time>0)
+					if (memory_time > 0)
 					{
-						if(!s_fear)
+						if (!s_fear)
 							CheckSightNewTarget();
 						memory_time--;
 					}
 					else
 					{
 						target = NULL;
-						state.StateTransition(MSI_LOST);
+
+						if (flag & M_FLAG_SHIELD) {
+							//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
+							stack<coord_def> will_move_;
+							will_move.clear();
+							if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
+							{
+								while (!will_move_.empty())
+								{
+									will_move.push_front(will_move_.top());
+									will_move_.pop();
+								}
+								state.StateTransition(MSI_SEARCH);
+							}
+							else
+								state.StateTransition(MSI_LOST);
+						}
+						else {
+							state.StateTransition(MSI_LOST);
+						}
 					}
 				}
 				else
 				{
-					memory_time=30;
+					memory_time = FoundTime();
 				}
-				atkmove(is_sight);
-				if(!is_sight && env[current_level].isInSight(position))
-				{ //플레이어를 발견하게된다.
-					if(target == &you)
-						FoundTarget(target,30);
+				if (state.GetState() != MS_FIND)
+				{
+					atkmove(is_sight);
+					if (!is_sight && env[current_level].isInSight(position))
+					{ //플레이어를 발견하게된다.
+						if (target == &you)
+							FoundTarget(target, FoundTime());
+					}
 				}
 				break;
 			case MS_FOLLOW:
@@ -2705,6 +2778,37 @@ int monster::action(int delay_)
 				else
 					MoveToPos(you.position, false);				
 				sightcheck(is_sight);
+				break;
+			case MS_FIND:
+				{
+					if (will_move.empty())
+					{
+						state.StateTransition(MSI_REST);
+					}
+					else {
+						coord_def c_ = will_move.back();
+						will_move.pop_back();
+						int success_ = MoveToPos(c_, false);
+						if (success_ != 2) //이동실패
+						{
+							will_move.push_back(c_);
+						}
+						if (is_sight && you_detect())//시야 안에 있을때 스텔스 체크
+						{
+							FoundTarget(&you, FoundTime());
+							int percent_ = 1;
+							if (you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA))
+								percent_ = 4;
+							if (flag & M_FLAG_SPEAK && randA(percent_) == 0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
+							{
+								if (char* c_ = Get_Speak(id, this, MST_FOUND)) {
+									printlog(c_, true, false, false, CL_speak);
+									Noise(position, 12, this);
+								}
+							}
+						}
+					}
+				}
 				break;
 			}
 		}
@@ -2744,7 +2848,7 @@ void monster::sightcheck(bool is_sight_)
 	{
 		if(is_sight_ && you_detect())//시야 안에 있을때 스텔스 체크
 		{
-			FoundTarget(&you,30);
+			FoundTarget(&you, FoundTime());
 		}
 	}
 }
@@ -3475,7 +3579,7 @@ bool monster::AttackedTarget(unit *order_)
 				target = order_;
 				target_pos = order_->position;
 			}
-			memory_time=30;
+			memory_time= FoundTime();
 		}
 		if(state.GetState() == MS_SLEEP) //자고있을때 깨어나면서 외칠 수 있음
 		{			
@@ -3747,6 +3851,8 @@ bool monster::CanChase()
 	if(s_mind_reading && s_ally && flag & M_FLAG_ANIMAL)
 		return false;
 	if( flag & M_FLAG_NONE_STAIR)
+		return false;
+	if (flag & M_FLAG_SHIELD)
 		return false;
 	return true;	
 }

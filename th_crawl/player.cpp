@@ -875,7 +875,7 @@ void players::youAttack(unit* unit_)
 			{
 				if(it->state.GetState() == MS_FOLLOW)
 				{							
-					it->FoundTarget(unit_,30);
+					it->FoundTarget(unit_,it->FoundTime());
 					it->state.SetState(MS_ATACK);
 				}
 

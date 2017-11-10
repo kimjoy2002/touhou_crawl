@@ -1908,5 +1908,11 @@ void SetResistMonster(monster* mon)
 	case MON_LARVA:
 		mon->poison_resist = 1;
 		break;
+	case MON_AUNN:
+		mon->elec_resist = 2;
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		break;
 	}
 }

@@ -108,6 +108,7 @@ FSMstate state_sleep(MS_SLEEP);
 FSMstate state_atack(MS_ATACK);
 FSMstate state_rest(MS_REST);
 FSMstate state_follow(MS_FOLLOW);
+FSMstate state_find(MS_FIND);
 
 
 void init_state()
@@ -117,6 +118,7 @@ void init_state()
 	state_normal.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_normal.AddTransition(MSI_NOISE,MS_ATACK);
 	state_normal.AddTransition(MSI_REST,MS_REST);
+	state_normal.AddTransition(MSI_SEARCH, MS_FIND);
 
 	//상태 수면: 한 자리에서 자는 상태
 	state_sleep.AddTransition(MSI_NOISE,MS_ATACK);
@@ -127,7 +129,8 @@ void init_state()
 	//상태 공격: 목표를 잡음
 	state_atack.AddTransition(MSI_LOST,MS_NORMAL);
 	state_atack.AddTransition(MSI_REST,MS_NORMAL);
-
+	state_atack.AddTransition(MSI_SEARCH, MS_FIND);
+	
 	//상태 휴식: 휴식중
 	state_rest.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_rest.AddTransition(MSI_NOISE,MS_ATACK);
@@ -140,6 +143,10 @@ void init_state()
 	state_follow.AddTransition(MSI_LOST,MS_NORMAL);
 	state_follow.AddTransition(MSI_FOUND,MS_ATACK);
 
+	state_find.AddTransition(MSI_ATACKED, MS_ATACK);
+	state_find.AddTransition(MSI_FOUND, MS_ATACK);
+	state_find.AddTransition(MSI_LOST, MS_NORMAL);
+	state_find.AddTransition(MSI_REST, MS_NORMAL);
 	
 }
 
@@ -150,6 +157,7 @@ void base_state_setup(FSMclass& state, monster_state first_state)
 	state.AddState(&state_atack);
 	state.AddState(&state_rest);
 	state.AddState(&state_follow);
+	state.AddState(&state_find);
 
 	state.SetState(first_state);
 }

@@ -990,7 +990,8 @@ enum monster_state
 	MS_SLEEP,
 	MS_ATACK,
 	MS_REST,
-	MS_FOLLOW
+	MS_FOLLOW,
+	MS_FIND
 };
 
 enum monster_state_simple //Ç¥½Ã¿ë »óÅÂ
@@ -1052,7 +1053,8 @@ enum monster_state_input
 	MSI_ATACKED, //°ø°Ý¹ÞÀ½
 	MSI_NOISE, //¼ÒÀ½
 	MSI_REST,//ÈÞ½Ä
-	MSI_WAKE//±þ
+	MSI_WAKE,//±þ
+	MSI_SEARCH //Å½»ö
 };
 
 enum monster_speak_type

@@ -787,9 +787,9 @@ const mon_infor mondata[] = {
 	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("칼",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10 },
 
-	{ MON_AUNN,1,1,name_infor("아웅",true),&img_named_aunn,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_AUNN,8,750,name_infor("아운",true),&img_named_aunn,55,18,2,
+	{ 9,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SHIELD | M_FLAG_SPEAK,3,1,10 },
 
 	{ MON_NARUMI,1,1,name_infor("나루미",false),&img_named_narumi,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

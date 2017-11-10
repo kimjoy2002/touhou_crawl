@@ -1795,7 +1795,7 @@ int monster::atkmove(int is_sight, bool only_move)
 		}
 	}
 
-	if(flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON )
+	if (flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON)
 	{
 		if(sm_info.parent_map_id >= 0)
 		{
@@ -2784,8 +2784,9 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
-				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8 && isMonsterSight(it->position)){
-					it->HpUpDown(rand_int(2, 3), DR_NONE);
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8*8 && isMonsterSight(it->position)){
+					int heal = it->max_hp / 10;
+					it->HpUpDown(heal, DR_NONE);
 				}
 			}
 			break;

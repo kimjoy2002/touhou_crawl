@@ -821,10 +821,14 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n";
 		break;
 	case MON_MAI2:
-		text_ += "\n";
+		text_ += "마타라 오키나의 충실한 부하로 뒤에서 춤을 추는 것으로 주변의 능력을 올려주는 능력을 가지고 있다.\n";
+		text_ += "직접 전투를 하는 것보단 근처에서 춤을 추고 있는 것으로 체력을 올려준다.\n";
+		text_ += "신중하지만 약간 자신 과잉적인 성격이라고 한다.\n";
 		break;
 	case MON_SATONO:
-		text_ += "\n";
+		text_ += "마타라 오키나의 충실한 부하로 뒤에서 춤을 추는 것으로 주변의 능력을 올려주는 능력을 가지고 있다.\n";
+		text_ += "직접 전투를 하는 것보단 근처에서 춤을 추고 있는 것으로 영력을 올려준다.\n";
+		text_ += "경박하지만 행동력이 있는 성격이라고 한다.\n";
 		break;
 	case MON_KOKORO:
 	case MON_KOKORO1:

@@ -2547,7 +2547,7 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 					beam++;
 				}
 
-				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 벽으로 만들었다.");
+				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 문으로 만들었다.");
 				env[current_level].dgtile[target.x][target.y].tile = DG_CLOSE_DOOR;
 				return true;
 			}

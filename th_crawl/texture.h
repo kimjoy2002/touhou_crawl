@@ -29,11 +29,13 @@ class textures
 private:
 	TextureFile* texture;
 	int alpha;
+	bool normal;
 protected:
 	RECT rect;
 public:
 	textures(TextureFile* _texture, int left, int top, int right, int bottom, int alphas);
 	textures(TextureFile* _texture, int mon_num, int alphas);
+	textures(TextureFile* _texture);
 	~textures();
 	bool draw(LPD3DXSPRITE pSprite, int alphas);
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, int alphas);
@@ -42,6 +44,7 @@ public:
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color);
 	bool draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas);
 	bool draw(LPD3DXSPRITE pSprite, RECT rc, int alphas);
+	bool isNormal() { return normal; }
 };
 
 

@@ -973,6 +973,11 @@ void print_special_map(int floor_, vector<map_dummy*> &map_vector)
 }
 
 
+void setBaseFloorWall(int floor_, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
+{
+	env[floor_].base_floor = floor_tex;
+	env[floor_].base_wall = wall_tex;
+}
 
 
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
@@ -1044,6 +1049,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 		}
 	}
 	print_special_map(num, vec_special_map);
+	setBaseFloorWall(num, floor_tex, wall_tex);
 
 	if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 	{
@@ -1204,6 +1210,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 	}
 
 	print_special_map(num, vec_special_map);
+	setBaseFloorWall(num, floor_tex, wall_tex);
 	
 	if(num == DREAM_LEVEL)
 		dream_map_make_last(num, 	
@@ -1378,6 +1385,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 	}
 
 	print_special_map(num, vec_special_map);
+	setBaseFloorWall(num, floor_tex, wall_tex);
 	
 	common_map_make_last(num, 	
 	floor_tex,wall_tex,
@@ -1448,6 +1456,7 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 		item_infor t;
 		env[num].MakeItem(coord_def(DG_MAX_X/2+rand_int(-9,9),DG_MAX_Y/2+rand_int(-4,4)),makeitem(ITM_BOOK, 0, &t));
 	}
+	setBaseFloorWall(num, floor_tex, wall_tex);
 
 
 }
@@ -1485,6 +1494,7 @@ void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 		env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
 		set_exist_named(MON_FLAN);
 	}
+	setBaseFloorWall(num, floor_tex, wall_tex);
 }
 
 void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
@@ -1535,6 +1545,7 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 		float y = round((float)DG_MAX_Y/2+cos(i*24.0f/180.0f*D3DX_PI)*-10.0f);
 		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
 	}
+	setBaseFloorWall(num, floor_tex, wall_tex);
 }
 void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
@@ -1563,6 +1574,7 @@ void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 
 	env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
 	env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
+	setBaseFloorWall(num, floor_tex, wall_tex);
 }
 
 

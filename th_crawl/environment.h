@@ -66,6 +66,20 @@ public:
 		}
 		return temp;
 	}
+	bool draw(LPD3DXSPRITE pSprite, int new_tile, float x, float y, D3DCOLOR color, int count_)
+	{
+		bool temp;
+		temp = img_dungeon01[new_tile].draw(pSprite, x, y, color);
+		if (temp && tile >= DG_FLOOR_OBJECT && tile <= DG_OBJECT_END)
+		{
+			temp = img_dungeon_object[tile - DG_FLOOR_OBJECT][count_ % 3].draw(pSprite, x, y, color);
+		}
+		return temp;
+	}
+	bool isNormal()
+	{
+		return img_dungeon01[tile].isNormal();
+	}
 	dot_tile_type GetDot();
 };
 
@@ -89,6 +103,8 @@ public:
 	int floor;
 	bool make;
 	int all_monster_id;
+	dungeon_tile_type base_floor;
+	dungeon_tile_type base_wall;
 	dungeon_tile dgtile[DG_MAX_X][DG_MAX_Y];
 	coord_def stair_up[3];
 	coord_def stair_down[3];

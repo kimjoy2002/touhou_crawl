@@ -43,7 +43,8 @@ void stair_info::LoadDatas(FILE *fp)
 	LoadData<int>(fp, next_floor);
 
 }
-environment::environment():floor(0), make(false), all_monster_id(1)
+environment::environment():floor(0), make(false), all_monster_id(1),
+base_floor(DG_FLOOR), base_wall(DG_WALL)
 {
 	mon_vector.reserve(MON_MAX_IN_FLOOR);
 }
@@ -58,6 +59,8 @@ void environment::SaveDatas(FILE *fp)
 	SaveData<int>(fp, floor);
 	SaveData<bool>(fp, make);
 	SaveData<int>(fp, all_monster_id);
+	SaveData<dungeon_tile_type>(fp, base_floor);
+	SaveData<dungeon_tile_type>(fp, base_wall);
 	SaveData<dungeon_tile>(fp, **dgtile, DG_MAX_X * DG_MAX_Y);
 	SaveData<coord_def>(fp, *stair_up, 3);
 	SaveData<coord_def>(fp, *stair_down, 3);
@@ -114,6 +117,8 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<int>(fp, floor);
 	LoadData<bool>(fp, make);
 	LoadData<int>(fp, all_monster_id);
+	LoadData<dungeon_tile_type>(fp, base_floor);
+	LoadData<dungeon_tile_type>(fp, base_wall);
 	LoadData<dungeon_tile>(fp, **dgtile);
 	LoadData<coord_def>(fp, *stair_up);
 	LoadData<coord_def>(fp, *stair_down);

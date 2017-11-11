@@ -71,59 +71,59 @@ textures img_dungeon01[] = {
 
 					textures(&texture_dungeon01, 672, 0, 704, 32, 255),
 					textures(&texture_dungeon01, 704, 0, 736, 32, 255), //마계땅7
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //문열림 15
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-신전
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-안개
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-요괴산
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단-홍마					
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마도서관
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단홍마지하
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단죽림
+					textures(&texture_dungeon01), //문열림 15
+					textures(&texture_dungeon01), //계단
+					textures(&texture_dungeon01), //계단
+					textures(&texture_dungeon01), //계단-신전
+					textures(&texture_dungeon01), //계단-안개
+					textures(&texture_dungeon01), //계단-요괴산
+					textures(&texture_dungeon01), //계단-홍마					
+					textures(&texture_dungeon01), //계단홍마도서관
+					textures(&texture_dungeon01), //계단홍마지하
+					textures(&texture_dungeon01), //계단죽림
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단영원정
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //계단지저
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01), //계단영원정
+					textures(&texture_dungeon01), //계단지저
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//플로어 더미끝		
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),//플로어 더미끝		
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),					
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),					
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
+					textures(&texture_dungeon01),
 					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//벽60
 					textures(&texture_dungeon01, 32, 0, 64, 32, 255),//돌벽
 					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//붉은벽
@@ -143,8 +143,8 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//벽2
 					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//벽3
 					textures(&texture_item01, 3, 255), //닫힌문
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//유리
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),//석상
+					textures(&texture_dungeon01),//유리
+					textures(&texture_dungeon01),//석상
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
 					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//바다
 };
@@ -1075,7 +1075,8 @@ textures::textures(TextureFile* _texture, int left, int top, int right, int bott
 	rect.right = right;
 	rect.bottom = bottom;
 	alpha = alphas;
-	texture = _texture;
+	texture = _texture; 
+	normal = false;
 }
 textures::textures(TextureFile* _texture, int mon_num, int alphas)
 {
@@ -1085,7 +1086,19 @@ textures::textures(TextureFile* _texture, int mon_num, int alphas)
 	rect.bottom = (mon_num/16)*33+32;
 	alpha = alphas;
 	texture = _texture;
+	normal = false;
 }
+textures::textures(TextureFile* _texture)
+{
+	rect.left = (0 % 16) * 32;
+	rect.top = (0 / 16) * 33;
+	rect.right = (0 % 16) * 32 + 32;
+	rect.bottom = (0 / 16) * 33 + 32;
+	alpha = 255;
+	texture = _texture;
+	normal = true;
+}
+
 
 //textures 클래스의 소멸자
 textures::~textures()

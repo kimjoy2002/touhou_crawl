@@ -2621,7 +2621,7 @@ int monster::action(int delay_)
 			case MS_NORMAL:
 				longmove();
 				if (flag & M_FLAG_SHIELD) {
-					if (distan_coord(position, first_position) > 8 * 8)
+					if (distan_coord(position, first_position) > 4 * 4)
 					{
 						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
 						stack<coord_def> will_move_;
@@ -3846,7 +3846,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 }
 bool monster::CanChase()
 {
-	if(state.GetState() == MS_REST || state.GetState() == MS_SLEEP || state.GetState() == MS_NORMAL)
+	if(state.GetState() == MS_REST || state.GetState() == MS_SLEEP || state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
 		return false;
 	if(s_confuse)
 		return false;
@@ -3998,7 +3998,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 	switch (state_)
 	{
 		case MSS_WANDERING:
-			return (!isUserAlly() && state.GetState() == MS_NORMAL) || (!isUserAlly() && state.GetState() == MS_ATACK && target != &you);
+			return (!isUserAlly() && state.GetState() == MS_NORMAL) || (!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
+				|| (!isUserAlly() && state.GetState() == MS_FIND);
 		case MSS_SLOW:
 			return (s_slow != 0) && s_haste == 0;
 		case MSS_HASTE:
@@ -4027,6 +4028,8 @@ monster_state_simple monster::GetSimpleState()
 	monster_state_simple temp = MSS_NONE;
 
 	if(state.GetState() == MS_NORMAL)
+		temp = MSS_WANDERING;
+	if (state.GetState() == MS_FIND)
 		temp = MSS_WANDERING;
 	if(!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
 		temp = MSS_WANDERING;
@@ -4077,7 +4080,7 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 		else
 			return false;
 	case MSS_WANDERING:
-		if(state.GetState() == MS_NORMAL)
+		if(state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
 		{
 			sprintf(string_,"탐험중");
 			return true;

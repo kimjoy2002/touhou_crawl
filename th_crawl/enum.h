@@ -370,7 +370,8 @@ enum dungeon_tile_flag
     FLAG_MAPPING = 1<<9, //매핑된 지역
     FLAG_NO_STAIR = 1<<10, //계단금지
     FLAG_VIOLET = 1<<11, //필드 바이올렛
-	FLAG_SANCTUARY = 1 << 12 //성역
+	FLAG_SANCTUARY = 1 << 12, //성역
+	FLAG_DONT_DOOR = 1 << 13 //몬스터가 열 수 없는 문
 };
 
 
@@ -737,10 +738,19 @@ enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ c
 	ITM_MISCELLANEOUS,
 	ITM_GOAL,
 	ITM_ORB,
-	ITM_SATORI,
+	ITM_ETC,
 	ITM_LAST
 };
 
+
+enum etc_item_type
+{
+	EIT_SATORI,
+	EIT_CAT_TREE,
+	EIT_BROKEN_CAMERA,
+	EIT_KAPPA_TRASH,
+	EIT_LAST
+};
 
 
 

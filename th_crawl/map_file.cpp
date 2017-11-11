@@ -412,6 +412,9 @@ bool PixedMap(map_dummy* map, char *temp)
 		{
 			switch(temp[j])
 			{
+			case '`':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_NONE;
+				break;
 			case '.':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
 				break;

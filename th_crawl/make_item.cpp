@@ -36,6 +36,26 @@ int armour_stat[5][3] =
 {10,-11,-4}
 };
 
+class etcStruct
+{
+public:
+	name_infor name;
+	textures* tex;
+	etcStruct(const char* name_, bool type_, textures* tex_):
+		name(name_, type_), tex(tex_)
+	{}
+};
+
+etcStruct etcList[EIT_LAST] = {
+	etcStruct("실종 포스터", false, &img_item_goal),
+	etcStruct("개다래 나무", false, &img_item_cat_tree),
+	etcStruct("부셔진 카메라", false, &img_item_broken_camera),
+	etcStruct("잡동사니", false, &img_item_kappa_trash),
+};
+
+
+
+
 
 
 item* environment::MakeItem(const coord_def &c, const item_infor &t)
@@ -282,6 +302,38 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
+		case 2:
+			t->value1 = 3;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 10;
+			t->value6 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->num = 2;
+			t->image = &img_item_chocolet;
+			t->name.name = "초콜렛";
+			t->name.name_type = true;
+			t->weight = 1.0f*t->num;
+			t->value = 30;
+			break;
+		case 3:
+			t->value1 = 4;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 10;
+			t->value6 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->num = 1;
+			t->image = &img_item_cucumber;
+			t->name.name = "오이";
+			t->name.name_type = false;
+			t->weight = 1.0f*t->num;
+			t->value = 30;
+			break;
 		}
 		break;
 	case ITM_POTION:
@@ -371,8 +423,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->weight = 1.0f;
 		t->value = 10000;
 		break;
-	case ITM_SATORI:
-		t->value1 = 0;
+	case ITM_ETC:
+		t->value1 = select_;
 		t->value2 = 0;
 		t->value3 = 0;
 		t->value4 = 0;
@@ -380,9 +432,9 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value6 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
-		t->image = &img_item_goal;
-		t->name.name = "실종 포스터";
-		t->name.name_type = false;
+		t->image = etcList[select_].tex;
+		t->name.name = etcList[select_].name.name;
+		t->name.name_type = etcList[select_].name.name_type;
 		t->weight = 1.0f;
 		t->value = 1;
 		break;

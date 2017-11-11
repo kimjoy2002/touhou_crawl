@@ -114,6 +114,7 @@ public:
 	bool connect_exit;
 	dungeon_tile_type floor_tex;
 	dungeon_tile_type wall_tex;
+	string name;
 
 	list<mapdummy_mon> monster_list;
 	list<mapdummy_item> item_list;

@@ -29,7 +29,7 @@ enum event_list
 	EVL_REGEN, //몹의 리젠 (꿈의 세계).
 	EVL_REGEN2, //몹의 리젠 (지저).
 	EVL_ARENA, //아레나
-	EVL_NAMAZ, //나마즈  떨구기
+	EVL_NAMAZ, //나마즈 떨구기
 	EVL_KOISHI,
 	EVL_KYOKO, //공포의 쿄코
 	EVL_AUTUMN, //단풍
@@ -37,7 +37,16 @@ enum event_list
 	EVL_RUN_FAIRY, //도망치는 삼월정
 	EVL_SCALET_TRAP, //홍마관 트랩
 	EVL_KOGASATIME, //코가사 타임!
-	EVL_SANTUARY //성역
+	EVL_SANTUARY, //성역
+	EVL_HOJOK, //호족난무
+	EVL_KOGASA3, //코가사안개
+	EVL_MEDI, //메디슨
+	EVL_LOCK_DOOR, //바로 문을 잠근다.
+	EVL_SMOKE, //연기발생
+	EVL_CHEN,
+	EVL_BROKEN_NESI, //수리가 끝나지않은 네시
+	EVL_FIRE_SMOKE,
+	EVL_COLD_SMOKE
 };
 
 class events

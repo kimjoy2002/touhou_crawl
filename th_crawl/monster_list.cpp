@@ -104,7 +104,7 @@ const mon_infor mondata[] = {
 
 	{MON_MEDICINE,9,1066,name_infor("메디슨",true),&img_named_medicine,70,2,10,
 	{8,12,0},{ATT_S_POISON,ATT_M_POISON,ATT_NONE},{name_infor("독기",false),name_infor("독기",false),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10},
 
 	{MON_DIEFAIRY,6,570,name_infor("대요정",true),&img_named_diefairy,50,0,15,
 	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

@@ -643,6 +643,7 @@ textures(&texture_item02, 121, 255)
 };
 
 textures img_item_goal(&texture_item01, 135, 255);
+textures img_item_cat_tree(&texture_item02, 163, 255);
 textures img_item_rune(&texture_item01, 214, 255);
 
 textures img_item_ring(&texture_item01, 15, 255);
@@ -653,7 +654,11 @@ textures img_item_needle(&texture_item01, 141, 255);
 textures img_item_kikuichi(&texture_item01, 142, 255);
 
 textures img_item_spellcard(&texture_item01, 181, 255);
-textures img_item_sweet_potato(&texture_item01, 182, 255);
+textures img_item_sweet_potato(&texture_item01, 182, 255); 
+textures img_item_chocolet(&texture_item02, 164, 255);
+textures img_item_cucumber(&texture_item02, 165, 255);
+textures img_item_broken_camera(&texture_item02, 166, 255);
+textures img_item_kappa_trash(&texture_item02, 167, 255);
 
 
 textures img_effect_select(&texture_item01, 1, 255);
@@ -1883,7 +1888,18 @@ int texturetoint(textures* input)
 	else if (input == &img_mons_occult_kunekune)
 		return 361;
 	else if (input == &img_mons_close_door)
-		return 362;	else
+		return 362;
+	else if (input == &img_item_cat_tree)
+		return 363;
+	else if (input == &img_item_chocolet)
+		return 364;
+	else if (input == &img_item_cucumber)
+		return 365;
+	else if (input == &img_item_broken_camera)
+		return 366;
+	else if (input == &img_item_kappa_trash)
+		return 367;
+	else
 		return 0;
 }
 
@@ -2615,7 +2631,18 @@ textures* inttotexture(int input)
 	case 361:
 		return &img_mons_occult_kunekune;
 	case 362:
-		return &img_mons_close_door;	default:
+		return &img_mons_close_door;
+	case 363:
+		return &img_item_cat_tree;
+	case 364:
+		return &img_item_chocolet;
+	case 365:
+		return &img_item_cucumber;
+	case 366:
+		return &img_item_broken_camera;
+	case 367:
+		return &img_item_kappa_trash;
+	default:
 		return &img_mons_default;
 	}
 }

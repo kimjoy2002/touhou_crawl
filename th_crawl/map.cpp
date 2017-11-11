@@ -343,9 +343,11 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
-	if(floor != 0 && randA(1) && floor != YUKKURI_LAST_LEVEL)
+	if(floor != 0 && floor != YUKKURI_LAST_LEVEL)
 	{ //테스트
-		vector_.push_back(10+floor);	
+		int i = rand_int(1, 2);
+		for(int j = 0; j < i; j++)
+			vector_.push_back(10+floor);	
 	}
 	if(floor == YOUKAI_MOUNTAIN_LAST_LEVEL)
 	{
@@ -396,6 +398,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(10+floor);
 		}
 	}
+
 	return;
 }
 
@@ -922,6 +925,36 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 
 
 
+void print_special_map(int floor_, vector<map_dummy*> &map_vector)
+{
+	enterlog();
+	int count_ = 0;
+	for (auto it = map_vector.begin(); it != map_vector.end(); it++)
+	{
+		if (count_ == 0)
+		{
+			if (wiz_list.wizard_mode == 1)
+			{
+				printlog("특수지형:", false, false, false, CL_danger);
+			}
+		}
+		if ((*it)->name.size() > 0)
+		{
+			env[floor_].AddSpecialMapInfo((*it)->name);
+			if (wiz_list.wizard_mode == 1)
+			{
+				printlog((*it)->name.c_str(), false, false, false, CL_danger);
+				printlog(", ", false, false, false, CL_danger);
+			}
+		}
+		count_++;
+		if(count_ % 4 == 0)
+			enterlog();
+	}
+	enterlog();
+}
+
+
 
 
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
@@ -992,7 +1025,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			}
 		}
 	}
-
+	print_special_map(num, vec_special_map);
 
 	if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 	{
@@ -1152,6 +1185,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 		}
 	}
 
+	print_special_map(num, vec_special_map);
 	
 	if(num == DREAM_LEVEL)
 		dream_map_make_last(num, 	
@@ -1325,6 +1359,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 		}
 	}
 
+	print_special_map(num, vec_special_map);
 	
 	common_map_make_last(num, 	
 	floor_tex,wall_tex,

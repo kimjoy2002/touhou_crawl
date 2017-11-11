@@ -100,6 +100,7 @@ public:
 	list<smoke> smoke_list;
 	list<floor_effect> floor_list;
 	list<events> event_list;
+	list<string> speciel_map_name;
 
 	
 	static bool isFirstFloor(int level_);
@@ -160,7 +161,10 @@ public:
 		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 			return false;
 		return dgtile[x_][y_].isDoor();
-	}	
+	}
+	bool isMonsterOpen(int x_, int y_) {
+		return !(dgtile[x_][y_].flag & FLAG_DONT_DOOR);
+	}
 	bool isOpenDoor(int x_,int y_){
 		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 			return false;
@@ -179,6 +183,7 @@ public:
 		if(dgtile[x_][y_].isCloseDoor())
 		{
 			dgtile[x_][y_].OpenDoor();
+			dgtile[x_][y_].flag &= ~FLAG_DONT_DOOR;
 			return true;
 		}
 		else
@@ -202,6 +207,7 @@ public:
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t);
 	item* AddItem(const coord_def &c, item *t, int num_=0);
+	void AddSpecialMapInfo(string string_);
 	void DeleteItem(const list<item>::iterator it);
 	bool DeleteItem(const item *item_);
 	void ClearShadow();

@@ -560,6 +560,33 @@ bool Dump(int type, string *filename_)
 		}
 	}
 
+	if (type == 1)
+	{
+		fprintf_s(fp, "\n\n\n<생성된 특수지형들>\n\n");
+		for (int i = 0; i < MAXLEVEL; i++)
+		{
+			if (!env[i].speciel_map_name.empty())
+			{
+				int k = 0;
+				fprintf_s(fp, "%12s:", CurrentLevelString(i));
+				for (auto it = env[i].speciel_map_name.begin(); it != env[i].speciel_map_name.end(); )
+				{
+					fprintf_s(fp, "%s", (*it).c_str());
+					it++;
+					k++;
+					if (it != env[i].speciel_map_name.end())
+					{
+						fprintf_s(fp, ", ");
+						if (k % 5 == 0)
+						{
+							fprintf_s(fp, "\n%13s","");
+						}
+					}
+				}
+				fprintf_s(fp, "\n");
+			}
+		}
+	}
 
 	fprintf_s(fp,"\n\n\n");
 	fprintf_s(fp,"%8s|%-18s|%s\n","턴","장소","내용");

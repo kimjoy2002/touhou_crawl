@@ -389,7 +389,7 @@ item_infor& id_to_item(int id, item_infor* item_)
 		makeitem(ITM_MISCELLANEOUS,1,item_);
 		break;
 	case 31://ªÁ≈‰∏Æ
-		makeitem(ITM_SATORI,1,item_);
+		makeitem(ITM_ETC,1,item_, EIT_SATORI);
 		break;
 	default:
 		break;

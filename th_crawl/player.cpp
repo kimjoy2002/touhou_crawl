@@ -3131,7 +3131,7 @@ interupt_type players::resetLOS(bool speak_)
 						if(env[current_level].isSmokePos(check_pos_.x,check_pos_.y,true))
 						{
 							smoke* smoke_ = env[current_level].isSmokePos2(check_pos_.x,check_pos_.y);
-							if(smoke_->sight_inter())
+							if(smoke_ && smoke_->sight_inter())
 							{
 								block_cloud-=smoke_->sight_inter();
 								if(!block_cloud)

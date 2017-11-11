@@ -552,7 +552,7 @@ bool item::isSimpleType(item_type_simple type_)
 		return (type==ITM_GOAL || type==ITM_ORB);
 		break;
 	case ITMS_OTHER:
-		return (type==ITM_SATORI);
+		return (type == ITM_ETC);
 		break;
 	default:
 		return false;
@@ -715,7 +715,7 @@ bool item::isiden()
 	{
 		return true;
 	}
-	else if(type == ITM_SATORI)
+	else if(type == ITM_ETC)
 	{
 		return true;
 	}
@@ -1051,6 +1051,21 @@ int item::action(int delay_)
 		{
 			env[current_level].DeleteItem(this);
 			return 0;
+		}
+	}
+	if (type == ITM_ETC && value1 == EIT_CAT_TREE) 
+	{
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && distan_coord(it->position, position) <= 2) {
+				if (it->id == MON_CHEN ||
+					it->id == MON_ORIN ||
+					it->id == MON_ORIN_CAT ||
+					it->id == MON_ORANGE_CAT ||
+					it->id == MON_WHITE_CAT ||
+					it->id == MON_BLACK_CAT)
+					it->s_confuse = 15;
+			}
 		}
 	}
 

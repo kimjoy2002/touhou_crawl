@@ -96,6 +96,13 @@ void environment::SaveDatas(FILE *fp)
 	{
 		(*it).SaveDatas(fp);
 	}
+	SaveData<int>(fp, speciel_map_name.size());
+	for (list<string>::iterator it = speciel_map_name.begin(); it != speciel_map_name.end(); it++)
+	{
+		char temp[100];
+		sprintf(temp, "%s", (*it).c_str());
+		SaveData<char>(fp, *temp, strlen(temp) + 1);
+	}
 }
 
 void environment::LoadDatas(FILE *fp)
@@ -160,7 +167,14 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		event_list.push_back(temp);
 	}
-
+	LoadData<int>(fp, size_);
+	for (int i = 0; i<size_; i++)
+	{
+		char temp[100];
+		LoadData<char>(fp, *temp);
+		string name = temp;
+		speciel_map_name.push_back(temp);
+	}
 	//----ENV로딩부분에서 임시 타겟팅을 잡아줘야한다.
 	
 	for(vector<monster>::iterator it=mon_vector.begin();it!=mon_vector.end();it++)
@@ -809,6 +823,10 @@ item* environment::AddItem(const coord_def &c, item *t, int num_)
 	return NULL;
 }
 
+void environment::AddSpecialMapInfo(string string_)
+{
+	speciel_map_name.push_back(string_);
+}
 
 
 void environment::DeleteItem(const list<item>::iterator it)

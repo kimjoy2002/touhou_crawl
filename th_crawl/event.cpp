@@ -104,7 +104,7 @@ int events::action(int delay_)
 		if(EventOccur(id,this))
 			return 0;
 	}
-	if(type == EVT_APPROACH_MIDDLE && distan_coord(position,you.position)<=10)
+	if(type == EVT_APPROACH_MIDDLE && distan_coord(position,you.position)<=4)
 	{
 		if(EventOccur(id,this))
 			return 0;
@@ -654,7 +654,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{			
 			for(int i=-3;i<=3;i++)
 			{
-				if(i!=0)	
+				if(i!=0)
 					env[current_level].dgtile[event_->position.x+i][event_->position.y+1].tile = DG_FLOOR;
 			}
 			for(int i = 0; i<5 ; i++)
@@ -680,6 +680,147 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			printlog("...그러나 코가사는 무언가 잘못되었음을 느꼈다.",true,false,false,CL_normal);
 		}
 		return 1;
+	case EVL_HOJOK:
+	{
+		unit* target_unit = env[current_level].isMonsterPos(event_->position.x - 4, event_->position.y - 1);
+		if (target_unit)
+		{
+			env[current_level].dgtile[event_->position.x - 4][event_->position.y].tile = DG_FLOOR;
+			env[current_level].dgtile[event_->position.x - 3][event_->position.y].tile = DG_FLOOR;
+			env[current_level].dgtile[event_->position.x - 3][event_->position.y - 1].tile = DG_FLOOR;
+
+			char temp[100];
+			sprintf(temp, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			printlog(temp, true, false, false, CL_speak);
+			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
+			if (!target_unit->isplayer())
+				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
+		}
+		target_unit = env[current_level].isMonsterPos(event_->position.x + 4, event_->position.y - 1);
+		if (target_unit)
+		{
+			env[current_level].dgtile[event_->position.x + 4][event_->position.y].tile = DG_FLOOR;
+			env[current_level].dgtile[event_->position.x + 3][event_->position.y].tile = DG_FLOOR;
+			env[current_level].dgtile[event_->position.x + 3][event_->position.y - 1].tile = DG_FLOOR;
+
+			char temp[100];
+			sprintf(temp, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			printlog(temp, true, false, false, CL_speak);
+			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
+			if(!target_unit->isplayer())
+				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
+		}
+		you.resetLOS();
+		return 1;
+	}
+	case EVL_KOGASA3:
+	{			
+		for (int i = -1; i < 2; i++)
+			for (int j = -1; j < 2; j++)
+				env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, NULL);
+		if (distan_coord(you.position, event_->position) <= 2) {
+			monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, event_->position);
+			char temp[100];
+			sprintf(temp, "%s%s외쳤다. \"원망스럽...콜록, 콜록!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
+			printlog(temp, true, false, false, CL_speak);
+			env[current_level].MakeNoise(event_->position, 12, NULL);
+			you.resetLOS();
+			MoreWait();
+			printlog("...코가사는 준비해둔 연기를 너무 들이마신듯하다. ", true, false, false, CL_normal);
+			mon_->SetSlow(rand_int(30, 40));
+			return 1;
+		}
+		return 0;
+	}
+	case EVL_MEDI:
+	{
+		for (rect_iterator rlt(event_->position, 1, 1); !rlt.end(); rlt++) {
+			if (env[current_level].isInSight((*rlt)))
+			{
+				monster *medi_ = env[current_level].AddMonster(MON_MEDICINE, M_FLAG_EVENT, event_->position);
+				medi_->PlusTimeDelay(-4*medi_->GetWalkDelay());
+				for (rect_iterator rlt2(event_->position, 1, 1); !rlt2.end(); rlt2++) {
+					if ((*rlt2) != event_->position)
+					{
+						random_extraction<int> rand_;
+						rand_.push(MON_CROW);
+						rand_.push(MON_FAIRY_GREEN);
+						rand_.push(MON_FAIRY_BLUE);
+						rand_.push(MON_FAIRY_RED);
+						rand_.push(MON_KATPA);
+						monster *mon_ = env[current_level].AddMonster(rand_.pop(), M_FLAG_EVENT | M_FLAG_NETURALY, (*rlt2));
+						
+						mon_->FoundTarget(medi_, mon_->FoundTime());
+						mon_->s_poison = 100;
+						mon_->SetPoisonReason(PRT_NEUTRAL);
+						mon_->s_fear = 20 + randA(20);
+					}
+
+				}
+				return 1;
+			}
+		}
+		return 0;
+	}
+	case EVL_LOCK_DOOR:
+	{
+		env[current_level].dgtile[event_->position.x][event_->position.y].flag |= FLAG_DONT_DOOR;
+		return 1;
+	}
+	case EVL_SMOKE:
+	{
+		for (int i = -1; i < 2; i++)
+		{
+			for (int j = -1; j < 2; j++)
+			{
+				if(randA(6)==0)
+					env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_normal, SMT_FOG, rand_int(3, 4), 0, NULL);
+			}
+		}
+		return 0;
+	}
+	case EVL_CHEN:
+	{
+		for (rect_iterator rlt(event_->position, 1, 1); !rlt.end(); rlt++) {
+			if (env[current_level].isInSight((*rlt)))
+			{
+				monster *chen_ = env[current_level].AddMonster(MON_CHEN, M_FLAG_EVENT, event_->position);
+				chen_->s_confuse = 15;
+				for (rect_iterator rlt2(event_->position, 1, 1); !rlt2.end(); rlt2++) {
+					if ((*rlt2).x != event_->position.x && (*rlt2).y != event_->position.y)
+					{
+						random_extraction<int> rand_;
+						rand_.push(MON_ORANGE_CAT);
+						rand_.push(MON_BLACK_CAT);
+						rand_.push(MON_WHITE_CAT);
+						monster *mon_ = env[current_level].AddMonster(rand_.pop(), M_FLAG_EVENT, (*rlt2));
+						mon_->s_confuse = 15;
+					}
+				}
+				return 1;
+			}
+		}
+		return 0;
+	}
+	case EVL_BROKEN_NESI:
+	{
+		monster *nesi_ = env[current_level].AddMonster(MON_NESI, M_FLAG_EVENT, event_->position);
+		nesi_->s_confuse = -1;
+		nesi_->exper = nesi_->exper / 2;
+		return 1;
+	}
+	case EVL_FIRE_SMOKE:
+	{
+		if(event_->count % 2)
+			env[current_level].MakeSmoke(coord_def(event_->position.x, event_->position.y), img_fog_fire, SMT_FIRE, rand_int(3, 4), 0, NULL);
+		return 0;
+	}
+	case EVL_COLD_SMOKE:
+	{
+		if (event_->count % 2)
+			env[current_level].MakeSmoke(coord_def(event_->position.x, event_->position.y), img_fog_cold, SMT_COLD, rand_int(3, 4), 0, NULL);
+		return 0;
+	}
 	default:
 		break;
 	}

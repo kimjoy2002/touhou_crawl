@@ -679,6 +679,12 @@ void environment::ClearAllShadow()
 	shadow_list.clear();
 	ReleaseMutex(mutx);
 }
+void environment::ClearSmoke()
+{
+	WaitForSingleObject(mutx, INFINITE);
+	smoke_list.clear();
+	ReleaseMutex(mutx);
+}
 void environment::ClearEvent()
 {
 	event_list.clear();
@@ -744,6 +750,7 @@ void environment::ClearFloor()
 	ClearEffect();
 	ClearAllShadow();
 	ClearEvent();
+	ClearSmoke();
 	{
 		vector<monster>::iterator it;
 		it = mon_vector.begin();

@@ -476,8 +476,8 @@ textures img_named_larva(&texture_monster01, 201, 255);
 textures img_named_nemuno(&texture_monster01, 202, 255);
 textures img_named_aunn(&texture_monster01, 203, 255);
 textures img_named_narumi(&texture_monster01, 204, 255);
-textures img_named_mai(&texture_monster01, 205, 255);
-textures img_named_satono(&texture_monster01, 206, 255);
+textures img_named_mai(&texture_monster01, 206, 255);
+textures img_named_satono(&texture_monster01, 205, 255);
 textures img_named_kokoro[] =
 {
 	textures(&texture_monster01, 208, 255),

@@ -284,12 +284,30 @@ void map_algorithms(int num)
 		{
 			env[num].AllySafeClear(map_list.dungeon_enter[PANDEMONIUM].floor, map_list.dungeon_enter[PANDEMONIUM].pos);
 			env[num].ClearFloor();
-			map_algorithms02(num,10,0,DG_FLOOR,DG_WALL);
+			map_algorithms02(num,10,0,(dungeon_tile_type)(DG_PANDE_FLOOR1 + randA(6)), (dungeon_tile_type)(DG_PANDE_WALL1 + randA(6)));
 		}
 		else if(num>PANDEMONIUM_LEVEL && num<=PANDEMONIUM_LAST_LEVEL)
 		{
 			env[num].ClearFloor();
-			map_algorithms02(num,5,0,DG_FLOOR,DG_WALL);
+			dungeon_tile_type floor_ = DG_FLOOR;
+			dungeon_tile_type wall_ = DG_FLOOR;
+
+			if (num == PANDEMONIUM_LEVEL + 1)
+			{
+				floor_ = DG_PANDE_FLOOR7;
+				wall_ = DG_PANDE_WALL7;
+			}
+			else if (num == PANDEMONIUM_LEVEL + 2)
+			{
+				floor_ = DG_PANDE_FLOOR4;
+				wall_ = DG_PANDE_WALL4;
+			}
+			else if (num == PANDEMONIUM_LEVEL + 3)
+			{
+				floor_ = DG_PANDE_FLOOR1;
+				wall_ = DG_PANDE_WALL1;
+			}
+			map_algorithms02(num,5,0, floor_, wall_);
 		}
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
 		{

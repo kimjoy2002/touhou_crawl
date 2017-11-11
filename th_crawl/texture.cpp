@@ -63,14 +63,14 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),
 					textures(&texture_dungeon01, 384, 0, 416, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 512, 0, 544, 32, 255), //마계땅1
+					textures(&texture_dungeon01, 544, 0, 576, 32, 255),
+					textures(&texture_dungeon01, 576, 0, 608, 32, 255),
+					textures(&texture_dungeon01, 608, 0, 640, 32, 255),
+					textures(&texture_dungeon01, 640, 0, 672, 32, 255),
 
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
+					textures(&texture_dungeon01, 672, 0, 704, 32, 255),
+					textures(&texture_dungeon01, 704, 0, 736, 32, 255), //마계땅7
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
@@ -129,6 +129,14 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//붉은벽
 					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//책장
 					textures(&texture_dungeon01, 224, 0, 256, 32, 255),//대나무
+
+					textures(&texture_dungeon01, 736, 0, 768, 32, 255), //마계벽1
+					textures(&texture_dungeon01, 768, 0, 800, 32, 255), //마계벽2
+					textures(&texture_dungeon01, 800, 0, 832, 32, 255), //마계벽3
+					textures(&texture_dungeon01, 832, 0, 864, 32, 255), //마계벽4
+					textures(&texture_dungeon01, 864, 0, 896, 32, 255), //마계벽5
+					textures(&texture_dungeon01, 896, 0, 928, 32, 255), //마계벽6
+					textures(&texture_dungeon01, 928, 0, 960, 32, 255), //마계벽7
 
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//나무
 					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//철벽
@@ -195,6 +203,14 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
+				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
 				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
 
 				{textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255) },		

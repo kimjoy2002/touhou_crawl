@@ -449,14 +449,14 @@ void tensi_burst(int good_)
 
 		if(is_live && env[current_level].isInSight(pos_))
 		{
-			if(good_<0 || (!is_ally && distan_coord(pos_,you.position) > 4))
-			{//아군과 가까이 있는 적은 폭발하지않아. 물론 텐시의 기분이 좋을때만 말이지!
+			if(good_<0 || (!is_ally))
+			{
 				vector<coord_def> vt_;
 				{
 					rect_iterator rit(pos_,1,1);
 					for(;!rit.end();rit++)
 					{
-						if(env[current_level].isMove(rit->x,rit->y))
+						if(env[current_level].isMove(rit->x,rit->y) && (good_<0 || *rit != you.position))
 						{
 							env[current_level].MakeEffect(*rit,&img_blast[randA(5)],false);
 							vt_.push_back(*rit);
@@ -465,21 +465,23 @@ void tensi_burst(int good_)
 				}
 				for(auto it2 = vt_.begin();it2 != vt_.end();it2++)
 				{
-					if(env[current_level].isMove(it2->x,it2->y))
+					if (env[current_level].isMove(it2->x, it2->y))
 					{
-						if(unit* hit_ = env[current_level].isMonsterPos(it2->x,it2->y))
-						{
-							
-							int att_ = randC(3,8+you.level/3);
-							int m_att_ = 3*(8+you.level/3);
+						if ((good_ < 0 || *it2 != you.position)) {
+							if (unit* hit_ = env[current_level].isMonsterPos(it2->x, it2->y))
+							{
 
-							if(hit_->isplayer())
-							{ //플레이어는 죽지 않을정도만
-								if(att_ >= hit_->GetHp())
-									att_ = hit_->GetHp()-1;
+								int att_ = randC(3, 8 + you.level / 3);
+								int m_att_ = 3 * (8 + you.level / 3);
+
+								if (hit_->isplayer())
+								{ //플레이어는 죽지 않을정도만
+									if (att_ >= hit_->GetHp())
+										att_ = hit_->GetHp() - 1;
+								}
+								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("텐시", false));
+								hit_->damage(temp_att, true);
 							}
-							attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("텐시",false));
-							hit_->damage(temp_att, true);
 						}
 					}
 				}

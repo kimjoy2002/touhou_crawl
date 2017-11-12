@@ -440,7 +440,7 @@ public:
 	bool SetUnluck(int s_unluck_);
 	bool SetSuperGraze(int s_super_graze_);
 	bool SetNoneMove(int s_none_move_); 
-	bool SetNightSight(int value_, int turn_);
+	bool SetNightSight(int value_, int turn_, bool stong_);
 
 
 	int GetInvisible();

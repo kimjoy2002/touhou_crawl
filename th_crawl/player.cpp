@@ -2811,11 +2811,11 @@ bool players::SetNoneMove(int s_none_move_)
 	s_none_move += s_none_move_;
 	return true;
 }
-bool players::SetNightSight(int value_, int turn_)
+bool players::SetNightSight(int value_, int turn_, bool stong_)
 {
 	if (!turn_)
 		return false;
-	if (confuse_resist>0 || you.invisible_view)
+	if (!stong_ && (confuse_resist>0 || you.invisible_view))
 		return false;
 	if(!s_night_sight_turn)
 		printlog("당신의 눈은 침침해졌다.", false, false, false, CL_small_danger);

@@ -3760,7 +3760,7 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 	{
 		if (env[current_level].isInSight(target)) {
 			printlog("밤참새의 노랫소리가 들려온다! ", false, false, false, CL_normal);
-			you.SetNightSight(1, turn_);
+			you.SetNightSight(1, turn_, false);
 			order->SetExhausted(turn_ - rand_int(0, 2));
 			return true;
 		}

@@ -3028,9 +3028,9 @@ bool monster::SetPoison(int poison_, int max_, bool strong_)
 	if(isYourShight())
 	{
 		if(!s_poison)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"독에 걸렸다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"독에 걸렸다. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 독은 심해졌다.");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 독은 심해졌다. ");
 	}
 
 	s_poison += poison_;
@@ -3088,11 +3088,11 @@ bool monster::SetTele(int tele_)
 	{
 		if(!s_tele)
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간이 불안정해졌다.");
+			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간이 불안정해졌다. ");
 		}
 		else
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간은 안정을 되찾았다.");
+			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간은 안정을 되찾았다. ");
 		}
 	}
 	if(!s_tele)
@@ -3110,10 +3110,10 @@ bool monster::SetMight(int might_)
 	{
 		if(!s_might)
 		{
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 강해졌다.");
+			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 강해졌다. ");
 		}
 		else
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 더욱 강해졌다.");
+			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 더욱 강해졌다. ");
 	}
 	s_might += might_;
 	if(s_might>100)
@@ -3140,9 +3140,9 @@ bool monster::SetHaste(int haste_)
 	if(isYourShight())
 	{
 		if(!s_haste)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다. ");
 	}
 	s_haste += haste_;
 	if(s_haste>100)
@@ -3159,9 +3159,9 @@ bool monster::SetConfuse(int confuse_, bool strong_)
 	if(isYourShight())
 	{
 		if(!s_confuse)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"혼란스러워졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"혼란스러워졌다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 혼란스러워졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 혼란스러워졌다. ");
 	}
 	s_confuse += confuse_;
 	if(s_confuse>50)
@@ -3175,9 +3175,9 @@ bool monster::SetSlow(int slow_)
 	if(isYourShight())
 	{
 		if(!s_slow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"느려졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"느려졌다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 느려졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 느려졌다. ");
 	}
 	s_slow += slow_;
 	if(s_slow>100)
@@ -3195,9 +3195,9 @@ bool monster::SetFrozen(int frozen_)
 	if(isYourShight())
 	{
 		if(!s_frozen)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙어 움직임이 둔해졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙어 움직임이 둔해졌다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 얼어붙어 움직임이 둔해졌다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 얼어붙어 움직임이 둔해졌다. ");
 	}
 	s_frozen += frozen_;
 	if(s_frozen>25)
@@ -3212,9 +3212,9 @@ bool monster::SetCharm(int charm_)
 	if(isYourShight())
 	{
 		if(!s_ally)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"매료되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"매료되었다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 매료되었다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 매료되었다. ");
 	}
 	s_ally += charm_;
 	if(s_ally>200)
@@ -3229,9 +3229,9 @@ bool monster::SetElec(int elec_)
 	if(isYourShight())
 	{
 		if(!s_elec)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다. ");
 	}
 	s_elec += elec_;
 	if(s_elec>40)
@@ -3245,7 +3245,7 @@ bool monster::SetParalyse(int paralyse_)
 		
 	if(isYourShight())
 	{
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마비되었다.");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마비되었다. ");
 	}
 	s_paralyse += paralyse_;
 	if(s_paralyse>100)
@@ -3263,9 +3263,9 @@ bool monster::SetGlow(int glow_)
 	if(isYourShight())
 	{
 		if(!s_glow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빛나고있다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빛나고있다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 빛나고있다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 빛나고있다. ");
 	}
 	s_glow += glow_;
 	if(s_glow>100)
@@ -3279,9 +3279,9 @@ bool monster::SetGraze(int graze_)
 	if(isYourShight())
 	{
 		if(!s_graze)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다. ");
 	}
 	s_graze += graze_;
 	if(s_graze>100)

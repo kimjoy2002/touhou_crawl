@@ -20,7 +20,10 @@ enum tensi_do_list
 	TENSI_BURST,
 	TENSI_WEAPON,
 	TENSI_KANAME,
-	TENSI_FIELD
+	TENSI_FIELD,
+	TENSI_BLIND,
+	TENSI_BUFF_DEBUFF,
+	TENSI_SUCIDE
 };
 
 enum weather_list

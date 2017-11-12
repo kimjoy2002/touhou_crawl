@@ -538,6 +538,40 @@ void tensi_field(int doing_)
 	}
 	env[current_level].MakeEvent(rand_.pop(), you.position, EVT_ALWAYS, rand_int(10, 20));
 }
+void tensi_blind(int doing_)
+{
+	you.SetNightSight(1, rand_int(20,40), true);
+}
+void tensi_buf_debuf(int doing_)
+{
+	int time_ = rand_int(20, 30)* abs(doing_);
+
+	int i = 0;
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && env[current_level].isInSight(it->position, true))
+		{
+			if(doing_>0)
+				it->SetSlow(time_);
+			else
+				it->SetHaste(time_);
+			i++;
+			if (i % 4 == 0)
+				enterlog();
+		}
+	}
+}
+void tensi_sucide(int doing_)
+{
+	for (int i = randA_1(you.level/6+1); i> 0; i--)
+	{
+		int id_ = MON_RABIT_BOMB;
+		if (monster* mon_ = BaseSummon(MON_RABIT_BOMB, rand_int(20, 30), false, true, 2, &you, you.position, SKD_OTHER, -1))
+		{
+			mon_->CheckSightNewTarget();
+		}
+	}
+}
 void tensi_action()
 {
 	string type;
@@ -567,13 +601,15 @@ void tensi_action()
 		else
 		{
 			type = "[평화:-1]";
-			switch(randA(5)){
+			switch(randA(7)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
 			case 3:doing_ = -1; action_ =  TENSI_EARTHQUAKE; break;
 			case 4:doing_ = -1; action_ =  TENSI_BURST; break;
 			case 5:doing_ = -1; action_ = TENSI_KANAME; break;
+			case 6:doing_ = -1; action_ = TENSI_BLIND; break;
+			case 7:doing_ = -1; action_ = TENSI_SUCIDE; break;
 			}
 		}
 	}
@@ -582,24 +618,26 @@ void tensi_action()
 		if(100+randA(4000)<randA(you.CheckTension()) && randA(9)>0)
 		{ //텐시의 포텐셜 폭발!	
 			type = "[위기:3]";
-			switch(randA(5)){
+			switch(randA(6)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
 			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //텐시는 전투를 좋아하기때문에 텔포는 많이 안쓴다.
 			case 4:doing_ = 2; action_ = TENSI_KANAME; break;
 			case 5:doing_ = 1; action_ = TENSI_FIELD; break;
+			case 6:doing_ = 2; action_ = TENSI_BUFF_DEBUFF; break;
 			}
 		}
 		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
 		{ //그럭저럭 좋은일
 			type = "[위기:2]";
-			switch(randA(4)){
+			switch(randA(5)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_BURST; break;
 			case 3:doing_ = 2; action_ =  TENSI_WEAPON; break;
 			case 4:doing_ = 1; action_ = TENSI_KANAME; break;
+			case 5:doing_ = 1; action_ = TENSI_BUFF_DEBUFF; break;
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
@@ -614,13 +652,16 @@ void tensi_action()
 		else
 		{ //운이 나빴어
 			type = "[위기:-1]";
-			switch(randA(5)){
+			switch(randA(8)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
 			case 3:doing_ = -1; action_ =  TENSI_BURST; break;
 			case 4:doing_ = rand_int(-2,-1); action_ = TENSI_KANAME; break;
 			case 5:doing_ = -1; action_ = TENSI_FIELD; break;
+			case 6:doing_ = -1; action_ = TENSI_BLIND; break;
+			case 7:doing_ = -1; action_ = TENSI_BUFF_DEBUFF; break;
+			case 8:doing_ = -1; action_ = TENSI_SUCIDE; break;
 			}
 		}
 
@@ -720,6 +761,33 @@ void tensi_action()
 			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
 		tensi_field(doing_);
+		break;
+	case TENSI_BLIND:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 실명. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_blind(doing_);
+		break;
+	case TENSI_BUFF_DEBUFF:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 광역가속감속. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_buf_debuf(doing_);
+		break;
+	case TENSI_SUCIDE:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 자폭토끼. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_sucide(doing_);
 		break;
 	}
 }
@@ -1124,7 +1192,72 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			case 4:
 				return "텐시: 좀 더 좋은 환경이 있는데 시험해볼래?";
 			}
-
+		case TENSI_BLIND:
+			switch (randA(3))
+			{
+			case 0:
+				return "텐시: 한 숨 잘테니까 불 좀 꺼야겠어";
+			case 1:
+				return "텐시: 너무 밝지않아?";
+			case 2:
+				return "텐시: 이게 좀 더 재미있을 거 같지않아?";
+			case 3:
+				return "텐시: 눈에 보이는 것이 전부는 아니야!";
+			}
+		case TENSI_BUFF_DEBUFF:
+			if (good_)
+			{
+				switch (randA(5))
+				{
+				case 0:
+					return "텐시는 주변의 흐름을 조절했다.";
+				case 1:
+					return "텐시: 여기까지 해줬는데도 진다면 각오하는게 좋을거야";
+				case 2:
+					return "텐시: 이번엔 기분이 좋으니까 특별 선물이야!";
+				case 3:
+					return "텐시: 이게 적이 느려보인다같은거지?";
+				case 4:
+					return "텐시: 이걸로 충분하려나?";
+				case 5:
+					return "텐시: 굼벵이 같은 것들!";
+				}
+			}
+			else {
+				switch (randA(5))
+				{
+				case 0:
+					return "텐시: 모두에게 변화를 좀 줘볼까?";
+				case 1:
+					return "텐시: 파티의 시작이야!";
+				case 2:
+					return "텐시: 뛰어서 도망치는건 재미없으니까, 모두를 빠르게 해보았지!";
+				case 3:
+					return "텐시: 이제 도망칠 순 없을껄?";
+				case 4:
+					return "텐시: 너무 쉽게 이길거같으니까, 좀 강화시켜줘봤지!";
+				case 5:
+					return "텐시: 좀 더 스릴이 있어야겠지?";
+				}
+			}
+		case TENSI_SUCIDE:
+			switch (randA(6))
+			{
+			case 0:
+				return "텐시: 좋은 친구들을 소개해줄게!";
+			case 1:
+				return "텐시: 괜찮은 애들이라고! 좀 강경파인걸 제외하면 말이지";
+			case 2:
+				return "텐시: 폭파하는거 좋아해?";
+			case 3:
+				return "텐시: 용맹하지만 아군을 신경쓰지않는게 단점이긴하지";
+			case 4:
+				return "텐시: 잠깐이지만 사이좋게 지내줘!";
+			case 5:
+				return "텐시: 자폭특공이란건 잘 이해할 수 없어... 무슨 종교라도 믿는걸까?";
+			case 6:
+				return "텐시: 주변을 싹 정리하는데는 이만한게 없지!";
+			}
 		}
 
 	}

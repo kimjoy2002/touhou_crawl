@@ -18,6 +18,7 @@
 #include "rect.h"
 #include "alchemy.h"
 #include "weapon.h"
+#include "event.h"
 
 
 const char* tensi_talk(bool good_, tensi_do_list list_);
@@ -522,8 +523,24 @@ void tensi_weapon(int doing_)
 	}
 }
 
+void tensi_field(int doing_)
+{
+	random_extraction<int> rand_;
+
+	if (doing_>0)
+	{
+		rand_.push(EVL_SANTUARY);
+	}
+	else 
+	{
+		rand_.push(EVL_VIOLET);
+		rand_.push(EVL_SILENCE);
+	}
+	env[current_level].MakeEvent(rand_.pop(), you.position, EVT_ALWAYS, rand_int(10, 20));
+}
 void tensi_action()
 {
+	string type;
 	if(wiz_list.wizard_mode == 1)
 	{
 		char temp[256];
@@ -537,17 +554,19 @@ void tensi_action()
 	int doing_ = 0;
 	tensi_do_list action_ = TENSI_NOTHING;
 
-	if(you.CheckTension() < randA(100) || you.GetPunish(GT_TENSI))
+	if(you.CheckTension()+10 < randA(100) || you.GetPunish(GT_TENSI))
 	{
 
 		int rand_ = randA(99);
 
 		if(rand_>44+(you.GetPunish(GT_TENSI)?50:0))
 		{
+			type = "[평화:0]";
 			action_ = TENSI_NOTHING;
 		}
 		else
 		{
+			type = "[평화:-1]";
 			switch(randA(5)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
@@ -560,20 +579,21 @@ void tensi_action()
 	}
 	else
 	{
-		if(100+randA(5000)<randA(you.CheckTension()))
-		{ //텐시의 포텐셜 폭발!			
+		if(100+randA(4000)<randA(you.CheckTension()) && randA(9)>0)
+		{ //텐시의 포텐셜 폭발!	
+			type = "[위기:3]";
 			switch(randA(5)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
 			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //텐시는 전투를 좋아하기때문에 텔포는 많이 안쓴다.
-			case 4:doing_ = 3; action_ =  TENSI_WEAPON; break;
-			case 5:doing_ = 2; action_ = TENSI_KANAME; break;
+			case 4:doing_ = 2; action_ = TENSI_KANAME; break;
+			case 5:doing_ = 1; action_ = TENSI_FIELD; break;
 			}
 		}
-		else if(randA(500)<randA(you.CheckTension()))
+		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
 		{ //그럭저럭 좋은일
-			
+			type = "[위기:2]";
 			switch(randA(4)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
@@ -582,8 +602,9 @@ void tensi_action()
 			case 4:doing_ = 1; action_ = TENSI_KANAME; break;
 			}
 		}
-		else if(randA(100)<randA(you.CheckTension()))
+		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
 		{ //괜찮네
+			type = "[위기:1]";
 			switch(randA(2)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
@@ -592,18 +613,21 @@ void tensi_action()
 		}
 		else
 		{ //운이 나빴어
-			switch(randA(4)){
+			type = "[위기:-1]";
+			switch(randA(5)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
 			case 3:doing_ = -1; action_ =  TENSI_BURST; break;
 			case 4:doing_ = rand_int(-2,-1); action_ = TENSI_KANAME; break;
+			case 5:doing_ = -1; action_ = TENSI_FIELD; break;
 			}
 		}
 
 	}
 	
-	
+	printlog(type, true, false, false, CL_tensi);
+		
 
 	printlog(tensi_talk(doing_>0, action_),true,false,false,CL_tensi);
 	switch(action_)
@@ -612,7 +636,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 아무일도안함. 텐션 %d", you.CheckTension());
+			sprintf_s(temp,256,"%s텐시: 아무일도안함. 텐션 %d", type.c_str(), you.CheckTension());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		break;
@@ -620,7 +644,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 포션. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 포션. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_potion(doing_>0);
@@ -629,7 +653,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 소환. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 소환. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_summon(doing_);
@@ -638,7 +662,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 텔레포트. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 텔레포트. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_tele(doing_);
@@ -647,7 +671,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 지진. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 지진. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_earthquake(doing_);
@@ -656,7 +680,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 무념무상. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 무념무상. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_munyum(doing_);
@@ -665,7 +689,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 폭발. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 폭발. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_burst(doing_);
@@ -674,7 +698,7 @@ void tensi_action()
 		if(wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp,256,"텐시: 비상의검. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%s텐시: 비상의검. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_weapon(doing_);
@@ -683,10 +707,19 @@ void tensi_action()
 		if (wiz_list.wizard_mode == 1)
 		{
 			char temp[256];
-			sprintf_s(temp, 256, "텐시: 카나메석. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%s텐시: 카나메석. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
 			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
 		tensi_kaname(doing_);
+		break;
+	case TENSI_FIELD:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 필드생성. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_field(doing_);
 		break;
 	}
 }
@@ -1076,6 +1109,20 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				case 5:
 					return "텐시: 사격연습을 해보지않을래? 물론 너가 표적이야!";
 				}
+			}
+		case TENSI_FIELD:
+			switch (randA(4))
+			{
+			case 0:
+				return "당신을 중심으로 무언가 거대한 장막이 펼쳐짐을 느꼈다.";
+			case 1:
+				return "텐시: 새로운 필드가 필요해?";
+			case 2:
+				return "텐시: 여기서 싸우는게 좀 더 재밌어보이는데!";
+			case 3:
+				return "텐시: 텐트 좀 펼칠테니까 도와줄래?";
+			case 4:
+				return "텐시: 좀 더 좋은 환경이 있는데 시험해볼래?";
 			}
 
 		}

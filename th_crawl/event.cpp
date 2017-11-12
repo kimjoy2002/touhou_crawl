@@ -821,6 +821,22 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].MakeSmoke(coord_def(event_->position.x, event_->position.y), img_fog_cold, SMT_COLD, rand_int(3, 4), 0, NULL);
 		return 0;
 	}
+	case EVL_SILENCE:
+	{
+		int prev_range = min(10, (event_->count + 2) / 2);
+		int silence_range = min(10, (event_->count + 1) / 2);
+		if (event_->count <= 0)
+		{
+			env[current_level].MakeSilence(event_->position, prev_range, false);
+			return 1;
+		}
+		else if (prev_range != silence_range)
+		{
+			env[current_level].MakeSilence(event_->position, prev_range, false);
+			env[current_level].MakeSilence(event_->position, silence_range, true);
+		}
+		return 0;
+	}
 	default:
 		break;
 	}

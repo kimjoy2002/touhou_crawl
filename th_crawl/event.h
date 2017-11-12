@@ -46,7 +46,8 @@ enum event_list
 	EVL_CHEN,
 	EVL_BROKEN_NESI, //수리가 끝나지않은 네시
 	EVL_FIRE_SMOKE,
-	EVL_COLD_SMOKE
+	EVL_COLD_SMOKE,
+	EVL_SILENCE
 };
 
 class events

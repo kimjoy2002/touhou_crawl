@@ -359,6 +359,10 @@ bool Dump(int type, string *filename_)
 	{
 		fprintf_s(fp,"¹«½Å¾Ó\n\n");
 	}
+	else if (you.god == GT_TENSI)
+	{
+		fprintf_s(fp, "½Å¾Ó: %s\n\n", GetGodString(you.god));
+	}
 	else
 	{
 		fprintf_s(fp,"½Å¾Ó: %s %c%c%c%c%c%c\n\n",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');

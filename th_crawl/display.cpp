@@ -340,6 +340,11 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		sprintf_s(temp,100,"¹«½Å¾Ó");
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
+	else if (you.god == GT_TENSI)
+	{
+		sprintf_s(temp, 100, "½Å¾Ó: %s", GetGodString(you.god));
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	}
 	else
 	{
 		sprintf_s(temp,100,"½Å¾Ó: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
@@ -720,6 +725,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(you.god == GT_NONE)
 		{
 			sprintf_s(temp,128,"¹«½Å¾Ó");
+		}
+		else if (you.god == GT_TENSI)
+		{
+			sprintf_s(temp, 128, "½Å¾Ó: %s", GetGodString(you.god));
 		}
 		else
 		{

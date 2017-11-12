@@ -1538,12 +1538,11 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	}
 	return return_;
 }
-
 bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 {
 	if(num_<=0)
 		return false;
-	if (flag & M_FLAG_NONE_MOVE)
+	if (!isCanMove())
 		return false;
 
 	if(state.GetState() == MS_ATACK)
@@ -1964,6 +1963,19 @@ int monster::atkmove(int is_sight, bool only_move)
 		}
 	}
 	return move_;
+}
+
+
+bool monster::isCanMove()
+{
+	if(state.GetState() == MS_SLEEP)
+		return false;
+	if (s_paralyse)
+		return false;
+	if (flag & M_FLAG_NONE_MOVE)
+		return false;
+
+	return true;
 }
 bool monster::isHaveSpell(spell_list sp)
 {
@@ -3265,7 +3277,7 @@ bool monster::SetGlow(int glow_)
 		if(!s_glow)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빛나고있다. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 빛나고있다. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 빛나고있다.");
 	}
 	s_glow += glow_;
 	if(s_glow>100)
@@ -3853,6 +3865,8 @@ bool monster::CanChase()
 	if(s_mind_reading && s_ally && flag & M_FLAG_ANIMAL)
 		return false;
 	if( flag & M_FLAG_NONE_STAIR)
+		return false;
+	if (!isCanMove())
 		return false;
 	if (flag & M_FLAG_SHIELD)
 		return false;

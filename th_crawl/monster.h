@@ -159,6 +159,7 @@ public:
 	bool OpenDoor(const coord_def &c);
 	int longmove();
 	int atkmove(int is_sight, bool only_move=false);
+	bool isCanMove();
 	bool isHaveSpell(spell_list sp);
 	int MoveToPos(coord_def pos_, bool only_move);
 	bool isView(); //당신이 볼 수 있는지.

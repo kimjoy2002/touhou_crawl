@@ -758,9 +758,9 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && ((env[current_level].isInSight((*it).position) && (flag & M_FLAG_SUMMON) ) || isMonsterSight((*it).position)) )
+				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && ((env[current_level].isInSight((*it).position, true) && (flag & M_FLAG_SUMMON) ) || isMonsterSight((*it).position)) )
 				{
-					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position) )
+					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position, true) )
 					{
 						FoundTarget(&(*it), FoundTime());
 						break;
@@ -817,7 +817,7 @@ void monster::CheckSightNewTarget()
 
 
 
-		if(env[current_level].isInSight(position) && you.isView(this) && !you.s_timestep)
+		if(env[current_level].isInSight(position, true) && you.isView(this) && !you.s_timestep)
 		{
 			if(state.GetState() == MS_ATACK ||  you_detect())
 			{
@@ -845,7 +845,7 @@ bool monster::ReturnEnemy()
 }
 const name_infor* monster::GetName()
 {
-	if(!isView() && you.hp > 0)
+	if((!env[current_level].isInSight(position) || !isView()) && you.hp > 0)
 		return &string_that;
 	return &name;
 }
@@ -1234,7 +1234,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage, back_stab);
 	int accuracy_ = a.accuracy;
 	bool sight_ = isYourShight();
-	bool only_invisible_ = ((env[current_level].isInSight(position)) && !isView());
+	bool only_invisible_ = ((env[current_level].isInSight(position, true)) && !isView());
 	bool graze_ = false;
 	
 
@@ -2183,7 +2183,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 int monster::action(int delay_)
 {	
 	bool is_sight = false;
-	if(env[current_level].isInSight(position))
+	if(env[current_level].isInSight(position, true))
 	{
 		if(first_contact)
 			FirstContact();
@@ -2535,7 +2535,7 @@ int monster::action(int delay_)
 					{
 						coord_def check_pos_ = (*rit);
 						int temp_ = pow((float)abs(check_pos_.x-target->position.x),2)+pow((float)abs(check_pos_.y-target->position.y),2);
-						if(temp_>49 && env[current_level].isMove(check_pos_.x, check_pos_.y, false) && (!target->isplayer() || env[current_level].isInSight(check_pos_)) 
+						if(temp_>49 && env[current_level].isMove(check_pos_.x, check_pos_.y, false) && (!target->isplayer() || env[current_level].isInSight(check_pos_, true)) 
 							&& target->isSightnonblocked((*rit)))
 						{
 
@@ -2610,7 +2610,7 @@ int monster::action(int delay_)
 				target = &you;
 				state.SetState(MS_FOLLOW);
 			}
-			if((flag & M_FLAG_SUMMON)  && isUserAlly() && !env[current_level].isInSight(target_pos) )
+			if((flag & M_FLAG_SUMMON)  && isUserAlly() && !env[current_level].isInSight(target_pos, true) )
 			{
 				state.SetState(MS_FOLLOW);
 
@@ -2746,7 +2746,7 @@ int monster::action(int delay_)
 				if (state.GetState() != MS_FIND)
 				{
 					atkmove(is_sight);
-					if (!is_sight && env[current_level].isInSight(position))
+					if (!is_sight && env[current_level].isInSight(position, true))
 					{ //플레이어를 발견하게된다.
 						if (target == &you)
 							FoundTarget(target, FoundTime());
@@ -2880,7 +2880,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_YAMAME:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && randA(2) == 0 && !isArena() && !isUserAlly())
+			if (env[current_level].isInSight(position, true) && randA(2) == 0 && !isArena() && !isUserAlly())
 			{
 				you.SetSick(10);
 			}
@@ -2888,7 +2888,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_TEWI:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && hp < max_hp / 2 && randA(3) == 0 && !isUserAlly())
+			if (env[current_level].isInSight(position, true) && hp < max_hp / 2 && randA(3) == 0 && !isUserAlly())
 			{
 				SetFear(rand_int(20, 40));
 			}
@@ -2896,7 +2896,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_CLOWNPIECE:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
+			if (env[current_level].isInSight(position, true) && !you.s_lunatic && randA(5) == 0 && !isArena() && !isUserAlly())
 			{
 				you.SetLunatic(rand_int(5, 10));
 			}
@@ -2913,7 +2913,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_SEKIBANKI:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && randA(2) == 0 &&
+			if (env[current_level].isInSight(position, true) && randA(2) == 0 &&
 				state.GetState() == MS_ATACK && !s_mute)
 			{
 				if (!env[current_level].isSilence(position) && flag & M_FLAG_SPEAK) {
@@ -2929,7 +2929,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_SEKIBANKI_BODY:
 		if (!smoke_){
-			if (!(env[current_level].isInSight(position)) && randA(2) == 0)
+			if (!(env[current_level].isInSight(position, true)) && randA(2) == 0)
 			{
 				env[current_level].SummonClear(map_id);
 				ChangeMonster(MON_SEKIBANKI, 0);
@@ -2975,7 +2975,7 @@ void monster::special_action(int delay_, bool smoke_)
 	}
 	case MON_MAI2:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && !isArena() && isUserAlly())
+			if (env[current_level].isInSight(position, true) && !isArena() && isUserAlly())
 			{
 				you.HpUpDown(rand_int(2, 3), DR_NONE);
 			}
@@ -2990,7 +2990,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_SATONO:
 		if (!smoke_){
-			if (env[current_level].isInSight(position) && !isArena() && isUserAlly())
+			if (env[current_level].isInSight(position, true) && !isArena() && isUserAlly())
 			{
 				you.MpUpDown(randA(3) ? 1 : rand_int(1, 2));
 			}

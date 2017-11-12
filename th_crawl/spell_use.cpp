@@ -3750,6 +3750,28 @@ bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+
+bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
+{
+	if (order->GetExhausted())
+		return false;
+	int turn_ = rand_int(10, 15);
+	if (!order->isplayer())
+	{
+		if (env[current_level].isInSight(target)) {
+			printlog("밤참새의 노랫소리가 들려온다! ", false, false, false, CL_normal);
+			you.SetNightSight(1, turn_);
+			order->SetExhausted(turn_ - rand_int(0, 2));
+			return true;
+		}
+		order->SetExhausted(turn_ - rand_int(0, 2));
+		return true;
+	}
+	order->SetExhausted(rand_int(3, 5));
+	return false;
+}
+
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -4275,6 +4297,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_STONE_ARROW, 20));
 		list->push_back(spell(SPL_KANAME_DRILL, 10));
 		break;
+	case MON_MISTIA:
+		list->push_back(spell(SPL_MISTIA_SONG, 50));
+		break;
 	default:
 		break;
 	}
@@ -4561,6 +4586,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_thunder_bolt(power, short_, order, target);
 	case SPL_SANTUARY:
 		return skill_santuary(power, short_, order, target);
+	case SPL_MISTIA_SONG:
+		return skill_mistia_song(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5004,6 +5031,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_thunder_bolt(power, short_, &you, target);
 	case SPL_SANTUARY:
 		return skill_santuary(power, short_, &you, target);
+	case SPL_MISTIA_SONG:
+		return skill_mistia_song(power, short_, &you, target);
 	default:
 		return false;
 	}

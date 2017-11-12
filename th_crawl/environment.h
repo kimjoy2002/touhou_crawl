@@ -144,9 +144,11 @@ public:
 	{
 		return isMove(c.x,c.y, fly_, swim_, no_ground_);
 	}
-	bool isInSight(const coord_def &c)
+	bool isInSight(const coord_def &c, bool monster_sight_ = false)
 	{
 		if(c.x<0 || c.x>=DG_MAX_X || c.y<0 || c.y>=DG_MAX_Y)
+			return false;
+		if (you.s_night_sight_turn && !monster_sight_ && distan_coord(c,you.position)>2)
 			return false;
 		return dgtile[c.x][c.y].flag & FLAG_INSIGHT;
 	}

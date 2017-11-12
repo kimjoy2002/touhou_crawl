@@ -617,7 +617,15 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 	}
 
-
+	if (s_night_sight_turn>0)
+	{
+		s_night_sight_turn--;
+		if (!s_night_sight_turn)
+		{
+			printlog("당신의 야맹증은 회복되었다.", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
 	if(s_slaying)
 	{
 		s_slaying = 0;

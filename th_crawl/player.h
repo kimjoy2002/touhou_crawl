@@ -246,6 +246,8 @@ public:
 	int s_unluck;
 	int s_super_graze;
 	int s_none_move;
+	int s_night_sight;
+	int s_night_sight_turn;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -437,7 +439,8 @@ public:
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
 	bool SetUnluck(int s_unluck_);
 	bool SetSuperGraze(int s_super_graze_);
-	bool SetNoneMove(int s_none_move_);
+	bool SetNoneMove(int s_none_move_); 
+	bool SetNightSight(int value_, int turn_);
 
 
 	int GetInvisible();

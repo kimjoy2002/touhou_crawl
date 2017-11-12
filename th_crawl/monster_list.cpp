@@ -90,8 +90,8 @@ const mon_infor mondata[] = {
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10},
 
-	{MON_MISTIA,8,535,name_infor("미스티아",false),&img_named_mistia,60,1,12,
-	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_MISTIA,8,535,name_infor("미스티아",false),&img_named_mistia,55,1,12,
+	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,8},
 
 	{MON_WRIGGLE,7,350,name_infor("리글",true),&img_named_wriggle,50,3,10,

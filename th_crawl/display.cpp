@@ -1354,6 +1354,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite, "이동불가", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
 				rc.left += fontDesc.Width * 9;
 			}
+			if (you.s_night_sight_turn)
+			{
+				pfont->DrawTextA(pSprite, "야맹증", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				rc.left += fontDesc.Width * 7;
+			}
 		}
 
 	}

@@ -205,6 +205,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_EMERALD_CITY:
 	case SPL_PRISM_CALL:
 	case SPL_SANTUARY:
+	case SPL_MISTIA_SONG:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
@@ -367,6 +368,7 @@ int SpellLength(spell_list skill)
 	case SPL_SUMMON_TRASH:
 	case SPL_KOKORO_CHANGE:
 	case SPL_SANTUARY:
+	case SPL_MISTIA_SONG:
 	default:
 		return 0;		
 	}
@@ -646,6 +648,8 @@ const char* SpellString(spell_list skill)
 		return "썬더볼트";
 	case SPL_SANTUARY:
 		return "성역";
+	case SPL_MISTIA_SONG:
+		return "밤참새의 노래";
 	default:
 		return "알수없는 마법";
 	}
@@ -718,6 +722,7 @@ int SpellLevel(spell_list skill)
 	case SPL_TIME_PARADOX: 
 	case SPL_AIR_STRIKE:
 	case SPL_NESY_CANNON:
+	case SPL_MISTIA_SONG:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -944,6 +949,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
 	case SPL_SANTUARY:
+	case SPL_MISTIA_SONG:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1257,6 +1263,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	case SPL_SANTUARY:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_MISTIA_SONG:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1402,6 +1410,7 @@ int SpellCap(spell_list skill)
 	case SPL_KOKORO_CHANGE:
 	case SPL_THUNDER_BOLT:
 	case SPL_SANTUARY:
+	case SPL_MISTIA_SONG:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1557,7 +1566,9 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_JUMP_ATTACK:
 	case SPL_AFTERLITE:
 	case SPL_KOKORO_CHANGE:
-		return (mon->s_exhausted?false:true);
+		return (mon->s_exhausted ? false : true);
+	case SPL_MISTIA_SONG:
+		return (mon->s_exhausted || mon->isUserAlly() ?false:true);
 	case SPL_SUMMON_YOSHIKA:
 		{
 

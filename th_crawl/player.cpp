@@ -72,7 +72,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
-force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0),
+force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0),
  alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -249,6 +249,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_unluck);
 	SaveData<int>(fp, s_super_graze);
 	SaveData<int>(fp, s_none_move);
+	SaveData<int>(fp, s_night_sight);
+	SaveData<int>(fp, s_night_sight_turn);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -468,6 +470,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_unluck); 
 	LoadData<int>(fp, s_super_graze);
 	LoadData<int>(fp, s_none_move);
+	LoadData<int>(fp, s_night_sight);
+	LoadData<int>(fp, s_night_sight_turn);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -2805,6 +2809,20 @@ bool players::SetSuperGraze(int s_super_graze_)
 bool players::SetNoneMove(int s_none_move_)
 {
 	s_none_move += s_none_move_;
+	return true;
+}
+bool players::SetNightSight(int value_, int turn_)
+{
+	if (!turn_)
+		return false;
+	if (confuse_resist>0 || you.invisible_view)
+		return false;
+	if(!s_night_sight_turn)
+		printlog("당신의 눈은 침침해졌다.", false, false, false, CL_small_danger);
+	else if(s_night_sight_turn && s_night_sight > value_)
+		printlog("당신의 눈은 더욱 더 침침해졌다!", false, false, false, CL_small_danger);
+	s_night_sight = value_;
+	s_night_sight_turn = turn_;
 	return true;
 }
 int players::GetInvisible()

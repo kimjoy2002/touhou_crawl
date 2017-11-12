@@ -108,7 +108,7 @@ const char* GetBrandInfor(weapon_brand brand)
 		case WB_FIRE:
 			return "이 무기는 화염으로 덮여있다. 데미지에 1/3의 추가 화염 데미지를 더한다.";
 		case WB_COLD:
-			return "이 무기는 냉기가 휘감겨있다. 데미지에 1/3의 추가 화염 데미지를 더한다.";
+			return "이 무기는 냉기가 휘감겨있다. 데미지에 1/3의 추가 냉기 데미지를 더한다.";
 		case WB_POISON:
 			return "이 무기는 맹독이 발라져있다. 공격한 적을 중독시킨다.";
 		case WB_CURSE:		

@@ -303,11 +303,11 @@ string GetMonsterInfor(monster *it)
 		break;
 	case MON_BENBEN:
 		text_ += "비파가 요괴화한 츠쿠모가미.\n";
-		text_ += "동생인 벤벤과 함께 다닌다.\n";
+		text_ += "동생인 야츠하시와 함께 다닌다.\n";
 		break;
 	case MON_YATHASI:
 		text_ += "고토가 요괴화한 츠쿠모가미.\n";
-		text_ += "언니인 야츠하시와 함께 다닌다.\n";
+		text_ += "언니인 벤벤과 함께 다닌다.\n";
 		break;
 	case MON_ORIN:
 		text_ += "작열지옥터에서 원령을 관리하고 있다.\n";

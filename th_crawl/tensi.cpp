@@ -408,7 +408,7 @@ void tensi_earthquake(int good_)
 	}//모든 몬스터에게 데미지를 줌
 
 	env[current_level].MakeNoise(you.position,30,NULL); //거대한 소음을 만든다. 텐시는 아무도 없을때 지진을 쓰기도 하지!
-
+	you.resetLOS();
 }
 void tensi_munyum(int good_)
 {

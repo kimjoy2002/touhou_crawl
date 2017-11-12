@@ -4087,7 +4087,8 @@ bool players::GiftCount(int value_)
 
 	if((gift_count-=value_)<=0)
 	{
-		GodGift(god,piety);
+		if(GodGift(god,piety))
+			SetInter(IT_EVENT);
 		gift_count = GetGodGiftTime(god);
 		return true;
 	}

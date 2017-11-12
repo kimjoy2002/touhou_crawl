@@ -601,7 +601,7 @@ void tensi_action()
 		else
 		{
 			type = "[∆Ú»≠:-1]";
-			switch(randA(7)){
+			switch(randA(6)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
@@ -609,7 +609,6 @@ void tensi_action()
 			case 4:doing_ = -1; action_ =  TENSI_BURST; break;
 			case 5:doing_ = -1; action_ = TENSI_KANAME; break;
 			case 6:doing_ = -1; action_ = TENSI_BLIND; break;
-			case 7:doing_ = -1; action_ = TENSI_SUCIDE; break;
 			}
 		}
 	}

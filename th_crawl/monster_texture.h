@@ -150,6 +150,9 @@ extern textures img_mons_occult_long;
 extern textures img_mons_occult_disk;
 extern textures img_mons_occult_small;
 extern textures img_mons_occult_kunekune;
+extern textures img_mons_kaname;
+extern textures img_mons_sheep;
+extern textures img_mons_bee;
 
 
 

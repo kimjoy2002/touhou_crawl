@@ -879,6 +879,17 @@ string GetMonsterInfor(monster *it)
 	case MON_KUNEKUNE:
 		text_ += "\n";
 		break;
+	case MON_KANAME:
+		text_ += "텐시의 능력으로 만들어진 원격 조종이 가능한 요석.\n";
+		text_ += "제자리에서 떠서 적을 향해 탄막을 쏘아댄다. 요석마다 쓰는 탄막의 세기가 조금씩 다르다.\n";
+		text_ += "요석자체는 움직이지 못하고 밀착하면 공격하지못하므로 근접해서 싸운다면 피해없이 싸울 수 있다.\n";
+		break;
+	case MON_SHEEP:
+		text_ += "\n";
+		break;
+	case MON_BEE:
+		text_ += "\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

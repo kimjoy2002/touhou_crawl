@@ -564,6 +564,19 @@ void wiz_mode()
 				  }
 			}
 			break;
+		case 'M':
+		{
+			key_ = waitkeyinput();
+
+
+			if (monster* mon_ = BaseSummon(MON_OCCULT_LONG + key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			{
+				mon_->state.SetState(MS_SLEEP);
+				mon_->flag &= ~M_FLAG_SUMMON;
+				mon_->ReturnEnemy();
+			}
+		}
+		break;
 		case '.':
 			for (int i = randA(3) + 1; i>0; i--)
 			{

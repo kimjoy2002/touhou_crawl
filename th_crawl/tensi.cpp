@@ -283,14 +283,42 @@ void tensi_summon(int good_)
 				int id_ = summon_vector[randA(summon_vector.size()-1)] ;
 
 				summon_info s_(you.GetMapId(),SKD_OTHER,GetSummonMaxNumber(SPL_NONE));
-				monster* mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,rand_int(100,200));
-				mon_->CheckSightNewTarget();
+				if (monster* mon_ = env[current_level].AddMonster_Summon(id_, flag_, (*rit), s_, rand_int(100, 200)))
+				{
+
+					mon_->CheckSightNewTarget();
+
+				}
 				i--;
 			}
 		}
 	}
 }
 
+void tensi_kaname(int good_)
+{
+	for (int i = rand_int(1 + 2 * abs(good_), 1 + 3 * abs(good_));  i> 0; i--)
+	{
+		int flag_ = M_FLAG_SUMMON;
+		if (good_>0)
+			flag_ |= M_FLAG_ALLY;
+		int id_ = MON_KANAME;
+
+		if (monster* mon_ = BaseSummon(MON_KANAME, rand_int(60, 100), false, true, 4, good_>0?&you:NULL, you.position, SKD_OTHER, -1))
+		{
+			int fanalty_ = randA(randA(you.level));
+			mon_->LevelUpdown(you.level - fanalty_);
+			if (mon_->level<7)
+				mon_->spell_lists.push_back(spell(SPL_MON_TANMAC_SMALL, 50));
+			else if (mon_->level<15)
+				mon_->spell_lists.push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+			else
+				mon_->spell_lists.push_back(spell(SPL_MON_TANMAC_MIDDLE, 50));
+			mon_->CheckSightNewTarget();
+		}
+	}
+
+}
 
 void tensi_tele(bool good_)
 {
@@ -518,12 +546,13 @@ void tensi_action()
 		}
 		else
 		{
-			switch(randA(4)){
+			switch(randA(5)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
 			case 3:doing_ = -1; action_ =  TENSI_EARTHQUAKE; break;
 			case 4:doing_ = -1; action_ =  TENSI_BURST; break;
+			case 5:doing_ = -1; action_ = TENSI_KANAME; break;
 			}
 		}
 	}
@@ -531,22 +560,24 @@ void tensi_action()
 	{
 		if(100+randA(5000)<randA(you.CheckTension()))
 		{ //텐시의 포텐셜 폭발!			
-			switch(randA(4)){
+			switch(randA(5)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
 			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //텐시는 전투를 좋아하기때문에 텔포는 많이 안쓴다.
 			case 4:doing_ = 3; action_ =  TENSI_WEAPON; break;
+			case 5:doing_ = 2; action_ = TENSI_KANAME; break;
 			}
 		}
 		else if(randA(500)<randA(you.CheckTension()))
 		{ //그럭저럭 좋은일
 			
-			switch(randA(3)){
+			switch(randA(4)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_BURST; break;
 			case 3:doing_ = 2; action_ =  TENSI_WEAPON; break;
+			case 4:doing_ = 1; action_ = TENSI_KANAME; break;
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()))
@@ -559,11 +590,12 @@ void tensi_action()
 		}
 		else
 		{ //운이 나빴어
-			switch(randA(2)){
+			switch(randA(4)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
 			case 3:doing_ = -1; action_ =  TENSI_BURST; break;
+			case 4:doing_ = rand_int(-2,-1); action_ = TENSI_KANAME; break;
 			}
 		}
 
@@ -644,6 +676,15 @@ void tensi_action()
 			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
 		tensi_weapon(doing_);
+		break;
+	case TENSI_KANAME:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "텐시: 카나메석. 텐션 %d 행동 %d", you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_kaname(doing_);
 		break;
 	}
 }
@@ -997,6 +1038,42 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				return "텐시: 꼭 돌려줘야해?";
 			case 6:
 				return "텐시: 들키면 이쿠에게 혼나니깐...";
+			}
+		case TENSI_KANAME:
+			if (good_)
+			{
+				switch (randA(5))
+				{
+				case 0:
+					return "텐시는 당신에게 지원군을 내려주었다.";
+				case 1:
+					return "텐시: 이게 있다면 지지는 않겠지?";
+				case 2:
+					return "텐시: 내가 귀여워 하는 애들이야!";
+				case 3:
+					return "텐시: 애완용 돌이란거 들어봤어?";
+				case 4:
+					return "텐시: 조심히 다뤄줘!";
+				case 5:
+					return "텐시: 카나메 판넬!";
+				}
+			}
+			else {
+				switch (randA(5))
+				{
+				case 0:
+					return "텐시: 거기서 멀어지는게 좋을거야";
+				case 1:
+					return "텐시: 돌 침대라고 들어봤어?";
+				case 2:
+					return "텐시: 내 돌은 사람을 물진않아... 쏘긴 하지만!";
+				case 3:
+					return "텐시: 여기서 살아갈 수 있을지 시험해봐야겠어!";
+				case 4:
+					return "텐시: 이번에 새로 만든 스펠카드인데, 시험 좀 해줄래?";
+				case 5:
+					return "텐시: 사격연습을 해보지않을래? 물론 너가 표적이야!";
+				}
 			}
 
 		}

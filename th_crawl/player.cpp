@@ -898,7 +898,7 @@ bool players::OpenDoor(const coord_def &c, bool no_turn)
 		if(env[current_level].OpenDoor(c.x,c.y))
 		{
 			if (no_turn == false) {
-				printlog("문을 열었다.", false, false, false, CL_normal);
+				printlog("문을 열었다. ", false, false, false, CL_normal);
 				time_delay += GetWalkDelay();
 			}
 			return 1;

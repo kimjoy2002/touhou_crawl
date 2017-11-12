@@ -405,6 +405,9 @@ textures img_mons_occult_long(&texture_monster01, 220, 255);
 textures img_mons_occult_disk(&texture_monster01, 221, 255);
 textures img_mons_occult_small(&texture_monster01, 222, 255);
 textures img_mons_occult_kunekune(&texture_monster01, 223, 255);
+textures img_mons_kaname(&texture_monster01, 224, 255);
+textures img_mons_sheep(&texture_monster01, 225, 255);
+textures img_mons_bee(&texture_monster01, 226, 255);
 
 
 
@@ -1928,6 +1931,12 @@ int texturetoint(textures* input)
 		return 366;
 	else if (input == &img_item_kappa_trash)
 		return 367;
+	else if (input == &img_mons_kaname)
+		return 368;
+	else if (input == &img_mons_sheep)
+		return 369;
+	else if (input == &img_mons_bee)
+		return 370;
 	else
 		return 0;
 }
@@ -2671,6 +2680,12 @@ textures* inttotexture(int input)
 		return &img_item_broken_camera;
 	case 367:
 		return &img_item_kappa_trash;
+	case 368:
+		return &img_mons_kaname;
+	case 369:
+		return &img_mons_sheep;
+	case 370:
+		return &img_mons_bee;
 	default:
 		return &img_mons_default;
 	}

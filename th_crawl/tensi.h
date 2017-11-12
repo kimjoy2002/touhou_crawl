@@ -18,7 +18,8 @@ enum tensi_do_list
 	TENSI_EARTHQUAKE,
 	TENSI_MUNYUM,
 	TENSI_BURST,
-	TENSI_WEAPON
+	TENSI_WEAPON,
+	TENSI_KANAME
 };
 
 enum weather_list

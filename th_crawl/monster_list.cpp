@@ -858,4 +858,16 @@ const mon_infor mondata[] = {
 	{ MON_KUNEKUNE,1,1,name_infor("Äí³×Äí³×",false),&img_mons_occult_kunekune,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+
+	{ MON_KANAME,1,1,name_infor("¿ä¼®",true),&img_mons_kaname,1,0,0,
+	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
+	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_NONE_MOVE | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10 },
+
+	{ MON_SHEEP,1,1,name_infor("²Þ²Ù´Â ¾ç",true),&img_mons_sheep,1,0,0,
+	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+
+	{ MON_BEE,1,1,name_infor("¹ú",true),&img_mons_bee,1,0,0,
+	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
 };

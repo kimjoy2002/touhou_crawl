@@ -161,6 +161,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
+	case SPL_THROW_DISH:
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
@@ -206,6 +207,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_PRISM_CALL:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
+	case SPL_MESS_CONFUSION: 
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
@@ -264,6 +266,7 @@ int SpellLength(spell_list skill)
 	case SPL_MERMAID_SONG:
 	case SPL_REAPER_MET:
 	case SPL_TRASH_RUSH:
+	case SPL_THROW_DISH:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -369,6 +372,7 @@ int SpellLength(spell_list skill)
 	case SPL_KOKORO_CHANGE:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
+	case SPL_MESS_CONFUSION:
 	default:
 		return 0;		
 	}
@@ -650,6 +654,10 @@ const char* SpellString(spell_list skill)
 		return "성역";
 	case SPL_MISTIA_SONG:
 		return "밤참새의 노래";
+	case SPL_THROW_DISH:
+		return "접시던지기";
+	case SPL_MESS_CONFUSION:
+		return "광역 혼란";
 	default:
 		return "알수없는 마법";
 	}
@@ -723,6 +731,7 @@ int SpellLevel(spell_list skill)
 	case SPL_AIR_STRIKE:
 	case SPL_NESY_CANNON:
 	case SPL_MISTIA_SONG:
+	case SPL_THROW_DISH:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -767,6 +776,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_YOSHIKA:
 	case SPL_KOKORO_CHANGE:
 	case SPL_THUNDER_BOLT:
+	case SPL_MESS_CONFUSION:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -870,6 +880,8 @@ int SpellNoise(spell_list skill)
 	case SPL_REAPER_MET:
 	case SPL_PSYCHOKINESIS:
 	case SPL_KOKORO_CHANGE:
+	case SPL_THROW_DISH:
+	case SPL_MESS_CONFUSION:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1265,6 +1277,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_MISTIA_SONG:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_DISH:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_MESS_CONFUSION:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1411,6 +1427,8 @@ int SpellCap(spell_list skill)
 	case SPL_THUNDER_BOLT:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
+	case SPL_THROW_DISH:
+	case SPL_MESS_CONFUSION:
 		return 200;
 	default:
 	case SPL_BLINK:

@@ -47,7 +47,8 @@ enum event_list
 	EVL_BROKEN_NESI, //수리가 끝나지않은 네시
 	EVL_FIRE_SMOKE,
 	EVL_COLD_SMOKE,
-	EVL_SILENCE
+	EVL_SILENCE,
+	EVL_WATER //임시로 물이 된다.
 };
 
 class events
@@ -58,6 +59,7 @@ public:
 	event_type type;
 	int count;
 	bool prev_sight;
+	int value;
 
 	events();
 	events(int id_, coord_def position_, event_type type_, int count_ = -1);

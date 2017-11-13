@@ -22,12 +22,12 @@ void arena_event(int num);
 bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
 
 events::events()
-:id(0),position(),type(EVT_ABOVE),prev_sight(false)
+:id(0),position(),type(EVT_ABOVE),prev_sight(false), value(0)
 {
 }
 
 events::events(int id_, coord_def position_, event_type type_, int count_)
-:id(id_),position(position_),type(type_),prev_sight(false), count(count_)
+:id(id_),position(position_),type(type_),prev_sight(false), count(count_), value(0)
 {
 	start();
 }
@@ -42,6 +42,7 @@ void events::SaveDatas(FILE *fp)
 	SaveData<event_type>(fp, type);
 	SaveData<int>(fp, count);
 	SaveData<bool>(fp, prev_sight);
+	SaveData<int>(fp, value);
 }
 void events::LoadDatas(FILE *fp)
 {
@@ -51,6 +52,7 @@ void events::LoadDatas(FILE *fp)
 	LoadData<event_type>(fp, type);
 	LoadData<int>(fp, count);
 	LoadData<bool>(fp, prev_sight);
+	LoadData<int>(fp, value);
 }
 
 int events::start()
@@ -834,6 +836,20 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 			env[current_level].MakeSilence(event_->position, prev_range, false);
 			env[current_level].MakeSilence(event_->position, silence_range, true);
+		}
+		return 0;
+	}
+	case EVL_WATER:
+	{
+		if (env[current_level].dgtile[event_->position.x][event_->position.y].tile != DG_SEA)
+		{
+			event_->value = env[current_level].dgtile[event_->position.x][event_->position.y].tile;
+			env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_SEA;
+		}
+		else if(event_->count <= 0)
+		{
+			env[current_level].dgtile[event_->position.x][event_->position.y].tile = event_->value?(dungeon_tile_type) event_->value: DG_SEA;
+			return 1;
 		}
 		return 0;
 	}

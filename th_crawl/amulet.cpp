@@ -13,9 +13,12 @@
 #include "player.h"
 #include "skill_use.h"
 #include "environment.h"
+#include "rect.h"
+#include "mon_infor.h"
+#include "event.h"
 
 
-char *amulet_uniden_string[AMT_MAX+2] =
+char *amulet_uniden_string[AMT_MAX] =
 {
 	"쥐가 그려진 ",
 	"소가 그려진 ",
@@ -29,7 +32,7 @@ char *amulet_uniden_string[AMT_MAX+2] =
 	"닭이 그려진 "
 };
 
-const char *amulet_iden_string[AMT_MAX+2] =
+const char *amulet_iden_string[AMT_MAX] =
 {
 	"완전무결의 ",
 	"삼라결계의 ",
@@ -76,13 +79,13 @@ float getAmuletCharge(amulet_type kind)
 	case AMT_PERFECT:
 		return 2.0f;
 	case AMT_POPULAR:
+	case AMT_OCCULT:
 		return 1.5f;
 	case AMT_BLOSSOM:
 	case AMT_TIMES:
 	case AMT_FAITH:
 	case AMT_SPIRIT:
 	case AMT_GRAZE:
-	case AMT_OCCULT:
 	case AMT_WEATHER:
 		return 1.0f;
 	case AMT_WAVE:
@@ -158,8 +161,14 @@ bool chargingFinish(amulet_type kind, int value)
 
 bool skill_soul_shot(int power, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_);
+bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target);
+bool skill_summon_occult_long(int power, bool short_, unit* order, coord_def target);
+bool skill_summon_occult_dish(int pow, bool short_, unit* order, coord_def target);
+bool skill_summon_occult_small(int pow, bool short_, unit* order, coord_def target);
+bool skill_summon_occult_kunekune(int pow, bool short_, unit* order, coord_def target);
+bool skill_abusion(int power, bool short_, unit* order, coord_def target);
 
-bool evokeAmulet(amulet_type kind) 
+bool evokeAmulet(amulet_type kind, int value_) 
 {
 
 	switch (kind)
@@ -204,16 +213,151 @@ bool evokeAmulet(amulet_type kind)
 		//미구현
 		break;
 	case AMT_OCCULT:
-		//오컬트 종류
-
-		//네시
-		//팔척귀신
-		//리틀 그린맨
-		//반쵸사라야시키
-		//쿠네쿠네
-		//.....
-		//차후 구현하기
+		skill_abusion(you.level * 5, false, &you, you.position);
+		switch (value_)
+		{
+		case OCT_NESI:
+			printlog("오컬트의 힘으로 도시전설 네시가 출현했다!", true, false, false, CL_magic);
+			skill_summon_occult_nesi(you.level * 5, false, &you, you.position);
+			break;
+		case OCT_LONG:
+			printlog("오컬트의 힘으로 도시전설 팔척귀신이 출현했다!", true, false, false, CL_magic);
+			skill_summon_occult_long(you.level * 5, false, &you, you.position);
+			break;
+		case OCT_SHORT:
+			printlog("오컬트의 힘으로 도시전설 리틀 그린맨들이 출현했다!", true, false, false, CL_magic);
+			skill_summon_occult_small(you.level * 5, false, &you, you.position);
+			break;
+		case OCT_DISH:
+			printlog("오컬트의 힘으로 도시전설 반쵸사라야시키가 출현했다!", true, false, false, CL_magic);
+			skill_summon_occult_dish(you.level * 5, false, &you, you.position);
+			break;
+		case OCT_KUNEKUNE:
+			printlog("오컬트의 힘으로 도시전설 쿠네쿠네가 출현했다!", true, false, false, CL_magic);
+			skill_summon_occult_kunekune(you.level * 5, false, &you, you.position);
+			break;
+		}
 		break;
 	}
 	return true;
+}
+
+const char* getOccultName(occult_type kind)
+{
+	switch (kind)
+	{
+	case OCT_NESI:
+		return "네시";
+	case OCT_LONG:
+		return "팔척귀신";
+	case OCT_SHORT:
+		return "리틀그린맨";
+	case OCT_DISH:
+		return "반쵸사라야시키";
+	case OCT_KUNEKUNE:
+		return "쿠네쿠네";
+	}
+	return "정체불명";
+}
+
+bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target) {
+	int time_ = rand_int(35, 50);
+	dif_rect_iterator drit(order->position, 4, true);
+	for (; !drit.end(); drit++)
+	{
+		if (summon_check(coord_def(drit->x, drit->y), order->position, false, true))
+		{
+			int flag_ = M_FLAG_SUMMON;
+			if (order->isplayer())
+				flag_ |= M_FLAG_ALLY;
+			int id_ = MON_NESI;
+
+			summon_info s_(order->GetMapId(), SKD_SUMMON_OCCULT, 1);
+			if (monster* mon_ = env[current_level].AddMonster_Summon(id_, flag_, (*drit), s_, time_-1))
+			{
+				mon_->LevelUpdown(min(5,you.level - mondata[MON_NESI].level));
+				for (auto spit = mon_->spell_lists.begin(); spit != mon_->spell_lists.end(); spit++)
+				{
+					spit->percent = spit->percent * (40 + (you.level * 3)) / 100;
+
+				}
+				mon_->CheckSightNewTarget();
+				rect_iterator rit((*drit), 1, 1);
+				
+				for (; !rit.end(); rit++)
+				{
+					if ((*rit) == (*drit) || summon_check(*rit, *drit, false, false)) {
+						env[current_level].MakeEvent(EVL_WATER, *rit, EVT_ALWAYS, time_);
+					}
+				}
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool skill_summon_occult_long(int pow, bool short_, unit* order, coord_def target)
+{
+	int time_ = rand_int(50, 100);
+	bool return_ = false;
+
+	int i = 1;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_OCCULT_LONG, time_, true, false, 2, order, target, SKD_SUMMON_OCCULT, 1))
+		{
+			mon_->LevelUpdown(you.level, 8.0f);
+			return_ = true;
+		}
+	}
+	return return_;
+}
+bool skill_summon_occult_dish(int pow, bool short_, unit* order, coord_def target)
+{
+	int time_ = rand_int(40, 80);
+	bool return_ = false;
+
+	int i = 1;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_OCCULT_DISK, time_, true, false, 2, order, target, SKD_SUMMON_OCCULT, 1))
+		{
+			mon_->LevelUpdown(you.level, 5.0f, 1.2f);
+			return_ = true;
+		}
+	}
+	return return_;
+}
+bool skill_summon_occult_small(int pow, bool short_, unit* order, coord_def target)
+{
+	int time_ = rand_int(35, 70);
+	bool return_ = false;
+
+	int i = rand_int(3,4);
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_OCCULT_SMALL, time_, true, false, 2, order, target, SKD_SUMMON_OCCULT, 5))
+		{
+			mon_->LevelUpdown(you.level, 4.0f, 1.5f);
+			return_ = true;
+		}
+	}
+	return return_;
+}
+bool skill_summon_occult_kunekune(int pow, bool short_, unit* order, coord_def target)
+{
+	int time_ = rand_int(50, 80);
+	bool return_ = false;
+
+	int i = 1;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_KUNEKUNE, time_, true, true, 4, order, target, SKD_SUMMON_OCCULT, 1))
+		{
+			mon_->LevelUpdown(you.level, 6.0f);
+			return_ = true;
+		}
+	}
+	return return_;
 }

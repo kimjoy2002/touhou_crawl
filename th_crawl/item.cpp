@@ -309,6 +309,14 @@ string item::GetName(int num_)
 		temp += GetBrandString((weapon_brand)value5, false);
 	}
 	temp += name.name;
+	if (type == ITM_AMULET)
+	{
+		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_OCCULT && value3 > 0) {
+			temp += " {";
+			temp += getOccultName((occult_type)value2);
+			temp += "}";
+		}
+	}
 	if(!isArtifact() && ((type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 1) || (type==ITM_RING && iden_list.ring_list[value1].iden == 1)))
 		temp += "(»ç¿ë)";
 	if(!isArtifact() && (type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 2))
@@ -698,6 +706,14 @@ bool item::isiden()
 		return identify && identify_curse && iden_list.ring_list[value1].iden == 2;
 
 	}
+	else if (type == ITM_AMULET)
+	{
+		if (value1 == AMT_OCCULT && value3 == 0) {
+			return false;
+		}
+		return identify && identify_curse;
+
+	}
 	else if(type >= ITM_THROW_FIRST && type <= ITM_THROW_LAST)
 	{
 		return true;
@@ -843,6 +859,10 @@ void item::Identify()
 		if(!prev_iden && you.isequip(this))
 			unidenequipamulet((amulet_type)value1, value2*(-1));
 		you.auto_equip_iden();
+		if(value1 == AMT_OCCULT) 
+		{
+			value3++;
+		}
 		break;
 	case ITM_SCROLL:
 		iden_list.scroll_list[value1].iden = 3;
@@ -865,6 +885,22 @@ void item::autoIdentify()
 	}
 	if(type == ITM_AMULET)
 	{
+		equipIdentify();
+	}
+}
+void item::equipIdentify()
+{
+	if (type == ITM_AMULET)
+	{
+		bool prev_iden = identify;
+		identify = true;
+		identify_curse = true;
+		iden_list.amulet_list[value1].iden = 2;
+		if (!prev_iden && you.isequip(this))
+			unidenequipamulet((amulet_type)value1, value2*(-1));
+		you.auto_equip_iden();
+	}
+	else {
 		Identify();
 	}
 }

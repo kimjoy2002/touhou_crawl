@@ -219,6 +219,8 @@ bool Dump(int type, string *filename_)
 							strncat(death_reason,"ºÎµúÇô Á×¾ú´Ù.",64);
 							break;
 						case ATT_PSYCHO:
+							if (you.dead_order->order)
+								strncat(death_reason, "ÀÇ ", 64);
 							strncat(death_reason, "¿°µ¿·Â¿¡ ÀÇÇØ ³¯¶ó°¡ Á×¾ú´Ù.", 64);
 							break;
 						case ATT_STONE_TRAP:

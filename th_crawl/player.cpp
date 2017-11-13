@@ -634,7 +634,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
 			{
-				if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
+				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
 				{
 					PositionSwap(mon_);								
 					printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
@@ -3757,7 +3757,8 @@ bool players::Evoke(char id_)
 					return false;
 				}
 				ReleaseMutex(mutx);
-				if (evokeAmulet((amulet_type)(*it).value1)) {
+				if (evokeAmulet((amulet_type)(*it).value1, (*it).value2)) {
+					(*it).value3++;
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					resetAmuletPercent((amulet_type)(*it).value1);
 					return true;
@@ -4280,7 +4281,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 		WaitForSingleObject(mutx, INFINITE);
 		//자동식별 추가
-		(*it).Identify();
+		(*it).equipIdentify();
 
 		equip_stat_change(&(*it), type_, true);
 		equipment[type_] = &(*it);

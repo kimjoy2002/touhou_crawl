@@ -254,8 +254,10 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value = 200;
 		break;
 	case ITM_AMULET:
-		t->value1 = select_ != -1 ? select_ : (int)goodbadamulet(good_bad);
-		t->value2 = 0;
+	{
+		int amulet_kind_ = select_ != -1 ? select_ : (int)goodbadamulet(good_bad);
+		t->value1 = amulet_kind_;
+		t->value2 = amulet_kind_==AMT_OCCULT?randA(OCT_MAX-1):0;
 		t->value3 = 0;
 		t->value4 = 0;
 		t->value5 = 0;
@@ -268,6 +270,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->weight = 1.0f;
 		t->value = 200;
 		break;
+	}
 	case ITM_FOOD:
 		switch(select_!=-1?select_:randA(1))
 		{

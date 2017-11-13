@@ -699,7 +699,7 @@ const mon_infor mondata[] = {
 	
 	{MON_NESI,15,1604,name_infor("네시",false),&img_mons_nesi,120,9,9,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_CANT_GROUND,99,1,10},
+	M_FLAG_NO_ATK | M_FLAG_NONE_STAIR | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_CANT_GROUND,99,1,10},
 	
 	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_sanghai[0],80,5,22,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -843,21 +843,21 @@ const mon_infor mondata[] = {
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
 	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10 },
 
-	{ MON_OCCULT_LONG,1,1,name_infor("팔척귀신",true),&img_mons_occult_long,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_OCCULT_LONG,1,1,name_infor("팔척귀신",true),&img_mons_occult_long,45,10,3,
+	{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,3,1,10 },
 
-	{ MON_OCCULT_DISK,1,1,name_infor("반쵸사라야시키",false),&img_mons_occult_disk,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_OCCULT_DISK,1,1,name_infor("반쵸사라야시키",false),&img_mons_occult_disk,25,1,15,
+	{ 5,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,2,1,10 },
 
-	{ MON_OCCULT_SMALL,1,1,name_infor("리틀 그린맨",false),&img_mons_occult_small,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_OCCULT_SMALL,1,1,name_infor("리틀 그린맨",false),&img_mons_occult_small,15,0,10,
+	{ 6,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,1,1,8 },
 
 	{ MON_KUNEKUNE,1,1,name_infor("쿠네쿠네",false),&img_mons_occult_kunekune,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_SILENCE | M_FLAG_NONE_MOVE | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10 },
 
 	{ MON_KANAME,1,1,name_infor("요석",true),&img_mons_kaname,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

@@ -3771,6 +3771,58 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
+{
+	int damage_ = 11 + pow / 6;
+	int hit_ = 12 + pow / 20;
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("접시", false));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		for (int i = 0; i<(order->GetParadox() ? 2 : 1); i++)
+			throwtanmac(34, beam, temp_infor, NULL);
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
+{
+	int i = 0;
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && it->isEnemyUnit(order) && &(*it) != order && order->isSightnonblocked(it->position))
+		{
+			if (it->CalcuateMR(GetDebufPower(SPL_MESS_CONFUSION, power)))
+			{
+				it->SetConfuse(rand_int(10, 20) + randA(power / 10));
+			}
+			else if (it->isYourShight())
+			{
+				printarray(false, false, false, CL_normal, 3, it->GetName()->name.c_str(), it->GetName()->name_is(true), "저항했다. ");
+			}
+			it->AttackedTarget(order);
+			i++;
+			if (i % 3 == 0)
+				enterlog();
+		}
+	}
+	return true;
+}
+bool skill_abusion(int power, bool short_, unit* order, coord_def target)
+{
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && it->flag & M_FLAG_SUMMON && it->isEnemyUnit(order) && &(*it) != order && order->isSightnonblocked(it->position))
+		{
+			it->summon_time = 0;
+		}
+	}
+	return true;
+}
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -4300,6 +4352,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_MISTIA:
 		list->push_back(spell(SPL_MISTIA_SONG, 50));
 		break;
+	case MON_OCCULT_DISK:
+		list->push_back(spell(SPL_THROW_DISH, 80));
+		break;
+	case MON_KUNEKUNE:
+		list->push_back(spell(SPL_MESS_CONFUSION, 30));
+		break;
 	default:
 		break;
 	}
@@ -4588,6 +4646,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_santuary(power, short_, order, target);
 	case SPL_MISTIA_SONG:
 		return skill_mistia_song(power, short_, order, target);
+	case SPL_THROW_DISH:
+		return skill_throw_dish(power, short_, order, target);
+	case SPL_MESS_CONFUSION:
+		return skill_mess_confusion(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5033,6 +5095,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_santuary(power, short_, &you, target);
 	case SPL_MISTIA_SONG:
 		return skill_mistia_song(power, short_, &you, target);
+	case SPL_THROW_DISH:
+		return skill_throw_dish(power, short_, &you, target);
+	case SPL_MESS_CONFUSION:
+		return skill_mess_confusion(power, short_, &you, target);
 	default:
 		return false;
 	}

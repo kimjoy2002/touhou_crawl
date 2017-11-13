@@ -604,6 +604,12 @@ string GetSpellInfor(spell_list spell)
 		text_ += "야맹증에 걸리면 눈이 멀어서 시야가 급격하게 줄어든다. 시간이 지나면 원래대로 돌아온다.\n";
 		text_ += "투명보기가 있거나 혼란저항이 있다면 야맹증에 걸리지않는다.\n";
 		break;
+	case SPL_THROW_DISH:
+		text_ += "탄막으로 접시를 던지는 심플한 기술. 상당히 돈이 필요한 탄막으로 보인다.\n";
+		break;
+	case SPL_MESS_CONFUSION:
+		text_ += "시야내의 모든 적에게 혼란을 시도하는 마법. 각자마다 마법저항을 체크한다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

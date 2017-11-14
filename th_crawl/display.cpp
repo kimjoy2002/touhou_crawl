@@ -24,6 +24,11 @@
 #include "alchemy.h"
 #include "tensi.h"
 #include "replay.h"
+#include "potion.h"
+#include "scroll.h"
+#include "ring.h"
+#include "book.h"
+#include "spellcard.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -124,6 +129,9 @@ void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		case DT_SPELL:
 			spell_draw(pSprite,pfont);
 			break;
+		case DT_IDEN:
+			iden_draw(pSprite, pfont);
+			break;
 		case DT_SKILL_USE:
 			skill2_draw(pSprite,pfont);
 			break;
@@ -189,6 +197,181 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		}
 	}
+}
+void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+{
+	int num = 0;
+	RECT rc = { 30, 10 - move, option_mg.getWidth(), option_mg.getHeight() };
+	char temp[100];
+	int one_ = 50, two_ = 100;
+	bool first_ = false;
+	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
+		char index = 'a', current;
+		D3DCOLOR font_color_ = iden_list.autopickup[i]?CL_normal:CL_bad;
+		for (current = num; current >= 26; current -= 26) {
+			if (index == 'a')
+				index = 'A';
+			else
+				index = 'a';
+		}
+
+		index += current;
+		if (i >= IDEN_CHECK_POTION_START && i < IDEN_CHECK_POTION_END) {
+			int cur_ = i - IDEN_CHECK_POTION_START;
+			if (i == IDEN_CHECK_POTION_START) {
+				first_ = true;
+			}
+			if (iden_list.potion_list[cur_].iden)
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<물약>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_potion[iden_list.potion_list[cur_].color].draw(pSprite, rc.left-24, rc.top+6, 255);
+				img_item_potion_kind[min(PT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left-24, rc.top+6, 255);
+				sprintf_s(temp, 100, "%c - %s물약", index, potion_iden_string[cur_]);
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+		else if (i >= IDEN_CHECK_SCROLL_START && i < IDEN_CHECK_SCROLL_END) {
+			int cur_ = i - IDEN_CHECK_SCROLL_START;
+			if (i == IDEN_CHECK_SCROLL_START) {
+				first_ = true;
+			}
+			if (iden_list.scroll_list[cur_].iden == 3)
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<두루마리>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_scroll.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				img_item_scroll_kind[min(SCT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c - %s두루마리", index, scroll_iden_string[cur_]);
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+		else if (i >= IDEN_CHECK_RING_START && i < IDEN_CHECK_RING_END) {
+			int cur_ = i - IDEN_CHECK_RING_START;
+			if (i == IDEN_CHECK_RING_START) {
+				first_ = true;
+			}
+			if (iden_list.ring_list[cur_].iden == 2)
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<반지>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_ring.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c - %s반지", index, ring_iden_string[cur_]);
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+		else if (i >= IDEN_CHECK_AMULET_START && i < IDEN_CHECK_AMULET_END) {
+			int cur_ = i - IDEN_CHECK_AMULET_START;
+			if (i == IDEN_CHECK_AMULET_START) {
+				first_ = true;
+			}
+			if (iden_list.amulet_list[cur_].iden == 2)
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<부적>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_amulet.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				img_item_amulet_kind[min(AMT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c - %s부적", index, amulet_iden_string[cur_]);
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
+			int cur_ = i - IDEN_CHECK_SPC_START;
+			if (i == IDEN_CHECK_SPC_START) {
+				first_ = true;
+			}
+			if (iden_list.spellcard_list[cur_].iden == 2)
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<스펠카드>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c - %s스펠카드", index, SpellcardName((spellcard_evoke_type)cur_));
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
+			int cur_ = i - IDEN_CHECK_BOOK_START;
+			if (i == IDEN_CHECK_BOOK_START) {
+				first_ = true;
+			}
+			if (iden_list.books_list[cur_])
+			{
+				if (first_)
+				{
+					rc.left = one_;
+					rc.top += fontDesc.Height;
+					sprintf_s(temp, 100, "<마법책>");
+					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					rc.top += 3*fontDesc.Height;
+					first_ = false;
+				}
+
+				rc.left = two_;
+				img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c - %s", index, static_book_list[cur_].name.c_str());
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc.top += 2*fontDesc.Height;
+				num++;
+			}
+		}
+	}
+	rc.top += move + 64;
+	max_y = (rc.top - option_mg.getHeight()>0 ? rc.top - option_mg.getHeight() : 0);
 }
 void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {	
@@ -2085,6 +2268,7 @@ void changemove(int var)
 		case DT_SUB_TEXT:
 		case DT_ITEM:
 		case DT_SKILL:
+		case DT_IDEN:
 			DisplayManager.move = CutSelect(0, DisplayManager.max_y, DisplayManager.move+var);
 			break;
 		case DT_SKILL_USE:

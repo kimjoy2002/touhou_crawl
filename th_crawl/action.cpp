@@ -29,6 +29,7 @@
 #include "throw.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
+#include "book.h"
 
 #include <algorithm>
 #include <random>
@@ -1821,151 +1822,65 @@ void rune_Show()
 
 
 
-void Iden_Show()//※주의) 이 함수는 발로 코딩했습니다.
+void Iden_Show()
 {
 	int line = 1, num=0;
-	SetText() = "식별된 아이템들\n\n";
-	for(int i=0; i<4;i++)
-	{
-		switch(i)
-		{
-		case 0:
-			for(int k=0;k<PT_MAX;k++)
-			{
-				if(iden_list.potion_list[k].iden)
-				{
-					SetText() += "<물약>\n\n";
-					line+=2;
-					for(int j=0;j<PT_MAX;j++)
-					{
-						if(iden_list.potion_list[j].iden)
-						{
-							SetText() += "    ";
-							SetText() += potion_iden_string[j];
-							SetText() += "물약\n";
-							line++;
-							num++;
-						}
-					}
-					SetText() += "\n";
-					line++;
-					break;
-				}
-			}
-			break;
-		case 1:
-			for(int k=0;k<SCT_MAX;k++)
-			{
-				if(iden_list.scroll_list[k].iden == 3)
-				{
-					SetText() += "<두루마리>\n\n";
-					line+=2;
-					for(int j=0;j<SCT_MAX;j++)
-					{
-						if(iden_list.scroll_list[j].iden == 3)
-						{
-							SetText() += "    ";
-							SetText() += scroll_iden_string[j];
-							SetText() += "두루마리\n";
-							line++;
-							num++;
-						}
-					}
-					SetText() += "\n";
-					line++;
-					break;
-				}
-			}
-			break;
-		case 2:
-			for(int k=0;k<RGT_MAX;k++)
-			{
-				if(iden_list.ring_list[k].iden == 2)
-				{
-					SetText() += "<반지>\n\n";
-					line+=2;
-					for(int j=0;j<RGT_MAX;j++)
-					{
-						if(iden_list.ring_list[j].iden == 2)
-						{
-							SetText() += "    ";
-							SetText() += ring_iden_string[j];
-							SetText() += "반지\n";
-							line++;
-							num++;
-						}
-					}
-					SetText() += "\n";
-					line++;
-					break;
-				}
-			}
-			break;
-		case 3:
-			for(int k=0;k<AMT_MAX;k++)
-			{
-				if(iden_list.amulet_list[k].iden == 2)
-				{					
-					SetText() += "<목걸이>\n\n";
-					line+=2;
-					for(int j=0;j<AMT_MAX;j++)
-					{
-						if(iden_list.amulet_list[j].iden == 2)
-						{					
-							SetText() += "    ";
-							SetText() += amulet_iden_string[j];
-							SetText() += "목걸이\n";
-							line++;
-							num++;
-						}
-					}
-					SetText() += "\n";
-					line++;
-					break;
-				}
-			}
-			break;
-		case 4:
-			for(int k=0;k<SPC_V_MAX;k++)
-			{
-				if(iden_list.spellcard_list[k].iden == 2)
-				{					
-					SetText() += "<스펠카드>\n\n";
-					line+=2;
-					for(int j=0;j<SPC_V_MAX;j++)
-					{
-						if(iden_list.amulet_list[j].iden == 2)
-						{					
-							SetText() += "    ";
-							SetText() += SpellcardName((spellcard_evoke_type)j);
-							SetText() += " 스펠카드\n";
-							line++;
-							num++;
-						}
-					}
-					SetText() += "\n";
-					line++;
-					break;
-				}
-			}
-			break;
+	vector<int> curList;
+
+
+	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
+		if (i >= IDEN_CHECK_POTION_START && i < IDEN_CHECK_POTION_END) {
+			int cur = i - IDEN_CHECK_POTION_START;
+			if (iden_list.potion_list[cur].iden)
+				curList.push_back(i);
+		}
+		else if (i >= IDEN_CHECK_SCROLL_START && i < IDEN_CHECK_SCROLL_END) {
+			int cur = i - IDEN_CHECK_SCROLL_START;
+			if (iden_list.scroll_list[cur].iden == 3)
+				curList.push_back(i);
+		}
+		else if (i >= IDEN_CHECK_RING_START && i < IDEN_CHECK_RING_END) {
+			int cur = i - IDEN_CHECK_RING_START;
+			if (iden_list.ring_list[cur].iden == 2)
+				curList.push_back(i);
+		}
+		else if (i >= IDEN_CHECK_AMULET_START && i < IDEN_CHECK_AMULET_END) {
+			int cur = i - IDEN_CHECK_AMULET_START;
+			if (iden_list.amulet_list[cur].iden == 2)
+				curList.push_back(i);
+		}
+		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
+			int cur = i - IDEN_CHECK_SPC_START;
+			if (iden_list.spellcard_list[cur].iden == 2)
+				curList.push_back(i);
+		}
+		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
+			int cur = i - IDEN_CHECK_BOOK_START;
+			if (iden_list.books_list[cur])
+				curList.push_back(i);
 		}
 	}
-	if(!num)
-	{
-		printlog("식별된 아이템이 없다.",true,false,false,CL_normal);
-		return;
-	}
-	changedisplay(DT_TEXT);
-	line = line*DisplayManager.fontDesc.Height + 50 - option_mg.getHeight();
-	if(line<0)
-		line = 0;
-	DisplayManager.max_y = line;
 
+
+
+	
+
+	changedisplay(DT_IDEN);
 	while(1)
 	{
+		
 		int key_ = waitkeyinput(true);
-		if(key_ == VK_DOWN)//-----이동키-------
+		int offseta_ = max(((DisplayManager.move + 1000) / 2000),0)*52;
+		int offsetb_ = max((DisplayManager.move / 2000), 0) * 52;
+		if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
+		{
+			int num = ((key_ >= 'a' && key_ <= 'z') ? (key_ - 'a') + offseta_ : (key_ - 'A' + 26) + offsetb_);
+			if (curList.size() >= num + 1)
+			{
+				iden_list.autopickup[curList[num]] = !iden_list.autopickup[curList[num]];
+			}
+		}
+		else if(key_ == VK_DOWN)//-----이동키-------
 		{
 			changemove(32);  //위
 		}

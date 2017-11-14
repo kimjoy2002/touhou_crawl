@@ -751,12 +751,13 @@ bool item::isautopick()
 	case ITM_POTION:
 		if(iden_list.potion_list[value1].iden)
 		{	
-			if(isGoodPotion((potion_type)value1)>0 || you.god == GT_EIRIN || (you.god == GT_YUUGI && value1 == PT_ALCOHOL))
+			return iden_list.autopickup[value1 + IDEN_CHECK_POTION_START];
+			/*if(isGoodPotion((potion_type)value1)>0 || you.god == GT_EIRIN || (you.god == GT_YUUGI && value1 == PT_ALCOHOL))
 			{
 				return true;
 			}
 			else
-				return false;
+				return false;*/
 		}
 		else
 			return true;
@@ -764,12 +765,9 @@ bool item::isautopick()
 		return true;
 	case ITM_SCROLL:
 		if(iden_list.scroll_list[value1].iden == 3)
-		{	
-			if(you.god == GT_LILLY && value1 == SCT_CHARGING)
-			{
-				return false;
-			}	
-			else if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
+		{
+			return iden_list.autopickup[value1 + IDEN_CHECK_SCROLL_START];
+			/*if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
 			{
 				return false;
 			}
@@ -778,22 +776,23 @@ bool item::isautopick()
 				return true;
 			}
 			else
-				return false;
+				return false;*/
 		}
 		else
 			return true;
-	case ITM_SPELL:		
-		if(you.god == GT_LILLY)
+	case ITM_SPELL:
+		if (iden_list.spellcard_list[value1].iden == 2)
 		{
-			return false;
-		}	
+			return iden_list.autopickup[value1 + IDEN_CHECK_SPC_START];
+		}
 		return true;
 	case ITM_AMULET:
 		return true;
 	case ITM_RING:
 		if(iden_list.ring_list[value1].iden == 2)
-		{	
-			if(isGoodRing((ring_type)value1,identify?value2:1)>0)
+		{
+			return iden_list.autopickup[value1 + IDEN_CHECK_RING_START];
+			/*if(isGoodRing((ring_type)value1,identify?value2:1)>0)
 			{
 				if(isPickableRIng((ring_type)value1)>0)
 					return true;
@@ -801,11 +800,17 @@ bool item::isautopick()
 					return false;
 			}
 			else
-				return false;
+				return false;*/
 		}
 		else
 			return true;
 	case ITM_BOOK:
+	{
+		if (iden_list.books_list[value1]) {
+			return iden_list.autopickup[value1 + IDEN_CHECK_BOOK_START];
+		}
+		return true;
+	}
 	case ITM_MENUAL:
 		return true;
 	}
@@ -869,6 +874,11 @@ void item::Identify()
 		break;
 	case ITM_POTION:
 		iden_list.potion_list[value1].iden = true;
+		break;
+	case ITM_BOOK:
+		if (value0 >= 0) {
+			iden_list.books_list[value0] = true;
+		}
 		break;
 	}
 	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value5 && value6)

@@ -1021,6 +1021,49 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 			iden_list.amulet_list[i].type = dq[i];
 		}
 	}//끝
+
+
+
+
+
+	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
+		if (i >= IDEN_CHECK_POTION_START && i < IDEN_CHECK_POTION_END) {
+			int cur = i - IDEN_CHECK_POTION_START;
+			if (isGoodPotion((potion_type)cur) <= 0)
+				iden_list.autopickup[i] = false;
+			else
+				iden_list.autopickup[i] = true;
+		}
+		else if (i >= IDEN_CHECK_SCROLL_START && i < IDEN_CHECK_SCROLL_END) {
+			int cur = i - IDEN_CHECK_SCROLL_START;
+			if (isGoodScroll((scroll_type)cur) <= 0)
+				iden_list.autopickup[i] = false;
+			else
+				iden_list.autopickup[i] = true;
+		}
+		else if (i >= IDEN_CHECK_RING_START && i < IDEN_CHECK_RING_END) {
+			int cur = i - IDEN_CHECK_RING_START;
+			if (isGoodRing((ring_type)cur, 1) <= 0 || isPickableRIng((ring_type)cur)<=0)
+				iden_list.autopickup[i] = false;
+			else
+				iden_list.autopickup[i] = true;
+		}
+		else if (i >= IDEN_CHECK_AMULET_START && i < IDEN_CHECK_AMULET_END) {
+			int cur = i - IDEN_CHECK_AMULET_START;
+			if (cur == AMT_OCCULT || cur == AMT_PERFECT)
+				iden_list.autopickup[i] = true;
+			else
+				iden_list.autopickup[i] = false;
+		}
+		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
+			int cur = i - IDEN_CHECK_SPC_START;
+			iden_list.autopickup[i] = true;
+		}
+		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
+			int cur = i - IDEN_CHECK_BOOK_START;
+			iden_list.autopickup[i] = false;
+		}
+	}
 }
 
 Iden_collect iden_list;

@@ -102,6 +102,7 @@ enum display_type
 	DT_ITEM,
 	DT_LOG,
 	DT_SPELL,
+	DT_IDEN,
 	DT_SKILL_USE,
 	DT_SUB_TEXT,
 	DT_PROPERTY

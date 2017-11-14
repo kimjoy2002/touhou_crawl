@@ -76,6 +76,7 @@ public:
 	void text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
+	void iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);

@@ -3325,7 +3325,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 			coord_def pos_ = target+coord_def(i,j);
 			if(env[current_level].isInSight(pos_) && env[current_level].dgtile[pos_.x][pos_.y].isBreakable() && randA(2) == 0)
 			{
-				env[current_level].dgtile[pos_.x][pos_.y].tile = DG_FLOOR;
+				env[current_level].changeTile(coord_def(pos_.x, pos_.y), env[current_level].base_floor);
 			}
 		}
 	}

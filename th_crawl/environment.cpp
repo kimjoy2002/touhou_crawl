@@ -197,6 +197,7 @@ bool environment::MakeMap(bool return_)
 	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL) && !return_))
 	{
 		map_algorithms(floor);
+		allCalculateAutoTile();
 		if(isNormalGame())
 		{
 			create_mon(floor, GetLevelMonsterNum(floor,false));
@@ -428,6 +429,258 @@ int environment::isStair(int x_, int y_)
 			return 5; //임시
 	}
 	return 0;
+}
+
+int environment::getAutoTileNum(unsigned char bit)
+{
+	switch(bit)
+	{
+		case 2:
+			return 44;
+		case 8:
+			return 45;
+		case 10:
+			return 39;
+		case 11:
+			return 38;
+		case 16:
+			return 43;
+		case 18:
+			return 41;
+		case 22:
+			return 40;
+		case 24:
+			return 33;
+		case 26: 
+			return 31;
+		case 27:
+			return 30;
+		case 30:
+			return 29;
+		case 31:
+			return 28;
+		case 64: 
+			return 42;
+		case 66: 
+			return 32;
+		case 72: 
+			return 37;
+		case 74: 
+			return 27; 
+		case 75: 
+			return 25;
+		case 80:
+			return 35;
+		case 82: 
+			return 19; 
+		case 86:
+			return 18; 
+		case 88: 
+			return 23; 
+		case 90: 
+			return 15; 
+		case 91: 
+			return 10; 
+		case 94: 
+			return 13; 
+		case 95: 
+			return 12; 
+		case 104: 
+			return 36; 
+		case 106: 
+			return 26; 
+		case 107: 
+			return 24; 
+		case 120: 
+			return 21; 
+		case 122: 
+			return 5; 
+		case 123: 
+			return 6; 
+		case 126: 
+			return 5; 
+		case 127: 
+			return 4; 
+		case 208: 
+			return 34; 
+		case 210: 
+			return 17; 
+		case 214: 
+			return 16; 
+		case 216: 
+			return 22; 
+		case 218: 
+			return 11; 
+		case 219: 
+			return 10; 
+		case 222: 
+			return 9; 
+		case 223: 
+			return 8; 
+		case 248: 
+			return 20; 
+		case 250: 
+			return 3; 
+		case 251: 
+			return 2; 
+		case 254: 
+			return 1; 
+		case 255: 
+			return 0;
+		case 0: 
+			return 46;
+	}
+	return 0;
+}
+
+void environment::calculateAutoTile(coord_def pos, AUTOTILE_KIND kind)
+{
+	unsigned char autotile_bitmap = 0;
+	int i = 0;
+	rect_iterator rand(pos, 1, 1);
+	while (!rand.end())
+	{
+		if ((*rand) == pos)
+		{
+			rand++;
+			continue;
+		}
+		if (((*rand).x < 0 || (*rand).x >= DG_MAX_X || (*rand).y < 0 || (*rand).y >= DG_MAX_Y) ||
+			dgtile[(*rand).x][(*rand).y].isAutoTile(kind)
+			)
+		{
+			autotile_bitmap |= 1 << i;
+		}
+		rand++;
+		i++;
+	}
+	{
+		//네 꼭지점은 인접한 타일이 없으면 계산에서 제외해야한다.
+
+		//0 -> 1,3
+		//2 -> 1,4
+		//5 -> 3,6
+		//7 -> 4,6
+		if (!(autotile_bitmap & 1 << 1)) {
+			autotile_bitmap &= ~(1 << 0);
+			autotile_bitmap &= ~(1 << 2);
+		}
+		if (!(autotile_bitmap & 1 << 3)) {
+			autotile_bitmap &= ~(1 << 0);
+			autotile_bitmap &= ~(1 << 5);
+		}
+		if (!(autotile_bitmap & 1 << 4)) {
+			autotile_bitmap &= ~(1 << 2);
+			autotile_bitmap &= ~(1 << 7);
+		}
+		if (!(autotile_bitmap & 1 << 6)) {
+			autotile_bitmap &= ~(1 << 5);
+			autotile_bitmap &= ~(1 << 7);
+		}
+	}
+	dgtile[pos.x][pos.y].autotile_bitmap[kind] = autotile_bitmap;
+}
+
+
+void environment::allCalculateAutoTile()
+{
+	for (int i = 0; i < AUTOTILE_MAX; i++)
+	{
+		for (int x = 0; x < DG_MAX_X; x++)
+		{
+			for (int y = 0; y < DG_MAX_Y; y++)
+			{
+				calculateAutoTile(coord_def(x, y), (AUTOTILE_KIND)i);
+			}
+		}
+	}
+}
+
+void environment::innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight)
+{
+	if (dgtile[tile_x][tile_y].tile == DG_WALL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_METAL_WALL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_metal_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_STONE_WALL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_mountain_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_RED_WALL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_red_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_SEA) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_water[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y, color_);
+	}
+	else if (!dgtile[tile_x][tile_y].isNormal()) {
+		dgtile[tile_x][tile_y].draw(pSprite, x, y, color_, count_);
+	}
+	else {
+		dgtile[tile_x][tile_y].draw(pSprite, env[current_level].base_floor, x, y, color_, count_);
+	}
+}
+
+void environment::drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight)
+{
+	if (!isExplore(tile_x, tile_y))
+	{
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(160, 160, 255), sight);
+	}
+	else if (dgtile[tile_x][tile_y].flag & FLAG_LIGHT)
+	{
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		img_effect_gold.draw(pSprite, x, y, 100);
+	}
+	else if (isInSight(coord_def(tile_x, tile_y)) && sight)
+	{
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+	}
+	else
+	{
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(128, 128, 128), sight);
+	}
+
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SILENCE)
+		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_VIOLET)
+		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 128, 255));
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SANCTUARY)
+		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 255, 0));
+
+}
+bool environment::changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul)
+{
+	dgtile[c.x][c.y].tile = tile;
+
+	if (!noAutoCacul)
+	{
+		for (int i = 0; i < AUTOTILE_MAX; i++)
+		{
+			rect_iterator rand(c, 1, 1);
+			while (!rand.end())
+			{
+				if (((*rand).x < 0 || (*rand).x >= DG_MAX_X || (*rand).y < 0 || (*rand).y >= DG_MAX_Y))
+				{
+					rand++;
+					continue;
+				}
+				calculateAutoTile((*rand), (AUTOTILE_KIND)i);
+				rand++;
+			}
+		}
+	}
+	return true;
 }
 int environment::CloseDoor(int x_,int y_)
 {
@@ -741,6 +994,8 @@ void environment::ClearFloor()
 		for(int y=0; y<DG_MAX_Y; y++)
 		{
 			dgtile[x][y].tile = DG_FLOOR;
+			for (int i = 0; i < AUTOTILE_MAX; i++)
+				dgtile[x][y].autotile_bitmap[i] = 0;
 			dgtile[x][y].flag = 0;
 			dgtile[x][y].silence_count = 0;
 			dgtile[x][y].violet_count = 0;

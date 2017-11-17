@@ -35,6 +35,7 @@ protected:
 public:
 	textures(TextureFile* _texture, int left, int top, int right, int bottom, int alphas);
 	textures(TextureFile* _texture, int mon_num, int alphas);
+	textures(TextureFile* _texture, int mon_num);
 	textures(TextureFile* _texture);
 	~textures();
 	bool draw(LPD3DXSPRITE pSprite, int alphas);

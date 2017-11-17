@@ -165,7 +165,8 @@ void bamboo_count(int num)
 		}
 		//이벤트는... 필요없어?
 		//list<events> event_list;
-		
+
+		env[num].allCalculateAutoTile();
 		ReleaseMutex(mutx);
 
 	}

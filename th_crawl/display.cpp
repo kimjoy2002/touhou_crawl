@@ -1579,44 +1579,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							sight = false;
 						}
 					}
-					
-					if (!env[current_level].isExplore(i + x_, j + y_))
-					{
-						if(!env[current_level].dgtile[i + x_][j + y_].isNormal())
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(160, 160, 255), you.turn);
-						else
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, env[current_level].base_floor, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(160, 160, 255), you.turn);
-					}
-					else if(env[current_level].dgtile[i+x_][j+y_].flag & FLAG_LIGHT)
-					{
-						if (!env[current_level].dgtile[i + x_][j + y_].isNormal())
-							env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255),you.turn);
-						else
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, env[current_level].base_floor, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(255, 255, 255), you.turn);
-						img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,100);
-					}
-					else if (env[current_level].isInSight(coord_def(i + x_, j + y_)) && sight)
-					{
-						if (!env[current_level].dgtile[i + x_][j + y_].isNormal())
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(255, 255, 255), you.turn);
-						else
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, env[current_level].base_floor, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(255, 255, 255), you.turn);
-					}
-					else
-					{
-						if (!env[current_level].dgtile[i + x_][j + y_].isNormal())
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(128, 128, 128), you.turn);
-						else
-							env[current_level].dgtile[i + x_][j + y_].draw(pSprite, env[current_level].base_floor, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_XRGB(128, 128, 128), you.turn);
-					}
-
-					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_SILENCE)
-						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(80,0,255,255));
-					if(env[current_level].isInSight(coord_def(i+x_,j+y_)) && env[current_level].dgtile[i+x_][j+y_].flag & FLAG_VIOLET)
-						img_effect_slience.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_ARGB(80,255,128,255));
-					if (env[current_level].isInSight(coord_def(i + x_, j + y_)) && env[current_level].dgtile[i + x_][j + y_].flag & FLAG_SANCTUARY)
-						img_effect_slience.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 255, 255, 0));
-				}
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, you.turn, sight);				}
 			}
 		}
 	}

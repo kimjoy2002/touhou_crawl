@@ -15,7 +15,11 @@
 
 
 extern textures img_title;
-
+extern textures img_auto_wall[48];
+extern textures img_auto_metal_wall[48];
+extern textures img_auto_mountain_wall[48];
+extern textures img_auto_red_wall[48];
+extern textures img_auto_water[48];
 extern textures img_mons_default;
 //여기추가하면 texturetoint도 추가해야함
 extern textures img_mons_reimu_yukkuri;

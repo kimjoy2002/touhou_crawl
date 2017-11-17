@@ -313,7 +313,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 								else
 								{
 									if(env[current_level].dgtile[pos.x+i][pos.y+j].isBreakable())
-										env[current_level].dgtile[pos.x+i][pos.y+j].tile = DG_FLOOR;
+										env[current_level].changeTile(coord_def(pos.x + i,pos.y + j), env[current_level].base_floor);
 								}
 							}
 						}

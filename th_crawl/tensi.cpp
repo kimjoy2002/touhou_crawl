@@ -386,7 +386,7 @@ void tensi_earthquake(int good_)
 			if(env[current_level].isInSight(pos) && env[current_level].dgtile[pos.x][pos.y].isBreakable())
 			{
 				if(randA(1)==0)
-					env[current_level].dgtile[pos.x][pos.y].tile = DG_FLOOR;
+					env[current_level].changeTile(pos, env[current_level].base_floor);
 			}
 		}
 	}//¸ÊÀ» ÆÄ±«ÇÑ´Ù.

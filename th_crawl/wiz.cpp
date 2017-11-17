@@ -513,7 +513,7 @@ void wiz_mode()
 				return;
 			}
 			enterlog();
-			env[current_level].dgtile[you.position.x][you.position.y].tile = next_;
+			env[current_level].changeTile(you.position, next_);
 		}
 		break;
 		case 'W':

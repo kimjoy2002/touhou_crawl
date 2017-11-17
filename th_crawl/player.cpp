@@ -794,7 +794,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if (you.GetPunish(GT_OKINA) && GetHazard()>=100 && randA(1))
 			{
-				env[current_level].dgtile[move_x_][move_y_].tile = DG_FLOOR;
+				env[current_level].changeTile(coord_def(move_x_, move_y_), DG_FLOOR);
 				//적이 서있으면 강제로 비키도록 한다.
 
 				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))

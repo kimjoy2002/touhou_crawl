@@ -23,6 +23,12 @@ class events;
 
 enum floor_type;
 
+enum AUTOTILE_KIND {
+	AUTOTILE_WALL = 0,
+	AUTOTILE_WATER,
+	AUTOTILE_MAX
+};
+
 class dungeon_tile
 {
 public:
@@ -31,6 +37,7 @@ public:
 	char silence_count;
 	char violet_count;
 	char santuary_count;
+	unsigned char autotile_bitmap[AUTOTILE_MAX]; //하나는 벽, 하나는 물
 	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0){};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
 	void init()
@@ -79,6 +86,22 @@ public:
 	bool isNormal()
 	{
 		return img_dungeon01[tile].isNormal();
+	}
+	bool isAutoTile(int i)
+	{
+		switch (i)
+		{
+		case AUTOTILE_WALL:
+			if (tile >= DG_WALL && tile <= DG_GLASS || tile == DG_OPEN_DOOR)
+				return true;
+			break;
+		case AUTOTILE_WATER:
+			if (tile == DG_SEA)
+				return true;
+			break;
+		}
+		return false;
+
 	}
 	dot_tile_type GetDot();
 };
@@ -207,6 +230,12 @@ public:
 		else
 			return false;
 	}
+	int getAutoTileNum(unsigned char bit);
+	void calculateAutoTile(coord_def pos, AUTOTILE_KIND kind);
+	void allCalculateAutoTile();
+	void innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight);
+	void drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight);
+	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
 	monster* AddMonster(int id_, int flag_, coord_def position_, int time_ = 0);
 	monster* AddMonster(monster *mon_, coord_def position_, int time_ = 0);

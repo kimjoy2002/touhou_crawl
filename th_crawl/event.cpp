@@ -295,12 +295,12 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case EVL_FLOOR:
 		{			
-			env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_FLOOR;
+			env[current_level].changeTile(event_->position, env[current_level].base_floor);
 		}
 		return 1;
 	case EVL_DREAM_FLOOR:
 	{
-		env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_DREAM_FLOOR;
+		env[current_level].changeTile(event_->position, DG_DREAM_FLOOR);
 	}
 	return 1;
 	case EVL_BAMBOO:
@@ -312,14 +312,14 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{			
 			for(int i=-3;i<=3;i++)
 			{
-				if(i!=0)	
-					env[current_level].dgtile[event_->position.x+i][event_->position.y+1].tile = DG_FLOOR;
+				if(i!=0)
+					env[current_level].changeTile(coord_def(event_->position.x + i,event_->position.y + 1), env[current_level].base_floor);
 			}
 			for(int i = 0; i<5 ; i++)
 			{
 				for(int j = 0; j<2; j++)
 				{
-					env[current_level].dgtile[event_->position.x+4*(j*2-1)][event_->position.y+i*2].tile = DG_OPEN_DOOR;
+					env[current_level].changeTile(coord_def(event_->position.x + 4 * (j * 2 - 1), event_->position.y + i * 2), DG_OPEN_DOOR);
 				}
 			}
 			
@@ -328,7 +328,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				for(int j = 0; j<3; j++)
 				{
 					if(i!=1 || j!=1)
-						env[current_level].dgtile[event_->position.x-1+i][event_->position.y+4+j].tile = DG_GLASS;
+						env[current_level].changeTile(coord_def(event_->position.x - 1 + i, event_->position.y + 4 + j), DG_GLASS);
 				}
 			}
 			printlog("It's LUNATIC TIME!!",true,false,false,CL_small_danger);
@@ -446,7 +446,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					for(int h = 3;h<DG_MAX_Y-3;h++)
 					{
 						if(env[current_level].dgtile[k][h].tile == DG_WALL2)
-							env[current_level].dgtile[k][h].tile = DG_DREAM_FLOOR;
+							env[current_level].changeTile(coord_def(k,h), env[current_level].base_floor);
 					}
 				}
 				{
@@ -459,7 +459,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
 					if(!env[current_level].isInSight(coord_def(x_,y_)) && env[current_level].dgtile[x_][y_].isFloor()  && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_STAIR) )
 					{
-						env[current_level].dgtile[x_][y_].tile = DG_MOON_STAIR;
+						env[current_level].changeTile(coord_def(x_, y_), DG_MOON_STAIR);
 						env[current_level].stair_vector.push_back(stair_info(coord_def(x_,y_),MOON_LEVEL));
 						break;
 					}
@@ -641,12 +641,12 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case EVL_SCALET_TRAP:
 		{
-			env[current_level].dgtile[event_->position.x-4][event_->position.y+1].tile = DG_OPEN_DOOR;
-			env[current_level].dgtile[event_->position.x-2][event_->position.y+1].tile = DG_OPEN_DOOR;
-			env[current_level].dgtile[event_->position.x-4][event_->position.y-1].tile = DG_OPEN_DOOR;
-			env[current_level].dgtile[event_->position.x-2][event_->position.y-1].tile = DG_OPEN_DOOR;
-			
-			env[current_level].dgtile[event_->position.x+1][event_->position.y].tile = DG_GLASS;
+			env[current_level].changeTile(coord_def(event_->position.x - 4, event_->position.y + 1), DG_OPEN_DOOR);
+			env[current_level].changeTile(coord_def(event_->position.x - 2, event_->position.y + 1), DG_OPEN_DOOR);
+			env[current_level].changeTile(coord_def(event_->position.x - 4, event_->position.y - 1), DG_OPEN_DOOR);
+			env[current_level].changeTile(coord_def(event_->position.x - 2, event_->position.y - 1), DG_OPEN_DOOR);
+
+			env[current_level].changeTile(coord_def(event_->position.x + 1, event_->position.y), DG_GLASS);
 			
 			printlog("방어마법진작동. 칩입자를 처단하라!",true,false,false,CL_small_danger);
 			env[current_level].MakeNoise(event_->position,8,NULL);
@@ -657,13 +657,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			for(int i=-3;i<=3;i++)
 			{
 				if(i!=0)
-					env[current_level].dgtile[event_->position.x+i][event_->position.y+1].tile = DG_FLOOR;
+					env[current_level].changeTile(coord_def(event_->position.x + i, event_->position.y + 1), env[current_level].base_floor);
 			}
 			for(int i = 0; i<5 ; i++)
 			{
 				for(int j = 0; j<2; j++)
 				{
-					env[current_level].dgtile[event_->position.x+4*(j*2-1)][event_->position.y+i*2].tile = DG_OPEN_DOOR;
+					env[current_level].changeTile(coord_def(event_->position.x + 4 * (j * 2 - 1), event_->position.y + i * 2), DG_OPEN_DOOR);
 				}
 			}
 			
@@ -672,7 +672,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				for(int j = 0; j<3; j++)
 				{
 					if(i!=1 || j!=1)
-						env[current_level].dgtile[event_->position.x-1+i][event_->position.y+4+j].tile = DG_GLASS;
+						env[current_level].changeTile(coord_def(event_->position.x - 1 + i, event_->position.y + 4 + j), DG_GLASS);
 				}
 			}
 			printlog("It's SURPRISE TIME!!",true,false,false,CL_small_danger);
@@ -687,9 +687,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		unit* target_unit = env[current_level].isMonsterPos(event_->position.x - 4, event_->position.y - 1);
 		if (target_unit)
 		{
-			env[current_level].dgtile[event_->position.x - 4][event_->position.y].tile = DG_FLOOR;
-			env[current_level].dgtile[event_->position.x - 3][event_->position.y].tile = DG_FLOOR;
-			env[current_level].dgtile[event_->position.x - 3][event_->position.y - 1].tile = DG_FLOOR;
+			env[current_level].changeTile(coord_def(event_->position.x - 4, event_->position.y), env[current_level].base_floor);
+			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y), env[current_level].base_floor);
+			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y-1), env[current_level].base_floor);
 
 			char temp[100];
 			sprintf(temp, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
@@ -701,9 +701,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		target_unit = env[current_level].isMonsterPos(event_->position.x + 4, event_->position.y - 1);
 		if (target_unit)
 		{
-			env[current_level].dgtile[event_->position.x + 4][event_->position.y].tile = DG_FLOOR;
-			env[current_level].dgtile[event_->position.x + 3][event_->position.y].tile = DG_FLOOR;
-			env[current_level].dgtile[event_->position.x + 3][event_->position.y - 1].tile = DG_FLOOR;
+			env[current_level].changeTile(coord_def(event_->position.x + 4, event_->position.y), env[current_level].base_floor);
+			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y), env[current_level].base_floor);
+			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y - 1), env[current_level].base_floor);
 
 			char temp[100];
 			sprintf(temp, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
@@ -844,11 +844,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (env[current_level].dgtile[event_->position.x][event_->position.y].tile != DG_SEA)
 		{
 			event_->value = env[current_level].dgtile[event_->position.x][event_->position.y].tile;
-			env[current_level].dgtile[event_->position.x][event_->position.y].tile = DG_SEA;
+			env[current_level].changeTile(event_->position, DG_SEA);
 		}
 		else if(event_->count <= 0)
 		{
-			env[current_level].dgtile[event_->position.x][event_->position.y].tile = event_->value?(dungeon_tile_type) event_->value: DG_SEA;
+			env[current_level].changeTile(event_->position, event_->value ? (dungeon_tile_type)event_->value : DG_SEA);
 			return 1;
 		}
 		return 0;

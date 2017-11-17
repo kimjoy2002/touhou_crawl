@@ -186,6 +186,7 @@ void arena_event(int num)
 				else
 					env[num].dgtile[DG_MAX_X/2][i].tile = DG_GRASS;
 			}
+			env[num].allCalculateAutoTile();
 
 			SeleteArenaMonster(num, you.level);
 
@@ -208,6 +209,7 @@ void arena_event(int num)
 			else
 				env[num].dgtile[DG_MAX_X/2][i].tile = DG_GLASS;
 		}
+		env[num].allCalculateAutoTile();
 		if(you.position.x == DG_MAX_X/2)
 			you.Blink(1);
 		

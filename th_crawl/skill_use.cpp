@@ -1297,8 +1297,8 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 	auto tile_ = env[current_level].dgtile[order->position.x][order->position.y].tile;
 
 	if(tile_ >= DG_FLOOR && tile_ <= DG_FLOOR_END)
-	{		
-		env[current_level].dgtile[order->position.x][order->position.y].tile = DG_TEMPLE_SUWAKO;
+	{
+		env[current_level].changeTile(order->position, DG_TEMPLE_SUWAKO);
 		printlog("당신은 발밑에 스와코님의 신전을 세웠다. 신앙심이 풍족해지는 것을 느꼈다.",true,false,false,CL_swako);
 		you.PietyUpDown(2+randA(2));
 		return true;
@@ -1395,8 +1395,8 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 
 		while(length_>0)
 		{
-			if(env[current_level].dgtile[beam->x][beam->y].isBreakable())
-				env[current_level].dgtile[beam->x][beam->y].tile = DG_FLOOR;
+			if (env[current_level].dgtile[beam->x][beam->y].isBreakable())
+				env[current_level].changeTile((*beam), env[current_level].base_floor);
 			beam++;
 			length_--;
 		}
@@ -1424,7 +1424,7 @@ bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
 	{		
 		if(!env[current_level].isMonsterPos(target.x,target.y))
 		{
-			env[current_level].dgtile[target.x][target.y].tile = DG_STATUE;
+			env[current_level].changeTile(target, DG_STATUE);
 			env[current_level].MakeEvent(EVL_FLOOR, target, EVT_COUNT,rand_int(30,50));
 			return true;
 		}
@@ -1457,7 +1457,7 @@ bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
 			auto mons_ = env[current_level].isMonsterPos(rit->x,rit->y);
 			if(!mons_ || mons_->isFly() || mons_->isSwim())
 			{
-				env[current_level].dgtile[rit->x][rit->y].tile = DG_SEA;
+				env[current_level].changeTile((*rit), DG_SEA);
 			}
 		}
 		rit++;
@@ -2548,7 +2548,8 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 				}
 
 				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 문으로 만들었다.");
-				env[current_level].dgtile[target.x][target.y].tile = DG_CLOSE_DOOR;
+
+				env[current_level].changeTile(target, DG_CLOSE_DOOR);
 				return true;
 			}
 			else {
@@ -2606,7 +2607,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 				}
 
 			}
-			env[current_level].dgtile[target.x][target.y].tile = DG_FLOOR;
+			env[current_level].changeTile(target, env[current_level].base_floor, true);
 			//적이 서있으면 강제로 비키도록 한다.
 			
 			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
@@ -2669,7 +2670,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				return false;
 			}
 
-			env[current_level].dgtile[beam->x][beam->y].tile = DG_OPEN_DOOR;
+			env[current_level].changeTile((*beam), DG_OPEN_DOOR);
 			you.SetXY(beam->x, beam->y);
 			unit_->LostTarget();
 			printlog("적의 등 뒤의 문으로 빠져나왔다!", true, false, false, CL_okina);
@@ -2763,7 +2764,7 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	if (env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
 		env[current_level].dgtile[order->position.x][order->position.y].isDoor() ||
 		env[current_level].dgtile[order->position.x][order->position.y].isTemple()) {
-		env[current_level].dgtile[order->position.x][order->position.y].tile = DG_OPEN_DOOR;
+		env[current_level].changeTile(order->position, DG_OPEN_DOOR);
 	}
 	else {
 		printlog("이 곳에는 문을 열만한 공간이 없다!", true, false, false, CL_normal);

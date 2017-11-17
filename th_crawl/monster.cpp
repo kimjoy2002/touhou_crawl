@@ -2223,7 +2223,7 @@ int monster::action(int delay_)
 		{
 			hp = 0;
 			if (id == MON_CLOSE_DOOR) {
-				env[current_level].dgtile[position.x][position.y].tile = DG_CLOSE_DOOR;
+				env[current_level].changeTile(position, DG_CLOSE_DOOR);
 				if (is_sight)
 					printarray(true, false, false, CL_okina, 3, GetName()->name.c_str(), GetName()->name_is(true), "평범한 문으로 돌아왔다.");
 			}

@@ -204,6 +204,10 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	RECT rc = { 30, 10 - move, option_mg.getWidth(), option_mg.getHeight() };
 	char temp[100];
 	int one_ = 50, two_ = 100;
+
+	pfont->DrawTextA(pSprite, "식별된 아이템들", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	rc.top += 2* fontDesc.Height;
+
 	bool first_ = false;
 	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
 		char index = 'a', current;
@@ -371,6 +375,13 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
+
+	if (num == 0) {
+		rc.left = one_;
+		pfont->DrawTextA(pSprite, "식별된 아이템이 없습니다.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.top += fontDesc.Height;
+	}
+
 	rc.top += move + 64;
 	max_y = (rc.top - option_mg.getHeight()>0 ? rc.top - option_mg.getHeight() : 0);
 }

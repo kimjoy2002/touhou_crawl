@@ -232,7 +232,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value6 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
-		t->image = &img_item_ring;
+		t->image = &img_item_ring[iden_list.ring_list[t->value1].type];
 		t->name.name = "¹ÝÁö";
 		t->name.name_type = false;
 		t->weight = 1.0f;

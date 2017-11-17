@@ -914,11 +914,58 @@ textures(&texture_item02, 120, 255),
 textures(&texture_item02, 121, 255)
 };
 
+textures img_item_ring_kind[] = { textures(&texture_item02, 128, 255),
+textures(&texture_item02, 129, 255),
+textures(&texture_item02, 130, 255),
+textures(&texture_item02, 131, 255),
+textures(&texture_item02, 132, 255),
+textures(&texture_item02, 133, 255),
+textures(&texture_item02, 134, 255),
+textures(&texture_item02, 135, 255),
+textures(&texture_item02, 136, 255),
+textures(&texture_item02, 137, 255),
+textures(&texture_item02, 138, 255),
+textures(&texture_item02, 139, 255),
+textures(&texture_item02, 140, 255),
+textures(&texture_item02, 141, 255),
+textures(&texture_item02, 142, 255),
+textures(&texture_item02, 143, 255),
+textures(&texture_item02, 144, 255),
+textures(&texture_item02, 145, 255),
+textures(&texture_item02, 146, 255),
+textures(&texture_item02, 147, 255),
+textures(&texture_item02, 148, 255),//더미
+textures(&texture_item02, 149, 255)//더미
+};
+
+
+
+textures img_item_ring[] = { textures(&texture_item02, 176, 255),
+textures(&texture_item02, 177, 255),
+textures(&texture_item02, 178, 255),
+textures(&texture_item02, 179, 255),
+textures(&texture_item02, 180, 255),
+textures(&texture_item02, 181, 255),
+textures(&texture_item02, 182, 255),
+textures(&texture_item02, 183, 255),
+textures(&texture_item02, 184, 255),
+textures(&texture_item02, 185, 255),
+textures(&texture_item02, 186, 255),
+textures(&texture_item02, 187, 255),
+textures(&texture_item02, 188, 255),
+textures(&texture_item02, 189, 255),
+textures(&texture_item02, 190, 255),
+textures(&texture_item02, 191, 255),
+textures(&texture_item02, 192, 255),
+textures(&texture_item02, 193, 255),
+textures(&texture_item02, 194, 255)
+};
+
+textures img_item_artifact_ring(&texture_item02, 197, 255);
+
 textures img_item_goal(&texture_item01, 135, 255);
 textures img_item_cat_tree(&texture_item02, 163, 255);
 textures img_item_rune(&texture_item01, 214, 255);
-
-textures img_item_ring(&texture_item01, 15, 255);
 
 textures img_item_amulet(&texture_item01, 16, 255);
 
@@ -1484,7 +1531,7 @@ int texturetoint(textures* input)
 		return 11;
 	else if(input == &img_item_scroll)
 		return 12;
-	else if(input == &img_item_ring)
+	else if(input == &img_item_ring[0])
 		return 13;
 	else if(input == &img_item_amulet)
 		return 14;
@@ -2200,6 +2247,44 @@ int texturetoint(textures* input)
 		return 369;
 	else if (input == &img_mons_bee)
 		return 370;
+	else if (input == &img_item_ring[1])
+		return 371;
+	else if (input == &img_item_ring[2])
+		return 372;
+	else if (input == &img_item_ring[3])
+		return 373;
+	else if (input == &img_item_ring[4])
+		return 374;
+	else if (input == &img_item_ring[5])
+		return 375;
+	else if (input == &img_item_ring[6])
+		return 376;
+	else if (input == &img_item_ring[7])
+		return 377;
+	else if (input == &img_item_ring[8])
+		return 378;
+	else if (input == &img_item_ring[9])
+		return 379;
+	else if (input == &img_item_ring[10])
+		return 380;
+	else if (input == &img_item_ring[11])
+		return 381;
+	else if (input == &img_item_ring[12])
+		return 382;
+	else if (input == &img_item_ring[13])
+		return 383;
+	else if (input == &img_item_ring[14])
+		return 384;
+	else if (input == &img_item_ring[15])
+		return 385;
+	else if (input == &img_item_ring[16])
+		return 386;
+	else if (input == &img_item_ring[17])
+		return 387;
+	else if (input == &img_item_ring[18])
+		return 388;
+	else if (input == &img_item_artifact_ring)
+		return 389;
 	else
 		return 0;
 }
@@ -2234,7 +2319,7 @@ textures* inttotexture(int input)
 	case 12:
 		return &img_item_scroll;
 	case 13:
-		return &img_item_ring;
+		return &img_item_ring[0];
 	case 14:
 		return &img_item_amulet;
 	case 15:
@@ -2949,6 +3034,46 @@ textures* inttotexture(int input)
 		return &img_mons_sheep;
 	case 370:
 		return &img_mons_bee;
+	case 371:
+		return &img_item_ring[1];
+	case 372:
+		return &img_item_ring[2];
+	case 373:
+		return &img_item_ring[3];
+	case 374:
+		return &img_item_ring[4];
+	case 375:
+		return &img_item_ring[5];
+	case 376:
+		return &img_item_ring[6];
+	case 377:
+		return &img_item_ring[7];
+	case 378:
+		return &img_item_ring[8];
+	case 379:
+		return &img_item_ring[9];
+	case 380:
+		return &img_item_ring[10];
+	case 381:
+		return &img_item_ring[11];
+	case 382:
+		return &img_item_ring[12];
+	case 383:
+		return &img_item_ring[13];
+	case 384:
+		return &img_item_ring[14];
+	case 385:
+		return &img_item_ring[15];
+	case 386:
+		return &img_item_ring[16];
+	case 387:
+		return &img_item_ring[17];
+	case 388:
+		return &img_item_ring[18];
+	case 389:
+		return &img_item_ring[19];
+	case 390:
+		return &img_item_artifact_ring;
 	default:
 		return &img_mons_default;
 	}

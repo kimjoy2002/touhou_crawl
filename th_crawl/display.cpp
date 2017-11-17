@@ -286,7 +286,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				}
 
 				rc.left = two_;
-				img_item_ring.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				img_item_ring[iden_list.ring_list[cur_].type].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				img_item_ring_kind[min(RGT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				sprintf_s(temp, 100, "%c - %s¹ÝÁö", index, ring_iden_string[cur_]);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;

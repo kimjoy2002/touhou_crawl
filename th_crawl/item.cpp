@@ -515,6 +515,11 @@ bool item::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 				img_item_amulet_kind[min(AMT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
 			}
 		}
+		else if (type == ITM_RING) {
+			if (iden_list.ring_list[value1].iden && !isArtifact()) {
+				img_item_ring_kind[min(RGT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+			}
+		}
 		return return_;
 	}
 	else
@@ -851,7 +856,8 @@ void item::Identify()
 	switch(type)
 	{
 	case ITM_RING:
-		iden_list.ring_list[value1].iden = 2;
+		if(!isArtifact())
+			iden_list.ring_list[value1].iden = 2;
 		if(!prev_iden && you.isequip(this))
 			unidenequipring((ring_type)value1, value2*(-1));
 		you.auto_equip_iden();

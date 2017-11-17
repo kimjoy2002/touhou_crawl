@@ -145,7 +145,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_AFTERLITE:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_REAPER_MET:
-		return ((S_FLAG_SMITE | S_FLAG_CLOSE_DANGER)& flag);
+		return ((S_FLAG_CLOSE_DANGER)& flag);
 	case SPL_FLAME:		
 	case SPL_FROST:
 	case SPL_BURN:

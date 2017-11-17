@@ -1306,8 +1306,8 @@ $.........$";
 		{
 			if (!(floor_ <= 14))
 				break;
-			map->size_x = 6;
-			map->size_y = 2;
+			map->size_x = 7;
+			map->size_y = 3;
 			bool hw_ = randA(1);
 			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
@@ -1328,11 +1328,13 @@ $.........$";
 			}
 			map->name = "초반_벽안의_보물";
 			return  "\
-.............\
-.###########.\
-.#i#i#i#i#i#.\
-.###########.\
-.............";
+...............\
+.#############.\
+.#############.\
+.##i#i#i#i#i##.\
+.#############.\
+.#############.\
+...............";
 			break;
 		}
 		case 48:

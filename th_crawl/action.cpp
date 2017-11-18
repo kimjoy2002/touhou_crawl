@@ -1428,6 +1428,10 @@ void Stair_move(bool down)
 					break;			
 				case DG_DREAM_STAIR:
 					next_ = DREAM_LEVEL;
+					if (env[next_].make == true)
+					{
+						next_ = MOON_LEVEL;
+					}
 					break;			
 				case DG_MOON_STAIR:					
 					next_ = MOON_LEVEL;

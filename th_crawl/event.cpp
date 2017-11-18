@@ -461,6 +461,12 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					{
 						env[current_level].changeTile(coord_def(x_, y_), DG_MOON_STAIR);
 						env[current_level].stair_vector.push_back(stair_info(coord_def(x_,y_),MOON_LEVEL));
+
+						if (!is_exist_named(MON_DOREMI)) {
+							monster *mon_ = env[current_level].AddMonster(MON_DOREMI, M_FLAG_EVENT, coord_def(x_, y_));
+							set_exist_named(MON_DOREMI);
+						}
+
 						break;
 					}
 				}
@@ -691,6 +697,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y), env[current_level].base_floor);
 			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y-1), env[current_level].base_floor);
 
+			you.resetLOS();
 			char temp[100];
 			sprintf(temp, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
@@ -705,6 +712,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y), env[current_level].base_floor);
 			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y - 1), env[current_level].base_floor);
 
+			you.resetLOS();
 			char temp[100];
 			sprintf(temp, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
@@ -712,7 +720,6 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if(!target_unit->isplayer())
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
 		}
-		you.resetLOS();
 		return 1;
 	}
 	case EVL_KOGASA3:

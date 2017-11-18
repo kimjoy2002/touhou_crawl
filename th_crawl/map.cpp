@@ -361,7 +361,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
-	if(floor != 0 && floor != YUKKURI_LAST_LEVEL)
+	if(floor != 0 && floor != YUKKURI_LAST_LEVEL && floor != DREAM_LEVEL)
 	{ //Å×½ºÆ®
 		int i = rand_int(1, 2);
 		for(int j = 0; j < i; j++)

@@ -209,6 +209,7 @@ public:
 	bool SetForceStrong(bool force_, int turn_, bool speak_);
 	bool SetInvincibility(int s_invincibility, bool speak_);
 	bool SetDebufPlus(int s_debuf_);
+	bool SetSleep(int s_sleep_);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

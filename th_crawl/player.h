@@ -248,6 +248,7 @@ public:
 	int s_none_move;
 	int s_night_sight;
 	int s_night_sight_turn;
+	int s_sleep;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -329,6 +330,9 @@ public:
 	void CalcuHP();
 	int GetHp(){return hp;};
 	int GetMaxHp(){return max_hp;};
+	int GetDisplayEv();
+	int GetDisplayAc();
+	int GetDisplaySh();
 	int GetAttack(bool max);
 	int GetHit();
 	int GetAtkDelay();
@@ -441,7 +445,7 @@ public:
 	bool SetSuperGraze(int s_super_graze_);
 	bool SetNoneMove(int s_none_move_); 
 	bool SetNightSight(int value_, int turn_, bool stong_);
-
+	bool SetSleep(int value_);
 
 	int GetInvisible();
 	int GetSaved(){return true;};

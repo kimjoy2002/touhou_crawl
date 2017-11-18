@@ -165,6 +165,9 @@ int GetHazard()
 	if(you.s_confuse || you.s_lunatic)
 		total_danger_ *= 3;
 
+	if (you.s_sleep < 0)
+		total_danger_ *= 3;
+
 	if(you.s_slow)
 		total_danger_ *= 2;
 	

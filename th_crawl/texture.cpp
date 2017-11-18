@@ -986,6 +986,7 @@ textures img_effect_auto_pick(&texture_item01, 143, 255);
 textures img_effect_lunatic(&texture_dungeon01, 288, 0, 320, 32, 255);
 textures img_effect_freeze(&texture_dungeon01, 320, 0, 352, 32, 255);
 textures img_effect_gold(&texture_dungeon01, 352, 0, 384, 32, 255);
+textures img_effect_sleep(&texture_dungeon01, 960, 0, 992, 32, 255);
 textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
 

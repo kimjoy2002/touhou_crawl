@@ -136,6 +136,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_THUNDER:
 	case SPL_PSYCHOKINESIS:
 	case SPL_TRASH_RUSH:
+	case SPL_SLEEP_SMITE:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_MERMAID_SONG:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
@@ -267,6 +268,7 @@ int SpellLength(spell_list skill)
 	case SPL_REAPER_MET:
 	case SPL_TRASH_RUSH:
 	case SPL_THROW_DISH:
+	case SPL_SLEEP_SMITE:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -658,6 +660,8 @@ const char* SpellString(spell_list skill)
 		return "접시던지기";
 	case SPL_MESS_CONFUSION:
 		return "광역 혼란";
+	case SPL_SLEEP_SMITE:
+		return "꿈으로 인도";
 	default:
 		return "알수없는 마법";
 	}
@@ -732,6 +736,7 @@ int SpellLevel(spell_list skill)
 	case SPL_NESY_CANNON:
 	case SPL_MISTIA_SONG:
 	case SPL_THROW_DISH:
+	case SPL_SLEEP_SMITE:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -844,6 +849,7 @@ int SpellNoise(spell_list skill)
 	case SPL_UNLUCK:
 	case SPL_MAMIZO_EVADE:
 	case SPL_PRISM_CALL:
+	case SPL_SLEEP_SMITE:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1281,6 +1287,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_MESS_CONFUSION:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_SLEEP_SMITE:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1429,6 +1437,7 @@ int SpellCap(spell_list skill)
 	case SPL_MISTIA_SONG:
 	case SPL_THROW_DISH:
 	case SPL_MESS_CONFUSION:
+	case SPL_SLEEP_SMITE:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1587,6 +1596,12 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (mon->s_exhausted ? false : true);
 	case SPL_MISTIA_SONG:
 		return (mon->s_exhausted || mon->isUserAlly() ?false:true);
+	case SPL_SLEEP_SMITE:
+		if (!mon->isUserAlly()) {
+			if (you.s_sleep < 0)
+				return false;\
+		}
+		return true;
 	case SPL_SUMMON_YOSHIKA:
 		{
 

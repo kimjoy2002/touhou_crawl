@@ -1005,7 +1005,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		int temp_buff_value_ = 0;
 
 
-		left_ = sprintf_s(temp,128,"%4d",you.ac);
+		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayAc());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ (you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0;
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
@@ -1037,7 +1037,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.left += fontDesc.Width*left_;
 
 		
-		left_ = sprintf_s(temp,128,"%4d",you.ev);
+		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayEv());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_EV);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
@@ -1068,7 +1068,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
-		left_ = sprintf_s(temp,128,"%4d",you.sh);
+		left_ = sprintf_s(temp,128,"%4d",you.GetDisplaySh());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_SH);
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
@@ -1563,6 +1563,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				pfont->DrawTextA(pSprite, "¾ß¸ÍÁõ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
 				rc.left += fontDesc.Width * 7;
 			}
+			if (you.s_sleep>0)
+			{
+				sprintf_s(temp, 128, "Á¹À½(%02d)", min(99,you.s_sleep));
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				rc.left += fontDesc.Width * 11;
+			}
+			else if (you.s_sleep<0)
+			{
+				pfont->DrawTextA(pSprite, "¼ö¸é", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				rc.left += fontDesc.Width * 5;
+			}
 		}
 
 	}
@@ -1840,7 +1851,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 	//±¤±â
-	if(you.s_lunatic || map_effect)
+	if(you.s_sleep < 0 || you.s_lunatic || map_effect)
 	{
 		int x_ = you.GetDisplayPos().x-8;
 		int y_ = you.GetDisplayPos().y-8;
@@ -1857,6 +1868,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						//if(!env[current_level].isExplore(i+x_,j+y_))
 						if(map_effect==1)
 							img_effect_freeze.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+						else if (you.s_sleep < 0)
+							img_effect_sleep.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, 100);
 						else if(you.s_lunatic)
 							img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 						else if(map_effect==2)

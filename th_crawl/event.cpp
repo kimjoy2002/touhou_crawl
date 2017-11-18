@@ -395,11 +395,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	return 0;
 	case EVL_DREAM_MONSTER:
 		{		
-			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT
+			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT, MON_SHEEP
 			};
 			rand_rect_iterator rit(event_->position,3,3);
-			int mon_id_ = arr_[randA(5)];
-			int i = mon_id_==MON_BLUE_UFO?3:1; 
+			int mon_id_ = arr_[randA(6)];
+			int i = mon_id_ == MON_SHEEP ?rand_int(3,4):(mon_id_==MON_BLUE_UFO?3:1);
 			for(;!rit.end() && i> 0;rit++)
 			{
 				if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
@@ -471,7 +471,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					}
 				}
 				you.resetLOS();
-				printlog("꿈의 세계는 완전히 개방되었다! 달로 가는 포탈이 어디선가 열렸다!",true,false,false,CL_danger);
+				printlog("꿈의 세계는 완전히 개방되었다! 어딘가 생성된 달로 가는 포탈로 최대한 빨리 들어가야한다!",true,false,false,CL_danger);
 				MoreWait();
 				env[current_level].MakeEvent(EVL_REGEN, coord_def(0,0), EVT_ALWAYS,30);
 				break;
@@ -573,7 +573,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					if(env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
 					{
 						enterlog();
-						printlog("등 뒤에 있어",true,false,false,CL_danger);
+						printlog("등 뒤에 있어!",true,false,false,CL_danger);
 						MoreWait();
 						monster *mon_ = env[current_level].AddMonster(MON_KOISHI,M_FLAG_EVENT,(*rit));
 						mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //코이시는 떨어지고 바로 공격하지않는다.

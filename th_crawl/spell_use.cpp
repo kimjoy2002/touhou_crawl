@@ -3668,7 +3668,7 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 	int max_ = 0;
 	//최대 4개까지 날림
 	for (int i = 0; i < 4 && monster_list.GetSize() != 0; i++) {
-		if (max_ == 0) {
+		if (max_ == 0 && order->isYourShight()) {
 			printlog("쓰레기 더미가 날라오기 시작한다!", true, false, false, CL_normal);
 		}
 
@@ -3824,6 +3824,21 @@ bool skill_abusion(int power, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
+
+bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if(order && order->isYourShight())
+			printarray(false, false, false, CL_normal, 5, order->GetName()->name.c_str(), order->GetName()->name_is(true), target_unit->GetName()->name.c_str(), target_unit->GetName()->name_to(true), "꿈으로 인도했다. ");
+		target_unit->SetSleep(rand_int(15,25));
+		return true;
+	}
+	return false;
+}
+
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -4141,6 +4156,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_DOREMI:
 		list->push_back(spell(SPL_SUMMON_DREAM, 40));
+		list->push_back(spell(SPL_SLEEP_SMITE, 15));
 		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_FAIRY_HERO:
@@ -4651,6 +4667,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_throw_dish(power, short_, order, target);
 	case SPL_MESS_CONFUSION:
 		return skill_mess_confusion(power, short_, order, target);
+	case SPL_SLEEP_SMITE:
+		return skill_sleep_smite(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5100,6 +5118,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_throw_dish(power, short_, &you, target);
 	case SPL_MESS_CONFUSION:
 		return skill_mess_confusion(power, short_, &you, target);
+	case SPL_SLEEP_SMITE:
+		return skill_sleep_smite(power, short_, &you, target);
 	default:
 		return false;
 	}

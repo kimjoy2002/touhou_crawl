@@ -610,6 +610,11 @@ string GetSpellInfor(spell_list spell)
 	case SPL_MESS_CONFUSION:
 		text_ += "시야내의 모든 적에게 혼란을 시도하는 마법. 각자마다 마법저항을 체크한다.\n";
 		break;
+	case SPL_SLEEP_SMITE:
+		text_ += "시야내의 적에게 잠을 유발하는 마법. 데미지는 없지만 저항할 수 없다.\n";
+		text_ += "또한 장애물을 무시하고 직접 시전이 가능하다.\n";
+		text_ += "잠에 빠지면 일정 턴 무방비상태가 되며 공격을 받으면 큰 데미지와 함께 깨어난다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

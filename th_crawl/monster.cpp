@@ -883,6 +883,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_NORMAL:
 	case ATT_VAMP:
 	case ATT_LUNATIC:
+	case ATT_SLEEP:
 	case ATT_CURSE:
 	case ATT_WEATHER:
 	case ATT_AUTUMN:
@@ -1026,6 +1027,23 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다. ");
 			break;
+		case ATT_SLEEP:
+			if (state.GetState() != MS_SLEEP)
+			{
+				if (a.order)
+				{
+					printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중했다. ");
+					
+				}
+			}
+			else
+			{
+				if (a.order)
+				{
+					printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "의 꿈을 먹었다. ");
+				}
+			}
+			break;
 		case ATT_FIRE:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다. ");
@@ -1160,6 +1178,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_LUNATIC:
+	case ATT_SLEEP:
 	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_CURSE:
@@ -1328,7 +1347,15 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			print_damage_message(a, back_stab);
 		}
 		
-		if(damage_)
+
+
+
+
+		if (a.type == ATT_SLEEP && state.GetState() == MS_SLEEP)
+		{
+			HpUpDown(-1, DR_SLEEP);
+		}
+		else if(damage_)
 		{
 			enterlog();
 			
@@ -1491,6 +1518,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		
 		AttackedTarget(a.order);
+		//잠자는건 공격당한 후에 적용됨
+		if (a.type == ATT_SLEEP) {
+			SetSleep(rand_int(10, 25));
+		}
 	}
 	else
 	{
@@ -3571,6 +3602,16 @@ bool monster::SetDebufPlus(int s_debuf_)
 {
 	debuf_boost =  s_debuf_;
 	return debuf_boost;
+}
+bool monster::SetSleep(int s_sleep_)
+{
+	if (s_sleep_ >= randA_1(100)) {
+
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "잠에 빠졌다. ");
+		state.SetState(MS_SLEEP);
+		return true;
+	}
+	return false;
 }
 bool monster::AttackedTarget(unit *order_)
 {	

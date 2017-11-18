@@ -626,6 +626,26 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	if (s_sleep > 0)
+	{
+		if(randA(1))
+			s_sleep--;
+		if (!s_sleep)
+		{
+			printlog("당신은 졸음을 깼다.", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	if (s_sleep < 0)
+	{
+		s_sleep++;
+		if (!s_sleep)
+		{
+			printlog("당신은 잠에서 깼다.", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+
+	}
 	if(s_slaying)
 	{
 		s_slaying = 0;
@@ -809,14 +829,11 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	ReleaseMutex(mutx);
 
 
-	if(s_paralyse)
+	if(s_paralyse || you.s_sleep < 0)
 	{
 		you.time_delay += you.GetNormalDelay();
 		SetInter(TurnEnd());
 	}
-	
-
-
 	return inter;
 }
 bool players::TraningStealth()

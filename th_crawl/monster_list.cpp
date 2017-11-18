@@ -573,9 +573,9 @@ const mon_infor mondata[] = {
 	{22,22,0},{ATT_FIRE,ATT_LUNATIC,ATT_NONE},{name_infor("횃불",true),name_infor(),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,1,1,8},
 	
-	{MON_DOREMI,14,3904,name_infor("도레미",false),&img_named_doremi,130,8,10,
-	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_UNIQUE | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_SHIELD | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,3,1,12},
+	{ MON_DOREMI,14,3904,name_infor("도레미",false),&img_named_doremi,120,8,10,
+	{12,12,0},{ATT_SLEEP,ATT_NORMAL,ATT_NONE},{name_infor("몽혼",true),name_infor("공격",true),name_infor()},
+	M_FLAG_UNIQUE | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK, 3, 1, 12 },
 
 	{MON_FAIRY_HERO,12,977,name_infor("요정 영웅",true),&img_mons_fairy_green_hero,120,10,8,
 	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -863,9 +863,9 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
 	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_NONE_MOVE | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10 },
 
-	{ MON_SHEEP,1,1,name_infor("꿈꾸는 양",true),&img_mons_sheep,1,0,0,
-	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+	{ MON_SHEEP,10,675,name_infor("꿈꾸는 양",true),&img_mons_sheep,55,1,10,
+	{ 8,0,0 },{ ATT_SLEEP,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_ANIMAL | M_FLAG_SPEAK, 2, 1, 10 },
 
 	{ MON_BEE,1,1,name_infor("벌",true),&img_mons_bee,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },

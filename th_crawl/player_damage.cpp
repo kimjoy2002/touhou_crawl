@@ -401,6 +401,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_LUNATIC:
+	case ATT_SLEEP:
 	case ATT_CURSE:
 	case ATT_WEATHER:
 	case ATT_AUTUMN:
@@ -574,6 +575,22 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중했다. ");
 		}
 		break;
+	case ATT_SLEEP:
+		if (you.s_sleep >= 0)
+		{
+			if (a.order)
+			{
+				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), name.name.c_str(), "에게 명중했다. ");
+			}
+		}
+		else
+		{
+			if (a.order)
+			{
+				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 4, name_.name.c_str(), name_.name_is(true), name.name.c_str(), "의 꿈을 먹었다. ");
+			}
+		}
+		break;
 	case ATT_FIRE:
 		if(a.order)
 		{
@@ -718,7 +735,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	if(a.type < ATT_THROW_NORMAL)
 	{
 		if(s_paralyse)
-			damage_ *= 1.5f;
+			damage_ *= 1.2f;
+		if (s_sleep < 0)
+			damage_ *= 2.0f;
 		else if(s_confuse)
 			damage_ *= 1.2f;
 		else if(a.order && !(a.order)->isView())
@@ -767,6 +786,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 			evasion *= max(0.5f,edit_ev/accuracy_);
 		if(evasion<0)
 			evasion = 0;
+		if (you.s_sleep<0 || you.s_paralyse)
+			evasion = 0;
 		if(evasion>0.95f)
 			evasion = 0.95f;
 	}
@@ -790,6 +811,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 		shield_ = (float)sh/(sh+breaking);
 		if(a.type >= ATT_NO_GUARD)
 			shield_ = 0;
+		if(you.s_sleep<0 || you.s_paralyse)
+			shield_ = 0;
 		//볼트형 가드안되게 하려면 어떻게?
 	}
 
@@ -808,7 +831,13 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			print_damage_message(a,damage_!=0);
 
-			if(damage_)
+			if (s_sleep < 0 && a.type == ATT_SLEEP)
+			{
+				a.damage = damage_;
+				dead_order = &a;
+				HpUpDown(-1, DR_SLEEP);
+			}
+			else if(damage_)
 			{
 				enterlog();
 				a.damage = damage_;
@@ -867,6 +896,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetPoison(70+randA(20), 150, true);
 			if(a.type == ATT_POISON_BLAST)
 				SetPoison(70+randA(20), 150, true);
+			if (a.type == ATT_SLEEP) {
+				SetSleep(rand_int(10, 25));
+			}
 			if(a.type == ATT_THROW_FREEZING)
 			{
 				int frozen_ = randA_1(10);
@@ -895,6 +927,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					s_value_veiling = 0;
 				}
 			}
+
 			if(GetProperty(TPT_FORCE_OF_NATURE) && hp>0 && randA(1))
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)

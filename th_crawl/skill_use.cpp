@@ -948,7 +948,7 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 			for(int i=0; i<turn_; i++)
 			{
 				printarray(false,false,false,CL_danger,1,"마음을 읽는 중... ");
-				if(you.s_confuse || you.s_paralyse)
+				if(you.s_confuse || you.s_paralyse || you.s_sleep < 0)
 				{
 					fail_ = 1;
 					break;

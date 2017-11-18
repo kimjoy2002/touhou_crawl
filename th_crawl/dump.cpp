@@ -202,6 +202,7 @@ bool Dump(int type, string *filename_)
 						case ATT_AUTUMN:
 						case ATT_CHOAS:
 						case ATT_LUNATIC:
+						case ATT_SLEEP:
 							if(you.dead_order->order)
 								strncat(death_reason,"에게 ",64);
 							strncat(death_reason,"맞아죽었다.",64);
@@ -324,7 +325,15 @@ bool Dump(int type, string *filename_)
 					strncat(death_reason,temp_reason,64);
 				}
 				break;
-
+			case DR_SLEEP:
+				if (you.dead_order || you.dead_order->order)
+				{
+					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+					strncat(death_reason, temp_reason, 64);
+					strncat(death_reason, "에 의해 ", 64);
+				}
+				strncat(death_reason, "행복한 꿈을 꾸다 죽었다.", 64);
+				break;
 			case DR_EFFECT:
 				strncat(death_reason,"부작용에 의해 죽었다.",64);
 				break;

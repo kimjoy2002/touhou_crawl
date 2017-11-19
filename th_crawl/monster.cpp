@@ -1000,6 +1000,8 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 	name_infor name_;
 	if(a.order)
 		name_ = (*a.order->GetName());
+
+
 	if(!back_stab)
 	{
 		switch(a.type)
@@ -1140,6 +1142,11 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 	{
 		if(a.order)
 		{
+			if(a.type == ATT_SLEEP && state.GetState() == MS_SLEEP)
+			{
+				printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "의 꿈을 먹었다. ");
+				return;
+			}
 			switch(a.order->GetAttackType())
 			{	
 			case AWT_SHORTBLADE:
@@ -1515,12 +1522,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		}
 
-
-		
-		AttackedTarget(a.order);
 		//잠자는건 공격당한 후에 적용됨
 		if (a.type == ATT_SLEEP) {
 			SetSleep(rand_int(10, 25));
+		}
+		else {
+			AttackedTarget(a.order);
+
 		}
 	}
 	else
@@ -3607,7 +3615,8 @@ bool monster::SetSleep(int s_sleep_)
 {
 	if (s_sleep_ >= randA_1(100)) {
 
-		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "잠에 빠졌다. ");
+		if(isYourShight() && state.GetState() != MS_SLEEP)
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "잠에 빠졌다. ");
 		state.SetState(MS_SLEEP);
 		return true;
 	}

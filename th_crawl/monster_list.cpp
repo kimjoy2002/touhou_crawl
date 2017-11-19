@@ -118,7 +118,7 @@ const mon_infor mondata[] = {
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 
-	{MON_HUMAM_YINYANG,5,66,name_infor("음양사",false),&img_mons_human_yinyang,30,1,10,
+	{MON_HUMAM_YINYANG,4,66,name_infor("음양사",false),&img_mons_human_yinyang,30,1,10,
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10},
 

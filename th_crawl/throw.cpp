@@ -97,16 +97,16 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 }
 
 
-bool TanmacDeleteRand(tanmac_type type)
+bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 {
 	switch(type)
 	{
 		case TMT_BILL:
 		case TMT_AMULET:	
 		case TMT_POISON_NEEDLE:
-			return (randA(9)==0);
+			return isCanDelete_?true:(randA(9)==0);
 		case TMT_KIKU_COMPRESSER:
-			return true;		
+			return true;
 	}
 	return false;
 }
@@ -413,7 +413,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 
 		if(item_ && (infor_.order != &you || !you.s_knife_collect))
 		{
-			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4))
+			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
 				item* temp = env[current_level].AddItem(prev,item_,1);
 				temp->throw_item = true;

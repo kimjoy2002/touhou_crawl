@@ -913,6 +913,7 @@ enum book_list
 
 enum tanmac_type
 {
+	TMT_WEAPON = -1,
 	TMT_BILL = 0,
 	TMT_AMULET,
 	TMT_POISON_NEEDLE,

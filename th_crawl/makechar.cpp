@@ -199,7 +199,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_SICKLE:
 		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,1,1,0,0,13,7,false,name_infor("â",true),name_infor("",true),4.0f,70));
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 15));	
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 25));	
 		//it->value3 = 2;
 		it->value4 = 3;
 		it->curse = true;

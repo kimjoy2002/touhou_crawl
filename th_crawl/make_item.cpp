@@ -588,15 +588,15 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			}
 			else if(i<=20)
 			{
-				t->value1 = 6;
-				t->value2 = 6;
+				t->value1 = 4;
+				t->value2 = 4;
 				t->value5 = 0;
 				t->value6 = 0;
 				t->value7 = 10;
 				t->value8 = 5;
 				t->can_throw = true;
 				t->image = &img_item_weapon_knife;
-				t->name.name = "나이프";
+				t->name.name = "투척용 나이프";
 				t->name.name_type = false; //true 받침있음
 				t->weight = 1.5f;
 				t->value = 50;
@@ -797,7 +797,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 		}
 	case ITM_WEAPON_SPEAR:
 		{		
-			int i = pixed_type>0?pixed_type:randA_1(30);
+			int i = pixed_type>0?pixed_type:randA_1(40);
 			if(i<=10)
 			{
 				t->value1 = 2;
@@ -813,7 +813,22 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value = 70;
 				return;
 			}
-			else if(i<=20)
+			else if (i <= 20)
+			{
+				t->value1 = 3;
+				t->value2 = 7;
+				t->value6 = 0;
+				t->value7 = 13;
+				t->value8 = 7;
+				t->can_throw = false;
+				t->image = &img_item_weapon_spear;
+				t->name.name = "투척용 창";
+				t->name.name_type = true; //true 받침있음
+				t->weight = 4.0f;
+				t->value = 70;
+				return;
+			}
+			else if(i<=30)
 			{
 				t->value1 = -2;
 				t->value2 = 11;
@@ -828,7 +843,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value = 120;
 				return;
 			}
-			else if(i<=30)
+			else if(i<=40)
 			{
 				t->value1 = -1;
 				t->value2 = 10;

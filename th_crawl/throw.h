@@ -32,7 +32,7 @@ textures* GetTanmacBaseGraphic(int type);
 name_infor GetTanmacString(int type);
 attack_type GetTanmacAttackType(tanmac_type type);
 attack_type GetWeapontoTanmac(weapon_brand brand);
-bool TanmacDeleteRand(tanmac_type type);
+bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_);
 void MakeTanmac(item_infor* t, int select_);
 
 

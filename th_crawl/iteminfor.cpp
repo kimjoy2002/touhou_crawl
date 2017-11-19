@@ -181,11 +181,19 @@ string GetItemInfor(item *it)
 
 
 
+
+
 		if (it->value5 && it->value6)
 		{
 			text_ += "\n\n";
 			text_ += GetBrandInfor((weapon_brand)it->value5);
 			text_ += "\n";
+		}
+
+
+		
+		{
+			//스킬레벨 설명해주기
 		}
 
 		char temp[100];
@@ -195,7 +203,7 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		if (it->throw_item)
 		{
-			sprintf(temp, "\n이 아이템은 던질 수 있다.");
+			sprintf(temp, "\n이 아이템은 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
 			text_ += temp;
 		}
 		sprintf(temp, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
@@ -216,11 +224,11 @@ string GetItemInfor(item *it)
 			break;
 		case TMT_AMULET:
 			text_ += "레이무가 쓰는 이 치사한 아뮬렛에는 고성능의 호밍성능이 붙어있다.\n";
-			text_ += "거의 필중으로 맞출 수 있는 것이 자랑이다.\n";
+			text_ += "높은 명중율이 자랑이다.\n";
 			break;
 		case TMT_POISON_NEEDLE:
-			text_ += "이것은 던지면서 상대에게 박히는 침이다.\n";
-			text_ += "데미지는 낮지만 이 침에는 특별히 독이 발라져있는것 같다.\n";
+			text_ += "이것은 던지면서 상대에게 박히는 수리검이다.\n";
+			text_ += "데미지는 낮지만 이 수리검에는 특별히 독이 발라져있는것 같다.\n";
 			break;
 		case TMT_KIKU_COMPRESSER:
 			text_ += "캇파들의 발명품중 하나다. 물을 가득 압축하고있는 폭탄이다.\n";

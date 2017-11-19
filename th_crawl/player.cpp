@@ -932,7 +932,7 @@ int players::GetDisplayAc()
 }
 int players::GetDisplaySh()
 {
-	return (you.s_sleep<0 || you.s_paralyse) ? 0 : ev;
+	return (you.s_sleep<0 || you.s_paralyse) ? 0 : sh;
 }
 int players::GetThrowDelay(item_type type_)
 {
@@ -4152,12 +4152,14 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 		int type_ = 0;
 		int pentan_ = s_wind?8:1;
+		tanmac_type tanmac_type_ = TMT_WEAPON;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
 		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),8,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
 		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST )
 		{
-			type_ = GetTanmacGraphicType((tanmac_type)(*it).value4);
-			temp_infor.type2 = GetTanmacAttackType((tanmac_type)(*it).value4);
+			tanmac_type_ = (tanmac_type)(*it).value4;
+			type_ = GetTanmacGraphicType(tanmac_type_);
+			temp_infor.type2 = GetTanmacAttackType(tanmac_type_);
 		}
 		else
 		{
@@ -4197,7 +4199,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 
 		time_delay += GetThrowDelay((*it).type);
-		if((!s_knife_collect || TanmacDeleteRand((tanmac_type)(*it).value4)) && DeleteItem(it,1))
+		if((!s_knife_collect || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
 		{
 			list<item>::iterator it2;
 			for(it2=you.item_list.begin(); it2 != you.item_list.end(); it2++)

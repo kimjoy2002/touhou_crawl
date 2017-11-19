@@ -132,8 +132,12 @@ string tribe_property::GetName()
 			switch(value)
 			{
 			case 1:
+			case 2:
+			case 3:
 				return "강한 재생력";	
 			case -1:
+			case -2:
+			case -3:
 				return "약한 재생력";
 			default:
 				return "버그재생";

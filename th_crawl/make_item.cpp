@@ -620,7 +620,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 		}
 	case ITM_WEAPON_LONGBLADE:
 		{
-			int i = pixed_type>0?pixed_type:randA_1(30);
+			int i = pixed_type>0?pixed_type:randA_1(35);
 			if(i<=10)
 			{
 				t->value1 = 1;
@@ -663,6 +663,21 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->name.name = "대검";
 				t->name.name_type = true; //true 받침있음
 				t->weight = 12.0f;
+				t->value = 200;
+				return;
+			}
+			else if (i <= 35)
+			{
+				t->value1 = 3;
+				t->value2 = 10;
+				t->value6 = 0;
+				t->value7 = 14;
+				t->value8 = 6;
+				t->can_throw = true;
+				t->image = &img_mons_default;
+				t->name.name = "철륜";
+				t->name.name_type = true; //true 받침있음
+				t->weight = 3.0f;
 				t->value = 200;
 				return;
 			}

@@ -309,7 +309,7 @@ int players::GetThrowAttack(const item* it, bool max_)
 
 int players::GetThrowHit(const item* it)
 {
-	int hit_ = 3+s_dex/3;	
+	int hit_ = 3+s_dex/2;	
 
 	hit_ += it->value1 + it->value3 + GetSkillLevel(SKT_TANMAC, true) /2;
 	

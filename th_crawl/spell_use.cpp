@@ -26,6 +26,7 @@
 #include "event.h"
 #include "key.h"
 #include "rand_shuffle.h"
+#include "evoke.h"
 #include <algorithm>
 #include <math.h>
 
@@ -4155,10 +4156,15 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CONFUSE, 5));
 		break;
 	case MON_DOREMI:
+	{
 		list->push_back(spell(SPL_SUMMON_DREAM, 40));
 		list->push_back(spell(SPL_SLEEP_SMITE, 15));
 		list->push_back(spell(SPL_BLINK, 15));
+		item_infor t;
+		makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_DREAM_SOUL);
+		item_list_->push_back(t);
 		break;
+	}
 	case MON_FAIRY_HERO:
 		break;
 	case MON_FAIRY_SOCERER:

@@ -569,7 +569,7 @@ void wiz_mode()
 			key_ = waitkeyinput();
 
 
-			if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_SHEEP : MON_OCCULT_LONG + key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+			if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_DOREMI : MON_OCCULT_LONG + key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 			{
 				mon_->state.SetState(MS_SLEEP);
 				mon_->flag &= ~M_FLAG_SUMMON;

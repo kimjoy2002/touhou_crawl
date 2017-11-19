@@ -113,18 +113,16 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 void MakeTanmac(item_infor* t, int select_)
 {
 
-	tanmac_type type = TMT_BILL;
+	tanmac_type type = TMT_AMULET;
 	
+	random_extraction<tanmac_type> rand_;
 
-	int rand_ = randA(99);
-	if(rand_>70)
-		type = TMT_BILL;
-	else if(rand_>20)
-		type = TMT_POISON_NEEDLE;
-	else if(rand_>10)
-		type = TMT_AMULET;
-	else
-		type = TMT_KIKU_COMPRESSER;
+	rand_.push(TMT_POISON_NEEDLE,20);
+
+	rand_.push(TMT_AMULET, 40);
+	rand_.push(TMT_KIKU_COMPRESSER, 10);
+
+	type = rand_.pop();
 	
 	if(select_ != -1)
 		type = (tanmac_type)select_;
@@ -138,7 +136,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_BILL;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->num = (select_ != -1)?20:rand_int(5,20);
+		t->num = (select_ != -1)?30:rand_int(10,30);
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
@@ -147,13 +145,13 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value = 2;
 		break;
 	case TMT_AMULET:
-		t->value1 = 99;
-		t->value2 = 9;
+		t->value1 = 15;
+		t->value2 = 8;
 		t->value3 = 0;
 		t->value4 = TMT_AMULET;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->num = (select_ != -1)?8:rand_int(1,8);
+		t->num = (select_ != -1)?10:rand_int(3,15);
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
@@ -168,7 +166,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_POISON_NEEDLE;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->num = (select_ != -1)?8:rand_int(1,8);
+		t->num = (select_ != -1)?8:rand_int(3,15);
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
@@ -183,7 +181,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_KIKU_COMPRESSER;
 		t->value5 = 0;
 		t->value6 = 0;
-		t->num = (select_ != -1)?8:rand_int(1,8);
+		t->num = (select_ != -1)?10:rand_int(3,15);
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
@@ -338,7 +336,7 @@ name_infor GetTanmacString(int type)
 	case TMT_AMULET:
 		return name_infor("호밍아뮬렛",true);
 	case TMT_POISON_NEEDLE:
-		return name_infor("독침",true);
+		return name_infor("맹독 수리검",true);
 	case TMT_KIKU_COMPRESSER:
 		return name_infor("키쿠이치몬지 컴프레서",false);
 	}

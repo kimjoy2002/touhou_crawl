@@ -492,7 +492,7 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(WeaponSelect(0),60,false);
 		MakeStartItem(SIT_ARMOUR_0,1);
 		MakeStartItem(SIT_SMALL_SHIELD,2);
-		MakeStartItem(SIT_TANMAC,3);
+		MakeStartItem(SIT_SPECIAL_TANMAC,3);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_TANMAC,30,false);

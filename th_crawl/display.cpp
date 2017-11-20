@@ -29,6 +29,7 @@
 #include "ring.h"
 #include "book.h"
 #include "spellcard.h"
+#include "throw.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -205,7 +206,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	char temp[100];
 	int one_ = 50, two_ = 100;
 
-	pfont->DrawTextA(pSprite, "식별된 아이템들", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	pfont->DrawTextA(pSprite, "식별된 아이템 & 자동 줍기 설정", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += 2* fontDesc.Height;
 
 	bool first_ = false;
@@ -373,6 +374,27 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
+		}
+		else if (i >= IDEN_CHECK_ETC_START && i < IDEN_CHECK_ETC_END) {
+			int cur_ = i - IDEN_CHECK_ETC_START;
+			if (i == IDEN_CHECK_ETC_START) {
+				first_ = true;
+			}
+			if (first_)
+			{
+				rc.left = one_;
+				rc.top += fontDesc.Height;
+				sprintf_s(temp, 100, "<기타>");
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+				rc.top += 3 * fontDesc.Height;
+				first_ = false;
+			}
+			rc.left = two_;
+			GetTanmacBaseGraphic(cur_)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
+			sprintf_s(temp, 100, "%c - %s", index, GetTanmacString(cur_).name.c_str());
+			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+			rc.top += 2 * fontDesc.Height;
+			num++;
 		}
 	}
 

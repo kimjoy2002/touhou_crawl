@@ -818,6 +818,8 @@ bool item::isautopick()
 	}
 	case ITM_MENUAL:
 		return true;
+	case ITM_THROW_TANMAC:
+		return iden_list.autopickup[value4 +IDEN_CHECK_ETC_START];
 	}
 	return false;
 }
@@ -1043,10 +1045,15 @@ bool item::Enchant(equip_type kind_, int acc_)
 	}
 	return enchant_;
 }
-void item::pick()
+bool item::pick()
 {
+	bool return_ = false;
 	drop = false;
-	throw_item = false;
+	if (throw_item) {
+		if(type != ITM_THROW_TANMAC && can_throw)
+			return_ = true;
+		throw_item = false;
+	}
 	prev_sight = false;
 	//if(type == ITM_GOAL && value1 ==0)
 	//{
@@ -1064,6 +1071,7 @@ void item::pick()
 	//	AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 	//	value1++;
 	//}
+	return return_;
 }
 int item::action(int delay_)
 {

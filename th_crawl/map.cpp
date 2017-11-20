@@ -1935,7 +1935,7 @@ void map_algorithms_tuto03(int num)
 	env[num].MakeEvent(27,coord_def(25,7),EVT_SIGHT);
 
 	env[num].MakeEvent(28,coord_def(31,7),EVT_SIGHT);
-	env[num].MakeItem(coord_def(30,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_BILL));
+	env[num].MakeItem(coord_def(30,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_AMULET));
 	env[num].MakeItem(coord_def(32,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_POISON_NEEDLE));
 	
 	env[num].MakeEvent(29,coord_def(37,7),EVT_SIGHT);

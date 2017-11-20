@@ -309,6 +309,8 @@ extern textures img_item_weapon_roundshield;
 extern textures img_item_weapon_shield;
 extern textures img_item_weapon_momizishield;
 extern textures img_item_weapon_kiteshield;
+extern textures img_item_weapon_chakram;
+extern textures img_item_weapon_javelin;
 
 
 
@@ -334,7 +336,7 @@ extern textures img_item_amulet;
 
 extern textures img_item_needle;
 extern textures img_item_kikuichi;
-
+extern textures img_item_doggojeo;
 extern textures img_item_spellcard;
 extern textures img_item_sweet_potato;
 extern textures img_item_chocolet;
@@ -359,7 +361,8 @@ extern textures img_tanmac_poison_big[];  //0¾¸
 extern textures img_tanmac_poison_small[]; //0¾¸
 extern textures img_tanmac_air[]; //0
 extern textures img_tanmac_rock_small[]; //0¾¸
-extern textures img_tanmac_rock_big[];
+extern textures img_tanmac_rock_big[]; 
+extern textures img_tanmac_doggojeo[];
 extern textures img_tanmac_small[6][4];
 
 

@@ -821,7 +821,8 @@ textures img_item_weapon_roundshield(&texture_item01, 52, 255);
 textures img_item_weapon_shield(&texture_item01, 53, 255);
 textures img_item_weapon_momizishield(&texture_item01, 54, 255);
 textures img_item_weapon_kiteshield(&texture_item01, 55, 255);
-
+textures img_item_weapon_chakram(&texture_item02, 173, 255);
+textures img_item_weapon_javelin(&texture_item02, 174, 255);
 
 
 
@@ -971,6 +972,7 @@ textures img_item_amulet(&texture_item01, 16, 255);
 
 textures img_item_needle(&texture_item01, 141, 255);
 textures img_item_kikuichi(&texture_item01, 142, 255);
+textures img_item_doggojeo(&texture_item02, 172, 255);
 
 textures img_item_spellcard(&texture_item01, 181, 255);
 textures img_item_sweet_potato(&texture_item01, 182, 255); 
@@ -1145,6 +1147,15 @@ textures img_tanmac_rock_big[] = {textures(&texture_item01, 200, 255),
 								textures(&texture_item01, 205, 255),
 							    textures(&texture_item01, 206, 255),
 							    textures(&texture_item01, 207, 255)
+};
+textures img_tanmac_doggojeo[] = { textures(&texture_item02, 208, 255),
+								textures(&texture_item02, 209, 255),
+								textures(&texture_item02, 210, 255),
+								textures(&texture_item02, 211, 255),
+								textures(&texture_item02, 212, 255),
+								textures(&texture_item02, 213, 255),
+								textures(&texture_item02, 214, 255),
+								textures(&texture_item02, 215, 255)
 };
 textures img_tanmac_small[6][4] =
 {
@@ -2286,6 +2297,12 @@ int texturetoint(textures* input)
 		return 388;
 	else if (input == &img_item_artifact_ring)
 		return 389;
+	else if (input == &img_item_weapon_chakram)
+		return 390;
+	else if (input == &img_item_weapon_javelin)
+		return 391;
+	else if (input == &img_item_doggojeo)
+		return 392;
 	else
 		return 0;
 }
@@ -3072,9 +3089,13 @@ textures* inttotexture(int input)
 	case 388:
 		return &img_item_ring[18];
 	case 389:
-		return &img_item_ring[19];
-	case 390:
 		return &img_item_artifact_ring;
+	case 390:
+		return &img_item_weapon_chakram;
+	case 391:
+		return &img_item_weapon_javelin;
+	case 392:
+		return &img_item_doggojeo;
 	default:
 		return &img_mons_default;
 	}

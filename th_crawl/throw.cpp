@@ -24,14 +24,16 @@ int GetTanmacGraphicType(tanmac_type type)
 {
 	switch(type)
 	{
-		case TMT_BILL:
-			return 1;
+		//case TMT_BILL:
+		//	return 1;
 		case TMT_AMULET:
 			return 2;			
 		case TMT_POISON_NEEDLE:
 			return 20;
 		case TMT_KIKU_COMPRESSER:
 			return 18;
+		case TMT_DOGGOJEO:
+			return 43;
 		/*아이템에서 나오지않는 번호들
 			return 10;
 			return 11;
@@ -61,7 +63,6 @@ attack_type GetTanmacAttackType(tanmac_type type)
 {
 	switch(type)
 	{
-		case TMT_BILL:
 		case TMT_AMULET:
 		case TMT_KIKU_COMPRESSER:
 			return ATT_THROW_NORMAL;			
@@ -101,9 +102,9 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 {
 	switch(type)
 	{
-		case TMT_BILL:
-		case TMT_AMULET:	
+		case TMT_AMULET:
 		case TMT_POISON_NEEDLE:
+		case TMT_DOGGOJEO:
 			return isCanDelete_?true:(randA(9)==0);
 		case TMT_KIKU_COMPRESSER:
 			return true;
@@ -119,8 +120,9 @@ void MakeTanmac(item_infor* t, int select_)
 
 	rand_.push(TMT_POISON_NEEDLE,20);
 
-	rand_.push(TMT_AMULET, 40);
+	rand_.push(TMT_AMULET, 30);
 	rand_.push(TMT_KIKU_COMPRESSER, 10);
+	rand_.push(TMT_DOGGOJEO, 10);
 
 	type = rand_.pop();
 	
@@ -129,7 +131,7 @@ void MakeTanmac(item_infor* t, int select_)
 
 	switch(type)
 	{
-	case TMT_BILL:
+	/*case TMT_BILL:
 		t->value1 = 5;
 		t->value2 = 5;
 		t->value3 = 0;
@@ -143,7 +145,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->name = GetTanmacString(t->value4);
 		t->weight = 0.1f*t->num;
 		t->value = 2;
-		break;
+		break;*/
 	case TMT_AMULET:
 		t->value1 = 15;
 		t->value2 = 8;
@@ -161,7 +163,7 @@ void MakeTanmac(item_infor* t, int select_)
 		break;
 	case TMT_POISON_NEEDLE:
 		t->value1 = 9;
-		t->value2 = 1;
+		t->value2 = 2;
 		t->value3 = 0;
 		t->value4 = TMT_POISON_NEEDLE;
 		t->value5 = 0;
@@ -188,7 +190,22 @@ void MakeTanmac(item_infor* t, int select_)
 		t->name = GetTanmacString(t->value4);
 		t->weight = 0.5f*t->num;
 		t->value = 100;
-		break;	
+		break;
+	case TMT_DOGGOJEO:
+		t->value1 = 6;
+		t->value2 = 10;
+		t->value3 = 0;
+		t->value4 = TMT_DOGGOJEO;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->num = (select_ != -1) ? 10 : rand_int(2, 8);
+		t->is_pile = true;
+		t->can_throw = true;
+		t->image = GetTanmacBaseGraphic(t->value4);
+		t->name = GetTanmacString(t->value4);
+		t->weight = 0.5f*t->num;
+		t->value = 20;
+		break;
 	}
 
 
@@ -306,6 +323,8 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_blast[type-36];
 	case 42:
 		return &img_thunder[PathToNum(path)];
+	case 43:
+		return &img_tanmac_doggojeo[direc];
 	}
 }
 
@@ -314,7 +333,8 @@ textures* GetTanmacBaseGraphic(int type)
 	switch(type)
 	{
 	default://없음 이거 뜨면 버그
-	case TMT_BILL:
+	//case TMT_BILL:
+	//	return &img_tanmac_bill[1];
 		return &img_tanmac_bill[1];
 	case TMT_AMULET:
 		return &img_tanmac_amulet[0];
@@ -322,6 +342,8 @@ textures* GetTanmacBaseGraphic(int type)
 		return &img_item_needle;
 	case TMT_KIKU_COMPRESSER:
 		return &img_item_kikuichi;
+	case TMT_DOGGOJEO:
+		return &img_item_doggojeo;
 	}
 }
 
@@ -331,14 +353,16 @@ name_infor GetTanmacString(int type)
 	{
 	default://없음 이거 뜨면 버그
 		return name_infor("버그탄막",true);
-	case TMT_BILL:
-		return name_infor("부적",true);
+	//case TMT_BILL:
+	//	return name_infor("부적",true);
 	case TMT_AMULET:
 		return name_infor("호밍아뮬렛",true);
 	case TMT_POISON_NEEDLE:
 		return name_infor("맹독 수리검",true);
 	case TMT_KIKU_COMPRESSER:
 		return name_infor("키쿠이치몬지 컴프레서",false);
+	case TMT_DOGGOJEO:
+		return name_infor("독고저", false);
 	}
 }
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete)

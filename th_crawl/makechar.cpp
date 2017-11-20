@@ -358,7 +358,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_TANMAC:
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t, TMT_BILL));
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t, TMT_AMULET));
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);
 		break;

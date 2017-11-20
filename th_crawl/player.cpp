@@ -3503,7 +3503,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 							printlog("개 획득)",true,false,false,CL_normal);
 						}
 					}
-					t->pick();
+					if (t->pick())
+						you.throw_weapon = &(*it);
 					final_item = it->id;
 					final_num = t->num;
 					ReleaseMutex(mutx);
@@ -3560,7 +3561,10 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 				printlog(" - ",false,false,false,(*t).item_color());
 				printlog((*t).GetName(),true,false,false,(*t).item_color());
 			}
-			it_temp->pick();
+			if (it_temp->pick()) {
+				throw_weapon = &(*it_temp);
+			}
+
 			final_item = t->id;
 			final_num = t->num;
 			ReleaseMutex(mutx);
@@ -4166,6 +4170,10 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		int pentan_ = s_wind?8:1;
 		tanmac_type tanmac_type_ = TMT_WEAPON;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
+		if ((*it).type == ITM_THROW_TANMAC && (*it).value4 == TMT_DOGGOJEO) {
+			pentan_ = 8;
+			beam_type_ = BMT_PENETRATE;
+		}
 		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),8,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
 		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST )
 		{

@@ -75,7 +75,7 @@ void wiz_mode()
 			break;
 		case 'A':
 		{
-			printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구 R-목걸이", true, false, false, CL_help);
+			printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구 R-목걸이 f-투척무기", true, false, false, CL_help);
 			printlog("어느 아이템을 얻어볼까?", false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
@@ -242,6 +242,13 @@ void wiz_mode()
 				else {
 					printlog(" 취소", true, false, false, CL_help);
 				}
+			}
+			return;
+			case 'f':
+			{
+				item_infor t;
+				makeitem(ITM_THROW_TANMAC, 0, &t, -1);
+				env[current_level].MakeItem(you.position, t);
 			}
 			return;
 			default:

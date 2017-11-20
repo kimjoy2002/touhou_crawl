@@ -669,12 +669,12 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			else if (i <= 35)
 			{
 				t->value1 = 3;
-				t->value2 = 10;
+				t->value2 = 9;
 				t->value6 = 0;
 				t->value7 = 14;
-				t->value8 = 6;
+				t->value8 = 5;
 				t->can_throw = true;
-				t->image = &img_mons_default;
+				t->image = &img_item_weapon_chakram;
 				t->name.name = "철륜";
 				t->name.name_type = true; //true 받침있음
 				t->weight = 3.0f;
@@ -830,13 +830,13 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			}
 			else if (i <= 20)
 			{
-				t->value1 = 3;
-				t->value2 = 7;
+				t->value1 = -1;
+				t->value2 = 11;
 				t->value6 = 0;
 				t->value7 = 13;
 				t->value8 = 7;
 				t->can_throw = false;
-				t->image = &img_item_weapon_spear;
+				t->image = &img_item_weapon_javelin;
 				t->name.name = "투척용 창";
 				t->name.name_type = true; //true 받침있음
 				t->weight = 4.0f;
@@ -1091,6 +1091,10 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
 			int cur = i - IDEN_CHECK_BOOK_START;
+			iden_list.autopickup[i] = false;
+		}
+		else if (i >= IDEN_CHECK_ETC_START && i < IDEN_CHECK_ETC_END) {
+			int cur = i - IDEN_CHECK_ETC_START;
 			iden_list.autopickup[i] = false;
 		}
 	}

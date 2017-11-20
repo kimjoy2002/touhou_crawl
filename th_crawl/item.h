@@ -124,7 +124,11 @@ enum iden_check
 
 	IDEN_CHECK_BOOK_END = IDEN_CHECK_BOOK_START + BOOK_LAST,
 
-	IDEN_CHECK_END = IDEN_CHECK_BOOK_END
+	IDEN_CHECK_ETC_START = IDEN_CHECK_BOOK_END,
+
+	IDEN_CHECK_ETC_END = IDEN_CHECK_ETC_START + TMT_MAX,
+
+	IDEN_CHECK_END = IDEN_CHECK_ETC_END
 };
 
 class Iden_collect
@@ -217,7 +221,7 @@ public:
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();
 	bool Enchant(equip_type kind_, int acc_);
-	void pick();
+	bool pick(); //리턴값은 던지기 무기일때
 
 	void Identify();//걍식별
 	void autoIdentify();//장신구계열의 자동식별

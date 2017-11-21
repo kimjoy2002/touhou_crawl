@@ -51,6 +51,16 @@ extern bool widesearch; //X커맨드용
 int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
 
+
+infoBox::infoBox() 
+{
+	x_size = 240;
+	y_size = 80;
+	x_comma = 10;
+	y_comma = 10;
+	draw = false;
+
+}
 //
 // 프레임계산 함수
 //
@@ -900,6 +910,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
+	infobox.init();
 	{
 		int i=0;
 		RECT rc={32*16+50, 10, option_mg.getWidth(), option_mg.getHeight()};
@@ -1274,6 +1285,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				sprintf_s(temp,128,"위험도(%d)",you.tension_gauge);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_small_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.");
 				//rc.left += fontDesc.Width*(13+(you.as_penalty>9?1:0));	
 				rc.left = 32*16+50;
 				rc.top +=fontDesc.Height;
@@ -1286,6 +1299,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					CL_bad;
 				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 10, fontDesc.Height,
+					"장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.");
 				//rc.left += fontDesc.Width*(13+(you.as_penalty>9?1:0));	
 				rc.left = 32*16+50;
 				rc.top +=fontDesc.Height;
@@ -1293,95 +1308,130 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.GetStatPanalty())
 			{
 				pfont->DrawTextA(pSprite,"스탯패널티", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 10, fontDesc.Height,
+					"스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.");
 				rc.left += fontDesc.Width*11;
 			}
 			if(you.s_exhausted)
 			{
 				pfont->DrawTextA(pSprite,"피로", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"피로한 동안엔 몇몇 행동이 불가능합니다.");
 				rc.left += fontDesc.Width*5;
 			}
 			if (you.s_super_graze)
 			{
 				pfont->DrawTextA(pSprite, "근성회피", -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_super_graze>3? CL_normal :CL_white_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"회피가능한 모든 공격을 100% 회피합니다.");
 				rc.left += fontDesc.Width * 9;
-
 			}
 			if(you.s_trans_panalty)
 			{
 				pfont->DrawTextA(pSprite,"시공부작용", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_trans_panalty<=2?CL_bad:(you.s_trans_panalty<5?CL_warning:CL_small_danger));
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 10, fontDesc.Height,
+					"시공마법의 성공율이 대폭 감소합니다.");
 				rc.left += fontDesc.Width*11;
 			}
 			if(you.s_spellcard)
 			{
 				pfont->DrawTextA(pSprite,"스펠카드", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_spellcard>5?CL_white_blue:CL_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"당신은 스펠카드를 사용하고 있습니다.");
 				rc.left += fontDesc.Width*9;	
 			}
 			if(you.s_autumn>0)
 			{
 				pfont->DrawTextA(pSprite,"공기화", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_autumn>0?CL_autumn:CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신은 믿을 수 없을 정도로 은밀합니다."); 
 				rc.left += fontDesc.Width*7;
 			}
 			if(you.s_wind)
 			{
 				pfont->DrawTextA(pSprite,"건신초래풍", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 10, fontDesc.Height,
+					"모든 근접, 원거리공격이 범위 공격이 됩니다.");
 				rc.left += fontDesc.Width*11;
 			}
 			if(you.s_knife_collect)
 			{
 				pfont->DrawTextA(pSprite,"탄막회수", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"당신이 쏜 탄막 아이템은 던지자마자 인벤토리로 회수됩니다."); 
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_drunken)
 			{
 				pfont->DrawTextA(pSprite,"음주", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"술이 취해있습니다. 올바르게 걷기 힘들며 마법 성공율이 약간 내려갑니다.");
 				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_lunatic)
 			{
 				pfont->DrawTextA(pSprite,"광기", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"대부분의 복잡한 행동이 불가능해지지만 근접 공격력이 대폭 상승합니다.");
 				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_catch)
 			{
 				pfont->DrawTextA(pSprite,"잡기", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_yuigi);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"당신은 근접한 상대를 잡고 있습니다. 권능에 부가 효과가 생깁니다.");
 				rc.left += fontDesc.Width*5;
 
 			}
 			if(you.s_ghost)
 			{
 				pfont->DrawTextA(pSprite,"유령", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_ghost>1?CL_white_blue:CL_yuyuko);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"당신의 주변엔 유령들이 꼬이고 있습니다.");
 				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_dimension)
 			{
 				pfont->DrawTextA(pSprite,"차원고정", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_dimension>3?CL_yukari:CL_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width *8, fontDesc.Height,
+					"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다."); 
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_mirror)
 			{
 				pfont->DrawTextA(pSprite,"반사", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"받은 모든 공격을 상대에게 되돌려 줍니다.");
 				rc.left += fontDesc.Width*5;
 
 			}
 			if(you.s_paradox)
 			{
 				pfont->DrawTextA(pSprite,"패러독스", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"탄막이나 일부 마법을 사용하면 연달아 2번 나갑니다.");
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_the_world)
 			{
 				pfont->DrawTextA(pSprite,"시간정지", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_the_world>1?CL_white_blue:you.s_the_world<0?CL_normal:CL_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"당신을 제외한 모든 물체는 움직일 수 없습니다."); 
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_mana_delay)
 			{
 				pfont->DrawTextA(pSprite,"영력회복지연", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 12, fontDesc.Height,
+					"영력이 회복되지않고 있습니다.");
 				rc.left += fontDesc.Width*13;
 
 			}
 			if(you.s_eirin_poison_time)
 			{				
 				D3DCOLOR color_ = you.s_eirin_poison_time>11?CL_small_danger:CL_danger;
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"시간이 지나면 수치만큼 지속데미지를 받습니다.");
 				sprintf_s(temp,128,"부작용(%d)",you.s_eirin_poison);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 				rc.left += fontDesc.Width*(1+strlen(temp));
@@ -1390,6 +1440,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{				
 				D3DCOLOR color_ = CL_danger;
 				sprintf_s(temp,128,"전이불가");
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"전이관련 마법과 아이템을 사용할 수 없습니다.");
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 				rc.left += fontDesc.Width*9;
 			}
@@ -1397,6 +1449,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{				
 				D3DCOLOR color_ = you.force_strong?CL_white_blue:CL_danger;
 				sprintf_s(temp,128,you.force_strong?"강화":"약화");
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					you.force_strong ? "당신의 모든 공격과 마법은 강화되었습니다.":
+					"당신의 모든 공격과 마법은 약화되었습니다.");
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 				rc.left += fontDesc.Width*5;
 			}
@@ -1408,62 +1463,86 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.power<=200)
 			{
 				pfont->DrawTextA(pSprite,"파워부족", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.power<=100?CL_danger:CL_warning);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"파워가 부족하여 공격력이 약해집니다.");
 				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_poison)
 			{
 				pfont->DrawTextA(pSprite,"독", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_poison<=50?CL_warning:(you.s_poison<=100?CL_small_danger:CL_danger));
-				rc.left += fontDesc.Width*3;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 2, fontDesc.Height,
+					"지속적으로 독 데미지를 받고있습니다.");
+				rc.left += fontDesc.Width*3;
 			}
 			if(you.s_tele)
 			{
 				pfont->DrawTextA(pSprite,"공간", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_blue);
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"일정 턴이 지나면 같은 층 무작위 위치로 이동됩니다.");
+				rc.left += fontDesc.Width*5;
 			}
 			if((you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
 			{
 				pfont->DrawTextA(pSprite,"가속", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.alchemy_buff == ALCT_HASTE?CL_alchemy:(you.s_haste>10?CL_white_blue:CL_blue));
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"당신의 모든 행동속도는 1.5배 빨라집니다.");
+				rc.left += fontDesc.Width*5;
 			}
 			else if(you.s_slow && !(you.s_haste || you.alchemy_buff == ALCT_HASTE))
 			{
 				pfont->DrawTextA(pSprite,"감속", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"당신의 모든 행동속도는 0.7배로 느려집니다.");
+				rc.left += fontDesc.Width*5;
 			}
 			else if((you.s_haste || you.alchemy_buff == ALCT_HASTE) && you.s_slow)
 			{
 				pfont->DrawTextA(pSprite,"가속+감속", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_magic);
-				rc.left += fontDesc.Width*10;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 9, fontDesc.Height,
+					"가속과 감속효과를 동시에 받아 안정된 상태입니다.");
+				rc.left += fontDesc.Width*10;
 
 			}
 			if(you.alchemy_buff == ALCT_STONE_FIST)
 			{				
 				pfont->DrawTextA(pSprite,"돌주먹", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
-				rc.left += fontDesc.Width*7;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신의 다음 맨손 공격은 추가 데미지를 줍니다.");
+				rc.left += fontDesc.Width*7;
 			}
 			if(you.alchemy_buff == ALCT_DIAMOND_HARDNESS)
 			{
 				pfont->DrawTextA(pSprite,"다이아", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"잠깐동안 추가 방어력을 얻습니다."); 
 				rc.left += fontDesc.Width*7;
 			}
 			if(you.alchemy_buff == ALCT_POISON_BODY)
 			{				
 				pfont->DrawTextA(pSprite,"포이즌", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
-				rc.left += fontDesc.Width*7;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"주변 8타일의 적에게 지속적으로 독 데미지를 줍니다."); 
+				rc.left += fontDesc.Width*7;
 			}
 			if(you.alchemy_buff == ALCT_STONE_FORM)
 			{				
 				pfont->DrawTextA(pSprite,"무념무상", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
-				rc.left += fontDesc.Width*9;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"근접 공격력이 상승하고 받는 데미지가 66%가 되지만 이동속도가 1.3배 느려집니다."); 
+				rc.left += fontDesc.Width*9;
 			}
 			if(you.alchemy_buff == ALCT_AUTUMN_BLADE)
 			{				
 				pfont->DrawTextA(pSprite,"블레이드", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
-				rc.left += fontDesc.Width*9;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"근접 공격력이 3배가 됩니다."); 
+				rc.left += fontDesc.Width*9;
 			}
 			if(you.alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 			{				
 				pfont->DrawTextA(pSprite,"현자의돌", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_alchemy);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"능력사용(a키)으로 5원소의 마법이 저렴하게 사용가능합니다.");
 				rc.left += fontDesc.Width*9;	
 			}
 			if(you.s_unluck > 0)
@@ -1471,16 +1550,22 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				if(you.s_unluck <= 3)
 				{
 					pfont->DrawTextA(pSprite,"흉", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_warning);
+					CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width *2, fontDesc.Height,
+						"당신은 불행합니다! 경험치를 먹어야 사라집니다.");
 					rc.left += fontDesc.Width*3;	
 				}
 				else if(you.s_unluck <= 6)
 				{
 					pfont->DrawTextA(pSprite,"대흉", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_small_danger);
+					CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+						"당신은 아주 불행합니다! 경험치를 먹어야 사라집니다.");
 					rc.left += fontDesc.Width*5;	
 				}
 				else
 				{
 					pfont->DrawTextA(pSprite,"불멸", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+					CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+						"당신은 끔찍하게 불행합니다! 경험치를 먹어야 사라집니다.");
 					rc.left += fontDesc.Width*5;	
 				}
 			}
@@ -1493,12 +1578,16 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{			
 					sprintf_s(temp,128,"화저%s",rf_>0?"+":"-");				 
 					pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,rf_>0?CL_good:CL_danger);
+					CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width *5, fontDesc.Height,
+						"화염 저항이 " + rf_>0 ? "높아졌습니다." : "낮아졌습니다.");
 					rc.left += fontDesc.Width*6;	
 				}
 				if(rc_)
 				{				
 					sprintf_s(temp,128,"냉저%s",rc_>0?"+":"-");	
 					pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,rc_>0?CL_good:CL_danger);
+					CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 5, fontDesc.Height,
+						"냉기 저항이 " + rc_>0 ? "높아졌습니다." : "낮아졌습니다.");
 					rc.left += fontDesc.Width*6;	
 				}
 			}
@@ -1507,93 +1596,131 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.s_confuse)
 			{
 				pfont->DrawTextA(pSprite,"혼란", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"이동을 포함한 대부분의 행동을 제대로 할 수 없습니다.");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_frozen)
 			{
 				pfont->DrawTextA(pSprite,"빙결", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_frozen>5?CL_blue:CL_bad);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"이동속도가 저하됩니다.");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_elec)
 			{
 				pfont->DrawTextA(pSprite,"방전", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"일정 턴마다 주변의 생물체에게 전기공격이 가해집니다.");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_paralyse)
 			{
 				pfont->DrawTextA(pSprite,"마비", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"움직일 수 없습니다!");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_levitation)
 			{
 				pfont->DrawTextA(pSprite,"비행", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_levitation>10?CL_white_blue:CL_blue);
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"하늘을 날아 몇몇 지형물체를 뛰어넘을 수 있습니다."); 
+				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_glow)
 			{
 				pfont->DrawTextA(pSprite,"발광", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_white_blue);
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"당신에게 빛이 비춰지고 있어 회피율이 낮아집니다."); 
+				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_graze && !you.s_super_graze)
 			{
 				pfont->DrawTextA(pSprite,"그레이즈", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_graze<0?CL_normal:you.s_graze>10?CL_white_blue:CL_blue);
-				rc.left += fontDesc.Width*9;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"회피 가능한 탄막을 손쉽게 피할 수 있습니다."); 
+				rc.left += fontDesc.Width*9;
 			}
 			if(you.s_silence)
 			{
 				pfont->DrawTextA(pSprite,"정적", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_silence>5?CL_white_blue:CL_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width *4, fontDesc.Height,
+					"당신은 소리내는 행동을 할 수 없습니다.");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_sick)
 			{
 				pfont->DrawTextA(pSprite,"병", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_sick>50?(you.s_sick>100?CL_danger:CL_small_danger):CL_warning);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 2, fontDesc.Height,
+					"지속시간동안 자연 체력회복이 불가능합니다.");
 				rc.left += fontDesc.Width*3;	
 			}
 			if(you.s_veiling)
 			{
 				pfont->DrawTextA(pSprite,"베일링", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신에게 근접공격을 하려는 상대에게 데미지를 입히고 사라집니다.");
 				rc.left += fontDesc.Width*7;	
 			}
 			if(you.s_invisible || you.togle_invisible)
 			{
 				pfont->DrawTextA(pSprite,"투명", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.togle_invisible?CL_speak:you.s_invisible>10?CL_white_blue:CL_blue);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"투명해져서 투명을 볼 수 없는 적의 눈에 띄지 않습니다.");
 				rc.left += fontDesc.Width*5;	
 			}
 			if(you.s_swift)
 			{
 				pfont->DrawTextA(pSprite, you.s_swift>0?"신속":"이속감소", -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_swift>10?CL_white_blue:(you.s_swift>0?CL_blue:CL_danger));
+				
+
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * you.s_swift > 0 ? 4:8, fontDesc.Height,
+					you.s_swift > 0 ? "당신의 이동속도는 빠릅니다." : "당신의 이동속도는 느립니다.");
 				rc.left += fontDesc.Width*(you.s_swift>0?5:9);
 			}
 			if(you.s_superman)
 			{
 				pfont->DrawTextA(pSprite,"초인", -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_superman>5?CL_white_puple:CL_magic);
-				rc.left += fontDesc.Width*5;	
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"초인과 같이 이동속도가 빨라졌습니다."); 
+				rc.left += fontDesc.Width*5;
 			}
 			if(you.s_slaying)
 			{
 				sprintf_s(temp,128,"전투력(%s%d)",you.s_slaying>0?"+":"",you.s_slaying);
 				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.s_slaying>0?CL_white_blue:CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신의 근접, 탄막공격력이 변화되었습니다."); 
 				rc.left += fontDesc.Width*(11+(you.s_slaying>9?1:0));
 			}
 			if (you.s_none_move)
 			{
 				pfont->DrawTextA(pSprite, "이동불가", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 8, fontDesc.Height,
+					"무엇인가에 잡혀서 이동할 수 없습니다."); 
 				rc.left += fontDesc.Width * 9;
 			}
 			if (you.s_night_sight_turn)
 			{
 				pfont->DrawTextA(pSprite, "야맹증", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신은 한치앞도 보이지않습니다.");
 				rc.left += fontDesc.Width * 7;
 			}
 			if (you.s_sleep>0)
 			{
 				sprintf_s(temp, 128, "졸음(%02d)", min(99,you.s_sleep));
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 4, fontDesc.Height,
+					"졸음이 오고있습니다. 수치가 100이 되면 강제로 잠을 잡니다.");
 				rc.left += fontDesc.Width * 11;
 			}
 			else if (you.s_sleep<0)
 			{
 				pfont->DrawTextA(pSprite, "수면", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_danger);
+				CheckMouseInfo(pSprite, pfont, rc, fontDesc.Width * 6, fontDesc.Height,
+					"당신은 잠을 자고 있습니다!");
 				rc.left += fontDesc.Width * 5;
 			}
 		}
@@ -1956,8 +2083,32 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.top += fontDesc.Height;	
 		pfont->DrawTextA(pSprite,"(z-일시정지 x-보통속도 c-배속)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
+	drawInfoBox(pSprite, pfont);
 
+}
+extern POINT MousePoint;
+void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, char* message)
+{
+	if (MousePoint.x >= rc.left && MousePoint.x <= rc.left + width_ &&
+		MousePoint.y >= rc.top && MousePoint.y <= rc.top + height_
+		)
 
+	{
+		infobox.setBox(MousePoint.x, MousePoint.y, message);
+	}
+}
+void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+{
+	if (infobox.draw)
+	{
+		RECT rc_ = { infobox.x, infobox.y, infobox.x + infobox.x_size, infobox.y + infobox.y_size };
+		dot_floor.draw(pSprite, (float)rc_.left, (float)rc_.top, 0.0f, infobox.x_size / 3.0f, infobox.y_size / 3.0f, D3DCOLOR_ARGB(200, 255, 255, 255));
+		rc_.left -= infobox.x_size / 2 - infobox.x_comma;
+		rc_.top -= infobox.y_size / 2 - infobox.y_comma;
+		rc_.right -= infobox.x_size / 2 + infobox.x_comma;
+		rc_.bottom -= infobox.y_size / 2 + infobox.y_comma;
+		pfont->DrawTextA(pSprite, infobox.info.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
+	}
 }
 void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {

@@ -47,6 +47,27 @@ public:
 	void reset();
 };
 
+class infoBox
+{
+public:
+	int x;
+	int y;
+	int x_size;
+	int y_size;
+	int x_comma;
+	int y_comma;
+	bool draw;
+	string info;
+	infoBox::infoBox();
+	void setBox(int x_, int y_, const char* info_) {
+		x = x_;
+		y = y_;
+		info = info_;
+		draw = true;
+	}
+	void init() { draw = false; }
+};
+
 class display_manager
 {
 public:
@@ -70,6 +91,8 @@ public:
 	int sight_type;
 	int spell_sight;
 
+	infoBox infobox;
+
 	display_manager();
 	void Getfontinfor();
 	void draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
@@ -87,9 +110,12 @@ public:
 	void start_spellview(char* message_);
 	void start_skillview(char* message_);
 	void start_itemview(item_view_type type, char* message_);
+	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, char* message);
+	void drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 };
 
 
+extern DIMOUSESTATE CurrentMouseState;
 
 void changedisplay(display_type set);
 void changemove(int var);

@@ -237,6 +237,7 @@ int d3d::EnterMsgLoop()
 		{
 			::MessageBox(0, "디스플레이 에러", 0, 0);
 		}
+		InputUpdate();
 		if(!g_ThreadCnt)
 			break;
 		//if(0)
@@ -315,12 +316,12 @@ void InputInitialize(HINSTANCE hinstance)
 
 void InputUpdate()
 {
-	Keyboard -> Acquire();
+	//Keyboard -> Acquire();
 	Mouse -> Acquire();
 
 
-	CopyMemory(PreviousKeyboardState, CurrentKeyboardState, sizeof(char) * 256);;
-	Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
+	//CopyMemory(PreviousKeyboardState, CurrentKeyboardState, sizeof(char) * 256);;
+	//Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
 
 	PreviousMouseState = CurrentMouseState;
 	Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);

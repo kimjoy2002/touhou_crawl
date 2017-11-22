@@ -37,7 +37,7 @@ extern D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
 extern LPD3DXSPRITE g_pSprite; //스프라이트포인터 
 extern ID3DXFont* g_pfont;
 extern HANDLE mutx;
-
+extern HWND hwnd;
 
 display_manager DisplayManager;
 
@@ -89,7 +89,6 @@ bool Display(float timeDelta)
 	if( Device ) 
 	{
 		Device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
-
 		if(SUCCEEDED(Device->BeginScene())){
 			
 			g_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
@@ -110,7 +109,8 @@ bool Display(float timeDelta)
 
 
 display_manager::display_manager():tile_type(0),text_log(),text_sub(),state(DT_TEXT),item_view(), item_vt(IVT_INFOR),
-item_view_message("무슨 아이템을 고르겠습니까?"), image(NULL), log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
+item_view_message("무슨 아이템을 고르겠습니까?"), image(NULL), log_length(1), move(0), max_y(1), sight_type(0), 
+spell_sight(0), scale_x(0), scale_y(0)
 {
 	for(int i=0;i<52;i++)
 		item_view[i] = 0;
@@ -915,6 +915,9 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
+	GetClientRect(hwnd, &windowSize);
+	scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidthCommon();
+	scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeightCommon();
 	infobox.init();
 	{
 		int i=0;
@@ -1969,7 +1972,6 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 extern POINT MousePoint;
 
-
 void stateBox::addState(const char* name, D3DCOLOR color, const char* info, display_manager* display)
 {
 	int sizeOfName = strlen(name);
@@ -1990,12 +1992,12 @@ void stateBox::enter(display_manager* display)
 }
 void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, const char* message)
 {
-	if (MousePoint.x >= rc.left && MousePoint.x <= rc.left + width_ &&
-		MousePoint.y >= rc.top && MousePoint.y <= rc.top + height_
+	if (MousePoint.x >= rc.left*scale_x && MousePoint.x <= (rc.left + width_)*scale_x &&
+		MousePoint.y >= rc.top*scale_y && MousePoint.y <= (rc.top + height_)*scale_y
 		)
 
 	{
-		infobox.setBox(MousePoint.x, MousePoint.y, message);
+		infobox.setBox(MousePoint.x/ scale_x, MousePoint.y/ scale_y, message);
 	}
 }
 void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)

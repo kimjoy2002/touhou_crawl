@@ -78,6 +78,9 @@ public:
 	D3DXFONT_DESC fontDesc;
 	string text;
 	display_type state;
+	RECT windowSize;
+	float scale_x;
+	float scale_y;
 
 	char item_view[52];
 	int item_num[52];

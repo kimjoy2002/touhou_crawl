@@ -68,6 +68,7 @@ public:
 	void init() { draw = false; }
 };
 
+
 class display_manager
 {
 public:
@@ -110,10 +111,23 @@ public:
 	void start_spellview(char* message_);
 	void start_skillview(char* message_);
 	void start_itemview(item_view_type type, char* message_);
-	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, char* message);
+	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, const char* message);
 	void drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 };
 
+class stateBox
+{
+	LPD3DXSPRITE pSprite;
+	ID3DXFont* pfont;
+	RECT start_rc;
+	RECT rc;
+	int width;
+	int current;
+public:
+	stateBox(LPD3DXSPRITE pSprite_, ID3DXFont* pfont_, RECT start_rc_);
+	void addState(const char* name, D3DCOLOR color, const char* info, display_manager* display);
+	void enter(display_manager* display);
+};
 
 extern DIMOUSESTATE CurrentMouseState;
 

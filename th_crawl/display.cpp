@@ -63,7 +63,7 @@ infoBox::infoBox()
 }	
 stateBox::stateBox(LPD3DXSPRITE pSprite_, ID3DXFont* pfont_, RECT start_rc_):
 pSprite(pSprite_), pfont(pfont_), start_rc(start_rc_), rc(start_rc_),
-width(32), current(0)
+width(34), current(0)
 {
 }
 //
@@ -2005,6 +2005,13 @@ void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	if (infobox.draw)
 	{
 		RECT rc_ = { infobox.x, infobox.y, infobox.x + infobox.x_size, infobox.y + infobox.y_size };
+		if (rc_.left + infobox.x_size / 2  > option_mg.getWidthCommon()) {
+			int i = rc_.left + infobox.x_size / 2 - option_mg.getWidthCommon();
+			rc_.left -= i;
+			rc_.right -= i;
+		}
+
+
 		dot_floor.draw(pSprite, (float)rc_.left, (float)rc_.top, 0.0f, infobox.x_size / 3.0f, infobox.y_size / 3.0f, D3DCOLOR_ARGB(200, 255, 255, 255));
 		rc_.left -= infobox.x_size / 2 - infobox.x_comma;
 		rc_.top -= infobox.y_size / 2 - infobox.y_comma;

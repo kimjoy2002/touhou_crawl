@@ -835,7 +835,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value6 = 0;
 				t->value7 = 13;
 				t->value8 = 7;
-				t->can_throw = false;
+				t->can_throw = true;
 				t->image = &img_item_weapon_javelin;
 				t->name.name = "투척용 창";
 				t->name.name_type = true; //true 받침있음

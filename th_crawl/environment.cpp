@@ -20,6 +20,7 @@
 #include "note.h"
 #include "beam.h"
 #include "replay.h"
+#include "forbid.h"
 #include <set>
 
 
@@ -106,6 +107,11 @@ void environment::SaveDatas(FILE *fp)
 		sprintf(temp, "%s", (*it).c_str());
 		SaveData<char>(fp, *temp, strlen(temp) + 1);
 	}
+	SaveData<int>(fp, forbid_list.size());
+	for (list<forbid>::iterator it = forbid_list.begin(); it != forbid_list.end(); it++)
+	{
+		(*it).SaveDatas(fp);
+	}
 }
 
 void environment::LoadDatas(FILE *fp)
@@ -179,6 +185,13 @@ void environment::LoadDatas(FILE *fp)
 		LoadData<char>(fp, *temp);
 		string name = temp;
 		speciel_map_name.push_back(temp);
+	}
+	LoadData<int>(fp, size_);
+	for (int i = 0; i<size_; i++)
+	{
+		forbid temp;
+		temp.LoadDatas(fp);
+		forbid_list.push_back(temp);
 	}
 	//----ENV로딩부분에서 임시 타겟팅을 잡아줘야한다.
 	
@@ -359,6 +372,7 @@ bool environment::magicmapping(int x_, int y_)
 	if(isBamboo())
 		return false;
 
+	env[current_level].CheckForbid(coord_def(x_,y_));
 		
 	switch(dgtile[x_][y_].tile)
 	{								
@@ -662,7 +676,7 @@ void environment::drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x
 bool environment::changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul)
 {
 	dgtile[c.x][c.y].tile = tile;
-
+	env[current_level].CheckForbid(c);
 	if (!noAutoCacul)
 	{
 		for (int i = 0; i < AUTOTILE_MAX; i++)
@@ -706,6 +720,7 @@ int environment::CloseDoor(int x_,int y_)
 				}
 			}
 		}
+		env[current_level].CheckForbid(coord_def(x_, y_));
 		dgtile[x_][y_].CloseDoor();
 		return 1;
 	}
@@ -938,6 +953,14 @@ void environment::ClearSmoke()
 	smoke_list.clear();
 	ReleaseMutex(mutx);
 }
+void environment::ClearForbid()
+{
+	for (auto it = forbid_list.begin(); it != forbid_list.end(); it++)
+		it->removeArea();
+	WaitForSingleObject(mutx, INFINITE);
+	forbid_list.clear();
+	ReleaseMutex(mutx);
+}
 void environment::ClearEvent()
 {
 	event_list.clear();
@@ -1006,6 +1029,7 @@ void environment::ClearFloor()
 	ClearAllShadow();
 	ClearEvent();
 	ClearSmoke();
+	ClearForbid();
 	{
 		vector<monster>::iterator it;
 		it = mon_vector.begin();
@@ -1351,6 +1375,140 @@ bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
 }
 
 
+void environment::MakeForbid(coord_def pos,  bool center_, bool on_)
+{
+	if (on_) {
+		if (center_)
+			dgtile[pos.x][pos.y].forbid_count2++;
+		else
+			dgtile[pos.x][pos.y].forbid_count++;
+
+	}
+	else if (!center_ && dgtile[pos.x][pos.y].forbid_count > 0) {
+		dgtile[pos.x][pos.y].forbid_count--;
+	}
+	else if (center_ && dgtile[pos.x][pos.y].forbid_count2 > 0) {
+		dgtile[pos.x][pos.y].forbid_count2--;
+	}
+
+	if (dgtile[pos.x][pos.y].forbid_count
+		|| dgtile[pos.x][pos.y].forbid_count2)
+		dgtile[pos.x][pos.y].flag |= FLAG_FORBID;
+	else
+		dgtile[pos.x][pos.y].flag &= ~FLAG_FORBID;
+
+
+}
+
+bool environment::MakeForbid(coord_def center_, int length_, bool on_, list<coord_def> &stack_)
+{
+	stack_.clear();
+	for (int x = center_.x - length_; x <= center_.x + length_; x++)
+	{
+		for (int y = center_.y - length_; y <= center_.y + length_; y++)
+		{
+			if (x >= 0 && y >= 0 && x < DG_MAX_X && y < DG_MAX_Y)
+			{
+				bool out_of_sight = pow((float)abs(center_.x - x), 2) + pow((float)abs(center_.y - y), 2) > length_*length_;
+
+				bool intercept = false;
+				for (int i = RT_BEGIN; i != RT_END; i++)
+				{
+					coord_def goal_ = coord_def(x, y);
+					if (out_of_sight)
+					{
+						intercept = true;
+						break;
+					}
+					if (distan_coord(center_, goal_) > length_*length_)
+					{
+						intercept = true;
+						break;
+					}
+					beam_iterator it(center_, goal_, (round_type)i);
+
+					while (!intercept && !it.end())
+					{
+						coord_def check_pos_ = (*it);
+						if ((env[current_level].isExplore(check_pos_.x, check_pos_.y)
+							|| env[current_level].isMapping(check_pos_.x, check_pos_.y))
+							&& !env[current_level].dgtile[check_pos_.x][check_pos_.y].isSight())
+						{
+							intercept = true;
+							break;
+						}
+						it++;
+					}
+					if (intercept == false)
+						break;
+					else if (i == RT_END - 1)
+					{
+
+					}
+					else
+						intercept = false;
+				}
+				if (!intercept)
+				{
+					coord_def pos(x, y);
+					MakeForbid(pos, pos == center_, on_);
+					stack_.push_back(coord_def(x, y));
+				}
+			}
+		}
+	}
+	return true;
+}
+bool environment::AddForbid(coord_def center_)
+{
+	for (auto it = forbid_list.begin(); it != forbid_list.end(); it++)
+	{
+		if (it->position == center_)
+		{
+			if (it->big == true)
+			{
+				it->removeArea();
+				it->big = false;
+				it->change = true;
+				ResetForbid();
+				return true;
+			}
+			else
+			{
+				it->removeArea();
+				WaitForSingleObject(mutx, INFINITE);
+				forbid_list.erase(it);
+				ReleaseMutex(mutx);
+				ResetForbid();
+				return false;
+			}
+		}
+	}
+	WaitForSingleObject(mutx, INFINITE);
+	forbid_list.push_back(forbid(center_));
+	ReleaseMutex(mutx);
+	ResetForbid();
+	return true;
+}
+bool environment::CheckForbid(coord_def center_)
+{
+	for (auto it = forbid_list.begin(); it != forbid_list.end(); it++)
+	{
+		it->setChange(center_);
+	}
+	return true;
+}
+bool environment::ResetForbid()
+{
+	for (auto it = forbid_list.begin(); it != forbid_list.end(); it++)
+	{
+		it->reset();
+	}
+	return true;
+}
+
+
+
 bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 {
 	vector<monster>::iterator it;
@@ -1559,6 +1717,12 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 		}
 	}
 	return NULL;
+}
+bool environment::isForbidZone(int x_, int y_)
+{
+	if (dgtile[x_][y_].flag & FLAG_FORBID)
+		return true;
+	return false;
 }
 bool environment::isSmokePos(int x_,int y_, bool only_fog)
 {

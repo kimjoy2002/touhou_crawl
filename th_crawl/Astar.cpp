@@ -125,7 +125,8 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				bool is_mapping = env[floor_].isMapping(it->x,it->y);
 				bool is_explore = (env[floor_].isExplore(it->x,it->y) || type >= ST_MONSTER_NORMAL);
 				bool is_door = (env[floor_].isDoor(it->x,it->y) && type < ST_MONSTER_NORMAL);//열수있는 문이냐
-				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_) || is_door));
+				bool is_forbid = env[floor_].isForbidZone(it->x, it->y) && type < ST_MONSTER_NORMAL;
+				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_) || is_door) && !is_forbid);
 				if(!is_move)
 				{
 					if(type == ST_SEARCH && !is_explore && ano_goal ==  start)

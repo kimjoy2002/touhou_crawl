@@ -96,5 +96,7 @@ extern textures dot_sea;
 extern textures dot_mapping_floor;
 extern textures dot_mapping_wall;
 extern textures sight_rect;
+extern textures explore_forbid_small;
+extern textures explore_forbid_big;
 
 #endif // __TEXTRUE_H__

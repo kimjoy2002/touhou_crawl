@@ -732,9 +732,32 @@ int players::move(short_move x_mov, short_move y_mov)
 			return 0;
 		}
 
-
-
-		if(env[current_level].isSmokePos(move_x_,move_y_))
+		if (env[current_level].isForbidZone(move_x_, move_y_) && !env[current_level].isForbidZone(you.position.x, you.position.y))
+		{
+			printlog("정말 들어갈거야?(y/n) ", false, false, false, CL_danger);
+			bool loop_ = true;
+			you.SetInter(IT_MAP_DANGER);
+			while (loop_)
+			{
+				switch (waitkeyinput())
+				{
+				case 'Y':
+				case 'y':
+					loop_ = false;
+					enterlog();
+					break;
+				case 'N':
+				case 'n':
+				case VK_ESCAPE:
+					loop_ = false;
+					printlog("잘 생각했다.", true, false, false, CL_normal);
+					return 0;
+				default:
+					break;
+				}
+			}
+		}
+		else if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
 			if(hp<temp_smoke->danger(this))
@@ -763,7 +786,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				}
 			}
 		}
-		if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(move_x_,move_y_))
+		else if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(move_x_,move_y_))
 		{
 			if(hp<temp_floor->danger(this))
 			{
@@ -822,7 +845,8 @@ int players::move(short_move x_mov, short_move y_mov)
 	{
 		coord_def temp(move_x_, move_y_);
 		if (you.god == GT_OKINA && !you.GetPunish(GT_OKINA)) {
-			OpenDoor(temp, true);
+			if (OpenDoor(temp, true) < 0)
+				return 0;
 			if (s_slaying<0)
 			{//온바시라 방해!			
 				printlog("움직일수 없다! 온바시라가 당신을 고정시키고있다!", true, false, false, CL_danger);
@@ -837,7 +861,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 		}
 		else {
-			return OpenDoor(temp, false);
+			return OpenDoor(temp, false) > 0;
 		}
 	}
 	else {
@@ -893,12 +917,38 @@ void players::youAttack(unit* unit_)
 
 }
 
-bool players::OpenDoor(const coord_def &c, bool no_turn)
+int players::OpenDoor(const coord_def &c, bool no_turn)
 {
 	if(env[current_level].isDoor(c.x,c.y))
 	{
+		if (env[current_level].isForbidZone(c.x, c.y) && !env[current_level].isForbidZone(you.position.x, you.position.y))
+		{
+			printlog("정말 열거야?(y/n) ", false, false, false, CL_danger);
+			bool loop_ = true;
+			while (loop_)
+			{
+				switch (waitkeyinput())
+				{
+				case 'Y':
+				case 'y':
+					loop_ = false;
+					enterlog();
+					break;
+				case 'N':
+				case 'n':
+				case VK_ESCAPE:
+					loop_ = false;
+					printlog("잘 생각했다.", true, false, false, CL_normal);
+					return -1;
+				default:
+					break;
+				}
+			}
+		}
+
 		if(env[current_level].OpenDoor(c.x,c.y))
 		{
+			env[current_level].CheckForbid(c);
 			if (no_turn == false) {
 				printlog("문을 열었다. ", false, false, false, CL_normal);
 				time_delay += GetWalkDelay();
@@ -3238,6 +3288,7 @@ interupt_type players::resetLOS(bool speak_)
 							GodAccpect_Explore_100();
 						}
 						env[current_level].dgtile[check_pos_.x][check_pos_.y].flag |= FLAG_EXPLORE;
+						env[current_level].CheckForbid(check_pos_);
 						switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 						{
 						case DG_DOWN_STAIR:
@@ -3348,6 +3399,10 @@ interupt_type players::resetLOS(bool speak_)
 		}
 
 	}
+	env[current_level].ResetForbid();
+
+
+
 	return interrupt_;
 	//테스트
 	/*beam_iterator it(you.position,coord_def(5,6));

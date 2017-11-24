@@ -1635,7 +1635,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							sight = false;
 						}
 					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, you.turn, sight);				}
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, you.turn, sight);
+				}
+				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
+				{
+					if (env[current_level].dgtile[i + x_][j + y_].forbid_count2)
+						explore_forbid_big.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(120, 255, 255, 255));
+					else if (env[current_level].dgtile[i + x_][j + y_].forbid_count)
+						explore_forbid_small.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 255, 255, 255));
+				}
 			}
 		}
 	}

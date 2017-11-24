@@ -385,9 +385,9 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	{	
 		deletelog();
 		if(!wide)
-			printlog("(명령어: v - 설명   . - 탐색)",true,false,true,CL_help);	
+			printlog("(명령어: v - 설명   . - 탐색   e - 위험구역설정)",true,false,true,CL_help);	
 		else
-			printlog("(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기)",true,false,true,CL_help);	
+			printlog("(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기   e - 위험구역설정)",true,false,true,CL_help);	
 
 	}
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
@@ -746,6 +746,13 @@ void Search()
 				}
 			}
 			break;
+		case 'E':
+		case 'e':
+			if (!env[current_level].isBamboo())
+			{
+				env[current_level].AddForbid(you.search_pos);
+			}
+			break;
 		case '.': 
 		case VK_RETURN:
 			you.search = false;
@@ -932,6 +939,13 @@ void Wide_Search()
 				}
 			}
 			break;
+		case 'E':
+		case 'e':
+			if (!env[current_level].isBamboo())
+			{
+				env[current_level].AddForbid(you.search_pos);
+			}
+			break;
 		case '.': 
 		case VK_RETURN:
 			widesearch = false;
@@ -1110,11 +1124,12 @@ void Open_door()
 	}
 	if(door_num==1)
 	{
-		if(!you.OpenDoor(temp, false))
+		int result = you.OpenDoor(temp, false);
+		if(result == 0)
 		{
 			printlog("그곳엔 열 수 있는 것이 없다!",true,false,false,CL_normal);
 		}		
-		else			
+		else if(result > 0)
 			you.TurnEnd();
 	}
 	else

@@ -20,6 +20,7 @@
 class smoke;
 class floor_effect;
 class events;
+class forbid;
 
 enum floor_type;
 
@@ -37,6 +38,8 @@ public:
 	char silence_count;
 	char violet_count;
 	char santuary_count;
+	char forbid_count;
+	char forbid_count2;
 	unsigned char autotile_bitmap[AUTOTILE_MAX]; //하나는 벽, 하나는 물
 	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0){};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
@@ -46,6 +49,8 @@ public:
 		flag = 0;
 		silence_count = 0;
 		violet_count = 0;
+		forbid_count = 0;
+		forbid_count2 = 0;
 	}
 	bool isMove(bool fly_, bool swim_, bool no_ground_)
 	{
@@ -140,6 +145,7 @@ public:
 	list<floor_effect> floor_list;
 	list<events> event_list;
 	list<string> speciel_map_name;
+	list<forbid> forbid_list;
 
 	
 	static bool isFirstFloor(int level_);
@@ -250,6 +256,7 @@ public:
 	void ClearAllShadow();
 	void ClearEvent();
 	void ClearSmoke();
+	void ClearForbid();
 	void AllySafeClear(int new_floor_, coord_def pos_); //영구아군(유유코망령, 릴리화이트동료등)이 각종 맵 갈릴때 죽는것을 방지
 	void ClearFloor();
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
@@ -272,6 +279,11 @@ public:
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);
 	bool MakeSantuary(coord_def center_, int length_, bool on_);
+	bool AddForbid(coord_def center_);
+	void MakeForbid(coord_def pos, bool center_, bool on_);
+	bool MakeForbid(coord_def center_, int length_, bool on_, list<coord_def> &stack_);
+	bool CheckForbid(coord_def center_);
+	bool ResetForbid();
 	bool MakeNoise(coord_def center_, int length_, const unit* excep_);
 	bool PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_=false);
 	bool MakeMapping(int percent_);
@@ -280,6 +292,7 @@ public:
 	bool isViolet(coord_def pos_);
 	bool isSanctuary(coord_def pos_);
 	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//해당 위치에 이미 몬스터가 있냐 ㅇ벗냐
+	bool isForbidZone(int x_, int y_);
 	bool isSmokePos(int x_,int y_, bool only_fog = false);//해당 위치에 구름이 있냐 없냐(only_fog는 시야를 가리는 구름만 찾는다.)	
 	floor_effect* isFloorEffectPos(int x_,int y_, const floor_effect* excep_ = NULL);
 	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//해당 위치에 구름이 있냐 없냐(포인터 리턴)

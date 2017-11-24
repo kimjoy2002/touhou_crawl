@@ -1328,8 +1328,8 @@ textures dot_sea(&texture_dot_sea, 0, 0, 3, 3, 255);
 textures dot_mapping_floor(&texture_dot_mapping_floor, 0, 0, 3, 3, 255);
 textures dot_mapping_wall(&texture_dot_mapping_wall, 0, 0, 3, 3, 255);
 textures sight_rect(&texture_sight_rect, 0, 0, 64, 64, 255);
-
-
+textures explore_forbid_small(&texture_item02, 217, 255);
+textures explore_forbid_big(&texture_item02, 216, 255);
 
 //-----------------------------------------------------------
 //TextureFile Å¬·¡½º

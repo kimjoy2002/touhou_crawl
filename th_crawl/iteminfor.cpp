@@ -157,31 +157,120 @@ string GetItemInfor(item *it)
 		case ITM_WEAPON_SHORTBLADE:
 			text_ += "날이 짧은 검이다. 빠른 속도로 공격할 수 있다.\n";
 			ski_ = SKT_SHORTBLADE;
+			switch (it->value0)
+			{
+			case 0:
+				text_ += "휴대하기 좋은 작은 단검. 직접적인 전투보다 조용히 적의 목을 따버리는데 효율적이다.\n";
+				break;
+			case 1:
+				text_ += "던지는 무기로 최적화된 단검. 근접전투로도 쓸 순 있지만 효율은 떨어진다.\n";
+				text_ += "비록 던지고나선 다시 주워야하지만 이를 해결할 수 있다면 유용한 투척수단이 된다.\n";
+				break;
+			case 2:
+				text_ += "다른 단검에 비해선 근접 전투에서도 쓸 수 있을 정도로 날이 긴 무기다.\n";
+				text_ += "구지 단검으로 정면전을 하고싶은 사람이라면 쓰게될 것이다.\n";
+				break;
+			}
 			break;
 		case ITM_WEAPON_LONGBLADE:
 			text_ += "날이 긴 장검이다. 찌르거나 베면서 상대를 공격한다.\n";
 			ski_ = SKT_LONGBLADE;
+			switch (it->value0)
+			{
+			case 0:
+				text_ += "평범한 도검으로 마땅히 특징이랄게 없을 정도로 쓰기 편한 평범한 검.\n";
+				break;
+			case 1:
+				text_ += "백랑텐구들이 자주 들고다니는 날이 크고 구부러져있는 장검.\n";
+				text_ += "날이 훨씬 크기 때문에 보통의 장검보다 더 큰 데미지를 준다.\n";
+				break;
+			case 2:
+				text_ += "아주 거대한 양날이 달린 검. 양손으로도 제대로 들기가 힘들다.\n";
+				text_ += "그 크기에 걸맞는 파괴력을 보여주지만 제대로 다루기엔 수련이 필요하다.\n";
+				break;
+			case 3:
+				text_ += "어딘가의 토착신이 자주 사용하는 둥그렇게 날이 달린 투척용 무기.\n";
+				text_ += "손으로 빙빙돌려서 던지면 그 회전력으로 다시 자신에게 돌아올 수 도 있다.\n";
+				text_ += "이걸 검이라고 볼 수 있을진 모르겠지만 손에 들고 검처럼도 사용할 수 있다.\n";
+				break;
+			}
 			break;
 		case ITM_WEAPON_MACE:
 			text_ += "뭉툭한 둔기다.\n";
+			switch (it->value0)
+			{
+			case 0:
+				text_ += "신사의 무녀들이 제사를 할때 사용하는 제사용구... 였으나\n";
+				text_ += "오히려 이 환상향의 무녀들은 물리적인 공격도구로 사용하는 일이 많다.\n";
+				text_ += "그렇게 효율적인 무기는 아닐지도 모르지만 시도해볼 가치는 있다.\n";
+				break;
+			case 1:
+				text_ += "마법사들이 흔히 쓰고 다니는 빗자루. 마법력을 올려주거나 그런 용도는 없다.\n";
+				text_ += "굳이 빗자루를 고집할 이유는 없지만 마법사는 빗자루라는 특유의 고집인듯 하다.\n";
+				text_ += "둔기로서 사용하는게 그나마 활용해볼 수 있다.\n";
+				break;
+			case 2:
+				text_ += "멋쟁이들이 사용한다는 양산. 강한 요괴일수록 양산을 사용하려는 풍조가 있는듯하다.\n";
+				text_ += "그렇게 효과적이진않을지 몰라도 강한척을 하고 싶은 사람들이라면 사용해보는게 어떨까?\n";
+				break;
+			case 3:
+				text_ += "보물을 찾는데 도움을 준다고 믿어지는 봉. 그러나 이런 속설은 미신인듯 싶다.\n";
+				text_ += "보물을 찾는데 도움은 되지않지만 다루기 쉬운 금속 봉으로 전투에서 쓸 수 있다.\n";
+				text_ += "양손으로 다루는데 특화되어있어서, 방패와 함께라면 효율이 떨어진다.\n";
+				break;
+			case 4:
+				text_ += "아주 거대한 기둥으로 이런 것을 무기로 쓰려 생각했다는게 신기할 정도다.\n";
+				text_ += "보통 익숙하지만 휘두르는데만 엄청난 시간이 걸릴듯 하다.\n";
+				text_ += "맞추기도 쉽지않아보이지만 맞춘다면 엄청난 데미지를 줄 수 있다.\n";
+				break;
+			}
 			ski_ = SKT_MACE;
 			break;
 		case ITM_WEAPON_SPEAR:
 			text_ += "길다란 창이다. 적을 찔러서 공격할 수 있다.\n";
 			ski_ = SKT_SPEAR;
+			switch (it->value0)
+			{
+			case 0:
+				text_ += "딱히 큰 특징이 없는 평범한 창. 찌르는데 쓸 수 있다.\n";
+				break;
+			case 1:
+				text_ += "던지는데 특화되어있는 거대한 창. 힘껏 던져서 적에게 맞출 수 있다.\n";
+				text_ += "근접전투에서도 충분히 사용이 가능하지만 휘두르기엔 적합하지않다.\n";
+				break;
+			case 2:
+				text_ += "사신이 자주 들고다닌다는 거대한 낫.\n";
+				text_ += "생각보다 무기로서 사용하기엔 어려워보이는 큰 낫이지만 익숙해지면 나름 강하다.\n";
+				break;
+			case 3:
+				text_ += "날이 3개달린 기다란 작살으로 찍는데 특화된 창이다.\n";
+				text_ += "가볍고 쓰기 좋지만 높은 위력은 나오지않는다.\n";
+				break;
+			case 4:
+				text_ += "대나무로 깎아서 만든 창. \n";
+				text_ += "아주 평범한 창처럼 보이지만 놀랄만한 위력을 숨기고 있다.\n";
+				text_ += "제대로 다루려면 상당한 연습이 필요하다.\n";
+				break;
+			}
 			break;
 		case ITM_WEAPON_AXE:
 			text_ += "적을 찍을 수 있는 도끼. 거대한 날을 지녔다.\n";
 			ski_ = SKT_AXE;
+			switch (it->value0)
+			{
+			case 0:
+				text_ += "한손으로 들 수 있는 작은 손도끼다. 큰 위력은 나오지않지만 다루기 쉽다.\n";
+				break;
+			case 1:
+				text_ += "길다란 자루에 큰 도끼날이 달린 거대한 도끼다.\n";
+				break;
+			case 2:
+				text_ += "어딘가의 배유령이 자주 들고다니는 거대한 낯이다.\n";
+				text_ += "아주 강력하지만 이런걸 휘두를려면 어마어마한 실력이 필요하다.\n";
+				break;
+			}
 			break;
-			//case ITM_WEAPON_BOW:
-			//	text_ += "화살을 걸고 멀리 있는 적에게 날릴 수 있는 활이다. 화살이 없으면 의미가 없다.\n";
-			//	break;
 		}
-
-
-
-
 
 		if (it->value5 && it->value6)
 		{
@@ -189,25 +278,33 @@ string GetItemInfor(item *it)
 			text_ += GetBrandInfor((weapon_brand)it->value5);
 			text_ += "\n";
 		}
-
-
 		
 		{
 			//스킬레벨 설명해주기
-		}
-
-		char temp[100];
-		sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
-		text_ += temp;
-		sprintf(temp, "\n현재공격속도 : %g%%    ( 기본공격속도 : %d0%%       최소공격속도 : %d0%% )", max((it->value8), (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) * 10, it->value7, it->value8);
-		text_ += temp;
-		if (it->throw_item)
-		{
-			sprintf(temp, "\n이 아이템은 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
+			char temp[100];
+			sprintf(temp, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨: %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
+			text_ += temp;
+			sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+			text_ += temp;
+			sprintf(temp, "\n현재공격속도 : %g%%    ( 기본공격속도 : %d0%%       최소공격속도 : %d0%% )", max((it->value8), (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) * 10, it->value7, it->value8);
 			text_ += temp;
 		}
-		sprintf(temp, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
-		text_ += temp;
+
+
+		if (it->can_throw)
+		{
+			char temp[100];
+			sprintf(temp, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
+			text_ += temp;
+			sprintf(temp, "\n이 경우 현재 투척속도는 %d%%이다. (현재 탄막 스킬 레벨: %d)", 10 * you.GetThrowDelay((*it).type, false), you.GetSkillLevel(SKT_TANMAC, true));
+			text_ += temp;
+		}
+
+		{
+			char temp[100];
+			sprintf(temp, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
+			text_ += temp;
+		}
 		break;
 	}
 	case ITM_THROW_TANMAC:
@@ -239,6 +336,8 @@ string GetItemInfor(item *it)
 		}
 		char temp[100];
 		sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+		text_ += temp;
+		sprintf(temp, "\n현재 투척속도 : %d%% (현재 탄막 스킬 레벨: %d)", 10 * you.GetThrowDelay((*it).type, false), you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 	}
 	break;

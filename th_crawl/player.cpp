@@ -984,7 +984,7 @@ int players::GetDisplaySh()
 {
 	return (you.s_sleep<0 || you.s_paralyse) ? 0 : sh;
 }
-int players::GetThrowDelay(item_type type_)
+int players::GetThrowDelay(item_type type_, bool random_)
 {
 	float real_delay_ = 14; //기본 딜레이 14
 	int skill_ = GetSkillLevel(SKT_TANMAC, true);
@@ -996,8 +996,9 @@ int players::GetThrowDelay(item_type type_)
 	//투척 8이 되어야 딜레이가 10
 	//그 이후 딜레이는 투척레벨 4마다 1씩 줄어듬
 	//최소 딜레이 6까지 가려면 투척레벨 22는 필요
-
-	int delay_ = real_delay_ + rand_float(0.99f, 0.0f);
+	int delay_ = real_delay_;
+	if(random_)
+		delay_ += rand_float(0.99f, 0.0f);
 	return delay_;
 }
 int players::GetSpellDelay()

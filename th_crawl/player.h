@@ -343,7 +343,7 @@ public:
 	int GetThrowAttack(const item* it, bool max_);
 	int GetThrowHit(const item* it);
 	attack_weapon_type GetAttackType();
-	int GetThrowDelay(item_type type_);
+	int GetThrowDelay(item_type type_, bool random_ = true);
 	int GetSpellDelay();
 	int GetNormalDelay();
 	int GetWalkDelay();

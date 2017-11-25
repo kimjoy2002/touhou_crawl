@@ -27,7 +27,7 @@
 
 extern HANDLE mutx;
 skill_type itemtoskill(item_type type_);
-
+extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 
 
 
@@ -205,6 +205,14 @@ int players::GetAtkDelay()
 	{
 		float real_delay_ = max((equipment[ET_WEAPON]->value8) , 
 			(equipment[ET_WEAPON]->value7- GetSkillLevel(itemtoskill(equipment[ET_WEAPON]->type), true)/2.0f));
+
+		if (equipment[ET_SHIELD])
+		{
+			real_delay_ += shieldPanaltyOfWeapon(equipment[ET_WEAPON]->type, equipment[ET_WEAPON]->value0);
+		}
+
+
+
 		delay_ = real_delay_+rand_float(0.99f,0.0f);
 	}
 	else if(equipment[ET_WEAPON])

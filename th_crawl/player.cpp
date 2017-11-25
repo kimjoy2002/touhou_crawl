@@ -42,6 +42,7 @@ players you;
 extern HANDLE mutx;
 extern map_infor map_list;
 skill_type itemtoskill(item_type type_);
+int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 extern bool widesearch; //X커맨드용
 
 void name_infor::SaveDatas(FILE *fp)
@@ -4474,6 +4475,29 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				default:
 					printlog("방어구로 인해 극심한 패널티를 받고 있다. ",true,false,false,CL_danger);
 					break;
+				}
+			}
+
+			if (type_ == ET_SHIELD || type_ == ET_WEAPON)
+			{
+				if (you.equipment[ET_WEAPON] && you.equipment[ET_SHIELD])
+				{
+					enterlog();
+					switch (shieldPanaltyOfWeapon(you.equipment[ET_WEAPON]->type, you.equipment[ET_WEAPON]->value0))
+					{
+					case 0:
+						break;
+					case 1:
+						printlog("방패와 무기를 함께 착용했다. (공격속도 0.1 느려짐)", true, false, false, CL_normal);
+						break;
+					case 2:
+						printlog("이 무기는 방패와 같이 쓰기엔 약간 불편하다. (공격속도 0.2 느려짐)", true, false, false, CL_small_danger);
+						break;
+					case 3:
+						printlog("이 무기는 방패와 같이 쓰기엔 아주 버겁다. (공격속도 0.3 느려짐)", true, false, false, CL_danger);
+						break;
+					}
+
 				}
 			}
 

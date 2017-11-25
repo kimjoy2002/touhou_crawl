@@ -20,6 +20,7 @@
 #include "option_manager.h"
 
 extern HANDLE mutx;
+extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 
 
 
@@ -284,10 +285,15 @@ string GetItemInfor(item *it)
 			char temp[100];
 			sprintf(temp, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨: %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
 			text_ += temp;
+
 			sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 			text_ += temp;
-			sprintf(temp, "\n현재공격속도 : %g%%    ( 기본공격속도 : %d0%%       최소공격속도 : %d0%% )", max((it->value8), (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) * 10, it->value7, it->value8);
+			sprintf(temp, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
 			text_ += temp;
+			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
+				sprintf(temp, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
+				text_ += temp;
+			}
 		}
 
 
@@ -296,7 +302,7 @@ string GetItemInfor(item *it)
 			char temp[100];
 			sprintf(temp, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
 			text_ += temp;
-			sprintf(temp, "\n이 경우 현재 투척속도는 %d%%이다. (현재 탄막 스킬 레벨: %d)", 10 * you.GetThrowDelay((*it).type, false), you.GetSkillLevel(SKT_TANMAC, true));
+			sprintf(temp, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨: %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 			text_ += temp;
 		}
 
@@ -337,7 +343,7 @@ string GetItemInfor(item *it)
 		char temp[100];
 		sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 		text_ += temp;
-		sprintf(temp, "\n현재 투척속도 : %d%% (현재 탄막 스킬 레벨: %d)", 10 * you.GetThrowDelay((*it).type, false), you.GetSkillLevel(SKT_TANMAC, true));
+		sprintf(temp, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨: %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 	}
 	break;

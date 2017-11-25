@@ -549,6 +549,72 @@ item_infor& CustomSimpleItem(item_infor* t, item_type type, int num, bool curse,
 	return (*t);
 }
 
+int shieldPanaltyOfWeapon(item_type type, int weapon_kind)
+{
+	switch (type)
+	{
+	case ITM_WEAPON_SHORTBLADE:
+		switch (weapon_kind)
+		{
+		case 0: //´ë°Å
+		case 1: //ÅõÃ´¿ë ³ªÀÌÇÁ
+		case 2: //¼ô¼Òµå
+			return 0;
+		}
+		break;
+	case ITM_WEAPON_LONGBLADE:
+		switch (weapon_kind)
+		{
+		case 0: //µµ°Ë
+		case 1: //¾ð¿ùµµ
+		case 3: //Ã¶·û
+			return 1;
+		case 2: //´ë°Ë
+			return 3;
+		}
+		break;
+	case ITM_WEAPON_MACE:
+		switch (weapon_kind)
+		{
+		case 0: //°íÇìÀÌ
+		case 1: //ºøÀÚ·ç
+		case 2: //¾ç»ê
+			return 1;
+		case 3: //´Ù¿ìÂ¡·Îµå
+		case 4: //¿Â¹Ù½Ã¶ó
+			return 3;
+		}
+		break;
+	case ITM_WEAPON_AXE:
+		switch (weapon_kind)
+		{
+		case 0: //¼Õµµ³¢
+			return 0;
+		case 1: //ÀüÅõµµ³¢
+			return 1;
+		case 2: //´é
+			return 3;
+		}
+		break;
+	case ITM_WEAPON_SPEAR:
+		switch (weapon_kind)
+		{
+		case 0: //Ã¢
+		case 1: //ÅõÃ¢
+			return 1;
+		case 2: //³´
+			return 2;
+		case 3: //»ïÁöÃ¢
+			return 1;
+		case 4: //Á×Ã¢
+			return 2;
+		}
+		break;
+	}
+	return 0;
+}
+
+
 
 void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 {
@@ -801,7 +867,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value7 = 14;
 				t->value8 = 7;
 				t->can_throw = false;
-				t->image = &img_item_weapon_hammer;
+				t->image = &img_item_weapon_dauzing_rod;
 				t->name.name = "´Ù¿ìÂ¡ ·Îµå";
 				t->name.name_type = true; //true ¹ÞÄ§ÀÖÀ½
 				t->weight = 5.0f;
@@ -901,7 +967,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value7 = 18;
 				t->value8 = 7;
 				t->can_throw = false;
-				t->image = &img_mons_default;
+				t->image = &img_item_weapon_bamboo_spear;
 				t->name.name = "Á×Ã¢";
 				t->name.name_type = true; //true ¹ÞÄ§ÀÖÀ½
 				t->weight = 6.0f;

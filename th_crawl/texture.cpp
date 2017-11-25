@@ -823,6 +823,8 @@ textures img_item_weapon_momizishield(&texture_item01, 54, 255);
 textures img_item_weapon_kiteshield(&texture_item01, 55, 255);
 textures img_item_weapon_chakram(&texture_item02, 173, 255);
 textures img_item_weapon_javelin(&texture_item02, 174, 255);
+textures img_item_weapon_dauzing_rod(&texture_item02, 218, 255);
+textures img_item_weapon_bamboo_spear(&texture_item02, 219, 255);
 
 
 
@@ -2303,6 +2305,10 @@ int texturetoint(textures* input)
 		return 391;
 	else if (input == &img_item_doggojeo)
 		return 392;
+	else if (input == &img_item_weapon_dauzing_rod)
+		return 393;
+	else if (input == &img_item_weapon_bamboo_spear)
+		return 394;
 	else
 		return 0;
 }
@@ -3096,6 +3102,10 @@ textures* inttotexture(int input)
 		return &img_item_weapon_javelin;
 	case 392:
 		return &img_item_doggojeo;
+	case 393:
+		return &img_item_weapon_dauzing_rod;
+	case 394:
+		return &img_item_weapon_bamboo_spear;
 	default:
 		return &img_mons_default;
 	}

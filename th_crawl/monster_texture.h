@@ -311,6 +311,8 @@ extern textures img_item_weapon_momizishield;
 extern textures img_item_weapon_kiteshield;
 extern textures img_item_weapon_chakram;
 extern textures img_item_weapon_javelin;
+extern textures img_item_weapon_dauzing_rod;
+extern textures img_item_weapon_bamboo_spear;
 
 
 

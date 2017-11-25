@@ -1758,14 +1758,21 @@ void skill_view()
 			else
 				break;
 		}
+		bool allMax = true;
 		for(int i = 0; i < SKT_MAX; i++)
 		{
+			if (you.skill[i].level < 27)
+			{
+				allMax = false;
+			}
 			if(you.skill[i].onoff >= 1)
 			{
 				ok_ = true;
 				break;	
 			}
 		}
+		if (allMax == true)
+			ok_ = true;
 		if(ok_==false)
 			view_skill("최소한 하나의 스킬을 켜야됩니다!");
 	}

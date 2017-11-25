@@ -75,7 +75,8 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
  alchemy_buff(ALCT_NONE), alchemy_time(0),
-teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), togle_invisible(false), battle_count(0),
+teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
+togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
@@ -268,6 +269,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, power_keep);
 	SaveData<bool>(fp, togle_invisible);
 	SaveData<int>(fp, battle_count);
+	SaveData<bool>(fp, youMaxiExp);
 	SaveData<int>(fp, uniden_poison_resist);
 	SaveData<int>(fp, uniden_fire_resist);
 	SaveData<int>(fp, uniden_ice_resist);
@@ -490,7 +492,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, invisible_view);
 	LoadData<int>(fp, power_keep);
 	LoadData<bool>(fp, togle_invisible);
-	LoadData<int>(fp, battle_count);		
+	LoadData<int>(fp, battle_count);
+	LoadData<bool>(fp, youMaxiExp);
 	LoadData<int>(fp, uniden_poison_resist);
 	LoadData<int>(fp, uniden_fire_resist);
 	LoadData<int>(fp, uniden_ice_resist);
@@ -2046,6 +2049,22 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	if(need_exp == -1)
 	{
 		you.skill[skill_].onoff = 0;
+		youMaxiExp = true;
+		bool allMax = true;
+		for (int i = 0; i < SKT_MAX; i++)
+		{
+			if (you.skill[i].level < 27)
+			{
+				allMax = false;
+			}
+			if (you.skill[i].onoff >= 1)
+			{
+				youMaxiExp = false;
+				break;
+			}
+		}
+		if (allMax == true)
+			youMaxiExp = false;
 		return false;
 	}
 	int exp_panalty = exp_to_skill_exp(GetSkillLevel(skill_, false));

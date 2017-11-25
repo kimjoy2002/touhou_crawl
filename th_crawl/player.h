@@ -267,6 +267,7 @@ public:
 	int power_keep;
 	bool togle_invisible; //스펠카드로만 얻는 투명
 	int battle_count; //전투중이다. 공격하면 100부터 시작
+	bool youMaxiExp; //경험치가 가득차서 경고
 
 	int uniden_poison_resist;
 	int uniden_fire_resist;

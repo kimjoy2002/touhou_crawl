@@ -400,10 +400,20 @@ void MainLoop()
 		}
 
 
+		while (you.youMaxiExp) {
+			enterlog();
+			printlog("당신은 배우고 있던 스킬을 마스터했다!", true, false, false, CL_normal);
+			MoreWait();
+
+			skill_view();
+			you.youMaxiExp = false;
+		}
 		int char_ = waitkeyinput();
 
 		you.prev_hp[1] = you.hp;
 		you.prev_mp[1] = you.mp;
+
+
 		switch(char_)
 		{
 		case 'k':

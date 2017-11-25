@@ -990,7 +990,7 @@ string GetMonsterInfor(monster *it)
 		text_ += "\n\n\n사용하는 마법\n\n";
 
 
-		if(it->random_spell)
+		if(!it->isUserAlly() && it->random_spell)
 		{
 			text_ += "이 몬스터의 마법은 고정되어있지 않다. 무슨 마법을 쓸지 몰라!\n";
 		}

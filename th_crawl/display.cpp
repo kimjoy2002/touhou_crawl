@@ -256,7 +256,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_potion[iden_list.potion_list[cur_].color].draw(pSprite, rc.left-24, rc.top+6, 255);
 				img_item_potion_kind[min(PT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left-24, rc.top+6, 255);
-				sprintf_s(temp, 100, "%c - %s물약", index, potion_iden_string[cur_]);
+				sprintf_s(temp, 100, "%c %c %s물약", index, iden_list.autopickup[i]?'+':'-', potion_iden_string[cur_]);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -282,7 +282,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_scroll.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c - %s두루마리", index, scroll_iden_string[cur_]);
+				sprintf_s(temp, 100, "%c %c %s두루마리", index, iden_list.autopickup[i] ? '+' : '-', scroll_iden_string[cur_]);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -308,7 +308,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_ring[iden_list.ring_list[cur_].type].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_ring_kind[min(RGT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c - %s반지", index, ring_iden_string[cur_]);
+				sprintf_s(temp, 100, "%c %c %s반지", index, iden_list.autopickup[i] ? '+' : '-', ring_iden_string[cur_]);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -334,7 +334,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_amulet.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_amulet_kind[min(AMT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c - %s부적", index, amulet_iden_string[cur_]);
+				sprintf_s(temp, 100, "%c %c %s부적", index, iden_list.autopickup[i] ? '+' : '-', amulet_iden_string[cur_]);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -359,7 +359,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				rc.left = two_;
 				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c - %s스펠카드", index, SpellcardName((spellcard_evoke_type)cur_));
+				sprintf_s(temp, 100, "%c %c %s스펠카드", index, iden_list.autopickup[i] ? '+' : '-', SpellcardName((spellcard_evoke_type)cur_));
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -384,7 +384,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				rc.left = two_;
 				img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c - %s", index, static_book_list[cur_].name.c_str());
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', static_book_list[cur_].name.c_str());
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -406,7 +406,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			rc.left = two_;
 			GetTanmacBaseGraphic(cur_)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
-			sprintf_s(temp, 100, "%c - %s", index, GetTanmacString(cur_).name.c_str());
+			sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', GetTanmacString(cur_).name.c_str());
 			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 			rc.top += 2 * fontDesc.Height;
 			num++;

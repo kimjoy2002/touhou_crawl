@@ -3527,6 +3527,14 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 	{
 		t->Identify(); //책은 항상 줍자마자 식별
 	}
+	if (t->type == ITM_THROW_TANMAC)
+	{
+		//던지기 아이템은 줍는순간 자동 줍기가 켜진다.
+		if (!t->throw_item) {
+			int cur = IDEN_CHECK_ETC_START + t->value4;
+			iden_list.autopickup[cur] = true;
+		}
+	}
 
 
 

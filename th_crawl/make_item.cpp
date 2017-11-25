@@ -577,6 +577,7 @@ int shieldPanaltyOfWeapon(item_type type, int weapon_kind)
 		switch (weapon_kind)
 		{
 		case 0: //고헤이
+			return 0;
 		case 1: //빗자루
 		case 2: //양산
 			return 1;

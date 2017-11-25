@@ -319,7 +319,14 @@ int players::GetThrowHit(const item* it)
 {
 	int hit_ = 3+s_dex/2;	
 
-	hit_ += it->value1 + it->value3 + GetSkillLevel(SKT_TANMAC, true) /2;
+	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
+	{//이것은 장착무기이다..
+		hit_ = 1 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+	}
+	else
+	{
+		hit_ += it->value1 + it->value3 + GetSkillLevel(SKT_TANMAC, true) / 2;
+	}
 	
 	if(s_knife_collect)
 	{

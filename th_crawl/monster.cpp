@@ -2183,12 +2183,15 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
-		if(!item_lists.empty())
+		if (s_ally != -1)
 		{
-			for(auto it = item_lists.begin(); it != item_lists.end(); it++)
+			if (!item_lists.empty())
 			{
-				item *it2;
-				it2 = env[current_level].MakeItem(position,(*it));;
+				for (auto it = item_lists.begin(); it != item_lists.end(); it++)
+				{
+					item *it2;
+					it2 = env[current_level].MakeItem(position, (*it));;
+				}
 			}
 		}
 		//if(id == MON_MAGIC_BOOK)

@@ -27,6 +27,7 @@
 #include "key.h"
 #include "rand_shuffle.h"
 #include "evoke.h"
+#include "armour.h"
 #include <algorithm>
 #include <math.h>
 
@@ -3865,12 +3866,77 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HASTE_OTHER, 20));
 		list->push_back(spell(SPL_HEAL_OTHER, 20));
 		break;
+	case MON_FAIRY_GREEN_WARRIOR:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_SHIELD, 0, &t, randA(28));
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_FAIRY_HERO:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 25);
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_BAKEKASA:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_MACE, -1, &t, 30);
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_KATPA:
+		if (randA(19) == 0)
+		{
+			item_infor t;
+			makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(randA(3))), 0, &t, AMK_KAPPA);
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_KATPA_SPEAR:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(3)), 0, &t, AMK_KAPPA);
+			item_list_->push_back(t);
+		}
+		if (randA(5) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_SPEAR, 0, &t, randA(2) ? 5 : 35);
+			item_list_->push_back(t);
+		}
+		break;
 	case MON_KATPA_GUN:
 		list->push_back(spell(SPL_MON_WATER_GUN, 90));
 		break;
-	case MON_KYOUKO:
-		list->push_back(spell(SPL_KYOKO_SMITE, 35));
+	case MON_RUMIA:
+	{
+		item_infor t;
+		makeitem(ITM_ARMOR_HEAD, 1, &t);
+		item_list_->push_back(t);
 		break;
+	}
+	case MON_KYOUKO:
+	{
+		list->push_back(spell(SPL_KYOKO_SMITE, 35));
+		item_infor t;
+		makeitem(ITM_WEAPON_MACE, 1, &t, 20);
+		item_list_->push_back(t);
+		break;
+	}
+	case MON_KOGASA:
+	{
+		item_infor t;
+		makeitem(ITM_WEAPON_MACE, 1, &t, 30);
+		item_list_->push_back(t);
+		break;
+	}
 	case MON_CIRNO:
 		list->push_back(spell(SPL_COLD_BEAM, 15));
 		break;
@@ -3878,11 +3944,24 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUMMON_BUG, 20));
 		break;
 	case MON_MEDICINE:
+	{
 		list->push_back(spell(SPL_MEDICINE_CLOUD, 30));
+		item_infor t;
+		makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(randA(3))), 1, &t, AMK_POISON);
+		item_list_->push_back(t);
 		break;
+	}
 	case MON_DIEFAIRY:
 		list->push_back(spell(SPL_BLINK, 20));
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 60));
+		break;
+	case MON_HUMAM_MAN:
+		if (randA(29) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_HUMAM_YINYANG:
 		list->push_back(spell(SPL_FLAME, 12));
@@ -3890,10 +3969,36 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CONFUSE, 5));
 		list->push_back(spell(SPL_SLOW, 5));
 		list->push_back(spell(SPL_BLINK, 20));
+		if (randA(29) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_HUMAM_PRIEST:
 		list->push_back(spell(SPL_SMITE, 15));
 		list->push_back(spell(SPL_SELF_HEAL, 10));
+		if (randA(29) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL);
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_HUMAM_SAMURI:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(randA(2) ? ITM_ARMOR_BODY_ARMOUR_2 : ITM_ARMOR_BODY_ARMOUR_3, 0, &t, AMK_NORMAL);
+			item_list_->push_back(t);
+		}
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 5);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_CROW_TENGU:
 		list->push_back(spell(SPL_GRAZE, 30));
@@ -3920,6 +4025,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_ICE_BOLT, 20));
 		list->push_back(spell(SPL_BLINK, 10));
 		list->push_back(spell(SPL_INVISIBLE, 7));
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_KAPPA);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_YAMABUSH_TENGU:
 		list->push_back(spell(SPL_HASTE, 20));
@@ -3931,6 +4042,22 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CONFUSE, 10));
 		list->push_back(spell(SPL_INVISIBLE, 7));
 		list->push_back(spell(SPL_MAGIC_TANMAC, 20));
+		break;
+
+	case MON_MOMIZI:
+		{
+			{
+				item_infor t;
+				makeitem(ITM_ARMOR_SHIELD, 1, &t, 25);
+				t.image = &img_item_weapon_momizishield;
+				item_list_->push_back(t);
+			}
+			{
+				item_infor t;
+				makeitem(ITM_WEAPON_LONGBLADE, 1, &t, 20);
+				item_list_->push_back(t);
+			}
+		}
 		break;
 	case MON_AYA:
 		list->push_back(spell(SPL_HASTE, 30));
@@ -3945,9 +4072,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CONFUSE, 10));
 		break;
 	case MON_NAZRIN:
+	{
 		list->push_back(spell(SPL_SUMMON_PENDULUM, 30));
 		list->push_back(spell(SPL_MAGIC_TANMAC, 20));
+		item_infor t;
+		makeitem(ITM_WEAPON_MACE, 1, &t, 40);
+		item_list_->push_back(t);
 		break;
+	}
 	case MON_SEKIBANKI_BODY:
 		list->push_back(spell(SPL_SUMMON_SEKIBANKI, 15));
 		break;
@@ -3957,9 +4089,34 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BLINK, 15));
 		break;
 	case MON_NITORI:
+	{
 		list->push_back(spell(SPL_WATER_CANNON, 30));
 		list->push_back(spell(SPL_INVISIBLE, 15));
 		list->push_back(spell(SPL_MON_WATER_GUN, 25));
+		item_infor t;
+		makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(3)), 1, &t, AMK_KAPPA);
+		item_list_->push_back(t);
+	}
+	break;
+	case MON_YOUMUYUKKURI:
+		if (randA(19) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 5);
+			item_list_->push_back(t);
+		}
+		break;
+	case MON_YOUMU:
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_LONGBLADE, 1, &t, 5);
+			item_list_->push_back(t);
+		}
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_SHORTBLADE, 1, &t, 25);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_KEGERO:
 		list->push_back(spell(SPL_JUMP_ATTACK, 25));
@@ -4036,6 +4193,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		item_list_->push_back(t);
 	}
 	break;
+	case MON_HOBGOBRIN_MAID:
+		if (randA(9) == 0)
+		{
+			item_infor t;
+			makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(3)), 0, &t, AMK_MAID);
+			item_list_->push_back(t);
+		}
+		break;
 	case MON_HOBGOBRIN_LIBRARIAN:
 		list->push_back(spell(SPL_INVISIBLE, 5));
 		list->push_back(spell(SPL_MAGIC_TANMAC, 15));
@@ -4054,15 +4219,33 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_MAID_FAIRY:
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+		if (randA(19) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MAID);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_SAKUYA:
+	{
 		list->push_back(spell(SPL_HASTE, 20));
 		list->push_back(spell(SPL_SLOW, 10));
 		list->push_back(spell(SPL_STASIS, 15));
 		list->push_back(spell(SPL_TELEPORT_SELF, 10));
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
 		list->push_back(spell(SPL_BLINK, 20));
+		{
+			item_infor t;
+			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 1, &t, AMK_MAID);
+			item_list_->push_back(t);
+		}
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_SHORTBLADE, 1, &t, 20);
+			item_list_->push_back(t);
+		}
 		break;
+	}
 	case MON_REMILIA:
 		list->push_back(spell(SPL_HASTE, 25));
 		break;
@@ -4074,6 +4257,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_YAMAWARO_NINJA:
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 30));
+		if(randA(2)==0)
+		{
+			item_infor t;
+			makeitem(ITM_THROW_TANMAC, 0, &t, TMT_POISON_NEEDLE);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_YAMAWARO_FLAG:
 		list->push_back(spell(SPL_SELF_HEAL, 20));
@@ -4141,6 +4330,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUICIDE_BOMB, 0));
 		break;
 	case MON_RABIT_SPEAR:
+		if (randA(19) == 0)
+		{
+			item_infor t;
+			makeitem(ITM_WEAPON_SPEAR, 0, &t, 43);
+			item_list_->push_back(t);
+		}
 		break;
 	case MON_RABIT_SUPPORT:
 		list->push_back(spell(SPL_RABBIT_HORN, 25));
@@ -4168,8 +4363,6 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		item_list_->push_back(t);
 		break;
 	}
-	case MON_FAIRY_HERO:
-		break;
 	case MON_FAIRY_SOCERER:
 		list->push_back(spell(SPL_ICE_BOLT, 20));
 		list->push_back(spell(SPL_FIRE_BOLT, 20));
@@ -4312,11 +4505,16 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HASTE_OTHER, 25));
 		break;
 	case MON_MURASA:
+	{
 		list->push_back(spell(SPL_SUMMON_ANCHOR, 40));
 		list->push_back(spell(SPL_ICE_BOLT, 10));
 		list->push_back(spell(SPL_ICE_CLOUD, 25));
 		list->push_back(spell(SPL_BLINK, 15));
+		item_infor t;
+		makeitem(ITM_WEAPON_AXE, 1, &t, 22);
+		item_list_->push_back(t);
 		break;
+	}
 	case MON_KEINE:
 		list->push_back(spell(SPL_LASER, 35));
 		list->push_back(spell(SPL_BLINK, 20));
@@ -4338,9 +4536,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_KOMACHI:
+	{
 		list->push_back(spell(SPL_REAPER_MET, 40));
 		list->push_back(spell(SPL_AFTERLITE, 20));
+		item_infor t;
+		makeitem(ITM_WEAPON_SPEAR, 1, &t, 30);
+		item_list_->push_back(t);
 		break;
+	}
 	case MON_SUMIREKO:
 		list->push_back(spell(SPL_SUMMON_TRASH, 30));
 		list->push_back(spell(SPL_TRASH_RUSH, 20));

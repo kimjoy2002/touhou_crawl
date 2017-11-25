@@ -1168,8 +1168,18 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 			}
 
 			
+
+			if (!(temp->pos.x - temp->size_x >= 0 &&
+				temp->pos.x + temp->size_x < DG_MAX_X &&
+				temp->pos.y - temp->size_y >= 0 &&
+				temp->pos.y + temp->size_y < DG_MAX_Y)
+				) {
+				success = false;
+			}
+
+
 			vector<map_dummy*>::iterator it;
-			if(piece < 4+randA(3))
+			if(success && piece < 4+randA(3))
 			{
 				for (it=vec_map.begin();it!=vec_map.end();it++) 
 				{
@@ -1180,12 +1190,15 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 					}
 				}
 			}
-			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
+			if (success)
 			{
-				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //맵더미충돌시엔 만들지 않음
+				for (it = vec_special_map.begin(); it != vec_special_map.end(); it++)
 				{
-					success = false;
-					break;
+					if ((*it)->collution(temp_coord, r_size_x, r_size_y) || (*it)->plus_collution(temp_coord, r_size_x, r_size_y)) //맵더미충돌시엔 만들지 않음
+					{
+						success = false;
+						break;
+					}
 				}
 			}
 			if(success) //겹치지 않을때 맵더미푸쉬

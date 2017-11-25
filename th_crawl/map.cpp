@@ -299,8 +299,8 @@ void map_algorithms(int num)
 			}
 			else if (num == PANDEMONIUM_LEVEL + 2)
 			{
-				floor_ = DG_PANDE_FLOOR4;
-				wall_ = DG_PANDE_WALL4;
+				floor_ = DG_PANDE_FLOOR5;
+				wall_ = DG_PANDE_WALL5;
 			}
 			else if (num == PANDEMONIUM_LEVEL + 3)
 			{

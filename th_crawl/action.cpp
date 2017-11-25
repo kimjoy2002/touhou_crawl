@@ -1239,10 +1239,9 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_RETURN_STAIR:
 		if(current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 		{
-			
 			if((type == DG_PANDEMONIUM_STAIR && down ) || (type == DG_RETURN_STAIR && !down ) )
 			{
-				if(!you.rune[RUNE_PANDEMONIUM_ICE + current_level - PANDEMONIUM_LEVEL - 1])
+				if(!you.rune[RUNE_PANDEMONIUM_MAGIC + current_level - PANDEMONIUM_LEVEL-1])
 				{
 					printlog("여기서 빠져나가면 이 층의 룬은 다신 얻을 수 없다. 정말로 나갈거야?(Y/N)",false,false,false,CL_danger);
 					switch(waitkeyinput())

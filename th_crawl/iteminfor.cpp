@@ -18,6 +18,7 @@
 #include "evoke.h"
 #include "book.h"
 #include "option_manager.h"
+#include "tribe.h"
 
 extern HANDLE mutx;
 extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
@@ -283,7 +284,7 @@ string GetItemInfor(item *it)
 		{
 			//스킬레벨 설명해주기
 			char temp[100];
-			sprintf(temp, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨: %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
+			sprintf(temp, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
 			text_ += temp;
 
 			sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
@@ -302,7 +303,7 @@ string GetItemInfor(item *it)
 			char temp[100];
 			sprintf(temp, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
 			text_ += temp;
-			sprintf(temp, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨: %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+			sprintf(temp, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 			text_ += temp;
 		}
 
@@ -343,7 +344,7 @@ string GetItemInfor(item *it)
 		char temp[100];
 		sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 		text_ += temp;
-		sprintf(temp, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨: %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+		sprintf(temp, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 	}
 	break;
@@ -408,9 +409,13 @@ string GetItemInfor(item *it)
 			break;
 		}
 		char temp[100];
-		sprintf(temp, "\n\n방어력 : %d   기본패널티 : %d   최소패널티 : %d\n\n", it->value1, it->value2, it->value3);
+		sprintf(temp, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf(temp, "\n\n패널티는 갑옷스킬을 올릴수록 줄어듭니다. 최소패널티이하로는 줄일수 없습니다.\n\n");
+		sprintf(temp, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
+		text_ += temp;
+		sprintf(temp, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
+			(it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)),
+			min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3), you.GetSkillLevel(SKT_ARMOUR, true));
 		text_ += temp;
 		sprintf(temp, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
 		text_ += temp;
@@ -429,9 +434,13 @@ string GetItemInfor(item *it)
 		text_ += "상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n";
 		text_ += "상대의 탄막을 막는 반칙적인 활용도 가능하다.\n";
 		char temp[100];
-		sprintf(temp, "방어력 : %d   기본패널티 : %d   최소패널티 : %d\n\n", it->value1, it->value2, it->value3);
+		sprintf(temp, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf(temp, "패널티는 방패스킬을 올릴수록 줄어듭니다. 최소패널티이하로는 줄일수 없습니다.\n\n");
+		sprintf(temp, "패널티는 방패 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n"); 
+		text_ += temp;
+		sprintf(temp, "현재 착용시 방어력: %d    패널티 : %d (현재 방패 스킬 레벨 : %d)\n\n",
+			(it->isiden() ? it->value4 : 0) + (int)(it->value1*(1.0f + (you.s_dex / 5.0f + you.GetSkillLevel(SKT_SHIELD, true)) / 15.0f)*(you.GetProperty(TPT_SLAY)?1.2f:1.0f)),
+			min(it->value3, it->value2 + you.GetSkillLevel(SKT_SHIELD, true) / 3), you.GetSkillLevel(SKT_SHIELD, true));
 		text_ += temp;
 		sprintf(temp, "합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
 		text_ += temp;

@@ -651,6 +651,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			else if(mon_->isUserAlly() && (mon_->flag & M_FLAG_NONE_MOVE))
 			{
 				printlog("이동할 수 없다.",true,false,false,CL_normal);
+				you.SetInter(IT_MAP_FIND);
 				return 0;
 			}
 			attack_type brand_ = ATT_NORMAL;

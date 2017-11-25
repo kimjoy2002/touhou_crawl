@@ -1593,6 +1593,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_JUMP_ATTACK:
 	case SPL_AFTERLITE:
 	case SPL_KOKORO_CHANGE:
+	case SPL_BLOOD_SMITE:
 		return (mon->s_exhausted ? false : true);
 	case SPL_MISTIA_SONG:
 		return (mon->s_exhausted || mon->isUserAlly() ?false:true);

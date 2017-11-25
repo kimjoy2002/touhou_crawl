@@ -743,7 +743,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 3;
 				t->value1 = 3;
-				t->value2 = 9;
+				t->value2 = 7;
 				t->value6 = 0;
 				t->value7 = 14;
 				t->value8 = 5;
@@ -915,7 +915,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 1;
 				t->value1 = -1;
-				t->value2 = 11;
+				t->value2 = 9;
 				t->value6 = 0;
 				t->value7 = 16;
 				t->value8 = 8;

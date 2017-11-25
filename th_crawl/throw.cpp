@@ -437,8 +437,34 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
-				item* temp = env[current_level].AddItem(prev,item_,1);
-				temp->throw_item = true;
+				if (item_->type == ITM_WEAPON_LONGBLADE && item_->value0 == 3)
+				{//철륜
+					env[current_level].ClearEffect();
+					beam--;
+					coord_def pos_;
+					while (length>1)
+					{
+						pos_ = *(beam--);
+						if (t_)
+							env[current_level].MakeEffect(pos_, t_, false);
+						else if (graphic_type || !item_)
+							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
+						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+							env[current_level].MakeEffect(pos_, item_->image, false);
+						Sleep(16);
+						env[current_level].ClearEffect();
+						length--;
+					}
+					item* temp = env[current_level].AddItem(beam.start_pos(), item_, 1);
+					temp->throw_item = true;
+					if(you.additem(temp, false))
+						env[current_level].DeleteItem(temp);
+				}
+				else
+				{
+					item* temp = env[current_level].AddItem(prev, item_, 1);
+					temp->throw_item = true;
+				}
 			}
 		}
 		break;

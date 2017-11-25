@@ -4286,13 +4286,16 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		time_delay += GetThrowDelay((*it).type);
 		if((!s_knife_collect || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
 		{
-			list<item>::iterator it2;
-			for(it2=you.item_list.begin(); it2 != you.item_list.end(); it2++)
+			if (throw_weapon == NULL)
 			{
-				if((*it2).can_throw && you.equipment[ET_WEAPON] != &(*it2))
+				list<item>::iterator it2;
+				for (it2 = you.item_list.begin(); it2 != you.item_list.end(); it2++)
 				{
-					throw_weapon = &(*it2);
-					break;
+					if ((*it2).can_throw && you.equipment[ET_WEAPON] != &(*it2))
+					{
+						throw_weapon = &(*it2);
+						break;
+					}
 				}
 			}
 		}

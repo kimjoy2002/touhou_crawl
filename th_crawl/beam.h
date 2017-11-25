@@ -32,6 +32,8 @@ public:
 	const coord_def* beam_iterator::operator->() const;
 	beam_iterator& operator ++ ();
 	beam_iterator operator ++ (int);
+	beam_iterator& operator -- ();
+	beam_iterator operator -- (int);
 	void init();
 	coord_def start_pos();
 	int GetDirec();

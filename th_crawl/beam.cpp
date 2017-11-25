@@ -66,6 +66,20 @@ beam_iterator beam_iterator::operator++( int dummy )
     ++(*this);
     return (copy);
 }
+beam_iterator& beam_iterator::operator --()
+{
+	cur_length--;
+	x -= x_step;
+	y -= y_step;
+	SetCurrent(type);
+	return *this;
+}
+beam_iterator beam_iterator::operator--(int dummy)
+{
+	const beam_iterator copy = *this;
+	--(*this);
+	return (copy);
+}
 void beam_iterator::init()
 {
 	cur_length = 1;

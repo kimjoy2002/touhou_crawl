@@ -1476,7 +1476,7 @@ int players::EvUpDown(int value_, int bonus_)
 	real_ev += value_;
 	bonus_ev += bonus_;
 	int size_ = -2*GetProperty(TPT_SIZE);
-	ev = 3+size_+ real_ev*(8+s_dex)/(32.0f-size_) + bonus_ev;
+	ev = 3+size_+ real_ev*(12+s_dex)/(32.0f-size_) + bonus_ev;
 	return ev;
 }
 int players::ShUpDown(int value_, int bonus_)

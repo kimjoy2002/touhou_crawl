@@ -71,7 +71,8 @@ void Help_Show()
 			printsub("W/T    - 방어구 장착/해제                          ",true,CL_normal);
 			printsub("P/R    - 장신구 장착/해제                          <치트모드>",true,CL_normal);
 			printsub("ctrl-A - 자동줍기 활성/해제                        & - 위자드모드",true,CL_normal);
-			printsub("                                                   _ - 세이브보존모드",true,CL_normal);
+			printsub("\'      - a, b단축키 무기 바꾸기                    _ - 세이브보존모드", true, CL_normal);
+			printsub("                                                   ",true,CL_normal);
 			printsub("                                                   ",true,CL_normal);
 			printsub("<능력 관련>                                        ",true,CL_normal);
 			printsub("p - 기도                                           ",true,CL_normal);

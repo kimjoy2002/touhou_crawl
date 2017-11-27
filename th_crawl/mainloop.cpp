@@ -594,6 +594,9 @@ void MainLoop()
 		case '^':
 			God_show();
 			break;
+		case '\'':
+			weapon_swap();
+			break;
 		case '&': //위자드모드!
 			//waitkeyinput();
 			wiz_mode();

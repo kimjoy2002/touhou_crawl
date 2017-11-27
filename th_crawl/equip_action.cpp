@@ -66,6 +66,57 @@ void Equip_Weapon()
 }
 
 
+void weapon_swap()
+{
+	item* aitem_ = you.GetItem('a');
+	item* bitem_ = you.GetItem('b');
+	if (aitem_ && !aitem_->isRightType(ET_WEAPON))
+		aitem_ = NULL;
+	if (bitem_ && !bitem_->isRightType(ET_WEAPON))
+		bitem_ = NULL;
+	bool equipAitem_ = false;
+	//장착한 무기가 a가 아니면 a로 a면 b로 바꿈
+	//a가 맨손인 경우는 어쩌지?
+
+	if (you.equipment[ET_WEAPON])
+	{
+		if(you.equipment[ET_WEAPON]->id == 'a')
+			equipAitem_ = false;
+		else
+		{
+			equipAitem_ = true;
+			you.already_swap = true;
+		}
+
+	}
+	else {
+		if (you.already_swap)
+		{
+			equipAitem_ = false;
+		}
+		else
+		{
+			equipAitem_ = true;
+			you.already_swap = true;
+		}
+
+	}
+
+	if(equipAitem_)
+	{
+		if (aitem_)
+			you.equip('a', ET_WEAPON);
+		else if (you.equipment[ET_WEAPON])
+			you.unequip(ET_WEAPON);
+	}
+	else
+	{
+		if (bitem_)
+			you.equip('b', ET_WEAPON);
+		else if (you.equipment[ET_WEAPON])
+			you.unequip(ET_WEAPON);
+	}
+}
 void Equip_Armor()
 {
 	if(you.s_lunatic)

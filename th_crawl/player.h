@@ -153,6 +153,7 @@ public:
 	int magic_resist;
 	int tension_gauge; //텐션 게이지
 	bool tension_turn; //이번턴에 이미 텐션을 체크했는가
+	bool already_swap; //swap했는가
 
 
 
@@ -563,6 +564,7 @@ void Drinking();
 void Spelllcard_Evoke();
 void Reading();
 void Equip_Weapon(); //무기장착
+void weapon_swap(); //무기스왑
 void Equip_Armor(); //방어구장착
 void Unequip_Armor(); //방어구해제
 void Equip_Jewelry(); //장신구장착

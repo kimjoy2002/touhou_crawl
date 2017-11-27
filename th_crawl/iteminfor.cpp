@@ -80,6 +80,13 @@ bool compareAlphabet(char l_, char r_)
 	return l_ > r_;
 }
 
+void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator b)
+{
+	list<item>::iterator aPlus = a;
+	++aPlus; // after position of a, will not be invalidated
+	l.splice(b, l, a); // move a before b, invalidates a
+	l.splice(aPlus, l, b); // move b before aPlus (where A was)
+}
 
 
 void iteminfor(bool gameover)
@@ -160,7 +167,7 @@ void iteminfor(bool gameover)
 										{
 											old_->id = item_->id;
 											new_->id = alphabet_;
-											iter_swap(old_, new_);
+											swap_list_items(you.item_list, old_, new_);
 
 											sprintf(temp, "%c", old_->id);
 											printlog(temp, false, false, false, old_->item_color());

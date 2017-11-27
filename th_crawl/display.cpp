@@ -1953,8 +1953,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		float x = 0, y = 0;
 		for(;it != text_log.text_list.end();it++)
 		{			
-			RECT rc={ (LONG)x, (LONG)y, 32/**16+16*/, (LONG)(y+fontDesc.Height)};
-			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
+			RECT rc={ (LONG)x, (LONG)y, 32*17+16, (LONG)(y+fontDesc.Height)};
+			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
 			if((*it)->enter)
 			{
 				x = 0;

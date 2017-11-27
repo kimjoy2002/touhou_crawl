@@ -19,13 +19,15 @@
 #include "book.h"
 #include "option_manager.h"
 #include "tribe.h"
+#include "dump.h"
+#include <set>
 
 extern HANDLE mutx;
 extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
+void discard(list<item>::iterator it, int number);
 
 
-
-string GetItemInfor(item *it);
+string GetItemInfor(item *it, bool can_use_, set<char> *key);
 
 void memorize_action(int spell_)
 {
@@ -66,6 +68,18 @@ void memorize_action(int spell_)
 
 }
 
+//true l이 r보다 크다
+bool compareAlphabet(char l_, char r_)
+{
+	bool l_small = l_ >= 'a' && l_ <= 'z';
+	bool r_small = l_ >= 'a' && l_ <= 'z';
+	if (l_small && !r_small)
+		return false;
+	else if(!l_small && r_small)
+		return true;
+	return l_ > r_;
+}
+
 
 
 void iteminfor(bool gameover)
@@ -81,31 +95,227 @@ void iteminfor(bool gameover)
 			{
 				while(1)
 				{
+					set<char> ket_list;
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetItemInfor(item_);
+					SetText() = GetItemInfor(item_, !gameover, &ket_list);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
-					if(item_->type == ITM_BOOK)
+					int key_ = waitkeyinput(true);
+					if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
 					{
-						int key_ = waitkeyinput(true);
-						if( (key_ >= 'a' && key_ <= 'f'))
-						{
-							if(int spell_ = item_->GetValue(key_ - 'a'+1))
-							{	
-								WaitForSingleObject(mutx, INFINITE);
-								SetText() = GetSpellInfor((spell_list)spell_);
-								SetText() += "\n\n";
-								SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
-								ReleaseMutex(mutx);
-								int memory_ = waitkeyinput();
+						if(int spell_ = item_->GetValue(key_ - 'a'+1))
+						{	
+							WaitForSingleObject(mutx, INFINITE);
+							SetText() = GetSpellInfor((spell_list)spell_);
+							SetText() += "\n\n";
+							SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
+							ReleaseMutex(mutx);
+							int memory_ = waitkeyinput();
 
-								if(memory_ == 'm')
+							if(memory_ == 'm')
+							{
+								memorize_action(spell_);
+								return;
+							}
+							continue;
+						}
+					}
+					else if (!ket_list.empty())
+					{
+
+						if (ket_list.count(key_) >= 1)
+						{
+							switch (key_)
+							{
+							case '=': //단축키 바꾸기
+							{
+								changedisplay(DT_GAME);
+								printlog("무슨 알파벳으로 바꿀거지? (a-z, A-Z)", true, false, false, CL_help);
 								{
-									memorize_action(spell_);
+									int alphabet_ = waitkeyinput();
+									if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
+										(alphabet_ >= 'A' && alphabet_ <= 'Z'))
+									{
+										list<item>::iterator old_;
+										list<item>::iterator new_;
+										for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
+										{
+											if (old_->id == alphabet_)
+											{
+												break;
+											}
+										}
+										for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
+										{
+											if (new_->id == item_->id)
+											{
+												break;
+											}
+										}
+										if (new_ == you.item_list.end())
+											break;
+
+										char temp[100];
+										if (old_ != you.item_list.end())
+										{
+											old_->id = item_->id;
+											new_->id = alphabet_;
+											iter_swap(old_, new_);
+
+											sprintf(temp, "%c", old_->id);
+											printlog(temp, false, false, false, old_->item_color());
+											printlog(" - ", false, false, false, old_->item_color());
+											printlog(old_->GetName(), false, false, false, old_->item_color());
+											printlog(", ", false, false, false, old_->item_color());
+										}
+										else
+										{
+											list<item>::iterator it;
+											for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+											{
+												if (compareAlphabet(it->id, alphabet_))
+												{
+													new_->id = alphabet_;
+													you.item_list.splice(it, you.item_list, new_);
+													break;
+												}
+											}
+											if (it == you.item_list.end())
+											{
+												new_->id = alphabet_;
+												you.item_list.splice(it, you.item_list, new_);
+											}
+										}
+										sprintf(temp, "%c", new_->id);
+										printlog(temp, false, false, false, new_->item_color());
+										printlog(" - ", false, false, false, new_->item_color());
+										printlog(new_->GetName(), false, false, false, new_->item_color());
+										printlog(" ", false, false, false, new_->item_color());
+									}
+								}
+								return;
+							}
+							case 'w': //장착
+								changedisplay(DT_GAME);
+								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
+								{
+									you.equip(item_->id, ET_WEAPON);
+								}
+								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
+								{
+									you.equiparmor(item_->id);
+								}
+								else if (item_->type == ITM_AMULET)
+								{
+									you.equipjewerly(item_->id);
+								}
+								else if (item_->type == ITM_RING)
+								{
+									you.equipjewerly(item_->id);
+								}
+								return;
+							case 'u': //벗기
+								changedisplay(DT_GAME);
+								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
+								{
+									if (!you.unequip(ET_WEAPON))
+									{
+										printlog("저주에 걸려 있어서 장비를 벗을 수 없다.", true, false, false, CL_normal);
+									}
+								}
+								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
+								{
+									you.unequiparmor(item_->id);
+								}
+								else if (item_->type == ITM_AMULET)
+								{
+									you.unequipjewerly(item_->id);
+								}
+								else if (item_->type == ITM_RING)
+								{
+									you.unequipjewerly(item_->id);
+								}
+								return;
+							case 'f': //탄막
+							{
+								changedisplay(DT_GAME);
+								you.throw_weapon = item_;
+								char temp[100];
+								sprintf(temp, "%c", item_->id);
+								printlog(temp, false, false, false, item_->item_color());
+								printlog(" - ", false, false, false, item_->item_color());
+								printlog(item_->GetName(), false, false, false, item_->item_color());
+								printlog("(탄막) ", false, false, false, item_->item_color());
+							}
+								return;
+							case 'q': //마시기
+								if (you.Drink(item_->id))
+								{
+									you.time_delay += you.GetNormalDelay();
+									you.doingActionDump(DACT_USE, "물약");
+									changedisplay(DT_GAME);
+									if (you.god == GT_EIRIN)
+									{
+										if (randA(2))
+										{
+											you.PietyUpDown(1);
+											you.GiftCount(1);
+										}
+									}
+									you.TurnEnd();
+								}
+								changedisplay(DT_GAME);
+								return;
+							case 'e': //먹기
+								changedisplay(DT_GAME);
+								you.Eat(item_->id);
+								return;
+							case 'r': //읽기
+								if(you.Read(item_->id))
+								{
+									you.doingActionDump(DACT_USE, "두루마리");
+									you.time_delay += you.GetNormalDelay();
+									changedisplay(DT_GAME);
+									you.TurnEnd();
+								}
+								changedisplay(DT_GAME);
+								return;
+							case 'v': //발동
+								changedisplay(DT_GAME);
+								if (you.Evoke(item_->id))
+								{
+									you.time_delay += you.GetNormalDelay();
+									you.TurnEnd();
+								}
+								return;
+							case 'd': //버리기
+							case 'D':
+								{
+									bool discard_ = false;
+									for (auto it = you.item_list.begin(); it != you.item_list.end(); it++)
+									{
+										if (&(*it) == item_)
+										{
+											if (you.possibleunequip(it))
+											{
+												discard(it, GetItemofNum(it, you.item_list.end()));
+												discard_ = true;
+												break;
+											}
+											else
+											{
+												break;
+											}
+										}
+									}
+									if (!discard_)
+									{
+										printlog("존재하지 않는 템입니다.", true, false, false, CL_normal);
+									}
+									changedisplay(DT_GAME);
 									return;
 								}
-								continue;
-							}	
+							}
 						}
 					}
 					else
@@ -137,10 +347,18 @@ void iteminfor(bool gameover)
 	changedisplay(DT_GAME);
 }
 
-string GetItemInfor(item *it)
+string GetItemInfor(item *it, bool can_use_, set<char> *key)
 {
+	string use_text_;
+	
 	string text_ = it->GetName();
 	text_ += "\n\n";
+
+	if (can_use_)
+	{
+		use_text_ += "(=)단축키변경, ";
+		if (key) key->insert('=');
+	}
 	switch (it->type)
 	{
 		//case ITM_WEAPON_DAGGER:
@@ -312,6 +530,26 @@ string GetItemInfor(item *it)
 			sprintf(temp, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
 			text_ += temp;
 		}
+
+
+		if(can_use_)
+		{
+			if (you.equipment[ET_WEAPON] != it)
+			{
+				use_text_ += "(w)장착, ";
+				if (key) key->insert('w');
+			}
+			else
+			{
+				use_text_ += "(u)해제, ";
+				if (key) key->insert('u');
+			}
+			if (it->can_throw)
+			{
+				use_text_ += "(f)탄막, ";
+				if (key) key->insert('f');
+			}
+		}
 		break;
 	}
 	case ITM_THROW_TANMAC:
@@ -346,6 +584,15 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		sprintf(temp, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
+
+		if (can_use_)
+		{
+			if (it->can_throw)
+			{
+				use_text_ += "(f)탄막, ";
+				if (key) key->insert('f');
+			}
+		}
 	}
 	break;
 	case ITM_ARMOR_BODY_ARMOUR_0:
@@ -427,6 +674,21 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		sprintf(temp, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
 		text_ += temp;
+
+
+		if (can_use_)
+		{
+			if (you.equipment[ET_ARMOR] != it)
+			{
+				use_text_ += "(w)장착, ";
+				if (key) key->insert('w');
+			}
+			else
+			{
+				use_text_ += "(u)해제, ";
+				if (key) key->insert('u');
+			}
+		}
 		break;
 	}
 	case ITM_ARMOR_SHIELD:
@@ -452,6 +714,20 @@ string GetItemInfor(item *it)
 		text_ += temp;
 		sprintf(temp, "이 아이템은 +%d까지 인챈트가 가능하다.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
 		text_ += temp;
+
+		if (can_use_)
+		{
+			if (you.equipment[ET_SHIELD] != it)
+			{
+				use_text_ += "(w)장착, ";
+				if (key) key->insert('w');
+			}
+			else
+			{
+				use_text_ += "(u)해제, ";
+				if (key) key->insert('u');
+			}
+		}
 		break;
 	}
 	case ITM_ARMOR_HEAD:
@@ -463,15 +739,67 @@ string GetItemInfor(item *it)
 		{
 		case ITM_ARMOR_HEAD:
 			text_ += "머리에 달 수 있는 리본. 패션의 기본\n";
+			if (can_use_)
+			{
+				if (you.equipment[ET_HELMET] != it)
+				{
+					use_text_ += "(w)장착, ";
+					if (key) key->insert('w');
+				}
+				else
+				{
+					use_text_ += "(u)해제, ";
+					if (key) key->insert('u');
+				}
+			}
 			break;
 		case ITM_ARMOR_CLOAK:
 			text_ += "몸에 두르는 폼나는 망토.\n";
+			if (can_use_)
+			{
+				if (you.equipment[ET_CLOAK] != it)
+				{
+					use_text_ += "(w)장착, ";
+					if (key) key->insert('w');
+				}
+				else
+				{
+					use_text_ += "(u)해제, ";
+					if (key) key->insert('u');
+				}
+			}
 			break;
 		case ITM_ARMOR_GLOVE:
 			text_ += "손에 낄 수 있는 장갑이다. 장갑에 저주가 걸려있으면 반지를 빼고 낄 수 없다.\n";
+			if (can_use_)
+			{
+				if (you.equipment[ET_GLOVE] != it)
+				{
+					use_text_ += "(w)장착, ";
+					if (key) key->insert('w');
+				}
+				else
+				{
+					use_text_ += "(u)해제, ";
+					if (key) key->insert('u');
+				}
+			}
 			break;
 		case ITM_ARMOR_BOOT:
 			text_ += "발을 보호하는 신발. 던전의 바닥을 맨발로 다니고 싶지않으면 꼭 착용하자.\n";
+			if (can_use_)
+			{
+				if (you.equipment[ET_BOOTS] != it)
+				{
+					use_text_ += "(w)장착, ";
+					if (key) key->insert('w');
+				}
+				else
+				{
+					use_text_ += "(u)해제, ";
+					if (key) key->insert('u');
+				}
+			}
 			break;
 		}
 		char temp[100];
@@ -556,10 +884,20 @@ string GetItemInfor(item *it)
 		{
 			text_ += "뭔가 의심스러운 액체가 들어있는 병. 마셔보지 않고선 알 수 없을 것 같다.\n";
 		}
+		if (can_use_)
+		{
+			use_text_ += "(q)마시기, ";
+			if (key) key->insert('q');
+		}
 	}
 	break;
 	case ITM_FOOD:
 		text_ += "먹을 수 있는 음식이다. 던전에 이런 음식들이 떨어져있는 것도 수상하지만 먹을 순 있어 보인다.\n";
+		if (can_use_)
+		{
+			use_text_ += "(e)먹기, ";
+			if (key) key->insert('e');
+		}
 		break;
 	case ITM_SCROLL:
 	{
@@ -644,6 +982,11 @@ string GetItemInfor(item *it)
 			text_ += "알 수 없는 문자들이 나열되어있는 두루마리.\n";
 		}
 		text_ += "소리내어서 읽으면 두루마리에 담겨진 미지의 힘을 끌어낼 수 있다.\n";
+		if (can_use_)
+		{
+			use_text_ += "(r)읽기, ";
+			if (key) key->insert('r');
+		}
 	}
 	break;
 	case ITM_SPELL:
@@ -679,6 +1022,11 @@ string GetItemInfor(item *it)
 		}
 		text_ += "스펠카드는 정해진 횟수내에서 마음대로 사용할 수 있으나 초과하면 더이상 사용할 수 없게된다.\n";
 		text_ += "정확한 남은 갯수는 식별을 해야 확인할 수 있다. 스펠카드는 발동술에 비례해서 위력이 올라간다.\n";
+		if (can_use_)
+		{
+			use_text_ += "(v)발동, ";
+			if (key) key->insert('v');
+		}
 	}
 	break;
 	case ITM_AMULET:
@@ -758,6 +1106,20 @@ string GetItemInfor(item *it)
 		{
 			text_ += "이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n";
 			text_ += "착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n";
+		}		
+
+		if (can_use_)
+		{
+			if (you.equipment[ET_NECK] != it)
+			{
+				use_text_ += "(w)장착, ";
+				if (key) key->insert('w');
+			}
+			else
+			{
+				use_text_ += "(u)해제, ";
+				if (key) key->insert('u');
+			}
 		}
 	}
 	break;
@@ -855,6 +1217,19 @@ string GetItemInfor(item *it)
 			text_ += "미지의 힘이 담겨있는 반지.\n";
 			text_ += "착용시 바로 그 힘을 알 수 있는 반지도 있는 반면. 눈치채기 힘든 반지도 있다.\n";
 		}
+		if (can_use_)
+		{
+			if (you.equipment[ET_RIGHT] != it && you.equipment[ET_LEFT] != it)
+			{
+				use_text_ += "(w)장착, ";
+				if (key) key->insert('w');
+			}
+			else
+			{
+				use_text_ += "(u)해제, ";
+				if (key) key->insert('u');
+			}
+		}
 	}
 	break;
 	case ITM_BOOK:
@@ -907,6 +1282,11 @@ string GetItemInfor(item *it)
 		sprintf(temp, "이 발동템을 사용할때마다 필요한 파워: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
 		text_ += temp;
 
+		if (can_use_)
+		{
+			use_text_ += "(v)발동, ";
+			if (key) key->insert('v');
+		}
 	}
 	break;
 
@@ -951,6 +1331,19 @@ string GetItemInfor(item *it)
 		break;
 	}
 
+	if (can_use_)
+	{
+		if (it->type == ITM_BOOK)
+		{
+			use_text_ += "(D)버리기";
+			if (key) key->insert('D');
+		}
+		else
+		{
+			use_text_ += "(d)버리기";
+			if (key) key->insert('d');
+		}
+	}
 
 
 
@@ -964,6 +1357,9 @@ string GetItemInfor(item *it)
 		}
 	}
 
+
+	text_ += "\n\n\n";
+	text_ += use_text_;
 	//char temp[100];
 	//if(!it->is_pile || it->num == 1)
 	//	sprintf(temp,"\n\n\n무게 : %g\n",it->weight);

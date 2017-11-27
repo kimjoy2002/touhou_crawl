@@ -16,9 +16,10 @@
 #include "spellcard.h"
 #include "dump.h"
 #include "option_manager.h"
+#include <set>
 
 extern HANDLE mutx;
-string GetItemInfor(item *it);
+string GetItemInfor(item *it, bool can_use_, set<char> *key);
 
 
 void PickUp()
@@ -453,7 +454,6 @@ void Spelllcard_Evoke()
 			changedisplay(DT_GAME);
 			if(you.Evoke(key_))
 			{
-				
 				you.time_delay += you.GetNormalDelay();
 				you.TurnEnd();
 			}
@@ -522,7 +522,7 @@ void Reading()
 				while(1)
 				{
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetItemInfor(item_);
+					SetText() = GetItemInfor(item_, false, NULL);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					int key_ = waitkeyinput(true);

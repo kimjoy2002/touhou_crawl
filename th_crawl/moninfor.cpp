@@ -1008,26 +1008,8 @@ string GetMonsterInfor(monster *it)
 				if(SpellFlagCheck(spell_, S_FLAG_DEBUF))
 				{
 					int value_ = GetDebufPower(spell_, min(SpellCap(spell_),(it->level-3)*5));
-					int percent_ = you.GetResist() - value_;
-					if(percent_ <= 1)
-					{
-						percent_ = 0;
-					}
-					else if(percent_<=101)
-					{
-						percent_ = percent_*(percent_-1)/2;
-					}
-					else if(percent_<=200)
-					{
-						percent_-= 101;
-						percent_ = 5050+percent_*(199-percent_)/2;
-					}			
-					else 
-					{
-						percent_ =  10000;
-					}
-
-					sprintf_s(temp,100," (%.0f%%)",(10000-percent_)/100.0f);
+					float percent_ = getDebufPercent (you.GetResist(), value_);
+					sprintf_s(temp,100," (%.0f%%)", percent_);
 					text_+=temp;
 
 				}

@@ -3732,7 +3732,7 @@ bool monster::Teleport()
 }
 int monster::GetResist()
 {
-	return 40+level * 5 + (resist+1) * 20;
+	return 70+level * 5 + (resist+1) * 25;
 }
 int monster::GetDetect()
 {

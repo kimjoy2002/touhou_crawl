@@ -2295,7 +2295,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 						sprintf(temp_speak,"%s%s외쳤다. \"요정들이 세봐야 얼마나 세겠어?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 3:
-						sprintf(temp_speak,"%s%s외쳤다. \"넌 스펠카드를 가지고 있지 않나보구나?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"넌 편하게 뒤에서 싸움을 구경해도 되니 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 4:
 						sprintf(temp_speak,"%s%s외쳤다. \"별로 요정들이랑 친해지고싶은 생각은 없어.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
@@ -2365,7 +2365,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=MISTY_LAKE_LEVEL && current_level<MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL) {					
+				else if(current_level>=MISTY_LAKE_LEVEL && current_level<=MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL) {					
 					switch(randA(6))
 					{
 					case 0:
@@ -2392,7 +2392,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) {					
+				else if(current_level>=YOUKAI_MOUNTAIN_LEVEL && current_level<=YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) {					
 					switch(randA(6))
 					{
 					case 0:
@@ -2419,7 +2419,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=SCARLET_LEVEL && current_level<SCARLET_LEVEL+MAX_SCARLET_LEVEL) {					
+				else if(current_level>=SCARLET_LEVEL && current_level<=SCARLET_LEVEL+MAX_SCARLET_LEVEL) {					
 					switch(randA(6))
 					{
 					case 0:
@@ -2446,7 +2446,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=SCARLET_LIBRARY_LEVEL && current_level<SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL) {					
+				else if(current_level>=SCARLET_LIBRARY_LEVEL && current_level<=SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL) {					
 					switch(randA(5))
 					{
 					case 0:
@@ -2470,7 +2470,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=SCARLET_UNDER_LEVEL && current_level<SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL) {					
+				else if(current_level>=SCARLET_UNDER_LEVEL && current_level<=SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL) {					
 					switch(randA(3))
 					{
 					case 0:
@@ -2488,7 +2488,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=BAMBOO_LEVEL && current_level<BAMBOO_LEVEL+MAX_BAMBOO_LEVEL) {					
+				else if(current_level>=BAMBOO_LEVEL && current_level<=BAMBOO_LEVEL+MAX_BAMBOO_LEVEL) {					
 					switch(randA(7))
 					{
 					case 0:
@@ -2518,7 +2518,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
-				else if(current_level>=EIENTEI_LEVEL && current_level<EIENTEI_LEVEL+MAX_EIENTEI_LEVEL) {					
+				else if(current_level>=EIENTEI_LEVEL && current_level<=EIENTEI_LEVEL+MAX_EIENTEI_LEVEL) {					
 					switch(randA(3))
 					{
 					case 0:

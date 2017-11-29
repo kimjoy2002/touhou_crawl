@@ -2309,6 +2309,8 @@ int texturetoint(textures* input)
 		return 393;
 	else if (input == &img_item_weapon_bamboo_spear)
 		return 394;
+	else if (input == &img_named_sigmund)
+		return 395;
 	else
 		return 0;
 }
@@ -3106,6 +3108,8 @@ textures* inttotexture(int input)
 		return &img_item_weapon_dauzing_rod;
 	case 394:
 		return &img_item_weapon_bamboo_spear;
+	case 395:
+		return &img_named_sigmund;
 	default:
 		return &img_mons_default;
 	}

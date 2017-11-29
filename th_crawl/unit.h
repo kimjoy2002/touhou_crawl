@@ -158,10 +158,7 @@ public:
 
 
 	virtual int GetResist() = 0;
-	bool CalcuateMR(int power)
-	{
-		return GetMindReading()?true:(GetResist() - power < randC(2,100));
-	}
+	bool CalcuateMR(int power);
 	virtual int GetPoisonResist()=0;
 	virtual float GetFireResist(bool cloud_ = false)=0;
 	virtual float GetColdResist(bool cloud_ = false)=0;

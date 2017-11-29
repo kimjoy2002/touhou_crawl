@@ -1349,6 +1349,7 @@ int SpellCap(spell_list skill)
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
 	case SPL_WATER_CANNON:
+	case SPL_SELF_INJURY:
 	case SPL_KYOKO_SMITE:
 	case SPL_MUTE:
 	case SPL_STONE_UPLIFT:
@@ -1363,7 +1364,6 @@ int SpellCap(spell_list skill)
 	case SPL_POISON_CLOUD:
 	case SPL_ICE_CLOUD:
 	case SPL_SUMMON_GOLEM:
-	case SPL_SELF_INJURY:
 	case SPL_CHARM:
 	case SPL_LASER:
 	case SPL_SUMMON_UNZAN:

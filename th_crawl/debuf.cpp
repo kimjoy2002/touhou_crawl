@@ -62,6 +62,45 @@ unit* DebufBeam(skill_list skill_, unit* order, coord_def target)
 	return DebufBeam(SkillLength(skill_),order, target);
 }
 
+int power_calculate(int resist, int power)
+{
+	return resist - power;
+}
+float getDebufPercent(int resist, int power)
+{
+	int percent_ = power_calculate(resist, power);
+	if (percent_ <= 1)
+	{
+		percent_ = 0;
+	}
+	else if (percent_ <= 101)
+	{
+		percent_ = percent_*(percent_ - 1) / 2;
+	}
+	else if (percent_ <= 200)
+	{
+		percent_ -= 101;
+		percent_ = 5050 + percent_*(199 - percent_) / 2;
+	}
+	else
+	{
+		percent_ = 10000;
+	}
+
+
+	return (10000 - percent_) / 100.0f;
+}
+
+bool unit::CalcuateMR(int power)
+{
+	if (wiz_list.wizard_mode == 1)
+	{
+		char temp[100];
+		sprintf_s(temp, 100, "디버프계산: 몬스터(%d) - 파워(%d) < randC(2,100)", GetResist(), power);
+		printarray(true, false, false, CL_help, 1, temp);
+	}
+	return GetMindReading() ? true : power_calculate(GetResist(), power) < randC(2, 100);
+}
 
 int GetDebufPower(spell_list skill, int power_)
 {
@@ -76,17 +115,17 @@ int GetDebufPower(spell_list skill, int power_)
 	case SPL_TELEPORT_OTHER:
 		return power_;
 	case SPL_HYPNOSIS:
-		return power_+10;
+		return power_+40;
 	case SPL_MUTE:
 		return power_-10;
 	case SPL_SELF_INJURY:
-		return power_;
+		return power_+10;
 	case SPL_CHARM:
 		return power_;
 	case SPL_MIND_BENDING:
-		return power_-20;
+		return power_-10;
 	case SPL_ANIMAL_CHANGE:
-		return power_-20;
+		return power_-10;
 	case SPL_PRIVATE_SQ:
 		return power_;
 	case SPL_INSANE:
@@ -94,7 +133,7 @@ int GetDebufPower(spell_list skill, int power_)
 	case SPL_STASIS:
 		return power_+20;
 	case SPL_MESS_CONFUSION:
-		return power_;
+		return power_-10;
 	default:
 		return power_-10;
 	}

@@ -914,7 +914,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			else if (i <= 20)
 			{
 				t->value0 = 1;
-				t->value1 = -1;
+				t->value1 = 1;
 				t->value2 = 9;
 				t->value6 = 0;
 				t->value7 = 16;
@@ -931,7 +931,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 2;
 				t->value1 = -2;
-				t->value2 = 11;
+				t->value2 = 12;
 				t->value6 = 0;
 				t->value7 = 15;
 				t->value8 = 7;
@@ -946,8 +946,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			else if(i<=40)
 			{
 				t->value0 = 3;
-				t->value1 = -1;
-				t->value2 = 10;
+				t->value1 = 0;
+				t->value2 = 11;
 				t->value6 = 0;
 				t->value7 = 14;
 				t->value8 = 7;

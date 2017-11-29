@@ -4609,7 +4609,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	}
 	if (order->s_clever) {
 		power *= 1.5f;
-		printarray(false, false, false, CL_danger,3,"디버그)",order->GetName()->name.c_str()," 마법증폭");
+		if(wiz_list.wizard_mode == 1)
+			printarray(false, false, false, CL_danger,3,"디버그)",order->GetName()->name.c_str()," 마법증폭");
 
 	}
 	power=max(0,min(SpellCap(skill),power));

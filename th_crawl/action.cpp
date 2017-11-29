@@ -30,6 +30,7 @@
 #include "rand_shuffle.h"
 #include "option_manager.h"
 #include "book.h"
+#include "debuf.h"
 
 #include <algorithm>
 #include <random>
@@ -432,28 +433,11 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 				{					
 					printlog("(",false,false,true,CL_normal);
 					char temp[64];
-					int percent_ = (*it).GetResist() - value_;
-					if(percent_ <= 1)
-					{
-						percent_ = 0;
-					}
-					else if(percent_<=101)
-					{
-						percent_ = percent_*(percent_-1)/2;
-					}
-					else if(percent_<=200)
-					{
-						percent_-= 101;
-						percent_ = 5050+percent_*(199-percent_)/2;
-					}			
-					else 
-					{
-						percent_ =  10000;
-					}
+					float percent_ = getDebufPercent((*it).GetResist(), value_);
 					if(it->s_mind_reading)
 						percent_ = 0;
 
-					sprintf_s(temp,64,"¼º°øÈ®·ü: %.0f%%",(10000-percent_)/100.0f);
+					sprintf_s(temp,64,"¼º°øÈ®·ü: %.0f%%", percent_);
 					printlog(temp,false,false,true,CL_normal);
 					printlog(")",false,false,true,CL_normal);
 				}

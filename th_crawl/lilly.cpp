@@ -278,32 +278,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch (randA(5))
 			{
 			case 0:
-				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s말했다. \"와아! 모두 돌격!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s말했다. \"오늘따라 힘이 넘쳐흘러!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 2:
-				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s말했다. \"요정부대 출격이다!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 3:
-				sprintf(temp_speak, "%s%s당신에게 ", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s당신의 앞에서 날개 춤을 추었다.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 4:
-				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s말했다. \"점점 강해지는 것 같아!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 5:
-				sprintf(temp_speak, "%s%s말했다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf(temp_speak, "%s%s말했다. \"다음엔 어디서 놀까?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf(temp_speak, "%s%s외쳤다. \"!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf(temp_speak, "%s%s외쳤다. \"너 정말 강하구나! 잘 부탁해!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf(temp_speak, "%s%s외쳤다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf(temp_speak, "%s%s외쳤다. \"한 여름밤의 전쟁이다!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf(temp_speak, "%s%s외쳤다. \"\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf(temp_speak, "%s%s외쳤다. \"부우활!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;

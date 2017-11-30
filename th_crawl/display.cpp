@@ -1816,12 +1816,6 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
 				{
 					(*it).draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
-					if((*it).isUnique() || (*it).image == &img_mons_default)
-					{
-						RECT rc={(LONG)(((*it).position.x-x_)*32.0f+20.0f),(LONG)(((*it).position.y-y_)*32.0f-10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight()};
-						rc.left -= fontDesc.Width*(*it).GetName()->name.size()/2;
-						pfont->DrawTextA(pSprite,(*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);	
-					}
 				}
 				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
 			}
@@ -1925,8 +1919,22 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 
-
-
+	//네임드 이름만 그리기
+	{
+		vector<monster>::iterator it;
+		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if ((*it).isLive() && (*it).isYourShight() && (*it).isUnique() || (*it).image == &img_mons_default) //더 추가해야할거. 볼수있다(투명아님).
+			{
+				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
+				{
+					RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
+					rc.left -= fontDesc.Width*(*it).GetName()->name.size() / 2;
+					pfont->DrawTextA(pSprite, (*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+				}
+			}
+		}
+	}
 
 	//텍스트(위쪽에 숏로그)그리기
 	if(!text_log.text_list.empty())

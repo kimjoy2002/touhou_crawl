@@ -28,6 +28,8 @@ int exp_to_skill_exp(int level);
 int skill_exp_penalty(int total_skill_exp);
 char* skill_string(skill_type skill);
 int GetSkillPercent(const skill_exp_infor &skill);
+int GetMaxSkillExp(const skill_exp_infor &skill);
+int GetBaseSkillExp();
 //int GetSkillDisplay(int aptit_);
 D3DCOLOR GetSkillColor(int aptit_);
 

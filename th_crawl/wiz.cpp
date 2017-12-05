@@ -600,6 +600,22 @@ void wiz_mode()
 		case 'o':
 			you.hp = 1;
 			break;
+		case 'q':
+		{
+			D3DCOLOR color_[] = { CL_normal, CL_warning, CL_small_danger, CL_danger, CL_magic, CL_help, CL_alchemy };
+			int j = 0;
+			for (int i = 0; i < 27; i++) {
+				char temp[100];
+				printlog(itoa(need_skill_exp(i, 100), temp, 10), false, false, false, color_[j]);
+				printlog(" ", false, false, false, CL_normal);
+				if (i == 13)
+					enterlog();
+				if (i % 5 == 4)
+					j++;
+			}
+			enterlog();
+		}
+			break;
 		case 'C':
 			{
 				for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)

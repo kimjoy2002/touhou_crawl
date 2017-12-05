@@ -2069,7 +2069,8 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		return false;
 	}
 	int exp_panalty = exp_to_skill_exp(GetSkillLevel(skill_, false));
-	int up_point = (exp_*10)/exp_panalty;
+	int up_point = (exp_*(4+min(6,exp_panalty)))/exp_panalty;
+
 	if(up_point<0)
 		up_point = 0;
 	skill[skill_].exper += up_point;

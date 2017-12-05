@@ -502,14 +502,21 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
-	int skt = 0, i=0;
+	int skt = 0, i=0; 
 	char sk_char = 'a';
+
+	sprintf_s(temp, 100, "      스킬명  레벨    현재  적성   비용          스킬명  레벨    현재  적성   비용");
+	pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.top += 2*fontDesc.Height;
+
+	rc.left = 50;
+
 	while(skt < SKT_MAX)
 	{
 		for(i = 0;i<1;i++)
 		{
 
-			sprintf_s(temp,100,"%c %c %8s %3d", you.GetSkillLevel(skt, false)==27?' ':sk_char,(you.GetSkillLevel(skt, false) ==27?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt), you.GetSkillLevel(skt, true));
+			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27?' ':sk_char,(you.GetSkillLevel(skt, false) ==27?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt), you.GetSkillLevel(skt, true));
 			sk_char++;
 
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 ? 
@@ -534,16 +541,46 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						
 			sprintf_s(temp,100,"%3d",you.skill[skt].aptit);
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
-			
 
+			rc.left += 50;
+			if (you.GetSkillLevel(skt, false) < 27) 
+			{
+				int base_skill = GetBaseSkillExp();
+				int skill_pecent = GetMaxSkillExp(you.skill[skt]);
+				float multi_ = exp_to_skill_exp(you.GetSkillLevel(skt, false));
 
-			rc.left += 250;
+				float value_ = (float)skill_pecent / base_skill;
+
+				sprintf_s(temp, 100, "%3.1f", value_);
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			}
+			else 
+			{
+				sprintf_s(temp, 100, " -   ");
+				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			}
+
+			rc.left += 200;
 			if(sk_char == 'z'+1)
 				sk_char = 'A';
-			if(sk_char == 'm')
+			switch (skt)
+			{
+			case SKT_FIGHT:
+			case SKT_TANMAC - 1:
+			case SKT_TANMAC:
+			case SKT_SPELLCASTING:
+			case SKT_EVOCATE-1:
+				rc.top += fontDesc.Height;
+				break;
+			default:
+				break;
+			}
+
+
+			if(skt == SKT_SPELLCASTING - 1)
 			{
 				rc.left = 800;
-				rc.top = 50-fontDesc.Height;
+				rc.top = 50+fontDesc.Height;
 			}
 		}
 		rc.left -= 450*i;
@@ -552,9 +589,24 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 
 	rc.left = 50;	
-	rc.top += fontDesc.Height*3;
-	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
 	rc.top += fontDesc.Height*2;
+	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
+	rc.top += fontDesc.Height *2;
+
+
+	pfont->DrawTextA(pSprite, "현재 당신의 스킬레벨을 확인하고 경험치 분배 비율을 조절할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+	rc.top += fontDesc.Height*1;
+
+	pfont->DrawTextA(pSprite, "알파벳 키를 눌러서 원하는 스킬로 경험치를 분배할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+
+	rc.top += fontDesc.Height * 2;
+	if (wiz_list.wizard_mode == 1 )
+	{
+		char temp[50];
+		sprintf_s(temp, 50, "[현재 경험치 패널티 %d]", exp_to_skill_exp(0));
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
+	}
+
 
 }
 void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)

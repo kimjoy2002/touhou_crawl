@@ -979,6 +979,10 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "읽은 순간 넓은 성역을 펼치는 두루마리. 성역에서는 모든 공격의 데미지를 무효로 한다.\n";
 				text_ += "산 속에 사는 어느 야만바가 만들었다고 하는 귀한 두루마리.\n";
 				break;
+			case SCT_BRAND_WEAPON:
+				text_ += "지금 들고 있는 무기에 마법적인 힘을 부여하는 두루마리.\n";
+				text_ += "어떤 마법이 부여될지는 알 수 없으며 기존에 부여된 마법적인 힘은 덮어씌워진다.\n";
+				break;
 			default:
 				text_ += "버그의 두루마리. 얼른 제작자에게 버그로 신고해버리자!\n";
 				break;

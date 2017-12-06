@@ -1789,7 +1789,7 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
-	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
+	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		printarray(true,false,false,CL_autumn,2,you.equipment[ET_WEAPON]->GetName().c_str(),"에서 쓸쓸하고도 종말적인 기운이 느껴진다.");
 		you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
@@ -1821,7 +1821,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
-	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
+	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"저주의 힘으로 가득 차있다.");
 		you.equipment[ET_WEAPON]->value5 = WB_CURSE;

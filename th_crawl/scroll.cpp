@@ -16,6 +16,7 @@
 #include "skill_use.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
+#include "weapon.h"
 #include <algorithm>
 extern HANDLE mutx;
 
@@ -40,6 +41,7 @@ char *scroll_uniden_string[SCT_MAX]=
 	"DQFQEFS가 써있는 ",
 	"BAHJDQU가 써있는 ",
 	"WQGOKOU가 써있는 ",
+	"EIQJIWE가 써있는 "
 };
 
 const char *scroll_iden_string[SCT_MAX]=
@@ -62,7 +64,8 @@ const char *scroll_iden_string[SCT_MAX]=
 	"영격 ",
 	"스펠카드충전의 ",
 	"망각의 ",
-	"성역의 "
+	"성역의 ",
+	"마법무기의 "
 };
 
 
@@ -83,6 +86,7 @@ bool skill_soul_shot(int power, unit* order, coord_def target);
 bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_);
 bool amnesia_scroll(bool pre_iden_);
+bool brand_weapon_scroll(bool pre_iden_);
 
 
 
@@ -97,8 +101,8 @@ scroll_type goodbadscroll(int good_bad)
 	}
 	else if(good_bad==3)
 	{
-		scroll_type list_[3] = {SCT_SILENCE,SCT_SOUL_SHOT,SCT_SANTUARY};
-		return list_[randA(2)];
+		scroll_type list_[4] = {SCT_SILENCE,SCT_SOUL_SHOT,SCT_SANTUARY, SCT_BRAND_WEAPON};
+		return list_[randA(3)];
 	}
 	else //if(good_bad==1)
 	{
@@ -134,6 +138,7 @@ int isGoodScroll(scroll_type kind)
 	case SCT_SILENCE:
 	case SCT_CHARGING:
 	case SCT_AMNESIA:
+	case SCT_BRAND_WEAPON:
 		return 1;
 	case SCT_NONE:
 		return 0;
@@ -316,6 +321,12 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		bool return_ = amnesia_scroll(pre_iden_);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
+		}
+	case SCT_BRAND_WEAPON:
+		{
+			iden_list.scroll_list[kind].iden = 3;
+			bool return_ = brand_weapon_scroll(pre_iden_);
+			return return_;
 		}
 	}
 	return true;
@@ -930,5 +941,76 @@ bool amnesia_scroll(bool pre_iden_)
 	}
 	else{
 		return true;
+	}
+}
+
+
+bool brand_weapon_scroll(bool pre_iden_)
+{
+	if (you.equipment[ET_WEAPON])
+	{
+		string before_name = you.equipment[ET_WEAPON]->GetName();
+		if (you.equipment[ET_WEAPON] && (you.equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
+		{
+			random_extraction<int> random;
+			random.push(WB_FIRE, 30);
+			random.push(WB_COLD, 30);
+			random.push(WB_POISON, 30);
+			random.push(WB_MANA_REGEN, 10);
+			random.push(WB_FAST_CAST, 10);
+			random.push(WB_PROTECT, 20);
+			int brand_ = random.pop();
+			string weapon_string;
+
+			switch (brand_)
+			{
+			case WB_FIRE:
+				weapon_string = "불길에 휩싸였다!";
+				break;
+			case WB_COLD:
+				weapon_string = "한기를 내뿜었다!";
+				break;
+			case WB_POISON:
+				weapon_string = "맹독을 뿜어냈다!";
+				break;
+			case WB_MANA_REGEN:
+				weapon_string = "마나를 내뿜고있다!";
+				break;
+			case WB_FAST_CAST:
+				weapon_string = "신비로운 힘을 뿜어내고 있다!";
+				break;
+			case WB_PROTECT:
+				weapon_string = "보호의 오오라를 내뿜고있다!";
+				break;
+			}
+
+			printarray(true, false, false, CL_magic, 3, you.equipment[ET_WEAPON]->GetName().c_str(), you.equipment[ET_WEAPON]->GetNameInfor().name_do(true), weapon_string.c_str());
+			you.equipment[ET_WEAPON]->value5 = brand_;
+			you.equipment[ET_WEAPON]->value6 = -1;
+			printlog("당신의 무기에 마법이 부여되었다! ", false, false, false, CL_normal);
+			return true;
+		}
+		else
+		{
+			if (pre_iden_) {
+				printlog("이 무기엔 마법을 부여할 수 없다. ", false, false, false, CL_normal);
+				return false;
+			}
+			else {
+				printlog("아무 일도 일어나지않았다. ", false, false, false, CL_normal);
+				return true;
+			}
+		}
+	}
+	else
+	{
+		if (pre_iden_) {
+			printlog("장비한 무기가 없다. ", false, false, false, CL_normal);
+			return false;
+		}
+		else {
+			printlog("아무 일도 일어나지않았다. ", false, false, false, CL_normal);
+			return true;
+		}
 	}
 }

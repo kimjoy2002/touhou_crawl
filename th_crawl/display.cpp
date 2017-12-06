@@ -370,7 +370,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if (i == IDEN_CHECK_BOOK_START) {
 				first_ = true;
 			}
-			if (iden_list.books_list[cur_])
+			if (cur_ == 0 || iden_list.books_list[cur_ - 1])
 			{
 				if (first_)
 				{
@@ -383,8 +383,16 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				}
 
 				rc.left = two_;
-				img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', static_book_list[cur_].name.c_str());
+				if (cur_ == 0)
+				{
+					img_item_book[0].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "미확인 마법책");
+				}
+				else
+				{
+					img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
+					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', static_book_list[cur_ - 1].name.c_str());
+				}
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -405,11 +413,26 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				first_ = false;
 			}
 			rc.left = two_;
-			GetTanmacBaseGraphic(cur_)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
-			sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', GetTanmacString(cur_).name.c_str());
+
+			if (cur_ == 0)
+			{
+				img_item_food_p_item.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "P 아이템");
+			}
+			else if (cur_ == 1)
+			{
+				img_item_food_bread.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "음식");
+			}
+			else if (cur_ >= 2)
+			{
+				GetTanmacBaseGraphic(cur_-2)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', GetTanmacString(cur_-2).name.c_str());
+			}
 			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 			rc.top += 2 * fontDesc.Height;
 			num++;
+
 		}
 	}
 

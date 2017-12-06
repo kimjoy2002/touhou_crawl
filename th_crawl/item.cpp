@@ -767,7 +767,7 @@ bool item::isautopick()
 		else
 			return true;
 	case ITM_FOOD:
-		return true;
+		return iden_list.autopickup[(value1==0?0:1) + IDEN_CHECK_ETC_START];
 	case ITM_SCROLL:
 		if(iden_list.scroll_list[value1].iden == 3)
 		{
@@ -792,7 +792,12 @@ bool item::isautopick()
 		}
 		return true;
 	case ITM_AMULET:
-		return true;
+		if (iden_list.amulet_list[value1].iden == 2)
+		{
+			return iden_list.autopickup[value1 + IDEN_CHECK_AMULET_START];
+		}
+		else
+			return true;
 	case ITM_RING:
 		if(iden_list.ring_list[value1].iden == 2)
 		{
@@ -811,15 +816,15 @@ bool item::isautopick()
 			return true;
 	case ITM_BOOK:
 	{
-		if (iden_list.books_list[value1]) {
-			return iden_list.autopickup[value1 + IDEN_CHECK_BOOK_START];
+		if (iden_list.books_list[value0]) {
+			return iden_list.autopickup[value0 + 1 + IDEN_CHECK_BOOK_START];
 		}
-		return true;
+		return iden_list.autopickup[IDEN_CHECK_BOOK_START];
 	}
 	case ITM_MENUAL:
 		return true;
 	case ITM_THROW_TANMAC:
-		return iden_list.autopickup[value4 +IDEN_CHECK_ETC_START];
+		return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
 	}
 	return false;
 }

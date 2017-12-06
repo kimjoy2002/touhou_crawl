@@ -1865,7 +1865,7 @@ void Iden_Show()
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
 			int cur = i - IDEN_CHECK_BOOK_START;
-			if (iden_list.books_list[cur])
+			if (cur == 0 || iden_list.books_list[cur-1])
 				curList.push_back(i);
 		}
 		else if (i >= IDEN_CHECK_ETC_START && i < IDEN_CHECK_ETC_END) {

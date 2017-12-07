@@ -870,4 +870,8 @@ const mon_infor mondata[] = {
 	{ MON_BEE,1,1,name_infor("¹ú",true),&img_mons_bee,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10 },
+
+	{ MON_BUSH,1,0,name_infor("Ç®",true),&img_mons_bush,50,0,0,
+	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
+	 M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,1,10 }
 };

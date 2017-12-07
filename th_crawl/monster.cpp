@@ -1420,7 +1420,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					if (sight_) {
-						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), id == MON_CLOSE_DOOR ? "부셨다." :  "죽였다.");
+						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴했다." :  "죽였다.");
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
@@ -1693,7 +1693,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
-				if(((*it).isEnemyMonster(this) || s_confuse)) //적일때
+				if(((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH)) //적일때
 				{
 					if(only_move)
 						return 0;
@@ -2076,7 +2076,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	if (message_ && !remove_)
 	{
 		if (sight_){
-			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "죽었다. ");
+			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. ");
 
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
 				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
@@ -2168,7 +2168,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 
 
-	if(!(flag & M_FLAG_SUMMON) && !remove_)
+	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
 	{
 		if (reason_ == PRT_PLAYER && s_fear != -1) //플레이어가 죽였다.
 		{
@@ -2230,7 +2230,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 		}
 	}
-	if(!remove_)
+	if (!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
 		GodAccpect_KillMonster(this,reason_);
 	return true;
 }

@@ -661,6 +661,7 @@ textures img_mons_occult_kunekune(&texture_monster01, 223, 255);
 textures img_mons_kaname(&texture_monster01, 224, 255);
 textures img_mons_sheep(&texture_monster01, 225, 255);
 textures img_mons_bee(&texture_monster01, 226, 255);
+textures img_mons_bush(&texture_item02, 175, 255);
 
 
 
@@ -825,6 +826,31 @@ textures img_item_weapon_chakram(&texture_item02, 173, 255);
 textures img_item_weapon_javelin(&texture_item02, 174, 255);
 textures img_item_weapon_dauzing_rod(&texture_item02, 218, 255);
 textures img_item_weapon_bamboo_spear(&texture_item02, 219, 255);
+
+
+textures img_item_artifact_shortsword(&texture_item02, 220, 255);
+textures img_item_artifact_bamboo_spear(&texture_item02, 221, 255);
+textures img_item_artifact_hammer(&texture_item02, 222, 255);
+textures img_item_artifact_onbasira(&texture_item02, 223, 255);
+textures img_item_artifact_gohey(&texture_item02, 224, 255);
+textures img_item_artifact_dagger(&texture_item02, 225, 255);
+textures img_item_artifact_katana(&texture_item02, 226, 255);
+textures img_item_artifact_scimitar(&texture_item02, 227, 255);
+textures img_item_artifact_greatsword(&texture_item02, 228, 255);
+textures img_item_artifact_broomstick(&texture_item02, 229, 255);
+textures img_item_artifact_handaxe(&texture_item02, 230, 255);
+textures img_item_artifact_battleaxe(&texture_item02, 231, 255);
+textures img_item_artifact_anchor(&texture_item02, 232, 255);
+textures img_item_artifact_spear(&texture_item02, 233, 255);
+textures img_item_artifact_scythe(&texture_item02, 234, 255);
+textures img_item_artifact_trident(&texture_item02, 235, 255);
+textures img_item_artifact_chakram(&texture_item02, 236, 255);
+textures img_item_artifact_umbrella(&texture_item02, 237, 255);
+textures img_item_artifact_knife(&texture_item02, 238, 255);
+textures img_item_artifact_dauzing_rod(&texture_item02, 239, 255);
+textures img_item_artifact_javelin(&texture_item02, 207, 255);
+
+
 
 
 
@@ -2312,6 +2338,50 @@ int texturetoint(textures* input)
 		return 394;
 	else if (input == &img_named_sigmund)
 		return 395;
+	else if (input == &img_mons_bush)
+		return 396;
+	else if (input == &img_item_artifact_shortsword)
+		return 397;
+	else if (input == &img_item_artifact_bamboo_spear)
+		return 398;
+	else if (input == &img_item_artifact_hammer)
+		return 399;
+	if (input == &img_item_artifact_onbasira)
+		return 400;
+	else if (input == &img_item_artifact_gohey)
+		return 401;
+	else if (input == &img_item_artifact_dagger)
+		return 402;
+	else if (input == &img_item_artifact_katana)
+		return 403;
+	else if (input == &img_item_artifact_scimitar)
+		return 404;
+	else if (input == &img_item_artifact_greatsword)
+		return 405;
+	else if (input == &img_item_artifact_broomstick)
+		return 406;
+	else if (input == &img_item_artifact_handaxe)
+		return 407;
+	else if (input == &img_item_artifact_battleaxe)
+		return 408;
+	else if (input == &img_item_artifact_anchor)
+		return 409;
+	else if (input == &img_item_artifact_spear)
+		return 410;
+	else if (input == &img_item_artifact_scythe)
+		return 411;
+	else if (input == &img_item_artifact_trident)
+		return 412;
+	else if (input == &img_item_artifact_chakram)
+		return 413;
+	else if (input == &img_item_artifact_umbrella)
+		return 414;
+	else if (input == &img_item_artifact_knife)
+		return 415;
+	else if (input == &img_item_artifact_dauzing_rod)
+		return 416;
+	else if (input == &img_item_artifact_javelin)
+		return 417;
 	else
 		return 0;
 }
@@ -3111,6 +3181,50 @@ textures* inttotexture(int input)
 		return &img_item_weapon_bamboo_spear;
 	case 395:
 		return &img_named_sigmund;
+	case 396:
+		return &img_mons_bush;
+	case 397:
+		return &img_item_artifact_shortsword;
+	case 398:
+		return &img_item_artifact_bamboo_spear;
+	case 399:
+		return &img_item_artifact_hammer;
+	case 400:
+		return &img_item_artifact_onbasira;
+	case 401:
+		return &img_item_artifact_gohey;
+	case 402:
+		return &img_item_artifact_dagger;
+	case 403:
+		return &img_item_artifact_katana;
+	case 404:
+		return &img_item_artifact_scimitar;
+	case 405:
+		return &img_item_artifact_greatsword;
+	case 406:
+		return &img_item_artifact_broomstick;
+	case 407:
+		return &img_item_artifact_handaxe;
+	case 408:
+		return &img_item_artifact_battleaxe;
+	case 409:
+		return &img_item_artifact_anchor;
+	case 410:
+		return &img_item_artifact_spear;
+	case 411:
+		return &img_item_artifact_scythe;
+	case 412:
+		return &img_item_artifact_trident;
+	case 413:
+		return &img_item_artifact_chakram;
+	case 414:
+		return &img_item_artifact_umbrella;
+	case 415:
+		return &img_item_artifact_knife;
+	case 416:
+		return &img_item_artifact_dauzing_rod;
+	case 417:
+		return &img_item_artifact_javelin;
 	default:
 		return &img_mons_default;
 	}

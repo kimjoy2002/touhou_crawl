@@ -670,6 +670,7 @@ enum monster_index
 	MON_KANAME,
 	MON_SHEEP,
 	MON_BEE,
+	MON_BUSH,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };

@@ -410,56 +410,58 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 				s = (*it).name.name;
 				printlog(s,false,false,true,CL_normal);
 				bool state_ = false;
-				for(monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss=(monster_state_simple)(mss+1))
+				if (!((*it).flag & M_FLAG_NO_STATE))
 				{
-					char temp[30];
-					if((*it).GetStateString(mss,temp))
+					for (monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss = (monster_state_simple)(mss + 1))
 					{
-						if(!state_)
+						char temp[30];
+						if ((*it).GetStateString(mss, temp))
 						{
-							printlog("(",false,false,true,CL_normal);
-							state_ = true;
+							if (!state_)
+							{
+								printlog("(", false, false, true, CL_normal);
+								state_ = true;
+							}
+							else
+							{
+								printlog(", ", false, false, true, CL_normal);
+							}
+							printlog(temp, false, false, true, CL_normal);
 						}
+					}
+					if (state_)
+						printlog(")", false, false, true, CL_normal);
+					if (type_ == VT_DEBUF)
+					{
+						printlog("(", false, false, true, CL_normal);
+						char temp[64];
+						float percent_ = getDebufPercent((*it).GetResist(), value_);
+						if (it->s_mind_reading)
+							percent_ = 0;
+
+						sprintf_s(temp, 64, "성공확률: %.0f%%", percent_);
+						printlog(temp, false, false, true, CL_normal);
+						printlog(")", false, false, true, CL_normal);
+					}
+					else if (type_ == VT_SATORI && !it->s_mind_reading)
+					{
+						printlog("(", false, false, true, CL_normal);
+						char temp[64];
+
+						int turn_ = 2 + it->level / 3 + it->resist * 3;
+
+						turn_ = max(1, turn_ - you.level / 4);
+
+						if (turn_ >= 20 || it->id == MON_KOISHI)
+							sprintf_s(temp, 64, "불가능");
 						else
-						{
-							printlog(", ",false,false,true,CL_normal);
-						}
-						printlog(temp,false,false,true,CL_normal);
+							sprintf_s(temp, 64, "%d턴", turn_);
+
+						printlog(temp, false, false, true, CL_normal);
+						printlog(")", false, false, true, CL_normal);
+
 					}
 				}
-				if(state_)
-					printlog(")",false,false,true,CL_normal);
-				if(type_ == VT_DEBUF)
-				{					
-					printlog("(",false,false,true,CL_normal);
-					char temp[64];
-					float percent_ = getDebufPercent((*it).GetResist(), value_);
-					if(it->s_mind_reading)
-						percent_ = 0;
-
-					sprintf_s(temp,64,"성공확률: %.0f%%", percent_);
-					printlog(temp,false,false,true,CL_normal);
-					printlog(")",false,false,true,CL_normal);
-				}
-				else if(type_ == VT_SATORI && !it->s_mind_reading)
-				{
-					printlog("(",false,false,true,CL_normal);
-					char temp[64];
-
-					int turn_ = 2+it->level/3+it->resist*3;
-
-					turn_ = max(1,turn_-you.level/4);
-
-					if(turn_>=20 || it->id == MON_KOISHI)
-						sprintf_s(temp,64,"불가능");
-					else
-						sprintf_s(temp,64,"%d턴",turn_);
-
-					printlog(temp,false,false,true,CL_normal);
-					printlog(")",false,false,true,CL_normal);
-
-				}
-
 				printlog(" ",true,false,true,CL_normal);
 				mon_ok = true;
 				return_ = 0;

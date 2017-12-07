@@ -1363,7 +1363,7 @@ void create_id_to_unique(int id, int level)
 		bool only_water = (mondata[(*it)].flag & M_FLAG_CANT_GROUND) && (mondata[(*it)].flag & M_FLAG_SWIM);
 		while(!env[level].isMove(x_,y_,false, only_water, only_water) || 
 			(env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || 
-			env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y))
+			env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
 		{
 			if(limit_--<0)
 				break;
@@ -1926,6 +1926,42 @@ void SetResistMonster(monster* mon)
 	case MON_NARUMI:
 		mon->elec_resist = 3;
 		mon->poison_resist = 1;
+		break;
+	case MON_TRASH:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_OCCULT_LONG:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		break;
+	case MON_OCCULT_DISK:
+		mon->ice_resist = 2;
+		break;
+	case MON_OCCULT_SMALL:
+		mon->poison_resist = 1;
+		break;
+	case MON_KUNEKUNE:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_KANAME:
+		mon->ice_resist = 3;
+		mon->fire_resist = 1;
+		mon->elec_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_SHEEP:
+		mon->confuse_resist = 1;
+		break;
+	case MON_BEE:
+		break;
+	case MON_BUSH:
+		mon->elec_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	}
 }

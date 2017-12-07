@@ -897,6 +897,9 @@ string GetMonsterInfor(monster *it)
 	case MON_BEE:
 		text_ += "\n";
 		break;
+	case MON_BUSH:
+		text_ += "평범한 풀이다. 이동을 방해하고 있지만 공격을 해서 치울 수 있어 보인다.\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

@@ -157,7 +157,7 @@ extern textures img_mons_occult_kunekune;
 extern textures img_mons_kaname;
 extern textures img_mons_sheep;
 extern textures img_mons_bee;
-
+extern textures img_mons_bush;
 
 
 
@@ -315,6 +315,27 @@ extern textures img_item_weapon_dauzing_rod;
 extern textures img_item_weapon_bamboo_spear;
 
 
+extern textures img_item_artifact_shortsword;
+extern textures img_item_artifact_bamboo_spear;
+extern textures img_item_artifact_hammer;
+extern textures img_item_artifact_onbasira;
+extern textures img_item_artifact_gohey;
+extern textures img_item_artifact_dagger;
+extern textures img_item_artifact_katana;
+extern textures img_item_artifact_scimitar;
+extern textures img_item_artifact_greatsword;
+extern textures img_item_artifact_broomstick;
+extern textures img_item_artifact_handaxe;
+extern textures img_item_artifact_battleaxe;
+extern textures img_item_artifact_anchor;
+extern textures img_item_artifact_spear;
+extern textures img_item_artifact_scythe;
+extern textures img_item_artifact_trident;
+extern textures img_item_artifact_chakram;
+extern textures img_item_artifact_umbrella;
+extern textures img_item_artifact_knife;
+extern textures img_item_artifact_dauzing_rod;
+extern textures img_item_artifact_javelin;
 
 
 

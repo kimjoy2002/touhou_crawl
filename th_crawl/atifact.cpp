@@ -425,6 +425,51 @@ void MakeArtifact(item* item_, int good_bad_)
 		item_->value4 = randA(item_->value1)+randA(2)+randA(2)-2;
 	}
 
+	if (item_->type >= ITM_WEAPON_FIRST && item_->type<ITM_WEAPON_LAST)
+	{
+		if (item_->image == &img_item_weapon_shortsword)
+			item_->image = &img_item_artifact_shortsword;
+		else if (item_->image == &img_item_weapon_bamboo_spear)
+			item_->image = &img_item_artifact_bamboo_spear;
+		else if (item_->image == &img_item_weapon_hammer)
+			item_->image = &img_item_artifact_hammer;
+		else if (item_->image == &img_item_weapon_onbasira)
+			item_->image = &img_item_artifact_onbasira;
+		else if (item_->image == &img_item_weapon_gohey)
+			item_->image = &img_item_artifact_gohey;
+		else if (item_->image == &img_item_weapon_dagger)
+			item_->image = &img_item_artifact_dagger;
+		else if (item_->image == &img_item_weapon_katana)
+			item_->image = &img_item_artifact_katana;
+		else if (item_->image == &img_item_weapon_scimitar)
+			item_->image = &img_item_artifact_scimitar;
+		else if (item_->image == &img_item_weapon_greatsword)
+			item_->image = &img_item_artifact_greatsword;
+		else if (item_->image == &img_item_weapon_broomstick)
+			item_->image = &img_item_artifact_broomstick;
+		else if (item_->image == &img_item_weapon_handaxe)
+			item_->image = &img_item_artifact_handaxe;
+		else if (item_->image == &img_item_weapon_battleaxe)
+			item_->image = &img_item_artifact_battleaxe;
+		else if (item_->image == &img_item_weapon_anchor)
+			item_->image = &img_item_artifact_anchor;
+		else if (item_->image == &img_item_weapon_spear)
+			item_->image = &img_item_artifact_spear;
+		else if (item_->image == &img_item_weapon_scythe)
+			item_->image = &img_item_artifact_scythe;
+		else if (item_->image == &img_item_weapon_trident)
+			item_->image = &img_item_artifact_trident;
+		else if (item_->image == &img_item_weapon_chakram)
+			item_->image = &img_item_artifact_chakram;
+		else if (item_->image == &img_item_weapon_umbrella)
+			item_->image = &img_item_artifact_umbrella;
+		else if (item_->image == &img_item_weapon_knife)
+			item_->image = &img_item_artifact_knife;
+		else if (item_->image == &img_item_weapon_dauzing_rod)
+			item_->image = &img_item_artifact_dauzing_rod;
+		else if (item_->image == &img_item_weapon_javelin)
+			item_->image = &img_item_artifact_javelin;
+	}
 	if (item_->type == ITM_RING)
 	{
 		item_->image = &img_item_artifact_ring;

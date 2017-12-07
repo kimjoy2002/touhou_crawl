@@ -876,75 +876,69 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_BYAKUREN:
 		return false;
 	case GT_KANAKO:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if (type_ == PRT_PLAYER)
 		{
-			if(type_ == PRT_PLAYER)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("카나코는 당신의 살생을 기뻐했다.",true,false,false,CL_help);
-					if(randA(2))
-					{
-						you.GiftCount(1);
-						you.PietyUpDown(1);
-						return true;
-					}
-				}
-				else
-				{ //아군일때
-					printlog("카나코는 당신의 행동에 분노했다. 참회하라!",true,false,false,CL_small_danger);
-					you.PietyUpDown(-5);
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("카나코는 당신의 살생을 기뻐했다.", true, false, false, CL_help);
+				if (randA(2))
+				{
+					you.GiftCount(1);
+					you.PietyUpDown(1);
 					return true;
 				}
+			}
+			else
+			{ //아군일때
+				printlog("카나코는 당신의 행동에 분노했다. 참회하라!", true, false, false, CL_small_danger);
+				you.PietyUpDown(-5);
+				return true;
 			}
 		}
 		return false;
 	case GT_SUWAKO:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
-			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("스와코는 당신의 살생을 기뻐했다.",true,false,false,CL_swako);
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-					}
-					if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
-					{
-						switch(you.god_value[GT_SUWAKO][1])
-						{
-						case SWAKO_2_KILL_HP:
-							if(randA(200) < you.piety)
-							{
-								printlog("체력이 회복되었다.",false,false,false,CL_normal);
-								you.HpUpDown(randA_1(1+mon_->level/2), DR_EFFECT);
-							}
-							break;
-						case SWAKO_2_KILL_MP:
-							if(randA(120) < you.piety)
-							{
-								printlog("영력이 회복되었다.",false,false,false,CL_normal);
-								you.MpUpDown(randA_1(1+mon_->level/4));
-							}
-							break;
-						case SWAKO_2_KILL_POWER:
-							if(randA(200) < you.piety)
-							{
-								printlog("파워가 회복되었다.",false,false,false,CL_normal);
-								you.PowUpDown(rand_int(3,5)+randA(mon_->level/4));
-							}
-							break;
-						}
-					}
-					enterlog();
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("스와코는 당신의 살생을 기뻐했다.", true, false, false, CL_swako);
+				if (randA(2))
+				{
+					you.PietyUpDown(1);
 				}
+				if (!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety) >= 2)
+				{
+					switch (you.god_value[GT_SUWAKO][1])
+					{
+					case SWAKO_2_KILL_HP:
+						if (randA(200) < you.piety)
+						{
+							printlog("체력이 회복되었다.", false, false, false, CL_normal);
+							you.HpUpDown(randA_1(1 + mon_->level / 2), DR_EFFECT);
+						}
+						break;
+					case SWAKO_2_KILL_MP:
+						if (randA(120) < you.piety)
+						{
+							printlog("영력이 회복되었다.", false, false, false, CL_normal);
+							you.MpUpDown(randA_1(1 + mon_->level / 4));
+						}
+						break;
+					case SWAKO_2_KILL_POWER:
+						if (randA(200) < you.piety)
+						{
+							printlog("파워가 회복되었다.", false, false, false, CL_normal);
+							you.PowUpDown(rand_int(3, 5) + randA(mon_->level / 4));
+						}
+						break;
+					}
+				}
+				enterlog();
 			}
 		}
 		return false;
 	case GT_MINORIKO:
-		if(mon_->id == MON_LETTY &&  !(mon_->flag & M_FLAG_SUMMON))
+		if(mon_->id == MON_LETTY)
 		{
 			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 			{
@@ -957,46 +951,40 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		}
 		return false;
 	case GT_MIMA:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if (type_ == PRT_PLAYER)
 		{
-			if(type_ == PRT_PLAYER)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("미마는 당신의 살생을 기뻐했다.",false,false,false,CL_green);
-					if(randA(5)<3)
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
-					if(!you.GetPunish(GT_MIMA) && pietyLevel(you.piety)>=1)
-					{
-						if(randA(120) < you.piety)
-						{
-							printlog("영력이 회복되었다.",false,false,false,CL_normal);
-							you.MpUpDown(randA_1(1+mon_->level/3));
-						}
-					}
-					enterlog();
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("미마는 당신의 살생을 기뻐했다.", false, false, false, CL_green);
+				if (randA(5) < 3)
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
+				if (!you.GetPunish(GT_MIMA) && pietyLevel(you.piety) >= 1)
+				{
+					if (randA(120) < you.piety)
+					{
+						printlog("영력이 회복되었다.", false, false, false, CL_normal);
+						you.MpUpDown(randA_1(1 + mon_->level / 3));
+					}
+				}
+				enterlog();
 			}
 		}
 		return false;
 	case GT_SHINKI:
 		return false;
 	case GT_YUUGI:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
-			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("유우기는 당신의 승리를 기뻐했다.",true,false,false,CL_yuigi);
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("유우기는 당신의 승리를 기뻐했다.", true, false, false, CL_yuigi);
+				if (randA(2))
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}
@@ -1019,24 +1007,21 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			env[current_level].MakeFloorEffect(coord_def(you.position.x,you.position.y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,3+you.piety/20,&you);
 			//플레이어 위치에는 무조건 단풍이 세워진다.(일부러 발밑에 단풍까는 플레이를 안해도되게 하기위해)
 		}
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
-			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					if(mon_->id == MON_LETTY)
-					{
-						printlog("시즈하는 박수를 쳤다.\"훌륭해\"",true,false,false,CL_autumn);
-						you.PietyUpDown(4);
-					}
-					else
-						printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
+			if(!mon_->isUserAlly())
+			{ //적일때
+				if(mon_->id == MON_LETTY)
+				{
+					printlog("시즈하는 박수를 쳤다.\"훌륭해\"",true,false,false,CL_autumn);
+					you.PietyUpDown(4);
+				}
+				else
+					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
+				if(randA(2))
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}
@@ -1044,101 +1029,89 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_HINA:
 		return false;
 	case GT_YUKARI:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
-			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
+			if(!mon_->isUserAlly())
+			{ //적일때
+				printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
+				if(randA(2))
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}
 		return false;
 	case GT_EIRIN:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
-			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
-			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					if(randA(3)==0)
-					{
-						printlog("에이린은 당신의 강함에 관심을 가졌다.",true,false,false,CL_small_danger);
-						you.PietyUpDown(1);
-						return true;
-					}
+			if(!mon_->isUserAlly())
+			{ //적일때
+				if(randA(3)==0)
+				{
+					printlog("에이린은 당신의 강함에 관심을 가졌다.",true,false,false,CL_small_danger);
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}
 		return false;
 	case GT_YUYUKO:
-		if(!(mon_->flag & M_FLAG_SUMMON))
+		if(mon_->s_ghost)
 		{
-			if(mon_->s_ghost)
+			if(you.god_value[GT_YUYUKO][0])
 			{
-				if(you.god_value[GT_YUYUKO][0])
+				for(auto it = env[you.god_value[GT_YUYUKO][1]].mon_vector.begin();it != env[you.god_value[GT_YUYUKO][1]].mon_vector.end();it++)
 				{
-					for(auto it = env[you.god_value[GT_YUYUKO][1]].mon_vector.begin();it != env[you.god_value[GT_YUYUKO][1]].mon_vector.end();it++)
+					if(it->isLive() && it->map_id == you.god_value[GT_YUYUKO][0])
 					{
-						if(it->isLive() && it->map_id == you.god_value[GT_YUYUKO][0])
-						{
-							it->summon_time = 0;
-						}
-					}
-				}
-				
-				{
-					monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
-					if(mon2_)
-					{
-
-						mon2_->id = MON_ENSLAVE_GHOST;
-						mon2_->name.name += "의 영혼";
-						mon2_->name.name_type = true;
-						printarray(true,false,false,CL_normal,3,mon_->name.name.c_str(),mon_->name.name_do()," 당신의 동료가 되었다.");
-						you.god_value[GT_YUYUKO][0] = mon2_->map_id;
-						you.god_value[GT_YUYUKO][1] = current_level;
-
-						//유령화되면 냉기저항1단계증가
-						if(mon2_->ice_resist<=2)
-							mon2_->ice_resist++;
-						//독저항이 생긴다.
-						mon2_->poison_resist=1;
-						
-						//그러나 레벨은 내려간다.
-						mon2_->LevelUpdown(-2);
-
-						char temp[200];
-						sprintf_s(temp,200,"%s%s구속했다.",mon_->name.name.c_str(),mon_->name.name_to(true));
-						AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
+						it->summon_time = 0;
 					}
 				}
 			}
-			else if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
+				
 			{
-				if(!mon_->isUserAlly())
-				{ //적일때
-					printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
+				monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
+				if(mon2_)
+				{
+
+					mon2_->id = MON_ENSLAVE_GHOST;
+					mon2_->name.name += "의 영혼";
+					mon2_->name.name_type = true;
+					printarray(true,false,false,CL_normal,3,mon_->name.name.c_str(),mon_->name.name_do()," 당신의 동료가 되었다.");
+					you.god_value[GT_YUYUKO][0] = mon2_->map_id;
+					you.god_value[GT_YUYUKO][1] = current_level;
+
+					//유령화되면 냉기저항1단계증가
+					if(mon2_->ice_resist<=2)
+						mon2_->ice_resist++;
+					//독저항이 생긴다.
+					mon2_->poison_resist=1;
+						
+					//그러나 레벨은 내려간다.
+					mon2_->LevelUpdown(-2);
+
+					char temp[200];
+					sprintf_s(temp,200,"%s%s구속했다.",mon_->name.name.c_str(),mon_->name.name_to(true));
+					AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
+				}
+			}
+		}
+		else if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
+		{
+			if(!mon_->isUserAlly())
+			{ //적일때
+				printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
+				if(randA(2))
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}
 		return false;
 	case GT_SATORI:
-		if(1)
-		{
-			you.GiftCount(1);
-		}
+		you.GiftCount(1);
 		return false;
 	case GT_TENSI:
 		return false;
@@ -1149,18 +1122,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_MIKO:
 		return false;
 	case GT_OKINA:
-		if (!(mon_->flag & M_FLAG_SUMMON))
+		if (type_ == PRT_PLAYER)
 		{
-			if (type_ == PRT_PLAYER)
-			{
-				if (!mon_->isUserAlly())
-				{ //적일때
-					printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
-					if (randA(2))
-					{
-						you.PietyUpDown(1);
-						return true;
-					}
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
+				if (randA(2))
+				{
+					you.PietyUpDown(1);
+					return true;
 				}
 			}
 		}

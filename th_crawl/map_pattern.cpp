@@ -2013,6 +2013,37 @@ char* youkai_enter_pattern(map_dummy* map)
 	}
 }
 
+char* yukkuri_enter_pattern(map_dummy* map)
+{
+	switch (randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "ÀµÄí¸®_±¼_ÀÔ±¸";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(-1, 0)));
+		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(1, 0)));
+		map->monster_list.push_back(mapdummy_mon(MON_MARISAYUKKURI, 0, coord_def(0, -1)));
+		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, 2), EVT_ALWAYS));
+		return "\
+.......\
+.=====.\
+.=...=.\
+.=.0.=.\
+.=...=.\
+.==+==.\
+.......";
+		break;
+	}
+}
 
 char* misty_lake_pattern(map_dummy* map)
 {
@@ -2055,7 +2086,7 @@ char* yukkuri_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_YUKKURI_STAIR);
-	return common_enter_pattern(map);
+	return yukkuri_enter_pattern(map);
 }
 char* depth_pattern(map_dummy* map)
 {

@@ -1947,18 +1947,84 @@ char* temple_pattern(map_dummy* map)
 	}
 }
 
+char* lake_enter_pattern(map_dummy* map)
+{
+	switch (randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "안개의_호수_입구";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		rand_rect_iterator rand_coord(coord_def(0, 0), map->size_x-1, map->size_y-1);
+		for (int i = 0; i < 10; i++) {
+			map->monster_list.push_back(mapdummy_mon(MON_BUSH, 0, (*rand_coord)));
+			if ((++rand_coord).end())
+				break;
+		}
+		map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(0, 0), EVT_ALWAYS));
+		return "\
+.......\
+.......\
+.......\
+...0...\
+.......\
+.......\
+.......";
+		break;
+	}
+}
+
+
+char* youkai_enter_pattern(map_dummy* map)
+{
+	switch (randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "요괴의_산_입구";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+.........\
+...***...\
+..*****..\
+.***.***.\
+.**.0.**.\
+.*.....*.\
+.**...**.\
+..**.**..\
+.........";
+		break;
+	}
+}
+
 
 char* misty_lake_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_MISTY_LAKE_STAIR);
-	return common_enter_pattern(map);
+	return lake_enter_pattern(map);
 }
 char* youkai_mountain_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_YOUKAI_MOUNTAIN_STAIR);
-	return common_enter_pattern(map);
+	return youkai_enter_pattern(map);
 }
 
 char* scarlet_library_pattern(map_dummy* map)

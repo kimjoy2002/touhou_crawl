@@ -129,6 +129,10 @@ enum skill_list
 	SKL_OKINA_3,
 	SKL_OKINA_4,
 	SKL_OKINA_5,
+	SKL_JUNKO_1,
+	SKL_JUNKO_2,
+	SKL_JUNKO_3,
+	SKL_JUNKO_4,
 	SKL_MAX
 };
 

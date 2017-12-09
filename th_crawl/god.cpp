@@ -857,6 +857,50 @@ bool GetGodAbility(int level, bool plus)
 	case GT_JUNKO:
 		switch (level)
 		{
+		case 1:
+			you.Ability(SKL_JUNKO_1, true, !plus);
+			if (plus)
+				printlog("당신은 이제 단순한 탄막을 쏠 수 있다.", true, false, false, CL_junko);
+			else
+				printlog("더 이상 당신은 단순한 탄막을 쏠 수 없다.", true, false, false, CL_junko);
+			break;
+		case 2:
+			you.Ability(SKL_JUNKO_2, true, !plus);
+			if (plus)
+				printlog("당신은 이제 순수한 힘을 얻을 수 있다.", true, false, false, CL_junko);
+			else
+				printlog("더 이상 당신은 순수한 힘을 얻을 수 없다.", true, false, false, CL_junko);
+			break;
+		case 4:
+			you.Ability(SKL_JUNKO_3, true, !plus);
+			if (plus)
+				printlog("당신은 이제 순수한 살의를 지닐 수 있다.", true, false, false, CL_junko);
+			else
+				printlog("더 이상 당신은 순수한 살의를 지닐 수 없다.", true, false, false, CL_junko);
+			break;
+		case 6:
+			you.Ability(SKL_JUNKO_4, true, !plus);
+			if (plus) {
+				printlog("당신은 이제 순화할 수 있다.", true, false, false, CL_junko);
+				if (you.god_value[GT_JUNKO][0] == 0)
+				{
+					random_extraction<int> rand_;
+					rand_.push(1);//스킬순화
+					rand_.push(2);//저항순화
+					rand_.push(3);//마력순화
+					rand_.push(4);//파워순화
+					if (!you.char_name.name.compare("모코우"))
+						rand_.push(5); //생명순화
+					rand_.push(6);//장비순화
+					you.god_value[GT_JUNKO][0] = rand_.pop();
+					you.god_value[GT_JUNKO][1] = rand_.pop();
+					you.god_value[GT_JUNKO][2] = rand_.pop();
+				}
+				MoreWait();
+			}
+			else
+				printlog("더 이상 당신은 순화할 수 없다.", true, false, false, CL_junko);
+			break;
 		}
 		return false;
 	}
@@ -1136,6 +1180,21 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		}
 		return false;
 	case GT_JUNKO:
+		if (!(mon_->flag & M_FLAG_SUMMON))
+		{
+			if (type_ == PRT_PLAYER)
+			{
+				if (!mon_->isUserAlly())
+				{ //적일때
+					printlog("순호는 당신의 살생을 기뻐했다.", true, false, false, CL_junko);
+					if (randA(4)==0)
+					{
+						you.PietyUpDown(1);
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 	return false;
@@ -1855,7 +1914,7 @@ void Pray()
 
 
 			}
-			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO || type == DG_TEMPLE_JUNKO)
+			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO)
 			{
 				printlog("이 신은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}

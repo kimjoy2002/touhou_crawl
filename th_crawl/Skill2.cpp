@@ -26,6 +26,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_KANAKO_1:
 	case SKL_YUYUKO_3:
 	case SKL_OKINA_3:
+	case SKL_JUNKO_1:
 		return ((S_FLAG_SPEAK | S_FLAG_GOD) & flag);
 	case SKL_OKINA_1:
 		return ((S_FLAG_SPEAK | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);
@@ -84,6 +85,9 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_LILLY_4:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
@@ -145,6 +149,7 @@ int SkillLength(skill_list skill)
 	case SKL_EIRIN_0:
 	case SKL_YUUGI_3_THROW:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_JUNKO_1:
 		return 7;
 	case SKL_SATORI_1:
 	case SKL_SATORI_2:
@@ -213,6 +218,9 @@ int SkillLength(skill_list skill)
 	case SKL_PHILOSOPHERS_4:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 	default:
 		return 0;
 	}
@@ -372,6 +380,14 @@ const char* SkillString(skill_list skill)
 		return "크레이지 백댄서즈";
 	case SKL_OKINA_5:
 		return "백도어 긴급탈출";
+	case SKL_JUNKO_1:
+		return "단순한 탄막";
+	case SKL_JUNKO_2:
+		return "순수한 힘";
+	case SKL_JUNKO_3:
+		return "순수한 살의";
+	case SKL_JUNKO_4:
+		return "순화";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -444,6 +460,10 @@ int SkillCap(skill_list skill)
 	case SKL_OKINA_3:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JUNKO_1:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -514,6 +534,10 @@ int SkillNoise(skill_list skill)
 	case SKL_LILLY_3:
 	case SKL_PHILOSOPHERS_3:
 	case SKL_OKINA_2:
+	case SKL_JUNKO_1:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -621,6 +645,10 @@ int SkillPow(skill_list skill)
 	case SKL_LILLY_2:
 	case SKL_LILLY_3:
 	case SKL_LILLY_4:
+	case SKL_JUNKO_1:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -737,6 +765,10 @@ int SkillDiffer(skill_list skill)
 	case SKL_OKINA_3:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JUNKO_1:
+	case SKL_JUNKO_2:
+	case SKL_JUNKO_3:
+	case SKL_JUNKO_4:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -810,8 +842,10 @@ int SkillMana(skill_list skill)
 	case SKL_SEIJA_2:
 	case SKL_LILLY_1:
 	case SKL_OKINA_4:
+	case SKL_JUNKO_4:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
+	case SKL_JUNKO_1:
 		return 1;
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:
@@ -836,6 +870,7 @@ int SkillMana(skill_list skill)
 	case SKL_YUKARI_3:
 	case SKL_LILLY_3:
 	case SKL_OKINA_3:
+	case SKL_JUNKO_2:
 		return 3;
 	case SKL_BYAKUREN_2:
 	case SKL_SIZUHA_1:
@@ -845,6 +880,7 @@ int SkillMana(skill_list skill)
 	case SKL_MINORIKO_2:
 	case SKL_YUYUKO_3:
 	case SKL_LILLY_4:
+	case SKL_JUNKO_3:
 		return 5;
 	case SKL_KANAKO_3:
 		return 4;
@@ -1335,6 +1371,34 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if (!check_)
 			you.PietyUpDown(-15);
 		return true;
+	case SKL_JUNKO_1:
+		if (check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PowUpDown(-(10 + randA(5)), true);
+		return true;
+	case SKL_JUNKO_2:
+		if (check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PowUpDown(-(30 + randA(20)), true);
+		return true;
+	case SKL_JUNKO_3:
+		if (check_ && you.power<100)
+		{
+			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PowUpDown(-(40 + randA(30)), true);
+		return true;
+	case SKL_JUNKO_4:
 	case SKL_NONE:
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
@@ -1515,6 +1579,12 @@ const char* SkillCostString(skill_list skill)
 		return "(신앙)";
 	case SKL_OKINA_5:
 		return "(영력 6, 신앙)";
+	case SKL_JUNKO_1:
+		return "(영력 1, P 소량)";
+	case SKL_JUNKO_2:
+		return "(영력 3, P 약간)";
+	case SKL_JUNKO_3:
+		return "(영력 5, P 대량)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

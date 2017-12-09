@@ -2797,6 +2797,92 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	//you.resetLOS(false);
 	return true;
 }
+bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	int damage_ = 4 + power / 10;
+	int multi_ = 4;
+	int hit_ = 10 + power / 15;
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("탄막", true));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+
+		for (int i = 0; i<(order->GetParadox() ? 2 : 1); i++)
+			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+bool skill_junko_2(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		you.SetMight(25 + power / 5 + randA_1(power / 2));
+		return true;
+	}
+	return false;
+}
+
+bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+	{
+		you.SetHaste(25 + power / 5 + randA_1(power / 2));
+		return true;
+	}
+	return false;
+}
+const char* getJunkoString(int kind_)
+{
+	return "임시: 임시다.";
+}
+bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
+{
+
+	int kind_ = 0;
+	bool loop_ = true;
+	printlog("한번 고른 순화는 되돌릴 수 없다! 신중하게 결정해야한다.", true, false, false, CL_danger);
+	while (loop_) {
+		printlog("어떤 능력을 순화하겠습니까?", true, false, false, CL_help);
+		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
+		printarray(true, false, false, CL_junko, 2, "b - ", getJunkoString(you.god_value[GT_JUNKO][1]));
+		printarray(true, false, false, CL_junko, 2, "c - ", getJunkoString(you.god_value[GT_JUNKO][2]));
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			kind_ = you.god_value[GT_JUNKO][0];
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			kind_ = you.god_value[GT_JUNKO][1];
+			loop_ = false;
+			break;
+		case 'c':
+		case 'C':
+			kind_ = you.god_value[GT_JUNKO][2];
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+	if (kind_ == 0)
+	{
+		printlog("알 수 없는 선택", true, false, false, CL_normal);
+		return false;
+	}
+	return false;
+}
+
 
 
 
@@ -3087,6 +3173,18 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_OKINA_5:
 		return skill_okina_5(power, short_, &you, target);
+		break;
+	case SKL_JUNKO_1:
+		return skill_junko_1(power, short_, &you, target);
+		break;
+	case SKL_JUNKO_2:
+		return skill_junko_2(power, short_, &you, target);
+		break;
+	case SKL_JUNKO_3:
+		return skill_junko_3(power, short_, &you, target);
+		break;
+	case SKL_JUNKO_4:
+		return skill_junko_4(power, short_, &you, target);
 		break;
 	}
 	return 0;

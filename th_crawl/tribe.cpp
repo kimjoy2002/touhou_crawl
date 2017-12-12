@@ -191,6 +191,12 @@ string tribe_property::GetName()
 		return "구름 저항";
 	case TPT_SEE_INVI:
 		return "투명 보기";
+	case TPT_FIRE_IMUNE:
+		return "화염 면역";
+	case TPT_COLD_IMUNE:
+		return "냉기 면역";
+	case TPT_ELEC_IMUNE:
+		return "전기 면역";
 	}
 	return "버그특성";
 }
@@ -443,6 +449,12 @@ string tribe_property::GetInfor()
 		return "당신은 구름에 영향을 적게 받는다.";
 	case TPT_SEE_INVI:
 		return "당신은 투명을 볼 수 있다.";
+	case TPT_FIRE_IMUNE:
+		return "당신은 화염에 면역이다.";
+	case TPT_COLD_IMUNE:
+		return "당신은 냉기에 면역이다.";
+	case TPT_ELEC_IMUNE:
+		return "당신은 전기에 면역이다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -654,6 +666,12 @@ string tribe_property::GetDetail()
 		return "자연현상 그 자체인 당신은 각종 구름의 영향을 적게 받는다.\n구름으로 인해 받는 데미지가 절반이 된다.";
 	case TPT_SEE_INVI:
 		return "투명한 적을 볼 수 있게 된다.";
+	case TPT_FIRE_IMUNE:
+		return "당신은 순호의 축복으로 화염에 면역이기에 화염 속성에 데미지를 입지 않는다.";
+	case TPT_COLD_IMUNE:
+		return "당신은 순호의 축복으로 냉기에 면역이기에 냉기 속성에 데미지를 입지 않는다.";
+	case TPT_ELEC_IMUNE:
+		return "당신은 순호의 축복으로 전기에 면역이기에 전기 속성에 데미지를 입지 않는다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -809,6 +827,15 @@ void tribe_property::gain(bool gain_)
 		return;
 	case TPT_SEE_INVI:
 		you.ResistUpDown(value_, RST_INVISIBLE);
+		return;
+	case TPT_FIRE_IMUNE:
+		you.ResistUpDown(value_, RST_FIRE);
+		return;
+	case TPT_COLD_IMUNE:
+		you.ResistUpDown(value_, RST_ICE);
+		return;
+	case TPT_ELEC_IMUNE:
+		you.ResistUpDown(value_, RST_ELEC);
 		return;
 	}
 }

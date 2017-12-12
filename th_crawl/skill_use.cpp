@@ -33,6 +33,7 @@
 #include "seija.h"
 #include "lilly.h"
 #include "option_manager.h"
+#include "tribe.h"
 
 
 extern HANDLE mutx;
@@ -2810,7 +2811,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 	int hit_ = 10 + power / 15;
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("탄막", true));
+		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("탄막", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -2865,7 +2866,7 @@ const char* getJunkoString(int kind_)
 	switch (kind_)
 	{
 	case 1:
-		return "스킬순화: 선택한 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.";
+		return "스킬순화: 선택한 적성0 이상의 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.";
 	case 2:
 		return "저항순화: 선택한 속성에 대해 면역이 된다.";
 	case 3:
@@ -2922,11 +2923,95 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
+	switch (kind_)
+	{
+	case 1: //스킬순화
+		while (true)
+		{
+			view_skill("어떤 스킬을 순화할거지?");
+			int move_ = 1;
+			int key_ = waitkeyinput(true);
+			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
+			{
+				int num = (key_ >= 'a' && key_ <= 'z') ? key_ - 'a' : key_ - 'A' + 26;
+				if (num < SKT_MAX && you.GetSkillLevel(num, false) < 27 && !you.cannotSkillup(num))
+				{
+					char temp[100];
+					sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
+
+					printlog(temp, true, false, true, CL_danger);
+					changedisplay(DT_GAME);
+
+					int key_ = waitkeyinput(true);
+					if (key_ == 'y' || key_ == 'Y')
+					{
+						you.SetPureSkill(num);
+						sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num));
+						printlog(temp, true, false, false, CL_junko);
+						break;
+					}
+				}
+				else
+				{
+					printlog("이 스킬은 순화할 수 없어", true, false, false, CL_normal);
+					changedisplay(DT_GAME);
+					return false;
+				}
+			}
+			else
+			{
+				printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+				changedisplay(DT_GAME);
+				return false;
+			}
+		}
+		break;
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+		printlog("어떤 저항을 순화할거지?", true, false, false, CL_junko);
+		printlog("a-화염 b-냉기 c-전기", true, false, false, CL_junko);
+
+		int key_ = waitkeyinput(true);
+		switch (key_)
+		{
+		case 'a':
+			you.DeleteProperty(TPT_FIRE_RESIST);
+			you.SetProperty(TPT_FIRE_IMUNE, 200);
+			printlog("순호는 당신의 화염에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			break;
+		case 'b':
+			you.DeleteProperty(TPT_COLD_RESIST);
+			you.SetProperty(TPT_COLD_IMUNE, 200);
+			printlog("순호는 당신의 냉기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			break;
+		case 'c':
+			you.DeleteProperty(TPT_ELEC_RESIST);
+			you.SetProperty(TPT_ELEC_IMUNE, 200);
+			printlog("순호는 당신의 전기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			break;
+		default:
+			printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+			changedisplay(DT_GAME);
+			return false;
+		}
+		break;
+	}
+
+
+
+
 	printlog("순호: 나의 축복을 받도록 해!", true, false, false, CL_junko);
+	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_1, true, true);
 	you.Ability(SKL_JUNKO_2, true, true);
 	you.Ability(SKL_JUNKO_3, true, true);
 	you.Ability(SKL_JUNKO_4, true, true);
+	you.StatUpDown(5, STAT_STR);
+	you.StatUpDown(5, STAT_DEX);
+	you.StatUpDown(5, STAT_INT);
 	you.SetPureTurn(30, -1);
 
 

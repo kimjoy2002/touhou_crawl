@@ -285,6 +285,7 @@ public:
 	int total_skill_exp;
 	skill_exp_infor skill[SKT_MAX];
 	int bonus_skill[SKT_MAX];
+	int pure_skill;
 
 	int MemorizeSpell[52];
 	int remainSpellPoiont;
@@ -382,6 +383,7 @@ public:
 	bool ResistUpDown(int value_, resist_type resist_);
 	bool UnidenResistUpDown(int value_, resist_type resist_);
 	void BonusSkillUpDown(int skill_, int value_);
+	void SetPureSkill(int skill_);
 	//interupt_type HungerApply(int hunger_ = 0);
 	int calculate_damage(attack_type &type_, int atk, int max_atk);
 	void print_damage_message(attack_infor &a, bool damaged_);
@@ -465,6 +467,7 @@ public:
 	int GetNoneMove() { return s_none_move; };
 	bool GetPunish(god_type god_);
 	int GetSkillLevel(int skill_, bool bonus_);
+	bool cannotSkillup(int skill_);
 	int DeleteProperty(tribe_proper_type type_);
 	bool Teleport();
 	bool Blink(int time_);

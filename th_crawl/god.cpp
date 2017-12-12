@@ -2772,50 +2772,103 @@ void God_show()
 		}
 		break;
 	case GT_JUNKO:
-		if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 		{
-			printsub("순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.             (패시브)", true, CL_junko);
+
+			bool already_pure = you.god_value[GT_JUNKO][3] != 0;
 			if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-				printsub(" └2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
-				printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
+				if (already_pure)
+				{
+					printsub("당신은 순호의 축복에 의해 영구적으로 순화되었다.                 (패시브)", true, CL_junko);
+					printsub(" └당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+					printsub(" └당신은 모든 스탯이 5 증가한다.", true, CL_junko);
+					printsub("", true, CL_normal);
+				}
+				else
+				{
+					printsub("순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.             (패시브)", true, CL_junko);
+					if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
+					{
+						printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						printsub(" └2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
+						printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
+						printsub("", true, CL_normal);
+					}
+				}
+			}
+			if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
+			{
+				printsub("당신은 단순하지만 강력한 탄막을 날릴 수 있다.                  (P, 영력)", true, already_pure? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
-		}
-		if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
-		{
-			printsub("당신은 단순하지만 강력한 탄막을 날릴 수 있다.                  (P, 영력)", true, CL_junko);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
-		{
-			printsub("당신은 순수한 힘을 얻을 수 있다.                                  (신앙)", true, CL_junko);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
-		{
-			printsub("당신은 순수한 살의를 얻을 수 있다.                                (신앙)", true, CL_junko);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
-		{
-			printsub("당신은 순호의 축복으로 영구적으로 순화할 수 있다.                 (신앙)", true, CL_junko);
-			printsub("", true, CL_normal);
-			//순화시 순화패널티 3이 영구적용
-			//올스탯 +5. 그러나 기존권능을 사용할 수 없게 됨
-			//그리고 아래 등장하는 순화중 3개가 랜덤으로 나옴
+			if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
+			{
+				printsub("당신은 순수한 힘을 얻을 수 있다.                                  (신앙)", true, already_pure ? CL_bad : CL_junko);
+				printsub("", true, CL_normal);
+			}
+			if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
+			{
+				printsub("당신은 순수한 살의를 얻을 수 있다.                                (신앙)", true, already_pure ? CL_bad : CL_junko);
+				printsub("", true, CL_normal);
+			}
+			if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
+			{
+				if (already_pure)
+				{
+					printsub("당신은 순호의 축복으로 영구적으로 순화되었다.", true, CL_junko);
+					char temp[100];
+					switch (you.god_value[GT_JUNKO][3])
+					{
+					case 1:
+						sprintf_s(temp, 100, " └스킬순화: 당신의 %s 스킬레벨은 캐릭터 레벨과 항상 같다. ", skill_string((skill_type)you.pure_skill));
+						printsub(temp, true, CL_junko);
+						break;
+					case 2:
+						sprintf_s(temp, 100, " └저항순화: 당신의 저항은 면역이다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					case 3:
+						sprintf_s(temp, 100, " └마력순화: 당신의 체력과 영력은 동일시된다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					case 4:
+						sprintf_s(temp, 100, " └파워순화: 당신은 항상 풀파워다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					case 5:
+						sprintf_s(temp, 100, " └생명순화: 당신의 목숨은 2개 남아있다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					case 6:
+						sprintf_s(temp, 100, " └장비순화: 당신은 가지고 있는 장비를 정화했다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					default:
+						printsub(" └알수없는 버그 순화", true, CL_junko);
+						break;
+					}
+				}
+				else
+				{
+					printsub("당신은 순호의 축복으로 영구적으로 순화할 수 있다.               (한번만)", true, CL_junko);
+				}
+				printsub("", true, CL_normal);
 
-			//순화목록
-			
-			//스킬순화: 적성0이상의 스킬 1개를 선택하여 적성과 상관없이 스킬레벨이 항상 캐릭터레벨과 동일하도록 변화합니다.
-			//저항순화 - 속성 하나에 대해서 완전한 면역이 됩니다.
-			//마력순화 - 영력와 체력을 동일화하고 재생력이 증가합니다.
-			//파워순화 - 항상 풀파워 모드가 됩니다.
-			//생명순화 - 당신의 생명력은 순화되어 추가 생명을 2개 얻습니다. 당신이 봉래인이면 나오지 않습니다.
-			//장비순화 - 당신이 선택한 무기, 방어구의 강화치를 강화최대치 + 5로 바꿉니다.아티펙트도 가능합니다.
+				//순화시 순화패널티 3이 영구적용
+				//올스탯 +5. 그러나 기존권능을 사용할 수 없게 됨
+				//그리고 아래 등장하는 순화중 3개가 랜덤으로 나옴
+
+				//순화목록
+
+				//스킬순화: 적성0이상의 스킬 1개를 선택하여 적성과 상관없이 스킬레벨이 항상 캐릭터레벨과 동일하도록 변화합니다.
+				//저항순화 - 속성 하나에 대해서 완전한 면역이 됩니다.
+				//마력순화 - 영력와 체력을 동일화하고 재생력이 증가합니다.
+				//파워순화 - 항상 풀파워 모드가 됩니다.
+				//생명순화 - 당신의 생명력은 순화되어 추가 생명을 2개 얻습니다. 당신이 봉래인이면 나오지 않습니다.
+				//장비순화 - 당신이 선택한 무기, 방어구의 강화치를 강화최대치 + 5로 바꿉니다.아티펙트도 가능합니다.
+			}
+			break;
 		}
-		break;
 	}
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);

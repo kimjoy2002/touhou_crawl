@@ -383,14 +383,14 @@ bool Dump(int type, string *filename_)
 	fprintf_s(fp,"                          SH:%4d             지능:%4d\n\n",you.sh,you.s_int);
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;
-	fprintf_s(fp,"화염저항: %c %c %c      혼란저항: %c           무기: " ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"화염저항: %s%c %c      혼란저항: %c           무기: " , resist_>=100?"∞":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.equipment[ET_WEAPON])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
 	else
 		fprintf_s(fp,"맨손\n");
 	resist_ = you.ice_resist;
 	resist2_ = you.invisible_view;
-	fprintf_s(fp,"냉기저항: %c %c %c      투명보기: %c           탄막: " ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"냉기저항: %s%c %c      투명보기: %c           탄막: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.throw_weapon)
 		fprintf_s(fp,"%c) %s\n",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
 	else
@@ -398,7 +398,7 @@ bool Dump(int type, string *filename_)
 	
 	resist_ = you.elec_resist;
 	resist2_ = you.power_keep;
-	fprintf_s(fp,"전기저항: %c %c %c      파워유지: %c           몸통: " ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"전기저항: %s%c %c      파워유지: %c           몸통: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.equipment[ET_ARMOR])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
 	else
@@ -512,7 +512,11 @@ bool Dump(int type, string *filename_)
 	int skt = 0;
 	while(skt < SKT_MAX)
 	{
-		if (you.GetSkillLevel(skt, false)) {
+		if (you.pure_skill == skt)
+		{
+			fprintf_s(fp, "  %4s %3d (순화)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false));
+		}
+		else if (you.GetSkillLevel(skt, false)) {
 			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
 		}
 		skt++;

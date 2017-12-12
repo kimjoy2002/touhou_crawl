@@ -455,7 +455,7 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		pfont->DrawTextA(pSprite,"당신의 특성이 없습니다.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		return;
 	}
-	pfont->DrawTextA(pSprite,"당신의 특성들 (알파벳을 누르면 상세한 정보다 나옵니다.)", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	pfont->DrawTextA(pSprite,"당신의 특성들 (알파벳을 누르면 상세한 정보가 나옵니다.)", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
@@ -539,18 +539,18 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i<1;i++)
 		{
 
-			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27?' ':sk_char,(you.GetSkillLevel(skt, false) ==27?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt), you.GetSkillLevel(skt, true));
+			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt), you.GetSkillLevel(skt, true));
 			sk_char++;
 
-			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 ? 
+			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
 				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_verybad))) :
-				CL_warning;
+				you.pure_skill == skt ? CL_junko : CL_warning;
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += 150;
 			//if(move ==0)
-			if(you.GetSkillLevel(skt, false)<27)
+			if(you.GetSkillLevel(skt, false)<27 && !you.cannotSkillup(skt))
 				sprintf_s(temp,100,"(%2d%%)",GetSkillPercent(you.skill[skt]));
 			else 
 				sprintf_s(temp,100,"");
@@ -566,7 +566,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
 
 			rc.left += 50;
-			if (you.GetSkillLevel(skt, false) < 27) 
+			if (you.GetSkillLevel(skt, false) < 27 && !you.cannotSkillup(skt))
 			{
 				int base_skill = GetBaseSkillExp();
 				int skill_pecent = GetMaxSkillExp(you.skill[skt]);
@@ -577,7 +577,13 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				sprintf_s(temp, 100, "%3.1f", value_);
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
-			else 
+			else if (you.pure_skill == skt)
+			{
+
+				pfont->DrawTextA(pSprite, "순화 ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
+
+			}
+			else
 			{
 				sprintf_s(temp, 100, " -   ");
 				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
@@ -616,20 +622,21 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
 	rc.top += fontDesc.Height *2;
 
-
-	pfont->DrawTextA(pSprite, "현재 당신의 스킬레벨을 확인하고 경험치 분배 비율을 조절할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
-	rc.top += fontDesc.Height*1;
-
-	pfont->DrawTextA(pSprite, "알파벳 키를 눌러서 원하는 스킬로 경험치를 분배할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
-
-	rc.top += fontDesc.Height * 2;
-	if (wiz_list.wizard_mode == 1 )
+	if (item_view_message.size() < 1)
 	{
-		char temp[50];
-		sprintf_s(temp, 50, "[현재 경험치 패널티 %d]", exp_to_skill_exp(0));
-		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
-	}
+		pfont->DrawTextA(pSprite, "현재 당신의 스킬레벨을 확인하고 경험치 분배 비율을 조절할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+		rc.top += fontDesc.Height * 1;
 
+		pfont->DrawTextA(pSprite, "알파벳 키를 눌러서 원하는 스킬로 경험치를 분배할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+
+		rc.top += fontDesc.Height * 2;
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[50];
+			sprintf_s(temp, 50, "[현재 경험치 패널티 %d]", exp_to_skill_exp(0));
+			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
+		}
+	}
 
 }
 void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
@@ -695,7 +702,10 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top += fontDesc.Height;		
 
 	int resist_ = you.fire_resist - you.uniden_fire_resist;
-	sprintf_s(temp,100,"화염저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	if(resist_>=100)
+		sprintf_s(temp, 100, "화염저항: ∞");
+	else
+		sprintf_s(temp,100,"화염저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.confuse_resist- you.uniden_confuse_resist;
@@ -720,7 +730,10 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 	resist_ = you.ice_resist - you.uniden_ice_resist;
-	sprintf_s(temp,100,"냉기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	if (resist_ >= 100)
+		sprintf_s(temp, 100, "냉기저항: ∞");
+	else
+		sprintf_s(temp,100,"냉기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.invisible_view- you.uniden_invisible_view;
@@ -744,7 +757,10 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top += fontDesc.Height;
 
 	resist_ = you.elec_resist - you.uniden_elec_resist;
-	sprintf_s(temp,100,"전기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	if (resist_ >= 100)
+		sprintf_s(temp, 100, "전기저항: ∞");
+	else
+		sprintf_s(temp,100,"전기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.power_keep- you.uniden_power_keep;

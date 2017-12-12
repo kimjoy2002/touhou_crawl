@@ -28,6 +28,7 @@
 #include "rand_shuffle.h"
 #include "evoke.h"
 #include "armour.h"
+#include "tribe.h"
 #include <algorithm>
 #include <math.h>
 
@@ -3712,18 +3713,21 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 	monster* mon_ = (monster*)order;
 
 	random_extraction<int> rand_kokoro;
-	rand_kokoro.push(MON_KOKORO1, (you.fire_resist <=0?100:
+	rand_kokoro.push(MON_KOKORO1, (you.GetProperty(TPT_FIRE_IMUNE)?0 :
+		(you.fire_resist <=0?100:
 		(you.fire_resist == 1 ? 30 :
 		(you.fire_resist == 2 ? 10 : 1
-		))));
-	rand_kokoro.push(MON_KOKORO2, (you.ice_resist <= 0 ? 100 :
+		)))));
+	rand_kokoro.push(MON_KOKORO2, (you.GetProperty(TPT_COLD_IMUNE) ?0:
+		(you.ice_resist <= 0 ? 100 :
 		(you.ice_resist == 1 ? 30 :
 		(you.ice_resist == 2 ? 10 : 1
-		))));
-	rand_kokoro.push(MON_KOKORO3, (you.elec_resist <= 0 ? 100 :
+		)))));
+	rand_kokoro.push(MON_KOKORO3, (you.GetProperty(TPT_ELEC_IMUNE)?0:
+		(you.elec_resist <= 0 ? 100 :
 		(you.elec_resist == 1 ? 30 :
 		(you.elec_resist == 2 ? 10 : 1
-		))));
+		)))));
 		
 
 	int id_ = rand_kokoro.pop();

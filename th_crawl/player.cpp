@@ -78,7 +78,7 @@ s_pure(0),s_pure_turn(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -284,6 +284,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, total_skill_exp);
 	SaveData<skill_exp_infor>(fp, *skill, SKT_MAX);
 	SaveData<int>(fp, *bonus_skill, SKT_MAX);
+	SaveData<int>(fp, pure_skill);
 	SaveData<int>(fp, *MemorizeSpell,52);
 	SaveData<int>(fp, remainSpellPoiont);
 	SaveData<int>(fp, currentSpellNum);
@@ -511,6 +512,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, total_skill_exp);
 	LoadData<skill_exp_infor>(fp, *skill);
 	LoadData<int>(fp, *bonus_skill);
+	LoadData<int>(fp, pure_skill);
 	LoadData<int>(fp, *MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
@@ -1726,6 +1728,11 @@ void players::BonusSkillUpDown(int skill_, int value_)
 {
 	bonus_skill[skill_] += value_;
 }
+void players::SetPureSkill(int skill_)
+{
+	pure_skill = skill_;
+	skill[skill_].onoff = 0;
+}
 //interupt_type players::HungerApply(int hunger_)
 //{
 //	hunger_type temp = GetHunger();
@@ -2044,6 +2051,11 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	{
 		you.skill[skill_].onoff = 1;
 	}
+	if (you.cannotSkillup(skill_))
+	{
+		you.skill[skill_].onoff = 0;
+		return false;
+	}
 	if(skill_ == SKT_ERROR)
 	{
 		printlog("스킬경험치에 에러가 발생했습니다.",true,false,false,CL_danger);
@@ -2058,7 +2070,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		bool allMax = true;
 		for (int i = 0; i < SKT_MAX; i++)
 		{
-			if (you.skill[i].level < 27)
+			if (!you.cannotSkillup(i) && you.GetSkillLevel(i, false) < 27 )
 			{
 				allMax = false;
 			}
@@ -2969,7 +2981,7 @@ bool players::SetPureTurn(int value_, int turn_)
 	if (!turn_)
 		return false;
 	s_pure += value_;
-	if (s_pure_turn != -1 && s_pure_turn < turn_)
+	if (s_pure_turn != -1 && (s_pure_turn < turn_  || turn_ == -1))
 		s_pure_turn = turn_;
 	return true;
 }
@@ -2987,6 +2999,9 @@ bool players::GetPunish(god_type god_)
 }
 int players::GetSkillLevel(int skill_, bool bonus_)
 {
+	if (pure_skill == skill_)
+		return you.level;
+
 	int return_ = skill[skill_].level;
 
 	if (bonus_) {
@@ -2995,6 +3010,13 @@ int players::GetSkillLevel(int skill_, bool bonus_)
 	if (return_ > 27)
 		return_ = 27;
 	return return_;	
+}
+bool players::cannotSkillup(int skill_)
+{
+	if (pure_skill == skill_)
+		return true;
+
+	return false;
 }
 int players::GetProperty(tribe_proper_type type_)
 {
@@ -5065,8 +5087,13 @@ float players::GetFireResist(bool cloud_)
 		if(GetProperty(TPT_CLOUD) && half_youkai[1] == 0)
 		{			
 			return 0;
-		}		
+		}
 	}
+	if (GetProperty(TPT_FIRE_IMUNE))
+	{
+		return 0;
+	}
+
 	if(fire_resist <= -2)
 		return_ *= 2;
 	else if(fire_resist == -1)
@@ -5094,6 +5121,10 @@ float players::GetColdResist(bool cloud_)
 			return 0;
 		}		
 	}
+	if (GetProperty(TPT_COLD_IMUNE))
+	{
+		return 0;
+	}
 	if(ice_resist <= -2)
 		return_ *= 2;
 	else if(ice_resist == -1)
@@ -5120,6 +5151,10 @@ float players::GetElecResist(bool cloud_)
 		{			
 			return 0;
 		}		
+	}
+	if (GetProperty(TPT_ELEC_IMUNE))
+	{
+		return 0;
 	}
 	if(elec_resist <= -2)
 		return_ *= 2;

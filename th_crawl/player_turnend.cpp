@@ -55,9 +55,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	inter = IT_NONE;
 	env[current_level].CheckFloor();
 	int delay_ = GetDelay();
-	if((s_haste || alchemy_buff == ALCT_HASTE) && !s_slow)
+	if((s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE) && !s_slow)
 		delay_ = delay_*0.7f;
-	else if(s_slow && !(s_haste || alchemy_buff == ALCT_HASTE))
+	else if(s_slow && !(s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE))
 		delay_ = delay_*1.5f;
 
 	if(GetStatPanalty()) //스탯패널티
@@ -160,7 +160,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				it++;
 				if(!p_del)
 				{
-					printlog("인벤토리에 있는 P템이 사라졌다.",false,false,false,CL_normal);
+					printlog("인벤토리에 있는 P템이 사라졌다. ",false,false,false,CL_normal);
 					p_del = true;
 				}
 				DeleteItem(temp);
@@ -176,35 +176,35 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				switch(it->value5)
 				{
 				case WB_FIRE:			
-					printlog("무기가 타오르는 것을 멈췄다.",true,false,false,CL_normal);
+					printlog("무기가 타오르는 것을 멈췄다. ",true,false,false,CL_normal);
 					break;
 				case WB_COLD:			
-					printlog("무기에서 나오던 냉기가 그쳤다.",true,false,false,CL_normal);
+					printlog("무기에서 나오던 냉기가 그쳤다. ",true,false,false,CL_normal);
 					break;		
 				case WB_POISON:			
-					printlog("더이상 무기에서 독이 떨어지지 않는다.",true,false,false,CL_normal);	
+					printlog("더이상 무기에서 독이 떨어지지 않는다. ",true,false,false,CL_normal);	
 					break;	
 				case WB_CURSE:		
-					printlog("무기에서 저주의 힘이 약해졌다.",true,false,false,CL_normal);	
+					printlog("무기에서 저주의 힘이 약해졌다. ",true,false,false,CL_normal);	
 					break;
 				case WB_WEATHER	:
-					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다.",true,false,false,CL_normal);	
+					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다. ",true,false,false,CL_normal);	
 					break;
 				case WB_AUTUMN:
-					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
+					printlog("무기는 더이상 쓸쓸해보이지 않는다. ",true,false,false,CL_normal);	
 					break;
 				case WB_MANA_REGEN:
-					printlog("영력의 흐름이 사라졌다.",true,false,false,CL_white_blue);	
+					printlog("영력의 흐름이 사라졌다. ",true,false,false,CL_white_blue);	
 					break;
 				case WB_FAST_CAST:
-					printlog("머리회전이 다시 둔해졌다.",true,false,false,CL_white_blue);	
+					printlog("머리회전이 다시 둔해졌다. ",true,false,false,CL_white_blue);	
 					break;
 				case WB_PROTECT:
 					AcUpDown(0,-5);
-					printlog("보호가 사라졌다.",true,false,false,CL_white_blue);	
+					printlog("보호가 사라졌다. ",true,false,false,CL_white_blue);	
 					break;
 				default:			
-					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	
+					printlog("방금 무기는 버그에 걸려있다. ",true,false,false,CL_danger);	
 					break;		
 				}
 				it->value5 = 0;
@@ -241,27 +241,27 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			damage_ = HpUpDown(-poison_damage(s_poison),DR_POISON);
 			if(damage_==-1)
 			{
-				printlog("독의 데미지를 받고 있다.",false,false,false,CL_normal);
+				printlog("독의 데미지를 받고 있다. ",false,false,false,CL_normal);
 				if(hp<30)					
 					SetInter(IT_POISON);
 			}
 			else if(damage_>=-4)
 			{
-				printlog("심한 독의 데미지를 받고 있다.",false,false,false,CL_small_danger);
+				printlog("심한 독의 데미지를 받고 있다. ",false,false,false,CL_small_danger);
 				if(hp<100)					
 					SetInter(IT_POISON);
 			}
 			else
 			{
-				printlog("매우 심한 독의 데미지를 받고 있다.",false,false,false,CL_danger);
+				printlog("매우 심한 독의 데미지를 받고 있다. ",false,false,false,CL_danger);
 				SetInter(IT_POISON);
 			}
 		}
 		s_poison--;
 		if(!s_poison)
-			printlog("독이 치료되었다.",false,false,false,CL_good);
+			printlog("독이 치료되었다. ",false,false,false,CL_good);
 		else if(s_poison%30 == 0)
-			printlog("독에서 약간 회복되었다.",false,false,false,CL_good);
+			printlog("독에서 약간 회복되었다. ",false,false,false,CL_good);
 	}
 	WaitForSingleObject(mutx, INFINITE);
 	if(s_might)
@@ -269,7 +269,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_might--;
 		if(!s_might)
 		{
-			printlog("힘이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("힘이 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_STR);
 			SetInter(IT_STAT);
 		}
@@ -279,7 +279,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_clever--;
 		if(!s_clever)
 		{
-			printlog("지능이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("지능이 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_INT);
 			SetInter(IT_STAT);
 		}
@@ -289,7 +289,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_agility--;
 		if(!s_agility)
 		{
-			printlog("민첩이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("민첩이 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_DEX);
 			EvUpDown(0,-5);
 			SetInter(IT_STAT);
@@ -299,39 +299,72 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_str < m_str && randA_1(20000) <= delay_)
 		{
 			s_str++;
-			printlog("잃어버린 힘이 회복되었다.",false,false,false,CL_blue);
+			printlog("잃어버린 힘이 회복되었다. ",false,false,false,CL_blue);
 		}	
 		else if(s_dex < m_dex && randA_1(20000) <= delay_)
 		{
 			s_dex++;
-			printlog("잃어버린 민첩이 회복되었다.",false,false,false,CL_blue);
+			printlog("잃어버린 민첩이 회복되었다. ",false,false,false,CL_blue);
 		}
 		else if(s_int < m_int && randA_1(20000) <= delay_)
 		{
 			s_int++;
-			printlog("잃어버린 지능이 회복되었다.",false,false,false,CL_blue);
+			printlog("잃어버린 지능이 회복되었다. ",false,false,false,CL_blue);
 		}
 	}
 	if(s_haste)
 	{
 		s_haste--;
-		if(!s_haste && alchemy_buff != ALCT_HASTE)
+		if(!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
 		{
-			printlog("속도가 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("속도가 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
-		if(s_haste == 10 && (alchemy_buff != ALCT_HASTE || alchemy_time<10))
+		if(s_haste == 10 && s_pure_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time<10))
 		{
-			printlog("속도가 돌아오고 있다.",false,false,false,CL_blue);
+			printlog("속도가 돌아오고 있다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
+	}
+	if (s_pure_haste)
+	{
+		s_pure_haste--;
+		if (!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
+		{
+			printlog("살의가 사라졌다. ", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+		if (s_pure_haste == 10 && s_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time < 10))
+		{
+			printlog("살의가 사라지고 있다. ", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+
+		if (s_pure_haste)
+		{
+			bool least_one = false;
+			for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && env[current_level].isInSight(it->position) && !it->isUserAlly())
+				{
+					least_one = true;
+					break;
+				}
+			}
+			if (!least_one) {
+				s_pure_haste = 0;
+				printlog("시야내에 적이 사라져 살의가 사라졌다. ", false, false, false, CL_blue);
+				SetInter(IT_STAT);
+			}
+		}
+
 	}
 	if(s_wind)
 	{
 		s_wind--;
 		if(!s_wind)
 		{
-			printlog("당신에게 감겨있던 바람이 빠져나갔다.",false,false,false,CL_blue);
+			printlog("당신에게 감겨있던 바람이 빠져나갔다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -340,7 +373,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_knife_collect--;
 		if(!s_knife_collect)
 		{
-			printlog("더이상 탄막이 자동으로 회수되지 않는다.",false,false,false,CL_blue);
+			printlog("더이상 탄막이 자동으로 회수되지 않는다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -349,7 +382,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_drunken--;
 		if(!s_drunken)
 		{
-			printlog("당신은 제정신을 차렸다.",false,false,false,CL_white_blue);
+			printlog("당신은 제정신을 차렸다. ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -360,7 +393,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_lunatic--;
 		if(!s_lunatic)
 		{
-			printlog("당신의 광기는 끝났다.",false,false,false,CL_white_blue);
+			printlog("당신의 광기는 끝났다. ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -391,7 +424,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_confuse--;
 		if(!s_confuse)
 		{
-			printlog("혼란스러움이 사라졌다.",false,false,false,CL_blue);
+			printlog("혼란스러움이 사라졌다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -400,7 +433,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_slow--;
 		if(!s_slow)
 		{
-			printlog("속도가 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("속도가 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -409,7 +442,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_frozen--;
 		if(!s_frozen)
 		{
-			printlog("얼어붙었던 몸이 녹았다.",false,false,false,CL_blue);
+			printlog("얼어붙었던 몸이 녹았다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -425,7 +458,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_elec--;
 		if(!s_elec)
 		{
-			printlog("방전이 멈췄다.",false,false,false,CL_blue);
+			printlog("방전이 멈췄다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -435,7 +468,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_paralyse--;
 		if(!s_paralyse)
 		{
-			printlog("다시 움직일 수 있게 되었다.",false,false,false,CL_blue);
+			printlog("다시 움직일 수 있게 되었다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -444,7 +477,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_levitation--;
 		if(!s_levitation)
 		{
-			printlog("땅에 부드럽게 착지했다.",false,false,false,CL_blue);
+			printlog("땅에 부드럽게 착지했다. ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_LEVITATION,false,false,temp);
@@ -452,7 +485,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_levitation == 10)
 		{
-			printlog("몸이 무거워지고 있다.",false,false,false,CL_small_danger);
+			printlog("몸이 무거워지고 있다. ",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
 		}
 	}
@@ -461,7 +494,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_glow--;
 		if(!s_glow)
 		{
-			printlog("당신의 몸에서 빛나는 것이 멈췄다.",false,false,false,CL_blue);
+			printlog("당신의 몸에서 빛나는 것이 멈췄다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -470,7 +503,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_graze--;
 		if(!s_graze)
 		{
-			printlog("더 이상 그레이즈를 하지 않는다.",false,false,false,CL_blue);
+			printlog("더 이상 그레이즈를 하지 않는다. ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_GRAZE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_GRAZE,false,false,temp);
@@ -478,7 +511,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_graze == 10)
 		{
-			printlog("그레이즈가 무뎌지고있다.",false,false,false,CL_blue);
+			printlog("그레이즈가 무뎌지고있다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -495,7 +528,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(!s_silence)
 		{
-			printlog("소리를 지우는 정적이 사라졌다.",false,false,false,CL_blue);
+			printlog("소리를 지우는 정적이 사라졌다. ",false,false,false,CL_blue);
 			env[current_level].MakeSilence(position, s_silence_range, false);
 			SetInter(IT_STAT);
 		}
@@ -505,7 +538,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sick--;
 		if(!s_sick)
 		{
-			printlog("병이 나았다.",false,false,false,CL_blue);
+			printlog("병이 나았다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -514,7 +547,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_veiling--;
 		if(!s_veiling)
 		{
-			printlog("휘감던 바람이 잠잠해졌다.",false,false,false,CL_blue);
+			printlog("휘감던 바람이 잠잠해졌다. ",false,false,false,CL_blue);
 			s_value_veiling = 0;
 			SetInter(IT_STAT);
 		}
@@ -524,7 +557,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_invisible--;
 		if(!s_invisible)
 		{
-			printlog("몸이 다시 불투명해졌다.",false,false,false,CL_blue);
+			printlog("몸이 다시 불투명해졌다. ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_INVISIBLE,false,false,temp);
@@ -532,7 +565,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_invisible == 10)
 		{
-			printlog("당신의 투명한 몸이 깜박이고있다.",false,false,false,CL_blue);
+			printlog("당신의 투명한 몸이 깜박이고있다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -542,12 +575,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift = 0;
 		if(!s_superman)
 		{
-			printlog("당신은 더이상 다리가 빠르지않다.",false,false,false,CL_blue);
+			printlog("당신은 더이상 다리가 빠르지않다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_superman == 5)
 		{
-			printlog("당신의 다리가 무거워지고있다.",false,false,false,CL_blue);
+			printlog("당신의 다리가 무거워지고있다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -588,7 +621,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_stasis--;
 		if(!s_stasis)
 		{
-			printlog("전이 방해가 풀렸다.",false,false,false,CL_blue);
+			printlog("전이 방해가 풀렸다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -597,7 +630,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		force_turn--;
 		if(!force_turn)
 		{
-			printlog("위력이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog("위력이 원래대로 돌아왔다. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -607,12 +640,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_super_graze--;
 		if (!s_super_graze)
 		{
-			printlog("당신의 근성 회피는 끝났다.", false, false, false, CL_blue);
+			printlog("당신의 근성 회피는 끝났다. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_super_graze == 3)
 		{
-			printlog("당신의 근성 회피가 끝나가고있다.", false, false, false, CL_blue);
+			printlog("당신의 근성 회피가 끝나가고있다. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -622,7 +655,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_night_sight_turn--;
 		if (!s_night_sight_turn)
 		{
-			printlog("당신의 야맹증은 회복되었다.", false, false, false, CL_blue);
+			printlog("당신의 야맹증은 회복되었다. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -632,7 +665,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_sleep--;
 		if (!s_sleep)
 		{
-			printlog("당신은 졸음을 깼다.", false, false, false, CL_blue);
+			printlog("당신은 졸음을 깼다. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -641,11 +674,22 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sleep++;
 		if (!s_sleep)
 		{
-			printlog("당신은 잠에서 깼다.", false, false, false, CL_blue);
+			printlog("당신은 잠에서 깼다. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 
 	}
+	if (you.s_pure_turn>0)
+	{
+		you.s_pure_turn--;
+		if (!you.s_pure_turn)
+		{
+			you.s_pure = 0;
+			printlog("당신의 일시적 순화가 해제되었다. ", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+
 	if(s_slaying)
 	{
 		s_slaying = 0;

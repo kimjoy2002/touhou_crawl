@@ -1922,6 +1922,7 @@ void Pray()
 			{
 				WaitForSingleObject(mutx, INFINITE);
 				deletesub();
+				SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
 				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
@@ -1940,6 +1941,7 @@ void Pray()
 					case 'Y':
 					case 'y':
 						changedisplay(DT_GAME);
+						SetDisplayTexture(NULL);
 						you.Belief((god_type)(type-DG_TEMPLE_FIRST),15);
 						MoreWait();
 					case 'N':
@@ -1949,6 +1951,7 @@ void Pray()
 					}
 				}
 				changedisplay(DT_GAME);
+				SetDisplayTexture(NULL);
 			}
 		}
 		else
@@ -2202,7 +2205,15 @@ void GodInfor(god_type god)
 		printsub("", true, CL_okina);
 		break;
 	case GT_JUNKO:
-		printsub("순호", true, CL_danger);
+		printsub("순호", true, CL_junko);
+		printsub("", true, CL_junko);
+		printsub("순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.", true, CL_junko);
+		printsub("그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.", true, CL_junko);
+		printsub("그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고", true, CL_junko);
+		printsub("순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.", true, CL_junko);
+		printsub("기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.", true, CL_junko);
+		printsub("그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.", true, CL_junko);
+		printsub("그녀는 원한을 갚기 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_junko);
 		break;
 	default:
 		printsub("버그신",true,CL_danger);
@@ -2228,6 +2239,7 @@ void God_show()
 	}
 	deletesub();
 	WaitForSingleObject(mutx, INFINITE);
+	SetDisplayTexture(&img_god_background[you.god]);
 	GodInfor(you.god);
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
@@ -2763,10 +2775,13 @@ void God_show()
 		if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 		{
 			printsub("순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.             (패시브)", true, CL_junko);
-			printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, CL_small_danger);
-			printsub(" └2단계: 당신은 일부 스크롤의 효과를 받지 않는다.", true, CL_small_danger);
-			printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, CL_small_danger);
-			printsub("", true, CL_normal);
+			if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
+			{
+				printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+				printsub(" └2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
+				printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
+				printsub("", true, CL_normal);
+			}
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
 		{
@@ -2810,6 +2825,7 @@ void God_show()
 		break;
 	}
 	changedisplay(DT_GAME);
+	SetDisplayTexture(NULL);
 
 }
 bool God_pray(const list<item>::iterator it)

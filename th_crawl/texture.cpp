@@ -11,6 +11,7 @@
 #include "monster_texture.h"
 #include "texture.h"
 #include "Fliename.h"
+#include <sys/stat.h>
 
 #include "option_manager.h"
 #include "enum.h"
@@ -26,6 +27,37 @@ const char *imgfile_title[MAX_TITLE] =
 	"./data/title_4.png",
 	"./data/title_5.png",
 };
+
+const char *imgfile_god[GT_LAST] =
+{
+	"",//GT_SHIKIEIKI = GT_FIRST,
+	"./data/god/byakuren.png",//GT_BYAKUREN,
+	"./data/god/kanako.png",//GT_KANAKO,
+	"./data/god/suwako.png",//GT_SUWAKO,
+	"./data/god/minoriko.png",//GT_MINORIKO,
+
+	"./data/god/mima.png",//GT_MIMA,
+	"./data/god/shinki.png",//GT_SHINKI,
+	"./data/god/yuugi.png",//GT_YUUGI,
+	"",//GT_SHIZUHA,
+	"",//GT_HINA,
+
+	"",//GT_YUKARI,
+	"",//GT_EIRIN,
+	"",//GT_YUYUKO,
+	"",//GT_SATORI,
+	"",//GT_TENSI,
+
+	"",//GT_SEIJA,
+	"",//GT_LILLY,
+	"",//GT_MIKO,
+	"./data/god/okina.png",//GT_OKINA,
+	"./data/god/junko.png",//GT_JUNKO
+};
+
+
+
+
 
 
 TextureFile texture_dungeon01(imgfile_dungeon01);
@@ -53,9 +85,59 @@ TextureFile texture_sight_rect(imgfile_sight_rect);
 
 TextureFile texture_title(imgfile_title[0]);
 
+TextureFile texture_god[GT_LAST]
+{ 
+TextureFile(imgfile_god[0]),
+TextureFile(imgfile_god[1]),
+TextureFile(imgfile_god[2]),
+TextureFile(imgfile_god[3]),
+TextureFile(imgfile_god[4]),
+TextureFile(imgfile_god[5]),
+TextureFile(imgfile_god[6]),
+TextureFile(imgfile_god[7]),
+TextureFile(imgfile_god[8]),
+TextureFile(imgfile_god[9]),
+TextureFile(imgfile_god[10]),
+TextureFile(imgfile_god[11]),
+TextureFile(imgfile_god[12]),
+TextureFile(imgfile_god[13]),
+TextureFile(imgfile_god[14]),
+TextureFile(imgfile_god[15]),
+TextureFile(imgfile_god[16]),
+TextureFile(imgfile_god[17]),
+TextureFile(imgfile_god[18]),
+TextureFile(imgfile_god[19])
+};
 
 
 textures img_title(&texture_title, 0, 0, 512, 512, 255);
+
+
+textures img_god_background[GT_LAST]=
+{
+textures(&texture_god[0], 0, 0, 512, 512, 255),
+textures(&texture_god[1], 0, 0, 512, 512, 255),
+textures(&texture_god[2], 0, 0, 512, 512, 255),
+textures(&texture_god[3], 0, 0, 512, 512, 255),
+textures(&texture_god[4], 0, 0, 512, 512, 255),
+textures(&texture_god[5], 0, 0, 512, 512, 255),
+textures(&texture_god[6], 0, 0, 512, 512, 255),
+textures(&texture_god[7], 0, 0, 512, 512, 255),
+textures(&texture_god[8], 0, 0, 512, 512, 255),
+textures(&texture_god[9], 0, 0, 512, 512, 255),
+textures(&texture_god[10], 0, 0, 512, 512, 255),
+textures(&texture_god[11], 0, 0, 512, 512, 255),
+textures(&texture_god[12], 0, 0, 512, 512, 255),
+textures(&texture_god[13], 0, 0, 512, 512, 255),
+textures(&texture_god[14], 0, 0, 512, 512, 255),
+textures(&texture_god[15], 0, 0, 512, 512, 255),
+textures(&texture_god[16], 0, 0, 512, 512, 255),
+textures(&texture_god[17], 0, 0, 512, 512, 255),
+textures(&texture_god[18], 0, 0, 512, 512, 255),
+textures(&texture_god[19], 0, 0, 512, 512, 255)
+};
+
+
 
 textures img_auto_wall[48] = {
 	textures(&texture_dungeon01, 32),
@@ -1388,6 +1470,12 @@ bool TextureFile::loading(IDirect3DDevice9* Device)
 //·Îµù
 bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 {
+	struct stat stStat = { 0 };
+
+	if (stat(name, &stStat) == -1) {
+		return false;
+	}
+
 	if(FAILED(D3DXCreateTextureFromFileExA(Device,
 		name,
 		0,

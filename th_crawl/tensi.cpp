@@ -171,7 +171,7 @@ int GetHazard()
 	if(you.s_slow)
 		total_danger_ *= 2;
 	
-	if(you.s_haste)
+	if(you.s_haste || you.s_pure_haste)
 		total_danger_ *= 0.7f;
 	if(you.s_might || you.s_clever || you.s_dex)
 		total_danger_ *= 0.7f;

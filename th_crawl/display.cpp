@@ -1507,10 +1507,14 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				stateDraw.addState("공간", CL_blue,
 					"일정 턴이 지나면 같은 층 무작위 위치로 이동됩니다.", this);
 			}
-			if((you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
+			if((you.s_pure_haste || you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
 			{
-				stateDraw.addState("가속", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
-					"당신의 모든 행동속도는 1.5배 빨라집니다.", this);
+				if (you.s_haste || you.alchemy_buff == ALCT_HASTE)
+					stateDraw.addState("가속", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
+						"당신의 모든 행동속도는 1.5배 빨라집니다.", this);
+				else if (you.s_pure_haste)
+					stateDraw.addState("살의",CL_junko,
+						"당신의 모든 행동속도는 1.5배 빨라집니다. 시야에 적이 안보이게되면 버프가 사라집니다.", this);
 			}
 			else if(you.s_slow && !(you.s_haste || you.alchemy_buff == ALCT_HASTE))
 			{
@@ -1681,6 +1685,21 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				stateDraw.addState("수면", CL_danger,
 					"당신은 잠을 자고 있습니다!", this);
+			}
+			if (you.s_pure>0 && you.s_pure_turn)
+			{
+				D3DCOLOR color_ = you.s_pure_turn == -1 ? CL_normal :
+					you.s_pure < 10 ? CL_bad :
+					you.s_pure < 20 ? CL_darkblue :
+					you.s_pure < 30 ? CL_blue : CL_white_blue;
+				if(you.s_pure_turn == -1)
+					sprintf_s(temp, 128, "순화");
+				else
+					sprintf_s(temp, 128, "순화(%d단계)", you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3)));
+				stateDraw.addState(temp, color_,
+					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
+					(you.s_pure >= 20) ? "스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
+					(you.s_pure >= 10) ? "스펠카드를 사용할 수 없습니다." : "당신은 아직 순화의 패널티를 받고있지 않습니다." , this);
 			}
 		}
 
@@ -2327,6 +2346,8 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
+	if (image)
+		image->draw(pSprite, 255);
 	//텍스트(위쪽에 숏로그)그리기
 	if(!text_sub.text_list.empty())
 	{

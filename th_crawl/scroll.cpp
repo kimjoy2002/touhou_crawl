@@ -155,6 +155,23 @@ int isGoodScroll(scroll_type kind)
 
 bool readscroll(scroll_type kind, bool pre_iden_)
 {
+	if (you.s_pure_turn && you.s_pure >= 10)
+	{
+		if (kind != SCT_ENCHANT_WEAPON_1 &&
+			kind != SCT_ENCHANT_WEAPON_2 &&
+			kind != SCT_ENCHANT_ARMOUR &&
+			kind != SCT_IDENTIFY &&
+			kind != SCT_BRAND_WEAPON &&
+			kind != SCT_REMOVE_CURSE &&
+			kind != SCT_AMNESIA)
+		{
+			printlog("당신은 두루마리의 효과를 사용하기엔 너무 순화되어있다.", true, false, false, CL_normal);
+			iden_list.scroll_list[kind].iden = 3;
+			return !pre_iden_;
+		}
+	}
+
+
 	switch(kind)
 	{
 	case SCT_TELEPORT:		

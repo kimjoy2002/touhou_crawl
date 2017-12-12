@@ -15,6 +15,7 @@
 
 
 extern textures img_title;
+extern textures img_god_background[GT_LAST];
 extern textures img_auto_wall[48];
 extern textures img_auto_metal_wall[48];
 extern textures img_auto_mountain_wall[48];

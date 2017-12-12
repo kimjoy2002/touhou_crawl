@@ -1193,7 +1193,10 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
 			int cur = i - IDEN_CHECK_BOOK_START;
-			iden_list.autopickup[i] = false;
+			if (cur == 0)
+				iden_list.autopickup[i] = true;
+			else
+				iden_list.autopickup[i] = false;
 		}
 		else if (i >= IDEN_CHECK_ETC_START && i < IDEN_CHECK_ETC_END) {
 			int cur = i - IDEN_CHECK_ETC_START;

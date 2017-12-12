@@ -29,7 +29,11 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
 		return false;
 	}
-
+	if (you.s_pure_turn && you.s_pure >= 10)
+	{
+		printlog("당신은 스펠카드를 쓰기엔 너무 순화되어있다.", true, false, false, CL_normal);
+		return false;
+	}
 	//if(you.power < Spellcardusepower(kind,true))
 	//{
 	//	printlog("스펠을 선언하기엔 당신의 P가 모자란다.",true,false,false,CL_small_danger);	

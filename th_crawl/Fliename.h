@@ -25,6 +25,7 @@ const char imgfile_test[] = "./data/test.png";
 
 
 extern const char *imgfile_title[MAX_TITLE];
+extern const char *imgfile_god[];
 
 
 const char imgfile_dot_floor[] = "./data/dot/fl.png";

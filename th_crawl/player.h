@@ -203,6 +203,7 @@ public:
 	int s_clever;
 	int s_agility;
 	int s_haste;
+	int s_pure_haste;
 	int s_confuse;
 	int s_slow;
 	int s_frozen;
@@ -250,6 +251,8 @@ public:
 	int s_night_sight;
 	int s_night_sight_turn;
 	int s_sleep;
+	int s_pure;
+	int s_pure_turn;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -400,6 +403,7 @@ public:
 	bool SetClever(int clever_);
 	bool SetAgility(int agility_);
 	bool SetHaste(int haste_);
+	bool SetPureHaste(int haste_);
 	bool SetConfuse(int confuse_, bool strong_=false);
 	bool SetSlow(int slow_);
 	bool SetFrozen(int frozen_);
@@ -448,6 +452,7 @@ public:
 	bool SetNoneMove(int s_none_move_); 
 	bool SetNightSight(int value_, int turn_, bool stong_);
 	bool SetSleep(int value_);
+	bool SetPureTurn(int value_, int turn_);
 
 	int GetInvisible();
 	int GetSaved(){return true;};

@@ -72,6 +72,7 @@ extern TextureFile texture_dot_mapping_floor;
 extern TextureFile texture_dot_mapping_wall;
 extern TextureFile texture_sight_rect;
 extern TextureFile texture_title;
+extern TextureFile texture_god[];
 
 extern textures img_dungeon01[];
 extern textures img_dungeon_object[][3];

@@ -420,7 +420,11 @@ const D3DCOLOR item::item_color()
 	switch(type)
 	{
 	case ITM_POTION:
-		if(iden_list.potion_list[value1].iden)
+		if (you.s_pure_turn && you.s_pure >= 30)
+		{
+			return_ = CL_bad;
+		}
+		else if(iden_list.potion_list[value1].iden)
 		{
 			int color_ = isGoodPotion((potion_type)value1);
 			return_ = (color_ == 3)?CL_magic:((color_ == 2)?CL_warning:((color_ == 1)?CL_help:((color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:(CL_STAT)))));
@@ -431,7 +435,19 @@ const D3DCOLOR item::item_color()
 		{
 			int color_ = isGoodScroll((scroll_type)value1);
 			return_ = (color_ == 3)?CL_magic:((color_ == 2)?CL_warning:((color_ == 1)?CL_help:((color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:(CL_STAT)))));
-			
+
+			if (you.s_pure_turn && you.s_pure >= 20)
+			{
+				if (value1 != SCT_ENCHANT_WEAPON_1 &&
+					value1 != SCT_ENCHANT_WEAPON_2 &&
+					value1 != SCT_ENCHANT_ARMOUR &&
+					value1 != SCT_IDENTIFY &&
+					value1 != SCT_BRAND_WEAPON &&
+					value1 != SCT_REMOVE_CURSE &&
+					value1 != SCT_AMNESIA)
+					return_ = CL_bad;
+			}
+
 			if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
 			{
 				return_ = CL_danger;
@@ -446,6 +462,10 @@ const D3DCOLOR item::item_color()
 		}
 		break;
 	case ITM_SPELL:
+		if (you.s_pure_turn && you.s_pure >= 10)
+		{
+			return_ = CL_bad;
+		}
 		break;
 	case ITM_AMULET:
 		if(iden_list.amulet_list[value1].iden == 2)

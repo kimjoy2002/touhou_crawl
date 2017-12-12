@@ -68,13 +68,13 @@ ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0)
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
-s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
+s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_pure_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
 s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0), s_swift(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
- alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -208,6 +208,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_clever);
 	SaveData<int>(fp, s_agility);
 	SaveData<int>(fp, s_haste);
+	SaveData<int>(fp, s_pure_haste);
 	SaveData<int>(fp, s_confuse);
 	SaveData<int>(fp, s_slow);
 	SaveData<int>(fp, s_frozen);
@@ -255,6 +256,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_night_sight);
 	SaveData<int>(fp, s_night_sight_turn);
 	SaveData<int>(fp, s_sleep);
+	SaveData<int>(fp, s_pure);
+	SaveData<int>(fp, s_pure_turn);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -431,6 +434,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_agility);
 	LoadData<int>(fp, s_haste);
+	LoadData<int>(fp, s_pure_haste);
 	LoadData<int>(fp, s_confuse);
 	LoadData<int>(fp, s_slow);
 	LoadData<int>(fp, s_frozen);
@@ -478,6 +482,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_night_sight); 
 	LoadData<int>(fp, s_night_sight_turn);
 	LoadData<int>(fp, s_sleep);
+	LoadData<int>(fp, s_pure);
+	LoadData<int>(fp, s_pure_turn);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -1572,15 +1578,13 @@ int players::PowDecreaseDelay(int delay_)
 		up_/=2;
 	}
 
-	if(s_haste)
+	if(s_haste || s_pure_haste)
 	{
-		if(s_haste)
-			up_/=up_>0?5:(up_<0?30:20);
+		up_/=up_>0?5:(up_<0?30:20);
 	}
 	if(s_invisible || togle_invisible)
 	{
-		if(s_invisible || togle_invisible)
-			up_/=up_>0?5:(up_<0?30:20);
+		up_/=up_>0?5:(up_<0?30:20);
 	}
 	if(up_<0)
 		up_ = 1;
@@ -2316,6 +2320,24 @@ bool players::SetHaste(int haste_)
 		s_haste = 100;
 	return true;
 }
+
+bool players::SetPureHaste(int haste_)
+{
+	if (!haste_)
+		return false;
+	if (!s_pure_haste)
+		printlog("당신은 살의에 의해 빨라졌다.", false, false, false, CL_white_blue);
+	else
+	{
+		printlog("당신의 살의는 좀 더 길어졌다.", false, false, false, CL_white_blue);
+	}
+	s_pure_haste += haste_;
+	power_decre = 0;
+	if (s_pure_haste>100)
+		s_pure_haste = 100;
+	return true;
+}
+
 bool players::SetConfuse(int confuse_, bool strong_)
 {
 	if(!confuse_)
@@ -2940,6 +2962,15 @@ bool players::SetSleep(int value_)
 		printlog("당신은 잠에 빠졌다!", true, false, false, CL_danger);
 		MoreWait();
 	}
+	return true;
+}
+bool players::SetPureTurn(int value_, int turn_)
+{
+	if (!turn_)
+		return false;
+	s_pure += value_;
+	if (s_pure_turn != -1 && s_pure_turn < turn_)
+		s_pure_turn = turn_;
 	return true;
 }
 int players::GetInvisible()
@@ -3769,6 +3800,12 @@ bool players::Eat(char id_)
 }
 bool players::Drink(char id_)
 {
+	if (you.s_pure_turn && you.s_pure >= 20)
+	{
+		printlog("당신은 물약의 맛을 느끼기엔 너무 순화되어있다.", true, false, false, CL_normal);
+		return false;
+	}
+
 	list<item>::iterator it;
 	for(it = item_list.begin(); it != item_list.end();it++)
 	{

@@ -2799,6 +2799,11 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 {
+	if (order->position == target)
+	{
+		printlog("자살할거야?", true, false, false, CL_small_danger);
+		return false;
+	}
 	beam_iterator beam(order->position, order->position);
 	int damage_ = 4 + power / 10;
 	int multi_ = 4;
@@ -2813,6 +2818,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 		for (int i = 0; i<(order->GetParadox() ? 2 : 1); i++)
 			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
 		order->SetParadox(0);
+		you.SetPureTurn(5, rand_int(20, 30));
 		return true;
 	}
 	return false;
@@ -2821,7 +2827,9 @@ bool skill_junko_2(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 	{
-		you.SetMight(25 + power / 5 + randA_1(power / 2));
+		int time_ = 25 + power / 5 + randA_1(power / 2);
+		you.SetMight(time_);
+		you.SetPureTurn(10, time_);
 		return true;
 	}
 	return false;
@@ -2831,21 +2839,54 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 	{
-		you.SetHaste(25 + power / 5 + randA_1(power / 2));
+		bool least_one = false;
+		for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && env[current_level].isInSight(it->position) && !it->isUserAlly())
+			{
+				least_one = true;
+				break;
+			}
+		}
+		if (!least_one)
+		{
+			printlog("시야에 살의를 표출할 적이 있어야 한다. ", true, false, false, CL_normal);
+			return false;
+		}
+		int time_ = 25 + power / 5 + randA_1(power / 2);
+		you.SetPureHaste(time_);
+		you.SetPureTurn(20, time_);
 		return true;
 	}
 	return false;
 }
 const char* getJunkoString(int kind_)
 {
-	return "임시: 임시다.";
+	switch (kind_)
+	{
+	case 1:
+		return "스킬순화: 선택한 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.";
+	case 2:
+		return "저항순화: 선택한 속성에 대해 면역이 된다.";
+	case 3:
+		return "마력순화: 체력과 영력이 동일시 되며 회복력이 합쳐진다.";
+	case 4:
+		return "파워순화: 항상 풀파워가 되며 떨어지지 않는다.";
+	case 5:
+		return "생명순화: 추가 목숨을 2개 얻는다.";
+	case 6:
+		return "장비순화: 선택한 장비의 강화치가 최대강화치+5가된다. 아티펙트도 가능.";
+	}
+
+	return "버그순화: 버그이므로 이걸 선택하면 안된다.";
 }
 bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 {
 
 	int kind_ = 0;
 	bool loop_ = true;
-	printlog("한번 고른 순화는 되돌릴 수 없다! 신중하게 결정해야한다.", true, false, false, CL_danger);
+	printlog("순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.", true, false, false, CL_danger);
+	printlog("또한 한번 고른 순화는 되돌릴 수 없다. 신중하게 결정하길!", true, false, false, CL_danger);
 	while (loop_) {
 		printlog("어떤 능력을 순화하겠습니까?", true, false, false, CL_help);
 		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
@@ -2880,6 +2921,15 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		printlog("알 수 없는 선택", true, false, false, CL_normal);
 		return false;
 	}
+
+	printlog("순호: 나의 축복을 받도록 해!", true, false, false, CL_junko);
+	you.Ability(SKL_JUNKO_1, true, true);
+	you.Ability(SKL_JUNKO_2, true, true);
+	you.Ability(SKL_JUNKO_3, true, true);
+	you.Ability(SKL_JUNKO_4, true, true);
+	you.SetPureTurn(30, -1);
+
+
 	return false;
 }
 

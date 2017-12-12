@@ -50,7 +50,7 @@ extern void init_identify();
 
 bool Setup()
 {    
-
+	bool return_ = true;
 	D3DXFONT_DESC fontDesc;
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
 	fontDesc.Height = 14;
@@ -70,7 +70,7 @@ bool Setup()
 
 
 	if( FAILED(D3DXCreateSprite(Device, &g_pSprite)))
-        return false;
+		return_ =  false;
 
 	Device->CreateVertexBuffer(
 		4 * sizeof(Vertex),
@@ -95,54 +95,59 @@ bool Setup()
 
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
 	if(!texture_title.loadingEX(Device))
-		return false;
+		return_ = false;
 
-
+	for (int i = 0; i < GT_LAST; i++)
+	{
+		int size_ = strlen(texture_god[i].name);
+		if (size_>1 && !texture_god[i].loadingEX(Device))
+			return_ = false;
+	}
 
 	if(!texture_dungeon01.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_monster01.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_players01.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_item01.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_item02.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_laser.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_test.loadingEX(Device))
-		return false;
+		return_ = false;
 	
 
 
 	if(!texture_dot_floor.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_wall.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_monster.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_player.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_up.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_down.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_item.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_door.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_temple.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_sea.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_mapping_floor.loadingEX(Device))
-		return false;
+		return_ = false;
 	if(!texture_dot_mapping_wall.loadingEX(Device))
-		return false;
+		return_ = false;
 	
 	if(!texture_sight_rect.loadingEX(Device))
-		return false;
+		return_ = false;
 
 
 
@@ -153,7 +158,7 @@ bool Setup()
 	map_list.random_number = (unsigned long)time(NULL);	
 	srand((unsigned int)map_list.random_number);
 	//rand_seed(map_list.random_number);
-	return true;
+	return return_;
 }
 
 //
@@ -218,14 +223,13 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
 	{
-		::MessageBox(0, "InitD3D() - FAILED", 0, 0);
+		::MessageBox(0, "D3를 초기화하는데 실패하였습니다.", 0, 0);
 		return 0;
 	}
 		
 	if(!Setup())
 	{
-		::MessageBox(0, "Setup() - FAILED", 0, 0);
-		return 0;
+		::MessageBox(0, "일부 정상적으로 로딩되지못한 이미지파일이 있습니다.", 0, 0);
 	}
 
 	d3d::EnterMsgLoop();

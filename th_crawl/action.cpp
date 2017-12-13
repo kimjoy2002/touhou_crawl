@@ -256,7 +256,10 @@ void long_rest()
 			printlog("체력이 회복되었다.",true,false,false,CL_normal);
 			return;
 		case IT_MP_RECOVER:
-			printlog("영력이 회복되었다.",true,false,false,CL_normal);
+			if(!you.pure_mp)
+				printlog("영력이 회복되었다.",true,false,false,CL_normal);
+			else
+				printlog("체력이 회복되었다.", true, false, false, CL_normal);
 			return;
 		case IT_MAP_DANGER:
 			printlog("시야안에 위험 요소가 있다.",true,false,false,CL_small_danger);

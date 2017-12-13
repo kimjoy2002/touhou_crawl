@@ -258,8 +258,9 @@ void wiz_mode()
 
 		}
 		case 'H':
-			you.HpUpDown(you.max_hp, DR_EFFECT);
-			you.MpUpDown(you.max_mp);
+			you.HpUpDown(you.GetMaxHp(), DR_EFFECT);
+			if(!you.pure_mp)
+				you.MpUpDown(you.max_mp);
 			you.PowUpDown(500, true);
 			break;
 		case 'g':

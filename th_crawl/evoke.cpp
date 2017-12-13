@@ -234,7 +234,8 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	case EVK_AIR_SCROLL:
 		{
 			printlog("에어두루마리로부터 영력을 얻었다!",false,false,false,CL_normal);
-			you.MpUpDown(8+level_/3+randA(3+level_/3));
+			int value_ = 8 + level_ / 3 + randA(3 + level_ / 3);
+			you.MpUpDown(value_);
 			//발동0 8~11에서 발동만렙 17~29
 			return true;
 		}

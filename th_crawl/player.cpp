@@ -63,7 +63,7 @@ void name_infor::LoadDatas(FILE *fp)
 
 players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
-hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
+hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
@@ -128,6 +128,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, mp);
 	SaveData<int>(fp, max_mp);
 	SaveData<int>(fp, mp_recov);
+	SaveData<bool>(fp, pure_mp);
 	SaveData<int>(fp, power);
 	SaveData<int>(fp, power_decre);
 	SaveData<int>(fp, level);
@@ -328,8 +329,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, mp);
 	prev_mp[0] = mp;
 	prev_mp[1] = mp;
-	LoadData<int>(fp, max_mp);
+	LoadData<int>(fp, max_mp); 
 	LoadData<int>(fp, mp_recov);
+	LoadData<bool>(fp, pure_mp);
 	LoadData<int>(fp, power);
 	LoadData<int>(fp, power_decre);
 	LoadData<int>(fp, level);
@@ -986,6 +988,34 @@ void players::CalcuHP()
 	hp = hp*next_hp_/max_hp;
 	max_hp = next_hp_;
 }
+int players::GetHp()
+{ 
+	if(pure_mp)
+		return hp+mp;
+	else
+		return hp;
+};
+int players::GetMaxHp() 
+{
+	if (pure_mp)
+		return max_hp + max_mp;
+	else
+		return max_hp; 
+};
+int players::GetMp() 
+{
+	if (pure_mp)
+		return hp + mp;
+	else
+		return mp; 
+};
+int players::GetMaxMp() 
+{
+	if (pure_mp)
+		return max_hp + max_mp;
+	else
+		return max_mp; 
+};
 int players::GetDisplayEv()
 {
 	return (you.s_sleep<0 || you.s_paralyse) ? 0 : ev;
@@ -1295,10 +1325,10 @@ interupt_type players::HpRecover(int delay_)
 		hp_recov -= delay_;
 		while((hp_recov)<=0)
 		{
-			bool already_ = (hp == max_hp);
+			bool already_ = (GetHp() == GetMaxHp());
 			HpUpDown(1,DR_NONE);
 			HpRecoverDelay(0);
-			if(hp == max_hp && !already_)
+			if(GetHp() == GetMaxHp() && !already_)
 				return IT_HP_RECOVER;
 		}
 	}
@@ -1309,7 +1339,8 @@ void deadlog();
 void resurectionlog(char* reason);
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
-	if(value_<0 && max_hp/2 <= -value_)
+	int prev_value_ = value_;
+	if(value_<0 && GetMaxHp()/2 <= -value_)
 		printlog("악! 이건 정말로 아프다!",true,false,false,CL_danger);
 
 	if(order_)
@@ -1326,10 +1357,24 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		printlog("데미지에 의해 잠에서 깼다! ", false, false, false, CL_white_blue);
 		s_sleep = 0;
 	}
+	if (pure_mp && value_ < 0 && mp > 0)
+	{
+		int temp_value_ = value_+mp;
+		mp = max(0, mp + value_);
+		value_ = temp_value_;
+		if (value_ >= 0)
+			return prev_value_;
+	}
+
 	hp+= value_;
 	GodAccpect_HPUpDown(value_,reason);
 	if(hp >= max_hp)
 	{
+		int plus_ = hp - max_hp;
+		if (pure_mp && mp < max_mp)
+		{
+			mp = min(mp + plus_, max_mp);
+		}
 		hp = max_hp;		
 	}	
 	if(hp<=0)
@@ -1395,7 +1440,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			GameOver();
 		}
 	}
-	return value_;
+	return prev_value_;
 }
 int players::MpRecoverDelay(int delay_,bool set_)
 {
@@ -1448,12 +1493,12 @@ interupt_type players::MpRecover(int delay_)
 		mp_recov -= delay_;
 		while((mp_recov)<=0)
 		{
-			bool already_ = (mp == max_mp);
+			bool already_ = (GetMp() == GetMaxMp());
 			MpUpDown(1);
 			MpRecoverDelay(0);
 			
 
-			if(mp == max_mp && !already_)
+			if(GetMp() == GetMaxMp() && !already_)
 				return IT_MP_RECOVER;
 		}
 	}
@@ -1461,16 +1506,24 @@ interupt_type players::MpRecover(int delay_)
 }
 int players::MpUpDown(int value_)
 {
-	mp+= value_;
-	if(mp >= max_mp)
+	if (pure_mp)
 	{
-		mp = max_mp;		
-	}	
-	if(mp<=0)
-	{
-		mp = 0;
+		HpUpDown(value_, DR_MP, NULL);
+		return mp;
 	}
-	return mp;
+	else 
+	{
+		mp += value_;
+		if (mp >= max_mp)
+		{
+			mp = max_mp;
+		}
+		if (mp <= 0)
+		{
+			mp = 0;
+		}
+		return mp;
+	}
 }
 int players::AcUpDown(int value_, int bonus_)
 {
@@ -2869,7 +2922,7 @@ bool players::SetStatBoost(int sdi_, int value_)
 bool players::SetEirinHeal(int value_, bool punish_)
 {
 
-	int real_value_ = min(max_hp-hp, value_);
+	int real_value_ = min(GetMaxHp() - GetHp(), value_);
 	
 	//수치만큼 힐하기
 
@@ -3222,9 +3275,18 @@ void players::LevelUp(bool speak_)
 	
 	if(speak_)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"레벨업 : 레벨 %2d. HP: %4d/%4d , MP: %4d/%4d", level,hp,max_hp,mp,max_mp);
-		AddNote(you.turn,CurrentLevelString(),temp,CL_good);
+		if (!you.pure_mp)
+		{
+			char temp[200];
+			sprintf_s(temp, 200, "레벨업 : 레벨 %2d. HP: %4d/%4d , MP: %4d/%4d", level, GetHp(), GetMaxHp(), GetMp(), GetMaxMp());
+			AddNote(you.turn, CurrentLevelString(), temp, CL_good);
+		}
+		else
+		{
+			char temp[200];
+			sprintf_s(temp, 200, "레벨업 : 레벨 %2d. HP: %4d/%4d", level, GetHp(), GetMaxHp());
+			AddNote(you.turn, CurrentLevelString(), temp, CL_good);
+		}
 	}
 }
 list<item>::iterator players::GetThrowIter()

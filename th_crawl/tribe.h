@@ -62,6 +62,7 @@ enum tribe_proper_type
 	TPT_FIRE_IMUNE,
 	TPT_COLD_IMUNE,
 	TPT_ELEC_IMUNE,
+	TPT_PURE_MP,
 	TPT_MAX
 };
 

@@ -110,265 +110,268 @@ int caculScore()
 
 bool Dump(int type, string *filename_)
 {
-	if(ReplayClass.ReplayMode())
+	if (ReplayClass.ReplayMode())
 		return false;
 
 
 	char filename[100];
 	char sql_[256];
 	mkdir("morgue");
-	FILE *fp;  
+	FILE *fp;
 	struct tm *t;
 	time_t now;
 	time(&now);
-	t=localtime(&now);
+	t = localtime(&now);
 
-	sprintf_s(filename,100,"morgue/%s-%04d%02d%02d-%02d%02d%02d.txt",you.user_name.name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
-	fp = fopen(filename,"wt");
-	
-	fprintf_s(fp,"동방크롤 %s 덤프 파일\n\n",version_string);
-	if(type == 1)
+	sprintf_s(filename, 100, "morgue/%s-%04d%02d%02d-%02d%02d%02d.txt", you.user_name.name.c_str(), 1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+	fp = fopen(filename, "wt");
+
+	fprintf_s(fp, "동방크롤 %s 덤프 파일\n\n", version_string);
+	if (type == 1)
 	{
 		char death_reason[64] = "";
 		char temp_reason[64];
 
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			fprintf_s(fp,"*위자드 모드*\n");
+			fprintf_s(fp, "*위자드 모드*\n");
 		}
-		else if(wiz_list.wizard_mode == 2)
+		else if (wiz_list.wizard_mode == 2)
 		{
-			fprintf_s(fp,"*세이브 보존*\n");
+			fprintf_s(fp, "*세이브 보존*\n");
 		}
-		fprintf_s(fp,"%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str(),you.hp,you.max_hp);
-		fprintf_s(fp,"             %s에서 ",CurrentLevelString());
-		switch(you.dead_reason)
+		fprintf_s(fp, "%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str(), you.GetHp(), you.GetMaxHp());
+		fprintf_s(fp, "             %s에서 ", CurrentLevelString());
+		switch (you.dead_reason)
 		{
-			case DR_NONE:
-				strncat(death_reason,"알수없는 이유",64);
-				if(you.dead_order)
+		case DR_NONE:
+			strncat(death_reason, "알수없는 이유", 64);
+			if (you.dead_order)
+			{
+				sprintf_s(temp_reason, 64, "(%d 데미지", you.dead_order->damage);
+				strncat(death_reason, temp_reason, 64);
+				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason,64,"(%d 데미지", you.dead_order->damage);
-					strncat(death_reason,temp_reason,64);
-					if(you.dead_order->order)
-					{
-						sprintf_s(temp_reason,64,",%s", you.dead_order->order->GetName()->name.c_str());
-						strncat(death_reason,temp_reason,64);
-
-					}
-					strncat(death_reason,")",64);
-				}
-				strncat(death_reason,"에 의해 죽었다.",64);
-				break;
-			case DR_HITTING:
-				if(you.dead_order)
-				{
-					if(you.dead_order->order)
-					{
-						sprintf_s(temp_reason,64,"%s", you.dead_order->order->GetName()->name.c_str());
-						strncat(death_reason,temp_reason,64);
-					}
-					switch(you.dead_order->type)
-					{
-						case ATT_NONE:
-						case ATT_SMITE:
-						default:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"죽었다.",64);
-							break;
-						case ATT_BLOOD:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"피를 토하며 죽었다.",64);
-							break;
-						case ATT_NOISE:
-							if(you.dead_order->order)
-								strncat(death_reason,"의 굉음에 의해 ",64);
-							strncat(death_reason,"고막이 터져죽었다.",64);
-							break;
-						case ATT_SPEAR:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							strncat(death_reason,"찔려죽었다.",64);
-							break;
-						case ATT_NORMAL:
-						case ATT_S_POISON:
-						case ATT_M_POISON:
-						case ATT_SICK:
-						case ATT_NORMAL_HIT:
-						case ATT_CURSE:
-						case ATT_WEATHER:
-						case ATT_AUTUMN:
-						case ATT_CHOAS:
-						case ATT_LUNATIC:
-						case ATT_SLEEP:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							strncat(death_reason,"맞아죽었다.",64);
-							break;
-						case ATT_VAMP:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							strncat(death_reason,"빨려죽었다.",64);
-							break;
-						case ATT_WALL:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							else
-								strncat(death_reason,"벽에 ",64);
-							strncat(death_reason,"부딪혀 죽었다.",64);
-							break;
-						case ATT_PSYCHO:
-							if (you.dead_order->order)
-								strncat(death_reason, "의 ", 64);
-							strncat(death_reason, "염동력에 의해 날라가 죽었다.", 64);
-							break;
-						case ATT_STONE_TRAP:
-							strncat(death_reason,"바위에 새끼발가락을 찧여 죽었다.",64);
-							break;
-						case ATT_THROW_NORMAL:
-						case ATT_THROW_WATER:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							strncat(death_reason,"피탄당했다.",64);
-							break;
-						case ATT_NORMAL_BLAST:
-						case ATT_AC_REDUCE_BLAST:
-							if(you.dead_order->order)
-								strncat(death_reason,"에게 ",64);
-							strncat(death_reason,"폭사당했다.",64);
-							break;
-						case ATT_FIRE:
-						case ATT_THROW_FIRE:
-						case ATT_CLOUD_FIRE:
-						case ATT_FIRE_BLAST:
-						case ATT_FIRE_PYSICAL_BLAST: 
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"불타죽었다.",64);
-							break;
-						case ATT_COLD:
-						case ATT_THROW_COLD:
-						case ATT_CLOUD_COLD:
-						case ATT_COLD_BLAST: 
-						case ATT_COLD_PYSICAL_BLAST: 
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"얼어죽었다.",64);
-							break;
-						case ATT_CLOUD_ELEC:
-						case ATT_ELEC_BLAST:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"감전되어 죽었다.",64);
-							break;
-						case ATT_POISON_BLAST:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"독살당했다.",64);
-							break;
-						case ATT_CLOUD_NORMAL:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"바람에 휩쓸려 죽었다.",64);
-							break;
-						case ATT_CLOUD_CURSE:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"저주받아 죽었다.",64);
-							break;
-						case ATT_BURST:
-							if(you.dead_order->order)
-								strncat(death_reason,"에 의해 ",64);
-							strncat(death_reason,"터져죽었다.",64);
-							break;
-					}
-					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
-					strncat(death_reason,temp_reason,64);
-				}
-				else
-					strncat(death_reason,"알수없는 데미지에 의해 죽었다.",64);
-				break;
-			case DR_POISON:
-				strncat(death_reason,"독에 중독되어 죽었다.",64);
-				break;
-			case DR_POTION:	
-				strncat(death_reason,"물약에 의해",64);
-				if(you.dead_order){
-					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
-					strncat(death_reason,temp_reason,64);
-				}
-				strncat(death_reason,"에 의해 죽었다.",64);
-				break;
-			case DR_QUIT:
-				strncat(death_reason,"게임을 포기했다.",64);
-				break;
-			case DR_HUNGRY:
-				strncat(death_reason,"굶어죽었다.",64);
-				break;
-			case DR_MIRROR:
-				if(you.dead_order)
-				{
-					if(you.dead_order->order)
-					{
-						sprintf_s(temp_reason,64,"%s", you.dead_order->order->GetName()->name.c_str());
-						strncat(death_reason,temp_reason,64);
-						strncat(death_reason,"의 ",64);
-					}
+					sprintf_s(temp_reason, 64, ",%s", you.dead_order->order->GetName()->name.c_str());
+					strncat(death_reason, temp_reason, 64);
 
 				}
-				strncat(death_reason,"반사데미지로 죽었다.",64);
-				if(you.dead_order)
-				{
-					sprintf_s(temp_reason,64,"(%d 데미지)", you.dead_order->damage);
-					strncat(death_reason,temp_reason,64);
-				}
-				break;
-			case DR_SLEEP:
-				if (you.dead_order || you.dead_order->order)
+				strncat(death_reason, ")", 64);
+			}
+			strncat(death_reason, "에 의해 죽었다.", 64);
+			break;
+		case DR_HITTING:
+			if (you.dead_order)
+			{
+				if (you.dead_order->order)
 				{
 					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
 					strncat(death_reason, temp_reason, 64);
-					strncat(death_reason, "에 의해 ", 64);
 				}
-				strncat(death_reason, "행복한 꿈을 꾸다 죽었다.", 64);
-				break;
-			case DR_EFFECT:
-				strncat(death_reason,"부작용에 의해 죽었다.",64);
-				break;
-			case DR_ESCAPE:
-				if(you.haveOrb()){
-					sprintf_s(temp_reason,64,"음양옥과 %d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
-					strncat(death_reason,temp_reason,64);
+				switch (you.dead_order->type)
+				{
+				case ATT_NONE:
+				case ATT_SMITE:
+				default:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "죽었다.", 64);
+					break;
+				case ATT_BLOOD:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "피를 토하며 죽었다.", 64);
+					break;
+				case ATT_NOISE:
+					if (you.dead_order->order)
+						strncat(death_reason, "의 굉음에 의해 ", 64);
+					strncat(death_reason, "고막이 터져죽었다.", 64);
+					break;
+				case ATT_SPEAR:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "찔려죽었다.", 64);
+					break;
+				case ATT_NORMAL:
+				case ATT_S_POISON:
+				case ATT_M_POISON:
+				case ATT_SICK:
+				case ATT_NORMAL_HIT:
+				case ATT_CURSE:
+				case ATT_WEATHER:
+				case ATT_AUTUMN:
+				case ATT_CHOAS:
+				case ATT_LUNATIC:
+				case ATT_SLEEP:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "맞아죽었다.", 64);
+					break;
+				case ATT_VAMP:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "빨려죽었다.", 64);
+					break;
+				case ATT_WALL:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					else
+						strncat(death_reason, "벽에 ", 64);
+					strncat(death_reason, "부딪혀 죽었다.", 64);
+					break;
+				case ATT_PSYCHO:
+					if (you.dead_order->order)
+						strncat(death_reason, "의 ", 64);
+					strncat(death_reason, "염동력에 의해 날라가 죽었다.", 64);
+					break;
+				case ATT_STONE_TRAP:
+					strncat(death_reason, "바위에 새끼발가락을 찧여 죽었다.", 64);
+					break;
+				case ATT_THROW_NORMAL:
+				case ATT_THROW_WATER:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "피탄당했다.", 64);
+					break;
+				case ATT_NORMAL_BLAST:
+				case ATT_AC_REDUCE_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "폭사당했다.", 64);
+					break;
+				case ATT_FIRE:
+				case ATT_THROW_FIRE:
+				case ATT_CLOUD_FIRE:
+				case ATT_FIRE_BLAST:
+				case ATT_FIRE_PYSICAL_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "불타죽었다.", 64);
+					break;
+				case ATT_COLD:
+				case ATT_THROW_COLD:
+				case ATT_CLOUD_COLD:
+				case ATT_COLD_BLAST:
+				case ATT_COLD_PYSICAL_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "얼어죽었다.", 64);
+					break;
+				case ATT_CLOUD_ELEC:
+				case ATT_ELEC_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "감전되어 죽었다.", 64);
+					break;
+				case ATT_POISON_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "독살당했다.", 64);
+					break;
+				case ATT_CLOUD_NORMAL:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "바람에 휩쓸려 죽었다.", 64);
+					break;
+				case ATT_CLOUD_CURSE:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "저주받아 죽었다.", 64);
+					break;
+				case ATT_BURST:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "터져죽었다.", 64);
+					break;
 				}
-				else if(you.haveGoal()){
-					sprintf_s(temp_reason,64,"%d개의 룬만 들고 도망쳤다.", you.haveGoal());
-					strncat(death_reason,temp_reason,64);
+				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
+				strncat(death_reason, temp_reason, 64);
+			}
+			else
+				strncat(death_reason, "알수없는 데미지에 의해 죽었다.", 64);
+			break;
+		case DR_POISON:
+			strncat(death_reason, "독에 중독되어 죽었다.", 64);
+			break;
+		case DR_POTION:
+			strncat(death_reason, "물약에 의해", 64);
+			if (you.dead_order) {
+				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
+				strncat(death_reason, temp_reason, 64);
+			}
+			strncat(death_reason, "에 의해 죽었다.", 64);
+			break;
+		case DR_QUIT:
+			strncat(death_reason, "게임을 포기했다.", 64);
+			break;
+		case DR_HUNGRY:
+			strncat(death_reason, "굶어죽었다.", 64);
+			break;
+		case DR_MIRROR:
+			if (you.dead_order)
+			{
+				if (you.dead_order->order)
+				{
+					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+					strncat(death_reason, temp_reason, 64);
+					strncat(death_reason, "의 ", 64);
 				}
-				else
-					strncat(death_reason,"성과없이 탈출했다.",64);
-				break;
-		}		
 
-		fprintf_s(fp,"%s\n             ",death_reason);
-		fprintf_s(fp,"최종턴 %d\n\n",you.turn);
-		
-		sprintf_s(sql_,256,"'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'",you.user_name.name.c_str(),you.level,caculScore(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(),death_reason,
-			you.turn,(you.god == GT_NONE)?"":GetGodString(you.god),you.haveGoal(),version_string
-			);
+			}
+			strncat(death_reason, "반사데미지로 죽었다.", 64);
+			if (you.dead_order)
+			{
+				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
+				strncat(death_reason, temp_reason, 64);
+			}
+			break;
+		case DR_MP:
+			strncat(death_reason, "순화한 영력이 전부 소모되어 죽었다.", 64);
+			break;
+		case DR_SLEEP:
+			if (you.dead_order || you.dead_order->order)
+			{
+				sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+				strncat(death_reason, temp_reason, 64);
+				strncat(death_reason, "에 의해 ", 64);
+			}
+			strncat(death_reason, "행복한 꿈을 꾸다 죽었다.", 64);
+			break;
+		case DR_EFFECT:
+			strncat(death_reason, "부작용에 의해 죽었다.", 64);
+			break;
+		case DR_ESCAPE:
+			if (you.haveOrb()) {
+				sprintf_s(temp_reason, 64, "음양옥과 %d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
+				strncat(death_reason, temp_reason, 64);
+			}
+			else if (you.haveGoal()) {
+				sprintf_s(temp_reason, 64, "%d개의 룬만 들고 도망쳤다.", you.haveGoal());
+				strncat(death_reason, temp_reason, 64);
+			}
+			else
+				strncat(death_reason, "성과없이 탈출했다.", 64);
+			break;
+		}
+
+		fprintf_s(fp, "%s\n             ", death_reason);
+		fprintf_s(fp, "최종턴 %d\n\n", you.turn);
+
+		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
+			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string
+		);
 
 
 	}
 
-	fprintf_s(fp,"%s (%s %s %s)      턴: %d      ",you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(),you.turn);
+	fprintf_s(fp, "%s (%s %s %s)      턴: %d      ", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.turn);
 
 
 
 
-	if(you.god == GT_NONE)
+	if (you.god == GT_NONE)
 	{
-		fprintf_s(fp,"무신앙\n\n");
+		fprintf_s(fp, "무신앙\n\n");
 	}
 	else if (you.god == GT_TENSI)
 	{
@@ -376,10 +379,19 @@ bool Dump(int type, string *filename_)
 	}
 	else
 	{
-		fprintf_s(fp,"신앙: %s %c%c%c%c%c%c\n\n",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+		fprintf_s(fp, "신앙: %s %c%c%c%c%c%c\n\n", GetGodString(you.god), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
 	}
-	fprintf_s(fp,"HP: %4d/%4d             AC:%4d             힘  :%4d\n",you.hp,you.max_hp,you.ac,you.s_str);
-	fprintf_s(fp,"MP: %4d/%4d             EV:%4d             민첩:%4d\n",you.mp,you.max_mp,you.ev,you.s_dex);
+	fprintf_s(fp, "HP: %4d/%4d             AC:%4d             힘  :%4d\n", you.GetHp(), you.GetMaxHp(), you.ac, you.s_str);
+	if (!you.pure_mp)
+	{
+		fprintf_s(fp, "MP: %4d/%4d             EV:%4d             민첩:%4d\n", you.GetMp(), you.GetMaxMp(), you.ev, you.s_dex);
+	}
+	else
+	{
+		fprintf_s(fp, "(마력순화)                EV:%4d             민첩:%4d\n", you.ev, you.s_dex);
+	}
+	
+	
 	fprintf_s(fp,"                          SH:%4d             지능:%4d\n\n",you.sh,you.s_int);
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;

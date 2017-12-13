@@ -1690,9 +1690,14 @@ void SpellUse()
 				{
 					if(use_)
 					{
-						if(SpellLevel(spell_)>you.mp)
+						if (you.pure_mp && SpellLevel(spell_) >= you.GetMp())
 						{
-							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.hp)
+							printlog("더 이상 순화된 마력을 사용하면 죽을거야!", true, false, false, CL_normal);
+							break;
+						}
+						else if(SpellLevel(spell_)>you.GetMp())
+						{
+							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.GetHp())
 							{
 								printlog("당신은 피를 대가로 마법을 영창했다!",true,false,false,CL_danger);	
 								blood_ = true;

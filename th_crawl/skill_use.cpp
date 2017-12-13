@@ -398,7 +398,7 @@ bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 	{
 		printlog("당신은 에이린의 임시 수혈로 회복되었다.",true,false,false,CL_help);
 		printlog("이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!",true,false,false,CL_danger);
-		you.SetEirinHeal(you.max_hp*rand_int(70,80)/100,false);
+		you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,false);
 	}
 	return true;
 }
@@ -2967,10 +2967,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		}
 		break;
 	case 2:
-	case 3:
-	case 4:
-	case 5:
-	case 6:
+	{
 		printlog("어떤 저항을 순화할거지?", true, false, false, CL_junko);
 		printlog("a-화염 b-냉기 c-전기", true, false, false, CL_junko);
 
@@ -2997,6 +2994,14 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			changedisplay(DT_GAME);
 			return false;
 		}
+		break;
+	}
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+		you.SetProperty(TPT_PURE_MP, 1);
+		printlog("순호는 당신의 마력을 순화하였다!", true, false, false, CL_junko);
 		break;
 	}
 

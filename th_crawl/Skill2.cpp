@@ -1154,7 +1154,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PietyUpDown(-5);
 		return true;
 	case SKL_EIRIN_2:
-		if(check_ && you.hp ==  you.max_hp)
+		if(check_ && you.GetHp() ==  you.GetMaxHp())
 		{
 			printlog("이미 체력이 가득 차 있다.",true,false,false,CL_normal);	
 			return false;
@@ -1651,7 +1651,12 @@ void SkillUse()
 				{
 					if(!GetDisplayMove()) //스킬사용
 					{
-						if(SkillMana(skill_)>you.mp)
+						if(you.pure_mp && SkillMana(skill_)>=you.GetMp())
+						{
+							printlog("더 이상 순화된 마력을 사용하면 죽을거야!", true, false, false, CL_normal);
+							break;
+						}
+						else if(SkillMana(skill_)>you.GetMp())
 						{
 							printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
 							break;
@@ -1671,7 +1676,7 @@ void SkillUse()
 								{
 									SkillPlusCost(skill_,false);
 									if(SkillMana(skill_))
-										you.mp -= SkillMana(skill_);
+										you.MpUpDown(-SkillMana(skill_));
 												
 									you.doingActionDump(SkillFlagCheck(skill_, S_FLAG_GOD)?DACT_INVOKE:DACT_EVOKE, SkillString(skill_));
 									SkillUseTraning(skill_);
@@ -1693,7 +1698,7 @@ void SkillUse()
 								{ //2는 사용에 실패한것이다. 마법이 아니면 사용에 실패하면 턴만 소모
 									SkillPlusCost(skill_,false);
 									if(SkillMana(skill_))
-										you.mp -= SkillMana(skill_);
+										you.MpUpDown(-SkillMana(skill_));
 								}
 
 								you.doingActionDump(SkillFlagCheck(skill_, S_FLAG_GOD)?DACT_INVOKE:DACT_EVOKE, SkillString(skill_));

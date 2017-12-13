@@ -245,6 +245,7 @@ const D3DCOLOR CL_lilly = D3DCOLOR_RGBA(255, 210, 233, 255);
 const D3DCOLOR CL_miko = D3DCOLOR_RGBA(255, 180, 130, 255);
 const D3DCOLOR CL_okina = D3DCOLOR_RGBA(255, 180, 130, 255);
 const D3DCOLOR CL_junko = D3DCOLOR_RGBA(255, 180, 130, 255);
+const D3DCOLOR CL_black_junko = D3DCOLOR_RGBA(150, 120, 80, 255);
 
 
 const name_infor string_that("±×°Í",true);

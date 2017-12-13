@@ -863,10 +863,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 				if(GetProperty(TPT_CLOUD) && damage_ > randA(2))
 				{
-					int max_num_ = min(10,damage_*40/max_hp);
+					int max_num_ = min(10,damage_*40/ GetMaxHp());
 					burstCloud(half_youkai[1], rand_int(max(0,max_num_-2),max_num_));
 				}
-				if(s_mirror && hp>0 && a.order)
+				if(s_mirror && GetHp()>0 && a.order)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
 					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("º£ÀÏ¸µ",true)), true);
@@ -933,7 +933,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 				GetChoas(this,damage_);
 			}
 
-			if(s_veiling && hp>0)
+			if(s_veiling && GetHp()>0)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
@@ -943,7 +943,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 				}
 			}
 
-			if(GetProperty(TPT_FORCE_OF_NATURE) && hp>0 && randA(1))
+			if(GetProperty(TPT_FORCE_OF_NATURE) && GetHp()>0 && randA(1))
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{

@@ -124,6 +124,7 @@ public:
 	int prev_mp[2];
 	int max_mp;
 	int mp_recov;
+	bool pure_mp;
 	int power;
 	int power_decre;
 	int level;
@@ -334,8 +335,10 @@ public:
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
 	void CalcuHP();
-	int GetHp(){return hp;};
-	int GetMaxHp(){return max_hp;};
+	int GetHp();
+	int GetMaxHp();
+	int GetMp();
+	int GetMaxMp();
 	int GetDisplayEv();
 	int GetDisplayAc();
 	int GetDisplaySh();

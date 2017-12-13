@@ -410,8 +410,8 @@ void MainLoop()
 		}
 		int char_ = waitkeyinput();
 
-		you.prev_hp[1] = you.hp;
-		you.prev_mp[1] = you.mp;
+		you.prev_hp[1] = you.GetHp();
+		you.prev_mp[1] = you.GetMp();
 
 
 		switch(char_)

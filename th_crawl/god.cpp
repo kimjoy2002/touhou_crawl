@@ -21,6 +21,7 @@
 #include "rand_shuffle.h"
 #include "seija.h"
 #include "lilly.h"
+#include "tribe.h"
 
 
 extern HANDLE mutx;
@@ -1256,7 +1257,7 @@ bool GodAccpect_GetPitem()
 		{
 			if(!you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=5)
 			{
-				int hp_ = rand_int(you.max_hp*9/100,you.max_hp*18/100)+1;
+				int hp_ = rand_int(you.GetMaxHp() *9/100,you.GetMaxHp() *18/100)+1;
 				printlog("회복되었다.",false,false,false,CL_normal);
 				you.HpUpDown(hp_, DR_EFFECT);
 				you.MpUpDown(randA_1(5));
@@ -1299,9 +1300,9 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 			switch(you.god_value[GT_SUWAKO][1])
 			{
 			case SWAKO_2_DEAD_PROTECT:
-				if(randA(9)<4 && you.hp <= 0 && value_ < 0)
+				if(randA(9)<4 && you.GetHp() <= 0 && value_ < 0)
 				{
-					if(you.hp-value_>0)
+					if(you.GetHp() -value_>0)
 					{
 						you.hp-=value_;
 						printlog("보호되었다!",false,false,false,CL_swako);
@@ -1318,13 +1319,13 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_HINA:
 		break;
 	case GT_YUKARI:
-		if(pietyLevel(you.piety)>=1 && you.hp > 0 && value_ < 0)
+		if(pietyLevel(you.piety)>=1 && you.GetHp() > 0 && value_ < 0)
 		{
-			int percent_ = value_ *-100 / you.max_hp;
+			int percent_ = value_ *-100 / you.GetMaxHp();
 			int a_ = 0;
 			if(randA(percent_+a_)>=8+a_)
 			{				
-				int left_percent_ = you.hp *-100 / you.max_hp;
+				int left_percent_ = you.GetHp() *-100 / you.GetMaxHp();
 					
 				if(percent_>=rand_int(25,50) && percent_>left_percent_)
 				{
@@ -2824,9 +2825,11 @@ void God_show()
 						printsub(temp, true, CL_junko);
 						break;
 					case 2:
-						sprintf_s(temp, 100, " └저항순화: 당신의 저항은 면역이다. ");
+					{
+						sprintf_s(temp, 100, " └저항순화: 당신의 %s 저항은 면역이다. ", you.GetProperty(TPT_FIRE_IMUNE)?"화염":(you.GetProperty(TPT_COLD_IMUNE) ? "냉기" : (you.GetProperty(TPT_ELEC_IMUNE) ? "전기" : "버그")));
 						printsub(temp, true, CL_junko);
 						break;
+					}
 					case 3:
 						sprintf_s(temp, 100, " └마력순화: 당신의 체력과 영력은 동일시된다. ");
 						printsub(temp, true, CL_junko);
@@ -2987,7 +2990,7 @@ bool god_punish(god_type god)
 			switch(rand_.pop())
 			{
 			case 0:				
-				you.MpUpDown(-you.max_mp);
+				you.MpUpDown(!you.pure_skill? -you.GetMaxMp(): -you.GetMaxMp()/2);
 				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 영력이 흡수되었다!");
 				break;
 			case 1:
@@ -3126,7 +3129,7 @@ bool god_punish(god_type god)
 				break;
 			case 1:
 				{
-					you.hp=max(1,you.hp/2);	
+					you.HpUpDown(max(1, you.GetHp() / 2), DR_EFFECT, NULL);
 					you.SetSick(rand_int(80,120));
 					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 건강을 빼앗아갔다!");
 					break;
@@ -3512,7 +3515,7 @@ bool god_punish(god_type god)
 			case 1:
 				{
 					printarray(true,false,false,CL_small_danger,1,"에이린이 당신의 몸에 강제로 실험을 했다!");
-					you.SetEirinHeal(you.max_hp*rand_int(70,80)/100,true);
+					you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,true);
 					for(int i=0;i<3;i++)
 						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
 				}
@@ -3666,8 +3669,9 @@ bool god_punish(god_type god)
 					else
 					{
 						//아무도 시야내에 없으면 백댄서를 부르지않는다(의미가 없음)
-						you.HpUpDown(-you.max_hp / 2, DR_EFFECT);
-						you.MpUpDown(-you.max_mp / 2);
+						you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
+						if(!you.pure_mp)
+							you.MpUpDown(-you.max_mp / 2);
 						printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
 						break;
 					}
@@ -3675,8 +3679,9 @@ bool god_punish(god_type god)
 				break;
 			case 1:
 				{
-					you.HpUpDown(-you.max_hp/2, DR_EFFECT);
-					you.MpUpDown(-you.max_mp/2);
+					you.HpUpDown(-you.GetMaxHp()/2, DR_EFFECT);
+					if (!you.pure_mp)
+						you.MpUpDown(-you.max_mp/2);
 					printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
 					break;
 				}

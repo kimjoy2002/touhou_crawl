@@ -667,7 +667,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
-	sprintf_s(temp,100,"HP: %d/%d",you.hp,you.max_hp);
+	sprintf_s(temp,100,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	sprintf_s(temp,100,"AC:%4d",you.ac);
@@ -678,8 +678,11 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
-	sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	if (!you.pure_mp)
+	{
+		sprintf_s(temp, 100, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	}
 	rc.left += 150;
 	sprintf_s(temp,100,"EV:%4d",you.ev);
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
@@ -1065,17 +1068,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		rc.top += fontDesc.Height;
 
-		sprintf_s(temp,128,"HP: %d/%d",you.hp,you.max_hp);
+		sprintf_s(temp,128,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
 		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*14;
 		{
-			int Hp_bar = max(you.hp*18/you.max_hp,min(you.prev_hp[0],you.max_hp)*18/you.max_hp);
-			int s_Hp_bar = min(you.hp*18/you.max_hp,min(you.prev_hp[0],you.max_hp)*18/you.max_hp);
-			D3DCOLOR color_ = (you.hp*18/you.max_hp>min(you.prev_hp[0],you.max_hp)*18/you.max_hp)?CL_dark_good:CL_danger;
+			int Hp_bar = max(you.GetHp() *18/you.GetMaxHp(),min(you.prev_hp[0],you.GetMaxHp())*18/you.GetMaxHp());
+			int s_Hp_bar = min(you.GetHp() *18/you.GetMaxHp(),min(you.prev_hp[0],you.GetMaxHp())*18/you.GetMaxHp());
+			D3DCOLOR color_ = (you.GetHp() *18/you.GetMaxHp()>min(you.prev_hp[0],you.GetMaxHp())*18/you.GetMaxHp())?(!you.pure_mp ? CL_dark_good :CL_black_junko):CL_danger;
 
 			for(i = 0;i<s_Hp_bar;i++)
 			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_good);
+				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, !you.pure_mp?CL_good:CL_junko);
 				rc.left += fontDesc.Width;
 			}
 			for(;i<Hp_bar;i++)
@@ -1093,29 +1096,32 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 		rc.top += fontDesc.Height;
-		sprintf_s(temp,128,"MP: %d/%d",you.mp,you.max_mp);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		if(you.max_mp)
+		if (!you.pure_mp)
 		{
-			rc.left += fontDesc.Width*14;
-			for(i = 0;i<you.mp*18/you.max_mp;i++)
+			sprintf_s(temp, 128, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
+			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			if (you.GetMaxMp())
 			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_good);
-				rc.left += fontDesc.Width;
+				rc.left += fontDesc.Width * 14;
+				for (i = 0; i < you.GetMp() * 18 / you.GetMaxMp(); i++)
+				{
+					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_good);
+					rc.left += fontDesc.Width;
+				}
+				for (; i < 18; i++)
+				{
+					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
+					rc.left += fontDesc.Width;
+				}
+				rc.left -= fontDesc.Width * 32;
 			}
-			for(;i<18;i++)
-			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
-				rc.left += fontDesc.Width;
-			}
-			rc.left -= fontDesc.Width*32;
+			rc.top += fontDesc.Height;
 		}
 
 
 
 		int left_ =0 ;
 
-		rc.top += fontDesc.Height;
 		int pow_ = min(you.power,500);
 		img_item_food_p_item.draw(pSprite,rc.left+7,rc.top+7,255);
 		left_ = sprintf_s(temp,128,"   %d.%02d",pow_/100,pow_%100);
@@ -1902,7 +1908,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int hp_offset_ = (temp1_+1)/2-16;
 
 				
-				int temp2_ = max(0,min(you.prev_hp[0],you.max_hp)) *32 / you.GetMaxHp();
+				int temp2_ = max(0,min(you.prev_hp[0],you.GetMaxHp())) *32 / you.GetMaxHp();
 				float p_hp_rate_ = (max_rate_ * temp2_);
 				int p_hp_offset_ = (temp2_+1)/2 -16;
 				

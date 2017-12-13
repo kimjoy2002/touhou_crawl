@@ -176,12 +176,14 @@ int GetHazard()
 	if(you.s_might || you.s_clever || you.s_dex)
 		total_danger_ *= 0.7f;
 
-	if(((float)you.hp)/you.max_hp <= 0.5f) //체력이 절반이하
-		total_danger_ *=  3.0f-2.0f*((float)you.hp)/you.max_hp;
+	if(((float)you.GetHp())/you.GetMaxHp() <= 0.5f) //체력이 절반이하
+		total_danger_ *=  3.0f-2.0f*((float)you.GetHp())/you.GetMaxHp();
 	
-	if(you.max_mp>=5 && ((float)you.mp)/you.max_mp <= 0.5f) //마나가 절반이하
-		total_danger_ *=  3.0f-2.0f*((float)you.hp)/you.max_hp;
-
+	if (!you.pure_mp)
+	{
+		if (you.GetMaxMp() >= 5 && ((float)you.GetMp()) / you.GetMaxMp() <= 0.5f) //마나가 절반이하
+			total_danger_ *= 3.0f - 2.0f*((float)you.GetMp()) / you.GetMaxMp();
+	}
 
 	if(you.s_the_world)
 		total_danger_ *= 0.1f;

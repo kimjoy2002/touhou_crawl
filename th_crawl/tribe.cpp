@@ -197,6 +197,8 @@ string tribe_property::GetName()
 		return "냉기 면역";
 	case TPT_ELEC_IMUNE:
 		return "전기 면역";
+	case TPT_PURE_MP:
+		return "순수한 마력";
 	}
 	return "버그특성";
 }
@@ -455,6 +457,8 @@ string tribe_property::GetInfor()
 		return "당신은 냉기에 면역이다.";
 	case TPT_ELEC_IMUNE:
 		return "당신은 전기에 면역이다.";
+	case TPT_PURE_MP:
+		return "당신의 체력과 영력은 동일시 된다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -672,6 +676,8 @@ string tribe_property::GetDetail()
 		return "당신은 순호의 축복으로 냉기에 면역이기에 냉기 속성에 데미지를 입지 않는다.";
 	case TPT_ELEC_IMUNE:
 		return "당신은 순호의 축복으로 전기에 면역이기에 전기 속성에 데미지를 입지 않는다.";
+	case TPT_PURE_MP:
+		return "당신은 순호의 축복으로 영력과 체력이 동일시 되었다.\n체력과 영력이 동일한 수치로 관리되어 데미지를 입을때, 마법을 사용할때 사용할 수 있다.\n또한 기존의 체력회복력과 영력회복력이 합산되어 더 빠른 회복을 하게된다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -836,6 +842,12 @@ void tribe_property::gain(bool gain_)
 		return;
 	case TPT_ELEC_IMUNE:
 		you.ResistUpDown(value_, RST_ELEC);
+		return;
+	case TPT_PURE_MP:
+		if (value_)
+			you.pure_mp = true;
+		else
+			you.pure_mp = false;
 		return;
 	}
 }

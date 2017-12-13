@@ -242,13 +242,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			if(damage_==-1)
 			{
 				printlog("독의 데미지를 받고 있다. ",false,false,false,CL_normal);
-				if(hp<30)					
+				if(GetHp()<30)
 					SetInter(IT_POISON);
 			}
 			else if(damage_>=-4)
 			{
 				printlog("심한 독의 데미지를 받고 있다. ",false,false,false,CL_small_danger);
-				if(hp<100)					
+				if(GetHp()<100)
 					SetInter(IT_POISON);
 			}
 			else
@@ -598,7 +598,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_eirin_poison_time>0 && s_eirin_poison_time<=10)
 		{
 			int damage_ = min(s_eirin_poison,(s_eirin_poison/s_eirin_poison_time+1));
-			HpUpDown(hp <= damage_ ? -(hp - 1) : -damage_, DR_EFFECT);
+			HpUpDown(GetHp() <= damage_ ? -(GetHp() - 1) : -damage_, DR_EFFECT);
 			s_eirin_poison -= damage_;
 			SetInter(IT_POISON);		
 			if(s_eirin_poison<=0)
@@ -848,7 +848,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	GodAccpect_turn(god_turn);
 	CheckMonsterPassive(god_turn);
 	
-	if(mp == max_mp)
+	if(GetMp() == GetMaxMp())
 	{
 		s_mana_delay = 0;
 		MpRecoverDelay(0,true);

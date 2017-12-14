@@ -838,7 +838,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				env[current_level].changeTile(coord_def(move_x_, move_y_), DG_FLOOR);
 				//적이 서있으면 강제로 비키도록 한다.
 
-				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
+				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(30), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
 				{
 					mon_->LevelUpdown(you.level, 6);
 					printlog("오키나가 문을 잠가버렸다!", true, false, false, CL_small_danger);
@@ -1420,6 +1420,23 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			image = &img_play_mokou[2];
 			DeleteProperty(TPT_18_LIFE);
 		}
+		else if (GetProperty(TPT_PURE_LIFE))
+		{
+			deadlog();
+			resurectionlog("순호의 생명순화");
+			printlog("죽어가던 당신의 생명력이 돌아왔다!", true, false, false, CL_white_blue);
+			MoreWait();
+			hp = max_hp;
+			mp = max_mp;
+			int life_ = GetProperty(TPT_PURE_LIFE);
+			if (life_ > 1) {
+				DeleteProperty(TPT_PURE_LIFE);
+				SetProperty(TPT_PURE_LIFE, 1);
+			}
+			else {
+				DeleteProperty(TPT_PURE_LIFE);
+			}
+		}
 		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
@@ -1664,6 +1681,9 @@ interupt_type players::PowDecrease(int delay_)
 }
 int players::PowUpDown(int value_, bool big_)
 {
+	if (GetProperty(TPT_PURE_POWER))
+		return power; //풀파워 모드면 떨어지지않음
+
 	bool full_power_ = power>=500?true:false;
 
 	if(big_ && value_<0 && power>500)

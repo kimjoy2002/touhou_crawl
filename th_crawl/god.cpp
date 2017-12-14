@@ -2839,11 +2839,11 @@ void God_show()
 						printsub(temp, true, CL_junko);
 						break;
 					case 5:
-						sprintf_s(temp, 100, " └생명순화: 당신의 목숨은 2개 남아있다. ");
+						sprintf_s(temp, 100, " └생명순화: 당신은 추가 목숨을 받았다. ");
 						printsub(temp, true, CL_junko);
 						break;
 					case 6:
-						sprintf_s(temp, 100, " └장비순화: 당신은 가지고 있는 장비를 정화했다. ");
+						sprintf_s(temp, 100, " └장비순화: 당신은 가지고 있던 장비를 순화했다. ");
 						printsub(temp, true, CL_junko);
 						break;
 					default:

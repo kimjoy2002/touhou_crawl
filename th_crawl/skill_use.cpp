@@ -2936,19 +2936,30 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				int num = (key_ >= 'a' && key_ <= 'z') ? key_ - 'a' : key_ - 'A' + 26;
 				if (num < SKT_MAX && you.GetSkillLevel(num, false) < 27 && !you.cannotSkillup(num))
 				{
-					char temp[100];
-					sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
-
-					printlog(temp, true, false, true, CL_danger);
-					changedisplay(DT_GAME);
-
-					int key_ = waitkeyinput(true);
-					if (key_ == 'y' || key_ == 'Y')
+					if (you.skill[num].aptit < 0)
 					{
-						you.SetPureSkill(num);
-						sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num));
-						printlog(temp, true, false, false, CL_junko);
-						break;
+						changedisplay(DT_GAME);
+						printlog("적성이 0이상인 스킬만 선택할 수 있다!", true, false, false, CL_warning);
+						MoreWait();
+					}
+					else
+					{
+						char temp[100];
+						sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
+
+						printlog(temp, true, false, true, CL_danger);
+						changedisplay(DT_GAME);
+
+						int key_ = waitkeyinput(true);
+						if (key_ == 'y' || key_ == 'Y')
+						{
+							you.SetPureSkill(num);
+							sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num));
+							printlog(temp, true, false, false, CL_junko);
+							sprintf_s(temp, 100, "순호로부터 스킬순화(%s) 축복", skill_string((skill_type)num));
+							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
+							break;
+						}
 					}
 				}
 				else
@@ -2978,16 +2989,19 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			you.DeleteProperty(TPT_FIRE_RESIST);
 			you.SetProperty(TPT_FIRE_IMUNE, 200);
 			printlog("순호는 당신의 화염에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(화염) 축복", CL_junko);
 			break;
 		case 'b':
 			you.DeleteProperty(TPT_COLD_RESIST);
 			you.SetProperty(TPT_COLD_IMUNE, 200);
 			printlog("순호는 당신의 냉기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(냉기) 축복", CL_junko);
 			break;
 		case 'c':
 			you.DeleteProperty(TPT_ELEC_RESIST);
 			you.SetProperty(TPT_ELEC_IMUNE, 200);
 			printlog("순호는 당신의 전기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(전기) 축복", CL_junko);
 			break;
 		default:
 			printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
@@ -2997,11 +3011,114 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	}
 	case 3:
-	case 4:
-	case 5:
-	case 6:
 		you.SetProperty(TPT_PURE_MP, 1);
 		printlog("순호는 당신의 마력을 순화하였다!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "순호로부터 마력순화 축복", CL_junko);
+		break;
+	case 4:
+		you.SetProperty(TPT_PURE_POWER, 1);
+		iden_list.autopickup[IDEN_CHECK_ETC_START] = false;
+		printlog("순호는 당신의 파워를 순화하였다!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "순호로부터 파워순화 축복", CL_junko);
+		break;
+	case 5:
+		you.SetProperty(TPT_PURE_LIFE, 2);
+		printlog("순호는 당신의 생명력을 순화하였다!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "순호로부터 생명순화 축복", CL_junko);
+		break;
+	case 6:
+		while (1)
+		{
+			view_item(IVT_PURE_ITEM, "무슨 아이템을 순화할거야?");
+			int key_ = waitkeyinput(true);
+			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
+			{
+				item *item_ = you.GetItem(key_);
+				if (item_)
+				{
+					if ((item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST) || (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST))
+					{
+						char temp[100];
+						sprintf_s(temp, 100, "정말 %s 아이템을 순화할거야? (y/n)", item_->GetName().c_str());
+						printlog(temp, true, false, true, CL_small_danger);
+						changedisplay(DT_GAME);
+
+						int key_ = waitkeyinput(true);
+						if (key_ == 'y' || key_ == 'Y')
+						{
+							sprintf_s(temp, 100, "순호는 당신의 %s 아이템을 순화하였다! ", item_->GetName().c_str());
+							printlog(temp, true, false, false, CL_junko);
+							sprintf_s(temp, 100, "순호로부터 아이템순화(%s) 축복", item_->GetName().c_str());
+							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
+
+							if (item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST)
+							{
+								item_->value4 = 14;
+							}
+							else if (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST)
+							{
+								int value_;
+								if (item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
+									value_ = item_->value1 + 5 - item_->value4;
+								else if (item_->type == ITM_ARMOR_SHIELD)
+									value_ = (item_->value1 <= 4 ? 3 : (item_->value1 <= 8 ? 6 : 9)) - item_->value4;
+								else
+									value_ = 7 - item_->value4;
+
+								if (item_->type != ITM_ARMOR_SHIELD)
+								{
+									if (you.equipment[item_->GetArmorType()] == item_)
+										you.AcUpDown(0, value_);
+								}
+								else
+								{
+									if (you.equipment[item_->GetArmorType()] == item_)
+										you.ShUpDown(0, value_);
+								}
+								item_->value4 += value_;
+							}
+							item_->curse = false;
+							item_->identify_curse = true;
+							break;
+						}
+					}
+					else
+					{
+						printlog("이 아이템은 순화할 수 없다.", true, false, false, CL_normal);
+						changedisplay(DT_GAME);
+						return false;
+					}
+
+				}
+			}
+			else if (key_ == VK_DOWN)//-----이동키-------
+			{
+				changemove(32);  //위
+			}
+			else if (key_ == VK_UP)
+			{
+				changemove(-32); //아래
+			}
+			else if (key_ == VK_PRIOR)
+			{
+				changemove(-option_mg.getHeight());
+			}
+			else if (key_ == VK_NEXT)
+			{
+				changemove(option_mg.getHeight());
+			}						//-----이동키끝-------
+			else if (key_ == '*')
+			{
+				view_item(IVT_SELECT, "무슨 아이템을 순화할거야?");
+			}
+			else if (key_ == VK_ESCAPE)
+			{
+				printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+				changedisplay(DT_GAME);
+				return false;
+			}
+		}
+		changedisplay(DT_GAME);
 		break;
 	}
 

@@ -1125,7 +1125,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		int pow_ = min(you.power,500);
 		img_item_food_p_item.draw(pSprite,rc.left+7,rc.top+7,255);
 		left_ = sprintf_s(temp,128,"   %d.%02d",pow_/100,pow_%100);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal)));
+		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
 		//юс╫ц		
 		//rc.left += fontDesc.Width*left_;
 		//sprintf_s(temp,50,"%6d",you.hunger);
@@ -2208,6 +2208,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_THROW:
 	case IVT_ARMOR:
 	case IVT_ARMOR_ENCHANT:
+	case IVT_PURE_ITEM:
 	case IVT_SPELLCARD:
 	case IVT_EVOKE:
 	case IVT_CURSE_ENCHANT:
@@ -2250,9 +2251,11 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	for(item_type_simple i = ITMS_FIRST ; !error_ && i != ITMS_LAST ; i=(item_type_simple)(i+1))
 	{
-		if((item_vt == IVT_EQ_WEAPON && i != ITMS_WEAPON) || 
+		if(((item_vt == IVT_EQ_WEAPON)&& i != ITMS_WEAPON) ||
 			((item_vt == IVT_EQ_ARMOR || item_vt == IVT_UEQ_ARMOR || item_vt == IVT_ARMOR || item_vt == IVT_ARMOR_ENCHANT)  && i != ITMS_ARMOR)
 			)
+			continue;
+		if(item_vt == IVT_PURE_ITEM && (i != ITMS_WEAPON && i != ITMS_ARMOR))
 			continue;
 		if(item_vt == IVT_FOOD && i != ITMS_FOOD)
 			continue;

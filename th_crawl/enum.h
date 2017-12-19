@@ -938,6 +938,7 @@ enum damage_reason
 	DR_HUNGRY,
 	DR_MIRROR,
 	DR_MP,
+	DR_JUNKO,
 	DR_SLEEP
 };
 

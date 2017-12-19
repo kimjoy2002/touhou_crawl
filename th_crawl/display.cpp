@@ -461,9 +461,9 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	{
 		char sp_char = (i<26)?('a'+i):('A'+i-26);
 		sprintf_s(temp,256,"%c - ",sp_char);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
 		rc.left += fontDesc.Width*4;
-		pfont->DrawTextA(pSprite,it->GetInfor().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		pfont->DrawTextA(pSprite,it->GetInfor().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
 		rc.top += fontDesc.Height;
 		rc.left = 50;
 		i++;
@@ -767,7 +767,14 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.power_keep- you.uniden_power_keep;
-	sprintf_s(temp,100,"파워유지: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+
+
+	if (you.power == 1000) {
+		sprintf_s(temp, 100, "파워유지: ∞");
+		resist_ = 1;
+	}
+	else
+		sprintf_s(temp,100,"파워유지: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	sprintf_s(temp,100,"몸통: ");

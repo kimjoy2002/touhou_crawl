@@ -2856,19 +2856,6 @@ void God_show()
 					printsub("당신은 순호의 축복으로 영구적으로 순화할 수 있다.               (한번만)", true, CL_junko);
 				}
 				printsub("", true, CL_normal);
-
-				//순화시 순화패널티 3이 영구적용
-				//올스탯 +5. 그러나 기존권능을 사용할 수 없게 됨
-				//그리고 아래 등장하는 순화중 3개가 랜덤으로 나옴
-
-				//순화목록
-
-				//스킬순화: 적성0이상의 스킬 1개를 선택하여 적성과 상관없이 스킬레벨이 항상 캐릭터레벨과 동일하도록 변화합니다.
-				//저항순화 - 속성 하나에 대해서 완전한 면역이 됩니다.
-				//마력순화 - 영력와 체력을 동일화하고 재생력이 증가합니다.
-				//파워순화 - 항상 풀파워 모드가 됩니다.
-				//생명순화 - 당신의 생명력은 순화되어 추가 생명을 2개 얻습니다. 당신이 봉래인이면 나오지 않습니다.
-				//장비순화 - 당신이 선택한 무기, 방어구의 강화치를 강화최대치 + 5로 바꿉니다.아티펙트도 가능합니다.
 			}
 			break;
 		}
@@ -3690,6 +3677,43 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_JUNKO:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0, 33);//약화
+			rand_.push(1, 33);//감속
+			rand_.push(2, 33);//스탯빼앗기
+			int time_ = rand_int(50, 80);
+			you.SetPureTurn(randA(1)?30:20, time_);
+			switch (rand_.pop())
+			{
+			case 0:
+			{
+				random_extraction<potion_type> potion_;
+				potion_.push(PT_DOWN_STAT);
+				potion_.push(PT_PARALYSIS);
+				potion_.push(PT_SLOW);
+				potion_.push(PT_CONFUSE);
+				potion_.push(PT_POISON);
+				potion_type p_ = potion_.choice();
+				printarray(false, false, false, CL_junko, 1, "순호는 당신의 힘을 약화하였다! ");
+				you.SetForceStrong(false, time_, true);
+			}
+			break;
+			case 1:
+			{
+				printarray(false, false, false, CL_junko, 1, "순호는 당신의 속도를 빼앗았다! ");
+				you.SetSlow(time_);
+			}
+			break;
+			case 2:
+			{
+				printarray(false, false, false, CL_junko, 1, "순호는 당신의 능력치를 빼앗았다! ");
+				for (int i = 0; i<3; i++)
+					you.StatUpDown(-rand_int(1, 2), randA(2) ? (randA(1) ? STAT_STR : STAT_DEX) : STAT_INT, true);
+			}
+			break;
+			}
+		}
 		break;
 	}
 	return false;		

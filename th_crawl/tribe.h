@@ -10,6 +10,7 @@
 #define  __TRIBE_H__
 
 #include <string>
+#include "d3dUtility.h"
 
 using namespace std;
 
@@ -83,6 +84,7 @@ public:
 	string GetName();
 	string GetInfor();
 	string GetDetail();
+	D3DCOLOR getColor();
 	void gain(bool gain_);
 };
 

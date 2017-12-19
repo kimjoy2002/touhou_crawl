@@ -695,6 +695,21 @@ string tribe_property::GetDetail()
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
 
+D3DCOLOR tribe_property::getColor()
+{
+
+	switch (id)
+	{
+	case TPT_FIRE_IMUNE:
+	case TPT_COLD_IMUNE:
+	case TPT_ELEC_IMUNE:
+	case TPT_PURE_MP:
+	case TPT_PURE_POWER:
+	case TPT_PURE_LIFE:
+		return CL_junko;
+	}
+	return CL_STAT;
+}
 void tribe_property::gain(bool gain_)
 {
 	int value_ = gain_?value:-value;

@@ -1916,63 +1916,72 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 {
 	bool sanae_ = !you.char_name.name.compare("사나에") && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
 
-	if(sanae_)
-		printlog("신을 버리면 당신의 신앙심은 전부 사라질것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
-	else
-		printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)",false,false,false,CL_danger);
-	switch(waitkeyinput())
+	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
+	for (int i = 0; i < (junko_ ? 2 : 1); i++)
 	{
-	case 'Y':
-	case 'y':
-		enterlog();
-		break;
-	case 'N':
-	default:
-		printlog(" 취소!",true,false,false,CL_normal);
-		return false;
+		if (i == 1)
+			printlog("순호는 이미 순화된 당신을 언제든지 죽일 수 있다. 정말로 죽을거야?(Y/N)", false, false, false, CL_danger);
+		else if (sanae_)
+			printlog("신을 버리면 당신의 신앙심은 전부 사라질것이다. 진짜로?(Y/N)", false, false, false, CL_danger);
+		else
+			printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)", false, false, false, CL_danger);
+		switch (waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			enterlog();
+			break;
+		case 'N':
+		default:
+			printlog(" 취소!", true, false, false, CL_normal);
+			return false;
+		}
 	}
-	
-	if(sanae_)
-		printarray(true,false,false,CL_danger,7,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ","버렸다. ",GetGodString(you.god),GetGodString_is(you.god)?"은 ":"는 ","당신의 독립을 눈물을 머금고 이해했다.");
-	else	
-		printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"을 ":"를 ",you.god==GT_SATORI?"버렸다.":"버렸다. 당신의 신은 분노했다!");
-	
-	
-	if(!sanae_)
-	{
-		you.PunishUpDown(30, you.god , true);
-	}
-	
-	char temp[200];
-	sprintf_s(temp,200,"%s%s 버렸다.",GetGodString(you.god),GetGodString_is(you.god)?"을":"를");
-	AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
-	
 
-	
-	for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
+
+
+	if (sanae_)
+		printarray(true, false, false, CL_danger, 7, "당신은 ", GetGodString(you.god), GetGodString_is(you.god) ? "을 " : "를 ", "버렸다. ", GetGodString(you.god), GetGodString_is(you.god) ? "은 " : "는 ", "당신의 독립을 눈물을 머금고 이해했다.");
+	else
+		printarray(true, false, false, CL_danger, 4, "당신은 ", GetGodString(you.god), GetGodString_is(you.god) ? "을 " : "를 ", you.god == GT_SATORI ? "버렸다." : "버렸다. 당신의 신은 분노했다!");
+
+
+	if (!sanae_)
+	{
+		you.PunishUpDown(30, you.god, true);
+	}
+
+	char temp[200];
+	sprintf_s(temp, 200, "%s%s 버렸다.", GetGodString(you.god), GetGodString_is(you.god) ? "을" : "를");
+	AddNote(you.turn, CurrentLevelString(), temp, CL_small_danger);
+
+
+
+	for (int level_ = pietyLevel(you.piety); level_ >= 0; level_--)
 		GetGodAbility(level_, false);
 
-	
-	if(you.god == GT_SATORI)
+
+	if (you.god == GT_SATORI)
 	{
 		you.god_value[GT_SATORI][0] = 1;
 	}
-	if(you.god == GT_SEIJA)		
-		printlog(seija_talk(GT_NONE, 7),true,false,false,CL_seija);
+	if (you.god == GT_SEIJA)
+		printlog(seija_talk(GT_NONE, 7), true, false, false, CL_seija);
 
 	GodAccpect_Abandon(you.god);
 
-	you.Ability(SKL_ABANDON_GOD,true,true);
+	you.Ability(SKL_ABANDON_GOD, true, true);
 
 
 
 
 
 
-	you.god = GT_NONE;	
+	you.god = GT_NONE;
 
-
-
+	if (junko_) {
+		you.HpUpDown(-you.GetMaxHp(), DR_JUNKO, NULL);
+	}
 
 
 	return true;
@@ -2876,7 +2885,7 @@ const char* getJunkoString(int kind_)
 	case 5:
 		return "생명순화: 추가 목숨을 2개 얻는다.";
 	case 6:
-		return "장비순화: 선택한 장비의 강화치가 최대강화치+5가된다. 아티펙트도 가능.";
+		return "장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티펙트도 가능.";
 	}
 
 	return "버그순화: 버그이므로 이걸 선택하면 안된다.";

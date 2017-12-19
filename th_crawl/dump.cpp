@@ -328,6 +328,9 @@ bool Dump(int type, string *filename_)
 		case DR_MP:
 			strncat(death_reason, "순화한 영력이 전부 소모되어 죽었다.", 64);
 			break;
+		case DR_JUNKO:
+			strncat(death_reason, "순호에 의해 사예가 순화되어 죽었다.", 64);
+			break;
 		case DR_SLEEP:
 			if (you.dead_order || you.dead_order->order)
 			{
@@ -402,7 +405,7 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp,"맨손\n");
 	resist_ = you.ice_resist;
 	resist2_ = you.invisible_view;
-	fprintf_s(fp,"냉기저항: %s%c %c      투명보기: %c           탄막: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"냉기저항: %s%c %c      투명보기: %c           탄막: " , resist_ >= 100 ? "∞" : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.throw_weapon)
 		fprintf_s(fp,"%c) %s\n",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
 	else
@@ -410,7 +413,7 @@ bool Dump(int type, string *filename_)
 	
 	resist_ = you.elec_resist;
 	resist2_ = you.power_keep;
-	fprintf_s(fp,"전기저항: %s%c %c      파워유지: %c           몸통: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"전기저항: %s%c %c      파워유지: %s          몸통: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),you.power == 1000 ? "∞": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
 	if(you.equipment[ET_ARMOR])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
 	else

@@ -1420,7 +1420,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			image = &img_play_mokou[2];
 			DeleteProperty(TPT_18_LIFE);
 		}
-		else if (GetProperty(TPT_PURE_LIFE))
+		else if (GetProperty(TPT_PURE_LIFE) && reason != DR_JUNKO)
 		{
 			deadlog();
 			resurectionlog("순호의 생명순화");

@@ -15,6 +15,8 @@
 
 #include "option_manager.h"
 #include "enum.h"
+#define COLOR_NUM 5
+#define STYLE_NUM 11
 
 
 const char *imgfile_title[MAX_TITLE] = 
@@ -844,6 +846,153 @@ textures img_play_mokou[] = {
 		textures(&texture_players01, 7, 255),
 		textures(&texture_players01, 8, 255)
 };
+textures img_playable_character[STYLE_NUM][COLOR_NUM] = {
+	{textures(&texture_players01, 32),
+	textures(&texture_players01, 33),
+	textures(&texture_players01, 34),
+	textures(&texture_players01, 35),
+	textures(&texture_players01, 36)},
+
+	{textures(&texture_players01, 37),
+	textures(&texture_players01, 38),
+	textures(&texture_players01, 39),
+	textures(&texture_players01, 40),
+	textures(&texture_players01, 41) },
+
+	{ textures(&texture_players01, 42),
+	textures(&texture_players01, 43),
+	textures(&texture_players01, 44),
+	textures(&texture_players01, 45),
+	textures(&texture_players01, 46) },
+
+	{ textures(&texture_players01, 47),
+	textures(&texture_players01, 48),
+	textures(&texture_players01, 49),
+	textures(&texture_players01, 50),
+	textures(&texture_players01, 51) },
+
+
+	{ textures(&texture_players01, 52),
+	textures(&texture_players01, 53),
+	textures(&texture_players01, 54),
+	textures(&texture_players01, 55),
+	textures(&texture_players01, 56) },
+
+	{ textures(&texture_players01, 57),
+	textures(&texture_players01, 58),
+	textures(&texture_players01, 59),
+	textures(&texture_players01, 60),
+	textures(&texture_players01, 61) },
+
+
+	{ textures(&texture_players01, 62),
+	textures(&texture_players01, 63),
+	textures(&texture_players01, 64),
+	textures(&texture_players01, 65),
+	textures(&texture_players01, 66) },
+
+
+	{ textures(&texture_players01, 67),
+	textures(&texture_players01, 68),
+	textures(&texture_players01, 69),
+	textures(&texture_players01, 70),
+	textures(&texture_players01, 71) },
+
+
+	{ textures(&texture_players01, 72),
+	textures(&texture_players01, 73),
+	textures(&texture_players01, 74),
+	textures(&texture_players01, 75),
+	textures(&texture_players01, 76) },
+
+
+	{ textures(&texture_players01, 77),
+	textures(&texture_players01, 78),
+	textures(&texture_players01, 79),
+	textures(&texture_players01, 80),
+	textures(&texture_players01, 81) },
+
+
+	{ textures(&texture_players01, 82),
+	textures(&texture_players01, 83),
+	textures(&texture_players01, 84),
+	textures(&texture_players01, 85),
+	textures(&texture_players01, 86) }
+};
+
+textures img_play_item_cloak[2] = {
+	textures(&texture_players01, 96),
+	textures(&texture_players01, 97)
+};
+textures img_play_item_glove[1] = {
+	textures(&texture_players01, 128)
+};
+textures img_play_item_boot[1] = {
+	textures(&texture_players01, 160)
+};
+textures img_play_item_body[17] = {
+	textures(&texture_players01, 192),
+	textures(&texture_players01, 193),
+	textures(&texture_players01, 194),
+	textures(&texture_players01, 195),
+	textures(&texture_players01, 196),
+	textures(&texture_players01, 197),
+	textures(&texture_players01, 198),
+	textures(&texture_players01, 199),
+	textures(&texture_players01, 200),
+	textures(&texture_players01, 201),
+	textures(&texture_players01, 202),
+	textures(&texture_players01, 203),
+	textures(&texture_players01, 204),
+	textures(&texture_players01, 205),
+	textures(&texture_players01, 206),
+	textures(&texture_players01, 207),
+	textures(&texture_players01, 208)
+};
+textures img_play_item_hat[6] = {
+	textures(&texture_players01, 224),
+	textures(&texture_players01, 225),
+	textures(&texture_players01, 226),
+	textures(&texture_players01, 227),
+	textures(&texture_players01, 228),
+	textures(&texture_players01, 229)
+};
+textures img_play_item_shield[4] = {
+	textures(&texture_players01, 256),
+	textures(&texture_players01, 257),
+	textures(&texture_players01, 258),
+	textures(&texture_players01, 259)
+};
+textures img_play_item_weapon[21] = {
+	textures(&texture_players01, 288),
+	textures(&texture_players01, 289),
+	textures(&texture_players01, 290),
+	textures(&texture_players01, 291),
+	textures(&texture_players01, 292),
+	textures(&texture_players01, 293),
+	textures(&texture_players01, 294),
+	textures(&texture_players01, 295),
+	textures(&texture_players01, 296),
+	textures(&texture_players01, 297),
+	textures(&texture_players01, 298),
+	textures(&texture_players01, 299),
+	textures(&texture_players01, 300),
+	textures(&texture_players01, 301),
+	textures(&texture_players01, 302),
+	textures(&texture_players01, 303),
+	textures(&texture_players01, 304),
+	textures(&texture_players01, 305),
+	textures(&texture_players01, 306),
+	textures(&texture_players01, 307),
+	textures(&texture_players01, 308)
+};
+textures img_play_item_tribe[1] = {
+	textures(&texture_players01, 320)
+};
+
+
+
+
 
 
 textures img_item_armor_robe(&texture_item01, 7, 255);
@@ -851,7 +1000,14 @@ textures img_item_armor_cloak(&texture_item01, 8, 255);
 textures img_item_armor_robe_sanae(&texture_item01, 9, 255);
 textures img_item_armor_glove(&texture_item01, 10, 255);
 textures img_item_armor_boot(&texture_item01, 11, 255);
-textures img_item_armor_helmet(&texture_item01, 12, 255);
+textures img_item_armor_helmet[] = {
+	textures(&texture_item02, 75, 255),
+	textures(&texture_item01, 12, 255),
+	textures(&texture_item02, 76, 255),
+	textures(&texture_item02, 77, 255),
+	textures(&texture_item02, 78, 255),
+	textures(&texture_item02, 79, 255)
+};
 textures img_item_armor_armour_0(&texture_item01, 136, 255);
 textures img_item_armor_armour_1(&texture_item01, 137, 255);
 textures img_item_armor_armour_2(&texture_item01, 138, 255);
@@ -1633,6 +1789,8 @@ bool textures::draw(LPD3DXSPRITE pSprite, RECT rc, int alphas)
 
 int texturetoint(textures* input)
 {
+	if (input == NULL)
+		return -1;
 
 	if(input == &img_mons_default)
 		return 0;
@@ -1650,7 +1808,7 @@ int texturetoint(textures* input)
 		return 6;
 	else if(input == &img_item_armor_boot)
 		return 7;
-	else if(input == &img_item_armor_helmet)
+	else if(input == &img_item_armor_helmet[1])
 		return 8;
 	else if(input == &img_item_weapon_dagger)
 		return 9;
@@ -2470,13 +2628,149 @@ int texturetoint(textures* input)
 		return 416;
 	else if (input == &img_item_artifact_javelin)
 		return 417;
+	else if (input == &img_play_item_cloak[0])
+		return 418;
+	else if (input == &img_play_item_cloak[1])
+		return 419;
+	else if (input == &img_play_item_glove[0])
+		return 420;
+	else if (input == &img_play_item_boot[0])
+		return 421;
+	else if (input == &img_play_item_body[0])
+		return 422;
+	else if (input == &img_play_item_body[1])
+		return 423;
+	else if (input == &img_play_item_body[2])
+		return 424;
+	else if (input == &img_play_item_body[3])
+		return 425;
+	else if (input == &img_play_item_body[4])
+		return 426;
+	else if (input == &img_play_item_body[5])
+		return 427;
+	else if (input == &img_play_item_body[6])
+		return 428;
+	else if (input == &img_play_item_body[7])
+		return 429;
+	else if (input == &img_play_item_body[8])
+		return 430;
+	else if (input == &img_play_item_body[9])
+		return 431;
+	else if (input == &img_play_item_body[10])
+		return 432;
+	else if (input == &img_play_item_body[11])
+		return 433;
+	else if (input == &img_play_item_body[12])
+		return 434;
+	else if (input == &img_play_item_body[13])
+		return 435;
+	else if (input == &img_play_item_body[14])
+		return 436;
+	else if (input == &img_play_item_body[15])
+		return 437;
+	else if (input == &img_play_item_body[16])
+		return 438;
+	else if (input == &img_play_item_hat[0])
+		return 439;
+	else if (input == &img_play_item_hat[1])
+		return 440;
+	else if (input == &img_play_item_hat[2])
+		return 441;
+	else if (input == &img_play_item_hat[3])
+		return 442;
+	else if (input == &img_play_item_hat[4])
+		return 443;
+	else if (input == &img_play_item_hat[5])
+		return 444;
+	else if (input == &img_play_item_shield[0])
+		return 445;
+	else if (input == &img_play_item_shield[1])
+		return 446;
+	else if (input == &img_play_item_shield[2])
+		return 447;
+	else if (input == &img_play_item_shield[3])
+		return 448;
+	else if (input == &img_play_item_weapon[0])
+		return 449;
+	else if (input == &img_play_item_weapon[1])
+		return 450;
+	else if (input == &img_play_item_weapon[2])
+		return 451;
+	else if (input == &img_play_item_weapon[3])
+		return 452;
+	else if (input == &img_play_item_weapon[4])
+		return 453;
+	else if (input == &img_play_item_weapon[5])
+		return 454;
+	else if (input == &img_play_item_weapon[6])
+		return 455;
+	else if (input == &img_play_item_weapon[7])
+		return 456;
+	else if (input == &img_play_item_weapon[8])
+		return 457;
+	else if (input == &img_play_item_weapon[9])
+		return 458;
+	else if (input == &img_play_item_weapon[10])
+		return 459;
+	else if (input == &img_play_item_weapon[11])
+		return 460;
+	else if (input == &img_play_item_weapon[12])
+		return 461;
+	else if (input == &img_play_item_weapon[13])
+		return 462;
+	else if (input == &img_play_item_weapon[14])
+		return 463;
+	else if (input == &img_play_item_weapon[15])
+		return 464;
+	else if (input == &img_play_item_weapon[16])
+		return 465;
+	else if (input == &img_play_item_weapon[17])
+		return 466;
+	else if (input == &img_play_item_weapon[18])
+		return 467;
+	else if (input == &img_play_item_weapon[19])
+		return 468;
+	else if (input == &img_play_item_tribe[0])
+		return 469;
+	else if (input == &img_play_item_weapon[20])
+		return 470;
+	else if (input == &img_item_armor_helmet[0])
+		return 471;
+	else if (input == &img_item_armor_helmet[2])
+		return 472;
+	else if (input == &img_item_armor_helmet[3])
+		return 473;
+	else if (input == &img_item_armor_helmet[4])
+		return 474;
+	else if (input == &img_item_armor_helmet[5])
+		return 475;
 	else
-		return 0;
+	{
+		for (int i = 0; i < STYLE_NUM; i++)
+		{
+			for (int j = 0; j < COLOR_NUM; j++)
+			{
+				if(input == &img_playable_character[i][j])
+					return 1000 + (i * COLOR_NUM) + j;
+			}
+		}
+	}
+	return 0;
 }
 
 
 textures* inttotexture(int input)
 {
+	if (input == -1)
+	{
+		return NULL;
+	}
+	else if (input >= 1000) 
+	{
+		int cur = input - 1000;
+		return &img_playable_character[cur / COLOR_NUM][cur % COLOR_NUM];
+	}
+
 	switch(input)
 	{
 	case 1:
@@ -2494,7 +2788,7 @@ textures* inttotexture(int input)
 	case 7:
 		return &img_item_armor_boot;
 	case 8:
-		return &img_item_armor_helmet;
+		return &img_item_armor_helmet[1];
 	case 9:
 		return &img_item_weapon_dagger;
 	case 10:
@@ -3313,6 +3607,122 @@ textures* inttotexture(int input)
 		return &img_item_artifact_dauzing_rod;
 	case 417:
 		return &img_item_artifact_javelin;
+	case 418:
+		return &img_play_item_cloak[0];
+	case 419:
+		return &img_play_item_cloak[1];
+	case 420:
+		return &img_play_item_glove[0];
+	case 421:
+		return &img_play_item_boot[0];
+	case 422:
+		return &img_play_item_body[0];
+	case 423:
+		return &img_play_item_body[1];
+	case 424:
+		return &img_play_item_body[2];
+	case 425:
+		return &img_play_item_body[3];
+	case 426:
+		return &img_play_item_body[4];
+	case 427:
+		return &img_play_item_body[5];
+	case 428:
+		return &img_play_item_body[6];
+	case 429:
+		return &img_play_item_body[7];
+	case 430:
+		return &img_play_item_body[8];
+	case 431:
+		return &img_play_item_body[9];
+	case 432:
+		return &img_play_item_body[10];
+	case 433:
+		return &img_play_item_body[11];
+	case 434:
+		return &img_play_item_body[12];
+	case 435:
+		return &img_play_item_body[13];
+	case 436:
+		return &img_play_item_body[14];
+	case 437:
+		return &img_play_item_body[15];
+	case 438:
+		return &img_play_item_body[16];
+	case 439:
+		return &img_play_item_hat[0];
+	case 440:
+		return &img_play_item_hat[1];
+	case 441:
+		return &img_play_item_hat[2];
+	case 442:
+		return &img_play_item_hat[3];
+	case 443:
+		return &img_play_item_hat[4];
+	case 444:
+		return &img_play_item_hat[5];
+	case 445:
+		return &img_play_item_shield[0];
+	case 446:
+		return &img_play_item_shield[1];
+	case 447:
+		return &img_play_item_shield[2];
+	case 448:
+		return &img_play_item_shield[3];
+	case 449:
+		return &img_play_item_weapon[0];
+	case 450:
+		return &img_play_item_weapon[1];
+	case 451:
+		return &img_play_item_weapon[2];
+	case 452:
+		return &img_play_item_weapon[3];
+	case 453:
+		return &img_play_item_weapon[4];
+	case 454:
+		return &img_play_item_weapon[5];
+	case 455:
+		return &img_play_item_weapon[6];
+	case 456:
+		return &img_play_item_weapon[7];
+	case 457:
+		return &img_play_item_weapon[8];
+	case 458:
+		return &img_play_item_weapon[9];
+	case 459:
+		return &img_play_item_weapon[10];
+	case 460:
+		return &img_play_item_weapon[11];
+	case 461:
+		return &img_play_item_weapon[12];
+	case 462:
+		return &img_play_item_weapon[13];
+	case 463:
+		return &img_play_item_weapon[14];
+	case 464:
+		return &img_play_item_weapon[15];
+	case 465:
+		return &img_play_item_weapon[16];
+	case 466:
+		return &img_play_item_weapon[17];
+	case 467:
+		return &img_play_item_weapon[18];
+	case 468:
+		return &img_play_item_weapon[19];
+	case 469:
+		return &img_play_item_tribe[0];
+	case 470:
+		return &img_play_item_weapon[20];
+	case 471:
+		return &img_item_armor_helmet[0];
+	case 472:
+		return &img_item_armor_helmet[2];
+	case 473:
+		return &img_item_armor_helmet[3];
+	case 474:
+		return &img_item_armor_helmet[4];
+	case 475:
+		return &img_item_armor_helmet[5];
 	default:
 		return &img_mons_default;
 	}

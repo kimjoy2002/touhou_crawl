@@ -80,6 +80,9 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = material==MTK_PLATE?&img_item_armor_armour_3:
 			material==MTK_CHAIN?&img_item_armor_armour_2:
 			material==MTK_LEATHER?&img_item_armor_armour_1:&img_item_armor_armour_0;
+		t->equip_image = material == MTK_PLATE ? &img_play_item_body[4] :
+			material == MTK_CHAIN ? &img_play_item_body[3] :
+			material == MTK_LEATHER ? &img_play_item_body[2] : &img_play_item_body[1];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ÀÏ¹Ý¿Ê";
 		t->value2 +=(material>=MTK_LEATHER)?((material>=MTK_CHAIN)?2:1):0;
@@ -88,15 +91,19 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->value = 40+(material*20);
 		break;		
 	case AMK_MIKO:
+	{
 		t->image = &img_item_armor_robe;
+		t->equip_image = &img_play_item_body[10];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ¹«³à¿Ê";
 		t->name.name_type = true;
-		t->weight = 6.0f*(material*0.5+1);
-		t->value = 80+(material*20);
-		break;		
+		t->weight = 6.0f*(material*0.5 + 1);
+		t->value = 80 + (material * 20);
+		break;
+	}
 	case AMK_WING:
 		t->image = &img_item_armor_relec;
+		t->equip_image = &img_play_item_body[12];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ³¯°³¿Ê";
 		t->name.name_type = true;
@@ -105,6 +112,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;		
 	case AMK_KAPPA:
 		t->image = &img_item_armor_rcold;
+		t->equip_image = &img_play_item_body[13];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " Ä±ÆÄ¿Ê";
 		t->name.name_type = true;
@@ -113,6 +121,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;		
 	case AMK_FIRE:
 		t->image = &img_item_armor_rfire;
+		t->equip_image = &img_play_item_body[14];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ºÒÁã¿Ê";
 		t->name.name_type = true;
@@ -121,6 +130,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;		
 	case AMK_MAID:
 		t->image = &img_item_armor_rmagic;
+		t->equip_image = &img_play_item_body[15];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ¸ÞÀÌµå¿Ê";
 		t->name.name_type = true;
@@ -129,6 +139,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;		
 	case AMK_POISON:
 		t->image = &img_item_armor_rpois;
+		t->equip_image = &img_play_item_body[16];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ÀÎÇü¿Ê";
 		t->name.name_type = true;
@@ -137,6 +148,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;	
 	case AMK_AUTUMN:
 		t->image = &img_item_autumn_armour[material+1];
+		t->equip_image = &img_play_item_body[5 + material + 1];
 		t->name.name = GetMaterialString(material);
 		t->name.name += " ´ÜÇ³¿Ê";
 		t->name.name_type = true;

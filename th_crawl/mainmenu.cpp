@@ -308,7 +308,13 @@ bool select_char(int value_)
 bool select_job(int value_)
 {
 	you.job = (job_type)(value_);
-	you.image = &img_play_normal;
+	int sytle = ((you.tribe == TRI_FAIRY)?3:randA(2));
+	int color = randA(10);
+	if (you.tribe == TRI_KAPPA)
+		color = 10;
+	else if (you.tribe == TRI_WOLFTENGU)
+		color = 9;
+	you.image = &img_playable_character[color][sytle];
 	you.char_name.name = "";
 	return true;
 }

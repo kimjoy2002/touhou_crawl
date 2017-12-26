@@ -424,6 +424,9 @@ bool PixedMap(map_dummy* map, char *temp)
 			case ',':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
 				break;
+			case '^':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DREAM_FLOOR;
+				break;
 			case '_':
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_GRASS;
 				break;

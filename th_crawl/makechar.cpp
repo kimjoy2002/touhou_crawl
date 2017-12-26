@@ -281,7 +281,8 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SMALL_SHIELD:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield,1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("나무방패",false),name_infor("",true),3.0f,30));
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 0));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield, &img_play_item_shield[0],1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("나무방패",false),name_infor("",true),3.0f,30));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -289,7 +290,8 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;	
 	case SIT_MIDDLE_SHIELD:
-		it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_shield,1,false,false,7,-3,0,0,0,0,0,0,false,name_infor("철방패",false),name_infor("",true),5.0f,100));
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 25));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_shield, &img_play_item_shield[1],1,false,false,7,-3,0,0,0,0,0,0,false,name_infor("철방패",false),name_infor("",true),5.0f,100));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -811,6 +813,10 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		else
 		{	
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_HEAD, 0, &t, -1));	
+			it->image = &img_item_armor_helmet[1];
+			it->equip_image = &img_play_item_hat[1];
+			it->name.name = "리본";
+			it->name.name_type = true;
 			it->value4 = 0;
 			it->curse = false;
 			it->Identify();

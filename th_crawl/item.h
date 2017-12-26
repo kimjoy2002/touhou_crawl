@@ -23,6 +23,7 @@ struct item_infor
 	name_infor name;
 	name_infor name2;
 	textures *image;
+	textures *equip_image;
 	item_type type;
 	float weight;
 	int value;
@@ -43,7 +44,7 @@ struct item_infor
 	bool curse;
 
 	bool artifact;
-	item_infor():name("없음",true), name2("",true) ,image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
+	item_infor():name("없음",true), name2("",true) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
 		num(1),value0(0),value1(0),value2(0),value3(0),value4(0),value5(0),value6(0), value7(0), value8(0)
 		, curse(false), artifact(false)
 	{};
@@ -150,6 +151,7 @@ public:
 	name_infor name;
 	name_infor second_name;
 	textures *image;
+	textures *equip_image;
 	coord_def position;
 	coord_def prev_position;
 	item_type type;
@@ -197,6 +199,7 @@ public:
 	
 	string GetName(int num_ = -1);
 	name_infor GetNameInfor();
+	textures *GetEquipTexture();
 	const D3DCOLOR item_color();
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
 
@@ -237,7 +240,7 @@ public:
 item_infor& makeCustomBook(item_infor* t);
 item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_ = -1);
 item_infor& makePitem(monster_index mon_id, int num, item_infor* t);
-item_infor& CustomItem(item_infor* t, item_type type, textures* graphic, int num, bool pile_, bool curse, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, bool throw_, name_infor name_, name_infor name2_, float weight, int value);
+item_infor& CustomItem(item_infor* t, item_type type, textures* graphic, textures* equip_graphic, int num, bool pile_, bool curse, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8, bool throw_, name_infor name_, name_infor name2_, float weight, int value);
 item_infor& CustomSimpleItem(item_infor* t, item_type type, int num, bool curse, int v1, int v2, int v3, int v4, int v5, int v6, int v7, int v8);
 int baditem(const item_infor *item_);
 item_type RandomItemType();

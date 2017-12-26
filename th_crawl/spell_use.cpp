@@ -3923,6 +3923,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	{
 		item_infor t;
 		makeitem(ITM_ARMOR_HEAD, 1, &t);
+		t.image = &img_item_armor_helmet[4];
+		t.equip_image = &img_play_item_hat[4];
+		t.name.name = "¸®º»";
+		t.name.name_type = true;
 		item_list_->push_back(t);
 		break;
 	}
@@ -4054,6 +4058,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 				item_infor t;
 				makeitem(ITM_ARMOR_SHIELD, 1, &t, 25);
 				t.image = &img_item_weapon_momizishield;
+				t.equip_image = &img_play_item_shield[2];
 				item_list_->push_back(t);
 			}
 			{

@@ -549,6 +549,63 @@ void players::LoadDatas(FILE *fp)
 	}
 }
 
+bool players::Draw(LPD3DXSPRITE pSprite, float x_, float y_)
+{
+	if (!GetCharNameString()->empty())
+	{
+		if (you.image) {
+			return you.image->draw(pSprite, x_, y_, 255);
+		}
+	}
+	else if (you.tribe == TRI_FAIRY)
+	{
+		item* t;
+		t = you.equipment[ET_CLOAK];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		if (you.image) {
+			you.image->draw(pSprite, x_, y_, 255);
+		}
+		t = you.equipment[ET_HELMET];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_WEAPON];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_SHIELD];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+	}
+	else
+	{
+		item* t;
+		t = you.equipment[ET_CLOAK];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		if (you.image) {
+			you.image->draw(pSprite, x_, y_, 255);
+		}
+		t = you.equipment[ET_GLOVE];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_BOOTS];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_ARMOR];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_HELMET];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_WEAPON];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+		t = you.equipment[ET_SHIELD];
+		if (t && t->equip_image)
+			t->equip_image->draw(pSprite, x_, y_, 255);
+	}
+	return false;
+}
 bool players::isLive()
 {
 	return true;

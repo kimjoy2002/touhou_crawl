@@ -499,16 +499,20 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		switch(you.equipment[ET_ARMOR]->type)
 		{
 		case ITM_ARMOR_BODY_ARMOUR_0:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];		
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[1];
+			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[6];
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_1:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[2];	
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[2];
+			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[7];
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_2:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[3];		
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[3];
+			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[8];
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_3:
-			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[4];		
+			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[4];
+			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[9];
 			break;
 		}
 		printlog("당신의 방어구는 커다란 단풍잎으로 변했다!",true,false,false,CL_normal);

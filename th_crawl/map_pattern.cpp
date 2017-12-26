@@ -2045,6 +2045,36 @@ char* yukkuri_enter_pattern(map_dummy* map)
 	}
 }
 
+
+char* dream_enter_pattern(map_dummy* map)
+{
+	switch (randA(0))
+	{
+	default:
+	case 0:
+		bool hw_ = randA(1);
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "꿈의_세계_입구";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+....^..\
+.^..^.^\
+..^^^..\
+.^^0^..\
+^.^^^^.\
+^...^..\
+..^...^";
+		break;
+	}
+}
+
+
 char* misty_lake_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
@@ -2098,7 +2128,7 @@ char* dream_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_DREAM_STAIR);
-	return common_enter_pattern(map);
+	return dream_enter_pattern(map);
 }
 char* pandemonium_pattern(map_dummy* map)
 {

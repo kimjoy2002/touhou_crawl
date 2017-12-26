@@ -318,6 +318,7 @@ public:
 	~players();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
+	bool Draw(LPD3DXSPRITE pSprite, float x_, float y_);
 	bool isLive();
 	bool isFly(){return s_levitation!=0;}
 	bool isSwim();

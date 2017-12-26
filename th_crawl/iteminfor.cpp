@@ -745,7 +745,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			text_ += "머리에 달 수 있는 리본. 패션의 기본\n";
+			text_ += "머리에 달 수 있는 장신구. 패션의 기본\n";
 			if (can_use_)
 			{
 				if (you.equipment[ET_HELMET] != it)

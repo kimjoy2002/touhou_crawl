@@ -260,13 +260,25 @@ extern textures img_play_momizi;
 extern textures img_play_normal;
 extern textures img_play_yamame;
 extern textures img_play_mokou[];
+extern textures img_playable_character[11][5];
+
+extern textures img_play_item_cloak[];
+extern textures img_play_item_glove[];
+extern textures img_play_item_boot[];
+extern textures img_play_item_body[];
+extern textures img_play_item_hat[];
+extern textures img_play_item_shield[];
+extern textures img_play_item_weapon[];
+extern textures img_play_item_tribe[];
+
+
 
 extern textures img_item_armor_robe;
 extern textures img_item_armor_cloak;
 extern textures img_item_armor_robe_sanae;
 extern textures img_item_armor_glove;
 extern textures img_item_armor_boot;
-extern textures img_item_armor_helmet;
+extern textures img_item_armor_helmet[];
 extern textures img_item_armor_armour_0;
 extern textures img_item_armor_armour_1;
 extern textures img_item_armor_armour_2;

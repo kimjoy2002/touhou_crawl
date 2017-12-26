@@ -1782,6 +1782,7 @@ void map_algorithms_tuto01(int num)
 	{
 		item* i = env[num].MakeItem(coord_def(18,18),makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));
 		i->image = &img_item_armor_robe_sanae;
+		i->equip_image = &img_play_item_body[11];
 	}
 	
 

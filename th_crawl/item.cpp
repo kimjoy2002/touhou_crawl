@@ -42,7 +42,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 
 
 item::item()
-:name("없음",true), second_name("",true), image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
+:name("없음",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
 can_throw(false), drop(false), throw_item(false), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 atifact_vector()
@@ -59,6 +59,7 @@ item::item(const coord_def &c, const item_infor &t)
 	position = c;
 	prev_position = c;
 	image = t.image;
+	equip_image = t.equip_image;
 	type = t.type;
 	weight = t.weight;
 	value = t.value;
@@ -91,7 +92,8 @@ void item_infor::SaveDatas(FILE *fp)
 {
 	name.SaveDatas(fp);
 	name2.SaveDatas(fp);	
-	SaveData<int>(fp, texturetoint(image));	
+	SaveData<int>(fp, texturetoint(image));
+	SaveData<int>(fp, texturetoint(equip_image));
 	SaveData<item_type>(fp, type);
 	SaveData<float>(fp, weight);
 	SaveData<int>(fp, value);
@@ -114,9 +116,11 @@ void item_infor::LoadDatas(FILE *fp)
 {
 	name.LoadDatas(fp);
 	name2.LoadDatas(fp);	
-	int it;
+	int it; 
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
+	LoadData<int>(fp, it);
+	equip_image = inttotexture(it);
 	LoadData<item_type>(fp, type);
 	LoadData<float>(fp, weight);
 	LoadData<int>(fp, value);
@@ -138,8 +142,9 @@ void item_infor::LoadDatas(FILE *fp)
 void item::SaveDatas(FILE *fp)
 {
 	name.SaveDatas(fp);
-	second_name.SaveDatas(fp);
+	second_name.SaveDatas(fp); 
 	SaveData<int>(fp, texturetoint(image));
+	SaveData<int>(fp, texturetoint(equip_image));
 	SaveData<int>(fp, position.x);
 	SaveData<int>(fp, position.y);
 	SaveData<int>(fp, prev_position.x);
@@ -184,6 +189,8 @@ void item::LoadDatas(FILE *fp)
 	int it;
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
+	LoadData<int>(fp, it);
+	equip_image = inttotexture(it);
 	LoadData<int>(fp, position.x);
 	LoadData<int>(fp, position.y);
 	LoadData<int>(fp, prev_position.x);
@@ -412,6 +419,10 @@ name_infor item::GetNameInfor()
 		return second_name;
 	else
 		return name;
+}
+textures* item::GetEquipTexture()
+{
+	return equip_image;
 }
 const D3DCOLOR item::item_color()	
 {	

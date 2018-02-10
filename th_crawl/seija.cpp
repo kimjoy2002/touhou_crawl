@@ -254,17 +254,17 @@ const char* seija_talk(god_type god_, int piety)
 		switch(god_)
 		{
 		
-		case GT_SHIKIEIKI:
+		case GT_JOON_AND_SION:
 			switch(randA(3))
 			{
 			case 0:
-				return "세이자: 어딘가에 높으신 분 같았지만, 나에게 걸리면 별거 아니었다고!";
+				return "세이자: !";
 			case 1:
-				return "세이자: 염마의 물건을 훔치는건 죽은 후의 후환이 두렵지만... 뭐 어때!";
+				return "세이자: ";
 			case 2:
-				return "세이자: 흑이라고? 난 태어날때부터 흑이었어!";
+				return "세이자: ";
 			case 3:
-				return "세이자: 흑백을 가릴 수 있다고? 난 뒤집을 수 있지!";
+				return "세이자: ";
 			}
 			break;
 		case GT_BYAKUREN:

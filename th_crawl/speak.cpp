@@ -1881,26 +1881,26 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 						return temp_speak;
 					}				
 					break;
-				case GT_SHIKIEIKI:
+				case GT_JOON_AND_SION:
 					switch(randA(5))
 					{
 					case 0:
-						sprintf(temp_speak,"%s%s외쳤다. \"염라님의 힘이라니 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 1:
-						sprintf(temp_speak,"%s%s외쳤다. \"흑백을 가려서 뭐하려는거야? 어쨌든 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 2:
-						sprintf(temp_speak,"%s%s외쳤다. \"누구를 심판할 수 있다고 생각하는거야? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 3:
-						sprintf(temp_speak,"%s%s외쳤다. \"사신이라도 될 생각이야? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 4:
-						sprintf(temp_speak,"%s%s외쳤다. \"염라님에게 잘보여서 죽을때 가산점을 받을거야? 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					case 5:
-						sprintf(temp_speak,"%s%s외쳤다. \"공평해서 부러워!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						sprintf(temp_speak,"%s%s외쳤다. \"\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 						return temp_speak;
 					}				
 					break;

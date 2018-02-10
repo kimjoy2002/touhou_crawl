@@ -35,7 +35,7 @@ int GetGodGiftTime(god_type god)
 	{
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_SUWAKO:
 		return 0;
 	case GT_MINORIKO:
@@ -72,7 +72,7 @@ bool GodGift(god_type god, int piety)
 	{
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
 		if(pietyLevel(you.piety)>=3)

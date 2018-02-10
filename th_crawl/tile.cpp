@@ -68,7 +68,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 		return DOT_DOWN;
-	case DG_TEMPLE_SHIKIEIKI:
+	case DG_TEMPLE_JOON_AND_SION:
 	case DG_TEMPLE_BYAKUREN:
 	case DG_TEMPLE_KANAKO:
 	case DG_TEMPLE_SUWAKO:

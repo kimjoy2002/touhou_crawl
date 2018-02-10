@@ -34,8 +34,8 @@ const char* GetGodString(god_type god)
 		return "알수없는신";
 	case GT_NONE:
 		return "";
-	case GT_SHIKIEIKI:
-		return "시키에이키";
+	case GT_JOON_AND_SION:
+		return "죠온&시온";
 	case GT_BYAKUREN:
 		return "뱌쿠렌";
 	case GT_KANAKO:
@@ -85,8 +85,8 @@ bool GetGodString_is(god_type god)
 		return true;
 	case GT_NONE:
 		return true;
-	case GT_SHIKIEIKI:
-		return false;
+	case GT_JOON_AND_SION:
+		return true;
 	case GT_BYAKUREN:
 		return true;
 	case GT_KANAKO:
@@ -162,7 +162,7 @@ bool GetGodAbility(int level, bool plus)
 		return false;
 	case GT_NONE:
 		return false;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 		return false;
 	case GT_BYAKUREN:
 		switch(level)
@@ -916,7 +916,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		return false;
 	case GT_NONE:
 		return false;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 		return false;
 	case GT_BYAKUREN:
 		return false;
@@ -1207,7 +1207,7 @@ bool GodAccpect_Entering()
 	case GT_MINORIKO:
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MIMA:
@@ -1247,7 +1247,7 @@ bool GodAccpect_GetPitem()
 		break;
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MIMA:
@@ -1291,7 +1291,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_MINORIKO:		
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 		break;
 	case GT_SUWAKO:		
@@ -1364,7 +1364,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_MINORIKO:		
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MIMA:
@@ -1410,7 +1410,7 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 		}
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
@@ -1440,7 +1440,7 @@ bool GodAccpect_Explore_100()
 	case GT_BYAKUREN:
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
@@ -1522,7 +1522,7 @@ bool GodAccpect_Exp_get()
 	case GT_BYAKUREN:
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
@@ -1555,7 +1555,7 @@ bool GodAccpect_First_contact()
 	case GT_BYAKUREN:
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
@@ -1599,7 +1599,7 @@ bool GodAccpect_Abandon(god_type god)
 	case GT_BYAKUREN:
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MINORIKO:
@@ -1667,7 +1667,7 @@ bool GodAccpect_turn(int turn)
 		return false;
 	case GT_NONE:
 		return false;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 		return false;
 	case GT_BYAKUREN:
 		return false;
@@ -1915,7 +1915,7 @@ void Pray()
 
 
 			}
-			else if (type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_MIKO)
+			else if (type == DG_TEMPLE_MIKO)
 			{
 				printlog("이 신은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
 			}
@@ -2056,13 +2056,16 @@ void GodInfor(god_type god)
 		printsub("그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
-	case GT_SHIKIEIKI:
-		printsub("시키에이키 야마자나두 - 낙원의 최고재판장",true,CL_help);
+	case GT_JOON_AND_SION:
+		printsub("요리가미 조온 & 시온 - 최흉최악의 자매",true, CL_joon_and_sion);
 		printsub("",true,CL_normal);
-		printsub("시키에이키는 죽은자의 재판을 맡고 있는 환상향의 염라대왕. 그녀는 흑백을 가리는 능력을 가지고 있다.",true,CL_normal);
-		printsub("신자들이 선행을 배푸는 것을 유도하며 악한 자들에게 대신 심판을 내리도록 돕는다.",true,CL_normal);
-		printsub("까다로운 교칙이 있지만 신자들은 던전의 몬스터들에게 그녀의 설교를 전달할 수 있게된다.",true,CL_normal);
-		printsub("",true,CL_normal);
+		printsub("낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.",true,CL_normal);
+		printsub("죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서",true,CL_normal);
+		printsub("믿는 것만으로도 소모품을 낭비하고 잃어버리는 불행이 생기게 될 것이다.",true,CL_normal);
+		printsub("그럼에도 둘을 신앙한다면 직접 빙의하는 것으로 직접적으로 그녀들의 권능들을 사용하게 된다.", true, CL_normal);
+		printsub("그녀들의 권능은 강력하지만, 빙의와 동시에 그에 따른 그녀들의 불운도 더욱 강해질것이다.", true, CL_normal);
+		printsub("신도들은 다른 적들을 죽여서 그들의 돈을 갈취하는 것으로 신앙심을 얻을 수 있다.", true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
 	case GT_SHINKI:
 		printsub("신키 - 마계의 신",true,CL_white_puple);
@@ -2197,24 +2200,24 @@ void GodInfor(god_type god)
 	case GT_OKINA:
 		printsub("마타라 오키나", true, CL_okina);
 		printsub("", true, CL_okina);
-		printsub("마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.", true, CL_okina);
-		printsub("그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.", true, CL_okina);
-		printsub("그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.", true, CL_okina);
-		printsub("문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.", true, CL_okina);
-		printsub("또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.", true, CL_okina);
-		printsub("그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.", true, CL_okina);
+		printsub("마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.", true, CL_normal);
+		printsub("그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.", true, CL_normal);
+		printsub("그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.", true, CL_normal);
+		printsub("문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.", true, CL_normal);
+		printsub("또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.", true, CL_normal);
+		printsub("그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.", true, CL_normal);
 		printsub("", true, CL_okina);
 		break;
 	case GT_JUNKO:
 		printsub("순호", true, CL_junko);
 		printsub("", true, CL_junko);
-		printsub("순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.", true, CL_junko);
-		printsub("그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.", true, CL_junko);
-		printsub("그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고", true, CL_junko);
-		printsub("순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.", true, CL_junko);
-		printsub("기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.", true, CL_junko);
-		printsub("그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.", true, CL_junko);
-		printsub("그녀는 원한을 갚기 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_junko);
+		printsub("순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.", true, CL_normal);
+		printsub("그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.", true, CL_normal);
+		printsub("그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고", true, CL_normal);
+		printsub("순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.", true, CL_normal);
+		printsub("기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.", true, CL_normal);
+		printsub("그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.", true, CL_normal);
+		printsub("그녀는 원한을 갚기 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_normal);
 		break;
 	default:
 		printsub("버그신",true,CL_danger);
@@ -2253,7 +2256,85 @@ void God_show()
 		break;
 	case GT_NONE:
 		break;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
+		if (level_ >= 0)
+		{
+			printsub("당신은 역병신과 빈곤신의 저주를 받고 있다.                                            (패시브)", true, CL_joon_and_sion);
+			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
+				printsub(" └ 당신은 소모품을 사용할때 가끔 2~3개를 한번에 소모한다.", true, CL_joon_and_sion);
+			}
+			else {
+				printsub(" └ 당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)", true, CL_joon);
+			}
+			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
+				printsub(" └ 줍지않은 소모품은 천천히 사라져갑니다. 소모품을 버리면 일정 확률로 사라진다.", true, CL_joon_and_sion);
+			}
+			else {
+				printsub(" └ 줍지않은 소모품은 빠른 속도로 사라져갑니다. 소모품을 버리면 무조건 사라진다. (강화됨)", true, CL_sion);
+			}
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 1 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			printsub("당신은 잠시동안 조온이나 시온을 빙의할 수 있다.                                       (액티브)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
+			printsub("", true, CL_normal);
+		}
+		if (level_ >= 2 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+				printsub("죠온이 빙의한 동안엔 모든 마법과 공격시 파워를 소모하여 추가 데미지를 준다.           (패시브)", true, CL_joon);
+				printsub("", true, CL_normal);
+			}
+			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+				printsub("시온이 빙의한 동안엔 파워를 주워도 파워가 오르지 않는 대신 체력과 영력을 회복한다.    (패시브)", true, CL_sion);
+				printsub("", true, CL_normal);
+			}
+			else {
+				printsub("빙의를 하게되면 죠온이나 시온이 당신의 파워를 이용한다.                               (패시브)", true, CL_bad);
+				printsub("", true, CL_normal);
+			}
+		}
+		if (level_ >= 4 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+				printsub("죠온이 빙의한 동안엔 소모품을 한번에 소모할때 추가 효과가 생긴다.                     (패시브)", true, CL_joon);
+				printsub("", true, CL_normal);
+			}
+			if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+				printsub("시온이 빙의한 동안엔 소모품이 사라질때마다 최대 체력이 빙의동안에만 늘어난다.         (패시브)", true, CL_sion);
+				printsub("", true, CL_normal);
+			}
+			else {
+				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 보조한다.                             (패시브)", true, CL_bad);
+				printsub("", true, CL_normal);
+			}
+		}
+		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+				printsub("당신은 시야내 적에게 혼란과 데미지를 줄 수 있다.                               (빙의시 한번만)", true, CL_joon);
+				printsub("", true, CL_normal);
+			}
+			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+				printsub("당신은 시야내 적에게 감속을 주고 시야를 가리는 안개를 뿌릴 수 있다.            (빙의시 한번만)", true, CL_sion);
+				printsub("", true, CL_normal);
+			}
+			else {
+				printsub("빙의를 하게되면 죠온이나 시온의 범위 권능을 사용할 수 있다.                    (빙의시 한번만)", true, CL_bad);
+				printsub("", true, CL_normal);
+			}
+		}
+		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			if (you.god_value[GT_JOON_AND_SION][0] != 0) {
+				printsub("당신은 빈곤신을 상대에 빙의시키는 필승의 전략을 사용할 수 있다.                         (신앙)", true, CL_joon_and_sion);
+				printsub("", true, CL_normal);
+			}
+			else {
+				printsub("빙의를 하게되면 최흉최악의 전략을 사용할 수 있다.                                       (신앙)", true, CL_bad);
+				printsub("", true, CL_normal);
+			}
+		}
 		break;
 	case GT_BYAKUREN:
 		if(level_ >= 1 && !you.GetPunish(GT_BYAKUREN))
@@ -2776,7 +2857,7 @@ void God_show()
 		{
 
 			bool already_pure = you.god_value[GT_JUNKO][3] != 0;
-			if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
+			if (level_ >= 0)
 			{
 				if (already_pure)
 				{
@@ -2879,7 +2960,7 @@ bool God_pray(const list<item>::iterator it)
 		break;
 	case GT_NONE:
 		break;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 		break;
 	case GT_BYAKUREN:
 		break;
@@ -2966,7 +3047,7 @@ bool god_punish(god_type god)
 		break;
 	case GT_NONE:
 		break;
-	case GT_SHIKIEIKI:
+	case GT_JOON_AND_SION:
 		break;
 	case GT_BYAKUREN:
 		{

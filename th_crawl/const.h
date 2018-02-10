@@ -63,6 +63,9 @@ extern const D3DCOLOR CL_miko;
 extern const D3DCOLOR CL_okina; 
 extern const D3DCOLOR CL_junko;
 extern const D3DCOLOR CL_black_junko;
+extern const D3DCOLOR CL_joon_and_sion;
+extern const D3DCOLOR CL_joon;
+extern const D3DCOLOR CL_sion;
 extern const name_infor string_that;
 extern const name_infor string_something;
 

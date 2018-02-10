@@ -3525,7 +3525,7 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_MOON_STAIR:		
 						case DG_PANDEMONIUM_STAIR:	
 						case DG_HAKUREI_STAIR:
-						case DG_TEMPLE_SHIKIEIKI:
+						case DG_TEMPLE_JOON_AND_SION:
 						case DG_TEMPLE_BYAKUREN:
 						case DG_TEMPLE_KANAKO:
 						case DG_TEMPLE_SUWAKO:

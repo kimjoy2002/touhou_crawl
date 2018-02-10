@@ -600,6 +600,7 @@ void dungeonView();
 void run_spell();
 void shout();
 void auto_pick_onoff(bool auto_);
+void floorMove();
 
 void wiz_mode();
 void save_mode();

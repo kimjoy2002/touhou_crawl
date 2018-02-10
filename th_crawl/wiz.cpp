@@ -710,6 +710,11 @@ void wiz_mode()
 		case 'B':
 			god_punish(you.god);
 			break;
+		case 'e':
+			char temp[100];
+			sprintf_s(temp, 100, "현재좌표: <%d, %d> ", you.position.x, you.position.y);
+			printlog(temp, true, false, false, CL_magic);
+			break;
 		case '?'://도움말
 
 			WaitForSingleObject(mutx, INFINITE);

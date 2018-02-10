@@ -24,6 +24,7 @@
 #include "network.h"
 #include "replay.h"
 #include "mon_infor.h"
+#include "mapsearching.h"
 
 
 
@@ -291,6 +292,7 @@ void charter_selete()
 	}
 	
 	init_state();
+	MapNode::initMapNode();
 	map_list.tutorial = GM_TITLE;
 
 	start_mainmenu();
@@ -508,6 +510,9 @@ void MainLoop()
 			break;
 		case 'S': //체크후 종료
 			saveandcheckexit();
+			break;
+		case 0x07: //전체층 이동
+			floorMove();
 			break;
 		case 0x89: //강제종료
 			nosaveandexit();

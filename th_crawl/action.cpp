@@ -31,6 +31,7 @@
 #include "option_manager.h"
 #include "book.h"
 #include "debuf.h"
+#include "mapsearching.h"
 
 #include <algorithm>
 #include <random>
@@ -1286,14 +1287,43 @@ bool warning(dungeon_tile_type type, bool down)
 
 
 
+void Stair_move_all() {
+
+	switch (dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile)
+	{
+	case DG_DOWN_STAIR:
+	case DG_TEMPLE_STAIR:
+	case DG_MISTY_LAKE_STAIR:
+	case DG_YOUKAI_MOUNTAIN_STAIR:
+	case DG_SCARLET_STAIR:
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
+		Stair_move(true);
+		break;
+	case DG_UP_STAIR:
+	case DG_RETURN_STAIR:
+		Stair_move(false);
+		break;
+	}
+}
 
 
 
 void Stair_move(bool down)
 {
-	switch(dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile)
+	dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
+	switch(env[current_level].getStairKind(you.position.x, you.position.y))
 	{
-	case DG_DOWN_STAIR:
+	case STAIR_KIND_DOWN_BASE:
 		if(!down)
 		{
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
@@ -1348,21 +1378,7 @@ void Stair_move(bool down)
 			printlog("더 이상 내려갈 수 없다.",true,false,false,CL_normal);
 		}
 		break;
-	case DG_TEMPLE_STAIR:		
-	case DG_MISTY_LAKE_STAIR:
-	case DG_YOUKAI_MOUNTAIN_STAIR:
-	case DG_SCARLET_STAIR:					
-	case DG_SCARLET_L_STAIR:
-	case DG_SCARLET_U_STAIR:
-	case DG_BAMBOO_STAIR:
-	case DG_EIENTEI_STAIR:
-	case DG_SUBTERRANEAN_STAIR:
-	case DG_YUKKURI_STAIR:
-	case DG_DEPTH_STAIR:
-	case DG_DREAM_STAIR:
-	case DG_MOON_STAIR:		
-	case DG_PANDEMONIUM_STAIR:	
-	case DG_HAKUREI_STAIR:
+	case STAIR_KIND_DOWN_SPECIAL:
 		if(!down)
 		{
 			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
@@ -1469,7 +1485,7 @@ void Stair_move(bool down)
 			break;
 		}
 		break;
-	case DG_UP_STAIR:
+	case STAIR_KIND_UP_BASE:
 		if(down)
 		{
 			printlog("여기선 내려갈 수 없다.",true,false,false,CL_normal);
@@ -1545,8 +1561,7 @@ void Stair_move(bool down)
 			}
 		}
 		break;
-		
-	case DG_RETURN_STAIR:
+	case STAIR_KIND_UP_SPECIAL:
 		if(down)
 		{
 			printlog("여기선 내려갈 수 없다.",true,false,false,CL_normal);
@@ -3082,4 +3097,151 @@ void auto_pick_onoff(bool auto_)
 		printlog("자동 줍기를 해제했다. (Ctrl + a 키로 다시 활성화 가능)",true,false,false,CL_small_danger);
 		you.auto_pickup = auto_?0:-1;
 	}
+}
+
+
+void floorMove()
+{
+	int current_level_ = current_level;
+	dungeon_level next_ = TEMPLE_LEVEL;
+	printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
+	printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
+	printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
+	printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
+	int key_ = waitkeyinput();
+	switch (key_)
+	{
+	case 'd':
+		next_ = (dungeon_level)0;
+		break;
+	case 'D':
+		next_ = MAX_DUNGEUN_LEVEL;
+		break;
+	case 't':
+	case 'T':
+		next_ = TEMPLE_LEVEL;
+		break;
+	case 'l':
+		next_ = MISTY_LAKE_LEVEL;
+		break;
+	case 'L':
+		next_ = MISTY_LAKE_LAST_LEVEL;
+		break;
+	case 'm':
+		next_ = YOUKAI_MOUNTAIN_LEVEL;
+		break;
+	case 'M':
+		next_ = YOUKAI_MOUNTAIN_LAST_LEVEL;
+		break;
+	case 's':
+		next_ = SCARLET_LEVEL;
+		break;
+	case 'S':
+		next_ = SCARLET_LEVEL_LAST_LEVEL;
+		break;
+	case 'b':
+	case 'B':
+		next_ = SCARLET_LIBRARY_LEVEL;
+		break;
+	case 'u':
+	case 'U':
+		next_ = SCARLET_UNDER_LEVEL;
+		break;
+	case 'a':
+	case 'A':
+		next_ = BAMBOO_LEVEL;
+		break;
+	case 'e':
+	case 'E':
+		next_ = EIENTEI_LEVEL;
+		break;
+	case 'h':
+		next_ = SUBTERRANEAN_LEVEL;
+		break;
+	case 'H':
+		next_ = SUBTERRANEAN_LEVEL_LAST_LEVEL;
+		break;
+	case 'y':
+		next_ = YUKKURI_LEVEL;
+		break;
+	case 'Y':
+		next_ = YUKKURI_LAST_LEVEL;
+		break;
+	case 'p':
+		next_ = DEPTH_LEVEL;
+		break;
+	case 'P':
+		next_ = DEPTH_LAST_LEVEL;
+		break;
+	case 'r':
+	case 'R':
+		next_ = DREAM_LEVEL;
+		break;
+	case 'o':
+	case 'O':
+		next_ = MOON_LEVEL;
+		break;
+	case 'k':
+	case 'K':
+		next_ = PANDEMONIUM_LEVEL;
+		break;
+	case 'z':
+		next_ = HAKUREI_LEVEL;
+		break;
+	case 'Z':
+		next_ = HAKUREI_LAST_LEVEL;
+		break;
+	default:
+		printlog(" 취소", true, false, false, CL_help);
+		return;
+	}
+
+
+	queue<list<coord_def>> stairMap;
+	if (MapNode::searchRoad(current_level, (int)next_, &stairMap)) {
+
+		while (!stairMap.empty()) {
+			list<coord_def> list_ = stairMap.front();
+			enterlog();
+			coord_def next_;
+			int length = 9999;
+			for (auto it = list_.begin(); it != list_.end(); it++)
+			{
+				stack<coord_def> stacks;
+				if ((env[current_level].isExplore(it->x, it->y) ||
+					env[current_level].isMapping(it->x, it->y)
+					)
+					&& env[current_level].isStair(it->x, it->y)
+					&& PathSearch(you.position, *it, stacks, ST_NORMAL))
+				{
+					if (length > stacks.size()) {
+						next_ = (*it);
+						length = stacks.size();
+					}
+				}
+			}
+
+			Long_Move(next_);
+			if (you.position == next_) {
+				switch (env[current_level].getStairKind(you.position.x, you.position.y)) 
+				{
+				case STAIR_KIND_NOT_STAIR:
+					return;
+				case STAIR_KIND_UP_BASE:
+				case STAIR_KIND_UP_SPECIAL:
+					Stair_move(false);
+					break;
+				case STAIR_KIND_DOWN_BASE:
+				case STAIR_KIND_DOWN_SPECIAL:
+					Stair_move(true);
+					break;
+				}
+			}
+			else {
+				return;
+			}
+			stairMap.pop();
+		}
+	}
+
 }

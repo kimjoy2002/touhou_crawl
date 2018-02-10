@@ -123,6 +123,15 @@ public:
 };
 
 
+enum stair_kind 
+{
+	STAIR_KIND_NOT_STAIR,
+	STAIR_KIND_UP_BASE,
+	STAIR_KIND_UP_SPECIAL,
+	STAIR_KIND_DOWN_BASE,
+	STAIR_KIND_DOWN_SPECIAL
+};
+
 
 
 class environment
@@ -223,6 +232,9 @@ public:
 		return dgtile[x_][y_].isCloseDoor();
 	}
 	int isStair(int x_, int y_); //실제 계단번지수에 +1을해서 리턴함(※올라가는 계단은 마이너스곱함)
+
+	stair_kind getStairKind(int x_, int y_);
+
 
 	bool magicmapping(int x_, int y_);
 	bool OpenDoor(int x_,int y_)

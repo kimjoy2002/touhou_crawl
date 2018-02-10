@@ -444,7 +444,36 @@ int environment::isStair(int x_, int y_)
 	}
 	return 0;
 }
-
+stair_kind environment::getStairKind(int x_, int y_)
+{
+	switch (dungeon_tile_type type = dgtile[x_][y_].tile)
+	{
+	case DG_DOWN_STAIR:
+		return STAIR_KIND_DOWN_BASE;
+	case DG_TEMPLE_STAIR:
+	case DG_MISTY_LAKE_STAIR:
+	case DG_YOUKAI_MOUNTAIN_STAIR:
+	case DG_SCARLET_STAIR:
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
+		return STAIR_KIND_DOWN_SPECIAL;
+	case DG_UP_STAIR:
+		return STAIR_KIND_UP_BASE;
+	case DG_RETURN_STAIR:
+		return STAIR_KIND_UP_SPECIAL;
+	default:
+		return STAIR_KIND_NOT_STAIR;
+	}
+}
 int environment::getAutoTileNum(unsigned char bit)
 {
 	switch(bit)

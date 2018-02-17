@@ -1134,7 +1134,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 	if (order && order->GetExhausted())
 		return false;
 	if (env[current_level].isInSight(target))
-		printlog("성역이 펼쳐졌다! ", false, false, false, CL_warning);
+		printlog("성역이 펼쳐졌다! ", true, false, false, CL_warning);
 	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
 
 	if (order && !order->isplayer())

@@ -397,6 +397,28 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	if (you.god == GT_JOON_AND_SION && you.god_value[GT_JOON_AND_SION][0] != 0 &&
+		you.god_value[GT_JOON_AND_SION][1] >= 0)
+	{
+		you.god_value[GT_JOON_AND_SION][1]--;
+		if (you.god_value[GT_JOON_AND_SION][1] <= 0)
+		{
+			printlog("´ç½ÅÀÇ ºùÀÇ°¡ ³¡³µ´Ù. ", false, false, false, CL_joon_and_sion);
+			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+				if (you.power >= 300)
+					you.PowUpDown(-(you.power - 300));
+			}
+			you.god_value[GT_JOON_AND_SION][0] = 0;
+			you.god_value[GT_JOON_AND_SION][1] = -1;
+			you.gift_count = GetGodGiftTime(god);
+			//you.Ability(SKL_JOON_AND_SION_1, true, false);
+			you.Ability(SKL_JOON_AND_SION_2, true, true);
+			you.Ability(SKL_JOON_AND_SION_3, true, true);
+			you.Ability(SKL_JOON_AND_SION_4, true, true);
+			you.Ability(SKL_JOON_AND_SION_OFF, true, true);
+			SetInter(IT_STAT);
+		}
+	}
 	if(alchemy_time)
 	{
 

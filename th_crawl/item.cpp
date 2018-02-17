@@ -44,7 +44,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 item::item()
 :name("없음",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
-can_throw(false), drop(false), throw_item(false), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
+can_throw(false), drop(false), throw_item(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 atifact_vector()
 {
 
@@ -86,6 +86,7 @@ item::item(const coord_def &c, const item_infor &t)
 	value6 = t.value6;
 	value7 = t.value7;
 	value8 = t.value8;
+	waste = 10000;
 
 }
 void item_infor::SaveDatas(FILE *fp)
@@ -99,7 +100,7 @@ void item_infor::SaveDatas(FILE *fp)
 	SaveData<int>(fp, value);
 	SaveData<bool>(fp, is_pile);
 	SaveData<int>(fp, num);	
-	SaveData<bool>(fp, can_throw);	
+	SaveData<bool>(fp, can_throw);
 	SaveData<int>(fp, value0);
 	SaveData<int>(fp, value1);
 	SaveData<int>(fp, value2);
@@ -126,7 +127,7 @@ void item_infor::LoadDatas(FILE *fp)
 	LoadData<int>(fp, value);
 	LoadData<bool>(fp, is_pile);
 	LoadData<int>(fp, num);	
-	LoadData<bool>(fp, can_throw);	
+	LoadData<bool>(fp, can_throw);
 	LoadData<int>(fp, value0);
 	LoadData<int>(fp, value1);
 	LoadData<int>(fp, value2);
@@ -164,6 +165,8 @@ void item::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, can_throw);
 	SaveData<bool>(fp, drop);
 	SaveData<bool>(fp, throw_item);
+	SaveData<int>(fp, waste);
+	SaveData<int>(fp, delay_turn);
 	SaveData<int>(fp, value0);
 	SaveData<int>(fp, value1);
 	SaveData<int>(fp, value2);
@@ -210,6 +213,8 @@ void item::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, can_throw);
 	LoadData<bool>(fp, drop);
 	LoadData<bool>(fp, throw_item);
+	LoadData<int>(fp, delay_turn);
+	LoadData<int>(fp, waste);
 	LoadData<int>(fp, value0);
 	LoadData<int>(fp, value1);
 	LoadData<int>(fp, value2);
@@ -706,6 +711,21 @@ int item::GetValue(int i)
 		return 0;
 	}
 }
+void item::TurnSave()
+{
+	delay_turn = you.turn;
+}
+void item::TurnLoad()
+{ //나중에 주인공 근처로 옮겨오는것도 생각한다.
+	int temp_turn = you.turn - delay_turn;
+	if (now_find)
+	{
+		if (you.god == GT_JOON_AND_SION)
+		{
+			waste -= (you.god_value[GT_JOON_AND_SION][0] == 2 ? 100 : 10) * temp_turn;
+		}
+	}
+}
 bool item::isweapon()
 {
 	return (type >= ITM_WEAPON_FIRST && type < ITM_WEAPON_LAST);
@@ -1138,8 +1158,20 @@ int item::action(int delay_)
 		env[current_level].MakeShadow(prev_position,image,SWT_ITEM,GetName());
 		prev_sight = false;
 	}
-
-
+	if (now_find)
+	{
+		if (you.god == GT_JOON_AND_SION)
+		{
+			if (type == ITM_POTION || type == ITM_SCROLL) {
+				waste -= you.god_value[GT_JOON_AND_SION][0] == 2 ? 100 : 10; //기본 1000턴후에 사라짐
+				//시온일땐 100턴후 사라지도록?
+				if (waste <= 0) {
+					env[current_level].DeleteItem(this);
+					return 0;
+				}
+			}
+		}
+	}
 	if(type == ITM_FOOD && value1 == 0)
 	{
 		value3--;

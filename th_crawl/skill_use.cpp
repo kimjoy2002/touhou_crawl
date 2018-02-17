@@ -38,6 +38,7 @@
 
 extern HANDLE mutx;
 extern bool widesearch; //X커맨드용
+extern int map_effect;
 
 bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 {
@@ -666,7 +667,7 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 					{
 						if((*it).type == ITM_POTION)
 						{	
-							drinkpotion(PT_ALCOHOL);	
+							drinkpotion(PT_ALCOHOL, false);	
 							you.DeleteItem(it,1);
 							return true;	
 
@@ -3150,11 +3151,264 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	you.SetPureTurn(30, -1);
 
 
-	return false;
+	return true;
 }
 
 
+bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target)
+{
+	int god_ = 0;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("어느 신을 빙의할거지?", true, false, false, CL_help);
+		printlog("a - 요리가미 죠온: 빙의시 즉시 파워를 가득 채워준다. 다만 해제시엔 낭비된다.", true, false, false, CL_joon);
+		printlog("                   또한 소모품을 사용하면 무조건 2~3개씩 낭비한다.", true, false, false, CL_joon);
+		printlog("b - 요리가미 시온: 빙의시 즉시 체력과 영력을 회복한다. 버린 소모품이 사라짐.", true, false, false, CL_sion);
+		printlog("                   땅에 떨어진 소모품 고갈속도증가. 파워패널티를 받지않는다.", true, false, false, CL_sion);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			god_ = 1;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			god_ = 2;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+	int level_ = pietyLevel(you.piety);
+	if (god_ == 1) {
+		map_effect = 2;
+		Sleep(500);
+		map_effect = 0;
 
+		switch (randA(3)) {
+		case 0:
+			printlog("죠온: 송두리채 빼앗아라!", true, false, false, CL_joon);
+			break;
+		case 1:
+			printlog("죠온: 값 나가는건 모조리 훔쳐!", true, false, false, CL_joon);
+			break;
+		case 2:
+			printlog("죠온: 힘을 줄테니 모두 나에게 바치는거야!", true, false, false, CL_joon);
+			break;
+		case 3:
+			printlog("죠온: 수금 시간이야!", true, false, false, CL_joon);
+			break;
+		}
+
+		you.god_value[GT_JOON_AND_SION][0] = 1;
+		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
+		you.Ability(SKL_JOON_AND_SION_1, true, true);
+		you.Ability(SKL_JOON_AND_SION_OFF, true, false);
+		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			you.Ability(SKL_JOON_AND_SION_2, true, false);
+		}
+		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			you.Ability(SKL_JOON_AND_SION_4, true, false);
+		}
+		you.PowUpDown(500);
+	}
+	else if (god_ == 2) {
+		map_effect = 3;
+		Sleep(500);
+		map_effect = 0;
+		switch (randA(3)) {
+		case 0:
+			printlog("시온: 자, 이제 베풀어주지 않을래?", true, false, false, CL_sion);
+			break;
+		case 1:
+			printlog("시온: 가난은 더 이상 싫어!", true, false, false, CL_sion);
+			break;
+		case 2:
+			printlog("시온: 최흉최악은 나 혼자로도 충분해!", true, false, false, CL_sion);
+			break;
+		case 3:
+			printlog("시온: 모두가 평등하게 불행한 시대가 올거야", true, false, false, CL_sion);
+			break;
+		}
+		you.god_value[GT_JOON_AND_SION][0] = 2;
+		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
+		you.Ability(SKL_JOON_AND_SION_1, true, true);
+		you.Ability(SKL_JOON_AND_SION_OFF, true, false);
+		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			you.Ability(SKL_JOON_AND_SION_3, true, false);
+		}
+		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
+		{
+			you.Ability(SKL_JOON_AND_SION_4, true, false);
+		}
+
+		int bonus_ = 70 + power/2;
+		int heal_ = rand_int(10, 20) + order->GetMaxHp()*rand_float(0.15f, 0.25f);
+		heal_ = heal_ * bonus_ / 100;
+		order->HpUpDown(heal_ , DR_NONE);
+
+		heal_ = rand_int(5, 10) + order->GetMaxHp()*rand_float(0.2f, 0.4f);
+		heal_ = heal_ * bonus_ / 100;
+		you.MpUpDown(heal_);
+	}
+
+	return true;
+}
+
+bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target)
+{
+	bool ok_ = false;
+	int enter_ = 0;
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && !it->isUserAlly() && env[current_level].isInSight(it->position))
+		{
+			if (!ok_) {
+				map_effect = 2;
+				Sleep(500);
+				map_effect = 0;
+				printlog("화려한 불빛과 폭죽이 주변의 적들에게 몰아친다! ", true, false, false, CL_joon);
+			} 
+
+			it->SetConfuse(rand_int(5,10)+randA(power/20), true);
+			int damage_ = (20 + (you.level * 2))*(power+400.0f)/400;
+
+
+			attack_infor temp_att(randC(5, damage_/5), damage_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("폭죽", true));
+			it->damage(temp_att, true);
+			enter_++;
+			if (enter_ == 1)
+			{
+				enterlog();
+				enter_ = 0;
+			}
+			ok_ = true;
+		}
+	}
+	if (ok_)
+	{
+		you.Ability(SKL_JOON_AND_SION_2, true, true);
+		return true;
+	}
+	else
+	{
+		printlog("시야내에 적이 없다.", true, false, false, CL_normal);
+		return false;
+	}
+	return false;
+}
+bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target)
+{
+	map_effect = 3;
+	Sleep(500);
+	map_effect = 0;
+	printlog("거대한 불운의 소용돌이가 휘몰아친다! ", true, false, false, CL_sion);
+	int enter_ = 0;
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && !it->isUserAlly() && env[current_level].isInSight(it->position))
+		{
+			it->SetSlow(rand_int(20, 40) + randA(power / 10));
+			enter_++;
+			if (enter_ == 3)
+			{
+				enterlog();
+				enter_ = 0;
+			}
+		}
+	}
+	random_extraction<textures*> rand_t;
+	rand_t.push(img_fog_sion[0], 3);
+	rand_t.push(img_fog_sion[1], 1);
+	rand_t.push(img_fog_sion[2], 1);
+	MakeCloud(you.position, rand_t, SMT_SION, rand_int(20, 25), rand_int(50, 70), 10, 0, 5, &you);
+	you.Ability(SKL_JOON_AND_SION_3, true, true);
+	return true;
+}
+bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor("시온", true));
+
+		coord_def c_ = throwtanmac(44, beam, temp_infor, NULL);
+		unit* hit_mon = env[current_level].isMonsterPos(c_.x, c_.y, order);
+		if (hit_mon && !hit_mon->isplayer())
+		{
+			monster* mon_ = (monster*)hit_mon;
+			if (mon_->flag & M_FLAG_INANIMATE)
+			{
+				printarray(true, false, false, CL_sion, 3, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), "무생물이기에 빙의할 수 없다.");
+				return true;
+			}
+			mon_->level = 1;
+			for (int i = 0; i<3; i++)
+			{
+				if (mondata[mon_->id].atk[i])
+				{
+					mon_->atk[i] = 2;
+				}
+			}
+			mon_->ac = 0;
+			mon_->ev = 5;
+			mon_->max_hp = mon_->max_hp / 2;
+			if (mon_->max_hp < mon_->hp)
+				mon_->hp = mon_->max_hp;
+			for (auto it = mon_->spell_lists.begin(); it != mon_->spell_lists.end(); it++)
+			{
+				it->percent = it->percent / 5;
+			}
+
+			if (monster* mon_ = BaseSummon(MON_SION, 100, true, false, 2, hit_mon, hit_mon->position, SKD_OTHER, -1))
+			{
+				mon_->s_ally = -1;
+				mon_->flag |= M_FLAG_ALLY;
+				mon_->SetInvincibility(-1, false);
+			}
+
+			if (hit_mon->isYourShight())
+			{
+				printarray(true, false, false, CL_sion, 2, hit_mon->GetName()->name.c_str(), "에 빈곤신이 빙의하였다!");
+			}
+			hit_mon->AttackedTarget(order);
+		}
+		if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+			//빙의된 신이 시온일때는 죠온으로 바뀐다.
+			you.Ability(SKL_JOON_AND_SION_3, true, true);
+			you.Ability(SKL_JOON_AND_SION_2, true, false);
+			you.god_value[GT_JOON_AND_SION][0] = 1;
+		}
+		you.Ability(SKL_JOON_AND_SION_4, true, true);
+		return true;
+	}
+	return false;
+}
+bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def target)
+{
+	printlog("당신의 빙의가 끝났다. ", false, false, false, CL_joon_and_sion);
+	if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+		if (you.power >= 300)
+			you.PowUpDown(-(you.power - 300));
+	}
+	you.god_value[GT_JOON_AND_SION][0] = 0;
+	you.god_value[GT_JOON_AND_SION][1] = -1;
+	you.gift_count = GetGodGiftTime(you.god);
+	//you.Ability(SKL_JOON_AND_SION_1, true, false);
+	you.Ability(SKL_JOON_AND_SION_2, true, true);
+	you.Ability(SKL_JOON_AND_SION_3, true, true);
+	you.Ability(SKL_JOON_AND_SION_4, true, true);
+	you.Ability(SKL_JOON_AND_SION_OFF, true, true);
+	return true;
+}
 
 
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
@@ -3455,6 +3709,21 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_JUNKO_4:
 		return skill_junko_4(power, short_, &you, target);
+		break;
+	case SKL_JOON_AND_SION_1:
+		return skill_joon_and_sion_1(power, short_, &you, target);
+		break;
+	case SKL_JOON_AND_SION_2:
+		return skill_joon_and_sion_2(power, short_, &you, target);
+		break;
+	case SKL_JOON_AND_SION_3:
+		return skill_joon_and_sion_3(power, short_, &you, target);
+		break;
+	case SKL_JOON_AND_SION_4:
+		return skill_joon_and_sion_4(power, short_, &you, target);
+		break;
+	case SKL_JOON_AND_SION_OFF:
+		return skill_joon_and_sion_off(power, short_, &you, target);
 		break;
 	}
 	return 0;

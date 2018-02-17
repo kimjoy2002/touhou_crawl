@@ -922,6 +922,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
 	case ATT_THROW_NONE_MASSAGE:
+	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
 	case ATT_BLOOD:
@@ -1025,6 +1026,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_WEAK_POISON:
 		case ATT_THROW_MIDDLE_POISON:
 		case ATT_THROW_STRONG_POISON:
+		case ATT_THROW_NONE_DAMAGE:
 		default:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다. ");
@@ -1216,6 +1218,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_RUSH:
 	case ATT_WALL:
 	case ATT_THROW_NONE_MASSAGE:
+	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 		break;
 	}
@@ -1254,6 +1257,24 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		back_stab = 0; //75%의 확률로 2레벨 암습은 실패
 	if(back_stab == 1 && randA(9))
 		back_stab = 0; //90% 1레벨 암습은 실패
+
+	bool player_joon_punch_ = false;
+
+	if (/*a.type < ATT_THROW_NORMAL &&*/ a.order && a.order->isplayer() && you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION)
+		&& you.god_value[GT_JOON_AND_SION][0] == 1 && pietyLevel(you.piety) >= 2 &&
+		you.power >= 10 )
+	{
+		//근접만 이었는데 수정함
+		player_joon_punch_ = true;
+	}
+
+	if (player_joon_punch_)
+	{
+		//죠온 데미지 부스트 1.3~1.9배 (신앙심비례)
+		float multi_= rand_float(1.3f, 1.3f + 0.1f*pietyLevel(you.piety));
+		a.damage *= multi_;
+		a.max_damage *= multi_;
+	}
 
 
 
@@ -1295,6 +1316,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	if(a.order)
 		name_ = (*a.order->GetName());
 	int percent_ = min(100,max(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
+
 
 
 	if(wiz_list.wizard_mode == 1)
@@ -1414,6 +1436,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
+			}
+			if (player_joon_punch_)
+			{
+				you.PowUpDown(-rand_int(1, 10), true);
+				createGold(position, rand_int(1, 2));
 			}
 			if(hp<=0)
 			{

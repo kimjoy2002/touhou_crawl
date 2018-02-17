@@ -160,7 +160,7 @@ bool chargingFinish(amulet_type kind, int value)
 }
 
 bool skill_soul_shot(int power, unit* order, coord_def target);
-bool recharging_scroll(bool pre_iden_, bool ablity_);
+bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target);
 bool skill_summon_occult_long(int power, bool short_, unit* order, coord_def target);
 bool skill_summon_occult_dish(int pow, bool short_, unit* order, coord_def target);
@@ -197,7 +197,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 		}
 		break;
 	case AMT_SPIRIT:
-		return recharging_scroll(true, true);
+		return recharging_scroll(true, true, false);
 		break;
 	case AMT_GRAZE:
 		you.SetSuperGraze(rand_int(10, 15));

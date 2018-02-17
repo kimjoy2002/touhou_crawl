@@ -1494,6 +1494,23 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 				DeleteProperty(TPT_PURE_LIFE);
 			}
 		}
+		else if (you.god == GT_JOON_AND_SION
+			&& you.god_value[GT_JOON_AND_SION][0] == 2
+			&& pietyLevel(you.piety) >= 4
+			&& !you.GetPunish(GT_JOON_AND_SION)
+			&& sionResurrection())
+		{
+			deadlog();
+			MoreWait();
+			resurectionlog("시온");
+			printlog("시온이 당신의 소모품을 대가로 당신을 부활시켰다!", true, false, false, CL_sion);
+			random_extraction<textures*> rand_t;
+			rand_t.push(img_fog_sion[0], 3);
+			rand_t.push(img_fog_sion[1], 1);
+			rand_t.push(img_fog_sion[2], 1);
+			MakeCloud(you.position, rand_t, SMT_SION, 9, rand_int(10, 25), 3, 0, 4, &you);
+			hp = max_hp / 10;
+		}
 		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
@@ -2360,9 +2377,9 @@ bool players::SetPoison(int poison_, int max_, bool strong_)
 		poison_/=3;
 
 	if(!s_poison)
-		printlog("당신은 독에 걸렸다.",false,false,false,CL_small_danger);
+		printlog("당신은 독에 걸렸다. ",false,false,false,CL_small_danger);
 	else
-		printlog("당신의 독은 심해졌다.",false,false,false,CL_small_danger);
+		printlog("당신의 독은 심해졌다. ",false,false,false,CL_small_danger);
 
 	s_poison += poison_;
 	if(s_poison>150)
@@ -2378,12 +2395,12 @@ bool players::SetTele(int tele_)
 		return false;
 	if(!s_tele)
 	{
-		printlog("당신은 공간의 불안정함을 느꼈다.",false,false,false,CL_white_blue);
+		printlog("당신은 공간의 불안정함을 느꼈다. ",false,false,false,CL_white_blue);
 		s_tele = tele_;
 	}
 	else
 	{
-		printlog("당신 주위의 공간은 안정되었다.",false,false,false,CL_normal);
+		printlog("당신 주위의 공간은 안정되었다. ",false,false,false,CL_normal);
 		s_tele = 0;
 	}
 	return true;
@@ -2394,12 +2411,12 @@ bool players::SetMight(int might_)
 		return false;
 	if(!s_might)
 	{
-		printlog("당신은 강력해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 강력해졌다. ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_STR);
 	}
 	else
 	{
-		printlog("당신의 더욱 더 강력해졌다.",false,false,false,CL_white_blue);
+		printlog("당신의 더욱 더 강력해졌다. ",false,false,false,CL_white_blue);
 
 	}
 	s_might += might_;
@@ -2413,12 +2430,12 @@ bool players::SetClever(int clever_)
 		return false;
 	if(!s_clever)
 	{
-		printlog("당신은 똑똑해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 똑똑해졌다. ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_INT);
 	}
 	else
 	{
-		printlog("당신은 더욱 더 똑똑해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 더욱 더 똑똑해졌다. ",false,false,false,CL_white_blue);
 
 	}
 	s_clever += clever_;
@@ -2432,13 +2449,13 @@ bool players::SetAgility(int agility_)
 		return false;
 	if(!s_agility)
 	{
-		printlog("당신은 민첩해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 민첩해졌다. ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_DEX);
 		EvUpDown(0,5);
 	}
 	else
 	{
-		printlog("당신의 더욱 더 민첩해졌다.",false,false,false,CL_white_blue);
+		printlog("당신의 더욱 더 민첩해졌다. ",false,false,false,CL_white_blue);
 
 	}
 	s_agility += agility_;
@@ -2451,10 +2468,10 @@ bool players::SetHaste(int haste_)
 	if(!haste_)
 		return false;
 	if(!s_haste)
-		printlog("당신은 빨라졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 빨라졌다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 가속은 좀 더 길어졌다.",false,false,false,CL_white_blue);
+		printlog("당신의 가속은 좀 더 길어졌다. ",false,false,false,CL_white_blue);
 	}
 	s_haste += haste_;
 	power_decre = 0;
@@ -2468,10 +2485,10 @@ bool players::SetPureHaste(int haste_)
 	if (!haste_)
 		return false;
 	if (!s_pure_haste)
-		printlog("당신은 살의에 의해 빨라졌다.", false, false, false, CL_white_blue);
+		printlog("당신은 살의에 의해 빨라졌다. ", false, false, false, CL_white_blue);
 	else
 	{
-		printlog("당신의 살의는 좀 더 길어졌다.", false, false, false, CL_white_blue);
+		printlog("당신의 살의는 좀 더 길어졌다. ", false, false, false, CL_white_blue);
 	}
 	s_pure_haste += haste_;
 	power_decre = 0;
@@ -2490,10 +2507,10 @@ bool players::SetConfuse(int confuse_, bool strong_)
 
 
 	if(!s_confuse)
-		printlog("당신은 혼란스러워졌다.",false,false,false,CL_small_danger);
+		printlog("당신은 혼란스러워졌다. ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 더 혼란스러워졌다.",false,false,false,CL_small_danger);
+		printlog("당신의 더욱 더 혼란스러워졌다. ",false,false,false,CL_small_danger);
 		confuse_ /=2;
 	}
 	s_confuse += confuse_;
@@ -2506,10 +2523,10 @@ bool players::SetSlow(int slow_)
 	if(!slow_)
 		return false;
 	if(!s_slow)
-		printlog("당신은 느려졌다.",false,false,false,CL_small_danger);
+		printlog("당신은 느려졌다. ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 더 느려졌다.",false,false,false,CL_small_danger);
+		printlog("당신의 더욱 더 느려졌다. ",false,false,false,CL_small_danger);
 		slow_ /=2;
 	}
 	s_slow += slow_;
@@ -2525,10 +2542,10 @@ bool players::SetFrozen(int frozen_)
 		return false;
 		
 	if(!s_frozen)
-		printlog("당신은 몸이 얼어붙어 움직이기 힘들어졌다.",false,false,false,CL_small_danger);
+		printlog("당신은 몸이 얼어붙어 움직이기 힘들어졌다. ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 몸이 얼어붙어 움직이기 힘들어졌다.",false,false,false,CL_small_danger);
+		printlog("당신의 더욱 몸이 얼어붙어 움직이기 힘들어졌다. ",false,false,false,CL_small_danger);
 		frozen_ /=2;
 	}
 	s_frozen += frozen_;
@@ -2541,10 +2558,10 @@ bool players::SetElec(int elec_)
 	if(!elec_)
 		return false;
 	if(!s_elec)
-		printlog("당신은 전기를 방출하기 시작했다.",false,false,false,CL_white_blue);
+		printlog("당신은 전기를 방출하기 시작했다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오랫동안 전기를 방출한다.",false,false,false,CL_white_blue);
+		printlog("당신은 더 오랫동안 전기를 방출한다. ",false,false,false,CL_white_blue);
 	}
 	s_elec += elec_;
 	if(s_elec>40)
@@ -2556,7 +2573,7 @@ bool players::SetParalyse(int paralyse_)
 	if(!paralyse_ || s_paralyse)
 		return false;
 
-	printlog("당신은 마비되었다.",false,false,false,CL_small_danger);
+	printlog("당신은 마비되었다. ",false,false,false,CL_small_danger);
 
 	s_paralyse += paralyse_;
 	if(s_paralyse>100)
@@ -2568,10 +2585,10 @@ bool players::SetLevitation(int levitation_)
 	if(!levitation_)
 		return false;
 	if(!s_levitation)
-		printlog("당신은 공중에 뜨기 시작했다.",false,false,false,CL_white_blue);
+		printlog("당신은 공중에 뜨기 시작했다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오랫동안 공중에 뜨게 되었다.",false,false,false,CL_white_blue);
+		printlog("당신은 더 오랫동안 공중에 뜨게 되었다. ",false,false,false,CL_white_blue);
 	}
 	s_levitation += levitation_;
 	if(s_levitation>100)
@@ -2583,10 +2600,10 @@ bool players::SetGlow(int glow_)
 	if(!glow_)
 		return false;
 	if(!s_glow)
-		printlog("당신은 빛을 내기 시작했다.",false,false,false,CL_small_danger);
+		printlog("당신은 빛을 내기 시작했다. ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신은 더 강한 빛을 내고 있다.",false,false,false,CL_small_danger);
+		printlog("당신은 더 강한 빛을 내고 있다. ",false,false,false,CL_small_danger);
 		glow_ /=2;
 	}
 	s_glow += glow_;
@@ -2599,10 +2616,10 @@ bool players::SetGraze(int graze_)
 	if(!graze_)
 		return false;
 	if(!s_graze)
-		printlog("당신의 탄막을 피하는 감각이 좋아졌다.",false,false,false,CL_white_blue);
+		printlog("당신의 탄막을 피하는 감각이 좋아졌다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 탄막을 피하는 감각이 지속된다.",false,false,false,CL_white_blue);
+		printlog("당신의 탄막을 피하는 감각이 지속된다. ",false,false,false,CL_white_blue);
 	}
 	if(graze_>0)
 		s_graze += graze_;
@@ -2617,9 +2634,9 @@ bool players::SetSilence(int silence_, int silence_range_)
 	if(!silence_)
 		return false;
 	if(!s_silence)
-		printlog("당신은 주변의 소리를 지웠다.",false,false,false,CL_white_blue);
+		printlog("당신은 주변의 소리를 지웠다. ",false,false,false,CL_white_blue);
 	else
-		printlog("당신은 주변의 소리를 지웠다.",false,false,false,CL_white_blue);
+		printlog("당신은 주변의 소리를 지웠다. ",false,false,false,CL_white_blue);
 	if(s_silence)
 		env[current_level].MakeSilence(position, s_silence_range, false);
 	s_silence_range = silence_range_;
@@ -2634,10 +2651,10 @@ bool players::SetSick(int sick_)
 	if(!sick_)
 		return false;
 	if(!s_sick)
-		printlog("당신은 아파졌다.",false,false,false,CL_small_danger);
+		printlog("당신은 아파졌다. ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신은 더욱 아파졌다.",false,false,false,CL_small_danger);
+		printlog("당신은 더욱 아파졌다. ",false,false,false,CL_small_danger);
 	}
 	s_sick += sick_;
 	if(s_sick>200)
@@ -2649,10 +2666,10 @@ bool players::SetVeiling(int veiling_, int value_)
 	if(!veiling_)
 		return false;
 	if(!s_veiling)
-		printlog("당신 주변에 바람이 휘감긴다.",false,false,false,CL_white_blue);
+		printlog("당신 주변에 바람이 휘감긴다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신 주변에 휘감긴 바람이 좀 더 오래간다.",false,false,false,CL_white_blue);
+		printlog("당신 주변에 휘감긴 바람이 좀 더 오래간다. ",false,false,false,CL_white_blue);
 	}
 	s_veiling += veiling_;
 	s_value_veiling = value_;
@@ -2665,10 +2682,10 @@ bool players::SetInvisible(int invisible_)
 	if(!invisible_)
 		return false;
 	if(!s_invisible)
-		printlog("당신은 투명해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 투명해졌다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오래 투명해졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 더 오래 투명해졌다. ",false,false,false,CL_white_blue);
 	}
 	s_invisible += invisible_;
 	power_decre = 0;
@@ -2725,25 +2742,25 @@ bool players::SetSwift(int swift_)
 
 	if (!s_swift) {
 		if (swift_>0) {
-			printlog("당신은 다리가 빨라졌다.", false, false, false, CL_white_blue);
+			printlog("당신은 다리가 빨라졌다. " , false, false, false, CL_white_blue);
 		}
 		else {
-			printlog("당신은 다리가 느려졌다.", false, false, false, CL_small_danger);
+			printlog("당신은 다리가 느려졌다. ", false, false, false, CL_small_danger);
 		}
 	}
 	else
 	{
 		if (swift_ > 0) {
 			if(s_swift > 0)
-				printlog("당신은 더 오래 달릴 수 있다.", false, false, false, CL_white_blue);
+				printlog("당신은 더 오래 달릴 수 있다. ", false, false, false, CL_white_blue);
 			else 
-				printlog("당신은 느린 걸음을 고쳐세웠다.", false, false, false, CL_white_blue);
+				printlog("당신은 느린 걸음을 고쳐세웠다. ", false, false, false, CL_white_blue);
 		}
 		else {
 			if (s_swift > 0)
-				printlog("당신은 가볍던 발이 무거워진 것을 느꼈다.", false, false, false, CL_small_danger);
+				printlog("당신은 가볍던 발이 무거워진 것을 느꼈다. ", false, false, false, CL_small_danger);
 			else
-				printlog("당신은 다리가 더욱 느려졌다.", false, false, false, CL_small_danger);
+				printlog("당신은 다리가 더욱 느려졌다. ", false, false, false, CL_small_danger);
 		}
 	}
 	s_swift += swift_;
@@ -2768,10 +2785,10 @@ bool players::SetSuperMan(int superman_)
 	if(!superman_)
 		return false;
 	if(!s_superman)
-		printlog("당신은 다리가 엄청나게 빨라졌다.",false,false,false,CL_white_blue);
+		printlog("당신은 다리가 엄청나게 빨라졌다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오래 달릴 수 있다.",false,false,false,CL_white_blue);
+		printlog("당신은 더 오래 달릴 수 있다. ",false,false,false,CL_white_blue);
 	}
 	s_superman += superman_;
 	s_swift = 0;
@@ -2798,10 +2815,10 @@ bool players::SetWind(int s_wind_)
 	if(!s_wind_)
 		return false;
 	if(!s_wind)
-		printlog("당신의 주변에 바람이 휘감겼다.",false,false,false,CL_white_blue);
+		printlog("당신의 주변에 바람이 휘감겼다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 주변에 바람이 더 휘감겼다.",false,false,false,CL_white_blue);
+		printlog("당신의 주변에 바람이 더 휘감겼다. ",false,false,false,CL_white_blue);
 	}
 	s_wind += s_wind_;
 	if(s_wind>200)
@@ -2813,10 +2830,10 @@ bool players::SetKnifeCollect(int s_knife_collect_)
 	if(!s_knife_collect_)
 		return false;
 	if(!s_knife_collect)
-		printlog("당신은 자동으로 탄막을 회수하기 시작한다.",false,false,false,CL_white_blue);
+		printlog("당신은 자동으로 탄막을 회수하기 시작한다. ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("탄막을 회수하는 시간이 길어졌다.",false,false,false,CL_white_blue);
+		printlog("탄막을 회수하는 시간이 길어졌다. ",false,false,false,CL_white_blue);
 	}
 	s_knife_collect += s_knife_collect_;
 	if(s_knife_collect>100)
@@ -2829,10 +2846,10 @@ bool players::SetDrunken(int s_drunken_)
 	if(!s_drunken_)
 		return false;
 	if(!s_drunken)
-		printlog("당신은 취했다.",false,false,false,CL_warning);
+		printlog("당신은 취했다. ",false,false,false,CL_warning);
 	else
 	{
-		printlog("당신은 더욱 더 취했다.",false,false,false,CL_warning);
+		printlog("당신은 더욱 더 취했다. ",false,false,false,CL_warning);
 	}
 	s_drunken += s_drunken_;
 	if(s_drunken>100)
@@ -2847,10 +2864,10 @@ bool players::SetLunatic(int s_lunatic_)
 	if(confuse_resist>0)
 		return false;
 	if(!s_lunatic)
-		printlog("당신은 광기에 휩싸였다.",false,false,false,CL_danger);
+		printlog("당신은 광기에 휩싸였다. ",false,false,false,CL_danger);
 	else
 	{
-		//printlog("당신은 더욱 더 미쳤다.",false,false,false,CL_warning);
+		//printlog("당신은 더욱 더 미쳤다. ",false,false,false,CL_warning);
 	}
 	s_lunatic = s_lunatic_;
 	if(s_lunatic>20)
@@ -2894,7 +2911,7 @@ bool players::SetTimeStep(int timestep_)
 }
 bool players::SetMirror(int mirror_)
 {
-	printlog("당신은 모든 데미지를 반사한다.",false,false,false,CL_white_blue);
+	printlog("당신은 모든 데미지를 반사한다. ",false,false,false,CL_white_blue);
 	s_mirror = mirror_;
 	return true;
 
@@ -2902,7 +2919,7 @@ bool players::SetMirror(int mirror_)
 bool players::SetParadox(int s_paradox_)
 {
 	if(s_paradox_)
-		printlog("당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다.",true,false,false,CL_white_blue);
+		printlog("당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다. ",true,false,false,CL_white_blue);
 	s_paradox = s_paradox_;
 	return true;
 
@@ -2914,11 +2931,11 @@ bool players::SetTransPanalty(int s_trans_panalty_)
 		return false;
 
 	if(s_trans_panalty_<3)
-		printlog("약간의 시공간 부작용을 받았다.",true,false,false,CL_bad);
+		printlog("약간의 시공간 부작용을 받았다. ",true,false,false,CL_bad);
 	else if(s_trans_panalty_<5)
-		printlog("상당한 시공간 부작용을 받았다.",true,false,false,CL_normal);
+		printlog("상당한 시공간 부작용을 받았다. ",true,false,false,CL_normal);
 	else
-		printlog("어마어마한 시공간 부작용을 받았다.",true,false,false,CL_small_danger);
+		printlog("어마어마한 시공간 부작용을 받았다. ",true,false,false,CL_small_danger);
 	s_trans_panalty += s_trans_panalty_;
 	return true;
 }
@@ -2927,7 +2944,7 @@ bool players::SetTheWorld(int s_the_world_)
 	if(!s_the_world_)
 		return false;
 	if(!s_the_world)
-		printlog("더 월드!",false,false,false,CL_white_blue);
+		printlog("더 월드! ",false,false,false,CL_white_blue);
 	else
 	{
 	}
@@ -3185,6 +3202,7 @@ bool players::Teleport()
 			return true;
 		}
 	}
+	return false;
 }
 bool players::Blink(int time_)
 {
@@ -3709,9 +3727,16 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 	list<item>::iterator it;
 	if(t->type == ITM_FOOD && t->value1 == 0)
 	{
-		PowUpDown(t->value5);
-		if(speak_)
-			printlog("P가 증가했다.",false,false,false,CL_normal);
+		bool sion_ = (you.god == GT_JOON_AND_SION &&
+			you.god_value[GT_JOON_AND_SION][0] == 2 &&
+			!you.GetPunish(GT_JOON_AND_SION) &&
+			pietyLevel(you.piety) >= 2);
+		if (!sion_)
+		{
+			PowUpDown(t->value5);
+			if (speak_)
+				printlog("P가 증가했다.", false, false, false, CL_normal);
+		}
 		ReleaseMutex(mutx);
 		GodAccpect_GetPitem();
 		return 1;
@@ -3977,10 +4002,40 @@ bool players::Drink(char id_)
 			{
 				if(!you.isequip(it))
 				{
+					int use_num_ = 1;
 					if(!you.GetPunish(GT_EIRIN) || randA(1))
 					{
-						drinkpotion((potion_type)(*it).value1);
-					
+						if (you.god == GT_JOON_AND_SION)
+						{
+							if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) == 0)
+							{
+								use_num_ = rand_int(2, 3);
+							}
+						}
+						if (use_num_ > it->num)
+							use_num_ = it->num;
+						if (use_num_ <= 0)
+						{
+							ReleaseMutex(mutx);
+							return false;
+						}
+
+						drinkpotion((potion_type)(*it).value1, false);
+
+						if (use_num_ > 1) {
+							for (int i = 1; i < use_num_; i++) {
+								enterlog();
+								drinkpotion((potion_type)(*it).value1, true);
+							}
+							if (you.god == GT_JOON_AND_SION
+								&& you.god_value[GT_JOON_AND_SION][0] == 1
+								&& pietyLevel(you.piety) >= 4
+								&& !you.GetPunish(GT_JOON_AND_SION))
+							{
+								joonRandomBuff();
+							}
+						}
+
 						if(iden_list.potion_list[(*it).value1].iden == false)
 						{		
 							printarray(false,false,false,CL_normal,3,"이것은 ",potion_iden_string[(*it).value1],"물약이다. ");		
@@ -3991,12 +4046,16 @@ bool players::Drink(char id_)
 					else
 					{
 						printarray(true,false,false,CL_small_danger,1,"에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!");
-
-						
-						drinkpotion(PT_WATER);
+						drinkpotion(PT_WATER, false);
 					}
 
-					DeleteItem(it,1);
+					if (use_num_ > 1) {
+						enterlog();
+						char temp[100];
+						sprintf_s(temp, 100, "역병신의 저주로 인해 %d개의 %s%s 낭비하여 사용하였다.", use_num_, it->GetName(-2).c_str(), it->GetNameInfor().name_to());
+						printarray(true, false, false, CL_small_danger, 1, temp);
+					}
+					DeleteItem(it, use_num_);
 					enterlog();
 					ReleaseMutex(mutx);
 					return true;	
@@ -4127,26 +4186,55 @@ bool players::Read(char id_)
 
 					printarray(true,false,false,CL_normal,3,it->GetName(-2).c_str(),it->GetNameInfor().name_to(true),"읽었다.");
 					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
-					bool use_ = readscroll((scroll_type)(*it).value1, pre_iden_);
-					
+					int use_num_ = 1;
+					if (you.god == GT_JOON_AND_SION) 
+					{
+						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) >= 0)
+						{
+							use_num_ = rand_int(2, 3);
+						}
+					}
+					if (use_num_ > it->num )
+						use_num_ = it->num;
+					if (use_num_ <= 0)
+					{
+						ReleaseMutex(mutx);
+						return false;
+					}
+
+					bool use_ = readscroll((scroll_type)(*it).value1, pre_iden_, false);
 					if(!use_)
 					{		
 						ReleaseMutex(mutx);
 						return false;		
 					}
+					else if(use_num_ > 1){
+						for(int i = 1; i < use_num_; i++)
+							readscroll((scroll_type)(*it).value1, true, true);
+						if (you.god == GT_JOON_AND_SION
+							&& you.god_value[GT_JOON_AND_SION][0] == 1
+							&& pietyLevel(you.piety) >= 4
+							&& !you.GetPunish(GT_JOON_AND_SION))
+						{
+							joonRandomBuff();
+						}
+					}
 
 					if(iden_list.scroll_list[(*it).value1].iden == 3)
 					{
 						if(!pre_iden_)
-							printarray(true,false,false,CL_normal,3,"이것은 ",it->GetName().c_str(),it->GetNameInfor().name_type?"이다":"다.");
-
+							printarray(true,false,false,CL_normal,3,"이것은 ",it->GetName(-2).c_str(),it->GetNameInfor().name_type?"이다":"다.");
+						if (use_num_ > 1) {
+							char temp[100];
+							sprintf_s(temp, 100, "역병신의 저주로 인해 %d개의 %s%s 낭비하여 사용하였다.", use_num_, it->GetName(-2).c_str(), it->GetNameInfor().name_to());
+							printarray(true, false, false, CL_small_danger, 1, temp);
+						}
 						(*it).identify = true;
-
 					}
 					//if(!you.skill[SKT_SPELLCASTING].level)
 					//	SkillTraining(SKT_SPELLCASTING,1);
 
-					DeleteItem(it,1);
+					DeleteItem(it, use_num_);
 					enterlog();
 					ReleaseMutex(mutx);
 					return true;	

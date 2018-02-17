@@ -159,7 +159,7 @@ extern textures img_mons_kaname;
 extern textures img_mons_sheep;
 extern textures img_mons_bee;
 extern textures img_mons_bush;
-
+extern textures img_mons_sion;
 
 
 
@@ -399,6 +399,7 @@ extern textures img_tanmac_air[]; //0
 extern textures img_tanmac_rock_small[]; //0¾¸
 extern textures img_tanmac_rock_big[]; 
 extern textures img_tanmac_doggojeo[];
+extern textures img_tanmac_sion[];
 extern textures img_tanmac_small[6][4];
 
 
@@ -411,6 +412,7 @@ extern textures img_fog_cold[];
 extern textures img_fog_dark[];
 extern textures img_fog_poison[];
 extern textures img_fog_slow[];
+extern textures img_fog_sion[3][4];
 extern textures img_blizzard[];
 extern textures img_fog_tonado[];
 extern textures img_blast[];
@@ -428,8 +430,10 @@ extern textures img_effect_lunatic;
 extern textures img_effect_freeze;
 extern textures img_effect_gold;
 extern textures img_effect_sleep;
+extern textures img_effect_sion;
 
 extern textures img_effect_autumn_leave[];
+extern textures img_effect_gold_floor[];
 extern textures img_effect_rock_trap;
 extern textures img_effect_rock_uplift[];
 extern textures img_effect_emerald_uplift[];

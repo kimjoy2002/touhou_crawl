@@ -122,6 +122,8 @@ char* smoke::GetName()
 		return "Àü±â ±¸¸§";
 	case SMT_DARK:
 		return "¾ÏÈæ ±¸¸§";
+	case SMT_SION:
+		return "ºó°ï ±¸¸§";
 	case SMT_POISON:
 		return "µ¶ ±¸¸§";
 	case SMT_CONFUSE:
@@ -148,6 +150,7 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_NORMAL:
 	case SMT_FOG:
 	case SMT_DARK:
+	case SMT_SION:
 	default:
 		return false;
 	case SMT_FIRE:
@@ -251,6 +254,7 @@ int smoke::sight_inter()
 	case SMT_FOG:
 		return 1;
 	case SMT_DARK:
+	case SMT_SION:
 		return 2;
 	default:
 		return 0;
@@ -290,7 +294,14 @@ void priqueue_push(list<coord_node*>& queues,node* data)
 
 coord_node cloud_node[DG_MAX_X][DG_MAX_Y];
 
+
 bool MakeCloud(const coord_def &c, textures *t, smoke_type type_, int num_, int time_, int expand_, int max_length, unit* parent_)
+{
+	random_extraction<textures*> rand_t;
+	rand_t.push(t);
+	return MakeCloud(c, rand_t, type_, num_, time_, 1, expand_, max_length, parent_);
+}
+bool MakeCloud(const coord_def &c, random_extraction<textures*> rand_t, smoke_type type_, int num_, int time_, int time_updown_, int expand_, int max_length, unit* parent_)
 {
 	for(int x=0;x<DG_MAX_X;x++)
 	{
@@ -309,7 +320,7 @@ bool MakeCloud(const coord_def &c, textures *t, smoke_type type_, int num_, int 
 		coord_node* node = Open.front();
 		Open.pop_front();
 
-		if(env[current_level].MakeSmoke(node->pos, t, type_, time_+rand_int(-1,1), expand_, parent_))
+		if(env[current_level].MakeSmoke(node->pos, rand_t.choice(), type_, time_+rand_int(-time_updown_, time_updown_), expand_, parent_))
 		{
 			num_--;
 		}

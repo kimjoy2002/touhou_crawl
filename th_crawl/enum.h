@@ -332,6 +332,7 @@ enum smoke_type
 	SMT_COLD,
 	SMT_ELEC,
 	SMT_DARK,
+	SMT_SION,
 	SMT_POISON,
 	SMT_CONFUSE,
 	SMT_SLOW,
@@ -672,6 +673,7 @@ enum monster_index
 	MON_SHEEP,
 	MON_BEE,
 	MON_BUSH,
+	MON_SION,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };
@@ -978,6 +980,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_SLEEP,
 	ATT_THROW_NORMAL, //여기부터 그레이즈가 됨
 	ATT_THROW_NONE_MASSAGE,
+	ATT_THROW_NONE_DAMAGE,
 	ATT_THROW_FIRE,
 	ATT_THROW_COLD,
 	ATT_THROW_WATER,

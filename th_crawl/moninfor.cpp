@@ -900,6 +900,11 @@ string GetMonsterInfor(monster *it)
 	case MON_BUSH:
 		text_ += "평범한 풀이다. 이동을 방해하고 있지만 공격을 해서 치울 수 있어 보인다.\n";
 		break;
+	case MON_SION:
+		text_ += "빈곤신 시온이 상대방에게 빙의하여 붙은 모습이다.\n";
+		text_ += "빙의된 상대는 빈곤신의 흉악한 불운덕분에 정상적인 전투를 할 수 없게 된다.\n";
+		text_ += "어떻게 플레이어는 이런 신을 빙의한채 싸울 수 있는 걸까?\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

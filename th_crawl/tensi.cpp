@@ -205,7 +205,7 @@ void tensi_potion(bool good_)
 		you_drink_ = bad_list_[randA(4)];
 
 
-	drinkpotion(you_drink_);
+	drinkpotion(you_drink_, false);
 }
 
 

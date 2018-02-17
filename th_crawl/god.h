@@ -39,6 +39,9 @@ void GodInfor(god_type god);
 void God_show();
 bool God_pray(const list<item>::iterator it);
 bool god_punish(god_type god);
+void createGold(coord_def c, int num);
+void joonRandomBuff();
+bool sionResurrection();
 
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
 bool GodAccpect_Entering();
@@ -56,6 +59,7 @@ int satori_sight();
 
 void Pray();
 
+void joon_sion_gift(bool speak_);
 void minoriko_gift(bool speak_);
 void byakuren_gift(bool speak_);
 void kanako_gift(bool speak_);

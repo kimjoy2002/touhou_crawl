@@ -106,7 +106,7 @@ int isGoodPotion(potion_type kind)
 	return 1;
 }
 
-void drinkpotion(potion_type kind)
+void drinkpotion(potion_type kind, bool waste_)
 {
 	int bonus = (you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN))?1:0;
 	switch(kind)

@@ -68,6 +68,7 @@ TextureFile texture_monster01(imgfile_monster01);
 TextureFile texture_players01(imgfile_players01);
 TextureFile texture_item01(imgfile_item01);
 TextureFile texture_item02(imgfile_item02);
+TextureFile texture_item03(imgfile_item03);
 TextureFile texture_laser(imgfile_laser);
 TextureFile texture_test(imgfile_test);
 TextureFile texture_dot_floor(imgfile_dot_floor);
@@ -508,7 +509,7 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단마계
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단히쿠레이
 				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단
-				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)}, //시키
+				{textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255)}, //죠온&시온
 
 				{textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255)}, //뱌쿠렌
 				{textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255)}, //카나코
@@ -747,6 +748,7 @@ textures img_mons_kaname(&texture_monster01, 224, 255);
 textures img_mons_sheep(&texture_monster01, 225, 255);
 textures img_mons_bee(&texture_monster01, 226, 255);
 textures img_mons_bush(&texture_item02, 175, 255);
+textures img_mons_sion(&texture_monster01, 227, 255);
 
 
 
@@ -1257,6 +1259,7 @@ textures img_effect_lunatic(&texture_dungeon01, 288, 0, 320, 32, 255);
 textures img_effect_freeze(&texture_dungeon01, 320, 0, 352, 32, 255);
 textures img_effect_gold(&texture_dungeon01, 352, 0, 384, 32, 255);
 textures img_effect_sleep(&texture_dungeon01, 960, 0, 992, 32, 255);
+textures img_effect_sion(&texture_dungeon01, 0, 296, 32, 328, 255);
 textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
 
@@ -1326,6 +1329,26 @@ textures img_fog_slow[] = {textures(&texture_item01, 84, 255),
 							    textures(&texture_item01, 86, 255),
 							    textures(&texture_item01, 87, 255)
 };
+
+textures img_fog_sion[3][4] = { {textures(&texture_item03, 13, 255),
+textures(&texture_item03, 14, 255),
+textures(&texture_item03, 15, 255),
+textures(&texture_item03, 16, 255)},
+
+{ textures(&texture_item03, 4, 255),
+textures(&texture_item03, 5, 255),
+textures(&texture_item03, 6, 255),
+textures(&texture_item03, 7, 255) },
+
+{ textures(&texture_item03, 9, 255),
+textures(&texture_item03, 10, 255),
+textures(&texture_item03, 11, 255),
+textures(&texture_item03, 12, 255) }
+};
+
+
+
+
 
 
 textures img_tanmac_fire_big[] = {textures(&texture_item01, 88, 255),
@@ -1425,6 +1448,19 @@ textures img_tanmac_doggojeo[] = { textures(&texture_item02, 208, 255),
 								textures(&texture_item02, 214, 255),
 								textures(&texture_item02, 215, 255)
 };
+
+textures img_tanmac_sion[] = { textures(&texture_item03, 17, 255),
+textures(&texture_item03, 18, 255),
+textures(&texture_item03, 19, 255),
+textures(&texture_item03, 20, 255),
+textures(&texture_item03, 21, 255),
+textures(&texture_item03, 22, 255),
+textures(&texture_item03, 23, 255),
+textures(&texture_item03, 24, 255)
+};
+
+
+
 textures img_tanmac_small[6][4] =
 {
 	{textures(&texture_laser, 36, 255),textures(&texture_laser, 37, 255),textures(&texture_laser, 38, 255), textures(&texture_laser, 39, 255)},
@@ -1543,6 +1579,11 @@ textures img_effect_autumn_leave[] = {
 	textures(&texture_item01, 172, 255)
 };
 
+textures img_effect_gold_floor[] = {
+	textures(&texture_item03, 0, 255),
+	textures(&texture_item03, 1, 255),
+	textures(&texture_item03, 2, 255)
+};
 
 
 
@@ -2745,6 +2786,20 @@ int texturetoint(textures* input)
 		return 474;
 	else if (input == &img_item_armor_helmet[5])
 		return 475;
+	else if (input == &img_effect_gold_floor[0])
+		return 476;
+	else if (input == &img_effect_gold_floor[1])
+		return 477;
+	else if (input == &img_effect_gold_floor[2])
+		return 478;
+	else if (input == &img_fog_sion[0][0])
+		return 479;
+	else if (input == &img_fog_sion[1][0])
+		return 480;
+	else if (input == &img_fog_sion[2][0])
+		return 481;
+	else if (input == &img_mons_sion)
+		return 482;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3724,6 +3779,20 @@ textures* inttotexture(int input)
 		return &img_item_armor_helmet[4];
 	case 475:
 		return &img_item_armor_helmet[5];
+	case 476:
+		return &img_effect_gold_floor[0];
+	case 477:
+		return &img_effect_gold_floor[1];
+	case 478:
+		return &img_effect_gold_floor[2];
+	case 479:
+		return &img_fog_sion[0][0];
+	case 480:
+		return &img_fog_sion[1][0];
+	case 481:
+		return &img_fog_sion[2][0];
+	case 482:
+		return &img_mons_sion;
 	default:
 		return &img_mons_default;
 	}

@@ -35,9 +35,10 @@ int GetGodGiftTime(god_type god)
 	{
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_JOON_AND_SION:
 	case GT_SUWAKO:
 		return 0;
+	case GT_JOON_AND_SION:
+		return (you.god_value[GT_JOON_AND_SION][1] == -1)?6:0;
 	case GT_MINORIKO:
 		return 30;
 	case GT_SHINKI:
@@ -72,8 +73,11 @@ bool GodGift(god_type god, int piety)
 	{
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_JOON_AND_SION:
 	case GT_SUWAKO:
+		return false;
+	case GT_JOON_AND_SION:
+		joon_sion_gift(true);
+		return true;
 	case GT_MINORIKO:
 		if(pietyLevel(you.piety)>=3)
 		{
@@ -87,6 +91,7 @@ bool GodGift(god_type god, int piety)
 	case GT_HINA:
 	case GT_YUKARI:
 	case GT_YUYUKO:
+		return false;
 	case GT_SATORI:
 		if(pietyLevel(you.piety)>=5)
 		{
@@ -148,6 +153,18 @@ struct compare {
 	bool operator()(const temp_class &a,const temp_class &b) const
 	{return (a.level != b.level)?a.level < b.level:a.exp<a.exp;}
 };
+
+void joon_sion_gift(bool speak_)
+{
+	if (speak_) {
+		printlog("당신은 다시 빙의를 할 수 있다.", true, false, false, CL_joon_and_sion);
+		MoreWait();
+	}
+	you.god_value[GT_JOON_AND_SION][1] = 0;
+	you.Ability(SKL_JOON_AND_SION_1, true, false);
+}
+
+
 void minoriko_gift(bool speak_)
 {	
 	item_infor t;

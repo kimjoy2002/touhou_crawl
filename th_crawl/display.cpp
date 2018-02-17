@@ -1412,6 +1412,16 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
 				stateDraw.addState(temp, color_, "장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.", this);
 			}
+
+			if (you.god == GT_JOON_AND_SION) 
+			{
+				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+					stateDraw.addState("빙의(죠온)", CL_joon, "소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다. 빙의가 풀리면 파워 3.00로 내려갑니다.", this);
+				}
+				if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+					stateDraw.addState("빙의(시온)", CL_sion, "줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.", this);
+				}
+			}
 			if(you.GetStatPanalty())
 			{
 				stateDraw.addState("스탯패널티", CL_danger, "스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.", this);
@@ -1523,8 +1533,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			if(you.power<=200)
 			{
-				stateDraw.addState("파워부족", you.power <= 100 ? CL_danger : CL_warning,
-					you.power <= 100 ? "파워가 부족하여 공격력이 매우 약해졌습니다.": "파워가 부족하여 공격력이 약해졌습니다.", this);
+				bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
+				stateDraw.addState("파워부족", sion_ ? CL_bad:(you.power <= 100 ? CL_danger : CL_warning),
+					sion_ ? "시온이 당신의 파워 패널티를 막고있습니다." :(you.power <= 100 ? "파워가 부족하여 공격력이 매우 약해졌습니다.": "파워가 부족하여 공격력이 약해졌습니다."), this);
 			}
 			if(you.s_poison)
 			{
@@ -2032,6 +2043,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 						else if(map_effect==2)
 							img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+						else if (map_effect == 3)
+							img_effect_sion.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, 80);
 							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
 					}
 				}

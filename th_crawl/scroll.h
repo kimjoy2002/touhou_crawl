@@ -47,6 +47,6 @@ extern char *scroll_uniden_string[SCT_MAX]; //스크롤 스트링
 extern const char *scroll_iden_string[SCT_MAX];
 
 int isGoodScroll(scroll_type kind);
-bool readscroll(scroll_type kind, bool pre_iden_);
+bool readscroll(scroll_type kind, bool pre_iden_, bool waste_);
 
 #endif // __SCROLL_H__

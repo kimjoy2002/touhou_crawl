@@ -300,6 +300,7 @@ public:
 	bool PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_=false);
 	bool MakeMapping(int percent_);
 	bool MakeMapping(coord_def center_, int length_, bool passed_, int percent_);
+	bool seeAllMonster();
 	bool isSilence(coord_def pos_);
 	bool isViolet(coord_def pos_);
 	bool isSanctuary(coord_def pos_);

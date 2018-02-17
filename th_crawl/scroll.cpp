@@ -70,21 +70,22 @@ const char *scroll_iden_string[SCT_MAX]=
 
 
 
-bool identity_scroll(bool pre_iden_);
+bool identity_scroll(bool pre_iden_); 
+void random_identity_scroll();
 bool curse_weapon_scroll(bool pre_iden_);
 bool curse_armour_scroll(bool pre_iden_);
 bool remove_curse_scroll(bool pre_iden_);
 bool blink_scroll(bool pre_iden_);
 bool enchant_weapon_1_scroll(bool pre_iden_);
 bool enchant_weapon_2_scroll(bool pre_iden_);
-bool enchant_armour_scroll(bool pre_iden_);
+bool enchant_armour_scroll(bool pre_iden_, bool waste_);
 bool fog_scroll(bool pre_iden_);
 bool detect_curse_scroll(bool pre_iden_);
 bool curse_jewelry_scroll(bool pre_iden_); 
 bool skill_silence(int pow, bool short_, unit* order, coord_def target);
 bool skill_soul_shot(int power, unit* order, coord_def target);
 bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
-bool recharging_scroll(bool pre_iden_, bool ablity_);
+bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool amnesia_scroll(bool pre_iden_);
 bool brand_weapon_scroll(bool pre_iden_);
 
@@ -153,7 +154,7 @@ int isGoodScroll(scroll_type kind)
 
 
 
-bool readscroll(scroll_type kind, bool pre_iden_)
+bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 {
 	if (you.s_pure_turn && you.s_pure >= 10)
 	{
@@ -176,6 +177,8 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 	{
 	case SCT_TELEPORT:		
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		ReleaseMutex(mutx);
 		if(!you.Tele_check(pre_iden_, false))
@@ -188,18 +191,26 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		{
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
-		bool return_ = identity_scroll(pre_iden_);
+		bool return_ = true;
+		if(waste_)
+			random_identity_scroll();
+		else
+			return_ = identity_scroll(pre_iden_);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
 	case SCT_NONE:
 		{
-		printlog("이 두루마리에 써있는 것은 낙서같다.",false,false,false,CL_normal);
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
+		printlog("이 두루마리에 써있는 것은 낙서같다.",true,false,false,CL_normal);
 		iden_list.scroll_list[kind].iden = 3;
 		return true;
 		}
 	case SCT_CURSE_WEAPON:		
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = curse_weapon_scroll(pre_iden_);
 		return return_;
@@ -212,6 +223,8 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 	case SCT_REMOVE_CURSE:
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = remove_curse_scroll(pre_iden_);
 		return return_;
@@ -219,14 +232,16 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 	case SCT_BLINK:
 		{
 		ReleaseMutex(mutx);
-		bool return_ = blink_scroll(pre_iden_);
+		bool return_ = blink_scroll(waste_ ? false : pre_iden_);
 		iden_list.scroll_list[kind].iden = 3;
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
 	case SCT_MAPPING:
 		 {
-			 iden_list.scroll_list[kind].iden = 3;
+			if (waste_) //낭비시엔 의미가 없음
+				return true;
+			iden_list.scroll_list[kind].iden = 3;
 			if(env[current_level].isBamboo())
 			{				
 				printlog("지형탐지는 미궁의 죽림에선 효과를 보지 못한다.",true,false,false,CL_normal);
@@ -260,7 +275,7 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		{
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
-		bool return_ = enchant_armour_scroll(pre_iden_);
+		bool return_ = enchant_armour_scroll(pre_iden_, waste_);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
@@ -272,6 +287,8 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 	case SCT_DETECT_CURSE:
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		bool return_ = detect_curse_scroll(pre_iden_);
 		iden_list.scroll_list[kind].iden = 3;
 		return return_;
@@ -284,6 +301,8 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 	case SCT_SILENCE:
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		skill_silence(75, false, &you, you.position);
 		iden_list.scroll_list[kind].iden = 3;
 		return true;
@@ -302,12 +321,15 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		}
 		else
 		{
-			printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+			if (!waste_) //낭비시엔 의미가 없음
+				printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
 		}
 		return true;
 		}
 	case SCT_SANTUARY:
 	{
+		//if (waste_) //낭비시엔 의미가 없음
+		//	return true;
 		iden_list.scroll_list[kind].iden = 3;
 		if (you.power >= 100)
 		{
@@ -327,12 +349,14 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 		{
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
-		bool return_ = recharging_scroll(pre_iden_, false);
+		bool return_ = recharging_scroll(pre_iden_, false, waste_);
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
 		}
 	case SCT_AMNESIA:
 		{
+		if (waste_) //낭비시엔 의미가 없음
+			return true;
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = amnesia_scroll(pre_iden_);
@@ -350,6 +374,30 @@ bool readscroll(scroll_type kind, bool pre_iden_)
 }
 
 
+void random_identity_scroll()
+{
+	//역병신의 저주로 스크롤 자동 식별
+	random_extraction<item *> rand_;
+
+	list<item>::iterator it;
+	for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+	{
+		if (!it->isiden())
+			rand_.push(&(*it));
+	}
+	if (rand_.GetSize() > 0) {
+		item* rand_item = rand_.pop();
+		if (rand_item != NULL)
+		{
+			rand_item->Identify();
+			char temp[2];
+			sprintf(temp, "%c", rand_item->id);
+			printlog(temp, false, false, false, rand_item->item_color());
+			printlog(" - ", false, false, false, rand_item->item_color());
+			printlog(rand_item->GetName(), true, false, false, rand_item->item_color());
+		}
+	}
+}
 
 bool identity_scroll(bool pre_iden_)
 {
@@ -694,17 +742,31 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 
 
 
-bool enchant_armour_scroll(bool pre_iden_)
+bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 {
-	if(iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
-		view_item(IVT_ARMOR_ENCHANT,"무슨 방어구를 강화하시겠습니까?");
-	else
-		view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
+	static int prev_key = 0;
+
+	if (!waste_) {
+		if (iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
+			view_item(IVT_ARMOR_ENCHANT, "무슨 방어구를 강화하시겠습니까?");
+		else
+			view_item(IVT_SELECT, "무슨 아이템에 사용하시겠습니까?");
+	}
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = 0;
+
+		if (!waste_) {
+			key_ = waitkeyinput(true);
+		}
+		else if (prev_key != 0) {
+			key_ = prev_key;
+		}
+		else
+			return false;
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
+			prev_key = key_;
 			item *item_ = you.GetItem(key_);
 			if(item_)
 			{
@@ -720,6 +782,9 @@ bool enchant_armour_scroll(bool pre_iden_)
 				}
 				else
 				{
+					if (!waste_) {
+						changedisplay(DT_GAME);
+					}
 					if(pre_iden_){
 						printlog("이 아이템은 강화할 수 없다.",true,false,false,CL_normal);
 						return false;
@@ -731,6 +796,9 @@ bool enchant_armour_scroll(bool pre_iden_)
 				}
 
 			}
+		}
+		else if (waste_) {
+			return false;
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
@@ -758,7 +826,9 @@ bool enchant_armour_scroll(bool pre_iden_)
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
-	changedisplay(DT_GAME);
+	if (!waste_) {
+		changedisplay(DT_GAME);
+	}
 	if(pre_iden_){
 		return false;
 	}
@@ -814,37 +884,50 @@ bool curse_jewelry_scroll(bool pre_iden_)
 		return true;
 	}
 }
-bool recharging_scroll(bool pre_iden_, bool ablity_)
+bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 {
-	bool ok_ = false;
-	for(auto it = you.item_list.begin();it != you.item_list.end(); it++)
-	{
-		if((*it).isSimpleType(ITMS_SPELL) && (*it).isChargable())
+	static int prev_key = 0;
+
+
+
+	if (!waste_) {
+		bool ok_ = false;
+		for(auto it = you.item_list.begin();it != you.item_list.end(); it++)
 		{
-			ok_ = true;
-			break;
+			if((*it).isSimpleType(ITMS_SPELL) && (*it).isChargable())
+			{
+				ok_ = true;
+				break;
+			}
 		}
-	}
-	if(!ok_)
-	{
-		printlog("당신의 소지품에 충전할 수 있는 스펠카드가 없다.",true,false,false,CL_normal);
-		if(pre_iden_)
-			return false;
+		if(!ok_)
+		{
+			printlog("당신의 소지품에 충전할 수 있는 스펠카드가 없다.",true,false,false,CL_normal);
+			if(pre_iden_)
+				return false;
+			else
+				return true;
+		}
+		if (iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
+			view_item(IVT_SPELLCARD, "무슨 스펠카드를 충전하시겠습니까?");
 		else
-			return true;
+			view_item(IVT_SELECT, "무슨 아이템에 사용하시겠습니까?");
 	}
-
-
-
-	if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-		view_item(IVT_SPELLCARD,"무슨 스펠카드를 충전하시겠습니까?");
-	else
-		view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = 0;
+
+		if (!waste_) {
+			key_ = waitkeyinput(true);
+		}
+		else if (prev_key != 0) {
+			key_ = prev_key;
+		}
+		else
+			return false;
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
+			prev_key = key_;
 			item *item_ = you.GetItem(key_);
 			if(item_)
 			{
@@ -863,7 +946,13 @@ bool recharging_scroll(bool pre_iden_, bool ablity_)
 
 					return true;
 				}
+				else if (waste_) {
+					return true;
+				}
 			}
+		}
+		else if (waste_) {
+			return false;
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
@@ -893,7 +982,9 @@ bool recharging_scroll(bool pre_iden_, bool ablity_)
 			break;
 		}
 	}
-	changedisplay(DT_GAME);
+	if (!waste_) {
+		changedisplay(DT_GAME);
+	}
 	if(pre_iden_){
 		return false;
 	}

@@ -163,6 +163,52 @@ bool GetGodAbility(int level, bool plus)
 	case GT_NONE:
 		return false;
 	case GT_JOON_AND_SION:
+		switch (level)
+		{
+		case 0:
+			if (plus)
+				printlog("당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.", true, false, false, CL_joon_and_sion);
+			break;
+		case 1:
+			you.Ability(SKL_JOON_AND_SION_1, true, !plus);
+			if (plus)
+				printlog("당신은 이제 죠온이나 시온을 빙의할 수 있다.", true, false, false, CL_joon_and_sion);
+			else
+				printlog("더 이상 당신은 이제 죠온이나 시온을 빙의할 수 없다.", true, false, false, CL_joon_and_sion);
+			break;
+		case 2:
+			if (plus)
+				printlog("빙의상태에서 빙의된 신에 따라 파워를 이용한 효과를 얻게 된다.", true, false, false, CL_joon_and_sion);
+			else
+				printlog("더 이상 빙의상태에서 파워를 이용한 효과를 얻을 수 없다.", true, false, false, CL_joon_and_sion);
+			break;
+		case 4:
+			if (plus)
+				printlog("빙의상태에서 빙의된 신에 따라 소모품을 이용한 효과를 얻게 된다.", true, false, false, CL_joon_and_sion);
+			else
+				printlog("더 이상 빙의상태에서 소모품을 이용한 효과를 얻을 수 없다.", true, false, false, CL_joon_and_sion);
+			break;
+		case 5:
+			if (plus)
+			{
+				printlog("빙의할때마다 한번만 빙의된 신의 필살기를 사용할 수 있다.", true, false, false, CL_joon_and_sion);
+				if (you.god_value[GT_JOON_AND_SION][0] == 1)
+					you.Ability(SKL_JOON_AND_SION_2, true, !plus);
+				else if (you.god_value[GT_JOON_AND_SION][0] == 2)
+					you.Ability(SKL_JOON_AND_SION_3, true, !plus);
+			}
+			else
+				printlog("더 이상 빙의된 신의 필살기를 사용할 수 없다.", true, false, false, CL_joon_and_sion);
+			break;
+		case 6:
+			if (you.god_value[GT_JOON_AND_SION][0] != 0)
+				you.Ability(SKL_JOON_AND_SION_4, true, !plus);
+			if (plus)
+				printlog("이제 당신은 무조건 이길 수 있는 최흉최악의 전법을 사용할 수 있다.", true, false, false, CL_joon_and_sion);
+			else
+				printlog("더 이상 최흉최악의 전법을 사용할 수 없다.", true, false, false, CL_joon_and_sion);
+			break;
+		}
 		return false;
 	case GT_BYAKUREN:
 		switch(level)
@@ -807,6 +853,9 @@ bool GetGodAbility(int level, bool plus)
 	case GT_MIKO:
 		switch (level)
 		{
+		case 0:
+		default:
+			break;
 		}
 		return false;
 	case GT_OKINA:
@@ -917,6 +966,19 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_NONE:
 		return false;
 	case GT_JOON_AND_SION:
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
+		{
+			if (!mon_->isUserAlly())
+			{ //적일때
+				printlog("죠온과 시온은 적의 지갑을 강탈하는 것을 기뻐했다.", true, false, false, CL_joon_and_sion);
+				if (randA(2))
+				{
+					you.GiftCount(1);
+					you.PietyUpDown(1);
+					return true;
+				}
+			}
+		}
 		return false;
 	case GT_BYAKUREN:
 		return false;
@@ -1247,7 +1309,17 @@ bool GodAccpect_GetPitem()
 		break;
 	case GT_ERROR:
 	case GT_NONE:
+		return false;
 	case GT_JOON_AND_SION:
+	{
+		if (you.god_value[GT_JOON_AND_SION][0] == 2 && !you.GetPunish(GT_JOON_AND_SION) && pietyLevel(you.piety) >= 2)
+		{
+			int hp_ = rand_int(you.GetMaxHp() * 6 / 100, you.GetMaxHp() * 10 / 100) + 1;
+			printlog("P로부터 회복하였다. ", false, false, false, CL_normal);
+			you.HpUpDown(hp_, DR_EFFECT);
+			return true;
+		}
+	}
 	case GT_KANAKO:
 	case GT_SUWAKO:
 	case GT_MIMA:
@@ -1258,7 +1330,7 @@ bool GodAccpect_GetPitem()
 			if(!you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=5)
 			{
 				int hp_ = rand_int(you.GetMaxHp() *9/100,you.GetMaxHp() *18/100)+1;
-				printlog("회복되었다.",false,false,false,CL_normal);
+				printlog("회복되었다. ",false,false,false,CL_normal);
 				you.HpUpDown(hp_, DR_EFFECT);
 				you.MpUpDown(randA_1(5));
 			}
@@ -2057,7 +2129,7 @@ void GodInfor(god_type god)
 		printsub("",true,CL_normal);
 		break;
 	case GT_JOON_AND_SION:
-		printsub("요리가미 조온 & 시온 - 최흉최악의 자매",true, CL_joon_and_sion);
+		printsub("요리가미 죠온 & 시온 - 최흉최악의 자매",true, CL_joon_and_sion);
 		printsub("",true,CL_normal);
 		printsub("낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.",true,CL_normal);
 		printsub("죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서",true,CL_normal);
@@ -2267,26 +2339,26 @@ void God_show()
 				printsub(" └ 당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)", true, CL_joon);
 			}
 			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
-				printsub(" └ 줍지않은 소모품은 천천히 사라져갑니다. 소모품을 버리면 일정 확률로 사라진다.", true, CL_joon_and_sion);
+				printsub(" └ 줍지않은 소모품은 천천히 사라져간다. 소모품을 버리면 일정 확률로 사라진다.", true, CL_joon_and_sion);
 			}
 			else {
-				printsub(" └ 줍지않은 소모품은 빠른 속도로 사라져갑니다. 소모품을 버리면 무조건 사라진다. (강화됨)", true, CL_sion);
+				printsub(" └ 줍지않은 소모품은 빠른 속도로 사라져간다. 소모품을 버리면 무조건 사라진다. (강화됨)", true, CL_sion);
 			}
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_JOON_AND_SION))
 		{
-			printsub("당신은 잠시동안 조온이나 시온을 빙의할 수 있다.                                       (액티브)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
+			printsub("당신은 잠시동안 죠온이나 시온을 빙의할 수 있다.                                       (액티브)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("죠온이 빙의한 동안엔 모든 마법과 공격시 파워를 소모하여 추가 데미지를 준다.           (패시브)", true, CL_joon);
+				printsub("죠온이 빙의한 동안엔 모든 데미지가 증폭되며 데미지를 줄때마다 파워가 소모된다.        (패시브)", true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("시온이 빙의한 동안엔 파워를 주워도 파워가 오르지 않는 대신 체력과 영력을 회복한다.    (패시브)", true, CL_sion);
+				printsub("시온이 빙의한 동안엔 파워를 주워도 파워가 오르지 않는 대신 체력을 회복한다.           (패시브)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
@@ -2297,15 +2369,15 @@ void God_show()
 		if (level_ >= 4 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("죠온이 빙의한 동안엔 소모품을 한번에 소모할때 추가 효과가 생긴다.                     (패시브)", true, CL_joon);
+				printsub("죠온이 빙의한 동안엔 소모품을 낭비하면 무작위 버프를 얻는다.                          (패시브)", true, CL_joon);
 				printsub("", true, CL_normal);
 			}
-			if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("시온이 빙의한 동안엔 소모품이 사라질때마다 최대 체력이 빙의동안에만 늘어난다.         (패시브)", true, CL_sion);
+			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
+				printsub("시온이 빙의한 동안엔 사망시 소모품을 대량으로 잃는 대신 죽음을 무효로 한다.           (패시브)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 보조한다.                             (패시브)", true, CL_bad);
+				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 이용한다                              (패시브)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
@@ -2316,7 +2388,7 @@ void God_show()
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("당신은 시야내 적에게 감속을 주고 시야를 가리는 안개를 뿌릴 수 있다.            (빙의시 한번만)", true, CL_sion);
+				printsub("당신은 시야내 적에게 감속을 건 후에 시야를 가리는 안개를 뿌릴 수 있다.         (빙의시 한번만)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
@@ -3577,7 +3649,7 @@ bool god_punish(god_type god)
 					potion_.push(PT_POISON);
 					potion_type p_ = potion_.choice();
 					printarray(true,false,false,CL_small_danger,3,"에이린은 당신에게 억지로 ",potion_iden_string[p_],"물약을 먹였다!");
-					drinkpotion(p_);
+					drinkpotion(p_, false);
 				}
 				break;
 			case 1:
@@ -3798,4 +3870,87 @@ bool god_punish(god_type god)
 		break;
 	}
 	return false;		
+}
+
+
+void createGold(coord_def c, int num) {
+	rand_rect_iterator rit(c, 2, 2);
+	int i = num;
+	for (; !rit.end() && i> 0; rit++)
+	{
+		if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y))
+		{
+			int rand_ = randA(2);
+			env[current_level].MakeFloorEffect(coord_def(rit->x, rit->y), &img_effect_gold_floor[rand_], &img_effect_gold_floor[rand_],  FLOORT_GOLD, rand_int(20, 30), &you);
+		}
+		i--;
+	}
+}
+
+void joonRandomBuff() {
+	//가속
+	//힘
+	//민첩
+	//지능
+	//AC증가
+	random_extraction<int> rand_;
+
+	rand_.push(0);
+	rand_.push(1);
+	rand_.push(2);
+	rand_.push(3);
+	rand_.push(4);
+	//rand_.push(5);
+
+	switch (rand_.pop())
+	{
+	case 0:
+		you.SetHaste(rand_int(30, 60));
+		break;
+	case 1:
+		you.SetMight(rand_int(30, 60));
+		break;
+	case 2:
+		you.SetAgility(rand_int(30, 60));
+		break;
+	case 3:
+		you.SetClever(rand_int(30, 60));
+		break;
+	case 4:
+		printlog("당신은 단단해졌다. ", false, false, false, CL_white_blue);
+		you.SetBuff(BUFFSTAT_AC, BUFF_JOON_AC, 8, rand_int(30, 60));
+		break;
+	}
+	enterlog();
+}
+bool sionResurrection() {
+	random_extraction<char> rand_;
+	for (auto it = you.item_list.begin(); it != you.item_list.end(); it++) {
+		if ((*it).type == ITM_POTION || (*it).type == ITM_SCROLL) {
+			for(int i = 0; i < it->num; i++)
+				rand_.push(it->id);
+		}
+	}
+
+	if (randA(99) < rand_.GetSize() * 10)
+	{
+		
+		for (int i = 0; i < 10; i++)
+		{
+			char key_ = rand_.pop();
+			list<item>::iterator it;
+			for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+			{
+				if ((*it).id == key_)
+				{
+					you.DeleteItem(it, 1);
+					break;
+				}
+			}
+			if (rand_.GetSize() == 0)
+				break;
+		}
+		return true;
+	}
+	return false;
 }

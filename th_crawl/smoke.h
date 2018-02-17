@@ -40,6 +40,6 @@ public:
 };
 
 bool MakeCloud(const coord_def &c, textures *t, smoke_type type_, int num_, int time_, int expand_, int max_length, unit* parent_ = NULL);
-
+bool MakeCloud(const coord_def &c, random_extraction<textures*> rand_t, smoke_type type_, int num_, int time_, int time_updown_, int expand_, int max_length, unit* parent_ = NULL);
 
 #endif // __SMOKE_H__

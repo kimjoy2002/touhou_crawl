@@ -873,5 +873,10 @@ const mon_infor mondata[] = {
 
 	{ MON_BUSH,1,0,name_infor("Ç®",true),&img_mons_bush,50,0,0,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
-	 M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,1,10 }
+	 M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,1,10 },
+
+	 { MON_SION, 1, 0, name_infor("½Ã¿Â", true), &img_mons_sion, 1, 8, 0,
+	 { 0,0,0}, { ATT_NONE,ATT_NONE,ATT_NONE }, {name_infor(),name_infor(),name_infor() },
+		M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_UNIQUE | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNHARM , 99, 1, 10 }
+
 };

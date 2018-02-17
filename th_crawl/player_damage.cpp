@@ -23,6 +23,7 @@
 #include "throw.h"
 #include "tensi.h"
 #include "tribe.h"
+#include "god.h"
 
 
 extern HANDLE mutx;
@@ -68,7 +69,8 @@ int players::GetAttack(bool max_)
 		max_atk_ = base_atk_;
 		min_atk_ = 0;
 	}
-	if(power<=200)
+	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
+	if(!sion_ && power<=200)
 	{ //파워 200이하에서만 파워에 의한 감소를 받는다.
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
@@ -84,6 +86,8 @@ int players::GetAttack(bool max_)
 	if(!equipment[ET_WEAPON] && alchemy_buff == ALCT_STONE_FORM)
 		max_atk_+=8;
 
+
+
 	max_atk_+=dam_plus;
 	if(s_slaying)
 	{
@@ -93,6 +97,7 @@ int players::GetAttack(bool max_)
 	{
 		max_atk_+=6;
 	}
+
 	if(you.force_turn)
 	{
 		if(you.force_strong)
@@ -277,8 +282,8 @@ int players::GetThrowAttack(const item* it, bool max_)
 	}
 
 	min_atk_ = min(it->value2/2, GetSkillLevel(SKT_TANMAC, true) /4);
-
-	if(power <= 200)
+	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
+	if(!sion_ && power <= 200)
 	{
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
@@ -476,6 +481,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_CLOUD_ELEC:
 	case ATT_THROW_ELEC:
 	case ATT_THROW_NONE_MASSAGE:
+	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
 	case ATT_BLOOD:	
@@ -584,6 +590,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_THROW_NONE_DAMAGE:
 	default:
 		if(a.order)
 		{
@@ -729,9 +736,10 @@ void players::print_no_damage_message(attack_infor &a)
 		case ATT_WALL:
 		case ATT_STONE_TRAP:
 		case ATT_PSYCHO:
+		case ATT_THROW_NONE_DAMAGE:
 			break;
 		default:
-		case ATT_NORMAL_HIT:	
+		case ATT_NORMAL_HIT:
 			printlog("아무런 데미지도 받지 않았다.",true,false,false,CL_normal);
 			break;
 		}

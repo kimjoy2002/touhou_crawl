@@ -16,6 +16,7 @@
 enum floor_type //아래 있는 것이 우선순위가 높다.
 {
 	FLOORT_NORMAL = 0,
+	FLOORT_GOLD,
 	FLOORT_AUTUMN,
 	FLOORT_STONE,
 	FLOORT_SCHEMA,

@@ -168,7 +168,9 @@ public:
 	bool identify_curse;
 	bool can_throw; 
 	bool drop;
-	bool throw_item;
+	bool throw_item; 
+	int waste;
+	int delay_turn;
 
 	int value0; //비상용 - 책-종류(이 것은 필요한 아이템아니면 사용하지 않는 변수다.)
 
@@ -210,6 +212,8 @@ public:
 	float GetStabPercent();
 	int GetValue(int i);
 
+	void TurnSave();//다른층으로 도망쳤다.
+	void TurnLoad();//다른층에서 도망왔다.
 
 	bool isweapon();
 	bool isarmor();

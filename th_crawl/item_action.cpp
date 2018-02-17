@@ -216,12 +216,45 @@ void iteminfor_pick()
 
 void discard(list<item>::iterator it, int number)
 {
-	item *temp2 = env[current_level].AddItem(you.position,&(*it),number);	
-	temp2->drop = true;
-	printlog("당신은 ",false,false,false,CL_normal);					
-	printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
-	printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);					
-	printlog("내려놓았다.",true,false,false,CL_normal);	
+	if (number == 0)
+		number = it->num;
+	int drop_number = number;
+	if (you.god == GT_JOON_AND_SION)
+	{
+		if ((*it).type == ITM_POTION || (*it).type == ITM_SCROLL) {
+			for (int i = 0; i < number; i++) {
+				if (you.god_value[GT_JOON_AND_SION][0] == 2 || randA(3) == 0) //25%
+					drop_number--;
+			}
+		}
+	}
+	item *temp2 = NULL;
+	if (drop_number >= 1) {
+		item *temp2 = env[current_level].AddItem(you.position, &(*it), drop_number);
+		temp2->drop = true;
+		temp2->waste = 10000; //항상 소멸 정도를 초기화
+		printlog("당신은 ",false,false,false,CL_normal);					
+		printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
+		printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);
+	}
+	else {
+		printlog("당신은 ", false, false, false, CL_normal);
+		printlog((*it).GetName(number), false, false, false, (*it).item_color());
+		printlog((*it).GetNameInfor().name_to(true), false, false, false, CL_normal);
+	}
+	if (drop_number == number) {
+		printlog("내려놓았다.", true, false, false, CL_normal);
+	}
+	else if(drop_number>=1) {
+		printlog("내려놓았다. ", false, false, false, CL_normal);
+		char temp[100];
+		sprintf_s(temp, 100, "빈곤신의 저주로 %d개가 사라졌다.", number-drop_number);
+		printarray(true, false, false, CL_small_danger, 1, temp);
+	}
+	else  {
+		printlog("내려놓았다. ", false, false, false, CL_normal);
+		printlog("그러나 빈곤신의 저주로 사라졌다.", true, false, false, CL_small_danger);
+	}
 	you.DeleteItem(it,number);
 	changedisplay(DT_GAME);
 	you.time_delay+=you.GetNormalDelay();

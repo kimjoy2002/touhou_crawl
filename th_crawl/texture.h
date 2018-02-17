@@ -57,6 +57,7 @@ extern TextureFile texture_players01;
 extern TextureFile texture_test;
 extern TextureFile texture_item01;
 extern TextureFile texture_item02;
+extern TextureFile texture_item03;
 extern TextureFile texture_laser;
 extern TextureFile texture_dot_floor;
 extern TextureFile texture_dot_wall;

@@ -27,6 +27,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUYUKO_3:
 	case SKL_OKINA_3:
 	case SKL_JUNKO_1:
+	case SKL_JOON_AND_SION_4:
 		return ((S_FLAG_SPEAK | S_FLAG_GOD) & flag);
 	case SKL_OKINA_1:
 		return ((S_FLAG_SPEAK | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);
@@ -88,6 +89,10 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_OFF:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
@@ -168,6 +173,7 @@ int SkillLength(skill_list skill)
 	case SKL_LILLY_3:
 	case SKL_OKINA_1:
 	case SKL_OKINA_2:
+	case SKL_JOON_AND_SION_4:
 		return 8;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -221,6 +227,10 @@ int SkillLength(skill_list skill)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_OFF:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
 	default:
 		return 0;
 	}
@@ -388,6 +398,16 @@ const char* SkillString(skill_list skill)
 		return "순수한 살의";
 	case SKL_JUNKO_4:
 		return "순화";
+	case SKL_JOON_AND_SION_1:
+		return "빙의";
+	case SKL_JOON_AND_SION_2:
+		return "퀸 오브 버블";
+	case SKL_JOON_AND_SION_3:
+		return "미스찬스 스캐터";
+	case SKL_JOON_AND_SION_4:
+		return "앱솔루트 루저";
+	case SKL_JOON_AND_SION_OFF:
+		return "강제빙의해제";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -464,6 +484,11 @@ int SkillCap(skill_list skill)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
+	case SKL_JOON_AND_SION_4:
+	case SKL_JOON_AND_SION_OFF:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -512,6 +537,8 @@ int SkillNoise(skill_list skill)
 	case SKL_OKINA_3:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_OFF:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -560,6 +587,7 @@ int SkillNoise(skill_list skill)
 	case SKL_LILLY_4:
 	case SKL_PHILOSOPHERS_2:
 	case SKL_PHILOSOPHERS_4:
+	case SKL_JOON_AND_SION_4:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -568,6 +596,8 @@ int SkillNoise(skill_list skill)
 	case SKL_SEIJA_2:
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
 		return 12;
 	case SKL_YUUGI_5:
 		return 16;
@@ -619,6 +649,8 @@ int SkillPow(skill_list skill)
 	case SKL_OKINA_3:
 	case SKL_OKINA_4:
 	case SKL_OKINA_5:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_OFF:
 		//신앙심으로 바꾸기
 		return you.piety;
 	case SKL_SIZUHA_1:
@@ -649,6 +681,9 @@ int SkillPow(skill_list skill)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
+	case SKL_JOON_AND_SION_4:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -769,6 +804,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
+	case SKL_JOON_AND_SION_4:
+	case SKL_JOON_AND_SION_OFF:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -843,6 +883,9 @@ int SkillMana(skill_list skill)
 	case SKL_LILLY_1:
 	case SKL_OKINA_4:
 	case SKL_JUNKO_4:
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_4:
+	case SKL_JOON_AND_SION_OFF:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 	case SKL_JUNKO_1:
@@ -881,6 +924,8 @@ int SkillMana(skill_list skill)
 	case SKL_YUYUKO_3:
 	case SKL_LILLY_4:
 	case SKL_JUNKO_3:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
 		return 5;
 	case SKL_KANAKO_3:
 		return 4;
@@ -1398,6 +1443,15 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if (!check_)
 			you.PowUpDown(-(70 + randA(30)), true);
 		return true;
+	case SKL_JOON_AND_SION_4:
+	{
+		if (!check_)
+			you.PietyUpDown(-(you.piety - 120));
+	}
+	case SKL_JOON_AND_SION_1:
+	case SKL_JOON_AND_SION_2:
+	case SKL_JOON_AND_SION_3:
+	case SKL_JOON_AND_SION_OFF:
 	case SKL_JUNKO_4:
 	case SKL_NONE:
 	case SKL_GRAZE:
@@ -1585,6 +1639,16 @@ const char* SkillCostString(skill_list skill)
 		return "(영력 3, P 약간)";
 	case SKL_JUNKO_3:
 		return "(영력 5, P 대량)";
+	case SKL_JOON_AND_SION_1:
+		return "(없음)";
+	case SKL_JOON_AND_SION_2:
+		return "(영력 5, 빙의중 한번만)";
+	case SKL_JOON_AND_SION_3:
+		return "(영력 5, 빙의중 한번만)";
+	case SKL_JOON_AND_SION_4:
+		return "(신앙)";
+	case SKL_JOON_AND_SION_OFF:
+		return "(없음)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

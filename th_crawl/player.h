@@ -52,6 +52,7 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_MINORIKO_RF,
 	BUFF_MINORIKO_RC,
 	BUFF_AUTUMN_RF,
+	BUFF_JOON_AC,
 	BUFF_MAX
 };
 enum action_type

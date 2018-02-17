@@ -248,7 +248,7 @@ const D3DCOLOR CL_junko = D3DCOLOR_RGBA(255, 180, 130, 255);
 const D3DCOLOR CL_black_junko = D3DCOLOR_RGBA(150, 120, 80, 255);
 const D3DCOLOR CL_joon_and_sion = D3DCOLOR_RGBA(255, 200, 0, 200);
 const D3DCOLOR CL_joon = D3DCOLOR_RGBA(255, 255, 0, 255);
-const D3DCOLOR CL_sion = D3DCOLOR_RGBA(0, 0, 200, 255);
+const D3DCOLOR CL_sion = D3DCOLOR_RGBA(50, 50, 255, 255);
 
 const name_infor string_that("그것",true);
 const name_infor string_something("무언가",false);

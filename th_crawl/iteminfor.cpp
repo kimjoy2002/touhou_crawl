@@ -20,6 +20,7 @@
 #include "option_manager.h"
 #include "tribe.h"
 #include "dump.h"
+#include "god.h"
 #include <set>
 
 extern HANDLE mutx;

@@ -277,6 +277,11 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			it->TurnSave();
 		}
 	}
+	for (auto it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++) 
+	{
+		it->TurnSave();
+	}
+
 	int dq_n=0;
 	
 	bool first_ = MakeMap(false);
@@ -352,6 +357,10 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		{
 			it->TurnLoad();
 		}
+	}
+	for (auto it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
+	{
+		it->TurnLoad();
 	}
 	if(floor && isNormalGame())
 		SaveFile();
@@ -1715,6 +1724,19 @@ bool environment::MakeMapping(coord_def center_, int length_, bool passed_, int 
 	{
 		if(percent_>randA(99))
 			magicmapping(it->x,it->y);
+	}
+	return true;
+}
+bool environment::seeAllMonster()
+{
+	vector<monster>::iterator it;
+	it = mon_vector.begin();
+	for (int i = 0; i < MON_MAX_IN_FLOOR && it != mon_vector.end(); i++, it++)
+	{
+		if ((*it).isLive() && !(*it).isYourShight())
+		{
+			env[current_level].MakeShadow(it->position, it->image);
+		}
 	}
 	return true;
 }

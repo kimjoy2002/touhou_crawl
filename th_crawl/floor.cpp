@@ -212,6 +212,8 @@ char* floor_effect::GetName()
 		return "바위 압정";
 	case FLOORT_SCHEMA:
 		return "틈새";
+	case FLOORT_GOLD:
+		return "동전";
 	case FLOORT_NORMAL:
 	default:
 		return 0;

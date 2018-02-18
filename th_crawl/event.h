@@ -48,6 +48,7 @@ enum event_list
 	EVL_FIRE_SMOKE,
 	EVL_COLD_SMOKE,
 	EVL_SILENCE,
+	EVL_SION_DELETE,
 	EVL_WATER //임시로 물이 된다.
 };
 

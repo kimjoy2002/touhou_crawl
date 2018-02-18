@@ -80,14 +80,17 @@ bool isGodTemple(int id_, god_type god_)
 		return (god_ == GT_SHIZUHA);	
 	case 18:
 		//유기
-		return (god_ == GT_YUUGI);	
+		return (god_ == GT_YUUGI);
 	case 19:
 		//유카리
 		return (god_ == GT_YUKARI);
+	case 20:
+		//조온시온
+		return (god_ == GT_JOON_AND_SION);
 	}
 }
 
-int GetMaxAlter(){return 20;};
+int GetMaxAlter(){return 21;};
 
 
 void makeAunnTemple(map_dummy* map, coord_def c)
@@ -628,18 +631,18 @@ char* real_altar_pattern(map_dummy* map, int id_)
 	case 19: //유카리 스키마 제단
 		{
 			map->size_x = 2;
-			map->size_y = 6;	
-			map->m_entrance.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->size_y = 6;
+			map->m_entrance.x = rand_int(-map->size_x + 1, map->size_x - 1);
 			map->m_entrance.y = map->size_y;
-			map->m_exit.x = rand_int(-map->size_x+1,map->size_x-1);
+			map->m_exit.x = rand_int(-map->size_x + 1, map->size_x - 1);
 			map->m_exit.y = map->size_y;
-						
+
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUKARI);
-			for(int i = -5; i <=5; i+=2)
+			for (int i = -5; i <= 5; i += 2)
 			{
-				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(-1,i),EVT_APPROACH_SMALL));
-				map->event_list.push_back(mapdummy_event(EVL_SUKIMA,coord_def(1,i),EVT_APPROACH_SMALL));
+				map->event_list.push_back(mapdummy_event(EVL_SUKIMA, coord_def(-1, i), EVT_APPROACH_SMALL));
+				map->event_list.push_back(mapdummy_event(EVL_SUKIMA, coord_def(1, i), EVT_APPROACH_SMALL));
 			}
 			makeAunnTemple(map, coord_def(0, 0));
 			map->name = "제단_유카리_스키마";
@@ -657,6 +660,44 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #...#\
 #...#\
 #...#";
+			break;
+		}
+	case 20: //죠온&시온 낚시 지형
+		{
+			map->size_x = 3;
+			map->size_y = 6;
+			map->m_entrance.x = rand_int(-map->size_x + 2, map->size_x - 2);
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = rand_int(-map->size_x + 2, map->size_x - 2);
+			map->m_exit.y = -map->size_y;
+
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_JOON_AND_SION);
+
+			for (int i = 0; i < 5; i++)
+			{
+				coord_def c_(1 - (i % 3) , -5 + i * 2);
+				item_infor t;
+				makeitem(randA(1) ? ITM_SCROLL : ITM_POTION, 0, &t, 1);
+				map->event_list.push_back(mapdummy_event(EVL_SION_DELETE, c_, EVT_APPROACH_SMALL));
+				map->item_list.push_back(mapdummy_item(t, c_));
+			}
+			makeAunnTemple(map, coord_def(-1, 5));
+			map->name = "제단_죠온시온_낚시";
+			return  "\
+##...##\
+###...#\
+###...#\
+##...##\
+#...###\
+#...###\
+##...##\
+###...#\
+###...#\
+##...##\
+#...###\
+#.0.###\
+#######";
 			break;
 		}
 	}

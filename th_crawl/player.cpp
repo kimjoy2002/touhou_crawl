@@ -4005,7 +4005,7 @@ bool players::Drink(char id_)
 					int use_num_ = 1;
 					if(!you.GetPunish(GT_EIRIN) || randA(1))
 					{
-						if (you.god == GT_JOON_AND_SION)
+						if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 						{
 							if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) == 0)
 							{
@@ -4187,7 +4187,7 @@ bool players::Read(char id_)
 					printarray(true,false,false,CL_normal,3,it->GetName(-2).c_str(),it->GetNameInfor().name_to(true),"ÀÐ¾ú´Ù.");
 					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
 					int use_num_ = 1;
-					if (you.god == GT_JOON_AND_SION) 
+					if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 					{
 						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) >= 0)
 						{

@@ -219,7 +219,7 @@ void discard(list<item>::iterator it, int number)
 	if (number == 0)
 		number = it->num;
 	int drop_number = number;
-	if (you.god == GT_JOON_AND_SION)
+	if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 	{
 		if ((*it).type == ITM_POTION || (*it).type == ITM_SCROLL) {
 			for (int i = 0; i < number; i++) {

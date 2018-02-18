@@ -51,7 +51,6 @@ void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::ite
 	bool rect_ = (infor_->skill) ? SkillFlagCheck((skill_list)infor_->spell, S_FLAG_RECT) : SpellFlagCheck((spell_list)infor_->spell, S_FLAG_RECT);
 
 
-	throwstring(it, infor_);
 	if (infor_->smite)
 		paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
 	if (infor_->spell == -2 && SpellcardFlagCheck((spellcard_evoke_type)infor_->spell, S_FLAG_DEBUF))
@@ -85,6 +84,7 @@ void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::ite
 
 bool refreshPath_after(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
 {
+	throwstring(it, infor_);
 	bool rect_ = (infor_->skill) ? SkillFlagCheck((skill_list)infor_->spell, S_FLAG_RECT) : SpellFlagCheck((spell_list)infor_->spell, S_FLAG_RECT);
 
 	bool good_path = (!infor_->smite)?CheckThrowPath(you.position,you.search_pos,beam):env[current_level].isMove(you.search_pos.x,you.search_pos.y,true);

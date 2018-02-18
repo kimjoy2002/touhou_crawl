@@ -3120,7 +3120,29 @@ bool god_punish(god_type god)
 	case GT_NONE:
 		break;
 	case GT_JOON_AND_SION:
-		break;
+	{
+		random_extraction<int> rand_;
+		rand_.push(0, 50);//죠온이 강제 빙의하면서 파워 감소
+		rand_.push(1, 50);//시온이 강제 빙의하면서 체력 영력 감소
+		switch (rand_.pop())
+		{
+		case 0:
+			you.god_value[GT_JOON_AND_SION][0] = 1;
+			you.god_value[GT_JOON_AND_SION][1] = rand_int(250, 400);
+			you.PowUpDown(-100);
+			printarray(true, false, false, CL_white_blue, 1, "죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!");
+			break;
+		case 1:
+			you.god_value[GT_JOON_AND_SION][0] = 2;
+			you.god_value[GT_JOON_AND_SION][1] = rand_int(250, 400);
+			you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
+			if (!you.pure_mp)
+				you.MpUpDown(-you.max_mp / 2);
+			printarray(true, false, false, CL_white_blue, 1, "시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!");
+			break;
+		}
+	}
+	break;
 	case GT_BYAKUREN:
 		{
 			random_extraction<int> rand_;
@@ -3129,7 +3151,7 @@ bool god_punish(god_type god)
 			rand_.push(2,25);//슬로우
 			switch(rand_.pop())
 			{
-			case 0:				
+			case 0:
 				you.MpUpDown(!you.pure_skill? -you.GetMaxMp(): -you.GetMaxMp()/2);
 				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 영력이 흡수되었다!");
 				break;

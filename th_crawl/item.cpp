@@ -1160,7 +1160,7 @@ int item::action(int delay_)
 	}
 	if (now_find)
 	{
-		if (you.god == GT_JOON_AND_SION)
+		if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (type == ITM_POTION || type == ITM_SCROLL) {
 				waste -= you.god_value[GT_JOON_AND_SION][0] == 2 ? 100 : 10; //기본 1000턴후에 사라짐

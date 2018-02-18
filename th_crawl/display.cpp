@@ -1413,13 +1413,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				stateDraw.addState(temp, color_, "장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.", this);
 			}
 
-			if (you.god == GT_JOON_AND_SION) 
+			if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-					stateDraw.addState("빙의(죠온)", CL_joon, "소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다. 빙의가 풀리면 파워 3.00로 내려갑니다.", this);
+					stateDraw.addState("빙의(죠온)", CL_joon, you.GetPunish(GT_JOON_AND_SION)?"소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다.":
+						"소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다. 빙의가 풀리면 파워 3.00로 내려갑니다.", this);
 				}
 				if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-					stateDraw.addState("빙의(시온)", CL_sion, "줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.", this);
+					stateDraw.addState("빙의(시온)", CL_sion, you.GetPunish(GT_JOON_AND_SION) ? "줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다." : 
+						"줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.", this);
 				}
 			}
 			if(you.GetStatPanalty())

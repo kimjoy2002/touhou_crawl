@@ -3976,3 +3976,49 @@ bool sionResurrection() {
 	}
 	return false;
 }
+
+void godAutoPickUp(god_type god_, bool belive_) {
+
+	switch (god_)
+	{
+	case GT_BYAKUREN:
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_JOON_AND_SION:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MINORIKO:
+	case GT_MIMA:
+	case GT_SHINKI:
+		break;
+	case GT_YUUGI:
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_ALCOHOL] = belive_;
+		break;
+	case GT_SHIZUHA:
+	case GT_HINA:
+		break;
+	case GT_YUKARI:
+		iden_list.autopickup[IDEN_CHECK_SCROLL_START + SCT_BLINK] = !belive_;
+		iden_list.autopickup[IDEN_CHECK_SCROLL_START + SCT_TELEPORT] = !belive_;
+		//공간이동
+		break;
+	case GT_EIRIN:
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_POISON] = belive_;
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_PARALYSIS] = belive_;
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_CONFUSE] = belive_;
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_SLOW] = belive_;
+		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_DOWN_STAT] = belive_;
+		//포션 다 주워
+		break;
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
+	case GT_MIKO:
+	case GT_OKINA:
+	case GT_JUNKO:
+	default:
+		break;
+	}
+}

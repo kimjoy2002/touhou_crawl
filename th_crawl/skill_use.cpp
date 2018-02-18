@@ -1976,7 +1976,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	GodAccpect_Abandon(you.god);
 
 	you.Ability(SKL_ABANDON_GOD, true, true);
-
+	godAutoPickUp(you.god, false);
 
 
 

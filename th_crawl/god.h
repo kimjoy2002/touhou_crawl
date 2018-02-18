@@ -42,6 +42,7 @@ bool god_punish(god_type god);
 void createGold(coord_def c, int num);
 void joonRandomBuff();
 bool sionResurrection();
+void godAutoPickUp(god_type god_, bool belive_);
 
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
 bool GodAccpect_Entering();

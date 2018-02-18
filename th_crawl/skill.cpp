@@ -82,7 +82,7 @@ int need_skill_exp(int level, int aptit)
 { 
 	if(level<0) return 0;
 	else if(level == 27) return -1;
-	return (60+(level)*(30+(level-1)*35))*aptit/100;
+	return (60+(level)*(30+(level-1)*45))*aptit/100;
 }
 
 int exp_to_skill_exp(int level)

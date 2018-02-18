@@ -181,7 +181,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		{
 			for(it2=env[current_level].mon_vector.begin(); it2 != env[current_level].mon_vector.end(); it2++)
 			{
-				if((*it2).isLive() && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) )
+				if((*it2).isLive() && !((*it2).flag & M_FLAG_UNHARM) && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) )
 				{
 					int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);
 					if(length_<3)

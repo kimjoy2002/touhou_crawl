@@ -9,6 +9,7 @@
 #include "map.h"
 #include "throw.h"
 #include "rand_shuffle.h"
+#include "mon_infor.h"
 #include <algorithm>
 
 map_infor map_list;
@@ -464,14 +465,17 @@ bool PixedMap(map_dummy* map, char *temp)
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_SEA;
 				break;	
 			case 'i': //각 던전에서 드랍되는 아이템을 넣음
+			case 'I': //여러개
 				{
-					item_infor t;
-					CreateFloorItem(map->floor,&t);
-					map->item_list.push_back(mapdummy_item(t,coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y)));
-					map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
+					int num_ = temp[j] == 'I' ? rand_int(3,4) : 1;
+					for (int k = 0; k < num_; k++) {
+						item_infor t;
+						CreateFloorItem(map->floor, &t);
+						map->item_list.push_back(mapdummy_item(t, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+						map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+					}
 				}
-				break;	
-
+				break;
 			case '0':
 			case '1':
 			case '2':
@@ -484,8 +488,13 @@ bool PixedMap(map_dummy* map, char *temp)
 			case '9':
 			{
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->sp_tile_list[temp[j]-'0'];
-
-				if(map->sp_tile_list[temp[j]-'0']>= DG_SUB_STAIR_FIRST && map->sp_tile_list[temp[j]-'0'] < DG_SUB_STAIR_MAX)
+				if (map->sp_tile_list[temp[j] - '0'] == DG_WALL) {
+					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->wall_tex;
+				}
+				else if (map->sp_tile_list[temp[j] - '0'] == DG_FLOOR) {
+					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+				}
+				else if(map->sp_tile_list[temp[j]-'0']>= DG_SUB_STAIR_FIRST && map->sp_tile_list[temp[j]-'0'] < DG_SUB_STAIR_MAX)
 				{//특수 지형이 만약 서브던젼 계단입구일 경우
 					int stiar_enter_ = map->sp_tile_list[temp[j]-'0'] - DG_SUB_STAIR_FIRST;
 					if(stiar_enter_>=SUBTERRANEAN)
@@ -495,6 +504,40 @@ bool PixedMap(map_dummy* map, char *temp)
 					//map_list.dungeon_enter[stiar_enter_].detected = true;
 					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);
 					map_list.dungeon_enter[stiar_enter_].pos += map->pos;
+				}
+				break;
+			}
+			case 'n':
+			case 'm':
+			case 'M':
+			{
+				//그 층에 일반적으로 나오는 몹들
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+				int mon_ = getMonsterFromFloor(map->floor, (temp[j]=='m'? GMFF_FLAG_ALL: (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
+				if (mon_ != -1) {
+					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+				}
+				break;
+			}
+			case 'd':
+			case 'D':
+			{
+				//꿈몹
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DREAM_FLOOR;
+				int mon_ = getMonsterFromFloor(DREAM_LEVEL, (temp[j] == 'd' ? GMFF_FLAG_ALL : (temp[j] == 'D' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
+				if (mon_ != -1) {
+					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+				}
+				break;
+			}
+			case 'h':
+			case 'H':
+			{
+				//지저몹
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_FLOOR1;
+				int mon_ = getMonsterFromFloor(SUBTERRANEAN_LEVEL, (temp[j] == 'd' ? GMFF_FLAG_ALL : (temp[j] == 'D' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
+				if (mon_ != -1) {
+					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
 				}
 				break;
 			}

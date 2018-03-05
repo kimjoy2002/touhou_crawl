@@ -65,6 +65,12 @@ enum monster_flag
 };
 
 
+enum getMonsterFromFloor_flag
+{
+	GMFF_FLAG_ALL = 0,
+	GMFF_FLAG_ONLY_WEAK,
+	GMFF_FLAG_ONLY_STRONG
+};
 
 extern const mon_infor mondata[];
 
@@ -75,6 +81,7 @@ void unset_exist_named(monster_index id);
 
 void create_mon(int floor, int num_);
 void init_monster();
+int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_);
 
 struct unique_infor
 {

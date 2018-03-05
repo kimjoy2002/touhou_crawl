@@ -15,7 +15,8 @@
 
 
 
-dungeon_tile_type randomTemple();
+dungeon_tile_type randomTemple(); 
+char* pande_pattern(map_dummy* map);
 
 char* common_enter_pattern(map_dummy* map)
 {
@@ -47,6 +48,8 @@ char* common_enter_pattern(map_dummy* map)
 
 char* common_base_pattern(int floor_, map_dummy* map)
 {
+	if (floor_ >= PANDEMONIUM_LEVEL && floor_ <= PANDEMONIUM_LAST_LEVEL)
+		return pande_pattern(map);
 
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
@@ -1772,6 +1775,695 @@ TT.....TT\
 	}
 	return NULL;
 }
+
+
+char* pande_pattern(map_dummy* map)
+{
+
+	switch (randA(21))
+	{
+	default:
+	case 0:
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = -map->size_x;
+		map->m_entrance.y = 0;
+		map->m_exit.x = map->size_x;
+		map->m_exit.y = 0;
+		map->flag = FLAG_NO_STAIR;
+		map->name = "마계_X자방";
+		return  "\
+###.###\
+##...##\
+#.#.#.#\
+...#...\
+#.#.#.#\
+##...##\
+###.###";
+		break;
+	case 1:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 5;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_STAIR;
+		map->name = "마계_유리방";
+		return  "\
+=.=.=.=.=.=\
+...........\
+=.........=\
+...........\
+=...m.m...=\
+.....M.....\
+=...m.m...=\
+...........\
+=.........=\
+...........\
+=.=.=.=.=.=";
+		break;
+	}
+	case 2:
+		map->size_x = 3;
+		map->size_y = 4;
+		map->m_entrance.x = 2;
+		map->m_entrance.y = -map->size_y;
+		map->m_exit.x = -2;
+		map->m_exit.y = map->size_y;
+		map->flag = FLAG_NO_STAIR;
+		map->name = "마계_ㄹ자_작은방";
+	return  "\
+#####.#\
+#.....#\
+#+#####\
+#.....#\
+#.mMm.#\
+#.....#\
+#####+#\
+#.....#\
+#.#####";
+	case 3:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 5;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_STAIR;
+		map->name = "마계_다이아몬드방";
+		map->sp_tile_list.clear();
+		int rand_ = randA(3);
+		for (int i = 0; i < 4; i++) {
+			if(rand_ == i)
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			else
+				map->sp_tile_list.push_back(DG_WALL);
+		}
+		return  "\
+...........\
+....#0#....\
+...##.##...\
+..##.m.##..\
+.##.mim.##.\
+.3.miiim.1.\
+.##.mim.##.\
+..##.m.##..\
+...##.##...\
+....#2#....\
+...........";
+		break;
+	}
+	case 4:
+	{
+		map->size_x = 4;
+		map->size_y = 6;
+		map->m_entrance.x = -1;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 1;
+		map->m_exit.y = map->size_y;
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_N방";
+		return  "\
+$$$$$$$$$\
+$...M...$\
+$.$+++$.$\
+$.=...=.$\
+$n=...=n$\
+$m=...=m$\
+$m=...=m$\
+$m=...=m$\
+$n=...=n$\
+$.=...=.$\
+$+$...$+$\
+$I$...$I$\
+$$$...$$$";
+		break;
+	}
+	case 5:
+	{
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = -map->size_y;
+		map->m_exit.x = rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = -map->size_y;
+		map->name = "마계_지그재그";
+		return  "\
+#.............#\
+#.............#\
+#.###########.#\
+#.#.........#.#\
+#.#.#m.m.m#.#.#\
+#.#.#.....#.#.#\
+#.#.#.###.#.#.#\
+#.#.#.#I#.#.#.#\
+#.#.#.#M#.#.#.#\
+#.#.#.....#.#.#\
+#.#.#######.#.#\
+#.#.........#.#\
+#.#n.n.n.n.n#.#\
+#.............#\
+###############";
+		break;
+	}
+	case 6:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_유전자";
+		return  "\
+...............\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+..###.....###..\
+#.....###.....#\
+...............";
+		break;
+	}
+	case 7:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 6;
+		map->size_y = 6;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_십자가";
+		return  "\
+.............\
+.....#.#.....\
+.....#.#.....\
+.....#.#.....\
+.....#.#.....\
+.#####.#####.\
+.............\
+.#####.#####.\
+.....#.#.....\
+.....#.#.....\
+.....#.#.....\
+.....#.#.....\
+.............";
+		break;
+	}
+	case 8:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 6;
+		map->size_y = 6;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_클로버_작은방";
+		return  "\
+.............\
+.............\
+....#...#....\
+...##...##...\
+..####+####..\
+....#...#....\
+....+...+....\
+....#...#....\
+..####+####..\
+...##...##...\
+....#...#....\
+.............\
+.............";
+		break;
+	}
+	case 9:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 6;
+		map->size_y = 6;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
+		random_extraction<int> rand_ext_;
+		rand_ext_.push(0);
+		rand_ext_.push(1);
+		rand_ext_.push(2);
+		rand_ext_.push(3);
+		int rand_ = rand_ext_.pop();
+		int rand2_ = rand_ext_.pop();
+		for (int i = 0; i < 4; i++) {
+			if (rand_ == i || rand2_ == i) {
+				map->sp_tile_list.push_back(DG_FLOOR);
+			}
+			else {
+				map->sp_tile_list.push_back(DG_SEA);
+			}
+		}
+		for (int i = 4; i < 8; i++) {
+			if (rand_+4 == i || rand2_+4 == i) {
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			}
+			else {
+				map->sp_tile_list.push_back(DG_GLASS);
+			}
+		}
+		map->name = "마계_물길";
+		return  "\
+.............\
+....==4==....\
+...==~0~==...\
+..==~~0~~==..\
+.==~~~0~~~==.\
+.=~~~~0~~~~=.\
+.51111i33337.\
+.=~~~~2~~~~=.\
+.==~~~2~~~==.\
+..==~~2~~==..\
+...==~2~==...\
+....==6==....\
+.............";
+		break;
+	}
+	case 10:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_디스코";
+		int add_ = randA(6);
+		for (int i = 0; i < 7; i++) {
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1+((i+ add_)%7)));
+		}
+		return  "\
+666666666666666\
+655555555555556\
+654444444444456\
+654333333333456\
+654322222223456\
+654321111123456\
+654321000123456\
+654321000123456\
+654321000123456\
+654321111123456\
+654322222223456\
+654333333333456\
+654444444444456\
+655555555555556\
+666666666666666";
+		break;
+	}
+	case 11:
+	{
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = -map->size_x;
+		map->m_entrance.y = 0;
+		map->m_exit.x = map->size_x;
+		map->m_exit.y = 0;		
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_무지개방";
+		int add_ = randA(6);
+		for (int i = 0; i < 7; i++) {
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + ((i + add_) % 7)));
+		}
+		return  "\
+000002222244444\
+0...02...24...4\
+0.m.++.m.++.m.4\
+0...02...24...4\
+00+0022+2244+44\
+11+11.....66+66\
+1...1.....6...6\
++.m.+..M..+.m.+\
+1...1.....6...6\
+11+11.....66+66\
+55+5533+3311+11\
+5...53...31...1\
+5.m.++.m.++.m.1\
+5...53...31...1\
+555553333311111";
+		break;
+	}
+	case 12:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_호수_신전";
+		map->sp_tile_list.push_back(randomTemple());
+		return  "\
+.........\
+.........\
+..~~~~~..\
+..~~~~~..\
+..~~0~~..\
+..~~~~~..\
+..~~~~~..\
+.........\
+.........";
+		break;
+	}
+	case 13:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_색다른방";
+		int rand_ = randA(3);
+		int rand2_ = randA(6);
+		for (int i = 0; i < 4; i++) {
+			if (rand_ == i)
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			else
+				map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand2_));
+		}
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand2_));
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1 + rand2_));
+		return  "\
+.........\
+.4440444.\
+.4555554.\
+.4555554.\
+.3555551.\
+.4555554.\
+.4555554.\
+.4442444.\
+.........";
+		break;
+	}
+	case 14:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_색다른방_몬스터";
+		int rand_ = randA(3);
+		int rand2_ = randA(6);
+		for (int i = 0; i < 4; i++) {
+			if (rand_ == i)
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			else
+				map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand2_));
+		}
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand2_));
+		return  "\
+.........\
+.4440444.\
+.4.....4.\
+.4.mmm.4.\
+.3.mMm.1.\
+.4.mmm.4.\
+.4.....4.\
+.4442444.\
+.........";
+		break;
+	}
+	case 15:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 5;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_보상함정방";
+		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, 3), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, -2), EVT_ALWAYS));
+		return  "\
+...........\
+..$&&&&&$..\
+..$iiiii$..\
+..$$$+$$$..\
+..$&M.M&$..\
+..$m.m.m$..\
+..$.mmm.$..\
+..$.....$..\
+..$$$+$$$..\
+...........\
+...........";
+		break;
+	}
+	case 16:
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = 0;
+		map->m_entrance.y = -map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = map->size_y;
+		//map->flag = FLAG_NO_STAIR;
+		map->name = "마계_유리와_문_방";
+		return  "\
+###.###\
+#.....#\
+#..#..#\
+#+#=#+#\
+#..#..#\
+#.....#\
+###.###";
+		break;
+	case 17:
+	{
+		map->size_x = 7;
+		map->size_y = 4;
+		map->m_entrance.x = map->size_x;
+		map->m_entrance.y = 0;
+		map->m_exit.x = -map->size_x;
+		map->m_exit.y = 0;
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_유리_통로";
+		return  "\
+===#########===\
+=m=#########=M=\
+==+.........+==\
+##...........##\
+.+...........+.\
+##...........##\
+==+.........+==\
+=M=#########=m=\
+===#########===";
+		break;
+	}
+	case 18:
+	{
+		map->size_x = 6;
+		map->size_y = 7;
+		map->m_entrance.x = rand_int(-1, 1);
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = rand_int(-1,1);
+		map->m_exit.y = map->size_y;
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		random_extraction<int> rand_ext_;
+		rand_ext_.push(0);
+		rand_ext_.push(1);
+		rand_ext_.push(2);
+		rand_ext_.push(3);
+		rand_ext_.push(4);
+		rand_ext_.push(5);
+		rand_ext_.push(6);
+		for (int i = 0; i < 3; i++) {
+			int rand_ = rand_ext_.pop();
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand_));
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1 + rand_));
+		}
+		map->name = "마계_브로콜리";
+		return  "\
+````00000````\
+````01110````\
+2222011104444\
+2333011105554\
+233300+005554\
+2333+...+5554\
+22222...44444\
+````#...#````\
+````#...#````\
+````#...#````\
+````#...#````\
+````#...#````\
+````#...#````\
+````#...#````\
+````#...#````";
+		break;
+	}
+	case 19:
+	{
+		map->size_x = 7;
+		map->size_y = 5;
+		map->m_entrance.x = map->size_x;
+		map->m_entrance.y = 0;
+		map->m_exit.x = -map->size_x;
+		map->m_exit.y = 0;
+		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_벨트_통로";
+		return  "\
+```````````````\
+`$``#######``=`\
+````#.....#````\
+```##.....##```\
+####.......####\
+...............\
+####.......####\
+```##.....##```\
+````#.....#````\
+`~``#######``&`\
+```````````````";
+		break;
+	}
+	case 20:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_꿈방";
+		int rand_ = randA(3);
+		for (int i = 0; i < 4; i++) {
+			if (rand_ == i)
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			else
+				map->sp_tile_list.push_back((dungeon_tile_type)(DG_WALL2));
+		}
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_WALL2));
+		return  "\
+.........\
+..44044..\
+.44^^^44.\
+.4^d^d^4.\
+.3^^D^^1.\
+.4^d^d^4.\
+.44^^^44.\
+..44244..\
+.........";
+		break;
+	}
+	case 21:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 6;
+		map->size_y = 6;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_지저방";
+		int rand_ = randA(3);
+		for (int i = 0; i < 4; i++) {
+			if (rand_ == i)
+				map->sp_tile_list.push_back(DG_CLOSE_DOOR);
+			else
+				map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1));
+		}
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1));
+		map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1));
+		return  "\
+.............\
+.444.....444.\
+.454.....454.\
+.45444044454.\
+.45555555554.\
+.455h555h554.\
+.15555H55552.\
+.455h555h554.\
+.45555555554.\
+.45444344454.\
+.454.....454.\
+.444.....444.\
+..............";
+		break;
+	}
+	case 999:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 7;
+		map->size_y = 7;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->name = "마계_템플릿";
+		return  "\
+...............\
+...............\
+...............\
+...............\
+...............\
+...............\
+...............\
+.......M.......\
+...............\
+...............\
+...............\
+...............\
+...............\
+...............\
+...............";
+		break;
+	}
+	}
+}
+
+
 
 
 

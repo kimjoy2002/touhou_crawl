@@ -673,6 +673,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_JOON_AND_SION);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR | FLAG_NO_ITEM;
 
 			for (int i = 0; i < 5; i++)
 			{

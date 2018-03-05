@@ -1965,3 +1965,272 @@ void SetResistMonster(monster* mon)
 		break;
 	}
 }
+
+int weak(getMonsterFromFloor_flag power) {
+	return power != GMFF_FLAG_ONLY_STRONG ? 3 : 0;
+}
+
+int middle(getMonsterFromFloor_flag power) {
+	return power == GMFF_FLAG_ALL ? 4 : 0;
+}
+
+int strong(getMonsterFromFloor_flag power) {
+	return power != GMFF_FLAG_ONLY_WEAK ? 1 : 0;
+}
+
+int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
+{
+	//-1은 실패이므로 항상 체크를 해야한다.
+
+	//power 0은 약함 강함 상관없이
+	//power 1은 약한 몬스터만
+	//power 2는 강한 몬스터만
+
+	if (isArena())
+		return -1;
+	random_extraction<int> rand_;
+
+	if (level_ < TEMPLE_LEVEL) {
+		if (level_ < 4) {
+			rand_.push(MON_MOOK, weak(power_));
+			rand_.push(MON_RAT, weak(power_));
+			rand_.push(MON_REIMUYUKKURI, middle(power_));
+			rand_.push(MON_FAIRY_GREEN, middle(power_));
+			rand_.push(MON_FAIRY_BLUE, middle(power_));
+			rand_.push(MON_FAIRY_RED, strong(power_));
+			rand_.push(MON_CROW, weak(power_));
+			rand_.push(MON_FIREFLY, strong(power_));
+			rand_.push(MON_SPIDER, strong(power_));
+			rand_.push(MON_BAKEKASA, strong(power_));
+		}
+		//극초반
+		else if (level_ < 8) {
+			rand_.push(MON_FAIRY_GREEN, weak(power_));
+			rand_.push(MON_FAIRY_BLUE, weak(power_));
+			rand_.push(MON_FAIRY_RED, middle(power_));
+			rand_.push(MON_HUMAM_MAN, weak(power_));
+			rand_.push(MON_HUMAM_PRIEST, middle(power_));
+			rand_.push(MON_HUMAM_YINYANG, middle(power_));
+			rand_.push(MON_HUMAM_SAMURI, strong(power_));
+			rand_.push(MON_CRANE, strong(power_));
+			rand_.push(MON_KATPA, weak(power_));
+			rand_.push(MON_MARISAYUKKURI, middle(power_));
+			rand_.push(MON_SNAKE, middle(power_));
+			rand_.push(MON_SNAKE, middle(power_));
+			rand_.push(MON_FROG, strong(power_));
+			//초반
+		} else if (level_ < 13) {
+			rand_.push(MON_HUMAM_PRIEST, weak(power_));
+			rand_.push(MON_HUMAM_YINYANG, weak(power_));
+			rand_.push(MON_HUMAM_SAMURI, middle(power_));
+			rand_.push(MON_FROG, middle(power_));
+			rand_.push(MON_ORANGE_CAT, middle(power_));
+			rand_.push(MON_WHITE_CAT, middle(power_));
+			rand_.push(MON_BLACK_CAT, middle(power_));
+			rand_.push(MON_FAIRY_RED, weak(power_));
+			rand_.push(MON_FAIRY_GREEN_WARRIOR, middle(power_));
+			rand_.push(MON_FAIRY_BLUE_MAGICIAN, middle(power_));
+			rand_.push(MON_CRANE, middle(power_));
+			rand_.push(MON_YAMABIKO, middle(power_));
+			rand_.push(MON_CROW_TENGU, strong(power_));
+			rand_.push(MON_RED_UFO, strong(power_));
+			rand_.push(MON_KATPA_SPEAR, strong(power_));
+			rand_.push(MON_FAIRY_HERO, strong(power_));
+			//중반
+		}
+		else {
+			rand_.push(MON_FROG, weak(power_));
+			rand_.push(MON_HUMAM_SAMURI, weak(power_));
+			rand_.push(MON_FAIRY_GREEN_WARRIOR, weak(power_));
+			rand_.push(MON_FAIRY_BLUE_MAGICIAN, weak(power_));
+			rand_.push(MON_FAIRY_HERO, middle(power_));
+			rand_.push(MON_CROW_TENGU, middle(power_));
+			rand_.push(MON_KATPA_SPEAR, middle(power_));
+			rand_.push(MON_ONI, strong(power_));
+			rand_.push(MON_BLUE_ONI, strong(power_));
+			rand_.push(MON_RED_UFO, middle(power_));
+			rand_.push(MON_BLUE_UFO, middle(power_));
+			rand_.push(MON_GREEN_UFO, middle(power_));
+			rand_.push(MON_EAGLE, middle(power_));
+			rand_.push(MON_TIGER, middle(power_));
+			rand_.push(MON_DRAGON_BABY, strong(power_));
+		}
+	}
+	else if (level_ == TEMPLE_LEVEL) {
+		return -1;
+	}
+	else if (level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL + MAX_MISTY_LAKE_LEVEL) {
+		rand_.push(MON_FAIRY_GREEN, weak(power_));
+		rand_.push(MON_FAIRY_BLUE, weak(power_));
+		rand_.push(MON_FAIRY_RED, weak(power_));
+		rand_.push(MON_FAIRY_GREEN_WARRIOR, middle(power_));
+		rand_.push(MON_FAIRY_BLUE_MAGICIAN, middle(power_));
+		rand_.push(MON_FAIRY_RED_COMMANDER, middle(power_));
+		rand_.push(MON_FAIRY_HERO, strong(power_));
+		rand_.push(MON_MUSHROOM, middle(power_));
+		rand_.push(MON_FROG, middle(power_));
+		rand_.push(MON_DEAGAMA, strong(power_));
+	}
+	else if (level_ >= YOUKAI_MOUNTAIN_LEVEL && level_ <= YOUKAI_MOUNTAIN_LEVEL + MAX_YOUKAI_MOUNTAIN_LEVEL) {
+		rand_.push(MON_FROG, weak(power_)); 
+		rand_.push(MON_KATPA, weak(power_));
+		rand_.push(MON_KATPA_SPEAR, middle(power_));
+		rand_.push(MON_KATPA_WATER_WIZARD, middle(power_));
+		rand_.push(MON_YAMABUSH_TENGU, middle(power_));
+		rand_.push(MON_YAMAWARO_NINJA, middle(power_));
+		rand_.push(MON_YAMAWARO_WAWRRIOR, middle(power_));
+		rand_.push(MON_YAMAWARO_FLAG, middle(power_));
+		rand_.push(MON_AYAYUKKURI, middle(power_));
+		rand_.push(MON_CROW_TENGU, middle(power_));
+		rand_.push(MON_HANATACA_TENGU, middle(power_));
+		rand_.push(MON_SANPEI_FIGHTER, strong(power_));
+	}
+	else if (level_ >= SCARLET_LEVEL && level_ <= SCARLET_LEVEL + MAX_SCARLET_LEVEL) {
+
+		rand_.push(MON_HOBGOBRIN, weak(power_));
+		rand_.push(MON_MAID_FAIRY, weak(power_));
+		rand_.push(MON_HOBGOBRIN_MAID, middle(power_));
+		rand_.push(MON_HOBGOBRIN_LIBRARIAN, middle(power_));
+		rand_.push(MON_MAGIC_BOOK, middle(power_));
+		rand_.push(MON_VAMPIER_BAT, middle(power_));
+		rand_.push(MON_HOBGOBRIN_TEMP, strong(power_));
+		rand_.push(MON_CHUPARCABRA, strong(power_));
+	}
+	else if (level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL + MAX_SCARLET_LIBRARY_LEVEL) {
+		rand_.push(MON_MAGIC_BOOK, weak(power_));
+		rand_.push(MON_MAGIC_BOOK, middle(power_));
+		rand_.push(MON_MAGIC_BOOK, strong(power_));
+	}
+	else if (level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL + MAX_SCARLET_UNDER_LEVEL) {
+		return -1;
+	}
+	else if (level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL + MAX_BAMBOO_LEVEL) {
+		rand_.push(MON_RABIT_SPEAR, weak(power_));
+		rand_.push(MON_RABIT_SPEAR, middle(power_));
+		rand_.push(MON_RABIT_SUPPORT, middle(power_));
+		rand_.push(MON_RABIT_MAGIC, middle(power_));
+		rand_.push(MON_RABIT_BOMB, strong(power_));
+	}
+	else if (level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL) {
+		rand_.push(MON_RABIT_SPEAR, weak(power_));
+		rand_.push(MON_RABIT_SPEAR, middle(power_));
+		rand_.push(MON_RABIT_SUPPORT, middle(power_));
+		rand_.push(MON_RABIT_MAGIC, middle(power_));
+		rand_.push(MON_RABIT_BOMB, strong(power_));
+	}
+	else if (level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL + MAX_SUBTERRANEAN_LEVEL) {
+		rand_.push(MON_HELL_CROW, weak(power_));
+		rand_.push(MON_VAMPIER_BAT, weak(power_));
+		rand_.push(MON_HAUNT, weak(power_));
+		rand_.push(MON_HELL_SPIDER, middle(power_));
+		rand_.push(MON_HELL_HOUND, middle(power_));
+		rand_.push(MON_HOBGOBRIN_LIBRARIAN, middle(power_));
+		rand_.push(MON_LANTERN_YOUKAI, middle(power_));
+		rand_.push(MON_BLOOD_HAUNT, middle(power_));
+		rand_.push(MON_ONI, middle(power_));
+		rand_.push(MON_BLUE_ONI, middle(power_));
+		rand_.push(MON_FIRE_CAR, strong(power_));
+	}
+	else if (level_ >= YUKKURI_LEVEL && level_ <= YUKKURI_LAST_LEVEL) {
+		rand_.push(MON_REIMUYUKKURI, weak(power_));
+		rand_.push(MON_MARISAYUKKURI, weak(power_));
+		rand_.push(MON_AYAYUKKURI, middle(power_)); 
+		rand_.push(MON_AYAYUKKURI, middle(power_)); //빈도수를 높이기위함
+		rand_.push(MON_REMILIAYUKKURI, middle(power_));
+		rand_.push(MON_REMILIAYUKKURI, middle(power_));
+		rand_.push(MON_YOUMUYUKKURI, strong(power_));
+		rand_.push(MON_ALICEYUKKURI, strong(power_));
+	}
+	else if (level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL) {
+		rand_.push(MON_TIGER, weak(power_));
+		rand_.push(MON_EAGLE, weak(power_));
+		rand_.push(MON_RAIJUU, weak(power_));
+		rand_.push(MON_RACCON, weak(power_));
+		rand_.push(MON_SNOW_GIRL, middle(power_));
+		rand_.push(MON_DRAGON_BABY, middle(power_));
+		rand_.push(MON_BLUE_UFO, middle(power_));
+		rand_.push(MON_RED_UFO, middle(power_));
+		rand_.push(MON_GREEN_UFO, middle(power_));
+		rand_.push(MON_NAMAZ, strong(power_));
+		rand_.push(MON_LANTERN_YOUKAI, strong(power_));
+		rand_.push(MON_ONI, strong(power_));
+		rand_.push(MON_BLUE_ONI, strong(power_));
+	}
+	else if (level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL) {
+		rand_.push(MON_SHEEP, weak(power_));
+		rand_.push(MON_MOON_RABIT_ATTACK, weak(power_));
+		rand_.push(MON_MOON_RABIT_SUPPORT, middle(power_));
+		rand_.push(MON_BLUE_UFO, middle(power_));
+		rand_.push(MON_RED_UFO, middle(power_));
+		rand_.push(MON_GREEN_UFO, middle(power_));
+		rand_.push(MON_NIGHTMARE, middle(power_));
+		rand_.push(MON_MAC, strong(power_));
+		rand_.push(MON_LUNATIC, middle(power_));
+		rand_.push(MON_MOON_RABIT_ELITE, strong(power_));
+	}
+	else if (level_ >= MOON_LEVEL && level_ <= MOON_LAST_LEVEL) {
+		rand_.push(MON_MOON_RABIT_ATTACK, weak(power_));
+		rand_.push(MON_MOON_RABIT_ATTACK, middle(power_));
+		rand_.push(MON_MOON_RABIT_SUPPORT, middle(power_));
+		rand_.push(MON_MOON_RABIT_ELITE, middle(power_));
+		rand_.push(MON_LUNATIC, middle(power_));
+		rand_.push(MON_MOON_RABIT_ELITE, strong(power_));
+	}
+	else if (level_ == PANDEMONIUM_LEVEL) {
+		rand_.push(MON_EVIL_EYE, weak(power_));
+		rand_.push(MON_LITTLE_IMP, weak(power_));
+		rand_.push(MON_SARA, middle(power_));
+		rand_.push(MON_LUIZE, middle(power_));
+		rand_.push(MON_ELIS, middle(power_));
+		rand_.push(MON_NIGHTMARE, middle(power_));
+		rand_.push(MON_YUKI, strong(power_));
+		rand_.push(MON_MAI, strong(power_));
+		rand_.push(MON_SARIEL, strong(power_));
+		rand_.push(MON_YUUGENMAGAN, strong(power_));
+	}
+	else if (level_ == PANDEMONIUM_LEVEL + 1) {
+		rand_.push(MON_EVIL_EYE, weak(power_));
+		rand_.push(MON_LITTLE_IMP, weak(power_));
+		rand_.push(MON_SARA, middle(power_));
+		rand_.push(MON_LUIZE, middle(power_));
+		rand_.push(MON_ELIS, middle(power_));
+		rand_.push(MON_NIGHTMARE, middle(power_));
+		rand_.push(MON_SARIEL, strong(power_));
+		rand_.push(MON_YUUGENMAGAN, strong(power_));
+	}
+	else if (level_ == PANDEMONIUM_LEVEL + 2) {
+		rand_.push(MON_EVIL_EYE, weak(power_));
+		rand_.push(MON_LITTLE_IMP, weak(power_));
+		rand_.push(MON_SARA, middle(power_));
+		rand_.push(MON_LUIZE, middle(power_));
+		rand_.push(MON_ELIS, middle(power_));
+		rand_.push(MON_NIGHTMARE, middle(power_));
+		rand_.push(MON_YUKI, strong(power_));
+		rand_.push(MON_MAI, strong(power_));
+	}
+	else if (level_ == PANDEMONIUM_LEVEL + 3) {
+		rand_.push(MON_LITTLE_IMP, weak(power_));
+		rand_.push(MON_SARA, middle(power_));
+		rand_.push(MON_LUIZE, middle(power_));
+		rand_.push(MON_ELIS, middle(power_));
+		rand_.push(MON_YUKI, strong(power_));
+		rand_.push(MON_MAI, strong(power_));
+	}
+	else if (level_ >= HAKUREI_LEVEL && level_ <= HAKUREI_LAST_LEVEL) {
+		rand_.push(MON_RACCON, weak(power_));
+		rand_.push(MON_DRAGON_BABY, middle(power_));
+		rand_.push(MON_FLOWER_TANK, middle(power_));
+		rand_.push(MON_ONI, middle(power_));
+		rand_.push(MON_BLUE_ONI, middle(power_));
+		rand_.push(MON_SNOW_GIRL, middle(power_));
+		rand_.push(MON_FIRE_CAR, strong(power_));
+		rand_.push(MON_EVIL_EYE_TANK, strong(power_));
+	}
+	else if (level_ == OKINA_LEVEL) {
+		return -1;
+	}
+	else {
+		return -1;
+	}
+	return rand_.pop();
+}

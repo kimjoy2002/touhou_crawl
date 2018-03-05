@@ -1863,7 +1863,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						}
 						if(auto_pick_)
 						{
-							if(!env[current_level].isMonsterPos((*temp).position.x,(*temp).position.y))
+							unit* unit_ = env[current_level].isMonsterPos((*temp).position.x, (*temp).position.y);
+							if(!unit_ || (!unit_->isView()))
 							{
 								img_effect_auto_pick.draw(pSprite,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f,255);
 							}

@@ -1071,6 +1071,14 @@ void GameOver()
 			ReplayClass.StopReplay(temp);
 		}
 	}
+	else if (isSprint())
+	{
+		char temp[256];
+		sprintf_s(temp, 256, "%d    ·¹º§ %dÀÇ %s %s %s \"%s\"", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str());
+
+
+		ReplayClass.StopReplay(temp);
+	}
 	else
 	{
 		ReplayClass.DeleteRpy();
@@ -1090,7 +1098,7 @@ void GameOver()
 	string dump_;
 	bool dump_ok = false;
 
-	if(isNormalGame())
+	if(isNormalGame() || isSprint())
 	{
 		for(list<item>::iterator it = you.item_list.begin(); it != you.item_list.end();it++)
 		{
@@ -1115,7 +1123,7 @@ void GameOver()
 			break;
 		}
 	}
-	if(isNormalGame())
+	if(isNormalGame() || isSprint())
 	{
 		iteminfor(true);
 		waitkeyinput(true);

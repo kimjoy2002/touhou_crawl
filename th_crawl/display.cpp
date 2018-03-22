@@ -1663,7 +1663,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_glow)
 			{
-				stateDraw.addState("발광", CL_white_blue,
+				stateDraw.addState("빛남", CL_white_blue,
 					"당신에게 빛이 비춰지고 있어 회피율이 낮아집니다.", this);
 			}
 			if(you.s_graze && !you.s_super_graze)

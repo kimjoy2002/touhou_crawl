@@ -85,9 +85,16 @@ bool isNormalGame()
 
 bool isArena()
 {
-	
 	return map_list.tutorial == GM_SPRINT1_AREANA;
 
+}
+bool isSprint()
+{
+	return map_list.tutorial == GM_SPRINT2_MINISTAGE;
+}
+int sprintMulti()
+{
+	return 7;
 }
 
 void initMap()
@@ -397,6 +404,7 @@ bool CommonValutMap(map_dummy* map, int pattern)
 
 bool PixedMap(map_dummy* map, char *temp)
 {
+	int sp_tile_index = 0;
 
 	map->tiles = new dungeon_tile_type*[map->size_x*2+1];
 	for(int i=0;i<map->size_x*2+1;i++)
@@ -411,71 +419,86 @@ bool PixedMap(map_dummy* map, char *temp)
 		}
 		if(temp[j]!=' ')
 		{
-			switch(temp[j])
+			switch (temp[j])
 			{
 			case '`':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_NONE;
 				break;
 			case '.':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->floor_tex;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				break;
 			case '#':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->wall_tex;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->wall_tex;
 				break;
 			case ',':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_FLOOR;
 				break;
 			case '^':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DREAM_FLOOR;
 				break;
+			case '-':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_FLOOR2;
+				break;
 			case '_':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_GRASS;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_GRASS;
+				break;
+			case '/':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_FLOOR1;
+				break;
+			case 'P':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_WALL1;
 				break;
 			case '@':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_WALL;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_WALL;
 				break;
 			case '*':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_STONE_WALL;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_STONE_WALL;
 				break;
 			case '$':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_METAL_WALL;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_METAL_WALL;
 				break;
 			case '[':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BAMBOO_WALL;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_BAMBOO_WALL;
+				break;
+			case ':':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_WALL2;
+				break;
+			case '(':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_RED_WALL;
 				break;
 			case 'T':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_TREE;
 				break;
 			case '+':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_CLOSE_DOOR;
-				break;	
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_CLOSE_DOOR;
+				break;
 			case '=':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_GLASS;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_GLASS;
 				break;
 			case '&':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_STATUE;
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_STATUE;
 				break;
 			case 'B':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_STATUE2;
 				break;
 			case 'E':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_BOOK_WALL;
-				break;				
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_BOOK_WALL;
+				break;
 			case '~':
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_SEA;
-				break;	
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SEA;
+				break;
 			case 'i': //각 던전에서 드랍되는 아이템을 넣음
 			case 'I': //여러개
-				{
-					int num_ = temp[j] == 'I' ? rand_int(3,4) : 1;
-					for (int k = 0; k < num_; k++) {
-						item_infor t;
-						CreateFloorItem(map->floor, &t);
-						map->item_list.push_back(mapdummy_item(t, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
-						map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
-					}
+			{
+				int num_ = temp[j] == 'I' ? rand_int(3, 4) : 1;
+				for (int k = 0; k < num_; k++) {
+					item_infor t;
+					CreateFloorItem(map->floor, &t);
+					map->item_list.push_back(mapdummy_item(t, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				}
-				break;
+			}
+			break;
 			case '0':
 			case '1':
 			case '2':
@@ -487,22 +510,29 @@ bool PixedMap(map_dummy* map, char *temp)
 			case '8':
 			case '9':
 			{
-				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = map->sp_tile_list[temp[j]-'0'];
-				if (map->sp_tile_list[temp[j] - '0'] == DG_WALL) {
+				int index_ = temp[j] !='9' ?temp[j] - '0':sp_tile_index++;
+				if (map->sp_tile_list.size() <= index_)
+				{
+					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+					break;
+				}
+
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->sp_tile_list[index_];
+				if (map->sp_tile_list[index_] == DG_WALL) {
 					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->wall_tex;
 				}
-				else if (map->sp_tile_list[temp[j] - '0'] == DG_FLOOR) {
+				else if (map->sp_tile_list[index_] == DG_FLOOR) {
 					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				}
-				else if(map->sp_tile_list[temp[j]-'0']>= DG_SUB_STAIR_FIRST && map->sp_tile_list[temp[j]-'0'] < DG_SUB_STAIR_MAX)
+				else if (map->sp_tile_list[index_] >= DG_SUB_STAIR_FIRST && map->sp_tile_list[index_] < DG_SUB_STAIR_MAX)
 				{//특수 지형이 만약 서브던젼 계단입구일 경우
-					int stiar_enter_ = map->sp_tile_list[temp[j]-'0'] - DG_SUB_STAIR_FIRST;
-					if(stiar_enter_>=SUBTERRANEAN)
+					int stiar_enter_ = map->sp_tile_list[index_] - DG_SUB_STAIR_FIRST;
+					if (stiar_enter_ >= SUBTERRANEAN)
 						stiar_enter_--;
-					if(stiar_enter_>=PANDEMONIUM)
+					if (stiar_enter_ >= PANDEMONIUM)
 						stiar_enter_--;
 					//map_list.dungeon_enter[stiar_enter_].detected = true;
-					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i%(map->size_x*2+1)-map->size_x,i/(map->size_x*2+1)-map->size_y);
+					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y);
 					map_list.dungeon_enter[stiar_enter_].pos += map->pos;
 				}
 				break;
@@ -513,7 +543,7 @@ bool PixedMap(map_dummy* map, char *temp)
 			{
 				//그 층에 일반적으로 나오는 몹들
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
-				int mon_ = getMonsterFromFloor(map->floor, (temp[j]=='m'? GMFF_FLAG_ALL: (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
+				int mon_ = getMonsterFromFloor(map->floor, (temp[j] == 'm' ? GMFF_FLAG_ALL : (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
 				if (mon_ != -1) {
 					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
 				}
@@ -541,6 +571,46 @@ bool PixedMap(map_dummy* map, char *temp)
 				}
 				break;
 			}
+			case '>':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DOWN_STAIR;
+			}
+			break;
+			case '<':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_UP_STAIR;
+			}
+			break;
+			case 'S':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+				map->pos_list.push_back(coord_def(coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+			}
+			break;
+			case 'F':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_GRASS;
+				map->pos_list.push_back(coord_def(coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+			}
+			break;
+			case 'W':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SEA;
+				map->pos_list.push_back(coord_def(coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+			}
+			break;
+			case 'R':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DREAM_FLOOR;
+				map->pos_list.push_back(coord_def(coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+			}
+			break;
+			case 'p':
+			{
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_FLOOR1;
+				map->pos_list.push_back(coord_def(coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+			}
+			break;
 			default:
 				map->tiles[i%(map->size_x*2+1)][i/(map->size_x*2+1)] = DG_FLOOR2;
 				break;

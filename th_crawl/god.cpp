@@ -971,12 +971,16 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("죠온과 시온은 적의 지갑을 강탈하는 것을 기뻐했다.", true, false, false, CL_joon_and_sion);
-				if (randA(2))
-				{
-					you.GiftCount(1);
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.GiftCount(1);
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -988,12 +992,16 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("카나코는 당신의 살생을 기뻐했다.", true, false, false, CL_help);
-				if (randA(2))
-				{
-					you.GiftCount(1);
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.GiftCount(1);
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 			else
 			{ //아군일때
@@ -1009,9 +1017,12 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("스와코는 당신의 살생을 기뻐했다.", true, false, false, CL_swako);
-				if (randA(2))
-				{
-					you.PietyUpDown(1);
+
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+					}
 				}
 				if (!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety) >= 2)
 				{
@@ -1041,6 +1052,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					}
 				}
 				enterlog();
+				return true;
 			}
 		}
 		return false;
@@ -1052,7 +1064,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("미노리코는 흥분한 상태로 외쳤다.\"바로 그거야!\"",true,false,false,CL_warning);
-					you.PietyUpDown(5);
+					you.PietyUpDown(5*isSprint()?5:1);
 				}
 			}
 		}
@@ -1063,10 +1075,14 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("미마는 당신의 살생을 기뻐했다.", false, false, false, CL_green);
-				if (randA(5) < 3)
-				{
-					you.PietyUpDown(1);
-					return true;
+
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(5) < 3)
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
 				if (!you.GetPunish(GT_MIMA) && pietyLevel(you.piety) >= 1)
 				{
@@ -1077,6 +1093,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					}
 				}
 				enterlog();
+				return return_;
 			}
 		}
 		return false;
@@ -1088,11 +1105,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("유우기는 당신의 승리를 기뻐했다.", true, false, false, CL_yuigi);
-				if (randA(2))
-				{
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -1125,11 +1146,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				}
 				else
 					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
-				if(randA(2))
-				{
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -1141,11 +1166,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if(!mon_->isUserAlly())
 			{ //적일때
 				printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
-				if(randA(2))
-				{
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -1154,11 +1183,19 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if(!mon_->isUserAlly())
 			{ //적일때
-				if(randA(3)==0)
 				{
-					printlog("에이린은 당신의 강함에 관심을 가졌다.",true,false,false,CL_small_danger);
-					you.PietyUpDown(1);
-					return true;
+					bool return_ = false;
+					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+						if (randA(3)==0)
+						{
+							you.GiftCount(1);
+							you.PietyUpDown(1);
+							return_ = true;
+						}
+					}
+					if(return_)
+						printlog("에이린은 당신의 강함에 관심을 가졌다.", true, false, false, CL_small_danger);
+					return return_;
 				}
 			}
 		}
@@ -1209,11 +1246,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if(!mon_->isUserAlly())
 			{ //적일때
 				printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
-				if(randA(2))
-				{
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -1234,11 +1275,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
-				if (randA(2))
-				{
-					you.PietyUpDown(1);
-					return true;
+				bool return_ = false;
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (randA(2))
+					{
+						you.PietyUpDown(1);
+						return_ = true;
+					}
 				}
+				return return_;
 			}
 		}
 		return false;
@@ -1250,11 +1295,16 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if (!mon_->isUserAlly())
 				{ //적일때
 					printlog("순호는 당신의 살생을 기뻐했다.", true, false, false, CL_junko);
-					if (randA(4)==0)
-					{
-						you.PietyUpDown(1);
-						return true;
+					bool return_ = false;
+					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+						if (randA(4)==0)
+						{
+							you.GiftCount(1);
+							you.PietyUpDown(1);
+							return_ = true;
+						}
 					}
+					return return_;
 				}
 			}
 		}
@@ -1299,14 +1349,19 @@ bool GodAccpect_GetPitem()
 {
 	switch(you.god)
 	{
-	case GT_MINORIKO:		
-		if(randA(3))
-		{
-			you.GiftCount(1);
-			you.PietyUpDown(1);
-			return true;
+	case GT_MINORIKO:
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			if (randA(3))
+			{
+				you.GiftCount(1);
+				you.PietyUpDown(1);
+				return_ = true;
+			}
 		}
-		break;
+		return return_;
+	}
 	case GT_ERROR:
 	case GT_NONE:
 		return false;
@@ -1334,8 +1389,14 @@ bool GodAccpect_GetPitem()
 				you.HpUpDown(hp_, DR_EFFECT);
 				you.MpUpDown(randA_1(5));
 			}
-			you.PietyUpDown(1);
-			return true;
+			bool return_ = false;
+			for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				{
+					you.PietyUpDown(1);
+					return_ = true;
+				}
+			}
+			return return_;
 		}
 		break;
 	case GT_YUUGI:
@@ -1474,12 +1535,19 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	switch(you.god)
 	{
 	case GT_BYAKUREN:
+		/*
 		if(skill_ >= SKT_SPELLCASTING && skill_ <= SKT_ALCHEMY && value>randA(40))
 		{
-			you.PietyUpDown(1);
-			you.GiftCount(1);
-			return true;
-		}
+			bool return_ = false;
+			for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				{
+					you.GiftCount(1);
+					you.PietyUpDown(1);
+					return_ = true;
+				}
+			}
+			return return_;
+		}*/
 	case GT_ERROR:
 	case GT_NONE:
 	case GT_JOON_AND_SION:
@@ -1522,56 +1590,70 @@ bool GodAccpect_Explore_100()
 	case GT_SHIZUHA:
 		return false;
 	case GT_HINA:
-		if(60>randA(100))
-		{
-			you.PietyUpDown(1);
-			return true;
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			if (60 > randA(100))
+			{
+				you.PietyUpDown(1);
+				return_ = true;
+			}
 		}
-		return false;
+		return return_;
+	}
 	case GT_YUKARI:
 	case GT_EIRIN:
 	case GT_YUYUKO:
 		return false;
 	case GT_SATORI:
-		if(50>randA(100))
-		{
-			you.PietyUpDown(1);
-			you.GiftCount(1);
-			return true;
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			if (50 > randA(100))
+			{
+				you.GiftCount(1);
+				you.PietyUpDown(1);
+				return_ = true;
+			}
 		}
-		return false;
+		return return_;
+	}
 	case GT_TENSI:
 		if(20>randA(100))
-		{
+		{//텐시는 스프린트를 어떻게?
 			you.GiftCount(1);
 		}
 		return false;
 	case GT_SEIJA:
 		return false;
 	case GT_LILLY:
-		if(50>randA(100))
-		{
-			you.PietyUpDown(1);
-			return true;
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			if (50 > randA(100))
+			{
+				you.PietyUpDown(1);
+				return_ = true;
+			}
 		}
-		if(5>randA(100))
-		{			
+		if (5 > randA(100))
+		{
 			random_extraction<int> rand_;
 			rand_.push(0);
 			rand_.push(1);
 			rand_.push(2);
 			rand_.push(3);
 			rand_.push(4);
-			for(int i = 0; i<5;i++)
+			for (int i = 0; i < 5; i++)
 			{
 				int next_ = rand_.pop();
-				if(you.god_value[GT_LILLY][next_] == 1)
+				if (you.god_value[GT_LILLY][next_] == 1)
 				{
-					for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
+					for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 					{
-						if(it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x,it->position.y)) && it->CanSpeak())
+						if (it->isLive() && (*it).isUserAlly() && it->map_id == you.lilly_allys[next_].map_id && current_level == you.lilly_allys[next_].floor  &&  env[current_level].isInSight(coord_def(it->position.x, it->position.y)) && it->CanSpeak())
 						{
-							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_NORMAL),true,false,false,CL_normal);
+							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_NORMAL), true, false, false, CL_normal);
 							return true;
 						}
 					}
@@ -1579,7 +1661,8 @@ bool GodAccpect_Explore_100()
 			}
 
 		}
-		return false;
+		return return_;
+	}
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
@@ -1610,8 +1693,17 @@ bool GodAccpect_Exp_get()
 	case GT_TENSI:
 		return false;
 	case GT_SEIJA:
-		you.GiftCount(1);
-		return true;
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			if (randA(2))
+			{
+				you.GiftCount(1);
+				return_ = true;
+			}
+		}
+		return return_;
+	}
 	case GT_LILLY:
 	case GT_MIKO:
 	case GT_OKINA:
@@ -1622,9 +1714,23 @@ bool GodAccpect_Exp_get()
 }
 bool GodAccpect_First_contact()
 {
-		switch(you.god)
+	switch(you.god)
 	{
 	case GT_BYAKUREN:
+	{
+		bool return_ = false;
+		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) 
+		{
+			if (randA(7) < 3)
+			{
+				you.GiftCount(1);
+				you.PietyUpDown(1);
+				return_ = true;
+			}
+		}
+		return return_;
+	}
+	return false;
 	case GT_ERROR:
 	case GT_NONE:
 	case GT_JOON_AND_SION:
@@ -1640,7 +1746,7 @@ bool GodAccpect_First_contact()
 	case GT_EIRIN:
 	case GT_YUYUKO:
 		return false;
-	case GT_SATORI:
+	case GT_SATORI: //사토리와 텐시는 조절?
 		if(randA(1)==0)
 		{
 			you.GiftCount(1);
@@ -2240,7 +2346,7 @@ void GodInfor(god_type god)
 		printsub("뱌쿠렌은 마계에 봉인되어있었던 대마법사로 환상향에 절인 명련사를 세워 불교의 가르침을 전한다.",true,CL_normal);
 		printsub("그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.",true,CL_normal);
 		printsub("그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.",true,CL_normal);
-		printsub("마법스킬들에 경험치를 투자하는 것으로 신앙심을 벌 수 있다.",true,CL_normal);
+		printsub("신도는 만나보지못한 새로운 사람들을 만나는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_SEIJA:

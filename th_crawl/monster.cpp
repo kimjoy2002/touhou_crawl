@@ -379,6 +379,9 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 	id = mondata[id_].id;
 	level  = mondata[id_].level;
 	exper = mondata[id_].exper;
+	if (isSprint()) {
+		exper *= sprintMulti();
+	}
 	name = mondata[id_].name;
 	image = mondata[id_].image;
 	hp = mondata[id_].max_hp;
@@ -758,7 +761,8 @@ void monster::CheckSightNewTarget()
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
 			{
-				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && ((env[current_level].isInSight((*it).position, true) && (flag & M_FLAG_SUMMON) ) || isMonsterSight((*it).position)) )
+				if((*it).isLive() && isEnemyMonster(&(*it)) && (*it).isView(this) && ((env[current_level].isInSight((*it).position, true) && (flag & M_FLAG_SUMMON) ) || isMonsterSight((*it).position)) 
+					&& !((*it).flag & M_FLAG_UNHARM))
 				{
 					if(!(flag & M_FLAG_SUMMON) || env[current_level].isInSight(position, true) )
 					{

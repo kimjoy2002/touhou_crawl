@@ -250,6 +250,7 @@ void Test_char_init(item_type item_, int bonus)
 }
 
 
+void addItem_temp(item_type item_type_, int item_id, int num);
 extern void start_mainmenu();
 
 void charter_selete()
@@ -368,13 +369,66 @@ void charter_selete()
 		printlog("아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!",true,false,false,CL_help);
 		printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버! 기회는 3번...",true,false,false,CL_help);
 	}
+	else if (map_list.tutorial == GM_SPRINT2_MINISTAGE)
+	{
 
+		char temp[200];
+		sprintf_s(temp, 200, "%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str());
+		AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+
+		SetTribe(you.tribe);
+		TouhouPlayerble(you.char_name.name, true);
+		SetJob(you.job, you.char_name.name);
+		TouhouPlayerble(you.char_name.name, false);
+		/*Test_char_init(item_, bonus);*/
+		you.CalcuHP();
+		Initialize();
+
+		addItem_temp(ITM_POTION, PT_HASTE, 1);
+		addItem_temp(ITM_POTION, PT_MIGHT, 1);
+		addItem_temp(ITM_POTION, PT_AGILITY, 1);
+		addItem_temp(ITM_POTION, PT_HEAL_WOUND, 1);
+		addItem_temp(ITM_POTION, PT_MAGIC, 1);
+		addItem_temp(ITM_POTION, PT_HEAL, 2);
+
+		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
+		/*you.image = &img_play_sanae;
+		you.char_name.name = "사나에";
+		you.tribe = TRI_HUMAN;
+		you.job = JOB_SHAMAN;
+		SetTribe(you.tribe);
+		you.CalcuHP();
+		env[current_level].EnterMap(0, deque<monster*>());
+
+		item_infor t;
+		item *it;
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_RING, 1, &t, RGT_SEE_INVISIBLE));
+		it->Identify();
+		you.additem(it, false);
+		you.equip('a', ET_LEFT, false);
+		env[current_level].DeleteItem(it);*/
+	}
 
 
 
 	changedisplay(DT_GAME);
 	saveexit = true;
 }
+
+void addItem_temp(item_type item_type_, int item_id, int num_)
+{
+	item_infor t;
+	item *it;
+	item_infor itme_ = makeitem(item_type_, 1, &t, item_id);
+	itme_.num = num_;
+	it = env[current_level].MakeItem(you.position, itme_);
+	it->Identify();
+	you.additem(it, false);
+	//you.equip('a', ET_LEFT, false);
+	env[current_level].DeleteItem(it);
+}
+
+
 
 
 void Initialize()

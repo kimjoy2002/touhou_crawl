@@ -49,7 +49,7 @@ const char *imgfile_god[GT_LAST] =
 	"./data/god/eirin.png",//GT_EIRIN,
 	"./data/god/yuyuko.png",//GT_YUYUKO,
 	"./data/god/satori.png",//GT_SATORI,
-	"",//GT_TENSI,
+	"./data/god/tensi.png",//GT_TENSI,
 
 	"./data/god/seija.png",//GT_SEIJA,
 	"",//GT_LILLY,

@@ -120,13 +120,14 @@ public:
 	list<mapdummy_item> item_list;
 	list<mapdummy_event> event_list;
 	vector<dungeon_tile_type> sp_tile_list;
+	list<coord_def> pos_list;
 
 	map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
 	~map_dummy();
-	void patternSet();
+	void patternSet(); 
 	bool collution(const coord_def& point,int size_x_ = 0,int size_y_ = 0);
 	bool plus_collution(const coord_def& point,int size_x_,int size_y_);
-	void make_map(environment& env_pointer, bool wall_ = true);
+	void make_map(environment& env_pointer, bool wall_ = true, bool stair_input_ = false);
 	void make_door(environment& env_pointer);
 	void mask(environment& env_pointer, bool wall_ = true);
 	void eventmapmake(environment& env_pointer, int count, bool wall_ = true);
@@ -137,6 +138,7 @@ public:
 	void SetConnectEnter(bool ok_){connect_enter=ok_;};
 	void SetConnectExit(bool ok_){connect_exit=ok_;};
 	bool GetConnect(){return (connect_exit||connect_enter);};
+	coord_def getNextPos();
 };
 
 extern map_infor map_list;

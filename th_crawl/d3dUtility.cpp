@@ -277,6 +277,10 @@ unsigned int WINAPI GameLoop(void *arg)
 				ReplayClass.StopReplay(temp);
 			}
 		}
+		else if (isSprint())
+		{
+			ReplayClass.StopReplay("스프린트");
+		}
 		else if(!isNormalGame())
 		{
 			ReplayClass.DeleteRpy();

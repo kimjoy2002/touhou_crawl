@@ -285,7 +285,7 @@ const mon_infor mondata[] = {
 	//여기부터 임시 정보들
 	{MON_WAKASAGI,6,300,name_infor("와카사기히메",false),&img_named_wakasagi,40,0,13,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_SPEAK | M_FLAG_CANT_GROUND,0,1,10},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_CANT_NETURAL | M_FLAG_SPEAK | M_FLAG_CANT_GROUND,0,1,10},
 
 	{MON_YAMAME,8,854,name_infor("야마메",false),&img_named_yamame,90,3,6,
 	{15,16,24},{ATT_NORMAL,ATT_NONE,ATT_SICK},{name_infor("공격",true),name_infor("공격",true),name_infor("독기",false)},
@@ -877,6 +877,17 @@ const mon_infor mondata[] = {
 
 	 { MON_SION, 1, 0, name_infor("시온", true), &img_mons_sion, 1, 8, 0,
 	 { 0,0,0}, { ATT_NONE,ATT_NONE,ATT_NONE }, {name_infor(),name_infor(),name_infor() },
-		M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_UNIQUE | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNHARM , 99, 1, 10 }
+		M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_UNIQUE | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNHARM , 99, 1, 10 },
 
+	{ MON_CURSE_DOLL, 8, 140, name_infor("저주받은 인형", true), &img_mons_sanghai[1], 30, 1, 12,
+	{ 4,0,0 }, { ATT_NORMAL,ATT_NONE,ATT_NONE }, { name_infor("공격",true),name_infor(),name_infor() },
+		M_FLAG_OPEN_DOOR  | M_FLAG_INANIMATE, 1, 1, 10},
+
+	{ MON_DANCING_WEAPON, 10, 870, name_infor("무기의 츠구모가미", true), &img_mons_default, 50, 0, 14,
+		{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+		M_FLAG_FLY | M_FLAG_INANIMATE, 1, 1, 9 },
+
+	{ MON_DANCING_ARMOUR, 10, 870, name_infor("갑옷의 츠구모가미", true), &img_mons_default, 80, 10, 2,
+		{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+		M_FLAG_FLY | M_FLAG_PASSED_ALLY |  M_FLAG_INANIMATE, 5, 1, 10 },
 };

@@ -409,11 +409,9 @@ string item::GetName(int num_)
 	}
 
 
-
-
-
-	if(type == ITM_BOOK && !identify)
-		temp = second_name.name;
+	if (type == ITM_BOOK && !iden_list.books_list[value0]) {
+		temp = second_name.name ;
+	}
 
 	return temp;
 }

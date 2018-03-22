@@ -69,7 +69,8 @@ enum getMonsterFromFloor_flag
 {
 	GMFF_FLAG_ALL = 0,
 	GMFF_FLAG_ONLY_WEAK,
-	GMFF_FLAG_ONLY_STRONG
+	GMFF_FLAG_ONLY_STRONG,
+	GMFF_FLAG_ONLY_MIDDLE
 };
 
 extern const mon_infor mondata[];
@@ -80,7 +81,8 @@ void set_exist_named(monster_index id); //네임드를 출현확정(벌트등으로)
 void unset_exist_named(monster_index id);
 
 void create_mon(int floor, int num_);
-void init_monster();
+void init_monster(); 
+int getMonsterFromSpecial(int type_, getMonsterFromFloor_flag power_);
 int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_);
 
 struct unique_infor

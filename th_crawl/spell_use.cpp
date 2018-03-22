@@ -4596,6 +4596,50 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_KUNEKUNE:
 		list->push_back(spell(SPL_MESS_CONFUSION, 30));
 		break;
+	case MON_CURSE_DOLL:
+		list->push_back(spell(SPL_SMITE, 10));
+		break;
+	case MON_DANCING_WEAPON:
+	{
+		item_infor t;
+		makeitem((item_type)(rand_int(ITM_WEAPON_FIRST, ITM_WEAPON_CLOSE)), randA(1), &t);
+		item_list_->push_back(t);
+		mon_->image = t.image;
+	}
+	break;
+	case MON_DANCING_ARMOUR:
+	{
+		item_infor t;
+		material_kind kind_ = (material_kind)randA(MTK_MAX-1);
+		armour_kind type_ = GetRandomArmourType(1);
+		makeitem((item_type)(ITM_ARMOR_BODY_ARMOUR_0+ kind_), randA(1), &t, type_);
+		item_list_->push_back(t);
+		mon_->image = t.image;
+		mon_->ac = kind_*2 + 1;
+		mon_->ev = (15-kind_*3);
+		switch (type_)
+		{
+		case AMK_MIKO:
+			mon_->confuse_resist = 1;
+			break;
+		case AMK_KAPPA:
+			mon_->ice_resist = 1;
+			break;
+		case AMK_FIRE:
+			mon_->fire_resist = 1;
+			break;
+		case AMK_POISON:
+			mon_->poison_resist = 1;
+			break;
+		case AMK_WING:
+			mon_->elec_resist = 1;
+			break;
+		case AMK_MAID:
+			mon_->resist++;
+			break;
+		}
+	}
+	break;
 	default:
 		break;
 	}

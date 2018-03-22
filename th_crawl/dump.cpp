@@ -123,7 +123,10 @@ bool Dump(int type, string *filename_)
 	time(&now);
 	t = localtime(&now);
 
-	sprintf_s(filename, 100, "morgue/%s-%04d%02d%02d-%02d%02d%02d.txt", you.user_name.name.c_str(), 1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+	sprintf_s(filename, 100, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
+		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
+		you.user_name.name.c_str(),
+		1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 	fp = fopen(filename, "wt");
 
 	fprintf_s(fp, "悼规农费 %s 待橇 颇老\n\n", version_string);
@@ -668,7 +671,7 @@ bool Dump(int type, string *filename_)
 
 
 	fclose(fp);
-	if(type == 1 && !wiz_list.wizard_mode)
+	if(isNormalGame() && type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
 	if(filename_)
 	{

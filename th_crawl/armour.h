@@ -29,7 +29,7 @@ enum armour_kind
 
 enum material_kind
 {
-	MTK_ROBE,
+	MTK_ROBE=0,
 	MTK_LEATHER,
 	MTK_CHAIN,
 	MTK_PLATE,

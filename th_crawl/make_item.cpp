@@ -58,9 +58,9 @@ etcStruct etcList[EIT_LAST] = {
 
 
 
-item* environment::MakeItem(const coord_def &c, const item_infor &t)
+item* environment::MakeItem(const coord_def &c, const item_infor &t, int num_)
 {
-	return AddItem(c,&item(c,t));
+	return AddItem(c,&item(c,t), num_);
 }
 
 item_infor& makePitem(monster_index mon_id, int num, item_infor* t)

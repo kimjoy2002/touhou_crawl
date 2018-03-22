@@ -1963,20 +1963,48 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
+	case MON_CURSE_DOLL:
+	case MON_DANCING_ARMOUR:
+	case MON_DANCING_WEAPON:
+		mon->poison_resist = 1;
+		break;
+
 	}
 }
 
 int weak(getMonsterFromFloor_flag power) {
-	return power != GMFF_FLAG_ONLY_STRONG ? 3 : 0;
+	return power == GMFF_FLAG_ONLY_MIDDLE ? 0 : (power != GMFF_FLAG_ONLY_STRONG ? 3 : 0);
 }
 
 int middle(getMonsterFromFloor_flag power) {
-	return power == GMFF_FLAG_ALL ? 4 : 0;
+	return power == GMFF_FLAG_ONLY_MIDDLE ? 1: (power == GMFF_FLAG_ALL ? 4 : 0);
 }
 
 int strong(getMonsterFromFloor_flag power) {
-	return power != GMFF_FLAG_ONLY_WEAK ? 1 : 0;
+	return power == GMFF_FLAG_ONLY_MIDDLE ? 0 : (power != GMFF_FLAG_ONLY_WEAK ? 1 : 0);
 }
+
+int getMonsterFromSpecial(int type_, getMonsterFromFloor_flag power_)
+{
+	random_extraction<int> rand_;
+
+	switch(type_)
+	{
+	default:
+		return -1;
+	case 0:
+		rand_.push(MON_CURSE_DOLL, weak(power_));
+		rand_.push(MON_BAKEKASA, weak(power_));
+		rand_.push(MON_DANCING_WEAPON, middle(power_));
+		rand_.push(MON_DANCING_ARMOUR, middle(power_));
+		rand_.push(MON_DANCING_WEAPON, strong(power_));
+		rand_.push(MON_DANCING_ARMOUR, strong(power_));
+		break;
+	}
+
+	return rand_.pop();
+}
+
 
 int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 {
@@ -1985,9 +2013,10 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 	//power 0은 약함 강함 상관없이
 	//power 1은 약한 몬스터만
 	//power 2는 강한 몬스터만
+	//power 3은 중간만
 
-	if (isArena())
-		return -1;
+	//if (isArena() || isSprint())
+	//	return -1;
 	random_extraction<int> rand_;
 
 	if (level_ < TEMPLE_LEVEL) {
@@ -2067,6 +2096,8 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_FAIRY_BLUE_MAGICIAN, middle(power_));
 		rand_.push(MON_FAIRY_RED_COMMANDER, middle(power_));
 		rand_.push(MON_FAIRY_HERO, strong(power_));
+		rand_.push(MON_FAIRY_SOCERER, strong(power_));
+		rand_.push(MON_FAIRY_SUN_FLOWER, strong(power_));
 		rand_.push(MON_MUSHROOM, middle(power_));
 		rand_.push(MON_FROG, middle(power_));
 		rand_.push(MON_DEAGAMA, strong(power_));

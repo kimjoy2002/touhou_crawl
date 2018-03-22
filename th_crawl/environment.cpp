@@ -1561,12 +1561,12 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			{
 				if(!env[current_level].isMove((*it2),true,true))
 				{
-					block_length_-=2;
+					block_length_-=isSprint()?20:2;
 					break;
 				}
 				it2++;
 			}
-			if(distan_coord((*it).position, center_) <= block_length_*block_length_)
+			if(block_length_ > 0 && distan_coord((*it).position, center_) <= block_length_*block_length_)
 			{
 				(*it).target_pos = center_;
 				(*it).memory_time = (*it).FoundTime();
@@ -2079,6 +2079,8 @@ char* CurrentLevelString(int level)
 
 	if(isArena())
 		sprintf(temp,"아레나");
+	else if (isSprint())
+		sprintf(temp, "스프린트");
 	else if(level_<TEMPLE_LEVEL)
 		sprintf(temp,"던전 %d층", level_+1);
 	else if(level_ == TEMPLE_LEVEL)

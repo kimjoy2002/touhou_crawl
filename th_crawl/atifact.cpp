@@ -12,6 +12,7 @@
 #include "save.h"
 #include "armour.h"
 #include "rand_shuffle.h"
+#include "environment.h"
 
 atifact_infor::atifact_infor(int kind_, int value_)
 	:kind(kind_), value(value_)
@@ -399,6 +400,10 @@ void MakeArtifact(item* item_, int good_bad_)
 		{
 			if(ArmourExceptopn((armour_kind)item_->value5) == i)
 				continue;
+		}
+		if (isSprint() && 
+			(i == RGT_TELEPORT || i == RGT_HUNGRY || i == RGT_FULL || i == RGT_LEVITATION)) {
+			continue;;
 		}
 
 		temp.push_back(i);

@@ -75,8 +75,10 @@ bool map_dummy::plus_collution(const coord_def& point,int size_x_,int size_y_)
 {
 	return ((abs(point.x-pos.x) <= size_x_ + size_x + -1 && abs(point.y-pos.y) == size_y_ + size_y + 1 ) || (abs(point.x-pos.x) == size_x_ + size_x + 1 && abs(point.y-pos.y) <= size_y_ + size_y + -1 ));
 }
-void map_dummy::make_map(environment& env_pointer, bool wall_)
+void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_)
 {	
+	int stait_up_num = 0;
+	int stait_down_num = 0;
 	for(int i = -size_x;i<=size_x;i++)
 	{
 		for(int j = -size_y;j<=size_y;j++)
@@ -88,7 +90,23 @@ void map_dummy::make_map(environment& env_pointer, bool wall_)
 			else if(tiles[i+size_x][j+size_y] != DG_NONE)
 			{
 				env_pointer.dgtile[i+pos.x][j+pos.y].tile = tiles[i+size_x][j+size_y];
-				if(env_pointer.dgtile[i+pos.x][j+pos.y].tile >= DG_SUB_STAIR_FIRST && env_pointer.dgtile[i+pos.x][j+pos.y].tile < DG_SUB_STAIR_MAX)
+				if (stair_input_ && env_pointer.dgtile[i + pos.x][j + pos.y].tile == DG_UP_STAIR)
+				{
+					if (stait_up_num <= 2) {
+						env_pointer.stair_up[stait_up_num].x = i + pos.x;
+						env_pointer.stair_up[stait_up_num].y = j + pos.y;
+						stait_up_num++;
+					}
+				}
+				else if (stair_input_ && env_pointer.dgtile[i + pos.x][j + pos.y].tile == DG_DOWN_STAIR)
+				{ 
+					if (stait_down_num <= 2) {
+						env_pointer.stair_down[stait_down_num].x = i + pos.x;
+						env_pointer.stair_down[stait_down_num].y = j + pos.y;
+						stait_down_num++;
+					}
+				}
+				else if(env_pointer.dgtile[i+pos.x][j+pos.y].tile >= DG_SUB_STAIR_FIRST && env_pointer.dgtile[i+pos.x][j+pos.y].tile < DG_SUB_STAIR_MAX)
 				{
 					env_pointer.stair_vector.push_back(stair_info(coord_def(i+pos.x,j+pos.y),tiles[i+size_x][j+size_y]));
 				}
@@ -100,6 +118,9 @@ void map_dummy::make_map(environment& env_pointer, bool wall_)
 	for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
 	{
 		env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+	}
+	for (auto it = pos_list.begin(); it != pos_list.end(); it++) {
+		it->operator+=(pos);
 	}
 	for(list<mapdummy_item>::iterator it = item_list.begin();it!=item_list.end();it++)
 	{
@@ -189,7 +210,14 @@ void map_dummy::SetExit(coord_def c)
 	m_exit = c;
 	tiles[m_exit.x-pos.x+size_x][m_exit.y-pos.y+size_y] = floor_tex;
 }
-
+coord_def map_dummy::getNextPos()
+{
+	if (pos_list.empty())
+		return coord_def(0,0);
+	coord_def c = pos_list.front();
+	pos_list.pop_front();
+	return c;
+}
 
 void make_lake(int num, int repeat);
 
@@ -204,6 +232,7 @@ void map_algorithms_tuto01(int num);
 void map_algorithms_tuto02(int num);
 void map_algorithms_tuto03(int num);
 void map_algorithms_arena(int num);
+void map_algorithms_sprint(int num);
 void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 
 void map_algorithms(int num)
@@ -339,9 +368,13 @@ void map_algorithms(int num)
 	{
 		map_algorithms_tuto03(num);
 	}
-	else //아레나1
+	else if(isArena())//아레나1
 	{
 		map_algorithms_arena(num);
+	}
+	else if (isSprint())
+	{
+		map_algorithms_sprint(num);
 	}
 }
 

@@ -12,6 +12,7 @@
 #include "environment.h"
 #include "throw.h"
 #include "debuf.h"
+#include "soundmanager.h"
 
 int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
@@ -41,6 +42,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 	//}
 
 
+	soundmanager.playSound("spellcard");
 
 	int i=0;
 	if(SpellcardFlagCheck(kind, S_FLAG_DIREC))
@@ -246,6 +248,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		return false;
 	}
 
+
 	switch(kind)
 	{
 	case SPC_V_FIRE:
@@ -256,8 +259,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 				
-				for(int i=0;i<(you.GetParadox()?2:1);i++)
-					throwtanmac(16,beam,temp_infor,NULL);
+				for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
+					soundmanager.playSound("fire");
+					throwtanmac(16, beam, temp_infor, NULL);
+				}
 				you.SetParadox(0); 
 				return true;
 			}
@@ -271,8 +276,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 				
-				for(int i=0;i<(you.GetParadox()?2:1);i++)
-					throwtanmac(22,beam,temp_infor,NULL);
+				for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
+					soundmanager.playSound("cold");
+					throwtanmac(22, beam, temp_infor, NULL);
+				}
 				you.SetParadox(0); 
 				return true;
 			}
@@ -293,9 +300,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				
 				for(int i=0;i<(you.GetParadox()?2:1);i++)
 				{
+					soundmanager.playSound("shoot");
 					coord_def pos = throwtanmac(26,beam,temp_infor,NULL);
 					if(env[current_level].dgtile[pos.x][pos.y].isBreakable())
 					{
+						soundmanager.playSound("stone");
 						for(int i=-1;i<=1;i++)
 							for(int j=-1;j<=1;j++)
 								env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_blast[1],false);
@@ -346,6 +355,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				
 				for(int i=0;i<(you.GetParadox()?2:1);i++)
 				{
+					soundmanager.playSound("wind");
 					ThrowSector(25,beam,temp_infor,SpellcardSector(SPC_V_AIR),[&](coord_def c_){
 						if(unit* unit_ = env[current_level].isMonsterPos(c_.x,c_.y) )
 						{
@@ -388,6 +398,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			return false;	
 		}
 	case SPC_V_INVISIBLE:
+		soundmanager.playSound("buff");
 		you.SetInvisible(rand_int(20,30)+randA(power/4));
 		return true;
 	default:

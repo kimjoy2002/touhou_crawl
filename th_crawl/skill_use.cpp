@@ -33,6 +33,7 @@
 #include "seija.h"
 #include "lilly.h"
 #include "option_manager.h"
+#include "soundmanager.h"
 #include "tribe.h"
 
 
@@ -79,6 +80,7 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 					multy_*=(9.0f+temp.GetCurLength())/9; //거리가 6기준으로 1.66배 데미지를 준다.
 					//multy_*=(13.0f+pow/5)/13;
 
+					soundmanager.playSound("wind");
 					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor("돌진",true));
 					unit_->damage(temp_att,false);
 					printlog("적에게 돌격했다!",true,false,false,CL_normal);	
@@ -102,8 +104,10 @@ bool skill_kanako_2(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		if(BaseSummon(MON_ONBASIRA, 20+randA_1(pow), true, false, 0, order, target, SKD_SUMMON_ONBASIRA, -1))
+		if (BaseSummon(MON_ONBASIRA, 20 + randA_1(pow), true, false, 0, order, target, SKD_SUMMON_ONBASIRA, -1)) {
+			soundmanager.playSound("stone");
 			return true;
+		}
 		else
 			printlog("생성할 수 없는 위치입니다.",true,false,false,CL_normal);	
 
@@ -115,6 +119,7 @@ bool skill_kanako_haste(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		soundmanager.playSound("buff");
 		you.SetWind(50+randA_1(pow));
 	}
 	return true;
@@ -179,6 +184,7 @@ bool skill_turn_invisible(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer() && !you.s_invisible)
 	{
+		soundmanager.playSound("buff");
 		you.SetInvisible(rand_int(15,25)+pow/2);
 		int temp = you.Ability(SKL_INVISIBLE,false,true,1);
 		you.Ability(SKL_INVISIBLE_OFF,false,false,temp);
@@ -204,6 +210,7 @@ bool skill_off_invisible(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_soul_shot(int power, unit* order, coord_def target)
 {
+	soundmanager.playSound("soul_shot");
 	for(int i=-2;i<=2;i++)
 		for(int j=-2;j<=2;j++)
 			if(abs(i)+abs(j)<4 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
@@ -231,7 +238,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
-	length_ = min(length_,SpellLength(SPL_FIRE_BALL));
+	length_ = min(length_,SkillLength(SKL_EIRIN_0));
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		view_item(IVT_POTION,"무엇을 던지겠습니까?");
@@ -278,8 +285,10 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 							
 							for(int i=0;i<(order->GetParadox()?2:1);i++)
 							{
+								soundmanager.playSound("throw");
 								coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
 								{
+									soundmanager.playSound("bomb");
 									for(int i=-1;i<=1;i++)
 										for(int j=-1;j<=1;j++)
 											if(env[current_level].isMove(pos.x+i,pos.y+j,true))
@@ -380,6 +389,7 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		}
 
 
+		soundmanager.playSound("buff");
 		you.SetStatBoost(stat_, max(1,pietyLevel(you.piety)-1));
 		if(stat_)
 			printarray(true,false,false,CL_good,3,"에이린이 당신의 몸을 더욱 ",stat_==1?"강력":(stat_==2?"민첩":"똑똑"),"해지도록 개조하였다!");
@@ -397,6 +407,7 @@ bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		soundmanager.playSound("buff");
 		printlog("당신은 에이린의 임시 수혈로 회복되었다.",true,false,false,CL_help);
 		printlog("이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!",true,false,false,CL_danger);
 		you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,false);
@@ -409,6 +420,7 @@ bool skill_byakuren_smart(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		soundmanager.playSound("buff");
 		int time_ = rand_int(10+randA_1(pow/10),20+randA_1(pow/10));
 		you.SetClever(time_);
 		you.SetManaRegen(time_);
@@ -421,6 +433,7 @@ bool skill_byakuren_leg(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
+		soundmanager.playSound("buff");
 		int time_ = rand_int(15,15+pow/5);
 		you.SetSuperMan(time_);
 	}
@@ -454,6 +467,7 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 		printlog("시야안 단풍위에 있는 적이 없다.",true,false,false,CL_normal);
 		return false;
 	}
+	soundmanager.playSound("spellcard");
 	return true;
 
 }
@@ -516,6 +530,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[9];
 			break;
 		}
+		soundmanager.playSound("buff");
 		printlog("당신의 방어구는 커다란 단풍잎으로 변했다!",true,false,false,CL_normal);
 	}
 	else
@@ -580,6 +595,7 @@ bool skill_minoriko_restore(int pow, bool short_, unit* order, coord_def target)
 		}
 		if(up_)
 		{
+			soundmanager.playSound("buff");
 			printlog("당신은 상태를 회복하였다.",true,false,false,CL_white_blue);
 			return true;
 		}
@@ -612,6 +628,7 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 						int bonus_ = (*it).value5 / 10;
 						order->HpUpDown(rand_int(10+bonus_,15+bonus_)+order->GetMaxHp()*rand_float(0.15f,0.25f),DR_NONE);
 						you.DeleteItem(it,1);
+						soundmanager.playSound("buff");
 						printlog("음식을 통해 체력을 회복하였다.",true,false,false,CL_white_blue);
 						return true;	
 					}
@@ -666,7 +683,8 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 					if((*it).id == key_)
 					{
 						if((*it).type == ITM_POTION)
-						{	
+						{
+							soundmanager.playSound("potion");
 							drinkpotion(PT_ALCOHOL, false);	
 							you.DeleteItem(it,1);
 							return true;	
@@ -731,7 +749,8 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 			mon_->SetXY(offset_);
 			int damage_ = you.GetAttack(false)*10/you.GetAtkDelay()*(1+pow/100.0f)+randC(2,2+pow/20);
 			int max_damage_ = you.GetAttack(true)*10/you.GetAtkDelay()*(1+pow/100.0f)+2*(2+pow/20);				
-			
+
+			soundmanager.playSound("stone");
 			printlog("저먼 스플렉스! ",false,false,false,CL_yuigi);
 			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor("저먼 스플렉스",false));
 			unit_->damage(temp_att,true);
@@ -780,6 +799,8 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 					break;
 				}
 				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
+
+				soundmanager.playSound("bomb"); 
 				BaseBomb(final_, &img_blast[2],temp_att,&you);
 
 				
@@ -833,6 +854,15 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 	printlog("삼보필살! ",false,false,false,CL_yuigi);
 	for(int i = 0; i < 3; i++)
 	{
+		if(i==0)
+			soundmanager.playSound("stone");
+		else if (i == 1)
+			soundmanager.playSound("bomb");
+		else if (i == 2)
+			soundmanager.playSound("nuke");
+
+
+
 		textures* t_ = i==0?&img_blast[4]:i==1?&img_blast[3]:&img_blast[0];
 		{
 			dif_rect_iterator rit(order->position,2+i);
@@ -902,12 +932,14 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 		
 		if (hit_mon->GetMindReading() || base2 < percent_)
 		{
+			soundmanager.playSound("laugh");
 			hit_mon->SetFear(-1);
 			you.GetExp(((monster*)hit_mon)->exper / 2);
 			env[current_level].SummonClear(((monster*)hit_mon)->map_id);
 		}
 		else if (base < percent_)
 		{
+			soundmanager.playSound("laugh");
 			hit_mon->SetFear(rand_int(25,40));
 		}
 		else if(hit_mon->isYourShight())
@@ -972,6 +1004,7 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 				printarray(true,false,false,CL_small_danger,1,fail_==1?"방해를 받아 마음을 읽는데 실패했다.":"대상이 시야에 사라져서 실패했다.");
 			else
 			{
+				soundmanager.playSound("debuf");
 				//printarray(true,false,false,CL_normal,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_is(true),"마음을 간파당했다.");
 				mon_->SetMindReading(1);
 			}
@@ -993,7 +1026,8 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 			return_ = true;
 	}
 	if(return_)
-	{		
+	{
+		soundmanager.playSound("summon");
 		printarray(true,false,false,CL_magic,1,"마계의 졸개들이 당신에게 소환되었다. ");	
 	}
 	return return_;
@@ -1006,8 +1040,12 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
 		if(randA(99)<=3)
 		{
+			soundmanager.playSound("laugh");
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			
+		}
+		else {
+			soundmanager.playSound("summon");
 		}
 		return_ = true;
 		enterlog();
@@ -1024,8 +1062,12 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
 		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
+			soundmanager.playSound("laugh");
 			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
 			mon_->ReturnEnemy();			
+		}
+		else {
+			soundmanager.playSound("summon");
 		}
 		return_ = true;
 		enterlog();
@@ -1036,6 +1078,7 @@ bool skill_yuyuko_on(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer() && !you.s_ghost)
 	{
+		soundmanager.playSound("buff");
 		printlog("유령을 불러들이기 시작한다.",true,false,false,CL_normal);
 		you.SetGhost(1);
 		int temp = you.Ability(SKL_YUYUKO_ON,true,true,1);
@@ -1127,6 +1170,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		}
 		if(j>0)
 		{
+			soundmanager.playSound("summon");
 			printarray(true,false,false,CL_normal,2,unit_->GetName()->name.c_str(),"에게 유령을 내보냈다.");
 			unit_->AttackedTarget(order);
 			return true;
@@ -1144,6 +1188,7 @@ bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer())
 	{
+		soundmanager.playSound("spellcard");
 		printlog("당신은 대량의 유령을 불러들이기 시작한다!",true,false,false,CL_white_blue);
 		int time_ = rand_int(35,45);
 		you.SetGhost(time_);
@@ -1171,6 +1216,7 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 		{					
 			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
 		}*/
+		soundmanager.playSound("debuf");
 		hit_mon->AttackedTarget(order);
 		return true;
 	}
@@ -1191,6 +1237,7 @@ bool skill_yukari_supporter(int power, bool short_, unit* order, coord_def targe
 				{
 					mon_->LevelUpdown(you.level,3);
 					hit_eff->time = 0;
+					soundmanager.playSound("summon");
 					return true;
 				}
 				else
@@ -1215,6 +1262,7 @@ bool skill_yukari_schema(int power, bool short_, unit* order, coord_def target)
 			{
 				if(you.control_blink(target))
 				{
+					soundmanager.playSound("blink");
 					printarray(true,false,false,CL_normal,1,"틈새를 타고 이동하였다.");
 					hit_eff->time = 0;
 					return true;
@@ -1235,6 +1283,7 @@ bool skill_yukari_shield(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order == &you)
 	{
+		soundmanager.playSound("buff");
 		you.SetBuff(BUFFSTAT_SH,BUFF_YUKARI,15,rand_int(70,100));
 		printlog("결계가 당신을 보호하고 있다.",true,false,false,CL_white_blue);
 		return true;
@@ -1277,6 +1326,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(50,70));
+		soundmanager.playSound("timestop");
 		printlog("차원이 고정되었다!",false,false,false,CL_white_blue);
 		return true;
 	}
@@ -1292,6 +1342,7 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 		if(env[current_level].isMove(target.x,target.y) && !env[current_level].isMonsterPos(target.x,target.y))
 		{
 			you.SetXY(target.x,target.y);
+			soundmanager.playSound("jump");
 			printarray(false,false,false,CL_normal,1,"점프! ");
 			return true;
 		}
@@ -1304,6 +1355,7 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 
 	if(tile_ >= DG_FLOOR && tile_ <= DG_FLOOR_END)
 	{
+		soundmanager.playSound("stone");
 		env[current_level].changeTile(order->position, DG_TEMPLE_SUWAKO);
 		printlog("당신은 발밑에 스와코님의 신전을 세웠다. 신앙심이 풍족해지는 것을 느꼈다.",true,false,false,CL_swako);
 		you.PietyUpDown(2+randA(2));
@@ -1323,8 +1375,10 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
-		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(14,beam,temp_infor,NULL);
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			soundmanager.playSound("shoot");
+			throwtanmac(14, beam, temp_infor, NULL);
+		}
 		order->SetParadox(0); 
 		return true;
 	}
@@ -1343,6 +1397,7 @@ bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 
 			if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_mon->isFly(),hit_mon->isSwim(),false))
 			{
+				soundmanager.playSound("debuf");
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
 				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_to(true),"끌어 당겼다.");
@@ -1361,7 +1416,8 @@ bool skill_swako_curse(int power, bool short_, unit* order, coord_def target)
 	{
 		int level_ = min(10,max(0,order->GetLevel() - hit_mon->GetLevel() + 5));
 		if(hit_mon->isYourShight())
-		{				
+		{
+			soundmanager.playSound("curse");
 			printarray(false,false,false,CL_swako,2,hit_mon->GetName()->name.c_str(),"에 재앙을 내렸다.");
 			hit_mon->SetSlow(rand_int(2,10)+randA(level_*3));
 			hit_mon->SetPoison(rand_int(20,35)+randA(level_*4),150,true);
@@ -1406,6 +1462,7 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 			beam++;
 			length_--;
 		}
+		soundmanager.playSound("stone");
 		return true;
 	}
 
@@ -1420,6 +1477,9 @@ bool skill_swako_summon_flog(int power, bool short_, unit* order, coord_def targ
 		return_ = true;
 		enterlog();
 	}
+	if (return_) {
+		soundmanager.playSound("summon");
+	}
 	return return_;
 }
 bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
@@ -1430,6 +1490,7 @@ bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
 	{		
 		if(!env[current_level].isMonsterPos(target.x,target.y))
 		{
+			soundmanager.playSound("stone");
 			env[current_level].changeTile(target, DG_STATUE);
 			env[current_level].MakeEvent(EVL_FLOOR, target, EVT_COUNT,rand_int(30,50));
 			return true;
@@ -1469,12 +1530,14 @@ bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
 		rit++;
 	}
 
+	soundmanager.playSound("spellcard");
 	printarray(true,false,false,CL_magic,1,"당신의 주변이 물바다가 되었다. ");	
 	
 	return true;
 }
 bool skill_swako_sleep(int power, bool short_, unit* order, coord_def target)
 {
+	soundmanager.playSound("spellcard");
 	you.SetTimeStep(100);
 	return true;
 }
@@ -1504,6 +1567,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 							{
 								if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) && (it->value4 < 0))
 								{
+									soundmanager.playSound("curse");
 									int value4_ = it->value4;
 									//if(value3_<0)
 									//	it->Enchant(ET_WEAPON, value3_*-2);
@@ -1514,6 +1578,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 								}
 								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
 								{
+									soundmanager.playSound("curse");
 									if(it->value4<0)
 										it->Enchant(ET_ARMOR,it->value4*-2);
 									printlog("히나는 당신의 방어구의 액땜을 해주었다.",true,false,false,CL_hina);
@@ -1587,12 +1652,14 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 		{
 			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 			{
+				soundmanager.playSound("curse");
 				printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"저주의 힘으로 가득 차있다.");
 				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 				you.equipment[ET_WEAPON]->value6 = rand_int(80,100);
 			}
 			else
 			{
+				soundmanager.playSound("curse");
 				printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
 				printlog(before_name,false,false,false,CL_small_danger);	
 				printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
@@ -1636,6 +1703,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
 									if(it->Curse(true,i))
 									{
+										soundmanager.playSound("curse");
 										int time_ = rand_int(25,40);
 										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
 										printlog(before_name,false,false,false,CL_small_danger);	
@@ -1720,7 +1788,8 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 								{
 									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
 									if(it->Curse(true,i))
-									{										
+									{
+										soundmanager.playSound("curse");
 										int bonus_ = rand_int(10,15)+you.GetMaxHp()*rand_float(0.25f,0.35f);
 										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
 										printlog(before_name,false,false,false,CL_small_danger);	
@@ -1797,6 +1866,7 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
+		soundmanager.playSound("buff");
 		printarray(true,false,false,CL_autumn,2,you.equipment[ET_WEAPON]->GetName().c_str(),"에서 쓸쓸하고도 종말적인 기운이 느껴진다.");
 		you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
 		you.equipment[ET_WEAPON]->value6 = -1;
@@ -1829,6 +1899,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
+		soundmanager.playSound("curse");
 		printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"저주의 힘으로 가득 차있다.");
 		you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 		you.equipment[ET_WEAPON]->value6 = -1;
@@ -1885,8 +1956,10 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
-		for(int i=0;i<(order->GetParadox()?2:1);i++)
-			throwtanmac(graphic_,beam,temp_infor,NULL);
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			soundmanager.playSound("fire");
+			throwtanmac(graphic_, beam, temp_infor, NULL);
+		}
 		order->SetParadox(0); 
 		if(order)
 		{
@@ -1905,6 +1978,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
+			soundmanager.playSound("sickle");
 			it->hp=it->hp/2;	
 			it->AttackedTarget(order);
 			//int att_ = 13+pow/15;
@@ -2119,7 +2193,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	seija_real_gift(next_);
 	
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
-	
+
 	char temp[200];
 	sprintf_s(temp,200,"세이자에게 선물을 받았다.");
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
@@ -2185,7 +2259,8 @@ bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 	{	
 		hit_mon->SetXY(you.position.x,you.position.y);
 		you.SetXY(target.x,target.y);
-		
+
+		soundmanager.playSound("blink");
 		printarray(true,false,false,CL_normal,4,"당신은 ", hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_and(true),"자리를 뒤집었다.");
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -2219,6 +2294,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 	}
 	if(ok_)
 	{
+		soundmanager.playSound("laugh");
 		return true;
 	}
 	else
@@ -2303,6 +2379,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 						}
 					}
 				}
+				soundmanager.playSound("warning");
 				you.lilly_allys[i].personality = person_;
 				you.lilly_allys[i].cooldown = 0;
 				
@@ -2439,6 +2516,7 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 
 	if(j>0)
 	{
+		soundmanager.playSound("summon");
 		printarray(true,false,false,CL_normal,1,"요정들을 자신의 주변으로 호출했다!");
 		return true;
 	}
@@ -2473,6 +2551,7 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 						printarray(true,false,false,CL_normal,1,"이 요정은 지금 당신에게 적대적이다.");
 						return false;
 					}
+					soundmanager.playSound("buff");
 					
 					hit_mon->HpUpDown(max(1,hit_mon->max_hp*rand_int(10,35)/100),DR_NONE);
 					printarray(true,false,false,CL_lilly,3,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"봄의 기운을 받아 체력이 회복되었다.");
@@ -2523,6 +2602,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	enterlog();
 	if(speak_)
 	{
+		soundmanager.playSound("spellcard");
 		you.SetForceStrong(false, rand_int(20,40),true);
 		return true;
 	}
@@ -2564,6 +2644,7 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 
 				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 문으로 만들었다.");
 
+				soundmanager.playSound("stone");
 				env[current_level].changeTile(target, DG_CLOSE_DOOR);
 				return true;
 			}
@@ -2627,6 +2708,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 			
 			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
 			{
+				soundmanager.playSound("block");
 				mon_->LevelUpdown(you.level, 6);
 				printarray(true, false, false, CL_okina, 1, "당신은 문을 강제로 단단하게 잠갔다!");
 				return true;
@@ -2685,6 +2767,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				return false;
 			}
 
+			soundmanager.playSound("blink");
 			env[current_level].changeTile((*beam), DG_OPEN_DOOR);
 			you.SetXY(beam->x, beam->y);
 			unit_->LostTarget();
@@ -2759,6 +2842,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 	enterlog();
 	if (speak_)
 	{
+		soundmanager.playSound("summon");
 		if (speak_->GetId() == MON_MAI2) {
 			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"그럼 바로 응원을 시작하겠어!\"");
 		}
@@ -2788,6 +2872,7 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 
 	//log에 오키나레벨로 도착함을 저장
 	deque<monster*> dq;
+	soundmanager.playSound("blink");
 	printlog("당신은 등 뒤의 문을 열고 도망쳤다!", true, false, false, CL_okina);
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -2830,8 +2915,10 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
 
-		for (int i = 0; i<(order->GetParadox() ? 2 : 1); i++)
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			soundmanager.playSound("shoot");
 			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+		}
 		order->SetParadox(0);
 		you.SetPureTurn(5, rand_int(20, 30));
 		return true;
@@ -2842,6 +2929,7 @@ bool skill_junko_2(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 	{
+		soundmanager.playSound("buff");
 		int time_ = 25 + power / 5 + randA_1(power / 2);
 		you.SetMight(time_);
 		you.SetPureTurn(10, time_);
@@ -2868,6 +2956,7 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 			printlog("시야에 살의를 표출할 적이 있어야 한다. ", true, false, false, CL_normal);
 			return false;
 		}
+		soundmanager.playSound("buff");
 		int time_ = 25 + power / 5 + randA_1(power / 2);
 		you.SetPureHaste(time_);
 		you.SetPureTurn(20, time_);
@@ -3139,6 +3228,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 
 
+	soundmanager.playSound("levelup");
 	printlog("순호: 나의 축복을 받도록 해!", true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_1, true, true);
@@ -3205,6 +3295,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 			break;
 		}
 
+		soundmanager.playSound("buff");
 		you.god_value[GT_JOON_AND_SION][0] = 1;
 		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
 		you.Ability(SKL_JOON_AND_SION_1, true, true);
@@ -3237,6 +3328,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 			printlog("시온: 모두가 평등하게 불행한 시대가 올거야", true, false, false, CL_sion);
 			break;
 		}
+		soundmanager.playSound("buff");
 		you.god_value[GT_JOON_AND_SION][0] = 2;
 		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
 		you.Ability(SKL_JOON_AND_SION_1, true, true);
@@ -3272,6 +3364,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 		if (it->isLive() && !it->isUserAlly() && env[current_level].isInSight(it->position))
 		{
 			if (!ok_) {
+				soundmanager.playSound("bomb");
 				map_effect = 2;
 				Sleep(500);
 				map_effect = 0;
@@ -3307,6 +3400,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 }
 bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target)
 {
+	soundmanager.playSound("curse");
 	map_effect = 3;
 	Sleep(500);
 	map_effect = 0;
@@ -3340,6 +3434,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 	{
 		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor("시온", true));
 
+		soundmanager.playSound("wind");
 		coord_def c_ = throwtanmac(44, beam, temp_infor, NULL);
 		unit* hit_mon = env[current_level].isMonsterPos(c_.x, c_.y, order);
 		if (hit_mon && !hit_mon->isplayer())
@@ -3350,6 +3445,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 				printarray(true, false, false, CL_sion, 3, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), "무생물이기에 빙의할 수 없다.");
 				return true;
 			}
+			soundmanager.playSound("smite");
 			mon_->level = 1;
 			for (int i = 0; i<3; i++)
 			{

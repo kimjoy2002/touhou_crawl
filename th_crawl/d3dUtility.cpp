@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "replay.h"
 #include "option_manager.h"
+#include "soundmanager.h"
 
 
 
@@ -64,6 +65,7 @@ void GetWindowSizeFromClientSize(DWORD dwStyle, BOOL bMenuFlag, int cx, int cy, 
 
 void InputInitialize(HINSTANCE hinstance);
 void InputUpdate();
+unsigned int WINAPI SoundLoop(void *arg);
 unsigned int WINAPI GameLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
 bool d3d::InitD3D(
@@ -220,9 +222,11 @@ int d3d::EnterMsgLoop()
 
 	timeBeginPeriod(1);
 	unsigned int thid;
+	unsigned int thid_sound;
 
-	g_ThreadCnt++;
+	g_ThreadCnt = 3;
 	_beginthreadex(NULL, 0, GameLoop,NULL,0,&thid);
+	_beginthreadex(NULL, 0, SoundLoop, NULL, 0, &thid_sound);
 	while(msg.message != WM_QUIT)
 	{
 		if(::PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -232,13 +236,14 @@ int d3d::EnterMsgLoop()
 			::TranslateMessage(&msg);
 			::DispatchMessage(&msg);
 		}
-		Sleep(16);	
+		Sleep(16);
 		if(!Display(0))
 		{
 			::MessageBox(0, "디스플레이 에러", 0, 0);
 		}
 		InputUpdate();
-		if(!g_ThreadCnt)
+		//UpdateBGM();
+		if(g_ThreadCnt < 2)
 			break;
 		//if(0)
 		//{
@@ -246,6 +251,7 @@ int d3d::EnterMsgLoop()
 		//}
     }
 	PostThreadMessage(thid,WM_QUIT,msg.wParam,msg.lParam);
+	PostThreadMessage(thid_sound, WM_QUIT, msg.wParam, msg.lParam);
 	int i=0;
 	while(g_ThreadCnt > 0 && i++ <= 50)
 		Sleep(200);
@@ -253,6 +259,53 @@ int d3d::EnterMsgLoop()
 		::MessageBox(0, "쓰레드 종료 실패", 0, 0);
 	return msg.wParam;
 }
+
+
+unsigned int WINAPI SoundLoop(void *arg)
+{
+	__try
+	{
+		__try
+		{
+			DWORD lastTime = timeGetTime();
+			DWORD currTime = lastTime;
+			MSG msg;
+			while (1)
+			{
+				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+				{
+					if (msg.message == WM_QUIT)
+						break;
+				}
+
+				UpdateBGM();
+
+				Sleep(16);
+				/*
+				currTime = timeGetTime();
+				while (currTime - lastTime < 16)
+				{
+					currTime = timeGetTime();
+				}
+				lastTime = currTime;*/
+			}
+			return 1;
+		}
+		__except (1)
+		{
+		}
+	}
+	__finally
+	{
+		g_ThreadCnt--;
+	}
+	return 0;
+}
+
+
+
+
+
 unsigned int WINAPI GameLoop(void *arg)
 {
 	__try
@@ -285,7 +338,7 @@ unsigned int WINAPI GameLoop(void *arg)
 		{
 			ReplayClass.DeleteRpy();
 		}
-		g_ThreadCnt--;
+		g_ThreadCnt-=2;
 	}
 	return 0;
 }

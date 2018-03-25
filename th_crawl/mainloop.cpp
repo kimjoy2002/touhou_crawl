@@ -25,6 +25,7 @@
 #include "replay.h"
 #include "mon_infor.h"
 #include "mapsearching.h"
+#include "soundmanager.h"
 
 
 
@@ -304,6 +305,10 @@ void charter_selete()
 		init_monster();
 		initMap();
 		wiz_list.wizard_mode = 0;
+	}
+	else {
+		env[current_level].playBgm();
+
 	}
 	if(map_list.tutorial == GM_TITLE)
 		map_list.tutorial = GM_NORMAL;

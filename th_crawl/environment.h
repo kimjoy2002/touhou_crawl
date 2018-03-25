@@ -271,6 +271,8 @@ public:
 	void ClearForbid();
 	void AllySafeClear(int new_floor_, coord_def pos_); //영구아군(유유코망령, 릴리화이트동료등)이 각종 맵 갈릴때 죽는것을 방지
 	void ClearFloor();
+	void enterBgm(boolean first_);
+	void playBgm();
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t, int num_ = 0);
 	item* AddItem(const coord_def &c, item *t, int num_ = 0);

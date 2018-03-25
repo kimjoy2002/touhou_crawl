@@ -26,7 +26,12 @@ void sendScore(const char *c, const char *file)
 
 	client.StartUp();
 	//client.Connect("127.0.0.1",12345);
-	client.Connect("175.194.18.134",12345);
+	struct hostent *host_entry = gethostbyname("joy1999.codns.com");
+	if (!host_entry)
+	{
+		return;
+	}
+	client.Connect(inet_ntoa(*(struct in_addr*)host_entry->h_addr_list[0]),12345);
 	packet data;
 	strcpy(data.str,"hello world"); 
 	data.str[11] = 0;

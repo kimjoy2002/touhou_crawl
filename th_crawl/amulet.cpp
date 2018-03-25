@@ -16,6 +16,7 @@
 #include "rect.h"
 #include "mon_infor.h"
 #include "event.h"
+#include "soundmanager.h"
 
 
 char *amulet_uniden_string[AMT_MAX] =
@@ -178,10 +179,12 @@ bool evokeAmulet(amulet_type kind, int value_)
 		//발동하지않음
 		break;
 	case AMT_BLOSSOM:
+		soundmanager.playSound("soul_shot");
 		printlog("팡! ", false, false, false, CL_white_blue);
 		skill_soul_shot(0, &you, you.position);
 		break;
 	case AMT_TIMES:
+		soundmanager.playSound("buff");
 		you.SetHaste(rand_int(50, 80));
 		break;
 	case AMT_WAVE:
@@ -192,18 +195,22 @@ bool evokeAmulet(amulet_type kind, int value_)
 		}
 		else
 		{
+			soundmanager.playSound("buff");
 			env[current_level].MakeMapping(100);
 			printlog("당신은 현재 층을 감지해냈다.", true, false, false, CL_normal);
 		}
 		break;
 	case AMT_SPIRIT:
+		soundmanager.playSound("buff");
 		return recharging_scroll(true, true, false);
 		break;
 	case AMT_GRAZE:
+		soundmanager.playSound("buff");
 		you.SetSuperGraze(rand_int(10, 15));
 		printlog("당신은 순간적으로 회피에 모든 신경을 쏟는다!", false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
+		soundmanager.playSound("buff");
 		printlog("당신은 체력을 회복했다. ", false, false, false, CL_normal);
 		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);
 		break;
@@ -213,6 +220,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 		//미구현
 		break;
 	case AMT_OCCULT:
+		soundmanager.playSound("summon");
 		skill_abusion(you.level * 5, false, &you, you.position);
 		switch (value_)
 		{

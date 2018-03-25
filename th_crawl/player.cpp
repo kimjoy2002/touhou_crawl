@@ -36,6 +36,7 @@
 #include "evoke.h"
 #include "map.h"
 #include "lilly.h"
+#include "soundmanager.h"
 
 
 players you;
@@ -1059,6 +1060,10 @@ int players::GetMaxHp()
 	else
 		return max_hp; 
 };
+int players::GetDangerHp() 
+{
+	return GetMaxHp() * 3 / 10;
+}
 int players::GetMp() 
 {
 	if (pure_mp)
@@ -1422,7 +1427,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		if (value_ >= 0)
 			return prev_value_;
 	}
-
+	int prev_hp_ = GetHp();
 	hp+= value_;
 	GodAccpect_HPUpDown(value_,reason);
 	if(hp >= max_hp)
@@ -1434,11 +1439,14 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		}
 		hp = max_hp;		
 	}	
+
+
 	if(hp<=0)
 	{
 		if (equipment[ET_NECK] && equipment[ET_NECK]->value1 == AMT_PERFECT && getAmuletPercent() >= 100)
 		{
 			deadlog();
+			soundmanager.playSound("gameover");
 			MoreWait();
 			resurectionlog("완전 무결의 부적");
 			printlog("그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!", true, false, false, CL_white_blue);
@@ -1456,6 +1464,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(GetProperty(TPT_9_LIFE))
 		{
 			deadlog();
+			soundmanager.playSound("gameover");
 			resurectionlog("리저렉션");
 			printlog("리저렉션!",true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
@@ -1468,6 +1477,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(GetProperty(TPT_18_LIFE))
 		{			
 			deadlog();
+			soundmanager.playSound("gameover");
 			resurectionlog("리저렉션");
 			printlog("리저렉션!",true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
@@ -1480,6 +1490,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if (GetProperty(TPT_PURE_LIFE) && reason != DR_JUNKO)
 		{
 			deadlog();
+			soundmanager.playSound("gameover");
 			resurectionlog("순호의 생명순화");
 			printlog("죽어가던 당신의 생명력이 돌아왔다!", true, false, false, CL_white_blue);
 			MoreWait();
@@ -1501,6 +1512,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			&& sionResurrection())
 		{
 			deadlog();
+			soundmanager.playSound("gameover");
 			MoreWait();
 			resurectionlog("시온");
 			printlog("시온이 당신의 소모품을 대가로 당신을 부활시켰다!", true, false, false, CL_sion);
@@ -1528,9 +1540,19 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		if(hp<=0)
 		{
 			dead_reason = reason;
+			soundmanager.playSound("gameover");
 			GameOver();
 		}
 	}
+	else if (prev_value_ < 0 &&  GetHp() <= GetDangerHp()) {
+		if (prev_hp_ > GetDangerHp()) {
+			soundmanager.playSound("lowhp");
+			printlog("============ 낮은 체력 경고 ============", true, false, false, CL_danger);
+		}
+	}
+
+
+
 	return prev_value_;
 }
 int players::MpRecoverDelay(int delay_,bool set_)
@@ -3297,6 +3319,7 @@ void players::LevelUp(bool speak_)
 		char temp[50];
 		sprintf_s(temp,50,"당신의 레벨이 올랐다! 레벨 %d",you.level);
 		printlog(temp,true,false,false,CL_good);
+		soundmanager.playSound("levelup");
 		MoreWait();
 	}
 	if(level%3 == 0)
@@ -3738,6 +3761,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 				printlog("P가 증가했다.", false, false, false, CL_normal);
 		}
 		ReleaseMutex(mutx);
+		if (speak_)
+			soundmanager.playSound("pickup");
 		GodAccpect_GetPitem();
 		return 1;
 	}
@@ -3751,6 +3776,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		rune[t->value1]++;
 		ReleaseMutex(mutx);
+		if (speak_)
+			soundmanager.playSound("pickup");
 		return 1;
 	}
 	if(t->type == ITM_ORB)
@@ -3761,6 +3788,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		sprintf_s(temp,200,"음양옥을 얻었다.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		ReleaseMutex(mutx);
+		if (speak_)
+			soundmanager.playSound("pickup");
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}
@@ -3812,6 +3841,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 					final_item = it->id;
 					final_num = t->num;
 					ReleaseMutex(mutx);
+					if (speak_)
+						soundmanager.playSound("pickup");
 					return 1;
 				//}
 				//else
@@ -3872,6 +3903,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 			final_item = t->id;
 			final_num = t->num;
 			ReleaseMutex(mutx);
+			if (speak_)
+				soundmanager.playSound("pickup");
 			return 1;
 		//}
 		//else
@@ -3938,6 +3971,7 @@ bool players::Eat(char id_)
 					if((*it).value1 == 0)
 						(*it).value3 = 100;
 					printlog("음식을 먹기 시작했다.",true,false,false,CL_bad);
+					soundmanager.playSound("powerup");
 					time_delay += you.GetNormalDelay();
 					TurnEnd();
 					
@@ -4020,6 +4054,7 @@ bool players::Drink(char id_)
 							return false;
 						}
 
+						soundmanager.playSound("potion");
 						drinkpotion((potion_type)(*it).value1, false);
 
 						if (use_num_ > 1) {
@@ -4184,6 +4219,7 @@ bool players::Read(char id_)
 				if((*it).type == ITM_SCROLL)
 				{
 
+					soundmanager.playSound("scroll");
 					printarray(true,false,false,CL_normal,3,it->GetName(-2).c_str(),it->GetNameInfor().name_to(true),"읽었다.");
 					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
 					int use_num_ = 1;
@@ -4420,6 +4456,8 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 
 
+	if(speak_)
+		soundmanager.playSound("god");
 
 	if(god == GT_SATORI)
 	{
@@ -4533,7 +4571,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 	//저주받은 템은 던질 수 없다!
 	if((*it).can_throw)
 	{
-
+		
 		bool kiku_ = ((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER);
 		
 		if(!CheckSucide(you.position, target_pos_, false,kiku_?1:0 , false))
@@ -4569,9 +4607,11 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			temp_infor.length = length_;
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
+				soundmanager.playSound("throw");
 				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
 				int power_ = GetSkillLevel(SKT_TANMAC, true)*5;
 				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("물보라",false));
+				soundmanager.playSound("bomb"); 
 				BaseBomb(c_,&img_fog_cold[0],temp_att);
 			}
 		}
@@ -4583,12 +4623,12 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 				temp_infor.length = length_;
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
+				soundmanager.playSound("shoot");
 				throwtanmac(type_,beam,temp_infor,&(*it));
 			}
 		}
 		you.SetParadox(0);
 
-				
 		doingActionDump(DACT_SHOOT, (*it).name.name);
 
 
@@ -4709,6 +4749,8 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
 			return 0;
 		}
+		if(speak_)
+			soundmanager.playSound("equip");
 		WaitForSingleObject(mutx, INFINITE);
 		//자동식별 추가
 		(*it).equipIdentify();

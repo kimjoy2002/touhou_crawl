@@ -16,6 +16,7 @@
 #include "skill_use.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
+#include "soundmanager.h"
 #include "weapon.h"
 #include <algorithm>
 extern HANDLE mutx;
@@ -233,6 +234,9 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		{
 		ReleaseMutex(mutx);
 		bool return_ = blink_scroll(waste_ ? false : pre_iden_);
+		if (return_) {
+			soundmanager.playSound("blink");
+		}
 		iden_list.scroll_list[kind].iden = 3;
 		WaitForSingleObject(mutx, INFINITE);
 		return return_;
@@ -316,6 +320,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			changedisplay(DT_GAME);
 			you.PowUpDown(-100,true);
 			printlog("ÆÎ! ",false,false,false,CL_white_blue);
+			soundmanager.playSound("soul_shot");
 			skill_soul_shot(0, &you, you.position);
 			WaitForSingleObject(mutx, INFINITE);
 		}

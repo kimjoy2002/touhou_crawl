@@ -29,6 +29,7 @@
 #include "throw.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
+#include "soundmanager.h"
 #include "book.h"
 #include "debuf.h"
 #include "mapsearching.h"
@@ -114,7 +115,7 @@ void auto_battle()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
-	if(100*you.GetHp()/you.GetMaxHp() <= 25)
+	if(you.GetHp() <= you.GetDangerHp())
 	{
 		printlog("자동전투하기엔 당신의 체력이 너무 적다.",true,false,false,CL_small_danger);
 		return;
@@ -1367,6 +1368,7 @@ void Stair_move(bool down)
 					you.TurnEnd();
 					env[current_level+1].EnterMap(i,dq);
 					printlog("계단을 내려왔다.",true,false,false,CL_normal);
+					soundmanager.playSound("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
 					break;
@@ -1480,6 +1482,7 @@ void Stair_move(bool down)
 
 			env[next_].EnterMap(0,dq);
 			printlog("계단을 내려왔다.",true,false,false,CL_normal);
+			soundmanager.playSound("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;
@@ -1522,6 +1525,7 @@ void Stair_move(bool down)
 					you.TurnEnd();
 					env[current_level-1].EnterMap(i,dq);
 					printlog("계단을 올라왔다.",true,false,false,CL_normal);
+					soundmanager.playSound("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
 					break;
@@ -1694,6 +1698,7 @@ void Stair_move(bool down)
 			you.TurnEnd();
 			env[floor_return].EnterMap(-1,dq,pos_return);
 			printlog("던전으로 돌아왔다.",true,false,false,CL_normal);
+			soundmanager.playSound("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;

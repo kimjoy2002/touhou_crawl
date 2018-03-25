@@ -25,6 +25,7 @@
 #include "alchemy.h"
 #include "tensi.h"
 #include "replay.h"
+#include "soundmanager.h"
 extern players you;
 extern HANDLE mutx;
 
@@ -80,6 +81,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_tele == 1 || (teleport_curse && !randA(100)))
 		{
 			Teleport();
+			soundmanager.playSound("blink");
 			printlog("갑자기 당신 주변이 변화했다.",false,false,false,CL_normal);
 			SetInter(IT_TELE);
 		}
@@ -1046,8 +1048,8 @@ int caculScore();
 
 
 void GameOver()
-{			
-
+{
+	StopCurrentBGM();
 	bool replay_mode_ = ReplayClass.ReplayMode();
 	
 

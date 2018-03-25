@@ -339,6 +339,7 @@ public:
 	void CalcuHP();
 	int GetHp();
 	int GetMaxHp();
+	int GetDangerHp();
 	int GetMp();
 	int GetMaxMp();
 	int GetDisplayEv();

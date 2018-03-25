@@ -24,6 +24,7 @@
 #include "tensi.h"
 #include "tribe.h"
 #include "god.h"
+#include "soundmanager.h"
 
 
 extern HANDLE mutx;
@@ -867,6 +868,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 				dead_order = &a;
 				HpUpDown(-damage_,DR_HITTING);
 
+				if (hp > 0) {
+					soundmanager.playSound("damaged");
+				}
+
 				dead_order = NULL;
 
 				if(GetProperty(TPT_CLOUD) && damage_ > randA(2))
@@ -986,6 +991,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"방패로 막았다.");
 				//SkillTraining(SKT_SHIELD,1);
+				soundmanager.playSound("block");
 			}
 		}
 	}
@@ -997,7 +1003,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"피했다.");
 			else 
 				printarray(true,false,false,a.order->isView()?CL_normal:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"그레이즈 했다.");
-
+			soundmanager.playSound("evade");
 			//if(GetArmourPanlty()<=2)
 			//	SkillTraining(SKT_DODGE,3+GetArmourPanlty());
 		}

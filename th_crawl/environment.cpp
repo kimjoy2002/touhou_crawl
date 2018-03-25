@@ -21,6 +21,7 @@
 #include "beam.h"
 #include "replay.h"
 #include "forbid.h"
+#include "soundmanager.h"
 #include <set>
 
 
@@ -285,6 +286,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	int dq_n=0;
 	
 	bool first_ = MakeMap(false);
+	enterBgm(first_);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;
 	if(you.s_silence)
@@ -1089,6 +1091,123 @@ void environment::ClearFloor()
 	}
 	floor_list.clear();
 	//make = false;
+}
+void environment::enterBgm(boolean first_)
+{
+	if (isArena() || isSprint()) {
+		PlayBGM("sprint");
+		return;
+	}
+	switch (floor) {
+	case 0:
+		if (first_) {
+			StopCurrentBGM("dungeon");
+			PlayBGM("dungeon");
+		}
+		break;
+	case MISTY_LAKE_LEVEL:
+		if (first_) {
+			StopCurrentBGM("mistlake");
+			PlayBGM("mistlake");
+		}
+		break;
+	case YOUKAI_MOUNTAIN_LEVEL:
+		StopCurrentBGM("youkaimountain");
+		PlayBGM("youkaimountain");
+		break;
+	case SCARLET_LEVEL:
+		StopCurrentBGM("scarlet");
+		PlayBGM("scarlet");
+		break;
+	case BAMBOO_LEVEL:
+		StopCurrentBGM("bamboo");
+		PlayBGM("bamboo");
+		break;
+	case DEPTH_LEVEL:
+		if (first_) {
+			StopCurrentBGM("depth");
+			PlayBGM("depth");
+		}
+		break;
+	case DREAM_LEVEL:
+		StopCurrentBGM("dream");
+		PlayBGM("dream");
+		break;
+	case PANDEMONIUM_LEVEL:
+	case PANDEMONIUM_LEVEL+1:
+	case PANDEMONIUM_LEVEL+2:
+	case PANDEMONIUM_LEVEL+3:
+		StopCurrentBGM("pandemonium");
+		PlayBGM("pandemonium");
+		break;
+	case SUBTERRANEAN_LEVEL:
+		StopCurrentBGM("subterranean");
+		PlayBGM("subterranean");
+		break;
+	case HAKUREI_LEVEL:
+		StopCurrentBGM("hakurei");
+		PlayBGM("hakurei");
+		break;
+	}
+}
+void environment::playBgm() {
+	if (isArena())
+		PlayBGM("sprint");
+	else if (isSprint())
+		PlayBGM("sprint");
+	else if (floor<TEMPLE_LEVEL)
+		PlayBGM("dungeon");
+	else if (floor == TEMPLE_LEVEL)
+		PlayBGM("dungeon");
+	else if (floor >= MISTY_LAKE_LEVEL && floor <= MISTY_LAKE_LEVEL + MAX_MISTY_LAKE_LEVEL)
+		PlayBGM("mistlake");
+	else if (floor >= YOUKAI_MOUNTAIN_LEVEL && floor <= YOUKAI_MOUNTAIN_LEVEL + MAX_YOUKAI_MOUNTAIN_LEVEL)
+		PlayBGM("youkaimountain");
+	else if (floor >= SCARLET_LEVEL && floor <= SCARLET_LEVEL + MAX_SCARLET_LEVEL)
+		PlayBGM("scarlet");
+	else if (floor >= SCARLET_LIBRARY_LEVEL && floor <= SCARLET_LIBRARY_LEVEL + MAX_SCARLET_LIBRARY_LEVEL)
+		PlayBGM("scarlet");
+	else if (floor >= SCARLET_UNDER_LEVEL && floor <= SCARLET_UNDER_LEVEL + MAX_SCARLET_UNDER_LEVEL)
+		PlayBGM("scarlet");
+	else if (floor >= BAMBOO_LEVEL && floor <= BAMBOO_LEVEL + MAX_BAMBOO_LEVEL)
+		PlayBGM("bamboo");
+	else if (floor >= EIENTEI_LEVEL && floor <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL)
+		PlayBGM("bamboo");
+	else if (floor >= SUBTERRANEAN_LEVEL && floor < SUBTERRANEAN_LEVEL + MAX_SUBTERRANEAN_LEVEL)
+		PlayBGM("subterranean");
+	else if (floor == SUBTERRANEAN_LEVEL + MAX_SUBTERRANEAN_LEVEL)
+		PlayBGM("subterranean");
+	else if (floor >= YUKKURI_LEVEL && floor <= YUKKURI_LAST_LEVEL)
+		PlayBGM("youkaimountain");
+	else if (floor >= DEPTH_LEVEL && floor <= DEPTH_LAST_LEVEL)
+		PlayBGM("depth");
+	else if (floor >= DREAM_LEVEL && floor <= DREAM_LAST_LEVEL)
+		PlayBGM("dream");
+	else if (floor >= MOON_LEVEL && floor <= MOON_LAST_LEVEL)
+		PlayBGM("dream");
+	else if (floor == PANDEMONIUM_LEVEL)
+		PlayBGM("pandemonium");
+	else if (floor == PANDEMONIUM_LEVEL + 1)
+		PlayBGM("pandemonium");
+	else if (floor == PANDEMONIUM_LEVEL + 2)
+		PlayBGM("pandemonium");
+	else if (floor == PANDEMONIUM_LEVEL + 3)
+		PlayBGM("pandemonium");
+	else if (floor >= HAKUREI_LEVEL && floor <= HAKUREI_LAST_LEVEL)
+		PlayBGM("hakurei");
+	else if (floor == OKINA_LEVEL) {
+		if (you.god_value[GT_OKINA][0] != OKINA_LEVEL
+			&& you.god_value[GT_OKINA][0] >= 0 &&
+			you.god_value[GT_OKINA][0] < MAXLEVEL) {
+			env[you.god_value[GT_OKINA][0]].playBgm();
+		}
+		else
+		{
+			PlayBGM("dungeon");
+		}
+	}
+	else
+		PlayBGM("dungeon");
 }
 monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* mon_)
 {

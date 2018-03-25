@@ -16,6 +16,7 @@
 #include "time.h"
 #include "FSM.h"
 #include "option_manager.h"
+#include "soundmanager.h"
 
 
 //
@@ -30,6 +31,7 @@ IDirectInput8* Input;
 IDirectInputDevice8* Keyboard;
 IDirectInputDevice8* Mouse;
 HANDLE mutx;
+extern HWND hwnd;
 
 
 HANDLE endmutx;
@@ -233,6 +235,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	{
 		::MessageBox(0, "일부 정상적으로 로딩되지못한 이미지파일이 있습니다.", 0, 0);
 	}
+	InitSound(hwnd);
 
 	d3d::EnterMsgLoop();
 

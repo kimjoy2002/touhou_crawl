@@ -23,6 +23,7 @@
 #include "rect.h"
 #include "tribe.h"
 #include "rand_shuffle.h"
+#include "soundmanager.h"
 
 
 
@@ -1390,6 +1391,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		else if(damage_)
 		{
+			if ((sight_ || only_invisible_) && a.type < ATT_THROW_NORMAL) {
+				soundmanager.playSound("hit");
+			}
+
 			enterlog();
 			
 			hp-=damage_;
@@ -1448,10 +1453,19 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			}
 			if(hp<=0)
 			{
+				if (sight_) {
+					if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
+						soundmanager.playSound("kill_named");
+					}
+					else {
+						soundmanager.playSound("kill");
+					}
+				}
 				if(a.order)
 				{
 					if (sight_) {
 						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴했다." :  "죽였다.");
+
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
@@ -2107,6 +2121,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	if (message_ && !remove_)
 	{
 		if (sight_){
+			if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
+				soundmanager.playSound("kill_named");
+			}
+			else {
+				soundmanager.playSound("kill");
+			}
 			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. ");
 
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
@@ -2302,8 +2322,10 @@ int monster::action(int delay_)
 			}
 			else {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-				if (is_sight && id != MON_TRASH)
+				if (is_sight && id != MON_TRASH) {
 					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "연기 속으로 사라졌다.");
+					soundmanager.playSound("kill_banashed");
+				}
 			}
 			env[current_level].SummonClear(map_id);
 			return 0;

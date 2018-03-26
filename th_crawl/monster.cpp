@@ -2229,12 +2229,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}
-		if(!randA(1+you.GetPunish(GT_SHINKI)?1:0))
+		if(!randA(1+you.GetPunish(GT_SHINKI)?1:0) && !isArena())
 		{
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
-		if (s_ally != -1)
+		if (s_ally != -1 && !isArena())
 		{
 			if (!item_lists.empty())
 			{

@@ -1680,7 +1680,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			{
 				if(!env[current_level].isMove((*it2),true,true))
 				{
-					block_length_-=isSprint()?20:2;
+					block_length_-=(isSprint() || isArena())?20:2;
 					break;
 				}
 				it2++;

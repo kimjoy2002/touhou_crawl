@@ -23,7 +23,9 @@ int makeMonsterid(int min_level, int max_level)
 		for(int i = 0; i < MON_MAX; i++)
 		{
 			int char_level= (mondata[i].flag & M_FLAG_UNIQUE) ? mondata[i].level*1.5f : mondata[i].level;
-			if(!(mondata[i].flag & M_FLAG_CANT_NETURAL) &&  char_level>= min_level && char_level <= max_level)
+			if(!(mondata[i].flag & M_FLAG_CANT_NETURAL)
+				&& !(mondata[i].flag & M_FLAG_CANT_GROUND)
+				&&  char_level>= min_level && char_level <= max_level)
 			{
 				mon_list_.push_back(i);
 			}

@@ -410,7 +410,7 @@ textures img_dungeon01[] = {
 
 					textures(&texture_dungeon01, 672, 0, 704, 32, 255),
 					textures(&texture_dungeon01, 704, 0, 736, 32, 255), //¸¶°è¶¥7
-					textures(&texture_dungeon01),
+					textures(&texture_dungeon01, 480, 0, 512, 32, 255),
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
 

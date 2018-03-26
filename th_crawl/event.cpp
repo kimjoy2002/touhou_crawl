@@ -14,6 +14,7 @@
 #include "mon_infor.h"
 #include "skill_use.h"
 #include "floor.h"
+#include "beam.h"
 
 int EventOccur(int id, events* event_);
 
@@ -422,7 +423,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 		case 5:
 			you.resetLOS();
-			printlog("꿈의 세계가 넓어지기 시작한다! 자고 있던 몹들이 깨어났다!", true, false, false, CL_danger);
+			printlog("꿈의 세계가 넓어지기 시작한다! 자고 있던 적들이 깨어나기 시작한다!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 4:
@@ -432,7 +433,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			break;
 		case 3:
 			you.resetLOS();
-			printlog("꿈의 세계가 또 다시 넓어졌다! 몹들이 당신을 눈치챘다!", true, false, false, CL_danger);
+			printlog("꿈의 세계가 또 다시 넓어졌다! 꿈의 주민들이 당신을 눈치챘다!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 2:
@@ -461,6 +462,25 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				{
 					env[current_level].changeTile(coord_def(x_, y_), DG_MOON_STAIR);
 					env[current_level].stair_vector.push_back(stair_info(coord_def(x_, y_), MOON_LEVEL));
+					rand_rect_iterator rect_it(coord_def(x_,y_),1,1);
+
+
+					while (!rect_it.end()) {
+						env[current_level].changeTile((*rect_it), DG_DREAM_FLOOR2);
+						rect_it++;
+					}
+
+
+
+					beam_iterator beam(coord_def(x_, y_), you.position);
+
+					beam.init();
+					while (!beam.end()) {
+						env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
+						beam++;
+					}
+					env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
+
 
 					if (!is_exist_named(MON_DOREMI)) {
 						monster *mon_ = env[current_level].AddMonster(MON_DOREMI, M_FLAG_EVENT, coord_def(x_, y_));
@@ -471,7 +491,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				}
 			}
 			you.resetLOS();
-			printlog("꿈의 세계는 완전히 개방되었다! 어딘가 생성된 달로 가는 포탈로 최대한 빨리 들어가야한다!", true, false, false, CL_danger);
+			printlog("꿈의 세계는 완전히 개방되었다! 달로 가는 포탈로 최대한 빨리 들어가야한다!", true, false, false, CL_danger);
 			MoreWait();
 			env[current_level].MakeEvent(EVL_REGEN, coord_def(0, 0), EVT_ALWAYS, 30);
 			break;

@@ -615,6 +615,10 @@ string GetSpellInfor(spell_list spell)
 		text_ += "또한 장애물을 무시하고 직접 시전이 가능하다.\n";
 		text_ += "잠에 빠지면 일정 턴 무방비상태가 되며 공격을 받으면 큰 데미지와 함께 깨어난다.\n";
 		break;
+	case SPL_TARGET_ELEC:
+		text_ += "원하는 상대에게 약한 전류를 흐르게 만드는 공격 마법.\n";
+		text_ += "일반적인 마법과 다르게, 지정한 대상에게 정확하게 전류를 흘려보낸다.\n";
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;

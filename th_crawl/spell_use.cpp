@@ -4227,6 +4227,27 @@ bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
 }
 
 
+
+bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("elec");
+		}
+		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("Àü±â", false));
+		ThrowShock(21, order->position, target_unit->position, temp_infor);
+		Sleep(120);
+		env[current_level].ClearEffect();
+		return true;
+	}
+	return false;
+}
+
+
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -4677,7 +4698,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_FIRE_SPREAD, 25));
 		break;
 	case MON_EVIL_EYE:
-		list->push_back(spell(SPL_SHOCK, 10));
+		list->push_back(spell(SPL_TARGET_ELEC, 20));
 		break;
 	case MON_ELIS:
 		list->push_back(spell(SPL_BLINK, 10));
@@ -5313,6 +5334,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_mess_confusion(power, short_, order, target);
 	case SPL_SLEEP_SMITE:
 		return skill_sleep_smite(power, short_, order, target);
+	case SPL_TARGET_ELEC:
+		return skill_target_elec(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5764,6 +5787,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_mess_confusion(power, short_, &you, target);
 	case SPL_SLEEP_SMITE:
 		return skill_sleep_smite(power, short_, &you, target);
+	case SPL_TARGET_ELEC:
+		return skill_target_elec(power, short_, &you, target);
 	default:
 		return false;
 	}

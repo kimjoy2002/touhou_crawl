@@ -1010,6 +1010,62 @@ bool skill_elec_passive(int power, unit* order)
 }
 
 
+bool skill_elec_ball_bomb(int power, unit* order)
+{
+	unit *hit_mon = NULL;
+	int conduct = 9999;
+	int spell_length_ = 6;
+	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if ((*it).isLive() && order->isEnemyMonster(&(*it)))
+		{
+			int length_ = pow((float)abs(order->position.x - it->position.x), 2) + pow((float)abs(order->position.y - it->position.y), 2);
+			if (!length_ || length_ >spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.
+				continue;
+			beam_iterator beam(order->position, order->position);
+			if (!CheckThrowPath(order->position, it->position, beam))//경로가 제대로 안 세워질경우 실패
+				continue;
+			int temp = (sqrt((float)length_)*10.0f + rand_int(-10, 10))*(2.0f - it->GetElecResist());
+			if (conduct>temp || (temp == conduct && randA(1)))
+			{
+				hit_mon = &(*it);
+				conduct = temp;
+			}
+		}
+	}
+	while (1) //루프안됨
+	{
+		if (order->isUserAlly())
+			break;
+		int length_ = pow((float)abs(order->position.x - you.position.x), 2) + pow((float)abs(order->position.y - you.position.y), 2);
+		if (!length_ || length_ > spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.
+			break;
+		beam_iterator beam(order->position, order->position);
+		if (!CheckThrowPath(order->position, you.position, beam))//경로가 제대로 안 세워질경우 실패
+			break;
+		int temp = (sqrt((float)length_)*10.0f + rand_int(-10, 10))*(2.0f - you.GetElecResist());
+		if (conduct>temp || (temp == conduct && randA(1)))
+		{
+			hit_mon = &you;
+			conduct = temp;
+		}
+		break;
+	}
+
+
+	if (hit_mon)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("elec");
+		}
+		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("전기", false));
+		ThrowShock(42, order->position, hit_mon->position, temp_infor);
+		Sleep(120);
+		env[current_level].ClearEffect();
+		return true;
+	}
+	return false;
+}
 
 
 
@@ -4246,6 +4302,26 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
+
+	int i = 2;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_ELEC_BALL, rand_int(30, 60), true, true, 2, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_SUMMON_ELEC_BALL)))
+		{
+			mon_->LevelUpdown((pow) / 8, 1.0f);
+			return_ = true;
+		}
+	}
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("elec");
+		}
+	}
+	return return_;
+}
 
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -4971,8 +5047,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_THUNDER_BOLT, 40));
 		break;
 	case MON_IKU:
-		list->push_back(spell(SPL_THUNDER, 25));
-		list->push_back(spell(SPL_THUNDER_BOLT, 30));
+		list->push_back(spell(SPL_THUNDER, 20));
+		list->push_back(spell(SPL_THUNDER_BOLT, 25));
+		list->push_back(spell(SPL_SUMMON_ELEC_BALL, 10));
 		break;
 	case MON_NEMUNO:
 	{
@@ -5336,6 +5413,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_sleep_smite(power, short_, order, target);
 	case SPL_TARGET_ELEC:
 		return skill_target_elec(power, short_, order, target);
+	case SPL_SUMMON_ELEC_BALL:
+		return skill_summon_elec_ball(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5789,6 +5868,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_sleep_smite(power, short_, &you, target);
 	case SPL_TARGET_ELEC:
 		return skill_target_elec(power, short_, &you, target);
+	case SPL_SUMMON_ELEC_BALL:
+		return skill_summon_elec_ball(power, short_, &you, target);
 	default:
 		return false;
 	}

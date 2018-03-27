@@ -3084,7 +3084,7 @@ void monster::special_action(int delay_, bool smoke_)
 		if (!smoke_){
 			if (env[current_level].isInSight(position, true) && !isArena() && isUserAlly())
 			{
-				you.HpUpDown(rand_int(2, 3), DR_NONE);
+				you.HpUpDown(rand_int(3, 4), DR_NONE);
 			}
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
@@ -3109,6 +3109,20 @@ void monster::special_action(int delay_, bool smoke_)
 				}
 			}
 		}
+		break;
+	case MON_ELEC_BALL:
+	{
+		if (!smoke_) {
+			exper++; //임시 변수
+			if (exper == 3) {
+				skill_elec_ball_bomb(level * 5, this);
+				summon_time = 0;
+				hp = 0;
+				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+				env[current_level].SummonClear(map_id);
+			}
+		}
+	}
 		break;
 	default:
 		break;

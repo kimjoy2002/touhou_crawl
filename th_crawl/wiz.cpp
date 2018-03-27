@@ -536,7 +536,7 @@ void wiz_mode()
 			break;
 		case '!':
 		{
-			you.Memorize(SPL_DISCHARGE, true);
+			you.Memorize(SPL_SUMMON_ELEC_BALL, true);
 		}
 		break;
 		/*case 'M':
@@ -564,7 +564,7 @@ void wiz_mode()
 				  key_ = waitkeyinput();
 
 				 
-				  if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_KOISHI :MON_MURASA+ key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+				  if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_YUUGENMAGAN :MON_MURASA+ key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 				  {
 					  mon_->state.SetState(MS_SLEEP);
 					  mon_->flag &= ~M_FLAG_SUMMON;

@@ -97,6 +97,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_YOUKAI:
 	case SPL_SUMMON_YOSHIKA:
 	case SPL_SUMMON_TRASH:
+	case SPL_SUMMON_ELEC_BALL:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
@@ -377,6 +378,7 @@ int SpellLength(spell_list skill)
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
+	case SPL_SUMMON_ELEC_BALL:
 	default:
 		return 0;		
 	}
@@ -666,6 +668,8 @@ const char* SpellString(spell_list skill)
 		return "꿈으로 인도";
 	case SPL_TARGET_ELEC:
 		return "전기 충격";
+	case SPL_SUMMON_ELEC_BALL:
+		return "용궁의사자 유영탄";
 	default:
 		return "알수없는 마법";
 	}
@@ -801,6 +805,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_YOUKAI:
 	case SPL_AUTUMN_BLADE:
 	case SPL_REAPER_MET:
+	case SPL_SUMMON_ELEC_BALL:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -968,6 +973,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_ANCHOR:
 	case SPL_TRASH_RUSH:
 	case SPL_THUNDER_BOLT:
+	case SPL_SUMMON_ELEC_BALL:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1297,6 +1303,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_TARGET_ELEC:
 		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
+	case SPL_SUMMON_ELEC_BALL:
+		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1447,6 +1455,7 @@ int SpellCap(spell_list skill)
 	case SPL_THROW_DISH:
 	case SPL_MESS_CONFUSION:
 	case SPL_SLEEP_SMITE:
+	case SPL_SUMMON_ELEC_BALL:
 		return 200;
 	default:
 	case SPL_BLINK:

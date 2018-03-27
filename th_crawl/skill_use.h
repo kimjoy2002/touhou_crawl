@@ -46,7 +46,7 @@ enum spell_list
 	SPL_PRISM_CALL, SPL_PSYCHOKINESIS, SPL_SUMMON_TRASH, SPL_TRASH_RUSH,
 	SPL_KOKORO_CHANGE, SPL_THUNDER_BOLT, SPL_SANTUARY,
 	SPL_MISTIA_SONG, SPL_MESS_CONFUSION, SPL_THROW_DISH,
-	SPL_SLEEP_SMITE, SPL_TARGET_ELEC,
+	SPL_SLEEP_SMITE, SPL_TARGET_ELEC, SPL_SUMMON_ELEC_BALL,
 	SPL_MAX
 };
 
@@ -208,6 +208,7 @@ int GetSpellBombRange(spell_list spell);
 
 
 bool skill_elec_passive(int power, unit* order);
+bool skill_elec_ball_bomb(int power, unit* order);
 
 
 

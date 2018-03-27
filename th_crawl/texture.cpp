@@ -2800,6 +2800,8 @@ int texturetoint(textures* input)
 		return 481;
 	else if (input == &img_mons_sion)
 		return 482;
+	else if(input == &img_blast[2])
+		return 483;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3793,6 +3795,8 @@ textures* inttotexture(int input)
 		return &img_fog_sion[2][0];
 	case 482:
 		return &img_mons_sion;
+	case 483:
+		return &img_blast[2];
 	default:
 		return &img_mons_default;
 	}

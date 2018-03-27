@@ -890,4 +890,11 @@ const mon_infor mondata[] = {
 	{ MON_DANCING_ARMOUR, 10, 870, name_infor("°©¿ÊÀÇ Ã÷±¸¸ð°¡¹Ì", true), &img_mons_default, 80, 10, 2,
 		{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("°ø°Ý",true),name_infor(),name_infor() },
 		M_FLAG_FLY | M_FLAG_PASSED_ALLY |  M_FLAG_INANIMATE, 5, 1, 10 },
+
+	{ MON_ELEC_BALL, 1, 0, name_infor("Àü±â±¸Ã¼", true), &img_blast[2], 10, 0, 10,
+	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
+		M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CONFUSE |
+		M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10 },
+
+
 };

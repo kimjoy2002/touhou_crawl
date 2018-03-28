@@ -485,6 +485,102 @@ stair_kind environment::getStairKind(int x_, int y_)
 		return STAIR_KIND_NOT_STAIR;
 	}
 }
+char environment::getAsciiDot(int x_, int y_)
+{
+	switch (dungeon_tile_type type = dgtile[x_][y_].tile)
+	{
+	case DG_NONE:
+		return ' ';
+	case DG_FLOOR:
+	case DG_FLOOR2:
+	case DG_GRASS:
+	case DG_DREAM_FLOOR:
+	case DG_PANDE_FLOOR1:
+	case DG_PANDE_FLOOR2:
+	case DG_PANDE_FLOOR3:
+	case DG_PANDE_FLOOR4:
+	case DG_PANDE_FLOOR5:
+	case DG_PANDE_FLOOR6:
+	case DG_PANDE_FLOOR7:
+	case DG_DREAM_FLOOR2:
+		return '.';
+	case DG_OPEN_DOOR:
+		return '/';
+	case DG_DOWN_STAIR:
+		return '>';
+	case DG_UP_STAIR:
+		return '<';
+	case DG_MISTY_LAKE_STAIR:
+	case DG_YOUKAI_MOUNTAIN_STAIR:
+	case DG_SCARLET_STAIR:
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
+		return '>';
+	case DG_RETURN_STAIR:
+		return '<';
+	case DG_TEMPLE_JOON_AND_SION:
+	case DG_TEMPLE_BYAKUREN:
+	case DG_TEMPLE_KANAKO:
+	case DG_TEMPLE_SUWAKO:
+	case DG_TEMPLE_MINORIKO:
+	case DG_TEMPLE_MIMA:
+	case DG_TEMPLE_SHINKI:
+	case DG_TEMPLE_YUUGI:
+	case DG_TEMPLE_SHIZUHA:
+	case DG_TEMPLE_HINA:
+	case DG_TEMPLE_YUKARI:
+	case DG_TEMPLE_EIRIN:
+	case DG_TEMPLE_YUYUKO:
+	case DG_TEMPLE_SATORI:
+	case DG_TEMPLE_TENSI:
+	case DG_TEMPLE_SEIJA:
+	case DG_TEMPLE_LILLY:
+	case DG_TEMPLE_MIKO:
+	case DG_TEMPLE_OKINA:
+	case DG_TEMPLE_JUNKO:
+		return '_';
+	case DG_WALL:
+	case DG_STONE_WALL:
+	case DG_RED_WALL:
+	case DG_BOOK_WALL:
+	case DG_BAMBOO_WALL:
+	case DG_PANDE_WALL1:
+	case DG_PANDE_WALL2:
+	case DG_PANDE_WALL3:
+	case DG_PANDE_WALL4:
+	case DG_PANDE_WALL5:
+	case DG_PANDE_WALL6:
+	case DG_PANDE_WALL7:
+		return '#';
+	case DG_TREE:
+		return 'T';
+	case DG_METAL_WALL:
+		return '#';
+	case DG_WALL2:
+	case DG_WALL3:
+		return '#';
+	case DG_CLOSE_DOOR:
+		return '+';
+	case DG_GLASS:
+		return '=';
+	case DG_STATUE:
+	case DG_STATUE2:
+		return '&';
+	case DG_SEA:
+		return '~';
+	default:
+		return ' ';
+	}
+}
 int environment::getAutoTileNum(unsigned char bit)
 {
 	switch(bit)

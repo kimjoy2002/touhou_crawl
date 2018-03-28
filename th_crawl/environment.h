@@ -234,6 +234,7 @@ public:
 	int isStair(int x_, int y_); //실제 계단번지수에 +1을해서 리턴함(※올라가는 계단은 마이너스곱함)
 
 	stair_kind getStairKind(int x_, int y_);
+	char getAsciiDot(int x_, int y_);
 
 
 	bool magicmapping(int x_, int y_);

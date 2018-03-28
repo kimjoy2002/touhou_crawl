@@ -140,6 +140,7 @@ public:
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
 	void SetXY(coord_def pos_);
+	char getAsciiDot();
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);
 	void FoundTarget(unit* unit_, int time_);
 	int FoundTime();

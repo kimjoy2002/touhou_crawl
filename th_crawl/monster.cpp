@@ -708,6 +708,12 @@ void monster::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
 }
+char monster::getAsciiDot() 
+{
+	if (id < 0)
+		return '?';
+	return mondata[id].dot;
+}
 void monster::LevelUpdown(int level_, float hp_, float atk_)
 {
 

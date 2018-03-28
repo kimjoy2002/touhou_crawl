@@ -19,6 +19,7 @@
 #include "network.h"
 #include "save.h"
 #include "replay.h"
+#include "mon_infor.h"
 
 extern const char *version_string;
 
@@ -80,6 +81,7 @@ void action_class::LoadDatas(FILE *fp)
 
 
 
+void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]);
 
 int caculScore()
 {
@@ -562,6 +564,31 @@ bool Dump(int type, string *filename_)
 	
 	fprintf_s(fp,"\n\n\n");
 
+	
+
+	{
+		map<char, list<string >> monster_list;
+		char temp_map_[17][17];
+		makeAsciiDump(&monster_list,temp_map_);
+		for (int y = 0; y < 17; y++) {
+			for (int x = 0; x < 17; x++) {
+				fprintf_s(fp, "%c", temp_map_[x][y]);
+			}
+			fprintf_s(fp, "\n");
+		}
+		for (auto it = monster_list.begin(); it != monster_list.end(); it++) {
+			fprintf_s(fp, "%c:", it->first);
+			boolean first = true;
+			for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++) {
+				if(!first)
+					fprintf_s(fp, ", ");
+				fprintf_s(fp, "%s", it2->c_str());
+				first = false;
+			}
+			fprintf_s(fp, "\n");
+		}
+	}
+	fprintf_s(fp, "\n\n\n");
 
 	if(!DisplayManager.text_log.text_list.empty())
 	{
@@ -702,3 +729,62 @@ const char* GetDumpActionString(dump_action_type type_)
 	}
 
 }
+
+void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]) {
+	int x_ = you.position.x - 8;
+	int y_ = you.position.y - 8;
+	for (int i = 0; i < 17; i++)
+	{
+		for (int j = 0; j < 17; j++)
+		{
+			int c_x_ = i + x_, c_y_ = j + y_;
+			if (c_x_ >= 0 && c_y_ >= 0 && c_x_ < DG_MAX_X && c_y_ < DG_MAX_Y)
+			{
+				if (env[current_level].isInSight(coord_def(c_x_, c_y_))) {
+					unit* target_unit = env[current_level].isMonsterPos(c_x_, c_y_);
+					if (target_unit != NULL) {
+						char mon_dot = target_unit->getAsciiDot();
+						map_[i][j] = mon_dot;
+						if (!target_unit->isplayer()) {
+							monster* target_mon = (monster*)target_unit;
+							if (!(target_mon->flag & M_FLAG_UNHARM))
+							{
+								auto it = monster_list->find(mon_dot);
+								if (it == monster_list->end()) {
+									list<string> new_list;
+
+									if (target_mon->isUserAlly())
+										new_list.push_back(target_mon->name.name+"¢½");
+									else 
+										new_list.push_back(target_mon->name.name);
+									(*monster_list)[mon_dot] = new_list;
+								}
+								else {
+									if (target_mon->isUserAlly())
+										it->second.push_back(target_mon->name.name + "¢½");
+									else
+										it->second.push_back(target_mon->name.name);
+								}
+							}
+						}
+					}
+					else {
+						map_[i][j] = env[current_level].getAsciiDot(c_x_, c_y_);
+					}
+				}
+				else if ((env[current_level].isExplore(c_x_, c_y_) || env[current_level].isMapping(c_x_, c_y_)))
+				{
+					map_[i][j] = env[current_level].getAsciiDot(c_x_, c_y_);
+				}
+				else {
+					map_[i][j] = ' ';
+				}
+			}
+			else {
+				map_[i][j] = ' ';
+			}
+		}
+	}
+
+}
+

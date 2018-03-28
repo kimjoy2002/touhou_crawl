@@ -364,6 +364,7 @@ public:
 	int GetSpellHungry(int spell_);
 	int GetStealth();
 	int GetBuffOk(stat_up stat_);//해당스탯 버프가 있으면 true리턴. 보통 display용
+	char getAsciiDot() { return '@'; };
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);

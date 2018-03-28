@@ -30,6 +30,7 @@ struct mon_infor
 	int resist;
 	int sense;
 	int speed;
+	char dot;
 };
 
 

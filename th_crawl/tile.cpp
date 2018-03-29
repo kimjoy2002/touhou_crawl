@@ -25,6 +25,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_PANDE_FLOOR5:
 	case DG_PANDE_FLOOR6:
 	case DG_PANDE_FLOOR7:
+	case DG_DREAM_FLOOR2:
+	case DG_HELL_FLOOR:
 		return DOT_FLOOR;
 	case DG_WALL:
 	case DG_GLASS:
@@ -44,6 +46,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_PANDE_WALL6:
 	case DG_PANDE_WALL7:
 	case DG_TREE:
+	case DG_HELL_WALL:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:

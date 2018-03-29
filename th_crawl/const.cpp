@@ -115,7 +115,7 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"지면",//10
 	"지면",
 	"지면",
-	"",
+	"지면",
 	"",
 	"열린문",//15
 	"내려가는 계단",
@@ -177,6 +177,7 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"마계벽",
 	"마계벽",
 	"나무",
+	"지옥벽",
 	"철벽",
 	"벽",
 	"벽",

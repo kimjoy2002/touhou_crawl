@@ -283,7 +283,7 @@ void map_algorithms(int num)
 		}
 		else if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 		{
-			map_algorithms01(num,DG_FLOOR,DG_WALL);
+			map_algorithms01(num, DG_HELL_FLOOR,DG_HELL_WALL);
 		}
 		else if(num >= YUKKURI_LEVEL && num < YUKKURI_LAST_LEVEL)
 		{

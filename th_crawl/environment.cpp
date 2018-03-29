@@ -503,6 +503,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_FLOOR6:
 	case DG_PANDE_FLOOR7:
 	case DG_DREAM_FLOOR2:
+	case DG_HELL_FLOOR:
 		return '.';
 	case DG_OPEN_DOOR:
 		return '/';
@@ -560,6 +561,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_WALL5:
 	case DG_PANDE_WALL6:
 	case DG_PANDE_WALL7:
+	case DG_HELL_WALL:
 		return '#';
 	case DG_TREE:
 		return 'T';
@@ -767,6 +769,11 @@ void environment::innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, fl
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_red_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_HELL_WALL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_hell_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_SEA) {
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);

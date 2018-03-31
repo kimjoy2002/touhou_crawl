@@ -4339,7 +4339,7 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_GLOW:
 		if(s_glow)
 		{
-			sprintf(string_,"¹ß±¤");
+			sprintf(string_,"ºû³²");
 			return true;
 		}
 		return false;

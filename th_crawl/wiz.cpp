@@ -152,12 +152,12 @@ void wiz_mode()
 			return;
 			case 'v':
 			{
-				int list[] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE };
+				int list[] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE,SPC_V_METAL, SPC_V_SUN };
 				enterlog();
-				printlog("a-화염 b-냉기 c-대지 d-대기 e-투명", true, false, false, CL_help);
+				printlog("a-화염 b-냉기 c-대지 d-대기 e-투명 f-금속 g-태양", true, false, false, CL_help);
 				printlog("어느 스펠카드를 얻어볼까?", false, false, false, CL_help);
 				key_ = waitkeyinput();
-				if (key_ >= 'a' && key_ <= 'e')
+				if (key_ >= 'a' && key_ <= 'g')
 				{
 					item_infor t;
 					makeitem(ITM_SPELL, 0, &t, list[key_ - 'a']);

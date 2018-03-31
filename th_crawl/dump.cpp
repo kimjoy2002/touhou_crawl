@@ -244,6 +244,11 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에게 ", 64);
 					strncat(death_reason, "폭사당했다.", 64);
 					break;
+				case ATT_SUN_BLAST:
+					if (you.dead_order->order)
+						strncat(death_reason, "의 ", 64);
+					strncat(death_reason, "햇빛에 타들어죽었다.", 64);
+					break;
 				case ATT_FIRE:
 				case ATT_THROW_FIRE:
 				case ATT_CLOUD_FIRE:

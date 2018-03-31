@@ -509,7 +509,9 @@ void reward_random_init()
 	rand_spell_card.push(SPC_V_FIRE, 3);
 	rand_spell_card.push(SPC_V_ICE, 3);
 	rand_spell_card.push(SPC_V_AIR, 3);
+	rand_spell_card.push(SPC_V_METAL, 3);
 	rand_spell_card.push(SPC_V_INVISIBLE, 1);
+	rand_spell_card.push(SPC_V_SUN, 1);
 
 	for (int i = 0; i < BOOK_LAST; i++) {
 		if(i != BOOK_TRANSITION)

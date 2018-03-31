@@ -105,7 +105,7 @@ public:
 	virtual bool SetElec(int elec_)=0;
 	virtual bool SetParalyse(int paralyse_)=0;
 	virtual bool SetLevitation(int levitation_)=0;
-	virtual bool SetGlow(int glow_)=0;
+	virtual bool SetGlow(int glow_, bool no_speak = false)=0;
 	virtual bool SetGraze(int graze_)=0;
 	virtual bool SetSilence(int silence_, int silence_range_)=0;
 	virtual bool SetSick(int sick_)=0;

@@ -417,6 +417,7 @@ extern textures img_fog_sion[3][4];
 extern textures img_blizzard[];
 extern textures img_fog_tonado[];
 extern textures img_blast[];
+extern textures img_autumn_edge[];
 extern textures img_fog_thunder[];
 
 

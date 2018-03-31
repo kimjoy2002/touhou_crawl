@@ -929,6 +929,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		if(damage_<0)
 			damage_ = 0;
 		break;
+	case ATT_SUN_BLAST:
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
@@ -1111,6 +1112,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			if(a.order)
 			{
 				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù. ");
+			}
+			break;
+		case ATT_SUN_BLAST:
+			if (a.order)
+			{
+				printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "¿¡ ÀÇÇØ Å¸µé¾î°¬´Ù. ");
 			}
 			break;
 		case ATT_COLD_PYSICAL_BLAST:
@@ -3383,11 +3390,11 @@ bool monster::SetLevitation(int levitation_)
 {
 	return false;
 }
-bool monster::SetGlow(int glow_)
+bool monster::SetGlow(int glow_, bool no_speak)
 {
 	if(!glow_)
 		return false;
-	if(isYourShight())
+	if(isYourShight() && !no_speak)
 	{
 		if(!s_glow)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ºû³ª°íÀÖ´Ù. ");

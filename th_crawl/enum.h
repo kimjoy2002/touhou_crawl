@@ -854,7 +854,9 @@ enum spellcard_evoke_type
 	SPC_V_ICE,
 	SPC_V_EARTH,
 	SPC_V_AIR,
-	SPC_V_INVISIBLE,
+	SPC_V_INVISIBLE, 
+	SPC_V_METAL,
+	SPC_V_SUN,
 	SPC_V_MAX
 };
 
@@ -1004,7 +1006,8 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_CLOUD_NORMAL,
 	ATT_CLOUD_CURSE,
 	ATT_NORMAL_BLAST, 
-	ATT_AC_REDUCE_BLAST, 
+	ATT_AC_REDUCE_BLAST,
+	ATT_SUN_BLAST,
 	ATT_FIRE_BLAST, 
 	ATT_COLD_BLAST, 
 	ATT_ELEC_BLAST, 

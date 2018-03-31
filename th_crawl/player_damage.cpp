@@ -477,6 +477,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
 		}
 		break;
+	case ATT_SUN_BLAST:
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
 	case ATT_CLOUD_ELEC:
@@ -675,6 +676,12 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		if(a.order)
 		{
 			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù. ");
+		}
+		break;
+	case ATT_SUN_BLAST:
+		if (a.order)
+		{
+			printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "¿¡ ÀÇÇØ Å¸µé¾î°¬´Ù. ");
 		}
 		break;
 	case ATT_COLD_PYSICAL_BLAST:

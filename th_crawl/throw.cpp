@@ -327,6 +327,8 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_tanmac_doggojeo[direc];
 	case 44:
 		return &img_tanmac_sion[direc];
+	case 45:
+		return &img_autumn_edge[direc];
 	}
 }
 

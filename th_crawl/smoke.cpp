@@ -154,14 +154,14 @@ bool smoke::effectSmoke(unit* unit_)
 	default:
 		return false;
 	case SMT_FIRE:
-		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("화염 구름",true)), true);
+		unit_->damage(attack_infor(rand_int(5,15),15,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("화염 구름",true)), true);
 		return true;
 	case SMT_COLD:
-		unit_->damage(attack_infor(rand_int(7,17),20,99,NULL,parent,ATT_CLOUD_COLD,name_infor("냉기 구름",true)), true);
+		unit_->damage(attack_infor(rand_int(3,12),12,99,NULL,parent,ATT_CLOUD_COLD,name_infor("냉기 구름",true)), true);
 		unit_->SetFrozen(randA_1(7));
 		return true;
 	case SMT_ELEC:
-		unit_->damage(attack_infor(rand_int(10,20),20,99,NULL,parent,ATT_CLOUD_ELEC,name_infor("전기 구름",true)), true);
+		unit_->damage(attack_infor(rand_int(7,17),17,99,NULL,parent,ATT_CLOUD_ELEC,name_infor("전기 구름",true)), true);
 		return true;
 	case SMT_TWIST:
 		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("트위스트",false)), true);

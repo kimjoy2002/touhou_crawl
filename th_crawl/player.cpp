@@ -2617,7 +2617,7 @@ bool players::SetLevitation(int levitation_)
 		s_levitation = 100;
 	return true;
 }
-bool players::SetGlow(int glow_)
+bool players::SetGlow(int glow_, bool no_speak)
 {
 	if(!glow_)
 		return false;
@@ -4129,7 +4129,7 @@ bool players::Evoke(char id_)
 					return false;	
 				}
 				ReleaseMutex(mutx);
-				int bonus_pow_ = 20+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*2 , GetSkillLevel(SKT_EVOCATE, true) *5);
+				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*4 , GetSkillLevel(SKT_EVOCATE, true) * 7);
 				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2))
 				{
 					WaitForSingleObject(mutx, INFINITE);

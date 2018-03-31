@@ -480,6 +480,10 @@ const D3DCOLOR item::item_color()
 		{
 			return_ = CL_bad;
 		}
+		else if(iden_list.spellcard_list[value2].iden ==2 &&
+			value2 == SPC_V_SUN && you.tribe == TRI_VAMPIRE){
+			return_ = CL_magic;
+		}
 		break;
 	case ITM_AMULET:
 		if(iden_list.amulet_list[value1].iden == 2)

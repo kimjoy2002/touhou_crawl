@@ -1171,6 +1171,7 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	case ATT_FIRE_BLAST:
 	case ATT_BURST:
 	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_SUN_BLAST:
 		image_ = &img_blast[0];
 		break;
 	case ATT_COLD_BLAST:

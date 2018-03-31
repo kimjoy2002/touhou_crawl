@@ -419,7 +419,7 @@ public:
 	bool SetElec(int elec_);
 	bool SetParalyse(int paralyse_);
 	bool SetLevitation(int levitation_);
-	bool SetGlow(int glow_);
+	bool SetGlow(int glow_, bool no_speak = false);
 	bool SetGraze(int graze_);
 	bool SetSilence(int silence_, int silence_range_);
 	bool SetSick(int sick_);

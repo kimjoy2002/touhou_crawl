@@ -30,6 +30,12 @@ optionManager::optionManager(string fileName) {
 
 		GetPrivateProfileString(_T("config"), _T("width"), _T("800"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
+
+		GetPrivateProfileString(_T("config"), _T("bgm_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		bgm_volume = _tstoi(szBuf);
+
+		GetPrivateProfileString(_T("config"), _T("se_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		se_volume = _tstoi(szBuf);
 	}
 }
 
@@ -46,6 +52,13 @@ void optionManager::createNewFile(string fileName) {
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
 
+	strString = _T("70");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("bgm_volume"), tchr, fileName.c_str());
+
+	strString = _T("70");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("se_volume"), tchr, fileName.c_str());
 }
 
 string optionManager::TCHARToString(const TCHAR* ptsz)

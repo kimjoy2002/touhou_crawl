@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "soundmanager.h"
+#include "option_manager.h"
 #include <fstream>
 using namespace std;
 
@@ -82,6 +83,8 @@ SOUNDBUFFER::SOUNDBUFFER()
 	IsLooping = false;
 	IsStreaming = false;
 	IsOverlab = false;
+	lazy_loading = false;
+	path = "";
 	Volume = 100;
 	stream_limit = 0;
 	Down_time = 100;
@@ -117,8 +120,9 @@ SOUNDBUFFER :: ~SOUNDBUFFER()
 		hmmio = NULL;
 	}
 }
-void SOUNDBUFFER::Load(IDirectSound8* Sound, char* WaveFileName, bool Streaming, bool Looping, bool overlab)
+void SOUNDBUFFER::Load(IDirectSound8* Sound, const char* WaveFileName, bool Streaming, bool Looping, bool overlab)
 {
+	path = WaveFileName;
 	ifstream infile;
 	infile.open(WaveFileName);
 	if (infile.fail())
@@ -127,7 +131,7 @@ void SOUNDBUFFER::Load(IDirectSound8* Sound, char* WaveFileName, bool Streaming,
 	}
 	infile.close();
 
-	hmmio = mmioOpen(WaveFileName, NULL, MMIO_ALLOCBUF | MMIO_READ);
+	hmmio = mmioOpen((char*)WaveFileName, NULL, MMIO_ALLOCBUF | MMIO_READ);
 
 	MMCKINFO ckRIFF;
 	ZeroMemory(&ckRIFF, sizeof(MMCKINFO));
@@ -397,10 +401,17 @@ boolean SOUNDBUFFER::StopSound()
 
 void SOUNDBUFFER::SetVolume()
 {
+	if (Volume > 100)
+		Volume = 100;
+	if (Volume < 0)
+		Volume = 0;
 	int Volume_ = Volume * Down_time / 100;
 	Volume_ = Volume_ * Up_time / 100;
+	if (Volume_ > 100)
+		Volume_ = 100;
 	if (!SoundBuffer)
 		return;
+
 
 	if (Volume_ == 0)
 		SoundBuffer->SetVolume(-10000);
@@ -547,16 +558,19 @@ void SOUNDMANAGER::Update()
 void SOUNDMANAGER::addSound(const char* name, char* path, bool Looping, bool overlab) 
 {
 	SOUNDBUFFER* new_sound = new SOUNDBUFFER();
+	new_sound->lazy_loading = true;
 	new_sound->Load(Sound, path, false, Looping, overlab);
-	new_sound->Volume = 70;
+	new_sound->Volume = option_mg.getSeVolume();
 	new_sound->SetVolume();
 	soundList[name] = new_sound;
 }
 void SOUNDMANAGER::addBgm(const char* name, char* path)
 {
 	SOUNDBUFFER* new_sound = new SOUNDBUFFER();
-	new_sound->Load(Sound, path, true, true, false);
-	new_sound->Volume = 70;
+	new_sound->lazy_loading = false;
+	new_sound->path = path;
+	//new_sound->Load(Sound, path, true, true, false); 나중에 로딩한다.
+	new_sound->Volume = option_mg.getBgmVolume();
 	new_sound->SetVolume();
 	bgmList[name] = new_sound;
 }
@@ -564,6 +578,11 @@ void SOUNDMANAGER::addBgm(const char* name, char* path)
 void SOUNDMANAGER::playSound(const char* name) 
 {
 	SOUNDBUFFER* sound_ = soundList[name];
+
+	if (sound_->lazy_loading == false) {
+		sound_->lazy_loading = true;
+		sound_->Load(Sound, sound_->path.c_str(), false, false, true);
+	}
 
 	if (sound_ && soundmanager.se_on)
 	{
@@ -575,9 +594,14 @@ void SOUNDMANAGER::playSound(const char* name)
 boolean SOUNDMANAGER::playBgm(const char* name)
 {
 	SOUNDBUFFER* sound_ = bgmList[name];
+
 	if (current_bgm == sound_)
 		return false;
 
+	if (sound_->lazy_loading == false) {
+		sound_->lazy_loading = true;
+		sound_->Load(Sound, sound_->path.c_str(), true, true, false);
+	}
 	if (sound_ && sound_->SoundBuffer && soundmanager.bgm_on)
 	{
 		sound_->PlaySound();
@@ -620,6 +644,28 @@ void StopBGM(SOUNDBUFFER* sound_)
 	if (sound_ && sound_->SoundBuffer && soundmanager.bgm_on)
 	{
 		sound_->StopSound();
+	}
+}
+void VolumeUp()
+{
+	for (auto it = soundmanager.bgmList.begin(); it != soundmanager.bgmList.end(); it++) {
+		it->second->Volume += 10;
+		it->second->SetVolume();
+	}
+	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
+		it->second->Volume += 10;
+		it->second->SetVolume();
+	}
+}
+void VolumeDown()
+{
+	for (auto it = soundmanager.bgmList.begin(); it != soundmanager.bgmList.end(); it++) {
+		it->second->Volume -= 10;
+		it->second->SetVolume();
+	}
+	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
+		it->second->Volume -= 10;
+		it->second->SetVolume();
 	}
 }
 void StopCurrentBGM(const char* except)

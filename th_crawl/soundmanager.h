@@ -34,16 +34,18 @@ public:
 	bool IsLooping;
 	bool IsStreaming;
 	bool IsOverlab;
+	bool lazy_loading;
 	long Volume;
 	int Up_time;
 	int Down_time;
 	int stream_limit; //자동으로 곡이 끊기는 시간
 	int play_time; //플레이 함수로 플레이후 지난시간
+	string path;
 
 	SOUNDBUFFER();
 	~SOUNDBUFFER();
 
-	void Load(IDirectSound8* Sound, char* WaveFileName, bool Streaming, bool Looping, bool overlab);
+	void Load(IDirectSound8* Sound, const char* WaveFileName, bool Streaming, bool Looping, bool overlab);
 	void Unload();
 	void BufferUpdate();
 	void PlaySound();
@@ -105,6 +107,10 @@ extern SOUNDMANAGER soundmanager;
 
 
 void InitSound(HWND windowhandle_);
+
+void VolumeUp();
+void VolumeDown();
+
 
 void PlaySE(const char* name);
 boolean PlayBGM(const char* name);

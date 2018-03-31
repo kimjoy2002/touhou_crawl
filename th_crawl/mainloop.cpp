@@ -632,6 +632,13 @@ void MainLoop()
 		case 'p':
 			Pray();
 			break;
+			/*
+		case '+':
+			VolumeUp();
+			break;
+		case '-':
+			VolumeDown();
+			break;*/
 		case '#':
 			if(Dump(0,NULL))
 				printlog("덤프에 성공했습니다.",true,false,false,CL_normal);

@@ -23,6 +23,9 @@ class optionManager {
 	int height;
 	int width;
 
+	int bgm_volume;
+	int se_volume;
+
 private:
 	optionManager() {};
 public:
@@ -35,6 +38,8 @@ public:
 	int getHeightCommon() { return height; };
 	int getWidthCommon() { return width; };
 
+	int getBgmVolume() { return bgm_volume; };
+	int getSeVolume() { return se_volume; };
 
 private:
 	string TCHARToString(const TCHAR* ptsz);

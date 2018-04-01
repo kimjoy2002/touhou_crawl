@@ -219,7 +219,7 @@ coord_def map_dummy::getNextPos()
 	return c;
 }
 
-void make_lake(int num, int repeat);
+void make_lake(int num, int repeat, boolean lava);
 
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
@@ -263,7 +263,7 @@ void map_algorithms(int num)
 		else if(num >= MISTY_LAKE_LEVEL && num <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
 		{
 			map_algorithms03(120,3,5,9, num,DG_GRASS,DG_WALL);
-			make_lake(num, 100);
+			make_lake(num, 100, false);
 		}
 		else if(num == SCARLET_LIBRARY_LEVEL)
 		{
@@ -283,7 +283,10 @@ void map_algorithms(int num)
 		}
 		else if(num >= SUBTERRANEAN_LEVEL && num <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 		{
-			map_algorithms01(num, DG_HELL_FLOOR,DG_HELL_WALL);
+			map_algorithms01(num, DG_HELL_FLOOR, DG_HELL_WALL);
+			if (num == SUBTERRANEAN_LEVEL_LAST_LEVEL) {
+				make_lake(num, 50, true);
+			}
 		}
 		else if(num >= YUKKURI_LEVEL && num < YUKKURI_LAST_LEVEL)
 		{
@@ -453,7 +456,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	return;
 }
 
-void make_lake(int num, int repeat)
+void make_lake(int num, int repeat, boolean lava)
 {
 	bool no_lake_ = false;
 	for(int j=0;j<repeat;j++) //무한반복 제거용
@@ -469,7 +472,7 @@ void make_lake(int num, int repeat)
 		{
 			for(int y_ = temp_coord.y-r_size_y+1; y_ < temp_coord.y+r_size_y; y_++)
 			{
-				if(!(env[num].dgtile[x_][y_].tile >= DG_FLOOR && env[num].dgtile[x_][y_].tile <= DG_FLOOR_END || env[num].dgtile[x_][y_].tile == DG_SEA))
+				if(!(env[num].dgtile[x_][y_].tile >= DG_FLOOR && env[num].dgtile[x_][y_].tile <= DG_FLOOR_END || env[num].dgtile[x_][y_].tile == DG_SEA || env[num].dgtile[x_][y_].tile == DG_LAVA))
 				{
 					no_lake_ = true;
 					x_ = temp_coord.x+r_size_x-1;
@@ -524,30 +527,32 @@ void make_lake(int num, int repeat)
 					if(x_ == temp_coord.x-r_size_x+1 || x_ == temp_coord.x+r_size_x-1)
 						if(y_ == temp_coord.y-r_size_y+1 || y_ == temp_coord.y+r_size_y-1)
 							continue;
-					env[num].dgtile[x_][y_].tile = DG_SEA;
+					env[num].dgtile[x_][y_].tile = lava? DG_LAVA : DG_SEA;
 				}
 			}
 		}
 	}
 
-
-
-	for (int i = rand_int(30,40); i>0; i--)
+	if (!lava)
 	{
-		int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1), limit_ = 10000;
-		while (!env[num].isMove(x_, y_, false, false, false) ||
-			(env[num].dgtile[x_][y_].flag & FLAG_NO_MONSTER) ||
-			env[num].isMonsterPos(x_, y_) || env[num].isStair(x_, y_))
+
+		for (int i = rand_int(30, 40); i > 0; i--)
 		{
-			if (limit_--<0)
-				break;
-			x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
-		}
-		if (limit_ <= 0)
-			continue;
-		if (env[num].AddMonster(MON_BUSH, 0, coord_def(x_, y_)))
-		{
-			continue;
+			int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1), limit_ = 10000;
+			while (!env[num].isMove(x_, y_, false, false, false) ||
+				(env[num].dgtile[x_][y_].flag & FLAG_NO_MONSTER) ||
+				env[num].isMonsterPos(x_, y_) || env[num].isStair(x_, y_))
+			{
+				if (limit_-- < 0)
+					break;
+				x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
+			}
+			if (limit_ <= 0)
+				continue;
+			if (env[num].AddMonster(MON_BUSH, 0, coord_def(x_, y_)))
+			{
+				continue;
+			}
 		}
 	}
 }

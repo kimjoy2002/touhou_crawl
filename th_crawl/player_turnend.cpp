@@ -507,7 +507,16 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_levitation--;
 		if(!s_levitation)
 		{
-			printlog("땅에 부드럽게 착지했다. ",false,false,false,CL_blue);
+			if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA)
+			{
+				printlog("당신은 물 위에 떨어졌다. ", false, false, false, you.isSwim()? CL_blue :CL_danger);
+			}
+			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
+				printlog("당신은 용암 위에 떨어졌다. ", false, false, false, CL_danger);
+			}
+			else {
+				printlog("땅에 부드럽게 착지했다. ", false, false, false, CL_blue);
+			}
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_LEVITATION,false,false,temp);
@@ -901,6 +910,31 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 
 	ReleaseMutex(mutx);
+
+
+	if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA &&
+		!you.isFly() && !you.isSwim())
+	{
+		drowned = true;
+		int damage_ = you.GetMaxHp() / 10;
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("질식", true)), true);
+		SetInter(IT_DAMAGE);
+	}	
+	else if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA &&
+		!you.isFly())
+	{
+		drowned = true;
+		int damage_ = you.GetMaxHp() / 3;
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor("용암", true)), true);
+
+		damage_ = you.GetMaxHp() / 10;
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("질식", true)), true);
+		SetInter(IT_DAMAGE);
+	}
+	else
+	{
+		drowned = false;
+	}
 
 
 	if(s_paralyse || you.s_sleep < 0)

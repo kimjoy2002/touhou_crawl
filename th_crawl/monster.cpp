@@ -939,6 +939,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_SMITE:
 	case ATT_BLOOD:
 	case ATT_BURST:
+	case ATT_DROWNING:
 		break;
 	}
 	switch(type_)
@@ -1153,6 +1154,9 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 				break;
 		case ATT_THROW_ELEC:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+			break;
+		case ATT_DROWNING:
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠졌다. ");
 			break;
 		case ATT_THROW_NONE_MASSAGE:
 			break;
@@ -1704,7 +1708,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 	}
 
 	if(!(flag & M_FLAG_NONE_MOVE) &&
-		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly(), isSwim(), false/*flag & M_FLAG_CANT_GROUND*/))
+		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/))
 	{
 		if(env[current_level].isSmokePos(position.x+x_mov,position.y+y_mov))
 		{
@@ -2960,6 +2964,23 @@ int monster::action(int delay_)
 
 
 	prev_position = position;
+
+	if (env[current_level].dgtile[position.x][position.y].tile == DG_SEA &&
+		!isFly() && !isSwim())
+	{
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠졌다. ");
+		dead(PRT_PLAYER, true);
+	}
+	else if (env[current_level].dgtile[position.x][position.y].tile == DG_LAVA &&
+		!isFly())
+	{
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "용암에 빠졌다. ");
+		dead(PRT_PLAYER, true);
+	}
+
+
+
+
 	return 0;
 }
 void monster::sightcheck(bool is_sight_)

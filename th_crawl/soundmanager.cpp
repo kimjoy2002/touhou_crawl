@@ -524,6 +524,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addSound("debuf", "sound\\se\\debuf.wav", false, true); //ok
 	addSound("curse", "sound\\se\\curse.wav", false, true); //ok
 	addSound("jump", "sound\\se\\jump.wav", false, true); //ok
+	addSound("water", "sound\\se\\water.wav", false, true); //ok
 	addSound("warning", "sound\\se\\warning.wav", false, true); //ok
 	
 	

@@ -303,7 +303,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 rese
 	DG_STATUE,
 	DG_STATUE2,
 	DG_SEA,
-	DG_OBJECT_END = DG_SEA,
+	DG_LAVA,
+	DG_OBJECT_END = DG_LAVA,
     MAX_NUM_DG
 };
 
@@ -1022,6 +1023,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_STONE_TRAP, //벽에 부딪히다.
 	ATT_PSYCHO, //벽에 부딪히다.
 	ATT_NORMAL_HIT,
+	ATT_DROWNING, //익사
 	ATT_MAX
 };
 

@@ -21,6 +21,11 @@ void Equip_Weapon()
 		printlog("광기에 휩싸인 상태로 무기를 바꿀 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.drowned)
+	{
+		printlog("물에 빠진 상태에선 무기를 바꿀 수 없다!", true, false, false, CL_danger);
+		return;
+	}
 
 	view_item(IVT_EQ_WEAPON,"무슨 무기를 장착하시겠습니까?");
 	while(1)
@@ -122,6 +127,11 @@ void Equip_Armor()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 방어구를 바꿀 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.drowned)
+	{
+		printlog("물에 빠진 상태에선 방어구를 바꿀 수 없다!", true, false, false, CL_danger);
 		return;
 	}
 	view_item(IVT_EQ_ARMOR,"무슨 방어구를 장착하겠습니까?");

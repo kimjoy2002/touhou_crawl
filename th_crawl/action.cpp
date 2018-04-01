@@ -3009,6 +3009,11 @@ void shout()
 			break;
 		}
 	}
+	if (you.drowned)
+	{
+		rare_shout = 1;
+		shout_ = "살려줘! ";
+	}
 
 	printlog("무엇을 외치겠습니까?",true,false,false,CL_help);
 	printlog("t - ",false,false,false,CL_normal);

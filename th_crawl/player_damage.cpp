@@ -488,6 +488,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_SMITE:
 	case ATT_BLOOD:	
 	case ATT_BURST:
+	case ATT_DROWNING:
 		break;
 	}
 
@@ -721,6 +722,9 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		if(damaged_)
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
 		break;
+	case ATT_DROWNING:
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠져 질식하고 있다. ");
+		break;
 	case ATT_THROW_NONE_MASSAGE:
 		break;
 	}			
@@ -876,7 +880,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 				HpUpDown(-damage_,DR_HITTING);
 
 				if (hp > 0) {
-					soundmanager.playSound("damaged");
+					if(a.type == ATT_DROWNING)
+						soundmanager.playSound("water");
+					else
+						soundmanager.playSound("damaged");
 				}
 
 				dead_order = NULL;

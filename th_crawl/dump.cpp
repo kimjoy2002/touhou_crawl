@@ -293,6 +293,9 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에 의해 ", 64);
 					strncat(death_reason, "터져죽었다.", 64);
 					break;
+				case ATT_DROWNING:
+					strncat(death_reason, "은 질식하여 죽었다.", 64);
+					break;
 				}
 				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
 				strncat(death_reason, temp_reason, 64);

@@ -255,6 +255,7 @@ public:
 	int s_sleep;
 	int s_pure;
 	int s_pure_turn;
+	bool drowned;//익사중(임시 수영가능)
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;

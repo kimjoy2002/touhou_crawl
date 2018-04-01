@@ -55,7 +55,8 @@ public:
 	bool isMove(bool fly_, bool swim_, bool no_ground_)
 	{
 		return ((!no_ground_ && tile<DG_NONE_MOVE )|| 
-			((fly_ || swim_) && tile == DG_SEA));
+			((fly_ || swim_) && tile == DG_SEA) ||
+			((fly_) && tile == DG_LAVA));
 	
 	};
 	bool isOpenDoor(){return (tile==DG_OPEN_DOOR);};
@@ -101,7 +102,7 @@ public:
 				return true;
 			break;
 		case AUTOTILE_WATER:
-			if (tile == DG_SEA)
+			if (tile == DG_SEA || tile == DG_LAVA)
 				return true;
 			break;
 		}

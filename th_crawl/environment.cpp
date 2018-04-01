@@ -578,6 +578,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_STATUE2:
 		return '&';
 	case DG_SEA:
+	case DG_LAVA:
 		return '~';
 	default:
 		return ' ';
@@ -779,6 +780,11 @@ void environment::innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, fl
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_water[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_LAVA) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_lava[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y, color_);
 	}
 	else if (!dgtile[tile_x][tile_y].isNormal()) {
 		dgtile[tile_x][tile_y].draw(pSprite, x, y, color_, count_);

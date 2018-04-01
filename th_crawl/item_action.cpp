@@ -355,6 +355,11 @@ void Eatting()
 		printlog("광기에 휩싸인 상태로 먹을 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.drowned)
+	{
+		printlog("물에 빠진 상태에선 먹을 수 없다!", true, false, false, CL_danger);
+		return;
+	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
 	{
 		printlog("당신은 이미 풀파워다!",true,false,false,CL_normal);
@@ -400,6 +405,11 @@ void Drinking()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 마실 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.drowned)
+	{
+		printlog("물에 빠진 상태에선 마실 수 없다!", true, false, false, CL_danger);
 		return;
 	}
 	view_item(IVT_POTION,"무엇을 마시겠습니까?");
@@ -525,6 +535,11 @@ void Reading()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 읽을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.drowned)
+	{
+		printlog("물에 빠진 상태에선 읽을 수 없다!", true, false, false, CL_danger);
 		return;
 	}
 	if(env[current_level].isSilence(you.position))

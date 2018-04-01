@@ -487,6 +487,9 @@ bool PixedMap(map_dummy* map, char *temp)
 			case '~':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SEA;
 				break;
+			case ';':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_LAVA;
+				break;
 			case 'i': //각 던전에서 드랍되는 아이템을 넣음
 			case 'I': //여러개
 			{

@@ -186,6 +186,7 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"석상",
 	"지상보살상",
 	"깊은물",
+	"용암"
 };
 
 const char *state_string[] = 

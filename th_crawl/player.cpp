@@ -75,7 +75,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -260,6 +260,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_sleep);
 	SaveData<int>(fp, s_pure);
 	SaveData<int>(fp, s_pure_turn);
+	SaveData<bool>(fp, drowned);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -488,6 +489,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_sleep);
 	LoadData<int>(fp, s_pure);
 	LoadData<int>(fp, s_pure_turn);
+	LoadData<bool>(fp, drowned);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -709,7 +711,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
 			{
-				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
+				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
 					PositionSwap(mon_);								
 					printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
@@ -907,7 +909,14 @@ int players::move(short_move x_mov, short_move y_mov)
 				return 1;
 			}
 		}
-		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()))
+
+
+		
+
+		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()) ||
+			(drowned && (env[current_level].dgtile[move_x_][move_y_].tile == DG_SEA ||
+				env[current_level].dgtile[move_x_][move_y_].tile == DG_LAVA)
+			))
 		{
 			SetXY(coord_def(move_x_,move_y_));
 			time_delay += GetWalkDelay();//이동속도만큼 이동
@@ -926,7 +935,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				printlog("움직일수 없다! 온바시라가 당신을 고정시키고있다!", true, false, false, CL_danger);
 				return 0;
 			}
-			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim()))
+			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim() || drowned))
 			{
 				SetXY(coord_def(move_x_, move_y_));
 				time_delay += GetWalkDelay();//이동속도만큼 이동
@@ -1132,6 +1141,8 @@ int players::GetWalkDelay()
 		speed_ *= 1.3f;
 	if(s_frozen)
 		speed_+=(s_frozen+1)*speed_/20;
+	if (drowned)
+		speed_ += 10;
 	return speed_;
 }
 int players::GetSpellPower(int s1_, int s2_, int s3_)

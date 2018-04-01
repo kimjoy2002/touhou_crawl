@@ -448,6 +448,57 @@ textures img_auto_hell_wall[48] = {
 	textures(&texture_dungeon01, 335)
 };
 
+textures img_auto_lava[48] = {
+	textures(&texture_dungeon01, 352),
+	textures(&texture_dungeon01, 353),
+	textures(&texture_dungeon01, 354),
+	textures(&texture_dungeon01, 355),
+	textures(&texture_dungeon01, 356),
+	textures(&texture_dungeon01, 357),
+	textures(&texture_dungeon01, 358),
+	textures(&texture_dungeon01, 359),
+	textures(&texture_dungeon01, 360),
+	textures(&texture_dungeon01, 361),
+	textures(&texture_dungeon01, 362),
+	textures(&texture_dungeon01, 363),
+	textures(&texture_dungeon01, 364),
+	textures(&texture_dungeon01, 365),
+	textures(&texture_dungeon01, 366),
+	textures(&texture_dungeon01, 367),
+	textures(&texture_dungeon01, 368),
+	textures(&texture_dungeon01, 369),
+	textures(&texture_dungeon01, 370),
+	textures(&texture_dungeon01, 371),
+	textures(&texture_dungeon01, 372),
+	textures(&texture_dungeon01, 373),
+	textures(&texture_dungeon01, 374),
+	textures(&texture_dungeon01, 375),
+	textures(&texture_dungeon01, 376),
+	textures(&texture_dungeon01, 377),
+	textures(&texture_dungeon01, 378),
+	textures(&texture_dungeon01, 379),
+	textures(&texture_dungeon01, 380),
+	textures(&texture_dungeon01, 381),
+	textures(&texture_dungeon01, 382),
+	textures(&texture_dungeon01, 383),
+	textures(&texture_dungeon01, 384),
+	textures(&texture_dungeon01, 385),
+	textures(&texture_dungeon01, 386),
+	textures(&texture_dungeon01, 387),
+	textures(&texture_dungeon01, 388),
+	textures(&texture_dungeon01, 389),
+	textures(&texture_dungeon01, 390),
+	textures(&texture_dungeon01, 391),
+	textures(&texture_dungeon01, 392),
+	textures(&texture_dungeon01, 393),
+	textures(&texture_dungeon01, 394),
+	textures(&texture_dungeon01, 395),
+	textures(&texture_dungeon01, 396),
+	textures(&texture_dungeon01, 397),
+	textures(&texture_dungeon01, 398),
+	textures(&texture_dungeon01, 399)
+};
+
 
 textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
@@ -539,7 +590,8 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01),//유리
 					textures(&texture_dungeon01),//석상
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
-					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//바다
+					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//바다
+					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//용암
 };
 
 textures img_dungeon_object[][3] = {
@@ -615,7 +667,8 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255)},
 				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
 				{textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+			{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
 };
 
 

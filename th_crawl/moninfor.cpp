@@ -996,6 +996,8 @@ string GetMonsterInfor(monster *it)
 	}
 	if(it->isFly())
 			text_ += "하늘을 날 수 있다.\n";
+	if (it->isSwim())
+		text_ += "수영을 할 수 있다.\n";
 	if(it->flag & M_FLAG_CAN_SEE_INVI)
 			text_ += "투명을 볼 수 있다.\n";
 	if(it->flag & M_FLAG_INANIMATE)

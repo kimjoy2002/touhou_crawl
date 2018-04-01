@@ -1424,6 +1424,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						"줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.", this);
 				}
 			}
+			if (you.drowned)
+			{
+				stateDraw.addState("익사중", CL_danger, "물에 빠졌습니다!", this);
+			}
 			if(you.GetStatPanalty())
 			{
 				stateDraw.addState("스탯패널티", CL_danger, "스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.", this);

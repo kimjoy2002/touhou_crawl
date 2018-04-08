@@ -304,6 +304,13 @@ void wiz_mode()
 				//you.resetLOS(false);
 			}
 			break;
+		case 'n':
+		{
+			item_infor t;
+			makeitem(ITM_ETC, 0, &t, EIT_CAT_TREE);
+			env[current_level].MakeItem(you.position, t);
+		}
+		return;
 		case 'G': //던전이동	
 		{
 			deque<monster*> dq;

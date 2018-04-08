@@ -1197,6 +1197,12 @@ int item::action(int delay_)
 					it->s_confuse = 15;
 			}
 		}
+		if (you.tribe == TRI_NECOMATA && distan_coord(you.position, position) <= 2) {
+			if (you.s_drunken == 0) {
+				printlog("당신은 개다래나무의 향기에 취했다!",true,false,false, CL_warning);
+			}
+			you.s_drunken = 15;
+		}
 	}
 
 	prev_position = position;

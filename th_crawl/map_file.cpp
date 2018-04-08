@@ -469,6 +469,9 @@ bool PixedMap(map_dummy* map, char *temp)
 			case 'T':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_TREE;
 				break;
+			case 'f':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SUN_FLOWER;
+				break;
 			case '+':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_CLOSE_DOOR;
 				break;

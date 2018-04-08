@@ -1097,6 +1097,7 @@ int get_unique_to_id(int m_id)
 	case MON_NEMUNO:  return 63;
 	case MON_AUNN:  return 64;
 	case MON_NARUMI:  return 65;
+	case MON_HATATE: return 66;
 	}
 }
 
@@ -1347,11 +1348,14 @@ void create_id_to_unique(int id, int level)
 	case 63:
 		index.push_back(MON_NEMUNO);
 		break;
-	case 65:
+	case 64:
 		index.push_back(MON_AUNN);
 		break;
-	case 66:
+	case 65:
 		index.push_back(MON_NARUMI);
+		break;
+	case 66:
+		index.push_back(MON_HATATE);
 		break;
 	}
 
@@ -1974,6 +1978,9 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_HATATE:
+		mon->wind_resist = 1;
 		break;
 	}
 }

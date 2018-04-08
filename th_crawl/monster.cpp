@@ -1616,6 +1616,9 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 {
 	bool return_ = false;
 	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
+	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
+		img_mons_dancing_weapon.draw(pSprite, x_, y_, 255);
+	}
 	if (return_ && !(flag & M_FLAG_NO_STATE))
 	{
 

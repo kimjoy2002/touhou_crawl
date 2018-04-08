@@ -163,6 +163,9 @@ extern textures img_mons_bee;
 extern textures img_mons_bush;
 extern textures img_mons_sion;
 
+extern textures img_named_hatate;
+extern textures img_mons_dancing_weapon;
+extern textures img_mons_cursed_doll;
 
 
 

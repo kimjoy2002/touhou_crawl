@@ -5618,6 +5618,59 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			}
 		}
 		break;
+	case MON_HATATE:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				sprintf(temp_speak, "%s%s외쳤다. \"취재하러 돌아다닐 필요가 없다니깐!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:
+				sprintf(temp_speak, "%s%s외쳤다. \"스마트폰이란게 뭐야?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak, "%s%s외쳤다. \"잠깐! 기사 작업중에 함부로 들어오지말라고!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 3:
+				sprintf(temp_speak, "%s%s외쳤다. \"아! 저번에 염사로 본적 있는 %s인데!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true), tribe_type_string[you.tribe]);
+				return temp_speak;
+			case 4:
+				sprintf(temp_speak, "%s%s외쳤다. \"잠시 움직이지 말아줄래? 초점이 흐려져서 말이지\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 5:
+				sprintf(temp_speak, "%s%s외쳤다. \"내 카메라는 연사기능이 붙어있어! 도망쳐도 소용없어!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 6:
+				sprintf(temp_speak, "%s%s은 핸드폰을 빠르게 누르고 있다.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				sprintf(temp_speak, "%s%s혼란하고 있다. \"핸드폰 충전하는걸 까먹었어!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 1:
+				sprintf(temp_speak, "%s%s혼란하고 있다. \"핸드폰 초점이 전혀 맞질 않잖아!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			case 2:
+				sprintf(temp_speak, "%s%s혼란하여 자기 자신을 자해하려고 있다.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				sprintf(temp_speak, "%s%s핸드폰 카메라를 적에게 향했다.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				return temp_speak;
+			}
+		}
+		break;
 	default:
 		break;
 	}

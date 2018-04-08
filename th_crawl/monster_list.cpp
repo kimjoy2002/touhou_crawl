@@ -879,7 +879,7 @@ const mon_infor mondata[] = {
 	 { 0,0,0}, { ATT_NONE,ATT_NONE,ATT_NONE }, {name_infor(),name_infor(),name_infor() },
 		M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_UNIQUE | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNHARM , 99, 1, 10 ,'&' },
 
-	{ MON_CURSE_DOLL, 8, 140, name_infor("저주받은 인형", true), &img_mons_sanghai[1], 30, 1, 12,
+	{ MON_CURSE_DOLL, 8, 140, name_infor("저주받은 인형", true), &img_mons_cursed_doll, 30, 1, 12,
 	{ 4,0,0 }, { ATT_NORMAL,ATT_NONE,ATT_NONE }, { name_infor("공격",true),name_infor(),name_infor() },
 		M_FLAG_OPEN_DOOR  | M_FLAG_INANIMATE, 1, 1, 10,'d' },
 
@@ -896,5 +896,7 @@ const mon_infor mondata[] = {
 		M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CONFUSE |
 		M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' },
 
-
+	{ MON_HATATE, 10, 1221, name_infor("하타테", false), &img_named_hatate, 75, 2, 20,
+		{ 7,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+		M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' }
 };

@@ -925,6 +925,9 @@ string GetMonsterInfor(monster *it)
 		text_ += "당장은 해가 없지만 충전이 끝난 순간 주변의 적에게 막강한 전류를 흘려보낸다.\n";
 		text_ += "충전이 끝나기전에 때려서 없애거나 사정범위 밖으로 도망치면 안전해진다.\n";
 		break;
+	case MON_HATATE:
+		text_ += "집에서 염사를 하여 신문기사를 쓰고 있는 까마귀 텐구\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

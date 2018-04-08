@@ -582,6 +582,7 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 928, 0, 960, 32, 255), //마계벽7
 
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//나무
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//해바라기
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//지옥벽
 					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//철벽
 					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//벽2
@@ -659,6 +660,7 @@ textures img_dungeon_object[][3] = {
 				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
 
 				{textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255),textures(&texture_item02, 160, 255) },
+				{ textures(&texture_item02, 159, 255),textures(&texture_item02, 159, 255),textures(&texture_item02, 159, 255) },
 				{ textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255) },
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
@@ -857,6 +859,10 @@ textures img_mons_sheep(&texture_monster01, 225, 255);
 textures img_mons_bee(&texture_monster01, 226, 255);
 textures img_mons_bush(&texture_item02, 175, 255);
 textures img_mons_sion(&texture_monster01, 227, 255);
+
+textures img_named_hatate(&texture_monster01, 228, 255);
+textures img_mons_dancing_weapon(&texture_monster01, 229, 255);
+textures img_mons_cursed_doll(&texture_monster01, 230, 255);
 
 
 
@@ -2918,6 +2924,12 @@ int texturetoint(textures* input)
 		return 482;
 	else if(input == &img_blast[2])
 		return 483;
+	else if (input == &img_named_hatate)
+		return 484;
+	else if (input == &img_mons_dancing_weapon)
+		return 485;
+	else if (input == &img_mons_cursed_doll)
+		return 486;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3913,6 +3925,12 @@ textures* inttotexture(int input)
 		return &img_mons_sion;
 	case 483:
 		return &img_blast[2];
+	case 484:
+		return &img_named_hatate;
+	case 485:
+		return &img_mons_dancing_weapon;
+	case 486:
+		return &img_mons_cursed_doll;
 	default:
 		return &img_mons_default;
 	}

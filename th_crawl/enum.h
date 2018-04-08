@@ -293,6 +293,7 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 rese
 	DG_PANDE_WALL6,
 	DG_PANDE_WALL7,
 	DG_TREE,
+	DG_SUN_FLOWER,
 	DG_HELL_WALL,
 	DG_WALL_END = DG_HELL_WALL,
 	DG_METAL_WALL,
@@ -683,6 +684,7 @@ enum monster_index
 	MON_DANCING_WEAPON,
 	MON_DANCING_ARMOUR,
 	MON_ELEC_BALL,
+	MON_HATATE,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };

@@ -564,6 +564,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_HELL_WALL:
 		return '#';
 	case DG_TREE:
+	case DG_SUN_FLOWER:
 		return 'T';
 	case DG_METAL_WALL:
 		return '#';

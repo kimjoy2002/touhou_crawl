@@ -177,6 +177,7 @@ extern const char *dungeon_tile_tribe_type_string[]=
 	"마계벽",
 	"마계벽",
 	"나무",
+	"해바라기",
 	"지옥벽",
 	"철벽",
 	"벽",

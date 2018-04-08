@@ -5117,6 +5117,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		}
 	}
 	break;
+	case MON_HATATE:
+		list->push_back(spell(SPL_VEILING, 20));
+		list->push_back(spell(SPL_SMITE, 25));
+		list->push_back(spell(SPL_BLINK, 25));
+		break;
 	default:
 		break;
 	}

@@ -1060,7 +1060,7 @@ TTT.TTT";
 			}
 		case 39: //네무노 고정지형
 			{
-				if (is_exist_named(MON_NEMUNO))
+				if (is_exist_named(MON_NEMUNO) && is_exist_named(MON_HATATE))
 					break;
 				if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LEVEL+3))
 					break;
@@ -1070,13 +1070,20 @@ TTT.TTT";
 				map->m_entrance.y = 0;
 				map->m_exit.x = map->size_x;
 				map->m_exit.y = 0;
-				if (!is_exist_named(MON_NEMUNO)) {
-					map->monster_list.push_back(mapdummy_mon(MON_NEMUNO, 0, coord_def(-4, 0)));
-					set_exist_named(MON_NEMUNO);
+				random_extraction<monster_index> rad_;
+
+				if (!is_exist_named(MON_NEMUNO))
+					rad_.push(MON_NEMUNO);
+				if (!is_exist_named(MON_HATATE))
+					rad_.push(MON_HATATE);
+				{
+					monster_index mon_ = rad_.pop();
+					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(-4, 0)));
+					set_exist_named(mon_);
 				}
 				map->flag = FLAG_NO_STAIR;
 				map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(-2, 0), EVT_ALWAYS));
-				map->name = "네무노_격리된_방";
+				map->name = "네무노하타테_격리방";
 				return  "\
 $$$$$TTTTTTTT\
 $...$TTT.TTTT\

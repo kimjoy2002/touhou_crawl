@@ -20,7 +20,6 @@ enum amulet_type
 	AMT_SPIRIT, //신령, 100%가 되면 스펠카드 충전
 	AMT_GRAZE, //그레이즈, 100%가 되면 그레이즈상태, 발동시 근성회피
 	AMT_WEATHER, //날씨, 100%가 되면 체력재생증가. 사용시 회복사용가능
-	AMT_POPULAR, //인기도, 100%가 되면 
 	AMT_OCCULT, //오컬트, 100%가 되면 소환물 추방가능 + 소환하기
 	AMT_MAX,
 };

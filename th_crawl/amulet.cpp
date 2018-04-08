@@ -29,8 +29,7 @@ char *amulet_uniden_string[AMT_MAX] =
 	"뱀이 그려진 ",
 	"말이 그려진 ",
 	"양이 그려진 ",
-	"원숭이가 그려진 ",
-	"닭이 그려진 "
+	"원숭이가 그려진 "
 };
 
 const char *amulet_iden_string[AMT_MAX] =
@@ -43,7 +42,6 @@ const char *amulet_iden_string[AMT_MAX] =
 	"신령의 ",
 	"그레이즈의 ",
 	"날씨의 ",
-	"인기도의 ",
 	"오컬트의 "
 };
 
@@ -79,7 +77,6 @@ float getAmuletCharge(amulet_type kind)
 	{
 	case AMT_PERFECT:
 		return 2.0f;
-	case AMT_POPULAR:
 	case AMT_OCCULT:
 		return 1.5f;
 	case AMT_BLOSSOM:
@@ -213,11 +210,6 @@ bool evokeAmulet(amulet_type kind, int value_)
 		soundmanager.playSound("buff");
 		printlog("당신은 체력을 회복했다. ", false, false, false, CL_normal);
 		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);
-		break;
-	case AMT_POPULAR:
-		//???
-
-		//미구현
 		break;
 	case AMT_OCCULT:
 		soundmanager.playSound("summon");

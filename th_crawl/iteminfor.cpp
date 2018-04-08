@@ -1115,12 +1115,6 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "100%가 된 부적을 착용한 채로 있으면 체력 회복속도가 약간 증가하며\n";
 				text_ += "100%상태에서 v를 누르면 체력을 약간 회복할 수 있다.\n";
 				break;
-			case AMT_POPULAR:
-				text_ += "종교가들이 주변의 인기를 모으기위해 만들었다던 부적.\n";
-				text_ += "착용하고 있으면 인기가 점점 높아지고 충전이 끝나면 ???\n";
-				text_ += "100%상태에서 v를 누르면 ???\n";
-				//투명?
-				break;
 			case AMT_OCCULT:
 				text_ += "도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n";
 				text_ += "착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n";

@@ -226,13 +226,13 @@ void wiz_mode()
 			case 'R':
 			{
 				int list[] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
-					AMT_WEATHER, AMT_POPULAR, AMT_OCCULT };
+					AMT_WEATHER, AMT_OCCULT };
 				enterlog();
 				printlog("a-완전무결 b-삼라결계 c-각부 d-신앙 e-전파 f-신령 g-그레이즈 h-기질", true, false, false, CL_help);
-				printlog("i-인기 j-오컬트", true, false, false, CL_help);
+				printlog("i-오컬트", true, false, false, CL_help);
 				printlog("어느 부적을 얻어볼까?", false, false, false, CL_help);
 				key_ = waitkeyinput();
-				if (key_ >= 'a' && key_ <= 'j')
+				if (key_ >= 'a' && key_ <= 'i')
 				{
 					item_infor t;
 					makeitem(ITM_AMULET, 0, &t, list[key_ - 'a']);

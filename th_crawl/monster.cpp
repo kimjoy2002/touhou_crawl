@@ -2296,7 +2296,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		else
 		{
 			char temp[200];
-			sprintf_s(temp,200,"네임드 %s%s 죽었다.",name.name.c_str(),name.name_to());
+			sprintf_s(temp,200,"네임드 %s%s 죽었다.",name.name.c_str(),name.name_is());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 
 		}

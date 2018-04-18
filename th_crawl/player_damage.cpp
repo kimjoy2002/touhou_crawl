@@ -94,6 +94,7 @@ int players::GetAttack(bool max_)
 	{
 		max_atk_+=s_slaying;
 	}
+	max_atk_ += you.GetBuffOk(BUFFSTAT_DAM);
 	if(GetProperty(TPT_SLAY))
 	{
 		max_atk_+=6;
@@ -188,6 +189,7 @@ int players::GetHit()
 	{
 		hit_+=s_slaying;
 	}
+	hit_ += you.GetBuffOk(BUFFSTAT_ACC);
 	if(GetProperty(TPT_SLAY))
 	{
 		hit_+=6;
@@ -299,6 +301,7 @@ int players::GetThrowAttack(const item* it, bool max_)
 	{
 		max_atk_+=s_slaying;
 	}
+	max_atk_ += you.GetBuffOk(BUFFSTAT_DAM);
 	if(GetProperty(TPT_SLAY))
 	{
 		max_atk_+=6;
@@ -344,6 +347,7 @@ int players::GetThrowHit(const item* it)
 	{
 		hit_+=s_slaying;
 	}
+	hit_ += you.GetBuffOk(BUFFSTAT_ACC);
 	if(GetProperty(TPT_SLAY))
 	{
 		hit_+=6;
@@ -794,7 +798,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			graze_ = true;
 	}
 
-	if(s_glow)
+	if(s_glow || you.GetBuffOk(BUFFSTAT_HALO))
 		accuracy_+=5; //빛날경우 명중 증가
 	if(a.order && a.order->GetMindReading())
 	{

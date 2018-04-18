@@ -13,6 +13,7 @@
 #include "environment.h"
 #include "mon_infor.h"
 #include "projectile.h"
+#include "god.h"
 #include "dump.h"
 extern HANDLE mutx;
 
@@ -93,6 +94,12 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_JOON_AND_SION_OFF:
 	case SKL_JOON_AND_SION_2:
 	case SKL_JOON_AND_SION_3:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
@@ -231,6 +238,12 @@ int SkillLength(skill_list skill)
 	case SKL_JOON_AND_SION_OFF:
 	case SKL_JOON_AND_SION_2:
 	case SKL_JOON_AND_SION_3:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 	default:
 		return 0;
 	}
@@ -408,6 +421,18 @@ const char* SkillString(skill_list skill)
 		return "앱솔루트 루저";
 	case SKL_JOON_AND_SION_OFF:
 		return "강제빙의해제";
+	case SKL_MIKO_1:
+		return "욕망모으기";
+	case SKL_MIKO_2:
+		return "축지의 망토";
+	case SKL_MIKO_3:
+		return "후광";
+	case SKL_MIKO_4:
+		return "저항얻기";
+	case SKL_MIKO_5:
+		return "빨간망토 파란망토";
+	case SKL_MIKO_6:
+		return "인기폭발";
 	case SKL_NONE:
 	default:
 		return "알수없는 능력";
@@ -505,6 +530,12 @@ int SkillCap(skill_list skill)
 	case SKL_TORMENT:
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 	default:
 		return 0;
 	}
@@ -539,6 +570,10 @@ int SkillNoise(skill_list skill)
 	case SKL_OKINA_5:
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -588,6 +623,8 @@ int SkillNoise(skill_list skill)
 	case SKL_PHILOSOPHERS_2:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_JOON_AND_SION_4:
+	case SKL_MIKO_1:
+	case SKL_MIKO_6:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -651,6 +688,12 @@ int SkillPow(skill_list skill)
 	case SKL_OKINA_5:
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 		//신앙심으로 바꾸기
 		return you.piety;
 	case SKL_SIZUHA_1:
@@ -809,6 +852,12 @@ int SkillDiffer(skill_list skill)
 	case SKL_JOON_AND_SION_3:
 	case SKL_JOON_AND_SION_4:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -886,6 +935,12 @@ int SkillMana(skill_list skill)
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_4:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_MIKO_1:
+	case SKL_MIKO_2:
+	case SKL_MIKO_3:
+	case SKL_MIKO_4:
+	case SKL_MIKO_5:
+	case SKL_MIKO_6:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 	case SKL_JUNKO_1:
@@ -1448,6 +1503,66 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if (!check_)
 			you.PietyUpDown(-(you.piety - 120));
 	}
+	case SKL_MIKO_1:
+	{
+		//TODO 층마다 한번만 사용가능하도록?
+		return true;
+	}
+	case SKL_MIKO_2:
+	{
+		if (check_ && you.piety < getMikoPiety(0))
+		{
+			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PietyUpDown(-getMikoPiety(0));
+		return true;
+	}
+	case SKL_MIKO_3:
+	{
+		if (check_ && you.piety < getMikoPiety(1))
+		{
+			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PietyUpDown(-getMikoPiety(1));
+		return true;
+	}
+	case SKL_MIKO_4:
+	{
+		if (check_ && you.piety < getMikoPiety(2))
+		{
+			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PietyUpDown(-getMikoPiety(2));
+		return true;
+	}
+	case SKL_MIKO_5:
+	{
+		if (check_ && you.piety < getMikoPiety(3))
+		{
+			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PietyUpDown(-getMikoPiety(3));
+		return true;
+	}
+	case SKL_MIKO_6:
+	{
+		if (check_ && you.piety < getMikoPiety(4))
+		{
+			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			return false;
+		}
+		if (!check_)
+			you.PietyUpDown(-getMikoPiety(4));
+		return true;
+	}
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_2:
 	case SKL_JOON_AND_SION_3:
@@ -1649,6 +1764,18 @@ const char* SkillCostString(skill_list skill)
 		return "(신앙)";
 	case SKL_JOON_AND_SION_OFF:
 		return "(없음)";
+	case SKL_MIKO_1:
+		return "(층마다 한번만)";
+	case SKL_MIKO_2:
+		return "(인기도 2%)";
+	case SKL_MIKO_3:
+		return "(인기도 10%)";
+	case SKL_MIKO_4:
+		return "(인기도 20%)";
+	case SKL_MIKO_5:
+		return "(인기도 50%)";
+	case SKL_MIKO_6:
+		return "(인기도 100%)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

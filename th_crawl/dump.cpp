@@ -389,6 +389,10 @@ bool Dump(int type, string *filename_)
 	{
 		fprintf_s(fp, "¹«½Å¾Ó\n\n");
 	}
+	else if (you.god == GT_MIKO)
+	{
+		fprintf_s(fp, "½Å¾Ó: %s (ÀÎ±âµµ %d%%)\n\n", GetGodString(you.god), you.piety / 2);
+	}
 	else if (you.god == GT_TENSI)
 	{
 		fprintf_s(fp, "½Å¾Ó: %s\n\n", GetGodString(you.god));

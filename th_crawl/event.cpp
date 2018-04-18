@@ -281,6 +281,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			{
 				printlog("하늘에서 키스메가 떨어졌다!", true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_EVENT, (*rit));
+				mon_->SetStrong(5);
 				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //키스메는 떨어지고 바로 공격하지않는다.
 				MoreWait();
 				i--;
@@ -351,6 +352,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				MoreWait();
 				printlog("...그러나 코가사는 땅바닥에 머리부터 부딪혔다.", true, false, false, CL_normal);
 				mon_->SetConfuse(5 + randA(5));
+				mon_->SetStrong(5);
 				mon_->hp = mon_->hp * 2 / 3;
 				i--;
 			}
@@ -401,11 +403,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		rand_rect_iterator rit(event_->position, 3, 3);
 		int mon_id_ = arr_[randA(6)];
 		int i = mon_id_ == MON_SHEEP ? rand_int(3, 4) : (mon_id_ == MON_BLUE_UFO ? 3 : 1);
+		int base_ = i;
 		for (; !rit.end() && i > 0; rit++)
 		{
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
 				monster *mon_ = env[current_level].AddMonster(mon_id_, 0, (*rit));
+				mon_->SetStrong(base_>1?1:3);
 				i--;
 			}
 		}
@@ -484,6 +488,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 					if (!is_exist_named(MON_DOREMI)) {
 						monster *mon_ = env[current_level].AddMonster(MON_DOREMI, M_FLAG_EVENT, coord_def(x_, y_));
+						mon_->SetStrong(5); 
 						set_exist_named(MON_DOREMI);
 					}
 
@@ -523,6 +528,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
 				{
 					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));
+					mon_->SetStrong(1);
 					mon_->AttackedTarget(&you);
 					break;
 				}
@@ -543,6 +549,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
 				{
 					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));
+					mon_->SetStrong(1);
 					mon_->state.SetState(MS_NORMAL);
 					break;
 				}
@@ -597,6 +604,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					MoreWait();
 					monster *mon_ = env[current_level].AddMonster(MON_KOISHI, M_FLAG_EVENT, (*rit));
 					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //코이시는 떨어지고 바로 공격하지않는다.
+					mon_->SetStrong(5);
 					mon_->SetHaste(20 + randA(20));
 					return 1;
 				}
@@ -612,6 +620,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	{
 		monster *kyoko_ = env[current_level].AddMonster(MON_KYOUKO, M_FLAG_EVENT, coord_def(0, -5) + event_->position);
 
+		kyoko_->SetStrong(5);
 		for (int i = rand_int(2, 4); i > 0; i--)
 		{
 			item_infor temp;
@@ -628,6 +637,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				mon_->hp = mon_->hp*rand_int(3, 9) / 10;
 				mon_->FoundTarget(kyoko_, mon_->FoundTime());
 				mon_->s_fear = 20 + randA(20);
+				mon_->SetStrong(1);
 				i--;
 			}
 		}
@@ -652,6 +662,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		monster *star_ = env[current_level].AddMonster(MON_STAR, M_FLAG_EVENT, coord_def(-1, 0) + event_->position);
 		monster *lunar_ = env[current_level].AddMonster(MON_LUNAR, M_FLAG_EVENT, coord_def(0, 0) + event_->position);
 
+		sunny_->SetStrong(5);
+		star_->SetStrong(5);
+		lunar_->SetStrong(5);
 		sunny_->s_fear = 30 + randA(20);
 		star_->s_fear = 30 + randA(20);
 		lunar_->s_fear = 30 + randA(20);
@@ -722,8 +735,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			sprintf(temp, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
-			if (!target_unit->isplayer())
+			if (!target_unit->isplayer()) {
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
+			}
 		}
 		target_unit = env[current_level].isMonsterPos(event_->position.x + 4, event_->position.y - 1);
 		if (target_unit)
@@ -757,6 +771,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			MoreWait();
 			printlog("...코가사는 준비해둔 연기를 너무 들이마신듯하다. ", true, false, false, CL_normal);
 			mon_->SetSlow(rand_int(30, 40));
+			mon_->SetStrong(5);
 			return 1;
 		}
 		return 0;
@@ -767,6 +782,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isInSight((*rlt)))
 			{
 				monster *medi_ = env[current_level].AddMonster(MON_MEDICINE, M_FLAG_EVENT, event_->position);
+
+				medi_->SetStrong(5);
 				medi_->PlusTimeDelay(-4 * medi_->GetWalkDelay());
 				for (rect_iterator rlt2(event_->position, 1, 1); !rlt2.end(); rlt2++) {
 					if ((*rlt2) != event_->position)
@@ -783,6 +800,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 						mon_->s_poison = 100;
 						mon_->SetPoisonReason(PRT_NEUTRAL);
 						mon_->s_fear = 20 + randA(20);
+						mon_->SetStrong(1);
 					}
 
 				}
@@ -814,6 +832,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isInSight((*rlt)))
 			{
 				monster *chen_ = env[current_level].AddMonster(MON_CHEN, M_FLAG_EVENT, event_->position);
+
+				chen_->SetStrong(5);
 				chen_->s_confuse = 15;
 				for (rect_iterator rlt2(event_->position, 1, 1); !rlt2.end(); rlt2++) {
 					if ((*rlt2).x != event_->position.x && (*rlt2).y != event_->position.y)
@@ -823,6 +843,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 						rand_.push(MON_BLACK_CAT);
 						rand_.push(MON_WHITE_CAT);
 						monster *mon_ = env[current_level].AddMonster(rand_.pop(), M_FLAG_EVENT, (*rlt2));
+
+						mon_->SetStrong(1); 
 						mon_->s_confuse = 15;
 					}
 				}
@@ -836,6 +858,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		monster *nesi_ = env[current_level].AddMonster(MON_NESI, M_FLAG_EVENT, event_->position);
 		nesi_->s_confuse = -1;
 		nesi_->exper = nesi_->exper / 2;
+		nesi_->SetStrong(1);
 		return 1;
 	}
 	case EVL_FIRE_SMOKE:

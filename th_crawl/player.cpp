@@ -554,6 +554,9 @@ void players::LoadDatas(FILE *fp)
 
 bool players::Draw(LPD3DXSPRITE pSprite, float x_, float y_)
 {
+	if (s_glow || you.GetBuffOk(BUFFSTAT_HALO)) {
+		img_effect_halo.draw(pSprite, x_, y_, 127);
+	}
 	if (!GetCharNameString()->empty())
 	{
 		if (you.image) {
@@ -1196,7 +1199,10 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	{
 		power_*=1.3f;
 	}
-
+	if (you.GetBuffOk(BUFFSTAT_SPL_POW))
+	{
+		power_ *= 1.5f;
+	}
 
 	power_*=1.5f; //마법인헨서 기본으로 딸려있도록
 
@@ -1292,6 +1298,9 @@ int players::GetStealth()
 
 	stealth_ += 50*GetProperty(TPT_STEALTH);
 	stealth_ -= you.as_penalty*10; //은밀 감소
+	if ((you.s_glow || you.GetBuffOk(BUFFSTAT_HALO))) {
+		stealth_ /= 2;
+	}
 	if(you.GetPunish(GT_SHIZUHA))
 	{
 		stealth_ /= 2;
@@ -1328,6 +1337,14 @@ int players::GetBuffOk(stat_up stat_)
 	case BUFFSTAT_DAM:
 	case BUFFSTAT_RF:
 	case BUFFSTAT_RC:
+	case BUFFSTAT_RE:
+	case BUFFSTAT_RP:
+	case BUFFSTAT_RCONF:
+	case BUFFSTAT_SPL_POW:
+	case BUFFSTAT_REGEN:
+	case BUFFSTAT_MREGEN:
+	case BUFFSTAT_HASTE:
+	case BUFFSTAT_HALO:
 		return value_;
 		break;
 	}
@@ -1375,6 +1392,9 @@ int players::HpRecoverDelay(int delay_)
 	}
 	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
 		cacul_ += max_hp/2;
+	}
+	{
+		cacul_ += 100 * you.GetBuffOk(BUFFSTAT_REGEN);
 	}
 	if(GetProperty(TPT_REGEN)>0)
 	{
@@ -1590,7 +1610,9 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	{
 		cacul_ +=25;
 	}
-	
+	{
+		cacul_ += 50 * you.GetBuffOk(BUFFSTAT_MREGEN);
+	}
 	if(GetProperty(TPT_MP_REGEN)>0)
 	{
 		cacul_ +=15*GetProperty(TPT_MP_REGEN)-5;
@@ -1699,6 +1721,13 @@ void players::UpDownBuff(stat_up stat_, int value_)
 		StatUpDown(value_, STAT_DEX);
 		break;
 	case BUFFSTAT_HP:
+		if (value_ > 0)
+			hp += value_;
+		max_hp += value_;
+		if (hp > max_hp) {
+			hp = max_hp;
+		}
+		break;
 	case BUFFSTAT_MP:
 	case BUFFSTAT_POW:
 		//미구현
@@ -1721,6 +1750,21 @@ void players::UpDownBuff(stat_up stat_, int value_)
 		break;
 	case BUFFSTAT_RC:
 		you.ResistUpDown(value_,RST_ICE);
+		break;
+	case BUFFSTAT_RE:
+		you.ResistUpDown(value_, RST_ELEC);
+		break;
+	case BUFFSTAT_RP:
+		you.ResistUpDown(value_, RST_POISON);
+		break;
+	case BUFFSTAT_RCONF:
+		you.ResistUpDown(value_, RST_CONFUSE);
+		break;
+	case BUFFSTAT_SPL_POW:
+		break;
+	case BUFFSTAT_REGEN:
+		break;
+	case BUFFSTAT_MREGEN:
 		break;
 	}
 }
@@ -1757,7 +1801,7 @@ int players::PowDecreaseDelay(int delay_)
 		up_/=2;
 	}
 
-	if(s_haste || s_pure_haste)
+	if(s_haste || s_pure_haste || GetBuffOk(BUFFSTAT_HASTE))
 	{
 		up_/=up_>0?5:(up_<0?30:20);
 	}
@@ -2070,6 +2114,7 @@ void players::ExpRecovery(int exper_)
 			if (_item && _item->type == ITM_AMULET){
 				chargingFinish((amulet_type)_item->value1, 1);
 				if (system_exp.value <= 0) {
+					soundmanager.playSound("charge");
 					if (isCanCharge((amulet_type)_item->value1)) {
 						printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
 					}
@@ -2995,21 +3040,77 @@ bool players::SetManaDelay(int s_mana_delay_)
 
 	return true;
 }
+int players::isSetMikoBuff(int temp_)
+{
+	for (list<buff_class>::iterator it = buff_list.begin(); it != buff_list.end(); it++)
+	{
+		if (temp_ == 0) {
+			//미코 망토
+			if (it->id == BUFF_MIKO_REGEN)
+				return 1; //빨간망토
+			if (it->id == BUFF_MIKO_MREGEN)
+				return 2; //파랑망토
+		}
+		else if (temp_ == 1) {
+			//미코 궁극
+			if (it->id == BUFF_MIKO_ULTI) {
+				if (it->stat == BUFFSTAT_HP)
+					return 1;
+				else if (it->stat == BUFFSTAT_MREGEN)
+					return 2;
+				else if (it->stat == BUFFSTAT_HASTE)
+					return 3;
+			}
+		}
+		else if (temp_ == 2) {
+			//미코 징벌
+			if (it->id == BUFF_MIKO_RF_MINUS || it->id == BUFF_MIKO_RC_MINUS) {
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+int players::reSetMikoBuff()
+{
+	int num = 0;
+
+	for (list<buff_class>::iterator it = buff_list.begin(); it != buff_list.end(); )
+	{
+		auto temp = it++;
+		if (temp->id >= BUFF_MIKO_START && temp->id <= BUFF_MIKO_END)
+		{
+			UpDownBuff(temp->stat, -1 * temp->value);
+			buff_list.erase(temp);
+			num++;
+		}
+	}
+	return num;
+}
 bool players::SetBuff(stat_up stat_, buff_type id_, int value_, int turn_)
 {
 	if(id_ != BUFF_DUPLE){
 		for(list<buff_class>::iterator it=buff_list.begin();it!=buff_list.end();it++)
 		{
 			if(it->id == id_){ //id가 겹치면 기존의 버프를 덮어 씌운다.
-			
-				UpDownBuff(it->stat,-1*it->value);
-				it->stat = stat_;
-				it->turn = turn_;
-				it->value = value_;
-				UpDownBuff(it->stat,it->value);
+				if (turn_ == 0) {
+					//삭제
+					UpDownBuff(it->stat, -1 * it->value);
+					buff_list.erase(it);
+				}
+				else {
+					UpDownBuff(it->stat, -1 * it->value);
+					it->stat = stat_;
+					it->turn = turn_;
+					it->value = value_;
+					UpDownBuff(it->stat, it->value);
+				}
 				return true;
 			}
 		}
+	}
+	if (turn_ == 0) {
+		return false;
 	}
 	buff_list.push_back(buff_class(stat_, id_, value_, turn_));
 	
@@ -4534,12 +4635,22 @@ bool players::StepUpDownPiety(int level_)
 }
 bool players::PietyUpDown(int piety_, bool absolutely_)
 {
+	int prev_piety_ = piety_;
 	int prev_ = pietyLevel(piety);
 	piety = absolutely_?piety_:piety_+piety;
 	if(piety<0)
 		piety = 0;
-	else if(piety>200)
+	else if (piety >= 200) {
+		if (prev_piety_ != 200) {
+			if (you.god == GT_MIKO) {
+				enterlog();
+				soundmanager.playSound("spellcard");
+				printlog("인기 폭발!", true, false, false, CL_miko);
+			}
+		}
+
 		piety = 200;
+	}
 	int next_ = pietyLevel(piety);
 	int differ_ = prev_>next_?-1:1;
 	if(prev_!=next_) //????
@@ -5503,7 +5614,9 @@ bool players::isView(const monster* monster_info)
 	
 	if(isArena())
 		return false;
-	if((you.s_invisible || you.togle_invisible) && !(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?
+	if((you.s_invisible || you.togle_invisible) && 
+		!(you.s_glow && you.GetBuffOk(BUFFSTAT_HALO)) &&
+		!(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?
 		return false;
 	return true;
 }

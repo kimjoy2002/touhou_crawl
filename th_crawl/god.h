@@ -42,6 +42,7 @@ bool god_punish(god_type god);
 void createGold(coord_def c, int num);
 void joonRandomBuff();
 bool sionResurrection();
+int getMikoPiety(int kind);
 void godAutoPickUp(god_type god_, bool belive_);
 
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
@@ -50,6 +51,7 @@ bool GodAccpect_GetPitem();
 bool GodAccpect_HPUpDown(int value_,damage_reason reason);
 bool GodAccpect_UseSpell(spell_list spell_);
 bool GodAccpect_Practice(int value, skill_type skill_);
+bool GodAccpect_Stair(bool down_, bool new_dungeon_);
 bool GodAccpect_Explore_100();
 bool GodAccpect_Exp_get();
 bool GodAccpect_First_contact();

@@ -1063,6 +1063,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		{
 			sprintf_s(temp,128,"무신앙");
 		}
+		else if (you.god == GT_MIKO) 
+		{
+			sprintf_s(temp, 128, "신앙: %s (인기도 %d%%)", GetGodString(you.god), you.piety/2);
+		}
 		else if (you.god == GT_TENSI)
 		{
 			sprintf_s(temp, 128, "신앙: %s", GetGodString(you.god));
@@ -1412,7 +1416,42 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
 				stateDraw.addState(temp, color_, "장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.", this);
 			}
+			bool haste_temp_ = false;
 
+			if (you.god == GT_MIKO)
+			{
+				if (env[current_level].popular == 1) {
+					stateDraw.addState("새로운장소", CL_normal, "이 층에선 욕망부르기를 아직 사용하지않았습니다.", this);
+				}
+				int mikocloak_ = you.isSetMikoBuff(0);
+				if (mikocloak_ == 1) {
+					stateDraw.addState("빨간망토", CL_danger, "층을 옮기기 전까지 전투력보너스 +6과 체력재생력을 얻고 있습니다.", this);
+				}
+				else if (mikocloak_ == 2) {
+					stateDraw.addState("파랑망토", CL_blue, "층을 옮기기 전까지는 스펠 파워 1.5배와 영력재생력을 얻고 있습니다.", this);
+				}
+				int ulti_ = you.isSetMikoBuff(1);
+				if (ulti_ >= 1 && ulti_ <= 3) {
+					stateDraw.addState(ulti_ == 1 ? "인기폭발(체력)":(ulti_ == 2 ? "인기폭발(영력)" : "인기폭발(가속)"),
+						CL_miko, 
+						ulti_ == 1 ? "최대 체력이 두배가 됩니다."
+						: (ulti_ == 2 ? "영력 회복속도가 폭증합니다." : 
+							"당신의 모든 행동속도는 1.5배 빨라집니다."), this);
+					if (ulti_ == 3) {
+						haste_temp_ = true;
+					}
+				}
+				if (you.GetBuffOk(BUFFSTAT_HALO)) {
+					stateDraw.addState("후광", CL_normal,
+						"주변의 적의 회피를 낮추고 투명을 보이게 하지만 당신의 은밀과 회피도 낮아집니다.", this);
+				}
+			}
+			else if (you.GetPunish(GT_MIKO)) {
+				if (you.GetBuffOk(BUFFSTAT_HP) < 0) {
+					stateDraw.addState("허약", CL_danger,
+						"최대 체력이 절반으로 줄었습니다.", this);
+				}
+			}
 			if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
@@ -1555,7 +1594,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if((you.s_pure_haste || you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
 			{
-				if (you.s_haste || you.alchemy_buff == ALCT_HASTE)
+				if ((you.s_haste || you.alchemy_buff == ALCT_HASTE) && !haste_temp_)
 					stateDraw.addState("가속", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
 						"당신의 모든 행동속도는 1.5배 빨라집니다.", this);
 				else if (you.s_pure_haste)
@@ -1625,17 +1664,38 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				int rf_ = you.GetBuffOk(BUFFSTAT_RF);
 				int rc_ = you.GetBuffOk(BUFFSTAT_RC);
+				int re_ = you.GetBuffOk(BUFFSTAT_RE);
+				int rp_ = you.GetBuffOk(BUFFSTAT_RP);
+				int rconf_ = you.GetBuffOk(BUFFSTAT_RCONF);
 				if(rf_)
 				{			
-					sprintf_s(temp,128,"화저%s",rf_>0?"+":"-");
+					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") :"-"));
 					stateDraw.addState(temp, rf_>0 ? CL_good : CL_danger,
-						"화염 저항이 " + rf_>0 ? "높아졌습니다." : "낮아졌습니다.", this);
+						(rf_>0 ? "화염 저항이 높아졌습니다." : "화염 저항이 낮아졌습니다."), this);
 				}
 				if(rc_)
-				{				
-					sprintf_s(temp,128,"냉저%s",rc_>0?"+":"-");
+				{
+					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : "-"));
 					stateDraw.addState(temp, rc_>0 ? CL_good : CL_danger,
-						"냉기 저항이 " + rc_>0 ? "높아졌습니다." : "낮아졌습니다.", this);
+						(rc_>0 ? "냉기 저항이 높아졌습니다." : "냉기 저항이 낮아졌습니다."), this);
+				}
+				if (re_)
+				{
+					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : "-"));
+					stateDraw.addState(temp, re_>0 ? CL_good : CL_danger,
+						(re_>0 ? "전기 저항이 높아졌습니다." : "전기 저항이 낮아졌습니다."), this);
+				}
+				if (rp_)
+				{
+					sprintf_s(temp, 128, "독저%s", rp_>0 ? "+" : "-");
+					stateDraw.addState(temp, rp_>0 ? CL_good : CL_danger,
+						(rp_>0 ? "독 저항이 높아졌습니다." : "독 저항이 낮아졌습니다."), this);
+				}
+				if (rconf_)
+				{
+					sprintf_s(temp, 128, "혼란저%s", rconf_>0 ? "+" : "-");
+					stateDraw.addState(temp, rconf_>0 ? CL_good : CL_danger,
+						(rconf_ >0 ? "혼란 저항이 높아졌습니다." : "혼란 저항이 낮아졌습니다."), this);
 				}
 			}
 
@@ -1665,7 +1725,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				stateDraw.addState("비행", you.s_levitation>10 ? CL_white_blue : CL_blue,
 					"하늘을 날아 몇몇 지형물체를 뛰어넘을 수 있습니다.", this);
 			}
-			if(you.s_glow)
+			else if(you.s_glow)
 			{
 				stateDraw.addState("빛남", CL_white_blue,
 					"당신에게 빛이 비춰지고 있어 회피율이 낮아집니다.", this);
@@ -1692,8 +1752,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_invisible || you.togle_invisible)
 			{
-				stateDraw.addState("투명", you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue,
-					"투명해져서 투명을 볼 수 없는 적의 눈에 띄지 않습니다.", this);
+				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
+				stateDraw.addState("투명", glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+					glow_? "투명해졌지만 빛나고 있기에 아무런 효과가 없습니다." :"투명해져서 투명을 볼 수 없는 적의 눈에 띄지 않습니다.", this);
 			}
 			if(you.s_swift)
 			{

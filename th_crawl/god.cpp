@@ -135,6 +135,57 @@ int GetGodAbandonValue(god_type god)
 	return 25;
 }
 
+int getPietyPercent(int type, int strong) {
+	int percen_ = randA(99);
+
+	switch(type)
+	{
+	default:
+	case 0: //randA(2) 66%
+		switch(strong)
+		{
+		default:
+		case 1: return percen_<33 ?1:0;
+		case 2: return percen_<50 ? 1 : 0;
+		case 3: return percen_<75 ? 1 : 0;
+		case 4: return percen_<90 ? 1 : 0;
+		case 5: return percen_<100 ? 1 : 0;
+		}
+	case 1: //50%
+		switch (strong)
+		{
+		default:
+		case 1: return percen_<25 ? 1 : 0;
+		case 2: return percen_<35 ? 1 : 0;
+		case 3: return percen_<66 ? 1 : 0;
+		case 4: return percen_<75 ? 1 : 0;
+		case 5: return percen_<100 ? 1 : 0;
+		}
+
+	case 2: //25%
+		switch (strong)
+		{
+		default:
+		case 1: return percen_<10 ? 1 : 0;
+		case 2: return percen_<20 ? 1 : 0;
+		case 3: return percen_<40 ? 1 : 0;
+		case 4: return percen_<60 ? 1 : 0;
+		case 5: return percen_<100 ? 1 : 0;
+		}
+	case 3: //미코 전용
+		switch (strong)
+		{
+		default:
+		case 1: return 1;
+		case 2: return 2;
+		case 3: return 3;
+		case 4: return 4;
+		case 5: return 5;
+		}
+	}
+	return 1;
+}
+
 int pietyLevel(int piety)
 {
 	if(piety<30)
@@ -578,7 +629,6 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		}
 		return false;
-		return false;
 	case GT_YUKARI:
 		switch(level)
 		{
@@ -854,7 +904,12 @@ bool GetGodAbility(int level, bool plus)
 		switch (level)
 		{
 		case 0:
-		default:
+			you.Ability(SKL_MIKO_1, true, !plus);
+			you.Ability(SKL_MIKO_2, true, !plus);
+			you.Ability(SKL_MIKO_3, true, !plus);
+			you.Ability(SKL_MIKO_4, true, !plus);
+			you.Ability(SKL_MIKO_5, true, !plus);
+			you.Ability(SKL_MIKO_6, true, !plus);
 			break;
 		}
 		return false;
@@ -973,7 +1028,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("죠온과 시온은 적의 지갑을 강탈하는 것을 기뻐했다.", true, false, false, CL_joon_and_sion);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.GiftCount(1);
 						you.PietyUpDown(1);
@@ -994,7 +1049,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("카나코는 당신의 살생을 기뻐했다.", true, false, false, CL_help);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.GiftCount(1);
 						you.PietyUpDown(1);
@@ -1019,7 +1074,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("스와코는 당신의 살생을 기뻐했다.", true, false, false, CL_swako);
 
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 					}
@@ -1078,7 +1133,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(5) < 3)
+					if (getPietyPercent(1, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1107,7 +1162,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("유우기는 당신의 승리를 기뻐했다.", true, false, false, CL_yuigi);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1148,7 +1203,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1168,7 +1223,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1186,7 +1241,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				{
 					bool return_ = false;
 					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-						if (randA(3)==0)
+						if (getPietyPercent(2, mon_->SetStrong()))
 						{
 							you.GiftCount(1);
 							you.PietyUpDown(1);
@@ -1248,7 +1303,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1268,16 +1323,26 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_LILLY:
 		return false;
 	case GT_MIKO:
-		return false;
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
+		{
+			if (!mon_->isUserAlly())
+			{ //적일때
+				int base = getPietyPercent(3, mon_->SetStrong());
+				for (int i = 0; i < (isSprint() ? sprintMulti()*base : base); i++) {
+					you.PietyUpDown(1);
+				}
+				return true;
+			}
+		}
 	case GT_OKINA:
-		if (type_ == PRT_PLAYER)
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
 				printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-					if (randA(2))
+					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
 						return_ = true;
@@ -1297,7 +1362,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					printlog("순호는 당신의 살생을 기뻐했다.", true, false, false, CL_junko);
 					bool return_ = false;
 					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-						if (randA(4)==0)
+						if (getPietyPercent(2, mon_->SetStrong()))
 						{
 							you.GiftCount(1);
 							you.PietyUpDown(1);
@@ -1572,6 +1637,57 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 		return false;
 	}
 	return false;
+}
+bool GodAccpect_Stair(bool down_, bool new_dungeon_)
+{
+
+	switch (you.god)
+	{
+	case GT_BYAKUREN:
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_JOON_AND_SION:
+	case GT_KANAKO:
+	case GT_SUWAKO:
+	case GT_MINORIKO:
+	case GT_MIMA:
+	case GT_SHINKI:
+	case GT_YUUGI:
+	case GT_SHIZUHA:
+	case GT_HINA:
+	case GT_YUKARI:
+	case GT_EIRIN:
+	case GT_YUYUKO:
+	case GT_SATORI:
+	case GT_TENSI:
+	case GT_SEIJA:
+	case GT_LILLY:
+		return false;
+	case GT_MIKO:
+	{
+		if (new_dungeon_)
+		{
+			printlog("새로운 던전에 진입하여 인기도가 초기화되었다.", true, false, false, CL_miko);
+			you.PietyUpDown(-200);
+		}
+		else if (down_)
+		{
+			printlog("층을 옮기면서 인기도가 조금 내려갔다.", true, false, false, CL_miko);
+			you.PietyUpDown(-10);
+		}
+		else
+		{
+			printlog("계단을 타고 올라가면서 인기도가 크게 내려갔다", true, false, false, CL_miko);
+			you.PietyUpDown(-30);
+		}
+	}
+	break;
+	case GT_OKINA:
+	case GT_JUNKO:
+		return false;
+	}
+	return false;
+
 }
 bool GodAccpect_Explore_100()
 {
@@ -2093,10 +2209,10 @@ void Pray()
 
 
 			}
-			else if (type == DG_TEMPLE_MIKO)
+			/*else if (type == DG_TEMPLE_MIKO)
 			{
 				printlog("이 신은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
-			}
+			}*/
 			else
 			{
 				WaitForSingleObject(mutx, INFINITE);
@@ -2373,7 +2489,14 @@ void GodInfor(god_type god)
 		printsub("",true,CL_normal);
 		break;
 	case GT_MIKO:
-		printsub("토요사토미미노 미코", true, CL_danger);
+		printsub("토요사토미미노 미코", true, CL_miko);
+		printsub("", true, CL_miko);
+		printsub("토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.", true, CL_normal);
+		printsub("그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.", true, CL_normal);
+		printsub("인기도는 빠른 속도로 오르며 적들의 욕망을 읽거나 죽임으로서 인기도를 모을 수 있지만", true, CL_normal);
+		printsub("층을 올라가거나 서브던전이 바뀌면 인기도가 떨어지며 권능은 인기도를 크게 소모하게 된다.", true, CL_normal);
+		printsub("미코의 권능인 도술은 반영구적이며 지속시간없이 유지되지만 층을 이동할 경우 사라진다.", true, CL_normal);
+		printsub("", true, CL_miko);
 		break;
 	case GT_OKINA:
 		printsub("마타라 오키나", true, CL_okina);
@@ -2995,7 +3118,32 @@ void God_show()
 	case GT_MIKO:
 		if (level_ >= 0 && !you.GetPunish(GT_MIKO))
 		{
-			printsub("알 수 없는 능력                                                 (패시브)", true, CL_miko);
+			printsub("인기도는 다음 행동을 할 경우 올라간다.", true, CL_normal);
+			printsub("    적을 죽인다. 강할수록 더 많이 올라간다.", true, CL_miko);
+			printsub("    욕망모으기를 이용해 시야내의 적들의 욕망을 모은다.", true, CL_miko);
+			printsub("", true, CL_normal);
+			printsub("인기도는 다음 행동을 할 경우 내려간다.", true, CL_normal);
+			printsub("    층을 옮긴다. 올라갈수록 더 많은 인기도가 떨어진다.", true, CL_miko);
+			printsub("    새로운 서브던전에 들어간다. 모든 인기도가 떨어진다.", true, CL_miko);
+			printsub("    미코의 권능을 사용한다.", true, CL_miko);
+			printsub("", true, CL_normal);
+			printsub("주변의 적들로부터 인기도를 모을 수 있다.                 (층마다 한번만)", true, CL_miko);
+			printsub("", true, CL_normal);
+			char temp[256];
+			sprintf_s(temp, 256, "빠른 속도로 랜덤한 순간이동을 할 수 있다.                  (인기도 %3d%%)", getMikoPiety(0) / 2);
+			printsub(temp, true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
+			printsub("", true, CL_normal);
+			sprintf_s(temp, 256, "해당 층에서 주변을 비추는 후광을 얻을 수 있다.             (인기도 %3d%%)", getMikoPiety(1) / 2);
+			printsub(temp, true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
+			printsub("", true, CL_normal);
+			sprintf_s(temp, 256, "해당 층에서 원하는 저항을 얻을 수 있다.                    (인기도 %3d%%)", getMikoPiety(2) / 2);
+			printsub(temp, true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
+			printsub("", true, CL_normal);
+			sprintf_s(temp, 256, "해당 층에서 원하는 전투능력을 강화시킬 수 있다.            (인기도 %3d%%)", getMikoPiety(3) / 2);
+			printsub(temp, true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
+			printsub("", true, CL_normal);
+			sprintf_s(temp, 256, "해당 층에서의 궁극의 축복을 받을 수 있다.                  (인기도 %3d%%)", getMikoPiety(4) / 2);
+			printsub(temp, true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
 		}
 		break;
@@ -3897,7 +4045,37 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_MIKO:
+	{
+		random_extraction<int> rand_;
+		rand_.push(0, 33);//허약
+		rand_.push(1, 33);//감속
+		rand_.push(2, 33);//스탯빼앗기
+		int time_ = rand_int(80, 160);
+		env[current_level].MakeNoise(you.position, 20, NULL);
+		switch (rand_.pop())
+		{
+		case 0:
+		{
+			printarray(false, false, false, CL_miko, 1, "미코는 당신의 체력을 빼앗아갔다! ");
+			you.SetBuff(BUFFSTAT_HP, BUFF_DUPLE, -(you.GetMaxHp()/2), time_);
+		}
 		break;
+		case 1:
+		{
+			printarray(false, false, false, CL_junko, 1, "미코는 당신을 느리게했다! ");
+			you.SetSlow(time_);
+		}
+		break;
+		case 2:
+		{
+			printarray(false, false, false, CL_junko, 1, "미코는 당신의 저항을 낮추었다! ");
+			you.SetBuff(BUFFSTAT_RF, BUFF_MIKO_RF_MINUS, -1, time_);
+			you.SetBuff(BUFFSTAT_RC, BUFF_MIKO_RC_MINUS, -1, time_);
+		}
+		break;
+		}
+	}
+	break;
 	case GT_OKINA:
 		{
 			random_extraction<int> rand_;
@@ -3969,13 +4147,6 @@ bool god_punish(god_type god)
 			{
 			case 0:
 			{
-				random_extraction<potion_type> potion_;
-				potion_.push(PT_DOWN_STAT);
-				potion_.push(PT_PARALYSIS);
-				potion_.push(PT_SLOW);
-				potion_.push(PT_CONFUSE);
-				potion_.push(PT_POISON);
-				potion_type p_ = potion_.choice();
 				printarray(false, false, false, CL_junko, 1, "순호는 당신의 힘을 약화하였다! ");
 				you.SetForceStrong(false, time_, true);
 			}
@@ -4127,4 +4298,21 @@ void godAutoPickUp(god_type god_, bool belive_) {
 	default:
 		break;
 	}
+}
+
+
+int getMikoPiety(int kind) {
+	switch (kind){
+		case 0:
+			return 4;
+		case 1:
+			return 20;
+		case 2:
+			return 40;
+		case 3:
+			return 100;
+		case 4:
+			return 200;
+	}
+	return 0;
 }

@@ -42,7 +42,7 @@ s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
-	speed(10), memory_time(0), first_contact(true), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(), 
+	speed(10), memory_time(0), first_contact(true), strong(1), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
 {	
 	base_state_setup(state,MS_SLEEP);
@@ -122,7 +122,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, time_delay);
 	SaveData<int>(fp, speed);
 	SaveData<int>(fp, memory_time);
-	SaveData<bool>(fp, first_contact);	
+	SaveData<bool>(fp, first_contact);
+	SaveData<int>(fp, strong);
 	SaveData<int>(fp, delay_turn);
 
 	SaveData<int>(fp, will_move.size());
@@ -236,7 +237,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, time_delay);
 	LoadData<int>(fp, speed);
 	LoadData<int>(fp, memory_time);
-	LoadData<bool>(fp, first_contact);	
+	LoadData<bool>(fp, first_contact);
+	LoadData<int>(fp, strong);
 	LoadData<int>(fp, delay_turn);
 
 
@@ -353,6 +355,7 @@ void monster::init()
 	speed = 0; 
 	memory_time = 0; 
 	first_contact = true;
+	strong = 1;
 	delay_turn = 0;
 	while(!will_move.empty())
 		will_move.pop_back();
@@ -1615,6 +1618,9 @@ bool monster::simple_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, floa
 bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 {
 	bool return_ = false;
+	if (s_glow) {
+		img_effect_halo.draw(pSprite, x_, y_, 127);
+	}
 	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_, 255);
@@ -2474,13 +2480,21 @@ int monster::action(int delay_)
 		}
 		if(s_glow)
 		{
-			s_glow--;
-			if(is_sight && isView())
+			if (!(is_sight && you.GetBuffOk(BUFFSTAT_HALO)))
 			{
-				if(!s_glow)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ºû³ª´Â °ÍÀ» ¸ØÃè´Ù.");
+				s_glow--;
+				if (is_sight && isView())
+				{
+					if (!s_glow)
+						printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ºû³ª´Â °ÍÀ» ¸ØÃè´Ù.");
+				}
 			}
 		}
+		else if (is_sight && you.GetBuffOk(BUFFSTAT_HALO))
+		{
+			s_glow = 1;
+		}
+
 		if(s_graze>0)
 		{
 			s_graze--;

@@ -56,9 +56,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	inter = IT_NONE;
 	env[current_level].CheckFloor();
 	int delay_ = GetDelay();
-	if((s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE) && !s_slow)
+	if((s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE || GetBuffOk(BUFFSTAT_HASTE)) && !s_slow)
 		delay_ = delay_*0.7f;
-	else if(s_slow && !(s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE))
+	else if(s_slow && !(s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE || GetBuffOk(BUFFSTAT_HASTE)))
 		delay_ = delay_*1.5f;
 
 	if(GetStatPanalty()) //½ºÅÈÆÐ³ÎÆ¼
@@ -97,7 +97,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(temp->turn>0){
 			temp->turn--;
 		}
-		if(temp->turn<=0)
+		if(temp->turn==0)
 		{
 			UpDownBuff(temp->stat,-1*temp->value);
 			buff_list.erase(temp);

@@ -117,7 +117,8 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	}
 	for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
 	{
-		env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+		monster* mon_ = env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+		mon_->SetStrong(mon_->isUnique()?5:1);
 	}
 	for (auto it = pos_list.begin(); it != pos_list.end(); it++) {
 		it->operator+=(pos);
@@ -182,18 +183,6 @@ void map_dummy::eventmapmake(environment& env_pointer, int count, bool wall_)
 			}
 		}
 	}
-	//for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
-	//{
-	//	env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
-	//}
-	//for(list<mapdummy_item>::iterator it = item_list.begin();it!=item_list.end();it++)
-	//{
-	//	env_pointer.MakeItem(it->pos+pos,it->id);
-	//}
-	//for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
-	//{
-	//	env_pointer.MakeEvent(it->id,it->position+pos,it->type);
-	//}
 }
 
 void map_dummy::SetEnter(coord_def c)
@@ -1518,7 +1507,8 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 		}
 	}	
 	if(!is_exist_named(MON_PACHU)){
-		env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		monster* mon_ = env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		mon_->SetStrong(5);
 		set_exist_named(MON_PACHU);
 	}
 	
@@ -1563,7 +1553,8 @@ void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 	env[num].MakeItem(coord_def(DG_MAX_X/2,DG_MAX_Y/2-6),t);
 
 	if(!is_exist_named(MON_FLAN)){
-		env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		monster* mon_ = env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
+		mon_->SetStrong(5);
 		set_exist_named(MON_FLAN);
 	}
 	setBaseFloorWall(num, floor_tex, wall_tex);

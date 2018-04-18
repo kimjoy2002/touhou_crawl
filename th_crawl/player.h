@@ -40,6 +40,14 @@ enum stat_up //스탯버프는 따로 두지않는다. 겹칠 가능성을 위해
 	BUFFSTAT_DAM,
 	BUFFSTAT_RF,
 	BUFFSTAT_RC,
+	BUFFSTAT_RE,
+	BUFFSTAT_RP,
+	BUFFSTAT_RCONF,
+	BUFFSTAT_SPL_POW,
+	BUFFSTAT_REGEN,
+	BUFFSTAT_MREGEN,
+	BUFFSTAT_HASTE,
+	BUFFSTAT_HALO,
 	BUFFSTAT_MAX
 };
 
@@ -53,6 +61,22 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_MINORIKO_RC,
 	BUFF_AUTUMN_RF,
 	BUFF_JOON_AC,
+	BUFF_MIKO_START,
+	BUFF_MIKO_RF = BUFF_MIKO_START, //미코버프들은 계단을 옮기면 사라짐
+	BUFF_MIKO_RI,
+	BUFF_MIKO_RE,
+	BUFF_MIKO_RP,
+	BUFF_MIKO_RC,
+	BUFF_MIKO_DAM,
+	BUFF_MIKO_ACC,
+	BUFF_MIKO_SPLPOW,
+	BUFF_MIKO_REGEN,
+	BUFF_MIKO_MREGEN,
+	BUFF_MIKO_HALO,
+	BUFF_MIKO_ULTI,
+	BUFF_MIKO_END = BUFF_MIKO_ULTI,
+	BUFF_MIKO_RF_MINUS,
+	BUFF_MIKO_RC_MINUS,
 	BUFF_MAX
 };
 enum action_type
@@ -450,6 +474,8 @@ public:
 	bool SetKnifeCollect(int s_knife_collect_);
 	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
+	int isSetMikoBuff(int temp_);
+	int reSetMikoBuff();
 	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true 리턴은 기존의 버프가 있어서 덮어씌웠다.
 	bool SetProperty(tribe_proper_type type_, int value_);
 	bool SetStatBoost(int sdi_, int value_);

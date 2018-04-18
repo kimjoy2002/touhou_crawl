@@ -103,6 +103,7 @@ public:
 	int speed; //행동시간 (누적되어있는시간/행동시간=행동턴)
 	int memory_time; //기억력
 	bool first_contact; //이 몬스터를 처음 보았다.
+	int strong; //강하기
 
 	int delay_turn; //다른층으로 도망친 턴. 이 턴만큼 회복등등...
 
@@ -179,6 +180,7 @@ public:
 	int HpRecoverDelay();
 	bool HpRecover(int trun_ = 1);
 	int HpUpDown(int value_,damage_reason reason, unit *order_ = false);
+	void SetStrong(int strong_) {strong = strong_;};
 	bool SetTele(int tele_);
 	bool SetMight(int might_);
 	bool SetClever(int clever_);
@@ -246,6 +248,7 @@ public:
 	int GetHit();
 	int GetEv();
 	int GetSaved(){return s_saved;};
+	int SetStrong() { return strong; };
 	bool isSaveSummoner(unit* order);
 	int GetWalkDelay(){return GetSpeed();};
 	bool GetMindReading(){return (s_mind_reading!=0);};

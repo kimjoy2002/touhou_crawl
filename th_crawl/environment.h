@@ -141,6 +141,7 @@ public:
 	int floor;
 	bool make;
 	int all_monster_id;
+	int popular;
 	dungeon_tile_type base_floor;
 	dungeon_tile_type base_wall;
 	dungeon_tile dgtile[DG_MAX_X][DG_MAX_Y];

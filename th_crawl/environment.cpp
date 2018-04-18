@@ -45,7 +45,7 @@ void stair_info::LoadDatas(FILE *fp)
 	LoadData<int>(fp, next_floor);
 
 }
-environment::environment():floor(0), make(false), all_monster_id(1),
+environment::environment():floor(0), make(false), all_monster_id(1), popular(1),
 base_floor(DG_FLOOR), base_wall(DG_WALL)
 {
 	mon_vector.reserve(MON_MAX_IN_FLOOR);
@@ -61,6 +61,7 @@ void environment::SaveDatas(FILE *fp)
 	SaveData<int>(fp, floor);
 	SaveData<bool>(fp, make);
 	SaveData<int>(fp, all_monster_id);
+	SaveData<int>(fp, popular);
 	SaveData<dungeon_tile_type>(fp, base_floor);
 	SaveData<dungeon_tile_type>(fp, base_wall);
 	SaveData<dungeon_tile>(fp, **dgtile, DG_MAX_X * DG_MAX_Y);
@@ -124,6 +125,7 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<int>(fp, floor);
 	LoadData<bool>(fp, make);
 	LoadData<int>(fp, all_monster_id);
+	LoadData<int>(fp, popular);
 	LoadData<dungeon_tile_type>(fp, base_floor);
 	LoadData<dungeon_tile_type>(fp, base_wall);
 	LoadData<dungeon_tile>(fp, **dgtile);
@@ -216,6 +218,10 @@ bool environment::MakeMap(bool return_)
 		{
 			create_mon(floor, GetLevelMonsterNum(floor,false));
 			create_item(floor,  GetLevelMonsterNum(floor,true));
+
+			if (you.god != GT_MIKO) {
+				popular = -1;
+			}
 		}	
 
 		if(floor>=SUBTERRANEAN_LEVEL && floor <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
@@ -291,6 +297,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	int prev_level = current_level;
 	if(you.s_silence)
 		env[current_level].MakeSilence(you.position, you.s_silence_range, false);
+	env[current_level].popular = -1;
 	current_level = floor;
 
 	if(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
@@ -310,6 +317,10 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	else
 		you.SetXY(pos_);
 	you.prev_position = you.position;
+	{
+		//미코에 의한 버프 초기화
+		you.reSetMikoBuff();
+	}
 	if(you.s_silence)
 		env[current_level].MakeSilence(you.position, you.s_silence_range, true);
 

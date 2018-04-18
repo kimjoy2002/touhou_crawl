@@ -33,6 +33,7 @@
 #include "book.h"
 #include "debuf.h"
 #include "mapsearching.h"
+#include "god.h"
 
 #include <algorithm>
 #include <random>
@@ -1368,6 +1369,7 @@ void Stair_move(bool down)
 					you.TurnEnd();
 					env[current_level+1].EnterMap(i,dq);
 					printlog("계단을 내려왔다.",true,false,false,CL_normal);
+					GodAccpect_Stair(true, false);
 					soundmanager.playSound("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
@@ -1480,8 +1482,9 @@ void Stair_move(bool down)
 					break;			
 			}
 
-			env[next_].EnterMap(0,dq);
+			env[next_].EnterMap(0,dq); 
 			printlog("계단을 내려왔다.",true,false,false,CL_normal);
+			GodAccpect_Stair(true, true);
 			soundmanager.playSound("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();
@@ -1525,6 +1528,7 @@ void Stair_move(bool down)
 					you.TurnEnd();
 					env[current_level-1].EnterMap(i,dq);
 					printlog("계단을 올라왔다.",true,false,false,CL_normal);
+					GodAccpect_Stair(false, false);
 					soundmanager.playSound("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
@@ -1698,6 +1702,7 @@ void Stair_move(bool down)
 			you.TurnEnd();
 			env[floor_return].EnterMap(-1,dq,pos_return);
 			printlog("던전으로 돌아왔다.",true,false,false,CL_normal);
+			GodAccpect_Stair(false, true);
 			soundmanager.playSound("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();

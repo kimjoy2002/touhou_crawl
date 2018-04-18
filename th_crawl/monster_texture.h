@@ -441,6 +441,7 @@ extern textures img_effect_sion;
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_gold_floor[];
 extern textures img_effect_rock_trap;
+extern textures img_effect_halo;
 extern textures img_effect_rock_uplift[];
 extern textures img_effect_emerald_uplift[];
 extern textures img_effect_schema[];

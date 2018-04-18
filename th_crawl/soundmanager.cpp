@@ -13,66 +13,6 @@ using namespace std;
 
 SOUNDMANAGER soundmanager;
 
-SOUNDBUFFER* se_pistol = 0;
-SOUNDBUFFER* se_flame_thrower = 0;
-SOUNDBUFFER* se_bow = 0;
-SOUNDBUFFER* se_pistol_reload = 0;
-SOUNDBUFFER* se_flame_reload = 0;
-SOUNDBUFFER* se_shotgun_reload = 0;
-SOUNDBUFFER* se_backstab = 0;
-SOUNDBUFFER* se_knife = 0;
-SOUNDBUFFER* se_sniper = 0;
-SOUNDBUFFER* se_silencer = 0;
-SOUNDBUFFER* bgm_dungeon_0 = 0;
-SOUNDBUFFER* bgm_dungeon_1 = 0;
-SOUNDBUFFER* bgm_dungeon_2 = 0;
-SOUNDBUFFER* bgm_dungeon_3 = 0;
-
-//AudioDevicePtr DevicePtr = NULL;
-//OutputStreamPtr se_pistol = NULL;
-//OutputStreamPtr se_flame_thrower = NULL;
-//OutputStreamPtr se_pistol_reload = NULL;
-//OutputStreamPtr se_flame_reload = NULL;
-//OutputStreamPtr bgm_dungeon_0 = NULL;
-//
-//void InitSound()
-//{
-//	DevicePtr = OpenDevice();
-//	if ( !DevicePtr )
-//		return;
-//	se_pistol = OpenSound(DevicePtr, "sound\\ÃÑ¼Ò¸®2.wav", false);
-//	se_flame_thrower = OpenSound(DevicePtr, "sound\\fire.wav", false);
-//	se_pistol_reload = OpenSound(DevicePtr, "sound\\ÃÑÀåÀü.wav", false);
-//	se_flame_reload = OpenSound(DevicePtr, "sound\\fire_reload.wav", false);
-//	bgm_dungeon_0 = OpenSound(DevicePtr, "sound\\bgm.mp3", true);
-//	bgm_dungeon_0->setRepeat(true);
-//}
-//
-//void PlaySE(OutputStreamPtr& sound_, bool init_)
-//{
-//	if(sound_)
-//	{
-//		if(init_)
-//			sound_->setPosition(0);
-//		sound_->play();
-//	}
-//}
-//
-//void PlayBGM(OutputStreamPtr& sound_)
-//{
-//	if(sound_)
-//	{
-//		sound_->play();
-//	}
-//}
-//void StopBGM(OutputStreamPtr& sound_)
-//{
-//	if(sound_)
-//	{
-//		sound_->stop();
-//	}
-//}
-
 
 SOUNDBUFFER::SOUNDBUFFER()
 {
@@ -526,6 +466,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addSound("jump", "sound\\se\\jump.wav", false, true); //ok
 	addSound("water", "sound\\se\\water.wav", false, true); //ok
 	addSound("warning", "sound\\se\\warning.wav", false, true); //ok
+	addSound("charge", "sound\\se\\charge.wav", false, true); //ok
 	
 	
 

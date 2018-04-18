@@ -3506,6 +3506,248 @@ bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def targ
 	return true;
 }
 
+bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
+{
+	if (env[current_level].popular == -1) {
+		printlog("이 곳은 인기를 모으기엔 너무 오래된 곳이다.", true, false, false, CL_normal);
+		return false;
+	} else if (env[current_level].popular == 0) {
+		printlog("이 곳은 이미 욕망을 모은 층이다.", true, false, false, CL_normal);
+		return false;
+	}
+
+	
+	int ok_ = 0;
+	int piety_ = 0;
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && !it->isUserAlly()
+			&& env[current_level].isInSight(it->position)
+			&& !(it->flag & M_FLAG_SUMMON)
+			&& !(it->flag & M_FLAG_UNHARM))
+		{
+			ok_++;
+			piety_ += it->SetStrong()*2;
+		}
+	}
+	if (ok_ > 0)
+	{
+		char temp[256];
+		sprintf_s(temp, 256, "시야안에 있는 %d명의 욕망을 읽어들였다!", ok_);
+		you.PietyUpDown(piety_);
+		printlog(temp, true, false, false, CL_miko);
+		env[current_level].popular = 0;
+		soundmanager.playSound("powerup");
+		return true;
+	}
+	else
+	{
+		printlog("시야내에 욕망을 읽어낼 적이 없다.", true, false, false, CL_normal);
+		return false;
+	}
+	return false;
+}
+bool skill_miko_2(int power, bool short_, unit* order, coord_def target)
+{
+	if (!order->Tele_check(true, false))
+		return false;
+	if (env[current_level].isInSight(order->position)) {
+		soundmanager.playSound("blink");
+	}
+	order->Blink(25);
+
+	return true;
+}
+bool skill_miko_3(int power, bool short_, unit* order, coord_def target)
+{
+	bool already_ = you.SetBuff(BUFFSTAT_HALO, BUFF_MIKO_HALO, 1, -1);
+	if (already_)
+	{
+		printlog("이미 존재하는 저항이다.", true, false, false, CL_normal);
+		return false;
+	}
+	else {
+		soundmanager.playSound("buff");
+		printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+		return true;
+	}
+	return true;
+}
+bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
+{
+	int resist_ = 0;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("미코: 어느 저항을 얻을거지? 버프는 층을 옮기기전까지 유지된단다.", true, false, false, CL_miko);
+		printlog("a - 화염저항    b - 냉기저항    c - 전기저항", true, false, false, CL_miko);
+		printlog("d - 독저항      e - 혼란저항", true, false, false, CL_miko);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			resist_ = 1;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			resist_ = 2;
+			loop_ = false;
+			break;
+		case 'c':
+		case 'C':
+			resist_ = 3;
+			loop_ = false;
+			break;
+		case 'd':
+		case 'D':
+			resist_ = 4;
+			loop_ = false;
+			break;
+		case 'e':
+		case 'E':
+			resist_ = 5;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+	bool already_ = false;
+	switch (resist_)
+	{
+	case 1:
+		already_ = you.SetBuff(BUFFSTAT_RF, BUFF_MIKO_RF, 1, -1);
+		break;
+	case 2:
+		already_ = you.SetBuff(BUFFSTAT_RC, BUFF_MIKO_RI, 1, -1);
+		break;
+	case 3:
+		already_ = you.SetBuff(BUFFSTAT_RE, BUFF_MIKO_RE, 1, -1);
+		break;
+	case 4:
+		already_ = you.SetBuff(BUFFSTAT_RP, BUFF_MIKO_RP, 1, -1);
+		break;
+	case 5:
+		already_ = you.SetBuff(BUFFSTAT_RCONF, BUFF_MIKO_RC, 1, -1);
+		break;
+	}
+	if (already_)
+	{
+		printlog("이미 존재하는 저항이다.", true, false, false, CL_normal);
+		return false;
+	}
+	else {
+		soundmanager.playSound("buff");
+		printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+		return true;
+
+	}
+}
+bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
+{
+	if(you.isSetMikoBuff(0)) {
+		printlog("이미 이 층에선 망토를 선택했다.", true, false, false, CL_normal);
+		return false;
+	}
+	int bonus_ = 0;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("미코: 어느 망토를 고를건가? 버프는 층을 옮기기전까지 유지된단다.", true, false, false, CL_miko);
+		printlog("a - 빨간망토 : 전투력보너스 +6과 체력재생력", true, false, false, CL_miko);
+		printlog("b - 파랑망토 : 스펠파워 1.5배 보너스와 영력재생력", true, false, false, CL_miko);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			bonus_ = 1;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			bonus_ = 2;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+
+	switch (bonus_)
+	{
+	case 1:
+		you.SetBuff(BUFFSTAT_DAM, BUFF_MIKO_DAM, 6, -1);
+		you.SetBuff(BUFFSTAT_ACC, BUFF_MIKO_ACC, 6, -1);
+		you.SetBuff(BUFFSTAT_REGEN, BUFF_MIKO_REGEN, 1, -1);
+		break;
+	case 2:
+		you.SetBuff(BUFFSTAT_SPL_POW, BUFF_MIKO_SPLPOW, 1, -1);
+		you.SetBuff(BUFFSTAT_MREGEN, BUFF_MIKO_MREGEN, 1, -1);
+		break;
+	}
+	soundmanager.playSound("buff");
+	printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+	return true;
+}
+bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
+{
+	if (you.isSetMikoBuff(1)) {
+		printlog("이미 인기 폭발 상태다.", true, false, false, CL_normal);
+		return false;
+	}
+	int bonus_ = 0;
+	bool loop_ = true;
+	while (loop_) {
+		printlog("인기 폭발! 어느 보너스를 얻을건가?", true, false, false, CL_miko);
+		printlog("a - 층을 옮기기전까지 체력 2배", true, false, false, CL_miko);
+		printlog("b - 층을 옮기기전까지 영력 회복 속도 폭증", true, false, false, CL_miko);
+		printlog("c - 층을 옮기기전까지 영구적인 가속", true, false, false, CL_miko);
+		switch (waitkeyinput())
+		{
+		case 'a':
+		case 'A':
+			bonus_ = 1;
+			loop_ = false;
+			break;
+		case 'b':
+		case 'B':
+			bonus_ = 2;
+			loop_ = false;
+			break;
+		case 'c':
+		case 'C':
+			bonus_ = 3;
+			loop_ = false;
+			break;
+		default:
+			break;
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, false, false, CL_normal);
+			return false;
+		}
+	}
+	switch (bonus_)
+	{
+	case 1:
+		you.SetBuff(BUFFSTAT_HP, BUFF_MIKO_ULTI, you.GetMaxHp(), -1);
+		break;
+	case 2:
+		you.SetBuff(BUFFSTAT_MREGEN, BUFF_MIKO_ULTI, 5, -1);
+		break;
+	case 3:
+		you.SetBuff(BUFFSTAT_HASTE, BUFF_MIKO_ULTI, 1, -1);
+		break;
+	}
+	soundmanager.playSound("buff");
+	printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+	return true;
+}
+
 
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
@@ -3820,6 +4062,24 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_JOON_AND_SION_OFF:
 		return skill_joon_and_sion_off(power, short_, &you, target);
+		break;
+	case SKL_MIKO_1:
+		return skill_miko_1(power, short_, &you, target);
+		break;
+	case SKL_MIKO_2:
+		return skill_miko_2(power, short_, &you, target);
+		break;
+	case SKL_MIKO_3:
+		return skill_miko_3(power, short_, &you, target);
+		break;
+	case SKL_MIKO_4:
+		return skill_miko_4(power, short_, &you, target);
+		break;
+	case SKL_MIKO_5:
+		return skill_miko_5(power, short_, &you, target);
+		break;
+	case SKL_MIKO_6:
+		return skill_miko_6(power, short_, &you, target);
 		break;
 	}
 	return 0;

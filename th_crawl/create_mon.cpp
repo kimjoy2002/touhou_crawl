@@ -11,7 +11,7 @@
 #include "event.h"
 
 
-void create_id_to_mon(int id, int level);
+void create_id_to_mon(int id, int level, int strong);
 int get_unique_to_id(int m_id);
 void create_id_to_unique(int id, int level);
 vector<unique_infor> unique_list;
@@ -22,15 +22,15 @@ struct mon_group
 	int min_level; //최소레벨 <- 나오는 던전 층
 	int max_level; //최대레벨 <- 나오는 던전 층
 	int percent; //확률  <- 나올 빈도를 결정한다.
-	int strong; //집단의 난이도  (10이 기본) <- 약한 몹이나 강한 몹이 너무 많이 생성됨을 방지
+	int strong; //집단의 난이도  (5가 최대) <- 약한 몹이나 강한 몹이 너무 많이 생성됨을 방지
 
 };
 mon_group normal_group[] = //일반몹 그룹
 {
-	{  0,  0,  4,  30,  1}, //모옥 1
-	{  1,  0,  4,  30,  1}, //쥐 1
-	{  2,  0,  3,  8,  2}, //레이무윳쿠리 1
-	{  3,  0,  2,  30,  1}, //초록요정 1
+	{  0,  0,  4,  30,  2}, //모옥 1
+	{  1,  0,  4,  30,  2}, //쥐 1
+	{  2,  0,  3,  8,  4}, //레이무윳쿠리 1
+	{  3,  0,  2,  30,  2}, //초록요정 1
 	//{  4,  0,  4,  20,  3}, //까마귀 3
 	{  6,  0,  1,  10,  3}, //파랑요정 1
 	{  7,  0,  2,  10,  2}, //초록요정 2~3
@@ -38,273 +38,273 @@ mon_group normal_group[] = //일반몹 그룹
 	{  5,  1,  2,  2,  3}, //빨간요정 1
 	{ 23,  1,  5,  5,  3}, //반딧불이
 	{  8,  1,  4,  10,  3}, //거미 1
-	{  9,  1,  5,  10,  5}, //뱀 1
-	{ 11,  1,  4,  12,  3}, //초록요정1 파랑요정1
-	{ 12,  1,  5,  12,  3}, //초록요정1 빨강요정1
+	{  9,  1,  5,  10,  4}, //뱀 1
+	{ 11,  1,  4,  12,  2}, //초록요정1 파랑요정1
+	{ 12,  1,  5,  12,  2}, //초록요정1 빨강요정1
 	//{ 13,  1,  5,  40,  3}, //모옥2 까마귀4
 	//{ 14,  1,  3,  8,  5}, //캇파2~3 (갓파 너무 쎄서 제거)
-	{ 24,  1,  4,  5,  5}, //인간부대(약함)
-	{ 27,  1,  14,  8,  5}, //우산요괴
-	{ 28,  1,  5,  5,  5}, //초록모옥
+	{ 24,  1,  4,  5,  1}, //인간부대(약함)
+	{ 27,  1,  14,  8,  3}, //우산요괴
+	{ 28,  1,  5,  5,  2}, //초록모옥
 	
-	{ 15,  2,  9,  20,  5}, //초록요정2 파랑요정1 빨강요정1
-	{ 14,  2,  3,  8,  5}, //캇파2~3
-	{ 18,  2,  6,  25,  6}, //캇파4~5
-	{ 20,  2,  9,  10,  7}, //거미1 뱀1
-	{ 10,  2,  11,  10,  6}, //두루미 1
-	{ 24,  2,  4,  5,  5}, //인간부대(약함)
-	{ 29,  2,  7,  5,  5}, //주황모옥
-	{ 28,  2,  5,  10,  5}, //초록모옥
-
-	
-	{ 10,  3,  14,  3,  6}, //두루미 1
-	{ 4,   3,  7,  10 , 3}, //까마귀3
-	{ 16,  3,  9,  10,  6}, //파랑요정2 빨강요정2
-	{ 25,  3,  6,  7, 10}, //인간부대(중간)
-	{ 30,  3,  9,  5,  5}, //회색모옥
+	{ 15,  2,  9,  20,  1}, //초록요정2 파랑요정1 빨강요정1
+	{ 14,  2,  3,  8,  2}, //캇파2~3
+	{ 18,  2,  6,  25,  2}, //캇파4~5
+	{ 20,  2,  9,  10,  3}, //거미1 뱀1
+	{ 10,  2,  11,  10,  5}, //두루미 1
+	{ 24,  2,  4,  5,  2}, //인간부대(약함)
+	{ 29,  2,  7,  5,  2}, //주황모옥
+	{ 28,  2,  5,  10,  2}, //초록모옥
 
 	
-	{ 25,  4,  6,  20, 10}, //인간부대(중간)
-	{ 29,  4,  7,  10,  5}, //주황모옥
+	{ 10,  3,  14,  3,  4}, //두루미 1
+	{ 4,   3,  7,  10 , 1}, //까마귀3
+	{ 16,  3,  9,  10,  1}, //파랑요정2 빨강요정2
+	{ 25,  3,  6,  7, 1}, //인간부대(중간)
+	{ 30,  3,  9,  5,  2}, //회색모옥
 
 	
-	{ 21,  5,  11,  10,  8}, //요정 전사사격 호위부대
-	{ 35,  5,  14,  5, 10}, //마리사윳쿠리
-	{ 30,  5,  9,  10,  5}, //회색모옥
+	{ 25,  4,  6,  20, 1}, //인간부대(중간)
+	{ 29,  4,  7,  10,  3}, //주황모옥
 
 	
-	{ 22,  6,  12,  10, 13}, //깃발 요정 호위부대
-	{ 32,  6,  14,  15, 10}, //고양이
-	
-	{ 31,  7,  14,  20, 10}, //개구리
-	{ 26,  7,  14,  30, 20}, //인간부대(강함)
-	{ 33,  7,  14,  15, 15}, //까마귀텐구
-	{ 38,  7,  14,  8, 10}, //야마비코
-
-
-	{ 34,  9,  14,  5, 30}, //오니
-	{ 39,  9,  14,  5, 15}, //캇파창병부대
-	{ 36,  9,  14,  5, 10}, //키메이마루
-
-	{ 37,  10,  14,  5, 30}, //레밀리아 윳쿠리
-	{ 53,  10,  14,  5, 30}, //매	
-	{ 54,  10,  14,  5, 30}, //호랑이
+	{ 21,  5,  11,  10,  1}, //요정 전사사격 호위부대
+	{ 35,  5,  14,  5, 4}, //마리사윳쿠리
+	{ 30,  5,  9,  10,  3}, //회색모옥
 
 	
-	{ 58,  11,  14,  5, 30}, //벤토라 1기
-	{ 34,  11,  14,  5, 30}, //오니
-	{ 42,  11,  14,  10, 30}, //텐구부대
-
-
-	{ 43,  12,  14,  5, 30}, //아오오니
-	{ 55,  12,  14,  5, 30}, //뇌수
+	{ 22,  6,  12,  10, 1}, //깃발 요정 호위부대
+	{ 32,  6,  14,  15, 3}, //고양이
 	
-	{ 56,  13,  14,  5, 30}, //용
+	{ 31,  7,  14,  20, 3}, //개구리
+	{ 26,  7,  14,  30, 1}, //인간부대(강함)
+	{ 33,  7,  14,  15, 4}, //까마귀텐구
+	{ 38,  7,  14,  8, 3}, //야마비코
+
+
+	{ 34,  9,  14,  5, 5}, //오니
+	{ 39,  9,  14,  5, 1}, //캇파창병부대
+	{ 36,  9,  14,  5, 3}, //키메이마루
+
+	{ 37,  10,  14,  5, 3}, //레밀리아 윳쿠리
+	{ 53,  10,  14,  5, 3}, //매	
+	{ 54,  10,  14,  5, 3}, //호랑이
+
+	
+	{ 58,  11,  14,  5, 3}, //벤토라 1기
+	{ 34,  11,  14,  5, 4}, //오니
+	{ 42,  11,  14,  10, 2}, //텐구부대
+
+
+	{ 43,  12,  14,  5, 4}, //아오오니
+	{ 55,  12,  14,  5, 3}, //뇌수
+	
+	{ 56,  13,  14,  5, 4}, //용
 
 	
 	//YOUKAI_MOUNTAIN_LEVEL
 
 	
 	
-	{ 15,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  8,  5}, //초록요정2 파랑요정1 빨강요정1
-	{ 21,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10,  8}, //요정 전사사격 호위부대
-	{ 22,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10, 13}, //깃발 요정 호위부대
+	{ 15,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  8,  1}, //초록요정2 파랑요정1 빨강요정1
+	{ 21,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10,  1}, //요정 전사사격 호위부대
+	{ 22,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10, 1}, //깃발 요정 호위부대
 	{  3,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  1}, //초록요정 1
-	{  5,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  3}, //빨간요정 1
-	{  6,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  3}, //파랑요정 1
-	{  7,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  2}, //초록요정 2~3
+	{  5,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  2}, //빨간요정 1
+	{  6,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //파랑요정 1
+	{  7,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //초록요정 2~3
 	{  0,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //모옥 1
-	{ 29,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  5}, //주황모옥
-	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  5}, //초록모옥
-	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  5}, //회색모옥
+	{ 29,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //주황모옥
+	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  1}, //초록모옥
+	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  1}, //회색모옥
 	
-	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  8}, //요정 전사사격 호위부대
-	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 13}, //깃발 요정 호위부대
-	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  2,  5}, //캇파2~3
-	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 2,  5}, //캇파창병
-	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 10}, //개구리
-	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 15}, //버섯요괴
+	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  1}, //요정 전사사격 호위부대
+	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 1}, //깃발 요정 호위부대
+	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  2,  1}, //캇파2~3
+	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 2,  3}, //캇파창병
+	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 3}, //개구리
+	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 3}, //버섯요괴
 		
-	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 13}, //깃발 요정 호위부대
-	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 2, 20}, //요정영웅부대
+	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 1}, //깃발 요정 호위부대
+	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 2, 1}, //요정영웅부대
 	
-	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 5, 13}, //큰두꺼비
+	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 5, 5}, //큰두꺼비
 
-	{ 66,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 20}, //요정소서러
-	{ 67,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 25}, //요정해바라기
+	{ 66,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 5}, //요정소서러
+	{ 67,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 5}, //요정해바라기
 
 	//YOUKAI_MOUNTAIN_LEVEL
 
-	{ 18,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2, 15,  6}, //캇파4~5
-	{ 31,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2,  7, 10}, //개구리
-	{ 17,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+1, 10,  5}, //캇파창병
-	{ 19,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+1,  7, 10}, //캇파1~3 캇파수술사
-	{ 33,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 15}, //까마귀텐구
-	{ 39,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2,  2, 15}, //캇파창병부대
-	{ 36,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+3,  1, 10}, //키메이마루
+	{ 18,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2, 15, 1}, //캇파4~5
+	{ 31,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2,  7, 3}, //개구리
+	{ 17,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+1, 10,  3}, //캇파창병
+	{ 19,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+1,  7, 1}, //캇파1~3 캇파수술사
+	{ 33,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 3}, //까마귀텐구
+	{ 39,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+2,  2, 1}, //캇파창병부대
+	{ 36,  YOUKAI_MOUNTAIN_LEVEL,  YOUKAI_MOUNTAIN_LEVEL+3,  1, 3}, //키메이마루
 
-	{ 17,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+2,  5, 10}, //캇파창병 
-	{ 33,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 15}, //까마귀텐구
-	{ 39,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 15}, //캇파창병부대
-	{ 44,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 20}, //캇파 창 수술 엘리트부대
-	{ 57,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  1, 25}, //야마와로 부대
+	{ 17,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+2,  5, 3}, //캇파창병 
+	{ 33,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 3}, //까마귀텐구
+	{ 39,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 1}, //캇파창병부대
+	{ 44,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 1}, //캇파 창 수술 엘리트부대
+	{ 57,  YOUKAI_MOUNTAIN_LEVEL+1,  YOUKAI_MOUNTAIN_LEVEL+3,  1, 2}, //야마와로 부대
 
 
-	{ 33,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 15}, //까마귀텐구
-	{ 39,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 15}, //캇파창병부대
-	{ 44,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 20}, //캇파 창 수술 엘리트부대
-	{ 40,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 15}, //야마부시텐구
-	{ 41,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 20}, //하나타카텐구
-	{ 36,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 10}, //키메이마루
-	{ 42,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  10, 30}, //텐구부대
+	{ 33,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 3}, //까마귀텐구
+	{ 39,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 1}, //캇파창병부대
+	{ 44,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 1}, //캇파 창 수술 엘리트부대
+	{ 40,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 3}, //야마부시텐구
+	{ 41,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 4}, //하나타카텐구
+	{ 36,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  3, 3}, //키메이마루
+	{ 42,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3,  10, 3}, //텐구부대
 	//{ 45,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+4,  10, 30}, //백랑텐구
-	{ 57,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3, 2, 25}, //야마와로 부대
+	{ 57,  YOUKAI_MOUNTAIN_LEVEL+2,  YOUKAI_MOUNTAIN_LEVEL+3, 2, 2}, //야마와로 부대
 
 	 
-	{ 40,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 15}, //야마부시텐구
-	{ 41,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 20}, //하나타카텐구
-	{ 61,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  2, 30}, //산페이파이터
-	{ 57,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 25}, //야마와로 부대
+	{ 40,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 3}, //야마부시텐구
+	{ 41,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 3}, //하나타카텐구
+	{ 61,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  2, 5}, //산페이파이터
+	{ 57,  YOUKAI_MOUNTAIN_LEVEL+3,  YOUKAI_MOUNTAIN_LEVEL+3,  5, 2}, //야마와로 부대
 
 
 	
 	//SCARLET_LEVEL
-	{ 51,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 15,  6}, //메이드요정3~4
-	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+2, 15,  16}, //홉고블린 소부대 
-	{ 49,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 메이드2기
-	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 1,  16}, //홉고블린 서기
+	{ 51,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 15,  1}, //메이드요정3~4
+	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+2, 15,  1}, //홉고블린 소부대 
+	{ 49,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  3}, //홉고블린 메이드2기
+	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 1,  4}, //홉고블린 서기
 	
-	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 소부대 
-	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 3,  16}, //홉고블린 서기
-	{ 47,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 3,  20}, //마법책
-	{ 52,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  30}, //추파카브라
-	{ 62,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  20}, //흡혈박쥐
+	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  1}, //홉고블린 소부대 
+	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 3,  4}, //홉고블린 서기
+	{ 47,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 3,  3}, //마법책
+	{ 52,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  5}, //추파카브라
+	{ 62,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3, 1,  3}, //흡혈박쥐
 	
-	{ 48,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 소부대 
-	{ 49,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 메이드2기
-	{ 50,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  16}, //홉고블린 서기
-	{ 47,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  20}, //마법책
-	{ 37,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  30}, //레밀리아 윳쿠리
-	{ 60,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  30}, //홉고블린 악마술사
+	{ 48,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  1}, //홉고블린 소부대 
+	{ 49,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  3}, //홉고블린 메이드2기
+	{ 50,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  3}, //홉고블린 서기
+	{ 47,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  3}, //마법책
+	{ 37,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  4}, //레밀리아 윳쿠리
+	{ 60,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  5}, //홉고블린 악마술사
 	
-	{ 52,  SCARLET_LEVEL+3,  SCARLET_LEVEL+3, 5,  30}, //추파카브라
+	{ 52,  SCARLET_LEVEL+3,  SCARLET_LEVEL+3, 5,  5}, //추파카브라
 	
-	{ 47,  SCARLET_LIBRARY_LEVEL,  SCARLET_LIBRARY_LEVEL, 5,  20}, //도서관용 마법책
+	{ 47,  SCARLET_LIBRARY_LEVEL,  SCARLET_LIBRARY_LEVEL, 5,  3}, //도서관용 마법책
 	
 
 	//영원정
-	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  30}, //토끼들
+	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  3}, //토끼들
 
 
 
 	//윳쿠리굴
 	{ 2,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2,  1}, //레이무윳쿠리
-	{ 35, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2, 2}, //마리사윳쿠리
-	{ 36, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //키메이마루
-	{ 37, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //레밀리아윳쿠리
-	{ 97, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //윳쿠리앨리스
-	{ 98, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 2}, //윳쿠리요우무
+	{ 35, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2, 1}, //마리사윳쿠리
+	{ 36, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 3}, //키메이마루
+	{ 37, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 3}, //레밀리아윳쿠리
+	{ 97, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 4}, //윳쿠리앨리스
+	{ 98, YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL, 10, 4}, //윳쿠리요우무
 
 
 
 	//짐승길
-	{ 68,  DEPTH_LEVEL,  DEPTH_LEVEL+2, 10,  28}, //요정대부대
-	{ 64,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  25}, //동물3형제
-	{ 86,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  20}, //너구리
-	{ 83,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //설녀
-	{ 84,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //나마즈
-	{ 87,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  25}, //제등요괴
-	{ 34,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  30}, //오니
-	{ 43,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  30}, //아오오니
-	{ 56,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  35}, //용
-	{ 59,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  35}, //벤토라
+	{ 68,  DEPTH_LEVEL,  DEPTH_LEVEL+2, 10,  1}, //요정대부대
+	{ 64,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  2}, //동물3형제
+	{ 86,  DEPTH_LEVEL,  DEPTH_LEVEL+3, 10,  2}, //너구리
+	{ 83,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //설녀
+	{ 84,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //나마즈
+	{ 87,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //제등요괴
+	{ 34,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //오니
+	{ 43,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //아오오니
+	{ 56,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //용
+	{ 59,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //벤토라
 
 	
 	//꿈의 세계
-	{ 73,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //맥
-	{ 74,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //악몽
-	{ 75,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //광기
-	{ 59,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //벤토라
-	{ 69,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //달토끼 지원병
-	{ 70,  DREAM_LEVEL,  DREAM_LEVEL, 10,  35}, //달토끼 척후병
+	{ 73,  DREAM_LEVEL,  DREAM_LEVEL, 10,  4}, //맥
+	{ 74,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //악몽
+	{ 75,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //광기
+	{ 59,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //벤토라
+	{ 69,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //달토끼 지원병
+	{ 70,  DREAM_LEVEL,  DREAM_LEVEL, 10,  2}, //달토끼 척후병
 	//아래는 희귀한 확률로 나오는
-	{ 89,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //마족들
-	{ 68,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //요정들
-	{ 83,  DREAM_LEVEL,  DREAM_LEVEL, 2,  35}, //설녀
-	{ 95,  DREAM_LEVEL,  DREAM_LEVEL, 2,  30}, //토끼들
-	{ 42,  DREAM_LEVEL,  DREAM_LEVEL, 2, 30}, //텐구부대
+	{ 89,  DREAM_LEVEL,  DREAM_LEVEL, 2,  3}, //마족들
+	{ 68,  DREAM_LEVEL,  DREAM_LEVEL, 2,  2}, //요정들
+	{ 83,  DREAM_LEVEL,  DREAM_LEVEL, 2,  3}, //설녀
+	{ 95,  DREAM_LEVEL,  DREAM_LEVEL, 2,  2}, //토끼들
+	{ 42,  DREAM_LEVEL,  DREAM_LEVEL, 2, 2}, //텐구부대
 
 
 
 
 	//달의 세계
-	{ 75,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //광기
-	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 지원병
-	{ 70,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 척후병
-	{ 72,  MOON_LEVEL,  MOON_LEVEL, 10,  35}, //달토끼 엘리트
+	{ 75,  MOON_LEVEL,  MOON_LEVEL, 10,  3}, //광기
+	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  2}, //달토끼 지원병
+	{ 70,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //달토끼 척후병
+	{ 72,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //달토끼 엘리트
 	
 	//지저
-	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  30}, //제등요괴
-	{ 68,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  28}, //요정대부대
-	{ 62,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  20}, //흡혈박쥐
-	{ 60,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+4, 2,  30}, //홉고블린 악마술사
-	{ 76,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //원령때
-	{ 78,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //츠치구모
-	{ 34,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //오니
+	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  3}, //제등요괴
+	{ 68,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  1}, //요정대부대
+	{ 62,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  2}, //흡혈박쥐
+	{ 60,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+4, 2,  3}, //홉고블린 악마술사
+	{ 76,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  1}, //원령때
+	{ 78,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  3}, //츠치구모
+	{ 34,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  3}, //오니
 
-	{ 79,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //핏빛원령
-	{ 43,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  30}, //아오오니
-	{ 32,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL+4, 7,  30}, //고양이
+	{ 79,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  4}, //핏빛원령
+	{ 43,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  4}, //아오오니
+	{ 32,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL+4, 7,  2}, //고양이
 
 	{ 80,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥개
 
-	{ 77,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 3,  30}, //화차
-	{ 34,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //오니
-	{ 43,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //아오오니
+	{ 77,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 3,  5}, //화차
+	{ 34,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  4}, //오니
+	{ 43,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  4}, //아오오니
 
-	{ 85,  SUBTERRANEAN_LEVEL+4,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥까마귀	
+	{ 85,  SUBTERRANEAN_LEVEL+4,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  1}, //지옥까마귀	
 	
-	{ 76,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  30}, //원령때
-	{ 85,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥까마귀
-	{ 77,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //화차
+	{ 76,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  1}, //원령때
+	{ 85,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  1}, //지옥까마귀
+	{ 77,  SUBTERRANEAN_LEVEL_LAST_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  5}, //화차
 	
 	//판데모니엄
-	{ 89,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 50,  35}, //3티어마족+자코
-	{ 90,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 6,  35}, //유겐마간
-	{ 91,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 7,  35}, //유키
-	{ 92,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 7,  35}, //마이
-	{ 93,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 6,  35}, //사리엘
-	{ 74,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 4,  35}, //악몽
-	{ 79,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 4,  35}, //피빛원령
+	{ 89,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 50,  1}, //3티어마족+자코
+	{ 90,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 6,  1}, //유겐마간
+	{ 91,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 7,  4}, //유키
+	{ 92,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 7,  4}, //마이
+	{ 93,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 6,  1}, //사리엘
+	{ 74,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 4,  3}, //악몽
+	{ 79,  PANDEMONIUM_LEVEL,  PANDEMONIUM_LEVEL, 4,  3}, //피빛원령
 	
 
 	//법계 (법계는 무슨 차이가 있지?
-	{ 89,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 60,  35}, //3티어마족+자코
-	{ 93,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  35}, //사리엘
-	{ 59,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  35}, //벤토라
-	{ 74,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  35}, //악몽
-	{ 79,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  35}, //피빛원령
+	{ 89,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 60,  1}, //3티어마족+자코
+	{ 93,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  1}, //사리엘
+	{ 59,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 10,  2}, //벤토라
+	{ 74,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  3}, //악몽
+	{ 79,  PANDEMONIUM_LEVEL+1,  PANDEMONIUM_LEVEL+1, 5,  3}, //피빛원령
 
 	//빙설세계	
-	{ 99,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 70,  35}, //루이즈의 비중이 높아지는
-	{ 92,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 15,  35}, //마이
-	{ 83,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 6,  35}, //설녀
-	{ 74,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 3,  35}, //악몽
+	{ 99,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 70,  1}, //루이즈의 비중이 높아지는
+	{ 92,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 15,  4}, //마이
+	{ 83,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 6,  3}, //설녀
+	{ 74,  PANDEMONIUM_LEVEL+2,  PANDEMONIUM_LEVEL+2, 3,  3}, //악몽
 
 	//판데모니엄
-	{ 89,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 60,  35}, //3티어마족+자코
-	{ 91,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 5,  35}, //유키
-	{ 92,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 15,  35}, //마이
+	{ 89,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 60,  1}, //3티어마족+자코
+	{ 91,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 5,  4}, //유키
+	{ 92,  PANDEMONIUM_LEVEL+3,  PANDEMONIUM_LEVEL+3, 15,  4}, //마이
 
 	//하쿠레이 신사
-	{ 56,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //용
-	{ 81,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //플라워 전차
-	{ 96,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  30}, //오니패거리
-	{ 86,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 5,  20}, //너구리
-	//{ 90,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 3,  35}, //유겐마간
-	{ 83,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  35}, //설녀
-	{ 77,  HAKUREI_LEVEL+2,  HAKUREI_LAST_LEVEL, 10,  35}, //화차
-	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  35}, //이블 전차
+	{ 56,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  3}, //용
+	{ 81,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  3}, //플라워 전차
+	{ 96,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 10,  4}, //오니패거리
+	{ 86,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL, 5,  2}, //너구리
+	//{ 90,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 3,  1}, //유겐마간
+	{ 83,  HAKUREI_LEVEL+1,  HAKUREI_LAST_LEVEL, 5,  3}, //설녀
+	{ 77,  HAKUREI_LEVEL+2,  HAKUREI_LAST_LEVEL, 10,  4}, //화차
+	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  5}, //이블 전차
 	//{ 88, HAKUREI_LAST_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //음양옥
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
@@ -511,7 +511,7 @@ void create_mon(int floor, int num_)
 		{
 			if(rand_<=(*it)->percent)
 			{
-				create_id_to_mon((*it)->id, floor);
+				create_id_to_mon((*it)->id, floor, (*it)->strong);
 				break;
 			}
 			else
@@ -548,442 +548,442 @@ void Set_X_Y(int &x_, int x, int rand_x, int &y_, int y, int rand_y)
 
 
 
-void create_id_to_mon(int id, int level)
+void create_id_to_mon(int id, int level, int strong)
 {
-	vector<monster_index> index;
+	vector<pair<monster_index, int>> index;
 
 	switch(id)
 	{
 	case 0:
-		index.push_back(MON_MOOK);
+		index.push_back(pair<monster_index, int>(MON_MOOK, strong));
 		break;
 	case 1:
-		index.push_back(MON_RAT);
+		index.push_back(pair<monster_index, int>(MON_RAT, strong));
 		break;
 	case 2:
-		index.push_back(MON_REIMUYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_REIMUYUKKURI, strong));
 		break;
 	case 3:
-		index.push_back(MON_FAIRY_GREEN);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
 		break;
 	case 4:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_CROW);
+			index.push_back(pair<monster_index, int>(MON_CROW, strong));
 		break;
 	case 5:
-		index.push_back(MON_FAIRY_RED);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED, strong));
 		break;
 	case 6:
-		index.push_back(MON_FAIRY_BLUE);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong));
 		break;
 	case 7:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_FAIRY_GREEN);
+			index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
 		break;
 	case 8:
-		index.push_back(MON_SPIDER);
+		index.push_back(pair<monster_index, int>(MON_SPIDER, strong));
 		break;
 	case 9:
-		index.push_back(MON_SNAKE);
+		index.push_back(pair<monster_index, int>(MON_SNAKE, strong));
 		break;
 	case 10:
-		index.push_back(MON_CRANE);
+		index.push_back(pair<monster_index, int>(MON_CRANE, strong));
 		break;
 	case 11:
-		index.push_back(MON_FAIRY_BLUE);
-		index.push_back(MON_FAIRY_GREEN);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong+1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
 		break;
 	case 12:
-		index.push_back(MON_FAIRY_RED);
-		index.push_back(MON_FAIRY_GREEN);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
 		break;
 	case 13:
-		//index.push_back(MON_MOOK);
-		//index.push_back(MON_MOOK);
-		//index.push_back(MON_CROW);
-		//index.push_back(MON_CROW);
-		//index.push_back(MON_CROW);
-		//index.push_back(MON_CROW);
+		//index.push_back(pair<monster_index, int>(MON_MOOK, strong));
+		//index.push_back(pair<monster_index, int>(MON_MOOK, strong));
+		//index.push_back(pair<monster_index, int>(MON_CROW, strong));
+		//index.push_back(pair<monster_index, int>(MON_CROW, strong));
+		//index.push_back(pair<monster_index, int>(MON_CROW, strong));
+		//index.push_back(pair<monster_index, int>(MON_CROW, strong));
 		break;
 	case 14:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA);
+			index.push_back(pair<monster_index, int>(MON_KATPA, strong));
 		break;
 	case 15:
-		index.push_back(MON_FAIRY_RED);
-		index.push_back(MON_FAIRY_BLUE);
-		index.push_back(MON_FAIRY_GREEN);
-		index.push_back(MON_FAIRY_GREEN);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_GREEN, strong));
 		break;
 	case 16:
-		index.push_back(MON_FAIRY_RED);
-		index.push_back(MON_FAIRY_RED);
-		index.push_back(MON_FAIRY_BLUE);
-		index.push_back(MON_FAIRY_BLUE);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong));
 		break;
 	case 17:
 		//비어있어
-		/*index.push_back(MON_KATPA);
-		index.push_back(MON_KATPA);*/
-		index.push_back(MON_KATPA_SPEAR);
+		/*index.push_back(pair<monster_index, int>(MON_KATPA, strong));
+		index.push_back(pair<monster_index, int>(MON_KATPA, strong));*/
+		index.push_back(pair<monster_index, int>(MON_KATPA_SPEAR, strong));
 		break;
 	case 18:
 		for(int rand_ =rand_int(3,4), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA);
+			index.push_back(pair<monster_index, int>(MON_KATPA, strong));
 		break;
 	case 19:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA);
-		index.push_back(MON_KATPA_WATER_WIZARD);
+			index.push_back(pair<monster_index, int>(MON_KATPA, strong));
+		index.push_back(pair<monster_index, int>(MON_KATPA_WATER_WIZARD, strong + 2));
 		/*for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA);
+			index.push_back(pair<monster_index, int>(MON_KATPA, strong));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back((monster_index)rand_int(MON_FAIRY_GREEN_WARRIOR,MON_FAIRY_RED_COMMANDER));*/
+			index.push_back(pair<monster_index, int>((monster_index)rand_int(MON_FAIRY_GREEN_WARRIOR,MON_FAIRY_RED_COMMANDER), strong));*/
 		
 		break;
 	case 20:
-		index.push_back(MON_SPIDER);
-		index.push_back(MON_SNAKE);
+		index.push_back(pair<monster_index, int>(MON_SPIDER, strong+1));
+		index.push_back(pair<monster_index, int>(MON_SNAKE, strong));
 		break;
 	case 21:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+			index.push_back(pair<monster_index, int>(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED, strong));
 		for(int rand_ = randA(3)?1:2, i=0;i<rand_;i++)
-			index.push_back(randA(2)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
+			index.push_back(pair<monster_index, int>(randA(2)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN, strong + 2));
 		break;
 	case 22:
 		for(int rand_ =rand_int(0,2), i=0;i<rand_;i++)
-			index.push_back(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+			index.push_back(pair<monster_index, int>(randA(2)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED, strong));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
-		index.push_back(MON_FAIRY_RED_COMMANDER);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_RED_COMMANDER, strong + 2));
 		break;
 	case 23:
-		index.push_back(MON_FIREFLY);
+		index.push_back(pair<monster_index, int>(MON_FIREFLY, strong));
 		break;
 	case 24:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_HUMAM_MAN);
+			index.push_back(pair<monster_index, int>(MON_HUMAM_MAN, strong));
 		break;
 	case 25:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(MON_HUMAM_MAN);
+			index.push_back(pair<monster_index, int>(MON_HUMAM_MAN, strong));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_HUMAM_PRIEST:MON_HUMAM_YINYANG);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_HUMAM_PRIEST:MON_HUMAM_YINYANG, strong+2));
 		if(randA(4)<1)
-			index.push_back(MON_HUMAM_SAMURI);
+			index.push_back(pair<monster_index, int>(MON_HUMAM_SAMURI, strong+3));
 		break;
 	case 26:
 		for(int rand_ = rand_int(0,2), i=0;i<rand_;i++)
-			index.push_back(MON_HUMAM_MAN);
-		index.push_back(MON_HUMAM_PRIEST);
-		index.push_back(MON_HUMAM_YINYANG);
-		index.push_back(randA(1)?MON_HUMAM_PRIEST:MON_HUMAM_YINYANG);
-		index.push_back(MON_HUMAM_SAMURI);
+			index.push_back(pair<monster_index, int>(MON_HUMAM_MAN, strong));
+		index.push_back(pair<monster_index, int>(MON_HUMAM_PRIEST, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_HUMAM_YINYANG, strong + 1));
+		index.push_back(pair<monster_index, int>(randA(1)?MON_HUMAM_PRIEST:MON_HUMAM_YINYANG, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_HUMAM_SAMURI, strong + 2));
 		break;
 	case 27:
-		index.push_back(MON_BAKEKASA);
+		index.push_back(pair<monster_index, int>(MON_BAKEKASA, strong));
 		break;
 	case 28:
-		index.push_back(MON_GREEN_MOOK);
+		index.push_back(pair<monster_index, int>(MON_GREEN_MOOK, strong));
 		break;
 	case 29:
-		index.push_back(MON_ORANGE_MOOK);
+		index.push_back(pair<monster_index, int>(MON_ORANGE_MOOK, strong));
 		break;
 	case 30:
-		index.push_back(MON_GRAY_MOOK);
+		index.push_back(pair<monster_index, int>(MON_GRAY_MOOK, strong));
 		break;
 	case 31:
-		index.push_back(MON_FROG);
+		index.push_back(pair<monster_index, int>(MON_FROG, strong));
 		break;
 	case 32:
-		index.push_back(randA(2)?(randA(1)?MON_ORANGE_CAT:MON_WHITE_CAT):MON_BLACK_CAT);
+		index.push_back(pair<monster_index, int>(randA(2)?(randA(1)?MON_ORANGE_CAT:MON_WHITE_CAT):MON_BLACK_CAT, strong));
 		break;
 	case 33:
-		index.push_back(MON_CROW_TENGU);
+		index.push_back(pair<monster_index, int>(MON_CROW_TENGU, strong));
 		break;
 	case 34:
-		index.push_back(MON_ONI);
+		index.push_back(pair<monster_index, int>(MON_ONI, strong));
 		break;
 	case 35:
-		index.push_back(MON_MARISAYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_MARISAYUKKURI, strong));
 		break;
 	case 36:
-		index.push_back(MON_AYAYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_AYAYUKKURI, strong));
 		break;
 	case 37:
-		index.push_back(MON_REMILIAYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_REMILIAYUKKURI, strong));
 		break;
 	case 38:
-		index.push_back(MON_YAMABIKO);
+		index.push_back(pair<monster_index, int>(MON_YAMABIKO, strong));
 		break;
 	case 39:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA);
-		index.push_back(MON_KATPA_WATER_WIZARD);
-		index.push_back(MON_KATPA_SPEAR);
+			index.push_back(pair<monster_index, int>(MON_KATPA, strong));
+		index.push_back(pair<monster_index, int>(MON_KATPA_WATER_WIZARD, strong + 2));
+		index.push_back(pair<monster_index, int>(MON_KATPA_SPEAR, strong + 2));
 		break;
 	case 40:
-		index.push_back(MON_YAMABUSH_TENGU);
+		index.push_back(pair<monster_index, int>(MON_YAMABUSH_TENGU, strong));
 		break;
 	case 41:
-		index.push_back(MON_HANATACA_TENGU);
+		index.push_back(pair<monster_index, int>(MON_HANATACA_TENGU, strong));
 		break;
 	case 42:
 		for(int rand_ =rand_int(0,2), i=0;i<rand_;i++)
-			index.push_back(MON_CROW);
+			index.push_back(pair<monster_index, int>(MON_CROW, strong));
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(MON_CROW_TENGU);
-		index.push_back(MON_YAMABUSH_TENGU);
+			index.push_back(pair<monster_index, int>(MON_CROW_TENGU, strong + 2));
+		index.push_back(pair<monster_index, int>(MON_YAMABUSH_TENGU, strong + 2));
 		break;
 	case 43:
-		index.push_back(MON_BLUE_ONI);
+		index.push_back(pair<monster_index, int>(MON_BLUE_ONI, strong));
 		break;
 	case 44:
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA_SPEAR);
+			index.push_back(pair<monster_index, int>(MON_KATPA_SPEAR, strong));
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(MON_KATPA_WATER_WIZARD);
+			index.push_back(pair<monster_index, int>(MON_KATPA_WATER_WIZARD, strong));
 		break;
 	case 45:
-		index.push_back(MON_WOLF_TENGU);
+		index.push_back(pair<monster_index, int>(MON_WOLF_TENGU, strong));
 		break;
 		
 	case 46:	
 		for(int rand_ =rand_int(1,4), i=0;i<rand_;i++)
-			index.push_back(MON_ZOMBIE_FAIRY);
+			index.push_back(pair<monster_index, int>(MON_ZOMBIE_FAIRY, strong));
 		break;			
 	case 47:
 		//마법책은 마법을 배우고있어야하므로 조심
-		index.push_back(MON_MAGIC_BOOK);
+		index.push_back(pair<monster_index, int>(MON_MAGIC_BOOK, strong));
 		break;		
 	case 48:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_HOBGOBRIN);
+			index.push_back(pair<monster_index, int>(MON_HOBGOBRIN, strong));
 		if(randA(2)<1)
-			index.push_back(MON_HOBGOBRIN_MAID);
+			index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_MAID, strong + 2));
 		if(randA(4)<1)
-			index.push_back(MON_HOBGOBRIN_LIBRARIAN);
+			index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_LIBRARIAN, strong + 3));
 		break;		
 	case 49:
-		index.push_back(MON_HOBGOBRIN_MAID);
-		index.push_back(MON_HOBGOBRIN_MAID);
+		index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_MAID, strong));
+		index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_MAID, strong));
 		break;	
 	case 50:
-		index.push_back(MON_HOBGOBRIN_LIBRARIAN);
+		index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_LIBRARIAN, strong));
 		break;
 	case 51:	
 		for(int rand_ =rand_int(3,5), i=0;i<rand_;i++)
-			index.push_back(MON_MAID_FAIRY);
+			index.push_back(pair<monster_index, int>(MON_MAID_FAIRY, strong));
 		break;
 	case 52:
-		index.push_back(MON_CHUPARCABRA);
+		index.push_back(pair<monster_index, int>(MON_CHUPARCABRA, strong));
 		break;
 	case 53:
-		index.push_back(MON_EAGLE);
+		index.push_back(pair<monster_index, int>(MON_EAGLE, strong));
 		break;
 	case 54:
-		index.push_back(MON_TIGER);
+		index.push_back(pair<monster_index, int>(MON_TIGER, strong));
 		break;
 	case 55:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_RAIJUU);
+			index.push_back(pair<monster_index, int>(MON_RAIJUU, strong));
 		break;
 	case 56:
-		index.push_back(MON_DRAGON_BABY);
+		index.push_back(pair<monster_index, int>(MON_DRAGON_BABY, strong));
 		break;
 	case 57:
 		for(int rand_ =rand_int(1,5), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_YAMAWARO_NINJA:MON_YAMAWARO_WAWRRIOR);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_YAMAWARO_NINJA:MON_YAMAWARO_WAWRRIOR, strong));
 		if(randA(3)<1)
-			index.push_back(MON_YAMAWARO_FLAG);
+			index.push_back(pair<monster_index, int>(MON_YAMAWARO_FLAG, strong));
 		break;
 	case 58:
-		index.push_back(MON_RED_UFO);
+		index.push_back(pair<monster_index, int>(MON_RED_UFO, strong));
 		break;
 	case 59:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-		index.push_back(randA(2)?(randA(1)?MON_RED_UFO:MON_BLUE_UFO):MON_GREEN_UFO);
+		index.push_back(pair<monster_index, int>(randA(2)?(randA(1)?MON_RED_UFO:MON_BLUE_UFO):MON_GREEN_UFO, strong));
 		break;
 	case 60:
-		index.push_back(MON_HOBGOBRIN_TEMP);
+		index.push_back(pair<monster_index, int>(MON_HOBGOBRIN_TEMP, strong));
 		break;
 	case 61:
-		index.push_back(MON_SANPEI_FIGHTER);
+		index.push_back(pair<monster_index, int>(MON_SANPEI_FIGHTER, strong));
 		break;
 	case 62:
 		for(int rand_ =rand_int(3,4), i=0;i<rand_;i++)
-			index.push_back(MON_VAMPIER_BAT);
+			index.push_back(pair<monster_index, int>(MON_VAMPIER_BAT, strong));
 		break;
 	case 63:
-		index.push_back(MON_DEAGAMA);
+		index.push_back(pair<monster_index, int>(MON_DEAGAMA, strong));
 		break;	
 	case 64:
-		index.push_back(MON_EAGLE);
+		index.push_back(pair<monster_index, int>(MON_EAGLE, strong));
 		for(int rand_ =rand_int(0,1), i=0;i<rand_;i++)
-			index.push_back(MON_TIGER);
+			index.push_back(pair<monster_index, int>(MON_TIGER, strong));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_RAIJUU);
+			index.push_back(pair<monster_index, int>(MON_RAIJUU, strong));
 		break;
 	case 65:		
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED, strong));
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER));
-		index.push_back(MON_FAIRY_HERO);
+			index.push_back(pair<monster_index, int>(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER), strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_HERO, strong + 2));
 		break;
 	case 66:
-		index.push_back(MON_FAIRY_SOCERER);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_SOCERER, strong));
 		break;	
 	case 67:		
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED, strong));
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN);
-		index.push_back(MON_FAIRY_SUN_FLOWER);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_FAIRY_GREEN_WARRIOR:MON_FAIRY_BLUE_MAGICIAN, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_SUN_FLOWER, strong + 2));
 		break;
 	case 68:
-		index.push_back(MON_FAIRY_HERO);
-		index.push_back(MON_FAIRY_SOCERER);
-		index.push_back(MON_FAIRY_SUN_FLOWER);
+		index.push_back(pair<monster_index, int>(MON_FAIRY_HERO, strong + 2));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_SOCERER, strong + 1));
+		index.push_back(pair<monster_index, int>(MON_FAIRY_SUN_FLOWER, strong + 1));
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_FAIRY_GREEN:randA(1)?MON_FAIRY_BLUE:MON_FAIRY_RED, strong));
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER));
+			index.push_back(pair<monster_index, int>(randA(2)==0?MON_FAIRY_GREEN_WARRIOR:(randA(1)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_RED_COMMANDER), strong));
 		break;	
 	case 69:
-		index.push_back(MON_MOON_RABIT_SUPPORT);
+		index.push_back(pair<monster_index, int>(MON_MOON_RABIT_SUPPORT, strong));
 		break;
 	case 70:
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_MOON_RABIT_ATTACK);
+			index.push_back(pair<monster_index, int>(MON_MOON_RABIT_ATTACK, strong));
 		break;
 	case 71:
-		index.push_back(MON_MOON_RABIT_ELITE);
+		index.push_back(pair<monster_index, int>(MON_MOON_RABIT_ELITE, strong));
 		break;		
 	case 72:
 		if(randA(3)==0)
-			index.push_back(MON_MOON_RABIT_SUPPORT);
+			index.push_back(pair<monster_index, int>(MON_MOON_RABIT_SUPPORT, strong));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(MON_MOON_RABIT_ATTACK);
+			index.push_back(pair<monster_index, int>(MON_MOON_RABIT_ATTACK, strong));
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(MON_MOON_RABIT_ELITE);
+			index.push_back(pair<monster_index, int>(MON_MOON_RABIT_ELITE, strong + 2));
 		break;	
 	case 73:
-		index.push_back(MON_MAC);
+		index.push_back(pair<monster_index, int>(MON_MAC, strong));
 		break;	
 	case 74:
-		index.push_back(MON_NIGHTMARE);
+		index.push_back(pair<monster_index, int>(MON_NIGHTMARE, strong));
 		break;	
 	case 75:
-		index.push_back(MON_LUNATIC);
+		index.push_back(pair<monster_index, int>(MON_LUNATIC, strong));
 		break;	
 	case 76:
 		for(int rand_ =rand_int(3,6), i=0;i<rand_;i++)
-			index.push_back(MON_HAUNT);
+			index.push_back(pair<monster_index, int>(MON_HAUNT, strong));
 		break;
 	case 77:
-		index.push_back(MON_FIRE_CAR);
+		index.push_back(pair<monster_index, int>(MON_FIRE_CAR, strong));
 		break;	
 	case 78:
-		index.push_back(MON_HELL_SPIDER);
+		index.push_back(pair<monster_index, int>(MON_HELL_SPIDER, strong));
 		break;	
 	case 79:
-		index.push_back(MON_BLOOD_HAUNT);
+		index.push_back(pair<monster_index, int>(MON_BLOOD_HAUNT, strong));
 		break;	
 	case 80:
-		index.push_back(MON_HELL_HOUND);
+		index.push_back(pair<monster_index, int>(MON_HELL_HOUND, strong));
 		if(randA(4)==0)
 		{
 			for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-				index.push_back(MON_HELL_HOUND);
+				index.push_back(pair<monster_index, int>(MON_HELL_HOUND, strong));
 		}
 		break;	
 	case 81:
-		index.push_back(MON_FLOWER_TANK);
+		index.push_back(pair<monster_index, int>(MON_FLOWER_TANK, strong));
 		break;	
 	case 82:
-		index.push_back(MON_EVIL_EYE_TANK);
+		index.push_back(pair<monster_index, int>(MON_EVIL_EYE_TANK, strong));
 		break;	
 	case 83:
-		index.push_back(MON_SNOW_GIRL);
+		index.push_back(pair<monster_index, int>(MON_SNOW_GIRL, strong));
 		break;	
 	case 84:
-		index.push_back(MON_NAMAZ);
+		index.push_back(pair<monster_index, int>(MON_NAMAZ, strong));
 		break;	
 	case 85:
 		for(int rand_ =rand_int(3,6), i=0;i<rand_;i++)
-			index.push_back(MON_HELL_CROW);
+			index.push_back(pair<monster_index, int>(MON_HELL_CROW, strong));
 		break;	
 	case 86:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(MON_RACCON);
+			index.push_back(pair<monster_index, int>(MON_RACCON, strong));
 		break;	
 	case 87:
-		index.push_back(MON_LANTERN_YOUKAI);
+		index.push_back(pair<monster_index, int>(MON_LANTERN_YOUKAI, strong));
 		break;
 	case 88:
-		index.push_back(MON_YINYAN);
+		index.push_back(pair<monster_index, int>(MON_YINYAN, strong));
 		break;
 	case 89:
 		if(randA(2)==0)
 		{
 			for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-				index.push_back(MON_LITTLE_IMP);
+				index.push_back(pair<monster_index, int>(MON_LITTLE_IMP, strong));
 		}
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS);
+			index.push_back(pair<monster_index, int>(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS, strong + 1));
 		break;
 	case 90:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(MON_EVIL_EYE);
-		index.push_back(MON_YUUGENMAGAN);
+			index.push_back(pair<monster_index, int>(MON_EVIL_EYE, strong));
+		index.push_back(pair<monster_index, int>(MON_YUUGENMAGAN, strong + 4));
 		break;
 	case 91:
-		index.push_back(MON_YUKI);
+		index.push_back(pair<monster_index, int>(MON_YUKI, strong));
 		break;
 	case 92:
-		index.push_back(MON_MAI);
+		index.push_back(pair<monster_index, int>(MON_MAI, strong));
 		break;
 	case 93:
-		index.push_back(MON_SARIEL);
+		index.push_back(pair<monster_index, int>(MON_SARIEL, strong + 3));
 		for(int rand_ =rand_int(1,3), i=0;i<rand_;i++)
-			index.push_back(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS);
+			index.push_back(pair<monster_index, int>(randA(2)==0?MON_SARA:randA(1)?MON_LUIZE:MON_ELIS, strong));
 		break;
 	case 94:
-		index.push_back(MON_MUSHROOM);
+		index.push_back(pair<monster_index, int>(MON_MUSHROOM, strong));
 		break;
 	case 95:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB);
+			index.push_back(pair<monster_index, int>(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB, strong));
 		if(randA(3)==0)
 		{
-			index.push_back(MON_RABIT_SUPPORT);
+			index.push_back(pair<monster_index, int>(MON_RABIT_SUPPORT, strong));
 		}
 		break;
 	case 96:
 		for(int rand_ =rand_int(2,3), i=0;i<rand_;i++)
-			index.push_back(randA(1)?MON_ONI:MON_BLUE_ONI);
+			index.push_back(pair<monster_index, int>(randA(1)?MON_ONI:MON_BLUE_ONI, strong));
 		break;
 	case 97:
-		index.push_back(MON_ALICEYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_ALICEYUKKURI, strong));
 		break;
 	case 98:
-		index.push_back(MON_YOUMUYUKKURI);
+		index.push_back(pair<monster_index, int>(MON_YOUMUYUKKURI, strong));
 		break;
 	case 99:
 		if(randA(2)==0)
 		{
 			for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-				index.push_back(MON_LITTLE_IMP);
+				index.push_back(pair<monster_index, int>(MON_LITTLE_IMP, strong));
 		}
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
-			index.push_back(randA(4)?MON_LUIZE:randA(1)?MON_SARA:MON_ELIS);
+			index.push_back(pair<monster_index, int>(randA(4)?MON_LUIZE:randA(1)?MON_SARA:MON_ELIS, strong + 1));
 		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
-	for(vector<monster_index>::iterator it=index.begin();it!=index.end();it++)
+	for(auto it=index.begin();it!=index.end();it++)
 	{ 
 		int x_ = 0, y_ = 0;
 		Set_X_Y(x_, x, rand_x, y_, y, rand_y);
@@ -1004,8 +1004,9 @@ void create_id_to_mon(int id, int level)
 			}
 			Set_X_Y(x_, x, rand_x, y_, y, rand_y);
 		}
-		if(env[level].AddMonster((*it),0,coord_def(x_,y_)))
+		if(monster* mon_ = env[level].AddMonster((*it).first,0,coord_def(x_,y_)))
 		{
+			mon_->SetStrong(max(1,min((*it).second, 5)));
 			continue;
 		}
 		k = 0;
@@ -1390,8 +1391,9 @@ void create_id_to_unique(int id, int level)
 			continue;
 
 			
-		if(env[level].AddMonster((*it),0,coord_def(x_,y_)))
+		if(monster* mon_ = env[level].AddMonster((*it),0,coord_def(x_,y_)))
 		{
+			mon_->SetStrong(5);
 			continue;
 		}
 		k = 0;

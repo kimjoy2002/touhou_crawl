@@ -2842,7 +2842,12 @@ char* hakurei_pattern(map_dummy* map)
 	map->sp_tile_list.push_back(DG_HAKUREI_STAIR);
 	return common_enter_pattern(map);
 }
-
+char* zigurrat_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_ZIGURRAT_STAIR);
+	return common_enter_pattern(map);
+}
 
 
 char* scarlet_pattern(map_dummy* map)

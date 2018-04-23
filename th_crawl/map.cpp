@@ -13,6 +13,8 @@
 #include "event.h"
 #include "armour.h"
 #include "evoke.h"
+#include "zigurrat.h"
+
 
 
 
@@ -342,6 +344,9 @@ void map_algorithms(int num)
 		else if (num == OKINA_LEVEL)
 		{
 			map_algorithms_okina(num, DG_FLOOR, DG_METAL_WALL);
+		}
+		else if (num == ZIGURRAT_LEVEL) {
+			map_algorithms_zigurrat(num);
 		}
 		else
 		{

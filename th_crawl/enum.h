@@ -88,6 +88,8 @@ enum dungeon_level
 
 	OKINA_LEVEL,
 
+	ZIGURRAT_LEVEL,
+
 	MAXLEVEL
 
 };
@@ -255,6 +257,7 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 rese
 	DG_MOON_STAIR,
 	DG_PANDEMONIUM_STAIR,
 	DG_HAKUREI_STAIR,
+	DG_ZIGURRAT_STAIR,
 	DG_SUB_STAIR_MAX,
 	DG_RETURN_STAIR = DG_SUB_STAIR_MAX,
 	DG_TEMPLE_FIRST,

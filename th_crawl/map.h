@@ -27,6 +27,7 @@ enum sub_dungeon
 	//MOON_D,
 	PANDEMONIUM,
 	HAKUREI_D,
+	ZIGURRAT,
 	MAX_SUB_DUNGEON
 };
 enum valut_pattern
@@ -161,6 +162,7 @@ char* depth_pattern(map_dummy* map);
 char* dream_pattern(map_dummy* map);
 char* pandemonium_pattern(map_dummy* map);
 char* hakurei_pattern(map_dummy* map);
+char* zigurrat_pattern(map_dummy* map);
 
 
 

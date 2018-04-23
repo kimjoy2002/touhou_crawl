@@ -2799,6 +2799,24 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
+				else if (current_level == OKINA_LEVEL) {
+					switch (randA(0))
+					{
+					case 0:
+						sprintf(temp_speak, "%s%s외쳤다. \"문을 따라들어왔더니 이상한 곳에 왔어\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}
+					break;
+				}
+				else if (current_level == ZIGURRAT_LEVEL) {
+					switch (randA(0))
+					{
+					case 0:
+						sprintf(temp_speak, "%s%s외쳤다. \"죽을 준비는 되었어?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+						return temp_speak;
+					}
+					break;
+				}
 				else {
 					switch(randA(0))
 					{

@@ -3698,6 +3698,7 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_MIKO:
 						case DG_TEMPLE_OKINA:
 						case DG_TEMPLE_JUNKO:
+						case DG_ZIGURRAT_STAIR:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 							{								
 							case DG_TEMPLE_STAIR:									
@@ -3742,6 +3743,9 @@ interupt_type players::resetLOS(bool speak_)
 								break;	
 							case DG_HAKUREI_STAIR:
 								map_list.dungeon_enter[HAKUREI_D].detected = true;		
+								break;
+							case DG_ZIGURRAT_STAIR:
+								map_list.dungeon_enter[ZIGURRAT_LEVEL].detected = true;
 								break;
 							}
 
@@ -4635,7 +4639,7 @@ bool players::StepUpDownPiety(int level_)
 }
 bool players::PietyUpDown(int piety_, bool absolutely_)
 {
-	int prev_piety_ = piety_;
+	int prev_piety_ = piety;
 	int prev_ = pietyLevel(piety);
 	piety = absolutely_?piety_:piety_+piety;
 	if(piety<0)

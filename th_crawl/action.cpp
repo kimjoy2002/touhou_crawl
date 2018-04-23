@@ -1251,6 +1251,9 @@ bool warning(dungeon_tile_type type, bool down)
 			}
 		}
 		break;
+	case DG_ZIGURRAT_STAIR:
+		//TODO
+		break;
 	case DG_DREAM_STAIR:
 		if(down)
 		{
@@ -1309,6 +1312,7 @@ void Stair_move_all() {
 	case DG_MOON_STAIR:
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
+	case DG_ZIGURRAT_STAIR:
 		Stair_move(true);
 		break;
 	case DG_UP_STAIR:
@@ -1476,7 +1480,10 @@ void Stair_move(bool down)
 							}
 						}
 					}
-					break;			
+					break;
+				case DG_ZIGURRAT_STAIR:
+					next_ = ZIGURRAT_LEVEL;
+					break;
 				case DG_HAKUREI_STAIR:
 					next_ = HAKUREI_LEVEL;
 					break;			
@@ -1672,6 +1679,12 @@ void Stair_move(bool down)
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[HAKUREI_D].pos;
 				break;
+			case ZIGURRAT_LEVEL:
+				floor_return = map_list.dungeon_enter[ZIGURRAT].floor;
+				env[floor_return].MakeMap(true);
+				pos_return = map_list.dungeon_enter[ZIGURRAT].pos;
+				break;
+
 			}
 			if(current_level>=SUBTERRANEAN_LEVEL && current_level<=SUBTERRANEAN_LEVEL_LAST_LEVEL)
 			{

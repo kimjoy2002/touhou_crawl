@@ -49,6 +49,7 @@ MapNode mapNode_moon("달의세계", MOON_LEVEL, MAX_MOON_LEVEL);
 MapNode mapNode_pande("마계", PANDEMONIUM_LEVEL, MAX_PANDEMONIUM_LEVEL);
 MapNode mapNode_hell("지저", SUBTERRANEAN_LEVEL, MAX_SUBTERRANEAN_LEVEL);
 MapNode mapNode_haku("하쿠레이신사", HAKUREI_LEVEL, MAX_HAKUREI_LEVEL);
+MapNode mapNode_zigurrat("꿈의세계 루나틱", ZIGURRAT_LEVEL, 1);
 
 
 MapNode::MapNode(const char* name_, int map_id_, int max_level_):
@@ -109,6 +110,7 @@ void MapNode::initMapNode()
 	mapNode_depth.addNode(&mapNode_pande, PANDEMONIUM);
 	mapNode_depth.addNode(&mapNode_hell, SUBTERRANEAN);
 	mapNode_depth.addNode(&mapNode_haku, HAKUREI_D);
+	mapNode_depth.addNode(&mapNode_zigurrat, ZIGURRAT);
 	mapNode_normal.addStair(&mapNode_moon, DREAM_D); //되돌아오는 계단
 
 	//mapNode_dream.addNode(&mapNode_normal);
@@ -123,6 +125,9 @@ void MapNode::initMapNode()
 	mapNode_hell.addNode(&mapNode_depth, -1); //돌아옴
 
 	mapNode_haku.addNode(&mapNode_depth, -1); //돌아옴
+
+	mapNode_zigurrat.addNode(&mapNode_depth, -1); //돌아옴
+	
 }
 
 
@@ -166,6 +171,8 @@ MapNode* MapNode::getNode(int level_)
 		return &mapNode_pande;
 	else if (level_ >= HAKUREI_LEVEL && level_ <= HAKUREI_LAST_LEVEL)
 		return &mapNode_haku;
+	else if (level_ == ZIGURRAT_LEVEL)
+		return &mapNode_zigurrat;
 	else
 		return NULL;
 }

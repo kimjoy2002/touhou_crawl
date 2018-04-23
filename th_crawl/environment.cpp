@@ -263,6 +263,7 @@ bool environment::MakeMap(bool return_)
 		case PANDEMONIUM_LEVEL+3:
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
+		case ZIGURRAT_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"던전 진행: %s에 들어섰다.",CurrentLevelString(floor));
@@ -437,9 +438,12 @@ bool environment::magicmapping(int x_, int y_)
 		break;
 	case DG_PANDEMONIUM_STAIR:
 		map_list.dungeon_enter[PANDEMONIUM].detected = true;		
-		break;	
+		break;
 	case DG_HAKUREI_STAIR:
 		map_list.dungeon_enter[HAKUREI_D].detected = true;		
+		break;
+	case DG_ZIGURRAT_STAIR:
+		map_list.dungeon_enter[ZIGURRAT].detected = true;
 		break;
 	}
 
@@ -487,6 +491,7 @@ stair_kind environment::getStairKind(int x_, int y_)
 	case DG_MOON_STAIR:
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
+	case DG_ZIGURRAT_STAIR:
 		return STAIR_KIND_DOWN_SPECIAL;
 	case DG_UP_STAIR:
 		return STAIR_KIND_UP_BASE;
@@ -536,6 +541,8 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_MOON_STAIR:
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
+		return '>';
+	case DG_ZIGURRAT_STAIR:
 		return '>';
 	case DG_RETURN_STAIR:
 		return '<';
@@ -1269,6 +1276,10 @@ void environment::enterBgm(boolean first_)
 		StopCurrentBGM("hakurei");
 		PlayBGM("hakurei");
 		break;
+	case ZIGURRAT_LEVEL:
+		StopCurrentBGM("dream");
+		PlayBGM("dream");
+		break;
 	}
 }
 void environment::playBgm() {
@@ -1316,6 +1327,8 @@ void environment::playBgm() {
 		PlayBGM("pandemonium");
 	else if (floor >= HAKUREI_LEVEL && floor <= HAKUREI_LAST_LEVEL)
 		PlayBGM("hakurei");
+	else if(floor == ZIGURRAT_LEVEL)
+		PlayBGM("dream");
 	else if (floor == OKINA_LEVEL) {
 		if (you.god_value[GT_OKINA][0] != OKINA_LEVEL
 			&& you.god_value[GT_OKINA][0] >= 0 &&
@@ -2363,6 +2376,8 @@ char* CurrentLevelString(int level)
 		sprintf(temp,"하쿠레이 %d층", level_+1-HAKUREI_LEVEL);
 	else if (level_ == OKINA_LEVEL)
 		sprintf(temp, "문 뒤의 세계");
+	else if (level_ == ZIGURRAT_LEVEL)
+		sprintf(temp, "꿈의 세계 루나틱");
 	else
 		sprintf(temp,"알수없는 층");
 

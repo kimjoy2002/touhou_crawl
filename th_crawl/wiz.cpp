@@ -402,6 +402,9 @@ void wiz_mode()
 			case 'Z':
 				next_ = HAKUREI_LAST_LEVEL;
 				break;
+			case '!':
+				next_ = ZIGURRAT_LEVEL;
+				break;
 			default:
 				printlog(" √Îº“", true, false, false, CL_help);
 				return;

@@ -86,7 +86,6 @@ public:
 	int s_changed; //둔갑시간. 시간이 지나면 너구리로 돌아온다.
 	int s_invincibility;
 	int debuf_boost;
-
 	int summon_time;
 	parent_type summon_parent;
 

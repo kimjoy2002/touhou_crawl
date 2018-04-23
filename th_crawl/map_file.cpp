@@ -33,7 +33,8 @@ bool environment::isFirstFloor(int level_)
 		level_ == MOON_LEVEL ||
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)||
 		level_ == HAKUREI_LEVEL ||
-		level_ == OKINA_LEVEL
+		level_ == OKINA_LEVEL ||
+		level_ == ZIGURRAT_LEVEL
 		) 
 		return true;
 	return false;
@@ -115,6 +116,7 @@ void initMap()
 	map_list.dungeon_enter[DREAM_D].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 	//map_list.dungeon_enter[MOON_D].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[PANDEMONIUM].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
+	map_list.dungeon_enter[ZIGURRAT].set(false, 0, 0, DEPTH_LEVEL + rand_int(2, MAX_DEPTH_LEVEL));
 	map_list.dungeon_enter[HAKUREI_D].set(false,0,0,DEPTH_LAST_LEVEL);
 
 	map_list.god_num = 10;
@@ -750,6 +752,10 @@ void map_dummy::patternSet()
 	else if(pattern == 100+HAKUREI_D) //ÇÏÄí·¹ÀÌ
 	{
 		PixedMap(this, hakurei_pattern(this));
+	}
+	else if (pattern == 100 + ZIGURRAT) //ÇÏÄí·¹ÀÌ
+	{
+		PixedMap(this, zigurrat_pattern(this));
 	}
 	
 	

@@ -43,7 +43,11 @@ bool seija_gift()
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
 			GetGodAbility(level_, false);
 		you.Ability(SKL_ABANDON_GOD,true,true);
-		you.god = GT_NONE;	
+		you.god = GT_NONE;
+
+		item_infor t;
+		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
+		printlog("...세이자가 마지막 선물로 요술망치를 주고 갔다.", true, false, false, CL_dark_good);
 		return true;
 	}
 
@@ -68,15 +72,151 @@ bool seija_gift()
 
 	}
 }
+const char* seija_god_string(int god, int num) {
+
+	switch (god)
+	{
+	case GT_BYAKUREN:
+		switch (num) {
+		case 0: return "뱌쿠렌: 무작위 마법책을 몇 권 받습니다.";
+		case 1: return "뱌쿠렌은 징벌로 당신을 느리게하거나 영력이나 스탯을 일시적으로 감소시킵니다.";
+		case 2: return "또한 뱌쿠렌의 징벌중엔 항상 일정 확률로 시전한 마법이 실패합니다.";
+		}
+	case GT_JOON_AND_SION:
+		switch (num) {
+		case 0: return "죠온&시온: 무작위 부적을 약간 받습니다.";
+		case 1: return "죠온과 시온은 당신의 아이템을 낭비하고 잃어버리도록 만듭니다.";
+		case 2: return "또한 징벌로 당신에게 강제로 빙의되어 체력, 영력이나 파워를 잃게 만듭니다.";
+		}
+	case GT_KANAKO:
+		switch (num) {
+		case 0: return "카나코: 무작위 무작위 무기를 여럿을 받습니다.";
+		case 1: return "카나코는 징벌로 당신에게 데미지를 주거나 온바시라를 꽂아서 발을 묶거나";
+		case 2: return "던전의 적대적인 몬스터들을 당신의 주위로 불러들이기도 합니다.";
+		}
+	case GT_SUWAKO:
+		switch (num) {
+		case 0: return "스와코: 스펠카드를 몇 개 받습니다.";
+		case 1: return "스와코는 당신에게 저주를 걸어 저항할 수 없는 감속과 독을 걸거나";
+		case 2: return "당신의 주변에 적대적인 개구리들을 소환합니다.";
+		}
+	case GT_MINORIKO:
+		switch (num) {
+		case 0: return "미노리코: 다수의 고구마를 받습니다.";
+		case 1: return "미노리코는 징벌로 당신의 파워를 절반으로 만들거나 건강을 빼앗아";
+		case 2: return "병에 걸리게하기도하며 능력치를 일시적으로 감소시킬 수 있습니다.";
+		}
+	case GT_MIMA:
+		switch (num) {
+		case 0: return "미마: 미마의 봉인서를 받습니다.";
+		case 1: return "미마는 징벌로 당신에게 다양한 속성의 파괴마법을 직접 날립니다.";
+		case 2: return "또한 미마에 징벌을 받는 동안엔 모든 마법의 파워가 절반이 됩니다.";
+		}
+	case GT_SHINKI:
+		switch (num) {
+		case 0: return "신키: 영격두루마리 몇개를 받습니다.";
+		case 1: return "신키는 징벌로 당신의 주변에 적대적인 마계인들을 소환합니다.";
+		case 2: return "또한 징벌중엔 적이 P아이템을 떨어뜨릴 확률을 낮춥니다.";
+		}
+	case GT_YUUGI:
+		switch (num) {
+		case 0: return "유우기: 무작위 방어구를 여럿 받습니다.";
+		case 1: return "유우기는 당신을 강제로 취하게 만들거나 데미지와 함께 집어던지거나";
+		case 2: return "당신 주변에 강력한 오니를 소환하기도 합니다.";
+		}
+	case GT_SHIZUHA:
+		switch (num) {
+		case 0: return "시즈하: 단풍브랜드의 무기를 받습니다.";
+		case 1: return "시즈하는 징벌로 당신을 혼란시키거나 큰 데미지를 주거나 큰 소음과 함께";
+		case 2: return "당신을 감속시킵니다. 단풍잎을 밟으면 큰 소음이 나며 화염에 약해집니다.";
+		}
+	case GT_HINA:
+		switch (num) {
+		case 0: return "히나: 무작위 반지를 여럿 받습니다.";
+		case 1: return "히나는 징벌로 당신에 저항불가능한 독과 감속을 걸거나 당신의 장비에 저주를";
+		case 2: return "걸기도하며 혼란을 겁니다. 징벌중엔 저주해제는 항상 실패할 가능성이 생깁니다.";
+		}
+	case GT_YUKARI:
+		switch (num) {
+		case 0: return "유카리: 공간이동 소모품을 여럿을 받습니다.";
+		case 1: return "유카리는 징벌로 혼란과 함께 공간이동을 시키거나 공간이동을 금지시킨후 주변에";
+		case 2: return "적들을 불러오기도하며 이형의 눈을 소환시키기도 합니다.";
+		}
+	case GT_EIRIN:
+		switch (num) {
+		case 0: return "에이린: 무작위 물약 더미를 받습니다.";
+		case 1: return "에이린은 당신에 나쁜 물약을 먹이거나 당신에게 수상한 실험을 하여 부작용을";
+		case 2: return "남깁니다. 또한 징벌중에 당신이 마시는 물약의 효과가 일정 확률로 사라집니다.";
+		}
+	case GT_YUYUKO:
+		switch (num) {
+		case 0: return "유유코: 무작위 발동템들을 받습니다.";
+		case 1: return "유유코는 징벌로 당신의 주변에 많은 적대적인 유령들을 소환시킵니다.";
+		case 2: return "소환되는 유령들은 당신이 강해질수록 강해집니다.";
+		}
+	case GT_SATORI:
+		switch (num) {
+		case 0: return "사토리: 식별두루마리 여럿을 받습니다.";
+		case 1: return "사토리는 당신을 징벌하진 않지만 무언가를 찾는 전단지를 던전에 뿌립니다.";
+		case 2: return "이 일정시간동안 뿌려지는 전단지는 던전의 아이템과 교체되어 생성됩니다.";
+		}
+	case GT_TENSI:
+		switch (num) {
+		case 0: return "텐시: 무작위 아이템을 여럿 받습니다.";
+		case 1: return "텐시는 징벌일지라도 당신을 언제나 가지고 놀 것입니다.";
+		case 2: return "그 징벌은 평소의 텐시의 행동보다 조금 더 나쁜 효과일 확률이 높습니다.";
+		}
+	case GT_SEIJA:
+		switch (num) {
+		case 0: return "세이자: 나로부터 받을 것은 없다!";
+		case 1: return "아마 이 선택지는 버그입니다.";
+		case 2: return "";
+		}
+	case GT_LILLY:
+		switch (num) {
+		case 0: return "릴리: 탄막 뭉치를 받습니다";
+		case 1: return "릴리는 징벌로 당신의 주변에 적대적인 요정들을 소환하거나";
+		case 2: return "당신을 약화시켜 일시적으로 공격력과 마법의 파워를 절반으로 낮춥니다.";
+		}
+	case GT_MIKO:
+		switch (num) {
+		case 0: return "미코: 아티펙트 망토를 하나 받습니다.";
+		case 1: return "미코는 징벌로 당신의 최대체력을 일시적으로 절반으로 줄이거나";
+		case 2: return "감속을 걸거나 화염과 냉기저항을 일시적으로 한단계 낮춥니다.";
+		}
+	case GT_OKINA:
+		switch (num) {
+		case 0: return "오키나: 약간의 성역 두루마리를 받습니다.";
+		case 1: return "오키나는 당신의 주변에 적대적인 백댄서를 소환하여 주변의 몬스터들을";
+		case 2: return "응원하거나 당신의 체력과 영력을 흡수합니다.";
+		}
+	case GT_JUNKO:
+		switch (num) {
+		case 0: return "순호: 무기강화와 방어구강화 두루마리를 여럿 받습니다.";
+		case 1: return "순호는 징벌로 당신을 약화시키거나 감속을 시키거나 당신의 능력치를";
+		case 2: return "일시적으로 감소시킵니다.";
+		}
+	case GT_ERROR:
+	case GT_NONE:
+	default:
+		switch (num) {
+		case 0: return "버그신: 이것을 선택하면 죽습니다.";
+		case 1: return "대부분은 버그입니다.";
+		case 2: return "";
+		}
+	
+	}
+	return "버그";
+}
 
 
 void seija_real_gift(int key_)
 {	
 	switch(key_)
 	{
-		case GT_BYAKUREN: //무작위 책 3~4개
+		case GT_BYAKUREN: //무작위 책 3~5개
 			{
-				for(int i = rand_int(3,4); i > 0; i--)
+				for(int i = rand_int(3,5); i > 0; i--)
 				{
 					random_extraction<int> rand_;
 
@@ -99,26 +239,26 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_KANAKO: //무작위 무기 3~4개
+		case GT_KANAKO: //무작위 무기 3~5개
 			{
-				for(int i = rand_int(3,4); i > 0; i--)
+				for(int i = rand_int(3,5); i > 0; i--)
 				{
 					kanako_gift(false);
 				}
 			}
 			break;
-		case GT_SUWAKO: //무작위 스펠카드 2~3개
+		case GT_SUWAKO: //무작위 스펠카드 2~4개
 			{
-				for(int i = rand_int(2,3); i > 0; i--)
+				for(int i = rand_int(2,4); i > 0; i--)
 				{
 					item_infor t;
 					env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, randA(SPC_V_MAX-1)));
 				}
 			}
 			break;
-		case GT_MINORIKO: //고구마 3~9개
+		case GT_MINORIKO: //고구마 10~30개
 			{
-				for(int i = 3; i > 0; i--)
+				for(int i = 10; i > 0; i--)
 				{	
 					item_infor t;
 					env[current_level].MakeItem(you.position,makeitem(ITM_FOOD, 0, &t, 1));
@@ -135,9 +275,9 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_SHINKI: //영격두루마리 2~3장
+		case GT_SHINKI: //영격두루마리 2~4장
 			{
-				for(int i = rand_int(2,3); i > 0; i--)
+				for(int i = rand_int(2,4); i > 0; i--)
 				{	
 					item_infor t;
 					item *it = env[current_level].MakeItem(you.position,makeitem(ITM_SCROLL, 0, &t, SCT_SOUL_SHOT));
@@ -147,9 +287,9 @@ void seija_real_gift(int key_)
 			break;
 		case GT_YUUGI:
 			{
-				for(int i = rand_int(2,3); i > 0; i--)
+				for(int i = rand_int(2,4); i > 0; i--)
 				{	
-					armour_gift(false);
+					armour_gift(false, false);
 				}
 			}
 			break;
@@ -170,7 +310,7 @@ void seija_real_gift(int key_)
 			{
 				for(int i = rand_int(2,3); i > 0; i--)
 				{	
-					jewelry_gift(false);
+					jewelry_gift(false, true, false);
 				}
 			}
 			break;
@@ -205,18 +345,21 @@ void seija_real_gift(int key_)
 			{
 				random_extraction<int> rand_;
 
-				for(int i = 0; i < EVK_MAX;i++)
-					rand_.push(i);
+				for (int i = 0; i < EVK_MAX; i++) {
+					if (i != EVK_MAGIC_HAMMER) {
+						rand_.push(i);
+					}
+				}
 				for(int i = 2; i > 0; i--)
-				{					
+				{
 					item_infor t;
 					env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t,rand_.pop()));
 				}
 			}
 			break;
-		case GT_SATORI: //식별두루마리 5~9개
+		case GT_SATORI: //식별두루마리 7~12개
 			{
-				for(int i = rand_int(5,9); i > 0; i--)
+				for(int i = rand_int(7,12); i > 0; i--)
 				{	
 					item_infor t;
 					item* it = env[current_level].MakeItem(you.position,makeitem(ITM_SCROLL, 0, &t, SCT_IDENTIFY));
@@ -224,9 +367,9 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_TENSI: //무작위 아이템 3~7개... 무려 던전 1층의!!
+		case GT_TENSI: //무작위 아이템 4~8개... 무려 던전 1층의!!
 			{				
-				for(int i = rand_int(3,6); i > 0; i--)
+				for(int i = rand_int(4,8); i > 0; i--)
 				{	
 					item_infor t;
 					item* it = env[current_level].MakeItem(you.position,CreateFloorItem(0,&t));
@@ -242,9 +385,79 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
+		case GT_JOON_AND_SION:
+		{
+			for (int i = 2; i > 0; i--)
+			{
+				item_infor t;
+				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t));
+			}
+		}
+		break;
+		case GT_MIKO:
+		{
+			for (int i = 1; i > 0; i--)
+			{
+				item_infor t;
+				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_CLOAK, 0, &t));
+				MakeArtifact(it, 3); //다른 아이템보다 효과가 좋음
+			}
+		}
+		break;
+		case GT_OKINA:
+		{
+			for (int i = rand_int(2,3); i > 0; i--)
+			{
+				item_infor t;
+				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY));
+			}
+		}
+		break;
+		case GT_JUNKO:
+		{
+			for (int i = rand_int(3, 6); i > 0; i--)
+			{
+				item_infor t;
+				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_WEAPON_1));
+			}
+			for (int i = rand_int(2, 3); i > 0; i--)
+			{
+				item_infor t;
+				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_ARMOUR));
+			}
+		}
+		break;
 	}
 }
 
+const char* seija_summon_buff() {
+
+	switch (randA(9))
+	{
+	case 0:
+		return "세이자: 도망쳐!";
+	case 1:
+		return "세이자: 정면전은 승산이 없다고!";
+	case 2:
+		return "세이자: 발을 빠르게 해줄테니까 잘 도망쳐보라고";
+	case 3:
+		return "세이자: 그 놈들은 느림보니까 따돌려버려!";
+	case 4:
+		return "세이자: 싸울 생각은 아니지?";
+	case 5:
+		return "세이자: 벌써 추격이 붙었나";
+	case 6:
+		return "세이자: 언제나의 추격자들일뿐이야, 따돌리자고";
+	case 7:
+		return "세이자: 수로 밀어붙이다니 반칙아니야?";
+	case 8:
+		return "세이자: 그래봤자 너희들은 우릴 잡을 수 없지";
+	case 9:
+		return "세이자: 너넨 질리지도 않냐!";
+	}
+
+	return "세이자: 이대로 도망쳐!";
+}
 
 
 const char* seija_talk(god_type god_, int piety)
@@ -258,13 +471,13 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(3))
 			{
 			case 0:
-				return "세이자: !";
+				return "세이자: 그 녀석들의 물건은 별로 가지고싶지않은데 너라도 쓸래?";
 			case 1:
-				return "세이자: ";
+				return "세이자: 그 녀석들은 어차피 역병신이니 내가 안 훔쳤어도 잃어버릴거야";
 			case 2:
-				return "세이자: ";
+				return "세이자: 나보다 미움 받는 애들은 흔치않은데 말이지";
 			case 3:
-				return "세이자: ";
+				return "세이자: 별로 가까이 가고싶지 않은 녀석들이란 말이지";
 			}
 			break;
 		case GT_BYAKUREN:
@@ -462,7 +675,45 @@ const char* seija_talk(god_type god_, int piety)
 				return "세이자: 주변도 보지않고 폭격해대는 요정이었어. 민폐라고 이거";
 			}
 			break;
-
+		case GT_MIKO:
+			switch (randA(3))
+			{
+			case 0:
+				return "세이자: 그 잘난 녀석이 아끼는 망토를 하나 가져왔지";
+			case 1:
+				return "세이자: 난 더 마음에 드는 망토가 있어서 말이지, 이건 너 줄게";
+			case 2:
+				return "세이자: 겉으론 위대한 척해도 속으론 약삭빠른 녀석이지. 난 알 수 있어";
+			case 3:
+				return "세이자: 빨간 망토? 파란 망토? 그런건 잘 모르겠는데";
+			}
+			break;
+		case GT_OKINA:
+			switch (randA(3))
+			{
+			case 0:
+				return "세이자: 그 이상한 춤을 추는 무리를 따돌리느라 진땀 뺏다고";
+			case 1:
+				return "세이자: 그런 놈의 부하따위 될까보냐";
+			case 2:
+				return "세이자: 이 아이템을 쓰면 일시적으로 무적이 된다던데 잘 써보라고";
+			case 3:
+				return "세이자: 등 뒤에 문이 있길래 들어가보고 이걸 훔쳐왔지";
+			}
+			break;
+		case GT_JUNKO:
+			switch (randA(3))
+			{
+			case 0:
+				return "세이자: 역시 아이템 강화는 가장 중요하지?";
+			case 1:
+				return "세이자: 계속 누굴 죽인다고 중얼거리다니 기분나쁜 놈이네";
+			case 2:
+				return "세이자: 순화가 축복이라고? 아이템을 쓰질못한다면 무슨 소용인거지?";
+			case 3:
+				return "세이자: 순수한 힘엔 못미치지만 우리에겐 머리와 아이템이 있지";
+			}
+			break;
 		}
 	}
 

@@ -11,26 +11,41 @@
 #include "projectile.h"
 #include "environment.h"
 #include "throw.h"
+#include "key.h"
+#include "soundmanager.h"
+#include "weapon.h"
+#include "god.h"
 
 
 const char *evoke_string[EVK_MAX]=
 {
 	"보탑",
 	"에어두루마리",
-	"몽혼"
+	"몽혼",
+	"요술망치"
 };
 const bool evoke_string_is[EVK_MAX]=
 {
 	true,
 	false,
-	true
+	true,
+	false
 };
 
+
+int getEvokeItem() {
+	random_extraction<int> random_evoke;
+
+	random_evoke.push(EVK_PAGODA,10);
+	random_evoke.push(EVK_AIR_SCROLL, 10);
+	//random_evoke.push(EVK_DREAM_SOUL, 2); //안나옴
+	return random_evoke.pop();
+}
 
 void MakeEvokeItem(item_infor* t, int kind_)
 {	
 	if(kind_ == -1 || (kind_<0 && kind_>=EVK_MAX))
-		kind_= randA(EVK_MAX-1);
+		kind_= getEvokeItem();
 
 	t->value1 = kind_;
 	t->value2 = 0;
@@ -42,7 +57,9 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	t->can_throw = false;
 	t->image = kind_==EVK_PAGODA?&img_item_evo_pagoda:
 	kind_==EVK_AIR_SCROLL?&img_item_evo_air_scroll:
-	kind_==EVK_DREAM_SOUL?&img_item_evo_dream_soul:&img_mons_default;
+	kind_==EVK_DREAM_SOUL?&img_item_evo_dream_soul:
+	kind_ == EVK_MAGIC_HAMMER ? &img_item_evo_hammer :
+		&img_mons_default;
 	t->name.name = evoke_string[kind_];
 	t->name.name_type = evoke_string_is[kind_];
 	t->weight = 1.0f;
@@ -146,6 +163,8 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 50;
 	case EVK_DREAM_SOUL:
 		return 50;
+	case EVK_MAGIC_HAMMER:
+		return 100;
 	default:
 		return false;
 	}
@@ -160,6 +179,7 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 		return (S_FLAG_PENETRATE) & flag;
 	case EVK_AIR_SCROLL:
 	case EVK_DREAM_SOUL:
+	case EVK_MAGIC_HAMMER:
 		return (S_FLAG_IMMEDIATELY) & flag;
 	default:
 		return false;
@@ -174,6 +194,7 @@ int EvokeLength(evoke_kind skill)
 		return 8;
 	case EVK_AIR_SCROLL:
 	case EVK_DREAM_SOUL:
+	case EVK_MAGIC_HAMMER:
 		return 0;
 	default:
 		return false;
@@ -200,6 +221,8 @@ int EvokeSuccece(evoke_kind skill)
 
 
 }
+void HammerPresent();
+void returnHammerItem();
 string DreamSoulMonster(vector<int>& list_, int level_);
 
 
@@ -223,9 +246,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				beam_infor temp_infor(randC(3,4+level_*2/3),3*(4+level_*2/3),16,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
-				
-				for(int i=0;i<(you.GetParadox()?2:1);i++)
-					throwtanmac(29,beam,temp_infor,NULL);
+
+				for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
+					soundmanager.playSound("laser");
+					throwtanmac(29, beam, temp_infor, NULL);
+				}
 				you.SetParadox(0); 
 				return true;
 			}
@@ -253,11 +278,213 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			printarray(true,false,false,CL_normal,3,"당신은 ",s_.c_str(),"의 꿈을 불러냈다!");
 			return true;
 		}
+	case EVK_MAGIC_HAMMER:
+		{
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			printlog("", true, false, true, CL_seija);
+			bool loop_ = true;
+			while (loop_)
+			{
+				int percent_ = 9;
+				int select_ = 0;
+				deletelog();
+				printlog("요술망치로 무슨 소원을 빌거야?", true, false, true, CL_help);
+				printlog("a - 날 회복해줘!", true, false, true, CL_normal);
+				printlog("b - 날 강하게 만들어줘!", true, false, true, CL_normal);
+				printlog("c - 많은 동료를 원해!", true, false, true, CL_normal);
+				printlog("d - 보물을 원해!", true, false, true, CL_normal);
+				int key_ = waitkeyinput();
+				switch (key_) {
+					case 'a':
+					case 'A':
+					{
+						if (randA(percent_)) {
+							soundmanager.playSound("buff");
+							you.HpUpDown(you.GetMaxHp() - you.GetHp(), DR_EFFECT);
+							if (!you.pure_mp)
+								you.MpUpDown(you.GetMaxMp() - you.GetMp());
+							printlog("요술망치가 당신을 최대로 회복시켰다!", true, false, false, CL_good);
+							loop_ = false;
+						}
+						else {
+							you.HpUpDown(-you.GetHp() * 2 / 3, DR_EFFECT);
+							if (!you.pure_mp)
+								you.MpUpDown(-you.GetMp());
+							soundmanager.playSound("laugh");
+							printlog("요술망치의 마력이 역류하였다! 당신의 체력과 영력이 빨려들었다!", true, false, false, CL_danger);
+							loop_ = false;
+						}
+						break;
+					}
+					case 'b':
+					case 'B':
+						if (randA(percent_)) {
+							soundmanager.playSound("buff");
+							you.SetForceStrong(true, rand_int(30, 60), true);
+							printlog("요술망치가 당신을 강하게 만들었다!", true, false, false, CL_good);
+							loop_ = false;
+						}
+						else {
+							int time_ = rand_int(30, 60);
+							you.SetSlow(time_);
+							you.SetForceStrong(false, time_, true);
+							soundmanager.playSound("laugh");
+							printlog("요술망치의 마력이 역류하였다! 당신은 약해졌다!", true, false, false, CL_danger);
+							loop_ = false;
+						}
+						break;
+					case 'c':
+					case 'C':
+					{
+						bool good_ = true;
+						if (randA(percent_)) {
+							good_ = true;
+						}
+						else {
+							good_ = false;
+						}
+						int time_ = rand_int(40, 80);
+						bool return_ = false;
+						int i = rand_int(4, 5);
+						for (; i > 0; i--)
+						{
+							if (monster *mon_ = BaseSummon(MON_OCCULT_SMALL, time_, true, false, 2, &you, target, SKD_SUMMON_OCCULT, 5))
+							{
+								mon_->LevelUpdown(you.level, 4.0f, 1.5f);
+								mon_->s_haste = time_+1;
+								if (!good_) {
+									mon_->ReturnEnemy();
+								}
+								mon_->PlusTimeDelay(-2*mon_->GetWalkDelay());
+								return_ = true;
+							}
+						}
+						if (good_) {
+							soundmanager.playSound("buff");
+							printlog("요술망치가 동료들을 불러냈다!", true, false, false, CL_good);
+						}
+						else {
+							soundmanager.playSound("laugh");
+							printlog("요술망치의 마력이 역류하였다! 동료가 모두 적대적으로 변했다!", true, false, false, CL_danger);
+						}
+						loop_ = false;
+						break;
+					}
+					case 'd':
+					case 'D':
+					{
+						if (randA(percent_)) {
+							HammerPresent();
+							soundmanager.playSound("buff");
+							printlog("요술망치가 보물을 만들어냈다!", true, false, false, CL_good);
+						}
+						else {
+							returnHammerItem();
+							random_extraction<int> oni_;
+							oni_.push(MON_ONI);
+							oni_.push(MON_BLUE_ONI);
+							int i = rand_int(1 + you.level / 10, 1 + you.level / 5);
+							for (; i>0; i--)
+							{
+								int time_ = rand_int(40, 60);
+								if (monster *mon_ = BaseSummon(oni_.choice(), time_, true, true, 2, NULL, you.position, SKD_OTHER, -1))
+								{
+									if (randA(99)<max(0, 200 - you.level * 30))
+										mon_->SetSlow(time_);
+									if (randA(99)<max(0, you.level * 4 - 28))
+										mon_->SetMight(time_);
+									if (randA(99)<max(0, you.level * 5 - 65))
+										mon_->SetHaste(time_);
+									mon_->PlusTimeDelay(-2 * mon_->GetWalkDelay());
+								}
+							}
+							soundmanager.playSound("laugh");
+							printlog("요술망치의 마력이 역류하였다! 보물이 모두 회수되었다!", true, false, false, CL_danger);
+						}
+
+						loop_ = false;
+						break;
+					}
+					case VK_ESCAPE:
+						printlog("취소했다.", true, false, false, CL_normal);
+						return false;
+					default:
+						break;
+				}
+
+
+			}
+			return true;
+		}
 	}
 	return false;
 }
 
 
+
+void HammerPresent() {
+	int kind_ = rand_int(1, 3);
+	item* it = NULL;
+	if (kind_ == 1) {
+		random_extraction<int> rand_;
+
+		for (int i = SKT_SHORTBLADE; i <= SKT_SPEAR; i++)
+		{
+			rand_.push(i - SKT_SHORTBLADE, you.GetSkillLevel(i, true) + 1);
+		}
+
+		item_infor t;
+		it = env[current_level].MakeItem(you.position, makeitem((item_type)(rand_.pop()), 1, &t));
+		it->value4 += rand_int(0, 5);
+		if (!it->value5 && randA(2) > 1)
+			it->value5 = GetNewBrand(0); //카나코는 신의 브랜드는 선물하지 않는다.
+		MakeArtifact(it, 1);
+	}
+	else if (kind_ == 2) {
+		it = armour_gift(false, true);
+	}
+	else {
+		it = jewelry_gift(false, false, true);
+	}
+	if (it != NULL) {
+		//10%의 확률로 회수해간다.
+		it->hamme_gift = true;
+	}
+}
+
+
+void returnHammerItem() {
+	//아이템 회수
+	for (int i = 0; i < MAXLEVEL; i++) {
+		for (auto it = env[i].item_list.begin(); it != env[i].item_list.end(); ) {
+			auto temp = it++;
+			if ((*temp).hamme_gift) {
+				env[i].DeleteItem(temp);
+			}
+		}
+	}
+	for (auto it = you.item_list.begin(); it != you.item_list.end(); ) {
+		auto temp = it++;
+		if ((*temp).hamme_gift) {
+
+			for (equip_type i = ET_FIRST; i != ET_LAST; i = (equip_type)(i + 1))
+			{
+				if (you.equipment[i] == &(*temp))
+				{
+					you.unequip(i, true);
+					break;
+				}
+			}
+			you.DeleteItem(temp);
+		}
+	}
+}
 
 
 

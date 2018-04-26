@@ -12,6 +12,7 @@ enum evoke_kind
 	EVK_PAGODA,
 	EVK_AIR_SCROLL,
 	EVK_DREAM_SOUL,
+	EVK_MAGIC_HAMMER,
 	EVK_MAX
 };
 

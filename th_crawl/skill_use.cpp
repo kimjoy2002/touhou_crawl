@@ -35,6 +35,7 @@
 #include "option_manager.h"
 #include "soundmanager.h"
 #include "tribe.h"
+#include "evoke.h"
 
 
 extern HANDLE mutx;
@@ -2070,103 +2071,77 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 {
 	int loop_ = true;
 	god_type next_ = GT_NONE;
+
+
+	if (you.god_value[GT_SEIJA][2] == 0) {
+		//처음 선물을 받을때 선물받을 신을 무작위로 4명 고른다.
+
+		random_extraction<int> rand_god;
+
+		for (int i = GT_FIRST; i < GT_LAST; i++) {
+			if (i != GT_SEIJA && !(you.god_value[GT_SEIJA][1] & (1 << i)))
+				rand_god.push(i);
+		}
+		for (int i = 0; i < 4; i++) {
+			//4개 랜덤 선택
+			you.god_value[GT_SEIJA][2] |= 1 << rand_god.pop();
+		}
+	}
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+	printlog("", true, false, true, CL_seija);
+
+
 	while(loop_)
 	{
-		printlog("세이자: 어느 신으로부터 훔친 선물을 줄까? (선택시 자세한 설명이 표시됨)",true,false,false,CL_seija);
+		deletelog();
+		printlog("세이자: 어느 신으로부터 훔친 선물을 줄까?",true,false,true,CL_seija);
 
-		string s_;
-		printlog("B - 뱌쿠렌     K - 카나코  W - 스와코   A - 미노리코",true,false,false,CL_help);
-		printlog("M - 미마       P - 신키    G - 유우기   Z - 시즈하  H - 히나     Y - 유카리 ",true,false,false,CL_help);
-		printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    L - 릴리",true,false,false,CL_help);
-		printlog("어떤 신의 보물을 달라고할까?",false,false,false,CL_help);
+		int num_ = 0;
+		god_type select_[4];
+		for (int i = GT_FIRST; i < GT_LAST; i++) {
+			if (you.god_value[GT_SEIJA][2] & (1 << i)) {
+				char temp[100];
+				sprintf_s(temp, 100, "%c - %s", num_+'a', seija_god_string(i, 0));
+				select_[num_++] = (god_type)i;
+				printlog(temp, true, false, true, CL_help);
+			}
+		}
 		int key_ = waitkeyinput();
 
 
-		switch(key_)
+		switch (key_)
 		{
-			case 'b':
-			case 'B':
-				next_ = GT_BYAKUREN;
-				s_ = "뱌쿠렌을 선택시 무작위 마법책을 몇권 받습니다. 뱌쿠렌로부터 징벌상태가 됩니다!";
-				break;
-			case 'k':
-			case 'K':
-				next_ = GT_KANAKO;
-				s_ = "카나코를 선택시 무작위 무기를 여럿을 받습니다. 카나코로부터 징벌상태가 됩니다!";
-				break;
-			case 'w':
-			case 'W':
-				next_ = GT_SUWAKO;
-				s_ = "스와코를 선택시 스펠카드를 몇개 받습니다. 스와코로부터 징벌상태가 됩니다!";
-				break;
-			case 'a':
-			case 'A':
-				next_ = GT_MINORIKO;
-				s_ = "미노리코를 선택시 다수의 고구마를 받습니다. 미노리코로부터 징벌상태가 됩니다!";
-				break;
-			case 'm':
-			case 'M':
-				next_ = GT_MIMA;
-				s_ = "미마를 선택시 미마의 봉인서를 받습니다. 미마로부터 징벌상태가 됩니다!";
-				break;
-			case 'p':
-			case 'P':
-				next_ = GT_SHINKI;
-				s_ = "신키를 선택시 영격두루마리 소량을 받습니다. 신키로부터 징벌상태가 됩니다!";
-				break;
-			case 'g':
-			case 'G':
-				next_ = GT_YUUGI;
-				s_ = "유우기를 선택시 무작위 방어구를 여럿 받습니다. 유우기로부터 징벌상태가 됩니다!";
-				break;
-			case 'z':
-			case 'Z':
-				next_ = GT_SHIZUHA;
-				s_ = "시즈하를 선택시 단풍브랜드의 무기를 받습니다. 시즈하로부터 징벌상태가 됩니다!";
-				break;
-			case 'h':
-			case 'H':
-				next_ = GT_HINA;
-				s_ = "히나를 선택시 무작위 장신구를 여럿 받습니다. 히나로부터 징벌상태가 됩니다!";
-				break;
-			case 'y':
-			case 'Y':
-				next_ = GT_YUKARI;
-				s_ = "유카리를 선택시 공간이동 소모품여럿을 받습니다. 유카리로부터 징벌상태가 됩니다!";
-				break;
-			case 'e':
-			case 'E':
-				next_ = GT_EIRIN;
-				s_ = "에이린을 선택시 무작위 물약 더미를 받습니다. 에이린로부터 징벌상태가 됩니다!";
-				break;
-			case 'u':
-			case 'U':
-				next_ = GT_YUYUKO;
-				s_ = "유유코를 선택시 무작위 발동템을 받습니다. 유유코로부터 징벌상태가 됩니다!";
-				break;
-			case 's':
-			case 'S':
-				next_ = GT_SATORI;
-				s_ = "사토리를 선택시 식별두루마리 여럿을 받습니다. 사토리로부터 징벌상태가 됩니다!";
-				break;
-			case 't':
-			case 'T':
-				next_ = GT_TENSI;
-				s_ = "텐시를 선택시 무작위 아이템을 여럿 받습니다. 텐시로부터 징벌상태가 됩니다!";
-				break;
-			case 'L':
-			case 'l':
-				next_ = GT_LILLY;
-				s_ = "릴리를 선택시 탄막뭉치를 받습니다. 릴리로부터 징벌상태가 됩니다!";
-				break;
-			default:
-				printlog(" 마음이 변하기전에 고르는게 좋을걸?",true,false,false,CL_small_danger);
-				return false;
+		case 'a':
+		case 'A':
+			next_ = select_[0];
+			break;
+		case 'b':
+		case 'B':
+			next_ = select_[1];
+			break;
+		case 'c':
+		case 'C':
+			next_ = select_[2];
+			break;
+		case 'd':
+		case 'D':
+			next_ = select_[3];
+			break;
+		default:
+			printlog("마음이 변하기전에 고르는게 좋을걸?", true, false, false, CL_small_danger);
+			return false;
 		}
-		enterlog();
-
-		printlog(s_,true,false,false,CL_small_danger);
-		printlog("이 신의 보물을 요구하겠습니까? (Y/N)",true,false,false,CL_help);
+		deletelog();
+		printlog(seija_god_string(next_, 0), true, false, true, CL_help);
+		printlog(seija_god_string(next_, 1), true, false, true, CL_small_danger);
+		printlog(seija_god_string(next_, 2), true, false, true, CL_small_danger);
+		printlog("이 신의 보물을 요구하겠습니까? (Y/N)",true,false, true,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -2181,7 +2156,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	}
 
-	if(you.god_value[GT_SEIJA][1] &= 1 << next_)
+	if(you.god_value[GT_SEIJA][1] & (1 << next_))
 	{
 		printlog("이미 한번 보물을 받았던 신이다.",true,false,false,CL_normal);
 		return false;
@@ -2197,6 +2172,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	char temp[200];
 	sprintf_s(temp,200,"세이자에게 선물을 받았다.");
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
 
 	switch(next_)
@@ -2244,8 +2220,11 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			GetGodAbility(level_, false);	
 
 		you.Ability(SKL_ABANDON_GOD,true,true);
-		you.god = GT_NONE;	
+		you.god = GT_NONE;
 
+		item_infor t;
+		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
+		printlog("...세이자가 마지막 선물로 요술망치를 주고 갔다.", true, false, false, CL_dark_good);
 	}
 
 	you.Ability(SKL_SEIJA_GIFT,true,true);

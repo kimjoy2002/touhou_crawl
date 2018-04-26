@@ -392,7 +392,7 @@ int ArmourExceptopn(armour_kind type)
 
 void MakeArtifact(item* item_, int good_bad_)
 {
-	int num_ = 1+randA(1+randA(3));
+	int num_ = 1+randA(good_bad_ +randA(3));
 	deque<int> temp;
 	for(int i=0; i<RGT_MAX_ATIFACT; i++)
 	{
@@ -422,12 +422,12 @@ void MakeArtifact(item* item_, int good_bad_)
 
 	if(item_->type>=ITM_WEAPON_FIRST && item_->type<ITM_WEAPON_LAST)
 	{
-		item_->value4 = randA(9)+randA(3)+randA(3)-4;
+		item_->value4 = randA(9)+randA(3)+randA(2 + good_bad_)-4;
 		//item_->value3 = randA(9)+randA(3)+randA(3)-4;
 	}		
 	if(item_->type>=ITM_ARMOR_FIRST && item_->type< ITM_ARMOR_LAST)
 	{
-		item_->value4 = randA(item_->value1)+randA(2)+randA(2)-2;
+		item_->value4 = randA(item_->value1)+randA(2)+randA(1+good_bad_)-2;
 	}
 
 	if (item_->type >= ITM_WEAPON_FIRST && item_->type<ITM_WEAPON_LAST)

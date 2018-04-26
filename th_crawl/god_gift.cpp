@@ -322,7 +322,7 @@ void kanako_gift(bool speak_)
 }
 
 
-void armour_gift(bool speak_)
+item* armour_gift(bool speak_, bool artifact_)
 {
 	random_extraction<int> rand_;
 	rand_.push(0,5); //아머
@@ -331,7 +331,7 @@ void armour_gift(bool speak_)
 	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
 	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
 	rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
-	
+	item* it = NULL;
 
 	int armour_ = rand_.pop();
 	switch(armour_)
@@ -351,10 +351,10 @@ void armour_gift(bool speak_)
 	
 			int select_ = rand2_.pop();
 			item_infor t;
-			item* it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
+			it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
 
 			//it->value4 += randA(randA(it->value1/2)); //추가 인챈트
-			if(randA(1)) //50%
+			if(randA(1) || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -369,9 +369,9 @@ void armour_gift(bool speak_)
 			int select_ = rand2_.pop();
 			
 			item_infor t;
-			item* it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
 						
-			if(randA(1)) //50%
+			if(randA(1) || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -383,9 +383,9 @@ void armour_gift(bool speak_)
 			random_extraction<int> rand2_;		
 			
 			item_infor t;
-			item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
+			it = env[current_level].MakeItem(you.position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
 
-			if(randA(1)) //50%
+			if(randA(1) || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -400,9 +400,11 @@ void armour_gift(bool speak_)
 
 		MoreWait();
 	}
+
+	return it;
 }
 
-void jewelry_gift(bool speak_)
+item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 {
 	random_extraction<int> rand_;
 
@@ -417,12 +419,13 @@ void jewelry_gift(bool speak_)
 	item_infor t;
 	item* it = env[current_level].MakeItem(you.position,makeitem(ITM_RING, 1, &t,rand_.pop()));
 
-	if(randA(2)) //66%
+	if(randA(2) || artifact_) //66%
 		MakeArtifact(it,1);
 
-	it->identify_curse = true;
-	it->curse = true;
-	//이 함수는 히나의 선물이기때문에 저주가 걸린다.
+	if (curse_) {
+		it->identify_curse = true;
+		it->curse = true;
+	}
 
 
 	if(speak_)
@@ -431,6 +434,8 @@ void jewelry_gift(bool speak_)
 
 		MoreWait();
 	}
+
+	return it;
 }
 
 void eirin_gift(bool speak_)

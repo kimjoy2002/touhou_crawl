@@ -3200,10 +3200,10 @@ bool players::SetForceStrong(bool force_, int turn_, bool speak_)
 	if(speak_)
 	{
 		if(!force_)
-			printlog("당신은 공격과 마법의 위력이 대폭 감소했다.",false,false,false,CL_small_danger);
+			printlog("당신은 공격과 마법의 위력이 대폭 감소했다. ",true,false,false,CL_small_danger);
 		else
 		{
-			printlog("당신의 공격과 마법의 위력은 대폭 증가했다.",false,false,false,CL_white_blue);
+			printlog("당신의 공격과 마법의 위력은 대폭 증가했다. ", true,false,false,CL_white_blue);
 		}
 	}
 
@@ -4277,6 +4277,9 @@ bool players::Evoke(char id_)
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;
 				}
+				else {
+					return false;
+				}
 			}
 			if ((*it).type == ITM_AMULET)
 			{
@@ -5228,7 +5231,7 @@ bool players::unequip(equip_type type_, bool force_)
 			return false;
 		}
 
-		if (type_ == ET_NECK && getAmuletPercent() > 0)
+		if (!force_ && type_ == ET_NECK && getAmuletPercent() > 0)
 		{
 			printlog("정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)", true, false, false, CL_small_danger);
 			bool repeat_ = true;

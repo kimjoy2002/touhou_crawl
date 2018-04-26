@@ -837,15 +837,31 @@ bool GetGodAbility(int level, bool plus)
 		}
 		switch(level)
 		{
+		case 0:
+		{
+			you.Ability(SKL_SEIJA_GIFT, true, !plus);
+			break;
+		}
+		case 2:
+			if (plus) {
+				printlog("세이자는 당신의 징벌로부터의 도주를 돕는다.", true, false, false, CL_seija);
+			}
+			else {
+				printlog("세이자는 더 이상 징벌로부터 당신을 돕지 않는다.", true, false, false, CL_seija);
+			}
+			break;
 		case 3:
 			you.Ability(SKL_SEIJA_1,true,!plus);
-			if(plus)
-				printlog("당신은 위치를 뒤집을 수 있다.",true,false,false,CL_seija);
-			else
+			if (plus) {
+				printlog("당신은 위치를 뒤집을 수 있다.", true, false, false, CL_seija);
+			}
+			else {
 				printlog("더 이상 위치를 뒤집을 수 없다.",true,false,false,CL_seija);
+		    }
 			break;
 		case 5:
 			you.Ability(SKL_SEIJA_2,true,!plus);
+			you.Ability(SKL_SEIJA_GIFT, true, true);
 			if(plus)
 				printlog("당신은 이제 모두의 시야를 뒤집을 수 있다.",true,false,false,CL_seija);
 			else
@@ -3035,8 +3051,13 @@ void God_show()
 			printsub("당신은 세이자로부터 스탯을 강화받고있다.                        (패시브)",true,CL_seija);
 			printsub("",true,CL_normal);
 		}
+		if (level_ >= 2 && !you.GetPunish(GT_SEIJA))
+		{
+			printsub("징벌에 의한 추격으로부터 당신을 돕는다.                         (패시브)", true, CL_seija);
+			printsub("", true, CL_normal);
+		}
 		if(level_ >= 3 && !you.GetPunish(GT_SEIJA))
-		{ 
+		{
 			printsub("원하는 상대방과 위치를 뒤집을 수 있다.                               (P)",true,CL_seija);
 			printsub("",true,CL_normal);
 		}
@@ -3362,6 +3383,7 @@ bool God_pray(const list<item>::iterator it)
 }
 bool god_punish(god_type god)
 {
+	bool summon_ = false;
 
 	if(wiz_list.wizard_mode == 1)
 	{
@@ -3467,6 +3489,7 @@ bool god_punish(god_type god)
 					if(!dq.empty())
 					{							
 						printarray(true,false,false,CL_help,1,"카나코는 당신을 전투로 강제로 이끌었다!");
+						summon_ = true;
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
 							if(env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
@@ -3525,6 +3548,7 @@ bool god_punish(god_type god)
 								mon_->LevelUpdown(you.level-5);
 						}
 					}
+					summon_ = true;
 					printarray(true,false,false,CL_swako,1,"스와코는 당신에게 적대적인 개구리 무리를 선물했다!");
 				}
 				break;
@@ -3545,7 +3569,7 @@ bool god_punish(god_type god)
 				break;
 			case 1:
 				{
-					you.HpUpDown(max(1, you.GetHp() / 2), DR_EFFECT, NULL);
+					you.HpUpDown(-max(1, you.GetHp() / 2), DR_EFFECT, NULL);
 					you.SetSick(rand_int(80,120));
 					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 건강을 빼앗아갔다!");
 					break;
@@ -3660,6 +3684,7 @@ bool god_punish(god_type god)
 						{
 						}
 					}
+					summon_ = true;
 					printarray(true,false,false,CL_white_puple,1,"신키가 적대적인 마계인을 창조해냈다!");
 				}
 				break;
@@ -3695,6 +3720,7 @@ bool god_punish(god_type god)
 					oni_.push(MON_ONI);
 					oni_.push(MON_BLUE_ONI);
 					int i = rand_int(1+you.level/10,1+you.level/5);
+					summon_ = true;
 					for(; i>0 ; i--)
 					{
 						int time_ = rand_int(40,60);
@@ -3865,7 +3891,8 @@ bool god_punish(god_type god)
 					rand_shuffle(dq.begin(),dq.end());
 					dif_rect_iterator rit(you.position,2,true);
 					if(!dq.empty())
-					{							
+					{
+						summon_ = true;
 						printarray(true,false,false,CL_yukari,1,"유카리는 당신의 주변에 몹들을 강제로 이동시켰다!");
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
@@ -3894,6 +3921,7 @@ bool god_punish(god_type god)
 				{
 
 					printarray(true,false,false,CL_yukari,1,"유카리는 당신을 감시하는 이형의 눈을 소환했다!");
+					summon_ = true;
 					int i = rand_int(2+you.level/8,3+you.level/5);
 					for(; i>0 ; i--)
 					{
@@ -3956,6 +3984,7 @@ bool god_punish(god_type god)
 							mon_->image = &img_mons_ghost[randA(2)];
 						}
 					}
+					summon_ = true;
 					printarray(true,false,false,CL_yuyuko,1,"유유코는 당신의 주변에 유령을 끌어모았다!");
 				}
 				break;
@@ -4038,6 +4067,7 @@ bool god_punish(god_type god)
 							mon_->SetForceStrong(true, 100,false);
 						}
 					}
+					summon_ = true;
 					printarray(true,false,false,CL_lilly,1,"릴리는 당신에게 적대적인 요정의 무리를 소환했다!");
 				}
 				break;
@@ -4168,6 +4198,17 @@ bool god_punish(god_type god)
 		}
 		break;
 	}
+
+	if (summon_) {
+		if (you.god == GT_SEIJA 
+			&& pietyLevel(you.piety) >= 2
+			&& !you.GetPunish(GT_SEIJA)) {
+			printlog(seija_summon_buff(), true, false, false, CL_seija);
+			you.SetHaste(rand_int(20, 40));
+		}
+	}
+
+
 	return false;		
 }
 

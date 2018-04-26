@@ -44,7 +44,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 item::item()
 :name("¾øÀ½",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
-can_throw(false), drop(false), throw_item(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
+can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 atifact_vector()
 {
 
@@ -77,6 +77,7 @@ item::item(const coord_def &c, const item_infor &t)
 	can_throw = t.can_throw;
 	drop = false;
 	throw_item = false;
+	hamme_gift = false;
 	value0 = t.value0;
 	value1 = t.value1;
 	value2 = t.value2;
@@ -165,6 +166,7 @@ void item::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, can_throw);
 	SaveData<bool>(fp, drop);
 	SaveData<bool>(fp, throw_item);
+	SaveData<bool>(fp, hamme_gift);
 	SaveData<int>(fp, waste);
 	SaveData<int>(fp, delay_turn);
 	SaveData<int>(fp, value0);
@@ -213,6 +215,7 @@ void item::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, can_throw);
 	LoadData<bool>(fp, drop);
 	LoadData<bool>(fp, throw_item);
+	LoadData<bool>(fp, hamme_gift);
 	LoadData<int>(fp, delay_turn);
 	LoadData<int>(fp, waste);
 	LoadData<int>(fp, value0);

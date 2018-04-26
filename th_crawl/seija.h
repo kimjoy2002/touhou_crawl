@@ -17,8 +17,8 @@ bool seija_gift();
 void seija_real_gift(int next_);
 const char* seija_talk(god_type god_, int piety);
 
-
-
+const char* seija_god_string(int god, int num);
+const char* seija_summon_buff();
 
 
 #endif // __SEIJA_H__

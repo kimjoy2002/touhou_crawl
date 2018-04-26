@@ -168,7 +168,8 @@ public:
 	bool identify_curse;
 	bool can_throw; 
 	bool drop;
-	bool throw_item; 
+	bool throw_item;
+	bool hamme_gift; //망치의 반대효과가 발동되면 전부 뺏어감
 	int waste;
 	int delay_turn;
 

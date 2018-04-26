@@ -848,7 +848,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 		}
 		case REWARD_TANMAC:
 		{
-			int id_ = randA(EVK_MAX - 1);
+			int id_ = randA(TMT_MAX - 1);
 			if (rand_tanmac.GetSize()) {
 				id_ = rand_tanmac.choice();
 			}

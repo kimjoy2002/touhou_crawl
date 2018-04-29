@@ -410,6 +410,7 @@ void seija_real_gift(int key_)
 			{
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY));
+				it->Identify();
 			}
 		}
 		break;
@@ -419,11 +420,13 @@ void seija_real_gift(int key_)
 			{
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_WEAPON_1));
+				it->Identify();
 			}
 			for (int i = rand_int(2, 3); i > 0; i--)
 			{
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_ENCHANT_ARMOUR));
+				it->Identify();
 			}
 		}
 		break;

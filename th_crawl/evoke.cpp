@@ -258,6 +258,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		}	
 	case EVK_AIR_SCROLL:
 		{
+			soundmanager.playSound("buff");
 			printlog("에어두루마리로부터 영력을 얻었다!",false,false,false,CL_normal);
 			int value_ = 8 + level_ / 3 + randA(3 + level_ / 3);
 			you.MpUpDown(value_);
@@ -275,6 +276,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 				}
 			}
+			soundmanager.playSound("summon");
 			printarray(true,false,false,CL_normal,3,"당신은 ",s_.c_str(),"의 꿈을 불러냈다!");
 			return true;
 		}
@@ -295,7 +297,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				int select_ = 0;
 				deletelog();
 				printlog("요술망치로 무슨 소원을 빌거야?", true, false, true, CL_help);
-				printlog("a - 날 회복해줘!", true, false, true, CL_normal);
+				printlog("a - 날 회복시켜줘!", true, false, true, CL_normal);
 				printlog("b - 날 강하게 만들어줘!", true, false, true, CL_normal);
 				printlog("c - 많은 동료를 원해!", true, false, true, CL_normal);
 				printlog("d - 보물을 원해!", true, false, true, CL_normal);

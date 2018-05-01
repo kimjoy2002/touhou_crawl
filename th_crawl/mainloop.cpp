@@ -307,6 +307,7 @@ void charter_selete()
 		wiz_list.wizard_mode = 0;
 	}
 	else {
+		printReEnter();
 		env[current_level].playBgm();
 
 	}

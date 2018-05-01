@@ -4357,3 +4357,91 @@ int getMikoPiety(int kind) {
 	}
 	return 0;
 }
+
+
+void printReEnter()
+{
+	if (you.GetPunish(you.god)) {
+		printlog("환상향에 돌아온걸 환영한다!", true, false, false, CL_normal);
+		return;
+	}
+	switch (you.god)
+	{
+	case GT_BYAKUREN:
+		printlog("히지리: 어서오세요. 신도여", true, false, false, CL_white_blue);
+		break;
+	case GT_JOON_AND_SION:
+		switch (randA(1))
+		{
+		case 0:
+			printlog("죠온: 한푼도 남김없이 모두 털어버리자고!", true, false, false, CL_joon);
+			break;
+		case 1:
+			printlog("시온: 배고파...", true, false, false, CL_sion);
+			break;
+		}
+		break;
+	case GT_KANAKO:
+		//사나에전용 대사 필요
+		printlog("카나코: 끊임없는 전투로 신앙을 보이도록 하여라!", true, false, false, CL_help);
+		break;
+	case GT_SUWAKO:
+		printlog("스와코: 하하하! 재밌어졌어", true, false, false, CL_swako);
+		break;
+	case GT_MINORIKO:
+		printlog("미노리코: 이 땅에 가을의 축복을!", true, false, false, CL_warning);
+		break;
+	case GT_MIMA:
+		printlog("미마: 압도적인 마법으로!", true, false, false, CL_green);
+		break;
+	case GT_SHINKI:
+		printlog("신키: 신키에게 P와 영혼을!", true, false, false, CL_white_puple);
+		break;
+	case GT_YUUGI:
+		printlog("유우기: 더 강한 상대를 찾아라!", true, false, false, CL_yuigi);
+		break;
+	case GT_SHIZUHA:
+		printlog("시즈하: 인기 있는 녀석은 모두 죽여라...", true, false, false, CL_small_danger);
+		break;
+	case GT_HINA:
+		printlog("히나: 그럼 액땜작업을 계속 하겠어", true, false, false, CL_hina);
+		break;
+	case GT_YUKARI:
+		printlog("유카리: 돌아온거야?", true, false, false, CL_yukari);
+		break;
+	case GT_EIRIN:
+		printlog("에이린: 새로운 실험체가 필요해졌어", true, false, false, CL_small_danger);
+		break;
+	case GT_YUYUKO:
+		printlog("유유코: 차라도 한잔 할래?", true, false, false, CL_yuyuko);
+		break;
+	case GT_SATORI:
+		printlog("사토리: 마음대로 뛰어 노세요. 던전은 넓으니까요.", true, false, false, CL_danger);
+		break;
+	case GT_TENSI:
+		printlog("텐시: 천계는 지루해! 넌 날 재밌게 해줄거지?", true, false, false, CL_tensi);
+		break;
+	case GT_SEIJA:
+		printlog("세이자: 자, 레지스탕스 활동의 개시다!", true, false, false, CL_seija);
+		break;
+	case GT_LILLY:
+		printlog("릴리: 봄이에요!", true, false, false, CL_lilly);
+		break;
+	case GT_MIKO:
+		printlog("미코: 모두의 욕망을 들어보도록 하지!", true, false, false, CL_miko);
+		break;
+	case GT_OKINA:
+		printlog("오키나: 이 세계에서 나를 각인시키도록 ", true, false, false, CL_okina);
+		break;
+	case GT_JUNKO:
+		printlog("순호: 상아여, 보고 있는가?", true, false, false, CL_junko);
+		break;
+	case GT_ERROR:
+	case GT_NONE:
+	default:
+		printlog("환상향에 돌아온걸 환영한다!", true, false, false, CL_normal);
+		break;
+	}
+
+
+}

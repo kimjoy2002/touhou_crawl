@@ -61,6 +61,7 @@ bool GodAccpect_turn(int turn);
 int satori_sight();
 
 void Pray();
+void printReEnter();
 
 void joon_sion_gift(bool speak_);
 void minoriko_gift(bool speak_);

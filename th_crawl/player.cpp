@@ -3276,6 +3276,8 @@ int players::GetResist()
 }
 bool players::GetPunish(god_type god_)
 {
+	if (god_ < 0)
+		return false;
 	return punish[god_].number;
 }
 int players::GetSkillLevel(int skill_, bool bonus_)

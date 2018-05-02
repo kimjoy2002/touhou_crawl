@@ -314,6 +314,7 @@ public:
 	bool isSmokePos(int x_,int y_, bool only_fog = false);//해당 위치에 구름이 있냐 없냐(only_fog는 시야를 가리는 구름만 찾는다.)	
 	floor_effect* isFloorEffectPos(int x_,int y_, const floor_effect* excep_ = NULL);
 	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//해당 위치에 구름이 있냐 없냐(포인터 리턴)
+	monster* getRandomMonster(bool except_melee); //시야내 랜덤 몬스터 리턴
 	int insight_mon(monster_enemy_type type_);//시야내 몬스터갯수
 	monster* close_mon(int x_,int y_, monster_enemy_type type_);//가장 가까이 있는 몬스터리턴
 	void item_view_set();

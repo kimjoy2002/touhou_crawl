@@ -19,6 +19,7 @@
 #include "alchemy.h"
 #include "weapon.h"
 #include "event.h"
+#include "soundmanager.h"
 
 
 const char* tensi_talk(bool good_, tensi_do_list list_);
@@ -205,6 +206,7 @@ void tensi_potion(bool good_)
 		you_drink_ = bad_list_[randA(4)];
 
 
+	soundmanager.playSound("potion");
 	drinkpotion(you_drink_, false);
 }
 
@@ -213,6 +215,24 @@ void tensi_potion(bool good_)
 
 
 
+void tensi_weather(int type_, int good_)
+{
+	soundmanager.playSound("spellcard");
+	switch (type_)
+	{
+	case 1:
+		you.SetWeather(1, 100);
+		break;
+	case 2:
+		you.SetWeather(2, 100);
+		break;
+	case 3:
+		you.SetWeather(3, 100);
+		break;
+	default:
+		break;
+	}
+}
 
 void tensi_summon(int good_)
 {
@@ -277,6 +297,7 @@ void tensi_summon(int good_)
 
 	if(!summon_vector.empty())
 	{
+		soundmanager.playSound("summon");
 		dif_rect_iterator rit(you.position,2);
 		int i = randC(abs(good_),3); 
 		for(;!rit.end() && i> 0;rit++)
@@ -303,6 +324,7 @@ void tensi_summon(int good_)
 
 void tensi_kaname(int good_)
 {
+	soundmanager.playSound("summon");
 	for (int i = rand_int(1 + 2 * abs(good_), 1 + 3 * abs(good_));  i> 0; i--)
 	{
 		int flag_ = M_FLAG_SUMMON;
@@ -369,6 +391,7 @@ void tensi_tele(bool good_)
 	}
 	if(env[current_level].isMove(final.x,final.y) && !env[current_level].isMonsterPos(final.x,final.y))
 	{
+		soundmanager.playSound("blink");
 		env[current_level].MakeSmoke(you.position, img_fog_normal, SMT_NORMAL, 4, 0, &you);
 		you.SetXY(final);
 	}
@@ -412,11 +435,13 @@ void tensi_earthquake(int good_)
 		}
 	}//모든 몬스터에게 데미지를 줌
 
+	soundmanager.playSound("earthquake"); 
 	env[current_level].MakeNoise(you.position,30,NULL); //거대한 소음을 만든다. 텐시는 아무도 없을때 지진을 쓰기도 하지!
 	you.resetLOS();
 }
 void tensi_munyum(int good_)
 {
+	soundmanager.playSound("buff");
 	you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(100,200));
 	//텐시의 무념무상 버프는 길다!
 }
@@ -487,6 +512,7 @@ void tensi_burst(int good_)
 								}
 								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("텐시", false));
 								hit_->damage(temp_att, true);
+								soundmanager.playSound("bomb");
 							}
 						}
 					}
@@ -545,6 +571,7 @@ void tensi_field(int doing_)
 }
 void tensi_blind(int doing_)
 {
+	soundmanager.playSound("laugh");
 	you.SetNightSight(1, rand_int(20,40), true);
 }
 void tensi_buf_debuf(int doing_)
@@ -568,6 +595,7 @@ void tensi_buf_debuf(int doing_)
 }
 void tensi_sucide(int doing_)
 {
+	soundmanager.playSound("summon");
 	for (int i = randA_1(you.level/6+1); i> 0; i--)
 	{
 		int id_ = MON_RABIT_BOMB;
@@ -606,7 +634,7 @@ void tensi_action()
 		else
 		{
 			type = "[평화:-1]";
-			switch(randA(6)){
+			switch(randA(7)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
@@ -614,6 +642,7 @@ void tensi_action()
 			case 4:doing_ = -1; action_ =  TENSI_BURST; break;
 			case 5:doing_ = -1; action_ = TENSI_KANAME; break;
 			case 6:doing_ = -1; action_ = TENSI_BLIND; break;
+			case 7:doing_ = -1; action_ = TENSI_WEATHER_THUNDER; break;
 			}
 		}
 	}
@@ -622,7 +651,7 @@ void tensi_action()
 		if(100+randA(4000)<randA(you.CheckTension()) && randA(9)>0)
 		{ //텐시의 포텐셜 폭발!	
 			type = "[위기:3]";
-			switch(randA(6)){
+			switch(randA(8)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
@@ -630,33 +659,38 @@ void tensi_action()
 			case 4:doing_ = 2; action_ = TENSI_KANAME; break;
 			case 5:doing_ = 1; action_ = TENSI_FIELD; break;
 			case 6:doing_ = 2; action_ = TENSI_BUFF_DEBUFF; break;
+			case 7:doing_ = 2; action_ = TENSI_WEATHER_THUNDER; break;
+			case 8:doing_ = 2; action_ = TENSI_WEATHER_FOG; break;
 			}
 		}
 		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
 		{ //그럭저럭 좋은일
 			type = "[위기:2]";
-			switch(randA(5)){
+			switch(randA(7)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_BURST; break;
 			case 3:doing_ = 2; action_ =  TENSI_WEAPON; break;
 			case 4:doing_ = 1; action_ = TENSI_KANAME; break;
 			case 5:doing_ = 1; action_ = TENSI_BUFF_DEBUFF; break;
+			case 6:doing_ = 1; action_ = TENSI_WEATHER_THUNDER; break;
+			case 7:doing_ = 1; action_ = TENSI_WEATHER_FOG; break;
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
 		{ //괜찮네
 			type = "[위기:1]";
-			switch(randA(2)){
+			switch(randA(3)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
 			case 2:doing_ = 1; action_ =  TENSI_WEAPON; break;
+			case 3:doing_ = 1; action_ = TENSI_WEATHER_SUN; break;
 			}
 		}
 		else
 		{ //운이 나빴어
 			type = "[위기:-1]";
-			switch(randA(8)){
+			switch(randA(10)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = -1; action_ =  TENSI_TELE; break;
@@ -666,12 +700,16 @@ void tensi_action()
 			case 6:doing_ = -1; action_ = TENSI_BLIND; break;
 			case 7:doing_ = -1; action_ = TENSI_BUFF_DEBUFF; break;
 			case 8:doing_ = -1; action_ = TENSI_SUCIDE; break;
+			case 9:doing_ = -1; action_ = TENSI_WEATHER_THUNDER; break;
+			case 10:doing_ = -1; action_ = TENSI_WEATHER_SUN; break;
 			}
 		}
 
 	}
 	
-	printlog(type, true, false, false, CL_tensi);
+	if (wiz_list.wizard_mode == 1) {
+		printlog(type, false, false, false, CL_tensi);
+	}
 		
 
 	printlog(tensi_talk(doing_>0, action_),true,false,false,CL_tensi);
@@ -792,6 +830,33 @@ void tensi_action()
 			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
 		tensi_sucide(doing_);
+		break;
+	case TENSI_WEATHER_FOG:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 안개. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_weather(1, doing_);
+		break;
+	case TENSI_WEATHER_THUNDER:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 번개. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_weather(2, doing_);
+		break;
+	case TENSI_WEATHER_SUN:
+		if (wiz_list.wizard_mode == 1)
+		{
+			char temp[256];
+			sprintf_s(temp, 256, "%s텐시: 쾌청. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		}
+		tensi_weather(3, doing_);
 		break;
 	}
 }
@@ -1262,6 +1327,58 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			case 6:
 				return "텐시: 주변을 싹 정리하는데는 이만한게 없지!";
 			}
+		case TENSI_WEATHER_FOG:
+			switch (randA(5))
+			{
+			case 0:
+				return "텐시: 오늘의 날씨는 매우 흐리겠습니다.";
+			case 1:
+				return "텐시: 난 안개낀날은 별로 좋아하지않아.";
+			case 2:
+				return "텐시: 이런 날씨에서도 싸울 수 있어?";
+			case 3:
+				return "텐시: 싫다. 습하고 어둡잖아!";
+			case 4:
+				return "텐시: 몸을 숨기기엔 적당한 날씨지!";
+			case 5:
+				return "텐시: 기상발현!";
+			}
+		case TENSI_WEATHER_THUNDER:
+			switch (randA(6))
+			{
+			case 0:
+				return "텐시: 오늘의 날씨는 큰 천둥번개가 치겠습니다!";
+			case 1:
+				return "텐시: 화끈하게 가자고!";
+			case 2:
+				return "텐시: 번개에 맞을 확률이 얼마나 되지?";
+			case 3:
+				return "텐시: 이런건 피할 수 없을껄?";
+			case 4:
+				return "텐시: 입고있는 옷이 절연소재이길 바랄게!";
+			case 5:
+				return "텐시: 우르릉 쾅쾅!";
+			case 6:
+				return "텐시: 비상의 검이여! 하늘에 천둥번개를 모아라!";
+			}
+		case TENSI_WEATHER_SUN:
+			switch (randA(6))
+			{
+			case 0:
+				return "텐시: 오늘의 날씨는 구름 한점없이 쨍쨍하겠습니다.";
+			case 1:
+				return "텐시: 어떻게 던전에 햇빛이 비치는거지? 뭐 어때!";
+			case 2:
+				return "텐시: 이런 태양빛 아래서 과연 누가 숨을 수 있을까?";
+			case 3:
+				return "텐시: 잠시 빨래를 말려야하니까!";
+			case 4:
+				return "텐시: 햇빛이여!";
+			case 5:
+				return "텐시: 비상의 검으론 이런 것도 할 수 있지!";
+			case 6:
+				return "텐시: 오늘은 소풍가는 날이야!";
+			}	
 		}
 
 	}

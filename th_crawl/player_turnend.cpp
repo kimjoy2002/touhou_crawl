@@ -25,6 +25,7 @@
 #include "alchemy.h"
 #include "tensi.h"
 #include "replay.h"
+#include "rect.h"
 #include "soundmanager.h"
 extern players you;
 extern HANDLE mutx;
@@ -528,15 +529,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
-	if(s_glow)
-	{
-		s_glow--;
-		if(!s_glow)
-		{
-			printlog("당신의 몸에서 빛나는 것이 멈췄다. ",false,false,false,CL_blue);
-			SetInter(IT_STAT);
-		}
-	}
 	if(s_graze)
 	{
 		s_graze--;
@@ -729,6 +721,74 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 	}
 
+	if (you.s_weather_turn>0)
+	{
+		if (you.s_weather == 2) //천둥번개
+		{
+			if (randA(9) == 0) { //높은 확률로 근처의 적에게 유도된다.
+				monster* mon_ = env[current_level].getRandomMonster(true);
+				if (mon_) {
+					rand_rect_iterator rand(mon_->position, 1, 1, false);
+					while (!rand.end()) {
+						coord_def pos_ = (*rand);
+						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
+						{
+							ReleaseMutex(mutx);
+							soundmanager.playSound("elec");
+							int damage_ = you.GetMaxHp() / 3;
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
+							BaseBomb(pos_, &img_blast[2], temp_att);
+							WaitForSingleObject(mutx, INFINITE);
+							break;
+						}
+						rand++;
+					}
+				}
+			}
+			else if (randA(1) == 0) //일반적으로 무작위로 떨어짐
+			{
+				rand_rect_iterator rand(position, 8, 8, true);
+
+				while (!rand.end()) {
+					coord_def pos_ = (*rand);
+					if (pow((float)abs(position.x - pos_.x), 2) + pow((float)abs(position.y - pos_.y), 2)<=64) {
+						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
+						{
+							ReleaseMutex(mutx);
+							soundmanager.playSound("elec");
+							int damage_ = you.GetMaxHp() / 3;
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
+							BaseBomb(pos_, &img_blast[2], temp_att);
+							WaitForSingleObject(mutx, INFINITE);
+						}
+						break;
+					}
+					rand++;
+				}
+			}
+
+		}
+		you.s_weather_turn--;
+		if (!you.s_weather_turn)
+		{
+			you.s_weather = 0;
+			resetLOS();
+			printlog("날씨가 원래대로 돌아왔다. ", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	if (you.s_weather == 3 && you.s_weather_turn > 0) {
+		s_glow = 1;
+	}
+	else if (s_glow)
+	{
+		s_glow--;
+		if (!s_glow)
+		{
+			printlog("당신의 몸에서 빛나는 것이 멈췄다. ", false, false, false, CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
 	if(s_slaying)
 	{
 		s_slaying = 0;

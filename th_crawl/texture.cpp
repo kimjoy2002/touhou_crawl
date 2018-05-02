@@ -1713,6 +1713,10 @@ textures img_effect_gold_floor[] = {
 textures img_effect_rock_trap(&texture_item01, 183, 255);
 textures img_effect_halo(&texture_laser, 114, 255);
 
+textures img_effect_sun(&texture_dungeon01, 349);
+textures img_effect_rain(&texture_dungeon01, 350);
+textures img_effect_fog(&texture_dungeon01, 351);
+
 textures img_effect_rock_uplift[] = {
 	textures(&texture_item01, 208, 255),
 	textures(&texture_item01, 209, 255),

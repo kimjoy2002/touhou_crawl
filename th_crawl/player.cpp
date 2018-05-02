@@ -75,7 +75,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0) , alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -261,6 +261,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_pure);
 	SaveData<int>(fp, s_pure_turn);
 	SaveData<bool>(fp, drowned);
+	SaveData<int>(fp, s_weather);
+	SaveData<int>(fp, s_weather_turn);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -490,6 +492,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_pure);
 	LoadData<int>(fp, s_pure_turn);
 	LoadData<bool>(fp, drowned);
+	LoadData<int>(fp, s_weather);
+	LoadData<int>(fp, s_weather_turn);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -3266,6 +3270,19 @@ bool players::SetPureTurn(int value_, int turn_)
 		s_pure_turn = turn_;
 	return true;
 }
+bool players::SetWeather(int value_, int turn_)
+{
+	if (!turn_)
+		return false;
+	s_weather = value_;
+	if (s_weather_turn != -1 && (s_weather_turn < turn_ || turn_ == -1))
+		s_weather_turn = turn_; 
+	if (s_weather == 3 && s_weather_turn > 0) {
+		s_glow = 1;
+	}
+	resetLOS();
+	return true;
+}
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -3610,13 +3627,22 @@ interupt_type players::resetLOS(bool speak_)
 							intercept = true;
 							break;					
 						}
+						if (you.s_weather == 1 && you.s_weather_turn > 0) {
+							//안개효과로 항상 시야를 줄임
+							block_cloud--;
+							if (block_cloud <= 0)
+							{
+								intercept = true;
+								break;
+							}
+						}
 						if(env[current_level].isSmokePos(check_pos_.x,check_pos_.y,true))
 						{
 							smoke* smoke_ = env[current_level].isSmokePos2(check_pos_.x,check_pos_.y);
 							if(smoke_ && smoke_->sight_inter())
 							{
 								block_cloud-=smoke_->sight_inter();
-								if(!block_cloud)
+								if(block_cloud <= 0)
 								{
 									intercept = true;
 									break;

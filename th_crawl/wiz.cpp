@@ -430,10 +430,33 @@ void wiz_mode()
 				printlog("마법이 듣지 않는다.", true, false, false, CL_normal);
 			}
 			break;
-		case 'w':
-			//skill_summon_bug(100,&you,you.position);		
-			you.SetBuff((stat_up)rand_int(BUFFSTAT_STR, BUFFSTAT_EV), BUFF_DUPLE, rand_int(-3, 3), 10);
-			break;
+		case 'w': //날씨발현
+		{
+			int next_ = DG_TEMPLE_FIRST;
+			printlog("a - 안개 b - 천둥번개 c - 쾌청", true, false, false, CL_help);
+			printlog("어느 날씨를 발현할건가?", false, false, false, CL_help);
+			wiz_list.wizard_mode = true;
+			key_ = waitkeyinput();
+			switch (key_)
+			{
+			case 'a':
+			case 'A':
+				you.SetWeather(1, 100);
+				break;
+			case 'b':
+			case 'B':
+				you.SetWeather(2, 100);
+				break;
+			case 'c':
+			case 'C':
+				you.SetWeather(3, 100);
+				break;
+			default:
+				break;
+			}
+
+		}
+		break;
 		case 'p':
 		{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
@@ -442,7 +465,6 @@ void wiz_mode()
 			printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    R - 세이자   L - 릴리", true, false, false, CL_help);
 			printlog("I - 미코       O - 오키나  J - 순호     X - 죠온&시온", true, false, false, CL_help);
 			printlog("어떤 신전을 만들까?",false,false,false,CL_help);
-			wiz_list.wizard_mode = true;
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -739,6 +761,7 @@ void wiz_mode()
 			printsub(" >      - 아랫층으로 내려가기             ",true,CL_normal);
 			printsub(" <      - 윗층으로 올라가기               ",true,CL_normal);
 			printsub(" A      - 아이템생성(베타)                ",true,CL_normal);
+			printsub(" w      - 날씨발현                        ", true, CL_normal);
 			printsub(" W      - 시간정지                        ",true,CL_normal);
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);

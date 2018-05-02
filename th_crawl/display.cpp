@@ -1407,6 +1407,22 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				stateDraw.addState(temp, CL_small_danger, "위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.", this);
 				stateDraw.enter(this);
 			}
+			if (you.s_weather>0 && you.s_weather_turn)
+			{
+				D3DCOLOR color_ = CL_normal;
+				switch (you.s_weather) {
+				case 1:
+					stateDraw.addState("안개", color_, "짙은 안개로 인하여 시야가 급격히 줄어듭니다.", this);
+					break;
+				case 2:
+					stateDraw.addState("천둥번개", color_, "주변에 무작위로 천둥번개가 떨어집니다.", this);
+					break;
+				case 3:
+					stateDraw.addState("쾌청", color_, "주변의 모두가 빛나게되어 회피가 낮아지고 투명이 효과를 잃습니다.", this);
+					break;
+				}
+				stateDraw.enter(this);
+			}
 			if(you.as_penalty>0)
 			{
 				D3DCOLOR color_ = you.as_penalty>you.GetPenaltyMinus(3)?CL_danger: //끔찍
@@ -2058,6 +2074,34 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 
+	//안개그리기
+	if(you.s_weather >= 1 && you.s_weather_turn > 0)
+	{
+		for (int i = 0; i < 17; i++)
+		{
+			for (int j = 0; j < 17; j++)
+			{
+				if (i + x_ >= 0 && j + y_ >= 0 && i + x_ < DG_MAX_X && j + y_ < DG_MAX_Y)
+				{
+					if (env[current_level].isSight(coord_def(i + x_, j + y_)) && env[current_level].isInSight(coord_def(i + x_, j + y_)))
+					{
+						switch (you.s_weather) {
+						case 1:
+							img_effect_fog.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(100, 255, 255, 255));
+							break;
+						case 2:
+							img_effect_rain.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(50, 255, 255, 255));
+							break;
+						case 3:
+							img_effect_sun.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(20, 255, 255, 255));
+							break;
+						}
+
+					}
+				}
+			}
+		}
+	}
 
 	//이펙트그리기
 	{

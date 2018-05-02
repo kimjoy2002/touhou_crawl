@@ -2059,6 +2059,27 @@ smoke* environment::isSmokePos2(int x_,int y_, const smoke* excep_)
 	}
 	return NULL;	
 }
+monster* environment::getRandomMonster(bool except_melee)
+{
+	random_extraction<monster*> mon_list;
+	int num_=0;
+	vector<monster>::iterator it;
+	it = mon_vector.begin();
+	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
+	{
+		if((*it).isLive() && (*it).isYourShight())
+		{
+			if (except_melee &&
+				(pow((float)abs(you.position.x - (*it).position.x), 2)
+					+ pow((float)abs(you.position.y - (*it).position.y), 2)) <= 2)
+				continue;
+			mon_list.push(&(*it));
+		}
+	}
+	if (mon_list.GetSize() == 0)
+		return NULL;
+	return mon_list.pop();
+}
 
 int environment::insight_mon(monster_enemy_type type_) //타입은 동맹,적등등.. 나중에 필요하면 조건넣기
 {

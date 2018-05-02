@@ -280,6 +280,8 @@ public:
 	int s_pure;
 	int s_pure_turn;
 	bool drowned;//익사중(임시 수영가능)
+	int s_weather;
+	int s_weather_turn;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -489,6 +491,7 @@ public:
 	bool SetNightSight(int value_, int turn_, bool stong_);
 	bool SetSleep(int value_);
 	bool SetPureTurn(int value_, int turn_);
+	bool SetWeather(int value_, int turn_);
 
 	int GetInvisible();
 	int GetSaved(){return true;};

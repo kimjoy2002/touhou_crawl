@@ -2480,7 +2480,7 @@ int monster::action(int delay_)
 		}
 		if(s_glow)
 		{
-			if (!(is_sight && you.GetBuffOk(BUFFSTAT_HALO)))
+			if (!((is_sight && you.GetBuffOk(BUFFSTAT_HALO)) || (is_sight && you.s_weather==3 && you.s_weather_turn>0)))
 			{
 				s_glow--;
 				if (is_sight && isView())
@@ -2490,7 +2490,7 @@ int monster::action(int delay_)
 				}
 			}
 		}
-		else if (is_sight && you.GetBuffOk(BUFFSTAT_HALO))
+		else if ((is_sight && you.GetBuffOk(BUFFSTAT_HALO)) || (is_sight && you.s_weather == 3 && you.s_weather_turn>0))
 		{
 			s_glow = 1;
 		}
@@ -4001,18 +4001,42 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 	{
 		int length_ = 8;
 		beam_iterator it(position,c,(round_type)i);
+		int block_cloud = 2;
 		while(!intercept && !it.end())
 		{
+			coord_def check_pos_ = (*it);
 			if(length_ == 0) //시야가 다 달았다.
 			{
 				intercept = true;
 				break;
 			}
-			if (!env[current_level].isSight((*it)) || (okina && env[current_level].isCloseDoor(it->x, it->y)))
+			if (!env[current_level].isSight(check_pos_) || (okina && env[current_level].isCloseDoor(check_pos_.x, check_pos_.y)))
 			{
 				intercept = true;
 				break;
-			}		
+			}
+			if (you.s_weather == 1 && you.s_weather_turn > 0) {
+				//안개효과로 항상 시야를 줄임
+				block_cloud--;
+				if (block_cloud < 0)
+				{
+					intercept = true;
+					break;
+				}
+			}
+			if (env[current_level].isSmokePos(check_pos_.x, check_pos_.y, true))
+			{
+				smoke* smoke_ = env[current_level].isSmokePos2(check_pos_.x, check_pos_.y);
+				if (smoke_ && smoke_->sight_inter())
+				{
+					block_cloud -= smoke_->sight_inter();
+					if (block_cloud < 0)
+					{
+						intercept = true;
+						break;
+					}
+				}
+			}
 			it++;
 			length_--;
 		}

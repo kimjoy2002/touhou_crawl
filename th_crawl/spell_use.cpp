@@ -5466,34 +5466,36 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 	if(size)
 	{
 		bool warning_ = false;
-		for(beam.init();!beam.end();)
-		{
-			auto temp_beam = beam++;
-			//스마이트형이 아닌경우 부딪히면 터지기 마련이다.
-			bool block_ = false;
-			if(!env[current_level].isMove(*(beam),true))
+		if (!smite) {
+			for(beam.init();!beam.end();)
 			{
-				beam = temp_beam;
-				target = (*beam);
-				block_ = true;
-			}
-
-		
-			for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-			{
-				if((*it).isLive() && (*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y &&
-					!(*it).isPassedBullet(&you)
-					)
+				auto temp_beam = beam++;
+				//스마이트형이 아닌경우 부딪히면 터지기 마련이다.
+				bool block_ = false;
+				if(!env[current_level].isMove(*(beam),true))
 				{
 					beam = temp_beam;
 					target = (*beam);
 					block_ = true;
+				}
+
+		
+				for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+				{
+					if((*it).isLive() && (*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y &&
+						!(*it).isPassedBullet(&you)
+						)
+					{
+						beam = temp_beam;
+						target = (*beam);
+						block_ = true;
+						break;
+					}
+				}
+				if(block_)
+				{
 					break;
 				}
-			}
-			if(block_)
-			{
-				break;
 			}
 		}
 

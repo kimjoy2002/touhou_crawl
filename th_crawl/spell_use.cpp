@@ -3495,7 +3495,7 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 
 bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 {
-	if(env[current_level].isMove(target.x, target.y))
+	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
@@ -3507,7 +3507,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(randA(randA(600))<power+100 || (*rit) == target)
 				{
-					if(env[current_level].isMove(rit->x,rit->y))
+					if(env[current_level].isMove(rit->x,rit->y,true))
 					{
 						env[current_level].MakeEffect(*rit,&img_blast[2],false);
 						vt_.push_back(*rit);
@@ -3517,7 +3517,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 		}
 		for(auto it = vt_.begin();it != vt_.end();it++)
 		{
-			if(env[current_level].isMove(it->x,it->y))
+			if(env[current_level].isMove(it->x,it->y,true))
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{

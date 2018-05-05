@@ -1412,7 +1412,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				D3DCOLOR color_ = CL_normal;
 				switch (you.s_weather) {
 				case 1:
-					stateDraw.addState("안개", color_, "짙은 안개로 인하여 시야가 급격히 줄어듭니다.", this);
+					stateDraw.addState("안개", color_, "짙은 안개로 인하여 모두의 시야가 급격히 줄어듭니다.", this);
 					break;
 				case 2:
 					stateDraw.addState("천둥번개", color_, "주변에 무작위로 천둥번개가 떨어집니다.", this);
@@ -1796,7 +1796,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if (you.s_night_sight_turn)
 			{
 				stateDraw.addState("야맹증", CL_danger,
-					"당신은 한치앞도 보이지않습니다. 시야가 극적으로 줄어듭니다.", this);
+					"당신은 한치앞도 보이지않습니다. 당신의 시야가 극적으로 줄어듭니다.", this);
 			}
 			if (you.s_sleep>0)
 			{

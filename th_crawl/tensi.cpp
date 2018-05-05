@@ -221,12 +221,15 @@ void tensi_weather(int type_, int good_)
 	switch (type_)
 	{
 	case 1:
+		printlog("한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.", true, false, false, CL_normal);
 		you.SetWeather(1, 100);
 		break;
 	case 2:
+		printlog("던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.", true, false, false, CL_normal);
 		you.SetWeather(2, 100);
 		break;
 	case 3:
+		printlog("던전에 강한 햇빛이 들기 시작했다.", true, false, false, CL_normal);
 		you.SetWeather(3, 100);
 		break;
 	default:

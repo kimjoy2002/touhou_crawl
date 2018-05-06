@@ -2312,7 +2312,7 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	{
 		if (!order->isplayer()) //카나메드릴은 너무 쎄서 몬스터 보정이 좀 더 필요
 			pow *= 0.7f;
-		beam_infor temp_infor(randC(3,20+pow/4.5),3*(20+pow/4.5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
+		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2539,7 +2539,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{		
 		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//몬스터가 쓸때 패널티
-		int damage_ = (13+power/6)*mon_panlty_;
+		int damage_ = (14+power/6)*mon_panlty_;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("광탄",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -3539,7 +3539,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("wind");
 		}
-		int damage_ = 2*(9+power/8);
+		int damage_ = 2*(8+power/8);
 		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("바람의 탄환",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));

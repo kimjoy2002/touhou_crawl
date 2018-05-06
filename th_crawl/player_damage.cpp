@@ -1005,6 +1005,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 		}
 		else
 		{
+			if (wiz_list.wizard_mode == 1)
+			{
+				char temp[50];
+				sprintf_s(temp, 50, "shield수치: %f 또는 %g", shield_, shield_);
+				printlog(temp, true, false, false, CL_danger);
+			}
 			if(a.order)	
 			{
 				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"방패로 막았다.");

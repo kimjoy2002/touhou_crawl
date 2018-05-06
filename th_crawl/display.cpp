@@ -1116,7 +1116,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left += fontDesc.Width * 14;
 				for (i = 0; i < you.GetMp() * 18 / you.GetMaxMp(); i++)
 				{
-					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_good);
+					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_blue);
 					rc.left += fontDesc.Width;
 				}
 				for (; i < 18; i++)
@@ -2019,6 +2019,18 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				dot_monster.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+p_hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,p_hp_rate_,0.5f,255);
 				dot_item.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,hp_rate_,0.5f,255);
 			}
+			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
+			{
+				float max_rate_ = (1 / 3.0f);
+
+				int temp1_ = max(0, you.GetMp()) * 32 / you.GetMaxMp();
+				float mp_rate_ = (max_rate_ * temp1_);
+				int mp_offset_ = (temp1_ + 1) / 2 - 16;
+
+				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, max_rate_ * 32.0f, 0.5f, 255);
+				dot_up.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + mp_offset_, (you.position.y - y_)*32.0f + 38.0f, 0.0f, mp_rate_, 0.5f, 255);
+			}
+
 		}
 		dot_player.draw(pSprite,GetDotX(you.position.x+offset_.x),GetDotY(you.position.y+offset_.y),255);
 	}

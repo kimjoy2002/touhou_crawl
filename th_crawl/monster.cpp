@@ -4291,210 +4291,210 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_ALLY;
 	return temp;
 }
-bool monster::GetStateString(monster_state_simple state_, char* string_)
+D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 {
 	switch(state_)
 	{
 	case MSS_NONE:
 		if(state.GetState() == MS_NORMAL)
 		{
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_SLEEP:
 		if(state.GetState() == MS_SLEEP)
 		{
 			sprintf(string_,"수면");
-			return true;
+			return CL_normal;
 		}
 		else if(state.GetState() == MS_REST)
 		{
 			sprintf(string_,"휴식");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_WANDERING:
 		if(state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
 		{
 			sprintf(string_,"탐험중");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_NO_NOTICE:
 		if(state.GetState() == MS_ATACK && !isUserAlly() && target != &you)
 		{
 			sprintf(string_,"발각안됨");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_CONFUSE:
 		if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
 		{
 			sprintf(string_,"혼란");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_POISON:
 		if(s_poison)
 		{
 			sprintf(string_,"독");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_SCARY:
-		return false;
+		return CL_none;
 	case MSS_MIGHT:
 		if(s_might)
 		{
 			sprintf(string_,"힘강화");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_CLEVER:
 		if (s_clever)
 		{
 			sprintf(string_, "영력강화");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_HASTE:
 		if(s_haste && !s_slow)
 		{
 			sprintf(string_,"가속");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_SLOW:
 		if(s_slow && !s_haste)
 		{
 			sprintf(string_,"감속");
-			return true;
+			return CL_normal;
 		}
 		else
-			return false;
+			return CL_none;
 	case MSS_SMOKE_ABOVE:
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
 			sprintf(string_,smoke_->GetName());
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_SUMMON:
 		if(flag & M_FLAG_SUMMON )
 		{
 			sprintf(string_,"소환");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_FROZEN:
 		if(s_frozen)
 		{
 			sprintf(string_,"빙결");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_ALLY:
 		if(isUserAlly())
 		{
 			sprintf(string_,"우호");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_ELEC:
 		if(s_elec)
 		{
 			sprintf(string_,"방전");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_PARALYSE:
 		if(s_paralyse)
 		{
 			sprintf(string_,"마비");
-			return true;
+			return CL_normal;
 
 		}
-		return false;
+		return CL_none;
 	case MSS_GLOW:
 		if(s_glow)
 		{
 			sprintf(string_,"빛남");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_GRAZE:
 		if(s_graze)
 		{
 			sprintf(string_,"그레이즈");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_SILENCE:
 		if(env[current_level].isSilence(position))
 		{
 			sprintf(string_,"정적");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_SICK:
 		if(s_sick)
 		{
 			sprintf(string_,"병");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_VEILING:
 		if(s_veiling)
 		{
 			sprintf(string_,"베일링");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_INVISIVLE:
 		if(s_invisible)
 		{
 			sprintf(string_,"투명");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_TELE:
 		if(s_tele)
 		{
 			sprintf(string_,"공간불안정");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_MUTE:
 		if(s_mute)
 		{
 			sprintf(string_,"벙어리");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_CATCH:
 		if(s_catch)
 		{
 			sprintf(string_,"잡힘");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_GHOST:
 		if(s_ghost)
 		{
 			sprintf(string_,"영혼구속");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_FEAR:
 		if(s_fear)
 		{
@@ -4502,30 +4502,30 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 			sprintf(string_,"공포");
 			else
 				sprintf(string_, "전의상실");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_MIND_READING:
 		if(s_mind_reading)
 		{
 			sprintf(string_,"간파");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_LUNATIC:
 		if(s_lunatic)
 		{
 			sprintf(string_,"광기");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_COMMUNICATION:
 		if(s_communication)
 		{
 			sprintf(string_,"동료부르기");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_FORCE:
 		if(force_turn)
 		{
@@ -4533,26 +4533,50 @@ bool monster::GetStateString(monster_state_simple state_, char* string_)
 				sprintf(string_,"강화");
 			else				
 				sprintf(string_,"약화");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_CHANGED:
 		if(s_changed)
 		{
 			sprintf(string_,"둔갑중");
-			return true;
+			return CL_normal;
 		}
-		return false;
+		return CL_none;
 	case MSS_INVINCIBILITY:
 		if (s_invincibility)
 		{
 			sprintf(string_, "무적");
-			return true;
+			return CL_normal;
 		}
-		return false;
-	default:
-		return false;
+		return CL_none;
+	case MSS_HP:
+	{
+		int hp_ = hp * 5 / max_hp;
+		switch (hp_)
+		{
+		case 0:
+			sprintf(string_, "죽기 직전");
+			return CL_danger;
+		case 1:
+			sprintf(string_, "심각한 부상");
+			return CL_small_danger;
+		case 2:
+			sprintf(string_, "상당한 부상");
+			return CL_warning;
+		case 3:
+			sprintf(string_, "가벼운 부상");
+			return CL_good;
+		case 4:
+			sprintf(string_, "거의 멀쩡함");
+			return CL_dark_good;
+		}
+		return CL_none;
 	}
+	default:
+		return CL_none;
+	}
+	return CL_none;
 }
 void shadow::SaveDatas(FILE *fp)
 {

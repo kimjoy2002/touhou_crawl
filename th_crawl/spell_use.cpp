@@ -260,7 +260,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 		if(!ok_)
 			return false;
 	}
-	else if(!SpellFlagCheck(skill, S_FLAG_SMITE))
+	else if(!SpellFlagCheck(skill, S_FLAG_SMITE) && !SpellFlagCheck(skill, S_FLAG_IMMEDIATELY))
 	{
 		beam_iterator beam(order->position,order->position);
 		
@@ -291,7 +291,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 			max_length_--;
 		}
 	}
-	else if(SpellFlagCheck(skill, S_FLAG_SMITE))
+	else if(SpellFlagCheck(skill, S_FLAG_SMITE) || SpellFlagCheck(skill, S_FLAG_IMMEDIATELY))
 	{
 		beam_iterator beam(order->position,order->position);
 		if(!CheckThrowPath(order->position,target, beam))

@@ -561,6 +561,9 @@ bool players::Draw(LPD3DXSPRITE pSprite, float x_, float y_)
 	if (s_glow || you.GetBuffOk(BUFFSTAT_HALO)) {
 		img_effect_halo.draw(pSprite, x_, y_, 127);
 	}
+	if (s_veiling) {
+		img_effect_veiling.draw(pSprite, x_, y_, 255);
+	}
 	if (!GetCharNameString()->empty())
 	{
 		if (you.image) {

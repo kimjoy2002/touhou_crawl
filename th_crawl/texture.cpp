@@ -1712,6 +1712,7 @@ textures img_effect_gold_floor[] = {
 
 textures img_effect_rock_trap(&texture_item01, 183, 255);
 textures img_effect_halo(&texture_laser, 114, 255);
+textures img_effect_veiling(&texture_laser, 115, 255);
 
 textures img_effect_sun(&texture_dungeon01, 349);
 textures img_effect_rain(&texture_dungeon01, 350);
@@ -2938,6 +2939,8 @@ int texturetoint(textures* input)
 		return 486;
 	else if (input == &img_effect_halo)
 		return 487;
+	else if(input == &img_effect_veiling)
+		return 488;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3941,6 +3944,8 @@ textures* inttotexture(int input)
 		return &img_mons_cursed_doll;
 	case 487:
 		return &img_effect_halo;
+	case 488:
+		return &img_effect_veiling;
 	default:
 		return &img_mons_default;
 	}

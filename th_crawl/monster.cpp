@@ -1640,6 +1640,10 @@ bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
 	if (s_glow) {
 		img_effect_halo.draw(pSprite, x_, y_, 127);
 	}
+	if (s_veiling) {
+		img_effect_veiling.draw(pSprite, x_, y_, 255);
+	}
+
 	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_, 255);

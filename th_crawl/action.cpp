@@ -45,6 +45,7 @@ using namespace std;
 using namespace std::tr1;
 
 
+
 extern HANDLE mutx;
 
 
@@ -3132,11 +3133,74 @@ void floorMove()
 {
 	int current_level_ = current_level;
 	dungeon_level next_ = TEMPLE_LEVEL;
-	printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
-	printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
-	printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
+
+
+	list<pair<char, string>> enter_;
+	enter_.push_back(pair<char, string>('d', "던전"));
+	if (map_list.dungeon_enter[TEMPLE].detected)
+		enter_.push_back(pair<char, string>('t', "신전"));
+	if (map_list.dungeon_enter[MISTY_LAKE].detected)
+		enter_.push_back(pair<char, string>('l', "안개의 호수"));
+	if (map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected)
+		enter_.push_back(pair<char, string>('m', "요괴의 산"));
+	if (map_list.dungeon_enter[SCARLET_M].detected)
+		enter_.push_back(pair<char, string>('s', "홍마관"));
+	if (map_list.dungeon_enter[SCARLET_L].detected)
+		enter_.push_back(pair<char, string>('b', "홍마관도서관"));
+	if (map_list.dungeon_enter[SCARLET_U].detected)
+		enter_.push_back(pair<char, string>('u', "홍마관지하"));
+	if (map_list.dungeon_enter[BAMBOO].detected)
+		enter_.push_back(pair<char, string>('a', "미궁의죽림"));
+	if (map_list.dungeon_enter[YUKKURI_D].detected)
+		enter_.push_back(pair<char, string>('y', "윳쿠리둥지"));
+	if (map_list.dungeon_enter[DEPTH].detected)
+		enter_.push_back(pair<char, string>('p', "짐승길"));
+	if (map_list.dungeon_enter[SUBTERRANEAN].detected)
+		enter_.push_back(pair<char, string>('h', "지령전"));
+	if (map_list.dungeon_enter[DREAM_D].detected)
+		enter_.push_back(pair<char, string>('r', "꿈의 세계"));
+	if (map_list.dungeon_enter[PANDEMONIUM].detected)
+		enter_.push_back(pair<char, string>('k', "마계"));
+	if (map_list.dungeon_enter[HAKUREI_D].detected)
+		enter_.push_back(pair<char, string>('z', "하쿠레이신사"));
+	/* 지구랏은 아직
+	if (map_list.dungeon_enter[ZIGURRAT].detected)
+		enter_.push_back(pair<char, string>('z', "하쿠레이신사"));*/
+
+	int num_ = 0;
+	for (auto it = enter_.begin(); it != enter_.end(); it++) {
+		char temp[100];
+		sprintf_s(temp, 100, "%c - %s  ", it->first, it->second.c_str());
+		printlog(temp, false, false, false, CL_help);
+		num_++;
+		if (num_ == 5) {
+			enterlog();
+			num_ = 0;
+		}
+	}
+	enterlog();
+	//printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
+	//printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
+	//printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
 	printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
 	int key_ = waitkeyinput();
+
+	bool ok_ = false;
+	for (auto it = enter_.begin(); it != enter_.end(); it++) 
+	{
+		if (key_ == it->first || key_ == (it->first - 'a' + 'A'))
+		{
+			ok_ = true;
+			break;
+		}
+	}
+	if (!ok_) {
+		printlog(" 취소", true, false, false, CL_help);
+		return;
+	}
+
+
+
 	switch (key_)
 	{
 	case 'd':
@@ -3179,10 +3243,6 @@ void floorMove()
 	case 'A':
 		next_ = BAMBOO_LEVEL;
 		break;
-	case 'e':
-	case 'E':
-		next_ = EIENTEI_LEVEL;
-		break;
 	case 'h':
 		next_ = SUBTERRANEAN_LEVEL;
 		break;
@@ -3204,10 +3264,6 @@ void floorMove()
 	case 'r':
 	case 'R':
 		next_ = DREAM_LEVEL;
-		break;
-	case 'o':
-	case 'O':
-		next_ = MOON_LEVEL;
 		break;
 	case 'k':
 	case 'K':

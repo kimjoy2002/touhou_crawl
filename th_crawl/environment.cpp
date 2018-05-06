@@ -908,7 +908,7 @@ monster* environment::AddMonster(int id_, int flag_, coord_def position_, int ti
 			if(all_monster_id<1)
 				all_monster_id = 1;
 			ReleaseMutex(mutx);
-			mon_vector.back().SetMonster(all_monster_id++, id_, flag_, time_, position_);
+			mon_vector.back().SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
 			return &(mon_vector.back());
 		}
 		else if(!(*it).isLive())
@@ -916,7 +916,7 @@ monster* environment::AddMonster(int id_, int flag_, coord_def position_, int ti
 			if(all_monster_id<1)
 				all_monster_id = 1;
 			ReleaseMutex(mutx);
-			(*it).SetMonster(all_monster_id++, id_, flag_, time_, position_);
+			(*it).SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
 			return &(*it);
 		}
 	}
@@ -2025,6 +2025,12 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 bool environment::isForbidZone(int x_, int y_)
 {
 	if (dgtile[x_][y_].flag & FLAG_FORBID)
+		return true;
+	return false;
+}
+bool environment::isBlockPos(int x_, int y_)
+{
+	if (dgtile[x_][y_].flag & FLAG_BLOCK)
 		return true;
 	return false;
 }

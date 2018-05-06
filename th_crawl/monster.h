@@ -127,7 +127,7 @@ public:
 	void LoadDatas(FILE *fp);
 	void ReTarget();
 	void init();
-	bool SetMonster(int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_ = true);
+	bool SetMonster(int map_num_, int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_ = true);
 	bool ChangeMonster(int id_, int flag_);
 	void FirstContact();
 	coord_def GetPrevPos(){return prev_position;};

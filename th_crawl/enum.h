@@ -398,7 +398,8 @@ enum dungeon_tile_flag
     FLAG_VIOLET = 1<<11, //필드 바이올렛
 	FLAG_SANCTUARY = 1 << 12, //성역
 	FLAG_DONT_DOOR = 1 << 13, //몬스터가 열 수 없는 문
-	FLAG_FORBID = 1 << 14 //포비든 영역
+	FLAG_FORBID = 1 << 14, //포비든 영역
+	FLAG_BLOCK = 1 << 15 //고정된 지형으로 이동하기 어려움
 };
 
 

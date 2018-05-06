@@ -369,7 +369,7 @@ void monster::init()
 	random_spell = false;
 	item_lists.clear();
 }
-bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_)
+bool monster::SetMonster(int map_num_, int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_)
 {
 	if(id_ < 0 || id_ > MON_MAX)
 		return false;
@@ -432,6 +432,12 @@ bool monster::SetMonster(int map_id_, int id_, int flag_, int time_, coord_def p
 		{
 			s_neutrality = 1;
 		}
+		if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+		{
+			env[map_num_].dgtile[position_.x][position_.y].flag |= FLAG_BLOCK;
+		}
+
+
 	}
 	SetResistMonster(this);
 
@@ -447,7 +453,7 @@ bool monster::ChangeMonster( int id_, int flag_)
 {
 	float hp_per_ = (float)(hp) / max_hp;
 	bool summon_ = (flag & M_FLAG_SUMMON)?true:false;
-	SetMonster(map_id,id_,flag_,summon_time,position,false);
+	SetMonster(current_level,map_id,id_,flag_,summon_time,position,false);
 	if(summon_)
 		flag |= M_FLAG_SUMMON;
 	if(flag & M_FLAG_ALLY)
@@ -698,6 +704,13 @@ void monster::SetXY(int x_, int y_)
 		env[current_level].MakeSilence(position, s_silence_range, false);
 	if(s_catch)
 		you.SetCatch(NULL);
+
+	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+	{
+		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+	}
+
+
 	position.set(x_,y_);
 	for(auto it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
 	{
@@ -706,6 +719,12 @@ void monster::SetXY(int x_, int y_)
 	}
 	if(s_silence)
 		env[current_level].MakeSilence(position, s_silence_range, true);
+
+	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+	{
+		env[current_level].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
+	}
+
 }
 void monster::SetXY(coord_def pos_)
 {
@@ -2134,7 +2153,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	if(isYourShight())
 		sight_ = true;
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, false);
+		env[current_level].MakeSilence(position, s_silence_range, false);	
+	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+	{
+		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+	}
 	if(s_catch)	
 		you.SetCatch(NULL);
 	if(s_changed) //Á×À¸¸é ³Ê±¸¸®·Î µ¹¾Æ¿È

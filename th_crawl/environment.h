@@ -311,6 +311,7 @@ public:
 	bool isSanctuary(coord_def pos_);
 	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//해당 위치에 이미 몬스터가 있냐 ㅇ벗냐
 	bool isForbidZone(int x_, int y_);
+	bool isBlockPos(int x_, int y_);
 	bool isSmokePos(int x_,int y_, bool only_fog = false);//해당 위치에 구름이 있냐 없냐(only_fog는 시야를 가리는 구름만 찾는다.)	
 	floor_effect* isFloorEffectPos(int x_,int y_, const floor_effect* excep_ = NULL);
 	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//해당 위치에 구름이 있냐 없냐(포인터 리턴)

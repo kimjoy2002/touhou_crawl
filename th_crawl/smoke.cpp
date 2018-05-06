@@ -81,6 +81,11 @@ bool smoke::action(int delay_)
 	if(time <= 0)
 		return false;
 	time--;
+	if (type == SMT_FIRE && env[current_level].dgtile[position.x][position.y].tile == DG_SEA  && time > 2) {
+		time -= 3;
+		if (time < 2)
+			time = 2;
+	}
 	if(time<=0)
 	{
 		clear();

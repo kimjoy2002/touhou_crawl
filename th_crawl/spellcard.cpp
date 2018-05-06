@@ -440,6 +440,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	}
 	case SPC_V_SUN:
 	{
+		printlog("강렬한 빛이 주변을 비추었다! ", true, false, false, CL_warning);
 		map_effect = 2;
 		Sleep(500);
 		map_effect = 0;

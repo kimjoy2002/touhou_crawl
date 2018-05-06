@@ -15,6 +15,7 @@
 #include "soundmanager.h"
 #include "mon_infor.h"
 #include "rect.h"
+#include "tribe.h"
 
 int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
@@ -32,7 +33,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
 		return false;
 	}
-	if (you.s_pure_turn && you.s_pure >= 10)
+	if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 	{
 		printlog("당신은 스펠카드를 쓰기엔 너무 순화되어있다.", true, false, false, CL_normal);
 		return false;

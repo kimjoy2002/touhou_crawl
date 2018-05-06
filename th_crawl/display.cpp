@@ -1820,6 +1820,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				else
 					sprintf_s(temp, 128, "순화(%d단계)", you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3)));
 				stateDraw.addState(temp, color_,
+					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? "두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
 					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
 					(you.s_pure >= 20) ? "스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
 					(you.s_pure >= 10) ? "스펠카드를 사용할 수 없습니다." : "당신은 아직 순화의 패널티를 받고있지 않습니다." , this);

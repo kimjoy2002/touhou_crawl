@@ -66,6 +66,7 @@ enum tribe_proper_type
 	TPT_PURE_MP,
 	TPT_PURE_POWER,
 	TPT_PURE_LIFE,
+	TPT_PURE_SYSTEM,
 	TPT_MAX
 };
 

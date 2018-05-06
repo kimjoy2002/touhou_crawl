@@ -479,7 +479,7 @@ const D3DCOLOR item::item_color()
 		}
 		break;
 	case ITM_SPELL:
-		if (you.s_pure_turn && you.s_pure >= 10)
+		if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 		{
 			return_ = CL_bad;
 		}

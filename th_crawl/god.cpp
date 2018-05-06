@@ -1010,9 +1010,10 @@ bool GetGodAbility(int level, bool plus)
 					rand_.push(2);//저항순화
 					rand_.push(3);//마력순화
 					rand_.push(4);//파워순화
-					if (!you.char_name.name.compare("모코우"))
+					if (you.char_name.name.compare("모코우"))
 						rand_.push(5); //생명순화
 					rand_.push(6);//장비순화
+					rand_.push(7);//시스템 순화 
 					you.god_value[GT_JUNKO][0] = rand_.pop();
 					you.god_value[GT_JUNKO][1] = rand_.pop();
 					you.god_value[GT_JUNKO][2] = rand_.pop();
@@ -3209,7 +3210,10 @@ void God_show()
 				if (already_pure)
 				{
 					printsub("당신은 순호의 축복에 의해 영구적으로 순화되었다.                 (패시브)", true, CL_junko);
-					printsub(" └당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+					if (you.god_value[GT_JUNKO][3] == 7)
+						printsub(" └당신은 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+					else
+						printsub(" └당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
 					printsub(" └당신은 모든 스탯이 5 증가한다.", true, CL_junko);
 					printsub("", true, CL_normal);
 				}
@@ -3272,6 +3276,10 @@ void God_show()
 						break;
 					case 6:
 						sprintf_s(temp, 100, " └장비순화: 당신은 가지고 있던 장비를 순화했다. ");
+						printsub(temp, true, CL_junko);
+						break;
+					case 7:
+						sprintf_s(temp, 100, " └시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다. ");
 						printsub(temp, true, CL_junko);
 						break;
 					default:

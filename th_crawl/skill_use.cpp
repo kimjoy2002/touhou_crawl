@@ -2959,6 +2959,8 @@ const char* getJunkoString(int kind_)
 		return "생명순화: 추가 목숨을 2개 얻는다.";
 	case 6:
 		return "장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티펙트도 가능.";
+	case 7:
+		return "시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.";
 	}
 
 	return "버그순화: 버그이므로 이걸 선택하면 안된다.";
@@ -2969,12 +2971,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	int kind_ = 0;
 	bool loop_ = true;
 	printlog("순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.", true, false, false, CL_danger);
-	printlog("또한 한번 고른 순화는 되돌릴 수 없다. 신중하게 결정하길!", true, false, false, CL_danger);
+	printlog("또한 한번 고른 순화는 되돌릴 수 없다! ", false, false, false, CL_danger);
 	while (loop_) {
 		printlog("어떤 능력을 순화하겠습니까?", true, false, false, CL_help);
 		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
 		printarray(true, false, false, CL_junko, 2, "b - ", getJunkoString(you.god_value[GT_JUNKO][1]));
 		printarray(true, false, false, CL_junko, 2, "c - ", getJunkoString(you.god_value[GT_JUNKO][2]));
+		printarray(true, false, false, CL_junko, 2, "d - ", "신앙심을 내리고 새로운 순화를 위해 이번 선택을 미룬다.");
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -2991,6 +2994,26 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'C':
 			kind_ = you.god_value[GT_JUNKO][2];
 			loop_ = false;
+			break;
+		case 'd':
+		case 'D':	
+		{
+			printlog("이번 선택을 미루면 다음 선택까지 시간이 걸립니다. 정말로 미루겠습니까? (Y/N)", true, false, false, CL_help);
+			switch (waitkeyinput())
+			{
+			case 'y':
+			case 'Y':
+				you.PietyUpDown(-(you.piety-140));
+				you.god_value[GT_JUNKO][0] = 0;
+				printlog("순화 선택을 미뤘다. 다음 순화 선택까지 다시 신앙을 모아야한다.", true, false, false, CL_normal);
+				return true;
+			case 'n':
+			case 'N':
+			default:
+				printlog("취소하였다.", true, false, false, CL_normal);
+				return false;
+			}
+		}
 			break;
 		default:
 			break;
@@ -3201,6 +3224,11 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 		changedisplay(DT_GAME);
+		break;
+	case 7:
+		you.SetProperty(TPT_PURE_SYSTEM, 1);
+		printlog("순호는 당신의 시스템을 순화하였다!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "순호로부터 시스템순화 축복", CL_junko);
 		break;
 	}
 

@@ -2111,7 +2111,7 @@ int players::getAmuletPercent()
 void players::ExpRecovery(int exper_)
 {
 	if (system_exp.value > 0) {
-		system_exp.value -= exper_;
+		system_exp.value -= (you.GetProperty(TPT_PURE_SYSTEM))?3*exper_:exper_;
 		if (system_exp.value <= 0) {
 			system_exp.value = 0;
 			item* _item = you.equipment[ET_NECK];

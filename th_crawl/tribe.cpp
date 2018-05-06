@@ -203,6 +203,8 @@ string tribe_property::GetName()
 		return "순수한 파워";
 	case TPT_PURE_LIFE:
 		return "순수한 생명";
+	case TPT_PURE_SYSTEM:
+		return "순수한 시스템";
 	}
 	return "버그특성";
 }
@@ -466,7 +468,9 @@ string tribe_property::GetInfor()
 	case TPT_PURE_POWER:
 		return "당신은 항상 풀파워다.";
 	case TPT_PURE_LIFE:
-		return value>1?"당신은 2개의 추가 생명이 남아있다.":"당신은 1개의 추가 생명이 남아있다.";
+		return value>1?"당신은 2개의 추가 생명이 남아있다.":"당신은 1개의 추가 생명이 남아있다."; 
+	case TPT_PURE_SYSTEM:
+		return "당신은 순화 상태에서도 스펠카드를 사용할 수 있으며 부적의 충전속도가 3배가 된다.";
 	}
 	return "이 특성은 버그다.";
 }
@@ -689,8 +693,10 @@ string tribe_property::GetDetail()
 	case TPT_PURE_POWER:
 		return "당신은 순호의 축복으로 항상 풀파워모드이며 떨어지지않는다.";
 	case TPT_PURE_LIFE:
-		return value>1 ? "당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n당신의 추가 생명은 2개 남았다." : 
-			"당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n당신의 추가 생명은 1개 남았다.";
+		return value>1 ? "당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 2개 남았다." : 
+			"당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 1개 남았다.";
+	case TPT_PURE_SYSTEM:
+		return "당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 스펠카드가 사용이 가능하게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.";
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -705,7 +711,8 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_ELEC_IMUNE:
 	case TPT_PURE_MP:
 	case TPT_PURE_POWER:
-	case TPT_PURE_LIFE:
+	case TPT_PURE_LIFE:	
+	case TPT_PURE_SYSTEM:
 		return CL_junko;
 	}
 	return CL_STAT;
@@ -881,6 +888,8 @@ void tribe_property::gain(bool gain_)
 		you.power = 1000;
 		return;
 	case TPT_PURE_LIFE:
+		return;
+	case TPT_PURE_SYSTEM:
 		return;
 	}
 }

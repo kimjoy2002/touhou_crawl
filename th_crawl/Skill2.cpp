@@ -1769,9 +1769,9 @@ const char* SkillCostString(skill_list skill)
 	case SKL_MIKO_2:
 		return "(인기도 2%)";
 	case SKL_MIKO_3:
-		return "(인기도 10%)";
+		return "(인기도 5%)";
 	case SKL_MIKO_4:
-		return "(인기도 20%)";
+		return "(인기도 15%)";
 	case SKL_MIKO_5:
 		return "(인기도 50%)";
 	case SKL_MIKO_6:

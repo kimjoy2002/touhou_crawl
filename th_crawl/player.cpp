@@ -4637,7 +4637,9 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 
 	you.Ability(SKL_ABANDON_GOD,true,false);
 	GetGodAbility(0, true);
-	PietyUpDown((isTutorial() || god == GT_SEIJA)?160:piety_,true);
+	PietyUpDown(
+		god == GT_MIKO ? 0 :
+		(isTutorial() || god == GT_SEIJA)?160:piety_,true);
 	godAutoPickUp(god, true);
 	if(isTutorial())
 	{

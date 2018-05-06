@@ -572,7 +572,8 @@ void MainLoop()
 			saveandcheckexit();
 			break;
 		case 0x07: //전체층 이동
-			floorMove();
+			if (isNormalGame())
+				floorMove();
 			break;
 		case 0x89: //강제종료
 			nosaveandexit();

@@ -492,6 +492,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		soundmanager.playSound("ufo");
 		if (you.s_evoke_ghost) {
 			printlog("당신은 오쿠리쵸친으로부터 손을 놓았다. ", true, false, false, CL_magic);
+			you.PowUpDown(50, true);
 			you.SetEvokeGhost(0);
 		}
 		else {

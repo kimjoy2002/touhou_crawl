@@ -1690,6 +1690,12 @@ void SpellUse()
 		printlog("물에 빠진 상태에선 마법은 쓸 수 없다!", true, false, false, CL_danger);
 		return;
 	}
+	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
+	if (!sion_ && you.power < 100)
+	{ //파워 100이하에선 마법을 쓸 수 없다. (시온일 경우 가능)
+		printlog("마법을 쓸려면 최소 파워가 1이상 있어야한다! ", true, false, false, CL_danger);
+		return;
+	}
 	if(you.currentSpellNum)
 	{
 		if(!you.GetProperty(TPT_FINGER_MAGIC) && silence_)

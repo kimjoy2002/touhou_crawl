@@ -147,6 +147,10 @@ bool evoke_evokable(evoke_kind kind)
 				SetSpellSight(0,0);
 				return true;
 			}
+			else {
+				SetSpellSight(0, 0);
+				return false;
+			}
 		}
 		else
 		{

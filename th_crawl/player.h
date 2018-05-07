@@ -282,6 +282,7 @@ public:
 	bool drowned;//익사중(임시 수영가능)
 	int s_weather;
 	int s_weather_turn;
+	int s_evoke_ghost;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -492,6 +493,7 @@ public:
 	bool SetSleep(int value_);
 	bool SetPureTurn(int value_, int turn_);
 	bool SetWeather(int value_, int turn_);
+	bool SetEvokeGhost(int turn_);
 
 	int GetInvisible();
 	int GetSaved(){return true;};

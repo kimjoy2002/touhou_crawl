@@ -689,6 +689,7 @@ enum monster_index
 	MON_DANCING_ARMOUR,
 	MON_ELEC_BALL,
 	MON_HATATE,
+	MON_BOMB,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };
@@ -958,7 +959,8 @@ enum damage_reason
 	DR_MIRROR,
 	DR_MP,
 	DR_JUNKO,
-	DR_SLEEP
+	DR_SLEEP,
+	DR_GHOST
 };
 
 

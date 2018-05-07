@@ -1984,6 +1984,13 @@ void SetResistMonster(monster* mon)
 	case MON_HATATE:
 		mon->wind_resist = 1;
 		break;
+	case MON_BOMB:
+		mon->elec_resist = 3;
+		mon->ice_resist = 3;
+		mon->fire_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
 	}
 }
 

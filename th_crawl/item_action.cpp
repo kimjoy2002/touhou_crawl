@@ -29,6 +29,10 @@ void PickUp()
 		printlog("광기에 휩싸인 상태로 무언가를 주울 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 주울 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	int num=0;
 	list<item>::iterator it, first_it;
 	for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
@@ -270,6 +274,10 @@ void iteminfor_discard()
 		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 버릴 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	int i=0;
 	view_item(IVT_DISCARD,"무슨 아이템을 버리겠습니까?");
 	while(1)
@@ -332,6 +340,10 @@ void fast_discard()
 		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 버릴 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	if(!you.final_item)
 		return;
 	for(list<item>::iterator it = you.item_list.begin();it != you.item_list.end();it++)
@@ -353,6 +365,10 @@ void Eatting()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 먹을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 먹을 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -405,6 +421,10 @@ void Drinking()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 마실 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 마실 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -535,6 +555,10 @@ void Reading()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 읽을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 읽을 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)

@@ -75,7 +75,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0) , alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -263,6 +263,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, drowned);
 	SaveData<int>(fp, s_weather);
 	SaveData<int>(fp, s_weather_turn);
+	SaveData<int>(fp, s_evoke_ghost);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -494,6 +495,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, drowned);
 	LoadData<int>(fp, s_weather);
 	LoadData<int>(fp, s_weather_turn);
+	LoadData<int>(fp, s_evoke_ghost);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -738,6 +740,14 @@ int players::move(short_move x_mov, short_move y_mov)
 				you.SetInter(IT_MAP_FIND);
 				return 0;
 			}
+
+			if (s_evoke_ghost) {
+				printlog("유령 상태에선 적을 공격할 수 없다. ", true, false, false, CL_normal);
+				return 0;
+			}
+
+
+
 			attack_type brand_ = ATT_NORMAL;
 			if(equipment[ET_WEAPON])
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
@@ -1440,6 +1450,11 @@ void resurectionlog(char* reason);
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	int prev_value_ = value_;
+	if (value_ > 0 && s_evoke_ghost) {
+		//유령화 상태에선 체력이 회복되지않음.
+		return prev_value_;
+	}
+
 	if(value_<0 && GetMaxHp()/2 <= -value_)
 		printlog("악! 이건 정말로 아프다!",true,false,false,CL_danger);
 
@@ -3286,6 +3301,12 @@ bool players::SetWeather(int value_, int turn_)
 	resetLOS();
 	return true;
 }
+bool players::SetEvokeGhost(int turn_)
+{
+	s_evoke_ghost = turn_;
+	return true;
+}
+
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -4262,10 +4283,19 @@ bool players::Drink(char id_)
 }
 bool players::Evoke(char id_)
 {
+
+
+
 	for(auto it = item_list.begin(); it != item_list.end(); it++)
 	{
 		if((*it).id == id_)
 		{
+			if (you.s_evoke_ghost &&
+				!((*it).type == ITM_MISCELLANEOUS && (*it).value1 == EVK_GHOST_BALL)
+				) {
+				printlog("유령상태에선 오쿠리쵸친을 제외한 아이템을 발동하는건 불가능해! ", true, false, false, CL_normal);
+				return false;
+			}
 			WaitForSingleObject(mutx, INFINITE);
 			if((*it).type == ITM_SPELL)
 			{
@@ -5652,7 +5682,7 @@ void players::burstCloud(int kind_, int rate_)
 bool players::isView(const monster* monster_info)
 {
 	
-	if(isArena())
+	if(isArena() || s_evoke_ghost)
 		return false;
 	if((you.s_invisible || you.togle_invisible) && 
 		!(you.s_glow && you.GetBuffOk(BUFFSTAT_HALO)) &&

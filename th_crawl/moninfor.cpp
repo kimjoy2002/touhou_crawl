@@ -928,6 +928,9 @@ string GetMonsterInfor(monster *it)
 	case MON_HATATE:
 		text_ += "집에서 염사를 하여 신문기사를 쓰고 있는 까마귀 텐구\n";
 		break;
+	case MON_BOMB:
+		text_ += "마법의 힘으로 점화된 폭탄이다. 얼마안있어 큰 범위로 터진다!\n";
+		break;
 	default:
 		text_ += "찾아볼 수 없는 몬스터\n";
 	}

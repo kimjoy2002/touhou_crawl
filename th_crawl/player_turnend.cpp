@@ -27,6 +27,7 @@
 #include "replay.h"
 #include "rect.h"
 #include "soundmanager.h"
+#include "tribe.h"
 extern players you;
 extern HANDLE mutx;
 
@@ -720,7 +721,31 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	if (you.s_evoke_ghost)
+	{
+		ReleaseMutex(mutx);
 
+		int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
+		level_ = max(level_, you.level / 3 + you.GetSkillLevel(SKT_EVOCATE, true) * 2 / 3);
+
+		int power_decre_ = 12 - level_ / 3;
+		you.PowUpDown(-power_decre_);
+
+		if (GetProperty(TPT_PURE_POWER)) {
+			if (randA(2) == 0) {
+				you.HpUpDown(-1, DR_GHOST);
+			}
+		}
+		if (you.power <= 0) {
+			soundmanager.playSound("ufo");
+			you.s_evoke_ghost = 0;
+			printlog("당신은 파워가 전부 소모되어 유령화가 해제되었다. ", false, false, false, CL_danger);
+			SetInter(IT_STAT);
+		}
+
+		WaitForSingleObject(mutx, INFINITE);
+
+	}
 	if (you.s_weather_turn>0)
 	{
 		if (you.s_weather == 2) //천둥번개

@@ -32,7 +32,7 @@
 
 
 coord_def inttodirec(int direc, int x_=0, int y_=0);
-
+bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
 : map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
@@ -3202,6 +3202,20 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 	}
 		break;
+	case MON_BOMB:
+	{
+		if (!smoke_) {
+			exper++; //임시 변수
+			if (exper == 3) {
+				env[current_level].MakeNoise(position, 20, NULL);
+				evoke_bomb(level * 5, false, this, position);
+				summon_time = 0;
+				hp = 0;
+				env[current_level].SummonClear(map_id);
+			}
+		}
+	}
+	break;
 	default:
 		break;
 	}

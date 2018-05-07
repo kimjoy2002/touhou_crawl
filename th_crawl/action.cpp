@@ -595,7 +595,7 @@ int Player_Move(const coord_def &c)
 
 				if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
 				{
-					if(!Auto_Pick_Up(temp))
+					if(!Auto_Pick_Up(temp) || you.s_lunatic || you.s_evoke_ghost)
 					{
 						if(!num)
 							start_it = temp;
@@ -2830,6 +2830,10 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 마법을 배울 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	//if(you.skill[SKT_SPELLCASTING].level == 0)

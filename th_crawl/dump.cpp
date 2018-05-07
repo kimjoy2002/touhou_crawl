@@ -353,6 +353,9 @@ bool Dump(int type, string *filename_)
 			}
 			strncat(death_reason, "행복한 꿈을 꾸다 죽었다.", 64);
 			break;
+		case DR_GHOST:
+			strncat(death_reason, "오쿠리쵸친에 생명력이 빨려 죽었다.", 64);
+			break;
 		case DR_EFFECT:
 			strncat(death_reason, "부작용에 의해 죽었다.", 64);
 			break;

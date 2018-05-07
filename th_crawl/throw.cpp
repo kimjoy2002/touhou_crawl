@@ -768,7 +768,10 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 	else 
 	{
 		int range_ = 0;
-		if(infor_->spell == -1 && item_!=you.item_list.end() && item_->type >= ITM_THROW_FIRST && item_->type < ITM_THROW_LAST && item_->value4 == TMT_KIKU_COMPRESSER)
+
+		if (infor_->spell == -4) //매직봄 전용...
+			range_ = 2;
+		else if(infor_->spell == -1 && item_!=you.item_list.end() && item_->type >= ITM_THROW_FIRST && item_->type < ITM_THROW_LAST && item_->value4 == TMT_KIKU_COMPRESSER)
 			range_ = 1;
 		else 
 			range_ = infor_->skill?GetSpellBombRange((skill_list)infor_->spell):GetSpellBombRange((spell_list)infor_->spell);
@@ -786,17 +789,35 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 					block_ = true;
 				}
 
-				for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-				{
-					if((*it).isLive() && (*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y &&
-						!(*it).isPassedBullet(&you)
-						)
+
+
+				if (infor_->spell == -4) {
+					for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 					{
-						beam = temp_beam;
-						block_ = true;
-						break;
+						if ((*it).isLive() && 
+							(((*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y) ||
+							((*it).position.x == (*beam).x && (*it).position.y == (*beam).y)))
+						{
+							beam = temp_beam;
+							block_ = true;
+							break;
+						}
 					}
 				}
+				else {
+					for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+					{
+						if ((*it).isLive() && (*it).position.x == (*temp_beam).x && (*it).position.y == (*temp_beam).y &&
+							!(*it).isPassedBullet(&you)
+							)
+						{
+							beam = temp_beam;
+							block_ = true;
+							break;
+						}
+					}
+				}
+
 				if(block_)
 					break;
 
@@ -880,6 +901,10 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
 		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 던질 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	beam_iterator beam(you.position,you.position);
 	projectile_infor infor(8,true,false);
 	int short_ = 0;
@@ -911,6 +936,10 @@ void Select_Throw()
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무언가를 던질 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();

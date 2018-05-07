@@ -24,7 +24,7 @@
 void throwstring(list<item>::iterator it, projectile_infor* infor_)
 {
 	deletelog();
-	if(infor_->spell == -2 || infor_->spell == -3)
+	if(infor_->spell == -2 || infor_->spell == -3 || infor_->spell == -4)
 	{
 		printlog("목표를 정하세요.",true,false,true,CL_help);
 		//printlog(it!=you.item_list.end()?it->GetName():"발사물이 없습니다.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);

@@ -133,12 +133,12 @@ void wiz_mode()
 			return;
 			case 'e':
 			{
-				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL, EVK_MAGIC_HAMMER };
+				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
 				enterlog();
-				printlog("a-º¸Å¾ b-¿¡¾îµÎ·ç¸¶¸® c-¸ùÈ¥ d-¿ä¼ú¸ÁÄ¡", true, false, false, CL_help);
+				printlog("a-º¸Å¾ b-¿¡¾îµÎ·ç¸¶¸® c-¸ùÈ¥ d-¸ÅÁ÷º½ e-¿ÀÄí¸®ÃİÄ£ f-°øÁß¾î·Ú g-¿ä¼ú¸ÁÄ¡", true, false, false, CL_help);
 				printlog("¾î´À ¹ßµ¿ÅÛÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
 				key_ = waitkeyinput();
-				if (key_ >= 'a' && key_ <= 'd')
+				if (key_ >= 'a' && key_ <= 'g')
 				{
 					item_infor t;
 					makeitem(ITM_MISCELLANEOUS, 0, &t, list[key_ - 'a']);

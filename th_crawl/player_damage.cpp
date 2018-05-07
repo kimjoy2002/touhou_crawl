@@ -863,7 +863,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
-			if (env[current_level].isSanctuary(position))
+			if (env[current_level].isSanctuary(position) || s_evoke_ghost)
 			{
 				//성역에선 모든 데미지가 0
 				damage_ = 0;

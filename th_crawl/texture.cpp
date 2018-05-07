@@ -1150,6 +1150,9 @@ textures img_item_armor_rpois(&texture_item01, 227, 255);
 textures img_item_evo_pagoda(&texture_item01, 228, 255);
 textures img_item_evo_air_scroll(&texture_item01, 229, 255);
 textures img_item_evo_dream_soul(&texture_item01, 230, 255);
+textures img_item_evo_bomb(&texture_item03, 26, 255);
+textures img_item_evo_ghost_ball(&texture_item03, 27, 255);
+textures img_item_evo_sky_torpedo(&texture_item03, 28, 255);
 textures img_item_evo_hammer(&texture_item01, 231, 255);
 
 
@@ -1373,6 +1376,7 @@ textures img_effect_lunatic(&texture_dungeon01, 288, 0, 320, 32, 255);
 textures img_effect_freeze(&texture_dungeon01, 320, 0, 352, 32, 255);
 textures img_effect_gold(&texture_dungeon01, 352, 0, 384, 32, 255);
 textures img_effect_sleep(&texture_dungeon01, 960, 0, 992, 32, 255);
+textures img_effect_white(&texture_dungeon01, 992, 0, 1024, 32, 255);
 textures img_effect_sion(&texture_dungeon01, 0, 296, 32, 328, 255);
 textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
@@ -2941,6 +2945,12 @@ int texturetoint(textures* input)
 		return 487;
 	else if(input == &img_effect_veiling)
 		return 488;
+	else if (input == &img_item_evo_bomb)
+		return 489;
+	else if (input == &img_item_evo_ghost_ball)
+		return 490;
+	else if (input == &img_item_evo_sky_torpedo)
+		return 491;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3946,6 +3956,12 @@ textures* inttotexture(int input)
 		return &img_effect_halo;
 	case 488:
 		return &img_effect_veiling;
+	case 489:
+		return &img_item_evo_bomb;
+	case 490:
+		return &img_item_evo_ghost_ball;
+	case 491:
+		return &img_item_evo_sky_torpedo;
 	default:
 		return &img_mons_default;
 	}

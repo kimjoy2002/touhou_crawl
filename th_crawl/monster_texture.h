@@ -301,6 +301,9 @@ extern textures img_item_armor_rpois;
 extern textures img_item_evo_pagoda;
 extern textures img_item_evo_air_scroll;
 extern textures img_item_evo_dream_soul;
+extern textures img_item_evo_bomb;
+extern textures img_item_evo_ghost_ball;
+extern textures img_item_evo_sky_torpedo;
 extern textures img_item_evo_hammer;
 
 
@@ -436,6 +439,7 @@ extern textures img_effect_lunatic;
 extern textures img_effect_freeze;
 extern textures img_effect_gold;
 extern textures img_effect_sleep;
+extern textures img_effect_white;
 extern textures img_effect_sion;
 
 extern textures img_effect_autumn_leave[];

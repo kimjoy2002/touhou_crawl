@@ -1587,6 +1587,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.force_strong ? "당신의 모든 공격과 마법은 강화되었습니다." :
 					"당신의 모든 공격과 마법은 약화되었습니다.", this);
 			}
+			if (you.s_evoke_ghost)
+			{
+				stateDraw.addState("유령화", CL_normal,
+					"당신은 모든 공격을 받지않습니다. 단, 이동 이외의 공격, 마법, 아이템등의 모든 행동을 사용할 수 없습니다.", this);
+			}
+
+			
 
 
 
@@ -2145,7 +2152,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 	//광기
-	if(you.s_sleep < 0 || you.s_lunatic || map_effect)
+	if(you.s_sleep < 0 || you.s_lunatic || map_effect || you.s_evoke_ghost)
 	{
 		int x_ = you.GetDisplayPos().x-8;
 		int y_ = you.GetDisplayPos().y-8;
@@ -2170,6 +2177,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
 						else if (map_effect == 3)
 							img_effect_sion.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, 80);
+						else if (you.s_evoke_ghost)
+							img_effect_white.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 80, 0, 100));
 							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
 					}
 				}

@@ -21,6 +21,10 @@ void Equip_Weapon()
 		printlog("광기에 휩싸인 상태로 무기를 바꿀 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 무기를 바꿀 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	if (you.drowned)
 	{
 		printlog("물에 빠진 상태에선 무기를 바꿀 수 없다!", true, false, false, CL_danger);
@@ -73,6 +77,16 @@ void Equip_Weapon()
 
 void weapon_swap()
 {
+	if (you.s_lunatic)
+	{
+		printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 장비를 바꿀 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
+
 	item* aitem_ = you.GetItem('a');
 	item* bitem_ = you.GetItem('b');
 	if (aitem_ && !aitem_->isRightType(ET_WEAPON))
@@ -129,6 +143,10 @@ void Equip_Armor()
 		printlog("광기에 휩싸인 상태로 방어구를 바꿀 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 방어구를 바꿀 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	if (you.drowned)
 	{
 		printlog("물에 빠진 상태에선 방어구를 바꿀 수 없다!", true, false, false, CL_danger);
@@ -176,6 +194,10 @@ void Unequip_Armor()
 		printlog("광기에 휩싸인 상태로 방어구를 벗을 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 방어구를 벗을 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 벗겠습니까?");
 	while(1)
 	{
@@ -217,7 +239,11 @@ void Equip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 반지를 낄 수 없다!",true,false,false,CL_danger);
+		printlog("광기에 휩싸인 상태로 장신구를 낄 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 장신구를 낄 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	view_item(IVT_EQ_JEWELRY,"무슨 장신구를 장착하겠습니까?");
@@ -259,7 +285,11 @@ void Unequip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 반지를 벗을 수 없다!",true,false,false,CL_danger);
+		printlog("광기에 휩싸인 상태로 장신구를 벗을 수 없다!",true,false,false,CL_danger);
+		return;
+	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 장신구를 벗을 수 없다. ", true, false, false, CL_normal);
 		return;
 	}
 	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 벗겠습니까?");

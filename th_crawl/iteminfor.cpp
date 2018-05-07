@@ -203,14 +203,34 @@ void iteminfor(bool gameover)
 								}
 								return;
 							}
-							case 'w': //장착
+							case 'w': //장착	
 								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost) {
+									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
+
 								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
 								{
+									if (you.drowned)
+									{
+										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										return;
+									}
 									you.equip(item_->id, ET_WEAPON);
 								}
 								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
 								{
+									if (you.drowned)
+									{
+										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										return;
+									}
 									you.equiparmor(item_->id);
 								}
 								else if (item_->type == ITM_AMULET)
@@ -224,8 +244,22 @@ void iteminfor(bool gameover)
 								return;
 							case 'u': //벗기
 								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost) {
+									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
 								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
 								{
+									if (you.drowned)
+									{
+										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										return;
+									}
 									if (!you.unequip(ET_WEAPON))
 									{
 										printlog("저주에 걸려 있어서 장비를 벗을 수 없다.", true, false, false, CL_normal);
@@ -233,6 +267,11 @@ void iteminfor(bool gameover)
 								}
 								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
 								{
+									if (you.drowned)
+									{
+										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										return;
+									}
 									you.unequiparmor(item_->id);
 								}
 								else if (item_->type == ITM_AMULET)
@@ -257,6 +296,21 @@ void iteminfor(bool gameover)
 							}
 								return;
 							case 'q': //마시기
+								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost) {
+									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
+								if (you.drowned)
+								{
+									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
 								if (you.Drink(item_->id))
 								{
 									you.time_delay += you.GetNormalDelay();
@@ -272,13 +326,41 @@ void iteminfor(bool gameover)
 									}
 									you.TurnEnd();
 								}
-								changedisplay(DT_GAME);
 								return;
 							case 'e': //먹기
 								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost) {
+									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
+								if (you.drowned)
+								{
+									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
 								you.Eat(item_->id);
 								return;
 							case 'r': //읽기
+								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost) {
+									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
+								if (you.drowned)
+								{
+									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
 								if(you.Read(item_->id))
 								{
 									you.doingActionDump(DACT_USE, "두루마리");
@@ -286,10 +368,20 @@ void iteminfor(bool gameover)
 									changedisplay(DT_GAME);
 									you.TurnEnd();
 								}
-								changedisplay(DT_GAME);
 								return;
 							case 'v': //발동
 								changedisplay(DT_GAME);
+								if (you.s_lunatic)
+								{
+									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									return;
+								}
+								if (you.s_evoke_ghost &&
+									!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
+									) {
+									printlog("유령상태에선 할 수 없다. ", true, false, false, CL_normal);
+									return;
+								}
 								if (you.Evoke(item_->id))
 								{
 									you.time_delay += you.GetNormalDelay();
@@ -299,6 +391,16 @@ void iteminfor(bool gameover)
 							case 'd': //버리기
 							case 'D':
 								{
+									changedisplay(DT_GAME);
+									if (you.s_lunatic)
+									{
+										printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+										return;
+									}
+									if (you.s_evoke_ghost) {
+										printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+										return;
+									}
 									bool discard_ = false;
 									for (auto it = you.item_list.begin(); it != you.item_list.end(); it++)
 									{
@@ -320,7 +422,6 @@ void iteminfor(bool gameover)
 									{
 										printlog("존재하지 않는 템입니다.", true, false, false, CL_normal);
 									}
-									changedisplay(DT_GAME);
 									return;
 								}
 							}
@@ -1285,15 +1386,40 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EVK_PAGODA:
 			text_ += "누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n";
 			text_ += "발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n";
+			text_ += "발동 스킬이 높아지면 데미지가 높아진다.\n";
 			break;
 		case EVK_AIR_SCROLL:
 			text_ += "어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n";
 			text_ += "발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n";
+			text_ += "발동 스킬이 높아지면 회복되는 영력이 많아진다.\n";
 			break;
 		case EVK_DREAM_SOUL:
 			text_ += "꿈의 세계에서 해메고있던 영혼이다.\n";
 			text_ += "사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n";
 			text_ += "어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n";
+			text_ += "발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n";
+			break;
+		case EVK_BOMB:
+			text_ += "아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n";
+			text_ += "발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n";
+			text_ += "던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n";
+			text_ += "발동템이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n";
+			text_ += "발동 스킬이 높아지면 데미지가 높아진다.\n";
+			break;
+		case EVK_GHOST_BALL:
+			text_ += "사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n";
+			text_ += "발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n";
+			text_ += "발동시 자신의 현재 체력이 30%~70%까지 감소되고 발동된다.\n";
+			text_ += "발동중엔 누구에게도 공격을 받는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n";
+			text_ += "한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n";
+			text_ += "유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n";
+			text_ += "만약 당신이 어떤 이유로 파워가 낮아지지 않는다면 오쿠리쵸친은 다른 무언가를 대신 가져갈 것이다.\n";
+			text_ += "발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n";
+			break;
+		case EVK_SKY_TORPEDO:
+			text_ += "캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n";
+			text_ += "잘 생각해보면 미사일과 별반 다를게 없다.\n";
+			text_ += "발동 스킬이 높아지면 데미지가 높아진다.\n";
 			break;
 		case EVK_MAGIC_HAMMER:
 			text_ += "소인족이 다룬다고 하는 요술망치. 본래 주인은 오니라고 한다.\n";

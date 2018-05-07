@@ -898,5 +898,10 @@ const mon_infor mondata[] = {
 
 	{ MON_HATATE, 10, 1221, name_infor("하타테", false), &img_named_hatate, 75, 2, 20,
 		{ 7,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
-		M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' }
+		M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
+
+	{ MON_BOMB, 1, 0, name_infor("매직봄", true), &img_item_evo_bomb, 10, 0, 10,
+		{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
+		M_FLAG_NONE_MOVE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' }
+		
 };

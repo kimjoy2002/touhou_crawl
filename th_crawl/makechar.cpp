@@ -1004,15 +1004,21 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.skill[SKT_EVOCATE].aptit +=1;
 		}
 		else
-		{					
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
+		{
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_SKY_TORPEDO));
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);
-			set_exist_named(MON_NITORI);	
+			it = env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t, AMT_OCCULT));
+			it->value2 = OCT_NESI;
+			it->Identify();
+			you.additem(it, false);
+			env[current_level].DeleteItem(it);
 
+			set_exist_named(MON_NITORI);
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.equip('a' + 4, ET_NECK, false);
 		}
 	}
 	else if (name_.compare("써니") == 0 || name_.compare("스타") == 0 || name_.compare("루나") == 0)

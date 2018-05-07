@@ -15,6 +15,7 @@
 #include "soundmanager.h"
 #include "weapon.h"
 #include "god.h"
+#include "rect.h"
 
 
 const char *evoke_string[EVK_MAX]=
@@ -22,6 +23,9 @@ const char *evoke_string[EVK_MAX]=
 	"보탑",
 	"에어두루마리",
 	"몽혼",
+	"4척 매직봄",
+	"오쿠리쵸친",
+	"공중어뢰",
 	"요술망치"
 };
 const bool evoke_string_is[EVK_MAX]=
@@ -29,6 +33,9 @@ const bool evoke_string_is[EVK_MAX]=
 	true,
 	false,
 	true,
+	true,
+	true,
+	false,
 	false
 };
 
@@ -38,6 +45,8 @@ int getEvokeItem() {
 
 	random_evoke.push(EVK_PAGODA,10);
 	random_evoke.push(EVK_AIR_SCROLL, 10);
+	random_evoke.push(EVK_BOMB, 10);
+	random_evoke.push(EVK_GHOST_BALL, 10);
 	//random_evoke.push(EVK_DREAM_SOUL, 2); //안나옴
 	return random_evoke.pop();
 }
@@ -58,6 +67,9 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	t->image = kind_==EVK_PAGODA?&img_item_evo_pagoda:
 	kind_==EVK_AIR_SCROLL?&img_item_evo_air_scroll:
 	kind_==EVK_DREAM_SOUL?&img_item_evo_dream_soul:
+	kind_ == EVK_BOMB? &img_item_evo_bomb:
+	kind_ == EVK_GHOST_BALL? &img_item_evo_ghost_ball:
+	kind_ == EVK_SKY_TORPEDO? &img_item_evo_sky_torpedo:
 	kind_ == EVK_MAGIC_HAMMER ? &img_item_evo_hammer :
 		&img_mons_default;
 	t->name.name = evoke_string[kind_];
@@ -122,7 +134,7 @@ bool evoke_evokable(evoke_kind kind)
 	{
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
-		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE),-3,false);
+		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
 		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind)))
 		{
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
@@ -163,6 +175,12 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 50;
 	case EVK_DREAM_SOUL:
 		return 50;
+	case EVK_BOMB:
+		return 30;
+	case EVK_GHOST_BALL:
+		return you.s_evoke_ghost?0:50;
+	case EVK_SKY_TORPEDO:
+		return 3;
 	case EVK_MAGIC_HAMMER:
 		return 100;
 	default:
@@ -175,10 +193,14 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 {
 	switch(skill)
 	{
+	case EVK_BOMB:
+	case EVK_SKY_TORPEDO:
+		return false;
 	case EVK_PAGODA:
 		return (S_FLAG_PENETRATE) & flag;
 	case EVK_AIR_SCROLL:
 	case EVK_DREAM_SOUL:
+	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
 		return (S_FLAG_IMMEDIATELY) & flag;
 	default:
@@ -190,10 +212,14 @@ int EvokeLength(evoke_kind skill)
 {
 	switch(skill)
 	{
+	case EVK_BOMB:
+		return 6;
 	case EVK_PAGODA:
+	case EVK_SKY_TORPEDO:
 		return 8;
 	case EVK_AIR_SCROLL:
 	case EVK_DREAM_SOUL:
+	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
 		return 0;
 	default:
@@ -243,7 +269,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		{
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
-				beam_infor temp_infor(randC(3,4+level_*2/3),3*(4+level_*2/3),16,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
+				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -424,11 +450,128 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			}
 			return true;
 		}
+	case EVK_BOMB:
+	{
+		beam_iterator beam(you.position, target);
+		coord_def final_postion_ = (*beam);
+		bool end_ = false;
+		while (!end_) {
+			if (beam.end()) {
+				end_ = true;
+			}
+			coord_def postion_ = (*beam);
+			if (!env[current_level].isMove(postion_, true) || env[current_level].isMonsterPos(postion_.x, postion_.y)) {
+				break;
+			}
+			env[current_level].MakeEffect(postion_, &img_item_evo_bomb, false);
+			Sleep(16);
+			env[current_level].ClearEffect();
+			final_postion_ = postion_;
+			beam++;
+		}
+		if (env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_SEA || 
+			env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_LAVA) {
+			soundmanager.playSound("water");
+			printlog("4척 매직봄은 물에 빠져버렸다. ", true, false, false, CL_normal);
+
+		}
+		else if (monster *mon_ = BaseSummon(MON_BOMB, 10, true, false, 2, &you, final_postion_, SKD_OTHER, -1))
+		{
+			if (level_ > 1)
+				mon_->LevelUpdown(level_ - 1, 1.0f);
+		}
+
+		return true;
+	}
+	case EVK_GHOST_BALL:
+	{
+		soundmanager.playSound("ufo");
+		if (you.s_evoke_ghost) {
+			printlog("당신은 오쿠리쵸친으로부터 손을 놓았다. ", true, false, false, CL_magic);
+			you.SetEvokeGhost(0);
+		}
+		else {
+			printlog("당신은 생명력을 대가로 유령화하였다! 한번 더 발동해서 해제할 수 있다.", true, false, false, CL_magic);
+			float bonus_ = 1.0f - (1.0f * level_ / 27);
+			int hp_ = min(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
+			you.HpUpDown(-hp_, DR_EFFECT);
+			you.PowUpDown(-50, true);
+			you.SetEvokeGhost(-1);
+		}
+	}
+	case EVK_SKY_TORPEDO:
+	{
+		beam_iterator beam(you.position, target);
+		if (CheckThrowPath(you.position, target, beam)) {
+			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("공중어뢰", false));
+			if (short_)
+				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+
+			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
+				soundmanager.playSound("shoot");
+				throwtanmac(19, beam, temp_infor, NULL);
+			}
+			you.SetParadox(0);
+			return true;
+		}
+		return false;
+	}
 	}
 	return false;
 }
 
 
+bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
+{
+	if (1)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("nuke");
+		}
+		textures* t_ = &img_blast[0];
+		{
+			rect_iterator rit(order->position, 2, 2);
+
+			for (; !rit.end(); rit++)
+				if (env[current_level].isMove(rit->x, rit->y, true))
+				{
+					if (order->isSightnonblocked(*rit))
+					{
+						env[current_level].MakeEffect(*rit, t_, false);
+					}
+				}
+		}
+
+		{
+			rect_iterator rit(order->position, 2, 2);
+
+			for (; !rit.end(); rit++)
+			{
+				if (env[current_level].isMove(rit->x, rit->y, true))
+				{
+					if (order->isSightnonblocked(*rit))
+					{
+						if (unit* hit_ = env[current_level].isMonsterPos(rit->x, rit->y))
+						{
+							if (hit_ != order)
+							{
+								int att_ = randC(4, 8 + power / 25);
+								int m_att_ = 4 * (8 + power / 25);
+
+								attack_infor temp_att(att_, m_att_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("매직봄", true));
+								hit_->damage(temp_att, true);
+							}
+						}
+					}
+				}
+			}
+		}
+		Sleep(300);
+		env[current_level].ClearEffect();
+		return true;
+	}
+	return false;
+}
 
 void HammerPresent() {
 	int kind_ = rand_int(1, 3);

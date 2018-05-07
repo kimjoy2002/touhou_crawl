@@ -558,6 +558,8 @@ void reward_random_init()
 	rand_evoke.push(EVK_PAGODA, 1);
 	rand_evoke.push(EVK_AIR_SCROLL, 1);
 	rand_evoke.push(EVK_DREAM_SOUL, 1);
+	rand_evoke.push(EVK_BOMB, 1);
+	rand_evoke.push(EVK_GHOST_BALL, 1);
 	
 	rand_tanmac.push(TMT_AMULET, 3);
 	rand_tanmac.push(TMT_POISON_NEEDLE, 2);

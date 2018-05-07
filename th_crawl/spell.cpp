@@ -1681,6 +1681,10 @@ void SpellUse()
 		printlog("광기에 휩싸인 상태로 마법은 쓸 수 없다!",true,false,false,CL_danger);
 		return;
 	}
+	if (you.s_evoke_ghost) {
+		printlog("유령 상태에선 마법을 쓸 수 없다. ", true, false, false, CL_normal);
+		return;
+	}
 	if (you.drowned)
 	{
 		printlog("물에 빠진 상태에선 마법은 쓸 수 없다!", true, false, false, CL_danger);

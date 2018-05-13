@@ -16,6 +16,7 @@
 #include "god.h"
 #include "dump.h"
 #include "tribe.h"
+#include "rect.h"
 
 
 extern HANDLE mutx;
@@ -80,6 +81,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case  SPL_FIRE_SPREAD:
 	case SPL_THUNDER_BOLT:
 		return (S_FLAG_PENETRATE | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_HYPER_BEAM:
+		return (S_FLAG_PENETRATE | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_SUMMON_BUG:
 	case SPL_SUMMON_PENDULUM:
 	case SPL_SUMMON_SEKIBANKI:
@@ -146,6 +149,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MANA_DRAIN:	
 	case SPL_BLOOD_SMITE:
 	case SPL_AFTERLITE:
+	case SPL_DREAM_CALL:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_REAPER_MET:
 		return ((S_FLAG_CLOSE_DANGER)& flag);
@@ -271,6 +275,7 @@ int SpellLength(spell_list skill)
 	case SPL_TRASH_RUSH:
 	case SPL_THROW_DISH:
 	case SPL_SLEEP_SMITE:
+	case SPL_DREAM_CALL:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -298,6 +303,7 @@ int SpellLength(spell_list skill)
 	case SPL_AIR_STRIKE:
 	case SPL_SUMMON_ANCHOR:
 	case SPL_TARGET_ELEC:
+	case SPL_HYPER_BEAM:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -670,6 +676,10 @@ const char* SpellString(spell_list skill)
 		return "전기 충격";
 	case SPL_SUMMON_ELEC_BALL:
 		return "용궁의사자 유영탄";
+	case SPL_DREAM_CALL:
+		return "드림캐쳐";
+	case SPL_HYPER_BEAM:
+		return "파괴광선";
 	default:
 		return "알수없는 마법";
 	}
@@ -817,6 +827,8 @@ int SpellLevel(spell_list skill)
 	case SPL_UNLUCK:
 	case SPL_MACRO_BURST:
 	case SPL_TRASH_RUSH:
+	case SPL_DREAM_CALL:
+	case SPL_HYPER_BEAM:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -955,6 +967,7 @@ int SpellNoise(spell_list skill)
 	case SPL_AUTUMN_BLADE:
 	case SPL_AFTERLITE:
 	case SPL_SUMMON_TRASH:
+	case SPL_DREAM_CALL:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -974,6 +987,7 @@ int SpellNoise(spell_list skill)
 	case SPL_TRASH_RUSH:
 	case SPL_THUNDER_BOLT:
 	case SPL_SUMMON_ELEC_BALL:
+	case SPL_HYPER_BEAM:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1305,6 +1319,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	case SPL_SUMMON_ELEC_BALL:
 		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
+	case SPL_DREAM_CALL:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_TRANS) : (SKT_ERROR);
+	case SPL_HYPER_BEAM:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1456,6 +1474,8 @@ int SpellCap(spell_list skill)
 	case SPL_MESS_CONFUSION:
 	case SPL_SLEEP_SMITE:
 	case SPL_SUMMON_ELEC_BALL:
+	case SPL_DREAM_CALL:
+	case SPL_HYPER_BEAM:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1604,6 +1624,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (mon->s_silence?false:true);
 	case SPL_TELEPORT_SELF:
 		return (mon->hp>mon->max_hp*0.2f || mon->s_tele?false:true);
+	case SPL_DISCHARGE:
+		return (mon->s_elec ? false : true);
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CALL_HOUND:
 	case SPL_FIRE_SPREAD:
@@ -1652,6 +1674,36 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
 			if (it->isLive() && it->sm_info.parent_map_id == mon->map_id && it->sm_info.summon_id == GetSummonKind(SPL_SUMMON_TRASH))
+			{
+				if (mon->isMonsterSight(it->position)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	case SPL_DREAM_CALL:
+	{
+		if (!env[current_level].isInSight(mon->position))
+			return false;
+		rect_iterator rect_(you.position, 1, 1);
+
+		bool block = true;
+		while (!rect_.end())
+		{
+			if (env[current_level].isMove((*rect_)) 
+				&& env[current_level].isMonsterPos(rect_->x, rect_->y) == NULL) {
+				block = false;
+				break;
+			}
+			rect_++;
+		}
+		if(block == true)
+			return false;
+
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (&(*it) != mon && it->isLive() && it->isCanMove() && it->isAllyMonster(mon))
 			{
 				if (mon->isMonsterSight(it->position)) {
 					return true;

@@ -615,7 +615,7 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단달
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단마계
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단히쿠레이
-				{ textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255) }, //계단꿈의포탈
+				{ textures(&texture_item03, 29, 255), textures(&texture_item03, 29, 255),textures(&texture_item03, 29, 255) }, //계단꿈의포탈
 				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단
 				{textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255)}, //죠온&시온
 
@@ -863,8 +863,12 @@ textures img_mons_sion(&texture_monster01, 227, 255);
 textures img_named_hatate(&texture_monster01, 228, 255);
 textures img_mons_dancing_weapon(&texture_monster01, 229, 255);
 textures img_mons_cursed_doll(&texture_monster01, 230, 255);
+textures img_named_doreking(&texture_monster01, 231, 255);
 
-
+textures img_mons_curiosity(&texture_monster01, 232, 255);
+textures img_mons_desire_red(&texture_monster01, 233, 255);
+textures img_mons_desire_green(&texture_monster01, 234, 255);
+textures img_mons_desire_blue(&texture_monster01, 235, 255);
 
 
 
@@ -2951,6 +2955,16 @@ int texturetoint(textures* input)
 		return 490;
 	else if (input == &img_item_evo_sky_torpedo)
 		return 491;
+	else if (input == &img_named_doreking)
+		return 492;
+	else if (input == &img_mons_curiosity)
+		return 493;
+	else if (input == &img_mons_desire_red)
+		return 494;
+	else if (input == &img_mons_desire_green)
+		return 495;
+	else if (input == &img_mons_desire_blue)
+		return 496;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3962,6 +3976,16 @@ textures* inttotexture(int input)
 		return &img_item_evo_ghost_ball;
 	case 491:
 		return &img_item_evo_sky_torpedo;
+	case 492:
+		return &img_named_doreking;
+	case 493:
+		return &img_mons_curiosity;
+	case 494:
+		return &img_mons_desire_red;
+	case 495:
+		return &img_mons_desire_green;
+	case 496:
+		return &img_mons_desire_blue;
 	default:
 		return &img_mons_default;
 	}

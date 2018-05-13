@@ -166,7 +166,11 @@ extern textures img_mons_sion;
 extern textures img_named_hatate;
 extern textures img_mons_dancing_weapon;
 extern textures img_mons_cursed_doll;
-
+extern textures img_named_doreking;
+extern textures img_mons_curiosity;
+extern textures img_mons_desire_red;
+extern textures img_mons_desire_green;
+extern textures img_mons_desire_blue;
 
 
 extern textures img_mons_test;

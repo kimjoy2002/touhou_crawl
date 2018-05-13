@@ -36,7 +36,7 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
 : map_id(-1), id(0), level(1), exper(0), name("¾øÀ½",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
-ac(0), ev(0), flag(0), resist(0), sense(0), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
+ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
@@ -75,7 +75,8 @@ void monster::SaveDatas(FILE *fp)
 	}
 	SaveData<int>(fp, flag);
 	SaveData<int>(fp, resist);
-	SaveData<int>(fp, sense);		
+	SaveData<int>(fp, sense);
+	SaveData<bool>(fp, dream);
 	SaveData<int>(fp, s_poison);	
 	SaveData<parent_type>(fp, poison_reason);
 	SaveData<int>(fp, s_tele);
@@ -190,7 +191,8 @@ void monster::LoadDatas(FILE *fp)
 	}
 	LoadData<int>(fp, flag);
 	LoadData<int>(fp, resist);
-	LoadData<int>(fp, sense);		
+	LoadData<int>(fp, sense);
+	LoadData<bool>(fp, dream);
 	LoadData<int>(fp, s_poison);
 	LoadData<parent_type>(fp, poison_reason);
 	LoadData<int>(fp, s_tele);
@@ -307,7 +309,8 @@ void monster::init()
 	ev = 0;
 	flag = 0;
 	resist = 0;
-	sense = 0;
+	sense = 0; 
+	dream = false;
 	s_poison = 0;
 	poison_reason = PRT_NEUTRAL;
 	s_tele = 0;
@@ -3052,7 +3055,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_FIRE_CAR:
 		if (smoke_){
-			if (!isUserAlly())
+			if (!isUserAlly() && current_level != ZIGURRAT_LEVEL)
 			{
 				for (int i = -1; i < 2; i++) {
 					for (int j = -1; j < 2; j++) {

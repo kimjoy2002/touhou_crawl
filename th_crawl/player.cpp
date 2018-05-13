@@ -66,7 +66,7 @@ players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
-as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
+as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_pure_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
@@ -160,7 +160,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, tension_gauge); 
 	SaveData<bool>(fp, tension_turn);
 	SaveData<bool>(fp, already_swap);
-		
+	SaveData<int>(fp, ziggurat_level);
+	
 	SaveData<int>(fp, buff_list.size());
 	for(list<buff_class>::iterator it=buff_list.begin();it!=buff_list.end();it++)
 	{
@@ -367,6 +368,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, tension_gauge);
 	LoadData<bool>(fp, tension_turn);
 	LoadData<bool>(fp, already_swap);
+	LoadData<int>(fp, ziggurat_level);
 	
 
 	int size_=0;
@@ -2029,12 +2031,18 @@ bool players::GetExp(int exper_, bool speak_)
 {
 	bool level_up_ = false;
 
-	
+
+
+	if (current_level == ZIGURRAT_LEVEL)
+	{
+		exper_ = exper_ / 3; //지구랏에선 경험치 33%
+
+	}
 	if(you.god == GT_LILLY)
 	{
 		exper_ = max(1,exper_*0.7f);
 		GetFairyExp(max(1,exper_/2));
-	}
+	} 
 
 	exper += exper_;
 	skill_exper += exper_;
@@ -3255,7 +3263,7 @@ bool players::SetNightSight(int value_, int turn_, bool stong_)
 {
 	if (!turn_)
 		return false;
-	if (!stong_ && (confuse_resist>0 || you.invisible_view))
+	if (!stong_ && (you.invisible_view))
 		return false;
 	if(!s_night_sight_turn)
 		printlog("당신의 눈은 침침해졌다.", false, false, false, CL_small_danger);

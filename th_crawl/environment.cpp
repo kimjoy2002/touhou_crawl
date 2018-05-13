@@ -210,7 +210,7 @@ void environment::LoadDatas(FILE *fp)
 }
 bool environment::MakeMap(bool return_)
 {
-	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL) && !return_))
+	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL || floor == ZIGURRAT_LEVEL) && !return_))
 	{
 		map_algorithms(floor);
 		allCalculateAutoTile();
@@ -263,7 +263,6 @@ bool environment::MakeMap(bool return_)
 		case PANDEMONIUM_LEVEL+3:
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
-		case ZIGURRAT_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"던전 진행: %s에 들어섰다.",CurrentLevelString(floor));
@@ -274,10 +273,19 @@ bool environment::MakeMap(bool return_)
 		make = true;
 		return true;
 	}
+	else if(floor == ZIGURRAT_LEVEL){
+		char temp2[200];
+		sprintf_s(temp2, 200, "던전 진행: %s에 들어섰다.", CurrentLevelString(floor));
+		AddNote(you.turn, CurrentLevelString(floor), temp2, CL_normal);
+	}
 	return false;
 }
 void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 {
+	if (floor == current_level) {
+	//같은 층끼리 움직이는거라면 몬스터를 끌어오면 안된다.
+		dq.clear();
+	}
 	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 		if(it->isLive())
@@ -1277,8 +1285,8 @@ void environment::enterBgm(boolean first_)
 		PlayBGM("hakurei");
 		break;
 	case ZIGURRAT_LEVEL:
-		StopCurrentBGM("dream");
-		PlayBGM("dream");
+		StopCurrentBGM("ziggurat");
+		PlayBGM("ziggurat");
 		break;
 	}
 }
@@ -1328,7 +1336,7 @@ void environment::playBgm() {
 	else if (floor >= HAKUREI_LEVEL && floor <= HAKUREI_LAST_LEVEL)
 		PlayBGM("hakurei");
 	else if(floor == ZIGURRAT_LEVEL)
-		PlayBGM("dream");
+		PlayBGM("ziggurat");
 	else if (floor == OKINA_LEVEL) {
 		if (you.god_value[GT_OKINA][0] != OKINA_LEVEL
 			&& you.god_value[GT_OKINA][0] >= 0 &&
@@ -2404,7 +2412,7 @@ char* CurrentLevelString(int level)
 	else if (level_ == OKINA_LEVEL)
 		sprintf(temp, "문 뒤의 세계");
 	else if (level_ == ZIGURRAT_LEVEL)
-		sprintf(temp, "꿈의 세계 루나틱");
+		sprintf(temp, "광몽의세계 %d층", you.ziggurat_level);
 	else
 		sprintf(temp,"알수없는 층");
 

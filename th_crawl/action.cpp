@@ -45,7 +45,6 @@ using namespace std;
 using namespace std::tr1;
 
 
-
 extern HANDLE mutx;
 
 
@@ -1254,7 +1253,25 @@ bool warning(dungeon_tile_type type, bool down)
 		}
 		break;
 	case DG_ZIGURRAT_STAIR:
-		//TODO
+		if (down && current_level != ZIGURRAT_LEVEL)
+		{
+			printlog("이 곳은 룬은 없지만 한번만 들어갈 수 있는 악몽의 던전이다. 준비되었어? (Y/N)", true, false, false, CL_danger);
+			switch (waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				if (you.ziggurat_level) {
+					printlog("이미 들어간 적이 있으면 더 이상 들어갈 수 없어! ", true, false, false, CL_help);
+					return false;
+				}
+				enterlog();
+				return true;
+			case 'N':
+			default:
+				printlog("좀 더 신중히 준비하도록!", true, false, false, CL_help);
+				return false;
+			}
+		}
 		break;
 	case DG_DREAM_STAIR:
 		if(down)
@@ -1683,6 +1700,8 @@ void Stair_move(bool down)
 				break;
 			case ZIGURRAT_LEVEL:
 				floor_return = map_list.dungeon_enter[ZIGURRAT].floor;
+				//지구랏에서 나오면 지구랏 1층으로 초기화
+				//you.ziggurat_level = 0;
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[ZIGURRAT].pos;
 				break;

@@ -1565,6 +1565,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				stateDraw.addState("영력회복지연", CL_warning,
 					"영력이 자연적으로 회복되지않습니다.", this);
 			}
+			if (env[current_level].isSilence(you.position))
+			{
+				stateDraw.addState("침묵", CL_white_blue,
+					"당신은 소리를 내어 말하는 것이 불가능합니다. 마법과 두루마리, 일부 권능을 사용할 수 없습니다.", this);
+			}
 			if(you.s_eirin_poison_time)
 			{
 				D3DCOLOR color_ = you.s_eirin_poison_time>11 ? CL_small_danger : CL_danger;

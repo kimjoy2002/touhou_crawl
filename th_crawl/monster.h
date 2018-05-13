@@ -50,6 +50,7 @@ public:
 	int flag;
 	int resist;
 	int sense;
+	bool dream;
 
 	int s_poison;
 	parent_type poison_reason;

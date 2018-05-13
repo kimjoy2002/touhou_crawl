@@ -346,6 +346,7 @@ void map_algorithms(int num)
 			map_algorithms_okina(num, DG_FLOOR, DG_METAL_WALL);
 		}
 		else if (num == ZIGURRAT_LEVEL) {
+			env[num].ClearFloor();
 			map_algorithms_zigurrat(num);
 		}
 		else

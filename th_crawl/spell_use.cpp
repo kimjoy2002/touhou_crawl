@@ -3547,6 +3547,14 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 			throwtanmac(25,beam,temp_infor,NULL);
 		order->SetParadox(0); 
+
+		if (!order->isplayer()) 
+		{
+			monster* mon_ = (monster*)order;
+
+			mon_->time_delay -= mon_->GetSpeed()/2; //2배 빠르게 공격가능
+		}
+
 		return true;
 	}
 	return false;
@@ -4324,6 +4332,73 @@ bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
+bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+		return false;
+	//항상 플레이어에게만 사용함
+
+
+	random_extraction<monster*> monster_list;
+	monster* mon_ = (monster*)order;
+
+
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (&(*it) != mon_ && it->isLive() && it->isCanMove() && it->isAllyMonster(mon_))
+		{
+			if (mon_->isMonsterSight(it->position)) {
+				monster_list.push(&(*it), it->level);
+			}
+		}
+	}
+	if (monster_list.GetSize() == 0)
+		return false;
+
+	rect_iterator rect_(you.position, 1, 1);
+	bool send_ = false;
+	while (!rect_.end())
+	{
+		if (env[current_level].isMove((*rect_))
+			&& env[current_level].isMonsterPos(rect_->x, rect_->y) == NULL) {
+			monster* send_mon_  = monster_list.pop();
+			send_mon_->SetXY(*rect_);
+			send_ = true;
+			if(monster_list.GetSize() == 0)
+				break;
+		}
+		rect_++;
+	}
+	if (send_ == true) {
+		if (env[current_level].isInSight(order->position)) {
+			printlog("적들이 당신을 순식간에 둘러쌓았다! ", false, false, false, CL_normal);
+			soundmanager.playSound("blink");
+		}
+	}
+	return true;
+}
+bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor("파괴광선", true));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot_heavy");
+			}
+			throwtanmac(29, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+
+
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -4518,7 +4593,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_YAMABUSH_TENGU:
 		list->push_back(spell(SPL_HASTE, 20));
-		list->push_back(spell(SPL_SMITE, 20));
+		list->push_back(spell(SPL_AIR_STRIKE, 20));
 		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
 	case MON_FORTUNE_TELLER:
@@ -5119,9 +5194,18 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	break;
 	case MON_HATATE:
 		list->push_back(spell(SPL_VEILING, 20));
-		list->push_back(spell(SPL_SMITE, 25));
+		list->push_back(spell(SPL_AIR_STRIKE, 25));
 		list->push_back(spell(SPL_BLINK, 25));
 		break;
+	case MON_DOREKING:
+		list->push_back(spell(SPL_SLEEP_SMITE, 20));
+		list->push_back(spell(SPL_DREAM_CALL, 30));
+		list->push_back(spell(SPL_HYPER_BEAM, 15));
+		break;
+	case MON_CURIOSITY:
+		list->push_back(spell(SPL_DISCHARGE, 50));
+		list->push_back(spell(SPL_THUNDER_BOLT, 10));
+		break; 
 	default:
 		break;
 	}
@@ -5421,6 +5505,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_target_elec(power, short_, order, target);
 	case SPL_SUMMON_ELEC_BALL:
 		return skill_summon_elec_ball(power, short_, order, target);
+	case SPL_DREAM_CALL:
+		return skill_dream_call(power, short_, order, target);
+	case SPL_HYPER_BEAM:
+		return skill_hyper_beam(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5878,6 +5966,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_target_elec(power, short_, &you, target);
 	case SPL_SUMMON_ELEC_BALL:
 		return skill_summon_elec_ball(power, short_, &you, target);
+	case SPL_DREAM_CALL:
+		return skill_dream_call(power, short_, &you, target);
+	case SPL_HYPER_BEAM:
+		return skill_hyper_beam(power, short_, &you, target);
 	default:
 		return false;
 	}

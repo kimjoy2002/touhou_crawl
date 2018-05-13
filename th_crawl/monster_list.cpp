@@ -902,6 +902,14 @@ const mon_infor mondata[] = {
 
 	{ MON_BOMB, 1, 0, name_infor("매직봄", true), &img_item_evo_bomb, 10, 0, 10,
 		{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
-		M_FLAG_NONE_MOVE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' }
-		
+		M_FLAG_NONE_MOVE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' },
+	
+	{ MON_DOREKING, 30, 9999, name_infor("도레킹", true), &img_named_doreking, 500, 20, 10,
+	{ 40,0,0 }, { ATT_NORMAL,ATT_NONE,ATT_NONE }, { name_infor("공격",true),name_infor(),name_infor() },
+	 M_FLAG_NONE_STAIR | M_FLAG_CANT_NETURAL | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_SILENCE | M_FLAG_INANIMATE, 99, 0, 10, 'D' },
+	
+	{ MON_CURIOSITY, 14, 1008, name_infor("큐리오시티", true), &img_mons_curiosity, 130, 20, 5,
+	{ 25,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+		M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE | M_FLAG_SILENCE, 99, 2, 10, '8' }
+
 };

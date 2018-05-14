@@ -33,7 +33,7 @@ const char *imgfile_title[MAX_TITLE] =
 
 const char *imgfile_god[GT_LAST] =
 {
-	"",//GT_SHIKIEIKI = GT_FIRST,
+	"./data/god/joon_and_sion.png",//GT_JOON_SION = GT_FIRST,
 	"./data/god/byakuren.png",//GT_BYAKUREN,
 	"./data/god/kanako.png",//GT_KANAKO,
 	"./data/god/suwako.png",//GT_SUWAKO,
@@ -52,8 +52,8 @@ const char *imgfile_god[GT_LAST] =
 	"./data/god/tensi.png",//GT_TENSI,
 
 	"./data/god/seija.png",//GT_SEIJA,
-	"",//GT_LILLY,
-	"",//GT_MIKO,
+	"./data/god/lilly.png",//GT_LILLY,
+	"./data/god/miko.png",//GT_MIKO,
 	"./data/god/okina.png",//GT_OKINA,
 	"./data/god/junko.png",//GT_JUNKO
 };

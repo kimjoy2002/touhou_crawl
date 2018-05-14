@@ -1607,11 +1607,13 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 		if (i != DG_TEMPLE_SEIJA && i != DG_TEMPLE_MIKO)// && i != DG_TEMPLE_OKINA && i != DG_TEMPLE_JUNKO)
 			temple_.push((dungeon_tile_type)i);
 	}
+	temple_.push(DG_STATUE);
 
-	for(int i=0; i<15; i++)
+
+	for(int i=1; i<21; i++)
 	{
-		float x = round((float)DG_MAX_X/2+sin(i*24.0f/180.0f*D3DX_PI)*10.0f);
-		float y = round((float)DG_MAX_Y/2+cos(i*24.0f/180.0f*D3DX_PI)*-10.0f);
+		float x = round((float)DG_MAX_X/2+sin(i*18.0f/180.0f*D3DX_PI)*10.0f);
+		float y = round((float)DG_MAX_Y/2+cos(i*18.0f/180.0f*D3DX_PI)*-10.0f);
 		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
 	}
 	setBaseFloorWall(num, floor_tex, wall_tex);

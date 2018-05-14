@@ -593,7 +593,7 @@ bool GetGodAbility(int level, bool plus)
 		case 2:
 			you.Ability(SKL_HINA_2,true,!plus);
 			if(plus)
-				printlog("당신은 무기에 저주를 걸어서 강력한 힘을 얻을 수 없다.",true,false,false,CL_hina);
+				printlog("당신은 무기에 저주를 걸어서 강력한 힘을 얻을 수 있다.",true,false,false,CL_hina);
 			else
 				printlog("더 이상 무기에 저주를 걸어서 힘을 얻을 수 없다.",true,false,false,CL_hina);
 			break;
@@ -2506,7 +2506,7 @@ void GodInfor(god_type god)
 		printsub("",true,CL_normal);
 		break;
 	case GT_MIKO:
-		printsub("토요사토미미노 미코", true, CL_miko);
+		printsub("토요사토미미노 미코 - 우주를 관장하는 전능 도사", true, CL_miko);
 		printsub("", true, CL_miko);
 		printsub("토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.", true, CL_normal);
 		printsub("그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.", true, CL_normal);
@@ -2516,7 +2516,7 @@ void GodInfor(god_type god)
 		printsub("", true, CL_miko);
 		break;
 	case GT_OKINA:
-		printsub("마타라 오키나", true, CL_okina);
+		printsub("마타라 오키나 - 궁극의 절대비신", true, CL_okina);
 		printsub("", true, CL_okina);
 		printsub("마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.", true, CL_normal);
 		printsub("그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.", true, CL_normal);
@@ -2535,7 +2535,7 @@ void GodInfor(god_type god)
 		printsub("순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.", true, CL_normal);
 		printsub("기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.", true, CL_normal);
 		printsub("그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.", true, CL_normal);
-		printsub("그녀는 원한을 갚기 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_normal);
+		printsub("그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_normal);
 		break;
 	default:
 		printsub("버그신",true,CL_danger);
@@ -2623,7 +2623,7 @@ void God_show()
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 이용한다                              (패시브)", true, CL_bad);
+				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 이용한다.                             (패시브)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}

@@ -4538,6 +4538,16 @@ bool players::Memorize(int spell_, bool immediately)
 	currentSpellNum++;
 	return true;
 }
+bool players::isMemorize(int spell)
+{
+	for (int i = 0; i < 52; i++) {
+		if (you.MemorizeSpell[i] == spell)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 {
 	int set_=-1;

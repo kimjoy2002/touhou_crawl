@@ -2963,7 +2963,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 					break;
 				}
 			}
-			
+			if (you.isMemorize(spell_)) {
+				changedisplay(DT_GAME);
+				printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+				return;
+			}
 
 			memorize_action(spell_);
 			/*

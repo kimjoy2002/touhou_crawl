@@ -532,6 +532,7 @@ public:
 	bool Evoke(char id_);
 	bool Read(char id_);
 	bool Memorize(int spell, bool immediately = false);
+	bool isMemorize(int spell);
 	int Ability(int skill_, bool god_, bool unset_, int immediately = 0);
 	bool Belief(god_type god_, int piety_, bool speak_=true);
 	bool StepUpDownPiety(int level_);

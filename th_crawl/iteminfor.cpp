@@ -122,6 +122,11 @@ void iteminfor(bool gameover)
 
 							if(memory_ == 'm')
 							{
+								if (you.isMemorize(spell_)) {
+									changedisplay(DT_GAME);
+									printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+									return;
+								}
 								memorize_action(spell_);
 								return;
 							}

@@ -601,7 +601,12 @@ void Reading()
 					if( (key_ >= 'a' && key_ <= 'f'))
 					{
 						if(int spell_ = item_->GetValue(key_ - 'a'+1))
-						{	
+						{
+							if (you.isMemorize(spell_)) {
+								changedisplay(DT_GAME);
+								printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+								return;
+							}
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";

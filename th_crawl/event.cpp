@@ -669,7 +669,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		star_->s_fear = 30 + randA(20);
 		lunar_->s_fear = 30 + randA(20);
 		char temp[100];
-		sprintf(temp, "%s%s외쳤다. \"도망쳐!\"", star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
+		sprintf_s(temp, 100, "%s%s외쳤다. \"도망쳐!\"", star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
 		printlog(temp, true, false, false, CL_speak);
 
 		sunny_->SetInvisible(10);
@@ -732,7 +732,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 			you.resetLOS();
 			char temp[100];
-			sprintf(temp, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer()) {
@@ -748,7 +748,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 			you.resetLOS();
 			char temp[100];
-			sprintf(temp, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer())
@@ -764,7 +764,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (distan_coord(you.position, event_->position) <= 2) {
 			monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, event_->position);
 			char temp[100];
-			sprintf(temp, "%s%s외쳤다. \"원망스럽...콜록, 콜록!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%s외쳤다. \"원망스럽...콜록, 콜록!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			env[current_level].MakeNoise(event_->position, 12, NULL);
 			you.resetLOS();

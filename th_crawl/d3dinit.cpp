@@ -6,6 +6,8 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include <stdlib.h>
+
 #include "d3dUtility.h"
 #include "textureUtility.h"
 #include "texture.h"
@@ -35,8 +37,6 @@ extern HWND hwnd;
 
 
 HANDLE endmutx;
-
-
 
 extern display_manager DisplayManager;
 
@@ -196,9 +196,6 @@ void Cleanup()
 		Input = NULL;
 	}
 }
-
-
-
 //
 // 윈도우 프로시저
 //
@@ -223,6 +220,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   PSTR cmdLine,
 				   int showCmd)
 {
+
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
@@ -242,7 +240,6 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	Cleanup();
 
 	Device->Release();
-
 	return 0;
 }
 

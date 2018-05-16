@@ -106,7 +106,7 @@ void environment::SaveDatas(FILE *fp)
 	for (list<string>::iterator it = speciel_map_name.begin(); it != speciel_map_name.end(); it++)
 	{
 		char temp[100];
-		sprintf(temp, "%s", (*it).c_str());
+		sprintf_s(temp,100, "%s", (*it).c_str());
 		SaveData<char>(fp, *temp, strlen(temp) + 1);
 	}
 	SaveData<int>(fp, forbid_list.size());
@@ -2366,55 +2366,55 @@ char* CurrentLevelString(int level)
 
 
 	if(isArena())
-		sprintf(temp,"¾Æ·¹³ª");
+		sprintf_s(temp,30,"¾Æ·¹³ª");
 	else if (isSprint())
-		sprintf(temp, "½ºÇÁ¸°Æ®");
+		sprintf_s(temp,30, "½ºÇÁ¸°Æ®");
 	else if(level_<TEMPLE_LEVEL)
-		sprintf(temp,"´øÀü %dÃþ", level_+1);
+		sprintf_s(temp,30,"´øÀü %dÃþ", level_+1);
 	else if(level_ == TEMPLE_LEVEL)
-		sprintf(temp,"½ÅÀü");
+		sprintf_s(temp,30,"½ÅÀü");
 	else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-		sprintf(temp,"¾È°³È£¼ö %dÃþ", level_+1-MISTY_LAKE_LEVEL);
+		sprintf_s(temp,30,"¾È°³È£¼ö %dÃþ", level_+1-MISTY_LAKE_LEVEL);
 	else if(level_ >= YOUKAI_MOUNTAIN_LEVEL && level_ <= YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
-		sprintf(temp,"¿ä±«ÀÇ»ê %dÃþ", level_+1-YOUKAI_MOUNTAIN_LEVEL);
+		sprintf_s(temp,30,"¿ä±«ÀÇ»ê %dÃþ", level_+1-YOUKAI_MOUNTAIN_LEVEL);
 	else if(level_ >= SCARLET_LEVEL && level_ <= SCARLET_LEVEL+MAX_SCARLET_LEVEL)
-		sprintf(temp,"È«¸¶°ü %dÃþ", level_+1-SCARLET_LEVEL);
+		sprintf_s(temp,30,"È«¸¶°ü %dÃþ", level_+1-SCARLET_LEVEL);
 	else if(level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL)
-		sprintf(temp,"È«¸¶°ü µµ¼­°ü");
+		sprintf_s(temp,30,"È«¸¶°ü µµ¼­°ü");
 	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
-		sprintf(temp,"È«¸¶°ü ÁöÇÏ½Ç");
+		sprintf_s(temp,30,"È«¸¶°ü ÁöÇÏ½Ç");
 	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
-		sprintf(temp,"¹Ì±ÃÀÇ Á×¸²");
+		sprintf_s(temp,30,"¹Ì±ÃÀÇ Á×¸²");
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
-		sprintf(temp,"¿µ¿øÁ¤");
+		sprintf_s(temp,30,"¿µ¿øÁ¤");
 	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf(temp,"ÁöÀú %dÃþ", level_+1-SUBTERRANEAN_LEVEL);
+		sprintf_s(temp,30,"ÁöÀú %dÃþ", level_+1-SUBTERRANEAN_LEVEL);
 	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf(temp,"ÀÛ¿­Áö¿ÁÅÍ");	
+		sprintf_s(temp,30,"ÀÛ¿­Áö¿ÁÅÍ");	
 	else if(level_ >= YUKKURI_LEVEL && level_ <=  YUKKURI_LAST_LEVEL)
-		sprintf(temp,"ÀµÄí¸®µÕÁö %dÃþ", level_+1-YUKKURI_LEVEL);
+		sprintf_s(temp,30,"ÀµÄí¸®µÕÁö %dÃþ", level_+1-YUKKURI_LEVEL);
 	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)
-		sprintf(temp,"Áü½Â±æ %dÃþ", level_+1-DEPTH_LEVEL);
+		sprintf_s(temp,30,"Áü½Â±æ %dÃþ", level_+1-DEPTH_LEVEL);
 	else if(level_ >= DREAM_LEVEL && level_ <=  DREAM_LAST_LEVEL)
-		sprintf(temp,"²ÞÀÇ ¼¼°è");
+		sprintf_s(temp,30,"²ÞÀÇ ¼¼°è");
 	else if(level_ >= MOON_LEVEL && level_ <=  MOON_LAST_LEVEL)
-		sprintf(temp,"´ÞÀÇ µµ½Ã");
+		sprintf_s(temp,30,"´ÞÀÇ µµ½Ã");
 	else if(level_ == PANDEMONIUM_LEVEL)
-		sprintf(temp,"¸¶°è");
+		sprintf_s(temp,30,"¸¶°è");
 	else if(level_ == PANDEMONIUM_LEVEL+1)
-		sprintf(temp,"¹ý°è");
+		sprintf_s(temp,30,"¹ý°è");
 	else if(level_ == PANDEMONIUM_LEVEL+2)
-		sprintf(temp,"ºù°á¼¼°è");
+		sprintf_s(temp,30,"ºù°á¼¼°è");
 	else if(level_ == PANDEMONIUM_LEVEL+3)
-		sprintf(temp,"ÆÇµ¥¸ð´Ï¾ö");
+		sprintf_s(temp,30,"ÆÇµ¥¸ð´Ï¾ö");
 	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
-		sprintf(temp,"ÇÏÄí·¹ÀÌ %dÃþ", level_+1-HAKUREI_LEVEL);
+		sprintf_s(temp,30,"ÇÏÄí·¹ÀÌ %dÃþ", level_+1-HAKUREI_LEVEL);
 	else if (level_ == OKINA_LEVEL)
-		sprintf(temp, "¹® µÚÀÇ ¼¼°è");
+		sprintf_s(temp,30, "¹® µÚÀÇ ¼¼°è");
 	else if (level_ == ZIGURRAT_LEVEL)
-		sprintf(temp, "±¤¸ùÀÇ¼¼°è %dÃþ", you.ziggurat_level);
+		sprintf_s(temp,30, "±¤¸ùÀÇ¼¼°è %dÃþ", you.ziggurat_level);
 	else
-		sprintf(temp,"¾Ë¼ö¾ø´Â Ãþ");
+		sprintf_s(temp,30,"¾Ë¼ö¾ø´Â Ãþ");
 
 	return temp;
 }

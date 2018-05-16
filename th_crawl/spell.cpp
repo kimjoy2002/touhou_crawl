@@ -1893,11 +1893,11 @@ void SpellUse()
 					}
 					else
 					{
-						int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
-						if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+						int num_ = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
+						if(spell_list spell__ = (spell_list)you.MemorizeSpell[num_])
 						{
 							WaitForSingleObject(mutx, INFINITE);
-							SetText() = GetSpellInfor((spell_list)spell_);
+							SetText() = GetSpellInfor((spell_list)spell__);
 							ReleaseMutex(mutx);
 							changedisplay(DT_TEXT);
 							waitkeyinput();

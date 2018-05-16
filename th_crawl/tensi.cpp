@@ -372,7 +372,7 @@ void tensi_tele(bool good_)
 
 		vector<monster>::iterator it;
 		it = env[current_level].mon_vector.begin();
-		for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
+		for(int j=0;j<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;j++,it++)
 		{
 			if((*it).isLive() && !(*it).isUserAlly() && (*it).isMonsterSight(c_) )
 			{					

@@ -1445,13 +1445,13 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 			
 			coord_def pos = throwtanmac(20,beam,temp_infor,NULL, false);
 			{
-				for(int i=-1;i<=1;i++)
+				for(int k=-1;k<=1;k++)
 					for(int j=-1;j<=1;j++)
-						if(env[current_level].isMove(pos.x+i,pos.y+j,true))
-							env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),&img_fog_poison[0],false);
-				for(int i=-1;i<=1;i++)
+						if(env[current_level].isMove(pos.x+k,pos.y+j,true))
+							env[current_level].MakeEffect(coord_def(pos.x+k,pos.y+j),&img_fog_poison[0],false);
+				for(int k=-1;k<=1;k++)
 					for(int j=-1;j<=1;j++)
-							env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
+							env[current_level].MakeSmoke(coord_def(pos.x+k,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
 
 				Sleep(300);
 				env[current_level].ClearEffect();

@@ -49,7 +49,7 @@ extern bool widesearch; //X커맨드용
 void name_infor::SaveDatas(FILE *fp)
 {
 	char temp[100];
-	sprintf(temp,"%s",name.c_str());
+	sprintf_s(temp,100,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 	SaveData<bool>(fp, name_type);
 }	
@@ -416,12 +416,12 @@ void players::LoadDatas(FILE *fp)
 		char temp_id_=0;
 		item *temp_ = NULL;
 		LoadData<char>(fp, temp_id_);
-		list<item>::iterator it;
-		for(it = item_list.begin(); temp_id_ && it != item_list.end();it++)
+		list<item>::iterator itw;
+		for(itw = item_list.begin(); temp_id_ && itw != item_list.end();itw++)
 		{
-			if((*it).id == temp_id_)
+			if((*itw).id == temp_id_)
 			{
-				temp_ = &(*it);
+				temp_ = &(*itw);
 				break;
 			}
 		}
@@ -547,12 +547,12 @@ void players::LoadDatas(FILE *fp)
 		char temp_id_=0;
 		item *temp_ = NULL;
 		LoadData<char>(fp, temp_id_);
-		list<item>::iterator it;
-		for(it = item_list.begin(); temp_id_ && it != item_list.end();it++)
+		list<item>::iterator itw;
+		for(itw = item_list.begin(); temp_id_ && itw != item_list.end();itw++)
 		{
-			if((*it).id == temp_id_)
+			if((*itw).id == temp_id_)
 			{
-				temp_ = &(*it);
+				temp_ = &(*itw);
 				break;
 			}
 		}
@@ -790,8 +790,8 @@ int players::move(short_move x_mov, short_move y_mov)
 				int hit_ = 12+level/3;
 				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
 				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
-					attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
-					mon_->damage(temp_att, false);
+					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
+					mon_->damage(temp_att_, false);
 				}
 			}
 			if(mon_->isLive() && you.GetProperty(TPT_JAW))
@@ -800,8 +800,8 @@ int players::move(short_move x_mov, short_move y_mov)
 				int hit_ = 12+level/3;
 				if(randA(3)<1)
 				{
-					attack_infor temp_att(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("깨물기",false));
-					mon_->damage(temp_att, false);
+					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("깨물기",false));
+					mon_->damage(temp_att_, false);
 				}
 			}
 			if(s_wind)
@@ -920,9 +920,9 @@ int players::move(short_move x_mov, short_move y_mov)
 				env[current_level].changeTile(coord_def(move_x_, move_y_), DG_FLOOR);
 				//적이 서있으면 강제로 비키도록 한다.
 
-				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(30), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
+				if (monster *mon__ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(30), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
 				{
-					mon_->LevelUpdown(you.level, 6);
+					mon__->LevelUpdown(you.level, 6);
 					printlog("오키나가 문을 잠가버렸다!", true, false, false, CL_small_danger);
 					return true;
 				}
@@ -3998,7 +3998,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 					if(speak_)
 					{
 						char temp[2];
-						sprintf(temp,"%c",it->id);
+						sprintf_s(temp,2,"%c",it->id);
 						printlog(temp,false,false,false,it->item_color());
 						printlog(" - ",false,false,false,it->item_color());
 						printlog(it->GetName(),false,false,false,it->item_color());
@@ -4006,9 +4006,9 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 						if(t->num)
 						{
 							printlog(" (",false,false,false,CL_normal);
-							char temp[16];
-							sprintf(temp,"%d",t->num);
-							printlog(temp,false,false,false,CL_normal);
+							char temp_[16];
+							sprintf_s(temp_, 16,"%d",t->num);
+							printlog(temp_,false,false,false,CL_normal);
 							printlog("개 획득)",true,false,false,CL_normal);
 						}
 					}
@@ -4067,7 +4067,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 			if(speak_)
 			{
 				char temp[2];
-				sprintf(temp,"%c",(*t).id);
+				sprintf_s(temp, 2,"%c",(*t).id);
 				printlog(temp,false,false,false,(*t).item_color());
 				printlog(" - ",false,false,false,(*t).item_color());
 				printlog((*t).GetName(),true,false,false,(*t).item_color());
@@ -4993,7 +4993,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		if(speak_)
 		{
 			char temp[2];
-			sprintf(temp,"%c",(*it).id);
+			sprintf_s(temp,2,"%c",(*it).id);
 			printlog(temp,false,false,false,(*it).item_color());
 			printlog(" - ",false,false,false,(*it).item_color());
 			printlog((*it).GetName(),false,false,false,(*it).item_color());
@@ -5125,12 +5125,12 @@ bool players::equipjewerly(char id_)
 					char temp[2];
 					changedisplay(DT_GAME);
 					printlog("< 또는 ",false,false,false,CL_normal);
-					sprintf(temp,"%c",equipment[ET_LEFT]->id);
+					sprintf_s(temp,2,"%c",equipment[ET_LEFT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
 					printlog(equipment[ET_LEFT]->GetName(),false,false,false,equipment[ET_LEFT]->item_color());
 					printlog("; > 또는 ",false,false,false,CL_normal);
-					sprintf(temp,"%c",equipment[ET_RIGHT]->id);
+					sprintf_s(temp,2,"%c",equipment[ET_RIGHT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
 					printlog(equipment[ET_RIGHT]->GetName(),false,false,false,equipment[ET_RIGHT]->item_color());

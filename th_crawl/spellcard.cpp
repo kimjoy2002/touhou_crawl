@@ -319,7 +319,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
-			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++)
+			for (int k = 0; k < (you.GetParadox() ? 2 : 1); k++)
 			{
 				soundmanager.playSound("shoot");
 				coord_def pos = throwtanmac(26, beam, temp_infor, NULL);

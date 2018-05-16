@@ -51,7 +51,7 @@ void action_class::SaveDatas(FILE *fp)
 	SaveData<dump_action_type>(fp, type);
 	
 	char temp[100];
-	sprintf(temp,"%s",name.c_str());
+	sprintf_s(temp,100,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 
 	for(int i=0;i<27;i++)

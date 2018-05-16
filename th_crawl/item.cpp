@@ -253,7 +253,7 @@ string item::GetName(int num_)
 	if(is_pile && num >1 && num_ != -2)
 	{
 		char buf[20]; 
-		sprintf(buf,"%d개의 ",num_!=-1?num_!=0?num_:num:num);
+		sprintf_s(buf, 20,"%d개의 ",num_!=-1?num_!=0?num_:num:num);
 		temp += buf;
 	}
 	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST)
@@ -261,8 +261,8 @@ string item::GetName(int num_)
 		if(identify)
 		{
 			char temp2[20];
-			//sprintf(temp2,"%c%d,%c%d ",value3>=0?'+':'-',abs(value3),value4>=0?'+':'-',abs(value4));
-			sprintf(temp2,"%c%d ",value4>=0?'+':'-',abs(value4));
+			//sprintf_s(temp2, 20,"%c%d,%c%d ",value3>=0?'+':'-',abs(value3),value4>=0?'+':'-',abs(value4));
+			sprintf_s(temp2, 20,"%c%d ",value4>=0?'+':'-',abs(value4));
 			temp += temp2;
 		}
 		else if(!value6 && second_name.name.size())
@@ -275,7 +275,7 @@ string item::GetName(int num_)
 		if(identify)
 		{
 			char temp2[10];
-			sprintf(temp2,"%c%d ",value4>=0?'+':'-',abs(value4));
+			sprintf_s(temp2,10,"%c%d ",value4>=0?'+':'-',abs(value4));
 			temp += temp2;
 		}
 		else if(second_name.name.size())

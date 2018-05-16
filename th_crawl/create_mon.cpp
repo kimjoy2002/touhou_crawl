@@ -242,6 +242,7 @@ mon_group normal_group[] = //ÀÏ¹Ý¸÷ ±×·ì
 	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  2}, //´ÞÅä³¢ Áö¿øº´
 	{ 70,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //´ÞÅä³¢ Ã´ÈÄº´
 	{ 72,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //´ÞÅä³¢ ¿¤¸®Æ®
+	{ 100,  MOON_LEVEL,  MOON_LEVEL, 10,  3}, //Å¥¸®¿À½ÃÆ¼
 	
 	//ÁöÀú
 	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  3}, //Á¦µî¿ä±«
@@ -980,6 +981,9 @@ void create_id_to_mon(int id, int level, int strong)
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
 			index.push_back(pair<monster_index, int>(randA(4)?MON_LUIZE:randA(1)?MON_SARA:MON_ELIS, strong + 1));
 		break;
+	case 100:
+		index.push_back(pair<monster_index, int>(MON_CURIOSITY, strong));
+		break; 
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -2241,6 +2245,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_MOON_RABIT_ELITE, middle(power_));
 		rand_.push(MON_LUNATIC, middle(power_));
 		rand_.push(MON_MOON_RABIT_ELITE, strong(power_));
+		rand_.push(MON_CURIOSITY, middle(power_));
 	}
 	else if (level_ == PANDEMONIUM_LEVEL) {
 		rand_.push(MON_EVIL_EYE, weak(power_));

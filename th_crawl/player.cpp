@@ -3805,7 +3805,7 @@ interupt_type players::resetLOS(bool speak_)
 								map_list.dungeon_enter[HAKUREI_D].detected = true;		
 								break;
 							case DG_ZIGURRAT_STAIR:
-								map_list.dungeon_enter[ZIGURRAT_LEVEL].detected = true;
+								map_list.dungeon_enter[ZIGURRAT].detected = true;
 								break;
 							}
 

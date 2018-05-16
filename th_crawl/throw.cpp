@@ -387,9 +387,9 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 		if(isStartGraphic(graphic_type))
 		{
 			coord_def postion_ = prev;
-			int path = 80+GetPosToDirec(prev,(*beam));
+			int path_ = 80+GetPosToDirec(prev,(*beam));
 			if(graphic_type || !item_)
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
 			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
 				env[current_level].MakeEffect(postion_,item_->image,false);
 		}
@@ -506,10 +506,10 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 	if(isStartGraphic(graphic_type))
 	{
 		coord_def postion_ = prev;
-		int path = 80+GetPosToDirec(prev,(*beam));
+		int path_ = 80+GetPosToDirec(prev,(*beam));
 
 		if(graphic_type)
-			env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+			env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
 	}
 	while(env[current_level].isMove(*(beam),true))
 	{
@@ -566,9 +566,9 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 		if(isStartGraphic(graphic_type))
 		{
 			coord_def postion_ = prev;
-			int path = 80+GetPosToDirec(prev,(*beam));
+			int path_ = 80+GetPosToDirec(prev,(*beam));
 			if(graphic_type)
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
 		}
 		{
 			vector<sector_check> vec_;

@@ -284,7 +284,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 							}
 							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("물약",true));
 							
-							for(int i=0;i<(order->GetParadox()?2:1);i++)
+							for(int k=0;k<(order->GetParadox()?2:1);k++)
 							{
 								soundmanager.playSound("throw");
 								coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
@@ -3055,8 +3055,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 						printlog(temp, true, false, true, CL_danger);
 						changedisplay(DT_GAME);
 
-						int key_ = waitkeyinput(true);
-						if (key_ == 'y' || key_ == 'Y')
+						int key__ = waitkeyinput(true);
+						if (key__ == 'y' || key__ == 'Y')
 						{
 							you.SetPureSkill(num);
 							sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num));
@@ -3148,8 +3148,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 						printlog(temp, true, false, true, CL_small_danger);
 						changedisplay(DT_GAME);
 
-						int key_ = waitkeyinput(true);
-						if (key_ == 'y' || key_ == 'Y')
+						int key__ = waitkeyinput(true);
+						if (key__ == 'y' || key__ == 'Y')
 						{
 							sprintf_s(temp, 100, "순호는 당신의 %s 아이템을 순화하였다! ", item_->GetName().c_str());
 							printlog(temp, true, false, false, CL_junko);
@@ -3471,11 +3471,11 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 				it->percent = it->percent / 5;
 			}
 
-			if (monster* mon_ = BaseSummon(MON_SION, 100, true, false, 2, hit_mon, hit_mon->position, SKD_OTHER, -1))
+			if (monster* mon__ = BaseSummon(MON_SION, 100, true, false, 2, hit_mon, hit_mon->position, SKD_OTHER, -1))
 			{
-				mon_->s_ally = -1;
-				mon_->flag |= M_FLAG_ALLY;
-				mon_->SetInvincibility(-1, false);
+				mon__->s_ally = -1;
+				mon__->flag |= M_FLAG_ALLY;
+				mon__->SetInvincibility(-1, false);
 			}
 
 			if (hit_mon->isYourShight())

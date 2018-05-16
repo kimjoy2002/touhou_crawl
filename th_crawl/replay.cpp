@@ -44,7 +44,7 @@ void replay_class::DeleteRpy()
 void replay_class::SaveDatas(FILE *fp)
 {
 	char temp[1024];
-	sprintf(temp,"%s",replay_string.c_str());
+	sprintf_s(temp,1024,"%s",replay_string.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 
 	SaveData<base_infor>(fp,infor);

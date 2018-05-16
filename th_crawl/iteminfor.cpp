@@ -175,7 +175,7 @@ void iteminfor(bool gameover)
 											new_->id = alphabet_;
 											swap_list_items(you.item_list, old_, new_);
 
-											sprintf(temp, "%c", old_->id);
+											sprintf_s(temp, 100, "%c", old_->id);
 											printlog(temp, false, false, false, old_->item_color());
 											printlog(" - ", false, false, false, old_->item_color());
 											printlog(old_->GetName(), false, false, false, old_->item_color());
@@ -199,7 +199,7 @@ void iteminfor(bool gameover)
 												you.item_list.splice(it, you.item_list, new_);
 											}
 										}
-										sprintf(temp, "%c", new_->id);
+										sprintf_s(temp, 100, "%c", new_->id);
 										printlog(temp, false, false, false, new_->item_color());
 										printlog(" - ", false, false, false, new_->item_color());
 										printlog(new_->GetName(), false, false, false, new_->item_color());
@@ -293,7 +293,7 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								you.throw_weapon = item_;
 								char temp[100];
-								sprintf(temp, "%c", item_->id);
+								sprintf_s(temp, 100, "%c", item_->id);
 								printlog(temp, false, false, false, item_->item_color());
 								printlog(" - ", false, false, false, item_->item_color());
 								printlog(item_->GetName(), false, false, false, item_->item_color());
@@ -616,15 +616,15 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			//스킬레벨 설명해주기
 			char temp[100];
-			sprintf(temp, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
+			sprintf_s(temp, 100, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
 			text_ += temp;
 
-			sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+			sprintf_s(temp,100, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 			text_ += temp;
-			sprintf(temp, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
+			sprintf_s(temp,100, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
 			text_ += temp;
 			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
-				sprintf(temp, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
+				sprintf_s(temp,100, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
 				text_ += temp;
 			}
 		}
@@ -633,15 +633,15 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->can_throw)
 		{
 			char temp[100];
-			sprintf(temp, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
+			sprintf_s(temp,100, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
 			text_ += temp;
-			sprintf(temp, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+			sprintf_s(temp,100, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 			text_ += temp;
 		}
 
 		{
 			char temp[100];
-			sprintf(temp, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
+			sprintf_s(temp,100, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
 			text_ += temp;
 		}
 
@@ -694,9 +694,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			break;
 		}
 		char temp[100];
-		sprintf(temp, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+		sprintf_s(temp,100, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 		text_ += temp;
-		sprintf(temp, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+		sprintf_s(temp,100, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 
 		if (can_use_)
@@ -770,23 +770,23 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			break;
 		}
 		char temp[100];
-		sprintf(temp, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
+		sprintf_s(temp,100, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf(temp, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
+		sprintf_s(temp,100, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
 		text_ += temp;
-		sprintf(temp, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
+		sprintf_s(temp,100, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
 			(it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3), you.GetSkillLevel(SKT_ARMOUR, true));
 		text_ += temp;
-		sprintf(temp, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
+		sprintf_s(temp,100, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf(temp, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
+		sprintf_s(temp,100, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
 		text_ += temp;
 
 
@@ -810,23 +810,23 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		text_ += "상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n";
 		text_ += "상대의 탄막을 막는 반칙적인 활용도 가능하다.\n";
 		char temp[100];
-		sprintf(temp, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
+		sprintf_s(temp,100, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf(temp, "패널티는 방패 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n"); 
+		sprintf_s(temp,100, "패널티는 방패 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n"); 
 		text_ += temp;
-		sprintf(temp, "현재 착용시 방어력: %d    패널티 : %d (현재 방패 스킬 레벨 : %d)\n\n",
+		sprintf_s(temp,100, "현재 착용시 방어력: %d    패널티 : %d (현재 방패 스킬 레벨 : %d)\n\n",
 			(it->isiden() ? it->value4 : 0) + (int)(it->value1*(1.0f + (you.s_dex / 5.0f + you.GetSkillLevel(SKT_SHIELD, true)) / 15.0f)*(you.GetProperty(TPT_SLAY)?1.2f:1.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_SHIELD, true) / 3), you.GetSkillLevel(SKT_SHIELD, true));
 		text_ += temp;
-		sprintf(temp, "합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
+		sprintf_s(temp,100, "합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf(temp, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf(temp, "이 아이템은 +%d까지 인챈트가 가능하다.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
+		sprintf_s(temp,100, "이 아이템은 +%d까지 인챈트가 가능하다.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
 		text_ += temp;
 
 		if (can_use_)
@@ -917,9 +917,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			break;
 		}
 		char temp[100];
-		sprintf(temp, "방어력 : %d", it->value1);
+		sprintf_s(temp,100, "방어력 : %d", it->value1);
 		text_ += temp;
-		sprintf(temp, "\n\n이 아이템은 +2까지 인챈트가 가능하다.");
+		sprintf_s(temp,100, "\n\n이 아이템은 +2까지 인챈트가 가능하다.");
 		text_ += temp;
 	}
 	break;
@@ -1370,14 +1370,14 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->identify)
 		{
 			char temp[100], sp_char = 'a';
-			sprintf(temp, "%-34s%-30s%s\n", "마법이름", "학파", "레벨");
+			sprintf_s(temp,100, "%-34s%-30s%s\n", "마법이름", "학파", "레벨");
 			text_ += temp;
 			for (int i = 0; i < 8; i++)
 			{
 				spell_list spell_;
 				if ((spell_ = (spell_list)it->GetValue(i + 1)) != SPL_NONE)
 				{
-					sprintf(temp, "%c - %-30s%-30s%d\n", sp_char++, SpellString(spell_), GetSpellSchoolString(spell_).c_str(), SpellLevel(spell_));
+					sprintf_s(temp,100, "%c - %-30s%-30s%d\n", sp_char++, SpellString(spell_), GetSpellSchoolString(spell_).c_str(), SpellLevel(spell_));
 					text_ += temp;
 				}
 			}
@@ -1441,7 +1441,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
 		text_ += "V키로 파워를 소모하여 발동할 수 있다.\n\n";
 		char temp[100];
-		sprintf(temp, "이 발동템을 사용할때마다 필요한 파워: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
+		sprintf_s(temp,100, "이 발동템을 사용할때마다 필요한 파워: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
 		text_ += temp;
 
 		if (can_use_)
@@ -1524,9 +1524,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	text_ += use_text_;
 	//char temp[100];
 	//if(!it->is_pile || it->num == 1)
-	//	sprintf(temp,"\n\n\n무게 : %g\n",it->weight);
+	//	sprintf_s(temp, 100,"\n\n\n무게 : %g\n",it->weight);
 	//else
-	//	sprintf(temp,"\n\n\n무게 : %g * %d\n",it->weight/it->num,it->num);
+	//	sprintf_s(temp, 100,"\n\n\n무게 : %g * %d\n",it->weight/it->num,it->num);
 	//text_ += temp;
 	return text_;
 

@@ -4322,12 +4322,12 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_SLEEP:
 		if(state.GetState() == MS_SLEEP)
 		{
-			sprintf(string_,"수면");
+			sprintf_s(string_,30,"수면");
 			return CL_normal;
 		}
 		else if(state.GetState() == MS_REST)
 		{
-			sprintf(string_,"휴식");
+			sprintf_s(string_,30,"휴식");
 			return CL_normal;
 		}
 		else
@@ -4335,7 +4335,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_WANDERING:
 		if(state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
 		{
-			sprintf(string_,"탐험중");
+			sprintf_s(string_,30,"탐험중");
 			return CL_normal;
 		}
 		else
@@ -4343,7 +4343,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_NO_NOTICE:
 		if(state.GetState() == MS_ATACK && !isUserAlly() && target != &you)
 		{
-			sprintf(string_,"발각안됨");
+			sprintf_s(string_,30,"발각안됨");
 			return CL_normal;
 		}
 		else
@@ -4351,7 +4351,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_CONFUSE:
 		if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
 		{
-			sprintf(string_,"혼란");
+			sprintf_s(string_,30,"혼란");
 			return CL_normal;
 		}
 		else
@@ -4359,7 +4359,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_POISON:
 		if(s_poison)
 		{
-			sprintf(string_,"독");
+			sprintf_s(string_,30,"독");
 			return CL_normal;
 		}
 		else
@@ -4369,7 +4369,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_MIGHT:
 		if(s_might)
 		{
-			sprintf(string_,"힘강화");
+			sprintf_s(string_,30,"힘강화");
 			return CL_normal;
 		}
 		else
@@ -4377,7 +4377,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_CLEVER:
 		if (s_clever)
 		{
-			sprintf(string_, "영력강화");
+			sprintf_s(string_,30, "영력강화");
 			return CL_normal;
 		}
 		else
@@ -4385,7 +4385,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_HASTE:
 		if(s_haste && !s_slow)
 		{
-			sprintf(string_,"가속");
+			sprintf_s(string_,30,"가속");
 			return CL_normal;
 		}
 		else
@@ -4393,7 +4393,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_SLOW:
 		if(s_slow && !s_haste)
 		{
-			sprintf(string_,"감속");
+			sprintf_s(string_,30,"감속");
 			return CL_normal;
 		}
 		else
@@ -4402,42 +4402,42 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
-			sprintf(string_,smoke_->GetName());
+			sprintf_s(string_,30,smoke_->GetName());
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SUMMON:
 		if(flag & M_FLAG_SUMMON )
 		{
-			sprintf(string_,"소환");
+			sprintf_s(string_,30,"소환");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_FROZEN:
 		if(s_frozen)
 		{
-			sprintf(string_,"빙결");
+			sprintf_s(string_,30,"빙결");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_ALLY:
 		if(isUserAlly())
 		{
-			sprintf(string_,"우호");
+			sprintf_s(string_,30,"우호");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_ELEC:
 		if(s_elec)
 		{
-			sprintf(string_,"방전");
+			sprintf_s(string_,30,"방전");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_PARALYSE:
 		if(s_paralyse)
 		{
-			sprintf(string_,"마비");
+			sprintf_s(string_,30,"마비");
 			return CL_normal;
 
 		}
@@ -4445,70 +4445,70 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_GLOW:
 		if(s_glow)
 		{
-			sprintf(string_,"빛남");
+			sprintf_s(string_,30,"빛남");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_GRAZE:
 		if(s_graze)
 		{
-			sprintf(string_,"그레이즈");
+			sprintf_s(string_,30,"그레이즈");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SILENCE:
 		if(env[current_level].isSilence(position))
 		{
-			sprintf(string_,"정적");
+			sprintf_s(string_,30,"정적");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SICK:
 		if(s_sick)
 		{
-			sprintf(string_,"병");
+			sprintf_s(string_,30,"병");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_VEILING:
 		if(s_veiling)
 		{
-			sprintf(string_,"베일링");
+			sprintf_s(string_,30,"베일링");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_INVISIVLE:
 		if(s_invisible)
 		{
-			sprintf(string_,"투명");
+			sprintf_s(string_,30,"투명");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_TELE:
 		if(s_tele)
 		{
-			sprintf(string_,"공간불안정");
+			sprintf_s(string_,30,"공간불안정");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_MUTE:
 		if(s_mute)
 		{
-			sprintf(string_,"벙어리");
+			sprintf_s(string_,30,"벙어리");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_CATCH:
 		if(s_catch)
 		{
-			sprintf(string_,"잡힘");
+			sprintf_s(string_,30,"잡힘");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_GHOST:
 		if(s_ghost)
 		{
-			sprintf(string_,"영혼구속");
+			sprintf_s(string_,30,"영혼구속");
 			return CL_normal;
 		}
 		return CL_none;
@@ -4516,30 +4516,30 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_fear)
 		{
 			if (s_fear>0)
-			sprintf(string_,"공포");
+			sprintf_s(string_,30,"공포");
 			else
-				sprintf(string_, "전의상실");
+				sprintf_s(string_,30, "전의상실");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_MIND_READING:
 		if(s_mind_reading)
 		{
-			sprintf(string_,"간파");
+			sprintf_s(string_,30,"간파");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_LUNATIC:
 		if(s_lunatic)
 		{
-			sprintf(string_,"광기");
+			sprintf_s(string_,30,"광기");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_COMMUNICATION:
 		if(s_communication)
 		{
-			sprintf(string_,"동료부르기");
+			sprintf_s(string_,30,"동료부르기");
 			return CL_normal;
 		}
 		return CL_none;
@@ -4547,23 +4547,23 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(force_turn)
 		{
 			if(force_strong)
-				sprintf(string_,"강화");
+				sprintf_s(string_,30,"강화");
 			else				
-				sprintf(string_,"약화");
+				sprintf_s(string_,30,"약화");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_CHANGED:
 		if(s_changed)
 		{
-			sprintf(string_,"둔갑중");
+			sprintf_s(string_,30,"둔갑중");
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_INVINCIBILITY:
 		if (s_invincibility)
 		{
-			sprintf(string_, "무적");
+			sprintf_s(string_,30, "무적");
 			return CL_normal;
 		}
 		return CL_none;
@@ -4573,19 +4573,19 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		switch (hp_)
 		{
 		case 0:
-			sprintf(string_, "죽기 직전");
+			sprintf_s(string_,30, "죽기 직전");
 			return CL_danger;
 		case 1:
-			sprintf(string_, "심각한 부상");
+			sprintf_s(string_,30, "심각한 부상");
 			return CL_small_danger;
 		case 2:
-			sprintf(string_, "상당한 부상");
+			sprintf_s(string_,30, "상당한 부상");
 			return CL_warning;
 		case 3:
-			sprintf(string_, "가벼운 부상");
+			sprintf_s(string_,30, "가벼운 부상");
 			return CL_good;
 		case 4:
-			sprintf(string_, "거의 멀쩡함");
+			sprintf_s(string_,30, "거의 멀쩡함");
 			return CL_dark_good;
 		}
 		return CL_none;
@@ -4602,7 +4602,7 @@ void shadow::SaveDatas(FILE *fp)
 	SaveData<int>(fp, position.y);
 	SaveData<shadow_type>(fp, type);
 	char temp[100];
-	sprintf(temp,"%s",name.c_str());
+	sprintf_s(temp, 100,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 }
 void shadow::LoadDatas(FILE *fp)

@@ -156,12 +156,12 @@ bool NetClient::SendFile(const char* c,const char* name)
 	strcpy(fstring+strlen(fstring),"\0");
 	SendBuf(fstring,256);
 	SendBuf(fname,256);
-	sprintf(fsize,"%d",len);
+	sprintf_s(fsize, 64,"%d",len);
     SendBuf(fsize,64);
 	
 
 	SendBuf(fname2,256);
-	sprintf(fsize2,"%d",len2);
+	sprintf_s(fsize2,64,"%d",len2);
     SendBuf(fsize2,64);
 
 

@@ -45,7 +45,7 @@ void test_rand(const char* tt)
 	
 	fprintf(fp,"|%30s|%ud\n",tt,map_list.random_number);
 	
-	sprintf(test_test2,"|%30s|%ud\n",tt,map_list.random_number);
+	sprintf_s(test_test2,256,"|%30s|%ud\n",tt,map_list.random_number);
 	fclose(fp);
 
 

@@ -415,6 +415,14 @@ void wiz_mode()
 			//you.resetLOS(false);
 			break;
 		}
+		case 'R': //맵 재생성	
+		{
+			deque<monster*> dq;
+			env[current_level].ClearFloor();
+			env[current_level].make = false;
+			env[current_level].EnterMap(0, dq);
+			break;
+		}
 		case 'b':
 			you.Blink(40);
 			break;
@@ -745,6 +753,7 @@ void wiz_mode()
 			printsub(" W      - 시간정지                        ",true,CL_normal);
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);
+			printsub(" R      - 현재 층 재구성                  ", true, CL_normal);
 			printsub("                                         ",true,CL_normal);
 			printsub(" 이외의 커맨드는 불안정하니 비추천        ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);

@@ -24,6 +24,7 @@ SOUNDBUFFER::SOUNDBUFFER()
 	IsStreaming = false;
 	IsOverlab = false;
 	lazy_loading = false;
+	quite = false;
 	path = "";
 	Volume = 100;
 	stream_limit = 0;
@@ -349,6 +350,8 @@ void SOUNDBUFFER::SetVolume()
 	Volume_ = Volume_ * Up_time / 100;
 	if (Volume_ > 100)
 		Volume_ = 100;
+	if (quite)
+		Volume_ = 0;
 	if (!SoundBuffer)
 		return;
 
@@ -592,22 +595,26 @@ void StopBGM(SOUNDBUFFER* sound_)
 void VolumeUp()
 {
 	for (auto it = soundmanager.bgmList.begin(); it != soundmanager.bgmList.end(); it++) {
-		it->second->Volume += 10;
+		it->second->quite = false;
+		//it->second->Volume += 10;
 		it->second->SetVolume();
 	}
 	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
-		it->second->Volume += 10;
+		it->second->quite = false;
+		//it->second->Volume += 10;
 		it->second->SetVolume();
 	}
 }
 void VolumeDown()
 {
 	for (auto it = soundmanager.bgmList.begin(); it != soundmanager.bgmList.end(); it++) {
-		it->second->Volume -= 10;
+		it->second->quite = true;
+		//it->second->Volume -= 10;
 		it->second->SetVolume();
 	}
 	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
-		it->second->Volume -= 10;
+		it->second->quite = true;
+		//it->second->Volume -= 10;
 		it->second->SetVolume();
 	}
 }

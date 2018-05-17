@@ -67,12 +67,12 @@ void Help_Show()
 			printsub("q      - 마시기(물약)                              ctrl-S - 세이브후 종료(경고없음)",true,CL_normal);
 			printsub("f/F    - 빠른/선택 던지기                          ctrl-Q - 세이브없이 종료",true,CL_normal);
 			printsub("v,V    - 스펠카드 사용                             # - 게임 덤프하기",true,CL_normal);
-			printsub("w      - 무기장착( - 키로 맨손)                    ",true,CL_normal);
+			printsub("w      - 무기장착( - 키로 맨손)                    +/- - 사운드 ON/OFF (초기설정이 있는 경우)",true,CL_normal);
 			printsub("W/T    - 방어구 장착/해제                          ",true,CL_normal);
-			printsub("P/R    - 장신구 장착/해제                          <치트모드>",true,CL_normal);
-			printsub("ctrl-A - 자동줍기 활성/해제                        & - 위자드모드",true,CL_normal);
-			printsub("\'      - a, b단축키 무기 바꾸기                    _ - 세이브보존모드", true, CL_normal);
-			printsub("                                                   ",true,CL_normal);
+			printsub("P/R    - 장신구 장착/해제                          ",true,CL_normal);
+			printsub("ctrl-A - 자동줍기 활성/해제                        <치트모드>",true,CL_normal);
+			printsub("\'      - a, b단축키 무기 바꾸기                    & - 위자드모드", true, CL_normal);
+			printsub("                                                   _ - 세이브보존모드",true,CL_normal);
 			printsub("                                                   ",true,CL_normal);
 			printsub("<능력 관련>                                        ",true,CL_normal);
 			printsub("p - 기도                                           ",true,CL_normal);

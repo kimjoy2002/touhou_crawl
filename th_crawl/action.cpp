@@ -729,6 +729,30 @@ void Search()
 		case 'u':
 			Move(coord_def(you.position.x+1,you.position.y-1));
 			break;
+		case 'K':
+			Move(coord_def(you.position.x, you.position.y - 8));  //위
+			break;
+		case 'J':
+			Move(coord_def(you.position.x, you.position.y + 8)); //아래
+			break;
+		case 'H':
+			Move(coord_def(you.position.x - 8, you.position.y)); //왼쪽
+			break;
+		case 'L':
+			Move(coord_def(you.position.x + 8, you.position.y)); //오른쪽
+			break;
+		case 'B':
+			Move(coord_def(you.position.x - 8, you.position.y + 8));
+			break;
+		case 'N':
+			Move(coord_def(you.position.x + 8, you.position.y + 8));
+			break;
+		case 'Y':
+			Move(coord_def(you.position.x - 8, you.position.y - 8));
+			break;
+		case 'U':
+			Move(coord_def(you.position.x + 8, you.position.y - 8));
+			break;
 		case 'v':
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{

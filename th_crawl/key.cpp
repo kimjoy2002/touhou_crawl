@@ -176,6 +176,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 		DWORD delay_;
 		int return_;
 		MSG msg;
+		bool end_ = false;
 		PeekMessage(&msg,NULL,0,0,PM_REMOVE);
 		if(msg.message == WM_CHAR)
 		{
@@ -196,21 +197,23 @@ int waitkeyinput(bool direction_, bool immedity_)
 					{
 						if(msg.wParam == 'z' || msg.wParam == 'x' || msg.wParam == 'c')
 						{
-							if(msg.wParam == 'x')
+							if (msg.wParam == 'x')
 								replay_speed = 1;
-							else if(msg.wParam == 'c')
+							else if (msg.wParam == 'c')
 								replay_speed = 0;
 							break;
 						}
 					}
-					if(msg.message == WM_QUIT)
+					if (msg.message == WM_QUIT) {
+						end_ = true;
 						break;
+					}
 				}
 				break;
 			}
 		}
 
-		if(game_over || msg.message == WM_QUIT)
+		if(game_over || end_)
 		{
 			throw 0;
 		}

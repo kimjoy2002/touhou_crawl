@@ -26,7 +26,8 @@ const char *evoke_string[EVK_MAX]=
 	"4Ã´ ¸ÅÁ÷º½",
 	"¿ÀÄí¸®ÃİÄ£",
 	"°øÁß¾î·Ú",
-	"¿ä¼ú¸ÁÄ¡"
+	"¿ä¼ú¸ÁÄ¡",
+	"Ä«¸Ş¶ó"
 };
 const bool evoke_string_is[EVK_MAX]=
 {
@@ -35,6 +36,7 @@ const bool evoke_string_is[EVK_MAX]=
 	true,
 	true,
 	true,
+	false,
 	false,
 	false
 };
@@ -47,7 +49,7 @@ int getEvokeItem() {
 	random_evoke.push(EVK_AIR_SCROLL, 10);
 	random_evoke.push(EVK_BOMB, 10);
 	random_evoke.push(EVK_GHOST_BALL, 10);
-	//random_evoke.push(EVK_DREAM_SOUL, 2); //¾È³ª¿È
+	random_evoke.push(EVK_DREAM_SOUL, 10);
 	return random_evoke.pop();
 }
 
@@ -71,7 +73,8 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	kind_ == EVK_GHOST_BALL? &img_item_evo_ghost_ball:
 	kind_ == EVK_SKY_TORPEDO? &img_item_evo_sky_torpedo:
 	kind_ == EVK_MAGIC_HAMMER ? &img_item_evo_hammer :
-		&img_mons_default;
+	kind_ == EVK_CAMERA ? &img_item_broken_camera:
+	&img_mons_default;
 	t->name.name = evoke_string[kind_];
 	t->name.name_type = evoke_string_is[kind_];
 	t->weight = 1.0f;
@@ -187,6 +190,8 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 3;
 	case EVK_MAGIC_HAMMER:
 		return 100;
+	case EVK_CAMERA:
+		return 100;
 	default:
 		return false;
 	}
@@ -199,6 +204,7 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 	{
 	case EVK_BOMB:
 	case EVK_SKY_TORPEDO:
+	case EVK_CAMERA:
 		return false;
 	case EVK_PAGODA:
 		return (S_FLAG_PENETRATE) & flag;
@@ -216,6 +222,8 @@ int EvokeLength(evoke_kind skill)
 {
 	switch(skill)
 	{
+	case EVK_CAMERA:
+		return 4;
 	case EVK_BOMB:
 		return 6;
 	case EVK_PAGODA:
@@ -261,7 +269,12 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 {
 	if(target == you.position && !EvokeFlagCheck(kind,S_FLAG_SEIF) && !EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		printlog("ÀÚ»ìÇÒ°Å¾ß?",true,false,false,CL_small_danger);	
+		if (kind == EVK_CAMERA) {
+			printlog("¼¿Ä«¸¦ ÂïÀ»²¨¾ß?", true, false, false, CL_small_danger);
+		}
+		else {
+			printlog("ÀÚ»ìÇÒ°Å¾ß?", true, false, false, CL_small_danger);
+		}
 		return false;
 	}
 	int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
@@ -518,6 +531,66 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			}
 			you.SetParadox(0);
 			return true;
+		}
+		return false;
+	}
+	case EVK_CAMERA:
+	{
+		unit *goal_ = env[current_level].isMonsterPos(target.x, target.y, &you);
+
+		if (goal_ == NULL ||
+			!goal_->isView()) {
+			printlog("Çã°øÀ» ÂïÀ» ¿©À¯´Â ¾ø´Ù. ", true, false, false, CL_normal);
+			return false;
+		}
+		if (!goal_->isplayer()) {
+			monster* mon_ = (monster*)goal_;
+			if (!mon_->isUnique()) {
+				printlog("Á» ´õ ÀÌ»Û ¹Ì¼Ò³à¸¦ Âï°í ½ÍÀºµ¥. ", true, false, false, CL_normal);
+				return false;
+			}
+			if (mon_->id == MON_FORTUNE_TELLER) {
+				printlog("³²ÀÚ´Â Âï°í ½ÍÁö ¾Ê¾Æ. ", true, false, false, CL_danger);
+				return false;
+			}
+		}
+
+
+		beam_iterator beam(you.position, target);
+		if (CheckThrowPath(you.position, target, beam))
+		{
+			beam.init();
+			bool loop_ = true;
+			while (loop_)
+			{
+				if (beam.end())
+					loop_ = false;
+
+				beam_iterator temp = beam;
+				unit *unit_ = env[current_level].isMonsterPos(temp->x, temp->y, &you);
+				if (unit_)
+				{
+					if ((*temp) != target && unit_->isView()) {
+						printlog("´©±º°¡°¡ »çÁøÀ» Âï´Â°É ¹æÇØÇÏ°í ÀÖ¾î! ", true, false, false, CL_normal);
+						return false;
+					}
+					if (unit_ == goal_ && !unit_->isplayer()) {
+						monster* mon_ = (monster*)unit_;
+						printlog("ÂûÄ¬! ", true, false, false, CL_normal);
+						env[current_level].MakeNoise(you.position, 8, NULL);
+						soundmanager.playSound("camera");
+						item_infor t;
+						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
+						it->name.name = mon_->name.name + "ÀÇ " + it->name.name;
+						it->value2 = mon_->id;
+						if (you.additem(it, true) > 0) {
+							env[current_level].DeleteItem(it);
+						}
+						return true;
+					}
+				}
+				beam++;
+			}
 		}
 		return false;
 	}

@@ -51,6 +51,7 @@ enum start_item_type
 	SIT_SPECIAL_TANMAC,
 	SIT_MIGHT_POTION,
 	SIT_RECHARGING_SCROLL,
+	SIT_CAMERA,
 	SIT_TEST_POTION,
 	SIT_TEST_RING,
 	SIT_TEST_SCROLL
@@ -385,6 +386,11 @@ void MakeStartItem(start_item_type select_, int num)
 		it->Identify();
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);		
+		break;
+	case SIT_CAMERA:			
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_CAMERA));
+		you.additem(it, false);
+		env[current_level].DeleteItem(it);
 		break;
 	case SIT_TEST_POTION:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t, PT_ALCOHOL));
@@ -781,10 +787,13 @@ void SetJob(job_type select_, string name_)
 		break;
 	case JOB_MISSING:
 		you.max_mp+=1;
-		MakeStartItem(SIT_AXE,0);
+		MakeStartItem(SIT_CAMERA, 0);
 		MakeStartItem(SIT_ROBE,1);
 		MakeStartItem(SIT_FOOD,2);
-		//?
+
+		you.GiveSkillExp(SKT_DODGE, 60, false);
+		you.GiveSkillExp(SKT_EVOCATE, 60, false);
+		you.GiveSkillExp(SKT_STEALTH, 60, false);
 		break;
 	}
 	you.skill_exper = 25;

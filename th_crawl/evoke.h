@@ -16,6 +16,7 @@ enum evoke_kind
 	EVK_GHOST_BALL,
 	EVK_SKY_TORPEDO,
 	EVK_MAGIC_HAMMER,
+	EVK_CAMERA,
 	EVK_MAX
 };
 

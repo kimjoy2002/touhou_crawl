@@ -21,6 +21,7 @@
 #include "tribe.h"
 #include "dump.h"
 #include "god.h"
+#include "mon_infor.h"
 #include <set>
 
 extern HANDLE mutx;
@@ -1433,12 +1434,23 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			text_ += "단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n";
 			text_ += "요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n";
 			break;
+		case EVK_CAMERA:
+			text_ += "환상향에 떨어지기전에 우연히 들고오게된 카메라.\n";
+			text_ += "기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n";
+			text_ += "당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n";
+			text_ += "그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n";
+			break;
 		default:
 			text_ += "버그를 담은 발동템이다.\n";
 			break;
 		}
 		text_ += "\n\n";
-		text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
+		if (it->value1 == EVK_CAMERA) {
+			text_ += "이 템은 횟수제한없이 발동이 가능한 템이다.\n";
+		}
+		else {
+			text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
+		}
 		text_ += "V키로 파워를 소모하여 발동할 수 있다.\n\n";
 		char temp[100];
 		sprintf_s(temp,100, "이 발동템을 사용할때마다 필요한 파워: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
@@ -1486,6 +1498,19 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EIT_KAPPA_TRASH:
 			text_ += "캇파들이 쓰고 남은 재료와 공구들이다. 쓰임새는 없을 것 같다.\n";
 			break;
+		case EIT_PHOTO:
+		{
+			if (it->value2 >= 0 && it->value2 < MON_MAX) {
+				char temp[100];
+				sprintf_s(temp, 100, "%s%s찍혀있는 사진이다.\n", mondata[it->value2].name.name.c_str(), mondata[it->value2].name.name_do(true));
+				text_ += temp;
+			}
+			else {
+				text_ += "미소녀가 찍혀있는 사진이다.\n";
+			}
+			text_ += "딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\n";
+			break;
+		}
 		}
 		break;
 	default:

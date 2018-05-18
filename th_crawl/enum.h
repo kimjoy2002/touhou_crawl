@@ -790,6 +790,7 @@ enum etc_item_type
 	EIT_CAT_TREE,
 	EIT_BROKEN_CAMERA,
 	EIT_KAPPA_TRASH,
+	EIT_PHOTO,
 	EIT_LAST
 };
 

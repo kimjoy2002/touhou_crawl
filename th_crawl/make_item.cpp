@@ -51,6 +51,7 @@ etcStruct etcList[EIT_LAST] = {
 	etcStruct("개다래 나무", false, &img_item_cat_tree),
 	etcStruct("부셔진 카메라", false, &img_item_broken_camera),
 	etcStruct("잡동사니", false, &img_item_kappa_trash),
+	etcStruct("사진", true, &img_item_goal)
 };
 
 

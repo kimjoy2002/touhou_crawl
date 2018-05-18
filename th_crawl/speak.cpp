@@ -5706,10 +5706,10 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					sprintf_s(temp_speak,100, "%s%s외쳤다. \"설마 소문으로 들은 칩입자가 너일줄이야!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				case 3:
-					sprintf_s(temp_speak,100, "%s%s외쳤다. \"안녕 모미지! 경비 임무라도 질린거야?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true), tribe_type_string[you.tribe]);
+					sprintf_s(temp_speak,100, "%s%s외쳤다. \"안녕 모미지! 경비 임무라도 질린거야?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				case 4:
-					sprintf_s(temp_speak,100, "%s%s외쳤다. \"아야에게 화풀이할거라면 나는 빼줬으면 하는데!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true), tribe_type_string[you.tribe]);
+					sprintf_s(temp_speak,100, "%s%s외쳤다. \"아야에게 화풀이할거라면 나는 빼줬으면 하는데!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				}
 			}

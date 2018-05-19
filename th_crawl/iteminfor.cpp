@@ -934,7 +934,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "단순한 맛난 물약이다.\n";
 				break;
 			case PT_HEAL:
-				text_ += "치료 물약이다. 마시면 각종 좋지않은 상태이상에서 회복되고 체력도 회복된다.\n";
+				text_ += "치료 물약이다. 마시면 혼란, 독, 병으로부터 회복되고 체력도 소량 회복된다.\n";
 				text_ += "효과도 마신 즉시 발휘되는 신비의 물약\n";
 				break;
 			case PT_POISON:

@@ -85,23 +85,25 @@ void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]);
 
 int caculScore()
 {
-	//경험치+룬하나당 500000점
-	int base = you.exper * 99; //현재 19렙에 185000
-	base += 5000000 * you.haveGoal();
+	long base = you.exper; 
+	int rune_ = you.haveGoal() + you.ziggurat_level/9;
+	if (you.rune[RUNE_SUBTERRANEAN]) //지저와 달의도시는 2개 분량 보너스
+		rune_++;
+	if (you.rune[RUNE_MOON]) //지저와 달의도시는 2개 분량 보너스
+		rune_++;
+	//지구랏 9층당 룬1개 수준의 점수
+	base += 5000 * you.ziggurat_level;
+	base += 10000 * rune_ + 1000* rune_*(rune_ +2);
 
 
 	if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 	{ //클리어 했다.
-		base += 500000; //클리어 보너스 점수
-		double multi = 2 * (max(you.turn,5000) +10000)/ (max(you.turn,5000)) - min(you.turn,200000)/200000;
-		multi = max(multi,1.2);
-		base*=multi;
+		base += 6250000000 * (rune_*rune_) / (you.turn + 80000);
 	}
 	if(!you.GetCharNameString()->empty()) //캐릭터 패널티
 	{		
 		base*=0.7;
 	}
-	base/=2;
 	return base;
 }
 

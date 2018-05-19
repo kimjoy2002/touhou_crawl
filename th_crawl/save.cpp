@@ -41,6 +41,7 @@ void saveandcheckexit()
 				PostQuitMessage(0);
 			return;
 		case 'N':
+		case VK_ESCAPE:
 			printlog("종료를 취소.",true,false,false,CL_help);
 			return;
 		default:
@@ -66,6 +67,7 @@ void nosaveandexit()
 			//PostQuitMessage(0);
 			return;
 		case 'N':
+		case VK_ESCAPE:
 			printlog("종료를 취소.",true,false,false,CL_help);
 			return;
 		default:

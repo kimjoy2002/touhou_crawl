@@ -2258,6 +2258,7 @@ void Pray()
 						MoreWait();
 					case 'N':
 					case 'n':
+					case VK_ESCAPE:
 						ok_ = false;
 						break;
 					}

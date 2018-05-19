@@ -16,6 +16,7 @@
 #include "weapon.h"
 #include "god.h"
 #include "rect.h"
+#include "speak.h"
 
 
 const char *evoke_string[EVK_MAX]=
@@ -576,13 +577,26 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					}
 					if (unit_ == goal_ && !unit_->isplayer()) {
 						monster* mon_ = (monster*)unit_;
-						printlog("ÂûÄ¬! ", true, false, false, CL_normal);
 						env[current_level].MakeNoise(you.position, 8, NULL);
+						printlog("ÂûÄ¬! ", false, false, false, CL_warning);
+						if (!mon_->s_paralyse && !mon_->s_confuse) {
+
+							char* c_ = Get_Speak(mon_->id, mon_, MST_CAMERA);
+							if (c_ && (env[current_level].isInSight(mon_->position)))
+								printlog(c_, true, false, false, CL_normal);
+						}
 						soundmanager.playSound("camera");
 						item_infor t;
 						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
 						it->name.name = mon_->name.name + "ÀÇ " + it->name.name;
 						it->value2 = mon_->id;
+						if (it->value2 == MON_KOKORO1 ||
+							it->value2 == MON_KOKORO2 ||
+							it->value2 == MON_KOKORO3)
+						{
+							it->value2 = MON_KOKORO;
+						}
+
 						if (you.additem(it, true) > 0) {
 							env[current_level].DeleteItem(it);
 						}

@@ -1128,7 +1128,8 @@ enum monster_speak_type
 	MST_NORMAL=0,
 	MST_FOUND,
 	MST_MAGIC,
-	MST_CONFUSE
+	MST_CONFUSE,
+	MST_CAMERA
 };
 
 enum god_type

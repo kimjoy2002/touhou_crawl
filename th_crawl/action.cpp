@@ -322,7 +322,7 @@ void auto_Move()
 		if(back_)
 			continue;
 		
-		if(PathSearch(you.position,you.position,you.will_move,ST_SEARCH))
+		if(PathSearch(you.position,you.position,you.will_move,ST_SEARCH, current_level, false, you.isSwim()))
 		{
 			if(!stack_move(true))
 			{

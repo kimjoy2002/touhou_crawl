@@ -1926,7 +1926,7 @@ int monster::longmove()
 {
 	if(move(inttodirec(direction,position.x,position.y), false))
 	{
-		if(randA(30)==1)
+		if(randA(15)==1)
 			direction = rand_int(0,7);
 	}
 	else
@@ -2791,7 +2791,7 @@ int monster::action(int delay_)
 			{
 			case MS_NORMAL:
 				longmove();
-				if (flag & M_FLAG_SHIELD) {
+				if (flag & M_FLAG_SHIELD || isUserAlly()) {
 					if (distan_coord(position, first_position) > 4 * 4)
 					{
 						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
@@ -2964,7 +2964,7 @@ int monster::action(int delay_)
 						{
 							will_move.push_back(c_);
 						}
-						if (is_sight && you_detect())//시야 안에 있을때 스텔스 체크
+						if (is_sight && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
 						{
 							FoundTarget(&you, FoundTime());
 							int percent_ = 1;

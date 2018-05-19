@@ -3174,22 +3174,22 @@ void shout(char auto_)
 	}
 	int rare_shout = 0;
 	string shout_ = "소리 지르기";
-	if(randA(10)<1)
+	if(randA(50)<1)
 	{
 		rare_shout = randA_1(5);
 		switch(rare_shout)
 		{
 		case 1:
-			shout_ = "왁! ";
+			shout_ = "원망스러워라! ";
 			break;
 		case 2:
-			shout_ = "야호! ";
+			shout_ = "안녕하세요! ";
 			break;
 		case 3:
-			shout_ = "우와아! ";
+			shout_ = "만세! ";
 			break;
 		case 4:
-			shout_ = "우어어어ㅓ어어! ";
+			shout_ = "야호! ";
 			break;
 		case 5:
 			shout_ = "와! ";
@@ -3252,7 +3252,7 @@ void shout(char auto_)
 					printlog("공격!",true,false,false,CL_normal);
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
-					Noise(you.position, 12);
+					//Noise(you.position, 12);
 					you.SetPrevAction('t', 'a');
 				}
 			}
@@ -3265,27 +3265,42 @@ void shout(char auto_)
 			{
 				it->target = NULL;
 				it->target_pos = you.position;
-				it->state.SetState(MS_FOLLOW);
+				it->state.SetState(MS_NORMAL);
 			}
 		}
 		printlog("멈춰!",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 12);
+		//Noise(you.position, 12);
 		you.SetPrevAction('t', 's');
 		break;
 	case 'w':
-		printlog("기다려!(미구현)",true,false,false,CL_normal);
+		for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && it->isUserAlly() && env[current_level].isInSight(it->position))
+			{
+				it->target = NULL;
+				it->first_position = it->position;
+				//it->target_pos = you.position;
+				it->state.SetState(MS_NORMAL);
+			}
+		}
+		printlog("기다려!",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 12);
 		you.SetPrevAction('t', 'w');
 		break;
 	case 'f':
-		printlog("따라와!(미구현)",true,false,false,CL_normal);
+		for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && it->isUserAlly() && env[current_level].isInSight(it->position))
+			{
+				it->state.SetState(MS_FOLLOW);
+			}
+		}
+		printlog("따라와!",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		Noise(you.position, 12);
 		you.SetPrevAction('t', 'f');
 		break;
 	default:

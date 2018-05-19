@@ -24,7 +24,7 @@ extern const char *evoke_string[EVK_MAX];
 struct item_infor;
 
 
-bool evoke_evokable(evoke_kind kind);
+bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind);
 int Evokeusepower(evoke_kind skill, bool max_);
 
 void MakeEvokeItem(item_infor* t, int kind_ = -1);

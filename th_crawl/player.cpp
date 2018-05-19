@@ -66,7 +66,8 @@ players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
-as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
+as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE),
+prev_action_key(), equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_pure_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
@@ -189,6 +190,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<float>(fp, item_weight);
 	SaveData<float>(fp, max_item_weight);
 	SaveData<action_type>(fp, prev_action);
+	SaveData<prev_action_struct>(fp, prev_action_key);
+
+	
 	for(int i=0;i<ET_LAST;i++)
 	{
 		SaveData<char>(fp, equipment[i]?equipment[i]->id:0);
@@ -200,6 +204,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prev_real_turn);
 	SaveData<bool>(fp, player_move);
 	SaveData<int>(fp,explore_map);
+	SaveData<char>(fp, final_item);
+	SaveData<int>(fp, final_num);
 
 	//SaveData<int>(fp, hunger);
 	//SaveData<int>(fp, hunger_per_turn);
@@ -411,6 +417,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<float>(fp, item_weight);
 	LoadData<float>(fp, max_item_weight);
 	LoadData<action_type>(fp, prev_action);
+	LoadData<prev_action_struct>(fp, prev_action_key);
 	for(int i=0;i<ET_LAST;i++)
 	{
 		char temp_id_=0;
@@ -434,6 +441,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_real_turn);
 	LoadData<bool>(fp, player_move);
 	LoadData<int>(fp,explore_map);
+	LoadData<char>(fp, final_item);
+	LoadData<int>(fp, final_num);
 	//LoadData<int>(fp, hunger);
 	//LoadData<int>(fp, hunger_per_turn);
 	LoadData<int>(fp, auto_pickup);
@@ -669,6 +678,12 @@ void players::SetXY(int x_, int y_)
 void players::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
+}
+void players::SetPrevAction(int key, char item, int num)
+{
+	prev_action_key.key = key;
+	prev_action_key.item = item;
+	prev_action_key.num = num;
 }
 void players::maybeAction()
 {
@@ -4289,7 +4304,7 @@ bool players::Drink(char id_)
 	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
 	return false;
 }
-bool players::Evoke(char id_)
+bool players::Evoke(char id_, bool auto_)
 {
 
 
@@ -4315,7 +4330,7 @@ bool players::Evoke(char id_)
 				}
 				ReleaseMutex(mutx);
 				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*4 , GetSkillLevel(SKT_EVOCATE, true) * 7);
-				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2))
+				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2, auto_))
 				{
 					WaitForSingleObject(mutx, INFINITE);
 					if(!(*it).value1)
@@ -4341,7 +4356,7 @@ bool players::Evoke(char id_)
 			{
 				ReleaseMutex(mutx);
 
-				if(evoke_evokable((evoke_kind)(*it).value1))
+				if(evoke_evokable(auto_, 0, (evoke_kind)(*it).value1))
 				{
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;

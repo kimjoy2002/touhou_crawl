@@ -1725,7 +1725,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 
 void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
-void SpellUse()
+void SpellUse(char auto_, int auto_direc_)
 {
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
@@ -1767,7 +1767,9 @@ void SpellUse()
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			int key_ = auto_;
+			if (key_ == 0)
+				key_ = waitkeyinput(true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -1797,8 +1799,9 @@ void SpellUse()
 						{
 							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
 							changedisplay(DT_GAME);
+							int direc_;
 							coord_def target_;
-							if(Direc_Throw(&target_))
+							if(direc_ = Direc_Throw(auto_direc_, &target_))
 							{
 								if(PlayerUseSpell(spell_, false, target_))
 								{	
@@ -1821,6 +1824,7 @@ void SpellUse()
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 									you.TurnEnd();
+									you.SetPrevAction('z',key_, direc_);
 								}
 							}
 							break;
@@ -1832,7 +1836,7 @@ void SpellUse()
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
-							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_)))
+							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), auto_>0))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)
@@ -1858,6 +1862,7 @@ void SpellUse()
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 									you.TurnEnd();
+									you.SetPrevAction('z', key_);
 								}
 							}
 							SetSpellSight(0,0);
@@ -1887,6 +1892,7 @@ void SpellUse()
 								if(!silence_)	
 									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 								you.TurnEnd();
+								you.SetPrevAction('z', key_);
 							}		
 							break;
 						}

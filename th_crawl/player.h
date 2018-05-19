@@ -129,6 +129,15 @@ struct current_max
 };
 
 
+struct prev_action_struct
+{
+	int key;
+	char item;
+	int num;
+	prev_action_struct() :key(0), item(0), num(0) {};
+};
+
+
 class players: public unit
 {
 public:
@@ -199,6 +208,7 @@ public:
 	float item_weight;
 	float max_item_weight;
 	action_type prev_action;
+	prev_action_struct prev_action_key;
 
 	item* equipment[ET_LAST]; //장착 아이템
 
@@ -358,6 +368,7 @@ public:
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
 	void SetXY(coord_def pos_);
+	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
 	int move(short_move x_mov, short_move y_mov);
@@ -529,7 +540,7 @@ public:
 	bool DeleteItem(const list<item>::iterator it, int num_ = 0);
 	bool Eat(char id_);
 	bool Drink(char id_);
-	bool Evoke(char id_);
+	bool Evoke(char id_, bool auto_);
 	bool Read(char id_);
 	bool Memorize(int spell, bool immediately = false);
 	bool isMemorize(int spell);
@@ -588,8 +599,10 @@ void GameOver();
 
 extern players you;
 
+int action_Move(int key, const coord_def &c); //메인루프에서의 이동
 int Move(const coord_def &c); //이동한다.
 void Long_Move(const coord_def &c); //길게 이동한다.
+void repeat_action();
 void auto_battle();//자동전투
 void auto_Move(); //자동으로 이동한다.
 void long_rest();
@@ -604,15 +617,16 @@ bool PickUpNum(list<item>::iterator it, int num, bool no_delay);
 int isPick(const item *t); //1 리턴이 ok. 마이너스가 안됨
 void iteminfor(bool gameover = false);
 void iteminfor_pick();
-void turn_skip();
+void turn_skip(); 
+void action_turn_skip();
 void escape();
 void iteminfor_discard();
 void fast_discard();
-void Eatting();
-void Drinking();
+void Eatting(char auto_);
+void Drinking(char auto_);
 //void Spelllcard_Declare();
-void Spelllcard_Evoke();
-void Reading();
+void Spelllcard_Evoke(char auto_);
+void Reading(char auto_);
 void Equip_Weapon(); //무기장착
 void weapon_swap(); //무기스왑
 void Equip_Armor(); //방어구장착
@@ -636,7 +650,7 @@ void Experience_Show();
 //bool Eat_Power();
 void dungeonView();
 void run_spell();
-void shout();
+void shout(char auto_);
 void auto_pick_onoff(bool auto_);
 void floorMove();
 

@@ -114,7 +114,7 @@ bool refreshPath(const coord_def &c, beam_iterator& beam, list<item>::iterator i
 
 
 
-int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_iterator& beam, projectile_infor* infor_, int m_len_ , float sector_)
+int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_iterator& beam, projectile_infor* infor_, int m_len_ , float sector_, bool auto_)
 {
 	you.search_pos = you.position;
 	you.search = true;
@@ -207,7 +207,8 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	bool good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 	while(1)
 	{
-		switch(waitkeyinput())
+		int key_ = auto_? VK_RETURN : waitkeyinput();
+		switch(key_)
 		{
 		case 'k':
 			good_path = refreshPath(coord_def(you.position.x,you.position.y-1), beam, it, infor_, m_len_, sector_);
@@ -382,47 +383,47 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 }
 
 
-bool Direc_Throw(coord_def* c)
+int Direc_Throw(int auto_direc_, coord_def* c)
 {
 	while(1)
 	{
 		printlog("어느 방향으로 발사하시겠습니까?",true,false,true,CL_help);
-		int key_=waitkeyinput();
+		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput());
 		switch(key_)
 		{
 		case 'k':
 			(*c) = coord_def(you.position.x,you.position.y-1);
-			return true;
+			return 'k';
 		case 'j':
 			(*c) = coord_def(you.position.x,you.position.y+1);
-			return true;
+			return 'j';
 		case 'h':
 			(*c) = coord_def(you.position.x-1,you.position.y);
-			return true;
+			return 'h';
 		case 'l':
 			(*c) = coord_def(you.position.x+1,you.position.y);
-			return true;
+			return 'l';
 		case 'b':
 			(*c) = coord_def(you.position.x-1,you.position.y+1);
-			return true;
+			return 'b';
 		case 'n':
 			(*c) = coord_def(you.position.x+1,you.position.y+1);
-			return true;
+			return 'n';
 		case 'y':
 			(*c) = coord_def(you.position.x-1,you.position.y-1);
-			return true;
+			return 'y';
 		case 'u':
 			(*c) = coord_def(you.position.x+1,you.position.y-1);
-			return true;
+			return 'u';
 		case VK_RETURN:
 			(*c) = coord_def(you.position.x,you.position.y);
-			return true;
+			return VK_RETURN;
 		case VK_ESCAPE:
 			deletelog();
-			return false;
+			return 0;
 		default:
 			printlog("잘못된 선택입니다.",true,false,true,CL_help);
 		}
 	}
-	
+	return 0;
 }

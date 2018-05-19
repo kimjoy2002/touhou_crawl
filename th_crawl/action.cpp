@@ -55,6 +55,18 @@ bool stack_move(bool auto_);
 extern display_manager DisplayManager;
 bool widesearch = false;
 
+int action_Move(int command, const coord_def &c)
+{
+	if (you.search)
+		return Search_Move(c, widesearch);
+	else {
+		you.SetPrevAction(command);
+		return Player_Move(c);
+	}
+}
+
+
+
 int Move(const coord_def &c)
 {
 	if(you.search)
@@ -103,6 +115,95 @@ void Long_Move(const coord_def &c)
 	}
 	stack_move(false);
 }
+
+void repeat_action()
+{
+	int key_ = you.prev_action_key.key;
+
+	switch (key_)
+	{
+	case 'k':
+		action_Move('k', coord_def(you.position.x, you.position.y - 1));  //위
+		break;
+	case 'j':
+		action_Move('j', coord_def(you.position.x, you.position.y + 1)); //아래
+		break;
+	case 'h':
+		action_Move('h', coord_def(you.position.x - 1, you.position.y)); //왼쪽
+		break;
+	case 'l':
+		action_Move('l', coord_def(you.position.x + 1, you.position.y)); //오른쪽
+		break;
+	case 'b':
+		action_Move('b', coord_def(you.position.x - 1, you.position.y + 1));
+		break;
+	case 'n':
+		action_Move('n', coord_def(you.position.x + 1, you.position.y + 1));
+		break;
+	case 'y':
+		action_Move('y', coord_def(you.position.x - 1, you.position.y - 1));
+		break;
+	case 'u':
+		action_Move('u', coord_def(you.position.x + 1, you.position.y - 1));
+		break;
+	case 's': //턴스킵
+		action_turn_skip();
+		break;
+	case 'D': //마지막에 먹은 아이템 버리기
+		fast_discard();
+		break;
+	case 'C': //문닫기
+		Close_door();
+		break;
+	case 'O': //문열기
+		Open_door();
+		break;
+	case 'o': //자동이동
+		auto_Move();
+		break;
+	case '5': //100턴넘기기
+		long_rest();
+		break;
+	case 'e': //먹기
+		Eatting(you.prev_action_key.item);
+		break;
+	case 'q': //마시기
+		Drinking(you.prev_action_key.item);
+		break;
+	case 'r': //읽기
+		Reading(you.prev_action_key.item);
+		break;
+	case 'f': //던지기
+		Quick_Throw(you.GetThrowIter(), you.GetTargetIter(), true);  //TODO
+		break;
+	case 'v':
+		Spelllcard_Evoke(you.prev_action_key.item); //TODO
+		break;
+	case 'p':
+		Pray(); 
+		break;
+	case 'z':
+		SpellUse(you.prev_action_key.item, you.prev_action_key.num); //TODO
+		break;
+	case 'a':
+		SkillUse(you.prev_action_key.item); //TODO
+		break;
+	case 't':
+		shout(you.prev_action_key.item); //TODO
+		break;
+	case '\'':
+		weapon_swap(); //TODO
+		break;
+	case VK_TAB:
+		auto_battle(); //TODO
+		break;
+	default:
+		break;
+	}
+}
+
+
+
 void auto_battle()
 {
 	if(!env[current_level].insight_mon(MET_ENEMY))
@@ -131,6 +232,7 @@ void auto_battle()
 			if(env[current_level].dgtile[(*it).x][(*it).y].isMove(true,false,false))
 			{
 				Move((*it));
+				you.SetPrevAction(VK_TAB);
 				return;
 			}
 			else
@@ -194,6 +296,7 @@ void auto_Move()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
+	you.SetPrevAction('o');
 	while(1)
 	{
 		bool back_ = false;
@@ -249,6 +352,7 @@ void long_rest()
 		printlog("시야안에 몬스터가 있다.",true,false,false,CL_small_danger);
 		return;
 	}
+	you.SetPrevAction('5');
 	printlog("휴식을 시작합니다.",true,false,false,CL_bad);
 	for(int i=0;i<100;i++)
 	{		
@@ -980,10 +1084,16 @@ void Wide_Search()
 }
 
 
+
 void turn_skip()
 {
 	you.time_delay += you.GetNormalDelay();
 	you.TurnEnd();
+}
+void action_turn_skip()
+{
+	turn_skip();
+	you.SetPrevAction('s');
 }
 
 void escape() //행동들을 취소함
@@ -1072,11 +1182,13 @@ void Close_door()
 		else
 		{
 			printlog("그곳엔 닫을 수 있는 것이 없다!",true,false,false,CL_normal);
-		}					
+		}
+		you.SetPrevAction('C');
 	}
 	else
 	{
 		printlog("근처에 닫을만한 것이 없다.",true,false,false,CL_normal);
+		you.SetPrevAction('C');
 	}
 }
 
@@ -1148,10 +1260,12 @@ void Open_door()
 		}		
 		else if(result > 0)
 			you.TurnEnd();
+		you.SetPrevAction('O');
 	}
 	else
 	{
 		printlog("근처에 열만한 것이 없다.",true,false,false,CL_normal);
+		you.SetPrevAction('O');
 	}
 	
 }
@@ -3049,7 +3163,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없다?
 	changedisplay(DT_GAME);
 	deletesub();
 }	
-void shout()
+void shout(char auto_)
 {	
 	if(env[current_level].isSilence(you.position))
 	{
@@ -3086,14 +3200,19 @@ void shout()
 		shout_ = "살려줘! ";
 	}
 
-	printlog("무엇을 외치겠습니까?",true,false,false,CL_help);
-	printlog("t - ",false,false,false,CL_normal);
-	printlog(shout_,true,false,false,CL_normal);
-	printlog("아군에게 명령 : a - 공격해라!   s - 공격을 멈춰!",true,false,false,CL_normal);
-	printlog("                w - 대기해라.   f - 따라와라.",true,false,false,CL_normal);
-	printlog("그외의 키 - 조용히 한다.",true,false,false,CL_normal);
+	if (auto_ == 0) {
+		printlog("무엇을 외치겠습니까?", true, false, false, CL_help);
+		printlog("t - ", false, false, false, CL_normal);
+		printlog(shout_, true, false, false, CL_normal);
+		printlog("아군에게 명령 : a - 공격해라!   s - 공격을 멈춰!", true, false, false, CL_normal);
+		printlog("                w - 대기해라.   f - 따라와라.", true, false, false, CL_normal);
+		printlog("그외의 키 - 조용히 한다.", true, false, false, CL_normal);
+	}
 
-	switch(waitkeyinput(true))
+	int key_ = auto_;
+	if (key_ == 0)
+		key_ = waitkeyinput(true);
+	switch(key_)
 	{
 	case 't':
 		if(!rare_shout)
@@ -3103,13 +3222,16 @@ void shout()
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		Noise(you.position, 12);
+		you.SetPrevAction('t', 't');
 		break;
 	case 'a':	
 		{
-			printlog("누구를 공격하게 명령하시겠습니까?",true,false,false,CL_help);
+			if (auto_ == 0) {
+				printlog("누구를 공격하게 명령하시겠습니까?", true, false, false, CL_help);
+			}
 			beam_iterator beam(you.position,you.position);
 			projectile_infor infor(8,false,true);
-			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor))
+			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,-1, 0.0f, auto_>0))
 			{
 				if(unit* target = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 				{
@@ -3129,6 +3251,7 @@ void shout()
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					Noise(you.position, 12);
+					you.SetPrevAction('t', 'a');
 				}
 			}
 			break;
@@ -3147,18 +3270,21 @@ void shout()
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		Noise(you.position, 12);
+		you.SetPrevAction('t', 's');
 		break;
 	case 'w':
 		printlog("기다려!(미구현)",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		Noise(you.position, 12);
+		you.SetPrevAction('t', 'w');
 		break;
 	case 'f':
 		printlog("따라와!(미구현)",true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		Noise(you.position, 12);
+		you.SetPrevAction('t', 'f');
 		break;
 	default:
 		printlog("아무것도 외치지 않았다.",true,false,false,CL_normal);

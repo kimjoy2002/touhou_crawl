@@ -95,7 +95,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target);
 
 
 
-bool evoke_evokable(evoke_kind kind)
+bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
 	{
@@ -120,7 +120,7 @@ bool evoke_evokable(evoke_kind kind)
 	{
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		coord_def target_;
-		if(Direc_Throw(&target_))
+		if(Direc_Throw(auto_direc_, &target_))
 		{
 			if(EvokeEvokable(kind, false, target_))
 			{
@@ -139,7 +139,7 @@ bool evoke_evokable(evoke_kind kind)
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
 		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
-		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind)))
+		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind), auto_))
 		{
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 			you.SetBattleCount(30);

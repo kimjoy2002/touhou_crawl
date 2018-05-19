@@ -894,7 +894,7 @@ list<item>::iterator ThrowSelect()
 	return you.item_list.end();
 }
 
-void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
+void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_)
 {	
 	if(you.s_lunatic)
 	{
@@ -908,7 +908,7 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
 	beam_iterator beam(you.position,you.position);
 	projectile_infor infor(8,true,false);
 	int short_ = 0;
-	if(short_ = Common_Throw(it, it2, beam, &infor))
+	if(short_ = Common_Throw(it, it2, beam, &infor, -1,  0, auto_))
 	{
 		if(it != you.item_list.end())
 		{
@@ -925,6 +925,7 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2)
 				//you.SkillTraining(SKT_TANMAC,2);
 				you.TurnEnd();
 			}
+			you.SetPrevAction('f');
 		}	
 
 	}
@@ -943,5 +944,5 @@ void Select_Throw()
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();
-	Quick_Throw(it!=you.item_list.end()?it:you.GetThrowIter(),you.GetTargetIter());
+	Quick_Throw(it!=you.item_list.end()?it:you.GetThrowIter(),you.GetTargetIter(), false);
 }

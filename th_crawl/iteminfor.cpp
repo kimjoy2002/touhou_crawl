@@ -388,7 +388,7 @@ void iteminfor(bool gameover)
 									printlog("유령상태에선 할 수 없다. ", true, false, false, CL_normal);
 									return;
 								}
-								if (you.Evoke(item_->id))
+								if (you.Evoke(item_->id, false))
 								{
 									you.time_delay += you.GetNormalDelay();
 									you.TurnEnd();

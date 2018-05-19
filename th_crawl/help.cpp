@@ -46,7 +46,8 @@ void Help_Show()
 			printsub("↖↑↗    7 8 9    y k u                           z,Z - 마법 사용",true,CL_normal);
 			printsub("←·→ <> 4 5 6 <> h . l                           I - 기억하고있는 마법 확인",true,CL_normal);
 			printsub("↙↓↘    1 2 3    b j n                           ",true,CL_normal);
-			printsub("o   - 자동탐색                                     <캐릭터 정보 출력>",true,CL_normal);
+			printsub("o      - 자동탐색                                  ",true,CL_normal);
+			printsub("`      - 이전 행동 반복                            <캐릭터 정보 출력>" , true, CL_normal);
 			printsub("                                                   @ - 간단한 캐릭터 상태",true,CL_normal);
 			printsub("<던전의 탐색>                                      % - 자세한 캐릭터 정보",true,CL_normal);
 			printsub("5      - 100턴 휴식                                ^ - 신앙 정보",true,CL_normal);

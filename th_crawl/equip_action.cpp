@@ -135,6 +135,7 @@ void weapon_swap()
 		else if (you.equipment[ET_WEAPON])
 			you.unequip(ET_WEAPON);
 	}
+	you.SetPrevAction('\'');
 }
 void Equip_Armor()
 {

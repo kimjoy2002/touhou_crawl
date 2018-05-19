@@ -228,9 +228,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
 bool CheckDangerSpell(int danger_);
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
-void SpellUse();
+void SpellUse(char auto_, int auto_direc_);
 void SpellView();
-void SkillUse();
+void SkillUse(char auto_);
 
 
 string GetSpellInfor(spell_list spell);

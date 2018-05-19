@@ -1821,7 +1821,7 @@ int GetSpellBombRange(spell_list spell)
 
 
 
-void SkillUse()
+void SkillUse(char auto_)
 {	
 	if(you.s_lunatic)
 	{
@@ -1834,7 +1834,9 @@ void SkillUse()
 		changedisplay(DT_SKILL_USE);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			int key_ = auto_;
+			if (key_ == 0)
+				key_ = waitkeyinput(true);
 			if( (key_ >= 'a' && key_ <= 'z') ||  (key_ >= 'A' && key_ <= 'Z'))
 			{
 				int num = (key_ >= 'A' && key_ <= 'Z')?(key_-'A'+26):(key_-'a');
@@ -1858,7 +1860,7 @@ void SkillUse()
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SkillLength(skill_),false,SkillFlagCheck(skill_, S_FLAG_SMITE),skill_,true);
-							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor))
+							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,-1,0.0f, auto_>0))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)
@@ -1875,6 +1877,7 @@ void SkillUse()
 									you.SetBattleCount(30);
 									you.time_delay += you.GetNormalDelay();
 									you.TurnEnd();
+									you.SetPrevAction('a', key_);
 								}
 							}
 							SetSpellSight(0,0);
@@ -1898,6 +1901,7 @@ void SkillUse()
 								you.SetBattleCount(30);
 								you.time_delay += you.GetNormalDelay();
 								you.TurnEnd();
+								you.SetPrevAction('a', key_);
 							}		
 							break;
 						}

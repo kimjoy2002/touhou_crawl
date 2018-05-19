@@ -2334,6 +2334,7 @@ void Pray()
 	}
 	you.time_delay += you.GetNormalDelay();
 	you.TurnEnd();
+	you.SetPrevAction('p');
 }
 
 

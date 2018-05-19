@@ -47,7 +47,7 @@ coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &in
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
 
-void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2);
+void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_);
 void Select_Throw();
 
 #endif // __THROW_H__

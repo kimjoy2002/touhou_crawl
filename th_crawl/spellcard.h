@@ -17,7 +17,7 @@ enum skill_flag;
 
 //
 //bool declare_spellcard(spellcard_declare_type kind, int power);
-bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_);//fail_은 무조건 실패 iden_은 미식별상태에서 조준실패시 true리턴
+bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_, bool auto_);//fail_은 무조건 실패 iden_은 미식별상태에서 조준실패시 true리턴
 //bool passive_spellcard(spellcard_passive_type kind, int power, int value, int turn_);
 //int spellcard_turn(spellcard_declare_type kind1, spellcard_evoke_type kind2, spellcard_passive_type kind3);
 

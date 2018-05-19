@@ -369,7 +369,7 @@ name_infor GetTanmacString(int type)
 		return name_infor("독고저", false);
 	}
 }
-coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete)
+coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
 	beam.init();
 	coord_def prev = beam.start_pos();
@@ -437,7 +437,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 			//벽에 부딪히는?
 		}
 
-		if(item_ && (infor_.order != &you || !you.s_knife_collect))
+		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
@@ -479,14 +479,14 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 	return prev;
 }
 
-coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete)
+coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
-	return throwtanmac_(0, t_, beam, infor_, item_, effect_delete);
+	return throwtanmac_(0, t_, beam, infor_, item_, effect_delete, mimic_);
 }
 
-coord_def throwtanmac(int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete)
+coord_def throwtanmac(int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
-	return throwtanmac_(graphic_type, NULL, beam, infor_, item_, effect_delete);
+	return throwtanmac_(graphic_type, NULL, beam, infor_, item_, effect_delete, mimic_);
 }
 
 

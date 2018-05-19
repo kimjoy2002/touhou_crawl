@@ -4851,7 +4851,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
 				soundmanager.playSound("shoot");
-				throwtanmac(type_,beam,temp_infor,&(*it));
+				throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
 			}
 		}
 		you.SetParadox(0);

@@ -2824,7 +2824,7 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 			it->AttackedTarget(order);			
 		}
 	}
-	if(!randA(4))
+	if(!randA(7))
 		you.SetTransPanalty(1);
 	return true;
 }
@@ -2854,7 +2854,7 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("timestop");
 		}
-		you.SetTransPanalty(rand_int(4,6));
+		you.SetTransPanalty(rand_int(3,4));
 		you.SetTheWorld(rand_int(5+power/50,max(10,6+power/30)));
 	}
 	return true;

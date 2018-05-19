@@ -219,6 +219,16 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "¿¡°Ô ", 64);
 					strncat(death_reason, "»¡·ÁÁ×¾ú´Ù.", 64);
 					break;
+				case ATT_VEILING:
+					if (you.dead_order->order)
+						strncat(death_reason, "ÀÇ ", 64);
+					strncat(death_reason, "¹Ù¶÷°©¿Ê¿¡ º£¿©Á×¾ú´Ù.", 64);
+					break;
+				case ATT_RUSH:
+					if (you.dead_order->order)
+						strncat(death_reason, "¿¡°Ô ", 64);
+					strncat(death_reason, "±³Åë»ç°í·Î Á×¾ú´Ù.", 64);
+					break;
 				case ATT_WALL:
 					if (you.dead_order->order)
 						strncat(death_reason, "¿¡°Ô ", 64);

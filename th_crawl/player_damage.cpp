@@ -968,7 +968,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("海老傅",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("海老傅",true)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}

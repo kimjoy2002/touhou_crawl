@@ -580,28 +580,66 @@ void wiz_mode()
 		}
 		break;
 		case 'm': 
-			{
-				  key_ = waitkeyinput();
-
-				 
-				  if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_ALICE :MON_MURASA+ key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-				  {
-					  mon_->state.SetState(MS_SLEEP);
-					  mon_->flag &= ~M_FLAG_SUMMON;
-					  mon_->ReturnEnemy();
-				  }
-			}
-			break;
-		case 'M':
 		{
-			key_ = waitkeyinput();
+			int id_ = 0;
+			char temp[100];
+			sprintf_s(temp, 100, "몬스터만들기(0~%d) :", MON_MAX - 1);
+			printlog(temp, false, false, false, CL_help);
 
 
-			if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_CURIOSITY : MON_OCCULT_LONG + key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-			{
-				mon_->state.SetState(MS_SLEEP);
-				mon_->flag &= ~M_FLAG_SUMMON;
-				mon_->ReturnEnemy();
+			while (true) {
+				deletelog();
+				sprintf_s(temp, 100, "%d (%s)", id_, mondata[id_].name.name.c_str());
+				printlog(temp, false, false, true, CL_normal);
+
+				key_ = waitkeyinput();
+				switch (key_) {
+				case 'k':
+					id_ += 10;
+					break;
+				case 'j':
+					id_ -= 10;;
+					break;
+				case 'h':
+					id_--;
+					break;
+				case 'l':
+					id_++;
+					break;
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					id_ = key_ - '0' + id_*10;
+					break;
+				case VK_RETURN:
+					if (monster* mon_ = BaseSummon(id_, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+					{
+						mon_->state.SetState(MS_SLEEP);
+						mon_->flag &= ~M_FLAG_SUMMON;
+						mon_->ReturnEnemy();
+					}
+					enterlog();
+					return;
+				case VK_BACK:
+					id_ = id_ / 10;
+					break;
+				case VK_ESCAPE://esc
+					enterlog();
+					printlog("몬스터 생성을 취소", true, false, false, CL_help);
+					return;
+				}
+				if (id_ < 0)
+					id_ = 0;
+				if (id_ >= MON_MAX)
+					id_ = MON_MAX - 1;
+
 			}
 		}
 		break;
@@ -754,7 +792,8 @@ void wiz_mode()
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);
 			printsub(" R      - 현재 층 재구성                  ", true, CL_normal);
-			printsub("                                         ",true,CL_normal);
+			printsub(" m      - 몬스터 생성                     ", true, CL_normal);
+			printsub("                                          ",true,CL_normal);
 			printsub(" 이외의 커맨드는 불안정하니 비추천        ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);

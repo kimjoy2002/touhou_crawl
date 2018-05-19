@@ -2205,7 +2205,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		vector<monster>::iterator it;
 		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if ((*it).isLive() && (*it).isYourShight() && (*it).isUnique() || (*it).image == &img_mons_default) //더 추가해야할거. 볼수있다(투명아님).
+			if ((*it).isLive() && (*it).isYourShight() && ((*it).isUnique() || (*it).image == &img_mons_default)) //더 추가해야할거. 볼수있다(투명아님).
 			{
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{

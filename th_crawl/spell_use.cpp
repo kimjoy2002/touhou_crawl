@@ -2989,7 +2989,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		speak_ = "¾È°³ÀÇ È£¼öÀÇ ²ÞÀ» ºÒ·¯³Â´Ù!";
 		break;
 	case 1: //¿ä±«»ê
-		list_.push_back(MON_WOLF_TENGU);
+		list_.push_back(MON_CROW_TENGU);
 		list_.push_back(MON_YAMABUSH_TENGU);
 		list_.push_back(MON_HANATACA_TENGU);
 		list_.push_back(MON_KATPA_WATER_WIZARD);

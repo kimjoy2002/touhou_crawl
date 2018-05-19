@@ -574,11 +574,6 @@ void wiz_mode()
 				you.s_the_world = -1;
 			}
 			break;
-		case '!':
-		{
-			you.Memorize(SPL_SUMMON_ELEC_BALL, true);
-		}
-		break;
 		case 'm': 
 		{
 			int id_ = 0;
@@ -592,18 +587,22 @@ void wiz_mode()
 				sprintf_s(temp, 100, "%d (%s)", id_, mondata[id_].name.name.c_str());
 				printlog(temp, false, false, true, CL_normal);
 
-				key_ = waitkeyinput();
+				key_ = waitkeyinput(true);
 				switch (key_) {
 				case 'k':
+				case VK_UP:
 					id_ += 10;
 					break;
 				case 'j':
+				case VK_DOWN:
 					id_ -= 10;;
 					break;
 				case 'h':
+				case VK_LEFT:
 					id_--;
 					break;
 				case 'l':
+				case VK_RIGHT:
 					id_++;
 					break;
 				case '0':

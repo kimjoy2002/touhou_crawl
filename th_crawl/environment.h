@@ -237,6 +237,7 @@ public:
 
 	stair_kind getStairKind(int x_, int y_);
 	char getAsciiDot(int x_, int y_);
+	const char* getTileHelp(int x_, int y_);
 
 
 	bool magicmapping(int x_, int y_);

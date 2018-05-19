@@ -688,7 +688,9 @@ int Player_Move(const coord_def &c)
 			if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
 			{
 				printlog(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile],false,false,false,CL_normal);
-				printlog("의 위에 서있다.",true,false,false,CL_normal);
+				printlog("의 위에 서있다. ", false,false,false,CL_normal);
+				printlog(env[current_level].getTileHelp(you.position.x, you.position.y), true, false, false, CL_normal);
+				
 			}
 				
 			list<item>::iterator it,start_it;
@@ -726,11 +728,11 @@ int Player_Move(const coord_def &c)
 					printlog("여기엔 ",false,false,false,CL_normal);
 					printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
 					printlog((*start_it).GetNameInfor().name_do(true),false,false,false,CL_normal);
-					printlog("있다.",true,false,false,CL_normal);
+					printlog("있다. (,키로 줍기)",true,false,false,CL_normal);
 				}
 				else if(num<=4)
 				{
-					printlog("여기엔 다음과 같은 물건이 있다.",true,false,false,CL_normal);
+					printlog("여기엔 다음과 같은 물건이 있다. (,키로 줍기)",true,false,false,CL_normal);
 					while(num>0)
 					{
 						printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
@@ -741,7 +743,7 @@ int Player_Move(const coord_def &c)
 				}
 				else
 				{
-					printlog("여기엔 여러개의 물건이 있다.",true,false,false,CL_normal);
+					printlog("여기엔 여러개의 물건이 있다. (,키로 줍기)",true,false,false,CL_normal);
 				}
 			}
 

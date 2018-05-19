@@ -611,6 +611,56 @@ char environment::getAsciiDot(int x_, int y_)
 		return ' ';
 	}
 }
+const char* environment::getTileHelp(int x_, int y_)
+{
+	switch(dgtile[x_][y_].tile)
+	{
+	case DG_DOWN_STAIR:
+	case DG_TEMPLE_STAIR:
+	case DG_MISTY_LAKE_STAIR:
+	case DG_YOUKAI_MOUNTAIN_STAIR:
+	case DG_SCARLET_STAIR:
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
+	case DG_ZIGURRAT_STAIR:
+		return "(>키로 내려가기)";
+	case DG_UP_STAIR:
+		return floor==0?"":"(<키로 올라가기)";
+	case DG_RETURN_STAIR:
+		return "(<키로 올라가기)";
+	case DG_TEMPLE_JOON_AND_SION:
+	case DG_TEMPLE_BYAKUREN:
+	case DG_TEMPLE_KANAKO:
+	case DG_TEMPLE_SUWAKO:
+	case DG_TEMPLE_MINORIKO:
+	case DG_TEMPLE_MIMA:
+	case DG_TEMPLE_SHINKI:
+	case DG_TEMPLE_YUUGI:
+	case DG_TEMPLE_SHIZUHA:
+	case DG_TEMPLE_HINA:
+	case DG_TEMPLE_YUKARI:
+	case DG_TEMPLE_EIRIN:
+	case DG_TEMPLE_YUYUKO:
+	case DG_TEMPLE_SATORI:
+	case DG_TEMPLE_TENSI:
+	case DG_TEMPLE_SEIJA:
+	case DG_TEMPLE_LILLY:
+	case DG_TEMPLE_MIKO:
+	case DG_TEMPLE_OKINA:
+	case DG_TEMPLE_JUNKO:
+		return "(p키로 기도)";
+	}
+	return "";
+}
 int environment::getAutoTileNum(unsigned char bit)
 {
 	switch(bit)

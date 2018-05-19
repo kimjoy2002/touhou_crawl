@@ -641,7 +641,7 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,9,'8' },
 	
-	{MON_EVIL_EYE_TANK,25,5043,name_infor("이블 아이 전차",false),&img_mons_evil_eye_tank,150,20,10,
+	{MON_EVIL_EYE_TANK,28,5043,name_infor("이블 아이 전차",false),&img_mons_evil_eye_tank,150,20,10,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,2,9,'8' },
 	
@@ -661,11 +661,11 @@ const mon_infor mondata[] = {
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI  | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,5,3,10,'&' },
 	
-	{MON_UTSUHO,23,13456,name_infor("우츠호",false),&img_named_utsuho,450,30,2,
+	{MON_UTSUHO,24,13456,name_infor("우츠호",false),&img_named_utsuho,450,30,2,
 	{50,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI  | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,4,3,10,'&' },
 	
-	{MON_SUIKA,22,9760,name_infor("스이카",false),&img_named_suika,350,28,5,
+	{MON_SUIKA,23,9760,name_infor("스이카",false),&img_named_suika,350,28,5,
 	{60,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,10,'&' },
 	

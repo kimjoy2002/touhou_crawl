@@ -954,6 +954,24 @@ string GetMonsterInfor(monster *it)
 	text_ += "\n\n";
 
 
+	{
+		int mon_level_ = it->level;
+		if (it->flag & M_FLAG_UNIQUE)
+			mon_level_ += 3;
+		int you_level_ = you.level+3;
+
+		if (you_level_ - mon_level_*3 > 3)
+			text_ += "이 상대는 무시해도 될 정도로 약해보인다.\n";
+		else if (you_level_ - mon_level_*2 > 0)
+			text_ += "이 상대는 약해보인다.\n";
+		else if (you.level - mon_level_ > 0)
+			text_ += "이 상대는 위험해보인다.\n";
+		else
+			text_ += "이 상대는 아주 위험하다!\n";
+	}
+
+
+
 	if(it->poison_resist)
 	{
 		if(it->poison_resist>0)

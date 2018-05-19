@@ -425,9 +425,12 @@ bool Dump(int type, string *filename_)
 	{
 		fprintf_s(fp, "(¸¶·Â¼øÈ­)                EV:%4d             ¹ÎÃ¸:%4d\n", you.ev, you.s_dex);
 	}
-	
-	
-	fprintf_s(fp,"                          SH:%4d             Áö´É:%4d\n\n",you.sh,you.s_int);
+												
+	{
+		int pow_ = min(you.power, 500);
+		fprintf_s(fp, "ÆÄ¿ö: %d.%02d                SH:%4d             Áö´É:%4d\n\n", pow_ / 100, pow_ % 100, you.sh, you.s_int);
+	}
+
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;
 	fprintf_s(fp,"È­¿°ÀúÇ×: %s%c %c      È¥¶õÀúÇ×: %c           ¹«±â: " , resist_>=100?"¡Ä":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));

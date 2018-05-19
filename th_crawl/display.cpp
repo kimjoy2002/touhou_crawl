@@ -694,6 +694,12 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //여기엔 돈이
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+
+	{
+		int pow_ = min(you.power, 500);
+		sprintf_s(temp, 100, "파워: %d.%02d", pow_ / 100, pow_ % 100);
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	}
 	rc.left += 150;
 	sprintf_s(temp,100,"SH:%4d",you.sh);
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);

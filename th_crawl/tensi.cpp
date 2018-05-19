@@ -716,149 +716,182 @@ void tensi_action()
 		
 
 	printlog(tensi_talk(doing_>0, action_),true,false,false,CL_tensi);
+	char temp[256];
 	switch(action_)
 	{
 	case TENSI_NOTHING:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: æ∆π´¿œµµæ»«‘. ≈Ÿº« %d", type.c_str(), you.CheckTension());
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: æ∆π´¿œµµæ»«‘");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		break;
 	case TENSI_POTION:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: ∆˜º«. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: %s ∆˜º«", (doing_>0) ? "¡¡¿∫" : "≥™ª€");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_potion(doing_>0);
 		break;
 	case TENSI_SUMMON:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: º“»Ø. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: %s º“»Ø", (doing_>0)?"øÏ»£¿˚":"¿˚¥Î¿˚");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_summon(doing_);
 		break;
 	case TENSI_TELE:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: ≈⁄∑π∆˜∆Æ. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: %s ≈⁄∑π∆˜∆Æ", (doing_>0) ? "æ»¿¸«—" : "¿ß«Ë«—");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_tele(doing_);
 		break;
 	case TENSI_EARTHQUAKE:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: ¡ˆ¡¯. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ¡ˆ¡¯");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_earthquake(doing_);
 		break;
 	case TENSI_MUNYUM:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: π´≥‰π´ªÛ. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: π´≥‰π´ªÛ πˆ«¡");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_munyum(doing_);
 		break;
 	case TENSI_BURST:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: ∆¯πﬂ. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: %s ∆¯πﬂ", (doing_>0) ? "æ»¿¸«—" : "¿ß«Ë«—");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_burst(doing_);
 		break;
 	case TENSI_WEAPON:
-		if(wiz_list.wizard_mode == 1)
+		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp,256,"%s≈ŸΩ√: ∫ÒªÛ¿«∞À. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ∫ÒªÛ¿«∞À ∫Œø©");
+		}
+		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_weapon(doing_);
 		break;
 	case TENSI_KANAME:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: ƒ´≥™∏ﬁºÆ. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: %s ƒ´≥™∏ﬁºÆ º“»Ø", (doing_>0) ? "øÏ»£¿˚" : "¿˚¥Î¿˚ ");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_kaname(doing_);
 		break;
 	case TENSI_FIELD:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: « µÂª˝º∫. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ∆Øºˆ « µÂ ª˝º∫");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_field(doing_);
 		break;
 	case TENSI_BLIND:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: Ω«∏Ì. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: Ω«∏Ì");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_blind(doing_);
 		break;
 	case TENSI_BUFF_DEBUFF:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: ±§ø™∞°º”∞®º”. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ±§ø™ %s", (doing_>0) ? "∞®º”" : "∞°º”");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_buf_debuf(doing_);
 		break;
 	case TENSI_SUCIDE:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: ¿⁄∆¯≈‰≥¢. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ¿⁄∆¯≈‰≥¢ º“»Ø");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_sucide(doing_);
 		break;
 	case TENSI_WEATHER_FOG:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: æ»∞≥. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: æ»∞≥");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(1, doing_);
 		break;
 	case TENSI_WEATHER_THUNDER:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: π¯∞≥. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: √µµ’π¯∞≥");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(2, doing_);
 		break;
 	case TENSI_WEATHER_SUN:
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[256];
 			sprintf_s(temp, 256, "%s≈ŸΩ√: ƒË√ª. ≈Ÿº« %d «‡µø %d", type.c_str(), you.CheckTension(), doing_);
-			AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		}
+		else {
+			sprintf_s(temp, 256, "≈ŸΩ√: ƒË√ª");
+		}
+		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(3, doing_);
 		break;
 	}

@@ -20,6 +20,7 @@
 #include "save.h"
 #include "replay.h"
 #include "mon_infor.h"
+#include "tribe.h"
 
 extern const char *version_string;
 
@@ -523,7 +524,20 @@ bool Dump(int type, string *filename_)
 	{				
 		fprintf_s(fp,"\n");
 	}
-	
+
+	fprintf_s(fp, "\n\n\n<특성>\n"/*,you.item_weight,you.max_item_weight*/);
+
+	if (you.property_vector.empty())
+	{
+		fprintf_s(fp, "당신의 특성이 없습니다.\n");
+	}
+	else {
+		for (auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
+		{
+			fprintf_s(fp, "%s\n", it->GetInfor().c_str());
+		}
+	}
+
 
 
 	fprintf_s(fp,"\n\n당신은 %s에 있다.\n",CurrentLevelString());

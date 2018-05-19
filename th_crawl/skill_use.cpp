@@ -2170,7 +2170,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
 	char temp[200];
-	sprintf_s(temp,200,"세이자에게 선물을 받았다.");
+	sprintf_s(temp,200,"세이자에게 선물을 받았다. (%s)", GetGodString(next_));
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();

@@ -770,13 +770,15 @@ int players::move(short_move x_mov, short_move y_mov)
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
 			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
 			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-			{					
-				doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
+			{
+				doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.name);
+				//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
 				//나중에 무기 이름으로 바꾸기
 			}
 			else if(!equipment[ET_WEAPON])
 			{
-				doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
+				doingActionDump(DACT_MELEE, "맨손");
+				//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
 			}
 			else
 			{

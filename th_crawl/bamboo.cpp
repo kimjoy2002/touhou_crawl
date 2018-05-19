@@ -86,7 +86,7 @@ void bamboo_count(int num)
 			{
 				if(offset_x  > i || offset_x  <= i - DG_MAX_X  || offset_y  > j || offset_y  <= j - DG_MAX_Y )
 				{  //새로 만들어야하는 맵	
-					if(randA(18000 - 15*min(map_list.bamboo_count,1000))<(map_list.bamboo_tewi?2:1))
+					if(randA(18000 - 15*min(map_list.bamboo_count,1100))<(map_list.bamboo_tewi?2:1))
 					{
 						env[num].dgtile[i][j].init();
 						env[num].dgtile[i][j].tile = DG_EIENTEI_STAIR;

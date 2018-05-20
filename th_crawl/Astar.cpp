@@ -59,7 +59,8 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 	bool is_mapping = env[floor_].isMapping(goal.x,goal.y);
 	bool is_explore = (env[floor_].isExplore(goal.x,goal.y) || type >= ST_MONSTER_NORMAL || type == ST_SEARCH);
 	bool is_move = (env[floor_].isMove(goal.x,goal.y,alway_fly_,alway_swim_) || type == ST_SEARCH);
-	if(!((is_explore || is_mapping) && is_move))
+	bool is_block = env[floor_].isBlockPos(goal.x, goal.y) && type < ST_MONSTER_NORMAL;
+	if(!((is_explore || is_mapping) && is_move && !is_block))
 	{
 		return false;
 	}
@@ -131,7 +132,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_) || is_door) && !is_forbid && !is_block);
 				if(!is_move)
 				{
-					if(type == ST_SEARCH && !is_explore && ano_goal ==  start)
+					if(type == ST_SEARCH && !is_explore && ano_goal ==  start && !is_block)
 					{
 						ano_goal = (*it);
 					}

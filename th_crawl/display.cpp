@@ -30,6 +30,7 @@
 #include "book.h"
 #include "spellcard.h"
 #include "throw.h"
+#include "mon_infor.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -1966,11 +1967,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							unit* unit_ = env[current_level].isMonsterPos((*temp).position.x, (*temp).position.y);
 							if(!unit_ || (!unit_->isView()))
 							{
-								img_effect_auto_pick.draw(pSprite,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f,255);
+								img_effect_auto_pick.draw(pSprite, ((*temp).position.x - x_)*32.0f + 20.0f, ((*temp).position.y - y_)*32.0f + 20.0f, 255);
 							}
 						}
 					}
-					dot_item.draw(pSprite,GetDotX((*temp).position.x+offset_.x),GetDotY((*temp).position.y+offset_.y),255);
+					dot_item.draw(pSprite, GetDotX((*temp).position.x + offset_.x), GetDotY((*temp).position.y + offset_.y), 255);
 				}
 				many_item = false;
 				auto_pick_ = false;
@@ -1978,38 +1979,38 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			else
 			{
 				many_item = true;
-				if(it == env[current_level].item_list.end() && (*temp).isautopick())
+				if (it == env[current_level].item_list.end() && (*temp).isautopick())
 					auto_pick_ = true;
 			}
 		}
-	}	
+	}
 
 
 	//바닥 효과 그리기
 	{
-		list<floor_effect>::iterator it; 
-		for(it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
+	list<floor_effect>::iterator it;
+	for (it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end(); it++)
+	{
+		if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
 		{
-			if(env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+			if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
-				{
-					it->draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
-				}
+				it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 			}
 		}
 	}
-	
+	}
+
 	//연기그리기
 	{
-		list<smoke>::iterator it; 
-		for(it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end();it++)
+		list<smoke>::iterator it;
+		for (it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end(); it++)
 		{
-			if(env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+			if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
+				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
-					it->draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
+					it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 				}
 			}
 		}
@@ -2017,25 +2018,25 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	//플레이어 그리기
 	{
-		if(!you.s_timestep && abs(you.position.x - x_-8)<=8 && abs(you.position.y - y_-8)<=8)
+		if (!you.s_timestep && abs(you.position.x - x_ - 8) <= 8 && abs(you.position.y - y_ - 8) <= 8)
 		{
 			you.Draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 20.0f);
-			if( you.GetHp() != you.GetMaxHp())
+			if (you.GetHp() != you.GetMaxHp())
 			{
-				float max_rate_= (1/3.0f);
+				float max_rate_ = (1 / 3.0f);
 
-				int temp1_ = max(0,you.GetHp()) *32 / you.GetMaxHp();
+				int temp1_ = max(0, you.GetHp()) * 32 / you.GetMaxHp();
 				float hp_rate_ = (max_rate_ * temp1_);
-				int hp_offset_ = (temp1_+1)/2-16;
+				int hp_offset_ = (temp1_ + 1) / 2 - 16;
 
-				
-				int temp2_ = max(0,min(you.prev_hp[0],you.GetMaxHp())) *32 / you.GetMaxHp();
+
+				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * 32 / you.GetMaxHp();
 				float p_hp_rate_ = (max_rate_ * temp2_);
-				int p_hp_offset_ = (temp2_+1)/2 -16;
-				
-				dot_floor.draw(pSprite,(you.position.x-x_)*32.0f+20.0f,(you.position.y-y_)*32.0f+36.0f,0.0f,max_rate_ * 32.0f,0.5f,255);
-				dot_monster.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+p_hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,p_hp_rate_,0.5f,255);
-				dot_item.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,hp_rate_,0.5f,255);
+				int p_hp_offset_ = (temp2_ + 1) / 2 - 16;
+
+				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, max_rate_ * 32.0f, 0.5f, 255);
+				dot_monster.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + p_hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, p_hp_rate_, 0.5f, 255);
+				dot_item.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, hp_rate_, 0.5f, 255);
 			}
 			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
 			{
@@ -2050,23 +2051,26 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 
 		}
-		dot_player.draw(pSprite,GetDotX(you.position.x+offset_.x),GetDotY(you.position.y+offset_.y),255);
+		dot_player.draw(pSprite, GetDotX(you.position.x + offset_.x), GetDotY(you.position.y + offset_.y), 255);
 	}
 
 
 	//몹그리기
 	{
 		vector<monster>::iterator it;
-		
-		for(it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+
+		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
+			if ((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
+				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
-					(*it).draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
+					(*it).draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+				}
 			}
 			else if(it->isLive() &&	you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3
 				&& GetPositionGap((*it).position.x, (*it).position.y, you.position.x, you.position.y) <= satori_sight()
@@ -2076,7 +2080,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					(*it).simple_draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+
+				}
 			}
 		}
 	}

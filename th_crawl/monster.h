@@ -140,6 +140,7 @@ public:
 	void SetX(int x_);
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
+	void SetXY(int map_num_, int x_, int y_);
 	void SetXY(coord_def pos_);
 	char getAsciiDot();
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);

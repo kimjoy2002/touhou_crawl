@@ -416,7 +416,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, int flag_, int time
 			else
 				state.SetState(MS_ATACK);
 		}
-		SetXY(position_);
+		SetXY(map_num_, position_.x, position_.y);
 		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
@@ -701,31 +701,35 @@ void monster::SetY(int y_)
 }
 void monster::SetXY(int x_, int y_)
 {
+	SetXY(current_level, x_, y_);
+}
+void monster::SetXY(int map_num_, int x_, int y_)
+{
 	if(position.x == x_ && position.y == y_)
 		return;
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, false);
+		env[map_num_].MakeSilence(position, s_silence_range, false);
 	if(s_catch)
 		you.SetCatch(NULL);
 
 	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
 	{
-		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+		env[map_num_].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
 	}
 
 
 	position.set(x_,y_);
-	for(auto it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
+	for(auto it = env[map_num_].floor_list.begin(); it != env[map_num_].floor_list.end();it++)
 	{
 		if(it->position == position)
 			it->onWalk(this);
 	}
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, true);
+		env[map_num_].MakeSilence(position, s_silence_range, true);
 
 	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
 	{
-		env[current_level].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
+		env[map_num_].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
 	}
 
 }

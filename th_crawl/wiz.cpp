@@ -678,7 +678,7 @@ void wiz_mode()
 			{
 				for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 				{
-					if(it->isLive())
+					if(it->isLive() && !(it->flag & M_FLAG_UNHARM))
 						it->dead(PRT_PLAYER,false);
 				}
 				for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)

@@ -1905,8 +1905,8 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				if(you.equipment[ET_WEAPON])
 					brand_ = (attack_type)GetAttType((weapon_brand)you.equipment[ET_WEAPON]->value5);
 				int damage_ = you.GetAttack(false);
-				damage_*=2.5f;
-				attack_infor temp_att(damage_,2.5f*you.GetAttack(true),
+				damage_*=1.4f;
+				attack_infor temp_att(damage_,1.4f*you.GetAttack(true),
 					99,&you,order->GetParentType(),brand_,name_infor("АјАн",true));					
 				hit_mon->damage(temp_att, true);
 

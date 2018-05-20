@@ -3973,7 +3973,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		rune[t->value1]++;
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			soundmanager.playSound("rune");
 		return 1;
 	}
 	if(t->type == ITM_ORB)
@@ -3985,7 +3985,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			soundmanager.playSound("rune");
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}

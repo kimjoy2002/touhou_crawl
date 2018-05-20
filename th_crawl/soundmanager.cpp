@@ -471,6 +471,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addSound("warning", "sound\\se\\warning.wav", false, true); //ok
 	addSound("charge", "sound\\se\\charge.wav", false, true); //ok
 	addSound("camera", "sound\\se\\camera.wav", false, true); //ok
+	addSound("rune", "sound\\se\\rune.wav", false, true); //ok
 	
 	
 

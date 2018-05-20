@@ -80,14 +80,14 @@ float getAmuletCharge(amulet_type kind)
 	case AMT_OCCULT:
 		return 1.5f;
 	case AMT_BLOSSOM:
-	case AMT_TIMES:
 	case AMT_FAITH:
 	case AMT_SPIRIT:
 	case AMT_GRAZE:
-	case AMT_WEATHER:
-		return 1.0f;
 	case AMT_WAVE:
-		return 0.5f;
+		return 1.0f;
+	case AMT_WEATHER:
+	case AMT_TIMES:
+		return 0.6f;
 
 	}
 	return 1.0f;
@@ -129,15 +129,23 @@ bool chargingFinish(amulet_type kind, int value)
 				printlog("더 이상 탄막을 그레이즈 하지 않는다.", true, false, false, CL_blue);
 			}
 		}
+		break; 
+	case AMT_WAVE:
+		if (value > 0) {
+			printlog("부적에 의해 영력 회복력이 올라갔다!", true, false, false, CL_blue);
+		}
+		else {
+			printlog("더 이상 부적으로부터 영력 회복력을 받지 못한다.", true, false, false, CL_blue);
+		}
 		break;
-	case AMT_WEATHER:
+	/*case AMT_WEATHER:
 		if (value > 0) {
 			printlog("부적에 의해 체력 재생력이 올라갔다!", true, false, false, CL_blue);
 		}
 		else {
 			printlog("더 이상 부적으로부터 재생력을 받지 못한다.", true, false, false, CL_blue);
 		}
-		break;
+		break;*/
 	case AMT_FAITH:
 		if (value > 0) {
 			if (you.god == GT_NONE) {
@@ -181,11 +189,27 @@ bool evokeAmulet(amulet_type kind, int value_)
 		skill_soul_shot(0, &you, you.position);
 		break;
 	case AMT_TIMES:
+	{
 		soundmanager.playSound("buff");
-		you.SetHaste(rand_int(50, 80));
+		rand_rect_iterator rand_(you.position,2,2);
+		int rand_num_ = rand_int(3, 6);
+		while (!rand_.end()) {
+			if (env[current_level].isMove(*rand_)) {
+				item_infor temp;
+				env[current_level].MakeItem(*rand_, makePitem(MON_MOOK, 1, &temp));
+				rand_num_--;
+				if (rand_num_ == 0)
+					break;
+			}
+			rand_++;
+		}
 		break;
+	}
 	case AMT_WAVE:
-		if (env[current_level].isBamboo())
+		soundmanager.playSound("buff");
+		printlog("당신은 영력을 회복했다. ", false, false, false, CL_normal);
+		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
+		/*if (env[current_level].isBamboo())
 		{
 			printlog("지형 탐지는 미궁의 죽림에선 효과를 보지 못한다.", true, false, false, CL_normal);
 			return false;
@@ -195,7 +219,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 			soundmanager.playSound("buff");
 			env[current_level].MakeMapping(100);
 			printlog("당신은 현재 층을 감지해냈다.", true, false, false, CL_normal);
-		}
+		}*/
 		break;
 	case AMT_SPIRIT:
 		soundmanager.playSound("buff");
@@ -207,9 +231,32 @@ bool evokeAmulet(amulet_type kind, int value_)
 		printlog("당신은 순간적으로 회피에 모든 신경을 쏟는다!", false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
-		soundmanager.playSound("buff");
+		{
+			soundmanager.playSound("buff");
+			int weather_ = rand_int(1, 3);
+			int time_ = rand_int(50, 80);
+			you.SetBuff(BUFFSTAT_REGEN, BUFF_DUPLE, 3, time_);
+			switch (weather_)
+			{
+			case 1:
+				printlog("한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.", true, false, false, CL_normal);
+				you.SetWeather(1, time_);
+				break;
+			case 2:
+				printlog("던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.", true, false, false, CL_normal);
+				you.SetWeather(2, time_);
+				break;
+			case 3:
+				printlog("던전에 강한 햇빛이 들기 시작했다.", true, false, false, CL_normal);
+				you.SetWeather(3, time_);
+				break;
+			default:
+				break;
+			}
+		}
+		/*soundmanager.playSound("buff");
 		printlog("당신은 체력을 회복했다. ", false, false, false, CL_normal);
-		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);
+		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);*/
 		break;
 	case AMT_OCCULT:
 		soundmanager.playSound("summon");

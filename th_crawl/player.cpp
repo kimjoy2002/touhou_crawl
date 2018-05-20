@@ -1426,9 +1426,9 @@ int players::HpRecoverDelay(int delay_)
 	{
 		cacul_ += 100.0f;
 	}
-	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
-		cacul_ += max_hp/2;
-	}
+	//if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
+	//	cacul_ += max_hp/2;
+	//}
 	{
 		cacul_ += 100 * you.GetBuffOk(BUFFSTAT_REGEN);
 	}
@@ -1653,6 +1653,9 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	}
 	{
 		cacul_ += 50 * you.GetBuffOk(BUFFSTAT_MREGEN);
+	}
+	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WAVE && you.getAmuletPercent() >= 100) {
+		cacul_ += 15;
 	}
 	if(GetProperty(TPT_MP_REGEN)>0)
 	{

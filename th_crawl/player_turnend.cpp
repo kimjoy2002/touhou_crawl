@@ -763,6 +763,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);
+							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
 							break;
 						}
@@ -784,6 +785,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);
+							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
 						}
 						break;

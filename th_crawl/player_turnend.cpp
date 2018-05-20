@@ -80,7 +80,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 	if(s_tele || teleport_curse)
 	{
-		if(s_tele == 1 || (teleport_curse && !randA(100)))
+		if(s_tele == 1 || (teleport_curse && !randA(400)))
 		{
 			Teleport();
 			soundmanager.playSound("blink");

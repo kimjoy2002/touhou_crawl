@@ -3622,6 +3622,11 @@ bool monster::SetGhost(int ghost_)
 		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다. ");	
 		return false;
 	}
+	if (dream)
+	{
+		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "꿈의 주민이기에 속박할 수 없다. ");
+		return false;
+	}
 
 	if(flag & M_FLAG_SUMMON)
 	{

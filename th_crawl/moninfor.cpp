@@ -1055,6 +1055,10 @@ string GetMonsterInfor(monster *it)
 	{
 		text_ += "\n\n이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다.\n";
 	}
+	if (it->dream)
+	{
+		text_ += "\n이 몬스터는 꿈의 주민이기에 당신의 동료권유나 영혼을 빼앗는 것이 불가능할지도 모른다.\n";
+	}
 
 	if(!it->spell_lists.empty())
 	{

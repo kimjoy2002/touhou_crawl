@@ -157,8 +157,9 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 {
 	monster* mon_ = env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
 	mon_->flag &= ~M_FLAG_UNIQUE;
+	mon_->flag |= M_FLAG_NONE_STAIR;
 	mon_->dream = true;
-	int level_up_ = randA(max(0,level_ - mon_->level)/2);
+	int level_up_ = min(9, randA(max(0,level_ - mon_->level/2)));
 	char temp[100];
 	if (level_up_ > 0) {
 		sprintf_s(temp, 100, "²ÞÀÇ ÁÖ¹Î %s+%d", mon_->name.name.c_str(), level_up_);

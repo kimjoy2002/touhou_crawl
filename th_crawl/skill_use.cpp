@@ -2321,6 +2321,11 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 					printlog("이 요정은 메이드로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
 					return false;
 				}
+				if (hit_mon->dream)
+				{
+					printlog("이 요정은 꿈의 주민이다. 꿈의 존재는 권유할 수 없다.", true, false, false, CL_normal);
+					return false;
+				}
 				if(hit_mon->level > you.level)
 				{
 					char temp[100];

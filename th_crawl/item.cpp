@@ -1160,7 +1160,7 @@ int item::action(int delay_)
 	}
 	else if(prev_sight)
 	{
-		env[current_level].MakeShadow(prev_position,image,SWT_ITEM,GetName());
+		env[current_level].MakeShadow(prev_position,image, value1,SWT_ITEM,GetName());
 		prev_sight = false;
 	}
 	if (now_find)

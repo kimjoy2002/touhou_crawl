@@ -275,11 +275,12 @@ public:
 	textures *image;
 	coord_def position;
 	shadow_type type;
+	int original_id;
+	bool unharm;
 	string name;
-	shadow():image(NULL),position(),type(SWT_MONSTER),name()
+	shadow():image(NULL),position(),type(SWT_MONSTER), original_id(-1), unharm(false),name()
 	{}
-	shadow(const coord_def &c, textures *t, shadow_type type_= SWT_MONSTER, string name_ = "")
-	{position=c;image=t;type=type_;name=name_;};
+	shadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, string name_ = "");
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 };

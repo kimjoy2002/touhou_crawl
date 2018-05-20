@@ -2103,8 +2103,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			switch((*it).type)
 			{
-			case SWT_MONSTER:				
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+			case SWT_MONSTER:
+				if (!(*it).unharm) {
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+				}
 				break;
 			case SWT_ITEM:
 				dot_item.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);

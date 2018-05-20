@@ -767,7 +767,6 @@ int Player_Move(const coord_def &c)
 	}
 	return move_type;
 }
-
 void search_monspell_view(monster* mon_)
 {
 	bool loop_ = true;

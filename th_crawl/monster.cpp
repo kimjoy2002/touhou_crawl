@@ -3013,7 +3013,7 @@ int monster::action(int delay_)
 	{
 		if(isView() && !(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
 			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight()))
-			env[current_level].MakeShadow(prev_position,image);
+			env[current_level].MakeShadow(prev_position,image, id);
 		prev_sight = false;
 	}
 	
@@ -4605,12 +4605,37 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	}
 	return CL_none;
 }
+
+shadow::shadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, string name_)
+{
+	position = c;
+	image = t;
+	type = type_; 
+	original_id = original_id_; 
+	if (type_ == SWT_MONSTER && original_id_ >= 0 && original_id_<MON_MAX &&
+		mondata[original_id_].flag & M_FLAG_UNHARM) 
+	{
+		unharm = true;
+	}
+	else
+	{
+		unharm = false;
+	}
+	name = name_;
+};
+
+
+
+
 void shadow::SaveDatas(FILE *fp)
 {
 	SaveData<int>(fp, texturetoint(image));
 	SaveData<int>(fp, position.x);
 	SaveData<int>(fp, position.y);
-	SaveData<shadow_type>(fp, type);
+	SaveData<shadow_type>(fp, type); 
+	SaveData<int>(fp, original_id);
+	SaveData<bool>(fp, unharm);
+	
 	char temp[100];
 	sprintf_s(temp, 100,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
@@ -4623,6 +4648,8 @@ void shadow::LoadDatas(FILE *fp)
 	LoadData<int>(fp, position.x);
 	LoadData<int>(fp, position.y);
 	LoadData<shadow_type>(fp, type);
+	LoadData<int>(fp, original_id);
+	LoadData<bool>(fp, unharm);
 	char temp[100];
 	LoadData<char>(fp, *temp);
 	name = temp;

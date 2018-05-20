@@ -1059,7 +1059,7 @@ void environment::SummonClear(int map_id_)
 	}
 }
 
-void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_, const string &name_)
+void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, const string &name_)
 {
 	if(isBamboo())
 		return; //죽림에선 만들지 않는다.
@@ -1069,7 +1069,7 @@ void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_,
 	{
 		if(it == shadow_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
 		{
-			shadow_list.insert(it,shadow(c,t,type_,name_));
+			shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 			ReleaseMutex(mutx);
 			return;
 		}
@@ -1077,13 +1077,13 @@ void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_,
 		{
 			if((*it).type < type_ )
 			{
-				shadow_list.insert(it,shadow(c,t,type_,name_));
+				shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 				ReleaseMutex(mutx);
 				return;
 			}
 			else if((*it).type == type_ )
 			{
-				shadow_list.insert(it,shadow(c,t,type_,name_));				
+				shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 				shadow_list.erase(it);
 				ReleaseMutex(mutx);
 				return;
@@ -2046,7 +2046,7 @@ bool environment::seeAllMonster()
 	{
 		if ((*it).isLive() && !(*it).isYourShight())
 		{
-			env[current_level].MakeShadow(it->position, it->image);
+			env[current_level].MakeShadow(it->position, it->image, it->id);
 		}
 	}
 	return true;
@@ -2075,6 +2075,18 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 		{
 			if(map_id_)
 				(*map_id_) = (*it).map_id;
+			return &(*it);
+		}
+	}
+	return NULL;
+}
+shadow* environment::isShadowPos(int x_, int y_)
+{
+	list<shadow>::iterator it;
+	for (it = shadow_list.begin(); it != shadow_list.end();)
+	{
+		if (it->position.x == x_ && it->position.y == y_) {
+
 			return &(*it);
 		}
 	}

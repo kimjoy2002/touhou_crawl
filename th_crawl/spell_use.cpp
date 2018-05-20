@@ -890,7 +890,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
 			if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //만약 거리를 벗어날경우 실패한다.
@@ -961,7 +961,7 @@ bool skill_elec_passive(int power, unit* order)
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
 			if(!length_ || length_ >spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.
@@ -1077,7 +1077,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs((*start).x-it->position.x),2)+pow((float)abs((*start).y-it->position.y),2);
 			if(!length_ || length_ > spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.

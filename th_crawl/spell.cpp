@@ -1627,7 +1627,6 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_DISCHARGE:
 		return (mon->s_elec ? false : true);
 	case SPL_MOON_COMMUNICATION:
-	case SPL_CALL_HOUND:
 	case SPL_FIRE_SPREAD:
 	case SPL_ALERT_NOISE: 
 	case SPL_JUMP_ATTACK:
@@ -1635,6 +1634,26 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_KOKORO_CHANGE:
 	case SPL_BLOOD_SMITE:
 		return (mon->s_exhausted ? false : true);
+	case SPL_CALL_HOUND:
+	{
+		if (mon->s_exhausted)
+			return false;		
+		
+		int max_ = 8;
+		//콜하운드로 부를 수 있는 한계는 최대 8마리
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && it->id == MON_HELL_HOUND)
+			{
+				if (env[current_level].isInSight(it->position)) {
+					max_--;
+				}
+			}
+		}
+		if (max_ < 0)
+			return false;
+		return true;
+	}
 	case SPL_MISTIA_SONG:
 		return (mon->s_exhausted || mon->isUserAlly() ?false:true);
 	case SPL_SLEEP_SMITE:

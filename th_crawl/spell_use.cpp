@@ -2947,7 +2947,7 @@ bool skill_moon_communication(int power, bool short_, unit* order, coord_def tar
 	if(order->GetExhausted())
 		return false;
 
-	order->SetCommunication(rand_int(2,4));
+	order->SetCommunication(rand_int(3,5));
 	return true;
 }
 bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)

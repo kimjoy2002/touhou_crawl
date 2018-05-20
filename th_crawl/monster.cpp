@@ -659,7 +659,7 @@ void monster::TurnLoad()
 
 	if(s_exhausted-temp_turn>0)
 		s_exhausted-=temp_turn;
-	else
+	else if(s_exhausted > 0)
 		s_exhausted =0;
 	
 	if(force_turn-temp_turn>0)
@@ -2632,7 +2632,7 @@ int monster::action(int delay_)
 			}
 		}
 
-		if(s_exhausted)
+		if(s_exhausted>0)
 		{
 			s_exhausted--;
 		}
@@ -2684,6 +2684,8 @@ int monster::action(int delay_)
 			if(!s_communication)
 			{
 				s_exhausted = rand_int(40,50);
+				if (id == MON_MOON_RABIT_SUPPORT && !isUserAlly())
+					s_exhausted = -1;
 			}
 
 
@@ -2696,6 +2698,8 @@ int monster::action(int delay_)
 					{
 						mon_->flag &= ~M_FLAG_SUMMON;
 					}
+					mon_->exper = 0;
+					mon_->SetHaste(rand_int(10, 30));
 				}
 				break;
 			case MON_HELL_HOUND:
@@ -2712,7 +2716,9 @@ int monster::action(int delay_)
 
 							if(monster* mon_=BaseSummon(MON_HELL_HOUND, rand_int(20,30), false, false, 2, this, check_pos_, SKD_OTHER, -1))
 							{
-								mon_->SetExhausted(rand_int(5,50));
+								mon_->exper = exper / 2;
+								exper -= mon_->exper;
+								mon_->SetExhausted(rand_int(10,30));
 								mon_->AttackedTarget(target);
 								if(!isUserAlly())
 								{

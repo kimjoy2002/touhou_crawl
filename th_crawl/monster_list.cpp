@@ -629,7 +629,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'G' },
 	
-	{MON_HELL_HOUND,9,254,name_infor("Áö¿Á°³",false),&img_mons_hell_dog,68,4,15,
+	{MON_HELL_HOUND,9,512,name_infor("Áö¿Á°³",false),&img_mons_hell_dog,68,4,15,
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("¹°±â",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D' },
 	

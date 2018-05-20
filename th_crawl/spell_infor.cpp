@@ -417,8 +417,8 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_MOON_COMMUNICATION:
 		text_ += "전파를 통신하여 아군 달토끼들을 불러모은다.\n";
-		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다.\n";
-		text_ += "소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
+		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다. 소환된 달토끼는 가속 버프를 받는다.\n";
+		text_ += "이 소환된 달토끼는 경험치는 주지않지만 소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
 		break;
 	case SPL_MOON_GUN:
 		text_ += "달의 기술을 집결하여 만든 총을 쏜다.\n";
@@ -444,6 +444,7 @@ string GetSpellInfor(spell_list spell)
 	case SPL_CALL_HOUND:
 		text_ += "주변의 개들을 끌어모으는 울부짖음을 외친다.\n";
 		text_ += "모인 개들도 다시 동료를 끌어 모을 수 있으니 되도록 빠르게 처리해야한다.\n";
+		text_ += "모여든 개들을 모두 처리하더라도 얻을 수 있는 총 경험치는 똑같다.\n";
 		break;
 	case SPL_CANNON:
 		text_ += "거대한 대포알을 쏴서 폭발후 회피불가능한 데미지를 준다.\n";

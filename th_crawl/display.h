@@ -134,7 +134,9 @@ public:
 
 extern DIMOUSESTATE CurrentMouseState;
 
-void changedisplay(display_type set);
+void changedisplay(display_type set); 
+int getDisplayMove();
+void setDisplayMove(int move_);
 void changemove(int var);
 int GetDisplayMove();
 string& SetText();

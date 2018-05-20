@@ -506,13 +506,15 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp,"¾øÀ½\n");
 	
 	fprintf_s(fp,"\n·é:");
+	int first_rune_ = 0;
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
 		if(you.rune[i])
 		{
-			if(i!=0)
+			if(first_rune_ !=0)
 				fprintf_s(fp,", ");
 			fprintf_s(fp,"%s",rune_string[i]);
+			first_rune_++;
 		}
 	}
 	fprintf_s(fp,"\n");

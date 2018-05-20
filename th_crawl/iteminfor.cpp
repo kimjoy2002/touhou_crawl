@@ -102,6 +102,7 @@ void iteminfor(bool gameover)
 			item *item_ = you.GetItem(key_);
 			if(item_)
 			{
+				int get_item_move_ = getDisplayMove();
 				while(1)
 				{
 					set<char> ket_list;
@@ -438,6 +439,7 @@ void iteminfor(bool gameover)
 					break;
 				}
 				view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");
+				setDisplayMove(get_item_move_);
 			}
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------

@@ -2834,7 +2834,24 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->isplayer())
 		return false;
 	if(!order->Tele_check(true, true))
-		return false;
+		return false;	
+	if (current_level == ZIGURRAT_LEVEL) {
+		printlog("광몽의 세계에선 순간이동의 제어가 불가능하다. 정말로 쓸거야? (y/n) ", true, true, false, CL_small_danger);
+
+		switch (waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			break;
+		case 'N':
+		case 'n':
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, true, false, CL_normal);
+			return false;
+		}
+		you.Blink(25);
+		return true;
+	}
 
 	if(you.control_blink(you.search_pos))
 	{

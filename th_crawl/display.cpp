@@ -1490,6 +1490,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				stateDraw.addState("익사중", CL_danger, "물에 빠졌습니다!", this);
 			}
+			if (current_level == ZIGURRAT_LEVEL)
+			{
+				stateDraw.addState("전이제어방해", CL_danger, "이 곳에서는 제어된 순간이동을 할 수 없다. 제어된 순간이동은 무작위 순간이동으로 바뀐다.", this);
+			}
 			if(you.GetStatPanalty())
 			{
 				stateDraw.addState("스탯패널티", CL_danger, "스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.", this);
@@ -2638,6 +2642,17 @@ void changedisplay(display_type set)
 		DisplayManager.max_y = 0;
 	ReleaseMutex(mutx);
 }
+
+int getDisplayMove()
+{
+	return DisplayManager.move;
+}
+
+void setDisplayMove(int move_)
+{
+	DisplayManager.move = move_;
+}
+
 
 void changemove(int var)
 {

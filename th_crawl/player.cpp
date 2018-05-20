@@ -4931,7 +4931,10 @@ bool players::isGrazeAmulet()
 }
 void players::resetAmuletPercent(amulet_type type_)
 {
-	system_exp.value = (GetNeedExp(max(level - 1, 0)) - GetNeedExp(max(level - 2, 0))) + 10;
+	int level_ = level;
+	if (level_ == 27)
+		level_--;
+	system_exp.value = (GetNeedExp(max(level_ - 1, 0)) - GetNeedExp(max(level_ - 2, 0))) + 10;
 	system_exp.value *= getAmuletCharge(type_);
 	system_exp.maxi = system_exp.value;
 	chargingFinish(type_, -1);

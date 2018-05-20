@@ -63,7 +63,8 @@ bool environment::isLastFloor(int level_)
 		level_ == MOON_LAST_LEVEL ||
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL )||
 		level_ == HAKUREI_LAST_LEVEL ||
-		level_ == OKINA_LEVEL)
+		level_ == OKINA_LEVEL ||
+		level_ == ZIGURRAT_LEVEL)
 		return true;
 	return false;
 	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 

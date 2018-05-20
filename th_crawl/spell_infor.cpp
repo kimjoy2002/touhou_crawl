@@ -670,6 +670,35 @@ string GetSpellInfor(spell_list spell)
 	text_ += '0'+SpellLevel(spell);
 	text_ += "레벨     학파: ";
 	text_ += GetSpellSchoolString(spell);
+	text_ += "\n";
+	text_ += "소음: ";
+	switch (SpellNoise(spell)) {
+	case 0:
+		text_ += "없음";
+		break;
+	case 4:
+		text_ += "작음";
+		break;
+	case 8:
+		text_ += "보통";
+		break;
+	case 12:
+		text_ += "큼";
+		break;
+	case 16:
+		text_ += "굉장함";
+		break;
+	case 24:
+		text_ += "소음공해";
+		break;
+	}
+	text_ += "\n";
+	if (int length_ = SpellLength(spell)) {
+		char c_temp[128];
+		sprintf_s(c_temp, 128, "사거리: %d칸", length_);
+		text_ += c_temp;
+	}
+	text_ += "\n";
 	return text_;
 }
 

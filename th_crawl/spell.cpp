@@ -721,7 +721,6 @@ int SpellLevel(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_DRAW_POWER:
-	case SPL_TARGET_ELEC:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -738,6 +737,7 @@ int SpellLevel(spell_list skill)
 	case SPL_ALERT_NOISE: 
 	case SPL_MERMAID_SONG:
 	case SPL_PRISM_CALL:
+	case SPL_TARGET_ELEC:
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -1356,7 +1356,6 @@ int SpellCap(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:	
 	case SPL_DRAW_POWER:
-	case SPL_TARGET_ELEC:
 		return 50;
 	case SPL_CONFUSE:
 	case SPL_SLOW:
@@ -1476,6 +1475,7 @@ int SpellCap(spell_list skill)
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_DREAM_CALL:
 	case SPL_HYPER_BEAM:
+	case SPL_TARGET_ELEC:
 		return 200;
 	default:
 	case SPL_BLINK:

@@ -4906,6 +4906,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_ICE_BOLT, 20));
 		list->push_back(spell(SPL_BLINK, 30));
 		break;
+	case MON_RAIJUU:
+		list->push_back(spell(SPL_TARGET_ELEC, 30));
+		break;
 	case MON_TEWI:
 		list->push_back(spell(SPL_RABBIT_HORN, 15));
 		break;

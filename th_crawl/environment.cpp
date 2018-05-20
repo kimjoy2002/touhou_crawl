@@ -263,6 +263,7 @@ bool environment::MakeMap(bool return_)
 		case PANDEMONIUM_LEVEL+3:
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
+		case ZIGURRAT_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"던전 진행: %s에 들어섰다.",CurrentLevelString(floor));

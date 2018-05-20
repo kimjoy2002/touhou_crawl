@@ -1437,7 +1437,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.as_penalty>you.GetPenaltyMinus(1)?CL_warning: //명중
 					CL_bad;
 				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
-				stateDraw.addState(temp, color_, "장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.", this);
+				stateDraw.addState(temp, color_,
+					you.as_penalty > you.GetPenaltyMinus(3) ? "갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다." : //끔찍
+					you.as_penalty>you.GetPenaltyMinus(2) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.": //이동패널티
+					you.as_penalty>you.GetPenaltyMinus(1) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중이 감소합니다." : //명중
+					"갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.", this);
 			}
 			bool haste_temp_ = false;
 

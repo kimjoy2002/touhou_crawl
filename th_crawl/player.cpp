@@ -5161,13 +5161,12 @@ bool players::equipjewerly(char id_)
 					sprintf_s(temp,2,"%c",equipment[ET_LEFT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
-					printlog(equipment[ET_LEFT]->GetName(),false,false,false,equipment[ET_LEFT]->item_color());
-					printlog("; > 또는 ",false,false,false,CL_normal);
+					printlog(equipment[ET_LEFT]->GetName(),true,false,false,equipment[ET_LEFT]->item_color());
+					printlog("> 또는 ",false,false,false,CL_normal);
 					sprintf_s(temp,2,"%c",equipment[ET_RIGHT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
-					printlog(equipment[ET_RIGHT]->GetName(),false,false,false,equipment[ET_RIGHT]->item_color());
-					printlog(";",true,false,false,CL_normal);
+					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color());
 					while(1)
 					{
 						int key_ = waitkeyinput(true);

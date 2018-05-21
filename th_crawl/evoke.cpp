@@ -579,13 +579,32 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						monster* mon_ = (monster*)unit_;
 						env[current_level].MakeNoise(you.position, 8, NULL);
 						printlog("찰칵! ", false, false, false, CL_warning);
-						if (!mon_->s_paralyse && !mon_->s_confuse) {
+						soundmanager.playSound("camera");
 
+						if (mon_->id == MON_SAKUYA && !mon_->s_confuse
+							&& !mon_->s_paralyse &&  mon_->state.GetState() != MS_SLEEP)
+						{
+							if (you.s_the_world) {
+								printlog("내가 시간을 멈추었다...", true, false, false, CL_warning);
+
+							}
+							else {
+								mon_->Blink(10);
+								if (mon_->position != target) {
+									printlog("그러나 촬영 대상이 사라졌다! ", true, false, false, CL_warning);
+									return true;
+								}
+							}
+						}
+
+
+
+						if (!mon_->s_paralyse && !mon_->s_confuse) {
 							char* c_ = Get_Speak(mon_->id, mon_, MST_CAMERA);
 							if (c_ && (env[current_level].isInSight(mon_->position)))
 								printlog(c_, true, false, false, CL_normal);
 						}
-						soundmanager.playSound("camera");
+
 						item_infor t;
 						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
 						it->name.name = mon_->name.name + "의 " + it->name.name;

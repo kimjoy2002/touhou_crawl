@@ -3548,7 +3548,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			switch(randA(8))
 			{
 			case 0:		
-				sprintf_s(temp_speak,100,"%s%s외쳤다. \"청소의 방해이지만...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%s외쳤다. \"정말, 청소의 방해네요...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
 				sprintf_s(temp_speak,100,"%s%s외쳤다. \"또 청소의 방해를 하는건가요?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
@@ -3608,7 +3608,7 @@ char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}
 		else if (type == MST_CAMERA)
 		{
-			sprintf_s(temp_speak, 100, "%s%s외쳤다. \"오늘은 특별히 찍혀드리죠.\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak, 100, "%s%s외쳤다. \"어머... 제법이군요.\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;	

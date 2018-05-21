@@ -1636,10 +1636,10 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 	
 	for(int i=DG_TEMPLE_JOON_AND_SION;i<=DG_TEMPLE_LAST;i++)
 	{
-		if (i != DG_TEMPLE_SEIJA && i != DG_TEMPLE_MIKO)// && i != DG_TEMPLE_OKINA && i != DG_TEMPLE_JUNKO)
+		if (i != DG_TEMPLE_SEIJA)// && i != DG_TEMPLE_OKINA && i != DG_TEMPLE_JUNKO)
 			temple_.push((dungeon_tile_type)i);
 	}
-	temple_.push(DG_STATUE);
+	//temple_.push(DG_STATUE);
 
 
 	for(int i=1; i<21; i++)

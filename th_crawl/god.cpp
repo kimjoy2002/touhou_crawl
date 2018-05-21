@@ -4674,6 +4674,7 @@ bool God_PraySpeak()
 		switch (level_)
 		{
 		default:
+		case 0:
 			printlog("신키에게 P와 영혼을! ", true, false, false, CL_warning);
 			return true;
 		}
@@ -4955,6 +4956,7 @@ bool God_PraySpeak()
 		switch (level_)
 		{
 		default:
+		case 0:
 			printlog("순호: 상아여 보고있는가!", true, false, false, CL_junko);
 			return true;
 		}

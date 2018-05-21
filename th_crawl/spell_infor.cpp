@@ -430,8 +430,8 @@ string GetSpellInfor(spell_list spell)
 		text_ += "특정 장소에서 나오는 몬스터들이 한번에 여럿 소환된다.\n";
 		break;
 	case SPL_MANA_DRAIN:
-		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하면서 데미지를 주는 스마이트형 공격.\n";
-		text_ += "특이하게 지능이 낮으면 받는 데미지가 높아진다.\n";
+		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하는 스마이트형 공격.\n";
+		text_ += "다른 데미지를 받진않지만 영력을 빠른 속도로 고갈시킨다.\n";
 		break;
 	case SPL_INSANE:
 		text_ += "대상을 미치게 만들어버린다. 저항하지 못한 상대는 광기에 빠진다.\n";

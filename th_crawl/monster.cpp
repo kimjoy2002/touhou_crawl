@@ -915,8 +915,11 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_SPEAR:
 	case ATT_NOISE:
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
@@ -975,16 +978,19 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	switch(type_)
 	{
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
@@ -1092,10 +1098,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			}
 			break;
 		case ATT_FIRE:
+		case ATT_FIRE_WEAK:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다. ");
 			break;
 		case ATT_COLD:
+		case ATT_COLD_WEAK:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다. ");
 			break;
@@ -1186,6 +1194,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
 			break;
 		case ATT_ELEC:
+		case ATT_ELEC_WEAK:
 			if (a.order)
 				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중하고 감전되었다. ");
 			break;
@@ -1242,7 +1251,11 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_NORMAL:
 	case ATT_SPEAR:
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
+	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_LUNATIC:
@@ -1272,7 +1285,6 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_CLOUD_NORMAL:
 	case ATT_CLOUD_CURSE:
 	case ATT_PSYCHO:
-	case ATT_ELEC:
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:

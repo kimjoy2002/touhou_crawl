@@ -218,8 +218,9 @@ mon_group normal_group[] = //ÀÏ¹Ý¸÷ ±×·ì
 	{ 43,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //¾Æ¿À¿À´Ï
 	{ 56,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //¿ë
 	{ 59,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //º¥Åä¶ó
+	{ 101,  DEPTH_LEVEL,  DEPTH_LEVEL + 4, 10, 1 }, //½Å·É
 
-	
+		
 	//²ÞÀÇ ¼¼°è
 	{ 73,  DREAM_LEVEL,  DREAM_LEVEL, 10,  4}, //¸Æ
 	{ 74,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //¾Ç¸ù
@@ -983,7 +984,11 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 100:
 		index.push_back(pair<monster_index, int>(MON_CURIOSITY, strong));
-		break; 
+		break;
+	case 101:
+		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_DESIRE, strong));
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -1757,6 +1762,21 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=1;
 		break;
 	case MON_DESIRE:
+	{
+		switch (randA(2))
+		{
+		case 0:
+			mon->fire_resist = 3;
+			break;
+		case 1:
+			mon->ice_resist = 3;
+			break;
+		case 2:
+			mon->elec_resist = 3;
+			break;
+		}
+		mon->poison_resist = 1;
+	}
 		break;
 	case MON_FLOWER_TANK:
 		mon->ice_resist=1;
@@ -2228,6 +2248,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_EAGLE, weak(power_));
 		rand_.push(MON_RAIJUU, weak(power_));
 		rand_.push(MON_RACCON, weak(power_));
+		rand_.push(MON_DESIRE, weak(power_));
 		rand_.push(MON_SNOW_GIRL, middle(power_));
 		rand_.push(MON_DRAGON_BABY, middle(power_));
 		rand_.push(MON_BLUE_UFO, middle(power_));
@@ -2236,7 +2257,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_NAMAZ, strong(power_));
 		rand_.push(MON_LANTERN_YOUKAI, strong(power_));
 		rand_.push(MON_ONI, strong(power_));
-		rand_.push(MON_BLUE_ONI, strong(power_));
+		rand_.push(MON_BLUE_ONI, strong(power_)); 
 	}
 	else if (level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL) {
 		rand_.push(MON_SHEEP, weak(power_));

@@ -605,8 +605,8 @@ const mon_infor mondata[] = {
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,2,10,'D' },
 	
-	{MON_NIGHTMARE,15,1712,name_infor("악몽의 조각",true),&img_mons_nightmare,70,12,5,
-	{31,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	{MON_NIGHTMARE,15,1712,name_infor("악몽의 조각",true),&img_mons_nightmare,120,12,5,
+	{33,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10,'%' },
 	
 	{MON_LUNATIC,13,1374,name_infor("광기의 조각",true),&img_mons_lunatic,90,12,5,
@@ -633,9 +633,9 @@ const mon_infor mondata[] = {
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("물기",false),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D' },
 	
-	{MON_DESIRE,1,1,name_infor("욕망의 덩어리",false),&img_mons_default,10,0,6,
-	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_CANT_NETURAL,0,1,10,'%' },
+	{MON_DESIRE,9,297,name_infor("신령",false),&img_mons_desire_red,40,1,20,
+	{18,0,0},{ ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
+	M_FLAG_FLY | M_FLAG_SPEAK,0,1,7,'%' },
 
 	{MON_FLOWER_TANK,18,3220,name_infor("플라워 전차",false),&img_mons_flower_tank[1],90,10,10,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},

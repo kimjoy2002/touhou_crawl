@@ -1727,19 +1727,19 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int rconf_ = you.GetBuffOk(BUFFSTAT_RCONF);
 				if(rf_)
 				{			
-					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") :"-"));
+					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rf_>0 ? CL_good : CL_danger,
 						(rf_>0 ? "화염 저항이 높아졌습니다." : "화염 저항이 낮아졌습니다."), this);
 				}
 				if(rc_)
 				{
-					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : "-"));
+					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rc_>0 ? CL_good : CL_danger,
 						(rc_>0 ? "냉기 저항이 높아졌습니다." : "냉기 저항이 낮아졌습니다."), this);
 				}
 				if (re_)
 				{
-					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : "-"));
+					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, re_>0 ? CL_good : CL_danger,
 						(re_>0 ? "전기 저항이 높아졌습니다." : "전기 저항이 낮아졌습니다."), this);
 				}

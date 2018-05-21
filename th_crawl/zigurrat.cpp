@@ -140,10 +140,11 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 		monster_list.push(MON_CURIOSITY, 10);
 		break;
 	case ZIGURRAT_SOUL:
+		monster_list.push(MON_DESIRE, 10);
 		monster_list.push(MON_HAUNT, 10);
 		monster_list.push(MON_LUNATIC, 4);
 		monster_list.push(MON_NIGHTMARE, 4);
-		monster_list.push(MON_BLOOD_HAUNT, 2);
+		monster_list.push(MON_BLOOD_HAUNT, 2); 
 		break;
 		
 	}

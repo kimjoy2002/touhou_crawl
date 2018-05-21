@@ -268,6 +268,7 @@ bool Dump(int type, string *filename_)
 					strncat(death_reason, "ÇŞºû¿¡ Å¸µé¾îÁ×¾ú´Ù.", 64);
 					break;
 				case ATT_FIRE:
+				case ATT_FIRE_WEAK:
 				case ATT_THROW_FIRE:
 				case ATT_CLOUD_FIRE:
 				case ATT_FIRE_BLAST:
@@ -277,6 +278,7 @@ bool Dump(int type, string *filename_)
 					strncat(death_reason, "ºÒÅ¸Á×¾ú´Ù.", 64);
 					break;
 				case ATT_COLD:
+				case ATT_COLD_WEAK:
 				case ATT_THROW_COLD:
 				case ATT_CLOUD_COLD:
 				case ATT_COLD_BLAST:
@@ -285,6 +287,8 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
 					strncat(death_reason, "¾ó¾îÁ×¾ú´Ù.", 64);
 					break;
+				case ATT_ELEC:
+				case ATT_ELEC_WEAK:
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
 					if (you.dead_order->order)

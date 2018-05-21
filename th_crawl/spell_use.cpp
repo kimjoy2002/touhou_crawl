@@ -3095,23 +3095,25 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
+		//더 이상 데미지를 주지 않음
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			soundmanager.playSound("wind");
 		}
 		int damage_ = 20+power/8;
 		int reduce_damage_ = damage_;
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
-			reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
-			you.MpUpDown(rand_int(-4,-7));
+			///reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
+			printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "당신의 마나를 흡수하였다. ");
+			you.MpUpDown(rand_int(-7,-12));
 		}
 		else //몬스터는 저항력으로 따짐
 		{
-			monster *mon_ = (monster*)target_unit;
-			reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
+			//monster *mon_ = (monster*)target_unit;
+			//reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
 		}
-		attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
-		target_unit->damage(temp_att, true);
+		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
+		//target_unit->damage(temp_att, true);
 		return true;
 	}
 	return false;
@@ -5077,6 +5079,24 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CALL_HOUND, 15));
 		break;
 	case MON_DESIRE:
+	{
+		if (mon_->fire_resist > 2) {
+			mon_->name.name = "빨간 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_FIRE_WEAK;
+			mon_->image = &img_mons_desire_red;
+		}
+		else if (mon_->ice_resist > 2) {
+			mon_->name.name = "파란 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_COLD_WEAK;
+			mon_->image = &img_mons_desire_blue;
+		}
+		else if (mon_->elec_resist > 2) {
+			mon_->name.name = "초록 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_ELEC_WEAK;
+			mon_->image = &img_mons_desire_green;
+		}
+	}
+	break;
 		break;
 	case MON_FLOWER_TANK:
 		list->push_back(spell(SPL_LASER, 25));

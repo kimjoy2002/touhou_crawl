@@ -77,6 +77,9 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_MIKO_END = BUFF_MIKO_ULTI,
 	BUFF_MIKO_RF_MINUS,
 	BUFF_MIKO_RC_MINUS,
+	BUFF_WEAK_RF,
+	BUFF_WEAK_RC,
+	BUFF_WEAK_RE,
 	BUFF_MAX
 };
 enum action_type

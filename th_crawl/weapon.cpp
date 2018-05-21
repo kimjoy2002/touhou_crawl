@@ -10,6 +10,7 @@
 #include "weapon.h"
 #include "enum.h"
 #include "common.h"
+#include "player.h"
 
 
 int GetNewBrand(int rare_weigth_)
@@ -35,6 +36,11 @@ int GetPulsDamage(weapon_brand brand, int damage)
 		case WB_FIRE:
 		case WB_COLD:
 			damage += damage/3;
+			break;
+		case WB_WEATHER:
+			if (you.s_weather) {
+				damage += damage / 2;
+			}
 			break;
 		default:
 			break;
@@ -114,7 +120,7 @@ const char* GetBrandInfor(weapon_brand brand)
 		case WB_CURSE:		
 			return "이 무기는 저주가 뿜어져나오고 있다. 공격한 적에 저항할 수 없는 독과 일정확률로 감속을 건다.";
 		case WB_WEATHER	:
-			return "공격한 적에 예측할 수 없는 다양한 효과를 낸다. 나쁜 효과는 나오지 않는다.";
+			return "이 무기는 다양한 속성의 공격이 무작위로 베어나온다. 날씨가 발현중이라면 50%의 추가 데미지를 준다.";
 		case WB_AUTUMN:
 			return "이 무기는 단검 수준의 암습이 가능하게 되고 이미 단검인 경우엔 깨어난 적도 암습할 수 있다.";
 		case WB_MANA_REGEN:

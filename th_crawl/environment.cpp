@@ -2486,18 +2486,32 @@ int GetLevelMonsterNum(int level, bool item_)
 	int level_ = level>=0?level:current_level;
 	if(!item_)
 	{
+		float multi_ = 1.0f;
+
+		if (int penalty_turn_ = you.CheckPeanltyTurn(level))
+		{
+			//1000부터 시작해서 5000턴부터 몬스터 2배
+			if (penalty_turn_ >= 1000) {
+				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
+			}
+		}
+
+
+
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
-			return 0;
+			return 0* multi_;
 		else if(level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL)
-			return 6;
+			return 6 * multi_;
 		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-			return 7;
+			return 7 * multi_;
 		else if(level_ >= YUKKURI_LEVEL && level_ <= YUKKURI_LAST_LEVEL)
-			return 20;
+			return 18 * multi_;
 		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
-			return 15;
+			return 15 * multi_;
+		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
+			return 12 * multi_;
 		else
-			return 9;
+			return 9 * multi_;
 	}
 	else{ //아이템
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)

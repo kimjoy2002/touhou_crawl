@@ -219,6 +219,7 @@ public:
 	int prev_real_turn; //턴
 	bool player_move;//플레이어의 움직임이 있었다.
 	int explore_map; //탐험한 거리
+	int penalty_turn[4]; //너무 오래있을때 패널티
 
 	char final_item; //마지막에 주운 템
 	int final_num; //마지막에 주운 템의 수량
@@ -444,6 +445,8 @@ public:
 	void CheckPunish(int delay_);
 	int GetNeedExp(int level_);
 	bool GiveSkillExp(skill_type skill_, int exp_, bool speak_ = true);
+	void EndTurnForPenalty();
+	int CheckPeanltyTurn(int level_);
 	bool SkillTraining(skill_type skill_, int percent_); // (1/percent_)%
 	bool SkillTraining(bool speak);
 	bool SetPoisonReason(parent_type type_){return false;};

@@ -133,7 +133,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	WaitForSingleObject(mutx, INFINITE);
 	SetInter(resetLOS());
 	sight_reset = false;
-	turn++;
+	turn++; 
+	EndTurnForPenalty();
 	if(delay_){
 		real_turn+=delay_;
 		if(player_move){

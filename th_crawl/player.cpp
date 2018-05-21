@@ -95,6 +95,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
 		MemorizeSkill_num[i] = 0;
+	for (int i = 0; i<4; i++)
+		penalty_turn[i] = 0;
 	//for(int i=0;i<GT_LAST;i++)
 	//	punish[i]=0;
 	for(int i=0;i<GT_LAST;i++)
@@ -204,6 +206,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prev_real_turn);
 	SaveData<bool>(fp, player_move);
 	SaveData<int>(fp,explore_map);
+	SaveData<int>(fp, *penalty_turn, 4); //너무 오래있을때 패널티
 	SaveData<char>(fp, final_item);
 	SaveData<int>(fp, final_num);
 
@@ -441,6 +444,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_real_turn);
 	LoadData<bool>(fp, player_move);
 	LoadData<int>(fp,explore_map);
+	LoadData<int>(fp, *penalty_turn);
 	LoadData<char>(fp, final_item);
 	LoadData<int>(fp, final_num);
 	//LoadData<int>(fp, hunger);
@@ -2051,8 +2055,13 @@ bool players::GetExp(int exper_, bool speak_)
 {
 	bool level_up_ = false;
 
-
-
+	if (int penalty_turn_= CheckPeanltyTurn(current_level)) {
+		if (penalty_turn_ >= 1000) {
+			float penalty_ = (1.0f - min(penalty_turn_ - 1000, 4000) / 5000.0f);
+			exper_ = exper_*penalty_;
+			//패널티 경험치는 1000턴부터 감소하기 시작하여 5000턴에서 20%
+		}
+	}
 	if (current_level == ZIGURRAT_LEVEL)
 	{
 		exper_ = exper_ / 3; //지구랏에선 경험치 33%
@@ -2437,6 +2446,48 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	}
 	return false;
 }
+
+void players::EndTurnForPenalty()
+{
+	if (current_level == BAMBOO_LEVEL)
+	{
+		penalty_turn[0]++;
+	}
+	else if (current_level == DREAM_LEVEL)
+	{
+		penalty_turn[1]++;
+	}
+	else if (current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
+	{
+		penalty_turn[2]++;
+	}
+	else if (current_level >= SUBTERRANEAN_LEVEL && current_level <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+	{
+		penalty_turn[3]++;
+	}
+}
+int players::CheckPeanltyTurn(int level_)
+{
+	if (level_ == BAMBOO_LEVEL)
+	{
+		return penalty_turn[0];
+	}
+	else if (level_ == DREAM_LEVEL)
+	{
+		return penalty_turn[1];
+	}
+	else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
+	{
+		return penalty_turn[2];
+	}
+	else if (level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+	{
+		return penalty_turn[3];
+	}
+	return 0;
+}
+
+
 bool players::SkillTraining(skill_type skill_, int percent_)
 {
 	if(randA((percent_*(skill[skill_].onoff>=1?1:10))-1)>0)

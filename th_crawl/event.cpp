@@ -516,7 +516,16 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	case EVL_REGEN:
-		if (randA(10) == 0)
+	{
+		float multi_ = 0.0f;
+		if (int penalty_turn_ = you.CheckPeanltyTurn(current_level))
+		{
+			//1000부터 시작해서 5000턴부터 몬스터 2배
+			if (penalty_turn_ >= 1000) {
+				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
+			}
+		}
+		if (randA(12-5*multi_) == 0)
 		{
 			int arr_[] = { MON_MAC, MON_NIGHTMARE, MON_LUNATIC, MON_BLUE_UFO, MON_MOON_RABIT_ATTACK, MON_MOON_RABIT_SUPPORT
 			};
@@ -535,9 +544,20 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 
 		}
+
+	}
 		return 0;
 	case EVL_REGEN2:
-		if (randA(50) == 0)
+	{
+		float multi_ = 0.0f;
+		if (int penalty_turn_ = you.CheckPeanltyTurn(current_level))
+		{
+			//1000부터 시작해서 5000턴부터 몬스터 2배
+			if (penalty_turn_ >= 1000) {
+				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
+			}
+		}
+		if (randA(50-25*multi_) == 0)
 		{
 			int arr_[] = { MON_HELL_SPIDER, MON_BLOOD_HAUNT, MON_LANTERN_YOUKAI, MON_HELL_HOUND, MON_ONI, MON_BLUE_ONI
 			};
@@ -556,7 +576,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 
 		}
-		return 0;
+	}
+	return 0;
 	case EVL_ARENA:
 	{
 		arena_event(current_level);

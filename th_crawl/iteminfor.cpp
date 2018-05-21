@@ -434,8 +434,6 @@ void iteminfor(bool gameover)
 							}
 						}
 					}
-					else
-						waitkeyinput();
 					break;
 				}
 				view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");

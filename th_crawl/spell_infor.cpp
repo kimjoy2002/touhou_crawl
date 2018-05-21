@@ -1172,6 +1172,29 @@ string GetSkillInfor(skill_list skill)
 		text_ += "최대 체력이 2배가 되거나, 영력회복속도를 엄청나게 상승시키거나, 반영구적인 가속중 선택할 수 있다.\n\n";
 		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
 		break;
+	case SKL_PHILOSOPHERS_1:
+		text_ += "화염구를 만들어 날리는 화염계 공격마법.\n";
+		text_ += "적에 부딪히거나 목표에서 터지며 주변에 폭발데미지를 입힌다.\n";
+		text_ += "자신도 가까이 있으면 데미지를 받을 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_2:
+		text_ += "물을 압축하여 발사한다.\n";
+		text_ += "맞은 상대를 밀쳐낼 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_3:
+		text_ += "빠른 대기의 탄환을 적에게 날리는 마법.\n";
+		text_ += "적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n";
+		text_ += "다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n";
+		break;
+	case SKL_PHILOSOPHERS_4:
+		text_ += "주변에 커다란 에메랄드로 된 벽을 솓구친다.\n";
+		text_ += "밀착하여 가까이 있는 상대에게 데미지를 줄 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_5:
+		text_ += "원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n";
+		text_ += "뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n";
+		text_ += "파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n";
+		break;
 	default:
 		text_ += "모르는 능력.\n";
 		break;

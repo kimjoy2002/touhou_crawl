@@ -201,6 +201,7 @@ int SkillLength(skill_list skill);
 const char* SkillString(skill_list skill); //스킬 이름
 int SkillCap(skill_list skill);//스킬파워 상한
 int SkillNoise(skill_list skill); //스킬 소음
+int SkillSpeed(skill_list skill);
 int SkillPow(skill_list skill);//스킬의 파워를 리턴
 int SkillDiffer(skill_list skill);//100을 최고로 성공률을 리턴한다.
 int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3);//간단한 성공률 공식을 세운다.

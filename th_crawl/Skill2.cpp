@@ -645,6 +645,16 @@ int SkillNoise(skill_list skill)
 	}
 
 }
+int SkillSpeed(skill_list skill)
+{
+	switch (skill)
+	{
+	case SKL_PHILOSOPHERS_3:
+		return 5;
+	default:
+		return 10;
+	}
+}
 int SkillPow(skill_list skill)
 {
 	switch(skill)
@@ -1875,7 +1885,7 @@ void SkillUse(char auto_)
 									SkillUseTraning(skill_);
 									Noise(you.position , SkillNoise(skill_));
 									you.SetBattleCount(30);
-									you.time_delay += you.GetNormalDelay();
+									you.time_delay += you.GetNormalDelay()*SkillSpeed(skill_) / 10;
 									you.TurnEnd();
 									you.SetPrevAction('a', key_);
 								}
@@ -1899,7 +1909,7 @@ void SkillUse(char auto_)
 								SkillUseTraning(skill_);
 								Noise(you.position , SkillNoise(skill_));
 								you.SetBattleCount(30);
-								you.time_delay += you.GetNormalDelay();
+								you.time_delay += you.GetNormalDelay()*SkillSpeed(skill_) / 10;
 								you.TurnEnd();
 								you.SetPrevAction('a', key_);
 							}		

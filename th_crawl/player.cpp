@@ -2428,7 +2428,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		{
 			//최대 마나는 나중에 손보자...
 			//그냥 렙마다; 최대마나 1증가
-			if(GetSkillLevel(skill_, false))
+			if(GetSkillLevel(skill_, false) % 3 == 0 || GetSkillLevel(skill_, false) > 5)
 			{
 				if((GetSkillLevel(skill_, false) > GetSkillLevel(SKT_SPELLCASTING, false)) || skill_ == SKT_SPELLCASTING)
 				{

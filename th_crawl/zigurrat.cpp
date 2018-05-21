@@ -169,7 +169,7 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 	}
 	mon_->name = name_infor(temp, mon_->name.name_type);
 	while (level_up_ > 0) {
-		mon_->LevelUpdown(2);
+		mon_->LevelUpdown(2,6.0f,1.0f);
 		level_up_--;
 	}
 }

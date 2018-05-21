@@ -490,6 +490,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_SMASH:
 	case ATT_BLOOD:	
 	case ATT_BURST:
 	case ATT_DROWNING:
@@ -644,6 +645,12 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 			printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
 		}
 		break;
+	case ATT_SMASH:
+		if (a.order)
+		{
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
+		}
+		break;
 	case ATT_BLOOD:	
 		if(a.order)
 		{
@@ -723,8 +730,10 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
 		break;
 	case ATT_ELEC:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+		if(a.order)
+		{
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 감전되었다. ");
+		}
 		break;
 	case ATT_DROWNING:
 		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠져 질식하고 있다. ");

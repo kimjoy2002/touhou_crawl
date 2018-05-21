@@ -670,6 +670,7 @@ string GetMonsterInfor(monster *it)
 		case MON_YORIHIME:
 			text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 여동생.\n";
 			text_ += "신령을 자신의 몸에 깃들게하여 신의 힘을 쓰는 능력을 가지고 있다.\n";
+			text_ += "그녀의 검에 전기와 불이 휘감아져있기때문에 전기와 화염에 대한 저항이 필요할 듯 하다 .\n";
 			break;
 		case MON_TOYOHIME:
 			text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 언니.\n";
@@ -947,6 +948,31 @@ string GetMonsterInfor(monster *it)
 			text_ += "기계로된 거미 모양을 한 달에서 파견된 탐사로봇\n";
 			text_ += "그 것이 지나온 곳에는 풀이 자라지못하고 모든 것을 정화한다고 한다.\n";
 			break;
+		case MON_KAGUYA_QUIZ_0:
+			text_ += "카구야가 냈던 난제중 하나. 용의 역린 부근의 오색으로 빛나는 구슬이다.\n";
+			text_ += "여의주라고도 불리며 역린을 건드리기때문에 얻기가 힘들다고 한다.\n";
+			text_ += "이 영롱한 구슬에서는 짜릿짜릿한 번개가 발생하고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_1:
+			text_ += "카구야가 냈던 난제중 하나. 부처가 사용했다고 하는 돌로 된 밥그릇이다.\n";
+			text_ += "가짜와 달리 실제로 부처가 사용한 석발은 빛이 강하게 난다고 한다.\n";
+			text_ += "이 돌로 된 석발에서는 당신의 방어를 무시하는 강타 공격을 한다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_2:
+			text_ += "카구야가 냈던 난제중 하나. 불쥐의 가죽으로 만든 옷이다.\n";
+			text_ += "특이한 쥐로 만든 이 옷은 불에 대한 데미지를 전혀 받지않는다고 한다.\n";
+			text_ += "이 쥐의 가죽으로 된 옷은 불꽃을 생성하여 날리고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_3:
+			text_ += "카구야가 냈던 난제중 하나. 둥그스름하고 광택있는 조개다.\n";
+			text_ += "제비가 낳았닥 하는 이 조개는 순산을 기원하는 의미가 있다고 한다.\n";
+			text_ += "이 둥그스름한 조개는 차가운 냉기를 발하고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_4:
+			text_ += "카구야가 냈던 난제중 하나. 금, 은, 옥으로 이루어진 나뭇가지다.\n";
+			text_ += "봉래산에 있으며 뿌리는 은, 줄기와 잎사귀는 금이며 과실은 옥으로 되어있다고 한다.\n";
+			text_ += "이 나뭇가지를 잘 살펴보니 탄막이 열려있는 것 같다.\n";
+			break;
 		default:
 			text_ += "찾아볼 수 없는 몬스터\n";
 		}
@@ -1046,6 +1072,8 @@ string GetMonsterInfor(monster *it)
 		text_ += "투명을 볼 수 있다.\n";
 	if(it->flag & M_FLAG_INANIMATE)
 		text_ += "무생물이다.\n";
+	if(it->flag & M_FLAG_RESIST_BLIZARD)
+		text_ += "눈보라에 면역이 있다. 달자매의 힘으로\n";
 	
 	if(it->resist >= 99)
 		text_ += "디버프 마법에 대한 면역력이 무한이다.\n";

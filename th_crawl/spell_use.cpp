@@ -180,7 +180,13 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	if(order->position == target && !SpellFlagCheck(skill, S_FLAG_SEIF))
 		return false;
 
-	if(SpellLength(skill) && length_ > SpellLength(skill)*SpellLength(skill))
+	if (SpellLength(skill) == 1) {
+		//사거리1은 특수 취급
+		if (length_ > 2)
+			return false;
+
+	}
+	else if(SpellLength(skill) && length_ > SpellLength(skill)*SpellLength(skill))
 		return false;
 	if(SpellFlagCheck(skill, S_FLAG_NO_COM))
 		return false;
@@ -417,7 +423,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -1970,7 +1976,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("spark");
 		}
 		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
-		ThrowSector(38,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
+		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
 	}
@@ -4414,7 +4420,89 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
+bool skill_kaguya_spell(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
+	int time_ = rand_int(10, 20);
+	int i = 5;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_KAGUYA_QUIZ_0+(5-i), time_, true, true, 3, order, target, SKD_SUMMON_KAGUYA_SPELL, GetSummonMaxNumber(SPL_KAGUYA_SPELL)))
+		{
+			mon_->PlusTimeDelay(-mon_->GetWalkDelay());
+			mon_->SetInvincibility(-1, false);
+			return_ = true;
+		}
+	}
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("summon");
+		}
+	}
+	return return_;
+}
+bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = (8 + pow / 15);
+		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("검", true));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("knife");
+			}
+			throwtanmac(47, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = (6 + pow / 11);
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("나이프", false));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("knife");
+			}
+			throwtanmac(48, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+
+bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("earthquake");
+		}
+		target_unit->Blink(40);
+		int damage_ = 70;
+		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor("천수력남 던지기", false));
+		target_unit->damage(temp_att, true);
+		return true;
+	}
+	return false;
+}
 
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -4809,7 +4897,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 10));
 		list->push_back(spell(SPL_STASIS, 15));
 		list->push_back(spell(SPL_TELEPORT_SELF, 10));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+		list->push_back(spell(SPL_THROW_KNIFE, 25));
 		list->push_back(spell(SPL_BLINK, 20));
 		{
 			item_infor t;
@@ -4892,6 +4980,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SARIEL:
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 25));
 		list->push_back(spell(SPL_HASTE_OTHER, 15));
+		break;
+	case MON_YUMEKO:
+		list->push_back(spell(SPL_THROW_SWORD, 30));
 		break;
 	case MON_SCHEMA_EYE:
 		list->push_back(spell(SPL_SCHEMA_TANMAC, 40));
@@ -4992,7 +5083,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_LUMINUS_STRIKE, 15));
 		break;
 	case MON_EVIL_EYE_TANK:
-		list->push_back(spell(SPL_CANNON, 25));
+		list->push_back(spell(SPL_CANNON, 21));
 		break;
 	case MON_SNOW_GIRL:
 		list->push_back(spell(SPL_FREEZE, 20));
@@ -5013,6 +5104,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HASTE, 15));
 		break;
 	case MON_SUIKA:
+		list->push_back(spell(SPL_THROW_PLAYER, 30));
 		break;
 	case MON_REIMU:
 		break;
@@ -5028,12 +5120,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SELF_HEAL, 15));
 		break;
 	case MON_UDONGE:
-		list->push_back(spell(SPL_MIND_BENDING, 15));
+		list->push_back(spell(SPL_MIND_BENDING, 25));
 		list->push_back(spell(SPL_FIELD_VIOLET, 15));
 		break;
 	case MON_KAGUYA:
-		list->push_back(spell(SPL_SUMMON_OPTION, 15));
-		list->push_back(spell(SPL_MANA_DRAIN, 15));
+		list->push_back(spell(SPL_KAGUYA_SPELL, 70));
 		break;
 	case MON_MOKOU:
 		break;
@@ -5044,13 +5135,15 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_FAKE_SANGHAI:
 		break;
 	case MON_HOURAI:
-	case MON_FAKE_HOURAI:
 		list->push_back(spell(SPL_LASER, 60));
+		break;
+	case MON_FAKE_HOURAI:
+		list->push_back(spell(SPL_LASER, 45));
 		break;
 	case MON_TOKIKO:
 	{
 		list->push_back(spell(SPL_TWIST, 15));
-		list->push_back(spell(SPL_VEILING, 15));
+		list->push_back(spell(SPL_VEILING, 25));
 		random_extraction<int> arr_;
 
 		arr_.push(BOOK_TEST_ANNIHILATE);
@@ -5225,7 +5318,22 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_CURIOSITY:
 		list->push_back(spell(SPL_DISCHARGE, 50));
 		list->push_back(spell(SPL_THUNDER_BOLT, 10));
-		break; 
+		break;
+	case MON_KAGUYA_QUIZ_0:
+		list->push_back(spell(SPL_TARGET_ELEC, 20));
+		break;
+	case MON_KAGUYA_QUIZ_1:
+		list->push_back(spell(SPL_SMITE, 12));
+		break;
+	case MON_KAGUYA_QUIZ_2:
+		list->push_back(spell(SPL_FLAME, 20));
+		break;
+	case MON_KAGUYA_QUIZ_3:
+		list->push_back(spell(SPL_FROST, 20));
+		break;
+	case MON_KAGUYA_QUIZ_4:
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 15));
+		break;
 	default:
 		break;
 	}
@@ -5529,6 +5637,14 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_dream_call(power, short_, order, target);
 	case SPL_HYPER_BEAM:
 		return skill_hyper_beam(power, short_, order, target);
+	case SPL_KAGUYA_SPELL:
+		return skill_kaguya_spell(power, short_, order, target);
+	case SPL_THROW_SWORD:
+		return skill_throw_sword(power, short_, order, target);
+	case SPL_THROW_KNIFE:
+		return skill_throw_knife(power, short_, order, target);
+	case SPL_THROW_PLAYER:
+		return skill_throw_player(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5990,6 +6106,14 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_dream_call(power, short_, &you, target);
 	case SPL_HYPER_BEAM:
 		return skill_hyper_beam(power, short_, &you, target);
+	case SPL_KAGUYA_SPELL:
+		return skill_kaguya_spell(power, short_, &you, target);
+	case SPL_THROW_SWORD:
+		return skill_throw_sword(power, short_, &you, target);
+	case SPL_THROW_KNIFE:
+		return skill_throw_knife(power, short_, &you, target);
+	case SPL_THROW_PLAYER:
+		return skill_throw_player(power, short_, &you, target);
 	default:
 		return false;
 	}

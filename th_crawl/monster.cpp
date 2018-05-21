@@ -966,6 +966,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_SMASH:
 	case ATT_BLOOD:
 	case ATT_BURST:
 	case ATT_DROWNING:
@@ -974,17 +975,17 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	switch(type_)
 	{
 	case ATT_FIRE:
-		bonus_damage = damage_*0.25f;
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
-		bonus_damage = damage_*0.25f;
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
-		bonus_damage = damage_*0.25f;
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
@@ -1108,6 +1109,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
 			}
 			break;
+		case ATT_SMASH:
+			if (a.order)
+			{
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
+			}
+			break;
 		case ATT_BLOOD:	
 			if(a.order)
 			{
@@ -1179,8 +1186,9 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
 			break;
 		case ATT_ELEC:
-			if(!GetElecResist())
-				break;
+			if (a.order)
+				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중하고 감전되었다. ");
+			break;
 		case ATT_THROW_ELEC:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
 			break;

@@ -3231,7 +3231,7 @@ void shout(char auto_)
 				printlog("누구를 공격하게 명령하시겠습니까?", true, false, false, CL_help);
 			}
 			beam_iterator beam(you.position,you.position);
-			projectile_infor infor(8,false,true);
+			projectile_infor infor(8,false,true, -3);
 			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,-1, 0.0f, auto_>0))
 			{
 				if(unit* target = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))

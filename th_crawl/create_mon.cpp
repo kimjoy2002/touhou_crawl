@@ -2009,6 +2009,17 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
+	case MON_KAGUYA_QUIZ_0:
+	case MON_KAGUYA_QUIZ_1:
+	case MON_KAGUYA_QUIZ_2:
+	case MON_KAGUYA_QUIZ_3:
+	case MON_KAGUYA_QUIZ_4:
+		mon->elec_resist = 3;
+		mon->ice_resist = 3;
+		mon->fire_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
 	}
 }
 

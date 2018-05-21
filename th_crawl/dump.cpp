@@ -185,6 +185,11 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에 의해 ", 64);
 					strncat(death_reason, "죽었다.", 64);
 					break;
+				case ATT_SMASH:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "바닥에 집어던져졌다.", 64);
+					break;
 				case ATT_BLOOD:
 					if (you.dead_order->order)
 						strncat(death_reason, "에 의해 ", 64);

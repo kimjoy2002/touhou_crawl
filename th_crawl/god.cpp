@@ -3719,7 +3719,7 @@ bool god_punish(god_type god)
 					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 집어던졌다!");
 					you.Blink(40);
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
-					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("자이언트스윙",true));
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY, ATT_SMASH,name_infor("자이언트스윙",true));
 					you.damage(temp_att, true);
 				}
 				break;

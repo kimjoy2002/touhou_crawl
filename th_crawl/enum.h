@@ -692,6 +692,11 @@ enum monster_index
 	MON_BOMB,
 	MON_DOREKING,
 	MON_CURIOSITY,
+	MON_KAGUYA_QUIZ_0,
+	MON_KAGUYA_QUIZ_1,
+	MON_KAGUYA_QUIZ_2,
+	MON_KAGUYA_QUIZ_3,
+	MON_KAGUYA_QUIZ_4,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };
@@ -985,6 +990,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_NORMAL=0,
 	ATT_SPEAR,
 	ATT_SMITE,
+	ATT_SMASH,
 	ATT_BLOOD,
 	ATT_NOISE,
 	ATT_FIRE,

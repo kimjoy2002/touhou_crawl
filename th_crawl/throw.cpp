@@ -329,6 +329,12 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_tanmac_sion[direc];
 	case 45:
 		return &img_autumn_edge[direc];
+	case 46:
+		return &img_tanmac_master_spark[direc];
+	case 47:
+		return &img_tanmac_sword[direc];
+	case 48:
+		return &img_tanmac_knife[direc];
 	}
 }
 

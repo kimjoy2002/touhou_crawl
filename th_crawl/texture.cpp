@@ -1581,6 +1581,38 @@ textures(&texture_item03, 23, 255),
 textures(&texture_item03, 24, 255)
 };
 
+textures img_tanmac_master_spark[] = { textures(&texture_item03, 37, 255),
+textures(&texture_item03, 38, 255),
+textures(&texture_item03, 39, 255),
+textures(&texture_item03, 40, 255),
+textures(&texture_item03, 41, 255),
+textures(&texture_item03, 42, 255),
+textures(&texture_item03, 43, 255),
+textures(&texture_item03, 44, 255)
+};
+
+textures img_tanmac_sword[] = { textures(&texture_item03, 45, 255),
+textures(&texture_item03, 46, 255),
+textures(&texture_item03, 47, 255),
+textures(&texture_item03, 48, 255),
+textures(&texture_item03, 49, 255),
+textures(&texture_item03, 50, 255),
+textures(&texture_item03, 51, 255),
+textures(&texture_item03, 52, 255)
+};
+textures img_tanmac_knife[] = { textures(&texture_item03, 53, 255),
+textures(&texture_item03, 54, 255),
+textures(&texture_item03, 55, 255),
+textures(&texture_item03, 56, 255),
+textures(&texture_item03, 57, 255),
+textures(&texture_item03, 58, 255),
+textures(&texture_item03, 59, 255),
+textures(&texture_item03, 60, 255)
+};
+
+
+
+
 
 
 textures img_tanmac_small[6][4] =
@@ -1714,6 +1746,14 @@ textures img_effect_gold_floor[] = {
 	textures(&texture_item03, 0, 255),
 	textures(&texture_item03, 1, 255),
 	textures(&texture_item03, 2, 255)
+};
+
+textures img_mon_kaguya_quiz[] = {
+	textures(&texture_item03, 32, 255),
+	textures(&texture_item03, 33, 255),
+	textures(&texture_item03, 34, 255),
+	textures(&texture_item03, 35, 255),
+	textures(&texture_item03, 36, 255)
 };
 
 
@@ -2965,6 +3005,16 @@ int texturetoint(textures* input)
 		return 495;
 	else if (input == &img_mons_desire_blue)
 		return 496;
+	else if (input == &img_mon_kaguya_quiz[0])
+		return 497;
+	else if (input == &img_mon_kaguya_quiz[1])
+		return 498;
+	else if (input == &img_mon_kaguya_quiz[2])
+		return 499;
+	else if (input == &img_mon_kaguya_quiz[3])
+		return 500;
+	else if (input == &img_mon_kaguya_quiz[4])
+		return 501;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3986,6 +4036,16 @@ textures* inttotexture(int input)
 		return &img_mons_desire_green;
 	case 496:
 		return &img_mons_desire_blue;
+	case 497:
+		return &img_mon_kaguya_quiz[0];
+	case 498:
+		return &img_mon_kaguya_quiz[1];
+	case 499:
+		return &img_mon_kaguya_quiz[2];
+	case 500:
+		return &img_mon_kaguya_quiz[3];
+	case 501:
+		return &img_mon_kaguya_quiz[4];
 	default:
 		return &img_mons_default;
 	}

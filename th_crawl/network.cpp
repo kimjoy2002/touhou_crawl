@@ -1,5 +1,6 @@
 #include "network.h"
 #include "replay.h"
+#include "option_manager.h"
 bool is_little_endian()
 {
 	const int x = 1;
@@ -26,12 +27,12 @@ void sendScore(const char *c, const char *file)
 
 	client.StartUp();
 	//client.Connect("127.0.0.1",12345);
-	struct hostent *host_entry = gethostbyname("joy1999.codns.com");
+	struct hostent *host_entry = gethostbyname(option_mg.getServerIp().c_str());
 	if (!host_entry)
 	{
 		return;
 	}
-	client.Connect(inet_ntoa(*(struct in_addr*)host_entry->h_addr_list[0]),12345);
+	client.Connect(inet_ntoa(*(struct in_addr*)host_entry->h_addr_list[0]), option_mg.getServerPort());
 	packet data;
 	strcpy(data.str,"hello world"); 
 	data.str[11] = 0;

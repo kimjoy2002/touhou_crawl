@@ -25,6 +25,9 @@ class optionManager {
 
 	int bgm_volume;
 	int se_volume;
+	
+	string server_ip;
+	int server_port;
 
 private:
 	optionManager() {};
@@ -40,6 +43,10 @@ public:
 
 	int getBgmVolume() { return bgm_volume; };
 	int getSeVolume() { return se_volume; };
+
+
+	string getServerIp() { return server_ip; };
+	int getServerPort() { return server_port; };
 
 private:
 	string TCHARToString(const TCHAR* ptsz);

@@ -2053,6 +2053,8 @@ void players::SetPureSkill(int skill_)
 
 bool players::GetExp(int exper_, bool speak_)
 {
+	if (exper_ < 0)
+		return false;
 	bool level_up_ = false;
 
 	if (int penalty_turn_= CheckPeanltyTurn(current_level)) {
@@ -2425,8 +2427,8 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_EVOCATE)
 		{
 			//최대 마나는 나중에 손보자...
-			//일단 3렙마다 최대마나 1증가
-			if(GetSkillLevel(skill_, false) % 3 == 0)
+			//그냥 렙마다; 최대마나 1증가
+			if(GetSkillLevel(skill_, false))
 			{
 				if((GetSkillLevel(skill_, false) > GetSkillLevel(SKT_SPELLCASTING, false)) || skill_ == SKT_SPELLCASTING)
 				{

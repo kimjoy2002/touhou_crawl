@@ -825,9 +825,24 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top += fontDesc.Height;
 
 	
-	//resist_ = you.poison_resist - you.uniden_poison_resist;
-	//sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+
+
+
+
+
+	string resist_text_ = "";
+	{
+		for (int i = 0; i < 10; i++) {
+			if (you.GetResist() > 110 + i * 20) {
+				resist_text_ += "#";
+			}
+			else {
+				resist_text_ += ".";
+			}
+		}
+	}
+	sprintf_s(temp,100,"마법저항: %s" , resist_text_.c_str());
+	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);

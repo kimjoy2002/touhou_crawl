@@ -463,7 +463,19 @@ bool Dump(int type, string *filename_)
 	else
 		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"없음\n":"착용불가\n");	
 
-	fprintf_s(fp,"                                           머리: ");
+
+	string resist_text_ = "";
+	{
+		for (int i = 0; i < 10; i++) {
+			if (you.GetResist() > 110 + i * 20) {
+				resist_text_ += "#";
+			}
+			else {
+				resist_text_ += ".";
+			}
+		}
+	}
+	fprintf_s(fp,"마법저항: %s                       머리: ", resist_text_.c_str());
 	if(you.equipment[ET_HELMET])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
 	else

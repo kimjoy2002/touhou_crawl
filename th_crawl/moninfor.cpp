@@ -1010,6 +1010,9 @@ string GetMonsterInfor(monster *it)
 		else if(it->elec_resist>=3)
 			text_ += "절연이다.\n";
 	}
+
+
+
 	if(it->confuse_resist)
 	{
 		if(it->confuse_resist>0)
@@ -1036,16 +1039,29 @@ string GetMonsterInfor(monster *it)
 			text_ += "행동이 매우 느리다.\n";
 	}
 	if(it->isFly())
-			text_ += "하늘을 날 수 있다.\n";
+		text_ += "하늘을 날 수 있다.\n";
 	if (it->isSwim())
 		text_ += "수영을 할 수 있다.\n";
 	if(it->flag & M_FLAG_CAN_SEE_INVI)
-			text_ += "투명을 볼 수 있다.\n";
+		text_ += "투명을 볼 수 있다.\n";
 	if(it->flag & M_FLAG_INANIMATE)
-			text_ += "무생물이다.\n";
+		text_ += "무생물이다.\n";
 	
 	if(it->resist >= 99)
-			text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
+		text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
+	else
+	{
+		text_ += "마법저항: ";
+		for (int i = 0; i < 10; i++ ) {
+			if (it->GetResist() > 110 + i * 20) {
+				text_ += "#";
+			}
+			else {
+				text_ += ".";
+			}
+		}
+		text_ += "\n";
+	}
 	if (it->flag & M_FLAG_SILENCE)
 		text_ += "침묵된 상태에서도 마법이 사용가능하다.\n";
 

@@ -398,8 +398,8 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp, "%s\n             ", death_reason);
 		fprintf_s(fp, "ÃÖÁ¾ÅÏ %d\n\n", you.turn);
 
-		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
-			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string
+		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
+			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
 		);
 
 

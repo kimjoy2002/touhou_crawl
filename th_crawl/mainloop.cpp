@@ -35,7 +35,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver0.91";
+const char *version_string = "ver1.0";
 
 
 void Initialize();

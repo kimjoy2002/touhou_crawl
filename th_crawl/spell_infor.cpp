@@ -435,7 +435,7 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_INSANE:
 		text_ += "대상을 미치게 만들어버린다. 저항하지 못한 상대는 광기에 빠진다.\n";
-		text_ += "마법저항으로 저항할 수 있다.\n";
+		text_ += "마법저항으로 저항할 수 있으며 혼란저항으론 완벽하게 방지가 가능하다.\n";
 		break;
 	case SPL_BLOOD_SMITE:
 		text_ += "대상의 최대 체력에 비례한 저항불가능한 스마이트형 공격.\n";

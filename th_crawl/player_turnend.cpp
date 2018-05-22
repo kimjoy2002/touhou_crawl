@@ -760,7 +760,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
 						{
 							ReleaseMutex(mutx);
-							soundmanager.playSound("elec");
+							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);
@@ -782,7 +782,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
 						{
 							ReleaseMutex(mutx);
-							soundmanager.playSound("elec");
+							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);

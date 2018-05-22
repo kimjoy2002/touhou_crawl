@@ -473,6 +473,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addSound("camera", "sound\\se\\camera.wav", false, true); //ok
 	addSound("rune", "sound\\se\\rune.wav", false, true); //ok
 	addSound("knife", "sound\\se\\knife.wav", false, true); //ok
+	addSound("thunder", "sound\\se\\thunder.wav", false, true); //ok
 	
 	
 

@@ -605,7 +605,7 @@ const mon_infor mondata[] = {
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,2,10,'D' },
 	
-	{MON_NIGHTMARE,15,1712,name_infor("¾Ç¸ùÀÇ Á¶°¢",true),&img_mons_nightmare,120,12,5,
+	{MON_NIGHTMARE,15,1712,name_infor("¾Ç¸ùÀÇ Á¶°¢",true),&img_mons_nightmare,112,12,5,
 	{33,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("°ø°Ý",true),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10,'%' },
 	

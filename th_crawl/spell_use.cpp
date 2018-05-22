@@ -3523,7 +3523,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			soundmanager.playSound("thunder");
 		}
 		vector<coord_def> vt_;
 		{

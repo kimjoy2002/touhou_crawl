@@ -23,6 +23,9 @@ void cccc(char *b, int s, char k)
 
 void sendScore(const char *c, const char *file)
 {
+	if (option_mg.getServerIp().size() == 0)
+		return;
+
 	NetClient client;
 
 	client.StartUp();

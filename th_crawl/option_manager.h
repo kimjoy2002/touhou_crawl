@@ -36,6 +36,9 @@ public:
 
 	void createNewFile(string fileName);
 
+	string getName() { return name; };
+
+
 	int getHeight() { return 600; };
 	int getWidth() { return 800; };
 	int getHeightCommon() { return height; };

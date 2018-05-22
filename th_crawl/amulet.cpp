@@ -126,7 +126,6 @@ bool chargingFinish(amulet_type kind, int value)
 			} else 
 			{
 				you.s_graze = 0;
-				printlog("더 이상 탄막을 그레이즈 하지 않는다.", true, false, false, CL_blue);
 			}
 		}
 		break; 

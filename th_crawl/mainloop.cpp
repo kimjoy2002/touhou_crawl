@@ -27,6 +27,7 @@
 #include "mapsearching.h"
 #include "soundmanager.h"
 
+#include "option_manager.h"
 
 
 
@@ -264,20 +265,20 @@ void charter_selete()
 	SetText() = "touhou crawl ";
 	SetText() += version_string;
 	SetText() += "\n동방프로젝트와 던전크롤의 동인게임\n\n";
-	if(load_name(user_name_file.c_str()))
+	string user_name = option_mg.getName();
+	if (user_name.size() != 0)
 	{
-		SetText() += "당신의 이름은 \"";
-		SetText() += you.user_name.name;
-		SetText() += "\" 이다.\n";
+		you.user_name.name = user_name;
 	}
-	else
-	{
-		SetText() += "당신의 이름은 \"";
-		SetText() += you.user_name.name;
-		SetText() += "\" 이다.\n";
-		SetText() += "user_name.txt에서 당신의 이름을 바꿀 수 있어.\n";
 
+	SetText() += "당신의 이름은 \"";
+	SetText() += you.user_name.name;
+	SetText() += "\" 이다.\n";
+
+	if (you.user_name.name.compare("이름없음") == 0) {
+		SetText() += "config.ini에서 당신의 이름을 바꿀 수 있어.\n";
 	}
+
 	SetDisplayTexture(&img_title);
 	ReleaseMutex(mutx);
 	waitkeyinput();	

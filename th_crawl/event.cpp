@@ -153,8 +153,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 5:
 		printlog("카나코는 말했다 : 항상 싸움의 후엔 체력을 채우는 습관을 들이렴.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : .키는 1턴휴식을, 5키는 100턴 휴식을 할 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 그리고 몬스터가 떨군 P템은 꼭 주워서 파워를 채우도록 해.", true, false, false, CL_warning);
+		printlog("카나코는 말했다 : .키는 1턴 휴식을, 5키는 100턴 휴식을 할 수 있어.", true, false, false, CL_warning);
+		printlog("카나코는 말했다 : m키를 눌러서 나오는 창에선 얻은 스킬 투자 방향을 정할 수 있어.", true, false, false, CL_warning);
 		printlog("카나코는 말했다 : 파워는 허기조절, 능력사용, 근접데미지 상승에 도움을 주지.", true, false, false, CL_warning);
 		return 1;
 	case 6:
@@ -165,7 +165,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (you.power > 150)
 			you.PowUpDown(-(you.power - 150), true);
 		printlog("카나코는 말했다 : 파워가 2.00이하가 되면 공격력이 감소해버린단다.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 적을 잡아서 P템을 먹는게 제일 좋지만 음식을 통해서도 회복이 가능하지.", true, false, false, CL_warning);
+		printlog("카나코는 말했다 : 적을 잡아서 나오는 P템을 먹거나 음식을 통해서 회복이 가능해.", true, false, false, CL_warning);
 		printlog("카나코는 말했다 : e키를 눌러서 빵을 먹으면 파워를 회복할 수 있어.", true, false, false, CL_warning);
 		return 1;
 	case 8:
@@ -237,15 +237,15 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case 24:
 		return 1;
 	case 25:
-		printlog("동방크롤에선 한손과 양손의 개념이 아직 없습니다. (이후 추가될 수 있습니다.)", true, false, false, CL_warning);
-		printlog("모든 무기는 한손무기라고 생각하고 사용해주세요.", true, false, false, CL_warning);
+		printlog("동방크롤에선 모든 무기를 한손이나 양손으로 들 수 있습니다.", true, false, false, CL_warning);
+		printlog("단, 몇몇 무기는 양손으로 들때 효율이 많이 떨어집니다.", true, false, false, CL_warning);
+		printlog("단검은 양손으로 써도 패널티가 없지만 다우징은 양손시 큰 패널티가 있습니다.", true, false, false, CL_warning);
 		return 1;
 	case 26:
 		printlog("몸통방어구엔 재질과 종류로 나뉘어있고 그외엔 보조방어구와 방패가 있습니다.", true, false, false, CL_warning);
 		printlog("갑옷엔 재질에 따라 장비패널티가 존재하여 합산되어 우측창에 표시됩니다.", true, false, false, CL_warning);
 		return 1;
 	case 27:
-
 		you.GiveSkillExp(SKT_ARMOUR, 1200, true);
 		you.GiveSkillExp(SKT_SHIELD, 300, true);
 		printlog("이 장비패널티는 힘과 갑옷,방패 스킬에 따라 감소됩니다.", true, false, false, CL_warning);
@@ -253,8 +253,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 28:
 		printlog("동방크롤엔 활이나 블로우건같은 원거리 무기가 없지만 모두 손으로 던질 수 있습니다.", true, false, false, CL_warning);
-		printlog("독침도 블로우건없이 손으로 던질 수 있으니 헷갈리지 말아주세요.", true, false, false, CL_warning);
-		printlog("모두 탄막 스킬에 영향을 받습니다.", true, false, false, CL_warning);
+		printlog("투척용단검, 투척용창, 철륜은 무기로도 쓸 수 있지만 투척용으로도 사용가능합니다.", true, false, false, CL_warning);
+		printlog("소모성 탄막과 투척용 무기 모두 탄막 스킬에 영향을 받습니다.", true, false, false, CL_warning);
 		return 1;
 	case 29:
 		printlog("동방크롤엔 허기의 개념이 없는 대신에 비슷한 P라는 게이지가 존재합니다.", true, false, false, CL_warning);
@@ -267,6 +267,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog("둘다 V로 발동이 가능하며 발동스킬에 영향을 받아 강력해집니다.", true, false, false, CL_warning);
 		return 1;
 	case 31:
+		printlog("부적은 돌죽의 아뮬렛에 대체되는 아이템입니다.", true, false, false, CL_warning);
+		printlog("낀 즉시 효과는 없지만 끼고 몬스터를 잡으면 퍼센티지가 채워집니다.", true, false, false, CL_warning);
+		printlog("100%가 되면 V키로 효과를 사용가능합니다. 일부는 끼기만 해도 효과가 있습니다.", true, false, false, CL_warning);
+		return 1;
+	case 32:
 		printlog("동방크롤엔 총 10개의 룬이 있고 조트의 방을 대체하는 하쿠레이 신사가 존재하여", true, false, false, CL_warning);
 		printlog("조트의 오브를 대체하는 음양옥이란 템을 주워서 탈출하면 게임에서 승리합니다.", true, false, false, CL_warning);
 		printlog("모자란 게임이지만 잘 부탁드립니다.", true, false, false, CL_warning);

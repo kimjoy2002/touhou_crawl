@@ -146,6 +146,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_TRASH_RUSH:
 	case SPL_SLEEP_SMITE:
 	case SPL_TARGET_ELEC:
+	case SPL_REIMU_BARRIER:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_MERMAID_SONG:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
@@ -174,8 +175,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
 	case SPL_THROW_DISH:
+	case SPL_THROW_AMULET:
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
+	case SPL_WARP_KICK:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_MACRO_BURST:
 		return (S_FLAG_CLOUD | S_FLAG_SPEAK | S_FLAG_DIREC ) & flag;
@@ -282,7 +285,9 @@ int SpellLength(spell_list skill)
 	case SPL_SLEEP_SMITE:
 	case SPL_DREAM_CALL:
 	case SPL_THROW_SWORD:
-	case SPL_THROW_KNIFE:
+	case SPL_THROW_KNIFE:	
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -394,6 +399,7 @@ int SpellLength(spell_list skill)
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
 	case SPL_SUMMON_ELEC_BALL:
+	case SPL_REIMU_BARRIER:
 	default:
 		return 0;		
 	}
@@ -606,7 +612,7 @@ const char* SpellString(spell_list skill)
 	case SPL_CALL_HOUND:
 		return "동료부르기";
 	case SPL_CANNON:
-		return "거대 대포";
+		return "음양탄";
 	case SPL_DOLLS_WAR:
 		return "돌즈워";
 	case SPL_FAKE_DOLLS_WAR:
@@ -697,6 +703,12 @@ const char* SpellString(spell_list skill)
 		return "나이프 던지기";
 	case SPL_THROW_PLAYER:
 		return "천수력남 던지기";
+	case SPL_THROW_AMULET:
+		return "부적 던지기";
+	case SPL_WARP_KICK:
+		return "아공혈";
+	case SPL_REIMU_BARRIER:
+		return "봉마진";
 	default:
 		return "알수없는 마법";
 	}
@@ -774,6 +786,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_DISH:
 	case SPL_SLEEP_SMITE:
 	case SPL_THROW_KNIFE:
+	case SPL_WARP_KICK:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -795,6 +808,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_ANCHOR:
 	case SPL_PSYCHOKINESIS:
 	case SPL_SUMMON_TRASH:
+	case SPL_THROW_AMULET:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -860,6 +874,7 @@ int SpellLevel(spell_list skill)
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_AFTERLITE:
 	case SPL_SANTUARY:
+	case SPL_REIMU_BARRIER:
 		return 9;
 	default:
 		return 0;
@@ -934,6 +949,8 @@ int SpellNoise(spell_list skill)
 	case SPL_TARGET_ELEC:
 	case SPL_THROW_SWORD:
 	case SPL_THROW_KNIFE:
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1019,6 +1036,7 @@ int SpellNoise(spell_list skill)
 	case SPL_FIRE_STORM:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
+	case SPL_REIMU_BARRIER:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1356,6 +1374,12 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_THROW_PLAYER:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_EARTH) : (SKT_ERROR);
+	case SPL_THROW_AMULET:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_WARP_KICK:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_REIMU_BARRIER:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1513,6 +1537,9 @@ int SpellCap(spell_list skill)
 	case SPL_THROW_SWORD:
 	case SPL_THROW_KNIFE:
 	case SPL_THROW_PLAYER:
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
+	case SPL_REIMU_BARRIER:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1770,6 +1797,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	}
 	case SPL_SANTUARY:
 		return (mon->s_exhausted ? false : (mon->hp>mon->max_hp*0.3f ? false : true));
+	case SPL_REIMU_BARRIER:
+		return (!mon->s_exhausted && you.god != GT_YUKARI && you.s_dimension == 0);
 	default:
 		return true;
 	}

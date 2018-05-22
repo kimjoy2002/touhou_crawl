@@ -28,6 +28,7 @@
 #include "rect.h"
 #include "soundmanager.h"
 #include "tribe.h"
+#include "mon_infor.h"
 extern players you;
 extern HANDLE mutx;
 
@@ -50,7 +51,7 @@ bool CheckMonsterPassive(int turn)
 	}
 	return true;
 }
-
+bool orbRun();
 interupt_type players::TurnEnd(bool *item_delete_)
 {
 	you.maybeAction();
@@ -1024,6 +1025,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		drowned = false;
 	}
 
+	if (you.haveOrb()) {
+		orbRun();
+
+	}
+
+
+
 
 	if(s_paralyse || you.s_sleep < 0)
 	{
@@ -1032,6 +1040,63 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	return inter;
 }
+
+bool orbRun() {
+	bool isReimu_ = false;
+	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+	{
+		if (it->isLive() && it->id == MON_REIMU && env[current_level].isInSight(it->position))
+		{
+			isReimu_ = true;
+		}
+	}
+	if (!isReimu_) {
+		//시야에 레이무가 없을 경우
+		you.reimu_turn++;
+	}
+	else {
+		you.reimu_turn = 0;
+
+	}
+
+
+	if (you.reimu_turn >= 150){
+		for (int i = 0; i < MAXLEVEL; i++) {
+			for (auto it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++) {
+				if (it->isLive() && it->id == MON_REIMU) {
+					it->dead(PRT_NEUTRAL, false, true);
+				}
+			}
+		}
+
+		if (monster* mon_ = BaseSummon(MON_REIMU, 100, false, true, 3, &you, you.position, SKD_OTHER, -1))
+		{
+			if (you.reimu_level >= 2) {
+				//두번째 등장할때부터 봉마진을 들고 옴
+				mon_->spell_lists.push_back(spell(SPL_REIMU_BARRIER, 15));
+			}
+			if (you.reimu_level >= 4) {
+				//네번째부턴 음양탄을 착용하고온다.
+				mon_->spell_lists.push_back(spell(SPL_CANNON, 8 + min(42, 2 *(you.reimu_level-4))));
+			}
+			mon_->LevelUpdown(you.reimu_level++, 15.0f);
+
+
+			mon_->flag &= ~M_FLAG_SUMMON;
+			mon_->ReturnEnemy();
+			printlog("틈새로부터 열받은 하쿠레이 신사의 무녀가 나타났다! ", true, false, false, CL_danger);
+
+			MoreWait();
+		}
+		you.reimu_turn = 0;
+		return true;
+	}
+	return false;
+}
+
+
+
+
 bool players::TraningStealth()
 {	
 	int panlty = equipment[ET_ARMOR]?-equipment[ET_ARMOR]->value2:0;
@@ -1060,7 +1125,7 @@ bool players::isSightnonblocked(coord_def c)
 						
 			coord_def check_pos_ = (*it);
 						
-			if(you.s_dimension)
+			if(you.s_dimension && you.god == GT_YUKARI)
 			{
 				if(abs(god_value[GT_YUKARI][0] - check_pos_.x)>8)
 					check_pos_.x += (god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;

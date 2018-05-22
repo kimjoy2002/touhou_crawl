@@ -193,8 +193,8 @@ public:
 	bool tension_turn; //이번턴에 이미 텐션을 체크했는가
 	bool already_swap; //swap했는가
 	int ziggurat_level;
-
-
+	int reimu_level;
+	int reimu_turn;
 
 
 

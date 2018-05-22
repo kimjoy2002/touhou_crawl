@@ -1275,6 +1275,11 @@ void Open_door()
 
 bool CheckDimension()
 {
+	if (you.god != GT_YUKARI) {
+		printlog("결계로 인해 계단을 이용할 수 없다!", true, false, false, CL_danger);
+		return false;
+	}
+
 
 	while(1)
 	{

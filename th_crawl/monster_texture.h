@@ -257,6 +257,7 @@ extern textures img_named_mai;
 extern textures img_named_satono;
 extern textures img_named_kokoro[4];
 extern textures img_named_sumireko;
+extern textures img_named_reimu2;
 
 
 

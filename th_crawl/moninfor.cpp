@@ -693,7 +693,8 @@ string GetMonsterInfor(monster *it)
 		case MON_REIMU:
 			text_ += "그 유명한 하쿠레이의 무녀다.\n";
 			text_ += "음양옥을 훔쳤다는 당신을 쫓기위해 날라왔다.\n";
-			text_ += "도망쳐! 분노한 그녀에겐 그 어떤 공격도 통하지않는다구!\n";
+			text_ += "그녀를 이기더라도 죽지않은채로 시간이 지나면 더 강해져서 부활할 것이다.\n";
+			text_ += "결국 그녀를 따돌리고 이 던전에서 탈출해야 당신의 모험이 끝날 것이다.\n";
 			break;
 		case MON_ALICE:
 			text_ += "마법의 숲에 살고 있던 칠색의 인형술사.\n";
@@ -982,6 +983,13 @@ string GetMonsterInfor(monster *it)
 	}
 	text_ += "\n\n";
 
+
+	if(it->id == MON_REIMU)
+	{
+		char temp[100];
+		sprintf_s(temp, 100, "이 레이무는 %d번 컨티뉴했다.\n", max(0,you.reimu_level - 1));
+		text_ += temp;
+	}
 
 	{
 		int mon_level_ = it->level;

@@ -66,7 +66,8 @@ players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
-as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE),
+as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0),
+reimu_level(0), reimu_turn(0) , search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE),
 prev_action_key(), equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
@@ -164,7 +165,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, tension_turn);
 	SaveData<bool>(fp, already_swap);
 	SaveData<int>(fp, ziggurat_level);
-	
+	SaveData<int>(fp, reimu_level);
+	SaveData<int>(fp, reimu_turn);
+
 	SaveData<int>(fp, buff_list.size());
 	for(list<buff_class>::iterator it=buff_list.begin();it!=buff_list.end();it++)
 	{
@@ -378,6 +381,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, tension_turn);
 	LoadData<bool>(fp, already_swap);
 	LoadData<int>(fp, ziggurat_level);
+	LoadData<int>(fp, reimu_level);
+	LoadData<int>(fp, reimu_turn);
 	
 
 	int size_=0;
@@ -702,7 +707,7 @@ coord_def players::GetDisplayPos()
 	}
 	else
 	{
-		return coord_def(god_value[GT_SUWAKO][0],god_value[GT_SUWAKO][1]);
+		return coord_def(god_value[GT_YUKARI][0],god_value[GT_YUKARI][1]);
 	}
 }
 int players::move(short_move x_mov, short_move y_mov)
@@ -721,7 +726,7 @@ int players::move(short_move x_mov, short_move y_mov)
 
 	int move_x_ =  position.x+x_mov, move_y_ = position.y+y_mov;
 	
-	if(you.s_dimension)
+	if(you.s_dimension && (you.god == GT_YUKARI))
 	{
 		if(abs(move_x_ - you.god_value[GT_YUKARI][0])>8)
 		{
@@ -3675,7 +3680,7 @@ interupt_type players::resetLOS(bool speak_)
 			//if(abs(position.x-x)+abs(position.y-y)>8)
 
 			bool out_of_sight = pow((float)abs(position.x-x),2)+pow((float)abs(position.y-y),2)>64;
-			if((out_of_sight && !you.s_dimension) || env[current_level].DisableMove(coord_def(x,y),true))
+			if((out_of_sight && !(you.s_dimension && you.god == GT_YUKARI)) || env[current_level].DisableMove(coord_def(x,y),true))
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 
@@ -3690,7 +3695,7 @@ interupt_type players::resetLOS(bool speak_)
 				for(int i=RT_BEGIN;i!=RT_END;i++)
 				{
 					coord_def goal_ = coord_def(x,y);
-					if(you.s_dimension && out_of_sight)
+					if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 					{
 						if(abs(position.x - goal_.x)>8)
 							goal_.x += (position.x - goal_.x)>0?17:-17;
@@ -3718,7 +3723,7 @@ interupt_type players::resetLOS(bool speak_)
 						
 						coord_def check_pos_ = (*it);
 						
-						if(you.s_dimension && out_of_sight)
+						if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 						{
 							if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
 								check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
@@ -3773,7 +3778,7 @@ interupt_type players::resetLOS(bool speak_)
 				{
 					coord_def check_pos_ = coord_def(x,y);
 						
-					//if(you.s_dimension && out_of_sight)
+					//if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 					//{
 					//	if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
 					//		check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?-17:17;
@@ -4039,6 +4044,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		ReleaseMutex(mutx);
 		if (speak_)
 			soundmanager.playSound("rune");
+		reimu_turn = 100;
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}

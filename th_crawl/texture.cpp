@@ -948,6 +948,7 @@ textures img_named_kokoro[] =
 	textures(&texture_monster01, 211, 255)
 };
 textures img_named_sumireko(&texture_monster01, 215, 255);
+textures img_named_reimu2(&texture_monster01, 198, 255);
 
 
 
@@ -3015,6 +3016,8 @@ int texturetoint(textures* input)
 		return 500;
 	else if (input == &img_mon_kaguya_quiz[4])
 		return 501;
+	else if (input == &img_named_reimu2)
+		return 502; 
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4046,6 +4049,8 @@ textures* inttotexture(int input)
 		return &img_mon_kaguya_quiz[3];
 	case 501:
 		return &img_mon_kaguya_quiz[4];
+	case 502:
+		return &img_named_reimu2;
 	default:
 		return &img_mons_default;
 	}

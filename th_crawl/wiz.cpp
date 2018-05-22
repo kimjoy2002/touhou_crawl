@@ -315,9 +315,9 @@ void wiz_mode()
 		{
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
-			printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
-			printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
-			printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
+			printlog("d - 던전 t - 신전 l - 안개의 호수  m - 요괴의 산  s - 홍마관  b - 홍마관도서관", true, false, false, CL_help);
+			printlog("u - 홍마관지하 a - 미궁의죽림 e - 영원정 y - 윳쿠리둥지 p - 짐승길 h - 지령전", true, false, false, CL_help);
+			printlog("r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사 ! - 광몽의 세계", true, false, false, CL_help);
 			printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)

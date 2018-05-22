@@ -1530,7 +1530,18 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					if (sight_) {
-						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴했다." :  "죽였다.");
+						{
+							char* c_ = Get_Speak(id, this, MST_DEAD);
+							if (c_)
+								printlog(c_, true, false, false, CL_normal);
+						}
+
+						if (id == MON_REIMU) {
+							printarray(true, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "틈새속으로 사라졌다.");
+						}
+						else {
+							printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴되었다. " : "죽었다. ");
+						}
 
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
@@ -2207,7 +2218,14 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			else {
 				soundmanager.playSound("kill");
 			}
-			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. ");
+			{
+				char* c_ = Get_Speak(id, this, MST_DEAD);
+				if (c_)
+					printlog(c_, true, false, false, CL_normal);
+			}
+
+			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), 
+				id == MON_REIMU ? "틈새속으로 사라졌다." : (flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. "));
 
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
 				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
@@ -3642,6 +3660,12 @@ bool monster::SetGhost(int ghost_)
 		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다. ");	
 		return false;
 	}
+	if (id == MON_REIMU)
+	{
+		printlog("낙원의 멋진 무녀는 모든 것으로부터 속박되지않는다.", true, false, false, CL_normal);
+		return false;
+	}
+
 	if (dream)
 	{
 		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "꿈의 주민이기에 속박할 수 없다. ");

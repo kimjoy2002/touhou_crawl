@@ -1573,7 +1573,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.s_dimension)
 			{
 				stateDraw.addState("차원고정", you.s_dimension>3 ? CL_yukari : CL_blue,
-					"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.", this);
+				 (you.god == GT_YUKARI)?
+						"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.":
+					"강제로 결계에 의해 차원이 고정되어 지속시간동안 결계 밖으로 나갈 수 없습니다!" , this);
 			}
 			if(you.s_mirror)
 			{

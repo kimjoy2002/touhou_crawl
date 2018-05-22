@@ -1817,6 +1817,11 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=2;
 		break;
 	case MON_REIMU:
+		mon->fire_resist = 1;
+		mon->elec_resist = 1;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	case MON_ALICE:
 		mon->elec_resist=1;

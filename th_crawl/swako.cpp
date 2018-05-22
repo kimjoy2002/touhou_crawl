@@ -10,6 +10,7 @@
 #include "swako.h"
 #include "player.h"
 #include "skill_use.h"
+#include "god.h"
 
 
 
@@ -353,6 +354,10 @@ bool GetSwakoAbility(int level, bool plus)
 			you.Ability(SKL_SWAKO_MISYAGUZI,true,!plus);
 			break;
 		case SWAKO_5_SWAKO_HAT:
+			if (you.suwako_meet == 1 && plus) {
+				GodGift(GT_SUWAKO, you.piety);
+				you.suwako_meet = 2;
+			}
 			return true;
 		}
 		if((swako_5_power)you.god_value[GT_SUWAKO][4] != SWAKO_5_SWAKO_HAT)

@@ -2044,6 +2044,11 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break; 
+	case MON_MISYAGUZI:
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	}
 }

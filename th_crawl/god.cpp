@@ -339,7 +339,7 @@ bool GetGodAbility(int level, bool plus)
 				you.god_value[GT_SUWAKO][1] = randA(SWAKO_2_LAST-1);
 				you.god_value[GT_SUWAKO][2] = randA(SWAKO_3_LAST-1);
 				you.god_value[GT_SUWAKO][3] = randA(SWAKO_4_LAST-1);
-				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1 -2);
+				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1);
 				you.suwako_meet = 1;
 			}
 			break;

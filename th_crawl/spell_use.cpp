@@ -4674,7 +4674,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		t.image = &img_item_armor_helmet[4];
 		t.equip_image = &img_play_item_hat[4];
 		t.name.name = "¸®º»";
-		t.name.name_type = true;
+		t.name.name_type = true; 
 		item_list_->push_back(t);
 		break;
 	}

@@ -1544,7 +1544,16 @@ bool skill_swako_sleep(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_ = false;
+	if (monster* mon_ = BaseSummon(MON_MISYAGUZI, rand_int(90, 120), true, false, 2, order, target, SKD_SUMMON_MISYAGUZI, -1))
+	{
+		printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+
+		soundmanager.playSound("summon");
+		return_ = true;
+		enterlog();
+	}
+	return return_;
 }
 bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 {

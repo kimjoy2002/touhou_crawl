@@ -978,7 +978,8 @@ string GetSkillInfor(skill_list skill)
 		text_ += "일정 시간이 지나면 잠에서 깨지만 그 반작용으로 짧은 감속에 걸린다.\n";
 		break;
 	case SKL_SWAKO_MISYAGUZI:
-		text_ += "강력한 미샤구지님을 잠시동안 소환한다.\n";
+		text_ += "스와코님이 사역하고있는 강력한 미샤구지님을 잠시동안 소환한다.\n";
+		text_ += "1번에 하나의 미샤구지님만 소환할 수 있지만 강력한 저주 공격을 가하는 듬직한 소환수다.\n";
 		break;
 	case SKL_HINA_1:
 		text_ += "저주가 걸려있는 장비의 마이너스 인챈트를 플러스로 바꾼다.\n";

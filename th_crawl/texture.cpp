@@ -949,6 +949,7 @@ textures img_named_kokoro[] =
 };
 textures img_named_sumireko(&texture_monster01, 215, 255);
 textures img_named_reimu2(&texture_monster01, 198, 255);
+textures img_mons_misyaguzi(&texture_monster01, 199, 255);
 
 
 
@@ -1071,13 +1072,14 @@ textures img_play_item_body[17] = {
 	textures(&texture_players01, 207),
 	textures(&texture_players01, 208)
 };
-textures img_play_item_hat[6] = {
+textures img_play_item_hat[7] = {
 	textures(&texture_players01, 224),
 	textures(&texture_players01, 225),
 	textures(&texture_players01, 226),
 	textures(&texture_players01, 227),
 	textures(&texture_players01, 228),
-	textures(&texture_players01, 229)
+	textures(&texture_players01, 229),
+	textures(&texture_players01, 230)
 };
 textures img_play_item_shield[4] = {
 	textures(&texture_players01, 256),
@@ -1128,7 +1130,8 @@ textures img_item_armor_helmet[] = {
 	textures(&texture_item02, 76, 255),
 	textures(&texture_item02, 77, 255),
 	textures(&texture_item02, 78, 255),
-	textures(&texture_item02, 79, 255)
+	textures(&texture_item02, 79, 255),
+	textures(&texture_item02, 74, 255)
 };
 textures img_item_armor_armour_0(&texture_item01, 136, 255);
 textures img_item_armor_armour_1(&texture_item01, 137, 255);
@@ -3018,6 +3021,12 @@ int texturetoint(textures* input)
 		return 501;
 	else if (input == &img_named_reimu2)
 		return 502; 
+	else if (input == &img_item_armor_helmet[6])
+		return 503;
+	else if (input == &img_play_item_hat[6])
+		return 504;
+	else if (input == &img_mons_misyaguzi)
+		return 505;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4051,6 +4060,12 @@ textures* inttotexture(int input)
 		return &img_mon_kaguya_quiz[4];
 	case 502:
 		return &img_named_reimu2;
+	case 503:
+		return &img_item_armor_helmet[6];
+	case 504:
+		return &img_play_item_hat[6];
+	case 505:
+		return &img_mons_misyaguzi;
 	default:
 		return &img_mons_default;
 	}

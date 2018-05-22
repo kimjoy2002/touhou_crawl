@@ -977,6 +977,10 @@ string GetMonsterInfor(monster *it)
 			text_ += "봉래산에 있으며 뿌리는 은, 줄기와 잎사귀는 금이며 과실은 옥으로 되어있다고 한다.\n";
 			text_ += "이 나뭇가지를 잘 살펴보니 탄막이 열려있는 것 같다.\n";
 			break;
+		case MON_MISYAGUZI:
+			text_ += "스와코가 사역하는 공포의 신. 하얀 뱀의 모양을 하고있다.\n";
+			text_ += "미샤구지의 이빨은 저주가 담겨있어서 물린 적은 저항할수없는 감속과 독이 걸린다.\n";
+			break;
 		default:
 			text_ += "찾아볼 수 없는 몬스터\n";
 		}

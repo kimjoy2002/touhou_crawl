@@ -699,7 +699,7 @@ const mon_infor mondata[] = {
 	
 	{MON_NESI,15,1604,name_infor("네시",false),&img_mons_nesi,120,9,9,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_NONE_STAIR | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_CANT_GROUND,99,1,10,'8' },
+	M_FLAG_NO_ATK | M_FLAG_NONE_STAIR | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_CANT_GROUND,99,1,10,'8' },
 	
 	{MON_SANGHAI,15,1,name_infor("상해 인형",true),&img_mons_sanghai[0],80,5,22,
 	{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor("공격",true),name_infor(),name_infor()},
@@ -931,4 +931,9 @@ const mon_infor mondata[] = {
 	{ MON_KAGUYA_QUIZ_4, 15, 1, name_infor("봉래의 옥의 가지", true), &img_mon_kaguya_quiz[4], 10, 0, 5,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
 		M_FLAG_NO_ATK | M_FLAG_NONE_MOVE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_SILENCE | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10, '*' },
+
+	{ MON_MISYAGUZI,15,1604,name_infor("미샤구지",false),&img_mons_misyaguzi,160,9,9,
+	{ 49,0,0 },{ ATT_CURSE,ATT_NONE,ATT_NONE },{ name_infor("공격",true),name_infor(),name_infor() },
+	M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM,99,1,10,'8' },
+		
 };

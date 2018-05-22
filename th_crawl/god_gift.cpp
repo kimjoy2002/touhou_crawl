@@ -73,8 +73,10 @@ bool GodGift(god_type god, int piety)
 	{
 	case GT_ERROR:
 	case GT_NONE:
-	case GT_SUWAKO:
 		return false;
+	case GT_SUWAKO:
+		swako_gift(true);
+		return true;
 	case GT_JOON_AND_SION:
 		joon_sion_gift(true);
 		return true;
@@ -154,6 +156,38 @@ struct compare {
 	{return (a.level != b.level)?a.level < b.level:a.exp<a.exp;}
 };
 
+void swako_gift(bool speak_) {
+	item_infor t;
+	makeitem(ITM_ARMOR_HEAD, 1, &t);
+	t.image = &img_item_armor_helmet[6];
+	t.equip_image = &img_play_item_hat[6];
+	t.name.name = "스와코의 모자";
+	t.name.name_type = false;
+	item* item_ = env[current_level].MakeItem(you.position, t);
+	MakeArtifact(item_, 2);
+
+	bool see_invi_ = false;
+	for (auto it = item_->atifact_vector.begin(); it != item_->atifact_vector.end(); it++) {
+		if (it->kind == RGT_SEE_INVISIBLE) {
+			see_invi_ = true;
+		}
+	}
+	if (!see_invi_) {
+		item_->atifact_vector.push_back(atifact_infor(RGT_SEE_INVISIBLE, 1));
+	}
+	item_->value4 = rand_int(4, 5);
+
+	if (speak_)
+	{
+		printlog("당신의 발밑에 무언가 나타났다!", true, false, false, CL_dark_good);
+
+		char temp[200];
+		sprintf_s(temp, 200, "스와코에게 선물을 받았다.");
+		AddNote(you.turn, CurrentLevelString(), temp, CL_help);
+
+		MoreWait();
+	}
+}
 void joon_sion_gift(bool speak_)
 {
 	if (speak_) {

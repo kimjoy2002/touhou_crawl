@@ -765,7 +765,7 @@ bool Dump(int type, string *filename_)
 
 
 	fclose(fp);
-	if(isNormalGame() && type == 1 && !wiz_list.wizard_mode)
+	if((isNormalGame() || isArena() || isSprint()) && type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
 	if(filename_)
 	{

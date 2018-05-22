@@ -47,7 +47,9 @@ enum spell_list
 	SPL_KOKORO_CHANGE, SPL_THUNDER_BOLT, SPL_SANTUARY,
 	SPL_MISTIA_SONG, SPL_MESS_CONFUSION, SPL_THROW_DISH,
 	SPL_SLEEP_SMITE, SPL_TARGET_ELEC, SPL_SUMMON_ELEC_BALL,
-	SPL_DREAM_CALL, SPL_HYPER_BEAM,
+	SPL_DREAM_CALL, SPL_HYPER_BEAM, SPL_KAGUYA_SPELL,
+	SPL_THROW_SWORD, SPL_THROW_KNIFE, SPL_THROW_PLAYER, SPL_THROW_AMULET,
+	SPL_WARP_KICK, SPL_REIMU_BARRIER,
 	SPL_MAX
 };
 
@@ -200,6 +202,7 @@ int SkillLength(skill_list skill);
 const char* SkillString(skill_list skill); //스킬 이름
 int SkillCap(skill_list skill);//스킬파워 상한
 int SkillNoise(skill_list skill); //스킬 소음
+int SkillSpeed(skill_list skill);
 int SkillPow(skill_list skill);//스킬의 파워를 리턴
 int SkillDiffer(skill_list skill);//100을 최고로 성공률을 리턴한다.
 int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3);//간단한 성공률 공식을 세운다.
@@ -228,9 +231,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
 bool CheckDangerSpell(int danger_);
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
-void SpellUse();
+void SpellUse(char auto_, int auto_direc_);
 void SpellView();
-void SkillUse();
+void SkillUse(char auto_);
 
 
 string GetSpellInfor(spell_list spell);

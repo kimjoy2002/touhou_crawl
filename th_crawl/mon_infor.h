@@ -62,7 +62,8 @@ enum monster_flag
 	M_FLAG_INANIMATE = 1<<23, //무생물
 	M_FLAG_NO_STATE = 1<<24, //상태 표시 안됨
 	M_FLAG_SILENCE = 1 << 25, //침묵에 면역이다.
-	M_FLAG_SHIELD = 1 << 26 //지역을 지킨다.
+	M_FLAG_SHIELD = 1 << 26, //지역을 지킨다.
+	M_FLAG_RESIST_BLIZARD = 1 << 27
 };
 
 

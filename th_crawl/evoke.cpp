@@ -16,6 +16,7 @@
 #include "weapon.h"
 #include "god.h"
 #include "rect.h"
+#include "speak.h"
 
 
 const char *evoke_string[EVK_MAX]=
@@ -26,7 +27,8 @@ const char *evoke_string[EVK_MAX]=
 	"4척 매직봄",
 	"오쿠리쵸친",
 	"공중어뢰",
-	"요술망치"
+	"요술망치",
+	"카메라"
 };
 const bool evoke_string_is[EVK_MAX]=
 {
@@ -35,6 +37,7 @@ const bool evoke_string_is[EVK_MAX]=
 	true,
 	true,
 	true,
+	false,
 	false,
 	false
 };
@@ -47,7 +50,7 @@ int getEvokeItem() {
 	random_evoke.push(EVK_AIR_SCROLL, 10);
 	random_evoke.push(EVK_BOMB, 10);
 	random_evoke.push(EVK_GHOST_BALL, 10);
-	//random_evoke.push(EVK_DREAM_SOUL, 2); //안나옴
+	random_evoke.push(EVK_DREAM_SOUL, 10);
 	return random_evoke.pop();
 }
 
@@ -71,7 +74,8 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	kind_ == EVK_GHOST_BALL? &img_item_evo_ghost_ball:
 	kind_ == EVK_SKY_TORPEDO? &img_item_evo_sky_torpedo:
 	kind_ == EVK_MAGIC_HAMMER ? &img_item_evo_hammer :
-		&img_mons_default;
+	kind_ == EVK_CAMERA ? &img_item_broken_camera:
+	&img_mons_default;
 	t->name.name = evoke_string[kind_];
 	t->name.name_type = evoke_string_is[kind_];
 	t->weight = 1.0f;
@@ -91,7 +95,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target);
 
 
 
-bool evoke_evokable(evoke_kind kind)
+bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
 	{
@@ -116,7 +120,7 @@ bool evoke_evokable(evoke_kind kind)
 	{
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		coord_def target_;
-		if(Direc_Throw(&target_))
+		if(Direc_Throw(auto_direc_, &target_))
 		{
 			if(EvokeEvokable(kind, false, target_))
 			{
@@ -135,7 +139,7 @@ bool evoke_evokable(evoke_kind kind)
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
 		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
-		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind)))
+		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind), auto_))
 		{
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 			you.SetBattleCount(30);
@@ -187,6 +191,8 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 3;
 	case EVK_MAGIC_HAMMER:
 		return 100;
+	case EVK_CAMERA:
+		return 100;
 	default:
 		return false;
 	}
@@ -199,6 +205,7 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 	{
 	case EVK_BOMB:
 	case EVK_SKY_TORPEDO:
+	case EVK_CAMERA:
 		return false;
 	case EVK_PAGODA:
 		return (S_FLAG_PENETRATE) & flag;
@@ -216,6 +223,8 @@ int EvokeLength(evoke_kind skill)
 {
 	switch(skill)
 	{
+	case EVK_CAMERA:
+		return 4;
 	case EVK_BOMB:
 		return 6;
 	case EVK_PAGODA:
@@ -261,7 +270,12 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 {
 	if(target == you.position && !EvokeFlagCheck(kind,S_FLAG_SEIF) && !EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		printlog("자살할거야?",true,false,false,CL_small_danger);	
+		if (kind == EVK_CAMERA) {
+			printlog("셀카를 찍을꺼야?", true, false, false, CL_small_danger);
+		}
+		else {
+			printlog("자살할거야?", true, false, false, CL_small_danger);
+		}
 		return false;
 	}
 	int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
@@ -518,6 +532,98 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			}
 			you.SetParadox(0);
 			return true;
+		}
+		return false;
+	}
+	case EVK_CAMERA:
+	{
+		unit *goal_ = env[current_level].isMonsterPos(target.x, target.y, &you);
+
+		if (goal_ == NULL ||
+			!goal_->isView()) {
+			printlog("허공을 찍을 여유는 없다. ", true, false, false, CL_normal);
+			return false;
+		}
+		if (!goal_->isplayer()) {
+			monster* mon_ = (monster*)goal_;
+			if (!mon_->isUnique()) {
+				printlog("좀 더 이쁜 미소녀를 찍고 싶은데. ", true, false, false, CL_normal);
+				return false;
+			}
+			if (mon_->id == MON_FORTUNE_TELLER) {
+				printlog("남자는 찍고 싶지 않아. ", true, false, false, CL_danger);
+				return false;
+			}
+		}
+
+
+		beam_iterator beam(you.position, target);
+		if (CheckThrowPath(you.position, target, beam))
+		{
+			beam.init();
+			bool loop_ = true;
+			while (loop_)
+			{
+				if (beam.end())
+					loop_ = false;
+
+				beam_iterator temp = beam;
+				unit *unit_ = env[current_level].isMonsterPos(temp->x, temp->y, &you);
+				if (unit_)
+				{
+					if ((*temp) != target && unit_->isView()) {
+						printlog("누군가가 사진을 찍는걸 방해하고 있어! ", true, false, false, CL_normal);
+						return false;
+					}
+					if (unit_ == goal_ && !unit_->isplayer()) {
+						monster* mon_ = (monster*)unit_;
+						env[current_level].MakeNoise(you.position, 8, NULL);
+						printlog("찰칵! ", false, false, false, CL_warning);
+						soundmanager.playSound("camera");
+
+						if (mon_->id == MON_SAKUYA && !mon_->s_confuse
+							&& !mon_->s_paralyse &&  mon_->state.GetState() != MS_SLEEP)
+						{
+							if (you.s_the_world) {
+								printlog("내가 시간을 멈추었다...", true, false, false, CL_warning);
+
+							}
+							else {
+								mon_->Blink(10);
+								if (mon_->position != target) {
+									printlog("그러나 촬영 대상이 사라졌다! ", true, false, false, CL_warning);
+									return true;
+								}
+							}
+						}
+
+
+
+						if (!mon_->s_paralyse && !mon_->s_confuse) {
+							char* c_ = Get_Speak(mon_->id, mon_, MST_CAMERA);
+							if (c_ && (env[current_level].isInSight(mon_->position)))
+								printlog(c_, true, false, false, CL_normal);
+						}
+
+						item_infor t;
+						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
+						it->name.name = mon_->name.name + "의 " + it->name.name;
+						it->value2 = mon_->id;
+						if (it->value2 == MON_KOKORO1 ||
+							it->value2 == MON_KOKORO2 ||
+							it->value2 == MON_KOKORO3)
+						{
+							it->value2 = MON_KOKORO;
+						}
+
+						if (you.additem(it, true) > 0) {
+							env[current_level].DeleteItem(it);
+						}
+						return true;
+					}
+				}
+				beam++;
+			}
 		}
 		return false;
 	}

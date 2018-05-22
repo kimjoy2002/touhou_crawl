@@ -600,7 +600,8 @@ void start_mainmenu()
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'t',5,temp,true,select_job,19);
 	temp = "실종자: 우연히 환상향에 흘러들어가버린 우리들이다?\n";
-	temp += "미구현.\n\n\n";
+	temp += "음식과 전혀 전투에 도움되지않는 카메라만 들고 시작한다.\n";
+	temp += "아무런 능력도 힘도 없지만 죽기전에 기념촬영 정도는 할 수 있을 것 같다.\n\n\n";
 	temp += "같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.\n";
 	m_mgr.menu_input_puls(4,'u',5,temp,true,select_job,20);
 	m_mgr.menu_input_puls(4,VK_ESCAPE,3,"",false,NULL,0);

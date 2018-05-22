@@ -27,6 +27,7 @@
 #include "mapsearching.h"
 #include "soundmanager.h"
 
+#include "option_manager.h"
 
 
 
@@ -35,7 +36,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver0.91";
+const char *version_string = "ver1.0";
 
 
 void Initialize();
@@ -264,20 +265,20 @@ void charter_selete()
 	SetText() = "touhou crawl ";
 	SetText() += version_string;
 	SetText() += "\n동방프로젝트와 던전크롤의 동인게임\n\n";
-	if(load_name(user_name_file.c_str()))
+	string user_name = option_mg.getName();
+	if (user_name.size() != 0)
 	{
-		SetText() += "당신의 이름은 \"";
-		SetText() += you.user_name.name;
-		SetText() += "\" 이다.\n";
+		you.user_name.name = user_name;
 	}
-	else
-	{
-		SetText() += "당신의 이름은 \"";
-		SetText() += you.user_name.name;
-		SetText() += "\" 이다.\n";
-		SetText() += "user_name.txt에서 당신의 이름을 바꿀 수 있어.\n";
 
+	SetText() += "당신의 이름은 \"";
+	SetText() += you.user_name.name;
+	SetText() += "\" 이다.\n";
+
+	if (you.user_name.name.compare("이름없음") == 0) {
+		SetText() += "config.ini에서 당신의 이름을 바꿀 수 있어.\n";
 	}
+
 	SetDisplayTexture(&img_title);
 	ReleaseMutex(mutx);
 	waitkeyinput();	
@@ -479,35 +480,35 @@ void MainLoop()
 		switch(char_)
 		{
 		case 'k':
-			Move(coord_def(you.position.x,you.position.y-1));  //위
+			action_Move('k', coord_def(you.position.x,you.position.y-1));  //위
 			break;
 		case 'j':
-			Move(coord_def(you.position.x,you.position.y+1)); //아래
+			action_Move('j', coord_def(you.position.x,you.position.y+1)); //아래
 			break;
 		case 'h':
-			Move(coord_def(you.position.x-1,you.position.y)); //왼쪽
+			action_Move('h', coord_def(you.position.x-1,you.position.y)); //왼쪽
 			break;
 		case 'l':
-			Move(coord_def(you.position.x+1,you.position.y)); //오른쪽
+			action_Move('l', coord_def(you.position.x+1,you.position.y)); //오른쪽
 			break;
 		case 'b':
-			Move(coord_def(you.position.x-1,you.position.y+1));
+			action_Move('b', coord_def(you.position.x-1,you.position.y+1));
 			break;
 		case 'n':
-			Move(coord_def(you.position.x+1,you.position.y+1));
+			action_Move('n', coord_def(you.position.x+1,you.position.y+1));
 			break;
 		case 'y':
-			Move(coord_def(you.position.x-1,you.position.y-1));
+			action_Move('y', coord_def(you.position.x-1,you.position.y-1));
 			break;
 		case 'u':
-			Move(coord_def(you.position.x+1,you.position.y-1));
+			action_Move('u', coord_def(you.position.x+1,you.position.y-1));
 			break;
 		case 'x': //주위탐색
 			Search();
 			break;
 		case 's': //턴스킵
 		case '.': //턴스킵
-			turn_skip();
+			action_turn_skip();
 			break;
 		case 'g':
 		case ',': //줍기
@@ -551,13 +552,13 @@ void MainLoop()
 				dungeonView();
 			break;
 		case 'e': //먹기
-			Eatting();
+			Eatting(0);
 			break;
 		case 'q': //마시기
-			Drinking();
+			Drinking(0);
 			break;
 		case 'r': //읽기
-			Reading();
+			Reading(0);
 			break;
 		case 'm': //스킬정보창
 			skill_view();
@@ -585,7 +586,7 @@ void MainLoop()
 			Wide_Search();
 			break;
 		case 'f': //던지기(빠른)
-			Quick_Throw(you.GetThrowIter(),you.GetTargetIter());
+			Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), false);
 			break;
 		case 'F': //던지기(선택)
 			Select_Throw();
@@ -629,31 +630,30 @@ void MainLoop()
 		//	break;
 		case 'v':
 		case 'V':
-			Spelllcard_Evoke();
+			Spelllcard_Evoke(0);
 			break;
 		case 'p':
 			Pray();
 			break;
-			/*
 		case '+':
 			VolumeUp();
 			break;
 		case '-':
 			VolumeDown();
-			break;*/
+			break;
 		case '#':
 			if(Dump(0,NULL))
 				printlog("덤프에 성공했습니다.",true,false,false,CL_normal);
 			break;
 		case 'Z':
 		case 'z':
-			SpellUse();
+			SpellUse(0, 0);
 			break;
 		case 'I':
 			SpellView();
 			break;
 		case 'a':
-			SkillUse();
+			SkillUse(0);
 			break;
 		case 'A':
 			PropertyView();
@@ -662,7 +662,7 @@ void MainLoop()
 			run_spell();
 			break;
 		case 't':
-			shout();
+			shout(0);
 			break;
 		case '^':
 			God_show();
@@ -688,6 +688,9 @@ void MainLoop()
 			break;
 		case VK_TAB:
 			auto_battle();
+			break;
+		case '`':
+			repeat_action();
 			break;
 		default:
 			break;

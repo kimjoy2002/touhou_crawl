@@ -30,6 +30,7 @@
 #include "book.h"
 #include "spellcard.h"
 #include "throw.h"
+#include "mon_infor.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -545,7 +546,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
-				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_verybad))) :
+				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_bad))) :
 				you.pure_skill == skt ? CL_junko : CL_warning;
 			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += 150;
@@ -694,6 +695,12 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //여기엔 돈이
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+
+	{
+		int pow_ = min(you.power, 500);
+		sprintf_s(temp, 100, "파워: %d.%02d", pow_ / 100, pow_ % 100);
+		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	}
 	rc.left += 150;
 	sprintf_s(temp,100,"SH:%4d",you.sh);
 	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
@@ -818,9 +825,24 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top += fontDesc.Height;
 
 	
-	//resist_ = you.poison_resist - you.uniden_poison_resist;
-	//sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+
+
+
+
+
+	string resist_text_ = "";
+	{
+		for (int i = 0; i < 10; i++) {
+			if (you.GetResist() > 110 + i * 20) {
+				resist_text_ += "#";
+			}
+			else {
+				resist_text_ += ".";
+			}
+		}
+	}
+	sprintf_s(temp,100,"마법저항: %s" , resist_text_.c_str());
+	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
@@ -1430,7 +1452,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.as_penalty>you.GetPenaltyMinus(1)?CL_warning: //명중
 					CL_bad;
 				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
-				stateDraw.addState(temp, color_, "장비패널티는 당신이 낀 갑옷과 방패의 패널티입니다.", this);
+				stateDraw.addState(temp, color_,
+					you.as_penalty > you.GetPenaltyMinus(3) ? "갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다." : //끔찍
+					you.as_penalty>you.GetPenaltyMinus(2) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.": //이동패널티
+					you.as_penalty>you.GetPenaltyMinus(1) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중이 감소합니다." : //명중
+					"갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.", this);
 			}
 			bool haste_temp_ = false;
 
@@ -1482,6 +1508,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if (you.drowned)
 			{
 				stateDraw.addState("익사중", CL_danger, "물에 빠졌습니다!", this);
+			}
+			if (current_level == ZIGURRAT_LEVEL)
+			{
+				stateDraw.addState("전이제어방해", CL_danger, "이 곳에서는 제어된 순간이동을 할 수 없다. 제어된 순간이동은 무작위 순간이동으로 바뀐다.", this);
 			}
 			if(you.GetStatPanalty())
 			{
@@ -1543,7 +1573,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.s_dimension)
 			{
 				stateDraw.addState("차원고정", you.s_dimension>3 ? CL_yukari : CL_blue,
-					"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.", this);
+				 (you.god == GT_YUKARI)?
+						"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.":
+					"강제로 결계에 의해 차원이 고정되어 지속시간동안 결계 밖으로 나갈 수 없습니다!" , this);
 			}
 			if(you.s_mirror)
 			{
@@ -1697,19 +1729,19 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int rconf_ = you.GetBuffOk(BUFFSTAT_RCONF);
 				if(rf_)
 				{			
-					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") :"-"));
+					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rf_>0 ? CL_good : CL_danger,
 						(rf_>0 ? "화염 저항이 높아졌습니다." : "화염 저항이 낮아졌습니다."), this);
 				}
 				if(rc_)
 				{
-					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : "-"));
+					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rc_>0 ? CL_good : CL_danger,
 						(rc_>0 ? "냉기 저항이 높아졌습니다." : "냉기 저항이 낮아졌습니다."), this);
 				}
 				if (re_)
 				{
-					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : "-"));
+					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, re_>0 ? CL_good : CL_danger,
 						(re_>0 ? "전기 저항이 높아졌습니다." : "전기 저항이 낮아졌습니다."), this);
 				}
@@ -1960,11 +1992,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							unit* unit_ = env[current_level].isMonsterPos((*temp).position.x, (*temp).position.y);
 							if(!unit_ || (!unit_->isView()))
 							{
-								img_effect_auto_pick.draw(pSprite,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f,255);
+								img_effect_auto_pick.draw(pSprite, ((*temp).position.x - x_)*32.0f + 20.0f, ((*temp).position.y - y_)*32.0f + 20.0f, 255);
 							}
 						}
 					}
-					dot_item.draw(pSprite,GetDotX((*temp).position.x+offset_.x),GetDotY((*temp).position.y+offset_.y),255);
+					dot_item.draw(pSprite, GetDotX((*temp).position.x + offset_.x), GetDotY((*temp).position.y + offset_.y), 255);
 				}
 				many_item = false;
 				auto_pick_ = false;
@@ -1972,38 +2004,38 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			else
 			{
 				many_item = true;
-				if(it == env[current_level].item_list.end() && (*temp).isautopick())
+				if (it == env[current_level].item_list.end() && (*temp).isautopick())
 					auto_pick_ = true;
 			}
 		}
-	}	
+	}
 
 
 	//바닥 효과 그리기
 	{
-		list<floor_effect>::iterator it; 
-		for(it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
+	list<floor_effect>::iterator it;
+	for (it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end(); it++)
+	{
+		if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
 		{
-			if(env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+			if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
-				{
-					it->draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
-				}
+				it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 			}
 		}
 	}
-	
+	}
+
 	//연기그리기
 	{
-		list<smoke>::iterator it; 
-		for(it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end();it++)
+		list<smoke>::iterator it;
+		for (it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end(); it++)
 		{
-			if(env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+			if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
+				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
-					it->draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
+					it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 				}
 			}
 		}
@@ -2011,25 +2043,25 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	//플레이어 그리기
 	{
-		if(!you.s_timestep && abs(you.position.x - x_-8)<=8 && abs(you.position.y - y_-8)<=8)
+		if (!you.s_timestep && abs(you.position.x - x_ - 8) <= 8 && abs(you.position.y - y_ - 8) <= 8)
 		{
 			you.Draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 20.0f);
-			if( you.GetHp() != you.GetMaxHp())
+			if (you.GetHp() != you.GetMaxHp())
 			{
-				float max_rate_= (1/3.0f);
+				float max_rate_ = (1 / 3.0f);
 
-				int temp1_ = max(0,you.GetHp()) *32 / you.GetMaxHp();
+				int temp1_ = max(0, you.GetHp()) * 32 / you.GetMaxHp();
 				float hp_rate_ = (max_rate_ * temp1_);
-				int hp_offset_ = (temp1_+1)/2-16;
+				int hp_offset_ = (temp1_ + 1) / 2 - 16;
 
-				
-				int temp2_ = max(0,min(you.prev_hp[0],you.GetMaxHp())) *32 / you.GetMaxHp();
+
+				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * 32 / you.GetMaxHp();
 				float p_hp_rate_ = (max_rate_ * temp2_);
-				int p_hp_offset_ = (temp2_+1)/2 -16;
-				
-				dot_floor.draw(pSprite,(you.position.x-x_)*32.0f+20.0f,(you.position.y-y_)*32.0f+36.0f,0.0f,max_rate_ * 32.0f,0.5f,255);
-				dot_monster.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+p_hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,p_hp_rate_,0.5f,255);
-				dot_item.draw(pSprite,(you.position.x-x_)*32.0f+20.0f+hp_offset_,(you.position.y-y_)*32.0f+36.0f,0.0f,hp_rate_,0.5f,255);
+				int p_hp_offset_ = (temp2_ + 1) / 2 - 16;
+
+				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, max_rate_ * 32.0f, 0.5f, 255);
+				dot_monster.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + p_hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, p_hp_rate_, 0.5f, 255);
+				dot_item.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, hp_rate_, 0.5f, 255);
 			}
 			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
 			{
@@ -2044,23 +2076,26 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 
 		}
-		dot_player.draw(pSprite,GetDotX(you.position.x+offset_.x),GetDotY(you.position.y+offset_.y),255);
+		dot_player.draw(pSprite, GetDotX(you.position.x + offset_.x), GetDotY(you.position.y + offset_.y), 255);
 	}
 
 
 	//몹그리기
 	{
 		vector<monster>::iterator it;
-		
-		for(it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+
+		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
+			if ((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
 			{
-				if(abs((*it).position.x -x_-8)<=8 && abs((*it).position.y -y_-8)<=8)
+				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
-					(*it).draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
+					(*it).draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+				}
 			}
 			else if(it->isLive() &&	you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3
 				&& GetPositionGap((*it).position.x, (*it).position.y, you.position.x, you.position.y) <= satori_sight()
@@ -2070,7 +2105,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					(*it).simple_draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
 				}
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+
+				}
 			}
 		}
 	}
@@ -2089,8 +2128,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			switch((*it).type)
 			{
-			case SWT_MONSTER:				
-				dot_monster.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
+			case SWT_MONSTER:
+				if (!(*it).unharm) {
+					dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x), GetDotY((*it).position.y + offset_.y), 255);
+				}
 				break;
 			case SWT_ITEM:
 				dot_item.draw(pSprite,GetDotX((*it).position.x+offset_.x),GetDotY((*it).position.y+offset_.y),255);
@@ -2199,7 +2240,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		vector<monster>::iterator it;
 		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if ((*it).isLive() && (*it).isYourShight() && (*it).isUnique() || (*it).image == &img_mons_default) //더 추가해야할거. 볼수있다(투명아님).
+			if ((*it).isLive() && (*it).isYourShight() && ((*it).isUnique() || (*it).image == &img_mons_default)) //더 추가해야할거. 볼수있다(투명아님).
 			{
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
@@ -2622,6 +2663,17 @@ void changedisplay(display_type set)
 		DisplayManager.max_y = 0;
 	ReleaseMutex(mutx);
 }
+
+int getDisplayMove()
+{
+	return DisplayManager.move;
+}
+
+void setDisplayMove(int move_)
+{
+	DisplayManager.move = move_;
+}
+
 
 void changemove(int var)
 {

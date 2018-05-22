@@ -948,6 +948,8 @@ textures img_named_kokoro[] =
 	textures(&texture_monster01, 211, 255)
 };
 textures img_named_sumireko(&texture_monster01, 215, 255);
+textures img_named_reimu2(&texture_monster01, 198, 255);
+textures img_mons_misyaguzi(&texture_monster01, 199, 255);
 
 
 
@@ -1070,13 +1072,14 @@ textures img_play_item_body[17] = {
 	textures(&texture_players01, 207),
 	textures(&texture_players01, 208)
 };
-textures img_play_item_hat[6] = {
+textures img_play_item_hat[7] = {
 	textures(&texture_players01, 224),
 	textures(&texture_players01, 225),
 	textures(&texture_players01, 226),
 	textures(&texture_players01, 227),
 	textures(&texture_players01, 228),
-	textures(&texture_players01, 229)
+	textures(&texture_players01, 229),
+	textures(&texture_players01, 230)
 };
 textures img_play_item_shield[4] = {
 	textures(&texture_players01, 256),
@@ -1127,7 +1130,8 @@ textures img_item_armor_helmet[] = {
 	textures(&texture_item02, 76, 255),
 	textures(&texture_item02, 77, 255),
 	textures(&texture_item02, 78, 255),
-	textures(&texture_item02, 79, 255)
+	textures(&texture_item02, 79, 255),
+	textures(&texture_item02, 74, 255)
 };
 textures img_item_armor_armour_0(&texture_item01, 136, 255);
 textures img_item_armor_armour_1(&texture_item01, 137, 255);
@@ -1581,6 +1585,38 @@ textures(&texture_item03, 23, 255),
 textures(&texture_item03, 24, 255)
 };
 
+textures img_tanmac_master_spark[] = { textures(&texture_item03, 37, 255),
+textures(&texture_item03, 38, 255),
+textures(&texture_item03, 39, 255),
+textures(&texture_item03, 40, 255),
+textures(&texture_item03, 41, 255),
+textures(&texture_item03, 42, 255),
+textures(&texture_item03, 43, 255),
+textures(&texture_item03, 44, 255)
+};
+
+textures img_tanmac_sword[] = { textures(&texture_item03, 45, 255),
+textures(&texture_item03, 46, 255),
+textures(&texture_item03, 47, 255),
+textures(&texture_item03, 48, 255),
+textures(&texture_item03, 49, 255),
+textures(&texture_item03, 50, 255),
+textures(&texture_item03, 51, 255),
+textures(&texture_item03, 52, 255)
+};
+textures img_tanmac_knife[] = { textures(&texture_item03, 53, 255),
+textures(&texture_item03, 54, 255),
+textures(&texture_item03, 55, 255),
+textures(&texture_item03, 56, 255),
+textures(&texture_item03, 57, 255),
+textures(&texture_item03, 58, 255),
+textures(&texture_item03, 59, 255),
+textures(&texture_item03, 60, 255)
+};
+
+
+
+
 
 
 textures img_tanmac_small[6][4] =
@@ -1714,6 +1750,14 @@ textures img_effect_gold_floor[] = {
 	textures(&texture_item03, 0, 255),
 	textures(&texture_item03, 1, 255),
 	textures(&texture_item03, 2, 255)
+};
+
+textures img_mon_kaguya_quiz[] = {
+	textures(&texture_item03, 32, 255),
+	textures(&texture_item03, 33, 255),
+	textures(&texture_item03, 34, 255),
+	textures(&texture_item03, 35, 255),
+	textures(&texture_item03, 36, 255)
 };
 
 
@@ -2965,6 +3009,24 @@ int texturetoint(textures* input)
 		return 495;
 	else if (input == &img_mons_desire_blue)
 		return 496;
+	else if (input == &img_mon_kaguya_quiz[0])
+		return 497;
+	else if (input == &img_mon_kaguya_quiz[1])
+		return 498;
+	else if (input == &img_mon_kaguya_quiz[2])
+		return 499;
+	else if (input == &img_mon_kaguya_quiz[3])
+		return 500;
+	else if (input == &img_mon_kaguya_quiz[4])
+		return 501;
+	else if (input == &img_named_reimu2)
+		return 502; 
+	else if (input == &img_item_armor_helmet[6])
+		return 503;
+	else if (input == &img_play_item_hat[6])
+		return 504;
+	else if (input == &img_mons_misyaguzi)
+		return 505;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3986,6 +4048,24 @@ textures* inttotexture(int input)
 		return &img_mons_desire_green;
 	case 496:
 		return &img_mons_desire_blue;
+	case 497:
+		return &img_mon_kaguya_quiz[0];
+	case 498:
+		return &img_mon_kaguya_quiz[1];
+	case 499:
+		return &img_mon_kaguya_quiz[2];
+	case 500:
+		return &img_mon_kaguya_quiz[3];
+	case 501:
+		return &img_mon_kaguya_quiz[4];
+	case 502:
+		return &img_named_reimu2;
+	case 503:
+		return &img_item_armor_helmet[6];
+	case 504:
+		return &img_play_item_hat[6];
+	case 505:
+		return &img_mons_misyaguzi;
 	default:
 		return &img_mons_default;
 	}

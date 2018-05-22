@@ -21,6 +21,7 @@
 #include "tribe.h"
 #include "dump.h"
 #include "god.h"
+#include "mon_infor.h"
 #include <set>
 
 extern HANDLE mutx;
@@ -101,6 +102,7 @@ void iteminfor(bool gameover)
 			item *item_ = you.GetItem(key_);
 			if(item_)
 			{
+				int get_item_move_ = getDisplayMove();
 				while(1)
 				{
 					set<char> ket_list;
@@ -122,6 +124,11 @@ void iteminfor(bool gameover)
 
 							if(memory_ == 'm')
 							{
+								if (you.isMemorize(spell_)) {
+									changedisplay(DT_GAME);
+									printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+									return;
+								}
 								memorize_action(spell_);
 								return;
 							}
@@ -382,7 +389,7 @@ void iteminfor(bool gameover)
 									printlog("유령상태에선 할 수 없다. ", true, false, false, CL_normal);
 									return;
 								}
-								if (you.Evoke(item_->id))
+								if (you.Evoke(item_->id, false))
 								{
 									you.time_delay += you.GetNormalDelay();
 									you.TurnEnd();
@@ -427,11 +434,10 @@ void iteminfor(bool gameover)
 							}
 						}
 					}
-					else
-						waitkeyinput();
 					break;
 				}
 				view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");
+				setDisplayMove(get_item_move_);
 			}
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
@@ -928,7 +934,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "단순한 맛난 물약이다.\n";
 				break;
 			case PT_HEAL:
-				text_ += "치료 물약이다. 마시면 각종 좋지않은 상태이상에서 회복되고 체력도 회복된다.\n";
+				text_ += "치료 물약이다. 마시면 혼란, 독, 병으로부터 회복되고 체력도 소량 회복된다.\n";
 				text_ += "효과도 마신 즉시 발휘되는 신비의 물약\n";
 				break;
 			case PT_POISON:
@@ -1182,9 +1188,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n";
 				break;
 			case AMT_TIMES:
-				text_ += "영야이변을 해결할때 사용된 밤을 멈추는 주술의 힘이 담긴 부적.\n";
-				text_ += "착용하고 있으면 주변의 각부가 모이고 충전이 되면 주변의 시간의 흐름보다 빠르게 움직일 수 있다.\n";
-				text_ += "100%가 된 부적을 착용한 채로 v를 누르면 가속이 발동한다.\n";
+				text_ += "영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n";
+				text_ += "착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n";
+				text_ += "100%가 된 부적을 착용한 채로 v를 누르면 주변에 파워아이템이 떨어진다.\n";
 				text_ += "발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n";
 				break;
 			case AMT_FAITH:
@@ -1195,8 +1201,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				break;
 			case AMT_WAVE:
 				text_ += "지령전같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n";
-				text_ += "착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 현재 층을 한 눈에 볼 수 있다.\n";
-				text_ += "100%가 된 부적을 착용한 채로 v를 누르면 현재 층의 지형을 비추게 된다.\n";
+				text_ += "착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n";
+				text_ += "100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n";
+				text_ += "100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n";
 				break;
 			case AMT_SPIRIT:
 				text_ += "몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n";
@@ -1211,10 +1218,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				text_ += "그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n";
 				break;
 			case AMT_WEATHER:
-				text_ += "어느 불량 천인이 자신의 검의 힘을 부여한 부적.\n";
+				text_ += "어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n";
 				text_ += "착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n";
-				text_ += "100%가 된 부적을 착용한 채로 있으면 체력 회복속도가 약간 증가하며\n";
-				text_ += "100%상태에서 v를 누르면 체력을 약간 회복할 수 있다.\n";
+				text_ += "100%상태에서 v를 누르면 무작위 날씨가 발현되며 체력재생력을 높게 올린다.\n";
 				break;
 			case AMT_OCCULT:
 				text_ += "도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n";
@@ -1410,8 +1416,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EVK_GHOST_BALL:
 			text_ += "사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n";
 			text_ += "발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n";
-			text_ += "발동시 자신의 현재 체력이 30%~70%까지 감소되고 발동된다.\n";
-			text_ += "발동중엔 누구에게도 공격을 받는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n";
+			text_ += "발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n";
+			text_ += "발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n";
 			text_ += "한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n";
 			text_ += "유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n";
 			text_ += "만약 당신이 어떤 이유로 파워가 낮아지지 않는다면 오쿠리쵸친은 다른 무언가를 대신 가져갈 것이다.\n";
@@ -1428,12 +1434,23 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			text_ += "단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n";
 			text_ += "요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n";
 			break;
+		case EVK_CAMERA:
+			text_ += "환상향에 떨어지기전에 우연히 들고오게된 카메라.\n";
+			text_ += "기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n";
+			text_ += "당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n";
+			text_ += "그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n";
+			break;
 		default:
 			text_ += "버그를 담은 발동템이다.\n";
 			break;
 		}
 		text_ += "\n\n";
-		text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
+		if (it->value1 == EVK_CAMERA) {
+			text_ += "이 템은 횟수제한없이 발동이 가능한 템이다.\n";
+		}
+		else {
+			text_ += "이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n";
+		}
 		text_ += "V키로 파워를 소모하여 발동할 수 있다.\n\n";
 		char temp[100];
 		sprintf_s(temp,100, "이 발동템을 사용할때마다 필요한 파워: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
@@ -1481,6 +1498,19 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EIT_KAPPA_TRASH:
 			text_ += "캇파들이 쓰고 남은 재료와 공구들이다. 쓰임새는 없을 것 같다.\n";
 			break;
+		case EIT_PHOTO:
+		{
+			if (it->value2 >= 0 && it->value2 < MON_MAX) {
+				char temp[100];
+				sprintf_s(temp, 100, "%s%s찍혀있는 사진이다.\n", mondata[it->value2].name.name.c_str(), mondata[it->value2].name.name_do(true));
+				text_ += temp;
+			}
+			else {
+				text_ += "미소녀가 찍혀있는 사진이다.\n";
+			}
+			text_ += "딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\n";
+			break;
+		}
 		}
 		break;
 	default:

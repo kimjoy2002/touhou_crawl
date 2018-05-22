@@ -355,12 +355,13 @@ void fast_discard()
 				discard(it,you.final_num);
 				you.final_item = 0;
 			}
+			you.SetPrevAction('D');
 			return;
 		}
 	}
 }
 
-void Eatting()
+void Eatting(char auto_)
 {	
 	if(you.s_lunatic)
 	{
@@ -384,11 +385,14 @@ void Eatting()
 	view_item(IVT_FOOD,"무엇을 먹겠습니까?");
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = auto_;
+		if (key_ == 0)
+			key_ = waitkeyinput(true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
 			you.Eat(key_);
+			you.SetPrevAction('e', key_);
 			break;
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
@@ -416,7 +420,7 @@ void Eatting()
 }
 
 
-void Drinking()
+void Drinking(char auto_)
 {
 	if(you.s_lunatic)
 	{
@@ -435,7 +439,9 @@ void Drinking()
 	view_item(IVT_POTION,"무엇을 마시겠습니까?");
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = auto_;
+		if(key_ == 0 )
+			key_ = waitkeyinput(true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			if(you.Drink(key_))
@@ -451,6 +457,7 @@ void Drinking()
 						you.GiftCount(1);
 					}
 				}
+				you.SetPrevAction('q', key_);
 				you.TurnEnd();
 			}
 			break;
@@ -500,7 +507,7 @@ void Drinking()
 //	}
 //}
 
-void Spelllcard_Evoke()
+void Spelllcard_Evoke(char auto_)
 {	
 	if(you.s_lunatic)
 	{
@@ -511,14 +518,17 @@ void Spelllcard_Evoke()
 	view_item(IVT_EVOKE,"무슨 아이템을 발동하시겠습니까?");
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = auto_;
+		if (key_ == 0)
+			key_ = waitkeyinput(true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
-			if(you.Evoke(key_))
+			if(you.Evoke(key_, auto_>0))
 			{
 				you.time_delay += you.GetNormalDelay();
 				you.TurnEnd();
+				you.SetPrevAction('v', key_);
 			}
 			break;
 		//	CheckKey(key_,i);
@@ -550,8 +560,8 @@ void Spelllcard_Evoke()
 }
 
 void memorize_action(int spell_);
-void Reading()
-{	
+void Reading(char auto_)
+{
 	if(you.s_lunatic)
 	{
 		printlog("광기에 휩싸인 상태로 읽을 수 없다!",true,false,false,CL_danger);
@@ -574,7 +584,9 @@ void Reading()
 	view_item(IVT_SCROLL,"무엇을 읽겠습니까?");
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		int key_ = auto_;
+		if (key_ == 0)
+			key_ = waitkeyinput(true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			item* item_ = you.GetItem(key_);
@@ -601,7 +613,12 @@ void Reading()
 					if( (key_ >= 'a' && key_ <= 'f'))
 					{
 						if(int spell_ = item_->GetValue(key_ - 'a'+1))
-						{	
+						{
+							if (you.isMemorize(spell_)) {
+								changedisplay(DT_GAME);
+								printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+								return;
+							}
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";
@@ -629,6 +646,7 @@ void Reading()
 					you.time_delay += you.GetNormalDelay();
 					changedisplay(DT_GAME);
 					you.TurnEnd();
+					you.SetPrevAction('r', key_);
 				}	
 			}
 			break;

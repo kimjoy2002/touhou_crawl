@@ -36,6 +36,13 @@ optionManager::optionManager(string fileName) {
 
 		GetPrivateProfileString(_T("config"), _T("se_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		se_volume = _tstoi(szBuf);
+
+		GetPrivateProfileString(_T("config"), _T("server_ip"), _T("joy1999.codns.com"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		server_ip = TCHARToString(szBuf);
+
+		GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		server_port = _tstoi(szBuf);
+
 	}
 }
 
@@ -59,6 +66,14 @@ void optionManager::createNewFile(string fileName) {
 	strString = _T("70");
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("se_volume"), tchr, fileName.c_str());
+
+	strString = _T("joy1999.codns.com");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("server_ip"), tchr, fileName.c_str());
+
+	strString = _T("12345");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
 }
 
 string optionManager::TCHARToString(const TCHAR* ptsz)

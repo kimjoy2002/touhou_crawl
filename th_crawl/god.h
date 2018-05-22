@@ -62,7 +62,8 @@ int satori_sight();
 
 void Pray();
 void printReEnter();
-
+bool God_PraySpeak();
+void swako_gift(bool speak_);
 void joon_sion_gift(bool speak_);
 void minoriko_gift(bool speak_);
 void byakuren_gift(bool speak_);

@@ -78,7 +78,7 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			case VK_UP:
 			case VK_NUMPAD8:
 				if(direction_) return VK_UP;
-				return 'k';
+				return (shift_check) ? 'K' : 'k';
 				break;
 			case '4':
 				if(direction_ || shift_check) break;
@@ -86,7 +86,7 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			case VK_LEFT:
 			case VK_NUMPAD4:	
 				if(direction_) return VK_LEFT;
-				return 'h';
+				return (shift_check) ? 'H' : 'h';
 				break;
 			case '6':
 				if(direction_ || shift_check) break;
@@ -94,7 +94,7 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			case VK_RIGHT:
 			case VK_NUMPAD6:	
 				if(direction_) return VK_RIGHT;
-				return 'l';
+				return (shift_check) ? 'L' : 'l';
 				break;
 			case '2':
 				if(direction_ || shift_check) break;
@@ -102,34 +102,34 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			case VK_DOWN:
 			case VK_NUMPAD2:	
 				if(direction_) return VK_DOWN;
-				return 'j';
+				return (shift_check) ? 'J' : 'j';
 				break;			
 			case '1':		
 				if(direction_ || shift_check) break;
 				return (shift_check)?'!':'b';
 			case VK_NUMPAD1:	
 			case 35:
-				return 'b';
+				return (shift_check) ? 'B' : 'b';
 			case '3':		
 				if(direction_ || shift_check) break;
 				return (shift_check)?'#':'n';
 			case 34:
 				if(direction_) return 34;
 			case VK_NUMPAD3:	
-				return 'n';
+				return (shift_check) ? 'N' : 'n';
 			case '7':	
 				if(direction_ || shift_check) break;
 				return (shift_check)?'&':'y';
 			case VK_NUMPAD7:	
 			case 36:
-				return 'y';
+				return (shift_check) ? 'Y' : 'y';
 			case '9':	
 				if(direction_ || shift_check) break;
 				return (shift_check)?'(':'u';	
 			case 33:
 				if(direction_) return 33;
 			case VK_NUMPAD9:	
-				return 'u';
+				return (shift_check) ? 'U' : 'u';
 			default:
 				break;
 			}			

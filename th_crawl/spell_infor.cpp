@@ -417,8 +417,8 @@ string GetSpellInfor(spell_list spell)
 		break;
 	case SPL_MOON_COMMUNICATION:
 		text_ += "전파를 통신하여 아군 달토끼들을 불러모은다.\n";
-		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다.\n";
-		text_ += "소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
+		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다. 소환된 달토끼는 가속 버프를 받는다.\n";
+		text_ += "이 소환된 달토끼는 경험치는 주지않지만 소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
 		break;
 	case SPL_MOON_GUN:
 		text_ += "달의 기술을 집결하여 만든 총을 쏜다.\n";
@@ -430,12 +430,12 @@ string GetSpellInfor(spell_list spell)
 		text_ += "특정 장소에서 나오는 몬스터들이 한번에 여럿 소환된다.\n";
 		break;
 	case SPL_MANA_DRAIN:
-		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하면서 데미지를 주는 스마이트형 공격.\n";
-		text_ += "특이하게 지능이 낮으면 받는 데미지가 높아진다.\n";
+		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하는 스마이트형 공격.\n";
+		text_ += "다른 데미지를 받진않지만 영력을 빠른 속도로 고갈시킨다.\n";
 		break;
 	case SPL_INSANE:
 		text_ += "대상을 미치게 만들어버린다. 저항하지 못한 상대는 광기에 빠진다.\n";
-		text_ += "마법저항으로 저항할 수 있다.\n";
+		text_ += "마법저항으로 저항할 수 있으며 혼란저항으론 완벽하게 방지가 가능하다.\n";
 		break;
 	case SPL_BLOOD_SMITE:
 		text_ += "대상의 최대 체력에 비례한 저항불가능한 스마이트형 공격.\n";
@@ -444,10 +444,11 @@ string GetSpellInfor(spell_list spell)
 	case SPL_CALL_HOUND:
 		text_ += "주변의 개들을 끌어모으는 울부짖음을 외친다.\n";
 		text_ += "모인 개들도 다시 동료를 끌어 모을 수 있으니 되도록 빠르게 처리해야한다.\n";
+		text_ += "모여든 개들을 모두 처리하더라도 얻을 수 있는 총 경험치는 똑같다.\n";
 		break;
 	case SPL_CANNON:
-		text_ += "거대한 대포알을 쏴서 폭발후 회피불가능한 데미지를 준다.\n";
-		text_ += "방어력을 어느정도 관통한다.\n";
+		text_ += "음양옥의 기운을 담은 탄막을 발사하여 폭발후 회피불가능한 데미지를 준다.\n";
+		text_ += "이 공격은 방어력을 어느정도 관통한다.\n";
 		break;
 	case SPL_DOLLS_WAR:
 		text_ += "근접과 공격에 강력한 상해인형과 원거리와 방어에 특화된 봉래인형을 같이 소환한다.\n";
@@ -635,6 +636,42 @@ string GetSpellInfor(spell_list spell)
 		text_ += "일직선으로 관통하는 강력한 빔을 발사한다.\n";
 		text_ += "왜 빔이 나가는건진 모르겠지만 로봇처럼 생겼으니까 빔을 붙여봤다.\n";
 		break;
+	case SPL_KAGUYA_SPELL:
+		text_ += "카구야가 낸 다섯개의 난제. \n";
+		text_ += "상대의 주변에 고정된 5개의 난제가 소환되어 주변의 적을 요격한다.\n";
+		text_ += "각각의 난제가 쓰는 공격은 강하진않지만 다양한 속성의 공격을 하며\n";
+		text_ += "난제 자체는 파괴되지않고 무적이므로 시전자인 카구야를 우선적으로 공격해야 멈출 수 있다.\n";
+		break;
+	case SPL_THROW_SWORD:
+		text_ += "검은 꼭 휘둘러야된다는 고정관념을 깨트려 거대한 장검을 던지는 기술.\n";
+		text_ += "이런 거대한 검을 던져서 맞으면 아플것이 분명하다.\n";
+		text_ += "가까이 있으면 던지진 못하나 가까이서 휘두른 검으로 맞던 멀리서 던진 검에 맞건 비슷할 듯 싶다.\n";
+		break;
+	case SPL_THROW_KNIFE:
+		text_ += "은제 나이프를 탄막으로서 던지는 단순한 기술.\n";
+		text_ += "평범한 탄막과 다를바가 없지만 날이 서있고 사용자의 기술이 붙어서 상당한 위력을 가지게 되었다.\n";
+		break;
+	case SPL_THROW_PLAYER:
+		text_ += "단지 적을 잡아서 던지는 심플한 기술. 그러나 오니의 근력이 붙으면서 그 어떤 기술보다 무서워졌다.\n";
+		text_ += "이 기술은 방어도, 회피도, 방패로도 막을 수 없다. 때문에 고정적으로 아주 큰 데미지를 받게 된다.\n";
+		text_ += "사용하기위해선 딱 달라붙어있어야 하며 던지는 위치는 무작위다. 어딘가의 강철지옥의 거인이 썼다고 한다 \n";
+		break;
+	case SPL_THROW_AMULET:
+		text_ += "요괴를 퇴치하는 부적을 던진다. 물론 요괴가 아니더라도 효과가 있다.\n";
+		text_ += "단순히 던져도 저절로 적에게 호밍되서 날라간다. 피하는게 쉽지않다.\n";
+		break;
+	case SPL_WARP_KICK:
+		text_ += "레이무가 틈새를 이용해서 적의 옆으로 순식간에 날라가서 차버린다.\n";
+		text_ += "멀어져도 방심할 수 없는 이유중 하나. 생각보다 발차기가 아프다.\n";
+		break;
+	case SPL_REIMU_BARRIER:
+		text_ += "레이무가 잠시 결계를 고정시켜서 상대를 도망가지 못하게 막는다.\n";
+		text_ += "결계가 고정된 상태에서 결계 밖으로 나갈 수 없게된다. \n";
+		text_ += "기본적으로 예방법은 없지만 지속시간이 짧으며 한번 사용하면 당분간은 사용할 수 없는 듯하다. \n";
+		if (you.god == GT_YUKARI) {
+			text_ += "단, 유카리라면 이 주문을 잘 알고있어서 사전에 막아줄 수 있을듯하다.\n";
+		}
+		break;
 	default:
 		text_ += "설명이 존재하지 않는 마법.\n";
 		break;
@@ -669,6 +706,35 @@ string GetSpellInfor(spell_list spell)
 	text_ += '0'+SpellLevel(spell);
 	text_ += "레벨     학파: ";
 	text_ += GetSpellSchoolString(spell);
+	text_ += "\n";
+	text_ += "소음: ";
+	switch (SpellNoise(spell)) {
+	case 0:
+		text_ += "없음";
+		break;
+	case 4:
+		text_ += "작음";
+		break;
+	case 8:
+		text_ += "보통";
+		break;
+	case 12:
+		text_ += "큼";
+		break;
+	case 16:
+		text_ += "굉장함";
+		break;
+	case 24:
+		text_ += "소음공해";
+		break;
+	}
+	text_ += "\n";
+	if (int length_ = SpellLength(spell)) {
+		char c_temp[128];
+		sprintf_s(c_temp, 128, "사거리: %d칸", length_);
+		text_ += c_temp;
+	}
+	text_ += "\n";
 	return text_;
 }
 
@@ -912,7 +978,8 @@ string GetSkillInfor(skill_list skill)
 		text_ += "일정 시간이 지나면 잠에서 깨지만 그 반작용으로 짧은 감속에 걸린다.\n";
 		break;
 	case SKL_SWAKO_MISYAGUZI:
-		text_ += "강력한 미샤구지님을 잠시동안 소환한다.\n";
+		text_ += "스와코님이 사역하고있는 강력한 미샤구지님을 잠시동안 소환한다.\n";
+		text_ += "1번에 하나의 미샤구지님만 소환할 수 있지만 강력한 저주 공격을 가하는 듬직한 소환수다.\n";
 		break;
 	case SKL_HINA_1:
 		text_ += "저주가 걸려있는 장비의 마이너스 인챈트를 플러스로 바꾼다.\n";
@@ -1121,6 +1188,29 @@ string GetSkillInfor(skill_list skill)
 		text_ += "가득 찬 인기도를 폭발시키고 전부 소모하여 강력한 버프를 얻는다.\n";
 		text_ += "최대 체력이 2배가 되거나, 영력회복속도를 엄청나게 상승시키거나, 반영구적인 가속중 선택할 수 있다.\n\n";
 		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
+		break;
+	case SKL_PHILOSOPHERS_1:
+		text_ += "화염구를 만들어 날리는 화염계 공격마법.\n";
+		text_ += "적에 부딪히거나 목표에서 터지며 주변에 폭발데미지를 입힌다.\n";
+		text_ += "자신도 가까이 있으면 데미지를 받을 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_2:
+		text_ += "물을 압축하여 발사한다.\n";
+		text_ += "맞은 상대를 밀쳐낼 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_3:
+		text_ += "빠른 대기의 탄환을 적에게 날리는 마법.\n";
+		text_ += "적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n";
+		text_ += "다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n";
+		break;
+	case SKL_PHILOSOPHERS_4:
+		text_ += "주변에 커다란 에메랄드로 된 벽을 솓구친다.\n";
+		text_ += "밀착하여 가까이 있는 상대에게 데미지를 줄 수 있다.\n";
+		break;
+	case SKL_PHILOSOPHERS_5:
+		text_ += "원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n";
+		text_ += "뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n";
+		text_ += "파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n";
 		break;
 	default:
 		text_ += "모르는 능력.\n";

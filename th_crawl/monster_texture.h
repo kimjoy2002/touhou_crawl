@@ -257,6 +257,8 @@ extern textures img_named_mai;
 extern textures img_named_satono;
 extern textures img_named_kokoro[4];
 extern textures img_named_sumireko;
+extern textures img_named_reimu2; 
+extern textures img_mons_misyaguzi;
 
 
 
@@ -412,6 +414,9 @@ extern textures img_tanmac_rock_small[]; //0¾¸
 extern textures img_tanmac_rock_big[]; 
 extern textures img_tanmac_doggojeo[];
 extern textures img_tanmac_sion[];
+extern textures img_tanmac_master_spark[];
+extern textures img_tanmac_sword[];
+extern textures img_tanmac_knife[];
 extern textures img_tanmac_small[6][4];
 
 
@@ -460,6 +465,7 @@ extern textures img_effect_schema[];
 
 extern textures img_effect_tanmac_middle[];
 
+extern textures img_mon_kaguya_quiz[];
 
 extern textures img_hp_graphic[5];
 

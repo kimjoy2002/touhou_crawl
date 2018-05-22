@@ -58,6 +58,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MON_TANMAC_MIDDLE:
 	case SPL_MON_WATER_GUN:
 	case SPL_MOON_GUN:
+	case SPL_THROW_SWORD:
+	case SPL_THROW_KNIFE:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_LUMINUS_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
@@ -102,11 +104,13 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_TRASH:
 	case SPL_SUMMON_ELEC_BALL:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
-	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_SUMMON_NAMAZ:
-	case SPL_SUMMON_ANCHOR:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;
+	case SPL_SUMMON_UNZAN_PUNCH:
+	case SPL_SUMMON_ANCHOR:
+	case SPL_KAGUYA_SPELL:
+		return (S_FLAG_SUMMON | S_FLAG_SMITE) & flag;
 	case SPL_FLAN_BUSIN:
 		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_CONFUSE:
@@ -142,6 +146,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_TRASH_RUSH:
 	case SPL_SLEEP_SMITE:
 	case SPL_TARGET_ELEC:
+	case SPL_REIMU_BARRIER:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
 	case SPL_MERMAID_SONG:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
@@ -150,6 +155,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_BLOOD_SMITE:
 	case SPL_AFTERLITE:
 	case SPL_DREAM_CALL:
+	case SPL_THROW_PLAYER:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_REAPER_MET:
 		return ((S_FLAG_CLOSE_DANGER)& flag);
@@ -169,8 +175,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
 	case SPL_THROW_DISH:
+	case SPL_THROW_AMULET:
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
+	case SPL_WARP_KICK:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_MACRO_BURST:
 		return (S_FLAG_CLOUD | S_FLAG_SPEAK | S_FLAG_DIREC ) & flag;
@@ -276,6 +284,10 @@ int SpellLength(spell_list skill)
 	case SPL_THROW_DISH:
 	case SPL_SLEEP_SMITE:
 	case SPL_DREAM_CALL:
+	case SPL_THROW_SWORD:
+	case SPL_THROW_KNIFE:	
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
 		return 8;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -304,6 +316,7 @@ int SpellLength(spell_list skill)
 	case SPL_SUMMON_ANCHOR:
 	case SPL_TARGET_ELEC:
 	case SPL_HYPER_BEAM:
+	case SPL_KAGUYA_SPELL:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -322,6 +335,7 @@ int SpellLength(spell_list skill)
 	case SPL_FREEZE:
 		return 2;
 	case SPL_FROZEN:
+	case SPL_THROW_PLAYER:
 		return 1;
 	case SPL_SUMMON_BUG:
 	case SPL_SELF_HEAL:
@@ -385,6 +399,7 @@ int SpellLength(spell_list skill)
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
 	case SPL_SUMMON_ELEC_BALL:
+	case SPL_REIMU_BARRIER:
 	default:
 		return 0;		
 	}
@@ -597,7 +612,7 @@ const char* SpellString(spell_list skill)
 	case SPL_CALL_HOUND:
 		return "동료부르기";
 	case SPL_CANNON:
-		return "거대 대포";
+		return "음양탄";
 	case SPL_DOLLS_WAR:
 		return "돌즈워";
 	case SPL_FAKE_DOLLS_WAR:
@@ -680,6 +695,20 @@ const char* SpellString(spell_list skill)
 		return "드림캐쳐";
 	case SPL_HYPER_BEAM:
 		return "파괴광선";
+	case SPL_KAGUYA_SPELL:
+		return "5개의 난제";
+	case SPL_THROW_SWORD:
+		return "검 던지기";
+	case SPL_THROW_KNIFE:
+		return "나이프 던지기";
+	case SPL_THROW_PLAYER:
+		return "천수력남 던지기";
+	case SPL_THROW_AMULET:
+		return "부적 던지기";
+	case SPL_WARP_KICK:
+		return "아공혈";
+	case SPL_REIMU_BARRIER:
+		return "봉마진";
 	default:
 		return "알수없는 마법";
 	}
@@ -721,7 +750,6 @@ int SpellLevel(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_DRAW_POWER:
-	case SPL_TARGET_ELEC:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -738,6 +766,7 @@ int SpellLevel(spell_list skill)
 	case SPL_ALERT_NOISE: 
 	case SPL_MERMAID_SONG:
 	case SPL_PRISM_CALL:
+	case SPL_TARGET_ELEC:
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -756,6 +785,8 @@ int SpellLevel(spell_list skill)
 	case SPL_MISTIA_SONG:
 	case SPL_THROW_DISH:
 	case SPL_SLEEP_SMITE:
+	case SPL_THROW_KNIFE:
+	case SPL_WARP_KICK:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -777,6 +808,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_ANCHOR:
 	case SPL_PSYCHOKINESIS:
 	case SPL_SUMMON_TRASH:
+	case SPL_THROW_AMULET:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -801,6 +833,7 @@ int SpellLevel(spell_list skill)
 	case SPL_KOKORO_CHANGE:
 	case SPL_THUNDER_BOLT:
 	case SPL_MESS_CONFUSION:
+	case SPL_THROW_SWORD:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -816,6 +849,7 @@ int SpellLevel(spell_list skill)
 	case SPL_AUTUMN_BLADE:
 	case SPL_REAPER_MET:
 	case SPL_SUMMON_ELEC_BALL:
+	case SPL_THROW_PLAYER:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -829,6 +863,7 @@ int SpellLevel(spell_list skill)
 	case SPL_TRASH_RUSH:
 	case SPL_DREAM_CALL:
 	case SPL_HYPER_BEAM:
+	case SPL_KAGUYA_SPELL:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -839,6 +874,7 @@ int SpellLevel(spell_list skill)
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_AFTERLITE:
 	case SPL_SANTUARY:
+	case SPL_REIMU_BARRIER:
 		return 9;
 	default:
 		return 0;
@@ -911,6 +947,10 @@ int SpellNoise(spell_list skill)
 	case SPL_THROW_DISH:
 	case SPL_MESS_CONFUSION:
 	case SPL_TARGET_ELEC:
+	case SPL_THROW_SWORD:
+	case SPL_THROW_KNIFE:
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -968,6 +1008,7 @@ int SpellNoise(spell_list skill)
 	case SPL_AFTERLITE:
 	case SPL_SUMMON_TRASH:
 	case SPL_DREAM_CALL:
+	case SPL_THROW_PLAYER:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -988,12 +1029,14 @@ int SpellNoise(spell_list skill)
 	case SPL_THUNDER_BOLT:
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_HYPER_BEAM:
+	case SPL_KAGUYA_SPELL:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
+	case SPL_REIMU_BARRIER:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1323,6 +1366,20 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_TRANS) : (SKT_ERROR);
 	case SPL_HYPER_BEAM:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_KAGUYA_SPELL:
+		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_SWORD:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_KNIFE:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_PLAYER:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_EARTH) : (SKT_ERROR);
+	case SPL_THROW_AMULET:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_WARP_KICK:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_REIMU_BARRIER:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1356,7 +1413,6 @@ int SpellCap(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:	
 	case SPL_DRAW_POWER:
-	case SPL_TARGET_ELEC:
 		return 50;
 	case SPL_CONFUSE:
 	case SPL_SLOW:
@@ -1476,6 +1532,14 @@ int SpellCap(spell_list skill)
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_DREAM_CALL:
 	case SPL_HYPER_BEAM:
+	case SPL_TARGET_ELEC:
+	case SPL_KAGUYA_SPELL:
+	case SPL_THROW_SWORD:
+	case SPL_THROW_KNIFE:
+	case SPL_THROW_PLAYER:
+	case SPL_THROW_AMULET:
+	case SPL_WARP_KICK:
+	case SPL_REIMU_BARRIER:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1627,7 +1691,6 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_DISCHARGE:
 		return (mon->s_elec ? false : true);
 	case SPL_MOON_COMMUNICATION:
-	case SPL_CALL_HOUND:
 	case SPL_FIRE_SPREAD:
 	case SPL_ALERT_NOISE: 
 	case SPL_JUMP_ATTACK:
@@ -1635,6 +1698,26 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_KOKORO_CHANGE:
 	case SPL_BLOOD_SMITE:
 		return (mon->s_exhausted ? false : true);
+	case SPL_CALL_HOUND:
+	{
+		if (mon->s_exhausted)
+			return false;		
+		
+		int max_ = 8;
+		//콜하운드로 부를 수 있는 한계는 최대 8마리
+		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if (it->isLive() && it->id == MON_HELL_HOUND)
+			{
+				if (env[current_level].isInSight(it->position)) {
+					max_--;
+				}
+			}
+		}
+		if (max_ < 0)
+			return false;
+		return true;
+	}
 	case SPL_MISTIA_SONG:
 		return (mon->s_exhausted || mon->isUserAlly() ?false:true);
 	case SPL_SLEEP_SMITE:
@@ -1714,6 +1797,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	}
 	case SPL_SANTUARY:
 		return (mon->s_exhausted ? false : (mon->hp>mon->max_hp*0.3f ? false : true));
+	case SPL_REIMU_BARRIER:
+		return (!mon->s_exhausted && you.god != GT_YUKARI && you.s_dimension == 0);
 	default:
 		return true;
 	}
@@ -1725,7 +1810,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 
 void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
-void SpellUse()
+void SpellUse(char auto_, int auto_direc_)
 {
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
@@ -1767,7 +1852,9 @@ void SpellUse()
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			int key_ = auto_;
+			if (key_ == 0)
+				key_ = waitkeyinput(true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -1797,8 +1884,9 @@ void SpellUse()
 						{
 							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
 							changedisplay(DT_GAME);
+							int direc_;
 							coord_def target_;
-							if(Direc_Throw(&target_))
+							if(direc_ = Direc_Throw(auto_direc_, &target_))
 							{
 								if(PlayerUseSpell(spell_, false, target_))
 								{	
@@ -1821,6 +1909,7 @@ void SpellUse()
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 									you.TurnEnd();
+									you.SetPrevAction('z',key_, direc_);
 								}
 							}
 							break;
@@ -1832,7 +1921,7 @@ void SpellUse()
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
-							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_)))
+							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), auto_>0))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)
@@ -1858,6 +1947,7 @@ void SpellUse()
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 									you.TurnEnd();
+									you.SetPrevAction('z', key_);
 								}
 							}
 							SetSpellSight(0,0);
@@ -1887,6 +1977,7 @@ void SpellUse()
 								if(!silence_)	
 									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
 								you.TurnEnd();
+								you.SetPrevAction('z', key_);
 							}		
 							break;
 						}

@@ -66,7 +66,9 @@ players::players():
 prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
-as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0), search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE) , equipment(), time_delay(0), speed(10),
+as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0),
+reimu_level(0), reimu_turn(0) , search(false), search_pos(0,0), item_weight(0), max_item_weight(350),prev_action(ACTT_NONE),
+prev_action_key(), equipment(), time_delay(0), speed(10),
 turn(0), real_turn(0), prev_real_turn(0), player_move(false), explore_map(0)/*, hunger(7000), hunger_per_turn(0)*/, 
 final_item(0), final_num(0), auto_pickup(1), inter(IT_NONE), 
 s_poison(0),s_tele(0), s_might(0), s_clever(0), s_agility(0), s_haste(0), s_pure_haste(0), s_confuse(0), s_slow(0),s_frozen(0),
@@ -94,6 +96,8 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
 		MemorizeSkill_num[i] = 0;
+	for (int i = 0; i<4; i++)
+		penalty_turn[i] = 0;
 	//for(int i=0;i<GT_LAST;i++)
 	//	punish[i]=0;
 	for(int i=0;i<GT_LAST;i++)
@@ -161,7 +165,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, tension_turn);
 	SaveData<bool>(fp, already_swap);
 	SaveData<int>(fp, ziggurat_level);
-	
+	SaveData<int>(fp, reimu_level);
+	SaveData<int>(fp, reimu_turn);
+
 	SaveData<int>(fp, buff_list.size());
 	for(list<buff_class>::iterator it=buff_list.begin();it!=buff_list.end();it++)
 	{
@@ -189,6 +195,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<float>(fp, item_weight);
 	SaveData<float>(fp, max_item_weight);
 	SaveData<action_type>(fp, prev_action);
+	SaveData<prev_action_struct>(fp, prev_action_key);
+
+	
 	for(int i=0;i<ET_LAST;i++)
 	{
 		SaveData<char>(fp, equipment[i]?equipment[i]->id:0);
@@ -200,6 +209,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prev_real_turn);
 	SaveData<bool>(fp, player_move);
 	SaveData<int>(fp,explore_map);
+	SaveData<int>(fp, *penalty_turn, 4); //너무 오래있을때 패널티
+	SaveData<char>(fp, final_item);
+	SaveData<int>(fp, final_num);
 
 	//SaveData<int>(fp, hunger);
 	//SaveData<int>(fp, hunger_per_turn);
@@ -369,6 +381,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, tension_turn);
 	LoadData<bool>(fp, already_swap);
 	LoadData<int>(fp, ziggurat_level);
+	LoadData<int>(fp, reimu_level);
+	LoadData<int>(fp, reimu_turn);
 	
 
 	int size_=0;
@@ -411,6 +425,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<float>(fp, item_weight);
 	LoadData<float>(fp, max_item_weight);
 	LoadData<action_type>(fp, prev_action);
+	LoadData<prev_action_struct>(fp, prev_action_key);
 	for(int i=0;i<ET_LAST;i++)
 	{
 		char temp_id_=0;
@@ -434,6 +449,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_real_turn);
 	LoadData<bool>(fp, player_move);
 	LoadData<int>(fp,explore_map);
+	LoadData<int>(fp, *penalty_turn);
+	LoadData<char>(fp, final_item);
+	LoadData<int>(fp, final_num);
 	//LoadData<int>(fp, hunger);
 	//LoadData<int>(fp, hunger_per_turn);
 	LoadData<int>(fp, auto_pickup);
@@ -670,6 +688,12 @@ void players::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
 }
+void players::SetPrevAction(int key, char item, int num)
+{
+	prev_action_key.key = key;
+	prev_action_key.item = item;
+	prev_action_key.num = num;
+}
 void players::maybeAction()
 {
 	you.prev_hp[0] = you.prev_hp[1];
@@ -683,7 +707,7 @@ coord_def players::GetDisplayPos()
 	}
 	else
 	{
-		return coord_def(god_value[GT_SUWAKO][0],god_value[GT_SUWAKO][1]);
+		return coord_def(god_value[GT_YUKARI][0],god_value[GT_YUKARI][1]);
 	}
 }
 int players::move(short_move x_mov, short_move y_mov)
@@ -702,7 +726,7 @@ int players::move(short_move x_mov, short_move y_mov)
 
 	int move_x_ =  position.x+x_mov, move_y_ = position.y+y_mov;
 	
-	if(you.s_dimension)
+	if(you.s_dimension && (you.god == GT_YUKARI))
 	{
 		if(abs(move_x_ - you.god_value[GT_YUKARI][0])>8)
 		{
@@ -755,13 +779,15 @@ int players::move(short_move x_mov, short_move y_mov)
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
 			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
 			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-			{					
-				doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
+			{
+				doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.name);
+				//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
 				//나중에 무기 이름으로 바꾸기
 			}
 			else if(!equipment[ET_WEAPON])
 			{
-				doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
+				doingActionDump(DACT_MELEE, "맨손");
+				//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
 			}
 			else
 			{
@@ -1409,9 +1435,9 @@ int players::HpRecoverDelay(int delay_)
 	{
 		cacul_ += 100.0f;
 	}
-	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
-		cacul_ += max_hp/2;
-	}
+	//if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WEATHER && you.getAmuletPercent() >= 100) {
+	//	cacul_ += max_hp/2;
+	//}
 	{
 		cacul_ += 100 * you.GetBuffOk(BUFFSTAT_REGEN);
 	}
@@ -1636,6 +1662,9 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	}
 	{
 		cacul_ += 50 * you.GetBuffOk(BUFFSTAT_MREGEN);
+	}
+	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WAVE && you.getAmuletPercent() >= 100) {
+		cacul_ += 15;
 	}
 	if(GetProperty(TPT_MP_REGEN)>0)
 	{
@@ -2029,10 +2058,17 @@ void players::SetPureSkill(int skill_)
 
 bool players::GetExp(int exper_, bool speak_)
 {
+	if (exper_ < 0)
+		return false;
 	bool level_up_ = false;
 
-
-
+	if (int penalty_turn_= CheckPeanltyTurn(current_level)) {
+		if (penalty_turn_ >= 1000) {
+			float penalty_ = (1.0f - min(penalty_turn_ - 1000, 4000) / 5000.0f);
+			exper_ = exper_*penalty_;
+			//패널티 경험치는 1000턴부터 감소하기 시작하여 5000턴에서 20%
+		}
+	}
 	if (current_level == ZIGURRAT_LEVEL)
 	{
 		exper_ = exper_ / 3; //지구랏에선 경험치 33%
@@ -2396,8 +2432,8 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_EVOCATE)
 		{
 			//최대 마나는 나중에 손보자...
-			//일단 3렙마다 최대마나 1증가
-			if(GetSkillLevel(skill_, false) % 3 == 0)
+			//그냥 렙마다; 최대마나 1증가
+			if(GetSkillLevel(skill_, false) % 3 == 0 || GetSkillLevel(skill_, false) >= 5)
 			{
 				if((GetSkillLevel(skill_, false) > GetSkillLevel(SKT_SPELLCASTING, false)) || skill_ == SKT_SPELLCASTING)
 				{
@@ -2417,6 +2453,48 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	}
 	return false;
 }
+
+void players::EndTurnForPenalty()
+{
+	if (current_level == BAMBOO_LEVEL)
+	{
+		penalty_turn[0]++;
+	}
+	else if (current_level == DREAM_LEVEL)
+	{
+		penalty_turn[1]++;
+	}
+	else if (current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
+	{
+		penalty_turn[2]++;
+	}
+	else if (current_level >= SUBTERRANEAN_LEVEL && current_level <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+	{
+		penalty_turn[3]++;
+	}
+}
+int players::CheckPeanltyTurn(int level_)
+{
+	if (level_ == BAMBOO_LEVEL)
+	{
+		return penalty_turn[0];
+	}
+	else if (level_ == DREAM_LEVEL)
+	{
+		return penalty_turn[1];
+	}
+	else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
+	{
+		return penalty_turn[2];
+	}
+	else if (level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
+	{
+		return penalty_turn[3];
+	}
+	return 0;
+}
+
+
 bool players::SkillTraining(skill_type skill_, int percent_)
 {
 	if(randA((percent_*(skill[skill_].onoff>=1?1:10))-1)>0)
@@ -3602,7 +3680,7 @@ interupt_type players::resetLOS(bool speak_)
 			//if(abs(position.x-x)+abs(position.y-y)>8)
 
 			bool out_of_sight = pow((float)abs(position.x-x),2)+pow((float)abs(position.y-y),2)>64;
-			if((out_of_sight && !you.s_dimension) || env[current_level].DisableMove(coord_def(x,y),true))
+			if((out_of_sight && !(you.s_dimension && you.god == GT_YUKARI)) || env[current_level].DisableMove(coord_def(x,y),true))
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 
@@ -3617,7 +3695,7 @@ interupt_type players::resetLOS(bool speak_)
 				for(int i=RT_BEGIN;i!=RT_END;i++)
 				{
 					coord_def goal_ = coord_def(x,y);
-					if(you.s_dimension && out_of_sight)
+					if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 					{
 						if(abs(position.x - goal_.x)>8)
 							goal_.x += (position.x - goal_.x)>0?17:-17;
@@ -3645,7 +3723,7 @@ interupt_type players::resetLOS(bool speak_)
 						
 						coord_def check_pos_ = (*it);
 						
-						if(you.s_dimension && out_of_sight)
+						if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 						{
 							if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
 								check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
@@ -3700,7 +3778,7 @@ interupt_type players::resetLOS(bool speak_)
 				{
 					coord_def check_pos_ = coord_def(x,y);
 						
-					//if(you.s_dimension && out_of_sight)
+					//if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 					//{
 					//	if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
 					//		check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?-17:17;
@@ -3953,7 +4031,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		rune[t->value1]++;
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			soundmanager.playSound("rune");
 		return 1;
 	}
 	if(t->type == ITM_ORB)
@@ -3965,7 +4043,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			soundmanager.playSound("rune");
+		reimu_turn = 100;
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}
@@ -4289,7 +4368,7 @@ bool players::Drink(char id_)
 	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
 	return false;
 }
-bool players::Evoke(char id_)
+bool players::Evoke(char id_, bool auto_)
 {
 
 
@@ -4315,7 +4394,7 @@ bool players::Evoke(char id_)
 				}
 				ReleaseMutex(mutx);
 				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*4 , GetSkillLevel(SKT_EVOCATE, true) * 7);
-				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2))
+				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2, auto_))
 				{
 					WaitForSingleObject(mutx, INFINITE);
 					if(!(*it).value1)
@@ -4341,7 +4420,7 @@ bool players::Evoke(char id_)
 			{
 				ReleaseMutex(mutx);
 
-				if(evoke_evokable((evoke_kind)(*it).value1))
+				if(evoke_evokable(auto_, 0, (evoke_kind)(*it).value1))
 				{
 					you.doingActionDump(DACT_EVOKE, (*it).name.name);
 					return true;
@@ -4537,6 +4616,16 @@ bool players::Memorize(int spell_, bool immediately)
 	}
 	currentSpellNum++;
 	return true;
+}
+bool players::isMemorize(int spell)
+{
+	for (int i = 0; i < 52; i++) {
+		if (you.MemorizeSpell[i] == spell)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 {
@@ -4824,7 +4913,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
 				soundmanager.playSound("shoot");
-				throwtanmac(type_,beam,temp_infor,&(*it));
+				throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
 			}
 		}
 		you.SetParadox(0);
@@ -4904,7 +4993,10 @@ bool players::isGrazeAmulet()
 }
 void players::resetAmuletPercent(amulet_type type_)
 {
-	system_exp.value = (GetNeedExp(max(level - 1, 0)) - GetNeedExp(max(level - 2, 0))) + 10;
+	int level_ = level;
+	if (level_ == 27)
+		level_--;
+	system_exp.value = (GetNeedExp(max(level_ - 1, 0)) - GetNeedExp(max(level_ - 2, 0))) + 10;
 	system_exp.value *= getAmuletCharge(type_);
 	system_exp.maxi = system_exp.value;
 	chargingFinish(type_, -1);
@@ -5128,13 +5220,12 @@ bool players::equipjewerly(char id_)
 					sprintf_s(temp,2,"%c",equipment[ET_LEFT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
-					printlog(equipment[ET_LEFT]->GetName(),false,false,false,equipment[ET_LEFT]->item_color());
-					printlog("; > 또는 ",false,false,false,CL_normal);
+					printlog(equipment[ET_LEFT]->GetName(),true,false,false,equipment[ET_LEFT]->item_color());
+					printlog("> 또는 ",false,false,false,CL_normal);
 					sprintf_s(temp,2,"%c",equipment[ET_RIGHT]->id);
 					printlog(temp,false,false,false,CL_normal);
 					printlog(" - ",false,false,false,CL_normal);
-					printlog(equipment[ET_RIGHT]->GetName(),false,false,false,equipment[ET_RIGHT]->item_color());
-					printlog(";",true,false,false,CL_normal);
+					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color());
 					while(1)
 					{
 						int key_ = waitkeyinput(true);

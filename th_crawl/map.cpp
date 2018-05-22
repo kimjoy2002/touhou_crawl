@@ -580,7 +580,7 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 			(*it)->make_door(env[num]);
 	}
 
-	
+
 	for (auto it=vec_map.begin();it!=vec_map.end();it++)
 		delete *it;
 
@@ -956,8 +956,8 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 	//}
 
 	//
-	//for (it=vec_special_map.begin();it!=vec_special_map.end();it++)
-	//	delete *it;
+	for (it=vec_special_map.begin();it!=vec_special_map.end();it++)
+		delete *it;
 	for(int k=0;k<divide_;k++)
 		env[num].MakeEvent(EVL_DREAM_MESSAGE, coord_def(0,0), EVT_COUNT,dream_count_*(k+1));
 	
@@ -1048,6 +1048,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 	
 
 	int rand_dummy = rand_int(20,30);
+	int check_ = special_enter.size();
 	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
 	{
 		int repeat = 10;
@@ -1089,8 +1090,10 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			}	
 			if(success) //겹치지 않을때 맵더미푸쉬
 			{
-				if(special_)
+				if (special_) {
 					vec_special_map.push_back(temp);
+					check_--;
+				}
 				else
 					vec_map.push_back(temp);
 				break;
@@ -1101,6 +1104,14 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 				continue;
 			}
 		}
+	}
+	if (check_ != 0) {
+		//무조건 특수지형은 만들어져야한다. 안 만들어지면 아예 처음부터 시작
+		for (auto it = vec_special_map.begin(); it != vec_special_map.end(); it++)
+			delete *it;
+		for (auto it = vec_map.begin(); it != vec_map.end(); it++)
+			delete *it;
+		return map_algorithms01(num, floor_tex, wall_tex);
 	}
 	print_special_map(num, vec_special_map);
 	setBaseFloorWall(num, floor_tex, wall_tex);
@@ -1133,6 +1144,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 	int prev_y=0;
 	int step = 0;
 
+	int check_ = special_enter.size();
 	int rand_dummy = special_enter.size();
 	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
 	{	
@@ -1175,6 +1187,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 			if(success) //겹치지 않을때 맵더미푸쉬
 			{
 				vec_special_map.push_back(temp);
+				check_--;
 				break;
 			}
 			else
@@ -1183,6 +1196,14 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 				continue;
 			}
 		}
+	}
+	if (check_ != 0) {
+		//무조건 특수지형은 만들어져야한다. 안 만들어지면 아예 처음부터 시작
+		for (auto it = vec_special_map.begin(); it != vec_special_map.end(); it++)
+			delete *it;
+		for (auto it = vec_map.begin(); it != vec_map.end(); it++)
+			delete *it;
+		return map_algorithms02(num, piece, weight, floor_tex, wall_tex);
 	}
 
 
@@ -1393,6 +1414,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 
 	int rand_dummy = special_enter.size();
+	int check_ = rand_dummy;
 	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
 	{	
 		int repeat = 10;
@@ -1441,6 +1463,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			if(success) //겹치지 않을때 맵더미푸쉬
 			{
 				vec_special_map.push_back(temp);
+				check_--;
 				break;
 			}
 			else
@@ -1450,6 +1473,15 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			}
 		}
 	}
+	if (check_ != 0) {
+		//무조건 특수지형은 만들어져야한다. 안 만들어지면 아예 처음부터 시작
+		for (auto it = vec_special_map.begin(); it != vec_special_map.end(); it++)
+			delete *it;
+		for (auto it = vec_map.begin(); it != vec_map.end(); it++)
+			delete *it;
+		return map_algorithms03(repeat_, size_mn_, size_mx_, m_size_, num, floor_tex, wall_tex);
+	}
+
 
 	print_special_map(num, vec_special_map);
 	setBaseFloorWall(num, floor_tex, wall_tex);
@@ -1604,10 +1636,10 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 	
 	for(int i=DG_TEMPLE_JOON_AND_SION;i<=DG_TEMPLE_LAST;i++)
 	{
-		if (i != DG_TEMPLE_SEIJA && i != DG_TEMPLE_MIKO)// && i != DG_TEMPLE_OKINA && i != DG_TEMPLE_JUNKO)
+		if (i != DG_TEMPLE_SEIJA)// && i != DG_TEMPLE_OKINA && i != DG_TEMPLE_JUNKO)
 			temple_.push((dungeon_tile_type)i);
 	}
-	temple_.push(DG_STATUE);
+	//temple_.push(DG_STATUE);
 
 
 	for(int i=1; i<21; i++)
@@ -1945,7 +1977,9 @@ void map_algorithms_tuto03(int num)
 				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
 			else if(x==52 && y==7) //문
 				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
-			else if(x==53 && y==7) //계단
+			else if (x == 58 && y == 7) //문
+				env[num].dgtile[x][y].tile = DG_CLOSE_DOOR;
+			else if(x==59 && y==7) //계단
 				env[num].dgtile[x][y].tile = DG_UP_STAIR;
 			
 			
@@ -1974,11 +2008,11 @@ void map_algorithms_tuto03(int num)
 			else if(x>=47 && x <=51 && y>=5 && y<=9) //여덟째방
 				env[num].dgtile[x][y].tile = DG_FLOOR;
 
-			
-			else if(x>=5 && x <=53 && y==7) //길목
+			else if (x >= 53 && x <= 57 && y >= 5 && y <= 9) //여덟째방
 				env[num].dgtile[x][y].tile = DG_FLOOR;
-
-
+			
+			else if(x>=5 && x <=59 && y==7) //길목
+				env[num].dgtile[x][y].tile = DG_FLOOR;
 
 			else
 				env[num].dgtile[x][y].tile = DG_WALL;
@@ -1998,7 +2032,7 @@ void map_algorithms_tuto03(int num)
 
 	env[num].MakeEvent(25,coord_def(13,7),EVT_SIGHT);	
 	env[num].MakeItem(coord_def(12,7),makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 10));
-	env[num].MakeItem(coord_def(14,7),makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 30));
+	env[num].MakeItem(coord_def(14,7),makeitem(ITM_WEAPON_MACE, 0, &t, 40));
 	
 	env[num].MakeEvent(26,coord_def(19,7),EVT_SIGHT);
 	env[num].MakeItem(coord_def(18,7),makeitem(ITM_ARMOR_BODY_ARMOUR_2, 0, &t, 0));
@@ -2008,7 +2042,7 @@ void map_algorithms_tuto03(int num)
 
 	env[num].MakeEvent(28,coord_def(31,7),EVT_SIGHT);
 	env[num].MakeItem(coord_def(30,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_AMULET));
-	env[num].MakeItem(coord_def(32,7),makeitem(ITM_THROW_TANMAC, 0, &t, TMT_POISON_NEEDLE));
+	env[num].MakeItem(coord_def(32,7),makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 30));
 	
 	env[num].MakeEvent(29,coord_def(37,7),EVT_SIGHT);
 	env[num].MakeEvent(EVL_SIGHT_P,coord_def(37,6),EVT_SIGHT);
@@ -2017,13 +2051,17 @@ void map_algorithms_tuto03(int num)
 	env[num].MakeEvent(30,coord_def(43,7),EVT_SIGHT);
 	env[num].MakeItem(coord_def(42,7),makeitem(ITM_SPELL, 0, &t, SPC_V_FIRE));
 	env[num].MakeItem(coord_def(44,7),makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
-	
-	env[num].MakeEvent(31,coord_def(49,7),EVT_SIGHT);
-	env[num].MakeItem(coord_def(48,7),makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN));
-	env[num].MakeItem(coord_def(50,7),makeitem(ITM_ORB, 0, &t, 0));
 
 
+	env[num].MakeEvent(31, coord_def(49, 7), EVT_SIGHT);
+	env[num].MakeItem(coord_def(48, 7), makeitem(ITM_AMULET, 0, &t, AMT_TIMES));
+	env[num].MakeItem(coord_def(50, 7), makeitem(ITM_AMULET, 0, &t, AMT_GRAZE));
 	
-	env[num].stair_up[1].x = 53;
+	env[num].MakeEvent(32,coord_def(55,7),EVT_SIGHT);
+	env[num].MakeItem(coord_def(54,7),makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN));
+	env[num].MakeItem(coord_def(56,7),makeitem(ITM_ORB, 0, &t, 0));
+
+
+	env[num].stair_up[1].x = 59;
 	env[num].stair_up[1].y = 7;
 }

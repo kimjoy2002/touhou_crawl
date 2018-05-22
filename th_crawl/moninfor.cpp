@@ -649,7 +649,10 @@ string GetMonsterInfor(monster *it)
 			text_ += "울부짖는 소리로 아군 개를 끌어 모은다. 무시하고 냅두면 어마어마하게 불어난다.\n";
 			break;
 		case MON_DESIRE:
-			text_ += "욕망이 뭉쳐져서 구현화된 덩어리.\n";
+			text_ += "욕망이 뭉쳐져서 구현화된 덩어리. 인간의 욕구와도 같다.\n";
+			text_ += "신령의 색깔에 따라 종류가 다르며 속성또한 다르다.\n";
+			text_ += "빨간색은 불, 파란색은 냉기, 초록색은 전기를 뜻하며 이에 맞는 속성 공격을 시도한다.\n";
+			text_ += "신령에 공격을 받게되면 해당 속성에 대한 저항력이 잠시동안 한단계 낮아진다. \n";
 			break;
 		case MON_FLOWER_TANK:
 			text_ += "누군가 만들어낸 전차.\n";
@@ -670,6 +673,7 @@ string GetMonsterInfor(monster *it)
 		case MON_YORIHIME:
 			text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 여동생.\n";
 			text_ += "신령을 자신의 몸에 깃들게하여 신의 힘을 쓰는 능력을 가지고 있다.\n";
+			text_ += "그녀의 검에 전기와 불이 휘감아져있기때문에 전기와 화염에 대한 저항이 필요할 듯 하다 .\n";
 			break;
 		case MON_TOYOHIME:
 			text_ += "달에서 살고있는 와타츠키 가문의 월인자매 중 언니.\n";
@@ -689,7 +693,8 @@ string GetMonsterInfor(monster *it)
 		case MON_REIMU:
 			text_ += "그 유명한 하쿠레이의 무녀다.\n";
 			text_ += "음양옥을 훔쳤다는 당신을 쫓기위해 날라왔다.\n";
-			text_ += "도망쳐! 분노한 그녀에겐 그 어떤 공격도 통하지않는다구!\n";
+			text_ += "그녀를 이기더라도 죽지않은채로 시간이 지나면 더 강해져서 부활할 것이다.\n";
+			text_ += "결국 그녀를 따돌리고 이 던전에서 탈출해야 당신의 모험이 끝날 것이다.\n";
 			break;
 		case MON_ALICE:
 			text_ += "마법의 숲에 살고 있던 칠색의 인형술사.\n";
@@ -947,11 +952,65 @@ string GetMonsterInfor(monster *it)
 			text_ += "기계로된 거미 모양을 한 달에서 파견된 탐사로봇\n";
 			text_ += "그 것이 지나온 곳에는 풀이 자라지못하고 모든 것을 정화한다고 한다.\n";
 			break;
+		case MON_KAGUYA_QUIZ_0:
+			text_ += "카구야가 냈던 난제중 하나. 용의 역린 부근의 오색으로 빛나는 구슬이다.\n";
+			text_ += "여의주라고도 불리며 역린을 건드리기때문에 얻기가 힘들다고 한다.\n";
+			text_ += "이 영롱한 구슬에서는 짜릿짜릿한 번개가 발생하고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_1:
+			text_ += "카구야가 냈던 난제중 하나. 부처가 사용했다고 하는 돌로 된 밥그릇이다.\n";
+			text_ += "가짜와 달리 실제로 부처가 사용한 석발은 빛이 강하게 난다고 한다.\n";
+			text_ += "이 돌로 된 석발에서는 당신의 방어를 무시하는 강타 공격을 한다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_2:
+			text_ += "카구야가 냈던 난제중 하나. 불쥐의 가죽으로 만든 옷이다.\n";
+			text_ += "특이한 쥐로 만든 이 옷은 불에 대한 데미지를 전혀 받지않는다고 한다.\n";
+			text_ += "이 쥐의 가죽으로 된 옷은 불꽃을 생성하여 날리고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_3:
+			text_ += "카구야가 냈던 난제중 하나. 둥그스름하고 광택있는 조개다.\n";
+			text_ += "제비가 낳았닥 하는 이 조개는 순산을 기원하는 의미가 있다고 한다.\n";
+			text_ += "이 둥그스름한 조개는 차가운 냉기를 발하고 있다.\n";
+			break;
+		case MON_KAGUYA_QUIZ_4:
+			text_ += "카구야가 냈던 난제중 하나. 금, 은, 옥으로 이루어진 나뭇가지다.\n";
+			text_ += "봉래산에 있으며 뿌리는 은, 줄기와 잎사귀는 금이며 과실은 옥으로 되어있다고 한다.\n";
+			text_ += "이 나뭇가지를 잘 살펴보니 탄막이 열려있는 것 같다.\n";
+			break;
+		case MON_MISYAGUZI:
+			text_ += "스와코가 사역하는 공포의 신. 하얀 뱀의 모양을 하고있다.\n";
+			text_ += "미샤구지의 이빨은 저주가 담겨있어서 물린 적은 저항할수없는 감속과 독이 걸린다.\n";
+			break;
 		default:
 			text_ += "찾아볼 수 없는 몬스터\n";
 		}
 	}
 	text_ += "\n\n";
+
+
+	if(it->id == MON_REIMU)
+	{
+		char temp[100];
+		sprintf_s(temp, 100, "이 레이무는 %d번 컨티뉴했다.\n", max(0,you.reimu_level - 1));
+		text_ += temp;
+	}
+
+	{
+		int mon_level_ = it->level;
+		if (it->flag & M_FLAG_UNIQUE)
+			mon_level_ += 3;
+		int you_level_ = you.level+3;
+
+		if (you_level_ - mon_level_*3 > 3)
+			text_ += "이 상대는 무시해도 될 정도로 약해보인다.\n";
+		else if (you_level_ - mon_level_*2 > 0)
+			text_ += "이 상대는 약해보인다.\n";
+		else if (you.level - mon_level_ > 0)
+			text_ += "이 상대는 위험해보인다.\n";
+		else
+			text_ += "이 상대는 아주 위험하다!\n";
+	}
+
 
 
 	if(it->poison_resist)
@@ -992,6 +1051,9 @@ string GetMonsterInfor(monster *it)
 		else if(it->elec_resist>=3)
 			text_ += "절연이다.\n";
 	}
+
+
+
 	if(it->confuse_resist)
 	{
 		if(it->confuse_resist>0)
@@ -1018,16 +1080,31 @@ string GetMonsterInfor(monster *it)
 			text_ += "행동이 매우 느리다.\n";
 	}
 	if(it->isFly())
-			text_ += "하늘을 날 수 있다.\n";
+		text_ += "하늘을 날 수 있다.\n";
 	if (it->isSwim())
 		text_ += "수영을 할 수 있다.\n";
 	if(it->flag & M_FLAG_CAN_SEE_INVI)
-			text_ += "투명을 볼 수 있다.\n";
+		text_ += "투명을 볼 수 있다.\n";
 	if(it->flag & M_FLAG_INANIMATE)
-			text_ += "무생물이다.\n";
+		text_ += "무생물이다.\n";
+	if(it->flag & M_FLAG_RESIST_BLIZARD)
+		text_ += "눈보라에 면역이 있다. 달자매의 힘으로\n";
 	
 	if(it->resist >= 99)
-			text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
+		text_ += "디버프 마법에 대한 면역력이 무한이다.\n";
+	else
+	{
+		text_ += "마법저항: ";
+		for (int i = 0; i < 10; i++ ) {
+			if (it->GetResist() > 110 + i * 20) {
+				text_ += "#";
+			}
+			else {
+				text_ += ".";
+			}
+		}
+		text_ += "\n";
+	}
 	if (it->flag & M_FLAG_SILENCE)
 		text_ += "침묵된 상태에서도 마법이 사용가능하다.\n";
 
@@ -1036,6 +1113,10 @@ string GetMonsterInfor(monster *it)
 	if(it->flag & M_FLAG_SUMMON)
 	{
 		text_ += "\n\n이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다.\n";
+	}
+	if (it->dream)
+	{
+		text_ += "\n이 몬스터는 꿈의 주민이기에 당신의 동료권유나 영혼을 빼앗는 것이 불가능할지도 모른다.\n";
 	}
 
 	if(!it->spell_lists.empty())

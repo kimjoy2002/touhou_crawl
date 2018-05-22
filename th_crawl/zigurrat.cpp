@@ -140,10 +140,11 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 		monster_list.push(MON_CURIOSITY, 10);
 		break;
 	case ZIGURRAT_SOUL:
+		monster_list.push(MON_DESIRE, 10);
 		monster_list.push(MON_HAUNT, 10);
 		monster_list.push(MON_LUNATIC, 4);
 		monster_list.push(MON_NIGHTMARE, 4);
-		monster_list.push(MON_BLOOD_HAUNT, 2);
+		monster_list.push(MON_BLOOD_HAUNT, 2); 
 		break;
 		
 	}
@@ -157,8 +158,9 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 {
 	monster* mon_ = env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
 	mon_->flag &= ~M_FLAG_UNIQUE;
+	mon_->flag |= M_FLAG_NONE_STAIR;
 	mon_->dream = true;
-	int level_up_ = randA(max(0,level_ - mon_->level)/2);
+	int level_up_ = min(9, randA(max(0,level_ - mon_->level/2)));
 	char temp[100];
 	if (level_up_ > 0) {
 		sprintf_s(temp, 100, "²ÞÀÇ ÁÖ¹Î %s+%d", mon_->name.name.c_str(), level_up_);
@@ -168,7 +170,7 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 	}
 	mon_->name = name_infor(temp, mon_->name.name_type);
 	while (level_up_ > 0) {
-		mon_->LevelUpdown(2);
+		mon_->LevelUpdown(2,6.0f,1.0f);
 		level_up_--;
 	}
 }

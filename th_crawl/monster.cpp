@@ -416,7 +416,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, int flag_, int time
 			else
 				state.SetState(MS_ATACK);
 		}
-		SetXY(position_);
+		SetXY(map_num_, position_.x, position_.y);
 		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
@@ -659,7 +659,7 @@ void monster::TurnLoad()
 
 	if(s_exhausted-temp_turn>0)
 		s_exhausted-=temp_turn;
-	else
+	else if(s_exhausted > 0)
 		s_exhausted =0;
 	
 	if(force_turn-temp_turn>0)
@@ -701,31 +701,35 @@ void monster::SetY(int y_)
 }
 void monster::SetXY(int x_, int y_)
 {
+	SetXY(current_level, x_, y_);
+}
+void monster::SetXY(int map_num_, int x_, int y_)
+{
 	if(position.x == x_ && position.y == y_)
 		return;
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, false);
+		env[map_num_].MakeSilence(position, s_silence_range, false);
 	if(s_catch)
 		you.SetCatch(NULL);
 
 	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
 	{
-		env[current_level].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+		env[map_num_].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
 	}
 
 
 	position.set(x_,y_);
-	for(auto it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
+	for(auto it = env[map_num_].floor_list.begin(); it != env[map_num_].floor_list.end();it++)
 	{
 		if(it->position == position)
 			it->onWalk(this);
 	}
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, true);
+		env[map_num_].MakeSilence(position, s_silence_range, true);
 
 	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
 	{
-		env[current_level].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
+		env[map_num_].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
 	}
 
 }
@@ -911,8 +915,11 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_SPEAR:
 	case ATT_NOISE:
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
@@ -962,6 +969,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_SMASH:
 	case ATT_BLOOD:
 	case ATT_BURST:
 	case ATT_DROWNING:
@@ -970,17 +978,20 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	switch(type_)
 	{
 	case ATT_FIRE:
-		bonus_damage = damage_*0.25f;
+	case ATT_FIRE_WEAK:
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
-		bonus_damage = damage_*0.25f;
+	case ATT_COLD_WEAK:
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
-		bonus_damage = damage_*0.25f;
+	case ATT_ELEC_WEAK:
+		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
@@ -1087,10 +1098,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			}
 			break;
 		case ATT_FIRE:
+		case ATT_FIRE_WEAK:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다. ");
 			break;
 		case ATT_COLD:
+		case ATT_COLD_WEAK:
 			if(a.order)
 				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다. ");
 			break;
@@ -1102,6 +1115,12 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			if(a.order)
 			{
 				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
+			}
+			break;
+		case ATT_SMASH:
+			if (a.order)
+			{
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
 			}
 			break;
 		case ATT_BLOOD:	
@@ -1175,8 +1194,10 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
 			break;
 		case ATT_ELEC:
-			if(!GetElecResist())
-				break;
+		case ATT_ELEC_WEAK:
+			if (a.order)
+				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중하고 감전되었다. ");
+			break;
 		case ATT_THROW_ELEC:
 			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
 			break;
@@ -1230,7 +1251,11 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_NORMAL:
 	case ATT_SPEAR:
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
+	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_LUNATIC:
@@ -1260,7 +1285,6 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_CLOUD_NORMAL:
 	case ATT_CLOUD_CURSE:
 	case ATT_PSYCHO:
-	case ATT_ELEC:
 	case ATT_VEILING:
 	case ATT_RUSH:
 	case ATT_WALL:
@@ -1483,7 +1507,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1506,7 +1530,18 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					if (sight_) {
-						printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴했다." :  "죽였다.");
+						{
+							char* c_ = Get_Speak(id, this, MST_DEAD);
+							if (c_)
+								printlog(c_, true, false, false, CL_normal);
+						}
+
+						if (id == MON_REIMU) {
+							printarray(true, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "틈새속으로 사라졌다.");
+						}
+						else {
+							printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴되었다. " : "죽었다. ");
+						}
 
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
@@ -1926,7 +1961,7 @@ int monster::longmove()
 {
 	if(move(inttodirec(direction,position.x,position.y), false))
 	{
-		if(randA(30)==1)
+		if(randA(15)==1)
 			direction = rand_int(0,7);
 	}
 	else
@@ -2183,7 +2218,14 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			else {
 				soundmanager.playSound("kill");
 			}
-			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. ");
+			{
+				char* c_ = Get_Speak(id, this, MST_DEAD);
+				if (c_)
+					printlog(c_, true, false, false, CL_normal);
+			}
+
+			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), 
+				id == MON_REIMU ? "틈새속으로 사라졌다." : (flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. "));
 
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
 				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
@@ -2632,7 +2674,7 @@ int monster::action(int delay_)
 			}
 		}
 
-		if(s_exhausted)
+		if(s_exhausted>0)
 		{
 			s_exhausted--;
 		}
@@ -2684,6 +2726,8 @@ int monster::action(int delay_)
 			if(!s_communication)
 			{
 				s_exhausted = rand_int(40,50);
+				if (id == MON_MOON_RABIT_SUPPORT && !isUserAlly())
+					s_exhausted = -1;
 			}
 
 
@@ -2696,6 +2740,8 @@ int monster::action(int delay_)
 					{
 						mon_->flag &= ~M_FLAG_SUMMON;
 					}
+					mon_->exper = 0;
+					mon_->SetHaste(rand_int(10, 30));
 				}
 				break;
 			case MON_HELL_HOUND:
@@ -2712,7 +2758,9 @@ int monster::action(int delay_)
 
 							if(monster* mon_=BaseSummon(MON_HELL_HOUND, rand_int(20,30), false, false, 2, this, check_pos_, SKD_OTHER, -1))
 							{
-								mon_->SetExhausted(rand_int(5,50));
+								mon_->exper = exper / 2;
+								exper -= mon_->exper;
+								mon_->SetExhausted(rand_int(10,30));
 								mon_->AttackedTarget(target);
 								if(!isUserAlly())
 								{
@@ -2791,7 +2839,7 @@ int monster::action(int delay_)
 			{
 			case MS_NORMAL:
 				longmove();
-				if (flag & M_FLAG_SHIELD) {
+				if (flag & M_FLAG_SHIELD || isUserAlly()) {
 					if (distan_coord(position, first_position) > 4 * 4)
 					{
 						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
@@ -2964,7 +3012,7 @@ int monster::action(int delay_)
 						{
 							will_move.push_back(c_);
 						}
-						if (is_sight && you_detect())//시야 안에 있을때 스텔스 체크
+						if (is_sight && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
 						{
 							FoundTarget(&you, FoundTime());
 							int percent_ = 1;
@@ -3003,7 +3051,7 @@ int monster::action(int delay_)
 	{
 		if(isView() && !(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
 			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight()))
-			env[current_level].MakeShadow(prev_position,image);
+			env[current_level].MakeShadow(prev_position,image, id);
 		prev_sight = false;
 	}
 	
@@ -3610,6 +3658,17 @@ bool monster::SetGhost(int ghost_)
 	if(flag & M_FLAG_INANIMATE)
 	{		
 		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다. ");	
+		return false;
+	}
+	if (id == MON_REIMU)
+	{
+		printlog("낙원의 멋진 무녀는 모든 것으로부터 속박되지않는다.", true, false, false, CL_normal);
+		return false;
+	}
+
+	if (dream)
+	{
+		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "꿈의 주민이기에 속박할 수 없다. ");
 		return false;
 	}
 
@@ -4595,12 +4654,37 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	}
 	return CL_none;
 }
+
+shadow::shadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, string name_)
+{
+	position = c;
+	image = t;
+	type = type_; 
+	original_id = original_id_; 
+	if (type_ == SWT_MONSTER && original_id_ >= 0 && original_id_<MON_MAX &&
+		mondata[original_id_].flag & M_FLAG_UNHARM) 
+	{
+		unharm = true;
+	}
+	else
+	{
+		unharm = false;
+	}
+	name = name_;
+};
+
+
+
+
 void shadow::SaveDatas(FILE *fp)
 {
 	SaveData<int>(fp, texturetoint(image));
 	SaveData<int>(fp, position.x);
 	SaveData<int>(fp, position.y);
-	SaveData<shadow_type>(fp, type);
+	SaveData<shadow_type>(fp, type); 
+	SaveData<int>(fp, original_id);
+	SaveData<bool>(fp, unharm);
+	
 	char temp[100];
 	sprintf_s(temp, 100,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
@@ -4613,6 +4697,8 @@ void shadow::LoadDatas(FILE *fp)
 	LoadData<int>(fp, position.x);
 	LoadData<int>(fp, position.y);
 	LoadData<shadow_type>(fp, type);
+	LoadData<int>(fp, original_id);
+	LoadData<bool>(fp, unharm);
 	char temp[100];
 	LoadData<char>(fp, *temp);
 	name = temp;

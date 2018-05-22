@@ -26,7 +26,7 @@ int SpellcardLength(spellcard_evoke_type skill);
 bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def &target);
 
 
-bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_)
+bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_, bool auto_)
 {
 	if(you.s_confuse)
 	{
@@ -48,7 +48,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 	soundmanager.playSound("spellcard");
 
 	int i=0;
-	if(SpellcardFlagCheck(kind, S_FLAG_DIREC))
+	/*if(SpellcardFlagCheck(kind, S_FLAG_DIREC))
 	{
 		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
 		coord_def target_;
@@ -71,12 +71,13 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		}
 
 	}
-	else if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
+	else */
+	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
 		projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
-		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind)))
+		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
 		{
 			if(fail_)
 				return true;

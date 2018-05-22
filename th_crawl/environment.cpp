@@ -263,6 +263,7 @@ bool environment::MakeMap(bool return_)
 		case PANDEMONIUM_LEVEL+3:
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
+		case ZIGURRAT_LEVEL:
 			{
 				char temp2[200];
 				sprintf_s(temp2,200,"던전 진행: %s에 들어섰다.",CurrentLevelString(floor));
@@ -610,6 +611,56 @@ char environment::getAsciiDot(int x_, int y_)
 	default:
 		return ' ';
 	}
+}
+const char* environment::getTileHelp(int x_, int y_)
+{
+	switch(dgtile[x_][y_].tile)
+	{
+	case DG_DOWN_STAIR:
+	case DG_TEMPLE_STAIR:
+	case DG_MISTY_LAKE_STAIR:
+	case DG_YOUKAI_MOUNTAIN_STAIR:
+	case DG_SCARLET_STAIR:
+	case DG_SCARLET_L_STAIR:
+	case DG_SCARLET_U_STAIR:
+	case DG_BAMBOO_STAIR:
+	case DG_EIENTEI_STAIR:
+	case DG_SUBTERRANEAN_STAIR:
+	case DG_YUKKURI_STAIR:
+	case DG_DEPTH_STAIR:
+	case DG_DREAM_STAIR:
+	case DG_MOON_STAIR:
+	case DG_PANDEMONIUM_STAIR:
+	case DG_HAKUREI_STAIR:
+	case DG_ZIGURRAT_STAIR:
+		return "(>키로 내려가기)";
+	case DG_UP_STAIR:
+		return floor==0?"":"(<키로 올라가기)";
+	case DG_RETURN_STAIR:
+		return "(<키로 올라가기)";
+	case DG_TEMPLE_JOON_AND_SION:
+	case DG_TEMPLE_BYAKUREN:
+	case DG_TEMPLE_KANAKO:
+	case DG_TEMPLE_SUWAKO:
+	case DG_TEMPLE_MINORIKO:
+	case DG_TEMPLE_MIMA:
+	case DG_TEMPLE_SHINKI:
+	case DG_TEMPLE_YUUGI:
+	case DG_TEMPLE_SHIZUHA:
+	case DG_TEMPLE_HINA:
+	case DG_TEMPLE_YUKARI:
+	case DG_TEMPLE_EIRIN:
+	case DG_TEMPLE_YUYUKO:
+	case DG_TEMPLE_SATORI:
+	case DG_TEMPLE_TENSI:
+	case DG_TEMPLE_SEIJA:
+	case DG_TEMPLE_LILLY:
+	case DG_TEMPLE_MIKO:
+	case DG_TEMPLE_OKINA:
+	case DG_TEMPLE_JUNKO:
+		return "(p키로 기도)";
+	}
+	return "";
 }
 int environment::getAutoTileNum(unsigned char bit)
 {
@@ -1009,7 +1060,7 @@ void environment::SummonClear(int map_id_)
 	}
 }
 
-void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_, const string &name_)
+void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, const string &name_)
 {
 	if(isBamboo())
 		return; //죽림에선 만들지 않는다.
@@ -1019,7 +1070,7 @@ void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_,
 	{
 		if(it == shadow_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
 		{
-			shadow_list.insert(it,shadow(c,t,type_,name_));
+			shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 			ReleaseMutex(mutx);
 			return;
 		}
@@ -1027,13 +1078,13 @@ void environment::MakeShadow(const coord_def &c, textures *t, shadow_type type_,
 		{
 			if((*it).type < type_ )
 			{
-				shadow_list.insert(it,shadow(c,t,type_,name_));
+				shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 				ReleaseMutex(mutx);
 				return;
 			}
 			else if((*it).type == type_ )
 			{
-				shadow_list.insert(it,shadow(c,t,type_,name_));				
+				shadow_list.insert(it,shadow(c,t, original_id_,type_,name_));
 				shadow_list.erase(it);
 				ReleaseMutex(mutx);
 				return;
@@ -1822,7 +1873,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			{
 				if(!env[current_level].isMove((*it2),true,true))
 				{
-					block_length_-=(isSprint() || isArena())?20:2;
+					block_length_-=(isTutorial()  || isSprint() || isArena())?20:2;
 					break;
 				}
 				it2++;
@@ -1996,7 +2047,7 @@ bool environment::seeAllMonster()
 	{
 		if ((*it).isLive() && !(*it).isYourShight())
 		{
-			env[current_level].MakeShadow(it->position, it->image);
+			env[current_level].MakeShadow(it->position, it->image, it->id);
 		}
 	}
 	return true;
@@ -2025,6 +2076,18 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 		{
 			if(map_id_)
 				(*map_id_) = (*it).map_id;
+			return &(*it);
+		}
+	}
+	return NULL;
+}
+shadow* environment::isShadowPos(int x_, int y_)
+{
+	list<shadow>::iterator it;
+	for (it = shadow_list.begin(); it != shadow_list.end();)
+	{
+		if (it->position.x == x_ && it->position.y == y_) {
+
 			return &(*it);
 		}
 	}
@@ -2423,18 +2486,32 @@ int GetLevelMonsterNum(int level, bool item_)
 	int level_ = level>=0?level:current_level;
 	if(!item_)
 	{
+		float multi_ = 1.0f;
+
+		if (int penalty_turn_ = you.CheckPeanltyTurn(level))
+		{
+			//1000부터 시작해서 5000턴부터 몬스터 2배
+			if (penalty_turn_ >= 1000) {
+				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
+			}
+		}
+
+
+
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL)
-			return 0;
+			return 0* multi_;
 		else if(level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL)
-			return 6;
+			return 6 * multi_;
 		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-			return 7;
+			return 7 * multi_;
 		else if(level_ >= YUKKURI_LEVEL && level_ <= YUKKURI_LAST_LEVEL)
-			return 20;
+			return 18 * multi_;
 		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
-			return 15;
+			return 15 * multi_;
+		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
+			return 12 * multi_;
 		else
-			return 9;
+			return 9 * multi_;
 	}
 	else{ //아이템
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)

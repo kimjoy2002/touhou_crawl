@@ -25,7 +25,7 @@ struct projectile_infor
 };
 
 
-int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_iterator& beam, projectile_infor* infor_, int m_len_= -1, float sector_ = 0);
-bool Direc_Throw(coord_def* c);
+int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_iterator& beam, projectile_infor* infor_, int m_len_= -1, float sector_ = 0, bool auto_ = false);
+int Direc_Throw(int auto_direc_, coord_def* c);
 
 #endif // __PROJECTILE_H__

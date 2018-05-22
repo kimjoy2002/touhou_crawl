@@ -339,7 +339,7 @@ bool GetGodAbility(int level, bool plus)
 				you.god_value[GT_SUWAKO][1] = randA(SWAKO_2_LAST-1);
 				you.god_value[GT_SUWAKO][2] = randA(SWAKO_3_LAST-1);
 				you.god_value[GT_SUWAKO][3] = randA(SWAKO_4_LAST-1);
-				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1 -2);
+				you.god_value[GT_SUWAKO][4] = randA(SWAKO_5_LAST-1);
 				you.suwako_meet = 1;
 			}
 			break;
@@ -1684,8 +1684,15 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 	{
 		if (new_dungeon_)
 		{
-			printlog("새로운 던전에 진입하여 인기도가 초기화되었다.", true, false, false, CL_miko);
 			you.PietyUpDown(-200);
+			if (down_ && env[current_level].popular == 1) {
+				printlog("새로운 던전에 진입하면서 새로운 인기도로 시작한다.", true, false, false, CL_miko);
+				you.PietyUpDown(60, true);
+			}
+			else {
+				printlog("던전을 옮기면서 인기도가 초기화되었다.", true, false, false, CL_miko);
+
+			}
 		}
 		else if (down_)
 		{
@@ -2200,8 +2207,14 @@ void Pray()
 			else if(num)
 				break;
 		}
-		if(!sacrifice)
-			printarray(true,false,false,CL_warning,3,GetGodString(you.god),GetGodString_is(you.god)?"은 ":"는 ","당신의 기도를 받아들였다.");
+		if (!sacrifice) {
+			if (you.GetPunish(you.god)) {
+				printarray(true, false, false, CL_warning, 3, GetGodString(you.god), GetGodString_is(you.god)?"은 ":"는 ", "심기가 불편해보인다.");
+			}
+			if (!God_PraySpeak()) {
+				printarray(true, false, false, CL_warning, 2, GetGodString(you.god),"에게 당신은 기도헀다.");
+			}
+		}
 	}
 	else
 	{
@@ -2258,6 +2271,7 @@ void Pray()
 						MoreWait();
 					case 'N':
 					case 'n':
+					case VK_ESCAPE:
 						ok_ = false;
 						break;
 					}
@@ -2334,6 +2348,7 @@ void Pray()
 	}
 	you.time_delay += you.GetNormalDelay();
 	you.TurnEnd();
+	you.SetPrevAction('p');
 }
 
 
@@ -3143,10 +3158,11 @@ void God_show()
 			printsub("인기도는 다음 행동을 할 경우 올라간다.", true, CL_normal);
 			printsub("    적을 죽인다. 강할수록 더 많이 올라간다.", true, CL_miko);
 			printsub("    욕망모으기를 이용해 시야내의 적들의 욕망을 모은다.", true, CL_miko);
+			printsub("    새로운 서브던전에 입장한다.", true, CL_miko);
 			printsub("", true, CL_normal);
 			printsub("인기도는 다음 행동을 할 경우 내려간다.", true, CL_normal);
 			printsub("    층을 옮긴다. 올라갈수록 더 많은 인기도가 떨어진다.", true, CL_miko);
-			printsub("    새로운 서브던전에 들어간다. 모든 인기도가 떨어진다.", true, CL_miko);
+			printsub("    서브던전을 옮긴다. 모든 인기도가 떨어진다.", true, CL_miko);
 			printsub("    미코의 권능을 사용한다.", true, CL_miko);
 			printsub("", true, CL_normal);
 			printsub("주변의 적들로부터 인기도를 모을 수 있다.                 (층마다 한번만)", true, CL_miko);
@@ -3717,7 +3733,7 @@ bool god_punish(god_type god)
 					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 집어던졌다!");
 					you.Blink(40);
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
-					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("자이언트스윙",true));
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY, ATT_SMASH,name_infor("자이언트스윙",true));
 					you.damage(temp_att, true);
 				}
 				break;
@@ -4403,7 +4419,7 @@ void printReEnter()
 		printlog("미마: 압도적인 마법으로!", true, false, false, CL_green);
 		break;
 	case GT_SHINKI:
-		printlog("신키: 신키에게 P와 영혼을!", true, false, false, CL_white_puple);
+		printlog("신키에게 P와 영혼을!", true, false, false, CL_warning);
 		break;
 	case GT_YUUGI:
 		printlog("유우기: 더 강한 상대를 찾아라!", true, false, false, CL_yuigi);
@@ -4415,7 +4431,7 @@ void printReEnter()
 		printlog("히나: 그럼 액땜작업을 계속 하겠어", true, false, false, CL_hina);
 		break;
 	case GT_YUKARI:
-		printlog("유카리: 돌아온거야?", true, false, false, CL_yukari);
+		printlog("유카리: 돌아왔구나", true, false, false, CL_yukari);
 		break;
 	case GT_EIRIN:
 		printlog("에이린: 새로운 실험체가 필요해졌어", true, false, false, CL_small_danger);
@@ -4451,5 +4467,500 @@ void printReEnter()
 		break;
 	}
 
+
+}
+
+
+
+
+
+
+
+
+
+
+bool God_PraySpeak()
+{
+	int level_ = pietyLevel(you.piety);
+	switch (you.god)
+	{
+	case GT_BYAKUREN:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("히지리: 아아, 법의 세계에 빛이 가득해", true, false, false, CL_white_blue);
+			return true;
+		case 1:
+			printlog("히지리: 우리 절은 인간과 요괴를 차별하지않는답니다.", true, false, false, CL_white_blue);
+			return true;
+		case 2:
+			printlog("히지리: 고된 수행은 마음을 깨끗하게 하지요.", true, false, false, CL_white_blue);
+			return true;
+		case 3:
+			printlog("히지리: 당신의 노력은 결실을 맺을거랍니다.", true, false, false, CL_white_blue);
+			return true;
+		case 4:
+			printlog("히지리: 비록 마법을 쓰는자라도 몸을 단련해야합니다.", true, false, false, CL_white_blue);
+			return true;
+		case 5:
+			printlog("히지리: 당신이 배운 불교의 가르침을 모두에게 전하세요.", true, false, false, CL_white_blue);
+			return true;
+		case 6:
+			printlog("히지리: 어서오세요. 진정한 부처님의 제자여", true, false, false, CL_white_blue);
+			return true;
+		}
+	case GT_ERROR:
+	case GT_NONE:
+		return false; 
+	case GT_JOON_AND_SION:
+		switch (level_)
+		{
+		default:
+		case 0:
+			if (randA(1))
+				printlog("죠온: 새로운 호구... 아니 고객이 왔네!", true, false, false, CL_joon);
+			else
+				printlog("시온: 배고프다...", true, false, false, CL_sion);
+			return true;
+		case 1:
+			if (randA(1))
+				printlog("죠온: 좀 더 팍팍 써도 된다고", true, false, false, CL_joon);
+			else
+				printlog("시온: 밥은 어딨어?", true, false, false, CL_sion);
+			return true;
+		case 2:
+			if (randA(1))
+				printlog("죠온: 저기 새 명품 핸드백이 사고싶은데 말이야", true, false, false, CL_joon);
+			else
+				printlog("시온: 왜 역병신인 우리를 믿고있는거야?", true, false, false, CL_sion);
+			return true;
+		case 3:
+			if (randA(1))
+				printlog("죠온: 응? 카드가 필요해?", true, false, false, CL_joon);
+			else
+				printlog("시온: 불우이웃돕기는 어때?", true, false, false, CL_sion);
+			return true;
+		case 4:
+			if (randA(1))
+				printlog("죠온: 아끼다 죽을바엔 모두 써버려!", true, false, false, CL_joon);
+			else
+				printlog("시온: 최근엔 배고파도 즐거워", true, false, false, CL_sion);
+			return true;
+		case 5:
+			if (randA(1))
+				printlog("죠온: 우리들이라면 모두를 털어버릴 수 있어!", true, false, false, CL_joon);
+			else
+				printlog("시온: 나도 도움이 될 수 있을까?", true, false, false, CL_sion);
+			return true;
+		case 6:
+			printlog("죠온&시온: 최흉최악의 자매의 힘을 보여주지! ", false, false, false, CL_joon_and_sion);
+			return true;
+		}
+	case GT_KANAKO:
+		if (you.char_name.name.compare("사나에") == 0)
+		{
+			printlog("카나코: 무리는 하지말렴. 사나에", true, false, false, CL_help);
+			return true;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("카나코: 끊임없는 전투로 신앙을 증명하거라", true, false, false, CL_help);
+			return true;
+		case 1:
+			printlog("카나코: 나를 부른 이는 누구인가?", true, false, false, CL_help);
+			return true;
+		case 2:
+			printlog("카나코: 신앙을 방해하는 자는 모두 제거하라", true, false, false, CL_help);
+			return true;
+		case 3:
+			printlog("카나코: 그대의 신앙에는 힘으로서 보답하지", true, false, false, CL_help);
+			return true;
+		case 4:
+			printlog("카나코: 산의 신앙을 더욱 더 퍼트리도록", true, false, false, CL_help);
+			return true;
+		case 5:
+			printlog("카나코: 한때 전투의 신으로 불렸던 몸. 그 힘을 느끼게해주지", true, false, false, CL_help);
+			return true;
+		case 6:
+			printlog("카나코: 진정한 전투의 화신이여 앞으로 나아가라!", true, false, false, CL_help);
+			return true;
+		}
+	case GT_SUWAKO:
+		if (you.char_name.name.compare("사나에") == 0)
+		{
+			printlog("스와코: 요괴퇴치의 시간이야 사나에!", true, false, false, CL_swako);
+			return true;
+		}
+		switch (randA(4))
+		{
+		default:
+		case 0:
+			printlog("스와코: 응? 나 불렀어?", true, false, false, CL_swako);
+			return true;
+		case 1:
+			printlog("스와코: 최근의 신도들은 원하는게 많다니깐", true, false, false, CL_swako);
+			return true;
+		case 2:
+			printlog("스와코: 내가 재앙신인걸 잊지말아~", true, false, false, CL_swako);
+			return true;
+		case 3:
+			printlog("스와코: 좀 더 노력하라고~", true, false, false, CL_swako);
+			return true;
+		case 4:
+			printlog("스와코: 걱정하지마, 충분히 힘은 줄테니깐", true, false, false, CL_swako);
+			return true;
+		}
+	case GT_MINORIKO:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("미노리코: 당신도 가을에 반한거야?", true, false, false, CL_warning);
+			return true;
+		case 1:
+			printlog("미노리코: 수확을 위해선 그만큼의 노력이 필요한거야", true, false, false, CL_warning);
+			return true;
+		case 2:
+			printlog("미노리코: 가을은 정말 아름다운 계절이야!", true, false, false, CL_warning);
+			return true;
+		case 3:
+			printlog("미노리코: 내가 준 고구마는 입맛에 맞아?", true, false, false, CL_warning);
+			return true;
+		case 4:
+			printlog("미노리코: 배는 든든하게 하고 다니지?", true, false, false, CL_warning);
+			return true;
+		case 5:
+			printlog("미노리코: 쌓아올린 모든 노력을 풍년으로 보답할때야!", true, false, false, CL_warning);
+			return true;
+		case 6:
+			printlog("미노리코: 가을의 사도여! 나아가서 가을의 위대함을 알려라!", true, false, false, CL_warning);
+			return true;
+		}
+	case GT_MIMA:
+		if (you.char_name.name.compare("마리사") == 0)
+		{
+			printlog("미마: 오랫만이네, 잘 지내고 있어?", true, false, false, CL_green);
+			return true;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("미마: 새로운 입교 희망자인가?", true, false, false, CL_green);
+			return true;
+		case 1:
+			printlog("미마: 사실 최근엔 제자는 받지않았었지만 특별케이스야", true, false, false, CL_green);
+			return true;
+		case 2:
+			printlog("미마: 마법의 기본은 파워다. 적어두도록", true, false, false, CL_green);
+			return true;
+		case 3:
+			printlog("미마: 선수필승. 먼저 공격한 쪽이 이긴다.", true, false, false, CL_green);
+			return true;
+		case 4:
+			printlog("미마: 내 궁극의 마법이 궁금한가?", true, false, false, CL_green);
+			return true;
+		case 5:
+			printlog("미마: 더 이상 내가 가르쳐줄 마법은 없다.", true, false, false, CL_green);
+			return true;
+		case 6:
+			printlog("미마: 마법의 힘으로 길을 열어라!", true, false, false, CL_green);
+			return true;
+		}
+	case GT_SHINKI:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("신키에게 P와 영혼을! ", true, false, false, CL_warning);
+			return true;
+		}
+	case GT_YUUGI:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("유우기: 넌 얼마나 강하지?", true, false, false, CL_yuigi);
+			return true;
+		case 1:
+			printlog("유우기: 강한 적과 붙어서 너의 강함을 증명해!", true, false, false, CL_yuigi);
+			return true;
+		case 2:
+			printlog("유우기: 난 거짓말을 하는 녀석이 싫어", true, false, false, CL_yuigi);
+			return true;
+		case 3:
+			printlog("유우기: 술은 많이 마실 수 있어?", true, false, false, CL_yuigi);
+			return true;
+		case 4:
+			printlog("유우기: 네가 싸우는걸 보면 왠지 즐거운데!", true, false, false, CL_yuigi);
+			return true;
+		case 5:
+			printlog("유우기: 나중에 나랑 한번 싸워보지않을래?", true, false, false, CL_yuigi);
+			return true;
+		case 6:
+			printlog("유우기: 다음엔 술자리에 초대할테니 꼭 살아서 돌아오라고!", true, false, false, CL_yuigi);
+			return true;
+		}
+	case GT_SHIZUHA:
+		switch (level_)
+		{
+		default:
+		case 0:
+		case 1:
+		case 2:
+			printlog("시즈하는 조용히 당신을 보고있다.", true, false, false, CL_warning);
+			return true;
+		case 3:
+		case 4:
+			printlog("시즈하는 당신의 기도에 고개를 끄덕였다.", true, false, false, CL_warning);
+			return true;
+		case 5:
+			printlog("시즈하: ...이제 우리들의 차례야...", true, false, false, CL_small_danger);
+			return true;
+		case 6:
+			printlog("시즈하: 다음 인기투표는 꼭 부탁할게", true, false, false, CL_small_danger);
+			return true;
+		}
+	case GT_HINA:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("히나: 이 곳엔 재액이 가득해", true, false, false, CL_hina);
+			return true;
+		case 1:
+			printlog("히나: 조금씩 조금씩 액땜을 해나가자", true, false, false, CL_hina);
+			return true;
+		case 2:
+			printlog("히나: 액땜을 방해하는 녀석들은 배제해도 좋아", true, false, false, CL_hina);
+			return true;
+		case 3:
+			printlog("히나: 더욱 더 많은 저주를 모으도록 해", true, false, false, CL_hina);
+			return true;
+		case 4:
+			printlog("히나: 나에겐 그동안 누구도 말을 걸어주지않았어", true, false, false, CL_hina);
+			return true;
+		case 5:
+			printlog("히나: 저주를 모으는 작업은 외로운거지", true, false, false, CL_hina);
+			return true;
+		case 6:
+			printlog("히나: 너는 나와 끝까지 같이 있어줄거지?", true, false, false, CL_hina);
+			return true;
+		}
+	case GT_YUKARI:
+		if (you.char_name.name.compare("레이무") == 0)
+		{
+			printlog("유카리: 환상향의 무녀의 본분이 뭔지 기억하고있지?", true, false, false, CL_yukari);
+			return true;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("유카리: 당신이 나의 새로운 식신?", true, false, false, CL_yukari);
+			return true;
+		case 1:
+			printlog("유카리: 환상향은 모든 것을 수용해", true, false, false, CL_yukari);
+			return true;
+		case 2:
+			printlog("유카리: 결계의 보수작업이 필요해", true, false, false, CL_yukari);
+			return true;
+		case 3:
+			printlog("유카리: 사태의 원인을 알기위해서라도 더 많은 정보가 필요해", true, false, false, CL_yukari);
+			return true;
+		case 4:
+			printlog("유카리: 당신만 믿고있어. 도움이 필요하면 말해", true, false, false, CL_yukari);
+			return true;
+		case 5:
+			printlog("유카리: 내 힘을 받으면 더 이상 경계의 유무는 무의미해", true, false, false, CL_yukari);
+			return true;
+		case 6:
+			printlog("유카리: 당신만이 할 수 있는 일이야", true, false, false, CL_yukari);
+			return true;
+		}
+	case GT_EIRIN:
+		if (you.char_name.name.compare("모코우") == 0)
+		{
+			printlog("에이린: 최근에도 공주님과는 사이좋게 지내나요?", true, false, false, CL_small_danger);
+			return true;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("에이린: 새로운 실험체가 필요해...", true, false, false, CL_small_danger);
+			return true;
+		case 1:
+			printlog("에이린: 이 약을 먹어보고 부작용은 없었어?", true, false, false, CL_small_danger);
+			return true;
+		case 2:
+			printlog("에이린: 좀 더 많은 표본이 필요해", true, false, false, CL_small_danger);
+			return true;
+		case 3:
+			printlog("에이린: 독을 알면 약도 만들 수 있는거야", true, false, false, CL_small_danger);
+			return true;
+		case 4:
+			printlog("에이린: 부작용을 두려워하지마. 효과는 확실해", true, false, false, CL_small_danger);
+			return true;
+		case 5:
+			printlog("에이린: 내가 준 약이라면 실패하지않을거야", true, false, false, CL_small_danger);
+			return true;
+		case 6:
+			printlog("에이린: 이것이 너의 새로운 모습이야", true, false, false, CL_small_danger);
+			return true;
+		}
+	case GT_YUYUKO:
+		if (you.char_name.name.compare("모코우") == 0)
+		{
+			printlog("유유코: 불로불사인 당신이 왜 날 믿는거야?", true, false, false, CL_yuyuko);
+			return true;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+		case 1:
+			printlog("유유코: 새로운 식단은 아직이니?", true, false, false, CL_yuyuko);
+			return true;
+		case 2:
+		case 3:
+			printlog("유유코: 좀 더 느긋하게 있어도 좋아.", true, false, false, CL_yuyuko);
+			return true;
+		case 4:
+			printlog("유유코: 유령은 차갑고 귀엽지않아?", true, false, false, CL_yuyuko);
+			return true;
+		case 5:
+			printlog("유유코: 친구들은 마음에 들어?", true, false, false, CL_yuyuko);
+			return true;
+		case 6:
+			printlog("유유코: 물론 죽더라도 영혼은 함께란다", true, false, false, CL_yuyuko);
+			return true;
+		}
+	case GT_SATORI:
+		switch (level_)
+		{
+		default:
+		case 0:
+		case 1:
+			printlog("사토리는 당신에게 큰 관심이 없다. ", true, false, false, CL_warning);
+			return true;
+		case 2:
+			printlog("사토리는 당신에게 미소지었다. ", true, false, false, CL_warning);
+			return true;
+		case 3:
+			printlog("사토리: 애완동물의 재롱은 언제나 보기 좋군요.", true, false, false, CL_danger);
+			return true;
+		case 4:
+			printlog("사토리는 당신을 쓰다듬었다. ", true, false, false, CL_warning);
+			return true;
+		case 5:
+			printlog("사토리: 오늘의 사료는 입맛에 맞나요?", true, false, false, CL_danger);
+			return true;
+		case 6:
+			printlog("사토리: 다음에 같이 산책하러 가지 않을래요?", true, false, false, CL_danger);
+			return true;
+		}
+	case GT_TENSI:
+		switch (randA(9))
+		{
+		default:
+		case 0:
+			printlog("텐시: 뭐야! 지금 바빠!", true, false, false, CL_tensi);
+			return true;
+		case 1:
+			printlog("텐시: 기도하는거만으로 요행을 바라는건 너무 이기적이지 않아?", true, false, false, CL_tensi);
+			return true;
+		case 2:
+			printlog("텐시: 재미있는 일은 없는거야?", true, false, false, CL_tensi);
+			return true;
+		case 3:
+			printlog("텐시: 오랫만에 지진을 일으켜볼까...", true, false, false, CL_tensi);
+			return true;
+		case 4:
+			printlog("텐시: 한번만 더 귀찮게하면 돌을 던질꺼야!", true, false, false, CL_tensi);
+			return true;
+		case 5:
+			printlog("텐시는 당신에게 돌을 던졌다.", true, false, false, CL_warning);
+			return true;
+		case 6:
+			printlog("텐시는 당신을 보고 키득키득 웃고있다.", true, false, false, CL_warning);
+			return true;
+		case 7:
+			printlog("텐시는 당신을 보고 따분한듯 하품하고 있다.", true, false, false, CL_warning);
+			return true;
+		case 8:
+			printlog("텐시는 당신의 기도를 무시했다.", true, false, false, CL_warning);
+			return true;
+		case 9:
+			printlog("텐시는 산갈치로 당신의 머리를 때렸다.", true, false, false, CL_warning);
+			return true;
+		}
+	case GT_SEIJA:
+		switch (level_)
+		{
+		default:
+		case 0:
+		case 1:
+			printlog("세이자는 당신의 기도를 무시했다.", true, false, false, CL_warning);
+			return true;
+		case 2:
+			printlog("세이자는 당신에 큰 관심이 없어보인다.", true, false, false, CL_warning);
+			return true;
+		case 3:
+			printlog("세이자의 표정은 그다지 안 좋아보인다.", true, false, false, CL_warning);
+			return true;
+		case 4:
+			printlog("세이자: 반칙이라도 살아남는다면 그걸로 충분해", true, false, false, CL_seija);
+			return true;
+		case 5:
+			printlog("세이자: 레지스탕스 생활은 마음에 들어?", true, false, false, CL_seija);
+			return true;
+		case 6:
+			printlog("세이자: 우린 최고의 파트너야 친구!", true, false, false, CL_seija);
+			return true;
+		}
+	case GT_LILLY:
+		return false;
+	case GT_MIKO:
+		return false;
+	case GT_OKINA:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("오키나: 네가 제 수행원으로 맡는지 테스트해볼거야.", true, false, false, CL_okina);
+			return true;
+		case 1:
+			printlog("오키나: 면접은 없어, 실전 테스트로 채용을 결정하지", true, false, false, CL_okina);
+			return true;
+		case 2:
+			printlog("오키나: 나의 존재는 항상 알려져야만 한다", true, false, false, CL_okina);
+			return true;
+		case 3:
+			printlog("오키나: 등 뒤의 문으로 내 힘을 받도록 해라", true, false, false, CL_okina);
+			return true;
+		case 4:
+			printlog("오키나: 슬슬 마이와 사토노는 해방시켜줄까 생각중이다", true, false, false, CL_okina);
+			return true;
+		case 5:
+			printlog("오키나: 실로 네 부하에 맞는 인재로구나. 합격이다!", true, false, false, CL_okina);
+			return true;
+		case 6:
+			printlog("오키나: 보라! 들으라! 말하라! 비신의 진정한 마력을 받아라!", true, false, false, CL_okina);
+			return true;
+		}
+	case GT_JUNKO:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog("순호: 상아여 보고있는가!", true, false, false, CL_junko);
+			return true;
+		}
+	}
+	return false;
 
 }

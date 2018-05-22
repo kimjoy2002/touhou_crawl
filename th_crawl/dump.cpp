@@ -20,6 +20,7 @@
 #include "save.h"
 #include "replay.h"
 #include "mon_infor.h"
+#include "tribe.h"
 
 extern const char *version_string;
 
@@ -85,23 +86,25 @@ void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]);
 
 int caculScore()
 {
-	//경험치+룬하나당 500000점
-	int base = you.exper * 99; //현재 19렙에 185000
-	base += 5000000 * you.haveGoal();
+	long base = you.exper; 
+	int rune_ = you.haveGoal() + you.ziggurat_level/9;
+	if (you.rune[RUNE_SUBTERRANEAN]) //지저와 달의도시는 2개 분량 보너스
+		rune_++;
+	if (you.rune[RUNE_MOON]) //지저와 달의도시는 2개 분량 보너스
+		rune_++;
+	//지구랏 9층당 룬1개 수준의 점수
+	base += 5000 * you.ziggurat_level;
+	base += 10000 * rune_ + 1000* rune_*(rune_ +2);
 
 
 	if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 	{ //클리어 했다.
-		base += 500000; //클리어 보너스 점수
-		double multi = 2 * (max(you.turn,5000) +10000)/ (max(you.turn,5000)) - min(you.turn,200000)/200000;
-		multi = max(multi,1.2);
-		base*=multi;
+		base += 6250000000 * (rune_*rune_) / (you.turn + 80000);
 	}
 	if(!you.GetCharNameString()->empty()) //캐릭터 패널티
 	{		
 		base*=0.7;
 	}
-	base/=2;
 	return base;
 }
 
@@ -182,6 +185,11 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에 의해 ", 64);
 					strncat(death_reason, "죽었다.", 64);
 					break;
+				case ATT_SMASH:
+					if (you.dead_order->order)
+						strncat(death_reason, "에 의해 ", 64);
+					strncat(death_reason, "바닥에 집어던져졌다.", 64);
+					break;
 				case ATT_BLOOD:
 					if (you.dead_order->order)
 						strncat(death_reason, "에 의해 ", 64);
@@ -217,6 +225,16 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에게 ", 64);
 					strncat(death_reason, "빨려죽었다.", 64);
 					break;
+				case ATT_VEILING:
+					if (you.dead_order->order)
+						strncat(death_reason, "의 ", 64);
+					strncat(death_reason, "바람갑옷에 베여죽었다.", 64);
+					break;
+				case ATT_RUSH:
+					if (you.dead_order->order)
+						strncat(death_reason, "에게 ", 64);
+					strncat(death_reason, "교통사고로 죽었다.", 64);
+					break;
 				case ATT_WALL:
 					if (you.dead_order->order)
 						strncat(death_reason, "에게 ", 64);
@@ -250,6 +268,7 @@ bool Dump(int type, string *filename_)
 					strncat(death_reason, "햇빛에 타들어죽었다.", 64);
 					break;
 				case ATT_FIRE:
+				case ATT_FIRE_WEAK:
 				case ATT_THROW_FIRE:
 				case ATT_CLOUD_FIRE:
 				case ATT_FIRE_BLAST:
@@ -259,6 +278,7 @@ bool Dump(int type, string *filename_)
 					strncat(death_reason, "불타죽었다.", 64);
 					break;
 				case ATT_COLD:
+				case ATT_COLD_WEAK:
 				case ATT_THROW_COLD:
 				case ATT_CLOUD_COLD:
 				case ATT_COLD_BLAST:
@@ -267,6 +287,8 @@ bool Dump(int type, string *filename_)
 						strncat(death_reason, "에 의해 ", 64);
 					strncat(death_reason, "얼어죽었다.", 64);
 					break;
+				case ATT_ELEC:
+				case ATT_ELEC_WEAK:
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
 					if (you.dead_order->order)
@@ -376,8 +398,8 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp, "%s\n             ", death_reason);
 		fprintf_s(fp, "최종턴 %d\n\n", you.turn);
 
-		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
-			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string
+		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
+			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
 		);
 
 
@@ -413,9 +435,12 @@ bool Dump(int type, string *filename_)
 	{
 		fprintf_s(fp, "(마력순화)                EV:%4d             민첩:%4d\n", you.ev, you.s_dex);
 	}
-	
-	
-	fprintf_s(fp,"                          SH:%4d             지능:%4d\n\n",you.sh,you.s_int);
+												
+	{
+		int pow_ = min(you.power, 500);
+		fprintf_s(fp, "파워: %d.%02d                SH:%4d             지능:%4d\n\n", pow_ / 100, pow_ % 100, you.sh, you.s_int);
+	}
+
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;
 	fprintf_s(fp,"화염저항: %s%c %c      혼란저항: %c           무기: " , resist_>=100?"∞":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
@@ -447,7 +472,19 @@ bool Dump(int type, string *filename_)
 	else
 		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"없음\n":"착용불가\n");	
 
-	fprintf_s(fp,"                                           머리: ");
+
+	string resist_text_ = "";
+	{
+		for (int i = 0; i < 10; i++) {
+			if (you.GetResist() > 110 + i * 20) {
+				resist_text_ += "#";
+			}
+			else {
+				resist_text_ += ".";
+			}
+		}
+	}
+	fprintf_s(fp,"마법저항: %s                       머리: ", resist_text_.c_str());
 	if(you.equipment[ET_HELMET])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
 	else
@@ -490,13 +527,15 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp,"없음\n");
 	
 	fprintf_s(fp,"\n룬:");
+	int first_rune_ = 0;
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
 		if(you.rune[i])
 		{
-			if(i!=0)
+			if(first_rune_ !=0)
 				fprintf_s(fp,", ");
 			fprintf_s(fp,"%s",rune_string[i]);
+			first_rune_++;
 		}
 	}
 	fprintf_s(fp,"\n");
@@ -508,7 +547,20 @@ bool Dump(int type, string *filename_)
 	{				
 		fprintf_s(fp,"\n");
 	}
-	
+
+	fprintf_s(fp, "\n\n\n<특성>\n"/*,you.item_weight,you.max_item_weight*/);
+
+	if (you.property_vector.empty())
+	{
+		fprintf_s(fp, "당신의 특성이 없습니다.\n");
+	}
+	else {
+		for (auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
+		{
+			fprintf_s(fp, "%s\n", it->GetInfor().c_str());
+		}
+	}
+
 
 
 	fprintf_s(fp,"\n\n당신은 %s에 있다.\n",CurrentLevelString());
@@ -713,7 +765,7 @@ bool Dump(int type, string *filename_)
 
 
 	fclose(fp);
-	if(isNormalGame() && type == 1 && !wiz_list.wizard_mode)
+	if((isNormalGame() || isArena() || isSprint()) && type == 1 && !wiz_list.wizard_mode)
 		sendScore(sql_,filename);
 	if(filename_)
 	{

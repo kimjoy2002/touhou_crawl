@@ -419,8 +419,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_NOISE:
 	case ATT_SPEAR:
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
@@ -490,6 +493,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_STONE_TRAP:
 	case ATT_SMITE:
+	case ATT_SMASH:
 	case ATT_BLOOD:	
 	case ATT_BURST:
 	case ATT_DROWNING:
@@ -500,16 +504,19 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	switch(type_)
 	{
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
+	case ATT_ELEC_WEAK:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetElecResist();
@@ -621,12 +628,14 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		}
 		break;
 	case ATT_FIRE:
+	case ATT_FIRE_WEAK:
 		if(a.order)
 		{
 			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 불타올랐다. ");
 		}
 		break;
 	case ATT_COLD:
+	case ATT_COLD_WEAK:
 		if(a.order)
 		{
 			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 얼어붙었다. ");
@@ -642,6 +651,12 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		if(a.order)
 		{
 			printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
+		}
+		break;
+	case ATT_SMASH:
+		if (a.order)
+		{
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
 		}
 		break;
 	case ATT_BLOOD:	
@@ -723,8 +738,11 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
 		break;
 	case ATT_ELEC:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+	case ATT_ELEC_WEAK:
+		if(a.order)
+		{
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 감전되었다. ");
+		}
 		break;
 	case ATT_DROWNING:
 		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠져 질식하고 있다. ");
@@ -952,6 +970,18 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetFrozen(frozen_);
 
 			}
+			if (a.type == ATT_FIRE_WEAK) {
+				you.SetBuff(BUFFSTAT_RF, BUFF_WEAK_RF, -1, rand_int(30,50));
+			}
+			if (a.type == ATT_COLD_WEAK) {
+				you.SetBuff(BUFFSTAT_RC, BUFF_WEAK_RC, -1, rand_int(30, 50));
+			}
+			if (a.type == ATT_ELEC_WEAK) {
+				you.SetBuff(BUFFSTAT_RE, BUFF_WEAK_RE, -1, rand_int(30, 50));
+			}
+
+
+
 			if(a.type == ATT_CURSE && randA(1))
 			{	
 				SetPoison(15+randA(25), 150, true);
@@ -968,7 +998,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}

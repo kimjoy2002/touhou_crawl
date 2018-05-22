@@ -35,6 +35,7 @@ public:
 	bool IsStreaming;
 	bool IsOverlab;
 	bool lazy_loading;
+	bool quite;
 	long Volume;
 	int Up_time;
 	int Down_time;

@@ -315,9 +315,9 @@ void wiz_mode()
 		{
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
-			printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
-			printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
-			printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
+			printlog("d - 던전 t - 신전 l - 안개의 호수  m - 요괴의 산  s - 홍마관  b - 홍마관도서관", true, false, false, CL_help);
+			printlog("u - 홍마관지하 a - 미궁의죽림 e - 영원정 y - 윳쿠리둥지 p - 짐승길 h - 지령전", true, false, false, CL_help);
+			printlog("r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사 ! - 광몽의 세계", true, false, false, CL_help);
 			printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
@@ -413,6 +413,14 @@ void wiz_mode()
 			env[next_].EnterMap(0, dq);
 			printlog("계단을 내려왔다.", true, false, false, CL_normal);
 			//you.resetLOS(false);
+			break;
+		}
+		case 'R': //맵 재생성	
+		{
+			deque<monster*> dq;
+			env[current_level].ClearFloor();
+			env[current_level].make = false;
+			env[current_level].EnterMap(0, dq);
 			break;
 		}
 		case 'b':
@@ -566,44 +574,77 @@ void wiz_mode()
 				you.s_the_world = -1;
 			}
 			break;
-		case '!':
-		{
-			you.Memorize(SPL_SUMMON_ELEC_BALL, true);
-		}
-		break;
 		case 'm': 
-			{
-				  key_ = waitkeyinput();
-
-				 
-				  if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_ALICE :MON_MURASA+ key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-				  {
-					  mon_->state.SetState(MS_SLEEP);
-					  mon_->flag &= ~M_FLAG_SUMMON;
-					  mon_->ReturnEnemy();
-				  }
-			}
-			break;
-		case 'M':
 		{
-			key_ = waitkeyinput();
+			int id_ = 0;
+			char temp[100];
+			sprintf_s(temp, 100, "몬스터만들기(0~%d) :", MON_MAX - 1);
+			printlog(temp, false, false, false, CL_help);
 
 
-			if (monster* mon_ = BaseSummon(key_ == 'z' ? MON_CURIOSITY : MON_OCCULT_LONG + key_ - 'a', 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
-			{
-				mon_->state.SetState(MS_SLEEP);
-				mon_->flag &= ~M_FLAG_SUMMON;
-				mon_->ReturnEnemy();
+			while (true) {
+				deletelog();
+				sprintf_s(temp, 100, "%d (%s)", id_, mondata[id_].name.name.c_str());
+				printlog(temp, false, false, true, CL_normal);
+
+				key_ = waitkeyinput(true);
+				switch (key_) {
+				case 'k':
+				case VK_UP:
+					id_ += 10;
+					break;
+				case 'j':
+				case VK_DOWN:
+					id_ -= 10;;
+					break;
+				case 'h':
+				case VK_LEFT:
+					id_--;
+					break;
+				case 'l':
+				case VK_RIGHT:
+					id_++;
+					break;
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					id_ = key_ - '0' + id_*10;
+					break;
+				case VK_RETURN:
+					if (monster* mon_ = BaseSummon(id_, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
+					{
+						mon_->state.SetState(MS_SLEEP);
+						mon_->flag &= ~M_FLAG_SUMMON;
+						mon_->ReturnEnemy();
+					}
+					enterlog();
+					return;
+				case VK_BACK:
+					id_ = id_ / 10;
+					break;
+				case VK_ESCAPE://esc
+					enterlog();
+					printlog("몬스터 생성을 취소", true, false, false, CL_help);
+					return;
+				}
+				if (id_ < 0)
+					id_ = 0;
+				if (id_ >= MON_MAX)
+					id_ = MON_MAX - 1;
+
 			}
 		}
 		break;
 		case '.':
-			for (int i = randA(3) + 1; i>0; i--)
-			{
-				BaseSummon(MON_ONBASIRA, rand_int(10, 30), true, false, 2, NULL, you.position, SKD_OTHER, -1);
-			}
-			printarray(true, false, false, CL_help, 1, "카나코는 당신에게 온바시라를 꽂았다!");
-			env[current_level].MakeNoise(you.position, 16, NULL);
+		{
+		}
 			break;
 		case '^':
 			if(you.god != GT_SEIJA)
@@ -633,7 +674,7 @@ void wiz_mode()
 			{
 				for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 				{
-					if(it->isLive())
+					if(it->isLive() && !(it->flag & M_FLAG_UNHARM))
 						it->dead(PRT_PLAYER,false);
 				}
 				for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
@@ -745,7 +786,9 @@ void wiz_mode()
 			printsub(" W      - 시간정지                        ",true,CL_normal);
 			printsub(" D      - 매직맵핑                        ",true,CL_normal);
 			printsub(" b      - 블링크                          ",true,CL_normal);
-			printsub("                                         ",true,CL_normal);
+			printsub(" R      - 현재 층 재구성                  ", true, CL_normal);
+			printsub(" m      - 몬스터 생성                     ", true, CL_normal);
+			printsub("                                          ",true,CL_normal);
 			printsub(" 이외의 커맨드는 불안정하니 비추천        ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);

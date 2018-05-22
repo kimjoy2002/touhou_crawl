@@ -180,7 +180,13 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	if(order->position == target && !SpellFlagCheck(skill, S_FLAG_SEIF))
 		return false;
 
-	if(SpellLength(skill) && length_ > SpellLength(skill)*SpellLength(skill))
+	if (SpellLength(skill) == 1) {
+		//사거리1은 특수 취급
+		if (length_ > 2)
+			return false;
+
+	}
+	else if(SpellLength(skill) && length_ > SpellLength(skill)*SpellLength(skill))
 		return false;
 	if(SpellFlagCheck(skill, S_FLAG_NO_COM))
 		return false;
@@ -417,7 +423,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -890,7 +896,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
 			if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //만약 거리를 벗어날경우 실패한다.
@@ -961,7 +967,7 @@ bool skill_elec_passive(int power, unit* order)
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
 			if(!length_ || length_ >spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.
@@ -1077,7 +1083,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 
-		if((*it).isLive())
+		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs((*start).x-it->position.x),2)+pow((float)abs((*start).y-it->position.y),2);
 			if(!length_ || length_ > spell_length_*spell_length_) //만약 거리를 벗어날경우 실패한다.
@@ -1905,8 +1911,8 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				if(you.equipment[ET_WEAPON])
 					brand_ = (attack_type)GetAttType((weapon_brand)you.equipment[ET_WEAPON]->value5);
 				int damage_ = you.GetAttack(false);
-				damage_*=2.5f;
-				attack_infor temp_att(damage_,2.5f*you.GetAttack(true),
+				damage_*=1.4f;
+				attack_infor temp_att(damage_,1.4f*you.GetAttack(true),
 					99,&you,order->GetParentType(),brand_,name_infor("공격",true));					
 				hit_mon->damage(temp_att, true);
 
@@ -1970,7 +1976,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("spark");
 		}
 		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
-		ThrowSector(38,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
+		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
 	}
@@ -2824,7 +2830,7 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 			it->AttackedTarget(order);			
 		}
 	}
-	if(!randA(4))
+	if(!randA(7))
 		you.SetTransPanalty(1);
 	return true;
 }
@@ -2834,7 +2840,24 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->isplayer())
 		return false;
 	if(!order->Tele_check(true, true))
-		return false;
+		return false;	
+	if (current_level == ZIGURRAT_LEVEL) {
+		printlog("광몽의 세계에선 순간이동의 제어가 불가능하다. 정말로 쓸거야? (y/n) ", true, true, false, CL_small_danger);
+
+		switch (waitkeyinput())
+		{
+		case 'Y':
+		case 'y':
+			break;
+		case 'N':
+		case 'n':
+		case VK_ESCAPE:
+			printlog("취소하였다.", true, true, false, CL_normal);
+			return false;
+		}
+		you.Blink(25);
+		return true;
+	}
 
 	if(you.control_blink(you.search_pos))
 	{
@@ -2854,7 +2877,7 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("timestop");
 		}
-		you.SetTransPanalty(rand_int(4,6));
+		you.SetTransPanalty(rand_int(3,4));
 		you.SetTheWorld(rand_int(5+power/50,max(10,6+power/30)));
 	}
 	return true;
@@ -2947,7 +2970,7 @@ bool skill_moon_communication(int power, bool short_, unit* order, coord_def tar
 	if(order->GetExhausted())
 		return false;
 
-	order->SetCommunication(rand_int(2,4));
+	order->SetCommunication(rand_int(3,5));
 	return true;
 }
 bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
@@ -2989,7 +3012,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		speak_ = "안개의 호수의 꿈을 불러냈다!";
 		break;
 	case 1: //요괴산
-		list_.push_back(MON_WOLF_TENGU);
+		list_.push_back(MON_CROW_TENGU);
 		list_.push_back(MON_YAMABUSH_TENGU);
 		list_.push_back(MON_HANATACA_TENGU);
 		list_.push_back(MON_KATPA_WATER_WIZARD);
@@ -3072,23 +3095,25 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
+		//더 이상 데미지를 주지 않음
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			soundmanager.playSound("wind");
 		}
 		int damage_ = 20+power/8;
 		int reduce_damage_ = damage_;
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
-			reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
-			you.MpUpDown(rand_int(-4,-7));
+			///reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
+			printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "당신의 마나를 흡수하였다. ");
+			you.MpUpDown(rand_int(-7,-12));
 		}
 		else //몬스터는 저항력으로 따짐
 		{
-			monster *mon_ = (monster*)target_unit;
-			reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
+			//monster *mon_ = (monster*)target_unit;
+			//reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
 		}
-		attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
-		target_unit->damage(temp_att, true);
+		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
+		//target_unit->damage(temp_att, true);
 		return true;
 	}
 	return false;
@@ -3168,12 +3193,12 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_CANNON));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("대포알",true));
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("음양탄",true));
 
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("대포알",true));
+			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("음양탄",true));
 			
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("bomb");
@@ -3498,7 +3523,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			soundmanager.playSound("thunder");
 		}
 		vector<coord_def> vt_;
 		{
@@ -4397,8 +4422,180 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
+bool skill_kaguya_spell(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
+	int time_ = rand_int(10, 20);
+	int i = 5;
+	for (; i>0; i--)
+	{
+		if (monster *mon_ = BaseSummon(MON_KAGUYA_QUIZ_0+(5-i), time_, true, true, 3, order, target, SKD_SUMMON_KAGUYA_SPELL, GetSummonMaxNumber(SPL_KAGUYA_SPELL)))
+		{
+			mon_->PlusTimeDelay(-mon_->GetWalkDelay());
+			mon_->SetInvincibility(-1, false);
+			return_ = true;
+		}
+	}
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("summon");
+		}
+	}
+	return return_;
+}
+bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = (8 + pow / 15);
+		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("검", true));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
 
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("knife");
+			}
+			throwtanmac(47, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = (6 + pow / 11);
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("나이프", false));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("knife");
+			}
+			throwtanmac(48, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+
+bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("earthquake");
+		}
+		target_unit->Blink(40);
+		int damage_ = 70;
+		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor("천수력남 던지기", false));
+		target_unit->damage(temp_att, true);
+		return true;
+	}
+	return false;
+}
+
+bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = (5 + pow / 12);
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("부적", true));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot");
+			}
+			throwtanmac(2, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
+	return false;
+}
+
+bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
+{
+	if (!order)
+		return false;
+	unit* unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y);
+	if (!unit_ && order->isEnemyUnit(unit_))
+	{
+		if (order->isplayer())
+			printlog("적 몬스터를 대상으로 써야한다.", true, false, false, CL_normal);
+		return false; //해당 위치에 몬스터가 없다.
+	}
+	if (order->position.distance_from(unit_->position) <= 1)
+	{
+		if (order->isplayer())
+			printlog("밀착한 대상에는 사용할 수 없다.", true, false, false, CL_normal);
+		return false; //해당 위치에 몬스터가 없다.
+	}
+
+
+
+	rand_rect_iterator rit(target, 1, 1, true);
+	//rand_rect_iterator rit(target,range_,range_);
+	while (!rit.end())
+	{
+		if (env[current_level].isMove(rit->x, rit->y, false, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(*rit))
+		{
+			order->SetXY((*rit));
+
+			if (env[current_level].isInSight((*rit))) {
+				soundmanager.playSound("blink");
+				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "에게 순간적으로 이동하며 발차기를 날렸다.");
+			}
+			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor("아공혈", true));
+			unit_->damage(temp_att, false);
+			return true;
+		}
+		rit++;
+	}
+	if (order->isplayer())
+		printlog("그곳으론 도약할 수 없다.", true, false, false, CL_normal);
+	return false; //해당 위치에 몬스터가 없다.
+}
+
+
+bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+		return false;
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		you.search_pos = target;
+		you.god_value[GT_YUKARI][0] = target.x;
+		you.god_value[GT_YUKARI][1] = target.y;
+		you.SetDimension(rand_int(15, 25));
+		soundmanager.playSound("timestop");
+		printlog("레이무에 의해 도망칠 수 없는 결계가 쳐졌다! ", false, false, false, CL_danger);
+		//((monster*)order)
+		if (order)
+		{
+			order->SetExhausted(-1);
+		}
+		return true;
+	}
+	return false;
+}
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -4477,7 +4674,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		t.image = &img_item_armor_helmet[4];
 		t.equip_image = &img_play_item_hat[4];
 		t.name.name = "리본";
-		t.name.name_type = true;
+		t.name.name_type = true; 
 		item_list_->push_back(t);
 		break;
 	}
@@ -4792,7 +4989,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 10));
 		list->push_back(spell(SPL_STASIS, 15));
 		list->push_back(spell(SPL_TELEPORT_SELF, 10));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+		list->push_back(spell(SPL_THROW_KNIFE, 25));
 		list->push_back(spell(SPL_BLINK, 20));
 		{
 			item_infor t;
@@ -4876,6 +5073,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 25));
 		list->push_back(spell(SPL_HASTE_OTHER, 15));
 		break;
+	case MON_YUMEKO:
+		list->push_back(spell(SPL_THROW_SWORD, 30));
+		break;
 	case MON_SCHEMA_EYE:
 		list->push_back(spell(SPL_SCHEMA_TANMAC, 40));
 		break;
@@ -4905,6 +5105,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_FROST, 25));
 		list->push_back(spell(SPL_ICE_BOLT, 20));
 		list->push_back(spell(SPL_BLINK, 30));
+		break;
+	case MON_RAIJUU:
+		list->push_back(spell(SPL_TARGET_ELEC, 30));
 		break;
 	case MON_TEWI:
 		list->push_back(spell(SPL_RABBIT_HORN, 15));
@@ -4966,13 +5169,31 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CALL_HOUND, 15));
 		break;
 	case MON_DESIRE:
+	{
+		if (mon_->fire_resist > 2) {
+			mon_->name.name = "빨간 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_FIRE_WEAK;
+			mon_->image = &img_mons_desire_red;
+		}
+		else if (mon_->ice_resist > 2) {
+			mon_->name.name = "파란 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_COLD_WEAK;
+			mon_->image = &img_mons_desire_blue;
+		}
+		else if (mon_->elec_resist > 2) {
+			mon_->name.name = "초록 " + mon_->name.name;
+			mon_->atk_type[0] = ATT_ELEC_WEAK;
+			mon_->image = &img_mons_desire_green;
+		}
+	}
+	break;
 		break;
 	case MON_FLOWER_TANK:
 		list->push_back(spell(SPL_LASER, 25));
 		list->push_back(spell(SPL_LUMINUS_STRIKE, 15));
 		break;
 	case MON_EVIL_EYE_TANK:
-		list->push_back(spell(SPL_CANNON, 25));
+		list->push_back(spell(SPL_CANNON, 21));
 		break;
 	case MON_SNOW_GIRL:
 		list->push_back(spell(SPL_FREEZE, 20));
@@ -4993,9 +5214,18 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HASTE, 15));
 		break;
 	case MON_SUIKA:
+		list->push_back(spell(SPL_THROW_PLAYER, 30));
 		break;
 	case MON_REIMU:
-		break;
+	{
+		if (you.char_name.name.compare("레이무") == 0)
+		{
+			mon_->image = &img_named_reimu2;
+		}
+		list->push_back(spell(SPL_THROW_AMULET, 15));
+		list->push_back(spell(SPL_WARP_KICK, 7));
+	}
+	break;
 	case MON_ALICE:
 		list->push_back(spell(SPL_DOLLS_WAR, 40));
 		list->push_back(spell(SPL_TELEPORT_SELF, 30));
@@ -5008,12 +5238,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SELF_HEAL, 15));
 		break;
 	case MON_UDONGE:
-		list->push_back(spell(SPL_MIND_BENDING, 15));
+		list->push_back(spell(SPL_MIND_BENDING, 25));
 		list->push_back(spell(SPL_FIELD_VIOLET, 15));
 		break;
 	case MON_KAGUYA:
-		list->push_back(spell(SPL_SUMMON_OPTION, 15));
-		list->push_back(spell(SPL_MANA_DRAIN, 15));
+		list->push_back(spell(SPL_KAGUYA_SPELL, 70));
 		break;
 	case MON_MOKOU:
 		break;
@@ -5024,13 +5253,15 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_FAKE_SANGHAI:
 		break;
 	case MON_HOURAI:
-	case MON_FAKE_HOURAI:
 		list->push_back(spell(SPL_LASER, 60));
+		break;
+	case MON_FAKE_HOURAI:
+		list->push_back(spell(SPL_LASER, 45));
 		break;
 	case MON_TOKIKO:
 	{
 		list->push_back(spell(SPL_TWIST, 15));
-		list->push_back(spell(SPL_VEILING, 15));
+		list->push_back(spell(SPL_VEILING, 25));
 		random_extraction<int> arr_;
 
 		arr_.push(BOOK_TEST_ANNIHILATE);
@@ -5205,7 +5436,22 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_CURIOSITY:
 		list->push_back(spell(SPL_DISCHARGE, 50));
 		list->push_back(spell(SPL_THUNDER_BOLT, 10));
-		break; 
+		break;
+	case MON_KAGUYA_QUIZ_0:
+		list->push_back(spell(SPL_TARGET_ELEC, 20));
+		break;
+	case MON_KAGUYA_QUIZ_1:
+		list->push_back(spell(SPL_SMITE, 12));
+		break;
+	case MON_KAGUYA_QUIZ_2:
+		list->push_back(spell(SPL_FLAME, 20));
+		break;
+	case MON_KAGUYA_QUIZ_3:
+		list->push_back(spell(SPL_FROST, 20));
+		break;
+	case MON_KAGUYA_QUIZ_4:
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 15));
+		break;
 	default:
 		break;
 	}
@@ -5509,6 +5755,20 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_dream_call(power, short_, order, target);
 	case SPL_HYPER_BEAM:
 		return skill_hyper_beam(power, short_, order, target);
+	case SPL_KAGUYA_SPELL:
+		return skill_kaguya_spell(power, short_, order, target);
+	case SPL_THROW_SWORD:
+		return skill_throw_sword(power, short_, order, target);
+	case SPL_THROW_KNIFE:
+		return skill_throw_knife(power, short_, order, target);
+	case SPL_THROW_PLAYER:
+		return skill_throw_player(power, short_, order, target);
+	case SPL_THROW_AMULET:
+		return skill_throw_amulet(power, short_, order, target);
+	case SPL_WARP_KICK:
+		return skill_warp_kick(power, short_, order, target);
+	case SPL_REIMU_BARRIER:
+		return skill_reimu_barrier(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -5970,6 +6230,20 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_dream_call(power, short_, &you, target);
 	case SPL_HYPER_BEAM:
 		return skill_hyper_beam(power, short_, &you, target);
+	case SPL_KAGUYA_SPELL:
+		return skill_kaguya_spell(power, short_, &you, target);
+	case SPL_THROW_SWORD:
+		return skill_throw_sword(power, short_, &you, target);
+	case SPL_THROW_KNIFE:
+		return skill_throw_knife(power, short_, &you, target);
+	case SPL_THROW_PLAYER:
+		return skill_throw_player(power, short_, &you, target);
+	case SPL_THROW_AMULET:
+		return skill_throw_amulet(power, short_, &you, target);
+	case SPL_WARP_KICK:
+		return skill_warp_kick(power, short_, &you, target);
+	case SPL_REIMU_BARRIER:
+		return skill_reimu_barrier(power, short_, &you, target);
 	default:
 		return false;
 	}

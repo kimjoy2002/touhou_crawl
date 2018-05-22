@@ -1544,7 +1544,16 @@ bool skill_swako_sleep(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_ = false;
+	if (monster* mon_ = BaseSummon(MON_MISYAGUZI, rand_int(90, 120), true, false, 2, order, target, SKD_SUMMON_MISYAGUZI, -1))
+	{
+		printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+
+		soundmanager.playSound("summon");
+		return_ = true;
+		enterlog();
+	}
+	return return_;
 }
 bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 {
@@ -2170,7 +2179,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
 	char temp[200];
-	sprintf_s(temp,200,"세이자에게 선물을 받았다.");
+	sprintf_s(temp,200,"세이자에게 선물을 받았다. (%s)", GetGodString(next_));
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
@@ -2319,6 +2328,11 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				if(hit_mon->id == MON_MAID_FAIRY)
 				{
 					printlog("이 요정은 메이드로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
+					return false;
+				}
+				if (hit_mon->dream)
+				{
+					printlog("이 요정은 꿈의 주민이다. 꿈의 존재는 권유할 수 없다.", true, false, false, CL_normal);
 					return false;
 				}
 				if(hit_mon->level > you.level)

@@ -583,6 +583,27 @@ bool remove_curse_scroll(bool pre_iden_)
 bool blink_scroll(bool pre_iden_)
 {
 	changedisplay(DT_GAME);
+	if (current_level == ZIGURRAT_LEVEL ) {
+		if (pre_iden_) {
+			printlog("광몽의 세계에선 순간이동의 제어가 불가능하다. 정말로 쓸거야? (y/n)", true, true, false, CL_small_danger);
+
+			switch (waitkeyinput())
+			{
+			case 'Y':
+			case 'y':
+				break;
+			case 'N':
+			case 'n':
+			case VK_ESCAPE:
+				printlog("취소하였다.", true, true, false, CL_normal);
+				return false;
+			}
+		}
+		you.Blink(25);
+		return true;
+	}
+
+
 	you.search_pos = you.position;
 	you.search = true;
 	bool is_move = false;

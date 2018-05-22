@@ -42,12 +42,12 @@ list<item>::iterator ThrowSelect();
 bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam);
 void paintpath(coord_def c_,beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len, float sector_);
 
-coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true);
-coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true);
+coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
+coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
 
-void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2);
+void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_);
 void Select_Throw();
 
 #endif // __THROW_H__

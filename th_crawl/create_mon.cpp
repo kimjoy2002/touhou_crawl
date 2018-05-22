@@ -218,8 +218,9 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 43,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //아오오니
 	{ 56,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  4}, //용
 	{ 59,  DEPTH_LEVEL,  DEPTH_LEVEL+4, 10,  3}, //벤토라
+	{ 101,  DEPTH_LEVEL,  DEPTH_LEVEL + 4, 10, 1 }, //신령
 
-	
+		
 	//꿈의 세계
 	{ 73,  DREAM_LEVEL,  DREAM_LEVEL, 10,  4}, //맥
 	{ 74,  DREAM_LEVEL,  DREAM_LEVEL, 10,  3}, //악몽
@@ -242,6 +243,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 69,  MOON_LEVEL,  MOON_LEVEL, 10,  2}, //달토끼 지원병
 	{ 70,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //달토끼 척후병
 	{ 72,  MOON_LEVEL,  MOON_LEVEL, 10,  1}, //달토끼 엘리트
+	{ 100,  MOON_LEVEL,  MOON_LEVEL, 10,  3}, //큐리오시티
 	
 	//지저
 	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  3}, //제등요괴
@@ -979,6 +981,13 @@ void create_id_to_mon(int id, int level, int strong)
 		}
 		for(int rand_ =rand_int(1,2), i=0;i<rand_;i++)
 			index.push_back(pair<monster_index, int>(randA(4)?MON_LUIZE:randA(1)?MON_SARA:MON_ELIS, strong + 1));
+		break;
+	case 100:
+		index.push_back(pair<monster_index, int>(MON_CURIOSITY, strong));
+		break;
+	case 101:
+		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_DESIRE, strong));
 		break;
 	}
 
@@ -1753,6 +1762,21 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=1;
 		break;
 	case MON_DESIRE:
+	{
+		switch (randA(2))
+		{
+		case 0:
+			mon->fire_resist = 3;
+			break;
+		case 1:
+			mon->ice_resist = 3;
+			break;
+		case 2:
+			mon->elec_resist = 3;
+			break;
+		}
+		mon->poison_resist = 1;
+	}
 		break;
 	case MON_FLOWER_TANK:
 		mon->ice_resist=1;
@@ -1793,6 +1817,11 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=2;
 		break;
 	case MON_REIMU:
+		mon->fire_resist = 1;
+		mon->elec_resist = 1;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	case MON_ALICE:
 		mon->elec_resist=1;
@@ -1965,7 +1994,8 @@ void SetResistMonster(monster* mon)
 	case MON_BEE:
 		break;
 	case MON_BUSH:
-		mon->elec_resist = 1;
+		mon->fire_resist = -1;
+		mon->elec_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
@@ -2000,6 +2030,22 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_CURIOSITY:
 		mon->elec_resist = 2;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_KAGUYA_QUIZ_0:
+	case MON_KAGUYA_QUIZ_1:
+	case MON_KAGUYA_QUIZ_2:
+	case MON_KAGUYA_QUIZ_3:
+	case MON_KAGUYA_QUIZ_4:
+		mon->elec_resist = 3;
+		mon->ice_resist = 3;
+		mon->fire_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break; 
+	case MON_MISYAGUZI:
 		mon->ice_resist = 1;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
@@ -2212,6 +2258,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_EAGLE, weak(power_));
 		rand_.push(MON_RAIJUU, weak(power_));
 		rand_.push(MON_RACCON, weak(power_));
+		rand_.push(MON_DESIRE, weak(power_));
 		rand_.push(MON_SNOW_GIRL, middle(power_));
 		rand_.push(MON_DRAGON_BABY, middle(power_));
 		rand_.push(MON_BLUE_UFO, middle(power_));
@@ -2220,7 +2267,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_NAMAZ, strong(power_));
 		rand_.push(MON_LANTERN_YOUKAI, strong(power_));
 		rand_.push(MON_ONI, strong(power_));
-		rand_.push(MON_BLUE_ONI, strong(power_));
+		rand_.push(MON_BLUE_ONI, strong(power_)); 
 	}
 	else if (level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL) {
 		rand_.push(MON_SHEEP, weak(power_));
@@ -2241,6 +2288,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_MOON_RABIT_ELITE, middle(power_));
 		rand_.push(MON_LUNATIC, middle(power_));
 		rand_.push(MON_MOON_RABIT_ELITE, strong(power_));
+		rand_.push(MON_CURIOSITY, middle(power_));
 	}
 	else if (level_ == PANDEMONIUM_LEVEL) {
 		rand_.push(MON_EVIL_EYE, weak(power_));

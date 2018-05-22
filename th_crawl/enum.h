@@ -692,6 +692,12 @@ enum monster_index
 	MON_BOMB,
 	MON_DOREKING,
 	MON_CURIOSITY,
+	MON_KAGUYA_QUIZ_0,
+	MON_KAGUYA_QUIZ_1,
+	MON_KAGUYA_QUIZ_2,
+	MON_KAGUYA_QUIZ_3,
+	MON_KAGUYA_QUIZ_4,
+	MON_MISYAGUZI,
 	MON_MAX,
 	MON_MAX_IN_FLOOR = 256
 };
@@ -790,6 +796,7 @@ enum etc_item_type
 	EIT_CAT_TREE,
 	EIT_BROKEN_CAMERA,
 	EIT_KAPPA_TRASH,
+	EIT_PHOTO,
 	EIT_LAST
 };
 
@@ -984,11 +991,15 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_damage_messa
 	ATT_NORMAL=0,
 	ATT_SPEAR,
 	ATT_SMITE,
+	ATT_SMASH,
 	ATT_BLOOD,
 	ATT_NOISE,
 	ATT_FIRE,
+	ATT_FIRE_WEAK,
 	ATT_COLD,
+	ATT_COLD_WEAK,
 	ATT_ELEC,
+	ATT_ELEC_WEAK,
 	ATT_S_POISON,
 	ATT_M_POISON,
 	ATT_SICK,
@@ -1127,7 +1138,9 @@ enum monster_speak_type
 	MST_NORMAL=0,
 	MST_FOUND,
 	MST_MAGIC,
-	MST_CONFUSE
+	MST_CONFUSE,
+	MST_CAMERA,
+	MST_DEAD
 };
 
 enum god_type

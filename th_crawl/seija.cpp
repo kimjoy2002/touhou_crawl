@@ -214,9 +214,9 @@ void seija_real_gift(int key_)
 {	
 	switch(key_)
 	{
-		case GT_BYAKUREN: //무작위 책 3~5개
+		case GT_BYAKUREN: //무작위 책 2~4개
 			{
-				for(int i = rand_int(3,5); i > 0; i--)
+				for(int i = rand_int(2,4); i > 0; i--)
 				{
 					random_extraction<int> rand_;
 
@@ -346,7 +346,8 @@ void seija_real_gift(int key_)
 				random_extraction<int> rand_;
 
 				for (int i = 0; i < EVK_MAX; i++) {
-					if (i != EVK_MAGIC_HAMMER || i != EVK_SKY_TORPEDO) {
+					if (i != EVK_MAGIC_HAMMER && i != EVK_SKY_TORPEDO && i != EVK_CAMERA
+						) {
 						rand_.push(i);
 					}
 				}
@@ -378,7 +379,7 @@ void seija_real_gift(int key_)
 			break;
 		case GT_LILLY: //탄막뭉치
 			{				
-				for(int i = rand_int(3,6); i > 0; i--)
+				for(int i = rand_int(4,7); i > 0; i--)
 				{	
 					item_infor t;
 					item* it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t));
@@ -406,7 +407,7 @@ void seija_real_gift(int key_)
 		break;
 		case GT_OKINA:
 		{
-			for (int i = rand_int(2,3); i > 0; i--)
+			for (int i = rand_int(2,4); i > 0; i--)
 			{
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY));

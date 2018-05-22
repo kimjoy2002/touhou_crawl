@@ -237,6 +237,7 @@ public:
 
 	stair_kind getStairKind(int x_, int y_);
 	char getAsciiDot(int x_, int y_);
+	const char* getTileHelp(int x_, int y_);
 
 
 	bool magicmapping(int x_, int y_);
@@ -262,7 +263,7 @@ public:
 	monster* AddMonster(monster *mon_, coord_def position_, int time_ = 0);
 	monster* AddMonster_Summon(int id_, int flag_, coord_def position_, summon_info &info_ , int time_);
 	void SummonClear(int map_id_);
-	void MakeShadow(const coord_def &c, textures *t, shadow_type type_= SWT_MONSTER, const string &name_ = "");
+	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1);
@@ -310,6 +311,7 @@ public:
 	bool isViolet(coord_def pos_);
 	bool isSanctuary(coord_def pos_);
 	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//해당 위치에 이미 몬스터가 있냐 ㅇ벗냐
+	shadow* isShadowPos(int x_, int y_);//해당 위치에 그림자있는지 확인
 	bool isForbidZone(int x_, int y_);
 	bool isBlockPos(int x_, int y_);
 	bool isSmokePos(int x_,int y_, bool only_fog = false);//해당 위치에 구름이 있냐 없냐(only_fog는 시야를 가리는 구름만 찾는다.)	

@@ -68,7 +68,7 @@ void joon_sion_gift(bool speak_);
 void minoriko_gift(bool speak_);
 void byakuren_gift(bool speak_);
 void kanako_gift(bool speak_);
-item* armour_gift(bool speak_, bool artifact_);
+item* armour_gift(bool speak_, bool artifact_, bool kanako_);
 item* jewelry_gift(bool speak_, bool curse_, bool artifact_);
 void eirin_gift(bool speak_);
 

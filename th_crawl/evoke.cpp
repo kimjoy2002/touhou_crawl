@@ -703,7 +703,7 @@ void HammerPresent() {
 		MakeArtifact(it, 1);
 	}
 	else if (kind_ == 2) {
-		it = armour_gift(false, true);
+		it = armour_gift(false, true, false);
 	}
 	else {
 		it = jewelry_gift(false, false, true);

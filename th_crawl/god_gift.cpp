@@ -117,7 +117,10 @@ bool GodGift(god_type god, int piety)
 	case GT_KANAKO:
 		if(pietyLevel(you.piety)>=5)
 		{
-			kanako_gift(true);
+			if (randA(2)) //66%로 무기
+				kanako_gift(true);
+			else
+				armour_gift(true, false, true);
 			return true;
 		}
 		return false;
@@ -356,7 +359,7 @@ void kanako_gift(bool speak_)
 }
 
 
-item* armour_gift(bool speak_, bool artifact_)
+item* armour_gift(bool speak_, bool artifact_, bool kanako_)
 {
 	random_extraction<int> rand_;
 	rand_.push(0,5); //아머
@@ -388,7 +391,7 @@ item* armour_gift(bool speak_, bool artifact_)
 			it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
 
 			//it->value4 += randA(randA(it->value1/2)); //추가 인챈트
-			if(randA(1) || artifact_) //50%
+			if(randA(kanako_ ? 2 : 1) == 0 || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -405,7 +408,7 @@ item* armour_gift(bool speak_, bool artifact_)
 			item_infor t;
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
 						
-			if(randA(1) || artifact_) //50%
+			if(randA(kanako_ ? 2 : 1) == 0 || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -419,7 +422,7 @@ item* armour_gift(bool speak_, bool artifact_)
 			item_infor t;
 			it = env[current_level].MakeItem(you.position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
 
-			if(randA(1) || artifact_) //50%
+			if(randA(kanako_?2:1)==0 || artifact_) //50%
 				MakeArtifact(it,1);
 		}
 		break;
@@ -432,6 +435,12 @@ item* armour_gift(bool speak_, bool artifact_)
 	{
 		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
+		if (kanako_)
+		{
+			char temp[200];
+			sprintf_s(temp, 200, "카나코에게 선물을 받았다.");
+			AddNote(you.turn, CurrentLevelString(), temp, CL_help);
+		}
 		MoreWait();
 	}
 

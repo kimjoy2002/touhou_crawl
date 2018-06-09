@@ -289,7 +289,7 @@ void seija_real_gift(int key_)
 			{
 				for(int i = rand_int(2,4); i > 0; i--)
 				{	
-					armour_gift(false, false);
+					armour_gift(false, false, false);
 				}
 			}
 			break;

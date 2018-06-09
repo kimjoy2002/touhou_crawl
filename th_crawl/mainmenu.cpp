@@ -172,6 +172,7 @@ public:
 
 bool checkSavefile(int value_)
 {
+	map_list.tutorial = GM_NORMAL;
 	if(ReplayClass.ReplayMode() == true)
 		return false;
 

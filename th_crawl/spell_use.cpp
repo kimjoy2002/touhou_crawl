@@ -696,7 +696,9 @@ bool skill_confuse(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_CONFUSE,pow)))
 		{
-			hit_mon->SetConfuse(rand_int(10,20)+randA(pow/10));
+			int value_ = rand_int(10, 20);
+			value_ += randA(pow / 10);
+			hit_mon->SetConfuse(value_);
 		}
 		else if(hit_mon->isYourShight())
 		{					
@@ -714,7 +716,9 @@ bool skill_slow(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SLOW,pow)))
 		{
-			hit_mon->SetSlow(rand_int(15,30)+randA(pow/8));
+			int value_ = rand_int(15, 30);
+			value_ += randA(pow / 8);
+			hit_mon->SetSlow(value_);
 		}
 		else if(hit_mon->isYourShight())
 		{					
@@ -1251,7 +1255,9 @@ bool skill_glow(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_GLOW,pow)))
 		{
-			hit_mon->SetGlow(rand_int(15,30)+randA(pow/8));
+			int value_ = rand_int(15, 30);
+			value_ += randA(pow / 8);
+			hit_mon->SetGlow(value_);
 		}
 		else if(hit_mon->isYourShight())
 		{					
@@ -1455,9 +1461,13 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 					for(int j=-1;j<=1;j++)
 						if(env[current_level].isMove(pos.x+k,pos.y+j,true))
 							env[current_level].MakeEffect(coord_def(pos.x+k,pos.y+j),&img_fog_poison[0],false);
-				for(int k=-1;k<=1;k++)
-					for(int j=-1;j<=1;j++)
-							env[current_level].MakeSmoke(coord_def(pos.x+k,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
+				for (int k = -1; k <= 1; k++) {
+					for (int j = -1; j <= 1; j++) {
+						int value_ = rand_int(6, 12);
+						value_ += randA(power / 15);
+						env[current_level].MakeSmoke(coord_def(pos.x + k, pos.y + j), img_fog_poison, SMT_CONFUSE, value_, 0, order);
+					}
+				}
 
 				Sleep(300);
 				env[current_level].ClearEffect();
@@ -1478,7 +1488,9 @@ bool skill_poison_cloud(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("wind");
 		}
-		MakeCloud(target, img_fog_poison, SMT_POISON, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
+		int value_ = rand_int(7, 10);
+		value_ += randA(pow / 10);
+		MakeCloud(target, img_fog_poison, SMT_POISON, rand_int(8,10), value_,0,5, order);
 		return true;
 	}
 	return false;
@@ -1490,7 +1502,9 @@ bool skill_ice_cloud(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("cold");
 		}
-		MakeCloud(target, img_fog_cold, SMT_COLD, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
+		int value_ = rand_int(7, 10);
+		value_ += randA(pow / 10);
+		MakeCloud(target, img_fog_cold, SMT_COLD, rand_int(8,10), value_,0,5, order);
 		return true;
 	}
 	return false;
@@ -1500,7 +1514,8 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
 	int id_ = MON_CROW;
-	int time_ = rand_int(20,30)+randA(pow);
+	int time_ = rand_int(20,30);
+	time_ += randA(pow);
 
 	int pow_ = pow/3+randA(pow*2/3);
 	int i = 2;
@@ -2189,7 +2204,9 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 			{		
 				if(hit_mon->CalcuateMR(GetDebufPower(SPL_MIND_BENDING,pow)))
 				{
-					hit_mon->SetSlow(rand_int(10,20)+randA(pow/12));
+					int value_ = rand_int(10, 20);
+					value_ += randA(pow / 12);
+					hit_mon->SetSlow(value_);
 				}
 				else if(hit_mon->isYourShight())
 				{					
@@ -2821,7 +2838,9 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 		{			
 			if(it->CalcuateMR(GetDebufPower(SPL_PRIVATE_SQ,power)))
 			{
-				it->SetSlow(rand_int(15,30)+randA(power/8));
+				int value_ = rand_int(15, 30);
+				value_ += randA(power / 8);
+				it->SetSlow(value_);
 			}
 			else if(it->isYourShight())
 			{					
@@ -3589,7 +3608,8 @@ bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
 	int id_ = MON_RACCON;
-	int time_ = rand_int(20,30)+randA(power);
+	int time_ = rand_int(20,30);
+	time_ += randA(power);
 
 	int pow_ = power/3+randA(power*2/3);
 	int i = 3;
@@ -3610,7 +3630,8 @@ bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
-	int time_ = rand_int(10,30)+randA(power)/2;
+	int time_ = rand_int(10,30);
+	time_ += randA(power) / 2;
 	random_extraction<int> rand_;
 	rand_.push(MON_ONI,2);
 	rand_.push(MON_BLUE_ONI,2);
@@ -3705,7 +3726,9 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("매크로 버스트",false)), true);
 					
 				}
-				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
+				int value_ = rand_int(6, 12);
+				value_ += randA(power / 15);
+				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND, value_,0,order);
 			}
 		}
 		Sleep(300);
@@ -4270,7 +4293,9 @@ bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
 		{
 			if (it->CalcuateMR(GetDebufPower(SPL_MESS_CONFUSION, power)))
 			{
-				it->SetConfuse(rand_int(10, 20) + randA(power / 10));
+				int value_ = rand_int(10, 20);
+				value_ += randA(power / 10);
+				it->SetConfuse(value_);
 			}
 			else if (it->isYourShight())
 			{

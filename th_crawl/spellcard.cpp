@@ -420,8 +420,12 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		return false;
 	}
 	case SPC_V_INVISIBLE:
-		you.SetInvisible(rand_int(20, 30) + randA(power / 4));
+	{
+		int value_ = rand_int(20, 30);
+		value_ += randA(power / 4);
+		you.SetInvisible(value_);
 		return true;
+	}
 	case SPC_V_METAL:
 	{
 		beam_iterator beam(you.position, target);
@@ -461,12 +465,16 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if(it->CalcuateMR(power_))
 				{
-					it->SetConfuse(rand_int(3, 8) + randA(power_ / 5));
+					int value_ = rand_int(3, 8);
+					value_ += randA(power_ / 5);
+					it->SetConfuse(value_);
 				}
 				else if(it->isYourShight())
 				{
 				}
-				it->SetGlow(rand_int(10, 20) + randA(power_ / 5), true);
+				int value_ = rand_int(10, 20);
+				value_ += randA(power_ / 5);
+				it->SetGlow(value_, true);
 				it->AttackedTarget(&you);			
 			}
 		}

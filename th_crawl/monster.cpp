@@ -489,7 +489,8 @@ void monster::FirstContact()
 				int max_ = 10000;
 				while(max_)
 				{
-					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+					int x_ = randA(DG_MAX_X - 1);
+					int y_ = randA(DG_MAX_Y - 1);
 					if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
 					{ //fly와 swim이 이 캐릭터 설정으로 되어있는건 이 캐릭터가 가볼수있는 위치였다. 라는것
 						env[current_level].MakeMapping(coord_def(x_,y_),rand_int(min_size_,max_size_),false,percent_);
@@ -3935,7 +3936,8 @@ bool monster::Teleport()
 	bool prev_sight_ = isYourShight();
 	while(1)
 	{
-		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+		int x_ = randA(DG_MAX_X - 1);
+		int y_ = randA(DG_MAX_Y - 1);
 		if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_))
 		{
 			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);

@@ -675,7 +675,8 @@ void TempleMap(map_dummy* map, int temple_)
 	map->tiles[map->m_entrance.x+map->size_x][map->m_entrance.y+map->size_y] = map->floor_tex;
 	map->tiles[map->m_exit.x+map->size_x][map->m_exit.y+map->size_y] = map->floor_tex;
 
-	int x_=rand_int(1,map->size_x*2-1),y_=rand_int(1,map->size_y*2-1);
+	int x_ = rand_int(1, map->size_x * 2 - 1);
+	int y_ = rand_int(1, map->size_y * 2 - 1);
 	map->tiles[x_][y_] =(dungeon_tile_type)(DG_TEMPLE_FIRST+temple_);
 	//map_list.temple[temple_].detected = true;
 	map_list.temple[temple_].pos = coord_def(x_,y_);

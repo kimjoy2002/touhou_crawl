@@ -466,7 +466,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 			while (1)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
+				int x_ = randA(DG_MAX_X - 1);
+				int y_ = randA(DG_MAX_Y - 1);
 				if (!env[current_level].isInSight(coord_def(x_, y_)) && env[current_level].dgtile[x_][y_].isFloor() && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_STAIR))
 				{
 					env[current_level].changeTile(coord_def(x_, y_), DG_MOON_STAIR);
@@ -538,7 +539,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 			while (1)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
+				int x_ = randA(DG_MAX_X - 1);
+				int y_ = randA(DG_MAX_Y - 1);
 				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
 				{
 					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));
@@ -570,7 +572,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 			while (1)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
+				int x_ = randA(DG_MAX_X - 1);
+				int y_ = randA(DG_MAX_Y - 1);
 				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
 				{
 					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));

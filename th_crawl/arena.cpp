@@ -60,7 +60,8 @@ void createarenamon(int num, int mon_id_ ,bool left)
 	int x_ = 0, y_ = 0;
 	do
 	{
-		x_ = DG_MAX_X/2+(left?-3:3)+rand_int(-1,1), y_ = DG_MAX_Y/2+rand_int(-2,2);
+		x_ = DG_MAX_X / 2 + (left ? -3 : 3) + rand_int(-1, 1);
+		y_ = DG_MAX_Y/2+rand_int(-2,2);
 	}
 	while(!env[num].isMove(x_,y_) || env[current_level].isMonsterPos(x_,y_));
 

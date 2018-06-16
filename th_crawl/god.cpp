@@ -1118,7 +1118,9 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						if (randA(200) < you.piety)
 						{
 							printlog("파워가 회복되었다.", false, false, false, CL_normal);
-							you.PowUpDown(rand_int(3, 5) + randA(mon_->level / 4));
+							int value_ = rand_int(3, 5);
+							value_ += randA(mon_->level / 4);
+							you.PowUpDown(value_);
 						}
 						break;
 					}
@@ -3546,7 +3548,9 @@ bool god_punish(god_type god)
 			case 0:	
 				{
 					you.SetSlow(rand_int(4,20));
-					you.SetPoison(rand_int(30,50)+randA(you.level*10),300,true);
+					int value_ = rand_int(30, 50);
+					value_ += randA(you.level * 10);
+					you.SetPoison(value_,300,true);
 					rand_rect_iterator rit(you.position,1,1);
 					int smoke_ = rand_int(2,5);
 					for(int i = 0; !rit.end() && i < smoke_;rit++)
@@ -3563,7 +3567,8 @@ bool god_punish(god_type god)
 				break;
 			case 1:
 				{
-					int i = rand_int(2,4)+randA(you.level/6); 
+					int i = rand_int(2, 4);
+					i += randA(you.level / 6);
 					for(; i>0 ; i--)
 					{
 						if(monster *mon_ = BaseSummon((you.level > 10 && randA(3)==1)?MON_DEAGAMA:MON_FROG, rand_int(60,120), true, true, 2, NULL, you.position, SKD_OTHER, -1))
@@ -3821,7 +3826,9 @@ bool god_punish(god_type god)
 			case 0:		
 				{
 					you.SetSlow(rand_int(4,20));
-					you.SetPoison(rand_int(20,40)+randA(you.level*8),200,true);
+					int value_ = rand_int(20, 40);
+					value_ += randA(you.level * 8);
+					you.SetPoison(value_,200,true);
 					rand_rect_iterator rit(you.position,1,1);
 					int smoke_ = rand_int(3,7);
 					for(int i = 0; !rit.end() && i < smoke_;rit++)
@@ -3999,7 +4006,8 @@ bool god_punish(god_type god)
 			{
 			case 0:
 				{
-					int i = rand_int(2+randA(you.level/10),5)+randA(you.level/3); 
+					int i = rand_int(2 + randA(you.level / 10), 5);
+					i += randA(you.level/3); 
 					for(; i>0 ; i--)
 					{
 						if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(20,40), true, true, 4, NULL, you.position, SKD_OTHER, -1))

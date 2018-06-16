@@ -453,7 +453,9 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit_->CalcuateMR(GetDebufPower(SKL_SIZUHA_1, pow)))
 				{
-					unit_->SetConfuse(rand_int(5,15)+randA(pow/20));
+					int value_ = rand_int(5, 15);
+					value_ += randA(pow / 20);
+					unit_->SetConfuse(value_);
 				}
 				else if(unit_->isYourShight())
 				{					
@@ -1420,8 +1422,13 @@ bool skill_swako_curse(int power, bool short_, unit* order, coord_def target)
 		{
 			soundmanager.playSound("curse");
 			printarray(false,false,false,CL_swako,2,hit_mon->GetName()->name.c_str(),"¿¡ Àç¾ÓÀ» ³»·È´Ù.");
-			hit_mon->SetSlow(rand_int(2,10)+randA(level_*3));
-			hit_mon->SetPoison(rand_int(20,35)+randA(level_*4),150,true);
+			int value_ = rand_int(2, 10);
+			value_ += randA(level_ * 3);
+			hit_mon->SetSlow(value_); 
+			
+			value_ = rand_int(20, 35);
+			value_ += randA(level_ * 4);
+			hit_mon->SetPoison(value_,150,true);
 			hit_mon->SetPoisonReason(order->GetParentType());
 			hit_mon->AttackedTarget(order);
 
@@ -3392,7 +3399,9 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 				printlog("È­·ÁÇÑ ºÒºû°ú ÆøÁ×ÀÌ ÁÖº¯ÀÇ Àûµé¿¡°Ô ¸ô¾ÆÄ£´Ù! ", true, false, false, CL_joon);
 			} 
 
-			it->SetConfuse(rand_int(5,10)+randA(power/20), true);
+			int value_ = rand_int(5, 10);
+			value_ += randA(power / 20);
+			it->SetConfuse(value_, true);
 			int damage_ = (20 + (you.level * 2))*(power+400.0f)/400;
 
 
@@ -3431,7 +3440,9 @@ bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target
 	{
 		if (it->isLive() && !it->isUserAlly() && env[current_level].isInSight(it->position))
 		{
-			it->SetSlow(rand_int(20, 40) + randA(power / 10));
+			int value_ = rand_int(20, 40);
+			value_ += randA(power / 10);
+			it->SetSlow(value_);
 			enter_++;
 			if (enter_ == 3)
 			{

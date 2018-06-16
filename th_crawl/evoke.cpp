@@ -769,7 +769,8 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 
 	random_extraction<int> mon_list_;
 
-	int num_ = rand_int(1,3)+randA(level_/13);
+	int num_ = rand_int(1, 3);
+	num_ += randA(level_ / 13);
 
 	if(num_ == 1)
 		level_ = min(27,level_ + 5);

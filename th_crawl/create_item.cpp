@@ -405,7 +405,12 @@ void create_id_to_item(int id, int level)
 
 	index.push_back(id_to_item(id, &temp));
 
-	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
+	int x = randA(DG_MAX_X-1);
+	int y=randA(DG_MAX_Y-1);
+	int rand_x=0;
+	int rand_y=0;
+	int r=2+index.size()/3;
+	int k=0;
 	for(vector<item_infor>::iterator it=index.begin();it!=index.end();it++)
 	{ 
 		int x_ = 0, y_ = 0;
@@ -414,7 +419,8 @@ void create_id_to_item(int id, int level)
 		{
 			if(it==index.begin())
 			{
-				x = randA(DG_MAX_X-1),y = randA(DG_MAX_Y-1);
+				x = randA(DG_MAX_X-1);
+				y = randA(DG_MAX_Y-1);
 			}
 			else
 			{

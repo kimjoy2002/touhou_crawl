@@ -533,14 +533,17 @@ void make_lake(int num, int repeat, boolean lava)
 
 		for (int i = rand_int(30, 40); i > 0; i--)
 		{
-			int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1), limit_ = 10000;
+			int x_ = randA(DG_MAX_X - 1);
+			int y_ = randA(DG_MAX_Y - 1);
+			int limit_ = 10000;
 			while (!env[num].isMove(x_, y_, false, false, false) ||
 				(env[num].dgtile[x_][y_].flag & FLAG_NO_MONSTER) ||
 				env[num].isMonsterPos(x_, y_) || env[num].isStair(x_, y_))
 			{
 				if (limit_-- < 0)
 					break;
-				x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
+				x_ = randA(DG_MAX_X - 1);
+				y_ = randA(DG_MAX_Y - 1);
 			}
 			if (limit_ <= 0)
 				continue;
@@ -589,7 +592,8 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 	{
 		while(1)
 		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
+			int x = randA(DG_MAX_X - 1);
+			int y = randA(DG_MAX_Y - 1);
 			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
 			{
 				if(i>2)
@@ -760,7 +764,8 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 	{
 		while(1)
 		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
+			int x = randA(DG_MAX_X - 1);
+			int y = randA(DG_MAX_Y - 1);
 			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
 			{
 				if(i>2)
@@ -970,7 +975,8 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 	{
 		while(1)
 		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
+			int x = randA(DG_MAX_X - 1);
+			int y = randA(DG_MAX_Y - 1);
 			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
 			{
 				if(i>2)

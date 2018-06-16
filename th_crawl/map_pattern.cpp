@@ -2909,7 +2909,9 @@ char* youkai_last_vault_pattern(map_dummy* map)
 		while(mon_num_)
 		{
 			int hw_ = randA(1);
-			coord_def c_(hw_?rand_int(-6,6):rand_int(5,6)*(randA(1)*2-1),hw_?rand_int(5,6)*(randA(1)*2-1):rand_int(-6,6));
+			int tempx_ = rand_int(5, 6);
+			int tempy_ = rand_int(5, 6);
+			coord_def c_(hw_?rand_int(-6,6): tempx_*(randA(1)*2-1),hw_? tempy_*(randA(1)*2-1):rand_int(-6,6));
 			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
 				[c_](mapdummy_mon &v)->bool{
 					return v.pos == c_;

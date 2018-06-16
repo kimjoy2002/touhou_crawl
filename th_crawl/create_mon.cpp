@@ -991,7 +991,12 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	}
 
-	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
+	int x = randA(DG_MAX_X-1);
+	int y=randA(DG_MAX_Y-1);
+	int rand_x=0;
+	int rand_y=0;
+	int r=2+index.size()/3;
+	int k=0;
 	for(auto it=index.begin();it!=index.end();it++)
 	{ 
 		int x_ = 0, y_ = 0;
@@ -1000,7 +1005,8 @@ void create_id_to_mon(int id, int level, int strong)
 		{
 			if(it==index.begin())
 			{
-				x = randA(DG_MAX_X-1),y = randA(DG_MAX_Y-1);
+				x = randA(DG_MAX_X-1);
+				y = randA(DG_MAX_Y-1);
 			}
 			else
 			{
@@ -1140,10 +1146,12 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 6:
 		{
-			int x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+			int x_=randA(DG_MAX_X-1);
+			int y_=randA(DG_MAX_Y-1);
 			while(!env[level].isMove(x_,y_) || (env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
 			{
-				x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+				x_=randA(DG_MAX_X-1);
+				y_=randA(DG_MAX_Y-1);
 			}			
 			env[level].MakeEvent(EVL_KISME,coord_def(x_,y_),EVT_APPROACH_SMALL);
 		}
@@ -1249,10 +1257,12 @@ void create_id_to_unique(int id, int level)
 	case 31:
 		if(randA(5)==0)
 		{
-			int x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+			int x_=randA(DG_MAX_X-1);
+			int y_=randA(DG_MAX_Y-1);
 			while(!env[level].isMove(x_,y_) || (env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
 			{
-				x_=randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+				x_ = randA(DG_MAX_X - 1);
+				y_ = randA(DG_MAX_Y - 1);
 			}			
 			env[level].MakeEvent(EVL_KOISHI,coord_def(x_,y_),EVT_APPROACH_SMALL);
 		}
@@ -1369,7 +1379,12 @@ void create_id_to_unique(int id, int level)
 		break;
 	}
 
-	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
+	int x = randA(DG_MAX_X-1);
+	int y=randA(DG_MAX_Y-1);
+	int rand_x=0;
+	int rand_y=0;
+	int r=2+index.size()/3;
+	int k=0;
 	for(vector<monster_index>::iterator it=index.begin();it!=index.end();it++)
 	{ 
 		int x_ = 0, y_ = 0, limit_ = 10000;
@@ -1383,7 +1398,8 @@ void create_id_to_unique(int id, int level)
 				break;
 			if(it==index.begin())
 			{
-				x = randA(DG_MAX_X-1),y = randA(DG_MAX_Y-1);
+				x = randA(DG_MAX_X - 1);
+				y = randA(DG_MAX_Y - 1);
 			}
 			else
 			{

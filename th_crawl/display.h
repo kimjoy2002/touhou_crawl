@@ -9,7 +9,7 @@
 #ifndef  __DISPLAY_H__
 #define  __DISPLAY_H__
 
-#include <String.h>
+#include <string>
 #include <list>
 #include "enum.h"
 

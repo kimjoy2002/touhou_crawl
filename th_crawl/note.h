@@ -9,7 +9,7 @@
 #ifndef  __NOTE_H__
 #define  __NOTE_H__
 
-#include <String.h>
+#include <string>
 #include <list>
 #include <d3dx9.h>
 

@@ -13,3 +13,7 @@ save.dat
 .suo
 .ini
 .wav
+
+!th_crawl/.vscode/
+!th_crawl/CMakeLists.txt
+!th_crawl/dll/

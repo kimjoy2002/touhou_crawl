@@ -2,8 +2,8 @@
 !th_crawl/
 
 th_crawl/th_crawl.*
-th_crawl/*.txt
 th_crawl/replay/*
+th_crawl/build
 Debug/
 morgue/
 Release/

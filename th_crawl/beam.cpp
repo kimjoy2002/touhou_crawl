@@ -28,8 +28,13 @@ beam_iterator::beam_iterator(const coord_def &start_,const coord_def &target_, r
 	max_length = max(abs(start.x-target.x),abs(start.y-target.y));
 	//max_length = sqrt(pow((float)abs(start.x-target.x),2)+pow((float)abs(start.y-target.y),2));	
 	cur_length = 1;
-	x_step = (float)(target.x-start.x+0.0001f)*cur_length/max_length;
-	y_step = (float)(target.y-start.y+0.0001f)*cur_length/max_length;
+	if(max_length == 0) {
+		x_step = 0;
+		y_step = 0;
+	} else {
+		x_step = (float)(target.x-start.x+0.0001f)*cur_length/max_length;
+		y_step = (float)(target.y-start.y+0.0001f)*cur_length/max_length;
+	}
 	x = start.x + x_step;
 	y = start.y + y_step;
 	type = type_;

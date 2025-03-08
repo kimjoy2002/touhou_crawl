@@ -303,7 +303,17 @@ unsigned int WINAPI SoundLoop(void *arg)
 }
 
 
-
+unsigned int ExceptionGameLoop() {
+	try {
+		return GameInnerLoop();
+	}
+	catch(std::exception& e) {
+		std::string msg = "exception occurs! : ";
+		msg += e.what();
+		::MessageBoxA(0, msg.c_str(), "Error", MB_OK | MB_ICONERROR);
+	}
+	return 0;
+}
 
 
 unsigned int WINAPI GameLoop(void *arg)
@@ -312,7 +322,7 @@ unsigned int WINAPI GameLoop(void *arg)
 	{
 		__try
 		{
-			return GameInnerLoop();
+			return ExceptionGameLoop();
 		}
 		__except(1)
 		{

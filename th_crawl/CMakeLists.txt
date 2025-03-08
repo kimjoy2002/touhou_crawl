@@ -41,6 +41,10 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(${PROJECT_NAME} PRIVATE _DEBUG)
     target_compile_options(${PROJECT_NAME} PRIVATE /MDd)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi /Ob0 /Od /RTC1")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /DEBUG")
+    add_compile_options(-fsanitize=address)
+    add_link_options(-fsanitize=address)
     execute_process(
         COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Debug
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Debug

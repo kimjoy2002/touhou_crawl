@@ -26,6 +26,7 @@
 #include "mon_infor.h"
 #include "mapsearching.h"
 #include "soundmanager.h"
+#include "localization.h"
 
 #include "option_manager.h"
 
@@ -254,6 +255,12 @@ void Test_char_init(item_type item_, int bonus)
 
 void addItem_temp(item_type item_type_, int item_id, int num);
 extern void start_mainmenu();
+
+void init_localization() {
+	LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_KOR);
+}
+
+
 
 void charter_selete()
 {//인간,마법사,요정,카라스텐구,백랑텐구,캇파,반요,츠구모가미,흡혈귀,오니,사신, 달토끼, 천인, 용궁의사자, 유 령, 망령, 소령

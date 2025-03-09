@@ -13,6 +13,7 @@
 #include "enum.h"
 #include "const.h"
 #include "display.h"
+#include "localization.h"
 
 class unit;
 class monster;
@@ -21,7 +22,8 @@ class monster;
 class name_infor
 {
 public:
-	string name;	
+	monster_index name_key;
+	string name;
 	bool name_type;
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
@@ -30,8 +32,10 @@ public:
 	const char* name_do(bool blank=false)/*이가*/const{return (name_type?(blank?"이 ":"이"):(blank?"가 ":"가"));}
 	const char* name_and(bool blank=false)/*과와*/const{return (name_type?(blank?"과 ":"과"):(blank?"와 ":"와"));}
 	const char* name_by(bool blank=false)/*으로로*/const{return (name_type?(blank?"으로 ":"으로"):(blank?"로 ":"로"));}
+	name_infor(monster_index name_key){this->name_key=name_key;}
 	name_infor(string name_ = "없음", bool name_type_ = true){name=name_;name_type=name_type_;}
 	name_infor(const name_infor &t){name=t.name;name_type=t.name_type;}
+	string getName(){return name;};
 };
 
 struct attack_infor

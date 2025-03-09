@@ -22,6 +22,7 @@ extern const char *version_string;
 
 extern HANDLE endmutx;
 extern bool Display(float timeDelta);
+extern void init_localization();
 extern void charter_selete();
 extern void MainLoop();
 extern void Initialize();
@@ -356,6 +357,7 @@ unsigned int WINAPI GameLoop(void *arg)
 
 unsigned int WINAPI GameInnerLoop()
 {
+	init_localization();
 	charter_selete();
 	MainLoop();
 	return 0;

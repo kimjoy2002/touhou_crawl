@@ -4461,7 +4461,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
-			sprintf_s(string_,30,smoke_->GetName());
+			sprintf_s(string_,30,smoke_->GetName().c_str());
 			return CL_normal;
 		}
 		return CL_none;

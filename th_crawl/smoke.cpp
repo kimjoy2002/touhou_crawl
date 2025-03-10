@@ -112,38 +112,38 @@ bool smoke::offsetmove(const coord_def &c)
 		return false;
 	}
 }
-char* smoke::GetName()
+string smoke::GetName()
 {
 	switch(type)
 	{
 	case SMT_NORMAL:
-		return "옅은 연기";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_NORMAL);
 	case SMT_FOG:
-		return "안개 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_FOG);
 	case SMT_FIRE:
-		return "화염 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_FIRE);
 	case SMT_COLD:
-		return "냉기 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_COLD);
 	case SMT_ELEC:
-		return "전기 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_ELEC);
 	case SMT_DARK:
-		return "암흑 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_DARK);
 	case SMT_SION:
-		return "빈곤 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_SION);
 	case SMT_POISON:
-		return "독 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_POISON);
 	case SMT_CONFUSE:
-		return "혼란 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_CONFUSE);
 	case SMT_SLOW:
-		return "스위트 포이즌";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_SLOW);
 	case SMT_TWIST:
-		return "트위스트";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_TWIST);
 	case SMT_WHIRLWIND:
-		return "회오리바람";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_WHIRLWIND);
 	case SMT_CURSE:
-		return "저주 구름";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_CURSE);
 	case SMT_BLIZZARD:
-		return "블리자드";
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_BLIZZARD);
 	default:
 		return 0;
 	}

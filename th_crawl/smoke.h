@@ -34,7 +34,7 @@ public:
 	bool action(int delay_);
 	bool offsetmove(const coord_def &c);
 	int sight_inter();
-	char* GetName();
+	string GetName();
 	bool effectSmoke(unit* unit_);
 	int danger(unit* unit_, bool first_ = true);
 };

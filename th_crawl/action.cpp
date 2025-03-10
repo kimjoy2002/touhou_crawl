@@ -87,31 +87,31 @@ void Long_Move(const coord_def &c)
 	you.search = false;
 	if(env[current_level].insight_mon(MET_ENEMY))
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_MON),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.s_dimension)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_DIMENSTION),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSTION),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.resetLOS() == IT_MAP_DANGER)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_MAP_DANGER),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(!PathSearch(you.position,c,you.will_move,ST_NORMAL))
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_UNABLE_MOVE),true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
 	}
 	stack_move(false);
 }
@@ -208,18 +208,18 @@ void auto_battle()
 {
 	if(!env[current_level].insight_mon(MET_ENEMY))
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_NOMON),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_NOMON),true,false,false,CL_small_danger);
 		return;
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.GetHp() <= you.GetDangerHp())
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_AUTOBATTLE_DANGERHP),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOBATTLE_DANGERHP),true,false,false,CL_small_danger);
 		return;
 	}
 
@@ -242,7 +242,7 @@ void auto_battle()
 	}
 	else
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_AUTOBATTLE_NOMON),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOBATTLE_NOMON),true,false,false,CL_small_danger);
 		return;
 	}
 
@@ -253,7 +253,7 @@ void auto_Move()
 {	
 	if(you.s_lunatic)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_LUNATIC_PENALTY),true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return;
 	}
 	you.search = false;
@@ -268,31 +268,31 @@ void auto_Move()
 	}*/
 	if(env[current_level].insight_mon(MET_ENEMY))
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_MON),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.s_dimension)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_DIMENSTION),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSTION),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(env[current_level].isBamboo())
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_AUTOTRAVEL_BAMBOO),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTRAVEL_BAMBOO),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
 	if(you.resetLOS() == IT_MAP_DANGER)
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_MAP_DANGER),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
@@ -333,34 +333,34 @@ void auto_Move()
 			break;
 	}
 	while(!you.will_move.empty()){you.will_move.pop();}
-	printlog(LocalzationManager::locString(LOC_DESCRIPTION_DONE_EXPLORE),true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_DONE_EXPLORE),true,false,false,CL_normal);
 }
 
 void long_rest()
 {
 	if(env[current_level].insight_mon(MET_ENEMY))
 	{
-		printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_MON),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 		return;
 	}
 	you.SetPrevAction('5');
-	printlog(LocalzationManager::locString(LOC_DESCRIPTION_REST_START),true,false,false,CL_bad);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_REST_START),true,false,false,CL_bad);
 	for(int i=0;i<100;i++)
 	{		
 		you.time_delay += you.GetNormalDelay();
 		switch(you.TurnEnd())
 		{
 		case IT_HP_RECOVER:
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_REST_HP),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_REST_HP),true,false,false,CL_normal);
 			return;
 		case IT_MP_RECOVER:
 			if(!you.pure_mp)
-				printlog(LocalzationManager::locString(LOC_DESCRIPTION_REST_MP),true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_REST_MP),true,false,false,CL_normal);
 			else
-				printlog(LocalzationManager::locString(LOC_DESCRIPTION_REST_HP), true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_REST_HP), true, false, false, CL_normal);
 			return;
 		case IT_MAP_DANGER:
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_MAP_DANGER),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 			return;
 		case IT_MAP_FIND:
 		//case IT_HUNGRY:
@@ -379,7 +379,7 @@ void long_rest()
 		if(waitkeyinput(false, true))
 			return;
 	}
-	printlog(LocalzationManager::locString(LOC_DESCRIPTION_REST_DONE),true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_REST_DONE),true,false,false,CL_normal);
 }
 
 
@@ -394,19 +394,19 @@ bool stack_move(bool auto_)
 			return false;
 		if(env[current_level].insight_mon(MET_ENEMY))
 		{
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_MON),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 			while(!you.will_move.empty()){you.will_move.pop();}
 			return false;
 		}
 		if(you.s_confuse)
 		{
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_CONFUSE),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
 			while(!you.will_move.empty()){you.will_move.pop();}	
 			return false;
 		}
 		if(you.s_dimension)
 		{
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_DIMENSTION),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSTION),true,false,false,CL_small_danger);
 			while(!you.will_move.empty()){you.will_move.pop();}	
 			return false;
 		}
@@ -417,7 +417,7 @@ bool stack_move(bool auto_)
 		switch(you.inter)
 		{
 		case IT_MAP_DANGER:
-			printlog(LocalzationManager::locString(LOC_DESCRIPTION_MAP_DANGER),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 			return false;
 		case IT_ITEM_PICKUP:
 		case IT_MAP_FIND:
@@ -438,7 +438,7 @@ bool stack_move(bool auto_)
 		{
 			while(!you.will_move.empty()){you.will_move.pop();}
 			if(env[current_level].insight_mon(MET_ENEMY))
-				printlog(LocalzationManager::locString(LOC_DESCRIPTION_LOS_MON),true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 			return false;
 		}
 		else if(item_interupt_<-1){
@@ -488,16 +488,16 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 		deletelog();
 		if(!wide)
 			//"(명령어: v - 설명   . - 탐색   e - 위험구역설정)"
-			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5} - {6})",LocalzationManager::locString(LOC_SYSTEM_COMMAND), "v",LocalzationManager::locString(LOC_SYSTEM_DESCRIPTION), ".",LocalzationManager::locString(LOC_SYSTEM_EXPLORE), "e",LocalzationManager::locString(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
+			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5} - {6})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
 		else
 			//"(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기   e - 위험구역설정)"
-			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5},{6} - {7}   {8} - {9})", LocalzationManager::locString(LOC_SYSTEM_COMMAND), "v",LocalzationManager::locString(LOC_SYSTEM_DESCRIPTION), ".",LocalzationManager::locString(LOC_SYSTEM_EXPLORE), "<", ">", LocalzationManager::locString(LOC_SYSTEM_STAIR_TRAVEL), "e",LocalzationManager::locString(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
+			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5},{6} - {7}   {8} - {9})", PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "<", ">", PlaceHolderHelper(LOC_SYSTEM_STAIR_TRAVEL), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
 
 	}
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
 	{
 		//"(명령어: v - 설명)"
-		printlog(LocalzationManager::formatString("({0}: {1} - {2})",LocalzationManager::locString(LOC_SYSTEM_COMMAND), "v", LocalzationManager::locString(LOC_SYSTEM_DESCRIPTION)),true,false,true,CL_help);	
+		printlog(LocalzationManager::formatString("({0}: {1} - {2})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v", PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),true,false,true,CL_help);	
 	}
 	else
 		deletelog();
@@ -509,7 +509,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 		{
 			if((*it).isLive() && (*it).isView() && (*it).position.x == you.search_pos.x && (*it).position.y == you.search_pos.y)
 			{
-				printlog(LocalzationManager::formatString("{0}: ", LocalzationManager::locString(LOC_SYSTEM_MONSTER)),false,false,true,CL_help);
+				printlog(LocalzationManager::formatString("{0}: ", PlaceHolderHelper(LOC_SYSTEM_MONSTER)),false,false,true,CL_help);
 				printlog((*it).name.getName(),false,false,true,CL_normal);
 				bool state_ = false;
 				if (!((*it).flag & M_FLAG_NO_STATE))
@@ -612,28 +612,27 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 			}
 			else
 			{
-				printlog("많은 아이템들",true,false,true,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MANY_ITEMS),true,false,true,CL_normal);
 			}
 		}
 	}
 
 	if(!(env[current_level].isInSight(you.search_pos)))
 	{
-		string s = "보이지 않는 곳";
-		printlog(s,true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TERRAIN_UNSEEN),true,false,true,CL_normal);
 		return_ = 0;
 	}
 	if(env[current_level].isExplore(you.search_pos.x,you.search_pos.y) || env[current_level].isMapping(you.search_pos.x,you.search_pos.y))
 	{//지형확인
 		
-		string s = "[지형: ";
+		string s = "[" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN) +": ";
 		s += dungeon_tile_tribe_type_string[env[current_level].dgtile[you.search_pos.x][you.search_pos.y].tile];
 		if(env[current_level].isSilence(you.search_pos))
-			s += " (정적)";
+			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN) + ")";
 		if(env[current_level].isViolet(you.search_pos))
-			s += " (바이올렛필드)";
+			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN_VIOLET) + ")";
 		if (env[current_level].isSanctuary(you.search_pos))
-			s += " (성역)";
+			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN_SANCTUARY) + ")";
 		floor_effect* floor_ = env[current_level].isFloorEffectPos(you.search_pos.x,you.search_pos.y);
 		if(env[current_level].isInSight(coord_def(you.search_pos.x,you.search_pos.y)) && floor_)
 		{
@@ -679,8 +678,7 @@ int Player_Move(const coord_def &c)
 			bool type = false;
 			if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
 			{
-				printlog(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile],false,false,false,CL_normal);
-				printlog("의 위에 서있다. ", false,false,false,CL_normal);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile]), false,false,false,CL_normal);
 				printlog(env[current_level].getTileHelp(you.position.x, you.position.y), true, false, false, CL_normal);
 				
 			}
@@ -717,10 +715,11 @@ int Player_Move(const coord_def &c)
 			{
 				if(num==1)
 				{
-					printlog("여기엔 ",false,false,false,CL_normal);
-					printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
-					printlog((*start_it).GetNameInfor().name_do(true),false,false,false,CL_normal);
-					printlog("있다. (,키로 줍기)",true,false,false,CL_normal);
+					LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1));
+					// printlog("여기엔 ",false,false,false,CL_normal);
+					// printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
+					// printlog((*start_it).GetNameInfor().name_do(true),false,false,false,CL_normal);
+					// printlog("있다. (,키로 줍기)",true,false,false,CL_normal);
 				}
 				else if(num<=4)
 				{

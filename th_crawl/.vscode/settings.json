@@ -49,6 +49,7 @@
         "xmemory0": "cpp",
         "bitset": "cpp",
         "cstring": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "unordered_set": "cpp"
     }
 }

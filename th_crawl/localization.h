@@ -197,7 +197,18 @@ public:
                         string value = (ph.key != LOC_NONE) ? locString(ph.key) : ph.name;
             
                         if (!pair_placeholder.second.empty()) {
-                            printlog(verb(value, pair_placeholder.second, ph.plural),isEnd?enter_:false,log_,temp_,ph.hasColor?ph.color:color_);
+                            string verb_ = verb(value, pair_placeholder.second, ph.plural, true);
+                            if(verb_.length() > 1) {
+                                if(verb_[verb_.length()-1] == ' ') {
+                                    printlog(verb_,false,log_,temp_,color_);
+                                    printlog(value,isEnd?enter_:false,log_,temp_,ph.hasColor?ph.color:color_);
+                                } else {
+                                    printlog(value,false,log_,temp_,ph.hasColor?ph.color:color_);
+                                    printlog(verb_,isEnd?enter_:false,log_,temp_,color_);
+                                }
+                            } else {                                
+                                printlog(value,isEnd?enter_:false,log_,temp_,ph.hasColor?ph.color:color_);
+                            }
                         } else {
                             printlog(value,isEnd?enter_:false,log_,temp_,ph.hasColor?ph.color:color_);
                         }
@@ -214,7 +225,7 @@ public:
 
 private:
     static std::string processTags(const std::string& template_str, const vector<PlaceHolderHelper>& values);
-    static std::string verb(const std::string& text, const std::string& verb, bool plural);
+    static std::string verb(const std::string& text, const std::string& verb, bool plural, bool only_verb);
     static string getCorrectParticle(const string& word, const string& opt1, const string& opt2);
     static string getIndefiniteArticle(const string& word,const string& opt1, const string& opt2);
     static pair<string, string> extractPlaceholder(const string& input);

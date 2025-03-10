@@ -104,7 +104,7 @@ string LocalzationManager::processTags(const string& template_str, const vector<
 			string value = (ph.key != LOC_NONE) ? locString(ph.key) : ph.name;
 
 			if (match[2].matched) {
-				replacement = verb(value, match[2].str(), ph.plural);
+				replacement = verb(value, match[2].str(), ph.plural, false);
 			} else {
 				replacement = value;
 			}
@@ -116,7 +116,7 @@ string LocalzationManager::processTags(const string& template_str, const vector<
     return result;
 }
 
-std::string LocalzationManager::verb(const std::string& text, const std::string& verb, bool plural) {
+std::string LocalzationManager::verb(const std::string& text, const std::string& verb, bool plural, bool only_verb) {
 	//text뒤에 예약 verb가 있으면 자동으로 변환해서 뒤에 붙여준다.
 	//만약 존재하지않는다면 그냥 뒤에 verb를 붙임
 	//예약verb의 종류
@@ -137,31 +137,31 @@ std::string LocalzationManager::verb(const std::string& text, const std::string&
 
 	size_t delimiter = verb.find('|');
 	if (delimiter == string::npos) {
-		return text + verb;
+		return only_verb?verb:text + verb;
 	}
 
 	string opt1 = verb.substr(0, delimiter);
 	string opt2 = verb.substr(delimiter + 1);
 
 	if (korean_verbs.count(verb)) {
-		return text + getCorrectParticle(text, opt1, opt2);
+		return only_verb?getCorrectParticle(text, opt1, opt2): text + getCorrectParticle(text, opt1, opt2);
 	} else if(korean_verbs.count(opt2 + "|" + opt1)) {
-		return text + getCorrectParticle(text, opt2, opt1);
+		return only_verb?getCorrectParticle(text, opt2, opt1):text + getCorrectParticle(text, opt2, opt1);
 	}
 
-	if (english_verbs.count(verb)) {
-		return  getIndefiniteArticle(text, opt1, opt2) + " " + text;
-	} else if(english_verbs.count(opt2 + "|" + opt1)) {
-		return  getIndefiniteArticle(text, opt2, opt1) + " " + text;
+	if (english_article.count(verb)) {
+		return only_verb?getIndefiniteArticle(text, opt1, opt2) + " ":getIndefiniteArticle(text, opt1, opt2) + " " + text;
+	} else if(english_article.count(opt2 + "|" + opt1)) {
+		return only_verb?getIndefiniteArticle(text, opt2, opt1) + " ": getIndefiniteArticle(text, opt2, opt1) + " " + text;
 	}
 	
-	if (english_article.count(verb)) {
-		return text + "" + (plural?opt2:opt1);
-	} else if(english_article.count(opt2 + "|" + opt1)) {
-		return text + "" + (plural?opt1:opt2);
+	if (english_verbs.count(verb)) {
+		return only_verb?" " + (plural?opt2:opt1):text + " " + (plural?opt2:opt1);
+	} else if(english_verbs.count(opt2 + "|" + opt1)) {
+		return only_verb?" " + (plural?opt1:opt2): text + " " + (plural?opt1:opt2);
 	}
 
-	return text + verb;
+	return only_verb?verb:text + verb;
 }
 string& LocalzationManager::monString(monster_index key) {
 	if(monster_name_map.find(key) != monster_name_map.end()) {

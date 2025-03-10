@@ -83,5 +83,5 @@ LOC_SYSTEM_TERRAIN_SILENCE,Silence
 LOC_SYSTEM_TERRAIN_VIOLET,Violet Field
 LOC_SYSTEM_TERRAIN_SANCTUARY,Sanctuary
 LOC_SYSTEM_ON_THE_TERRAIN,Standing on {0}.
-LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. {0:is|are} good (Press ',' to pick up)
-LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. {0:is|are} good (Press ',' to pick up)
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press ',' to pick up)
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press ',' to pick up)

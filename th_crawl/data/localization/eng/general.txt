@@ -1,18 +1,18 @@
-LOC_DESCRIPTION_LOS_MON,There is a monster in sight.
-LOC_DESCRIPTION_LOS_NOMON,There are no monsters in sight.
-LOC_DESCRIPTION_CONFUSE,You are confused.
-LOC_DESCRIPTION_DIMENSTION,Dimension is fixed and cannot be supported.
-LOC_DESCRIPTION_MAP_DANGER,There are dangerous elements in sight.
-LOC_DESCRIPTION_UNABLE_MOVE,You cannot move there.
-LOC_DESCRIPTION_AUTOBATTLE_DANGERHP,Your health is too low for auto battle.
-LOC_DESCRIPTION_AUTOBATTLE_NOMON,There are no monsters to attack.
-LOC_DESCRIPTION_LUNATIC_PENALTY,You cannot do this while in madness!
-LOC_DESCRIPTION_AUTOTRAVEL_BAMBOO,You cannot automatically explore this area.
-LOC_DESCRIPTION_DONE_EXPLORE,Exploration complete.
-LOC_DESCRIPTION_REST_START,You begin to rest.
-LOC_DESCRIPTION_REST_HP,Your health has been restored.
-LOC_DESCRIPTION_REST_MP,Your spirit energy has been restored.
-LOC_DESCRIPTION_REST_DONE,Rest complete.
+LOC_SYSTEM_LOS_MON,A monster is in sight.
+LOC_SYSTEM_LOS_NOMON,There are no monsters in sight.
+LOC_SYSTEM_CONFUSE_WARNING,You are confused.
+LOC_SYSTEM_DIMENSTION,The dimension is fixed and cannot be changed.
+LOC_SYSTEM_MAP_DANGER,Dangerous elements are in sight.
+LOC_SYSTEM_UNABLE_MOVE,You cannot move there.
+LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your health is too low for auto battle.
+LOC_SYSTEM_AUTOBATTLE_NOMON,There are no monsters to attack.
+LOC_SYSTEM_LUNATIC_PENALTY,You cannot do this while in madness!
+LOC_SYSTEM_AUTOTRAVEL_BAMBOO,It seems you cannot auto-explore this area.
+LOC_SYSTEM_DONE_EXPLORE,Exploration complete.
+LOC_SYSTEM_REST_START,You begin to rest.
+LOC_SYSTEM_REST_HP,Your health has been restored.
+LOC_SYSTEM_REST_MP,Your spirit energy has been restored.
+LOC_SYSTEM_REST_DONE,Rest complete.
 LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_DESCRIPTION,Description
 LOC_SYSTEM_EXPLORE,Explore
@@ -62,3 +62,26 @@ LOC_SYSTEM_HP_LOW,Severely Injured
 LOC_SYSTEM_HP_MIDDLE,Moderately Injured
 LOC_SYSTEM_HP_HIGH,Lightly Injured
 LOC_SYSTEM_HP_VERY_HIGH,Almost Unharmed
+LOC_SYSTEM_SMOKE_NORMAL,Light Smoke
+LOC_SYSTEM_SMOKE_FOG,Fog Cloud
+LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
+LOC_SYSTEM_SMOKE_COLD,Cold Cloud
+LOC_SYSTEM_SMOKE_ELEC,Electric Cloud
+LOC_SYSTEM_SMOKE_DARK,Dark Cloud
+LOC_SYSTEM_SMOKE_SION,Poverty Cloud
+LOC_SYSTEM_SMOKE_POISON,Poison Cloud
+LOC_SYSTEM_SMOKE_CONFUSE,Confusion Cloud
+LOC_SYSTEM_SMOKE_SLOW,Sweet Poison
+LOC_SYSTEM_SMOKE_TWIST,Twist
+LOC_SYSTEM_SMOKE_WHIRLWIND,Whirlwind
+LOC_SYSTEM_SMOKE_CURSE,Cursed Cloud
+LOC_SYSTEM_SMOKE_BLIZZARD,Blizzard
+LOC_SYSTEM_MANY_ITEMS,Many Items
+LOC_SYSTEM_TERRAIN_UNSEEN,Unseen Area
+LOC_SYSTEM_TERRAIN,Terrain
+LOC_SYSTEM_TERRAIN_SILENCE,Silence
+LOC_SYSTEM_TERRAIN_VIOLET,Violet Field
+LOC_SYSTEM_TERRAIN_SANCTUARY,Sanctuary
+LOC_SYSTEM_ON_THE_TERRAIN,Standing on {0}.
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. {0:is|are} good (Press ',' to pick up)
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. {0:is|are} good (Press ',' to pick up)

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: dump.cpp
+// íŒŒì¼ì´ë¦„: dump.cpp
 //
-// ³»¿ë: ´ıÇÁÇÏÀÚ
+// ë‚´ìš©: ë¤í”„í•˜ì
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -88,20 +88,20 @@ int caculScore()
 {
 	long base = you.exper; 
 	int rune_ = you.haveGoal() + you.ziggurat_level/9;
-	if (you.rune[RUNE_SUBTERRANEAN]) //ÁöÀú¿Í ´ŞÀÇµµ½Ã´Â 2°³ ºĞ·® º¸³Ê½º
+	if (you.rune[RUNE_SUBTERRANEAN]) //ì§€ì €ì™€ ë‹¬ì˜ë„ì‹œëŠ” 2ê°œ ë¶„ëŸ‰ ë³´ë„ˆìŠ¤
 		rune_++;
-	if (you.rune[RUNE_MOON]) //ÁöÀú¿Í ´ŞÀÇµµ½Ã´Â 2°³ ºĞ·® º¸³Ê½º
+	if (you.rune[RUNE_MOON]) //ì§€ì €ì™€ ë‹¬ì˜ë„ì‹œëŠ” 2ê°œ ë¶„ëŸ‰ ë³´ë„ˆìŠ¤
 		rune_++;
-	//Áö±¸¶ù 9Ãş´ç ·é1°³ ¼öÁØÀÇ Á¡¼ö
+	//ì§€êµ¬ë 9ì¸µë‹¹ ë£¬1ê°œ ìˆ˜ì¤€ì˜ ì ìˆ˜
 	base += 5000 * you.ziggurat_level;
 	base += 10000 * rune_ + 1000* rune_*(rune_ +2);
 
 
 	if(you.dead_reason == DR_ESCAPE && you.haveOrb())
-	{ //Å¬¸®¾î Çß´Ù.
+	{ //í´ë¦¬ì–´ í–ˆë‹¤.
 		base += 6250000000 * (rune_*rune_) / (you.turn + 80000);
 	}
-	if(!you.GetCharNameString()->empty()) //Ä³¸¯ÅÍ ÆĞ³ÎÆ¼
+	if(!you.GetCharNameString()->empty()) //ìºë¦­í„° íŒ¨ë„í‹°
 	{		
 		base*=0.7;
 	}
@@ -134,7 +134,7 @@ bool Dump(int type, string *filename_)
 		1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 	fp = fopen(filename, "wt");
 
-	fprintf_s(fp, "µ¿¹æÅ©·Ñ %s ´ıÇÁ ÆÄÀÏ\n\n", version_string);
+	fprintf_s(fp, "ë™ë°©í¬ë¡¤ %s ë¤í”„ íŒŒì¼\n\n", version_string);
 	if (type == 1)
 	{
 		char death_reason[64] = "";
@@ -142,21 +142,21 @@ bool Dump(int type, string *filename_)
 
 		if (wiz_list.wizard_mode == 1)
 		{
-			fprintf_s(fp, "*À§ÀÚµå ¸ğµå*\n");
+			fprintf_s(fp, "*ìœ„ìë“œ ëª¨ë“œ*\n");
 		}
 		else if (wiz_list.wizard_mode == 2)
 		{
-			fprintf_s(fp, "*¼¼ÀÌºê º¸Á¸*\n");
+			fprintf_s(fp, "*ì„¸ì´ë¸Œ ë³´ì¡´*\n");
 		}
-		fprintf_s(fp, "%d    ·¹º§ %dÀÇ %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str(), you.GetHp(), you.GetMaxHp());
-		fprintf_s(fp, "             %s¿¡¼­ ", CurrentLevelString());
+		fprintf_s(fp, "%d    ë ˆë²¨ %dì˜ %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str(), you.GetHp(), you.GetMaxHp());
+		fprintf_s(fp, "             %sì—ì„œ ", CurrentLevelString());
 		switch (you.dead_reason)
 		{
 		case DR_NONE:
-			strncat(death_reason, "¾Ë¼ö¾ø´Â ÀÌÀ¯", 64);
+			strncat(death_reason, "ì•Œìˆ˜ì—†ëŠ” ì´ìœ ", 64);
 			if (you.dead_order)
 			{
-				sprintf_s(temp_reason, 64, "(%d µ¥¹ÌÁö", you.dead_order->damage);
+				sprintf_s(temp_reason, 64, "(%d ë°ë¯¸ì§€", you.dead_order->damage);
 				strncat(death_reason, temp_reason, 64);
 				if (you.dead_order->order)
 				{
@@ -166,7 +166,7 @@ bool Dump(int type, string *filename_)
 				}
 				strncat(death_reason, ")", 64);
 			}
-			strncat(death_reason, "¿¡ ÀÇÇØ Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ì— ì˜í•´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_HITTING:
 			if (you.dead_order)
@@ -182,28 +182,28 @@ bool Dump(int type, string *filename_)
 				case ATT_SMITE:
 				default:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_SMASH:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "¹Ù´Ú¿¡ Áı¾î´øÁ®Á³´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ë°”ë‹¥ì— ì§‘ì–´ë˜ì ¸ì¡Œë‹¤.", 64);
 					break;
 				case ATT_BLOOD:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "ÇÇ¸¦ ÅäÇÏ¸ç Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "í”¼ë¥¼ í† í•˜ë©° ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_NOISE:
 					if (you.dead_order->order)
-						strncat(death_reason, "ÀÇ ±²À½¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "°í¸·ÀÌ ÅÍÁ®Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì˜ êµ‰ìŒì— ì˜í•´ ", 64);
+					strncat(death_reason, "ê³ ë§‰ì´ í„°ì ¸ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_SPEAR:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "Âñ·ÁÁ×¾ú´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "ì°”ë ¤ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_NORMAL:
 				case ATT_S_POISON:
@@ -217,55 +217,55 @@ bool Dump(int type, string *filename_)
 				case ATT_LUNATIC:
 				case ATT_SLEEP:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "¸Â¾ÆÁ×¾ú´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "ë§ì•„ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_VAMP:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "»¡·ÁÁ×¾ú´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "ë¹¨ë ¤ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_VEILING:
 					if (you.dead_order->order)
-						strncat(death_reason, "ÀÇ ", 64);
-					strncat(death_reason, "¹Ù¶÷°©¿Ê¿¡ º£¿©Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì˜ ", 64);
+					strncat(death_reason, "ë°”ëŒê°‘ì˜·ì— ë² ì—¬ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_RUSH:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "±³Åë»ç°í·Î Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "êµí†µì‚¬ê³ ë¡œ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_WALL:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
 					else
-						strncat(death_reason, "º®¿¡ ", 64);
-					strncat(death_reason, "ºÎµúÇô Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ë²½ì— ", 64);
+					strncat(death_reason, "ë¶€ë”ªí˜€ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_PSYCHO:
 					if (you.dead_order->order)
-						strncat(death_reason, "ÀÇ ", 64);
-					strncat(death_reason, "¿°µ¿·Â¿¡ ÀÇÇØ ³¯¶ó°¡ Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì˜ ", 64);
+					strncat(death_reason, "ì—¼ë™ë ¥ì— ì˜í•´ ë‚ ë¼ê°€ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_STONE_TRAP:
-					strncat(death_reason, "¹ÙÀ§¿¡ »õ³¢¹ß°¡¶ôÀ» Âö¿© Á×¾ú´Ù.", 64);
+					strncat(death_reason, "ë°”ìœ„ì— ìƒˆë¼ë°œê°€ë½ì„ ì°§ì—¬ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_THROW_NORMAL:
 				case ATT_THROW_WATER:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "ÇÇÅº´çÇß´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "í”¼íƒ„ë‹¹í–ˆë‹¤.", 64);
 					break;
 				case ATT_NORMAL_BLAST:
 				case ATT_AC_REDUCE_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡°Ô ", 64);
-					strncat(death_reason, "Æø»ç´çÇß´Ù.", 64);
+						strncat(death_reason, "ì—ê²Œ ", 64);
+					strncat(death_reason, "í­ì‚¬ë‹¹í–ˆë‹¤.", 64);
 					break;
 				case ATT_SUN_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "ÀÇ ", 64);
-					strncat(death_reason, "ÇŞºû¿¡ Å¸µé¾îÁ×¾ú´Ù.", 64);
+						strncat(death_reason, "ì˜ ", 64);
+					strncat(death_reason, "í–‡ë¹›ì— íƒ€ë“¤ì–´ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_FIRE:
 				case ATT_FIRE_WEAK:
@@ -274,8 +274,8 @@ bool Dump(int type, string *filename_)
 				case ATT_FIRE_BLAST:
 				case ATT_FIRE_PYSICAL_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "ºÒÅ¸Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ë¶ˆíƒ€ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_COLD:
 				case ATT_COLD_WEAK:
@@ -284,63 +284,63 @@ bool Dump(int type, string *filename_)
 				case ATT_COLD_BLAST:
 				case ATT_COLD_PYSICAL_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "¾ó¾îÁ×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ì–¼ì–´ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_ELEC:
 				case ATT_ELEC_WEAK:
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "°¨ÀüµÇ¾î Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ê°ì „ë˜ì–´ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_POISON_BLAST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "µ¶»ì´çÇß´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ë…ì‚´ë‹¹í–ˆë‹¤.", 64);
 					break;
 				case ATT_CLOUD_NORMAL:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "¹Ù¶÷¿¡ ÈÛ¾µ·Á Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ë°”ëŒì— íœ©ì“¸ë ¤ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_CLOUD_CURSE:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "ÀúÁÖ¹Ş¾Æ Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "ì €ì£¼ë°›ì•„ ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_BURST:
 					if (you.dead_order->order)
-						strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
-					strncat(death_reason, "ÅÍÁ®Á×¾ú´Ù.", 64);
+						strncat(death_reason, "ì— ì˜í•´ ", 64);
+					strncat(death_reason, "í„°ì ¸ì£½ì—ˆë‹¤.", 64);
 					break;
 				case ATT_DROWNING:
-					strncat(death_reason, "Àº Áú½ÄÇÏ¿© Á×¾ú´Ù.", 64);
+					strncat(death_reason, "ì€ ì§ˆì‹í•˜ì—¬ ì£½ì—ˆë‹¤.", 64);
 					break;
 				}
-				sprintf_s(temp_reason, 64, "(%d µ¥¹ÌÁö)", you.dead_order->damage);
+				sprintf_s(temp_reason, 64, "(%d ë°ë¯¸ì§€)", you.dead_order->damage);
 				strncat(death_reason, temp_reason, 64);
 			}
 			else
-				strncat(death_reason, "¾Ë¼ö¾ø´Â µ¥¹ÌÁö¿¡ ÀÇÇØ Á×¾ú´Ù.", 64);
+				strncat(death_reason, "ì•Œìˆ˜ì—†ëŠ” ë°ë¯¸ì§€ì— ì˜í•´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_POISON:
-			strncat(death_reason, "µ¶¿¡ Áßµ¶µÇ¾î Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ë…ì— ì¤‘ë…ë˜ì–´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_POTION:
-			strncat(death_reason, "¹°¾à¿¡ ÀÇÇØ", 64);
+			strncat(death_reason, "ë¬¼ì•½ì— ì˜í•´", 64);
 			if (you.dead_order) {
-				sprintf_s(temp_reason, 64, "(%d µ¥¹ÌÁö)", you.dead_order->damage);
+				sprintf_s(temp_reason, 64, "(%d ë°ë¯¸ì§€)", you.dead_order->damage);
 				strncat(death_reason, temp_reason, 64);
 			}
-			strncat(death_reason, "¿¡ ÀÇÇØ Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ì— ì˜í•´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_QUIT:
-			strncat(death_reason, "°ÔÀÓÀ» Æ÷±âÇß´Ù.", 64);
+			strncat(death_reason, "ê²Œì„ì„ í¬ê¸°í–ˆë‹¤.", 64);
 			break;
 		case DR_HUNGRY:
-			strncat(death_reason, "±¾¾îÁ×¾ú´Ù.", 64);
+			strncat(death_reason, "êµ¶ì–´ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_MIRROR:
 			if (you.dead_order)
@@ -349,54 +349,54 @@ bool Dump(int type, string *filename_)
 				{
 					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
 					strncat(death_reason, temp_reason, 64);
-					strncat(death_reason, "ÀÇ ", 64);
+					strncat(death_reason, "ì˜ ", 64);
 				}
 
 			}
-			strncat(death_reason, "¹İ»çµ¥¹ÌÁö·Î Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ë°˜ì‚¬ë°ë¯¸ì§€ë¡œ ì£½ì—ˆë‹¤.", 64);
 			if (you.dead_order)
 			{
-				sprintf_s(temp_reason, 64, "(%d µ¥¹ÌÁö)", you.dead_order->damage);
+				sprintf_s(temp_reason, 64, "(%d ë°ë¯¸ì§€)", you.dead_order->damage);
 				strncat(death_reason, temp_reason, 64);
 			}
 			break;
 		case DR_MP:
-			strncat(death_reason, "¼øÈ­ÇÑ ¿µ·ÂÀÌ ÀüºÎ ¼Ò¸ğµÇ¾î Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ìˆœí™”í•œ ì˜ë ¥ì´ ì „ë¶€ ì†Œëª¨ë˜ì–´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_JUNKO:
-			strncat(death_reason, "¼øÈ£¿¡ ÀÇÇØ »ç¿¹°¡ ¼øÈ­µÇ¾î Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ìˆœí˜¸ì— ì˜í•´ ì‚¬ì˜ˆê°€ ìˆœí™”ë˜ì–´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_SLEEP:
 			if (you.dead_order || you.dead_order->order)
 			{
 				sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
 				strncat(death_reason, temp_reason, 64);
-				strncat(death_reason, "¿¡ ÀÇÇØ ", 64);
+				strncat(death_reason, "ì— ì˜í•´ ", 64);
 			}
-			strncat(death_reason, "Çàº¹ÇÑ ²ŞÀ» ²Ù´Ù Á×¾ú´Ù.", 64);
+			strncat(death_reason, "í–‰ë³µí•œ ê¿ˆì„ ê¾¸ë‹¤ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_GHOST:
-			strncat(death_reason, "¿ÀÄí¸®ÃİÄ£¿¡ »ı¸í·ÂÀÌ »¡·Á Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ì˜¤ì¿ ë¦¬ìµ¸ì¹œì— ìƒëª…ë ¥ì´ ë¹¨ë ¤ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_EFFECT:
-			strncat(death_reason, "ºÎÀÛ¿ë¿¡ ÀÇÇØ Á×¾ú´Ù.", 64);
+			strncat(death_reason, "ë¶€ì‘ìš©ì— ì˜í•´ ì£½ì—ˆë‹¤.", 64);
 			break;
 		case DR_ESCAPE:
 			if (you.haveOrb()) {
-				sprintf_s(temp_reason, 64, "À½¾ç¿Á°ú %d°³ÀÇ ·éÀ» µé°í Å»ÃâÇÏ´Âµ¥ ¼º°øÇß´Ù.", you.haveGoal());
+				sprintf_s(temp_reason, 64, "ìŒì–‘ì˜¥ê³¼ %dê°œì˜ ë£¬ì„ ë“¤ê³  íƒˆì¶œí•˜ëŠ”ë° ì„±ê³µí–ˆë‹¤.", you.haveGoal());
 				strncat(death_reason, temp_reason, 64);
 			}
 			else if (you.haveGoal()) {
-				sprintf_s(temp_reason, 64, "%d°³ÀÇ ·é¸¸ µé°í µµ¸ÁÃÆ´Ù.", you.haveGoal());
+				sprintf_s(temp_reason, 64, "%dê°œì˜ ë£¬ë§Œ ë“¤ê³  ë„ë§ì³¤ë‹¤.", you.haveGoal());
 				strncat(death_reason, temp_reason, 64);
 			}
 			else
-				strncat(death_reason, "¼º°ú¾øÀÌ Å»ÃâÇß´Ù.", 64);
+				strncat(death_reason, "ì„±ê³¼ì—†ì´ íƒˆì¶œí–ˆë‹¤.", 64);
 			break;
 		}
 
 		fprintf_s(fp, "%s\n             ", death_reason);
-		fprintf_s(fp, "ÃÖÁ¾ÅÏ %d\n\n", you.turn);
+		fprintf_s(fp, "ìµœì¢…í„´ %d\n\n", you.turn);
 
 		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
 			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
@@ -405,72 +405,72 @@ bool Dump(int type, string *filename_)
 
 	}
 
-	fprintf_s(fp, "%s (%s %s %s)      ÅÏ: %d      ", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.turn);
+	fprintf_s(fp, "%s (%s %s %s)      í„´: %d      ", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.turn);
 
 
 
 
 	if (you.god == GT_NONE)
 	{
-		fprintf_s(fp, "¹«½Å¾Ó\n\n");
+		fprintf_s(fp, "ë¬´ì‹ ì•™\n\n");
 	}
 	else if (you.god == GT_MIKO)
 	{
-		fprintf_s(fp, "½Å¾Ó: %s (ÀÎ±âµµ %d%%)\n\n", GetGodString(you.god), you.piety / 2);
+		fprintf_s(fp, "ì‹ ì•™: %s (ì¸ê¸°ë„ %d%%)\n\n", GetGodString(you.god), you.piety / 2);
 	}
 	else if (you.god == GT_TENSI)
 	{
-		fprintf_s(fp, "½Å¾Ó: %s\n\n", GetGodString(you.god));
+		fprintf_s(fp, "ì‹ ì•™: %s\n\n", GetGodString(you.god));
 	}
 	else
 	{
-		fprintf_s(fp, "½Å¾Ó: %s %c%c%c%c%c%c\n\n", GetGodString(you.god), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
+		fprintf_s(fp, "ì‹ ì•™: %s %c%c%c%c%c%c\n\n", GetGodString(you.god), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
 	}
-	fprintf_s(fp, "HP: %4d/%4d             AC:%4d             Èû  :%4d\n", you.GetHp(), you.GetMaxHp(), you.ac, you.s_str);
+	fprintf_s(fp, "HP: %4d/%4d             AC:%4d             í˜  :%4d\n", you.GetHp(), you.GetMaxHp(), you.ac, you.s_str);
 	if (!you.pure_mp)
 	{
-		fprintf_s(fp, "MP: %4d/%4d             EV:%4d             ¹ÎÃ¸:%4d\n", you.GetMp(), you.GetMaxMp(), you.ev, you.s_dex);
+		fprintf_s(fp, "MP: %4d/%4d             EV:%4d             ë¯¼ì²©:%4d\n", you.GetMp(), you.GetMaxMp(), you.ev, you.s_dex);
 	}
 	else
 	{
-		fprintf_s(fp, "(¸¶·Â¼øÈ­)                EV:%4d             ¹ÎÃ¸:%4d\n", you.ev, you.s_dex);
+		fprintf_s(fp, "(ë§ˆë ¥ìˆœí™”)                EV:%4d             ë¯¼ì²©:%4d\n", you.ev, you.s_dex);
 	}
 												
 	{
 		int pow_ = min(you.power, 500);
-		fprintf_s(fp, "ÆÄ¿ö: %d.%02d                SH:%4d             Áö´É:%4d\n\n", pow_ / 100, pow_ % 100, you.sh, you.s_int);
+		fprintf_s(fp, "íŒŒì›Œ: %d.%02d                SH:%4d             ì§€ëŠ¥:%4d\n\n", pow_ / 100, pow_ % 100, you.sh, you.s_int);
 	}
 
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;
-	fprintf_s(fp,"È­¿°ÀúÇ×: %s%c %c      È¥¶õÀúÇ×: %c           ¹«±â: " , resist_>=100?"¡Ä":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"í™”ì—¼ì €í•­: %s%c %c      í˜¼ë€ì €í•­: %c           ë¬´ê¸°: " , resist_>=100?"âˆ":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.equipment[ET_WEAPON])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
 	else
-		fprintf_s(fp,"¸Ç¼Õ\n");
+		fprintf_s(fp,"ë§¨ì†\n");
 	resist_ = you.ice_resist;
 	resist2_ = you.invisible_view;
-	fprintf_s(fp,"³Ã±âÀúÇ×: %s%c %c      Åõ¸íº¸±â: %c           Åº¸·: " , resist_ >= 100 ? "¡Ä" : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	fprintf_s(fp,"ëƒ‰ê¸°ì €í•­: %s%c %c      íˆ¬ëª…ë³´ê¸°: %c           íƒ„ë§‰: " , resist_ >= 100 ? "âˆ" : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
 	if(you.throw_weapon)
 		fprintf_s(fp,"%c) %s\n",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
 	else
-		fprintf_s(fp,"¾øÀ½\n");
+		fprintf_s(fp,"ì—†ìŒ\n");
 	
 	resist_ = you.elec_resist;
 	resist2_ = you.power_keep;
-	fprintf_s(fp,"Àü±âÀúÇ×: %s%c %c      ÆÄ¿öÀ¯Áö: %s          ¸öÅë: " , resist_ >= 100 ? "¡Ä " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),you.power == 1000 ? "¡Ä": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
+	fprintf_s(fp,"ì „ê¸°ì €í•­: %s%c %c      íŒŒì›Œìœ ì§€: %s          ëª¸í†µ: " , resist_ >= 100 ? "âˆ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),you.power == 1000 ? "âˆ": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
 	if(you.equipment[ET_ARMOR])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_ARMOR, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_ARMOR, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");
 
 	
 	resist_ = you.poison_resist;
-	fprintf_s(fp,"µ¶ÀúÇ×  : %c                                ¹æÆĞ: ",resist_>=1?'+':(resist_<=-1?'-':'.'));
+	fprintf_s(fp,"ë…ì €í•­  : %c                                ë°©íŒ¨: ",resist_>=1?'+':(resist_<=-1?'-':'.'));
 	if(you.equipment[ET_SHIELD])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");	
+		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");	
 
 
 	string resist_text_ = "";
@@ -484,49 +484,49 @@ bool Dump(int type, string *filename_)
 			}
 		}
 	}
-	fprintf_s(fp,"¸¶¹ıÀúÇ×: %s                       ¸Ó¸®: ", resist_text_.c_str());
+	fprintf_s(fp,"ë§ˆë²•ì €í•­: %s                       ë¨¸ë¦¬: ", resist_text_.c_str());
 	if(you.equipment[ET_HELMET])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_HELMET, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_HELMET, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");
 
-	fprintf_s(fp,"                                           ¸ÁÅä: ");
+	fprintf_s(fp,"                                           ë§í† : ");
 	if(you.equipment[ET_CLOAK])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_CLOAK, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_CLOAK, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");
 
-	fprintf_s(fp,"                                           ¼Õ  : ");
+	fprintf_s(fp,"                                           ì†  : ");
 	if(you.equipment[ET_GLOVE])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_GLOVE, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_GLOVE, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");
 
-	fprintf_s(fp,"                                           ¹ß  : ");
+	fprintf_s(fp,"                                           ë°œ  : ");
 	if(you.equipment[ET_BOOTS])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
 	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_BOOTS, false)?"¾øÀ½\n":"Âø¿ëºÒ°¡\n");
+		fprintf_s(fp,you.isImpossibeEquip(ET_BOOTS, false)?"ì—†ìŒ\n":"ì°©ìš©ë¶ˆê°€\n");
 
-	fprintf_s(fp,"                                           ¸ñ°ÉÀÌ  : ");
+	fprintf_s(fp,"                                           ëª©ê±¸ì´  : ");
 	if(you.equipment[ET_NECK])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
 	else
-		fprintf_s(fp,"¾øÀ½\n");		
+		fprintf_s(fp,"ì—†ìŒ\n");		
 
-	fprintf_s(fp,"                                           ¿Ş¹İÁö  : ");
+	fprintf_s(fp,"                                           ì™¼ë°˜ì§€  : ");
 	if(you.equipment[ET_LEFT])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_LEFT]->id,you.equipment[ET_LEFT]->GetName().c_str());
 	else
-		fprintf_s(fp,"¾øÀ½\n");
+		fprintf_s(fp,"ì—†ìŒ\n");
 
-	fprintf_s(fp,"                                           ¿À¸¥¹İÁö: ");      
+	fprintf_s(fp,"                                           ì˜¤ë¥¸ë°˜ì§€: ");      
 	if(you.equipment[ET_RIGHT])
 		fprintf_s(fp,"%c) %s\n",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
 	else
-		fprintf_s(fp,"¾øÀ½\n");
+		fprintf_s(fp,"ì—†ìŒ\n");
 	
-	fprintf_s(fp,"\n·é:");
+	fprintf_s(fp,"\në£¬:");
 	int first_rune_ = 0;
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
@@ -541,18 +541,18 @@ bool Dump(int type, string *filename_)
 	fprintf_s(fp,"\n");
 	if(you.rune[RUNE_HAKUREI_ORB])
 	{
-		fprintf_s(fp,"À½¾ç¿Á\n");
+		fprintf_s(fp,"ìŒì–‘ì˜¥\n");
 	}
 	else
 	{				
 		fprintf_s(fp,"\n");
 	}
 
-	fprintf_s(fp, "\n\n\n<Æ¯¼º>\n"/*,you.item_weight,you.max_item_weight*/);
+	fprintf_s(fp, "\n\n\n<íŠ¹ì„±>\n"/*,you.item_weight,you.max_item_weight*/);
 
 	if (you.property_vector.empty())
 	{
-		fprintf_s(fp, "´ç½ÅÀÇ Æ¯¼ºÀÌ ¾ø½À´Ï´Ù.\n");
+		fprintf_s(fp, "ë‹¹ì‹ ì˜ íŠ¹ì„±ì´ ì—†ìŠµë‹ˆë‹¤.\n");
 	}
 	else {
 		for (auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
@@ -563,9 +563,9 @@ bool Dump(int type, string *filename_)
 
 
 
-	fprintf_s(fp,"\n\n´ç½ÅÀº %s¿¡ ÀÖ´Ù.\n",CurrentLevelString());
+	fprintf_s(fp,"\n\në‹¹ì‹ ì€ %sì— ìˆë‹¤.\n",CurrentLevelString());
 
-	fprintf_s(fp,"\n\n\n<ÀÎº¥Åä¸®>\n"/*,you.item_weight,you.max_item_weight*/);
+	fprintf_s(fp,"\n\n\n<ì¸ë²¤í† ë¦¬>\n"/*,you.item_weight,you.max_item_weight*/);
 
 	
 	list<item>::iterator first,end;
@@ -588,20 +588,20 @@ bool Dump(int type, string *filename_)
 				}
 				fprintf_s(fp,"  %c - %s",(*it).id,(*it).GetName().c_str());
 				if(equip)
-					fprintf_s(fp,"%s",(equip==1?"(ÀåÂø)":(equip==2?"(¿Ş¼Õ)":"(¿À¸¥¼Õ)")));
+					fprintf_s(fp,"%s",(equip==1?"(ì¥ì°©)":(equip==2?"(ì™¼ì†)":"(ì˜¤ë¥¸ì†)")));
 				fprintf_s(fp,"\n");
 			}
 		}
 	}
 
-	fprintf_s(fp,"\n\n\n<½ºÅ³>\n\n");
+	fprintf_s(fp,"\n\n\n<ìŠ¤í‚¬>\n\n");
 
 	int skt = 0;
 	while(skt < SKT_MAX)
 	{
 		if (you.pure_skill == skt)
 		{
-			fprintf_s(fp, "  %4s %3d (¼øÈ­)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false));
+			fprintf_s(fp, "  %4s %3d (ìˆœí™”)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false));
 		}
 		else if (you.GetSkillLevel(skt, false)) {
 			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
@@ -610,9 +610,9 @@ bool Dump(int type, string *filename_)
 	}
 
 
-	fprintf_s(fp,"\n\n\n±â¾ïÇÏ°í ÀÖ´Â ÁÖ¹®µé\n");
+	fprintf_s(fp,"\n\n\nê¸°ì–µí•˜ê³  ìˆëŠ” ì£¼ë¬¸ë“¤\n");
 	if(you.currentSpellNum)
-		fprintf_s(fp,"\n%-34s %-20s %s","¸¶¹ıÀÌ¸§","ÇĞÆÄ","½ÇÆĞÀ²");
+		fprintf_s(fp,"\n%-34s %-20s %s","ë§ˆë²•ì´ë¦„","í•™íŒŒ","ì‹¤íŒ¨ìœ¨");
 	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSpell[i])
@@ -622,9 +622,9 @@ bool Dump(int type, string *filename_)
 		}
 	}
 	if(you.currentSpellNum)
-		fprintf_s(fp,"\n\n´ç½ÅÀº %d°³ÀÇ ¸¶¹ıÀ» ¹è¿ì°í ÀÖÀ¸¸ç %dÀÇ ¸¶¹ı ·¹º§ÀÌ ³²¾Ò´Ù.\n",you.currentSpellNum,you.remainSpellPoiont);
+		fprintf_s(fp,"\n\në‹¹ì‹ ì€ %dê°œì˜ ë§ˆë²•ì„ ë°°ìš°ê³  ìˆìœ¼ë©° %dì˜ ë§ˆë²• ë ˆë²¨ì´ ë‚¨ì•˜ë‹¤.\n",you.currentSpellNum,you.remainSpellPoiont);
 	else
-		fprintf_s(fp,"\n´ç½ÅÀº ¸¶¹ıÀ» ¹è¿ì°í ÀÖÁö ¾Ê´Ù.\n");
+		fprintf_s(fp,"\në‹¹ì‹ ì€ ë§ˆë²•ì„ ë°°ìš°ê³  ìˆì§€ ì•Šë‹¤.\n");
 
 
 
@@ -693,7 +693,7 @@ bool Dump(int type, string *filename_)
 
 	if (type == 1)
 	{
-		fprintf_s(fp, "\n\n\n<»ı¼ºµÈ Æ¯¼öÁöÇüµé>\n\n");
+		fprintf_s(fp, "\n\n\n<ìƒì„±ëœ íŠ¹ìˆ˜ì§€í˜•ë“¤>\n\n");
 		for (int i = 0; i < MAXLEVEL; i++)
 		{
 			if (!env[i].speciel_map_name.empty())
@@ -720,7 +720,7 @@ bool Dump(int type, string *filename_)
 	}
 
 	fprintf_s(fp,"\n\n\n");
-	fprintf_s(fp,"%8s|%-18s|%s\n","ÅÏ","Àå¼Ò","³»¿ë");
+	fprintf_s(fp,"%8s|%-18s|%s\n","í„´","ì¥ì†Œ","ë‚´ìš©");
 
 	for(list<note_dummy>::iterator it = save_note.note_list.begin(); it != save_note.note_list.end(); it++)
 	{
@@ -730,8 +730,8 @@ bool Dump(int type, string *filename_)
 	
 	fprintf_s(fp,"%-26s","  ");
 	for(int i=0;i<9;i++)
-		fprintf_s(fp,"¦¢ %2d-%2d",1+i*3,3+i*3);
-	fprintf_s(fp,"¦­  ÇÕ°è\n");
+		fprintf_s(fp,"â”‚ %2d-%2d",1+i*3,3+i*3);
+	fprintf_s(fp,"â”ƒ  í•©ê³„\n");
 
 
 
@@ -745,19 +745,19 @@ bool Dump(int type, string *filename_)
 
 			fprintf_s(fp,"%-4s----------------------",GetDumpActionString(type_));
 			for(int i=0;i<9;i++)
-				fprintf_s(fp,"¦«------");
-			fprintf_s(fp,"¦À¦¡¦¡¦¡\n");
+				fprintf_s(fp,"â”¼------");
+			fprintf_s(fp,"â•‚â”€â”€â”€\n");
 		}
 
 		fprintf_s(fp,"%26s",it->name.c_str());
 		for(int i=0;i<9;i++)
 		{
 			int add_ = it->num[0+i*3]+it->num[1+i*3]+it->num[2+i*3];
-			fprintf_s(fp,"¦¢%6d",add_);
+			fprintf_s(fp,"â”‚%6d",add_);
 			total_ += add_;
 		}
 
-		fprintf_s(fp,"¦­%6d\n",total_);
+		fprintf_s(fp,"â”ƒ%6d\n",total_);
 	}
 
 
@@ -780,19 +780,19 @@ const char* GetDumpActionString(dump_action_type type_)
 	switch(type_)
 	{
 	case DACT_MELEE:
-		return "±ÙÁ¢";
+		return "ê·¼ì ‘";
 	case DACT_SHOOT:
-		return "Åº¸·";
+		return "íƒ„ë§‰";
 	case DACT_SPELL:
-		return "¸¶¹ı";
+		return "ë§ˆë²•";
 	case DACT_INVOKE:
-		return "±Ç´É";
+		return "ê¶ŒëŠ¥";
 	case DACT_EVOKE:
-		return "¹ßµ¿";
+		return "ë°œë™";
 	case DACT_USE:
-		return "¼Ò¸ğ";
+		return "ì†Œëª¨";
 	default:
-		return "±âÅ¸";
+		return "ê¸°íƒ€";
 	}
 
 }
@@ -821,14 +821,14 @@ void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]) {
 									list<string> new_list;
 
 									if (target_mon->isUserAlly())
-										new_list.push_back(target_mon->name.name+"¢½");
+										new_list.push_back(target_mon->name.name+"â™¡");
 									else 
 										new_list.push_back(target_mon->name.name);
 									(*monster_list)[mon_dot] = new_list;
 								}
 								else {
 									if (target_mon->isUserAlly())
-										it->second.push_back(target_mon->name.name + "¢½");
+										it->second.push_back(target_mon->name.name + "â™¡");
 									else
 										it->second.push_back(target_mon->name.name);
 								}

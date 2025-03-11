@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: save.cpp
+// íŒŒì¼ì´ë¦„: save.cpp
 //
-// ³»¿ë: ¼¼ÀÌºê ÆíÀÇ¿ë ÇÔ¼ö
+// ë‚´ìš©: ì„¸ì´ë¸Œ í¸ì˜ìš© í•¨ìˆ˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 #include "save.h"
@@ -32,7 +32,7 @@ void saveandcheckexit()
 {
 	while(1)
 	{
-		printlog("ÀúÀåÈÄ Á¾·áÇÏ½Ã°Ú½À´Ï±î?(Y/N)",false,false,false,CL_help);
+		printlog("ì €ì¥í›„ ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?(Y/N)",false,false,false,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -42,11 +42,11 @@ void saveandcheckexit()
 			return;
 		case 'N':
 		case VK_ESCAPE:
-			printlog("Á¾·á¸¦ Ãë¼Ò.",true,false,false,CL_help);
+			printlog("ì¢…ë£Œë¥¼ ì·¨ì†Œ.",true,false,false,CL_help);
 			return;
 		default:
 			enterlog();
-			printlog("Y¿Í NÁß¿¡ ¼±ÅÃÇØÁÖ¼¼¿ä.",true,false,false,CL_help);
+			printlog("Yì™€ Nì¤‘ì— ì„ íƒí•´ì£¼ì„¸ìš”.",true,false,false,CL_help);
 			break;
 		}
 	}
@@ -56,7 +56,7 @@ void nosaveandexit()
 {	
 	while(1)
 	{
-		printlog("ÀúÀåÇÏÁö¾Ê°í Á¾·áÇÏ½Ã°Ú½À´Ï±î?(Y/N)",false,false,false,CL_help);
+		printlog("ì €ì¥í•˜ì§€ì•Šê³  ì¢…ë£Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?(Y/N)",false,false,false,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -68,11 +68,11 @@ void nosaveandexit()
 			return;
 		case 'N':
 		case VK_ESCAPE:
-			printlog("Á¾·á¸¦ Ãë¼Ò.",true,false,false,CL_help);
+			printlog("ì¢…ë£Œë¥¼ ì·¨ì†Œ.",true,false,false,CL_help);
 			return;
 		default:
 			enterlog();
-			printlog("Y¿Í NÁß¿¡ ¼±ÅÃÇØÁÖ¼¼¿ä.",true,false,false,CL_help);
+			printlog("Yì™€ Nì¤‘ì— ì„ íƒí•´ì£¼ì„¸ìš”.",true,false,false,CL_help);
 			break;
 		}
 	}
@@ -125,7 +125,7 @@ bool load_name(const char* path)
 		WaitForSingleObject(mutx, INFINITE);
 		you.user_name.name = name;
 		ReleaseMutex(mutx);
-		if(strcmp(name,"ÀÌ¸§¾øÀ½"))
+		if(strcmp(name,"ì´ë¦„ì—†ìŒ"))
 			return true;
 		else
 			return false;

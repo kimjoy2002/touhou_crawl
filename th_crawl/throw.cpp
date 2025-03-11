@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: throw.cpp
+// íŒŒì¼ì´ë¦„: throw.cpp
 //
-// ³»¿ë: Åº¸·´øÁö±â °ü·Ã ÇÔ¼ö & Åº¸· ±×·¡ÇÈ Ã³¸® µîµî
+// ë‚´ìš©: íƒ„ë§‰ë˜ì§€ê¸° ê´€ë ¨ í•¨ìˆ˜ & íƒ„ë§‰ ê·¸ë˜í”½ ì²˜ë¦¬ ë“±ë“±
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,27 +34,27 @@ int GetTanmacGraphicType(tanmac_type type)
 			return 18;
 		case TMT_DOGGOJEO:
 			return 43;
-		/*¾ÆÀÌÅÛ¿¡¼­ ³ª¿ÀÁö¾Ê´Â ¹øÈ£µé
+		/*ì•„ì´í…œì—ì„œ ë‚˜ì˜¤ì§€ì•ŠëŠ” ë²ˆí˜¸ë“¤
 			return 10;
 			return 11;
 			return 12;
 			return 13;
 			return 14;
-			return 15; //¿©±îÁø µ¿±Ù Åº¸·
-			return 16; //Å«ºÒ
-			return 17; //ÀÛÀººÒ
-			return 18; //¾ÆÀÌ½º
-			return 19; //ÀÛÀº¾ÆÀÌ½º
-			return 20; //ÀÛÀºµ¶
-			return 21; //Àü±â
-			return 22; //Å«¾ÆÀÌ½º
-			return 23; //Å«µ¶
-			return 24; //¾È°³
-			return 25; //¿¡¾îÄ¿ÅÍ
-			return 26; //ÀÛÀº µ¹
-			return 27; //Æ÷¼Ç
-			return 28; //Ä«³ª¸Ş¼®
-		¿©±îÁö¸¶¹ıÀü¿ë ¹øÈ£µé(¸®ÅÏµÉÀÏÀÌ ¾ø´Ù.)*/
+			return 15; //ì—¬ê¹Œì§„ ë™ê·¼ íƒ„ë§‰
+			return 16; //í°ë¶ˆ
+			return 17; //ì‘ì€ë¶ˆ
+			return 18; //ì•„ì´ìŠ¤
+			return 19; //ì‘ì€ì•„ì´ìŠ¤
+			return 20; //ì‘ì€ë…
+			return 21; //ì „ê¸°
+			return 22; //í°ì•„ì´ìŠ¤
+			return 23; //í°ë…
+			return 24; //ì•ˆê°œ
+			return 25; //ì—ì–´ì»¤í„°
+			return 26; //ì‘ì€ ëŒ
+			return 27; //í¬ì…˜
+			return 28; //ì¹´ë‚˜ë©”ì„
+		ì—¬ê¹Œì§€ë§ˆë²•ì „ìš© ë²ˆí˜¸ë“¤(ë¦¬í„´ë ì¼ì´ ì—†ë‹¤.)*/
 		default:
 			return 0;
 	}
@@ -212,15 +212,15 @@ void MakeTanmac(item_infor* t, int select_)
 }
 int PathToNum(int path)
 {
-	//·¹ÀÌÁ®(ÁÖ·Î Àü±â°è¿­)ÀÇ »ç¿ëÅ¸ÀÏÀ» Á¤ÇÏ±âÀ§ÇÑ switch¹®
+	//ë ˆì´ì ¸(ì£¼ë¡œ ì „ê¸°ê³„ì—´)ì˜ ì‚¬ìš©íƒ€ì¼ì„ ì •í•˜ê¸°ìœ„í•œ switchë¬¸
 	//7 0 1
 	//6 * 2
 	//5 4 3
-	//À§¿Í °°Àº Å¸ÀÏ´ë·ÎÇÑ´Ù.
-	//¿©±â¼­ ½ÊÀÇÀÚ¸®¿¡¼­ µé¾î°¡¼­ ÀÏÀÇ ÀÚ¸®·Î ³ª°£´Ù°í °¡Á¤(µé¾î°¡´Â°Í°ú ³ª°¡´Â°ÍÀÌ ¹Ù²î¾îµµ °°À½)
-	//¿©±â¼­ Æ¯¼öÄÉÀÌ½º·Î 8Àº ½ÃÀÛÁ¡ÀÏ¶§, 9´Â µµÂøÁ¡ÀÏ¶§·Î Ãë±ŞÇÑ´Ù.
-	//ÇØ´ç °æ·Î¿¡ ¸Â´Â ÀÌ¹ÌÁö¹è¿­ÀÇ ÀÎµ¦½º¸¦ ¸®ÅÏÇÑ´Ù.
-	//·¹ÀÌÁ®Çü µµÆ®¸¦ ¸¸µé¶§ ¾Æ·¡¿Í °°Àº ÀÎµ¦½º¸¦ ºÎ¿©ÇØ¼­ ¸¸µéÀÚ.(90µµ ÀÌ»ó ²©ÀÌ´Â°Ç Á¦¿ÜÇßÀ½)
+	//ìœ„ì™€ ê°™ì€ íƒ€ì¼ëŒ€ë¡œí•œë‹¤.
+	//ì—¬ê¸°ì„œ ì‹­ì˜ìë¦¬ì—ì„œ ë“¤ì–´ê°€ì„œ ì¼ì˜ ìë¦¬ë¡œ ë‚˜ê°„ë‹¤ê³  ê°€ì •(ë“¤ì–´ê°€ëŠ”ê²ƒê³¼ ë‚˜ê°€ëŠ”ê²ƒì´ ë°”ë€Œì–´ë„ ê°™ìŒ)
+	//ì—¬ê¸°ì„œ íŠ¹ìˆ˜ì¼€ì´ìŠ¤ë¡œ 8ì€ ì‹œì‘ì ì¼ë•Œ, 9ëŠ” ë„ì°©ì ì¼ë•Œë¡œ ì·¨ê¸‰í•œë‹¤.
+	//í•´ë‹¹ ê²½ë¡œì— ë§ëŠ” ì´ë¯¸ì§€ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¥¼ ë¦¬í„´í•œë‹¤.
+	//ë ˆì´ì ¸í˜• ë„íŠ¸ë¥¼ ë§Œë“¤ë•Œ ì•„ë˜ì™€ ê°™ì€ ì¸ë±ìŠ¤ë¥¼ ë¶€ì—¬í•´ì„œ ë§Œë“¤ì.(90ë„ ì´ìƒ êº½ì´ëŠ”ê±´ ì œì™¸í–ˆìŒ)
 	switch(path)
 	{
 	case 80:case 8:return 0;
@@ -267,7 +267,7 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 	switch(type)
 	{
 	default:
-	case 0://¾øÀ½ ÀÌ°Å ¶ß¸é ¹ö±×
+	case 0://ì—†ìŒ ì´ê±° ëœ¨ë©´ ë²„ê·¸
 	case 1:
 		return &img_tanmac_bill[direc];
 	case 2:
@@ -342,7 +342,7 @@ textures* GetTanmacBaseGraphic(int type)
 {
 	switch(type)
 	{
-	default://¾øÀ½ ÀÌ°Å ¶ß¸é ¹ö±×
+	default://ì—†ìŒ ì´ê±° ëœ¨ë©´ ë²„ê·¸
 	//case TMT_BILL:
 	//	return &img_tanmac_bill[1];
 		return &img_tanmac_bill[1];
@@ -361,18 +361,18 @@ name_infor GetTanmacString(int type)
 {
 	switch(type)
 	{
-	default://¾øÀ½ ÀÌ°Å ¶ß¸é ¹ö±×
-		return name_infor("¹ö±×Åº¸·",true);
+	default://ì—†ìŒ ì´ê±° ëœ¨ë©´ ë²„ê·¸
+		return name_infor("ë²„ê·¸íƒ„ë§‰",true);
 	//case TMT_BILL:
-	//	return name_infor("ºÎÀû",true);
+	//	return name_infor("ë¶€ì ",true);
 	case TMT_AMULET:
-		return name_infor("È£¹Ö¾Æ¹Ä·¿",true);
+		return name_infor("í˜¸ë°ì•„ë®¬ë ›",true);
 	case TMT_POISON_NEEDLE:
-		return name_infor("¸Íµ¶ ¼ö¸®°Ë",true);
+		return name_infor("ë§¹ë… ìˆ˜ë¦¬ê²€",true);
 	case TMT_KIKU_COMPRESSER:
-		return name_infor("Å°ÄíÀÌÄ¡¸óÁö ÄÄÇÁ·¹¼­",false);
+		return name_infor("í‚¤ì¿ ì´ì¹˜ëª¬ì§€ ì»´í”„ë ˆì„œ",false);
 	case TMT_DOGGOJEO:
-		return name_infor("µ¶°íÀú", false);
+		return name_infor("ë…ê³ ì €", false);
 	}
 }
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
@@ -396,7 +396,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 			int path_ = 80+GetPosToDirec(prev,(*beam));
 			if(graphic_type || !item_)
 				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
-			else if(item_) //ÀÚÃ¼ ±×·¡ÇÈÀÌ ¾ø°í itemÀÏ °æ¿ì item ±×·¡ÇÈÀ» ±×´ë·Î ¾´´Ù.
+			else if(item_) //ìì²´ ê·¸ë˜í”½ì´ ì—†ê³  itemì¼ ê²½ìš° item ê·¸ë˜í”½ì„ ê·¸ëŒ€ë¡œ ì“´ë‹¤.
 				env[current_level].MakeEffect(postion_,item_->image,false);
 		}
 		while(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0)
@@ -414,7 +414,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 			}
 			if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
 				!you.isPassedBullet(infor_.order)
-				) //ÇÃ·¹ÀÌ¾î´Â ÀÚ±âÀÚ½Å¿¡°Ô ¸ÂÁö¾Ê´Â Á¶°ÇÀº ³ªÁß¿¡ Áö¿ï±î?
+				) //í”Œë ˆì´ì–´ëŠ” ìê¸°ìì‹ ì—ê²Œ ë§ì§€ì•ŠëŠ” ì¡°ê±´ì€ ë‚˜ì¤‘ì— ì§€ìš¸ê¹Œ?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
 				if(you.damage(temp_att))
@@ -428,7 +428,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 				env[current_level].MakeEffect(postion_,t_,false);
 			else if(graphic_type || !item_)
 				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
-			else if(item_) //ÀÚÃ¼ ±×·¡ÇÈÀÌ ¾ø°í itemÀÏ °æ¿ì item ±×·¡ÇÈÀ» ±×´ë·Î ¾´´Ù.
+			else if(item_) //ìì²´ ê·¸ë˜í”½ì´ ì—†ê³  itemì¼ ê²½ìš° item ê·¸ë˜í”½ì„ ê·¸ëŒ€ë¡œ ì“´ë‹¤.
 				env[current_level].MakeEffect(postion_,item_->image,false);
 			Sleep(16);
 			length++;
@@ -440,7 +440,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 		if(infor_.type1 == BMT_WALL && !env[current_level].isMove(*(beam),true) && penetrate>0 &&  infor_.max_damage>length)
 		{
 			prev = *(beam++);
-			//º®¿¡ ºÎµúÈ÷´Â?
+			//ë²½ì— ë¶€ë”ªíˆëŠ”?
 		}
 
 		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
@@ -448,7 +448,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
 				if (item_->type == ITM_WEAPON_LONGBLADE && item_->value0 == 3)
-				{//Ã¶·û
+				{//ì² ë¥œ
 					env[current_level].ClearEffect();
 					beam--;
 					coord_def pos_;
@@ -459,7 +459,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 							env[current_level].MakeEffect(pos_, t_, false);
 						else if (graphic_type || !item_)
 							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
-						else if (item_) //ÀÚÃ¼ ±×·¡ÇÈÀÌ ¾ø°í itemÀÏ °æ¿ì item ±×·¡ÇÈÀ» ±×´ë·Î ¾´´Ù.
+						else if (item_) //ìì²´ ê·¸ë˜í”½ì´ ì—†ê³  itemì¼ ê²½ìš° item ê·¸ë˜í”½ì„ ê·¸ëŒ€ë¡œ ì“´ë‹¤.
 							env[current_level].MakeEffect(pos_, item_->image, false);
 						Sleep(16);
 						env[current_level].ClearEffect();
@@ -543,13 +543,13 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 	}
 	if(!infor_.order->isplayer() && you.position.x == target.x && you.position.y == target.y &&
 		!you.isPassedBullet(infor_.order)
-		) //ÇÃ·¹ÀÌ¾î´Â ÀÚ±âÀÚ½Å¿¡°Ô ¸ÂÁö¾Ê´Â Á¶°ÇÀº ³ªÁß¿¡ Áö¿ï±î?
+		) //í”Œë ˆì´ì–´ëŠ” ìê¸°ìì‹ ì—ê²Œ ë§ì§€ì•ŠëŠ” ì¡°ê±´ì€ ë‚˜ì¤‘ì— ì§€ìš¸ê¹Œ?
 	{
 		attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
 		you.damage(temp_att);
 	}
 	return true;
-	//ÀÌ ÇÔ¼ö¸¦ ºÎ¸£°í³­ÈÄ¿¡ sleep(120)¿Í env[current_level].ClearEffect()´Â ¾Ë¾Æ¼­ ºÎ¸£ÀÚ.
+	//ì´ í•¨ìˆ˜ë¥¼ ë¶€ë¥´ê³ ë‚œí›„ì— sleep(120)ì™€ env[current_level].ClearEffect()ëŠ” ì•Œì•„ì„œ ë¶€ë¥´ì.
 }
 
 
@@ -644,7 +644,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 		
 			//if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
 			//	!you.isPassedBullet(infor_.order)
-			//	) //ÇÃ·¹ÀÌ¾î´Â ÀÚ±âÀÚ½Å¿¡°Ô ¸ÂÁö¾Ê´Â Á¶°ÇÀº ³ªÁß¿¡ Áö¿ï±î?
+			//	) //í”Œë ˆì´ì–´ëŠ” ìê¸°ìì‹ ì—ê²Œ ë§ì§€ì•ŠëŠ” ì¡°ê±´ì€ ë‚˜ì¤‘ì— ì§€ìš¸ê¹Œ?
 			//{
 			//	attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
 			//	if(you.damage(temp_att))
@@ -665,7 +665,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 		//if(infor_.type1 == BMT_WALL && !env[current_level].isMove(*(beam),true) && penetrate>0 && length>0)
 		//{
 		//	prev = *(beam++);
-		//	//º®¿¡ ºÎµúÈ÷´Â?
+		//	//ë²½ì— ë¶€ë”ªíˆëŠ”?
 		//}
 		break;
 	}
@@ -775,7 +775,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 	{
 		int range_ = 0;
 
-		if (infor_->spell == -4) //¸ÅÁ÷º½ Àü¿ë...
+		if (infor_->spell == -4) //ë§¤ì§ë´„ ì „ìš©...
 			range_ = 2;
 		else if(infor_->spell == -1 && item_!=you.item_list.end() && item_->type >= ITM_THROW_FIRST && item_->type < ITM_THROW_LAST && item_->value4 == TMT_KIKU_COMPRESSER)
 			range_ = 1;
@@ -787,7 +787,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			for(beam.init();!beam.end();)
 			{
 				auto temp_beam = beam++;
-				//½º¸¶ÀÌÆ®ÇüÀÌ ¾Æ´Ñ°æ¿ì ºÎµúÈ÷¸é ÅÍÁö±â ¸¶·ÃÀÌ´Ù.
+				//ìŠ¤ë§ˆì´íŠ¸í˜•ì´ ì•„ë‹Œê²½ìš° ë¶€ë”ªíˆë©´ í„°ì§€ê¸° ë§ˆë ¨ì´ë‹¤.
 				bool block_ = false;
 				if(!env[current_level].isMove(*(beam),true))
 				{
@@ -862,7 +862,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 
 list<item>::iterator ThrowSelect()
 {
-	view_item(IVT_THROW,"¹«¾ùÀ» ´øÁö°Ú½À´Ï±î?");
+	view_item(IVT_THROW,"ë¬´ì—‡ì„ ë˜ì§€ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -875,13 +875,13 @@ list<item>::iterator ThrowSelect()
 				return it;
 			}
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -890,9 +890,9 @@ list<item>::iterator ThrowSelect()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» ´øÁö°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ë˜ì§€ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -904,11 +904,11 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ´øÁú ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ´øÁú ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	beam_iterator beam(you.position,you.position);
@@ -942,11 +942,11 @@ void Select_Throw()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ´øÁú ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ´øÁú ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();

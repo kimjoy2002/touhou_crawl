@@ -1,4 +1,4 @@
-
+ï»¿
 #ifndef  __COMMON_H__
 #define  __COMMON_H__
 
@@ -62,11 +62,11 @@ float ceil_up(float x);
 
 char asctonum(char a);
 
-int randA(int x); /*0ºÎÅÍ X±îÁöÀÇ ·£´ı³­¼ö ¸®ÅÏ*/
+int randA(int x); /*0ë¶€í„° Xê¹Œì§€ì˜ ëœë¤ë‚œìˆ˜ ë¦¬í„´*/
 
-int randA_1(int x); /*1ºÎÅÍ X±îÁöÀÇ ·£´ı³­¼ö ¸®ÅÏ*/
+int randA_1(int x); /*1ë¶€í„° Xê¹Œì§€ì˜ ëœë¤ë‚œìˆ˜ ë¦¬í„´*/
 
-bool randB(int x, int point); /*0ºÎÅÍ X°¡ point¸¦ ÀÛ°Å³ª°°À»¶§ true¸®ÅÏ*/
+bool randB(int x, int point); /*0ë¶€í„° Xê°€ pointë¥¼ ì‘ê±°ë‚˜ê°™ì„ë•Œ trueë¦¬í„´*/
 
 int randC(int dice, int x); /*(dice)d(x)*/
 
@@ -273,7 +273,7 @@ public:
 		return max_percent;
 	}
 
-	int push(T value_, int percent_ = 1) //ÇÏ³ª¸¦ ³ÖÀ¸¸é¼­ 
+	int push(T value_, int percent_ = 1) //í•˜ë‚˜ë¥¼ ë„£ìœ¼ë©´ì„œ 
 	{
 		if(percent_<=0)
 			return max_percent;
@@ -283,12 +283,12 @@ public:
 		return max_percent;
 	}
 	
-	T pop() //ÇÏ³ª¸¦ ²¨³»¸é¼­ ¸ñ·Ï¿¡¼­ Á¦°Å
+	T pop() //í•˜ë‚˜ë¥¼ êº¼ë‚´ë©´ì„œ ëª©ë¡ì—ì„œ ì œê±°
 	{
 		return pop_base(true);
 	}
 	
-	T choice() //ÇÏ³ª¸¦ ¼±ÅÃ¸¸ ÇÔ
+	T choice() //í•˜ë‚˜ë¥¼ ì„ íƒë§Œ í•¨
 	{
 		return pop_base(false);
 	}

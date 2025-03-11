@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: key.cpp
+// íŒŒì¼ì´ë¦„: key.cpp
 //
-// ³»¿ë: Å°ÀÇ ÀÔ·Â Ã³¸®
+// ë‚´ìš©: í‚¤ì˜ ì…ë ¥ ì²˜ë¦¬
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,34 +46,34 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 	{
 		if(msg.message == WM_CHAR)
 		{
-			if(msg.wParam == 1) //A+ÄÁÆ®·Ñ
+			if(msg.wParam == 1) //A+ì»¨íŠ¸ë¡¤
 			{
 				//if(shift_check)
-					return 0x8B; //0x8BÀº ÄÁÆ®·ÑA
+					return 0x8B; //0x8Bì€ ì»¨íŠ¸ë¡¤A
 			}
-			if(msg.wParam == 16) //p+ÄÁÆ®·Ñ
+			if(msg.wParam == 16) //p+ì»¨íŠ¸ë¡¤
 			{
 				//if(shift_check)
-					return 0x88; //0x88Àº ÄÁÆ®·Ñp
+					return 0x88; //0x88ì€ ì»¨íŠ¸ë¡¤p
 			}
-			else if(msg.wParam == 17 ) //Q+ÄÁÆ®·Ñ
+			else if(msg.wParam == 17 ) //Q+ì»¨íŠ¸ë¡¤
 			{
 				//if(shift_check)
-					return 0x89; //0x89Àº ÄÁÆ®·ÑQ
+					return 0x89; //0x89ì€ ì»¨íŠ¸ë¡¤Q
 			}
-			else if(msg.wParam == 19) //S+ÄÁÆ®·Ñ
+			else if(msg.wParam == 19) //S+ì»¨íŠ¸ë¡¤
 			{
 				//if(shift_check)
-					return 0x8A; //0x8AÀº ÄÁÆ®·ÑS
+					return 0x8A; //0x8Aì€ ì»¨íŠ¸ë¡¤S
 			}
-			return msg.wParam; //¿£ÅÍ13 esc 27
+			return msg.wParam; //ì—”í„°13 esc 27
 		}
 		else if(msg.message == WM_KEYDOWN)
 		{
 			switch(msg.wParam)
 			{
 			case '8':
-				if(direction_ || shift_check) break; //¿ø·¡´Â if(direction_)¸¸ÀÖ¾ú´Âµ¥ ¹º°¡ ²¿ÀÓ
+				if(direction_ || shift_check) break; //ì›ë˜ëŠ” if(direction_)ë§Œìˆì—ˆëŠ”ë° ë­”ê°€ ê¼¬ì„
 				return (shift_check)?'*':'k';
 			case VK_UP:
 			case VK_NUMPAD8:
@@ -236,7 +236,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 
 int MoreWait()
 {
-	printlog("----------´ÙÀ½Àå----------",true,false,true,CL_normal);
+	printlog("----------ë‹¤ìŒì¥----------",true,false,true,CL_normal);
 	while(1)
 	{
 		int select = waitkeyinput();

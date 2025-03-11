@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: floor.cpp
+// íŒŒì¼ì´ë¦„: floor.cpp
 //
-// ³»¿ë: ¹Ù´Ú Å¬·¡½º
+// ë‚´ìš©: ë°”ë‹¥ í´ë˜ìŠ¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -132,7 +132,7 @@ void floor_effect::onWalk(unit* unit_)
 			//if(it->GetPrevPos() != position)
 			//{
 		if(!unit_->isFly())
-			unit_->damage(attack_infor(rand_int(8,14),15,99,NULL,parent,ATT_STONE_TRAP,name_infor("¹ÙÀ§ ¾ĞÁ¤",true)), true);
+			unit_->damage(attack_infor(rand_int(8,14),15,99,NULL,parent,ATT_STONE_TRAP,name_infor("ë°”ìœ„ ì••ì •",true)), true);
 				/*return true;*/
 		//	}
 		//}
@@ -143,7 +143,7 @@ void floor_effect::onWalk(unit* unit_)
 			env[current_level].MakeNoise(you.position,20,NULL);
 			
 			if(!you.s_autumn)
-				printarray(true,false,false,CL_autumn,1,"´ÜÇ³ÀÙÀ» ¹âÀ»¶§ ¹Ù½º¶ô°Å¸®´Â ½Ã²ô·¯¿î ¼Ò¸®°¡ ³µ´Ù.");
+				printarray(true,false,false,CL_autumn,1,"ë‹¨í’ìì„ ë°Ÿì„ë•Œ ë°”ìŠ¤ë½ê±°ë¦¬ëŠ” ì‹œë„ëŸ¬ìš´ ì†Œë¦¬ê°€ ë‚¬ë‹¤.");
 		}
 		break;	
 	case FLOORT_NORMAL:
@@ -155,9 +155,9 @@ bool floor_effect::Update(textures *t, textures *t2, floor_type type_, int time_
 {
 	time_*=10;
 	if(type_>= type)
-	{//µ¤¾î ¾º¿î´Ù.
+	{//ë®ì–´ ì”Œìš´ë‹¤.
 		if(type_== type && parent == parent_ &&time_<time)
-		{//½Ã°£ÀÌ Âª¾ÆÁö´Â °æ¿ì´Â µ¤¾î¾º¿ìÁö¾ÊÀ½
+		{//ì‹œê°„ì´ ì§§ì•„ì§€ëŠ” ê²½ìš°ëŠ” ë®ì–´ì”Œìš°ì§€ì•ŠìŒ
 			return false;
 		}
 		image = t;
@@ -193,9 +193,9 @@ int floor_effect::danger(unit* unit_, bool first_)
 	switch(type)
 	{
 	case FLOORT_STONE:
-		danger_ = 0/* unit_->isFly()?0:( unit_->isplayer()?999:8)*/; //ÀÌ ÇÔÁ¤Àº ±¦È÷ ¸ó½ºÅÍ°¡ ÇÇÇÏ¸éÂ¥ÁõÀ» ºÒ·¯µéÀÏ¼öÀÖÀ½.
+		danger_ = 0/* unit_->isFly()?0:( unit_->isplayer()?999:8)*/; //ì´ í•¨ì •ì€ ê´œíˆ ëª¬ìŠ¤í„°ê°€ í”¼í•˜ë©´ì§œì¦ì„ ë¶ˆëŸ¬ë“¤ì¼ìˆ˜ìˆìŒ.
 
-		//´Ù¸¸ ´Ù¸¥ ±æÀÌ ÀÖÀ¸¸é ¿ìÈ¸ÇÏ´ÂÁ¤µµ´Â »ı°¢ÇØº½
+		//ë‹¤ë§Œ ë‹¤ë¥¸ ê¸¸ì´ ìˆìœ¼ë©´ ìš°íšŒí•˜ëŠ”ì •ë„ëŠ” ìƒê°í•´ë´„
 		return danger_;
 	default:
 		return 0;
@@ -207,13 +207,13 @@ char* floor_effect::GetName()
 	switch(type)
 	{
 	case FLOORT_AUTUMN:
-		return "´ÜÇ³ÀÙ";
+		return "ë‹¨í’ì";
 	case FLOORT_STONE:
-		return "¹ÙÀ§ ¾ĞÁ¤";
+		return "ë°”ìœ„ ì••ì •";
 	case FLOORT_SCHEMA:
-		return "Æ´»õ";
+		return "í‹ˆìƒˆ";
 	case FLOORT_GOLD:
-		return "µ¿Àü";
+		return "ë™ì „";
 	case FLOORT_NORMAL:
 	default:
 		return 0;

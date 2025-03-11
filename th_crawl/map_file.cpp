@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: map_file.cpp
+// íŒŒì¼ì´ë¦„: map_file.cpp
 //
-// ³»¿ë: ¸ÊÀ» ¸¸µå´Â ÇÔ¼öµé(¼¼ºÎ)
+// ë‚´ìš©: ë§µì„ ë§Œë“œëŠ” í•¨ìˆ˜ë“¤(ì„¸ë¶€)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -128,7 +128,7 @@ void initMap()
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SEIJA) //¼¼ÀÌÀÚ´Â ¹«Á¶°Ç ³ª¿Â´Ù.
+		if(i != GT_SEIJA) //ì„¸ì´ìëŠ” ë¬´ì¡°ê±´ ë‚˜ì˜¨ë‹¤.
 			dq.push_back(i);
 	}
 	rand_shuffle(dq.begin(),dq.end());
@@ -496,8 +496,8 @@ bool PixedMap(map_dummy* map, char *temp)
 			case ';':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_LAVA;
 				break;
-			case 'i': //°¢ ´øÀü¿¡¼­ µå¶øµÇ´Â ¾ÆÀÌÅÛÀ» ³ÖÀ½
-			case 'I': //¿©·¯°³
+			case 'i': //ê° ë˜ì „ì—ì„œ ë“œëë˜ëŠ” ì•„ì´í…œì„ ë„£ìŒ
+			case 'I': //ì—¬ëŸ¬ê°œ
 			{
 				int num_ = temp[j] == 'I' ? rand_int(3, 4) : 1;
 				for (int k = 0; k < num_; k++) {
@@ -534,7 +534,7 @@ bool PixedMap(map_dummy* map, char *temp)
 					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				}
 				else if (map->sp_tile_list[index_] >= DG_SUB_STAIR_FIRST && map->sp_tile_list[index_] < DG_SUB_STAIR_MAX)
-				{//Æ¯¼ö ÁöÇüÀÌ ¸¸¾à ¼­ºê´øÁ¯ °è´ÜÀÔ±¸ÀÏ °æ¿ì
+				{//íŠ¹ìˆ˜ ì§€í˜•ì´ ë§Œì•½ ì„œë¸Œë˜ì ¼ ê³„ë‹¨ì…êµ¬ì¼ ê²½ìš°
 					int stiar_enter_ = map->sp_tile_list[index_] - DG_SUB_STAIR_FIRST;
 					if (stiar_enter_ >= SUBTERRANEAN)
 						stiar_enter_--;
@@ -550,7 +550,7 @@ bool PixedMap(map_dummy* map, char *temp)
 			case 'm':
 			case 'M':
 			{
-				//±× Ãş¿¡ ÀÏ¹İÀûÀ¸·Î ³ª¿À´Â ¸÷µé
+				//ê·¸ ì¸µì— ì¼ë°˜ì ìœ¼ë¡œ ë‚˜ì˜¤ëŠ” ëª¹ë“¤
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				int mon_ = getMonsterFromFloor(map->floor, (temp[j] == 'm' ? GMFF_FLAG_ALL : (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
 				if (mon_ != -1) {
@@ -561,7 +561,7 @@ bool PixedMap(map_dummy* map, char *temp)
 			case 'd':
 			case 'D':
 			{
-				//²Ş¸÷
+				//ê¿ˆëª¹
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_DREAM_FLOOR;
 				int mon_ = getMonsterFromFloor(DREAM_LEVEL, (temp[j] == 'd' ? GMFF_FLAG_ALL : (temp[j] == 'D' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
 				if (mon_ != -1) {
@@ -572,7 +572,7 @@ bool PixedMap(map_dummy* map, char *temp)
 			case 'h':
 			case 'H':
 			{
-				//ÁöÀú¸÷
+				//ì§€ì €ëª¹
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_FLOOR1;
 				int mon_ = getMonsterFromFloor(SUBTERRANEAN_LEVEL, (temp[j] == 'd' ? GMFF_FLAG_ALL : (temp[j] == 'D' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
 				if (mon_ != -1) {
@@ -686,9 +686,9 @@ void TempleMap(map_dummy* map, int temple_)
 
 void map_dummy::patternSet()
 {
-	if(pattern == 0) //¼­ºê´øÀüÀÔ±¸ÀÇ ÆĞÅÏ = 100+¼­ºê´øÀü | Á¦´ÜÆĞÅÏ = 100+¼­ºê´øÀü°¹¼ö+Á¦´Ü¸ğ¾ç
-					//10ÀÌ»ó 100¹Ì¸¸: 10¿¡ floor¸¦ ´õÇÑ ¸¸Å­ÀÇ Ãş¿¡¼­ÀÇ Åë»óÆ¯¼öÆĞÅÏ
-	{				//°áÁ¤µÇ´Â ÆĞÅÏ 1000+
+	if(pattern == 0) //ì„œë¸Œë˜ì „ì…êµ¬ì˜ íŒ¨í„´ = 100+ì„œë¸Œë˜ì „ | ì œë‹¨íŒ¨í„´ = 100+ì„œë¸Œë˜ì „ê°¯ìˆ˜+ì œë‹¨ëª¨ì–‘
+					//10ì´ìƒ 100ë¯¸ë§Œ: 10ì— floorë¥¼ ë”í•œ ë§Œí¼ì˜ ì¸µì—ì„œì˜ í†µìƒíŠ¹ìˆ˜íŒ¨í„´
+	{				//ê²°ì •ë˜ëŠ” íŒ¨í„´ 1000+
 		baseMap(this);
 	}
 	else if(pattern == 1)
@@ -699,62 +699,62 @@ void map_dummy::patternSet()
 	{
 		PixedMap(this, common_base_pattern(pattern-10, this));
 	}
-	else if(pattern == 100+TEMPLE) //±³È¸
+	else if(pattern == 100+TEMPLE) //êµíšŒ
 	{
 		//TempleEnterMap(this);
 		PixedMap(this, temple_pattern(this));
 	}
-	else if(pattern == 100+MISTY_LAKE) //¾È°³È£¼ö
+	else if(pattern == 100+MISTY_LAKE) //ì•ˆê°œí˜¸ìˆ˜
 	{
 		PixedMap(this, misty_lake_pattern(this));
 	}
-	else if(pattern == 100+YOUKAI_MOUNTAIN) //¿ä±«»ê
+	else if(pattern == 100+YOUKAI_MOUNTAIN) //ìš”ê´´ì‚°
 	{
 		//YoukaiEnterMap(this);		
 		PixedMap(this, youkai_mountain_pattern(this));
 	}
-	else if(pattern == 100+SCARLET_M) //È«¸¶°ü
+	else if(pattern == 100+SCARLET_M) //í™ë§ˆê´€
 	{
 		PixedMap(this, scarlet_pattern(this));
 	}
 	
-	else if(pattern == 100+SCARLET_L) //µµ¼­°ü
+	else if(pattern == 100+SCARLET_L) //ë„ì„œê´€
 	{
 		PixedMap(this, scarlet_library_pattern(this));
 	}
-	else if(pattern == 100+SCARLET_U) //ÁöÇÏ½Ç
+	else if(pattern == 100+SCARLET_U) //ì§€í•˜ì‹¤
 	{
 		PixedMap(this, scarlet_under_pattern(this));
 	}
-	else if(pattern == 100+BAMBOO) //¹Ì±ÃÀÇÁ×¸²
+	else if(pattern == 100+BAMBOO) //ë¯¸ê¶ì˜ì£½ë¦¼
 	{
 		PixedMap(this, bamboo_pattern(this));
 	}
-	else if(pattern == 100+SUBTERRANEAN) //ÁöÀú
+	else if(pattern == 100+SUBTERRANEAN) //ì§€ì €
 	{
 		PixedMap(this, subterranean_pattern(this));
 	}
-	else if(pattern == 100+YUKKURI_D) //ÀµÄí¸®
+	else if(pattern == 100+YUKKURI_D) //ìœ³ì¿ ë¦¬
 	{
 		PixedMap(this, yukkuri_pattern(this));
 	}
-	else if(pattern == 100+DEPTH) //Áü½Â±æ
+	else if(pattern == 100+DEPTH) //ì§ìŠ¹ê¸¸
 	{
 		PixedMap(this, depth_pattern(this));
 	}
-	else if(pattern == 100+DREAM_D) //²ŞÀÇ¼¼°è
+	else if(pattern == 100+DREAM_D) //ê¿ˆì˜ì„¸ê³„
 	{
 		PixedMap(this, dream_pattern(this));
 	}
-	else if(pattern == 100+PANDEMONIUM) //¸¶°è
+	else if(pattern == 100+PANDEMONIUM) //ë§ˆê³„
 	{
 		PixedMap(this, pandemonium_pattern(this));
 	}
-	else if(pattern == 100+HAKUREI_D) //ÇÏÄí·¹ÀÌ
+	else if(pattern == 100+HAKUREI_D) //í•˜ì¿ ë ˆì´
 	{
 		PixedMap(this, hakurei_pattern(this));
 	}
-	else if (pattern == 100 + ZIGURRAT) //ÇÏÄí·¹ÀÌ
+	else if (pattern == 100 + ZIGURRAT) //í•˜ì¿ ë ˆì´
 	{
 		PixedMap(this, zigurrat_pattern(this));
 	}

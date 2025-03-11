@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: seija.cpp
+// íŒŒì¼ì´ë¦„: seija.cpp
 //
-// ³»¿ë: ¼¼ÀÌÀÚ ³»¿ë
+// ë‚´ìš©: ì„¸ì´ìž ë‚´ìš©
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,12 +32,12 @@ bool seija_gift()
 		
 		MoreWait();
 		
-		printarray(true,false,false,CL_danger,3,"´ç½ÅÀº ", GetGodString(you.god), "·ÎºÎÅÍ ¹ö·ÁÁ³´Ù!");
+		printarray(true,false,false,CL_danger,3,"ë‹¹ì‹ ì€ ", GetGodString(you.god), "ë¡œë¶€í„° ë²„ë ¤ì¡Œë‹¤!");
 	
 		//you.PunishUpDown(30, you.god , true);
 	
 		char temp[200];
-		sprintf_s(temp,200,"%s·ÎºÎÅÍ ¹ö·ÁÁ³´Ù.",GetGodString(you.god));
+		sprintf_s(temp,200,"%së¡œë¶€í„° ë²„ë ¤ì¡Œë‹¤.",GetGodString(you.god));
 		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
 
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
@@ -47,7 +47,7 @@ bool seija_gift()
 
 		item_infor t;
 		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
-		printlog("...¼¼ÀÌÀÚ°¡ ¸¶Áö¸· ¼±¹°·Î ¿ä¼ú¸ÁÄ¡¸¦ ÁÖ°í °¬´Ù.", true, false, false, CL_dark_good);
+		printlog("...ì„¸ì´ìžê°€ ë§ˆì§€ë§‰ ì„ ë¬¼ë¡œ ìš”ìˆ ë§ì¹˜ë¥¼ ì£¼ê³  ê°”ë‹¤.", true, false, false, CL_dark_good);
 		return true;
 	}
 
@@ -55,7 +55,7 @@ bool seija_gift()
 	
 	if(temp)
 	{	
-		printlog("¼±¹°À» ¹ÞÁö¾ÊÀºÁö ³Ê¹« ¿À·£½Ã°£ÀÌ Áö³ª¼­ ¼±¹°ÀÌ Ãë¼ÒµÇ¾ú´Ù.",true,false,false,CL_small_danger);
+		printlog("ì„ ë¬¼ì„ ë°›ì§€ì•Šì€ì§€ ë„ˆë¬´ ì˜¤ëžœì‹œê°„ì´ ì§€ë‚˜ì„œ ì„ ë¬¼ì´ ì·¨ì†Œë˜ì—ˆë‹¤.",true,false,false,CL_small_danger);
 		MoreWait();
 		printlog(seija_talk(GT_NONE, seija_level_), true,false,false,CL_seija);
 		you.StepUpDownPiety(-1);
@@ -63,8 +63,8 @@ bool seija_gift()
 	}
 	else
 	{
-		printlog("ÀÌÁ¦ ¼¼ÀÌÀÚ·ÎºÎÅÍ ¼±¹°À» ¿ä±¸ÇÒ ¼ö ÀÖ´Ù. ",false,false,false,CL_seija);
-		printlog("(aÅ°·Î ¼±¹°À» ¿äÃ»)",true,false,false,CL_help);
+		printlog("ì´ì œ ì„¸ì´ìžë¡œë¶€í„° ì„ ë¬¼ì„ ìš”êµ¬í•  ìˆ˜ ìžˆë‹¤. ",false,false,false,CL_seija);
+		printlog("(aí‚¤ë¡œ ì„ ë¬¼ì„ ìš”ì²­)",true,false,false,CL_help);
 		MoreWait();
 
 		you.Ability(SKL_SEIJA_GIFT,true,false);
@@ -78,135 +78,135 @@ const char* seija_god_string(int god, int num) {
 	{
 	case GT_BYAKUREN:
 		switch (num) {
-		case 0: return "¹òÄí·»: ¹«ÀÛÀ§ ¸¶¹ýÃ¥À» ¸î ±Ç ¹Þ½À´Ï´Ù.";
-		case 1: return "¹òÄí·»Àº Â¡¹ú·Î ´ç½ÅÀ» ´À¸®°ÔÇÏ°Å³ª ¿µ·ÂÀÌ³ª ½ºÅÈÀ» ÀÏ½ÃÀûÀ¸·Î °¨¼Ò½ÃÅµ´Ï´Ù.";
-		case 2: return "¶ÇÇÑ ¹òÄí·»ÀÇ Â¡¹úÁß¿£ Ç×»ó ÀÏÁ¤ È®·ü·Î ½ÃÀüÇÑ ¸¶¹ýÀÌ ½ÇÆÐÇÕ´Ï´Ù.";
+		case 0: return "ë±Œì¿ ë Œ: ë¬´ìž‘ìœ„ ë§ˆë²•ì±…ì„ ëª‡ ê¶Œ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ë±Œì¿ ë Œì€ ì§•ë²Œë¡œ ë‹¹ì‹ ì„ ëŠë¦¬ê²Œí•˜ê±°ë‚˜ ì˜ë ¥ì´ë‚˜ ìŠ¤íƒ¯ì„ ì¼ì‹œì ìœ¼ë¡œ ê°ì†Œì‹œí‚µë‹ˆë‹¤.";
+		case 2: return "ë˜í•œ ë±Œì¿ ë Œì˜ ì§•ë²Œì¤‘ì—” í•­ìƒ ì¼ì • í™•ë¥ ë¡œ ì‹œì „í•œ ë§ˆë²•ì´ ì‹¤íŒ¨í•©ë‹ˆë‹¤.";
 		}
 	case GT_JOON_AND_SION:
 		switch (num) {
-		case 0: return "ÁÒ¿Â&½Ã¿Â: ¹«ÀÛÀ§ ºÎÀûÀ» ¾à°£ ¹Þ½À´Ï´Ù.";
-		case 1: return "ÁÒ¿Â°ú ½Ã¿ÂÀº ´ç½ÅÀÇ ¾ÆÀÌÅÛÀ» ³¶ºñÇÏ°í ÀÒ¾î¹ö¸®µµ·Ï ¸¸µì´Ï´Ù.";
-		case 2: return "¶ÇÇÑ Â¡¹ú·Î ´ç½Å¿¡°Ô °­Á¦·Î ºùÀÇµÇ¾î Ã¼·Â, ¿µ·ÂÀÌ³ª ÆÄ¿ö¸¦ ÀÒ°Ô ¸¸µì´Ï´Ù.";
+		case 0: return "ì£ ì˜¨&ì‹œì˜¨: ë¬´ìž‘ìœ„ ë¶€ì ì„ ì•½ê°„ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì£ ì˜¨ê³¼ ì‹œì˜¨ì€ ë‹¹ì‹ ì˜ ì•„ì´í…œì„ ë‚­ë¹„í•˜ê³  ìžƒì–´ë²„ë¦¬ë„ë¡ ë§Œë“­ë‹ˆë‹¤.";
+		case 2: return "ë˜í•œ ì§•ë²Œë¡œ ë‹¹ì‹ ì—ê²Œ ê°•ì œë¡œ ë¹™ì˜ë˜ì–´ ì²´ë ¥, ì˜ë ¥ì´ë‚˜ íŒŒì›Œë¥¼ ìžƒê²Œ ë§Œë“­ë‹ˆë‹¤.";
 		}
 	case GT_KANAKO:
 		switch (num) {
-		case 0: return "Ä«³ªÄÚ: ¹«ÀÛÀ§ ¹«ÀÛÀ§ ¹«±â¸¦ ¿©·µÀ» ¹Þ½À´Ï´Ù.";
-		case 1: return "Ä«³ªÄÚ´Â Â¡¹ú·Î ´ç½Å¿¡°Ô µ¥¹ÌÁö¸¦ ÁÖ°Å³ª ¿Â¹Ù½Ã¶ó¸¦ ²È¾Æ¼­ ¹ßÀ» ¹­°Å³ª";
-		case 2: return "´øÀüÀÇ Àû´ëÀûÀÎ ¸ó½ºÅÍµéÀ» ´ç½ÅÀÇ ÁÖÀ§·Î ºÒ·¯µéÀÌ±âµµ ÇÕ´Ï´Ù.";
+		case 0: return "ì¹´ë‚˜ì½”: ë¬´ìž‘ìœ„ ë¬´ìž‘ìœ„ ë¬´ê¸°ë¥¼ ì—¬ëŸ¿ì„ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì¹´ë‚˜ì½”ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì—ê²Œ ë°ë¯¸ì§€ë¥¼ ì£¼ê±°ë‚˜ ì˜¨ë°”ì‹œë¼ë¥¼ ê½‚ì•„ì„œ ë°œì„ ë¬¶ê±°ë‚˜";
+		case 2: return "ë˜ì „ì˜ ì ëŒ€ì ì¸ ëª¬ìŠ¤í„°ë“¤ì„ ë‹¹ì‹ ì˜ ì£¼ìœ„ë¡œ ë¶ˆëŸ¬ë“¤ì´ê¸°ë„ í•©ë‹ˆë‹¤.";
 		}
 	case GT_SUWAKO:
 		switch (num) {
-		case 0: return "½º¿ÍÄÚ: ½ºÆçÄ«µå¸¦ ¸î °³ ¹Þ½À´Ï´Ù.";
-		case 1: return "½º¿ÍÄÚ´Â ´ç½Å¿¡°Ô ÀúÁÖ¸¦ °É¾î ÀúÇ×ÇÒ ¼ö ¾ø´Â °¨¼Ó°ú µ¶À» °É°Å³ª";
-		case 2: return "´ç½ÅÀÇ ÁÖº¯¿¡ Àû´ëÀûÀÎ °³±¸¸®µéÀ» ¼ÒÈ¯ÇÕ´Ï´Ù.";
+		case 0: return "ìŠ¤ì™€ì½”: ìŠ¤íŽ ì¹´ë“œë¥¼ ëª‡ ê°œ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ìŠ¤ì™€ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ì €ì£¼ë¥¼ ê±¸ì–´ ì €í•­í•  ìˆ˜ ì—†ëŠ” ê°ì†ê³¼ ë…ì„ ê±¸ê±°ë‚˜";
+		case 2: return "ë‹¹ì‹ ì˜ ì£¼ë³€ì— ì ëŒ€ì ì¸ ê°œêµ¬ë¦¬ë“¤ì„ ì†Œí™˜í•©ë‹ˆë‹¤.";
 		}
 	case GT_MINORIKO:
 		switch (num) {
-		case 0: return "¹Ì³ë¸®ÄÚ: ´Ù¼öÀÇ °í±¸¸¶¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "¹Ì³ë¸®ÄÚ´Â Â¡¹ú·Î ´ç½ÅÀÇ ÆÄ¿ö¸¦ Àý¹ÝÀ¸·Î ¸¸µé°Å³ª °Ç°­À» »©¾Ñ¾Æ";
-		case 2: return "º´¿¡ °É¸®°ÔÇÏ±âµµÇÏ¸ç ´É·ÂÄ¡¸¦ ÀÏ½ÃÀûÀ¸·Î °¨¼Ò½ÃÅ³ ¼ö ÀÖ½À´Ï´Ù.";
+		case 0: return "ë¯¸ë…¸ë¦¬ì½”: ë‹¤ìˆ˜ì˜ ê³ êµ¬ë§ˆë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ë¯¸ë…¸ë¦¬ì½”ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì˜ íŒŒì›Œë¥¼ ì ˆë°˜ìœ¼ë¡œ ë§Œë“¤ê±°ë‚˜ ê±´ê°•ì„ ë¹¼ì•—ì•„";
+		case 2: return "ë³‘ì— ê±¸ë¦¬ê²Œí•˜ê¸°ë„í•˜ë©° ëŠ¥ë ¥ì¹˜ë¥¼ ì¼ì‹œì ìœ¼ë¡œ ê°ì†Œì‹œí‚¬ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.";
 		}
 	case GT_MIMA:
 		switch (num) {
-		case 0: return "¹Ì¸¶: ¹Ì¸¶ÀÇ ºÀÀÎ¼­¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "¹Ì¸¶´Â Â¡¹ú·Î ´ç½Å¿¡°Ô ´Ù¾çÇÑ ¼Ó¼ºÀÇ ÆÄ±«¸¶¹ýÀ» Á÷Á¢ ³¯¸³´Ï´Ù.";
-		case 2: return "¶ÇÇÑ ¹Ì¸¶¿¡ Â¡¹úÀ» ¹Þ´Â µ¿¾È¿£ ¸ðµç ¸¶¹ýÀÇ ÆÄ¿ö°¡ Àý¹ÝÀÌ µË´Ï´Ù.";
+		case 0: return "ë¯¸ë§ˆ: ë¯¸ë§ˆì˜ ë´‰ì¸ì„œë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ë¯¸ë§ˆëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì—ê²Œ ë‹¤ì–‘í•œ ì†ì„±ì˜ íŒŒê´´ë§ˆë²•ì„ ì§ì ‘ ë‚ ë¦½ë‹ˆë‹¤.";
+		case 2: return "ë˜í•œ ë¯¸ë§ˆì— ì§•ë²Œì„ ë°›ëŠ” ë™ì•ˆì—” ëª¨ë“  ë§ˆë²•ì˜ íŒŒì›Œê°€ ì ˆë°˜ì´ ë©ë‹ˆë‹¤.";
 		}
 	case GT_SHINKI:
 		switch (num) {
-		case 0: return "½ÅÅ°: ¿µ°ÝµÎ·ç¸¶¸® ¸î°³¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "½ÅÅ°´Â Â¡¹ú·Î ´ç½ÅÀÇ ÁÖº¯¿¡ Àû´ëÀûÀÎ ¸¶°èÀÎµéÀ» ¼ÒÈ¯ÇÕ´Ï´Ù.";
-		case 2: return "¶ÇÇÑ Â¡¹úÁß¿£ ÀûÀÌ P¾ÆÀÌÅÛÀ» ¶³¾î¶ß¸± È®·üÀ» ³·Ãä´Ï´Ù.";
+		case 0: return "ì‹ í‚¤: ì˜ê²©ë‘ë£¨ë§ˆë¦¬ ëª‡ê°œë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì‹ í‚¤ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì˜ ì£¼ë³€ì— ì ëŒ€ì ì¸ ë§ˆê³„ì¸ë“¤ì„ ì†Œí™˜í•©ë‹ˆë‹¤.";
+		case 2: return "ë˜í•œ ì§•ë²Œì¤‘ì—” ì ì´ Pì•„ì´í…œì„ ë–¨ì–´ëœ¨ë¦´ í™•ë¥ ì„ ë‚®ì¶¥ë‹ˆë‹¤.";
 		}
 	case GT_YUUGI:
 		switch (num) {
-		case 0: return "À¯¿ì±â: ¹«ÀÛÀ§ ¹æ¾î±¸¸¦ ¿©·µ ¹Þ½À´Ï´Ù.";
-		case 1: return "À¯¿ì±â´Â ´ç½ÅÀ» °­Á¦·Î ÃëÇÏ°Ô ¸¸µé°Å³ª µ¥¹ÌÁö¿Í ÇÔ²² Áý¾î´øÁö°Å³ª";
-		case 2: return "´ç½Å ÁÖº¯¿¡ °­·ÂÇÑ ¿À´Ï¸¦ ¼ÒÈ¯ÇÏ±âµµ ÇÕ´Ï´Ù.";
+		case 0: return "ìœ ìš°ê¸°: ë¬´ìž‘ìœ„ ë°©ì–´êµ¬ë¥¼ ì—¬ëŸ¿ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ìœ ìš°ê¸°ëŠ” ë‹¹ì‹ ì„ ê°•ì œë¡œ ì·¨í•˜ê²Œ ë§Œë“¤ê±°ë‚˜ ë°ë¯¸ì§€ì™€ í•¨ê»˜ ì§‘ì–´ë˜ì§€ê±°ë‚˜";
+		case 2: return "ë‹¹ì‹  ì£¼ë³€ì— ê°•ë ¥í•œ ì˜¤ë‹ˆë¥¼ ì†Œí™˜í•˜ê¸°ë„ í•©ë‹ˆë‹¤.";
 		}
 	case GT_SHIZUHA:
 		switch (num) {
-		case 0: return "½ÃÁîÇÏ: ´ÜÇ³ºê·£µåÀÇ ¹«±â¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "½ÃÁîÇÏ´Â Â¡¹ú·Î ´ç½ÅÀ» È¥¶õ½ÃÅ°°Å³ª Å« µ¥¹ÌÁö¸¦ ÁÖ°Å³ª Å« ¼ÒÀ½°ú ÇÔ²²";
-		case 2: return "´ç½ÅÀ» °¨¼Ó½ÃÅµ´Ï´Ù. ´ÜÇ³ÀÙÀ» ¹âÀ¸¸é Å« ¼ÒÀ½ÀÌ ³ª¸ç È­¿°¿¡ ¾àÇØÁý´Ï´Ù.";
+		case 0: return "ì‹œì¦ˆí•˜: ë‹¨í’ë¸Œëžœë“œì˜ ë¬´ê¸°ë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì‹œì¦ˆí•˜ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì„ í˜¼ëž€ì‹œí‚¤ê±°ë‚˜ í° ë°ë¯¸ì§€ë¥¼ ì£¼ê±°ë‚˜ í° ì†ŒìŒê³¼ í•¨ê»˜";
+		case 2: return "ë‹¹ì‹ ì„ ê°ì†ì‹œí‚µë‹ˆë‹¤. ë‹¨í’ìžŽì„ ë°Ÿìœ¼ë©´ í° ì†ŒìŒì´ ë‚˜ë©° í™”ì—¼ì— ì•½í•´ì§‘ë‹ˆë‹¤.";
 		}
 	case GT_HINA:
 		switch (num) {
-		case 0: return "È÷³ª: ¹«ÀÛÀ§ ¹ÝÁö¸¦ ¿©·µ ¹Þ½À´Ï´Ù.";
-		case 1: return "È÷³ª´Â Â¡¹ú·Î ´ç½Å¿¡ ÀúÇ×ºÒ°¡´ÉÇÑ µ¶°ú °¨¼ÓÀ» °É°Å³ª ´ç½ÅÀÇ Àåºñ¿¡ ÀúÁÖ¸¦";
-		case 2: return "°É±âµµÇÏ¸ç È¥¶õÀ» °Ì´Ï´Ù. Â¡¹úÁß¿£ ÀúÁÖÇØÁ¦´Â Ç×»ó ½ÇÆÐÇÒ °¡´É¼ºÀÌ »ý±é´Ï´Ù.";
+		case 0: return "ížˆë‚˜: ë¬´ìž‘ìœ„ ë°˜ì§€ë¥¼ ì—¬ëŸ¿ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ížˆë‚˜ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì— ì €í•­ë¶ˆê°€ëŠ¥í•œ ë…ê³¼ ê°ì†ì„ ê±¸ê±°ë‚˜ ë‹¹ì‹ ì˜ ìž¥ë¹„ì— ì €ì£¼ë¥¼";
+		case 2: return "ê±¸ê¸°ë„í•˜ë©° í˜¼ëž€ì„ ê²ë‹ˆë‹¤. ì§•ë²Œì¤‘ì—” ì €ì£¼í•´ì œëŠ” í•­ìƒ ì‹¤íŒ¨í•  ê°€ëŠ¥ì„±ì´ ìƒê¹ë‹ˆë‹¤.";
 		}
 	case GT_YUKARI:
 		switch (num) {
-		case 0: return "À¯Ä«¸®: °ø°£ÀÌµ¿ ¼Ò¸ðÇ°À» ¿©·µÀ» ¹Þ½À´Ï´Ù.";
-		case 1: return "À¯Ä«¸®´Â Â¡¹ú·Î È¥¶õ°ú ÇÔ²² °ø°£ÀÌµ¿À» ½ÃÅ°°Å³ª °ø°£ÀÌµ¿À» ±ÝÁö½ÃÅ²ÈÄ ÁÖº¯¿¡";
-		case 2: return "ÀûµéÀ» ºÒ·¯¿À±âµµÇÏ¸ç ÀÌÇüÀÇ ´«À» ¼ÒÈ¯½ÃÅ°±âµµ ÇÕ´Ï´Ù.";
+		case 0: return "ìœ ì¹´ë¦¬: ê³µê°„ì´ë™ ì†Œëª¨í’ˆì„ ì—¬ëŸ¿ì„ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ìœ ì¹´ë¦¬ëŠ” ì§•ë²Œë¡œ í˜¼ëž€ê³¼ í•¨ê»˜ ê³µê°„ì´ë™ì„ ì‹œí‚¤ê±°ë‚˜ ê³µê°„ì´ë™ì„ ê¸ˆì§€ì‹œí‚¨í›„ ì£¼ë³€ì—";
+		case 2: return "ì ë“¤ì„ ë¶ˆëŸ¬ì˜¤ê¸°ë„í•˜ë©° ì´í˜•ì˜ ëˆˆì„ ì†Œí™˜ì‹œí‚¤ê¸°ë„ í•©ë‹ˆë‹¤.";
 		}
 	case GT_EIRIN:
 		switch (num) {
-		case 0: return "¿¡ÀÌ¸°: ¹«ÀÛÀ§ ¹°¾à ´õ¹Ì¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "¿¡ÀÌ¸°Àº ´ç½Å¿¡ ³ª»Û ¹°¾àÀ» ¸ÔÀÌ°Å³ª ´ç½Å¿¡°Ô ¼ö»óÇÑ ½ÇÇèÀ» ÇÏ¿© ºÎÀÛ¿ëÀ»";
-		case 2: return "³²±é´Ï´Ù. ¶ÇÇÑ Â¡¹úÁß¿¡ ´ç½ÅÀÌ ¸¶½Ã´Â ¹°¾àÀÇ È¿°ú°¡ ÀÏÁ¤ È®·ü·Î »ç¶óÁý´Ï´Ù.";
+		case 0: return "ì—ì´ë¦°: ë¬´ìž‘ìœ„ ë¬¼ì•½ ë”ë¯¸ë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì—ì´ë¦°ì€ ë‹¹ì‹ ì— ë‚˜ìœ ë¬¼ì•½ì„ ë¨¹ì´ê±°ë‚˜ ë‹¹ì‹ ì—ê²Œ ìˆ˜ìƒí•œ ì‹¤í—˜ì„ í•˜ì—¬ ë¶€ìž‘ìš©ì„";
+		case 2: return "ë‚¨ê¹ë‹ˆë‹¤. ë˜í•œ ì§•ë²Œì¤‘ì— ë‹¹ì‹ ì´ ë§ˆì‹œëŠ” ë¬¼ì•½ì˜ íš¨ê³¼ê°€ ì¼ì • í™•ë¥ ë¡œ ì‚¬ë¼ì§‘ë‹ˆë‹¤.";
 		}
 	case GT_YUYUKO:
 		switch (num) {
-		case 0: return "À¯À¯ÄÚ: ¹«ÀÛÀ§ ¹ßµ¿ÅÛµéÀ» ¹Þ½À´Ï´Ù.";
-		case 1: return "À¯À¯ÄÚ´Â Â¡¹ú·Î ´ç½ÅÀÇ ÁÖº¯¿¡ ¸¹Àº Àû´ëÀûÀÎ À¯·ÉµéÀ» ¼ÒÈ¯½ÃÅµ´Ï´Ù.";
-		case 2: return "¼ÒÈ¯µÇ´Â À¯·ÉµéÀº ´ç½ÅÀÌ °­ÇØÁú¼ö·Ï °­ÇØÁý´Ï´Ù.";
+		case 0: return "ìœ ìœ ì½”: ë¬´ìž‘ìœ„ ë°œë™í…œë“¤ì„ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ìœ ìœ ì½”ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì˜ ì£¼ë³€ì— ë§Žì€ ì ëŒ€ì ì¸ ìœ ë ¹ë“¤ì„ ì†Œí™˜ì‹œí‚µë‹ˆë‹¤.";
+		case 2: return "ì†Œí™˜ë˜ëŠ” ìœ ë ¹ë“¤ì€ ë‹¹ì‹ ì´ ê°•í•´ì§ˆìˆ˜ë¡ ê°•í•´ì§‘ë‹ˆë‹¤.";
 		}
 	case GT_SATORI:
 		switch (num) {
-		case 0: return "»çÅä¸®: ½Äº°µÎ·ç¸¶¸® ¿©·µÀ» ¹Þ½À´Ï´Ù.";
-		case 1: return "»çÅä¸®´Â ´ç½ÅÀ» Â¡¹úÇÏÁø ¾ÊÁö¸¸ ¹«¾ð°¡¸¦ Ã£´Â Àü´ÜÁö¸¦ ´øÀü¿¡ »Ñ¸³´Ï´Ù.";
-		case 2: return "ÀÌ ÀÏÁ¤½Ã°£µ¿¾È »Ñ·ÁÁö´Â Àü´ÜÁö´Â ´øÀüÀÇ ¾ÆÀÌÅÛ°ú ±³Ã¼µÇ¾î »ý¼ºµË´Ï´Ù.";
+		case 0: return "ì‚¬í† ë¦¬: ì‹ë³„ë‘ë£¨ë§ˆë¦¬ ì—¬ëŸ¿ì„ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì‚¬í† ë¦¬ëŠ” ë‹¹ì‹ ì„ ì§•ë²Œí•˜ì§„ ì•Šì§€ë§Œ ë¬´ì–¸ê°€ë¥¼ ì°¾ëŠ” ì „ë‹¨ì§€ë¥¼ ë˜ì „ì— ë¿Œë¦½ë‹ˆë‹¤.";
+		case 2: return "ì´ ì¼ì •ì‹œê°„ë™ì•ˆ ë¿Œë ¤ì§€ëŠ” ì „ë‹¨ì§€ëŠ” ë˜ì „ì˜ ì•„ì´í…œê³¼ êµì²´ë˜ì–´ ìƒì„±ë©ë‹ˆë‹¤.";
 		}
 	case GT_TENSI:
 		switch (num) {
-		case 0: return "ÅÙ½Ã: ¹«ÀÛÀ§ ¾ÆÀÌÅÛÀ» ¿©·µ ¹Þ½À´Ï´Ù.";
-		case 1: return "ÅÙ½Ã´Â Â¡¹úÀÏÁö¶óµµ ´ç½ÅÀ» ¾ðÁ¦³ª °¡Áö°í ³î °ÍÀÔ´Ï´Ù.";
-		case 2: return "±× Â¡¹úÀº Æò¼ÒÀÇ ÅÙ½ÃÀÇ Çàµ¿º¸´Ù Á¶±Ý ´õ ³ª»Û È¿°úÀÏ È®·üÀÌ ³ô½À´Ï´Ù.";
+		case 0: return "í…ì‹œ: ë¬´ìž‘ìœ„ ì•„ì´í…œì„ ì—¬ëŸ¿ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "í…ì‹œëŠ” ì§•ë²Œì¼ì§€ë¼ë„ ë‹¹ì‹ ì„ ì–¸ì œë‚˜ ê°€ì§€ê³  ë†€ ê²ƒìž…ë‹ˆë‹¤.";
+		case 2: return "ê·¸ ì§•ë²Œì€ í‰ì†Œì˜ í…ì‹œì˜ í–‰ë™ë³´ë‹¤ ì¡°ê¸ˆ ë” ë‚˜ìœ íš¨ê³¼ì¼ í™•ë¥ ì´ ë†’ìŠµë‹ˆë‹¤.";
 		}
 	case GT_SEIJA:
 		switch (num) {
-		case 0: return "¼¼ÀÌÀÚ: ³ª·ÎºÎÅÍ ¹ÞÀ» °ÍÀº ¾ø´Ù!";
-		case 1: return "¾Æ¸¶ ÀÌ ¼±ÅÃÁö´Â ¹ö±×ÀÔ´Ï´Ù.";
+		case 0: return "ì„¸ì´ìž: ë‚˜ë¡œë¶€í„° ë°›ì„ ê²ƒì€ ì—†ë‹¤!";
+		case 1: return "ì•„ë§ˆ ì´ ì„ íƒì§€ëŠ” ë²„ê·¸ìž…ë‹ˆë‹¤.";
 		case 2: return "";
 		}
 	case GT_LILLY:
 		switch (num) {
-		case 0: return "¸±¸®: Åº¸· ¹¶Ä¡¸¦ ¹Þ½À´Ï´Ù";
-		case 1: return "¸±¸®´Â Â¡¹ú·Î ´ç½ÅÀÇ ÁÖº¯¿¡ Àû´ëÀûÀÎ ¿äÁ¤µéÀ» ¼ÒÈ¯ÇÏ°Å³ª";
-		case 2: return "´ç½ÅÀ» ¾àÈ­½ÃÄÑ ÀÏ½ÃÀûÀ¸·Î °ø°Ý·Â°ú ¸¶¹ýÀÇ ÆÄ¿ö¸¦ Àý¹ÝÀ¸·Î ³·Ãä´Ï´Ù.";
+		case 0: return "ë¦´ë¦¬: íƒ„ë§‰ ë­‰ì¹˜ë¥¼ ë°›ìŠµë‹ˆë‹¤";
+		case 1: return "ë¦´ë¦¬ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì˜ ì£¼ë³€ì— ì ëŒ€ì ì¸ ìš”ì •ë“¤ì„ ì†Œí™˜í•˜ê±°ë‚˜";
+		case 2: return "ë‹¹ì‹ ì„ ì•½í™”ì‹œì¼œ ì¼ì‹œì ìœ¼ë¡œ ê³µê²©ë ¥ê³¼ ë§ˆë²•ì˜ íŒŒì›Œë¥¼ ì ˆë°˜ìœ¼ë¡œ ë‚®ì¶¥ë‹ˆë‹¤.";
 		}
 	case GT_MIKO:
 		switch (num) {
-		case 0: return "¹ÌÄÚ: ¾ÆÆ¼ÆåÆ® ¸ÁÅä¸¦ ÇÏ³ª ¹Þ½À´Ï´Ù.";
-		case 1: return "¹ÌÄÚ´Â Â¡¹ú·Î ´ç½ÅÀÇ ÃÖ´ëÃ¼·ÂÀ» ÀÏ½ÃÀûÀ¸·Î Àý¹ÝÀ¸·Î ÁÙÀÌ°Å³ª";
-		case 2: return "°¨¼ÓÀ» °É°Å³ª È­¿°°ú ³Ã±âÀúÇ×À» ÀÏ½ÃÀûÀ¸·Î ÇÑ´Ü°è ³·Ãä´Ï´Ù.";
+		case 0: return "ë¯¸ì½”: ì•„í‹°íŽ™íŠ¸ ë§í† ë¥¼ í•˜ë‚˜ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ë¯¸ì½”ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì˜ ìµœëŒ€ì²´ë ¥ì„ ì¼ì‹œì ìœ¼ë¡œ ì ˆë°˜ìœ¼ë¡œ ì¤„ì´ê±°ë‚˜";
+		case 2: return "ê°ì†ì„ ê±¸ê±°ë‚˜ í™”ì—¼ê³¼ ëƒ‰ê¸°ì €í•­ì„ ì¼ì‹œì ìœ¼ë¡œ í•œë‹¨ê³„ ë‚®ì¶¥ë‹ˆë‹¤.";
 		}
 	case GT_OKINA:
 		switch (num) {
-		case 0: return "¿ÀÅ°³ª: ¾à°£ÀÇ ¼º¿ª µÎ·ç¸¶¸®¸¦ ¹Þ½À´Ï´Ù.";
-		case 1: return "¿ÀÅ°³ª´Â ´ç½ÅÀÇ ÁÖº¯¿¡ Àû´ëÀûÀÎ ¹é´í¼­¸¦ ¼ÒÈ¯ÇÏ¿© ÁÖº¯ÀÇ ¸ó½ºÅÍµéÀ»";
-		case 2: return "ÀÀ¿øÇÏ°Å³ª ´ç½ÅÀÇ Ã¼·Â°ú ¿µ·ÂÀ» Èí¼öÇÕ´Ï´Ù.";
+		case 0: return "ì˜¤í‚¤ë‚˜: ì•½ê°„ì˜ ì„±ì—­ ë‘ë£¨ë§ˆë¦¬ë¥¼ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ì˜¤í‚¤ë‚˜ëŠ” ë‹¹ì‹ ì˜ ì£¼ë³€ì— ì ëŒ€ì ì¸ ë°±ëŒ„ì„œë¥¼ ì†Œí™˜í•˜ì—¬ ì£¼ë³€ì˜ ëª¬ìŠ¤í„°ë“¤ì„";
+		case 2: return "ì‘ì›í•˜ê±°ë‚˜ ë‹¹ì‹ ì˜ ì²´ë ¥ê³¼ ì˜ë ¥ì„ í¡ìˆ˜í•©ë‹ˆë‹¤.";
 		}
 	case GT_JUNKO:
 		switch (num) {
-		case 0: return "¼øÈ£: ¹«±â°­È­¿Í ¹æ¾î±¸°­È­ µÎ·ç¸¶¸®¸¦ ¿©·µ ¹Þ½À´Ï´Ù.";
-		case 1: return "¼øÈ£´Â Â¡¹ú·Î ´ç½ÅÀ» ¾àÈ­½ÃÅ°°Å³ª °¨¼ÓÀ» ½ÃÅ°°Å³ª ´ç½ÅÀÇ ´É·ÂÄ¡¸¦";
-		case 2: return "ÀÏ½ÃÀûÀ¸·Î °¨¼Ò½ÃÅµ´Ï´Ù.";
+		case 0: return "ìˆœí˜¸: ë¬´ê¸°ê°•í™”ì™€ ë°©ì–´êµ¬ê°•í™” ë‘ë£¨ë§ˆë¦¬ë¥¼ ì—¬ëŸ¿ ë°›ìŠµë‹ˆë‹¤.";
+		case 1: return "ìˆœí˜¸ëŠ” ì§•ë²Œë¡œ ë‹¹ì‹ ì„ ì•½í™”ì‹œí‚¤ê±°ë‚˜ ê°ì†ì„ ì‹œí‚¤ê±°ë‚˜ ë‹¹ì‹ ì˜ ëŠ¥ë ¥ì¹˜ë¥¼";
+		case 2: return "ì¼ì‹œì ìœ¼ë¡œ ê°ì†Œì‹œí‚µë‹ˆë‹¤.";
 		}
 	case GT_ERROR:
 	case GT_NONE:
 	default:
 		switch (num) {
-		case 0: return "¹ö±×½Å: ÀÌ°ÍÀ» ¼±ÅÃÇÏ¸é Á×½À´Ï´Ù.";
-		case 1: return "´ëºÎºÐÀº ¹ö±×ÀÔ´Ï´Ù.";
+		case 0: return "ë²„ê·¸ì‹ : ì´ê²ƒì„ ì„ íƒí•˜ë©´ ì£½ìŠµë‹ˆë‹¤.";
+		case 1: return "ëŒ€ë¶€ë¶„ì€ ë²„ê·¸ìž…ë‹ˆë‹¤.";
 		case 2: return "";
 		}
 	
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 
@@ -214,7 +214,7 @@ void seija_real_gift(int key_)
 {	
 	switch(key_)
 	{
-		case GT_BYAKUREN: //¹«ÀÛÀ§ Ã¥ 2~4°³
+		case GT_BYAKUREN: //ë¬´ìž‘ìœ„ ì±… 2~4ê°œ
 			{
 				for(int i = rand_int(2,4); i > 0; i--)
 				{
@@ -239,7 +239,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_KANAKO: //¹«ÀÛÀ§ ¹«±â 3~5°³
+		case GT_KANAKO: //ë¬´ìž‘ìœ„ ë¬´ê¸° 3~5ê°œ
 			{
 				for(int i = rand_int(3,5); i > 0; i--)
 				{
@@ -247,7 +247,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_SUWAKO: //¹«ÀÛÀ§ ½ºÆçÄ«µå 2~4°³
+		case GT_SUWAKO: //ë¬´ìž‘ìœ„ ìŠ¤íŽ ì¹´ë“œ 2~4ê°œ
 			{
 				for(int i = rand_int(2,4); i > 0; i--)
 				{
@@ -256,7 +256,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_MINORIKO: //°í±¸¸¶ 10~30°³
+		case GT_MINORIKO: //ê³ êµ¬ë§ˆ 10~30ê°œ
 			{
 				for(int i = 10; i > 0; i--)
 				{	
@@ -265,7 +265,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_MIMA: //¹Ì¸¶ÀÇ ºÀÀÎ¼­
+		case GT_MIMA: //ë¯¸ë§ˆì˜ ë´‰ì¸ì„œ
 			{
 				for(int i = 1; i > 0; i--)
 				{	
@@ -275,7 +275,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_SHINKI: //¿µ°ÝµÎ·ç¸¶¸® 2~4Àå
+		case GT_SHINKI: //ì˜ê²©ë‘ë£¨ë§ˆë¦¬ 2~4ìž¥
 			{
 				for(int i = rand_int(2,4); i > 0; i--)
 				{	
@@ -314,7 +314,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_YUKARI://°ø°£µÎ·ç¸¶¸® 3~7Àå ¼ø°£ÀÌµ¿µÎ·ç¸¶¸® 0~3Àå
+		case GT_YUKARI://ê³µê°„ë‘ë£¨ë§ˆë¦¬ 3~7ìž¥ ìˆœê°„ì´ë™ë‘ë£¨ë§ˆë¦¬ 0~3ìž¥
 			{
 				for(int i = rand_int(3,7); i > 0; i--)
 				{	
@@ -330,7 +330,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_EIRIN: //Æ÷¼Ç 6~12°³
+		case GT_EIRIN: //í¬ì…˜ 6~12ê°œ
 			{
 				for(int i = rand_int(6,12); i > 0; i--)
 				{					
@@ -341,7 +341,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_YUYUKO: //¹«ÀÛÀ§ ¹ßµ¿ÅÛ 2°³
+		case GT_YUYUKO: //ë¬´ìž‘ìœ„ ë°œë™í…œ 2ê°œ
 			{
 				random_extraction<int> rand_;
 
@@ -358,7 +358,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_SATORI: //½Äº°µÎ·ç¸¶¸® 7~12°³
+		case GT_SATORI: //ì‹ë³„ë‘ë£¨ë§ˆë¦¬ 7~12ê°œ
 			{
 				for(int i = rand_int(7,12); i > 0; i--)
 				{	
@@ -368,7 +368,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_TENSI: //¹«ÀÛÀ§ ¾ÆÀÌÅÛ 4~8°³... ¹«·Á ´øÀü 1ÃþÀÇ!!
+		case GT_TENSI: //ë¬´ìž‘ìœ„ ì•„ì´í…œ 4~8ê°œ... ë¬´ë ¤ ë˜ì „ 1ì¸µì˜!!
 			{				
 				for(int i = rand_int(4,8); i > 0; i--)
 				{	
@@ -377,7 +377,7 @@ void seija_real_gift(int key_)
 				}
 			}
 			break;
-		case GT_LILLY: //Åº¸·¹¶Ä¡
+		case GT_LILLY: //íƒ„ë§‰ë­‰ì¹˜
 			{				
 				for(int i = rand_int(4,7); i > 0; i--)
 				{	
@@ -401,7 +401,7 @@ void seija_real_gift(int key_)
 			{
 				item_infor t;
 				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_CLOAK, 0, &t));
-				MakeArtifact(it, 3); //´Ù¸¥ ¾ÆÀÌÅÛº¸´Ù È¿°ú°¡ ÁÁÀ½
+				MakeArtifact(it, 3); //ë‹¤ë¥¸ ì•„ì´í…œë³´ë‹¤ íš¨ê³¼ê°€ ì¢‹ìŒ
 			}
 		}
 		break;
@@ -439,28 +439,28 @@ const char* seija_summon_buff() {
 	switch (randA(9))
 	{
 	case 0:
-		return "¼¼ÀÌÀÚ: µµ¸ÁÃÄ!";
+		return "ì„¸ì´ìž: ë„ë§ì³!";
 	case 1:
-		return "¼¼ÀÌÀÚ: Á¤¸éÀüÀº ½Â»êÀÌ ¾ø´Ù°í!";
+		return "ì„¸ì´ìž: ì •ë©´ì „ì€ ìŠ¹ì‚°ì´ ì—†ë‹¤ê³ !";
 	case 2:
-		return "¼¼ÀÌÀÚ: ¹ßÀ» ºü¸£°Ô ÇØÁÙÅ×´Ï±î Àß µµ¸ÁÃÄº¸¶ó°í";
+		return "ì„¸ì´ìž: ë°œì„ ë¹ ë¥´ê²Œ í•´ì¤„í…Œë‹ˆê¹Œ ìž˜ ë„ë§ì³ë³´ë¼ê³ ";
 	case 3:
-		return "¼¼ÀÌÀÚ: ±× ³ðµéÀº ´À¸²º¸´Ï±î µûµ¹·Á¹ö·Á!";
+		return "ì„¸ì´ìž: ê·¸ ë†ˆë“¤ì€ ëŠë¦¼ë³´ë‹ˆê¹Œ ë”°ëŒë ¤ë²„ë ¤!";
 	case 4:
-		return "¼¼ÀÌÀÚ: ½Î¿ï »ý°¢Àº ¾Æ´ÏÁö?";
+		return "ì„¸ì´ìž: ì‹¸ìš¸ ìƒê°ì€ ì•„ë‹ˆì§€?";
 	case 5:
-		return "¼¼ÀÌÀÚ: ¹ú½á Ãß°ÝÀÌ ºÙ¾ú³ª";
+		return "ì„¸ì´ìž: ë²Œì¨ ì¶”ê²©ì´ ë¶™ì—ˆë‚˜";
 	case 6:
-		return "¼¼ÀÌÀÚ: ¾ðÁ¦³ªÀÇ Ãß°ÝÀÚµéÀÏ»ÓÀÌ¾ß, µûµ¹¸®ÀÚ°í";
+		return "ì„¸ì´ìž: ì–¸ì œë‚˜ì˜ ì¶”ê²©ìžë“¤ì¼ë¿ì´ì•¼, ë”°ëŒë¦¬ìžê³ ";
 	case 7:
-		return "¼¼ÀÌÀÚ: ¼ö·Î ¹Ð¾îºÙÀÌ´Ù´Ï ¹ÝÄ¢¾Æ´Ï¾ß?";
+		return "ì„¸ì´ìž: ìˆ˜ë¡œ ë°€ì–´ë¶™ì´ë‹¤ë‹ˆ ë°˜ì¹™ì•„ë‹ˆì•¼?";
 	case 8:
-		return "¼¼ÀÌÀÚ: ±×·¡ºÃÀÚ ³ÊÈñµéÀº ¿ì¸± ÀâÀ» ¼ö ¾øÁö";
+		return "ì„¸ì´ìž: ê·¸ëž˜ë´¤ìž ë„ˆí¬ë“¤ì€ ìš°ë¦´ ìž¡ì„ ìˆ˜ ì—†ì§€";
 	case 9:
-		return "¼¼ÀÌÀÚ: ³Ê³Ù Áú¸®Áöµµ ¾Ê³Ä!";
+		return "ì„¸ì´ìž: ë„ˆë„¨ ì§ˆë¦¬ì§€ë„ ì•Šëƒ!";
 	}
 
-	return "¼¼ÀÌÀÚ: ÀÌ´ë·Î µµ¸ÁÃÄ!";
+	return "ì„¸ì´ìž: ì´ëŒ€ë¡œ ë„ë§ì³!";
 }
 
 
@@ -475,247 +475,247 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±× ³à¼®µéÀÇ ¹°°ÇÀº º°·Î °¡Áö°í½ÍÁö¾ÊÀºµ¥ ³Ê¶óµµ ¾µ·¡?";
+				return "ì„¸ì´ìž: ê·¸ ë…€ì„ë“¤ì˜ ë¬¼ê±´ì€ ë³„ë¡œ ê°€ì§€ê³ ì‹¶ì§€ì•Šì€ë° ë„ˆë¼ë„ ì“¸ëž˜?";
 			case 1:
-				return "¼¼ÀÌÀÚ: ±× ³à¼®µéÀº ¾îÂ÷ÇÇ ¿ªº´½ÅÀÌ´Ï ³»°¡ ¾È ÈÉÃÆ¾îµµ ÀÒ¾î¹ö¸±°Å¾ß";
+				return "ì„¸ì´ìž: ê·¸ ë…€ì„ë“¤ì€ ì–´ì°¨í”¼ ì—­ë³‘ì‹ ì´ë‹ˆ ë‚´ê°€ ì•ˆ í›”ì³¤ì–´ë„ ìžƒì–´ë²„ë¦´ê±°ì•¼";
 			case 2:
-				return "¼¼ÀÌÀÚ: ³ªº¸´Ù ¹Ì¿ò ¹Þ´Â ¾ÖµéÀº ÈçÄ¡¾ÊÀºµ¥ ¸»ÀÌÁö";
+				return "ì„¸ì´ìž: ë‚˜ë³´ë‹¤ ë¯¸ì›€ ë°›ëŠ” ì• ë“¤ì€ í”ì¹˜ì•Šì€ë° ë§ì´ì§€";
 			case 3:
-				return "¼¼ÀÌÀÚ: º°·Î °¡±îÀÌ °¡°í½ÍÁö ¾ÊÀº ³à¼®µéÀÌ¶õ ¸»ÀÌÁö";
+				return "ì„¸ì´ìž: ë³„ë¡œ ê°€ê¹Œì´ ê°€ê³ ì‹¶ì§€ ì•Šì€ ë…€ì„ë“¤ì´ëž€ ë§ì´ì§€";
 			}
 			break;
 		case GT_BYAKUREN:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¿ä±«, ÀÎ°£¿¡°Ô ÆòµîÇÏ°Ô? µüºÁµµ À§¼±ÀÚÀÇ ´À³¦ÀÌ ³ª´Â±º!";
+				return "ì„¸ì´ìž: ìš”ê´´, ì¸ê°„ì—ê²Œ í‰ë“±í•˜ê²Œ? ë”±ë´ë„ ìœ„ì„ ìžì˜ ëŠë‚Œì´ ë‚˜ëŠ”êµ°!";
 			case 1:
-				return "¼¼ÀÌÀÚ: Àý¿¡ ¹°°ÇÀ» ÈÉÄ¡·¯°¬À»¶§ ¼úÀÌ ÀÜ¶à ³õ¿©ÀÖ¾ú´Ù°í! ÆÄ°è½Â Áý´ÜÀÌ ºÐ¸íÇØ!";
+				return "ì„¸ì´ìž: ì ˆì— ë¬¼ê±´ì„ í›”ì¹˜ëŸ¬ê°”ì„ë•Œ ìˆ ì´ ìž”ëœ© ë†“ì—¬ìžˆì—ˆë‹¤ê³ ! íŒŒê³„ìŠ¹ ì§‘ë‹¨ì´ ë¶„ëª…í•´!";
 			case 2:
-				return "¼¼ÀÌÀÚ: ±× Àý¿¡ ÀÖ¾ú´ø ¸¶¹ýÃ¥µéÀÌ¾ß. ¼û¾îµé¾î°¡´Ù°¡ ¾ß¸¶ºñÄÚ ÇÏ³ª°¡ Â¢¾î¼­ È¥³µ´Ù´Ï±ñ";
+				return "ì„¸ì´ìž: ê·¸ ì ˆì— ìžˆì—ˆë˜ ë§ˆë²•ì±…ë“¤ì´ì•¼. ìˆ¨ì–´ë“¤ì–´ê°€ë‹¤ê°€ ì•¼ë§ˆë¹„ì½” í•˜ë‚˜ê°€ ì§–ì–´ì„œ í˜¼ë‚¬ë‹¤ë‹ˆê¹";
 			case 3:
-				return "¼¼ÀÌÀÚ: ±× °÷ÀÇ ÁÖÁö½Â¿¡°Õ À§ÇèÇÑ ºÐÀ§±â°¡ Èê·¯³ª¿ÔÁö¸¸... Àß µµ¸ÁÃÄ¿ÔÁö!";
+				return "ì„¸ì´ìž: ê·¸ ê³³ì˜ ì£¼ì§€ìŠ¹ì—ê² ìœ„í—˜í•œ ë¶„ìœ„ê¸°ê°€ í˜ëŸ¬ë‚˜ì™”ì§€ë§Œ... ìž˜ ë„ë§ì³ì™”ì§€!";
 			}
 			break;
 		case GT_KANAKO:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¹ìÀÇ ÇôÃ³·³ ¸»Àç°£ÀÌ ¶Ù¾î³­ ½ÅÀÌ¾úÁö. ³ª¿¡°Õ ¼³µæÀº ¾ÈÅëÇÏÁö¸¸ ¸»ÀÌ¾ß";
+				return "ì„¸ì´ìž: ë±€ì˜ í˜€ì²˜ëŸ¼ ë§ìž¬ê°„ì´ ë›°ì–´ë‚œ ì‹ ì´ì—ˆì§€. ë‚˜ì—ê² ì„¤ë“ì€ ì•ˆí†µí•˜ì§€ë§Œ ë§ì´ì•¼";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÀÌ ¸¹Àº °í¹°µéÀÌ ¾µ¸ð°¡ ÀÖÀ»±î? ¿øÇÑ´Ù¸é ÁÖ°ÚÁö¸¸";
+				return "ì„¸ì´ìž: ì´ ë§Žì€ ê³ ë¬¼ë“¤ì´ ì“¸ëª¨ê°€ ìžˆì„ê¹Œ? ì›í•œë‹¤ë©´ ì£¼ê² ì§€ë§Œ";
 			case 2:
-				return "¼¼ÀÌÀÚ: ±× ½Å ¸»ÀÌ¾ß. ¼¾½º°¡ ÃÌ½º·´´Ù°í ¼¾½º°¡";
+				return "ì„¸ì´ìž: ê·¸ ì‹  ë§ì´ì•¼. ì„¼ìŠ¤ê°€ ì´ŒìŠ¤ëŸ½ë‹¤ê³  ì„¼ìŠ¤ê°€";
 			case 3:
-				return "¼¼ÀÌÀÚ: ±× ±âµÕÀ¸·ÎºÎÅÍ µµ¸ÁÄ¡´Â°Ç ²Ï ¾î·Á¿üÁö... Àß ÇÇÇØº¸¶ó°í!";
+				return "ì„¸ì´ìž: ê·¸ ê¸°ë‘¥ìœ¼ë¡œë¶€í„° ë„ë§ì¹˜ëŠ”ê±´ ê½¤ ì–´ë ¤ì› ì§€... ìž˜ í”¼í•´ë³´ë¼ê³ !";
 			}
 			break;
 		case GT_SUWAKO:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ÀÌ·± ²¿¸ÍÀÌµµ ½ÅÀÌ¾ú´ø°Å¾ß? ±×·¸°Ô ½êº¸ÀÌÁø¾Ê¾Ò´Âµ¥";
+				return "ì„¸ì´ìž: ì´ëŸ° ê¼¬ë§¹ì´ë„ ì‹ ì´ì—ˆë˜ê±°ì•¼? ê·¸ë ‡ê²Œ ìŽ„ë³´ì´ì§„ì•Šì•˜ëŠ”ë°";
 			case 1:
-				return "¼¼ÀÌÀÚ: ±× °÷¿£ °³±¸¸®°¡ Âü ¸¹¾ÒÁö. º°·Î ÁÁ¾ÆÇÏÁø ¾Ê´Âµ¥ ¸»ÀÌ¾ß";
+				return "ì„¸ì´ìž: ê·¸ ê³³ì—” ê°œêµ¬ë¦¬ê°€ ì°¸ ë§Žì•˜ì§€. ë³„ë¡œ ì¢‹ì•„í•˜ì§„ ì•ŠëŠ”ë° ë§ì´ì•¼";
 			case 2:
-				return "¼¼ÀÌÀÚ: ±× Àç¾Ó½Å. º¸±âº¸´Ü À§ÇèÇÏ´Ù°í";
+				return "ì„¸ì´ìž: ê·¸ ìž¬ì•™ì‹ . ë³´ê¸°ë³´ë‹¨ ìœ„í—˜í•˜ë‹¤ê³ ";
 			case 3:
-				return "¼¼ÀÌÀÚ: ÀÌ ¹°°Ç¿£ Àç¾ÓÀÌ µû¶ó¿À´Âµ¥ ±¦Âú°Ú¾î?";
+				return "ì„¸ì´ìž: ì´ ë¬¼ê±´ì—” ìž¬ì•™ì´ ë”°ë¼ì˜¤ëŠ”ë° ê´œì°®ê² ì–´?";
 			}
 			break;
 		case GT_MINORIKO:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¹¹ µµ¸Á»ýÈ°ÀÌ¶óµµ ¹äÀº Ã¬°Ü¸Ô¾î¾ßÁö. ¿©±â Á» ³ª´²ÁÙ°Ô";
+				return "ì„¸ì´ìž: ë­ ë„ë§ìƒí™œì´ë¼ë„ ë°¥ì€ ì±™ê²¨ë¨¹ì–´ì•¼ì§€. ì—¬ê¸° ì¢€ ë‚˜ëˆ ì¤„ê²Œ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ³­ ÀÌÁ¦ °í±¸¸¶´Â Áú·Á¼­¸»ÀÌ¾ß, ³ª´²ÁÙ±î »ý°¢ÇÏ°í ÀÖ¾ú´Ù°í";
+				return "ì„¸ì´ìž: ë‚œ ì´ì œ ê³ êµ¬ë§ˆëŠ” ì§ˆë ¤ì„œë§ì´ì•¼, ë‚˜ëˆ ì¤„ê¹Œ ìƒê°í•˜ê³  ìžˆì—ˆë‹¤ê³ ";
 			case 2:
-				return "¼¼ÀÌÀÚ: ÀÌ °í±¸¸¶µéÀº ±× Ç³³âÀÇ ½Å¿¡°Ô... ¾î¶ó? ÀÌ¸§ÀÌ ¹¹¿´Áö?";
+				return "ì„¸ì´ìž: ì´ ê³ êµ¬ë§ˆë“¤ì€ ê·¸ í’ë…„ì˜ ì‹ ì—ê²Œ... ì–´ë¼? ì´ë¦„ì´ ë­ì˜€ì§€?";
 			case 3:
-				return "¼¼ÀÌÀÚ: ¹è°íÆÍ³ªº¸Áö? Á» ³ª´²ÁÖÁö";
+				return "ì„¸ì´ìž: ë°°ê³ íŒ ë‚˜ë³´ì§€? ì¢€ ë‚˜ëˆ ì£¼ì§€";
 			}
 			break;
 		case GT_MIMA:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±Ã±ØÀÇ ¸¶¹ýÀÌ ÀûÇôÀÖ´Ù°í ÇÏ´õ±º. ¼ÒÁßÇÏ°Ô ¾²¶ó°í";
+				return "ì„¸ì´ìž: ê¶ê·¹ì˜ ë§ˆë²•ì´ ì í˜€ìžˆë‹¤ê³  í•˜ë”êµ°. ì†Œì¤‘í•˜ê²Œ ì“°ë¼ê³ ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÀÌ°Ô ±× ½ºÆÄÅ©ÀÎÁö ¹ºÁö°¡ ÀûÇôÀÖ´Â Ã¥ÀÎ°¡? ¹ÝÄ¢¼öÁØÀÌ¶ó°í ±× ¸¶¹ý";
+				return "ì„¸ì´ìž: ì´ê²Œ ê·¸ ìŠ¤íŒŒí¬ì¸ì§€ ë­”ì§€ê°€ ì í˜€ìžˆëŠ” ì±…ì¸ê°€? ë°˜ì¹™ìˆ˜ì¤€ì´ë¼ê³  ê·¸ ë§ˆë²•";
 			case 2:
-				return "¼¼ÀÌÀÚ: ¾Ç·É? ¾Ç·ÉÀÌ ¾´ Ã¥ÀÌ¶ó°í? ÀÐÀ¸¸é ÀúÁÖ¹Þ´Â°Ç ¾Æ´Ï°ÚÁö?";
+				return "ì„¸ì´ìž: ì•…ë ¹? ì•…ë ¹ì´ ì“´ ì±…ì´ë¼ê³ ? ì½ìœ¼ë©´ ì €ì£¼ë°›ëŠ”ê±´ ì•„ë‹ˆê² ì§€?";
 			case 3:
-				return "¼¼ÀÌÀÚ: ¹°°Ç º¸´Â ´«Àº ÀÖ±¸¸¸ ±×·¡. ÀÌ°Ç Á» ±ÍÇÑ Ã¥ÀÌÁö";
+				return "ì„¸ì´ìž: ë¬¼ê±´ ë³´ëŠ” ëˆˆì€ ìžˆêµ¬ë§Œ ê·¸ëž˜. ì´ê±´ ì¢€ ê·€í•œ ì±…ì´ì§€";
 			}
 			break;
 		case GT_SHINKI:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¸¶°èÀÇ ½Å? ±× ¾îº¡º¡ÇÏ°Ô »ý±ä ³à¼®ÀÌ?";
+				return "ì„¸ì´ìž: ë§ˆê³„ì˜ ì‹ ? ê·¸ ì–´ë²™ë²™í•˜ê²Œ ìƒê¸´ ë…€ì„ì´?";
 			case 1:
-				return "¼¼ÀÌÀÚ: »ý°¢º¸´Ù ¸¶°è°¡ ¸ÖÂÄÇØ¼­ ³î¶ú´Ù°í. ±âºÐ³ª»Ú°Ô »ý±ä ±«¹°À» »ý°¢Çß´Âµ¥";
+				return "ì„¸ì´ìž: ìƒê°ë³´ë‹¤ ë§ˆê³„ê°€ ë©€ì©¡í•´ì„œ ë†€ëžë‹¤ê³ . ê¸°ë¶„ë‚˜ì˜ê²Œ ìƒê¸´ ê´´ë¬¼ì„ ìƒê°í–ˆëŠ”ë°";
 			case 2:
-				return "¼¼ÀÌÀÚ: ¸¶°è´Â ±æÀ» ÀÒ±â ½±´Ù°í. È¤½Ã °¡°ÔµÇ¸é Á¶½ÉÇÏ´Â°Ô ÁÁÀ»²¬";
+				return "ì„¸ì´ìž: ë§ˆê³„ëŠ” ê¸¸ì„ ìžƒê¸° ì‰½ë‹¤ê³ . í˜¹ì‹œ ê°€ê²Œë˜ë©´ ì¡°ì‹¬í•˜ëŠ”ê²Œ ì¢‹ì„ê»„";
 			case 3:
-				return "¼¼ÀÌÀÚ: ¸¶Á·µéÀÌ ÁøÀý¸Ó¸®³ªµµ·Ï ÂÑ¾Æ¿À´õ¶ó°í... ÀÌ°É ÁÙÅ×´Ï Á» µûµ¹·Á ÁÙ·¡?";
+				return "ì„¸ì´ìž: ë§ˆì¡±ë“¤ì´ ì§„ì ˆë¨¸ë¦¬ë‚˜ë„ë¡ ì«“ì•„ì˜¤ë”ë¼ê³ ... ì´ê±¸ ì¤„í…Œë‹ˆ ì¢€ ë”°ëŒë ¤ ì¤„ëž˜?";
 			}
 			break;
 		case GT_YUUGI:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¿À´ÏÀÇ »ó´ë´Â ÇÇÇÏ°í ½Í¾î¼­ ¸»ÀÌÁö. ÀÖ´Â Èû²¯ µµ¸ÁÄ¡¶ó°í";
+				return "ì„¸ì´ìž: ì˜¤ë‹ˆì˜ ìƒëŒ€ëŠ” í”¼í•˜ê³  ì‹¶ì–´ì„œ ë§ì´ì§€. ìžˆëŠ” íž˜ê» ë„ë§ì¹˜ë¼ê³ ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÀÌ °©¿ÊµéÀº ¿À´ÏµéÀÇ º¸¹°Áß ÇÏ³ªÁö. ³ª¿¡°Ô °É¸®¸é ±Ý¹æÀÌ¶ó°í";
+				return "ì„¸ì´ìž: ì´ ê°‘ì˜·ë“¤ì€ ì˜¤ë‹ˆë“¤ì˜ ë³´ë¬¼ì¤‘ í•˜ë‚˜ì§€. ë‚˜ì—ê²Œ ê±¸ë¦¬ë©´ ê¸ˆë°©ì´ë¼ê³ ";
 			case 2:
-				return "¼¼ÀÌÀÚ: °©¿ÊÀº ÇÊ¿äÇØÁú²¨¾ß. ¿À´ÏÀÇ ÁÖ¸ÔÀ» Á¤¸éÀ¸·Î ¸Â°í ¹öÆ¼·Á¸é ¸»ÀÌÁö";
+				return "ì„¸ì´ìž: ê°‘ì˜·ì€ í•„ìš”í•´ì§ˆêº¼ì•¼. ì˜¤ë‹ˆì˜ ì£¼ë¨¹ì„ ì •ë©´ìœ¼ë¡œ ë§žê³  ë²„í‹°ë ¤ë©´ ë§ì´ì§€";
 			case 3:
-				return "¼¼ÀÌÀÚ: ³­ ¿À´Ïµé¿¡°Ô ¹Ì¿ò¹Þ´Â ¼º°Ý°°¾Æ¼­ ¸»ÀÌ¾ß. Á» ´ë½Å »ó´ëÇØÁáÀ¸¸é ÇÏ´Âµ¥";
+				return "ì„¸ì´ìž: ë‚œ ì˜¤ë‹ˆë“¤ì—ê²Œ ë¯¸ì›€ë°›ëŠ” ì„±ê²©ê°™ì•„ì„œ ë§ì´ì•¼. ì¢€ ëŒ€ì‹  ìƒëŒ€í•´ì¤¬ìœ¼ë©´ í•˜ëŠ”ë°";
 			}
 			break;
 		case GT_SHIZUHA:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ´ÜÇ³Àº ¶³¾îÁö¸é º¸Àß°Í ¾øÁö. ³Êµµ ±×·¸°Ô »ý°¢ÇÏÁö?";
+				return "ì„¸ì´ìž: ë‹¨í’ì€ ë–¨ì–´ì§€ë©´ ë³´ìž˜ê²ƒ ì—†ì§€. ë„ˆë„ ê·¸ë ‡ê²Œ ìƒê°í•˜ì§€?";
 			case 1:
-				return "¼¼ÀÌÀÚ: Á¸Àç°¨ÀÌ ¾øÀ»°Å °°Àº ½ÅÀÌ¾úÁö. ÀÚ ¹Þ¾Æ";
+				return "ì„¸ì´ìž: ì¡´ìž¬ê°ì´ ì—†ì„ê±° ê°™ì€ ì‹ ì´ì—ˆì§€. ìž ë°›ì•„";
 			case 2:
-				return "¼¼ÀÌÀÚ: ±Û½ê ÀÌ°É °¡Á®¿Ã¶§ ´©°¡ ²À ÁöÄÑº¸°íÀÖ´Ù´Â ´À³¦ÀÌ µé¾ú´Ü ¸»ÀÌ¾ß?";
+				return "ì„¸ì´ìž: ê¸€ìŽ„ ì´ê±¸ ê°€ì ¸ì˜¬ë•Œ ëˆ„ê°€ ê¼­ ì§€ì¼œë³´ê³ ìžˆë‹¤ëŠ” ëŠë‚Œì´ ë“¤ì—ˆë‹¨ ë§ì´ì•¼?";
 			case 3:
-				return "¼¼ÀÌÀÚ: ¿ª½Ã ½Î¿òÀº ¸ô·¡ µîµÚ¿¡¼­ Âî¸£´Â°Ô ÃÖ°íÁö. ³Êµµ ±×·¸°Ô »ý°¢ÇÏÁö?";
+				return "ì„¸ì´ìž: ì—­ì‹œ ì‹¸ì›€ì€ ëª°ëž˜ ë“±ë’¤ì—ì„œ ì°Œë¥´ëŠ”ê²Œ ìµœê³ ì§€. ë„ˆë„ ê·¸ë ‡ê²Œ ìƒê°í•˜ì§€?";
 			}
 			break;
 		case GT_HINA:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¸¶Ä§ ÀÌ·± ÀúÁÖ¹ÞÀº ¹°°ÇÀº ³ªµµ ÇÊ¿ä¾ø¾ú¾î. ÀüºÎ ÁÙ°Ô";
+				return "ì„¸ì´ìž: ë§ˆì¹¨ ì´ëŸ° ì €ì£¼ë°›ì€ ë¬¼ê±´ì€ ë‚˜ë„ í•„ìš”ì—†ì—ˆì–´. ì „ë¶€ ì¤„ê²Œ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ²Ï °ªÀÌ ³ª°¡´Â ¹ÝÁö°°¾Æ º¸ÀÌ±äÇÏ´Âµ¥, ³¢¸é ¼Ò¸§³¢Ä¥°Å°°°í ½È¾î";
+				return "ì„¸ì´ìž: ê½¤ ê°’ì´ ë‚˜ê°€ëŠ” ë°˜ì§€ê°™ì•„ ë³´ì´ê¸´í•˜ëŠ”ë°, ë¼ë©´ ì†Œë¦„ë¼ì¹ ê±°ê°™ê³  ì‹«ì–´";
 			case 2:
-				return "¼¼ÀÌÀÚ: ÀÏºÎ·¯ ÀÚ½ÅÀÇ Àåºñ¿¡ ÀúÁÖ¸¦ °Å´Â »ç¶÷ÀÌ ÀÖ´Ù°í? ¿¡ÀÌ ¼³¸¶";
+				return "ì„¸ì´ìž: ì¼ë¶€ëŸ¬ ìžì‹ ì˜ ìž¥ë¹„ì— ì €ì£¼ë¥¼ ê±°ëŠ” ì‚¬ëžŒì´ ìžˆë‹¤ê³ ? ì—ì´ ì„¤ë§ˆ";
 			case 3:
-				return "¼¼ÀÌÀÚ: ÇÊ¿äÇÏ¸é ÁÖ°ÚÁö¸¸ ÀúÁÖ´Â Á¶½ÉÇÏ¶ó°í ";
+				return "ì„¸ì´ìž: í•„ìš”í•˜ë©´ ì£¼ê² ì§€ë§Œ ì €ì£¼ëŠ” ì¡°ì‹¬í•˜ë¼ê³  ";
 			}
 			break;
 		case GT_YUKARI:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ÀÌ ±âºÐ³ª»Û ¿ä±«¶ûÀº º°·Î ¿¬°üµÇ°í ½ÍÁö ¾Ê¾Ò´Âµ¥";
+				return "ì„¸ì´ìž: ì´ ê¸°ë¶„ë‚˜ìœ ìš”ê´´ëž‘ì€ ë³„ë¡œ ì—°ê´€ë˜ê³  ì‹¶ì§€ ì•Šì•˜ëŠ”ë°";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÀÌ ¹°°ÇµéÀ» ÈÉÄ¡·¯°¬À»¶§ ÀÌ ¿ä±«´Â ÀáÀÚ°íÀÖ¾úÁö";
+				return "ì„¸ì´ìž: ì´ ë¬¼ê±´ë“¤ì„ í›”ì¹˜ëŸ¬ê°”ì„ë•Œ ì´ ìš”ê´´ëŠ” ìž ìžê³ ìžˆì—ˆì§€";
 			case 2:
-				return "¼¼ÀÌÀÚ: µµ¸ÁÄ¥¶§´Â ÀÌ °ø°£ÀÌµ¿ ¾ÆÀÌÅÛ¸¸ÇÑ°Ô ¾øÁö. À¯¿ëÇÏ°Ô ¾²¶ó°í";
+				return "ì„¸ì´ìž: ë„ë§ì¹ ë•ŒëŠ” ì´ ê³µê°„ì´ë™ ì•„ì´í…œë§Œí•œê²Œ ì—†ì§€. ìœ ìš©í•˜ê²Œ ì“°ë¼ê³ ";
 			case 3:
-				return "¼¼ÀÌÀÚ: °ø°£ÀÌµ¿Àº À¯¿ëÇÏÁö¸¸ ¸Ö¹Ì°¡ ½ÉÇÏ´Ü¸»ÀÌ¾ß. ¿ìÀ¡";
+				return "ì„¸ì´ìž: ê³µê°„ì´ë™ì€ ìœ ìš©í•˜ì§€ë§Œ ë©€ë¯¸ê°€ ì‹¬í•˜ë‹¨ë§ì´ì•¼. ìš°ì›©";
 			}
 			break;
 		case GT_EIRIN:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±× ¾à»çÀÇ Áý¿¡¼­ ÈÉÃÄ¿Â ¹°¾àµéÀÌ¾ß. ¹«½¼ ¹°¾àÀÎÁö´Â Àß ¸ð¸£°ÚÁö¸¸";
+				return "ì„¸ì´ìž: ê·¸ ì•½ì‚¬ì˜ ì§‘ì—ì„œ í›”ì³ì˜¨ ë¬¼ì•½ë“¤ì´ì•¼. ë¬´ìŠ¨ ë¬¼ì•½ì¸ì§€ëŠ” ìž˜ ëª¨ë¥´ê² ì§€ë§Œ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ¾à»ç¶ó¸é¼­? ¿Ö ±×·¸°Ô µ¶À» ¸¹ÀÌ °¡Áö°í ÀÖ´Â °ÅÁö?";
+				return "ì„¸ì´ìž: ì•½ì‚¬ë¼ë©´ì„œ? ì™œ ê·¸ë ‡ê²Œ ë…ì„ ë§Žì´ ê°€ì§€ê³  ìžˆëŠ” ê±°ì§€?";
 			case 2:
-				return "¼¼ÀÌÀÚ: ±× ¾à»çÀÇ ¹æ¿¡ Ã³À½ º¸´Â ÀÌ»óÇÑ ½ÇÇèµµ±¸µµ ÀÜ¶àÀÖ¾ú¾î. À§ÇèÇØº¸¿©¼­ ¹«½ÃÇßÁö";
+				return "ì„¸ì´ìž: ê·¸ ì•½ì‚¬ì˜ ë°©ì— ì²˜ìŒ ë³´ëŠ” ì´ìƒí•œ ì‹¤í—˜ë„êµ¬ë„ ìž”ëœ©ìžˆì—ˆì–´. ìœ„í—˜í•´ë³´ì—¬ì„œ ë¬´ì‹œí–ˆì§€";
 			case 3:
-				return "¼¼ÀÌÀÚ: »óÈ²À» Å¸°³ÇÏ´Âµ¥´Â ¹°¾à¸¸Å­ µçµçÇÑ°Ô ¾øÁö. ³Êµµ Á¶½ÉÇÏ¶ó°í!";
+				return "ì„¸ì´ìž: ìƒí™©ì„ íƒ€ê°œí•˜ëŠ”ë°ëŠ” ë¬¼ì•½ë§Œí¼ ë“ ë“ í•œê²Œ ì—†ì§€. ë„ˆë„ ì¡°ì‹¬í•˜ë¼ê³ !";
 			}
 			break;
 		case GT_YUYUKO:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±× ±ä °è´Ü¿¡ ´Ù½Ã ¿Ã¶ó°¡°í ½ÍÁø ¾Ê´õ¶ó";
+				return "ì„¸ì´ìž: ê·¸ ê¸´ ê³„ë‹¨ì— ë‹¤ì‹œ ì˜¬ë¼ê°€ê³  ì‹¶ì§„ ì•Šë”ë¼";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÀÌ ¹°°ÇÀ» ÈÉÄ¡°í ³ª¼­ºÎÅÏ À¯·ÉÀÌ Áö°ã°Ô ²¿ÀÌ´õ±º";
+				return "ì„¸ì´ìž: ì´ ë¬¼ê±´ì„ í›”ì¹˜ê³  ë‚˜ì„œë¶€í„´ ìœ ë ¹ì´ ì§€ê²¹ê²Œ ê¼¬ì´ë”êµ°";
 			case 2:
-				return "¼¼ÀÌÀÚ: Á×À½À» ´Ù·ç´Â ¸Á·É? ºÒ±æÇÏ³×";
+				return "ì„¸ì´ìž: ì£½ìŒì„ ë‹¤ë£¨ëŠ” ë§ë ¹? ë¶ˆê¸¸í•˜ë„¤";
 			case 3:
-				return "¼¼ÀÌÀÚ: À¯·ÉÁ¤µµ´Â ½±°Ô µûµ¹¸± ¼ö ÀÖ°ÚÁö? ¹Ï´Â´Ù°í ÆÄÆ®³Ê";
+				return "ì„¸ì´ìž: ìœ ë ¹ì •ë„ëŠ” ì‰½ê²Œ ë”°ëŒë¦´ ìˆ˜ ìžˆê² ì§€? ë¯¿ëŠ”ë‹¤ê³  íŒŒíŠ¸ë„ˆ";
 			}
 			break;
 		case GT_SATORI:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¸¶À½À» ÀÐ´Â ¿ä±«¶ó... ±âºÐ ³ª»Û ¿ä±«±¸¸¸";
+				return "ì„¸ì´ìž: ë§ˆìŒì„ ì½ëŠ” ìš”ê´´ë¼... ê¸°ë¶„ ë‚˜ìœ ìš”ê´´êµ¬ë§Œ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ¾Ö¿Ïµ¿¹°À» ±â¸£´Â°ÇÁö ¹æ¸ñÇÏ´Â°ÇÁö Àß ¸ð¸£°Ú³×";
+				return "ì„¸ì´ìž: ì• ì™„ë™ë¬¼ì„ ê¸°ë¥´ëŠ”ê±´ì§€ ë°©ëª©í•˜ëŠ”ê±´ì§€ ìž˜ ëª¨ë¥´ê² ë„¤";
 			case 2:
-				return "¼¼ÀÌÀÚ: º°·Î °­ÇØº¸ÀÌÁø¾ÊÀº ³à¼®ÀÌ¾ú¾î. ´Ù½Ã ¸¸³ª±ä ½ÈÁö¸¸";
+				return "ì„¸ì´ìž: ë³„ë¡œ ê°•í•´ë³´ì´ì§„ì•Šì€ ë…€ì„ì´ì—ˆì–´. ë‹¤ì‹œ ë§Œë‚˜ê¸´ ì‹«ì§€ë§Œ";
 			case 3:
-				return "¼¼ÀÌÀÚ: ³ª¸¸Å­ ¹Ì¿ò ¹Þ´Â ³à¼®ÀÌ¶ó°í? º°·Î µ¿·áÀÇ½ÄÀº ¾È´À³¢Áö¸¸ ¸»ÀÌ¾ß";
+				return "ì„¸ì´ìž: ë‚˜ë§Œí¼ ë¯¸ì›€ ë°›ëŠ” ë…€ì„ì´ë¼ê³ ? ë³„ë¡œ ë™ë£Œì˜ì‹ì€ ì•ˆëŠë¼ì§€ë§Œ ë§ì´ì•¼";
 			}
 			break;
 		case GT_TENSI:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ÀÌ·± ³à¼®À» ¹Ï´Â »ç¶÷ÀÌ ÀÖ´Ù°í? ÃëÇâ Âü µ¶Æ¯ÇÏ±¸¸¸";
+				return "ì„¸ì´ìž: ì´ëŸ° ë…€ì„ì„ ë¯¿ëŠ” ì‚¬ëžŒì´ ìžˆë‹¤ê³ ? ì·¨í–¥ ì°¸ ë…íŠ¹í•˜êµ¬ë§Œ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ÇÏ´Ã¿¡¼­ µ¹¿¡ ¸ÂÁö ¾Ê°Ô Á¶½ÉÇÏ¶ó±¸";
+				return "ì„¸ì´ìž: í•˜ëŠ˜ì—ì„œ ëŒì— ë§žì§€ ì•Šê²Œ ì¡°ì‹¬í•˜ë¼êµ¬";
 			case 2:
-				return "¼¼ÀÌÀÚ: ÀÌ·± Àâµ¿»ç´Ï°¡ ÇÊ¿äÇÑ°Å¾ß? ³Êµµ Âü Æ¯ÀÌÇÏ±º";
+				return "ì„¸ì´ìž: ì´ëŸ° ìž¡ë™ì‚¬ë‹ˆê°€ í•„ìš”í•œê±°ì•¼? ë„ˆë„ ì°¸ íŠ¹ì´í•˜êµ°";
 			case 3:
-				return "¼¼ÀÌÀÚ: ÃµÀÎÀÇ ¹°°ÇÄ¡°ï °ª½Îº¸ÀÌ´Â ¹°°Ç »ÓÀÌ¾ú¾î";
+				return "ì„¸ì´ìž: ì²œì¸ì˜ ë¬¼ê±´ì¹˜ê³¤ ê°’ì‹¸ë³´ì´ëŠ” ë¬¼ê±´ ë¿ì´ì—ˆì–´";
 			}
 			break;
 		case GT_LILLY:
 			switch(randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¿äÁ¤? ±Ç¸® ½ÅÀå? ¹«½¼ ¸»µµ ¾ÈµÇ´Â ¾ê±â¸¦ ÇÏ´Â°É±î?";
+				return "ì„¸ì´ìž: ìš”ì •? ê¶Œë¦¬ ì‹ ìž¥? ë¬´ìŠ¨ ë§ë„ ì•ˆë˜ëŠ” ì–˜ê¸°ë¥¼ í•˜ëŠ”ê±¸ê¹Œ?";
 			case 1:
-				return "¼¼ÀÌÀÚ: ¿äÁ¤°ú ¹ú·¹´Â ºñ½ÁÇÏÁö~ Á×¿©µµ Á×¿©µµ °è¼Ó ±ÍÂú°Ô±¸´Â Á¡ ¸»ÀÌ¾ß";
+				return "ì„¸ì´ìž: ìš”ì •ê³¼ ë²Œë ˆëŠ” ë¹„ìŠ·í•˜ì§€~ ì£½ì—¬ë„ ì£½ì—¬ë„ ê³„ì† ê·€ì°®ê²Œêµ¬ëŠ” ì  ë§ì´ì•¼";
 			case 2:
-				return "¼¼ÀÌÀÚ: ¿äÁ¤ÀÇ ¹°°ÇÀÌ µµ¿òÀÌ µÉÁø ¸ð¸£°ÚÁö¸¸ ÈÉÃÄ¿Ô¾î. ¾î¶»°Ôµç ½áº¸¶ó°í";
+				return "ì„¸ì´ìž: ìš”ì •ì˜ ë¬¼ê±´ì´ ë„ì›€ì´ ë ì§„ ëª¨ë¥´ê² ì§€ë§Œ í›”ì³ì™”ì–´. ì–´ë–»ê²Œë“  ì¨ë³´ë¼ê³ ";
 			case 3:
-				return "¼¼ÀÌÀÚ: ÁÖº¯µµ º¸Áö¾Ê°í Æø°ÝÇØ´ë´Â ¿äÁ¤ÀÌ¾ú¾î. ¹ÎÆó¶ó°í ÀÌ°Å";
+				return "ì„¸ì´ìž: ì£¼ë³€ë„ ë³´ì§€ì•Šê³  í­ê²©í•´ëŒ€ëŠ” ìš”ì •ì´ì—ˆì–´. ë¯¼íë¼ê³  ì´ê±°";
 			}
 			break;
 		case GT_MIKO:
 			switch (randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±× Àß³­ ³à¼®ÀÌ ¾Æ³¢´Â ¸ÁÅä¸¦ ÇÏ³ª °¡Á®¿ÔÁö";
+				return "ì„¸ì´ìž: ê·¸ ìž˜ë‚œ ë…€ì„ì´ ì•„ë¼ëŠ” ë§í† ë¥¼ í•˜ë‚˜ ê°€ì ¸ì™”ì§€";
 			case 1:
-				return "¼¼ÀÌÀÚ: ³­ ´õ ¸¶À½¿¡ µå´Â ¸ÁÅä°¡ ÀÖ¾î¼­ ¸»ÀÌÁö, ÀÌ°Ç ³Ê ÁÙ°Ô";
+				return "ì„¸ì´ìž: ë‚œ ë” ë§ˆìŒì— ë“œëŠ” ë§í† ê°€ ìžˆì–´ì„œ ë§ì´ì§€, ì´ê±´ ë„ˆ ì¤„ê²Œ";
 			case 2:
-				return "¼¼ÀÌÀÚ: °ÑÀ¸·Ð À§´ëÇÑ Ã´ÇØµµ ¼ÓÀ¸·Ð ¾à»èºü¸¥ ³à¼®ÀÌÁö. ³­ ¾Ë ¼ö ÀÖ¾î";
+				return "ì„¸ì´ìž: ê²‰ìœ¼ë¡  ìœ„ëŒ€í•œ ì²™í•´ë„ ì†ìœ¼ë¡  ì•½ì‚­ë¹ ë¥¸ ë…€ì„ì´ì§€. ë‚œ ì•Œ ìˆ˜ ìžˆì–´";
 			case 3:
-				return "¼¼ÀÌÀÚ: »¡°£ ¸ÁÅä? ÆÄ¶õ ¸ÁÅä? ±×·±°Ç Àß ¸ð¸£°Ú´Âµ¥";
+				return "ì„¸ì´ìž: ë¹¨ê°„ ë§í† ? íŒŒëž€ ë§í† ? ê·¸ëŸ°ê±´ ìž˜ ëª¨ë¥´ê² ëŠ”ë°";
 			}
 			break;
 		case GT_OKINA:
 			switch (randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ±× ÀÌ»óÇÑ ÃãÀ» Ãß´Â ¹«¸®¸¦ µûµ¹¸®´À¶ó Áø¶¡ »¯´Ù°í";
+				return "ì„¸ì´ìž: ê·¸ ì´ìƒí•œ ì¶¤ì„ ì¶”ëŠ” ë¬´ë¦¬ë¥¼ ë”°ëŒë¦¬ëŠë¼ ì§„ë•€ ëºë‹¤ê³ ";
 			case 1:
-				return "¼¼ÀÌÀÚ: ±×·± ³ðÀÇ ºÎÇÏµûÀ§ µÉ±îº¸³Ä";
+				return "ì„¸ì´ìž: ê·¸ëŸ° ë†ˆì˜ ë¶€í•˜ë”°ìœ„ ë ê¹Œë³´ëƒ";
 			case 2:
-				return "¼¼ÀÌÀÚ: ÀÌ ¾ÆÀÌÅÛÀ» ¾²¸é ÀÏ½ÃÀûÀ¸·Î ¹«ÀûÀÌ µÈ´Ù´øµ¥ Àß ½áº¸¶ó°í";
+				return "ì„¸ì´ìž: ì´ ì•„ì´í…œì„ ì“°ë©´ ì¼ì‹œì ìœ¼ë¡œ ë¬´ì ì´ ëœë‹¤ë˜ë° ìž˜ ì¨ë³´ë¼ê³ ";
 			case 3:
-				return "¼¼ÀÌÀÚ: µî µÚ¿¡ ¹®ÀÌ ÀÖ±æ·¡ µé¾î°¡º¸°í ÀÌ°É ÈÉÃÄ¿ÔÁö";
+				return "ì„¸ì´ìž: ë“± ë’¤ì— ë¬¸ì´ ìžˆê¸¸ëž˜ ë“¤ì–´ê°€ë³´ê³  ì´ê±¸ í›”ì³ì™”ì§€";
 			}
 			break;
 		case GT_JUNKO:
 			switch (randA(3))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ¿ª½Ã ¾ÆÀÌÅÛ °­È­´Â °¡Àå Áß¿äÇÏÁö?";
+				return "ì„¸ì´ìž: ì—­ì‹œ ì•„ì´í…œ ê°•í™”ëŠ” ê°€ìž¥ ì¤‘ìš”í•˜ì§€?";
 			case 1:
-				return "¼¼ÀÌÀÚ: °è¼Ó ´©±¼ Á×ÀÎ´Ù°í Áß¾ó°Å¸®´Ù´Ï ±âºÐ³ª»Û ³ðÀÌ³×";
+				return "ì„¸ì´ìž: ê³„ì† ëˆ„êµ´ ì£½ì¸ë‹¤ê³  ì¤‘ì–¼ê±°ë¦¬ë‹¤ë‹ˆ ê¸°ë¶„ë‚˜ìœ ë†ˆì´ë„¤";
 			case 2:
-				return "¼¼ÀÌÀÚ: ¼øÈ­°¡ Ãàº¹ÀÌ¶ó°í? ¾ÆÀÌÅÛÀ» ¾²Áú¸øÇÑ´Ù¸é ¹«½¼ ¼Ò¿ëÀÎ°ÅÁö?";
+				return "ì„¸ì´ìž: ìˆœí™”ê°€ ì¶•ë³µì´ë¼ê³ ? ì•„ì´í…œì„ ì“°ì§ˆëª»í•œë‹¤ë©´ ë¬´ìŠ¨ ì†Œìš©ì¸ê±°ì§€?";
 			case 3:
-				return "¼¼ÀÌÀÚ: ¼ø¼öÇÑ Èû¿£ ¸ø¹ÌÄ¡Áö¸¸ ¿ì¸®¿¡°Õ ¸Ó¸®¿Í ¾ÆÀÌÅÛÀÌ ÀÖÁö";
+				return "ì„¸ì´ìž: ìˆœìˆ˜í•œ íž˜ì—” ëª»ë¯¸ì¹˜ì§€ë§Œ ìš°ë¦¬ì—ê² ë¨¸ë¦¬ì™€ ì•„ì´í…œì´ ìžˆì§€";
 			}
 			break;
 		}
@@ -727,15 +727,15 @@ const char* seija_talk(god_type god_, int piety)
 		switch(randA(4))
 		{
 		case 0:
-			return "¼¼ÀÌÀÚ: »õ·Î¿î ·¹Áö½ºÅÁ½ºÀÇ Åº»ýÀÌ±º! È¯¿µÇÑ´Ù!";
+			return "ì„¸ì´ìž: ìƒˆë¡œìš´ ë ˆì§€ìŠ¤íƒ•ìŠ¤ì˜ íƒ„ìƒì´êµ°! í™˜ì˜í•œë‹¤!";
 		case 1:
-			return "¼¼ÀÌÀÚ: ¿ì¸° ÃÖ°íÀÇ ÆÀÀÌ µÉ°Å¾ß!";
+			return "ì„¸ì´ìž: ìš°ë¦° ìµœê³ ì˜ íŒ€ì´ ë ê±°ì•¼!";
 		case 2:
-			return "¼¼ÀÌÀÚ: Äà´ë¸¸ ³ôÀº ±× ³à¼®µé¿¡°Ô ÇÑ¹æ ¸ÔÀÌÀÚ°í!";
+			return "ì„¸ì´ìž: ì½§ëŒ€ë§Œ ë†’ì€ ê·¸ ë…€ì„ë“¤ì—ê²Œ í•œë°© ë¨¹ì´ìžê³ !";
 		case 3:
-			return "¼¼ÀÌÀÚ: ÇÏ±Ø»óÀÇ ½ÃÀÛÀÌ´Ù!";
+			return "ì„¸ì´ìž: í•˜ê·¹ìƒì˜ ì‹œìž‘ì´ë‹¤!";
 		case 4:
-			return "¼¼ÀÌÀÚ: ¾àÀÚ¿¡°Ô ÈûÀ»! °­ÀÚ¿¡°Õ ¹úÀ»!";
+			return "ì„¸ì´ìž: ì•½ìžì—ê²Œ íž˜ì„! ê°•ìžì—ê² ë²Œì„!";
 		}
 		break;		
 	case 1:
@@ -744,17 +744,17 @@ const char* seija_talk(god_type god_, int piety)
 		switch(randA(5))
 		{
 		case 0:
-			return "¼¼ÀÌÀÚ: Á¤¸»? ¾ÆÀÌÅÛÀÌ ÇÊ¿äÇÏÁö¾ÊÀº°Å¾ß? ±× ÀÚ½Å°¨ ½ÈÁø ¾Ê¾Æ";
+			return "ì„¸ì´ìž: ì •ë§? ì•„ì´í…œì´ í•„ìš”í•˜ì§€ì•Šì€ê±°ì•¼? ê·¸ ìžì‹ ê° ì‹«ì§„ ì•Šì•„";
 		case 1:
-			return "¼¼ÀÌÀÚ: ¹°·Ð ¼±¹°Àº ¹ÞÁö¾Ê¾Æµµ Á» µµ¿ÍÁÙ°ÅÁö?";
+			return "ì„¸ì´ìž: ë¬¼ë¡  ì„ ë¬¼ì€ ë°›ì§€ì•Šì•„ë„ ì¢€ ë„ì™€ì¤„ê±°ì§€?";
 		case 2:
-			return "¼¼ÀÌÀÚ: »ç¾çÇÒ ÇÊ¿ä´Â ¾ø´Âµ¥ ¸»ÀÌÁö";
+			return "ì„¸ì´ìž: ì‚¬ì–‘í•  í•„ìš”ëŠ” ì—†ëŠ”ë° ë§ì´ì§€";
 		case 3:
-			return "¼¼ÀÌÀÚ: ÇÊ¿ä¾ø´Ù´Â°É·Î ¾Ë°Ú¾î ÆÄÆ®³Ê";
+			return "ì„¸ì´ìž: í•„ìš”ì—†ë‹¤ëŠ”ê±¸ë¡œ ì•Œê² ì–´ íŒŒíŠ¸ë„ˆ";
 		case 4:
-			return "¼¼ÀÌÀÚ: ÈÄÈ¸ÇÏÁö¸»¶ó°í";
+			return "ì„¸ì´ìž: í›„íšŒí•˜ì§€ë§ë¼ê³ ";
 		case 5:
-			return "¼¼ÀÌÀÚ: ±×·³ ÀÌ º¸¹°Àº ³»°¡ °¡Áö°í ÀÖÁö";
+			return "ì„¸ì´ìž: ê·¸ëŸ¼ ì´ ë³´ë¬¼ì€ ë‚´ê°€ ê°€ì§€ê³  ìžˆì§€";
 		}
 		break;		
 	case 4:
@@ -763,9 +763,9 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(1))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: Á¤¸»·Î ÇÊ¿ä¾ø¾î?";
+				return "ì„¸ì´ìž: ì •ë§ë¡œ í•„ìš”ì—†ì–´?";
 			case 1:
-				return "¼¼ÀÌÀÚ: ±â²¯ ³» º¸¹°À» ÁØ´Ù´Âµ¥ ¿Ö ½È´Ù´Â°ÅÁö?";
+				return "ì„¸ì´ìž: ê¸°ê» ë‚´ ë³´ë¬¼ì„ ì¤€ë‹¤ëŠ”ë° ì™œ ì‹«ë‹¤ëŠ”ê±°ì§€?";
 			}
 		}
 		else
@@ -773,19 +773,19 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(6))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: (ÀÌ°Å ¼öÁö°¡ ¾È ¸Â´Â°Å ¾Æ´Ò±î?)";
+				return "ì„¸ì´ìž: (ì´ê±° ìˆ˜ì§€ê°€ ì•ˆ ë§žëŠ”ê±° ì•„ë‹ê¹Œ?)";
 			case 1:
-				return "¼¼ÀÌÀÚ: ³ª ´öºÐ¿¡ ¿©±â±îÁö ¿Ô´Ù°í »ý°¢ÇØ";
+				return "ì„¸ì´ìž: ë‚˜ ë•ë¶„ì— ì—¬ê¸°ê¹Œì§€ ì™”ë‹¤ê³  ìƒê°í•´";
 			case 2:
-				return "¼¼ÀÌÀÚ: Èì... ¿©±â ¹Þ¾Æ";
+				return "ì„¸ì´ìž: í ... ì—¬ê¸° ë°›ì•„";
 			case 3:
-				return "¼¼ÀÌÀÚ: (ÀÌ°Ç Á» ¾Æ±î¿îµ¥...)";
+				return "ì„¸ì´ìž: (ì´ê±´ ì¢€ ì•„ê¹Œìš´ë°...)";
 			case 4:
-				return "¼¼ÀÌÀÚ: (ÀÌ ¹°°Çº¸´Ù ÀÌ ³à¼®ÀÌ ´õ À¯¿ëÇÒ°Å°°Áø ¾ÊÀºµ¥...)";
+				return "ì„¸ì´ìž: (ì´ ë¬¼ê±´ë³´ë‹¤ ì´ ë…€ì„ì´ ë” ìœ ìš©í• ê±°ê°™ì§„ ì•Šì€ë°...)";
 			case 5:
-				return "¼¼ÀÌÀÚ: ¿ª½Ã ÀÌ°Ç Á» ¾Æ±î¿î... ¾Æ, ¾Æ¹«°Íµµ ¾Æ´Ï¾ß";
+				return "ì„¸ì´ìž: ì—­ì‹œ ì´ê±´ ì¢€ ì•„ê¹Œìš´... ì•„, ì•„ë¬´ê²ƒë„ ì•„ë‹ˆì•¼";
 			case 6:
-				return "¼¼ÀÌÀÚ: (»ý°¢ÇØº¸´Ï ³»°¡ ¼ÕÇØ¸¦ º¸°í ÀÖÀÝ¾Æ ÀÌ°Å)";
+				return "ì„¸ì´ìž: (ìƒê°í•´ë³´ë‹ˆ ë‚´ê°€ ì†í•´ë¥¼ ë³´ê³  ìžˆìž–ì•„ ì´ê±°)";
 			}	
 		}
 		break;	
@@ -795,9 +795,9 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(1))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ÀÌºÁ, ¸»ÇØºÁ. ¹«½¼ ¼Ó¼ÀÀÌ ÀÖ´Â°ÅÁö?";
+				return "ì„¸ì´ìž: ì´ë´, ë§í•´ë´. ë¬´ìŠ¨ ì†ì…ˆì´ ìžˆëŠ”ê±°ì§€?";
 			case 1:
-				return "¼¼ÀÌÀÚ: ³×°¡ ¹» »ý°¢ÇÏ´ÂÁö ¾Ë ¼ö°¡ ¾ø±º";
+				return "ì„¸ì´ìž: ë„¤ê°€ ë­˜ ìƒê°í•˜ëŠ”ì§€ ì•Œ ìˆ˜ê°€ ì—†êµ°";
 			}
 		}
 		else
@@ -805,56 +805,56 @@ const char* seija_talk(god_type god_, int piety)
 			switch(randA(6))
 			{
 			case 0:
-				return "¼¼ÀÌÀÚ: ...";
+				return "ì„¸ì´ìž: ...";
 			case 1:
-				return "¼¼ÀÌÀÚ´Â ½É±â°¡ ºÒÆíÇÑµí ÇÏ´Ù.";
+				return "ì„¸ì´ìžëŠ” ì‹¬ê¸°ê°€ ë¶ˆíŽ¸í•œë“¯ í•˜ë‹¤.";
 			case 2:
-				return "¼¼ÀÌÀÚ: ...¿ª½Ã ¾Æ¹«¸® »ý°¢ÇØµµ ³»°¡ ¼ÕÇØ¾ß";
+				return "ì„¸ì´ìž: ...ì—­ì‹œ ì•„ë¬´ë¦¬ ìƒê°í•´ë„ ë‚´ê°€ ì†í•´ì•¼";
 			case 3:
-				return "¼¼ÀÌÀÚ: (±×·¯°íº¸´Ï ¼±¹°À» ½Åµµ¿¡°Ô ÁÖ´Ù°¡ ¹è½Å´çÇÏ´Â ½ÅÀÌ ÀÖ´Ù°í µé¾ú´Â°É)";
+				return "ì„¸ì´ìž: (ê·¸ëŸ¬ê³ ë³´ë‹ˆ ì„ ë¬¼ì„ ì‹ ë„ì—ê²Œ ì£¼ë‹¤ê°€ ë°°ì‹ ë‹¹í•˜ëŠ” ì‹ ì´ ìžˆë‹¤ê³  ë“¤ì—ˆëŠ”ê±¸)";
 			case 4:
-				return "¼¼ÀÌÀÚ: Èï... ±× ¾ó±¼ ¿ØÁö Â¥Áõ³ª´Â°É";
+				return "ì„¸ì´ìž: í¥... ê·¸ ì–¼êµ´ ì™ ì§€ ì§œì¦ë‚˜ëŠ”ê±¸";
 			case 5:
-				return "¼¼ÀÌÀÚ: (³»°¡ ÀÌ¿ë´çÇÏ°í ÀÖ´Â°Ô ¾Æ´Ò±î ÀÌ°Å?)";
+				return "ì„¸ì´ìž: (ë‚´ê°€ ì´ìš©ë‹¹í•˜ê³  ìžˆëŠ”ê²Œ ì•„ë‹ê¹Œ ì´ê±°?)";
 			case 6:
-				return "¼¼ÀÌÀÚ: (¹è½Å ´çÇÏ±â Àü¿¡ ¹è½ÅÇÑ´Ù... ÀÌ°Ô ³» ½ÅÁ¶¿´Áö)";
+				return "ì„¸ì´ìž: (ë°°ì‹  ë‹¹í•˜ê¸° ì „ì— ë°°ì‹ í•œë‹¤... ì´ê²Œ ë‚´ ì‹ ì¡°ì˜€ì§€)";
 			}
 		}
 		break;	
-	case 6: //¼¼ÀÌÀÚÀÇ ¹è½Å
+	case 6: //ì„¸ì´ìžì˜ ë°°ì‹ 
 		switch(randA(6))
 		{
 		case 0:
-			return "¼¼ÀÌÀÚ: Àß µé¾î. ³­ »À¼Ó±îÁö ¾Æ¸¶³ëÀÚÄí´Ù! ³ª¿¡°Ô µ¿·á¶õ ¾ø¾î!";
+			return "ì„¸ì´ìž: ìž˜ ë“¤ì–´. ë‚œ ë¼ˆì†ê¹Œì§€ ì•„ë§ˆë…¸ìžì¿ ë‹¤! ë‚˜ì—ê²Œ ë™ë£Œëž€ ì—†ì–´!";
 		case 1:
-			return "¼¼ÀÌÀÚ: ¿ª½Ã ³Í ÀûÀÌ¾ú¾î. ³Í ¾àÀÚÀÇ ÆíÀÌ ¾Æ´Ï¾ß!";
+			return "ì„¸ì´ìž: ì—­ì‹œ ë„Œ ì ì´ì—ˆì–´. ë„Œ ì•½ìžì˜ íŽ¸ì´ ì•„ë‹ˆì•¼!";
 		case 2:
-			return "¼¼ÀÌÀÚ: ³Êµµ ³¯ ¹è½ÅÇÒ »ý°¢ÀÌ¾úÁö? ¾Æ´Ï¾ß! ³»°¡ ³Î ¹è½ÅÇÒ°Å´Ù!";
+			return "ì„¸ì´ìž: ë„ˆë„ ë‚  ë°°ì‹ í•  ìƒê°ì´ì—ˆì§€? ì•„ë‹ˆì•¼! ë‚´ê°€ ë„ ë°°ì‹ í• ê±°ë‹¤!";
 		case 3:
-			return "¼¼ÀÌÀÚ: ÀÌ¿ë´çÇÏ´Ù ¹ö·ÁÁø ³à¼®Àº ¹Ù·Î ³Ê´Ù! ÀÌ ¸ÛÃ»¾Æ! ³»°¡ ³Î ÀÌ¿ëÇÑ°Å¾ß!";
+			return "ì„¸ì´ìž: ì´ìš©ë‹¹í•˜ë‹¤ ë²„ë ¤ì§„ ë…€ì„ì€ ë°”ë¡œ ë„ˆë‹¤! ì´ ë©ì²­ì•„! ë‚´ê°€ ë„ ì´ìš©í•œê±°ì•¼!";
 		case 4:
-			return "¼¼ÀÌÀÚ: ³Êµµ ³» º¸¹°ÀÌ Å½³ª¼­ ¿Â°ÅÁö? ³»°¡ ±× ¼Ó¼ÀÀ» ¸ð¸¦ ÁÙ ¾Ë°í?";
+			return "ì„¸ì´ìž: ë„ˆë„ ë‚´ ë³´ë¬¼ì´ íƒë‚˜ì„œ ì˜¨ê±°ì§€? ë‚´ê°€ ê·¸ ì†ì…ˆì„ ëª¨ë¥¼ ì¤„ ì•Œê³ ?";
 		case 5:
-			return "¼¼ÀÌÀÚ: ¾Æ¸¶³ëÀÚÄí¿¡°Ô µ¿·á¶õ ¾ø¾î! ³Í Ã³À½ºÎÅÍ ÀÌ¿ë´çÇÑ°Å»ÓÀÌÁö!";
+			return "ì„¸ì´ìž: ì•„ë§ˆë…¸ìžì¿ ì—ê²Œ ë™ë£Œëž€ ì—†ì–´! ë„Œ ì²˜ìŒë¶€í„° ì´ìš©ë‹¹í•œê±°ë¿ì´ì§€!";
 		case 6:
-			return "¼¼ÀÌÀÚ: ±×µ¿¾È ³Î ÆÄÆ®³Ê¶ó°í Çß´ø¸»Àº ´Ù °ÅÁþ¸»ÀÌ´Ù. ¿Ö³Ä¸é ³­ ¾Æ¸¶³ëÀÚÄí´Ï±î!";
+			return "ì„¸ì´ìž: ê·¸ë™ì•ˆ ë„ íŒŒíŠ¸ë„ˆë¼ê³  í–ˆë˜ë§ì€ ë‹¤ ê±°ì§“ë§ì´ë‹¤. ì™œëƒë©´ ë‚œ ì•„ë§ˆë…¸ìžì¿ ë‹ˆê¹Œ!";
 		}
 		break;			
-	case 7:		//¼¼ÀÌÀÚ¸¦ ¹è½Å
+	case 7:		//ì„¸ì´ìžë¥¼ ë°°ì‹ 
 		switch(randA(3))
 		{
 		case 0:
-			return "¼¼ÀÌÀÚ: ¹¹? ³×°¡ ³¯ ¹è½ÅÇØ? ±×°Ô ±×·¸°Ô ½±°Ô µÉ°Å°°¾Æ?";
+			return "ì„¸ì´ìž: ë­? ë„¤ê°€ ë‚  ë°°ì‹ í•´? ê·¸ê²Œ ê·¸ë ‡ê²Œ ì‰½ê²Œ ë ê±°ê°™ì•„?";
 		case 1:
-			return "¼¼ÀÌÀÚ: ±×·¨±º. ¿ª½Ã µ¿·á´Â ÇÊ¿ä¾ø´Â °Å¿´¾î. ³Í ²ûÂïÇÏ°Ô Á×À»°Å¾ß!";
+			return "ì„¸ì´ìž: ê·¸ëž¬êµ°. ì—­ì‹œ ë™ë£ŒëŠ” í•„ìš”ì—†ëŠ” ê±°ì˜€ì–´. ë„Œ ë”ì°í•˜ê²Œ ì£½ì„ê±°ì•¼!";
 		case 2:
-			return "¼¼ÀÌÀÚ: ÀÌ ¾Æ¸¶³ëÀÚÄí¸¦ ÀÌ¿ëÇÏ·ÁÇÏ´Ù´Ï °£µµ Å©±¸³ª!";
+			return "ì„¸ì´ìž: ì´ ì•„ë§ˆë…¸ìžì¿ ë¥¼ ì´ìš©í•˜ë ¤í•˜ë‹¤ë‹ˆ ê°„ë„ í¬êµ¬ë‚˜!";
 		case 3:
-			return "¼¼ÀÌÀÚ: ÈÄÈ¸ÇÏ°Ô ÇØÁÖ¸¶!";
+			return "ì„¸ì´ìž: í›„íšŒí•˜ê²Œ í•´ì£¼ë§ˆ!";
 		}
 		break;	
 	}
 
 	
-	return "¼¼ÀÌÀÚ: ...";
+	return "ì„¸ì´ìž: ...";
 }

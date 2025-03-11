@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: floor.h
+// íŒŒì¼ì´ë¦„: floor.h
 //
-// ³»¿ë: ¹Ù´Ú Å¬·¡½º
+// ë‚´ìš©: ë°”ë‹¥ í´ë˜ìŠ¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,7 +13,7 @@
 #include "common.h"
 #include "unit.h"
 
-enum floor_type //¾Æ·¡ ÀÖ´Â °ÍÀÌ ¿ì¼±¼øÀ§°¡ ³ô´Ù.
+enum floor_type //ì•„ë˜ ìˆëŠ” ê²ƒì´ ìš°ì„ ìˆœìœ„ê°€ ë†’ë‹¤.
 {
 	FLOORT_NORMAL = 0,
 	FLOORT_GOLD,
@@ -50,9 +50,9 @@ public:
 
 	bool Update(textures *t, textures *t2, floor_type type_, int time_, parent_type parent_ = PRT_NEUTRAL);
 
-	static bool isFly(floor_type type_); //ÇÏ´Ã»ó ¹èÄ¡(¹°,¿ë¾ÏÀ§ °¡´É)
-	static bool isSwim(floor_type type_); //¹°À§ ¹èÄ¡°¡´É(¹°À§ °¡´É)
-	static bool isNoGround(floor_type type_); //Áö»ó ¹èÄ¡ºÒ°¡?
+	static bool isFly(floor_type type_); //í•˜ëŠ˜ìƒ ë°°ì¹˜(ë¬¼,ìš©ì•”ìœ„ ê°€ëŠ¥)
+	static bool isSwim(floor_type type_); //ë¬¼ìœ„ ë°°ì¹˜ê°€ëŠ¥(ë¬¼ìœ„ ê°€ëŠ¥)
+	static bool isNoGround(floor_type type_); //ì§€ìƒ ë°°ì¹˜ë¶ˆê°€?
 
 	char* GetName();
 };

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: FSM.h
+// íŒŒì¼ì´ë¦„: FSM.h
 //
-// ³»¿ë: fsmÅ¬·¡½º ¼±¾ğ
+// ë‚´ìš©: fsmí´ë˜ìŠ¤ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,10 +13,10 @@
 #include "enum.h"
 #include <map>
 
-typedef struct state_trans_infor//»óÅÂÀüÀÌ Á¤º¸
+typedef struct state_trans_infor//ìƒíƒœì „ì´ ì •ë³´
 {
-	monster_state_input input; //¹ŞÀ» ¼ö ÀÖ´Â ÀÔ·ÂÀÇ °¹¼ö
-	monster_state after; //ÀÔ·Â¿¡ ´ëÇÑ »óÅÂÀüÀÌ
+	monster_state_input input; //ë°›ì„ ìˆ˜ ìˆëŠ” ì…ë ¥ì˜ ê°¯ìˆ˜
+	monster_state after; //ì…ë ¥ì— ëŒ€í•œ ìƒíƒœì „ì´
 	state_trans_infor(monster_state_input input_, monster_state after_)
 	{
 		input = input_;
@@ -25,27 +25,27 @@ typedef struct state_trans_infor//»óÅÂÀüÀÌ Á¤º¸
 }state_trans_infor;
 
 
-class FSMstate //°ÔÀÓÇÁ·Î±×·¡¹ÖÀë..
+class FSMstate //ê²Œì„í”„ë¡œê·¸ë˜ë°ì¼..
 {
-	unsigned char NumofTran; //ÀÏ¾î³¯ ¼ö ÀÖ´Â »óÅÂÀüÀÌÀÇ °¹¼ö
+	unsigned char NumofTran; //ì¼ì–´ë‚  ìˆ˜ ìˆëŠ” ìƒíƒœì „ì´ì˜ ê°¯ìˆ˜
 
-	vector<state_trans_infor> trans; //»óÅÂÀüÀÌ¿¡ ´ëÇÑ Á¤º¸
-	monster_state id; //°íÀ¯ ID
+	vector<state_trans_infor> trans; //ìƒíƒœì „ì´ì— ëŒ€í•œ ì •ë³´
+	monster_state id; //ê³ ìœ  ID
 
 public:
 	FSMstate(monster_state id_);
 
 	monster_state GetId(){ return id;};
-	void AddTransition(monster_state_input input_, monster_state after_); //»óÅÂÀüÀÌ Ãß°¡
-	void DelTransition(monster_state_input input_); //»óÅÂÀüÀÌ Á¦°Å
-	monster_state Transition(monster_state_input input_); //»óÅÂÀüÀÌ
+	void AddTransition(monster_state_input input_, monster_state after_); //ìƒíƒœì „ì´ ì¶”ê°€
+	void DelTransition(monster_state_input input_); //ìƒíƒœì „ì´ ì œê±°
+	monster_state Transition(monster_state_input input_); //ìƒíƒœì „ì´
 };
 
 
 
-class FSMclass //»óÅÂÅ¬·¡½º¸¦ Æ÷ÀÎÅÍ·Î ³Ñ°ÜÁÖÁö¸¸ newÇÑÃ¤·Î ³Ñ±âÁö¸»ÀÚ. Å¬·¡½º¾È¿¡¼­ ¸Ş¸ğ¸®ÇØÁ¦¸¦ ÇÏÁö¾ÊÀ½.
+class FSMclass //ìƒíƒœí´ë˜ìŠ¤ë¥¼ í¬ì¸í„°ë¡œ ë„˜ê²¨ì£¼ì§€ë§Œ newí•œì±„ë¡œ ë„˜ê¸°ì§€ë§ì. í´ë˜ìŠ¤ì•ˆì—ì„œ ë©”ëª¨ë¦¬í•´ì œë¥¼ í•˜ì§€ì•ŠìŒ.
 {
-	map<monster_state,FSMstate*> state_map; //»óÅÂ¸¦ ´ãÀº ¸Ê
+	map<monster_state,FSMstate*> state_map; //ìƒíƒœë¥¼ ë‹´ì€ ë§µ
 	monster_state current_state;
 
 public:
@@ -54,10 +54,10 @@ public:
 	monster_state GetState(){return current_state;};
 	void SetState(monster_state state_){current_state = state_;};
 
-	void AddState(FSMstate* Newstate_); //»óÅÂÃß°¡
-	void DeleteState(monster_state state_); //»óÅÂ»èÁ¦
+	void AddState(FSMstate* Newstate_); //ìƒíƒœì¶”ê°€
+	void DeleteState(monster_state state_); //ìƒíƒœì‚­ì œ
 
-	monster_state StateTransition(monster_state_input input_); //»óÅÂÀüÀÌ
+	monster_state StateTransition(monster_state_input input_); //ìƒíƒœì „ì´
 };
 
 

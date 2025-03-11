@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: display.cpp
+// íŒŒì¼ì´ë¦„: display.cpp
 //
-// ³»¿ë: Å©·ÑÀÇ Ãâ·Â
+// ë‚´ìš©: í¬ë¡¤ì˜ ì¶œë ¥
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,10 +13,10 @@
 #include "const.h"
 
 
-extern IDirect3DDevice9* Device; //µğ¹ÙÀÌ½ºÆ÷ÀÎÅÍ
-extern IDirect3DVertexBuffer9* g_pVB; //¹öÅØ½º¹öÆÛÆ÷ÀÎÅÍ
-extern D3DXMATRIXA16 g_BaseMatrix; //¸ÅÆ®¸¯½ºÆ÷ÀÎÅÍ
-extern LPD3DXSPRITE g_pSprite; //½ºÇÁ¶óÀÌÆ®Æ÷ÀÎÅÍ 
+extern IDirect3DDevice9* Device; //ë””ë°”ì´ìŠ¤í¬ì¸í„°
+extern IDirect3DVertexBuffer9* g_pVB; //ë²„í…ìŠ¤ë²„í¼í¬ì¸í„°
+extern D3DXMATRIXA16 g_BaseMatrix; //ë§¤íŠ¸ë¦­ìŠ¤í¬ì¸í„°
+extern LPD3DXSPRITE g_pSprite; //ìŠ¤í”„ë¼ì´íŠ¸í¬ì¸í„° 
 extern ID3DXFont* g_pfont;
 extern HANDLE mutx;
 extern display_manager DisplayManager;

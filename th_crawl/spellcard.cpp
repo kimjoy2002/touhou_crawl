@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: spellcard.cpp
+// íŒŒì¼ì´ë¦„: spellcard.cpp
 //
-// ³»¿ë: ½ºÆçÄ«µå ¼±¾ğ
+// ë‚´ìš©: ìŠ¤í ì¹´ë“œ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@
 #include "rect.h"
 #include "tribe.h"
 
-int GetDebufPower(spell_list skill, int power_);//µğ¹öÇÁÀÇ ÆÄ¿ö
+int GetDebufPower(spell_list skill, int power_);//ë””ë²„í”„ì˜ íŒŒì›Œ
 
 extern int map_effect;
 bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag);
@@ -30,17 +30,17 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 {
 	if(you.s_confuse)
 	{
-		printlog("´ç½ÅÀº È¥¶õ½º·´´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ í˜¼ë€ìŠ¤ëŸ½ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 	{
-		printlog("´ç½ÅÀº ½ºÆçÄ«µå¸¦ ¾²±â¿£ ³Ê¹« ¼øÈ­µÇ¾îÀÖ´Ù.", true, false, false, CL_normal);
+		printlog("ë‹¹ì‹ ì€ ìŠ¤í ì¹´ë“œë¥¼ ì“°ê¸°ì—” ë„ˆë¬´ ìˆœí™”ë˜ì–´ìˆë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	//if(you.power < Spellcardusepower(kind,true))
 	//{
-	//	printlog("½ºÆçÀ» ¼±¾ğÇÏ±â¿£ ´ç½ÅÀÇ P°¡ ¸ğÀÚ¶õ´Ù.",true,false,false,CL_small_danger);	
+	//	printlog("ìŠ¤í ì„ ì„ ì–¸í•˜ê¸°ì—” ë‹¹ì‹ ì˜ Pê°€ ëª¨ìë€ë‹¤.",true,false,false,CL_small_danger);	
 	//	return false;
 	//}
 
@@ -117,9 +117,9 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 
 void createSpellCard(int goodbad, int select_, item_infor* t)
 {
-	//¼¿·ºÆ®´Â³ªÁß¿¡ ¼Ó¼º ½ºÆçÄ«µå·Î..
-	//³ªÁß¿¡ ¼Ó¼º¿¡ µû¸¥ ½ºÆçÄ«µå, ¹ßµ¿ ¼±¾ğ¿¡ ¸ÂÃá ¼¼±â Á¤µµ °¡Ä¡ Á¤µµ ´Ù Àß ¹Ù²ãº¸ÀÚ
-	//Áö±İÀº ±¸ÇöÀÌ ¸ñÀû
+	//ì…€ë ‰íŠ¸ëŠ”ë‚˜ì¤‘ì— ì†ì„± ìŠ¤í ì¹´ë“œë¡œ..
+	//ë‚˜ì¤‘ì— ì†ì„±ì— ë”°ë¥¸ ìŠ¤í ì¹´ë“œ, ë°œë™ ì„ ì–¸ì— ë§ì¶˜ ì„¸ê¸° ì •ë„ ê°€ì¹˜ ì •ë„ ë‹¤ ì˜ ë°”ê¿”ë³´ì
+	//ì§€ê¸ˆì€ êµ¬í˜„ì´ ëª©ì 
 	t->value2 = select_!=1?(spellcard_evoke_type)select_:randA(SPC_V_MAX-1);
 	t->value1 = SpellcardMaxCharge((spellcard_evoke_type)t->value2)*rand_float(0.2f,1);
 	t->value3 = 0;
@@ -129,7 +129,7 @@ void createSpellCard(int goodbad, int select_, item_infor* t)
 	t->is_pile = false;
 	t->can_throw = false;
 	t->image = &img_mons_default;
-	t->name.name = "½ºÆçÄ«µå";
+	t->name.name = "ìŠ¤í ì¹´ë“œ";
 	t->name.name_type = false;
 	t->weight = 2.0f;
 	t->value = 200;
@@ -177,20 +177,20 @@ const char* SpellcardName(spellcard_evoke_type skill)
 {
 	switch(skill)
 	{
-	case SPC_V_INVISIBLE: //¿ù-Åõ¸í+È¸ÇÇ
-		return "Åõ¸íÀÇ ";
-	case SPC_V_FIRE: //È­-±¸¸§»ı¼º
-		return "È­¿°ÀÇ ";
-	case SPC_V_ICE: //¼ö-°üÅëÇüº¼Æ®
-		return "³Ã±âÀÇ ";
-	case SPC_V_AIR: //¸ñ-¹ĞÃÄ³»±â
-		return "´ë±âÀÇ ";
-	case SPC_V_METAL://±İ-
-		return "±İ¼ÓÀÇ ";
-	case SPC_V_EARTH: //Åä-º®ÆÄ±«
-		return "´ëÁöÀÇ ";
-	case SPC_V_SUN://ÀÏ-ÁÖº¯ ¸ó½ºÅÍ È¥¶õ+Åõ¸íÇØÁ¦
-		return "ÅÂ¾çÀÇ ";
+	case SPC_V_INVISIBLE: //ì›”-íˆ¬ëª…+íšŒí”¼
+		return "íˆ¬ëª…ì˜ ";
+	case SPC_V_FIRE: //í™”-êµ¬ë¦„ìƒì„±
+		return "í™”ì—¼ì˜ ";
+	case SPC_V_ICE: //ìˆ˜-ê´€í†µí˜•ë³¼íŠ¸
+		return "ëƒ‰ê¸°ì˜ ";
+	case SPC_V_AIR: //ëª©-ë°€ì³ë‚´ê¸°
+		return "ëŒ€ê¸°ì˜ ";
+	case SPC_V_METAL://ê¸ˆ-
+		return "ê¸ˆì†ì˜ ";
+	case SPC_V_EARTH: //í† -ë²½íŒŒê´´
+		return "ëŒ€ì§€ì˜ ";
+	case SPC_V_SUN://ì¼-ì£¼ë³€ ëª¬ìŠ¤í„° í˜¼ë€+íˆ¬ëª…í•´ì œ
+		return "íƒœì–‘ì˜ ";
 	default:
 		return false;
 	}
@@ -266,7 +266,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 {
 	if(target == you.position && !SpellcardFlagCheck(kind,S_FLAG_SEIF) && !SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		printlog("ÀÚ»ìÇÒ°Å¾ß?",true,false,false,CL_small_danger);	
+		printlog("ìì‚´í• ê±°ì•¼?",true,false,false,CL_small_danger);	
 		return false;
 	}
 
@@ -279,7 +279,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		if (CheckThrowPath(you.position, target, beam))
 		{
 			soundmanager.playSound("fire");
-			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor("ºÒ¹Ù´Ù", false));
+			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor("ë¶ˆë°”ë‹¤", false));
 			ThrowSector(0, beam, temp_infor, GetSpellSector(SPL_FIRE_SPREAD), [&](coord_def c_) {
 				if (you.isSightnonblocked(c_))
 				{
@@ -294,7 +294,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor("³Ã±â", true));
+			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor("ëƒ‰ê¸°", true));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -313,10 +313,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
 
-			//beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("È­¿°±¸",false));
+			//beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("í™”ì—¼êµ¬",false));
 			//coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
 
-			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor("¾Ï¼®Åº", true));
+			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor("ì•”ì„íƒ„", true));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -340,7 +340,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 								{
 									if (unit* hit_ = env[current_level].isMonsterPos(pos.x + i, pos.y + j))
 									{
-										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("¾Ï¼®ÆÄÆí", true));
+										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("ì•”ì„íŒŒí¸", true));
 										hit_->damage(temp_att, true);
 									}
 								}
@@ -356,7 +356,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if (!env[current_level].dgtile[pos.x][pos.y].isMove(true, true, false))
 				{
-					printarray(true, false, false, CL_normal, 3, "¾Ï¼®ÅºÀÌ ", dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile], "¿¡ ºÎµúÇûÁö¸¸ ¹Ìµ¿µµ ÇÏÁö ¾Ê¾Ò´Ù.");
+					printarray(true, false, false, CL_normal, 3, "ì•”ì„íƒ„ì´ ", dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile], "ì— ë¶€ë”ªí˜”ì§€ë§Œ ë¯¸ë™ë„ í•˜ì§€ ì•Šì•˜ë‹¤.");
 					env[current_level].MakeNoise(target, 8, NULL);
 				}
 				Sleep(300);
@@ -372,7 +372,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("¹Ù¶÷", true));
+			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ë°”ëŒ", true));
 
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++)
@@ -405,7 +405,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							if (real_knock_)
 							{
-								printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "¹Ù¶÷¿¡ ¹Ğ·Á³ª°¬´Ù.");
+								printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "ë°”ëŒì— ë°€ë ¤ë‚˜ê°”ë‹¤.");
 							}
 						}
 					}
@@ -426,7 +426,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(1, 10 + power / 6), 1 * (10 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("Ã¶°¡½Ã", false));
+			beam_infor temp_infor(randC(1, 10 + power / 6), 1 * (10 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ì² ê°€ì‹œ", false));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -441,7 +441,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	}
 	case SPC_V_SUN:
 	{
-		printlog("°­·ÄÇÑ ºûÀÌ ÁÖº¯À» ºñÃß¾ú´Ù! ", true, false, false, CL_warning);
+		printlog("ê°•ë ¬í•œ ë¹›ì´ ì£¼ë³€ì„ ë¹„ì¶”ì—ˆë‹¤! ", true, false, false, CL_warning);
 		map_effect = 2;
 		Sleep(500);
 		map_effect = 0;
@@ -453,7 +453,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN ||
 					it->id == MON_VAMPIER_BAT) {
 					int damage_ = 10 + power_ / 12;
-					it->damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("ÇŞºû", true)), true);
+					it->damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("í–‡ë¹›", true)), true);
 					power_ += 100;
 				}
 				if (it->flag & M_FLAG_INANIMATE)
@@ -472,7 +472,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		if (you.tribe == TRI_VAMPIRE) {
 			int damage_ = 8 + power / 12;
-			you.damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("ÇŞºû", true)), true);
+			you.damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("í–‡ë¹›", true)), true);
 		}
 		return true;
 	}

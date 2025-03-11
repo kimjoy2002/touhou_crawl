@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: swako.h
+// íŒŒì¼ì´ë¦„: swako.h
 //
-// ³»¿ë: ½º¿ÍÄÚ ±Ç´É °ü·Ã
+// ë‚´ìš©: ìŠ¤ì™€ì½” ê¶ŒëŠ¥ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,58 +11,58 @@
 
 
 
-enum swako_1_power //½Å¾ÓÀÌ µéÁö¾Ê´Â »ç¿ëÇü ±Ç´Éµé
+enum swako_1_power //ì‹ ì•™ì´ ë“¤ì§€ì•ŠëŠ” ì‚¬ìš©í˜• ê¶ŒëŠ¥ë“¤
 {
-	SWAKO_1_JUMP=0, //Á¡ÇÁ
-	SWAKO_1_TEMPLE, //½ÅÀü¼¼¿ì±â
-	SWAKO_1_WATER_GUN, //¹°ÃÑ
-	SWAKO_1_TONGUE, //°³±¸¸® Çô
+	SWAKO_1_JUMP=0, //ì í”„
+	SWAKO_1_TEMPLE, //ì‹ ì „ì„¸ìš°ê¸°
+	SWAKO_1_WATER_GUN, //ë¬¼ì´
+	SWAKO_1_TONGUE, //ê°œêµ¬ë¦¬ í˜€
 	SWAKO_1_LAST
 };
-enum swako_2_power //È¿À²ÀÌ ÁÁÀº ÆÐ½Ãºê ±Ç´Éµé
+enum swako_2_power //íš¨ìœ¨ì´ ì¢‹ì€ íŒ¨ì‹œë¸Œ ê¶ŒëŠ¥ë“¤
 {
-	SWAKO_2_KILL_HP=0, //Á×ÀÏ¶§ Ã¼·ÂÈ¸º¹
-	SWAKO_2_KILL_MP, //Á×ÀÏ¶§ ¸¶³ªÈ¸º¹
-	SWAKO_2_KILL_POWER, //Á×ÀÏ¶§ ÆÄ¿ö»ó½Â
-	SWAKO_2_SWIM, //¼ö¿µÇÑ´Ù. ¼ö¿µÁß¿£ ´É·ÂÄ¡ÀÇ »ó½Â
-	SWAKO_2_DEAD_PROTECT, //Á×À½À¸·ÎºÎÅÍÀÇ º¸È£
+	SWAKO_2_KILL_HP=0, //ì£½ì¼ë•Œ ì²´ë ¥íšŒë³µ
+	SWAKO_2_KILL_MP, //ì£½ì¼ë•Œ ë§ˆë‚˜íšŒë³µ
+	SWAKO_2_KILL_POWER, //ì£½ì¼ë•Œ íŒŒì›ŒìƒìŠ¹
+	SWAKO_2_SWIM, //ìˆ˜ì˜í•œë‹¤. ìˆ˜ì˜ì¤‘ì—” ëŠ¥ë ¥ì¹˜ì˜ ìƒìŠ¹
+	SWAKO_2_DEAD_PROTECT, //ì£½ìŒìœ¼ë¡œë¶€í„°ì˜ ë³´í˜¸
 	SWAKO_2_LAST
 };
 
-enum swako_3_power //½Å¾ÓÀ» ¼Ò¸ðÇÏ´Â »ç¿ëÇü ±Ç´É
+enum swako_3_power //ì‹ ì•™ì„ ì†Œëª¨í•˜ëŠ” ì‚¬ìš©í˜• ê¶ŒëŠ¥
 {
-	SWAKO_3_CURSE=0, //ÅäÂø½ÅÀÇÀç¾Ó(°¨¼Ó,µ¶)
-	SWAKO_3_DIGGING, //±¼Âø
-	SWAKO_3_SUMMON_FLOG, //°³±¸¸®¼ÒÈ¯(·¹º§ºñ·Ê °­ÇÔ)
-	SWAKO_3_STATUE, //±æÀ» ¸·´Â °³±¸¸®¼®»ó¼ÒÈ¯
+	SWAKO_3_CURSE=0, //í† ì°©ì‹ ì˜ìž¬ì•™(ê°ì†,ë…)
+	SWAKO_3_DIGGING, //êµ´ì°©
+	SWAKO_3_SUMMON_FLOG, //ê°œêµ¬ë¦¬ì†Œí™˜(ë ˆë²¨ë¹„ë¡€ ê°•í•¨)
+	SWAKO_3_STATUE, //ê¸¸ì„ ë§‰ëŠ” ê°œêµ¬ë¦¬ì„ìƒì†Œí™˜
 	SWAKO_3_LAST
 };
 
-enum swako_4_power //ÀúÇ×À» ÁØ´Ù
+enum swako_4_power //ì €í•­ì„ ì¤€ë‹¤
 {
-	SWAKO_4_COLD_RESIST=0, //³Ã±âÀúÇ×
-	SWAKO_4_FIRE_RESIST, //È­¿°ÀúÇ×
-	SWAKO_4_AC, //Ãß°¡ AC
-	SWAKO_4_CONFUSE_RESIST, //È¥¶õÀúÇ×
-	SWAKO_4_POISON_RESIST, //µ¶ÀúÇ×
+	SWAKO_4_COLD_RESIST=0, //ëƒ‰ê¸°ì €í•­
+	SWAKO_4_FIRE_RESIST, //í™”ì—¼ì €í•­
+	SWAKO_4_AC, //ì¶”ê°€ AC
+	SWAKO_4_CONFUSE_RESIST, //í˜¼ëž€ì €í•­
+	SWAKO_4_POISON_RESIST, //ë…ì €í•­
 	SWAKO_4_LAST
 };
 
-enum swako_5_power //ÃÖÁ¾±Ç´É
+enum swako_5_power //ìµœì¢…ê¶ŒëŠ¥
 {
-	SWAKO_5_RAIN=0, //ÁÖº¯À» ¹°¹Ù´Ù·Î ¸¸µç´Ù. ¾Æ±º °³±¸¸®°¡ ¼ÒÈ¯µÈ´Ù. 
-	SWAKO_5_SLEEP, //µ¿¸é. ÅÏÀ» Áö³»°í Ã¼·Â¸¶³ª°¡ Á¶±Ý È¸º¹ÇÑ´Ù. 
-	SWAKO_5_MISYAGUZI, //¹Ì»þ±¸Áö´ÔÀ» ¼ÒÈ¯ÇÑ´Ù. 
-	SWAKO_5_SWAKO_HAT, //½º¿ÍÄÚ´ÔÀÇ ¸ðÀÚ¸¦ ¹Þ´Â´Ù.(µÇµ¹¸®±â ºÒ°¡´É)
+	SWAKO_5_RAIN=0, //ì£¼ë³€ì„ ë¬¼ë°”ë‹¤ë¡œ ë§Œë“ ë‹¤. ì•„êµ° ê°œêµ¬ë¦¬ê°€ ì†Œí™˜ëœë‹¤. 
+	SWAKO_5_SLEEP, //ë™ë©´. í„´ì„ ì§€ë‚´ê³  ì²´ë ¥ë§ˆë‚˜ê°€ ì¡°ê¸ˆ íšŒë³µí•œë‹¤. 
+	SWAKO_5_MISYAGUZI, //ë¯¸ìƒ¤êµ¬ì§€ë‹˜ì„ ì†Œí™˜í•œë‹¤. 
+	SWAKO_5_SWAKO_HAT, //ìŠ¤ì™€ì½”ë‹˜ì˜ ëª¨ìžë¥¼ ë°›ëŠ”ë‹¤.(ë˜ëŒë¦¬ê¸° ë¶ˆê°€ëŠ¥)
 	SWAKO_5_LAST
 };
 
-enum swako_string //¹«½¼ Á¤º¸°¡ ÇÊ¿äÇÑ°¡
+enum swako_string //ë¬´ìŠ¨ ì •ë³´ê°€ í•„ìš”í•œê°€
 {
-	SWAKO_NAME=0, //ÀÌ¸§
-	SWAKO_SIMPLE_INFOR, //½Å¾ÓÃ¢¿¡¼­ º¸¿©ÁÖ´Â Á¤º¸
-	SWAKO_GET_STRING, //±Ç´ÉÀ» ¾ò¾úÀ»¶§ Á¤º¸
-	SWAKO_UNGET_STRING, //±Ç´ÉÀÌ »ç¶óÁ³À»¶§ Á¤º¸
+	SWAKO_NAME=0, //ì´ë¦„
+	SWAKO_SIMPLE_INFOR, //ì‹ ì•™ì°½ì—ì„œ ë³´ì—¬ì£¼ëŠ” ì •ë³´
+	SWAKO_GET_STRING, //ê¶ŒëŠ¥ì„ ì–»ì—ˆì„ë•Œ ì •ë³´
+	SWAKO_UNGET_STRING, //ê¶ŒëŠ¥ì´ ì‚¬ë¼ì¡Œì„ë•Œ ì •ë³´
 	SWAKO_STRING
 };
 

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: sprint.cpp
+// íŒŒì¼ì´ë¦„: sprint.cpp
 //
-// ³»¿ë: ½ºÇÁ¸°Æ®
+// ë‚´ìš©: ìŠ¤í”„ë¦°íŠ¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,9 +21,9 @@ enum REWARD_ITEM_TYPE
 	REWARD_SCROLL,
 	REWARD_POTION,
 	REWARD_NECC_RING,
-	REWARD_BONUS_FOR_EARLY, //ÃÊ¹İ¿¡ µµ¿òÀÌ µÉ¸¸ÇÑ ¾ÆÀÌÅÛ
-	REWARD_BONUS_RANDOM, //ÀüÃ¼ÀûÀÎ ·£´ı(Æ÷¼Ç µÎ·ç¸¶¸® Á¦¿Ü)
-	REWARD_BONUS_FOR_MIDDLE, //½ºÆå¾÷¿¡ µµ¿òÀÌ µÉ¸¸ÇÑ ¾ÆÀÌÅÛ
+	REWARD_BONUS_FOR_EARLY, //ì´ˆë°˜ì— ë„ì›€ì´ ë ë§Œí•œ ì•„ì´í…œ
+	REWARD_BONUS_RANDOM, //ì „ì²´ì ì¸ ëœë¤(í¬ì…˜ ë‘ë£¨ë§ˆë¦¬ ì œì™¸)
+	REWARD_BONUS_FOR_MIDDLE, //ìŠ¤í™ì—…ì— ë„ì›€ì´ ë ë§Œí•œ ì•„ì´í…œ
 	REWARD_SPELLCARD,
 	REWARD_BOOK,
 	REWARD_RING,
@@ -72,24 +72,24 @@ void map_algorithms_sprint(int num)
 	set_sprint_map(&sprint_map);
 	sprint_map.make_map(env[num],true, true);
 
-	//È«¸¶°ü
+	//í™ë§ˆê´€
 	addMonster_sprint(num, MON_HOBGOBRIN_MAID, &sprint_map);
-	//3¹øÂ°¹æ
+	//3ë²ˆì§¸ë°©
 	addMonster_sprint(num, MON_HOBGOBRIN_TEMP, &sprint_map);
 
 	addMonster_sprint(num, MON_MAGIC_BOOK, &sprint_map);
 	reward_item(num, REWARD_BOOK, &sprint_map);
 	reward_item(num, REWARD_BOOK, &sprint_map);
 	reward_item(num, REWARD_BOOK, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_HOBGOBRIN_MAID, &sprint_map);
 	addMonster_sprint(num, MON_HOBGOBRIN_MAID, &sprint_map);
-	//3¹øÂ°¹æ
+	//3ë²ˆì§¸ë°©
 	addMonster_sprint(num, MON_CHUPARCABRA, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
-	//Ã÷±¸¸ğ°¡¹Ì
+	//ì¸ êµ¬ëª¨ê°€ë¯¸
 	reward_item(num, REWARD_ARMOUR2, &sprint_map);
 	reward_item(num, REWARD_WEAPON, &sprint_map);
 	addMonster_sprint(num, MON_MEDICINE, &sprint_map);
@@ -101,7 +101,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_HOBGOBRIN_TEMP, &sprint_map);
 	
 	addMonster_sprint(num, MON_PACHU, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	reward_item(num, REWARD_WEAPON, &sprint_map);
 	reward_item(num, REWARD_SHIELD, &sprint_map);
@@ -112,9 +112,9 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, getMonsterFromSpecial(0, GMFF_FLAG_ONLY_WEAK), &sprint_map);
 
 	addMonster_sprint(num, getMonsterFromFloor(SCARLET_LEVEL, GMFF_FLAG_ONLY_WEAK), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 	
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, getMonsterFromSpecial(0, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromSpecial(0, GMFF_FLAG_ALL), &sprint_map);
@@ -134,7 +134,7 @@ void map_algorithms_sprint(int num)
 	reward_item(num, REWARD_BOOK, &sprint_map);
 	reward_item(num, REWARD_BOOK, &sprint_map);
 	reward_item(num, REWARD_BOOK, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 	addMonster_sprint(num, getMonsterFromSpecial(0, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromSpecial(0, GMFF_FLAG_ALL), &sprint_map);
 
@@ -146,7 +146,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_WAKASAGI, &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	reward_item(num, REWARD_ARTIFACT, &sprint_map);
 	addMonster_sprint(num, MON_VAMPIER_BAT, &sprint_map);
@@ -155,34 +155,34 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 
-	//¿£ÅÍ
+	//ì—”í„°
 
 
-	//¾ÆÁ÷ Áß¾Ó
+	//ì•„ì§ ì¤‘ì•™
 	reward_item(num, REWARD_WEAK_POTION, &sprint_map);
 	reward_item(num, REWARD_NECC_RING, &sprint_map);
-	//±íÀºÃş
+	//ê¹Šì€ì¸µ
 	reward_item(num, REWARD_ARMOUR2, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	reward_item(num, REWARD_WEAK_POTION, &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(7, GMFF_FLAG_ALL), &sprint_map);
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//±íÀºÃş
+	//ê¹Šì€ì¸µ
 	addMonster_sprint(num, getMonsterFromFloor(12, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(12, GMFF_FLAG_ALL), &sprint_map);
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
-	//½ÃÀÛ
+	//ì‹œì‘
 	addMonster_sprint(num, randA(1) ? MON_KATPA: MON_HUMAM_MAN, &sprint_map);
 	addMonster_sprint(num, randA(2)? (randA(1) ? MON_SUNNY : MON_STAR):MON_LUNAR, &sprint_map);
-	//½ÃÀÛ³¡
+	//ì‹œì‘ë
 	addMonster_sprint(num, getMonsterFromFloor(8, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	reward_item(num, REWARD_BONUS_FOR_EARLY, &sprint_map);
-	//±íÀºÃş
+	//ê¹Šì€ì¸µ
 	addMonster_sprint(num, getMonsterFromFloor(14, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(14, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	reward_item(num, REWARD_BONUS_FOR_MIDDLE, &sprint_map);
@@ -190,27 +190,27 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_TEWI, &sprint_map);
 
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, getMonsterFromFloor(7, GMFF_FLAG_ALL), &sprint_map);
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//±íÀºÃş
+	//ê¹Šì€ì¸µ
 	addMonster_sprint(num, getMonsterFromFloor(12, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(12, GMFF_FLAG_ALL), &sprint_map);
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
-	//¾ÆÁ÷Áß¾Ó
+	//ì•„ì§ì¤‘ì•™
 	addMonster_sprint(num, getMonsterFromFloor(0, GMFF_FLAG_ONLY_WEAK), &sprint_map);
 
 	addMonster_sprint(num, MON_BUSH, &sprint_map);
 	addMonster_sprint(num, MON_BUSH, &sprint_map);
-	//±íÀºÃş
+	//ê¹Šì€ì¸µ
 	reward_item(num, REWARD_NECC_RING, &sprint_map);
 	reward_item(num, REWARD_ARMOUR2, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_SMALL_SCPO, &sprint_map);
@@ -221,7 +221,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(BAMBOO_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, getMonsterFromFloor(MISTY_LAKE_LEVEL, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(MISTY_LAKE_LEVEL, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
@@ -229,7 +229,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_BUSH, &sprint_map);
 
 	addMonster_sprint(num, MON_YAMAWARO_NINJA, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num,MON_CIRNO, &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(MISTY_LAKE_LEVEL, GMFF_FLAG_ONLY_STRONG), &sprint_map);
@@ -243,7 +243,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_SANPEI_FIGHTER, &sprint_map);
 
 	reward_item(num, REWARD_TANMAC, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_SCROLL, &sprint_map);
@@ -256,7 +256,7 @@ void map_algorithms_sprint(int num)
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 	reward_item(num, REWARD_AMULET, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_SCROLL, &sprint_map);
@@ -276,7 +276,7 @@ void map_algorithms_sprint(int num)
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 	reward_item(num, REWARD_EVOKE, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_NEMUNO, &sprint_map);
 
@@ -287,7 +287,7 @@ void map_algorithms_sprint(int num)
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 	reward_item(num, REWARD_SPELLCARD, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -296,7 +296,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_NITORI, &sprint_map);
 
 	reward_item(num, REWARD_TANMAC, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -308,7 +308,7 @@ void map_algorithms_sprint(int num)
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -317,7 +317,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	addMonster_sprint(num, MON_FLOWER_TANK, &sprint_map);
@@ -325,7 +325,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_YUMEKO, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_YUKI, &sprint_map);
 	addMonster_sprint(num, MON_MAI, &sprint_map);
@@ -335,14 +335,14 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_LUIZE, &sprint_map);
 	addMonster_sprint(num, MON_ELIS, &sprint_map);
 	addMonster_sprint(num, MON_SARA, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	addMonster_sprint(num, MON_EVIL_EYE_TANK, &sprint_map);
@@ -353,13 +353,13 @@ void map_algorithms_sprint(int num)
 
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, getMonsterFromFloor(PANDEMONIUM_LEVEL + 3, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(PANDEMONIUM_LEVEL + 3, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, getMonsterFromFloor(PANDEMONIUM_LEVEL + 3, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	addMonster_sprint(num, getMonsterFromFloor(PANDEMONIUM_LEVEL + 3, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
@@ -369,7 +369,7 @@ void map_algorithms_sprint(int num)
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
 
 	addMonster_sprint(num, getMonsterFromFloor(DEPTH_LEVEL, GMFF_FLAG_ALL), &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_SHEEP, &sprint_map);
 	addMonster_sprint(num, MON_SHEEP, &sprint_map);
@@ -380,7 +380,7 @@ void map_algorithms_sprint(int num)
 	reward_item(num, REWARD_BONUS_FOR_MIDDLE, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	addMonster_sprint(num, MON_MOON_RABIT_SUPPORT, &sprint_map);
@@ -390,13 +390,13 @@ void map_algorithms_sprint(int num)
 	reward_item(num, REWARD_MOON_RUNE, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 	addMonster_sprint(num, MON_MOON_RABIT_ELITE, &sprint_map);
 	addMonster_sprint(num, MON_MOON_RABIT_ELITE, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -406,7 +406,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_HAUNT, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -422,7 +422,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_BLUE_UFO, &sprint_map);
 	addMonster_sprint(num, MON_LUNATIC, &sprint_map);
 	addMonster_sprint(num, MON_GREEN_UFO, &sprint_map);
-	//¿£ÅÍ
+	//ì—”í„°
 
 
 	reward_item(num, REWARD_HELL_RUNE, &sprint_map);
@@ -458,17 +458,17 @@ random_extraction<int> rand_scroll_necessary;
 random_extraction<int> rand_scroll_option;
 random_extraction<int> rand_potion_option;
 random_extraction<int> rand_ring_necessary;
-random_extraction<int> rand_spell_card;//½ºÆçÄ«µå(¶¥Á¦¿Ü)
-random_extraction<int> rand_book;//Ã¥
-random_extraction<int> rand_ring_option;//¹İÁö(°ñ°í·ç)
-random_extraction<int> rand_armour2;//º¸Á¶¹æ¾î±¸
-random_extraction<int> rand_shield;//º¸Á¶¹æ¾î±¸
-random_extraction<int> rand_amulet;//¸ñ°ÉÀÌ
-random_extraction<int> rand_evoke;//¹ßµ¿ÅÛ
-random_extraction<int> rand_tanmac;//Åº¸·
-random_extraction<int> rand_bonus_for_early; //´çÀå ÃÊ¹İ¿¡ µµ¿òÀÌ µÉ¸¸ÇÑ ¾ÆÀÌÅÛ
-random_extraction<int> rand_bonus_for_middle; //½ºÆå¾÷¿¡ µµ¿òÀÌ µÇ´Â ¾ÆÀÌÅÛ
-random_extraction<int> rand_bonus_for_random; //·£´ı ¾ÆÀÌÅÛ
+random_extraction<int> rand_spell_card;//ìŠ¤í ì¹´ë“œ(ë•…ì œì™¸)
+random_extraction<int> rand_book;//ì±…
+random_extraction<int> rand_ring_option;//ë°˜ì§€(ê³¨ê³ ë£¨)
+random_extraction<int> rand_armour2;//ë³´ì¡°ë°©ì–´êµ¬
+random_extraction<int> rand_shield;//ë³´ì¡°ë°©ì–´êµ¬
+random_extraction<int> rand_amulet;//ëª©ê±¸ì´
+random_extraction<int> rand_evoke;//ë°œë™í…œ
+random_extraction<int> rand_tanmac;//íƒ„ë§‰
+random_extraction<int> rand_bonus_for_early; //ë‹¹ì¥ ì´ˆë°˜ì— ë„ì›€ì´ ë ë§Œí•œ ì•„ì´í…œ
+random_extraction<int> rand_bonus_for_middle; //ìŠ¤í™ì—…ì— ë„ì›€ì´ ë˜ëŠ” ì•„ì´í…œ
+random_extraction<int> rand_bonus_for_random; //ëœë¤ ì•„ì´í…œ
 
 void reward_random_init()
 {

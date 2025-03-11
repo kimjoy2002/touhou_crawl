@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: bamboo.cpp
+// íŒŒì¼ì´ë¦„: bamboo.cpp
 //
-// ³»¿ë: ¹Ì±ÃÀÇ Á×¸²¿ë ( ¾îºñ½º )
+// ë‚´ìš©: ë¯¸ê¶ì˜ ì£½ë¦¼ìš© ( ì–´ë¹„ìŠ¤ )
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,17 +58,17 @@ void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 
 
 void bamboo_count(int num)
-{ //ÇÃ·¹ÀÌ¾î°¡ ¸ÊÀ» ¹ş¾î³¯°Å°°À¸¸é ¹Ù·Î Áß¾ÓÀ¸·Î ²ø¾î¿Â´Ù.
+{ //í”Œë ˆì´ì–´ê°€ ë§µì„ ë²—ì–´ë‚ ê±°ê°™ìœ¼ë©´ ë°”ë¡œ ì¤‘ì•™ìœ¼ë¡œ ëŒì–´ì˜¨ë‹¤.
 	int offset_x=0, offset_y=0;
 	if(you.position.x<8 || you.position.x>DG_MAX_X-9)
 		offset_x = DG_MAX_X/2-you.position.x;
 	if(you.position.y<8 || you.position.y>DG_MAX_Y-9)
 		offset_y = DG_MAX_Y/2-you.position.y;
 
-	if(offset_x || offset_y) //¹ÛÀ» ¹ş¾î³²
+	if(offset_x || offset_y) //ë°–ì„ ë²—ì–´ë‚¨
 	{
 		WaitForSingleObject(mutx, INFINITE);
-		//¿òÁ÷¿©¾ßÇÒ°Í. ¸ÊÅ¸ÀÏ, ¸ó½ºÅÍÀ§Ä¡, ¿ÀºêÁ§Æ®À§Ä¡, ¸÷ÀÇ Å¸°ÙÆÃ?
+		//ì›€ì§ì—¬ì•¼í• ê²ƒ. ë§µíƒ€ì¼, ëª¬ìŠ¤í„°ìœ„ì¹˜, ì˜¤ë¸Œì íŠ¸ìœ„ì¹˜, ëª¹ì˜ íƒ€ê²ŸíŒ…?
 		dungeon_tile tempdgtile[DG_MAX_X][DG_MAX_Y];
 		for(int i = 0; i < DG_MAX_X; i++)
 		{
@@ -85,7 +85,7 @@ void bamboo_count(int num)
 			for(int j = 0; j < DG_MAX_Y; j++)
 			{
 				if(offset_x  > i || offset_x  <= i - DG_MAX_X  || offset_y  > j || offset_y  <= j - DG_MAX_Y )
-				{  //»õ·Î ¸¸µé¾î¾ßÇÏ´Â ¸Ê	
+				{  //ìƒˆë¡œ ë§Œë“¤ì–´ì•¼í•˜ëŠ” ë§µ	
 					if(randA(18000 - 15*min(map_list.bamboo_count,1100))<(map_list.bamboo_tewi?2:1))
 					{
 						env[num].dgtile[i][j].init();
@@ -110,7 +110,7 @@ void bamboo_count(int num)
 					}
 				}
 				else
-				{ //±âÁ¸ ¸ÊÀÌ ¿òÁ÷ÀÎ´Ù.
+				{ //ê¸°ì¡´ ë§µì´ ì›€ì§ì¸ë‹¤.
 					int x_ = i - offset_x, y_ = j - offset_y;
 
 					if(x_ >= 0 && x_ < DG_MAX_X && y_ >= 0 && y_ < DG_MAX_Y )
@@ -118,17 +118,17 @@ void bamboo_count(int num)
 					else
 					{						
 						env[num].dgtile[i][j].init();
-						env[num].dgtile[i][j].tile = DG_SEA; //Á¸ÀçÇØ¼±¾ÈµÊ(µğ¹ö±ë)
+						env[num].dgtile[i][j].tile = DG_SEA; //ì¡´ì¬í•´ì„ ì•ˆë¨(ë””ë²„ê¹…)
 					}
 				}
 			}
 		}
 
-		//ÀÌÁ¦ºÎÅÏ ¿Å°ÜÁø ÁöÇü¿¡ ¸Â°Ô ¿ÀºêÁ§Æ®µéÀ» ÀüºÎ ÀÌµ¿½ÃÅ²´Ù.
+		//ì´ì œë¶€í„´ ì˜®ê²¨ì§„ ì§€í˜•ì— ë§ê²Œ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ì „ë¶€ ì´ë™ì‹œí‚¨ë‹¤.
 
-		//ÇÃ·¹ÀÌ¾î
+		//í”Œë ˆì´ì–´
 		you.offsetmove(coord_def(offset_x,offset_y));
-		//¸ó½ºÅÍ
+		//ëª¬ìŠ¤í„°
 		for(vector<monster>::iterator it = env[num].mon_vector.begin() ; it != env[num].mon_vector.end() ; it++)
 		{
 			if((*it).isLive())
@@ -142,28 +142,28 @@ void bamboo_count(int num)
 				}
 			}
 		}
-		//¾È°³
+		//ì•ˆê°œ
 		for(list<smoke>::iterator it = env[num].smoke_list.begin();it != env[num].smoke_list.end() ;it++)
 		{
 			(*it).offsetmove(coord_def(offset_x,offset_y));
 		}
-		//½¦µµ¿ì´Â ¾²Áö¾Ê´Â´Ù.
+		//ì‰ë„ìš°ëŠ” ì“°ì§€ì•ŠëŠ”ë‹¤.
 		env[num].ClearAllShadow();
-		//¾ÆÀÌÅÛ		(¹üÀ§¿¡ ¹ş¾î³ª¸é »èÁ¦µµ µÈ´Ù.)
+		//ì•„ì´í…œ		(ë²”ìœ„ì— ë²—ì–´ë‚˜ë©´ ì‚­ì œë„ ëœë‹¤.)
 		for(list<item>::iterator it =  env[num].item_list.begin();it !=  env[num].item_list.end() ;)
 		{
 			item *temp = &(*it);
 			it++;
 			temp->offsetmove(coord_def(offset_x,offset_y));
 		}
-		//ÀÌÆåÆ®		ÇÊ¿ä¾ø¾û
+		//ì´í™íŠ¸		í•„ìš”ì—†ì—‰
 		env[num].ClearEffect();
-		//¶¥È¿°ú		
+		//ë•…íš¨ê³¼		
 		for(list<floor_effect>::iterator it = env[num].floor_list.begin() ; it != env[num].floor_list.end() ; it++)
 		{
 			(*it).offsetmove(coord_def(offset_x,offset_y));
 		}
-		//ÀÌº¥Æ®´Â... ÇÊ¿ä¾ø¾î?
+		//ì´ë²¤íŠ¸ëŠ”... í•„ìš”ì—†ì–´?
 		//list<events> event_list;
 
 		env[num].allCalculateAutoTile();
@@ -193,22 +193,22 @@ void bamboo_count(int num)
 	}
 
 	if(randA(1000)<map_list.bamboo_rate)
-	{ //¸ó½ºÅÍ¸¦ »ı¼ºÇÏ±â½ÃÀÛÇÑ´Ù.
+	{ //ëª¬ìŠ¤í„°ë¥¼ ìƒì„±í•˜ê¸°ì‹œì‘í•œë‹¤.
 		
 		random_extraction<int> percent_;
-		percent_.push(MON_RABIT_BOMB,5+max(map_list.bamboo_count/50-10,0));//ÆÄ¹Ö¹æÁö ÆøÅºº´ÀÇ ¼ö°¡ Á¡Á¡ ¸¹¾ÆÁø´Ù
+		percent_.push(MON_RABIT_BOMB,5+max(map_list.bamboo_count/50-10,0));//íŒŒë°ë°©ì§€ í­íƒ„ë³‘ì˜ ìˆ˜ê°€ ì ì  ë§ì•„ì§„ë‹¤
 
 		if(map_list.bamboo_rate<=200)
 		{
-			percent_.push(MON_RABIT_SPEAR,60);//Ã¢º´
-			percent_.push(MON_RABIT_SUPPORT,15);//Áö¿øº´
-			percent_.push(MON_RABIT_MAGIC,20);//¸¶¹ı»ç
+			percent_.push(MON_RABIT_SPEAR,60);//ì°½ë³‘
+			percent_.push(MON_RABIT_SUPPORT,15);//ì§€ì›ë³‘
+			percent_.push(MON_RABIT_MAGIC,20);//ë§ˆë²•ì‚¬
 		}
 		else
-		{ //Åä³¢µéÀÌ ¸¹¾ÆÁö¸é Áö¿øº´Àº Àû¾îÁü
-			percent_.push(MON_RABIT_SPEAR,65);//Ã¢º´
-			percent_.push(MON_RABIT_SUPPORT,5);//Áö¿øº´
-			percent_.push(MON_RABIT_MAGIC,25);//¸¶¹ı»ç
+		{ //í† ë¼ë“¤ì´ ë§ì•„ì§€ë©´ ì§€ì›ë³‘ì€ ì ì–´ì§
+			percent_.push(MON_RABIT_SPEAR,65);//ì°½ë³‘
+			percent_.push(MON_RABIT_SUPPORT,5);//ì§€ì›ë³‘
+			percent_.push(MON_RABIT_MAGIC,25);//ë§ˆë²•ì‚¬
 
 		}
 		int id_ = percent_.pop();
@@ -241,7 +241,7 @@ void bamboo_count(int num)
 	map_list.bamboo_count++;
 	if(map_list.bamboo_count % 120 == 20)
 	{
-		int grade_ = min(map_list.bamboo_count/20,200); //½Ã°£ÀÌ Èå¸¦¼ö·Ï Á¡Á¡ Á×¸²ÀÌ °Å¼¼Áø´Ù
+		int grade_ = min(map_list.bamboo_count/20,200); //ì‹œê°„ì´ íë¥¼ìˆ˜ë¡ ì ì  ì£½ë¦¼ì´ ê±°ì„¸ì§„ë‹¤
 		map_list.bamboo_rate = rand_int(60,120)+grade_;
 
 	}

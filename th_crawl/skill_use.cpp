@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: skill_use.cpp
+// íŒŒì¼ì´ë¦„: skill_use.cpp
 //
-// ³»¿ë: »ç¿ëÇÏ´Â ½ºÅ³µé
+// ë‚´ìš©: ì‚¬ìš©í•˜ëŠ” ìŠ¤í‚¬ë“¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,7 @@
 
 
 extern HANDLE mutx;
-extern bool widesearch; //XÄ¿¸Çµå¿ë
+extern bool widesearch; //Xì»¤ë§¨ë“œìš©
 extern int map_effect;
 
 bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
@@ -49,8 +49,8 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 		monster* unit_ = (monster*)env[current_level].isMonsterPos(target.x,target.y, &you);
 		if(!unit_ || unit_->isUserAlly())
 		{
-			printlog("Àû ¸ó½ºÅÍ¸¦ ´ë»óÀ¸·Î ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
-			return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ì  ëª¬ìŠ¤í„°ë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
+			return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 		}
 
 		beam_iterator beam(order->position,order->position);
@@ -60,7 +60,7 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 			
 			if(beam.GetMaxLength() == 1 || env[current_level].isMonsterPos(beam->x,beam->y, &you))
 			{				
-				printlog("´« ¾ÕÀÇ »ó´ë¿¡°Õ µ¹ÁøÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+				printlog("ëˆˆ ì•ì˜ ìƒëŒ€ì—ê² ëŒì§„í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 				return false;
 			}
 			while(!beam.end())
@@ -72,29 +72,29 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 				{
 					if(!env[current_level].dgtile[beam->x][beam->y].isMove(you.isFly(),you.isSwim(),false))
 					{
-						printlog("ÇØ´ç À§Ä¡¿£ µ¹°İÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+						printlog("í•´ë‹¹ ìœ„ì¹˜ì—” ëŒê²©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 						return false;
 					}
 					you.SetXY(beam->x,beam->y);
 
-					float multy_ = 1.0f; //±âµµ¼ú, °Å¸® ºñ·ÊÇØ¼­ µ¥¹ÌÁö¸¦ ÁÖÀÚ.
-					multy_*=(9.0f+temp.GetCurLength())/9; //°Å¸®°¡ 6±âÁØÀ¸·Î 1.66¹è µ¥¹ÌÁö¸¦ ÁØ´Ù.
+					float multy_ = 1.0f; //ê¸°ë„ìˆ , ê±°ë¦¬ ë¹„ë¡€í•´ì„œ ë°ë¯¸ì§€ë¥¼ ì£¼ì.
+					multy_*=(9.0f+temp.GetCurLength())/9; //ê±°ë¦¬ê°€ 6ê¸°ì¤€ìœ¼ë¡œ 1.66ë°° ë°ë¯¸ì§€ë¥¼ ì¤€ë‹¤.
 					//multy_*=(13.0f+pow/5)/13;
 
 					soundmanager.playSound("wind");
-					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor("µ¹Áø",true));
+					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor("ëŒì§„",true));
 					unit_->damage(temp_att,false);
-					printlog("Àû¿¡°Ô µ¹°İÇß´Ù!",true,false,false,CL_normal);	
+					printlog("ì ì—ê²Œ ëŒê²©í–ˆë‹¤!",true,false,false,CL_normal);	
 					return true;
 				}
 				beam++;
 			}
-			printlog("µ¹ÁøÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ëŒì§„í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
-		//´õÀÌ»ó ¸¶ÀÌÆ®´Â ¾Æ´Ï´Ù! ÀûÀÇ ¹æÇâÀ¸·Î µ¹ÁøÇÑ´Ù.
+		//ë”ì´ìƒ ë§ˆì´íŠ¸ëŠ” ì•„ë‹ˆë‹¤! ì ì˜ ë°©í–¥ìœ¼ë¡œ ëŒì§„í•œë‹¤.
 		//you.SetMight(20+randA_1(pow*5));
-		printlog("»çÀÌ¿¡ Àå¾Ö¹°ÀÌ ÀÖ´Ù.",true,false,false,CL_normal);	
+		printlog("ì‚¬ì´ì— ì¥ì• ë¬¼ì´ ìˆë‹¤.",true,false,false,CL_normal);	
 		return false;
 	}
 	return false;
@@ -110,7 +110,7 @@ bool skill_kanako_2(int pow, bool short_, unit* order, coord_def target)
 			return true;
 		}
 		else
-			printlog("»ı¼ºÇÒ ¼ö ¾ø´Â À§Ä¡ÀÔ´Ï´Ù.",true,false,false,CL_normal);	
+			printlog("ìƒì„±í•  ìˆ˜ ì—†ëŠ” ìœ„ì¹˜ì…ë‹ˆë‹¤.",true,false,false,CL_normal);	
 
 	}
 	return false;
@@ -135,7 +135,7 @@ bool skill_turn_graze(int pow, bool short_, unit* order, coord_def target)
 		return true;
 	}
 	else if(order->isplayer() && you.s_graze)
-		printlog("ÀÌ¹Ì ±×·¹ÀÌÁîµµÁß¿¡ »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì´ë¯¸ ê·¸ë ˆì´ì¦ˆë„ì¤‘ì— ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 
 	return false;
 }
@@ -144,10 +144,10 @@ bool skill_off_graze(int pow, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		if (you.isGrazeAmulet()) {
-			printlog("¾Æ¹Ä·¿ÀÇ Èû¿¡ ÀÇÇØ ±×·¹ÀÌÁî´Â Á¾·á ½ÃÅ³ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+			printlog("ì•„ë®¬ë ›ì˜ í˜ì— ì˜í•´ ê·¸ë ˆì´ì¦ˆëŠ” ì¢…ë£Œ ì‹œí‚¬ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
-		printlog("±×·¹ÀÌÁî¸¦ ¸ØÃè´Ù.",true,false,false,CL_normal);
+		printlog("ê·¸ë ˆì´ì¦ˆë¥¼ ë©ˆì·„ë‹¤.",true,false,false,CL_normal);
 		you.s_graze = 0;
 		int temp = you.Ability(SKL_GRAZE_OFF,false,true,1);
 		you.Ability(SKL_GRAZE,false,false,temp);
@@ -165,7 +165,7 @@ bool skill_turn_levitation(int pow, bool short_, unit* order, coord_def target)
 		return true;
 	}
 	else if(order->isplayer() && you.s_levitation)
-		printlog("ÀÌ¹Ì ºñÇàµµÁß¿¡ »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì´ë¯¸ ë¹„í–‰ë„ì¤‘ì— ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 
 	return false;
 }
@@ -173,7 +173,7 @@ bool skill_off_levitation(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		printlog("ºñÇàÀ» ¸ØÃè´Ù.",true,false,false,CL_normal);
+		printlog("ë¹„í–‰ì„ ë©ˆì·„ë‹¤.",true,false,false,CL_normal);
 		you.s_levitation = 0;
 		int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 		you.Ability(SKL_LEVITATION,false,false,temp);
@@ -192,7 +192,7 @@ bool skill_turn_invisible(int pow, bool short_, unit* order, coord_def target)
 		return true;
 	}
 	else if(order->isplayer() && you.s_invisible)
-		printlog("ÀÌ¹Ì Åõ¸íÇÑ µµÁß¿¡ »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì´ë¯¸ íˆ¬ëª…í•œ ë„ì¤‘ì— ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 
 	return false;
 }
@@ -200,7 +200,7 @@ bool skill_off_invisible(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		printlog("´Ù½Ã º¸ÀÌ±â ½ÃÀÛÇß´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¤ì‹œ ë³´ì´ê¸° ì‹œì‘í–ˆë‹¤.",true,false,false,CL_normal);
 		you.s_invisible = 0;
 		int temp = you.Ability(SKL_INVISIBLE_OFF,false,true,1);
 		you.Ability(SKL_INVISIBLE,false,false,temp);
@@ -242,7 +242,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 	length_ = min(length_,SkillLength(SKL_EIRIN_0));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		view_item(IVT_POTION,"¹«¾ùÀ» ´øÁö°Ú½À´Ï±î?");
+		view_item(IVT_POTION,"ë¬´ì—‡ì„ ë˜ì§€ê² ìŠµë‹ˆê¹Œ?");
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -282,7 +282,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 								smoke_ = SMT_FIRE;
 								break;
 							}
-							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("¹°¾à",true));
+							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("ë¬¼ì•½",true));
 							
 							for(int k=0;k<(order->GetParadox()?2:1);k++)
 							{
@@ -310,21 +310,21 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 						}
 						else
 						{
-							printlog("±×°ÍÀº ¹°¾àÀÌ ¾Æ´Ï´Ù.",true,false,false,CL_normal);
+							printlog("ê·¸ê²ƒì€ ë¬¼ì•½ì´ ì•„ë‹ˆë‹¤.",true,false,false,CL_normal);
 							return false;	
 						}
 					}
 				}
-				printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+				printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 				return false;	
 			}
-			else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+			else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 			{
-				changemove(32);  //À§
+				changemove(32);  //ìœ„
 			}
 			else if(key_ == VK_UP)
 			{
-				changemove(-32); //¾Æ·¡
+				changemove(-32); //ì•„ë˜
 			}
 			else if(key_ == VK_PRIOR)
 			{
@@ -333,9 +333,9 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 			else if(key_ == VK_NEXT)
 			{
 				changemove(option_mg.getHeight());
-			}						//-----ÀÌµ¿Å°³¡-------
+			}						//-----ì´ë™í‚¤ë-------
 			else if(key_ == '*')
-				view_item(IVT_SELECT,"¹«¾ùÀ» ´øÁö°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ì—‡ì„ ë˜ì§€ê² ìŠµë‹ˆê¹Œ?");
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -351,8 +351,8 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 	{
 		bool end_ = false;
 		int stat_ = 0;
-		//¾îµğ¼­ºÎÅÍ
-		printlog("¾î´À ´É·ÂÄ¡·Î ¸ô¾ÆÁÙ°ÅÁö? (S)tr - Èû  (D)ex - ¹ÎÃ¸  (I)nt - Áö´É (N) - Á¦°Å",true,false,false,CL_help);
+		//ì–´ë””ì„œë¶€í„°
+		printlog("ì–´ëŠ ëŠ¥ë ¥ì¹˜ë¡œ ëª°ì•„ì¤„ê±°ì§€? (S)tr - í˜  (D)ex - ë¯¼ì²©  (I)nt - ì§€ëŠ¥ (N) - ì œê±°",true,false,false,CL_help);
 		while(!end_)
 		{
 			switch(waitkeyinput())
@@ -374,7 +374,7 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 				end_ = true;
 				break;
 			case VK_ESCAPE:
-				printlog("Ãë¼ÒÇÏ¿´´Ù. ½ÅÁßÇÏ°Ô »ı°¢ÇÏµµ·Ï!",true,false,false,CL_help);
+				printlog("ì·¨ì†Œí•˜ì˜€ë‹¤. ì‹ ì¤‘í•˜ê²Œ ìƒê°í•˜ë„ë¡!",true,false,false,CL_help);
 				return false;
 			}
 		}
@@ -382,9 +382,9 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		if(you.s_stat_boost == stat_)
 		{
 			if(stat_)
-				printlog("´ç½ÅÀº ÀÌ¹Ì ±× ´É·ÂÄ¡·Î °³Á¶µÇ¾îÀÖ´Ù!",false,false,false,CL_normal);
+				printlog("ë‹¹ì‹ ì€ ì´ë¯¸ ê·¸ ëŠ¥ë ¥ì¹˜ë¡œ ê°œì¡°ë˜ì–´ìˆë‹¤!",false,false,false,CL_normal);
 			else
-				printlog("´ç½ÅÀº °³Á¶µÇ¾îÀÖ´Â ¸öÀÌ ¾Æ´Ï´Ù!",false,false,false,CL_normal);
+				printlog("ë‹¹ì‹ ì€ ê°œì¡°ë˜ì–´ìˆëŠ” ëª¸ì´ ì•„ë‹ˆë‹¤!",false,false,false,CL_normal);
 
 			return false;
 		}
@@ -393,11 +393,11 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		soundmanager.playSound("buff");
 		you.SetStatBoost(stat_, max(1,pietyLevel(you.piety)-1));
 		if(stat_)
-			printarray(true,false,false,CL_good,3,"¿¡ÀÌ¸°ÀÌ ´ç½ÅÀÇ ¸öÀ» ´õ¿í ",stat_==1?"°­·Â":(stat_==2?"¹ÎÃ¸":"¶È¶È"),"ÇØÁöµµ·Ï °³Á¶ÇÏ¿´´Ù!");
+			printarray(true,false,false,CL_good,3,"ì—ì´ë¦°ì´ ë‹¹ì‹ ì˜ ëª¸ì„ ë”ìš± ",stat_==1?"ê°•ë ¥":(stat_==2?"ë¯¼ì²©":"ë˜‘ë˜‘"),"í•´ì§€ë„ë¡ ê°œì¡°í•˜ì˜€ë‹¤!");
 		else
 		{
-			printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÇ ¸öÀ» ¿ø·¡´ë·Î µÇµ¹·È´Ù. ",false,false,false,CL_help);
-			printlog("¾Æ¸¶µµ...",false,false,false,CL_small_danger);
+			printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì˜ ëª¸ì„ ì›ë˜ëŒ€ë¡œ ë˜ëŒë ¸ë‹¤. ",false,false,false,CL_help);
+			printlog("ì•„ë§ˆë„...",false,false,false,CL_small_danger);
 		}
 		return true;
 	}
@@ -409,8 +409,8 @@ bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		soundmanager.playSound("buff");
-		printlog("´ç½ÅÀº ¿¡ÀÌ¸°ÀÇ ÀÓ½Ã ¼öÇ÷·Î È¸º¹µÇ¾ú´Ù.",true,false,false,CL_help);
-		printlog("ÀÌ ¼öÇ÷Àº ½Ã°£ÀÌ Áö³ª¸é Å« ºÎÀÛ¿ëÀ» ºÒ·¯¿Ã°ÍÀÌ´Ù!",true,false,false,CL_danger);
+		printlog("ë‹¹ì‹ ì€ ì—ì´ë¦°ì˜ ì„ì‹œ ìˆ˜í˜ˆë¡œ íšŒë³µë˜ì—ˆë‹¤.",true,false,false,CL_help);
+		printlog("ì´ ìˆ˜í˜ˆì€ ì‹œê°„ì´ ì§€ë‚˜ë©´ í° ë¶€ì‘ìš©ì„ ë¶ˆëŸ¬ì˜¬ê²ƒì´ë‹¤!",true,false,false,CL_danger);
 		you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,false);
 	}
 	return true;
@@ -457,7 +457,7 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 				}
 				else if(unit_->isYourShight())
 				{					
-					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 				}
 				number_++;
 			}
@@ -465,7 +465,7 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 	}
 	if(!number_)
 	{
-		printlog("½Ã¾ß¾È ´ÜÇ³À§¿¡ ÀÖ´Â ÀûÀÌ ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ì‹œì•¼ì•ˆ ë‹¨í’ìœ„ì— ìˆëŠ” ì ì´ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	soundmanager.playSound("spellcard");
@@ -478,17 +478,17 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 	{
 		if(you.equipment[ET_ARMOR]->isArtifact())
 		{
-			printlog("¾ÆÆ¼ÆåÆ®´Â º¯È­ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ì•„í‹°í™íŠ¸ëŠ” ë³€í™”í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		if(you.equipment[ET_ARMOR]->value5 == AMK_AUTUMN)
 		{
-			printlog("ÀÌ ¾ÆÀÌÅÛÀº ÀÌ¹Ì ´ÜÇ³À¸·Î µÇ¾îÀÖ´Ù.",true,false,false,CL_normal);
+			printlog("ì´ ì•„ì´í…œì€ ì´ë¯¸ ë‹¨í’ìœ¼ë¡œ ë˜ì–´ìˆë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 			
 		
-		printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"´ÜÇ³¹æ¾î±¸·Î °­È­ÇÏ½Ã°Ú½À´Ï±î?(y/n)");
+		printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"ë‹¨í’ë°©ì–´êµ¬ë¡œ ê°•í™”í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(y/n)");
 		
 		
 		switch(waitkeyinput())
@@ -497,7 +497,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		case 'y':
 			break;
 		default:
-			printlog("Ãë¼ÒÇÏ¿´´Ù. ½ÅÁßÇÏ°Ô »ı°¢ÇÏµµ·Ï!",true,false,false,CL_help);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤. ì‹ ì¤‘í•˜ê²Œ ìƒê°í•˜ë„ë¡!",true,false,false,CL_help);
 			return false;
 		}
 		
@@ -509,7 +509,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 
 		
 		you.equipment[ET_ARMOR]->name.name = GetMaterialString((material_kind)(you.equipment[ET_ARMOR]->type-ITM_ARMOR_BODY_ARMOUR_0));
-		you.equipment[ET_ARMOR]->name.name += " ´ÜÇ³¿Ê";
+		you.equipment[ET_ARMOR]->name.name += " ë‹¨í’ì˜·";
 
 
 		switch(you.equipment[ET_ARMOR]->type)
@@ -532,11 +532,11 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			break;
 		}
 		soundmanager.playSound("buff");
-		printlog("´ç½ÅÀÇ ¹æ¾î±¸´Â Ä¿´Ù¶õ ´ÜÇ³ÀÙÀ¸·Î º¯Çß´Ù!",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì˜ ë°©ì–´êµ¬ëŠ” ì»¤ë‹¤ë€ ë‹¨í’ììœ¼ë¡œ ë³€í–ˆë‹¤!",true,false,false,CL_normal);
 	}
 	else
 	{
-		printlog("´ç½ÅÀº ¹æ¾î±¸¸¦ ³¢°í ÀÖÁö ¾Ê´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ë°©ì–´êµ¬ë¥¼ ë¼ê³  ìˆì§€ ì•Šë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -597,11 +597,11 @@ bool skill_minoriko_restore(int pow, bool short_, unit* order, coord_def target)
 		if(up_)
 		{
 			soundmanager.playSound("buff");
-			printlog("´ç½ÅÀº »óÅÂ¸¦ È¸º¹ÇÏ¿´´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ ìƒíƒœë¥¼ íšŒë³µí•˜ì˜€ë‹¤.",true,false,false,CL_white_blue);
 			return true;
 		}
 		else{
-			printlog("´ç½ÅÀº È¸º¹ÇÒ »óÅÂ°¡ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì€ íšŒë³µí•  ìƒíƒœê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;	
 		}
 
@@ -612,7 +612,7 @@ bool skill_minoriko_restore(int pow, bool short_, unit* order, coord_def target)
 	
 bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 {		
-	view_item(IVT_FOOD,"¹«¾ùÀ» »ç¿ëÇÏ°Ú½À´Ï±î?");
+	view_item(IVT_FOOD,"ë¬´ì—‡ì„ ì‚¬ìš©í•˜ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -630,26 +630,26 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 						order->HpUpDown(rand_int(10+bonus_,15+bonus_)+order->GetMaxHp()*rand_float(0.15f,0.25f),DR_NONE);
 						you.DeleteItem(it,1);
 						soundmanager.playSound("buff");
-						printlog("À½½ÄÀ» ÅëÇØ Ã¼·ÂÀ» È¸º¹ÇÏ¿´´Ù.",true,false,false,CL_white_blue);
+						printlog("ìŒì‹ì„ í†µí•´ ì²´ë ¥ì„ íšŒë³µí•˜ì˜€ë‹¤.",true,false,false,CL_white_blue);
 						return true;	
 					}
 					else
 					{
-						printlog("±×°ÍÀº À½½ÄÀÌ ¾Æ´Ï´Ù.",true,false,false,CL_normal);
+						printlog("ê·¸ê²ƒì€ ìŒì‹ì´ ì•„ë‹ˆë‹¤.",true,false,false,CL_normal);
 						return false;	
 					}
 				}
 			}
-			printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+			printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 			return false;	
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -658,9 +658,9 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -671,7 +671,7 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 {
 	{
-		view_item(IVT_POTION,"¹«¾ùÀ» »ç¿ëÇÏ°Ú½À´Ï±î?");
+		view_item(IVT_POTION,"ë¬´ì—‡ì„ ì‚¬ìš©í•˜ê² ìŠµë‹ˆê¹Œ?");
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -693,21 +693,21 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 						}
 						else
 						{
-							printlog("±×°ÍÀº ¹°¾àÀÌ ¾Æ´Ï´Ù.",true,false,false,CL_normal);
+							printlog("ê·¸ê²ƒì€ ë¬¼ì•½ì´ ì•„ë‹ˆë‹¤.",true,false,false,CL_normal);
 							return false;	
 						}
 					}
 				}
-				printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+				printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 				return false;	
 			}
-			else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+			else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 			{
-				changemove(32);  //À§
+				changemove(32);  //ìœ„
 			}
 			else if(key_ == VK_UP)
 			{
-				changemove(-32); //¾Æ·¡
+				changemove(-32); //ì•„ë˜
 			}
 			else if(key_ == VK_PRIOR)
 			{
@@ -716,9 +716,9 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 			else if(key_ == VK_NEXT)
 			{
 				changemove(option_mg.getHeight());
-			}						//-----ÀÌµ¿Å°³¡-------
+			}						//-----ì´ë™í‚¤ë-------
 			else if(key_ == '*')
-				view_item(IVT_SELECT,"¹«¾ùÀ» »ç¿ëÇÏ°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ì—‡ì„ ì‚¬ìš©í•˜ê² ìŠµë‹ˆê¹Œ?");
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -739,12 +739,12 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 			coord_def offset_ = you.position+you.position - mon_->position;
 			if(!env[current_level].isMove(offset_))
 			{
-				printlog("Àû¿¡°Ô Àú¸Õ ½ºÇÃ·º½º¸¦ °É Áö¸éÀÌ ºÎÁ·ÇÏ´Ù.",true,false,false,CL_normal);
+				printlog("ì ì—ê²Œ ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤ë¥¼ ê±¸ ì§€ë©´ì´ ë¶€ì¡±í•˜ë‹¤.",true,false,false,CL_normal);
 				return false;	
 			}
 			if(env[current_level].isMonsterPos(offset_.x,offset_.y,order))
 			{
-				printlog("Àú¸Õ ½ºÇÃ·º½º¸¦ ¾²´Âµ¥ ¹æÇØµÇ´Â ´©±º°¡°¡ ÀÖ´Ù.",true,false,false,CL_normal);
+				printlog("ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤ë¥¼ ì“°ëŠ”ë° ë°©í•´ë˜ëŠ” ëˆ„êµ°ê°€ê°€ ìˆë‹¤.",true,false,false,CL_normal);
 				return false;	
 			}
 			mon_->SetXY(offset_);
@@ -752,8 +752,8 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 			int max_damage_ = you.GetAttack(true)*10/you.GetAtkDelay()*(1+pow/100.0f)+2*(2+pow/20);				
 
 			soundmanager.playSound("stone");
-			printlog("Àú¸Õ ½ºÇÃ·º½º! ",false,false,false,CL_yuigi);
-			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor("Àú¸Õ ½ºÇÃ·º½º",false));
+			printlog("ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤! ",false,false,false,CL_yuigi);
+			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor("ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤",false));
 			unit_->damage(temp_att,true);
 
 			if(!no_cost_)
@@ -781,7 +781,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, throw_length_, 0.0f))
 			{		
 				int length_ = ceil(sqrt(pow((float)abs(order->position.x-you.search_pos.x),2)+pow((float)abs(order->position.y-you.search_pos.y),2)));
-				printlog("³¯¶ó°¡¶ó! ",false,false,false,CL_yuigi);
+				printlog("ë‚ ë¼ê°€ë¼! ",false,false,false,CL_yuigi);
 				int damage_ = 5+mon_->level+power/10;
 				beam_infor temp_infor(randC(1,damage_),damage_,15,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NORMAL,mon_->name);
 				coord_def final_ = throwtanmac(mon_->image,beam,temp_infor,NULL);
@@ -792,14 +792,14 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 				for(;!rit.end();rit++)
 				{
 					if(!env[current_level].isMove(rit->x, rit->y))
-						continue; //¿òÁ÷ÀÏ¼ö¾ø´Â À§Ä¡	
+						continue; //ì›€ì§ì¼ìˆ˜ì—†ëŠ” ìœ„ì¹˜	
 					if(env[current_level].isMonsterPos(rit->x,rit->y)) 
-						continue; //ÀÌ¹Ì ¸ó½ºÅÍ°¡ ÀÖ´Â À§Ä¡
+						continue; //ì´ë¯¸ ëª¬ìŠ¤í„°ê°€ ìˆëŠ” ìœ„ì¹˜
 
 					mon_->SetXY(*rit);
 					break;
 				}
-				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Ãæ°İÆÄ",false));
+				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ì¶©ê²©íŒŒ",false));
 
 				soundmanager.playSound("bomb"); 
 				BaseBomb(final_, &img_blast[2],temp_att,&you);
@@ -825,7 +825,7 @@ bool skill_yuugi_shout(int pow, bool short_, unit* order, coord_def target)
 		{
 			int offset_ = max(-4,(it->level - you.level));
 			if(!ok_)
-				printlog("Ä§¹¬ÇÏ¶ó! ",false,false,false,CL_yuigi);
+				printlog("ì¹¨ë¬µí•˜ë¼! ",false,false,false,CL_yuigi);
 			if(randA(10+offset_)>3+offset_ || (you.s_catch && !it->isplayer() && ((monster*)&(*it))->s_catch))
 			{
 				it->SetMute(rand_int(20+pow/5,40+pow/5));
@@ -845,14 +845,14 @@ bool skill_yuugi_shout(int pow, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("Æ÷È¿¸¦ µéÀ» »ó´ë°¡ ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("í¬íš¨ë¥¼ ë“¤ì„ ìƒëŒ€ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;	
 	}
 	return false;
 }
 bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 {
-	printlog("»ïº¸ÇÊ»ì! ",false,false,false,CL_yuigi);
+	printlog("ì‚¼ë³´í•„ì‚´! ",false,false,false,CL_yuigi);
 	for(int i = 0; i < 3; i++)
 	{
 		if(i==0)
@@ -898,7 +898,7 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 									m_att_ *= 2;
 								}
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Ãæ°İÆÄ",false));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ì¶©ê²©íŒŒ",false));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -921,7 +921,7 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 	{
 		if(!(hit_mon->isplayer()) && ((monster*)hit_mon)->id == MON_KOISHI)
 		{
-			printarray(true,false,false,CL_small_danger,1,"µ¿»ıÀÇ ¸¶À½Àº ´İÇôÀÖ´Ù.");
+			printarray(true,false,false,CL_small_danger,1,"ë™ìƒì˜ ë§ˆìŒì€ ë‹«í˜€ìˆë‹¤.");
 			return false;
 		}
 
@@ -945,7 +945,7 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -968,17 +968,17 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 
 			if(turn_>=20)
 			{
-				printarray(true,false,false,CL_small_danger,1,"ÀÌ »ó´ëÀÇ ¸¶À½Àº ÀĞÀ» ¼ö ¾ø´Ù.");
+				printarray(true,false,false,CL_small_danger,1,"ì´ ìƒëŒ€ì˜ ë§ˆìŒì€ ì½ì„ ìˆ˜ ì—†ë‹¤.");
 				return false;
 			}
 			if(mon_->id == MON_KOISHI)
 			{
-				printarray(true,false,false,CL_small_danger,1,"µ¿»ıÀÇ ¸¶À½Àº ´İÇôÀÖ´Ù.");
+				printarray(true,false,false,CL_small_danger,1,"ë™ìƒì˜ ë§ˆìŒì€ ë‹«í˜€ìˆë‹¤.");
 				return false;
 			}
 			if(mon_->s_mind_reading)
 			{
-				printarray(true,false,false,CL_normal,1,"ÀÌ¹Ì ¸¶À½À» °£ÆÄÇÑ ´ë»óÀÌ´Ù.");
+				printarray(true,false,false,CL_normal,1,"ì´ë¯¸ ë§ˆìŒì„ ê°„íŒŒí•œ ëŒ€ìƒì´ë‹¤.");
 				return false;
 
 			}
@@ -986,7 +986,7 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 			int fail_ = 0;
 			for(int i=0; i<turn_; i++)
 			{
-				printarray(false,false,false,CL_danger,1,"¸¶À½À» ÀĞ´Â Áß... ");
+				printarray(false,false,false,CL_danger,1,"ë§ˆìŒì„ ì½ëŠ” ì¤‘... ");
 				if(you.s_confuse || you.s_paralyse || you.s_sleep < 0)
 				{
 					fail_ = 1;
@@ -1002,11 +1002,11 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 				Sleep(100);
 			}
 			if(fail_)
-				printarray(true,false,false,CL_small_danger,1,fail_==1?"¹æÇØ¸¦ ¹Ş¾Æ ¸¶À½À» ÀĞ´Âµ¥ ½ÇÆĞÇß´Ù.":"´ë»óÀÌ ½Ã¾ß¿¡ »ç¶óÁ®¼­ ½ÇÆĞÇß´Ù.");
+				printarray(true,false,false,CL_small_danger,1,fail_==1?"ë°©í•´ë¥¼ ë°›ì•„ ë§ˆìŒì„ ì½ëŠ”ë° ì‹¤íŒ¨í–ˆë‹¤.":"ëŒ€ìƒì´ ì‹œì•¼ì— ì‚¬ë¼ì ¸ì„œ ì‹¤íŒ¨í–ˆë‹¤.");
 			else
 			{
 				soundmanager.playSound("debuf");
-				//printarray(true,false,false,CL_normal,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_is(true),"¸¶À½À» °£ÆÄ´çÇß´Ù.");
+				//printarray(true,false,false,CL_normal,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_is(true),"ë§ˆìŒì„ ê°„íŒŒë‹¹í–ˆë‹¤.");
 				mon_->SetMindReading(1);
 			}
 			return true;
@@ -1029,7 +1029,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 	if(return_)
 	{
 		soundmanager.playSound("summon");
-		printarray(true,false,false,CL_magic,1,"¸¶°èÀÇ Á¹°³µéÀÌ ´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");	
+		printarray(true,false,false,CL_magic,1,"ë§ˆê³„ì˜ ì¡¸ê°œë“¤ì´ ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");	
 	}
 	return return_;
 }
@@ -1038,11 +1038,11 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 	bool return_=false;
 	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");		
+		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");		
 		if(randA(99)<=3)
 		{
 			soundmanager.playSound("laugh");
-			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"ÀÇ ±âºĞÀÌ ½â ÁÁ¾Æº¸ÀÌÁö ¾Ê´Â´Ù.");				
+			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"ì˜ ê¸°ë¶„ì´ ì© ì¢‹ì•„ë³´ì´ì§€ ì•ŠëŠ”ë‹¤.");				
 			mon_->ReturnEnemy();			
 		}
 		else {
@@ -1060,11 +1060,11 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	int id_ = randA(3)==0?MON_YUKI:(randA(2)==0?MON_MAI:randA(1)?MON_YUUGENMAGAN:MON_SARIEL);
 	if(monster* mon_=BaseSummon(id_, rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
 	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");		
+		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");		
 		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
 			soundmanager.playSound("laugh");
-			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"ÀÇ ±âºĞÀÌ ½â ÁÁ¾Æº¸ÀÌÁö ¾Ê´Â´Ù.");				
+			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"ì˜ ê¸°ë¶„ì´ ì© ì¢‹ì•„ë³´ì´ì§€ ì•ŠëŠ”ë‹¤.");				
 			mon_->ReturnEnemy();			
 		}
 		else {
@@ -1080,14 +1080,14 @@ bool skill_yuyuko_on(int power, bool short_, unit* order, coord_def target)
 	if(order->isplayer() && !you.s_ghost)
 	{
 		soundmanager.playSound("buff");
-		printlog("À¯·ÉÀ» ºÒ·¯µéÀÌ±â ½ÃÀÛÇÑ´Ù.",true,false,false,CL_normal);
+		printlog("ìœ ë ¹ì„ ë¶ˆëŸ¬ë“¤ì´ê¸° ì‹œì‘í•œë‹¤.",true,false,false,CL_normal);
 		you.SetGhost(1);
 		int temp = you.Ability(SKL_YUYUKO_ON,true,true,1);
 		you.Ability(SKL_YUYUKO_OFF,true,false,temp);
 		return true;
 	}
 	else if(order->isplayer() && you.s_ghost)
-		printlog("ÀÌ¹Ì À¯·ÉÀ» ¸ğÀ¸°í ÀÖ´Ù(¹ö±×).",true,false,false,CL_normal);	
+		printlog("ì´ë¯¸ ìœ ë ¹ì„ ëª¨ìœ¼ê³  ìˆë‹¤(ë²„ê·¸).",true,false,false,CL_normal);	
 
 	return false;
 }
@@ -1095,7 +1095,7 @@ bool skill_yuyuko_off(int power, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		printlog("À¯·É ¼ÒÈ¯À» ¸ØÃè´Ù.",true,false,false,CL_normal);
+		printlog("ìœ ë ¹ ì†Œí™˜ì„ ë©ˆì·„ë‹¤.",true,false,false,CL_normal);
 		you.s_ghost = 0;
 		int temp = you.Ability(SKL_YUYUKO_OFF,true,true,1);
 		you.Ability(SKL_YUYUKO_ON,true,false,temp);
@@ -1172,17 +1172,17 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		if(j>0)
 		{
 			soundmanager.playSound("summon");
-			printarray(true,false,false,CL_normal,2,unit_->GetName()->name.c_str(),"¿¡°Ô À¯·ÉÀ» ³»º¸³Â´Ù.");
+			printarray(true,false,false,CL_normal,2,unit_->GetName()->name.c_str(),"ì—ê²Œ ìœ ë ¹ì„ ë‚´ë³´ëƒˆë‹¤.");
 			unit_->AttackedTarget(order);
 			return true;
 		}
 		else
 		{
-			printarray(true,false,false,CL_normal,1,"À¯·ÉÀÌ ¾ø´Ù.");
+			printarray(true,false,false,CL_normal,1,"ìœ ë ¹ì´ ì—†ë‹¤.");
 			return false;
 		}
 	}
-	printlog("À¯´ÖÀ» ´ë»óÀ¸·Î »ç¿ëÇØ¾ßÇÑ´Ù.",true,false,false,CL_normal);
+	printlog("ìœ ë‹›ì„ ëŒ€ìƒìœ¼ë¡œ ì‚¬ìš©í•´ì•¼í•œë‹¤.",true,false,false,CL_normal);
 	return false;
 }
 bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
@@ -1190,7 +1190,7 @@ bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		soundmanager.playSound("spellcard");
-		printlog("´ç½ÅÀº ´ë·®ÀÇ À¯·ÉÀ» ºÒ·¯µéÀÌ±â ½ÃÀÛÇÑ´Ù!",true,false,false,CL_white_blue);
+		printlog("ë‹¹ì‹ ì€ ëŒ€ëŸ‰ì˜ ìœ ë ¹ì„ ë¶ˆëŸ¬ë“¤ì´ê¸° ì‹œì‘í•œë‹¤!",true,false,false,CL_white_blue);
 		int time_ = rand_int(35,45);
 		you.SetGhost(time_);
 	}
@@ -1215,7 +1215,7 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 		}
 		/*else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}*/
 		soundmanager.playSound("debuf");
 		hit_mon->AttackedTarget(order);
@@ -1243,12 +1243,12 @@ bool skill_yukari_supporter(int power, bool short_, unit* order, coord_def targe
 				}
 				else
 				{
-					printarray(true,false,false,CL_normal,1,"»ı¼ºÇÒ ¼ö ¾ø´Â À§Ä¡´Ù.");
+					printarray(true,false,false,CL_normal,1,"ìƒì„±í•  ìˆ˜ ì—†ëŠ” ìœ„ì¹˜ë‹¤.");
 					return false;
 				}
 			}
 		}
-		printarray(true,false,false,CL_normal,1,"Æ´»õ¸¦ ´ë»óÀ¸·Î ÁöÁ¤ÇØ¾ßÇÑ´Ù.");
+		printarray(true,false,false,CL_normal,1,"í‹ˆìƒˆë¥¼ ëŒ€ìƒìœ¼ë¡œ ì§€ì •í•´ì•¼í•œë‹¤.");
 	}
 	return false;
 
@@ -1264,18 +1264,18 @@ bool skill_yukari_schema(int power, bool short_, unit* order, coord_def target)
 				if(you.control_blink(target))
 				{
 					soundmanager.playSound("blink");
-					printarray(true,false,false,CL_normal,1,"Æ´»õ¸¦ Å¸°í ÀÌµ¿ÇÏ¿´´Ù.");
+					printarray(true,false,false,CL_normal,1,"í‹ˆìƒˆë¥¼ íƒ€ê³  ì´ë™í•˜ì˜€ë‹¤.");
 					hit_eff->time = 0;
 					return true;
 				}
 				else
 				{
-					printarray(true,false,false,CL_normal,1,"ÀÌµ¿ÇÒ ¼ö ¾ø´Â À§Ä¡´Ù.");
+					printarray(true,false,false,CL_normal,1,"ì´ë™í•  ìˆ˜ ì—†ëŠ” ìœ„ì¹˜ë‹¤.");
 					return false;
 				}
 			}
 		}
-		printarray(true,false,false,CL_normal,1,"Æ´»õ¸¦ ´ë»óÀ¸·Î ÁöÁ¤ÇØ¾ßÇÑ´Ù.");
+		printarray(true,false,false,CL_normal,1,"í‹ˆìƒˆë¥¼ ëŒ€ìƒìœ¼ë¡œ ì§€ì •í•´ì•¼í•œë‹¤.");
 	}
 	return false;
 
@@ -1286,7 +1286,7 @@ bool skill_yukari_shield(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("buff");
 		you.SetBuff(BUFFSTAT_SH,BUFF_YUKARI,15,rand_int(70,100));
-		printlog("°á°è°¡ ´ç½ÅÀ» º¸È£ÇÏ°í ÀÖ´Ù.",true,false,false,CL_white_blue);
+		printlog("ê²°ê³„ê°€ ë‹¹ì‹ ì„ ë³´í˜¸í•˜ê³  ìˆë‹¤.",true,false,false,CL_white_blue);
 		return true;
 	}
 	return false;
@@ -1297,7 +1297,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 	{
 		if(env[current_level].isBamboo())
 		{
-			printlog("ÀÌ °÷¿¡¼­´Â Â÷¿øÀ» °íÁ¤ÇÒ ¼ö ¾ø´Ù!",true,false,false,CL_small_danger);
+			printlog("ì´ ê³³ì—ì„œëŠ” ì°¨ì›ì„ ê³ ì •í•  ìˆ˜ ì—†ë‹¤!",true,false,false,CL_small_danger);
 			return false;
 		}
 		you.search_pos = target;
@@ -1305,7 +1305,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.search = true;
 
 	
-		printlog("ÀÌ À§Ä¡·Î Â÷¿øÀ» °íÁ¤ÇÒ±î? (Y/N)",false,false,false,CL_danger);
+		printlog("ì´ ìœ„ì¹˜ë¡œ ì°¨ì›ì„ ê³ ì •í• ê¹Œ? (Y/N)",false,false,false,CL_danger);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -1314,7 +1314,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 			break;
 		case 'N':
 		default:
-			printlog(" Ãë¼Ò!",true,false,false,CL_normal);
+			printlog(" ì·¨ì†Œ!",true,false,false,CL_normal);
 			widesearch = false;
 			you.search = false;
 			return false;
@@ -1328,7 +1328,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(50,70));
 		soundmanager.playSound("timestop");
-		printlog("Â÷¿øÀÌ °íÁ¤µÇ¾ú´Ù!",false,false,false,CL_white_blue);
+		printlog("ì°¨ì›ì´ ê³ ì •ë˜ì—ˆë‹¤!",false,false,false,CL_white_blue);
 		return true;
 	}
 	return false;
@@ -1344,7 +1344,7 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 		{
 			you.SetXY(target.x,target.y);
 			soundmanager.playSound("jump");
-			printarray(false,false,false,CL_normal,1,"Á¡ÇÁ! ");
+			printarray(false,false,false,CL_normal,1,"ì í”„! ");
 			return true;
 		}
 	}
@@ -1358,12 +1358,12 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("stone");
 		env[current_level].changeTile(order->position, DG_TEMPLE_SUWAKO);
-		printlog("´ç½ÅÀº ¹ß¹Ø¿¡ ½º¿ÍÄÚ´ÔÀÇ ½ÅÀüÀ» ¼¼¿ü´Ù. ½Å¾Ó½ÉÀÌ Ç³Á·ÇØÁö´Â °ÍÀ» ´À²¼´Ù.",true,false,false,CL_swako);
+		printlog("ë‹¹ì‹ ì€ ë°œë°‘ì— ìŠ¤ì™€ì½”ë‹˜ì˜ ì‹ ì „ì„ ì„¸ì› ë‹¤. ì‹ ì•™ì‹¬ì´ í’ì¡±í•´ì§€ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",true,false,false,CL_swako);
 		you.PietyUpDown(2+randA(2));
 		return true;
 	}
 	else
-		printlog("¿©±â¿£ ½ÅÀüÀ» ¼¼¿ï ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+		printlog("ì—¬ê¸°ì—” ì‹ ì „ì„ ì„¸ìš¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 
 	return false;
 }
@@ -1372,7 +1372,7 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¹°ÃÑ",true));
+		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("ë¬¼ì´",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1401,11 +1401,11 @@ bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 				soundmanager.playSound("debuf");
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_to(true),"²ø¾î ´ç°å´Ù.");
+				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_to(true),"ëŒì–´ ë‹¹ê²¼ë‹¤.");
 				return true;
 			}
 		}
-		printlog("²ø¾î ´ç±æ ¼ö ¾ø´Â À§Ä¡ÀÔ´Ï´Ù.",true,false,false,CL_small_danger);
+		printlog("ëŒì–´ ë‹¹ê¸¸ ìˆ˜ ì—†ëŠ” ìœ„ì¹˜ì…ë‹ˆë‹¤.",true,false,false,CL_small_danger);
 
 	}
 	return false;
@@ -1419,7 +1419,7 @@ bool skill_swako_curse(int power, bool short_, unit* order, coord_def target)
 		if(hit_mon->isYourShight())
 		{
 			soundmanager.playSound("curse");
-			printarray(false,false,false,CL_swako,2,hit_mon->GetName()->name.c_str(),"¿¡ Àç¾ÓÀ» ³»·È´Ù.");
+			printarray(false,false,false,CL_swako,2,hit_mon->GetName()->name.c_str(),"ì— ì¬ì•™ì„ ë‚´ë ¸ë‹¤.");
 			hit_mon->SetSlow(rand_int(2,10)+randA(level_*3));
 			hit_mon->SetPoison(rand_int(20,35)+randA(level_*4),150,true);
 			hit_mon->SetPoisonReason(order->GetParentType());
@@ -1474,7 +1474,7 @@ bool skill_swako_summon_flog(int power, bool short_, unit* order, coord_def targ
 	bool return_=false;
 	if(monster* mon_=BaseSummon(MON_FROG, rand_int(60,80), true, false, 2, order, target, SKD_SUMMON_SWAKO_FLOG, -1))
 	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");		
+		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");		
 		return_ = true;
 		enterlog();
 	}
@@ -1497,10 +1497,10 @@ bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
 			return true;
 		}
 		else
-			printlog("¿©±â¿£ ¼®»óÀ» ¼¼¿ï ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+			printlog("ì—¬ê¸°ì—” ì„ìƒì„ ì„¸ìš¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 	}
 	else
-		printlog("¿©±â¿£ ¼®»óÀ» ¼¼¿ï ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+		printlog("ì—¬ê¸°ì—” ì„ìƒì„ ì„¸ìš¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 	return false;
 }
 bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
@@ -1532,7 +1532,7 @@ bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
 	}
 
 	soundmanager.playSound("spellcard");
-	printarray(true,false,false,CL_magic,1,"´ç½ÅÀÇ ÁÖº¯ÀÌ ¹°¹Ù´Ù°¡ µÇ¾ú´Ù. ");	
+	printarray(true,false,false,CL_magic,1,"ë‹¹ì‹ ì˜ ì£¼ë³€ì´ ë¬¼ë°”ë‹¤ê°€ ë˜ì—ˆë‹¤. ");	
 	
 	return true;
 }
@@ -1547,7 +1547,7 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 	bool return_ = false;
 	if (monster* mon_ = BaseSummon(MON_MISYAGUZI, rand_int(90, 120), true, false, 2, order, target, SKD_SUMMON_MISYAGUZI, -1))
 	{
-		printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");
+		printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");
 
 		soundmanager.playSound("summon");
 		return_ = true;
@@ -1557,7 +1557,7 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 }
 bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_CURSE_ENCHANT,"¹«½¼ ¾ÆÀÌÅÛÀ» °í¸£½Ã°Ú½À´Ï±î?");
+	view_item(IVT_CURSE_ENCHANT,"ë¬´ìŠ¨ ì•„ì´í…œì„ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1583,7 +1583,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 									//	it->Enchant(ET_WEAPON, value3_*-2);
 									if(value4_<0)
 										it->Enchant(ET_WEAPON,value4_*-2);
-									printlog("È÷³ª´Â ´ç½ÅÀÇ ¹«±âÀÇ ¾×¶«À» ÇØÁÖ¾ú´Ù.",true,false,false,CL_hina);
+									printlog("íˆë‚˜ëŠ” ë‹¹ì‹ ì˜ ë¬´ê¸°ì˜ ì•¡ë•œì„ í•´ì£¼ì—ˆë‹¤.",true,false,false,CL_hina);
 									return true;	
 								}
 								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
@@ -1591,46 +1591,46 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 									soundmanager.playSound("curse");
 									if(it->value4<0)
 										it->Enchant(ET_ARMOR,it->value4*-2);
-									printlog("È÷³ª´Â ´ç½ÅÀÇ ¹æ¾î±¸ÀÇ ¾×¶«À» ÇØÁÖ¾ú´Ù.",true,false,false,CL_hina);
+									printlog("íˆë‚˜ëŠ” ë‹¹ì‹ ì˜ ë°©ì–´êµ¬ì˜ ì•¡ë•œì„ í•´ì£¼ì—ˆë‹¤.",true,false,false,CL_hina);
 								
 									return true;	
 
 								}
 								else
 								{
-									printlog("¸¶ÀÌ³Ê½º ÀÎÃ¦Æ®°¡ µÇ¾îÀÖ´Â ¾ÆÀÌÅÛ¸¸ ¼±ÅÃÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_normal);
+									printlog("ë§ˆì´ë„ˆìŠ¤ ì¸ì±ˆíŠ¸ê°€ ë˜ì–´ìˆëŠ” ì•„ì´í…œë§Œ ì„ íƒí•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_normal);
 									return false;	
 								}
 							}
 							else
 							{
-								printlog("ÀúÁÖ °É·ÁÀÖ´Â ¾ÆÀÌÅÛ¿¡¸¸ »ç¿ëÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_normal);
+								printlog("ì €ì£¼ ê±¸ë ¤ìˆëŠ” ì•„ì´í…œì—ë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_normal);
 								return false;	
 							}
 						}
 						else
 						{
-							printlog("¾ÆÆ¼ÆåÆ®¿£ »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+							printlog("ì•„í‹°í™íŠ¸ì—” ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 							return false;	
 						}
 					}
 					else
 					{
-						printlog("¿Ã¹Ù¸£Áö ¾ÊÀº ´ë»óÀÌ´Ù.",true,false,false,CL_normal);
+						printlog("ì˜¬ë°”ë¥´ì§€ ì•Šì€ ëŒ€ìƒì´ë‹¤.",true,false,false,CL_normal);
 						return false;	
 					}
 				}
 			}
-			printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+			printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 			return false;	
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1639,9 +1639,9 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛÀ» °í¸£½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì„ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1654,43 +1654,43 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 	{
 		if(you.equipment[ET_WEAPON]->curse)
 		{
-			printlog("ÀÌ¹Ì ÀúÁÖ¿¡ °É·ÁÀÖ´Ù.",true,false,false,CL_normal);
+			printlog("ì´ë¯¸ ì €ì£¼ì— ê±¸ë ¤ìˆë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
-		string before_name = you.equipment[ET_WEAPON]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+		string before_name = you.equipment[ET_WEAPON]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 		if(you.equipment[ET_WEAPON]->Curse(true,ET_WEAPON))
 		{
 			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 			{
 				soundmanager.playSound("curse");
-				printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ÀúÁÖÀÇ ÈûÀ¸·Î °¡µæ Â÷ÀÖ´Ù.");
+				printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ì €ì£¼ì˜ í˜ìœ¼ë¡œ ê°€ë“ ì°¨ìˆë‹¤.");
 				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 				you.equipment[ET_WEAPON]->value6 = rand_int(80,100);
 			}
 			else
 			{
 				soundmanager.playSound("curse");
-				printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);	
+				printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);	
 				printlog(before_name,false,false,false,CL_small_danger);	
 				printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("°Ë°Ô ºû³ª¸é¼­ ´ç½Å¿¡°Ô ½ÅºñÇÑ ÈûÀÌ µé¾î¿Â´Ù.",true,false,false,CL_small_danger);		
+				printlog("ê²€ê²Œ ë¹›ë‚˜ë©´ì„œ ë‹¹ì‹ ì—ê²Œ ì‹ ë¹„í•œ í˜ì´ ë“¤ì–´ì˜¨ë‹¤.",true,false,false,CL_small_danger);		
 				you.SetMight(rand_int(80,100));
 			}
 			return true;
 		}
 		else
 		{
-			printlog("ÀÌ ¹«±â´Â ÀúÁÖ¸¦ °É ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+			printlog("ì´ ë¬´ê¸°ëŠ” ì €ì£¼ë¥¼ ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			return false;
 		}
 
 	}
-	printlog("¹«±â¸¦ ³¢°í ÀÖ¾î¾ß µÈ´Ù.",true,false,false,CL_normal);
+	printlog("ë¬´ê¸°ë¥¼ ë¼ê³  ìˆì–´ì•¼ ëœë‹¤.",true,false,false,CL_normal);
 	return false;
 }
 bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_UEQ_ARMOR,"¹«½¼ ¹æ¾î±¸¸¦ °í¸£½Ã°Ú½À´Ï±î?");
+	view_item(IVT_UEQ_ARMOR,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1710,15 +1710,15 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 							{
 								if(!it->curse && it->identify_curse)
 								{
-									string before_name = you.equipment[i]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+									string before_name = you.equipment[i]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 									if(it->Curse(true,i))
 									{
 										soundmanager.playSound("curse");
 										int time_ = rand_int(25,40);
-										printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);	
+										printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);	
 										printlog(before_name,false,false,false,CL_small_danger);	
 										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-										printlog("°Ë°Ô ºû³ª¸é¼­ ´ç½ÅÀº ¸ğµç µ¥¹ÌÁö¸¦ ¹İ»çÇÑ´Ù.",true,false,false,CL_small_danger);	
+										printlog("ê²€ê²Œ ë¹›ë‚˜ë©´ì„œ ë‹¹ì‹ ì€ ëª¨ë“  ë°ë¯¸ì§€ë¥¼ ë°˜ì‚¬í•œë‹¤.",true,false,false,CL_small_danger);	
 										if(i == ET_ARMOR)	
 											time_*=3;
 										you.SetMirror(time_);
@@ -1726,37 +1726,37 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 									}
 									else
 									{
-										printlog("ÀÌ ¹æ¾î±¸¿¡´Â ÀúÁÖ¸¦ °É ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+										printlog("ì´ ë°©ì–´êµ¬ì—ëŠ” ì €ì£¼ë¥¼ ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 										return false;	
 									}
 								}
 								else
 								{
-									printlog("ÀÌ¹Ì ÀúÁÖ¿¡ °É·ÁÀÖ´Ù.",true,false,false,CL_normal);
+									printlog("ì´ë¯¸ ì €ì£¼ì— ê±¸ë ¤ìˆë‹¤.",true,false,false,CL_normal);
 									return false;	
 								}
 							}
 						}
-						printlog("±×°ÍÀ» ÀÔ°í ÀÖÁö ¾Ê´Ù!",true,false,false,CL_normal);
+						printlog("ê·¸ê²ƒì„ ì…ê³  ìˆì§€ ì•Šë‹¤!",true,false,false,CL_normal);
 						return false;	
 					}
 					else
 					{
-						printlog("¹æ¾î±¸¿¡¸¸ »ç¿ëÀÌ °¡´ÉÇÏ´Ù.",true,false,false,CL_normal);
+						printlog("ë°©ì–´êµ¬ì—ë§Œ ì‚¬ìš©ì´ ê°€ëŠ¥í•˜ë‹¤.",true,false,false,CL_normal);
 						return false;	
 					}
 				}
 			}
-			printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+			printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 			return false;	
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1765,9 +1765,9 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ ¹æ¾î±¸¸¦ °í¸£½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1776,7 +1776,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 }
 bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_UEQ_JEWELRY,"¹«½¼ Àå½Å±¸¸¦ °í¸£½Ã°Ú½À´Ï±î?");
+	view_item(IVT_UEQ_JEWELRY,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1796,52 +1796,52 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 							{
 								if(!it->curse && it->identify_curse)
 								{
-									string before_name = you.equipment[i]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+									string before_name = you.equipment[i]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 									if(it->Curse(true,i))
 									{
 										soundmanager.playSound("curse");
 										int bonus_ = rand_int(10,15)+you.GetMaxHp()*rand_float(0.25f,0.35f);
-										printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);	
+										printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);	
 										printlog(before_name,false,false,false,CL_small_danger);	
 										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-										printlog("°Ë°Ô ºû³ª¸é¼­ ´ç½ÅÀº È¸º¹ÇÑ´Ù.",true,false,false,CL_small_danger);											
+										printlog("ê²€ê²Œ ë¹›ë‚˜ë©´ì„œ ë‹¹ì‹ ì€ íšŒë³µí•œë‹¤.",true,false,false,CL_small_danger);											
 										you.HpUpDown(bonus_,DR_NONE);										
 										you.MpUpDown(you.max_mp *rand_float(0.3f,0.4f));
 										return true;
 									}
 									else
 									{
-										printlog("ÀÌ Àå½Å±¸¿¡´Â ÀúÁÖ¸¦ °É ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+										printlog("ì´ ì¥ì‹ êµ¬ì—ëŠ” ì €ì£¼ë¥¼ ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 										return false;
 									}
 								}
 								else
 								{
-									printlog("ÀÌ¹Ì ÀúÁÖ¿¡ °É·ÁÀÖ´Ù.",true,false,false,CL_normal);
+									printlog("ì´ë¯¸ ì €ì£¼ì— ê±¸ë ¤ìˆë‹¤.",true,false,false,CL_normal);
 									return false;	
 								}
 							}
 						}
-						printlog("±×°ÍÀ» ÀÔ°í ÀÖÁö ¾Ê´Ù!",true,false,false,CL_normal);
+						printlog("ê·¸ê²ƒì„ ì…ê³  ìˆì§€ ì•Šë‹¤!",true,false,false,CL_normal);
 						return false;	
 					}
 					else
 					{
-						printlog("Àå½Å±¸¿¡¸¸ »ç¿ëÀÌ °¡´ÉÇÏ´Ù.",true,false,false,CL_normal);
+						printlog("ì¥ì‹ êµ¬ì—ë§Œ ì‚¬ìš©ì´ ê°€ëŠ¥í•˜ë‹¤.",true,false,false,CL_normal);
 						return false;	
 					}
 				}
 			}
-			printlog("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌÅÛ.",true,false,false,CL_normal);
+			printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´í…œ.",true,false,false,CL_normal);
 			return false;	
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1850,9 +1850,9 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ Àå½Å±¸¸¦ °í¸£½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ê³ ë¥´ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1861,7 +1861,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 }
 bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("µü ÇÑ¹ø¸¸ ÇöÀç ¹«±â¿¡ ´ÜÇ³ ºê·£µå¸¦ ºÎ¿©ÇÒ ¼ö ÀÖ´Ù. ÇÒ·¡?(Y/N)",false,false,false,CL_danger);
+	printlog("ë”± í•œë²ˆë§Œ í˜„ì¬ ë¬´ê¸°ì— ë‹¨í’ ë¸Œëœë“œë¥¼ ë¶€ì—¬í•  ìˆ˜ ìˆë‹¤. í• ë˜?(Y/N)",false,false,false,CL_danger);
 	switch(waitkeyinput())
 	{
 	case 'Y':
@@ -1870,31 +1870,31 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 		break;
 	case 'N':
 	default:
-		printlog(" Ãë¼Ò!",true,false,false,CL_normal);
+		printlog(" ì·¨ì†Œ!",true,false,false,CL_normal);
 		return false;
 	}
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		soundmanager.playSound("buff");
-		printarray(true,false,false,CL_autumn,2,you.equipment[ET_WEAPON]->GetName().c_str(),"¿¡¼­ ¾µ¾µÇÏ°íµµ Á¾¸»ÀûÀÎ ±â¿îÀÌ ´À²¸Áø´Ù.");
+		printarray(true,false,false,CL_autumn,2,you.equipment[ET_WEAPON]->GetName().c_str(),"ì—ì„œ ì“¸ì“¸í•˜ê³ ë„ ì¢…ë§ì ì¸ ê¸°ìš´ì´ ëŠê»´ì§„ë‹¤.");
 		you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
-		printlog("½ÃÁîÇÏ: À¯¿ëÇÏ°Ô ¾²µµ·Ï!",true,false,false,CL_autumn);
+		printlog("ì‹œì¦ˆí•˜: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!",true,false,false,CL_autumn);
 		you.god_value[GT_SHIZUHA][0] = 1;
 		you.Ability(SKL_SIZUHA_3,true,true);
 	}
 	else
 	{
-		printlog("¿©±â¿£ ºÎ¿©ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ì—¬ê¸°ì—” ë¶€ì—¬í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	return true;
 }
 bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("µü ÇÑ¹ø¸¸ ÇöÀç ¹«±â¿¡ ÀúÁÖ ºê·£µå¸¦ ºÎ¿©ÇÒ ¼ö ÀÖ´Ù. ÇÒ·¡?(Y/N)",false,false,false,CL_danger);
+	printlog("ë”± í•œë²ˆë§Œ í˜„ì¬ ë¬´ê¸°ì— ì €ì£¼ ë¸Œëœë“œë¥¼ ë¶€ì—¬í•  ìˆ˜ ìˆë‹¤. í• ë˜?(Y/N)",false,false,false,CL_danger);
 	switch(waitkeyinput())
 	{
 	case 'Y':
@@ -1903,24 +1903,24 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 		break;
 	case 'N':
 	default:
-		printlog(" Ãë¼Ò!",true,false,false,CL_normal);
+		printlog(" ì·¨ì†Œ!",true,false,false,CL_normal);
 		return false;
 	}
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		soundmanager.playSound("curse");
-		printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ÀúÁÖÀÇ ÈûÀ¸·Î °¡µæ Â÷ÀÖ´Ù.");
+		printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ì €ì£¼ì˜ í˜ìœ¼ë¡œ ê°€ë“ ì°¨ìˆë‹¤.");
 		you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
-		printlog("È÷³ª: À¯¿ëÇÏ°Ô ¾²µµ·Ï!",true,false,false,CL_hina);
+		printlog("íˆë‚˜: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!",true,false,false,CL_hina);
 		you.god_value[GT_HINA][0] = 1;
 		you.Ability(SKL_HINA_5,true,true);
 	}
 	else
 	{
-		printlog("¿©±â¿£ ºÎ¿©ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ì—¬ê¸°ì—” ë¶€ì—¬í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -1932,24 +1932,24 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 		return false;
 
 
-	string str_ = "ºê·¹½º";
+	string str_ = "ë¸Œë ˆìŠ¤";
 	attack_type type_ = ATT_THROW_COLD;
 	int graphic_ = 36;
 
 	switch(you.half_youkai[1])
 	{
 	case 0:
-		str_ = "È­¿° ºê·¹½º";
+		str_ = "í™”ì—¼ ë¸Œë ˆìŠ¤";
 		type_ = ATT_THROW_FIRE;
 		graphic_ = 36;
 		break;
 	case 1:
-		str_ = "³Ã±â ºê·¹½º";
+		str_ = "ëƒ‰ê¸° ë¸Œë ˆìŠ¤";
 		type_ = ATT_THROW_COLD;
 		graphic_ = 40;
 		break;
 	case 2:
-		str_ = "Àü°İ ºê·¹½º";
+		str_ = "ì „ê²© ë¸Œë ˆìŠ¤";
 		type_ = ATT_THROW_ELEC;
 		graphic_ = 38;
 		break;
@@ -1982,7 +1982,7 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("´ç½ÅÀº Áö¿ÁÀÇ °íÅëÀ» ºÒ·¶´Ù!",true,false,false,CL_normal);
+	printlog("ë‹¹ì‹ ì€ ì§€ì˜¥ì˜ ê³ í†µì„ ë¶ˆë €ë‹¤!",true,false,false,CL_normal);
 	
 	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
 	{	
@@ -1993,7 +1993,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 			it->AttackedTarget(order);
 			//int att_ = 13+pow/15;
 			//	
-			//attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+			//attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("ëƒ‰ê¸°",false));
 			//it->damage(temp_att, true);			
 		}
 	}
@@ -2003,17 +2003,17 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 {
-	bool sanae_ = !you.char_name.name.compare("»ç³ª¿¡") && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
+	bool sanae_ = !you.char_name.name.compare("ì‚¬ë‚˜ì—") && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
 
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 	for (int i = 0; i < (junko_ ? 2 : 1); i++)
 	{
 		if (i == 1)
-			printlog("¼øÈ£´Â ÀÌ¹Ì ¼øÈ­µÈ ´ç½ÅÀ» ¾ğÁ¦µçÁö Á×ÀÏ ¼ö ÀÖ´Ù. Á¤¸»·Î Á×À»°Å¾ß?(Y/N)", false, false, false, CL_danger);
+			printlog("ìˆœí˜¸ëŠ” ì´ë¯¸ ìˆœí™”ëœ ë‹¹ì‹ ì„ ì–¸ì œë“ ì§€ ì£½ì¼ ìˆ˜ ìˆë‹¤. ì •ë§ë¡œ ì£½ì„ê±°ì•¼?(Y/N)", false, false, false, CL_danger);
 		else if (sanae_)
-			printlog("½ÅÀ» ¹ö¸®¸é ´ç½ÅÀÇ ½Å¾Ó½ÉÀº ÀüºÎ »ç¶óÁú°ÍÀÌ´Ù. ÁøÂ¥·Î?(Y/N)", false, false, false, CL_danger);
+			printlog("ì‹ ì„ ë²„ë¦¬ë©´ ë‹¹ì‹ ì˜ ì‹ ì•™ì‹¬ì€ ì „ë¶€ ì‚¬ë¼ì§ˆê²ƒì´ë‹¤. ì§„ì§œë¡œ?(Y/N)", false, false, false, CL_danger);
 		else
-			printlog("½ÅÀ» ¹ö¸®¸é ´ç½ÅÀº ½ÅÀÇ ³ë¿©¿òÀ» »ì °ÍÀÌ´Ù. ÁøÂ¥·Î?(Y/N)", false, false, false, CL_danger);
+			printlog("ì‹ ì„ ë²„ë¦¬ë©´ ë‹¹ì‹ ì€ ì‹ ì˜ ë…¸ì—¬ì›€ì„ ì‚´ ê²ƒì´ë‹¤. ì§„ì§œë¡œ?(Y/N)", false, false, false, CL_danger);
 		switch (waitkeyinput())
 		{
 		case 'Y':
@@ -2022,7 +2022,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 			break;
 		case 'N':
 		default:
-			printlog(" Ãë¼Ò!", true, false, false, CL_normal);
+			printlog(" ì·¨ì†Œ!", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2030,9 +2030,9 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 
 
 	if (sanae_)
-		printarray(true, false, false, CL_danger, 7, "´ç½ÅÀº ", GetGodString(you.god), GetGodString_is(you.god) ? "À» " : "¸¦ ", "¹ö·È´Ù. ", GetGodString(you.god), GetGodString_is(you.god) ? "Àº " : "´Â ", "´ç½ÅÀÇ µ¶¸³À» ´«¹°À» ¸Ó±İ°í ÀÌÇØÇß´Ù.");
+		printarray(true, false, false, CL_danger, 7, "ë‹¹ì‹ ì€ ", GetGodString(you.god), GetGodString_is(you.god) ? "ì„ " : "ë¥¼ ", "ë²„ë ¸ë‹¤. ", GetGodString(you.god), GetGodString_is(you.god) ? "ì€ " : "ëŠ” ", "ë‹¹ì‹ ì˜ ë…ë¦½ì„ ëˆˆë¬¼ì„ ë¨¸ê¸ˆê³  ì´í•´í–ˆë‹¤.");
 	else
-		printarray(true, false, false, CL_danger, 4, "´ç½ÅÀº ", GetGodString(you.god), GetGodString_is(you.god) ? "À» " : "¸¦ ", you.god == GT_SATORI ? "¹ö·È´Ù." : "¹ö·È´Ù. ´ç½ÅÀÇ ½ÅÀº ºĞ³ëÇß´Ù!");
+		printarray(true, false, false, CL_danger, 4, "ë‹¹ì‹ ì€ ", GetGodString(you.god), GetGodString_is(you.god) ? "ì„ " : "ë¥¼ ", you.god == GT_SATORI ? "ë²„ë ¸ë‹¤." : "ë²„ë ¸ë‹¤. ë‹¹ì‹ ì˜ ì‹ ì€ ë¶„ë…¸í–ˆë‹¤!");
 
 
 	if (!sanae_)
@@ -2041,7 +2041,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	}
 
 	char temp[200];
-	sprintf_s(temp, 200, "%s%s ¹ö·È´Ù.", GetGodString(you.god), GetGodString_is(you.god) ? "À»" : "¸¦");
+	sprintf_s(temp, 200, "%s%s ë²„ë ¸ë‹¤.", GetGodString(you.god), GetGodString_is(you.god) ? "ì„" : "ë¥¼");
 	AddNote(you.turn, CurrentLevelString(), temp, CL_small_danger);
 
 
@@ -2083,7 +2083,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 
 	if (you.god_value[GT_SEIJA][2] == 0) {
-		//Ã³À½ ¼±¹°À» ¹ŞÀ»¶§ ¼±¹°¹ŞÀ» ½ÅÀ» ¹«ÀÛÀ§·Î 4¸í °í¸¥´Ù.
+		//ì²˜ìŒ ì„ ë¬¼ì„ ë°›ì„ë•Œ ì„ ë¬¼ë°›ì„ ì‹ ì„ ë¬´ì‘ìœ„ë¡œ 4ëª… ê³ ë¥¸ë‹¤.
 
 		random_extraction<int> rand_god;
 
@@ -2092,7 +2092,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 				rand_god.push(i);
 		}
 		for (int i = 0; i < 4; i++) {
-			//4°³ ·£´ı ¼±ÅÃ
+			//4ê°œ ëœë¤ ì„ íƒ
 			you.god_value[GT_SEIJA][2] |= 1 << rand_god.pop();
 		}
 	}
@@ -2109,7 +2109,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	while(loop_)
 	{
 		deletelog();
-		printlog("¼¼ÀÌÀÚ: ¾î´À ½ÅÀ¸·ÎºÎÅÍ ÈÉÄ£ ¼±¹°À» ÁÙ±î?",true,false,true,CL_seija);
+		printlog("ì„¸ì´ì: ì–´ëŠ ì‹ ìœ¼ë¡œë¶€í„° í›”ì¹œ ì„ ë¬¼ì„ ì¤„ê¹Œ?",true,false,true,CL_seija);
 
 		int num_ = 0;
 		god_type select_[4];
@@ -2143,14 +2143,14 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			next_ = select_[3];
 			break;
 		default:
-			printlog("¸¶À½ÀÌ º¯ÇÏ±âÀü¿¡ °í¸£´Â°Ô ÁÁÀ»°É?", true, false, false, CL_small_danger);
+			printlog("ë§ˆìŒì´ ë³€í•˜ê¸°ì „ì— ê³ ë¥´ëŠ”ê²Œ ì¢‹ì„ê±¸?", true, false, false, CL_small_danger);
 			return false;
 		}
 		deletelog();
 		printlog(seija_god_string(next_, 0), true, false, true, CL_help);
 		printlog(seija_god_string(next_, 1), true, false, true, CL_small_danger);
 		printlog(seija_god_string(next_, 2), true, false, true, CL_small_danger);
-		printlog("ÀÌ ½ÅÀÇ º¸¹°À» ¿ä±¸ÇÏ°Ú½À´Ï±î? (Y/N)",true,false, true,CL_help);
+		printlog("ì´ ì‹ ì˜ ë³´ë¬¼ì„ ìš”êµ¬í•˜ê² ìŠµë‹ˆê¹Œ? (Y/N)",true,false, true,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -2167,7 +2167,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.god_value[GT_SEIJA][1] & (1 << next_))
 	{
-		printlog("ÀÌ¹Ì ÇÑ¹ø º¸¹°À» ¹Ş¾Ò´ø ½ÅÀÌ´Ù.",true,false,false,CL_normal);
+		printlog("ì´ë¯¸ í•œë²ˆ ë³´ë¬¼ì„ ë°›ì•˜ë˜ ì‹ ì´ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 
@@ -2176,10 +2176,10 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	seija_real_gift(next_);
 	
-	printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+	printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 	char temp[200];
-	sprintf_s(temp,200,"¼¼ÀÌÀÚ¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù. (%s)", GetGodString(next_));
+	sprintf_s(temp,200,"ì„¸ì´ìì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤. (%s)", GetGodString(next_));
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
@@ -2208,7 +2208,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	you.PunishUpDown(GetGodGiftTime(GT_SEIJA)-1,next_);
 	you.gift_count = GetGodGiftTime(GT_SEIJA);
 	
-	//Áßº¹¼±¹°¹æÁö
+	//ì¤‘ë³µì„ ë¬¼ë°©ì§€
 	you.god_value[GT_SEIJA][1] |= 1 << next_;  
 
 
@@ -2219,10 +2219,10 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	if(pietyLevel(you.piety) == 0)
 	{
 
-		printarray(true,false,false,CL_danger,4,"´ç½ÅÀº ", GetGodString(you.god),GetGodString_is(you.god)?"À¸·ÎºÎÅÍ ":"·ÎºÎÅÍ ","¹ö·ÁÁ³´Ù.");
+		printarray(true,false,false,CL_danger,4,"ë‹¹ì‹ ì€ ", GetGodString(you.god),GetGodString_is(you.god)?"ìœ¼ë¡œë¶€í„° ":"ë¡œë¶€í„° ","ë²„ë ¤ì¡Œë‹¤.");
 		
 		char temp[200];
-		sprintf_s(temp,200,"%s%s ¹ö·ÁÁ³´Ù.",GetGodString(you.god),GetGodString_is(you.god)?"À¸·ÎºÎÅÍ":"·ÎºÎÅÍ");
+		sprintf_s(temp,200,"%s%s ë²„ë ¤ì¡Œë‹¤.",GetGodString(you.god),GetGodString_is(you.god)?"ìœ¼ë¡œë¶€í„°":"ë¡œë¶€í„°");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
 	
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
@@ -2233,7 +2233,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 		item_infor t;
 		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
-		printlog("...¼¼ÀÌÀÚ°¡ ¸¶Áö¸· ¼±¹°·Î ¿ä¼ú¸ÁÄ¡¸¦ ÁÖ°í °¬´Ù.", true, false, false, CL_dark_good);
+		printlog("...ì„¸ì´ìê°€ ë§ˆì§€ë§‰ ì„ ë¬¼ë¡œ ìš”ìˆ ë§ì¹˜ë¥¼ ì£¼ê³  ê°”ë‹¤.", true, false, false, CL_dark_good);
 	}
 
 	you.Ability(SKL_SEIJA_GIFT,true,true);
@@ -2249,7 +2249,7 @@ bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 		you.SetXY(target.x,target.y);
 
 		soundmanager.playSound("blink");
-		printarray(true,false,false,CL_normal,4,"´ç½ÅÀº ", hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_and(true),"ÀÚ¸®¸¦ µÚÁı¾ú´Ù.");
+		printarray(true,false,false,CL_normal,4,"ë‹¹ì‹ ì€ ", hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_and(true),"ìë¦¬ë¥¼ ë’¤ì§‘ì—ˆë‹¤.");
 		hit_mon->AttackedTarget(order);
 		return true;
 	}
@@ -2267,7 +2267,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 		{
 			int offset_ = min(4,max(-4,(you.level - it->level)));
 			if(!ok_)
-				printlog("¼¼ÀÌÀÚ´Â ¸ğµÎÀÇ ½Ã¾ß¸¦ µÚÁı¾î¹ö·È´Ù.",true,false,false,CL_normal);
+				printlog("ì„¸ì´ìëŠ” ëª¨ë‘ì˜ ì‹œì•¼ë¥¼ ë’¤ì§‘ì–´ë²„ë ¸ë‹¤.",true,false,false,CL_normal);
 
 			it->SetConfuse(rand_int(20+2*offset_,5),true);
 			it->hp = max(1,it->hp*rand_float(0.3f,0.7f));
@@ -2287,7 +2287,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("½Ã¾ß³»¿¡ µÚÁı¾î¹ö¸± »ó´ë°¡ ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ì‹œì•¼ë‚´ì— ë’¤ì§‘ì–´ë²„ë¦´ ìƒëŒ€ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;	
 	}
 	return false;
@@ -2301,7 +2301,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 		{
 			if(pietyLevel(you.piety) <= i)
 			{
-				printlog("¿äÁ¤À» µ¿·á·Î ´õ ±ÇÀ¯ÇÏ·Á¸é ½Å¾Ó½ÉÀ» ´õ ³ô¿©¾ßµÈ´Ù.",true,false,false,CL_normal);
+				printlog("ìš”ì •ì„ ë™ë£Œë¡œ ë” ê¶Œìœ í•˜ë ¤ë©´ ì‹ ì•™ì‹¬ì„ ë” ë†’ì—¬ì•¼ëœë‹¤.",true,false,false,CL_normal);
 				return false;	
 			}
 
@@ -2312,33 +2312,33 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 
 				if(hit_mon->flag & M_FLAG_SUMMON)
 				{
-					printlog("¼ÒÈ¯µÈ ¸ó½ºÅÍ´Â ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+					printlog("ì†Œí™˜ëœ ëª¬ìŠ¤í„°ëŠ” ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 					return false;	
 				}
 				if(!(hit_mon->flag & M_FLAG_FAIRY))
 				{
-					printlog("¿äÁ¤ÀÌ ¾Æ´Ï¸é ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+					printlog("ìš”ì •ì´ ì•„ë‹ˆë©´ ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 					return false;	
 				}
 				if(hit_mon->id == MON_ZOMBIE_FAIRY)
 				{
-					printlog("ÀÌ ¿äÁ¤Àº Á»ºñ·Î ÃëÁ÷ÁßÀÌ´Ù. Á÷¾÷À» °¡Áø ¿äÁ¤Àº ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+					printlog("ì´ ìš”ì •ì€ ì¢€ë¹„ë¡œ ì·¨ì§ì¤‘ì´ë‹¤. ì§ì—…ì„ ê°€ì§„ ìš”ì •ì€ ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 					return false;
 				}
 				if(hit_mon->id == MON_MAID_FAIRY)
 				{
-					printlog("ÀÌ ¿äÁ¤Àº ¸ŞÀÌµå·Î ÃëÁ÷ÁßÀÌ´Ù. Á÷¾÷À» °¡Áø ¿äÁ¤Àº ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+					printlog("ì´ ìš”ì •ì€ ë©”ì´ë“œë¡œ ì·¨ì§ì¤‘ì´ë‹¤. ì§ì—…ì„ ê°€ì§„ ìš”ì •ì€ ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 					return false;
 				}
 				if (hit_mon->dream)
 				{
-					printlog("ÀÌ ¿äÁ¤Àº ²ŞÀÇ ÁÖ¹ÎÀÌ´Ù. ²ŞÀÇ Á¸Àç´Â ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+					printlog("ì´ ìš”ì •ì€ ê¿ˆì˜ ì£¼ë¯¼ì´ë‹¤. ê¿ˆì˜ ì¡´ì¬ëŠ” ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 					return false;
 				}
 				if(hit_mon->level > you.level)
 				{
 					char temp[100];
-					sprintf_s(temp,100,"ÀÌ ¿äÁ¤À» ±ÇÀ¯ÇÏ·Á¸é %d·¹º§ÀÌ»óÀÌ µÇ¾î¾ßÇÑ´Ù.",hit_mon->level);
+					sprintf_s(temp,100,"ì´ ìš”ì •ì„ ê¶Œìœ í•˜ë ¤ë©´ %dë ˆë²¨ì´ìƒì´ ë˜ì–´ì•¼í•œë‹¤.",hit_mon->level);
 					printlog(temp,true,false,false,CL_normal);
 					return false;
 				}
@@ -2347,7 +2347,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				{
 					if((you.lilly_allys[j].map_id == hit_mon->map_id && you.lilly_allys[j].floor == current_level) || hit_mon->flag & M_FLAG_ALLY)
 					{
-						printlog("ÀÌ ¿äÁ¤Àº ÀÌ¹Ì ´ç½ÅÀÇ µ¿·á´Ù.",true,false,false,CL_normal);
+						printlog("ì´ ìš”ì •ì€ ì´ë¯¸ ë‹¹ì‹ ì˜ ë™ë£Œë‹¤.",true,false,false,CL_normal);
 						return false;
 					}
 				}
@@ -2380,9 +2380,9 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				hit_mon->s_ally = -1;
 				hit_mon->state.SetState(MS_FOLLOW);
 
-				if(!(hit_mon->flag & M_FLAG_UNIQUE)) //ÀÌ¸§ Áö¾îÁÖ±â
+				if(!(hit_mon->flag & M_FLAG_UNIQUE)) //ì´ë¦„ ì§€ì–´ì£¼ê¸°
 				{
-					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"ÀÚ½ÅÀÇ ÀÌ¸§ÀÌ ",fairy_name[you.lilly_allys[i].name].name.c_str(),fairy_name[you.lilly_allys[i].name].name_type?"ÀÌ¶ó°í ":"¶ó°í ","¼Ò°³Çß´Ù.");
+					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"ìì‹ ì˜ ì´ë¦„ì´ ",fairy_name[you.lilly_allys[i].name].name.c_str(),fairy_name[you.lilly_allys[i].name].name_type?"ì´ë¼ê³  ":"ë¼ê³  ","ì†Œê°œí–ˆë‹¤.");
 		
 					hit_mon->name.name = fairy_name[you.lilly_allys[i].name].name;
 					hit_mon->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
@@ -2394,22 +2394,22 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				
 				you.god_value[GT_LILLY][i] = 1;
 				
-				if((hit_mon->flag & M_FLAG_UNIQUE)) //ÀÌ¸§ Áö¾îÁÖ±â
+				if((hit_mon->flag & M_FLAG_UNIQUE)) //ì´ë¦„ ì§€ì–´ì£¼ê¸°
 				{
 					char temp[200];
-					sprintf_s(temp,200,"%s%sµ¿·á°¡ µÇ¾ú´Ù.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
+					sprintf_s(temp,200,"%s%së™ë£Œê°€ ë˜ì—ˆë‹¤.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
 					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
 				}
 				else{					
 					char temp[200];
-					sprintf_s(temp,200,"%s(%s)%sµ¿·á°¡ µÇ¾ú´Ù.",hit_mon->name.name.c_str(),mondata[hit_mon->id].name.name.c_str(),hit_mon->name.name_do(true));
+					sprintf_s(temp,200,"%s(%s)%së™ë£Œê°€ ë˜ì—ˆë‹¤.",hit_mon->name.name.c_str(),mondata[hit_mon->id].name.name.c_str(),hit_mon->name.name_do(true));
 					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
 				}
 
 				you.Ability(SKL_LILLY_1,true,true);
 
 				if(hit_mon->id == MON_SUNNY || hit_mon->id == MON_LUNAR || hit_mon->id == MON_STAR)
-				{//»ï¿ùÁ¤ Æ¯¼ö ´ë»ç!					
+				{//ì‚¼ì›”ì • íŠ¹ìˆ˜ ëŒ€ì‚¬!					
 					for(auto it = env[you.lilly_allys[i].floor].mon_vector.begin(); it != env[you.lilly_allys[i].floor].mon_vector.end();it++)
 					{
 						if(it->isLive() && (it->id == MON_SUNNY || hit_mon->id == MON_LUNAR || hit_mon->id == MON_STAR) &&
@@ -2420,21 +2420,21 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 							{
 							case MON_SUNNY:
 								if(hit_mon->id == MON_LUNAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"Æ÷±â°¡ ºü¸£´Ù°í ·ç³ª!\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"í¬ê¸°ê°€ ë¹ ë¥´ë‹¤ê³  ë£¨ë‚˜!\"");
 								else if(hit_mon->id == MON_STAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"½ºÅ¸?!\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"ìŠ¤íƒ€?!\"");
 								break;
 							case MON_LUNAR:
 								if(hit_mon->id == MON_SUNNY)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"½á´Ï? ³ó´ãÀÌÁö?\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"ì¨ë‹ˆ? ë†ë‹´ì´ì§€?\"");
 								else if(hit_mon->id == MON_STAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"¾î? ½ºÅ¸, Áø½ÉÀÌ¾ß?\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"ì–´? ìŠ¤íƒ€, ì§„ì‹¬ì´ì•¼?\"");
 								break;
 							case MON_STAR:
 								if(hit_mon->id == MON_SUNNY)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"¿ì¸± ¹è½ÅÇÏ´Â°Å¾ß ½á´Ï?\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"ìš°ë¦´ ë°°ì‹ í•˜ëŠ”ê±°ì•¼ ì¨ë‹ˆ?\"");
 								else if(hit_mon->id == MON_LUNAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"¿ÜÃÆ´Ù. \"¼ÓÁö¸¶ ·ç³ª!\"");
+									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì™¸ì³¤ë‹¤. \"ì†ì§€ë§ˆ ë£¨ë‚˜!\"");
 							}
 						}
 					}
@@ -2446,14 +2446,14 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 			}
 			else
 			{
-				printlog("¿©±â¿£ ¸ó½ºÅÍ°¡ ¾ø´Ù.",true,false,false,CL_normal);
+				printlog("ì—¬ê¸°ì—” ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 				return false;	
 			}
 		}
 	}
 
 	
-	printlog("´õ ÀÌ»óÀÇ ±ÇÀ¯´Â ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+	printlog("ë” ì´ìƒì˜ ê¶Œìœ ëŠ” í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 	you.Ability(SKL_LILLY_1,true,true);
 	return false;
 }
@@ -2510,12 +2510,12 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 	if(j>0)
 	{
 		soundmanager.playSound("summon");
-		printarray(true,false,false,CL_normal,1,"¿äÁ¤µéÀ» ÀÚ½ÅÀÇ ÁÖº¯À¸·Î È£ÃâÇß´Ù!");
+		printarray(true,false,false,CL_normal,1,"ìš”ì •ë“¤ì„ ìì‹ ì˜ ì£¼ë³€ìœ¼ë¡œ í˜¸ì¶œí–ˆë‹¤!");
 		return true;
 	}
 	else
 	{
-		printarray(true,false,false,CL_normal,1,"È£ÃâÇÒ ¿äÁ¤ÀÌ ¾ø´Ù.");
+		printarray(true,false,false,CL_normal,1,"í˜¸ì¶œí•  ìš”ì •ì´ ì—†ë‹¤.");
 		return false;
 	}
 
@@ -2536,18 +2536,18 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 				{
 					if(hit_mon->hp >= hit_mon->max_hp)
 					{
-						printarray(true,false,false,CL_normal,1,"ÀÌ ¿äÁ¤Àº ÀÌ¹Ì Ã¼·ÂÀÌ °¡µæ Â÷ÀÖ´Ù.");
+						printarray(true,false,false,CL_normal,1,"ì´ ìš”ì •ì€ ì´ë¯¸ ì²´ë ¥ì´ ê°€ë“ ì°¨ìˆë‹¤.");
 						return false;
 					}
 					if(!hit_mon->isUserAlly())
 					{						
-						printarray(true,false,false,CL_normal,1,"ÀÌ ¿äÁ¤Àº Áö±İ ´ç½Å¿¡°Ô Àû´ëÀûÀÌ´Ù.");
+						printarray(true,false,false,CL_normal,1,"ì´ ìš”ì •ì€ ì§€ê¸ˆ ë‹¹ì‹ ì—ê²Œ ì ëŒ€ì ì´ë‹¤.");
 						return false;
 					}
 					soundmanager.playSound("buff");
 					
 					hit_mon->HpUpDown(max(1,hit_mon->max_hp*rand_int(10,35)/100),DR_NONE);
-					printarray(true,false,false,CL_lilly,3,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"º½ÀÇ ±â¿îÀ» ¹Ş¾Æ Ã¼·ÂÀÌ È¸º¹µÇ¾ú´Ù.");
+					printarray(true,false,false,CL_lilly,3,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"ë´„ì˜ ê¸°ìš´ì„ ë°›ì•„ ì²´ë ¥ì´ íšŒë³µë˜ì—ˆë‹¤.");
 		
 					return true;
 				}
@@ -2556,7 +2556,7 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 	}
 	
 	
-	printarray(true,false,false,CL_normal,1,"µ¿·á ¿äÁ¤À» ´ë»óÀ¸·Î ¼±ÅÃÇØ¾ßÇÑ´Ù.");
+	printarray(true,false,false,CL_normal,1,"ë™ë£Œ ìš”ì •ì„ ëŒ€ìƒìœ¼ë¡œ ì„ íƒí•´ì•¼í•œë‹¤.");
 	return false;
 
 }
@@ -2581,7 +2581,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 				{
 					if(!speak_)
 					{ 
-						printarray(true,false,false,CL_lilly,1,"´ç½ÅÀº ÀÚ½ÅÀÇ ÈûÀ» ¿äÁ¤µé¿¡°Ô ³ª´²ÁÖ¾ú´Ù!");
+						printarray(true,false,false,CL_lilly,1,"ë‹¹ì‹ ì€ ìì‹ ì˜ í˜ì„ ìš”ì •ë“¤ì—ê²Œ ë‚˜ëˆ ì£¼ì—ˆë‹¤!");
 						if(it->CanSpeak())
 							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_FAIRY_WAR),true,false,false,CL_normal);
 					}
@@ -2601,7 +2601,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	}
 
 	
-	printarray(true,false,false,CL_normal,1,"ÁÖº¯¿¡ ÈûÀ» Àü´ŞÇÒ µ¿·á ¿äÁ¤ÀÌ ¾ø´Ù.");
+	printarray(true,false,false,CL_normal,1,"ì£¼ë³€ì— í˜ì„ ì „ë‹¬í•  ë™ë£Œ ìš”ì •ì´ ì—†ë‹¤.");
 	return false;
 }
 
@@ -2610,7 +2610,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("ÀÌ Àå¼Ò¿¡¼± ¹®À» ¸¸µé ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ì¥ì†Œì—ì„  ë¬¸ì„ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	if (order->isplayer())
@@ -2629,27 +2629,27 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 					unit *unit_ = env[current_level].isMonsterPos(temp->x, temp->y, &you);
 					if (unit_)
 					{
-						printlog("»çÀÌ¿¡ Àå¾Ö¹°ÀÌ ÀÖ´Ù.", true, false, false, CL_normal);
+						printlog("ì‚¬ì´ì— ì¥ì• ë¬¼ì´ ìˆë‹¤.", true, false, false, CL_normal);
 						return false;
 					}
 					beam++;
 				}
 
-				printarray(true, false, false, CL_okina, 3, "´ç½ÅÀº ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " Å¸ÀÏÀ» ¹®À¸·Î ¸¸µé¾ú´Ù.");
+				printarray(true, false, false, CL_okina, 3, "ë‹¹ì‹ ì€ ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " íƒ€ì¼ì„ ë¬¸ìœ¼ë¡œ ë§Œë“¤ì—ˆë‹¤.");
 
 				soundmanager.playSound("stone");
 				env[current_level].changeTile(target, DG_CLOSE_DOOR);
 				return true;
 			}
 			else {
-				printlog("»çÀÌ¿¡ Àå¾Ö¹°ÀÌ ÀÖ´Ù.", true, false, false, CL_normal);
+				printlog("ì‚¬ì´ì— ì¥ì• ë¬¼ì´ ìˆë‹¤.", true, false, false, CL_normal);
 				return false;
 			}
 
 		}
 		else {
-			printlog("º®À» ´ë»óÀ¸·Î ½á¾ß ÇÑ´Ù.", true, false, false, CL_normal);
-			return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ë²½ì„ ëŒ€ìƒìœ¼ë¡œ ì¨ì•¼ í•œë‹¤.", true, false, false, CL_normal);
+			return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 
 		}
 	}
@@ -2661,7 +2661,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 	{
 		unit *unit_ = env[current_level].isMonsterPos(target.x, target.y, &you);
 		if (unit_ && unit_->GetId() == MON_CLOSE_DOOR) {
-			printlog("ÀÌ¹Ì Àá°ÜÀÖ´Â ¹®ÀÌ´Ù.", false, false, false, CL_normal);
+			printlog("ì´ë¯¸ ì ê²¨ìˆëŠ” ë¬¸ì´ë‹¤.", false, false, false, CL_normal);
 			return false;
 		}
 
@@ -2671,44 +2671,44 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 
 				rand_rect_iterator rit(unit_->position, 1, 1, true);
 				while (!rit.end()) {
-					unit* unit_hit_ = NULL; //ºÎµúÈù Àû
-					bool hit_ = false; //ºÎµúÇû´Ù!
+					unit* unit_hit_ = NULL; //ë¶€ë”ªíŒ ì 
+					bool hit_ = false; //ë¶€ë”ªí˜”ë‹¤!
 
 					hit_ = !env[current_level].isMove(coord_def(rit->x, rit->y), unit_->isFly(), unit_->isSwim(), false);
 					unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);
 
 					if (!hit_ && !unit_hit_) {
-						//¿òÁ÷ÀÏ¼öµµÀÖÀ»¶§
-						printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "¹®¿¡ ¹ĞÃÄÁ® Æ¨°Ü³ª°¬´Ù!");
+						//ì›€ì§ì¼ìˆ˜ë„ìˆì„ë•Œ
+						printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "ë¬¸ì— ë°€ì³ì ¸ íŠ•ê²¨ë‚˜ê°”ë‹¤!");
 						unit_->SetXY(rit->x, rit->y);
-						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor("¹®", true));
+						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor("ë¬¸", true));
 						unit_->damage(temp_att, true);
 						unit_->SetConfuse(5+randA(5));
-						unit_->PlusTimeDelay(-unit_->GetWalkDelay()); //1ÅÏ Çàµ¿À» ½®´Ù.
+						unit_->PlusTimeDelay(-unit_->GetWalkDelay()); //1í„´ í–‰ë™ì„ ì‰°ë‹¤.
 						break;
 					}
 
 					rit++;
 					if (rit.end()) {
-						printarray(true, false, false, CL_normal, 4, "¹ĞÃÄ³¾ ÀÚ¸®°¡ ¾ø¾î¼­ ¹® À§¿¡ ÀÖ´Â ", unit_->GetName()->name.c_str(), unit_->GetName()->name_to(true), "¹ĞÃÄ³¾ ¼ö ¾ø´Ù.");
+						printarray(true, false, false, CL_normal, 4, "ë°€ì³ë‚¼ ìë¦¬ê°€ ì—†ì–´ì„œ ë¬¸ ìœ„ì— ìˆëŠ” ", unit_->GetName()->name.c_str(), unit_->GetName()->name_to(true), "ë°€ì³ë‚¼ ìˆ˜ ì—†ë‹¤.");
 						return false;
 					}
 				}
 
 			}
 			env[current_level].changeTile(target, env[current_level].base_floor, true);
-			//ÀûÀÌ ¼­ÀÖÀ¸¸é °­Á¦·Î ºñÅ°µµ·Ï ÇÑ´Ù.
+			//ì ì´ ì„œìˆìœ¼ë©´ ê°•ì œë¡œ ë¹„í‚¤ë„ë¡ í•œë‹¤.
 			
 			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
 			{
 				soundmanager.playSound("block");
 				mon_->LevelUpdown(you.level, 6);
-				printarray(true, false, false, CL_okina, 1, "´ç½ÅÀº ¹®À» °­Á¦·Î ´Ü´ÜÇÏ°Ô Àá°¬´Ù!");
+				printarray(true, false, false, CL_okina, 1, "ë‹¹ì‹ ì€ ë¬¸ì„ ê°•ì œë¡œ ë‹¨ë‹¨í•˜ê²Œ ì ê°”ë‹¤!");
 				return true;
 			}
 		}
 		else {
-			printlog("¹®À» ´ë»óÀ¸·Î »ç¿ëÇØ¾ß ÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("ë¬¸ì„ ëŒ€ìƒìœ¼ë¡œ ì‚¬ìš©í•´ì•¼ í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2717,7 +2717,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("ÀÌ Àå¼Ò¿¡¼± ¹®À» ¸¸µé ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ì¥ì†Œì—ì„  ë¬¸ì„ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	if (order->isplayer())
@@ -2725,8 +2725,8 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 		monster* this_unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y, &you);
 		if (!this_unit_ || this_unit_->isUserAlly())
 		{
-			printlog("Àû ¸ó½ºÅÍ¸¦ ´ë»óÀ¸·Î ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
-			return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ì  ëª¬ìŠ¤í„°ë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
+			return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 		}
 
 		beam_iterator beam(order->position, order->position);
@@ -2739,7 +2739,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 
 			unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
 			if (!unit_) {
-				printlog("ÇØ´ç Àû¿¡°Ô ¿Ã¹Ù¸¥ °æ·Î¸¦ ¼³Á¤ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_danger);
+				printlog("í•´ë‹¹ ì ì—ê²Œ ì˜¬ë°”ë¥¸ ê²½ë¡œë¥¼ ì„¤ì •í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_danger);
 				return false;
 			}
 
@@ -2747,7 +2747,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 
 			unit *unit2_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
 			if (unit2_) {
-				printlog("ÀûÀÇ µî µÚ¿¡ ¹®À» ¼³Ä¡ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+				printlog("ì ì˜ ë“± ë’¤ì— ë¬¸ì„ ì„¤ì¹˜í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 				return false;
 			}
 			if (!(env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
@@ -2756,7 +2756,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				!env[current_level].dgtile[beam->x][beam->y].isBreakable()
 				)
 			{
-				printlog("ÀûÀÇ µî µÚ¿¡ ¹®À» ¼³Ä¡ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+				printlog("ì ì˜ ë“± ë’¤ì— ë¬¸ì„ ì„¤ì¹˜í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 				return false;
 			}
 
@@ -2764,10 +2764,10 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 			env[current_level].changeTile((*beam), DG_OPEN_DOOR);
 			you.SetXY(beam->x, beam->y);
 			unit_->LostTarget();
-			printlog("ÀûÀÇ µî µÚÀÇ ¹®À¸·Î ºüÁ®³ª¿Ô´Ù!", true, false, false, CL_okina);
+			printlog("ì ì˜ ë“± ë’¤ì˜ ë¬¸ìœ¼ë¡œ ë¹ ì ¸ë‚˜ì™”ë‹¤!", true, false, false, CL_okina);
 			return true;
 		}
-		printlog("»çÀÌ¿¡ Àå¾Ö¹°ÀÌ ÀÖ´Ù.", true, false, false, CL_normal);
+		printlog("ì‚¬ì´ì— ì¥ì• ë¬¼ì´ ìˆë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	return false;
@@ -2775,17 +2775,17 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("ÀÌ °÷¿¡¼­´Â ¹é´í¼­¸¦ ¼ÒÈ¯ÇÒ ÇÊ¿ä°¡ ¾ø´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ê³³ì—ì„œëŠ” ë°±ëŒ„ì„œë¥¼ ì†Œí™˜í•  í•„ìš”ê°€ ì—†ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	int num_ = 1;
 	int id_ = MON_MAI2;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("¾î´À ¹é´í¼­¸¦ È£ÃâÇÏ½Ã°Ú½À´Ï±î?", true, false, false, CL_help);
-		printlog("a - Å×ÀÌ·¹ÀÌ´Ù ¸¶ÀÌ: µÚ¿¡¼­ ÃãÃß´Â °ÍÀ¸·Î Ã¼·ÂÀ» È¸º¹½ÃÄÑÁØ´Ù.", true, false, false, CL_okina);
-		printlog("b -   ´Ï½Ã´Ù »çÅä³ë: µÚ¿¡¼­ ÃãÃß´Â °ÍÀ¸·Î ¿µ·ÂÀ» È¸º¹½ÃÄÑÁØ´Ù.", true, false, false, CL_okina);
-		printlog("c -   ¹é´í¼­Áî ¼ÒÈ¯: µÎ¸íÀ» ¸ğµÎ ¼ÒÈ¯ÇÑ´Ù. (½Å¾Ó½É¼Ò¸ğ 2¹è)", true, false, false, CL_okina);
+		printlog("ì–´ëŠ ë°±ëŒ„ì„œë¥¼ í˜¸ì¶œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?", true, false, false, CL_help);
+		printlog("a - í…Œì´ë ˆì´ë‹¤ ë§ˆì´: ë’¤ì—ì„œ ì¶¤ì¶”ëŠ” ê²ƒìœ¼ë¡œ ì²´ë ¥ì„ íšŒë³µì‹œì¼œì¤€ë‹¤.", true, false, false, CL_okina);
+		printlog("b -   ë‹ˆì‹œë‹¤ ì‚¬í† ë…¸: ë’¤ì—ì„œ ì¶¤ì¶”ëŠ” ê²ƒìœ¼ë¡œ ì˜ë ¥ì„ íšŒë³µì‹œì¼œì¤€ë‹¤.", true, false, false, CL_okina);
+		printlog("c -   ë°±ëŒ„ì„œì¦ˆ ì†Œí™˜: ë‘ëª…ì„ ëª¨ë‘ ì†Œí™˜í•œë‹¤. (ì‹ ì•™ì‹¬ì†Œëª¨ 2ë°°)", true, false, false, CL_okina);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -2806,7 +2806,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2820,7 +2820,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 			if (mon_)
 				return_ = true;
 			mon_->LevelUpdown(you.level, 6);
-			printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "´ç½Å¿¡°Ô ¼ÒÈ¯µÇ¾ú´Ù. ");
+			printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "ë‹¹ì‹ ì—ê²Œ ì†Œí™˜ë˜ì—ˆë‹¤. ");
 			if (!speak_ && mon_->isLive() && (*mon_).isUserAlly() && env[current_level].isInSight(coord_def(mon_->position.x, mon_->position.y)) && mon_->CanSpeak()) {
 					speak_ = mon_;
 			}
@@ -2837,10 +2837,10 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("summon");
 		if (speak_->GetId() == MON_MAI2) {
-			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "¿ÜÃÆ´Ù. \"±×·³ ¹Ù·Î ÀÀ¿øÀ» ½ÃÀÛÇÏ°Ú¾î!\"");
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "ì™¸ì³¤ë‹¤. \"ê·¸ëŸ¼ ë°”ë¡œ ì‘ì›ì„ ì‹œì‘í•˜ê² ì–´!\"");
 		}
 		else if (speak_->GetId() == MON_SATONO) {
-			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "¿ÜÃÆ´Ù. \"µÚ¿¡¼­ ÀÀ¿øÇÒ°Ô!\"");
+			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "ì™¸ì³¤ë‹¤. \"ë’¤ì—ì„œ ì‘ì›í• ê²Œ!\"");
 		}
 	}
 
@@ -2849,7 +2849,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("ÀÌ °÷Àº ÀÌ¹Ì µŞ ¹®ÀÇ ¼¼°è´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ê³³ì€ ì´ë¯¸ ë’· ë¬¸ì˜ ì„¸ê³„ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 
@@ -2859,14 +2859,14 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 		env[current_level].changeTile(order->position, DG_OPEN_DOOR);
 	}
 	else {
-		printlog("ÀÌ °÷¿¡´Â ¹®À» ¿­¸¸ÇÑ °ø°£ÀÌ ¾ø´Ù!", true, false, false, CL_normal);
+		printlog("ì´ ê³³ì—ëŠ” ë¬¸ì„ ì—´ë§Œí•œ ê³µê°„ì´ ì—†ë‹¤!", true, false, false, CL_normal);
 		return false;
 	}
 
-	//log¿¡ ¿ÀÅ°³ª·¹º§·Î µµÂøÇÔÀ» ÀúÀå
+	//logì— ì˜¤í‚¤ë‚˜ë ˆë²¨ë¡œ ë„ì°©í•¨ì„ ì €ì¥
 	deque<monster*> dq;
 	soundmanager.playSound("blink");
-	printlog("´ç½ÅÀº µî µÚÀÇ ¹®À» ¿­°í µµ¸ÁÃÆ´Ù!", true, false, false, CL_okina);
+	printlog("ë‹¹ì‹ ì€ ë“± ë’¤ì˜ ë¬¸ì„ ì—´ê³  ë„ë§ì³¤ë‹¤!", true, false, false, CL_okina);
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
 		if (it->isLive() && distan_coord(it->position, you.position) <= 2 && it->CanChase())
@@ -2880,12 +2880,12 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	you.god_value[GT_OKINA][1] = you.position.x;
 	you.god_value[GT_OKINA][2] = you.position.y;
 	env[OKINA_LEVEL].EnterMap(0, dq);
-	printarray(true, false, false, CL_normal, 2, "ÀÌ °÷Àº ¹® µÚÀÇ ¼¼°è´Ù. ", randA(2)?randA(1)?
-		"Ç« ½¬´Ù °¡µµ·Ï! ":"È¯¿µÇÏ³×! ":"¿©±â´Â ¾ÈÀüÇØº¸ÀÎ´Ù. ");
+	printarray(true, false, false, CL_normal, 2, "ì´ ê³³ì€ ë¬¸ ë’¤ì˜ ì„¸ê³„ë‹¤. ", randA(2)?randA(1)?
+		"í‘¹ ì‰¬ë‹¤ ê°€ë„ë¡! ":"í™˜ì˜í•˜ë„¤! ":"ì—¬ê¸°ëŠ” ì•ˆì „í•´ë³´ì¸ë‹¤. ");
 
 
 	char temp2[200];
-	sprintf_s(temp2, 200, "%s·Î µµ¸ÁÃÆ´Ù.", CurrentLevelString(current_level));
+	sprintf_s(temp2, 200, "%së¡œ ë„ë§ì³¤ë‹¤.", CurrentLevelString(current_level));
 	AddNote(you.turn, CurrentLevelString(current_level), temp2, CL_normal);
 	//you.resetLOS(false);
 	return true;
@@ -2894,7 +2894,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->position == target)
 	{
-		printlog("ÀÚ»ìÇÒ°Å¾ß?", true, false, false, CL_small_danger);
+		printlog("ìì‚´í• ê±°ì•¼?", true, false, false, CL_small_danger);
 		return false;
 	}
 	beam_iterator beam(order->position, order->position);
@@ -2903,7 +2903,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 	int hit_ = 10 + power / 15;
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("Åº¸·", true));
+		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("íƒ„ë§‰", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -2946,7 +2946,7 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 		}
 		if (!least_one)
 		{
-			printlog("½Ã¾ß¿¡ »ìÀÇ¸¦ Ç¥ÃâÇÒ ÀûÀÌ ÀÖ¾î¾ß ÇÑ´Ù. ", true, false, false, CL_normal);
+			printlog("ì‹œì•¼ì— ì‚´ì˜ë¥¼ í‘œì¶œí•  ì ì´ ìˆì–´ì•¼ í•œë‹¤. ", true, false, false, CL_normal);
 			return false;
 		}
 		soundmanager.playSound("buff");
@@ -2962,36 +2962,36 @@ const char* getJunkoString(int kind_)
 	switch (kind_)
 	{
 	case 1:
-		return "½ºÅ³¼øÈ­: ¼±ÅÃÇÑ Àû¼º0 ÀÌ»óÀÇ ½ºÅ³ÀÇ ·¹º§ÀÌ Ä³¸¯ÅÍ ·¹º§°ú Ç×»ó °°¾ÆÁø´Ù.";
+		return "ìŠ¤í‚¬ìˆœí™”: ì„ íƒí•œ ì ì„±0 ì´ìƒì˜ ìŠ¤í‚¬ì˜ ë ˆë²¨ì´ ìºë¦­í„° ë ˆë²¨ê³¼ í•­ìƒ ê°™ì•„ì§„ë‹¤.";
 	case 2:
-		return "ÀúÇ×¼øÈ­: ¼±ÅÃÇÑ ¼Ó¼º¿¡ ´ëÇØ ¸é¿ªÀÌ µÈ´Ù.";
+		return "ì €í•­ìˆœí™”: ì„ íƒí•œ ì†ì„±ì— ëŒ€í•´ ë©´ì—­ì´ ëœë‹¤.";
 	case 3:
-		return "¸¶·Â¼øÈ­: Ã¼·Â°ú ¿µ·ÂÀÌ µ¿ÀÏ½Ã µÇ¸ç È¸º¹·ÂÀÌ ÇÕÃÄÁø´Ù.";
+		return "ë§ˆë ¥ìˆœí™”: ì²´ë ¥ê³¼ ì˜ë ¥ì´ ë™ì¼ì‹œ ë˜ë©° íšŒë³µë ¥ì´ í•©ì³ì§„ë‹¤.";
 	case 4:
-		return "ÆÄ¿ö¼øÈ­: Ç×»ó Ç®ÆÄ¿ö°¡ µÇ¸ç ¶³¾îÁöÁö ¾Ê´Â´Ù.";
+		return "íŒŒì›Œìˆœí™”: í•­ìƒ í’€íŒŒì›Œê°€ ë˜ë©° ë–¨ì–´ì§€ì§€ ì•ŠëŠ”ë‹¤.";
 	case 5:
-		return "»ı¸í¼øÈ­: Ãß°¡ ¸ñ¼ûÀ» 2°³ ¾ò´Â´Ù.";
+		return "ìƒëª…ìˆœí™”: ì¶”ê°€ ëª©ìˆ¨ì„ 2ê°œ ì–»ëŠ”ë‹¤.";
 	case 6:
-		return "Àåºñ¼øÈ­: ¼±ÅÃÇÑ ÀåºñÀÇ °­È­Ä¡°¡ ÃÖ´ë °­È­Ä¡+5°¡ µÈ´Ù. ¾ÆÆ¼ÆåÆ®µµ °¡´É.";
+		return "ì¥ë¹„ìˆœí™”: ì„ íƒí•œ ì¥ë¹„ì˜ ê°•í™”ì¹˜ê°€ ìµœëŒ€ ê°•í™”ì¹˜+5ê°€ ëœë‹¤. ì•„í‹°í™íŠ¸ë„ ê°€ëŠ¥.";
 	case 7:
-		return "½Ã½ºÅÛ¼øÈ­: ºÎÀûÀÇ ÃæÀü¼Óµµ°¡ 3¹è°¡ µÇ°í ¼øÈ­½Ã¿¡µµ ½ºÆçÄ«µå »ç¿ëÀÌ °¡´É.";
+		return "ì‹œìŠ¤í…œìˆœí™”: ë¶€ì ì˜ ì¶©ì „ì†ë„ê°€ 3ë°°ê°€ ë˜ê³  ìˆœí™”ì‹œì—ë„ ìŠ¤í ì¹´ë“œ ì‚¬ìš©ì´ ê°€ëŠ¥.";
 	}
 
-	return "¹ö±×¼øÈ­: ¹ö±×ÀÌ¹Ç·Î ÀÌ°É ¼±ÅÃÇÏ¸é ¾ÈµÈ´Ù.";
+	return "ë²„ê·¸ìˆœí™”: ë²„ê·¸ì´ë¯€ë¡œ ì´ê±¸ ì„ íƒí•˜ë©´ ì•ˆëœë‹¤.";
 }
 bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 {
 
 	int kind_ = 0;
 	bool loop_ = true;
-	printlog("¼øÈ­ÀÇ Ãàº¹Àº ±Ç´ÉÀ» »ç¿ëÇÒ ¼ö ¾ø°ÔµÇ¸ç ¿µ±¸ÀûÀÎ ¼øÈ­ ÆĞ³ÎÆ¼¸¦ ¾ò°ÔµÈ´Ù.", true, false, false, CL_danger);
-	printlog("¶ÇÇÑ ÇÑ¹ø °í¸¥ ¼øÈ­´Â µÇµ¹¸± ¼ö ¾ø´Ù! ", false, false, false, CL_danger);
+	printlog("ìˆœí™”ì˜ ì¶•ë³µì€ ê¶ŒëŠ¥ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ê²Œë˜ë©° ì˜êµ¬ì ì¸ ìˆœí™” íŒ¨ë„í‹°ë¥¼ ì–»ê²Œëœë‹¤.", true, false, false, CL_danger);
+	printlog("ë˜í•œ í•œë²ˆ ê³ ë¥¸ ìˆœí™”ëŠ” ë˜ëŒë¦´ ìˆ˜ ì—†ë‹¤! ", false, false, false, CL_danger);
 	while (loop_) {
-		printlog("¾î¶² ´É·ÂÀ» ¼øÈ­ÇÏ°Ú½À´Ï±î?", true, false, false, CL_help);
+		printlog("ì–´ë–¤ ëŠ¥ë ¥ì„ ìˆœí™”í•˜ê² ìŠµë‹ˆê¹Œ?", true, false, false, CL_help);
 		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
 		printarray(true, false, false, CL_junko, 2, "b - ", getJunkoString(you.god_value[GT_JUNKO][1]));
 		printarray(true, false, false, CL_junko, 2, "c - ", getJunkoString(you.god_value[GT_JUNKO][2]));
-		printarray(true, false, false, CL_junko, 2, "d - ", "½Å¾Ó½ÉÀ» ³»¸®°í »õ·Î¿î ¼øÈ­¸¦ À§ÇØ ÀÌ¹ø ¼±ÅÃÀ» ¹Ì·é´Ù.");
+		printarray(true, false, false, CL_junko, 2, "d - ", "ì‹ ì•™ì‹¬ì„ ë‚´ë¦¬ê³  ìƒˆë¡œìš´ ìˆœí™”ë¥¼ ìœ„í•´ ì´ë²ˆ ì„ íƒì„ ë¯¸ë£¬ë‹¤.");
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3012,19 +3012,19 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'd':
 		case 'D':	
 		{
-			printlog("ÀÌ¹ø ¼±ÅÃÀ» ¹Ì·ç¸é ´ÙÀ½ ¼±ÅÃ±îÁö ½Ã°£ÀÌ °É¸³´Ï´Ù. Á¤¸»·Î ¹Ì·ç°Ú½À´Ï±î? (Y/N)", true, false, false, CL_help);
+			printlog("ì´ë²ˆ ì„ íƒì„ ë¯¸ë£¨ë©´ ë‹¤ìŒ ì„ íƒê¹Œì§€ ì‹œê°„ì´ ê±¸ë¦½ë‹ˆë‹¤. ì •ë§ë¡œ ë¯¸ë£¨ê² ìŠµë‹ˆê¹Œ? (Y/N)", true, false, false, CL_help);
 			switch (waitkeyinput())
 			{
 			case 'y':
 			case 'Y':
 				you.PietyUpDown(-(you.piety-140));
 				you.god_value[GT_JUNKO][0] = 0;
-				printlog("¼øÈ­ ¼±ÅÃÀ» ¹Ì·ğ´Ù. ´ÙÀ½ ¼øÈ­ ¼±ÅÃ±îÁö ´Ù½Ã ½Å¾ÓÀ» ¸ğ¾Æ¾ßÇÑ´Ù.", true, false, false, CL_normal);
+				printlog("ìˆœí™” ì„ íƒì„ ë¯¸ë¤˜ë‹¤. ë‹¤ìŒ ìˆœí™” ì„ íƒê¹Œì§€ ë‹¤ì‹œ ì‹ ì•™ì„ ëª¨ì•„ì•¼í•œë‹¤.", true, false, false, CL_normal);
 				return true;
 			case 'n':
 			case 'N':
 			default:
-				printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+				printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 				return false;
 			}
 		}
@@ -3032,22 +3032,22 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
 	if (kind_ == 0)
 	{
-		printlog("¾Ë ¼ö ¾ø´Â ¼±ÅÃ", true, false, false, CL_normal);
+		printlog("ì•Œ ìˆ˜ ì—†ëŠ” ì„ íƒ", true, false, false, CL_normal);
 		return false;
 	}
 
 	switch (kind_)
 	{
-	case 1: //½ºÅ³¼øÈ­
+	case 1: //ìŠ¤í‚¬ìˆœí™”
 		while (true)
 		{
-			view_skill("¾î¶² ½ºÅ³À» ¼øÈ­ÇÒ°ÅÁö?");
+			view_skill("ì–´ë–¤ ìŠ¤í‚¬ì„ ìˆœí™”í• ê±°ì§€?");
 			int move_ = 1;
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
@@ -3058,13 +3058,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					if (you.skill[num].aptit < 0)
 					{
 						changedisplay(DT_GAME);
-						printlog("Àû¼ºÀÌ 0ÀÌ»óÀÎ ½ºÅ³¸¸ ¼±ÅÃÇÒ ¼ö ÀÖ´Ù!", true, false, false, CL_warning);
+						printlog("ì ì„±ì´ 0ì´ìƒì¸ ìŠ¤í‚¬ë§Œ ì„ íƒí•  ìˆ˜ ìˆë‹¤!", true, false, false, CL_warning);
 						MoreWait();
 					}
 					else
 					{
 						char temp[100];
-						sprintf_s(temp, 100, "Á¤¸» %s ½ºÅ³À» ¼øÈ­ÇÒ°Å¾ß? (ÇöÀç ·¹º§ %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
+						sprintf_s(temp, 100, "ì •ë§ %s ìŠ¤í‚¬ì„ ìˆœí™”í• ê±°ì•¼? (í˜„ì¬ ë ˆë²¨ %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
 
 						printlog(temp, true, false, true, CL_danger);
 						changedisplay(DT_GAME);
@@ -3073,9 +3073,9 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 						if (key__ == 'y' || key__ == 'Y')
 						{
 							you.SetPureSkill(num);
-							sprintf_s(temp, 100, "¼øÈ£´Â ´ç½ÅÀÇ %s ½ºÅ³À» ¼øÈ­ÇÏ¿´´Ù! ", skill_string((skill_type)num));
+							sprintf_s(temp, 100, "ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ %s ìŠ¤í‚¬ì„ ìˆœí™”í•˜ì˜€ë‹¤! ", skill_string((skill_type)num));
 							printlog(temp, true, false, false, CL_junko);
-							sprintf_s(temp, 100, "¼øÈ£·ÎºÎÅÍ ½ºÅ³¼øÈ­(%s) Ãàº¹", skill_string((skill_type)num));
+							sprintf_s(temp, 100, "ìˆœí˜¸ë¡œë¶€í„° ìŠ¤í‚¬ìˆœí™”(%s) ì¶•ë³µ", skill_string((skill_type)num));
 							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
 							break;
 						}
@@ -3083,14 +3083,14 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				}
 				else
 				{
-					printlog("ÀÌ ½ºÅ³Àº ¼øÈ­ÇÒ ¼ö ¾ø¾î", true, false, false, CL_normal);
+					printlog("ì´ ìŠ¤í‚¬ì€ ìˆœí™”í•  ìˆ˜ ì—†ì–´", true, false, false, CL_normal);
 					changedisplay(DT_GAME);
 					return false;
 				}
 			}
 			else
 			{
-				printlog("Ãë¼ÒÇÏ¿´´Ù. ½ÅÁßÇÏ°Ô °í¹ÎÇÏµµ·Ï", true, false, false, CL_normal);
+				printlog("ì·¨ì†Œí•˜ì˜€ë‹¤. ì‹ ì¤‘í•˜ê²Œ ê³ ë¯¼í•˜ë„ë¡", true, false, false, CL_normal);
 				changedisplay(DT_GAME);
 				return false;
 			}
@@ -3098,8 +3098,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	case 2:
 	{
-		printlog("¾î¶² ÀúÇ×À» ¼øÈ­ÇÒ°ÅÁö?", true, false, false, CL_junko);
-		printlog("a-È­¿° b-³Ã±â c-Àü±â", true, false, false, CL_junko);
+		printlog("ì–´ë–¤ ì €í•­ì„ ìˆœí™”í• ê±°ì§€?", true, false, false, CL_junko);
+		printlog("a-í™”ì—¼ b-ëƒ‰ê¸° c-ì „ê¸°", true, false, false, CL_junko);
 
 		int key_ = waitkeyinput(true);
 		switch (key_)
@@ -3107,23 +3107,23 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'a':
 			you.DeleteProperty(TPT_FIRE_RESIST);
 			you.SetProperty(TPT_FIRE_IMUNE, 200);
-			printlog("¼øÈ£´Â ´ç½ÅÀÇ È­¿°¿¡ ´ëÇÑ ÀúÇ×À» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ÀúÇ×¼øÈ­(È­¿°) Ãàº¹", CL_junko);
+			printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ í™”ì—¼ì— ëŒ€í•œ ì €í•­ì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ì €í•­ìˆœí™”(í™”ì—¼) ì¶•ë³µ", CL_junko);
 			break;
 		case 'b':
 			you.DeleteProperty(TPT_COLD_RESIST);
 			you.SetProperty(TPT_COLD_IMUNE, 200);
-			printlog("¼øÈ£´Â ´ç½ÅÀÇ ³Ã±â¿¡ ´ëÇÑ ÀúÇ×À» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ÀúÇ×¼øÈ­(³Ã±â) Ãàº¹", CL_junko);
+			printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ëƒ‰ê¸°ì— ëŒ€í•œ ì €í•­ì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ì €í•­ìˆœí™”(ëƒ‰ê¸°) ì¶•ë³µ", CL_junko);
 			break;
 		case 'c':
 			you.DeleteProperty(TPT_ELEC_RESIST);
 			you.SetProperty(TPT_ELEC_IMUNE, 200);
-			printlog("¼øÈ£´Â ´ç½ÅÀÇ Àü±â¿¡ ´ëÇÑ ÀúÇ×À» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ÀúÇ×¼øÈ­(Àü±â) Ãàº¹", CL_junko);
+			printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ì „ê¸°ì— ëŒ€í•œ ì €í•­ì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ì €í•­ìˆœí™”(ì „ê¸°) ì¶•ë³µ", CL_junko);
 			break;
 		default:
-			printlog("Ãë¼ÒÇÏ¿´´Ù. ½ÅÁßÇÏ°Ô °í¹ÎÇÏµµ·Ï", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤. ì‹ ì¤‘í•˜ê²Œ ê³ ë¯¼í•˜ë„ë¡", true, false, false, CL_normal);
 			changedisplay(DT_GAME);
 			return false;
 		}
@@ -3131,24 +3131,24 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	case 3:
 		you.SetProperty(TPT_PURE_MP, 1);
-		printlog("¼øÈ£´Â ´ç½ÅÀÇ ¸¶·ÂÀ» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ¸¶·Â¼øÈ­ Ãàº¹", CL_junko);
+		printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ë§ˆë ¥ì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ë§ˆë ¥ìˆœí™” ì¶•ë³µ", CL_junko);
 		break;
 	case 4:
 		you.SetProperty(TPT_PURE_POWER, 1);
 		iden_list.autopickup[IDEN_CHECK_ETC_START] = false;
-		printlog("¼øÈ£´Â ´ç½ÅÀÇ ÆÄ¿ö¸¦ ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ÆÄ¿ö¼øÈ­ Ãàº¹", CL_junko);
+		printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ íŒŒì›Œë¥¼ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° íŒŒì›Œìˆœí™” ì¶•ë³µ", CL_junko);
 		break;
 	case 5:
 		you.SetProperty(TPT_PURE_LIFE, 2);
-		printlog("¼øÈ£´Â ´ç½ÅÀÇ »ı¸í·ÂÀ» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ »ı¸í¼øÈ­ Ãàº¹", CL_junko);
+		printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ìƒëª…ë ¥ì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ìƒëª…ìˆœí™” ì¶•ë³µ", CL_junko);
 		break;
 	case 6:
 		while (1)
 		{
-			view_item(IVT_PURE_ITEM, "¹«½¼ ¾ÆÀÌÅÛÀ» ¼øÈ­ÇÒ°Å¾ß?");
+			view_item(IVT_PURE_ITEM, "ë¬´ìŠ¨ ì•„ì´í…œì„ ìˆœí™”í• ê±°ì•¼?");
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
@@ -3158,16 +3158,16 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					if ((item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST) || (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST))
 					{
 						char temp[100];
-						sprintf_s(temp, 100, "Á¤¸» %s ¾ÆÀÌÅÛÀ» ¼øÈ­ÇÒ°Å¾ß? (y/n)", item_->GetName().c_str());
+						sprintf_s(temp, 100, "ì •ë§ %s ì•„ì´í…œì„ ìˆœí™”í• ê±°ì•¼? (y/n)", item_->GetName().c_str());
 						printlog(temp, true, false, true, CL_small_danger);
 						changedisplay(DT_GAME);
 
 						int key__ = waitkeyinput(true);
 						if (key__ == 'y' || key__ == 'Y')
 						{
-							sprintf_s(temp, 100, "¼øÈ£´Â ´ç½ÅÀÇ %s ¾ÆÀÌÅÛÀ» ¼øÈ­ÇÏ¿´´Ù! ", item_->GetName().c_str());
+							sprintf_s(temp, 100, "ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ %s ì•„ì´í…œì„ ìˆœí™”í•˜ì˜€ë‹¤! ", item_->GetName().c_str());
 							printlog(temp, true, false, false, CL_junko);
-							sprintf_s(temp, 100, "¼øÈ£·ÎºÎÅÍ ¾ÆÀÌÅÛ¼øÈ­(%s) Ãàº¹", item_->GetName().c_str());
+							sprintf_s(temp, 100, "ìˆœí˜¸ë¡œë¶€í„° ì•„ì´í…œìˆœí™”(%s) ì¶•ë³µ", item_->GetName().c_str());
 							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
 
 							if (item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST)
@@ -3203,20 +3203,20 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					}
 					else
 					{
-						printlog("ÀÌ ¾ÆÀÌÅÛÀº ¼øÈ­ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+						printlog("ì´ ì•„ì´í…œì€ ìˆœí™”í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 						changedisplay(DT_GAME);
 						return false;
 					}
 
 				}
 			}
-			else if (key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+			else if (key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 			{
-				changemove(32);  //À§
+				changemove(32);  //ìœ„
 			}
 			else if (key_ == VK_UP)
 			{
-				changemove(-32); //¾Æ·¡
+				changemove(-32); //ì•„ë˜
 			}
 			else if (key_ == VK_PRIOR)
 			{
@@ -3225,14 +3225,14 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			else if (key_ == VK_NEXT)
 			{
 				changemove(option_mg.getHeight());
-			}						//-----ÀÌµ¿Å°³¡-------
+			}						//-----ì´ë™í‚¤ë-------
 			else if (key_ == '*')
 			{
-				view_item(IVT_SELECT, "¹«½¼ ¾ÆÀÌÅÛÀ» ¼øÈ­ÇÒ°Å¾ß?");
+				view_item(IVT_SELECT, "ë¬´ìŠ¨ ì•„ì´í…œì„ ìˆœí™”í• ê±°ì•¼?");
 			}
 			else if (key_ == VK_ESCAPE)
 			{
-				printlog("Ãë¼ÒÇÏ¿´´Ù. ½ÅÁßÇÏ°Ô °í¹ÎÇÏµµ·Ï", true, false, false, CL_normal);
+				printlog("ì·¨ì†Œí•˜ì˜€ë‹¤. ì‹ ì¤‘í•˜ê²Œ ê³ ë¯¼í•˜ë„ë¡", true, false, false, CL_normal);
 				changedisplay(DT_GAME);
 				return false;
 			}
@@ -3241,8 +3241,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	case 7:
 		you.SetProperty(TPT_PURE_SYSTEM, 1);
-		printlog("¼øÈ£´Â ´ç½ÅÀÇ ½Ã½ºÅÛÀ» ¼øÈ­ÇÏ¿´´Ù!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "¼øÈ£·ÎºÎÅÍ ½Ã½ºÅÛ¼øÈ­ Ãàº¹", CL_junko);
+		printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ì‹œìŠ¤í…œì„ ìˆœí™”í•˜ì˜€ë‹¤!", true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), "ìˆœí˜¸ë¡œë¶€í„° ì‹œìŠ¤í…œìˆœí™” ì¶•ë³µ", CL_junko);
 		break;
 	}
 
@@ -3250,7 +3250,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 
 	soundmanager.playSound("levelup");
-	printlog("¼øÈ£: ³ªÀÇ Ãàº¹À» ¹Şµµ·Ï ÇØ!", true, false, false, CL_junko);
+	printlog("ìˆœí˜¸: ë‚˜ì˜ ì¶•ë³µì„ ë°›ë„ë¡ í•´!", true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_1, true, true);
 	you.Ability(SKL_JUNKO_2, true, true);
@@ -3271,11 +3271,11 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 	int god_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("¾î´À ½ÅÀ» ºùÀÇÇÒ°ÅÁö?", true, false, false, CL_help);
-		printlog("a - ¿ä¸®°¡¹Ì ÁÒ¿Â: ºùÀÇ½Ã Áï½Ã ÆÄ¿ö¸¦ °¡µæ Ã¤¿öÁØ´Ù. ´Ù¸¸ ÇØÁ¦½Ã¿£ ³¶ºñµÈ´Ù.", true, false, false, CL_joon);
-		printlog("                   ¶ÇÇÑ ¼Ò¸ğÇ°À» »ç¿ëÇÏ¸é ¹«Á¶°Ç 2~3°³¾¿ ³¶ºñÇÑ´Ù.", true, false, false, CL_joon);
-		printlog("b - ¿ä¸®°¡¹Ì ½Ã¿Â: ºùÀÇ½Ã Áï½Ã Ã¼·Â°ú ¿µ·ÂÀ» È¸º¹ÇÑ´Ù. ¹ö¸° ¼Ò¸ğÇ°ÀÌ »ç¶óÁü.", true, false, false, CL_sion);
-		printlog("                   ¶¥¿¡ ¶³¾îÁø ¼Ò¸ğÇ° °í°¥¼ÓµµÁõ°¡. ÆÄ¿öÆĞ³ÎÆ¼¸¦ ¹ŞÁö¾Ê´Â´Ù.", true, false, false, CL_sion);
+		printlog("ì–´ëŠ ì‹ ì„ ë¹™ì˜í• ê±°ì§€?", true, false, false, CL_help);
+		printlog("a - ìš”ë¦¬ê°€ë¯¸ ì£ ì˜¨: ë¹™ì˜ì‹œ ì¦‰ì‹œ íŒŒì›Œë¥¼ ê°€ë“ ì±„ì›Œì¤€ë‹¤. ë‹¤ë§Œ í•´ì œì‹œì—” ë‚­ë¹„ëœë‹¤.", true, false, false, CL_joon);
+		printlog("                   ë˜í•œ ì†Œëª¨í’ˆì„ ì‚¬ìš©í•˜ë©´ ë¬´ì¡°ê±´ 2~3ê°œì”© ë‚­ë¹„í•œë‹¤.", true, false, false, CL_joon);
+		printlog("b - ìš”ë¦¬ê°€ë¯¸ ì‹œì˜¨: ë¹™ì˜ì‹œ ì¦‰ì‹œ ì²´ë ¥ê³¼ ì˜ë ¥ì„ íšŒë³µí•œë‹¤. ë²„ë¦° ì†Œëª¨í’ˆì´ ì‚¬ë¼ì§.", true, false, false, CL_sion);
+		printlog("                   ë•…ì— ë–¨ì–´ì§„ ì†Œëª¨í’ˆ ê³ ê°ˆì†ë„ì¦ê°€. íŒŒì›ŒíŒ¨ë„í‹°ë¥¼ ë°›ì§€ì•ŠëŠ”ë‹¤.", true, false, false, CL_sion);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3291,7 +3291,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3303,16 +3303,16 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 
 		switch (randA(3)) {
 		case 0:
-			printlog("ÁÒ¿Â: ¼ÛµÎ¸®Ã¤ »©¾Ñ¾Æ¶ó!", true, false, false, CL_joon);
+			printlog("ì£ ì˜¨: ì†¡ë‘ë¦¬ì±„ ë¹¼ì•—ì•„ë¼!", true, false, false, CL_joon);
 			break;
 		case 1:
-			printlog("ÁÒ¿Â: °ª ³ª°¡´Â°Ç ¸ğÁ¶¸® ÈÉÃÄ!", true, false, false, CL_joon);
+			printlog("ì£ ì˜¨: ê°’ ë‚˜ê°€ëŠ”ê±´ ëª¨ì¡°ë¦¬ í›”ì³!", true, false, false, CL_joon);
 			break;
 		case 2:
-			printlog("ÁÒ¿Â: ÈûÀ» ÁÙÅ×´Ï ¸ğµÎ ³ª¿¡°Ô ¹ÙÄ¡´Â°Å¾ß!", true, false, false, CL_joon);
+			printlog("ì£ ì˜¨: í˜ì„ ì¤„í…Œë‹ˆ ëª¨ë‘ ë‚˜ì—ê²Œ ë°”ì¹˜ëŠ”ê±°ì•¼!", true, false, false, CL_joon);
 			break;
 		case 3:
-			printlog("ÁÒ¿Â: ¼ö±İ ½Ã°£ÀÌ¾ß!", true, false, false, CL_joon);
+			printlog("ì£ ì˜¨: ìˆ˜ê¸ˆ ì‹œê°„ì´ì•¼!", true, false, false, CL_joon);
 			break;
 		}
 
@@ -3337,16 +3337,16 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		map_effect = 0;
 		switch (randA(3)) {
 		case 0:
-			printlog("½Ã¿Â: ÀÚ, ÀÌÁ¦ º£Ç®¾îÁÖÁö ¾ÊÀ»·¡?", true, false, false, CL_sion);
+			printlog("ì‹œì˜¨: ì, ì´ì œ ë² í’€ì–´ì£¼ì§€ ì•Šì„ë˜?", true, false, false, CL_sion);
 			break;
 		case 1:
-			printlog("½Ã¿Â: °¡³­Àº ´õ ÀÌ»ó ½È¾î!", true, false, false, CL_sion);
+			printlog("ì‹œì˜¨: ê°€ë‚œì€ ë” ì´ìƒ ì‹«ì–´!", true, false, false, CL_sion);
 			break;
 		case 2:
-			printlog("½Ã¿Â: ÃÖÈäÃÖ¾ÇÀº ³ª È¥ÀÚ·Îµµ ÃæºĞÇØ!", true, false, false, CL_sion);
+			printlog("ì‹œì˜¨: ìµœí‰ìµœì•…ì€ ë‚˜ í˜¼ìë¡œë„ ì¶©ë¶„í•´!", true, false, false, CL_sion);
 			break;
 		case 3:
-			printlog("½Ã¿Â: ¸ğµÎ°¡ ÆòµîÇÏ°Ô ºÒÇàÇÑ ½Ã´ë°¡ ¿Ã°Å¾ß", true, false, false, CL_sion);
+			printlog("ì‹œì˜¨: ëª¨ë‘ê°€ í‰ë“±í•˜ê²Œ ë¶ˆí–‰í•œ ì‹œëŒ€ê°€ ì˜¬ê±°ì•¼", true, false, false, CL_sion);
 			break;
 		}
 		soundmanager.playSound("buff");
@@ -3389,14 +3389,14 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 				map_effect = 2;
 				Sleep(500);
 				map_effect = 0;
-				printlog("È­·ÁÇÑ ºÒºû°ú ÆøÁ×ÀÌ ÁÖº¯ÀÇ Àûµé¿¡°Ô ¸ô¾ÆÄ£´Ù! ", true, false, false, CL_joon);
+				printlog("í™”ë ¤í•œ ë¶ˆë¹›ê³¼ í­ì£½ì´ ì£¼ë³€ì˜ ì ë“¤ì—ê²Œ ëª°ì•„ì¹œë‹¤! ", true, false, false, CL_joon);
 			} 
 
 			it->SetConfuse(rand_int(5,10)+randA(power/20), true);
 			int damage_ = (20 + (you.level * 2))*(power+400.0f)/400;
 
 
-			attack_infor temp_att(randC(5, damage_/5), damage_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("ÆøÁ×", true));
+			attack_infor temp_att(randC(5, damage_/5), damage_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("í­ì£½", true));
 			it->damage(temp_att, true);
 			enter_++;
 			if (enter_ == 1)
@@ -3414,7 +3414,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 	}
 	else
 	{
-		printlog("½Ã¾ß³»¿¡ ÀûÀÌ ¾ø´Ù.", true, false, false, CL_normal);
+		printlog("ì‹œì•¼ë‚´ì— ì ì´ ì—†ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	return false;
@@ -3425,7 +3425,7 @@ bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target
 	map_effect = 3;
 	Sleep(500);
 	map_effect = 0;
-	printlog("°Å´ëÇÑ ºÒ¿îÀÇ ¼Ò¿ëµ¹ÀÌ°¡ ÈÖ¸ô¾ÆÄ£´Ù! ", true, false, false, CL_sion);
+	printlog("ê±°ëŒ€í•œ ë¶ˆìš´ì˜ ì†Œìš©ëŒì´ê°€ íœ˜ëª°ì•„ì¹œë‹¤! ", true, false, false, CL_sion);
 	int enter_ = 0;
 	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -3453,7 +3453,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor("½Ã¿Â", true));
+		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor("ì‹œì˜¨", true));
 
 		soundmanager.playSound("wind");
 		coord_def c_ = throwtanmac(44, beam, temp_infor, NULL);
@@ -3463,7 +3463,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 			monster* mon_ = (monster*)hit_mon;
 			if (mon_->flag & M_FLAG_INANIMATE)
 			{
-				printarray(true, false, false, CL_sion, 3, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), "¹«»ı¹°ÀÌ±â¿¡ ºùÀÇÇÒ ¼ö ¾ø´Ù.");
+				printarray(true, false, false, CL_sion, 3, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), "ë¬´ìƒë¬¼ì´ê¸°ì— ë¹™ì˜í•  ìˆ˜ ì—†ë‹¤.");
 				return true;
 			}
 			soundmanager.playSound("smite");
@@ -3494,12 +3494,12 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 
 			if (hit_mon->isYourShight())
 			{
-				printarray(true, false, false, CL_sion, 2, hit_mon->GetName()->name.c_str(), "¿¡ ºó°ï½ÅÀÌ ºùÀÇÇÏ¿´´Ù!");
+				printarray(true, false, false, CL_sion, 2, hit_mon->GetName()->name.c_str(), "ì— ë¹ˆê³¤ì‹ ì´ ë¹™ì˜í•˜ì˜€ë‹¤!");
 			}
 			hit_mon->AttackedTarget(order);
 		}
 		if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-			//ºùÀÇµÈ ½ÅÀÌ ½Ã¿ÂÀÏ¶§´Â ÁÒ¿ÂÀ¸·Î ¹Ù²ï´Ù.
+			//ë¹™ì˜ëœ ì‹ ì´ ì‹œì˜¨ì¼ë•ŒëŠ” ì£ ì˜¨ìœ¼ë¡œ ë°”ë€ë‹¤.
 			you.Ability(SKL_JOON_AND_SION_3, true, true);
 			you.Ability(SKL_JOON_AND_SION_2, true, false);
 			you.god_value[GT_JOON_AND_SION][0] = 1;
@@ -3511,7 +3511,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 }
 bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def target)
 {
-	printlog("´ç½ÅÀÇ ºùÀÇ°¡ ³¡³µ´Ù. ", false, false, false, CL_joon_and_sion);
+	printlog("ë‹¹ì‹ ì˜ ë¹™ì˜ê°€ ëë‚¬ë‹¤. ", false, false, false, CL_joon_and_sion);
 	if (you.god_value[GT_JOON_AND_SION][0] == 1) {
 		if (you.power >= 300)
 			you.PowUpDown(-(you.power - 300));
@@ -3530,10 +3530,10 @@ bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def targ
 bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].popular == -1) {
-		printlog("ÀÌ °÷Àº ÀÎ±â¸¦ ¸ğÀ¸±â¿£ ³Ê¹« ¿À·¡µÈ °÷ÀÌ´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ê³³ì€ ì¸ê¸°ë¥¼ ëª¨ìœ¼ê¸°ì—” ë„ˆë¬´ ì˜¤ë˜ëœ ê³³ì´ë‹¤.", true, false, false, CL_normal);
 		return false;
 	} else if (env[current_level].popular == 0) {
-		printlog("ÀÌ °÷Àº ÀÌ¹Ì ¿å¸ÁÀ» ¸ğÀº ÃşÀÌ´Ù.", true, false, false, CL_normal);
+		printlog("ì´ ê³³ì€ ì´ë¯¸ ìš•ë§ì„ ëª¨ì€ ì¸µì´ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 
@@ -3554,7 +3554,7 @@ bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 	if (ok_ > 0)
 	{
 		char temp[256];
-		sprintf_s(temp, 256, "½Ã¾ß¾È¿¡ ÀÖ´Â %d¸íÀÇ ¿å¸ÁÀ» ÀĞ¾îµé¿´´Ù!", ok_);
+		sprintf_s(temp, 256, "ì‹œì•¼ì•ˆì— ìˆëŠ” %dëª…ì˜ ìš•ë§ì„ ì½ì–´ë“¤ì˜€ë‹¤!", ok_);
 		you.PietyUpDown(piety_);
 		printlog(temp, true, false, false, CL_miko);
 		env[current_level].popular = 0;
@@ -3563,7 +3563,7 @@ bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("½Ã¾ß³»¿¡ ¿å¸ÁÀ» ÀĞ¾î³¾ ÀûÀÌ ¾ø´Ù.", true, false, false, CL_normal);
+		printlog("ì‹œì•¼ë‚´ì— ìš•ë§ì„ ì½ì–´ë‚¼ ì ì´ ì—†ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	return false;
@@ -3584,12 +3584,12 @@ bool skill_miko_3(int power, bool short_, unit* order, coord_def target)
 	bool already_ = you.SetBuff(BUFFSTAT_HALO, BUFF_MIKO_HALO, 1, -1);
 	if (already_)
 	{
-		printlog("ÀÌ¹Ì Á¸ÀçÇÏ´Â ÀúÇ×ÀÌ´Ù.", true, false, false, CL_normal);
+		printlog("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì €í•­ì´ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	else {
 		soundmanager.playSound("buff");
-		printlog("¹ÌÄÚ: À¯¿ëÇÏ°Ô ¾²µµ·Ï!", true, false, false, CL_miko);
+		printlog("ë¯¸ì½”: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!", true, false, false, CL_miko);
 		return true;
 	}
 	return true;
@@ -3599,9 +3599,9 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	int resist_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("¹ÌÄÚ: ¾î´À ÀúÇ×À» ¾òÀ»°ÅÁö? ¹öÇÁ´Â ÃşÀ» ¿Å±â±âÀü±îÁö À¯ÁöµÈ´Ü´Ù.", true, false, false, CL_miko);
-		printlog("a - È­¿°ÀúÇ×    b - ³Ã±âÀúÇ×    c - Àü±âÀúÇ×", true, false, false, CL_miko);
-		printlog("d - µ¶ÀúÇ×      e - È¥¶õÀúÇ×", true, false, false, CL_miko);
+		printlog("ë¯¸ì½”: ì–´ëŠ ì €í•­ì„ ì–»ì„ê±°ì§€? ë²„í”„ëŠ” ì¸µì„ ì˜®ê¸°ê¸°ì „ê¹Œì§€ ìœ ì§€ëœë‹¨ë‹¤.", true, false, false, CL_miko);
+		printlog("a - í™”ì—¼ì €í•­    b - ëƒ‰ê¸°ì €í•­    c - ì „ê¸°ì €í•­", true, false, false, CL_miko);
+		printlog("d - ë…ì €í•­      e - í˜¼ë€ì €í•­", true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3632,7 +3632,7 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3657,12 +3657,12 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	if (already_)
 	{
-		printlog("ÀÌ¹Ì Á¸ÀçÇÏ´Â ÀúÇ×ÀÌ´Ù.", true, false, false, CL_normal);
+		printlog("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ì €í•­ì´ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	else {
 		soundmanager.playSound("buff");
-		printlog("¹ÌÄÚ: À¯¿ëÇÏ°Ô ¾²µµ·Ï!", true, false, false, CL_miko);
+		printlog("ë¯¸ì½”: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!", true, false, false, CL_miko);
 		return true;
 
 	}
@@ -3670,15 +3670,15 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 {
 	if(you.isSetMikoBuff(0)) {
-		printlog("ÀÌ¹Ì ÀÌ Ãş¿¡¼± ¸ÁÅä¸¦ ¼±ÅÃÇß´Ù.", true, false, false, CL_normal);
+		printlog("ì´ë¯¸ ì´ ì¸µì—ì„  ë§í† ë¥¼ ì„ íƒí–ˆë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	int bonus_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("¹ÌÄÚ: ¾î´À ¸ÁÅä¸¦ °í¸¦°Ç°¡? ¹öÇÁ´Â ÃşÀ» ¿Å±â±âÀü±îÁö À¯ÁöµÈ´Ü´Ù.", true, false, false, CL_miko);
-		printlog("a - »¡°£¸ÁÅä : ÀüÅõ·Âº¸³Ê½º +6°ú Ã¼·ÂÀç»ı·Â", true, false, false, CL_miko);
-		printlog("b - ÆÄ¶û¸ÁÅä : ½ºÆçÆÄ¿ö 1.5¹è º¸³Ê½º¿Í ¿µ·ÂÀç»ı·Â", true, false, false, CL_miko);
+		printlog("ë¯¸ì½”: ì–´ëŠ ë§í† ë¥¼ ê³ ë¥¼ê±´ê°€? ë²„í”„ëŠ” ì¸µì„ ì˜®ê¸°ê¸°ì „ê¹Œì§€ ìœ ì§€ëœë‹¨ë‹¤.", true, false, false, CL_miko);
+		printlog("a - ë¹¨ê°„ë§í†  : ì „íˆ¬ë ¥ë³´ë„ˆìŠ¤ +6ê³¼ ì²´ë ¥ì¬ìƒë ¥", true, false, false, CL_miko);
+		printlog("b - íŒŒë‘ë§í†  : ìŠ¤í íŒŒì›Œ 1.5ë°° ë³´ë„ˆìŠ¤ì™€ ì˜ë ¥ì¬ìƒë ¥", true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3694,7 +3694,7 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3712,22 +3712,22 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		break;
 	}
 	soundmanager.playSound("buff");
-	printlog("¹ÌÄÚ: À¯¿ëÇÏ°Ô ¾²µµ·Ï!", true, false, false, CL_miko);
+	printlog("ë¯¸ì½”: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!", true, false, false, CL_miko);
 	return true;
 }
 bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 {
 	if (you.isSetMikoBuff(1)) {
-		printlog("ÀÌ¹Ì ÀÎ±â Æø¹ß »óÅÂ´Ù.", true, false, false, CL_normal);
+		printlog("ì´ë¯¸ ì¸ê¸° í­ë°œ ìƒíƒœë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 	int bonus_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("ÀÎ±â Æø¹ß! ¾î´À º¸³Ê½º¸¦ ¾òÀ»°Ç°¡?", true, false, false, CL_miko);
-		printlog("a - ÃşÀ» ¿Å±â±âÀü±îÁö Ã¼·Â 2¹è", true, false, false, CL_miko);
-		printlog("b - ÃşÀ» ¿Å±â±âÀü±îÁö ¿µ·Â È¸º¹ ¼Óµµ ÆøÁõ", true, false, false, CL_miko);
-		printlog("c - ÃşÀ» ¿Å±â±âÀü±îÁö ¿µ±¸ÀûÀÎ °¡¼Ó", true, false, false, CL_miko);
+		printlog("ì¸ê¸° í­ë°œ! ì–´ëŠ ë³´ë„ˆìŠ¤ë¥¼ ì–»ì„ê±´ê°€?", true, false, false, CL_miko);
+		printlog("a - ì¸µì„ ì˜®ê¸°ê¸°ì „ê¹Œì§€ ì²´ë ¥ 2ë°°", true, false, false, CL_miko);
+		printlog("b - ì¸µì„ ì˜®ê¸°ê¸°ì „ê¹Œì§€ ì˜ë ¥ íšŒë³µ ì†ë„ í­ì¦", true, false, false, CL_miko);
+		printlog("c - ì¸µì„ ì˜®ê¸°ê¸°ì „ê¹Œì§€ ì˜êµ¬ì ì¸ ê°€ì†", true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3748,7 +3748,7 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, false, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3765,7 +3765,7 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		break;
 	}
 	soundmanager.playSound("buff");
-	printlog("¹ÌÄÚ: À¯¿ëÇÏ°Ô ¾²µµ·Ï!", true, false, false, CL_miko);
+	printlog("ë¯¸ì½”: ìœ ìš©í•˜ê²Œ ì“°ë„ë¡!", true, false, false, CL_miko);
 	return true;
 }
 
@@ -3785,18 +3785,18 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 	int power=min(SkillCap(skill),SkillPow(skill));
 	if(SkillFlagCheck(skill, S_FLAG_SPEAK) && env[current_level].isSilence(you.position))
 	{
-		printlog("´ç½ÅÀº ¼Ò¸®¸¦ ³¾ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì†Œë¦¬ë¥¼ ë‚¼ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 		return 0;		
 	}
 	
 	if(SkillFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
 	{
-		printlog("ÀÌ ±â¼úÀ» ¾²±â¿£ ÇÇ·Î°¡ ½×¿´´Ù.",true,false,false,CL_normal);	
+		printlog("ì´ ê¸°ìˆ ì„ ì“°ê¸°ì—” í”¼ë¡œê°€ ìŒ“ì˜€ë‹¤.",true,false,false,CL_normal);	
 		return false;
 	}
 	if(randA_1(100) > SkillDiffer(skill))
 	{
-		printlog("´ç½ÅÀº ½ºÅ³ »ç¿ë¿¡ ½ÇÆĞÇß´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ìŠ¤í‚¬ ì‚¬ìš©ì— ì‹¤íŒ¨í–ˆë‹¤.",true,false,false,CL_normal);
 		return 2;
 	}	
 	if(!SkillPlusCost(skill,true))
@@ -4014,12 +4014,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 			
 			if(you.GetPunish(GT_MIMA))
 			{
-				printlog("¹Ì¸¶´Â ´ç½ÅÀÌ ¾²´Â ¸¶¹ıÀÇ À§·ÂÀ» ¹İ°¨½ÃÄ×´Ù!",true,false,false,CL_green);
+				printlog("ë¯¸ë§ˆëŠ” ë‹¹ì‹ ì´ ì“°ëŠ” ë§ˆë²•ì˜ ìœ„ë ¥ì„ ë°˜ê°ì‹œì¼°ë‹¤!",true,false,false,CL_green);
 			}
 			if(wiz_list.wizard_mode == 1)
 			{
 				char temp[50];
-				sprintf_s(temp,50,"½ºÆçÆÄ¿ö %d / %d",power,SkillCap(skill));
+				sprintf_s(temp,50,"ìŠ¤í íŒŒì›Œ %d / %d",power,SkillCap(skill));
 				printlog(temp,true,false,false,CL_help);
 			}
 

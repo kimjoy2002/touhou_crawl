@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: atifact.cpp
+// íŒŒì¼ì´ë¦„: atifact.cpp
 //
-// ³»¿ë: ¾ÆÆ¼ÆåÆ® ±¸Çö
+// ë‚´ìš©: ì•„í‹°í™íŠ¸ êµ¬í˜„
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,28 +91,28 @@ const char* GetAtifactString(ring_type ring_, int value_)
 	switch(ring_)
 	{
 	case RGT_STR:
-		sprintf_s(temp,32,"Èû%s%d",value_<0?"":"+",value_);
+		sprintf_s(temp,32,"í˜%s%d",value_<0?"":"+",value_);
 		break;
 	case RGT_DEX:
-		sprintf_s(temp,32,"¹ÎÃ¸%s%d",value_<0?"":"+",value_);
+		sprintf_s(temp,32,"ë¯¼ì²©%s%d",value_<0?"":"+",value_);
 		break;
 	case RGT_INT:
-		sprintf_s(temp,32,"Áö´É%s%d",value_<0?"":"+",value_);
+		sprintf_s(temp,32,"ì§€ëŠ¥%s%d",value_<0?"":"+",value_);
 		break;
 	case RGT_HUNGRY:
-		sprintf_s(temp,32,"Çã±â");
+		sprintf_s(temp,32,"í—ˆê¸°");
 		break;
 	case RGT_FULL:
-		sprintf_s(temp,32,"Æ÷¸¸°¨");
+		sprintf_s(temp,32,"í¬ë§Œê°");
 		break;
 	case RGT_TELEPORT:
-		sprintf_s(temp,32,"*ÀüÀÌ");
+		sprintf_s(temp,32,"*ì „ì´");
 		break;
 	case RGT_POISON_RESIS:
-		sprintf_s(temp,32,"µ¶ÀúÇ×%s",value_>0?"+":"-");
+		sprintf_s(temp,32,"ë…ì €í•­%s",value_>0?"+":"-");
 		break;
 	case RGT_FIRE_RESIS:
-		sprintf_s(temp,32,"È­¿°ÀúÇ×%s",(value_==3?"+++":
+		sprintf_s(temp,32,"í™”ì—¼ì €í•­%s",(value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -121,7 +121,7 @@ const char* GetAtifactString(ring_type ring_, int value_)
 			)))))));
 		break;
 	case RGT_ICE_RESIS:
-		sprintf_s(temp,32,"³Ã±âÀúÇ×%s",(value_==3?"+++":
+		sprintf_s(temp,32,"ëƒ‰ê¸°ì €í•­%s",(value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -130,22 +130,22 @@ const char* GetAtifactString(ring_type ring_, int value_)
 			)))))));
 		break;
 	case RGT_SEE_INVISIBLE:
-		sprintf_s(temp,32,"Åõ¸í°¨Áö");
+		sprintf_s(temp,32,"íˆ¬ëª…ê°ì§€");
 		break;
 	//case RGT_GRAZE:
-	//	sprintf_s(temp,32,"+±×·¹ÀÌÁî");
+	//	sprintf_s(temp,32,"+ê·¸ë ˆì´ì¦ˆ");
 	//	break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,32,"+ºñÇà");
+		sprintf_s(temp,32,"+ë¹„í–‰");
 		break;
 	case RGT_INVISIBLE:
-		sprintf_s(temp,32,"+Åõ¸í");
+		sprintf_s(temp,32,"+íˆ¬ëª…");
 		break;
 	case RGT_MANA:
-		sprintf_s(temp,32,"¿µ·Â");
+		sprintf_s(temp,32,"ì˜ë ¥");
 		break;
 	case RGT_MAGACIAN:
-		sprintf_s(temp,32,"¸¶¹ı»ç");
+		sprintf_s(temp,32,"ë§ˆë²•ì‚¬");
 		break;
 	case RGT_AC:
 		sprintf_s(temp,32,"AC%s%d",value_<0?"":"+",value_);
@@ -154,13 +154,13 @@ const char* GetAtifactString(ring_type ring_, int value_)
 		sprintf_s(temp,32,"EV%s%d",value_<0?"":"+",value_);
 		break;
 	case RGT_CONFUSE_RESIS:
-		sprintf_s(temp,32,"È¥¶õÀúÇ×");
+		sprintf_s(temp,32,"í˜¼ë€ì €í•­");
 		break;
 	case RGT_ELEC_RESIS:
-		sprintf_s(temp,32,"Àü±âÀúÇ×");
+		sprintf_s(temp,32,"ì „ê¸°ì €í•­");
 		break;
 	case RGT_MAGIC_RESIS:
-		sprintf_s(temp,32,"¸¶¹ıÀúÇ×");
+		sprintf_s(temp,32,"ë§ˆë²•ì €í•­");
 		break;
 	case RGT_SKILL_UP:
 		sprintf_s(temp, 32, "%s+%d", skill_string((skill_type)(value_ %100)), value_/100);
@@ -175,28 +175,28 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 	switch(ring_)
 	{
 	case RGT_STR:
-		sprintf_s(temp,128,"ÈûÀÌ ¼öÄ¡¸¸Å­ Áõ°¨ÇÑ´Ù.(%s%d)",value_<0?"":"+",value_);
+		sprintf_s(temp,128,"í˜ì´ ìˆ˜ì¹˜ë§Œí¼ ì¦ê°í•œë‹¤.(%s%d)",value_<0?"":"+",value_);
 		break;
 	case RGT_DEX:
-		sprintf_s(temp,128,"¹ÎÃ¸ÀÌ ¼öÄ¡¸¸Å­ Áõ°¨ÇÑ´Ù.(%s%d)",value_<0?"":"+",value_);
+		sprintf_s(temp,128,"ë¯¼ì²©ì´ ìˆ˜ì¹˜ë§Œí¼ ì¦ê°í•œë‹¤.(%s%d)",value_<0?"":"+",value_);
 		break;
 	case RGT_INT:
-		sprintf_s(temp,128,"Áö´ÉÀÌ ¼öÄ¡¸¸Å­ Áõ°¨ÇÑ´Ù.(%s%d)",value_<0?"":"+",value_);
+		sprintf_s(temp,128,"ì§€ëŠ¥ì´ ìˆ˜ì¹˜ë§Œí¼ ì¦ê°í•œë‹¤.(%s%d)",value_<0?"":"+",value_);
 		break;
 	case RGT_HUNGRY:
-		sprintf_s(temp,128,"ÆÄ¿ö°¡ ºü¸¥ ¼Óµµ·Î ¼Ò¸ğµÈ´Ù.");
+		sprintf_s(temp,128,"íŒŒì›Œê°€ ë¹ ë¥¸ ì†ë„ë¡œ ì†Œëª¨ëœë‹¤.");
 		break;
 	case RGT_FULL:
-		sprintf_s(temp,128,"ÆÄ¿ö°¡ ÃµÃµÈ÷ ¼Ò¸ğµÈ´Ù.");
+		sprintf_s(temp,128,"íŒŒì›Œê°€ ì²œì²œíˆ ì†Œëª¨ëœë‹¤.");
 		break;
 	case RGT_TELEPORT:
-		sprintf_s(temp,128,"¹«ÀÛÀ§·Î °ø°£ÀÌµ¿À» ÇÑ´Ù.");
+		sprintf_s(temp,128,"ë¬´ì‘ìœ„ë¡œ ê³µê°„ì´ë™ì„ í•œë‹¤.");
 		break;
 	case RGT_POISON_RESIS:
-		sprintf_s(temp,128,"%s",value_>0?"µ¶¿¡ ¸é¿ªÀÌ »ı±ä´Ù.":"µ¶¿¡ Ãë¾àÇØÁø´Ù.");
+		sprintf_s(temp,128,"%s",value_>0?"ë…ì— ë©´ì—­ì´ ìƒê¸´ë‹¤.":"ë…ì— ì·¨ì•½í•´ì§„ë‹¤.");
 		break;
 	case RGT_FIRE_RESIS:
-		sprintf_s(temp,128,"È­¿°ÀúÇ×ÀÌ Áõ°¨ÇÑ´Ù.(%s)",(value_==3?"+++":
+		sprintf_s(temp,128,"í™”ì—¼ì €í•­ì´ ì¦ê°í•œë‹¤.(%s)",(value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -205,7 +205,7 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 			)))))));
 		break;
 	case RGT_ICE_RESIS:
-		sprintf_s(temp,128,"³Ã±âÀúÇ×ÀÌ Áõ°¨ÇÑ´Ù.(%s)",(value_==3?"+++":
+		sprintf_s(temp,128,"ëƒ‰ê¸°ì €í•­ì´ ì¦ê°í•œë‹¤.(%s)",(value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -214,40 +214,40 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 			)))))));
 		break;
 	case RGT_SEE_INVISIBLE:
-		sprintf_s(temp,128,"Åõ¸íÀ» °¨ÁöÇÒ ¼ö ÀÖ´Ù.");
+		sprintf_s(temp,128,"íˆ¬ëª…ì„ ê°ì§€í•  ìˆ˜ ìˆë‹¤.");
 		break;
 	//case RGT_GRAZE:
-	//	sprintf_s(temp,128,"±×·¹ÀÌÁî¸¦ ¹ßµ¿ÇÒ ¼ö ÀÖ´Ù.");
+	//	sprintf_s(temp,128,"ê·¸ë ˆì´ì¦ˆë¥¼ ë°œë™í•  ìˆ˜ ìˆë‹¤.");
 	//	break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,128,"ºñÇàÀ» ¹ßµ¿ÇÒ ¼ö ÀÖ´Ù.");
+		sprintf_s(temp,128,"ë¹„í–‰ì„ ë°œë™í•  ìˆ˜ ìˆë‹¤.");
 		break;
 	case RGT_INVISIBLE:
-		sprintf_s(temp,128,"Åõ¸íÀ» ¹ßµ¿ÇÒ ¼ö ÀÖ´Ù.");
+		sprintf_s(temp,128,"íˆ¬ëª…ì„ ë°œë™í•  ìˆ˜ ìˆë‹¤.");
 		break;
 	case RGT_MANA:
-		sprintf_s(temp,128,"¿µ·ÂÀÇ ÃÖ´ëÄ¡°¡ ¿Ã¶ó°£´Ù.");
+		sprintf_s(temp,128,"ì˜ë ¥ì˜ ìµœëŒ€ì¹˜ê°€ ì˜¬ë¼ê°„ë‹¤.");
 		break;
 	case RGT_MAGACIAN:
-		sprintf_s(temp,128,"¸¶¹ı¼º°øÀ²ÀÌ ¿Ã¶ó°£´Ù.");
+		sprintf_s(temp,128,"ë§ˆë²•ì„±ê³µìœ¨ì´ ì˜¬ë¼ê°„ë‹¤.");
 		break;
 	case RGT_AC:
-		sprintf_s(temp,128,"¹æ¾î°¡ Áõ°¨ÇÑ´Ù.(%s%d)",value_<0?"":"+",value_);
+		sprintf_s(temp,128,"ë°©ì–´ê°€ ì¦ê°í•œë‹¤.(%s%d)",value_<0?"":"+",value_);
 		break;
 	case RGT_EV:
-		sprintf_s(temp,128,"È¸ÇÇ°¡ Áõ°¨ÇÑ´Ù.(%s%d)",value_<0?"":"+",value_);
+		sprintf_s(temp,128,"íšŒí”¼ê°€ ì¦ê°í•œë‹¤.(%s%d)",value_<0?"":"+",value_);
 		break;
 	case RGT_CONFUSE_RESIS:
-		sprintf_s(temp,128,"È¥¶õ¿¡ ÀúÇ×ÀÌ »ı±ä´Ù.");
+		sprintf_s(temp,128,"í˜¼ë€ì— ì €í•­ì´ ìƒê¸´ë‹¤.");
 		break;
 	case RGT_ELEC_RESIS:
-		sprintf_s(temp,128,"Àü±â¿¡ ÀúÇ×ÀÌ »ı±ä´Ù.");
+		sprintf_s(temp,128,"ì „ê¸°ì— ì €í•­ì´ ìƒê¸´ë‹¤.");
 		break;
 	case RGT_MAGIC_RESIS:
-		sprintf_s(temp,128,"¸¶¹ı ÀúÇ×ÀÌ »ı±ä´Ù.(%d)",20+value_*20);
+		sprintf_s(temp,128,"ë§ˆë²• ì €í•­ì´ ìƒê¸´ë‹¤.(%d)",20+value_*20);
 		break;
 	case RGT_SKILL_UP:
-		sprintf_s(temp, 128, "ÁöÁ¤µÈ ½ºÅ³·¹º§ÀÌ ¿Ã¶ó°£´Ù.(%s+%d)", skill_string((skill_type)(value_ % 100)), value_ / 100);
+		sprintf_s(temp, 128, "ì§€ì •ëœ ìŠ¤í‚¬ë ˆë²¨ì´ ì˜¬ë¼ê°„ë‹¤.(%s+%d)", skill_string((skill_type)(value_ % 100)), value_ / 100);
 		break;
 
 	}
@@ -291,8 +291,8 @@ bool effectartifact(ring_type kind, int value)
 		return false;
 	/*case RGT_GRAZE:
 		{	
-			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //±×·¹ÀÌÁî ÇØÁ¦¸¦ »èÁ¦ÇÏ°í ¼ö¸¦ ¸®ÅÏ
-			temp += you.Ability(SKL_GRAZE,false,true); //±×·¹ÀÌÁî ¹ßµ¿µµ ÇØÁ¦ÇÏ°í ¼ö¸¦ ¸®ÅÏ
+			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //ê·¸ë ˆì´ì¦ˆ í•´ì œë¥¼ ì‚­ì œí•˜ê³  ìˆ˜ë¥¼ ë¦¬í„´
+			temp += you.Ability(SKL_GRAZE,false,true); //ê·¸ë ˆì´ì¦ˆ ë°œë™ë„ í•´ì œí•˜ê³  ìˆ˜ë¥¼ ë¦¬í„´
 
 			temp+=value;
 			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
@@ -479,7 +479,7 @@ void MakeArtifact(item* item_, int good_bad_)
 	{
 		item_->image = &img_item_artifact_ring;
 	}
-	item_->second_name.name = "¾ÆÆ¼ÆåÆ® ";
+	item_->second_name.name = "ì•„í‹°í™íŠ¸ ";
 	item_->second_name.name_type = false;
 
 }

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: book.cpp
+// íŒŒì¼ì´ë¦„: book.cpp
 //
-// ³»¿ë: Ã¥ ¸ðÀ½
+// ë‚´ìš©: ì±… ëª¨ìŒ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -11,47 +11,47 @@
 
 book_infor static_book_list[BOOK_LAST]=
 {
-	book_infor("ÃÊº¸ È­¿°¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_FIRE_BASE,300,SPL_BURN,SPL_FLAME,SPL_FIRE_WALL,SPL_FIRE_BALL,SPL_FIRE_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ³Ã±â¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_COLD_BASE,300,SPL_FROZEN,SPL_FROST,SPL_FREEZE,SPL_ICE_CLOUD,SPL_ICE_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ µ¶¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_POISON_BASE,300,SPL_STING,SPL_CURE_POISON,SPL_POISON_SKIN,SPL_CONFUSE_CLOUD,SPL_VENOM_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ¸¶¹ý»çÀÇ ¸¶¹ýÃ¥",true,BOOK_WIZARD_BASE,300,SPL_MAGIC_TANMAC,SPL_BLINK,SPL_DIAMOND_HARDNESS,SPL_SUMMON_OPTION,SPL_CONFUSE_CLOUD,SPL_FIRE_WALL,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ´ëÁö¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_EARTH_BASE,30,SPL_STONE_PUNCH,SPL_STONE_ARROW,SPL_STONE_TRAP,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ´ë±â¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_AIR_BASE,300,SPL_SHOCK,SPL_LEVITATION, SPL_TWIST,SPL_DISCHARGE,SPL_THUNDER,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ¼ÒÈ¯¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_SUMMON_BASE,300,SPL_SUMMON_MOOK,SPL_SUMMON_OPTION,SPL_SUMMON_BIRD,SPL_SUMMON_GOLEM,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ¿¬±Ý¼ú»çÀÇ ¸¶¹ýÃ¥",true,BOOK_ALCHMIST_BASE,300,SPL_STONE_PUNCH,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SUMMON_GOLEM,SPL_EMERALD_CITY,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ½É¸®ÇÐÀÚÀÇ ¸¶¹ýÃ¥",true,BOOK_PSYCHOLOGIST_BASE,300,SPL_HYPNOSIS, SPL_MIND_BENDING, SPL_MUTE, SPL_SELF_INJURY, SPL_CHARM,SPL_NONE ,SPL_NONE,SPL_NONE),
-	book_infor("ÃÊº¸ ¸¶¹ýÀü»çÀÇ ¸¶¹ýÃ¥",true,BOOK_BRAND_BASE,400,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SILENCE,SPL_HASTE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¸ÞÀÌµåÀÇ ±âº»¼Ò¾ç",true,BOOK_MAID_BASE,400,SPL_BLINK,SPL_SUMMON_OPTION,SPL_KNIFE_COLLECT,SPL_TIME_PARADOX,SPL_PRIVATE_SQ,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("Àü°ÝÀÇ ¸¶¹ýÃ¥",true,BOOK_SHOCK,500,SPL_SHOCK,SPL_LEVITATION,SPL_DISCHARGE,SPL_THUNDER,SPL_CHAIN_LIGHTNING,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¿ø¼Ò ¿¬½ÀÀÇ ¸¶¹ýÃ¥",true,BOOK_PRACTICE,450,SPL_BURN,SPL_FROZEN,SPL_VEILING,SPL_STONE_PUNCH,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("º¸Á¶ÀÇ ¸¶¹ýÃ¥",true,BOOK_SUB,450,SPL_DRAW_POWER,SPL_DIAMOND_HARDNESS,SPL_BLINK,SPL_MIND_BENDING,SPL_SUMMON_BIRD,SPL_STONE_TRAP,SPL_NONE,SPL_NONE),
-	book_infor("¾Ï»ìÀÚÀÇ ¸¶¹ýÃ¥",true,BOOK_STALKING,600,SPL_STING,SPL_CONFUSE,SPL_CONFUSE_CLOUD,SPL_INVISIBLE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("±¸¸§ÀÇ ¸¶¹ýÃ¥",true,BOOK_CLOUD,700,SPL_TWIST,SPL_FIRE_WALL,SPL_CONFUSE_CLOUD,SPL_POISON_CLOUD,SPL_ICE_CLOUD,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÆÄ±«ÀÇ ¸¶¹ýÃ¥",true,BOOK_CONJURE,700,SPL_MAGIC_TANMAC,SPL_SUMMON_OPTION,SPL_LASER,SPL_FIRE_BOLT,SPL_ICE_BOLT,SPL_SUMMON_ELEC_BALL,SPL_NONE,SPL_NONE),
-	book_infor("¸ÅÈ¤ÀÇ ¸¶¹ýÃ¥",true,BOOK_HEX,400,SPL_GLOW,SPL_MUTE,SPL_CONFUSE,SPL_CHARM,SPL_SILENCE,SPL_INVISIBLE,SPL_NONE,SPL_NONE),
-	book_infor("¹æ¾îÀÇ ¸¶¹ýÃ¥",true,BOOK_DEFENSE,600,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_CURE_POISON,SPL_DISCHARGE,SPL_SILENCE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE),	
-	book_infor("Ç³¼öÁö¸®ÇÐ °³¿ä",false,BOOK_ENCHANT,700,SPL_AIR_STRIKE,SPL_FREEZE,SPL_STONE_UPLIFT,SPL_FIRE_BALL,SPL_HASTE,SPL_SUMMON_UFO,SPL_NONE,SPL_NONE),
-	book_infor("ÀüÀÌÀÇ ¸¶¹ýÃ¥",true,BOOK_TRANSITION,500,SPL_DRAW_POWER,SPL_BLINK,SPL_TELEPORT_OTHER,SPL_TELEPORT_SELF,SPL_RECALL,SPL_KNIFE_COLLECT,SPL_NONE,SPL_NONE),	
-	book_infor("ÅÙ½ÃÀÇ ºñÀü¼­",false,BOOK_TENSI,1000,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_STONE_FORM,SPL_SUMMON_NAMAZ,SPL_SHATTER,SPL_NONE,SPL_NONE,SPL_NONE),	
-	book_infor("¹Ì¸¶ÀÇ ºÀÀÎ¼­",false,BOOK_TEST_ANNIHILATE,1500,SPL_LUMINUS_STRIKE,SPL_SPARK,SPL_FIRE_STORM,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("Á¤½Å Áö¹èÇÐ",true,BOOK_DEBUF,1500,SPL_ANIMAL_CHANGE,SPL_PRIVATE_SQ,SPL_INVISIBLE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¸ÞÀÌµå ºñÀü¼­",false,BOOK_MAID_ULTI,1500,SPL_PRIVATE_SQ,SPL_CONTROLED_BLINK,SPL_THE_WORLD,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¾óÀ½¿äÁ¤ ºñÀü¼­",false,BOOK_ICE_ULTI,1500,SPL_ICE_BOLT,SPL_ICE_CLOUD,SPL_BLIZZARD,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¾Ù¸®½ºÀÇ ¸¶µµ¼­",false,BOOK_SUMMON_ULTI,1500,SPL_SUMMON_UFO,SPL_SUMMON_YOUKAI,SPL_SUMMON_NAMAZ,SPL_DOLLS_WAR,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("ÅÙ±¸ÀÇ È°±Ø ¸¸È­",false,BOOK_AIR_ULTI,1500,SPL_VEILING,SPL_TWIST,SPL_AIR_STRIKE,SPL_MACRO_BURST,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
-	book_infor("¸¶±×´® ¿ÀÇª½º",false,BOOK_ALCHMY_ULTI,1500,SPL_EMERALD_CITY,SPL_STONE_FORM,SPL_AUTUMN_BLADE,SPL_PHILOSOPHERS_STONE, SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
+	book_infor("ì´ˆë³´ í™”ì—¼ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_FIRE_BASE,300,SPL_BURN,SPL_FLAME,SPL_FIRE_WALL,SPL_FIRE_BALL,SPL_FIRE_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ëƒ‰ê¸°ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_COLD_BASE,300,SPL_FROZEN,SPL_FROST,SPL_FREEZE,SPL_ICE_CLOUD,SPL_ICE_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ë…ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_POISON_BASE,300,SPL_STING,SPL_CURE_POISON,SPL_POISON_SKIN,SPL_CONFUSE_CLOUD,SPL_VENOM_BOLT,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ë§ˆë²•ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_WIZARD_BASE,300,SPL_MAGIC_TANMAC,SPL_BLINK,SPL_DIAMOND_HARDNESS,SPL_SUMMON_OPTION,SPL_CONFUSE_CLOUD,SPL_FIRE_WALL,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ëŒ€ì§€ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_EARTH_BASE,30,SPL_STONE_PUNCH,SPL_STONE_ARROW,SPL_STONE_TRAP,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ëŒ€ê¸°ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_AIR_BASE,300,SPL_SHOCK,SPL_LEVITATION, SPL_TWIST,SPL_DISCHARGE,SPL_THUNDER,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ì†Œí™˜ìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_SUMMON_BASE,300,SPL_SUMMON_MOOK,SPL_SUMMON_OPTION,SPL_SUMMON_BIRD,SPL_SUMMON_GOLEM,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ì—°ê¸ˆìˆ ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_ALCHMIST_BASE,300,SPL_STONE_PUNCH,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SUMMON_GOLEM,SPL_EMERALD_CITY,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ì‹¬ë¦¬í•™ìžì˜ ë§ˆë²•ì±…",true,BOOK_PSYCHOLOGIST_BASE,300,SPL_HYPNOSIS, SPL_MIND_BENDING, SPL_MUTE, SPL_SELF_INJURY, SPL_CHARM,SPL_NONE ,SPL_NONE,SPL_NONE),
+	book_infor("ì´ˆë³´ ë§ˆë²•ì „ì‚¬ì˜ ë§ˆë²•ì±…",true,BOOK_BRAND_BASE,400,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_POISON_SKIN,SPL_SILENCE,SPL_HASTE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ë©”ì´ë“œì˜ ê¸°ë³¸ì†Œì–‘",true,BOOK_MAID_BASE,400,SPL_BLINK,SPL_SUMMON_OPTION,SPL_KNIFE_COLLECT,SPL_TIME_PARADOX,SPL_PRIVATE_SQ,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì „ê²©ì˜ ë§ˆë²•ì±…",true,BOOK_SHOCK,500,SPL_SHOCK,SPL_LEVITATION,SPL_DISCHARGE,SPL_THUNDER,SPL_CHAIN_LIGHTNING,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì›ì†Œ ì—°ìŠµì˜ ë§ˆë²•ì±…",true,BOOK_PRACTICE,450,SPL_BURN,SPL_FROZEN,SPL_VEILING,SPL_STONE_PUNCH,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ë³´ì¡°ì˜ ë§ˆë²•ì±…",true,BOOK_SUB,450,SPL_DRAW_POWER,SPL_DIAMOND_HARDNESS,SPL_BLINK,SPL_MIND_BENDING,SPL_SUMMON_BIRD,SPL_STONE_TRAP,SPL_NONE,SPL_NONE),
+	book_infor("ì•”ì‚´ìžì˜ ë§ˆë²•ì±…",true,BOOK_STALKING,600,SPL_STING,SPL_CONFUSE,SPL_CONFUSE_CLOUD,SPL_INVISIBLE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("êµ¬ë¦„ì˜ ë§ˆë²•ì±…",true,BOOK_CLOUD,700,SPL_TWIST,SPL_FIRE_WALL,SPL_CONFUSE_CLOUD,SPL_POISON_CLOUD,SPL_ICE_CLOUD,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("íŒŒê´´ì˜ ë§ˆë²•ì±…",true,BOOK_CONJURE,700,SPL_MAGIC_TANMAC,SPL_SUMMON_OPTION,SPL_LASER,SPL_FIRE_BOLT,SPL_ICE_BOLT,SPL_SUMMON_ELEC_BALL,SPL_NONE,SPL_NONE),
+	book_infor("ë§¤í˜¹ì˜ ë§ˆë²•ì±…",true,BOOK_HEX,400,SPL_GLOW,SPL_MUTE,SPL_CONFUSE,SPL_CHARM,SPL_SILENCE,SPL_INVISIBLE,SPL_NONE,SPL_NONE),
+	book_infor("ë°©ì–´ì˜ ë§ˆë²•ì±…",true,BOOK_DEFENSE,600,SPL_VEILING,SPL_DIAMOND_HARDNESS,SPL_CURE_POISON,SPL_DISCHARGE,SPL_SILENCE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE),	
+	book_infor("í’ìˆ˜ì§€ë¦¬í•™ ê°œìš”",false,BOOK_ENCHANT,700,SPL_AIR_STRIKE,SPL_FREEZE,SPL_STONE_UPLIFT,SPL_FIRE_BALL,SPL_HASTE,SPL_SUMMON_UFO,SPL_NONE,SPL_NONE),
+	book_infor("ì „ì´ì˜ ë§ˆë²•ì±…",true,BOOK_TRANSITION,500,SPL_DRAW_POWER,SPL_BLINK,SPL_TELEPORT_OTHER,SPL_TELEPORT_SELF,SPL_RECALL,SPL_KNIFE_COLLECT,SPL_NONE,SPL_NONE),	
+	book_infor("í…ì‹œì˜ ë¹„ì „ì„œ",false,BOOK_TENSI,1000,SPL_STONE_UPLIFT,SPL_KANAME_DRILL,SPL_STONE_FORM,SPL_SUMMON_NAMAZ,SPL_SHATTER,SPL_NONE,SPL_NONE,SPL_NONE),	
+	book_infor("ë¯¸ë§ˆì˜ ë´‰ì¸ì„œ",false,BOOK_TEST_ANNIHILATE,1500,SPL_LUMINUS_STRIKE,SPL_SPARK,SPL_FIRE_STORM,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì •ì‹  ì§€ë°°í•™",true,BOOK_DEBUF,1500,SPL_ANIMAL_CHANGE,SPL_PRIVATE_SQ,SPL_INVISIBLE,SPL_FIELD_VIOLET,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ë©”ì´ë“œ ë¹„ì „ì„œ",false,BOOK_MAID_ULTI,1500,SPL_PRIVATE_SQ,SPL_CONTROLED_BLINK,SPL_THE_WORLD,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì–¼ìŒìš”ì • ë¹„ì „ì„œ",false,BOOK_ICE_ULTI,1500,SPL_ICE_BOLT,SPL_ICE_CLOUD,SPL_BLIZZARD,SPL_PERFERT_FREEZE,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ì•¨ë¦¬ìŠ¤ì˜ ë§ˆë„ì„œ",false,BOOK_SUMMON_ULTI,1500,SPL_SUMMON_UFO,SPL_SUMMON_YOUKAI,SPL_SUMMON_NAMAZ,SPL_DOLLS_WAR,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("í…êµ¬ì˜ í™œê·¹ ë§Œí™”",false,BOOK_AIR_ULTI,1500,SPL_VEILING,SPL_TWIST,SPL_AIR_STRIKE,SPL_MACRO_BURST,SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE),
+	book_infor("ë§ˆê·¸ëˆ” ì˜¤í‘¸ìŠ¤",false,BOOK_ALCHMY_ULTI,1500,SPL_EMERALD_CITY,SPL_STONE_FORM,SPL_AUTUMN_BLADE,SPL_PHILOSOPHERS_STONE, SPL_NONE,SPL_NONE,SPL_NONE,SPL_NONE)
 	
 };
 
 string random_book_list[RANDOM_BOOK_NUM]=
 {
-	"»¡°£ Ä¿¹öÀÇ Ã¥",
-	"ÃÊ·Ï Ä¿¹öÀÇ Ã¥",
-	"ÆÄ¶õ Ä¿¹öÀÇ Ã¥",
-	"³ë¶õ Ä¿¹öÀÇ Ã¥",
-	"ºÐÈ« Ä¿¹öÀÇ Ã¥",
-	"ÁÖÈ² Ä¿¹öÀÇ Ã¥",
-	"º¸¶ó Ä¿¹öÀÇ Ã¥"
+	"ë¹¨ê°„ ì»¤ë²„ì˜ ì±…",
+	"ì´ˆë¡ ì»¤ë²„ì˜ ì±…",
+	"íŒŒëž€ ì»¤ë²„ì˜ ì±…",
+	"ë…¸ëž€ ì»¤ë²„ì˜ ì±…",
+	"ë¶„í™ ì»¤ë²„ì˜ ì±…",
+	"ì£¼í™© ì»¤ë²„ì˜ ì±…",
+	"ë³´ë¼ ì»¤ë²„ì˜ ì±…"
 };
 
 
@@ -64,65 +64,65 @@ const char* GetBookInfor(book_list book_)
 	{
 	default:
 	case BOOK_CUSTOM_BOOK:
-		return "´Ù¾çÇÑ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥.\nÀÌ¸§ÀÖ´Â Ã¥Àº ¾Æ´Ñ °Í °°Áö¸¸ ¹è¿ï¸¸ÇÑ ¸¶¹ýÀº ÀÖ¾îº¸ÀÎ´Ù.\n";
+		return "ë‹¤ì–‘í•œ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±….\nì´ë¦„ìžˆëŠ” ì±…ì€ ì•„ë‹Œ ê²ƒ ê°™ì§€ë§Œ ë°°ìš¸ë§Œí•œ ë§ˆë²•ì€ ìžˆì–´ë³´ì¸ë‹¤.\n";
 	case BOOK_FIRE_BASE:
-		return "È­¿°¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\nÈ­¿°¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "í™”ì—¼ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\ní™”ì—¼ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_COLD_BASE:
-		return "³Ã±â¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\n³Ã±â¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ëƒ‰ê¸°ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nëƒ‰ê¸°ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_POISON_BASE:
-		return "µ¶¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\nµ¶¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ë…ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\në…ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_WIZARD_BASE:
-		return "´Ù¾çÇÏ°í °¡¼ººñ ÁÁÀº Àú·¹º§ ¸¶¹ýµéÀÌ µé¾î ÀÖ´Â Ã¥\n°í·¹º§Àº ¾øÁö¸¸ ±¸¼ºÀÌ ¾ËÂ÷´Ù.\n";
+		return "ë‹¤ì–‘í•˜ê³  ê°€ì„±ë¹„ ì¢‹ì€ ì €ë ˆë²¨ ë§ˆë²•ë“¤ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nê³ ë ˆë²¨ì€ ì—†ì§€ë§Œ êµ¬ì„±ì´ ì•Œì°¨ë‹¤.\n";
 	case BOOK_EARTH_BASE:
-		return "´ëÁö¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\n´ëÁö¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ëŒ€ì§€ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nëŒ€ì§€ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_AIR_BASE:
-		return "´ë±â¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\n´ë±â¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ëŒ€ê¸°ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nëŒ€ê¸°ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_SUMMON_BASE:
-		return "¼ÒÈ¯¿¡ ´ëÇÑ ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\n¼ÒÈ¯¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ì†Œí™˜ì— ëŒ€í•œ ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nì†Œí™˜ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_ALCHMIST_BASE:
-		return "¿¬±Ý¼úÀ» °¡¸£Ä¡´Â Ã¥\n¸¶¹ýÀ» ÅëÇØ¼­ °£´ÜÇÑ ¿¬±Ý¼úÀ» ½ÃÇèÇØº¼ ¼ö ÀÖ´Â °Í °°´Ù.\n";
+		return "ì—°ê¸ˆìˆ ì„ ê°€ë¥´ì¹˜ëŠ” ì±…\në§ˆë²•ì„ í†µí•´ì„œ ê°„ë‹¨í•œ ì—°ê¸ˆìˆ ì„ ì‹œí—˜í•´ë³¼ ìˆ˜ ìžˆëŠ” ê²ƒ ê°™ë‹¤.\n";
 	case BOOK_PSYCHOLOGIST_BASE:
-		return "Á¤½ÅÀ» Á¶Á¾ÇÏ´Â ±âÃÊÀûÀÎ ¸¶¹ýÀÌ µé¾î ÀÖ´Â Ã¥\n½É¸®¸¶¹ý¿¡ ÀÔ¹®ÇÏ°í ½ÍÀº ´ç½Å¿¡°Ô ÃßÃµ\n";
+		return "ì •ì‹ ì„ ì¡°ì¢…í•˜ëŠ” ê¸°ì´ˆì ì¸ ë§ˆë²•ì´ ë“¤ì–´ ìžˆëŠ” ì±…\nì‹¬ë¦¬ë§ˆë²•ì— ìž…ë¬¸í•˜ê³  ì‹¶ì€ ë‹¹ì‹ ì—ê²Œ ì¶”ì²œ\n";
 	case BOOK_BRAND_BASE:
-		return "ÃÊº¸ ¸¶Àü»ç¸¦ À§ÇØ ¸¸µé¾îÁø ¸¶¹ýÃ¥\nÀü»çµé¿¡°Ô À¯¿ëÇÑ ¸¶¹ýµé·Î ±¸¼ºÀÌ µÇ¾îÀÖ´Ù.\n";
+		return "ì´ˆë³´ ë§ˆì „ì‚¬ë¥¼ ìœ„í•´ ë§Œë“¤ì–´ì§„ ë§ˆë²•ì±…\nì „ì‚¬ë“¤ì—ê²Œ ìœ ìš©í•œ ë§ˆë²•ë“¤ë¡œ êµ¬ì„±ì´ ë˜ì–´ìžˆë‹¤.\n";
 	case BOOK_MAID_BASE:
-		return "¸ÞÀÌµåµéÀÌ ±âº»ÀûÀ¸·Î °¡Á®¾ßÇÒ ¼Ò¾çÀÌ¶ó°í ÀûÇôÀÖ´Ù. È«¸¶°ü¿¡¼­ ¹èÆ÷ÁßÀÌ´Ù.\n¸ÞÀÌµåÀÇ ±æÀº ¸Ö°íµµ ÇèÇÏ´Ù.\n";
+		return "ë©”ì´ë“œë“¤ì´ ê¸°ë³¸ì ìœ¼ë¡œ ê°€ì ¸ì•¼í•  ì†Œì–‘ì´ë¼ê³  ì í˜€ìžˆë‹¤. í™ë§ˆê´€ì—ì„œ ë°°í¬ì¤‘ì´ë‹¤.\në©”ì´ë“œì˜ ê¸¸ì€ ë©€ê³ ë„ í—˜í•˜ë‹¤.\n";
 	case BOOK_SHOCK:
-		return "´Ù¾çÇÑ Àü±â¸¶¹ýÀÌ ÀûÇôÀÖ´Â ¸¶¹ýÃ¥\n¸¸Áö±â¸¸ÇØµµ Â¥¸´Â¥¸´ÇÏ´Ù.\n";
+		return "ë‹¤ì–‘í•œ ì „ê¸°ë§ˆë²•ì´ ì í˜€ìžˆëŠ” ë§ˆë²•ì±…\në§Œì§€ê¸°ë§Œí•´ë„ ì§œë¦¿ì§œë¦¿í•˜ë‹¤.\n";
 	case BOOK_PRACTICE:
-		return "°£´ÜÇÑ ¿ø¼Ò¿¬½ÀÀ» ÇÒ ¼ö ÀÖ°Ô µÇ¾îÀÖ´Â ¸¶¹ýÃ¥\nÇÏÁö¸¸ ºòÅä¸®´í½º´Â ÀÌÁ¦ ¾ø´Ù°í!\n";
+		return "ê°„ë‹¨í•œ ì›ì†Œì—°ìŠµì„ í•  ìˆ˜ ìžˆê²Œ ë˜ì–´ìžˆëŠ” ë§ˆë²•ì±…\ní•˜ì§€ë§Œ ë¹…í† ë¦¬ëŒ„ìŠ¤ëŠ” ì´ì œ ì—†ë‹¤ê³ !\n";
 	case BOOK_SUB:
-		return "´Ù¾çÇÑ º¸Á¶¸¶¹ýÀÌ ÀûÇôÀÖ´Â ¸¶¹ýÃ¥.\n¸¶¹ý»ç ÀÔ¹®¿¡ ÁÁ¾Æº¸ÀÎ´Ù.\n";
+		return "ë‹¤ì–‘í•œ ë³´ì¡°ë§ˆë²•ì´ ì í˜€ìžˆëŠ” ë§ˆë²•ì±….\në§ˆë²•ì‚¬ ìž…ë¬¸ì— ì¢‹ì•„ë³´ì¸ë‹¤.\n";
 	case BOOK_STALKING:
-		return "¸¶¹ý¾Ï»ìÀÚ¸¦ ²Þ²Ù´Â »ç¶÷µéÀ» À§ÇÑ ¸¶¹ýÃ¥\n¾ÆÁ÷Àº ¸¶¹ýÀÌ ¸ðÀÚ¶óº¸ÀÎ´Ù.\n";
+		return "ë§ˆë²•ì•”ì‚´ìžë¥¼ ê¿ˆê¾¸ëŠ” ì‚¬ëžŒë“¤ì„ ìœ„í•œ ë§ˆë²•ì±…\nì•„ì§ì€ ë§ˆë²•ì´ ëª¨ìžë¼ë³´ì¸ë‹¤.\n";
 	case BOOK_CLOUD:
-		return "±¸¸§À» ¸¸µå´Â ³ëÇÏ¿ì°¡ ÀûÇôÀÖ´Â ¸¶¹ýÃ¥\n¿ØÁö Ã¥µµ ÃàÃàÇØº¸ÀÎ´Ù.\n";
+		return "êµ¬ë¦„ì„ ë§Œë“œëŠ” ë…¸í•˜ìš°ê°€ ì í˜€ìžˆëŠ” ë§ˆë²•ì±…\nì™ ì§€ ì±…ë„ ì¶•ì¶•í•´ë³´ì¸ë‹¤.\n";
 	case BOOK_CONJURE:
-		return "°­·ÂÇÑ ÆÄ±«ÀÇ ±âÃÊ ¸¶¹ýÀÌ ÀûÇôÀÖ´Â Ã¥\nÅº¸·Àº ÆÄ¿ö!\n";
+		return "ê°•ë ¥í•œ íŒŒê´´ì˜ ê¸°ì´ˆ ë§ˆë²•ì´ ì í˜€ìžˆëŠ” ì±…\níƒ„ë§‰ì€ íŒŒì›Œ!\n";
 	case BOOK_HEX:
-		return "Á¤½Å¸¶¹ý°è¿­ÀÇ ¸¶¹ýÀÌ ÀûÇôÀÖ´Â Ã¥\n¿ä±«µéÀº Á¤½Å°ø°Ý¿¡ ¾àÇÏ´Ù°íµé ÇÑ´Ù.\n";
+		return "ì •ì‹ ë§ˆë²•ê³„ì—´ì˜ ë§ˆë²•ì´ ì í˜€ìžˆëŠ” ì±…\nìš”ê´´ë“¤ì€ ì •ì‹ ê³µê²©ì— ì•½í•˜ë‹¤ê³ ë“¤ í•œë‹¤.\n";
 	case BOOK_DEFENSE:
-		return "´Ù¾çÇÑ ¹æ¾î ÁÖ¹®ÀÌ µé¾îÀÖ´Â Ã¥\n»ì¾Æ³²´Â °ÍÀº Á¦ÀÏ Áß¿äÇÏ´Ù.\n";
+		return "ë‹¤ì–‘í•œ ë°©ì–´ ì£¼ë¬¸ì´ ë“¤ì–´ìžˆëŠ” ì±…\nì‚´ì•„ë‚¨ëŠ” ê²ƒì€ ì œì¼ ì¤‘ìš”í•˜ë‹¤.\n";
 	case BOOK_ENCHANT:
-		return "Ç³¼öÁö¸®¿¡ ÇØ¹ÚÇÑ ¸ð³ë³ëº£³ë ÈÄÅä°¡ ÆíÂùÇÑ Ã¥.\n¹Ù¶÷À» ´Ù·ç´Â °ÍºÎÅÍ ´ëÁö¸¦ ÀÏÀ¸Å°´Â ÀÏ, ¹°À» ´Ù·ç¸é¼­ ¿î±â¸¦ ´Ù·ç´Â ¹ýÀÌ ÀûÇôÀÖ´Ù\n¿ÖÀÎÁö ¹æÈ­ÇÏ´Â ¹ý¿¡ ´ëÇÑ ¼¼¼¼ÇÑ ºÎ·ÏÀÌ ³¢¿öÁ®ÀÖ´Ù.\n";
+		return "í’ìˆ˜ì§€ë¦¬ì— í•´ë°•í•œ ëª¨ë…¸ë…¸ë² ë…¸ í›„í† ê°€ íŽ¸ì°¬í•œ ì±….\në°”ëžŒì„ ë‹¤ë£¨ëŠ” ê²ƒë¶€í„° ëŒ€ì§€ë¥¼ ì¼ìœ¼í‚¤ëŠ” ì¼, ë¬¼ì„ ë‹¤ë£¨ë©´ì„œ ìš´ê¸°ë¥¼ ë‹¤ë£¨ëŠ” ë²•ì´ ì í˜€ìžˆë‹¤\nì™œì¸ì§€ ë°©í™”í•˜ëŠ” ë²•ì— ëŒ€í•œ ì„¸ì„¸í•œ ë¶€ë¡ì´ ë¼ì›Œì ¸ìžˆë‹¤.\n";
 	case BOOK_TRANSITION:
-		return "ÀüÀÌ¿¡ °ü·ÃµÈ ¸¶¹ýÀÌ ÀûÇôÀÖ´Â ¸¶¹ýÃ¥\n½Ã°ø°£À» ´Ù·ç´Â °Í¿£ Å« À§ÇèÀÌ µû¸¥´Ù.\n";
+		return "ì „ì´ì— ê´€ë ¨ëœ ë§ˆë²•ì´ ì í˜€ìžˆëŠ” ë§ˆë²•ì±…\nì‹œê³µê°„ì„ ë‹¤ë£¨ëŠ” ê²ƒì—” í° ìœ„í—˜ì´ ë”°ë¥¸ë‹¤.\n";
 	case BOOK_TENSI:
-		return "ºÒ·®ÃµÀÎ ÅÙ½Ã°¡ Á÷Á¢ ÀÚÇÊÇÑ ¸¶¹ýÃ¥\n¿¹ÃøºÒ°¡ÀÎ ±×³àÁö¸¸ ±×³àÀÇ ´ëÁö¸¦ ´Ù·ç´Â ±â¼úÀº ¹è¿ï¸¸ÇÏ´Ù.\n";
+		return "ë¶ˆëŸ‰ì²œì¸ í…ì‹œê°€ ì§ì ‘ ìží•„í•œ ë§ˆë²•ì±…\nì˜ˆì¸¡ë¶ˆê°€ì¸ ê·¸ë…€ì§€ë§Œ ê·¸ë…€ì˜ ëŒ€ì§€ë¥¼ ë‹¤ë£¨ëŠ” ê¸°ìˆ ì€ ë°°ìš¸ë§Œí•˜ë‹¤.\n";
 	case BOOK_TEST_ANNIHILATE:
-		return "¹Ì¸¶°¡ ÀûÀº ±Ã±ØÀÇ ÆÄ±«¼ú¼­\n¸ðµç ÆÄ±«¹ý»ç°¡ ²Þ²Ù°íÀÖ´Â ±× Ã¥ÀÌ´Ù.\n";
+		return "ë¯¸ë§ˆê°€ ì ì€ ê¶ê·¹ì˜ íŒŒê´´ìˆ ì„œ\nëª¨ë“  íŒŒê´´ë²•ì‚¬ê°€ ê¿ˆê¾¸ê³ ìžˆëŠ” ê·¸ ì±…ì´ë‹¤.\n";
 	case BOOK_DEBUF:
-		return "ÁöÀú¼¼°è¿¡ »ì°íÀÖ´Â »çÅä¸®°¡ ÀûÀº Á¤½ÅÀ» Áö¹èÇÏ´Â ¹ý\n¿ØÁö Ã¥¿¡°Ô ¸¶À½À» ÀÐÈ÷°í ÀÖ´Â µíÇÑ ´À³¦ÀÌ´Ù.\n";
+		return "ì§€ì €ì„¸ê³„ì— ì‚´ê³ ìžˆëŠ” ì‚¬í† ë¦¬ê°€ ì ì€ ì •ì‹ ì„ ì§€ë°°í•˜ëŠ” ë²•\nì™ ì§€ ì±…ì—ê²Œ ë§ˆìŒì„ ì½ížˆê³  ìžˆëŠ” ë“¯í•œ ëŠë‚Œì´ë‹¤.\n";
 	case BOOK_MAID_ULTI:
-		return "È«¸¶°üÀÇ ¸ÞÀÌµåÀåÀÌ À¯´ÉÇÑ ¸ÞÀÌµå¸¦ ±æ·¯³»±â À§ÇØ ¸¸µé¾ú´Ù´Â ±× Ã¥ÀÌ´Ù.\nÈ«¸¶°ü¿£ »çÄí¾ßÀÌ¿Ü¿¡ À¯´ÉÇÑ ¸ÞÀÌµå°¡ ¾øÀ»»Ó´õ·¯ ¾Æ¹«µµ Ã¥À» ÀÌÇØÇÏÁö ¸øÇß±â¿¡ Àü¼³·Î¸¸ ³²°ÜÁø Ã¥ÀÌ´Ù.\n¸¶¹ý »Ó¸¸ÀÌ ¾Æ´Ï¶ó Ã»¼ÒÇÏ´Â ¹ý, »¡·¡ÇÏ´Â ¹ýµîÀÌ ºÎ·ÏÀ¸·Î ÀûÇôÀÖ´Ù.\n";
+		return "í™ë§ˆê´€ì˜ ë©”ì´ë“œìž¥ì´ ìœ ëŠ¥í•œ ë©”ì´ë“œë¥¼ ê¸¸ëŸ¬ë‚´ê¸° ìœ„í•´ ë§Œë“¤ì—ˆë‹¤ëŠ” ê·¸ ì±…ì´ë‹¤.\ní™ë§ˆê´€ì—” ì‚¬ì¿ ì•¼ì´ì™¸ì— ìœ ëŠ¥í•œ ë©”ì´ë“œê°€ ì—†ì„ë¿ë”ëŸ¬ ì•„ë¬´ë„ ì±…ì„ ì´í•´í•˜ì§€ ëª»í–ˆê¸°ì— ì „ì„¤ë¡œë§Œ ë‚¨ê²¨ì§„ ì±…ì´ë‹¤.\në§ˆë²• ë¿ë§Œì´ ì•„ë‹ˆë¼ ì²­ì†Œí•˜ëŠ” ë²•, ë¹¨ëž˜í•˜ëŠ” ë²•ë“±ì´ ë¶€ë¡ìœ¼ë¡œ ì í˜€ìžˆë‹¤.\n";
 	case BOOK_ICE_ULTI:
-		return "È£¼ö¿¡ »ì°íÀÖ´Â ¸ð ¾óÀ½ ¿äÁ¤ÀÌ Á÷Á¢ ÀÚ½ÅÀÇ ÃÖ°­À» Áõ¸íÇÏ±âÀ§ÇØ ÀûÀº Ã¥ÀÌ´Ù.\nÃ¥Àº ±×¸²Ã¥Ã³·³ ±×¸²°ú ÇÔ²² ±¸ºÒ±¸ºÒÇÑ ±Û¾¾·Î ¼³¸íÀÌ µÇ¾îÀÖ´Ù.\n±²ÀåÈ÷ Ãß»óÀûÀ¸·Î ¼³¸íµÇ¾îÀÖ±â¿¡ ¿ÀÈ÷·Á ÀÌÇØÇÏ±â ¾î·Æ´Ù. ÀÌÇØÇÏ·Á¸é ³î¶ó¿î ÀÌÇØ·ÂÀÌ ÀÖ¾î¾ßµÉ°Í°°´Ù.\n";
+		return "í˜¸ìˆ˜ì— ì‚´ê³ ìžˆëŠ” ëª¨ ì–¼ìŒ ìš”ì •ì´ ì§ì ‘ ìžì‹ ì˜ ìµœê°•ì„ ì¦ëª…í•˜ê¸°ìœ„í•´ ì ì€ ì±…ì´ë‹¤.\nì±…ì€ ê·¸ë¦¼ì±…ì²˜ëŸ¼ ê·¸ë¦¼ê³¼ í•¨ê»˜ êµ¬ë¶ˆêµ¬ë¶ˆí•œ ê¸€ì”¨ë¡œ ì„¤ëª…ì´ ë˜ì–´ìžˆë‹¤.\nêµ‰ìž¥ížˆ ì¶”ìƒì ìœ¼ë¡œ ì„¤ëª…ë˜ì–´ìžˆê¸°ì— ì˜¤ížˆë ¤ ì´í•´í•˜ê¸° ì–´ë µë‹¤. ì´í•´í•˜ë ¤ë©´ ë†€ë¼ìš´ ì´í•´ë ¥ì´ ìžˆì–´ì•¼ë ê²ƒê°™ë‹¤.\n";
 	case BOOK_SUMMON_ULTI:
-		return "¸¶¹ýÀÇ ½£¿¡ »ì°íÀÖ´Â ÀÎÇü¼ú»ç°¡ ÀÚÁÖ µé°í´Ù´Ï´Â Ã¥ÀÌ¶ó°í ÇÑ´Ù.\nÁ¤±³ÇÏ°í ¼¶¼¼ÇÏ°Ô ¼³¸íµÇ¾îÀÖ´Â ¸¹Àº ÀÎÇüÀ» ´Ù·ç´Â ¹ýÀº ¼ÒÈ¯¼ú¿¡µµ ÀÀ¿ëÇÒ ¼ö ÀÖÀ» °Í °°´Ù.\n¹«¼·°Ôµµ Æø¾à´Ù·ç´Â ¹ý, »ó´ë¸¦ ÀúÁÖÇÏ´Â ¹ýµµ ÀûÇôÀÖ´Ù. ÀÌ ºÎºÐÀº ¸øº»Ã´ÇÏÀÚ.\n";
+		return "ë§ˆë²•ì˜ ìˆ²ì— ì‚´ê³ ìžˆëŠ” ì¸í˜•ìˆ ì‚¬ê°€ ìžì£¼ ë“¤ê³ ë‹¤ë‹ˆëŠ” ì±…ì´ë¼ê³  í•œë‹¤.\nì •êµí•˜ê³  ì„¬ì„¸í•˜ê²Œ ì„¤ëª…ë˜ì–´ìžˆëŠ” ë§Žì€ ì¸í˜•ì„ ë‹¤ë£¨ëŠ” ë²•ì€ ì†Œí™˜ìˆ ì—ë„ ì‘ìš©í•  ìˆ˜ ìžˆì„ ê²ƒ ê°™ë‹¤.\në¬´ì„­ê²Œë„ í­ì•½ë‹¤ë£¨ëŠ” ë²•, ìƒëŒ€ë¥¼ ì €ì£¼í•˜ëŠ” ë²•ë„ ì í˜€ìžˆë‹¤. ì´ ë¶€ë¶„ì€ ëª»ë³¸ì²™í•˜ìž.\n";
 	case BOOK_AIR_ULTI:
-		return "ÅÙ±¸°¡ ÁÖÀÎ°øÀÎ ¹ÚÁø°¨ ³ÑÄ¡´Â ¸ðÇè ¸¸È­.\n³»¿ëµµ Àç¹ÕÁö¸¸ ÀÌ ¸¸È­ÀÇ ÁÖÀÎ°øÀÌ ¾²´Â ±â¼úÀº µû¶óÇØ º¼ ¼ö ÀÖÀ» °Í °°´Ù.\n";
+		return "í…êµ¬ê°€ ì£¼ì¸ê³µì¸ ë°•ì§„ê° ë„˜ì¹˜ëŠ” ëª¨í—˜ ë§Œí™”.\në‚´ìš©ë„ ìž¬ë°Œì§€ë§Œ ì´ ë§Œí™”ì˜ ì£¼ì¸ê³µì´ ì“°ëŠ” ê¸°ìˆ ì€ ë”°ë¼í•´ ë³¼ ìˆ˜ ìžˆì„ ê²ƒ ê°™ë‹¤.\n";
 	case BOOK_ALCHMY_ULTI:
-		return "¾î´À ÀúÅÃ¾È¿¡ÀÖ´Â Å« µµ¼­°ü¿¡ ²ÈÇôÀÖ´ø ¿¬±Ý¼úÀÇ ¸ðµç °ÍÀÌ ÀûÇôÀÖ´Â ¸¶µµ¼­.\n¾Ë¾Æº¸±â Èûµé°í ¾Ö¸ÅÇÏ°Ô ÀûÇôÀÖ¾î¼­ ¿¬±Ý¼úÀÇ ´ë°¡°¡ ¾Æ´Ï¸é ³»¿ëÀ» ÀÌÇØÇÏ´Â°Ç Èûµé¾îº¸ÀÎ´Ù.\nÀûÇôÀÖ´Â ÁöÀúºÐÇÑ ³«¼­·Î ºÁ¼± ÀÌ Ã¥ÀÇ ¿ø ÁÖÀÎµµ ³»¿ëÀ» Àß ÀÌÇØÇÏÁö ¸øÇß´ø°Å°°´Ù.\n";
+		return "ì–´ëŠ ì €íƒì•ˆì—ìžˆëŠ” í° ë„ì„œê´€ì— ê½‚í˜€ìžˆë˜ ì—°ê¸ˆìˆ ì˜ ëª¨ë“  ê²ƒì´ ì í˜€ìžˆëŠ” ë§ˆë„ì„œ.\nì•Œì•„ë³´ê¸° íž˜ë“¤ê³  ì• ë§¤í•˜ê²Œ ì í˜€ìžˆì–´ì„œ ì—°ê¸ˆìˆ ì˜ ëŒ€ê°€ê°€ ì•„ë‹ˆë©´ ë‚´ìš©ì„ ì´í•´í•˜ëŠ”ê±´ íž˜ë“¤ì–´ë³´ì¸ë‹¤.\nì í˜€ìžˆëŠ” ì§€ì €ë¶„í•œ ë‚™ì„œë¡œ ë´ì„  ì´ ì±…ì˜ ì› ì£¼ì¸ë„ ë‚´ìš©ì„ ìž˜ ì´í•´í•˜ì§€ ëª»í–ˆë˜ê±°ê°™ë‹¤.\n";
 	}
 }
 

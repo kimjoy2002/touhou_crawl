@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: alchemy.cpp
+// íŒŒì¼ì´ë¦„: alchemy.cpp
 //
-// ³»¿ë: ¿¬±İ¼ú °ü·Ã
+// ë‚´ìš©: ì—°ê¸ˆìˆ  ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +19,7 @@ bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_)
 		alchemy_time += time_;
 		if(Getalchemytime(buff_)<alchemy_time)
 			alchemy_time = Getalchemytime(buff_);
-		printlog("´ç½ÅÀÇ ¿¬±İ¼ú¿¡ ÀÇÇÑ ¹öÇÁ´Â ´õ¿í ±æ¾îÁ³´Ù.",false,false,false,CL_white_blue);
+		printlog("ë‹¹ì‹ ì˜ ì—°ê¸ˆìˆ ì— ì˜í•œ ë²„í”„ëŠ” ë”ìš± ê¸¸ì–´ì¡Œë‹¤.",false,false,false,CL_white_blue);
 	}
 	else
 	{
@@ -78,16 +78,16 @@ void alchemyalmostoff(ALCHEMY_LIST list_)
 		break;
 	case ALCT_HASTE:
 		if(you.s_haste < 10)
-			printlog("¼Óµµ°¡ µ¹¾Æ¿À°í ÀÖ´Ù.",false,false,false,CL_blue);
+			printlog("ì†ë„ê°€ ëŒì•„ì˜¤ê³  ìˆë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_STONE_FORM:
-		printlog("¹«³ä¹«»óÀÇ °æÁö°¡ ³¡³ª°£´Ù.",false,false,false,CL_blue);
+		printlog("ë¬´ë…ë¬´ìƒì˜ ê²½ì§€ê°€ ëë‚˜ê°„ë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_AUTUMN_BLADE:
-		printlog("¼Õ¿¡ °¨±ä ¿¬±İ¼úÀÇ ÈûÀÌ ¾àÇØÁö°íÀÖ´Ù.",false,false,false,CL_blue);
+		printlog("ì†ì— ê°ê¸´ ì—°ê¸ˆìˆ ì˜ í˜ì´ ì•½í•´ì§€ê³ ìˆë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_PHILOSOPHERS_STONE:
-		printlog("ÇöÀÚÀÇ µ¹Àº °ÅÀÇ »ç¶óÁ®°¡°íÀÖ´Ù.",false,false,false,CL_blue);
+		printlog("í˜„ìì˜ ëŒì€ ê±°ì˜ ì‚¬ë¼ì ¸ê°€ê³ ìˆë‹¤.",false,false,false,CL_blue);
 		break;
 	}
 }
@@ -100,40 +100,40 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 		break;
 	case ALCT_STONE_FIST:
 		if(onoff_)
-			printlog("´ç½ÅÀÇ ÁÖ¸ÔÀÌ ¹ÙÀ§Ã³·³ ´Ü´ÜÇØÁ³´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì˜ ì£¼ë¨¹ì´ ë°”ìœ„ì²˜ëŸ¼ ë‹¨ë‹¨í•´ì¡Œë‹¤.",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ ÁÖ¸ÔÀº ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ì£¼ë¨¹ì€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_DIAMOND_HARDNESS:
 		you.UpDownBuff(BUFFSTAT_AC,5*(onoff_?1:-1));
 		if(onoff_)
-			printlog("´ç½ÅÀÇ ¸öÀº ¹ÙÀ§Ã³·³ ´Ü´ÜÇØÁ³´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì˜ ëª¸ì€ ë°”ìœ„ì²˜ëŸ¼ ë‹¨ë‹¨í•´ì¡Œë‹¤.",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ ¸öÀº ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ëª¸ì€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_POISON_BODY:
 		if(onoff_)
-			printlog("´ç½ÅÀÇ ¸öÀº µ¶ ±â¿îÀ» »Õ¾î³»±â ½ÃÀÛÇß´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì˜ ëª¸ì€ ë… ê¸°ìš´ì„ ë¿œì–´ë‚´ê¸° ì‹œì‘í–ˆë‹¤.",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ ¸öÀº ´õÀÌ»ó µ¶À» »Õ¾î³»Áö ¾Ê´Â´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ëª¸ì€ ë”ì´ìƒ ë…ì„ ë¿œì–´ë‚´ì§€ ì•ŠëŠ”ë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_HASTE:
 		if(onoff_)
-			printlog("´ç½ÅÀÇ ¿¬±İ¼úÀÇ ÈûÀ¸·Î »¡¶óÁ³´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì˜ ì—°ê¸ˆìˆ ì˜ í˜ìœ¼ë¡œ ë¹¨ë¼ì¡Œë‹¤.",true,false,false,CL_white_blue);
 		else if(!you.s_haste)
-			printlog("¼Óµµ°¡ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù .",false,false,false,CL_blue);
+			printlog("ì†ë„ê°€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤ .",false,false,false,CL_blue);
 		break;
 	case ALCT_STONE_FORM:
 		if(onoff_)
-			printlog("´ç½ÅÀº ¹«³ä¹«»óÀÇ °æÁö¿¡ ÀÌ¸£·¶´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ ë¬´ë…ë¬´ìƒì˜ ê²½ì§€ì— ì´ë¥´ë €ë‹¤.",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ ¹«³ä¹«»óÀÇ °æÁö´Â ³¡³µ´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ë¬´ë…ë¬´ìƒì˜ ê²½ì§€ëŠ” ëë‚¬ë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_AUTUMN_BLADE:
 		if(onoff_)
-			printlog("´ç½ÅÀº ¼Õ¿¡ Åé´Ï¸¦ »õ°Ü³Ö¾ú´Ù.",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ ì†ì— í†±ë‹ˆë¥¼ ìƒˆê²¨ë„£ì—ˆë‹¤.",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ Åé´Ï´Â »ç¶óÁ³´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ í†±ë‹ˆëŠ” ì‚¬ë¼ì¡Œë‹¤.",false,false,false,CL_blue);
 		break;
 	case ALCT_PHILOSOPHERS_STONE:
 		you.Ability(SKL_PHILOSOPHERS_1,false,!onoff_);
@@ -142,9 +142,9 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 		you.Ability(SKL_PHILOSOPHERS_4,false,!onoff_);
 		you.Ability(SKL_PHILOSOPHERS_5,false,!onoff_);
 		if(onoff_)
-			printlog("´ç½ÅÀº ÇöÀÚÀÇ µ¹À» ¿¬¼ºÇØ³Â´Ù. (aÅ°·Î Ãß°¡ ¸¶¹ıÀ» »ç¿ë°¡´É)",true,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ í˜„ìì˜ ëŒì„ ì—°ì„±í•´ëƒˆë‹¤. (aí‚¤ë¡œ ì¶”ê°€ ë§ˆë²•ì„ ì‚¬ìš©ê°€ëŠ¥)",true,false,false,CL_white_blue);
 		else
-			printlog("´ç½ÅÀÇ ÇöÀÚÀÇ µ¹Àº ÀÌÀ¹°í »ç¶óÁ³´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ í˜„ìì˜ ëŒì€ ì´ìœ½ê³  ì‚¬ë¼ì¡Œë‹¤.",false,false,false,CL_blue);
 		break;
 
 	}

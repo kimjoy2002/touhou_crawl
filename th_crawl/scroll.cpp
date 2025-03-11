@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: scroll.cpp
+// íŒŒì¼ì´ë¦„: scroll.cpp
 //
-// ³»¿ë: µÎ·ç¸¶¸®
+// ë‚´ìš©: ë‘ë£¨ë§ˆë¦¬
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,50 +23,50 @@ extern HANDLE mutx;
 
 char *scroll_uniden_string[SCT_MAX]=
 {
-	"ASASVQE°¡ ½áÀÖ´Â ",
-	"EFIIEQN°¡ ½áÀÖ´Â ",
-	"QEWFQFF°¡ ½áÀÖ´Â ",
-	"DIQHQNA°¡ ½áÀÖ´Â ",
-	"IVNUXTO°¡ ½áÀÖ´Â ",
-	"MDIMIKU°¡ ½áÀÖ´Â ",
-	"AFIQHQW°¡ ½áÀÖ´Â ",
-	"POIUGAW°¡ ½áÀÖ´Â ",
-	"MVDOQUR°¡ ½áÀÖ´Â ",
-	"TFJEOTT°¡ ½áÀÖ´Â ",
-	"XNEPBIQ°¡ ½áÀÖ´Â ",
-	"JUYBLNM°¡ ½áÀÖ´Â ",
-	"UNQIFNV°¡ ½áÀÖ´Â ",
-	"LVIWBAA°¡ ½áÀÖ´Â ",
-	"RWMVXCO°¡ ½áÀÖ´Â ",
-	"OFQXLFE°¡ ½áÀÖ´Â ",
-	"DQFQEFS°¡ ½áÀÖ´Â ",
-	"BAHJDQU°¡ ½áÀÖ´Â ",
-	"WQGOKOU°¡ ½áÀÖ´Â ",
-	"EIQJIWE°¡ ½áÀÖ´Â "
+	"ASASVQEê°€ ì¨ìˆëŠ” ",
+	"EFIIEQNê°€ ì¨ìˆëŠ” ",
+	"QEWFQFFê°€ ì¨ìˆëŠ” ",
+	"DIQHQNAê°€ ì¨ìˆëŠ” ",
+	"IVNUXTOê°€ ì¨ìˆëŠ” ",
+	"MDIMIKUê°€ ì¨ìˆëŠ” ",
+	"AFIQHQWê°€ ì¨ìˆëŠ” ",
+	"POIUGAWê°€ ì¨ìˆëŠ” ",
+	"MVDOQURê°€ ì¨ìˆëŠ” ",
+	"TFJEOTTê°€ ì¨ìˆëŠ” ",
+	"XNEPBIQê°€ ì¨ìˆëŠ” ",
+	"JUYBLNMê°€ ì¨ìˆëŠ” ",
+	"UNQIFNVê°€ ì¨ìˆëŠ” ",
+	"LVIWBAAê°€ ì¨ìˆëŠ” ",
+	"RWMVXCOê°€ ì¨ìˆëŠ” ",
+	"OFQXLFEê°€ ì¨ìˆëŠ” ",
+	"DQFQEFSê°€ ì¨ìˆëŠ” ",
+	"BAHJDQUê°€ ì¨ìˆëŠ” ",
+	"WQGOKOUê°€ ì¨ìˆëŠ” ",
+	"EIQJIWEê°€ ì¨ìˆëŠ” "
 };
 
 const char *scroll_iden_string[SCT_MAX]=
 {	
-	"°ø°£ÀÌµ¿ÀÇ ",
-	"½Äº°ÀÇ ",
-	"³«¼­ ",
-	"¹«±âÀúÁÖÀÇ ",
-	"¹æ¾î±¸ÀúÁÖÀÇ ",
-	"ÀúÁÖÇØÁ¦ÀÇ ",
-	"¼ø°£ÀÌµ¿ÀÇ ",
-	"ÁöÇüÅ½ÁöÀÇ ",
-	"¹«±â°­È­ÀÇ ",
-	"¹«±â°­È­ÀÇ ",
-	"¹æ¾î±¸°­È­ÀÇ ",
-	"¾È°³ÀÇ ",
-	"ÀúÁÖÅ½ÁöÀÇ ",
-	"Àå½Å±¸ÀúÁÖÀÇ ",
-	"Á¤ÀûÀÇ ",
-	"¿µ°İ ",
-	"½ºÆçÄ«µåÃæÀüÀÇ ",
-	"¸Á°¢ÀÇ ",
-	"¼º¿ªÀÇ ",
-	"¸¶¹ı¹«±âÀÇ "
+	"ê³µê°„ì´ë™ì˜ ",
+	"ì‹ë³„ì˜ ",
+	"ë‚™ì„œ ",
+	"ë¬´ê¸°ì €ì£¼ì˜ ",
+	"ë°©ì–´êµ¬ì €ì£¼ì˜ ",
+	"ì €ì£¼í•´ì œì˜ ",
+	"ìˆœê°„ì´ë™ì˜ ",
+	"ì§€í˜•íƒì§€ì˜ ",
+	"ë¬´ê¸°ê°•í™”ì˜ ",
+	"ë¬´ê¸°ê°•í™”ì˜ ",
+	"ë°©ì–´êµ¬ê°•í™”ì˜ ",
+	"ì•ˆê°œì˜ ",
+	"ì €ì£¼íƒì§€ì˜ ",
+	"ì¥ì‹ êµ¬ì €ì£¼ì˜ ",
+	"ì •ì ì˜ ",
+	"ì˜ê²© ",
+	"ìŠ¤í ì¹´ë“œì¶©ì „ì˜ ",
+	"ë§ê°ì˜ ",
+	"ì„±ì—­ì˜ ",
+	"ë§ˆë²•ë¬´ê¸°ì˜ "
 };
 
 
@@ -167,7 +167,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			kind != SCT_REMOVE_CURSE &&
 			kind != SCT_AMNESIA)
 		{
-			printlog("´ç½ÅÀº µÎ·ç¸¶¸®ÀÇ È¿°ú¸¦ »ç¿ëÇÏ±â¿£ ³Ê¹« ¼øÈ­µÇ¾îÀÖ´Ù.", true, false, false, CL_normal);
+			printlog("ë‹¹ì‹ ì€ ë‘ë£¨ë§ˆë¦¬ì˜ íš¨ê³¼ë¥¼ ì‚¬ìš©í•˜ê¸°ì—” ë„ˆë¬´ ìˆœí™”ë˜ì–´ìˆë‹¤.", true, false, false, CL_normal);
 			iden_list.scroll_list[kind].iden = 3;
 			return !pre_iden_;
 		}
@@ -178,7 +178,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 	{
 	case SCT_TELEPORT:		
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		ReleaseMutex(mutx);
@@ -202,15 +202,15 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_NONE:
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
-		printlog("ÀÌ µÎ·ç¸¶¸®¿¡ ½áÀÖ´Â °ÍÀº ³«¼­°°´Ù.",true,false,false,CL_normal);
+		printlog("ì´ ë‘ë£¨ë§ˆë¦¬ì— ì¨ìˆëŠ” ê²ƒì€ ë‚™ì„œê°™ë‹¤.",true,false,false,CL_normal);
 		iden_list.scroll_list[kind].iden = 3;
 		return true;
 		}
 	case SCT_CURSE_WEAPON:		
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = curse_weapon_scroll(pre_iden_);
@@ -224,7 +224,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_REMOVE_CURSE:
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		iden_list.scroll_list[kind].iden = 3;
 		bool return_ = remove_curse_scroll(pre_iden_);
@@ -243,12 +243,12 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_MAPPING:
 		 {
-			if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+			if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 				return true;
 			iden_list.scroll_list[kind].iden = 3;
 			if(env[current_level].isBamboo())
 			{				
-				printlog("ÁöÇüÅ½Áö´Â ¹Ì±ÃÀÇ Á×¸²¿¡¼± È¿°ú¸¦ º¸Áö ¸øÇÑ´Ù.",true,false,false,CL_normal);
+				printlog("ì§€í˜•íƒì§€ëŠ” ë¯¸ê¶ì˜ ì£½ë¦¼ì—ì„  íš¨ê³¼ë¥¼ ë³´ì§€ ëª»í•œë‹¤.",true,false,false,CL_normal);
 				if(pre_iden_){
 					return false;
 				}
@@ -259,7 +259,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			else
 			{
 				env[current_level].MakeMapping(100);	
-				printlog("´ç½ÅÀº ÇöÀç ÃşÀ» °¨ÁöÇØ³Â´Ù.",true,false,false,CL_normal);
+				printlog("ë‹¹ì‹ ì€ í˜„ì¬ ì¸µì„ ê°ì§€í•´ëƒˆë‹¤.",true,false,false,CL_normal);
 			}
 			return true;
 		 }
@@ -291,7 +291,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_DETECT_CURSE:
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		bool return_ = detect_curse_scroll(pre_iden_);
 		iden_list.scroll_list[kind].iden = 3;
@@ -305,13 +305,13 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_SILENCE:
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		skill_silence(75, false, &you, you.position);
 		iden_list.scroll_list[kind].iden = 3;
 		return true;
 		}
-	case SCT_SOUL_SHOT://Ãß°¡
+	case SCT_SOUL_SHOT://ì¶”ê°€
 		{
 		iden_list.scroll_list[kind].iden = 3;
 		if(you.power >= 100)
@@ -319,21 +319,21 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			ReleaseMutex(mutx);
 			changedisplay(DT_GAME);
 			you.PowUpDown(-100,true);
-			printlog("ÆÎ! ",false,false,false,CL_white_blue);
+			printlog("íŒ¡! ",false,false,false,CL_white_blue);
 			soundmanager.playSound("soul_shot");
 			skill_soul_shot(0, &you, you.position);
 			WaitForSingleObject(mutx, INFINITE);
 		}
 		else
 		{
-			if (!waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
-				printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			if (!waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
+				printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 		}
 		return true;
 		}
 	case SCT_SANTUARY:
 	{
-		//if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		//if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 		//	return true;
 		iden_list.scroll_list[kind].iden = 3;
 		if (you.power >= 100)
@@ -346,7 +346,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 		else
 		{
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.", true, false, false, CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.", true, false, false, CL_normal);
 		}
 		return true;
 	}
@@ -360,7 +360,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_AMNESIA:
 		{
-		if (waste_) //³¶ºñ½Ã¿£ ÀÇ¹Ì°¡ ¾øÀ½
+		if (waste_) //ë‚­ë¹„ì‹œì—” ì˜ë¯¸ê°€ ì—†ìŒ
 			return true;
 		ReleaseMutex(mutx);
 		iden_list.scroll_list[kind].iden = 3;
@@ -381,7 +381,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 
 void random_identity_scroll()
 {
-	//¿ªº´½ÅÀÇ ÀúÁÖ·Î ½ºÅ©·Ñ ÀÚµ¿ ½Äº°
+	//ì—­ë³‘ì‹ ì˜ ì €ì£¼ë¡œ ìŠ¤í¬ë¡¤ ìë™ ì‹ë³„
 	random_extraction<item *> rand_;
 
 	list<item>::iterator it;
@@ -407,9 +407,9 @@ void random_identity_scroll()
 bool identity_scroll(bool pre_iden_)
 {
 	if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
-		view_item(IVT_UNIDEN,"¹«½¼ ¾ÆÀÌÅÛÀ» ½Äº°½Ã°Ú½À´Ï±î?");
+		view_item(IVT_UNIDEN,"ë¬´ìŠ¨ ì•„ì´í…œì„ ì‹ë³„ì‹œê² ìŠµë‹ˆê¹Œ?");
 	else
-		view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+		view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -430,13 +430,13 @@ bool identity_scroll(bool pre_iden_)
 				}
 			}
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -445,13 +445,13 @@ bool identity_scroll(bool pre_iden_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
-				view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛÀ» ½Äº°½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì„ ì‹ë³„ì‹œê² ìŠµë‹ˆê¹Œ?");
 			else
-				view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -470,23 +470,23 @@ bool curse_weapon_scroll(bool pre_iden_)
 {
 	if(you.equipment[ET_WEAPON])
 	{
-		string before_name = you.equipment[ET_WEAPON]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+		string before_name = you.equipment[ET_WEAPON]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 		if(you.equipment[ET_WEAPON]->Curse(true,ET_WEAPON))
 		{
-			printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);	
+			printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);	
 			printlog(before_name,false,false,false,CL_small_danger);	
 			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-			printlog("°Ë°Ô ºû³µ´Ù.",true,false,false,CL_small_danger);		
+			printlog("ê²€ê²Œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_small_danger);		
 			return true;
 		}
 		else
 		{
 			if(pre_iden_){
-				printlog("ÀÌ ¾ÆÀÌÅÛÀº ÀúÁÖ¸¦ ´õ °É ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+				printlog("ì´ ì•„ì´í…œì€ ì €ì£¼ë¥¼ ë” ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 				return false;
 			}
 			else{
-				printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+				printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -494,11 +494,11 @@ bool curse_weapon_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("¹«±â¸¦ ³¢°í ÀÖÁö ¾Ê´Ù.",true,false,false,CL_normal);
+			printlog("ë¬´ê¸°ë¥¼ ë¼ê³  ìˆì§€ ì•Šë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		else{
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -514,23 +514,23 @@ bool curse_armour_scroll(bool pre_iden_)
 	{
 		if(you.equipment[dq[i]])
 		{
-			string before_name = you.equipment[dq[i]]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+			string before_name = you.equipment[dq[i]]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 			if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
 			{
-				printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);		
+				printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);		
 				printlog(before_name,false,false,false,CL_small_danger);	
 				printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("°Ë°Ô ºû³µ´Ù.",true,false,false,CL_small_danger);		
+				printlog("ê²€ê²Œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_small_danger);		
 				return true;
 			}
 		}
 	}
 	if(pre_iden_){
-		printlog("ÀúÁÖ°É ¼ö ÀÖ´Â ¹æ¾î±¸¸¦ ³¢°í ÀÖÁö ¾Ê´Ù.",true,false,false,CL_normal);
+		printlog("ì €ì£¼ê±¸ ìˆ˜ ìˆëŠ” ë°©ì–´êµ¬ë¥¼ ë¼ê³  ìˆì§€ ì•Šë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	else{
-		printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+		printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 		return true;
 	}
 }
@@ -549,8 +549,8 @@ bool remove_curse_scroll(bool pre_iden_)
 				{		
 					if(iden_==false && you.GetPunish(GT_HINA) && randA(2))
 					{
-						printlog("È÷³ª°¡ ´ç½ÅÀÇ ¾×¶«À» ¹æÇØÇß´Ù! ",false,false,false,CL_hina);						
-						printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+						printlog("íˆë‚˜ê°€ ë‹¹ì‹ ì˜ ì•¡ë•œì„ ë°©í•´í–ˆë‹¤! ",false,false,false,CL_hina);						
+						printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 						return true;
 					}
 					you.equipment[i]->curse = false;
@@ -563,17 +563,17 @@ bool remove_curse_scroll(bool pre_iden_)
 	}
 	if(iden_)
 	{
-		printlog("°¡Áö°íÀÖ´ø ÀåºñÀÇ ÀúÁÖ°¡ Ç®·È´Ù.",true,false,false,CL_normal);
+		printlog("ê°€ì§€ê³ ìˆë˜ ì¥ë¹„ì˜ ì €ì£¼ê°€ í’€ë ¸ë‹¤.",true,false,false,CL_normal);
 		return true;
 	}
 	else
 	{
 		if(pre_iden_){
-			printlog("ÀúÁÖ°¡ °É¸° Àåºñ°¡ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ì €ì£¼ê°€ ê±¸ë¦° ì¥ë¹„ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		else{
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -585,7 +585,7 @@ bool blink_scroll(bool pre_iden_)
 	changedisplay(DT_GAME);
 	if (current_level == ZIGURRAT_LEVEL ) {
 		if (pre_iden_) {
-			printlog("±¤¸ùÀÇ ¼¼°è¿¡¼± ¼ø°£ÀÌµ¿ÀÇ Á¦¾î°¡ ºÒ°¡´ÉÇÏ´Ù. Á¤¸»·Î ¾µ°Å¾ß? (y/n)", true, true, false, CL_small_danger);
+			printlog("ê´‘ëª½ì˜ ì„¸ê³„ì—ì„  ìˆœê°„ì´ë™ì˜ ì œì–´ê°€ ë¶ˆê°€ëŠ¥í•˜ë‹¤. ì •ë§ë¡œ ì“¸ê±°ì•¼? (y/n)", true, true, false, CL_small_danger);
 
 			switch (waitkeyinput())
 			{
@@ -595,7 +595,7 @@ bool blink_scroll(bool pre_iden_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
-				printlog("Ãë¼ÒÇÏ¿´´Ù.", true, true, false, CL_normal);
+				printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, true, false, CL_normal);
 				return false;
 			}
 		}
@@ -613,16 +613,16 @@ bool blink_scroll(bool pre_iden_)
 		switch(waitkeyinput())
 		{
 		case 'k':
-			is_move = Search_Move(coord_def(you.position.x,you.position.y-1), false,VT_BLINK);  //À§
+			is_move = Search_Move(coord_def(you.position.x,you.position.y-1), false,VT_BLINK);  //ìœ„
 			break;
 		case 'j':
-			is_move = Search_Move(coord_def(you.position.x,you.position.y+1), false,VT_BLINK); //¾Æ·¡
+			is_move = Search_Move(coord_def(you.position.x,you.position.y+1), false,VT_BLINK); //ì•„ë˜
 			break;
 		case 'h':
-			is_move = Search_Move(coord_def(you.position.x-1,you.position.y), false,VT_BLINK); //¿ŞÂÊ
+			is_move = Search_Move(coord_def(you.position.x-1,you.position.y), false,VT_BLINK); //ì™¼ìª½
 			break;
 		case 'l':
-			is_move = Search_Move(coord_def(you.position.x+1,you.position.y), false,VT_BLINK); //¿À¸¥ÂÊ
+			is_move = Search_Move(coord_def(you.position.x+1,you.position.y), false,VT_BLINK); //ì˜¤ë¥¸ìª½
 			break;
 		case 'b':
 			is_move = Search_Move(coord_def(you.position.x-1,you.position.y+1), false,VT_BLINK);
@@ -655,10 +655,10 @@ bool blink_scroll(bool pre_iden_)
 			break;
 		case VK_ESCAPE:	
 			if(pre_iden_){
-				printlog("Á¤¸»·Î ¼ø°£ÀÌµ¿À» Ãë¼ÒÇÏ½Ã°Ú½À´Ï±î? (y/n)",true,true,false,CL_help);
+				printlog("ì •ë§ë¡œ ìˆœê°„ì´ë™ì„ ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? (y/n)",true,true,false,CL_help);
 			}
 			else{
-				printlog("Á¤¸»·Î ¼ø°£ÀÌµ¿À» Ãë¼ÒÇÏ½Ã°Ú½À´Ï±î? ½ºÅ©·ÑÀº »ç¶óÁı´Ï´Ù! (y/n)",true,true,false,CL_help);
+				printlog("ì •ë§ë¡œ ìˆœê°„ì´ë™ì„ ì·¨ì†Œí•˜ì‹œê² ìŠµë‹ˆê¹Œ? ìŠ¤í¬ë¡¤ì€ ì‚¬ë¼ì§‘ë‹ˆë‹¤! (y/n)",true,true,false,CL_help);
 			}
 			bool repeat_ = true;
 			while(repeat_)
@@ -693,10 +693,10 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 		string before_name = you.equipment[ET_WEAPON]->GetName();
 		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
-			printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_good);	
+			printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_good);	
 			printlog(before_name,false,false,false,CL_good);	
 			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_good);
-			printlog("»¡°­»öÀ¸·Î ºû³µ´Ù.",true,false,false,CL_good);
+			printlog("ë¹¨ê°•ìƒ‰ìœ¼ë¡œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_good);
 			you.equipment[ET_WEAPON]->curse = false;
 			you.equipment[ET_WEAPON]->identify_curse = true;
 			return true;
@@ -704,11 +704,11 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 		else
 		{
 			if(pre_iden_){
-				printlog("´õ ÀÌ»ó °­È­ ÇÒ ¼ö ¾ø´Â ¹«±â´Ù.",true,false,false,CL_normal);
+				printlog("ë” ì´ìƒ ê°•í™” í•  ìˆ˜ ì—†ëŠ” ë¬´ê¸°ë‹¤.",true,false,false,CL_normal);
 				return false;
 			}
 			else{
-				printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+				printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -716,11 +716,11 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("ÀåºñÇÑ ¹«±â°¡ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ì¥ë¹„í•œ ë¬´ê¸°ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		else{
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -733,10 +733,10 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 		string before_name = you.equipment[ET_WEAPON]->GetName();
 		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
-			printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_good);	
+			printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_good);	
 			printlog(before_name,false,false,false,CL_good);	
 			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_good);
-			printlog("»¡°­»öÀ¸·Î ºû³µ´Ù.",true,false,false,CL_good);
+			printlog("ë¹¨ê°•ìƒ‰ìœ¼ë¡œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_good);
 			you.equipment[ET_WEAPON]->curse = false;
 			you.equipment[ET_WEAPON]->identify_curse = true;
 			return true;
@@ -744,11 +744,11 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 		else
 		{
 			if(pre_iden_){
-				printlog("´õ ÀÌ»ó °­È­ ÇÒ ¼ö ¾ø´Â ¹«±â´Ù.",true,false,false,CL_normal);
+				printlog("ë” ì´ìƒ ê°•í™” í•  ìˆ˜ ì—†ëŠ” ë¬´ê¸°ë‹¤.",true,false,false,CL_normal);
 				return false;
 			}
 			else{
-				printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+				printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -756,11 +756,11 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("ÀåºñÇÑ ¹«±â°¡ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ì¥ë¹„í•œ ë¬´ê¸°ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		else{
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -774,9 +774,9 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 
 	if (!waste_) {
 		if (iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
-			view_item(IVT_ARMOR_ENCHANT, "¹«½¼ ¹æ¾î±¸¸¦ °­È­ÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_ARMOR_ENCHANT, "ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ê°•í™”í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else
-			view_item(IVT_SELECT, "¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT, "ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	}
 	while(1)
 	{
@@ -801,7 +801,7 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 				{
 					printlog(before_name,false,false,false,CL_good);	
 					printlog(item_->GetNameInfor().name_do(true),false,false,false,CL_good);
-					printlog("ÃÊ·Ï»öÀ¸·Î ºû³µ´Ù.",true,false,false,CL_good);
+					printlog("ì´ˆë¡ìƒ‰ìœ¼ë¡œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_good);
 					item_->curse = false;
 					item_->identify_curse = true;
 					return true;
@@ -812,11 +812,11 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 						changedisplay(DT_GAME);
 					}
 					if(pre_iden_){
-						printlog("ÀÌ ¾ÆÀÌÅÛÀº °­È­ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+						printlog("ì´ ì•„ì´í…œì€ ê°•í™”í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 						return false;
 					}
 					else{
-						printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+						printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 						return true;
 					}
 				}
@@ -826,13 +826,13 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		else if (waste_) {
 			return false;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -841,13 +841,13 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
-				view_item(IVT_SELECT,"¹«½¼ ¹æ¾î±¸¸¦ °­È­ÇÏ½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ê°•í™”í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 			else
-				view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -876,7 +876,7 @@ bool detect_curse_scroll(bool pre_iden_)
 	{
 		it->identify_curse = true;
 	}
-	printlog("ÀÎº¥Åä¸®ÀÇ ÀúÁÖ¸¦ Å½ÁöÇß´Ù.",true,true,false,CL_normal);
+	printlog("ì¸ë²¤í† ë¦¬ì˜ ì €ì£¼ë¥¼ íƒì§€í–ˆë‹¤.",true,true,false,CL_normal);
 	return true;
 }
 bool curse_jewelry_scroll(bool pre_iden_)
@@ -890,23 +890,23 @@ bool curse_jewelry_scroll(bool pre_iden_)
 	{
 		if(you.equipment[dq[i]])
 		{
-			string before_name = you.equipment[dq[i]]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+			string before_name = you.equipment[dq[i]]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 			if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
 			{
-				printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);		
+				printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);		
 				printlog(before_name,false,false,false,CL_small_danger);	
 				printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("°Ë°Ô ºû³µ´Ù.",true,false,false,CL_small_danger);		
+				printlog("ê²€ê²Œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_small_danger);		
 				return true;
 			}
 		}
 	}
 	if(pre_iden_){
-		printlog("ÀúÁÖ°É ¼ö ÀÖ´Â Àå½Å±¸°¡ ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ì €ì£¼ê±¸ ìˆ˜ ìˆëŠ” ì¥ì‹ êµ¬ê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	else{
-		printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+		printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 		return true;
 	}
 }
@@ -928,16 +928,16 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		}
 		if(!ok_)
 		{
-			printlog("´ç½ÅÀÇ ¼ÒÁöÇ°¿¡ ÃæÀüÇÒ ¼ö ÀÖ´Â ½ºÆçÄ«µå°¡ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì˜ ì†Œì§€í’ˆì— ì¶©ì „í•  ìˆ˜ ìˆëŠ” ìŠ¤í ì¹´ë“œê°€ ì—†ë‹¤.",true,false,false,CL_normal);
 			if(pre_iden_)
 				return false;
 			else
 				return true;
 		}
 		if (iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-			view_item(IVT_SPELLCARD, "¹«½¼ ½ºÆçÄ«µå¸¦ ÃæÀüÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SPELLCARD, "ë¬´ìŠ¨ ìŠ¤í ì¹´ë“œë¥¼ ì¶©ì „í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else
-			view_item(IVT_SELECT, "¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT, "ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	}
 	while(1)
 	{
@@ -963,7 +963,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 
 					printlog(item_->GetName(),false,false,false,CL_good);	
 					printlog(item_->GetNameInfor().name_do(true),false,false,false,CL_good);
-					printlog("ÃæÀüµÇ¾ú´Ù.",true,false,false,CL_good);
+					printlog("ì¶©ì „ë˜ì—ˆë‹¤.",true,false,false,CL_good);
 
 					item_->value1 += charging_;
 					if(item_->value1>SpellcardMaxCharge((spellcard_evoke_type)item_->value2))
@@ -980,13 +980,13 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		else if (waste_) {
 			return false;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -995,13 +995,13 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-				view_item(IVT_SPELLCARD,"¹«½¼ ½ºÆçÄ«µå¸¦ ÃæÀüÇÏ½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SPELLCARD,"ë¬´ìŠ¨ ìŠ¤í ì¹´ë“œë¥¼ ì¶©ì „í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 			else
-				view_item(IVT_SELECT,"¹«½¼ ¾ÆÀÌÅÛ¿¡ »ç¿ëÇÏ½Ã°Ú½À´Ï±î?");
+				view_item(IVT_SELECT,"ë¬´ìŠ¨ ì•„ì´í…œì— ì‚¬ìš©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		}
 		else if(key_ == VK_ESCAPE)
 		{
@@ -1025,7 +1025,7 @@ bool amnesia_scroll(bool pre_iden_)
 	if(you.currentSpellNum)
 	{
 		int i=0;
-		view_spell("ÀØÀ» ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä. ( ?Å°·Î ¼³¸íÀ» º¼ ¼ö ÀÖ´Ù. )");
+		view_spell("ìŠì„ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”. ( ?í‚¤ë¡œ ì„¤ëª…ì„ ë³¼ ìˆ˜ ìˆë‹¤. )");
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -1037,7 +1037,7 @@ bool amnesia_scroll(bool pre_iden_)
 				{				
 					
 					changedisplay(DT_GAME);
-					printarray(true,false,false,CL_help,2,SpellString(spell_)," ¸¶¹ıÀ» ÀØ°Ú½À´Ï±î? (Y/N)");
+					printarray(true,false,false,CL_help,2,SpellString(spell_)," ë§ˆë²•ì„ ìŠê² ìŠµë‹ˆê¹Œ? (Y/N)");
 					switch(waitkeyinput())
 					{
 					case 'Y':
@@ -1049,12 +1049,12 @@ bool amnesia_scroll(bool pre_iden_)
 							you.remainSpellPoiont+=SpellLevel(spell_);
 							you.currentSpellNum--;
 							ReleaseMutex(mutx);
-							printarray(true,false,false,CL_normal,3,"´ç½ÅÀº ",SpellString(spell_)," ¸¶¹ıÀ» ÀØ¾ú´Ù.");	
+							printarray(true,false,false,CL_normal,3,"ë‹¹ì‹ ì€ ",SpellString(spell_)," ë§ˆë²•ì„ ìŠì—ˆë‹¤.");	
 							return true;
 						}
 					case 'N':
 					default:
-						view_spell("ÀØÀ» ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä.  ( ?Å°·Î ¼³¸íÀ» º¼ ¼ö ÀÖ´Ù. )");
+						view_spell("ìŠì„ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”.  ( ?í‚¤ë¡œ ì„¤ëª…ì„ ë³¼ ìˆ˜ ìˆë‹¤. )");
 						//changedisplay(DT_SPELL);
 						break;
 					}
@@ -1067,7 +1067,7 @@ bool amnesia_scroll(bool pre_iden_)
 	}
 	else
 	{
-		printlog("¾ÆÁ÷ ¾Ë°íÀÖ´Â ¸¶¹ıÀÌ ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì•„ì§ ì•Œê³ ìˆëŠ” ë§ˆë²•ì´ ì—†ë‹¤.",true,false,false,CL_normal);	
 	}
 
 	if(pre_iden_){
@@ -1099,39 +1099,39 @@ bool brand_weapon_scroll(bool pre_iden_)
 			switch (brand_)
 			{
 			case WB_FIRE:
-				weapon_string = "ºÒ±æ¿¡ ÈÛ½Î¿´´Ù!";
+				weapon_string = "ë¶ˆê¸¸ì— íœ©ì‹¸ì˜€ë‹¤!";
 				break;
 			case WB_COLD:
-				weapon_string = "ÇÑ±â¸¦ ³»»Õ¾ú´Ù!";
+				weapon_string = "í•œê¸°ë¥¼ ë‚´ë¿œì—ˆë‹¤!";
 				break;
 			case WB_POISON:
-				weapon_string = "¸Íµ¶À» »Õ¾î³Â´Ù!";
+				weapon_string = "ë§¹ë…ì„ ë¿œì–´ëƒˆë‹¤!";
 				break;
 			case WB_MANA_REGEN:
-				weapon_string = "¸¶³ª¸¦ ³»»Õ°íÀÖ´Ù!";
+				weapon_string = "ë§ˆë‚˜ë¥¼ ë‚´ë¿œê³ ìˆë‹¤!";
 				break;
 			case WB_FAST_CAST:
-				weapon_string = "½Åºñ·Î¿î ÈûÀ» »Õ¾î³»°í ÀÖ´Ù!";
+				weapon_string = "ì‹ ë¹„ë¡œìš´ í˜ì„ ë¿œì–´ë‚´ê³  ìˆë‹¤!";
 				break;
 			case WB_PROTECT:
-				weapon_string = "º¸È£ÀÇ ¿À¿À¶ó¸¦ ³»»Õ°íÀÖ´Ù!";
+				weapon_string = "ë³´í˜¸ì˜ ì˜¤ì˜¤ë¼ë¥¼ ë‚´ë¿œê³ ìˆë‹¤!";
 				break;
 			}
 
 			printarray(true, false, false, CL_magic, 3, you.equipment[ET_WEAPON]->GetName().c_str(), you.equipment[ET_WEAPON]->GetNameInfor().name_do(true), weapon_string.c_str());
 			you.equipment[ET_WEAPON]->value5 = brand_;
 			you.equipment[ET_WEAPON]->value6 = -1;
-			printlog("´ç½ÅÀÇ ¹«±â¿¡ ¸¶¹ıÀÌ ºÎ¿©µÇ¾ú´Ù! ", false, false, false, CL_normal);
+			printlog("ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ë§ˆë²•ì´ ë¶€ì—¬ë˜ì—ˆë‹¤! ", false, false, false, CL_normal);
 			return true;
 		}
 		else
 		{
 			if (pre_iden_) {
-				printlog("ÀÌ ¹«±â¿£ ¸¶¹ıÀ» ºÎ¿©ÇÒ ¼ö ¾ø´Ù. ", false, false, false, CL_normal);
+				printlog("ì´ ë¬´ê¸°ì—” ë§ˆë²•ì„ ë¶€ì—¬í•  ìˆ˜ ì—†ë‹¤. ", false, false, false, CL_normal);
 				return false;
 			}
 			else {
-				printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù. ", false, false, false, CL_normal);
+				printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤. ", false, false, false, CL_normal);
 				return true;
 			}
 		}
@@ -1139,11 +1139,11 @@ bool brand_weapon_scroll(bool pre_iden_)
 	else
 	{
 		if (pre_iden_) {
-			printlog("ÀåºñÇÑ ¹«±â°¡ ¾ø´Ù. ", false, false, false, CL_normal);
+			printlog("ì¥ë¹„í•œ ë¬´ê¸°ê°€ ì—†ë‹¤. ", false, false, false, CL_normal);
 			return false;
 		}
 		else {
-			printlog("¾Æ¹« ÀÏµµ ÀÏ¾î³ªÁö¾Ê¾Ò´Ù. ", false, false, false, CL_normal);
+			printlog("ì•„ë¬´ ì¼ë„ ì¼ì–´ë‚˜ì§€ì•Šì•˜ë‹¤. ", false, false, false, CL_normal);
 			return true;
 		}
 	}

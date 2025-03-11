@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: textureUtility.cpp
+// íŒŒì¼ì´ë¦„: textureUtility.cpp
 //
-// ³»¿ë: ±×¸®±â ÇÔ¼ö Á¤ÀÇ ¸ğÀ½
+// ë‚´ìš©: ê·¸ë¦¬ê¸° í•¨ìˆ˜ ì •ì˜ ëª¨ìŒ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -14,12 +14,12 @@
 // extern
 //
 
-extern IDirect3DDevice9* Device; //µğ¹ÙÀÌ½ºÆ÷ÀÎÅÍ
-extern IDirect3DVertexBuffer9* g_pVB; //¹öÅØ½º¹öÆÛÆ÷ÀÎÅÍ
-extern D3DXMATRIXA16 g_BaseMatrix; //¸ÅÆ®¸¯½ºÆ÷ÀÎÅÍ
+extern IDirect3DDevice9* Device; //ë””ë°”ì´ìŠ¤í¬ì¸í„°
+extern IDirect3DVertexBuffer9* g_pVB; //ë²„í…ìŠ¤ë²„í¼í¬ì¸í„°
+extern D3DXMATRIXA16 g_BaseMatrix; //ë§¤íŠ¸ë¦­ìŠ¤í¬ì¸í„°
 
 //
-// ÅØ½ºÃÄ¸¦ È¸Àü½ÃÅ²´Ù.
+// í…ìŠ¤ì³ë¥¼ íšŒì „ì‹œí‚¨ë‹¤.
 //
 
 bool TextureRotate(float z)
@@ -33,7 +33,7 @@ bool TextureRotate(float z)
 }
 
 //
-// ÅØ½ºÃÄÀÇ À§Ä¡¸¦ Á¤ÇÑ´Ù.
+// í…ìŠ¤ì³ì˜ ìœ„ì¹˜ë¥¼ ì •í•œë‹¤.
 //
 
 bool TexturePosition(float x, float y)
@@ -48,7 +48,7 @@ bool TexturePosition(float x, float y)
 }
 
 //
-// ÅØ½ºÃÄÀÇ Å©±â¸¦ Á¤ÇÑ´Ù.
+// í…ìŠ¤ì³ì˜ í¬ê¸°ë¥¼ ì •í•œë‹¤.
 //
 
 bool TextureScale(float x,float y)
@@ -62,7 +62,7 @@ bool TextureScale(float x,float y)
 
 
 //
-// ÅØ½ºÃÄ¸¦ ±×¸°´Ù.
+// í…ìŠ¤ì³ë¥¼ ê·¸ë¦°ë‹¤.
 //
 
 bool DrawTexture(IDirect3DTexture9* g_pTempTexture)

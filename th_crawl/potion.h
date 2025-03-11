@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: potion.h
+// íŒŒì¼ì´ë¦„: potion.h
 //
-// ³»¿ë: potion°ü·Ã ¼±¾ğ
+// ë‚´ìš©: potionê´€ë ¨ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -12,7 +12,7 @@
 
 #include "player.h"
 potion_type goodbadpotion(int good_bad);
-extern const char *potion_uniden_string[PT_MAX]; //¹°¾à»ö½ºÆ®¸µ
+extern const char *potion_uniden_string[PT_MAX]; //ë¬¼ì•½ìƒ‰ìŠ¤íŠ¸ë§
 extern const char *potion_iden_string[PT_MAX];
 int isGoodPotion(potion_type kind);
 void drinkpotion(potion_type kind, bool waste_);

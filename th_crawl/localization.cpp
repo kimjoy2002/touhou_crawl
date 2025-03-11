@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: localization.cpp
+// íŒŒì¼ì´ë¦„: localization.cpp
 //
-// ³»¿ë: ´Ù±¹¾î
+// ë‚´ìš©: ë‹¤êµ­ì–´
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,7 +15,7 @@
 #include <sstream>
 
 
-// **ENUM ¡ê ¹®ÀÚ¿­ º¯È¯ ¸Ê »ı¼º ÇÔ¼ö**
+// **ENUM â†” ë¬¸ìì—´ ë³€í™˜ ë§µ ìƒì„± í•¨ìˆ˜**
 std::unordered_map<std::string, LOCALIZATION_ENUM_KEY> createEnumMap() {
     std::unordered_map<std::string, LOCALIZATION_ENUM_KEY> map;
 #define X(name) map[#name] = name;
@@ -29,7 +29,7 @@ unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
 
 unordered_set<string> LocalzationManager::korean_verbs = {
-	"Àº|´Â", "ÀÌ|°¡", "À»|¸¦", "¿Í|°ú"
+	"ì€|ëŠ”", "ì´|ê°€", "ì„|ë¥¼", "ì™€|ê³¼"
 };
 unordered_set<string> LocalzationManager::english_verbs = {
 	"is|are"
@@ -69,7 +69,7 @@ void LocalzationManager::init(LOCALIZATION_TYPE type) {
 			key.erase(key.find_last_not_of(" \t\r\n") + 1);
 			value.erase(0, value.find_first_not_of(" \t\r\n"));
 
-			// ÀÚµ¿ ¸ÅÇÎµÈ ENUM È®ÀÎ
+			// ìë™ ë§¤í•‘ëœ ENUM í™•ì¸
 			if (localization_enum_map.count(key)) {
 				localization_map[localization_enum_map[key]] = value;
 			} else {
@@ -89,7 +89,7 @@ string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) {
 }
 
 
-// ÅÂ±×¸¦ Ã³¸®ÇÏ´Â ÇÔ¼ö
+// íƒœê·¸ë¥¼ ì²˜ë¦¬í•˜ëŠ” í•¨ìˆ˜
 string LocalzationManager::processTags(const string& template_str, const vector<PlaceHolderHelper>& values) {
     string result = template_str;
     regex placeholder_regex(R"(\{(\d+)(?::([^}]+))?\})");
@@ -117,22 +117,22 @@ string LocalzationManager::processTags(const string& template_str, const vector<
 }
 
 std::string LocalzationManager::verb(const std::string& text, const std::string& verb, bool plural, bool only_verb) {
-	//textµÚ¿¡ ¿¹¾à verb°¡ ÀÖÀ¸¸é ÀÚµ¿À¸·Î º¯È¯ÇØ¼­ µÚ¿¡ ºÙ¿©ÁØ´Ù.
-	//¸¸¾à Á¸ÀçÇÏÁö¾Ê´Â´Ù¸é ±×³É µÚ¿¡ verb¸¦ ºÙÀÓ
-	//¿¹¾àverbÀÇ Á¾·ù
-	//µÚ¿¡ ºÙ´Â°Å "Àº|´Â", "ÀÌ|°¡", "À»|¸¦", "¿Í|°ú", "is|are"
-	//¾Õ¿¡ ºÙ´Â°Å "a|an"
+	//textë’¤ì— ì˜ˆì•½ verbê°€ ìˆìœ¼ë©´ ìë™ìœ¼ë¡œ ë³€í™˜í•´ì„œ ë’¤ì— ë¶™ì—¬ì¤€ë‹¤.
+	//ë§Œì•½ ì¡´ì¬í•˜ì§€ì•ŠëŠ”ë‹¤ë©´ ê·¸ëƒ¥ ë’¤ì— verbë¥¼ ë¶™ì„
+	//ì˜ˆì•½verbì˜ ì¢…ë¥˜
+	//ë’¤ì— ë¶™ëŠ”ê±° "ì€|ëŠ”", "ì´|ê°€", "ì„|ë¥¼", "ì™€|ê³¼", "is|are"
+	//ì•ì— ë¶™ëŠ”ê±° "a|an"
 
-	//Âü°í·Î À§¿¡ ¾Æ¹«°Íµµ ¾È¸ÅÄªµÇ¸é ±×³É µÚ¿¡ ºÙÀÌ°í
-	//|±âÁØÀ¸·Î ¾ÕµÚ°¡ ¹Ù²î¾îµµ µ¿ÀÛÇØ¾ß
+	//ì°¸ê³ ë¡œ ìœ„ì— ì•„ë¬´ê²ƒë„ ì•ˆë§¤ì¹­ë˜ë©´ ê·¸ëƒ¥ ë’¤ì— ë¶™ì´ê³ 
+	//|ê¸°ì¤€ìœ¼ë¡œ ì•ë’¤ê°€ ë°”ë€Œì–´ë„ ë™ì‘í•´ì•¼
 
 
-	//¿¹½Ã1) text=»ç°ú verb=Àº|´Â -> return "»ç°ú´Â";
-	//¿¹½Ã2) text=»ç¶÷ verb=À»|¸¦ -> return "»ç¶÷À»";
-	//¿¹½Ã3) text=µ¿¹° verb=¸¦|À» -> return "µ¿¹°À»";
-	//¿¹½Ã4) text=apple verb=a|an -> return "an apple";
-	//¿¹½Ã5) text=ÀÇÀÚ verb=ÀÇ -> return "ÀÇÀÚÀÇ";
-	//¿¹½Ã6) text=Å×½ºÆ® verb=¹Ù|º¸ -> return "Å×½ºÆ®¹Ù|º¸";
+	//ì˜ˆì‹œ1) text=ì‚¬ê³¼ verb=ì€|ëŠ” -> return "ì‚¬ê³¼ëŠ”";
+	//ì˜ˆì‹œ2) text=ì‚¬ëŒ verb=ì„|ë¥¼ -> return "ì‚¬ëŒì„";
+	//ì˜ˆì‹œ3) text=ë™ë¬¼ verb=ë¥¼|ì„ -> return "ë™ë¬¼ì„";
+	//ì˜ˆì‹œ4) text=apple verb=a|an -> return "an apple";
+	//ì˜ˆì‹œ5) text=ì˜ì verb=ì˜ -> return "ì˜ìì˜";
+	//ì˜ˆì‹œ6) text=í…ŒìŠ¤íŠ¸ verb=ë°”|ë³´ -> return "í…ŒìŠ¤íŠ¸ë°”|ë³´";
 
 
 	size_t delimiter = verb.find('|');

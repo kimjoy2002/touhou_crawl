@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: enum.h
+// íŒŒì¼ì´ë¦„: enum.h
 //
-// ³»¿ë: enum°ü·Ã
+// ë‚´ìš©: enumê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -95,7 +95,7 @@ enum dungeon_level
 };
 
 
-//Ãâ·ÂÅ¸ÀÔ
+//ì¶œë ¥íƒ€ì…
 enum display_type
 {
 	DT_TEXT=0,
@@ -111,7 +111,7 @@ enum display_type
 	DT_PROPERTY
 };
 
-//½ºÅÈ
+//ìŠ¤íƒ¯
 enum stat_type
 {
 	STAT_STR=0,
@@ -130,7 +130,7 @@ enum resist_type
 	RST_POWER,
 	RST_MAX
 };
-//¾ÆÀÌÅÛ¸ñ·Ïº¸±â Å¸ÀÔ
+//ì•„ì´í…œëª©ë¡ë³´ê¸° íƒ€ì…
 enum item_view_type
 {
 	IVT_INFOR,
@@ -156,7 +156,7 @@ enum item_view_type
 };
 
 
-//ÇÑÄ­ ÀÌµ¿À» À§ÇÑ »ó¼öµé
+//í•œì¹¸ ì´ë™ì„ ìœ„í•œ ìƒìˆ˜ë“¤
 enum short_move
 {
 	MV_BACK=-1,
@@ -165,7 +165,7 @@ enum short_move
 };
 
 
-//±æÃ£±â Å¸ÀÔ
+//ê¸¸ì°¾ê¸° íƒ€ì…
 enum search_type
 {
 	ST_NORMAL=0,
@@ -188,7 +188,7 @@ enum search_type
 //};
 
 //interupt
-enum interupt_type //¾Æ·¡·Î°¥¼ö·Ï ÀÎÅÍ·´Æ® ¿ì¼±¼øÀ§°¡ Áõ°¡ÇÑ´Ù.
+enum interupt_type //ì•„ë˜ë¡œê°ˆìˆ˜ë¡ ì¸í„°ëŸ½íŠ¸ ìš°ì„ ìˆœìœ„ê°€ ì¦ê°€í•œë‹¤.
 {
 	IT_NONE = 0,
 	IT_HP_RECOVER,
@@ -207,7 +207,7 @@ enum interupt_type //¾Æ·¡·Î°¥¼ö·Ï ÀÎÅÍ·´Æ® ¿ì¼±¼øÀ§°¡ Áõ°¡ÇÑ´Ù.
 
 
 
-//¹İ¿Ã¸²,¿Ã¸²,¹ö¸²µî(°æ·Î°è»êÀ§ÇÔ)
+//ë°˜ì˜¬ë¦¼,ì˜¬ë¦¼,ë²„ë¦¼ë“±(ê²½ë¡œê³„ì‚°ìœ„í•¨)
 enum round_type
 {
 	RT_BEGIN=0,
@@ -219,8 +219,8 @@ enum round_type
 	RT_END
 };
 
-//´øÀüÅ¸ÀÏÁ¾·ù
-enum dungeon_tile_type //¿ä°Å Ãß°¡ÇßÀ»¶§ ½Ã¾ß¿¡ °É¸®µµ·ÏÇÏ·Á¸é player.cppÀÇ resetLOS()¿¡ Ãß°¡ÇÏÀÚ
+//ë˜ì „íƒ€ì¼ì¢…ë¥˜
+enum dungeon_tile_type //ìš”ê±° ì¶”ê°€í–ˆì„ë•Œ ì‹œì•¼ì— ê±¸ë¦¬ë„ë¡í•˜ë ¤ë©´ player.cppì˜ resetLOS()ì— ì¶”ê°€í•˜ì
 {
 	DG_NONE = 0,
     DG_FLOOR,
@@ -238,7 +238,7 @@ enum dungeon_tile_type //¿ä°Å Ãß°¡ÇßÀ»¶§ ½Ã¾ß¿¡ °É¸®µµ·ÏÇÏ·Á¸é player.cppÀÇ rese
 	DG_HELL_FLOOR,
 	DG_FLOOR_END = DG_HELL_FLOOR,
 	DG_FLOOR_OBJECT = 15,
-	DG_OPEN_DOOR = DG_FLOOR_OBJECT, //¿ÀºêÁ§Æ®´Â ¹Ù´Ú+µ¤¾î¾²±â ½ÄÀÏ¶§
+	DG_OPEN_DOOR = DG_FLOOR_OBJECT, //ì˜¤ë¸Œì íŠ¸ëŠ” ë°”ë‹¥+ë®ì–´ì“°ê¸° ì‹ì¼ë•Œ
 	DG_DOWN_STAIR,
 	DG_UP_STAIR,
 	DG_SUB_STAIR_FIRST,
@@ -354,12 +354,12 @@ enum smoke_type
 
 enum event_type
 {
-	EVT_ABOVE=0, //À§¿¡ ¿Ã¶ó¼­´Ù.
-	EVT_SIGHT, //½Ã¾ß¿¡ µé¾î¿À´Ù.
-	EVT_APPROACH_SMALL, //±ÙÃ³¿¡ µµÂøÇß´Ù. (¹ĞÂø½Ã)
-	EVT_APPROACH_MIDDLE, //±ÙÃ³¿¡ µµÂøÇß´Ù. (Àû´çÈ÷)
-	EVT_COUNT, //ÅÏ
-	EVT_ALWAYS, //Ç×»ó
+	EVT_ABOVE=0, //ìœ„ì— ì˜¬ë¼ì„œë‹¤.
+	EVT_SIGHT, //ì‹œì•¼ì— ë“¤ì–´ì˜¤ë‹¤.
+	EVT_APPROACH_SMALL, //ê·¼ì²˜ì— ë„ì°©í–ˆë‹¤. (ë°€ì°©ì‹œ)
+	EVT_APPROACH_MIDDLE, //ê·¼ì²˜ì— ë„ì°©í–ˆë‹¤. (ì ë‹¹íˆ)
+	EVT_COUNT, //í„´
+	EVT_ALWAYS, //í•­ìƒ
 	EVT_MAX
 };
 
@@ -381,38 +381,38 @@ enum monster_enemy_type
 };
 
 
-//´øÀüÅ¸ÀÏÀÇ ÇÃ·¡±×
+//ë˜ì „íƒ€ì¼ì˜ í”Œë˜ê·¸
 enum dungeon_tile_flag
 {
-	FLAG_INSIGHT = 1<<0, //ÇöÀç ´«¿¡ º¸ÀÓ
-    FLAG_EXPLORE = 1<<1, //Å½ÇèµÈ Áö¿ª
-    FLAG_LIGHT = 1<<2, //°æ·Îºû(ºö°°Àº°É·Î)
-    FLAG_SMOKE = 1<<3, //¿¬±â°¡ ÀÖ´Ù.
-    FLAG_SIGHT_SMOKE = 1<<4, //½Ã¾ß¸¦ °¡¸®´Â ¿¬±â
-    FLAG_SILENCE = 1<<5, //»çÀÏ·±½º¹üÀ§?
-    FLAG_DANGER = 1<<6, //ÀÚµ¿Å½»öÀ» ¹æÇØÇÏ´Â ¿äÀÎÀÌ ÀÖ´Â°¡?
-    FLAG_NO_MONSTER = 1<<7, //¸ó½ºÅÍ¸®Á¨±İÁö
-    FLAG_NO_ITEM = 1<<8, //¾ÆÀÌÅÛ¸®Á¨±İÁö
-    FLAG_MAPPING = 1<<9, //¸ÅÇÎµÈ Áö¿ª
-    FLAG_NO_STAIR = 1<<10, //°è´Ü±İÁö
-    FLAG_VIOLET = 1<<11, //ÇÊµå ¹ÙÀÌ¿Ã·¿
-	FLAG_SANCTUARY = 1 << 12, //¼º¿ª
-	FLAG_DONT_DOOR = 1 << 13, //¸ó½ºÅÍ°¡ ¿­ ¼ö ¾ø´Â ¹®
-	FLAG_FORBID = 1 << 14, //Æ÷ºñµç ¿µ¿ª
-	FLAG_BLOCK = 1 << 15 //°íÁ¤µÈ ÁöÇüÀ¸·Î ÀÌµ¿ÇÏ±â ¾î·Á¿ò
+	FLAG_INSIGHT = 1<<0, //í˜„ì¬ ëˆˆì— ë³´ì„
+    FLAG_EXPLORE = 1<<1, //íƒí—˜ëœ ì§€ì—­
+    FLAG_LIGHT = 1<<2, //ê²½ë¡œë¹›(ë¹”ê°™ì€ê±¸ë¡œ)
+    FLAG_SMOKE = 1<<3, //ì—°ê¸°ê°€ ìˆë‹¤.
+    FLAG_SIGHT_SMOKE = 1<<4, //ì‹œì•¼ë¥¼ ê°€ë¦¬ëŠ” ì—°ê¸°
+    FLAG_SILENCE = 1<<5, //ì‚¬ì¼ëŸ°ìŠ¤ë²”ìœ„?
+    FLAG_DANGER = 1<<6, //ìë™íƒìƒ‰ì„ ë°©í•´í•˜ëŠ” ìš”ì¸ì´ ìˆëŠ”ê°€?
+    FLAG_NO_MONSTER = 1<<7, //ëª¬ìŠ¤í„°ë¦¬ì  ê¸ˆì§€
+    FLAG_NO_ITEM = 1<<8, //ì•„ì´í…œë¦¬ì  ê¸ˆì§€
+    FLAG_MAPPING = 1<<9, //ë§¤í•‘ëœ ì§€ì—­
+    FLAG_NO_STAIR = 1<<10, //ê³„ë‹¨ê¸ˆì§€
+    FLAG_VIOLET = 1<<11, //í•„ë“œ ë°”ì´ì˜¬ë ›
+	FLAG_SANCTUARY = 1 << 12, //ì„±ì—­
+	FLAG_DONT_DOOR = 1 << 13, //ëª¬ìŠ¤í„°ê°€ ì—´ ìˆ˜ ì—†ëŠ” ë¬¸
+	FLAG_FORBID = 1 << 14, //í¬ë¹„ë“  ì˜ì—­
+	FLAG_BLOCK = 1 << 15 //ê³ ì •ëœ ì§€í˜•ìœ¼ë¡œ ì´ë™í•˜ê¸° ì–´ë ¤ì›€
 };
 
 
-//´øÀü »çÀÌÁî
+//ë˜ì „ ì‚¬ì´ì¦ˆ
 enum dungeon_size
 {
 	DG_MAX_Y = 70,
 	DG_MAX_X = 80
 };
 
-//Á¾Á·
+//ì¢…ì¡±
 enum tribe_type
-{//ÀÎ°£,¸¶¹ı»ç,¿äÁ¤,Ä«¶ó½ºÅÙ±¸,¹é¶ûÅÙ±¸,Ä±ÆÄ,³×ÄÚ¸¶Å¸,¹İ¿ä,Ã÷±¸¸ğ°¡¹Ì,ÈíÇ÷±Í,¿À´Ï,»ç½Å, ´ŞÅä³¢, ÃµÀÎ, ¿ë±ÃÀÇ»çÀÚ, À¯·É, ¸Á·É, ¼Ò·É
+{//ì¸ê°„,ë§ˆë²•ì‚¬,ìš”ì •,ì¹´ë¼ìŠ¤í…êµ¬,ë°±ë‘í…êµ¬,ìº‡íŒŒ,ë„¤ì½”ë§ˆíƒ€,ë°˜ìš”,ì¸ êµ¬ëª¨ê°€ë¯¸,í¡í˜ˆê·€,ì˜¤ë‹ˆ,ì‚¬ì‹ , ë‹¬í† ë¼, ì²œì¸, ìš©ê¶ì˜ì‚¬ì, ìœ ë ¹, ë§ë ¹, ì†Œë ¹
 	TRI_FIRST = 0,
 	TRI_HUMAN = 0,
 	TRI_WIZARD,
@@ -427,7 +427,7 @@ enum tribe_type
 	TRI_HALFYOKAI,
 	TRI_WRAITH,
 	TRI_VAMPIRE,
-	TRI_YOKAI, //³×ÀÓµå¿ëÀÌ´Ï±ñ Ç×»óµÚ¿¡
+	TRI_YOKAI, //ë„¤ì„ë“œìš©ì´ë‹ˆê¹ í•­ìƒë’¤ì—
 	TRI_MAX
 };
 
@@ -461,7 +461,7 @@ enum job_type
 	JOB_MAX
 };
 
-//¸ó½ºÅÍ
+//ëª¬ìŠ¤í„°
 enum monster_index
 {
 	MON_REIMUYUKKURI = 0,
@@ -573,7 +573,7 @@ enum monster_index
 	MON_RED_UFO,
 	MON_GREEN_UFO,
 	MON_BLUE_UFO,
-	MON_KOISHI, //º¸ÀÌÁö¾Ê´Â°øÆ÷
+	MON_KOISHI, //ë³´ì´ì§€ì•ŠëŠ”ê³µí¬
 	MON_NUE,
 	MON_SANPEI_FIGHTER,
 	MON_VAMPIER_BAT,
@@ -584,20 +584,20 @@ enum monster_index
 	MON_HELL_CROW,
 	MON_RACCON,
 	MON_LANTERN_YOUKAI,
-	MON_YINYAN, //À½¾ç¿Á
-	//¸¶°èÆÄÆ¼ (À¯´ÏÅ©°¡ ¾Æ´Ï´Ù..)
-	MON_YUUGENMAGAN, //À¯°Õ¸¶°£(Àü±â)
-	MON_ELIS, //¿¤¸®½º(ÈíÇ÷)
-	MON_SARIEL,//»ç¸®¿¤(¹ÌÁ¤)
-	MON_SARA, //»ç¶ó(¹ÌÁ¤)
-	MON_LUIZE, //·çÀÌÁî(¹ÌÁ¤)
-	MON_YUKI, //À¯Å°(È­¿°)
-	MON_MAI, //¸¶ÀÌ(¾óÀ½)
-	MON_YUMEKO, //À¯¸ŞÄÚ(°Ë)
-	MON_MAGICAL_STAR, //¸ÅÁöÄÃ ½ºÅ¸ (¿ôÀ½)
-	MON_GOLEM, //°ñ·½
-	MON_EVIL_EYE, //ÀÌºí¾ÆÀÌ
-	MON_LITTLE_IMP, //¸¶Á· ÀÚÄÚ
+	MON_YINYAN, //ìŒì–‘ì˜¥
+	//ë§ˆê³„íŒŒí‹° (ìœ ë‹ˆí¬ê°€ ì•„ë‹ˆë‹¤..)
+	MON_YUUGENMAGAN, //ìœ ê²ë§ˆê°„(ì „ê¸°)
+	MON_ELIS, //ì—˜ë¦¬ìŠ¤(í¡í˜ˆ)
+	MON_SARIEL,//ì‚¬ë¦¬ì—˜(ë¯¸ì •)
+	MON_SARA, //ì‚¬ë¼(ë¯¸ì •)
+	MON_LUIZE, //ë£¨ì´ì¦ˆ(ë¯¸ì •)
+	MON_YUKI, //ìœ í‚¤(í™”ì—¼)
+	MON_MAI, //ë§ˆì´(ì–¼ìŒ)
+	MON_YUMEKO, //ìœ ë©”ì½”(ê²€)
+	MON_MAGICAL_STAR, //ë§¤ì§€ì»¬ ìŠ¤íƒ€ (ì›ƒìŒ)
+	MON_GOLEM, //ê³¨ë ˜
+	MON_EVIL_EYE, //ì´ë¸”ì•„ì´
+	MON_LITTLE_IMP, //ë§ˆì¡± ìì½”
 	MON_ENSLAVE_GHOST,
 	MON_SCHEMA_EYE,
 	MON_FLAN,
@@ -702,7 +702,7 @@ enum monster_index
 	MON_MAX_IN_FLOOR = 256
 };
 
-enum skill_type //°íÄ¡¸é skill.cppÀÇ ½ºÅ³½ºÆ®¸µºÎºĞÃß°¡. player.cpp¿¡¼­ itemtoskillµµ Ãß°¡
+enum skill_type //ê³ ì¹˜ë©´ skill.cppì˜ ìŠ¤í‚¬ìŠ¤íŠ¸ë§ë¶€ë¶„ì¶”ê°€. player.cppì—ì„œ itemtoskillë„ ì¶”ê°€
 {
 	SKT_ERROR = -1,
 	SKT_FIGHT = 0,
@@ -734,8 +734,8 @@ enum skill_type //°íÄ¡¸é skill.cppÀÇ ½ºÅ³½ºÆ®¸µºÎºĞÃß°¡. player.cpp¿¡¼­ itemtosk
 	SKT_MAX
 };
 
-enum item_type //Ãß°¡½Ã envÀÇ isSimpleType »ìÇÊ°Í+item_type_simpleµµ Ãß°¡ÇÏ±â+ const ½ºÆ®¸µµµ Ãß°¡ÇÏ°í+GetItemTypeStingµµ Ãß°¡ÇØ¾ßÇÔ
-{ //GetItemInforµµ Ãß°¡ÇÏÀÚ 
+enum item_type //ì¶”ê°€ì‹œ envì˜ isSimpleType ì‚´í•„ê²ƒ+item_type_simpleë„ ì¶”ê°€í•˜ê¸°+ const ìŠ¤íŠ¸ë§ë„ ì¶”ê°€í•˜ê³ +GetItemTypeStingë„ ì¶”ê°€í•´ì•¼í•¨
+{ //GetItemInforë„ ì¶”ê°€í•˜ì 
 	ITM_WEAPON_FIRST = 0,
 	ITM_WEAPON_SHORTBLADE=0,
 	ITM_WEAPON_LONGBLADE,
@@ -821,7 +821,7 @@ enum item_type_simple
 	ITMS_LAST
 };
 
-//ÀåÂøÅ¸ÀÔ
+//ì¥ì°©íƒ€ì…
 enum equip_type
 {
 	ET_FIRST,
@@ -973,7 +973,7 @@ enum damage_reason
 };
 
 
-//¼­Ä¡Å¸ÀÔ
+//ì„œì¹˜íƒ€ì…
 enum view_type
 {
 	VT_NORMAL = 0,
@@ -984,9 +984,9 @@ enum view_type
 	VT_MAX
 };
 
-//°ø°İÅ¸ÀÔ
-enum attack_type //Ãß°¡½Ã monster¿Í playerÀÇ µ¥¹ÌÁö ¸Ş¼¼Áö(print_no_damage_message°°Àº°Å)¸¦ °íÃÄ¾ßÇÔ. 
-{ //Ã£¾Æº¸¸é ¶Ç Ãß°¡ÇÒ°Å ÀÖÀ»µí
+//ê³µê²©íƒ€ì…
+enum attack_type //ì¶”ê°€ì‹œ monsterì™€ playerì˜ ë°ë¯¸ì§€ ë©”ì„¸ì§€(print_no_damage_messageê°™ì€ê±°)ë¥¼ ê³ ì³ì•¼í•¨. 
+{ //ì°¾ì•„ë³´ë©´ ë˜ ì¶”ê°€í• ê±° ìˆì„ë“¯
 	ATT_NONE = -1,
 	ATT_NORMAL=0,
 	ATT_SPEAR,
@@ -1010,7 +1010,7 @@ enum attack_type //Ãß°¡½Ã monster¿Í playerÀÇ µ¥¹ÌÁö ¸Ş¼¼Áö(print_no_damage_messa
 	ATT_VAMP,
 	ATT_LUNATIC,
 	ATT_SLEEP,
-	ATT_THROW_NORMAL, //¿©±âºÎÅÍ ±×·¹ÀÌÁî°¡ µÊ
+	ATT_THROW_NORMAL, //ì—¬ê¸°ë¶€í„° ê·¸ë ˆì´ì¦ˆê°€ ë¨
 	ATT_THROW_NONE_MASSAGE,
 	ATT_THROW_NONE_DAMAGE,
 	ATT_THROW_FIRE,
@@ -1019,9 +1019,9 @@ enum attack_type //Ãß°¡½Ã monster¿Í playerÀÇ µ¥¹ÌÁö ¸Ş¼¼Áö(print_no_damage_messa
 	ATT_THROW_WEAK_POISON,
 	ATT_THROW_MIDDLE_POISON,
 	ATT_THROW_STRONG_POISON,
-	ATT_THROW_LAST, //»ç¿ë¾ÈÇÔ. ±×·¹ÀÌÁî°¡ µÇ´Â °ø°İµé
-	ATT_THROW_ELEC, //±×·¹ÀÌÁî´Â ¾È µÇ´Âµ¥ °¡µå´Â µÈ´Ù.
-	ATT_NO_GUARD,//¿©±âºÎÅÍ Æø¹ßÇü(½Çµå·Î °¡µå°¡ ¾ÈµÈ´Ù.)
+	ATT_THROW_LAST, //ì‚¬ìš©ì•ˆí•¨. ê·¸ë ˆì´ì¦ˆê°€ ë˜ëŠ” ê³µê²©ë“¤
+	ATT_THROW_ELEC, //ê·¸ë ˆì´ì¦ˆëŠ” ì•ˆ ë˜ëŠ”ë° ê°€ë“œëŠ” ëœë‹¤.
+	ATT_NO_GUARD,//ì—¬ê¸°ë¶€í„° í­ë°œí˜•(ì‹¤ë“œë¡œ ê°€ë“œê°€ ì•ˆëœë‹¤.)
 	ATT_CLOUD_FIRE = ATT_NO_GUARD, 
 	ATT_CLOUD_COLD,
 	ATT_CLOUD_ELEC,
@@ -1039,25 +1039,25 @@ enum attack_type //Ãß°¡½Ã monster¿Í playerÀÇ µ¥¹ÌÁö ¸Ş¼¼Áö(print_no_damage_messa
 	ATT_THROW_FREEZING,
 	ATT_BURST, 
 	ATT_VEILING,
-	ATT_RUSH, //Ä«³ªÄÚ µ¹Áø?
-	ATT_WALL, //º®¿¡ ºÎµúÈ÷´Ù.
-	ATT_STONE_TRAP, //º®¿¡ ºÎµúÈ÷´Ù.
-	ATT_PSYCHO, //º®¿¡ ºÎµúÈ÷´Ù.
+	ATT_RUSH, //ì¹´ë‚˜ì½” ëŒì§„?
+	ATT_WALL, //ë²½ì— ë¶€ë”ªíˆë‹¤.
+	ATT_STONE_TRAP, //ë²½ì— ë¶€ë”ªíˆë‹¤.
+	ATT_PSYCHO, //ë²½ì— ë¶€ë”ªíˆë‹¤.
 	ATT_NORMAL_HIT,
-	ATT_DROWNING, //ÀÍ»ç
+	ATT_DROWNING, //ìµì‚¬
 	ATT_MAX
 };
 
-//ºöÅ¸ÀÔ
+//ë¹”íƒ€ì…
 enum beam_type
 {
 	BMT_NORMAL = 0,
 	BMT_PENETRATE,
-	BMT_WALL, //º®¿¡ ºÎµúÈ÷´Â ºö
+	BMT_WALL, //ë²½ì— ë¶€ë”ªíˆëŠ” ë¹”
 	BMT_MAX
 };
 
-//¸ó½ºÅÍ»óÅÂ
+//ëª¬ìŠ¤í„°ìƒíƒœ
 enum monster_state
 {
 	MS_ERROR=0,
@@ -1069,7 +1069,7 @@ enum monster_state
 	MS_FIND
 };
 
-enum monster_state_simple //Ç¥½Ã¿ë »óÅÂ
+enum monster_state_simple //í‘œì‹œìš© ìƒíƒœ
 {
 	MSS_NONE=0,
 	MSS_SLEEP,
@@ -1120,17 +1120,17 @@ enum attack_weapon_type
 	AWT_SPEAR
 };
 
-//¸ó½ºÅÍ »óÅÂÀüÀÌ¸¦ ÀÏÀ¸Å°´Â ÀÔ·Â
+//ëª¬ìŠ¤í„° ìƒíƒœì „ì´ë¥¼ ì¼ìœ¼í‚¤ëŠ” ì…ë ¥
 enum monster_state_input
 {
-	MSI_NORMAL=0, //ÀÏ¹İ »óÅÂ(»ç¿ë¾ÈÇÔ?)
-	MSI_FOUND, //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ß
-	MSI_LOST,//ÇÃ·¹ÀÌ¾î¸¦ ÀÒ¾î¹ö¸²
-	MSI_ATACKED, //°ø°İ¹ŞÀ½
-	MSI_NOISE, //¼ÒÀ½
-	MSI_REST,//ÈŞ½Ä
-	MSI_WAKE,//±ş
-	MSI_SEARCH //Å½»ö
+	MSI_NORMAL=0, //ì¼ë°˜ ìƒíƒœ(ì‚¬ìš©ì•ˆí•¨?)
+	MSI_FOUND, //í”Œë ˆì´ì–´ë¥¼ ë°œê²¬
+	MSI_LOST,//í”Œë ˆì´ì–´ë¥¼ ìƒì–´ë²„ë¦¼
+	MSI_ATACKED, //ê³µê²©ë°›ìŒ
+	MSI_NOISE, //ì†ŒìŒ
+	MSI_REST,//íœ´ì‹
+	MSI_WAKE,//ê¹¸
+	MSI_SEARCH //íƒìƒ‰
 };
 
 enum monster_speak_type

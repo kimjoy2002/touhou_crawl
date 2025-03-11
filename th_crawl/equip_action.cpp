@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: equip_action.cpp
+// íŒŒì¼ì´ë¦„: equip_action.cpp
 //
-// ³»¿ë: playerÀÇ Çàµ¿µé(ÀåÂø °ü·Ã Çàµ¿µé)
+// ë‚´ìš©: playerì˜ í–‰ë™ë“¤(ì¥ì°© ê´€ë ¨ í–‰ë™ë“¤)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,20 +18,20 @@ void Equip_Weapon()
 {
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹«±â¸¦ ¹Ù²Ü ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë¬´ê¸°ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«±â¸¦ ¹Ù²Ü ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ê¸°ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ¹«±â¸¦ ¹Ù²Ü ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ë¬´ê¸°ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
 
-	view_item(IVT_EQ_WEAPON,"¹«½¼ ¹«±â¸¦ ÀåÂøÇÏ½Ã°Ú½À´Ï±î?");
+	view_item(IVT_EQ_WEAPON,"ë¬´ìŠ¨ ë¬´ê¸°ë¥¼ ì¥ì°©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -41,13 +41,13 @@ void Equip_Weapon()
 			you.equip(key_,ET_WEAPON);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -56,14 +56,14 @@ void Equip_Weapon()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ ¹«±â¸¦ ÀåÂøÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ë¬´ê¸°ë¥¼ ì¥ì°©í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == '-')
 		{
 			if(!you.unequip(ET_WEAPON))
 			{				
-				printlog("ÀúÁÖ¿¡ °É·Á ÀÖ¾î¼­ Àåºñ¸¦ ¹şÀ» ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+				printlog("ì €ì£¼ì— ê±¸ë ¤ ìˆì–´ì„œ ì¥ë¹„ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			}
 			break;
 		}
@@ -79,11 +79,11 @@ void weapon_swap()
 {
 	if (you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± Àåºñ¸¦ ¹Ù²Ü ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ì¥ë¹„ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 
@@ -94,8 +94,8 @@ void weapon_swap()
 	if (bitem_ && !bitem_->isRightType(ET_WEAPON))
 		bitem_ = NULL;
 	bool equipAitem_ = false;
-	//ÀåÂøÇÑ ¹«±â°¡ a°¡ ¾Æ´Ï¸é a·Î a¸é b·Î ¹Ù²Ş
-	//a°¡ ¸Ç¼ÕÀÎ °æ¿ì´Â ¾îÂ¼Áö?
+	//ì¥ì°©í•œ ë¬´ê¸°ê°€ aê°€ ì•„ë‹ˆë©´ aë¡œ aë©´ bë¡œ ë°”ê¿ˆ
+	//aê°€ ë§¨ì†ì¸ ê²½ìš°ëŠ” ì–´ì©Œì§€?
 
 	if (you.equipment[ET_WEAPON])
 	{
@@ -141,19 +141,19 @@ void Equip_Armor()
 {
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹æ¾î±¸¸¦ ¹Ù²Ü ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë°©ì–´êµ¬ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹æ¾î±¸¸¦ ¹Ù²Ü ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë°©ì–´êµ¬ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ¹æ¾î±¸¸¦ ¹Ù²Ü ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ë°©ì–´êµ¬ë¥¼ ë°”ê¿€ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
-	view_item(IVT_EQ_ARMOR,"¹«½¼ ¹æ¾î±¸¸¦ ÀåÂøÇÏ°Ú½À´Ï±î?");
+	view_item(IVT_EQ_ARMOR,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ì¥ì°©í•˜ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -163,13 +163,13 @@ void Equip_Armor()
 			you.equiparmor(key_);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -178,9 +178,9 @@ void Equip_Armor()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ ¹æ¾î±¸¸¦ ÀåÂøÇÏ°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ì¥ì°©í•˜ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -192,14 +192,14 @@ void Unequip_Armor()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹æ¾î±¸¸¦ ¹şÀ» ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë°©ì–´êµ¬ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹æ¾î±¸¸¦ ¹şÀ» ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë°©ì–´êµ¬ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_UEQ_ARMOR,"¹«½¼ ¹æ¾î±¸¸¦ ¹ş°Ú½À´Ï±î?");
+	view_item(IVT_UEQ_ARMOR,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ë²—ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -210,13 +210,13 @@ void Unequip_Armor()
 			you.unequiparmor(key_);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -225,9 +225,9 @@ void Unequip_Armor()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ ¹æ¾î±¸¸¦ ¹ş°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ë°©ì–´êµ¬ë¥¼ ë²—ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -240,14 +240,14 @@ void Equip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î Àå½Å±¸¸¦ ³¥ ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ì¥ì‹ êµ¬ë¥¼ ë‚„ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± Àå½Å±¸¸¦ ³¥ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ì¥ì‹ êµ¬ë¥¼ ë‚„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_EQ_JEWELRY,"¹«½¼ Àå½Å±¸¸¦ ÀåÂøÇÏ°Ú½À´Ï±î?");
+	view_item(IVT_EQ_JEWELRY,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ì¥ì°©í•˜ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -257,13 +257,13 @@ void Equip_Jewelry()
 			you.equipjewerly(key_);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -272,9 +272,9 @@ void Equip_Jewelry()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ Àå½Å±¸¸¦ ÀåÂøÇÏ°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ì¥ì°©í•˜ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -286,14 +286,14 @@ void Unequip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î Àå½Å±¸¸¦ ¹şÀ» ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ì¥ì‹ êµ¬ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± Àå½Å±¸¸¦ ¹şÀ» ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ì¥ì‹ êµ¬ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_UEQ_JEWELRY,"¹«½¼ Àå½Å±¸¸¦ ¹ş°Ú½À´Ï±î?");
+	view_item(IVT_UEQ_JEWELRY,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ë²—ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -303,13 +303,13 @@ void Unequip_Jewelry()
 			you.unequipjewerly(key_);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -318,9 +318,9 @@ void Unequip_Jewelry()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«½¼ Àå½Å±¸¸¦ ¹ş°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ìŠ¨ ì¥ì‹ êµ¬ë¥¼ ë²—ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

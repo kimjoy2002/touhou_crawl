@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: FSM.cpp
+// íŒŒì¼ì´ë¦„: FSM.cpp
 //
-// ³»¿ë: fsmÅ¬·¡½º Á¤ÀÇ
+// ë‚´ìš©: fsmí´ë˜ìŠ¤ ì •ì˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +54,7 @@ void FSMclass::AddState(FSMstate* Newstate_)
 {
 	map<monster_state,FSMstate*>::iterator it;
 
-	if(!state_map.empty()) //ÀÌ¹Ì Á¸ÀçÇÏ´Â »óÅÂÀÎ°æ¿ì
+	if(!state_map.empty()) //ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ìƒíƒœì¸ê²½ìš°
 	{
 		it = state_map.find(Newstate_->GetId());
 		if(it != state_map.end())
@@ -68,7 +68,7 @@ void FSMclass::DeleteState(monster_state state_)
 {
 	map<monster_state,FSMstate*>::iterator it;
 
-	if(!state_map.empty()) //Á¸ÀçÇÏ´Â °æ¿ì
+	if(!state_map.empty()) //ì¡´ì¬í•˜ëŠ” ê²½ìš°
 	{
 		it = state_map.find(state_);
 		if(it != state_map.end())
@@ -87,7 +87,7 @@ monster_state FSMclass::StateTransition(monster_state_input input_)
 
 	map<monster_state,FSMstate*>::iterator it;
 
-	if(!state_map.empty()) //Á¸ÀçÇÏ´Â °æ¿ì
+	if(!state_map.empty()) //ì¡´ì¬í•˜ëŠ” ê²½ìš°
 	{
 		it = state_map.find(current_state);
 		if(it != state_map.end())
@@ -102,7 +102,7 @@ monster_state FSMclass::StateTransition(monster_state_input input_)
 
 
 
-//¾Æ·¡ºÎÅÍ »óÅÂ
+//ì•„ë˜ë¶€í„° ìƒíƒœ
 FSMstate state_normal(MS_NORMAL);
 FSMstate state_sleep(MS_SLEEP);
 FSMstate state_atack(MS_ATACK);
@@ -113,32 +113,32 @@ FSMstate state_find(MS_FIND);
 
 void init_state()
 {
-	//»óÅÂ ³ë¸»: ÀûÀ» ¹ß°ßÇÏÁö¾Ê°í ¶°µµ´Â »óÅÂ
+	//ìƒíƒœ ë…¸ë§: ì ì„ ë°œê²¬í•˜ì§€ì•Šê³  ë– ë„ëŠ” ìƒíƒœ
 	state_normal.AddTransition(MSI_FOUND,MS_ATACK);
 	state_normal.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_normal.AddTransition(MSI_NOISE,MS_ATACK);
 	state_normal.AddTransition(MSI_REST,MS_REST);
 	state_normal.AddTransition(MSI_SEARCH, MS_FIND);
 
-	//»óÅÂ ¼ö¸é: ÇÑ ÀÚ¸®¿¡¼­ ÀÚ´Â »óÅÂ
+	//ìƒíƒœ ìˆ˜ë©´: í•œ ìë¦¬ì—ì„œ ìëŠ” ìƒíƒœ
 	state_sleep.AddTransition(MSI_NOISE,MS_ATACK);
 	state_sleep.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_sleep.AddTransition(MSI_FOUND,MS_ATACK);
 	state_sleep.AddTransition(MSI_WAKE,MS_NORMAL);
 
-	//»óÅÂ °ø°İ: ¸ñÇ¥¸¦ ÀâÀ½
+	//ìƒíƒœ ê³µê²©: ëª©í‘œë¥¼ ì¡ìŒ
 	state_atack.AddTransition(MSI_LOST,MS_NORMAL);
 	state_atack.AddTransition(MSI_REST,MS_NORMAL);
 	state_atack.AddTransition(MSI_SEARCH, MS_FIND);
 	
-	//»óÅÂ ÈŞ½Ä: ÈŞ½ÄÁß
+	//ìƒíƒœ íœ´ì‹: íœ´ì‹ì¤‘
 	state_rest.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_rest.AddTransition(MSI_NOISE,MS_ATACK);
 	state_rest.AddTransition(MSI_FOUND,MS_ATACK);
 	state_rest.AddTransition(MSI_REST,MS_SLEEP);
 	state_rest.AddTransition(MSI_WAKE,MS_NORMAL);
 
-	//»óÅÂ ÃßÁ¾: µ¿¸ÍÀÌ ÇÃ·¹ÀÌ¾î¸¦ µû¶ó°¨
+	//ìƒíƒœ ì¶”ì¢…: ë™ë§¹ì´ í”Œë ˆì´ì–´ë¥¼ ë”°ë¼ê°
 	state_follow.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_follow.AddTransition(MSI_LOST,MS_NORMAL);
 	state_follow.AddTransition(MSI_FOUND,MS_ATACK);

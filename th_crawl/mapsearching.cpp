@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: mapsearching.cpp
+// íŒŒì¼ì´ë¦„: mapsearching.cpp
 //
-// ³»¿ë: ¸Ê ¼­Äª ¾Ë°í¸®Áò
+// ë‚´ìš©: ë§µ ì„œì¹­ ì•Œê³ ë¦¬ì¦˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,39 +17,39 @@ int seqence = 0;
 
 
 /*
-¤¿ÀÏ¹İ´øÀü
-¤Ó¤¿¾È°³ÀÇÈ£¼ö
-¤Ó¤Ó¤¿È«¸¶°ü
-¤Ó¤Ó¤Ó¤¿µµ¼­°ü
-¤Ó¤Ó¤Ó¤¤ÁöÇÏ½Ç
-¤Ó¤Ó¤¤¿ä±«ÀÇ»ê
-¤Ó¤Ó¡¡¤¤ÀµÄí¸®±¼
-¤Ó¤¤¹Ì±ÃÀÇÁ×¸²
-¤Ó¡¡¤¤¿µ¿øÁ¤
-Áü½Â±¼
-¤¿²ŞÀÇ¼¼°è
-¤¿¸¶°è
-¤¿ÁöÀú
-¤¤ÇÏÄí·¹ÀÌ½Å»ç
+ã…ì¼ë°˜ë˜ì „
+ã…£ã…ì•ˆê°œì˜í˜¸ìˆ˜
+ã…£ã…£ã…í™ë§ˆê´€
+ã…£ã…£ã…£ã…ë„ì„œê´€
+ã…£ã…£ã…£ã„´ì§€í•˜ì‹¤
+ã…£ã…£ã„´ìš”ê´´ì˜ì‚°
+ã…£ã…£ã€€ã„´ìœ³ì¿ ë¦¬êµ´
+ã…£ã„´ë¯¸ê¶ì˜ì£½ë¦¼
+ã…£ã€€ã„´ì˜ì›ì •
+ì§ìŠ¹êµ´
+ã…ê¿ˆì˜ì„¸ê³„
+ã…ë§ˆê³„
+ã…ì§€ì €
+ã„´í•˜ì¿ ë ˆì´ì‹ ì‚¬
 */
 
-MapNode mapNode_normal("ÀÏ¹İ´øÀü", 0, MAX_DUNGEUN_LEVEL);
-MapNode mapNode_temple("½ÅÀü", TEMPLE_LEVEL, 1);
-MapNode mapNode_misty("¾È°³ÀÇÈ£¼ö", MISTY_LAKE_LEVEL, MAX_MISTY_LAKE_LEVEL);
-MapNode mapNode_scarlet("È«¸¶°ü", SCARLET_LEVEL, MAX_SCARLET_LEVEL);
-MapNode mapNode_library("µµ¼­°ü", SCARLET_LIBRARY_LEVEL, MAX_SCARLET_LIBRARY_LEVEL);
-MapNode mapNode_flan("ÁöÇÏ½Ç", SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
-MapNode mapNode_moun("¿ä±«ÀÇ»ê", YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
-MapNode mapNode_yukku("ÀµÄí¸®±¼", YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
-MapNode mapNode_bamboo("¹Ì±ÃÀÇÁ×¸²", BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
-MapNode mapNode_eien("¿µ¿øÁ¤", EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
-MapNode mapNode_depth("Áü½Â±æ", DEPTH_LEVEL, MAX_DEPTH_LEVEL);
-MapNode mapNode_dream("²ŞÀÇ¼¼°è", DREAM_LEVEL, MAX_DREAM_LEVEL);
-MapNode mapNode_moon("´ŞÀÇ¼¼°è", MOON_LEVEL, MAX_MOON_LEVEL);
-MapNode mapNode_pande("¸¶°è", PANDEMONIUM_LEVEL, MAX_PANDEMONIUM_LEVEL);
-MapNode mapNode_hell("ÁöÀú", SUBTERRANEAN_LEVEL, MAX_SUBTERRANEAN_LEVEL);
-MapNode mapNode_haku("ÇÏÄí·¹ÀÌ½Å»ç", HAKUREI_LEVEL, MAX_HAKUREI_LEVEL);
-MapNode mapNode_zigurrat("²ŞÀÇ¼¼°è ·ç³ªÆ½", ZIGURRAT_LEVEL, 1);
+MapNode mapNode_normal("ì¼ë°˜ë˜ì „", 0, MAX_DUNGEUN_LEVEL);
+MapNode mapNode_temple("ì‹ ì „", TEMPLE_LEVEL, 1);
+MapNode mapNode_misty("ì•ˆê°œì˜í˜¸ìˆ˜", MISTY_LAKE_LEVEL, MAX_MISTY_LAKE_LEVEL);
+MapNode mapNode_scarlet("í™ë§ˆê´€", SCARLET_LEVEL, MAX_SCARLET_LEVEL);
+MapNode mapNode_library("ë„ì„œê´€", SCARLET_LIBRARY_LEVEL, MAX_SCARLET_LIBRARY_LEVEL);
+MapNode mapNode_flan("ì§€í•˜ì‹¤", SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
+MapNode mapNode_moun("ìš”ê´´ì˜ì‚°", YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
+MapNode mapNode_yukku("ìœ³ì¿ ë¦¬êµ´", YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
+MapNode mapNode_bamboo("ë¯¸ê¶ì˜ì£½ë¦¼", BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
+MapNode mapNode_eien("ì˜ì›ì •", EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
+MapNode mapNode_depth("ì§ìŠ¹ê¸¸", DEPTH_LEVEL, MAX_DEPTH_LEVEL);
+MapNode mapNode_dream("ê¿ˆì˜ì„¸ê³„", DREAM_LEVEL, MAX_DREAM_LEVEL);
+MapNode mapNode_moon("ë‹¬ì˜ì„¸ê³„", MOON_LEVEL, MAX_MOON_LEVEL);
+MapNode mapNode_pande("ë§ˆê³„", PANDEMONIUM_LEVEL, MAX_PANDEMONIUM_LEVEL);
+MapNode mapNode_hell("ì§€ì €", SUBTERRANEAN_LEVEL, MAX_SUBTERRANEAN_LEVEL);
+MapNode mapNode_haku("í•˜ì¿ ë ˆì´ì‹ ì‚¬", HAKUREI_LEVEL, MAX_HAKUREI_LEVEL);
+MapNode mapNode_zigurrat("ê¿ˆì˜ì„¸ê³„ ë£¨ë‚˜í‹±", ZIGURRAT_LEVEL, 1);
 
 
 MapNode::MapNode(const char* name_, int map_id_, int max_level_):
@@ -79,54 +79,54 @@ void MapNode::initMapNode()
 	mapNode_normal.addNode(&mapNode_misty, MISTY_LAKE);
 	mapNode_normal.addNode(&mapNode_bamboo, BAMBOO);
 	mapNode_normal.addNode(&mapNode_depth, DEPTH);
-	mapNode_normal.addStair(&mapNode_eien, BAMBOO); //µÇµ¹¾Æ¿À´Â °è´Ü
+	mapNode_normal.addStair(&mapNode_eien, BAMBOO); //ë˜ëŒì•„ì˜¤ëŠ” ê³„ë‹¨
 
-	mapNode_temple.addNode(&mapNode_normal, -1); //µ¹¾Æ¿È
+	mapNode_temple.addNode(&mapNode_normal, -1); //ëŒì•„ì˜´
 
-	mapNode_misty.addNode(&mapNode_normal, -1); //µ¹¾Æ¿È
+	mapNode_misty.addNode(&mapNode_normal, -1); //ëŒì•„ì˜´
 	mapNode_misty.addNode(&mapNode_scarlet, SCARLET_M);
 	mapNode_misty.addNode(&mapNode_moun, YOUKAI_MOUNTAIN);
 
-	mapNode_scarlet.addNode(&mapNode_misty, -1); //µ¹¾Æ¿È
+	mapNode_scarlet.addNode(&mapNode_misty, -1); //ëŒì•„ì˜´
 	mapNode_scarlet.addNode(&mapNode_library, SCARLET_L);
 	mapNode_scarlet.addNode(&mapNode_flan, SCARLET_U);
 
-	mapNode_library.addNode(&mapNode_scarlet, -1); //µ¹¾Æ¿È
+	mapNode_library.addNode(&mapNode_scarlet, -1); //ëŒì•„ì˜´
 
-	mapNode_flan.addNode(&mapNode_scarlet, -1); //µ¹¾Æ¿È
+	mapNode_flan.addNode(&mapNode_scarlet, -1); //ëŒì•„ì˜´
 
-	mapNode_moun.addNode(&mapNode_misty, -1); //µ¹¾Æ¿È
+	mapNode_moun.addNode(&mapNode_misty, -1); //ëŒì•„ì˜´
 	mapNode_moun.addNode(&mapNode_yukku, YUKKURI_D);
 
-	mapNode_yukku.addNode(&mapNode_moun, -1); //µ¹¾Æ¿È
+	mapNode_yukku.addNode(&mapNode_moun, -1); //ëŒì•„ì˜´
 
 	//mapNode_bamboo.addNode(&mapNode_normal);
-	mapNode_bamboo.addStair(&mapNode_normal, -1);//ÀÏ¹æµ¿Çà
+	mapNode_bamboo.addStair(&mapNode_normal, -1);//ì¼ë°©ë™í–‰
 
-	mapNode_eien.addNode(&mapNode_normal, -1); //µ¹¾Æ¿È
+	mapNode_eien.addNode(&mapNode_normal, -1); //ëŒì•„ì˜´
 
-	mapNode_depth.addNode(&mapNode_normal, -1); //µ¹¾Æ¿È
+	mapNode_depth.addNode(&mapNode_normal, -1); //ëŒì•„ì˜´
 	mapNode_depth.addNode(&mapNode_dream, DREAM_D);
 	mapNode_depth.addNode(&mapNode_pande, PANDEMONIUM);
 	mapNode_depth.addNode(&mapNode_hell, SUBTERRANEAN);
 	mapNode_depth.addNode(&mapNode_haku, HAKUREI_D);
 	mapNode_depth.addNode(&mapNode_zigurrat, ZIGURRAT);
-	mapNode_normal.addStair(&mapNode_moon, DREAM_D); //µÇµ¹¾Æ¿À´Â °è´Ü
+	mapNode_normal.addStair(&mapNode_moon, DREAM_D); //ë˜ëŒì•„ì˜¤ëŠ” ê³„ë‹¨
 
 	//mapNode_dream.addNode(&mapNode_normal);
-	mapNode_dream.addStair(&mapNode_depth, -1);//ÀÏ¹æµ¿Çà
+	mapNode_dream.addStair(&mapNode_depth, -1);//ì¼ë°©ë™í–‰
 
-	mapNode_moon.addNode(&mapNode_depth, -1); //µ¹¾Æ¿È
+	mapNode_moon.addNode(&mapNode_depth, -1); //ëŒì•„ì˜´
 
 	//mapNode_pande.addNode(&mapNode_depth);
-	mapNode_pande.addStair(&mapNode_depth, -1);//ÀÏ¹æµ¿Çà
+	mapNode_pande.addStair(&mapNode_depth, -1);//ì¼ë°©ë™í–‰
 
 
-	mapNode_hell.addNode(&mapNode_depth, -1); //µ¹¾Æ¿È
+	mapNode_hell.addNode(&mapNode_depth, -1); //ëŒì•„ì˜´
 
-	mapNode_haku.addNode(&mapNode_depth, -1); //µ¹¾Æ¿È
+	mapNode_haku.addNode(&mapNode_depth, -1); //ëŒì•„ì˜´
 
-	mapNode_zigurrat.addNode(&mapNode_depth, -1); //µ¹¾Æ¿È
+	mapNode_zigurrat.addNode(&mapNode_depth, -1); //ëŒì•„ì˜´
 	
 }
 
@@ -266,9 +266,9 @@ bool MapNode::getFloorStairToStack(queue<list<coord_def>> *stairMap, int dungeon
 void testLoopAndPrint(MapNode* node, int prev, int depth)
 {
 	//char temp[100];
-	//sprintf_s(temp, 100, "Å×½ºÆ®) %d¹øÂ° - %s", node->getUniqueId(), node->getName().c_str());
+	//sprintf_s(temp, 100, "í…ŒìŠ¤íŠ¸) %dë²ˆì§¸ - %s", node->getUniqueId(), node->getName().c_str());
 	//for (int i = 0; i<depth; i++)
-	//	printlog("¤¤", false, false, false, CL_help);
+	//	printlog("ã„´", false, false, false, CL_help);
 	//printlog(temp, true, false, false, CL_help);
 
 
@@ -301,7 +301,7 @@ bool getShortCut(stack<MapNode*>* stack_, MapNode* node, MapNode* goal, int prev
 		{
 			if ((*it) == goal) {
 				//char temp[100];
-				//sprintf_s(temp, 100, "µµÂø) %s", (*it)->getName().c_str());
+				//sprintf_s(temp, 100, "ë„ì°©) %s", (*it)->getName().c_str());
 				//printlog(temp, true, false, false, CL_help);
 				stack_->push((*it));
 				return true;
@@ -311,7 +311,7 @@ bool getShortCut(stack<MapNode*>* stack_, MapNode* node, MapNode* goal, int prev
 			if (getShortCut(stack_, (*it), goal, node->getUniqueId(), depth + 1))
 			{
 				//char temp[100];
-				//sprintf_s(temp, 100, "¿ªÃßÀû) %s" , (*it)->getName().c_str());
+				//sprintf_s(temp, 100, "ì—­ì¶”ì ) %s" , (*it)->getName().c_str());
 				//printlog(temp, true, false, false, CL_help);
 				stack_->push((*it));
 				return true;
@@ -335,7 +335,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 	enterlog();
 	if (start == NULL || goal == NULL)
 	{
-		printlog("¾Ë ¼ö ¾ø´Â À§Ä¡.", false, false, false, CL_help);
+		printlog("ì•Œ ìˆ˜ ì—†ëŠ” ìœ„ì¹˜.", false, false, false, CL_help);
 		return false;
 	}
 
@@ -351,7 +351,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 			if (stackMap.empty())
 			{
 				//char temp[100];
-				//sprintf_s(temp, 100, "[µµÂø]%d", start_level);
+				//sprintf_s(temp, 100, "[ë„ì°©]%d", start_level);
 				//printlog(temp, false, false, false, CL_magic);
 				break;
 			}
@@ -369,12 +369,12 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					int next_floor = next_dungeon->getFloorStair(current_dungeon->getMapId());
 					if (next_floor == -1) {
-						printlog("°¡´Â ±æÀ» ¾Ë ¼ö ¾ø½À´Ï´Ù.", true, false, false, CL_help);
+						printlog("ê°€ëŠ” ê¸¸ì„ ì•Œ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", true, false, false, CL_help);
 						return false;
 					}
 
 					if (!current_dungeon->getFloorStairToStack(stairMap, next_dungeon->getMapId())) {
-						printlog("°¡´Â ±æÀ» ¾Ë ¼ö ¾ø½À´Ï´Ù.", false, false, false, CL_help);
+						printlog("ê°€ëŠ” ê¸¸ì„ ì•Œ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", false, false, false, CL_help);
 						return false;
 					}
 
@@ -386,7 +386,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					if (!SetStairToStack(stairMap, start_level, false))
 					{
-						printlog("°¡´Â ±æÀ» ¾Ë ¼ö ¾ø½À´Ï´Ù.", false, false, false, CL_help);
+						printlog("ê°€ëŠ” ê¸¸ì„ ì•Œ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", false, false, false, CL_help);
 						return false;
 					}
 					start_level++;
@@ -395,7 +395,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					if(!SetStairToStack(stairMap, start_level, true))
 					{
-						printlog("°¡´Â ±æÀ» ¾Ë ¼ö ¾ø½À´Ï´Ù.", false, false, false, CL_help);
+						printlog("ê°€ëŠ” ê¸¸ì„ ì•Œ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", false, false, false, CL_help);
 						return false;
 					}
 					start_level--;
@@ -413,12 +413,12 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 
 	if(return_)
 	{
-		//printlog("À§Ä¡¸¦ Á¤»óÀûÀ¸·Î Ã£¾Ò½À´Ï´Ù.", false, false, false, CL_help);
+		//printlog("ìœ„ì¹˜ë¥¼ ì •ìƒì ìœ¼ë¡œ ì°¾ì•˜ìŠµë‹ˆë‹¤.", false, false, false, CL_help);
 		return true;
 	}
 	else
 	{
-		printlog("±× °÷±îÁö °¡´Â ±æÀ» ¾Ë ¼ö ¾ø½À´Ï´Ù.", false, false, false, CL_help);
+		printlog("ê·¸ ê³³ê¹Œì§€ ê°€ëŠ” ê¸¸ì„ ì•Œ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", false, false, false, CL_help);
 		return false;
 	}
 }

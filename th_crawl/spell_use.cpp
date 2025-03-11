@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: spell_use.cpp
+// íŒŒì¼ì´ë¦„: spell_use.cpp
 //
-// ³»¿ë: »ç¿ëÇÏ´Â ½ºÆçµé
+// ë‚´ìš©: ì‚¬ìš©í•˜ëŠ” ìŠ¤í ë“¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -38,18 +38,18 @@ extern int map_effect;
 
 bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 {
-	//ÀÌ ¸¶¹ıÀÌ ÀÌ ¸ó½ºÅÍ¿¡°Ô Á¦´ë·Î µè´ÂÁö
-	//true¸é µÇµµ·Ï ¸¶¹ıÀ» ¾²´Â°É ÇÇÇÑ´Ù.
-	//false¸é ¹«½ÃÇÏ°í ½ğ´Ù. (°ø°İÀÌ ¾È µè°Å³ª ÀÚ½Å¿¡ ºñÇØ¼­ ³Ê¹« ¾àÇÏ°Å³ª)
+	//ì´ ë§ˆë²•ì´ ì´ ëª¬ìŠ¤í„°ì—ê²Œ ì œëŒ€ë¡œ ë“£ëŠ”ì§€
+	//trueë©´ ë˜ë„ë¡ ë§ˆë²•ì„ ì“°ëŠ”ê±¸ í”¼í•œë‹¤.
+	//falseë©´ ë¬´ì‹œí•˜ê³  ìœë‹¤. (ê³µê²©ì´ ì•ˆ ë“£ê±°ë‚˜ ìì‹ ì— ë¹„í•´ì„œ ë„ˆë¬´ ì•½í•˜ê±°ë‚˜)
 	boolean danger_ = false;
 	if (use_->isUserAlly() && target_->isUserAlly()) {
-		//¸¸¾à ¾Æ±º°ú ÀûÀÌ ¸ğµÎ ¾Æ±ºÀÌ¸é »ç¿ëÀ» ¾ÈÇÑ´Ù.
-		//(¸±¸®°°Àº °æ¿ì ÀÚ»ì°ø°İÀ» ¹æÁöÇÏ±â À§ÇÔ)
+		//ë§Œì•½ ì•„êµ°ê³¼ ì ì´ ëª¨ë‘ ì•„êµ°ì´ë©´ ì‚¬ìš©ì„ ì•ˆí•œë‹¤.
+		//(ë¦´ë¦¬ê°™ì€ ê²½ìš° ìì‚´ê³µê²©ì„ ë°©ì§€í•˜ê¸° ìœ„í•¨)
 		danger_ = true;
 	}
 
 	if(use_->level - target_->level >= 5 && !danger_)
-		return false; //·¹º§Â÷ÀÌ°¡ ½ÉÇÏ°Ô ³­´Ù. ½Å°æ¾²Áö¾Ê´Â´Ù.
+		return false; //ë ˆë²¨ì°¨ì´ê°€ ì‹¬í•˜ê²Œ ë‚œë‹¤. ì‹ ê²½ì“°ì§€ì•ŠëŠ”ë‹¤.
 
 	bool resist_[RST_TYPE_MAX];
 
@@ -75,7 +75,7 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 		}
 	} 
 	
-	//°¢ ¼Ó¼º°ø°İ¿¡ ÇØ´çµÇ´Âµ¥ ÇØ´ç ÀúÇ×ÀÌ ¾ø´Â °æ¿ì À§ÇèÇÑ °ø°İÀÓ
+	//ê° ì†ì„±ê³µê²©ì— í•´ë‹¹ë˜ëŠ”ë° í•´ë‹¹ ì €í•­ì´ ì—†ëŠ” ê²½ìš° ìœ„í—˜í•œ ê³µê²©ì„
 	if(resist_[RST_POISON] && target_->poison_resist<=0)
 		return true;
 	if(resist_[RST_ELEC] && target_->elec_resist<=danger_ ?2:1)
@@ -86,7 +86,7 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 		return true;
 
 	if(!resist_[RST_POISON] && !resist_[RST_ELEC] && !resist_[RST_FIRE] && !resist_[RST_ICE])
-		return true; //¹«¼Ó¼º°ø°İ
+		return true; //ë¬´ì†ì„±ê³µê²©
 
 	return false; 
 
@@ -94,12 +94,12 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 
 
 bool isBandAlly(monster* order, monster* other)
-{//¿¹³×µéÀÌ Çù·ÂÇÏ´ÂÁö(¹öÇÁ¸¦ °°ÀÌ ¹Ş´ÂÁö)
-	//Áï order°¡ other¿¡°Ô ¹öÇÁ¸¦ ÁÖ´ÀÁö È®ÀÎ
-	//³ªÁß¿£ ÀÚ¸®¸¦ ¹Ù²Ü ¼ö ÀÖ´ÂÁö µîµµ °í·Á
-	//ÇöÀç´Â ¹öÇÁ¸¸ Àû¿ëÀÌ¹Ç·Î ¹öÇÁ¾²´Â ¸÷¸¸ °í·Á
+{//ì˜ˆë„¤ë“¤ì´ í˜‘ë ¥í•˜ëŠ”ì§€(ë²„í”„ë¥¼ ê°™ì´ ë°›ëŠ”ì§€)
+	//ì¦‰ orderê°€ otherì—ê²Œ ë²„í”„ë¥¼ ì£¼ëŠì§€ í™•ì¸
+	//ë‚˜ì¤‘ì—” ìë¦¬ë¥¼ ë°”ê¿€ ìˆ˜ ìˆëŠ”ì§€ ë“±ë„ ê³ ë ¤
+	//í˜„ì¬ëŠ” ë²„í”„ë§Œ ì ìš©ì´ë¯€ë¡œ ë²„í”„ì“°ëŠ” ëª¹ë§Œ ê³ ë ¤
 
-	if(!order->isAllyMonster(other)) //¾ÖÃÊ¿¡ ¾Æ±ºÀÌ ¾Æ´Ï¸é ¹öÇÁ¸¦ ÁÖÁö ¸øÇÔ.
+	if(!order->isAllyMonster(other)) //ì• ì´ˆì— ì•„êµ°ì´ ì•„ë‹ˆë©´ ë²„í”„ë¥¼ ì£¼ì§€ ëª»í•¨.
 		return false;
 
 
@@ -181,7 +181,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 		return false;
 
 	if (SpellLength(skill) == 1) {
-		//»ç°Å¸®1Àº Æ¯¼ö Ãë±Ş
+		//ì‚¬ê±°ë¦¬1ì€ íŠ¹ìˆ˜ ì·¨ê¸‰
 		if (length_ > 2)
 			return false;
 
@@ -379,7 +379,7 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 			}
 
 			summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
-			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //ÆÄ¿ö¿¡ µû¶ó¼­ Á¶Á¤ÇÏ±â
+			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //íŒŒì›Œì— ë”°ë¼ì„œ ì¡°ì •í•˜ê¸°
 
 			if(order && !order->isplayer())
 			{
@@ -402,7 +402,7 @@ bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randA_1(2 + pow / 3), 2 + pow / 3, 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("Åº¸·", true));
+		beam_infor temp_infor(randA_1(2 + pow / 3), 2 + pow / 3, 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("íƒ„ë§‰", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -423,7 +423,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Åº¸·",true));
+		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("íƒ„ë§‰",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -444,7 +444,7 @@ bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,15+pow/4),15+pow/4,12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¹°ÃÑ",true));
+		beam_infor temp_infor(randC(1,15+pow/4),15+pow/4,12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("ë¬¼ì´",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -464,7 +464,7 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("ºÒ²É",true));
+		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("ë¶ˆê½ƒ",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -484,9 +484,9 @@ bool skill_flame(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:4;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 15+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("ºÒ²É",true));
+		beam_infor temp_infor(randC(1,damage_),damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("ë¶ˆê½ƒ",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -506,7 +506,7 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("³Ã±â",false));
+		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("ëƒ‰ê¸°",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -526,9 +526,9 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:4;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 14+pow/5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("³Ã±â",false));
+		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("ëƒ‰ê¸°",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -551,12 +551,12 @@ bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{	
-		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("ëƒ‰ê¸°",false));
 		target_unit->damage(temp_att, true);
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("cold");
 		}
-		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("³Ã±â",false));
+		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("ëƒ‰ê¸°",false));
 		//if(short_)
 		//	temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		//throwtanmac(19,beam,temp_infor,NULL);
@@ -569,7 +569,7 @@ bool skill_sting(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor("µ¶Åº¸·",true));
+		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor("ë…íƒ„ë§‰",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -603,13 +603,13 @@ bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
 		if(env[current_level].isMonsterPos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("ÀÌ¹Ì ´©±º°¡ ÀÖ´Â À§Ä¡¿¡ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.",true,false,false,CL_small_danger);
+				printlog("ì´ë¯¸ ëˆ„êµ°ê°€ ìˆëŠ” ìœ„ì¹˜ì— ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.",true,false,false,CL_small_danger);
 			return false;
 		}
 		if(env[current_level].isSmokePos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("±¸¸§ÀÌ Á¸ÀçÇÏ´Â °÷¿¡ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.",true,false,false,CL_small_danger);
+				printlog("êµ¬ë¦„ì´ ì¡´ì¬í•˜ëŠ” ê³³ì— ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.",true,false,false,CL_small_danger);
 			return false;
 		}
 		env[current_level].MakeSmoke(target, img_fog_fire, SMT_FIRE, rand_int(7,13)+pow/4,  0, order);
@@ -629,7 +629,7 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 		if(env[current_level].isSmokePos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("±¸¸§ÀÌ Á¸ÀçÇÏ´Â °÷¿¡ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.",true,false,false,CL_small_danger);
+				printlog("êµ¬ë¦„ì´ ì¡´ì¬í•˜ëŠ” ê³³ì— ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.",true,false,false,CL_small_danger);
 			return false;
 		}
 		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
@@ -646,7 +646,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("³Ãµ¿ºö",true));
+		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("ëƒ‰ë™ë¹”",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -654,7 +654,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("cold");
 			}
-			throwtanmac(18, beam, temp_infor, NULL); //¾óÀ½Åº¸· ¸ğ¾ç ÇÏ³ª ´õ ¸¸µé°í ¹Ù²Ù±â
+			throwtanmac(18, beam, temp_infor, NULL); //ì–¼ìŒíƒ„ë§‰ ëª¨ì–‘ í•˜ë‚˜ ë” ë§Œë“¤ê³  ë°”ê¾¸ê¸°
 		}
 		order->SetParadox(0); 
 		beam.init();
@@ -700,7 +700,7 @@ bool skill_confuse(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -718,7 +718,7 @@ bool skill_slow(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -751,12 +751,12 @@ bool skill_cure_poison(int pow, bool short_, unit* order, coord_def target)
 		players* player_pointer = (players*)order;
 		if(player_pointer->s_poison)
 		{
-			printlog("µ¶ÀÌ Ä¡·áµÇ¾ú´Ù.",true,false,false,CL_normal);
+			printlog("ë…ì´ ì¹˜ë£Œë˜ì—ˆë‹¤.",true,false,false,CL_normal);
 			player_pointer->s_poison = 0;
 		}
 		else
 		{
-			printlog("µ¶ÀÌ °É·ÁÀÖÀ»¶§¸¸ »ç¿ëÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_small_danger);
+			printlog("ë…ì´ ê±¸ë ¤ìˆì„ë•Œë§Œ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_small_danger);
 			return false;
 		}
 	}
@@ -769,7 +769,7 @@ bool skill_smite(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
-		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor("°­Å¸",false));
+		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor("ê°•íƒ€",false));
 		
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
@@ -802,7 +802,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ºÒÅ¸¿À¸£±â ½ÃÀÛÇß´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë¶ˆíƒ€ì˜¤ë¥´ê¸° ì‹œì‘í–ˆë‹¤.");
 			you.equipment[ET_WEAPON]->value5 = WB_FIRE;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -811,7 +811,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_FIRE && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"´õ¿í ´õ ºÒÅ¸¿À¸£±â ½ÃÀÛÇß´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë”ìš± ë” ë¶ˆíƒ€ì˜¤ë¥´ê¸° ì‹œì‘í–ˆë‹¤.");
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -821,7 +821,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("¸¶¹ıÀÌ µèÁö ¾Ê´Â´Ù.",true,false,false,CL_normal);
+			printlog("ë§ˆë²•ì´ ë“£ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -832,7 +832,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"³Ã±â¸¦ »Õ±â ½ÃÀÛÇß´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ëƒ‰ê¸°ë¥¼ ë¿œê¸° ì‹œì‘í–ˆë‹¤.");
 			you.equipment[ET_WEAPON]->value5 = WB_COLD;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -841,7 +841,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_COLD && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"´õ¿í ³Ã±â¸¦ »Õ±â ½ÃÀÛÇß´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë”ìš± ëƒ‰ê¸°ë¥¼ ë¿œê¸° ì‹œì‘í–ˆë‹¤.");
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -851,7 +851,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("¸¶¹ıÀÌ µèÁö ¾Ê´Â´Ù.",true,false,false,CL_normal);
+			printlog("ë§ˆë²•ì´ ë“£ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -863,7 +863,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"µ¶À» ¶³¾î¶ß¸®±â ½ÃÀÛÇß´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë…ì„ ë–¨ì–´ëœ¨ë¦¬ê¸° ì‹œì‘í–ˆë‹¤.");
 			you.equipment[ET_WEAPON]->value5 = WB_POISON;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -872,7 +872,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"´õ¿í µ¶ÀÌ ÁøÇØÁ³´Ù.");
+			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë”ìš± ë…ì´ ì§„í•´ì¡Œë‹¤.");
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -882,7 +882,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("¸¶¹ıÀÌ µèÁö ¾Ê´Â´Ù.",true,false,false,CL_normal);
+			printlog("ë§ˆë²•ì´ ë“£ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -899,10 +899,10 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
-			if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+			if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 				continue;
 			beam_iterator beam(order->position,order->position);
-			if(!CheckThrowPath(order->position,it->position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+			if(!CheckThrowPath(order->position,it->position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 				continue;
 			int direc2 = GetPosToDirec(order->position, it->position);
 			direc2 = min((direc-direc2+8)%8,(direc2-direc+8)%8);
@@ -916,13 +916,13 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 	}
-	while(1) //·çÇÁ¾ÈµÊ
+	while(1) //ë£¨í”„ì•ˆë¨
 	{
 		int length_ = pow((float)abs(order->position.x-you.position.x),2)+pow((float)abs(order->position.y-you.position.y),2);
-		if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+		if(!length_ || length_ > SpellLength(SPL_SHOCK)*SpellLength(SPL_SHOCK)) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 			break;
 		beam_iterator beam(order->position,order->position);
-		if(!CheckThrowPath(order->position,you.position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+		if(!CheckThrowPath(order->position,you.position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 			break;
 		int direc2 = GetPosToDirec(order->position, you.position);
 		direc2 = min((direc-direc2+8)%8,(direc2-direc+8)%8);
@@ -943,7 +943,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("Àü±â",false));
+		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("ì „ê¸°",false));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect(); 
@@ -952,7 +952,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 	else
 	{
 		if(order->isplayer())
-			printlog("½ò ¹æÇâ¿¡ Àü±â°¡ ÅëÇÏ´Â ÀûÀÌ ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ì  ë°©í–¥ì— ì „ê¸°ê°€ í†µí•˜ëŠ” ì ì´ ì—†ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -970,10 +970,10 @@ bool skill_elec_passive(int power, unit* order)
 		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
-			if(!length_ || length_ >spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+			if(!length_ || length_ >spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 				continue;
 			beam_iterator beam(order->position,order->position);
-			if(!CheckThrowPath(order->position,it->position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+			if(!CheckThrowPath(order->position,it->position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 				continue;
 			int temp = (sqrt((float)length_)*10.0f+rand_int(-10,10))*(2.0f-it->GetElecResist());
 			if(conduct>temp || (temp==conduct && randA(1)))
@@ -983,13 +983,13 @@ bool skill_elec_passive(int power, unit* order)
 			}
 		}
 	}
-	while(1) //·çÇÁ¾ÈµÊ
+	while(1) //ë£¨í”„ì•ˆë¨
 	{
 		int length_ = pow((float)abs(order->position.x-you.position.x),2)+pow((float)abs(order->position.y-you.position.y),2);
-		if(!length_ || length_ > spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+		if(!length_ || length_ > spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 			break;
 		beam_iterator beam(order->position,order->position);
-		if(!CheckThrowPath(order->position,you.position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+		if(!CheckThrowPath(order->position,you.position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 			break;
 		int temp = (sqrt((float)length_)*10.0f+rand_int(-10,10))*(2.0f-you.GetElecResist());
 		if(conduct>temp || (temp==conduct && randA(1)))
@@ -1006,7 +1006,7 @@ bool skill_elec_passive(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("Àü±â",false));
+		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("ì „ê¸°",false));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -1026,10 +1026,10 @@ bool skill_elec_ball_bomb(int power, unit* order)
 		if ((*it).isLive() && order->isEnemyMonster(&(*it)))
 		{
 			int length_ = pow((float)abs(order->position.x - it->position.x), 2) + pow((float)abs(order->position.y - it->position.y), 2);
-			if (!length_ || length_ >spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+			if (!length_ || length_ >spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 				continue;
 			beam_iterator beam(order->position, order->position);
-			if (!CheckThrowPath(order->position, it->position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+			if (!CheckThrowPath(order->position, it->position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 				continue;
 			int temp = (sqrt((float)length_)*10.0f + rand_int(-10, 10))*(2.0f - it->GetElecResist());
 			if (conduct>temp || (temp == conduct && randA(1)))
@@ -1039,15 +1039,15 @@ bool skill_elec_ball_bomb(int power, unit* order)
 			}
 		}
 	}
-	while (1) //·çÇÁ¾ÈµÊ
+	while (1) //ë£¨í”„ì•ˆë¨
 	{
 		if (order->isUserAlly())
 			break;
 		int length_ = pow((float)abs(order->position.x - you.position.x), 2) + pow((float)abs(order->position.y - you.position.y), 2);
-		if (!length_ || length_ > spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+		if (!length_ || length_ > spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 			break;
 		beam_iterator beam(order->position, order->position);
-		if (!CheckThrowPath(order->position, you.position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+		if (!CheckThrowPath(order->position, you.position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 			break;
 		int temp = (sqrt((float)length_)*10.0f + rand_int(-10, 10))*(2.0f - you.GetElecResist());
 		if (conduct>temp || (temp == conduct && randA(1)))
@@ -1064,7 +1064,7 @@ bool skill_elec_ball_bomb(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("Àü±â", false));
+		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("ì „ê¸°", false));
 		ThrowShock(42, order->position, hit_mon->position, temp_infor);
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -1086,10 +1086,10 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs((*start).x-it->position.x),2)+pow((float)abs((*start).y-it->position.y),2);
-			if(!length_ || length_ > spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+			if(!length_ || length_ > spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 				continue;
 			beam_iterator beam((*start),order->position);
-			if(!CheckThrowPath((*start),it->position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+			if(!CheckThrowPath((*start),it->position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 				continue;
 			int direc2 = GetPosToDirec((*start), it->position);
 			int direc3 = min((direc-direc2+8)%8,(direc2-direc+8)%8);
@@ -1104,13 +1104,13 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 			}
 		}
 	}
-	while(1) //·çÇÁ¾ÈµÊ
+	while(1) //ë£¨í”„ì•ˆë¨
 	{
 		int length_ = pow((float)abs(start->x-you.position.x),2)+pow((float)abs(start->y-you.position.y),2);
-		if(!length_ || length_ > spell_length_*spell_length_) //¸¸¾à °Å¸®¸¦ ¹ş¾î³¯°æ¿ì ½ÇÆĞÇÑ´Ù.
+		if(!length_ || length_ > spell_length_*spell_length_) //ë§Œì•½ ê±°ë¦¬ë¥¼ ë²—ì–´ë‚ ê²½ìš° ì‹¤íŒ¨í•œë‹¤.
 			break;
 		beam_iterator beam(*start,*start);
-		if(!CheckThrowPath(*start,you.position, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+		if(!CheckThrowPath(*start,you.position, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 			break;
 		int direc2 = GetPosToDirec(*start, you.position);
 		direc2 = min((direc-direc2+8)%8,(direc2-direc+8)%8);
@@ -1131,7 +1131,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("Àü±â",false));
+		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("ì „ê¸°",false));
 		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -1170,7 +1170,7 @@ bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target
 
 bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* order, name_infor bomb_name, coord_def target)
 {
-	//targetÀ» Áß½ÉÀ¸·Î ÅÍÁöµµ·Ï ¹Ù²Ş..
+	//targetì„ ì¤‘ì‹¬ìœ¼ë¡œ í„°ì§€ë„ë¡ ë°”ê¿ˆ..
 	textures* image_ = &img_blast[0];
 	switch(type)
 	{
@@ -1255,7 +1255,7 @@ bool skill_glow(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1308,7 +1308,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 		return false;
 	if (env[current_level].isInSight(target)) {
 		soundmanager.playSound("spellcard");
-		printlog("¼º¿ªÀÌ ÆîÃÄÁ³´Ù! ", true, false, false, CL_warning);
+		printlog("ì„±ì—­ì´ í¼ì³ì¡Œë‹¤! ", true, false, false, CL_warning);
 	}
 	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
 
@@ -1328,9 +1328,9 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:1;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:1;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 6+pow/3-mon_panlty_;
-		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Åº¸·",true));
+		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("íƒ„ë§‰",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -1352,12 +1352,12 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("È­¿°±¸",false));
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("í™”ì—¼êµ¬",false));
 
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("È­¿°±¸",false));
+			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("í™”ì—¼êµ¬",false));
 			
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("bomb");
@@ -1374,9 +1374,9 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:2;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:2;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("È­¿°",true));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("í™”ì—¼",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1396,9 +1396,9 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:2;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:2;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("³Ã±â",false));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("ëƒ‰ê¸°",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1418,7 +1418,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor("¸Íµ¶",false));
+		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor("ë§¹ë…",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1440,7 +1440,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_CONFUSE_CLOUD));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("¾ÇÃëÅº",true));
+		beam_infor temp_infor(0,0,10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("ì•…ì·¨íƒ„",true));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -1505,11 +1505,11 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	int pow_ = pow/3+randA(pow*2/3);
 	int i = 2;
 
-	if(pow_<=20)//±î¸¶±Í
+	if(pow_<=20)//ê¹Œë§ˆê·€
 	{
 		//i=(randA_1(20) < pow?3:2);
 	}
-	else if(pow_<=50)//³ªÁß¿¡ ±î¸¶±Í¿¡¼­ ¹Ù²ÙÀÚ
+	else if(pow_<=50)//ë‚˜ì¤‘ì— ê¹Œë§ˆê·€ì—ì„œ ë°”ê¾¸ì
 	{
 		id_ = MON_CRANE;
 		i=1;
@@ -1553,7 +1553,7 @@ bool skill_recall(int pow, bool short_, unit* order, coord_def target)
 			dq[i]->SetXY(rit->x,rit->y);
 			if(dq[i]->isYourShight())
 			{
-				printarray(false,false,false,CL_normal,3,dq[i]->GetName()->name.c_str(),dq[i]->GetName()->name_is(true),"¸®ÄİµÇ¾ú´Ù.");
+				printarray(false,false,false,CL_normal,3,dq[i]->GetName()->name.c_str(),dq[i]->GetName()->name_is(true),"ë¦¬ì½œë˜ì—ˆë‹¤.");
 				j++;
 				if(j%3==0)
 					enterlog();
@@ -1576,7 +1576,7 @@ bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1605,7 +1605,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("wind");
 			}
-			printlog("È¸¿À¸®°¡ ÈÖ¸ô¾ÆÄ£´Ù! ", false, false, false, CL_normal);
+			printlog("íšŒì˜¤ë¦¬ê°€ íœ˜ëª°ì•„ì¹œë‹¤! ", false, false, false, CL_normal);
 		}
 		{
 			dif_rect_iterator rit(target,1);
@@ -1634,7 +1634,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 						//		int att_ = randC(9,10+power/20);
 						//		int m_att_ = 9*(10+power/20);
 
-						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("È­¿°ÆøÇ³",true));
+						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("í™”ì—¼í­í’",true));
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
@@ -1694,7 +1694,7 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/6),3*(5+pow/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¼ö¾Ğ",true));
+		beam_infor temp_infor(randC(3,5+pow/6),3*(5+pow/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("ìˆ˜ì••",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1727,7 +1727,7 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 				}
 				if(real_knock_)
 				{
-					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"Æ¨°ÜÁ®³ª°¬´Ù.");
+					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"íŠ•ê²¨ì ¸ë‚˜ê°”ë‹¤.");
 				}
 			}
 		}
@@ -1746,7 +1746,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
 		}
-		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor("±²À½",false));
+		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor("êµ‰ìŒ",false));
 		target_unit->damage(temp_att, true);
 		if(randA(10)==0)
 			target_unit->SetConfuse(rand_int(3,6));
@@ -1802,49 +1802,49 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_HYPNOSIS,pow)))
 		{
 			rand_rect_iterator rit(hit_mon->position,1,1,true);
-			unit* unit_ = NULL; //ºÎµúÈù Àû
-			bool hit_ = false; //ºÎµúÇû´Ù!
+			unit* unit_ = NULL; //ë¶€ë”ªíŒ ì 
+			bool hit_ = false; //ë¶€ë”ªí˜”ë‹¤!
 
 			hit_ = !env[current_level].isMove(coord_def(rit->x,rit->y),hit_mon->isFly(),hit_mon->isSwim(),false);
 			unit_= env[current_level].isMonsterPos(rit->x,rit->y);
 
-			if(hit_) //º®¿¡ ºÎµúÇû´Ù.
+			if(hit_) //ë²½ì— ë¶€ë”ªí˜”ë‹¤.
 			{
 				if (env[current_level].isInSight(order->position)) {
 					soundmanager.playSound("stone");
 				}
-				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor("Ãæµ¹",true));
+				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor("ì¶©ëŒ",true));
 				hit_mon->damage(temp_att, true);
 			}
 			else if(unit_)
-			{ //À¯´Ö¿¡ ºÎµúÈ÷¸é µÑ¿¡°Ô µ¥¹ÌÁö 
+			{ //ìœ ë‹›ì— ë¶€ë”ªíˆë©´ ë‘˜ì—ê²Œ ë°ë¯¸ì§€ 
 				if (env[current_level].isInSight(order->position)) {
 					soundmanager.playSound("stone");
 				}
 				{
-					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor("Ãæµ¹",true));
+					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor("ì¶©ëŒ",true));
 					hit_mon->damage(temp_att, true);
 				}				
 				{
-					attack_infor temp_att(randC(1,6+pow/8),(6+pow/8),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor("Ãæµ¹",true));
+					attack_infor temp_att(randC(1,6+pow/8),(6+pow/8),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor("ì¶©ëŒ",true));
 					unit_->damage(temp_att, true);
 				}
 			}
 			else
 			{
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÃÖ¸é¿¡ °É¸°Ã¤·Î ¿òÁ÷¿´´Ù.");
+				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ìµœë©´ì— ê±¸ë¦°ì±„ë¡œ ì›€ì§ì˜€ë‹¤.");
 				hit_mon->SetXY(rit->x,rit->y);
 			}
 			if(randA(4) == 0)
 			{
 				hit_mon->LostTarget();
 			}
-			hit_mon->PlusTimeDelay(-hit_mon->GetWalkDelay()); //1ÅÏ Çàµ¿À» ½®´Ù.
+			hit_mon->PlusTimeDelay(-hit_mon->GetWalkDelay()); //1í„´ í–‰ë™ì„ ì‰°ë‹¤.
 
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		return true;
 	}
@@ -1861,7 +1861,7 @@ bool skill_mute(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1873,21 +1873,21 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 	if(unit* hit_mon = DebufBeam(SPL_SELF_INJURY, order, target))
 	{
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SELF_INJURY,pow)))
-		{ //³ªÁß¿¡ Ãß°¡ÇÒ°Í-> ¸¶¹ıÀ» ¾²´Â Ä³¸¯ÅÍ´Â ¸¶¹ıÀ¸·Î ÀÚÇØÇÒ °¡´É¼º?
+		{ //ë‚˜ì¤‘ì— ì¶”ê°€í• ê²ƒ-> ë§ˆë²•ì„ ì“°ëŠ” ìºë¦­í„°ëŠ” ë§ˆë²•ìœ¼ë¡œ ìí•´í•  ê°€ëŠ¥ì„±?
 			if(!hit_mon->isplayer())
 			{
 				monster *mon_ = (monster*) hit_mon;
 
 				if(mon_->state.GetState() == MS_SLEEP)
-				{//ÀÚ°íÀÖ´Âµ¥ ÀÚÇØÇÒ¸®°¡
+				{//ìê³ ìˆëŠ”ë° ìí•´í• ë¦¬ê°€
 					if(order->isplayer())
-						printlog("ÀÚ°í ÀÖ´Â ¸÷Àº ÀÚÇØÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+						printlog("ìê³  ìˆëŠ” ëª¹ì€ ìí•´í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 					return false; 
 				}
-				if(mon_->flag & M_FLAG_NO_ATK){ //°ø°İ¸øÇÏ´Â¾Ö°¡ ÀÚÇØÇÒ¸®°¡
+				if(mon_->flag & M_FLAG_NO_ATK){ //ê³µê²©ëª»í•˜ëŠ”ì• ê°€ ìí•´í• ë¦¬ê°€
 					
 					if(order->isplayer())
-						printlog("ÀÌ ¸ó½ºÅÍ´Â ½º½º·Î¸¦ °ø°İÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
+						printlog("ì´ ëª¬ìŠ¤í„°ëŠ” ìŠ¤ìŠ¤ë¡œë¥¼ ê³µê²©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
 					return false;
 				}
 
@@ -1903,7 +1903,7 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				attack_infor temp_att(damage_,2.0f*mon_->GetAttack(num_,true),
 					99,mon_,order->GetParentType(),mon_->atk_type[num_],mon_->atk_name[num_]);					
 				hit_mon->damage(temp_att, true);
-				hit_mon->PlusTimeDelay(-hit_mon->GetWalkDelay()); //1ÅÏ Çàµ¿À» ½®´Ù.
+				hit_mon->PlusTimeDelay(-hit_mon->GetWalkDelay()); //1í„´ í–‰ë™ì„ ì‰°ë‹¤.
 			}
 			else
 			{
@@ -1913,14 +1913,14 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				int damage_ = you.GetAttack(false);
 				damage_*=1.4f;
 				attack_infor temp_att(damage_,1.4f*you.GetAttack(true),
-					99,&you,order->GetParentType(),brand_,name_infor("°ø°İ",true));					
+					99,&you,order->GetParentType(),brand_,name_infor("ê³µê²©",true));					
 				hit_mon->damage(temp_att, true);
 
 			}
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1938,7 +1938,7 @@ bool skill_charm(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1951,7 +1951,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("·¹ÀÌÀú",false));
+		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("ë ˆì´ì €",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1975,7 +1975,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("spark");
 		}
-		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("½ºÆÄÅ©",false));
+		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("ìŠ¤íŒŒí¬",false));
 		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
@@ -2165,7 +2165,7 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 	
 	final_target->HpUpDown(rand_int(2+pow/10,10+pow/5),DR_NONE);
 	if(env[current_level].isInSight(final_target->position))
-		printarray(true,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"È¸º¹µÇ¾ú´Ù.");
+		printarray(true,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"íšŒë³µë˜ì—ˆë‹¤.");
 
 	return true;
 
@@ -2175,7 +2175,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Åº¸·",true));
+		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("íƒ„ë§‰",true));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -2193,7 +2193,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 				}
 				else if(hit_mon->isYourShight())
 				{					
-					printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+					printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 				}
 				hit_mon->AttackedTarget(order);
 			}
@@ -2209,7 +2209,7 @@ bool skill_stone_punch(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON])
 		{
-			printlog("¹«¾ğ°¡¸¦ µç »óÅÂ·Î »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ë¬´ì–¸ê°€ë¥¼ ë“  ìƒíƒœë¡œ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 		you.SetAlchemyBuff(ALCT_STONE_FIST,rand_int(8,15)+pow/5);
@@ -2222,9 +2222,9 @@ bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer()?0:4;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 19+pow/5.5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("µ¹¸æÀÌ",false));
+		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ëŒë©©ì´",false));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2246,12 +2246,12 @@ bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
 		if(!env[current_level].isMove(target.x,target.y,floor_effect::isFly(FLOORT_STONE),floor_effect::isSwim(FLOORT_STONE),floor_effect::isNoGround(FLOORT_STONE)))
 		{
 			if(order->isplayer())
-				printlog("ÀÌ À§Ä¡¿¡´Â ±ò ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+				printlog("ì´ ìœ„ì¹˜ì—ëŠ” ê¹” ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			return false;
 		}
 
 		if(order == &you)
-			printlog("´ç½ÅÀº ¹Ù´Ú¿¡ »ÏÁ·ÇÑ ¹ÙÀ§¸¦ ±ò¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì€ ë°”ë‹¥ì— ë¾°ì¡±í•œ ë°”ìœ„ë¥¼ ê¹”ì•˜ë‹¤.",true,false,false,CL_normal);
 		env[current_level].MakeFloorEffect(target,&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow/4,&you);
 		rand_rect_iterator rit(target,1,1);
 		for(;!rit.end();rit++)
@@ -2298,7 +2298,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("¹ÙÀ§",false)), true);
+					hit_->damage(attack_infor(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ë°”ìœ„",false)), true);
 		
 					//hit_->damage(att_, true);
 				}
@@ -2316,9 +2316,9 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		if (!order->isplayer()) //Ä«³ª¸Şµå¸±Àº ³Ê¹« ½ê¼­ ¸ó½ºÅÍ º¸Á¤ÀÌ Á» ´õ ÇÊ¿ä
+		if (!order->isplayer()) //ì¹´ë‚˜ë©”ë“œë¦´ì€ ë„ˆë¬´ ì„ì„œ ëª¬ìŠ¤í„° ë³´ì •ì´ ì¢€ ë” í•„ìš”
 			pow *= 0.7f;
-		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Ä«³ª¸Şµå¸±",true));
+		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ì¹´ë‚˜ë©”ë“œë¦´",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2406,8 +2406,8 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) //ÇÃ¶ûÀº ¸é¿ª(³ªÁß¿¡ ÆøÆÈ¸é¿ªÃß°¡?)
-						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor("Æø¹ß",true)), true);
+					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) //í”Œë‘ì€ ë©´ì—­(ë‚˜ì¤‘ì— í­íŒ”ë©´ì—­ì¶”ê°€?)
+						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor("í­ë°œ",true)), true);
 				}
 
 			}
@@ -2476,7 +2476,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(4,13+power/20);
 								int m_att_ = 4*(13+power/20);
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ÀÚÆø",true));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ìí­",true));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -2493,7 +2493,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			//attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Æø¹ß",true));
+			//attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("í­ë°œ",true));
 			//order->damage(temp_att, true);
 		}
 		return true;
@@ -2509,9 +2509,9 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 		if(order && env[current_level].isInSight(order->position))
 		{
 			if(order->GetId() == MON_TEWI)
-				printlog("Å×À§°¡ Å«¼Ò¸®·Î Åä³¢µéÀ» ¸ğÀ¸°í ÀÖ´Ù.",false,false,false,CL_small_danger);
+				printlog("í…Œìœ„ê°€ í°ì†Œë¦¬ë¡œ í† ë¼ë“¤ì„ ëª¨ìœ¼ê³  ìˆë‹¤.",false,false,false,CL_small_danger);
 			else
-				printlog("Å« ³ªÆÈ¼Ò¸®°¡ Åä³¢µéÀ» ²ø¾î¸ğÀ¸°í ÀÖ´Ù.",false,false,false,CL_small_danger);
+				printlog("í° ë‚˜íŒ”ì†Œë¦¬ê°€ í† ë¼ë“¤ì„ ëŒì–´ëª¨ìœ¼ê³  ìˆë‹¤.",false,false,false,CL_small_danger);
 		}
 		return true;
 	}
@@ -2544,9 +2544,9 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL));
 	if(CheckThrowPath(order->position,target,beam))
 	{		
-		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = (14+power/6)*mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("±¤Åº",true));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ê´‘íƒ„",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -2561,7 +2561,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 			int max_len_ = max(abs(order->position.x - pos.x),abs( order->position.y - pos.y));
 			if(max_len_ >= 3)
 			{
-				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor("Æø¹ß",true));
+				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor("í­ë°œ",true));
 				BaseBomb(pos, &img_blast[2],temp_att,hit_mon);
 			}
 		}
@@ -2594,7 +2594,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 		}
 		
 		if(env[current_level].isInSight(target))
-			printlog("È­¿°ÆøÇ³ÀÌ ÅÍÁ³´Ù!",false,false,false,CL_normal);
+			printlog("í™”ì—¼í­í’ì´ í„°ì¡Œë‹¤!",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2611,7 +2611,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(9,10+power/20);
 								int m_att_ = 9*(10+power/20);
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("È­¿°ÆøÇ³",true));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("í™”ì—¼í­í’",true));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -2636,7 +2636,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("cold");
 		}
 		if(env[current_level].isInSight(target))
-			printlog("´«º¸¶ó°¡ ÈÖ¸ô¾ÆÄ£´Ù! ",false,false,false,CL_normal);
+			printlog("ëˆˆë³´ë¼ê°€ íœ˜ëª°ì•„ì¹œë‹¤! ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2664,7 +2664,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 						//		int att_ = randC(9,10+power/20);
 						//		int m_att_ = 9*(10+power/20);
 
-						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("È­¿°ÆøÇ³",true));
+						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("í™”ì—¼í­í’",true));
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
@@ -2692,7 +2692,7 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 				soundmanager.playSound("timestop");
 			}
 			int att_ = 10+pow/7;				
-			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor("³Ã±â",false));
+			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor("ëƒ‰ê¸°",false));
 			it->damage(temp_att, true);
 			it->SetFrozen(randA(30));			
 		}
@@ -2722,13 +2722,13 @@ bool skill_draw_power(int pow, bool short_, unit* order, coord_def target)
 	if(p_tem)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"%d°³ÀÇ PÅÛÀ» ÇÑ¹ø¿¡ È¸¼öÇß´Ù.",p_tem);
+		sprintf_s(temp,200,"%dê°œì˜ Pí…œì„ í•œë²ˆì— íšŒìˆ˜í–ˆë‹¤.",p_tem);
 		printlog(temp,true,false,false,CL_normal);
 		return true;
 	}
 	else
 	{
-		printarray(true,false,false,CL_normal,1,"½Ã¾ß³»¿¡ PÅÛÀÌ ¾ø´Ù.");
+		printarray(true,false,false,CL_normal,1,"ì‹œì•¼ë‚´ì— Pí…œì´ ì—†ë‹¤.");
 		return false;
 	}
 	return true;
@@ -2741,7 +2741,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 		
 		if(!hit_mon->isplayer() && ((monster*)hit_mon)->flag & M_FLAG_ANIMAL)
 		{
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀÌ¹Ì µ¿¹°ÀÌ±â¿¡ º¯½Å¿¡ °É¸®Áö¾Ê´Â´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì´ë¯¸ ë™ë¬¼ì´ê¸°ì— ë³€ì‹ ì— ê±¸ë¦¬ì§€ì•ŠëŠ”ë‹¤.");
 			return false;
 		}
 
@@ -2758,7 +2758,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 					 animal_id_ = randA(1)?MON_FROG:MON_ORANGE_CAT;
 				else/* if(hit_mon->GetLevel()<16)*/
 					 animal_id_ = randA(2)==0?MON_EAGLE:randA(1)?MON_RAIJUU:MON_TIGER;
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"µ¿¹°·Î º¯ÇØ¹ö·È´Ù!");
+				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ë™ë¬¼ë¡œ ë³€í•´ë²„ë ¸ë‹¤!");
 				
 				if(!hit_mon->isplayer() && (order->isplayer() || order->isUserAlly()))
 				{
@@ -2774,7 +2774,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -2789,7 +2789,7 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 		if((*it).id == EVL_VIOLET)
 		{
 			if(order->isplayer())
-				printarray(true,false,false,CL_normal,1,"Ãş¸¶´Ù 1°³ÀÇ ÆÄÀå¸¸ Á¶Á¾ÇÒ ¼ö ÀÖ´Ù.");
+				printarray(true,false,false,CL_normal,1,"ì¸µë§ˆë‹¤ 1ê°œì˜ íŒŒì¥ë§Œ ì¡°ì¢…í•  ìˆ˜ ìˆë‹¤.");
 			return false;
 		}
 	} 
@@ -2797,7 +2797,7 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 		soundmanager.playSound("spellcard");
 	}
 	if(env[current_level].isInSight(target))
-		printlog("º¸¶ó»öÀÇ ÆÄÀåÀÌ »ı°Ü³µ´Ù! ",false,false,false,CL_normal);
+		printlog("ë³´ë¼ìƒ‰ì˜ íŒŒì¥ì´ ìƒê²¨ë‚¬ë‹¤! ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+power/10);
 	return true;
 }
@@ -2825,7 +2825,7 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 			}
 			else if(it->isYourShight())
 			{					
-				printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+				printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 			}
 			it->AttackedTarget(order);			
 		}
@@ -2842,7 +2842,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->Tele_check(true, true))
 		return false;	
 	if (current_level == ZIGURRAT_LEVEL) {
-		printlog("±¤¸ùÀÇ ¼¼°è¿¡¼± ¼ø°£ÀÌµ¿ÀÇ Á¦¾î°¡ ºÒ°¡´ÉÇÏ´Ù. Á¤¸»·Î ¾µ°Å¾ß? (y/n) ", true, true, false, CL_small_danger);
+		printlog("ê´‘ëª½ì˜ ì„¸ê³„ì—ì„  ìˆœê°„ì´ë™ì˜ ì œì–´ê°€ ë¶ˆê°€ëŠ¥í•˜ë‹¤. ì •ë§ë¡œ ì“¸ê±°ì•¼? (y/n) ", true, true, false, CL_small_danger);
 
 		switch (waitkeyinput())
 		{
@@ -2852,7 +2852,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 		case 'N':
 		case 'n':
 		case VK_ESCAPE:
-			printlog("Ãë¼ÒÇÏ¿´´Ù.", true, true, false, CL_normal);
+			printlog("ì·¨ì†Œí•˜ì˜€ë‹¤.", true, true, false, CL_normal);
 			return false;
 		}
 		you.Blink(25);
@@ -2948,7 +2948,7 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 		monster* final_target = (*it);	
 		final_target->HpUpDown(rand_int(2+power/10,10+power/5),DR_NONE);		
 		if(env[current_level].isInSight(final_target->position))
-			printarray(false,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"È¸º¹µÇ¾ú´Ù.");
+			printarray(false,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"íšŒë³µë˜ì—ˆë‹¤.");
 	}
 
 	return true;
@@ -2979,7 +2979,7 @@ bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = 6+power/8;
-		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ÃÑ¾Ë",true));
+		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ì´ì•Œ",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -3003,63 +3003,63 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 	string speak_; 
 	switch(randA(6))
 	{
-	case 0: //¿äÁ¤
+	case 0: //ìš”ì •
 		list_.push_back(MON_FAIRY_GREEN_WARRIOR);
 		list_.push_back(MON_FAIRY_BLUE_MAGICIAN);
 		list_.push_back(MON_FAIRY_SOCERER);
 		list_.push_back(MON_FAIRY_SUN_FLOWER);
 		list_.push_back(MON_FAIRY_HERO);
-		speak_ = "¾È°³ÀÇ È£¼öÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ì•ˆê°œì˜ í˜¸ìˆ˜ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 1: //¿ä±«»ê
+	case 1: //ìš”ê´´ì‚°
 		list_.push_back(MON_CROW_TENGU);
 		list_.push_back(MON_YAMABUSH_TENGU);
 		list_.push_back(MON_HANATACA_TENGU);
 		list_.push_back(MON_KATPA_WATER_WIZARD);
 		list_.push_back(MON_KATPA_SPEAR);
-		speak_ = "¿ä±«ÀÇ »êÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ìš”ê´´ì˜ ì‚°ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 2: //È«¸¶°ü
+	case 2: //í™ë§ˆê´€
 		list_.push_back(MON_HOBGOBRIN_MAID);
 		list_.push_back(MON_HOBGOBRIN_LIBRARIAN);
 		list_.push_back(MON_HOBGOBRIN_TEMP);
 		list_.push_back(MON_MAID_FAIRY);
 		list_.push_back(MON_CHUPARCABRA);
-		speak_ = "È«¸¶°üÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "í™ë§ˆê´€ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 3: //ÀµÄí¸®
+	case 3: //ìœ³ì¿ ë¦¬
 		list_.push_back(MON_REIMUYUKKURI);
 		list_.push_back(MON_MARISAYUKKURI);
 		list_.push_back(MON_AYAYUKKURI);
 		list_.push_back(MON_REMILIAYUKKURI);
 		list_.push_back(MON_ALICEYUKKURI);
 		list_.push_back(MON_YOUMUYUKKURI);
-		speak_ = "ÀµÄí¸® µÕÁöÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ìœ³ì¿ ë¦¬ ë‘¥ì§€ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 4: //Á×¸²
+	case 4: //ì£½ë¦¼
 		list_.push_back(MON_RABIT_BOMB);
 		list_.push_back(MON_RABIT_SPEAR);
 		list_.push_back(MON_RABIT_SPEAR);
 		list_.push_back(MON_RABIT_SUPPORT);
 		list_.push_back(MON_RABIT_MAGIC);
 		list_.push_back(MON_RABIT_SPEAR);
-		speak_ = "¹Ì±ÃÀÇ Á×¸²ÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ë¯¸ê¶ì˜ ì£½ë¦¼ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 5: //ÁöÀú
+	case 5: //ì§€ì €
 		list_.push_back(MON_HAUNT);
 		list_.push_back(MON_FIRE_CAR);
 		list_.push_back(MON_HELL_SPIDER);
 		list_.push_back(MON_BLOOD_HAUNT);
 		list_.push_back(MON_HELL_CROW);
-		speak_ = "ÁöÀúÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ì§€ì €ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
-	case 6: //¸¶°è
+	case 6: //ë§ˆê³„
 		list_.push_back(MON_SARA);
 		list_.push_back(MON_LUIZE);
 		list_.push_back(MON_ELIS);
 		list_.push_back(MON_EVIL_EYE);
 		list_.push_back(MON_LITTLE_IMP);
-		speak_ = "¸¶°èÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!";
+		speak_ = "ë§ˆê³„ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!";
 		break;
 	}
 
@@ -3095,24 +3095,24 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
-		//´õ ÀÌ»ó µ¥¹ÌÁö¸¦ ÁÖÁö ¾ÊÀ½
+		//ë” ì´ìƒ ë°ë¯¸ì§€ë¥¼ ì£¼ì§€ ì•ŠìŒ
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("wind");
 		}
 		int damage_ = 20+power/8;
 		int reduce_damage_ = damage_;
-		if(target_unit->isplayer()) //ÀÌ °ø°İÀº Áö´ÉÀ¸·Î °¨¼Ò°¡ °¡´ÉÇÏ´Ù.
+		if(target_unit->isplayer()) //ì´ ê³µê²©ì€ ì§€ëŠ¥ìœ¼ë¡œ ê°ì†Œê°€ ê°€ëŠ¥í•˜ë‹¤.
 		{
 			///reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
-			printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "´ç½ÅÀÇ ¸¶³ª¸¦ Èí¼öÇÏ¿´´Ù. ");
+			printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "ë‹¹ì‹ ì˜ ë§ˆë‚˜ë¥¼ í¡ìˆ˜í•˜ì˜€ë‹¤. ");
 			you.MpUpDown(rand_int(-7,-12));
 		}
-		else //¸ó½ºÅÍ´Â ÀúÇ×·ÂÀ¸·Î µûÁü
+		else //ëª¬ìŠ¤í„°ëŠ” ì €í•­ë ¥ìœ¼ë¡œ ë”°ì§
 		{
 			//monster *mon_ = (monster*)target_unit;
 			//reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
 		}
-		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("¾Ç¸ù",true));
+		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("ì•…ëª½",true));
 		//target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -3131,7 +3131,7 @@ bool skill_insane(int power, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -3148,7 +3148,7 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 	{
 		if(order && target_unit->isplayer())
 		{
-			printarray(true,false,false,CL_danger,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),target_unit->GetName()->name_to(true),"¶Õ¾îÁö°Ô ÀÀ½ÃÇß´Ù.");
+			printarray(true,false,false,CL_danger,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),target_unit->GetName()->name_to(true),"ëš«ì–´ì§€ê²Œ ì‘ì‹œí–ˆë‹¤.");
 
 		}
 		if (env[current_level].isInSight(order->position)) {
@@ -3156,7 +3156,7 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 		}
 
 		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
-		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor("ÇÇÀÇ ÀÀ½Ã",false));
+		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor("í”¼ì˜ ì‘ì‹œ",false));
 		target_unit->damage(temp_att, true);
 		order->SetExhausted(rand_int(3, 5));
 		return true;
@@ -3193,12 +3193,12 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_CANNON));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("À½¾çÅº",true));
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("ìŒì–‘íƒ„",true));
 
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("À½¾çÅº",true));
+			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("ìŒì–‘íƒ„",true));
 			
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("bomb");
@@ -3258,7 +3258,7 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("fire");
 		}
-		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("ºÒ¹Ù´Ù",false));
+		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("ë¶ˆë°”ë‹¤",false));
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
 			if(order->isSightnonblocked(c_))
 			{
@@ -3286,7 +3286,7 @@ bool skill_stasis(int power, bool short_, unit* order, coord_def target)
 		}
 		else if(hit_mon->isYourShight())
 		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -3301,14 +3301,14 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 	if(!unit_ && order->isEnemyUnit(unit_)) 
 	{
 		if(order->isplayer())
-			printlog("Àû ¸ó½ºÅÍ¸¦ ´ë»óÀ¸·Î ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
-		return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ì  ëª¬ìŠ¤í„°ë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
+		return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 	}
 	if(order->position.distance_from(unit_->position)<=1)
 	{		
 		if(order->isplayer())
-			printlog("¹ĞÂøÇÑ ´ë»ó¿¡´Â »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
-		return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ë°€ì°©í•œ ëŒ€ìƒì—ëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
+		return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 	}
 
 
@@ -3323,9 +3323,9 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 			
 			if (env[current_level].isInSight((*rit))) {
 				soundmanager.playSound("howl");
-				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "¿¡°Ô µµ¾àÇß´Ù.");
+				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "ì—ê²Œ ë„ì•½í–ˆë‹¤.");
 			}
-			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor("µµ¾à",true));
+			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor("ë„ì•½",true));
 			unit_->damage(temp_att,false);
 			if(order)
 			{
@@ -3336,8 +3336,8 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 		rit++;
 	}
 	if(order->isplayer())
-		printlog("±×°÷À¸·Ğ µµ¾àÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_normal);	
-	return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+		printlog("ê·¸ê³³ìœ¼ë¡  ë„ì•½í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);	
+	return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 }
 bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
 {
@@ -3357,12 +3357,12 @@ bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 		if((*it).id == EVL_NAMAZ)
 		{
 			if(order->isplayer())
-				printarray(true,false,false,CL_normal,1,"Ãş¸¶´Ù 1°³ÀÇ ³ª¸¶Áî¸¸ ¶³¾î¶ß¸± ¼ö ÀÖ´Ù.");
+				printarray(true,false,false,CL_normal,1,"ì¸µë§ˆë‹¤ 1ê°œì˜ ë‚˜ë§ˆì¦ˆë§Œ ë–¨ì–´ëœ¨ë¦´ ìˆ˜ ìˆë‹¤.");
 			return false;
 		}
 	}
 	if(env[current_level].isInSight(target))
-		printlog("ÇÏ´Ã¿¡¼­ ¹Ù¶÷ ¼Ò¸®°¡ µé¸®°íÀÖ´Ù! ",false,false,false,CL_normal);
+		printlog("í•˜ëŠ˜ì—ì„œ ë°”ëŒ ì†Œë¦¬ê°€ ë“¤ë¦¬ê³ ìˆë‹¤! ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_NAMAZ,coord_def(target.x,target.y),EVT_COUNT,4);
 	if (env[current_level].isInSight(order->position)) {
 		soundmanager.playSound("namaz");
@@ -3389,7 +3389,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 		}
 		
 		if(env[current_level].isInSight(target))
-			printlog("°Å´ëÇÑ ³ª¸¶Áî°¡ ¶³¾îÁ³´Ù! ",false,false,false,CL_normal);
+			printlog("ê±°ëŒ€í•œ ë‚˜ë§ˆì¦ˆê°€ ë–¨ì–´ì¡Œë‹¤! ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,length_);
 		
@@ -3404,7 +3404,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 							int att_ = randC(8,6+power/30);
 							int m_att_ = 8*(6+power/30);
 
-							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("Ãæ°İÆÄ",false));
+							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ì¶©ê²©íŒŒ",false));
 							hit_->damage(temp_att, true);
 						}
 					}
@@ -3428,7 +3428,7 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = order?1+order->GetLevel():6;
-		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("Åº¸·",true));
+		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("íƒ„ë§‰",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -3461,7 +3461,7 @@ bool skill_change(int power, bool short_, unit* order, coord_def target)
 	{
 		if(&(*it) != order && it->isLive() && !it->isUserAlly() && mon_order->isMonsterSight(it->position) &&
 			it->id != MON_RACCON && it->id != MON_MAMIZO && it->level + (it->flag & M_FLAG_UNIQUE?3:0) >= mon_order->level)
-		{ //¾Æ±ºÀÌ¸é¼­ µĞ°© ³Ê±¸¸®°¡ ¾Æ´Ò¶§ ÀÚ±âº¸´Ù ·¹º§ÀÌ ³ôÀ»¶§ º¯½Å°¡´É.
+		{ //ì•„êµ°ì´ë©´ì„œ ë‘”ê°‘ ë„ˆêµ¬ë¦¬ê°€ ì•„ë‹ë•Œ ìê¸°ë³´ë‹¤ ë ˆë²¨ì´ ë†’ì„ë•Œ ë³€ì‹ ê°€ëŠ¥.
 			beam_iterator beam(order->position,order->position);
 			target_mon_list.push_back(it->id);
 		}
@@ -3472,17 +3472,17 @@ bool skill_change(int power, bool short_, unit* order, coord_def target)
 	sort(target_mon_list.begin(), target_mon_list.end(),[&](const int &lf, const int &rf)
 	{
 		return mondata[lf].level + (mondata[lf].flag & M_FLAG_UNIQUE?3:0) > mondata[rf].level + (mondata[rf].flag & M_FLAG_UNIQUE?3:0);
-	}); //·¹º§ÀÌ ³ôÀº ¼ø¼­´ë·Î ³ª¿­(³×ÀÓµå´Â ·¹º§ º¸Á¤Ä¡¸¦ 3 ³ô°Ô ÀâÀ½)
+	}); //ë ˆë²¨ì´ ë†’ì€ ìˆœì„œëŒ€ë¡œ ë‚˜ì—´(ë„¤ì„ë“œëŠ” ë ˆë²¨ ë³´ì •ì¹˜ë¥¼ 3 ë†’ê²Œ ì¡ìŒ)
 	
 	if(env[current_level].isInSight(mon_order->position))
-		printarray(true,false,false,CL_magic,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),mondata[target_mon_list[0]].name.name.c_str(),mondata[target_mon_list[0]].name.name_by(true),"µĞ°©ÇÏ¿´´Ù!");
+		printarray(true,false,false,CL_magic,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),mondata[target_mon_list[0]].name.name.c_str(),mondata[target_mon_list[0]].name.name_by(true),"ë‘”ê°‘í•˜ì˜€ë‹¤!");
 			
 	mon_order->ChangeMonster(target_mon_list[0],0);
-	mon_order->flag &= ~M_FLAG_UNIQUE; //À¯´ÏÅ© ÅÂ±×´Â Áö¿î´Ù.
+	mon_order->flag &= ~M_FLAG_UNIQUE; //ìœ ë‹ˆí¬ íƒœê·¸ëŠ” ì§€ìš´ë‹¤.
 
-	mon_order->name.name = "µĞ°©ÇÑ " + mon_order->name.name;
+	mon_order->name.name = "ë‘”ê°‘í•œ " + mon_order->name.name;
 	
-	mon_order->s_changed = rand_int(20,30);//µĞ°©ÅÏ
+	mon_order->s_changed = rand_int(20,30);//ë‘”ê°‘í„´
 
 	return true;
 }
@@ -3497,20 +3497,20 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 		{
 			you.SetUnluck(3);
 
-			printarray(false,false,false,CL_small_danger,4,order->GetName()->name.c_str(),order->GetName()->name_do(true),target_unit->GetName()->name.c_str(),"ÀÇ ¿î±â¸¦ Á¶ÀÛÇß´Ù. ");
+			printarray(false,false,false,CL_small_danger,4,order->GetName()->name.c_str(),order->GetName()->name_do(true),target_unit->GetName()->name.c_str(),"ì˜ ìš´ê¸°ë¥¼ ì¡°ì‘í–ˆë‹¤. ");
 			
 			if(you.s_unluck<=3)
-				printlog("¾à°£ÀÇ ºÒÇàÀÌ ´À²¸Á³´Ù.",false,false,false,CL_small_danger);
+				printlog("ì•½ê°„ì˜ ë¶ˆí–‰ì´ ëŠê»´ì¡Œë‹¤.",false,false,false,CL_small_danger);
 			else if(you.s_unluck<=6)
-				printlog("»ó´çÈ÷ ºÒÇàÇØÁø °Í °°´Ù.",false,false,false,CL_small_danger);
+				printlog("ìƒë‹¹íˆ ë¶ˆí–‰í•´ì§„ ê²ƒ ê°™ë‹¤.",false,false,false,CL_small_danger);
 			else
-				printlog("¼¼»óÀÇ ¾ÇÀÇ°¡ ´À²¸Áø´Ù!",false,false,false,CL_danger);
+				printlog("ì„¸ìƒì˜ ì•…ì˜ê°€ ëŠê»´ì§„ë‹¤!",false,false,false,CL_danger);
 
 			return true;
 		}
 		else
 		{
-			printarray(true,false,false,CL_small_danger,7,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),"ÀÇ ¿î±â¸¦ Á¶ÀÛÇß´Ù.",target_unit->GetName()->name.c_str(),target_unit->GetName()->name_is(true),"¿ØÁö ºÒÇàÇØº¸ÀÎ´Ù.");
+			printarray(true,false,false,CL_small_danger,7,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),"ì˜ ìš´ê¸°ë¥¼ ì¡°ì‘í–ˆë‹¤.",target_unit->GetName()->name.c_str(),target_unit->GetName()->name_is(true),"ì™ ì§€ ë¶ˆí–‰í•´ë³´ì¸ë‹¤.");
 			return true;
 		}
 	}
@@ -3546,7 +3546,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("¹ø°³",false)), true);
+					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("ë²ˆê°œ",false)), true);
 				}
 			}
 		}
@@ -3565,7 +3565,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("wind");
 		}
 		int damage_ = 2*(8+power/8);
-		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("¹Ù¶÷ÀÇ ÅºÈ¯",true));
+		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("ë°”ëŒì˜ íƒ„í™˜",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3577,7 +3577,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 		{
 			monster* mon_ = (monster*)order;
 
-			mon_->time_delay -= mon_->GetSpeed()/2; //2¹è ºü¸£°Ô °ø°İ°¡´É
+			mon_->time_delay -= mon_->GetSpeed()/2; //2ë°° ë¹ ë¥´ê²Œ ê³µê²©ê°€ëŠ¥
 		}
 
 		return true;
@@ -3652,7 +3652,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 				continue;
 			beam_iterator beam(order->position,order->position);
 			
-			if(!CheckThrowPath(order->position,goal_, beam))//°æ·Î°¡ Á¦´ë·Î ¾È ¼¼¿öÁú°æ¿ì ½ÇÆĞ
+			if(!CheckThrowPath(order->position,goal_, beam))//ê²½ë¡œê°€ ì œëŒ€ë¡œ ì•ˆ ì„¸ì›Œì§ˆê²½ìš° ì‹¤íŒ¨
 				continue;
 
 			int direc2 = GetPosToDirec(order->position, goal_);
@@ -3668,7 +3668,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 
 	if(result_.GetSize() == 0)
 	{
-		printarray(true,false,false,CL_normal,1,"ÀÌ ¸¶¹ıÀ» »ç¿ëÇÏ±âÀ§ÇØ¼± µÚ¿¡ ÃæºĞÇÑ °ø°£ÀÌ ÇÊ¿äÇÏ´Ù.");
+		printarray(true,false,false,CL_normal,1,"ì´ ë§ˆë²•ì„ ì‚¬ìš©í•˜ê¸°ìœ„í•´ì„  ë’¤ì— ì¶©ë¶„í•œ ê³µê°„ì´ í•„ìš”í•˜ë‹¤.");
 		return false;
 	}
 
@@ -3694,7 +3694,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 		
-		printarray(true,false,false,CL_normal,1,"°­·ÂÇÑ µ¹Ç³À» µ¿¹İÇÑ ¹ßµ¸¿ò°ú ÇÔ²² µÚÂÊÀ¸·Î µµ¾àÇß´Ù!");
+		printarray(true,false,false,CL_normal,1,"ê°•ë ¥í•œ ëŒí’ì„ ë™ë°˜í•œ ë°œë‹ì›€ê³¼ í•¨ê»˜ ë’¤ìª½ìœ¼ë¡œ ë„ì•½í–ˆë‹¤!");
 
 		for(auto it = vt_.begin();it != vt_.end();it++)
 		{
@@ -3702,7 +3702,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y,&you))
 				{
-					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("¸ÅÅ©·Î ¹ö½ºÆ®",false)), true);
+					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("ë§¤í¬ë¡œ ë²„ìŠ¤íŠ¸",false)), true);
 					
 				}
 				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
@@ -3716,7 +3716,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 	}
 	else{
 		
-		printarray(true,false,false,CL_normal,1,"¹ßÀ» µóÀ» °ø°£ÀÌ ºÎÁ·ÇÏ´Ù.");
+		printarray(true,false,false,CL_normal,1,"ë°œì„ ë”›ì„ ê³µê°„ì´ ë¶€ì¡±í•˜ë‹¤.");
 		return false;
 	}
 	return false;
@@ -3726,7 +3726,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 	if (env[current_level].isInSight(order->position)) {
 		soundmanager.playSound("earthquake");
 	}
-	printarray(false,false,false,CL_normal,1,"Ä«-Å©·¡½¬! ");
+	printarray(false,false,false,CL_normal,1,"ì¹´-í¬ë˜ì‰¬! ");
 	map_effect = 2;
 	Sleep(500);
 	
@@ -3737,7 +3737,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 			int damage_ = 5*(3+power/5);
 			if(it->isFly())
 				damage_ /= 3;
-			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ÁöÁø",true));
+			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ì§€ì§„",true));
 			it->damage(temp_att, true);			
 		}
 	}
@@ -3771,7 +3771,7 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 		if(it->isLive() && it->id == MON_YOSIKA)
 		{
 			if( !seiga_->isMonsterSight((it->position)))
-				return false;//ÀÌ¹Ì ¿ä½ÃÄ«°¡ ½Ã¾ß³»¸é ±¸Áö È£ÃâÇÒÇÊ¿ä°¡ ¾ø¤·¹Ç
+				return false;//ì´ë¯¸ ìš”ì‹œì¹´ê°€ ì‹œì•¼ë‚´ë©´ êµ¬ì§€ í˜¸ì¶œí• í•„ìš”ê°€ ì—†ã…‡ë¯€
 			yosika = &(*it);
 			break;
 		}
@@ -3786,7 +3786,7 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 			seiga_->SetSaved(true);
 			if(yosika->isYourShight())
 			{
-				printarray(true,false,false,CL_normal,4,yosika->GetName()->name.c_str(),yosika->GetName()->name_is(true),seiga_->GetName()->name.c_str(),"ÀÇ ¿·À¸·Î ºÒ·Á¿Ô´Ù.");
+				printarray(true,false,false,CL_normal,4,yosika->GetName()->name.c_str(),yosika->GetName()->name_is(true),seiga_->GetName()->name.c_str(),"ì˜ ì˜†ìœ¼ë¡œ ë¶ˆë ¤ì™”ë‹¤.");
 			}
 		}
 	}
@@ -3803,7 +3803,7 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 			//mon_->ReturnEnemy();
 			if(mon_->isYourShight())
 			{
-				printarray(true,false,false,CL_normal,5,seiga_->GetName()->name.c_str(),seiga_->name.name_is(true),mon_->name.name.c_str(),mon_->name.name_to(true),"ºÎÈ°½ÃÄ×´Ù!");
+				printarray(true,false,false,CL_normal,5,seiga_->GetName()->name.c_str(),seiga_->name.name_is(true),mon_->name.name.c_str(),mon_->name.name_to(true),"ë¶€í™œì‹œì¼°ë‹¤!");
 			}
 		}
 	}
@@ -3815,7 +3815,7 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("¼ö¾Ğ",true));
+		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("ìˆ˜ì••",true));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3843,7 +3843,7 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 		{
 			if(you.confuse_resist>0)
 			{
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ÀúÇ×Çß´Ù.");
+				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"ì €í•­í–ˆë‹¤.");
 				return true;
 			}
 
@@ -3857,7 +3857,7 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 				{
 					hit_mon->SetXY(*beam);
 					hit_mon->AttackedTarget(order);
-					printarray(true,false,false,CL_normal,4,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),order->GetName()->name.c_str(),"ÀÇ ³ë·¡¼Ò¸®¿¡ ²ø·Á °É¾î°¬´Ù.");
+					printarray(true,false,false,CL_normal,4,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),order->GetName()->name.c_str(),"ì˜ ë…¸ë˜ì†Œë¦¬ì— ëŒë ¤ ê±¸ì–´ê°”ë‹¤.");
 					return true;
 				}
 			}
@@ -3897,7 +3897,7 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
 					int damage_ = 10+power/6;
-					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("¿¡¸Ş¶öµå",false)), true);
+					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("ì—ë©”ë„ë“œ",false)), true);
 				}
 
 			}
@@ -3939,7 +3939,7 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
 		{
 			if (env[current_level].isInSight(target))
-				printlog("°Å´ëÇÑ ´éÀÌ ¹Ù´Ú¿¡ ¹ÚÇû´Ù! ", false, false, false, CL_normal);
+				printlog("ê±°ëŒ€í•œ ë‹»ì´ ë°”ë‹¥ì— ë°•í˜”ë‹¤! ", false, false, false, CL_normal);
 			return_ = true;
 		}
 	}
@@ -3964,7 +3964,7 @@ bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 				}
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
-				printarray(true, false, false, CL_normal, 4, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), order->GetName()->name.c_str(), "¿¡°Ô »¡·Áµé¾î°¬´Ù. ");
+				printarray(true, false, false, CL_normal, 4, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), order->GetName()->name.c_str(), "ì—ê²Œ ë¹¨ë ¤ë“¤ì–´ê°”ë‹¤. ");
 				hit_mon->SetSwift(rand_int(-30, -20));
 				return true;
 			}
@@ -3985,8 +3985,8 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("sickle");
 		}
 		int damage_ = hit_mon->GetHp() / 2;
-		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "´ç½ÅÀ» ÇâÇØ ³´À» ³»¸®ÃÆ´Ù.");
-		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor("¾ó¸¶¾ø´Â ¿©»ı", true)), true);
+		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "ë‹¹ì‹ ì„ í–¥í•´ ë‚«ì„ ë‚´ë¦¬ì³¤ë‹¤.");
+		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor("ì–¼ë§ˆì—†ëŠ” ì—¬ìƒ", true)), true);
 		if (order)
 		{
 			order->SetExhausted(rand_int(10, 15));
@@ -4002,7 +4002,7 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 		return false;
 	monster* mon_ = (monster*)order;
 
-	printlog("ÇÁ¸®Áò ÄÜÃ¼¸£Åä! ", false, false, false, CL_normal);
+	printlog("í”„ë¦¬ì¦˜ ì½˜ì²´ë¥´í† ! ", false, false, false, CL_normal);
 	deque<monster*> dq;
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -4022,7 +4022,7 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 			dq[i]->SetXY(rit->x, rit->y);
 			if (dq[i]->isYourShight())
 			{
-				printarray(false, false, false, CL_normal, 3, dq[i]->GetName()->name.c_str(), dq[i]->GetName()->name_is(true), "ÇÕÁÖ¿¡ Âü°¡ÇÏ¿´´Ù. ");
+				printarray(false, false, false, CL_normal, 3, dq[i]->GetName()->name.c_str(), dq[i]->GetName()->name_is(true), "í•©ì£¼ì— ì°¸ê°€í•˜ì˜€ë‹¤. ");
 				j++;
 				if (j % 3 == 0)
 					enterlog();
@@ -4041,17 +4041,17 @@ bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 		if (!target_unit->isplayer()) {
 			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
 				if (order->isplayer()) {
-					printlog("ÀÌ ´ë»óÀº ¿òÁ÷ÀÌÁö ¸øÇÏ±â ¶§¹®¿¡ ÅÚ·¹Å°³×½Ã½º¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+					printlog("ì´ ëŒ€ìƒì€ ì›€ì§ì´ì§€ ëª»í•˜ê¸° ë•Œë¬¸ì— í…”ë ˆí‚¤ë„¤ì‹œìŠ¤ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 				}
-				return false; //ÀÌµ¿ºÒ°¡ÀÎ Àû¿£ »ç¿ë ºÒ°¡
+				return false; //ì´ë™ë¶ˆê°€ì¸ ì ì—” ì‚¬ìš© ë¶ˆê°€
 			}
 		} 
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("blink");
 		}
 		target_unit->Blink(25);
-		printarray(true, false, false, CL_normal, 3, target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true), "¿°µ¿·Â¿¡ ÀÇÇØ Æ¨°ÜÁ®³ª°¬´Ù. ");
-		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor("¿°µ¿·Â", true));
+		printarray(true, false, false, CL_normal, 3, target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true), "ì—¼ë™ë ¥ì— ì˜í•´ íŠ•ê²¨ì ¸ë‚˜ê°”ë‹¤. ");
+		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor("ì—¼ë™ë ¥", true));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -4117,13 +4117,13 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 	}
 
 	int max_ = 0;
-	//ÃÖ´ë 4°³±îÁö ³¯¸²
+	//ìµœëŒ€ 4ê°œê¹Œì§€ ë‚ ë¦¼
 	for (int i = 0; i < 4 && monster_list.GetSize() != 0; i++) {
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("shoot_heavy");
 		}
 		if (max_ == 0 && order->isYourShight()) {
-			printlog("¾²·¹±â ´õ¹Ì°¡ ³¯¶ó¿À±â ½ÃÀÛÇÑ´Ù!", true, false, false, CL_normal);
+			printlog("ì“°ë ˆê¸° ë”ë¯¸ê°€ ë‚ ë¼ì˜¤ê¸° ì‹œì‘í•œë‹¤!", true, false, false, CL_normal);
 		}
 
 
@@ -4139,9 +4139,9 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 		for (; !rit.end(); rit++)
 		{
 			if (!env[current_level].isMove(rit->x, rit->y))
-				continue; //¿òÁ÷ÀÏ¼ö¾ø´Â À§Ä¡	
+				continue; //ì›€ì§ì¼ìˆ˜ì—†ëŠ” ìœ„ì¹˜	
 			if (env[current_level].isMonsterPos(rit->x, rit->y))
-				continue; //ÀÌ¹Ì ¸ó½ºÅÍ°¡ ÀÖ´Â À§Ä¡
+				continue; //ì´ë¯¸ ëª¬ìŠ¤í„°ê°€ ìˆëŠ” ìœ„ì¹˜
 
 			trash->SetXY(*rit);
 			break;
@@ -4185,7 +4185,7 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 		soundmanager.playSound("spellcard");
 	}
 	mon_->ChangeMonster(id_, 0);
-	printarray(true, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), id_ == MON_KOKORO1 ?"ºĞ³ë": id_ == MON_KOKORO2 ?"½½ÇÄ":"±â»İ","ÀÇ °¡¸éÀ» Âø¿ëÇß´Ù. ");
+	printarray(true, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), id_ == MON_KOKORO1 ?"ë¶„ë…¸": id_ == MON_KOKORO2 ?"ìŠ¬í””":"ê¸°ì¨","ì˜ ê°€ë©´ì„ ì°©ìš©í–ˆë‹¤. ");
 	if (monster* mask_mon_ = BaseSummon(mask_, rand_int(80,100), true, true, 2, order, target, SKD_SUMMON_MASK, GetSummonMaxNumber(SPL_KOKORO_CHANGE))) {
 
 	}
@@ -4197,9 +4197,9 @@ bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int mon_panlty_ = order->isplayer() ? 0 : 2;//¸ó½ºÅÍ°¡ ¾µ¶§ ÆĞ³ÎÆ¼
+		int mon_panlty_ = order->isplayer() ? 0 : 2;//ëª¬ìŠ¤í„°ê°€ ì“¸ë•Œ íŒ¨ë„í‹°
 		int damage_ = 11 + pow / 6 - mon_panlty_;
-		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor("¹ø°³", false));
+		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor("ë²ˆê°œ", false));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4224,7 +4224,7 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 	if (!order->isplayer())
 	{
 		if (env[current_level].isInSight(target)) {
-			printlog("¹ãÂü»õÀÇ ³ë·§¼Ò¸®°¡ µé·Á¿Â´Ù! ", false, false, false, CL_normal); 
+			printlog("ë°¤ì°¸ìƒˆì˜ ë…¸ë«ì†Œë¦¬ê°€ ë“¤ë ¤ì˜¨ë‹¤! ", false, false, false, CL_normal); 
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("laugh");
 			}
@@ -4246,7 +4246,7 @@ bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("Á¢½Ã", false));
+		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ì ‘ì‹œ", false));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4274,7 +4274,7 @@ bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
 			}
 			else if (it->isYourShight())
 			{
-				printarray(false, false, false, CL_normal, 3, it->GetName()->name.c_str(), it->GetName()->name_is(true), "ÀúÇ×Çß´Ù. ");
+				printarray(false, false, false, CL_normal, 3, it->GetName()->name.c_str(), it->GetName()->name_is(true), "ì €í•­í–ˆë‹¤. ");
 			}
 			it->AttackedTarget(order);
 			i++;
@@ -4309,7 +4309,7 @@ bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("smite");
 		}
 		if(order && order->isYourShight())
-			printarray(false, false, false, CL_normal, 5, order->GetName()->name.c_str(), order->GetName()->name_is(true), target_unit->GetName()->name.c_str(), target_unit->GetName()->name_to(true), "²ŞÀ¸·Î ÀÎµµÇß´Ù. ");
+			printarray(false, false, false, CL_normal, 5, order->GetName()->name.c_str(), order->GetName()->name_is(true), target_unit->GetName()->name.c_str(), target_unit->GetName()->name_to(true), "ê¿ˆìœ¼ë¡œ ì¸ë„í–ˆë‹¤. ");
 		target_unit->SetSleep(rand_int(15,25));
 		return true;
 	} 
@@ -4327,7 +4327,7 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("Àü±â", false));
+		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("ì „ê¸°", false));
 		ThrowShock(21, order->position, target_unit->position, temp_infor);
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -4361,7 +4361,7 @@ bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 		return false;
-	//Ç×»ó ÇÃ·¹ÀÌ¾î¿¡°Ô¸¸ »ç¿ëÇÔ
+	//í•­ìƒ í”Œë ˆì´ì–´ì—ê²Œë§Œ ì‚¬ìš©í•¨
 
 
 	random_extraction<monster*> monster_list;
@@ -4396,7 +4396,7 @@ bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (send_ == true) {
 		if (env[current_level].isInSight(order->position)) {
-			printlog("ÀûµéÀÌ ´ç½ÅÀ» ¼ø½Ä°£¿¡ µÑ·¯½×¾Ò´Ù! ", false, false, false, CL_normal);
+			printlog("ì ë“¤ì´ ë‹¹ì‹ ì„ ìˆœì‹ê°„ì— ë‘˜ëŸ¬ìŒ“ì•˜ë‹¤! ", false, false, false, CL_normal);
 			soundmanager.playSound("blink");
 		}
 	}
@@ -4407,7 +4407,7 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor("ÆÄ±«±¤¼±", true));
+		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor("íŒŒê´´ê´‘ì„ ", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4449,7 +4449,7 @@ bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (8 + pow / 15);
-		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("°Ë", true));
+		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ê²€", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4471,7 +4471,7 @@ bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (6 + pow / 11);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("³ªÀÌÇÁ", false));
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ë‚˜ì´í”„", false));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4499,7 +4499,7 @@ bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
 		}
 		target_unit->Blink(40);
 		int damage_ = 70;
-		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor("Ãµ¼ö·Â³² ´øÁö±â", false));
+		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor("ì²œìˆ˜ë ¥ë‚¨ ë˜ì§€ê¸°", false));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -4512,7 +4512,7 @@ bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (5 + pow / 12);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ºÎÀû", true));
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ë¶€ì ", true));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4537,14 +4537,14 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 	if (!unit_ && order->isEnemyUnit(unit_))
 	{
 		if (order->isplayer())
-			printlog("Àû ¸ó½ºÅÍ¸¦ ´ë»óÀ¸·Î ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
-		return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ì  ëª¬ìŠ¤í„°ë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
+		return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 	}
 	if (order->position.distance_from(unit_->position) <= 1)
 	{
 		if (order->isplayer())
-			printlog("¹ĞÂøÇÑ ´ë»ó¿¡´Â »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
-		return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+			printlog("ë°€ì°©í•œ ëŒ€ìƒì—ëŠ” ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
+		return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 	}
 
 
@@ -4559,17 +4559,17 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 
 			if (env[current_level].isInSight((*rit))) {
 				soundmanager.playSound("blink");
-				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "¿¡°Ô ¼ø°£ÀûÀ¸·Î ÀÌµ¿ÇÏ¸ç ¹ßÂ÷±â¸¦ ³¯·È´Ù.");
+				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "ì—ê²Œ ìˆœê°„ì ìœ¼ë¡œ ì´ë™í•˜ë©° ë°œì°¨ê¸°ë¥¼ ë‚ ë ¸ë‹¤.");
 			}
-			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor("¾Æ°øÇ÷", true));
+			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor("ì•„ê³µí˜ˆ", true));
 			unit_->damage(temp_att, false);
 			return true;
 		}
 		rit++;
 	}
 	if (order->isplayer())
-		printlog("±×°÷À¸·Ğ µµ¾àÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_normal);
-	return false; //ÇØ´ç À§Ä¡¿¡ ¸ó½ºÅÍ°¡ ¾ø´Ù.
+		printlog("ê·¸ê³³ìœ¼ë¡  ë„ì•½í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
+	return false; //í•´ë‹¹ ìœ„ì¹˜ì— ëª¬ìŠ¤í„°ê°€ ì—†ë‹¤.
 }
 
 
@@ -4586,7 +4586,7 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(15, 25));
 		soundmanager.playSound("timestop");
-		printlog("·¹ÀÌ¹«¿¡ ÀÇÇØ µµ¸ÁÄ¥ ¼ö ¾ø´Â °á°è°¡ ÃÄÁ³´Ù! ", false, false, false, CL_danger);
+		printlog("ë ˆì´ë¬´ì— ì˜í•´ ë„ë§ì¹  ìˆ˜ ì—†ëŠ” ê²°ê³„ê°€ ì³ì¡Œë‹¤! ", false, false, false, CL_danger);
 		//((monster*)order)
 		if (order)
 		{
@@ -4673,7 +4673,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		makeitem(ITM_ARMOR_HEAD, 1, &t);
 		t.image = &img_item_armor_helmet[4];
 		t.equip_image = &img_play_item_hat[4];
-		t.name.name = "¸®º»";
+		t.name.name = "ë¦¬ë³¸";
 		t.name.name_type = true; 
 		item_list_->push_back(t);
 		break;
@@ -4921,11 +4921,11 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		SPL_KANAME_DRILL, SPL_ICE_CLOUD, SPL_POISON_CLOUD, SPL_MIND_BENDING,SPL_LUMINUS_STRIKE,
 		SPL_AIR_STRIKE
 		};
-		//ÁÖ °ø°İ½ºÅ³
+		//ì£¼ ê³µê²©ìŠ¤í‚¬
 		int arr2_[] = { SPL_DISCHARGE, SPL_CONFUSE, SPL_SLOW, SPL_GRAZE, SPL_VEILING,
 		SPL_HASTE, SPL_INVISIBLE, SPL_HYPNOSIS
 		};
-		//º¸Á¶½ºÅ³
+		//ë³´ì¡°ìŠ¤í‚¬
 
 		int add_ = arr_[randA(10)];
 		list->push_back(spell(add_, 25));
@@ -4965,12 +4965,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_VENOM_BOLT, 15));
 		break;
 	case MON_HOBGOBRIN_TEMP:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 15)); //¾Ç¸¶¼ÒÈ¯À¸·Î ¹Ù²Ù±â
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 15)); //ì•…ë§ˆì†Œí™˜ìœ¼ë¡œ ë°”ê¾¸ê¸°
 		//list->push_back(spell(SPL_SUMMON_BIRD,20));
 		list->push_back(spell(SPL_SMITE, 10));
 		break;
 	case MON_KOAKUMA:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 10)); //¾Ç¸¶¼ÒÈ¯À¸·Î ¹Ù²Ù±â
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 10)); //ì•…ë§ˆì†Œí™˜ìœ¼ë¡œ ë°”ê¾¸ê¸°
 		list->push_back(spell(SPL_FIRE_BOLT, 15));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
@@ -5171,17 +5171,17 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_DESIRE:
 	{
 		if (mon_->fire_resist > 2) {
-			mon_->name.name = "»¡°£ " + mon_->name.name;
+			mon_->name.name = "ë¹¨ê°„ " + mon_->name.name;
 			mon_->atk_type[0] = ATT_FIRE_WEAK;
 			mon_->image = &img_mons_desire_red;
 		}
 		else if (mon_->ice_resist > 2) {
-			mon_->name.name = "ÆÄ¶õ " + mon_->name.name;
+			mon_->name.name = "íŒŒë€ " + mon_->name.name;
 			mon_->atk_type[0] = ATT_COLD_WEAK;
 			mon_->image = &img_mons_desire_blue;
 		}
 		else if (mon_->elec_resist > 2) {
-			mon_->name.name = "ÃÊ·Ï " + mon_->name.name;
+			mon_->name.name = "ì´ˆë¡ " + mon_->name.name;
 			mon_->atk_type[0] = ATT_ELEC_WEAK;
 			mon_->image = &img_mons_desire_green;
 		}
@@ -5218,7 +5218,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_REIMU:
 	{
-		if (you.char_name.name.compare("·¹ÀÌ¹«") == 0)
+		if (you.char_name.name.compare("ë ˆì´ë¬´") == 0)
 		{
 			mon_->image = &img_named_reimu2;
 		}
@@ -5475,7 +5475,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	if (order->s_clever) {
 		power *= 1.5f;
 		if(wiz_list.wizard_mode == 1)
-			printarray(false, false, false, CL_danger,3,"µğ¹ö±×)",order->GetName()->name.c_str()," ¸¶¹ıÁõÆø");
+			printarray(false, false, false, CL_danger,3,"ë””ë²„ê·¸)",order->GetName()->name.c_str()," ë§ˆë²•ì¦í­");
 
 	}
 	power=max(0,min(SpellCap(skill),power));
@@ -5778,7 +5778,7 @@ bool CheckDangerSpell(int danger_)
 {	
 	if(danger_>=3)
 	{
-		printlog("ÀÌ ¸¶¹ıÀº »ç¿ëÇÏ±â¿£ ³Ê¹« À§ÇèÇÏ´Ù. ±×·¡µµ ¾µ°Ç°¡?(Y/N)",false,false,false,CL_danger);
+		printlog("ì´ ë§ˆë²•ì€ ì‚¬ìš©í•˜ê¸°ì—” ë„ˆë¬´ ìœ„í—˜í•˜ë‹¤. ê·¸ë˜ë„ ì“¸ê±´ê°€?(Y/N)",false,false,false,CL_danger);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -5787,7 +5787,7 @@ bool CheckDangerSpell(int danger_)
 			break;
 		case 'N':
 		default:
-			printlog(" Çö¸íÇÏ±º.",true,false,false,CL_normal);
+			printlog(" í˜„ëª…í•˜êµ°.",true,false,false,CL_normal);
 			return false;
 		}
 	}
@@ -5801,7 +5801,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 	
 	if(pos == target && !self)
 	{
-		printlog("ÀÚ»ìÇÒ°Å¾ß?",true,false,false,CL_small_danger);	
+		printlog("ìì‚´í• ê±°ì•¼?",true,false,false,CL_small_danger);	
 		return false;
 	}
 	beam_iterator beam(pos,target);
@@ -5818,7 +5818,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 			for(beam.init();!beam.end();)
 			{
 				auto temp_beam = beam++;
-				//½º¸¶ÀÌÆ®ÇüÀÌ ¾Æ´Ñ°æ¿ì ºÎµúÈ÷¸é ÅÍÁö±â ¸¶·ÃÀÌ´Ù.
+				//ìŠ¤ë§ˆì´íŠ¸í˜•ì´ ì•„ë‹Œê²½ìš° ë¶€ë”ªíˆë©´ í„°ì§€ê¸° ë§ˆë ¨ì´ë‹¤.
 				bool block_ = false;
 				if(!env[current_level].isMove(*(beam),true))
 				{
@@ -5875,7 +5875,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 
 		if(warning_)
 		{
-			printlog("ÀÌ °ø°İÀº ´ç½Å¿¡°Ô ÇÇÇØ¸¦ ÁÙ °ÍÀÌ´Ù. ±×·¡µµ ¾µ°Ç°¡?(Y/N)",false,false,false,CL_danger);
+			printlog("ì´ ê³µê²©ì€ ë‹¹ì‹ ì—ê²Œ í”¼í•´ë¥¼ ì¤„ ê²ƒì´ë‹¤. ê·¸ë˜ë„ ì“¸ê±´ê°€?(Y/N)",false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -5884,7 +5884,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 				break;
 			case 'N':
 			default:
-				printlog(" Ãë¼ÒÇÏ¿´´Ù.",true,false,false,CL_normal);
+				printlog(" ì·¨ì†Œí•˜ì˜€ë‹¤.",true,false,false,CL_normal);
 				return false;
 			}
 
@@ -5917,29 +5917,29 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	}
 	if(!you.isSightnonblocked(target))
 	{
-		printlog("¿©±ä ¸·ÇôÀÖ´Ù.",true,false,false,CL_normal);	
+		printlog("ì—¬ê¸´ ë§‰í˜€ìˆë‹¤.",true,false,false,CL_normal);	
 		return false;
 	}
 	if(SpellFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
 	{
-		printlog("ÀÌ ¸¶¹ıÀ» ¾²±â¿£ ÇÇ·Î°¡ ½×¿´´Ù.",true,false,false,CL_normal);	
+		printlog("ì´ ë§ˆë²•ì„ ì“°ê¸°ì—” í”¼ë¡œê°€ ìŒ“ì˜€ë‹¤.",true,false,false,CL_normal);	
 		return false;
 	}
 	if(randA_1(100) > you.GetSpellSuccess(skill))
 	{
-		printlog("´ç½ÅÀº ¸¶¹ı ÁÖ¹®¿¡ ½ÇÆĞÇß´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ë§ˆë²• ì£¼ë¬¸ì— ì‹¤íŒ¨í–ˆë‹¤.",true,false,false,CL_normal);
 		SpellMiscasting(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill)));
 		return true;
 	}
 	if(you.GetPunish(GT_MIMA))
 	{
-		printlog("¹Ì¸¶´Â ´ç½ÅÀÌ ¾²´Â ¸¶¹ıÀÇ À§·ÂÀ» ¹İ°¨½ÃÄ×´Ù!",true,false,false,CL_green);
+		printlog("ë¯¸ë§ˆëŠ” ë‹¹ì‹ ì´ ì“°ëŠ” ë§ˆë²•ì˜ ìœ„ë ¥ì„ ë°˜ê°ì‹œì¼°ë‹¤!",true,false,false,CL_green);
 	}
 
 	if(wiz_list.wizard_mode == 1)
 	{
 		char temp[50];
-		sprintf_s(temp,50,"½ºÆçÆÄ¿ö %d / %d",power,SpellCap(skill));
+		sprintf_s(temp,50,"ìŠ¤í íŒŒì›Œ %d / %d",power,SpellCap(skill));
 		printlog(temp,true,false,false,CL_help);
 	}
 	switch(skill)

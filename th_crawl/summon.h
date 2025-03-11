@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: summon.h
+// íŒŒì¼ì´ë¦„: summon.h
 //
-// ³»¿ë: ¼ÒÈ¯¹° °ü·Ã
+// ë‚´ìš©: ì†Œí™˜ë¬¼ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,9 +55,9 @@ enum SUMMON_KIND
 class summon_info
 {
 public:
-	int parent_map_id; //¼ÒÈ¯»çÀÇ ¸Ê ¾ÆÀÌµğ
-	SUMMON_KIND summon_id; //¹«½¼ ¼­¸ÕÀÎ°¡
-	int max_num; //¼ÒÈ¯¹° ÃÖ´ë °¹¼ö
+	int parent_map_id; //ì†Œí™˜ì‚¬ì˜ ë§µ ì•„ì´ë””
+	SUMMON_KIND summon_id; //ë¬´ìŠ¨ ì„œë¨¼ì¸ê°€
+	int max_num; //ì†Œí™˜ë¬¼ ìµœëŒ€ ê°¯ìˆ˜
 	summon_info():
 	parent_map_id(-1),summon_id(SKD_OTHER),  max_num(-1)
 	{}
@@ -75,10 +75,10 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 };
-bool summon_check(coord_def c, coord_def order, bool fly_, bool swim_); //ÀÌ À§Ä¡¿¡ ¼ÒÈ¯ÇØµµ µÇ´Â°¡?
-int GetSummonMaxNumber(spell_list skill);//ÃÖ´ë¼ÒÈ¯°¹¼ö
+bool summon_check(coord_def c, coord_def order, bool fly_, bool swim_); //ì´ ìœ„ì¹˜ì— ì†Œí™˜í•´ë„ ë˜ëŠ”ê°€?
+int GetSummonMaxNumber(spell_list skill);//ìµœëŒ€ì†Œí™˜ê°¯ìˆ˜
 SUMMON_KIND GetSummonKind(spell_list skill);
-bool IsIndepend_summoner(SUMMON_KIND skill);//±×°ÍÀº ¼ÒÈ¯»çÀÇÁ×À½¿¡ µû¶ó »ç¶óÁö´Â°¡?
+bool IsIndepend_summoner(SUMMON_KIND skill);//ê·¸ê²ƒì€ ì†Œí™˜ì‚¬ì˜ì£½ìŒì— ë”°ë¼ ì‚¬ë¼ì§€ëŠ”ê°€?
 
 
 

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: help.cpp
+// íŒŒì¼ì´ë¦„: help.cpp
 //
-// ³»¿ë: µµ¿ò¸»
+// ë‚´ìš©: ë„ì›€ë§
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,11 +24,11 @@ void Help_Show()
 	bool loop_ = true;
 	int input_;
 	WaitForSingleObject(mutx, INFINITE);
-	printsub("<µ¿¹æ Å©·Ñ µµ¿ò¸» ¸ñ·Ï>",true,CL_normal);
+	printsub("<ë™ë°© í¬ë¡¤ ë„ì›€ë§ ëª©ë¡>",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub("?. Ä¿¸Çµå",true,CL_normal);
-	printsub(":. ÁøÇà ³ëÆ®",true,CL_normal);
-	printsub("0. ½ºÅä¸®",true,CL_normal);
+	printsub("?. ì»¤ë§¨ë“œ",true,CL_normal);
+	printsub(":. ì§„í–‰ ë…¸íŠ¸",true,CL_normal);
+	printsub("0. ìŠ¤í† ë¦¬",true,CL_normal);
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);
 	while(loop_)
@@ -39,45 +39,45 @@ void Help_Show()
 		case '?':
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			printsub("                                   --- Ä¿¸Çµå ¸ñ·Ï ---",true,CL_normal);
+			printsub("                                   --- ì»¤ë§¨ë“œ ëª©ë¡ ---",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("<ÀÌµ¿>                                             <¸¶¹ı>",true,CL_normal);
-			printsub("¹æÇâÅ° - ´ÙÀ½ÀÇ Å°°¡ ¼­·Î µ¿ÀÏÇÏ´Ù                 M - ¸¶¹ı ±â¾ï",true,CL_normal);
-			printsub("¢Ø¡è¢Ö    7 8 9    y k u                           z,Z - ¸¶¹ı »ç¿ë",true,CL_normal);
-			printsub("¡ç¡¤¡æ <> 4 5 6 <> h . l                           I - ±â¾ïÇÏ°íÀÖ´Â ¸¶¹ı È®ÀÎ",true,CL_normal);
-			printsub("¢×¡é¢Ù    1 2 3    b j n                           ",true,CL_normal);
-			printsub("o      - ÀÚµ¿Å½»ö                                  ",true,CL_normal);
-			printsub("`      - ÀÌÀü Çàµ¿ ¹İº¹                            <Ä³¸¯ÅÍ Á¤º¸ Ãâ·Â>" , true, CL_normal);
-			printsub("                                                   @ - °£´ÜÇÑ Ä³¸¯ÅÍ »óÅÂ",true,CL_normal);
-			printsub("<´øÀüÀÇ Å½»ö>                                      % - ÀÚ¼¼ÇÑ Ä³¸¯ÅÍ Á¤º¸",true,CL_normal);
-			printsub("5      - 100ÅÏ ÈŞ½Ä                                ^ - ½Å¾Ó Á¤º¸",true,CL_normal);
-			printsub("x      - ±ÙÃ³ Á¶»ç                                 \\ - ½Äº°µÈ ¾ÆÀÌÅÛ Á¤º¸",true,CL_normal);
-			printsub("s¶Ç´Â. - 1ÅÏ ³Ñ±â±â                                A - Ä³¸¯ÅÍ Æ¯¼º È®ÀÎ",true,CL_normal);
-			printsub("X      - ¸ÊÀ» Á¶»ç                                 [ - ÀÔ°íÀÖ´Â Àåºñ Ç¥½Ã",true,CL_normal);
-			printsub("<,>    - °è´Ü ¿À¸£±â/³»·Á°¡±â                      } - ÇöÀç ¹«±â Ç¥½Ã",true,CL_normal);
-			printsub("O,C    - ¹® ¿­±â/´İ±â                              \" - ÇöÀç Àå½Å±¸ Ç¥½Ã",true,CL_normal);
-			printsub("                                                   E - °æÇèÄ¡ Ç¥½Ã",true,CL_normal);
-			printsub("                                                   m - ½ºÅ³Ã¢ Ç¥½Ã",true,CL_normal);
-			printsub("<¾ÆÀÌÅÛ°ü·Ã>                                       ] - È¹µæÇÑ ·é Ç¥½Ã",true,CL_normal);
-			printsub("i      - °¡Áö°í ÀÖ´Â ¾ÆÀÌÅÛ                        ctrl-O - ´øÀü ÁøÇàµµ Ç¥½Ã",true,CL_normal);
-			printsub("g¶Ç´Â, - ¶³¾îÁ®ÀÖ´Â ¾ÆÀÌÅÛÁİ±â                     ",true,CL_normal);
-			printsub("d      - ¾ÆÀÌÅÛ¹ö¸®±â                              ",true,CL_normal);
-			printsub("D      - °¡Àå ÃÖ±Ù¿¡ ¾òÀº ¾ÆÀÌÅÛ¹ö¸®±â             <ºñ°ÔÀÓ Ä¿¸Çµå>",true,CL_normal);
-			printsub("e      - ¸Ô±â(À½½Ä)                                ctrl-P - Áö³­ ¸Ş¼¼Áö º¸±â",true,CL_normal);
-			printsub("r      - ÀĞ±â(µÎ·ç¸¶¸®,Ã¥)                         S - ¼¼ÀÌºêÈÄ Á¾·á",true,CL_normal);
-			printsub("q      - ¸¶½Ã±â(¹°¾à)                              ctrl-S - ¼¼ÀÌºêÈÄ Á¾·á(°æ°í¾øÀ½)",true,CL_normal);
-			printsub("f/F    - ºü¸¥/¼±ÅÃ ´øÁö±â                          ctrl-Q - ¼¼ÀÌºê¾øÀÌ Á¾·á",true,CL_normal);
-			printsub("v,V    - ½ºÆçÄ«µå »ç¿ë                             # - °ÔÀÓ ´ıÇÁÇÏ±â",true,CL_normal);
-			printsub("w      - ¹«±âÀåÂø( - Å°·Î ¸Ç¼Õ)                    +/- - »ç¿îµå ON/OFF (ÃÊ±â¼³Á¤ÀÌ ÀÖ´Â °æ¿ì)",true,CL_normal);
-			printsub("W/T    - ¹æ¾î±¸ ÀåÂø/ÇØÁ¦                          ",true,CL_normal);
-			printsub("P/R    - Àå½Å±¸ ÀåÂø/ÇØÁ¦                          ",true,CL_normal);
-			printsub("ctrl-A - ÀÚµ¿Áİ±â È°¼º/ÇØÁ¦                        <Ä¡Æ®¸ğµå>",true,CL_normal);
-			printsub("\'      - a, b´ÜÃàÅ° ¹«±â ¹Ù²Ù±â                    & - À§ÀÚµå¸ğµå", true, CL_normal);
-			printsub("                                                   _ - ¼¼ÀÌºêº¸Á¸¸ğµå",true,CL_normal);
+			printsub("<ì´ë™>                                             <ë§ˆë²•>",true,CL_normal);
+			printsub("ë°©í–¥í‚¤ - ë‹¤ìŒì˜ í‚¤ê°€ ì„œë¡œ ë™ì¼í•˜ë‹¤                 M - ë§ˆë²• ê¸°ì–µ",true,CL_normal);
+			printsub("â†–â†‘â†—    7 8 9    y k u                           z,Z - ë§ˆë²• ì‚¬ìš©",true,CL_normal);
+			printsub("â†Â·â†’ <> 4 5 6 <> h . l                           I - ê¸°ì–µí•˜ê³ ìˆëŠ” ë§ˆë²• í™•ì¸",true,CL_normal);
+			printsub("â†™â†“â†˜    1 2 3    b j n                           ",true,CL_normal);
+			printsub("o      - ìë™íƒìƒ‰                                  ",true,CL_normal);
+			printsub("`      - ì´ì „ í–‰ë™ ë°˜ë³µ                            <ìºë¦­í„° ì •ë³´ ì¶œë ¥>" , true, CL_normal);
+			printsub("                                                   @ - ê°„ë‹¨í•œ ìºë¦­í„° ìƒíƒœ",true,CL_normal);
+			printsub("<ë˜ì „ì˜ íƒìƒ‰>                                      % - ìì„¸í•œ ìºë¦­í„° ì •ë³´",true,CL_normal);
+			printsub("5      - 100í„´ íœ´ì‹                                ^ - ì‹ ì•™ ì •ë³´",true,CL_normal);
+			printsub("x      - ê·¼ì²˜ ì¡°ì‚¬                                 \\ - ì‹ë³„ëœ ì•„ì´í…œ ì •ë³´",true,CL_normal);
+			printsub("së˜ëŠ”. - 1í„´ ë„˜ê¸°ê¸°                                A - ìºë¦­í„° íŠ¹ì„± í™•ì¸",true,CL_normal);
+			printsub("X      - ë§µì„ ì¡°ì‚¬                                 [ - ì…ê³ ìˆëŠ” ì¥ë¹„ í‘œì‹œ",true,CL_normal);
+			printsub("<,>    - ê³„ë‹¨ ì˜¤ë¥´ê¸°/ë‚´ë ¤ê°€ê¸°                      } - í˜„ì¬ ë¬´ê¸° í‘œì‹œ",true,CL_normal);
+			printsub("O,C    - ë¬¸ ì—´ê¸°/ë‹«ê¸°                              \" - í˜„ì¬ ì¥ì‹ êµ¬ í‘œì‹œ",true,CL_normal);
+			printsub("                                                   E - ê²½í—˜ì¹˜ í‘œì‹œ",true,CL_normal);
+			printsub("                                                   m - ìŠ¤í‚¬ì°½ í‘œì‹œ",true,CL_normal);
+			printsub("<ì•„ì´í…œê´€ë ¨>                                       ] - íšë“í•œ ë£¬ í‘œì‹œ",true,CL_normal);
+			printsub("i      - ê°€ì§€ê³  ìˆëŠ” ì•„ì´í…œ                        ctrl-O - ë˜ì „ ì§„í–‰ë„ í‘œì‹œ",true,CL_normal);
+			printsub("gë˜ëŠ”, - ë–¨ì–´ì ¸ìˆëŠ” ì•„ì´í…œì¤ê¸°                     ",true,CL_normal);
+			printsub("d      - ì•„ì´í…œë²„ë¦¬ê¸°                              ",true,CL_normal);
+			printsub("D      - ê°€ì¥ ìµœê·¼ì— ì–»ì€ ì•„ì´í…œë²„ë¦¬ê¸°             <ë¹„ê²Œì„ ì»¤ë§¨ë“œ>",true,CL_normal);
+			printsub("e      - ë¨¹ê¸°(ìŒì‹)                                ctrl-P - ì§€ë‚œ ë©”ì„¸ì§€ ë³´ê¸°",true,CL_normal);
+			printsub("r      - ì½ê¸°(ë‘ë£¨ë§ˆë¦¬,ì±…)                         S - ì„¸ì´ë¸Œí›„ ì¢…ë£Œ",true,CL_normal);
+			printsub("q      - ë§ˆì‹œê¸°(ë¬¼ì•½)                              ctrl-S - ì„¸ì´ë¸Œí›„ ì¢…ë£Œ(ê²½ê³ ì—†ìŒ)",true,CL_normal);
+			printsub("f/F    - ë¹ ë¥¸/ì„ íƒ ë˜ì§€ê¸°                          ctrl-Q - ì„¸ì´ë¸Œì—†ì´ ì¢…ë£Œ",true,CL_normal);
+			printsub("v,V    - ìŠ¤í ì¹´ë“œ ì‚¬ìš©                             # - ê²Œì„ ë¤í”„í•˜ê¸°",true,CL_normal);
+			printsub("w      - ë¬´ê¸°ì¥ì°©( - í‚¤ë¡œ ë§¨ì†)                    +/- - ì‚¬ìš´ë“œ ON/OFF (ì´ˆê¸°ì„¤ì •ì´ ìˆëŠ” ê²½ìš°)",true,CL_normal);
+			printsub("W/T    - ë°©ì–´êµ¬ ì¥ì°©/í•´ì œ                          ",true,CL_normal);
+			printsub("P/R    - ì¥ì‹ êµ¬ ì¥ì°©/í•´ì œ                          ",true,CL_normal);
+			printsub("ctrl-A - ìë™ì¤ê¸° í™œì„±/í•´ì œ                        <ì¹˜íŠ¸ëª¨ë“œ>",true,CL_normal);
+			printsub("\'      - a, bë‹¨ì¶•í‚¤ ë¬´ê¸° ë°”ê¾¸ê¸°                    & - ìœ„ìë“œëª¨ë“œ", true, CL_normal);
+			printsub("                                                   _ - ì„¸ì´ë¸Œë³´ì¡´ëª¨ë“œ",true,CL_normal);
 			printsub("                                                   ",true,CL_normal);
-			printsub("<´É·Â °ü·Ã>                                        ",true,CL_normal);
-			printsub("p - ±âµµ                                           ",true,CL_normal);
-			printsub("a - ±Ç´É È¤Àº ¹ßµ¿´É·Â»ç¿ë                         ",true,CL_normal);
+			printsub("<ëŠ¥ë ¥ ê´€ë ¨>                                        ",true,CL_normal);
+			printsub("p - ê¸°ë„                                           ",true,CL_normal);
+			printsub("a - ê¶ŒëŠ¥ í˜¹ì€ ë°œë™ëŠ¥ë ¥ì‚¬ìš©                         ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);
 			break;
@@ -86,7 +86,7 @@ void Help_Show()
 				WaitForSingleObject(mutx, INFINITE);
 				deletesub();
 				char temp[300];
-				sprintf_s(temp,300,"%8s|%-18s|%s\n","ÅÏ","Àå¼Ò","³»¿ë");
+				sprintf_s(temp,300,"%8s|%-18s|%s\n","í„´","ì¥ì†Œ","ë‚´ìš©");
 				printsub(temp,true,CL_normal);
 				for(list<note_dummy>::iterator it = save_note.note_list.begin(); it != save_note.note_list.end(); it++)
 				{
@@ -100,10 +100,10 @@ void Help_Show()
 					switch(waitkeyinput(true))
 					{
 					case VK_UP:
-						changemove(1);  //À§
+						changemove(1);  //ìœ„
 						continue;
 					case VK_DOWN:
-						changemove(-1); //¾Æ·¡
+						changemove(-1); //ì•„ë˜
 						continue;
 					case VK_PRIOR:
 						changemove(DisplayManager.log_length);
@@ -124,38 +124,38 @@ void Help_Show()
 		case '0':
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			printsub("                                    --- ½ºÅä¸® ---",true,CL_normal);
-			printsub("È¯»óÇâÀÌ ´øÀüÈ­µÇ¾î¹ö·È´Ù!",true,CL_normal);
+			printsub("                                    --- ìŠ¤í† ë¦¬ ---",true,CL_normal);
+			printsub("í™˜ìƒí–¥ì´ ë˜ì „í™”ë˜ì–´ë²„ë ¸ë‹¤!",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("È¯»óÇâÀÇ ÀÎ¿äµéÀº ¼ø°£ÀûÀÎ »óÈ²º¯È­¸¦ ¹Ş¾ÆµéÀÌÁö ¸øÇÏ°í °÷°÷¿¡¼­ °İÇÑ ¹İÀÀÀ» º¸¿´´Ù. ",true,CL_normal);
+			printsub("í™˜ìƒí–¥ì˜ ì¸ìš”ë“¤ì€ ìˆœê°„ì ì¸ ìƒí™©ë³€í™”ë¥¼ ë°›ì•„ë“¤ì´ì§€ ëª»í•˜ê³  ê³³ê³³ì—ì„œ ê²©í•œ ë°˜ì‘ì„ ë³´ì˜€ë‹¤. ",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("´ç½ÅÀº È¯»óÇâÀ» ¿ø·¡´ë·Î µÇµ¹·Á³õ±âÀ§ÇØ ´øÀüÀ» Å½ÇèÇÏµµ·Ï ½ÃÀÛÇß´Ù. ",true,CL_normal);
+			printsub("ë‹¹ì‹ ì€ í™˜ìƒí–¥ì„ ì›ë˜ëŒ€ë¡œ ë˜ëŒë ¤ë†“ê¸°ìœ„í•´ ë˜ì „ì„ íƒí—˜í•˜ë„ë¡ ì‹œì‘í–ˆë‹¤. ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);
 			break;
 		//case '1':
 		//	WaitForSingleObject(mutx, INFINITE);
 		//	deletesub();
-		//	printsub("                                   --- Á¦ÀÛÀÚ Àâ´ã ---",true,CL_normal);
-		//	printsub("º»°ÔÀÓÀº ´øÀüÅ©·Ñ(½ºÅæ¼öÇÁ)¿Í µ¿¹æÇÁ·ÎÁ§Æ®¸¦ ¼¯Àº °ÔÀÓÀÔ´Ï´Ù.",true,CL_normal);
+		//	printsub("                                   --- ì œì‘ì ì¡ë‹´ ---",true,CL_normal);
+		//	printsub("ë³¸ê²Œì„ì€ ë˜ì „í¬ë¡¤(ìŠ¤í†¤ìˆ˜í”„)ì™€ ë™ë°©í”„ë¡œì íŠ¸ë¥¼ ì„ì€ ê²Œì„ì…ë‹ˆë‹¤.",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Á¦ÀÛÀÚ - joy1999",true,CL_normal);
+		//	printsub("ì œì‘ì - joy1999",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Á¦ÀÛÅø - Visual C++ 2008 Express Edition",true,CL_normal);
+		//	printsub("ì œì‘íˆ´ - Visual C++ 2008 Express Edition",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Á¦ÀÛ¾ğ¾î - C++(´ÙÀÌ·ºÆ®X 9.0)",true,CL_normal);
+		//	printsub("ì œì‘ì–¸ì–´ - C++(ë‹¤ì´ë ‰íŠ¸X 9.0)",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Á¦ÀÛ±â°£ - ¸ğ¸§",true,CL_normal);
+		//	printsub("ì œì‘ê¸°ê°„ - ëª¨ë¦„",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Àâ´ã: ÀÌ¹ø °ÔÀÓÀº ¹¯È÷Áö ¾Ê¾ÒÀ¸¸é ÁÁ°Ú´Ù.",true,CL_normal);
+		//	printsub("ì¡ë‹´: ì´ë²ˆ ê²Œì„ì€ ë¬»íˆì§€ ì•Šì•˜ìœ¼ë©´ ì¢‹ê² ë‹¤.",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("È¤½Ã °ÔÀÓ¿¡ °ü·ÃµÈ °ÇÀÇ»çÇ×, Áú¹®, ¹ö±×µî¿¡´ëÇØ¼­ ¸»ÇÏ½Ã°í ½ÍÀ¸½Å°Ô ÀÖ´Ù¸é ´ÙÀ½ÀÇ ºí·Î±× ÁÖ¼Ò·Î ¿ÍÁÖ¼¼¿ä.",true,CL_normal);
+		//	printsub("í˜¹ì‹œ ê²Œì„ì— ê´€ë ¨ëœ ê±´ì˜ì‚¬í•­, ì§ˆë¬¸, ë²„ê·¸ë“±ì—ëŒ€í•´ì„œ ë§í•˜ì‹œê³  ì‹¶ìœ¼ì‹ ê²Œ ìˆë‹¤ë©´ ë‹¤ìŒì˜ ë¸”ë¡œê·¸ ì£¼ì†Œë¡œ ì™€ì£¼ì„¸ìš”.",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	printsub("http://joy1999.egloos.com/",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("°¨»çÇÕ´Ï´Ù.",true,CL_normal);
+		//	printsub("ê°ì‚¬í•©ë‹ˆë‹¤.",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	changedisplay(DT_SUB_TEXT);
 		//	ReleaseMutex(mutx);
@@ -163,30 +163,30 @@ void Help_Show()
 		//case '2':
 		//	WaitForSingleObject(mutx, INFINITE);
 		//	deletesub();
-		//	printsub("                                   --- µµ¿òÁÖ½Å ºĞµé ---",true,CL_normal);
-		//	printsub("°ÔÀÓÀ» ¸¸µå´Âµ¥ ¸¹Àº µµ¿òÀ» ÁÖ½Å ÀÌÇÏÀÇ ºĞµé¿¡°Ô ¸ğµÎ °¨»çµå¸³´Ï´Ù.",true,CL_normal);
+		//	printsub("                                   --- ë„ì›€ì£¼ì‹  ë¶„ë“¤ ---",true,CL_normal);
+		//	printsub("ê²Œì„ì„ ë§Œë“œëŠ”ë° ë§ì€ ë„ì›€ì„ ì£¼ì‹  ì´í•˜ì˜ ë¶„ë“¤ì—ê²Œ ëª¨ë‘ ê°ì‚¬ë“œë¦½ë‹ˆë‹¤.",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("<Å×½ºÅÍ>",true,CL_normal);
-		//	printsub("ÀÌ¼Ò¸®½ºÅ©, µğÀÎ, ³ì»öÀÌ½½, Rian¡Ùiku, ÈÄÀğ, Minacle, Zeroize, Ä«³ª¶¥",true,CL_normal); 
-		//	printsub("TachibanaMiya, ¹Ì¿À, Dhin, ·¹³ª¤é, ³ª°¡Åä, mystery, ÁØ¹ü, ¾î¶²",true,CL_normal);
+		//	printsub("<í…ŒìŠ¤í„°>",true,CL_normal);
+		//	printsub("ì´ì†Œë¦¬ìŠ¤í¬, ë””ì¸, ë…¹ìƒ‰ì´ìŠ¬, Rianâ˜†iku, í›„ìŸˆ, Minacle, Zeroize, ì¹´ë‚˜ë•…",true,CL_normal); 
+		//	printsub("TachibanaMiya, ë¯¸ì˜¤, Dhin, ë ˆë‚˜ã…¹, ë‚˜ê°€í† , mystery, ì¤€ë²”, ì–´ë–¤",true,CL_normal);
 		//	printsub("",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("<Æ¯È÷ ¸¹Àº µµ¿òÀ» ÁÖ½ÅºĞµé>",true,CL_normal);
+		//	printsub("<íŠ¹íˆ ë§ì€ ë„ì›€ì„ ì£¼ì‹ ë¶„ë“¤>",true,CL_normal);
 		//	printsub("",true,CL_help);
-		//	printsub("ÀÌ¼Ò¸®½ºÅ© - ¸¹Àº ±âÈ¹À» µµ¿ÍÁÖ½É.",true,CL_normal);
+		//	printsub("ì´ì†Œë¦¬ìŠ¤í¬ - ë§ì€ ê¸°íšì„ ë„ì™€ì£¼ì‹¬.",true,CL_normal);
 		//	printsub("",true,CL_help);
-		//	printsub("µğÀÎ´Ô - ¿ª½Ã ±âÈ¹ÂÊÀ¸·Îµµ ¸¹ÀÌ µµ¿ÍÁÖ½É. µµÆ®µµ ¸î°³ Âï¾îÁÖ½É.",true,CL_normal);
+		//	printsub("ë””ì¸ë‹˜ - ì—­ì‹œ ê¸°íšìª½ìœ¼ë¡œë„ ë§ì´ ë„ì™€ì£¼ì‹¬. ë„íŠ¸ë„ ëª‡ê°œ ì°ì–´ì£¼ì‹¬.",true,CL_normal);
 		//	printsub("",true,CL_help);
-		//	printsub("Rian¡Ùiku - Á¦°¡ ÀÚÁÖ ¼³È£ÇÔ.",true,CL_normal);
+		//	printsub("Rianâ˜†iku - ì œê°€ ìì£¼ ì„¤í˜¸í•¨.",true,CL_normal);
 		//	printsub("",true,CL_help);
-		//	printsub("¹Ì¿À, ³ì»öÀÌ½½ - ÀÌ¹ø¿¡ Å©·Ñ Åä³Ê¸ÕÆ® °°ÀÌ ³ª°¨.",true,CL_normal);
+		//	printsub("ë¯¸ì˜¤, ë…¹ìƒ‰ì´ìŠ¬ - ì´ë²ˆì— í¬ë¡¤ í† ë„ˆë¨¼íŠ¸ ê°™ì´ ë‚˜ê°.",true,CL_normal);
 		//	printsub("",true,CL_help);
-		//	printsub("±×¿ÜÀÇ #µ¿¹æÀÔÃµÄ¢, #µ¿¹æÅ©·Ñ Ã¤³Î ºĞµé ¸ğµÎ Ãß°¡ÀûÀ¸·Î °¨»çµå¸².",true,CL_normal);
+		//	printsub("ê·¸ì™¸ì˜ #ë™ë°©ì…ì²œì¹™, #ë™ë°©í¬ë¡¤ ì±„ë„ ë¶„ë“¤ ëª¨ë‘ ì¶”ê°€ì ìœ¼ë¡œ ê°ì‚¬ë“œë¦¼.",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("±×¸®°í Áö±İ ´Ù¿î¹Ş¾Æ¼­ ÇÃ·¹ÀÌÇÏ½Å ºĞµé ¸ğµÎ »ç¶ûÇÔ.",true,CL_normal);
+		//	printsub("ê·¸ë¦¬ê³  ì§€ê¸ˆ ë‹¤ìš´ë°›ì•„ì„œ í”Œë ˆì´í•˜ì‹  ë¶„ë“¤ ëª¨ë‘ ì‚¬ë‘í•¨.",true,CL_normal);
 		//	printsub("",true,CL_normal);
-		//	printsub("Å×½ºÅÍÇÏ½Ã°í½ÍÀ¸½Å ºĞµéÀº ºí·Î±×¿¡ ³²±â¼¼¿ä. Å©·Ñ·¯ ¿ì´ë, ¹ö±× Àß Ã£´ÂºĞ ¿ì´ë.",true,CL_normal);
+		//	printsub("í…ŒìŠ¤í„°í•˜ì‹œê³ ì‹¶ìœ¼ì‹  ë¶„ë“¤ì€ ë¸”ë¡œê·¸ì— ë‚¨ê¸°ì„¸ìš”. í¬ë¡¤ëŸ¬ ìš°ëŒ€, ë²„ê·¸ ì˜ ì°¾ëŠ”ë¶„ ìš°ëŒ€.",true,CL_normal);
 		//	changedisplay(DT_SUB_TEXT);
 		//	ReleaseMutex(mutx);
 		//	break;
@@ -194,44 +194,44 @@ void Help_Show()
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
 			changedisplay(DT_SUB_TEXT);
-			printsub("                                   --- ÀÚÃ¼ F A Q ---",true,CL_normal);
-			printsub("Q. °í¸¦ ¼ö ÀÖ´Â ½Å°ú ½Å¾Ó½ÉÀ» ¾ò´Â ¹æ¹ıÀº?",true,CL_help);
-			printsub("   A. Ä«³ªÄÚ, ¿¡ÀÌ¸°, ¹òÄí·»»ÓÀÔ´Ï´Ù.",true,CL_normal);
-			printsub("      Ä«³ªÄÚ- ¸÷À» Á×ÀÎ´Ù. PÅÛÀ§¿¡¼­ ±âµµÇÑ´Ù.",true,CL_normal);
-			printsub("      ¿¡ÀÌ¸°- ¸Í¹°À» Á¦¿ÜÇÑ Æ÷¼ÇÀ» ¸¶½Å´Ù. Æ÷¼ÇÀ§¿¡¼­ ±âµµÇÑ´Ù. PÅÛÀ§¿¡¼­ ±âµµÇÑ´Ù.",true,CL_normal);
-			printsub("      ¹òÄí·»- ³²Àº ½ºÅ³ °æÇèÄ¡·Î ¸¶¹ı½ºÅ³À» ¼ö·ÃÇÑ´Ù.",true,CL_normal);
+			printsub("                                   --- ìì²´ F A Q ---",true,CL_normal);
+			printsub("Q. ê³ ë¥¼ ìˆ˜ ìˆëŠ” ì‹ ê³¼ ì‹ ì•™ì‹¬ì„ ì–»ëŠ” ë°©ë²•ì€?",true,CL_help);
+			printsub("   A. ì¹´ë‚˜ì½”, ì—ì´ë¦°, ë±Œì¿ ë Œë¿ì…ë‹ˆë‹¤.",true,CL_normal);
+			printsub("      ì¹´ë‚˜ì½”- ëª¹ì„ ì£½ì¸ë‹¤. Pí…œìœ„ì—ì„œ ê¸°ë„í•œë‹¤.",true,CL_normal);
+			printsub("      ì—ì´ë¦°- ë§¹ë¬¼ì„ ì œì™¸í•œ í¬ì…˜ì„ ë§ˆì‹ ë‹¤. í¬ì…˜ìœ„ì—ì„œ ê¸°ë„í•œë‹¤. Pí…œìœ„ì—ì„œ ê¸°ë„í•œë‹¤.",true,CL_normal);
+			printsub("      ë±Œì¿ ë Œ- ë‚¨ì€ ìŠ¤í‚¬ ê²½í—˜ì¹˜ë¡œ ë§ˆë²•ìŠ¤í‚¬ì„ ìˆ˜ë ¨í•œë‹¤.",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("Q. ¿Ö ÀÎ°£°ú ¹«³à¸¦ ¾È°ñ¶óµµ ·¹ÀÌ¹«Áö?",true,CL_help);
-			printsub("   A. µµÆ® ¿ì·Á¸Ô´Ùº¸´Ï±î ±×·¸½À´Ï´Ù. ´ÙÀ½ ¹öÁ¯¿¡¼± Á¾Á·¿¡ ¸Â°Ô µµÆ®°¡ ¹Ù²ò´Ï´Ù.",true,CL_normal);
+			printsub("Q. ì™œ ì¸ê°„ê³¼ ë¬´ë…€ë¥¼ ì•ˆê³¨ë¼ë„ ë ˆì´ë¬´ì§€?",true,CL_help);
+			printsub("   A. ë„íŠ¸ ìš°ë ¤ë¨¹ë‹¤ë³´ë‹ˆê¹Œ ê·¸ë ‡ìŠµë‹ˆë‹¤. ë‹¤ìŒ ë²„ì ¼ì—ì„  ì¢…ì¡±ì— ë§ê²Œ ë„íŠ¸ê°€ ë°”ë€ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("Q. µ¿¹æÄ³¸¯ÅÍ´Â ÇÃ·¹ÀÌ¾îÄ³¸¯ÅÍ·Î ÇÃ·¹ÀÌÇÒ ¼ö ¾ø°ÔµÉ ¿¹Á¤?",true,CL_help);
-			printsub("   A. ¾Æ´Õ´Ï´Ù.",true,CL_normal);
+			printsub("Q. ë™ë°©ìºë¦­í„°ëŠ” í”Œë ˆì´ì–´ìºë¦­í„°ë¡œ í”Œë ˆì´í•  ìˆ˜ ì—†ê²Œë  ì˜ˆì •?",true,CL_help);
+			printsub("   A. ì•„ë‹™ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub("Q. ¸ÅÅ©·Î°¡ ¾ø´Ù. ctrl-G°¡ ¾ø´Ù. ¿À¸¥ÂÊ¿¡ ÀÎº¥Ã¢ÀÌ ¾ø´Ù. µîµî",true,CL_help);
-			printsub("   A. ¾ÆÁ÷ Å©·Ñ¿¡ ºñÇØ¼­ ºÎÁ·ÇÑ Á¡Àº Á¡Â÷ Ãß°¡ÇØ³ª°¥ ¿¹Á¤ÀÔ´Ï´Ù.",true,CL_normal);
+			printsub("Q. ë§¤í¬ë¡œê°€ ì—†ë‹¤. ctrl-Gê°€ ì—†ë‹¤. ì˜¤ë¥¸ìª½ì— ì¸ë²¤ì°½ì´ ì—†ë‹¤. ë“±ë“±",true,CL_help);
+			printsub("   A. ì•„ì§ í¬ë¡¤ì— ë¹„í•´ì„œ ë¶€ì¡±í•œ ì ì€ ì ì°¨ ì¶”ê°€í•´ë‚˜ê°ˆ ì˜ˆì •ì…ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. ¸¶¹ı¼º°ø·üÀÌ ³Ê¹« Á¤È®ÇÏ°Ô ³ª¿Â´Ù.",true,CL_help);
-			printsub("   A. ÈÄ¿¡ ¼º°ø·üÀº ÁÁÀ½, ³ª»İ, º¸Åë°°Àº ¹®ÀåÀ¸·Î ¹Ù²Ü ¿¹Á¤ÀÔ´Ï´Ù.",true,CL_normal);
+			printsub("Q. ë§ˆë²•ì„±ê³µë¥ ì´ ë„ˆë¬´ ì •í™•í•˜ê²Œ ë‚˜ì˜¨ë‹¤.",true,CL_help);
+			printsub("   A. í›„ì— ì„±ê³µë¥ ì€ ì¢‹ìŒ, ë‚˜ì¨, ë³´í†µê°™ì€ ë¬¸ì¥ìœ¼ë¡œ ë°”ê¿€ ì˜ˆì •ì…ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. ±¾¾îÁ×°Ú´Âµ¥ À½½ÄÀÌ ¾ø´Ù!",true,CL_help);
-			printsub("   A. ¹è°íÇÂ »óÅÂ¿¡¼± c¸¦ ´­·¯¼­ p¸¦ ÇÑÄ­ ¼Ò¸ğÇÏ¿© Çã±â¸¦ Ã¤¿ï ¼ö ÀÖ½À´Ï´Ù.",true,CL_normal);
+			printsub("Q. êµ¶ì–´ì£½ê² ëŠ”ë° ìŒì‹ì´ ì—†ë‹¤!",true,CL_help);
+			printsub("   A. ë°°ê³ í”ˆ ìƒíƒœì—ì„  cë¥¼ ëˆŒëŸ¬ì„œ pë¥¼ í•œì¹¸ ì†Œëª¨í•˜ì—¬ í—ˆê¸°ë¥¼ ì±„ìš¸ ìˆ˜ ìˆìŠµë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. ½ºÅ³ ¼ºÀåÄ¡¸¦ º¸°í ½Í´Ù.",true,CL_help);
-			printsub("   A. ºí·Î±×¿¡ °ø°³ÁßÀÔ´Ï´Ù. °ÔÀÓ»ó¿¡¼­´Â mÅ°·Î ½ºÅ³°æÇèÄ¡¸¦ º¸´Â È­¸é¿¡¼­ !¸¦ ´©¸£¸é ¼ºÀåÄ¡·Î ¹Ù²ò´Ï´Ù.",true,CL_normal);
+			printsub("Q. ìŠ¤í‚¬ ì„±ì¥ì¹˜ë¥¼ ë³´ê³  ì‹¶ë‹¤.",true,CL_help);
+			printsub("   A. ë¸”ë¡œê·¸ì— ê³µê°œì¤‘ì…ë‹ˆë‹¤. ê²Œì„ìƒì—ì„œëŠ” mí‚¤ë¡œ ìŠ¤í‚¬ê²½í—˜ì¹˜ë¥¼ ë³´ëŠ” í™”ë©´ì—ì„œ !ë¥¼ ëˆ„ë¥´ë©´ ì„±ì¥ì¹˜ë¡œ ë°”ë€ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. ÀÌ °ÔÀÓ¿¡ ¸ñÇ¥´Â ¹¹Áö?",true,CL_help);
-			printsub("   A. ¾ÆÁ÷ ¹Ì¿Ï¼ºÀÌ¶ó º°´Ù¸¥ ¸ñÇ¥´Â ¾øÁö¸¸ ÀÌ¹ø ¹öÁ¯¿¡¼± ¿ä±«ÀÇ»ê ¸·ÃşÀÇ ÂÊÁö¸¦ °¡Á®¿Í¾ßÇÕ´Ï´Ù.",true,CL_normal);
+			printsub("Q. ì´ ê²Œì„ì— ëª©í‘œëŠ” ë­ì§€?",true,CL_help);
+			printsub("   A. ì•„ì§ ë¯¸ì™„ì„±ì´ë¼ ë³„ë‹¤ë¥¸ ëª©í‘œëŠ” ì—†ì§€ë§Œ ì´ë²ˆ ë²„ì ¼ì—ì„  ìš”ê´´ì˜ì‚° ë§‰ì¸µì˜ ìª½ì§€ë¥¼ ê°€ì ¸ì™€ì•¼í•©ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. ¼­ºê´øÀüÀÇ °è´ÜÀÌ ´Ù¸¥°è´Ü°ú ±¸º°ÇÏ±â Èûµé´Ù.",true,CL_help);
-			printsub("   A. ÈÄ¿¡ µµÆ®¸¦ ¹Ù²Ü ¿¹Á¤ÀÔ´Ï´Ù. ÇöÀç´Â Ãş¿¡¼­ ³»·Á°¡´Â °è´ÜÀÌ 4°³ ÀÌ»óÀÏ¶§",true,CL_normal);
-			printsub("      ±× Áß ÇÏ³ª°¡ ¼­ºê´øÀü °è´ÜÀÌ¶ó°í º¸½Ã¸éµË´Ï´Ù.",true,CL_normal);
-			printsub("      ¸¸¾à ¾Æ¹«¸® Ã£¾Æµµ ¾øÀ¸¸é ¹ö±×´Ï ½Å°íÇØÁÖ¼¼¿ä.",true,CL_normal);
+			printsub("Q. ì„œë¸Œë˜ì „ì˜ ê³„ë‹¨ì´ ë‹¤ë¥¸ê³„ë‹¨ê³¼ êµ¬ë³„í•˜ê¸° í˜ë“¤ë‹¤.",true,CL_help);
+			printsub("   A. í›„ì— ë„íŠ¸ë¥¼ ë°”ê¿€ ì˜ˆì •ì…ë‹ˆë‹¤. í˜„ì¬ëŠ” ì¸µì—ì„œ ë‚´ë ¤ê°€ëŠ” ê³„ë‹¨ì´ 4ê°œ ì´ìƒì¼ë•Œ",true,CL_normal);
+			printsub("      ê·¸ ì¤‘ í•˜ë‚˜ê°€ ì„œë¸Œë˜ì „ ê³„ë‹¨ì´ë¼ê³  ë³´ì‹œë©´ë©ë‹ˆë‹¤.",true,CL_normal);
+			printsub("      ë§Œì•½ ì•„ë¬´ë¦¬ ì°¾ì•„ë„ ì—†ìœ¼ë©´ ë²„ê·¸ë‹ˆ ì‹ ê³ í•´ì£¼ì„¸ìš”.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. Å¸ÀÌÆ² ÀÌ¹ÌÁö¸¦ 2°³ ÀÌ»ó ¹ŞÀ¸¸é ¾î¶»°Ô ÇÒ°ÅÁö?",true,CL_help);
-			printsub("   A. Å¸ÀÌÆ² ÀÌ¹ÌÁö¸¦ ¿©·¯°³¹ŞÀ¸¸é ½ÇÇàÇÒ¶§¸¶´Ù ·£´ıÇÑ Å¸ÀÌÆ²À» Ãâ·ÂÇÒ°Ì´Ï´Ù.",true,CL_normal);
+			printsub("Q. íƒ€ì´í‹€ ì´ë¯¸ì§€ë¥¼ 2ê°œ ì´ìƒ ë°›ìœ¼ë©´ ì–´ë–»ê²Œ í• ê±°ì§€?",true,CL_help);
+			printsub("   A. íƒ€ì´í‹€ ì´ë¯¸ì§€ë¥¼ ì—¬ëŸ¬ê°œë°›ìœ¼ë©´ ì‹¤í–‰í• ë•Œë§ˆë‹¤ ëœë¤í•œ íƒ€ì´í‹€ì„ ì¶œë ¥í• ê²ë‹ˆë‹¤.",true,CL_normal);
 			printsub("",true,CL_help);
-			printsub("Q. Å¸ÀÌÆ²À» ¸¸µé¾îÁÖ°í ½Í´Ù. µµÆ®¸¦ Âï¾îÁÖ°í ½Í´Ù. Å×½ºÆ®¸¦ ÇØÁÖ°í ½Í´Ù.",true,CL_help);
-			printsub("   A. ¾Æ¾â¾¾ #µ¿¹æÅ©·Ñ Ã¤³Î·Î ¿À¼¼¿ä.",true,CL_normal);
+			printsub("Q. íƒ€ì´í‹€ì„ ë§Œë“¤ì–´ì£¼ê³  ì‹¶ë‹¤. ë„íŠ¸ë¥¼ ì°ì–´ì£¼ê³  ì‹¶ë‹¤. í…ŒìŠ¤íŠ¸ë¥¼ í•´ì£¼ê³  ì‹¶ë‹¤.",true,CL_help);
+			printsub("   A. ì•„ì–„ì”¨ #ë™ë°©í¬ë¡¤ ì±„ë„ë¡œ ì˜¤ì„¸ìš”.",true,CL_normal);
 			printsub("",true,CL_help);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);

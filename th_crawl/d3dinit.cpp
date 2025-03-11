@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: d3dinit.cpp
+// íŒŒì¼ì´ë¦„: d3dinit.cpp
 //
-// ³»¿ë: ÇÁ·Î±×·¥ÀÇ Áß½É ÆÄÀÏ
+// ë‚´ìš©: í”„ë¡œê·¸ë¨ì˜ ì¤‘ì‹¬ íŒŒì¼
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,12 +22,12 @@
 
 
 //
-// Àü¿ª
+// ì „ì—­
 //
-IDirect3DDevice9* Device = NULL; //µğ¹ÙÀÌ½ºÆ÷ÀÎÅÍ
-IDirect3DVertexBuffer9* g_pVB = NULL; //¹öÅØ½º¹öÆÛÆ÷ÀÎÅÍ
-D3DXMATRIXA16 g_BaseMatrix; //¸ÅÆ®¸¯½ºÆ÷ÀÎÅÍ
-LPD3DXSPRITE g_pSprite = NULL; //½ºÇÁ¶óÀÌÆ®Æ÷ÀÎÅÍ 
+IDirect3DDevice9* Device = NULL; //ë””ë°”ì´ìŠ¤í¬ì¸í„°
+IDirect3DVertexBuffer9* g_pVB = NULL; //ë²„í…ìŠ¤ë²„í¼í¬ì¸í„°
+D3DXMATRIXA16 g_BaseMatrix; //ë§¤íŠ¸ë¦­ìŠ¤í¬ì¸í„°
+LPD3DXSPRITE g_pSprite = NULL; //ìŠ¤í”„ë¼ì´íŠ¸í¬ì¸í„° 
 ID3DXFont* g_pfont = NULL;
 IDirectInput8* Input;
 IDirectInputDevice8* Keyboard;
@@ -47,7 +47,7 @@ extern void init_identify();
 
 
 //
-// ÃÊ±âÈ­ ÇÔ¼ö
+// ì´ˆê¸°í™” í•¨ìˆ˜
 //
 
 bool Setup()
@@ -65,7 +65,7 @@ bool Setup()
 	fontDesc.PitchAndFamily = FF_DONTCARE;
 	fontDesc.MipLevels = 1;
 
-	strcpy(fontDesc.FaceName, "¹ÙÅÁÃ¼");
+	strcpy(fontDesc.FaceName, "ë°”íƒ•ì²´");
 	
 
 	D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);
@@ -166,7 +166,7 @@ bool Setup()
 }
 
 //
-// ³¡³»±â ÇÔ¼ö
+// ëë‚´ê¸° í•¨ìˆ˜
 //
 
 void Cleanup()
@@ -197,7 +197,7 @@ void Cleanup()
 	}
 }
 //
-// À©µµ¿ì ÇÁ·Î½ÃÀú
+// ìœˆë„ìš° í”„ë¡œì‹œì €
 //
 
 LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -212,7 +212,7 @@ LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 //
-// À©¸ŞÀÎ
+// ìœˆë©”ì¸
 //
 
 int WINAPI WinMain(HINSTANCE hinstance,
@@ -225,13 +225,13 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
 	{
-		::MessageBox(0, "D3¸¦ ÃÊ±âÈ­ÇÏ´Âµ¥ ½ÇÆĞÇÏ¿´½À´Ï´Ù.", 0, 0);
+		::MessageBox(0, "D3ë¥¼ ì´ˆê¸°í™”í•˜ëŠ”ë° ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.", 0, 0);
 		return 0;
 	}
 		
 	if(!Setup())
 	{
-		::MessageBox(0, "ÀÏºÎ Á¤»óÀûÀ¸·Î ·ÎµùµÇÁö¸øÇÑ ÀÌ¹ÌÁöÆÄÀÏÀÌ ÀÖ½À´Ï´Ù.", 0, 0);
+		::MessageBox(0, "ì¼ë¶€ ì •ìƒì ìœ¼ë¡œ ë¡œë”©ë˜ì§€ëª»í•œ ì´ë¯¸ì§€íŒŒì¼ì´ ìˆìŠµë‹ˆë‹¤.", 0, 0);
 	}
 	InitSound(hwnd);
 

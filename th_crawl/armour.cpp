@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: armour.cpp
+// íŒŒì¼ì´ë¦„: armour.cpp
 //
-// ³»¿ë: °©¿Ê
+// ë‚´ìš©: ê°‘ì˜·
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,22 +17,22 @@ int GetMaterial(material_kind kind_, armour_value ac_)
 {
 	switch(kind_)
 	{
-	case MTK_ROBE: //Ãµ
+	case MTK_ROBE: //ì²œ
 		return ac_==AMV_AC? 3
 			:(ac_==AMV_MAX_EV? 0 
 			:(ac_==AMV_MIN_EV? 0
 			:0));
-	case MTK_LEATHER: //°¡Á×
+	case MTK_LEATHER: //ê°€ì£½
 		return ac_==AMV_AC? 5
 			:(ac_==AMV_MAX_EV? -2 
 			:(ac_==AMV_MIN_EV? -1
 			:0));
-	case MTK_CHAIN: //»ç½½
+	case MTK_CHAIN: //ì‚¬ìŠ¬
 		return ac_==AMV_AC? 8
 			:(ac_==AMV_MAX_EV? -6 
 			:(ac_==AMV_MIN_EV? -3
 			:0));
-	case MTK_PLATE: //ÆÇ±Ý
+	case MTK_PLATE: //íŒê¸ˆ
 		return ac_==AMV_AC? 13
 			:(ac_==AMV_MAX_EV? -11 
 			:(ac_==AMV_MIN_EV? -4
@@ -47,14 +47,14 @@ string GetMaterialString(material_kind kind_)
 {
 	switch(kind_)
 	{
-	case MTK_ROBE: //Ãµ
-		return "Ãµ";
-	case MTK_LEATHER: //°¡Á×
-		return "°¡Á×";
-	case MTK_CHAIN: //»ç½½
-		return "»ç½½";
-	case MTK_PLATE: //ÆÇ±Ý
-		return "ÆÇ±Ý";
+	case MTK_ROBE: //ì²œ
+		return "ì²œ";
+	case MTK_LEATHER: //ê°€ì£½
+		return "ê°€ì£½";
+	case MTK_CHAIN: //ì‚¬ìŠ¬
+		return "ì‚¬ìŠ¬";
+	case MTK_PLATE: //íŒê¸ˆ
+		return "íŒê¸ˆ";
 	}
 	return 0;
 }
@@ -63,7 +63,7 @@ string GetMaterialString(material_kind kind_)
 
 void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 {
-	//°øÅë
+	//ê³µí†µ
 	t->value1 = GetMaterial(material,AMV_AC);
 	t->value2 = GetMaterial(material,AMV_MAX_EV);
 	t->value3 = GetMaterial(material,AMV_MIN_EV);
@@ -84,7 +84,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 			material == MTK_CHAIN ? &img_play_item_body[3] :
 			material == MTK_LEATHER ? &img_play_item_body[2] : &img_play_item_body[1];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ÀÏ¹Ý¿Ê";
+		t->name.name += " ì¼ë°˜ì˜·";
 		t->value2 +=(material>=MTK_LEATHER)?((material>=MTK_CHAIN)?2:1):0;
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
@@ -95,7 +95,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_robe;
 		t->equip_image = &img_play_item_body[10];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ¹«³à¿Ê";
+		t->name.name += " ë¬´ë…€ì˜·";
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5 + 1);
 		t->value = 80 + (material * 20);
@@ -105,7 +105,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_relec;
 		t->equip_image = &img_play_item_body[12];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ³¯°³¿Ê";
+		t->name.name += " ë‚ ê°œì˜·";
 		t->name.name_type = true;
 		t->weight = 3.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -114,7 +114,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_rcold;
 		t->equip_image = &img_play_item_body[13];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " Ä±ÆÄ¿Ê";
+		t->name.name += " ìº‡íŒŒì˜·";
 		t->name.name_type = true;
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -123,7 +123,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_rfire;
 		t->equip_image = &img_play_item_body[14];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ºÒÁã¿Ê";
+		t->name.name += " ë¶ˆì¥ì˜·";
 		t->name.name_type = true;
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -132,7 +132,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_rmagic;
 		t->equip_image = &img_play_item_body[15];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ¸ÞÀÌµå¿Ê";
+		t->name.name += " ë©”ì´ë“œì˜·";
 		t->name.name_type = true;
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -141,7 +141,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_armor_rpois;
 		t->equip_image = &img_play_item_body[16];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ÀÎÇü¿Ê";
+		t->name.name += " ì¸í˜•ì˜·";
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -150,7 +150,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->image = &img_item_autumn_armour[material+1];
 		t->equip_image = &img_play_item_body[5 + material + 1];
 		t->name.name = GetMaterialString(material);
-		t->name.name += " ´ÜÇ³¿Ê";
+		t->name.name += " ë‹¨í’ì˜·";
 		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
@@ -179,7 +179,7 @@ void MakeArmourEnchant(int good_bad, item_infor* t)
 
 	if(good_bad)
 	{
-		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+		t->name2.name = "ë£¬ì´ ìƒˆê²¨ì§„ ";
 		t->name2.name_type = true;
 	}
 

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: wiz.cpp
+// íŒŒì¼ì´ë¦„: wiz.cpp
 //
-// ³»¿ë: À§ÀÚµå¸ğµå!!
+// ë‚´ìš©: ìœ„ìë“œëª¨ë“œ!!
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,8 +34,8 @@ void wiz_mode()
 	{
 
 		
-		printlog("#### °æ°í! À§ÀÚµå¸ğµå´Â Á¡¼öµî·ÏÀÌ ¾ÈµÇ¸ç Àç¹Ì¸¦ Å«ÆøÀ¸·Î ¶³¾î¶ß¸³´Ï´Ù. ### ",true,false,false,CL_danger);
-		printlog("ÁøÂ¥·Î Å³²¨¾ß? (Y/N) ",false,false,false,CL_danger);
+		printlog("#### ê²½ê³ ! ìœ„ìë“œëª¨ë“œëŠ” ì ìˆ˜ë“±ë¡ì´ ì•ˆë˜ë©° ì¬ë¯¸ë¥¼ í°í­ìœ¼ë¡œ ë–¨ì–´ëœ¨ë¦½ë‹ˆë‹¤. ### ",true,false,false,CL_danger);
+		printlog("ì§„ì§œë¡œ í‚¬êº¼ì•¼? (Y/N) ",false,false,false,CL_danger);
 
 		
 		int key_ = waitkeyinput();
@@ -45,7 +45,7 @@ void wiz_mode()
 			enterlog();
 			break;
 		default:
-			printlog("À§ÀÚµå¸ğµå¸¦ Ãë¼Ò",true,false,false,CL_help);
+			printlog("ìœ„ìë“œëª¨ë“œë¥¼ ì·¨ì†Œ",true,false,false,CL_help);
 			return;
 		}
 
@@ -53,7 +53,7 @@ void wiz_mode()
 
 
 
-	printlog("<À§ÀÚµå¸ğµå> ¾î´À ¸í·É¾î?  ( ? - µµ¿ò¸» )",true,false,false,CL_help);
+	printlog("<ìœ„ìë“œëª¨ë“œ> ì–´ëŠ ëª…ë ¹ì–´?  ( ? - ë„ì›€ë§ )",true,false,false,CL_help);
 	wiz_list.wizard_mode = 1;
 	while(1)
 	{
@@ -62,12 +62,12 @@ void wiz_mode()
 		changedisplay(DT_GAME);
 		switch (key_)
 		{
-		case 'D': //¸Ê¹àÈ÷±â
+		case 'D': //ë§µë°íˆê¸°
 			for (int i = 0; i < DG_MAX_X; i++)
 				for (int j = 0; j < DG_MAX_Y; j++)
 					env[current_level].magicmapping(i, j);
 			break;
-		case 'f': //¿¬±â
+		case 'f': //ì—°ê¸°
 			//for(int i = -1;i<2;i++)
 			//	for(int j = -1;j<2;j++)
 			//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
@@ -75,8 +75,8 @@ void wiz_mode()
 			break;
 		case 'A':
 		{
-			printlog("p-Æ÷¼Ç s-½ºÅ©·Ñ e-¹ßµ¿ÅÛ v-½ºÆçÄ«µå r-¹İÁö b-Ã¥ a-¹æ¾î±¸ R-¸ñ°ÉÀÌ f-ÅõÃ´¹«±â", true, false, false, CL_help);
-			printlog("¾î´À ¾ÆÀÌÅÛÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
+			printlog("p-í¬ì…˜ s-ìŠ¤í¬ë¡¤ e-ë°œë™í…œ v-ìŠ¤í ì¹´ë“œ r-ë°˜ì§€ b-ì±… a-ë°©ì–´êµ¬ R-ëª©ê±¸ì´ f-íˆ¬ì²™ë¬´ê¸°", true, false, false, CL_help);
+			printlog("ì–´ëŠ ì•„ì´í…œì„ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -86,9 +86,9 @@ void wiz_mode()
 					PT_SLOW, PT_PARALYSIS, PT_CLEVER, PT_AGILITY, PT_MAGIC, PT_LEVETATION, PT_POWER,
 					PT_DOWN_STAT, PT_RECOVER_STAT, PT_ALCOHOL };
 				enterlog();
-				printlog("a-¹° b-Ä¡À¯ c-µ¶ d-Ã¼·ÂÈ¸º¹ e-Èû f-°¡¼Ó g-È¥¶õ h-°¨¼Ó i-¸¶ºñ", true, false, false, CL_help);
-				printlog("j-Áö´É k-¹ÎÃ¸ l-¿µ·Â m-ºñÇà n-ÆÄ¿ö o-´É·ÂÄ¡°¨¼Ò p-´É·ÂÄ¡È¸º¹ q-¼ú", true, false, false, CL_help);
-				printlog("¾î´À Æ÷¼ÇÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-ë¬¼ b-ì¹˜ìœ  c-ë… d-ì²´ë ¥íšŒë³µ e-í˜ f-ê°€ì† g-í˜¼ë€ h-ê°ì† i-ë§ˆë¹„", true, false, false, CL_help);
+				printlog("j-ì§€ëŠ¥ k-ë¯¼ì²© l-ì˜ë ¥ m-ë¹„í–‰ n-íŒŒì›Œ o-ëŠ¥ë ¥ì¹˜ê°ì†Œ p-ëŠ¥ë ¥ì¹˜íšŒë³µ q-ìˆ ", true, false, false, CL_help);
+				printlog("ì–´ëŠ í¬ì…˜ì„ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'q')
 				{
@@ -101,7 +101,7 @@ void wiz_mode()
 					}
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -111,10 +111,10 @@ void wiz_mode()
 					SCT_BLINK,SCT_MAPPING,SCT_ENCHANT_WEAPON_1,	SCT_ENCHANT_ARMOUR,SCT_FOG,SCT_DETECT_CURSE,
 					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA, SCT_SANTUARY, SCT_BRAND_WEAPON };
 				enterlog();
-				printlog("a-ÅÚÆ÷ b-½Äº° c-³«¼­ d-¹«±âÀúÁÖ e-¹æ¾î±¸ÀúÁÖ f-ÀúÁÖÇØÁ¦ g-¼ø°£ÀÌµ¿ h-¸¶¹ıÁöµµ", true, false, false, CL_help);
-				printlog("i-¹«±â°­È­ j-¹æ¾î±¸°­È­ k-¿¬±â l-ÀúÁÖ°¨Áö m-Àå½Å±¸ÀúÁÖ n-Á¤Àû o-¿µ°İ p-½ºÆçÃæÀü", true, false, false, CL_help);
-				printlog("q-¸Á°¢ r-¼º¿ª s-¸¶¹ı¹«±â", true, false, false, CL_help);
-				printlog("¾î´À ½ºÅ©·ÑÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-í…”í¬ b-ì‹ë³„ c-ë‚™ì„œ d-ë¬´ê¸°ì €ì£¼ e-ë°©ì–´êµ¬ì €ì£¼ f-ì €ì£¼í•´ì œ g-ìˆœê°„ì´ë™ h-ë§ˆë²•ì§€ë„", true, false, false, CL_help);
+				printlog("i-ë¬´ê¸°ê°•í™” j-ë°©ì–´êµ¬ê°•í™” k-ì—°ê¸° l-ì €ì£¼ê°ì§€ m-ì¥ì‹ êµ¬ì €ì£¼ n-ì •ì  o-ì˜ê²© p-ìŠ¤í ì¶©ì „", true, false, false, CL_help);
+				printlog("q-ë§ê° r-ì„±ì—­ s-ë§ˆë²•ë¬´ê¸°", true, false, false, CL_help);
+				printlog("ì–´ëŠ ìŠ¤í¬ë¡¤ì„ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 's')
 				{
@@ -127,7 +127,7 @@ void wiz_mode()
 					}
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -135,8 +135,8 @@ void wiz_mode()
 			{
 				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
 				enterlog();
-				printlog("a-º¸Å¾ b-¿¡¾îµÎ·ç¸¶¸® c-¸ùÈ¥ d-¸ÅÁ÷º½ e-¿ÀÄí¸®ÃİÄ£ f-°øÁß¾î·Ú g-¿ä¼ú¸ÁÄ¡", true, false, false, CL_help);
-				printlog("¾î´À ¹ßµ¿ÅÛÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-ë³´íƒ‘ b-ì—ì–´ë‘ë£¨ë§ˆë¦¬ c-ëª½í˜¼ d-ë§¤ì§ë´„ e-ì˜¤ì¿ ë¦¬ìµ¸ì¹œ f-ê³µì¤‘ì–´ë¢° g-ìš”ìˆ ë§ì¹˜", true, false, false, CL_help);
+				printlog("ì–´ëŠ ë°œë™í…œì„ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'g')
 				{
@@ -146,7 +146,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -154,8 +154,8 @@ void wiz_mode()
 			{
 				int list[] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE,SPC_V_METAL, SPC_V_SUN };
 				enterlog();
-				printlog("a-È­¿° b-³Ã±â c-´ëÁö d-´ë±â e-Åõ¸í f-±İ¼Ó g-ÅÂ¾ç", true, false, false, CL_help);
-				printlog("¾î´À ½ºÆçÄ«µå¸¦ ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-í™”ì—¼ b-ëƒ‰ê¸° c-ëŒ€ì§€ d-ëŒ€ê¸° e-íˆ¬ëª… f-ê¸ˆì† g-íƒœì–‘", true, false, false, CL_help);
+				printlog("ì–´ëŠ ìŠ¤í ì¹´ë“œë¥¼ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'g')
 				{
@@ -165,7 +165,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -175,10 +175,10 @@ void wiz_mode()
 					RGT_FIRE_RESIS,	RGT_ICE_RESIS,RGT_SEE_INVISIBLE/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,
 					RGT_MANA,RGT_MAGACIAN,RGT_AC,RGT_EV,RGT_CONFUSE_RESIS,	RGT_ELEC_RESIS,RGT_MAGIC_RESIS };
 				enterlog();
-				printlog("a-Èû b-¹ÎÃ¸ c-Áö´É d-Çã±â e-¸¸º¹µµ f-°ø°£ÀÌµ¿ g-µ¶ÀúÇ× h-È­¿°ÀúÇ×", true, false, false, CL_help);
-				printlog("i-³Ã±âÀúÇ× j-Åõ¸íº¸±â k-ºñÇà l-Åõ¸í m-¿µ·Â n-¸¶¹ı»ç o-¹æ¾î", true, false, false, CL_help);
-				printlog("p-È¸ÇÇ q-È¥¶õÀúÇ× r-Àü±âÀúÇ× s-¸¶¹ıÀúÇ× !-¾ÆÆ¼ÆåÆ®", true, false, false, CL_help);
-				printlog("¾î´À ¹İÁö¸¦ ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-í˜ b-ë¯¼ì²© c-ì§€ëŠ¥ d-í—ˆê¸° e-ë§Œë³µë„ f-ê³µê°„ì´ë™ g-ë…ì €í•­ h-í™”ì—¼ì €í•­", true, false, false, CL_help);
+				printlog("i-ëƒ‰ê¸°ì €í•­ j-íˆ¬ëª…ë³´ê¸° k-ë¹„í–‰ l-íˆ¬ëª… m-ì˜ë ¥ n-ë§ˆë²•ì‚¬ o-ë°©ì–´", true, false, false, CL_help);
+				printlog("p-íšŒí”¼ q-í˜¼ë€ì €í•­ r-ì „ê¸°ì €í•­ s-ë§ˆë²•ì €í•­ !-ì•„í‹°í™íŠ¸", true, false, false, CL_help);
+				printlog("ì–´ëŠ ë°˜ì§€ë¥¼ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 's')
 				{
@@ -198,7 +198,7 @@ void wiz_mode()
 
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -228,9 +228,9 @@ void wiz_mode()
 				int list[] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
 					AMT_WEATHER, AMT_OCCULT };
 				enterlog();
-				printlog("a-¿ÏÀü¹«°á b-»ï¶ó°á°è c-°¢ºÎ d-½Å¾Ó e-ÀüÆÄ f-½Å·É g-±×·¹ÀÌÁî h-±âÁú", true, false, false, CL_help);
-				printlog("i-¿ÀÄÃÆ®", true, false, false, CL_help);
-				printlog("¾î´À ºÎÀûÀ» ¾ò¾îº¼±î?", false, false, false, CL_help);
+				printlog("a-ì™„ì „ë¬´ê²° b-ì‚¼ë¼ê²°ê³„ c-ê°ë¶€ d-ì‹ ì•™ e-ì „íŒŒ f-ì‹ ë ¹ g-ê·¸ë ˆì´ì¦ˆ h-ê¸°ì§ˆ", true, false, false, CL_help);
+				printlog("i-ì˜¤ì»¬íŠ¸", true, false, false, CL_help);
+				printlog("ì–´ëŠ ë¶€ì ì„ ì–»ì–´ë³¼ê¹Œ?", false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'i')
 				{
@@ -240,7 +240,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" Ãë¼Ò", true, false, false, CL_help);
+					printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				}
 			}
 			return;
@@ -252,7 +252,7 @@ void wiz_mode()
 			}
 			return;
 			default:
-				printlog(" Ãë¼Ò", true, false, false, CL_help);
+				printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				return;
 			}
 
@@ -264,7 +264,7 @@ void wiz_mode()
 			you.PowUpDown(500, true);
 			break;
 		case 'g':
-			printlog("¿ëÀÇ ¸¶Áö¸· Æ¯¼ºÀÌ ¹ßÇöµÇ¾ú´Ù. ´ç½ÅÀº °ø±âÀÇ Èå¸§À» ´Ù·ê ¼ö ÀÖ°Ô µÇ¾ú´Ù.", true, false, false, CL_small_danger);
+			printlog("ìš©ì˜ ë§ˆì§€ë§‰ íŠ¹ì„±ì´ ë°œí˜„ë˜ì—ˆë‹¤. ë‹¹ì‹ ì€ ê³µê¸°ì˜ íë¦„ì„ ë‹¤ë£° ìˆ˜ ìˆê²Œ ë˜ì—ˆë‹¤.", true, false, false, CL_small_danger);
 			you.SetProperty(TPT_GRAZE_CONTROL, 1);
 			break;
 		case 'P':
@@ -276,10 +276,10 @@ void wiz_mode()
 					chargingFinish((amulet_type)_item->value1, 1);
 					if (you.system_exp.value <= 0) {
 						if (isCanCharge((amulet_type)_item->value1)) {
-							printlog("ºÎÀûÀÇ ÈûÀÌ ¸ğµÎ Ã¤¿öÁ³´Ù! ÀÌÁ¦ ¿øÇÒ¶§ v·Î ¹ßµ¿ÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_white_puple);
+							printlog("ë¶€ì ì˜ í˜ì´ ëª¨ë‘ ì±„ì›Œì¡Œë‹¤! ì´ì œ ì›í• ë•Œ vë¡œ ë°œë™í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_white_puple);
 						}
 						else {
-							printlog("ºÎÀûÀÇ ÈûÀÌ ¸ğµÎ Ã¤¿öÁ³´Ù!", true, false, false, CL_white_puple);
+							printlog("ë¶€ì ì˜ í˜ì´ ëª¨ë‘ ì±„ì›Œì¡Œë‹¤!", true, false, false, CL_white_puple);
 						}
 					}
 				}
@@ -288,7 +288,7 @@ void wiz_mode()
 		case 'X':
 			you.GetExp(you.GetNeedExp(you.level - 1) - you.exper);
 			break;
-		case '>': //´ÙÀ½Ãş ÀÌµ¿
+		case '>': //ë‹¤ìŒì¸µ ì´ë™
 			if (!environment::isLastFloor(current_level))
 			{
 				deque<monster*> dq;
@@ -296,7 +296,7 @@ void wiz_mode()
 				//you.resetLOS(false);
 			}
 			break;
-		case '<': //ÀÌÀüÃş ÀÌµ¿	
+		case '<': //ì´ì „ì¸µ ì´ë™	
 			if (!environment::isFirstFloor(current_level))
 			{
 				deque<monster*> dq;
@@ -311,14 +311,14 @@ void wiz_mode()
 			env[current_level].MakeItem(you.position, t);
 		}
 		return;
-		case 'G': //´øÀüÀÌµ¿	
+		case 'G': //ë˜ì „ì´ë™	
 		{
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
-			printlog("d - ´øÀü t - ½ÅÀü l - ¾È°³ÀÇ È£¼ö  m - ¿ä±«ÀÇ »ê  s - È«¸¶°ü  b - È«¸¶°üµµ¼­°ü", true, false, false, CL_help);
-			printlog("u - È«¸¶°üÁöÇÏ a - ¹Ì±ÃÀÇÁ×¸² e - ¿µ¿øÁ¤ y - ÀµÄí¸®µÕÁö p - Áü½Â±æ h - Áö·ÉÀü", true, false, false, CL_help);
-			printlog("r - ²ŞÀÇ ¼¼°è o - ´ŞÀÇ ¼¼°è  k - ¸¶°è  z - ÇÏÄí·¹ÀÌ½Å»ç ! - ±¤¸ùÀÇ ¼¼°è", true, false, false, CL_help);
-			printlog("¾î´À ´øÀüÀ¸·Î ÀÌµ¿ÇØº¼±î? (´ë¹®ÀÚ·Î ¸¶Áö¸·Ãş)", false, false, false, CL_help);
+			printlog("d - ë˜ì „ t - ì‹ ì „ l - ì•ˆê°œì˜ í˜¸ìˆ˜  m - ìš”ê´´ì˜ ì‚°  s - í™ë§ˆê´€  b - í™ë§ˆê´€ë„ì„œê´€", true, false, false, CL_help);
+			printlog("u - í™ë§ˆê´€ì§€í•˜ a - ë¯¸ê¶ì˜ì£½ë¦¼ e - ì˜ì›ì • y - ìœ³ì¿ ë¦¬ë‘¥ì§€ p - ì§ìŠ¹ê¸¸ h - ì§€ë ¹ì „", true, false, false, CL_help);
+			printlog("r - ê¿ˆì˜ ì„¸ê³„ o - ë‹¬ì˜ ì„¸ê³„  k - ë§ˆê³„  z - í•˜ì¿ ë ˆì´ì‹ ì‚¬ ! - ê´‘ëª½ì˜ ì„¸ê³„", true, false, false, CL_help);
+			printlog("ì–´ëŠ ë˜ì „ìœ¼ë¡œ ì´ë™í•´ë³¼ê¹Œ? (ëŒ€ë¬¸ìë¡œ ë§ˆì§€ë§‰ì¸µ)", false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -406,16 +406,16 @@ void wiz_mode()
 				next_ = ZIGURRAT_LEVEL;
 				break;
 			default:
-				printlog(" Ãë¼Ò", true, false, false, CL_help);
+				printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				return;
 			}
 			enterlog();
 			env[next_].EnterMap(0, dq);
-			printlog("°è´ÜÀ» ³»·Á¿Ô´Ù.", true, false, false, CL_normal);
+			printlog("ê³„ë‹¨ì„ ë‚´ë ¤ì™”ë‹¤.", true, false, false, CL_normal);
 			//you.resetLOS(false);
 			break;
 		}
-		case 'R': //¸Ê Àç»ı¼º	
+		case 'R': //ë§µ ì¬ìƒì„±	
 		{
 			deque<monster*> dq;
 			env[current_level].ClearFloor();
@@ -435,14 +435,14 @@ void wiz_mode()
 			}
 			else
 			{
-				printlog("¸¶¹ıÀÌ µèÁö ¾Ê´Â´Ù.", true, false, false, CL_normal);
+				printlog("ë§ˆë²•ì´ ë“£ì§€ ì•ŠëŠ”ë‹¤.", true, false, false, CL_normal);
 			}
 			break;
-		case 'w': //³¯¾¾¹ßÇö
+		case 'w': //ë‚ ì”¨ë°œí˜„
 		{
 			int next_ = DG_TEMPLE_FIRST;
-			printlog("a - ¾È°³ b - ÃµµÕ¹ø°³ c - ÄèÃ»", true, false, false, CL_help);
-			printlog("¾î´À ³¯¾¾¸¦ ¹ßÇöÇÒ°Ç°¡?", false, false, false, CL_help);
+			printlog("a - ì•ˆê°œ b - ì²œë‘¥ë²ˆê°œ c - ì¾Œì²­", true, false, false, CL_help);
+			printlog("ì–´ëŠ ë‚ ì”¨ë¥¼ ë°œí˜„í• ê±´ê°€?", false, false, false, CL_help);
 			wiz_list.wizard_mode = true;
 			key_ = waitkeyinput();
 			switch (key_)
@@ -468,11 +468,11 @@ void wiz_mode()
 		case 'p':
 		{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
-			printlog("B - ¹òÄí·»     K - Ä«³ªÄÚ  W - ½º¿ÍÄÚ   A - ¹Ì³ë¸®ÄÚ",true,false,false,CL_help);
-			printlog("M - ¹Ì¸¶       P - ½ÅÅ°    G - À¯¿ì±â   Z - ½ÃÁîÇÏ  H - È÷³ª     Y - À¯Ä«¸® ",true,false,false,CL_help);
-			printlog("E - ¿¡ÀÌ¸°     U - À¯À¯ÄÚ  S - »çÅä¸®   T - ÅÙ½Ã    R - ¼¼ÀÌÀÚ   L - ¸±¸®", true, false, false, CL_help);
-			printlog("I - ¹ÌÄÚ       O - ¿ÀÅ°³ª  J - ¼øÈ£     X - ÁÒ¿Â&½Ã¿Â", true, false, false, CL_help);
-			printlog("¾î¶² ½ÅÀüÀ» ¸¸µé±î?",false,false,false,CL_help);
+			printlog("B - ë±Œì¿ ë Œ     K - ì¹´ë‚˜ì½”  W - ìŠ¤ì™€ì½”   A - ë¯¸ë…¸ë¦¬ì½”",true,false,false,CL_help);
+			printlog("M - ë¯¸ë§ˆ       P - ì‹ í‚¤    G - ìœ ìš°ê¸°   Z - ì‹œì¦ˆí•˜  H - íˆë‚˜     Y - ìœ ì¹´ë¦¬ ",true,false,false,CL_help);
+			printlog("E - ì—ì´ë¦°     U - ìœ ìœ ì½”  S - ì‚¬í† ë¦¬   T - í…ì‹œ    R - ì„¸ì´ì   L - ë¦´ë¦¬", true, false, false, CL_help);
+			printlog("I - ë¯¸ì½”       O - ì˜¤í‚¤ë‚˜  J - ìˆœí˜¸     X - ì£ ì˜¨&ì‹œì˜¨", true, false, false, CL_help);
+			printlog("ì–´ë–¤ ì‹ ì „ì„ ë§Œë“¤ê¹Œ?",false,false,false,CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -557,7 +557,7 @@ void wiz_mode()
 					next_ = DG_TEMPLE_JUNKO;
 					break;
 			default:
-				printlog(" Ãë¼Ò", true, false, false, CL_help);
+				printlog(" ì·¨ì†Œ", true, false, false, CL_help);
 				return;
 			}
 			enterlog();
@@ -578,7 +578,7 @@ void wiz_mode()
 		{
 			int id_ = 0;
 			char temp[100];
-			sprintf_s(temp, 100, "¸ó½ºÅÍ¸¸µé±â(0~%d) :", MON_MAX - 1);
+			sprintf_s(temp, 100, "ëª¬ìŠ¤í„°ë§Œë“¤ê¸°(0~%d) :", MON_MAX - 1);
 			printlog(temp, false, false, false, CL_help);
 
 
@@ -631,7 +631,7 @@ void wiz_mode()
 					break;
 				case VK_ESCAPE://esc
 					enterlog();
-					printlog("¸ó½ºÅÍ »ı¼ºÀ» Ãë¼Ò", true, false, false, CL_help);
+					printlog("ëª¬ìŠ¤í„° ìƒì„±ì„ ì·¨ì†Œ", true, false, false, CL_help);
 					return;
 				}
 				if (id_ < 0)
@@ -697,7 +697,7 @@ void wiz_mode()
 				}
 				exp_ = you.exper;
 				char temp[200];
-				sprintf_s(temp,200,"ÀÏ¹İ´øÀü %dÃş±îÁö ·¹º§:%d (°æÇèÄ¡¾ç %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
+				sprintf_s(temp,200,"ì¼ë°˜ë˜ì „ %dì¸µê¹Œì§€ ë ˆë²¨:%d (ê²½í—˜ì¹˜ì–‘ %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 				 
@@ -711,7 +711,7 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"¾È°³È£¼öÅ¬¸®¾î ·¹º§:%d (°æÇèÄ¡¾ç %d)", you.level,exp_-prevexp_);
+				sprintf_s(temp,200,"ì•ˆê°œí˜¸ìˆ˜í´ë¦¬ì–´ ë ˆë²¨:%d (ê²½í—˜ì¹˜ì–‘ %d)", you.level,exp_-prevexp_);
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 
@@ -726,7 +726,7 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"³²Àº´øÀü Å¬¸®¾î ·¹º§:%d (°æÇèÄ¡¾ç %d)", you.level,exp_-prevexp_);
+				sprintf_s(temp,200,"ë‚¨ì€ë˜ì „ í´ë¦¬ì–´ ë ˆë²¨:%d (ê²½í—˜ì¹˜ì–‘ %d)", you.level,exp_-prevexp_);
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 
@@ -741,7 +741,7 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"¿ä±«ÀÇ»ê Å¬¸®¾î ·¹º§:%d (°æÇèÄ¡¾ç %d)", you.level,exp_-prevexp_);
+				sprintf_s(temp,200,"ìš”ê´´ì˜ì‚° í´ë¦¬ì–´ ë ˆë²¨:%d (ê²½í—˜ì¹˜ì–‘ %d)", you.level,exp_-prevexp_);
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 
@@ -755,7 +755,7 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"È«¸¶°ü Å¬¸®¾î ·¹º§:%d (°æÇèÄ¡¾ç %d)", you.level,exp_-prevexp_);
+				sprintf_s(temp,200,"í™ë§ˆê´€ í´ë¦¬ì–´ ë ˆë²¨:%d (ê²½í—˜ì¹˜ì–‘ %d)", you.level,exp_-prevexp_);
 				printlog(temp,true,false,false,CL_normal);
 				prevexp_ = exp_;
 			}
@@ -765,36 +765,36 @@ void wiz_mode()
 			break;
 		case 'e':
 			char temp[100];
-			sprintf_s(temp, 100, "ÇöÀçÁÂÇ¥: <%d, %d> ", you.position.x, you.position.y);
+			sprintf_s(temp, 100, "í˜„ì¬ì¢Œí‘œ: <%d, %d> ", you.position.x, you.position.y);
 			printlog(temp, true, false, false, CL_magic);
 			break;
-		case '?'://µµ¿ò¸»
+		case '?'://ë„ì›€ë§
 
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			printsub("                             --- À§ÀÚµå¸ğµå Ä¿¸Çµå ¸ñ·Ï ---",true,CL_normal);
+			printsub("                             --- ìœ„ìë“œëª¨ë“œ ì»¤ë§¨ë“œ ëª©ë¡ ---",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub(" X      - 1·¹º§¾÷                         ",true,CL_normal);
-			printsub(" H      - Ã¼·Â ¿µ·Â ÆÄ¿ö È¸º¹             ",true,CL_normal);
-			printsub(" G      - Àå¼ÒÀÌµ¿                        ",true,CL_normal);
-			printsub(" p      - Á¦´Ü »ı¼º                       ",true,CL_normal);
-			printsub(" ^      - ½Å¾Ó½É 10Áõ°¡                   ",true,CL_normal);
-			printsub(" >      - ¾Æ·§ÃşÀ¸·Î ³»·Á°¡±â             ",true,CL_normal);
-			printsub(" <      - À­ÃşÀ¸·Î ¿Ã¶ó°¡±â               ",true,CL_normal);
-			printsub(" A      - ¾ÆÀÌÅÛ»ı¼º(º£Å¸)                ",true,CL_normal);
-			printsub(" w      - ³¯¾¾¹ßÇö                        ", true, CL_normal);
-			printsub(" W      - ½Ã°£Á¤Áö                        ",true,CL_normal);
-			printsub(" D      - ¸ÅÁ÷¸ÊÇÎ                        ",true,CL_normal);
-			printsub(" b      - ºí¸µÅ©                          ",true,CL_normal);
-			printsub(" R      - ÇöÀç Ãş Àç±¸¼º                  ", true, CL_normal);
-			printsub(" m      - ¸ó½ºÅÍ »ı¼º                     ", true, CL_normal);
+			printsub(" X      - 1ë ˆë²¨ì—…                         ",true,CL_normal);
+			printsub(" H      - ì²´ë ¥ ì˜ë ¥ íŒŒì›Œ íšŒë³µ             ",true,CL_normal);
+			printsub(" G      - ì¥ì†Œì´ë™                        ",true,CL_normal);
+			printsub(" p      - ì œë‹¨ ìƒì„±                       ",true,CL_normal);
+			printsub(" ^      - ì‹ ì•™ì‹¬ 10ì¦ê°€                   ",true,CL_normal);
+			printsub(" >      - ì•„ë«ì¸µìœ¼ë¡œ ë‚´ë ¤ê°€ê¸°             ",true,CL_normal);
+			printsub(" <      - ìœ—ì¸µìœ¼ë¡œ ì˜¬ë¼ê°€ê¸°               ",true,CL_normal);
+			printsub(" A      - ì•„ì´í…œìƒì„±(ë² íƒ€)                ",true,CL_normal);
+			printsub(" w      - ë‚ ì”¨ë°œí˜„                        ", true, CL_normal);
+			printsub(" W      - ì‹œê°„ì •ì§€                        ",true,CL_normal);
+			printsub(" D      - ë§¤ì§ë§µí•‘                        ",true,CL_normal);
+			printsub(" b      - ë¸”ë§í¬                          ",true,CL_normal);
+			printsub(" R      - í˜„ì¬ ì¸µ ì¬êµ¬ì„±                  ", true, CL_normal);
+			printsub(" m      - ëª¬ìŠ¤í„° ìƒì„±                     ", true, CL_normal);
 			printsub("                                          ",true,CL_normal);
-			printsub(" ÀÌ¿ÜÀÇ Ä¿¸Çµå´Â ºÒ¾ÈÁ¤ÇÏ´Ï ºñÃßÃµ        ",true,CL_normal);
+			printsub(" ì´ì™¸ì˜ ì»¤ë§¨ë“œëŠ” ë¶ˆì•ˆì •í•˜ë‹ˆ ë¹„ì¶”ì²œ        ",true,CL_normal);
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);
 			continue;
 		default:
-			printlog("¾ø´Â ¸í·É¾î",true,false,false,CL_help);
+			printlog("ì—†ëŠ” ëª…ë ¹ì–´",true,false,false,CL_help);
 			break;
 		}
 	return;
@@ -809,9 +809,9 @@ void save_mode()
 	{
 
 		
-		printlog("#### °æ°í! ÀÌ ¸ğµå´Â ¿Â¶óÀÎÁ¡¼öµî·ÏÀÌ ¾ÈµË´Ï´Ù! Ä¡Æ®·Î Ãë±ŞµË´Ï´Ù! ### ",true,false,false,CL_danger);
-		printlog("#### ¼¼ÀÌºê´Â ÃşÀÌµ¿½Ã, ¼öµ¿ÀúÀå½Ã¿¡ ÀúÀåµË´Ï´Ù. ### ",true,false,false,CL_danger);
-		printlog("ÁøÂ¥·Î Å³²¨¾ß? (Y/N) ",false,false,false,CL_danger);
+		printlog("#### ê²½ê³ ! ì´ ëª¨ë“œëŠ” ì˜¨ë¼ì¸ì ìˆ˜ë“±ë¡ì´ ì•ˆë©ë‹ˆë‹¤! ì¹˜íŠ¸ë¡œ ì·¨ê¸‰ë©ë‹ˆë‹¤! ### ",true,false,false,CL_danger);
+		printlog("#### ì„¸ì´ë¸ŒëŠ” ì¸µì´ë™ì‹œ, ìˆ˜ë™ì €ì¥ì‹œì— ì €ì¥ë©ë‹ˆë‹¤. ### ",true,false,false,CL_danger);
+		printlog("ì§„ì§œë¡œ í‚¬êº¼ì•¼? (Y/N) ",false,false,false,CL_danger);
 			
 		int key_ = waitkeyinput();
 		switch(key_)
@@ -820,7 +820,7 @@ void save_mode()
 			enterlog();
 			break;
 		default:
-			printlog("¼¼ÀÌºêº¸Á¸¸ğµå¸¦ Ãë¼Ò",true,false,false,CL_help);
+			printlog("ì„¸ì´ë¸Œë³´ì¡´ëª¨ë“œë¥¼ ì·¨ì†Œ",true,false,false,CL_help);
 			return;
 		}
 
@@ -829,8 +829,8 @@ void save_mode()
 	}
 	else if(wiz_list.wizard_mode == 1)
 	{		
-		printlog("À§ÀÚµå¸ğµå¿¡¼­ ¼¼ÀÌºêº¸Á¸¸ğµå·Î ÀÌµ¿ÇÏ´õ¶óµµ Á¡¼öµî·ÏÀº µÇÁö¾Ê½À´Ï´Ù.",true,false,false,CL_danger);
-		printlog("¹Ù²Ü²¨¾ß? (Y/N) ",false,false,false,CL_danger);
+		printlog("ìœ„ìë“œëª¨ë“œì—ì„œ ì„¸ì´ë¸Œë³´ì¡´ëª¨ë“œë¡œ ì´ë™í•˜ë”ë¼ë„ ì ìˆ˜ë“±ë¡ì€ ë˜ì§€ì•ŠìŠµë‹ˆë‹¤.",true,false,false,CL_danger);
+		printlog("ë°”ê¿€êº¼ì•¼? (Y/N) ",false,false,false,CL_danger);
 
 
 		int key_ = waitkeyinput();
@@ -840,7 +840,7 @@ void save_mode()
 			enterlog();
 			break;
 		default:
-			printlog("Ãë¼Ò",true,false,false,CL_help);
+			printlog("ì·¨ì†Œ",true,false,false,CL_help);
 			return;
 		}
 
@@ -848,7 +848,7 @@ void save_mode()
 	}
 	else  if(wiz_list.wizard_mode == 2)
 	{	
-		printlog("ÀÌ¹Ì ´ç½ÅÀº ¼¼ÀÌºêº¸Á¸¸ğµå´Ù. ÀÌ ¸ğµå¿¡¼± ¼¼ÀÌºêÆÄÀÏÀÌ »èÁ¦µÇÁö¾Ê´Â´Ù. ",true,false,false,CL_normal);
+		printlog("ì´ë¯¸ ë‹¹ì‹ ì€ ì„¸ì´ë¸Œë³´ì¡´ëª¨ë“œë‹¤. ì´ ëª¨ë“œì—ì„  ì„¸ì´ë¸ŒíŒŒì¼ì´ ì‚­ì œë˜ì§€ì•ŠëŠ”ë‹¤. ",true,false,false,CL_normal);
 	}
 
 	return;

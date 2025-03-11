@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: player_.cpp
+// íŒŒì¼ì´ë¦„: player_.cpp
 //
-// ³»¿ë: player°ü·Ã ÇÔ¼ö
+// ë‚´ìš©: playerê´€ë ¨ í•¨ìˆ˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -64,7 +64,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	else if(s_slow && !(s_pure_haste || s_haste || alchemy_buff == ALCT_HASTE || GetBuffOk(BUFFSTAT_HASTE)))
 		delay_ = delay_*1.5f;
 
-	if(GetStatPanalty()) //½ºÅÈÆĞ³ÎÆ¼
+	if(GetStatPanalty()) //ìŠ¤íƒ¯íŒ¨ë„í‹°
 	{
 		delay_ = delay_*2.0f;
 	}
@@ -85,7 +85,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			Teleport();
 			soundmanager.playSound("blink");
-			printlog("°©ÀÚ±â ´ç½Å ÁÖº¯ÀÌ º¯È­Çß´Ù.",false,false,false,CL_normal);
+			printlog("ê°‘ìê¸° ë‹¹ì‹  ì£¼ë³€ì´ ë³€í™”í–ˆë‹¤.",false,false,false,CL_normal);
 			SetInter(IT_TELE);
 		}
 		if(s_tele)
@@ -147,7 +147,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	ReleaseMutex(mutx);
 	if(env[current_level].ActionItem(delay_))
-	{//¾ÆÀÌÅÛÀÌ µµÁß »èÁ¦µÇ¾ú´Ù.
+	{//ì•„ì´í…œì´ ë„ì¤‘ ì‚­ì œë˜ì—ˆë‹¤.
 		if(item_delete_)
 			(*item_delete_) = true;
 	}
@@ -166,7 +166,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				it++;
 				if(!p_del)
 				{
-					printlog("ÀÎº¥Åä¸®¿¡ ÀÖ´Â PÅÛÀÌ »ç¶óÁ³´Ù. ",false,false,false,CL_normal);
+					printlog("ì¸ë²¤í† ë¦¬ì— ìˆëŠ” Pí…œì´ ì‚¬ë¼ì¡Œë‹¤. ",false,false,false,CL_normal);
 					p_del = true;
 				}
 				DeleteItem(temp);
@@ -182,35 +182,35 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				switch(it->value5)
 				{
 				case WB_FIRE:			
-					printlog("¹«±â°¡ Å¸¿À¸£´Â °ÍÀ» ¸ØÃè´Ù. ",true,false,false,CL_normal);
+					printlog("ë¬´ê¸°ê°€ íƒ€ì˜¤ë¥´ëŠ” ê²ƒì„ ë©ˆì·„ë‹¤. ",true,false,false,CL_normal);
 					break;
 				case WB_COLD:			
-					printlog("¹«±â¿¡¼­ ³ª¿À´ø ³Ã±â°¡ ±×ÃÆ´Ù. ",true,false,false,CL_normal);
+					printlog("ë¬´ê¸°ì—ì„œ ë‚˜ì˜¤ë˜ ëƒ‰ê¸°ê°€ ê·¸ì³¤ë‹¤. ",true,false,false,CL_normal);
 					break;		
 				case WB_POISON:			
-					printlog("´õÀÌ»ó ¹«±â¿¡¼­ µ¶ÀÌ ¶³¾îÁöÁö ¾Ê´Â´Ù. ",true,false,false,CL_normal);	
+					printlog("ë”ì´ìƒ ë¬´ê¸°ì—ì„œ ë…ì´ ë–¨ì–´ì§€ì§€ ì•ŠëŠ”ë‹¤. ",true,false,false,CL_normal);	
 					break;	
 				case WB_CURSE:		
-					printlog("¹«±â¿¡¼­ ÀúÁÖÀÇ ÈûÀÌ ¾àÇØÁ³´Ù. ",true,false,false,CL_normal);	
+					printlog("ë¬´ê¸°ì—ì„œ ì €ì£¼ì˜ í˜ì´ ì•½í•´ì¡Œë‹¤. ",true,false,false,CL_normal);	
 					break;
 				case WB_WEATHER	:
-					printlog("¹«±â¿¡¼­ ºñ»óÀÇ ±â¿îÀº ´õÀÌ»ó ´À²¸ÁöÁö¾Ê´Â´Ù. ",true,false,false,CL_normal);	
+					printlog("ë¬´ê¸°ì—ì„œ ë¹„ìƒì˜ ê¸°ìš´ì€ ë”ì´ìƒ ëŠê»´ì§€ì§€ì•ŠëŠ”ë‹¤. ",true,false,false,CL_normal);	
 					break;
 				case WB_AUTUMN:
-					printlog("¹«±â´Â ´õÀÌ»ó ¾µ¾µÇØº¸ÀÌÁö ¾Ê´Â´Ù. ",true,false,false,CL_normal);	
+					printlog("ë¬´ê¸°ëŠ” ë”ì´ìƒ ì“¸ì“¸í•´ë³´ì´ì§€ ì•ŠëŠ”ë‹¤. ",true,false,false,CL_normal);	
 					break;
 				case WB_MANA_REGEN:
-					printlog("¿µ·ÂÀÇ Èå¸§ÀÌ »ç¶óÁ³´Ù. ",true,false,false,CL_white_blue);	
+					printlog("ì˜ë ¥ì˜ íë¦„ì´ ì‚¬ë¼ì¡Œë‹¤. ",true,false,false,CL_white_blue);	
 					break;
 				case WB_FAST_CAST:
-					printlog("¸Ó¸®È¸ÀüÀÌ ´Ù½Ã µĞÇØÁ³´Ù. ",true,false,false,CL_white_blue);	
+					printlog("ë¨¸ë¦¬íšŒì „ì´ ë‹¤ì‹œ ë‘”í•´ì¡Œë‹¤. ",true,false,false,CL_white_blue);	
 					break;
 				case WB_PROTECT:
 					AcUpDown(0,-5);
-					printlog("º¸È£°¡ »ç¶óÁ³´Ù. ",true,false,false,CL_white_blue);	
+					printlog("ë³´í˜¸ê°€ ì‚¬ë¼ì¡Œë‹¤. ",true,false,false,CL_white_blue);	
 					break;
 				default:			
-					printlog("¹æ±İ ¹«±â´Â ¹ö±×¿¡ °É·ÁÀÖ´Ù. ",true,false,false,CL_danger);	
+					printlog("ë°©ê¸ˆ ë¬´ê¸°ëŠ” ë²„ê·¸ì— ê±¸ë ¤ìˆë‹¤. ",true,false,false,CL_danger);	
 					break;		
 				}
 				it->value5 = 0;
@@ -235,8 +235,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	ReleaseMutex(mutx);
 	env[current_level].ActionMonster(delay_);
 	WaitForSingleObject(mutx, INFINITE);
-	if(sight_reset) //¸ó½ºÅÍ°¡ ¸¸µé¾î³½ ±¸¸§¿¡ ½Ã¾ß°¡ °¡¸± °æ¿ì°¡ »ı±æ°æ¿ì
-		SetInter(resetLOS()); //±²ÀåÈ÷ ¿¬»êÀÌ ¸¹ÀÌ µé¾î°¡´Â ÀÛ¾÷ÀÌ¹Ç·Î ÇÊ¿äÇÒ¶§¸¸ ºÒ·¯¾ßÇÔ
+	if(sight_reset) //ëª¬ìŠ¤í„°ê°€ ë§Œë“¤ì–´ë‚¸ êµ¬ë¦„ì— ì‹œì•¼ê°€ ê°€ë¦´ ê²½ìš°ê°€ ìƒê¸¸ê²½ìš°
+		SetInter(resetLOS()); //êµ‰ì¥íˆ ì—°ì‚°ì´ ë§ì´ ë“¤ì–´ê°€ëŠ” ì‘ì—…ì´ë¯€ë¡œ í•„ìš”í• ë•Œë§Œ ë¶ˆëŸ¬ì•¼í•¨
 	env[current_level].ClearShadow();
 	ReleaseMutex(mutx);
 	if(s_poison)
@@ -247,27 +247,27 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			damage_ = HpUpDown(-poison_damage(s_poison),DR_POISON);
 			if(damage_==-1)
 			{
-				printlog("µ¶ÀÇ µ¥¹ÌÁö¸¦ ¹Ş°í ÀÖ´Ù. ",false,false,false,CL_normal);
+				printlog("ë…ì˜ ë°ë¯¸ì§€ë¥¼ ë°›ê³  ìˆë‹¤. ",false,false,false,CL_normal);
 				if(GetHp()<30)
 					SetInter(IT_POISON);
 			}
 			else if(damage_>=-4)
 			{
-				printlog("½ÉÇÑ µ¶ÀÇ µ¥¹ÌÁö¸¦ ¹Ş°í ÀÖ´Ù. ",false,false,false,CL_small_danger);
+				printlog("ì‹¬í•œ ë…ì˜ ë°ë¯¸ì§€ë¥¼ ë°›ê³  ìˆë‹¤. ",false,false,false,CL_small_danger);
 				if(GetHp()<100)
 					SetInter(IT_POISON);
 			}
 			else
 			{
-				printlog("¸Å¿ì ½ÉÇÑ µ¶ÀÇ µ¥¹ÌÁö¸¦ ¹Ş°í ÀÖ´Ù. ",false,false,false,CL_danger);
+				printlog("ë§¤ìš° ì‹¬í•œ ë…ì˜ ë°ë¯¸ì§€ë¥¼ ë°›ê³  ìˆë‹¤. ",false,false,false,CL_danger);
 				SetInter(IT_POISON);
 			}
 		}
 		s_poison--;
 		if(!s_poison)
-			printlog("µ¶ÀÌ Ä¡·áµÇ¾ú´Ù. ",false,false,false,CL_good);
+			printlog("ë…ì´ ì¹˜ë£Œë˜ì—ˆë‹¤. ",false,false,false,CL_good);
 		else if(s_poison%30 == 0)
-			printlog("µ¶¿¡¼­ ¾à°£ È¸º¹µÇ¾ú´Ù. ",false,false,false,CL_good);
+			printlog("ë…ì—ì„œ ì•½ê°„ íšŒë³µë˜ì—ˆë‹¤. ",false,false,false,CL_good);
 	}
 	WaitForSingleObject(mutx, INFINITE);
 	if(s_might)
@@ -275,7 +275,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_might--;
 		if(!s_might)
 		{
-			printlog("ÈûÀÌ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("í˜ì´ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_STR);
 			SetInter(IT_STAT);
 		}
@@ -285,7 +285,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_clever--;
 		if(!s_clever)
 		{
-			printlog("Áö´ÉÀÌ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("ì§€ëŠ¥ì´ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_INT);
 			SetInter(IT_STAT);
 		}
@@ -295,7 +295,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_agility--;
 		if(!s_agility)
 		{
-			printlog("¹ÎÃ¸ÀÌ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("ë¯¼ì²©ì´ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_DEX);
 			EvUpDown(0,-5);
 			SetInter(IT_STAT);
@@ -305,17 +305,17 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_str < m_str && randA_1(20000) <= delay_)
 		{
 			s_str++;
-			printlog("ÀÒ¾î¹ö¸° ÈûÀÌ È¸º¹µÇ¾ú´Ù. ",false,false,false,CL_blue);
+			printlog("ìƒì–´ë²„ë¦° í˜ì´ íšŒë³µë˜ì—ˆë‹¤. ",false,false,false,CL_blue);
 		}	
 		else if(s_dex < m_dex && randA_1(20000) <= delay_)
 		{
 			s_dex++;
-			printlog("ÀÒ¾î¹ö¸° ¹ÎÃ¸ÀÌ È¸º¹µÇ¾ú´Ù. ",false,false,false,CL_blue);
+			printlog("ìƒì–´ë²„ë¦° ë¯¼ì²©ì´ íšŒë³µë˜ì—ˆë‹¤. ",false,false,false,CL_blue);
 		}
 		else if(s_int < m_int && randA_1(20000) <= delay_)
 		{
 			s_int++;
-			printlog("ÀÒ¾î¹ö¸° Áö´ÉÀÌ È¸º¹µÇ¾ú´Ù. ",false,false,false,CL_blue);
+			printlog("ìƒì–´ë²„ë¦° ì§€ëŠ¥ì´ íšŒë³µë˜ì—ˆë‹¤. ",false,false,false,CL_blue);
 		}
 	}
 	if(s_haste)
@@ -323,12 +323,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_haste--;
 		if(!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
 		{
-			printlog("¼Óµµ°¡ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("ì†ë„ê°€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_haste == 10 && s_pure_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time<10))
 		{
-			printlog("¼Óµµ°¡ µ¹¾Æ¿À°í ÀÖ´Ù. ",false,false,false,CL_blue);
+			printlog("ì†ë„ê°€ ëŒì•„ì˜¤ê³  ìˆë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -337,12 +337,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_pure_haste--;
 		if (!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
 		{
-			printlog("»ìÀÇ°¡ »ç¶óÁ³´Ù. ", false, false, false, CL_blue);
+			printlog("ì‚´ì˜ê°€ ì‚¬ë¼ì¡Œë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_pure_haste == 10 && s_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time < 10))
 		{
-			printlog("»ìÀÇ°¡ »ç¶óÁö°í ÀÖ´Ù. ", false, false, false, CL_blue);
+			printlog("ì‚´ì˜ê°€ ì‚¬ë¼ì§€ê³  ìˆë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -359,7 +359,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			}
 			if (!least_one) {
 				s_pure_haste = 0;
-				printlog("½Ã¾ß³»¿¡ ÀûÀÌ »ç¶óÁ® »ìÀÇ°¡ »ç¶óÁ³´Ù. ", false, false, false, CL_blue);
+				printlog("ì‹œì•¼ë‚´ì— ì ì´ ì‚¬ë¼ì ¸ ì‚´ì˜ê°€ ì‚¬ë¼ì¡Œë‹¤. ", false, false, false, CL_blue);
 				SetInter(IT_STAT);
 			}
 		}
@@ -370,7 +370,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_wind--;
 		if(!s_wind)
 		{
-			printlog("´ç½Å¿¡°Ô °¨°ÜÀÖ´ø ¹Ù¶÷ÀÌ ºüÁ®³ª°¬´Ù. ",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì—ê²Œ ê°ê²¨ìˆë˜ ë°”ëŒì´ ë¹ ì ¸ë‚˜ê°”ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -379,7 +379,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_knife_collect--;
 		if(!s_knife_collect)
 		{
-			printlog("´õÀÌ»ó Åº¸·ÀÌ ÀÚµ¿À¸·Î È¸¼öµÇÁö ¾Ê´Â´Ù. ",false,false,false,CL_blue);
+			printlog("ë”ì´ìƒ íƒ„ë§‰ì´ ìë™ìœ¼ë¡œ íšŒìˆ˜ë˜ì§€ ì•ŠëŠ”ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -388,7 +388,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_drunken--;
 		if(!s_drunken)
 		{
-			printlog("´ç½ÅÀº Á¦Á¤½ÅÀ» Â÷·È´Ù. ",false,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ ì œì •ì‹ ì„ ì°¨ë ¸ë‹¤. ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -399,7 +399,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_lunatic--;
 		if(!s_lunatic)
 		{
-			printlog("´ç½ÅÀÇ ±¤±â´Â ³¡³µ´Ù. ",false,false,false,CL_white_blue);
+			printlog("ë‹¹ì‹ ì˜ ê´‘ê¸°ëŠ” ëë‚¬ë‹¤. ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -409,7 +409,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		you.god_value[GT_JOON_AND_SION][1]--;
 		if (you.god_value[GT_JOON_AND_SION][1] <= 0)
 		{
-			printlog("´ç½ÅÀÇ ºùÀÇ°¡ ³¡³µ´Ù. ", false, false, false, CL_joon_and_sion);
+			printlog("ë‹¹ì‹ ì˜ ë¹™ì˜ê°€ ëë‚¬ë‹¤. ", false, false, false, CL_joon_and_sion);
 			if(!you.GetPunish(GT_JOON_AND_SION)) 
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
@@ -458,7 +458,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_confuse--;
 		if(!s_confuse)
 		{
-			printlog("È¥¶õ½º·¯¿òÀÌ »ç¶óÁ³´Ù. ",false,false,false,CL_blue);
+			printlog("í˜¼ë€ìŠ¤ëŸ¬ì›€ì´ ì‚¬ë¼ì¡Œë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -467,7 +467,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_slow--;
 		if(!s_slow)
 		{
-			printlog("¼Óµµ°¡ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("ì†ë„ê°€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -476,7 +476,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_frozen--;
 		if(!s_frozen)
 		{
-			printlog("¾ó¾îºÙ¾ú´ø ¸öÀÌ ³ì¾Ò´Ù. ",false,false,false,CL_blue);
+			printlog("ì–¼ì–´ë¶™ì—ˆë˜ ëª¸ì´ ë…¹ì•˜ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -492,7 +492,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_elec--;
 		if(!s_elec)
 		{
-			printlog("¹æÀüÀÌ ¸ØÃè´Ù. ",false,false,false,CL_blue);
+			printlog("ë°©ì „ì´ ë©ˆì·„ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -502,7 +502,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_paralyse--;
 		if(!s_paralyse)
 		{
-			printlog("´Ù½Ã ¿òÁ÷ÀÏ ¼ö ÀÖ°Ô µÇ¾ú´Ù. ",false,false,false,CL_blue);
+			printlog("ë‹¤ì‹œ ì›€ì§ì¼ ìˆ˜ ìˆê²Œ ë˜ì—ˆë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -513,13 +513,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA)
 			{
-				printlog("´ç½ÅÀº ¹° À§¿¡ ¶³¾îÁ³´Ù. ", false, false, false, you.isSwim()? CL_blue :CL_danger);
+				printlog("ë‹¹ì‹ ì€ ë¬¼ ìœ„ì— ë–¨ì–´ì¡Œë‹¤. ", false, false, false, you.isSwim()? CL_blue :CL_danger);
 			}
 			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
-				printlog("´ç½ÅÀº ¿ë¾Ï À§¿¡ ¶³¾îÁ³´Ù. ", false, false, false, CL_danger);
+				printlog("ë‹¹ì‹ ì€ ìš©ì•” ìœ„ì— ë–¨ì–´ì¡Œë‹¤. ", false, false, false, CL_danger);
 			}
 			else {
-				printlog("¶¥¿¡ ºÎµå·´°Ô ÂøÁöÇß´Ù. ", false, false, false, CL_blue);
+				printlog("ë•…ì— ë¶€ë“œëŸ½ê²Œ ì°©ì§€í–ˆë‹¤. ", false, false, false, CL_blue);
 			}
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 			if(temp)
@@ -528,7 +528,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_levitation == 10)
 		{
-			printlog("¸öÀÌ ¹«°Å¿öÁö°í ÀÖ´Ù. ",false,false,false,CL_small_danger);
+			printlog("ëª¸ì´ ë¬´ê±°ì›Œì§€ê³  ìˆë‹¤. ",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
 		}
 	}
@@ -537,7 +537,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_graze--;
 		if(!s_graze)
 		{
-			printlog("´õ ÀÌ»ó ±×·¹ÀÌÁî¸¦ ÇÏÁö ¾Ê´Â´Ù. ",false,false,false,CL_blue);
+			printlog("ë” ì´ìƒ ê·¸ë ˆì´ì¦ˆë¥¼ í•˜ì§€ ì•ŠëŠ”ë‹¤. ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_GRAZE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_GRAZE,false,false,temp);
@@ -545,7 +545,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_graze == 10)
 		{
-			printlog("±×·¹ÀÌÁî°¡ ¹«µ®Áö°íÀÖ´Ù. ",false,false,false,CL_blue);
+			printlog("ê·¸ë ˆì´ì¦ˆê°€ ë¬´ëŒì§€ê³ ìˆë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -562,7 +562,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(!s_silence)
 		{
-			printlog("¼Ò¸®¸¦ Áö¿ì´Â Á¤ÀûÀÌ »ç¶óÁ³´Ù. ",false,false,false,CL_blue);
+			printlog("ì†Œë¦¬ë¥¼ ì§€ìš°ëŠ” ì •ì ì´ ì‚¬ë¼ì¡Œë‹¤. ",false,false,false,CL_blue);
 			env[current_level].MakeSilence(position, s_silence_range, false);
 			SetInter(IT_STAT);
 		}
@@ -572,7 +572,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sick--;
 		if(!s_sick)
 		{
-			printlog("º´ÀÌ ³ª¾Ò´Ù. ",false,false,false,CL_blue);
+			printlog("ë³‘ì´ ë‚˜ì•˜ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -581,7 +581,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_veiling--;
 		if(!s_veiling)
 		{
-			printlog("ÈÖ°¨´ø ¹Ù¶÷ÀÌ ÀáÀáÇØÁ³´Ù. ",false,false,false,CL_blue);
+			printlog("íœ˜ê°ë˜ ë°”ëŒì´ ì ì í•´ì¡Œë‹¤. ",false,false,false,CL_blue);
 			s_value_veiling = 0;
 			SetInter(IT_STAT);
 		}
@@ -591,7 +591,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_invisible--;
 		if(!s_invisible)
 		{
-			printlog("¸öÀÌ ´Ù½Ã ºÒÅõ¸íÇØÁ³´Ù. ",false,false,false,CL_blue);
+			printlog("ëª¸ì´ ë‹¤ì‹œ ë¶ˆíˆ¬ëª…í•´ì¡Œë‹¤. ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_INVISIBLE,false,false,temp);
@@ -599,7 +599,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_invisible == 10)
 		{
-			printlog("´ç½ÅÀÇ Åõ¸íÇÑ ¸öÀÌ ±ô¹ÚÀÌ°íÀÖ´Ù. ",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ íˆ¬ëª…í•œ ëª¸ì´ ê¹œë°•ì´ê³ ìˆë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -609,12 +609,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift = 0;
 		if(!s_superman)
 		{
-			printlog("´ç½ÅÀº ´õÀÌ»ó ´Ù¸®°¡ ºü¸£Áö¾Ê´Ù. ",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì€ ë”ì´ìƒ ë‹¤ë¦¬ê°€ ë¹ ë¥´ì§€ì•Šë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_superman == 5)
 		{
-			printlog("´ç½ÅÀÇ ´Ù¸®°¡ ¹«°Å¿öÁö°íÀÖ´Ù. ",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ë‹¤ë¦¬ê°€ ë¬´ê±°ì›Œì§€ê³ ìˆë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -625,7 +625,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_eirin_poison_time--;
 		if(s_eirin_poison_time == 11)
 		{			
-			printlog("Ä¡À¯·Î ÀÎÇÑ ºÎÀÛ¿ëÀÌ ½ÃÀÛµÇ¾ú´Ù!",true,false,false,CL_danger);
+			printlog("ì¹˜ìœ ë¡œ ì¸í•œ ë¶€ì‘ìš©ì´ ì‹œì‘ë˜ì—ˆë‹¤!",true,false,false,CL_danger);
 			enterlog();
 			SetInter(IT_STAT);
 		}
@@ -655,7 +655,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_stasis--;
 		if(!s_stasis)
 		{
-			printlog("ÀüÀÌ ¹æÇØ°¡ Ç®·È´Ù. ",false,false,false,CL_blue);
+			printlog("ì „ì´ ë°©í•´ê°€ í’€ë ¸ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -664,7 +664,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		force_turn--;
 		if(!force_turn)
 		{
-			printlog("À§·ÂÀÌ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ",false,false,false,CL_blue);
+			printlog("ìœ„ë ¥ì´ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -674,12 +674,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_super_graze--;
 		if (!s_super_graze)
 		{
-			printlog("´ç½ÅÀÇ ±Ù¼º È¸ÇÇ´Â ³¡³µ´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ê·¼ì„± íšŒí”¼ëŠ” ëë‚¬ë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_super_graze == 3)
 		{
-			printlog("´ç½ÅÀÇ ±Ù¼º È¸ÇÇ°¡ ³¡³ª°¡°íÀÖ´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ê·¼ì„± íšŒí”¼ê°€ ëë‚˜ê°€ê³ ìˆë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -689,7 +689,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_night_sight_turn--;
 		if (!s_night_sight_turn)
 		{
-			printlog("´ç½ÅÀÇ ¾ß¸ÍÁõÀº È¸º¹µÇ¾ú´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ì•¼ë§¹ì¦ì€ íšŒë³µë˜ì—ˆë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -699,7 +699,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_sleep--;
 		if (!s_sleep)
 		{
-			printlog("´ç½ÅÀº Á¹À½À» ²£´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì€ ì¡¸ìŒì„ ê¹¼ë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -708,7 +708,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sleep++;
 		if (!s_sleep)
 		{
-			printlog("´ç½ÅÀº Àá¿¡¼­ ²£´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì€ ì ì—ì„œ ê¹¼ë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -719,7 +719,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if (!you.s_pure_turn)
 		{
 			you.s_pure = 0;
-			printlog("´ç½ÅÀÇ ÀÏ½ÃÀû ¼øÈ­°¡ ÇØÁ¦µÇ¾ú´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ì¼ì‹œì  ìˆœí™”ê°€ í•´ì œë˜ì—ˆë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -741,7 +741,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if (you.power <= 0) {
 			soundmanager.playSound("ufo");
 			you.s_evoke_ghost = 0;
-			printlog("´ç½ÅÀº ÆÄ¿ö°¡ ÀüºÎ ¼Ò¸ğµÇ¾î À¯·ÉÈ­°¡ ÇØÁ¦µÇ¾ú´Ù. ", false, false, false, CL_danger);
+			printlog("ë‹¹ì‹ ì€ íŒŒì›Œê°€ ì „ë¶€ ì†Œëª¨ë˜ì–´ ìœ ë ¹í™”ê°€ í•´ì œë˜ì—ˆë‹¤. ", false, false, false, CL_danger);
 			SetInter(IT_STAT);
 		}
 
@@ -750,9 +750,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if (you.s_weather_turn>0)
 	{
-		if (you.s_weather == 2) //ÃµµÕ¹ø°³
+		if (you.s_weather == 2) //ì²œë‘¥ë²ˆê°œ
 		{
-			if (randA(9) == 0) { //³ôÀº È®·ü·Î ±ÙÃ³ÀÇ Àû¿¡°Ô À¯µµµÈ´Ù.
+			if (randA(9) == 0) { //ë†’ì€ í™•ë¥ ë¡œ ê·¼ì²˜ì˜ ì ì—ê²Œ ìœ ë„ëœë‹¤.
 				monster* mon_ = env[current_level].getRandomMonster(true);
 				if (mon_) {
 					rand_rect_iterator rand(mon_->position, 1, 1, false);
@@ -763,7 +763,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							ReleaseMutex(mutx);
 							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
-							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("¹ø°³", false));
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("ë²ˆê°œ", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);
 							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
@@ -773,7 +773,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 					}
 				}
 			}
-			else if (randA(1) == 0) //ÀÏ¹İÀûÀ¸·Î ¹«ÀÛÀ§·Î ¶³¾îÁü
+			else if (randA(1) == 0) //ì¼ë°˜ì ìœ¼ë¡œ ë¬´ì‘ìœ„ë¡œ ë–¨ì–´ì§
 			{
 				rand_rect_iterator rand(position, 8, 8, true);
 
@@ -785,7 +785,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							ReleaseMutex(mutx);
 							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
-							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("¹ø°³", false));
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("ë²ˆê°œ", false));
 							BaseBomb(pos_, &img_blast[2], temp_att);
 							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
@@ -802,7 +802,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			you.s_weather = 0;
 			resetLOS();
-			printlog("³¯¾¾°¡ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù. ", false, false, false, CL_blue);
+			printlog("ë‚ ì”¨ê°€ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -814,7 +814,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_glow--;
 		if (!s_glow)
 		{
-			printlog("´ç½ÅÀÇ ¸ö¿¡¼­ ºû³ª´Â °ÍÀÌ ¸ØÃè´Ù. ", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ëª¸ì—ì„œ ë¹›ë‚˜ëŠ” ê²ƒì´ ë©ˆì·„ë‹¤. ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -831,20 +831,20 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_spellcard--;
 		//if(!s_spellcard)
 		//{
-		//	printlog("½ºÆç ºê·¹ÀÌÅ©!",true,false,false,CL_danger);
+		//	printlog("ìŠ¤í  ë¸Œë ˆì´í¬!",true,false,false,CL_danger);
 		//	if(equipment[ET_NECK])
 		//	{
 		//		passive_spellcard((spellcard_passive_type)equipment[ET_NECK]->value3, equipment[ET_NECK]->value4, -1, 0);
 		//	}
 		//	else
 		//	{
-		//		printlog("[BUG]½ºÆçÄ«µå¸¦ ³¢Áö¾ÊÀº Ã¤·Î ½ºÆç¼±¾ğ",true,false,false,CL_danger);
+		//		printlog("[BUG]ìŠ¤í ì¹´ë“œë¥¼ ë¼ì§€ì•Šì€ ì±„ë¡œ ìŠ¤í ì„ ì–¸",true,false,false,CL_danger);
 		//	}
 		//	SetInter(IT_STAT);
 		//}
 		//if(s_spellcard == 5)
 		//{
-		//	printlog("½ºÆçÄ«µåÀÇ ½Ã°£ÀÌ °ÅÀÇ ´Ù ³¡³ª°£´Ù.",false,false,false,CL_small_danger);
+		//	printlog("ìŠ¤í ì¹´ë“œì˜ ì‹œê°„ì´ ê±°ì˜ ë‹¤ ëë‚˜ê°„ë‹¤.",false,false,false,CL_small_danger);
 		//	SetInter(IT_STAT);
 		//}
 	}
@@ -854,12 +854,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift--;
 		if(!s_swift)
 		{
-			printlog("´ç½ÅÀº ´õ ÀÌ»ó ´Ù¸®°¡ ºü¸£Áö¾Ê´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì€ ë” ì´ìƒ ë‹¤ë¦¬ê°€ ë¹ ë¥´ì§€ì•Šë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_swift == 10)
 		{
-			printlog("´ç½ÅÀÇ ´Ù¸®°¡ ¹«°Å¿öÁö°íÀÖ´Ù.",false,false,false,CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ë‹¤ë¦¬ê°€ ë¬´ê±°ì›Œì§€ê³ ìˆë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -868,12 +868,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift++;
 		if (!s_swift)
 		{
-			printlog("´ç½ÅÀº ´õ ÀÌ»ó ´Ù¸®°¡ ´À¸®Áö¾Ê´Ù.", false, false, false, CL_white_blue);
+			printlog("ë‹¹ì‹ ì€ ë” ì´ìƒ ë‹¤ë¦¬ê°€ ëŠë¦¬ì§€ì•Šë‹¤.", false, false, false, CL_white_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_swift == -5)
 		{
-			printlog("´ç½ÅÀÇ ´Ù¸®°¡ µ¹¾Æ¿À°í ÀÖ´Ù.", false, false, false, CL_blue);
+			printlog("ë‹¹ì‹ ì˜ ë‹¤ë¦¬ê°€ ëŒì•„ì˜¤ê³  ìˆë‹¤.", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -882,7 +882,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_mana_regen--;
 		if(!s_mana_regen)
 		{
-			printlog("¿µ·ÂÈ¸º¹¼Óµµ°¡ Á¤»óÀÌ µÇ¾ú´Ù.",false,false,false,CL_blue);
+			printlog("ì˜ë ¥íšŒë³µì†ë„ê°€ ì •ìƒì´ ë˜ì—ˆë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -892,7 +892,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		if(s_ghost == 1)
 		{
-			printlog("À¯·ÉÀÇ ºóµµ°¡ Á¤»óÀÌ µÇ¾ú´Ù.",false,false,false,CL_blue);
+			printlog("ìœ ë ¹ì˜ ë¹ˆë„ê°€ ì •ìƒì´ ë˜ì—ˆë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -902,7 +902,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(!s_mirror)
 		{
-			printlog("µ¥¹ÌÁö ¹İ»ç°¡ ³¡³µ´Ù.",false,false,false,CL_blue);
+			printlog("ë°ë¯¸ì§€ ë°˜ì‚¬ê°€ ëë‚¬ë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -914,7 +914,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_dimension == 0)
 		{			
 			resetLOS(false);
-			printlog("Â÷¿øÀÌ ¿ø·¡´ë·Î µ¹¾Æ¿Ô´Ù.",false,false,false,CL_blue);
+			printlog("ì°¨ì›ì´ ì›ë˜ëŒ€ë¡œ ëŒì•„ì™”ë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -924,7 +924,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(s_timestep == 0)
 		{
-			printlog("´ç½ÅÀº µ¿¸éÀ» ³¡³Â´Ù. ¾ÆÁ÷ Àá¿¡¼­ ´ú ²£´Ù. ",false,false,false,CL_swako);
+			printlog("ë‹¹ì‹ ì€ ë™ë©´ì„ ëëƒˆë‹¤. ì•„ì§ ì ì—ì„œ ëœ ê¹¼ë‹¤. ",false,false,false,CL_swako);
 			you.SetSlow(rand_int(4,6));
 			SetInter(IT_STAT);
 		}
@@ -934,7 +934,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_paradox--;
 		if(s_paradox == 0)
 		{			
-			printlog("µµÇÃ°»¾î°¡ »ç¶óÁ³´Ù.",false,false,false,CL_blue);
+			printlog("ë„í”Œê°±ì–´ê°€ ì‚¬ë¼ì¡Œë‹¤.",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -944,7 +944,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(s_the_world == 1)
 		{
-			printlog("±×¸®°í ½Ã°£Àº ¿òÁ÷ÀÌ±â ½ÃÀÛÇÑ´Ù...",false,false,false,CL_small_danger);
+			printlog("ê·¸ë¦¬ê³  ì‹œê°„ì€ ì›€ì§ì´ê¸° ì‹œì‘í•œë‹¤...",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
 		}
 
@@ -1006,7 +1006,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("Áú½Ä", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("ì§ˆì‹", true)), true);
 		SetInter(IT_DAMAGE);
 	}	
 	else if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA &&
@@ -1014,10 +1014,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 3;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor("¿ë¾Ï", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor("ìš©ì•”", true)), true);
 
 		damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("Áú½Ä", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("ì§ˆì‹", true)), true);
 		SetInter(IT_DAMAGE);
 	}
 	else
@@ -1051,7 +1051,7 @@ bool orbRun() {
 		}
 	}
 	if (!isReimu_) {
-		//½Ã¾ß¿¡ ·¹ÀÌ¹«°¡ ¾øÀ» °æ¿ì
+		//ì‹œì•¼ì— ë ˆì´ë¬´ê°€ ì—†ì„ ê²½ìš°
 		you.reimu_turn++;
 	}
 	else {
@@ -1072,11 +1072,11 @@ bool orbRun() {
 		if (monster* mon_ = BaseSummon(MON_REIMU, 100, false, true, 3, &you, you.position, SKD_OTHER, -1))
 		{
 			if (you.reimu_level >= 2) {
-				//µÎ¹øÂ° µîÀåÇÒ¶§ºÎÅÍ ºÀ¸¶ÁøÀ» µé°í ¿È
+				//ë‘ë²ˆì§¸ ë“±ì¥í• ë•Œë¶€í„° ë´‰ë§ˆì§„ì„ ë“¤ê³  ì˜´
 				mon_->spell_lists.push_back(spell(SPL_REIMU_BARRIER, 15));
 			}
 			if (you.reimu_level >= 4) {
-				//³×¹øÂ°ºÎÅÏ À½¾çÅºÀ» Âø¿ëÇÏ°í¿Â´Ù.
+				//ë„¤ë²ˆì§¸ë¶€í„´ ìŒì–‘íƒ„ì„ ì°©ìš©í•˜ê³ ì˜¨ë‹¤.
 				mon_->spell_lists.push_back(spell(SPL_CANNON, 8 + min(42, 2 *(you.reimu_level-4))));
 			}
 			mon_->LevelUpdown(you.reimu_level++, 15.0f);
@@ -1084,7 +1084,7 @@ bool orbRun() {
 
 			mon_->flag &= ~M_FLAG_SUMMON;
 			mon_->ReturnEnemy();
-			printlog("Æ´»õ·ÎºÎÅÍ ¿­¹ŞÀº ÇÏÄí·¹ÀÌ ½Å»çÀÇ ¹«³à°¡ ³ªÅ¸³µ´Ù! ", true, false, false, CL_danger);
+			printlog("í‹ˆìƒˆë¡œë¶€í„° ì—´ë°›ì€ í•˜ì¿ ë ˆì´ ì‹ ì‚¬ì˜ ë¬´ë…€ê°€ ë‚˜íƒ€ë‚¬ë‹¤! ", true, false, false, CL_danger);
 
 			MoreWait();
 		}
@@ -1134,7 +1134,7 @@ bool players::isSightnonblocked(coord_def c)
 			}
 
 
-			if(length_ == 0) //½Ã¾ß°¡ ´Ù ´Ş¾Ò´Ù.
+			if(length_ == 0) //ì‹œì•¼ê°€ ë‹¤ ë‹¬ì•˜ë‹¤.
 			{
 				intercept = true;
 				break;
@@ -1151,7 +1151,7 @@ bool players::isSightnonblocked(coord_def c)
 			break;
 		else if(i == RT_END - 1)
 		{
-			return false; //°ø°İºÒ°¡´ÉÇÑ À§Ä¡
+			return false; //ê³µê²©ë¶ˆê°€ëŠ¥í•œ ìœ„ì¹˜
 		}
 		else
 			intercept = false;
@@ -1206,19 +1206,19 @@ void deadlog()
 	{
 		char temp[200];	
 		if(you.dead_order && you.dead_order->order)
-			sprintf_s(temp,200,"%s¿¡°Ô Á×¾ú´Ù.",you.dead_order->order->GetName()->name.c_str());
+			sprintf_s(temp,200,"%sì—ê²Œ ì£½ì—ˆë‹¤.",you.dead_order->order->GetName()->name.c_str());
 		else if(you.dead_reason == DR_HUNGRY)
-			sprintf_s(temp,200,"±¾¾îÁ×¾ú´Ù.");
+			sprintf_s(temp,200,"êµ¶ì–´ì£½ì—ˆë‹¤.");
 		else if(you.dead_reason == DR_QUIT)
-			sprintf_s(temp,200,"°ÔÀÓÀ» Æ÷±âÇß´Ù.");
+			sprintf_s(temp,200,"ê²Œì„ì„ í¬ê¸°í–ˆë‹¤.");
 		else if(you.dead_reason == DR_ESCAPE)
-			sprintf_s(temp,200,"´øÀüÀ» Å»ÃâÇß´Ù.");
+			sprintf_s(temp,200,"ë˜ì „ì„ íƒˆì¶œí–ˆë‹¤.");
 		else if(you.dead_reason == DR_POISON)
-			sprintf_s(temp,200,"µ¶¿¡ Áßµ¶µÇ¾î Á×¾ú´Ù.");
+			sprintf_s(temp,200,"ë…ì— ì¤‘ë…ë˜ì–´ ì£½ì—ˆë‹¤.");
 		else if(you.dead_reason == DR_EFFECT)
-			sprintf_s(temp,200,"ºÎÀÛ¿ë¿¡ ÀÇÇØ Á×¾ú´Ù.");
+			sprintf_s(temp,200,"ë¶€ì‘ìš©ì— ì˜í•´ ì£½ì—ˆë‹¤.");
 		else
-			sprintf_s(temp,200,"Á×¾ú´Ù.");
+			sprintf_s(temp,200,"ì£½ì—ˆë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
 }
@@ -1227,7 +1227,7 @@ void deadlog()
 void resurectionlog(char* reason)
 {
 	char temp[200];
-	sprintf_s(temp, 200, "%s¿¡ ÀÇÇØ¼­ ºÎÈ°Çß´Ù.", reason);
+	sprintf_s(temp, 200, "%sì— ì˜í•´ì„œ ë¶€í™œí–ˆë‹¤.", reason);
 	AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
 }
 
@@ -1246,7 +1246,7 @@ void GameOver()
 	if(isNormalGame())
 	{
 		char temp[256];
-		sprintf_s(temp,256,"%d    ·¹º§ %dÀÇ %s %s %s \"%s\"",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str());
+		sprintf_s(temp,256,"%d    ë ˆë²¨ %dì˜ %s %s %s \"%s\"",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str());
 
 
 		ReplayClass.StopReplay(temp);
@@ -1256,14 +1256,14 @@ void GameOver()
 	{
 		{
 			char temp[256];
-			sprintf_s(temp,256,"¾Æ·¹³ª ·¹º§ %d",you.level);
+			sprintf_s(temp,256,"ì•„ë ˆë‚˜ ë ˆë²¨ %d",you.level);
 			ReplayClass.StopReplay(temp);
 		}
 	}
 	else if (isSprint())
 	{
 		char temp[256];
-		sprintf_s(temp, 256, "%d    ·¹º§ %dÀÇ %s %s %s \"%s\"", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str());
+		sprintf_s(temp, 256, "%d    ë ˆë²¨ %dì˜ %s %s %s \"%s\"", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str());
 
 
 		ReplayClass.StopReplay(temp);
@@ -1277,11 +1277,11 @@ void GameOver()
 
 
 	if(you.dead_reason != DR_ESCAPE)
-		printlog("Á×¾ú´Ù...",true,false,false,CL_normal);
+		printlog("ì£½ì—ˆë‹¤...",true,false,false,CL_normal);
 	else
-		printlog("´øÀüÀ» Å»ÃâÇß´Ù.",true,false,false,CL_normal);
+		printlog("ë˜ì „ì„ íƒˆì¶œí–ˆë‹¤.",true,false,false,CL_normal);
 
-	printlog("------------´ÙÀ½Àå------------",true,false,false,CL_normal);
+	printlog("------------ë‹¤ìŒì¥------------",true,false,false,CL_normal);
 
 	deadlog();
 	string dump_;
@@ -1341,16 +1341,16 @@ void GameOver()
 				if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 				{
 					if(wiz_list.wizard_mode == 1)
-						printsub("ÇÃ·¹ÀÌÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù! ´ÙÀ½¿£ À§ÀÚµå¸ğµå¾øÀÌ µµÀüÇØº¾½Ã´Ù!",true,CL_magic);
+						printsub("í”Œë ˆì´í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤! ë‹¤ìŒì—” ìœ„ìë“œëª¨ë“œì—†ì´ ë„ì „í•´ë´…ì‹œë‹¤!",true,CL_magic);
 					else if(wiz_list.wizard_mode == 2)
-						printsub("ÇÃ·¹ÀÌÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù! ´ÙÀ½¿£ ¼¼ÀÌºê¾øÀÌ µµÀüÇØº¾½Ã´Ù!",true,CL_magic);
+						printsub("í”Œë ˆì´í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤! ë‹¤ìŒì—” ì„¸ì´ë¸Œì—†ì´ ë„ì „í•´ë´…ì‹œë‹¤!",true,CL_magic);
 					else
-						printsub("Å¬¸®¾î ÃàÇÏµå¸³´Ï´Ù! ±×¸®°í ÇÃ·¹ÀÌÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù!",true,CL_magic);
+						printsub("í´ë¦¬ì–´ ì¶•í•˜ë“œë¦½ë‹ˆë‹¤! ê·¸ë¦¬ê³  í”Œë ˆì´í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤!",true,CL_magic);
 				}
 				printsub("",true,CL_help);
-				printsub("±â·ÏÀº °ÔÀÓÀÇ morgueÆú´õ¿¡ ÀúÀåµÇ¾îÀÖ½À´Ï´Ù.",true,CL_help);
+				printsub("ê¸°ë¡ì€ ê²Œì„ì˜ morgueí´ë”ì— ì €ì¥ë˜ì–´ìˆìŠµë‹ˆë‹¤.",true,CL_help);
 				printsub("",true,CL_help);
-				printsub("Á¾·áÇÏ½Ã·Á¸é Enter³ª ESC¸¦ ´©¸£¼¼¿ä.",true,CL_help);
+				printsub("ì¢…ë£Œí•˜ì‹œë ¤ë©´ Enterë‚˜ ESCë¥¼ ëˆ„ë¥´ì„¸ìš”.",true,CL_help);
 				bool end_ = false;
 				while(!end_)
 				{

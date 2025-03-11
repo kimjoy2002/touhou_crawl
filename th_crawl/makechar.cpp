@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: makechar.cpp
+// íŒŒì¼ì´ë¦„: makechar.cpp
 //
-// ³»¿ë: Ä³¸¯ÅÍ ¸¸µé±â
+// ë‚´ìš©: ìºë¦­í„° ë§Œë“¤ê¸°
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -65,12 +65,12 @@ void MakeStartItem(start_item_type select_, int num);
 
 skill_type WeaponSelect(int num)
 {
-		SetText() = "¿øÇÏ½Ã´Â ¹«±â¸¦ ¼±ÅÃÇÕ´Ï´Ù.\n\n\n";
-		SetText() += "a - ´Ü°Ë\n";
-		SetText() += "b - µµ³¢\n";
-		SetText() += "c - µĞ±â\n";
-		SetText() += "d - Ã¢\n";
-		SetText() += "e - Àå°Ë\n";
+		SetText() = "ì›í•˜ì‹œëŠ” ë¬´ê¸°ë¥¼ ì„ íƒí•©ë‹ˆë‹¤.\n\n\n";
+		SetText() += "a - ë‹¨ê²€\n";
+		SetText() += "b - ë„ë¼\n";
+		SetText() += "c - ë‘”ê¸°\n";
+		SetText() += "d - ì°½\n";
+		SetText() += "e - ì¥ê²€\n";
 
 		while(1)
 		{
@@ -104,9 +104,9 @@ skill_type WeaponSelect(int num)
 
 god_type FanaticSelect()
 {
-		SetText() = "´©±¸ÀÇ ±¤½Åµµ°¡ µÉ°Ç°¡?\n\n\n";
-		SetText() += "a - ÅÙ½Ã\n";
-		SetText() += "b - À¯Ä«¸®\n";
+		SetText() = "ëˆ„êµ¬ì˜ ê´‘ì‹ ë„ê°€ ë ê±´ê°€?\n\n\n";
+		SetText() += "a - í…ì‹œ\n";
+		SetText() += "b - ìœ ì¹´ë¦¬\n";
 
 		while(1)
 		{
@@ -135,7 +135,7 @@ void MakeStartItem(start_item_type select_, int num)
 	switch(select_)
 	{
 	case SIT_SHORTBLADE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SHORTBLADE,&img_item_weapon_dagger,1,false,false,4,7,0,0,0,0,10,5,false,name_infor("´ë°Å",false),name_infor("",true),2.0f,50));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SHORTBLADE,&img_item_weapon_dagger,1,false,false,4,7,0,0,0,0,10,5,false,name_infor("ëŒ€ê±°",false),name_infor("",true),2.0f,50));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 5));
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -152,7 +152,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_LONGBLADE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_LONGBLADE,&img_item_weapon_katana,1,false,false,1,9,0,0,0,0,13,7,false,name_infor("µµ°Ë",true),name_infor("",true),4.0f,100));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_LONGBLADE,&img_item_weapon_katana,1,false,false,1,9,0,0,0,0,13,7,false,name_infor("ë„ê²€",true),name_infor("",true),4.0f,100));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 15));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -161,7 +161,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_MACE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,0,0,0,0,13,7,false,name_infor("°íÇìÀÌ",false),name_infor("",true),3.0f,60));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,0,0,0,0,13,7,false,name_infor("ê³ í—¤ì´",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 5));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -170,7 +170,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_AXE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_AXE,&img_item_weapon_handaxe,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("¼Õµµ³¢",false),name_infor("",true),3.0f,60));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_AXE,&img_item_weapon_handaxe,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("ì†ë„ë¼",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_AXE, 0, &t, 5));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -179,7 +179,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SPEAR:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("Ã¢",true),name_infor("",true),4.0f,70));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("ì°½",true),name_infor("",true),4.0f,70));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 5));
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -188,7 +188,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_GOHEY:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,1,1,0,0,13,7,false,name_infor("°íÇìÀÌ",false),name_infor("",true),3.0f,60));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,1,1,0,0,13,7,false,name_infor("ê³ í—¤ì´",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 5));	
 		//it->value3 = 1;
 		it->value4 = 1;
@@ -199,7 +199,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SICKLE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,1,1,0,0,13,7,false,name_infor("Ã¢",true),name_infor("",true),4.0f,70));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,1,1,0,0,13,7,false,name_infor("ì°½",true),name_infor("",true),4.0f,70));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 25));	
 		//it->value3 = 2;
 		it->value4 = 3;
@@ -220,7 +220,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ROBE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("ë¬´ë…€ë³µ",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -229,7 +229,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_KAPPA_ROBE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_KAPPA));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("ë¬´ë…€ë³µ",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -238,7 +238,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_MIKO:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("ë¬´ë…€ë³µ",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -247,7 +247,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_MAID:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MAID));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("¹«³àº¹",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("ë¬´ë…€ë³µ",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -265,7 +265,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ARMOUR_0:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_1, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("°æ°©¿Ê",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("ê²½ê°‘ì˜·",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -274,7 +274,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ARMOUR_1:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_2, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_1,&img_item_armor_armour_1,1,false,false,armour_stat[2][0],armour_stat[2][1],armour_stat[2][2],0,0,0,0,0,false,name_infor("Áß°£ Áß°©¿Ê",true),name_infor("",true),6.0f,40));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_1,&img_item_armor_armour_1,1,false,false,armour_stat[2][0],armour_stat[2][1],armour_stat[2][2],0,0,0,0,0,false,name_infor("ì¤‘ê°„ ì¤‘ê°‘ì˜·",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -283,7 +283,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_SMALL_SHIELD:
 		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 0));
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield, &img_play_item_shield[0],1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("³ª¹«¹æÆĞ",false),name_infor("",true),3.0f,30));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield, &img_play_item_shield[0],1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("ë‚˜ë¬´ë°©íŒ¨",false),name_infor("",true),3.0f,30));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -292,7 +292,7 @@ void MakeStartItem(start_item_type select_, int num)
 		break;	
 	case SIT_MIDDLE_SHIELD:
 		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 25));
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_shield, &img_play_item_shield[1],1,false,false,7,-3,0,0,0,0,0,0,false,name_infor("Ã¶¹æÆĞ",false),name_infor("",true),5.0f,100));
+		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_shield, &img_play_item_shield[1],1,false,false,7,-3,0,0,0,0,0,0,false,name_infor("ì² ë°©íŒ¨",false),name_infor("",true),5.0f,100));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -432,7 +432,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(5,STAT_STR);
 		you.StatUpDown(-6,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
-		if(name_.compare("¸ğ¹ÌÁö")) //¸ğ¹ÌÁö´Â Æ¯¼öÇÑ ½ÃÀÛ
+		if(name_.compare("ëª¨ë¯¸ì§€")) //ëª¨ë¯¸ì§€ëŠ” íŠ¹ìˆ˜í•œ ì‹œì‘
 		{
 			you.GiveSkillExp(WeaponSelect(0),60,false);
 			if(!you.GetProperty(TPT_SIZE))
@@ -467,7 +467,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(6,STAT_INT);
 		you.StatUpDown(-6,STAT_STR);
 		MakeStartItem(SIT_ROBE,0);
-		if(name_.compare("¸¶¸®»ç")) //¸¶¸®»ç´Â ÀÌ Ã¥À» ¾òÁö ¾Ê´Â´Ù.
+		if(name_.compare("ë§ˆë¦¬ì‚¬")) //ë§ˆë¦¬ì‚¬ëŠ” ì´ ì±…ì„ ì–»ì§€ ì•ŠëŠ”ë‹¤.
 			MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
@@ -487,9 +487,9 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(SKT_MACE,120,false);
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,50,false);
-		if(name_.compare("»ç³ª¿¡") == 0) //·¹ÀÌ¹«´Â ¹ÏÁö¾Ê´Â´Ù.
+		if(name_.compare("ì‚¬ë‚˜ì—") == 0) //ë ˆì´ë¬´ëŠ” ë¯¿ì§€ì•ŠëŠ”ë‹¤.
 			you.Belief(GT_SUWAKO,35,false);
-		else if(name_.compare("·¹ÀÌ¹«")) //·¹ÀÌ¹«´Â ¹ÏÁö¾Ê´Â´Ù.
+		else if(name_.compare("ë ˆì´ë¬´")) //ë ˆì´ë¬´ëŠ” ë¯¿ì§€ì•ŠëŠ”ë‹¤.
 			you.Belief(GT_KANAKO,35,false);
 		break;
 	case JOB_GLADIATOR:
@@ -517,7 +517,7 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(SKT_STEALTH,30,false);
 		you.GiveSkillExp(SKT_UNWEAPON,90,false);
 		break;
-	case JOB_CRUSADER: //°­È­Àü»çÀÎÁö, ¿ä¼úÀü»çÀÎÁö ¼±ÅÃÇÏ°ÔÇÏ±â
+	case JOB_CRUSADER: //ê°•í™”ì „ì‚¬ì¸ì§€, ìš”ìˆ ì „ì‚¬ì¸ì§€ ì„ íƒí•˜ê²Œí•˜ê¸°
 		you.max_hp+=1;
 		you.max_mp+=1;
 		you.GiveSkillExp(WeaponSelect(0),30,false);
@@ -768,7 +768,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(-3,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		
-		if(name_.compare("´ÏÅä¸®"))
+		if(name_.compare("ë‹ˆí† ë¦¬"))
 		{			
 			you.GiveSkillExp(WeaponSelect(0),60,false);
 			MakeStartItem(SIT_ROBE,1);
@@ -812,7 +812,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 {
 	item_infor t;
 	item *it;
-	if(name_.compare("·¹ÀÌ¹«")==0)
+	if(name_.compare("ë ˆì´ë¬´")==0)
 	{	
 		if(aptit_)
 		{
@@ -824,7 +824,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_HEAD, 0, &t, -1));	
 			it->image = &img_item_armor_helmet[1];
 			it->equip_image = &img_play_item_hat[1];
-			it->name.name = "¸®º»";
+			it->name.name = "ë¦¬ë³¸";
 			it->name.name_type = true;
 			it->value4 = 0;
 			it->curse = false;
@@ -847,7 +847,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 	}
 
-	else if(name_.compare("¸¶¸®»ç")==0)
+	else if(name_.compare("ë§ˆë¦¬ì‚¬")==0)
 	{
 		if(aptit_)
 		{
@@ -891,7 +891,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			//you.Memorize(SPL_CONTROLED_BLINK,true);		
 		}
 	}
-	else if(name_.compare("»ç³ª¿¡")==0)
+	else if(name_.compare("ì‚¬ë‚˜ì—")==0)
 	{
 		if(aptit_)
 		{
@@ -920,7 +920,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("¸ğ¹ÌÁö")==0)
+	else if(name_.compare("ëª¨ë¯¸ì§€")==0)
 	{
 		if(aptit_)
 		{
@@ -963,7 +963,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			
 		}
 	}
-	else if(name_.compare("ÄÚÀÌ½Ã")==0)
+	else if(name_.compare("ì½”ì´ì‹œ")==0)
 	{
 		if(aptit_)
 		{
@@ -985,7 +985,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("¸ğÄÚ¿ì")==0)
+	else if(name_.compare("ëª¨ì½”ìš°")==0)
 	{
 		if(aptit_)
 		{
@@ -1005,7 +1005,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("´ÏÅä¸®")==0)
+	else if(name_.compare("ë‹ˆí† ë¦¬")==0)
 	{
 		if(aptit_)
 		{
@@ -1030,21 +1030,21 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.equip('a' + 4, ET_NECK, false);
 		}
 	}
-	else if (name_.compare("½á´Ï") == 0 || name_.compare("½ºÅ¸") == 0 || name_.compare("·ç³ª") == 0)
+	else if (name_.compare("ì¨ë‹ˆ") == 0 || name_.compare("ìŠ¤íƒ€") == 0 || name_.compare("ë£¨ë‚˜") == 0)
 	{
 		if (aptit_)
 		{
-			if (name_.compare("½á´Ï") == 0) {
+			if (name_.compare("ì¨ë‹ˆ") == 0) {
 				you.skill[SKT_SPELLCASTING].aptit += 1;
 				you.skill[SKT_CONJURE].aptit += 2;
 
 			}
-			if (name_.compare("½ºÅ¸") == 0) {
+			if (name_.compare("ìŠ¤íƒ€") == 0) {
 				you.skill[SKT_FIGHT].aptit += 1;
 				you.skill[SKT_DODGE].aptit += 1;
 				you.skill[SKT_ALCHEMY].aptit += 1;
 			}
-			if (name_.compare("·ç³ª") == 0) {
+			if (name_.compare("ë£¨ë‚˜") == 0) {
 				you.skill[SKT_SHORTBLADE].aptit += 1;
 				you.skill[SKT_STEALTH].aptit += 1;
 				you.skill[SKT_MENTAL].aptit += 1;
@@ -1063,20 +1063,20 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 
 
-			if (name_.compare("½á´Ï") == 0) {
+			if (name_.compare("ì¨ë‹ˆ") == 0) {
 
 
 
 
 			}
-			if (name_.compare("½ºÅ¸") == 0) {
+			if (name_.compare("ìŠ¤íƒ€") == 0) {
 				
 				you.SetProperty(TPT_SEE_INVI, 1);
 
 
 
 			}
-			if (name_.compare("·ç³ª") == 0) {
+			if (name_.compare("ë£¨ë‚˜") == 0) {
 				for (int i = 0; i < 5; i++)
 				{
 					it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SILENCE));
@@ -1089,11 +1089,11 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 
 			vector<int> temp;
-			if (name_.compare("½á´Ï") != 0)
+			if (name_.compare("ì¨ë‹ˆ") != 0)
 				temp.push_back(MON_SUNNY);
-			if (name_.compare("½ºÅ¸") != 0)
+			if (name_.compare("ìŠ¤íƒ€") != 0)
 				temp.push_back(MON_STAR);
-			if (name_.compare("·ç³ª") != 0)
+			if (name_.compare("ë£¨ë‚˜") != 0)
 				temp.push_back(MON_LUNAR);
 			
 

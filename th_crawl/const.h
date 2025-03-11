@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: const.h
+// íŒŒì¼ì´ë¦„: const.h
 //
-// ³»¿ë: const°ü·Ã
+// ë‚´ìš©: constê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,22 +16,22 @@
 
 class name_infor;
 
-extern const char *tribe_type_string[]; //Á¾Á·½ºÆ®¸µ
-extern const char *job_type_string[]; //Á÷¾÷½ºÆ®¸µ
+extern const char *tribe_type_string[]; //ì¢…ì¡±ìŠ¤íŠ¸ë§
+extern const char *job_type_string[]; //ì§ì—…ìŠ¤íŠ¸ë§
 
 extern const bool tribe_string_back[];
 extern const bool job_string_back[];
 
 
-extern const char *dungeon_tile_tribe_type_string[]; //Å¸ÀÏ½ºÆ®¸µ
+extern const char *dungeon_tile_tribe_type_string[]; //íƒ€ì¼ìŠ¤íŠ¸ë§
 
-extern const char *state_string[]; //»óÅÂÀÌ»ó½ºÆ®¸µ
+extern const char *state_string[]; //ìƒíƒœì´ìƒìŠ¤íŠ¸ë§
 
 extern const char *rune_string[];
 
 
 
-extern const D3DCOLOR CL_normal; //»ö±ò
+extern const D3DCOLOR CL_normal; //ìƒ‰ê¹”
 extern const D3DCOLOR CL_bad;
 extern const D3DCOLOR CL_verybad;
 extern const D3DCOLOR CL_none;

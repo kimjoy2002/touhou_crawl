@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: skill.cpp
+// íŒŒì¼ì´ë¦„: skill.cpp
 //
-// ³»¿ë: ½ºÅ³»ç¿ë°Ç
+// ë‚´ìš©: ìŠ¤í‚¬ì‚¬ìš©ê±´
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_SEIJA_1:
 	case SKL_LILLY_1:
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_GOD) & flag);
-	case SKL_OKINA_2: //¹®Àü¿ëÀ¸·Î º¯°æ
+	case SKL_OKINA_2: //ë¬¸ì „ìš©ìœ¼ë¡œ ë³€ê²½
 		return ((S_FLAG_SPEAK | S_FLAG_SMITE | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);
 	case SKL_SWAKO_JUMP:
 		return ((S_FLAG_SMITE | S_FLAG_RECT | S_FLAG_NO_TARGET | S_FLAG_GOD) & flag);		
@@ -253,189 +253,189 @@ const char* SkillString(skill_list skill)
 	switch(skill)
 	{
 	case SKL_KANAKO_1:
-		return "°Ç½ÅÃÊ·¡µ¹";
+		return "ê±´ì‹ ì´ˆë˜ëŒ";
 	case SKL_KANAKO_2:
-		return "°Ç½ÅÃÊ·¡¾îÁÖ";
+		return "ê±´ì‹ ì´ˆë˜ì–´ì£¼";
 	case SKL_KANAKO_3:
-		return "°Ç½ÅÃÊ·¡Ç³";
+		return "ê±´ì‹ ì´ˆë˜í’";
 	case SKL_GRAZE:
-		return "±×·¹ÀÌÁî ¹ßµ¿";
+		return "ê·¸ë ˆì´ì¦ˆ ë°œë™";
 	case SKL_GRAZE_OFF:
-		return "±×·¹ÀÌÁî ÇØÁ¦";
+		return "ê·¸ë ˆì´ì¦ˆ í•´ì œ";
 	case SKL_LEVITATION:
-		return "ºñÇà ¹ßµ¿";
+		return "ë¹„í–‰ ë°œë™";
 	case SKL_LEVITATION_OFF:
-		return "ºñÇà ÇØÁ¦";
+		return "ë¹„í–‰ í•´ì œ";
 	case SKL_INVISIBLE:
-		return "Åõ¸í ¹ßµ¿";
+		return "íˆ¬ëª… ë°œë™";
 	case SKL_INVISIBLE_OFF:
-		return "Åõ¸í ÇØÁ¦";
+		return "íˆ¬ëª… í•´ì œ";
 	case SKL_EIRIN_0:
-		return "¹°¾à ´øÁö±â";
+		return "ë¬¼ì•½ ë˜ì§€ê¸°";
 	case SKL_EIRIN_1:
-		return "½ÅÃ¼°³Á¶";
+		return "ì‹ ì²´ê°œì¡°";
 	case SKL_EIRIN_2:
-		return "±ä±Ş¼öÇ÷";
+		return "ê¸´ê¸‰ìˆ˜í˜ˆ";
 	case SKL_BYAKUREN_1:
-		return "Áö·Â°­È­";
+		return "ì§€ë ¥ê°•í™”";
 	case SKL_BYAKUREN_2:
-		return "°¢·Â°­È­";
+		return "ê°ë ¥ê°•í™”";
 	case SKL_SIZUHA_1:
-		return "±¤±âÀÇ ³«¿±";
+		return "ê´‘ê¸°ì˜ ë‚™ì—½";
 	case SKL_SIZUHA_2:
-		return "´ÜÇ³ ¹æ¾î±¸";
+		return "ë‹¨í’ ë°©ì–´êµ¬";
 	case SKL_SIZUHA_3:
-		return "´ÜÇ³ÀÇ ¹«±â ºÎ¿©";
+		return "ë‹¨í’ì˜ ë¬´ê¸° ë¶€ì—¬";
 	case SKL_MINORIKO_1:
-		return "´É·ÂÄ¡ È¸º¹";
+		return "ëŠ¥ë ¥ì¹˜ íšŒë³µ";
 	case SKL_MINORIKO_2:
-		return "Ã¼·Â È¸º¹";
+		return "ì²´ë ¥ íšŒë³µ";
 	case SKL_YUUGI_1:
-		return "¼ú ¸¶½Ã±â";
+		return "ìˆ  ë§ˆì‹œê¸°";
 	case SKL_YUUGI_2:
-		return "Àú¸Õ ½ºÇÃ·º½º";
+		return "ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤";
 	case SKL_YUUGI_3:
 	case SKL_YUUGI_3_THROW:
-		return "Áı¾î´øÁö±â";
+		return "ì§‘ì–´ë˜ì§€ê¸°";
 	case SKL_YUUGI_4:
-		return "±«¸êÀÇ Æ÷È¿";
+		return "ê´´ë©¸ì˜ í¬íš¨";
 	case SKL_YUUGI_5:
-		return "»ïº¸ÇÊ»ì";
+		return "ì‚¼ë³´í•„ì‚´";
 	case SKL_SATORI_1:
-		return "Æ®¶ó¿ì¸¶";
+		return "íŠ¸ë¼ìš°ë§ˆ";
 	case SKL_SATORI_2:
-		return "µ¶½É¼ú";		
+		return "ë…ì‹¬ìˆ ";		
 	case SKL_SHINKI_1:
-		return "ÇÏ±Ş ¸¶Á· ¼ÒÈ¯";		
+		return "í•˜ê¸‰ ë§ˆì¡± ì†Œí™˜";		
 	case SKL_SHINKI_2:
-		return "Áß±Ş ¸¶Á· ¼ÒÈ¯";		
+		return "ì¤‘ê¸‰ ë§ˆì¡± ì†Œí™˜";		
 	case SKL_SHINKI_3:
-		return "»ó±Ş ¸¶Á· ¼ÒÈ¯";
+		return "ìƒê¸‰ ë§ˆì¡± ì†Œí™˜";
 	case SKL_YUYUKO_ON:
-		return "À¯·É ¼ÒÈ¯ ¹ßµ¿";
+		return "ìœ ë ¹ ì†Œí™˜ ë°œë™";
 	case SKL_YUYUKO_OFF:
-		return "À¯·É ¼ÒÈ¯ ÇØÁ¦";
+		return "ìœ ë ¹ ì†Œí™˜ í•´ì œ";
 	case SKL_YUYUKO_1:	
-		return "À¯·É Á¶Á¾";	
+		return "ìœ ë ¹ ì¡°ì¢…";	
 	case SKL_YUYUKO_2:
-		return "À¯·É ¼ÒÈ¯ °¡¼Ó";	
+		return "ìœ ë ¹ ì†Œí™˜ ê°€ì†";	
 	case SKL_YUYUKO_3:		
-		return "À¯·É ±¸¼Ó";	
+		return "ìœ ë ¹ êµ¬ì†";	
 	case SKL_YUKARI_1:
-		return "º¯¿ëÀ» º¸´Â ´«";
+		return "ë³€ìš©ì„ ë³´ëŠ” ëˆˆ";
 	case SKL_YUKARI_2:
-		return "È¯»ó±¤»óÇ÷";
+		return "í™˜ìƒê´‘ìƒí˜ˆ";
 	case SKL_YUKARI_3:
-		return "»çÁß°á°è";
+		return "ì‚¬ì¤‘ê²°ê³„";
 	case SKL_YUKARI_4:
-		return "Â÷¿ø°íÁ¤";	
+		return "ì°¨ì›ê³ ì •";	
 	case SKL_SWAKO_JUMP:
-		return "°³±¸¸® Á¡ÇÁ";	
+		return "ê°œêµ¬ë¦¬ ì í”„";	
 	case SKL_SWAKO_TEMPLE:
-		return "½ÅÀü ¼¼¿ì±â";	
+		return "ì‹ ì „ ì„¸ìš°ê¸°";	
 	case SKL_SWAKO_WATER_GUN:
-		return "¹°ÃÑ";	
+		return "ë¬¼ì´";	
 	case SKL_SWAKO_TOUGUE:
-		return "°³±¸¸® Çô";	
+		return "ê°œêµ¬ë¦¬ í˜€";	
 	case SKL_SWAKO_CURSE:
-		return "ÅäÂø½ÅÀÇ Àç¾Ó";	
+		return "í† ì°©ì‹ ì˜ ì¬ì•™";	
 	case SKL_SWAKO_DIGGING:
-		return "±¼Âø";	
+		return "êµ´ì°©";	
 	case SKL_SWAKO_SUMMON_FLOG:
-		return "°³±¸¸® ¼ÒÈ¯";	
+		return "ê°œêµ¬ë¦¬ ì†Œí™˜";	
 	case SKL_SWAKO_STATUE:
-		return "¼®»ó ¼¼¿ì±â";	
+		return "ì„ìƒ ì„¸ìš°ê¸°";	
 	case SKL_SWAKO_RAIN:
-		return "ºñ ³»¸®±â";
+		return "ë¹„ ë‚´ë¦¬ê¸°";
 	case SKL_SWAKO_SLEEP:
-		return "µ¿¸é";
+		return "ë™ë©´";
 	case SKL_SWAKO_MISYAGUZI:
-		return "¹Ì»ş±¸Áö´Ô ¼ÒÈ¯";
+		return "ë¯¸ìƒ¤êµ¬ì§€ë‹˜ ì†Œí™˜";
 	case SKL_HINA_1:
-		return "¾×¶«";
+		return "ì•¡ë•œ";
 	case SKL_HINA_2:
-		return "¹«±â ÀúÁÖ(°­È­)";
+		return "ë¬´ê¸° ì €ì£¼(ê°•í™”)";
 	case SKL_HINA_3:
-		return "¹æ¾î±¸ ÀúÁÖ(¹İ»ç)";
+		return "ë°©ì–´êµ¬ ì €ì£¼(ë°˜ì‚¬)";
 	case SKL_HINA_4:
-		return "Àå½Å±¸ ÀúÁÖ(È¸º¹)";
+		return "ì¥ì‹ êµ¬ ì €ì£¼(íšŒë³µ)";
 	case SKL_HINA_5:
-		return "ÀúÁÖÀÇ ¹«±â ºÎ¿©";
+		return "ì €ì£¼ì˜ ë¬´ê¸° ë¶€ì—¬";
 	case SKL_JUMPING_ATTACK:
-		return "µµ¾à °ø°İ";
+		return "ë„ì•½ ê³µê²©";
 	case SKL_BREATH:
-		return "ºê·¹½º";
+		return "ë¸Œë ˆìŠ¤";
 	case SKL_TORMENT:
-		return "Áö¿ÁÀÇ °íÅë";
+		return "ì§€ì˜¥ì˜ ê³ í†µ";
 	case SKL_ABANDON_GOD:
-		return "½ÅÀ» ¹ö¸®±â";
+		return "ì‹ ì„ ë²„ë¦¬ê¸°";
 	case SKL_SEIJA_GIFT:
-		return "º¸¹° ¹Ş±â";
+		return "ë³´ë¬¼ ë°›ê¸°";
 	case SKL_SEIJA_1:
-		return "À§Ä¡ µÚÁı±â";
+		return "ìœ„ì¹˜ ë’¤ì§‘ê¸°";
 	case SKL_SEIJA_2:
-		return "ÃµÇÏÀüº¹";
+		return "ì²œí•˜ì „ë³µ";
 	case SKL_LILLY_1:
-		return "µ¿·á ±ÇÀ¯";
+		return "ë™ë£Œ ê¶Œìœ ";
 	case SKL_LILLY_2:
-		return "¿äÁ¤ ºÎ¸£±â";
+		return "ìš”ì • ë¶€ë¥´ê¸°";
 	case SKL_LILLY_3:		
-		return "º½ÀÇ Ä¡À¯";
+		return "ë´„ì˜ ì¹˜ìœ ";
 	case SKL_LILLY_4:
-		return "¿äÁ¤´ëÀüÀï";
+		return "ìš”ì •ëŒ€ì „ìŸ";
 	case SKL_PHILOSOPHERS_1:
-		return "È­-È­¿°±¸";
+		return "í™”-í™”ì—¼êµ¬";
 	case SKL_PHILOSOPHERS_2:
-		return "¼ö-¿öÅÍÄ³³í";
+		return "ìˆ˜-ì›Œí„°ìºë…¼";
 	case SKL_PHILOSOPHERS_3:
-		return "¸ñ-ÁúÇ³¼±";
+		return "ëª©-ì§ˆí’ì„ ";
 	case SKL_PHILOSOPHERS_4:
-		return "±İ-¿¡¸Ş¶öµå ½ÃÆ¼";
+		return "ê¸ˆ-ì—ë©”ë„ë“œ ì‹œí‹°";
 	case SKL_PHILOSOPHERS_5:
-		return "Åä-Áö¹İ À¶±â";
+		return "í† -ì§€ë°˜ ìœµê¸°";
 	case SKL_OKINA_1:
-		return "¹® »ı¼º";
+		return "ë¬¸ ìƒì„±";
 	case SKL_OKINA_2:
-		return "¹® Àá±×±â";
+		return "ë¬¸ ì ê·¸ê¸°";
 	case SKL_OKINA_3:
-		return "ÀÎÅõ ¹éµµ¾î";
+		return "ì¸íˆ¬ ë°±ë„ì–´";
 	case SKL_OKINA_4:
-		return "Å©·¹ÀÌÁö ¹é´í¼­Áî";
+		return "í¬ë ˆì´ì§€ ë°±ëŒ„ì„œì¦ˆ";
 	case SKL_OKINA_5:
-		return "¹éµµ¾î ±ä±ŞÅ»Ãâ";
+		return "ë°±ë„ì–´ ê¸´ê¸‰íƒˆì¶œ";
 	case SKL_JUNKO_1:
-		return "´Ü¼øÇÑ Åº¸·";
+		return "ë‹¨ìˆœí•œ íƒ„ë§‰";
 	case SKL_JUNKO_2:
-		return "¼ø¼öÇÑ Èû";
+		return "ìˆœìˆ˜í•œ í˜";
 	case SKL_JUNKO_3:
-		return "¼ø¼öÇÑ »ìÀÇ";
+		return "ìˆœìˆ˜í•œ ì‚´ì˜";
 	case SKL_JUNKO_4:
-		return "¼øÈ­";
+		return "ìˆœí™”";
 	case SKL_JOON_AND_SION_1:
-		return "ºùÀÇ";
+		return "ë¹™ì˜";
 	case SKL_JOON_AND_SION_2:
-		return "Äı ¿Àºê ¹öºí";
+		return "í€¸ ì˜¤ë¸Œ ë²„ë¸”";
 	case SKL_JOON_AND_SION_3:
-		return "¹Ì½ºÂù½º ½ºÄ³ÅÍ";
+		return "ë¯¸ìŠ¤ì°¬ìŠ¤ ìŠ¤ìºí„°";
 	case SKL_JOON_AND_SION_4:
-		return "¾Û¼Ö·çÆ® ·çÀú";
+		return "ì•±ì†”ë£¨íŠ¸ ë£¨ì €";
 	case SKL_JOON_AND_SION_OFF:
-		return "°­Á¦ºùÀÇÇØÁ¦";
+		return "ê°•ì œë¹™ì˜í•´ì œ";
 	case SKL_MIKO_1:
-		return "¿å¸Á¸ğÀ¸±â";
+		return "ìš•ë§ëª¨ìœ¼ê¸°";
 	case SKL_MIKO_2:
-		return "ÃàÁöÀÇ ¸ÁÅä";
+		return "ì¶•ì§€ì˜ ë§í† ";
 	case SKL_MIKO_3:
-		return "ÈÄ±¤";
+		return "í›„ê´‘";
 	case SKL_MIKO_4:
-		return "ÀúÇ×¾ò±â";
+		return "ì €í•­ì–»ê¸°";
 	case SKL_MIKO_5:
-		return "»¡°£¸ÁÅä ÆÄ¶õ¸ÁÅä";
+		return "ë¹¨ê°„ë§í†  íŒŒë€ë§í† ";
 	case SKL_MIKO_6:
-		return "ÀÎ±âÆø¹ß";
+		return "ì¸ê¸°í­ë°œ";
 	case SKL_NONE:
 	default:
-		return "¾Ë¼ö¾ø´Â ´É·Â";
+		return "ì•Œìˆ˜ì—†ëŠ” ëŠ¥ë ¥";
 	}
 }
 int SkillCap(skill_list skill)
@@ -704,7 +704,7 @@ int SkillPow(skill_list skill)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
-		//½Å¾Ó½ÉÀ¸·Î ¹Ù²Ù±â
+		//ì‹ ì•™ì‹¬ìœ¼ë¡œ ë°”ê¾¸ê¸°
 		return you.piety;
 	case SKL_SIZUHA_1:
 	case SKL_SATORI_1:
@@ -774,7 +774,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_BYAKUREN_2:		
 		return 100;
 		
-	case SKL_SIZUHA_1: //µğ¹öÇÁ
+	case SKL_SIZUHA_1: //ë””ë²„í”„
 	case SKL_SATORI_1:
 
 		//return SkillDiffer_simple(1,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
@@ -1012,14 +1012,14 @@ int SkillMana(skill_list skill)
 	}
 }
 bool SkillPlusCost(skill_list skill,bool check_)
-{ //return false´Â ÄÚ½ºÆ®¸¦ ½ÇÆĞÇÑ°ÍÀÌ´Ù.
-	//check_´Â ¼Ò¸ğ ¾ÈÇÏ°í Ã¼Å©¸¸
+{ //return falseëŠ” ì½”ìŠ¤íŠ¸ë¥¼ ì‹¤íŒ¨í•œê²ƒì´ë‹¤.
+	//check_ëŠ” ì†Œëª¨ ì•ˆí•˜ê³  ì²´í¬ë§Œ
 	switch(skill)
 	{
 	case SKL_EIRIN_0:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1038,7 +1038,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_MINORIKO_1:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1062,7 +1062,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUYUKO_1:	
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1095,7 +1095,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_JUMP:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1104,7 +1104,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_TEMPLE:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1115,7 +1115,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_TOUGUE:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1124,7 +1124,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_CURSE:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1136,7 +1136,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_DIGGING:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1148,7 +1148,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_SUMMON_FLOG:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1160,7 +1160,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_STATUE:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1172,7 +1172,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_RAIN:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1184,7 +1184,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_SLEEP:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1196,7 +1196,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_MISYAGUZI:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1208,7 +1208,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_1:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1219,7 +1219,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_2:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1230,7 +1230,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_3:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1242,7 +1242,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SIZUHA_2:
 		if(check_ && !you.equipment[ET_ARMOR])
 		{
-			printlog("°©¿ÊÀ» ³¢°í »ç¿ëÇÏ¿©¾ß ÇÑ´Ù.",true,false,false,CL_small_danger);	
+			printlog("ê°‘ì˜·ì„ ë¼ê³  ì‚¬ìš©í•˜ì—¬ì•¼ í•œë‹¤.",true,false,false,CL_small_danger);	
 			return false;
 		}
 		if(!check_)
@@ -1251,7 +1251,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SIZUHA_3:
 		if(check_ && !you.equipment[ET_WEAPON])
 		{
-			printlog("¹«±â¸¦ ³¢°í »ç¿ëÇÏ¿©¾ß ÇÑ´Ù.",true,false,false,CL_small_danger);	
+			printlog("ë¬´ê¸°ë¥¼ ë¼ê³  ì‚¬ìš©í•˜ì—¬ì•¼ í•œë‹¤.",true,false,false,CL_small_danger);	
 			return false;
 		}
 		return true;
@@ -1266,12 +1266,12 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_EIRIN_2:
 		if(check_ && you.GetHp() ==  you.GetMaxHp())
 		{
-			printlog("ÀÌ¹Ì Ã¼·ÂÀÌ °¡µæ Â÷ ÀÖ´Ù.",true,false,false,CL_normal);	
+			printlog("ì´ë¯¸ ì²´ë ¥ì´ ê°€ë“ ì°¨ ìˆë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1287,7 +1287,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_MINORIKO_2:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1299,7 +1299,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_2:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1311,7 +1311,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_3:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1323,7 +1323,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_4:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1335,7 +1335,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_5:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1347,7 +1347,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_HINA_1:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1360,14 +1360,14 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_HINA_5:
 		if(check_ && !you.equipment[ET_WEAPON])
 		{
-			printlog("¹«±â¸¦ ³¢°í »ç¿ëÇÏ¿©¾ß ÇÑ´Ù.",true,false,false,CL_small_danger);	
+			printlog("ë¬´ê¸°ë¥¼ ë¼ê³  ì‚¬ìš©í•˜ì—¬ì•¼ í•œë‹¤.",true,false,false,CL_small_danger);	
 			return false;
 		}
 		return true;	
 	case SKL_LEVITATION:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1376,7 +1376,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_INVISIBLE:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1385,7 +1385,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUMPING_ATTACK:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1394,7 +1394,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_BREATH:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1403,7 +1403,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_TORMENT:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1414,7 +1414,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SEIJA_1:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1423,7 +1423,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SEIJA_2:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1437,7 +1437,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_LILLY_3:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1446,7 +1446,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_LILLY_4:
 		if(check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.",true,false,false,CL_normal);	
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.",true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1457,7 +1457,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_OKINA_1:
 		if (check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1484,7 +1484,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_1:
 		if (check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1493,7 +1493,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_2:
 		if (check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1502,7 +1502,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_3:
 		if (check_ && you.power<100)
 		{
-			printlog("ÆÄ¿ö 1Ä­ ÀÌ»ó¿¡¼­ ½á¾ßÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("íŒŒì›Œ 1ì¹¸ ì´ìƒì—ì„œ ì¨ì•¼í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1515,14 +1515,14 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	}
 	case SKL_MIKO_1:
 	{
-		//TODO Ãş¸¶´Ù ÇÑ¹ø¸¸ »ç¿ë°¡´ÉÇÏµµ·Ï?
+		//TODO ì¸µë§ˆë‹¤ í•œë²ˆë§Œ ì‚¬ìš©ê°€ëŠ¥í•˜ë„ë¡?
 		return true;
 	}
 	case SKL_MIKO_2:
 	{
 		if (check_ && you.piety < getMikoPiety(0))
 		{
-			printlog("ÀÎ±âµµ°¡ ¸ğÀÚ¶õ´Ù.", true, false, false, CL_normal);
+			printlog("ì¸ê¸°ë„ê°€ ëª¨ìë€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1533,7 +1533,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(1))
 		{
-			printlog("ÀÎ±âµµ°¡ ¸ğÀÚ¶õ´Ù.", true, false, false, CL_normal);
+			printlog("ì¸ê¸°ë„ê°€ ëª¨ìë€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1544,7 +1544,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(2))
 		{
-			printlog("ÀÎ±âµµ°¡ ¸ğÀÚ¶õ´Ù.", true, false, false, CL_normal);
+			printlog("ì¸ê¸°ë„ê°€ ëª¨ìë€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1555,7 +1555,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(3))
 		{
-			printlog("ÀÎ±âµµ°¡ ¸ğÀÚ¶õ´Ù.", true, false, false, CL_normal);
+			printlog("ì¸ê¸°ë„ê°€ ëª¨ìë€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1566,7 +1566,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(4))
 		{
-			printlog("ÀÎ±âµµ°¡ ¸ğÀÚ¶õ´Ù.", true, false, false, CL_normal);
+			printlog("ì¸ê¸°ë„ê°€ ëª¨ìë€ë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1629,163 +1629,163 @@ const char* SkillCostString(skill_list skill)
 	switch(skill)
 	{
 	case SKL_KANAKO_1:
-		return "(¿µ·Â 2, ½Å¾Ó)";		
+		return "(ì˜ë ¥ 2, ì‹ ì•™)";		
 	case SKL_MINORIKO_1:
-		return "(¿µ·Â 3, P ¾à°£, ½Å¾Ó)";
+		return "(ì˜ë ¥ 3, P ì•½ê°„, ì‹ ì•™)";
 	case SKL_BYAKUREN_1:
-		return "(½Å¾Ó)";
+		return "(ì‹ ì•™)";
 	case SKL_YUUGI_1:
-		return "(¹°¾à, ½Å¾Ó)";
+		return "(ë¬¼ì•½, ì‹ ì•™)";
 	case SKL_YUUGI_2:
-		return "(½Å¾Ó, P ¼Ò·®)";
+		return "(ì‹ ì•™, P ì†ŒëŸ‰)";
 	case SKL_YUUGI_3:
-		return "(½Å¾Ó, P ¼Ò·®)";
+		return "(ì‹ ì•™, P ì†ŒëŸ‰)";
 	case SKL_YUUGI_4:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_YUUGI_5:
-		return "(½Å¾Ó, P ´ë·®)";
+		return "(ì‹ ì•™, P ëŒ€ëŸ‰)";
 	case SKL_KANAKO_2:
-		return "(¿µ·Â 3, ½Å¾Ó)";
+		return "(ì˜ë ¥ 3, ì‹ ì•™)";
 	case SKL_BYAKUREN_2:
-		return "(¿µ·Â 4, ½Å¾Ó)";
+		return "(ì˜ë ¥ 4, ì‹ ì•™)";
 	case SKL_KANAKO_3:
-		return "(¿µ·Â 4, ½Å¾Ó)";
+		return "(ì˜ë ¥ 4, ì‹ ì•™)";
 	case SKL_EIRIN_0:
-		return "(¹°¾à, P ¾à°£)";
+		return "(ë¬¼ì•½, P ì•½ê°„)";
 	case SKL_EIRIN_1:
-		return "(½Å¾Ó)";
+		return "(ì‹ ì•™)";
 	case SKL_EIRIN_2:
-		return "(¿µ·Â 5, ½Å¾Ó, P ´ë·®)";	
+		return "(ì˜ë ¥ 5, ì‹ ì•™, P ëŒ€ëŸ‰)";	
 	case SKL_MINORIKO_2:
-		return "(À½½Ä, ¿µ·Â 5, P ´ë·®, ½Å¾Ó)";	
+		return "(ìŒì‹, ì˜ë ¥ 5, P ëŒ€ëŸ‰, ì‹ ì•™)";	
 	case SKL_SIZUHA_1:
-		return "(¿µ·Â 4, ½Å¾Ó)";
+		return "(ì˜ë ¥ 4, ì‹ ì•™)";
 	case SKL_SIZUHA_2:
-		return "(½Å¾Ó)";
+		return "(ì‹ ì•™)";
 	case SKL_SIZUHA_3:
-		return "(ÇÑ¹ø¸¸)";
+		return "(í•œë²ˆë§Œ)";
 	case SKL_LEVITATION:
-		return "(¿µ·Â 2, P ¼Ò·®)";
+		return "(ì˜ë ¥ 2, P ì†ŒëŸ‰)";
 	case SKL_INVISIBLE:
-		return "(¿µ·Â 2, P ¾à°£)";
+		return "(ì˜ë ¥ 2, P ì•½ê°„)";
 	case SKL_SATORI_1:
-		return "(¿µ·Â 2, ½Å¾Ó)";	
+		return "(ì˜ë ¥ 2, ì‹ ì•™)";	
 	case SKL_SATORI_2:
-		return "(¿µ·Â 5, ½Ã°£, ½Å¾Ó)";	
+		return "(ì˜ë ¥ 5, ì‹œê°„, ì‹ ì•™)";	
 	case SKL_SHINKI_1:
-		return "(½Å¾Ó, P ¼Ò·®)";
+		return "(ì‹ ì•™, P ì†ŒëŸ‰)";
 	case SKL_SHINKI_2:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_SHINKI_3:
-		return "(½Å¾Ó, P ´ë·®)";
+		return "(ì‹ ì•™, P ëŒ€ëŸ‰)";
 	case SKL_YUYUKO_1:
-		return "(¿µ·Â 2, P ¼Ò·®)";
+		return "(ì˜ë ¥ 2, P ì†ŒëŸ‰)";
 	case SKL_YUYUKO_2:
-		return "(¿µ·Â 3, ½Å¾Ó)";
+		return "(ì˜ë ¥ 3, ì‹ ì•™)";
 	case SKL_YUYUKO_3:
-		return "(¿µ·Â 5, ½Å¾Ó)";
+		return "(ì˜ë ¥ 5, ì‹ ì•™)";
 	case SKL_YUKARI_1:
-		return "(¿µ·Â 2, ½Å¾Ó)";
+		return "(ì˜ë ¥ 2, ì‹ ì•™)";
 	case SKL_YUKARI_2:
-		return "(¿µ·Â 4, ½Å¾Ó)";
+		return "(ì˜ë ¥ 4, ì‹ ì•™)";
 	case SKL_YUKARI_3:
-		return "(¿µ·Â 3, ½Å¾Ó)";
+		return "(ì˜ë ¥ 3, ì‹ ì•™)";
 	case SKL_YUKARI_4:
-		return "(¿µ·Â 6, ½Å¾Ó)";
+		return "(ì˜ë ¥ 6, ì‹ ì•™)";
 	case SKL_SWAKO_JUMP:
-		return "(¿µ·Â 2, P ¼Ò·®)";
+		return "(ì˜ë ¥ 2, P ì†ŒëŸ‰)";
 	case SKL_SWAKO_TEMPLE:
-		return "(P ´ë·®)";
+		return "(P ëŒ€ëŸ‰)";
 	case SKL_SWAKO_WATER_GUN:
-		return "(¿µ·Â 1)";
+		return "(ì˜ë ¥ 1)";
 	case SKL_SWAKO_TOUGUE:
-		return "(¿µ·Â 2, P ¼Ò·®)";
+		return "(ì˜ë ¥ 2, P ì†ŒëŸ‰)";
 	case SKL_SWAKO_CURSE:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_SWAKO_DIGGING:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_SWAKO_SUMMON_FLOG:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_SWAKO_STATUE:
-		return "(½Å¾Ó, P ¾à°£)";
+		return "(ì‹ ì•™, P ì•½ê°„)";
 	case SKL_SWAKO_RAIN:
-		return "(½Å¾Ó, P ´ë·®)";
+		return "(ì‹ ì•™, P ëŒ€ëŸ‰)";
 	case SKL_SWAKO_SLEEP:
-		return "(½Å¾Ó, P ´ë·®)";
+		return "(ì‹ ì•™, P ëŒ€ëŸ‰)";
 	case SKL_SWAKO_MISYAGUZI:
-		return "(½Å¾Ó, P ´ë·®)";
+		return "(ì‹ ì•™, P ëŒ€ëŸ‰)";
 	case SKL_HINA_1:
-		return "(P ¼Ò·®)";
+		return "(P ì†ŒëŸ‰)";
 	case SKL_HINA_2:
-		return "(ÀúÁÖ)";
+		return "(ì €ì£¼)";
 	case SKL_HINA_3:
-		return "(ÀúÁÖ)";
+		return "(ì €ì£¼)";
 	case SKL_HINA_4:
-		return "(ÀúÁÖ)";
+		return "(ì €ì£¼)";
 	case SKL_HINA_5:
-		return "(ÇÑ¹ø¸¸)";
+		return "(í•œë²ˆë§Œ)";
 	case SKL_JUMPING_ATTACK:
-		return "(P ¾à°£)";
+		return "(P ì•½ê°„)";
 	case SKL_BREATH:
-		return "(P ¼Ò·®)";
+		return "(P ì†ŒëŸ‰)";
 	case SKL_TORMENT:
-		return "(¿µ·Â 6, P ´ë·®)";
+		return "(ì˜ë ¥ 6, P ëŒ€ëŸ‰)";
 	case SKL_SEIJA_1:
-		return "(P ¾à°£)";
+		return "(P ì•½ê°„)";
 	case SKL_SEIJA_2:
-		return "(P ´ë·®)";
+		return "(P ëŒ€ëŸ‰)";
 	case SKL_LILLY_1:
-		return "(¾øÀ½)";
+		return "(ì—†ìŒ)";
 	case SKL_LILLY_2:
-		return "(¿µ·Â 2)";
+		return "(ì˜ë ¥ 2)";
 	case SKL_LILLY_3:
-		return "(¿µ·Â 3, P ¾à°£)";
+		return "(ì˜ë ¥ 3, P ì•½ê°„)";
 	case SKL_LILLY_4:
-		return "(¿µ·Â 5, P ´ë·®)";
+		return "(ì˜ë ¥ 5, P ëŒ€ëŸ‰)";
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
-		return "(¿µ·Â 1)";
+		return "(ì˜ë ¥ 1)";
 	case SKL_OKINA_1:
-		return "(¿µ·Â 2, P ¾à°£)";
+		return "(ì˜ë ¥ 2, P ì•½ê°„)";
 	case SKL_OKINA_2:
-		return "(¿µ·Â 2, ½Å¾Ó)";
+		return "(ì˜ë ¥ 2, ì‹ ì•™)";
 	case SKL_OKINA_3:
-		return "(¿µ·Â 3, ½Å¾Ó)";
+		return "(ì˜ë ¥ 3, ì‹ ì•™)";
 	case SKL_OKINA_4:
-		return "(½Å¾Ó)";
+		return "(ì‹ ì•™)";
 	case SKL_OKINA_5:
-		return "(¿µ·Â 6, ½Å¾Ó)";
+		return "(ì˜ë ¥ 6, ì‹ ì•™)";
 	case SKL_JUNKO_1:
-		return "(¿µ·Â 1, P ¼Ò·®)";
+		return "(ì˜ë ¥ 1, P ì†ŒëŸ‰)";
 	case SKL_JUNKO_2:
-		return "(¿µ·Â 3, P ¾à°£)";
+		return "(ì˜ë ¥ 3, P ì•½ê°„)";
 	case SKL_JUNKO_3:
-		return "(¿µ·Â 5, P ´ë·®)";
+		return "(ì˜ë ¥ 5, P ëŒ€ëŸ‰)";
 	case SKL_JOON_AND_SION_1:
-		return "(¾øÀ½)";
+		return "(ì—†ìŒ)";
 	case SKL_JOON_AND_SION_2:
-		return "(¿µ·Â 5, ºùÀÇÁß ÇÑ¹ø¸¸)";
+		return "(ì˜ë ¥ 5, ë¹™ì˜ì¤‘ í•œë²ˆë§Œ)";
 	case SKL_JOON_AND_SION_3:
-		return "(¿µ·Â 5, ºùÀÇÁß ÇÑ¹ø¸¸)";
+		return "(ì˜ë ¥ 5, ë¹™ì˜ì¤‘ í•œë²ˆë§Œ)";
 	case SKL_JOON_AND_SION_4:
-		return "(½Å¾Ó)";
+		return "(ì‹ ì•™)";
 	case SKL_JOON_AND_SION_OFF:
-		return "(¾øÀ½)";
+		return "(ì—†ìŒ)";
 	case SKL_MIKO_1:
-		return "(Ãş¸¶´Ù ÇÑ¹ø¸¸)";
+		return "(ì¸µë§ˆë‹¤ í•œë²ˆë§Œ)";
 	case SKL_MIKO_2:
-		return "(ÀÎ±âµµ 2%)";
+		return "(ì¸ê¸°ë„ 2%)";
 	case SKL_MIKO_3:
-		return "(ÀÎ±âµµ 5%)";
+		return "(ì¸ê¸°ë„ 5%)";
 	case SKL_MIKO_4:
-		return "(ÀÎ±âµµ 15%)";
+		return "(ì¸ê¸°ë„ 15%)";
 	case SKL_MIKO_5:
-		return "(ÀÎ±âµµ 50%)";
+		return "(ì¸ê¸°ë„ 50%)";
 	case SKL_MIKO_6:
-		return "(ÀÎ±âµµ 100%)";
+		return "(ì¸ê¸°ë„ 100%)";
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
@@ -1796,7 +1796,7 @@ const char* SkillCostString(skill_list skill)
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
 	default:
-		return "(¾øÀ½)";
+		return "(ì—†ìŒ)";
 	}
 }
 int GetSpellBombRange(skill_list skill)
@@ -1835,7 +1835,7 @@ void SkillUse(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if(you.currentSkillNum)
@@ -1852,16 +1852,16 @@ void SkillUse(char auto_)
 				int num = (key_ >= 'A' && key_ <= 'Z')?(key_-'A'+26):(key_-'a');
 				if(skill_list skill_ = (skill_list)you.MemorizeSkill[num])
 				{
-					if(!GetDisplayMove()) //½ºÅ³»ç¿ë
+					if(!GetDisplayMove()) //ìŠ¤í‚¬ì‚¬ìš©
 					{
 						if(you.pure_mp && SkillMana(skill_)>=you.GetMp())
 						{
-							printlog("´õ ÀÌ»ó ¼øÈ­µÈ ¸¶·ÂÀ» »ç¿ëÇÏ¸é Á×À»°Å¾ß!", true, false, false, CL_normal);
+							printlog("ë” ì´ìƒ ìˆœí™”ëœ ë§ˆë ¥ì„ ì‚¬ìš©í•˜ë©´ ì£½ì„ê±°ì•¼!", true, false, false, CL_normal);
 							break;
 						}
 						else if(SkillMana(skill_)>you.GetMp())
 						{
-							printlog("´ç½ÅÀÇ ¿µ·ÂÀÌ ¸ğÀÚ¶õ´Ù.",true,false,false,CL_normal);	
+							printlog("ë‹¹ì‹ ì˜ ì˜ë ¥ì´ ëª¨ìë€ë‹¤.",true,false,false,CL_normal);	
 							break;
 						}
 						if(!SkillFlagCheck(skill_, S_FLAG_IMMEDIATELY))
@@ -1899,7 +1899,7 @@ void SkillUse(char auto_)
 							if(int succece_ =  UseSkill(skill_, false, you.position))
 							{
 								if(succece_ != 2)
-								{ //2´Â »ç¿ë¿¡ ½ÇÆĞÇÑ°ÍÀÌ´Ù. ¸¶¹ıÀÌ ¾Æ´Ï¸é »ç¿ë¿¡ ½ÇÆĞÇÏ¸é ÅÏ¸¸ ¼Ò¸ğ
+								{ //2ëŠ” ì‚¬ìš©ì— ì‹¤íŒ¨í•œê²ƒì´ë‹¤. ë§ˆë²•ì´ ì•„ë‹ˆë©´ ì‚¬ìš©ì— ì‹¤íŒ¨í•˜ë©´ í„´ë§Œ ì†Œëª¨
 									SkillPlusCost(skill_,false);
 									if(SkillMana(skill_))
 										you.MpUpDown(-SkillMana(skill_));
@@ -1916,7 +1916,7 @@ void SkillUse(char auto_)
 							break;
 						}
 					}
-					else //¼³¸íº¸±â
+					else //ì„¤ëª…ë³´ê¸°
 					{
 						WaitForSingleObject(mutx, INFINITE);
 						SetText() = GetSkillInfor(skill_);
@@ -1938,5 +1938,5 @@ void SkillUse(char auto_)
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("¾ÆÁ÷ ¾Ë°íÀÖ´Â ´É·ÂÀÌ ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì•„ì§ ì•Œê³ ìˆëŠ” ëŠ¥ë ¥ì´ ì—†ë‹¤.",true,false,false,CL_normal);	
 }

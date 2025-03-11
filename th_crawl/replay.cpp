@@ -1,11 +1,10 @@
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// íŒŒì¼ì´ë¦„: replay.cpp
+//
+// ë‚´ìš©: ë¦¬í”Œë ˆì´
+//
 //////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// ÆÄÀÏÀÌ¸§: replay.cpp
-//
-// ³»¿ë: ¸®ÇÃ·¹ÀÌ
-//
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 #include <direct.h>
@@ -16,6 +15,7 @@
 #include "map.h"
 #include "save.h"
 #include "key.h"
+#include <windows.h>
 
 typedef struct _finddata_t  FILE_SEARCH;
 
@@ -23,7 +23,7 @@ typedef struct _finddata_t  FILE_SEARCH;
 extern const char *version_string;
 
 replay_class ReplayClass;
-
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 replay_class::~replay_class()
 {
@@ -103,65 +103,53 @@ void replay_class::init_replay(const char* name)
 
 bool replay_class::SaveReplayStart()
 {
-	if(!init || play)
-		return false;
+    if (!init || play)
+        return false;
 
-	char filename[512];
-	mkdir("replay");
-	FILE *fp;  
-	struct tm *t;
-	time_t now;
-	time(&now);
-	t=localtime(&now);
+    _mkdir("replay");  // Windowsì—ì„œ mkdir ëŒ€ì‹  _mkdir ì‚¬ìš©
 
+    FILE* fp = nullptr;
+    struct tm* t;
+    time_t now;
+    time(&now);
+    t = localtime(&now);
+
+    if (replay_string.empty()) {
+        replay_string = "replay/temp.rpy";
+    }
 	
-	if(replay_string.empty()){
-		sprintf_s(filename,512,"replay/temp.rpy");
-		//sprintf_s(filename,1024,"replay/%s-%04d%02d%02d-%02d%02d%02d.txt",you.user_name.name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
-		replay_string = filename;
-	}
+    std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
 
+    if (_wfopen_s(&fp, wfilename.c_str(), L"wb") != 0 || !fp) {
+        return false;
+    }
 
-	sprintf_s(filename,512,"%s",replay_string.c_str());
-	
+    fwrite(&infor, sizeof(base_infor), 1, fp);
+    fclose(fp);
 
-	
-	fp = fopen(filename,"wb");
-	
-
-	fwrite(&infor,sizeof(base_infor),1,fp);
-
-	
-
-	fclose(fp);
-
-
-	return true;
+    return true;
 }
 
 
 
 
 bool replay_class::SaveReplayInput(DWORD time_, int key_)
-{	
-	if(!init || play)
-		return false;
+{
+    if (!init || play)
+        return false;
 
-	if(!replay_string.empty()){
-		
-		char filename[512];
-		FILE *fp;  
-		sprintf_s(filename,512,"%s",replay_string.c_str());
-		fp = fopen(filename,"ab");
-		if(fp)
-		{
-			fwrite(&time_,sizeof(DWORD),1,fp);
-			fwrite(&key_,sizeof(unsigned int),1,fp);
-		}		
-		fclose(fp);
+    if (!replay_string.empty()) {
+        FILE* fp = nullptr;
+        std::wstring wfilename = ConvertUTF8ToUTF16(replay_string); // UTF-8 â†’ UTF-16 ë³€í™˜
 
-	}
-	return true;
+        // UTF-16 ê²½ë¡œë¥¼ ì‚¬ìš©í•˜ì—¬ íŒŒì¼ ì—´ê¸° (append binary mode)
+        if (_wfopen_s(&fp, wfilename.c_str(), L"ab") == 0 && fp) {
+            fwrite(&time_, sizeof(DWORD), 1, fp);
+            fwrite(&key_, sizeof(unsigned int), 1, fp);
+            fclose(fp);
+        }
+    }
+    return true;
 }
 
 
@@ -250,12 +238,12 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
 bool replay_class::StopReplay(const char* str)
 {
 	if(play)
-	{//¸¸¾à ¸®ÇÃ·¹ÀÌ¸ğµå·Î ½ÇÇàÁßÀÏ¶§!
+	{//ë§Œì•½ ë¦¬í”Œë ˆì´ëª¨ë“œë¡œ ì‹¤í–‰ì¤‘ì¼ë•Œ!
 		auto_key = false;
 		init = false;
 	}
 	else if(init)
-	{//±×°Ô ¾Æ´Ï¸é ¸®ÇÃ·¹ÀÌ ÀúÀåÁßÀÏ°ÍÀÌ´Ù.
+	{//ê·¸ê²Œ ì•„ë‹ˆë©´ ë¦¬í”Œë ˆì´ ì €ì¥ì¤‘ì¼ê²ƒì´ë‹¤.
 		strcpy_s(infor.infor,256,str);
 		
 		char filename[512];
@@ -359,7 +347,7 @@ bool replay_menu(int value_)
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub(blank,false,CL_warning);
-			printsub("¸®ÇÃ·¹ÀÌ ¸ñ·Ï!",true,CL_help);
+			printsub("ë¦¬í”Œë ˆì´ ëª©ë¡!",true,CL_help);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 
@@ -391,7 +379,7 @@ bool replay_menu(int value_)
 
 					{
 						char temp[128];
-						sprintf_s(temp,128,"%d³â %d¿ù %dÀÏ %d½Ã %dºĞ",stC.wYear, stC.wMonth,stC.wDay, stC.wHour, stC.wMinute);
+						sprintf_s(temp,128,"%dë…„ %dì›” %dì¼ %dì‹œ %dë¶„",stC.wYear, stC.wMonth,stC.wDay, stC.wHour, stC.wMinute);
 						printsub(temp,true,CL_help);
 					}
 
@@ -408,14 +396,14 @@ bool replay_menu(int value_)
 			{
 			
 				printsub(blank,false,CL_warning);
-				printsub("ÆÄÀÏÀÌ ¾ø¾î¿ä!",true,CL_danger);
+				printsub("íŒŒì¼ì´ ì—†ì–´ìš”!",true,CL_danger);
 				printsub("",true,CL_normal);
 
 			}
 			
 			{
 				char temp[128];
-				sprintf_s(temp,128,"%dÆäÀÌÁö",page+1);
+				sprintf_s(temp,128,"%dí˜ì´ì§€",page+1);
 				printsub(blank,false,CL_warning);
 				printsub(temp,true,CL_help);
 			}

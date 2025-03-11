@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: evoke.cpp
+// íŒŒì¼ì´ë¦„: evoke.cpp
 //
-// ³»¿ë: ¹ßµ¿ÅÛµé
+// ë‚´ìš©: ë°œë™í…œë“¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,14 +21,14 @@
 
 const char *evoke_string[EVK_MAX]=
 {
-	"º¸Å¾",
-	"¿¡¾îµÎ·ç¸¶¸®",
-	"¸ùÈ¥",
-	"4Ã´ ¸ÅÁ÷º½",
-	"¿ÀÄí¸®ÃİÄ£",
-	"°øÁß¾î·Ú",
-	"¿ä¼ú¸ÁÄ¡",
-	"Ä«¸Ş¶ó"
+	"ë³´íƒ‘",
+	"ì—ì–´ë‘ë£¨ë§ˆë¦¬",
+	"ëª½í˜¼",
+	"4ì²™ ë§¤ì§ë´„",
+	"ì˜¤ì¿ ë¦¬ìµ¸ì¹œ",
+	"ê³µì¤‘ì–´ë¢°",
+	"ìš”ìˆ ë§ì¹˜",
+	"ì¹´ë©”ë¼"
 };
 const bool evoke_string_is[EVK_MAX]=
 {
@@ -99,19 +99,19 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
 	{
-		printlog("´ç½ÅÀº È¥¶õ½º·´´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ í˜¼ë€ìŠ¤ëŸ½ë‹¤.",true,false,false,CL_normal);
 		return false;
 	}
 
 	if(you.power < Evokeusepower(kind,true))
 	{
-		printlog("¹ßµ¿ÇÏ±â¿£ ´ç½ÅÀÇ P°¡ ¸ğÀÚ¶õ´Ù.",true,false,false,CL_small_danger);	
+		printlog("ë°œë™í•˜ê¸°ì—” ë‹¹ì‹ ì˜ Pê°€ ëª¨ìë€ë‹¤.",true,false,false,CL_small_danger);	
 		return false;
 	}
 
 	if(randA(99) >= EvokeSuccece(kind))
 	{		
-		printlog("¾Æ¹«·± ÀÏµµ ÀÏ¾î³ªÁö ¾Ê¾Ò´Ù.",true,false,false,CL_normal);	
+		printlog("ì•„ë¬´ëŸ° ì¼ë„ ì¼ì–´ë‚˜ì§€ ì•Šì•˜ë‹¤.",true,false,false,CL_normal);	
 		return true;
 	}
 
@@ -271,10 +271,10 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	if(target == you.position && !EvokeFlagCheck(kind,S_FLAG_SEIF) && !EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		if (kind == EVK_CAMERA) {
-			printlog("¼¿Ä«¸¦ ÂïÀ»²¨¾ß?", true, false, false, CL_small_danger);
+			printlog("ì…€ì¹´ë¥¼ ì°ì„êº¼ì•¼?", true, false, false, CL_small_danger);
 		}
 		else {
-			printlog("ÀÚ»ìÇÒ°Å¾ß?", true, false, false, CL_small_danger);
+			printlog("ìì‚´í• ê±°ì•¼?", true, false, false, CL_small_danger);
 		}
 		return false;
 	}
@@ -287,7 +287,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		{
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
-				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("·¹ÀÌÀú",false));
+				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("ë ˆì´ì €",false));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -303,10 +303,10 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	case EVK_AIR_SCROLL:
 		{
 			soundmanager.playSound("buff");
-			printlog("¿¡¾îµÎ·ç¸¶¸®·ÎºÎÅÍ ¿µ·ÂÀ» ¾ò¾ú´Ù!",false,false,false,CL_normal);
+			printlog("ì—ì–´ë‘ë£¨ë§ˆë¦¬ë¡œë¶€í„° ì˜ë ¥ì„ ì–»ì—ˆë‹¤!",false,false,false,CL_normal);
 			int value_ = 8 + level_ / 3 + randA(3 + level_ / 3);
 			you.MpUpDown(value_);
-			//¹ßµ¿0 8~11¿¡¼­ ¹ßµ¿¸¸·¾ 17~29
+			//ë°œë™0 8~11ì—ì„œ ë°œë™ë§Œë ™ 17~29
 			return true;
 		}
 	case EVK_DREAM_SOUL:
@@ -321,7 +321,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				}
 			}
 			soundmanager.playSound("summon");
-			printarray(true,false,false,CL_normal,3,"´ç½ÅÀº ",s_.c_str(),"ÀÇ ²ŞÀ» ºÒ·¯³Â´Ù!");
+			printarray(true,false,false,CL_normal,3,"ë‹¹ì‹ ì€ ",s_.c_str(),"ì˜ ê¿ˆì„ ë¶ˆëŸ¬ëƒˆë‹¤!");
 			return true;
 		}
 	case EVK_MAGIC_HAMMER:
@@ -340,11 +340,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				int percent_ = 9;
 				int select_ = 0;
 				deletelog();
-				printlog("¿ä¼ú¸ÁÄ¡·Î ¹«½¼ ¼Ò¿øÀ» ºô°Å¾ß?", true, false, true, CL_help);
-				printlog("a - ³¯ È¸º¹½ÃÄÑÁà!", true, false, true, CL_normal);
-				printlog("b - ³¯ °­ÇÏ°Ô ¸¸µé¾îÁà!", true, false, true, CL_normal);
-				printlog("c - ¸¹Àº µ¿·á¸¦ ¿øÇØ!", true, false, true, CL_normal);
-				printlog("d - º¸¹°À» ¿øÇØ!", true, false, true, CL_normal);
+				printlog("ìš”ìˆ ë§ì¹˜ë¡œ ë¬´ìŠ¨ ì†Œì›ì„ ë¹Œê±°ì•¼?", true, false, true, CL_help);
+				printlog("a - ë‚  íšŒë³µì‹œì¼œì¤˜!", true, false, true, CL_normal);
+				printlog("b - ë‚  ê°•í•˜ê²Œ ë§Œë“¤ì–´ì¤˜!", true, false, true, CL_normal);
+				printlog("c - ë§ì€ ë™ë£Œë¥¼ ì›í•´!", true, false, true, CL_normal);
+				printlog("d - ë³´ë¬¼ì„ ì›í•´!", true, false, true, CL_normal);
 				int key_ = waitkeyinput();
 				switch (key_) {
 					case 'a':
@@ -355,7 +355,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							you.HpUpDown(you.GetMaxHp() - you.GetHp(), DR_EFFECT);
 							if (!you.pure_mp)
 								you.MpUpDown(you.GetMaxMp() - you.GetMp());
-							printlog("¿ä¼ú¸ÁÄ¡°¡ ´ç½ÅÀ» ÃÖ´ë·Î È¸º¹½ÃÄ×´Ù!", true, false, false, CL_good);
+							printlog("ìš”ìˆ ë§ì¹˜ê°€ ë‹¹ì‹ ì„ ìµœëŒ€ë¡œ íšŒë³µì‹œì¼°ë‹¤!", true, false, false, CL_good);
 							loop_ = false;
 						}
 						else {
@@ -363,7 +363,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							if (!you.pure_mp)
 								you.MpUpDown(-you.GetMp());
 							soundmanager.playSound("laugh");
-							printlog("¿ä¼ú¸ÁÄ¡ÀÇ ¸¶·ÂÀÌ ¿ª·ùÇÏ¿´´Ù! ´ç½ÅÀÇ Ã¼·Â°ú ¿µ·ÂÀÌ »¡·Áµé¾ú´Ù!", true, false, false, CL_danger);
+							printlog("ìš”ìˆ ë§ì¹˜ì˜ ë§ˆë ¥ì´ ì—­ë¥˜í•˜ì˜€ë‹¤! ë‹¹ì‹ ì˜ ì²´ë ¥ê³¼ ì˜ë ¥ì´ ë¹¨ë ¤ë“¤ì—ˆë‹¤!", true, false, false, CL_danger);
 							loop_ = false;
 						}
 						break;
@@ -373,7 +373,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						if (randA(percent_)) {
 							soundmanager.playSound("buff");
 							you.SetForceStrong(true, rand_int(30, 60), true);
-							printlog("¿ä¼ú¸ÁÄ¡°¡ ´ç½ÅÀ» °­ÇÏ°Ô ¸¸µé¾ú´Ù!", true, false, false, CL_good);
+							printlog("ìš”ìˆ ë§ì¹˜ê°€ ë‹¹ì‹ ì„ ê°•í•˜ê²Œ ë§Œë“¤ì—ˆë‹¤!", true, false, false, CL_good);
 							loop_ = false;
 						}
 						else {
@@ -381,7 +381,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							you.SetSlow(time_);
 							you.SetForceStrong(false, time_, true);
 							soundmanager.playSound("laugh");
-							printlog("¿ä¼ú¸ÁÄ¡ÀÇ ¸¶·ÂÀÌ ¿ª·ùÇÏ¿´´Ù! ´ç½ÅÀº ¾àÇØÁ³´Ù!", true, false, false, CL_danger);
+							printlog("ìš”ìˆ ë§ì¹˜ì˜ ë§ˆë ¥ì´ ì—­ë¥˜í•˜ì˜€ë‹¤! ë‹¹ì‹ ì€ ì•½í•´ì¡Œë‹¤!", true, false, false, CL_danger);
 							loop_ = false;
 						}
 						break;
@@ -413,11 +413,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						}
 						if (good_) {
 							soundmanager.playSound("buff");
-							printlog("¿ä¼ú¸ÁÄ¡°¡ µ¿·áµéÀ» ºÒ·¯³Â´Ù!", true, false, false, CL_good);
+							printlog("ìš”ìˆ ë§ì¹˜ê°€ ë™ë£Œë“¤ì„ ë¶ˆëŸ¬ëƒˆë‹¤!", true, false, false, CL_good);
 						}
 						else {
 							soundmanager.playSound("laugh");
-							printlog("¿ä¼ú¸ÁÄ¡ÀÇ ¸¶·ÂÀÌ ¿ª·ùÇÏ¿´´Ù! µ¿·á°¡ ¸ğµÎ Àû´ëÀûÀ¸·Î º¯Çß´Ù!", true, false, false, CL_danger);
+							printlog("ìš”ìˆ ë§ì¹˜ì˜ ë§ˆë ¥ì´ ì—­ë¥˜í•˜ì˜€ë‹¤! ë™ë£Œê°€ ëª¨ë‘ ì ëŒ€ì ìœ¼ë¡œ ë³€í–ˆë‹¤!", true, false, false, CL_danger);
 						}
 						loop_ = false;
 						break;
@@ -428,7 +428,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						if (randA(percent_)) {
 							HammerPresent();
 							soundmanager.playSound("buff");
-							printlog("¿ä¼ú¸ÁÄ¡°¡ º¸¹°À» ¸¸µé¾î³Â´Ù!", true, false, false, CL_good);
+							printlog("ìš”ìˆ ë§ì¹˜ê°€ ë³´ë¬¼ì„ ë§Œë“¤ì–´ëƒˆë‹¤!", true, false, false, CL_good);
 						}
 						else {
 							returnHammerItem();
@@ -451,14 +451,14 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 								}
 							}
 							soundmanager.playSound("laugh");
-							printlog("¿ä¼ú¸ÁÄ¡ÀÇ ¸¶·ÂÀÌ ¿ª·ùÇÏ¿´´Ù! º¸¹°ÀÌ ¸ğµÎ È¸¼öµÇ¾ú´Ù!", true, false, false, CL_danger);
+							printlog("ìš”ìˆ ë§ì¹˜ì˜ ë§ˆë ¥ì´ ì—­ë¥˜í•˜ì˜€ë‹¤! ë³´ë¬¼ì´ ëª¨ë‘ íšŒìˆ˜ë˜ì—ˆë‹¤!", true, false, false, CL_danger);
 						}
 
 						loop_ = false;
 						break;
 					}
 					case VK_ESCAPE:
-						printlog("Ãë¼ÒÇß´Ù.", true, false, false, CL_normal);
+						printlog("ì·¨ì†Œí–ˆë‹¤.", true, false, false, CL_normal);
 						return false;
 					default:
 						break;
@@ -490,7 +490,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		if (env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_SEA || 
 			env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_LAVA) {
 			soundmanager.playSound("water");
-			printlog("4Ã´ ¸ÅÁ÷º½Àº ¹°¿¡ ºüÁ®¹ö·È´Ù. ", true, false, false, CL_normal);
+			printlog("4ì²™ ë§¤ì§ë´„ì€ ë¬¼ì— ë¹ ì ¸ë²„ë ¸ë‹¤. ", true, false, false, CL_normal);
 
 		}
 		else if (monster *mon_ = BaseSummon(MON_BOMB, 10, true, false, 2, &you, final_postion_, SKD_OTHER, -1))
@@ -505,12 +505,12 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	{
 		soundmanager.playSound("ufo");
 		if (you.s_evoke_ghost) {
-			printlog("´ç½ÅÀº ¿ÀÄí¸®ÃİÄ£À¸·ÎºÎÅÍ ¼ÕÀ» ³õ¾Ò´Ù. ", true, false, false, CL_magic);
+			printlog("ë‹¹ì‹ ì€ ì˜¤ì¿ ë¦¬ìµ¸ì¹œìœ¼ë¡œë¶€í„° ì†ì„ ë†“ì•˜ë‹¤. ", true, false, false, CL_magic);
 			you.PowUpDown(50, true);
 			you.SetEvokeGhost(0);
 		}
 		else {
-			printlog("´ç½ÅÀº »ı¸í·ÂÀ» ´ë°¡·Î À¯·ÉÈ­ÇÏ¿´´Ù! ÇÑ¹ø ´õ ¹ßµ¿ÇØ¼­ ÇØÁ¦ÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_magic);
+			printlog("ë‹¹ì‹ ì€ ìƒëª…ë ¥ì„ ëŒ€ê°€ë¡œ ìœ ë ¹í™”í•˜ì˜€ë‹¤! í•œë²ˆ ë” ë°œë™í•´ì„œ í•´ì œí•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_magic);
 			float bonus_ = 1.0f - (1.0f * level_ / 27);
 			int hp_ = min(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
 			you.HpUpDown(-hp_, DR_EFFECT);
@@ -522,7 +522,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("°øÁß¾î·Ú", false));
+			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("ê³µì¤‘ì–´ë¢°", false));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -541,17 +541,17 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 		if (goal_ == NULL ||
 			!goal_->isView()) {
-			printlog("Çã°øÀ» ÂïÀ» ¿©À¯´Â ¾ø´Ù. ", true, false, false, CL_normal);
+			printlog("í—ˆê³µì„ ì°ì„ ì—¬ìœ ëŠ” ì—†ë‹¤. ", true, false, false, CL_normal);
 			return false;
 		}
 		if (!goal_->isplayer()) {
 			monster* mon_ = (monster*)goal_;
 			if (!mon_->isUnique()) {
-				printlog("Á» ´õ ÀÌ»Û ¹Ì¼Ò³à¸¦ Âï°í ½ÍÀºµ¥. ", true, false, false, CL_normal);
+				printlog("ì¢€ ë” ì´ìœ ë¯¸ì†Œë…€ë¥¼ ì°ê³  ì‹¶ì€ë°. ", true, false, false, CL_normal);
 				return false;
 			}
 			if (mon_->id == MON_FORTUNE_TELLER) {
-				printlog("³²ÀÚ´Â Âï°í ½ÍÁö ¾Ê¾Æ. ", true, false, false, CL_danger);
+				printlog("ë‚¨ìëŠ” ì°ê³  ì‹¶ì§€ ì•Šì•„. ", true, false, false, CL_danger);
 				return false;
 			}
 		}
@@ -572,26 +572,26 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				if (unit_)
 				{
 					if ((*temp) != target && unit_->isView()) {
-						printlog("´©±º°¡°¡ »çÁøÀ» Âï´Â°É ¹æÇØÇÏ°í ÀÖ¾î! ", true, false, false, CL_normal);
+						printlog("ëˆ„êµ°ê°€ê°€ ì‚¬ì§„ì„ ì°ëŠ”ê±¸ ë°©í•´í•˜ê³  ìˆì–´! ", true, false, false, CL_normal);
 						return false;
 					}
 					if (unit_ == goal_ && !unit_->isplayer()) {
 						monster* mon_ = (monster*)unit_;
 						env[current_level].MakeNoise(you.position, 8, NULL);
-						printlog("ÂûÄ¬! ", false, false, false, CL_warning);
+						printlog("ì°°ì¹µ! ", false, false, false, CL_warning);
 						soundmanager.playSound("camera");
 
 						if (mon_->id == MON_SAKUYA && !mon_->s_confuse
 							&& !mon_->s_paralyse &&  mon_->state.GetState() != MS_SLEEP)
 						{
 							if (you.s_the_world) {
-								printlog("³»°¡ ½Ã°£À» ¸ØÃß¾ú´Ù...", true, false, false, CL_warning);
+								printlog("ë‚´ê°€ ì‹œê°„ì„ ë©ˆì¶”ì—ˆë‹¤...", true, false, false, CL_warning);
 
 							}
 							else {
 								mon_->Blink(10);
 								if (mon_->position != target) {
-									printlog("±×·¯³ª ÃÔ¿µ ´ë»óÀÌ »ç¶óÁ³´Ù! ", true, false, false, CL_warning);
+									printlog("ê·¸ëŸ¬ë‚˜ ì´¬ì˜ ëŒ€ìƒì´ ì‚¬ë¼ì¡Œë‹¤! ", true, false, false, CL_warning);
 									return true;
 								}
 							}
@@ -607,7 +607,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 						item_infor t;
 						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
-						it->name.name = mon_->name.name + "ÀÇ " + it->name.name;
+						it->name.name = mon_->name.name + "ì˜ " + it->name.name;
 						it->value2 = mon_->id;
 						if (it->value2 == MON_KOKORO1 ||
 							it->value2 == MON_KOKORO2 ||
@@ -669,7 +669,7 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(4, 8 + power / 25);
 								int m_att_ = 4 * (8 + power / 25);
 
-								attack_infor temp_att(att_, m_att_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("¸ÅÁ÷º½", true));
+								attack_infor temp_att(att_, m_att_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("ë§¤ì§ë´„", true));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -699,7 +699,7 @@ void HammerPresent() {
 		it = env[current_level].MakeItem(you.position, makeitem((item_type)(rand_.pop()), 1, &t));
 		it->value4 += rand_int(0, 5);
 		if (!it->value5 && randA(2) > 1)
-			it->value5 = GetNewBrand(0); //Ä«³ªÄÚ´Â ½ÅÀÇ ºê·£µå´Â ¼±¹°ÇÏÁö ¾Ê´Â´Ù.
+			it->value5 = GetNewBrand(0); //ì¹´ë‚˜ì½”ëŠ” ì‹ ì˜ ë¸Œëœë“œëŠ” ì„ ë¬¼í•˜ì§€ ì•ŠëŠ”ë‹¤.
 		MakeArtifact(it, 1);
 	}
 	else if (kind_ == 2) {
@@ -709,14 +709,14 @@ void HammerPresent() {
 		it = jewelry_gift(false, false, true);
 	}
 	if (it != NULL) {
-		//10%ÀÇ È®·ü·Î È¸¼öÇØ°£´Ù.
+		//10%ì˜ í™•ë¥ ë¡œ íšŒìˆ˜í•´ê°„ë‹¤.
 		it->hamme_gift = true;
 	}
 }
 
 
 void returnHammerItem() {
-	//¾ÆÀÌÅÛ È¸¼ö
+	//ì•„ì´í…œ íšŒìˆ˜
 	for (int i = 0; i < MAXLEVEL; i++) {
 		for (auto it = env[i].item_list.begin(); it != env[i].item_list.end(); ) {
 			auto temp = it++;
@@ -750,19 +750,19 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 	random_extraction<int> branch_list_;
 	string msg_;
 	if(level_>=0)
-		branch_list_.push(0);//¿äÁ¤
+		branch_list_.push(0);//ìš”ì •
 	if(level_>=0)
-		branch_list_.push(1);//¿ä±«ÀÇ»ê
+		branch_list_.push(1);//ìš”ê´´ì˜ì‚°
 	if(level_>=6)
-		branch_list_.push(2);//È«¸¶°ü
+		branch_list_.push(2);//í™ë§ˆê´€
 	if(level_>=0)
-		branch_list_.push(3);//ÀµÄí¸®
+		branch_list_.push(3);//ìœ³ì¿ ë¦¬
 	if(level_>=0)
-		branch_list_.push(4);//¹Ì±ÃÀÇÁ×¸²
+		branch_list_.push(4);//ë¯¸ê¶ì˜ì£½ë¦¼
 	if(level_>=0)
-		branch_list_.push(5);//ÁöÀú
+		branch_list_.push(5);//ì§€ì €
 	if(level_>=6)
-		branch_list_.push(6);//¸¶°è
+		branch_list_.push(6);//ë§ˆê³„
 
 	int branch_ = branch_list_.pop();
 
@@ -777,7 +777,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 
 	switch(branch_)
 	{
-	case 0: //¿äÁ¤
+	case 0: //ìš”ì •
 		if(level_<=3)
 			mon_list_.push(MON_FAIRY_GREEN,4);
 		if(level_<=5)
@@ -796,9 +796,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_FAIRY_SOCERER,15);
 		if(level_>21)
 			mon_list_.push(MON_FAIRY_SUN_FLOWER,5);
-		msg_ = "¾È°³ÀÇ È£¼ö";
+		msg_ = "ì•ˆê°œì˜ í˜¸ìˆ˜";
 		break;
-	case 1: //¿ä±«»ê
+	case 1: //ìš”ê´´ì‚°
 		if(level_<=6)
 			mon_list_.push(MON_CROW,6);
 		if(level_<=13)
@@ -817,9 +817,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_HANATACA_TENGU,10);
 		if(level_>21)
 			mon_list_.push(MON_SANPEI_FIGHTER,3);
-		msg_ = "¿ä±«ÀÇ »ê";
+		msg_ = "ìš”ê´´ì˜ ì‚°";
 		break;
-	case 2: //È«¸¶°ü
+	case 2: //í™ë§ˆê´€
 		if(level_<=13)
 			mon_list_.push(MON_HOBGOBRIN,15);
 		if(level_<=16)
@@ -834,9 +834,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_VAMPIER_BAT,10);			
 		if(level_>21)
 			mon_list_.push(MON_CHUPARCABRA,3);
-		msg_ = "È«¸¶°ü";
+		msg_ = "í™ë§ˆê´€";
 		break;
-	case 3: //ÀµÄí¸®
+	case 3: //ìœ³ì¿ ë¦¬
 		if(level_<=9)
 			mon_list_.push(MON_REIMUYUKKURI,15);
 		if(level_<=16)
@@ -849,9 +849,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_YOUMUYUKKURI,2);
 		if(level_>21)
 			mon_list_.push(MON_ALICEYUKKURI,2);
-		msg_ = "ÀµÄí¸® µÕÁö";
+		msg_ = "ìœ³ì¿ ë¦¬ ë‘¥ì§€";
 		break;
-	case 4: //Á×¸²
+	case 4: //ì£½ë¦¼
 		if(level_<=12)
 			mon_list_.push(MON_RABBIT,10);
 		if(level_>6)
@@ -862,9 +862,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_RABIT_SUPPORT,3);
 		if(level_>15)
 			mon_list_.push(MON_RABIT_MAGIC,10);
-		msg_ = "¹Ì±ÃÀÇ Á×¸²";
+		msg_ = "ë¯¸ê¶ì˜ ì£½ë¦¼";
 		break;
-	case 5: //ÁöÀú
+	case 5: //ì§€ì €
 		if(level_<=8)
 			mon_list_.push(MON_CROW,6);
 		if(level_<=13)
@@ -881,9 +881,9 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(randA(1)?MON_ONI:MON_BLUE_ONI,8);
 		if(level_>24)
 			mon_list_.push(MON_FIRE_CAR,3);				
-		msg_ = "ÁöÀú";
+		msg_ = "ì§€ì €";
 		break;
-	case 6: //¸¶°è
+	case 6: //ë§ˆê³„
 		if(level_<=12)
 			mon_list_.push(MON_EVIL_EYE,10);
 		if(level_<=10)
@@ -902,7 +902,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_YUKI,3);
 		if(level_>23)
 			mon_list_.push(MON_MAI,3);		
-		msg_ = "¸¶°è";
+		msg_ = "ë§ˆê³„";
 		break;
 	}
 

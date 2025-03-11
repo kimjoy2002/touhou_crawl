@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: item.cpp
+// íŒŒì¼ì´ë¦„: item.cpp
 //
-// ³»¿ë: ¾ÆÀÌÅÛ °ü·Ã ÇÔ¼ö
+// ë‚´ìš©: ì•„ì´í…œ ê´€ë ¨ í•¨ìˆ˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -42,7 +42,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 
 
 item::item()
-:name("¾øÀ½",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
+:name("ì—†ìŒ",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
 can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 atifact_vector()
@@ -247,13 +247,13 @@ string item::GetName(int num_)
 		if( (((type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST) || (type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && !identify) || curse || (type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST))
 		{
 			if(curse || !isArtifact())
-				temp += curse?"ÀúÁÖ¹ÞÀº ":"ÀúÁÖ¹ÞÁö¾ÊÀº ";
+				temp += curse?"ì €ì£¼ë°›ì€ ":"ì €ì£¼ë°›ì§€ì•Šì€ ";
 		}
 	}
 	if(is_pile && num >1 && num_ != -2)
 	{
 		char buf[20]; 
-		sprintf_s(buf, 20,"%d°³ÀÇ ",num_!=-1?num_!=0?num_:num:num);
+		sprintf_s(buf, 20,"%dê°œì˜ ",num_!=-1?num_!=0?num_:num:num);
 		temp += buf;
 	}
 	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST)
@@ -333,9 +333,9 @@ string item::GetName(int num_)
 		}
 	}
 	if(!isArtifact() && ((type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 1) || (type==ITM_RING && iden_list.ring_list[value1].iden == 1)))
-		temp += "(»ç¿ë)";
+		temp += "(ì‚¬ìš©)";
 	if(!isArtifact() && (type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 2))
-		temp += "(¼±ÅÃ»ç¿ë)";
+		temp += "(ì„ íƒì‚¬ìš©)";
 	if(type==ITM_SPELL)
 	{
 		if(identify)
@@ -348,11 +348,11 @@ string item::GetName(int num_)
 		{
 			char temp2[32];
 			if(value3>0)
-				sprintf_s(temp2,32,"(»ç¿ëÈ½¼ö: %d)",value3);
+				sprintf_s(temp2,32,"(ì‚¬ìš©íšŸìˆ˜: %d)",value3);
 			else if(value3 == -1)
-				sprintf_s(temp2,32,"(ºñ¾îÀÖÀ½)");
+				sprintf_s(temp2,32,"(ë¹„ì–´ìžˆìŒ)");
 			else if(value3 == -2)
-				sprintf_s(temp2,32,"(ÃæÀüµÊ)");
+				sprintf_s(temp2,32,"(ì¶©ì „ë¨)");
 
 
 			temp += temp2;
@@ -360,7 +360,7 @@ string item::GetName(int num_)
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{
-		temp += " {¹ßµ¿}";
+		temp += " {ë°œë™}";
 	}
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{
@@ -370,7 +370,7 @@ string item::GetName(int num_)
 	}
 	
 	if(isArtifact() && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
-	{ //¾ÆÆ¼ÆåÆ®!
+	{ //ì•„í‹°íŽ™íŠ¸!
 		if(identify)
 		{
 			string arti_ = " {";
@@ -407,7 +407,7 @@ string item::GetName(int num_)
 		}
 		else
 		{
-			temp+=" {¾ÆÆ¼ÆåÆ®}";
+			temp+=" {ì•„í‹°íŽ™íŠ¸}";
 		}
 	}
 
@@ -472,7 +472,7 @@ const D3DCOLOR item::item_color()
 		}
 		break;
 	case ITM_RING:
-		if(iden_list.ring_list[value1].iden == 2) //½Äº°¾ÈµÇµµ »ö±ò·Î ±¸º°°¡´É?
+		if(iden_list.ring_list[value1].iden == 2) //ì‹ë³„ì•ˆë˜ë„ ìƒ‰ê¹”ë¡œ êµ¬ë³„ê°€ëŠ¥?
 		{
 			int color_ = isGoodRing((ring_type)value1, identify?value2:1);
 			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_STAT);
@@ -502,9 +502,9 @@ const D3DCOLOR item::item_color()
 	}
 
 	if(identify_curse && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
-	{ //ÀúÁÖ½Äº°µÈ»óÅÂ¿¡ ¹«±â,¹æ¾î±¸, Àå½Å±¸ÀÏ¶§
+	{ //ì €ì£¼ì‹ë³„ëœìƒíƒœì— ë¬´ê¸°,ë°©ì–´êµ¬, ìž¥ì‹ êµ¬ì¼ë•Œ
 		if(return_ == CL_STAT || curse)
-		{ //¤·¤·
+		{ //ã…‡ã…‡
 			return_ = curse?CL_danger:CL_good;
 		}
 	}
@@ -721,7 +721,7 @@ void item::TurnSave()
 	delay_turn = you.turn;
 }
 void item::TurnLoad()
-{ //³ªÁß¿¡ ÁÖÀÎ°ø ±ÙÃ³·Î ¿Å°Ü¿À´Â°Íµµ »ý°¢ÇÑ´Ù.
+{ //ë‚˜ì¤‘ì— ì£¼ì¸ê³µ ê·¼ì²˜ë¡œ ì˜®ê²¨ì˜¤ëŠ”ê²ƒë„ ìƒê°í•œë‹¤.
 	int temp_turn = you.turn - delay_turn;
 	if (now_find)
 	{
@@ -1055,10 +1055,10 @@ bool item::isEnhantable()
 }
 bool item::Enchant(equip_type kind_, int acc_)
 {
-	bool enchant_ = curse?true:false; //ÀúÁÖ°É¸°ÅÛÀº ¹«Á¶°Ç ÀÎÃ¦Æ®
+	bool enchant_ = curse?true:false; //ì €ì£¼ê±¸ë¦°í…œì€ ë¬´ì¡°ê±´ ì¸ì±ˆíŠ¸
 
 	if(isArtifact())
-		return enchant_; //¾ÆÆ¼ÆåÆ®´Â ÀÎÃ¦Æ® ¹«½Ã
+		return enchant_; //ì•„í‹°íŽ™íŠ¸ëŠ” ì¸ì±ˆíŠ¸ ë¬´ì‹œ
 
 	if(kind_ == ET_WEAPON && (type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST))
 	{
@@ -1086,7 +1086,7 @@ bool item::Enchant(equip_type kind_, int acc_)
 				max_enchant = 9;
 		}
 
-		while(acc_ && value4<max_enchant) //³ôÀ»¼ö·Ï È®·ü ³·Ãß±â
+		while(acc_ && value4<max_enchant) //ë†’ì„ìˆ˜ë¡ í™•ë¥  ë‚®ì¶”ê¸°
 		{
 			value4++;
 			if(type != ITM_ARMOR_SHIELD) 
@@ -1118,17 +1118,17 @@ bool item::pick()
 	prev_sight = false;
 	//if(type == ITM_GOAL && value1 ==0)
 	//{
-	//	printlog("´ç½ÅÀº ·éÀ» ÁÖ¿ü´Ù!",true,false,false,CL_good);
+	//	printlog("ë‹¹ì‹ ì€ ë£¬ì„ ì£¼ì› ë‹¤!",true,false,false,CL_good);
 	//	char temp[200];
-	//	sprintf_s(temp,200,"·éÀ» ¾ò¾ú´Ù.");
+	//	sprintf_s(temp,200,"ë£¬ì„ ì–»ì—ˆë‹¤.");
 	//	AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 	//	value1++;
 	//}
 	//if(type == ITM_ORB && value1 ==0)
 	//{
-	//	printlog("´ç½ÅÀº À½¾ç¿ÁÀ» ÁÖ¿ü´Ù. ´øÀü1ÃþÀ¸·Î °¡Áö°í ¿Ã¶ó°¡¸é ½Â¸®ÇÑ´Ù!",true,false,false,CL_good);
+	//	printlog("ë‹¹ì‹ ì€ ìŒì–‘ì˜¥ì„ ì£¼ì› ë‹¤. ë˜ì „1ì¸µìœ¼ë¡œ ê°€ì§€ê³  ì˜¬ë¼ê°€ë©´ ìŠ¹ë¦¬í•œë‹¤!",true,false,false,CL_good);
 	//	char temp[200];
-	//	sprintf_s(temp,200,"À½¾ç¿ÁÀ» ¾ò¾ú´Ù.");
+	//	sprintf_s(temp,200,"ìŒì–‘ì˜¥ì„ ì–»ì—ˆë‹¤.");
 	//	AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 	//	value1++;
 	//}
@@ -1168,8 +1168,8 @@ int item::action(int delay_)
 		if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (type == ITM_POTION || type == ITM_SCROLL) {
-				waste -= you.god_value[GT_JOON_AND_SION][0] == 2 ? 100 : 10; //±âº» 1000ÅÏÈÄ¿¡ »ç¶óÁü
-				//½Ã¿ÂÀÏ¶© 100ÅÏÈÄ »ç¶óÁöµµ·Ï?
+				waste -= you.god_value[GT_JOON_AND_SION][0] == 2 ? 100 : 10; //ê¸°ë³¸ 1000í„´í›„ì— ì‚¬ë¼ì§
+				//ì‹œì˜¨ì¼ë• 100í„´í›„ ì‚¬ë¼ì§€ë„ë¡?
 				if (waste <= 0) {
 					env[current_level].DeleteItem(this);
 					return 0;
@@ -1202,7 +1202,7 @@ int item::action(int delay_)
 		}
 		if (you.tribe == TRI_NECOMATA && distan_coord(you.position, position) <= 2) {
 			if (you.s_drunken == 0) {
-				printlog("´ç½ÅÀº °³´Ù·¡³ª¹«ÀÇ Çâ±â¿¡ ÃëÇß´Ù!",true,false,false, CL_warning);
+				printlog("ë‹¹ì‹ ì€ ê°œë‹¤ëž˜ë‚˜ë¬´ì˜ í–¥ê¸°ì— ì·¨í–ˆë‹¤!",true,false,false, CL_warning);
 			}
 			you.s_drunken = 15;
 		}

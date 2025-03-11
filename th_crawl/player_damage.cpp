@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: player_damage.cpp
+// íŒŒì¼ì´ë¦„: player_damage.cpp
 //
-// ³»¿ë: playerÀÇ µ¥¹ÌÁö Ã³¸® ÇÔ¼ö
+// ë‚´ìš©: playerì˜ ë°ë¯¸ì§€ ì²˜ë¦¬ í•¨ìˆ˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,13 +51,13 @@ int players::GetAttack(bool max_)
 			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/15.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
 			min_atk_ = 0;//min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
 		}
-		else //¿©±â´Â ¹ö±× Ã³¸®. µ¥¹ÌÁö°¡ ¾øÀ¸¸é ¹ö±×ÀÓÀ» ¾Ë¼öÀÖÀ½
+		else //ì—¬ê¸°ëŠ” ë²„ê·¸ ì²˜ë¦¬. ë°ë¯¸ì§€ê°€ ì—†ìœ¼ë©´ ë²„ê·¸ì„ì„ ì•Œìˆ˜ìˆìŒ
 		{
 			max_atk_ = 0;
 			min_atk_ = 0; 
 		}
 	}
-	else if(!equipment[ET_WEAPON]) //¸Ç¼ÕÀÓ
+	else if(!equipment[ET_WEAPON]) //ë§¨ì†ì„
 	{
 		skill_ = SKT_UNWEAPON;
 		max_atk_ = base_atk_+ GetSkillLevel(skill_, true);
@@ -72,7 +72,7 @@ int players::GetAttack(bool max_)
 	}
 	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
 	if(!sion_ && power<=200)
-	{ //ÆÄ¿ö 200ÀÌÇÏ¿¡¼­¸¸ ÆÄ¿ö¿¡ ÀÇÇÑ °¨¼Ò¸¦ ¹Ş´Â´Ù.
+	{ //íŒŒì›Œ 200ì´í•˜ì—ì„œë§Œ íŒŒì›Œì— ì˜í•œ ê°ì†Œë¥¼ ë°›ëŠ”ë‹¤.
 		max_atk_ *= (min(power,500)*0.001f+0.5f);
 		min_atk_ *= (min(power,500)*0.001f+0.5f);
 	}
@@ -128,7 +128,7 @@ int players::GetAttack(bool max_)
 		cacul_max_ += 10;
 	}
 
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5)//¼Ó¼ººê·£µåÃ³¸®
+	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5)//ì†ì„±ë¸Œëœë“œì²˜ë¦¬
 	{
 		atk_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
 		cacul_max_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,cacul_max_);
@@ -139,7 +139,7 @@ int players::GetAttack(bool max_)
 	if(wiz_list.wizard_mode == 1 && !max_)
 	{		
 		char temp[50];
-		sprintf_s(temp,50,"[¸Æµ© %d]",cacul_max_);
+		sprintf_s(temp,50,"[ë§¥ë€ %d]",cacul_max_);
 		printlog(temp,false,false,false,CL_help);
 	}
 
@@ -148,7 +148,7 @@ int players::GetAttack(bool max_)
 
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
 	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
-	{ //´Ü°Ë ¾Ï½À º¸³Ê½º
+	{ //ë‹¨ê²€ ì•”ìŠµ ë³´ë„ˆìŠ¤
 		stab_atk_+=(2+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))/2)*2;
 		stab_atk_*=(1+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))*0.1f);
 	}
@@ -194,14 +194,14 @@ int players::GetHit()
 	{
 		hit_+=6;
 	}
-	if(s_unluck) //¸íÁß´Ù¿î
+	if(s_unluck) //ëª…ì¤‘ë‹¤ìš´
 	{
 		hit_-=s_unluck>6?9:(s_unluck>3?7:5);
 	}
 
 
 	if(as_penalty > GetPenaltyMinus(1))
-	{//¸¸¾à ¹æ¾îÆĞ³ÎÆ¼¶§¹®¿¡ ¸íÁßÀÌ ³»·Á°¥ °æ¿ì
+	{//ë§Œì•½ ë°©ì–´íŒ¨ë„í‹°ë•Œë¬¸ì— ëª…ì¤‘ì´ ë‚´ë ¤ê°ˆ ê²½ìš°
 		hit_ -= as_penalty; 
 	}
 	return hit_;
@@ -236,7 +236,7 @@ int players::ReSetASPanlty()
 	int prev_panlty_ = as_penalty;
 	int panlty_ = 0;
 	if(armor_)
-	{ //¾Æ¸ÓÀÇ ÆĞ³ÎÆ¼
+	{ //ì•„ë¨¸ì˜ íŒ¨ë„í‹°
 		int panlty2_ = -armor_->value2;
 		panlty2_ -= GetSkillLevel(SKT_ARMOUR, true)/3;
 		if(panlty2_ < -armor_->value3)
@@ -276,7 +276,7 @@ int players::GetThrowAttack(const item* it, bool max_)
 	
 	
 	if(!(it->type>=ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
-	{//ÀÌ°ÍÀº ÀåÂø¹«±âÀÌ´Ù..
+	{//ì´ê²ƒì€ ì¥ì°©ë¬´ê¸°ì´ë‹¤..
 		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true)/15.0f+it->value4/10.0f);
 	}
 	else
@@ -329,7 +329,7 @@ int players::GetThrowHit(const item* it)
 	int hit_ = 3+s_dex/2;	
 
 	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
-	{//ÀÌ°ÍÀº ÀåÂø¹«±âÀÌ´Ù..
+	{//ì´ê²ƒì€ ì¥ì°©ë¬´ê¸°ì´ë‹¤..
 		hit_ = 1 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
 	}
 	else
@@ -352,14 +352,14 @@ int players::GetThrowHit(const item* it)
 	{
 		hit_+=6;
 	}
-	if(s_unluck) //¸íÁß´Ù¿î
+	if(s_unluck) //ëª…ì¤‘ë‹¤ìš´
 	{
 		hit_-=s_unluck>6?9:(s_unluck>3?7:5);
 	}
 
 
 	if(as_penalty > GetPenaltyMinus(1))
-	{//¸¸¾à ¹æ¾îÆĞ³ÎÆ¼¶§¹®¿¡ ¸íÁßÀÌ ³»·Á°¥ °æ¿ì
+	{//ë§Œì•½ ë°©ì–´íŒ¨ë„í‹°ë•Œë¬¸ì— ëª…ì¤‘ì´ ë‚´ë ¤ê°ˆ ê²½ìš°
 		hit_ -= as_penalty; 
 	}
 
@@ -400,11 +400,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 
 	if(s_unluck>3 && randA(s_unluck>6?10:20)==0)
 	{
-		//´ëÈäÀÌ»ó¿¡¼± ÃÖ´ë µ¥¹ÌÁö¸¦ ¸ÂÀ» È®·üÀÌ Á¸ÀçÇÑ´Ù.
-		//´ëÈä5%  ºÒ¸ê 10%		
+		//ëŒ€í‰ì´ìƒì—ì„  ìµœëŒ€ ë°ë¯¸ì§€ë¥¼ ë§ì„ í™•ë¥ ì´ ì¡´ì¬í•œë‹¤.
+		//ëŒ€í‰5%  ë¶ˆë©¸ 10%		
 		if(wiz_list.wizard_mode == 1)
 		{	
-			printlog("Ç®´ÙÀÌ½º!",true,false,false,CL_danger);
+			printlog("í’€ë‹¤ì´ìŠ¤!",true,false,false,CL_danger);
 		}
 		damage_ = max_atk;
 
@@ -457,12 +457,12 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
 	default:
-		{//µ¥¹ÌÁö °è»ê°ø½Ä
-			//ÃÖÁ¾µ¥¹ÌÁö  :  1d(percent_*damage_) - 0d(ac_dec)
-			//percent_:1¿¡¼­ AC15±îÁö AC1´ç 0.010. 15ºÎÅÍ AC30±îÁø 0.01,  AC30ÈÄºÎÅÏ 0.005¾¿ °¨¼Ò(AC15¸é 0.85 AC30ÀÌ¸é 0.625)
-			//ac_dec -> 3, 6, 10, 15, 21, 28, 36, 45, 55¿¡¼­ 1¾¿ Áõ°¡
-			//´Â ¿¹Àü º¯¼ö°í Áö±İÀº (ac+1)/3ÀÌ ac_dec°¡ µÈ´Ù.
-			//ÃÖÁ¾µ¥¹ÌÁö°¡ 0º¸´Ù ÀÛÀ¸¸é 0ÀÌµÈ´Ù.
+		{//ë°ë¯¸ì§€ ê³„ì‚°ê³µì‹
+			//ìµœì¢…ë°ë¯¸ì§€  :  1d(percent_*damage_) - 0d(ac_dec)
+			//percent_:1ì—ì„œ AC15ê¹Œì§€ AC1ë‹¹ 0.010. 15ë¶€í„° AC30ê¹Œì§„ 0.01,  AC30í›„ë¶€í„´ 0.005ì”© ê°ì†Œ(AC15ë©´ 0.85 AC30ì´ë©´ 0.625)
+			//ac_dec -> 3, 6, 10, 15, 21, 28, 36, 45, 55ì—ì„œ 1ì”© ì¦ê°€
+			//ëŠ” ì˜ˆì „ ë³€ìˆ˜ê³  ì§€ê¸ˆì€ (ac+1)/3ì´ ac_decê°€ ëœë‹¤.
+			//ìµœì¢…ë°ë¯¸ì§€ê°€ 0ë³´ë‹¤ ì‘ìœ¼ë©´ 0ì´ëœë‹¤.
 			float percent_ = 1.0f;
 			int ac_dec=0;
 			for(int i = ac; i>0; i--)
@@ -608,7 +608,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	default:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"¿¡°Ô ¸íÁßÇß´Ù. ");
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"ì—ê²Œ ëª…ì¤‘í–ˆë‹¤. ");
 		}
 		break;
 	case ATT_SLEEP:
@@ -616,14 +616,14 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		{
 			if (a.order)
 			{
-				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 6, name_.name.c_str(), "ÀÇ ", a.name.name.c_str(), a.name.name_is(true), name.name.c_str(), "¿¡°Ô ¸íÁßÇß´Ù. ");
+				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 6, name_.name.c_str(), "ì˜ ", a.name.name.c_str(), a.name.name_is(true), name.name.c_str(), "ì—ê²Œ ëª…ì¤‘í–ˆë‹¤. ");
 			}
 		}
 		else
 		{
 			if (a.order)
 			{
-				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 4, name_.name.c_str(), name_.name_is(true), name.name.c_str(), "ÀÇ ²ŞÀ» ¸Ô¾ú´Ù. ");
+				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 4, name_.name.c_str(), name_.name_is(true), name.name.c_str(), "ì˜ ê¿ˆì„ ë¨¹ì—ˆë‹¤. ");
 			}
 		}
 		break;
@@ -631,60 +631,60 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_FIRE_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"¿¡°Ô ¸íÁßÇÏ°í ºÒÅ¸¿Ã¶ú´Ù. ");
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"ì—ê²Œ ëª…ì¤‘í•˜ê³  ë¶ˆíƒ€ì˜¬ëë‹¤. ");
 		}
 		break;
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"¿¡°Ô ¸íÁßÇÏ°í ¾ó¾îºÙ¾ú´Ù. ");
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"ì—ê²Œ ëª…ì¤‘í•˜ê³  ì–¼ì–´ë¶™ì—ˆë‹¤. ");
 		}
 		break;
 	case ATT_NORMAL_HIT:		
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"¿¡°Ô µé¾î°¬´Ù. ");
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"ì—ê²Œ ë“¤ì–´ê°”ë‹¤. ");
 		}	
 		break;
 	case ATT_SMITE:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,4,"¹«¾ùÀÎ°¡ ",GetName()->name.c_str(),GetName()->name_to(true),"°­Å¸Çß´Ù. ");
+			printarray(false,false,false,CL_normal,4,"ë¬´ì—‡ì¸ê°€ ",GetName()->name.c_str(),GetName()->name_to(true),"ê°•íƒ€í–ˆë‹¤. ");
 		}
 		break;
 	case ATT_SMASH:
 		if (a.order)
 		{
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "Áı¾î´øÁøÈÄ ¹Ù´Ú¿¡ ³»ÆØ°ÜÃÄÁ³´Ù. ");
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ì§‘ì–´ë˜ì§„í›„ ë°”ë‹¥ì— ë‚´íŒ½ê²¨ì³ì¡Œë‹¤. ");
 		}
 		break;
 	case ATT_BLOOD:	
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ÇÇ°¡ ÅÍÁ®³ª¿Ô´Ù. ");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ í”¼ê°€ í„°ì ¸ë‚˜ì™”ë‹¤. ");
 		}
 		break;
 	case ATT_NOISE:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,3,"±²À½ÀÌ ",GetName()->name.c_str(),"ÀÇ ´ŞÆØÀÌ°üÀ» °­Å¸Çß´Ù. ");
+			printarray(false,false,false,CL_normal,3,"êµ‰ìŒì´ ",GetName()->name.c_str(),"ì˜ ë‹¬íŒ½ì´ê´€ì„ ê°•íƒ€í–ˆë‹¤. ");
 		}
 		break;
 	case ATT_CLOUD_FIRE:
 		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"È­¿°¿¡ ÈÛ½Î¿´´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í™”ì—¼ì— íœ©ì‹¸ì˜€ë‹¤. ");
 		break;
 	case ATT_CLOUD_COLD:
 		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¾ó¾îºÙ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì–¼ì–´ë¶™ì—ˆë‹¤. ");
 		break;
 	case ATT_CLOUD_ELEC:
 		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"°¨ÀüµÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê°ì „ë˜ì—ˆë‹¤. ");
 		break;
 	case ATT_STONE_TRAP:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"»ÏÁ·ÇÑ ¹ÙÀ§¸¦ ¹â¾Ò´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¾°ì¡±í•œ ë°”ìœ„ë¥¼ ë°Ÿì•˜ë‹¤. ");
 		break;
 	case ATT_NORMAL_BLAST:
 	case ATT_AC_REDUCE_BLAST:
@@ -695,57 +695,57 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_POISON_BLAST:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù. ");
+			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ì˜ í­ë°œì— íœ˜ë§ë ¸ë‹¤. ");
 		}
 		break;
 	case ATT_SUN_BLAST:
 		if (a.order)
 		{
-			printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "¿¡ ÀÇÇØ Å¸µé¾î°¬´Ù. ");
+			printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "ì— ì˜í•´ íƒ€ë“¤ì–´ê°”ë‹¤. ");
 		}
 		break;
 	case ATT_COLD_PYSICAL_BLAST:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´«º¸¶ó¿¡ ÈÖ¸»·È´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ëˆˆë³´ë¼ì— íœ˜ë§ë ¸ë‹¤. ");
 		break;			
 	case ATT_BURST:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Æø¹ßÇß´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í­ë°œí–ˆë‹¤. ");
 		break;
 	case ATT_CLOUD_NORMAL:
 		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷¿¡ ÈÛ¾µ·È´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°”ëŒì— íœ©ì“¸ë ¸ë‹¤. ");
 		break;
 	case ATT_CLOUD_CURSE:
 		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ÀúÁÖ¹Ş°íÀÖ´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì €ì£¼ë°›ê³ ìˆë‹¤. ");
 		break;
 	case ATT_VEILING:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷ °©¿Ê¿¡ º£¿´´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°”ëŒ ê°‘ì˜·ì— ë² ì˜€ë‹¤. ");
 		break;		
 	case ATT_RUSH:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¸Â¾Ò´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë§ì•˜ë‹¤. ");
 		break;
 	case ATT_WALL:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"ºÎµúÇû´Ù. ");
+			printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"ë¶€ë”ªí˜”ë‹¤. ");
 		}
 		else
 		{
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"º®¿¡ ºÎµúÇû´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë²½ì— ë¶€ë”ªí˜”ë‹¤. ");
 		}
 		break;
 	case ATT_PSYCHO:
-		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹Ù´Ú¿¡ ³»ÆØ°ÜÃÄÁ³´Ù. ");
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë°”ë‹¥ì— ë‚´íŒ½ê²¨ì³ì¡Œë‹¤. ");
 		break;
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"¿¡°Ô ¸íÁßÇÏ°í °¨ÀüµÇ¾ú´Ù. ");
+			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"ì—ê²Œ ëª…ì¤‘í•˜ê³  ê°ì „ë˜ì—ˆë‹¤. ");
 		}
 		break;
 	case ATT_DROWNING:
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹°¿¡ ºüÁ® Áú½ÄÇÏ°í ÀÖ´Ù. ");
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë¬¼ì— ë¹ ì ¸ ì§ˆì‹í•˜ê³  ìˆë‹¤. ");
 		break;
 	case ATT_THROW_NONE_MASSAGE:
 		break;
@@ -774,7 +774,7 @@ void players::print_no_damage_message(attack_infor &a)
 			break;
 		default:
 		case ATT_NORMAL_HIT:
-			printlog("¾Æ¹«·± µ¥¹ÌÁöµµ ¹ŞÁö ¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+			printlog("ì•„ë¬´ëŸ° ë°ë¯¸ì§€ë„ ë°›ì§€ ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 			break;
 		}
 	}
@@ -798,7 +798,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		else if(s_confuse)
 			damage_ *= 1.2f;
 		else if(a.order && !(a.order)->isView())
-		{ //Åõ¸íÀÏ¶§ Á¶°Ç
+		{ //íˆ¬ëª…ì¼ë•Œ ì¡°ê±´
 			damage_ *= 1.5f;
 		}
 	}
@@ -806,7 +806,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 
 
-	if(s_timestep) //¿ÏÀü ¹«ÀûÀÌ µÊ
+	if(s_timestep) //ì™„ì „ ë¬´ì ì´ ë¨
 		return false;
 
 	
@@ -817,10 +817,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 	}
 
 	if(s_glow || you.GetBuffOk(BUFFSTAT_HALO))
-		accuracy_+=5; //ºû³¯°æ¿ì ¸íÁß Áõ°¡
+		accuracy_+=5; //ë¹›ë‚ ê²½ìš° ëª…ì¤‘ ì¦ê°€
 	if(a.order && a.order->GetMindReading())
 	{
-		accuracy_/=3; //ÀÌ ´ë»óÀº °£ÆÄÇÑ »ó´ë´Ù.
+		accuracy_/=3; //ì´ ëŒ€ìƒì€ ê°„íŒŒí•œ ìƒëŒ€ë‹¤.
 	}
 
 	if(a.order && !isView((monster*)a.order))
@@ -830,11 +830,11 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 
 
-	{//È¸ÇÇ·ü °è»ê°ø½Ä
-	//ÃÖÁ¾È¸ÇÇ·ü :  edit_ev/(edit_ev+accuracy_)
-	//edit_ev:1¿¡¼­ EV15±îÁö EV1´ç 0.8. 15ºÎÅÍ AC30±îÁø 1,  AC30ÈÄºÎÅÏ 1.5¾¿ Áõ°¡
-	//ÀúÈ¸ÇÇÆĞ³ÎÅÍ: ¸¸¾à accuracy_>edit_evÀÏ°æ¿ì ÃÖÁ¾È¸ÇÇ·ü¿¡¼­ edit_ev/accuracy_À» °öÇÑ´Ù. ´Ü 0.5°¡ ÃÖ¼ÒÄ¡
-	//ÃÖÁ¾°ªÀÌ 0º¸´ÙÀûÀ» °æ¿ì 0ÀÌ µÈ´Ù.
+	{//íšŒí”¼ë¥  ê³„ì‚°ê³µì‹
+	//ìµœì¢…íšŒí”¼ë¥  :  edit_ev/(edit_ev+accuracy_)
+	//edit_ev:1ì—ì„œ EV15ê¹Œì§€ EV1ë‹¹ 0.8. 15ë¶€í„° AC30ê¹Œì§„ 1,  AC30í›„ë¶€í„´ 1.5ì”© ì¦ê°€
+	//ì €íšŒí”¼íŒ¨ë„í„°: ë§Œì•½ accuracy_>edit_evì¼ê²½ìš° ìµœì¢…íšŒí”¼ë¥ ì—ì„œ edit_ev/accuracy_ì„ ê³±í•œë‹¤. ë‹¨ 0.5ê°€ ìµœì†Œì¹˜
+	//ìµœì¢…ê°’ì´ 0ë³´ë‹¤ì ì„ ê²½ìš° 0ì´ ëœë‹¤.
 		float edit_ev=0;
 		for(int i = ev; i>0; i--)
 			edit_ev += (i<=15?0.8f:(i<=30?1:1.5f));
@@ -857,11 +857,11 @@ bool players::damage(attack_infor &a, bool perfect_)
 	}
 	you.SetInter(IT_DAMAGE);
 
-	{//½Çµå °ø½Ä
-     //breaking ±âº» 30
-	 //¸¸¾à ±×·¹ÀÌÁî°¡´ÉÇÑ °ø°İÀÏ °æ¿ì 5À» »«´Ù.
-     // (SH / breaking+SH)ÀÇ È®·ü·Î °¡µå!
-	 //´Ü ½Çµå°¡ ÅëÇÏÁö ¾Ê´Â °ø°İÀÏ°æ¿ì ÃÖÁ¾È®·üÀÌ 0ÀÌµÊ(³ªÁß¿¡ ³Ö±â)
+	{//ì‹¤ë“œ ê³µì‹
+     //breaking ê¸°ë³¸ 30
+	 //ë§Œì•½ ê·¸ë ˆì´ì¦ˆê°€ëŠ¥í•œ ê³µê²©ì¼ ê²½ìš° 5ì„ ëº€ë‹¤.
+     // (SH / breaking+SH)ì˜ í™•ë¥ ë¡œ ê°€ë“œ!
+	 //ë‹¨ ì‹¤ë“œê°€ í†µí•˜ì§€ ì•ŠëŠ” ê³µê²©ì¼ê²½ìš° ìµœì¢…í™•ë¥ ì´ 0ì´ë¨(ë‚˜ì¤‘ì— ë„£ê¸°)
 		float breaking = 75;
 		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
 			breaking -= 15;
@@ -870,7 +870,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			shield_ = 0;
 		if(you.s_sleep<0 || you.s_paralyse)
 			shield_ = 0;
-		//º¼Æ®Çü °¡µå¾ÈµÇ°Ô ÇÏ·Á¸é ¾î¶»°Ô?
+		//ë³¼íŠ¸í˜• ê°€ë“œì•ˆë˜ê²Œ í•˜ë ¤ë©´ ì–´ë–»ê²Œ?
 	}
 
 
@@ -883,7 +883,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		{
 			if (env[current_level].isSanctuary(position) || s_evoke_ghost)
 			{
-				//¼º¿ª¿¡¼± ¸ğµç µ¥¹ÌÁö°¡ 0
+				//ì„±ì—­ì—ì„  ëª¨ë“  ë°ë¯¸ì§€ê°€ 0
 				damage_ = 0;
 			}
 			print_damage_message(a,damage_!=0);
@@ -918,14 +918,14 @@ bool players::damage(attack_infor &a, bool perfect_)
 				if(s_mirror && GetHp()>0 && a.order)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
-					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("º£ÀÏ¸µ",true)), true);
+					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("ë² ì¼ë§",true)), true);
 				}
 				if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 				{
 					if(a.order)
 					{
 						a.order->HpUpDown(damage_/3,DR_EFFECT);	
-						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true),  name.name.c_str(),"ÀÇ Ã¼·ÂÀ» Èí¼öÇß´Ù.");
+						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true),  name.name.c_str(),"ì˜ ì²´ë ¥ì„ í¡ìˆ˜í–ˆë‹¤.");
 			
 					}
 				}
@@ -998,7 +998,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("º£ÀÏ¸µ",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("ë² ì¼ë§",true)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1011,19 +1011,19 @@ bool players::damage(attack_infor &a, bool perfect_)
 					switch(half_youkai[1])
 					{
 					case 0:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor("È­¿°",true)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor("í™”ì—¼",true)), true);
 						if(a.order->GetFireResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
 					case 1:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor("³Ã±â",false)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor("ëƒ‰ê¸°",false)), true);
 						if(a.order->GetColdResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
 					case 2:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor("Àü°İ",true)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor("ì „ê²©",true)), true);
 						if(a.order->GetElecResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
@@ -1038,12 +1038,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if (wiz_list.wizard_mode == 1)
 			{
 				char temp[50];
-				sprintf_s(temp, 50, "shield¼öÄ¡: %f ¶Ç´Â %g", shield_, shield_);
+				sprintf_s(temp, 50, "shieldìˆ˜ì¹˜: %f ë˜ëŠ” %g", shield_, shield_);
 				printlog(temp, true, false, false, CL_danger);
 			}
 			if(a.order)	
 			{
-				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_to(true),"¹æÆĞ·Î ¸·¾Ò´Ù.");
+				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_to(true),"ë°©íŒ¨ë¡œ ë§‰ì•˜ë‹¤.");
 				//SkillTraining(SKT_SHIELD,1);
 				soundmanager.playSound("block");
 			}
@@ -1054,9 +1054,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 		if (a.order)
 		{
 			if (!graze_ || you.s_super_graze)
-				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_to(true),"ÇÇÇß´Ù.");
+				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_to(true),"í”¼í–ˆë‹¤.");
 			else 
-				printarray(true,false,false,a.order->isView()?CL_normal:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_to(true),"±×·¹ÀÌÁî Çß´Ù.");
+				printarray(true,false,false,a.order->isView()?CL_normal:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_to(true),"ê·¸ë ˆì´ì¦ˆ í–ˆë‹¤.");
 			soundmanager.playSound("evade");
 			//if(GetArmourPanlty()<=2)
 			//	SkillTraining(SKT_DODGE,3+GetArmourPanlty());

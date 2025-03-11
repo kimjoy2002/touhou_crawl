@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: map_pattern.cpp
+// íŒŒì¼ì´ë¦„: map_pattern.cpp
 //
-// ³»¿ë: ¸Ê ÆĞÅÏ ÀúÀå¼Ò
+// ë‚´ìš©: ë§µ íŒ¨í„´ ì €ì¥ì†Œ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@ char* common_enter_pattern(map_dummy* map)
 		map->m_entrance.y = 0;
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
-		map->name = "°ø¿ë_¼­ºê´øÀüÀÔ±¸";
+		map->name = "ê³µìš©_ì„œë¸Œë˜ì „ì…êµ¬";
 		/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 		return  "\
 #######\
@@ -58,7 +58,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
-			base_pe = 3; //¸î¸î Æ¯¼ö ÁöÇüº¸Á¤
+			base_pe = 3; //ëª‡ëª‡ íŠ¹ìˆ˜ ì§€í˜•ë³´ì •
 		randomPattern.push(i,base_pe);
 	}
 	while(randomPattern.GetSize())
@@ -75,7 +75,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_entrance.y = -2;
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 2;
-			map->name = "±âº»_SÁöÇü";
+			map->name = "ê¸°ë³¸_Sì§€í˜•";
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 			return  "\
 ###########\
@@ -97,7 +97,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¹ÙµÏÆÇ";
+			map->name = "ê¸°ë³¸_ë°”ë‘‘íŒ";
 			return  "\
 #.#.#.#.#\
 .#.#.#.#.\
@@ -120,7 +120,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-				map->name = "±âº»_¼¶";
+				map->name = "ê¸°ë³¸_ì„¬";
 				return  "\
 ...........\
 ...___.....\
@@ -135,7 +135,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 ...........";
 				break;		
 			}
-		case 3: //·ç³ªÆ½ Å¸ÀÓ
+		case 3: //ë£¨ë‚˜í‹± íƒ€ì„
 			{
 				if(is_exist_named(MON_CLOWNPIECE))
 					break;
@@ -161,7 +161,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 					}
 				}
 				map->event_list.push_back(mapdummy_event(EVL_LUNATICTIME,coord_def(0,-4),EVT_SIGHT));
-				map->name = "Å¬¶ó¿îÇÇ½º_·ç³ªÆ½Å¸ÀÓ";
+				map->name = "í´ë¼ìš´í”¼ìŠ¤_ë£¨ë‚˜í‹±íƒ€ì„";
 				return  "\
 #############\
 #.#.......#.#\
@@ -184,7 +184,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-1,1);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_°¡·ÎÇÏ¼ö±¸";
+			map->name = "ê¸°ë³¸_ê°€ë¡œí•˜ìˆ˜êµ¬";
 			return  "\
 #################\
 ~~~~~~~~~~~~~~~~~\
@@ -205,7 +205,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-				map->name = "±âº»_33°­Ã¶º®";
+				map->name = "ê¸°ë³¸_33ê°•ì² ë²½";
 				return  "\
 .....\
 .$$$.\
@@ -213,7 +213,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 .$$$.\
 .....";			
 			}
-		case 6: //Ç®»Ñ¸® ¿ä±« ³×Æ®¿öÅ©
+		case 6: //í’€ë¿Œë¦¬ ìš”ê´´ ë„¤íŠ¸ì›Œí¬
 			{
 				if(!((floor_ >= 10 && floor_ <=MAX_DUNGEUN_LEVEL) ||
 					(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL) ||
@@ -243,7 +243,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 					map->monster_list.push_back(mapdummy_mon(MON_SEKIBANKI,0,coord_def(0,0)));
 					set_exist_named(MON_SEKIBANKI);
 				}
-				map->name = "Ç®»Ñ¸®_³×Æ®¿öÅ©";
+				map->name = "í’€ë¿Œë¦¬_ë„¤íŠ¸ì›Œí¬";
 				return  "\
 .......\
 .~~~~~.\
@@ -253,7 +253,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 .~~~~~.\
 .......";			
 			}
-		case 7: //ÄìÄÚ¹Ì½ºÄ¡ ÄÜ¼­Æ®
+		case 7: //ì¿„ì½”ë¯¸ìŠ¤ì¹˜ ì½˜ì„œíŠ¸
 			{
 				if(floor_ < 4)
 					break;
@@ -274,7 +274,7 @@ char* common_base_pattern(int floor_, map_dummy* map)
 					map->monster_list.push_back(mapdummy_mon(MON_MISTIA,0,coord_def(1,-1)));
 					set_exist_named(MON_MISTIA);
 				}
-				map->name = "ÄìÄÚ_¹Ì½ºÄ¡_ÄÜ¼­Æ®";
+				map->name = "ì¿„ì½”_ë¯¸ìŠ¤ì¹˜_ì½˜ì„œíŠ¸";
 				return  "\
 $$$$$$$$$\
 $$.....$$\
@@ -292,7 +292,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¼¼·ÎÁ¼Àº±æ";
+			map->name = "ê¸°ë³¸_ì„¸ë¡œì¢ì€ê¸¸";
 			return  "\
 ##.##\
 ##.##\
@@ -306,7 +306,7 @@ $$$...$$$";
 ##.##\
 ##.##";
 			break;
-		case 9: //ÄÚ°¡»ç ±Ş½À
+		case 9: //ì½”ê°€ì‚¬ ê¸‰ìŠµ
 			{
 				map->size_x = 2;
 				map->size_y = 2;	
@@ -318,7 +318,7 @@ $$$...$$$";
 					map->event_list.push_back(mapdummy_event(EVL_KOGASA,coord_def(0,0),EVT_APPROACH_SMALL));
 					set_exist_named(MON_KOGASA);
 				}
-				map->name = "ÄÚ°¡»ç_±Ş½À";
+				map->name = "ì½”ê°€ì‚¬_ê¸‰ìŠµ";
 				return  "\
 ####.\
 #....\
@@ -326,7 +326,7 @@ $$$...$$$";
 #...#\
 ..###";			
 			}
-		case 10: //¿äÁ¤´ëÀüÀï
+		case 10: //ìš”ì •ëŒ€ì „ìŸ
 			if(floor_ < 5)
 				break;
 			if(is_exist_named(MON_SUNNY)|| is_exist_named(MON_CIRNO))
@@ -351,7 +351,7 @@ $$$...$$$";
 				set_exist_named(MON_SUNNY);
 			}
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
-			map->name = "¿äÁ¤´ëÀüÀï";
+			map->name = "ìš”ì •ëŒ€ì „ìŸ";
 			return  "\
 #############\
 #...........#\
@@ -373,7 +373,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_À°°¢Çü¹æ";
+			map->name = "ê¸°ë³¸_ìœ¡ê°í˜•ë°©";
 			return  "\
 #########\
 ##.....##\
@@ -396,7 +396,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_°­Ã¶½ÊÀÚ°¡";
+			map->name = "ê¸°ë³¸_ê°•ì² ì‹­ìê°€";
 			return  "\
 .......\
 ...$...\
@@ -415,7 +415,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¼º°Ô¹æ";
+			map->name = "ê¸°ë³¸_ì„±ê²Œë°©";
 			return  "\
 ####.####\
 #.#.#.#.#\
@@ -435,7 +435,7 @@ $$$...$$$";
 			map->m_exit.x = rand_int(1,3);
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¼¼·Î_Áö±×Àç±×¹æ";
+			map->name = "ê¸°ë³¸_ì„¸ë¡œ_ì§€ê·¸ì¬ê·¸ë°©";
 			return  "\
 #...#####\
 ##...####\
@@ -463,7 +463,7 @@ $$$...$$$";
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI,0,coord_def(3,-1)));	
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_ÀµÄí¸®Áı";
+			map->name = "ê¸°ë³¸_ìœ³ì¿ ë¦¬ì§‘";
 			return  "\
 ..[.[........\
 ...[[...####.\
@@ -482,7 +482,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_ºñ¾îÀÖ´Â_Áı";
+			map->name = "ê¸°ë³¸_ë¹„ì–´ìˆëŠ”_ì§‘";
 			return  "\
 ####+####\
 #.......#\
@@ -507,7 +507,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_´ÙÁß_¹®¹æ";
+			map->name = "ê¸°ë³¸_ë‹¤ì¤‘_ë¬¸ë°©";
 			return  "\
 .......\
 .#+###.\
@@ -526,7 +526,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¤§_°­Ã¶¹æ";
+			map->name = "ê¸°ë³¸_ã„·_ê°•ì² ë°©";
 			return  "\
 #########\
 #.......#\
@@ -544,7 +544,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-1,1);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_°¡·Î_À¯¸®Åë·Î";
+			map->name = "ê¸°ë³¸_ê°€ë¡œ_ìœ ë¦¬í†µë¡œ";
 			return  "\
 ###############\
 ....=.....=....\
@@ -554,7 +554,7 @@ $$$...$$$";
 ....=.....=....\
 ###############";
 			break;
-		case 20: //º¸Å¾À» Ã£Àº ³ªÁî¸°
+		case 20: //ë³´íƒ‘ì„ ì°¾ì€ ë‚˜ì¦ˆë¦°
 			{
 			if (!(floor_ >= 7 && floor_ <= 14))
 				break;
@@ -576,7 +576,7 @@ $$$...$$$";
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));		
 
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "³ªÁî¸°_º¸Å¾¹ß°ß";
+			map->name = "ë‚˜ì¦ˆë¦°_ë³´íƒ‘ë°œê²¬";
 			return  "\
 #########\
 #.......#\
@@ -589,7 +589,7 @@ $$$...$$$";
 ####+####";
 			break;
 			}
-		case 21: //°øÆ÷ÀÇ ÄìÄÚ
+		case 21: //ê³µí¬ì˜ ì¿„ì½”
 			if(!(floor_ >= 3 && floor_ <= 5))
 				break;
 			if(is_exist_named(MON_KYOUKO))
@@ -605,7 +605,7 @@ $$$...$$$";
 				set_exist_named(MON_KYOUKO);
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "ÄìÄÚ_ÇĞ»ìÀÚ";
+			map->name = "ì¿„ì½”_í•™ì‚´ì";
 			return  "\
 #########\
 #$$$$$$$#\
@@ -636,7 +636,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "ÃÊ¹İ_ÀÛÀº_¿¬¸ø";
+			map->name = "ì´ˆë°˜_ì‘ì€_ì—°ëª»";
 			return  "\
 .......\
 ..~~~..\
@@ -660,7 +660,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_ITEM;
-			map->name = "ÃÊ¹İ_°­Ã¶_¾ÆÀÌÅÛ»óÀÚ";
+			map->name = "ì´ˆë°˜_ê°•ì² _ì•„ì´í…œìƒì";
 			return  "\
 .......\
 .$$$$$.\
@@ -682,7 +682,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "ÃÊ¹İ_½ÊÀÚº®_Åë·Î";
+			map->name = "ì´ˆë°˜_ì‹­ìë²½_í†µë¡œ";
 			return  "\
 ...#...\
 ...#...\
@@ -706,7 +706,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "ÃÊ¹İ_ÀÛÀº_¼¶";
+			map->name = "ì´ˆë°˜_ì‘ì€_ì„¬";
 			return  "\
 ...........\
 ..~~~~~~~..\
@@ -719,7 +719,7 @@ $$$...$$$";
 ...........";
 			break;
 			}
-		case 26: //UFO±×¸®±â
+		case 26: //UFOê·¸ë¦¬ê¸°
 			{
 			if(floor_ > 14)
 				break;
@@ -738,7 +738,7 @@ $$$...$$$";
 			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(0,0)));
 			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(1,0)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "ÃÊ¹İ_º¥Åä¶ó_½ÅÈ£µî";
+			map->name = "ì´ˆë°˜_ë²¤í† ë¼_ì‹ í˜¸ë“±";
 			return  "\
 .......\
 .=====.\
@@ -747,7 +747,7 @@ $$$...$$$";
 .......";
 			break;
 			}
-		case 27: //µµ¸ÁÃÄ Æä¾î¸®
+		case 27: //ë„ë§ì³ í˜ì–´ë¦¬
 			if(!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
 				break;
 			if(is_exist_named(MON_SUNNY))
@@ -767,7 +767,7 @@ $$$...$$$";
 				set_exist_named(MON_LUNAR);
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "»ï¿ùÁ¤_µµÁÖ";
+			map->name = "ì‚¼ì›”ì •_ë„ì£¼";
 			return  "\
 #######\
 #.....#\
@@ -775,7 +775,7 @@ $$$...$$$";
 #.....#\
 #######";
 			break;
-		case 28: //È«¸¶°ü Ã¥ Æ®·¦
+		case 28: //í™ë§ˆê´€ ì±… íŠ¸ë©
 			{
 			if(!(floor_ >= SCARLET_LEVEL && floor_ <= SCARLET_LEVEL_LAST_LEVEL))
 				break;
@@ -796,7 +796,7 @@ $$$...$$$";
 			item_infor t;
 			makeitem(ITM_BOOK, 0, &t, -1);
 			map->item_list.push_back(mapdummy_item(t,coord_def(3,0)));
-			map->name = "È«¸¶°ü_Ã¥_Æ®·¦";
+			map->name = "í™ë§ˆê´€_ì±…_íŠ¸ë©";
 			return  "\
 #########\
 #.#.#####\
@@ -807,7 +807,7 @@ $$$...$$$";
 #########";
 			break;
 			}
-		case 29: //¿ä±«ÀÇ»ê ¼öÁ·°ü
+		case 29: //ìš”ê´´ì˜ì‚° ìˆ˜ì¡±ê´€
 			{
 			if(!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
 				break;	
@@ -831,7 +831,7 @@ $$$...$$$";
 
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "¿ä±«ÀÇ»ê_¼öÁ·°ü";
+			map->name = "ìš”ê´´ì˜ì‚°_ìˆ˜ì¡±ê´€";
 			return  "\
 .......\
 .=====.\
@@ -842,7 +842,7 @@ $$$...$$$";
 .......";
 			break;
 			}
-		case 30: //ÄÚ°¡»ç Å¸ÀÓ
+		case 30: //ì½”ê°€ì‚¬ íƒ€ì„
 			{
 				if(is_exist_named(MON_KOGASA))
 					break;
@@ -868,7 +868,7 @@ $$$...$$$";
 					}
 				}
 				map->event_list.push_back(mapdummy_event(EVL_KOGASATIME,coord_def(0,-4),EVT_SIGHT));
-				map->name = "ÄÚ°¡»ç_¼­ÇÁ¶óÀÌÁîÅ¸ÀÓ";
+				map->name = "ì½”ê°€ì‚¬_ì„œí”„ë¼ì´ì¦ˆíƒ€ì„";
 				return  "\
 #############\
 #.#.......#.#\
@@ -894,7 +894,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_ÀÛÀº±âµÕµé";
+			map->name = "ê¸°ë³¸_ì‘ì€ê¸°ë‘¥ë“¤";
 			return  "\
 .......\
 .#.#.#.\
@@ -915,7 +915,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¼®»ó¹æ";
+			map->name = "ê¸°ë³¸_ì„ìƒë°©";
 			return  "\
 #######\
 #.....#\
@@ -936,7 +936,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_°¡·Î_Ã¥Åë·Î";
+			map->name = "ê¸°ë³¸_ê°€ë¡œ_ì±…í†µë¡œ";
 			return  "\
 #######\
 EEEEEEE\
@@ -955,7 +955,7 @@ EEEEEEE\
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "±âº»_¼¼·Î_Ã¥Åë·Î";
+			map->name = "ê¸°ë³¸_ì„¸ë¡œ_ì±…í†µë¡œ";
 			return  "\
 #E.E#\
 #E.E#\
@@ -977,7 +977,7 @@ EEEEEEE\
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-				map->name = "±âº»_¼®»ó_¿¬¸ø";
+				map->name = "ê¸°ë³¸_ì„ìƒ_ì—°ëª»";
 				return  "\
 .....\
 .~~~.\
@@ -987,7 +987,7 @@ EEEEEEE\
 .....\
 .....";			
 			}
-		case 36: //¼û°ÜÁø º¸¹°Ã¢°í
+		case 36: //ìˆ¨ê²¨ì§„ ë³´ë¬¼ì°½ê³ 
 			{
 				if(floor_ < 5)
 					break;
@@ -1004,7 +1004,7 @@ EEEEEEE\
 					makeitem(ITM_BOOK, 0, &t, -1);
 					map->item_list.push_back(mapdummy_item(t,coord_def(rand_int(-2,2),rand_int(-1,0))));	
 				}
-				map->name = "±âº»_¼û°ÜÁø_Ã¥¹æ";
+				map->name = "ê¸°ë³¸_ìˆ¨ê²¨ì§„_ì±…ë°©";
 				return  "\
 ####&####\
 #E.....E#\
@@ -1024,7 +1024,7 @@ EEEEEEE\
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 				map->sp_tile_list.push_back(randomTemple());
-				map->name = "±âº»_¼û°ÜÁø_Á¦´Ü";
+				map->name = "ê¸°ë³¸_ìˆ¨ê²¨ì§„_ì œë‹¨";
 				return  "\
 .....\
 .###.\
@@ -1032,7 +1032,7 @@ EEEEEEE\
 .#&#.\
 .....";			
 			}
-		case 38: //³ª·ç¹Ì °íÁ¤ÁöÇü
+		case 38: //ë‚˜ë£¨ë¯¸ ê³ ì •ì§€í˜•
 			{
 				if (is_exist_named(MON_NARUMI))
 					break;
@@ -1048,7 +1048,7 @@ EEEEEEE\
 					map->monster_list.push_back(mapdummy_mon(MON_NARUMI, 0, coord_def(2, 2)));
 					set_exist_named(MON_NARUMI);
 				}
-				map->name = "³ª·ç¹Ì_¿ä±«»ê_Áö»óº¸»ì";
+				map->name = "ë‚˜ë£¨ë¯¸_ìš”ê´´ì‚°_ì§€ìƒë³´ì‚´";
 				return  "\
 TTT.TTT\
 TB...BT\
@@ -1058,7 +1058,7 @@ T..~..T\
 TB....T\
 TTT.TTT";
 			}
-		case 39: //³×¹«³ë °íÁ¤ÁöÇü
+		case 39: //ë„¤ë¬´ë…¸ ê³ ì •ì§€í˜•
 			{
 				if (is_exist_named(MON_NEMUNO) && is_exist_named(MON_HATATE))
 					break;
@@ -1083,7 +1083,7 @@ TTT.TTT";
 				}
 				map->flag = FLAG_NO_STAIR;
 				map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(-2, 0), EVT_ALWAYS));
-				map->name = "³×¹«³ëÇÏÅ¸Å×_°İ¸®¹æ";
+				map->name = "ë„¤ë¬´ë…¸í•˜íƒ€í…Œ_ê²©ë¦¬ë°©";
 				return  "\
 $$$$$TTTTTTTT\
 $...$TTT.TTTT\
@@ -1091,7 +1091,7 @@ $...+.T.T.TT.\
 $...$T.TTT..T\
 $$$$$TTTTTTTT";
 			}
-		case 40: //¶ó¹Ù °íÁ¤ÁöÇü
+		case 40: //ë¼ë°” ê³ ì •ì§€í˜•
 			{
 				if (is_exist_named(MON_LARVA))
 					break;
@@ -1115,7 +1115,7 @@ $$$$$TTTTTTTT";
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, -1)));
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(-1, 1)));
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, 1)));
-				map->name = "¶ó¹Ù_³ªºñ¹ç";
+				map->name = "ë¼ë°”_ë‚˜ë¹„ë°­";
 				return  "\
 ..._...\
 .T___T.\
@@ -1127,7 +1127,7 @@ _______\
 				break;
 			}
 		case 41:
-		{//È£Á·³­¹«
+		{//í˜¸ì¡±ë‚œë¬´
 			if (is_exist_named(MON_FUTO) || is_exist_named(MON_TOZIKO))
 				break;
 			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
@@ -1150,7 +1150,7 @@ _______\
 				set_exist_named(MON_FUTO);
 			}
 			map->event_list.push_back(mapdummy_event(EVL_HOJOK, coord_def(0, -2), EVT_APPROACH_MIDDLE));
-			map->name = "È£Á·³­¹«";
+			map->name = "í˜¸ì¡±ë‚œë¬´";
 			return  "\
 $$$$$$$$$$$\
 $.$iiiii$.$\
@@ -1163,7 +1163,7 @@ $.........$\
 $.........$";
 			break;
 		}
-		case 42: //ÄÚ°¡»ç ±ôÂ¦¾È°³
+		case 42: //ì½”ê°€ì‚¬ ê¹œì§ì•ˆê°œ
 		{
 			if (is_exist_named(MON_KOGASA))
 				break;
@@ -1182,7 +1182,7 @@ $.........$";
 				map->event_list.push_back(mapdummy_event(EVL_KOGASA3, coord_def(0, 0), EVT_ALWAYS));
 				set_exist_named(MON_KOGASA);
 			}
-			map->name = "ÄÚ°¡»ç_¿¬¸·";
+			map->name = "ì½”ê°€ì‚¬_ì—°ë§‰";
 			return  "\
 .....\
 .....\
@@ -1190,7 +1190,7 @@ $.........$";
 .....\
 .....";
 		}
-		case 43: //¸Şµğ½¼
+		case 43: //ë©”ë””ìŠ¨
 		{
 			if (is_exist_named(MON_MEDICINE))
 				break;
@@ -1207,7 +1207,7 @@ $.........$";
 				map->event_list.push_back(mapdummy_event(EVL_MEDI, coord_def(0, 0), EVT_ALWAYS));
 				set_exist_named(MON_MEDICINE);
 			}
-			map->name = "¸Şµğ½¼_´ë·®ÇĞ»ì";
+			map->name = "ë©”ë””ìŠ¨_ëŒ€ëŸ‰í•™ì‚´";
 			return  "\
 #.......#\
 #.......#\
@@ -1232,7 +1232,7 @@ $.........$";
 			item_infor t;
 			makeitem(ITM_FOOD, 0, &t);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, 1)));
-			map->name = "±âº»_Áö»óº¸»ì_°ø¾ç";
+			map->name = "ê¸°ë³¸_ì§€ìƒë³´ì‚´_ê³µì–‘";
 			return  "\
 .....\
 .###.\
@@ -1275,7 +1275,7 @@ $.........$";
 				map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, (*rlt2)));
 			}
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(3, 0), EVT_ALWAYS));
-			map->name = "ÃÊ¹İ_¾È°³È£¼ö_°¡µæÂù_Àû";
+			map->name = "ì´ˆë°˜_ì•ˆê°œí˜¸ìˆ˜_ê°€ë“ì°¬_ì ";
 			return  "\
 #######\
 #.....#\
@@ -1299,7 +1299,7 @@ $.........$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			map->flag = FLAG_NO_STAIR;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "ÃÊ¹İ_¸¸ÀÚ_¾ÆÀÌÅÛ";
+			map->name = "ì´ˆë°˜_ë§Œì_ì•„ì´í…œ";
 			return  "\
 .........\
 .........\
@@ -1336,7 +1336,7 @@ $.........$";
 			{
 				map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, coord_def(-4+i*2,0)));
 			}
-			map->name = "ÃÊ¹İ_º®¾ÈÀÇ_º¸¹°";
+			map->name = "ì´ˆë°˜_ë²½ì•ˆì˜_ë³´ë¬¼";
 			return  "\
 ...............\
 .#############.\
@@ -1361,7 +1361,7 @@ $.........$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 			map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(0, 0), EVT_ALWAYS));
-			map->name = "ÃÊ¹İ_¿ÂÃµ";
+			map->name = "ì´ˆë°˜_ì˜¨ì²œ";
 			return  "\
 .....\
 .~~~.\
@@ -1397,7 +1397,7 @@ $.........$";
 					map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, (*rlt2)));
 			}
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(-2, 0), EVT_ALWAYS));
-			map->name = "¸®±Û_¹ú·¹À¯¸®¹æ";
+			map->name = "ë¦¬ê¸€_ë²Œë ˆìœ ë¦¬ë°©";
 			return  "\
 .......\
 .=====.\
@@ -1429,7 +1429,7 @@ $.........$";
 			item_infor t;
 			makeitem(ITM_ETC, 0, &t, EIT_CAT_TREE);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, 0)));
-			map->name = "Ã¾_°³´Ù·¡³ª¹«";
+			map->name = "ì²¸_ê°œë‹¤ë˜ë‚˜ë¬´";
 			return  "\
 .....\
 .....\
@@ -1457,7 +1457,7 @@ $.........$";
 			makeitem(ITM_FOOD, 0, &t,2);
 			map->item_list.push_back(mapdummy_item(t, coord_def(-2, -2)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "³ªÁî¸°_°úÀÚÀç·áÁ¡";
+			map->name = "ë‚˜ì¦ˆë¦°_ê³¼ìì¬ë£Œì ";
 			return  "\
 #########\
 #......$#\
@@ -1470,7 +1470,7 @@ $.........$";
 ####+####";
 			break;
 		}
-		case 52: //³×½Ã ¼ö¸®Áß
+		case 52: //ë„¤ì‹œ ìˆ˜ë¦¬ì¤‘
 		{
 			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
 				break;
@@ -1486,7 +1486,7 @@ $.........$";
 			map->monster_list.push_back(mapdummy_mon(MON_KATPA_WATER_WIZARD, 0, coord_def(2, 1)));
 			map->event_list.push_back(mapdummy_event(EVL_BROKEN_NESI, coord_def(1, 0), EVT_SIGHT));
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(2, 0), EVT_ALWAYS));
-			map->name = "¿ä±«»ê_³×½Ã¼ö¸®Áß";
+			map->name = "ìš”ê´´ì‚°_ë„¤ì‹œìˆ˜ë¦¬ì¤‘";
 			return  "\
 $$$$$$$\
 $.....$\
@@ -1532,7 +1532,7 @@ $$$$$$$";
 				map->item_list.push_back(mapdummy_item(t, coord_def(i*2-3, -3)));
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "¿ä±«»ê_Ä±ÆÄ¸¶Æ®";
+			map->name = "ìš”ê´´ì‚°_ìº‡íŒŒë§ˆíŠ¸";
 			return  "\
 #########\
 #.i.i.i.#\
@@ -1568,7 +1568,7 @@ $$$$$$$";
 				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, 0, coord_def(0, 0)));
 			}
 			map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "È«¸¶°ü_¾Ö¿Ïµ¿¹°_¿ì¸®";
+			map->name = "í™ë§ˆê´€_ì• ì™„ë™ë¬¼_ìš°ë¦¬";
 			return  "\
 .........\
 .........\
@@ -1581,7 +1581,7 @@ $$$$$$$";
 .........";
 			break;
 		}
-		case 55: //°£ÀÌ µµ¼­°ü
+		case 55: //ê°„ì´ ë„ì„œê´€
 		{
 			if (!(floor_ >= SCARLET_LEVEL && floor_ <= SCARLET_LEVEL_LAST_LEVEL))
 				break;
@@ -1597,7 +1597,7 @@ $$$$$$$";
 			item_infor t;
 			makeitem(ITM_BOOK, 0, &t, -1);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, -5)));
-			map->name = "È«¸¶°ü_°£ÀÌ_µµ¼­°ü";
+			map->name = "í™ë§ˆê´€_ê°„ì´_ë„ì„œê´€";
 			return  "\
 #######\
 #.....#\
@@ -1613,7 +1613,7 @@ $$$$$$$";
 #.E.E.#\
 #.E.E.#";
 		}
-		case 56: //°Å´ëÇÑ ½£ÀÔ±¸
+		case 56: //ê±°ëŒ€í•œ ìˆ²ì…êµ¬
 		{
 			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
 				break;
@@ -1624,7 +1624,7 @@ $$$$$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 4;
 			map->flag = FLAG_NO_STAIR;
-			map->name = "¾È°³È£¼ö_°Å´ëÇÑ_½£";
+			map->name = "ì•ˆê°œí˜¸ìˆ˜_ê±°ëŒ€í•œ_ìˆ²";
 			return  "\
 `````TTTTTTTT````````\
 ``TTTT......TTTTT````\
@@ -1640,7 +1640,7 @@ TT......TT```````````\
 ";
 
 		}
-		case 57: //È£¼ö
+		case 57: //í˜¸ìˆ˜
 		{
 			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
 				break;
@@ -1651,7 +1651,7 @@ TT......TT```````````\
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			map->flag = FLAG_NO_STAIR;
-			map->name = "¾È°³È£¼ö_Â¡°Ë´Ù¸®";
+			map->name = "ì•ˆê°œí˜¸ìˆ˜_ì§•ê²€ë‹¤ë¦¬";
 			return  "\
 ``~~~.~T~``\
 `~~~~~.~~~`\
@@ -1671,7 +1671,7 @@ TT......TT```````````\
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = rand_int(-map->size_x, map->size_x);
 			map->m_exit.y = map->size_y;
-			map->name = "¾È°³È£¼ö_³ª¹«_±æ";
+			map->name = "ì•ˆê°œí˜¸ìˆ˜_ë‚˜ë¬´_ê¸¸";
 			return  "\
 T.T.T\
 ``.``\
@@ -1689,7 +1689,7 @@ T.T.T";
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = -1;
 			map->m_exit.y = map->size_y;
-			map->name = "¾È°³È£¼ö_ÀÛÀº_½£";
+			map->name = "ì•ˆê°œí˜¸ìˆ˜_ì‘ì€_ìˆ²";
 			return  "\
 ```.`\
 ``.T.\
@@ -1707,7 +1707,7 @@ T.T.T";
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
-			map->name = "¾È°³È£¼ö_½£_¾ÈÀÇ_¿¬¸ø";
+			map->name = "ì•ˆê°œí˜¸ìˆ˜_ìˆ²_ì•ˆì˜_ì—°ëª»";
 			return  "\
 `TTTTTTT`\
 TT.....TT\
@@ -1734,7 +1734,7 @@ TT.....TT\
 					map->event_list.push_back(mapdummy_event((i+j)%2? EVL_COLD_SMOKE:EVL_FIRE_SMOKE, coord_def(i*2-3, j*2-3), EVT_ALWAYS));
 				}
 			}
-			map->name = "È«¸¶°ü_¸¶·Âº¸°ü_Àü½Ã´ë";
+			map->name = "í™ë§ˆê´€_ë§ˆë ¥ë³´ê´€_ì „ì‹œëŒ€";
 			return  "\
 .........\
 ..=====..\
@@ -1752,7 +1752,7 @@ TT.....TT\
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
-			map->name = "±âº»_´ÙÀÌ¾Æ¸óµå_¹æ";
+			map->name = "ê¸°ë³¸_ë‹¤ì´ì•„ëª¬ë“œ_ë°©";
 			return  "\
 ```#.#```\
 ``#...#``\
@@ -1770,7 +1770,7 @@ TT.....TT\
 			map->m_entrance.y = rand_int(-map->size_y, map->size_y);
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-map->size_y, map->size_y);
-			map->name = "±âº»_°¡·Î_¸ğ·¡½Ã°è¹æ";
+			map->name = "ê¸°ë³¸_ê°€ë¡œ_ëª¨ë˜ì‹œê³„ë°©";
 			return  "\
 ...#`````##....\
 ....###`.......\
@@ -1798,7 +1798,7 @@ char* pande_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_STAIR;
-		map->name = "¸¶°è_XÀÚ¹æ";
+		map->name = "ë§ˆê³„_Xìë°©";
 		return  "\
 ###.###\
 ##...##\
@@ -1819,7 +1819,7 @@ char* pande_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_STAIR;
-		map->name = "¸¶°è_À¯¸®¹æ";
+		map->name = "ë§ˆê³„_ìœ ë¦¬ë°©";
 		return  "\
 =.=.=.=.=.=\
 ...........\
@@ -1842,7 +1842,7 @@ char* pande_pattern(map_dummy* map)
 		map->m_exit.x = -2;
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_STAIR;
-		map->name = "¸¶°è_¤©ÀÚ_ÀÛÀº¹æ";
+		map->name = "ë§ˆê³„_ã„¹ì_ì‘ì€ë°©";
 	return  "\
 #####.#\
 #.....#\
@@ -1864,7 +1864,7 @@ char* pande_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_STAIR;
-		map->name = "¸¶°è_´ÙÀÌ¾Æ¸óµå¹æ";
+		map->name = "ë§ˆê³„_ë‹¤ì´ì•„ëª¬ë“œë°©";
 		map->sp_tile_list.clear();
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
@@ -1896,7 +1896,7 @@ char* pande_pattern(map_dummy* map)
 		map->m_exit.x = 1;
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_N¹æ";
+		map->name = "ë§ˆê³„_Në°©";
 		return  "\
 $$$$$$$$$\
 $...M...$\
@@ -1921,7 +1921,7 @@ $$$...$$$";
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = -map->size_y;
-		map->name = "¸¶°è_Áö±×Àç±×";
+		map->name = "ë§ˆê³„_ì§€ê·¸ì¬ê·¸";
 		return  "\
 #.............#\
 #.............#\
@@ -1951,7 +1951,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_À¯ÀüÀÚ";
+		map->name = "ë§ˆê³„_ìœ ì „ì";
 		return  "\
 ...............\
 #.....###.....#\
@@ -1981,7 +1981,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_½ÊÀÚ°¡";
+		map->name = "ë§ˆê³„_ì‹­ìê°€";
 		return  "\
 .............\
 .....#.#.....\
@@ -2009,7 +2009,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_Å¬·Î¹ö_ÀÛÀº¹æ";
+		map->name = "ë§ˆê³„_í´ë¡œë²„_ì‘ì€ë°©";
 		return  "\
 .............\
 .............\
@@ -2060,7 +2060,7 @@ $$$...$$$";
 				map->sp_tile_list.push_back(DG_GLASS);
 			}
 		}
-		map->name = "¸¶°è_¹°±æ";
+		map->name = "ë§ˆê³„_ë¬¼ê¸¸";
 		return  "\
 .............\
 ....==4==....\
@@ -2088,7 +2088,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_µğ½ºÄÚ";
+		map->name = "ë§ˆê³„_ë””ìŠ¤ì½”";
 		int add_ = randA(6);
 		for (int i = 0; i < 7; i++) {
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1+((i+ add_)%7)));
@@ -2120,7 +2120,7 @@ $$$...$$$";
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;		
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_¹«Áö°³¹æ";
+		map->name = "ë§ˆê³„_ë¬´ì§€ê°œë°©";
 		int add_ = randA(6);
 		for (int i = 0; i < 7; i++) {
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + ((i + add_) % 7)));
@@ -2154,7 +2154,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_È£¼ö_½ÅÀü";
+		map->name = "ë§ˆê³„_í˜¸ìˆ˜_ì‹ ì „";
 		map->sp_tile_list.push_back(randomTemple());
 		return  "\
 .........\
@@ -2179,7 +2179,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_»ö´Ù¸¥¹æ";
+		map->name = "ë§ˆê³„_ìƒ‰ë‹¤ë¥¸ë°©";
 		int rand_ = randA(3);
 		int rand2_ = randA(6);
 		for (int i = 0; i < 4; i++) {
@@ -2213,7 +2213,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_»ö´Ù¸¥¹æ_¸ó½ºÅÍ";
+		map->name = "ë§ˆê³„_ìƒ‰ë‹¤ë¥¸ë°©_ëª¬ìŠ¤í„°";
 		int rand_ = randA(3);
 		int rand2_ = randA(6);
 		for (int i = 0; i < 4; i++) {
@@ -2246,7 +2246,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_º¸»óÇÔÁ¤¹æ";
+		map->name = "ë§ˆê³„_ë³´ìƒí•¨ì •ë°©";
 		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, 3), EVT_ALWAYS));
 		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, -2), EVT_ALWAYS));
 		return  "\
@@ -2271,7 +2271,7 @@ $$$...$$$";
 		map->m_exit.x = 0;
 		map->m_exit.y = map->size_y;
 		//map->flag = FLAG_NO_STAIR;
-		map->name = "¸¶°è_À¯¸®¿Í_¹®_¹æ";
+		map->name = "ë§ˆê³„_ìœ ë¦¬ì™€_ë¬¸_ë°©";
 		return  "\
 ###.###\
 #.....#\
@@ -2290,7 +2290,7 @@ $$$...$$$";
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_À¯¸®_Åë·Î";
+		map->name = "ë§ˆê³„_ìœ ë¦¬_í†µë¡œ";
 		return  "\
 ===#########===\
 =m=#########=M=\
@@ -2325,7 +2325,7 @@ $$$...$$$";
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand_));
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1 + rand_));
 		}
-		map->name = "¸¶°è_ºê·ÎÄİ¸®";
+		map->name = "ë§ˆê³„_ë¸Œë¡œì½œë¦¬";
 		return  "\
 ````00000````\
 ````01110````\
@@ -2353,7 +2353,7 @@ $$$...$$$";
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_º§Æ®_Åë·Î";
+		map->name = "ë§ˆê³„_ë²¨íŠ¸_í†µë¡œ";
 		return  "\
 ```````````````\
 `$``#######``=`\
@@ -2379,7 +2379,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_²Ş¹æ";
+		map->name = "ë§ˆê³„_ê¿ˆë°©";
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
 			if (rand_ == i)
@@ -2411,7 +2411,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_ÁöÀú¹æ";
+		map->name = "ë§ˆê³„_ì§€ì €ë°©";
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
 			if (rand_ == i)
@@ -2448,7 +2448,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "¸¶°è_ÅÛÇÃ¸´";
+		map->name = "ë§ˆê³„_í…œí”Œë¦¿";
 		return  "\
 ...............\
 ...............\
@@ -2478,7 +2478,7 @@ $$$...$$$";
 char* temple_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
-	map->sp_tile_list.push_back(DG_TEMPLE_STAIR); //0Àº ÅÛÇÃ ÀÔ±¸·Î Ä£´Ù.
+	map->sp_tile_list.push_back(DG_TEMPLE_STAIR); //0ì€ í…œí”Œ ì…êµ¬ë¡œ ì¹œë‹¤.
 	switch(randA(7))
 	{
 	default:
@@ -2490,7 +2490,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "½ÅÀü_´ÙÀÌ¾Æ¸óµå_ÀÔ±¸";
+		map->name = "ì‹ ì „_ë‹¤ì´ì•„ëª¬ë“œ_ì…êµ¬";
 		return  "\
 ###.###\
 ##...##\
@@ -2508,7 +2508,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "½ÅÀü_°¡·Î_»ç½½ÀÔ±¸";
+		map->name = "ì‹ ì „_ê°€ë¡œ_ì‚¬ìŠ¬ì…êµ¬";
 		return  "\
 #####################\
 #.....#.....#.....###\
@@ -2524,7 +2524,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_exit.x = 4;
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "½ÅÀü_È¸¿À¸®ÀÔ±¸";
+		map->name = "ì‹ ì „_íšŒì˜¤ë¦¬ì…êµ¬";
 		return  "\
 #########.#\
 #.......#.#\
@@ -2545,7 +2545,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "½ÅÀü_½ÊÀÚÀÔ±¸";
+		map->name = "ì‹ ì „_ì‹­ìì…êµ¬";
 		return  "\
 ###.###\
 #.#.#.#\
@@ -2563,7 +2563,7 @@ char* temple_pattern(map_dummy* map)
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "½ÅÀü_¼öÁ·°üÀÔ±¸";
+		map->name = "ì‹ ì „_ìˆ˜ì¡±ê´€ì…êµ¬";
 		return  "\
 ===+===\
 =~=0=~=\
@@ -2582,7 +2582,7 @@ char* temple_pattern(map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "½ÅÀü_È£¼öÀÔ±¸";
+			map->name = "ì‹ ì „_í˜¸ìˆ˜ì…êµ¬";
 			return  "\
 .........\
 ...~~~...\
@@ -2610,7 +2610,7 @@ char* temple_pattern(map_dummy* map)
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(-1,-1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(1,1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(3,-1)));
-			map->name = "½ÅÀü_¸ğ¿ÁÀÔ±¸"; 
+			map->name = "ì‹ ì „_ëª¨ì˜¥ì…êµ¬"; 
 			return  "\
 .............\
 .===========.\
@@ -2632,7 +2632,7 @@ char* temple_pattern(map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "½ÅÀü_4°³_¼öÁ·°üÀÔ±¸";
+			map->name = "ì‹ ì „_4ê°œ_ìˆ˜ì¡±ê´€ì…êµ¬";
 			return  "\
 .........\
 .===.===.\
@@ -2661,7 +2661,7 @@ char* lake_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "¾È°³ÀÇ_È£¼ö_ÀÔ±¸";
+		map->name = "ì•ˆê°œì˜_í˜¸ìˆ˜_ì…êµ¬";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		rand_rect_iterator rand_coord(coord_def(0, 0), map->size_x-1, map->size_y-1);
 		for (int i = 0; i < 10; i++) {
@@ -2697,7 +2697,7 @@ char* youkai_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "¿ä±«ÀÇ_»ê_ÀÔ±¸";
+		map->name = "ìš”ê´´ì˜_ì‚°_ì…êµ¬";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return "\
 .........\
@@ -2727,7 +2727,7 @@ char* yukkuri_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "ÀµÄí¸®_±¼_ÀÔ±¸";
+		map->name = "ìœ³ì¿ ë¦¬_êµ´_ì…êµ¬";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(-1, 0)));
 		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(1, 0)));
@@ -2760,7 +2760,7 @@ char* dream_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "²ŞÀÇ_¼¼°è_ÀÔ±¸";
+		map->name = "ê¿ˆì˜_ì„¸ê³„_ì…êµ¬";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return "\
 ....^..\
@@ -2869,7 +2869,7 @@ char* scarlet_pattern(map_dummy* map)
 			set_exist_named(MON_MEIRIN);
 		}
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "È«¸¶°ü_±âº»ÀÔ±¸";
+		map->name = "í™ë§ˆê´€_ê¸°ë³¸ì…êµ¬";
 		return  "\
 #######\
 #..0..#\
@@ -2921,7 +2921,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "¿ä±«»ê_¾Æ¾ß_·é";
+		map->name = "ìš”ê´´ì‚°_ì•„ì•¼_ë£¬";
 		return  "\
 #################\
 ###...........###\
@@ -2984,7 +2984,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "¿ä±«»ê_´ÏÅä¸®_·é";
+		map->name = "ìš”ê´´ì‚°_ë‹ˆí† ë¦¬_ë£¬";
 		return  "\
 .................\
 .................\
@@ -3043,7 +3043,7 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(-3,1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(3,1)));	
 
-		map->name = "È«¸¶°ü_±âº»_·é";
+		map->name = "í™ë§ˆê´€_ê¸°ë³¸_ë£¬";
 		return  "\
 #######+++#######\
 #...............#\
@@ -3115,7 +3115,7 @@ char* eientei_vault_pattern(map_dummy* map)
 		}
 
 
-		map->name = "¿µ¿øÁ¤_±âº»_·é";
+		map->name = "ì˜ì›ì •_ê¸°ë³¸_ë£¬";
 
 		return  "\
 .......................................................................\
@@ -3183,7 +3183,7 @@ char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "¸¶°è_¹ı°è_·é";
+		map->name = "ë§ˆê³„_ë²•ê³„_ë£¬";
 		return  "\
 $$$$$$$$$$$$$$$$$\
 $$$...........$$$\
@@ -3231,7 +3231,7 @@ char* pandemonium_ice_last_vault_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,-1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,1)));		
 
-		map->name = "¸¶°è_ºù°á¼¼°è_·é";
+		map->name = "ë§ˆê³„_ë¹™ê²°ì„¸ê³„_ë£¬";
 		return  "\
 ##~~~~~~~..~~~~~~~~##\
 #~~~~~~~.~~~~~~~~~~~#\
@@ -3293,7 +3293,7 @@ char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "¸¶°è_ÆÇµ¥¸ğ´Ï¾ö_·é";
+		map->name = "ë§ˆê³„_íŒë°ëª¨ë‹ˆì—„_ë£¬";
 		return  "\
 $$$$$$$$$$$$$$$$$\
 $.##iiii.iiii##.$\
@@ -3358,7 +3358,7 @@ char* yukkuri_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "ÀµÄí¸®_±âº»_·é";
+		map->name = "ìœ³ì¿ ë¦¬_ê¸°ë³¸_ë£¬";
 		return  "\
 ...............................\
 ...............................\
@@ -3441,7 +3441,7 @@ char* moon_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "´Şµµ½Ã_±âº»_·é";
+		map->name = "ë‹¬ë„ì‹œ_ê¸°ë³¸_ë£¬";
 		return  "\
 ...............\
 .$$$.......$$$.\
@@ -3505,7 +3505,7 @@ char* subterranean_last_vault_pattern(map_dummy* map)
 				set_exist_named(MON_UTSUHO);
 			}
 
-			map->name = "ÁöÀú_±âº»_·é";
+			map->name = "ì§€ì €_ê¸°ë³¸_ë£¬";
 			return  "\
 .....................\
 .......#######.......\
@@ -3588,7 +3588,7 @@ char* hakurei_last_vault_pattern(map_dummy* map)
 					mon_num_--;
 				}
 			}
-			map->name = "ÇÏÄí·¹ÀÌ_±âº»_À½¾ç¿Á";
+			map->name = "í•˜ì¿ ë ˆì´_ê¸°ë³¸_ìŒì–‘ì˜¥";
 			return  "\
 #####$$$$$$$$$#####\
 ###$$$.......$$$###\

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: god.cpp
+// íŒŒì¼ì´ë¦„: god.cpp
 //
-// ³»¿ë: ½Å°ü·Ã
+// ë‚´ìš©: ì‹ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,7 +161,7 @@ void swako_gift(bool speak_) {
 	makeitem(ITM_ARMOR_HEAD, 1, &t);
 	t.image = &img_item_armor_helmet[6];
 	t.equip_image = &img_play_item_hat[6];
-	t.name.name = "½º¿ÍÄÚÀÇ ¸ğÀÚ";
+	t.name.name = "ìŠ¤ì™€ì½”ì˜ ëª¨ì";
 	t.name.name_type = false;
 	item* item_ = env[current_level].MakeItem(you.position, t);
 	MakeArtifact(item_, 2);
@@ -179,10 +179,10 @@ void swako_gift(bool speak_) {
 
 	if (speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!", true, false, false, CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!", true, false, false, CL_dark_good);
 
 		char temp[200];
-		sprintf_s(temp, 200, "½º¿ÍÄÚ¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp, 200, "ìŠ¤ì™€ì½”ì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn, CurrentLevelString(), temp, CL_help);
 
 		MoreWait();
@@ -191,7 +191,7 @@ void swako_gift(bool speak_) {
 void joon_sion_gift(bool speak_)
 {
 	if (speak_) {
-		printlog("´ç½ÅÀº ´Ù½Ã ºùÀÇ¸¦ ÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_joon_and_sion);
+		printlog("ë‹¹ì‹ ì€ ë‹¤ì‹œ ë¹™ì˜ë¥¼ í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_joon_and_sion);
 		MoreWait();
 	}
 	you.god_value[GT_JOON_AND_SION][1] = 0;
@@ -206,10 +206,10 @@ void minoriko_gift(bool speak_)
 	
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		char temp[200];
-		sprintf_s(temp,200,"¹Ì³ë¸®ÄÚ¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp,200,"ë¯¸ë…¸ë¦¬ì½”ì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
 		MoreWait();
@@ -245,10 +245,10 @@ void byakuren_gift(bool speak_)
 	
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		char temp[200];
-		sprintf_s(temp,200,"¹òÄí·»¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp,200,"ë±Œì¿ ë Œì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
 		MoreWait();
@@ -262,38 +262,38 @@ void mima_gift(book_list book_)
 		item_infor t;
 		env[current_level].MakeItem(you.position,makeitem(ITM_BOOK, 0, &t, book_));
 		
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		char temp[200];
-		sprintf_s(temp,200,"¹Ì¸¶¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp,200,"ë¯¸ë§ˆì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 		MoreWait();
 	}
 }
 void satori_gift()
 {
-	printlog("»çÅä¸®´ÔÀÌ ´ç½Å¿¡°Ô ¸ÔÀÌ¸¦ ÁÖ¼Ì´Ù!",false,false,false,CL_green);
+	printlog("ì‚¬í† ë¦¬ë‹˜ì´ ë‹¹ì‹ ì—ê²Œ ë¨¹ì´ë¥¼ ì£¼ì…¨ë‹¤!",false,false,false,CL_green);
 	if(1)
-	{//Ã¼·ÂÈ¸º¹
+	{//ì²´ë ¥íšŒë³µ
 		you.HpUpDown(5+randA_1(25),DR_POTION);
 	}
 	if(1)
-	{//¸¶³ªÈ¸º¹
+	{//ë§ˆë‚˜íšŒë³µ
 		you.MpUpDown(9+randA_1(15));
 	}
 	if(randA(1))
-	{//´É·ÂÄ¡È¸º¹ 
+	{//ëŠ¥ë ¥ì¹˜íšŒë³µ 
 		you.s_paralyse = 0;
 		you.s_confuse = 0;
 		you.s_poison = 0;
 		you.s_sick = 0;
 	}
 	if(randA(2)==0)
-	{//ÆÄ¿ö¾÷
+	{//íŒŒì›Œì—…
 		you.PowUpDown(50);
 	}
 	if(randA(4)==0)
-	{//´É·ÂÄ¡È¸º¹
+	{//ëŠ¥ë ¥ì¹˜íšŒë³µ
 		if(you.s_str < you.m_str)
 		{
 			you.StatUpDown(you.m_str-you.s_str,STAT_STR,true);
@@ -308,16 +308,16 @@ void satori_gift()
 		}
 	}
 	if(randA(9)==0)
-	{//Áö´É¾÷
+	{//ì§€ëŠ¥ì—…
 		you.SetClever(rand_int(50,80));
 		//you.HungerApply(50);
 	}
 	if(randA(9)==0)
-	{//¹ÎÃ¸¾÷
+	{//ë¯¼ì²©ì—…
 		you.SetAgility(rand_int(50,80));
 	}
 	if(randA(9)==0)
-	{//Èû¾÷
+	{//í˜ì—…
 		you.SetMight(rand_int(50,80));
 	}
 }
@@ -339,15 +339,15 @@ void kanako_gift(bool speak_)
 	//it->value3 += rand_int(-1,6);
 	it->value4 += rand_int(-2,6);
 	if(!it->value5 && randA(2)>1)
-		it->value5 = GetNewBrand(0); //Ä«³ªÄÚ´Â ½ÅÀÇ ºê·£µå´Â ¼±¹°ÇÏÁö ¾Ê´Â´Ù.
+		it->value5 = GetNewBrand(0); //ì¹´ë‚˜ì½”ëŠ” ì‹ ì˜ ë¸Œëœë“œëŠ” ì„ ë¬¼í•˜ì§€ ì•ŠëŠ”ë‹¤.
 	if(randA(3) == 0)
 		MakeArtifact(it,1);
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		char temp[200];
-		sprintf_s(temp,200,"Ä«³ªÄÚ¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp,200,"ì¹´ë‚˜ì½”ì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
 		MoreWait();
@@ -359,12 +359,12 @@ void kanako_gift(bool speak_)
 item* armour_gift(bool speak_, bool artifact_)
 {
 	random_extraction<int> rand_;
-	rand_.push(0,5); //¾Æ¸Ó
-	rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=1?3:1); //¹æÆĞ
-	rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //¸Ó¸®
-	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //¸ÁÅä
-	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //¼Õ
-	rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //¹ß
+	rand_.push(0,5); //ì•„ë¨¸
+	rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=1?3:1); //ë°©íŒ¨
+	rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //ë¨¸ë¦¬
+	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //ë§í† 
+	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //ì†
+	rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //ë°œ
 	item* it = NULL;
 
 	int armour_ = rand_.pop();
@@ -372,22 +372,22 @@ item* armour_gift(bool speak_, bool artifact_)
 	{
 	case 0:
 		{
-			//È¸ÇÇ½ºÅ³ÀÌ °©¿Ê½ºÅ³ÀÇ 2¹èÀÌ»óÀÌ°Å³ª °©¿ÊÀÌ 5·¹º§¹Ì¸¸
+			//íšŒí”¼ìŠ¤í‚¬ì´ ê°‘ì˜·ìŠ¤í‚¬ì˜ 2ë°°ì´ìƒì´ê±°ë‚˜ ê°‘ì˜·ì´ 5ë ˆë²¨ë¯¸ë§Œ
 			bool dodge_ = (you.GetSkillLevel(SKT_DODGE, true)>you.GetSkillLevel(SKT_ARMOUR, true)*2 || you.GetSkillLevel(SKT_ARMOUR, true) < 5);
-			//°©¿Ê½ºÅ³ÀÌ È¸ÇÇ½ºÅ³ÀÇ 2¹èÀÌ»óÀÌ°Å³ª °©¿ÊÀÌ 15·¹º§ÀÌ»ó
+			//ê°‘ì˜·ìŠ¤í‚¬ì´ íšŒí”¼ìŠ¤í‚¬ì˜ 2ë°°ì´ìƒì´ê±°ë‚˜ ê°‘ì˜·ì´ 15ë ˆë²¨ì´ìƒ
 			bool heavy_ = (you.GetSkillLevel(SKT_ARMOUR, true)>you.GetSkillLevel(SKT_DODGE, true) *2 || you.GetSkillLevel(SKT_ARMOUR, true) >= 15);
 			random_extraction<int> rand2_;
 
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //·Îºê
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //°¡Á×
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //Ã¼ÀÎ
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //ÆÇ±İ
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //ë¡œë¸Œ
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //ê°€ì£½
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //ì²´ì¸
+			rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //íŒê¸ˆ
 	
 			int select_ = rand2_.pop();
 			item_infor t;
 			it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
 
-			//it->value4 += randA(randA(it->value1/2)); //Ãß°¡ ÀÎÃ¦Æ®
+			//it->value4 += randA(randA(it->value1/2)); //ì¶”ê°€ ì¸ì±ˆíŠ¸
 			if(randA(1) || artifact_) //50%
 				MakeArtifact(it,1);
 		}
@@ -396,9 +396,9 @@ item* armour_gift(bool speak_, bool artifact_)
 		{
 			random_extraction<int> rand2_;
 
-			rand2_.push(0, you.GetSkillLevel(SKT_SHIELD, true) <=5?5:1); //¹öÅ¬·¯
-			rand2_.push(28, you.GetSkillLevel(SKT_SHIELD, true) >=10?5:1); //½Çµå
-			rand2_.push(30, you.GetSkillLevel(SKT_SHIELD, true) >=20?10:1); //Ä«ÀÌÆ®
+			rand2_.push(0, you.GetSkillLevel(SKT_SHIELD, true) <=5?5:1); //ë²„í´ëŸ¬
+			rand2_.push(28, you.GetSkillLevel(SKT_SHIELD, true) >=10?5:1); //ì‹¤ë“œ
+			rand2_.push(30, you.GetSkillLevel(SKT_SHIELD, true) >=20?10:1); //ì¹´ì´íŠ¸
 			
 			int select_ = rand2_.pop();
 			
@@ -430,7 +430,7 @@ item* armour_gift(bool speak_, bool artifact_)
 
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		MoreWait();
 	}
@@ -446,7 +446,7 @@ item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 	{
 		if(isGoodRing((ring_type)i,1))
 		{			
-			rand_.push(i,iden_list.ring_list[i].iden == 2?1:20); //½Äº°µÈ°ÍÀº È®·üÀÌ È® ÁÙ¾îµë
+			rand_.push(i,iden_list.ring_list[i].iden == 2?1:20); //ì‹ë³„ëœê²ƒì€ í™•ë¥ ì´ í™• ì¤„ì–´ë“¬
 		}
 	}
 	
@@ -464,7 +464,7 @@ item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 
 		MoreWait();
 	}
@@ -490,10 +490,10 @@ void eirin_gift(bool speak_)
 		env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t,(int)type_));
 	if(speak_)
 	{
-		printlog("´ç½ÅÀÇ ¹ß¹Ø¿¡ ¹«¾ğ°¡ ³ªÅ¸³µ´Ù!",true,false,false,CL_dark_good);
+		printlog("ë‹¹ì‹ ì˜ ë°œë°‘ì— ë¬´ì–¸ê°€ ë‚˜íƒ€ë‚¬ë‹¤!",true,false,false,CL_dark_good);
 	
 		char temp[200];
-		sprintf_s(temp,200,"¿¡ÀÌ¸°¿¡°Ô ¼±¹°À» ¹Ş¾Ò´Ù.");
+		sprintf_s(temp,200,"ì—ì´ë¦°ì—ê²Œ ì„ ë¬¼ì„ ë°›ì•˜ë‹¤.");
 		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
 		MoreWait();

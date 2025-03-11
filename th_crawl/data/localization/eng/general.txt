@@ -1,4 +1,4 @@
-LOC_SYSTEM_LOS_MON,A monster is in sight.
+﻿LOC_SYSTEM_LOS_MON,A monster is in sight.
 LOC_SYSTEM_LOS_NOMON,There are no monsters in sight.
 LOC_SYSTEM_CONFUSE_WARNING,You are confused.
 LOC_SYSTEM_DIMENSTION,The dimension is fixed and cannot be changed.

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: event.cpp
+// íŒŒì¼ì´ë¦„: event.cpp
 //
-// ³»¿ë: ÀÌº¥Æ® Ã³¸®¿¡ °üÇÑ ÇÔ¼ö, Å¬·¡½º Á¤ÀÇ
+// ë‚´ìš©: ì´ë²¤íŠ¸ ì²˜ë¦¬ì— ê´€í•œ í•¨ìˆ˜, í´ë˜ìŠ¤ ì •ì˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,7 +81,7 @@ int events::action(int delay_)
 {
 	bool is_sight = false;
 	if(env[current_level].isInSight(position))
-		is_sight = true; //ÇöÀç ´«¿¡ º¸ÀÌ´ÂÁö
+		is_sight = true; //í˜„ì¬ ëˆˆì— ë³´ì´ëŠ”ì§€
 
 	if(count>=0)
 	{
@@ -130,151 +130,151 @@ int events::action(int delay_)
 
 
 
-int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
+int EventOccur(int id, events* event_) //1ì´ ì ìš©í•˜ê³  ëë‚´ê¸°
 {
 	enterlog();
 	switch (id)
 	{
 	case 1:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¹®À» ¿­¶§´Â ¹® ¿·¿¡¼­ OÅ°¸¦, ´İÀ»¶§´Â CÅ°·Î ´İÀ» ¼ö ÀÖÁö.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¹æÇâÅ°·Î ¹Ğ¾î¼­ ÀÚµ¿À¸·Î ¿­±âµµ ÇÑ´Ü´Ù.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë¬¸ì„ ì—´ë•ŒëŠ” ë¬¸ ì˜†ì—ì„œ Oí‚¤ë¥¼, ë‹«ì„ë•ŒëŠ” Cí‚¤ë¡œ ë‹«ì„ ìˆ˜ ìˆì§€.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë°©í–¥í‚¤ë¡œ ë°€ì–´ì„œ ìë™ìœ¼ë¡œ ì—´ê¸°ë„ í•œë‹¨ë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 2:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Å°ÆĞµåÀÇ ¹æÇâÅ°³ª y u b nÅ°·Î ´ë°¢¼±À» ¿òÁ÷¿©º¸ÀÚ.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : oÅ°¸¦ ´©¸£¸é Å½»ö ¾ÈÇÑ Áö¿ªÀ¸·Î ÀÚµ¿À¸·Î ÀÌµ¿ÇÏÁö.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : í‚¤íŒ¨ë“œì˜ ë°©í–¥í‚¤ë‚˜ y u b ní‚¤ë¡œ ëŒ€ê°ì„ ì„ ì›€ì§ì—¬ë³´ì.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : oí‚¤ë¥¼ ëˆ„ë¥´ë©´ íƒìƒ‰ ì•ˆí•œ ì§€ì—­ìœ¼ë¡œ ìë™ìœ¼ë¡œ ì´ë™í•˜ì§€.", true, false, false, CL_warning);
 		return 1;
 	case 3:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ,³ª g¸¦ ´­·¯¼­ ¾ÆÀÌÅÛÀ» ÁÖ¿ö¼­ ÀåÂøÇØº¸·Å.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : wÅ°·Î ¹«±â, WÅ°·Î ¹æ¾î±¸ÀåÂø, iÅ°´Â ¼³¸í, dÅ°´Â ¹ö¸®±â¾ß.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ,ë‚˜ gë¥¼ ëˆŒëŸ¬ì„œ ì•„ì´í…œì„ ì£¼ì›Œì„œ ì¥ì°©í•´ë³´ë ´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : wí‚¤ë¡œ ë¬´ê¸°, Wí‚¤ë¡œ ë°©ì–´êµ¬ì¥ì°©, ií‚¤ëŠ” ì„¤ëª…, dí‚¤ëŠ” ë²„ë¦¬ê¸°ì•¼.", true, false, false, CL_warning);
 		return 1;
 	case 4:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Å©·ÑÀº ¾ğÁ¦³ª ÀüÅõÀÇ ¿¬¼ÓÀÌÁö, °ø°İÀº Á÷Á¢ ºÎµúÈ÷¸é µÅ.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¾àÇÑ »ó´ë¶óµµ 1:1·Î ½Î¿ì´Â°Ô À¯¸®ÇÏ´Ï °ñ¸ñÀ¸·Î À¯ÀÎÇÏ·Å.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : í¬ë¡¤ì€ ì–¸ì œë‚˜ ì „íˆ¬ì˜ ì—°ì†ì´ì§€, ê³µê²©ì€ ì§ì ‘ ë¶€ë”ªíˆë©´ ë¼.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì•½í•œ ìƒëŒ€ë¼ë„ 1:1ë¡œ ì‹¸ìš°ëŠ”ê²Œ ìœ ë¦¬í•˜ë‹ˆ ê³¨ëª©ìœ¼ë¡œ ìœ ì¸í•˜ë ´.", true, false, false, CL_warning);
 		return 1;
 	case 5:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Ç×»ó ½Î¿òÀÇ ÈÄ¿£ Ã¼·ÂÀ» Ã¤¿ì´Â ½À°üÀ» µéÀÌ·Å.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : .Å°´Â 1ÅÏ ÈŞ½ÄÀ», 5Å°´Â 100ÅÏ ÈŞ½ÄÀ» ÇÒ ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : mÅ°¸¦ ´­·¯¼­ ³ª¿À´Â Ã¢¿¡¼± ¾òÀº ½ºÅ³ ÅõÀÚ ¹æÇâÀ» Á¤ÇÒ ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÆÄ¿ö´Â Çã±âÁ¶Àı, ´É·Â»ç¿ë, ±ÙÁ¢µ¥¹ÌÁö »ó½Â¿¡ µµ¿òÀ» ÁÖÁö.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : í•­ìƒ ì‹¸ì›€ì˜ í›„ì—” ì²´ë ¥ì„ ì±„ìš°ëŠ” ìŠµê´€ì„ ë“¤ì´ë ´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : .í‚¤ëŠ” 1í„´ íœ´ì‹ì„, 5í‚¤ëŠ” 100í„´ íœ´ì‹ì„ í•  ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : mí‚¤ë¥¼ ëˆŒëŸ¬ì„œ ë‚˜ì˜¤ëŠ” ì°½ì—ì„  ì–»ì€ ìŠ¤í‚¬ íˆ¬ì ë°©í–¥ì„ ì •í•  ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : íŒŒì›ŒëŠ” í—ˆê¸°ì¡°ì ˆ, ëŠ¥ë ¥ì‚¬ìš©, ê·¼ì ‘ë°ë¯¸ì§€ ìƒìŠ¹ì— ë„ì›€ì„ ì£¼ì§€.", true, false, false, CL_warning);
 		return 1;
 	case 6:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : °è´ÜÀ» ³»·Á°¥¶§´Â >Å°, ¿Ã¶ó¿Ã¶© <Å°·Î ¿Ã¶ó¿Ã ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀÌ¹Ì Á¤¸®ÇÑ Ãş¿¡¼± º¼°Ô ¾øÀ¸´Ï ´ÙÀ½ ÃşÀ¸·Î ³»·Á°¡ÀÚ.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ê³„ë‹¨ì„ ë‚´ë ¤ê°ˆë•ŒëŠ” >í‚¤, ì˜¬ë¼ì˜¬ë• <í‚¤ë¡œ ì˜¬ë¼ì˜¬ ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì´ë¯¸ ì •ë¦¬í•œ ì¸µì—ì„  ë³¼ê²Œ ì—†ìœ¼ë‹ˆ ë‹¤ìŒ ì¸µìœ¼ë¡œ ë‚´ë ¤ê°€ì.", true, false, false, CL_warning);
 		return 1;
 	case 7:
 		if (you.power > 150)
 			you.PowUpDown(-(you.power - 150), true);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÆÄ¿ö°¡ 2.00ÀÌÇÏ°¡ µÇ¸é °ø°İ·ÂÀÌ °¨¼ÒÇØ¹ö¸°´Ü´Ù.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀûÀ» Àâ¾Æ¼­ ³ª¿À´Â PÅÛÀ» ¸Ô°Å³ª À½½ÄÀ» ÅëÇØ¼­ È¸º¹ÀÌ °¡´ÉÇØ.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : eÅ°¸¦ ´­·¯¼­ »§À» ¸ÔÀ¸¸é ÆÄ¿ö¸¦ È¸º¹ÇÒ ¼ö ÀÖ¾î.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : íŒŒì›Œê°€ 2.00ì´í•˜ê°€ ë˜ë©´ ê³µê²©ë ¥ì´ ê°ì†Œí•´ë²„ë¦°ë‹¨ë‹¤.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì ì„ ì¡ì•„ì„œ ë‚˜ì˜¤ëŠ” Pí…œì„ ë¨¹ê±°ë‚˜ ìŒì‹ì„ í†µí•´ì„œ íšŒë³µì´ ê°€ëŠ¥í•´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : eí‚¤ë¥¼ ëˆŒëŸ¬ì„œ ë¹µì„ ë¨¹ìœ¼ë©´ íŒŒì›Œë¥¼ íšŒë³µí•  ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
 		return 1;
 	case 8:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¿ø°Å¸® °ø°İÀº ¾ğÁ¦³ª ÆíÇÏÁö. ºÎÀûÀ» ÁÖ¿öº¸·Å.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì›ê±°ë¦¬ ê³µê²©ì€ ì–¸ì œë‚˜ í¸í•˜ì§€. ë¶€ì ì„ ì£¼ì›Œë³´ë ´.", true, false, false, CL_warning);
 		return 1;
 	case 9:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¿ø°Å¸® ¹«±â¸¦ ´øÁú¶§´Â FÅ°¸¦ ´©¸£°í ´øÁú ÅÛÀ» °ñ¶ó.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : fÅ°·Ğ ÁØºñµÇ¾îÀÖ´Â Åº¸·À» ¹Ù·Î ´øÁú ¼ö ÀÖ´Ü´Ù.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì›ê±°ë¦¬ ë¬´ê¸°ë¥¼ ë˜ì§ˆë•ŒëŠ” Fí‚¤ë¥¼ ëˆ„ë¥´ê³  ë˜ì§ˆ í…œì„ ê³¨ë¼.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : fí‚¤ë¡  ì¤€ë¹„ë˜ì–´ìˆëŠ” íƒ„ë§‰ì„ ë°”ë¡œ ë˜ì§ˆ ìˆ˜ ìˆë‹¨ë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 10:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : È¿°ú¸¦ ¾Ë ¼ö ¾ø´Â Àå½Å±¸¿Í µÎ·ç¸¶¸®±º. ÀÏ´Ü »ç¿ëÇØº¸ÀÚ.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀÏ´Ü ¹İÁö¸¦ ÁÖ¿ö¼­ PÅ°·Î ÀåÂøÇØ. RÅ°·Ğ ¹şÀ» ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : µÎ·ç¸¶¸®¸¦ ÀĞ´Â°Ç rÅ°¾ß. ¼±ÅÃÃ¢ÀÌ ¶ß¸é ¹İÁö¿¡ »ç¿ëÇØºÁ.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : íš¨ê³¼ë¥¼ ì•Œ ìˆ˜ ì—†ëŠ” ì¥ì‹ êµ¬ì™€ ë‘ë£¨ë§ˆë¦¬êµ°. ì¼ë‹¨ ì‚¬ìš©í•´ë³´ì.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì¼ë‹¨ ë°˜ì§€ë¥¼ ì£¼ì›Œì„œ Pí‚¤ë¡œ ì¥ì°©í•´. Rí‚¤ë¡  ë²—ì„ ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë‘ë£¨ë§ˆë¦¬ë¥¼ ì½ëŠ”ê±´ rí‚¤ì•¼. ì„ íƒì°½ì´ ëœ¨ë©´ ë°˜ì§€ì— ì‚¬ìš©í•´ë´.", true, false, false, CL_warning);
 		return 1;
 	case 11:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÇÏÇÏ, Çã±âÀÇ ¹İÁö´Â ÀüÇô µµ¿òÀÌ ¾ÈµÇÁö. dÅ°·Î ¹ö¸± ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¹°¾àÀÌ º¸ÀÌ´Â±º. ¹°¾àÀº qÅ°·Î ¸ÔÀ» ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¿ª½Ã ¸Ô±âÀü¿£ È¿°ú¸¦ ¾Ë ¼ö ¾ø°í °¡²û ³ª»Û È¿°úµµ ÀÖÁö.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : í•˜í•˜, í—ˆê¸°ì˜ ë°˜ì§€ëŠ” ì „í˜€ ë„ì›€ì´ ì•ˆë˜ì§€. dí‚¤ë¡œ ë²„ë¦´ ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë¬¼ì•½ì´ ë³´ì´ëŠ”êµ°. ë¬¼ì•½ì€ qí‚¤ë¡œ ë¨¹ì„ ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì—­ì‹œ ë¨¹ê¸°ì „ì—” íš¨ê³¼ë¥¼ ì•Œ ìˆ˜ ì—†ê³  ê°€ë” ë‚˜ìœ íš¨ê³¼ë„ ìˆì§€.", true, false, false, CL_warning);
 		return 1;
 	case 12:
 		you.GiveSkillExp(SKT_SPELLCASTING, 20, true);
 		you.GiveSkillExp(SKT_CONJURE, 100, true);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¸¶¹ıÀ» ¹è¿ì·Á¸é Ã¥¿¡¼­ ÁÖ¹®À» ¸ÕÀú ¹è¿ö¾ßÇÏÁö.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀÏ´Ü Ã¥À» ÁÖ¿ö¼­ MÅ°·Î ¸¶¹ıÀÇÅº¸·À» ¹è¿öº¸ÀÚ.", true, false, false, CL_warning); \
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë§ˆë²•ì„ ë°°ìš°ë ¤ë©´ ì±…ì—ì„œ ì£¼ë¬¸ì„ ë¨¼ì € ë°°ì›Œì•¼í•˜ì§€.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì¼ë‹¨ ì±…ì„ ì£¼ì›Œì„œ Mí‚¤ë¡œ ë§ˆë²•ì˜íƒ„ë§‰ì„ ë°°ì›Œë³´ì.", true, false, false, CL_warning); \
 			return 1;
 	case 13:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¸¶¹ıÀ» »ç¿ëÇÏ±âÀ§ÇØ¼± zÅ°³ª ZÅ°¸¦ ´©¸£°í »ç¿ëÇÒ¼öÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¹æ¹ıÀº ºÎÀû´øÁö±â¿Í ¶È°°´Ü´Ù! ÀÚ ¸÷À» ¸¶¹ıÀ¸·Î Àâ¾Æº¸·Å.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë§ˆë²•ì„ ì‚¬ìš©í•˜ê¸°ìœ„í•´ì„  zí‚¤ë‚˜ Zí‚¤ë¥¼ ëˆ„ë¥´ê³  ì‚¬ìš©í• ìˆ˜ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë°©ë²•ì€ ë¶€ì ë˜ì§€ê¸°ì™€ ë˜‘ê°™ë‹¨ë‹¤! ì ëª¹ì„ ë§ˆë²•ìœ¼ë¡œ ì¡ì•„ë³´ë ´.", true, false, false, CL_warning);
 		return 1;
 	case 14:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : <Å°·Î ´Ù½Ã À§ÃşÀ¸·Î ¿Ã¶ó°¥ ¼ö ÀÖ¾î.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : <í‚¤ë¡œ ë‹¤ì‹œ ìœ„ì¸µìœ¼ë¡œ ì˜¬ë¼ê°ˆ ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
 		return 1;
 	case 15:
-		printlog("½Å¼ºÇÑ ±â¿îÀÌ °¨µ¹°í ÀÖ´Ù.", true, false, false, CL_normal);
+		printlog("ì‹ ì„±í•œ ê¸°ìš´ì´ ê°ëŒê³  ìˆë‹¤.", true, false, false, CL_normal);
 		return 1;
 	case 16:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ½Î¿ì°í³­ ÈÄ¿£ 5Å°·Î ÈŞ½Ä ±â¾ïÇÏ°íÀÖÁö? µ¶ÀÌ °É·È´Ù¸é Ç®¾îµÖ.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Á¦´ÜÀ» Ã£À¸¸é À§¿¡¼­ pÅ°·Î ±âµµ¸¦ ÇÒ ¼ö ÀÖ¾î.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ³» ½ÅÀüÀÌ´Ï±î ÇÑ¹ø ¹Ï¾îº¸·Å. ¹Ï°í³­ÈÄ ^Å°·Î ¼³¸íÀÌ º¸¿©.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì‹¸ìš°ê³ ë‚œ í›„ì—” 5í‚¤ë¡œ íœ´ì‹ ê¸°ì–µí•˜ê³ ìˆì§€? ë…ì´ ê±¸ë ¸ë‹¤ë©´ í’€ì–´ë‘¬.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì œë‹¨ì„ ì°¾ìœ¼ë©´ ìœ„ì—ì„œ pí‚¤ë¡œ ê¸°ë„ë¥¼ í•  ìˆ˜ ìˆì–´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë‚´ ì‹ ì „ì´ë‹ˆê¹Œ í•œë²ˆ ë¯¿ì–´ë³´ë ´. ë¯¿ê³ ë‚œí›„ ^í‚¤ë¡œ ì„¤ëª…ì´ ë³´ì—¬.", true, false, false, CL_warning);
 		return 1;
 	case 17:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : aÅ°¸¦ ´­·¯¼­ ±Ç´ÉÀ» ÇÑ¹ø »ç¿ëÇØ¼­ ½Î¿öº¸·Å.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ±Ç´ÉÀº ÀÏÁ¤ ½Å¾Ó½ÉÀÌ µÇ¸é Á¡Á¡ ´Ã¾î³ª°ÔµÇÁö.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Æ¯È÷ ³» ±Ç´ÉÀº ½Å¾Ó½ÉÀ» ÀÏÁ¤·® ¼Ò¸ğÇÏ´Ï±î ÁÖÀÇÇØ¼­ ½á.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : aí‚¤ë¥¼ ëˆŒëŸ¬ì„œ ê¶ŒëŠ¥ì„ í•œë²ˆ ì‚¬ìš©í•´ì„œ ì‹¸ì›Œë³´ë ´.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ê¶ŒëŠ¥ì€ ì¼ì • ì‹ ì•™ì‹¬ì´ ë˜ë©´ ì ì  ëŠ˜ì–´ë‚˜ê²Œë˜ì§€.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : íŠ¹íˆ ë‚´ ê¶ŒëŠ¥ì€ ì‹ ì•™ì‹¬ì„ ì¼ì •ëŸ‰ ì†Œëª¨í•˜ë‹ˆê¹Œ ì£¼ì˜í•´ì„œ ì¨.", true, false, false, CL_warning);
 		return 1;
 	case 18:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ½Å¸¶´Ù ½Å¾Ó½ÉÀ» ¾ò´Â ¹æ¹ıÀÌ ´Ù¸£°í ½È¾îÇÏ´Â °Íµµ ÀÖ´Ü´Ù.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ³ªÀÇ °æ¿ì´Â ÀûÀ» Á×ÀÏ¶§¸¶´Ù ½Å¾Ó½ÉÀÌ Á¶±İ¾¿ ¿À¸¥´Ü´Ù.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ³ª °°Àº °æ¿ì´Â ÀûÀ» Á×ÀÌ¸é ÀÚµ¿À¸·Î ½Å¾Ó½ÉÀÌ ¿À¸£Áö.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì‹ ë§ˆë‹¤ ì‹ ì•™ì‹¬ì„ ì–»ëŠ” ë°©ë²•ì´ ë‹¤ë¥´ê³  ì‹«ì–´í•˜ëŠ” ê²ƒë„ ìˆë‹¨ë‹¤.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë‚˜ì˜ ê²½ìš°ëŠ” ì ì„ ì£½ì¼ë•Œë§ˆë‹¤ ì‹ ì•™ì‹¬ì´ ì¡°ê¸ˆì”© ì˜¤ë¥¸ë‹¨ë‹¤.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë‚˜ ê°™ì€ ê²½ìš°ëŠ” ì ì„ ì£½ì´ë©´ ìë™ìœ¼ë¡œ ì‹ ì•™ì‹¬ì´ ì˜¤ë¥´ì§€.", true, false, false, CL_warning);
 		return 1;
 	case 19:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ¿ä±« ¿ì»êÀÌ±¸³ª. ¸Ó¸®À§¿¡ ÀÌ¸§ÀÌ »õ°ÜÁø ¸÷Àº ³×ÀÓµå¶õ´Ù.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ³×ÀÓµå¸÷Àº º¸Åë Àûº¸´Ù °­ÇÏÁö. ¼ö´Ü°ú ¹æ¹ıÀ» °¡¸®Áö¸¶.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ±×µ¿¾È ³ª¿Â ¾ÆÀÌÅÛ°ú ¹æ¹ıÀ» È°¿ëÇØ¼­ ÀâÀ» ¼ö ÀÖÀ»Áö ½ÃÇèÇØº¸ÀÚ.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ìš”ê´´ ìš°ì‚°ì´êµ¬ë‚˜. ë¨¸ë¦¬ìœ„ì— ì´ë¦„ì´ ìƒˆê²¨ì§„ ëª¹ì€ ë„¤ì„ë“œë€ë‹¤.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ë„¤ì„ë“œëª¹ì€ ë³´í†µ ì ë³´ë‹¤ ê°•í•˜ì§€. ìˆ˜ë‹¨ê³¼ ë°©ë²•ì„ ê°€ë¦¬ì§€ë§ˆ.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ê·¸ë™ì•ˆ ë‚˜ì˜¨ ì•„ì´í…œê³¼ ë°©ë²•ì„ í™œìš©í•´ì„œ ì¡ì„ ìˆ˜ ìˆì„ì§€ ì‹œí—˜í•´ë³´ì.", true, false, false, CL_warning);
 		return 1;
 	case 20:
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Æ©Åä¸®¾óÀº ¿©±â¼­ ³¡ÀÌ¶õ´Ù »ç³ª¿¡.", true, false, false, CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ½ÇÁ¦ °ÔÀÓ¿¡¼­´Â Á×À½À» µÎ·Á¿öÇÏÁö¸»°Å¶ó!", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : íŠœí† ë¦¬ì–¼ì€ ì—¬ê¸°ì„œ ëì´ë€ë‹¤ ì‚¬ë‚˜ì—.", true, false, false, CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì‹¤ì œ ê²Œì„ì—ì„œëŠ” ì£½ìŒì„ ë‘ë ¤ì›Œí•˜ì§€ë§ê±°ë¼!", true, false, false, CL_warning);
 		return 1;
 	case 21:
-		printlog("°­·ÂÇÑ ±¤±â°¡ ´À²¸Áø´Ù. Áö±İÀÌ¶óµµ µµ¸ÁÃÄ!", true, false, false, CL_small_danger);
+		printlog("ê°•ë ¥í•œ ê´‘ê¸°ê°€ ëŠê»´ì§„ë‹¤. ì§€ê¸ˆì´ë¼ë„ ë„ë§ì³!", true, false, false, CL_small_danger);
 		return 1;
 	case 22:
-		printlog("¿©±ä ºĞ¸í ¸¸µé´Ù ¸»¾Ò±º. ¸øµÈ Á¦ÀÛÀÚ ³ğ!", true, false, false, CL_help);
+		printlog("ì—¬ê¸´ ë¶„ëª… ë§Œë“¤ë‹¤ ë§ì•˜êµ°. ëª»ëœ ì œì‘ì ë†ˆ!", true, false, false, CL_help);
 		return 1;
 	case 23:
-		printlog("ÀÌ °÷Àº ²ûÂïÇÑ ¹Ì±ÃÀÌ±º! Ãâ±¸¸¦ Ã£¾Æ¾ß ÇÑ´Ù. ¾Æ´Ï¸é »õ·Î¿î Àå¼Ò¸¦ Ã£À»Áöµµ..?", true, false, false, CL_small_danger);
+		printlog("ì´ ê³³ì€ ë”ì°í•œ ë¯¸ê¶ì´êµ°! ì¶œêµ¬ë¥¼ ì°¾ì•„ì•¼ í•œë‹¤. ì•„ë‹ˆë©´ ìƒˆë¡œìš´ ì¥ì†Œë¥¼ ì°¾ì„ì§€ë„..?", true, false, false, CL_small_danger);
 		return 1;
 	case 24:
 		return 1;
 	case 25:
-		printlog("µ¿¹æÅ©·Ñ¿¡¼± ¸ğµç ¹«±â¸¦ ÇÑ¼ÕÀÌ³ª ¾ç¼ÕÀ¸·Î µé ¼ö ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
-		printlog("´Ü, ¸î¸î ¹«±â´Â ¾ç¼ÕÀ¸·Î µé¶§ È¿À²ÀÌ ¸¹ÀÌ ¶³¾îÁı´Ï´Ù.", true, false, false, CL_warning);
-		printlog("´Ü°ËÀº ¾ç¼ÕÀ¸·Î ½áµµ ÆĞ³ÎÆ¼°¡ ¾øÁö¸¸ ´Ù¿ìÂ¡Àº ¾ç¼Õ½Ã Å« ÆĞ³ÎÆ¼°¡ ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ë™ë°©í¬ë¡¤ì—ì„  ëª¨ë“  ë¬´ê¸°ë¥¼ í•œì†ì´ë‚˜ ì–‘ì†ìœ¼ë¡œ ë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ë‹¨, ëª‡ëª‡ ë¬´ê¸°ëŠ” ì–‘ì†ìœ¼ë¡œ ë“¤ë•Œ íš¨ìœ¨ì´ ë§ì´ ë–¨ì–´ì§‘ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ë‹¨ê²€ì€ ì–‘ì†ìœ¼ë¡œ ì¨ë„ íŒ¨ë„í‹°ê°€ ì—†ì§€ë§Œ ë‹¤ìš°ì§•ì€ ì–‘ì†ì‹œ í° íŒ¨ë„í‹°ê°€ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 26:
-		printlog("¸öÅë¹æ¾î±¸¿£ ÀçÁú°ú Á¾·ù·Î ³ª´µ¾îÀÖ°í ±×¿Ü¿£ º¸Á¶¹æ¾î±¸¿Í ¹æÆĞ°¡ ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
-		printlog("°©¿Ê¿£ ÀçÁú¿¡ µû¶ó ÀåºñÆĞ³ÎÆ¼°¡ Á¸ÀçÇÏ¿© ÇÕ»êµÇ¾î ¿ìÃøÃ¢¿¡ Ç¥½ÃµË´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ëª¸í†µë°©ì–´êµ¬ì—” ì¬ì§ˆê³¼ ì¢…ë¥˜ë¡œ ë‚˜ë‰˜ì–´ìˆê³  ê·¸ì™¸ì—” ë³´ì¡°ë°©ì–´êµ¬ì™€ ë°©íŒ¨ê°€ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ê°‘ì˜·ì—” ì¬ì§ˆì— ë”°ë¼ ì¥ë¹„íŒ¨ë„í‹°ê°€ ì¡´ì¬í•˜ì—¬ í•©ì‚°ë˜ì–´ ìš°ì¸¡ì°½ì— í‘œì‹œë©ë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 27:
 		you.GiveSkillExp(SKT_ARMOUR, 1200, true);
 		you.GiveSkillExp(SKT_SHIELD, 300, true);
-		printlog("ÀÌ ÀåºñÆĞ³ÎÆ¼´Â Èû°ú °©¿Ê,¹æÆĞ ½ºÅ³¿¡ µû¶ó °¨¼ÒµË´Ï´Ù.", true, false, false, CL_warning);
-		printlog("ÀÚ¼¼ÇÑ ¼öÄ¡³ª Á¤µµ´Â i¸¦ ´­·¯¼­ ÀÚ¼¼ÇÑ ¼öÄ¡¸¦ È®ÀÎÇØº¸¼¼¿ä.", true, false, false, CL_warning);
+		printlog("ì´ ì¥ë¹„íŒ¨ë„í‹°ëŠ” í˜ê³¼ ê°‘ì˜·,ë°©íŒ¨ ìŠ¤í‚¬ì— ë”°ë¼ ê°ì†Œë©ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ìì„¸í•œ ìˆ˜ì¹˜ë‚˜ ì •ë„ëŠ” ië¥¼ ëˆŒëŸ¬ì„œ ìì„¸í•œ ìˆ˜ì¹˜ë¥¼ í™•ì¸í•´ë³´ì„¸ìš”.", true, false, false, CL_warning);
 		return 1;
 	case 28:
-		printlog("µ¿¹æÅ©·Ñ¿£ È°ÀÌ³ª ºí·Î¿ì°Ç°°Àº ¿ø°Å¸® ¹«±â°¡ ¾øÁö¸¸ ¸ğµÎ ¼ÕÀ¸·Î ´øÁú ¼ö ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
-		printlog("ÅõÃ´¿ë´Ü°Ë, ÅõÃ´¿ëÃ¢, Ã¶·ûÀº ¹«±â·Îµµ ¾µ ¼ö ÀÖÁö¸¸ ÅõÃ´¿ëÀ¸·Îµµ »ç¿ë°¡´ÉÇÕ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("¼Ò¸ğ¼º Åº¸·°ú ÅõÃ´¿ë ¹«±â ¸ğµÎ Åº¸· ½ºÅ³¿¡ ¿µÇâÀ» ¹Ş½À´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ë™ë°©í¬ë¡¤ì—” í™œì´ë‚˜ ë¸”ë¡œìš°ê±´ê°™ì€ ì›ê±°ë¦¬ ë¬´ê¸°ê°€ ì—†ì§€ë§Œ ëª¨ë‘ ì†ìœ¼ë¡œ ë˜ì§ˆ ìˆ˜ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("íˆ¬ì²™ìš©ë‹¨ê²€, íˆ¬ì²™ìš©ì°½, ì² ë¥œì€ ë¬´ê¸°ë¡œë„ ì“¸ ìˆ˜ ìˆì§€ë§Œ íˆ¬ì²™ìš©ìœ¼ë¡œë„ ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ì†Œëª¨ì„± íƒ„ë§‰ê³¼ íˆ¬ì²™ìš© ë¬´ê¸° ëª¨ë‘ íƒ„ë§‰ ìŠ¤í‚¬ì— ì˜í–¥ì„ ë°›ìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 29:
-		printlog("µ¿¹æÅ©·Ñ¿£ Çã±âÀÇ °³³äÀÌ ¾ø´Â ´ë½Å¿¡ ºñ½ÁÇÑ P¶ó´Â °ÔÀÌÁö°¡ Á¸ÀçÇÕ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("¾Æ»ç´Â Á¸ÀçÇÏÁö¾Ê´Â ´ë½Å 2Ä­ÀÌÇÏ·Î ¶³¾îÁö¸é ÀüÅõÆĞ³ÎÆ¼°¡ ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
-		printlog("¸ğµç ÀûÀº ÀÏÁ¤È®·ü·Î PÅÛÀ» ¶³¾î¶ß¸®¸ç ÀÌ°ÍÀ» ÁÖÀ¸¸é P°¡ È¸º¹µË´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ë™ë°©í¬ë¡¤ì—” í—ˆê¸°ì˜ ê°œë…ì´ ì—†ëŠ” ëŒ€ì‹ ì— ë¹„ìŠ·í•œ Pë¼ëŠ” ê²Œì´ì§€ê°€ ì¡´ì¬í•©ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ì•„ì‚¬ëŠ” ì¡´ì¬í•˜ì§€ì•ŠëŠ” ëŒ€ì‹  2ì¹¸ì´í•˜ë¡œ ë–¨ì–´ì§€ë©´ ì „íˆ¬íŒ¨ë„í‹°ê°€ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ëª¨ë“  ì ì€ ì¼ì •í™•ë¥ ë¡œ Pí…œì„ ë–¨ì–´ëœ¨ë¦¬ë©° ì´ê²ƒì„ ì£¼ìœ¼ë©´ Pê°€ íšŒë³µë©ë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 30:
-		printlog("½ºÆçÄ«µå´Â µ¹Á×ÀÇ ¿Ïµå¸¦ ´ëÃ¼ÇÏ´Â ¾ÆÀÌÅÛÀÔ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("{¹ßµ¿}ÀÌ ºÙÀº ÅÛÀº P¸¦ ¼Ò¸ğÇÏ¿© ¹ßµ¿ÇÏ´Â ¿µ±¸ÀûÀÎ ºñ¼Ò¸ğ¹ßµ¿ÅÛÀÔ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("µÑ´Ù V·Î ¹ßµ¿ÀÌ °¡´ÉÇÏ¸ç ¹ßµ¿½ºÅ³¿¡ ¿µÇâÀ» ¹Ş¾Æ °­·ÂÇØÁı´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ìŠ¤í ì¹´ë“œëŠ” ëŒì£½ì˜ ì™„ë“œë¥¼ ëŒ€ì²´í•˜ëŠ” ì•„ì´í…œì…ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("{ë°œë™}ì´ ë¶™ì€ í…œì€ Pë¥¼ ì†Œëª¨í•˜ì—¬ ë°œë™í•˜ëŠ” ì˜êµ¬ì ì¸ ë¹„ì†Œëª¨ë°œë™í…œì…ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ë‘˜ë‹¤ Vë¡œ ë°œë™ì´ ê°€ëŠ¥í•˜ë©° ë°œë™ìŠ¤í‚¬ì— ì˜í–¥ì„ ë°›ì•„ ê°•ë ¥í•´ì§‘ë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 31:
-		printlog("ºÎÀûÀº µ¹Á×ÀÇ ¾Æ¹Ä·¿¿¡ ´ëÃ¼µÇ´Â ¾ÆÀÌÅÛÀÔ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("³¤ Áï½Ã È¿°ú´Â ¾øÁö¸¸ ³¢°í ¸ó½ºÅÍ¸¦ ÀâÀ¸¸é ÆÛ¼¾Æ¼Áö°¡ Ã¤¿öÁı´Ï´Ù.", true, false, false, CL_warning);
-		printlog("100%°¡ µÇ¸é VÅ°·Î È¿°ú¸¦ »ç¿ë°¡´ÉÇÕ´Ï´Ù. ÀÏºÎ´Â ³¢±â¸¸ ÇØµµ È¿°ú°¡ ÀÖ½À´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ë¶€ì ì€ ëŒì£½ì˜ ì•„ë®¬ë ›ì— ëŒ€ì²´ë˜ëŠ” ì•„ì´í…œì…ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ë‚€ ì¦‰ì‹œ íš¨ê³¼ëŠ” ì—†ì§€ë§Œ ë¼ê³  ëª¬ìŠ¤í„°ë¥¼ ì¡ìœ¼ë©´ í¼ì„¼í‹°ì§€ê°€ ì±„ì›Œì§‘ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("100%ê°€ ë˜ë©´ Ví‚¤ë¡œ íš¨ê³¼ë¥¼ ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤. ì¼ë¶€ëŠ” ë¼ê¸°ë§Œ í•´ë„ íš¨ê³¼ê°€ ìˆìŠµë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case 32:
-		printlog("µ¿¹æÅ©·Ñ¿£ ÃÑ 10°³ÀÇ ·éÀÌ ÀÖ°í Á¶Æ®ÀÇ ¹æÀ» ´ëÃ¼ÇÏ´Â ÇÏÄí·¹ÀÌ ½Å»ç°¡ Á¸ÀçÇÏ¿©", true, false, false, CL_warning);
-		printlog("Á¶Æ®ÀÇ ¿Àºê¸¦ ´ëÃ¼ÇÏ´Â À½¾ç¿ÁÀÌ¶õ ÅÛÀ» ÁÖ¿ö¼­ Å»ÃâÇÏ¸é °ÔÀÓ¿¡¼­ ½Â¸®ÇÕ´Ï´Ù.", true, false, false, CL_warning);
-		printlog("¸ğÀÚ¶õ °ÔÀÓÀÌÁö¸¸ Àß ºÎÅ¹µå¸³´Ï´Ù.", true, false, false, CL_warning);
+		printlog("ë™ë°©í¬ë¡¤ì—” ì´ 10ê°œì˜ ë£¬ì´ ìˆê³  ì¡°íŠ¸ì˜ ë°©ì„ ëŒ€ì²´í•˜ëŠ” í•˜ì¿ ë ˆì´ ì‹ ì‚¬ê°€ ì¡´ì¬í•˜ì—¬", true, false, false, CL_warning);
+		printlog("ì¡°íŠ¸ì˜ ì˜¤ë¸Œë¥¼ ëŒ€ì²´í•˜ëŠ” ìŒì–‘ì˜¥ì´ë€ í…œì„ ì£¼ì›Œì„œ íƒˆì¶œí•˜ë©´ ê²Œì„ì—ì„œ ìŠ¹ë¦¬í•©ë‹ˆë‹¤.", true, false, false, CL_warning);
+		printlog("ëª¨ìë€ ê²Œì„ì´ì§€ë§Œ ì˜ ë¶€íƒë“œë¦½ë‹ˆë‹¤.", true, false, false, CL_warning);
 		return 1;
 	case EVL_KISME:
 	{
@@ -284,10 +284,10 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		{
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
-				printlog("ÇÏ´Ã¿¡¼­ Å°½º¸Ş°¡ ¶³¾îÁ³´Ù!", true, false, false, CL_small_danger);
+				printlog("í•˜ëŠ˜ì—ì„œ í‚¤ìŠ¤ë©”ê°€ ë–¨ì–´ì¡Œë‹¤!", true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_EVENT, (*rit));
 				mon_->SetStrong(5);
-				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //Å°½º¸Ş´Â ¶³¾îÁö°í ¹Ù·Î °ø°İÇÏÁö¾Ê´Â´Ù.
+				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //í‚¤ìŠ¤ë©”ëŠ” ë–¨ì–´ì§€ê³  ë°”ë¡œ ê³µê²©í•˜ì§€ì•ŠëŠ”ë‹¤.
 				MoreWait();
 				i--;
 			}
@@ -352,10 +352,10 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		{
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
-				printlog("ÇÏ´Ã¿¡¼­ ÄÚ°¡»ç°¡ ¶³¾îÁ³´Ù!", true, false, false, CL_small_danger);
+				printlog("í•˜ëŠ˜ì—ì„œ ì½”ê°€ì‚¬ê°€ ë–¨ì–´ì¡Œë‹¤!", true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, (*rit));
 				MoreWait();
-				printlog("...±×·¯³ª ÄÚ°¡»ç´Â ¶¥¹Ù´Ú¿¡ ¸Ó¸®ºÎÅÍ ºÎµúÇû´Ù.", true, false, false, CL_normal);
+				printlog("...ê·¸ëŸ¬ë‚˜ ì½”ê°€ì‚¬ëŠ” ë•…ë°”ë‹¥ì— ë¨¸ë¦¬ë¶€í„° ë¶€ë”ªí˜”ë‹¤.", true, false, false, CL_normal);
 				mon_->SetConfuse(5 + randA(5));
 				mon_->SetStrong(5);
 				mon_->hp = mon_->hp * 2 / 3;
@@ -432,22 +432,22 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		{
 		case 5:
 			you.resetLOS();
-			printlog("²ŞÀÇ ¼¼°è°¡ ³Ğ¾îÁö±â ½ÃÀÛÇÑ´Ù! ÀÚ°í ÀÖ´ø ÀûµéÀÌ ±ú¾î³ª±â ½ÃÀÛÇÑ´Ù!", true, false, false, CL_danger);
+			printlog("ê¿ˆì˜ ì„¸ê³„ê°€ ë„“ì–´ì§€ê¸° ì‹œì‘í•œë‹¤! ìê³  ìˆë˜ ì ë“¤ì´ ê¹¨ì–´ë‚˜ê¸° ì‹œì‘í•œë‹¤!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 4:
 			you.resetLOS();
-			printlog("²ŞÀÇ ¼¼°è°¡ ³Ğ¾îÁö°í ÀÖ´Ù!", true, false, false, CL_danger);
+			printlog("ê¿ˆì˜ ì„¸ê³„ê°€ ë„“ì–´ì§€ê³  ìˆë‹¤!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 3:
 			you.resetLOS();
-			printlog("²ŞÀÇ ¼¼°è°¡ ¶Ç ´Ù½Ã ³Ğ¾îÁ³´Ù! ²ŞÀÇ ÁÖ¹ÎµéÀÌ ´ç½ÅÀ» ´«Ä¡Ã«´Ù!", true, false, false, CL_danger);
+			printlog("ê¿ˆì˜ ì„¸ê³„ê°€ ë˜ ë‹¤ì‹œ ë„“ì–´ì¡Œë‹¤! ê¿ˆì˜ ì£¼ë¯¼ë“¤ì´ ë‹¹ì‹ ì„ ëˆˆì¹˜ì±˜ë‹¤!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 2:
 			you.resetLOS();
-			printlog("²ŞÀÇ ¼¼°è´Â °ÅÀÇ ´ëºÎºĞ ¿­·È´Ù! °ğ ¸ó½ºÅÍ°¡ µé²ú±â ½ÃÀÛÇÑ´Ù!", true, false, false, CL_danger);
+			printlog("ê¿ˆì˜ ì„¸ê³„ëŠ” ê±°ì˜ ëŒ€ë¶€ë¶„ ì—´ë ¸ë‹¤! ê³§ ëª¬ìŠ¤í„°ê°€ ë“¤ë“ê¸° ì‹œì‘í•œë‹¤!", true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 1:
@@ -501,7 +501,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 				}
 			}
 			you.resetLOS();
-			printlog("²ŞÀÇ ¼¼°è´Â ¿ÏÀüÈ÷ °³¹æµÇ¾ú´Ù! ´Ş·Î °¡´Â Æ÷Å»·Î ÃÖ´ëÇÑ »¡¸® µé¾î°¡¾ßÇÑ´Ù!", true, false, false, CL_danger);
+			printlog("ê¿ˆì˜ ì„¸ê³„ëŠ” ì™„ì „íˆ ê°œë°©ë˜ì—ˆë‹¤! ë‹¬ë¡œ ê°€ëŠ” í¬íƒˆë¡œ ìµœëŒ€í•œ ë¹¨ë¦¬ ë“¤ì–´ê°€ì•¼í•œë‹¤!", true, false, false, CL_danger);
 			MoreWait();
 			env[current_level].MakeEvent(EVL_REGEN, coord_def(0, 0), EVT_ALWAYS, 30);
 			break;
@@ -525,7 +525,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		float multi_ = 0.0f;
 		if (int penalty_turn_ = you.CheckPeanltyTurn(current_level))
 		{
-			//1000ºÎÅÍ ½ÃÀÛÇØ¼­ 5000ÅÏºÎÅÍ ¸ó½ºÅÍ 2¹è
+			//1000ë¶€í„° ì‹œì‘í•´ì„œ 5000í„´ë¶€í„° ëª¬ìŠ¤í„° 2ë°°
 			if (penalty_turn_ >= 1000) {
 				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
 			}
@@ -557,7 +557,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		float multi_ = 0.0f;
 		if (int penalty_turn_ = you.CheckPeanltyTurn(current_level))
 		{
-			//1000ºÎÅÍ ½ÃÀÛÇØ¼­ 5000ÅÏºÎÅÍ ¸ó½ºÅÍ 2¹è
+			//1000ë¶€í„° ì‹œì‘í•´ì„œ 5000í„´ë¶€í„° ëª¬ìŠ¤í„° 2ë°°
 			if (penalty_turn_ >= 1000) {
 				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
 			}
@@ -605,14 +605,14 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		if (event_->count == 10)
 		{
 			enterlog();
-			printlog("³ª, ¸Ş¸®¾¾", true, false, false, CL_small_danger);
+			printlog("ë‚˜, ë©”ë¦¬ì”¨", true, false, false, CL_small_danger);
 			MoreWait();
 			you.SetInter(IT_EVENT);
 		}
 		if (event_->count == 5)
 		{
 			enterlog();
-			printlog("Áö±İ, ´ç½ÅÀÇ", true, false, false, CL_small_danger);
+			printlog("ì§€ê¸ˆ, ë‹¹ì‹ ì˜", true, false, false, CL_small_danger);
 			MoreWait();
 			you.SetInter(IT_EVENT);
 		}
@@ -626,17 +626,17 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 				if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 				{
 					enterlog();
-					printlog("µî µÚ¿¡ ÀÖ¾î!", true, false, false, CL_danger);
+					printlog("ë“± ë’¤ì— ìˆì–´!", true, false, false, CL_danger);
 					MoreWait();
 					monster *mon_ = env[current_level].AddMonster(MON_KOISHI, M_FLAG_EVENT, (*rit));
-					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //ÄÚÀÌ½Ã´Â ¶³¾îÁö°í ¹Ù·Î °ø°İÇÏÁö¾Ê´Â´Ù.
+					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //ì½”ì´ì‹œëŠ” ë–¨ì–´ì§€ê³  ë°”ë¡œ ê³µê²©í•˜ì§€ì•ŠëŠ”ë‹¤.
 					mon_->SetStrong(5);
 					mon_->SetHaste(20 + randA(20));
 					return 1;
 				}
 			}
 			enterlog();
-			printlog("... º¸ÀÌÁö ¾Ê´Â °÷¿¡ ÀÖ¾î", true, false, false, CL_small_danger); //ÄÚÀÌ½Ã µîÀå½ÇÆĞ
+			printlog("... ë³´ì´ì§€ ì•ŠëŠ” ê³³ì— ìˆì–´", true, false, false, CL_small_danger); //ì½”ì´ì‹œ ë“±ì¥ì‹¤íŒ¨
 			MoreWait();
 			return 1;
 		}
@@ -695,7 +695,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		star_->s_fear = 30 + randA(20);
 		lunar_->s_fear = 30 + randA(20);
 		char temp[100];
-		sprintf_s(temp, 100, "%s%s¿ÜÃÆ´Ù. \"µµ¸ÁÃÄ!\"", star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
+		sprintf_s(temp, 100, "%s%sì™¸ì³¤ë‹¤. \"ë„ë§ì³!\"", star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
 		printlog(temp, true, false, false, CL_speak);
 
 		sunny_->SetInvisible(10);
@@ -713,7 +713,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 
 		env[current_level].changeTile(coord_def(event_->position.x + 1, event_->position.y), DG_GLASS);
 
-		printlog("¹æ¾î¸¶¹ıÁøÀÛµ¿. Ä¨ÀÔÀÚ¸¦ Ã³´ÜÇÏ¶ó!", true, false, false, CL_small_danger);
+		printlog("ë°©ì–´ë§ˆë²•ì§„ì‘ë™. ì¹©ì…ìë¥¼ ì²˜ë‹¨í•˜ë¼!", true, false, false, CL_small_danger);
 		env[current_level].MakeNoise(event_->position, 8, NULL);
 	}
 	return 1;
@@ -744,7 +744,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		env[current_level].MakeNoise(event_->position, 16, NULL);
 		you.resetLOS();
 		MoreWait();
-		printlog("...±×·¯³ª ÄÚ°¡»ç´Â ¹«¾ğ°¡ Àß¸øµÇ¾úÀ½À» ´À²¼´Ù.", true, false, false, CL_normal);
+		printlog("...ê·¸ëŸ¬ë‚˜ ì½”ê°€ì‚¬ëŠ” ë¬´ì–¸ê°€ ì˜ëª»ë˜ì—ˆìŒì„ ëŠê¼ˆë‹¤.", true, false, false, CL_normal);
 	}
 	return 1;
 	case EVL_HOJOK:
@@ -758,7 +758,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 
 			you.resetLOS();
 			char temp[100];
-			sprintf_s(temp, 100, "%s%s¿ÜÃÆ´Ù. \"ÇØÄ¡¿öÁÖ¸¶!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%sì™¸ì³¤ë‹¤. \"í•´ì¹˜ì›Œì£¼ë§ˆ!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer()) {
@@ -774,7 +774,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 
 			you.resetLOS();
 			char temp[100];
-			sprintf_s(temp, 100, "%s%s¿ÜÃÆ´Ù. \"Àú¿¡°Ô ¸Ã°ÜÁÖ½Ã±æ!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%sì™¸ì³¤ë‹¤. \"ì €ì—ê²Œ ë§¡ê²¨ì£¼ì‹œê¸¸!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer())
@@ -790,12 +790,12 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 		if (distan_coord(you.position, event_->position) <= 2) {
 			monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, event_->position);
 			char temp[100];
-			sprintf_s(temp, 100, "%s%s¿ÜÃÆ´Ù. \"¿ø¸Á½º·´...Äİ·Ï, Äİ·Ï!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
+			sprintf_s(temp, 100, "%s%sì™¸ì³¤ë‹¤. \"ì›ë§ìŠ¤ëŸ½...ì½œë¡, ì½œë¡!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
 			printlog(temp, true, false, false, CL_speak);
 			env[current_level].MakeNoise(event_->position, 12, NULL);
 			you.resetLOS();
 			MoreWait();
-			printlog("...ÄÚ°¡»ç´Â ÁØºñÇØµĞ ¿¬±â¸¦ ³Ê¹« µéÀÌ¸¶½ÅµíÇÏ´Ù. ", true, false, false, CL_normal);
+			printlog("...ì½”ê°€ì‚¬ëŠ” ì¤€ë¹„í•´ë‘” ì—°ê¸°ë¥¼ ë„ˆë¬´ ë“¤ì´ë§ˆì‹ ë“¯í•˜ë‹¤. ", true, false, false, CL_normal);
 			mon_->SetSlow(rand_int(30, 40));
 			mon_->SetStrong(5);
 			return 1;
@@ -932,7 +932,7 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 	case EVL_SION_DELETE:
 	{
 		int num = 0;
-		string str_ = "¾ÆÀÌÅÛÀÌ ";
+		string str_ = "ì•„ì´í…œì´ ";
 		list<item>::iterator it, first_it;
 		for (it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
 		{
@@ -948,11 +948,11 @@ int EventOccur(int id, events* event_) //1ÀÌ Àû¿ëÇÏ°í ³¡³»±â
 				break;
 		}
 		if (num == 1) {
-			printarray(true, false, false, CL_small_danger, 2, str_.c_str(), "°¡±îÀÌ°¡ÀÚ »ç¶óÁ³´Ù.");
+			printarray(true, false, false, CL_small_danger, 2, str_.c_str(), "ê°€ê¹Œì´ê°€ì ì‚¬ë¼ì¡Œë‹¤.");
 			you.SetInter(IT_EVENT);
 		}
 		else if (num > 1) {
-			printarray(true, false, false, CL_small_danger, 1, "¾ÆÀÌÅÛµéÀÌ °¡±îÀÌ°¡ÀÚ »ç¶óÁ³´Ù.");
+			printarray(true, false, false, CL_small_danger, 1, "ì•„ì´í…œë“¤ì´ ê°€ê¹Œì´ê°€ì ì‚¬ë¼ì¡Œë‹¤.");
 			you.SetInter(IT_EVENT);
 		}
 		return 1;

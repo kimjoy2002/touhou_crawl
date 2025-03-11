@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: zigurrat.cpp
+// íŒŒì¼ì´ë¦„: zigurrat.cpp
 //
-// ³»¿ë: Áö±¸¶ù
+// ë‚´ìš©: ì§€êµ¬ë
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -163,10 +163,10 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 	int level_up_ = min(9, randA(max(0,level_ - mon_->level/2)));
 	char temp[100];
 	if (level_up_ > 0) {
-		sprintf_s(temp, 100, "²ŞÀÇ ÁÖ¹Î %s+%d", mon_->name.name.c_str(), level_up_);
+		sprintf_s(temp, 100, "ê¿ˆì˜ ì£¼ë¯¼ %s+%d", mon_->name.name.c_str(), level_up_);
 	}
 	else {
-		sprintf_s(temp, 100, "²ŞÀÇ ÁÖ¹Î %s", mon_->name.name.c_str());
+		sprintf_s(temp, 100, "ê¿ˆì˜ ì£¼ë¯¼ %s", mon_->name.name.c_str());
 	}
 	mon_->name = name_infor(temp, mon_->name.name_type);
 	while (level_up_ > 0) {
@@ -214,7 +214,7 @@ void addZigguratMonster(int num, int x_, int y_, int monster_num)
 			int named_percent = randA(10+you.ziggurat_level);
 			int mon_id_ = getZigurratMonster(you.ziggurat_level, named_percent, type_);
 			if (first_ == true && you.ziggurat_level == 26) {
-				//¸¶Áö¸· Ãş¿¡¼­´Â µµ·¹Å·ÀÌ °íÁ¤
+				//ë§ˆì§€ë§‰ ì¸µì—ì„œëŠ” ë„ë ˆí‚¹ì´ ê³ ì •
 				mon_id_ = MON_DOREKING;
 			}
 
@@ -244,7 +244,7 @@ void addZigguratItem(int num, int x_, int y_, int item_num)
 			env[num].GetPositiontoitem((*rect_)) == env[num].item_list.end()
 			)
 		{
-			//¾ÆÀÌÅÛÀÌ ÀÌ ÀÚ¸®¿¡ ¾øÀ»¶§~ ¶ó´Â Á¶°ÇÀÌ ÇÊ¿äÇÔ
+			//ì•„ì´í…œì´ ì´ ìë¦¬ì— ì—†ì„ë•Œ~ ë¼ëŠ” ì¡°ê±´ì´ í•„ìš”í•¨
 			item_infor t;
 			item* it = env[num].MakeItem((*rect_), CreateFloorItem(DEPTH_LEVEL, &t));
 			item_num--;

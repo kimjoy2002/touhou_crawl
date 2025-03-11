@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: environment.h
+// íŒŒì¼ì´ë¦„: environment.h
 //
-// ³»¿ë: ¸Ê°ú °ÔÀÓµ¥ÀÌÅÍ
+// ë‚´ìš©: ë§µê³¼ ê²Œì„ë°ì´í„°
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +40,7 @@ public:
 	char santuary_count;
 	char forbid_count;
 	char forbid_count2;
-	unsigned char autotile_bitmap[AUTOTILE_MAX]; //ÇÏ³ª´Â º®, ÇÏ³ª´Â ¹°
+	unsigned char autotile_bitmap[AUTOTILE_MAX]; //í•˜ë‚˜ëŠ” ë²½, í•˜ë‚˜ëŠ” ë¬¼
 	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0){};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
 	void init()
@@ -147,7 +147,7 @@ public:
 	dungeon_tile dgtile[DG_MAX_X][DG_MAX_Y];
 	coord_def stair_up[3];
 	coord_def stair_down[3];
-	vector<stair_info> stair_vector; //Ãß°¡ °è´Ü.(³ªÁß¿£ ÅëÇÕÇÏ±â)
+	vector<stair_info> stair_vector; //ì¶”ê°€ ê³„ë‹¨.(ë‚˜ì¤‘ì—” í†µí•©í•˜ê¸°)
 	vector<monster> mon_vector;
 	list<shadow> shadow_list;
 	list<item> item_list;
@@ -166,7 +166,7 @@ public:
 	~environment();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	bool MakeMap(bool return_); //return_ Àº µÇµ¹¾Æ¿À´Â °è´ÜÀÏ¶§ Àü¿ë(ÀÌ¶§´Â ´ë³ª¹«½£À» ¸¸µéÁö ¾Ê´Â´Ù.)
+	bool MakeMap(bool return_); //return_ ì€ ë˜ëŒì•„ì˜¤ëŠ” ê³„ë‹¨ì¼ë•Œ ì „ìš©(ì´ë•ŒëŠ” ëŒ€ë‚˜ë¬´ìˆ²ì„ ë§Œë“¤ì§€ ì•ŠëŠ”ë‹¤.)
 	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0));
 	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false)
 	{		
@@ -175,7 +175,7 @@ public:
 		if(you.s_dimension)
 		{			
 			if(abs(x_ - you.god_value[GT_YUKARI][0])>8 || abs(y_ - you.god_value[GT_YUKARI][1])>8)
-				return false; //Â÷¿ø°íÁ¤ÀÇ ¹üÀ§ ¹Û¿¡ ÀÖ´Ù.
+				return false; //ì°¨ì›ê³ ì •ì˜ ë²”ìœ„ ë°–ì— ìˆë‹¤.
 		}
 
 		return dgtile[x_][y_].isMove(fly_, swim_, no_ground_);
@@ -233,7 +233,7 @@ public:
 			return false;
 		return dgtile[x_][y_].isCloseDoor();
 	}
-	int isStair(int x_, int y_); //½ÇÁ¦ °è´Ü¹øÁö¼ö¿¡ +1À»ÇØ¼­ ¸®ÅÏÇÔ(¡Ø¿Ã¶ó°¡´Â °è´ÜÀº ¸¶ÀÌ³Ê½º°öÇÔ)
+	int isStair(int x_, int y_); //ì‹¤ì œ ê³„ë‹¨ë²ˆì§€ìˆ˜ì— +1ì„í•´ì„œ ë¦¬í„´í•¨(â€»ì˜¬ë¼ê°€ëŠ” ê³„ë‹¨ì€ ë§ˆì´ë„ˆìŠ¤ê³±í•¨)
 
 	stair_kind getStairKind(int x_, int y_);
 	char getAsciiDot(int x_, int y_);
@@ -258,7 +258,7 @@ public:
 	void innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight);
 	void drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight);
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
-	int CloseDoor(int x_,int y_); //0Àº ¹®¾øÀ½ 1Àº ´İÀ½ -1Àº ¾îµò°¡ °É·ÁÀÖÀ½
+	int CloseDoor(int x_,int y_); //0ì€ ë¬¸ì—†ìŒ 1ì€ ë‹«ìŒ -1ì€ ì–´ë”˜ê°€ ê±¸ë ¤ìˆìŒ
 	monster* AddMonster(int id_, int flag_, coord_def position_, int time_ = 0);
 	monster* AddMonster(monster *mon_, coord_def position_, int time_ = 0);
 	monster* AddMonster_Summon(int id_, int flag_, coord_def position_, summon_info &info_ , int time_);
@@ -267,13 +267,13 @@ public:
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1);
-	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : ½Ã¾ß ¹Û¿¡¼­ÀÇ ÀÌÆåÆ®µµ º¼°ÍÀÎ°¡?
+	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : ì‹œì•¼ ë°–ì—ì„œì˜ ì´í™íŠ¸ë„ ë³¼ê²ƒì¸ê°€?
 	void ClearEffect();
 	void ClearAllShadow();
 	void ClearEvent();
 	void ClearSmoke();
 	void ClearForbid();
-	void AllySafeClear(int new_floor_, coord_def pos_); //¿µ±¸¾Æ±º(À¯À¯ÄÚ¸Á·É, ¸±¸®È­ÀÌÆ®µ¿·áµî)ÀÌ °¢Á¾ ¸Ê °¥¸±¶§ Á×´Â°ÍÀ» ¹æÁö
+	void AllySafeClear(int new_floor_, coord_def pos_); //ì˜êµ¬ì•„êµ°(ìœ ìœ ì½”ë§ë ¹, ë¦´ë¦¬í™”ì´íŠ¸ë™ë£Œë“±)ì´ ê°ì¢… ë§µ ê°ˆë¦´ë•Œ ì£½ëŠ”ê²ƒì„ ë°©ì§€
 	void ClearFloor();
 	void enterBgm(boolean first_);
 	void playBgm();
@@ -293,7 +293,7 @@ public:
 	bool ActionEvent(int delay_);
 	bool ActionSmokeEffect();
 	bool ActionItem(int delay_);
-	bool DisableMove(coord_def pos_, bool view_ = false); //ÀÌ À§Ä¡ÀÇ ¸ğµç ¹°Ã¼´Â Çàµ¿ÇÒ ¼ö ¾ø´Ù.
+	bool DisableMove(coord_def pos_, bool view_ = false); //ì´ ìœ„ì¹˜ì˜ ëª¨ë“  ë¬¼ì²´ëŠ” í–‰ë™í•  ìˆ˜ ì—†ë‹¤.
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);
 	bool MakeSantuary(coord_def center_, int length_, bool on_);
@@ -310,20 +310,20 @@ public:
 	bool isSilence(coord_def pos_);
 	bool isViolet(coord_def pos_);
 	bool isSanctuary(coord_def pos_);
-	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//ÇØ´ç À§Ä¡¿¡ ÀÌ¹Ì ¸ó½ºÅÍ°¡ ÀÖ³Ä ¤·¹ş³Ä
-	shadow* isShadowPos(int x_, int y_);//ÇØ´ç À§Ä¡¿¡ ±×¸²ÀÚÀÖ´ÂÁö È®ÀÎ
+	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//í•´ë‹¹ ìœ„ì¹˜ì— ì´ë¯¸ ëª¬ìŠ¤í„°ê°€ ìˆëƒ ã…‡ë²—ëƒ
+	shadow* isShadowPos(int x_, int y_);//í•´ë‹¹ ìœ„ì¹˜ì— ê·¸ë¦¼ììˆëŠ”ì§€ í™•ì¸
 	bool isForbidZone(int x_, int y_);
 	bool isBlockPos(int x_, int y_);
-	bool isSmokePos(int x_,int y_, bool only_fog = false);//ÇØ´ç À§Ä¡¿¡ ±¸¸§ÀÌ ÀÖ³Ä ¾ø³Ä(only_fog´Â ½Ã¾ß¸¦ °¡¸®´Â ±¸¸§¸¸ Ã£´Â´Ù.)	
+	bool isSmokePos(int x_,int y_, bool only_fog = false);//í•´ë‹¹ ìœ„ì¹˜ì— êµ¬ë¦„ì´ ìˆëƒ ì—†ëƒ(only_fogëŠ” ì‹œì•¼ë¥¼ ê°€ë¦¬ëŠ” êµ¬ë¦„ë§Œ ì°¾ëŠ”ë‹¤.)	
 	floor_effect* isFloorEffectPos(int x_,int y_, const floor_effect* excep_ = NULL);
-	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//ÇØ´ç À§Ä¡¿¡ ±¸¸§ÀÌ ÀÖ³Ä ¾ø³Ä(Æ÷ÀÎÅÍ ¸®ÅÏ)
-	monster* getRandomMonster(bool except_melee); //½Ã¾ß³» ·£´ı ¸ó½ºÅÍ ¸®ÅÏ
-	int insight_mon(monster_enemy_type type_);//½Ã¾ß³» ¸ó½ºÅÍ°¹¼ö
-	monster* close_mon(int x_,int y_, monster_enemy_type type_);//°¡Àå °¡±îÀÌ ÀÖ´Â ¸ó½ºÅÍ¸®ÅÏ
+	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//í•´ë‹¹ ìœ„ì¹˜ì— êµ¬ë¦„ì´ ìˆëƒ ì—†ëƒ(í¬ì¸í„° ë¦¬í„´)
+	monster* getRandomMonster(bool except_melee); //ì‹œì•¼ë‚´ ëœë¤ ëª¬ìŠ¤í„° ë¦¬í„´
+	int insight_mon(monster_enemy_type type_);//ì‹œì•¼ë‚´ ëª¬ìŠ¤í„°ê°¯ìˆ˜
+	monster* close_mon(int x_,int y_, monster_enemy_type type_);//ê°€ì¥ ê°€ê¹Œì´ ìˆëŠ” ëª¬ìŠ¤í„°ë¦¬í„´
 	void item_view_set();
-	int new_item_interupt();//½Ã¾ß¿¡ »õ·Î¿î ¾ÆÀÌÅÛÀÖÀ¸¸é ¸Ş¼¼Áöº¸³»°í °¹¼ö¸®ÅÏ
-	item* close_item(vector<item*> &item_vector_);//°¡Àå °¡±î¿î ¾ÆÀÌÅÛÀÇ Á¤º¸¸¦ ¸®ÅÏ
-	unit* GetMapIDtoUnit(int Map_id); //¸Ê¾ÆÀÌµğ·ÎºÎÅÍ À¯´Ö Æ÷ÀÎÅÍ¸¦ ¸®ÅÏ
+	int new_item_interupt();//ì‹œì•¼ì— ìƒˆë¡œìš´ ì•„ì´í…œìˆìœ¼ë©´ ë©”ì„¸ì§€ë³´ë‚´ê³  ê°¯ìˆ˜ë¦¬í„´
+	item* close_item(vector<item*> &item_vector_);//ê°€ì¥ ê°€ê¹Œìš´ ì•„ì´í…œì˜ ì •ë³´ë¥¼ ë¦¬í„´
+	unit* GetMapIDtoUnit(int Map_id); //ë§µì•„ì´ë””ë¡œë¶€í„° ìœ ë‹› í¬ì¸í„°ë¥¼ ë¦¬í„´
 
 	list<item>::iterator GetPositiontoitem(coord_def position_);
 	list<item>::iterator GetPositiontoitemend(coord_def position_);

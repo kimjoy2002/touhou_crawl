@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: monster.h
+// íŒŒì¼ì´ë¦„: monster.h
 //
-// ³»¿ë: ¸÷ÀÇ Å¬·¡½º ¼±¾ğ
+// ë‚´ìš©: ëª¹ì˜ í´ë˜ìŠ¤ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ struct item_infor;
 struct spell
 {
 	int num;
-	int percent; //percent/100 °¡ È®·ü
+	int percent; //percent/100 ê°€ í™•ë¥ 
 	spell(int num_=0, int percent_=0):num(num_),percent(percent_){}
 };
 
@@ -82,9 +82,9 @@ public:
 	int s_neutrality;
 	int s_communication;
 	int s_exhausted;
-	bool force_strong; //°­È­/¾àÈ­(À§·Â 2¹è 1/2¹è)
-	int force_turn; //°­È­/¾àÈ­ÅÏ
-	int s_changed; //µĞ°©½Ã°£. ½Ã°£ÀÌ Áö³ª¸é ³Ê±¸¸®·Î µ¹¾Æ¿Â´Ù.
+	bool force_strong; //ê°•í™”/ì•½í™”(ìœ„ë ¥ 2ë°° 1/2ë°°)
+	int force_turn; //ê°•í™”/ì•½í™”í„´
+	int s_changed; //ë‘”ê°‘ì‹œê°„. ì‹œê°„ì´ ì§€ë‚˜ë©´ ë„ˆêµ¬ë¦¬ë¡œ ëŒì•„ì˜¨ë‹¤.
 	int s_invincibility;
 	int debuf_boost;
 	int summon_time;
@@ -99,17 +99,17 @@ public:
 	int wind_resist;
 
 
-	int time_delay; //´©ÀûµÇ¾îÀÖ´Â½Ã°£
-	int speed; //Çàµ¿½Ã°£ (´©ÀûµÇ¾îÀÖ´Â½Ã°£/Çàµ¿½Ã°£=Çàµ¿ÅÏ)
-	int memory_time; //±â¾ï·Â
-	bool first_contact; //ÀÌ ¸ó½ºÅÍ¸¦ Ã³À½ º¸¾Ò´Ù.
-	int strong; //°­ÇÏ±â
+	int time_delay; //ëˆ„ì ë˜ì–´ìˆëŠ”ì‹œê°„
+	int speed; //í–‰ë™ì‹œê°„ (ëˆ„ì ë˜ì–´ìˆëŠ”ì‹œê°„/í–‰ë™ì‹œê°„=í–‰ë™í„´)
+	int memory_time; //ê¸°ì–µë ¥
+	bool first_contact; //ì´ ëª¬ìŠ¤í„°ë¥¼ ì²˜ìŒ ë³´ì•˜ë‹¤.
+	int strong; //ê°•í•˜ê¸°
 
-	int delay_turn; //´Ù¸¥ÃşÀ¸·Î µµ¸ÁÄ£ ÅÏ. ÀÌ ÅÏ¸¸Å­ È¸º¹µîµî...
+	int delay_turn; //ë‹¤ë¥¸ì¸µìœ¼ë¡œ ë„ë§ì¹œ í„´. ì´ í„´ë§Œí¼ íšŒë³µë“±ë“±...
 
 	list<coord_def> will_move;
 	unit* target;
-	int temp_target_map_id; //·Îµù½Ã ÀÓ½Ã·Î Å¸°ÙÆÃÀÇ ¾ÆÀÌµğ¸¦ ÀúÀåÇÑ´Ù.(¸ó½ºÅÍ ·ÎµùÀº ¼±ÈÄ¸¦ ¾Ë ¼ö ¾øÀ¸´Ï!)
+	int temp_target_map_id; //ë¡œë”©ì‹œ ì„ì‹œë¡œ íƒ€ê²ŸíŒ…ì˜ ì•„ì´ë””ë¥¼ ì €ì¥í•œë‹¤.(ëª¬ìŠ¤í„° ë¡œë”©ì€ ì„ í›„ë¥¼ ì•Œ ìˆ˜ ì—†ìœ¼ë‹ˆ!)
 	coord_def target_pos;
 	int direction;
 
@@ -118,9 +118,9 @@ public:
 
 	FSMclass state;
 	list<spell> spell_lists;
-	bool random_spell; //ÀÌ ¸ó½ºÅÍ°¡ °íÁ¤µÈ ½ºÆç¼ÂÀ» µé°íÀÖÁö¾Ê´Ù.
+	bool random_spell; //ì´ ëª¬ìŠ¤í„°ê°€ ê³ ì •ëœ ìŠ¤í ì…‹ì„ ë“¤ê³ ìˆì§€ì•Šë‹¤.
 	
-	vector<item_infor> item_lists; //µå¶øÇÏ´Â ¾ÆÀÌÅÛ¸ñ·Ï
+	vector<item_infor> item_lists; //ë“œëí•˜ëŠ” ì•„ì´í…œëª©ë¡
 
 
 	monster();
@@ -135,8 +135,8 @@ public:
 	coord_def GetFirstPos() { return first_position; };
 	int GetHp(){return hp;};
 	int GetMaxHp(){return max_hp;};
-	void TurnSave();//´Ù¸¥ÃşÀ¸·Î µµ¸ÁÃÆ´Ù.
-	void TurnLoad();//´Ù¸¥Ãş¿¡¼­ µµ¸Á¿Ô´Ù.
+	void TurnSave();//ë‹¤ë¥¸ì¸µìœ¼ë¡œ ë„ë§ì³¤ë‹¤.
+	void TurnLoad();//ë‹¤ë¥¸ì¸µì—ì„œ ë„ë§ì™”ë‹¤.
 	void SetX(int x_);
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
@@ -155,7 +155,7 @@ public:
 	bool isSwim();
 	bool simple_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
-	bool smartmove(short_move x_mov, short_move y_mov, int num_); //¾Æ±ºÀÌ ÀÚ¸®¸¦ ÀâÀ» ¼ö ÀÖ°Ô ±æÀ» ºñÄÑÁÖ´Â ÀÎ°øÁö´É
+	bool smartmove(short_move x_mov, short_move y_mov, int num_); //ì•„êµ°ì´ ìë¦¬ë¥¼ ì¡ì„ ìˆ˜ ìˆê²Œ ê¸¸ì„ ë¹„ì¼œì£¼ëŠ” ì¸ê³µì§€ëŠ¥
 	int move(short_move x_mov, short_move y_mov, bool only_move);
 	int move(const coord_def &c, bool only_move);
 	bool offsetmove(const coord_def &c);
@@ -165,16 +165,16 @@ public:
 	bool isCanMove();
 	bool isHaveSpell(spell_list sp);
 	int MoveToPos(coord_def pos_, bool only_move);
-	bool isView(); //´ç½ÅÀÌ º¼ ¼ö ÀÖ´ÂÁö.
-	bool isView(const monster* monster_info); //¸ó½ºÅÍ°¡ ÀÌ ¸÷À» º¼ ¼ö ÀÖ´ÂÁö.
-	bool CanSpeak(); //ÀÌ ¸ó½ºÅÍ°¡ ¸»ÇÒ ¼ö ÀÖ´ÂÁö(»çÀÏ·±½º¿¡ ÀÇÇØ¼­ ¾È¸·Çû´ÂÁö)
+	bool isView(); //ë‹¹ì‹ ì´ ë³¼ ìˆ˜ ìˆëŠ”ì§€.
+	bool isView(const monster* monster_info); //ëª¬ìŠ¤í„°ê°€ ì´ ëª¹ì„ ë³¼ ìˆ˜ ìˆëŠ”ì§€.
+	bool CanSpeak(); //ì´ ëª¬ìŠ¤í„°ê°€ ë§í•  ìˆ˜ ìˆëŠ”ì§€(ì‚¬ì¼ëŸ°ìŠ¤ì— ì˜í•´ì„œ ì•ˆë§‰í˜”ëŠ”ì§€)
 	int calculate_damage(attack_type &type_, int atk, int max_atk, int back_stab);
 	void print_damage_message(attack_infor &a, bool back_stab);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove´Â Áõ¹ß½ÃÅ°±â(¾Æ¿¹ °æÇèÄ¡³ª °ü·Ãµµ ¾øÀÌ)
+	bool dead(parent_type reason_, bool message_, bool remove_ = false); //removeëŠ” ì¦ë°œì‹œí‚¤ê¸°(ì•„ì˜ˆ ê²½í—˜ì¹˜ë‚˜ ê´€ë ¨ë„ ì—†ì´)
 	int action(int delay_);
-	void sightcheck(bool is_sight_); //½Ã¾ß¿¡ µé¾î¿À¸é ´ıºó´Ù.
+	void sightcheck(bool is_sight_); //ì‹œì•¼ì— ë“¤ì–´ì˜¤ë©´ ë¤ë¹ˆë‹¤.
 	void special_action(int delay_, bool smoke_);
 	bool SetPoisonReason(parent_type type_);
 	bool SetPoison(int poison_, int max_, bool strong_);
@@ -230,15 +230,15 @@ public:
 	bool Teleport();
 	int GetResist();
 	int GetDetect();
-	bool you_detect(); //´ç½ÅÀ» °¨ÁöÇß´ÂÁö
+	bool you_detect(); //ë‹¹ì‹ ì„ ê°ì§€í–ˆëŠ”ì§€
 	bool isYourShight();
 	bool isEnemyUnit(unit* unit_info);
-	bool isEnemyMonster(const monster* monster_info); //ÀÌ ¸÷ÀÌ ÀûÀÎÁö
-	bool isPassedBullet(unit* order);//ÀÌ °ø°İÀÌ °üÅëµÇ´ÂÁö
-	bool isAllyMonster(const monster* monster_info); //ÀÌ ¸÷ÀÌ ¾Æ±ºÀÎÁö
-	bool isUserAlly() const; //À¯Àú¿¡ Ä£¹ĞÇÑ°¡?
-	bool isSightnonblocked(coord_def c); //¿©±â±îÁö °ø°İÀÌ ´ê´ÂÁö
-	bool isMonsterSight(coord_def c, boolean okina = false);//ÇØ´ç À§Ä¡¿¡ "¸ó½ºÅÍ"ÀÇ ½Ã¾ß¿¡ µé¾î¿Ô´Â°¡?
+	bool isEnemyMonster(const monster* monster_info); //ì´ ëª¹ì´ ì ì¸ì§€
+	bool isPassedBullet(unit* order);//ì´ ê³µê²©ì´ ê´€í†µë˜ëŠ”ì§€
+	bool isAllyMonster(const monster* monster_info); //ì´ ëª¹ì´ ì•„êµ°ì¸ì§€
+	bool isUserAlly() const; //ìœ ì €ì— ì¹œë°€í•œê°€?
+	bool isSightnonblocked(coord_def c); //ì—¬ê¸°ê¹Œì§€ ê³µê²©ì´ ë‹¿ëŠ”ì§€
+	bool isMonsterSight(coord_def c, boolean okina = false);//í•´ë‹¹ ìœ„ì¹˜ì— "ëª¬ìŠ¤í„°"ì˜ ì‹œì•¼ì— ë“¤ì–´ì™”ëŠ”ê°€?
 	bool CanChase();
 	parent_type GetParentType();
 	bool isUnique();

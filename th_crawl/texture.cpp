@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: texture.cpp
+// íŒŒì¼ì´ë¦„: texture.cpp
 //
-// ³»¿ë: textureÅ¬·¡½º Á¤ÀÇ ¹× ÅØ½ºÃÄ°´Ã¼
+// ë‚´ìš©: textureí´ë˜ìŠ¤ ì •ì˜ ë° í…ìŠ¤ì³ê°ì²´
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -502,35 +502,35 @@ textures img_auto_lava[48] = {
 
 textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
-					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //¶¥1
+					textures(&texture_dungeon01, 0, 0, 32, 32, 255), //ë•…1
 					textures(&texture_dungeon01, 0, 0, 32, 32, 255),
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),
 					textures(&texture_dungeon01, 384, 0, 416, 32, 255),
-					textures(&texture_dungeon01, 512, 0, 544, 32, 255), //¸¶°è¶¥1
+					textures(&texture_dungeon01, 512, 0, 544, 32, 255), //ë§ˆê³„ë•…1
 					textures(&texture_dungeon01, 544, 0, 576, 32, 255),
 					textures(&texture_dungeon01, 576, 0, 608, 32, 255),
 					textures(&texture_dungeon01, 608, 0, 640, 32, 255),
 					textures(&texture_dungeon01, 640, 0, 672, 32, 255),
 
 					textures(&texture_dungeon01, 672, 0, 704, 32, 255),
-					textures(&texture_dungeon01, 704, 0, 736, 32, 255), //¸¶°è¶¥7
+					textures(&texture_dungeon01, 704, 0, 736, 32, 255), //ë§ˆê³„ë•…7
 					textures(&texture_dungeon01, 480, 0, 512, 32, 255),
 					textures(&texture_dungeon01, 480, 330, 512, 362, 255),
 					textures(&texture_dungeon01),
 
-					textures(&texture_dungeon01), //¹®¿­¸² 15
-					textures(&texture_dungeon01), //°è´Ü
-					textures(&texture_dungeon01), //°è´Ü
-					textures(&texture_dungeon01), //°è´Ü-½ÅÀü
-					textures(&texture_dungeon01), //°è´Ü-¾È°³
-					textures(&texture_dungeon01), //°è´Ü-¿ä±«»ê
-					textures(&texture_dungeon01), //°è´Ü-È«¸¶					
-					textures(&texture_dungeon01), //°è´ÜÈ«¸¶µµ¼­°ü
-					textures(&texture_dungeon01), //°è´ÜÈ«¸¶ÁöÇÏ
-					textures(&texture_dungeon01), //°è´ÜÁ×¸²
+					textures(&texture_dungeon01), //ë¬¸ì—´ë¦¼ 15
+					textures(&texture_dungeon01), //ê³„ë‹¨
+					textures(&texture_dungeon01), //ê³„ë‹¨
+					textures(&texture_dungeon01), //ê³„ë‹¨-ì‹ ì „
+					textures(&texture_dungeon01), //ê³„ë‹¨-ì•ˆê°œ
+					textures(&texture_dungeon01), //ê³„ë‹¨-ìš”ê´´ì‚°
+					textures(&texture_dungeon01), //ê³„ë‹¨-í™ë§ˆ					
+					textures(&texture_dungeon01), //ê³„ë‹¨í™ë§ˆë„ì„œê´€
+					textures(&texture_dungeon01), //ê³„ë‹¨í™ë§ˆì§€í•˜
+					textures(&texture_dungeon01), //ê³„ë‹¨ì£½ë¦¼
 
-					textures(&texture_dungeon01), //°è´Ü¿µ¿øÁ¤
-					textures(&texture_dungeon01), //°è´ÜÁöÀú
+					textures(&texture_dungeon01), //ê³„ë‹¨ì˜ì›ì •
+					textures(&texture_dungeon01), //ê³„ë‹¨ì§€ì €
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
@@ -549,7 +549,7 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
-					textures(&texture_dungeon01),//ÇÃ·Î¾î ´õ¹Ì³¡		
+					textures(&texture_dungeon01),//í”Œë¡œì–´ ë”ë¯¸ë		
 
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
@@ -567,85 +567,85 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
 					textures(&texture_dungeon01),
-					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//º®60
-					textures(&texture_dungeon01, 32, 0, 64, 32, 255),//µ¹º®
-					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//ºÓÀºº®
-					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//Ã¥Àå
-					textures(&texture_dungeon01, 224, 0, 256, 32, 255),//´ë³ª¹«
+					textures(&texture_dungeon01, 64, 0, 96, 32, 255),//ë²½60
+					textures(&texture_dungeon01, 32, 0, 64, 32, 255),//ëŒë²½
+					textures(&texture_dungeon01, 128, 0, 160, 32, 255),//ë¶‰ì€ë²½
+					textures(&texture_dungeon01, 160, 0, 192, 32, 255),//ì±…ì¥
+					textures(&texture_dungeon01, 224, 0, 256, 32, 255),//ëŒ€ë‚˜ë¬´
 
-					textures(&texture_dungeon01, 736, 0, 768, 32, 255), //¸¶°èº®1
-					textures(&texture_dungeon01, 768, 0, 800, 32, 255), //¸¶°èº®2
-					textures(&texture_dungeon01, 800, 0, 832, 32, 255), //¸¶°èº®3
-					textures(&texture_dungeon01, 832, 0, 864, 32, 255), //¸¶°èº®4
-					textures(&texture_dungeon01, 864, 0, 896, 32, 255), //¸¶°èº®5
-					textures(&texture_dungeon01, 896, 0, 928, 32, 255), //¸¶°èº®6
-					textures(&texture_dungeon01, 928, 0, 960, 32, 255), //¸¶°èº®7
+					textures(&texture_dungeon01, 736, 0, 768, 32, 255), //ë§ˆê³„ë²½1
+					textures(&texture_dungeon01, 768, 0, 800, 32, 255), //ë§ˆê³„ë²½2
+					textures(&texture_dungeon01, 800, 0, 832, 32, 255), //ë§ˆê³„ë²½3
+					textures(&texture_dungeon01, 832, 0, 864, 32, 255), //ë§ˆê³„ë²½4
+					textures(&texture_dungeon01, 864, 0, 896, 32, 255), //ë§ˆê³„ë²½5
+					textures(&texture_dungeon01, 896, 0, 928, 32, 255), //ë§ˆê³„ë²½6
+					textures(&texture_dungeon01, 928, 0, 960, 32, 255), //ë§ˆê³„ë²½7
 
-					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//³ª¹«
-					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//ÇØ¹Ù¶ó±â
-					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//Áö¿Áº®
-					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//Ã¶º®
-					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//º®2
-					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//º®3
-					textures(&texture_item01, 3, 255), //´İÈù¹®
-					textures(&texture_dungeon01),//À¯¸®
-					textures(&texture_dungeon01),//¼®»ó
-					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//¼®»ó2
-					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//¹Ù´Ù
-					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//¿ë¾Ï
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//ë‚˜ë¬´
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//í•´ë°”ë¼ê¸°
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//ì§€ì˜¥ë²½
+					textures(&texture_dungeon01, 192, 0, 224, 32, 255),//ì² ë²½
+					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//ë²½2
+					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//ë²½3
+					textures(&texture_item01, 3, 255), //ë‹«íŒë¬¸
+					textures(&texture_dungeon01),//ìœ ë¦¬
+					textures(&texture_dungeon01),//ì„ìƒ
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//ì„ìƒ2
+					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//ë°”ë‹¤
+					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//ìš©ì•”
 };
 
 textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255),textures(&texture_item01, 4, 255)},
-				{textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255)},//°è´Ü³»
-				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//°è´Ü¿Ã
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//°è´Ü½ÅÀü
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//°è´Ü¾È°³
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//°è´Ü¿ä±«
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//°è´ÜÈ«¸¶
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÈ«¸¶µµ¼­°ü
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÈ«¸¶ÁöÇÏ
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÁ×¸²
+				{textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255),textures(&texture_item01, 5, 255)},//ê³„ë‹¨ë‚´
+				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//ê³„ë‹¨ì˜¬
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//ê³„ë‹¨ì‹ ì „
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//ê³„ë‹¨ì•ˆê°œ
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//ê³„ë‹¨ìš”ê´´
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//ê³„ë‹¨í™ë§ˆ
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨í™ë§ˆë„ì„œê´€
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨í™ë§ˆì§€í•˜
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ì£½ë¦¼
 				
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´Ü¿µ¿øÁ¤
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÁöÀú
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//°è´ÜÀµÄí¸®
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÁü½Â±æ
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´Ü²Ş
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´Ü´Ş
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´Ü¸¶°è
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //°è´ÜÈ÷Äí·¹ÀÌ
-				{ textures(&texture_item03, 29, 255), textures(&texture_item03, 29, 255),textures(&texture_item03, 29, 255) }, //°è´Ü²ŞÀÇÆ÷Å»
-				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//°è´Ü
-				{textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255)}, //ÁÒ¿Â&½Ã¿Â
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ì˜ì›ì •
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ì§€ì €
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},//ê³„ë‹¨ìœ³ì¿ ë¦¬
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ì§ìŠ¹ê¸¸
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ê¿ˆ
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ë‹¬
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨ë§ˆê³„
+				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //ê³„ë‹¨íˆì¿ ë ˆì´
+				{ textures(&texture_item03, 29, 255), textures(&texture_item03, 29, 255),textures(&texture_item03, 29, 255) }, //ê³„ë‹¨ê¿ˆì˜í¬íƒˆ
+				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//ê³„ë‹¨
+				{textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255)}, //ì£ ì˜¨&ì‹œì˜¨
 
-				{textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255)}, //¹òÄí·»
-				{textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255)}, //Ä«³ªÄÚ
-				{textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255)}, //½º¿ÍÄÚ
-				{textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255)}, //¹Ì³ë¸®ÄÚ
-				{textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255)}, //¹Ì¸¶
-				{textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255)}, //½ÅÅ°
-				{textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255)},  //À¯¿ì±â
-				{textures(&texture_item01, 128, 255),textures(&texture_item01, 220, 255),textures(&texture_item01, 221, 255)}, //½ÃÁîÇÏ
-			    {textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255)}, //È÷³ª
-			    {textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255)}, //À¯Ä«¸®
+				{textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255),textures(&texture_item01, 121, 255)}, //ë±Œì¿ ë Œ
+				{textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255),textures(&texture_item01, 122, 255)}, //ì¹´ë‚˜ì½”
+				{textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255),textures(&texture_item01, 123, 255)}, //ìŠ¤ì™€ì½”
+				{textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255),textures(&texture_item01, 124, 255)}, //ë¯¸ë…¸ë¦¬ì½”
+				{textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255),textures(&texture_item01, 125, 255)}, //ë¯¸ë§ˆ
+				{textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255),textures(&texture_item01, 126, 255)}, //ì‹ í‚¤
+				{textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255),textures(&texture_item01, 127, 255)},  //ìœ ìš°ê¸°
+				{textures(&texture_item01, 128, 255),textures(&texture_item01, 220, 255),textures(&texture_item01, 221, 255)}, //ì‹œì¦ˆí•˜
+			    {textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255),textures(&texture_item01, 129, 255)}, //íˆë‚˜
+			    {textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255),textures(&texture_item01, 130, 255)}, //ìœ ì¹´ë¦¬
 			    
-				{textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255)}, //¿¡ÀÌ¸°
-				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //À¯À¯ÄÚ
-			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //»çÅä¸®
-			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //ÅÙ½Ã
-				{textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255)}, //¼¼ÀÌÀÚ				
-				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //¸±¸®
-				{textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255) }, //¹ÌÄÚ
-				{textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255) }, //¿ÀÅ°³ª
-				{textures(&texture_item02, 169, 255), textures(&texture_item02, 170, 255), textures(&texture_item02, 171, 255) }, //¼øÈ£
+				{textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255),textures(&texture_item01, 131, 255)}, //ì—ì´ë¦°
+				{textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255),textures(&texture_item01, 132, 255)}, //ìœ ìœ ì½”
+			    {textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255),textures(&texture_item01, 133, 255)}, //ì‚¬í† ë¦¬
+			    {textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255),textures(&texture_item01, 134, 255)}, //í…ì‹œ
+				{textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255),textures(&texture_item01, 236, 255)}, //ì„¸ì´ì				
+				{textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255),textures(&texture_item01, 175, 255)}, //ë¦´ë¦¬
+				{textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255) }, //ë¯¸ì½”
+				{textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255) }, //ì˜¤í‚¤ë‚˜
+				{textures(&texture_item02, 169, 255), textures(&texture_item02, 170, 255), textures(&texture_item02, 171, 255) }, //ìˆœí˜¸
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //º®
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //ë²½
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
@@ -1330,8 +1330,8 @@ textures(&texture_item02, 144, 255),
 textures(&texture_item02, 145, 255),
 textures(&texture_item02, 146, 255),
 textures(&texture_item02, 147, 255),
-textures(&texture_item02, 148, 255),//´õ¹Ì
-textures(&texture_item02, 149, 255)//´õ¹Ì
+textures(&texture_item02, 148, 255),//ë”ë¯¸
+textures(&texture_item02, 149, 255)//ë”ë¯¸
 };
 
 
@@ -1822,23 +1822,23 @@ textures explore_forbid_small(&texture_item02, 217, 255);
 textures explore_forbid_big(&texture_item02, 216, 255);
 
 //-----------------------------------------------------------
-//TextureFile Å¬·¡½º
+//TextureFile í´ë˜ìŠ¤
 //-----------------------------------------------------------
 
-//TextureFile Å¬·¡½ºÀÇ »ı¼ºÀÚ
+//TextureFile í´ë˜ìŠ¤ì˜ ìƒì„±ì
 TextureFile::TextureFile(LPCSTR _name)
 {
 	name = _name;
 	pTexture = NULL;
 }
 
-//TextureFile Å¬·¡½ºÀÇ ¼Ò¸êÀÚ
+//TextureFile í´ë˜ìŠ¤ì˜ ì†Œë©¸ì
 TextureFile::~TextureFile()
 {
 	d3d::Release(pTexture);  
 }
 
-//·Îµù
+//ë¡œë”©
 bool TextureFile::loading(IDirect3DDevice9* Device)
 {
 	if(FAILED(D3DXCreateTextureFromFile(Device,name,&pTexture)))
@@ -1846,7 +1846,7 @@ bool TextureFile::loading(IDirect3DDevice9* Device)
 	return true;
 }
 
-//·Îµù
+//ë¡œë”©
 bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 {
 	struct stat stStat = { 0 };
@@ -1863,7 +1863,7 @@ bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 		0,
 		D3DFMT_UNKNOWN,
 		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE, //2½Â¼ö¾Æ´Ï¾îµµ Á¦´ë·Î(ÀÌ°Å ¾È¾²¸é ÁöÆ÷½º°¡ ¾Æ´Ñ ÄÄ¿¡¼± Âî±×·¯Áü Á¶½É)
+		D3DX_FILTER_NONE, //2ìŠ¹ìˆ˜ì•„ë‹ˆì–´ë„ ì œëŒ€ë¡œ(ì´ê±° ì•ˆì“°ë©´ ì§€í¬ìŠ¤ê°€ ì•„ë‹Œ ì»´ì—ì„  ì°Œê·¸ëŸ¬ì§ ì¡°ì‹¬)
 		D3DX_DEFAULT,
 		0,
 		NULL,
@@ -1875,10 +1875,10 @@ bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 }
 
 //-----------------------------------------------------------
-//textures Å¬·¡½º
+//textures í´ë˜ìŠ¤
 //-----------------------------------------------------------
 
-//textures Å¬·¡½ºÀÇ »ı¼ºÀÚ
+//textures í´ë˜ìŠ¤ì˜ ìƒì„±ì
 textures::textures(TextureFile* _texture, int left, int top, int right, int bottom, int alphas)
 {
 	rect.left = left;
@@ -1921,12 +1921,12 @@ textures::textures(TextureFile* _texture)
 }
 
 
-//textures Å¬·¡½ºÀÇ ¼Ò¸êÀÚ
+//textures í´ë˜ìŠ¤ì˜ ì†Œë©¸ì
 textures::~textures()
 {
 }
 
-//µå·Î¿ì(¹è°æ)
+//ë“œë¡œìš°(ë°°ê²½)
 bool textures::draw(LPD3DXSPRITE pSprite, int alphas)
 {
 	if(!texture)
@@ -1940,7 +1940,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, int alphas)
 	return true;
 }
 
-//µå·Î¿ì(À§Ä¡)
+//ë“œë¡œìš°(ìœ„ì¹˜)
 bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, int alphas)
 {	
 	if(!texture)
@@ -1953,7 +1953,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, int alphas)
 
 	return true;
 }
-//µå·Î¿ì(À§Ä¡,»ö±ò)
+//ë“œë¡œìš°(ìœ„ì¹˜,ìƒ‰ê¹”)
 bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
 {
 	if(!texture)
@@ -1963,7 +1963,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
 	return true;
 }
 
-//µå·Î¿ì(À§Ä¡, È¸Àü)
+//ë“œë¡œìš°(ìœ„ì¹˜, íšŒì „)
 bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, int alphas)
 {
 	if(!texture)
@@ -1974,7 +1974,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, int 
 }
 
 
-//µå·Î¿ì(À§Ä¡, È¸Àü, Å©±â)
+//ë“œë¡œìš°(ìœ„ì¹˜, íšŒì „, í¬ê¸°)
 bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas)
 {
 	if(!texture)
@@ -1984,7 +1984,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, floa
 	return true;
 }
 
-//µå·Î¿ì(À§Ä¡, È¸Àü, Å©±â,»ö±ò)
+//ë“œë¡œìš°(ìœ„ì¹˜, íšŒì „, í¬ê¸°,ìƒ‰ê¹”)
 bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color)
 {
 	if(!texture)
@@ -1995,7 +1995,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, floa
 }
 
 
-//µå·Î¿ì(¹è°æ, Æ¯Á¤ Àß¶ó¾²±â)
+//ë“œë¡œìš°(ë°°ê²½, íŠ¹ì • ì˜ë¼ì“°ê¸°)
 bool textures::draw(LPD3DXSPRITE pSprite, RECT rc, int alphas)
 {
 	if(!texture)

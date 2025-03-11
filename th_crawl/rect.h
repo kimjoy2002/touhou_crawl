@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: rect.h
+// íŒŒì¼ì´ë¦„: rect.h
 //
-// ³»¿ë: »ç°¢Çü ¹İº¹ÀÚ
+// ë‚´ìš©: ì‚¬ê°í˜• ë°˜ë³µì
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -12,7 +12,7 @@
 #include "common.h"
 #include "enum.h"
 
-class rect_iterator //¿øÇÏ´Â »ç°¢ÇüÀ» Ãâ·ÂÇÑ´Ù.
+class rect_iterator //ì›í•˜ëŠ” ì‚¬ê°í˜•ì„ ì¶œë ¥í•œë‹¤.
 {
 	coord_def start;
 	coord_def current;
@@ -31,7 +31,7 @@ public:
 
 
 
-class rand_rect_iterator //Æ¯Á¤ ¹üÀ§¾ÈÀ» ¹«ÀÛÀ§¼ø¼­·Î ÃßÃâÇØ³½´Ù.
+class rand_rect_iterator //íŠ¹ì • ë²”ìœ„ì•ˆì„ ë¬´ì‘ìœ„ìˆœì„œë¡œ ì¶”ì¶œí•´ë‚¸ë‹¤.
 {
 	coord_def start;
 	int current;
@@ -49,16 +49,16 @@ public:
 };
 
 
-class dif_rect_iterator //Æ¯Á¤ À§Ä¡ºÎÅÍ Á¡Â÷ ÆÛÁö¸é¼­ ¹«ÀÛÀ§·Î ÃßÃâÇÑ´Ù.
+class dif_rect_iterator //íŠ¹ì • ìœ„ì¹˜ë¶€í„° ì ì°¨ í¼ì§€ë©´ì„œ ë¬´ì‘ìœ„ë¡œ ì¶”ì¶œí•œë‹¤.
 {
 	coord_def start;
 	int current;
-	int distan; //Áß¾ÓÀ¸·ÎºÎÅÍ °Å¸®
+	int distan; //ì¤‘ì•™ìœ¼ë¡œë¶€í„° ê±°ë¦¬
 	deque<coord_def> dq;
 
 public:
 	dif_rect_iterator(const coord_def &start_, int distan, bool random_ = false);
-	void sort_distan(bool close_); //°¡±îÀÌÀÖ´Â ¼ø¼­·Î Á¤·Ä
+	void sort_distan(bool close_); //ê°€ê¹Œì´ìˆëŠ” ìˆœì„œë¡œ ì •ë ¬
 	coord_def dif_rect_iterator::operator *() const;
 	const coord_def* dif_rect_iterator::operator->() const;
 	dif_rect_iterator& operator ++ ();

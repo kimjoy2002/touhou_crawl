@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: ring.h
+// íŒŒì¼ì´ë¦„: ring.h
 //
-// ³»¿ë: ¸µ°ú ¾Æ¹Ä·¿ °ü·Ã ¼±¾ğ
+// ë‚´ìš©: ë§ê³¼ ì•„ë®¬ë › ê´€ë ¨ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,8 +19,8 @@ extern const char *ring_iden_string[RGT_MAX];
 int isRingGotValue(ring_type ring_);
 ring_type goodbadring(int good_bad);
 int isGoodRing(ring_type kind, int value);
-int isPickableRIng(ring_type kind); //2°³ÀÌ»ó Áı¾îµµ µÇ´Â ¸µ
-bool equipring(ring_type kind, int value); //¸®ÅÏ°ª: ½Äº°½Ã true ¹Ì½Äº°½Ã false
+int isPickableRIng(ring_type kind); //2ê°œì´ìƒ ì§‘ì–´ë„ ë˜ëŠ” ë§
+bool equipring(ring_type kind, int value); //ë¦¬í„´ê°’: ì‹ë³„ì‹œ true ë¯¸ì‹ë³„ì‹œ false
 bool unidenequipring(ring_type kind, int value);
 
 

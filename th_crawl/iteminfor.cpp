@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: iteminfor.cpp
+// íŒŒì¼ì´ë¦„: iteminfor.cpp
 //
-// ³»¿ë: ¾ÆÀÌÅÛÀÇ Á¤º¸¶ç¿ì±â
+// ë‚´ìš©: ì•„ì´í…œì˜ ì •ë³´ë„ìš°ê¸°
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,16 +35,16 @@ void memorize_action(int spell_)
 {
 	changedisplay(DT_GAME);
 	if(spell_ == SPL_NONE)
-		printlog("Á¸ÀçÇÏÁö ¾Ê´Â ½ºÆçÀÔ´Ï´Ù.",true,false,false,CL_normal);
+		printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ìŠ¤í ì…ë‹ˆë‹¤.",true,false,false,CL_normal);
 	else
 	{		
 		bool ok_ = true;
 		while(ok_)
 		{
 			printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
-			printlog(" ÁÖ¹®À» ÀÍÈ÷½Ã°Ú½À´Ï±î? (y/n)",false,false,false,CL_help);
+			printlog(" ì£¼ë¬¸ì„ ìµíˆì‹œê² ìŠµë‹ˆê¹Œ? (y/n)",false,false,false,CL_help);
 			char temp[128];
-			sprintf_s(temp,128," [¸¶¹ı½ÇÆĞÀ²: %d%% ³²Àº ¸¶¹ı ·¹º§: %d]",100-you.GetSpellSuccess(spell_),you.remainSpellPoiont);
+			sprintf_s(temp,128," [ë§ˆë²•ì‹¤íŒ¨ìœ¨: %d%% ë‚¨ì€ ë§ˆë²• ë ˆë²¨: %d]",100-you.GetSpellSuccess(spell_),you.remainSpellPoiont);
 
 			printlog(temp,true,false,false,CL_warning);
 			switch(waitkeyinput())
@@ -57,11 +57,11 @@ void memorize_action(int spell_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
-				printlog("Ãë¼ÒÇß´Ù.",true,false,false,CL_help);
+				printlog("ì·¨ì†Œí–ˆë‹¤.",true,false,false,CL_help);
 				ok_ = false;
 				break;
 			default:
-				printlog("Y¿Í NÁß¿¡ ¼±ÅÃÇØÁÖ¼¼¿ä.",true,false,false,CL_help);
+				printlog("Yì™€ Nì¤‘ì— ì„ íƒí•´ì£¼ì„¸ìš”.",true,false,false,CL_help);
 				break;
 			}
 		}
@@ -70,7 +70,7 @@ void memorize_action(int spell_)
 
 }
 
-//true lÀÌ rº¸´Ù Å©´Ù
+//true lì´ rë³´ë‹¤ í¬ë‹¤
 bool compareAlphabet(char l_, char r_)
 {
 	bool l_small = l_ >= 'a' && l_ <= 'z';
@@ -93,7 +93,7 @@ void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator
 
 void iteminfor(bool gameover)
 {
-	view_item(IVT_INFOR,gameover?"´ç½ÅÀÇ ¾ÆÀÌÅÛ":"¹«½¼ ¾ÆÀÌÅÛÀ» È®ÀÎÇÏ°Ú½À´Ï±î?");
+	view_item(IVT_INFOR,gameover?"ë‹¹ì‹ ì˜ ì•„ì´í…œ":"ë¬´ìŠ¨ ì•„ì´í…œì„ í™•ì¸í•˜ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -118,7 +118,7 @@ void iteminfor(bool gameover)
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";
-							SetText() += "mÀ» ´©¸£¸é ¸¶¹ıÀ» ±â¾ïÇÒ ¼ö ÀÖ½À´Ï´Ù.\n";
+							SetText() += "mì„ ëˆ„ë¥´ë©´ ë§ˆë²•ì„ ê¸°ì–µí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n";
 							ReleaseMutex(mutx);
 							int memory_ = waitkeyinput();
 
@@ -126,7 +126,7 @@ void iteminfor(bool gameover)
 							{
 								if (you.isMemorize(spell_)) {
 									changedisplay(DT_GAME);
-									printlog("ÀÌ¹Ì ±â¾ïÇÏ°íÀÖ´Â ¸¶¹ıÀÔ´Ï´Ù. ", true, false, false, CL_normal);
+									printlog("ì´ë¯¸ ê¸°ì–µí•˜ê³ ìˆëŠ” ë§ˆë²•ì…ë‹ˆë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								memorize_action(spell_);
@@ -142,10 +142,10 @@ void iteminfor(bool gameover)
 						{
 							switch (key_)
 							{
-							case '=': //´ÜÃàÅ° ¹Ù²Ù±â
+							case '=': //ë‹¨ì¶•í‚¤ ë°”ê¾¸ê¸°
 							{
 								changedisplay(DT_GAME);
-								printlog("¹«½¼ ¾ËÆÄºªÀ¸·Î ¹Ù²Ü°ÅÁö? (a-z, A-Z)", true, false, false, CL_help);
+								printlog("ë¬´ìŠ¨ ì•ŒíŒŒë²³ìœ¼ë¡œ ë°”ê¿€ê±°ì§€? (a-z, A-Z)", true, false, false, CL_help);
 								{
 									int alphabet_ = waitkeyinput();
 									if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
@@ -210,15 +210,15 @@ void iteminfor(bool gameover)
 								}
 								return;
 							}
-							case 'w': //ÀåÂø	
+							case 'w': //ì¥ì°©	
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 
@@ -226,7 +226,7 @@ void iteminfor(bool gameover)
 								{
 									if (you.drowned)
 									{
-										printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+										printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 										return;
 									}
 									you.equip(item_->id, ET_WEAPON);
@@ -235,7 +235,7 @@ void iteminfor(bool gameover)
 								{
 									if (you.drowned)
 									{
-										printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+										printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 										return;
 									}
 									you.equiparmor(item_->id);
@@ -249,34 +249,34 @@ void iteminfor(bool gameover)
 									you.equipjewerly(item_->id);
 								}
 								return;
-							case 'u': //¹ş±â
+							case 'u': //ë²—ê¸°
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
 								{
 									if (you.drowned)
 									{
-										printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+										printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 										return;
 									}
 									if (!you.unequip(ET_WEAPON))
 									{
-										printlog("ÀúÁÖ¿¡ °É·Á ÀÖ¾î¼­ Àåºñ¸¦ ¹şÀ» ¼ö ¾ø´Ù.", true, false, false, CL_normal);
+										printlog("ì €ì£¼ì— ê±¸ë ¤ ìˆì–´ì„œ ì¥ë¹„ë¥¼ ë²—ì„ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_normal);
 									}
 								}
 								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
 								{
 									if (you.drowned)
 									{
-										printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+										printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 										return;
 									}
 									you.unequiparmor(item_->id);
@@ -290,7 +290,7 @@ void iteminfor(bool gameover)
 									you.unequipjewerly(item_->id);
 								}
 								return;
-							case 'f': //Åº¸·
+							case 'f': //íƒ„ë§‰
 							{
 								changedisplay(DT_GAME);
 								you.throw_weapon = item_;
@@ -299,29 +299,29 @@ void iteminfor(bool gameover)
 								printlog(temp, false, false, false, item_->item_color());
 								printlog(" - ", false, false, false, item_->item_color());
 								printlog(item_->GetName(), false, false, false, item_->item_color());
-								printlog("(Åº¸·) ", false, false, false, item_->item_color());
+								printlog("(íƒ„ë§‰) ", false, false, false, item_->item_color());
 							}
 								return;
-							case 'q': //¸¶½Ã±â
+							case 'q': //ë§ˆì‹œê¸°
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
 								{
-									printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.Drink(item_->id))
 								{
 									you.time_delay += you.GetNormalDelay();
-									you.doingActionDump(DACT_USE, "¹°¾à");
+									you.doingActionDump(DACT_USE, "ë¬¼ì•½");
 									changedisplay(DT_GAME);
 									if (you.god == GT_EIRIN)
 									{
@@ -334,59 +334,59 @@ void iteminfor(bool gameover)
 									you.TurnEnd();
 								}
 								return;
-							case 'e': //¸Ô±â
+							case 'e': //ë¨¹ê¸°
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
 								{
-									printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								you.Eat(item_->id);
 								return;
-							case 'r': //ÀĞ±â
+							case 'r': //ì½ê¸°
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
 								{
-									printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if(you.Read(item_->id))
 								{
-									you.doingActionDump(DACT_USE, "µÎ·ç¸¶¸®");
+									you.doingActionDump(DACT_USE, "ë‘ë£¨ë§ˆë¦¬");
 									you.time_delay += you.GetNormalDelay();
 									changedisplay(DT_GAME);
 									you.TurnEnd();
 								}
 								return;
-							case 'v': //¹ßµ¿
+							case 'v': //ë°œë™
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+									printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost &&
 									!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
 									) {
-									printlog("À¯·É»óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+									printlog("ìœ ë ¹ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 									return;
 								}
 								if (you.Evoke(item_->id, false))
@@ -395,17 +395,17 @@ void iteminfor(bool gameover)
 									you.TurnEnd();
 								}
 								return;
-							case 'd': //¹ö¸®±â
+							case 'd': //ë²„ë¦¬ê¸°
 							case 'D':
 								{
 									changedisplay(DT_GAME);
 									if (you.s_lunatic)
 									{
-										printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+										printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 										return;
 									}
 									if (you.s_evoke_ghost) {
-										printlog("À¯·É »óÅÂ¿¡¼± ÇÒ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+										printlog("ìœ ë ¹ ìƒíƒœì—ì„  í•  ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 										return;
 									}
 									bool discard_ = false;
@@ -427,7 +427,7 @@ void iteminfor(bool gameover)
 									}
 									if (!discard_)
 									{
-										printlog("Á¸ÀçÇÏÁö ¾Ê´Â ÅÛÀÔ´Ï´Ù.", true, false, false, CL_normal);
+										printlog("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” í…œì…ë‹ˆë‹¤.", true, false, false, CL_normal);
 									}
 									return;
 								}
@@ -436,17 +436,17 @@ void iteminfor(bool gameover)
 					}
 					break;
 				}
-				view_item(IVT_INFOR,gameover?"´ç½ÅÀÇ ¾ÆÀÌÅÛ":"¹«½¼ ¾ÆÀÌÅÛÀ» È®ÀÎÇÏ°Ú½À´Ï±î?");
+				view_item(IVT_INFOR,gameover?"ë‹¹ì‹ ì˜ ì•„ì´í…œ":"ë¬´ìŠ¨ ì•„ì´í…œì„ í™•ì¸í•˜ê² ìŠµë‹ˆê¹Œ?");
 				setDisplayMove(get_item_move_);
 			}
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -455,7 +455,7 @@ void iteminfor(bool gameover)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == VK_ESCAPE || (key_ == VK_RETURN && gameover))
 			break;
 	}
@@ -471,14 +471,14 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 	if (can_use_)
 	{
-		use_text_ += "(=)´ÜÃàÅ°º¯°æ, ";
+		use_text_ += "(=)ë‹¨ì¶•í‚¤ë³€ê²½, ";
 		if (key) key->insert('=');
 	}
 	switch (it->type)
 	{
 		//case ITM_WEAPON_DAGGER:
-		//	text_ += "´Ü°ËÀÇ ÀÏÁ¾À¸·Î ÀÛÀº Ä®ÀÌ´Ù. ÀûÀ» ±â½ÀÇÏ´Âµ¥ Æ¯È÷ À¯¿ëÇÑ ¹«±âÀÌ´Ù.\n\
-		//			  ³¯·Á¼­ Åº¸·À¸·Î ¾²´Â °Íµµ °¡´ÉÇÏ´Ù.\n";
+		//	text_ += "ë‹¨ê²€ì˜ ì¼ì¢…ìœ¼ë¡œ ì‘ì€ ì¹¼ì´ë‹¤. ì ì„ ê¸°ìŠµí•˜ëŠ”ë° íŠ¹íˆ ìœ ìš©í•œ ë¬´ê¸°ì´ë‹¤.\n\
+		//			  ë‚ ë ¤ì„œ íƒ„ë§‰ìœ¼ë¡œ ì“°ëŠ” ê²ƒë„ ê°€ëŠ¥í•˜ë‹¤.\n";
 	case ITM_WEAPON_SHORTBLADE:
 	case ITM_WEAPON_LONGBLADE:
 	case ITM_WEAPON_MACE:
@@ -490,118 +490,118 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_WEAPON_SHORTBLADE:
-			text_ += "³¯ÀÌ ÂªÀº °ËÀÌ´Ù. ºü¸¥ ¼Óµµ·Î °ø°İÇÒ ¼ö ÀÖ´Ù.\n";
+			text_ += "ë‚ ì´ ì§§ì€ ê²€ì´ë‹¤. ë¹ ë¥¸ ì†ë„ë¡œ ê³µê²©í•  ìˆ˜ ìˆë‹¤.\n";
 			ski_ = SKT_SHORTBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "ÈŞ´ëÇÏ±â ÁÁÀº ÀÛÀº ´Ü°Ë. Á÷Á¢ÀûÀÎ ÀüÅõº¸´Ù Á¶¿ëÈ÷ ÀûÀÇ ¸ñÀ» µû¹ö¸®´Âµ¥ È¿À²ÀûÀÌ´Ù.\n";
+				text_ += "íœ´ëŒ€í•˜ê¸° ì¢‹ì€ ì‘ì€ ë‹¨ê²€. ì§ì ‘ì ì¸ ì „íˆ¬ë³´ë‹¤ ì¡°ìš©íˆ ì ì˜ ëª©ì„ ë”°ë²„ë¦¬ëŠ”ë° íš¨ìœ¨ì ì´ë‹¤.\n";
 				break;
 			case 1:
-				text_ += "´øÁö´Â ¹«±â·Î ÃÖÀûÈ­µÈ ´Ü°Ë. ±ÙÁ¢ÀüÅõ·Îµµ ¾µ ¼ø ÀÖÁö¸¸ È¿À²Àº ¶³¾îÁø´Ù.\n";
-				text_ += "ºñ·Ï ´øÁö°í³ª¼± ´Ù½Ã ÁÖ¿ö¾ßÇÏÁö¸¸ ÀÌ¸¦ ÇØ°áÇÒ ¼ö ÀÖ´Ù¸é À¯¿ëÇÑ ÅõÃ´¼ö´ÜÀÌ µÈ´Ù.\n";
+				text_ += "ë˜ì§€ëŠ” ë¬´ê¸°ë¡œ ìµœì í™”ëœ ë‹¨ê²€. ê·¼ì ‘ì „íˆ¬ë¡œë„ ì“¸ ìˆœ ìˆì§€ë§Œ íš¨ìœ¨ì€ ë–¨ì–´ì§„ë‹¤.\n";
+				text_ += "ë¹„ë¡ ë˜ì§€ê³ ë‚˜ì„  ë‹¤ì‹œ ì£¼ì›Œì•¼í•˜ì§€ë§Œ ì´ë¥¼ í•´ê²°í•  ìˆ˜ ìˆë‹¤ë©´ ìœ ìš©í•œ íˆ¬ì²™ìˆ˜ë‹¨ì´ ëœë‹¤.\n";
 				break;
 			case 2:
-				text_ += "´Ù¸¥ ´Ü°Ë¿¡ ºñÇØ¼± ±ÙÁ¢ ÀüÅõ¿¡¼­µµ ¾µ ¼ö ÀÖÀ» Á¤µµ·Î ³¯ÀÌ ±ä ¹«±â´Ù.\n";
-				text_ += "±¸Áö ´Ü°ËÀ¸·Î Á¤¸éÀüÀ» ÇÏ°í½ÍÀº »ç¶÷ÀÌ¶ó¸é ¾²°ÔµÉ °ÍÀÌ´Ù.\n";
+				text_ += "ë‹¤ë¥¸ ë‹¨ê²€ì— ë¹„í•´ì„  ê·¼ì ‘ ì „íˆ¬ì—ì„œë„ ì“¸ ìˆ˜ ìˆì„ ì •ë„ë¡œ ë‚ ì´ ê¸´ ë¬´ê¸°ë‹¤.\n";
+				text_ += "êµ¬ì§€ ë‹¨ê²€ìœ¼ë¡œ ì •ë©´ì „ì„ í•˜ê³ ì‹¶ì€ ì‚¬ëŒì´ë¼ë©´ ì“°ê²Œë  ê²ƒì´ë‹¤.\n";
 				break;
 			}
 			break;
 		case ITM_WEAPON_LONGBLADE:
-			text_ += "³¯ÀÌ ±ä Àå°ËÀÌ´Ù. Âî¸£°Å³ª º£¸é¼­ »ó´ë¸¦ °ø°İÇÑ´Ù.\n";
+			text_ += "ë‚ ì´ ê¸´ ì¥ê²€ì´ë‹¤. ì°Œë¥´ê±°ë‚˜ ë² ë©´ì„œ ìƒëŒ€ë¥¼ ê³µê²©í•œë‹¤.\n";
 			ski_ = SKT_LONGBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "Æò¹üÇÑ µµ°ËÀ¸·Î ¸¶¶¥È÷ Æ¯Â¡ÀÌ¶ö°Ô ¾øÀ» Á¤µµ·Î ¾²±â ÆíÇÑ Æò¹üÇÑ °Ë.\n";
+				text_ += "í‰ë²”í•œ ë„ê²€ìœ¼ë¡œ ë§ˆë•…íˆ íŠ¹ì§•ì´ë„ê²Œ ì—†ì„ ì •ë„ë¡œ ì“°ê¸° í¸í•œ í‰ë²”í•œ ê²€.\n";
 				break;
 			case 1:
-				text_ += "¹é¶ûÅÙ±¸µéÀÌ ÀÚÁÖ µé°í´Ù´Ï´Â ³¯ÀÌ Å©°í ±¸ºÎ·¯Á®ÀÖ´Â Àå°Ë.\n";
-				text_ += "³¯ÀÌ ÈÎ¾À Å©±â ¶§¹®¿¡ º¸ÅëÀÇ Àå°Ëº¸´Ù ´õ Å« µ¥¹ÌÁö¸¦ ÁØ´Ù.\n";
+				text_ += "ë°±ë‘í…êµ¬ë“¤ì´ ìì£¼ ë“¤ê³ ë‹¤ë‹ˆëŠ” ë‚ ì´ í¬ê³  êµ¬ë¶€ëŸ¬ì ¸ìˆëŠ” ì¥ê²€.\n";
+				text_ += "ë‚ ì´ í›¨ì”¬ í¬ê¸° ë•Œë¬¸ì— ë³´í†µì˜ ì¥ê²€ë³´ë‹¤ ë” í° ë°ë¯¸ì§€ë¥¼ ì¤€ë‹¤.\n";
 				break;
 			case 2:
-				text_ += "¾ÆÁÖ °Å´ëÇÑ ¾ç³¯ÀÌ ´Ş¸° °Ë. ¾ç¼ÕÀ¸·Îµµ Á¦´ë·Î µé±â°¡ Èûµé´Ù.\n";
-				text_ += "±× Å©±â¿¡ °É¸Â´Â ÆÄ±«·ÂÀ» º¸¿©ÁÖÁö¸¸ Á¦´ë·Î ´Ù·ç±â¿£ ¼ö·ÃÀÌ ÇÊ¿äÇÏ´Ù.\n";
+				text_ += "ì•„ì£¼ ê±°ëŒ€í•œ ì–‘ë‚ ì´ ë‹¬ë¦° ê²€. ì–‘ì†ìœ¼ë¡œë„ ì œëŒ€ë¡œ ë“¤ê¸°ê°€ í˜ë“¤ë‹¤.\n";
+				text_ += "ê·¸ í¬ê¸°ì— ê±¸ë§ëŠ” íŒŒê´´ë ¥ì„ ë³´ì—¬ì£¼ì§€ë§Œ ì œëŒ€ë¡œ ë‹¤ë£¨ê¸°ì—” ìˆ˜ë ¨ì´ í•„ìš”í•˜ë‹¤.\n";
 				break;
 			case 3:
-				text_ += "¾îµò°¡ÀÇ ÅäÂø½ÅÀÌ ÀÚÁÖ »ç¿ëÇÏ´Â µÕ±×·¸°Ô ³¯ÀÌ ´Ş¸° ÅõÃ´¿ë ¹«±â.\n";
-				text_ += "¼ÕÀ¸·Î ºùºùµ¹·Á¼­ ´øÁö¸é ±× È¸Àü·ÂÀ¸·Î ´Ù½Ã ÀÚ½Å¿¡°Ô µ¹¾Æ¿Ã ¼ö µµ ÀÖ´Ù.\n";
-				text_ += "ÀÌ°É °ËÀÌ¶ó°í º¼ ¼ö ÀÖÀ»Áø ¸ğ¸£°ÚÁö¸¸ ¼Õ¿¡ µé°í °ËÃ³·³µµ »ç¿ëÇÒ ¼ö ÀÖ´Ù.\n";
+				text_ += "ì–´ë”˜ê°€ì˜ í† ì°©ì‹ ì´ ìì£¼ ì‚¬ìš©í•˜ëŠ” ë‘¥ê·¸ë ‡ê²Œ ë‚ ì´ ë‹¬ë¦° íˆ¬ì²™ìš© ë¬´ê¸°.\n";
+				text_ += "ì†ìœ¼ë¡œ ë¹™ë¹™ëŒë ¤ì„œ ë˜ì§€ë©´ ê·¸ íšŒì „ë ¥ìœ¼ë¡œ ë‹¤ì‹œ ìì‹ ì—ê²Œ ëŒì•„ì˜¬ ìˆ˜ ë„ ìˆë‹¤.\n";
+				text_ += "ì´ê±¸ ê²€ì´ë¼ê³  ë³¼ ìˆ˜ ìˆì„ì§„ ëª¨ë¥´ê² ì§€ë§Œ ì†ì— ë“¤ê³  ê²€ì²˜ëŸ¼ë„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.\n";
 				break;
 			}
 			break;
 		case ITM_WEAPON_MACE:
-			text_ += "¹¶ÅöÇÑ µĞ±â´Ù.\n";
+			text_ += "ë­‰íˆ­í•œ ë‘”ê¸°ë‹¤.\n";
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "½Å»çÀÇ ¹«³àµéÀÌ Á¦»ç¸¦ ÇÒ¶§ »ç¿ëÇÏ´Â Á¦»ç¿ë±¸... ¿´À¸³ª\n";
-				text_ += "¿ÀÈ÷·Á ÀÌ È¯»óÇâÀÇ ¹«³àµéÀº ¹°¸®ÀûÀÎ °ø°İµµ±¸·Î »ç¿ëÇÏ´Â ÀÏÀÌ ¸¹´Ù.\n";
-				text_ += "±×·¸°Ô È¿À²ÀûÀÎ ¹«±â´Â ¾Æ´ÒÁöµµ ¸ğ¸£Áö¸¸ ½ÃµµÇØº¼ °¡Ä¡´Â ÀÖ´Ù.\n";
+				text_ += "ì‹ ì‚¬ì˜ ë¬´ë…€ë“¤ì´ ì œì‚¬ë¥¼ í• ë•Œ ì‚¬ìš©í•˜ëŠ” ì œì‚¬ìš©êµ¬... ì˜€ìœ¼ë‚˜\n";
+				text_ += "ì˜¤íˆë ¤ ì´ í™˜ìƒí–¥ì˜ ë¬´ë…€ë“¤ì€ ë¬¼ë¦¬ì ì¸ ê³µê²©ë„êµ¬ë¡œ ì‚¬ìš©í•˜ëŠ” ì¼ì´ ë§ë‹¤.\n";
+				text_ += "ê·¸ë ‡ê²Œ íš¨ìœ¨ì ì¸ ë¬´ê¸°ëŠ” ì•„ë‹ì§€ë„ ëª¨ë¥´ì§€ë§Œ ì‹œë„í•´ë³¼ ê°€ì¹˜ëŠ” ìˆë‹¤.\n";
 				break;
 			case 1:
-				text_ += "¸¶¹ı»çµéÀÌ ÈçÈ÷ ¾²°í ´Ù´Ï´Â ºøÀÚ·ç. ¸¶¹ı·ÂÀ» ¿Ã·ÁÁÖ°Å³ª ±×·± ¿ëµµ´Â ¾ø´Ù.\n";
-				text_ += "±»ÀÌ ºøÀÚ·ç¸¦ °íÁıÇÒ ÀÌÀ¯´Â ¾øÁö¸¸ ¸¶¹ı»ç´Â ºøÀÚ·ç¶ó´Â Æ¯À¯ÀÇ °íÁıÀÎµí ÇÏ´Ù.\n";
-				text_ += "µĞ±â·Î¼­ »ç¿ëÇÏ´Â°Ô ±×³ª¸¶ È°¿ëÇØº¼ ¼ö ÀÖ´Ù.\n";
+				text_ += "ë§ˆë²•ì‚¬ë“¤ì´ í”íˆ ì“°ê³  ë‹¤ë‹ˆëŠ” ë¹—ìë£¨. ë§ˆë²•ë ¥ì„ ì˜¬ë ¤ì£¼ê±°ë‚˜ ê·¸ëŸ° ìš©ë„ëŠ” ì—†ë‹¤.\n";
+				text_ += "êµ³ì´ ë¹—ìë£¨ë¥¼ ê³ ì§‘í•  ì´ìœ ëŠ” ì—†ì§€ë§Œ ë§ˆë²•ì‚¬ëŠ” ë¹—ìë£¨ë¼ëŠ” íŠ¹ìœ ì˜ ê³ ì§‘ì¸ë“¯ í•˜ë‹¤.\n";
+				text_ += "ë‘”ê¸°ë¡œì„œ ì‚¬ìš©í•˜ëŠ”ê²Œ ê·¸ë‚˜ë§ˆ í™œìš©í•´ë³¼ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case 2:
-				text_ += "¸ÚÀïÀÌµéÀÌ »ç¿ëÇÑ´Ù´Â ¾ç»ê. °­ÇÑ ¿ä±«ÀÏ¼ö·Ï ¾ç»êÀ» »ç¿ëÇÏ·Á´Â Ç³Á¶°¡ ÀÖ´ÂµíÇÏ´Ù.\n";
-				text_ += "±×·¸°Ô È¿°úÀûÀÌÁø¾ÊÀ»Áö ¸ô¶óµµ °­ÇÑÃ´À» ÇÏ°í ½ÍÀº »ç¶÷µéÀÌ¶ó¸é »ç¿ëÇØº¸´Â°Ô ¾î¶³±î?\n";
+				text_ += "ë©‹ìŸì´ë“¤ì´ ì‚¬ìš©í•œë‹¤ëŠ” ì–‘ì‚°. ê°•í•œ ìš”ê´´ì¼ìˆ˜ë¡ ì–‘ì‚°ì„ ì‚¬ìš©í•˜ë ¤ëŠ” í’ì¡°ê°€ ìˆëŠ”ë“¯í•˜ë‹¤.\n";
+				text_ += "ê·¸ë ‡ê²Œ íš¨ê³¼ì ì´ì§„ì•Šì„ì§€ ëª°ë¼ë„ ê°•í•œì²™ì„ í•˜ê³  ì‹¶ì€ ì‚¬ëŒë“¤ì´ë¼ë©´ ì‚¬ìš©í•´ë³´ëŠ”ê²Œ ì–´ë–¨ê¹Œ?\n";
 				break;
 			case 3:
-				text_ += "º¸¹°À» Ã£´Âµ¥ µµ¿òÀ» ÁØ´Ù°í ¹Ï¾îÁö´Â ºÀ. ±×·¯³ª ÀÌ·± ¼Ó¼³Àº ¹Ì½ÅÀÎµí ½Í´Ù.\n";
-				text_ += "º¸¹°À» Ã£´Âµ¥ µµ¿òÀº µÇÁö¾ÊÁö¸¸ ´Ù·ç±â ½¬¿î ±İ¼Ó ºÀÀ¸·Î ÀüÅõ¿¡¼­ ¾µ ¼ö ÀÖ´Ù.\n";
-				text_ += "¾ç¼ÕÀ¸·Î ´Ù·ç´Âµ¥ Æ¯È­µÇ¾îÀÖ¾î¼­, ¹æÆĞ¿Í ÇÔ²²¶ó¸é È¿À²ÀÌ ¶³¾îÁø´Ù.\n";
+				text_ += "ë³´ë¬¼ì„ ì°¾ëŠ”ë° ë„ì›€ì„ ì¤€ë‹¤ê³  ë¯¿ì–´ì§€ëŠ” ë´‰. ê·¸ëŸ¬ë‚˜ ì´ëŸ° ì†ì„¤ì€ ë¯¸ì‹ ì¸ë“¯ ì‹¶ë‹¤.\n";
+				text_ += "ë³´ë¬¼ì„ ì°¾ëŠ”ë° ë„ì›€ì€ ë˜ì§€ì•Šì§€ë§Œ ë‹¤ë£¨ê¸° ì‰¬ìš´ ê¸ˆì† ë´‰ìœ¼ë¡œ ì „íˆ¬ì—ì„œ ì“¸ ìˆ˜ ìˆë‹¤.\n";
+				text_ += "ì–‘ì†ìœ¼ë¡œ ë‹¤ë£¨ëŠ”ë° íŠ¹í™”ë˜ì–´ìˆì–´ì„œ, ë°©íŒ¨ì™€ í•¨ê»˜ë¼ë©´ íš¨ìœ¨ì´ ë–¨ì–´ì§„ë‹¤.\n";
 				break;
 			case 4:
-				text_ += "¾ÆÁÖ °Å´ëÇÑ ±âµÕÀ¸·Î ÀÌ·± °ÍÀ» ¹«±â·Î ¾²·Á »ı°¢Çß´Ù´Â°Ô ½Å±âÇÒ Á¤µµ´Ù.\n";
-				text_ += "º¸Åë ÀÍ¼÷ÇÏÁö¸¸ ÈÖµÎ¸£´Âµ¥¸¸ ¾öÃ»³­ ½Ã°£ÀÌ °É¸±µí ÇÏ´Ù.\n";
-				text_ += "¸ÂÃß±âµµ ½±Áö¾Ê¾Æº¸ÀÌÁö¸¸ ¸ÂÃá´Ù¸é ¾öÃ»³­ µ¥¹ÌÁö¸¦ ÁÙ ¼ö ÀÖ´Ù.\n";
+				text_ += "ì•„ì£¼ ê±°ëŒ€í•œ ê¸°ë‘¥ìœ¼ë¡œ ì´ëŸ° ê²ƒì„ ë¬´ê¸°ë¡œ ì“°ë ¤ ìƒê°í–ˆë‹¤ëŠ”ê²Œ ì‹ ê¸°í•  ì •ë„ë‹¤.\n";
+				text_ += "ë³´í†µ ìµìˆ™í•˜ì§€ë§Œ íœ˜ë‘ë¥´ëŠ”ë°ë§Œ ì—„ì²­ë‚œ ì‹œê°„ì´ ê±¸ë¦´ë“¯ í•˜ë‹¤.\n";
+				text_ += "ë§ì¶”ê¸°ë„ ì‰½ì§€ì•Šì•„ë³´ì´ì§€ë§Œ ë§ì¶˜ë‹¤ë©´ ì—„ì²­ë‚œ ë°ë¯¸ì§€ë¥¼ ì¤„ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			}
 			ski_ = SKT_MACE;
 			break;
 		case ITM_WEAPON_SPEAR:
-			text_ += "±æ´Ù¶õ Ã¢ÀÌ´Ù. ÀûÀ» Âñ·¯¼­ °ø°İÇÒ ¼ö ÀÖ´Ù.\n";
+			text_ += "ê¸¸ë‹¤ë€ ì°½ì´ë‹¤. ì ì„ ì°”ëŸ¬ì„œ ê³µê²©í•  ìˆ˜ ìˆë‹¤.\n";
 			ski_ = SKT_SPEAR;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "µüÈ÷ Å« Æ¯Â¡ÀÌ ¾ø´Â Æò¹üÇÑ Ã¢. Âî¸£´Âµ¥ ¾µ ¼ö ÀÖ´Ù.\n";
+				text_ += "ë”±íˆ í° íŠ¹ì§•ì´ ì—†ëŠ” í‰ë²”í•œ ì°½. ì°Œë¥´ëŠ”ë° ì“¸ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case 1:
-				text_ += "´øÁö´Âµ¥ Æ¯È­µÇ¾îÀÖ´Â °Å´ëÇÑ Ã¢. Èû²¯ ´øÁ®¼­ Àû¿¡°Ô ¸ÂÃâ ¼ö ÀÖ´Ù.\n";
-				text_ += "±ÙÁ¢ÀüÅõ¿¡¼­µµ ÃæºĞÈ÷ »ç¿ëÀÌ °¡´ÉÇÏÁö¸¸ ÈÖµÎ¸£±â¿£ ÀûÇÕÇÏÁö¾Ê´Ù.\n";
+				text_ += "ë˜ì§€ëŠ”ë° íŠ¹í™”ë˜ì–´ìˆëŠ” ê±°ëŒ€í•œ ì°½. í˜ê» ë˜ì ¸ì„œ ì ì—ê²Œ ë§ì¶œ ìˆ˜ ìˆë‹¤.\n";
+				text_ += "ê·¼ì ‘ì „íˆ¬ì—ì„œë„ ì¶©ë¶„íˆ ì‚¬ìš©ì´ ê°€ëŠ¥í•˜ì§€ë§Œ íœ˜ë‘ë¥´ê¸°ì—” ì í•©í•˜ì§€ì•Šë‹¤.\n";
 				break;
 			case 2:
-				text_ += "»ç½ÅÀÌ ÀÚÁÖ µé°í´Ù´Ñ´Ù´Â °Å´ëÇÑ ³´.\n";
-				text_ += "»ı°¢º¸´Ù ¹«±â·Î¼­ »ç¿ëÇÏ±â¿£ ¾î·Á¿öº¸ÀÌ´Â Å« ³´ÀÌÁö¸¸ ÀÍ¼÷ÇØÁö¸é ³ª¸§ °­ÇÏ´Ù.\n";
+				text_ += "ì‚¬ì‹ ì´ ìì£¼ ë“¤ê³ ë‹¤ë‹Œë‹¤ëŠ” ê±°ëŒ€í•œ ë‚«.\n";
+				text_ += "ìƒê°ë³´ë‹¤ ë¬´ê¸°ë¡œì„œ ì‚¬ìš©í•˜ê¸°ì—” ì–´ë ¤ì›Œë³´ì´ëŠ” í° ë‚«ì´ì§€ë§Œ ìµìˆ™í•´ì§€ë©´ ë‚˜ë¦„ ê°•í•˜ë‹¤.\n";
 				break;
 			case 3:
-				text_ += "³¯ÀÌ 3°³´Ş¸° ±â´Ù¶õ ÀÛ»ìÀ¸·Î Âï´Âµ¥ Æ¯È­µÈ Ã¢ÀÌ´Ù.\n";
-				text_ += "°¡º±°í ¾²±â ÁÁÁö¸¸ ³ôÀº À§·ÂÀº ³ª¿ÀÁö¾Ê´Â´Ù.\n";
+				text_ += "ë‚ ì´ 3ê°œë‹¬ë¦° ê¸°ë‹¤ë€ ì‘ì‚´ìœ¼ë¡œ ì°ëŠ”ë° íŠ¹í™”ëœ ì°½ì´ë‹¤.\n";
+				text_ += "ê°€ë³ê³  ì“°ê¸° ì¢‹ì§€ë§Œ ë†’ì€ ìœ„ë ¥ì€ ë‚˜ì˜¤ì§€ì•ŠëŠ”ë‹¤.\n";
 				break;
 			case 4:
-				text_ += "´ë³ª¹«·Î ±ğ¾Æ¼­ ¸¸µç Ã¢. \n";
-				text_ += "¾ÆÁÖ Æò¹üÇÑ Ã¢Ã³·³ º¸ÀÌÁö¸¸ ³î¶ö¸¸ÇÑ À§·ÂÀ» ¼û±â°í ÀÖ´Ù.\n";
-				text_ += "Á¦´ë·Î ´Ù·ç·Á¸é »ó´çÇÑ ¿¬½ÀÀÌ ÇÊ¿äÇÏ´Ù.\n";
+				text_ += "ëŒ€ë‚˜ë¬´ë¡œ ê¹ì•„ì„œ ë§Œë“  ì°½. \n";
+				text_ += "ì•„ì£¼ í‰ë²”í•œ ì°½ì²˜ëŸ¼ ë³´ì´ì§€ë§Œ ë†€ë„ë§Œí•œ ìœ„ë ¥ì„ ìˆ¨ê¸°ê³  ìˆë‹¤.\n";
+				text_ += "ì œëŒ€ë¡œ ë‹¤ë£¨ë ¤ë©´ ìƒë‹¹í•œ ì—°ìŠµì´ í•„ìš”í•˜ë‹¤.\n";
 				break;
 			}
 			break;
 		case ITM_WEAPON_AXE:
-			text_ += "ÀûÀ» ÂïÀ» ¼ö ÀÖ´Â µµ³¢. °Å´ëÇÑ ³¯À» Áö³æ´Ù.\n";
+			text_ += "ì ì„ ì°ì„ ìˆ˜ ìˆëŠ” ë„ë¼. ê±°ëŒ€í•œ ë‚ ì„ ì§€ë…”ë‹¤.\n";
 			ski_ = SKT_AXE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "ÇÑ¼ÕÀ¸·Î µé ¼ö ÀÖ´Â ÀÛÀº ¼Õµµ³¢´Ù. Å« À§·ÂÀº ³ª¿ÀÁö¾ÊÁö¸¸ ´Ù·ç±â ½±´Ù.\n";
+				text_ += "í•œì†ìœ¼ë¡œ ë“¤ ìˆ˜ ìˆëŠ” ì‘ì€ ì†ë„ë¼ë‹¤. í° ìœ„ë ¥ì€ ë‚˜ì˜¤ì§€ì•Šì§€ë§Œ ë‹¤ë£¨ê¸° ì‰½ë‹¤.\n";
 				break;
 			case 1:
-				text_ += "±æ´Ù¶õ ÀÚ·ç¿¡ Å« µµ³¢³¯ÀÌ ´Ş¸° °Å´ëÇÑ µµ³¢´Ù.\n";
+				text_ += "ê¸¸ë‹¤ë€ ìë£¨ì— í° ë„ë¼ë‚ ì´ ë‹¬ë¦° ê±°ëŒ€í•œ ë„ë¼ë‹¤.\n";
 				break;
 			case 2:
-				text_ += "¾îµò°¡ÀÇ ¹èÀ¯·ÉÀÌ ÀÚÁÖ µé°í´Ù´Ï´Â °Å´ëÇÑ ³¸ÀÌ´Ù.\n";
-				text_ += "¾ÆÁÖ °­·ÂÇÏÁö¸¸ ÀÌ·±°É ÈÖµÎ¸¦·Á¸é ¾î¸¶¾î¸¶ÇÑ ½Ç·ÂÀÌ ÇÊ¿äÇÏ´Ù.\n";
+				text_ += "ì–´ë”˜ê°€ì˜ ë°°ìœ ë ¹ì´ ìì£¼ ë“¤ê³ ë‹¤ë‹ˆëŠ” ê±°ëŒ€í•œ ë‚¯ì´ë‹¤.\n";
+				text_ += "ì•„ì£¼ ê°•ë ¥í•˜ì§€ë§Œ ì´ëŸ°ê±¸ íœ˜ë‘ë¥¼ë ¤ë©´ ì–´ë§ˆì–´ë§ˆí•œ ì‹¤ë ¥ì´ í•„ìš”í•˜ë‹¤.\n";
 				break;
 			}
 			break;
@@ -615,17 +615,17 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		}
 		
 		{
-			//½ºÅ³·¹º§ ¼³¸íÇØÁÖ±â
+			//ìŠ¤í‚¬ë ˆë²¨ ì„¤ëª…í•´ì£¼ê¸°
 			char temp[100];
-			sprintf_s(temp, 100, "\n\nÀÌ ¹«±â´Â %s ½ºÅ³¿¡ ºñ·ÊÇÏ¿© °­ÇØÁø´Ù. (ÇöÀç %s ½ºÅ³ ·¹º§ : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
+			sprintf_s(temp, 100, "\n\nì´ ë¬´ê¸°ëŠ” %s ìŠ¤í‚¬ì— ë¹„ë¡€í•˜ì—¬ ê°•í•´ì§„ë‹¤. (í˜„ì¬ %s ìŠ¤í‚¬ ë ˆë²¨ : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
 			text_ += temp;
 
-			sprintf_s(temp,100, "\n°ø°İ·Â : %d       ¸íÁß·Â : %d", it->value2, it->value1);
+			sprintf_s(temp,100, "\nê³µê²©ë ¥ : %d       ëª…ì¤‘ë ¥ : %d", it->value2, it->value1);
 			text_ += temp;
-			sprintf_s(temp,100, "\nÇöÀç°ø°İ¼Óµµ : %g    ( ±âº»°ø°İ¼Óµµ : %g       ÃÖ¼Ò°ø°İ¼Óµµ : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
+			sprintf_s(temp,100, "\ní˜„ì¬ê³µê²©ì†ë„ : %g    ( ê¸°ë³¸ê³µê²©ì†ë„ : %g       ìµœì†Œê³µê²©ì†ë„ : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
 			text_ += temp;
 			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
-				sprintf_s(temp,100, "\n´Ü, ÀÌ ¹«±â´Â ¹æÆĞ¸¦ µé°ÔµÇ¸é °ø°İ¼Óµµ°¡ %g¸¸Å­ Ãß°¡ÀûÀ¸·Î ´À·ÁÁø´Ù.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
+				sprintf_s(temp,100, "\në‹¨, ì´ ë¬´ê¸°ëŠ” ë°©íŒ¨ë¥¼ ë“¤ê²Œë˜ë©´ ê³µê²©ì†ë„ê°€ %gë§Œí¼ ì¶”ê°€ì ìœ¼ë¡œ ëŠë ¤ì§„ë‹¤.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
 				text_ += temp;
 			}
 		}
@@ -634,15 +634,15 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->can_throw)
 		{
 			char temp[100];
-			sprintf_s(temp,100, "\n\nÀÌ ¾ÆÀÌÅÛÀº ±ÙÁ¢ ¹«±â·Îµµ »ç¿ë°¡´ÉÇÏÁö¸¸ ´øÁ®¼­ Åº¸·À¸·Îµµ »ç¿ëÇÒ ¼ö ÀÖ´Ù.");
+			sprintf_s(temp,100, "\n\nì´ ì•„ì´í…œì€ ê·¼ì ‘ ë¬´ê¸°ë¡œë„ ì‚¬ìš©ê°€ëŠ¥í•˜ì§€ë§Œ ë˜ì ¸ì„œ íƒ„ë§‰ìœ¼ë¡œë„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.");
 			text_ += temp;
-			sprintf_s(temp,100, "\nÀÌ °æ¿ì ÇöÀç ÅõÃ´¼Óµµ´Â %gÀÌ´Ù. (ÇöÀç Åº¸· ½ºÅ³ ·¹º§ : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+			sprintf_s(temp,100, "\nì´ ê²½ìš° í˜„ì¬ íˆ¬ì²™ì†ë„ëŠ” %gì´ë‹¤. (í˜„ì¬ íƒ„ë§‰ ìŠ¤í‚¬ ë ˆë²¨ : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 			text_ += temp;
 		}
 
 		{
 			char temp[100];
-			sprintf_s(temp,100, "\n\nÀÌ ¾ÆÀÌÅÛÀº +9±îÁö ÀÎÃ¦Æ®°¡ °¡´ÉÇÏ´Ù.");
+			sprintf_s(temp,100, "\n\nì´ ì•„ì´í…œì€ +9ê¹Œì§€ ì¸ì±ˆíŠ¸ê°€ ê°€ëŠ¥í•˜ë‹¤.");
 			text_ += temp;
 		}
 
@@ -651,17 +651,17 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			if (you.equipment[ET_WEAPON] != it)
 			{
-				use_text_ += "(w)ÀåÂø, ";
+				use_text_ += "(w)ì¥ì°©, ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)ÇØÁ¦, ";
+				use_text_ += "(u)í•´ì œ, ";
 				if (key) key->insert('u');
 			}
 			if (it->can_throw)
 			{
-				use_text_ += "(f)Åº¸·, ";
+				use_text_ += "(f)íƒ„ë§‰, ";
 				if (key) key->insert('f');
 			}
 		}
@@ -671,40 +671,40 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		switch (it->value4)
 		{
-		default://¾øÀ½ ÀÌ°Å ¶ß¸é ¹ö±×
-			text_ += "Åº¸· ³îÀÌÀÇ ±âº»ÀÌ µÇ´Â Åº¸·ÀÌ´Ù. Àû¿¡°Ô ´øÁ®¼­ ¸ÂÃá´Ù.\n";
-			text_ += "¹®Á¦´Â ÀÌ°Ô ¹ö±× Åº¸·ÀÌ¶ó´Â °ÍÀÌ´Ù.\n";
+		default://ì—†ìŒ ì´ê±° ëœ¨ë©´ ë²„ê·¸
+			text_ += "íƒ„ë§‰ ë†€ì´ì˜ ê¸°ë³¸ì´ ë˜ëŠ” íƒ„ë§‰ì´ë‹¤. ì ì—ê²Œ ë˜ì ¸ì„œ ë§ì¶˜ë‹¤.\n";
+			text_ += "ë¬¸ì œëŠ” ì´ê²Œ ë²„ê·¸ íƒ„ë§‰ì´ë¼ëŠ” ê²ƒì´ë‹¤.\n";
 			break;
 		case TMT_AMULET:
-			text_ += "·¹ÀÌ¹«°¡ ¾²´Â ÀÌ Ä¡»çÇÑ ¾Æ¹Ä·¿¿¡´Â °í¼º´ÉÀÇ È£¹Ö¼º´ÉÀÌ ºÙ¾îÀÖ´Ù.\n";
-			text_ += "Æ¯º°ÇÑ Æ¯Â¡ÀÌ ¾ø´Â Åº¸·ÀÌÁö¸¸ ³ôÀº ¸íÁßÀ²ÀÌ ÀÚ¶ûÀÌ´Ù.\n";
+			text_ += "ë ˆì´ë¬´ê°€ ì“°ëŠ” ì´ ì¹˜ì‚¬í•œ ì•„ë®¬ë ›ì—ëŠ” ê³ ì„±ëŠ¥ì˜ í˜¸ë°ì„±ëŠ¥ì´ ë¶™ì–´ìˆë‹¤.\n";
+			text_ += "íŠ¹ë³„í•œ íŠ¹ì§•ì´ ì—†ëŠ” íƒ„ë§‰ì´ì§€ë§Œ ë†’ì€ ëª…ì¤‘ìœ¨ì´ ìë‘ì´ë‹¤.\n";
 			break;
 		case TMT_POISON_NEEDLE:
-			text_ += "ÀÌ°ÍÀº ´øÁö¸é¼­ »ó´ë¿¡°Ô ¹ÚÈ÷´Â ¼ö¸®°ËÀÌ´Ù.\n";
-			text_ += "µ¥¹ÌÁö´Â ³·Áö¸¸ ÀÌ ¼ö¸®°Ë¿¡´Â Æ¯º°È÷ µ¶ÀÌ ¹ß¶óÁ®ÀÖ´Â°Í °°´Ù.\n";
+			text_ += "ì´ê²ƒì€ ë˜ì§€ë©´ì„œ ìƒëŒ€ì—ê²Œ ë°•íˆëŠ” ìˆ˜ë¦¬ê²€ì´ë‹¤.\n";
+			text_ += "ë°ë¯¸ì§€ëŠ” ë‚®ì§€ë§Œ ì´ ìˆ˜ë¦¬ê²€ì—ëŠ” íŠ¹ë³„íˆ ë…ì´ ë°œë¼ì ¸ìˆëŠ”ê²ƒ ê°™ë‹¤.\n";
 			break;
 		case TMT_KIKU_COMPRESSER:
-			text_ += "Ä±ÆÄµéÀÇ ¹ß¸íÇ°Áß ÇÏ³ª´Ù. ¹°À» °¡µæ ¾ĞÃàÇÏ°íÀÖ´Â ÆøÅºÀÌ´Ù.\n";
-			text_ += "»ó´ë¿¡°Ô ´øÁö¸é ¾ĞÃàµÇ¾îÀÖ´ø ¹°ÀÌ ÇÑ¹ø¿¡ ÅÍÁø´Ù.\n";
-			text_ += "³ĞÀº ¹üÀ§ °ø°İÇÒ ¼ö ÀÖÀ» °Í °°´Ù.\n";
+			text_ += "ìº‡íŒŒë“¤ì˜ ë°œëª…í’ˆì¤‘ í•˜ë‚˜ë‹¤. ë¬¼ì„ ê°€ë“ ì••ì¶•í•˜ê³ ìˆëŠ” í­íƒ„ì´ë‹¤.\n";
+			text_ += "ìƒëŒ€ì—ê²Œ ë˜ì§€ë©´ ì••ì¶•ë˜ì–´ìˆë˜ ë¬¼ì´ í•œë²ˆì— í„°ì§„ë‹¤.\n";
+			text_ += "ë„“ì€ ë²”ìœ„ ê³µê²©í•  ìˆ˜ ìˆì„ ê²ƒ ê°™ë‹¤.\n";
 			break;
 		case TMT_DOGGOJEO:
-			text_ += "ºÒ±³ÀÇ ½Â·ÁµéÀÌ ¼öÇàÇÒ¶§ »ç¿ëÇß´Ù°í ÇÏ´Â °í´ë ÀÎµµÀÇ ¹«±â.\n";
-			text_ += "Æò¼Ò¿£ Æò¹üÇÑ ¼ÕÀâÀÌÃ³·³ »ı°åÁö¸¸ °­ÇÑ ÈûÀ¸·Î ´øÁö¸é ¸¶·ÂÀÌ ¹æÃâµÈ´Ù.\n";
-			text_ += "´Ù¸¥ Åº¸·°ú ´Ù¸£°Ô ÀûµéÀ» °üÅëÇÏ¿© °ø°İÀÌ °¡´ÉÇÏ´Ù.\n";
+			text_ += "ë¶ˆêµì˜ ìŠ¹ë ¤ë“¤ì´ ìˆ˜í–‰í• ë•Œ ì‚¬ìš©í–ˆë‹¤ê³  í•˜ëŠ” ê³ ëŒ€ ì¸ë„ì˜ ë¬´ê¸°.\n";
+			text_ += "í‰ì†Œì—” í‰ë²”í•œ ì†ì¡ì´ì²˜ëŸ¼ ìƒê²¼ì§€ë§Œ ê°•í•œ í˜ìœ¼ë¡œ ë˜ì§€ë©´ ë§ˆë ¥ì´ ë°©ì¶œëœë‹¤.\n";
+			text_ += "ë‹¤ë¥¸ íƒ„ë§‰ê³¼ ë‹¤ë¥´ê²Œ ì ë“¤ì„ ê´€í†µí•˜ì—¬ ê³µê²©ì´ ê°€ëŠ¥í•˜ë‹¤.\n";
 			break;
 		}
 		char temp[100];
-		sprintf_s(temp,100, "\n°ø°İ·Â : %d       ¸íÁß·Â : %d", it->value2, it->value1);
+		sprintf_s(temp,100, "\nê³µê²©ë ¥ : %d       ëª…ì¤‘ë ¥ : %d", it->value2, it->value1);
 		text_ += temp;
-		sprintf_s(temp,100, "\nÇöÀç ÅõÃ´¼Óµµ : %g (ÇöÀç Åº¸· ½ºÅ³ ·¹º§ : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+		sprintf_s(temp,100, "\ní˜„ì¬ íˆ¬ì²™ì†ë„ : %g (í˜„ì¬ íƒ„ë§‰ ìŠ¤í‚¬ ë ˆë²¨ : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 
 		if (can_use_)
 		{
 			if (it->can_throw)
 			{
-				use_text_ += "(f)Åº¸·, ";
+				use_text_ += "(f)íƒ„ë§‰, ";
 				if (key) key->insert('f');
 			}
 		}
@@ -718,76 +718,76 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value5)
 		{
 		case AMK_NORMAL:
-			text_ += "Æò»ó½Ã¿¡ ÀÔ´Â ÆíÇÑ ¿Ê.\n";
-			text_ += "ÃµÀÌ ¾Æ´Ñ ÀçÁúÀÇ °©¿Ê ±âº»ÆĞ³ÎÆ¼°¡ »ó´çÈ÷ ³»·Á°£´Ù. \n";
-			text_ += "±×·¯³ª ÃÖ¼ÒÆĞ³ÎÆ¼´Â ´Ù¸¥ ¿Ê°ú µ¿ÀÏÇÏ¹Ç·Î °©¿Ê¿¡ ÀÍ¼÷ÇØÁö¸é ÀÌÁ¡ÀÌ ¾ø¾îÁø´Ù.\n\n";
+			text_ += "í‰ìƒì‹œì— ì…ëŠ” í¸í•œ ì˜·.\n";
+			text_ += "ì²œì´ ì•„ë‹Œ ì¬ì§ˆì˜ ê°‘ì˜· ê¸°ë³¸íŒ¨ë„í‹°ê°€ ìƒë‹¹íˆ ë‚´ë ¤ê°„ë‹¤. \n";
+			text_ += "ê·¸ëŸ¬ë‚˜ ìµœì†ŒíŒ¨ë„í‹°ëŠ” ë‹¤ë¥¸ ì˜·ê³¼ ë™ì¼í•˜ë¯€ë¡œ ê°‘ì˜·ì— ìµìˆ™í•´ì§€ë©´ ì´ì ì´ ì—†ì–´ì§„ë‹¤.\n\n";
 			break;
 		case AMK_MIKO:
-			text_ += "¹«³àµéÀÌ ÀÔ´Â ¿Ê.\n";
-			text_ += "½ÅÀÇ °¡È£¸¦ ¹Ş¾Æ¼­ Á¤½ÅÀ» º¸È£ÇØÁØ´Ù. ÀÔ°íÀÖ´Â µ¿¾È È¥¶õÀúÇ×ÀÌ »ı±ä´Ù.\n\n";
+			text_ += "ë¬´ë…€ë“¤ì´ ì…ëŠ” ì˜·.\n";
+			text_ += "ì‹ ì˜ ê°€í˜¸ë¥¼ ë°›ì•„ì„œ ì •ì‹ ì„ ë³´í˜¸í•´ì¤€ë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ í˜¼ë€ì €í•­ì´ ìƒê¸´ë‹¤.\n\n";
 			break;
 		case AMK_WING:
-			text_ += "¿ë±ÃÀÇ »çÀÚµéÀÌ ÀÔ´Â´Ù´Â ³¯°³¿Ê.\n";
-			text_ += "Àü±â¸¦ Èê·Áº¸³»´Â Æ¯Â¡À» °¡Áö°í ÀÖ´Ù. ÀÔ°íÀÖ´Â µ¿¾È Àü±âÀúÇ×ÀÌ »ı±ä´Ù.\n\n";
+			text_ += "ìš©ê¶ì˜ ì‚¬ìë“¤ì´ ì…ëŠ”ë‹¤ëŠ” ë‚ ê°œì˜·.\n";
+			text_ += "ì „ê¸°ë¥¼ í˜ë ¤ë³´ë‚´ëŠ” íŠ¹ì§•ì„ ê°€ì§€ê³  ìˆë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ ì „ê¸°ì €í•­ì´ ìƒê¸´ë‹¤.\n\n";
 			break;
 		case AMK_KAPPA:
-			text_ += "Ä±ÆÄµéÀÌ À¯´ÏÆûÃ³·³ ÀÔ°í ÀÖ´Â ÆÄ¶õ»ö ¿ÊÀÌ´Ù.\n";
-			text_ += "°­ÀÇ ÃßÀ§¿¡µµ °ßµô ¼ö ÀÖ°Ô µğÀÚÀÎ µÇ¾îÀÖ´Ù. ÀÔ°íÀÖ´Â µ¿¾È ³Ã±âÀúÇ×ÀÌ »ı±ä´Ù.\n\n";
+			text_ += "ìº‡íŒŒë“¤ì´ ìœ ë‹ˆí¼ì²˜ëŸ¼ ì…ê³  ìˆëŠ” íŒŒë€ìƒ‰ ì˜·ì´ë‹¤.\n";
+			text_ += "ê°•ì˜ ì¶”ìœ„ì—ë„ ê²¬ë”œ ìˆ˜ ìˆê²Œ ë””ìì¸ ë˜ì–´ìˆë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ ëƒ‰ê¸°ì €í•­ì´ ìƒê¸´ë‹¤.\n\n";
 			break;
 		case AMK_FIRE:
-			text_ += "ºÒÁãÀÇ ±â¿îÀÌ ¼­·ÁÀÖ´Â ¿ÊÀÌ´Ù.\n";
-			text_ += "¶ß°Å¿î ¿­¿¡µµ °ßµô ¼ö ÀÖÀ» °Í °°´Ù. ÀÔ°íÀÖ´Â µ¿¾È È­¿°ÀúÇ×ÀÌ »ı±ä´Ù.\n\n";
+			text_ += "ë¶ˆì¥ì˜ ê¸°ìš´ì´ ì„œë ¤ìˆëŠ” ì˜·ì´ë‹¤.\n";
+			text_ += "ëœ¨ê±°ìš´ ì—´ì—ë„ ê²¬ë”œ ìˆ˜ ìˆì„ ê²ƒ ê°™ë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ í™”ì—¼ì €í•­ì´ ìƒê¸´ë‹¤.\n\n";
 			break;
 		case AMK_MAID:
-			text_ += "È«¸¶°üÀÇ ¸ŞÀÌµåµéÀÌ ÀÔ´Â ¿Ê.\n";
-			text_ += "È«¸¶°ü µµ¼­°üÇ¥ Æ¯¼öÇÑ ¸¶¹ıÀû Ã³¸®°¡ µÇ¾îÀÖ´Ù. ÀÔ°íÀÖ´Â µ¿¾È ¸¶¹ıÀúÇ×ÀÌ ¿Ã¶ó°£´Ù.\n\n";
+			text_ += "í™ë§ˆê´€ì˜ ë©”ì´ë“œë“¤ì´ ì…ëŠ” ì˜·.\n";
+			text_ += "í™ë§ˆê´€ ë„ì„œê´€í‘œ íŠ¹ìˆ˜í•œ ë§ˆë²•ì  ì²˜ë¦¬ê°€ ë˜ì–´ìˆë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ ë§ˆë²•ì €í•­ì´ ì˜¬ë¼ê°„ë‹¤.\n\n";
 			break;
 		case AMK_POISON:
-			text_ += "Àº¹æ¿ï ²É¹çÀÇ ÀÎÇüÀÌ ÀÔ°í ÀÖ´ø ¿ÊÀÌÁö¸¸ ²Ï »çÀÌÁî°¡ Ä¿¼­ ÀÔÀ» ¼ö ÀÖÀ» °Í °°´Ù.\n";
-			text_ += "Àº¹æ¿ï ²ÉÀÇ ±â¿îÀÌ ´ç½ÅÀ» º¸È£ÇØÁØ´Ù. ÀÔ°íÀÖ´Â µ¿¾È µ¶ÀúÇ×ÀÌ »ı±ä´Ù.\n\n";
+			text_ += "ì€ë°©ìš¸ ê½ƒë°­ì˜ ì¸í˜•ì´ ì…ê³  ìˆë˜ ì˜·ì´ì§€ë§Œ ê½¤ ì‚¬ì´ì¦ˆê°€ ì»¤ì„œ ì…ì„ ìˆ˜ ìˆì„ ê²ƒ ê°™ë‹¤.\n";
+			text_ += "ì€ë°©ìš¸ ê½ƒì˜ ê¸°ìš´ì´ ë‹¹ì‹ ì„ ë³´í˜¸í•´ì¤€ë‹¤. ì…ê³ ìˆëŠ” ë™ì•ˆ ë…ì €í•­ì´ ìƒê¸´ë‹¤.\n\n";
 			break;
 		case AMK_AUTUMN:
-			text_ += "´ÜÇ³À¸·Î ¸¸µé¾îÁø ¿Ê. ÀÇ¿Ü·Î Á¦´ë·ÎµÈ ¿ÊÀÌ´Ù.\n";
-			text_ += "½ÃÁîÇÏ¸¦ ¹Ï°íÀÖÀ»¶§ ÁÖº¯ÀÇ Ç³°æ¿¡ µ¿È­µÇ¾î¼­ Àº¹ĞÀÌ ±Ş°İÇÏ°Ô ¿Ã¶ó°£´Ù.\n\n";
+			text_ += "ë‹¨í’ìœ¼ë¡œ ë§Œë“¤ì–´ì§„ ì˜·. ì˜ì™¸ë¡œ ì œëŒ€ë¡œëœ ì˜·ì´ë‹¤.\n";
+			text_ += "ì‹œì¦ˆí•˜ë¥¼ ë¯¿ê³ ìˆì„ë•Œ ì£¼ë³€ì˜ í’ê²½ì— ë™í™”ë˜ì–´ì„œ ì€ë°€ì´ ê¸‰ê²©í•˜ê²Œ ì˜¬ë¼ê°„ë‹¤.\n\n";
 			break;
 		}
 		switch (it->type)
 		{
 		case ITM_ARMOR_BODY_ARMOUR_0:
-			text_ += "¿òÁ÷ÀÌ±â ÆíÇÏ°Ô ÃµÀ¸·Î µÇ¾îÀÖ´Â ¿Ê.\n";
-			text_ += "ÀæÀº ±×·¹ÀÌÁî¿¡µµ ²ô´ö¾ø´Â Áú±ä ¿Ê°¨À¸·Î µÇ¾îÀÖ´Ù!\n";
+			text_ += "ì›€ì§ì´ê¸° í¸í•˜ê²Œ ì²œìœ¼ë¡œ ë˜ì–´ìˆëŠ” ì˜·.\n";
+			text_ += "ì¦ì€ ê·¸ë ˆì´ì¦ˆì—ë„ ë„ë•ì—†ëŠ” ì§ˆê¸´ ì˜·ê°ìœ¼ë¡œ ë˜ì–´ìˆë‹¤!\n";
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_1:
-			text_ += "Áú±ä ÀçÁú·Î µÇ¾îÀÖ´Â ¿Ê.\n";
-			text_ += "Ãµº¸´Ü ¿òÁ÷ÀÌ±â ºÒÆíÇÏÁö¸¸ ²Ï °¡º±´Ù.\n";
+			text_ += "ì§ˆê¸´ ì¬ì§ˆë¡œ ë˜ì–´ìˆëŠ” ì˜·.\n";
+			text_ += "ì²œë³´ë‹¨ ì›€ì§ì´ê¸° ë¶ˆí¸í•˜ì§€ë§Œ ê½¤ ê°€ë³ë‹¤.\n";
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_2:
-			text_ += "»ç½½·Î ¾ôÇôÀÖ´Â °©¿Ê.\n";
-			text_ += "²Ï ´Ü´ÜÇÏÁö¸¸ ÆÇ±İÀ¸·ÎµÈ °©¿Êº¸´Ù´Â ¸øÇÏ´Ù.\n";
+			text_ += "ì‚¬ìŠ¬ë¡œ ì–½í˜€ìˆëŠ” ê°‘ì˜·.\n";
+			text_ += "ê½¤ ë‹¨ë‹¨í•˜ì§€ë§Œ íŒê¸ˆìœ¼ë¡œëœ ê°‘ì˜·ë³´ë‹¤ëŠ” ëª»í•˜ë‹¤.\n";
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_3:
-			text_ += "°­Ã¶·Î µÈ ÆÇ±İÀ» µ¡´í °©¿Ê.\n";
-			text_ += "¸¶¹ı°ú ¿òÁ÷ÀÓÀ» ¹æÇØÇÏÁö¸¸ ´ç½ÅÀÇ ¾ÈÀüÀ» Ã¥ÀÓÁø´Ù.\n";
+			text_ += "ê°•ì² ë¡œ ëœ íŒê¸ˆì„ ë§ëŒ„ ê°‘ì˜·.\n";
+			text_ += "ë§ˆë²•ê³¼ ì›€ì§ì„ì„ ë°©í•´í•˜ì§€ë§Œ ë‹¹ì‹ ì˜ ì•ˆì „ì„ ì±…ì„ì§„ë‹¤.\n";
 			break;
 		}
 		char temp[100];
-		sprintf_s(temp,100, "\n\n±âº» ¹æ¾î·Â : %d   ±âº» ÆĞ³ÎÆ¼ : %d   ÃÖ¼Ò ÆĞ³ÎÆ¼ : %d\n", it->value1, it->value2, it->value3);
+		sprintf_s(temp,100, "\n\nê¸°ë³¸ ë°©ì–´ë ¥ : %d   ê¸°ë³¸ íŒ¨ë„í‹° : %d   ìµœì†Œ íŒ¨ë„í‹° : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf_s(temp,100, "ÆĞ³ÎÆ¼´Â °©¿Ê ½ºÅ³À» ¿Ã¸±¼ö·Ï ÁÙ¾îµì´Ï´Ù. ÃÖ¼Ò ÆĞ³ÎÆ¼ÀÌÇÏ·Î´Â ÁÙÀÏ¼ö ¾ø½À´Ï´Ù.\n");
+		sprintf_s(temp,100, "íŒ¨ë„í‹°ëŠ” ê°‘ì˜· ìŠ¤í‚¬ì„ ì˜¬ë¦´ìˆ˜ë¡ ì¤„ì–´ë“­ë‹ˆë‹¤. ìµœì†Œ íŒ¨ë„í‹°ì´í•˜ë¡œëŠ” ì¤„ì¼ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "ÇöÀç Âø¿ë½Ã ¹æ¾î·Â: %d     ÆĞ³ÎÆ¼ : %d (ÇöÀç °©¿Ê ½ºÅ³ ·¹º§ : %d)\n\n", 
+		sprintf_s(temp,100, "í˜„ì¬ ì°©ìš©ì‹œ ë°©ì–´ë ¥: %d     íŒ¨ë„í‹° : %d (í˜„ì¬ ê°‘ì˜· ìŠ¤í‚¬ ë ˆë²¨ : %d)\n\n", 
 			(it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3), you.GetSkillLevel(SKT_ARMOUR, true));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ¿Í Àº¹Ğ, ¸¶¹ı¼º°øÀ²ÀÌ °¨¼ÒÇÕ´Ï´Ù.\n");
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼ì™€ ì€ë°€, ë§ˆë²•ì„±ê³µìœ¨ì´ ê°ì†Œí•©ë‹ˆë‹¤.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ÆĞ³ÎÆ¼¸¸Å­ Ãß°¡ÀûÀ¸·Î ¸íÁßÀ²ÀÌ °¨¼ÒÇÕ´Ï´Ù.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ íŒ¨ë„í‹°ë§Œí¼ ì¶”ê°€ì ìœ¼ë¡œ ëª…ì¤‘ìœ¨ì´ ê°ì†Œí•©ë‹ˆë‹¤.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ÆĞ³ÎÆ¼¸¸Å­ ÀÌµ¿¼Óµµ°¡ °¨¼ÒÇÕ´Ï´Ù.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ íŒ¨ë„í‹°ë§Œí¼ ì´ë™ì†ë„ê°€ ê°ì†Œí•©ë‹ˆë‹¤.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ¸ğµç Çàµ¿ÀÌ 2¹è µô·¹ÀÌµË´Ï´Ù.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ ëª¨ë“  í–‰ë™ì´ 2ë°° ë”œë ˆì´ë©ë‹ˆë‹¤.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf_s(temp,100, "\nÀÌ ¾ÆÀÌÅÛÀº +%d±îÁö ÀÎÃ¦Æ®°¡ °¡´ÉÇÏ´Ù.", it->value1);
+		sprintf_s(temp,100, "\nì´ ì•„ì´í…œì€ +%dê¹Œì§€ ì¸ì±ˆíŠ¸ê°€ ê°€ëŠ¥í•˜ë‹¤.", it->value1);
 		text_ += temp;
 
 
@@ -795,12 +795,12 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			if (you.equipment[ET_ARMOR] != it)
 			{
-				use_text_ += "(w)ÀåÂø, ";
+				use_text_ += "(w)ì¥ì°©, ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)ÇØÁ¦, ";
+				use_text_ += "(u)í•´ì œ, ";
 				if (key) key->insert('u');
 			}
 		}
@@ -808,38 +808,38 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	case ITM_ARMOR_SHIELD:
 	{
-		text_ += "»ó´ëÀÇ °ø°İÀ» ¸·±â À§ÇÑ ¹æÆĞ. ¾ç¼Õ¹«±â¸¦ µé°í ÀÖÀ¸¸é ÀåÂøÀÌ ºÒ°¡´ÉÇÏ´Ù.\n";
-		text_ += "»ó´ëÀÇ Åº¸·À» ¸·´Â ¹İÄ¢ÀûÀÎ È°¿ëµµ °¡´ÉÇÏ´Ù.\n";
+		text_ += "ìƒëŒ€ì˜ ê³µê²©ì„ ë§‰ê¸° ìœ„í•œ ë°©íŒ¨. ì–‘ì†ë¬´ê¸°ë¥¼ ë“¤ê³  ìˆìœ¼ë©´ ì¥ì°©ì´ ë¶ˆê°€ëŠ¥í•˜ë‹¤.\n";
+		text_ += "ìƒëŒ€ì˜ íƒ„ë§‰ì„ ë§‰ëŠ” ë°˜ì¹™ì ì¸ í™œìš©ë„ ê°€ëŠ¥í•˜ë‹¤.\n";
 		char temp[100];
-		sprintf_s(temp,100, "\n\n±âº» ¹æ¾î·Â : %d   ±âº» ÆĞ³ÎÆ¼ : %d   ÃÖ¼Ò ÆĞ³ÎÆ¼ : %d\n", it->value1, it->value2, it->value3);
+		sprintf_s(temp,100, "\n\nê¸°ë³¸ ë°©ì–´ë ¥ : %d   ê¸°ë³¸ íŒ¨ë„í‹° : %d   ìµœì†Œ íŒ¨ë„í‹° : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf_s(temp,100, "ÆĞ³ÎÆ¼´Â ¹æÆĞ ½ºÅ³À» ¿Ã¸±¼ö·Ï ÁÙ¾îµì´Ï´Ù. ÃÖ¼Ò ÆĞ³ÎÆ¼ÀÌÇÏ·Î´Â ÁÙÀÏ¼ö ¾ø½À´Ï´Ù.\n"); 
+		sprintf_s(temp,100, "íŒ¨ë„í‹°ëŠ” ë°©íŒ¨ ìŠ¤í‚¬ì„ ì˜¬ë¦´ìˆ˜ë¡ ì¤„ì–´ë“­ë‹ˆë‹¤. ìµœì†Œ íŒ¨ë„í‹°ì´í•˜ë¡œëŠ” ì¤„ì¼ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"); 
 		text_ += temp;
-		sprintf_s(temp,100, "ÇöÀç Âø¿ë½Ã ¹æ¾î·Â: %d    ÆĞ³ÎÆ¼ : %d (ÇöÀç ¹æÆĞ ½ºÅ³ ·¹º§ : %d)\n\n",
+		sprintf_s(temp,100, "í˜„ì¬ ì°©ìš©ì‹œ ë°©ì–´ë ¥: %d    íŒ¨ë„í‹° : %d (í˜„ì¬ ë°©íŒ¨ ìŠ¤í‚¬ ë ˆë²¨ : %d)\n\n",
 			(it->isiden() ? it->value4 : 0) + (int)(it->value1*(1.0f + (you.s_dex / 5.0f + you.GetSkillLevel(SKT_SHIELD, true)) / 15.0f)*(you.GetProperty(TPT_SLAY)?1.2f:1.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_SHIELD, true) / 3), you.GetSkillLevel(SKT_SHIELD, true));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ¿Í Àº¹Ğ, ¸¶¹ı¼º°øÀ², Àº¹ĞÀÌ °¨¼ÒÇÕ´Ï´Ù.\n");
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼ì™€ ì€ë°€, ë§ˆë²•ì„±ê³µìœ¨, ì€ë°€ì´ ê°ì†Œí•©ë‹ˆë‹¤.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ÆĞ³ÎÆ¼¸¸Å­ Ãß°¡ÀûÀ¸·Î ¸íÁßÀ²ÀÌ °¨¼ÒÇÕ´Ï´Ù.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ íŒ¨ë„í‹°ë§Œí¼ ì¶”ê°€ì ìœ¼ë¡œ ëª…ì¤‘ìœ¨ì´ ê°ì†Œí•©ë‹ˆë‹¤.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ÆĞ³ÎÆ¼¸¸Å­ ÀÌµ¿¼Óµµ°¡ °¨¼ÒÇÕ´Ï´Ù.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ íŒ¨ë„í‹°ë§Œí¼ ì´ë™ì†ë„ê°€ ê°ì†Œí•©ë‹ˆë‹¤.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf_s(temp,100, "ÇÕ°è ÆĞ³ÎÆ¼°¡ %dº¸´Ù ³ôÀ¸¸é ¸ğµç Çàµ¿ÀÌ 2¹è µô·¹ÀÌµË´Ï´Ù.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,100, "í•©ê³„ íŒ¨ë„í‹°ê°€ %dë³´ë‹¤ ë†’ìœ¼ë©´ ëª¨ë“  í–‰ë™ì´ 2ë°° ë”œë ˆì´ë©ë‹ˆë‹¤.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf_s(temp,100, "ÀÌ ¾ÆÀÌÅÛÀº +%d±îÁö ÀÎÃ¦Æ®°¡ °¡´ÉÇÏ´Ù.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
+		sprintf_s(temp,100, "ì´ ì•„ì´í…œì€ +%dê¹Œì§€ ì¸ì±ˆíŠ¸ê°€ ê°€ëŠ¥í•˜ë‹¤.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
 		text_ += temp;
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_SHIELD] != it)
 			{
-				use_text_ += "(w)ÀåÂø, ";
+				use_text_ += "(w)ì¥ì°©, ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)ÇØÁ¦, ";
+				use_text_ += "(u)í•´ì œ, ";
 				if (key) key->insert('u');
 			}
 		}
@@ -853,74 +853,74 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			text_ += "¸Ó¸®¿¡ ´Ş ¼ö ÀÖ´Â Àå½Å±¸. ÆĞ¼ÇÀÇ ±âº»\n";
+			text_ += "ë¨¸ë¦¬ì— ë‹¬ ìˆ˜ ìˆëŠ” ì¥ì‹ êµ¬. íŒ¨ì…˜ì˜ ê¸°ë³¸\n";
 			if (can_use_)
 			{
 				if (you.equipment[ET_HELMET] != it)
 				{
-					use_text_ += "(w)ÀåÂø, ";
+					use_text_ += "(w)ì¥ì°©, ";
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)ÇØÁ¦, ";
+					use_text_ += "(u)í•´ì œ, ";
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_CLOAK:
-			text_ += "¸ö¿¡ µÎ¸£´Â Æû³ª´Â ¸ÁÅä.\n";
+			text_ += "ëª¸ì— ë‘ë¥´ëŠ” í¼ë‚˜ëŠ” ë§í† .\n";
 			if (can_use_)
 			{
 				if (you.equipment[ET_CLOAK] != it)
 				{
-					use_text_ += "(w)ÀåÂø, ";
+					use_text_ += "(w)ì¥ì°©, ";
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)ÇØÁ¦, ";
+					use_text_ += "(u)í•´ì œ, ";
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_GLOVE:
-			text_ += "¼Õ¿¡ ³¥ ¼ö ÀÖ´Â Àå°©ÀÌ´Ù. Àå°©¿¡ ÀúÁÖ°¡ °É·ÁÀÖÀ¸¸é ¹İÁö¸¦ »©°í ³¥ ¼ö ¾ø´Ù.\n";
+			text_ += "ì†ì— ë‚„ ìˆ˜ ìˆëŠ” ì¥ê°‘ì´ë‹¤. ì¥ê°‘ì— ì €ì£¼ê°€ ê±¸ë ¤ìˆìœ¼ë©´ ë°˜ì§€ë¥¼ ë¹¼ê³  ë‚„ ìˆ˜ ì—†ë‹¤.\n";
 			if (can_use_)
 			{
 				if (you.equipment[ET_GLOVE] != it)
 				{
-					use_text_ += "(w)ÀåÂø, ";
+					use_text_ += "(w)ì¥ì°©, ";
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)ÇØÁ¦, ";
+					use_text_ += "(u)í•´ì œ, ";
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_BOOT:
-			text_ += "¹ßÀ» º¸È£ÇÏ´Â ½Å¹ß. ´øÀüÀÇ ¹Ù´ÚÀ» ¸Ç¹ß·Î ´Ù´Ï°í ½ÍÁö¾ÊÀ¸¸é ²À Âø¿ëÇÏÀÚ.\n";
+			text_ += "ë°œì„ ë³´í˜¸í•˜ëŠ” ì‹ ë°œ. ë˜ì „ì˜ ë°”ë‹¥ì„ ë§¨ë°œë¡œ ë‹¤ë‹ˆê³  ì‹¶ì§€ì•Šìœ¼ë©´ ê¼­ ì°©ìš©í•˜ì.\n";
 			if (can_use_)
 			{
 				if (you.equipment[ET_BOOTS] != it)
 				{
-					use_text_ += "(w)ÀåÂø, ";
+					use_text_ += "(w)ì¥ì°©, ";
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)ÇØÁ¦, ";
+					use_text_ += "(u)í•´ì œ, ";
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		}
 		char temp[100];
-		sprintf_s(temp,100, "¹æ¾î·Â : %d", it->value1);
+		sprintf_s(temp,100, "ë°©ì–´ë ¥ : %d", it->value1);
 		text_ += temp;
-		sprintf_s(temp,100, "\n\nÀÌ ¾ÆÀÌÅÛÀº +2±îÁö ÀÎÃ¦Æ®°¡ °¡´ÉÇÏ´Ù.");
+		sprintf_s(temp,100, "\n\nì´ ì•„ì´í…œì€ +2ê¹Œì§€ ì¸ì±ˆíŠ¸ê°€ ê°€ëŠ¥í•˜ë‹¤.");
 		text_ += temp;
 	}
 	break;
@@ -931,86 +931,86 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case PT_WATER:
-				text_ += "´Ü¼øÇÑ ¸À³­ ¹°¾àÀÌ´Ù.\n";
+				text_ += "ë‹¨ìˆœí•œ ë§›ë‚œ ë¬¼ì•½ì´ë‹¤.\n";
 				break;
 			case PT_HEAL:
-				text_ += "Ä¡·á ¹°¾àÀÌ´Ù. ¸¶½Ã¸é È¥¶õ, µ¶, º´À¸·ÎºÎÅÍ È¸º¹µÇ°í Ã¼·Âµµ ¼Ò·® È¸º¹µÈ´Ù.\n";
-				text_ += "È¿°úµµ ¸¶½Å Áï½Ã ¹ßÈÖµÇ´Â ½ÅºñÀÇ ¹°¾à\n";
+				text_ += "ì¹˜ë£Œ ë¬¼ì•½ì´ë‹¤. ë§ˆì‹œë©´ í˜¼ë€, ë…, ë³‘ìœ¼ë¡œë¶€í„° íšŒë³µë˜ê³  ì²´ë ¥ë„ ì†ŒëŸ‰ íšŒë³µëœë‹¤.\n";
+				text_ += "íš¨ê³¼ë„ ë§ˆì‹  ì¦‰ì‹œ ë°œíœ˜ë˜ëŠ” ì‹ ë¹„ì˜ ë¬¼ì•½\n";
 				break;
 			case PT_POISON:
-				text_ += "µ¶ÀÌ µé¾îÀÖ´Â ¹°¾àÀÌ´Ù. ¿ª°Ü¿î ¸ÀÀÌ ³ª°í ¸¶½Ã¸é ²ûÂïÇÑ µ¶¿¡ °É¸°´Ù.\n";
+				text_ += "ë…ì´ ë“¤ì–´ìˆëŠ” ë¬¼ì•½ì´ë‹¤. ì—­ê²¨ìš´ ë§›ì´ ë‚˜ê³  ë§ˆì‹œë©´ ë”ì°í•œ ë…ì— ê±¸ë¦°ë‹¤.\n";
 				break;
 			case PT_HEAL_WOUND:
-				text_ += "»óÃ³¸¦ Ä¡·áÇÏ´Â ¹°¾àÀÌ´Ù. ¸ÔÀ¸¸é ¼ø°£ÀûÀ¸·Î ¸¹Àº Ã¼·ÂÀ» Ä¡·áÇÑ´Ù.\n";
-				text_ += "´Ù¸¸ »óÅÂÀÌ»óÀ» Ä¡·áÇÏÁö´Â ¸øÇÑ´Ù.\n";
+				text_ += "ìƒì²˜ë¥¼ ì¹˜ë£Œí•˜ëŠ” ë¬¼ì•½ì´ë‹¤. ë¨¹ìœ¼ë©´ ìˆœê°„ì ìœ¼ë¡œ ë§ì€ ì²´ë ¥ì„ ì¹˜ë£Œí•œë‹¤.\n";
+				text_ += "ë‹¤ë§Œ ìƒíƒœì´ìƒì„ ì¹˜ë£Œí•˜ì§€ëŠ” ëª»í•œë‹¤.\n";
 				break;
 			case PT_MIGHT:
-				text_ += "¼ø°£ÀûÀ¸·Î °­ÇÑ ±Ù·ÂÀ» ¹ßÈÖÇÏ°Ô µÇ´Â ¹°¾à. °ø°İ·Âµµ °­ÇØÁø´Ù.\n";
+				text_ += "ìˆœê°„ì ìœ¼ë¡œ ê°•í•œ ê·¼ë ¥ì„ ë°œíœ˜í•˜ê²Œ ë˜ëŠ” ë¬¼ì•½. ê³µê²©ë ¥ë„ ê°•í•´ì§„ë‹¤.\n";
 				break;
 			case PT_HASTE:
-				text_ += "ºü¸¥ ¼Óµµ·Î ¿òÁ÷ÀÌ°Ô µµ¿ÍÁÖ´Â ¹°¾à. ÀÌµ¿, Çàµ¿ ¸ğµÎ 2¹è¼ÓÀÌ µÈ´Ù.\n";
+				text_ += "ë¹ ë¥¸ ì†ë„ë¡œ ì›€ì§ì´ê²Œ ë„ì™€ì£¼ëŠ” ë¬¼ì•½. ì´ë™, í–‰ë™ ëª¨ë‘ 2ë°°ì†ì´ ëœë‹¤.\n";
 				break;
 			case PT_CONFUSE:
-				text_ += "¸¶½Ã¸é Á¤½Å¿¡ È¥¶õÀ» °¡Á®´ÙÁÖ´Â ¹°¾à.\n";
-				text_ += "È¥¶õÀÌ °¡¶ó¾ÉÀ»¶§±îÁö Á¦ÀÚ¸®¿¡ ¼­¼­ °¡¸¸È÷ ±â´Ù¸®´Â °Íµµ ¹æ¹ıÀÌ´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ì •ì‹ ì— í˜¼ë€ì„ ê°€ì ¸ë‹¤ì£¼ëŠ” ë¬¼ì•½.\n";
+				text_ += "í˜¼ë€ì´ ê°€ë¼ì•‰ì„ë•Œê¹Œì§€ ì œìë¦¬ì— ì„œì„œ ê°€ë§Œíˆ ê¸°ë‹¤ë¦¬ëŠ” ê²ƒë„ ë°©ë²•ì´ë‹¤.\n";
 				break;
 			case PT_SLOW:
-				text_ += "¿òÁ÷ÀÓÀÌ µĞÇØÁö´Â ¹°¾à. ¸ğµç ÀÌµ¿, Çàµ¿ÀÌ 1/2¹è¼ÓÀÌ µÈ´Ù.\n";
+				text_ += "ì›€ì§ì„ì´ ë‘”í•´ì§€ëŠ” ë¬¼ì•½. ëª¨ë“  ì´ë™, í–‰ë™ì´ 1/2ë°°ì†ì´ ëœë‹¤.\n";
 				break;
 			case PT_PARALYSIS:
-				text_ += "¸¶½Ã¸é ¸îÅÏ°£ ¸öÀÌ ¸¶ºñµÇ´Â ¹°¾à. À§ÇèÇÏ´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ëª‡í„´ê°„ ëª¸ì´ ë§ˆë¹„ë˜ëŠ” ë¬¼ì•½. ìœ„í—˜í•˜ë‹¤.\n";
 				break;
 			case PT_CLEVER:
-				text_ += "¸¶½Ã¸é ÀÏ½ÃÀûÀ¸·Î Áö´ÉÀÌ ³ô¾ÆÁö´Â ¹°¾à.\n";
-				text_ += "Áö´É°ú ÇÔ²² ¸¶¹ı¼º°ø·ü, ¸¶¹ıÆÄ¿öµµ °°ÀÌ ¿Ã¶ó°£´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ì¼ì‹œì ìœ¼ë¡œ ì§€ëŠ¥ì´ ë†’ì•„ì§€ëŠ” ë¬¼ì•½.\n";
+				text_ += "ì§€ëŠ¥ê³¼ í•¨ê»˜ ë§ˆë²•ì„±ê³µë¥ , ë§ˆë²•íŒŒì›Œë„ ê°™ì´ ì˜¬ë¼ê°„ë‹¤.\n";
 				break;
 			case PT_AGILITY:
-				text_ += "¸¶½Ã¸é ÀÏ½ÃÀûÀ¸·Î ¹ÎÃ¸ÀÌ ³ô¾ÆÁö´Â ¹°¾à.\n";
-				text_ += "¹ÎÃ¸°ú ÇÔ²² È¸ÇÇµµ ¿Ã¶ó°£´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ì¼ì‹œì ìœ¼ë¡œ ë¯¼ì²©ì´ ë†’ì•„ì§€ëŠ” ë¬¼ì•½.\n";
+				text_ += "ë¯¼ì²©ê³¼ í•¨ê»˜ íšŒí”¼ë„ ì˜¬ë¼ê°„ë‹¤.\n";
 				break;
 			case PT_MAGIC:
-				text_ += "¸¶½Ã¸é ¿µ·ÂÀ» ¼ø½Ä°£¿¡ Ã¤¿öÁÖ´Â ¸¶·ÂÀÇ ¹°¾à.\n";
+				text_ += "ë§ˆì‹œë©´ ì˜ë ¥ì„ ìˆœì‹ê°„ì— ì±„ì›Œì£¼ëŠ” ë§ˆë ¥ì˜ ë¬¼ì•½.\n";
 				break;
 			case PT_LEVETATION:
-				text_ += "¸¶½Ã¸é ÀÏ½ÃÀûÀ¸·Î ºñÇà»óÅÂ°¡ µÇ´Â ¹°¾à. ºñÇà»óÅÂ¿¡¼­´Â ±íÀº¹°µûÀ§¸¦ °Ç³Î ¼ö ÀÖ°ÔµÈ´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ì¼ì‹œì ìœ¼ë¡œ ë¹„í–‰ìƒíƒœê°€ ë˜ëŠ” ë¬¼ì•½. ë¹„í–‰ìƒíƒœì—ì„œëŠ” ê¹Šì€ë¬¼ë”°ìœ„ë¥¼ ê±´ë„ ìˆ˜ ìˆê²Œëœë‹¤.\n";
 				break;
 			case PT_POWER:
-				text_ += "¸¶½Ã¸é ÆÄ¿ö°¡ »ó½ÂÇÏ´Â ÆÄ¿öÀÇ ¹°¾à.\n";
-				text_ += "¸¶½Å Áï½Ã P°¡ 1.00Áõ°¡ÇÏ°Ô µÈ´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ íŒŒì›Œê°€ ìƒìŠ¹í•˜ëŠ” íŒŒì›Œì˜ ë¬¼ì•½.\n";
+				text_ += "ë§ˆì‹  ì¦‰ì‹œ Pê°€ 1.00ì¦ê°€í•˜ê²Œ ëœë‹¤.\n";
 				break;
 			case PT_DOWN_STAT:
-				text_ += "¸¶½Ã¸é ÀÏ½ÃÀûÀ¸·Î ´É·ÂÄ¡°¡ °¨¼ÒÇÏ°Ô µÇ´Â ¿ª°Ü¿î ¹°¾à.\n";
-				text_ += "Èû Áö´É ¹ÎÃ¸Áß ¹«ÀÛÀ§ ´É·ÂÄ¡°¡ ÀÏ½ÃÀûÀ¸·Î °¨¼ÒµÈ´Ù. ½Ã°£ÀÌ Áö³ª¸é µÇµ¹¾Æ ¿Â´Ù.\n";
+				text_ += "ë§ˆì‹œë©´ ì¼ì‹œì ìœ¼ë¡œ ëŠ¥ë ¥ì¹˜ê°€ ê°ì†Œí•˜ê²Œ ë˜ëŠ” ì—­ê²¨ìš´ ë¬¼ì•½.\n";
+				text_ += "í˜ ì§€ëŠ¥ ë¯¼ì²©ì¤‘ ë¬´ì‘ìœ„ ëŠ¥ë ¥ì¹˜ê°€ ì¼ì‹œì ìœ¼ë¡œ ê°ì†Œëœë‹¤. ì‹œê°„ì´ ì§€ë‚˜ë©´ ë˜ëŒì•„ ì˜¨ë‹¤.\n";
 				break;
 			case PT_RECOVER_STAT:
-				text_ += "¸¶½Ã¸é ÀÏ½ÃÀûÀ¸·Î ÀÒ¾î¹ö¸° ´É·ÂÄ¡¸¦ ÀÏÁ¤·® È¸º¹½ÃÄÑÁÖ´Â ¹°¾à.\n";
+				text_ += "ë§ˆì‹œë©´ ì¼ì‹œì ìœ¼ë¡œ ìƒì–´ë²„ë¦° ëŠ¥ë ¥ì¹˜ë¥¼ ì¼ì •ëŸ‰ íšŒë³µì‹œì¼œì£¼ëŠ” ë¬¼ì•½.\n";
 				break;
 			case PT_ALCOHOL:
-				text_ += "ÀÌ°ÍÀº ¼úÀÌ´Ù. ¸¶½Ã¸é ÃëÇÑ´Ù.\n";
-				text_ += "¼ú¿¡ ÃëÇÑ »óÅÂ¸é ¶È¹Ù·Î ¿òÁ÷ÀÌ±â Èûµé¾î Áø´Ù.\n";
+				text_ += "ì´ê²ƒì€ ìˆ ì´ë‹¤. ë§ˆì‹œë©´ ì·¨í•œë‹¤.\n";
+				text_ += "ìˆ ì— ì·¨í•œ ìƒíƒœë©´ ë˜‘ë°”ë¡œ ì›€ì§ì´ê¸° í˜ë“¤ì–´ ì§„ë‹¤.\n";
 				break;
 
 			default:
-				text_ += "ÀÌ°Ç ¹ö±× ¹°¾àÀÌ´Ù. ²ûÂïÇÏ±º!\n";
+				text_ += "ì´ê±´ ë²„ê·¸ ë¬¼ì•½ì´ë‹¤. ë”ì°í•˜êµ°!\n";
 				break;
 			}
 		}
 		else
 		{
-			text_ += "¹º°¡ ÀÇ½É½º·¯¿î ¾×Ã¼°¡ µé¾îÀÖ´Â º´. ¸¶¼Åº¸Áö ¾Ê°í¼± ¾Ë ¼ö ¾øÀ» °Í °°´Ù.\n";
+			text_ += "ë­”ê°€ ì˜ì‹¬ìŠ¤ëŸ¬ìš´ ì•¡ì²´ê°€ ë“¤ì–´ìˆëŠ” ë³‘. ë§ˆì…”ë³´ì§€ ì•Šê³ ì„  ì•Œ ìˆ˜ ì—†ì„ ê²ƒ ê°™ë‹¤.\n";
 		}
 		if (can_use_)
 		{
-			use_text_ += "(q)¸¶½Ã±â, ";
+			use_text_ += "(q)ë§ˆì‹œê¸°, ";
 			if (key) key->insert('q');
 		}
 	}
 	break;
 	case ITM_FOOD:
-		text_ += "¸ÔÀ» ¼ö ÀÖ´Â À½½ÄÀÌ´Ù. ´øÀü¿¡ ÀÌ·± À½½ÄµéÀÌ ¶³¾îÁ®ÀÖ´Â °Íµµ ¼ö»óÇÏÁö¸¸ ¸ÔÀ» ¼ø ÀÖ¾î º¸ÀÎ´Ù.\n";
+		text_ += "ë¨¹ì„ ìˆ˜ ìˆëŠ” ìŒì‹ì´ë‹¤. ë˜ì „ì— ì´ëŸ° ìŒì‹ë“¤ì´ ë–¨ì–´ì ¸ìˆëŠ” ê²ƒë„ ìˆ˜ìƒí•˜ì§€ë§Œ ë¨¹ì„ ìˆœ ìˆì–´ ë³´ì¸ë‹¤.\n";
 		if (can_use_)
 		{
-			use_text_ += "(e)¸Ô±â, ";
+			use_text_ += "(e)ë¨¹ê¸°, ";
 			if (key) key->insert('e');
 		}
 		break;
@@ -1021,89 +1021,89 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case SCT_TELEPORT:
-				text_ += "ÀĞÀ¸¸é ÀÌ»óÇÑ °ø°£ÀÌµ¿À» ÀÏÀ¸Å°´Â µÎ·ç¸¶¸®. ´Ü, ÀĞÀÚ¸¶ÀÚ °ø°£ÀÌµ¿ÀÌ µÇÁø ¾Ê´Â´Ù.\n";
-				text_ += "¸îÅÏÀÇ ÁØºñ±â°£ÀÌ ÇÊ¿äÇÏ´Ù. °ø°£ÀÌµ¿ÀÌ °É¸° »óÅÂ¿¡¼­ ÀĞÀ¸¸é ±× ÈûÀ» ÁßÈ­½ÃÄÑ ¾ïÁ¦ÇÒ ¼ö µµ ÀÖ´Ù.\n";
+				text_ += "ì½ìœ¼ë©´ ì´ìƒí•œ ê³µê°„ì´ë™ì„ ì¼ìœ¼í‚¤ëŠ” ë‘ë£¨ë§ˆë¦¬. ë‹¨, ì½ìë§ˆì ê³µê°„ì´ë™ì´ ë˜ì§„ ì•ŠëŠ”ë‹¤.\n";
+				text_ += "ëª‡í„´ì˜ ì¤€ë¹„ê¸°ê°„ì´ í•„ìš”í•˜ë‹¤. ê³µê°„ì´ë™ì´ ê±¸ë¦° ìƒíƒœì—ì„œ ì½ìœ¼ë©´ ê·¸ í˜ì„ ì¤‘í™”ì‹œì¼œ ì–µì œí•  ìˆ˜ ë„ ìˆë‹¤.\n";
 				break;
 			case SCT_IDENTIFY:
-				text_ += "½Äº°ÀÇ µÎ·ç¸¶¸®. ÀĞ°í³ª¼­ ¼Õ¿¡ ´í ¹°°ÇÀ» ½Äº°ÇÒ ¼ö ÀÖ°Ô µÈ´Ù. ¸Å¿ì Áß¿äÇÑ µÎ·ç¸¶¸®\n";
-				text_ += "¸ğ ¹İ¿ä °¡°ÔÁÖÀÎÀÇ ´É·Â°ú ¸Å¿ì Èí»çÇÏ´Ù.\n";
+				text_ += "ì‹ë³„ì˜ ë‘ë£¨ë§ˆë¦¬. ì½ê³ ë‚˜ì„œ ì†ì— ëŒ„ ë¬¼ê±´ì„ ì‹ë³„í•  ìˆ˜ ìˆê²Œ ëœë‹¤. ë§¤ìš° ì¤‘ìš”í•œ ë‘ë£¨ë§ˆë¦¬\n";
+				text_ += "ëª¨ ë°˜ìš” ê°€ê²Œì£¼ì¸ì˜ ëŠ¥ë ¥ê³¼ ë§¤ìš° í¡ì‚¬í•˜ë‹¤.\n";
 				break;
 			case SCT_NONE:
-				text_ += "Àå³­²Ù·¯±â ¿äÁ¤µéÀÌ ÀÇ¹Ì¾øÀÌ ½á³õÀº ³«¼­±º!\n";
+				text_ += "ì¥ë‚œê¾¸ëŸ¬ê¸° ìš”ì •ë“¤ì´ ì˜ë¯¸ì—†ì´ ì¨ë†“ì€ ë‚™ì„œêµ°!\n";
 				break;
 			case SCT_CURSE_WEAPON:
-				text_ += "µé°íÀÖ´Â ¹«±â¿¡ ÀúÁÖ¸¦ °Ç´Ù. ÀúÁÖ¿¡ °É¸° Àåºñ´Â ÀúÁÖ°¡ Ç®¸®±âÀü±îÁö ÇØÁ¦ÇÒ ¼ö ¾ø°Ô µÈ´Ù.\n";
+				text_ += "ë“¤ê³ ìˆëŠ” ë¬´ê¸°ì— ì €ì£¼ë¥¼ ê±´ë‹¤. ì €ì£¼ì— ê±¸ë¦° ì¥ë¹„ëŠ” ì €ì£¼ê°€ í’€ë¦¬ê¸°ì „ê¹Œì§€ í•´ì œí•  ìˆ˜ ì—†ê²Œ ëœë‹¤.\n";
 				break;
 			case SCT_CURSE_ARMOUR:
-				text_ += "µé°íÀÖ´Â ¹æ¾î±¸¿¡ ÀúÁÖ¸¦ °Ç´Ù. ÀúÁÖ¿¡ °É¸° Àåºñ´Â ÀúÁÖ°¡ Ç®¸®±âÀü±îÁö ÇØÁ¦ÇÒ ¼ö ¾ø°Ô µÈ´Ù.\n";
+				text_ += "ë“¤ê³ ìˆëŠ” ë°©ì–´êµ¬ì— ì €ì£¼ë¥¼ ê±´ë‹¤. ì €ì£¼ì— ê±¸ë¦° ì¥ë¹„ëŠ” ì €ì£¼ê°€ í’€ë¦¬ê¸°ì „ê¹Œì§€ í•´ì œí•  ìˆ˜ ì—†ê²Œ ëœë‹¤.\n";
 				break;
 			case SCT_REMOVE_CURSE:
-				text_ += "µé°íÀÖ´Â ÀåºñÀÇ ÀúÁÖ¸¦ ÇØÁ¦ÇÑ´Ù. ±âºĞ ³ª»İµµ »ç¶óÁø´Ù.\n";
+				text_ += "ë“¤ê³ ìˆëŠ” ì¥ë¹„ì˜ ì €ì£¼ë¥¼ í•´ì œí•œë‹¤. ê¸°ë¶„ ë‚˜ì¨ë„ ì‚¬ë¼ì§„ë‹¤.\n";
 				break;
 			case SCT_BLINK:
-				text_ += "½Ã¾ß³»ÀÇ ÀÓÀÇÀÇ À§Ä¡¿¡ ¼ø°£ÀÌµ¿À» ÇÏ°Ô µµ¿ÍÁÖ´Â µÎ·ç¸¶¸®.\n";
-				text_ += "À§±âÅ»Ãâ¿ëÀ¸·Î ÃÖ°íÀÇ µÎ·ç¸¶¸®´Ù.\n";
+				text_ += "ì‹œì•¼ë‚´ì˜ ì„ì˜ì˜ ìœ„ì¹˜ì— ìˆœê°„ì´ë™ì„ í•˜ê²Œ ë„ì™€ì£¼ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
+				text_ += "ìœ„ê¸°íƒˆì¶œìš©ìœ¼ë¡œ ìµœê³ ì˜ ë‘ë£¨ë§ˆë¦¬ë‹¤.\n";
 				break;
 			case SCT_MAPPING:
-				text_ += "ÇöÀç ÀÖ´Â ÃşÀÇ ¸ÊÀ» ¹àÇôÁÖ´Â µÎ·ç¸¶¸®.\n";
+				text_ += "í˜„ì¬ ìˆëŠ” ì¸µì˜ ë§µì„ ë°í˜€ì£¼ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
 				break;
 			case SCT_ENCHANT_WEAPON_1:
 			case SCT_ENCHANT_WEAPON_2:
-				text_ += "ÇöÀç ÀåÂøµÇ¾îÀÖ´Â ¹«±âÀÇ °ø°İ·Â°ú ¸íÁß·ÂÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù. ¶ÇÇÑ ÀúÁÖµµ ¾ø¾ÖÁØ´Ù.\n";
+				text_ += "í˜„ì¬ ì¥ì°©ë˜ì–´ìˆëŠ” ë¬´ê¸°ì˜ ê³µê²©ë ¥ê³¼ ëª…ì¤‘ë ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤. ë˜í•œ ì €ì£¼ë„ ì—†ì• ì¤€ë‹¤.\n";
 				break;
 			case SCT_ENCHANT_ARMOUR:
-				text_ += "¼±ÅÃÇÑ ¹æ¾î±¸ÀÇ ¹æ¾î·ÂÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù. ¶ÇÇÑ ÀúÁÖµµ ¾ø¾ÖÁØ´Ù.\n";
+				text_ += "ì„ íƒí•œ ë°©ì–´êµ¬ì˜ ë°©ì–´ë ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤. ë˜í•œ ì €ì£¼ë„ ì—†ì• ì¤€ë‹¤.\n";
 				break;
 			case SCT_FOG:
-				text_ += "¿¬±â¸¦ ¸¸µé¾î ³»´Â µÎ·ç¸¶¸®.\n";
-				text_ += "¿¬±â´Â »ó´ë¿Í ÀÚ½ÅÀÇ ½Ã¾ß¸¦ °¡·ÁÁØ´Ù.\n";
+				text_ += "ì—°ê¸°ë¥¼ ë§Œë“¤ì–´ ë‚´ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
+				text_ += "ì—°ê¸°ëŠ” ìƒëŒ€ì™€ ìì‹ ì˜ ì‹œì•¼ë¥¼ ê°€ë ¤ì¤€ë‹¤.\n";
 				break;
 			case SCT_DETECT_CURSE:
-				text_ += "¼ÒÁöÇ°Áß¿¡ ÀúÁÖ°¡ °É¸° ¾ÆÀÌÅÛÀ» Å½ÁöÇÏ´Â µÎ·ç¸¶¸®.\n";
-				text_ += "Å½ÁöÇÒ ¾ÆÀÌÅÛÀÌ ¾ø¾îµµ ½Äº°Àº µÈ´Ù.\n";
+				text_ += "ì†Œì§€í’ˆì¤‘ì— ì €ì£¼ê°€ ê±¸ë¦° ì•„ì´í…œì„ íƒì§€í•˜ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
+				text_ += "íƒì§€í•  ì•„ì´í…œì´ ì—†ì–´ë„ ì‹ë³„ì€ ëœë‹¤.\n";
 				break;
 			case SCT_CURSE_JEWELRY:
-				text_ += "ÀåÂøÇÏ°í ÀÖ´Â Àå½Å±¸¿¡ ÀúÁÖ¸¦ °Å´Â µÎ·ç¸¶¸®.\n";
-				text_ += "¹İÁö¿Í ¸ñ°ÉÀÌÁß ¹«ÀÛÀ§ ÇÑ°³ÀÇ Àå½Å±¸¿¡ ÀúÁÖ°¡ °É¸°´Ù.\n";
+				text_ += "ì¥ì°©í•˜ê³  ìˆëŠ” ì¥ì‹ êµ¬ì— ì €ì£¼ë¥¼ ê±°ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
+				text_ += "ë°˜ì§€ì™€ ëª©ê±¸ì´ì¤‘ ë¬´ì‘ìœ„ í•œê°œì˜ ì¥ì‹ êµ¬ì— ì €ì£¼ê°€ ê±¸ë¦°ë‹¤.\n";
 				break;
 			case SCT_SILENCE:
-				text_ += "ÁÖº¯ÀÇ ¼ÒÀ½À» ÁÙÀÌ´Â µÎ·ç¸¶¸®. ÀÏ½ÃÀûÀ¸·Î Á¤Àû»óÅÂ°¡ µÈ´Ù.\n";
-				text_ += "Á¤Àû¹üÀ§¾È¿¡ ÀÖ´Â ÀûÀº ¸¶¹ıÀ» »ç¿ëÇÏÁö¸øÇÏ¸ç ¹üÀ§´Â ½Ã°£ÀÌ Áö³ª¸é Á¡Á¡ ÁÙ¾îµç´Ù.\n";
-				text_ += "´Ü, ÀÚ½Åµµ ¼Ò¸®¸¦ ³»¾ßÇÏ´Â ¸¶¹ı°ú µÎ·ç¸¶¸®, ±Ç´ÉÀ» »ç¿ëÇÏÁö ¸øÇÏ°Ô µÈ´Ù.\n";
+				text_ += "ì£¼ë³€ì˜ ì†ŒìŒì„ ì¤„ì´ëŠ” ë‘ë£¨ë§ˆë¦¬. ì¼ì‹œì ìœ¼ë¡œ ì •ì ìƒíƒœê°€ ëœë‹¤.\n";
+				text_ += "ì •ì ë²”ìœ„ì•ˆì— ìˆëŠ” ì ì€ ë§ˆë²•ì„ ì‚¬ìš©í•˜ì§€ëª»í•˜ë©° ë²”ìœ„ëŠ” ì‹œê°„ì´ ì§€ë‚˜ë©´ ì ì  ì¤„ì–´ë“ ë‹¤.\n";
+				text_ += "ë‹¨, ìì‹ ë„ ì†Œë¦¬ë¥¼ ë‚´ì•¼í•˜ëŠ” ë§ˆë²•ê³¼ ë‘ë£¨ë§ˆë¦¬, ê¶ŒëŠ¥ì„ ì‚¬ìš©í•˜ì§€ ëª»í•˜ê²Œ ëœë‹¤.\n";
 				break;
 			case SCT_SOUL_SHOT:
-				text_ += "¿µ°İÀ» »ç¿ëÇÏ´Â µÎ·ç¸¶¸®, ÁÖº¯ÀÇ Àû¿¡°Ô ÀúÇ×ÇÒ ¼ö ¾ø´Â ÂªÀº ¸¶ºñ¸¦ °Ç´Ù.\n";
-				text_ += "È¿°ú´Â Àı´ëÀûÀÌÁö¸¸ P¸¦ ÇÑÄ­ °­Á¦·Î ¼Ò¸ğÇÏ°ÔµÈ´Ù.\n";
+				text_ += "ì˜ê²©ì„ ì‚¬ìš©í•˜ëŠ” ë‘ë£¨ë§ˆë¦¬, ì£¼ë³€ì˜ ì ì—ê²Œ ì €í•­í•  ìˆ˜ ì—†ëŠ” ì§§ì€ ë§ˆë¹„ë¥¼ ê±´ë‹¤.\n";
+				text_ += "íš¨ê³¼ëŠ” ì ˆëŒ€ì ì´ì§€ë§Œ Pë¥¼ í•œì¹¸ ê°•ì œë¡œ ì†Œëª¨í•˜ê²Œëœë‹¤.\n";
 				break;
 			case SCT_CHARGING:
-				text_ += "½ºÆçÄ«µå¸¦ ÃæÀüÇÏ´Â µÎ·ç¸¶¸®. ¾î´ÀÁ¤µµ »ç¿ëÇÑ ½ºÆçÄ«µåÀÇ ÃæÀü¾çÀ» ÃæÀüÇÑ´Ù.\n";
-				text_ += "½ºÆçÄ«µåÀÇ ÃÖ´ëÄ¡°¡ ³ôÀ»¼ö·Ï ÃæÀüÇÏ´Â ¾çµµ ´Ã¾î³­´Ù.\n";
+				text_ += "ìŠ¤í ì¹´ë“œë¥¼ ì¶©ì „í•˜ëŠ” ë‘ë£¨ë§ˆë¦¬. ì–´ëŠì •ë„ ì‚¬ìš©í•œ ìŠ¤í ì¹´ë“œì˜ ì¶©ì „ì–‘ì„ ì¶©ì „í•œë‹¤.\n";
+				text_ += "ìŠ¤í ì¹´ë“œì˜ ìµœëŒ€ì¹˜ê°€ ë†’ì„ìˆ˜ë¡ ì¶©ì „í•˜ëŠ” ì–‘ë„ ëŠ˜ì–´ë‚œë‹¤.\n";
 				break;
 			case SCT_AMNESIA:
-				text_ += "¹è¿î ¸¶¹ıÀ» ÀØ´Â ¸Á°¢ÀÇ µÎ·ç¸¶¸®. »ç¿ë½Ã ¹è¿ì°í ÀÖ´Â ¸¶¹ıÁß¿¡ ÇÏ³ª¸¦ ¼±ÅÃÇÏ¿© ÀØ´Â´Ù.\n";
-				text_ += "¸¶¹ıÀ» ¹è¿ï¶§ »ç¿ëÇÑ ·¹º§Àº µ¹·Á¹Ş´Â´Ù.\n";
+				text_ += "ë°°ìš´ ë§ˆë²•ì„ ìŠëŠ” ë§ê°ì˜ ë‘ë£¨ë§ˆë¦¬. ì‚¬ìš©ì‹œ ë°°ìš°ê³  ìˆëŠ” ë§ˆë²•ì¤‘ì— í•˜ë‚˜ë¥¼ ì„ íƒí•˜ì—¬ ìŠëŠ”ë‹¤.\n";
+				text_ += "ë§ˆë²•ì„ ë°°ìš¸ë•Œ ì‚¬ìš©í•œ ë ˆë²¨ì€ ëŒë ¤ë°›ëŠ”ë‹¤.\n";
 				break;
 			case SCT_SANTUARY:
-				text_ += "ÀĞÀº ¼ø°£ ³ĞÀº ¼º¿ªÀ» ÆîÄ¡´Â µÎ·ç¸¶¸®. ¼º¿ª¿¡¼­´Â ¸ğµç °ø°İÀÇ µ¥¹ÌÁö¸¦ ¹«È¿·Î ÇÑ´Ù.\n";
-				text_ += "»ê ¼Ó¿¡ »ç´Â ¾î´À ¾ß¸¸¹Ù°¡ ¸¸µé¾ú´Ù°í ÇÏ´Â ±ÍÇÑ µÎ·ç¸¶¸®.\n";
+				text_ += "ì½ì€ ìˆœê°„ ë„“ì€ ì„±ì—­ì„ í¼ì¹˜ëŠ” ë‘ë£¨ë§ˆë¦¬. ì„±ì—­ì—ì„œëŠ” ëª¨ë“  ê³µê²©ì˜ ë°ë¯¸ì§€ë¥¼ ë¬´íš¨ë¡œ í•œë‹¤.\n";
+				text_ += "ì‚° ì†ì— ì‚¬ëŠ” ì–´ëŠ ì•¼ë§Œë°”ê°€ ë§Œë“¤ì—ˆë‹¤ê³  í•˜ëŠ” ê·€í•œ ë‘ë£¨ë§ˆë¦¬.\n";
 				break;
 			case SCT_BRAND_WEAPON:
-				text_ += "Áö±İ µé°í ÀÖ´Â ¹«±â¿¡ ¸¶¹ıÀûÀÎ ÈûÀ» ºÎ¿©ÇÏ´Â µÎ·ç¸¶¸®.\n";
-				text_ += "¾î¶² ¸¶¹ıÀÌ ºÎ¿©µÉÁö´Â ¾Ë ¼ö ¾øÀ¸¸ç ±âÁ¸¿¡ ºÎ¿©µÈ ¸¶¹ıÀûÀÎ ÈûÀº µ¤¾î¾º¿öÁø´Ù.\n";
+				text_ += "ì§€ê¸ˆ ë“¤ê³  ìˆëŠ” ë¬´ê¸°ì— ë§ˆë²•ì ì¸ í˜ì„ ë¶€ì—¬í•˜ëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
+				text_ += "ì–´ë–¤ ë§ˆë²•ì´ ë¶€ì—¬ë ì§€ëŠ” ì•Œ ìˆ˜ ì—†ìœ¼ë©° ê¸°ì¡´ì— ë¶€ì—¬ëœ ë§ˆë²•ì ì¸ í˜ì€ ë®ì–´ì”Œì›Œì§„ë‹¤.\n";
 				break;
 			default:
-				text_ += "¹ö±×ÀÇ µÎ·ç¸¶¸®. ¾ó¸¥ Á¦ÀÛÀÚ¿¡°Ô ¹ö±×·Î ½Å°íÇØ¹ö¸®ÀÚ!\n";
+				text_ += "ë²„ê·¸ì˜ ë‘ë£¨ë§ˆë¦¬. ì–¼ë¥¸ ì œì‘ìì—ê²Œ ë²„ê·¸ë¡œ ì‹ ê³ í•´ë²„ë¦¬ì!\n";
 				break;
 			}
 		}
 		else
 		{
-			text_ += "¾Ë ¼ö ¾ø´Â ¹®ÀÚµéÀÌ ³ª¿­µÇ¾îÀÖ´Â µÎ·ç¸¶¸®.\n";
+			text_ += "ì•Œ ìˆ˜ ì—†ëŠ” ë¬¸ìë“¤ì´ ë‚˜ì—´ë˜ì–´ìˆëŠ” ë‘ë£¨ë§ˆë¦¬.\n";
 		}
-		text_ += "¼Ò¸®³»¾î¼­ ÀĞÀ¸¸é µÎ·ç¸¶¸®¿¡ ´ã°ÜÁø ¹ÌÁöÀÇ ÈûÀ» ²ø¾î³¾ ¼ö ÀÖ´Ù.\n";
+		text_ += "ì†Œë¦¬ë‚´ì–´ì„œ ì½ìœ¼ë©´ ë‘ë£¨ë§ˆë¦¬ì— ë‹´ê²¨ì§„ ë¯¸ì§€ì˜ í˜ì„ ëŒì–´ë‚¼ ìˆ˜ ìˆë‹¤.\n";
 		if (can_use_)
 		{
-			use_text_ += "(r)ÀĞ±â, ";
+			use_text_ += "(r)ì½ê¸°, ";
 			if (key) key->insert('r');
 		}
 	}
@@ -1115,140 +1115,140 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value2)
 			{
 			case SPC_V_FIRE:
-				text_ += "È­¿°ÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "»ç¿ëÇÏ¸é ¿øÇÏ´Â ¹æÇâÀÇ ³ĞÀº ¹üÀ§·Î È­¿°±¸¸§À» »ı¼ºÇÑ´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é ±¸¸§ÀÇ Áö¼Ó½Ã°£ÀÌ ±æ¾îÁø´Ù.\n";
+				text_ += "í™”ì—¼ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ì‚¬ìš©í•˜ë©´ ì›í•˜ëŠ” ë°©í–¥ì˜ ë„“ì€ ë²”ìœ„ë¡œ í™”ì—¼êµ¬ë¦„ì„ ìƒì„±í•œë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ êµ¬ë¦„ì˜ ì§€ì†ì‹œê°„ì´ ê¸¸ì–´ì§„ë‹¤.\n";
 				break;
 			case SPC_V_ICE:
-				text_ += "³Ã±âÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "»ó´ë¿¡°Ô °­·ÂÇÑ ³Ã±â°ø°İÀ» °¡ÇÑ´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é µ¥¹ÌÁö°¡ ³ô¾ÆÁø´Ù.\n";
+				text_ += "ëƒ‰ê¸°ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ìƒëŒ€ì—ê²Œ ê°•ë ¥í•œ ëƒ‰ê¸°ê³µê²©ì„ ê°€í•œë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ ë°ë¯¸ì§€ê°€ ë†’ì•„ì§„ë‹¤.\n";
 				break;
 			case SPC_V_EARTH:
-				text_ += "´ëÁöÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "ÀÚÃ¼ À§·ÂÀº ³·Áö¸¸ º®¿¡ ºÎµúÈ÷¸é º®À» Æø¹ß½ÃÄÑ ³ôÀº ¹üÀ§ µ¥¹ÌÁö¸¦ ÀÔÈù´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é µ¥¹ÌÁö°¡ ³ô¾ÆÁø´Ù.\n";
+				text_ += "ëŒ€ì§€ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ìì²´ ìœ„ë ¥ì€ ë‚®ì§€ë§Œ ë²½ì— ë¶€ë”ªíˆë©´ ë²½ì„ í­ë°œì‹œì¼œ ë†’ì€ ë²”ìœ„ ë°ë¯¸ì§€ë¥¼ ì…íŒë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ ë°ë¯¸ì§€ê°€ ë†’ì•„ì§„ë‹¤.\n";
 				break;
 			case SPC_V_AIR:
-				text_ += "´ë±âÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "ºÎÃ¤²ÃÀÇ ³ĞÀº ¹üÀ§¿¡ Åº¸·À» ³¯·Á ¹üÀ§³»ÀÇ ÀûµéÀ» ³¯·Á¹ö¸°´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é ³¯¸®´Â Á¤µµ¿Í À§·ÂÀÌ °­ÇØÁø´Ù.\n";
+				text_ += "ëŒ€ê¸°ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ë¶€ì±„ê¼´ì˜ ë„“ì€ ë²”ìœ„ì— íƒ„ë§‰ì„ ë‚ ë ¤ ë²”ìœ„ë‚´ì˜ ì ë“¤ì„ ë‚ ë ¤ë²„ë¦°ë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ ë‚ ë¦¬ëŠ” ì •ë„ì™€ ìœ„ë ¥ì´ ê°•í•´ì§„ë‹¤.\n";
 				break;
 			case SPC_V_INVISIBLE:
-				text_ += "´ŞºûÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "»ç¿ëÇÑ »ç¶÷À» ÀÏÁ¤½Ã°£ Åõ¸íÇÏ°Ô ¸¸µç´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é Åõ¸íÀÇ Áö¼Ó½Ã°£ÀÌ ±æ¾îÁø´Ù.\n";
+				text_ += "ë‹¬ë¹›ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ì‚¬ìš©í•œ ì‚¬ëŒì„ ì¼ì •ì‹œê°„ íˆ¬ëª…í•˜ê²Œ ë§Œë“ ë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ íˆ¬ëª…ì˜ ì§€ì†ì‹œê°„ì´ ê¸¸ì–´ì§„ë‹¤.\n";
 				break;
 			case SPC_V_METAL:
-				text_ += "±İ¼ÓÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "»ç¿ëÇÏ¸é Àü¹æÀ¸·Î Ã¶°¡½Ã¸¦ 3¿¬¼ÓÀ¸·Î ¹ß»çÇÑ´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é µ¥¹ÌÁö°¡ ³ô¾ÆÁø´Ù.\n";
+				text_ += "ê¸ˆì†ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ì‚¬ìš©í•˜ë©´ ì „ë°©ìœ¼ë¡œ ì² ê°€ì‹œë¥¼ 3ì—°ì†ìœ¼ë¡œ ë°œì‚¬í•œë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ ë°ë¯¸ì§€ê°€ ë†’ì•„ì§„ë‹¤.\n";
 				break;
 			case SPC_V_SUN:
-				text_ += "ÅÂ¾çÀÇ ±â¿îÀ» ´ãÀº ½ºÆçÄ«µå´Ù.\n";
-				text_ += "»ç¿ëÇÏ¸é Å« ºûÀ» ¹ß»êÇÏ¿© ÁÖº¯ÀÇ ÀûÀ» ºû³ª°Ô ÇÏ°í È¥¶õÀ» °Ç´Ù.\n";
-				text_ += "È¥¶õÀº °­ÇÒ¼ö·Ï ÀúÇ×ÇÒ ¼ö ÀÖÀ¸¸ç ¹«»ı¹°¿¡°Õ °É¸®Áö¾Ê´Â´Ù.\n";
-				text_ += "¶ÇÇÑ, ÈíÇ÷±Í¿¡°Õ ´Ü¼øÇÑ È¥¶õÈ¿°ú ÀÌ»óÀÇ µ¥¹ÌÁö¸¦ ÁÙ ¼ö ÀÖ´Ù°í ÇÑ´Ù.\n";
-				text_ += "¹ßµ¿½ºÅ³ÀÌ ³ôÀ¸¸é Áö¼Ó½Ã°£°ú È¥¶õÀÌ °É¸± È®·üÀÌ ´Ã¾î³­´Ù.\n";
+				text_ += "íƒœì–‘ì˜ ê¸°ìš´ì„ ë‹´ì€ ìŠ¤í ì¹´ë“œë‹¤.\n";
+				text_ += "ì‚¬ìš©í•˜ë©´ í° ë¹›ì„ ë°œì‚°í•˜ì—¬ ì£¼ë³€ì˜ ì ì„ ë¹›ë‚˜ê²Œ í•˜ê³  í˜¼ë€ì„ ê±´ë‹¤.\n";
+				text_ += "í˜¼ë€ì€ ê°•í• ìˆ˜ë¡ ì €í•­í•  ìˆ˜ ìˆìœ¼ë©° ë¬´ìƒë¬¼ì—ê² ê±¸ë¦¬ì§€ì•ŠëŠ”ë‹¤.\n";
+				text_ += "ë˜í•œ, í¡í˜ˆê·€ì—ê² ë‹¨ìˆœí•œ í˜¼ë€íš¨ê³¼ ì´ìƒì˜ ë°ë¯¸ì§€ë¥¼ ì¤„ ìˆ˜ ìˆë‹¤ê³  í•œë‹¤.\n";
+				text_ += "ë°œë™ìŠ¤í‚¬ì´ ë†’ìœ¼ë©´ ì§€ì†ì‹œê°„ê³¼ í˜¼ë€ì´ ê±¸ë¦´ í™•ë¥ ì´ ëŠ˜ì–´ë‚œë‹¤.\n";
 				break;
 			default:
-				text_ += "¹ö±×ÀÇ ½ºÆçÄ«µå´Ù.\n";
+				text_ += "ë²„ê·¸ì˜ ìŠ¤í ì¹´ë“œë‹¤.\n";
 				break;
 			}
 			text_ += "\n";
 		}
-		text_ += "½ºÆçÄ«µå´Â Á¤ÇØÁø È½¼ö³»¿¡¼­ ¸¶À½´ë·Î »ç¿ëÇÒ ¼ö ÀÖÀ¸³ª ÃÊ°úÇÏ¸é ´õÀÌ»ó »ç¿ëÇÒ ¼ö ¾ø°ÔµÈ´Ù.\n";
-		text_ += "Á¤È®ÇÑ ³²Àº °¹¼ö´Â ½Äº°À» ÇØ¾ß È®ÀÎÇÒ ¼ö ÀÖ´Ù. ½ºÆçÄ«µå´Â ¹ßµ¿¼ú¿¡ ºñ·ÊÇØ¼­ À§·ÂÀÌ ¿Ã¶ó°£´Ù.\n";
+		text_ += "ìŠ¤í ì¹´ë“œëŠ” ì •í•´ì§„ íšŸìˆ˜ë‚´ì—ì„œ ë§ˆìŒëŒ€ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆìœ¼ë‚˜ ì´ˆê³¼í•˜ë©´ ë”ì´ìƒ ì‚¬ìš©í•  ìˆ˜ ì—†ê²Œëœë‹¤.\n";
+		text_ += "ì •í™•í•œ ë‚¨ì€ ê°¯ìˆ˜ëŠ” ì‹ë³„ì„ í•´ì•¼ í™•ì¸í•  ìˆ˜ ìˆë‹¤. ìŠ¤í ì¹´ë“œëŠ” ë°œë™ìˆ ì— ë¹„ë¡€í•´ì„œ ìœ„ë ¥ì´ ì˜¬ë¼ê°„ë‹¤.\n";
 		if (can_use_)
 		{
-			use_text_ += "(v)¹ßµ¿, ";
+			use_text_ += "(v)ë°œë™, ";
 			if (key) key->insert('v');
 		}
 	}
 	break;
 	case ITM_AMULET:
 	{
-		text_ += "¹ÌÁöÀÇ ÈûÀÌ ´ã°ÜÀÖ´Â ºÎÀû. ±âº»ÀûÀ¸·Ğ ¾Æ¹«·± Èûµµ °¡Áö°í ÀÖÁö¾Ê´Â Æò¹üÇÑ ºÎÀûÀÌÁö¸¸\n";
-		text_ += "Âø¿ëÇÑ Ã¤·Î °æÇèÄ¡¸¦ ¾òÀ¸¸é ºÎÀûÀÇ ÃæÀü·®ÀÌ Á¡Á¡ ÃæÀüµÇ¸ç 100%°¡ µÇ¸é ÈûÀ» ¹ßÈÖÇÑ´Ù.\n";
-		text_ += "¸¸¾à Âø¿ëÇÏ°íÀÖ´Â ºÎÀûÀ» ¹şÀ¸¸é ±× Áï½Ã ÃæÀü·®ÀÌ 0%·Î ¶³¾îÁö¹Ç·Î ÁÖÀÇÇØ¾ßÇÑ´Ù.\n\n";
+		text_ += "ë¯¸ì§€ì˜ í˜ì´ ë‹´ê²¨ìˆëŠ” ë¶€ì . ê¸°ë³¸ì ìœ¼ë¡  ì•„ë¬´ëŸ° í˜ë„ ê°€ì§€ê³  ìˆì§€ì•ŠëŠ” í‰ë²”í•œ ë¶€ì ì´ì§€ë§Œ\n";
+		text_ += "ì°©ìš©í•œ ì±„ë¡œ ê²½í—˜ì¹˜ë¥¼ ì–»ìœ¼ë©´ ë¶€ì ì˜ ì¶©ì „ëŸ‰ì´ ì ì  ì¶©ì „ë˜ë©° 100%ê°€ ë˜ë©´ í˜ì„ ë°œíœ˜í•œë‹¤.\n";
+		text_ += "ë§Œì•½ ì°©ìš©í•˜ê³ ìˆëŠ” ë¶€ì ì„ ë²—ìœ¼ë©´ ê·¸ ì¦‰ì‹œ ì¶©ì „ëŸ‰ì´ 0%ë¡œ ë–¨ì–´ì§€ë¯€ë¡œ ì£¼ì˜í•´ì•¼í•œë‹¤.\n\n";
 		if (iden_list.amulet_list[it->value1].iden == 2)
 		{
 			switch (it->value1)
 			{
 			case AMT_PERFECT:
-				text_ += "¹Ì·¡¸¦ Ã¼ÇèÇÑ´Ù°í ÇÏ´Â ¿¡ÀÌ¸°ÀÇ °¨ÁÖ¾àÀÇ È¿´ÉÀÌ ³ì¾Æµé¾îÀÖ´Â ºÎÀû.\n";
-				text_ += "´Ù¸¥ ºÎÀû¿¡ ºñÇØ ¾ÆÁÖ ´À¸° ¼Óµµ·Î ÃæÀüÀÌ µÇÁö¸¸ ÈûÀÌ ¸ğÀÌ¸é Á×À½À» È¸ÇÇÇÒ ¼ö ÀÖ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Î Á×°ÔµÇ¸é Ã¼·ÂÀÌ ÀüºÎ È¸º¹µÇ¾î ºÎÈ°ÇÑ´Ù.\n";
-				text_ += "´Ü, ÀÌ ¹æ¹ıÀ¸·Î ºÎÈ°ÇÏ°ÔµÇ¸é ºÎÀûÀº ºÒÅ¸ »ç¶óÁö°ÔµÈ´Ù.\n";
+				text_ += "ë¯¸ë˜ë¥¼ ì²´í—˜í•œë‹¤ê³  í•˜ëŠ” ì—ì´ë¦°ì˜ ê°ì£¼ì•½ì˜ íš¨ëŠ¥ì´ ë…¹ì•„ë“¤ì–´ìˆëŠ” ë¶€ì .\n";
+				text_ += "ë‹¤ë¥¸ ë¶€ì ì— ë¹„í•´ ì•„ì£¼ ëŠë¦° ì†ë„ë¡œ ì¶©ì „ì´ ë˜ì§€ë§Œ í˜ì´ ëª¨ì´ë©´ ì£½ìŒì„ íšŒí”¼í•  ìˆ˜ ìˆë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œ ì£½ê²Œë˜ë©´ ì²´ë ¥ì´ ì „ë¶€ íšŒë³µë˜ì–´ ë¶€í™œí•œë‹¤.\n";
+				text_ += "ë‹¨, ì´ ë°©ë²•ìœ¼ë¡œ ë¶€í™œí•˜ê²Œë˜ë©´ ë¶€ì ì€ ë¶ˆíƒ€ ì‚¬ë¼ì§€ê²Œëœë‹¤.\n";
 				break;
 			case AMT_BLOSSOM:
-				text_ += "Ãá¼³ÀÌº¯¿¡ ¾²ÀÎ º½ÀÇ ±â¿îÀ» ¸ğ¾Æ¼­ Æ¯¼öÇÑ °á°è¸¦ ¹ßµ¿½ÃÅ³ ¼ö ÀÖ´Â ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÁÖº¯ÀÇ º½ÀÇ ±â¿îÀÌ ¸ğÀÌ°í ÃæÀüÀÌ µÇ¸é ¿µ°İÀ» ¹ßµ¿ÇÒ ¼ö ÀÖ°Ô µÈ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Î v¸¦ ´©¸£¸é ¿µ°İÀÌ ¹ßµ¿µÇ¾î ÁÖº¯ÀÇ ÀûÀ» ÀÏÁ¤½Ã°£ ¸¶ºñ½ÃÅ²´Ù.\n";
-				text_ += "¹ßµ¿ÈÄ¿¡´Â ÃæÀüÄ¡°¡ 0%°¡ µÇ¾î ´Ù½Ã ÃæÀüÇÒ ¼ö ÀÖ°Ô µÈ´Ù.\n";
+				text_ += "ì¶˜ì„¤ì´ë³€ì— ì“°ì¸ ë´„ì˜ ê¸°ìš´ì„ ëª¨ì•„ì„œ íŠ¹ìˆ˜í•œ ê²°ê³„ë¥¼ ë°œë™ì‹œí‚¬ ìˆ˜ ìˆëŠ” ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì£¼ë³€ì˜ ë´„ì˜ ê¸°ìš´ì´ ëª¨ì´ê³  ì¶©ì „ì´ ë˜ë©´ ì˜ê²©ì„ ë°œë™í•  ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œ vë¥¼ ëˆ„ë¥´ë©´ ì˜ê²©ì´ ë°œë™ë˜ì–´ ì£¼ë³€ì˜ ì ì„ ì¼ì •ì‹œê°„ ë§ˆë¹„ì‹œí‚¨ë‹¤.\n";
+				text_ += "ë°œë™í›„ì—ëŠ” ì¶©ì „ì¹˜ê°€ 0%ê°€ ë˜ì–´ ë‹¤ì‹œ ì¶©ì „í•  ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
 				break;
 			case AMT_TIMES:
-				text_ += "¿µ¾ßÀÌº¯À» ÇØ°áÇÒ¶§ »ç¿ëµÈ ÁÖ¼úÀÇ ÈûÀÌ ´ã±ä ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÁÖº¯ÀÇ °¢ºÎ°¡ ¸ğÀÌ°í ÃæÀüÀÌ µÇ¸é ÆÄ¿ö ¾ÆÀÌÅÛÀ» »ı»êÇÒ ¼ö ÀÖ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Î v¸¦ ´©¸£¸é ÁÖº¯¿¡ ÆÄ¿ö¾ÆÀÌÅÛÀÌ ¶³¾îÁø´Ù.\n";
-				text_ += "¹ßµ¿ÈÄ¿¡´Â ÃæÀüÄ¡°¡ 0%°¡ µÇ¾î ´Ù½Ã ÃæÀüÇÒ ¼ö ÀÖ°Ô µÈ´Ù.\n";
+				text_ += "ì˜ì•¼ì´ë³€ì„ í•´ê²°í• ë•Œ ì‚¬ìš©ëœ ì£¼ìˆ ì˜ í˜ì´ ë‹´ê¸´ ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì£¼ë³€ì˜ ê°ë¶€ê°€ ëª¨ì´ê³  ì¶©ì „ì´ ë˜ë©´ íŒŒì›Œ ì•„ì´í…œì„ ìƒì‚°í•  ìˆ˜ ìˆë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œ vë¥¼ ëˆ„ë¥´ë©´ ì£¼ë³€ì— íŒŒì›Œì•„ì´í…œì´ ë–¨ì–´ì§„ë‹¤.\n";
+				text_ += "ë°œë™í›„ì—ëŠ” ì¶©ì „ì¹˜ê°€ 0%ê°€ ë˜ì–´ ë‹¤ì‹œ ì¶©ì „í•  ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
 				break;
 			case AMT_FAITH:
-				text_ += "½Å¾ÓÀÇ ÈûÀ» ¸ğÀ» ¼ö ÀÖ´Â ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÁÖº¯ÀÇ ½Å¾ÓÀÌ ¸ğÀÌ°í ÃæÀüÀÌ µÇ¸é ½Åµé°úÀÇ °ü°è°¡ ÁÁ¾ÆÁø´Ù.\n";
-				text_ += "100%°¡ µÇ¸é ÀÚµ¿À¸·Î ÇöÀç ½Å¾Ó½ÉÀÌ Á¶±İ ¿À¸¥ÈÄ ÃæÀüÄ¡°¡ ´Ù½Ã 0%ÀÌ µÈ´Ù.\n";
-				text_ += "¸î¸î ½ÅÀº ½Å¾ÓÀ» ¸ğÀ¸Áö¾Ê±â¶§¹®¿¡ ÀÌ ºÎÀûÀÇ È¿´ÉÀÌ ¾øÀ» ¼ö ÀÖ´Ù.\n";
+				text_ += "ì‹ ì•™ì˜ í˜ì„ ëª¨ì„ ìˆ˜ ìˆëŠ” ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì£¼ë³€ì˜ ì‹ ì•™ì´ ëª¨ì´ê³  ì¶©ì „ì´ ë˜ë©´ ì‹ ë“¤ê³¼ì˜ ê´€ê³„ê°€ ì¢‹ì•„ì§„ë‹¤.\n";
+				text_ += "100%ê°€ ë˜ë©´ ìë™ìœ¼ë¡œ í˜„ì¬ ì‹ ì•™ì‹¬ì´ ì¡°ê¸ˆ ì˜¤ë¥¸í›„ ì¶©ì „ì¹˜ê°€ ë‹¤ì‹œ 0%ì´ ëœë‹¤.\n";
+				text_ += "ëª‡ëª‡ ì‹ ì€ ì‹ ì•™ì„ ëª¨ìœ¼ì§€ì•Šê¸°ë•Œë¬¸ì— ì´ ë¶€ì ì˜ íš¨ëŠ¥ì´ ì—†ì„ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case AMT_WAVE:
-				text_ += "Áö·ÉÀü°°Àº ÁöÇÏ¿¡¼­µµ ¸Ö¸® ÀÖ´Â »ó´ë¿Í Åë½ÅÀÌ °¡´ÉÇÏµµ·Ï °³Á¶µÈ ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÀüÆÄ¼ö½Å°¨µµ°¡ Á¡Á¡ ÁÁ¾ÆÁö°í ÃæÀüÀÌ µÇ¸é ¼ö½ÅµÈ ÀüÆÄ°¡ ¿µ·ÂÀ¸·Î È¯¿øµÈ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Îµµ ¿µ·ÂÀÇ È¸º¹·ÂÀÌ Á¶±İ ¿Ã¶ó°¡¸ç\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Î v¸¦ ´©¸£¸é ¿µ·ÂÀ» ¼ø°£ÀûÀ¸·Î È¸º¹ÇÒ ¼ö ÀÖ´Ù.\n";
+				text_ += "ì§€ë ¹ì „ê°™ì€ ì§€í•˜ì—ì„œë„ ë©€ë¦¬ ìˆëŠ” ìƒëŒ€ì™€ í†µì‹ ì´ ê°€ëŠ¥í•˜ë„ë¡ ê°œì¡°ëœ ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì „íŒŒìˆ˜ì‹ ê°ë„ê°€ ì ì  ì¢‹ì•„ì§€ê³  ì¶©ì „ì´ ë˜ë©´ ìˆ˜ì‹ ëœ ì „íŒŒê°€ ì˜ë ¥ìœ¼ë¡œ í™˜ì›ëœë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œë„ ì˜ë ¥ì˜ íšŒë³µë ¥ì´ ì¡°ê¸ˆ ì˜¬ë¼ê°€ë©°\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œ vë¥¼ ëˆ„ë¥´ë©´ ì˜ë ¥ì„ ìˆœê°„ì ìœ¼ë¡œ íšŒë³µí•  ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case AMT_SPIRIT:
-				text_ += "¸ùÀü´ë»ç¹¦ÀÇ ÅÂÀÚ¸¦ ºÎÈ°½ÃÅ³¶§µµ »ç¿ëµÇ¾ú´Ù´ø ½Å·ÉÀ» ´ãÀ» ¼ö ÀÖ´Â ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÁÖº¯ÀÇ ½Å·ÉÀÌ ¸ğÀÌ°í ÃæÀüÀÌ µÇ¸é °¡Áø ½ºÆçÄ«µå¿¡ ½Å·ÉÀ» ºÒ¾î³ÖÀ» ¼ö ÀÖ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Î v¸¦ ´©¸£¸é °¡Áö°í ÀÖ´Â ½ºÆçÄ«µå 1ÀåÀ» ÃæÀüÇÒ ¼ö ÀÖ´Ù.\n";
+				text_ += "ëª½ì „ëŒ€ì‚¬ë¬˜ì˜ íƒœìë¥¼ ë¶€í™œì‹œí‚¬ë•Œë„ ì‚¬ìš©ë˜ì—ˆë‹¤ë˜ ì‹ ë ¹ì„ ë‹´ì„ ìˆ˜ ìˆëŠ” ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì£¼ë³€ì˜ ì‹ ë ¹ì´ ëª¨ì´ê³  ì¶©ì „ì´ ë˜ë©´ ê°€ì§„ ìŠ¤í ì¹´ë“œì— ì‹ ë ¹ì„ ë¶ˆì–´ë„£ì„ ìˆ˜ ìˆë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œ vë¥¼ ëˆ„ë¥´ë©´ ê°€ì§€ê³  ìˆëŠ” ìŠ¤í ì¹´ë“œ 1ì¥ì„ ì¶©ì „í•  ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case AMT_GRAZE:
-				text_ += "¾î´À ÀÌº¯¿¡¼­³ª Áß¿äÇÑ ±×·¹ÀÌÁîÀÇ ÈûÀÌ ´ã±ä ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é Á¡Â÷ ÃæÀüÀÌ µÇ°í ÃæÀüÀÌ ³¡³ª¸é ´ç½ÅÀº Åº¸·±«¹°ÀÌ µÈ´Ù.\n";
-				text_ += "100%°¡ µÈ ºÎÀûÀ» Âø¿ëÇÑ Ã¤·Îµµ »ó½Ã ±×·¹ÀÌÁî°¡ ¹ßµ¿µÇ¾î ¿ø°Å¸® Åº¸·À» ÀÏÁ¤È®·ü·Î ÇÇÇÒ ¼ö ÀÖ°í\n";
-				text_ += "100%»óÅÂ¿¡¼­ v¸¦ ´©¸£¸é ±Ù¼ºÈ¸ÇÇ°¡ ¹ßµ¿µÇ¾î È¸ÇÇ°¡´ÉÇÑ °ø°İÀ» ÀÏÁ¤ÅÏ 100% È¸ÇÇÇÑ´Ù.\n";
-				text_ += "±×·¹ÀÌÁîÇÒ¶§ ³ª´Â ¼Ò¸®°¡ ±âºĞÀÌ ÁÁ´Ù. ±×·¹ÀÌÁî°¡ ÀÇ¹Ì¾ø´ø ½Ã¸®Áîµµ ÀÖ¾ú´Ù°í...?\n";
+				text_ += "ì–´ëŠ ì´ë³€ì—ì„œë‚˜ ì¤‘ìš”í•œ ê·¸ë ˆì´ì¦ˆì˜ í˜ì´ ë‹´ê¸´ ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì ì°¨ ì¶©ì „ì´ ë˜ê³  ì¶©ì „ì´ ëë‚˜ë©´ ë‹¹ì‹ ì€ íƒ„ë§‰ê´´ë¬¼ì´ ëœë‹¤.\n";
+				text_ += "100%ê°€ ëœ ë¶€ì ì„ ì°©ìš©í•œ ì±„ë¡œë„ ìƒì‹œ ê·¸ë ˆì´ì¦ˆê°€ ë°œë™ë˜ì–´ ì›ê±°ë¦¬ íƒ„ë§‰ì„ ì¼ì •í™•ë¥ ë¡œ í”¼í•  ìˆ˜ ìˆê³ \n";
+				text_ += "100%ìƒíƒœì—ì„œ vë¥¼ ëˆ„ë¥´ë©´ ê·¼ì„±íšŒí”¼ê°€ ë°œë™ë˜ì–´ íšŒí”¼ê°€ëŠ¥í•œ ê³µê²©ì„ ì¼ì •í„´ 100% íšŒí”¼í•œë‹¤.\n";
+				text_ += "ê·¸ë ˆì´ì¦ˆí• ë•Œ ë‚˜ëŠ” ì†Œë¦¬ê°€ ê¸°ë¶„ì´ ì¢‹ë‹¤. ê·¸ë ˆì´ì¦ˆê°€ ì˜ë¯¸ì—†ë˜ ì‹œë¦¬ì¦ˆë„ ìˆì—ˆë‹¤ê³ ...?\n";
 				break;
 			case AMT_WEATHER:
-				text_ += "¾î´À ºÒ·® ÃµÀÎÀÌ ÀÚ½ÅÀÇ °ËÀÇ ÈûÀ» ºÎ¿©ÇÑ ºÎÀû. ±×³àÀÇ º¯´ö½º·¯¿î ¼º°İÀÌ ºÎÀû¿¡µµ ´ã°ÜÀÖ´Ù.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ÁÖº¯ÀÇ ±âÁú ±¸½½À» Èí¼öÇÏ°í ÃæÀüÀÌ ³¡³ª¸é ºÎÀû¿¡ ¼û°ÜÀÖ´ø ±âÁúÀÌ ¹ßµ¿µÈ´Ù.\n";
-				text_ += "100%»óÅÂ¿¡¼­ v¸¦ ´©¸£¸é ¹«ÀÛÀ§ ³¯¾¾°¡ ¹ßÇöµÇ¸ç Ã¼·ÂÀç»ı·ÂÀ» ³ô°Ô ¿Ã¸°´Ù.\n";
+				text_ += "ì–´ëŠ ë¶ˆëŸ‰ ì²œì¸ì´ ìì‹ ì˜ ê²€ì˜ í˜ì„ ë¶€ì—¬í•œ ë¶€ì . ê·¸ë…€ì˜ ë³€ë•ìŠ¤ëŸ¬ìš´ ì„±ê²©ì´ ë¶€ì ì—ë„ ë‹´ê²¨ìˆë‹¤.\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì£¼ë³€ì˜ ê¸°ì§ˆ êµ¬ìŠ¬ì„ í¡ìˆ˜í•˜ê³  ì¶©ì „ì´ ëë‚˜ë©´ ë¶€ì ì— ìˆ¨ê²¨ìˆë˜ ê¸°ì§ˆì´ ë°œë™ëœë‹¤.\n";
+				text_ += "100%ìƒíƒœì—ì„œ vë¥¼ ëˆ„ë¥´ë©´ ë¬´ì‘ìœ„ ë‚ ì”¨ê°€ ë°œí˜„ë˜ë©° ì²´ë ¥ì¬ìƒë ¥ì„ ë†’ê²Œ ì˜¬ë¦°ë‹¤.\n";
 				break;
 			case AMT_OCCULT:
-				text_ += "µµ½ÃÀü¼³À» ½ÇÃ¼È­ÇÏ´Â ÈûÀ» °¡Áø ¿ÀÄÃÆ®º¼ÀÇ ÈûÀÌ ´ã±ä ºÎÀû.\n";
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é ¿ÀÄÃÆ®ÀÇ ±â¿îÀ» Èí¼öÇÏ°í ÃæÀüÀÌ ³¡³ª¸é ¿ÀÄÃÆ®ÀÇ ÈûÀ» ¹æÃâÇÑ´Ù.\n";
-				text_ += "100%»óÅÂ¿¡¼­ v¸¦ ´©¸£¸é ½Ã¾ß³»ÀÇ ¸ğµç Àû´ëÀûÀÎ ¼ÒÈ¯¹°À» Ãß¹æÇÏ¸ç\n";
-				text_ += "ºÎÀû¾È¿¡ ¼û°ÜÀÖ´Â ¿ÀÄÃÆ®ÀÇ ÈûÀ» ¿ä±«·Î¼­ ±¸ÇöÈ­ÇÑ´Ù.\n";
+				text_ += "ë„ì‹œì „ì„¤ì„ ì‹¤ì²´í™”í•˜ëŠ” í˜ì„ ê°€ì§„ ì˜¤ì»¬íŠ¸ë³¼ì˜ í˜ì´ ë‹´ê¸´ ë¶€ì .\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ ì˜¤ì»¬íŠ¸ì˜ ê¸°ìš´ì„ í¡ìˆ˜í•˜ê³  ì¶©ì „ì´ ëë‚˜ë©´ ì˜¤ì»¬íŠ¸ì˜ í˜ì„ ë°©ì¶œí•œë‹¤.\n";
+				text_ += "100%ìƒíƒœì—ì„œ vë¥¼ ëˆ„ë¥´ë©´ ì‹œì•¼ë‚´ì˜ ëª¨ë“  ì ëŒ€ì ì¸ ì†Œí™˜ë¬¼ì„ ì¶”ë°©í•˜ë©°\n";
+				text_ += "ë¶€ì ì•ˆì— ìˆ¨ê²¨ìˆëŠ” ì˜¤ì»¬íŠ¸ì˜ í˜ì„ ìš”ê´´ë¡œì„œ êµ¬í˜„í™”í•œë‹¤.\n";
 				break;
 			default:
-				text_ += "ÀÌ ¹ö±× ºÎÀûÀº ¸Úµµ ¾ø°í È¿°úµµ ¾ø´Ù.\n";
+				text_ += "ì´ ë²„ê·¸ ë¶€ì ì€ ë©‹ë„ ì—†ê³  íš¨ê³¼ë„ ì—†ë‹¤.\n";
 				break;
 			}
 		}
 		else
 		{
-			text_ += "ÀÌ ºÎÀûÀº ¾ÆÁ÷ ¹«½¼ ÈûÀ» °¡Áö°í ÀÖ´ÂÁö ¾ÆÁ÷ ¾Ë ¼ö °¡ ¾ø´Ù.\n";
-			text_ += "Âø¿ëÇÏ¸é ¹«½¼ ÈûÀ» ¼û±â°í ÀÖ´ÂÁö ¾Ë ¼ö ÀÖÀ» °Í °°´Ù.\n";
+			text_ += "ì´ ë¶€ì ì€ ì•„ì§ ë¬´ìŠ¨ í˜ì„ ê°€ì§€ê³  ìˆëŠ”ì§€ ì•„ì§ ì•Œ ìˆ˜ ê°€ ì—†ë‹¤.\n";
+			text_ += "ì°©ìš©í•˜ë©´ ë¬´ìŠ¨ í˜ì„ ìˆ¨ê¸°ê³  ìˆëŠ”ì§€ ì•Œ ìˆ˜ ìˆì„ ê²ƒ ê°™ë‹¤.\n";
 		}		
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_NECK] != it)
 			{
-				use_text_ += "(w)ÀåÂø, ";
+				use_text_ += "(w)ì¥ì°©, ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)ÇØÁ¦, ";
+				use_text_ += "(u)í•´ì œ, ";
 				if (key) key->insert('u');
 			}
 		}
@@ -1261,103 +1261,103 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case RGT_STR:
-				text_ += "¼Õ¿¡ ³¤ Âø¿ëÀÚÀÇ ±Ù·ÂÀ» °­È­½ÃÅ°°Å³ª ¾àÈ­½ÃÅ°´Â ÈûÀÇ ¹İÁö.\n";
-				text_ += "±× Áõ°¨·®Àº ¹İÁöÀÇ ¼öÄ¡¿¡ ´Ş·ÁÀÖ´Ù.\n";
+				text_ += "ì†ì— ë‚€ ì°©ìš©ìì˜ ê·¼ë ¥ì„ ê°•í™”ì‹œí‚¤ê±°ë‚˜ ì•½í™”ì‹œí‚¤ëŠ” í˜ì˜ ë°˜ì§€.\n";
+				text_ += "ê·¸ ì¦ê°ëŸ‰ì€ ë°˜ì§€ì˜ ìˆ˜ì¹˜ì— ë‹¬ë ¤ìˆë‹¤.\n";
 				break;
 			case RGT_DEX:
-				text_ += "¼Õ¿¡ ³¤ Âø¿ëÀÚÀÇ ¹ÎÃ¸¼ºÀ» °­È­½ÃÅ°°Å³ª ¾àÈ­½ÃÅ°´Â ¹ÎÃ¸ÀÇ ¹İÁö.\n";
-				text_ += "±× Áõ°¨·®Àº ¹İÁöÀÇ ¼öÄ¡¿¡ ´Ş·ÁÀÖ´Ù.\n";
+				text_ += "ì†ì— ë‚€ ì°©ìš©ìì˜ ë¯¼ì²©ì„±ì„ ê°•í™”ì‹œí‚¤ê±°ë‚˜ ì•½í™”ì‹œí‚¤ëŠ” ë¯¼ì²©ì˜ ë°˜ì§€.\n";
+				text_ += "ê·¸ ì¦ê°ëŸ‰ì€ ë°˜ì§€ì˜ ìˆ˜ì¹˜ì— ë‹¬ë ¤ìˆë‹¤.\n";
 				break;
 			case RGT_INT:
-				text_ += "¼Õ¿¡ ³¤ Âø¿ëÀÚÀÇ Áö´ÉÀ» °­È­½ÃÅ°°Å³ª ¾àÈ­½ÃÅ°´Â Áö´ÉÀÇ ¹İÁö.\n";
-				text_ += "±× Áõ°¨·®Àº ¹İÁöÀÇ ¼öÄ¡¿¡ ´Ş·ÁÀÖ´Ù.\n";
+				text_ += "ì†ì— ë‚€ ì°©ìš©ìì˜ ì§€ëŠ¥ì„ ê°•í™”ì‹œí‚¤ê±°ë‚˜ ì•½í™”ì‹œí‚¤ëŠ” ì§€ëŠ¥ì˜ ë°˜ì§€.\n";
+				text_ += "ê·¸ ì¦ê°ëŸ‰ì€ ë°˜ì§€ì˜ ìˆ˜ì¹˜ì— ë‹¬ë ¤ìˆë‹¤.\n";
 				break;
 			case RGT_HUNGRY:
-				text_ += "Âø¿ëÇÑ ÀÚÀÇ ÀÚ¿¬ÀûÀÎ PÅÛ ¼Ò¸ğ°¡ ºü¸£°Ô µÇ´Â ¹è°íÇÄÀÇ ¹İÁö.\n";
+				text_ += "ì°©ìš©í•œ ìì˜ ìì—°ì ì¸ Pí…œ ì†Œëª¨ê°€ ë¹ ë¥´ê²Œ ë˜ëŠ” ë°°ê³ í””ì˜ ë°˜ì§€.\n";
 				break;
 			case RGT_FULL:
-				text_ += "¹Ì³ë¸®ÄÚ´ÔÀÇ Ãàº¹ÀÌ ´ã°ÜÀÖ´Â ¹İÁö·Î Âø¿ëÇÑ ÀÚ°¡ Æ÷¸¸°¨À» ´À³¢°Ô µÈ´Ù.\n";
-				text_ += "½ÅÁø´ë»ç°¡ ´À·ÁÁ®¼­ Âø¿ëÀÚ´Â ÀÚ¿¬ÀûÀÎ PÅÛ ¼Ò¸ğ°¡ ´À·ÁÁö°Ô µÈ´Ù.\n";
-				text_ += "°¡¼ÓÀÌ³ª Åõ¸í»óÅÂ¿¡¼­ÀÇ P¼Ò¸ğ °¡¼Óµµ ÁÙ¿©ÁØ´Ù.\n";
+				text_ += "ë¯¸ë…¸ë¦¬ì½”ë‹˜ì˜ ì¶•ë³µì´ ë‹´ê²¨ìˆëŠ” ë°˜ì§€ë¡œ ì°©ìš©í•œ ìê°€ í¬ë§Œê°ì„ ëŠë¼ê²Œ ëœë‹¤.\n";
+				text_ += "ì‹ ì§„ëŒ€ì‚¬ê°€ ëŠë ¤ì ¸ì„œ ì°©ìš©ìëŠ” ìì—°ì ì¸ Pí…œ ì†Œëª¨ê°€ ëŠë ¤ì§€ê²Œ ëœë‹¤.\n";
+				text_ += "ê°€ì†ì´ë‚˜ íˆ¬ëª…ìƒíƒœì—ì„œì˜ Pì†Œëª¨ ê°€ì†ë„ ì¤„ì—¬ì¤€ë‹¤.\n";
 				break;
 			case RGT_TELEPORT:
-				text_ += "Âø¿ëÀÚ¿¡°Ô °ø°£ÀÌµ¿ÀÇ ´É·ÂÀ» ºÎ¿©ÇÏ´Â ¹İÁö.\n";
-				text_ += "±× ºÎÀÛ¿ëÀ¸·Î ³¢°í ÀÖ´Â µ¿¾È ¹«ÀÛÀ§ÀÇ °ø°£ÀÌµ¿ÀÌ °£°£È÷ ¹ß»ıÇÏ°ÔµÈ´Ù.\n";
+				text_ += "ì°©ìš©ìì—ê²Œ ê³µê°„ì´ë™ì˜ ëŠ¥ë ¥ì„ ë¶€ì—¬í•˜ëŠ” ë°˜ì§€.\n";
+				text_ += "ê·¸ ë¶€ì‘ìš©ìœ¼ë¡œ ë¼ê³  ìˆëŠ” ë™ì•ˆ ë¬´ì‘ìœ„ì˜ ê³µê°„ì´ë™ì´ ê°„ê°„íˆ ë°œìƒí•˜ê²Œëœë‹¤.\n";
 				break;
 			case RGT_POISON_RESIS:
-				text_ += "µ¶¿¡ ´ëÇÑ ³»¼ºÀ» ¾ò´Â ¹İÁö. °ÅÀÇ ¸ğµç µ¶¿¡ ³»¼ºÀÌ »ı±ä´Ù.\n";
+				text_ += "ë…ì— ëŒ€í•œ ë‚´ì„±ì„ ì–»ëŠ” ë°˜ì§€. ê±°ì˜ ëª¨ë“  ë…ì— ë‚´ì„±ì´ ìƒê¸´ë‹¤.\n";
 				break;
 			case RGT_FIRE_RESIS:
-				text_ += "È­¿°¿¡ ´ëÇÑ ÀúÇ×À» ¾ò´Â ¹İÁö. ÃÑ 3´Ü°è±îÁö ÁßÃ¸ÀúÇ×À» ¾òÀ» ¼ö ÀÖ´Ù.\n";
+				text_ += "í™”ì—¼ì— ëŒ€í•œ ì €í•­ì„ ì–»ëŠ” ë°˜ì§€. ì´ 3ë‹¨ê³„ê¹Œì§€ ì¤‘ì²©ì €í•­ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case RGT_ICE_RESIS:
-				text_ += "³Ã±â¿¡ ´ëÇÑ ÀúÇ×À» ¾ò´Â ¹İÁö. ÃÑ 3´Ü°è±îÁö ÁßÃ¸ÀúÇ×À» ¾òÀ» ¼ö ÀÖ´Ù.\n";
+				text_ += "ëƒ‰ê¸°ì— ëŒ€í•œ ì €í•­ì„ ì–»ëŠ” ë°˜ì§€. ì´ 3ë‹¨ê³„ê¹Œì§€ ì¤‘ì²©ì €í•­ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.\n";
 				break;
 			case RGT_SEE_INVISIBLE:
-				text_ += "Âø¿ëÇÏ°í ÀÖÀ¸¸é Åõ¸íÇÑ ÀûÀ» º¼ ¼ö ÀÖ°Ô µÈ´Ù.\n";
+				text_ += "ì°©ìš©í•˜ê³  ìˆìœ¼ë©´ íˆ¬ëª…í•œ ì ì„ ë³¼ ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
 				break;
 				/*case RGT_GRAZE:
-					text_ += "±×·¹ÀÌÁî¸¦ »ç¿ëÇÒ ¼ö ÀÖ´Â ¹İÁö. Âø¿ëÇÏ¸é ´É·Â»ç¿ë¿¡¼­ ±×·¹ÀÌÁî¹ßµ¿ÀÌ »ı±ä´Ù.\n";
-					text_ += "±×·¹ÀÌÁî»óÅÂ¿¡¼­´Â ¸ğµç ¿ø°Å¸® °ø°İÀ» ÀÏÁ¤È®·ü·Î ÇÇÇÒ ¼ö ÀÖ°Ô µÈ´Ù.\n";
-					text_ += "»ç¿ë¿¡´Â ¹ßµ¿½ºÅ³ÀÌ ÇÊ¿äÇÏ¸ç P°¡ ¾à°£ ¼Ò¸ğµÈ´Ù.\n";
+					text_ += "ê·¸ë ˆì´ì¦ˆë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë°˜ì§€. ì°©ìš©í•˜ë©´ ëŠ¥ë ¥ì‚¬ìš©ì—ì„œ ê·¸ë ˆì´ì¦ˆë°œë™ì´ ìƒê¸´ë‹¤.\n";
+					text_ += "ê·¸ë ˆì´ì¦ˆìƒíƒœì—ì„œëŠ” ëª¨ë“  ì›ê±°ë¦¬ ê³µê²©ì„ ì¼ì •í™•ë¥ ë¡œ í”¼í•  ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
+					text_ += "ì‚¬ìš©ì—ëŠ” ë°œë™ìŠ¤í‚¬ì´ í•„ìš”í•˜ë©° Pê°€ ì•½ê°„ ì†Œëª¨ëœë‹¤.\n";
 					break;*/
 			case RGT_LEVITATION:
-				text_ += "ºñÇàÀ» »ç¿ëÇÒ ¼ö ÀÖ´Â ¹İÁö. Âø¿ëÇÏ¸é ´É·Â»ç¿ë¿¡¼­ ºñÇà¹ßµ¿ÀÌ »ı±ä´Ù.\n";
-				text_ += "ºñÇà»óÅÂ¿¡¼­´Â ±íÀº¹°µûÀ§¸¦ °Ç³Î ¼ö ÀÖ°ÔµÈ´Ù.\n";
-				text_ += "»ç¿ë¿¡´Â ¹ßµ¿½ºÅ³ÀÌ ÇÊ¿äÇÏ¸ç P°¡ ¾à°£ ¼Ò¸ğµÈ´Ù.\n";
+				text_ += "ë¹„í–‰ì„ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë°˜ì§€. ì°©ìš©í•˜ë©´ ëŠ¥ë ¥ì‚¬ìš©ì—ì„œ ë¹„í–‰ë°œë™ì´ ìƒê¸´ë‹¤.\n";
+				text_ += "ë¹„í–‰ìƒíƒœì—ì„œëŠ” ê¹Šì€ë¬¼ë”°ìœ„ë¥¼ ê±´ë„ ìˆ˜ ìˆê²Œëœë‹¤.\n";
+				text_ += "ì‚¬ìš©ì—ëŠ” ë°œë™ìŠ¤í‚¬ì´ í•„ìš”í•˜ë©° Pê°€ ì•½ê°„ ì†Œëª¨ëœë‹¤.\n";
 				break;
 			case RGT_INVISIBLE:
-				text_ += "Åõ¸íÀ» »ç¿ëÇÒ ¼ö ÀÖ´Â ¹İÁö. Âø¿ëÇÏ¸é ´É·Â»ç¿ë¿¡¼­ Åõ¸í¹ßµ¿ÀÌ »ı±ä´Ù.\n";
-				text_ += "Åõ¸í»óÅÂ¿¡¼­´Â Àû¿¡°Ô µéÅ³ È®·üÀÌ ¸Å¿ì ³·¾ÆÁö°Ô µÈ´Ù.\n";
-				text_ += "Åõ¸í»óÅÂ¿¡¼­´Â PÀÇ ¼Ò¸ğ·®ÀÌ °¡¼ÓµÇ´Â ´ÜÁ¡ÀÌ ÀÖ´Ù.\n";
-				text_ += "»ç¿ë¿¡´Â ¹ßµ¿½ºÅ³ÀÌ ÇÊ¿äÇÏ¸ç P°¡ ¾à°£ ¼Ò¸ğµÈ´Ù.\n";
+				text_ += "íˆ¬ëª…ì„ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë°˜ì§€. ì°©ìš©í•˜ë©´ ëŠ¥ë ¥ì‚¬ìš©ì—ì„œ íˆ¬ëª…ë°œë™ì´ ìƒê¸´ë‹¤.\n";
+				text_ += "íˆ¬ëª…ìƒíƒœì—ì„œëŠ” ì ì—ê²Œ ë“¤í‚¬ í™•ë¥ ì´ ë§¤ìš° ë‚®ì•„ì§€ê²Œ ëœë‹¤.\n";
+				text_ += "íˆ¬ëª…ìƒíƒœì—ì„œëŠ” Pì˜ ì†Œëª¨ëŸ‰ì´ ê°€ì†ë˜ëŠ” ë‹¨ì ì´ ìˆë‹¤.\n";
+				text_ += "ì‚¬ìš©ì—ëŠ” ë°œë™ìŠ¤í‚¬ì´ í•„ìš”í•˜ë©° Pê°€ ì•½ê°„ ì†Œëª¨ëœë‹¤.\n";
 				break;
 			case RGT_MANA:
-				text_ += "Âø¿ë½Ã ÃÖ´ë¸¶³ª°¡ Áõ°¡ÇÏ´Â ¹İÁö.\n";
-				text_ += "Âø¿ëÇØÁ¦½Ã ¿ø·¡´ë·Î µ¹¾Æ¿Â´Ù.\n";
+				text_ += "ì°©ìš©ì‹œ ìµœëŒ€ë§ˆë‚˜ê°€ ì¦ê°€í•˜ëŠ” ë°˜ì§€.\n";
+				text_ += "ì°©ìš©í•´ì œì‹œ ì›ë˜ëŒ€ë¡œ ëŒì•„ì˜¨ë‹¤.\n";
 				break;
 			case RGT_MAGACIAN:
-				text_ += "Âø¿ë½Ã ¸¶¹ı¼º°ø·ü°ú ¸¶¹ıÆÄ¿ö¸¦ »ó½Â½ÃÅ°´Â ¹İÁö.\n";
+				text_ += "ì°©ìš©ì‹œ ë§ˆë²•ì„±ê³µë¥ ê³¼ ë§ˆë²•íŒŒì›Œë¥¼ ìƒìŠ¹ì‹œí‚¤ëŠ” ë°˜ì§€.\n";
 				break;
 			case RGT_AC:
-				text_ += "Âø¿ë½Ã ¹æ¾î°¡ Áõ°¨ÇÏ´Â ¹İÁö.\n";
-				text_ += "Áõ°¡°¨ µÇ´Â ¼öÄ¡´Â ¹İÁö¿¡ ÀûÇôÁø ¼ıÀÚ¿Í °°´Ù.\n";
+				text_ += "ì°©ìš©ì‹œ ë°©ì–´ê°€ ì¦ê°í•˜ëŠ” ë°˜ì§€.\n";
+				text_ += "ì¦ê°€ê° ë˜ëŠ” ìˆ˜ì¹˜ëŠ” ë°˜ì§€ì— ì í˜€ì§„ ìˆ«ìì™€ ê°™ë‹¤.\n";
 				break;
 			case RGT_EV:
-				text_ += "Âø¿ë½Ã È¸ÇÇ°¡ Áõ°¡ÇÏ´Â ¹İÁö.\n";
-				text_ += "Áõ°¨ µÇ´Â ¼öÄ¡´Â ¹İÁö¿¡ ÀûÇôÁø ¼ıÀÚ¿Í °°´Ù.\n";
+				text_ += "ì°©ìš©ì‹œ íšŒí”¼ê°€ ì¦ê°€í•˜ëŠ” ë°˜ì§€.\n";
+				text_ += "ì¦ê° ë˜ëŠ” ìˆ˜ì¹˜ëŠ” ë°˜ì§€ì— ì í˜€ì§„ ìˆ«ìì™€ ê°™ë‹¤.\n";
 				break;
 			case RGT_CONFUSE_RESIS:
-				text_ += "Âø¿ë½Ã È¥¶õ°ú ±¤±â¿¡ ÀúÇ×ÀÌ »ı±â´Â ¹İÁö.\n";
+				text_ += "ì°©ìš©ì‹œ í˜¼ë€ê³¼ ê´‘ê¸°ì— ì €í•­ì´ ìƒê¸°ëŠ” ë°˜ì§€.\n";
 				break;
 			case RGT_ELEC_RESIS:
-				text_ += "Âø¿ë½Ã Àü±âÀúÇ×ÀÌ ¿Ã¶ó°¡´Â ¹İÁö.\n";
-				text_ += "¿Ïº®ÇÏ°Ô ¸·¾ÆÁÖÁø ¾ÊÁö¸¸ »ó´çÇÑ µ¥¹ÌÁö¸¦ ÁÙ¿©ÁØ´Ù.\n";
+				text_ += "ì°©ìš©ì‹œ ì „ê¸°ì €í•­ì´ ì˜¬ë¼ê°€ëŠ” ë°˜ì§€.\n";
+				text_ += "ì™„ë²½í•˜ê²Œ ë§‰ì•„ì£¼ì§„ ì•Šì§€ë§Œ ìƒë‹¹í•œ ë°ë¯¸ì§€ë¥¼ ì¤„ì—¬ì¤€ë‹¤.\n";
 				break;
 			case RGT_MAGIC_RESIS:
-				text_ += "Âø¿ë½Ã ¸¶¹ıÀúÇ×ÀÌ ¿Ã¶ó°¡´Â ¹İÁö.\n";
-				text_ += "¸¶¹ıÀúÇ×Àº µ¥¹ÌÁö¸¦ ÁÙ¿©ÁÖÁø ¸øÇÏÁö¸¸ µğ¹öÇÁ°°Àº ¸¶¹ıÀ¸·ÎºÎÅÍ º¸È£ÇØÁØ´Ù.\n";
+				text_ += "ì°©ìš©ì‹œ ë§ˆë²•ì €í•­ì´ ì˜¬ë¼ê°€ëŠ” ë°˜ì§€.\n";
+				text_ += "ë§ˆë²•ì €í•­ì€ ë°ë¯¸ì§€ë¥¼ ì¤„ì—¬ì£¼ì§„ ëª»í•˜ì§€ë§Œ ë””ë²„í”„ê°™ì€ ë§ˆë²•ìœ¼ë¡œë¶€í„° ë³´í˜¸í•´ì¤€ë‹¤.\n";
 				break;
 			default:
-				text_ += "¹ö±×ÀÇ ÈûÀÌ ±êµç ¹İÁö´Ù.\n";
+				text_ += "ë²„ê·¸ì˜ í˜ì´ ê¹ƒë“  ë°˜ì§€ë‹¤.\n";
 				break;
 			}
 		}
 		else
 		{
-			text_ += "¹ÌÁöÀÇ ÈûÀÌ ´ã°ÜÀÖ´Â ¹İÁö.\n";
-			text_ += "Âø¿ë½Ã ¹Ù·Î ±× ÈûÀ» ¾Ë ¼ö ÀÖ´Â ¹İÁöµµ ÀÖ´Â ¹İ¸é. ´«Ä¡Ã¤±â Èûµç ¹İÁöµµ ÀÖ´Ù.\n";
+			text_ += "ë¯¸ì§€ì˜ í˜ì´ ë‹´ê²¨ìˆëŠ” ë°˜ì§€.\n";
+			text_ += "ì°©ìš©ì‹œ ë°”ë¡œ ê·¸ í˜ì„ ì•Œ ìˆ˜ ìˆëŠ” ë°˜ì§€ë„ ìˆëŠ” ë°˜ë©´. ëˆˆì¹˜ì±„ê¸° í˜ë“  ë°˜ì§€ë„ ìˆë‹¤.\n";
 		}
 		if (can_use_)
 		{
 			if (you.equipment[ET_RIGHT] != it && you.equipment[ET_LEFT] != it)
 			{
-				use_text_ += "(w)ÀåÂø, ";
+				use_text_ += "(w)ì¥ì°©, ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)ÇØÁ¦, ";
+				use_text_ += "(u)í•´ì œ, ";
 				if (key) key->insert('u');
 			}
 		}
@@ -1371,7 +1371,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->identify)
 		{
 			char temp[100], sp_char = 'a';
-			sprintf_s(temp,100, "%-34s%-30s%s\n", "¸¶¹ıÀÌ¸§", "ÇĞÆÄ", "·¹º§");
+			sprintf_s(temp,100, "%-34s%-30s%s\n", "ë§ˆë²•ì´ë¦„", "í•™íŒŒ", "ë ˆë²¨");
 			text_ += temp;
 			for (int i = 0; i < 8; i++)
 			{
@@ -1390,89 +1390,89 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value1)
 		{
 		case EVK_PAGODA:
-			text_ += "´©±º°¡°¡ ÀÒ¾î¹ö¸° º¸Å¾. °­·ÂÇÑ ÈûÀÌ ´ã°ÜÀÖ´Ù.\n";
-			text_ += "¹ßµ¿ÇÏ°ÔµÇ¸é ¾È¿¡ ¸ğ¿©ÀÖ´ø ÈûÀÌ ·¹ÀÌÀúÀÇ ÇüÅÂ·Î ¹ß»çµÈ´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é µ¥¹ÌÁö°¡ ³ô¾ÆÁø´Ù.\n";
+			text_ += "ëˆ„êµ°ê°€ê°€ ìƒì–´ë²„ë¦° ë³´íƒ‘. ê°•ë ¥í•œ í˜ì´ ë‹´ê²¨ìˆë‹¤.\n";
+			text_ += "ë°œë™í•˜ê²Œë˜ë©´ ì•ˆì— ëª¨ì—¬ìˆë˜ í˜ì´ ë ˆì´ì €ì˜ í˜•íƒœë¡œ ë°œì‚¬ëœë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ ë°ë¯¸ì§€ê°€ ë†’ì•„ì§„ë‹¤.\n";
 			break;
 		case EVK_AIR_SCROLL:
-			text_ += "¾îµò°¡ÀÇ ÁÖÁö½ÂÀÌ ¾²°í ÀÖ´ø °æÀü. ¸¶¹ıÀÇ ÈûÀÌ ´ã°Ü ÀÖ´Ù.\n";
-			text_ += "¹ßµ¿ÇÏ°ÔµÇ¸é ÆÄ¿ö¸¦ ´ë°¡·Î »ç¿ëÀÚÀÇ ¿µ·ÂÀ» ¼ø½Ä°£¿¡ È¸º¹½ÃÄÑÁØ´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é È¸º¹µÇ´Â ¿µ·ÂÀÌ ¸¹¾ÆÁø´Ù.\n";
+			text_ += "ì–´ë”˜ê°€ì˜ ì£¼ì§€ìŠ¹ì´ ì“°ê³  ìˆë˜ ê²½ì „. ë§ˆë²•ì˜ í˜ì´ ë‹´ê²¨ ìˆë‹¤.\n";
+			text_ += "ë°œë™í•˜ê²Œë˜ë©´ íŒŒì›Œë¥¼ ëŒ€ê°€ë¡œ ì‚¬ìš©ìì˜ ì˜ë ¥ì„ ìˆœì‹ê°„ì— íšŒë³µì‹œì¼œì¤€ë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ íšŒë³µë˜ëŠ” ì˜ë ¥ì´ ë§ì•„ì§„ë‹¤.\n";
 			break;
 		case EVK_DREAM_SOUL:
-			text_ += "²ŞÀÇ ¼¼°è¿¡¼­ ÇØ¸Ş°íÀÖ´ø ¿µÈ¥ÀÌ´Ù.\n";
-			text_ += "»ç¿ëÇÏ¸é ²ŞÀÇ ¼¼°è·ÎºÎÅÍ È¯»óÀÇ ½ÇÃ¼È­°¡ Àá½Ãµ¿¾È °¡´ÉÇÏ´Ù.\n";
-			text_ += "¾îµò°¡ÀÇ Áö¿ª¿¡ ÀÖ´ø ¸ó½ºÅÍ ¹«¸®µéÀÌ ¾Æ±ºÀÌ µÇ¾î ¼ÒÈ¯µÈ´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é ´õ¿í °­ÇÑ ¾Æ±ºÀÌ ¼ÒÈ¯µÈ´Ù.\n";
+			text_ += "ê¿ˆì˜ ì„¸ê³„ì—ì„œ í•´ë©”ê³ ìˆë˜ ì˜í˜¼ì´ë‹¤.\n";
+			text_ += "ì‚¬ìš©í•˜ë©´ ê¿ˆì˜ ì„¸ê³„ë¡œë¶€í„° í™˜ìƒì˜ ì‹¤ì²´í™”ê°€ ì ì‹œë™ì•ˆ ê°€ëŠ¥í•˜ë‹¤.\n";
+			text_ += "ì–´ë”˜ê°€ì˜ ì§€ì—­ì— ìˆë˜ ëª¬ìŠ¤í„° ë¬´ë¦¬ë“¤ì´ ì•„êµ°ì´ ë˜ì–´ ì†Œí™˜ëœë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ ë”ìš± ê°•í•œ ì•„êµ°ì´ ì†Œí™˜ëœë‹¤.\n";
 			break;
 		case EVK_BOMB:
-			text_ += "¾ÆÁÖ °Å´ëÇÑ ÆøÅº. ¸¶¹ıÀÇ ÈûÀ¸·Î Á¡È­°¡ °¡´ÉÇÏ´Ù.\n";
-			text_ += "¹ßµ¿ÇÏ°ÔµÇ¸é ÆøÅºÀÌ Á¡È­µÇ¾î ¸ñÇ¥ÁöÁ¡À¸·Î ´øÁú ¼ö ÀÖ´Ù.\n";
-			text_ += "´øÁø ÆøÅºÀº ¹Ù·Î ÅÍÁöÁø¾ÊÁö¸¸ ¸î ÅÏÀÌ Áö³ª¸é Å« Æø¹ßÀÌ ÀÏ¾î³­´Ù.\n";
-			text_ += "ÆøÅºÀº ÇÑ Ä­À» Â÷ÁöÇÏ¸ç Àû¿¡ ÀÇÇØ ÆÄ±«µÇ¸é ÆøÆÄÇÏÁö¾Ê°í ÆÄ±«µÇ¾î¹ö¸°´Ù.\n";
-			text_ += "¹ßµ¿ÅÛÀÌ¹Ç·Î »ç¿ëÇØµµ ¼Ò¸ğµÇÁø¾Ê´Â´Ù. ½ÅºñÇÑ ¸¶¹ıÀÇ ÈûÀÌ ÀÛ¿ëÇÏ´Â °Í °°´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é µ¥¹ÌÁö¿Í ÆøÅºÀÇ Ã¼·ÂÀÌ ³ô¾ÆÁø´Ù.\n";
+			text_ += "ì•„ì£¼ ê±°ëŒ€í•œ í­íƒ„. ë§ˆë²•ì˜ í˜ìœ¼ë¡œ ì í™”ê°€ ê°€ëŠ¥í•˜ë‹¤.\n";
+			text_ += "ë°œë™í•˜ê²Œë˜ë©´ í­íƒ„ì´ ì í™”ë˜ì–´ ëª©í‘œì§€ì ìœ¼ë¡œ ë˜ì§ˆ ìˆ˜ ìˆë‹¤.\n";
+			text_ += "ë˜ì§„ í­íƒ„ì€ ë°”ë¡œ í„°ì§€ì§„ì•Šì§€ë§Œ ëª‡ í„´ì´ ì§€ë‚˜ë©´ í° í­ë°œì´ ì¼ì–´ë‚œë‹¤.\n";
+			text_ += "í­íƒ„ì€ í•œ ì¹¸ì„ ì°¨ì§€í•˜ë©° ì ì— ì˜í•´ íŒŒê´´ë˜ë©´ í­íŒŒí•˜ì§€ì•Šê³  íŒŒê´´ë˜ì–´ë²„ë¦°ë‹¤.\n";
+			text_ += "ë°œë™í…œì´ë¯€ë¡œ ì‚¬ìš©í•´ë„ ì†Œëª¨ë˜ì§„ì•ŠëŠ”ë‹¤. ì‹ ë¹„í•œ ë§ˆë²•ì˜ í˜ì´ ì‘ìš©í•˜ëŠ” ê²ƒ ê°™ë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ ë°ë¯¸ì§€ì™€ í­íƒ„ì˜ ì²´ë ¥ì´ ë†’ì•„ì§„ë‹¤.\n";
 			break;
 		case EVK_GHOST_BALL:
-			text_ += "»ç¶÷¾øÀÌ µîºÒ¸¸ ¶°´Ù´Ñ´Ù´Â ±«´ãÀÇ ÇÏ³ª·Î À¯·ÉÀÌ µé°í´Ù´Ñ´Ù´Â µîºÒÀÌ´Ù.\n";
-			text_ += "¹ßµ¿ÇÏ¿© ¼Õ¿¡ µé¸é ¾Æ¹«¿¡°Ôµµ º¸ÀÌÁö¾Ê°í °ø°İ´çÇÏÁö¾Ê´Â À¯·ÉÈ­»óÅÂ°¡ µÈ´Ù.\n";
-			text_ += "¹ßµ¿½Ã ÀÚ½ÅÀÇ ÇöÀç ³²Àº Ã¼·ÂÀÌ 30%~70%±îÁö °¨¼ÒµÇ°í ¹ßµ¿µÈ´Ù.\n";
-			text_ += "¹ßµ¿Áß¿£ ´©±¸¿¡°Ôµµ °ø°İÀ» ¹ŞÁö¾Ê´Â ¹«Àû»óÅÂÁö¸¸ Ã¼·ÂÀº È¸º¹µÇÁö¾Ê°í ÆÄ¿ö°¡ ºü¸£°Ô ¶³¾îÁø´Ù.\n";
-			text_ += "ÇÑ¹ø ´õ ¹ßµ¿ÇØ¼­ Á¾·áÇÏ°Å³ª ÆÄ¿ö°¡ 0ÀÌµÇ¸é ÀÚµ¿À¸·Î Á¾·áµÈ´Ù.\n";
-			text_ += "À¯·ÉÈ­»óÅÂ¿¡¼± ÀÌµ¿¸¸ °¡´ÉÇÏ¿© ¾ÆÀÌÅÛ, ¸¶¹ı, °ø°İµîÀÇ ¸ğµç Çàµ¿ÀÌ ºÒ°¡´ÉÇÏ´Ù.\n";
-			text_ += "¸¸¾à ´ç½ÅÀÌ ¾î¶² ÀÌÀ¯·Î ÆÄ¿ö°¡ ³·¾ÆÁöÁö ¾Ê´Â´Ù¸é ¿ÀÄí¸®ÃİÄ£Àº ´Ù¸¥ ¹«¾ğ°¡¸¦ ´ë½Å °¡Á®°¥ °ÍÀÌ´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é ¹ßµ¿½Ã °¨¼ÒµÇ´Â Ã¼·Â°ú ¹ßµ¿Áß ¶³¾îÁö´Â ÆÄ¿ö¼Ò¸ğ°¡ ³·¾ÆÁø´Ù.\n";
+			text_ += "ì‚¬ëŒì—†ì´ ë“±ë¶ˆë§Œ ë– ë‹¤ë‹Œë‹¤ëŠ” ê´´ë‹´ì˜ í•˜ë‚˜ë¡œ ìœ ë ¹ì´ ë“¤ê³ ë‹¤ë‹Œë‹¤ëŠ” ë“±ë¶ˆì´ë‹¤.\n";
+			text_ += "ë°œë™í•˜ì—¬ ì†ì— ë“¤ë©´ ì•„ë¬´ì—ê²Œë„ ë³´ì´ì§€ì•Šê³  ê³µê²©ë‹¹í•˜ì§€ì•ŠëŠ” ìœ ë ¹í™”ìƒíƒœê°€ ëœë‹¤.\n";
+			text_ += "ë°œë™ì‹œ ìì‹ ì˜ í˜„ì¬ ë‚¨ì€ ì²´ë ¥ì´ 30%~70%ê¹Œì§€ ê°ì†Œë˜ê³  ë°œë™ëœë‹¤.\n";
+			text_ += "ë°œë™ì¤‘ì—” ëˆ„êµ¬ì—ê²Œë„ ê³µê²©ì„ ë°›ì§€ì•ŠëŠ” ë¬´ì ìƒíƒœì§€ë§Œ ì²´ë ¥ì€ íšŒë³µë˜ì§€ì•Šê³  íŒŒì›Œê°€ ë¹ ë¥´ê²Œ ë–¨ì–´ì§„ë‹¤.\n";
+			text_ += "í•œë²ˆ ë” ë°œë™í•´ì„œ ì¢…ë£Œí•˜ê±°ë‚˜ íŒŒì›Œê°€ 0ì´ë˜ë©´ ìë™ìœ¼ë¡œ ì¢…ë£Œëœë‹¤.\n";
+			text_ += "ìœ ë ¹í™”ìƒíƒœì—ì„  ì´ë™ë§Œ ê°€ëŠ¥í•˜ì—¬ ì•„ì´í…œ, ë§ˆë²•, ê³µê²©ë“±ì˜ ëª¨ë“  í–‰ë™ì´ ë¶ˆê°€ëŠ¥í•˜ë‹¤.\n";
+			text_ += "ë§Œì•½ ë‹¹ì‹ ì´ ì–´ë–¤ ì´ìœ ë¡œ íŒŒì›Œê°€ ë‚®ì•„ì§€ì§€ ì•ŠëŠ”ë‹¤ë©´ ì˜¤ì¿ ë¦¬ìµ¸ì¹œì€ ë‹¤ë¥¸ ë¬´ì–¸ê°€ë¥¼ ëŒ€ì‹  ê°€ì ¸ê°ˆ ê²ƒì´ë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ ë°œë™ì‹œ ê°ì†Œë˜ëŠ” ì²´ë ¥ê³¼ ë°œë™ì¤‘ ë–¨ì–´ì§€ëŠ” íŒŒì›Œì†Œëª¨ê°€ ë‚®ì•„ì§„ë‹¤.\n";
 			break;
 		case EVK_SKY_TORPEDO:
-			text_ += "Ä±ÆÄ°¡ ¹°¹Û¿¡¼­µµ ½ò ¼ö ÀÖµµ·Ï °³·®ÇÑ ¾î·Ú.\n";
-			text_ += "Àß »ı°¢ÇØº¸¸é ¹Ì»çÀÏ°ú º°¹İ ´Ù¸¦°Ô ¾ø´Ù.\n";
-			text_ += "¹ßµ¿ ½ºÅ³ÀÌ ³ô¾ÆÁö¸é µ¥¹ÌÁö°¡ ³ô¾ÆÁø´Ù.\n";
+			text_ += "ìº‡íŒŒê°€ ë¬¼ë°–ì—ì„œë„ ì  ìˆ˜ ìˆë„ë¡ ê°œëŸ‰í•œ ì–´ë¢°.\n";
+			text_ += "ì˜ ìƒê°í•´ë³´ë©´ ë¯¸ì‚¬ì¼ê³¼ ë³„ë°˜ ë‹¤ë¥¼ê²Œ ì—†ë‹¤.\n";
+			text_ += "ë°œë™ ìŠ¤í‚¬ì´ ë†’ì•„ì§€ë©´ ë°ë¯¸ì§€ê°€ ë†’ì•„ì§„ë‹¤.\n";
 			break;
 		case EVK_MAGIC_HAMMER:
-			text_ += "¼ÒÀÎÁ·ÀÌ ´Ù·é´Ù°í ÇÏ´Â ¿ä¼ú¸ÁÄ¡. º»·¡ ÁÖÀÎÀº ¿À´Ï¶ó°í ÇÑ´Ù.\n";
-			text_ += "»ç¿ëÇÏ¸é ½Ç·Î ¾öÃ»³­ È¿°úµéÀ» ¿øÇÏ´Â´ë·Î ÆÄ¿ö 1Ä­¸¸À¸·Î »ç¿ëÇÒ ¼ö ÀÖ°Ô µÈ´Ù.\n";
-			text_ += "´Ü, ¿ä¼ú¸ÁÄ¡¸¦ »ç¿ëÇÏ´Â°ÍÀº Å« À§ÇèºÎ´ãÀÌ µû¸£°ÔµÇ¸ç »ç¿ëÀÚ¸¦ ÀÚ¸ê½ÃÅ²´Ù°í ÇÑ´Ù.\n";
-			text_ += "¿ä¼ú¸ÁÄ¡¸¦ »ç¿ë½Ã 10%ÀÇ È®·ü·Î Á¤¹İ´ëÀÇ È¿°ú°¡ ¹ßÈÖµÉ °¡´É¼ºÀÌ ÀÖ´Ù.\n";
+			text_ += "ì†Œì¸ì¡±ì´ ë‹¤ë£¬ë‹¤ê³  í•˜ëŠ” ìš”ìˆ ë§ì¹˜. ë³¸ë˜ ì£¼ì¸ì€ ì˜¤ë‹ˆë¼ê³  í•œë‹¤.\n";
+			text_ += "ì‚¬ìš©í•˜ë©´ ì‹¤ë¡œ ì—„ì²­ë‚œ íš¨ê³¼ë“¤ì„ ì›í•˜ëŠ”ëŒ€ë¡œ íŒŒì›Œ 1ì¹¸ë§Œìœ¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ìˆê²Œ ëœë‹¤.\n";
+			text_ += "ë‹¨, ìš”ìˆ ë§ì¹˜ë¥¼ ì‚¬ìš©í•˜ëŠ”ê²ƒì€ í° ìœ„í—˜ë¶€ë‹´ì´ ë”°ë¥´ê²Œë˜ë©° ì‚¬ìš©ìë¥¼ ìë©¸ì‹œí‚¨ë‹¤ê³  í•œë‹¤.\n";
+			text_ += "ìš”ìˆ ë§ì¹˜ë¥¼ ì‚¬ìš©ì‹œ 10%ì˜ í™•ë¥ ë¡œ ì •ë°˜ëŒ€ì˜ íš¨ê³¼ê°€ ë°œíœ˜ë  ê°€ëŠ¥ì„±ì´ ìˆë‹¤.\n";
 			break;
 		case EVK_CAMERA:
-			text_ += "È¯»óÇâ¿¡ ¶³¾îÁö±âÀü¿¡ ¿ì¿¬È÷ µé°í¿À°ÔµÈ Ä«¸Ş¶ó.\n";
-			text_ += "±â¹¦ÇÑ ÈûÀ» »ç¿ëÇÏ¿© ¿ØÁö ÇÊ¸§¾øÀÌµµ ÂïÀ» ¼ö ÀÖ¾îº¸ÀÎ´Ù.\n";
-			text_ += "´ç½ÅÀÇ »ıÁ¸¿£ ÀüÇô µµ¿òÀÌ ¾ÈµÇÁö¸¸ ¹Ì¼Ò³àµéÀ» Âï¾î¼­ ±â³ä»çÁøÀ» º¸°üÇÒ¼öµµ ÀÖ´Ù.\n";
-			text_ += "±×·¸°Ô °í¼º´ÉÀº ¾Æ´ÑÁö¶ó ³Ê¹« ¸Ö¸®ÀÖ´Â »ó´ë¿£ Âï±â Èûµé¾î º¸ÀÎ´Ù.\n";
+			text_ += "í™˜ìƒí–¥ì— ë–¨ì–´ì§€ê¸°ì „ì— ìš°ì—°íˆ ë“¤ê³ ì˜¤ê²Œëœ ì¹´ë©”ë¼.\n";
+			text_ += "ê¸°ë¬˜í•œ í˜ì„ ì‚¬ìš©í•˜ì—¬ ì™ ì§€ í•„ë¦„ì—†ì´ë„ ì°ì„ ìˆ˜ ìˆì–´ë³´ì¸ë‹¤.\n";
+			text_ += "ë‹¹ì‹ ì˜ ìƒì¡´ì—” ì „í˜€ ë„ì›€ì´ ì•ˆë˜ì§€ë§Œ ë¯¸ì†Œë…€ë“¤ì„ ì°ì–´ì„œ ê¸°ë…ì‚¬ì§„ì„ ë³´ê´€í• ìˆ˜ë„ ìˆë‹¤.\n";
+			text_ += "ê·¸ë ‡ê²Œ ê³ ì„±ëŠ¥ì€ ì•„ë‹Œì§€ë¼ ë„ˆë¬´ ë©€ë¦¬ìˆëŠ” ìƒëŒ€ì—” ì°ê¸° í˜ë“¤ì–´ ë³´ì¸ë‹¤.\n";
 			break;
 		default:
-			text_ += "¹ö±×¸¦ ´ãÀº ¹ßµ¿ÅÛÀÌ´Ù.\n";
+			text_ += "ë²„ê·¸ë¥¼ ë‹´ì€ ë°œë™í…œì´ë‹¤.\n";
 			break;
 		}
 		text_ += "\n\n";
 		if (it->value1 == EVK_CAMERA) {
-			text_ += "ÀÌ ÅÛÀº È½¼öÁ¦ÇÑ¾øÀÌ ¹ßµ¿ÀÌ °¡´ÉÇÑ ÅÛÀÌ´Ù.\n";
+			text_ += "ì´ í…œì€ íšŸìˆ˜ì œí•œì—†ì´ ë°œë™ì´ ê°€ëŠ¥í•œ í…œì´ë‹¤.\n";
 		}
 		else {
-			text_ += "ÀÌ ÅÛÀº È½¼öÁ¦ÇÑ¾øÀÌ ¹ßµ¿ÀÌ °¡´ÉÇÑ ÅÛÀÌ´Ù. ´ç½ÅÀÇ ¹ßµ¿½ºÅ³¿¡ ºñ·ÊÇØ¼­ °­·ÂÇÔÀÌ °áÁ¤µÈ´Ù.\n";
+			text_ += "ì´ í…œì€ íšŸìˆ˜ì œí•œì—†ì´ ë°œë™ì´ ê°€ëŠ¥í•œ í…œì´ë‹¤. ë‹¹ì‹ ì˜ ë°œë™ìŠ¤í‚¬ì— ë¹„ë¡€í•´ì„œ ê°•ë ¥í•¨ì´ ê²°ì •ëœë‹¤.\n";
 		}
-		text_ += "VÅ°·Î ÆÄ¿ö¸¦ ¼Ò¸ğÇÏ¿© ¹ßµ¿ÇÒ ¼ö ÀÖ´Ù.\n\n";
+		text_ += "Ví‚¤ë¡œ íŒŒì›Œë¥¼ ì†Œëª¨í•˜ì—¬ ë°œë™í•  ìˆ˜ ìˆë‹¤.\n\n";
 		char temp[100];
-		sprintf_s(temp,100, "ÀÌ ¹ßµ¿ÅÛÀ» »ç¿ëÇÒ¶§¸¶´Ù ÇÊ¿äÇÑ ÆÄ¿ö: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
+		sprintf_s(temp,100, "ì´ ë°œë™í…œì„ ì‚¬ìš©í• ë•Œë§ˆë‹¤ í•„ìš”í•œ íŒŒì›Œ: %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
 		text_ += temp;
 
 		if (can_use_)
 		{
-			use_text_ += "(v)¹ßµ¿, ";
+			use_text_ += "(v)ë°œë™, ";
 			if (key) key->insert('v');
 		}
 	}
 	break;
 
 	case ITM_GOAL:
-		text_ += "ÀÌ°ÍÀº °¢Á¾ ´øÀüÀ» Á¤º¹ÇÑ Áõ°ÅÀÎ ·éÀÌ´Ù. \n";
-		text_ += "3°³¸¦ ¸ğÀ¸¸é ÃÖ½ÉºÎ ÇÏÄí·¹ÀÌ ½Å»çÀÇ ¹®À» ¿­ ¼ö ÀÖ´Ù.\n";
+		text_ += "ì´ê²ƒì€ ê°ì¢… ë˜ì „ì„ ì •ë³µí•œ ì¦ê±°ì¸ ë£¬ì´ë‹¤. \n";
+		text_ += "3ê°œë¥¼ ëª¨ìœ¼ë©´ ìµœì‹¬ë¶€ í•˜ì¿ ë ˆì´ ì‹ ì‚¬ì˜ ë¬¸ì„ ì—´ ìˆ˜ ìˆë‹¤.\n";
 		break;
 	case ITM_ORB:
-		text_ += "ÀÌ°ÍÀº °­´ëÇÑ ÈûÀ» °¡Áø À½¾ç¿ÁÀÌ´Ù. ½Å»ç ³»ºÎ¿¡ Á¤ÁßÇÏ°Ô ¸ğ¼ÅÁ® ÀÖ´Ù.\n";
-		text_ += "ÀÌ °ÍÀ» °¡Áö°í Å»ÃâÇÏ¸é ÀÌ ÀÌº¯À» ³¡³»°Å³ª ¾öÃ»³­ ÈûÀ» ¾òÀ» ¼ö ÀÖÀ» °Í °°´Ù.\n";
-		text_ += "¾î¶»°Ô »ç¿ëÇÏ´ÂÁö´Â ´ç½ÅÀÇ ÀÚÀ¯ÀÌ´Ù! ±×·¯³ª Å»ÃâÇÒ¶§±îÁø ³¡ÀÌ ¾Æ´Ï¹Ç·Î Á¶½ÉÇÏ±æ!\n";
-		text_ += "Æ¯È÷ ½Å»çÀÇ È«¹éÀÇ ¹«³à°¡ ´«¿¡ ºÒÀ» Å°°í ´ç½ÅÀ» ÂÑ¾Æ¿Ã °ÍÀÌ´Ù.\n";
+		text_ += "ì´ê²ƒì€ ê°•ëŒ€í•œ í˜ì„ ê°€ì§„ ìŒì–‘ì˜¥ì´ë‹¤. ì‹ ì‚¬ ë‚´ë¶€ì— ì •ì¤‘í•˜ê²Œ ëª¨ì…”ì ¸ ìˆë‹¤.\n";
+		text_ += "ì´ ê²ƒì„ ê°€ì§€ê³  íƒˆì¶œí•˜ë©´ ì´ ì´ë³€ì„ ëë‚´ê±°ë‚˜ ì—„ì²­ë‚œ í˜ì„ ì–»ì„ ìˆ˜ ìˆì„ ê²ƒ ê°™ë‹¤.\n";
+		text_ += "ì–´ë–»ê²Œ ì‚¬ìš©í•˜ëŠ”ì§€ëŠ” ë‹¹ì‹ ì˜ ììœ ì´ë‹¤! ê·¸ëŸ¬ë‚˜ íƒˆì¶œí• ë•Œê¹Œì§„ ëì´ ì•„ë‹ˆë¯€ë¡œ ì¡°ì‹¬í•˜ê¸¸!\n";
+		text_ += "íŠ¹íˆ ì‹ ì‚¬ì˜ í™ë°±ì˜ ë¬´ë…€ê°€ ëˆˆì— ë¶ˆì„ í‚¤ê³  ë‹¹ì‹ ì„ ì«“ì•„ì˜¬ ê²ƒì´ë‹¤.\n";
 		break;
 	case ITM_ETC:
 		switch (it->value1)
@@ -1480,41 +1480,41 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EIT_SATORI:
 			if (you.god_value[GT_SATORI][0] == 1)
 			{
-				text_ += "\"ÀÒ¾î¹ö¸° ¾Ö¿Ïµ¿¹°À» Ã£½À´Ï´Ù. - ÄÚ¸ŞÀÌÁö »çÅä¸®\"¶ó°í ÀûÇôÀÖ´Â Á¾ÀÌ´Ù.\n";
-				text_ += "´ç½ÅÀÇ »çÁøÀÌ ºÙ¾îÀÖ´Ù...\n";
+				text_ += "\"ìƒì–´ë²„ë¦° ì• ì™„ë™ë¬¼ì„ ì°¾ìŠµë‹ˆë‹¤. - ì½”ë©”ì´ì§€ ì‚¬í† ë¦¬\"ë¼ê³  ì í˜€ìˆëŠ” ì¢…ì´ë‹¤.\n";
+				text_ += "ë‹¹ì‹ ì˜ ì‚¬ì§„ì´ ë¶™ì–´ìˆë‹¤...\n";
 			}
 			else
 			{
-				text_ += "\"ÀÒ¾î¹ö¸° ¹°°ÇÀ» Ã£½À´Ï´Ù. - ÄÚ¸ŞÀÌÁö »çÅä¸®\"¶ó°í ÀûÇôÀÖ´Â Á¾ÀÌ´Ù.\n";
+				text_ += "\"ìƒì–´ë²„ë¦° ë¬¼ê±´ì„ ì°¾ìŠµë‹ˆë‹¤. - ì½”ë©”ì´ì§€ ì‚¬í† ë¦¬\"ë¼ê³  ì í˜€ìˆëŠ” ì¢…ì´ë‹¤.\n";
 			}
 			break;
 		case EIT_CAT_TREE:
-			text_ += "°³´Ù·¡ ³ª¹«´Ù. ±×·¸°Ô À¯¿ëÇÏÁø¾Ê¾Æº¸ÀÌÁö¸¸ °í¾çÀÌ°úµéÀº ¸ÆÀ» ¸ø Ãß´ÂµíÇÏ´Ù.\n";
+			text_ += "ê°œë‹¤ë˜ ë‚˜ë¬´ë‹¤. ê·¸ë ‡ê²Œ ìœ ìš©í•˜ì§„ì•Šì•„ë³´ì´ì§€ë§Œ ê³ ì–‘ì´ê³¼ë“¤ì€ ë§¥ì„ ëª» ì¶”ëŠ”ë“¯í•˜ë‹¤.\n";
 			break;
 		case EIT_BROKEN_CAMERA:
-			text_ += "ºÎ¼ÅÁ®ÀÖ´Â ÅÙ±¸ÀÇ Ä«¸Ş¶ó´Ù. ¾Æ¹«·¡µµ Ä±ÆÄµéÀÌ ¼ö¸®¸¦ À§ÇØ º¸°üÇÏ°í ÀÖ´Â µí ÇÏ´Ù.\n";
-			text_ += "½ÉÇÏ°Ô ºÎ¼ÅÁ®ÀÖ±â¶§¹®¿¡ ¾²ÀÓ»õ´Â ÀüÇô ¾ø¾îº¸ÀÎ´Ù.\n";
+			text_ += "ë¶€ì…”ì ¸ìˆëŠ” í…êµ¬ì˜ ì¹´ë©”ë¼ë‹¤. ì•„ë¬´ë˜ë„ ìº‡íŒŒë“¤ì´ ìˆ˜ë¦¬ë¥¼ ìœ„í•´ ë³´ê´€í•˜ê³  ìˆëŠ” ë“¯ í•˜ë‹¤.\n";
+			text_ += "ì‹¬í•˜ê²Œ ë¶€ì…”ì ¸ìˆê¸°ë•Œë¬¸ì— ì“°ì„ìƒˆëŠ” ì „í˜€ ì—†ì–´ë³´ì¸ë‹¤.\n";
 			break;
 		case EIT_KAPPA_TRASH:
-			text_ += "Ä±ÆÄµéÀÌ ¾²°í ³²Àº Àç·á¿Í °ø±¸µéÀÌ´Ù. ¾²ÀÓ»õ´Â ¾øÀ» °Í °°´Ù.\n";
+			text_ += "ìº‡íŒŒë“¤ì´ ì“°ê³  ë‚¨ì€ ì¬ë£Œì™€ ê³µêµ¬ë“¤ì´ë‹¤. ì“°ì„ìƒˆëŠ” ì—†ì„ ê²ƒ ê°™ë‹¤.\n";
 			break;
 		case EIT_PHOTO:
 		{
 			if (it->value2 >= 0 && it->value2 < MON_MAX) {
 				char temp[100];
-				sprintf_s(temp, 100, "%s%sÂïÇôÀÖ´Â »çÁøÀÌ´Ù.\n", mondata[it->value2].name.name.c_str(), mondata[it->value2].name.name_do(true));
+				sprintf_s(temp, 100, "%s%sì°í˜€ìˆëŠ” ì‚¬ì§„ì´ë‹¤.\n", mondata[it->value2].name.name.c_str(), mondata[it->value2].name.name_do(true));
 				text_ += temp;
 			}
 			else {
-				text_ += "¹Ì¼Ò³à°¡ ÂïÇôÀÖ´Â »çÁøÀÌ´Ù.\n";
+				text_ += "ë¯¸ì†Œë…€ê°€ ì°í˜€ìˆëŠ” ì‚¬ì§„ì´ë‹¤.\n";
 			}
-			text_ += "µüÈ÷ Å« ÀÇ¹Ì´Â ¾øÁö¸¸ ¼ÒÀå¿ëÀ¸·Î´Â ÁÁÀ» °Í °°´Ù.\n";
+			text_ += "ë”±íˆ í° ì˜ë¯¸ëŠ” ì—†ì§€ë§Œ ì†Œì¥ìš©ìœ¼ë¡œëŠ” ì¢‹ì„ ê²ƒ ê°™ë‹¤.\n";
 			break;
 		}
 		}
 		break;
 	default:
-		text_ += "¹ö±×ÅÛÀÌ´Ù. Á¦ÀÛÀÚ¿¡°Ô ½Å°íÇÏÀÚ.\n";
+		text_ += "ë²„ê·¸í…œì´ë‹¤. ì œì‘ìì—ê²Œ ì‹ ê³ í•˜ì.\n";
 		break;
 	}
 
@@ -1522,12 +1522,12 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		if (it->type == ITM_BOOK)
 		{
-			use_text_ += "(D)¹ö¸®±â";
+			use_text_ += "(D)ë²„ë¦¬ê¸°";
 			if (key) key->insert('D');
 		}
 		else
 		{
-			use_text_ += "(d)¹ö¸®±â";
+			use_text_ += "(d)ë²„ë¦¬ê¸°";
 			if (key) key->insert('d');
 		}
 	}
@@ -1549,9 +1549,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	text_ += use_text_;
 	//char temp[100];
 	//if(!it->is_pile || it->num == 1)
-	//	sprintf_s(temp, 100,"\n\n\n¹«°Ô : %g\n",it->weight);
+	//	sprintf_s(temp, 100,"\n\n\në¬´ê²Œ : %g\n",it->weight);
 	//else
-	//	sprintf_s(temp, 100,"\n\n\n¹«°Ô : %g * %d\n",it->weight/it->num,it->num);
+	//	sprintf_s(temp, 100,"\n\n\në¬´ê²Œ : %g * %d\n",it->weight/it->num,it->num);
 	//text_ += temp;
 	return text_;
 

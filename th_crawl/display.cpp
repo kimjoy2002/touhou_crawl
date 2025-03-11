@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: display.cpp
+// íŒŒì¼ì´ë¦„: display.cpp
 //
-// ³»¿ë: Å©·ÑÀÇ Ãâ·Â
+// ë‚´ìš©: í¬ë¡¤ì˜ ì¶œë ¥
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,10 +32,10 @@
 #include "throw.h"
 #include "mon_infor.h"
 
-extern IDirect3DDevice9* Device; //µğ¹ÙÀÌ½ºÆ÷ÀÎÅÍ
-extern IDirect3DVertexBuffer9* g_pVB; //¹öÅØ½º¹öÆÛÆ÷ÀÎÅÍ
-extern D3DXMATRIXA16 g_BaseMatrix; //¸ÅÆ®¸¯½ºÆ÷ÀÎÅÍ
-extern LPD3DXSPRITE g_pSprite; //½ºÇÁ¶óÀÌÆ®Æ÷ÀÎÅÍ 
+extern IDirect3DDevice9* Device; //ë””ë°”ì´ìŠ¤í¬ì¸í„°
+extern IDirect3DVertexBuffer9* g_pVB; //ë²„í…ìŠ¤ë²„í¼í¬ì¸í„°
+extern D3DXMATRIXA16 g_BaseMatrix; //ë§¤íŠ¸ë¦­ìŠ¤í¬ì¸í„°
+extern LPD3DXSPRITE g_pSprite; //ìŠ¤í”„ë¼ì´íŠ¸í¬ì¸í„° 
 extern ID3DXFont* g_pfont;
 extern HANDLE mutx;
 extern HWND hwnd;
@@ -46,10 +46,10 @@ DWORD FrameCnt = 0;
 float TimeElapsed = 0;
 float FPS = 0;
 
-extern bool widesearch; //XÄ¿¸Çµå¿ë
+extern bool widesearch; //Xì»¤ë§¨ë“œìš©
 
 
-int map_effect=0;//Àá±ñ ³ª¿À´Â ¸ÊÀÇ ¹İÂ¦ ÀÌº¥Æ®
+int map_effect=0;//ì ê¹ ë‚˜ì˜¤ëŠ” ë§µì˜ ë°˜ì§ ì´ë²¤íŠ¸
 
 
 
@@ -68,7 +68,7 @@ width(34), current(0)
 {
 }
 //
-// ÇÁ·¹ÀÓ°è»ê ÇÔ¼ö
+// í”„ë ˆì„ê³„ì‚° í•¨ìˆ˜
 //
 void CalcFPS(float timeDelta)
 {
@@ -110,7 +110,7 @@ bool Display(float timeDelta)
 
 
 display_manager::display_manager():tile_type(0),text_log(),text_sub(),state(DT_TEXT),item_view(), item_vt(IVT_INFOR),
-item_view_message("¹«½¼ ¾ÆÀÌÅÛÀ» °í¸£°Ú½À´Ï±î?"), image(NULL), log_length(1), move(0), max_y(1), sight_type(0), 
+item_view_message("ë¬´ìŠ¨ ì•„ì´í…œì„ ê³ ë¥´ê² ìŠµë‹ˆê¹Œ?"), image(NULL), log_length(1), move(0), max_y(1), sight_type(0), 
 spell_sight(0), scale_x(0), scale_y(0)
 {
 	for(int i=0;i<52;i++)
@@ -160,13 +160,41 @@ void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			break;
 	}
 }
+
+std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str) {
+    int size_needed = MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, NULL, 0);
+    std::wstring utf16Str(size_needed, 0);
+    MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, &utf16Str[0], size_needed);
+    return utf16Str;
+}
+
+
+
+int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+    if (!pFont || !text || !pRect) {
+        return 0;
+    }
+
+    // UTF-8 ë¬¸ìì—´ì„ UTF-16ìœ¼ë¡œ ë³€í™˜
+    std::wstring utf16Text = ConvertUTF8ToUTF16(text);
+    if (utf16Text.empty()) {
+        return 0;
+    }
+
+    // DrawTextW í•¨ìˆ˜ í˜¸ì¶œ
+    return pFont->DrawTextW(pSprite, utf16Text.c_str(), count, pRect, format, color);
+}
+
+
+
 void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	if(image)
 		image->draw(pSprite,255);
 	RECT rc={50, 50-move, option_mg.getWidth(), option_mg.getHeight()};
-	pfont->DrawTextA(pSprite,text.c_str(), -1, &rc, DT_NOCLIP,D3DCOLOR_XRGB(200,200,200));
+	DrawTextUTF8(pfont, pSprite, text.c_str(), -1, &rc, DT_NOCLIP,D3DCOLOR_XRGB(200,200,200));
 }
+
 void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {	
 	int i=0;
@@ -174,17 +202,17 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	char temp[100];
 	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	
-	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
+	DrawTextUTF8(pfont,pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
 
 
-	pfont->DrawTextA(pSprite,"´ÜÃàÅ° - ÀÌ¸§", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ë‹¨ì¶•í‚¤ - ì´ë¦„", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
-	pfont->DrawTextA(pSprite,"ÇĞÆÄ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"í•™íŒŒ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
-	pfont->DrawTextA(pSprite,"½ÇÆĞÀ²", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ì‹¤íŒ¨ìœ¨", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 150;
-	pfont->DrawTextA(pSprite,"·¹º§", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ë ˆë²¨", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
 	for(int i=0;i<52;i++)
@@ -199,15 +227,15 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			char sp_char = (i<26)?('a'+i):('A'+i-26);
 			sprintf_s(temp,100,"%c      - %s",sp_char,SpellString(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left += 200;
-			pfont->DrawTextA(pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
+			DrawTextUTF8(pfont,pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left = 450;
 			sprintf_s(temp,100,"%-3d%%",100-you.GetSpellSuccess(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left += 150;
 			sprintf_s(temp,100,"%d",SpellLevel(spell_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.top += fontDesc.Height;
 			rc.left = 50;
 
@@ -222,7 +250,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	char temp[100];
 	int one_ = 50, two_ = 100;
 
-	pfont->DrawTextA(pSprite, "½Äº°µÈ ¾ÆÀÌÅÛ & ÀÚµ¿ Áİ±â ¼³Á¤", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite, "ì‹ë³„ëœ ì•„ì´í…œ & ìë™ ì¤ê¸° ì„¤ì •", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += 2* fontDesc.Height;
 
 	bool first_ = false;
@@ -248,8 +276,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<¹°¾à>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ë¬¼ì•½>");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
@@ -257,8 +285,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_potion[iden_list.potion_list[cur_].color].draw(pSprite, rc.left-24, rc.top+6, 255);
 				img_item_potion_kind[min(PT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left-24, rc.top+6, 255);
-				sprintf_s(temp, 100, "%c %c %s¹°¾à", index, iden_list.autopickup[i]?'+':'-', potion_iden_string[cur_]);
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				sprintf_s(temp, 100, "%c %c %së¬¼ì•½", index, iden_list.autopickup[i]?'+':'-', potion_iden_string[cur_]);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -274,8 +302,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<µÎ·ç¸¶¸®>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ë‘ë£¨ë§ˆë¦¬>");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
@@ -283,8 +311,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_scroll.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %sµÎ·ç¸¶¸®", index, iden_list.autopickup[i] ? '+' : '-', scroll_iden_string[cur_]);
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				sprintf_s(temp, 100, "%c %c %së‘ë£¨ë§ˆë¦¬", index, iden_list.autopickup[i] ? '+' : '-', scroll_iden_string[cur_]);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -300,8 +328,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<¹İÁö>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ë°˜ì§€>");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
@@ -309,8 +337,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_ring[iden_list.ring_list[cur_].type].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_ring_kind[min(RGT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s¹İÁö", index, iden_list.autopickup[i] ? '+' : '-', ring_iden_string[cur_]);
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				sprintf_s(temp, 100, "%c %c %së°˜ì§€", index, iden_list.autopickup[i] ? '+' : '-', ring_iden_string[cur_]);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -326,8 +354,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<ºÎÀû>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ë¶€ì >");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
@@ -335,8 +363,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_amulet.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_amulet_kind[min(AMT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %sºÎÀû", index, iden_list.autopickup[i] ? '+' : '-', amulet_iden_string[cur_]);
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				sprintf_s(temp, 100, "%c %c %së¶€ì ", index, iden_list.autopickup[i] ? '+' : '-', amulet_iden_string[cur_]);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -352,16 +380,16 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<½ºÆçÄ«µå>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ìŠ¤í ì¹´ë“œ>");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
 
 				rc.left = two_;
 				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s½ºÆçÄ«µå", index, iden_list.autopickup[i] ? '+' : '-', SpellcardName((spellcard_evoke_type)cur_));
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				sprintf_s(temp, 100, "%c %c %sìŠ¤í ì¹´ë“œ", index, iden_list.autopickup[i] ? '+' : '-', SpellcardName((spellcard_evoke_type)cur_));
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -377,8 +405,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.left = one_;
 					rc.top += fontDesc.Height;
-					sprintf_s(temp, 100, "<¸¶¹ıÃ¥>");
-					pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+					sprintf_s(temp, 100, "<ë§ˆë²•ì±…>");
+					DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
 				}
@@ -387,14 +415,14 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				if (cur_ == 0)
 				{
 					img_item_book[0].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "¹ÌÈ®ÀÎ ¸¶¹ıÃ¥");
+					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "ë¯¸í™•ì¸ ë§ˆë²•ì±…");
 				}
 				else
 				{
 					img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', static_book_list[cur_ - 1].name.c_str());
 				}
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -408,8 +436,8 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				rc.left = one_;
 				rc.top += fontDesc.Height;
-				sprintf_s(temp, 100, "<±âÅ¸>");
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+				sprintf_s(temp, 100, "<ê¸°íƒ€>");
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 				rc.top += 3 * fontDesc.Height;
 				first_ = false;
 			}
@@ -418,19 +446,19 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if (cur_ == 0)
 			{
 				img_item_food_p_item.draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "P ¾ÆÀÌÅÛ");
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "P ì•„ì´í…œ");
 			}
 			else if (cur_ == 1)
 			{
 				img_item_food_bread.draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "À½½Ä");
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', "ìŒì‹");
 			}
 			else if (cur_ >= 2)
 			{
 				GetTanmacBaseGraphic(cur_-2)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', GetTanmacString(cur_-2).name.c_str());
 			}
-			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 			rc.top += 2 * fontDesc.Height;
 			num++;
 
@@ -439,7 +467,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	if (num == 0) {
 		rc.left = one_;
-		pfont->DrawTextA(pSprite, "½Äº°µÈ ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite, "ì‹ë³„ëœ ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.top += fontDesc.Height;
 	}
 
@@ -453,18 +481,18 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	int i =0;
 	if(you.property_vector.empty())
 	{
-		pfont->DrawTextA(pSprite,"´ç½ÅÀÇ Æ¯¼ºÀÌ ¾ø½À´Ï´Ù.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,"ë‹¹ì‹ ì˜ íŠ¹ì„±ì´ ì—†ìŠµë‹ˆë‹¤.", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		return;
 	}
-	pfont->DrawTextA(pSprite,"´ç½ÅÀÇ Æ¯¼ºµé (¾ËÆÄºªÀ» ´©¸£¸é »ó¼¼ÇÑ Á¤º¸°¡ ³ª¿É´Ï´Ù.)", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ë‹¹ì‹ ì˜ íŠ¹ì„±ë“¤ (ì•ŒíŒŒë²³ì„ ëˆ„ë¥´ë©´ ìƒì„¸í•œ ì •ë³´ê°€ ë‚˜ì˜µë‹ˆë‹¤.)", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
 		char sp_char = (i<26)?('a'+i):('A'+i-26);
 		sprintf_s(temp,256,"%c - ",sp_char);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
 		rc.left += fontDesc.Width*4;
-		pfont->DrawTextA(pSprite,it->GetInfor().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
+		DrawTextUTF8(pfont,pSprite,it->GetInfor().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
 		rc.top += fontDesc.Height;
 		rc.left = 50;
 		i++;
@@ -478,17 +506,17 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	char temp[100];
 	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	if(move == 0)
-		pfont->DrawTextA(pSprite,"¾î´À ½ºÅ³À» »ç¿ëÇÏ°Ú½À´Ï±î?", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+		DrawTextUTF8(pfont,pSprite,"ì–´ëŠ ìŠ¤í‚¬ì„ ì‚¬ìš©í•˜ê² ìŠµë‹ˆê¹Œ?", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 	else
-		pfont->DrawTextA(pSprite,"¾î´À ½ºÅ³ÀÇ ¼³¸íÀ» º¸½Ã°Ú½À´Ï±î?", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+		DrawTextUTF8(pfont,pSprite,"ì–´ëŠ ìŠ¤í‚¬ì˜ ì„¤ëª…ì„ ë³´ì‹œê² ìŠµë‹ˆê¹Œ?", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 	rc.top += fontDesc.Height;
 
 
-	pfont->DrawTextA(pSprite,"´ÜÃàÅ° - ÀÌ¸§", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ë‹¨ì¶•í‚¤ - ì´ë¦„", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 250;
-	pfont->DrawTextA(pSprite,"ºñ¿ë", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ë¹„ìš©", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
-	pfont->DrawTextA(pSprite,"¼º°ø·ü", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,"ì„±ê³µë¥ ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
 	for(int i=0;i<52;i++)
@@ -498,15 +526,15 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			skill_list skill_ = (skill_list)you.MemorizeSkill[i];
 			char sp_char = i>=26?('A'+i-26):('a'+i);
 			sprintf_s(temp,100,"%c      - %s",sp_char,SkillString(skill_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += 250;
 			{
 				int k = sprintf_s(temp,100,"%s",SkillCostString(skill_));
-				pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+				DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			}
 			rc.left = 500;
 			sprintf_s(temp,100,"%3d%%",SkillDiffer(skill_));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.top += fontDesc.Height;
 			rc.left = 50;
 		}
@@ -515,10 +543,10 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top = option_mg.getHeight() - fontDesc.Height*3;
 	{	
 		if(move == 0)
-			sprintf_s(temp,100,"!³ª ?¸¦ ´­·¯¼­ ¼³¸íÀ» º¼ ¼ö ÀÖ½À´Ï´Ù.");
+			sprintf_s(temp,100,"!ë‚˜ ?ë¥¼ ëˆŒëŸ¬ì„œ ì„¤ëª…ì„ ë³¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
 		else		
-			sprintf_s(temp,100,"!³ª ?¸¦ ´­·¯¼­ ½ºÅ³ »ç¿ëÀ» ÇÒ ¼ö ÀÖ½À´Ï´Ù.");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			sprintf_s(temp,100,"!ë‚˜ ?ë¥¼ ëˆŒëŸ¬ì„œ ìŠ¤í‚¬ ì‚¬ìš©ì„ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 	}
 }
 
@@ -529,8 +557,8 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	int skt = 0, i=0; 
 	char sk_char = 'a';
 
-	sprintf_s(temp, 100, "      ½ºÅ³¸í  ·¹º§    ÇöÀç  Àû¼º   ºñ¿ë          ½ºÅ³¸í  ·¹º§    ÇöÀç  Àû¼º   ºñ¿ë");
-	pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	sprintf_s(temp, 100, "      ìŠ¤í‚¬ëª…  ë ˆë²¨    í˜„ì¬  ì ì„±   ë¹„ìš©          ìŠ¤í‚¬ëª…  ë ˆë²¨    í˜„ì¬  ì ì„±   ë¹„ìš©");
+	DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 	rc.top += 2*fontDesc.Height;
 
 	rc.left = 50;
@@ -548,7 +576,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_bad))) :
 				you.pure_skill == skt ? CL_junko : CL_warning;
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += 150;
 			//if(move ==0)
 			if(you.GetSkillLevel(skt, false)<27 && !you.cannotSkillup(skt))
@@ -560,11 +588,11 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			//	sprintf_s(temp,100,"%d",you.skill[skt].aptit);
 			//else
 			//	sprintf_s(temp,100,"%d",you.skill[skt].exper);
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += 50;
 						
 			sprintf_s(temp,100,"%3d",you.skill[skt].aptit);
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
 
 			rc.left += 50;
 			if (you.GetSkillLevel(skt, false) < 27 && !you.cannotSkillup(skt))
@@ -576,18 +604,18 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				float value_ = (float)skill_pecent / base_skill;
 
 				sprintf_s(temp, 100, "%3.1f", value_);
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 			else if (you.pure_skill == skt)
 			{
 
-				pfont->DrawTextA(pSprite, "¼øÈ­ ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
+				DrawTextUTF8(pfont,pSprite, "ìˆœí™” ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
 
 			}
 			else
 			{
 				sprintf_s(temp, 100, " -   ");
-				pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 
 			rc.left += 200;
@@ -620,22 +648,22 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	rc.left = 50;	
 	rc.top += fontDesc.Height*2;
-	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
+	DrawTextUTF8(pfont,pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_warning);
 	rc.top += fontDesc.Height *2;
 
 	if (item_view_message.size() < 1)
 	{
-		pfont->DrawTextA(pSprite, "ÇöÀç ´ç½ÅÀÇ ½ºÅ³·¹º§À» È®ÀÎÇÏ°í °æÇèÄ¡ ºĞ¹è ºñÀ²À» Á¶ÀıÇÒ ¼ö ÀÖ½À´Ï´Ù.", -1, &rc, DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite, "í˜„ì¬ ë‹¹ì‹ ì˜ ìŠ¤í‚¬ë ˆë²¨ì„ í™•ì¸í•˜ê³  ê²½í—˜ì¹˜ ë¶„ë°° ë¹„ìœ¨ì„ ì¡°ì ˆí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.", -1, &rc, DT_NOCLIP, CL_normal);
 		rc.top += fontDesc.Height * 1;
 
-		pfont->DrawTextA(pSprite, "¾ËÆÄºª Å°¸¦ ´­·¯¼­ ¿øÇÏ´Â ½ºÅ³·Î °æÇèÄ¡¸¦ ºĞ¹èÇÒ ¼ö ÀÖ½À´Ï´Ù.", -1, &rc, DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite, "ì•ŒíŒŒë²³ í‚¤ë¥¼ ëˆŒëŸ¬ì„œ ì›í•˜ëŠ” ìŠ¤í‚¬ë¡œ ê²½í—˜ì¹˜ë¥¼ ë¶„ë°°í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.", -1, &rc, DT_NOCLIP, CL_normal);
 
 		rc.top += fontDesc.Height * 2;
 		if (wiz_list.wizard_mode == 1)
 		{
 			char temp[50];
-			sprintf_s(temp, 50, "[ÇöÀç °æÇèÄ¡ ÆĞ³ÎÆ¼ %d]", exp_to_skill_exp(0));
-			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
+			sprintf_s(temp, 50, "[í˜„ì¬ ê²½í—˜ì¹˜ íŒ¨ë„í‹° %d]", exp_to_skill_exp(0));
+			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
 		}
 	}
 
@@ -644,96 +672,96 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={30, 10, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
-	sprintf_s(temp,100,"%s (%d·¹º§ %s %s %s)",you.user_name.name.c_str(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
+	sprintf_s(temp,100,"%s (%dë ˆë²¨ %s %s %s)",you.user_name.name.c_str(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 	rc.left += 300;
-	sprintf_s(temp,100,"ÅÏ: %d",you.turn);	
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"í„´: %d",you.turn);	
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 200;
 	if(you.god == GT_NONE)
 	{
-		sprintf_s(temp,100,"¹«½Å¾Ó");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		sprintf_s(temp,100,"ë¬´ì‹ ì•™");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else if (you.god == GT_TENSI)
 	{
-		sprintf_s(temp, 100, "½Å¾Ó: %s", GetGodString(you.god));
-		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		sprintf_s(temp, 100, "ì‹ ì•™: %s", GetGodString(you.god));
+		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{
-		sprintf_s(temp,100,"½Å¾Ó: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		sprintf_s(temp,100,"ì‹ ì•™: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
 	sprintf_s(temp,100,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	sprintf_s(temp,100,"AC:%4d",you.ac);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"Èû  :%4d",you.s_str);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"í˜  :%4d",you.s_str);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
 	if (!you.pure_mp)
 	{
 		sprintf_s(temp, 100, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
-		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left += 150;
 	sprintf_s(temp,100,"EV:%4d",you.ev);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¹ÎÃ¸:%4d",you.s_dex);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë¯¼ì²©:%4d",you.s_dex);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 
 	{
 		int pow_ = min(you.power, 500);
-		sprintf_s(temp, 100, "ÆÄ¿ö: %d.%02d", pow_ / 100, pow_ % 100);
-		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		sprintf_s(temp, 100, "íŒŒì›Œ: %d.%02d", pow_ / 100, pow_ % 100);
+		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left += 150;
 	sprintf_s(temp,100,"SH:%4d",you.sh);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"Áö´É:%4d",you.s_int);
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ì§€ëŠ¥:%4d",you.s_int);
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 	rc.top += fontDesc.Height;		
 
 	int resist_ = you.fire_resist - you.uniden_fire_resist;
 	if(resist_>=100)
-		sprintf_s(temp, 100, "È­¿°ÀúÇ×: ¡Ä");
+		sprintf_s(temp, 100, "í™”ì—¼ì €í•­: âˆ");
 	else
-		sprintf_s(temp,100,"È­¿°ÀúÇ×: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+		sprintf_s(temp,100,"í™”ì—¼ì €í•­: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.confuse_resist- you.uniden_confuse_resist;
-	sprintf_s(temp,100,"È¥¶õÀúÇ×: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	sprintf_s(temp,100,"í˜¼ë€ì €í•­: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"¹«±â: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë¬´ê¸°: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_WEAPON])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"¸Ç¼Õ");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		sprintf_s(temp,100,"ë§¨ì†");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -741,85 +769,85 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	resist_ = you.ice_resist - you.uniden_ice_resist;
 	if (resist_ >= 100)
-		sprintf_s(temp, 100, "³Ã±âÀúÇ×: ¡Ä");
+		sprintf_s(temp, 100, "ëƒ‰ê¸°ì €í•­: âˆ");
 	else
-		sprintf_s(temp,100,"³Ã±âÀúÇ×: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+		sprintf_s(temp,100,"ëƒ‰ê¸°ì €í•­: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.invisible_view- you.uniden_invisible_view;
-	sprintf_s(temp,100,"Åõ¸íº¸±â: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	sprintf_s(temp,100,"íˆ¬ëª…ë³´ê¸°: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"Åº¸·: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"íƒ„ë§‰: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.throw_weapon)
 	{
 		sprintf_s(temp,100,"%c) %s",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"¾øÀ½");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,"ì—†ìŒ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 	resist_ = you.elec_resist - you.uniden_elec_resist;
 	if (resist_ >= 100)
-		sprintf_s(temp, 100, "Àü±âÀúÇ×: ¡Ä");
+		sprintf_s(temp, 100, "ì „ê¸°ì €í•­: âˆ");
 	else
-		sprintf_s(temp,100,"Àü±âÀúÇ×: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+		sprintf_s(temp,100,"ì „ê¸°ì €í•­: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.power_keep- you.uniden_power_keep;
 
 
 	if (you.power == 1000) {
-		sprintf_s(temp, 100, "ÆÄ¿öÀ¯Áö: ¡Ä");
+		sprintf_s(temp, 100, "íŒŒì›Œìœ ì§€: âˆ");
 		resist_ = 1;
 	}
 	else
-		sprintf_s(temp,100,"ÆÄ¿öÀ¯Áö: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+		sprintf_s(temp,100,"íŒŒì›Œìœ ì§€: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"¸öÅë: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ëª¸í†µ: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_ARMOR])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_ARMOR]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_ARMOR]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_ARMOR, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_ARMOR, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 	
 	resist_ = you.poison_resist - you.uniden_poison_resist;
-	sprintf_s(temp,100,"µ¶ÀúÇ×  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	sprintf_s(temp,100,"ë…ì €í•­  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¹æÆĞ: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë°©íŒ¨: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_SHIELD])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_SHIELD, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_SHIELD, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -841,163 +869,163 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
-	sprintf_s(temp,100,"¸¶¹ıÀúÇ×: %s" , resist_text_.c_str());
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë§ˆë²•ì €í•­: %s" , resist_text_.c_str());
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¸Ó¸®: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë¨¸ë¦¬: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_HELMET])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_HELMET]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_HELMET]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_HELMET, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_HELMET, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 	
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¸ÁÅä: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë§í† : ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_CLOAK])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_CLOAK]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_CLOAK]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_CLOAK, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_CLOAK, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 	
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¼Õ  : ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ì†  : ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_GLOVE])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_GLOVE]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_GLOVE]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_GLOVE, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_GLOVE, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¹ß  : ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ë°œ  : ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*6;
 	if(you.equipment[ET_BOOTS])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_BOOTS]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_BOOTS]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_BOOTS, false)?"¾øÀ½":"Âø¿ëºÒ°¡");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,you.isImpossibeEquip(ET_BOOTS, false)?"ì—†ìŒ":"ì°©ìš©ë¶ˆê°€");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 	
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¸ñ°ÉÀÌ  : ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ëª©ê±¸ì´  : ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*10;
 	if(you.equipment[ET_NECK])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_NECK]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_NECK]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"¾øÀ½");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,"ì—†ìŒ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 		
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¿Ş¹İÁö  : ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ì™¼ë°˜ì§€  : ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*10;
 	if(you.equipment[ET_LEFT])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_LEFT]->id,you.equipment[ET_LEFT]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_LEFT]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_LEFT]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"¾øÀ½");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,"ì—†ìŒ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 			
 
-	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //¿©±â¿£ µ·ÀÌ
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//sprintf_s(temp,100,"MP: %d/%d",you.mp,you.max_mp); //ì—¬ê¸°ì—” ëˆì´
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"¿À¸¥¹İÁö: ");
-	pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	sprintf_s(temp,100,"ì˜¤ë¥¸ë°˜ì§€: ");
+	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += fontDesc.Width*10;
 	if(you.equipment[ET_RIGHT])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_RIGHT]->item_color());
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_RIGHT]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"¾øÀ½");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		sprintf_s(temp,100,"ì—†ìŒ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1008,7 +1036,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	
 	string rune_temp;
 	
-	rune_temp = "·é:";
+	rune_temp = "ë£¬:";
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
 		if(you.rune[i])
@@ -1018,13 +1046,13 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			rune_temp += rune_string[i];
 		}
 	}
-	pfont->DrawTextA(pSprite,rune_temp.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,rune_temp.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 	
 	if(you.rune[RUNE_HAKUREI_ORB])
 	{
-		pfont->DrawTextA(pSprite,"À½¾ç¿Á", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite,"ìŒì–‘ì˜¥", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{				
@@ -1036,6 +1064,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 }
 
+
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	GetClientRect(hwnd, &windowSize);
@@ -1046,25 +1075,25 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		int i=0;
 		RECT rc={32*16+50, 10, option_mg.getWidth(), option_mg.getHeight()};
 		char temp[128];
-		sprintf_s(temp,128,"%d·¹º§",you.level);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		sprintf_s(temp,128,"%dë ˆë²¨",you.level);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*7;
-		pfont->DrawTextA(pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		
 		if(ReplayClass.play)
 		{
 			rc.left = 32*16+180;			
-			pfont->DrawTextA(pSprite,"*¸®ÇÃ·¹ÀÌ Áß*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, wiz_list.wizard_mode == 1?CL_help:(wiz_list.wizard_mode == 2?CL_magic:CL_warning));
+			DrawTextUTF8(pfont,pSprite,"*ë¦¬í”Œë ˆì´ ì¤‘*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, wiz_list.wizard_mode == 1?CL_help:(wiz_list.wizard_mode == 2?CL_magic:CL_warning));
 		}
 		else if(wiz_list.wizard_mode == 1)
 		{
 			rc.left = 32*16+180;			
-			pfont->DrawTextA(pSprite,"*À§ÀÚµå ¸ğµå*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			DrawTextUTF8(pfont,pSprite,"*ìœ„ìë“œ ëª¨ë“œ*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 		}
 		else if(wiz_list.wizard_mode == 2)
 		{
 			rc.left = 32*16+180;			
-			pfont->DrawTextA(pSprite,"*¼¼ÀÌºê º¸Á¸*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+			DrawTextUTF8(pfont,pSprite,"*ì„¸ì´ë¸Œ ë³´ì¡´*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 		}
 
 
@@ -1072,37 +1101,37 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		rc.top += fontDesc.Height;
 		rc.left = 32*16+50;
-		pfont->DrawTextA(pSprite,tribe_type_string[you.tribe], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,tribe_type_string[you.tribe], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*(strlen(tribe_type_string[you.tribe])+1);
-		pfont->DrawTextA(pSprite,job_type_string[you.job], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,job_type_string[you.job], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*(strlen(job_type_string[you.job])+1);
-		pfont->DrawTextA(pSprite,you.GetCharNameString()->c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,you.GetCharNameString()->c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left = 32*16+50;
 		rc.top += fontDesc.Height;
 
 
 		if(you.god == GT_NONE)
 		{
-			sprintf_s(temp,128,"¹«½Å¾Ó");
+			sprintf_s(temp,128,"ë¬´ì‹ ì•™");
 		}
 		else if (you.god == GT_MIKO) 
 		{
-			sprintf_s(temp, 128, "½Å¾Ó: %s (ÀÎ±âµµ %d%%)", GetGodString(you.god), you.piety/2);
+			sprintf_s(temp, 128, "ì‹ ì•™: %s (ì¸ê¸°ë„ %d%%)", GetGodString(you.god), you.piety/2);
 		}
 		else if (you.god == GT_TENSI)
 		{
-			sprintf_s(temp, 128, "½Å¾Ó: %s", GetGodString(you.god));
+			sprintf_s(temp, 128, "ì‹ ì•™: %s", GetGodString(you.god));
 		}
 		else
 		{
-			sprintf_s(temp,128,"½Å¾Ó: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+			sprintf_s(temp,128,"ì‹ ì•™: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
 		}
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 
 		rc.top += fontDesc.Height;
 
 		sprintf_s(temp,128,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*14;
 		{
 			int Hp_bar = max(you.GetHp() *18/you.GetMaxHp(),min(you.prev_hp[0],you.GetMaxHp())*18/you.GetMaxHp());
@@ -1111,17 +1140,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			for(i = 0;i<s_Hp_bar;i++)
 			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, !you.pure_mp?CL_good:CL_junko);
+				DrawTextUTF8(pfont,pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, !you.pure_mp?CL_good:CL_junko);
 				rc.left += fontDesc.Width;
 			}
 			for(;i<Hp_bar;i++)
 			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+				DrawTextUTF8(pfont,pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 				rc.left += fontDesc.Width;
 			}
 			for(;i<18;i++)
 			{
-				pfont->DrawTextA(pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
+				DrawTextUTF8(pfont,pSprite,"=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
 				rc.left += fontDesc.Width;
 			}
 		}
@@ -1132,18 +1161,18 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if (!you.pure_mp)
 		{
 			sprintf_s(temp, 128, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
-			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			if (you.GetMaxMp())
 			{
 				rc.left += fontDesc.Width * 14;
 				for (i = 0; i < you.GetMp() * 18 / you.GetMaxMp(); i++)
 				{
-					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_blue);
+					DrawTextUTF8(pfont,pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_blue);
 					rc.left += fontDesc.Width;
 				}
 				for (; i < 18; i++)
 				{
-					pfont->DrawTextA(pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
+					DrawTextUTF8(pfont,pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
 					rc.left += fontDesc.Width;
 				}
 				rc.left -= fontDesc.Width * 32;
@@ -1158,11 +1187,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		int pow_ = min(you.power,500);
 		img_item_food_p_item.draw(pSprite,rc.left+7,rc.top+7,255);
 		left_ = sprintf_s(temp,128,"   %d.%02d",pow_/100,pow_%100);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
-		//ÀÓ½Ã		
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
+		//ì„ì‹œ		
 		//rc.left += fontDesc.Width*left_;
 		//sprintf_s(temp,50,"%6d",you.hunger);
-		//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_might?CL_white_blue:CL_STAT);
+		//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_might?CL_white_blue:CL_STAT);
 		rc.left = 32*16+50;
 
 
@@ -1170,7 +1199,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		rc.top += fontDesc.Height;
 		left_ = sprintf_s(temp,128,"AC:");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 				
 		int temp_buff_value_ = 0;
@@ -1178,11 +1207,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayAc());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ (you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0;
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
-		left_ = sprintf_s(temp,128,"    Èû  :");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		left_ = sprintf_s(temp,128,"    í˜  :");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
 		if(you.s_str == you.m_str)
@@ -1198,23 +1227,23 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==1?CL_white_puple:
 				(you.s_str != you.m_str)?CL_warning:CL_STAT;
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
 		left_ = sprintf_s(temp,128,"EV:");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
 		
 		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayEv());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_EV);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
-		left_ = sprintf_s(temp,128,"    ¹ÎÃ¸:");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		left_ = sprintf_s(temp,128,"    ë¯¼ì²©:");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
 
@@ -1230,22 +1259,22 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==2?CL_white_puple:
 				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
 		left_ = sprintf_s(temp,128,"SH:");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
 		left_ = sprintf_s(temp,128,"%4d",you.GetDisplaySh());
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_SH);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
-		left_ = sprintf_s(temp,128,"    Áö´É:");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		left_ = sprintf_s(temp,128,"    ì§€ëŠ¥:");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*left_;
 
 
@@ -1264,15 +1293,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==3?CL_white_puple:
 				(you.s_int != you.m_int)?CL_warning:CL_STAT;
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
 
 
-		sprintf_s(temp, 128, "ºÎÀû: ");
-		pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		sprintf_s(temp, 128, "ë¶€ì : ");
+		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width * 6;
 
 		if (you.equipment[ET_NECK])
@@ -1284,18 +1313,18 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				sprintf_s(temp2, 64, "%s%s", iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], _item->name.name.c_str());
 			}
 			sprintf_s(temp, 128, "%c) %s (%d%%)", you.equipment[ET_NECK]->id, temp2, you.getAmuletPercent());
-			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
+			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
 		}
 		else
 		{
-			sprintf_s(temp, 128, "¾øÀ½");
-			pfont->DrawTextA(pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+			sprintf_s(temp, 128, "ì—†ìŒ");
+			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 		}
 		rc.left = 32 * 16 + 50;
 		rc.top += fontDesc.Height;
 
-		sprintf_s(temp,128,"¹«±â: ");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		sprintf_s(temp,128,"ë¬´ê¸°: ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*6;
 		if(you.equipment[ET_WEAPON])
 		{
@@ -1312,7 +1341,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					if(prev_space_ == 0)
 					{
-						pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+						DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
 						rc.left = 32*16+50;
 						rc.top +=fontDesc.Height;
 						max_len_ = 36;
@@ -1325,7 +1354,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 							tempchar2[j] = temp[i - one_line+1+j];
 						tempchar2[j] = NULL;			
 
-						pfont->DrawTextA(pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+						DrawTextUTF8(pfont,pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
 						rc.left = 32*16+50;
 						rc.top +=fontDesc.Height;
 						max_len_ = 36;
@@ -1342,7 +1371,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 						tempchar2[j] = temp[i - one_line+1+j];
 					tempchar2[j] = NULL;
 			
-					pfont->DrawTextA(pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+					DrawTextUTF8(pfont,pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
 					rc.left = 32*16+50;
 					rc.top +=fontDesc.Height;
 					max_len_ = 36;
@@ -1351,26 +1380,26 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		else
 		{
-			sprintf_s(temp,128,"¸Ç¼Õ");
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+			sprintf_s(temp,128,"ë§¨ì†");
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 			rc.left = 32*16+50;
 			rc.top +=fontDesc.Height;
 		}
 		//rc.left -= fontDesc.Width*6;
 
 		//rc.top += fontDesc.Height;
-		sprintf_s(temp,128,"Åº¸·: ");
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		sprintf_s(temp,128,"íƒ„ë§‰: ");
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*6;
 		if(you.throw_weapon)
 		{
 			sprintf_s(temp,128,"%c) %s",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
 		}
 		else
 		{
-			sprintf_s(temp,128,"¾øÀ½");
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+			sprintf_s(temp,128,"ì—†ìŒ");
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		}
 		rc.left -= fontDesc.Width*6;
 
@@ -1381,42 +1410,42 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(you.GetNeedExp(you.level-1) > 0)
 		{
 			rc.top += fontDesc.Height;
-			sprintf_s(temp,128,"´ÙÀ½·¹º§±îÁö:");
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			sprintf_s(temp,128,"ë‹¤ìŒë ˆë²¨ê¹Œì§€:");
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += fontDesc.Width*14;
 		
 			sprintf_s(temp,128,"%d%%",(you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)));
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
 			rc.left -= fontDesc.Width*14;
 		}
 		else
 		{
 			rc.top += fontDesc.Height;
-			sprintf_s(temp,128,"ÃÖ°í ·¹º§");
-			pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
+			sprintf_s(temp,128,"ìµœê³  ë ˆë²¨");
+			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 
 		}
 
 
 		rc.top += fontDesc.Height;
 		sprintf_s(temp,128,"%s",CurrentLevelString());
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*15;
-		sprintf_s(temp,128,"ÅÏ: %g (%g)",you.real_turn/10.0f, you.prev_real_turn/10.0f);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);		
+		sprintf_s(temp,128,"í„´: %g (%g)",you.real_turn/10.0f, you.prev_real_turn/10.0f);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);		
 		rc.left -= fontDesc.Width*15;
 		rc.top += fontDesc.Height;
-		//sprintf_s(temp,128,"³²Àº½ºÅ³°æÇèÄ¡: %d",you.skill_exper);
-		//pfont->DrawTextA(pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		//sprintf_s(temp,128,"ë‚¨ì€ìŠ¤í‚¬ê²½í—˜ì¹˜: %d",you.skill_exper);
+		//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		//rc.top += fontDesc.Height;
 
-		{ //»óÅÂÀÌ»ó Ç¥½Ã!
+		{ //ìƒíƒœì´ìƒ í‘œì‹œ!
 			/*const char *state_str;*/
 			/*int hunger = you.GetHunger();
 			if(hunger != HT_NORMAL)
 			{
 				state_str = state_string[hunger];
-				pfont->DrawTextA(pSprite,state_str, -1, &rc, DT_SINGLELINE | DT_NOCLIP,hunger==HT_STARVING?CL_danger:(hunger<=HT_HUNGRY?CL_warning:CL_good));
+				DrawTextUTF8(pfont,pSprite,state_str, -1, &rc, DT_SINGLELINE | DT_NOCLIP,hunger==HT_STARVING?CL_danger:(hunger<=HT_HUNGRY?CL_warning:CL_good));
 				rc.left += fontDesc.Width*(strlen(state_str)+1);				
 			}*/
 
@@ -1425,8 +1454,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			if(wiz_list.wizard_mode == 1)
 			{
-				sprintf_s(temp,128,"À§Çèµµ(%d)",you.tension_gauge);
-				stateDraw.addState(temp, CL_small_danger, "À§Çèµµ´Â ¾ó¸¶³ª ÇöÀç »óÈ²ÀÌ À§ÇèÇÑÁö¿¡ ´ëÇÑ ¼öÄ¡ÀÔ´Ï´Ù.", this);
+				sprintf_s(temp,128,"ìœ„í—˜ë„(%d)",you.tension_gauge);
+				stateDraw.addState(temp, CL_small_danger, "ìœ„í—˜ë„ëŠ” ì–¼ë§ˆë‚˜ í˜„ì¬ ìƒí™©ì´ ìœ„í—˜í•œì§€ì— ëŒ€í•œ ìˆ˜ì¹˜ì…ë‹ˆë‹¤.", this);
 				stateDraw.enter(this);
 			}
 			if (you.s_weather>0 && you.s_weather_turn)
@@ -1434,200 +1463,200 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				D3DCOLOR color_ = CL_normal;
 				switch (you.s_weather) {
 				case 1:
-					stateDraw.addState("¾È°³", color_, "Â£Àº ¾È°³·Î ÀÎÇÏ¿© ¸ğµÎÀÇ ½Ã¾ß°¡ ±Ş°İÈ÷ ÁÙ¾îµì´Ï´Ù.", this);
+					stateDraw.addState("ì•ˆê°œ", color_, "ì§™ì€ ì•ˆê°œë¡œ ì¸í•˜ì—¬ ëª¨ë‘ì˜ ì‹œì•¼ê°€ ê¸‰ê²©íˆ ì¤„ì–´ë“­ë‹ˆë‹¤.", this);
 					break;
 				case 2:
-					stateDraw.addState("ÃµµÕ¹ø°³", color_, "ÁÖº¯¿¡ ¹«ÀÛÀ§·Î ÃµµÕ¹ø°³°¡ ¶³¾îÁı´Ï´Ù.", this);
+					stateDraw.addState("ì²œë‘¥ë²ˆê°œ", color_, "ì£¼ë³€ì— ë¬´ì‘ìœ„ë¡œ ì²œë‘¥ë²ˆê°œê°€ ë–¨ì–´ì§‘ë‹ˆë‹¤.", this);
 					break;
 				case 3:
-					stateDraw.addState("ÄèÃ»", color_, "ÁÖº¯ÀÇ ¸ğµÎ°¡ ºû³ª°ÔµÇ¾î È¸ÇÇ°¡ ³·¾ÆÁö°í Åõ¸íÀÌ È¿°ú¸¦ ÀÒ½À´Ï´Ù.", this);
+					stateDraw.addState("ì¾Œì²­", color_, "ì£¼ë³€ì˜ ëª¨ë‘ê°€ ë¹›ë‚˜ê²Œë˜ì–´ íšŒí”¼ê°€ ë‚®ì•„ì§€ê³  íˆ¬ëª…ì´ íš¨ê³¼ë¥¼ ìƒìŠµë‹ˆë‹¤.", this);
 					break;
 				}
 				stateDraw.enter(this);
 			}
 			if(you.as_penalty>0)
 			{
-				D3DCOLOR color_ = you.as_penalty>you.GetPenaltyMinus(3)?CL_danger: //²ûÂï
-					you.as_penalty>you.GetPenaltyMinus(2)?CL_small_danger: //ÀÌµ¿ÆĞ³ÎÆ¼
-					you.as_penalty>you.GetPenaltyMinus(1)?CL_warning: //¸íÁß
+				D3DCOLOR color_ = you.as_penalty>you.GetPenaltyMinus(3)?CL_danger: //ë”ì°
+					you.as_penalty>you.GetPenaltyMinus(2)?CL_small_danger: //ì´ë™íŒ¨ë„í‹°
+					you.as_penalty>you.GetPenaltyMinus(1)?CL_warning: //ëª…ì¤‘
 					CL_bad;
-				sprintf_s(temp,128,"ÀåºñÆĞ³ÎÆ¼(%d)",you.as_penalty);
+				sprintf_s(temp,128,"ì¥ë¹„íŒ¨ë„í‹°(%d)",you.as_penalty);
 				stateDraw.addState(temp, color_,
-					you.as_penalty > you.GetPenaltyMinus(3) ? "°©¿Ê°ú ¹æÆĞ°¡ ³Ê¹« ¹«°Ì½À´Ï´Ù! ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ, Àº¹Ğ, ¸¶¹ı, ¸íÁß, ÀÌµ¿¼Óµµ°¡ °¨¼ÒµÇ°í, Çàµ¿¼Óµµ°¡ 2¹è·Î ´À·ÁÁı´Ï´Ù." : //²ûÂï
-					you.as_penalty>you.GetPenaltyMinus(2) ? "°©¿Ê°ú ¹æÆĞÀÇ ÆĞ³ÎÆ¼ÀÇ ÇÕ°èÀÔ´Ï´Ù. ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ, Àº¹Ğ, ¸¶¹ı¼º°øÀ², ¸íÁß, ÀÌµ¿¼Óµµ°¡ °¨¼ÒÇÕ´Ï´Ù.": //ÀÌµ¿ÆĞ³ÎÆ¼
-					you.as_penalty>you.GetPenaltyMinus(1) ? "°©¿Ê°ú ¹æÆĞÀÇ ÆĞ³ÎÆ¼ÀÇ ÇÕ°èÀÔ´Ï´Ù. ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ, Àº¹Ğ, ¸¶¹ı¼º°øÀ², ¸íÁßÀÌ °¨¼ÒÇÕ´Ï´Ù." : //¸íÁß
-					"°©¿Ê°ú ¹æÆĞÀÇ ÆĞ³ÎÆ¼ÀÇ ÇÕ°èÀÔ´Ï´Ù. ÆĞ³ÎÆ¼¸¸Å­ È¸ÇÇ¿Í Àº¹Ğ, ¸¶¹ı¼º°øÀ²ÀÌ °¨¼ÒÇÕ´Ï´Ù.", this);
+					you.as_penalty > you.GetPenaltyMinus(3) ? "ê°‘ì˜·ê³¼ ë°©íŒ¨ê°€ ë„ˆë¬´ ë¬´ê²ìŠµë‹ˆë‹¤! íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼, ì€ë°€, ë§ˆë²•, ëª…ì¤‘, ì´ë™ì†ë„ê°€ ê°ì†Œë˜ê³ , í–‰ë™ì†ë„ê°€ 2ë°°ë¡œ ëŠë ¤ì§‘ë‹ˆë‹¤." : //ë”ì°
+					you.as_penalty>you.GetPenaltyMinus(2) ? "ê°‘ì˜·ê³¼ ë°©íŒ¨ì˜ íŒ¨ë„í‹°ì˜ í•©ê³„ì…ë‹ˆë‹¤. íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼, ì€ë°€, ë§ˆë²•ì„±ê³µìœ¨, ëª…ì¤‘, ì´ë™ì†ë„ê°€ ê°ì†Œí•©ë‹ˆë‹¤.": //ì´ë™íŒ¨ë„í‹°
+					you.as_penalty>you.GetPenaltyMinus(1) ? "ê°‘ì˜·ê³¼ ë°©íŒ¨ì˜ íŒ¨ë„í‹°ì˜ í•©ê³„ì…ë‹ˆë‹¤. íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼, ì€ë°€, ë§ˆë²•ì„±ê³µìœ¨, ëª…ì¤‘ì´ ê°ì†Œí•©ë‹ˆë‹¤." : //ëª…ì¤‘
+					"ê°‘ì˜·ê³¼ ë°©íŒ¨ì˜ íŒ¨ë„í‹°ì˜ í•©ê³„ì…ë‹ˆë‹¤. íŒ¨ë„í‹°ë§Œí¼ íšŒí”¼ì™€ ì€ë°€, ë§ˆë²•ì„±ê³µìœ¨ì´ ê°ì†Œí•©ë‹ˆë‹¤.", this);
 			}
 			bool haste_temp_ = false;
 
 			if (you.god == GT_MIKO)
 			{
 				if (env[current_level].popular == 1) {
-					stateDraw.addState("»õ·Î¿îÀå¼Ò", CL_normal, "ÀÌ Ãş¿¡¼± ¿å¸ÁºÎ¸£±â¸¦ ¾ÆÁ÷ »ç¿ëÇÏÁö¾Ê¾Ò½À´Ï´Ù.", this);
+					stateDraw.addState("ìƒˆë¡œìš´ì¥ì†Œ", CL_normal, "ì´ ì¸µì—ì„  ìš•ë§ë¶€ë¥´ê¸°ë¥¼ ì•„ì§ ì‚¬ìš©í•˜ì§€ì•Šì•˜ìŠµë‹ˆë‹¤.", this);
 				}
 				int mikocloak_ = you.isSetMikoBuff(0);
 				if (mikocloak_ == 1) {
-					stateDraw.addState("»¡°£¸ÁÅä", CL_danger, "ÃşÀ» ¿Å±â±â Àü±îÁö ÀüÅõ·Âº¸³Ê½º +6°ú Ã¼·ÂÀç»ı·ÂÀ» ¾ò°í ÀÖ½À´Ï´Ù.", this);
+					stateDraw.addState("ë¹¨ê°„ë§í† ", CL_danger, "ì¸µì„ ì˜®ê¸°ê¸° ì „ê¹Œì§€ ì „íˆ¬ë ¥ë³´ë„ˆìŠ¤ +6ê³¼ ì²´ë ¥ì¬ìƒë ¥ì„ ì–»ê³  ìˆìŠµë‹ˆë‹¤.", this);
 				}
 				else if (mikocloak_ == 2) {
-					stateDraw.addState("ÆÄ¶û¸ÁÅä", CL_blue, "ÃşÀ» ¿Å±â±â Àü±îÁö´Â ½ºÆç ÆÄ¿ö 1.5¹è¿Í ¿µ·ÂÀç»ı·ÂÀ» ¾ò°í ÀÖ½À´Ï´Ù.", this);
+					stateDraw.addState("íŒŒë‘ë§í† ", CL_blue, "ì¸µì„ ì˜®ê¸°ê¸° ì „ê¹Œì§€ëŠ” ìŠ¤í  íŒŒì›Œ 1.5ë°°ì™€ ì˜ë ¥ì¬ìƒë ¥ì„ ì–»ê³  ìˆìŠµë‹ˆë‹¤.", this);
 				}
 				int ulti_ = you.isSetMikoBuff(1);
 				if (ulti_ >= 1 && ulti_ <= 3) {
-					stateDraw.addState(ulti_ == 1 ? "ÀÎ±âÆø¹ß(Ã¼·Â)":(ulti_ == 2 ? "ÀÎ±âÆø¹ß(¿µ·Â)" : "ÀÎ±âÆø¹ß(°¡¼Ó)"),
+					stateDraw.addState(ulti_ == 1 ? "ì¸ê¸°í­ë°œ(ì²´ë ¥)":(ulti_ == 2 ? "ì¸ê¸°í­ë°œ(ì˜ë ¥)" : "ì¸ê¸°í­ë°œ(ê°€ì†)"),
 						CL_miko, 
-						ulti_ == 1 ? "ÃÖ´ë Ã¼·ÂÀÌ µÎ¹è°¡ µË´Ï´Ù."
-						: (ulti_ == 2 ? "¿µ·Â È¸º¹¼Óµµ°¡ ÆøÁõÇÕ´Ï´Ù." : 
-							"´ç½ÅÀÇ ¸ğµç Çàµ¿¼Óµµ´Â 1.5¹è »¡¶óÁı´Ï´Ù."), this);
+						ulti_ == 1 ? "ìµœëŒ€ ì²´ë ¥ì´ ë‘ë°°ê°€ ë©ë‹ˆë‹¤."
+						: (ulti_ == 2 ? "ì˜ë ¥ íšŒë³µì†ë„ê°€ í­ì¦í•©ë‹ˆë‹¤." : 
+							"ë‹¹ì‹ ì˜ ëª¨ë“  í–‰ë™ì†ë„ëŠ” 1.5ë°° ë¹¨ë¼ì§‘ë‹ˆë‹¤."), this);
 					if (ulti_ == 3) {
 						haste_temp_ = true;
 					}
 				}
 				if (you.GetBuffOk(BUFFSTAT_HALO)) {
-					stateDraw.addState("ÈÄ±¤", CL_normal,
-						"ÁÖº¯ÀÇ ÀûÀÇ È¸ÇÇ¸¦ ³·Ãß°í Åõ¸íÀ» º¸ÀÌ°Ô ÇÏÁö¸¸ ´ç½ÅÀÇ Àº¹Ğ°ú È¸ÇÇµµ ³·¾ÆÁı´Ï´Ù.", this);
+					stateDraw.addState("í›„ê´‘", CL_normal,
+						"ì£¼ë³€ì˜ ì ì˜ íšŒí”¼ë¥¼ ë‚®ì¶”ê³  íˆ¬ëª…ì„ ë³´ì´ê²Œ í•˜ì§€ë§Œ ë‹¹ì‹ ì˜ ì€ë°€ê³¼ íšŒí”¼ë„ ë‚®ì•„ì§‘ë‹ˆë‹¤.", this);
 				}
 			}
 			else if (you.GetPunish(GT_MIKO)) {
 				if (you.GetBuffOk(BUFFSTAT_HP) < 0) {
-					stateDraw.addState("Çã¾à", CL_danger,
-						"ÃÖ´ë Ã¼·ÂÀÌ Àı¹İÀ¸·Î ÁÙ¾ú½À´Ï´Ù.", this);
+					stateDraw.addState("í—ˆì•½", CL_danger,
+						"ìµœëŒ€ ì²´ë ¥ì´ ì ˆë°˜ìœ¼ë¡œ ì¤„ì—ˆìŠµë‹ˆë‹¤.", this);
 				}
 			}
 			if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-					stateDraw.addState("ºùÀÇ(ÁÒ¿Â)", CL_joon, you.GetPunish(GT_JOON_AND_SION)?"¼Ò¸ğÇ°À» »ç¿ë½Ã ¹«Á¶°Ç 2~3°³¾¿ ³¶ºñÇÏ¿© »ç¿ëÇÕ´Ï´Ù.":
-						"¼Ò¸ğÇ°À» »ç¿ë½Ã ¹«Á¶°Ç 2~3°³¾¿ ³¶ºñÇÏ¿© »ç¿ëÇÕ´Ï´Ù. ºùÀÇ°¡ Ç®¸®¸é ÆÄ¿ö 3.00·Î ³»·Á°©´Ï´Ù.", this);
+					stateDraw.addState("ë¹™ì˜(ì£ ì˜¨)", CL_joon, you.GetPunish(GT_JOON_AND_SION)?"ì†Œëª¨í’ˆì„ ì‚¬ìš©ì‹œ ë¬´ì¡°ê±´ 2~3ê°œì”© ë‚­ë¹„í•˜ì—¬ ì‚¬ìš©í•©ë‹ˆë‹¤.":
+						"ì†Œëª¨í’ˆì„ ì‚¬ìš©ì‹œ ë¬´ì¡°ê±´ 2~3ê°œì”© ë‚­ë¹„í•˜ì—¬ ì‚¬ìš©í•©ë‹ˆë‹¤. ë¹™ì˜ê°€ í’€ë¦¬ë©´ íŒŒì›Œ 3.00ë¡œ ë‚´ë ¤ê°‘ë‹ˆë‹¤.", this);
 				}
 				if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-					stateDraw.addState("ºùÀÇ(½Ã¿Â)", CL_sion, you.GetPunish(GT_JOON_AND_SION) ? "ÁİÁö¾ÊÀº ¼Ò¸ğÇ°Àº ºü¸¥¼Óµµ·Î »ç¶óÁö¸ç ¼Ò¸ğÇ°À» ¹ö¸®¸é ¹«Á¶°Ç »ç¶óÁı´Ï´Ù." : 
-						"ÁİÁö¾ÊÀº ¼Ò¸ğÇ°Àº ºü¸¥¼Óµµ·Î »ç¶óÁö¸ç ¼Ò¸ğÇ°À» ¹ö¸®¸é ¹«Á¶°Ç »ç¶óÁı´Ï´Ù. ÆÄ¿öÆĞ³ÎÆ¼¸¦ ¾È ¹Ş½À´Ï´Ù.", this);
+					stateDraw.addState("ë¹™ì˜(ì‹œì˜¨)", CL_sion, you.GetPunish(GT_JOON_AND_SION) ? "ì¤ì§€ì•Šì€ ì†Œëª¨í’ˆì€ ë¹ ë¥¸ì†ë„ë¡œ ì‚¬ë¼ì§€ë©° ì†Œëª¨í’ˆì„ ë²„ë¦¬ë©´ ë¬´ì¡°ê±´ ì‚¬ë¼ì§‘ë‹ˆë‹¤." : 
+						"ì¤ì§€ì•Šì€ ì†Œëª¨í’ˆì€ ë¹ ë¥¸ì†ë„ë¡œ ì‚¬ë¼ì§€ë©° ì†Œëª¨í’ˆì„ ë²„ë¦¬ë©´ ë¬´ì¡°ê±´ ì‚¬ë¼ì§‘ë‹ˆë‹¤. íŒŒì›ŒíŒ¨ë„í‹°ë¥¼ ì•ˆ ë°›ìŠµë‹ˆë‹¤.", this);
 				}
 			}
 			if (you.drowned)
 			{
-				stateDraw.addState("ÀÍ»çÁß", CL_danger, "¹°¿¡ ºüÁ³½À´Ï´Ù!", this);
+				stateDraw.addState("ìµì‚¬ì¤‘", CL_danger, "ë¬¼ì— ë¹ ì¡ŒìŠµë‹ˆë‹¤!", this);
 			}
 			if (current_level == ZIGURRAT_LEVEL)
 			{
-				stateDraw.addState("ÀüÀÌÁ¦¾î¹æÇØ", CL_danger, "ÀÌ °÷¿¡¼­´Â Á¦¾îµÈ ¼ø°£ÀÌµ¿À» ÇÒ ¼ö ¾ø´Ù. Á¦¾îµÈ ¼ø°£ÀÌµ¿Àº ¹«ÀÛÀ§ ¼ø°£ÀÌµ¿À¸·Î ¹Ù²ï´Ù.", this);
+				stateDraw.addState("ì „ì´ì œì–´ë°©í•´", CL_danger, "ì´ ê³³ì—ì„œëŠ” ì œì–´ëœ ìˆœê°„ì´ë™ì„ í•  ìˆ˜ ì—†ë‹¤. ì œì–´ëœ ìˆœê°„ì´ë™ì€ ë¬´ì‘ìœ„ ìˆœê°„ì´ë™ìœ¼ë¡œ ë°”ë€ë‹¤.", this);
 			}
 			if(you.GetStatPanalty())
 			{
-				stateDraw.addState("½ºÅÈÆĞ³ÎÆ¼", CL_danger, "½ºÅÈÀÌ 0ÀÌ µÈ ÆĞ³ÎÆ¼·Î ¸ğµç Çàµ¿ µô·¹ÀÌ°¡ 2¹è°¡ µË´Ï´Ù.", this);
+				stateDraw.addState("ìŠ¤íƒ¯íŒ¨ë„í‹°", CL_danger, "ìŠ¤íƒ¯ì´ 0ì´ ëœ íŒ¨ë„í‹°ë¡œ ëª¨ë“  í–‰ë™ ë”œë ˆì´ê°€ 2ë°°ê°€ ë©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_exhausted)
 			{
-				stateDraw.addState("ÇÇ·Î", CL_warning, "ÇÇ·ÎÇÑ µ¿¾È¿£ ¸î¸î Çàµ¿ÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.", this);
+				stateDraw.addState("í”¼ë¡œ", CL_warning, "í”¼ë¡œí•œ ë™ì•ˆì—” ëª‡ëª‡ í–‰ë™ì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.", this);
 			}
 			if (you.s_super_graze)
 			{
-				stateDraw.addState("±Ù¼ºÈ¸ÇÇ", you.s_super_graze>3 ? CL_normal : CL_white_blue, "È¸ÇÇ°¡´ÉÇÑ ¸ğµç °ø°İÀ» 100% È¸ÇÇÇÕ´Ï´Ù.", this);
+				stateDraw.addState("ê·¼ì„±íšŒí”¼", you.s_super_graze>3 ? CL_normal : CL_white_blue, "íšŒí”¼ê°€ëŠ¥í•œ ëª¨ë“  ê³µê²©ì„ 100% íšŒí”¼í•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_trans_panalty)
 			{
-				stateDraw.addState("½Ã°øºÎÀÛ¿ë", you.s_trans_panalty <= 2 ? CL_bad : (you.s_trans_panalty<5 ? CL_warning : CL_small_danger), 
-					"½Ã°ø¸¶¹ıÀÇ ¼º°øÀ²ÀÌ ´ëÆø °¨¼ÒÇÕ´Ï´Ù.", this);
+				stateDraw.addState("ì‹œê³µë¶€ì‘ìš©", you.s_trans_panalty <= 2 ? CL_bad : (you.s_trans_panalty<5 ? CL_warning : CL_small_danger), 
+					"ì‹œê³µë§ˆë²•ì˜ ì„±ê³µìœ¨ì´ ëŒ€í­ ê°ì†Œí•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_spellcard)
 			{
-				stateDraw.addState("½ºÆçÄ«µå", you.s_spellcard>5 ? CL_white_blue : CL_blue, 
-					"´ç½ÅÀº ½ºÆçÄ«µå¸¦ »ç¿ëÇÏ°í ÀÖ½À´Ï´Ù.", this);
+				stateDraw.addState("ìŠ¤í ì¹´ë“œ", you.s_spellcard>5 ? CL_white_blue : CL_blue, 
+					"ë‹¹ì‹ ì€ ìŠ¤í ì¹´ë“œë¥¼ ì‚¬ìš©í•˜ê³  ìˆìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_autumn>0)
 			{
-				stateDraw.addState("°ø±âÈ­", you.s_autumn>0 ? CL_autumn : CL_danger, 
-					"´ç½ÅÀº ¹ÏÀ» ¼ö ¾øÀ» Á¤µµ·Î Àº¹ĞÇÕ´Ï´Ù.", this);
+				stateDraw.addState("ê³µê¸°í™”", you.s_autumn>0 ? CL_autumn : CL_danger, 
+					"ë‹¹ì‹ ì€ ë¯¿ì„ ìˆ˜ ì—†ì„ ì •ë„ë¡œ ì€ë°€í•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_wind)
 			{
-				stateDraw.addState("°Ç½ÅÃÊ·¡Ç³", CL_white_blue,
-					"¸ğµç ±ÙÁ¢, ¿ø°Å¸®°ø°İÀÌ ¹üÀ§ °ø°İÀÌ µË´Ï´Ù.", this);
+				stateDraw.addState("ê±´ì‹ ì´ˆë˜í’", CL_white_blue,
+					"ëª¨ë“  ê·¼ì ‘, ì›ê±°ë¦¬ê³µê²©ì´ ë²”ìœ„ ê³µê²©ì´ ë©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_knife_collect)
 			{
-				stateDraw.addState("Åº¸·È¸¼ö", CL_white_blue,
-					"´ç½ÅÀÌ ½ğ Åº¸· ¾ÆÀÌÅÛÀº ´øÁöÀÚ¸¶ÀÚ ÀÎº¥Åä¸®·Î È¸¼öµË´Ï´Ù.", this);
+				stateDraw.addState("íƒ„ë§‰íšŒìˆ˜", CL_white_blue,
+					"ë‹¹ì‹ ì´ ìœ íƒ„ë§‰ ì•„ì´í…œì€ ë˜ì§€ìë§ˆì ì¸ë²¤í† ë¦¬ë¡œ íšŒìˆ˜ë©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_drunken)
 			{
-				stateDraw.addState("À½ÁÖ", CL_warning,
-					"¼úÀÌ ÃëÇØÀÖ½À´Ï´Ù. ¿Ã¹Ù¸£°Ô °È±â Èûµé¸ç ¸¶¹ı ¼º°øÀ²ÀÌ ¾à°£ ³»·Á°©´Ï´Ù.", this);
+				stateDraw.addState("ìŒì£¼", CL_warning,
+					"ìˆ ì´ ì·¨í•´ìˆìŠµë‹ˆë‹¤. ì˜¬ë°”ë¥´ê²Œ ê±·ê¸° í˜ë“¤ë©° ë§ˆë²• ì„±ê³µìœ¨ì´ ì•½ê°„ ë‚´ë ¤ê°‘ë‹ˆë‹¤.", this);
 			}
 			if(you.s_lunatic)
 			{
-				stateDraw.addState("±¤±â", CL_danger,
-					"´ëºÎºĞÀÇ º¹ÀâÇÑ Çàµ¿ÀÌ ºÒ°¡´ÉÇØÁöÁö¸¸ ±ÙÁ¢ °ø°İ·ÂÀÌ ´ëÆø »ó½ÂÇÕ´Ï´Ù.", this);
+				stateDraw.addState("ê´‘ê¸°", CL_danger,
+					"ëŒ€ë¶€ë¶„ì˜ ë³µì¡í•œ í–‰ë™ì´ ë¶ˆê°€ëŠ¥í•´ì§€ì§€ë§Œ ê·¼ì ‘ ê³µê²©ë ¥ì´ ëŒ€í­ ìƒìŠ¹í•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_catch)
 			{
-				stateDraw.addState("Àâ±â", CL_yuigi,
-					"´ç½ÅÀº ±ÙÁ¢ÇÑ »ó´ë¸¦ Àâ°í ÀÖ½À´Ï´Ù. ±Ç´É¿¡ ºÎ°¡ È¿°ú°¡ »ı±é´Ï´Ù.", this);
+				stateDraw.addState("ì¡ê¸°", CL_yuigi,
+					"ë‹¹ì‹ ì€ ê·¼ì ‘í•œ ìƒëŒ€ë¥¼ ì¡ê³  ìˆìŠµë‹ˆë‹¤. ê¶ŒëŠ¥ì— ë¶€ê°€ íš¨ê³¼ê°€ ìƒê¹ë‹ˆë‹¤.", this);
 			}
 			if(you.s_ghost)
 			{
-				stateDraw.addState("À¯·É", you.s_ghost>1 ? CL_white_blue : CL_yuyuko,
-					"´ç½ÅÀÇ ÁÖº¯¿£ À¯·ÉµéÀÌ ²¿ÀÌ°í ÀÖ½À´Ï´Ù.", this);
+				stateDraw.addState("ìœ ë ¹", you.s_ghost>1 ? CL_white_blue : CL_yuyuko,
+					"ë‹¹ì‹ ì˜ ì£¼ë³€ì—” ìœ ë ¹ë“¤ì´ ê¼¬ì´ê³  ìˆìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_dimension)
 			{
-				stateDraw.addState("Â÷¿ø°íÁ¤", you.s_dimension>3 ? CL_yukari : CL_blue,
+				stateDraw.addState("ì°¨ì›ê³ ì •", you.s_dimension>3 ? CL_yukari : CL_blue,
 				 (you.god == GT_YUKARI)?
-						"´ç½ÅÀº ÇöÀç Â÷¿øÀ» °íÁ¤½ÃÄÑ »óÇÏÁÂ¿ìÀÇ Â÷¿øÀ» ³Ñ³ªµé ¼ö ÀÖ½À´Ï´Ù.":
-					"°­Á¦·Î °á°è¿¡ ÀÇÇØ Â÷¿øÀÌ °íÁ¤µÇ¾î Áö¼Ó½Ã°£µ¿¾È °á°è ¹ÛÀ¸·Î ³ª°¥ ¼ö ¾ø½À´Ï´Ù!" , this);
+						"ë‹¹ì‹ ì€ í˜„ì¬ ì°¨ì›ì„ ê³ ì •ì‹œì¼œ ìƒí•˜ì¢Œìš°ì˜ ì°¨ì›ì„ ë„˜ë‚˜ë“¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.":
+					"ê°•ì œë¡œ ê²°ê³„ì— ì˜í•´ ì°¨ì›ì´ ê³ ì •ë˜ì–´ ì§€ì†ì‹œê°„ë™ì•ˆ ê²°ê³„ ë°–ìœ¼ë¡œ ë‚˜ê°ˆ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!" , this);
 			}
 			if(you.s_mirror)
 			{
-				stateDraw.addState("¹İ»ç", CL_normal,
-					"¹ŞÀº ¸ğµç °ø°İÀ» »ó´ë¿¡°Ô µÇµ¹·Á Áİ´Ï´Ù.", this);
+				stateDraw.addState("ë°˜ì‚¬", CL_normal,
+					"ë°›ì€ ëª¨ë“  ê³µê²©ì„ ìƒëŒ€ì—ê²Œ ë˜ëŒë ¤ ì¤ë‹ˆë‹¤.", this);
 			}
 			if(you.s_paradox)
 			{
-				stateDraw.addState("ÆĞ·¯µ¶½º", CL_white_blue,
-					"Åº¸·ÀÌ³ª ÀÏºÎ ¸¶¹ıÀ» »ç¿ëÇÏ¸é ¿¬´Ş¾Æ 2¹ø ³ª°©´Ï´Ù.", this);
+				stateDraw.addState("íŒ¨ëŸ¬ë…ìŠ¤", CL_white_blue,
+					"íƒ„ë§‰ì´ë‚˜ ì¼ë¶€ ë§ˆë²•ì„ ì‚¬ìš©í•˜ë©´ ì—°ë‹¬ì•„ 2ë²ˆ ë‚˜ê°‘ë‹ˆë‹¤.", this);
 			}
 			if(you.s_the_world)
 			{
-				stateDraw.addState("½Ã°£Á¤Áö", you.s_the_world>1 ? CL_white_blue : you.s_the_world<0 ? CL_normal : CL_blue,
-					"´ç½ÅÀ» Á¦¿ÜÇÑ ¸ğµç ¹°Ã¼´Â ¿òÁ÷ÀÏ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("ì‹œê°„ì •ì§€", you.s_the_world>1 ? CL_white_blue : you.s_the_world<0 ? CL_normal : CL_blue,
+					"ë‹¹ì‹ ì„ ì œì™¸í•œ ëª¨ë“  ë¬¼ì²´ëŠ” ì›€ì§ì¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_mana_delay)
 			{
-				stateDraw.addState("¿µ·ÂÈ¸º¹Áö¿¬", CL_warning,
-					"¿µ·ÂÀÌ ÀÚ¿¬ÀûÀ¸·Î È¸º¹µÇÁö¾Ê½À´Ï´Ù.", this);
+				stateDraw.addState("ì˜ë ¥íšŒë³µì§€ì—°", CL_warning,
+					"ì˜ë ¥ì´ ìì—°ì ìœ¼ë¡œ íšŒë³µë˜ì§€ì•ŠìŠµë‹ˆë‹¤.", this);
 			}
 			if (env[current_level].isSilence(you.position))
 			{
-				stateDraw.addState("Ä§¹¬", CL_white_blue,
-					"´ç½ÅÀº ¼Ò¸®¸¦ ³»¾î ¸»ÇÏ´Â °ÍÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù. ¸¶¹ı°ú µÎ·ç¸¶¸®, ÀÏºÎ ±Ç´ÉÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("ì¹¨ë¬µ", CL_white_blue,
+					"ë‹¹ì‹ ì€ ì†Œë¦¬ë¥¼ ë‚´ì–´ ë§í•˜ëŠ” ê²ƒì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤. ë§ˆë²•ê³¼ ë‘ë£¨ë§ˆë¦¬, ì¼ë¶€ ê¶ŒëŠ¥ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_eirin_poison_time)
 			{
 				D3DCOLOR color_ = you.s_eirin_poison_time>11 ? CL_small_danger : CL_danger;
-				sprintf_s(temp, 128, "ºÎÀÛ¿ë(%d)", you.s_eirin_poison);
+				sprintf_s(temp, 128, "ë¶€ì‘ìš©(%d)", you.s_eirin_poison);
 				stateDraw.addState(temp, color_,
-					"½Ã°£ÀÌ Áö³ª¸é ¼öÄ¡¸¸Å­ Áö¼Óµ¥¹ÌÁö¸¦ ¹Ş½À´Ï´Ù.", this);
+					"ì‹œê°„ì´ ì§€ë‚˜ë©´ ìˆ˜ì¹˜ë§Œí¼ ì§€ì†ë°ë¯¸ì§€ë¥¼ ë°›ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_stasis)
 			{				
 				D3DCOLOR color_ = CL_danger;
-				sprintf_s(temp,128,"ÀüÀÌºÒ°¡");
+				sprintf_s(temp,128,"ì „ì´ë¶ˆê°€");
 				stateDraw.addState(temp, color_,
-					"ÀüÀÌ°ü·Ã ¸¶¹ı°ú ¾ÆÀÌÅÛÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+					"ì „ì´ê´€ë ¨ ë§ˆë²•ê³¼ ì•„ì´í…œì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.force_turn)
 			{				
 				D3DCOLOR color_ = you.force_strong?CL_white_blue:CL_danger;
-				sprintf_s(temp,128,you.force_strong?"°­È­":"¾àÈ­");
+				sprintf_s(temp,128,you.force_strong?"ê°•í™”":"ì•½í™”");
 				stateDraw.addState(temp, color_,
-					you.force_strong ? "´ç½ÅÀÇ ¸ğµç °ø°İ°ú ¸¶¹ıÀº °­È­µÇ¾ú½À´Ï´Ù." :
-					"´ç½ÅÀÇ ¸ğµç °ø°İ°ú ¸¶¹ıÀº ¾àÈ­µÇ¾ú½À´Ï´Ù.", this);
+					you.force_strong ? "ë‹¹ì‹ ì˜ ëª¨ë“  ê³µê²©ê³¼ ë§ˆë²•ì€ ê°•í™”ë˜ì—ˆìŠµë‹ˆë‹¤." :
+					"ë‹¹ì‹ ì˜ ëª¨ë“  ê³µê²©ê³¼ ë§ˆë²•ì€ ì•½í™”ë˜ì—ˆìŠµë‹ˆë‹¤.", this);
 			}
 			if (you.s_evoke_ghost)
 			{
-				stateDraw.addState("À¯·ÉÈ­", CL_normal,
-					"´ç½ÅÀº ¸ğµç °ø°İÀ» ¹ŞÁö¾Ê½À´Ï´Ù. ´Ü, ÀÌµ¿ ÀÌ¿ÜÀÇ °ø°İ, ¸¶¹ı, ¾ÆÀÌÅÛµîÀÇ ¸ğµç Çàµ¿À» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("ìœ ë ¹í™”", CL_normal,
+					"ë‹¹ì‹ ì€ ëª¨ë“  ê³µê²©ì„ ë°›ì§€ì•ŠìŠµë‹ˆë‹¤. ë‹¨, ì´ë™ ì´ì™¸ì˜ ê³µê²©, ë§ˆë²•, ì•„ì´í…œë“±ì˜ ëª¨ë“  í–‰ë™ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 
 			
@@ -1639,84 +1668,84 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.power<=200)
 			{
 				bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
-				stateDraw.addState("ÆÄ¿öºÎÁ·", sion_ ? CL_bad:(you.power <= 100 ? CL_danger : CL_warning),
-					sion_ ? "½Ã¿ÂÀÌ ´ç½ÅÀÇ ÆÄ¿ö ÆĞ³ÎÆ¼¸¦ ¸·°íÀÖ½À´Ï´Ù." :(you.power <= 100 ? "ÆÄ¿ö°¡ ºÎÁ·ÇÏ¿© °ø°İ·ÂÀÌ ¸Å¿ì ¾àÇØÁ³½À´Ï´Ù.": "ÆÄ¿ö°¡ ºÎÁ·ÇÏ¿© °ø°İ·ÂÀÌ ¾àÇØÁ³½À´Ï´Ù."), this);
+				stateDraw.addState("íŒŒì›Œë¶€ì¡±", sion_ ? CL_bad:(you.power <= 100 ? CL_danger : CL_warning),
+					sion_ ? "ì‹œì˜¨ì´ ë‹¹ì‹ ì˜ íŒŒì›Œ íŒ¨ë„í‹°ë¥¼ ë§‰ê³ ìˆìŠµë‹ˆë‹¤." :(you.power <= 100 ? "íŒŒì›Œê°€ ë¶€ì¡±í•˜ì—¬ ê³µê²©ë ¥ì´ ë§¤ìš° ì•½í•´ì¡ŒìŠµë‹ˆë‹¤.": "íŒŒì›Œê°€ ë¶€ì¡±í•˜ì—¬ ê³µê²©ë ¥ì´ ì•½í•´ì¡ŒìŠµë‹ˆë‹¤."), this);
 			}
 			if(you.s_poison)
 			{
-				stateDraw.addState("µ¶", you.s_poison <= 50 ? CL_warning : (you.s_poison <= 100 ? CL_small_danger : CL_danger),
-					"Áö¼ÓÀûÀ¸·Î µ¶ µ¥¹ÌÁö¸¦ ¹Ş°íÀÖ½À´Ï´Ù.", this);
+				stateDraw.addState("ë…", you.s_poison <= 50 ? CL_warning : (you.s_poison <= 100 ? CL_small_danger : CL_danger),
+					"ì§€ì†ì ìœ¼ë¡œ ë… ë°ë¯¸ì§€ë¥¼ ë°›ê³ ìˆìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_tele)
 			{
-				stateDraw.addState("°ø°£", CL_blue,
-					"ÀÏÁ¤ ÅÏÀÌ Áö³ª¸é °°Àº Ãş ¹«ÀÛÀ§ À§Ä¡·Î ÀÌµ¿µË´Ï´Ù.", this);
+				stateDraw.addState("ê³µê°„", CL_blue,
+					"ì¼ì • í„´ì´ ì§€ë‚˜ë©´ ê°™ì€ ì¸µ ë¬´ì‘ìœ„ ìœ„ì¹˜ë¡œ ì´ë™ë©ë‹ˆë‹¤.", this);
 			}
 			if((you.s_pure_haste || you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
 			{
 				if ((you.s_haste || you.alchemy_buff == ALCT_HASTE) && !haste_temp_)
-					stateDraw.addState("°¡¼Ó", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
-						"´ç½ÅÀÇ ¸ğµç Çàµ¿¼Óµµ´Â 1.5¹è »¡¶óÁı´Ï´Ù.", this);
+					stateDraw.addState("ê°€ì†", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
+						"ë‹¹ì‹ ì˜ ëª¨ë“  í–‰ë™ì†ë„ëŠ” 1.5ë°° ë¹¨ë¼ì§‘ë‹ˆë‹¤.", this);
 				else if (you.s_pure_haste)
-					stateDraw.addState("»ìÀÇ",CL_junko,
-						"´ç½ÅÀÇ ¸ğµç Çàµ¿¼Óµµ´Â 1.5¹è »¡¶óÁı´Ï´Ù. ½Ã¾ß¿¡ ÀûÀÌ ¾Èº¸ÀÌ°ÔµÇ¸é ¹öÇÁ°¡ »ç¶óÁı´Ï´Ù.", this);
+					stateDraw.addState("ì‚´ì˜",CL_junko,
+						"ë‹¹ì‹ ì˜ ëª¨ë“  í–‰ë™ì†ë„ëŠ” 1.5ë°° ë¹¨ë¼ì§‘ë‹ˆë‹¤. ì‹œì•¼ì— ì ì´ ì•ˆë³´ì´ê²Œë˜ë©´ ë²„í”„ê°€ ì‚¬ë¼ì§‘ë‹ˆë‹¤.", this);
 			}
 			else if(you.s_slow && !(you.s_haste || you.alchemy_buff == ALCT_HASTE))
 			{
-				stateDraw.addState("°¨¼Ó", CL_danger,
-					"´ç½ÅÀÇ ¸ğµç Çàµ¿¼Óµµ´Â 0.7¹è·Î ´À·ÁÁı´Ï´Ù.", this);
+				stateDraw.addState("ê°ì†", CL_danger,
+					"ë‹¹ì‹ ì˜ ëª¨ë“  í–‰ë™ì†ë„ëŠ” 0.7ë°°ë¡œ ëŠë ¤ì§‘ë‹ˆë‹¤.", this);
 			}
 			else if((you.s_haste || you.alchemy_buff == ALCT_HASTE) && you.s_slow)
 			{
-				stateDraw.addState("°¡¼Ó+°¨¼Ó", CL_magic,
-					"°¡¼Ó°ú °¨¼ÓÈ¿°ú¸¦ µ¿½Ã¿¡ ¹Ş¾Æ ¾ÈÁ¤µÈ »óÅÂÀÔ´Ï´Ù.", this);
+				stateDraw.addState("ê°€ì†+ê°ì†", CL_magic,
+					"ê°€ì†ê³¼ ê°ì†íš¨ê³¼ë¥¼ ë™ì‹œì— ë°›ì•„ ì•ˆì •ëœ ìƒíƒœì…ë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_STONE_FIST)
 			{
-				stateDraw.addState("µ¹ÁÖ¸Ô", CL_alchemy,
-					"´ç½ÅÀÇ ´ÙÀ½ ¸Ç¼Õ °ø°İÀº Ãß°¡ µ¥¹ÌÁö¸¦ Áİ´Ï´Ù.", this);
+				stateDraw.addState("ëŒì£¼ë¨¹", CL_alchemy,
+					"ë‹¹ì‹ ì˜ ë‹¤ìŒ ë§¨ì† ê³µê²©ì€ ì¶”ê°€ ë°ë¯¸ì§€ë¥¼ ì¤ë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_DIAMOND_HARDNESS)
 			{
-				stateDraw.addState("´ÙÀÌ¾Æ", CL_alchemy,
-					"Àá±ñµ¿¾È Ãß°¡ ¹æ¾î·ÂÀ» ¾ò½À´Ï´Ù.", this);
+				stateDraw.addState("ë‹¤ì´ì•„", CL_alchemy,
+					"ì ê¹ë™ì•ˆ ì¶”ê°€ ë°©ì–´ë ¥ì„ ì–»ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_POISON_BODY)
 			{
-				stateDraw.addState("Æ÷ÀÌÁğ", CL_alchemy,
-					"ÁÖº¯ 8Å¸ÀÏÀÇ Àû¿¡°Ô Áö¼ÓÀûÀ¸·Î µ¶ µ¥¹ÌÁö¸¦ Áİ´Ï´Ù.", this);
+				stateDraw.addState("í¬ì´ì¦Œ", CL_alchemy,
+					"ì£¼ë³€ 8íƒ€ì¼ì˜ ì ì—ê²Œ ì§€ì†ì ìœ¼ë¡œ ë… ë°ë¯¸ì§€ë¥¼ ì¤ë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_STONE_FORM)
 			{
-				stateDraw.addState("¹«³ä¹«»ó", CL_alchemy,
-					"±ÙÁ¢ °ø°İ·ÂÀÌ »ó½ÂÇÏ°í ¹Ş´Â µ¥¹ÌÁö°¡ 66%°¡ µÇÁö¸¸ ÀÌµ¿¼Óµµ°¡ 1.3¹è ´À·ÁÁı´Ï´Ù.", this);
+				stateDraw.addState("ë¬´ë…ë¬´ìƒ", CL_alchemy,
+					"ê·¼ì ‘ ê³µê²©ë ¥ì´ ìƒìŠ¹í•˜ê³  ë°›ëŠ” ë°ë¯¸ì§€ê°€ 66%ê°€ ë˜ì§€ë§Œ ì´ë™ì†ë„ê°€ 1.3ë°° ëŠë ¤ì§‘ë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_AUTUMN_BLADE)
 			{
-				stateDraw.addState("ºí·¹ÀÌµå", CL_alchemy,
-					"±ÙÁ¢ °ø°İ·ÂÀÌ 3¹è°¡ µË´Ï´Ù.", this);
+				stateDraw.addState("ë¸”ë ˆì´ë“œ", CL_alchemy,
+					"ê·¼ì ‘ ê³µê²©ë ¥ì´ 3ë°°ê°€ ë©ë‹ˆë‹¤.", this);
 			}
 			if(you.alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 			{
-				stateDraw.addState("ÇöÀÚÀÇµ¹", CL_alchemy,
-					"´É·Â»ç¿ë(aÅ°)À¸·Î 5¿ø¼ÒÀÇ ¸¶¹ıÀÌ Àú·ÅÇÏ°Ô »ç¿ë°¡´ÉÇÕ´Ï´Ù.", this);
+				stateDraw.addState("í˜„ìì˜ëŒ", CL_alchemy,
+					"ëŠ¥ë ¥ì‚¬ìš©(aí‚¤)ìœ¼ë¡œ 5ì›ì†Œì˜ ë§ˆë²•ì´ ì €ë ´í•˜ê²Œ ì‚¬ìš©ê°€ëŠ¥í•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_unluck > 0)
 			{
 				if(you.s_unluck <= 3)
 				{
-					stateDraw.addState("Èä", CL_warning,
-						"´ç½ÅÀº ºÒÇàÇÕ´Ï´Ù! ÀÌ »óÅÂ´Â °æÇèÄ¡¸¦ ¸Ô¾î¾ß »ç¶óÁı´Ï´Ù.", this);
+					stateDraw.addState("í‰", CL_warning,
+						"ë‹¹ì‹ ì€ ë¶ˆí–‰í•©ë‹ˆë‹¤! ì´ ìƒíƒœëŠ” ê²½í—˜ì¹˜ë¥¼ ë¨¹ì–´ì•¼ ì‚¬ë¼ì§‘ë‹ˆë‹¤.", this);
 				}
 				else if(you.s_unluck <= 6)
 				{
-					stateDraw.addState("´ëÈä", CL_small_danger,
-						"´ç½ÅÀº ¾ÆÁÖ ºÒÇàÇÕ´Ï´Ù! ÀÌ »óÅÂ´Â °æÇèÄ¡¸¦ ¸Ô¾î¾ß »ç¶óÁı´Ï´Ù.", this);
+					stateDraw.addState("ëŒ€í‰", CL_small_danger,
+						"ë‹¹ì‹ ì€ ì•„ì£¼ ë¶ˆí–‰í•©ë‹ˆë‹¤! ì´ ìƒíƒœëŠ” ê²½í—˜ì¹˜ë¥¼ ë¨¹ì–´ì•¼ ì‚¬ë¼ì§‘ë‹ˆë‹¤.", this);
 				}
 				else
 				{
-					stateDraw.addState("ºÒ¸ê", CL_danger,
-						"´ç½ÅÀº ²ûÂïÇÏ°Ô ºÒÇàÇÕ´Ï´Ù! ÀÌ »óÅÂ´Â °æÇèÄ¡¸¦ ¸Ô¾î¾ß »ç¶óÁı´Ï´Ù.", this);
+					stateDraw.addState("ë¶ˆë©¸", CL_danger,
+						"ë‹¹ì‹ ì€ ë”ì°í•˜ê²Œ ë¶ˆí–‰í•©ë‹ˆë‹¤! ì´ ìƒíƒœëŠ” ê²½í—˜ì¹˜ë¥¼ ë¨¹ì–´ì•¼ ì‚¬ë¼ì§‘ë‹ˆë‹¤.", this);
 				}
 			}
 
@@ -1729,129 +1758,129 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int rconf_ = you.GetBuffOk(BUFFSTAT_RCONF);
 				if(rf_)
 				{			
-					sprintf_s(temp,128,"È­Àú%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")));
+					sprintf_s(temp,128,"í™”ì €%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rf_>0 ? CL_good : CL_danger,
-						(rf_>0 ? "È­¿° ÀúÇ×ÀÌ ³ô¾ÆÁ³½À´Ï´Ù." : "È­¿° ÀúÇ×ÀÌ ³·¾ÆÁ³½À´Ï´Ù."), this);
+						(rf_>0 ? "í™”ì—¼ ì €í•­ì´ ë†’ì•„ì¡ŒìŠµë‹ˆë‹¤." : "í™”ì—¼ ì €í•­ì´ ë‚®ì•„ì¡ŒìŠµë‹ˆë‹¤."), this);
 				}
 				if(rc_)
 				{
-					sprintf_s(temp,128,"³ÃÀú%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")));
+					sprintf_s(temp,128,"ëƒ‰ì €%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, rc_>0 ? CL_good : CL_danger,
-						(rc_>0 ? "³Ã±â ÀúÇ×ÀÌ ³ô¾ÆÁ³½À´Ï´Ù." : "³Ã±â ÀúÇ×ÀÌ ³·¾ÆÁ³½À´Ï´Ù."), this);
+						(rc_>0 ? "ëƒ‰ê¸° ì €í•­ì´ ë†’ì•„ì¡ŒìŠµë‹ˆë‹¤." : "ëƒ‰ê¸° ì €í•­ì´ ë‚®ì•„ì¡ŒìŠµë‹ˆë‹¤."), this);
 				}
 				if (re_)
 				{
-					sprintf_s(temp, 128, "³úÀú%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-")));
+					sprintf_s(temp, 128, "ë‡Œì €%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-")));
 					stateDraw.addState(temp, re_>0 ? CL_good : CL_danger,
-						(re_>0 ? "Àü±â ÀúÇ×ÀÌ ³ô¾ÆÁ³½À´Ï´Ù." : "Àü±â ÀúÇ×ÀÌ ³·¾ÆÁ³½À´Ï´Ù."), this);
+						(re_>0 ? "ì „ê¸° ì €í•­ì´ ë†’ì•„ì¡ŒìŠµë‹ˆë‹¤." : "ì „ê¸° ì €í•­ì´ ë‚®ì•„ì¡ŒìŠµë‹ˆë‹¤."), this);
 				}
 				if (rp_)
 				{
-					sprintf_s(temp, 128, "µ¶Àú%s", rp_>0 ? "+" : "-");
+					sprintf_s(temp, 128, "ë…ì €%s", rp_>0 ? "+" : "-");
 					stateDraw.addState(temp, rp_>0 ? CL_good : CL_danger,
-						(rp_>0 ? "µ¶ ÀúÇ×ÀÌ ³ô¾ÆÁ³½À´Ï´Ù." : "µ¶ ÀúÇ×ÀÌ ³·¾ÆÁ³½À´Ï´Ù."), this);
+						(rp_>0 ? "ë… ì €í•­ì´ ë†’ì•„ì¡ŒìŠµë‹ˆë‹¤." : "ë… ì €í•­ì´ ë‚®ì•„ì¡ŒìŠµë‹ˆë‹¤."), this);
 				}
 				if (rconf_)
 				{
-					sprintf_s(temp, 128, "È¥¶õÀú%s", rconf_>0 ? "+" : "-");
+					sprintf_s(temp, 128, "í˜¼ë€ì €%s", rconf_>0 ? "+" : "-");
 					stateDraw.addState(temp, rconf_>0 ? CL_good : CL_danger,
-						(rconf_ >0 ? "È¥¶õ ÀúÇ×ÀÌ ³ô¾ÆÁ³½À´Ï´Ù." : "È¥¶õ ÀúÇ×ÀÌ ³·¾ÆÁ³½À´Ï´Ù."), this);
+						(rconf_ >0 ? "í˜¼ë€ ì €í•­ì´ ë†’ì•„ì¡ŒìŠµë‹ˆë‹¤." : "í˜¼ë€ ì €í•­ì´ ë‚®ì•„ì¡ŒìŠµë‹ˆë‹¤."), this);
 				}
 			}
 
 
 			if(you.s_confuse)
 			{
-				stateDraw.addState("È¥¶õ", CL_danger,
-					"ÀÌµ¿À» Æ÷ÇÔÇÑ ´ëºÎºĞÀÇ Çàµ¿À» Á¦´ë·Î ÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("í˜¼ë€", CL_danger,
+					"ì´ë™ì„ í¬í•¨í•œ ëŒ€ë¶€ë¶„ì˜ í–‰ë™ì„ ì œëŒ€ë¡œ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_frozen)
 			{
-				stateDraw.addState("ºù°á", you.s_frozen>5 ? CL_blue : CL_bad,
-					"ÀÌµ¿¼Óµµ°¡ ÀúÇÏµË´Ï´Ù.", this);
+				stateDraw.addState("ë¹™ê²°", you.s_frozen>5 ? CL_blue : CL_bad,
+					"ì´ë™ì†ë„ê°€ ì €í•˜ë©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_elec)
 			{
-				stateDraw.addState("¹æÀü", CL_normal,
-					"ÀÏÁ¤ ÅÏ¸¶´Ù ÁÖº¯ÀÇ »ı¹°Ã¼¿¡°Ô Àü±â°ø°İÀÌ °¡ÇØÁı´Ï´Ù.", this);
+				stateDraw.addState("ë°©ì „", CL_normal,
+					"ì¼ì • í„´ë§ˆë‹¤ ì£¼ë³€ì˜ ìƒë¬¼ì²´ì—ê²Œ ì „ê¸°ê³µê²©ì´ ê°€í•´ì§‘ë‹ˆë‹¤.", this);
 			}
 			if(you.s_paralyse)
 			{
-				stateDraw.addState("¸¶ºñ", CL_danger,
-					"¿òÁ÷ÀÏ ¼ö ¾ø½À´Ï´Ù!", this);
+				stateDraw.addState("ë§ˆë¹„", CL_danger,
+					"ì›€ì§ì¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤!", this);
 			}
 			if(you.s_levitation)
 			{
-				stateDraw.addState("ºñÇà", you.s_levitation>10 ? CL_white_blue : CL_blue,
-					"ÇÏ´ÃÀ» ³¯¾Æ ¸î¸î ÁöÇü¹°Ã¼¸¦ ¶Ù¾î³ÑÀ» ¼ö ÀÖ½À´Ï´Ù.", this);
+				stateDraw.addState("ë¹„í–‰", you.s_levitation>10 ? CL_white_blue : CL_blue,
+					"í•˜ëŠ˜ì„ ë‚ ì•„ ëª‡ëª‡ ì§€í˜•ë¬¼ì²´ë¥¼ ë›°ì–´ë„˜ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.", this);
 			}
 			else if(you.s_glow)
 			{
-				stateDraw.addState("ºû³²", CL_white_blue,
-					"´ç½Å¿¡°Ô ºûÀÌ ºñÃçÁö°í ÀÖ¾î È¸ÇÇÀ²ÀÌ ³·¾ÆÁı´Ï´Ù.", this);
+				stateDraw.addState("ë¹›ë‚¨", CL_white_blue,
+					"ë‹¹ì‹ ì—ê²Œ ë¹›ì´ ë¹„ì¶°ì§€ê³  ìˆì–´ íšŒí”¼ìœ¨ì´ ë‚®ì•„ì§‘ë‹ˆë‹¤.", this);
 			}
 			if(you.s_graze && !you.s_super_graze)
 			{
-				stateDraw.addState("±×·¹ÀÌÁî", you.s_graze<0 ? CL_normal : you.s_graze>10 ? CL_white_blue : CL_blue,
-					"È¸ÇÇ °¡´ÉÇÑ Åº¸·À» ¼Õ½±°Ô ÇÇÇÒ ¼ö ÀÖ½À´Ï´Ù.", this);
+				stateDraw.addState("ê·¸ë ˆì´ì¦ˆ", you.s_graze<0 ? CL_normal : you.s_graze>10 ? CL_white_blue : CL_blue,
+					"íšŒí”¼ ê°€ëŠ¥í•œ íƒ„ë§‰ì„ ì†ì‰½ê²Œ í”¼í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_silence)
 			{
-				stateDraw.addState("Á¤Àû", you.s_silence>5 ? CL_white_blue : CL_blue,
-					"´ç½ÅÀº ¼Ò¸®³»´Â Çàµ¿À» ÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("ì •ì ", you.s_silence>5 ? CL_white_blue : CL_blue,
+					"ë‹¹ì‹ ì€ ì†Œë¦¬ë‚´ëŠ” í–‰ë™ì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_sick)
 			{
-				stateDraw.addState("º´", you.s_sick>50 ? (you.s_sick>100 ? CL_danger : CL_small_danger) : CL_warning,
-					"Áö¼Ó½Ã°£µ¿¾È ÀÚ¿¬ Ã¼·ÂÈ¸º¹ÀÌ ºÒ°¡´ÉÇÕ´Ï´Ù.", this);
+				stateDraw.addState("ë³‘", you.s_sick>50 ? (you.s_sick>100 ? CL_danger : CL_small_danger) : CL_warning,
+					"ì§€ì†ì‹œê°„ë™ì•ˆ ìì—° ì²´ë ¥íšŒë³µì´ ë¶ˆê°€ëŠ¥í•©ë‹ˆë‹¤.", this);
 			}
 			if(you.s_veiling)
 			{
-				stateDraw.addState("º£ÀÏ¸µ", CL_normal,
-					"´ç½Å¿¡°Ô ±ÙÁ¢°ø°İÀ» ÇÏ·Á´Â »ó´ë¿¡°Ô µ¥¹ÌÁö¸¦ ÀÔÈ÷°í »ç¶óÁı´Ï´Ù.", this);
+				stateDraw.addState("ë² ì¼ë§", CL_normal,
+					"ë‹¹ì‹ ì—ê²Œ ê·¼ì ‘ê³µê²©ì„ í•˜ë ¤ëŠ” ìƒëŒ€ì—ê²Œ ë°ë¯¸ì§€ë¥¼ ì…íˆê³  ì‚¬ë¼ì§‘ë‹ˆë‹¤.", this);
 			}
 			if(you.s_invisible || you.togle_invisible)
 			{
 				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
-				stateDraw.addState("Åõ¸í", glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
-					glow_? "Åõ¸íÇØÁ³Áö¸¸ ºû³ª°í ÀÖ±â¿¡ ¾Æ¹«·± È¿°ú°¡ ¾ø½À´Ï´Ù." :"Åõ¸íÇØÁ®¼­ Åõ¸íÀ» º¼ ¼ö ¾ø´Â ÀûÀÇ ´«¿¡ ¶çÁö ¾Ê½À´Ï´Ù.", this);
+				stateDraw.addState("íˆ¬ëª…", glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+					glow_? "íˆ¬ëª…í•´ì¡Œì§€ë§Œ ë¹›ë‚˜ê³  ìˆê¸°ì— ì•„ë¬´ëŸ° íš¨ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤." :"íˆ¬ëª…í•´ì ¸ì„œ íˆ¬ëª…ì„ ë³¼ ìˆ˜ ì—†ëŠ” ì ì˜ ëˆˆì— ë„ì§€ ì•ŠìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_swift)
 			{
-				stateDraw.addState(you.s_swift>0 ? "½Å¼Ó" : "ÀÌ¼Ó°¨¼Ò", you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
-					you.s_swift > 0 ? "´ç½ÅÀÇ ÀÌµ¿¼Óµµ´Â ºü¸¨´Ï´Ù." : "´ç½ÅÀÇ ÀÌµ¿¼Óµµ´Â ´À¸³´Ï´Ù.", this);
+				stateDraw.addState(you.s_swift>0 ? "ì‹ ì†" : "ì´ì†ê°ì†Œ", you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
+					you.s_swift > 0 ? "ë‹¹ì‹ ì˜ ì´ë™ì†ë„ëŠ” ë¹ ë¦…ë‹ˆë‹¤." : "ë‹¹ì‹ ì˜ ì´ë™ì†ë„ëŠ” ëŠë¦½ë‹ˆë‹¤.", this);
 			}
 			if(you.s_superman)
 			{
-				stateDraw.addState("ÃÊÀÎ", you.s_superman>5 ? CL_white_puple : CL_magic,
-					"ÃÊÀÎ°ú °°ÀÌ ÀÌµ¿¼Óµµ°¡ »¡¶óÁ³½À´Ï´Ù.", this);
+				stateDraw.addState("ì´ˆì¸", you.s_superman>5 ? CL_white_puple : CL_magic,
+					"ì´ˆì¸ê³¼ ê°™ì´ ì´ë™ì†ë„ê°€ ë¹¨ë¼ì¡ŒìŠµë‹ˆë‹¤.", this);
 			}
 			if(you.s_slaying)
 			{
-				sprintf_s(temp,128,"ÀüÅõ·Â(%s%d)",you.s_slaying>0?"+":"",you.s_slaying);
+				sprintf_s(temp,128,"ì „íˆ¬ë ¥(%s%d)",you.s_slaying>0?"+":"",you.s_slaying);
 				stateDraw.addState(temp, you.s_slaying>0 ? CL_white_blue : CL_danger,
-					"´ç½ÅÀÇ ±ÙÁ¢, Åº¸·°ø°İ·ÂÀÌ º¯È­µÇ¾ú½À´Ï´Ù.", this);
+					"ë‹¹ì‹ ì˜ ê·¼ì ‘, íƒ„ë§‰ê³µê²©ë ¥ì´ ë³€í™”ë˜ì—ˆìŠµë‹ˆë‹¤.", this);
 			}
 			if (you.s_none_move)
 			{
-				stateDraw.addState("ÀÌµ¿ºÒ°¡", CL_danger,
-					"¹«¾ùÀÎ°¡¿¡ ÀâÇô¼­ ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.", this);
+				stateDraw.addState("ì´ë™ë¶ˆê°€", CL_danger,
+					"ë¬´ì—‡ì¸ê°€ì— ì¡í˜€ì„œ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", this);
 			}
 			if (you.s_night_sight_turn)
 			{
-				stateDraw.addState("¾ß¸ÍÁõ", CL_danger,
-					"´ç½ÅÀº ÇÑÄ¡¾Õµµ º¸ÀÌÁö¾Ê½À´Ï´Ù. ´ç½ÅÀÇ ½Ã¾ß°¡ ±ØÀûÀ¸·Î ÁÙ¾îµì´Ï´Ù.", this);
+				stateDraw.addState("ì•¼ë§¹ì¦", CL_danger,
+					"ë‹¹ì‹ ì€ í•œì¹˜ì•ë„ ë³´ì´ì§€ì•ŠìŠµë‹ˆë‹¤. ë‹¹ì‹ ì˜ ì‹œì•¼ê°€ ê·¹ì ìœ¼ë¡œ ì¤„ì–´ë“­ë‹ˆë‹¤.", this);
 			}
 			if (you.s_sleep>0)
 			{
-				sprintf_s(temp, 128, "Á¹À½(%02d)", min(99,you.s_sleep));
+				sprintf_s(temp, 128, "ì¡¸ìŒ(%02d)", min(99,you.s_sleep));
 				stateDraw.addState(temp, CL_small_danger,
-					"Á¹À½ÀÌ ¿À°íÀÖ½À´Ï´Ù. ¼öÄ¡°¡ 100ÀÌ µÇ¸é °­Á¦·Î ÀáÀ» Àâ´Ï´Ù.", this);
+					"ì¡¸ìŒì´ ì˜¤ê³ ìˆìŠµë‹ˆë‹¤. ìˆ˜ì¹˜ê°€ 100ì´ ë˜ë©´ ê°•ì œë¡œ ì ì„ ì¡ë‹ˆë‹¤.", this);
 			}
 			else if (you.s_sleep<0)
 			{
-				stateDraw.addState("¼ö¸é", CL_danger,
-					"´ç½ÅÀº ÀáÀ» ÀÚ°í ÀÖ½À´Ï´Ù!", this);
+				stateDraw.addState("ìˆ˜ë©´", CL_danger,
+					"ë‹¹ì‹ ì€ ì ì„ ìê³  ìˆìŠµë‹ˆë‹¤!", this);
 			}
 			if (you.s_pure>0 && you.s_pure_turn)
 			{
@@ -1860,19 +1889,19 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.s_pure < 20 ? CL_darkblue :
 					you.s_pure < 30 ? CL_blue : CL_white_blue;
 				if(you.s_pure_turn == -1)
-					sprintf_s(temp, 128, "¼øÈ­");
+					sprintf_s(temp, 128, "ìˆœí™”");
 				else
-					sprintf_s(temp, 128, "¼øÈ­(%d´Ü°è)", you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3)));
+					sprintf_s(temp, 128, "ìˆœí™”(%dë‹¨ê³„)", you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3)));
 				stateDraw.addState(temp, color_,
-					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? "µÎ·ç¸¶¸®, ¹°¾àÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù. (ÀÏºÎ ºÎ¿©Çü µÎ·ç¸¶¸®´Â °¡´É)" :
-					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "½ºÆçÄ«µå, µÎ·ç¸¶¸®, ¹°¾àÀ» »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù. (ÀÏºÎ ºÎ¿©Çü µÎ·ç¸¶¸®´Â °¡´É)" :
-					(you.s_pure >= 20) ? "½ºÆçÄ«µå, µÎ·ç¸¶¸®¸¦ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù. (ÀÏºÎ ºÎ¿©Çü µÎ·ç¸¶¸®´Â °¡´É)" :
-					(you.s_pure >= 10) ? "½ºÆçÄ«µå¸¦ »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù." : "´ç½ÅÀº ¾ÆÁ÷ ¼øÈ­ÀÇ ÆĞ³ÎÆ¼¸¦ ¹Ş°íÀÖÁö ¾Ê½À´Ï´Ù." , this);
+					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? "ë‘ë£¨ë§ˆë¦¬, ë¬¼ì•½ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. (ì¼ë¶€ ë¶€ì—¬í˜• ë‘ë£¨ë§ˆë¦¬ëŠ” ê°€ëŠ¥)" :
+					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "ìŠ¤í ì¹´ë“œ, ë‘ë£¨ë§ˆë¦¬, ë¬¼ì•½ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. (ì¼ë¶€ ë¶€ì—¬í˜• ë‘ë£¨ë§ˆë¦¬ëŠ” ê°€ëŠ¥)" :
+					(you.s_pure >= 20) ? "ìŠ¤í ì¹´ë“œ, ë‘ë£¨ë§ˆë¦¬ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. (ì¼ë¶€ ë¶€ì—¬í˜• ë‘ë£¨ë§ˆë¦¬ëŠ” ê°€ëŠ¥)" :
+					(you.s_pure >= 10) ? "ìŠ¤í ì¹´ë“œë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤." : "ë‹¹ì‹ ì€ ì•„ì§ ìˆœí™”ì˜ íŒ¨ë„í‹°ë¥¼ ë°›ê³ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤." , this);
 			}
 		}
 
 	}
-	//¹ÙÅÁ Å¸ÀÏ ±×¸®±â
+	//ë°”íƒ• íƒ€ì¼ ê·¸ë¦¬ê¸°
 	int x_ = you.GetDisplayPos().x-8;
 	int y_ = you.GetDisplayPos().y-8;
 	for(int i=0;i<17;i++)
@@ -1916,7 +1945,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		offset_.x = DG_MAX_X/2 - you.position.x;
 		offset_.y = DG_MAX_Y/2 - you.position.y;
 	}
-	//¹Ì´Ï¸Ê ±×¸®±â
+	//ë¯¸ë‹ˆë§µ ê·¸ë¦¬ê¸°
 	{
 		for(int i=0;i<DG_MAX_X;i++)
 		{
@@ -1961,7 +1990,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 
-	//¾ÆÀÌÅÛ±×¸®±â
+	//ì•„ì´í…œê·¸ë¦¬ê¸°
 	{
 		list<item>::iterator it; 
 		bool many_item = false;
@@ -2011,12 +2040,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 
 
-	//¹Ù´Ú È¿°ú ±×¸®±â
+	//ë°”ë‹¥ íš¨ê³¼ ê·¸ë¦¬ê¸°
 	{
 	list<floor_effect>::iterator it;
 	for (it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end(); it++)
 	{
-		if (env[current_level].isInSight((*it).position)) //´õ Ãß°¡ÇØ¾ßÇÒ°Å. º¼¼öÀÖ´Ù(Åõ¸í¾Æ´Ô).
+		if (env[current_level].isInSight((*it).position)) //ë” ì¶”ê°€í•´ì•¼í• ê±°. ë³¼ìˆ˜ìˆë‹¤(íˆ¬ëª…ì•„ë‹˜).
 		{
 			if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 			{
@@ -2026,12 +2055,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	}
 
-	//¿¬±â±×¸®±â
+	//ì—°ê¸°ê·¸ë¦¬ê¸°
 	{
 		list<smoke>::iterator it;
 		for (it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end(); it++)
 		{
-			if (env[current_level].isInSight((*it).position)) //´õ Ãß°¡ÇØ¾ßÇÒ°Å. º¼¼öÀÖ´Ù(Åõ¸í¾Æ´Ô).
+			if (env[current_level].isInSight((*it).position)) //ë” ì¶”ê°€í•´ì•¼í• ê±°. ë³¼ìˆ˜ìˆë‹¤(íˆ¬ëª…ì•„ë‹˜).
 			{
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
@@ -2041,7 +2070,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 
-	//ÇÃ·¹ÀÌ¾î ±×¸®±â
+	//í”Œë ˆì´ì–´ ê·¸ë¦¬ê¸°
 	{
 		if (!you.s_timestep && abs(you.position.x - x_ - 8) <= 8 && abs(you.position.y - y_ - 8) <= 8)
 		{
@@ -2080,13 +2109,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 
 
-	//¸÷±×¸®±â
+	//ëª¹ê·¸ë¦¬ê¸°
 	{
 		vector<monster>::iterator it;
 
 		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if ((*it).isLive() && (*it).isYourShight()) //´õ Ãß°¡ÇØ¾ßÇÒ°Å. º¼¼öÀÖ´Ù(Åõ¸í¾Æ´Ô).
+			if ((*it).isLive() && (*it).isYourShight()) //ë” ì¶”ê°€í•´ì•¼í• ê±°. ë³¼ìˆ˜ìˆë‹¤(íˆ¬ëª…ì•„ë‹˜).
 			{
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
@@ -2113,7 +2142,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
-	//±×¸²ÀÚ ±×¸®±â
+	//ê·¸ë¦¼ì ê·¸ë¦¬ê¸°
 	{
 		list<shadow>::iterator it;
 		
@@ -2140,7 +2169,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 
-	//¾È°³±×¸®±â
+	//ì•ˆê°œê·¸ë¦¬ê¸°
 	if(you.s_weather >= 1 && you.s_weather_turn > 0)
 	{
 		for (int i = 0; i < 17; i++)
@@ -2169,7 +2198,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 
-	//ÀÌÆåÆ®±×¸®±â
+	//ì´í™íŠ¸ê·¸ë¦¬ê¸°
 	{
 		list<effect>::iterator it;		
 		for(it = env[current_level].effect_list.begin(); it != env[current_level].effect_list.end(); it++)
@@ -2189,7 +2218,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*32.0f+20.0f,(you.search_pos.y-y_)*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255));
 	}
 
-	{ //Å×µÎ¸®
+	{ //í…Œë‘ë¦¬
 		if(!env[current_level].isBamboo())
 			sight_rect.draw(pSprite,GetDotX(x_+8),GetDotY(y_+8),255);
 	}
@@ -2197,7 +2226,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 
-	//±¤±â
+	//ê´‘ê¸°
 	if(you.s_sleep < 0 || you.s_lunatic || map_effect || you.s_evoke_ghost)
 	{
 		int x_ = you.GetDisplayPos().x-8;
@@ -2235,24 +2264,24 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 
-	//³×ÀÓµå ÀÌ¸§¸¸ ±×¸®±â
+	//ë„¤ì„ë“œ ì´ë¦„ë§Œ ê·¸ë¦¬ê¸°
 	{
 		vector<monster>::iterator it;
 		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if ((*it).isLive() && (*it).isYourShight() && ((*it).isUnique() || (*it).image == &img_mons_default)) //´õ Ãß°¡ÇØ¾ßÇÒ°Å. º¼¼öÀÖ´Ù(Åõ¸í¾Æ´Ô).
+			if ((*it).isLive() && (*it).isYourShight() && ((*it).isUnique() || (*it).image == &img_mons_default)) //ë” ì¶”ê°€í•´ì•¼í• ê±°. ë³¼ìˆ˜ìˆë‹¤(íˆ¬ëª…ì•„ë‹˜).
 			{
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
 					RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
 					rc.left -= fontDesc.Width*(*it).GetName()->name.size() / 2;
-					pfont->DrawTextA(pSprite, (*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+					DrawTextUTF8(pfont,pSprite, (*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 				}
 			}
 		}
 	}
 
-	//ÅØ½ºÆ®(À§ÂÊ¿¡ ¼ô·Î±×)±×¸®±â
+	//í…ìŠ¤íŠ¸(ìœ„ìª½ì— ìˆë¡œê·¸)ê·¸ë¦¬ê¸°
 	if(!text_log.text_list.empty())
 	{
 		list<text_dummy*>::iterator it;
@@ -2278,7 +2307,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(;it != text_log.text_list.end();it++)
 		{			
 			RECT rc={ (LONG)x, (LONG)y, 32*17+16, (LONG)(y+fontDesc.Height)};
-			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
+			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
 			if((*it)->enter)
 			{
 				x = 0;
@@ -2295,9 +2324,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	if(ReplayClass.play)
 	{
 		RECT rc={50, 400, option_mg.getWidth(), option_mg.getHeight()};
-		pfont->DrawTextA(pSprite,"¸®ÇÃ·¹ÀÌ ¸ğµåÁß", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		DrawTextUTF8(pfont,pSprite,"ë¦¬í”Œë ˆì´ ëª¨ë“œì¤‘", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;	
-		pfont->DrawTextA(pSprite,"(z-ÀÏ½ÃÁ¤Áö x-º¸Åë¼Óµµ c-¹è¼Ó)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		DrawTextUTF8(pfont,pSprite,"(z-ì¼ì‹œì •ì§€ x-ë³´í†µì†ë„ c-ë°°ì†)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	drawInfoBox(pSprite, pfont);
 
@@ -2311,7 +2340,7 @@ void stateBox::addState(const char* name, D3DCOLOR color, const char* info, disp
 	{
 		enter(display);
 	}
-	pfont->DrawTextA(pSprite, name, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color);
+	DrawTextUTF8(pfont,pSprite, name, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color);
 	display->CheckMouseInfo(pSprite, pfont, rc, display->fontDesc.Width * sizeOfName, display->fontDesc.Height, info);
 	rc.left += display->fontDesc.Width * (sizeOfName+1);
 	current += (sizeOfName + 1);
@@ -2349,7 +2378,7 @@ void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc_.top -= infobox.y_size / 2 - infobox.y_comma;
 		rc_.right -= infobox.x_size / 2 + infobox.x_comma;
 		rc_.bottom -= infobox.y_size / 2 + infobox.y_comma;
-		pfont->DrawTextA(pSprite, infobox.info.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
+		DrawTextUTF8(pfont,pSprite, infobox.info.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
 	}
 }
 void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
@@ -2377,19 +2406,19 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_EVOKE:
 	case IVT_CURSE_ENCHANT:
 		char temp[50];
-		sprintf_s(temp,50,"<ÀÎº¥Åä¸®>  (¾ÆÀÌÅÛ °¹¼ö %d / 52)", you.item_list.size()/*,you.item_weight,you.max_item_weight*/);
-		pfont->DrawTextA(pSprite,temp, -1, &rc, DT_NOCLIP,CL_normal);
+		sprintf_s(temp,50,"<ì¸ë²¤í† ë¦¬>  (ì•„ì´í…œ ê°¯ìˆ˜ %d / 52)", you.item_list.size()/*,you.item_weight,you.max_item_weight*/);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;
 		break;
 	default:
 		break;
 	}
 	
-	pfont->DrawTextA(pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
+	DrawTextUTF8(pfont,pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
 	rc.left += 32;
 
-	list<item>::iterator first,end; //¿©±â¼­ ¾ÆÀÌÅÛ¹İº¹ÀÚÀÇ ½ÃÀÛ°ú ³¡À» °áÁ¤ÇØÁØ´Ù. Á» ¹«½ÄÇÔ
+	list<item>::iterator first,end; //ì—¬ê¸°ì„œ ì•„ì´í…œë°˜ë³µìì˜ ì‹œì‘ê³¼ ëì„ ê²°ì •í•´ì¤€ë‹¤. ì¢€ ë¬´ì‹í•¨
 	int error_ = false;
 	switch(item_vt)
 	{
@@ -2503,7 +2532,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.top += 16;
 					rc.left -= 48;
-					pfont->DrawTextA(pSprite,GetItemTypeSting(i), -1, &rc, DT_NOCLIP,CL_help);
+					DrawTextUTF8(pfont,pSprite,GetItemTypeSting(i), -1, &rc, DT_NOCLIP,CL_help);
 					rc.top += 32;
 					rc.left += 48;
 					exist = true;
@@ -2513,10 +2542,10 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp+=item_view[asctonum((*it).id)]?(item_num[asctonum((*it).id)]?" # ":" + "):" - ";
 				temp+=(*it).GetName().c_str();
 				if(equip)
-					temp += (equip==1?"(ÀåÂø)":(equip==2?"(¿Ş¼Õ)":"(¿À¸¥¼Õ)"));
+					temp += (equip==1?"(ì¥ì°©)":(equip==2?"(ì™¼ì†)":"(ì˜¤ë¥¸ì†)"));
 				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
 				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
-				pfont->DrawTextA(pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
+				DrawTextUTF8(pfont,pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
 				rc.top += 32;
 			}
 		}
@@ -2527,7 +2556,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
-	//ÅØ½ºÆ®(À§ÂÊ¿¡ ¼ô·Î±×)±×¸®±â
+	//í…ìŠ¤íŠ¸(ìœ„ìª½ì— ìˆë¡œê·¸)ê·¸ë¦¬ê¸°
 	if(!text_log.text_list.empty())
 	{
 		list<text_dummy*>::iterator it;
@@ -2554,7 +2583,7 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i < view_length && it != text_log.text_list.end();it++)
 		{			
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
-			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
+			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{
 				x = 0;
@@ -2573,7 +2602,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	if (image)
 		image->draw(pSprite, 255);
-	//ÅØ½ºÆ®(À§ÂÊ¿¡ ¼ô·Î±×)±×¸®±â
+	//í…ìŠ¤íŠ¸(ìœ„ìª½ì— ìˆë¡œê·¸)ê·¸ë¦¬ê¸°
 	if(!text_sub.text_list.empty())
 	{
 		list<text_dummy*>::iterator it;
@@ -2600,7 +2629,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{			
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
-			pfont->DrawTextA(pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
+			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{
 				x = 0;

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: create_item.cpp
+// íŒŒì¼ì´ë¦„: create_item.cpp
 //
-// ³»¿ë: ¸Ê¿¡ ¸Â´Â ¾ÆÀÌÅÛÀ» »ı¼ºÇÑ´Ù.
+// ë‚´ìš©: ë§µì— ë§ëŠ” ì•„ì´í…œì„ ìƒì„±í•œë‹¤.
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,164 +18,164 @@ void create_id_to_item(int id, int level);
 
 struct item_group
 {
-	int id; //°íÀ¯¹øÈ£ <- °íÀ¯¹øÈ£
-	int min_level; //ÃÖ¼Ò·¹º§ <- ³ª¿À´Â ´øÀü Ãş
-	int max_level; //ÃÖ´ë·¹º§ <- ³ª¿À´Â ´øÀü Ãş
-	int percent; //È®·ü  <- ³ª¿Ã ºóµµ¸¦ °áÁ¤ÇÑ´Ù.
-	int rare; //·¹¾îµµ
+	int id; //ê³ ìœ ë²ˆí˜¸ <- ê³ ìœ ë²ˆí˜¸
+	int min_level; //ìµœì†Œë ˆë²¨ <- ë‚˜ì˜¤ëŠ” ë˜ì „ ì¸µ
+	int max_level; //ìµœëŒ€ë ˆë²¨ <- ë‚˜ì˜¤ëŠ” ë˜ì „ ì¸µ
+	int percent; //í™•ë¥   <- ë‚˜ì˜¬ ë¹ˆë„ë¥¼ ê²°ì •í•œë‹¤.
+	int rare; //ë ˆì–´ë„
 };
 
 
-item_group item_index[] = //¾ÆÀÌÅÛ ¸ñ·Ï(²À 2¹øÂ°¸¦ ³»¸²Â÷¼øÀ¸·Î Á¤·Ä)
+item_group item_index[] = //ì•„ì´í…œ ëª©ë¡(ê¼­ 2ë²ˆì§¸ë¥¼ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬)
 {
-	{0,0,SCARLET_LEVEL_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,0,SCARLET_LEVEL_LAST_LEVEL,5,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{21,0,SCARLET_LEVEL_LAST_LEVEL,2,1}, //À½½Ä
+	{0,0,SCARLET_LEVEL_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,0,SCARLET_LEVEL_LAST_LEVEL,5,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{21,0,SCARLET_LEVEL_LAST_LEVEL,2,1}, //ìŒì‹
 	
 	
-	{2,0,7,70,1}, //ÃÊ¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{3,0,7,80,1}, //ÃÊ¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{4,0,7,15,1}, //ÃÊ¹İ Àß³ª¿À´Â ³ª»Û ¹°¾àµé
-	//{5,0,7,15,1}, //ÃÊ¹İ Àß³ª¿À´Â ³ª»Û µÎ·ç¸¶¸®µé
-	{6,0,7,80,1}, //ÃÊ¹İ¿ë ¹«±â
-	{7,0,7,20,1}, //ÃÊ¹İ¿ë ¹æ¾î±¸
-	{8,0,7,20,1}, //ÃÊ¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{9,0,7,1,1}, //ÃÊ¹İ¿ë ³ª»Û ¹İÁö, ¾Æ¹Ä·¿µé
-	{10,0,7,10,1}, //ÃÊ¹İ¿ë ¹æÆĞ
-	{11,0,7,0,1}, //ÃÊ¹İ¿ë ºóÄ­
-	{12,0,7,0,1}, //ÃÊ¹İ¿ë ºóÄ­
-	{26,0,7,5,1},//½ºÆçÄ«µå
-	{27,2,4,2,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,2,4,2,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,2,4,2,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,2,4,1,1},//¹ßµ¿ÅÛ
+	{2,0,7,70,1}, //ì´ˆë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{3,0,7,80,1}, //ì´ˆë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{4,0,7,15,1}, //ì´ˆë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë¬¼ì•½ë“¤
+	//{5,0,7,15,1}, //ì´ˆë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{6,0,7,80,1}, //ì´ˆë°˜ìš© ë¬´ê¸°
+	{7,0,7,20,1}, //ì´ˆë°˜ìš© ë°©ì–´êµ¬
+	{8,0,7,20,1}, //ì´ˆë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{9,0,7,1,1}, //ì´ˆë°˜ìš© ë‚˜ìœ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{10,0,7,10,1}, //ì´ˆë°˜ìš© ë°©íŒ¨
+	{11,0,7,0,1}, //ì´ˆë°˜ìš© ë¹ˆì¹¸
+	{12,0,7,0,1}, //ì´ˆë°˜ìš© ë¹ˆì¹¸
+	{26,0,7,5,1},//ìŠ¤í ì¹´ë“œ
+	{27,2,4,2,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,2,4,2,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,2,4,2,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,2,4,1,1},//ë°œë™í…œ
 
-	{25,2,SCARLET_LEVEL_LAST_LEVEL,3,1}, //Ã¥
+	{25,2,SCARLET_LEVEL_LAST_LEVEL,3,1}, //ì±…
 	
-	{13,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{15,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //Áß¹İ Àß³ª¿À´Â ³ª»Û ¹°¾àµé
-	//{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //Áß¹İ Àß³ª¿À´Â ³ª»Û µÎ·ç¸¶¸®µé
-	{17,5,SCARLET_LEVEL_LAST_LEVEL,80,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,5,SCARLET_LEVEL_LAST_LEVEL,20,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{20,5,SCARLET_LEVEL_LAST_LEVEL,1,1}, //Áß¹İ¿ë ³ª»Û ¹İÁö, ¾Æ¹Ä·¿µé
-	{22,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æÆĞ
-	{23,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //Áß¹İ¿ë ºóÄ­
-	{24,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //Áß¹İ¿ë ºóÄ­
-	{26,5,SCARLET_LEVEL_LAST_LEVEL,5,1}, //½ºÆçÄ«µå
-	{27,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//¹ßµ¿ÅÛ
+	{13,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{15,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë¬¼ì•½ë“¤
+	//{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{17,5,SCARLET_LEVEL_LAST_LEVEL,80,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,5,SCARLET_LEVEL_LAST_LEVEL,20,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{20,5,SCARLET_LEVEL_LAST_LEVEL,1,1}, //ì¤‘ë°˜ìš© ë‚˜ìœ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{22,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{23,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //ì¤‘ë°˜ìš© ë¹ˆì¹¸
+	{24,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //ì¤‘ë°˜ìš© ë¹ˆì¹¸
+	{26,5,SCARLET_LEVEL_LAST_LEVEL,5,1}, //ìŠ¤í ì¹´ë“œ
+	{27,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//ë°œë™í…œ
 
 
-	{13,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,90,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{15,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,25,1}, //Áß¹İ Àß³ª¿À´Â ³ª»Û ¹°¾àµé
-	{17,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{20,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1}, //Áß¹İ¿ë ³ª»Û ¹İÁö, ¾Æ¹Ä·¿µé
-	{22,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,5,1}, //Áß¹İ¿ë ¹æÆĞ
-	{23,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,0,1}, //Áß¹İ¿ë ºóÄ­
-	{24,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,0,1}, //Áß¹İ¿ë ºóÄ­
-	{26,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,2,1}, //½ºÆçÄ«µå
-	{27,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1},//¹ßµ¿ÅÛ
-
-	
-
-	//ÀµÄí¸®
-	{13,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{17,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{0,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{21,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,5,1}, //À½½Ä
-	{22,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,8,1}, //Áß¹İ¿ë ¹æÆĞ
-	{25,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //Ã¥
-	{26,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,3,1}, //½ºÆçÄ«µå
-	{27,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,15,1},//¹ßµ¿ÅÛ
-
+	{13,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,90,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{15,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,25,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë¬¼ì•½ë“¤
+	{17,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{20,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1}, //ì¤‘ë°˜ìš© ë‚˜ìœ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{22,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,5,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{23,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,0,1}, //ì¤‘ë°˜ìš© ë¹ˆì¹¸
+	{24,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,0,1}, //ì¤‘ë°˜ìš© ë¹ˆì¹¸
+	{26,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,2,1}, //ìŠ¤í ì¹´ë“œ
+	{27,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1},//ë°œë™í…œ
 
 	
-	//Áü½Â±æ
-	{13,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{15,DEPTH_LEVEL,DEPTH_LAST_LEVEL,30,1}, //Áß¹İ Àß³ª¿À´Â ³ª»Û ¹°¾àµé
-	{17,DEPTH_LEVEL,DEPTH_LAST_LEVEL,50,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{0,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{25,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //Ã¥
-	{26,DEPTH_LEVEL,DEPTH_LAST_LEVEL,3,1}, //½ºÆçÄ«µå
-	{21,DEPTH_LEVEL,DEPTH_LAST_LEVEL,5,1}, //À½½Ä
-	{22,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æÆĞ
-	{27,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//¹ßµ¿ÅÛ
-	
-	//´ŞÀÇµµ½Ã
-	{13,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{17,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{0,MOON_LEVEL,MOON_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,MOON_LEVEL,MOON_LAST_LEVEL,25,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{25,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //Ã¥
-	{26,MOON_LEVEL,MOON_LAST_LEVEL,3,1}, //½ºÆçÄ«µå
-	{21,MOON_LEVEL,MOON_LAST_LEVEL,5,1}, //À½½Ä
-	{22,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æÆĞ
-	{27,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,MOON_LEVEL,MOON_LAST_LEVEL,20,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,MOON_LEVEL,MOON_LAST_LEVEL,3,1},//¹ßµ¿ÅÛ
-	
-	//ÁöÀú
-	{13,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{17,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{0,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{25,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,15,1}, //Ã¥
-	{26,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1}, //½ºÆçÄ«µå
-	{21,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,5,1}, //À½½Ä
-	{22,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æÆĞ
-	{27,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1},//¹ßµ¿ÅÛ
 
-	//ÆÇµ¥¸ğ´Ï¾ö
-	{13,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,60,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº ¹°¾àµé
-	{14,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,50,1}, //Áß¹İ Àß³ª¿À´Â ÁÁÀº µÎ·ç¸¶¸®µé
-	{15,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //Áß¹İ Àß³ª¿À´Â ³ª»Û ¹°¾àµé
-	{17,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,60,1}, //Áß¹İ¿ë ¹«±âµé(°¡²û ÀúÁÖ)
-	{18,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //Áß¹İ¿ë ¹æ¾î±¸
-	{19,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //Áß¹İ¿ë ÁÁÀº ¹İÁö, ¾Æ¹Ä·¿µé
-	{0,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //Àâ Åº¸·µé
-	{1,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //±âÅ¸¹æ¾î±¸µé(Àå°©, ºÎÃ÷, ¸ÁÅäµî)
-	{25,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //Ã¥
-	{26,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,3,1}, //½ºÆçÄ«µå
-	{21,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,5,1}, //À½½Ä
-	{22,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //Áß¹İ¿ë ¹æÆĞ
-	{27,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹«±â
-	{28,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹æ¾î±¸
-	{29,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//¾ÆÆ¼ÆåÆ®¹İÁö
-	{30,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//¹ßµ¿ÅÛ
+	//ìœ³ì¿ ë¦¬
+	{13,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{17,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,30,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{0,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{21,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,5,1}, //ìŒì‹
+	{22,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,8,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{25,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,20,1}, //ì±…
+	{26,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,3,1}, //ìŠ¤í ì¹´ë“œ
+	{27,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,15,1},//ë°œë™í…œ
+
+
+	
+	//ì§ìŠ¹ê¸¸
+	{13,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,DEPTH_LEVEL,DEPTH_LAST_LEVEL,70,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{15,DEPTH_LEVEL,DEPTH_LAST_LEVEL,30,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë¬¼ì•½ë“¤
+	{17,DEPTH_LEVEL,DEPTH_LAST_LEVEL,50,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{0,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{25,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //ì±…
+	{26,DEPTH_LEVEL,DEPTH_LAST_LEVEL,3,1}, //ìŠ¤í ì¹´ë“œ
+	{21,DEPTH_LEVEL,DEPTH_LAST_LEVEL,5,1}, //ìŒì‹
+	{22,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{27,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//ë°œë™í…œ
+	
+	//ë‹¬ì˜ë„ì‹œ
+	{13,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{17,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,MOON_LEVEL,MOON_LAST_LEVEL,50,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{0,MOON_LEVEL,MOON_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,MOON_LEVEL,MOON_LAST_LEVEL,25,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{25,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //ì±…
+	{26,MOON_LEVEL,MOON_LAST_LEVEL,3,1}, //ìŠ¤í ì¹´ë“œ
+	{21,MOON_LEVEL,MOON_LAST_LEVEL,5,1}, //ìŒì‹
+	{22,MOON_LEVEL,MOON_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{27,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,MOON_LEVEL,MOON_LAST_LEVEL,20,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,MOON_LEVEL,MOON_LAST_LEVEL,3,1},//ë°œë™í…œ
+	
+	//ì§€ì €
+	{13,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{17,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,50,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{0,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{25,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,15,1}, //ì±…
+	{26,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1}, //ìŠ¤í ì¹´ë“œ
+	{21,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,5,1}, //ìŒì‹
+	{22,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{27,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1},//ë°œë™í…œ
+
+	//íŒë°ëª¨ë‹ˆì—„
+	{13,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,60,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë¬¼ì•½ë“¤
+	{14,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,50,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ì¢‹ì€ ë‘ë£¨ë§ˆë¦¬ë“¤
+	{15,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //ì¤‘ë°˜ ì˜ë‚˜ì˜¤ëŠ” ë‚˜ìœ ë¬¼ì•½ë“¤
+	{17,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,60,1}, //ì¤‘ë°˜ìš© ë¬´ê¸°ë“¤(ê°€ë” ì €ì£¼)
+	{18,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //ì¤‘ë°˜ìš© ë°©ì–´êµ¬
+	{19,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ì¢‹ì€ ë°˜ì§€, ì•„ë®¬ë ›ë“¤
+	{0,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,20,1}, //ì¡ íƒ„ë§‰ë“¤
+	{1,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //ê¸°íƒ€ë°©ì–´êµ¬ë“¤(ì¥ê°‘, ë¶€ì¸ , ë§í† ë“±)
+	{25,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //ì±…
+	{26,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,3,1}, //ìŠ¤í ì¹´ë“œ
+	{21,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,5,1}, //ìŒì‹
+	{22,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,10,1}, //ì¤‘ë°˜ìš© ë°©íŒ¨
+	{27,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë¬´ê¸°
+	{28,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°©ì–´êµ¬
+	{29,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//ì•„í‹°í™íŠ¸ë°˜ì§€
+	{30,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//ë°œë™í…œ
 	
 
 	{-1,0,0,0,0}
@@ -191,16 +191,16 @@ item_infor& CreateFloorItem(int floor, item_infor* item_)
 
 	if(you.GetPunish(GT_SATORI) && randA(9)==0)
 	{
-		//»çÅä¸® Â¡¹úÁß¿£ °­Á¦·Î ¸î°³ÀÇ ÅÛÀÌ ¾Ö¿Ïµ¿¹° Æ÷½ºÅÍ°¡ µÈ´Ù.
+		//ì‚¬í† ë¦¬ ì§•ë²Œì¤‘ì—” ê°•ì œë¡œ ëª‡ê°œì˜ í…œì´ ì• ì™„ë™ë¬¼ í¬ìŠ¤í„°ê°€ ëœë‹¤.
 		id_to_item(31, item_);
 		return (*item_);
 	}
 	if(you.s_unluck>3 && randA(you.s_unluck>6?6:12)==0)
 	{
-		//´ëÈäÀÌ»óÀÇ ºÒ¿î¿¡¼± È®·üÀûÀ¸·Î ³ª»ÛÅÛÀÌ ÀÜ¶à ³ª¿Â´Ù.
+		//ëŒ€í‰ì´ìƒì˜ ë¶ˆìš´ì—ì„  í™•ë¥ ì ìœ¼ë¡œ ë‚˜ìœí…œì´ ì”ëœ© ë‚˜ì˜¨ë‹¤.
 		random_extraction<int> rand_;
-		rand_.push(4);//³ª»ÛÆ÷¼Ç
-		rand_.push(9);//³ª»Û¹İÁö
+		rand_.push(4);//ë‚˜ìœí¬ì…˜
+		rand_.push(9);//ë‚˜ìœë°˜ì§€
 		id_to_item(rand_.pop(), item_);
 		return (*item_);
 	}
@@ -270,7 +270,7 @@ void create_item(int floor, int num_)
 		
 		if(you.GetPunish(GT_SATORI) && randA(9)==0)
 		{
-			//»çÅä¸® Â¡¹úÁß¿£ °­Á¦·Î ¸î°³ÀÇ ÅÛÀÌ ¾Ö¿Ïµ¿¹° Æ÷½ºÅÍ°¡ µÈ´Ù.
+			//ì‚¬í† ë¦¬ ì§•ë²Œì¤‘ì—” ê°•ì œë¡œ ëª‡ê°œì˜ í…œì´ ì• ì™„ë™ë¬¼ í¬ìŠ¤í„°ê°€ ëœë‹¤.
 			create_id_to_item(31, floor);
 			continue;
 		}
@@ -302,77 +302,77 @@ item_infor& id_to_item(int id, item_infor* item_)
 	case 1:
 		makeitem((item_type)rand_int(ITM_ARMOR_HEAD,ITM_ARMOR_BOOT),rand_int(2,-1),item_);
 		break;
-	case 2: //±Â ÃÊ¹İ¹°¾à
+	case 2: //êµ¿ ì´ˆë°˜ë¬¼ì•½
 		makeitem(ITM_POTION,randA(1)>0?1:(randA(60)?2:3),item_);
 		break;
-	case 3: //±Â ÃÊ¹İ½ºÅ©·Ñ
+	case 3: //êµ¿ ì´ˆë°˜ìŠ¤í¬ë¡¤
 		makeitem(ITM_SCROLL,randA(2)>0?1:(randA(60)?2:3),item_);
 		break;
-	case 4: //¹èµå ÃÊ¹İ¹°¾à
+	case 4: //ë°°ë“œ ì´ˆë°˜ë¬¼ì•½
 		makeitem(ITM_POTION,-1,item_);
 		break;
-	case 5: //¹èµå ÃÊ¹İ½ºÅ©·Ñ
+	case 5: //ë°°ë“œ ì´ˆë°˜ìŠ¤í¬ë¡¤
 		makeitem(ITM_SCROLL,-1,item_);
 		break;
-	case 6: //ÈçÇÑ ¹«±â
+	case 6: //í”í•œ ë¬´ê¸°
 		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(8)?0:(randA(3)?1:-1),item_);
 		break;
-	case 7://ÈçÇÑ ¹æ¾î±¸
+	case 7://í”í•œ ë°©ì–´êµ¬
 		makeitem((item_type)(ITM_ARMOR_BODY_FIRST+randA(ITM_ARMOR_BODY_LAST-ITM_ARMOR_BODY_FIRST-1)),randA(6)?0:(randA(3)?1:-1),item_);
 		break;
-	case 8://ÈçÇÑ ÁÁÀº Àå½Å±¸
+	case 8://í”í•œ ì¢‹ì€ ì¥ì‹ êµ¬
 		makeitem(randA(6)?ITM_RING:ITM_AMULET,1,item_);
 		break;
-	case 9://ÈçÇÑ ³ª»Û Àå½Å±¸
+	case 9://í”í•œ ë‚˜ìœ ì¥ì‹ êµ¬
 		makeitem(ITM_RING,-1,item_);
 		break;
-	case 10://ÈçÇÑ ¹æÆĞ
+	case 10://í”í•œ ë°©íŒ¨
 		makeitem(ITM_ARMOR_SHIELD,randA(4)?0:(randA(3)?1:-1),item_);
 		break;
 
 		
-	case 13: //±Â Áß¹İ¹°¾à
+	case 13: //êµ¿ ì¤‘ë°˜ë¬¼ì•½
 		makeitem(ITM_POTION,randA(1)>0?1:(randA(30)?2:3),item_);
 		break;
-	case 14: //±Â Áß¹İ½ºÅ©·Ñ
+	case 14: //êµ¿ ì¤‘ë°˜ìŠ¤í¬ë¡¤
 		makeitem(ITM_SCROLL,randA(2)>0?1:(randA(30)?2:3),item_);
 		break;
-	case 15: //¹èµå Áß¹İ¹°¾à
+	case 15: //ë°°ë“œ ì¤‘ë°˜ë¬¼ì•½
 		makeitem(ITM_POTION,randA(3)?-1:-2,item_);
 		break;
-	case 16: //¹èµå Áß¹İ½ºÅ©·Ñ
+	case 16: //ë°°ë“œ ì¤‘ë°˜ìŠ¤í¬ë¡¤
 		makeitem(ITM_SCROLL,randA(3)?-1:-2,item_);
 		break;
-	case 17: //Áß¹İ ¹«±â - °íÄ§
+	case 17: //ì¤‘ë°˜ ë¬´ê¸° - ê³ ì¹¨
 		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(4)?0:(randA(6)?1:-1),item_);
 		break;
-	case 18://Áß¹İ ¹æ¾î±¸ - °íÄ§
+	case 18://ì¤‘ë°˜ ë°©ì–´êµ¬ - ê³ ì¹¨
 		makeitem((item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1),randA(4)?0:(randA(6)?1:-1),item_);
 		break;
-	case 19://Áß¹İ ÁÁÀº Àå½Å±¸
+	case 19://ì¤‘ë°˜ ì¢‹ì€ ì¥ì‹ êµ¬
 		makeitem(randA(4)?ITM_RING:ITM_AMULET,randA(2)?2:1,item_);
 		break;
-	case 20://Áß¹İ ³ª»Û Àå½Å±¸
+	case 20://ì¤‘ë°˜ ë‚˜ìœ ì¥ì‹ êµ¬
 		makeitem(ITM_RING,randA(1)?-2:-1,item_);
 		break;
-	case 21://À½½Ä
+	case 21://ìŒì‹
 		makeitem(ITM_FOOD,0,item_);
 		break;
-	case 22://Áß¹İ ¹æÆĞ
+	case 22://ì¤‘ë°˜ ë°©íŒ¨
 		makeitem(ITM_ARMOR_SHIELD,randA(4)?0:(randA(6)?1:-1),item_);
 		break;
-	case 25://Ã¥
+	case 25://ì±…
 		makeitem(ITM_BOOK,0,item_);
 		break;
-	case 26://½ºÆçÄ«µå
+	case 26://ìŠ¤í ì¹´ë“œ
 		makeitem(ITM_SPELL,0,item_);
 		//index.push_back(createSpellCard(1, 0, item_));
 		break;
-	case 27://¾ÆÆ¼ÆåÆ® ¹«±â
+	case 27://ì•„í‹°í™íŠ¸ ë¬´ê¸°
 		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(2)?0:(randA(3)?1:-1),item_);
 		item_->artifact = true;
 		break;
-	case 28://¾ÆÆ¼ÆåÆ® ¹æ¾î±¸
+	case 28://ì•„í‹°í™íŠ¸ ë°©ì–´êµ¬
 		{
 			item_type atype_ = (item_type)rand_int(ITM_ARMOR_BODY_FIRST,ITM_ARMOR_BODY_LAST-1);
 			if(randA(1)==0)
@@ -381,14 +381,14 @@ item_infor& id_to_item(int id, item_infor* item_)
 			item_->artifact = true;
 		}
 		break;
-	case 29://¾ÆÆ¼ÆåÆ® ¹İÁö
+	case 29://ì•„í‹°í™íŠ¸ ë°˜ì§€
 		makeitem(ITM_RING,randA(9)?1:-1,item_);
 		item_->artifact = true;
 		break;
-	case 30://¹ßµ¿ÅÛ
+	case 30://ë°œë™í…œ
 		makeitem(ITM_MISCELLANEOUS,1,item_);
 		break;
-	case 31://»çÅä¸®
+	case 31://ì‚¬í† ë¦¬
 		makeitem(ITM_ETC,1,item_, EIT_SATORI);
 		break;
 	default:
@@ -431,7 +431,7 @@ void create_id_to_item(int id, int level)
 		if((*it).artifact)
 		{
 			if((item_->type>=ITM_WEAPON_FIRST && item_->type< ITM_WEAPON_LAST)||(item_->type>=ITM_ARMOR_FIRST && item_->type< ITM_ARMOR_LAST)||(item_->type>=ITM_JEWELRY_FIRST && item_->type< ITM_JEWELRY_LAST))
-			{ //¾ÆÆ¼ÆåÆ® ¸¸µé±â
+			{ //ì•„í‹°í™íŠ¸ ë§Œë“¤ê¸°
 					MakeArtifact(item_,item_->curse?-1:1);
 			}
 		}

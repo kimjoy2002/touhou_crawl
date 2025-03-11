@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: temple_pattern.cpp
+// íŒŒì¼ì´ë¦„: temple_pattern.cpp
 //
-// ³»¿ë: ¸Ê ÆĞÅÏ ÀúÀå¼Ò
+// ë‚´ìš©: ë§µ íŒ¨í„´ ì €ì¥ì†Œ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -38,33 +38,33 @@ bool isGodTemple(int id_, god_type god_)
 	case 2:
 	case 5:
 	case 6:
-		//°ø¿ë ½Å
+		//ê³µìš© ì‹ 
 		return true;
 	case 9:
-		//¹òÄí·»
+		//ë±Œì¿ ë Œ
 		return (god_ == GT_BYAKUREN);
 	case 12:
-		//½º¿ÍÄÚ
+		//ìŠ¤ì™€ì½”
 		return (god_ == GT_SUWAKO);
 	case 15:
-		//½º¿ÍÄÚ
+		//ìŠ¤ì™€ì½”
 		return (!is_exist_named(MON_CIRNO) && god_ == GT_SUWAKO);
 	case 14:
-		//¹Ì³ë¸®ÄÚ
+		//ë¯¸ë…¸ë¦¬ì½”
 		return (god_ == GT_MINORIKO);
 	case 11:
-		//½ÅÅ°
+		//ì‹ í‚¤
 		return (god_ == GT_SHINKI);	
 	case 13:
-		//È÷³ª
+		//íˆë‚˜
 		return (god_ == GT_HINA);			
 	case 10:
-		//¿¡ÀÌ¸°
+		//ì—ì´ë¦°
 		return (god_ == GT_EIRIN);		
 	case 8:
-		//»çÅä¸®
+		//ì‚¬í† ë¦¬
 		return (god_ == GT_SATORI);
-		//º¹ÇÕ ½Å
+		//ë³µí•© ì‹ 
 	case 3:
 		return (!is_exist_named(MON_ORIN) || !is_exist_named(MON_DIEFAIRY))
 			&& (god_ == GT_MINORIKO || god_ == GT_SHIZUHA);
@@ -73,19 +73,19 @@ bool isGodTemple(int id_, god_type god_)
 	case 4:
 		return (god_ == GT_KANAKO || god_ == GT_SUWAKO);
 	case 16:
-		//À¯À¯ÄÚ
+		//ìœ ìœ ì½”
 		return !is_exist_named(MON_MISTIA) && (god_ == GT_YUYUKO);
 	case 17:
-		//½ÃÁîÇÏ
+		//ì‹œì¦ˆí•˜
 		return (god_ == GT_SHIZUHA);	
 	case 18:
-		//À¯±â
+		//ìœ ê¸°
 		return (god_ == GT_YUUGI);
 	case 19:
-		//À¯Ä«¸®
+		//ìœ ì¹´ë¦¬
 		return (god_ == GT_YUKARI);
 	case 20:
-		//Á¶¿Â½Ã¿Â
+		//ì¡°ì˜¨ì‹œì˜¨
 		return (god_ == GT_JOON_AND_SION);
 	}
 }
@@ -95,12 +95,12 @@ int GetMaxAlter(){return 21;};
 
 void makeAunnTemple(map_dummy* map, coord_def c)
 {
-	//¾Æ¿îÀº ·£´ıÇÏ°Ô Á¦´Ü »ı¼º ¸Ê¿¡ ³¢¾îµé¾î¼­ ±× Áö¿ªÀ» ¼öÈ£ÇÑ´Ù.
+	//ì•„ìš´ì€ ëœë¤í•˜ê²Œ ì œë‹¨ ìƒì„± ë§µì— ë¼ì–´ë“¤ì–´ì„œ ê·¸ ì§€ì—­ì„ ìˆ˜í˜¸í•œë‹¤.
 
 	if (is_exist_named(MON_AUNN))
 		return;
 	if (randA(99) < 1) 
-	{//È®·ü 1% (±×·¯³ª ½ÇÁ¦·Î ½ÅÀüÀº 16°³Á¤µµ »ı±â¹Ç·Î ´ë·« 15%Á¤µµ È®·ü·Î ¾Æ¿îÀÌ µîÀåÇÑ´Ù.
+	{//í™•ë¥  1% (ê·¸ëŸ¬ë‚˜ ì‹¤ì œë¡œ ì‹ ì „ì€ 16ê°œì •ë„ ìƒê¸°ë¯€ë¡œ ëŒ€ëµ 15%ì •ë„ í™•ë¥ ë¡œ ì•„ìš´ì´ ë“±ì¥í•œë‹¤.
 		if (!is_exist_named(MON_AUNN)) {
 			map->monster_list.push_back(mapdummy_mon(MON_AUNN, 0, c));
 			set_exist_named(MON_AUNN);
@@ -114,7 +114,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 	switch(id_)
 	{
 	default:
-	case 0: //ÀüºÎ
+	case 0: //ì „ë¶€
 		map->size_x = 3;
 		map->size_y = 3;	
 		map->m_entrance.x = 0;
@@ -122,7 +122,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
 		makeAunnTemple(map,coord_def(0, 0));
-		map->name = "°ø¿ëÁ¦´Ü_´ÙÀÌ¾Æ¹®¹æ";
+		map->name = "ê³µìš©ì œë‹¨_ë‹¤ì´ì•„ë¬¸ë°©";
 		return  "\
 ###+###\
 #..#..#\
@@ -131,7 +131,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.#+#.#\
 #..#..#\
 #######";
-	case 1: //ÀüºÎ
+	case 1: //ì „ë¶€
 		map->size_x = 3;
 		map->size_y = 1;	
 		map->m_entrance.x = map->size_x;
@@ -139,13 +139,13 @@ char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		makeAunnTemple(map, coord_def(0, 0));
-		map->name = "°ø¿ëÁ¦´Ü_°¡·Î_ÀÏÀÚÅë·Î";
+		map->name = "ê³µìš©ì œë‹¨_ê°€ë¡œ_ì¼ìí†µë¡œ";
 		return  "\
 #######\
 #0+....\
 #######";
 		break;
-	case 2: //ÀüºÎ
+	case 2: //ì „ë¶€
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -156,7 +156,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "°ø¿ëÁ¦´Ü_±âµÕ";
+			map->name = "ê³µìš©ì œë‹¨_ê¸°ë‘¥";
 			return  "\
 .......\
 .#.#.#.\
@@ -167,7 +167,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 3: //¾ÆÅ°»÷µå
+	case 3: //ì•„í‚¤ìƒŒë“œ
 		{
 			map->size_x = 3;
 			map->size_y = 2;	
@@ -189,7 +189,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				set_exist_named(MON_DIEFAIRY);
 			}
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "Á¦´Ü_¾ÆÅ°»÷µå";
+			map->name = "ì œë‹¨_ì•„í‚¤ìƒŒë“œ";
 			return  "\
 #######\
 #0=.=1#\
@@ -198,7 +198,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.....#";
 			break;
 		}
-	case 4: //¸ğ¸®¾ß ½ÅÀü
+	case 4: //ëª¨ë¦¬ì•¼ ì‹ ì „
 		{
 			map->size_x = 3;
 			map->size_y = 3;	
@@ -215,7 +215,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem((item_type)randA(ITM_ARMOR_BODY_ARMOUR_3), 0, &t, AMK_MIKO);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_¸ğ¸®¾ß½Å»ç";
+			map->name = "ì œë‹¨_ëª¨ë¦¬ì•¼ì‹ ì‚¬";
 			return  "\
 #######\
 #.###.#\
@@ -226,7 +226,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.....#";
 			break;
 		}
-	case 5: //ÀüºÎ
+	case 5: //ì „ë¶€
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -237,7 +237,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			makeAunnTemple(map, coord_def(0, 2));
-			map->name = "°ø¿ëÁ¦´Ü_ÀÛÀº_¹æ";
+			map->name = "ê³µìš©ì œë‹¨_ì‘ì€_ë°©";
 			return  "\
 .......\
 .......\
@@ -248,7 +248,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 6: //ÀüºÎ
+	case 6: //ì „ë¶€
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -270,7 +270,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "°ø¿ëÁ¦´Ü_µ¿¼­³²ºÏ";
+			map->name = "ê³µìš©ì œë‹¨_ë™ì„œë‚¨ë¶";
 			return  "\
 .......\
 ...1...\
@@ -281,7 +281,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 7: //±¸ÀÛ°á°è
+	case 7: //êµ¬ì‘ê²°ê³„
 		{
 			map->size_x = 3;
 			map->size_y = 2;	
@@ -293,7 +293,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "Á¦´Ü_±¸ÀÛ°á°è";
+			map->name = "ì œë‹¨_êµ¬ì‘ê²°ê³„";
 			return  "\
 #######\
 #.1.2.#\
@@ -302,7 +302,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.....#";
 			break;
 		}
-	case 8: //»çÅä¸®»çÀ°ÅÍ
+	case 8: //ì‚¬í† ë¦¬ì‚¬ìœ¡í„°
 		{
 			map->size_x = 6;
 			map->size_y = 3;	
@@ -318,7 +318,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(1,-1)));
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(3,1)));
 			makeAunnTemple(map, coord_def(0, 3));
-			map->name = "Á¦´Ü_»çÅä¸®_»çÀ°ÅÍ";
+			map->name = "ì œë‹¨_ì‚¬í† ë¦¬_ì‚¬ìœ¡í„°";
 			return  "\
 #############\
 #.=========.#\
@@ -329,7 +329,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.....0.....#";
 			break;
 		}
-	case 9: //¹òÄí·» Ã¥ ¼±¹°
+	case 9: //ë±Œì¿ ë Œ ì±… ì„ ë¬¼
 		{
 			bool hw_ = randA(1);
 			map->size_x = 2;
@@ -345,14 +345,14 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem(ITM_BOOK, 0, &t, 0);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_¹òÄí·»_Ã¥¼±¹°";
+			map->name = "ì œë‹¨_ë±Œì¿ ë Œ_ì±…ì„ ë¬¼";
 			return  "\
 .....\
 ..0..\
 .....";
 			break;
 		}
-	case 10: //¿¡ÀÌ¸° ½ÇÇè½Ç
+	case 10: //ì—ì´ë¦° ì‹¤í—˜ì‹¤
 		{
 			map->size_x = 3;
 			map->size_y = 2;	
@@ -375,7 +375,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem(ITM_POTION, -1, &t);
 			map->item_list.push_back(mapdummy_item(t,coord_def(2,1)));
 			makeAunnTemple(map, coord_def(0, -1));
-			map->name = "Á¦´Ü_¿¡ÀÌ¸°_Æ÷¼Ç";
+			map->name = "ì œë‹¨_ì—ì´ë¦°_í¬ì…˜";
 			return  "\
 #.....#\
 #..0..#\
@@ -384,7 +384,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #######";
 			break;
 		}
-	case 11: //½ÅÅ°¿Í P
+	case 11: //ì‹ í‚¤ì™€ P
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -405,7 +405,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_½ÅÅ°_P";
+			map->name = "ì œë‹¨_ì‹ í‚¤_P";
 			return  "\
 .......\
 .......\
@@ -416,7 +416,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 12: //½º¿ÍÄÚÀÇ ¹Ù´ÙÁöÇü
+	case 12: //ìŠ¤ì™€ì½”ì˜ ë°”ë‹¤ì§€í˜•
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -430,7 +430,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_SUWAKO);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_½º¿ÍÄÚ_¹Ù´Ù";
+			map->name = "ì œë‹¨_ìŠ¤ì™€ì½”_ë°”ë‹¤";
 			return  "\
 .......\
 .#.~#~.\
@@ -441,7 +441,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 13: //È÷³ªÀÇ ¾×¸ğ¾ç ÁöÇü
+	case 13: //íˆë‚˜ì˜ ì•¡ëª¨ì–‘ ì§€í˜•
 		{
 			bool hw_ = randA(1);
 			map->size_x = 6;
@@ -455,7 +455,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_HINA);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_È÷³ª_¾×ÁöÇü";
+			map->name = "ì œë‹¨_íˆë‚˜_ì•¡ì§€í˜•";
 			return  "\
 .............\
 .............\
@@ -470,7 +470,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .............";
 			break;
 		}
-	case 14: //¹Ì³ë¸®ÄÚ °í±¸¸¶½ÅÀü
+	case 14: //ë¯¸ë…¸ë¦¬ì½” ê³ êµ¬ë§ˆì‹ ì „
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -493,7 +493,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_¹Ì³ë¸®ÄÚ_°í±¸¸¶";
+			map->name = "ì œë‹¨_ë¯¸ë…¸ë¦¬ì½”_ê³ êµ¬ë§ˆ";
 			return  "\
 .......\
 .......\
@@ -504,7 +504,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 15: //Ä¡¸£³ë¿¡ Â¡¹úÀ» °¡ÇÏ´Â ½º¿ÍÄÚ
+	case 15: //ì¹˜ë¥´ë…¸ì— ì§•ë²Œì„ ê°€í•˜ëŠ” ìŠ¤ì™€ì½”
 		{
 			map->size_x = 5;
 			map->size_y = 3;	
@@ -526,7 +526,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(0,0)));
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
 			makeAunnTemple(map, coord_def(0, -3));
-			map->name = "Á¦´Ü_½º¿ÍÄÚ_Ä¡¸£³ëÂ¡¹ú";
+			map->name = "ì œë‹¨_ìŠ¤ì™€ì½”_ì¹˜ë¥´ë…¸ì§•ë²Œ";
 			return  "\
 #.........#\
 #.=======.#\
@@ -537,7 +537,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 ###########";
 			break;
 		}
-	case 16: //À¯À¯ÄÚ½Ä´Ü
+	case 16: //ìœ ìœ ì½”ì‹ë‹¨
 		{
 			map->size_x = 3;
 			map->size_y = 2;	
@@ -557,7 +557,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->monster_list.push_back(mapdummy_mon(MON_RABBIT,0,coord_def(0,-1)));
 			}
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "Á¦´Ü_À¯À¯ÄÚ_½Ä´Ü";
+			map->name = "ì œë‹¨_ìœ ìœ ì½”_ì‹ë‹¨";
 			return  "\
 #######\
 #.=.=.#\
@@ -566,7 +566,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #.....#";
 			break;
 		}
-	case 17: //½ÃÁîÇÏ ´ÜÇ³Á¦´Ü
+	case 17: //ì‹œì¦ˆí•˜ ë‹¨í’ì œë‹¨
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -589,7 +589,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_½ÃÁîÇÏ_´ÜÇ³";
+			map->name = "ì œë‹¨_ì‹œì¦ˆí•˜_ë‹¨í’";
 			return  "\
 .......\
 .......\
@@ -600,7 +600,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 .......";
 			break;
 		}
-	case 18: //À¯¿ì±â ½Î¿ò
+	case 18: //ìœ ìš°ê¸° ì‹¸ì›€
 		{
 			map->size_x = 5;
 			map->size_y = 4;	
@@ -615,7 +615,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);
 			makeAunnTemple(map, coord_def(0, -3));
-			map->name = "Á¦´Ü_À¯¿ì±â_Åõ±âÀå";
+			map->name = "ì œë‹¨_ìœ ìš°ê¸°_íˆ¬ê¸°ì¥";
 			return  "\
 ###########\
 .....0.....\
@@ -628,7 +628,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 ###########";
 			break;
 		}
-	case 19: //À¯Ä«¸® ½ºÅ°¸¶ Á¦´Ü
+	case 19: //ìœ ì¹´ë¦¬ ìŠ¤í‚¤ë§ˆ ì œë‹¨
 		{
 			map->size_x = 2;
 			map->size_y = 6;
@@ -645,7 +645,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->event_list.push_back(mapdummy_event(EVL_SUKIMA, coord_def(1, i), EVT_APPROACH_SMALL));
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "Á¦´Ü_À¯Ä«¸®_½ºÅ°¸¶";
+			map->name = "ì œë‹¨_ìœ ì¹´ë¦¬_ìŠ¤í‚¤ë§ˆ";
 			return  "\
 #####\
 #.0.#\
@@ -662,7 +662,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 #...#";
 			break;
 		}
-	case 20: //ÁÒ¿Â&½Ã¿Â ³¬½Ã ÁöÇü
+	case 20: //ì£ ì˜¨&ì‹œì˜¨ ë‚šì‹œ ì§€í˜•
 		{
 			map->size_x = 3;
 			map->size_y = 6;
@@ -684,7 +684,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 				map->item_list.push_back(mapdummy_item(t, c_));
 			}
 			makeAunnTemple(map, coord_def(-1, 5));
-			map->name = "Á¦´Ü_ÁÒ¿Â½Ã¿Â_³¬½Ã";
+			map->name = "ì œë‹¨_ì£ ì˜¨ì‹œì˜¨_ë‚šì‹œ";
 			return  "\
 ##...##\
 ###...#\

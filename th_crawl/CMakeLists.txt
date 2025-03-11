@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+﻿cmake_minimum_required(VERSION 3.15)
 
 project(th_crawl LANGUAGES CXX)
 
@@ -17,6 +17,8 @@ else()
     set(ARCH "Win32")
 endif()
 
+add_compile_options(/utf-8)
+add_compile_options(/wd4819)
 if (MSVC)
     add_definitions(-D_HAS_STD_BYTE=0)
 endif()

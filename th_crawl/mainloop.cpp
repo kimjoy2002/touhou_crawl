@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: mainloop.h
+// íŒŒì¼ì´ë¦„: mainloop.h
 //
-// ³»¿ë: ÁÖ°ÔÀÓ·çÇÁ
+// ë‚´ìš©: ì£¼ê²Œì„ë£¨í”„
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -72,8 +72,8 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 5;
 		t.can_throw = true;
 		t.image = &img_item_weapon_dagger;
-		t.name.name = "´ë°Å";
-		t.name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+		t.name.name = "ëŒ€ê±°";
+		t.name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 		t.weight = 2.0f;
 		t.value = 50;
 		break;
@@ -86,8 +86,8 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = true;
 		t.image = &img_item_weapon_handaxe;
-		t.name.name = "¼Õµµ³¢";
-		t.name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+		t.name.name = "ì†ë„ë¼";
+		t.name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 		t.weight = 3.0f;
 		t.value = 60;
 		break;
@@ -100,8 +100,8 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = false;
 		t.image = randA(1)?&img_item_weapon_gohey:&img_item_weapon_gohey2;
-		t.name.name = "°íÇìÀÌ";
-		t.name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+		t.name.name = "ê³ í—¤ì´";
+		t.name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 		t.weight = 3.0f;
 		t.value = 60;
 		break;
@@ -114,8 +114,8 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = true;
 		t.image = &img_item_weapon_spear;
-		t.name.name = "Ã¢";
-		t.name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+		t.name.name = "ì°½";
+		t.name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 		t.weight = 4.0f;
 		t.value = 70;
 		break;
@@ -144,7 +144,7 @@ void Test_char_init(item_type item_, int bonus)
 	t.is_pile = false;
 	t.can_throw = false;
 	t.image = &img_item_armor_robe;
-	t.name.name = "¹«³àº¹";
+	t.name.name = "ë¬´ë…€ë³µ";
 	t.name.name_type = true;
 	t.weight = 6.0f;
 	t.value = 40;
@@ -168,7 +168,7 @@ void Test_char_init(item_type item_, int bonus)
 	t.is_pile = true;
 	t.can_throw = false;
 	t.image = &img_item_food_bread;
-	t.name.name = "»§";
+	t.name.name = "ë¹µ";
 	t.name.name_type = true;
 	t.weight = 5.0f;
 	t.value = 30;
@@ -263,7 +263,7 @@ void init_localization() {
 
 
 void charter_selete()
-{//ÀÎ°£,¸¶¹ı»ç,¿äÁ¤,Ä«¶ó½ºÅÙ±¸,¹é¶ûÅÙ±¸,Ä±ÆÄ,¹İ¿ä,Ã÷±¸¸ğ°¡¹Ì,ÈíÇ÷±Í,¿À´Ï,»ç½Å, ´ŞÅä³¢, ÃµÀÎ, ¿ë±ÃÀÇ»çÀÚ, À¯ ·É, ¸Á·É, ¼Ò·É
+{//ì¸ê°„,ë§ˆë²•ì‚¬,ìš”ì •,ì¹´ë¼ìŠ¤í…êµ¬,ë°±ë‘í…êµ¬,ìº‡íŒŒ,ë°˜ìš”,ì¸ êµ¬ëª¨ê°€ë¯¸,í¡í˜ˆê·€,ì˜¤ë‹ˆ,ì‚¬ì‹ , ë‹¬í† ë¼, ì²œì¸, ìš©ê¶ì˜ì‚¬ì, ìœ  ë ¹, ë§ë ¹, ì†Œë ¹
 	for(int i = 0; i<MAXLEVEL; i++)
 		env[i].floor = i;
 	
@@ -271,26 +271,26 @@ void charter_selete()
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() = "touhou crawl ";
 	SetText() += version_string;
-	SetText() += "\nµ¿¹æÇÁ·ÎÁ§Æ®¿Í ´øÀüÅ©·ÑÀÇ µ¿ÀÎ°ÔÀÓ\n\n";
+	SetText() += "\në™ë°©í”„ë¡œì íŠ¸ì™€ ë˜ì „í¬ë¡¤ì˜ ë™ì¸ê²Œì„\n\n";
 	string user_name = option_mg.getName();
 	if (user_name.size() != 0)
 	{
 		you.user_name.name = user_name;
 	}
 
-	SetText() += "´ç½ÅÀÇ ÀÌ¸§Àº \"";
+	SetText() += "ë‹¹ì‹ ì˜ ì´ë¦„ì€ \"";
 	SetText() += you.user_name.name;
-	SetText() += "\" ÀÌ´Ù.\n";
+	SetText() += "\" ì´ë‹¤.\n";
 
-	if (you.user_name.name.compare("ÀÌ¸§¾øÀ½") == 0) {
-		SetText() += "config.ini¿¡¼­ ´ç½ÅÀÇ ÀÌ¸§À» ¹Ù²Ü ¼ö ÀÖ¾î.\n";
+	if (you.user_name.name.compare("ì´ë¦„ì—†ìŒ") == 0) {
+		SetText() += "config.iniì—ì„œ ë‹¹ì‹ ì˜ ì´ë¦„ì„ ë°”ê¿€ ìˆ˜ ìˆì–´.\n";
 	}
 
 	SetDisplayTexture(&img_title);
 	ReleaseMutex(mutx);
 	waitkeyinput();	
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() += "½ÃÀÛÇÑ´Ù!\n";
+	SetText() += "ì‹œì‘í•œë‹¤!\n";
 	ReleaseMutex(mutx);
 	Sleep(500);
 	SetDisplayTexture(NULL);
@@ -326,7 +326,7 @@ void charter_selete()
 	if(isNormalGame() && !saveexit)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"%s, %s %s %s. ´øÀüÀÇ Å½ÇèÀ» ½ÃÀÛÇß´Ù.", you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
+		sprintf_s(temp,200,"%s, %s %s %s. ë˜ì „ì˜ íƒí—˜ì„ ì‹œì‘í–ˆë‹¤.", you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 
 		SetTribe(you.tribe);
@@ -340,32 +340,32 @@ void charter_selete()
 	else if(map_list.tutorial == GM_TUTORIAL)
 	{		
 		you.image = &img_play_sanae;
-		you.char_name.name = "»ç³ª¿¡";
+		you.char_name.name = "ì‚¬ë‚˜ì—";
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
 		you.CalcuHP();
 		env[current_level].EnterMap(0,deque<monster*>());	
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : È¯¿µÇÑ´Ù, »ç³ª¿¡! ÀÌ¹ø Æ©Åä¸®¾óÀº ³»°¡ ´ã´çÇÏÁö.",true,false,false,CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : Áö³ª°£ ¸»Àº ÄÁÆ®·Ñ+P·Î ·Î±×¸¦ È®ÀÎÇÏ°í ±Ã±İÇÑ°Ç ?¸¦ ´­·¯.",true,false,false,CL_warning);
-		printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀÏ´Ü h j k l³ª ¹æÇâÅ°·Î ¿òÁ÷ÀÏ ¼ö ÀÖ¾î. ´ë¼Ò¹®ÀÚ¿¡ Á¶½ÉÇØ.",true,false,false,CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : í™˜ì˜í•œë‹¤, ì‚¬ë‚˜ì—! ì´ë²ˆ íŠœí† ë¦¬ì–¼ì€ ë‚´ê°€ ë‹´ë‹¹í•˜ì§€.",true,false,false,CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì§€ë‚˜ê°„ ë§ì€ ì»¨íŠ¸ë¡¤+Pë¡œ ë¡œê·¸ë¥¼ í™•ì¸í•˜ê³  ê¶ê¸ˆí•œê±´ ?ë¥¼ ëˆŒëŸ¬.",true,false,false,CL_warning);
+		printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì¼ë‹¨ h j k lë‚˜ ë°©í–¥í‚¤ë¡œ ì›€ì§ì¼ ìˆ˜ ìˆì–´. ëŒ€ì†Œë¬¸ìì— ì¡°ì‹¬í•´.",true,false,false,CL_warning);
 	}
 	else if(map_list.tutorial == GM_TUTORIAL2)
 	{
 		you.image = &img_play_sanae;
-		you.char_name.name = "»ç³ª¿¡";
+		you.char_name.name = "ì‚¬ë‚˜ì—";
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
 		you.CalcuHP();
 		env[current_level].EnterMap(0,deque<monster*>());	
-		printlog("¾È³çÇÏ¼¼¿ä. Dungeon Crawl Stone Soup (ÀÌÇÏ µ¹Á×) ÆÒ°ÔÀÓ µ¿¹æÅ©·ÑÀÔ´Ï´Ù.",true,false,false,CL_warning);
-		printlog("¿©±â¿¡¼± µ¹Á× °æÇèÀÚºĞÀ» À§ÇÑ Æ©Åä¸®¾óÀÔ´Ï´Ù.",true,false,false,CL_warning);
+		printlog("ì•ˆë…•í•˜ì„¸ìš”. Dungeon Crawl Stone Soup (ì´í•˜ ëŒì£½) íŒ¬ê²Œì„ ë™ë°©í¬ë¡¤ì…ë‹ˆë‹¤.",true,false,false,CL_warning);
+		printlog("ì—¬ê¸°ì—ì„  ëŒì£½ ê²½í—˜ìë¶„ì„ ìœ„í•œ íŠœí† ë¦¬ì–¼ì…ë‹ˆë‹¤.",true,false,false,CL_warning);
 	}
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)
 	{
 		you.image = &img_play_sanae;
-		you.char_name.name = "»ç³ª¿¡";
+		you.char_name.name = "ì‚¬ë‚˜ì—";
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
@@ -380,14 +380,14 @@ void charter_selete()
 		you.equip('a',ET_LEFT,false);
 		env[current_level].DeleteItem(it);
 
-		printlog("¾Æ·¹³ª¿¡ ¿Â°É È¯¿µÇÑ´Ù! ½Â¸®ÇÒ °Í °°Àº ÆÀÀÇ ¹æÇâ¿¡ ¼­ÀÖ¾î¶ó!",true,false,false,CL_help);
-		printlog("¸¸¾à ½ÂÀÚ¸¦ ¸ÂÃß°ÔµÇ¸é ·¹º§ÀÌ 1 ¿À¸¥´Ù. Æ²¸®¸é °ÔÀÓ ¿À¹ö! ±âÈ¸´Â 3¹ø...",true,false,false,CL_help);
+		printlog("ì•„ë ˆë‚˜ì— ì˜¨ê±¸ í™˜ì˜í•œë‹¤! ìŠ¹ë¦¬í•  ê²ƒ ê°™ì€ íŒ€ì˜ ë°©í–¥ì— ì„œìˆì–´ë¼!",true,false,false,CL_help);
+		printlog("ë§Œì•½ ìŠ¹ìë¥¼ ë§ì¶”ê²Œë˜ë©´ ë ˆë²¨ì´ 1 ì˜¤ë¥¸ë‹¤. í‹€ë¦¬ë©´ ê²Œì„ ì˜¤ë²„! ê¸°íšŒëŠ” 3ë²ˆ...",true,false,false,CL_help);
 	}
 	else if (map_list.tutorial == GM_SPRINT2_MINISTAGE)
 	{
 
 		char temp[200];
-		sprintf_s(temp, 200, "%s, %s %s %s. ´øÀüÀÇ Å½ÇèÀ» ½ÃÀÛÇß´Ù.", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str());
+		sprintf_s(temp, 200, "%s, %s %s %s. ë˜ì „ì˜ íƒí—˜ì„ ì‹œì‘í–ˆë‹¤.", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str());
 		AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
 
 		SetTribe(you.tribe);
@@ -407,7 +407,7 @@ void charter_selete()
 
 		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
 		/*you.image = &img_play_sanae;
-		you.char_name.name = "»ç³ª¿¡";
+		you.char_name.name = "ì‚¬ë‚˜ì—";
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
@@ -449,7 +449,7 @@ void Initialize()
 {
 	env[current_level].EnterMap(0,deque<monster*>());
 
-	printlog("È¯»óÇâ¿¡ ¿Â°É È¯¿µÇÑ´Ù!",true,false,false,CL_normal);
+	printlog("í™˜ìƒí–¥ì— ì˜¨ê±¸ í™˜ì˜í•œë‹¤!",true,false,false,CL_normal);
 	//you.resetLOS(false);
 	you.FairyRevive(false);
 }
@@ -472,7 +472,7 @@ void MainLoop()
 
 		while (you.youMaxiExp) {
 			enterlog();
-			printlog("´ç½ÅÀº ¹è¿ì°í ÀÖ´ø ½ºÅ³À» ¸¶½ºÅÍÇß´Ù!", true, false, false, CL_normal);
+			printlog("ë‹¹ì‹ ì€ ë°°ìš°ê³  ìˆë˜ ìŠ¤í‚¬ì„ ë§ˆìŠ¤í„°í–ˆë‹¤!", true, false, false, CL_normal);
 			MoreWait();
 
 			skill_view();
@@ -487,16 +487,16 @@ void MainLoop()
 		switch(char_)
 		{
 		case 'k':
-			action_Move('k', coord_def(you.position.x,you.position.y-1));  //À§
+			action_Move('k', coord_def(you.position.x,you.position.y-1));  //ìœ„
 			break;
 		case 'j':
-			action_Move('j', coord_def(you.position.x,you.position.y+1)); //¾Æ·¡
+			action_Move('j', coord_def(you.position.x,you.position.y+1)); //ì•„ë˜
 			break;
 		case 'h':
-			action_Move('h', coord_def(you.position.x-1,you.position.y)); //¿ŞÂÊ
+			action_Move('h', coord_def(you.position.x-1,you.position.y)); //ì™¼ìª½
 			break;
 		case 'l':
-			action_Move('l', coord_def(you.position.x+1,you.position.y)); //¿À¸¥ÂÊ
+			action_Move('l', coord_def(you.position.x+1,you.position.y)); //ì˜¤ë¥¸ìª½
 			break;
 		case 'b':
 			action_Move('b', coord_def(you.position.x-1,you.position.y+1));
@@ -510,95 +510,95 @@ void MainLoop()
 		case 'u':
 			action_Move('u', coord_def(you.position.x+1,you.position.y-1));
 			break;
-		case 'x': //ÁÖÀ§Å½»ö
+		case 'x': //ì£¼ìœ„íƒìƒ‰
 			Search();
 			break;
-		case 's': //ÅÏ½ºÅµ
-		case '.': //ÅÏ½ºÅµ
+		case 's': //í„´ìŠ¤í‚µ
+		case '.': //í„´ìŠ¤í‚µ
 			action_turn_skip();
 			break;
 		case 'g':
-		case ',': //Áİ±â
+		case ',': //ì¤ê¸°
 			PickUp();
 			break;
-		case 'i': //¾ÆÀÌÅÛÈ®ÀÎ
+		case 'i': //ì•„ì´í…œí™•ì¸
 			iteminfor();
 			break;	
-		case 'd': //¾ÆÀÌÅÛ¹ö¸®±â
+		case 'd': //ì•„ì´í…œë²„ë¦¬ê¸°
 			iteminfor_discard();
 			break;
-		case 'D': //¸¶Áö¸·¿¡ ¸ÔÀº ¾ÆÀÌÅÛ ¹ö¸®±â
+		case 'D': //ë§ˆì§€ë§‰ì— ë¨¹ì€ ì•„ì´í…œ ë²„ë¦¬ê¸°
 			fast_discard();
 			break;
-		case 'w': //¹«±âÀåÂø
+		case 'w': //ë¬´ê¸°ì¥ì°©
 			Equip_Weapon();
 			break;
-		case 'W': //¹æ¾î±¸ÀåÂø
+		case 'W': //ë°©ì–´êµ¬ì¥ì°©
 			Equip_Armor();
 			break;
-		case 'T': //¹æ¾î±¸ÇØÁ¦
+		case 'T': //ë°©ì–´êµ¬í•´ì œ
 			Unequip_Armor();
 			break;
-		case 'C': //¹®´İ±â
+		case 'C': //ë¬¸ë‹«ê¸°
 			Close_door();
 			break;
-		case 'O': //¹®¿­±â
+		case 'O': //ë¬¸ì—´ê¸°
 			Open_door();
 			break;
-		case 'o': //ÀÚµ¿ÀÌµ¿
+		case 'o': //ìë™ì´ë™
 			auto_Move();
 			break;
-		case '5': //100ÅÏ³Ñ±â±â
+		case '5': //100í„´ë„˜ê¸°ê¸°
 			long_rest();
 			break;
-		case 0x88: //ÄÁÆ®·ÑP - ·Î±×
+		case 0x88: //ì»¨íŠ¸ë¡¤P - ë¡œê·¸
 			view_log();
 			break;
-		case 15: //ÄÁÆ®·Ño
+		case 15: //ì»¨íŠ¸ë¡¤o
 			if(isNormalGame())
 				dungeonView();
 			break;
-		case 'e': //¸Ô±â
+		case 'e': //ë¨¹ê¸°
 			Eatting(0);
 			break;
-		case 'q': //¸¶½Ã±â
+		case 'q': //ë§ˆì‹œê¸°
 			Drinking(0);
 			break;
-		case 'r': //ÀĞ±â
+		case 'r': //ì½ê¸°
 			Reading(0);
 			break;
-		case 'm': //½ºÅ³Á¤º¸Ã¢
+		case 'm': //ìŠ¤í‚¬ì •ë³´ì°½
 			skill_view();
 			break;
-		case 'P': //Àå½Å±¸ÀåÂø
+		case 'P': //ì¥ì‹ êµ¬ì¥ì°©
 			Equip_Jewelry();
 			break;
-		case 'R': //Àå½Å±¸ÇØÁ¦
+		case 'R': //ì¥ì‹ êµ¬í•´ì œ
 			Unequip_Jewelry();
 			break;
-		case 'S': //Ã¼Å©ÈÄ Á¾·á
+		case 'S': //ì²´í¬í›„ ì¢…ë£Œ
 			saveandcheckexit();
 			break;
-		case 0x07: //ÀüÃ¼Ãş ÀÌµ¿
+		case 0x07: //ì „ì²´ì¸µ ì´ë™
 			if (isNormalGame())
 				floorMove();
 			break;
-		case 0x89: //°­Á¦Á¾·á
+		case 0x89: //ê°•ì œì¢…ë£Œ
 			nosaveandexit();
 			break;
-		case 0x8A: //ÀúÀå°ú Á¾·á
+		case 0x8A: //ì €ì¥ê³¼ ì¢…ë£Œ
 			saveandexit();
 			break;
-		case 'X': //³ĞÀºÅ½»ö
+		case 'X': //ë„“ì€íƒìƒ‰
 			Wide_Search();
 			break;
-		case 'f': //´øÁö±â(ºü¸¥)
+		case 'f': //ë˜ì§€ê¸°(ë¹ ë¥¸)
 			Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), false);
 			break;
-		case 'F': //´øÁö±â(¼±ÅÃ)
+		case 'F': //ë˜ì§€ê¸°(ì„ íƒ)
 			Select_Throw();
 			break;
-		case '\\': //½Äº°ÅÛ È®ÀÎ
+		case '\\': //ì‹ë³„í…œ í™•ì¸
 			Iden_Show();
 			break;
 		case '>':
@@ -650,7 +650,7 @@ void MainLoop()
 			break;
 		case '#':
 			if(Dump(0,NULL))
-				printlog("´ıÇÁ¿¡ ¼º°øÇß½À´Ï´Ù.",true,false,false,CL_normal);
+				printlog("ë¤í”„ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤.",true,false,false,CL_normal);
 			break;
 		case 'Z':
 		case 'z':
@@ -677,7 +677,7 @@ void MainLoop()
 		case '\'':
 			weapon_swap();
 			break;
-		case '&': //À§ÀÚµå¸ğµå!
+		case '&': //ìœ„ìë“œëª¨ë“œ!
 			//waitkeyinput();
 			wiz_mode();
 			break;
@@ -687,7 +687,7 @@ void MainLoop()
 		case 0x8B:
 			auto_pick_onoff(false);
 			break;
-		case '?'://µµ¿ò¸»
+		case '?'://ë„ì›€ë§
 			Help_Show();
 			break;
 		case VK_ESCAPE://esc

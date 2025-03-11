@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: god.cpp
+// íŒŒì¼ì´ë¦„: god.cpp
 //
-// ³»¿ë: ½Å°ü·Ã
+// ë‚´ìš©: ì‹ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,51 +31,51 @@ const char* GetGodString(god_type god)
 	switch(god)
 	{
 	case GT_ERROR:
-		return "¾Ë¼ö¾ø´Â½Å";
+		return "ì•Œìˆ˜ì—†ëŠ”ì‹ ";
 	case GT_NONE:
 		return "";
 	case GT_JOON_AND_SION:
-		return "ÁÒ¿Â&½Ã¿Â";
+		return "ì£ ì˜¨&ì‹œì˜¨";
 	case GT_BYAKUREN:
-		return "¹òÄí·»";
+		return "ë±Œì¿ ë Œ";
 	case GT_KANAKO:
-		return "Ä«³ªÄÚ";
+		return "ì¹´ë‚˜ì½”";
 	case GT_SUWAKO:
-		return "½º¿ÍÄÚ";
+		return "ìŠ¤ì™€ì½”";
 	case GT_MINORIKO:
-		return "¹Ì³ë¸®ÄÚ";
+		return "ë¯¸ë…¸ë¦¬ì½”";
 	case GT_MIMA:
-		return "¹Ì¸¶";
+		return "ë¯¸ë§ˆ";
 	case GT_SHINKI:
-		return "½ÅÅ°";
+		return "ì‹ í‚¤";
 	case GT_YUUGI:
-		return "À¯¿ì±â";
+		return "ìœ ìš°ê¸°";
 	case GT_SHIZUHA:
-		return "½ÃÁîÇÏ";
+		return "ì‹œì¦ˆí•˜";
 	case GT_HINA:
-		return "È÷³ª";
+		return "íˆë‚˜";
 	case GT_YUKARI:
-		return "À¯Ä«¸®";
+		return "ìœ ì¹´ë¦¬";
 	case GT_EIRIN:
-		return "¿¡ÀÌ¸°";
+		return "ì—ì´ë¦°";
 	case GT_YUYUKO:
-		return "À¯À¯ÄÚ";
+		return "ìœ ìœ ì½”";
 	case GT_SATORI:
-		return "»çÅä¸®";
+		return "ì‚¬í† ë¦¬";
 	case GT_TENSI:
-		return "ÅÙ½Ã";
+		return "í…ì‹œ";
 	case GT_SEIJA:
-		return "¼¼ÀÌÀÚ";
+		return "ì„¸ì´ì";
 	case GT_LILLY:
-		return "¸±¸®";
+		return "ë¦´ë¦¬";
 	case GT_MIKO:
-		return "¹ÌÄÚ";
+		return "ë¯¸ì½”";
 	case GT_OKINA:
-		return "¿ÀÅ°³ª";
+		return "ì˜¤í‚¤ë‚˜";
 	case GT_JUNKO:
-		return "¼øÈ£";
+		return "ìˆœí˜¸";
 	}
-	return "¸ğ¸§";
+	return "ëª¨ë¦„";
 }
 bool GetGodString_is(god_type god)
 {
@@ -172,7 +172,7 @@ int getPietyPercent(int type, int strong) {
 		case 4: return percen_<60 ? 1 : 0;
 		case 5: return percen_<100 ? 1 : 0;
 		}
-	case 3: //¹ÌÄÚ Àü¿ë
+	case 3: //ë¯¸ì½” ì „ìš©
 		switch (strong)
 		{
 		default:
@@ -218,46 +218,46 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 0:
 			if (plus)
-				printlog("´ç½ÅÀº ¿ªº´½Å°ú ºó°ï½ÅÀÇ ÀúÁÖ·Î ¼Ò¸ğÇ°À» ³¶ºñÇÏ¸ç ÀÒ¾î¹ö¸°´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë‹¹ì‹ ì€ ì—­ë³‘ì‹ ê³¼ ë¹ˆê³¤ì‹ ì˜ ì €ì£¼ë¡œ ì†Œëª¨í’ˆì„ ë‚­ë¹„í•˜ë©° ìƒì–´ë²„ë¦°ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		case 1:
 			you.Ability(SKL_JOON_AND_SION_1, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀ» ºùÀÇÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì„ ë¹™ì˜í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_joon_and_sion);
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀº ÀÌÁ¦ ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀ» ºùÀÇÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ì´ì œ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì„ ë¹™ì˜í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		case 2:
 			if (plus)
-				printlog("ºùÀÇ»óÅÂ¿¡¼­ ºùÀÇµÈ ½Å¿¡ µû¶ó ÆÄ¿ö¸¦ ÀÌ¿ëÇÑ È¿°ú¸¦ ¾ò°Ô µÈ´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë¹™ì˜ìƒíƒœì—ì„œ ë¹™ì˜ëœ ì‹ ì— ë”°ë¼ íŒŒì›Œë¥¼ ì´ìš©í•œ íš¨ê³¼ë¥¼ ì–»ê²Œ ëœë‹¤.", true, false, false, CL_joon_and_sion);
 			else
-				printlog("´õ ÀÌ»ó ºùÀÇ»óÅÂ¿¡¼­ ÆÄ¿ö¸¦ ÀÌ¿ëÇÑ È¿°ú¸¦ ¾òÀ» ¼ö ¾ø´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë” ì´ìƒ ë¹™ì˜ìƒíƒœì—ì„œ íŒŒì›Œë¥¼ ì´ìš©í•œ íš¨ê³¼ë¥¼ ì–»ì„ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		case 4:
 			if (plus)
-				printlog("ºùÀÇ»óÅÂ¿¡¼­ ºùÀÇµÈ ½Å¿¡ µû¶ó ¼Ò¸ğÇ°À» ÀÌ¿ëÇÑ È¿°ú¸¦ ¾ò°Ô µÈ´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë¹™ì˜ìƒíƒœì—ì„œ ë¹™ì˜ëœ ì‹ ì— ë”°ë¼ ì†Œëª¨í’ˆì„ ì´ìš©í•œ íš¨ê³¼ë¥¼ ì–»ê²Œ ëœë‹¤.", true, false, false, CL_joon_and_sion);
 			else
-				printlog("´õ ÀÌ»ó ºùÀÇ»óÅÂ¿¡¼­ ¼Ò¸ğÇ°À» ÀÌ¿ëÇÑ È¿°ú¸¦ ¾òÀ» ¼ö ¾ø´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë” ì´ìƒ ë¹™ì˜ìƒíƒœì—ì„œ ì†Œëª¨í’ˆì„ ì´ìš©í•œ íš¨ê³¼ë¥¼ ì–»ì„ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		case 5:
 			if (plus)
 			{
-				printlog("ºùÀÇÇÒ¶§¸¶´Ù ÇÑ¹ø¸¸ ºùÀÇµÈ ½ÅÀÇ ÇÊ»ì±â¸¦ »ç¿ëÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë¹™ì˜í• ë•Œë§ˆë‹¤ í•œë²ˆë§Œ ë¹™ì˜ëœ ì‹ ì˜ í•„ì‚´ê¸°ë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_joon_and_sion);
 				if (you.god_value[GT_JOON_AND_SION][0] == 1)
 					you.Ability(SKL_JOON_AND_SION_2, true, !plus);
 				else if (you.god_value[GT_JOON_AND_SION][0] == 2)
 					you.Ability(SKL_JOON_AND_SION_3, true, !plus);
 			}
 			else
-				printlog("´õ ÀÌ»ó ºùÀÇµÈ ½ÅÀÇ ÇÊ»ì±â¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë” ì´ìƒ ë¹™ì˜ëœ ì‹ ì˜ í•„ì‚´ê¸°ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		case 6:
 			if (you.god_value[GT_JOON_AND_SION][0] != 0)
 				you.Ability(SKL_JOON_AND_SION_4, true, !plus);
 			if (plus)
-				printlog("ÀÌÁ¦ ´ç½ÅÀº ¹«Á¶°Ç ÀÌ±æ ¼ö ÀÖ´Â ÃÖÈäÃÖ¾ÇÀÇ Àü¹ıÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ì´ì œ ë‹¹ì‹ ì€ ë¬´ì¡°ê±´ ì´ê¸¸ ìˆ˜ ìˆëŠ” ìµœí‰ìµœì•…ì˜ ì „ë²•ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_joon_and_sion);
 			else
-				printlog("´õ ÀÌ»ó ÃÖÈäÃÖ¾ÇÀÇ Àü¹ıÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_joon_and_sion);
+				printlog("ë” ì´ìƒ ìµœí‰ìµœì•…ì˜ ì „ë²•ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_joon_and_sion);
 			break;
 		}
 		return false;
@@ -267,39 +267,39 @@ bool GetGodAbility(int level, bool plus)
 		case 1:
 			you.remainSpellPoiont+=plus;
 			if(plus)
-				printlog("È÷Áö¸®´Â ´ç½ÅÀÇ ¹è¿ï ¼ö ÀÖ´Â ¸¶¹ı·¹º§ ÇÑ°è¸¦ ´Ã·ÁÁØ´Ù.",true,false,false,CL_white_blue);
+				printlog("íˆì§€ë¦¬ëŠ” ë‹¹ì‹ ì˜ ë°°ìš¸ ìˆ˜ ìˆëŠ” ë§ˆë²•ë ˆë²¨ í•œê³„ë¥¼ ëŠ˜ë ¤ì¤€ë‹¤.",true,false,false,CL_white_blue);
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀÇ ¹è¿ï ¼ö ÀÖ´Â ¸¶¹ı·¹º§ ÇÑ°è¸¦ ´Ã·ÁÁÖÁö¾Ê´Â´Ù.",true,false,false,CL_white_blue);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì˜ ë°°ìš¸ ìˆ˜ ìˆëŠ” ë§ˆë²•ë ˆë²¨ í•œê³„ë¥¼ ëŠ˜ë ¤ì£¼ì§€ì•ŠëŠ”ë‹¤.",true,false,false,CL_white_blue);
 			break;
 		case 2:
 			you.remainSpellPoiont+=plus;
 			you.Ability(SKL_BYAKUREN_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¼ø°£ÀûÀ¸·Î Áö·ÂÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù.",true,false,false,CL_white_blue);
+				printlog("ë‹¹ì‹ ì€ ìˆœê°„ì ìœ¼ë¡œ ì§€ë ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤.",true,false,false,CL_white_blue);
 			else
-				printlog("´õ ÀÌ»ó ¼ø°£ÀûÀÎ Áö·Â°­È­¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_white_blue);
+				printlog("ë” ì´ìƒ ìˆœê°„ì ì¸ ì§€ë ¥ê°•í™”ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_white_blue);
 			break;
 		case 3:
 			you.remainSpellPoiont+=plus;
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ °­È­µÈ ±Ù·ÂÀ¸·Î ³·Àº °©¿ÊÆĞ³ÎÆ¼ÀÇ ¸¶¹ı½ÇÆĞÀ²À» ¹«½ÃÇÑ´Ù.",true,false,false,CL_white_blue);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ê°•í™”ëœ ê·¼ë ¥ìœ¼ë¡œ ë‚®ì€ ê°‘ì˜·íŒ¨ë„í‹°ì˜ ë§ˆë²•ì‹¤íŒ¨ìœ¨ì„ ë¬´ì‹œí•œë‹¤.",true,false,false,CL_white_blue);
 			else
-				printlog("´õÀÌ»ó ±Ù·Â°­È­ÀÇ Ãàº¹À» ¹ŞÁö ¸øÇÑ´Ù.",true,false,false,CL_white_blue);
+				printlog("ë”ì´ìƒ ê·¼ë ¥ê°•í™”ì˜ ì¶•ë³µì„ ë°›ì§€ ëª»í•œë‹¤.",true,false,false,CL_white_blue);
 			break;
 		case 4:
 			you.remainSpellPoiont+=plus;
 			if(plus)
-				printlog("È÷Áö¸®´Â ÀÌÁ¦ ´ç½ÅÀÇ °­È­¸¶¹ıµéÀ» º¸Á¶ÇØÁØ´Ù.",true,false,false,CL_white_blue);
+				printlog("íˆì§€ë¦¬ëŠ” ì´ì œ ë‹¹ì‹ ì˜ ê°•í™”ë§ˆë²•ë“¤ì„ ë³´ì¡°í•´ì¤€ë‹¤.",true,false,false,CL_white_blue);
 			else
-				printlog("´õ ÀÌ»ó °­È­¸¶¹ıµéÀ» º¸Á¶¹ŞÁö ¸øÇÑ´Ù.",true,false,false,CL_white_blue);
+				printlog("ë” ì´ìƒ ê°•í™”ë§ˆë²•ë“¤ì„ ë³´ì¡°ë°›ì§€ ëª»í•œë‹¤.",true,false,false,CL_white_blue);
 			break;
 		case 5:
 			you.remainSpellPoiont+=plus;
 			you.Ability(SKL_BYAKUREN_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ È÷Áö¸®ÀÇ Ãàº¹À¸·Î ÃÊÀÎ°°Àº °¢·ÂÀ¸·Î ´Ş¸± ¼ö ÀÖ°Ô µÈ´Ù.",true,false,false,CL_white_blue);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ íˆì§€ë¦¬ì˜ ì¶•ë³µìœ¼ë¡œ ì´ˆì¸ê°™ì€ ê°ë ¥ìœ¼ë¡œ ë‹¬ë¦´ ìˆ˜ ìˆê²Œ ëœë‹¤.",true,false,false,CL_white_blue);
 			else
-				printlog("´õÀÌ»ó ÃÊÀÎ°°Àº °¢·ÂÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_white_blue);
+				printlog("ë”ì´ìƒ ì´ˆì¸ê°™ì€ ê°ë ¥ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_white_blue);
 			break;
 		}
 		return false;
@@ -309,23 +309,23 @@ bool GetGodAbility(int level, bool plus)
 		case 1:
 			you.Ability(SKL_KANAKO_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¼ø°£ÀûÀ¸·Î »ó´ë¿¡°Ô µ¹ÁøÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_help);
+				printlog("ë‹¹ì‹ ì€ ìˆœê°„ì ìœ¼ë¡œ ìƒëŒ€ì—ê²Œ ëŒì§„í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_help);
 			else
-				printlog("´õ ÀÌ»ó ¼ø°£ÀûÀÎ µ¹ÁøÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_help);
+				printlog("ë” ì´ìƒ ìˆœê°„ì ì¸ ëŒì§„ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_help);
 			break;
 		case 3:
 			you.Ability(SKL_KANAKO_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ±âµÕÀ» ¼ÒÈ¯ ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_help);
+				printlog("ë‹¹ì‹ ì€ ê¸°ë‘¥ì„ ì†Œí™˜ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_help);
 			else
-				printlog("´õ ÀÌ»ó ±âµÕÀ» ¼ÒÈ¯ ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_help);
+				printlog("ë” ì´ìƒ ê¸°ë‘¥ì„ ì†Œí™˜ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_help);
 			break;
 		case 5:
 			you.Ability(SKL_KANAKO_3,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¹Ù¶÷À» °¨Àº °ø°İÀ» ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_help);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ë°”ëŒì„ ê°ì€ ê³µê²©ì„ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_help);
 			else
-				printlog("´õ ÀÌ»ó ¹Ù¶÷À» °¨¾Æ °ø°İÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_help);
+				printlog("ë” ì´ìƒ ë°”ëŒì„ ê°ì•„ ê³µê²©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_help);
 			break;
 		}
 		return false;
@@ -357,29 +357,29 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 1:
 			if(plus)
-				printlog("´ç½ÅÀº ÆÄ¿ö°¡ ³ôÀ»¼ö·Ï Ã¼·Â°ú ¿µ·ÂÈ¸º¹¼Óµµ°¡ »¡¶óÁø´Ù.",true,false,false,CL_warning);
+				printlog("ë‹¹ì‹ ì€ íŒŒì›Œê°€ ë†’ì„ìˆ˜ë¡ ì²´ë ¥ê³¼ ì˜ë ¥íšŒë³µì†ë„ê°€ ë¹¨ë¼ì§„ë‹¤.",true,false,false,CL_warning);
 			else
-				printlog("´õ ÀÌ»ó Ã¼·Â°ú ¿µ·ÂÈ¸º¹¼Óµµ°¡ »¡¶óÁöÁö¾Ê´Â´Ù.",true,false,false,CL_warning);
+				printlog("ë” ì´ìƒ ì²´ë ¥ê³¼ ì˜ë ¥íšŒë³µì†ë„ê°€ ë¹¨ë¼ì§€ì§€ì•ŠëŠ”ë‹¤.",true,false,false,CL_warning);
 			break;
 		case 2:
 			you.Ability(SKL_MINORIKO_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ »óÅÂÀÌ»ó°ú ´É·ÂÄ¡ÀúÇÏ¸¦ È¸º¹ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_warning);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìƒíƒœì´ìƒê³¼ ëŠ¥ë ¥ì¹˜ì €í•˜ë¥¼ íšŒë³µí•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_warning);
 			else
-				printlog("´õ ÀÌ»ó »óÅÂÀÌ»ó°ú ´É·ÂÄ¡ÀúÇÏ¸¦ È¸º¹ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_warning);
+				printlog("ë” ì´ìƒ ìƒíƒœì´ìƒê³¼ ëŠ¥ë ¥ì¹˜ì €í•˜ë¥¼ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_warning);
 			break;
 		case 3:
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ À½½ÄÀ» »¡¸® ¸ÔÀ» ¼ö ÀÖ°í ¿µ·ÂÀ» Á¶±İ È¸º¹ÇÑ´Ù.",true,false,false,CL_warning);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìŒì‹ì„ ë¹¨ë¦¬ ë¨¹ì„ ìˆ˜ ìˆê³  ì˜ë ¥ì„ ì¡°ê¸ˆ íšŒë³µí•œë‹¤.",true,false,false,CL_warning);
 			else
-				printlog("´õ ÀÌ»ó À½½ÄÀ» »¡¸® ¸ÔÁö ¸øÇÑ´Ù.",true,false,false,CL_warning);
+				printlog("ë” ì´ìƒ ìŒì‹ì„ ë¹¨ë¦¬ ë¨¹ì§€ ëª»í•œë‹¤.",true,false,false,CL_warning);
 			break;
 		case 4:
 			you.Ability(SKL_MINORIKO_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ À½½Ä°ú P¸¦ ¼Ò¸ğÇÏ¿© Ã¼·ÂÀ» Å©°Ô È¸º¹ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_warning);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìŒì‹ê³¼ Pë¥¼ ì†Œëª¨í•˜ì—¬ ì²´ë ¥ì„ í¬ê²Œ íšŒë³µí•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_warning);
 			else
-				printlog("´õ ÀÌ»ó À½½ÄÀ¸·Î Ã¼·ÂÀ» È¸º¹ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_warning);
+				printlog("ë” ì´ìƒ ìŒì‹ìœ¼ë¡œ ì²´ë ¥ì„ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_warning);
 			break;
 		case 5:
 			//if(you.power>=500)
@@ -388,9 +388,9 @@ bool GetGodAbility(int level, bool plus)
 			//	you.ResistUpDown(plus,RST_ICE);
 			//}
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ À½½ÄÀ» ¸ÔÀº Á÷ÈÄ È­¿°°ú ³Ã±â¿¡ °­ÇØÁø´Ù.",true,false,false,CL_warning);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìŒì‹ì„ ë¨¹ì€ ì§í›„ í™”ì—¼ê³¼ ëƒ‰ê¸°ì— ê°•í•´ì§„ë‹¤.",true,false,false,CL_warning);
 			else
-				printlog("´õ ÀÌ»ó À½½ÄÀ» ¸Ô¾îµµ È­¿°°ú ³Ã±â¿¡ °­ÇÏÁö¾Ê´Ù.",true,false,false,CL_warning);
+				printlog("ë” ì´ìƒ ìŒì‹ì„ ë¨¹ì–´ë„ í™”ì—¼ê³¼ ëƒ‰ê¸°ì— ê°•í•˜ì§€ì•Šë‹¤.",true,false,false,CL_warning);
 			break;
 		}
 		return false;
@@ -400,23 +400,23 @@ bool GetGodAbility(int level, bool plus)
 			case 0:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("´ç½ÅÀº ÃÖ´ë¿µ·ÂÀÌ ½Å¾Ó½É¿¡ ºñ·ÊÇØ¼­ Áõ°¡ÇÑ´Ù.",true,false,false,CL_green);
+					printlog("ë‹¹ì‹ ì€ ìµœëŒ€ì˜ë ¥ì´ ì‹ ì•™ì‹¬ì— ë¹„ë¡€í•´ì„œ ì¦ê°€í•œë‹¤.",true,false,false,CL_green);
 				else
-					printlog("´ç½ÅÀÇ ÃÖ´ë¿µ·ÂÀº °¨¼ÒÇß´Ù.",true,false,false,CL_green);
+					printlog("ë‹¹ì‹ ì˜ ìµœëŒ€ì˜ë ¥ì€ ê°ì†Œí–ˆë‹¤.",true,false,false,CL_green);
 				break;
 			case 1:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("´ç½ÅÀº ÀûÀ» Á×¿´À»¶§ ¿µ·ÂÀ» ¾ò´Â´Ù.",true,false,false,CL_green);
+					printlog("ë‹¹ì‹ ì€ ì ì„ ì£½ì˜€ì„ë•Œ ì˜ë ¥ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_green);
 				else
-					printlog("´õ ÀÌ»ó ÀûÀ» Á×¿´À»¶§ ¿µ·ÂÀ» ¾òÁö ¸øÇÑ´Ù.",true,false,false,CL_green);
+					printlog("ë” ì´ìƒ ì ì„ ì£½ì˜€ì„ë•Œ ì˜ë ¥ì„ ì–»ì§€ ëª»í•œë‹¤.",true,false,false,CL_green);
 				break;
 			case 2:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("¹Ì¸¶´Â ÀÌÁ¦ ÆÄ±«¼úÀÌ µé¾î°£ ¸¶¹ıÀÇ À§·ÂÀ» º¸Á¶ÇÑ´Ù.",true,false,false,CL_green);
+					printlog("ë¯¸ë§ˆëŠ” ì´ì œ íŒŒê´´ìˆ ì´ ë“¤ì–´ê°„ ë§ˆë²•ì˜ ìœ„ë ¥ì„ ë³´ì¡°í•œë‹¤.",true,false,false,CL_green);
 				else
-					printlog("´õ ÀÌ»ó ÆÄ±«¼ú À§·ÂÀ» º¸Á¶¹ŞÁö ¸øÇÑ´Ù.",true,false,false,CL_green);
+					printlog("ë” ì´ìƒ íŒŒê´´ìˆ  ìœ„ë ¥ì„ ë³´ì¡°ë°›ì§€ ëª»í•œë‹¤.",true,false,false,CL_green);
 				break;
 			case 3:
 				mima_gift(BOOK_CONJURE);
@@ -425,9 +425,9 @@ bool GetGodAbility(int level, bool plus)
 			case 4:
 				you.max_mp+=plus;
 				if(plus)
-					printlog("¹Ì¸¶´Â ÀÌÁ¦ ÆÄ±«¼úÀÌ µé¾î°£ ¸¶¹ıÀÇ ¼º°øÀ²À» ¿Ã·ÁÁØ´Ù.",true,false,false,CL_green);
+					printlog("ë¯¸ë§ˆëŠ” ì´ì œ íŒŒê´´ìˆ ì´ ë“¤ì–´ê°„ ë§ˆë²•ì˜ ì„±ê³µìœ¨ì„ ì˜¬ë ¤ì¤€ë‹¤.",true,false,false,CL_green);
 				else
-					printlog("´õ ÀÌ»ó ÆÄ±«¼ú ¼º°øÀ²À» º¸Á¤¹ŞÁö ¸øÇÑ´Ù.",true,false,false,CL_green);
+					printlog("ë” ì´ìƒ íŒŒê´´ìˆ  ì„±ê³µìœ¨ì„ ë³´ì •ë°›ì§€ ëª»í•œë‹¤.",true,false,false,CL_green);
 				break;
 			case 5:
 				mima_gift(BOOK_TEST_ANNIHILATE);
@@ -444,35 +444,35 @@ bool GetGodAbility(int level, bool plus)
 			case 1:
 				you.Ability(SKL_SHINKI_1,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº ÇÏ±Ş ¸¶Á·ÀÇ ÀÛÀº ¹«¸®¸¦ ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_white_puple);
+					printlog("ë‹¹ì‹ ì€ í•˜ê¸‰ ë§ˆì¡±ì˜ ì‘ì€ ë¬´ë¦¬ë¥¼ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_white_puple);
 				else
-					printlog("´õ ÀÌ»ó ÇÏ±Ş ¸¶Á·ÀÇ ÀÛÀº ¹«¸®¸¦ ¼ÒÈ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_white_puple);
+					printlog("ë” ì´ìƒ í•˜ê¸‰ ë§ˆì¡±ì˜ ì‘ì€ ë¬´ë¦¬ë¥¼ ì†Œí™˜í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_white_puple);
 				break;
 			case 2:
 				you.Ability(SKL_SHINKI_2,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº À§ÇèÀ» ¹«¸¨¾²°í ½ÅÅ°ÀÇ Áß±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_white_puple);
+					printlog("ë‹¹ì‹ ì€ ìœ„í—˜ì„ ë¬´ë¦…ì“°ê³  ì‹ í‚¤ì˜ ì¤‘ê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_white_puple);
 				else
-					printlog("´õ ÀÌ»ó Áß±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_white_puple);
+					printlog("ë” ì´ìƒ ì¤‘ê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_white_puple);
 				break;
 			case 3:
 				if(plus)
-					printlog("½ÅÅ°´Â ´ç½ÅÀ» Àû´ëÀûÀÎ ¼ÒÈ¯¼ö·ÎºÎÅÍ ÁöÄÑÁØ´Ù.",true,false,false,CL_white_puple);
+					printlog("ì‹ í‚¤ëŠ” ë‹¹ì‹ ì„ ì ëŒ€ì ì¸ ì†Œí™˜ìˆ˜ë¡œë¶€í„° ì§€ì¼œì¤€ë‹¤.",true,false,false,CL_white_puple);
 				else
-					printlog("´õ ÀÌ»ó Àû´ëÀûÀÎ ¼ÒÈ¯¼ö·ÎºÎÅÍ º¸È£¹ŞÁö ¸øÇÑ´Ù.",true,false,false,CL_white_puple);
+					printlog("ë” ì´ìƒ ì ëŒ€ì ì¸ ì†Œí™˜ìˆ˜ë¡œë¶€í„° ë³´í˜¸ë°›ì§€ ëª»í•œë‹¤.",true,false,false,CL_white_puple);
 				break;
 			case 4:
 				you.Ability(SKL_SHINKI_3,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº À§ÇèÀ» ¹«¸¨¾²°í ½ÅÅ°ÀÇ »ó±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_white_puple);
+					printlog("ë‹¹ì‹ ì€ ìœ„í—˜ì„ ë¬´ë¦…ì“°ê³  ì‹ í‚¤ì˜ ìƒê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_white_puple);
 				else
-					printlog("´õ ÀÌ»ó »ó±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_white_puple);
+					printlog("ë” ì´ìƒ ìƒê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_white_puple);
 				break;
 			case 5:
 				if(plus)
-					printlog("ÀÌÁ¦ ´ç½ÅÀº P·ÎºÎÅÍ ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_white_puple);
+					printlog("ì´ì œ ë‹¹ì‹ ì€ Pë¡œë¶€í„° í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_white_puple);
 				else
-					printlog("´õ ÀÌ»ó P·ÎºÎÅÍ ÈûÀ» ¾òÁö ¸øÇÑ´Ù.",true,false,false,CL_white_puple);
+					printlog("ë” ì´ìƒ Pë¡œë¶€í„° í˜ì„ ì–»ì§€ ëª»í•œë‹¤.",true,false,false,CL_white_puple);
 				break;
 		}
 		return false;
@@ -481,44 +481,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 0:
 			if(plus)
-				printlog("´ç½ÅÀº ÃëÇßÀ»¶§ Àß ÇÇÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ì·¨í–ˆì„ë•Œ ì˜ í”¼í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó ÃëÇØµµ ÇÇÇÏÁö ¸øÇÑ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ ì·¨í•´ë„ í”¼í•˜ì§€ ëª»í•œë‹¤.",true,false,false,CL_yuigi);
 			break;
 		case 1:
 			you.Ability(SKL_YUUGI_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¹°¾àÀ» ¼ú·Î ¹Ù²ã ¸¶½Ç ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ë¬¼ì•½ì„ ìˆ ë¡œ ë°”ê¿” ë§ˆì‹¤ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó ¹°¾àÀ» ¼ú·Î ¹Ù²ã ¸¶½Ç ¼ö ¾ø´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ ë¬¼ì•½ì„ ìˆ ë¡œ ë°”ê¿” ë§ˆì‹¤ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuigi);
 			break;
 		case 2:
 			you.Ability(SKL_YUUGI_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº Àû¿¡°Ô Àú¸Õ ½ºÇÃ·º½º¸¦ °É ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ì ì—ê²Œ ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤ë¥¼ ê±¸ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó Àû¿¡°Ô Àú¸Õ ½ºÇÃ·º½º¸¦ °É ¼ö ¾ø´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ ì ì—ê²Œ ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤ë¥¼ ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuigi);
 			break;
 		case 3:
 			you.Ability(SKL_YUUGI_3,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀûÀ» Áı¾î ´øÁú ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ì ì„ ì§‘ì–´ ë˜ì§ˆ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó ÀûÀ» Áı¾î ´øÁú ¼ö ¾ø´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ ì ì„ ì§‘ì–´ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuigi);
 			break;
 		case 4:
 			you.Ability(SKL_YUUGI_4,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¿À´ÏÀÇ Æ÷È¿¸¦ ¿ÜÄ¥ ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ì˜¤ë‹ˆì˜ í¬íš¨ë¥¼ ì™¸ì¹  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó Æ÷È¿ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ í¬íš¨í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuigi);
 			break;
 		case 5:
 			you.Ability(SKL_YUUGI_5,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº µåµğ¾î »ïº¸ÇÊ»ìÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_yuigi);
+				printlog("ë‹¹ì‹ ì€ ë“œë””ì–´ ì‚¼ë³´í•„ì‚´ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuigi);
 			else
-				printlog("´õ ÀÌ»ó »ïº¸ÇÊ»ìÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_yuigi);
+				printlog("ë” ì´ìƒ ì‚¼ë³´í•„ì‚´ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuigi);
 			break;
 		}
 		return false;
@@ -527,44 +527,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 			case 0:
 				if(plus)
-					printlog("½ÃÁîÇÏ´Â Àá¿¡¼­ ±ü ÀûµéÀÌ ¿ÜÄ¡´Â È®·üÀ» Å©°Ô ÁÙ¿©ÁØ´Ù.",true,false,false,CL_autumn);
+					printlog("ì‹œì¦ˆí•˜ëŠ” ì ì—ì„œ ê¹¬ ì ë“¤ì´ ì™¸ì¹˜ëŠ” í™•ë¥ ì„ í¬ê²Œ ì¤„ì—¬ì¤€ë‹¤.",true,false,false,CL_autumn);
 				else
-					printlog("´õ ÀÌ»ó ½ÃÁîÇÏ´Â ÀûÀÇ ¿ÜÄ§À» ÁÙ¿©ÁÖÁö ¾Ê´Â´Ù.",true,false,false,CL_autumn);
+					printlog("ë” ì´ìƒ ì‹œì¦ˆí•˜ëŠ” ì ì˜ ì™¸ì¹¨ì„ ì¤„ì—¬ì£¼ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_autumn);
 				break;
 			case 1:
 				if(plus)
-					printlog("´ç½ÅÀº Àº¹ĞÇÏ°Ô ¿òÁ÷ÀÏ ¼ö ÀÖ´Â ´ÜÇ³ÀÇ ¹ßÀÚÃë¸¦ ³²±ä´Ù.",true,false,false,CL_autumn);
+					printlog("ë‹¹ì‹ ì€ ì€ë°€í•˜ê²Œ ì›€ì§ì¼ ìˆ˜ ìˆëŠ” ë‹¨í’ì˜ ë°œìì·¨ë¥¼ ë‚¨ê¸´ë‹¤.",true,false,false,CL_autumn);
 				else
-					printlog("´õ ÀÌ»ó ´ç½ÅÀº ¹ßÀÚÃë¿¡ ´ÜÇ³À» ³²±âÁö ¸øÇÑ´Ù.",true,false,false,CL_autumn);
+					printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë°œìì·¨ì— ë‹¨í’ì„ ë‚¨ê¸°ì§€ ëª»í•œë‹¤.",true,false,false,CL_autumn);
 				break;
 			case 2:
 				you.Ability(SKL_SIZUHA_1,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº ´ÜÇ³À§¿¡ ÀÖ´Â ¸ó½ºÅÍµé¿¡°Ô È¥¶õÀ» °É ¼ö ÀÖ´Ù.",true,false,false,CL_autumn);
+					printlog("ë‹¹ì‹ ì€ ë‹¨í’ìœ„ì— ìˆëŠ” ëª¬ìŠ¤í„°ë“¤ì—ê²Œ í˜¼ë€ì„ ê±¸ ìˆ˜ ìˆë‹¤.",true,false,false,CL_autumn);
 				else
-					printlog("´õ ÀÌ»ó ´ç½ÅÀº ´ÜÇ³À§ÀÇ ¸ó½ºÅÍµé¿¡°Ô È¥¶õÀ» °É ¼ö ¾ø´Ù.",true,false,false,CL_autumn);
+					printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë‹¨í’ìœ„ì˜ ëª¬ìŠ¤í„°ë“¤ì—ê²Œ í˜¼ë€ì„ ê±¸ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_autumn);
 				break;
 			case 3:
 				you.Ability(SKL_SIZUHA_2,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº ³¢°íÀÖ´Â ¹æ¾î±¸¸¦ ´ÜÇ³ ¹æ¾î±¸·Î ¸¸µé ¼ö ÀÖ´Ù.",true,false,false,CL_autumn);
+					printlog("ë‹¹ì‹ ì€ ë¼ê³ ìˆëŠ” ë°©ì–´êµ¬ë¥¼ ë‹¨í’ ë°©ì–´êµ¬ë¡œ ë§Œë“¤ ìˆ˜ ìˆë‹¤.",true,false,false,CL_autumn);
 				else
-					printlog("´õ ÀÌ»ó ´ç½ÅÀº ³¢°íÀÖ´Â ¹æ¾î±¸¸¦ ´ÜÇ³ ¹æ¾î±¸·Î ¸¸µé ¼ö ¾ø´Ù.",true,false,false,CL_autumn);
+					printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë¼ê³ ìˆëŠ” ë°©ì–´êµ¬ë¥¼ ë‹¨í’ ë°©ì–´êµ¬ë¡œ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_autumn);
 				break;
 			case 4:
 				if(plus)
-					printlog("´ç½ÅÀº ´ÜÇ³ À§¸¦ °ÉÀ»¶§ ¸Å¿ì ºü¸£°Ô ¿òÁ÷ÀÏ ¼ö ÀÖ´Ù.",true,false,false,CL_autumn);
+					printlog("ë‹¹ì‹ ì€ ë‹¨í’ ìœ„ë¥¼ ê±¸ì„ë•Œ ë§¤ìš° ë¹ ë¥´ê²Œ ì›€ì§ì¼ ìˆ˜ ìˆë‹¤.",true,false,false,CL_autumn);
 				else
-					printlog("´õ ÀÌ»ó ´ç½ÅÀº ´ÜÇ³ À§¿¡¼­ ºü¸£°Ô ¿òÁ÷ÀÏ ¼ö ¾ø´Ù.",true,false,false,CL_autumn);
+					printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë‹¨í’ ìœ„ì—ì„œ ë¹ ë¥´ê²Œ ì›€ì§ì¼ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_autumn);
 				break;
 			case 6:
 				if(you.god_value[GT_SHIZUHA][0]==0)
 				{
 					you.Ability(SKL_SIZUHA_3,true,!plus);
 					if(plus)
-						printlog("´ç½ÅÀº µü ÇÑ¹ø ´ç½ÅÀÇ ¹«±â¿¡ ´ÜÇ³ÀÇ ÈûÀ» ºÒ¾î³ÖÀ» ¼ö ÀÖ´Ù.",true,false,false,CL_autumn);
+						printlog("ë‹¹ì‹ ì€ ë”± í•œë²ˆ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ë‹¨í’ì˜ í˜ì„ ë¶ˆì–´ë„£ì„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_autumn);
 					else
-						printlog("´õ ÀÌ»ó ´ç½ÅÀº ´ç½ÅÀÇ ¹«±â¿¡ ´ÜÇ³ÀÇ ÈûÀ» ºÒ¾î³ÖÀ» ¼ö ¾ø´Ù.",true,false,false,CL_autumn);
+						printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ë‹¨í’ì˜ í˜ì„ ë¶ˆì–´ë„£ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_autumn);
 				}
 				break;
 		}
@@ -580,51 +580,51 @@ bool GetGodAbility(int level, bool plus)
 				{
 					it->identify_curse = true;
 				}
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¾ÆÀÌÅÛÀÇ ÀúÁÖ¸¦ Å½ÁöÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì•„ì´í…œì˜ ì €ì£¼ë¥¼ íƒì§€í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 			}
 			break;
 		case 1:
 			you.Ability(SKL_HINA_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀúÁÖ°É¸° ¾ÆÀÌÅÛÀÇ ¸¶ÀÌ³Ê½º ÀÎÃ¦Æ®¸¦ ÇÃ·¯½º·Î ¹Ù²Ü ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ì €ì£¼ê±¸ë¦° ì•„ì´í…œì˜ ë§ˆì´ë„ˆìŠ¤ ì¸ì±ˆíŠ¸ë¥¼ í”ŒëŸ¬ìŠ¤ë¡œ ë°”ê¿€ ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 			else
-				printlog("´õ ÀÌ»ó ÀúÁÖ°É¸° ¾ÆÀÌÅÛÀÇ ÀÎÃ¦Æ®¸¦ ¿ªÀüÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_hina);
+				printlog("ë” ì´ìƒ ì €ì£¼ê±¸ë¦° ì•„ì´í…œì˜ ì¸ì±ˆíŠ¸ë¥¼ ì—­ì „í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_hina);
 			break;
 		case 2:
 			you.Ability(SKL_HINA_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¹«±â¿¡ ÀúÁÖ¸¦ °É¾î¼­ °­·ÂÇÑ ÈûÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ë¬´ê¸°ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ ê°•ë ¥í•œ í˜ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 			else
-				printlog("´õ ÀÌ»ó ¹«±â¿¡ ÀúÁÖ¸¦ °É¾î¼­ ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_hina);
+				printlog("ë” ì´ìƒ ë¬´ê¸°ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_hina);
 			break;
 		case 3:
 			you.Ability(SKL_HINA_3,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¹æ¾î±¸¿¡ ÀúÁÖ¸¦ °É¾î¼­ ¸ğµç µ¥¹ÌÁö¸¦ ¹İ»ç½ÃÅ³ ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ë°©ì–´êµ¬ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ ëª¨ë“  ë°ë¯¸ì§€ë¥¼ ë°˜ì‚¬ì‹œí‚¬ ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 			else
-				printlog("´õ ÀÌ»ó ¹æ¾î±¸¿¡ ÀúÁÖ¸¦ °É¾î¼­ µ¥¹ÌÁö¸¦ ¹İ»ç½ÃÅ³ ¼ö ¾ø´Ù.",true,false,false,CL_hina);
+				printlog("ë” ì´ìƒ ë°©ì–´êµ¬ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ ë°ë¯¸ì§€ë¥¼ ë°˜ì‚¬ì‹œí‚¬ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_hina);
 			break;
 		case 4:
 			you.Ability(SKL_HINA_4,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº Àå½Å±¸¿¡ ÀúÁÖ¸¦ °É¾î¼­ Ã¼·Â°ú ¿µ·ÂÀ» È¸º¹ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ì¥ì‹ êµ¬ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ ì²´ë ¥ê³¼ ì˜ë ¥ì„ íšŒë³µí•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 			else
-				printlog("´õ ÀÌ»ó Àå½Å±¸¿¡ ÀúÁÖ¸¦ °É¾î¼­ Ã¼·Â°ú ¿µ·ÂÀ» È¸º¹ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_hina);
+				printlog("ë” ì´ìƒ ì¥ì‹ êµ¬ì— ì €ì£¼ë¥¼ ê±¸ì–´ì„œ ì²´ë ¥ê³¼ ì˜ë ¥ì„ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_hina);
 			break;
 		case 5:
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÀúÁÖ¸¦ Èğ»Ñ¸®°í ´Ù´Ñ´Ù.",true,false,false,CL_hina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì €ì£¼ë¥¼ í©ë¿Œë¦¬ê³  ë‹¤ë‹Œë‹¤.",true,false,false,CL_hina);
 			else
-				printlog("´õ ÀÌ»ó ÀúÁÖ¸¦ Èğ»Ñ¸®°í ´Ù´ÏÁö ¾Ê´Â´Ù.",true,false,false,CL_hina);
+				printlog("ë” ì´ìƒ ì €ì£¼ë¥¼ í©ë¿Œë¦¬ê³  ë‹¤ë‹ˆì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_hina);
 			break;
 		case 6:
 			if(you.god_value[GT_HINA][0]==0)
 			{
 				you.Ability(SKL_HINA_5,true,!plus);
 				if(plus)
-					printlog("´ç½ÅÀº µü ÇÑ¹ø ´ç½ÅÀÇ ¹«±â¿¡ ÀúÁÖÀÇ ÈûÀ» ºÒ¾î³ÖÀ» ¼ö ÀÖ´Ù.",true,false,false,CL_hina);
+					printlog("ë‹¹ì‹ ì€ ë”± í•œë²ˆ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ì €ì£¼ì˜ í˜ì„ ë¶ˆì–´ë„£ì„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_hina);
 				else
-					printlog("´õ ÀÌ»ó ´ç½ÅÀº ´ç½ÅÀÇ ¹«±â¿¡ ÀúÁÖÀÇ ÈûÀ» ºÒ¾î³ÖÀ» ¼ö ¾ø´Ù.",true,false,false,CL_hina);
+					printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ì €ì£¼ì˜ í˜ì„ ë¶ˆì–´ë„£ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_hina);
 			}
 			break;
 		}
@@ -634,37 +634,37 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 1:
 			if(plus)
-				printlog("´ç½ÅÀº ÀÏÁ¤ µ¥¹ÌÁö¸¦ ¹ŞÀ¸¸é °¡²û ¼ø°£ÀÌµ¿µÈ´Ù.",true,false,false,CL_yukari);
+				printlog("ë‹¹ì‹ ì€ ì¼ì • ë°ë¯¸ì§€ë¥¼ ë°›ìœ¼ë©´ ê°€ë” ìˆœê°„ì´ë™ëœë‹¤.",true,false,false,CL_yukari);
 			else
-				printlog("´õ ÀÌ»ó µ¥¹ÌÁö¸¦ ¹ŞÀ»¶§ ¼ø°£ÀÌµ¿µÇÁö ¾Ê´Â´Ù.",true,false,false,CL_yukari);
+				printlog("ë” ì´ìƒ ë°ë¯¸ì§€ë¥¼ ë°›ì„ë•Œ ìˆœê°„ì´ë™ë˜ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_yukari);
 			break;
 		case 2:
 			you.Ability(SKL_YUKARI_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº °æ°è·ÎºÎÅÍ Áö¿ø»ç°İÀ» ¿äÃ»ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_yukari);
+				printlog("ë‹¹ì‹ ì€ ê²½ê³„ë¡œë¶€í„° ì§€ì›ì‚¬ê²©ì„ ìš”ì²­í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yukari);
 			else
-				printlog("´õ ÀÌ»ó Áö¿ø»ç°İÀ» ¿äÃ»ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_yukari);
+				printlog("ë” ì´ìƒ ì§€ì›ì‚¬ê²©ì„ ìš”ì²­í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yukari);
 			break;
 		case 3:
 			you.Ability(SKL_YUKARI_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº °æ°è¸¦ Å¸°í ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_yukari);
+				printlog("ë‹¹ì‹ ì€ ê²½ê³„ë¥¼ íƒ€ê³  ì´ë™í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yukari);
 			else
-				printlog("´õ ÀÌ»ó °æ°è¸¦ Å¸°í ÀÌµ¿ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_yukari);
+				printlog("ë” ì´ìƒ ê²½ê³„ë¥¼ íƒ€ê³  ì´ë™í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yukari);
 			break;
 		case 4:
 			you.Ability(SKL_YUKARI_3,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº °á°è¸¦ ¸¸µé ¼ö ÀÖ´Ù.",true,false,false,CL_yukari);
+				printlog("ë‹¹ì‹ ì€ ê²°ê³„ë¥¼ ë§Œë“¤ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yukari);
 			else
-				printlog("´õ ÀÌ»ó °á°è¸¦ ¸¸µé ¼ö ¾ø´Ù.",true,false,false,CL_yukari);
+				printlog("ë” ì´ìƒ ê²°ê³„ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yukari);
 			break;
 		case 5:
 			you.Ability(SKL_YUKARI_4,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº Â÷¿øÀ» °íÁ¤½ÃÅ³ ¼ö ÀÖ´Ù.",true,false,false,CL_yukari);
+				printlog("ë‹¹ì‹ ì€ ì°¨ì›ì„ ê³ ì •ì‹œí‚¬ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yukari);
 			else
-				printlog("´õ ÀÌ»ó Â÷¿øÀ» °íÁ¤½ÃÅ³ ¼ö ¾ø´Ù.",true,false,false,CL_yukari);
+				printlog("ë” ì´ìƒ ì°¨ì›ì„ ê³ ì •ì‹œí‚¬ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yukari);
 			break;
 		}
 		return false;
@@ -674,7 +674,7 @@ bool GetGodAbility(int level, bool plus)
 		case 0:
 			if(plus)
 			{
-				printlog("¿¡ÀÌ¸°Àº ¹°¾àÀÛ¿ëÀ» ¿Ã·ÁÁØ´Ù. ÁÁÀº¹°¾àÀ§¿¡¼­ ±âµµÇÏ¿© ³ª»Û¹°¾àÀ» ¸¸µé ¼ö ÀÖ´Ù.",true,false,false,CL_small_danger);
+				printlog("ì—ì´ë¦°ì€ ë¬¼ì•½ì‘ìš©ì„ ì˜¬ë ¤ì¤€ë‹¤. ì¢‹ì€ë¬¼ì•½ìœ„ì—ì„œ ê¸°ë„í•˜ì—¬ ë‚˜ìœë¬¼ì•½ì„ ë§Œë“¤ ìˆ˜ ìˆë‹¤.",true,false,false,CL_small_danger);
 				iden_list.potion_list[PT_POISON].iden = true;
 				iden_list.potion_list[PT_DOWN_STAT].iden = true;
 				iden_list.potion_list[PT_CONFUSE].iden = true;
@@ -683,49 +683,49 @@ bool GetGodAbility(int level, bool plus)
 			}
 			else
 			{
-				printlog("´õ ÀÌ»ó ¹°¾àÀÇ ÀÛ¿ëÀ» ¿Ã·ÁÁÖÁö ¾Ê´Â´Ù. ´õÀÌ»ó ³ª»Û ¹°¾àÀ» ¸¸µé ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë” ì´ìƒ ë¬¼ì•½ì˜ ì‘ìš©ì„ ì˜¬ë ¤ì£¼ì§€ ì•ŠëŠ”ë‹¤. ë”ì´ìƒ ë‚˜ìœ ë¬¼ì•½ì„ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			}
 			break;
 		case 1:
 			if(plus)
-				printlog("´ç½ÅÀº µ¶¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_small_danger);
+				printlog("ë‹¹ì‹ ì€ ë…ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_small_danger);
 			else
-				printlog("´õ ÀÌ»ó µ¶¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë” ì´ìƒ ë…ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			break;
 		case 2:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 1);
 			you.Ability(SKL_EIRIN_0,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¹°¾àÀ» ´øÁú ¼ö ÀÖ´Ù. ÀÌÁ¦ ´É·ÂÄ¡°¨¼Ò¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_small_danger);
+				printlog("ë‹¹ì‹ ì€ ë¬¼ì•½ì„ ë˜ì§ˆ ìˆ˜ ìˆë‹¤. ì´ì œ ëŠ¥ë ¥ì¹˜ê°ì†Œë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_small_danger);
 			else
-				printlog("´õ ÀÌ»ó ¹°¾àÀ» ´øÁú ¼ö ¾ø´Ù. ´É·ÂÄ¡°¨¼Ò¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë” ì´ìƒ ë¬¼ì•½ì„ ë˜ì§ˆ ìˆ˜ ì—†ë‹¤. ëŠ¥ë ¥ì¹˜ê°ì†Œë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			break;
 		case 3:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 2);
 			you.Ability(SKL_EIRIN_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ½ÅÃ¼°³Á¶¸¦ ÇÒ ¼ö ÀÖ´Ù. ´ç½ÅÀº ÀÌÁ¦ È¥¶õ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_small_danger);
+				printlog("ë‹¹ì‹ ì€ ì‹ ì²´ê°œì¡°ë¥¼ í•  ìˆ˜ ìˆë‹¤. ë‹¹ì‹ ì€ ì´ì œ í˜¼ë€ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_small_danger);
 			else
-				printlog("´õ ÀÌ»ó ½ÅÃ¼°³Á¶¸¦ ÇÒ ¼ö ¾ø´Ù. ´õ ÀÌ»ó È¥¶õ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë” ì´ìƒ ì‹ ì²´ê°œì¡°ë¥¼ í•  ìˆ˜ ì—†ë‹¤. ë” ì´ìƒ í˜¼ë€ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			break;
 		case 4:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 3);
 			if(plus)
-				printlog("´ç½ÅÀº °¨¼Ó¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_small_danger);
+				printlog("ë‹¹ì‹ ì€ ê°ì†ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_small_danger);
 			else
-				printlog("´õ ÀÌ»ó °¨¼Ó¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë” ì´ìƒ ê°ì†ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			break;
 		case 5:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 4);
 			you.Ability(SKL_EIRIN_2,true,!plus);
 			if(plus)
-				printlog("ÀÌÁ¦ ±ä±Ş¼öÇ÷ÀÌ °¡´ÉÇÏ´Ù. ÀÌÁ¦ ¸¶ºñ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾ò´Â´Ù.",true,false,false,CL_small_danger);
+				printlog("ì´ì œ ê¸´ê¸‰ìˆ˜í˜ˆì´ ê°€ëŠ¥í•˜ë‹¤. ì´ì œ ë§ˆë¹„ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ëŠ”ë‹¤.",true,false,false,CL_small_danger);
 			else
-				printlog("´õÀÌ»ó ±ä±Ş¼öÇ÷À» ÇÒ ¼ö ¾ø´Ù. ´õ ÀÌ»ó ¸¶ºñ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.",true,false,false,CL_small_danger);
+				printlog("ë”ì´ìƒ ê¸´ê¸‰ìˆ˜í˜ˆì„ í•  ìˆ˜ ì—†ë‹¤. ë” ì´ìƒ ë§ˆë¹„ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_small_danger);
 			break;
 		case 6:
 			if(you.s_stat_boost)
@@ -755,30 +755,30 @@ bool GetGodAbility(int level, bool plus)
 				you.Ability(SKL_YUYUKO_ON,true,plus);
 			}
 			if(plus)
-				printlog("´ç½Å ÁÖº¯¿£ Ç×»ó À¯·ÉÀÌ ¸ğ¿©µç´Ù.",true,false,false,CL_yuyuko);
+				printlog("ë‹¹ì‹  ì£¼ë³€ì—” í•­ìƒ ìœ ë ¹ì´ ëª¨ì—¬ë“ ë‹¤.",true,false,false,CL_yuyuko);
 			else
-				printlog("´õ ÀÌ»ó ´ç½Å ÁÖº¯¿¡ À¯·ÉÀÌ ¸ğ¿©µéÁö ¾Ê´Â´Ù.",true,false,false,CL_yuyuko);
+				printlog("ë” ì´ìƒ ë‹¹ì‹  ì£¼ë³€ì— ìœ ë ¹ì´ ëª¨ì—¬ë“¤ì§€ ì•ŠëŠ”ë‹¤.",true,false,false,CL_yuyuko);
 			break;
 		case 2:
 			you.Ability(SKL_YUYUKO_1,true,!plus);
 			if(plus)
-				printlog("À¯·ÉÀ» ¿øÇÏ´Â °÷À¸·Î ÀÌµ¿½ÃÅ³ ¼ö ÀÖ´Ù.",true,false,false,CL_yuyuko);
+				printlog("ìœ ë ¹ì„ ì›í•˜ëŠ” ê³³ìœ¼ë¡œ ì´ë™ì‹œí‚¬ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuyuko);
 			else
-				printlog("´õ ÀÌ»ó À¯·ÉÀ» ÀÌµ¿½ÃÅ³ ¼ö ¾ø´Ù.",true,false,false,CL_yuyuko);
+				printlog("ë” ì´ìƒ ìœ ë ¹ì„ ì´ë™ì‹œí‚¬ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuyuko);
 			break;
 		case 3:
 			you.Ability(SKL_YUYUKO_2,true,!plus);
 			if(plus)
-				printlog("Àá½Ãµ¿¾È À¯·ÉÀÇ ºóµµ¸¦ Áõ°¡½ÃÅ³ ¼ö ÀÖ´Ù.",true,false,false,CL_yuyuko);
+				printlog("ì ì‹œë™ì•ˆ ìœ ë ¹ì˜ ë¹ˆë„ë¥¼ ì¦ê°€ì‹œí‚¬ ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuyuko);
 			else
-				printlog("´õ ÀÌ»ó À¯·ÉÀÇ ºóµµ¸¦ Áõ°¡½ÃÅ³ ¼ö ¾ø´Ù.",true,false,false,CL_yuyuko);
+				printlog("ë” ì´ìƒ ìœ ë ¹ì˜ ë¹ˆë„ë¥¼ ì¦ê°€ì‹œí‚¬ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuyuko);
 			break;
 		case 5:
 			you.Ability(SKL_YUYUKO_3,true,!plus);
 			if(plus)
-				printlog("Àû ÇÑ¸íÀÇ ¿µÈ¥À» ¼Ó¹ÚÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_yuyuko);
+				printlog("ì  í•œëª…ì˜ ì˜í˜¼ì„ ì†ë°•í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_yuyuko);
 			else
-				printlog("´õ ÀÌ»ó ¿µÈ¥À» ¼Ó¹ÚÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_yuyuko);
+				printlog("ë” ì´ìƒ ì˜í˜¼ì„ ì†ë°•í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_yuyuko);
 			break;
 		}
 		return false;
@@ -788,48 +788,48 @@ bool GetGodAbility(int level, bool plus)
 		case 0:
 			you.ResistUpDown(plus,RST_INVISIBLE);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ Åõ¸íÀ» °¨ÁöÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ íˆ¬ëª…ì„ ê°ì§€í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó Åõ¸íÀ» °¨ÁöÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ íˆ¬ëª…ì„ ê°ì§€í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_danger);
 			break;
 		case 1:
 			you.Ability(SKL_SATORI_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº Àû¿¡°Ô Æ®¶ó¿ì¸¶¸¦ º¸¿©ÁÙ ¼ö ÀÖ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì ì—ê²Œ íŠ¸ë¼ìš°ë§ˆë¥¼ ë³´ì—¬ì¤„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó Àû¿¡°Ô Æ®¶ó¿ì¸¶¸¦ º¸¿©ÁÙ ¼ö ¾ø´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ ì ì—ê²Œ íŠ¸ë¼ìš°ë§ˆë¥¼ ë³´ì—¬ì¤„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_danger);
 			break;
 		case 2:
 			if(plus)
-				printlog("´ç½ÅÀº ÀûÀ¸·ÎºÎÅÍ ´øÀüÀÇ ¸ğ¾çÀ» ÀĞ¾î³¾ ¼ö ÀÖ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì ìœ¼ë¡œë¶€í„° ë˜ì „ì˜ ëª¨ì–‘ì„ ì½ì–´ë‚¼ ìˆ˜ ìˆë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó ÀûÀ¸·ÎºÎÅÍ ´øÀüÀÇ ¸ğ¾çÀ» ÀĞÁö ¸øÇÑ´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ ì ìœ¼ë¡œë¶€í„° ë˜ì „ì˜ ëª¨ì–‘ì„ ì½ì§€ ëª»í•œë‹¤.",true,false,false,CL_danger);
 			break;
 		case 3:
 			if(plus)
-				printlog("´ç½ÅÀº ÁÖº¯ÀÇ ÀûÀÇ ±âÃ´À» ÀĞÀ» ¼ö ÀÖ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì£¼ë³€ì˜ ì ì˜ ê¸°ì²™ì„ ì½ì„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó ÁÖº¯ÀÇ ÀûÀÇ ±âÃ´À» ÀĞÀ» ¼ö ¾ø´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ ì£¼ë³€ì˜ ì ì˜ ê¸°ì²™ì„ ì½ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_danger);
 			break;
 		case 4:
 			you.Ability(SKL_SATORI_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀûÀÇ »ı°¢À» ÀĞ¾î³¾ ¼ö ÀÖ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì ì˜ ìƒê°ì„ ì½ì–´ë‚¼ ìˆ˜ ìˆë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó »ı°¢À» ÀĞÀ» ¼ö ¾ø´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ ìƒê°ì„ ì½ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_danger);
 			break;
 		case 5:
 			if(plus)
-				printlog("´ç½ÅÀº »çÅä¸®´ÔÀÇ °ü¸®¸¦ Á÷Á¢ ¹Ş´Â ¼ÒÁßÇÑ ¾Ö¿Ïµ¿¹°ÀÌ´Ù.",true,false,false,CL_danger);
+				printlog("ë‹¹ì‹ ì€ ì‚¬í† ë¦¬ë‹˜ì˜ ê´€ë¦¬ë¥¼ ì§ì ‘ ë°›ëŠ” ì†Œì¤‘í•œ ì• ì™„ë™ë¬¼ì´ë‹¤.",true,false,false,CL_danger);
 			else
-				printlog("´õ ÀÌ»ó »çÅä¸®´ÔÀº ´ç½ÅÀ» Á÷Á¢ °ü¸®ÇÏÁö¾Ê´Â´Ù.",true,false,false,CL_danger);
+				printlog("ë” ì´ìƒ ì‚¬í† ë¦¬ë‹˜ì€ ë‹¹ì‹ ì„ ì§ì ‘ ê´€ë¦¬í•˜ì§€ì•ŠëŠ”ë‹¤.",true,false,false,CL_danger);
 			break;
 		}
 		return false;
 	case GT_TENSI:
 		return false;
 	case GT_SEIJA:
-		if(level>=1 && level<=5) //¼¼ÀÌÀÚ ½ºÅÈ »½
+		if(level>=1 && level<=5) //ì„¸ì´ì ìŠ¤íƒ¯ ë»¥
 		{			
 			you.StatUpDown(plus?2:-2,STAT_STR);
 			you.StatUpDown(plus?2:-2,STAT_INT);
@@ -844,28 +844,28 @@ bool GetGodAbility(int level, bool plus)
 		}
 		case 2:
 			if (plus) {
-				printlog("¼¼ÀÌÀÚ´Â ´ç½ÅÀÇ Â¡¹ú·ÎºÎÅÍÀÇ µµÁÖ¸¦ µ½´Â´Ù.", true, false, false, CL_seija);
+				printlog("ì„¸ì´ìëŠ” ë‹¹ì‹ ì˜ ì§•ë²Œë¡œë¶€í„°ì˜ ë„ì£¼ë¥¼ ë•ëŠ”ë‹¤.", true, false, false, CL_seija);
 			}
 			else {
-				printlog("¼¼ÀÌÀÚ´Â ´õ ÀÌ»ó Â¡¹ú·ÎºÎÅÍ ´ç½ÅÀ» µ½Áö ¾Ê´Â´Ù.", true, false, false, CL_seija);
+				printlog("ì„¸ì´ìëŠ” ë” ì´ìƒ ì§•ë²Œë¡œë¶€í„° ë‹¹ì‹ ì„ ë•ì§€ ì•ŠëŠ”ë‹¤.", true, false, false, CL_seija);
 			}
 			break;
 		case 3:
 			you.Ability(SKL_SEIJA_1,true,!plus);
 			if (plus) {
-				printlog("´ç½ÅÀº À§Ä¡¸¦ µÚÁıÀ» ¼ö ÀÖ´Ù.", true, false, false, CL_seija);
+				printlog("ë‹¹ì‹ ì€ ìœ„ì¹˜ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ìˆë‹¤.", true, false, false, CL_seija);
 			}
 			else {
-				printlog("´õ ÀÌ»ó À§Ä¡¸¦ µÚÁıÀ» ¼ö ¾ø´Ù.",true,false,false,CL_seija);
+				printlog("ë” ì´ìƒ ìœ„ì¹˜ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_seija);
 		    }
 			break;
 		case 5:
 			you.Ability(SKL_SEIJA_2,true,!plus);
 			you.Ability(SKL_SEIJA_GIFT, true, true);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¸ğµÎÀÇ ½Ã¾ß¸¦ µÚÁıÀ» ¼ö ÀÖ´Ù.",true,false,false,CL_seija);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ëª¨ë‘ì˜ ì‹œì•¼ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_seija);
 			else
-				printlog("´õ ÀÌ»ó ¸ğµÎÀÇ ½Ã¾ß¸¦ µÚÁıÀ» ¼ö ¾ø´Ù.",true,false,false,CL_seija);
+				printlog("ë” ì´ìƒ ëª¨ë‘ì˜ ì‹œì•¼ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_seija);
 			break;
 		}
 		return false;
@@ -876,43 +876,43 @@ bool GetGodAbility(int level, bool plus)
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_2,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¿äÁ¤µéÀ» µ¿·á·Î ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìš”ì •ë“¤ì„ ë™ë£Œë¡œ ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			else
-				printlog("´õ ÀÌ»ó ¿äÁ¤À» µ¿·á·Î ±ÇÀ¯ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_lilly);
+				printlog("ë” ì´ìƒ ìš”ì •ì„ ë™ë£Œë¡œ ê¶Œìœ í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_lilly);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¿äÁ¤µéÀ» ±ÙÃ³·Î È£ÃâÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìš”ì •ë“¤ì„ ê·¼ì²˜ë¡œ í˜¸ì¶œí•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			else
-				printlog("´õ ÀÌ»ó ¿äÁ¤À» È£ÃâÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_lilly);
+				printlog("ë” ì´ìƒ ìš”ì •ì„ í˜¸ì¶œí•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_lilly);
 			break;
 		case 2:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÇÑ¸íÀÇ ¿äÁ¤À» ´õ ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ í•œëª…ì˜ ìš”ì •ì„ ë” ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			break;
 		case 3:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_3,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÇÑ¸íÀÇ ¿äÁ¤À» ´õ ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ í•œëª…ì˜ ìš”ì •ì„ ë” ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¿äÁ¤À» Ä¡À¯ ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìš”ì •ì„ ì¹˜ìœ  í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			else
-				printlog("´õ ÀÌ»ó ¿äÁ¤À» Ä¡À¯ ÇÒ ¼ö ¾ø´Ù.",true,false,false,CL_lilly);
+				printlog("ë” ì´ìƒ ìš”ì •ì„ ì¹˜ìœ  í•  ìˆ˜ ì—†ë‹¤.",true,false,false,CL_lilly);
 			break;
 		case 4:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÇÑ¸íÀÇ ¿äÁ¤À» ´õ ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ í•œëª…ì˜ ìš”ì •ì„ ë” ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			break;
 		case 5:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_4,true,!plus);
 			if(plus)
-				printlog("´ç½ÅÀº ¸¶Áö¸· µ¿·á°¡ µÉ ¿äÁ¤À» ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ë§ˆì§€ë§‰ ë™ë£Œê°€ ë  ìš”ì •ì„ ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			if(plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÀÏ½ÃÀûÀ¸·Î ÀÚ½ÅÀÇ ÈûÀ» ¿äÁ¤µé¿¡°Ô ³ª´²ÁÙ ¼ö ÀÖ´Ù.",true,false,false,CL_lilly);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì¼ì‹œì ìœ¼ë¡œ ìì‹ ì˜ í˜ì„ ìš”ì •ë“¤ì—ê²Œ ë‚˜ëˆ ì¤„ ìˆ˜ ìˆë‹¤.",true,false,false,CL_lilly);
 			else
-				printlog("´õ ÀÌ»ó ¿äÁ¤´ëÀüÀïÀ» ¹úÀÏ ¼ö ¾ø´Ù.",true,false,false,CL_lilly);
+				printlog("ë” ì´ìƒ ìš”ì •ëŒ€ì „ìŸì„ ë²Œì¼ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_lilly);
 			break;
 		}
 		return false;
@@ -934,44 +934,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 0:
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¹®À» ÀÚÀ¯ÀÚÀç·Î ³Ñ³ªµé¸ç Åõ½ÃÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ë¬¸ì„ ììœ ìì¬ë¡œ ë„˜ë‚˜ë“¤ë©° íˆ¬ì‹œí•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó ¹®À» ÀÚÀ¯ÀÚÀç·Î µå³ªµé ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ ë¬¸ì„ ììœ ìì¬ë¡œ ë“œë‚˜ë“¤ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		case 1:
 			you.Ability(SKL_OKINA_1, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¿øÇÏ´Â º®¿¡ ¹®À» ¸¸µé ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì›í•˜ëŠ” ë²½ì— ë¬¸ì„ ë§Œë“¤ ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó ¹®À» ¸¸µé¾î ³¾ ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ ë¬¸ì„ ë§Œë“¤ì–´ ë‚¼ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		case 2:
 			you.Ability(SKL_OKINA_2, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¸Ö¸® ¶³¾îÁø ¿­¸° ¹®À» °­Á¦·Î ´İ¾Æ Àá±Û ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ë©€ë¦¬ ë–¨ì–´ì§„ ì—´ë¦° ë¬¸ì„ ê°•ì œë¡œ ë‹«ì•„ ì ê¸€ ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó ¹®À» °­Á¦·Î ´İÀ» ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ ë¬¸ì„ ê°•ì œë¡œ ë‹«ì„ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		case 3:
 			you.Ability(SKL_OKINA_3, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ÀûÀÇ µî µÚ¿¡ ¹éµµ¾î¸¦ ¸¸µé¾î ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ì ì˜ ë“± ë’¤ì— ë°±ë„ì–´ë¥¼ ë§Œë“¤ì–´ ì´ë™í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó ÀûÀÇ µîµÚ¿¡ ¹éµµ¾î¸¦ ¸¸µé ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ ì ì˜ ë“±ë’¤ì— ë°±ë„ì–´ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		case 4:
 			you.Ability(SKL_OKINA_4, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ Å©·¹ÀÌÁö ¹é´í¼­Áî¸¦ È£ÃâÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ í¬ë ˆì´ì§€ ë°±ëŒ„ì„œì¦ˆë¥¼ í˜¸ì¶œí•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó Å©·¹ÀÌÁö ¹é´í¼­Áî¸¦ È£ÃâÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ í¬ë ˆì´ì§€ ë°±ëŒ„ì„œì¦ˆë¥¼ í˜¸ì¶œí•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		case 5:
 			you.Ability(SKL_OKINA_5, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ µî µÚÀÇ ¹®À» ¿­°í µµ¸ÁÄ¥ ¼ö ÀÖ´Ù.", true, false, false, CL_okina);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ë“± ë’¤ì˜ ë¬¸ì„ ì—´ê³  ë„ë§ì¹  ìˆ˜ ìˆë‹¤.", true, false, false, CL_okina);
 			else
-				printlog("´õ ÀÌ»ó µî µÚÀÇ ¹®À¸·Î µµ¸ÁÄ¥ ¼ö ¾ø´Ù.", true, false, false, CL_okina);
+				printlog("ë” ì´ìƒ ë“± ë’¤ì˜ ë¬¸ìœ¼ë¡œ ë„ë§ì¹  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_okina);
 			break;
 		}
 		return false;
@@ -981,39 +981,39 @@ bool GetGodAbility(int level, bool plus)
 		case 1:
 			you.Ability(SKL_JUNKO_1, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ´Ü¼øÇÑ Åº¸·À» ½ò ¼ö ÀÖ´Ù.", true, false, false, CL_junko);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ë‹¨ìˆœí•œ íƒ„ë§‰ì„ ì  ìˆ˜ ìˆë‹¤.", true, false, false, CL_junko);
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀº ´Ü¼øÇÑ Åº¸·À» ½ò ¼ö ¾ø´Ù.", true, false, false, CL_junko);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ë‹¨ìˆœí•œ íƒ„ë§‰ì„ ì  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_junko);
 			break;
 		case 2:
 			you.Ability(SKL_JUNKO_2, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¼ø¼öÇÑ ÈûÀ» ¾òÀ» ¼ö ÀÖ´Ù.", true, false, false, CL_junko);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìˆœìˆ˜í•œ í˜ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.", true, false, false, CL_junko);
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀº ¼ø¼öÇÑ ÈûÀ» ¾òÀ» ¼ö ¾ø´Ù.", true, false, false, CL_junko);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ìˆœìˆ˜í•œ í˜ì„ ì–»ì„ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_junko);
 			break;
 		case 4:
 			you.Ability(SKL_JUNKO_3, true, !plus);
 			if (plus)
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¼ø¼öÇÑ »ìÀÇ¸¦ Áö´Ò ¼ö ÀÖ´Ù.", true, false, false, CL_junko);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìˆœìˆ˜í•œ ì‚´ì˜ë¥¼ ì§€ë‹ ìˆ˜ ìˆë‹¤.", true, false, false, CL_junko);
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀº ¼ø¼öÇÑ »ìÀÇ¸¦ Áö´Ò ¼ö ¾ø´Ù.", true, false, false, CL_junko);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ìˆœìˆ˜í•œ ì‚´ì˜ë¥¼ ì§€ë‹ ìˆ˜ ì—†ë‹¤.", true, false, false, CL_junko);
 			break;
 		case 6:
 			you.Ability(SKL_JUNKO_4, true, !plus);
 			if (plus) {
-				printlog("´ç½ÅÀº ÀÌÁ¦ ¼øÈ­ÇÒ ¼ö ÀÖ´Ù.", true, false, false, CL_junko);
+				printlog("ë‹¹ì‹ ì€ ì´ì œ ìˆœí™”í•  ìˆ˜ ìˆë‹¤.", true, false, false, CL_junko);
 				if (you.god_value[GT_JUNKO][0] == 0)
 				{
 					random_extraction<int> rand_;
-					rand_.push(1);//½ºÅ³¼øÈ­
-					rand_.push(2);//ÀúÇ×¼øÈ­
-					rand_.push(3);//¸¶·Â¼øÈ­
-					rand_.push(4);//ÆÄ¿ö¼øÈ­
-					if (you.char_name.name.compare("¸ğÄÚ¿ì"))
-						rand_.push(5); //»ı¸í¼øÈ­
-					rand_.push(6);//Àåºñ¼øÈ­
-					rand_.push(7);//½Ã½ºÅÛ ¼øÈ­ 
+					rand_.push(1);//ìŠ¤í‚¬ìˆœí™”
+					rand_.push(2);//ì €í•­ìˆœí™”
+					rand_.push(3);//ë§ˆë ¥ìˆœí™”
+					rand_.push(4);//íŒŒì›Œìˆœí™”
+					if (you.char_name.name.compare("ëª¨ì½”ìš°"))
+						rand_.push(5); //ìƒëª…ìˆœí™”
+					rand_.push(6);//ì¥ë¹„ìˆœí™”
+					rand_.push(7);//ì‹œìŠ¤í…œ ìˆœí™” 
 					you.god_value[GT_JUNKO][0] = rand_.pop();
 					you.god_value[GT_JUNKO][1] = rand_.pop();
 					you.god_value[GT_JUNKO][2] = rand_.pop();
@@ -1021,7 +1021,7 @@ bool GetGodAbility(int level, bool plus)
 				MoreWait();
 			}
 			else
-				printlog("´õ ÀÌ»ó ´ç½ÅÀº ¼øÈ­ÇÒ ¼ö ¾ø´Ù.", true, false, false, CL_junko);
+				printlog("ë” ì´ìƒ ë‹¹ì‹ ì€ ìˆœí™”í•  ìˆ˜ ì—†ë‹¤.", true, false, false, CL_junko);
 			break;
 		}
 		return false;
@@ -1041,8 +1041,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("ÁÒ¿Â°ú ½Ã¿ÂÀº ÀûÀÇ Áö°©À» °­Å»ÇÏ´Â °ÍÀ» ±â»µÇß´Ù.", true, false, false, CL_joon_and_sion);
+			{ //ì ì¼ë•Œ
+				printlog("ì£ ì˜¨ê³¼ ì‹œì˜¨ì€ ì ì˜ ì§€ê°‘ì„ ê°•íƒˆí•˜ëŠ” ê²ƒì„ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_joon_and_sion);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1062,8 +1062,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("Ä«³ªÄÚ´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.", true, false, false, CL_help);
+			{ //ì ì¼ë•Œ
+				printlog("ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_help);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1076,8 +1076,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				return return_;
 			}
 			else
-			{ //¾Æ±ºÀÏ¶§
-				printlog("Ä«³ªÄÚ´Â ´ç½ÅÀÇ Çàµ¿¿¡ ºĞ³ëÇß´Ù. ÂüÈ¸ÇÏ¶ó!", true, false, false, CL_small_danger);
+			{ //ì•„êµ°ì¼ë•Œ
+				printlog("ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì˜ í–‰ë™ì— ë¶„ë…¸í–ˆë‹¤. ì°¸íšŒí•˜ë¼!", true, false, false, CL_small_danger);
 				you.PietyUpDown(-5);
 				return true;
 			}
@@ -1087,8 +1087,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("½º¿ÍÄÚ´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.", true, false, false, CL_swako);
+			{ //ì ì¼ë•Œ
+				printlog("ìŠ¤ì™€ì½”ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_swako);
 
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1103,21 +1103,21 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					case SWAKO_2_KILL_HP:
 						if (randA(200) < you.piety)
 						{
-							printlog("Ã¼·ÂÀÌ È¸º¹µÇ¾ú´Ù.", false, false, false, CL_normal);
+							printlog("ì²´ë ¥ì´ íšŒë³µë˜ì—ˆë‹¤.", false, false, false, CL_normal);
 							you.HpUpDown(randA_1(1 + mon_->level / 2), DR_EFFECT);
 						}
 						break;
 					case SWAKO_2_KILL_MP:
 						if (randA(120) < you.piety)
 						{
-							printlog("¿µ·ÂÀÌ È¸º¹µÇ¾ú´Ù.", false, false, false, CL_normal);
+							printlog("ì˜ë ¥ì´ íšŒë³µë˜ì—ˆë‹¤.", false, false, false, CL_normal);
 							you.MpUpDown(randA_1(1 + mon_->level / 4));
 						}
 						break;
 					case SWAKO_2_KILL_POWER:
 						if (randA(200) < you.piety)
 						{
-							printlog("ÆÄ¿ö°¡ È¸º¹µÇ¾ú´Ù.", false, false, false, CL_normal);
+							printlog("íŒŒì›Œê°€ íšŒë³µë˜ì—ˆë‹¤.", false, false, false, CL_normal);
 							you.PowUpDown(rand_int(3, 5) + randA(mon_->level / 4));
 						}
 						break;
@@ -1134,8 +1134,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 			{
 				if(!mon_->isUserAlly())
-				{ //ÀûÀÏ¶§
-					printlog("¹Ì³ë¸®ÄÚ´Â ÈïºĞÇÑ »óÅÂ·Î ¿ÜÃÆ´Ù.\"¹Ù·Î ±×°Å¾ß!\"",true,false,false,CL_warning);
+				{ //ì ì¼ë•Œ
+					printlog("ë¯¸ë…¸ë¦¬ì½”ëŠ” í¥ë¶„í•œ ìƒíƒœë¡œ ì™¸ì³¤ë‹¤.\"ë°”ë¡œ ê·¸ê±°ì•¼!\"",true,false,false,CL_warning);
 					you.PietyUpDown(5*isSprint()?5:1);
 				}
 			}
@@ -1145,8 +1145,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("¹Ì¸¶´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.", false, false, false, CL_green);
+			{ //ì ì¼ë•Œ
+				printlog("ë¯¸ë§ˆëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.", false, false, false, CL_green);
 
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
@@ -1160,7 +1160,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				{
 					if (randA(120) < you.piety)
 					{
-						printlog("¿µ·ÂÀÌ È¸º¹µÇ¾ú´Ù.", false, false, false, CL_normal);
+						printlog("ì˜ë ¥ì´ íšŒë³µë˜ì—ˆë‹¤.", false, false, false, CL_normal);
 						you.MpUpDown(randA_1(1 + mon_->level / 3));
 					}
 				}
@@ -1175,8 +1175,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("À¯¿ì±â´Â ´ç½ÅÀÇ ½Â¸®¸¦ ±â»µÇß´Ù.", true, false, false, CL_yuigi);
+			{ //ì ì¼ë•Œ
+				printlog("ìœ ìš°ê¸°ëŠ” ë‹¹ì‹ ì˜ ìŠ¹ë¦¬ë¥¼ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_yuigi);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1205,19 +1205,19 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			}
 			int rand_ = randA(1);
 			env[current_level].MakeFloorEffect(coord_def(you.position.x,you.position.y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,3+you.piety/20,&you);
-			//ÇÃ·¹ÀÌ¾î À§Ä¡¿¡´Â ¹«Á¶°Ç ´ÜÇ³ÀÌ ¼¼¿öÁø´Ù.(ÀÏºÎ·¯ ¹ß¹Ø¿¡ ´ÜÇ³±î´Â ÇÃ·¹ÀÌ¸¦ ¾ÈÇØµµµÇ°Ô ÇÏ±âÀ§ÇØ)
+			//í”Œë ˆì´ì–´ ìœ„ì¹˜ì—ëŠ” ë¬´ì¡°ê±´ ë‹¨í’ì´ ì„¸ì›Œì§„ë‹¤.(ì¼ë¶€ëŸ¬ ë°œë°‘ì— ë‹¨í’ê¹ŒëŠ” í”Œë ˆì´ë¥¼ ì•ˆí•´ë„ë˜ê²Œ í•˜ê¸°ìœ„í•´)
 		}
 		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if(!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
+			{ //ì ì¼ë•Œ
 				if(mon_->id == MON_LETTY)
 				{
-					printlog("½ÃÁîÇÏ´Â ¹Ú¼ö¸¦ ÃÆ´Ù.\"ÈÇ¸¢ÇØ\"",true,false,false,CL_autumn);
+					printlog("ì‹œì¦ˆí•˜ëŠ” ë°•ìˆ˜ë¥¼ ì³¤ë‹¤.\"í›Œë¥­í•´\"",true,false,false,CL_autumn);
 					you.PietyUpDown(4);
 				}
 				else
-					printlog("½ÃÁîÇÏ´Â ´ç½ÅÀÇ ÀûÀÌ ³«¿±Ã³·³ ¾²·¯Á®°¡´Â °ÍÀ» ±â»µÇß´Ù.",true,false,false,CL_autumn);
+					printlog("ì‹œì¦ˆí•˜ëŠ” ë‹¹ì‹ ì˜ ì ì´ ë‚™ì—½ì²˜ëŸ¼ ì“°ëŸ¬ì ¸ê°€ëŠ” ê²ƒì„ ê¸°ë»í–ˆë‹¤.",true,false,false,CL_autumn);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1236,8 +1236,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if(!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("À¯Ä«¸®´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.",true,false,false,CL_yukari);
+			{ //ì ì¼ë•Œ
+				printlog("ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.",true,false,false,CL_yukari);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1254,7 +1254,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if(!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
+			{ //ì ì¼ë•Œ
 				{
 					bool return_ = false;
 					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
@@ -1266,7 +1266,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						}
 					}
 					if(return_)
-						printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÇ °­ÇÔ¿¡ °ü½ÉÀ» °¡Á³´Ù.", true, false, false, CL_small_danger);
+						printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì˜ ê°•í•¨ì— ê´€ì‹¬ì„ ê°€ì¡Œë‹¤.", true, false, false, CL_small_danger);
 					return return_;
 				}
 			}
@@ -1292,23 +1292,23 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				{
 
 					mon2_->id = MON_ENSLAVE_GHOST;
-					mon2_->name.name += "ÀÇ ¿µÈ¥";
+					mon2_->name.name += "ì˜ ì˜í˜¼";
 					mon2_->name.name_type = true;
-					printarray(true,false,false,CL_normal,3,mon_->name.name.c_str(),mon_->name.name_do()," ´ç½ÅÀÇ µ¿·á°¡ µÇ¾ú´Ù.");
+					printarray(true,false,false,CL_normal,3,mon_->name.name.c_str(),mon_->name.name_do()," ë‹¹ì‹ ì˜ ë™ë£Œê°€ ë˜ì—ˆë‹¤.");
 					you.god_value[GT_YUYUKO][0] = mon2_->map_id;
 					you.god_value[GT_YUYUKO][1] = current_level;
 
-					//À¯·ÉÈ­µÇ¸é ³Ã±âÀúÇ×1´Ü°èÁõ°¡
+					//ìœ ë ¹í™”ë˜ë©´ ëƒ‰ê¸°ì €í•­1ë‹¨ê³„ì¦ê°€
 					if(mon2_->ice_resist<=2)
 						mon2_->ice_resist++;
-					//µ¶ÀúÇ×ÀÌ »ı±ä´Ù.
+					//ë…ì €í•­ì´ ìƒê¸´ë‹¤.
 					mon2_->poison_resist=1;
 						
-					//±×·¯³ª ·¹º§Àº ³»·Á°£´Ù.
+					//ê·¸ëŸ¬ë‚˜ ë ˆë²¨ì€ ë‚´ë ¤ê°„ë‹¤.
 					mon2_->LevelUpdown(-2);
 
 					char temp[200];
-					sprintf_s(temp,200,"%s%s±¸¼ÓÇß´Ù.",mon_->name.name.c_str(),mon_->name.name_to(true));
+					sprintf_s(temp,200,"%s%sêµ¬ì†í–ˆë‹¤.",mon_->name.name.c_str(),mon_->name.name_to(true));
 					AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
 				}
 			}
@@ -1316,8 +1316,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		else if(type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if(!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("À¯À¯ÄÚ´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.",true,false,false,CL_yuyuko);
+			{ //ì ì¼ë•Œ
+				printlog("ìœ ìœ ì½”ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.",true,false,false,CL_yuyuko);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1343,7 +1343,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
+			{ //ì ì¼ë•Œ
 				int base = getPietyPercent(3, mon_->SetStrong());
 				for (int i = 0; i < (isSprint() ? sprintMulti()*base : base); i++) {
 					you.PietyUpDown(1);
@@ -1355,8 +1355,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
 		{
 			if (!mon_->isUserAlly())
-			{ //ÀûÀÏ¶§
-				printlog("¿ÀÅ°³ª´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.", true, false, false, CL_okina);
+			{ //ì ì¼ë•Œ
+				printlog("ì˜¤í‚¤ë‚˜ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_okina);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1375,8 +1375,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (type_ == PRT_PLAYER)
 			{
 				if (!mon_->isUserAlly())
-				{ //ÀûÀÏ¶§
-					printlog("¼øÈ£´Â ´ç½ÅÀÇ »ì»ıÀ» ±â»µÇß´Ù.", true, false, false, CL_junko);
+				{ //ì ì¼ë•Œ
+					printlog("ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ì‚´ìƒì„ ê¸°ë»í–ˆë‹¤.", true, false, false, CL_junko);
 					bool return_ = false;
 					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 						if (getPietyPercent(2, mon_->SetStrong()))
@@ -1452,7 +1452,7 @@ bool GodAccpect_GetPitem()
 		if (you.god_value[GT_JOON_AND_SION][0] == 2 && !you.GetPunish(GT_JOON_AND_SION) && pietyLevel(you.piety) >= 2)
 		{
 			int hp_ = rand_int(you.GetMaxHp() * 6 / 100, you.GetMaxHp() * 10 / 100) + 1;
-			printlog("P·ÎºÎÅÍ È¸º¹ÇÏ¿´´Ù. ", false, false, false, CL_normal);
+			printlog("Pë¡œë¶€í„° íšŒë³µí•˜ì˜€ë‹¤. ", false, false, false, CL_normal);
 			you.HpUpDown(hp_, DR_EFFECT);
 			return true;
 		}
@@ -1467,7 +1467,7 @@ bool GodAccpect_GetPitem()
 			if(!you.GetPunish(GT_SHINKI) && pietyLevel(you.piety)>=5)
 			{
 				int hp_ = rand_int(you.GetMaxHp() *9/100,you.GetMaxHp() *18/100)+1;
-				printlog("È¸º¹µÇ¾ú´Ù. ",false,false,false,CL_normal);
+				printlog("íšŒë³µë˜ì—ˆë‹¤. ",false,false,false,CL_normal);
 				you.HpUpDown(hp_, DR_EFFECT);
 				you.MpUpDown(randA_1(5));
 			}
@@ -1520,7 +1520,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 					if(you.GetHp() -value_>0)
 					{
 						you.hp-=value_;
-						printlog("º¸È£µÇ¾ú´Ù!",false,false,false,CL_swako);
+						printlog("ë³´í˜¸ë˜ì—ˆë‹¤!",false,false,false,CL_swako);
 					}
 				}
 				break;
@@ -1546,9 +1546,9 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 				{
 					you.Teleport();
 					if(env[current_level].isInSight(you.position))
-						printlog("´ç½ÅÀº ¾à°£ °ø°£ÀÌ ¾î±ß³­ °ÍÀ» ´«Ä¡Ã«´Ù.",false,false,false,CL_normal);
+						printlog("ë‹¹ì‹ ì€ ì•½ê°„ ê³µê°„ì´ ì–´ê¸‹ë‚œ ê²ƒì„ ëˆˆì¹˜ì±˜ë‹¤.",false,false,false,CL_normal);
 					else
-						printlog("°©ÀÚ±â ´ç½Å ÁÖº¯ÀÌ º¯È­Çß´Ù.",false,false,false,CL_normal);
+						printlog("ê°‘ìê¸° ë‹¹ì‹  ì£¼ë³€ì´ ë³€í™”í–ˆë‹¤.",false,false,false,CL_normal);
 				}
 				else
 				{
@@ -1586,7 +1586,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_SHINKI:
 		return false;
 	case GT_YUUGI:
-		printlog("À¯¿ì±â´Â ´ç½ÅÀÇ ¸¶¹ı¿¡ ºĞ³ëÇß´Ù!",true,false,false,CL_small_danger);
+		printlog("ìœ ìš°ê¸°ëŠ” ë‹¹ì‹ ì˜ ë§ˆë²•ì— ë¶„ë…¸í–ˆë‹¤!",true,false,false,CL_small_danger);
 		you.PietyUpDown(-5);
 		return false;
 	case GT_SHIZUHA:
@@ -1594,7 +1594,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_YUKARI:
 		if(spell_ == SPL_BLINK || spell_ == SPL_TELEPORT_SELF)
 		{			
-			printlog("À¯Ä«¸®´Â ´ç½ÅÀÇ À§ÇèÇÑ ÀüÀÌ¸¶¹ı »ç¿ë¿¡ ºĞ³ëÇß´Ù!",true,false,false,CL_small_danger);
+			printlog("ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì˜ ìœ„í—˜í•œ ì „ì´ë§ˆë²• ì‚¬ìš©ì— ë¶„ë…¸í–ˆë‹¤!",true,false,false,CL_small_danger);
 			you.PietyUpDown(-5);
 			return false;
 		}
@@ -1686,22 +1686,22 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 		{
 			you.PietyUpDown(-200);
 			if (down_ && env[current_level].popular == 1) {
-				printlog("»õ·Î¿î ´øÀü¿¡ ÁøÀÔÇÏ¸é¼­ »õ·Î¿î ÀÎ±âµµ·Î ½ÃÀÛÇÑ´Ù.", true, false, false, CL_miko);
+				printlog("ìƒˆë¡œìš´ ë˜ì „ì— ì§„ì…í•˜ë©´ì„œ ìƒˆë¡œìš´ ì¸ê¸°ë„ë¡œ ì‹œì‘í•œë‹¤.", true, false, false, CL_miko);
 				you.PietyUpDown(60, true);
 			}
 			else {
-				printlog("´øÀüÀ» ¿Å±â¸é¼­ ÀÎ±âµµ°¡ ÃÊ±âÈ­µÇ¾ú´Ù.", true, false, false, CL_miko);
+				printlog("ë˜ì „ì„ ì˜®ê¸°ë©´ì„œ ì¸ê¸°ë„ê°€ ì´ˆê¸°í™”ë˜ì—ˆë‹¤.", true, false, false, CL_miko);
 
 			}
 		}
 		else if (down_)
 		{
-			printlog("ÃşÀ» ¿Å±â¸é¼­ ÀÎ±âµµ°¡ Á¶±İ ³»·Á°¬´Ù.", true, false, false, CL_miko);
+			printlog("ì¸µì„ ì˜®ê¸°ë©´ì„œ ì¸ê¸°ë„ê°€ ì¡°ê¸ˆ ë‚´ë ¤ê°”ë‹¤.", true, false, false, CL_miko);
 			you.PietyUpDown(-10);
 		}
 		else
 		{
-			printlog("°è´ÜÀ» Å¸°í ¿Ã¶ó°¡¸é¼­ ÀÎ±âµµ°¡ Å©°Ô ³»·Á°¬´Ù", true, false, false, CL_miko);
+			printlog("ê³„ë‹¨ì„ íƒ€ê³  ì˜¬ë¼ê°€ë©´ì„œ ì¸ê¸°ë„ê°€ í¬ê²Œ ë‚´ë ¤ê°”ë‹¤", true, false, false, CL_miko);
 			you.PietyUpDown(-30);
 		}
 	}
@@ -1760,7 +1760,7 @@ bool GodAccpect_Explore_100()
 	}
 	case GT_TENSI:
 		if(20>randA(100))
-		{//ÅÙ½Ã´Â ½ºÇÁ¸°Æ®¸¦ ¾î¶»°Ô?
+		{//í…ì‹œëŠ” ìŠ¤í”„ë¦°íŠ¸ë¥¼ ì–´ë–»ê²Œ?
 			you.GiftCount(1);
 		}
 		return false;
@@ -1886,7 +1886,7 @@ bool GodAccpect_First_contact()
 	case GT_EIRIN:
 	case GT_YUYUKO:
 		return false;
-	case GT_SATORI: //»çÅä¸®¿Í ÅÙ½Ã´Â Á¶Àı?
+	case GT_SATORI: //ì‚¬í† ë¦¬ì™€ í…ì‹œëŠ” ì¡°ì ˆ?
 		if(randA(1)==0)
 		{
 			you.GiftCount(1);
@@ -1954,7 +1954,7 @@ bool GodAccpect_Abandon(god_type god)
 			}
 			if(k>0)
 			{
-				printarray(true,false,false,CL_danger,1,"¸±¸®¸¦ ¹è½ÅÇÏ¿© ¸ğµç µ¿·á ¿äÁ¤ÀÌ ´ç½Å¿¡°Ô µîÀ» µ¹·È´Ù!");
+				printarray(true,false,false,CL_danger,1,"ë¦´ë¦¬ë¥¼ ë°°ì‹ í•˜ì—¬ ëª¨ë“  ë™ë£Œ ìš”ì •ì´ ë‹¹ì‹ ì—ê²Œ ë“±ì„ ëŒë ¸ë‹¤!");
 			}
 		}
 		return false;
@@ -2209,10 +2209,10 @@ void Pray()
 		}
 		if (!sacrifice) {
 			if (you.GetPunish(you.god)) {
-				printarray(true, false, false, CL_warning, 3, GetGodString(you.god), GetGodString_is(you.god)?"Àº ":"´Â ", "½É±â°¡ ºÒÆíÇØº¸ÀÎ´Ù.");
+				printarray(true, false, false, CL_warning, 3, GetGodString(you.god), GetGodString_is(you.god)?"ì€ ":"ëŠ” ", "ì‹¬ê¸°ê°€ ë¶ˆí¸í•´ë³´ì¸ë‹¤.");
 			}
 			if (!God_PraySpeak()) {
-				printarray(true, false, false, CL_warning, 2, GetGodString(you.god),"¿¡°Ô ´ç½ÅÀº ±âµµÁ™´Ù.");
+				printarray(true, false, false, CL_warning, 2, GetGodString(you.god),"ì—ê²Œ ë‹¹ì‹ ì€ ê¸°ë„í—€ë‹¤.");
 			}
 		}
 	}
@@ -2222,26 +2222,26 @@ void Pray()
 		dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
 		if(type == DG_TEMPLE_SUWAKO && isTutorial() && !you.s_poison)
 		{
-			printlog("½º¿ÍÄÚ´Â ¸»Çß´Ù : ´øÀü¿¡¼­ Á×´Â´Ù°í ÁøÂ¥ Á×´Â°Ç ¾Æ´Ï¾ß. ¸ğµç ±â·ÏÀº »ç¶óÁöÁö¸¸.",true,false,false,CL_warning);
-			printlog("½º¿ÍÄÚ´Â ¸»Çß´Ù : ±×·¡¼­ Å©·ÑÀÇ ¼¼°è¿¡¼± Á×´Â °Íµµ ÀÏÀÌ¶õ´Ù! ´ÙÀ½¿¡ º¸ÀÚ »ç³ª¿¡!",true,false,false,CL_warning);
+			printlog("ìŠ¤ì™€ì½”ëŠ” ë§í–ˆë‹¤ : ë˜ì „ì—ì„œ ì£½ëŠ”ë‹¤ê³  ì§„ì§œ ì£½ëŠ”ê±´ ì•„ë‹ˆì•¼. ëª¨ë“  ê¸°ë¡ì€ ì‚¬ë¼ì§€ì§€ë§Œ.",true,false,false,CL_warning);
+			printlog("ìŠ¤ì™€ì½”ëŠ” ë§í–ˆë‹¤ : ê·¸ë˜ì„œ í¬ë¡¤ì˜ ì„¸ê³„ì—ì„  ì£½ëŠ” ê²ƒë„ ì¼ì´ë€ë‹¤! ë‹¤ìŒì— ë³´ì ì‚¬ë‚˜ì—!",true,false,false,CL_warning);
 			you.SetPoison(150, 150,true);
 		}
 		
 		if(type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST)
 		{
-			printlog("´ç½ÅÀº Á¦´Ü¿¡ ±âµµ¸¦ µå·È´Ù.",true,false,false,CL_warning);
+			printlog("ë‹¹ì‹ ì€ ì œë‹¨ì— ê¸°ë„ë¥¼ ë“œë ¸ë‹¤.",true,false,false,CL_warning);
 			MoreWait();
 
 
 			if(type != DG_TEMPLE_SATORI && you.GetPunish((god_type)(type-DG_TEMPLE_FIRST)))
 			{
-				printarray(true,false,false,CL_warning,3,GetGodString((god_type)(type-DG_TEMPLE_FIRST)),GetGodString_is((god_type)(type-DG_TEMPLE_FIRST))?"Àº ":"´Â ","¾ÆÁ÷ ´ç½ÅÀ» ¿ë¼­ÇÏÁö¾Ê¾Ò´Ù.");
+				printarray(true,false,false,CL_warning,3,GetGodString((god_type)(type-DG_TEMPLE_FIRST)),GetGodString_is((god_type)(type-DG_TEMPLE_FIRST))?"ì€ ":"ëŠ” ","ì•„ì§ ë‹¹ì‹ ì„ ìš©ì„œí•˜ì§€ì•Šì•˜ë‹¤.");
 
 
 			}
 			/*else if (type == DG_TEMPLE_MIKO)
 			{
-				printlog("ÀÌ ½ÅÀº ´ç½ÅÀÇ ÀÔ±³¸¦ ¹Ş¾ÆÁÖ±â¿£ ¾ÆÁ÷ ³Ê¹« ¹Ù»Ú´Ù!.",true,false,false,CL_warning);
+				printlog("ì´ ì‹ ì€ ë‹¹ì‹ ì˜ ì…êµë¥¼ ë°›ì•„ì£¼ê¸°ì—” ì•„ì§ ë„ˆë¬´ ë°”ì˜ë‹¤!.",true,false,false,CL_warning);
 			}*/
 			else
 			{
@@ -2251,7 +2251,7 @@ void Pray()
 				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
-				printsub("½Åµµ°¡ µÇ·Á¸é YÅ°¸¦, Ãë¼ÒÇÏ·Á¸é NÅ°¸¦ ´©¸¥´Ù.",true,CL_help);
+				printsub("ì‹ ë„ê°€ ë˜ë ¤ë©´ Yí‚¤ë¥¼, ì·¨ì†Œí•˜ë ¤ë©´ Ní‚¤ë¥¼ ëˆ„ë¥¸ë‹¤.",true,CL_help);
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);
 				bool ok_= true;
@@ -2282,67 +2282,67 @@ void Pray()
 		}
 		else
 		{
-			printlog("´ç½ÅÀº »îÀÇ ÀÇ¹Ì¿¡ ´ëÇØ Àá½Ã »ı°¢Çß´Ù.",true,false,false,CL_warning);
+			printlog("ë‹¹ì‹ ì€ ì‚¶ì˜ ì˜ë¯¸ì— ëŒ€í•´ ì ì‹œ ìƒê°í–ˆë‹¤.",true,false,false,CL_warning);
 		}
 
 		//switch(type)
 		//{
 		//case DG_TEMPLE_SHIKIEIKI:
-		//	printlog("½ÃÅ°¿¡ÀÌÅ°´Â ¸»Çß´Ù : ÃÖ´ëÇÑ »¡¸® ±× ÂÊÁö¸¦ Áö»óÀ¸·Î °¡Á®´ÙÁÖ¼¼¿ä.",true,false,false,CL_warning);
+		//	printlog("ì‹œí‚¤ì—ì´í‚¤ëŠ” ë§í–ˆë‹¤ : ìµœëŒ€í•œ ë¹¨ë¦¬ ê·¸ ìª½ì§€ë¥¼ ì§€ìƒìœ¼ë¡œ ê°€ì ¸ë‹¤ì£¼ì„¸ìš”.",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_BYAKUREN:
-		//	printlog("¹òÄí·»Àº ¸»Çß´Ù : ¾Æ¾Æ, Å©·ÑÀÇ ¼¼°è ¾È¿¡ ºûÀÌ °¡µæÇØ.",true,false,false,CL_warning);
+		//	printlog("ë±Œì¿ ë Œì€ ë§í–ˆë‹¤ : ì•„ì•„, í¬ë¡¤ì˜ ì„¸ê³„ ì•ˆì— ë¹›ì´ ê°€ë“í•´.",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_KANAKO:
-		//	printlog("Ä«³ªÄÚ´Â ¸»Çß´Ù : ÀÌ°ÍÀº ½Å¾ÓÀ» ¸ğÀ» ±âÈ¸ÀÔ´Ï´Ù.",true,false,false,CL_warning);
+		//	printlog("ì¹´ë‚˜ì½”ëŠ” ë§í–ˆë‹¤ : ì´ê²ƒì€ ì‹ ì•™ì„ ëª¨ì„ ê¸°íšŒì…ë‹ˆë‹¤.",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_SUWAKO:
 		//	if(isNormalGame() || you.s_poison)
 		//	{
-		//		printlog("½º¿ÍÄÚ´Â ¸»Çß´Ù : ¾ÆÇÏÇÏ, Àç¹ÌÀÖ¾îÁ³¾î.",true,false,false,CL_warning);
+		//		printlog("ìŠ¤ì™€ì½”ëŠ” ë§í–ˆë‹¤ : ì•„í•˜í•˜, ì¬ë¯¸ìˆì–´ì¡Œì–´.",true,false,false,CL_warning);
 		//	}
 		//	else
 		//	{
-		//		printlog("½º¿ÍÄÚ´Â ¸»Çß´Ù : ´øÀü¿¡¼­ Á×´Â´Ù°í ÁøÂ¥ Á×´Â°Ç ¾Æ´Ï¾ß. ¸ğµç ±â·ÏÀº »ç¶óÁöÁö¸¸.",true,false,false,CL_warning);
-		//		printlog("½º¿ÍÄÚ´Â ¸»Çß´Ù : ±×·¡¼­ Å©·ÑÀÇ ¼¼°è¿¡¼± Á×´Â °Íµµ ÀÏÀÌ¶õ´Ù! ´ÙÀ½¿¡ º¸ÀÚ »ç³ª¿¡!",true,false,false,CL_warning);
+		//		printlog("ìŠ¤ì™€ì½”ëŠ” ë§í–ˆë‹¤ : ë˜ì „ì—ì„œ ì£½ëŠ”ë‹¤ê³  ì§„ì§œ ì£½ëŠ”ê±´ ì•„ë‹ˆì•¼. ëª¨ë“  ê¸°ë¡ì€ ì‚¬ë¼ì§€ì§€ë§Œ.",true,false,false,CL_warning);
+		//		printlog("ìŠ¤ì™€ì½”ëŠ” ë§í–ˆë‹¤ : ê·¸ë˜ì„œ í¬ë¡¤ì˜ ì„¸ê³„ì—ì„  ì£½ëŠ” ê²ƒë„ ì¼ì´ë€ë‹¤! ë‹¤ìŒì— ë³´ì ì‚¬ë‚˜ì—!",true,false,false,CL_warning);
 		//		you.SetPoison(150,true);
 		//	}
 		//	break;
 		//case DG_TEMPLE_MINORIKO:
-		//	printlog("¹Ì³ë¸®ÄÚ´Â ¸»Çß´Ù : ´øÀüÅ½Çèµµ ½ÄÈÄ°æ!",true,false,false,CL_warning);
+		//	printlog("ë¯¸ë…¸ë¦¬ì½”ëŠ” ë§í–ˆë‹¤ : ë˜ì „íƒí—˜ë„ ì‹í›„ê²½!",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_MIMA:
-		//	printlog("¹Ì¸¶´Â ¸»Çß´Ù : ±âºĞÁÁ°Ô ÀÚ°íÀÖ¾ú´Âµ¥, ¾î¶»°Ô µÈ°ÅÁö?",true,false,false,CL_warning);
+		//	printlog("ë¯¸ë§ˆëŠ” ë§í–ˆë‹¤ : ê¸°ë¶„ì¢‹ê²Œ ìê³ ìˆì—ˆëŠ”ë°, ì–´ë–»ê²Œ ëœê±°ì§€?",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_SHINKI:
-		//	printlog("½ÅÅ°´Â ¸»Çß´Ù : ¸¶°èµµ ¾û¸ÁÀÌ¾ß...",true,false,false,CL_warning);
+		//	printlog("ì‹ í‚¤ëŠ” ë§í–ˆë‹¤ : ë§ˆê³„ë„ ì—‰ë§ì´ì•¼...",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_YUUGI:
-		//	printlog("À¯¿ì±â´Â ¸»Çß´Ù : °­ÇÑ ³à¼®µéÀ» ¸¹ÀÌ º¸°Ú´Â°É!",true,false,false,CL_warning);
+		//	printlog("ìœ ìš°ê¸°ëŠ” ë§í–ˆë‹¤ : ê°•í•œ ë…€ì„ë“¤ì„ ë§ì´ ë³´ê² ëŠ”ê±¸!",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_SHIZUHA:
-		//	printlog("Àß µé¸®Áö¾Ê´Â ºÎ½º·°°Å¸®´Â ¼Ò¸®°¡ µé¸°´Ù.",true,false,false,CL_warning);
+		//	printlog("ì˜ ë“¤ë¦¬ì§€ì•ŠëŠ” ë¶€ìŠ¤ëŸ­ê±°ë¦¬ëŠ” ì†Œë¦¬ê°€ ë“¤ë¦°ë‹¤.",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_HINA:
-		//	printlog("È÷³ª´Â ¸»Çß´Ù : ¾×ÀÌ ³ÑÃÄ³ª! ¾×¶«ÇÒ ½Ã°£ÀÌ¾ß!",true,false,false,CL_warning);
+		//	printlog("íˆë‚˜ëŠ” ë§í–ˆë‹¤ : ì•¡ì´ ë„˜ì³ë‚˜! ì•¡ë•œí•  ì‹œê°„ì´ì•¼!",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_YUKARI:
-		//	printlog("À¯Ä«¸®´Â ¸»Çß´Ù : ³» Å¿Àº ¾Æ´Ï¶ó±¸?",true,false,false,CL_warning);
+		//	printlog("ìœ ì¹´ë¦¬ëŠ” ë§í–ˆë‹¤ : ë‚´ íƒ“ì€ ì•„ë‹ˆë¼êµ¬?",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_EIRIN:
-		//	printlog("¿¡ÀÌ¸°Àº ¸»Çß´Ù : ÈûÀ» ¿øÇÑ´Ù¸é, ³ªÀÇ ½ÇÇèÀç·á°¡ µÇ´Â°Ç ¾î¶§?",true,false,false,CL_warning);
+		//	printlog("ì—ì´ë¦°ì€ ë§í–ˆë‹¤ : í˜ì„ ì›í•œë‹¤ë©´, ë‚˜ì˜ ì‹¤í—˜ì¬ë£Œê°€ ë˜ëŠ”ê±´ ì–´ë•Œ?",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_YUYUKO:
-		//	printlog("À¯À¯ÄÚ´Â ¸»Çß´Ù : ÀÌ¿Õ ÀÌ·¸°Ô µÈ°Å Áñ±â¸é µÇÀİ¾Æ?",true,false,false,CL_warning);
+		//	printlog("ìœ ìœ ì½”ëŠ” ë§í–ˆë‹¤ : ì´ì™• ì´ë ‡ê²Œ ëœê±° ì¦ê¸°ë©´ ë˜ì–ì•„?",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_SATORI:
-		//	printlog("»çÅä¸®´Â ¸»Çß´Ù : ¾Ö¿Ïµ¿¹°µéÀº ¾îµğ·Î °¬À»±î¿ä...",true,false,false,CL_warning);
+		//	printlog("ì‚¬í† ë¦¬ëŠ” ë§í–ˆë‹¤ : ì• ì™„ë™ë¬¼ë“¤ì€ ì–´ë””ë¡œ ê°”ì„ê¹Œìš”...",true,false,false,CL_warning);
 		//	break;
 		//case DG_TEMPLE_TENSI:
-		//	printlog("ÅÙ½Ã´Â ¹ÌÄ£µíÀÌ ¿ô¾ú´Ù.",true,false,false,CL_warning);
+		//	printlog("í…ì‹œëŠ” ë¯¸ì¹œë“¯ì´ ì›ƒì—ˆë‹¤.",true,false,false,CL_warning);
 		//	break;
 		//default:
-		//	printlog("´ç½ÅÀº »îÀÇ ÀÇ¹Ì¿¡ ´ëÇØ Àá½Ã »ı°¢Çß´Ù.",true,false,false,CL_warning);
+		//	printlog("ë‹¹ì‹ ì€ ì‚¶ì˜ ì˜ë¯¸ì— ëŒ€í•´ ì ì‹œ ìƒê°í–ˆë‹¤.",true,false,false,CL_warning);
 		//	break;
 		//}
 	}
@@ -2355,212 +2355,212 @@ void Pray()
 
 void GodInfor(god_type god)
 {
-	printsub("                                                    ½Å¾Ó",true,CL_normal);
+	printsub("                                                    ì‹ ì•™",true,CL_normal);
 	switch(god)
 	{
 	case GT_SUWAKO:
-		printsub("¸ğ¸®¾ß ½º¿ÍÄÚ - ÅäÂø½ÅÀÇ Á¤Á¡",true,CL_swako);
+		printsub("ëª¨ë¦¬ì•¼ ìŠ¤ì™€ì½” - í† ì°©ì‹ ì˜ ì •ì ",true,CL_swako);
 		printsub("",true,CL_normal);
-		printsub("½º¿ÍÄÚ´Â °ï(¶¥)À» Ã¢Á¶ÇÏ´Â ´É·ÂÀ» °¡Áø ÅäÂø½ÅÀÌ´Ù.",true,CL_normal);
-		printsub("½º¿ÍÄÚ´Â ½ÅÀÚµé¿¡°Ô º¯´ö½º·¯¿î ±Ç´ÉÀ» ÁØ´Ù.",true,CL_normal);
-		printsub("±× ¶§¹®¿¡ ½ÅÀÚµéÀº ´Ù¾çÇÑ ±Ç´ÉÀ» ¹ŞÀ» ¼ö ÀÖÁö¸¸ ¿øÇÏ´Â ±Ç´ÉÀ» ¹ŞÁö´Â ¸øÇÑ´Ù.",true,CL_normal);
+		printsub("ìŠ¤ì™€ì½”ëŠ” ê³¤(ë•…)ì„ ì°½ì¡°í•˜ëŠ” ëŠ¥ë ¥ì„ ê°€ì§„ í† ì°©ì‹ ì´ë‹¤.",true,CL_normal);
+		printsub("ìŠ¤ì™€ì½”ëŠ” ì‹ ìë“¤ì—ê²Œ ë³€ë•ìŠ¤ëŸ¬ìš´ ê¶ŒëŠ¥ì„ ì¤€ë‹¤.",true,CL_normal);
+		printsub("ê·¸ ë•Œë¬¸ì— ì‹ ìë“¤ì€ ë‹¤ì–‘í•œ ê¶ŒëŠ¥ì„ ë°›ì„ ìˆ˜ ìˆì§€ë§Œ ì›í•˜ëŠ” ê¶ŒëŠ¥ì„ ë°›ì§€ëŠ” ëª»í•œë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_MIMA:
-		printsub("¹Ì¸¶ - ¾ÆµæÇÑ ²Ş¿¡ ¿î¸íÀ» ¸Ã±ä Á¤½Å",true,CL_green);
+		printsub("ë¯¸ë§ˆ - ì•„ë“í•œ ê¿ˆì— ìš´ëª…ì„ ë§¡ê¸´ ì •ì‹ ",true,CL_green);
 		printsub("",true,CL_normal);
-		printsub("¹Ì¸¶´Â Àç¾Ó½Å°İÀÎ Á¸Àç·Î ¾Ç·ÉÀÌ´Ù.",true,CL_normal);
-		printsub("½ÅµµµéÀº ¹Ì¸¶ÀÇ ¹ØÀ¸·Î µé¾î°¡´Â °ÍÀ¸·Î °­·ÂÇÑ ÆÄ±« ¸¶¹ıÀ» Áö¿ø¹Ş°í Àü¼ö¹Ş´Â´Ù.",true,CL_normal);
-		printsub("Æ¯È÷ ±×³àÀÇ Ãæ½ÇÇÑ ÃßÁ¾ÀÚ°¡ µÇ¾úÀ»¶§ ±Ã±ØÀÇ ÆÄ±« ¸¶¹ıÀÎ ½ºÆÄÅ©¸¦ Àü¼ö¹Ş°ÔµÈ´Ù.",true,CL_normal);
+		printsub("ë¯¸ë§ˆëŠ” ì¬ì•™ì‹ ê²©ì¸ ì¡´ì¬ë¡œ ì•…ë ¹ì´ë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ë“¤ì€ ë¯¸ë§ˆì˜ ë°‘ìœ¼ë¡œ ë“¤ì–´ê°€ëŠ” ê²ƒìœ¼ë¡œ ê°•ë ¥í•œ íŒŒê´´ ë§ˆë²•ì„ ì§€ì›ë°›ê³  ì „ìˆ˜ë°›ëŠ”ë‹¤.",true,CL_normal);
+		printsub("íŠ¹íˆ ê·¸ë…€ì˜ ì¶©ì‹¤í•œ ì¶”ì¢…ìê°€ ë˜ì—ˆì„ë•Œ ê¶ê·¹ì˜ íŒŒê´´ ë§ˆë²•ì¸ ìŠ¤íŒŒí¬ë¥¼ ì „ìˆ˜ë°›ê²Œëœë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_YUYUKO:
-		printsub("»çÀÌ±³¿ìÁö À¯À¯ÄÚ - Àú½Â´©°¢ÀÇ ¸Á·É¼Ò³à",true,CL_yuyuko);
+		printsub("ì‚¬ì´êµìš°ì§€ ìœ ìœ ì½” - ì €ìŠ¹ëˆ„ê°ì˜ ë§ë ¹ì†Œë…€",true,CL_yuyuko);
 		printsub("",true,CL_normal);
-		printsub("À¯À¯ÄÚ´Â ¹é¿Á·ç¿¡ »ç´Â »çÀÌ±³¿ìÁöÀÇ ¾Æ°¡¾¾ÀÌ´Ù.",true,CL_normal);
-		printsub("±×³à´Â Á×À½À» Á¶Á¾ ÇÒ ¼ö ÀÖ´Â °­·ÂÇÑ ´É·ÂÀ» °¡Áö°í ÀÖ¾î¼­ ½Åµµµé¿¡°Ô Á×À½ÀÇ ÈûÀ» ¼±¹°ÇØÁØ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ½Åµµ°¡ µÇ¸é Á×À½À» ´Ù·ç´Â ´É·Â°ú ¸¹Àº ¿µÈ¥µéÀ» ¼±¹° ¹ŞÀ» °ÍÀÌ´Ù.",true,CL_normal);
+		printsub("ìœ ìœ ì½”ëŠ” ë°±ì˜¥ë£¨ì— ì‚¬ëŠ” ì‚¬ì´êµìš°ì§€ì˜ ì•„ê°€ì”¨ì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì£½ìŒì„ ì¡°ì¢… í•  ìˆ˜ ìˆëŠ” ê°•ë ¥í•œ ëŠ¥ë ¥ì„ ê°€ì§€ê³  ìˆì–´ì„œ ì‹ ë„ë“¤ì—ê²Œ ì£½ìŒì˜ í˜ì„ ì„ ë¬¼í•´ì¤€ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ì‹ ë„ê°€ ë˜ë©´ ì£½ìŒì„ ë‹¤ë£¨ëŠ” ëŠ¥ë ¥ê³¼ ë§ì€ ì˜í˜¼ë“¤ì„ ì„ ë¬¼ ë°›ì„ ê²ƒì´ë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_JOON_AND_SION:
-		printsub("¿ä¸®°¡¹Ì ÁÒ¿Â & ½Ã¿Â - ÃÖÈäÃÖ¾ÇÀÇ ÀÚ¸Å",true, CL_joon_and_sion);
+		printsub("ìš”ë¦¬ê°€ë¯¸ ì£ ì˜¨ & ì‹œì˜¨ - ìµœí‰ìµœì•…ì˜ ìë§¤",true, CL_joon_and_sion);
 		printsub("",true,CL_normal);
-		printsub("³¶ºñ¿Í ºó°ïÀÇ ÀÚ¸Å ½ÅÀ¸·Î ¹Ï´Â ½ÅÀÚ¿¡°Ô ºÒ¿îÀ» °¡Á®´ÙÁØ´Ù.",true,CL_normal);
-		printsub("ÁÒ¿ÂÀº Àç»êÀ» ³¶ºñ½ÃÅ°´Â ¿ªº´½Å, ½Ã¿ÂÀº ¹Ï´Â ÀÚ¸¦ ºó°ïÇÏ°Ô ¸¸µå´Â ºó°ï½ÅÀ¸·Î¼­",true,CL_normal);
-		printsub("¹Ï´Â °Í¸¸À¸·Îµµ ¼Ò¸ğÇ°À» ³¶ºñÇÏ°í ÀÒ¾î¹ö¸®´Â ºÒÇàÀÌ »ı±â°Ô µÉ °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("±×·³¿¡µµ µÑÀ» ½Å¾ÓÇÑ´Ù¸é Á÷Á¢ ºùÀÇÇÏ´Â °ÍÀ¸·Î Á÷Á¢ÀûÀ¸·Î ±×³àµéÀÇ ±Ç´ÉµéÀ» »ç¿ëÇÏ°Ô µÈ´Ù.", true, CL_normal);
-		printsub("±×³àµéÀÇ ±Ç´ÉÀº °­·ÂÇÏÁö¸¸, ºùÀÇ¿Í µ¿½Ã¿¡ ±×¿¡ µû¸¥ ±×³àµéÀÇ ºÒ¿îµµ ´õ¿í °­ÇØÁú°ÍÀÌ´Ù.", true, CL_normal);
-		printsub("½ÅµµµéÀº ´Ù¸¥ ÀûµéÀ» Á×¿©¼­ ±×µéÀÇ µ·À» °¥ÃëÇÏ´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.", true, CL_normal);
+		printsub("ë‚­ë¹„ì™€ ë¹ˆê³¤ì˜ ìë§¤ ì‹ ìœ¼ë¡œ ë¯¿ëŠ” ì‹ ìì—ê²Œ ë¶ˆìš´ì„ ê°€ì ¸ë‹¤ì¤€ë‹¤.",true,CL_normal);
+		printsub("ì£ ì˜¨ì€ ì¬ì‚°ì„ ë‚­ë¹„ì‹œí‚¤ëŠ” ì—­ë³‘ì‹ , ì‹œì˜¨ì€ ë¯¿ëŠ” ìë¥¼ ë¹ˆê³¤í•˜ê²Œ ë§Œë“œëŠ” ë¹ˆê³¤ì‹ ìœ¼ë¡œì„œ",true,CL_normal);
+		printsub("ë¯¿ëŠ” ê²ƒë§Œìœ¼ë¡œë„ ì†Œëª¨í’ˆì„ ë‚­ë¹„í•˜ê³  ìƒì–´ë²„ë¦¬ëŠ” ë¶ˆí–‰ì´ ìƒê¸°ê²Œ ë  ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ëŸ¼ì—ë„ ë‘˜ì„ ì‹ ì•™í•œë‹¤ë©´ ì§ì ‘ ë¹™ì˜í•˜ëŠ” ê²ƒìœ¼ë¡œ ì§ì ‘ì ìœ¼ë¡œ ê·¸ë…€ë“¤ì˜ ê¶ŒëŠ¥ë“¤ì„ ì‚¬ìš©í•˜ê²Œ ëœë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ë“¤ì˜ ê¶ŒëŠ¥ì€ ê°•ë ¥í•˜ì§€ë§Œ, ë¹™ì˜ì™€ ë™ì‹œì— ê·¸ì— ë”°ë¥¸ ê·¸ë…€ë“¤ì˜ ë¶ˆìš´ë„ ë”ìš± ê°•í•´ì§ˆê²ƒì´ë‹¤.", true, CL_normal);
+		printsub("ì‹ ë„ë“¤ì€ ë‹¤ë¥¸ ì ë“¤ì„ ì£½ì—¬ì„œ ê·¸ë“¤ì˜ ëˆì„ ê°ˆì·¨í•˜ëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.", true, CL_normal);
 		printsub("", true, CL_normal);
 		break;
 	case GT_SHINKI:
-		printsub("½ÅÅ° - ¸¶°èÀÇ ½Å",true,CL_white_puple);
+		printsub("ì‹ í‚¤ - ë§ˆê³„ì˜ ì‹ ",true,CL_white_puple);
 		printsub("",true,CL_normal);
-		printsub("½ÅÅ°´Â ¸¶°èÀÇ ÁÖÀÎÀÌÀÚ ¸¶°è¸¦ Ã¢Á¶ÇÑ ¸¶°èÀÇ ½ÅÀÌ´Ù.",true,CL_normal);
-		printsub("Ã¢Á¶ÀÇ ´É·ÂÀ» ÀÌ¿ëÇØ¼­ ½ÅÅ°´Â ½Åµµµé¿¡°Ô °­·ÂÇÑ ¸¶Á·µéÀ» ¼±¹°ÇÑ´Ù.",true,CL_normal);
-		printsub("¶ÇÇÑ ½ÅÅ°´Â ´ç½ÅÀ» Àû´ëÀûÀÎ ¼ÒÈ¯¼ö·ÎºÎÅÍ ÁöÄÑÁÖ°Å³ª P¸¦ ¸ğÀ»¶§¸¶´Ù Ã¼·Â°ú ¿µ·ÂÀ» È¸º¹½ÃÄÑÁØ´Ù.",true,CL_normal);
-		printsub("ÀÏÁ¤¼öÁØ ÀÌ»óÀÇ ¸¶Á·µéÀº ´ç½ÅÀ» ¾ğÁ¦¶óµµ ¹è½ÅÇÒ ¼ö ÀÖ´Â °É ¿°µÎÇØ¾ßµÈ´Ù.",true,CL_normal);
-		printsub("½ÅµµµéÀº PÅÛÀ» Áİ´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("ì‹ í‚¤ëŠ” ë§ˆê³„ì˜ ì£¼ì¸ì´ì ë§ˆê³„ë¥¼ ì°½ì¡°í•œ ë§ˆê³„ì˜ ì‹ ì´ë‹¤.",true,CL_normal);
+		printsub("ì°½ì¡°ì˜ ëŠ¥ë ¥ì„ ì´ìš©í•´ì„œ ì‹ í‚¤ëŠ” ì‹ ë„ë“¤ì—ê²Œ ê°•ë ¥í•œ ë§ˆì¡±ë“¤ì„ ì„ ë¬¼í•œë‹¤.",true,CL_normal);
+		printsub("ë˜í•œ ì‹ í‚¤ëŠ” ë‹¹ì‹ ì„ ì ëŒ€ì ì¸ ì†Œí™˜ìˆ˜ë¡œë¶€í„° ì§€ì¼œì£¼ê±°ë‚˜ Pë¥¼ ëª¨ì„ë•Œë§ˆë‹¤ ì²´ë ¥ê³¼ ì˜ë ¥ì„ íšŒë³µì‹œì¼œì¤€ë‹¤.",true,CL_normal);
+		printsub("ì¼ì •ìˆ˜ì¤€ ì´ìƒì˜ ë§ˆì¡±ë“¤ì€ ë‹¹ì‹ ì„ ì–¸ì œë¼ë„ ë°°ì‹ í•  ìˆ˜ ìˆëŠ” ê±¸ ì—¼ë‘í•´ì•¼ëœë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ë“¤ì€ Pí…œì„ ì¤ëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_MINORIKO:
-		printsub("¾ÆÅ° ¹Ì³ë¸®ÄÚ - Ç³Á·°ú ¼öÈ®ÀÇ »óÂ¡",true,CL_warning);
-		printsub("¹Ì³ë¸®ÄÚ´Â °¡À»ÀÇ ¼öÈ®À» »óÂ¡ÇÏ´Â ½ÅÀ¸·Î ½Åµµ¿¡°Ô Ç³Á·ÇÔÀ» ¼±»çÇÑ´Ù.",true,CL_normal);
-		printsub("½ÅµµµéÀº ¹Ì³ë¸®ÄÚ¿¡°Ô Ç³Á·ÇÑ À½½ÄÀ» ³»·Á¹Ş°Ô µÇ°í Æ÷¸¸°¨°ú Ã¼·ÂÀ» º¸Àå¹Ş´Â´Ù.",true,CL_normal);
-		printsub("½ÅµµµéÀº PÅÛÀ» Áİ´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("ì•„í‚¤ ë¯¸ë…¸ë¦¬ì½” - í’ì¡±ê³¼ ìˆ˜í™•ì˜ ìƒì§•",true,CL_warning);
+		printsub("ë¯¸ë…¸ë¦¬ì½”ëŠ” ê°€ì„ì˜ ìˆ˜í™•ì„ ìƒì§•í•˜ëŠ” ì‹ ìœ¼ë¡œ ì‹ ë„ì—ê²Œ í’ì¡±í•¨ì„ ì„ ì‚¬í•œë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ë“¤ì€ ë¯¸ë…¸ë¦¬ì½”ì—ê²Œ í’ì¡±í•œ ìŒì‹ì„ ë‚´ë ¤ë°›ê²Œ ë˜ê³  í¬ë§Œê°ê³¼ ì²´ë ¥ì„ ë³´ì¥ë°›ëŠ”ë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ë“¤ì€ Pí…œì„ ì¤ëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_SHIZUHA:
-		printsub("¾ÆÅ° ½ÃÁîÇÏ - ¿Ü·Î¿ò°ú ÀÓÁ¾ÀÇ »óÂ¡",true,CL_small_danger);
+		printsub("ì•„í‚¤ ì‹œì¦ˆí•˜ - ì™¸ë¡œì›€ê³¼ ì„ì¢…ì˜ ìƒì§•",true,CL_small_danger);
 		printsub("",true,CL_normal);
-		printsub("¾ÆÅ° ½ÃÁîÇÏ´Â ´ÜÇ³ÀÇ ½ÅÀÌ´Ù.",true,CL_normal);
-		printsub("½ÃÁîÇÏ´Â ½ÅµµµéÀÇ ´ç½ÅÀÇ Á¸Àç°¨À» ³·Ãß¾î Àº¹ĞÇÏ°Ô ´Ù´Ò ¼ö ÀÖ°Ô µµ¿ÍÁØ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ±Ç´ÉÀº ¾Ï»ìÀÚµé¿¡°Ô Å« ÇıÅÃÀ» ÁÖ¸ç Áß°©¿ÊÀÇ ÆĞ³ÎÆ¼µµ Å©°Ô »ó¼â¹ŞÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("½ÃÁîÇÏ´Â ½Ã²ô·¯¿î ÀÚµéÀÇ ½ÃÃ¼°¡ ³«¿±Ã³·³ ¶³¾îÁö´Â °ÍÀ» ±â»µÇÑ´Ù.",true,CL_normal);
+		printsub("ì•„í‚¤ ì‹œì¦ˆí•˜ëŠ” ë‹¨í’ì˜ ì‹ ì´ë‹¤.",true,CL_normal);
+		printsub("ì‹œì¦ˆí•˜ëŠ” ì‹ ë„ë“¤ì˜ ë‹¹ì‹ ì˜ ì¡´ì¬ê°ì„ ë‚®ì¶”ì–´ ì€ë°€í•˜ê²Œ ë‹¤ë‹ ìˆ˜ ìˆê²Œ ë„ì™€ì¤€ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ê¶ŒëŠ¥ì€ ì•”ì‚´ìë“¤ì—ê²Œ í° í˜œíƒì„ ì£¼ë©° ì¤‘ê°‘ì˜·ì˜ íŒ¨ë„í‹°ë„ í¬ê²Œ ìƒì‡„ë°›ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ì‹œì¦ˆí•˜ëŠ” ì‹œë„ëŸ¬ìš´ ìë“¤ì˜ ì‹œì²´ê°€ ë‚™ì—½ì²˜ëŸ¼ ë–¨ì–´ì§€ëŠ” ê²ƒì„ ê¸°ë»í•œë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_EIRIN:
-		printsub("¾ß°íÄÚ·Î ¿¡ÀÌ¸° - ´ŞÀÇ µÎ³ú",true,CL_small_danger);
+		printsub("ì•¼ê³ ì½”ë¡œ ì—ì´ë¦° - ë‹¬ì˜ ë‘ë‡Œ",true,CL_small_danger);
 		printsub("",true,CL_normal);
-		printsub("±×³à´Â ¸ğµç ¾àÀ» Á¦Á¶ÇÒ ¼ö ÀÖ´Â ´ŞÀÇ ÃÖ°íÀÇ ÇöÀÚ·Î ÃµÀç ¾à»çÀÌ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ½Åµµ·Î µé¾î°¡¸é ¿©·¯°¡Áö ¹°¾àµéÀ» ¹Ş°ÔµÇ°í Ãß°¡ÀûÀÎ È¿°ú¸¦ ¾ò°Ô µÈ´Ù.",true,CL_normal);
-		printsub("¶ÇÇÑ ÀÚ½ÅÀÇ ¸öÀ» °³Á¶ÇÏ°Å³ª ºÎÀÛ¿ëÀ» °¨´çÇÏ´Â ±ØÀûÀÎ Ä¡·áµµ °¡´ÉÇØÁø´Ù.",true,CL_normal);
-		printsub("½Åµµ´Â ±×³àÀÇ ½ÇÇè´ë»óÀÌ µÉ °¢¿À¸¦ ÇÒ ¼ö ÀÖ´Ù¸é ±×¸¸Å­ÀÇ º¸´äÀ» ¹ŞÀ» ¼ö ÀÖÀ» °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("½Åµµ´Â ÀÌ·Î¿î ¹°¾àÀÇ À§¿¡¼­ ±âµµ¸¦ ÇÏ¿© Æ÷¼ÇÀ» ¹ÙÄ¡°Å³ª ¹°¾àÀ» ¸¶½Ã´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("¶ÇÇÑ ÀÚÁÖ´Â ¾Æ´ÏÁö¸¸ ÀûÀ» Á×¿´À»¶§ °¡²û¾¿ ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö µµ ÀÖ´Ù.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ëª¨ë“  ì•½ì„ ì œì¡°í•  ìˆ˜ ìˆëŠ” ë‹¬ì˜ ìµœê³ ì˜ í˜„ìë¡œ ì²œì¬ ì•½ì‚¬ì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ì‹ ë„ë¡œ ë“¤ì–´ê°€ë©´ ì—¬ëŸ¬ê°€ì§€ ë¬¼ì•½ë“¤ì„ ë°›ê²Œë˜ê³  ì¶”ê°€ì ì¸ íš¨ê³¼ë¥¼ ì–»ê²Œ ëœë‹¤.",true,CL_normal);
+		printsub("ë˜í•œ ìì‹ ì˜ ëª¸ì„ ê°œì¡°í•˜ê±°ë‚˜ ë¶€ì‘ìš©ì„ ê°ë‹¹í•˜ëŠ” ê·¹ì ì¸ ì¹˜ë£Œë„ ê°€ëŠ¥í•´ì§„ë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ëŠ” ê·¸ë…€ì˜ ì‹¤í—˜ëŒ€ìƒì´ ë  ê°ì˜¤ë¥¼ í•  ìˆ˜ ìˆë‹¤ë©´ ê·¸ë§Œí¼ì˜ ë³´ë‹µì„ ë°›ì„ ìˆ˜ ìˆì„ ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ëŠ” ì´ë¡œìš´ ë¬¼ì•½ì˜ ìœ„ì—ì„œ ê¸°ë„ë¥¼ í•˜ì—¬ í¬ì…˜ì„ ë°”ì¹˜ê±°ë‚˜ ë¬¼ì•½ì„ ë§ˆì‹œëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ë˜í•œ ìì£¼ëŠ” ì•„ë‹ˆì§€ë§Œ ì ì„ ì£½ì˜€ì„ë•Œ ê°€ë”ì”© ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ë„ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_KANAKO:
-		printsub("¾ß»çÄ« Ä«³ªÄÚ - »êÆÇ°ú È£¼öÀÇ ±ÇÈ­",true,CL_help);
+		printsub("ì•¼ì‚¬ì¹´ ì¹´ë‚˜ì½” - ì‚°íŒê³¼ í˜¸ìˆ˜ì˜ ê¶Œí™”",true,CL_help);
 		printsub("",true,CL_normal);
-		printsub("Ä«³ªÄÚ´Â °Ç(ÇÏ´Ã)À» Ã¢Á¶ÇÏ´Â ´É·ÂÀ» °¡Áø ½ÅÀ¸·Î º»·¡´Â ¹Ù¶÷ÀÇ ½ÅÀÌÁö¸¸ »êÀÇ ½ÅÀ¸·Î ¸ğ¼ÅÁö°í ÀÖ´Ù.",true,CL_normal);
-		printsub("±×³à´Â ½ÅÀÚµé¿¡°Ô ½Å¾ÓÀ» ¹Ş´Â °ÍÀ¸·Î °­·ÂÇÑ ÀüÅõ ´É·ÂÀ» º¸´äÇÑ´Ù.",true,CL_normal);
-		printsub("Æ¯È÷ ±ÙÁ¢Àü»ç¿Í ¿ø°Å¸®Åº¸·À¸·Î ½Î¿ì´Â ÀÚ¿¡°Ô Å« µµ¿òÀÌ µÉ °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("½ÅÀÚµéÀº °è¼ÓµÇ´Â ÀüÅõ·Î ±×³à¿¡°Ô ½Å¾ÓÀ» ¹ÙÃÄ¾ßÇÑ´Ù.",true,CL_normal);
+		printsub("ì¹´ë‚˜ì½”ëŠ” ê±´(í•˜ëŠ˜)ì„ ì°½ì¡°í•˜ëŠ” ëŠ¥ë ¥ì„ ê°€ì§„ ì‹ ìœ¼ë¡œ ë³¸ë˜ëŠ” ë°”ëŒì˜ ì‹ ì´ì§€ë§Œ ì‚°ì˜ ì‹ ìœ¼ë¡œ ëª¨ì…”ì§€ê³  ìˆë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì‹ ìë“¤ì—ê²Œ ì‹ ì•™ì„ ë°›ëŠ” ê²ƒìœ¼ë¡œ ê°•ë ¥í•œ ì „íˆ¬ ëŠ¥ë ¥ì„ ë³´ë‹µí•œë‹¤.",true,CL_normal);
+		printsub("íŠ¹íˆ ê·¼ì ‘ì „ì‚¬ì™€ ì›ê±°ë¦¬íƒ„ë§‰ìœ¼ë¡œ ì‹¸ìš°ëŠ” ìì—ê²Œ í° ë„ì›€ì´ ë  ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ì‹ ìë“¤ì€ ê³„ì†ë˜ëŠ” ì „íˆ¬ë¡œ ê·¸ë…€ì—ê²Œ ì‹ ì•™ì„ ë°”ì³ì•¼í•œë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_YUKARI:
-		printsub("¾ßÄí¸ğ À¯Ä«¸® - °æ°è¼Ó¿¡ ¼ûÀº ¿ä±«",true,CL_yukari);
-		printsub("¾ßÄí¸ğ À¯Ä«¸®´Â È¯»óÇâ¿¡¼­µµ ÀÌ¸§ÀÖ´Â °­·ÂÇÑ °æ°èÀÇ ¿ä±«´Ù.",true,CL_normal);
-		printsub("À¯Ä«¸®ÀÇ ½Ä½ÅÀ¸·Î µé¾î°¡°Ô µÇ¸é ±×³à¿¡°Ô °æ°è¿Í °ü·ÃµÈ ´É·ÂÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("°­·ÂÇÑ ÀüÀÌ´É·ÂÀ» Á¦°ø¹ŞÁö¸¸ ±Ç´ÉÀ» Á¦¿ÜÇÑ ´Ù¸¥ ÀüÀÌ´É·ÂÀ» ±İÁöÇÏ°í",true,CL_normal);
-		printsub("Á¦¾îÇÏ±â Èûµç °­·ÂÇÑ ÀüÀÌ ´É·ÂÀº ¿ªÀ¸·Î ½Åµµ¸¦ À§ÇèÇÏ°Ô ¸¸µé¼öµµ ÀÖ´Ù.",true,CL_normal);
-		//printsub("±×³àÀÇ ½ÅÀüÀº ½ºÅ°¸¶ ¾ÈÂÊÀÌ¶ó´Â Æ¯¼öÇÑ ´øÀü¿¡ ÁÖ·Î Á¸ÀçÇÏ¸ç ±×³àÀÇ ½Ä½ÅµéÀº ¿©±â¿¡¼­ ½ÃÀÛÇÏ°Ô µÈ´Ù.",true,CL_normal);
+		printsub("ì•¼ì¿ ëª¨ ìœ ì¹´ë¦¬ - ê²½ê³„ì†ì— ìˆ¨ì€ ìš”ê´´",true,CL_yukari);
+		printsub("ì•¼ì¿ ëª¨ ìœ ì¹´ë¦¬ëŠ” í™˜ìƒí–¥ì—ì„œë„ ì´ë¦„ìˆëŠ” ê°•ë ¥í•œ ê²½ê³„ì˜ ìš”ê´´ë‹¤.",true,CL_normal);
+		printsub("ìœ ì¹´ë¦¬ì˜ ì‹ì‹ ìœ¼ë¡œ ë“¤ì–´ê°€ê²Œ ë˜ë©´ ê·¸ë…€ì—ê²Œ ê²½ê³„ì™€ ê´€ë ¨ëœ ëŠ¥ë ¥ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ê°•ë ¥í•œ ì „ì´ëŠ¥ë ¥ì„ ì œê³µë°›ì§€ë§Œ ê¶ŒëŠ¥ì„ ì œì™¸í•œ ë‹¤ë¥¸ ì „ì´ëŠ¥ë ¥ì„ ê¸ˆì§€í•˜ê³ ",true,CL_normal);
+		printsub("ì œì–´í•˜ê¸° í˜ë“  ê°•ë ¥í•œ ì „ì´ ëŠ¥ë ¥ì€ ì—­ìœ¼ë¡œ ì‹ ë„ë¥¼ ìœ„í—˜í•˜ê²Œ ë§Œë“¤ìˆ˜ë„ ìˆë‹¤.",true,CL_normal);
+		//printsub("ê·¸ë…€ì˜ ì‹ ì „ì€ ìŠ¤í‚¤ë§ˆ ì•ˆìª½ì´ë¼ëŠ” íŠ¹ìˆ˜í•œ ë˜ì „ì— ì£¼ë¡œ ì¡´ì¬í•˜ë©° ê·¸ë…€ì˜ ì‹ì‹ ë“¤ì€ ì—¬ê¸°ì—ì„œ ì‹œì‘í•˜ê²Œ ëœë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_HINA:
-		printsub("Ä«±â¾ß¸¶ È÷³ª - ¼û¾îÀÖ´Â ¾×¸·ÀÌ ÀÎÇü ½Å",true,CL_hina);
+		printsub("ì¹´ê¸°ì•¼ë§ˆ íˆë‚˜ - ìˆ¨ì–´ìˆëŠ” ì•¡ë§‰ì´ ì¸í˜• ì‹ ",true,CL_hina);
 		printsub("",true,CL_normal);
-		printsub("È÷³ª´Â ¾×À» ¸ğ¾Æ¼­ Àç¾ÓÀ» ¹æÁöÇÏ´Â Àç¾Ó½ÅÀÌ´Ù.",true,CL_normal);
-		printsub("±×³à·ÎºÎÅÍ ¾×À» ¹Ş¾Æ¼­ ÀúÁÖ¸¦ ¸ö¿¡ Áö´Ï´Â °ÍÀ¸·Î ±×³àÀÇ ±Ç´ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("´øÀüÀ» Å½ÇèÇÏ´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("íˆë‚˜ëŠ” ì•¡ì„ ëª¨ì•„ì„œ ì¬ì•™ì„ ë°©ì§€í•˜ëŠ” ì¬ì•™ì‹ ì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ë¡œë¶€í„° ì•¡ì„ ë°›ì•„ì„œ ì €ì£¼ë¥¼ ëª¸ì— ì§€ë‹ˆëŠ” ê²ƒìœ¼ë¡œ ê·¸ë…€ì˜ ê¶ŒëŠ¥ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ë˜ì „ì„ íƒí—˜í•˜ëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_SATORI:
-		printsub("ÄÚ¸ŞÀÌÁö »çÅä¸® - ¿ø·Éµµ µÎ·Á¿öÇÏ´Â ¼Ò³à",true,CL_danger);
+		printsub("ì½”ë©”ì´ì§€ ì‚¬í† ë¦¬ - ì›ë ¹ë„ ë‘ë ¤ì›Œí•˜ëŠ” ì†Œë…€",true,CL_danger);
 		printsub("",true,CL_normal);
-		printsub("»çÅä¸®´Â Áö·ÉÀüÀÇ ÁÖÀÎÀ¸·Î ¸¶À½À» ÀĞ´Â ¿ä±«ÀÌ´Ù.",true,CL_normal);
-		printsub("»çÅä¸®¸¦ ¹Ï´Â´Ù´Â °ÍÀº ±×³àÀÇ ÆêÀÌ µÈ´Ù´Â ¾ê±â¿Íµµ °°°í ±×³àÀÇ ÈûÀ» ¹ŞÀ» ¼ö ÀÖ°Ô µÈ´Ù.",true,CL_normal);
-		printsub("»çÅä¸®´Â ¹æÀÓÁÖÀÇÀÌ±â¶§¹®¿¡ ÀüÅõ¿¡ Á÷Á¢ °ü·ÃµÈ ´É·ÂÀº º°·Î ÁÖÁø ¾Ê´Â´Ù.",true,CL_normal);
-		printsub("±×·¯³ª ±×³àÀÇ ¸¶À½À» ÀĞ´Â ´É·ÂÀ¸·Î ´øÀüÀÇ ÁöÇü Á¤º¸¸¦ ¾ò°Å³ª À§Ä¡¸¦ ¾Ë¾Æ³¾ ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("¶ÇÇÑ »ó´ëÀÇ ¸¶À½ ¼ÓÀ¸·ÎºÎÅÍ Æ®¶ó¿ì¸¶¸¦ ÀĞ¾î³»°Å³ª »ó´ëÀÇ »ı°¢À» ÅëÂ°·Î ÀĞ¾î³» ³ó¶ôÇÒ¼öµµ ÀÖ´Ù.",true,CL_normal);
-		printsub("»ı°¢À» °£ÆÄ´çÇÑ »ó´ë´Â ¸ğµç µğ¹öÇÁ ¸¶¹ı¿¡ Ãë¾àÇØÁö¹Ç·Î Á¤½Å¼úÀ» ¿¬¸¶ÇÑ »ç¶÷¿¡°Ô µµ¿òÀÌ µÉ °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ¾Ö¿Ïµ¿¹°µéÀº ´øÀüÀ» Å½ÇèÇÏ´Â °ÍÀ¸·Î ±×³àÀÇ È£°¨À» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("ì‚¬í† ë¦¬ëŠ” ì§€ë ¹ì „ì˜ ì£¼ì¸ìœ¼ë¡œ ë§ˆìŒì„ ì½ëŠ” ìš”ê´´ì´ë‹¤.",true,CL_normal);
+		printsub("ì‚¬í† ë¦¬ë¥¼ ë¯¿ëŠ”ë‹¤ëŠ” ê²ƒì€ ê·¸ë…€ì˜ í«ì´ ëœë‹¤ëŠ” ì–˜ê¸°ì™€ë„ ê°™ê³  ê·¸ë…€ì˜ í˜ì„ ë°›ì„ ìˆ˜ ìˆê²Œ ëœë‹¤.",true,CL_normal);
+		printsub("ì‚¬í† ë¦¬ëŠ” ë°©ì„ì£¼ì˜ì´ê¸°ë•Œë¬¸ì— ì „íˆ¬ì— ì§ì ‘ ê´€ë ¨ëœ ëŠ¥ë ¥ì€ ë³„ë¡œ ì£¼ì§„ ì•ŠëŠ”ë‹¤.",true,CL_normal);
+		printsub("ê·¸ëŸ¬ë‚˜ ê·¸ë…€ì˜ ë§ˆìŒì„ ì½ëŠ” ëŠ¥ë ¥ìœ¼ë¡œ ë˜ì „ì˜ ì§€í˜• ì •ë³´ë¥¼ ì–»ê±°ë‚˜ ìœ„ì¹˜ë¥¼ ì•Œì•„ë‚¼ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ë˜í•œ ìƒëŒ€ì˜ ë§ˆìŒ ì†ìœ¼ë¡œë¶€í„° íŠ¸ë¼ìš°ë§ˆë¥¼ ì½ì–´ë‚´ê±°ë‚˜ ìƒëŒ€ì˜ ìƒê°ì„ í†µì§¸ë¡œ ì½ì–´ë‚´ ë†ë½í• ìˆ˜ë„ ìˆë‹¤.",true,CL_normal);
+		printsub("ìƒê°ì„ ê°„íŒŒë‹¹í•œ ìƒëŒ€ëŠ” ëª¨ë“  ë””ë²„í”„ ë§ˆë²•ì— ì·¨ì•½í•´ì§€ë¯€ë¡œ ì •ì‹ ìˆ ì„ ì—°ë§ˆí•œ ì‚¬ëŒì—ê²Œ ë„ì›€ì´ ë  ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ì• ì™„ë™ë¬¼ë“¤ì€ ë˜ì „ì„ íƒí—˜í•˜ëŠ” ê²ƒìœ¼ë¡œ ê·¸ë…€ì˜ í˜¸ê°ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_YUUGI:
-		printsub("È£½Ã±¸¸¶ À¯¿ì±â - ÀÏÄÃ¾îÁö´Â ±«·Â³­½Å",true,CL_yuigi);
+		printsub("í˜¸ì‹œêµ¬ë§ˆ ìœ ìš°ê¸° - ì¼ì»¬ì–´ì§€ëŠ” ê´´ë ¥ë‚œì‹ ",true,CL_yuigi);
 		printsub("",true,CL_normal);
-		printsub("À¯¿ì±â´Â ÁöÇÏÀÇ ¿¾µµ½Ã¿¡ »ì°í ÀÖ´Â ¿À´ÏÀÌ´Ù. À¯¿ì±â´Â ±«·Â³­½ÅÀÇ ¿À´Ï·Î °­·ÂÇÑ ÈûÀ» ½Åµµ¿¡°Ô ÁØ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ÈûÀº ±ÙÁ¢ ÀüÅõ¸¦ ÇÏ¸é¼­ »ó´ë¸¦ ¸ÅÄ¡°Å³ª Áı¾î´øÁö´Â µî ·¹½½¸µ°°Àº ÀüÅõ¸¦ ÇØ³¾ ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("¶ÇÇÑ ¿À´ÏÀÇ ÈûÀ¸·Î Æ÷È¿¸¦ ÇÏ¿© »ó´ë¸¦ º¡¾î¸®·Î ¸¸µé°Å³ª ¿À´ÏÀÇ ±Ã±Ø±â ¶ÇÇÑ »ç¿ëÇÒ ¼ö ÀÖ°Ô µÈ´Ù.",true,CL_normal);
-		printsub("´Ü, À¯¿ì±â´Â ½Åµµ°¡ ¸¶¹ıÀÇ Èû¿¡ ÀÇÁöÇØ ½Î¿ì´Â °ÍÀ» ½È¾îÇÑ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ½Å¾Ó½ÉÀº ÀüÅõ¿¡¼­ ½Â¸®ÇÏ´Â °ÍÀ¸·Î ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("ìœ ìš°ê¸°ëŠ” ì§€í•˜ì˜ ì˜›ë„ì‹œì— ì‚´ê³  ìˆëŠ” ì˜¤ë‹ˆì´ë‹¤. ìœ ìš°ê¸°ëŠ” ê´´ë ¥ë‚œì‹ ì˜ ì˜¤ë‹ˆë¡œ ê°•ë ¥í•œ í˜ì„ ì‹ ë„ì—ê²Œ ì¤€ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ í˜ì€ ê·¼ì ‘ ì „íˆ¬ë¥¼ í•˜ë©´ì„œ ìƒëŒ€ë¥¼ ë§¤ì¹˜ê±°ë‚˜ ì§‘ì–´ë˜ì§€ëŠ” ë“± ë ˆìŠ¬ë§ê°™ì€ ì „íˆ¬ë¥¼ í•´ë‚¼ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ë˜í•œ ì˜¤ë‹ˆì˜ í˜ìœ¼ë¡œ í¬íš¨ë¥¼ í•˜ì—¬ ìƒëŒ€ë¥¼ ë²™ì–´ë¦¬ë¡œ ë§Œë“¤ê±°ë‚˜ ì˜¤ë‹ˆì˜ ê¶ê·¹ê¸° ë˜í•œ ì‚¬ìš©í•  ìˆ˜ ìˆê²Œ ëœë‹¤.",true,CL_normal);
+		printsub("ë‹¨, ìœ ìš°ê¸°ëŠ” ì‹ ë„ê°€ ë§ˆë²•ì˜ í˜ì— ì˜ì§€í•´ ì‹¸ìš°ëŠ” ê²ƒì„ ì‹«ì–´í•œë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ì‹ ì•™ì‹¬ì€ ì „íˆ¬ì—ì„œ ìŠ¹ë¦¬í•˜ëŠ” ê²ƒìœ¼ë¡œ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_TENSI:
-		printsub("È÷³ª³ªÀÌ ÅÙ½Ã - ºñ»óºñºñ»óÃµÀÇ ¾Æ°¡¾¾",true,CL_tensi);
+		printsub("íˆë‚˜ë‚˜ì´ í…ì‹œ - ë¹„ìƒë¹„ë¹„ìƒì²œì˜ ì•„ê°€ì”¨",true,CL_tensi);
 		printsub("",true,CL_normal);
-		printsub("ÅÙ½Ã´Â À¯Á¤ÃµÀÇ Á¦¸Ú´ë·ÎÀÎ ÃµÀÎ ¾Æ°¡¾¾ÀÌ´Ù.",true,CL_normal);
-		printsub("±×³à´Â Áö·çÇÑ Ãµ°è»ıÈ°¿¡ µûºĞÇØÇÏ´øÂ÷ ÀÌ ÀÌº¯À» °è±â·Î ÀÚ½ÅÀ» ¹Ï°íÀÚÇÏ´Â ½ÅµµµéÀ» Àå³­°¨Ã³·³ Ãë±ŞÇÑ´Ù.",true,CL_normal);
-		printsub("ÅÙ½Ã´Â ½Åµµ¿¡°Ô ¾î¶°ÇÑ ±Ç´Éµµ ³»·ÁÁÖÁö¾Ê´Â´Ù. ¸ğµç Çàµ¿Àº ±×³àÀÇ º¯´ö´ë·Î ÀÌ·ç¾îÁø´Ù. ",true,CL_normal);
-		printsub("½Åµµ°¡ Ç×»ó À§ÇèÃµ¸¸ÇÑ ÀüÅõ¸¦ ¹İº¹ÇÏ¿© ±×³àÀÇ Èï¹Ì¸¦ ÃÖ´ëÇÑÀ¸·Î ²ø¾î³½´Ù¸é °­·ÂÇÑ µµ¿òÀ» ¹ŞÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("ÇÏÁö¸¸ ½Åµµ°¡ ¾ÈÀÌÇÑ ¾ÈÀüÀ» ¹Ù¶õ´Ù¸é °ğ ÀÚ½ÅÀÇ »ı°¢À» ÈÄÈ¸ÇÏ°Ô µÉ °ÍÀÌ´Ù.",true,CL_normal);
+		printsub("í…ì‹œëŠ” ìœ ì •ì²œì˜ ì œë©‹ëŒ€ë¡œì¸ ì²œì¸ ì•„ê°€ì”¨ì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì§€ë£¨í•œ ì²œê³„ìƒí™œì— ë”°ë¶„í•´í•˜ë˜ì°¨ ì´ ì´ë³€ì„ ê³„ê¸°ë¡œ ìì‹ ì„ ë¯¿ê³ ìí•˜ëŠ” ì‹ ë„ë“¤ì„ ì¥ë‚œê°ì²˜ëŸ¼ ì·¨ê¸‰í•œë‹¤.",true,CL_normal);
+		printsub("í…ì‹œëŠ” ì‹ ë„ì—ê²Œ ì–´ë– í•œ ê¶ŒëŠ¥ë„ ë‚´ë ¤ì£¼ì§€ì•ŠëŠ”ë‹¤. ëª¨ë“  í–‰ë™ì€ ê·¸ë…€ì˜ ë³€ë•ëŒ€ë¡œ ì´ë£¨ì–´ì§„ë‹¤. ",true,CL_normal);
+		printsub("ì‹ ë„ê°€ í•­ìƒ ìœ„í—˜ì²œë§Œí•œ ì „íˆ¬ë¥¼ ë°˜ë³µí•˜ì—¬ ê·¸ë…€ì˜ í¥ë¯¸ë¥¼ ìµœëŒ€í•œìœ¼ë¡œ ëŒì–´ë‚¸ë‹¤ë©´ ê°•ë ¥í•œ ë„ì›€ì„ ë°›ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("í•˜ì§€ë§Œ ì‹ ë„ê°€ ì•ˆì´í•œ ì•ˆì „ì„ ë°”ë€ë‹¤ë©´ ê³§ ìì‹ ì˜ ìƒê°ì„ í›„íšŒí•˜ê²Œ ë  ê²ƒì´ë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_BYAKUREN:
-		printsub("È÷Áö¸® ¹òÄí·» - ºÀÀÎµÈ ´ë¸¶¹ı»ç",true,CL_white_blue);
+		printsub("íˆì§€ë¦¬ ë±Œì¿ ë Œ - ë´‰ì¸ëœ ëŒ€ë§ˆë²•ì‚¬",true,CL_white_blue);
 		printsub("",true,CL_normal);
-		printsub("¹òÄí·»Àº ¸¶°è¿¡ ºÀÀÎµÇ¾îÀÖ¾ú´ø ´ë¸¶¹ı»ç·Î È¯»óÇâ¿¡ ÀıÀÎ ¸í·Ã»ç¸¦ ¼¼¿ö ºÒ±³ÀÇ °¡¸£Ä§À» ÀüÇÑ´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ Æ¯±â´Â ¸¶¹ı(Æ¯È÷ ½ÅÃ¼´É·ÂÀ» ¿Ã¸®´Â ¸¶¹ı)ÀÌ¹Ç·Î ½ÅÀÚµé¿¡°Ô ¸¶¹ıÀ» ÁÖ·Î °¡¸£Ä£´Ù.",true,CL_normal);
-		printsub("±×³àÀÇ ±Ç´ÉÀ¸·Î ³ôÀº ¼öÁØÀÇ Áö´ÉÀ» ¾ò°Å³ª ºü¸¥ ÀÌµ¿ÀÌ °¡´ÉÇÏ°Å³ª ¸¶¹ıÆĞ³ÎÆ¼¸¦ »ó¼â¹Ş´Â´Ù.",true,CL_normal);
-		printsub("½Åµµ´Â ¸¸³ªº¸Áö¸øÇÑ »õ·Î¿î »ç¶÷µéÀ» ¸¸³ª´Â °ÍÀ¸·Î ½Å¾Ó½ÉÀ» ¾òÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
+		printsub("ë±Œì¿ ë Œì€ ë§ˆê³„ì— ë´‰ì¸ë˜ì–´ìˆì—ˆë˜ ëŒ€ë§ˆë²•ì‚¬ë¡œ í™˜ìƒí–¥ì— ì ˆì¸ ëª…ë ¨ì‚¬ë¥¼ ì„¸ì›Œ ë¶ˆêµì˜ ê°€ë¥´ì¹¨ì„ ì „í•œë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ íŠ¹ê¸°ëŠ” ë§ˆë²•(íŠ¹íˆ ì‹ ì²´ëŠ¥ë ¥ì„ ì˜¬ë¦¬ëŠ” ë§ˆë²•)ì´ë¯€ë¡œ ì‹ ìë“¤ì—ê²Œ ë§ˆë²•ì„ ì£¼ë¡œ ê°€ë¥´ì¹œë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ì˜ ê¶ŒëŠ¥ìœ¼ë¡œ ë†’ì€ ìˆ˜ì¤€ì˜ ì§€ëŠ¥ì„ ì–»ê±°ë‚˜ ë¹ ë¥¸ ì´ë™ì´ ê°€ëŠ¥í•˜ê±°ë‚˜ ë§ˆë²•íŒ¨ë„í‹°ë¥¼ ìƒì‡„ë°›ëŠ”ë‹¤.",true,CL_normal);
+		printsub("ì‹ ë„ëŠ” ë§Œë‚˜ë³´ì§€ëª»í•œ ìƒˆë¡œìš´ ì‚¬ëŒë“¤ì„ ë§Œë‚˜ëŠ” ê²ƒìœ¼ë¡œ ì‹ ì•™ì‹¬ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_SEIJA:
-		printsub("Å°Áø ¼¼ÀÌÀÚ - ¿ª½ÀÀÇ ¾Æ¸¶³ëÀÚÄí",true,CL_seija);
+		printsub("í‚¤ì§„ ì„¸ì´ì - ì—­ìŠµì˜ ì•„ë§ˆë…¸ìì¿ ",true,CL_seija);
 		printsub("",true,CL_normal);
-		printsub("¼¼ÀÌÀÚ´Â °ø°³¼ö¹èµÇ¾îÀÖ´Â ¾Æ¸¶³ëÀÚÄí·Î ´Ù¾çÇÑ ¹°°ÇµéÀ» µé°í µµ¸ÁÁßÀÌ´Ù.",true,CL_normal);
-		printsub("¼¼ÀÌÀÚ¿Í ¼ÕÀ» Àâ´Â °ÍÀ¸·Î ±×³à°¡ ÈÉÄ£ °­·ÂÇÑ ¾ÆÀÌÅÛµéÀ» ¼±¹° ¹ŞÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("ÇöÀç ±ÃÁö¿¡ ¸ô¸° ±×³à´Â ¼¼ÀÌÀÚ´Â ´ç½ÅÀÌ ÇÑÆíÀÌ µÇ´Â °Í ÀÚÃ¼¸¦ ÃÖ°í·Î È¯¿µÇÒ °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("±×·¯³ª ¼¼ÀÌÀÚ´Â ¾îµğ±îÁö³ª ½Åµµ¸¦ ÀÌ¿ëÇÒ »ı°¢ÀÌ¹Ç·Î ´ç½ÅÀ» ¹æÆĞ·Î »ïÀ» °ÍÀÌ°í",true,CL_normal);
-		printsub("±×³à´Â ´ç½ÅÀÌ ÀÌ¿ë°¡Ä¡°¡ ¾ø¾îÁö¸é ¾ğÁ¦µçÁö ¹ö¸± °ÍÀÌ¸ç ±×³à¸¦ ¹ÏÀ¸¸é ¿µ¿øÈ÷ ´Ù¸¥ ½ÅµéÀÇ ÁúÅ¸¸¦ ¹ŞÀ» °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("±×³à´Â ÀÇ½ÉÀÌ ¸¹°í °­ÀÚ¸¦ ½È¾îÇÏ¹Ç·Î ·¹º§ÀÌ 9¸¦ ³Ñ¾î°¡¸é ´õÀÌ»ó ±×³à¸¦ ¹ÏÀ» ¼ö ¾ø°Ô µÈ´Ù.",true,CL_normal);
+		printsub("ì„¸ì´ìëŠ” ê³µê°œìˆ˜ë°°ë˜ì–´ìˆëŠ” ì•„ë§ˆë…¸ìì¿ ë¡œ ë‹¤ì–‘í•œ ë¬¼ê±´ë“¤ì„ ë“¤ê³  ë„ë§ì¤‘ì´ë‹¤.",true,CL_normal);
+		printsub("ì„¸ì´ìì™€ ì†ì„ ì¡ëŠ” ê²ƒìœ¼ë¡œ ê·¸ë…€ê°€ í›”ì¹œ ê°•ë ¥í•œ ì•„ì´í…œë“¤ì„ ì„ ë¬¼ ë°›ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("í˜„ì¬ ê¶ì§€ì— ëª°ë¦° ê·¸ë…€ëŠ” ì„¸ì´ìëŠ” ë‹¹ì‹ ì´ í•œí¸ì´ ë˜ëŠ” ê²ƒ ìì²´ë¥¼ ìµœê³ ë¡œ í™˜ì˜í•  ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ëŸ¬ë‚˜ ì„¸ì´ìëŠ” ì–´ë””ê¹Œì§€ë‚˜ ì‹ ë„ë¥¼ ì´ìš©í•  ìƒê°ì´ë¯€ë¡œ ë‹¹ì‹ ì„ ë°©íŒ¨ë¡œ ì‚¼ì„ ê²ƒì´ê³ ",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ë‹¹ì‹ ì´ ì´ìš©ê°€ì¹˜ê°€ ì—†ì–´ì§€ë©´ ì–¸ì œë“ ì§€ ë²„ë¦´ ê²ƒì´ë©° ê·¸ë…€ë¥¼ ë¯¿ìœ¼ë©´ ì˜ì›íˆ ë‹¤ë¥¸ ì‹ ë“¤ì˜ ì§ˆíƒ€ë¥¼ ë°›ì„ ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì˜ì‹¬ì´ ë§ê³  ê°•ìë¥¼ ì‹«ì–´í•˜ë¯€ë¡œ ë ˆë²¨ì´ 9ë¥¼ ë„˜ì–´ê°€ë©´ ë”ì´ìƒ ê·¸ë…€ë¥¼ ë¯¿ì„ ìˆ˜ ì—†ê²Œ ëœë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_LILLY:
-		printsub("¸±¸® È­ÀÌÆ® - º½À» ³ª¸£´Â ¿äÁ¤",true,CL_lilly);
+		printsub("ë¦´ë¦¬ í™”ì´íŠ¸ - ë´„ì„ ë‚˜ë¥´ëŠ” ìš”ì •",true,CL_lilly);
 		printsub("",true,CL_lilly);
-		printsub("¸±¸® È­ÀÌÆ®´Â º½À» ¾Ë¸®´Â ¿äÁ¤À¸·Î Áö³ª°¡´Â °Í¸¸À¸·Îµµ º½²ÉÀ» °³È­½ÃÅ²´Ù°íÇÑ´Ù.",true,CL_normal);
-		printsub("±×³à´Â ¿äÁ¤ÀÇ ±Ç¸®¸¦ ½ÅÀå½ÃÅ°±â À§ÇØ ¿äÁ¤µé¿¡°Ô ÀÚ½ÅÀÇ ÈûÀ» ³ª´²ÁÖ°íÀÖ´Ù.",true,CL_normal);
-		printsub("±×³à¸¦ ¹Ï´Â °ÍÀ¸·Î ¶°µ¹ÀÌ ¿äÁ¤µéÀ» ÀÚ½ÅÀÇ µ¿·á·Î ²ø¾î¸ğÀ» ¼ö ÀÖ´Ù.",true,CL_normal);
-		printsub("µ¿·á°¡ µÈ ¿äÁ¤Àº ´ç½ÅÀÌ Á×À»¶§±îÁö Á×¾îµµ µÇ»ì¾Æ³ª¸é¼­ ´ç½ÅÀ» µû¸¦ °ÍÀÌ´Ù.",true,CL_normal);
-		printsub("´ç½ÅÀº ¾òÀº °æÇèÄ¡¸¦ ÀÏºÎ¸¦ µ¿·á ¿äÁ¤µé¿¡ ³ª´²Áà¾ßÇÏ¸ç °æÇèÄ¡¸¦ ¹ŞÀº ¿äÁ¤µéÀº ´ç½Å°ú ÇÔ²² ¼ºÀåÇÑ´Ù. ",true,CL_normal);
-		printsub("º»·¡ ¸±¸®È­ÀÌÆ®´Â ¿äÁ¤¸¸ÀÇ ½ÅÀÌÁö¸¸ ÀÚ¹ßÀûÀÎ ´Ù¸¥ Á¾Á·ÀÇ ÀÔ±³´Â °ÅºÎÇÏÁö¾Ê´Â´Ù.",true,CL_normal);
-		printsub("¸±¸®È­ÀÌÆ®´Â ÀÌ ¼¼»óÀ» Å½ÇèÇÏ´Â °ÍÀ» ÁÁ¾ÆÇÑ´Ù.",true,CL_normal);
+		printsub("ë¦´ë¦¬ í™”ì´íŠ¸ëŠ” ë´„ì„ ì•Œë¦¬ëŠ” ìš”ì •ìœ¼ë¡œ ì§€ë‚˜ê°€ëŠ” ê²ƒë§Œìœ¼ë¡œë„ ë´„ê½ƒì„ ê°œí™”ì‹œí‚¨ë‹¤ê³ í•œë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ëŠ” ìš”ì •ì˜ ê¶Œë¦¬ë¥¼ ì‹ ì¥ì‹œí‚¤ê¸° ìœ„í•´ ìš”ì •ë“¤ì—ê²Œ ìì‹ ì˜ í˜ì„ ë‚˜ëˆ ì£¼ê³ ìˆë‹¤.",true,CL_normal);
+		printsub("ê·¸ë…€ë¥¼ ë¯¿ëŠ” ê²ƒìœ¼ë¡œ ë– ëŒì´ ìš”ì •ë“¤ì„ ìì‹ ì˜ ë™ë£Œë¡œ ëŒì–´ëª¨ì„ ìˆ˜ ìˆë‹¤.",true,CL_normal);
+		printsub("ë™ë£Œê°€ ëœ ìš”ì •ì€ ë‹¹ì‹ ì´ ì£½ì„ë•Œê¹Œì§€ ì£½ì–´ë„ ë˜ì‚´ì•„ë‚˜ë©´ì„œ ë‹¹ì‹ ì„ ë”°ë¥¼ ê²ƒì´ë‹¤.",true,CL_normal);
+		printsub("ë‹¹ì‹ ì€ ì–»ì€ ê²½í—˜ì¹˜ë¥¼ ì¼ë¶€ë¥¼ ë™ë£Œ ìš”ì •ë“¤ì— ë‚˜ëˆ ì¤˜ì•¼í•˜ë©° ê²½í—˜ì¹˜ë¥¼ ë°›ì€ ìš”ì •ë“¤ì€ ë‹¹ì‹ ê³¼ í•¨ê»˜ ì„±ì¥í•œë‹¤. ",true,CL_normal);
+		printsub("ë³¸ë˜ ë¦´ë¦¬í™”ì´íŠ¸ëŠ” ìš”ì •ë§Œì˜ ì‹ ì´ì§€ë§Œ ìë°œì ì¸ ë‹¤ë¥¸ ì¢…ì¡±ì˜ ì…êµëŠ” ê±°ë¶€í•˜ì§€ì•ŠëŠ”ë‹¤.",true,CL_normal);
+		printsub("ë¦´ë¦¬í™”ì´íŠ¸ëŠ” ì´ ì„¸ìƒì„ íƒí—˜í•˜ëŠ” ê²ƒì„ ì¢‹ì•„í•œë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
 		break;
 	case GT_MIKO:
-		printsub("Åä¿ä»çÅä¹Ì¹Ì³ë ¹ÌÄÚ - ¿ìÁÖ¸¦ °üÀåÇÏ´Â Àü´É µµ»ç", true, CL_miko);
+		printsub("í† ìš”ì‚¬í† ë¯¸ë¯¸ë…¸ ë¯¸ì½” - ìš°ì£¼ë¥¼ ê´€ì¥í•˜ëŠ” ì „ëŠ¥ ë„ì‚¬", true, CL_miko);
 		printsub("", true, CL_miko);
-		printsub("Åä¿ä»çÅä¹Ì¹Ì³ë ¹ÌÄÚ´Â ¸ùÀü´ë»ç¹¦ÀÇ ¼ºÀÎÀ¸·Î ¿å¸ÁÀ» ÀĞ´Â ´É·ÂÀ» Áö³æ´Ù.", true, CL_normal);
-		printsub("±×³à¸¦ ¹Ï´Â ½Åµµ´Â ½Å¾Ó½ÉÀÌ ¾Æ´Ñ ÀÎ±âµµ¸¦ ÀÚ¿øÀ¸·Î »ç¿ëÇÏ°ÔµÈ´Ù.", true, CL_normal);
-		printsub("ÀÎ±âµµ´Â ºü¸¥ ¼Óµµ·Î ¿À¸£¸ç ÀûµéÀÇ ¿å¸ÁÀ» ÀĞ°Å³ª Á×ÀÓÀ¸·Î¼­ ÀÎ±âµµ¸¦ ¸ğÀ» ¼ö ÀÖÁö¸¸", true, CL_normal);
-		printsub("ÃşÀ» ¿Ã¶ó°¡°Å³ª ¼­ºê´øÀüÀÌ ¹Ù²î¸é ÀÎ±âµµ°¡ ¶³¾îÁö¸ç ±Ç´ÉÀº ÀÎ±âµµ¸¦ Å©°Ô ¼Ò¸ğÇÏ°Ô µÈ´Ù.", true, CL_normal);
-		printsub("¹ÌÄÚÀÇ ±Ç´ÉÀÎ µµ¼úÀº ¹İ¿µ±¸ÀûÀÌ¸ç Áö¼Ó½Ã°£¾øÀÌ À¯ÁöµÇÁö¸¸ ÃşÀ» ÀÌµ¿ÇÒ °æ¿ì »ç¶óÁø´Ù.", true, CL_normal);
+		printsub("í† ìš”ì‚¬í† ë¯¸ë¯¸ë…¸ ë¯¸ì½”ëŠ” ëª½ì „ëŒ€ì‚¬ë¬˜ì˜ ì„±ì¸ìœ¼ë¡œ ìš•ë§ì„ ì½ëŠ” ëŠ¥ë ¥ì„ ì§€ë…”ë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ë¥¼ ë¯¿ëŠ” ì‹ ë„ëŠ” ì‹ ì•™ì‹¬ì´ ì•„ë‹Œ ì¸ê¸°ë„ë¥¼ ìì›ìœ¼ë¡œ ì‚¬ìš©í•˜ê²Œëœë‹¤.", true, CL_normal);
+		printsub("ì¸ê¸°ë„ëŠ” ë¹ ë¥¸ ì†ë„ë¡œ ì˜¤ë¥´ë©° ì ë“¤ì˜ ìš•ë§ì„ ì½ê±°ë‚˜ ì£½ì„ìœ¼ë¡œì„œ ì¸ê¸°ë„ë¥¼ ëª¨ì„ ìˆ˜ ìˆì§€ë§Œ", true, CL_normal);
+		printsub("ì¸µì„ ì˜¬ë¼ê°€ê±°ë‚˜ ì„œë¸Œë˜ì „ì´ ë°”ë€Œë©´ ì¸ê¸°ë„ê°€ ë–¨ì–´ì§€ë©° ê¶ŒëŠ¥ì€ ì¸ê¸°ë„ë¥¼ í¬ê²Œ ì†Œëª¨í•˜ê²Œ ëœë‹¤.", true, CL_normal);
+		printsub("ë¯¸ì½”ì˜ ê¶ŒëŠ¥ì¸ ë„ìˆ ì€ ë°˜ì˜êµ¬ì ì´ë©° ì§€ì†ì‹œê°„ì—†ì´ ìœ ì§€ë˜ì§€ë§Œ ì¸µì„ ì´ë™í•  ê²½ìš° ì‚¬ë¼ì§„ë‹¤.", true, CL_normal);
 		printsub("", true, CL_miko);
 		break;
 	case GT_OKINA:
-		printsub("¸¶Å¸¶ó ¿ÀÅ°³ª - ±Ã±ØÀÇ Àı´ëºñ½Å", true, CL_okina);
+		printsub("ë§ˆíƒ€ë¼ ì˜¤í‚¤ë‚˜ - ê¶ê·¹ì˜ ì ˆëŒ€ë¹„ì‹ ", true, CL_okina);
 		printsub("", true, CL_okina);
-		printsub("¸¶Å¸¶ó ¿ÀÅ°³ª´Â ¹èÈÄ¿¡ ¼û¾îÀÖ´Â ºñ½ÅÀ¸·Î ÀÚ¼¼ÇÑ Á¤Ã¼´Â ¾Ë·ÁÁ®ÀÖÁö¾Ê´Ù.", true, CL_normal);
-		printsub("±×³à´Â ÀÚ½ÅÀÇ ÀÏÀ» ¸Ã±æ ºÎÇÏ¸¦ Ã£°íÀÖÀ¸¸ç, ´ç½ÅÀÌ ±× ÀÏÀ» ÇÒ¼öµµ ÀÖ´Ù.", true, CL_normal);
-		printsub("±×³àÀÇ ½Åµµ°¡ µÇ´Â °ÍÀ¸·Î ±×³àÀÇ ¹®À» ¸¸µå´Â ÈûÀ» ÀÌ¿ëÇÑ ±Ç´ÉÀ» ¹ŞÀ» ¼ö ÀÖ´Ù.", true, CL_normal);
-		printsub("¹®À» ÀÚÀ¯ÀÚÀç·Î Å¸°í´Ù´Ò¼öµµÀÖ°í, ÀûÀÇ µîµÚ¿¡¼­ °©ÀÚ±â µîÀåÇÒ¼öµµ ÀÖ´Ù.", true, CL_normal);
-		printsub("¶ÇÇÑ ´Ù¸¥ µ¿·áµéÀ» ºÎ¸£´Â °ÍÀ¸·Î »ı¸í·Â°ú Á¤½Å·ÂÀ» ²ø¾î¿Ã¸±¼öµµ ÀÖ´Ù.", true, CL_normal);
-		printsub("±×³à´Â ÀüÅõ¿¡¼­ ½Â¸®ÇÏ¿© ½ÅÀÇ Á¸Àç°¨À» ³Î¸® ¾Ë¸®´Â °ÍÀ» ÁÁ¾ÆÇÑ´Ù.", true, CL_normal);
+		printsub("ë§ˆíƒ€ë¼ ì˜¤í‚¤ë‚˜ëŠ” ë°°í›„ì— ìˆ¨ì–´ìˆëŠ” ë¹„ì‹ ìœ¼ë¡œ ìì„¸í•œ ì •ì²´ëŠ” ì•Œë ¤ì ¸ìˆì§€ì•Šë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ëŠ” ìì‹ ì˜ ì¼ì„ ë§¡ê¸¸ ë¶€í•˜ë¥¼ ì°¾ê³ ìˆìœ¼ë©°, ë‹¹ì‹ ì´ ê·¸ ì¼ì„ í• ìˆ˜ë„ ìˆë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ì˜ ì‹ ë„ê°€ ë˜ëŠ” ê²ƒìœ¼ë¡œ ê·¸ë…€ì˜ ë¬¸ì„ ë§Œë“œëŠ” í˜ì„ ì´ìš©í•œ ê¶ŒëŠ¥ì„ ë°›ì„ ìˆ˜ ìˆë‹¤.", true, CL_normal);
+		printsub("ë¬¸ì„ ììœ ìì¬ë¡œ íƒ€ê³ ë‹¤ë‹ìˆ˜ë„ìˆê³ , ì ì˜ ë“±ë’¤ì—ì„œ ê°‘ìê¸° ë“±ì¥í• ìˆ˜ë„ ìˆë‹¤.", true, CL_normal);
+		printsub("ë˜í•œ ë‹¤ë¥¸ ë™ë£Œë“¤ì„ ë¶€ë¥´ëŠ” ê²ƒìœ¼ë¡œ ìƒëª…ë ¥ê³¼ ì •ì‹ ë ¥ì„ ëŒì–´ì˜¬ë¦´ìˆ˜ë„ ìˆë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì „íˆ¬ì—ì„œ ìŠ¹ë¦¬í•˜ì—¬ ì‹ ì˜ ì¡´ì¬ê°ì„ ë„ë¦¬ ì•Œë¦¬ëŠ” ê²ƒì„ ì¢‹ì•„í•œë‹¤.", true, CL_normal);
 		printsub("", true, CL_okina);
 		break;
 	case GT_JUNKO:
-		printsub("¼øÈ£", true, CL_junko);
+		printsub("ìˆœí˜¸", true, CL_junko);
 		printsub("", true, CL_junko);
-		printsub("¼øÈ£´Â ¿øÇÑÀÌ ¼øÈ­µÈ ½Å·ÉÀ¸·Î ÀÚ½ÅÀÇ ¿øÇÑÀ» °±±âÀ§ÇØ ½Åµµ¸¦ ¸ğÁıÇÏ°í ÀÖ´Ù.", true, CL_normal);
-		printsub("±×³àÀÇ ½Åµµ°¡ µÈ´Ù¸é ´Ü¼øÇÏÁö¸¸ °­·ÂÇÑ ¼øÈ­ÀÇ ´É·ÂÀ» ¹ŞÀ» ¼ö ÀÖ´Ù.", true, CL_normal);
-		printsub("±×³àÀÇ ±Ç´ÉÀº ½Å¾Ó½Éµµ ¼Ò¸ğÇÏÁö¾ÊÁö¸¸ »ç¿ëÇÏ°ÔµÇ¸é ÀÏ½ÃÀûÀ¸·Î ¼øÈ­»óÅÂ¿¡ ºüÁö°í", true, CL_normal);
-		printsub("¼øÈ­ ´Ü°è°¡ ¿Ã¶ó°¥¼ö·Ï ¼Ò¸ğÇ°ÀÇ »ç¿ë¿¡ Á¦ÇÑµÇ´Â ÆĞ³ÎÆ¼°¡ »ı±ä´Ù.", true, CL_normal);
-		printsub("±âº»ÀûÀ¸·Î ±Ç´É¿¡ ÀÇÇÑ ¼øÈ­»óÅÂ´Â ½Ã°£ÀÌ Áö³ª¸é µ¹¾Æ¿ÀÁö¸¸ ¼øÈ£°¡ ¾Æ³¢´Â ½Åµµ¿¡°Ô´Â ¿µ±¸ÀûÀÎ ¼øÈ­¸¦ ³»¸± ¼ö ÀÖ´Ù.", true, CL_normal);
-		printsub("±×³àÀÇ Ãàº¹Àº ³Ê¹« ¹«°Ì±â¿¡ ÆĞ³ÎÆ¼µµ Å©°í ¹è½ÅÁ¶Â÷ Çã¿ëµÇÁö¾ÊÁö¸¸ ±×¿¡ ºñ°ßÇÒ¸¸ÇÑ »õ·Î¿î Ãàº¹ÀÌ ³»·ÁÁø´Ù.", true, CL_normal);
-		printsub("±×³à´Â ¿øÇÑÀ» °±±âÀ§ÇØ º¸ÀÌ´Â ÀûÀ» ¸ğÁ¶¸® Á×ÀÌ´Â °ÍÀ» ÁÁ¾ÆÇÑ´Ù.", true, CL_normal);
+		printsub("ìˆœí˜¸ëŠ” ì›í•œì´ ìˆœí™”ëœ ì‹ ë ¹ìœ¼ë¡œ ìì‹ ì˜ ì›í•œì„ ê°šê¸°ìœ„í•´ ì‹ ë„ë¥¼ ëª¨ì§‘í•˜ê³  ìˆë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ì˜ ì‹ ë„ê°€ ëœë‹¤ë©´ ë‹¨ìˆœí•˜ì§€ë§Œ ê°•ë ¥í•œ ìˆœí™”ì˜ ëŠ¥ë ¥ì„ ë°›ì„ ìˆ˜ ìˆë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ì˜ ê¶ŒëŠ¥ì€ ì‹ ì•™ì‹¬ë„ ì†Œëª¨í•˜ì§€ì•Šì§€ë§Œ ì‚¬ìš©í•˜ê²Œë˜ë©´ ì¼ì‹œì ìœ¼ë¡œ ìˆœí™”ìƒíƒœì— ë¹ ì§€ê³ ", true, CL_normal);
+		printsub("ìˆœí™” ë‹¨ê³„ê°€ ì˜¬ë¼ê°ˆìˆ˜ë¡ ì†Œëª¨í’ˆì˜ ì‚¬ìš©ì— ì œí•œë˜ëŠ” íŒ¨ë„í‹°ê°€ ìƒê¸´ë‹¤.", true, CL_normal);
+		printsub("ê¸°ë³¸ì ìœ¼ë¡œ ê¶ŒëŠ¥ì— ì˜í•œ ìˆœí™”ìƒíƒœëŠ” ì‹œê°„ì´ ì§€ë‚˜ë©´ ëŒì•„ì˜¤ì§€ë§Œ ìˆœí˜¸ê°€ ì•„ë¼ëŠ” ì‹ ë„ì—ê²ŒëŠ” ì˜êµ¬ì ì¸ ìˆœí™”ë¥¼ ë‚´ë¦´ ìˆ˜ ìˆë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ì˜ ì¶•ë³µì€ ë„ˆë¬´ ë¬´ê²ê¸°ì— íŒ¨ë„í‹°ë„ í¬ê³  ë°°ì‹ ì¡°ì°¨ í—ˆìš©ë˜ì§€ì•Šì§€ë§Œ ê·¸ì— ë¹„ê²¬í• ë§Œí•œ ìƒˆë¡œìš´ ì¶•ë³µì´ ë‚´ë ¤ì§„ë‹¤.", true, CL_normal);
+		printsub("ê·¸ë…€ëŠ” ì›í•œì„ ê°šê¸°ìœ„í•´ ë³´ì´ëŠ” ì ì„ ëª¨ì¡°ë¦¬ ì£½ì´ëŠ” ê²ƒì„ ì¢‹ì•„í•œë‹¤.", true, CL_normal);
 		break;
 	default:
-		printsub("¹ö±×½Å",true,CL_danger);
+		printsub("ë²„ê·¸ì‹ ",true,CL_danger);
 		printsub("",true,CL_normal);
-		printsub("ÀÌ ½ÅÀº ¹ö±×´Ù!",true,CL_normal);
-		printsub("¹ö±×½ÅÀº °ÔÀÓ ÇÃ·¹ÀÌ¿¡ Áö´ëÇÑ ¿µÇâÀ» ÁÖ¸ç ´ç½Å¿¡°Ô ±íÀº ½ºÆ®·¹½º¸¦ ÁØ´Ù.",true,CL_normal);
-		printsub("ÀÌ ½ÅÀÌ Á¸ÀçÇÏ´Â °Í¸¸À¸·Îµµ °ÔÀÓÀÌ Å©·¡½¬°¡ ³¯ ¼ö ÀÖÀ¸¸ç ´ç½ÅÀÇ Ä³¸¯ÅÍ¸¦ »èÁ¦½ÃÅ³Áöµµ ¸ğ¸¥´Ù.",true,CL_normal);
-		printsub("¹ö±×½ÅÀÇ ºĞ³ë¸¦ °¡¶ó¾ÉÈ÷·Á¸é Á¦ÀÛÀÚ¿¡°Ô º¸°íÇÏ´Â ¼ö ¹Û¿¡ ¾ø´Ù.",true,CL_normal);
+		printsub("ì´ ì‹ ì€ ë²„ê·¸ë‹¤!",true,CL_normal);
+		printsub("ë²„ê·¸ì‹ ì€ ê²Œì„ í”Œë ˆì´ì— ì§€ëŒ€í•œ ì˜í–¥ì„ ì£¼ë©° ë‹¹ì‹ ì—ê²Œ ê¹Šì€ ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ì¤€ë‹¤.",true,CL_normal);
+		printsub("ì´ ì‹ ì´ ì¡´ì¬í•˜ëŠ” ê²ƒë§Œìœ¼ë¡œë„ ê²Œì„ì´ í¬ë˜ì‰¬ê°€ ë‚  ìˆ˜ ìˆìœ¼ë©° ë‹¹ì‹ ì˜ ìºë¦­í„°ë¥¼ ì‚­ì œì‹œí‚¬ì§€ë„ ëª¨ë¥¸ë‹¤.",true,CL_normal);
+		printsub("ë²„ê·¸ì‹ ì˜ ë¶„ë…¸ë¥¼ ê°€ë¼ì•‰íˆë ¤ë©´ ì œì‘ìì—ê²Œ ë³´ê³ í•˜ëŠ” ìˆ˜ ë°–ì— ì—†ë‹¤.",true,CL_normal);
 		printsub("",true,CL_normal);
-		printsub("¹ö±×½ÅÀº µ¿¹æÅ©·Ñ¿¡¼­ °¡Àå ¾ÇÇÑ ½ÅÀÌ´Ù.",true,CL_danger);
+		printsub("ë²„ê·¸ì‹ ì€ ë™ë°©í¬ë¡¤ì—ì„œ ê°€ì¥ ì•…í•œ ì‹ ì´ë‹¤.",true,CL_danger);
 		printsub("",true,CL_normal);
 		break;
 	}
@@ -2571,7 +2571,7 @@ void God_show()
 {
 	if(you.god == GT_NONE)
 	{
-		printlog("´ç½ÅÀº ¾ÆÁ÷ ½ÅÀ» ¹Ï°í ÀÖÁö ¾Ê´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì•„ì§ ì‹ ì„ ë¯¿ê³  ìˆì§€ ì•Šë‹¤.",true,false,false,CL_normal);
 		return;
 	}
 	deletesub();
@@ -2580,7 +2580,7 @@ void God_show()
 	GodInfor(you.god);
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub("±Ç´Éµé:                                                           (ºñ¿ë)",true,CL_normal);
+	printsub("ê¶ŒëŠ¥ë“¤:                                                           (ë¹„ìš©)",true,CL_normal);
 	printsub("",true,CL_normal);
 	int level_ = pietyLevel(you.piety);
 	switch(you.god)
@@ -2592,79 +2592,79 @@ void God_show()
 	case GT_JOON_AND_SION:
 		if (level_ >= 0)
 		{
-			printsub("´ç½ÅÀº ¿ªº´½Å°ú ºó°ï½ÅÀÇ ÀúÁÖ¸¦ ¹Ş°í ÀÖ´Ù.                                            (ÆĞ½Ãºê)", true, CL_joon_and_sion);
+			printsub("ë‹¹ì‹ ì€ ì—­ë³‘ì‹ ê³¼ ë¹ˆê³¤ì‹ ì˜ ì €ì£¼ë¥¼ ë°›ê³  ìˆë‹¤.                                            (íŒ¨ì‹œë¸Œ)", true, CL_joon_and_sion);
 			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
-				printsub(" ¦¦ ´ç½ÅÀº ¼Ò¸ğÇ°À» »ç¿ëÇÒ¶§ °¡²û 2~3°³¸¦ ÇÑ¹ø¿¡ ¼Ò¸ğÇÑ´Ù.", true, CL_joon_and_sion);
+				printsub(" â”” ë‹¹ì‹ ì€ ì†Œëª¨í’ˆì„ ì‚¬ìš©í• ë•Œ ê°€ë” 2~3ê°œë¥¼ í•œë²ˆì— ì†Œëª¨í•œë‹¤.", true, CL_joon_and_sion);
 			}
 			else {
-				printsub(" ¦¦ ´ç½ÅÀº ¼Ò¸ğÇ°À» »ç¿ëÇÒ¶§ ¹«Á¶°Ç 2~3°³¸¦ ÇÑ¹ø¿¡ ¼Ò¸ğÇÑ´Ù. (°­È­µÊ)", true, CL_joon);
+				printsub(" â”” ë‹¹ì‹ ì€ ì†Œëª¨í’ˆì„ ì‚¬ìš©í• ë•Œ ë¬´ì¡°ê±´ 2~3ê°œë¥¼ í•œë²ˆì— ì†Œëª¨í•œë‹¤. (ê°•í™”ë¨)", true, CL_joon);
 			}
 			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
-				printsub(" ¦¦ ÁİÁö¾ÊÀº ¼Ò¸ğÇ°Àº ÃµÃµÈ÷ »ç¶óÁ®°£´Ù. ¼Ò¸ğÇ°À» ¹ö¸®¸é ÀÏÁ¤ È®·ü·Î »ç¶óÁø´Ù.", true, CL_joon_and_sion);
+				printsub(" â”” ì¤ì§€ì•Šì€ ì†Œëª¨í’ˆì€ ì²œì²œíˆ ì‚¬ë¼ì ¸ê°„ë‹¤. ì†Œëª¨í’ˆì„ ë²„ë¦¬ë©´ ì¼ì • í™•ë¥ ë¡œ ì‚¬ë¼ì§„ë‹¤.", true, CL_joon_and_sion);
 			}
 			else {
-				printsub(" ¦¦ ÁİÁö¾ÊÀº ¼Ò¸ğÇ°Àº ºü¸¥ ¼Óµµ·Î »ç¶óÁ®°£´Ù. ¼Ò¸ğÇ°À» ¹ö¸®¸é ¹«Á¶°Ç »ç¶óÁø´Ù. (°­È­µÊ)", true, CL_sion);
+				printsub(" â”” ì¤ì§€ì•Šì€ ì†Œëª¨í’ˆì€ ë¹ ë¥¸ ì†ë„ë¡œ ì‚¬ë¼ì ¸ê°„ë‹¤. ì†Œëª¨í’ˆì„ ë²„ë¦¬ë©´ ë¬´ì¡°ê±´ ì‚¬ë¼ì§„ë‹¤. (ê°•í™”ë¨)", true, CL_sion);
 			}
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_JOON_AND_SION))
 		{
-			printsub("´ç½ÅÀº Àá½Ãµ¿¾È ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀ» ºùÀÇÇÒ ¼ö ÀÖ´Ù.                                       (¾×Æ¼ºê)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
+			printsub("ë‹¹ì‹ ì€ ì ì‹œë™ì•ˆ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì„ ë¹™ì˜í•  ìˆ˜ ìˆë‹¤.                                       (ì•¡í‹°ë¸Œ)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("ÁÒ¿ÂÀÌ ºùÀÇÇÑ µ¿¾È¿£ ¸ğµç µ¥¹ÌÁö°¡ ÁõÆøµÇ¸ç µ¥¹ÌÁö¸¦ ÁÙ¶§¸¶´Ù ÆÄ¿ö°¡ ¼Ò¸ğµÈ´Ù.        (ÆĞ½Ãºê)", true, CL_joon);
+				printsub("ì£ ì˜¨ì´ ë¹™ì˜í•œ ë™ì•ˆì—” ëª¨ë“  ë°ë¯¸ì§€ê°€ ì¦í­ë˜ë©° ë°ë¯¸ì§€ë¥¼ ì¤„ë•Œë§ˆë‹¤ íŒŒì›Œê°€ ì†Œëª¨ëœë‹¤.        (íŒ¨ì‹œë¸Œ)", true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("½Ã¿ÂÀÌ ºùÀÇÇÑ µ¿¾È¿£ ÆÄ¿ö¸¦ ÁÖ¿öµµ ÆÄ¿ö°¡ ¿À¸£Áö ¾Ê´Â ´ë½Å Ã¼·ÂÀ» È¸º¹ÇÑ´Ù.           (ÆĞ½Ãºê)", true, CL_sion);
+				printsub("ì‹œì˜¨ì´ ë¹™ì˜í•œ ë™ì•ˆì—” íŒŒì›Œë¥¼ ì£¼ì›Œë„ íŒŒì›Œê°€ ì˜¤ë¥´ì§€ ì•ŠëŠ” ëŒ€ì‹  ì²´ë ¥ì„ íšŒë³µí•œë‹¤.           (íŒ¨ì‹œë¸Œ)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("ºùÀÇ¸¦ ÇÏ°ÔµÇ¸é ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀÌ ´ç½ÅÀÇ ÆÄ¿ö¸¦ ÀÌ¿ëÇÑ´Ù.                               (ÆĞ½Ãºê)", true, CL_bad);
+				printsub("ë¹™ì˜ë¥¼ í•˜ê²Œë˜ë©´ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì´ ë‹¹ì‹ ì˜ íŒŒì›Œë¥¼ ì´ìš©í•œë‹¤.                               (íŒ¨ì‹œë¸Œ)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 4 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("ÁÒ¿ÂÀÌ ºùÀÇÇÑ µ¿¾È¿£ ¼Ò¸ğÇ°À» ³¶ºñÇÏ¸é ¹«ÀÛÀ§ ¹öÇÁ¸¦ ¾ò´Â´Ù.                          (ÆĞ½Ãºê)", true, CL_joon);
+				printsub("ì£ ì˜¨ì´ ë¹™ì˜í•œ ë™ì•ˆì—” ì†Œëª¨í’ˆì„ ë‚­ë¹„í•˜ë©´ ë¬´ì‘ìœ„ ë²„í”„ë¥¼ ì–»ëŠ”ë‹¤.                          (íŒ¨ì‹œë¸Œ)", true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("½Ã¿ÂÀÌ ºùÀÇÇÑ µ¿¾È¿£ »ç¸Á½Ã ¼Ò¸ğÇ°À» ´ë·®À¸·Î ÀÒ´Â ´ë½Å Á×À½À» ¹«È¿·Î ÇÑ´Ù.           (ÆĞ½Ãºê)", true, CL_sion);
+				printsub("ì‹œì˜¨ì´ ë¹™ì˜í•œ ë™ì•ˆì—” ì‚¬ë§ì‹œ ì†Œëª¨í’ˆì„ ëŒ€ëŸ‰ìœ¼ë¡œ ìƒëŠ” ëŒ€ì‹  ì£½ìŒì„ ë¬´íš¨ë¡œ í•œë‹¤.           (íŒ¨ì‹œë¸Œ)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("ºùÀÇ¸¦ ÇÏ°ÔµÇ¸é ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀÌ ´ç½ÅÀÇ ¼Ò¸ğÇ°À» ÀÌ¿ëÇÑ´Ù.                             (ÆĞ½Ãºê)", true, CL_bad);
+				printsub("ë¹™ì˜ë¥¼ í•˜ê²Œë˜ë©´ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì´ ë‹¹ì‹ ì˜ ì†Œëª¨í’ˆì„ ì´ìš©í•œë‹¤.                             (íŒ¨ì‹œë¸Œ)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("´ç½ÅÀº ½Ã¾ß³» Àû¿¡°Ô È¥¶õ°ú µ¥¹ÌÁö¸¦ ÁÙ ¼ö ÀÖ´Ù.                               (ºùÀÇ½Ã ÇÑ¹ø¸¸)", true, CL_joon);
+				printsub("ë‹¹ì‹ ì€ ì‹œì•¼ë‚´ ì ì—ê²Œ í˜¼ë€ê³¼ ë°ë¯¸ì§€ë¥¼ ì¤„ ìˆ˜ ìˆë‹¤.                               (ë¹™ì˜ì‹œ í•œë²ˆë§Œ)", true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("´ç½ÅÀº ½Ã¾ß³» Àû¿¡°Ô °¨¼ÓÀ» °Ç ÈÄ¿¡ ½Ã¾ß¸¦ °¡¸®´Â ¾È°³¸¦ »Ñ¸± ¼ö ÀÖ´Ù.         (ºùÀÇ½Ã ÇÑ¹ø¸¸)", true, CL_sion);
+				printsub("ë‹¹ì‹ ì€ ì‹œì•¼ë‚´ ì ì—ê²Œ ê°ì†ì„ ê±´ í›„ì— ì‹œì•¼ë¥¼ ê°€ë¦¬ëŠ” ì•ˆê°œë¥¼ ë¿Œë¦´ ìˆ˜ ìˆë‹¤.         (ë¹™ì˜ì‹œ í•œë²ˆë§Œ)", true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("ºùÀÇ¸¦ ÇÏ°ÔµÇ¸é ÁÒ¿ÂÀÌ³ª ½Ã¿ÂÀÇ ¹üÀ§ ±Ç´ÉÀ» »ç¿ëÇÒ ¼ö ÀÖ´Ù.                    (ºùÀÇ½Ã ÇÑ¹ø¸¸)", true, CL_bad);
+				printsub("ë¹™ì˜ë¥¼ í•˜ê²Œë˜ë©´ ì£ ì˜¨ì´ë‚˜ ì‹œì˜¨ì˜ ë²”ìœ„ ê¶ŒëŠ¥ì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.                    (ë¹™ì˜ì‹œ í•œë²ˆë§Œ)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] != 0) {
-				printsub("´ç½ÅÀº ºó°ï½ÅÀ» »ó´ë¿¡ ºùÀÇ½ÃÅ°´Â ÇÊ½ÂÀÇ Àü·«À» »ç¿ëÇÒ ¼ö ÀÖ´Ù.                         (½Å¾Ó)", true, CL_joon_and_sion);
+				printsub("ë‹¹ì‹ ì€ ë¹ˆê³¤ì‹ ì„ ìƒëŒ€ì— ë¹™ì˜ì‹œí‚¤ëŠ” í•„ìŠ¹ì˜ ì „ëµì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.                         (ì‹ ì•™)", true, CL_joon_and_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("ºùÀÇ¸¦ ÇÏ°ÔµÇ¸é ÃÖÈäÃÖ¾ÇÀÇ Àü·«À» »ç¿ëÇÒ ¼ö ÀÖ´Ù.                                       (½Å¾Ó)", true, CL_bad);
+				printsub("ë¹™ì˜ë¥¼ í•˜ê²Œë˜ë©´ ìµœí‰ìµœì•…ì˜ ì „ëµì„ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.                                       (ì‹ ì•™)", true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
@@ -2672,44 +2672,44 @@ void God_show()
 	case GT_BYAKUREN:
 		if(level_ >= 1 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("È÷Áö¸®´Â ´ç½ÅÀÌ ¹è¿ï ¼ö ÀÖ´Â ¸¶¹ı·¹º§ÀÇ ÇÑ°è¸¦ ´Ã¸°´Ù.                     (ÆĞ½Ãºê)",true,CL_white_blue);
+			printsub("íˆì§€ë¦¬ëŠ” ë‹¹ì‹ ì´ ë°°ìš¸ ìˆ˜ ìˆëŠ” ë§ˆë²•ë ˆë²¨ì˜ í•œê³„ë¥¼ ëŠ˜ë¦°ë‹¤.                     (íŒ¨ì‹œë¸Œ)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("´ç½ÅÀº ¼ø°£ÀûÀ¸·Î Áö´ÉÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù.                                   (½Å¾Ó)",true,CL_white_blue);
+			printsub("ë‹¹ì‹ ì€ ìˆœê°„ì ìœ¼ë¡œ ì§€ëŠ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤.                                   (ì‹ ì•™)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("´ç½ÅÀº ±Ù·ÂÀÌ °­È­µÇ¾î ³·Àº ¼öÁØÀÇ °©¿ÊÆĞ³ÎÆ¼ÀÇ ¸¶¹ı½ÇÆĞÀ²À» ¹«½ÃÇÑ´Ù.     (ÆĞ½Ãºê)",true,CL_white_blue);
+			printsub("ë‹¹ì‹ ì€ ê·¼ë ¥ì´ ê°•í™”ë˜ì–´ ë‚®ì€ ìˆ˜ì¤€ì˜ ê°‘ì˜·íŒ¨ë„í‹°ì˜ ë§ˆë²•ì‹¤íŒ¨ìœ¨ì„ ë¬´ì‹œí•œë‹¤.     (íŒ¨ì‹œë¸Œ)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("È÷Áö¸®´Â ´ç½ÅÀÇ °­È­ ¸¶¹ıµéÀ» º¸Á¶ÇØÁØ´Ù.                                  (ÆĞ½Ãºê)",true,CL_white_blue);
+			printsub("íˆì§€ë¦¬ëŠ” ë‹¹ì‹ ì˜ ê°•í™” ë§ˆë²•ë“¤ì„ ë³´ì¡°í•´ì¤€ë‹¤.                                  (íŒ¨ì‹œë¸Œ)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("´ç½ÅÀº ¼ø°£ÀûÀ¸·Î °¢·ÂÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù.                             (¿µ·Â, ½Å¾Ó)",true,CL_white_blue);
+			printsub("ë‹¹ì‹ ì€ ìˆœê°„ì ìœ¼ë¡œ ê°ë ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤.                             (ì˜ë ¥, ì‹ ì•™)",true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_KANAKO:
 		if(level_ >= 1 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("´ç½ÅÀº Ä«³ªÄÚ´ÔÀÇ ÈûÀ¸·Î µ¹ÁøÇÒ ¼ö ÀÖ´Ù.                    (¿µ·Â, ½Å¾Ó)",true,CL_help);
+			printsub("ë‹¹ì‹ ì€ ì¹´ë‚˜ì½”ë‹˜ì˜ í˜ìœ¼ë¡œ ëŒì§„í•  ìˆ˜ ìˆë‹¤.                    (ì˜ë ¥, ì‹ ì•™)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("´ç½ÅÀº Ä«³ªÄÚ´ÔÀÇ ±âµÕÀ» ±¸ÇöÇÒ ¼ö ÀÖ´Ù.                    (¿µ·Â, ½Å¾Ó)",true,CL_help);
+			printsub("ë‹¹ì‹ ì€ ì¹´ë‚˜ì½”ë‹˜ì˜ ê¸°ë‘¥ì„ êµ¬í˜„í•  ìˆ˜ ìˆë‹¤.                    (ì˜ë ¥, ì‹ ì•™)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("´ç½ÅÀº Ä«³ªÄÚ´ÔÀÇ ¹Ù¶÷ÀÇ ÈûÀ» ÈÖ°¨À» ¼ö ÀÖ´Ù.               (¿µ·Â, ½Å¾Ó)",true,CL_help);
+			printsub("ë‹¹ì‹ ì€ ì¹´ë‚˜ì½”ë‹˜ì˜ ë°”ëŒì˜ í˜ì„ íœ˜ê°ì„ ìˆ˜ ìˆë‹¤.               (ì˜ë ¥, ì‹ ì•™)",true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		break;
@@ -2743,355 +2743,355 @@ void God_show()
 	case GT_MINORIKO:
 		if(level_ >= 0)
 		{
-			printsub("ÆÄ¿ö°¡ °¡µæÂ÷µµ À½½ÄÀ» ¸ÔÀ» ¼ö ÀÖ°í ÃÖ´ë ÆÄ¿ö¸¦ ¿À·¡ À¯ÁöÇÒ ¼ö ÀÖ´Ù.       (ÆĞ½Ãºê)",true,CL_warning);
+			printsub("íŒŒì›Œê°€ ê°€ë“ì°¨ë„ ìŒì‹ì„ ë¨¹ì„ ìˆ˜ ìˆê³  ìµœëŒ€ íŒŒì›Œë¥¼ ì˜¤ë˜ ìœ ì§€í•  ìˆ˜ ìˆë‹¤.       (íŒ¨ì‹œë¸Œ)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("´ç½ÅÀÌ ÆÄ¿ö°¡ °¡µæÂ÷ÀÖÀ»¼ö·Ï Ã¼·Â°ú ¿µ·ÂÈ¸º¹¼Óµµ°¡ »¡¶óÁø´Ù.               (ÆĞ½Ãºê)",true,CL_warning);
+			printsub("ë‹¹ì‹ ì´ íŒŒì›Œê°€ ê°€ë“ì°¨ìˆì„ìˆ˜ë¡ ì²´ë ¥ê³¼ ì˜ë ¥íšŒë³µì†ë„ê°€ ë¹¨ë¼ì§„ë‹¤.               (íŒ¨ì‹œë¸Œ)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("¹Ì³ë¸®ÄÚ´Â ´ç½Å¿¡°Ô °É¸° »óÅÂÀÌ»ó°ú ´É·ÂÀúÇÏ¸¦ È¸º¹½ÃÄÑÁØ´Ù.              (P, ½Å¾Ó)",true,CL_warning);
+			printsub("ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ê±¸ë¦° ìƒíƒœì´ìƒê³¼ ëŠ¥ë ¥ì €í•˜ë¥¼ íšŒë³µì‹œì¼œì¤€ë‹¤.              (P, ì‹ ì•™)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_MINORIKO))
-		{ //ÀÌ¶§ºÎÅÍ °í±¸¸¶ ¼±¹°À» ÇØÁØ´Ù.
-			printsub("´ç½ÅÀº À½½ÄÀ» ´õ »¡¸® ¸ÔÀ» ¼ö ÀÖ°í ¸ÔÀ»¶§ ¿µ·Âµµ Á¶±İ È¸º¹ÇÑ´Ù.            (ÆĞ½Ãºê)",true,CL_warning);
+		{ //ì´ë•Œë¶€í„° ê³ êµ¬ë§ˆ ì„ ë¬¼ì„ í•´ì¤€ë‹¤.
+			printsub("ë‹¹ì‹ ì€ ìŒì‹ì„ ë” ë¹¨ë¦¬ ë¨¹ì„ ìˆ˜ ìˆê³  ë¨¹ì„ë•Œ ì˜ë ¥ë„ ì¡°ê¸ˆ íšŒë³µí•œë‹¤.            (íŒ¨ì‹œë¸Œ)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("¹Ì³ë¸®ÄÚ´Â ´ç½ÅÀÌ °¡Áø À½½ÄÀ» ¼Ò¸ğÇÏ¿© Ã¼·ÂÀ» Å©°Ô È¸º¹ÇÒ ¼ö ÀÖ´Ù.  (P, À½½Ä, ½Å¾Ó)",true,CL_warning);
+			printsub("ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì´ ê°€ì§„ ìŒì‹ì„ ì†Œëª¨í•˜ì—¬ ì²´ë ¥ì„ í¬ê²Œ íšŒë³µí•  ìˆ˜ ìˆë‹¤.  (P, ìŒì‹, ì‹ ì•™)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("¹Ì³ë¸®ÄÚ´Â ´ç½ÅÀÌ À½½ÄÀ» ¸ÔÀº Á÷ÈÄ ÀÏ½ÃÀûÀ¸·Î ºÒ,³Ã±âÀúÇ×À» 1´Ü°è ÁØ´Ù.    (ÆĞ½Ãºê)",true,CL_warning);
+			printsub("ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì´ ìŒì‹ì„ ë¨¹ì€ ì§í›„ ì¼ì‹œì ìœ¼ë¡œ ë¶ˆ,ëƒ‰ê¸°ì €í•­ì„ 1ë‹¨ê³„ ì¤€ë‹¤.    (íŒ¨ì‹œë¸Œ)",true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_MIMA:
 		if(level_ >= 0 && !you.GetPunish(GT_MIMA))
 		{ 
-			printsub("½Å¾Ó½É¿¡ ºñ·ÊÇØ¼­ ÃÖ´ë¿µ·ÂÀÌ ¿Ã¶ó°£´Ù.                                     (ÆĞ½Ãºê)",true,CL_green);
+			printsub("ì‹ ì•™ì‹¬ì— ë¹„ë¡€í•´ì„œ ìµœëŒ€ì˜ë ¥ì´ ì˜¬ë¼ê°„ë‹¤.                                     (íŒ¨ì‹œë¸Œ)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("ÀûÀ» Á×¿´À»¶§ ÀûÀÇ ¼¼±â¿¡ µû¶ó ¿µ·ÂÀ» ¾òÀ» ¼ö ÀÖ´Ù.                        (ÆĞ½Ãºê)",true,CL_green);
+			printsub("ì ì„ ì£½ì˜€ì„ë•Œ ì ì˜ ì„¸ê¸°ì— ë”°ë¼ ì˜ë ¥ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.                        (íŒ¨ì‹œë¸Œ)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("¹Ì¸¶´Â ÆÄ±«¼úÀÌ µé¾î°£ ¸¶¹ıÀÇ À§·ÂÀ» Áõ°¡½ÃÅ²´Ù.                           (ÆĞ½Ãºê)",true,CL_green);
+			printsub("ë¯¸ë§ˆëŠ” íŒŒê´´ìˆ ì´ ë“¤ì–´ê°„ ë§ˆë²•ì˜ ìœ„ë ¥ì„ ì¦ê°€ì‹œí‚¨ë‹¤.                           (íŒ¨ì‹œë¸Œ)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("¹Ì¸¶´Â ÆÄ±«¼úÀÌ µé¾î°£ ¸¶¹ıÀÇ ¼º°øÀ²À» Áõ°¡½ÃÅ²´Ù.                         (ÆĞ½Ãºê)",true,CL_green);
+			printsub("ë¯¸ë§ˆëŠ” íŒŒê´´ìˆ ì´ ë“¤ì–´ê°„ ë§ˆë²•ì˜ ì„±ê³µìœ¨ì„ ì¦ê°€ì‹œí‚¨ë‹¤.                         (íŒ¨ì‹œë¸Œ)",true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHINKI:
 		if(level_ >= 1 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("´ç½ÅÀº ÇÏ±Ş ¸¶Á· ¹«¸®¸¦ ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.                                    (P, ½Å¾Ó)",true,CL_white_puple);
+			printsub("ë‹¹ì‹ ì€ í•˜ê¸‰ ë§ˆì¡± ë¬´ë¦¬ë¥¼ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.                                    (P, ì‹ ì•™)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("´ç½ÅÀº Áß±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.                                         (P, ½Å¾Ó)",true,CL_white_puple);
+			printsub("ë‹¹ì‹ ì€ ì¤‘ê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.                                         (P, ì‹ ì•™)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("Àû´ëÀûÀÎ ¼ÒÈ¯¼öÀÇ Çàµ¿À» ÀÏÁ¤È®·ü·Î ¹æÇØÇÑ´Ù.                               (ÆĞ½Ãºê)",true,CL_white_puple);
+			printsub("ì ëŒ€ì ì¸ ì†Œí™˜ìˆ˜ì˜ í–‰ë™ì„ ì¼ì •í™•ë¥ ë¡œ ë°©í•´í•œë‹¤.                               (íŒ¨ì‹œë¸Œ)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("´ç½ÅÀº »ó±Ş ¸¶Á·À» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.                                         (P, ½Å¾Ó)",true,CL_white_puple);
+			printsub("ë‹¹ì‹ ì€ ìƒê¸‰ ë§ˆì¡±ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.                                         (P, ì‹ ì•™)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("´ç½ÅÀº P¸¦ ÁÖ¿ï¶§¸¶´Ù Ã¼·Â°ú ¿µ·ÂÀÌ Â÷¿À¸¥´Ù.                               (ÆĞ½Ãºê)",true,CL_white_puple);
+			printsub("ë‹¹ì‹ ì€ Pë¥¼ ì£¼ìš¸ë•Œë§ˆë‹¤ ì²´ë ¥ê³¼ ì˜ë ¥ì´ ì°¨ì˜¤ë¥¸ë‹¤.                               (íŒ¨ì‹œë¸Œ)",true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUUGI:
 		if(level_ >= 0 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("Ãë±â°¡ ¿À¸¥ »óÅÂ¿¡¼­ ¾à°£ÀÇ Ã¼·ÂÈ¸º¹·Â°ú ³ôÀº È¸ÇÇ¸¦ ¾ò´Â´Ù.                (ÆĞ½Ãºê)",true,CL_yuigi);
+			printsub("ì·¨ê¸°ê°€ ì˜¤ë¥¸ ìƒíƒœì—ì„œ ì•½ê°„ì˜ ì²´ë ¥íšŒë³µë ¥ê³¼ ë†’ì€ íšŒí”¼ë¥¼ ì–»ëŠ”ë‹¤.                (íŒ¨ì‹œë¸Œ)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("¹°¾à 1°³¸¦ ¼ú·Î ¹Ù²ã¼­ ¸¶½Ç ¼ö ÀÖ´Ù.                                    (¹°¾à, ½Å¾Ó)",true,CL_yuigi);
+			printsub("ë¬¼ì•½ 1ê°œë¥¼ ìˆ ë¡œ ë°”ê¿”ì„œ ë§ˆì‹¤ ìˆ˜ ìˆë‹¤.                                    (ë¬¼ì•½, ì‹ ì•™)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("ÀüÅõÁß °¡²û »ó´ë¸¦ Àâ´Â´Ù. ÀâÀ¸¸é Àâ±â±â¼úÀ» ½Å¾Ó¼Ò¸ğ¾øÀÌ ¾µ ¼ö ÀÖ´Ù.       (ÆĞ½Ãºê)",true,CL_yuigi);
+			printsub("ì „íˆ¬ì¤‘ ê°€ë” ìƒëŒ€ë¥¼ ì¡ëŠ”ë‹¤. ì¡ìœ¼ë©´ ì¡ê¸°ê¸°ìˆ ì„ ì‹ ì•™ì†Œëª¨ì—†ì´ ì“¸ ìˆ˜ ìˆë‹¤.       (íŒ¨ì‹œë¸Œ)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("»ó´ë¸¦ Àâ¾Æ Àú¸Õ ½ºÇÃ·º½º¸¦ °É ¼ö ÀÖ´Ù.                                    (P, ½Å¾Ó)",true,CL_yuigi);
+			printsub("ìƒëŒ€ë¥¼ ì¡ì•„ ì €ë¨¼ ìŠ¤í”Œë ‰ìŠ¤ë¥¼ ê±¸ ìˆ˜ ìˆë‹¤.                                    (P, ì‹ ì•™)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("»ó´ë¸¦ Àâ¾Æ Áı¾î ´øÁú ¼ö ÀÖ´Ù.                                             (P, ½Å¾Ó)",true,CL_yuigi);
+			printsub("ìƒëŒ€ë¥¼ ì¡ì•„ ì§‘ì–´ ë˜ì§ˆ ìˆ˜ ìˆë‹¤.                                             (P, ì‹ ì•™)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("ÁÖº¯ÀÇ »ó´ë¸¦ Ä§¹¬½ÃÅ°´Â °­·ÂÇÑ Æ÷È¿¸¦ ÇÒ ¼ö ÀÖ´Ù.                         (P, ½Å¾Ó)",true,CL_yuigi);
+			printsub("ì£¼ë³€ì˜ ìƒëŒ€ë¥¼ ì¹¨ë¬µì‹œí‚¤ëŠ” ê°•ë ¥í•œ í¬íš¨ë¥¼ í•  ìˆ˜ ìˆë‹¤.                         (P, ì‹ ì•™)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("¿À´ÏÀÇ ±Ã±Ø±â, »ïº¸ÇÊ»ìÀ» ¾µ ¼ö ÀÖ´Ù.                                      (P, ½Å¾Ó)",true,CL_yuigi);
+			printsub("ì˜¤ë‹ˆì˜ ê¶ê·¹ê¸°, ì‚¼ë³´í•„ì‚´ì„ ì“¸ ìˆ˜ ìˆë‹¤.                                      (P, ì‹ ì•™)",true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHIZUHA:
 		if(level_ >= 0 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("½ÃÁîÇÏ´Â ÀûµéÀÌ Àá¿¡¼­ ±ú¸é¼­ ¿ÜÄ¡´Â È®·üÀ» ÁÙ¿©ÁØ´Ù.           (ÆĞ½Ãºê)",true,CL_autumn);
+			printsub("ì‹œì¦ˆí•˜ëŠ” ì ë“¤ì´ ì ì—ì„œ ê¹¨ë©´ì„œ ì™¸ì¹˜ëŠ” í™•ë¥ ì„ ì¤„ì—¬ì¤€ë‹¤.           (íŒ¨ì‹œë¸Œ)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("´ç½ÅÀº ¿òÁ÷ÀÌ°Å³ª ÀûÀ» Á×¿´À»¶§ ´ÜÇ³ÀÙÀÇ ÀÚÃë¸¦ ³²±ä´Ù.         (ÆĞ½Ãºê)",true,CL_autumn);
+			printsub("ë‹¹ì‹ ì€ ì›€ì§ì´ê±°ë‚˜ ì ì„ ì£½ì˜€ì„ë•Œ ë‹¨í’ìì˜ ìì·¨ë¥¼ ë‚¨ê¸´ë‹¤.         (íŒ¨ì‹œë¸Œ)",true,CL_autumn);
 			printsub("",true,CL_normal);
-			printsub("´ÜÇ³ À§¸¦ °ÉÀ¸¸é ¸Å¿ì Àº¹ĞÇÏ°Ô ¿òÁ÷ÀÏ ¼ö ÀÖ´Ù.                  (ÆĞ½Ãºê) ",true,CL_autumn);
+			printsub("ë‹¨í’ ìœ„ë¥¼ ê±¸ìœ¼ë©´ ë§¤ìš° ì€ë°€í•˜ê²Œ ì›€ì§ì¼ ìˆ˜ ìˆë‹¤.                  (íŒ¨ì‹œë¸Œ) ",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("´ç½ÅÀº ´ÜÇ³ À§¿¡ ¼­ÀÖ´Â ¸ğµç Àû¿¡ È¥¶õÀ» °É ¼ö ÀÖ´Ù.        (¿µ·Â, ½Å¾Ó)",true,CL_autumn);
+			printsub("ë‹¹ì‹ ì€ ë‹¨í’ ìœ„ì— ì„œìˆëŠ” ëª¨ë“  ì ì— í˜¼ë€ì„ ê±¸ ìˆ˜ ìˆë‹¤.        (ì˜ë ¥, ì‹ ì•™)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("´ç½ÅÀº ¹æ¾î±¸¸¦ ´ÜÇ³¹æ¾î±¸·Î ¹Ù²Ü ¼ö ÀÖ´Ù.                        (½Å¾Ó)",true,CL_autumn);
+			printsub("ë‹¹ì‹ ì€ ë°©ì–´êµ¬ë¥¼ ë‹¨í’ë°©ì–´êµ¬ë¡œ ë°”ê¿€ ìˆ˜ ìˆë‹¤.                        (ì‹ ì•™)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("´ç½ÅÀº ´ÜÇ³ À§¸¦ °ÉÀ»¶§ ¸Å¿ì ºü¸£°Ô ¿òÁ÷ÀÏ ¼ö ÀÖ´Ù.             (ÆĞ½Ãºê)",true,CL_autumn);
+			printsub("ë‹¹ì‹ ì€ ë‹¨í’ ìœ„ë¥¼ ê±¸ì„ë•Œ ë§¤ìš° ë¹ ë¥´ê²Œ ì›€ì§ì¼ ìˆ˜ ìˆë‹¤.             (íŒ¨ì‹œë¸Œ)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 6 && you.god_value[GT_SHIZUHA][0]==0 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("´ç½ÅÀº µü ÇÑ¹ø ´ç½ÅÀÇ ¹«±â¿¡ ´ÜÇ³ºê·£µå¸¦ ºÎ¿©ÇÒ ¼ö ÀÖ´Ù.       (ÇÑ¹ø¸¸)",true,CL_autumn);
+			printsub("ë‹¹ì‹ ì€ ë”± í•œë²ˆ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ë‹¨í’ë¸Œëœë“œë¥¼ ë¶€ì—¬í•  ìˆ˜ ìˆë‹¤.       (í•œë²ˆë§Œ)",true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_HINA:
 		if(level_ >= 0)
 		{ 
-			printsub("´ç½ÅÀº ½Ã¾ß³»ÀÇ Àåºñ¿¡ ÀúÁÖ°¡ °É·ÁÀÖ´ÂÁö È®ÀÎÇÏ°í ½Äº°ÇÒ ¼ö ÀÖ´Ù.                (ÆĞ½Ãºê)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ì‹œì•¼ë‚´ì˜ ì¥ë¹„ì— ì €ì£¼ê°€ ê±¸ë ¤ìˆëŠ”ì§€ í™•ì¸í•˜ê³  ì‹ë³„í•  ìˆ˜ ìˆë‹¤.                (íŒ¨ì‹œë¸Œ)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("´ç½ÅÀº ÀåÂøÁßÀÎ ÀúÁÖ°¡ °É¸° ÀåºñÀÇ ¸¶ÀÌ³Ê½º ÀÎÃ¦Æ®¸¦ ÇÃ·¯½º·Î ¹Ù²Ü ¼ö ÀÖ´Ù.           (P)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ì¥ì°©ì¤‘ì¸ ì €ì£¼ê°€ ê±¸ë¦° ì¥ë¹„ì˜ ë§ˆì´ë„ˆìŠ¤ ì¸ì±ˆíŠ¸ë¥¼ í”ŒëŸ¬ìŠ¤ë¡œ ë°”ê¿€ ìˆ˜ ìˆë‹¤.           (P)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("´ç½ÅÀº ¹«±â¿¡ Àá½Ãµ¿¾È ÀúÁÖÀÇ ÈûÀ» ´ã¾Æ °­È­ ½ÃÅ³ ¼ö ÀÖ´Ù.                         (ÀúÁÖ)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ë¬´ê¸°ì— ì ì‹œë™ì•ˆ ì €ì£¼ì˜ í˜ì„ ë‹´ì•„ ê°•í™” ì‹œí‚¬ ìˆ˜ ìˆë‹¤.                         (ì €ì£¼)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("´ç½ÅÀº ¹æ¾î±¸¿¡ Àá½Ãµ¿¾È ÀúÁÖÀÇ ÈûÀ» ´ã¾Æ ¸ğµç °ø°İÀ» ¹İ»ç½ÃÅ³ ¼ö ÀÖ´Ù.            (ÀúÁÖ)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ë°©ì–´êµ¬ì— ì ì‹œë™ì•ˆ ì €ì£¼ì˜ í˜ì„ ë‹´ì•„ ëª¨ë“  ê³µê²©ì„ ë°˜ì‚¬ì‹œí‚¬ ìˆ˜ ìˆë‹¤.            (ì €ì£¼)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("´ç½ÅÀº Àå½Å±¸¿¡ Àá½Ãµ¿¾È ÀúÁÖÀÇ ÈûÀ» ´ã¾Æ »ı¸í·ÂÀ» Ä¡À¯ ÇÒ ¼ö ÀÖ´Ù.                (ÀúÁÖ)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ì¥ì‹ êµ¬ì— ì ì‹œë™ì•ˆ ì €ì£¼ì˜ í˜ì„ ë‹´ì•„ ìƒëª…ë ¥ì„ ì¹˜ìœ  í•  ìˆ˜ ìˆë‹¤.                (ì €ì£¼)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("´ç½ÅÀº ÀúÁÖµÈ ¾ÆÀÌÅÛÀ» ³¢°í ÀÖÀ¸¸é ÀúÁÖ¸¦ Èğ»Ñ¸®°í ´Ù´Ñ´Ù.                       (ÆĞ½Ãºê)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ì €ì£¼ëœ ì•„ì´í…œì„ ë¼ê³  ìˆìœ¼ë©´ ì €ì£¼ë¥¼ í©ë¿Œë¦¬ê³  ë‹¤ë‹Œë‹¤.                       (íŒ¨ì‹œë¸Œ)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 6 && you.god_value[GT_HINA][0]==0 && !you.GetPunish(GT_HINA))
 		{
-			printsub("´ç½ÅÀº µü ÇÑ¹ø ´ç½ÅÀÇ ¹«±â¿¡ ÀúÁÖºê·£µå¸¦ ºÎ¿©ÇÒ ¼ö ÀÖ´Ù.						   (ÇÑ¹ø¸¸)",true,CL_hina);
+			printsub("ë‹¹ì‹ ì€ ë”± í•œë²ˆ ë‹¹ì‹ ì˜ ë¬´ê¸°ì— ì €ì£¼ë¸Œëœë“œë¥¼ ë¶€ì—¬í•  ìˆ˜ ìˆë‹¤.						   (í•œë²ˆë§Œ)",true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUKARI:
 		if(level_ >= 0 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("Æ´»õ°¡ ´ç½ÅÀ» ÁöÄÑº»´Ù.                                         (ÆĞ½Ãºê)",true,CL_yukari);
+			printsub("í‹ˆìƒˆê°€ ë‹¹ì‹ ì„ ì§€ì¼œë³¸ë‹¤.                                         (íŒ¨ì‹œë¸Œ)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("´ç½ÅÀº ÀÏÁ¤ µ¥¹ÌÁö¸¦ ÀÔÀ¸¸é °ø°£ÀÌµ¿ÀÌ ÀÏ¾î³­´Ù.                (ÆĞ½Ãºê)",true,CL_yukari);
+			printsub("ë‹¹ì‹ ì€ ì¼ì • ë°ë¯¸ì§€ë¥¼ ì…ìœ¼ë©´ ê³µê°„ì´ë™ì´ ì¼ì–´ë‚œë‹¤.                (íŒ¨ì‹œë¸Œ)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("´ç½ÅÀº Æ´»õ·ÎºÎÅÍ »ç°İÁö¿øÀ» ¹ŞÀ» ¼ö ÀÖ´Ù.                  (¿µ·Â, ½Å¾Ó)",true,CL_yukari);
+			printsub("ë‹¹ì‹ ì€ í‹ˆìƒˆë¡œë¶€í„° ì‚¬ê²©ì§€ì›ì„ ë°›ì„ ìˆ˜ ìˆë‹¤.                  (ì˜ë ¥, ì‹ ì•™)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("´ç½ÅÀº Æ´»õ¸¦ Å¸°í´Ù´Ò ¼ö ÀÖ´Ù.                             (¿µ·Â, ½Å¾Ó)",true,CL_yukari);
+			printsub("ë‹¹ì‹ ì€ í‹ˆìƒˆë¥¼ íƒ€ê³ ë‹¤ë‹ ìˆ˜ ìˆë‹¤.                             (ì˜ë ¥, ì‹ ì•™)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("´ç½ÅÀº °á°è¸¦ ¸¸µé ¼ö ÀÖ´Ù.                                 (¿µ·Â, ½Å¾Ó)",true,CL_yukari);
+			printsub("ë‹¹ì‹ ì€ ê²°ê³„ë¥¼ ë§Œë“¤ ìˆ˜ ìˆë‹¤.                                 (ì˜ë ¥, ì‹ ì•™)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("´ç½ÅÀº Àá½Ãµ¿¾È Â÷¿øÀ» °íÁ¤½ÃÅ³ ¼ö ÀÖ´Ù.                    (¿µ·Â, ½Å¾Ó)",true,CL_yukari);
+			printsub("ë‹¹ì‹ ì€ ì ì‹œë™ì•ˆ ì°¨ì›ì„ ê³ ì •ì‹œí‚¬ ìˆ˜ ìˆë‹¤.                    (ì˜ë ¥, ì‹ ì•™)",true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_EIRIN:
 		if(!you.GetPunish(GT_EIRIN))
 		{
-			printsub("¿¡ÀÌ¸°Àº ¹°¾àµéÀÇ È¿°ú¸¦ »ó½Â½ÃÄÑÁØ´Ù.                          (ÆĞ½Ãºê)",true,CL_small_danger);
+			printsub("ì—ì´ë¦°ì€ ë¬¼ì•½ë“¤ì˜ íš¨ê³¼ë¥¼ ìƒìŠ¹ì‹œì¼œì¤€ë‹¤.                          (íŒ¨ì‹œë¸Œ)",true,CL_small_danger);
 			printsub("",true,CL_normal);
-			printsub("ÁÁÀº ¹°¾àÀ§¿¡¼­ ±âµµÇÏ´Â °ÍÀ¸·Î ³ª»Û ¹°¾àÀ» ¸¸µé ¼ö ÀÖ´Ù.         (¹°¾à)",true,CL_small_danger);
+			printsub("ì¢‹ì€ ë¬¼ì•½ìœ„ì—ì„œ ê¸°ë„í•˜ëŠ” ê²ƒìœ¼ë¡œ ë‚˜ìœ ë¬¼ì•½ì„ ë§Œë“¤ ìˆ˜ ìˆë‹¤.         (ë¬¼ì•½)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 			if(level_ >= 1)
 			{
-				printsub("´ç½ÅÀº ´ÙÀ½ÀÇ ¹°¾àÀ» ¸¶½Ç¶§ Ãß°¡ È¿°ú¸¦ ¹Ş´Â´Ù.                 (ÆĞ½Ãºê)",true,CL_small_danger);
-				printsub(" ¦¦µ¶¹°¾à : ÀÌµ¿¼Óµµ°¡ »¡¶óÁø´Ù.",true,CL_small_danger);
+				printsub("ë‹¹ì‹ ì€ ë‹¤ìŒì˜ ë¬¼ì•½ì„ ë§ˆì‹¤ë•Œ ì¶”ê°€ íš¨ê³¼ë¥¼ ë°›ëŠ”ë‹¤.                 (íŒ¨ì‹œë¸Œ)",true,CL_small_danger);
+				printsub(" â””ë…ë¬¼ì•½ : ì´ë™ì†ë„ê°€ ë¹¨ë¼ì§„ë‹¤.",true,CL_small_danger);
 				if(level_ >= 2)
-					printsub(" ¦¦´É·ÂÄ¡°¨¼Ò¹°¾à : Ã¼·ÂÀ» È¸º¹ÇÑ´Ù.",true,CL_small_danger);
+					printsub(" â””ëŠ¥ë ¥ì¹˜ê°ì†Œë¬¼ì•½ : ì²´ë ¥ì„ íšŒë³µí•œë‹¤.",true,CL_small_danger);
 				if(level_ >= 3)
-					printsub(" ¦¦È¥¶õ¹°¾à : ¿µ·ÂÀ» È¸º¹ÇÑ´Ù.",true,CL_small_danger);
+					printsub(" â””í˜¼ë€ë¬¼ì•½ : ì˜ë ¥ì„ íšŒë³µí•œë‹¤.",true,CL_small_danger);
 				if(level_ >= 4)
-					printsub(" ¦¦°¨¼Ó¹°¾à : Åõ¸íÇØÁø´Ù.",true,CL_small_danger);
+					printsub(" â””ê°ì†ë¬¼ì•½ : íˆ¬ëª…í•´ì§„ë‹¤.",true,CL_small_danger);
 				if(level_ >= 5)
-					printsub(" ¦¦¸¶ºñ¹°¾à : ¸¶ºñ½Ã°£ÀÌ ÁÙ¾îµé°í ¿µ°İÀ» »ç¿ëÇÑ´Ù.",true,CL_small_danger);
+					printsub(" â””ë§ˆë¹„ë¬¼ì•½ : ë§ˆë¹„ì‹œê°„ì´ ì¤„ì–´ë“¤ê³  ì˜ê²©ì„ ì‚¬ìš©í•œë‹¤.",true,CL_small_danger);
 				entersub();
 				printsub("",true,CL_normal);
 			}
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("´ç½ÅÀÇ ¹°¾àÀ» ´øÁú ¼ö ÀÖ´Ù.                                    (P, ¹°¾à)",true,CL_small_danger);
+			printsub("ë‹¹ì‹ ì˜ ë¬¼ì•½ì„ ë˜ì§ˆ ìˆ˜ ìˆë‹¤.                                    (P, ë¬¼ì•½)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("´ç½ÅÀº ½ÅÃ¼°³Á¶¸¦ ÅëÇØ ´É·ÂÄ¡¸¦ Á¶ÀıÇÒ ¼ö ÀÖ´Ù.                   (½Å¾Ó)",true,CL_small_danger);
+			printsub("ë‹¹ì‹ ì€ ì‹ ì²´ê°œì¡°ë¥¼ í†µí•´ ëŠ¥ë ¥ì¹˜ë¥¼ ì¡°ì ˆí•  ìˆ˜ ìˆë‹¤.                   (ì‹ ì•™)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("´ç½ÅÀº ºÎÀÛ¿ëÀ» ´ë°¡·Î ¸öÀ» Àç»ıÇÒ ¼ö ÀÖ´Ù.              (P, ¿µ·Â, ½Å¾Ó)",true,CL_small_danger);
+			printsub("ë‹¹ì‹ ì€ ë¶€ì‘ìš©ì„ ëŒ€ê°€ë¡œ ëª¸ì„ ì¬ìƒí•  ìˆ˜ ìˆë‹¤.              (P, ì˜ë ¥, ì‹ ì•™)",true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUYUKO:
 		if(level_ >= 1 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("´ç½ÅÀº À¯·ÉÀ» ºÒ·¯µéÀÎ´Ù.                                      (ÆĞ½Ãºê)",true,CL_yuyuko);
+			printsub("ë‹¹ì‹ ì€ ìœ ë ¹ì„ ë¶ˆëŸ¬ë“¤ì¸ë‹¤.                                      (íŒ¨ì‹œë¸Œ)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("¿øÇÏ´Â À§Ä¡¿¡ À¯·ÉµéÀ» º¸³¾ ¼ö ÀÖ´Ù.                          (P, ¿µ·Â)",true,CL_yuyuko);
+			printsub("ì›í•˜ëŠ” ìœ„ì¹˜ì— ìœ ë ¹ë“¤ì„ ë³´ë‚¼ ìˆ˜ ìˆë‹¤.                          (P, ì˜ë ¥)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("Àá½Ãµ¿¾È À¯·ÉÀ» ºÒ·¯µéÀÌ´Â ºóµµ¸¦ ³ôÈú ¼ö ÀÖ´Ù.            (½Å¾Ó, ¿µ·Â)",true,CL_yuyuko);
+			printsub("ì ì‹œë™ì•ˆ ìœ ë ¹ì„ ë¶ˆëŸ¬ë“¤ì´ëŠ” ë¹ˆë„ë¥¼ ë†’í ìˆ˜ ìˆë‹¤.            (ì‹ ì•™, ì˜ë ¥)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("Àû ÇÑ¸íÀÇ ¿µÈ¥À» ÀâÀ» ¼ö ÀÖ´Ù.                             (½Å¾Ó, ¿µ·Â)",true,CL_yuyuko);
+			printsub("ì  í•œëª…ì˜ ì˜í˜¼ì„ ì¡ì„ ìˆ˜ ìˆë‹¤.                             (ì‹ ì•™, ì˜ë ¥)",true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SATORI:
 		if(level_ >= 0 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("´ç½ÅÀº Åõ¸íÀ» º¼ ¼ö ÀÖ´Ù.                                       (ÆĞ½Ãºê)",true,CL_danger);
+			printsub("ë‹¹ì‹ ì€ íˆ¬ëª…ì„ ë³¼ ìˆ˜ ìˆë‹¤.                                       (íŒ¨ì‹œë¸Œ)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("´ç½ÅÀº »ó´ëÀÇ Æ®¶ó¿ì¸¶¸¦ ²ø¾î³¾ ¼ö ÀÖ´Ù.                          (½Å¾Ó)",true,CL_danger);
+			printsub("ë‹¹ì‹ ì€ ìƒëŒ€ì˜ íŠ¸ë¼ìš°ë§ˆë¥¼ ëŒì–´ë‚¼ ìˆ˜ ìˆë‹¤.                          (ì‹ ì•™)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("´ç½ÅÀº ÀûÀÇ ±â¾ï¼Ó¿¡¼­ ¸ÊÀÇ ÇüÅÂ¸¦ ÀĞ¾î³½´Ù.                    (ÆĞ½Ãºê)",true,CL_danger);
+			printsub("ë‹¹ì‹ ì€ ì ì˜ ê¸°ì–µì†ì—ì„œ ë§µì˜ í˜•íƒœë¥¼ ì½ì–´ë‚¸ë‹¤.                    (íŒ¨ì‹œë¸Œ)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("´ç½ÅÀº ¸÷ÀÇ ±âÃ´À» Å½ÁöÇÒ ¼ö ÀÖ´Ù.                              (ÆĞ½Ãºê)",true,CL_danger);
+			printsub("ë‹¹ì‹ ì€ ëª¹ì˜ ê¸°ì²™ì„ íƒì§€í•  ìˆ˜ ìˆë‹¤.                              (íŒ¨ì‹œë¸Œ)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("Àû ÇÑ¸íÀÇ »ı°¢À» ¿Ïº®ÇÏ°Ô µ¶ÆÄÇÒ ¼ö ÀÖ´Ù.                   (½Ã°£, ½Å¾Ó)",true,CL_danger);
+			printsub("ì  í•œëª…ì˜ ìƒê°ì„ ì™„ë²½í•˜ê²Œ ë…íŒŒí•  ìˆ˜ ìˆë‹¤.                   (ì‹œê°„, ì‹ ì•™)",true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("»çÅä¸®´Â °¡²û ´ç½Å¿¡°Ô ¸ÔÀÌ¸¦ ÁØ´Ù. À§ÇèÇÒ¼ö·Ï ÀÚÁÖ ÁØ´Ù.       (ÆĞ½Ãºê)",true,CL_danger);
+			printsub("ì‚¬í† ë¦¬ëŠ” ê°€ë” ë‹¹ì‹ ì—ê²Œ ë¨¹ì´ë¥¼ ì¤€ë‹¤. ìœ„í—˜í• ìˆ˜ë¡ ìì£¼ ì¤€ë‹¤.       (íŒ¨ì‹œë¸Œ)",true,CL_danger);
 			printsub("",true,CL_normal); 
 		}
 		break;
 	case GT_TENSI:
 		if(level_ >= 0 && !you.GetPunish(GT_TENSI))
 		{ 
-			printsub("ÅÙ½ÃÀÇ Çàµ¿Àº ¿¹ÃøÇÒ ¼ö ¾ø´Ù!                                           ",true,CL_tensi);
+			printsub("í…ì‹œì˜ í–‰ë™ì€ ì˜ˆì¸¡í•  ìˆ˜ ì—†ë‹¤!                                           ",true,CL_tensi);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SEIJA:
 		if(level_ >= 1 && !you.GetPunish(GT_SEIJA))
 		{ 
-			printsub("´ç½ÅÀº ¼¼ÀÌÀÚ·ÎºÎÅÍ ½ºÅÈÀ» °­È­¹Ş°íÀÖ´Ù.                        (ÆĞ½Ãºê)",true,CL_seija);
+			printsub("ë‹¹ì‹ ì€ ì„¸ì´ìë¡œë¶€í„° ìŠ¤íƒ¯ì„ ê°•í™”ë°›ê³ ìˆë‹¤.                        (íŒ¨ì‹œë¸Œ)",true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_SEIJA))
 		{
-			printsub("Â¡¹ú¿¡ ÀÇÇÑ Ãß°İÀ¸·ÎºÎÅÍ ´ç½ÅÀ» µ½´Â´Ù.                         (ÆĞ½Ãºê)", true, CL_seija);
+			printsub("ì§•ë²Œì— ì˜í•œ ì¶”ê²©ìœ¼ë¡œë¶€í„° ë‹¹ì‹ ì„ ë•ëŠ”ë‹¤.                         (íŒ¨ì‹œë¸Œ)", true, CL_seija);
 			printsub("", true, CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SEIJA))
 		{
-			printsub("¿øÇÏ´Â »ó´ë¹æ°ú À§Ä¡¸¦ µÚÁıÀ» ¼ö ÀÖ´Ù.                               (P)",true,CL_seija);
+			printsub("ì›í•˜ëŠ” ìƒëŒ€ë°©ê³¼ ìœ„ì¹˜ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ìˆë‹¤.                               (P)",true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SEIJA))
 		{ 
-			printsub("¸ğµç Àû, ¾Æ±ºÀÇ ½Ã¾ß¸¦ µÚÁıÀ» ¼ö ÀÖ´Ù.                               (P)",true,CL_seija);
+			printsub("ëª¨ë“  ì , ì•„êµ°ì˜ ì‹œì•¼ë¥¼ ë’¤ì§‘ì„ ìˆ˜ ìˆë‹¤.                               (P)",true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_LILLY:
 		if(level_ >= 1 )
 		{ 
-			printsub("===´ç½ÅÀÇ µ¿·á ¿äÁ¤===",true,CL_lilly);
+			printsub("===ë‹¹ì‹ ì˜ ë™ë£Œ ìš”ì •===",true,CL_lilly);
 			printsub("",true,CL_normal);
 			for(int i = 0; i < min(5,level_); i++)
 			{
 				char temp[100];
-				sprintf_s(temp,100,"%d¹øÂ° µ¿·á: ",i+1);
+				sprintf_s(temp,100,"%dë²ˆì§¸ ë™ë£Œ: ",i+1);
 				printsub(temp,false,CL_warning);
 				if(you.god_value[GT_LILLY][i])
 				{
@@ -3108,19 +3108,19 @@ void God_show()
 					}
 					for(;lenght_<25;lenght_++)
 						printsub(" ",false,CL_normal);
-					lenght_ += printsub("·¹º§: ",false,CL_warning);
+					lenght_ += printsub("ë ˆë²¨: ",false,CL_warning);
 					sprintf_s(temp,100,"%2d",you.lilly_allys[i].level);
 					lenght_ += printsub(temp,false,CL_normal);
 
 					for(;lenght_<40;lenght_++)
 						printsub(" ",false,CL_normal);
-					printsub("»óÅÂ: ",false,CL_warning);
-					sprintf_s(temp,100,"%s",you.god_value[GT_LILLY][i]==1?"»ıÁ¸":"ºÎÈ°´ë±âÁß");
+					printsub("ìƒíƒœ: ",false,CL_warning);
+					sprintf_s(temp,100,"%s",you.god_value[GT_LILLY][i]==1?"ìƒì¡´":"ë¶€í™œëŒ€ê¸°ì¤‘");
 					printsub(temp,true,you.god_value[GT_LILLY][i]==1?CL_white_blue:CL_danger);
 				}
 				else
 				{
-					printsub("°ø¼®",true,CL_bad);
+					printsub("ê³µì„",true,CL_bad);
 				}
 			}
 			printsub("",true,CL_normal);
@@ -3128,59 +3128,59 @@ void God_show()
 		}
 		if(level_ >= 0 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("¿äÁ¤¿¡ °æÇèÄ¡¸¦ ³ª´²ÁÖ¸ç Á×Àº ¿äÁ¤µµ °æÇèÄ¡¸¦ ¸ÔÀ¸¸é ºÎÈ°ÇÑ´Ù.  (ÆĞ½Ãºê)",true,CL_lilly);
+			printsub("ìš”ì •ì— ê²½í—˜ì¹˜ë¥¼ ë‚˜ëˆ ì£¼ë©° ì£½ì€ ìš”ì •ë„ ê²½í—˜ì¹˜ë¥¼ ë¨¹ìœ¼ë©´ ë¶€í™œí•œë‹¤.  (íŒ¨ì‹œë¸Œ)",true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("´ç½ÅÀº ¿äÁ¤µéÀ» µ¿·á·Î ±ÇÀ¯ÇÒ ¼ö ÀÖ´Ù.                            (¾øÀ½)",true,CL_lilly);
+			printsub("ë‹¹ì‹ ì€ ìš”ì •ë“¤ì„ ë™ë£Œë¡œ ê¶Œìœ í•  ìˆ˜ ìˆë‹¤.                            (ì—†ìŒ)",true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("´ç½ÅÀº ¿äÁ¤µéÀ» ±ÙÃ³·Î È£ÃâÇÒ ¼ö ÀÖ´Ù.                            (¿µ·Â)",true,CL_lilly);
+			printsub("ë‹¹ì‹ ì€ ìš”ì •ë“¤ì„ ê·¼ì²˜ë¡œ í˜¸ì¶œí•  ìˆ˜ ìˆë‹¤.                            (ì˜ë ¥)",true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("´ç½ÅÀº µ¿·á ¿äÁ¤À» Ä¡À¯ÇÒ ¼ö ÀÖ´Ù.                             (P, ¿µ·Â)",true,CL_lilly);
+			printsub("ë‹¹ì‹ ì€ ë™ë£Œ ìš”ì •ì„ ì¹˜ìœ í•  ìˆ˜ ìˆë‹¤.                             (P, ì˜ë ¥)",true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("´ç½ÅÀº ¿äÁ¤µé¿¡°Ô ÈûÀ» ³ª´²ÁÙ ¼ö ÀÖ´Ù.                         (P, ¿µ·Â)",true,CL_lilly);
+			printsub("ë‹¹ì‹ ì€ ìš”ì •ë“¤ì—ê²Œ í˜ì„ ë‚˜ëˆ ì¤„ ìˆ˜ ìˆë‹¤.                         (P, ì˜ë ¥)",true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_MIKO:
 		if (level_ >= 0 && !you.GetPunish(GT_MIKO))
 		{
-			printsub("ÀÎ±âµµ´Â ´ÙÀ½ Çàµ¿À» ÇÒ °æ¿ì ¿Ã¶ó°£´Ù.", true, CL_normal);
-			printsub("    ÀûÀ» Á×ÀÎ´Ù. °­ÇÒ¼ö·Ï ´õ ¸¹ÀÌ ¿Ã¶ó°£´Ù.", true, CL_miko);
-			printsub("    ¿å¸Á¸ğÀ¸±â¸¦ ÀÌ¿ëÇØ ½Ã¾ß³»ÀÇ ÀûµéÀÇ ¿å¸ÁÀ» ¸ğÀº´Ù.", true, CL_miko);
-			printsub("    »õ·Î¿î ¼­ºê´øÀü¿¡ ÀÔÀåÇÑ´Ù.", true, CL_miko);
+			printsub("ì¸ê¸°ë„ëŠ” ë‹¤ìŒ í–‰ë™ì„ í•  ê²½ìš° ì˜¬ë¼ê°„ë‹¤.", true, CL_normal);
+			printsub("    ì ì„ ì£½ì¸ë‹¤. ê°•í• ìˆ˜ë¡ ë” ë§ì´ ì˜¬ë¼ê°„ë‹¤.", true, CL_miko);
+			printsub("    ìš•ë§ëª¨ìœ¼ê¸°ë¥¼ ì´ìš©í•´ ì‹œì•¼ë‚´ì˜ ì ë“¤ì˜ ìš•ë§ì„ ëª¨ì€ë‹¤.", true, CL_miko);
+			printsub("    ìƒˆë¡œìš´ ì„œë¸Œë˜ì „ì— ì…ì¥í•œë‹¤.", true, CL_miko);
 			printsub("", true, CL_normal);
-			printsub("ÀÎ±âµµ´Â ´ÙÀ½ Çàµ¿À» ÇÒ °æ¿ì ³»·Á°£´Ù.", true, CL_normal);
-			printsub("    ÃşÀ» ¿Å±ä´Ù. ¿Ã¶ó°¥¼ö·Ï ´õ ¸¹Àº ÀÎ±âµµ°¡ ¶³¾îÁø´Ù.", true, CL_miko);
-			printsub("    ¼­ºê´øÀüÀ» ¿Å±ä´Ù. ¸ğµç ÀÎ±âµµ°¡ ¶³¾îÁø´Ù.", true, CL_miko);
-			printsub("    ¹ÌÄÚÀÇ ±Ç´ÉÀ» »ç¿ëÇÑ´Ù.", true, CL_miko);
+			printsub("ì¸ê¸°ë„ëŠ” ë‹¤ìŒ í–‰ë™ì„ í•  ê²½ìš° ë‚´ë ¤ê°„ë‹¤.", true, CL_normal);
+			printsub("    ì¸µì„ ì˜®ê¸´ë‹¤. ì˜¬ë¼ê°ˆìˆ˜ë¡ ë” ë§ì€ ì¸ê¸°ë„ê°€ ë–¨ì–´ì§„ë‹¤.", true, CL_miko);
+			printsub("    ì„œë¸Œë˜ì „ì„ ì˜®ê¸´ë‹¤. ëª¨ë“  ì¸ê¸°ë„ê°€ ë–¨ì–´ì§„ë‹¤.", true, CL_miko);
+			printsub("    ë¯¸ì½”ì˜ ê¶ŒëŠ¥ì„ ì‚¬ìš©í•œë‹¤.", true, CL_miko);
 			printsub("", true, CL_normal);
-			printsub("ÁÖº¯ÀÇ Àûµé·ÎºÎÅÍ ÀÎ±âµµ¸¦ ¸ğÀ» ¼ö ÀÖ´Ù.                 (Ãş¸¶´Ù ÇÑ¹ø¸¸)", true, CL_miko);
+			printsub("ì£¼ë³€ì˜ ì ë“¤ë¡œë¶€í„° ì¸ê¸°ë„ë¥¼ ëª¨ì„ ìˆ˜ ìˆë‹¤.                 (ì¸µë§ˆë‹¤ í•œë²ˆë§Œ)", true, CL_miko);
 			printsub("", true, CL_normal);
 			char temp[256];
-			sprintf_s(temp, 256, "ºü¸¥ ¼Óµµ·Î ·£´ıÇÑ ¼ø°£ÀÌµ¿À» ÇÒ ¼ö ÀÖ´Ù.                  (ÀÎ±âµµ %3d%%)", getMikoPiety(0) / 2);
+			sprintf_s(temp, 256, "ë¹ ë¥¸ ì†ë„ë¡œ ëœë¤í•œ ìˆœê°„ì´ë™ì„ í•  ìˆ˜ ìˆë‹¤.                  (ì¸ê¸°ë„ %3d%%)", getMikoPiety(0) / 2);
 			printsub(temp, true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "ÇØ´ç Ãş¿¡¼­ ÁÖº¯À» ºñÃß´Â ÈÄ±¤À» ¾òÀ» ¼ö ÀÖ´Ù.             (ÀÎ±âµµ %3d%%)", getMikoPiety(1) / 2);
+			sprintf_s(temp, 256, "í•´ë‹¹ ì¸µì—ì„œ ì£¼ë³€ì„ ë¹„ì¶”ëŠ” í›„ê´‘ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.             (ì¸ê¸°ë„ %3d%%)", getMikoPiety(1) / 2);
 			printsub(temp, true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "ÇØ´ç Ãş¿¡¼­ ¿øÇÏ´Â ÀúÇ×À» ¾òÀ» ¼ö ÀÖ´Ù.                    (ÀÎ±âµµ %3d%%)", getMikoPiety(2) / 2);
+			sprintf_s(temp, 256, "í•´ë‹¹ ì¸µì—ì„œ ì›í•˜ëŠ” ì €í•­ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.                    (ì¸ê¸°ë„ %3d%%)", getMikoPiety(2) / 2);
 			printsub(temp, true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "ÇØ´ç Ãş¿¡¼­ ¿øÇÏ´Â ÀüÅõ´É·ÂÀ» °­È­½ÃÅ³ ¼ö ÀÖ´Ù.            (ÀÎ±âµµ %3d%%)", getMikoPiety(3) / 2);
+			sprintf_s(temp, 256, "í•´ë‹¹ ì¸µì—ì„œ ì›í•˜ëŠ” ì „íˆ¬ëŠ¥ë ¥ì„ ê°•í™”ì‹œí‚¬ ìˆ˜ ìˆë‹¤.            (ì¸ê¸°ë„ %3d%%)", getMikoPiety(3) / 2);
 			printsub(temp, true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "ÇØ´ç Ãş¿¡¼­ÀÇ ±Ã±ØÀÇ Ãàº¹À» ¹ŞÀ» ¼ö ÀÖ´Ù.                  (ÀÎ±âµµ %3d%%)", getMikoPiety(4) / 2);
+			sprintf_s(temp, 256, "í•´ë‹¹ ì¸µì—ì„œì˜ ê¶ê·¹ì˜ ì¶•ë³µì„ ë°›ì„ ìˆ˜ ìˆë‹¤.                  (ì¸ê¸°ë„ %3d%%)", getMikoPiety(4) / 2);
 			printsub(temp, true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
 			printsub("", true, CL_normal);
 		}
@@ -3188,32 +3188,32 @@ void God_show()
 	case GT_OKINA:
 		if (level_ >= 0 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº ÀÚÀ¯ÀÚÀç·Î ¹®ÀÇ ÀÌµ¿°ú Åõ½Ã°¡ °¡´ÉÇÏ´Ù.                  (ÆĞ½Ãºê)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ ììœ ìì¬ë¡œ ë¬¸ì˜ ì´ë™ê³¼ íˆ¬ì‹œê°€ ê°€ëŠ¥í•˜ë‹¤.                  (íŒ¨ì‹œë¸Œ)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº ¿øÇÏ´Â º®¿¡ ¹®À» ¸¸µé ¼ö ÀÖ´Ù.                           (P, ¿µ·Â)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ ì›í•˜ëŠ” ë²½ì— ë¬¸ì„ ë§Œë“¤ ìˆ˜ ìˆë‹¤.                           (P, ì˜ë ¥)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº ¹®À» °­Á¦·Î ´İ°í Àá±Û ¼ö ÀÖ´Ù.                        (½Å¾Ó, ¿µ·Â)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ ë¬¸ì„ ê°•ì œë¡œ ë‹«ê³  ì ê¸€ ìˆ˜ ìˆë‹¤.                        (ì‹ ì•™, ì˜ë ¥)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 3 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº ÀûÀÇ µîµÚ·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Ù.                           (½Å¾Ó, ¿µ·Â)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ ì ì˜ ë“±ë’¤ë¡œ ì´ë™í•  ìˆ˜ ìˆë‹¤.                           (ì‹ ì•™, ì˜ë ¥)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 4 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº Å©·¹ÀÌÁö ¹é´í¼­¸¦ ºÒ·¯¿Ã ¼ö ÀÖ´Ù.                           (½Å¾Ó)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ í¬ë ˆì´ì§€ ë°±ëŒ„ì„œë¥¼ ë¶ˆëŸ¬ì˜¬ ìˆ˜ ìˆë‹¤.                           (ì‹ ì•™)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 5 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("´ç½ÅÀº ¾ğÁ¦µçÁö µîµÚ¿¡ ÀÖ´Â ¹®À» ¿­°í Å»Ãâ ÇÒ ¼ö ÀÖ´Ù.       (½Å¾Ó, ¿µ·Â)", true, CL_okina);
+			printsub("ë‹¹ì‹ ì€ ì–¸ì œë“ ì§€ ë“±ë’¤ì— ìˆëŠ” ë¬¸ì„ ì—´ê³  íƒˆì¶œ í•  ìˆ˜ ìˆë‹¤.       (ì‹ ì•™, ì˜ë ¥)", true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		break;
@@ -3225,87 +3225,87 @@ void God_show()
 			{
 				if (already_pure)
 				{
-					printsub("´ç½ÅÀº ¼øÈ£ÀÇ Ãàº¹¿¡ ÀÇÇØ ¿µ±¸ÀûÀ¸·Î ¼øÈ­µÇ¾ú´Ù.                 (ÆĞ½Ãºê)", true, CL_junko);
+					printsub("ë‹¹ì‹ ì€ ìˆœí˜¸ì˜ ì¶•ë³µì— ì˜í•´ ì˜êµ¬ì ìœ¼ë¡œ ìˆœí™”ë˜ì—ˆë‹¤.                 (íŒ¨ì‹œë¸Œ)", true, CL_junko);
 					if (you.god_value[GT_JUNKO][3] == 7)
-						printsub(" ¦¦´ç½ÅÀº ÀÏºÎ µÎ·ç¸¶¸®, ¹°¾àÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						printsub(" â””ë‹¹ì‹ ì€ ì¼ë¶€ ë‘ë£¨ë§ˆë¦¬, ë¬¼ì•½ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
 					else
-						printsub(" ¦¦´ç½ÅÀº ½ºÆçÄ«µå, ÀÏºÎ µÎ·ç¸¶¸®, ¹°¾àÀ» »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-					printsub(" ¦¦´ç½ÅÀº ¸ğµç ½ºÅÈÀÌ 5 Áõ°¡ÇÑ´Ù.", true, CL_junko);
+						printsub(" â””ë‹¹ì‹ ì€ ìŠ¤í ì¹´ë“œ, ì¼ë¶€ ë‘ë£¨ë§ˆë¦¬, ë¬¼ì•½ì„ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+					printsub(" â””ë‹¹ì‹ ì€ ëª¨ë“  ìŠ¤íƒ¯ì´ 5 ì¦ê°€í•œë‹¤.", true, CL_junko);
 					printsub("", true, CL_normal);
 				}
 				else
 				{
-					printsub("¼øÈ£ÀÇ ÈûÀº °­·ÂÇÏÁö¸¸ ´ç½ÅÀ» ÀÏ½ÃÀûÀ¸·Î ¼øÈ­½ÃÅ²´Ù.             (ÆĞ½Ãºê)", true, CL_junko);
+					printsub("ìˆœí˜¸ì˜ í˜ì€ ê°•ë ¥í•˜ì§€ë§Œ ë‹¹ì‹ ì„ ì¼ì‹œì ìœ¼ë¡œ ìˆœí™”ì‹œí‚¨ë‹¤.             (íŒ¨ì‹œë¸Œ)", true, CL_junko);
 					if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 					{
-						printsub(" ¦¦1´Ü°è: ´ç½ÅÀº ½ºÆçÄ«µå¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-						printsub(" ¦¦2´Ü°è: ´ç½ÅÀº ÀÏºÎ µÎ·ç¸¶¸®ÀÇ È¿°ú¸¦ »ç¿ëÇÒ ¼ö ¾ø´Ù.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
-						printsub(" ¦¦3´Ü°è: ´ç½ÅÀº ¹°¾àÀÇ È¿°ú¸¦ ¹ŞÁö ¾Ê´Â´Ù.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
+						printsub(" â””1ë‹¨ê³„: ë‹¹ì‹ ì€ ìŠ¤í ì¹´ë“œë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						printsub(" â””2ë‹¨ê³„: ë‹¹ì‹ ì€ ì¼ë¶€ ë‘ë£¨ë§ˆë¦¬ì˜ íš¨ê³¼ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ë‹¤.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
+						printsub(" â””3ë‹¨ê³„: ë‹¹ì‹ ì€ ë¬¼ì•½ì˜ íš¨ê³¼ë¥¼ ë°›ì§€ ì•ŠëŠ”ë‹¤.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
 						printsub("", true, CL_normal);
 					}
 				}
 			}
 			if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("´ç½ÅÀº ´Ü¼øÇÏÁö¸¸ °­·ÂÇÑ Åº¸·À» ³¯¸± ¼ö ÀÖ´Ù.                  (P, ¿µ·Â)", true, already_pure? CL_bad : CL_junko);
+				printsub("ë‹¹ì‹ ì€ ë‹¨ìˆœí•˜ì§€ë§Œ ê°•ë ¥í•œ íƒ„ë§‰ì„ ë‚ ë¦´ ìˆ˜ ìˆë‹¤.                  (P, ì˜ë ¥)", true, already_pure? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("´ç½ÅÀº ¼ø¼öÇÑ ÈûÀ» ¾òÀ» ¼ö ÀÖ´Ù.                                  (½Å¾Ó)", true, already_pure ? CL_bad : CL_junko);
+				printsub("ë‹¹ì‹ ì€ ìˆœìˆ˜í•œ í˜ì„ ì–»ì„ ìˆ˜ ìˆë‹¤.                                  (ì‹ ì•™)", true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("´ç½ÅÀº ¼ø¼öÇÑ »ìÀÇ¸¦ ¾òÀ» ¼ö ÀÖ´Ù.                                (½Å¾Ó)", true, already_pure ? CL_bad : CL_junko);
+				printsub("ë‹¹ì‹ ì€ ìˆœìˆ˜í•œ ì‚´ì˜ë¥¼ ì–»ì„ ìˆ˜ ìˆë‹¤.                                (ì‹ ì•™)", true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
 			{
 				if (already_pure)
 				{
-					printsub("´ç½ÅÀº ¼øÈ£ÀÇ Ãàº¹À¸·Î ¿µ±¸ÀûÀ¸·Î ¼øÈ­µÇ¾ú´Ù.", true, CL_junko);
+					printsub("ë‹¹ì‹ ì€ ìˆœí˜¸ì˜ ì¶•ë³µìœ¼ë¡œ ì˜êµ¬ì ìœ¼ë¡œ ìˆœí™”ë˜ì—ˆë‹¤.", true, CL_junko);
 					char temp[100];
 					switch (you.god_value[GT_JUNKO][3])
 					{
 					case 1:
-						sprintf_s(temp, 100, " ¦¦½ºÅ³¼øÈ­: ´ç½ÅÀÇ %s ½ºÅ³·¹º§Àº Ä³¸¯ÅÍ ·¹º§°ú Ç×»ó °°´Ù. ", skill_string((skill_type)you.pure_skill));
+						sprintf_s(temp, 100, " â””ìŠ¤í‚¬ìˆœí™”: ë‹¹ì‹ ì˜ %s ìŠ¤í‚¬ë ˆë²¨ì€ ìºë¦­í„° ë ˆë²¨ê³¼ í•­ìƒ ê°™ë‹¤. ", skill_string((skill_type)you.pure_skill));
 						printsub(temp, true, CL_junko);
 						break;
 					case 2:
 					{
-						sprintf_s(temp, 100, " ¦¦ÀúÇ×¼øÈ­: ´ç½ÅÀÇ %s ÀúÇ×Àº ¸é¿ªÀÌ´Ù. ", you.GetProperty(TPT_FIRE_IMUNE)?"È­¿°":(you.GetProperty(TPT_COLD_IMUNE) ? "³Ã±â" : (you.GetProperty(TPT_ELEC_IMUNE) ? "Àü±â" : "¹ö±×")));
+						sprintf_s(temp, 100, " â””ì €í•­ìˆœí™”: ë‹¹ì‹ ì˜ %s ì €í•­ì€ ë©´ì—­ì´ë‹¤. ", you.GetProperty(TPT_FIRE_IMUNE)?"í™”ì—¼":(you.GetProperty(TPT_COLD_IMUNE) ? "ëƒ‰ê¸°" : (you.GetProperty(TPT_ELEC_IMUNE) ? "ì „ê¸°" : "ë²„ê·¸")));
 						printsub(temp, true, CL_junko);
 						break;
 					}
 					case 3:
-						sprintf_s(temp, 100, " ¦¦¸¶·Â¼øÈ­: ´ç½ÅÀÇ Ã¼·Â°ú ¿µ·ÂÀº µ¿ÀÏ½ÃµÈ´Ù. ");
+						sprintf_s(temp, 100, " â””ë§ˆë ¥ìˆœí™”: ë‹¹ì‹ ì˜ ì²´ë ¥ê³¼ ì˜ë ¥ì€ ë™ì¼ì‹œëœë‹¤. ");
 						printsub(temp, true, CL_junko);
 						break;
 					case 4:
-						sprintf_s(temp, 100, " ¦¦ÆÄ¿ö¼øÈ­: ´ç½ÅÀº Ç×»ó Ç®ÆÄ¿ö´Ù. ");
+						sprintf_s(temp, 100, " â””íŒŒì›Œìˆœí™”: ë‹¹ì‹ ì€ í•­ìƒ í’€íŒŒì›Œë‹¤. ");
 						printsub(temp, true, CL_junko);
 						break;
 					case 5:
-						sprintf_s(temp, 100, " ¦¦»ı¸í¼øÈ­: ´ç½ÅÀº Ãß°¡ ¸ñ¼ûÀ» ¹Ş¾Ò´Ù. ");
+						sprintf_s(temp, 100, " â””ìƒëª…ìˆœí™”: ë‹¹ì‹ ì€ ì¶”ê°€ ëª©ìˆ¨ì„ ë°›ì•˜ë‹¤. ");
 						printsub(temp, true, CL_junko);
 						break;
 					case 6:
-						sprintf_s(temp, 100, " ¦¦Àåºñ¼øÈ­: ´ç½ÅÀº °¡Áö°í ÀÖ´ø Àåºñ¸¦ ¼øÈ­Çß´Ù. ");
+						sprintf_s(temp, 100, " â””ì¥ë¹„ìˆœí™”: ë‹¹ì‹ ì€ ê°€ì§€ê³  ìˆë˜ ì¥ë¹„ë¥¼ ìˆœí™”í–ˆë‹¤. ");
 						printsub(temp, true, CL_junko);
 						break;
 					case 7:
-						sprintf_s(temp, 100, " ¦¦½Ã½ºÅÛ¼øÈ­: ´ç½ÅÀº ½ºÆçÄ«µå »ç¿ëÀÌ Çã°¡µÇ°í ºÎÀûÀÇ ÃæÀü¼Óµµ°¡ 3¹è°¡ µÇ¾ú´Ù. ");
+						sprintf_s(temp, 100, " â””ì‹œìŠ¤í…œìˆœí™”: ë‹¹ì‹ ì€ ìŠ¤í ì¹´ë“œ ì‚¬ìš©ì´ í—ˆê°€ë˜ê³  ë¶€ì ì˜ ì¶©ì „ì†ë„ê°€ 3ë°°ê°€ ë˜ì—ˆë‹¤. ");
 						printsub(temp, true, CL_junko);
 						break;
 					default:
-						printsub(" ¦¦¾Ë¼ö¾ø´Â ¹ö±× ¼øÈ­", true, CL_junko);
+						printsub(" â””ì•Œìˆ˜ì—†ëŠ” ë²„ê·¸ ìˆœí™”", true, CL_junko);
 						break;
 					}
 				}
 				else
 				{
-					printsub("´ç½ÅÀº ¼øÈ£ÀÇ Ãàº¹À¸·Î ¿µ±¸ÀûÀ¸·Î ¼øÈ­ÇÒ ¼ö ÀÖ´Ù.               (ÇÑ¹ø¸¸)", true, CL_junko);
+					printsub("ë‹¹ì‹ ì€ ìˆœí˜¸ì˜ ì¶•ë³µìœ¼ë¡œ ì˜êµ¬ì ìœ¼ë¡œ ìˆœí™”í•  ìˆ˜ ìˆë‹¤.               (í•œë²ˆë§Œ)", true, CL_junko);
 				}
 				printsub("", true, CL_normal);
 			}
@@ -3338,7 +3338,7 @@ bool God_pray(const list<item>::iterator it)
 	case GT_KANAKO:
 		//if(it->type == ITM_FOOD && it->value1 == 0)
 		//{
-		//	printlog("PÅÛÀº ºÒ±âµÕ¿¡ ÈÛ½Î¿© »ç¶óÁ³´Ù. Ä«³ªÄÚ´Â °ø¹°À» ¹Ş¾Æµé¿´´Ù.",true,false,false,CL_small_danger);
+		//	printlog("Pí…œì€ ë¶ˆê¸°ë‘¥ì— íœ©ì‹¸ì—¬ ì‚¬ë¼ì¡Œë‹¤. ì¹´ë‚˜ì½”ëŠ” ê³µë¬¼ì„ ë°›ì•„ë“¤ì˜€ë‹¤.",true,false,false,CL_small_danger);
 		//	env[current_level].DeleteItem(it);
 		//	if(randA(1))
 		//	{
@@ -3367,7 +3367,7 @@ bool God_pray(const list<item>::iterator it)
 	case GT_EIRIN:
 		//if(it->type == ITM_FOOD && it->value1 == 0)
 		//{
-		//	printlog("PÅÛÀº ºÒ±âµÕ¿¡ ÈÛ½Î¿© »ç¶óÁ³´Ù. ¿¡ÀÌ¸°Àº °ø¹°À» ¹Ş¾Æµé¿´´Ù.",true,false,false,CL_small_danger);
+		//	printlog("Pí…œì€ ë¶ˆê¸°ë‘¥ì— íœ©ì‹¸ì—¬ ì‚¬ë¼ì¡Œë‹¤. ì—ì´ë¦°ì€ ê³µë¬¼ì„ ë°›ì•„ë“¤ì˜€ë‹¤.",true,false,false,CL_small_danger);
 		//	env[current_level].DeleteItem(it);
 		//	you.PietyUpDown(1);	
 		//	you.GiftCount(1);
@@ -3377,10 +3377,10 @@ bool God_pray(const list<item>::iterator it)
 		{
 			int per_ = randA(100);
 			int result_ = (per_<15)?PT_CONFUSE:((per_<41)?PT_POISON:((per_<67)?PT_SLOW:(per_<93)?PT_DOWN_STAT:PT_PARALYSIS));
-			printarray(false,false,false,CL_small_danger,3,it->GetName().c_str(),it->GetNameInfor().name_is(true),randA(2)?(randA(1)?"¿¬±â¸¦ ³»¸ç ":"°í¾àÇÑ ³¿»õ¸¦ Ç³±â¸ç "):"ºûÀ» ³»¸é¼­ ");
+			printarray(false,false,false,CL_small_danger,3,it->GetName().c_str(),it->GetNameInfor().name_is(true),randA(2)?(randA(1)?"ì—°ê¸°ë¥¼ ë‚´ë©° ":"ê³ ì•½í•œ ëƒ„ìƒˆë¥¼ í’ê¸°ë©° "):"ë¹›ì„ ë‚´ë©´ì„œ ");
 			it->value1 = result_;
-			printarray(true,false,false,CL_small_danger,3,it->GetName().c_str(),it->GetNameInfor().name_by(true),"¹Ù²î¾ú´Ù.");
-			printarray(true,false,false,CL_small_danger,1,"¿¡ÀÌ¸°Àº ÈíÁ·È÷ ¿©°å´Ù.");
+			printarray(true,false,false,CL_small_danger,3,it->GetName().c_str(),it->GetNameInfor().name_by(true),"ë°”ë€Œì—ˆë‹¤.");
+			printarray(true,false,false,CL_small_danger,1,"ì—ì´ë¦°ì€ í¡ì¡±íˆ ì—¬ê²¼ë‹¤.");
 			you.PietyUpDown(it->num * 2);
 			you.GiftCount(it->num * 1);
 			return true;
@@ -3411,7 +3411,7 @@ bool god_punish(god_type god)
 
 	if(wiz_list.wizard_mode == 1)
 	{
-		printarray(true,false,false,CL_small_danger,1,"***Â¡¹ú!***");
+		printarray(true,false,false,CL_small_danger,1,"***ì§•ë²Œ!***");
 	}
 	switch(god)
 	{
@@ -3422,15 +3422,15 @@ bool god_punish(god_type god)
 	case GT_JOON_AND_SION:
 	{
 		random_extraction<int> rand_;
-		rand_.push(0, 50);//ÁÒ¿ÂÀÌ °­Á¦ ºùÀÇÇÏ¸é¼­ ÆÄ¿ö °¨¼Ò
-		rand_.push(1, 50);//½Ã¿ÂÀÌ °­Á¦ ºùÀÇÇÏ¸é¼­ Ã¼·Â ¿µ·Â °¨¼Ò
+		rand_.push(0, 50);//ì£ ì˜¨ì´ ê°•ì œ ë¹™ì˜í•˜ë©´ì„œ íŒŒì›Œ ê°ì†Œ
+		rand_.push(1, 50);//ì‹œì˜¨ì´ ê°•ì œ ë¹™ì˜í•˜ë©´ì„œ ì²´ë ¥ ì˜ë ¥ ê°ì†Œ
 		switch (rand_.pop())
 		{
 		case 0:
 			you.god_value[GT_JOON_AND_SION][0] = 1;
 			you.god_value[GT_JOON_AND_SION][1] = rand_int(250, 400);
 			you.PowUpDown(-100);
-			printarray(true, false, false, CL_white_blue, 1, "ÁÒ¿ÂÀÌ ´ç½Å¿¡°Ô °­Á¦·Î ºùÀÇÇÏ¿´´Ù! ÆÄ¿ö°¡ °¨¼ÒÇÏ¿´´Ù!");
+			printarray(true, false, false, CL_white_blue, 1, "ì£ ì˜¨ì´ ë‹¹ì‹ ì—ê²Œ ê°•ì œë¡œ ë¹™ì˜í•˜ì˜€ë‹¤! íŒŒì›Œê°€ ê°ì†Œí•˜ì˜€ë‹¤!");
 			break;
 		case 1:
 			you.god_value[GT_JOON_AND_SION][0] = 2;
@@ -3438,7 +3438,7 @@ bool god_punish(god_type god)
 			you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
 			if (!you.pure_mp)
 				you.MpUpDown(-you.max_mp / 2);
-			printarray(true, false, false, CL_white_blue, 1, "½Ã¿ÂÀÌ ´ç½Å¿¡°Ô °­Á¦·Î ºùÀÇÇÏ¿´´Ù! Ã¼·Â°ú ¿µ·ÂÀ» ÀÒ¾ú´Ù!");
+			printarray(true, false, false, CL_white_blue, 1, "ì‹œì˜¨ì´ ë‹¹ì‹ ì—ê²Œ ê°•ì œë¡œ ë¹™ì˜í•˜ì˜€ë‹¤! ì²´ë ¥ê³¼ ì˜ë ¥ì„ ìƒì—ˆë‹¤!");
 			break;
 		}
 	}
@@ -3446,22 +3446,22 @@ bool god_punish(god_type god)
 	case GT_BYAKUREN:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,50);//¸¶³ªÈí¼ö
-			rand_.push(1,25);//½ºÅÈµå·¹ÀÎ
-			rand_.push(2,25);//½½·Î¿ì
+			rand_.push(0,50);//ë§ˆë‚˜í¡ìˆ˜
+			rand_.push(1,25);//ìŠ¤íƒ¯ë“œë ˆì¸
+			rand_.push(2,25);//ìŠ¬ë¡œìš°
 			switch(rand_.pop())
 			{
 			case 0:
 				you.MpUpDown(!you.pure_skill? -you.GetMaxMp(): -you.GetMaxMp()/2);
-				printarray(true,false,false,CL_white_blue,1,"¹òÄí·»ÀÇ ºĞ³ë·Î ´ç½ÅÀÇ ¿µ·ÂÀÌ Èí¼öµÇ¾ú´Ù!");
+				printarray(true,false,false,CL_white_blue,1,"ë±Œì¿ ë Œì˜ ë¶„ë…¸ë¡œ ë‹¹ì‹ ì˜ ì˜ë ¥ì´ í¡ìˆ˜ë˜ì—ˆë‹¤!");
 				break;
 			case 1:
 				(randA(1)?you.StatUpDown(-rand_int(1,5),STAT_STR,true):you.StatUpDown(-rand_int(3,7),STAT_INT,true));
-				printarray(true,false,false,CL_white_blue,1,"¹òÄí·»ÀÇ ºĞ³ë·Î ´ç½ÅÀÇ ½ºÅÈÀÌ °¨¼ÒµÇ¾ú´Ù!");
+				printarray(true,false,false,CL_white_blue,1,"ë±Œì¿ ë Œì˜ ë¶„ë…¸ë¡œ ë‹¹ì‹ ì˜ ìŠ¤íƒ¯ì´ ê°ì†Œë˜ì—ˆë‹¤!");
 				break;
 			case 2:
 				you.SetSlow(rand_int(80,100));
-				printarray(true,false,false,CL_white_blue,1,"¹òÄí·»ÀÇ ºĞ³ë·Î ´ç½ÅÀº ´À·ÁÁ³´Ù!");
+				printarray(true,false,false,CL_white_blue,1,"ë±Œì¿ ë Œì˜ ë¶„ë…¸ë¡œ ë‹¹ì‹ ì€ ëŠë ¤ì¡Œë‹¤!");
 				break;
 			}
 		}
@@ -3469,16 +3469,16 @@ bool god_punish(god_type god)
 	case GT_KANAKO:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,33);//°Ç½ÅÃÊ·¡µ¹
-			rand_.push(1,33);//¿Â¹Ù½Ã¶ó
-			rand_.push(2,33);//¸÷ ¸®Äİ
+			rand_.push(0,33);//ê±´ì‹ ì´ˆë˜ëŒ
+			rand_.push(1,33);//ì˜¨ë°”ì‹œë¼
+			rand_.push(2,33);//ëª¹ ë¦¬ì½œ
 			switch(rand_.pop())
 			{
 			case 0:	
 				{
-					printarray(true,false,false,CL_help,1,"Ä«³ªÄÚ´Â ´ç½Å¿¡°Ô °­·ÂÇÑ ÀÏ°İÀ» ³¯·È´Ù!");
+					printarray(true,false,false,CL_help,1,"ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ê°•ë ¥í•œ ì¼ê²©ì„ ë‚ ë ¸ë‹¤!");
 					int damage_ = you.GetHp()*rand_int(40,80)/100;
-					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("°Ç½ÅÃÊ·¡ µ¹",true));
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("ê±´ì‹ ì´ˆë˜ ëŒ",true));
 					you.damage(temp_att, true);
 
 
@@ -3490,7 +3490,7 @@ bool god_punish(god_type god)
 					{
 						BaseSummon(MON_ONBASIRA, rand_int(10,30), true, false, 2, NULL, you.position, SKD_OTHER, -1);
 					}
-					printarray(true,false,false,CL_help,1,"Ä«³ªÄÚ´Â ´ç½Å¿¡°Ô ¿Â¹Ù½Ã¶ó¸¦ ²È¾Ò´Ù!");
+					printarray(true,false,false,CL_help,1,"ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ì˜¨ë°”ì‹œë¼ë¥¼ ê½‚ì•˜ë‹¤!");
 					env[current_level].MakeNoise(you.position,16,NULL);
 					break;
 				}
@@ -3512,7 +3512,7 @@ bool god_punish(god_type god)
 					dif_rect_iterator rit(you.position,2,true);
 					if(!dq.empty())
 					{							
-						printarray(true,false,false,CL_help,1,"Ä«³ªÄÚ´Â ´ç½ÅÀ» ÀüÅõ·Î °­Á¦·Î ÀÌ²ø¾ú´Ù!");
+						printarray(true,false,false,CL_help,1,"ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì„ ì „íˆ¬ë¡œ ê°•ì œë¡œ ì´ëŒì—ˆë‹¤!");
 						summon_ = true;
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
@@ -3529,7 +3529,7 @@ bool god_punish(god_type god)
 					}
 					else
 					{
-						printarray(true,false,false,CL_help,1,"Ä«³ªÄÚ´Â ´ç½ÅÀ» ÀüÅõ·Î ÀÌ²ø·ÁÇßÁö¸¸ Àû´çÇÑ ÀûÀÌ ¾ø¾ú´Ù.");
+						printarray(true,false,false,CL_help,1,"ì¹´ë‚˜ì½”ëŠ” ë‹¹ì‹ ì„ ì „íˆ¬ë¡œ ì´ëŒë ¤í–ˆì§€ë§Œ ì ë‹¹í•œ ì ì´ ì—†ì—ˆë‹¤.");
 					}
 				}
 				break;
@@ -3539,8 +3539,8 @@ bool god_punish(god_type god)
 	case GT_SUWAKO:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,50);//ÀúÁÖ
-			rand_.push(1,50);//°³±¸¸®
+			rand_.push(0,50);//ì €ì£¼
+			rand_.push(1,50);//ê°œêµ¬ë¦¬
 			switch(rand_.pop())
 			{
 			case 0:	
@@ -3558,7 +3558,7 @@ bool god_punish(god_type god)
 						}
 					}
 					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_FOG,rand_int(6,12),0,&you);
-					printarray(true,false,false,CL_swako,1,"½º¿ÍÄÚ´Â ´ç½Å¿¡°Ô ÀúÁÖ¸¦ ³»·È´Ù!");
+					printarray(true,false,false,CL_swako,1,"ìŠ¤ì™€ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ì €ì£¼ë¥¼ ë‚´ë ¸ë‹¤!");
 				}
 				break;
 			case 1:
@@ -3573,7 +3573,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_swako,1,"½º¿ÍÄÚ´Â ´ç½Å¿¡°Ô Àû´ëÀûÀÎ °³±¸¸® ¹«¸®¸¦ ¼±¹°Çß´Ù!");
+					printarray(true,false,false,CL_swako,1,"ìŠ¤ì™€ì½”ëŠ” ë‹¹ì‹ ì—ê²Œ ì ëŒ€ì ì¸ ê°œêµ¬ë¦¬ ë¬´ë¦¬ë¥¼ ì„ ë¬¼í–ˆë‹¤!");
 				}
 				break;
 			}
@@ -3582,27 +3582,27 @@ bool god_punish(god_type god)
 	case GT_MINORIKO:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,50);//ÆÄ¿öÀı¹İ
-			rand_.push(1,25);//Ã¼·Â°¨¼Ò¿Í º´
-			rand_.push(2,25);//´É·ÂÄ¡°¨¼Ò
+			rand_.push(0,50);//íŒŒì›Œì ˆë°˜
+			rand_.push(1,25);//ì²´ë ¥ê°ì†Œì™€ ë³‘
+			rand_.push(2,25);//ëŠ¥ë ¥ì¹˜ê°ì†Œ
 			switch(rand_.pop())
 			{
 			case 0:				
 				you.PowUpDown(-min(you.power,500)/2,true);
-				printarray(true,false,false,CL_warning,1,"¹Ì³ë¸®ÄÚ´Â ´ç½ÅÀÇ ¹è°íÇÄÀ» °¡¼Ó½ÃÄ×´Ù!");
+				printarray(true,false,false,CL_warning,1,"ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì˜ ë°°ê³ í””ì„ ê°€ì†ì‹œì¼°ë‹¤!");
 				break;
 			case 1:
 				{
 					you.HpUpDown(-max(1, you.GetHp() / 2), DR_EFFECT, NULL);
 					you.SetSick(rand_int(80,120));
-					printarray(true,false,false,CL_warning,1,"¹Ì³ë¸®ÄÚ´Â ´ç½ÅÀÇ °Ç°­À» »©¾Ñ¾Æ°¬´Ù!");
+					printarray(true,false,false,CL_warning,1,"ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì˜ ê±´ê°•ì„ ë¹¼ì•—ì•„ê°”ë‹¤!");
 					break;
 				}
 			case 2:
 				{
 					for(int i=0;i<3;i++)
 						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
-					printarray(true,false,false,CL_warning,1,"¹Ì³ë¸®ÄÚ´Â ´ç½ÅÀÇ ´É·ÂÄ¡¸¦ ±ï¾Æ³»·È´Ù!");
+					printarray(true,false,false,CL_warning,1,"ë¯¸ë…¸ë¦¬ì½”ëŠ” ë‹¹ì‹ ì˜ ëŠ¥ë ¥ì¹˜ë¥¼ ê¹ì•„ë‚´ë ¸ë‹¤!");
 					break;
 				}
 			}
@@ -3611,12 +3611,12 @@ bool god_punish(god_type god)
 	case GT_MIMA:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,33);//Æø¹ß
+			rand_.push(0,33);//í­ë°œ
 			switch(rand_.pop())
 			{
 			case 0:	
 				{
-					string str_ = "¸¶¹ı";
+					string str_ = "ë§ˆë²•";
 					textures* tex_ = &img_blast[2];
 					attack_type type_ = ATT_NORMAL_BLAST;
 					int damage_ = 15+you.level*5;
@@ -3624,27 +3624,27 @@ bool god_punish(god_type god)
 					{
 					case 0:
 						{
-						str_ = "È­¿° ¸¶¹ı";
+						str_ = "í™”ì—¼ ë§ˆë²•";
 						tex_ = &img_blast[0];
 						type_ = ATT_FIRE_BLAST;
 						break;
 						}
 					case 1:
 						{
-						str_ = "¾Ï¼® ¸¶¹ı";
+						str_ = "ì•”ì„ ë§ˆë²•";
 						tex_ = &img_blast[1];
 						type_ = ATT_NORMAL_BLAST;
 						damage_ = damage_*4/5;
 						break;
 					case 2:
-						str_ = "Àü±â ¸¶¹ı";
+						str_ = "ì „ê¸° ë§ˆë²•";
 						tex_ = &img_blast[2];
 						type_ = ATT_ELEC_BLAST;
 						break;
 						}
 					case 3:
 						{
-						str_ = "¸Íµ¶ ¸¶¹ı";
+						str_ = "ë§¹ë… ë§ˆë²•";
 						tex_ = &img_blast[3];
 						type_ = ATT_POISON_BLAST;
 						damage_ = damage_*4/5;
@@ -3652,21 +3652,21 @@ bool god_punish(god_type god)
 						}
 					case 4:
 						{
-						str_ = "³Ã±â ¸¶¹ı";
+						str_ = "ëƒ‰ê¸° ë§ˆë²•";
 						tex_ = &img_blast[4];
 						type_ = ATT_COLD_BLAST;
 						break;
 						}
 					case 5:
 						{
-						str_ = "¸¶·Â";
+						str_ = "ë§ˆë ¥";
 						tex_ = &img_blast[5];
 						type_ = ATT_COLD_BLAST;
 						damage_ = damage_*3/5;
 						break;
 						}
 					}
-					printarray(true,false,false,CL_green,3,"¹Ì¸¶°¡ °­·ÂÇÑ ",str_.c_str(),"À» ´ç½Å¿¡ °Ü³ÉÇß´Ù!");
+					printarray(true,false,false,CL_green,3,"ë¯¸ë§ˆê°€ ê°•ë ¥í•œ ",str_.c_str(),"ì„ ë‹¹ì‹ ì— ê²¨ëƒ¥í–ˆë‹¤!");
 					attack_infor temp_att(randC(3,damage_/3),damage_,99,NULL,PRT_ENEMY,type_,name_infor(str_.c_str(),true));
 					BaseBomb(you.position, tex_,temp_att);
 					env[current_level].MakeNoise(you.position,12,NULL);
@@ -3678,7 +3678,7 @@ bool god_punish(god_type god)
 	case GT_SHINKI:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,100);//¾Ç¸¶¼ÒÈ¯
+			rand_.push(0,100);//ì•…ë§ˆì†Œí™˜
 			switch(rand_.pop())
 			{
 			case 0:
@@ -3709,7 +3709,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_white_puple,1,"½ÅÅ°°¡ Àû´ëÀûÀÎ ¸¶°èÀÎÀ» Ã¢Á¶ÇØ³Â´Ù!");
+					printarray(true,false,false,CL_white_puple,1,"ì‹ í‚¤ê°€ ì ëŒ€ì ì¸ ë§ˆê³„ì¸ì„ ì°½ì¡°í•´ëƒˆë‹¤!");
 				}
 				break;
 			}
@@ -3718,28 +3718,28 @@ bool god_punish(god_type god)
 	case GT_YUUGI:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,25);//¼ú
-			rand_.push(1,25);//ÀÚÀÌ¾ğÆ® ½ºÀ®
-			rand_.push(2,50);//¿À´Ï ¼ÒÈ¯
+			rand_.push(0,25);//ìˆ 
+			rand_.push(1,25);//ìì´ì–¸íŠ¸ ìŠ¤ìœ™
+			rand_.push(2,50);//ì˜¤ë‹ˆ ì†Œí™˜
 			switch(rand_.pop())
 			{
 			case 0:			
-				printarray(true,false,false,CL_yuigi,1,"À¯¿ì±â°¡ °­ÇÑ ¼úÀ» ´ç½Å¿¡°Ô °­Á¦·Î ¸Ô¿´´Ù!");	
+				printarray(true,false,false,CL_yuigi,1,"ìœ ìš°ê¸°ê°€ ê°•í•œ ìˆ ì„ ë‹¹ì‹ ì—ê²Œ ê°•ì œë¡œ ë¨¹ì˜€ë‹¤!");	
 				you.SetConfuse(rand_int(9,30));
 				you.SetDrunken(rand_int(50,100));
 				break;
 			case 1:
 				{
-					printarray(true,false,false,CL_yuigi,1,"À¯¿ì±â°¡ ´ç½ÅÀ» Áı¾î´øÁ³´Ù!");
+					printarray(true,false,false,CL_yuigi,1,"ìœ ìš°ê¸°ê°€ ë‹¹ì‹ ì„ ì§‘ì–´ë˜ì¡Œë‹¤!");
 					you.Blink(40);
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
-					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY, ATT_SMASH,name_infor("ÀÚÀÌ¾ğÆ®½ºÀ®",true));
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY, ATT_SMASH,name_infor("ìì´ì–¸íŠ¸ìŠ¤ìœ™",true));
 					you.damage(temp_att, true);
 				}
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_yuigi,1,"À¯¿ì±â°¡ ´ç½ÅÀ» ¹úÇÏ±âÀ§ÇØ µ¿·á ¿À´ÏµéÀ» ºÒ·¯³Â´Ù!");
+					printarray(true,false,false,CL_yuigi,1,"ìœ ìš°ê¸°ê°€ ë‹¹ì‹ ì„ ë²Œí•˜ê¸°ìœ„í•´ ë™ë£Œ ì˜¤ë‹ˆë“¤ì„ ë¶ˆëŸ¬ëƒˆë‹¤!");
 					random_extraction<int> oni_;
 					oni_.push(MON_ONI);
 					oni_.push(MON_BLUE_ONI);
@@ -3766,13 +3766,13 @@ bool god_punish(god_type god)
 	case GT_SHIZUHA:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,33);//È¥¶õ
-			rand_.push(1,33);//¾Ï½À
-			rand_.push(2,33);//½½·Î¿ì
+			rand_.push(0,33);//í˜¼ë€
+			rand_.push(1,33);//ì•”ìŠµ
+			rand_.push(2,33);//ìŠ¬ë¡œìš°
 			switch(rand_.pop())
 			{
 			case 0:			
-				printarray(true,false,false,CL_autumn,1,"½ÃÁîÇÏ´Â ´ç½Å¿¡ ±¤±âÀÇ ³«¿±À» Èğ³¯·È´Ù!");	
+				printarray(true,false,false,CL_autumn,1,"ì‹œì¦ˆí•˜ëŠ” ë‹¹ì‹ ì— ê´‘ê¸°ì˜ ë‚™ì—½ì„ í©ë‚ ë ¸ë‹¤!");	
 				you.SetConfuse(rand_int(12,45), true);
 				break;
 			case 1:
@@ -3791,16 +3791,16 @@ bool god_punish(god_type god)
 					int rand_ = randA(1);
 					env[current_level].MakeFloorEffect(coord_def(you.position.x,you.position.y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,3+you.piety/20,&you);
 	
-					printarray(true,false,false,CL_autumn,1,"½ÃÁîÇÏ°¡ ´ç½ÅÀÇ µî µÚ¸¦ Âñ·¶´Ù!");
+					printarray(true,false,false,CL_autumn,1,"ì‹œì¦ˆí•˜ê°€ ë‹¹ì‹ ì˜ ë“± ë’¤ë¥¼ ì°”ë €ë‹¤!");
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
-					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("¾Ï½À",true));
+					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor("ì•”ìŠµ",true));
 					you.damage(temp_att, true);
 					you.SetBuff(BUFFSTAT_RF,BUFF_AUTUMN_RF,-1,1);
 				}
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_autumn,1,"½ÃÁîÇÏ°¡ ¾öÃ»³­ ¼ÒÀ½°ú ÇÔ²² ´ç½ÅÀ» Áö¸ñÇß´Ù!");
+					printarray(true,false,false,CL_autumn,1,"ì‹œì¦ˆí•˜ê°€ ì—„ì²­ë‚œ ì†ŒìŒê³¼ í•¨ê»˜ ë‹¹ì‹ ì„ ì§€ëª©í–ˆë‹¤!");
 					env[current_level].MakeNoise(you.position,30,NULL);
 					int time_ = rand_int(40,60);
 					you.SetGlow(time_);
@@ -3813,9 +3813,9 @@ bool god_punish(god_type god)
 	case GT_HINA:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,25);//¾×
-			rand_.push(1,50);//Àåºñ¾×
-			rand_.push(2,25);//È¥¶õ
+			rand_.push(0,25);//ì•¡
+			rand_.push(1,50);//ì¥ë¹„ì•¡
+			rand_.push(2,25);//í˜¼ë€
 			switch(rand_.pop())
 			{
 			case 0:		
@@ -3833,7 +3833,7 @@ bool god_punish(god_type god)
 						}
 					}
 					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_CURSE,rand_int(6,12),0,&you);
-					printarray(true,false,false,CL_hina,1,"È÷³ª´Â ¾×À» ´ç½Å¿¡°Ô Á÷Á¢ ÁÖÀÔÇß´Ù!");
+					printarray(true,false,false,CL_hina,1,"íˆë‚˜ëŠ” ì•¡ì„ ë‹¹ì‹ ì—ê²Œ ì§ì ‘ ì£¼ì…í–ˆë‹¤!");
 				}
 				break;
 			case 1:
@@ -3846,21 +3846,21 @@ bool god_punish(god_type god)
 							dq.push_back(i);
 					}	
 					rand_shuffle(dq.begin(),dq.end());
-					printarray(false,false,false,CL_hina,1,"È÷³ª´Â ´ç½ÅÀÇ Àåºñ¿¡ ¾×À» ÁÖÀÔÇß´Ù! ");
+					printarray(false,false,false,CL_hina,1,"íˆë‚˜ëŠ” ë‹¹ì‹ ì˜ ì¥ë¹„ì— ì•¡ì„ ì£¼ì…í–ˆë‹¤! ");
 
 
 					for(int i = 0; i<dq.size() ; i++)
 					{
 						if(you.equipment[dq[i]])
 						{
-							string before_name = you.equipment[dq[i]]->GetName(); //ÀúÁÖ¹Ş±âÀü ÀÌ¸§
+							string before_name = you.equipment[dq[i]]->GetName(); //ì €ì£¼ë°›ê¸°ì „ ì´ë¦„
 							if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
 							{
 								enterlog();
-								printlog("ÀåÂøÇÏ°í ÀÖ´ø ",false,false,false,CL_small_danger);		
+								printlog("ì¥ì°©í•˜ê³  ìˆë˜ ",false,false,false,CL_small_danger);		
 								printlog(before_name,false,false,false,CL_small_danger);	
 								printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-								printlog("°Ë°Ô ºû³µ´Ù.",true,false,false,CL_small_danger);		
+								printlog("ê²€ê²Œ ë¹›ë‚¬ë‹¤.",true,false,false,CL_small_danger);		
 								curse_ = true;
 								break;
 							}
@@ -3868,14 +3868,14 @@ bool god_punish(god_type god)
 					}
 					if(!curse_)
 					{
-						printarray(true,false,false,CL_hina,1,"±×·¯³ª ¾Æ¹«ÀÏµµ ÀÏ¾î³ªÁö ¾Ê¾Ò´Ù.");
+						printarray(true,false,false,CL_hina,1,"ê·¸ëŸ¬ë‚˜ ì•„ë¬´ì¼ë„ ì¼ì–´ë‚˜ì§€ ì•Šì•˜ë‹¤.");
 
 					}
 				}
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_autumn,1,"È÷³ª´Â ´ç½ÅÀ» ºùºù µ¹·È´Ù!");	
+					printarray(true,false,false,CL_autumn,1,"íˆë‚˜ëŠ” ë‹¹ì‹ ì„ ë¹™ë¹™ ëŒë ¸ë‹¤!");	
 					you.SetConfuse(rand_int(12,45), true);
 					break;
 				}
@@ -3885,16 +3885,16 @@ bool god_punish(god_type god)
 	case GT_YUKARI:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,25);//°ø°£ÀÌµ¿
-			rand_.push(1,50);//Àåºñ¾×
-			rand_.push(2,25);//È¥¶õ
+			rand_.push(0,25);//ê³µê°„ì´ë™
+			rand_.push(1,50);//ì¥ë¹„ì•¡
+			rand_.push(2,25);//í˜¼ë€
 			switch(rand_.pop())
 			{
 			case 0:		
 				{
 					you.SetConfuse(rand_int(6,18), true);
 					you.Teleport();
-					printarray(true,false,false,CL_yukari,1,"À¯Ä«¸®´Â ´ç½ÅÀ» °­Á¦·Î ÅÚ·¹Æ÷Æ® ½ÃÄ×´Ù!");
+					printarray(true,false,false,CL_yukari,1,"ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì„ ê°•ì œë¡œ í…”ë ˆí¬íŠ¸ ì‹œì¼°ë‹¤!");
 				}
 				break;
 			case 1:
@@ -3917,7 +3917,7 @@ bool god_punish(god_type god)
 					if(!dq.empty())
 					{
 						summon_ = true;
-						printarray(true,false,false,CL_yukari,1,"À¯Ä«¸®´Â ´ç½ÅÀÇ ÁÖº¯¿¡ ¸÷µéÀ» °­Á¦·Î ÀÌµ¿½ÃÄ×´Ù!");
+						printarray(true,false,false,CL_yukari,1,"ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì˜ ì£¼ë³€ì— ëª¹ë“¤ì„ ê°•ì œë¡œ ì´ë™ì‹œì¼°ë‹¤!");
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
 							if(env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
@@ -3937,14 +3937,14 @@ bool god_punish(god_type god)
 					}
 					else
 					{
-						printarray(true,false,false,CL_yukari,1,"À¯Ä«¸®´Â ´ç½ÅÀÇ °ø°£ÀÌµ¿À» ¸·¾Ò´Ù!");
+						printarray(true,false,false,CL_yukari,1,"ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì˜ ê³µê°„ì´ë™ì„ ë§‰ì•˜ë‹¤!");
 					}
 				}
 				break;
 			case 2:
 				{
 
-					printarray(true,false,false,CL_yukari,1,"À¯Ä«¸®´Â ´ç½ÅÀ» °¨½ÃÇÏ´Â ÀÌÇüÀÇ ´«À» ¼ÒÈ¯Çß´Ù!");
+					printarray(true,false,false,CL_yukari,1,"ìœ ì¹´ë¦¬ëŠ” ë‹¹ì‹ ì„ ê°ì‹œí•˜ëŠ” ì´í˜•ì˜ ëˆˆì„ ì†Œí™˜í–ˆë‹¤!");
 					summon_ = true;
 					int i = rand_int(2+you.level/8,3+you.level/5);
 					for(; i>0 ; i--)
@@ -3963,8 +3963,8 @@ bool god_punish(god_type god)
 	case GT_EIRIN:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,66);//¹°¾à¸ÔÀÌ±â
-			rand_.push(1,33);//°­Á¦½ÇÇè
+			rand_.push(0,66);//ë¬¼ì•½ë¨¹ì´ê¸°
+			rand_.push(1,33);//ê°•ì œì‹¤í—˜
 			switch(rand_.pop())
 			{
 			case 0:
@@ -3976,13 +3976,13 @@ bool god_punish(god_type god)
 					potion_.push(PT_CONFUSE);
 					potion_.push(PT_POISON);
 					potion_type p_ = potion_.choice();
-					printarray(true,false,false,CL_small_danger,3,"¿¡ÀÌ¸°Àº ´ç½Å¿¡°Ô ¾ïÁö·Î ",potion_iden_string[p_],"¹°¾àÀ» ¸Ô¿´´Ù!");
+					printarray(true,false,false,CL_small_danger,3,"ì—ì´ë¦°ì€ ë‹¹ì‹ ì—ê²Œ ì–µì§€ë¡œ ",potion_iden_string[p_],"ë¬¼ì•½ì„ ë¨¹ì˜€ë‹¤!");
 					drinkpotion(p_, false);
 				}
 				break;
 			case 1:
 				{
-					printarray(true,false,false,CL_small_danger,1,"¿¡ÀÌ¸°ÀÌ ´ç½ÅÀÇ ¸ö¿¡ °­Á¦·Î ½ÇÇèÀ» Çß´Ù!");
+					printarray(true,false,false,CL_small_danger,1,"ì—ì´ë¦°ì´ ë‹¹ì‹ ì˜ ëª¸ì— ê°•ì œë¡œ ì‹¤í—˜ì„ í–ˆë‹¤!");
 					you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,true);
 					for(int i=0;i<3;i++)
 						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
@@ -3994,7 +3994,7 @@ bool god_punish(god_type god)
 	case GT_YUYUKO:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,50);//À¯·É
+			rand_.push(0,50);//ìœ ë ¹
 			switch(rand_.pop())
 			{
 			case 0:
@@ -4009,7 +4009,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_yuyuko,1,"À¯À¯ÄÚ´Â ´ç½ÅÀÇ ÁÖº¯¿¡ À¯·ÉÀ» ²ø¾î¸ğ¾Ò´Ù!");
+					printarray(true,false,false,CL_yuyuko,1,"ìœ ìœ ì½”ëŠ” ë‹¹ì‹ ì˜ ì£¼ë³€ì— ìœ ë ¹ì„ ëŒì–´ëª¨ì•˜ë‹¤!");
 				}
 				break;
 			}
@@ -4026,7 +4026,7 @@ bool god_punish(god_type god)
 				
 			while(god_ == GT_SEIJA || god_ == GT_SATORI)
 				god_ = (god_type)rand_int(GT_BYAKUREN,GT_LILLY);
-			printarray(true,false,false,CL_seija,3,"¼¼ÀÌÀÚ´Â ´ç½Å°ú ",GetGodString(god_),"ÀÇ °ü°è¸¦ ÀÌ°£ÁúÇß´Ù!");
+			printarray(true,false,false,CL_seija,3,"ì„¸ì´ìëŠ” ë‹¹ì‹ ê³¼ ",GetGodString(god_),"ì˜ ê´€ê³„ë¥¼ ì´ê°„ì§ˆí–ˆë‹¤!");
 			
 			you.PunishUpDown(rand_int(3,4),god_);
 		}
@@ -4034,14 +4034,14 @@ bool god_punish(god_type god)
 	case GT_LILLY:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0,35);//¾àÈ­
-			rand_.push(1,65);//¿äÁ¤¼ÒÈ¯
+			rand_.push(0,35);//ì•½í™”
+			rand_.push(1,65);//ìš”ì •ì†Œí™˜
 			switch(rand_.pop())
 			{
 			case 0:		
 				{
 					you.SetForceStrong(false, rand_int(20,40),true);
-					printarray(true,false,false,CL_lilly,1,"¸±¸®´Â ´ç½ÅÀÇ ÈûÀ» »©¾Ñ¾Ò´Ù!");
+					printarray(true,false,false,CL_lilly,1,"ë¦´ë¦¬ëŠ” ë‹¹ì‹ ì˜ í˜ì„ ë¹¼ì•—ì•˜ë‹¤!");
 				}
 				break;
 			case 1:
@@ -4092,7 +4092,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_lilly,1,"¸±¸®´Â ´ç½Å¿¡°Ô Àû´ëÀûÀÎ ¿äÁ¤ÀÇ ¹«¸®¸¦ ¼ÒÈ¯Çß´Ù!");
+					printarray(true,false,false,CL_lilly,1,"ë¦´ë¦¬ëŠ” ë‹¹ì‹ ì—ê²Œ ì ëŒ€ì ì¸ ìš”ì •ì˜ ë¬´ë¦¬ë¥¼ ì†Œí™˜í–ˆë‹¤!");
 				}
 				break;
 			}
@@ -4101,28 +4101,28 @@ bool god_punish(god_type god)
 	case GT_MIKO:
 	{
 		random_extraction<int> rand_;
-		rand_.push(0, 33);//Çã¾à
-		rand_.push(1, 33);//°¨¼Ó
-		rand_.push(2, 33);//½ºÅÈ»©¾Ñ±â
+		rand_.push(0, 33);//í—ˆì•½
+		rand_.push(1, 33);//ê°ì†
+		rand_.push(2, 33);//ìŠ¤íƒ¯ë¹¼ì•—ê¸°
 		int time_ = rand_int(80, 160);
 		env[current_level].MakeNoise(you.position, 20, NULL);
 		switch (rand_.pop())
 		{
 		case 0:
 		{
-			printarray(false, false, false, CL_miko, 1, "¹ÌÄÚ´Â ´ç½ÅÀÇ Ã¼·ÂÀ» »©¾Ñ¾Æ°¬´Ù! ");
+			printarray(false, false, false, CL_miko, 1, "ë¯¸ì½”ëŠ” ë‹¹ì‹ ì˜ ì²´ë ¥ì„ ë¹¼ì•—ì•„ê°”ë‹¤! ");
 			you.SetBuff(BUFFSTAT_HP, BUFF_DUPLE, -(you.GetMaxHp()/2), time_);
 		}
 		break;
 		case 1:
 		{
-			printarray(false, false, false, CL_junko, 1, "¹ÌÄÚ´Â ´ç½ÅÀ» ´À¸®°ÔÇß´Ù! ");
+			printarray(false, false, false, CL_junko, 1, "ë¯¸ì½”ëŠ” ë‹¹ì‹ ì„ ëŠë¦¬ê²Œí–ˆë‹¤! ");
 			you.SetSlow(time_);
 		}
 		break;
 		case 2:
 		{
-			printarray(false, false, false, CL_junko, 1, "¹ÌÄÚ´Â ´ç½ÅÀÇ ÀúÇ×À» ³·Ãß¾ú´Ù! ");
+			printarray(false, false, false, CL_junko, 1, "ë¯¸ì½”ëŠ” ë‹¹ì‹ ì˜ ì €í•­ì„ ë‚®ì¶”ì—ˆë‹¤! ");
 			you.SetBuff(BUFFSTAT_RF, BUFF_MIKO_RF_MINUS, -1, time_);
 			you.SetBuff(BUFFSTAT_RC, BUFF_MIKO_RC_MINUS, -1, time_);
 		}
@@ -4133,8 +4133,8 @@ bool god_punish(god_type god)
 	case GT_OKINA:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0, 50);//¸¶ÀÌ, »çÅä³ë ¼ÒÈ¯
-			rand_.push(1, 50);//Ã¼·Â, ¿µ·Â°¨¼Ò
+			rand_.push(0, 50);//ë§ˆì´, ì‚¬í† ë…¸ ì†Œí™˜
+			rand_.push(1, 50);//ì²´ë ¥, ì˜ë ¥ê°ì†Œ
 			switch (rand_.pop())
 			{
 			case 0:
@@ -4153,7 +4153,7 @@ bool god_punish(god_type god)
 
 					if (isYourSight)
 					{
-						printarray(true, false, false, CL_okina, 1, "¿ÀÅ°³ª´Â ¹é´í¼­¸¦ ºÒ·¯³Â´Ù!");
+						printarray(true, false, false, CL_okina, 1, "ì˜¤í‚¤ë‚˜ëŠ” ë°±ëŒ„ì„œë¥¼ ë¶ˆëŸ¬ëƒˆë‹¤!");
 
 						int time_ = rand_int(40, 60);
 						if (monster *mon_ = BaseSummon(MON_MAI2, time_, true, true, 3, NULL, you.position, SKD_OTHER, -1))
@@ -4168,11 +4168,11 @@ bool god_punish(god_type god)
 					}
 					else
 					{
-						//¾Æ¹«µµ ½Ã¾ß³»¿¡ ¾øÀ¸¸é ¹é´í¼­¸¦ ºÎ¸£Áö¾Ê´Â´Ù(ÀÇ¹Ì°¡ ¾øÀ½)
+						//ì•„ë¬´ë„ ì‹œì•¼ë‚´ì— ì—†ìœ¼ë©´ ë°±ëŒ„ì„œë¥¼ ë¶€ë¥´ì§€ì•ŠëŠ”ë‹¤(ì˜ë¯¸ê°€ ì—†ìŒ)
 						you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
 						if(!you.pure_mp)
 							you.MpUpDown(-you.max_mp / 2);
-						printarray(true, false, false, CL_okina, 1, "¿ÀÅ°³ªÀÇ ºĞ³ë·Î ´ç½ÅÀÇ Ã¼·Â°ú ¿µ·ÂÀÌ Èí¼öµÇ¾ú´Ù!");
+						printarray(true, false, false, CL_okina, 1, "ì˜¤í‚¤ë‚˜ì˜ ë¶„ë…¸ë¡œ ë‹¹ì‹ ì˜ ì²´ë ¥ê³¼ ì˜ë ¥ì´ í¡ìˆ˜ë˜ì—ˆë‹¤!");
 						break;
 					}
 				}
@@ -4182,7 +4182,7 @@ bool god_punish(god_type god)
 					you.HpUpDown(-you.GetMaxHp()/2, DR_EFFECT);
 					if (!you.pure_mp)
 						you.MpUpDown(-you.max_mp/2);
-					printarray(true, false, false, CL_okina, 1, "¿ÀÅ°³ªÀÇ ºĞ³ë·Î ´ç½ÅÀÇ Ã¼·Â°ú ¿µ·ÂÀÌ Èí¼öµÇ¾ú´Ù!");
+					printarray(true, false, false, CL_okina, 1, "ì˜¤í‚¤ë‚˜ì˜ ë¶„ë…¸ë¡œ ë‹¹ì‹ ì˜ ì²´ë ¥ê³¼ ì˜ë ¥ì´ í¡ìˆ˜ë˜ì—ˆë‹¤!");
 					break;
 				}
 				break;
@@ -4192,28 +4192,28 @@ bool god_punish(god_type god)
 	case GT_JUNKO:
 		{
 			random_extraction<int> rand_;
-			rand_.push(0, 33);//¾àÈ­
-			rand_.push(1, 33);//°¨¼Ó
-			rand_.push(2, 33);//½ºÅÈ»©¾Ñ±â
+			rand_.push(0, 33);//ì•½í™”
+			rand_.push(1, 33);//ê°ì†
+			rand_.push(2, 33);//ìŠ¤íƒ¯ë¹¼ì•—ê¸°
 			int time_ = rand_int(50, 80);
 			you.SetPureTurn(randA(1)?30:20, time_);
 			switch (rand_.pop())
 			{
 			case 0:
 			{
-				printarray(false, false, false, CL_junko, 1, "¼øÈ£´Â ´ç½ÅÀÇ ÈûÀ» ¾àÈ­ÇÏ¿´´Ù! ");
+				printarray(false, false, false, CL_junko, 1, "ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ í˜ì„ ì•½í™”í•˜ì˜€ë‹¤! ");
 				you.SetForceStrong(false, time_, true);
 			}
 			break;
 			case 1:
 			{
-				printarray(false, false, false, CL_junko, 1, "¼øÈ£´Â ´ç½ÅÀÇ ¼Óµµ¸¦ »©¾Ñ¾Ò´Ù! ");
+				printarray(false, false, false, CL_junko, 1, "ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ì†ë„ë¥¼ ë¹¼ì•—ì•˜ë‹¤! ");
 				you.SetSlow(time_);
 			}
 			break;
 			case 2:
 			{
-				printarray(false, false, false, CL_junko, 1, "¼øÈ£´Â ´ç½ÅÀÇ ´É·ÂÄ¡¸¦ »©¾Ñ¾Ò´Ù! ");
+				printarray(false, false, false, CL_junko, 1, "ìˆœí˜¸ëŠ” ë‹¹ì‹ ì˜ ëŠ¥ë ¥ì¹˜ë¥¼ ë¹¼ì•—ì•˜ë‹¤! ");
 				for (int i = 0; i<3; i++)
 					you.StatUpDown(-rand_int(1, 2), randA(2) ? (randA(1) ? STAT_STR : STAT_DEX) : STAT_INT, true);
 			}
@@ -4252,11 +4252,11 @@ void createGold(coord_def c, int num) {
 }
 
 void joonRandomBuff() {
-	//°¡¼Ó
-	//Èû
-	//¹ÎÃ¸
-	//Áö´É
-	//ACÁõ°¡
+	//ê°€ì†
+	//í˜
+	//ë¯¼ì²©
+	//ì§€ëŠ¥
+	//ACì¦ê°€
 	random_extraction<int> rand_;
 
 	rand_.push(0);
@@ -4281,7 +4281,7 @@ void joonRandomBuff() {
 		you.SetClever(rand_int(30, 60));
 		break;
 	case 4:
-		printlog("´ç½ÅÀº ´Ü´ÜÇØÁ³´Ù. ", false, false, false, CL_white_blue);
+		printlog("ë‹¹ì‹ ì€ ë‹¨ë‹¨í•´ì¡Œë‹¤. ", false, false, false, CL_white_blue);
 		you.SetBuff(BUFFSTAT_AC, BUFF_JOON_AC, 8, rand_int(30, 60));
 		break;
 	}
@@ -4342,7 +4342,7 @@ void godAutoPickUp(god_type god_, bool belive_) {
 	case GT_YUKARI:
 		iden_list.autopickup[IDEN_CHECK_SCROLL_START + SCT_BLINK] = !belive_;
 		iden_list.autopickup[IDEN_CHECK_SCROLL_START + SCT_TELEPORT] = !belive_;
-		//°ø°£ÀÌµ¿
+		//ê³µê°„ì´ë™
 		break;
 	case GT_EIRIN:
 		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_POISON] = belive_;
@@ -4350,7 +4350,7 @@ void godAutoPickUp(god_type god_, bool belive_) {
 		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_CONFUSE] = belive_;
 		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_SLOW] = belive_;
 		iden_list.autopickup[IDEN_CHECK_POTION_START + PT_DOWN_STAT] = belive_;
-		//Æ÷¼Ç ´Ù ÁÖ¿ö
+		//í¬ì…˜ ë‹¤ ì£¼ì›Œ
 		break;
 	case GT_YUYUKO:
 	case GT_SATORI:
@@ -4386,84 +4386,84 @@ int getMikoPiety(int kind) {
 void printReEnter()
 {
 	if (you.GetPunish(you.god)) {
-		printlog("È¯»óÇâ¿¡ µ¹¾Æ¿Â°É È¯¿µÇÑ´Ù!", true, false, false, CL_normal);
+		printlog("í™˜ìƒí–¥ì— ëŒì•„ì˜¨ê±¸ í™˜ì˜í•œë‹¤!", true, false, false, CL_normal);
 		return;
 	}
 	switch (you.god)
 	{
 	case GT_BYAKUREN:
-		printlog("È÷Áö¸®: ¾î¼­¿À¼¼¿ä. ½Åµµ¿©", true, false, false, CL_white_blue);
+		printlog("íˆì§€ë¦¬: ì–´ì„œì˜¤ì„¸ìš”. ì‹ ë„ì—¬", true, false, false, CL_white_blue);
 		break;
 	case GT_JOON_AND_SION:
 		switch (randA(1))
 		{
 		case 0:
-			printlog("ÁÒ¿Â: ÇÑÇ¬µµ ³²±è¾øÀÌ ¸ğµÎ ÅĞ¾î¹ö¸®ÀÚ°í!", true, false, false, CL_joon);
+			printlog("ì£ ì˜¨: í•œí‘¼ë„ ë‚¨ê¹€ì—†ì´ ëª¨ë‘ í„¸ì–´ë²„ë¦¬ìê³ !", true, false, false, CL_joon);
 			break;
 		case 1:
-			printlog("½Ã¿Â: ¹è°íÆÄ...", true, false, false, CL_sion);
+			printlog("ì‹œì˜¨: ë°°ê³ íŒŒ...", true, false, false, CL_sion);
 			break;
 		}
 		break;
 	case GT_KANAKO:
-		//»ç³ª¿¡Àü¿ë ´ë»ç ÇÊ¿ä
-		printlog("Ä«³ªÄÚ: ²÷ÀÓ¾ø´Â ÀüÅõ·Î ½Å¾ÓÀ» º¸ÀÌµµ·Ï ÇÏ¿©¶ó!", true, false, false, CL_help);
+		//ì‚¬ë‚˜ì—ì „ìš© ëŒ€ì‚¬ í•„ìš”
+		printlog("ì¹´ë‚˜ì½”: ëŠì„ì—†ëŠ” ì „íˆ¬ë¡œ ì‹ ì•™ì„ ë³´ì´ë„ë¡ í•˜ì—¬ë¼!", true, false, false, CL_help);
 		break;
 	case GT_SUWAKO:
-		printlog("½º¿ÍÄÚ: ÇÏÇÏÇÏ! Àç¹Õ¾îÁ³¾î", true, false, false, CL_swako);
+		printlog("ìŠ¤ì™€ì½”: í•˜í•˜í•˜! ì¬ë°Œì–´ì¡Œì–´", true, false, false, CL_swako);
 		break;
 	case GT_MINORIKO:
-		printlog("¹Ì³ë¸®ÄÚ: ÀÌ ¶¥¿¡ °¡À»ÀÇ Ãàº¹À»!", true, false, false, CL_warning);
+		printlog("ë¯¸ë…¸ë¦¬ì½”: ì´ ë•…ì— ê°€ì„ì˜ ì¶•ë³µì„!", true, false, false, CL_warning);
 		break;
 	case GT_MIMA:
-		printlog("¹Ì¸¶: ¾ĞµµÀûÀÎ ¸¶¹ıÀ¸·Î!", true, false, false, CL_green);
+		printlog("ë¯¸ë§ˆ: ì••ë„ì ì¸ ë§ˆë²•ìœ¼ë¡œ!", true, false, false, CL_green);
 		break;
 	case GT_SHINKI:
-		printlog("½ÅÅ°¿¡°Ô P¿Í ¿µÈ¥À»!", true, false, false, CL_warning);
+		printlog("ì‹ í‚¤ì—ê²Œ Pì™€ ì˜í˜¼ì„!", true, false, false, CL_warning);
 		break;
 	case GT_YUUGI:
-		printlog("À¯¿ì±â: ´õ °­ÇÑ »ó´ë¸¦ Ã£¾Æ¶ó!", true, false, false, CL_yuigi);
+		printlog("ìœ ìš°ê¸°: ë” ê°•í•œ ìƒëŒ€ë¥¼ ì°¾ì•„ë¼!", true, false, false, CL_yuigi);
 		break;
 	case GT_SHIZUHA:
-		printlog("½ÃÁîÇÏ: ÀÎ±â ÀÖ´Â ³à¼®Àº ¸ğµÎ Á×¿©¶ó...", true, false, false, CL_small_danger);
+		printlog("ì‹œì¦ˆí•˜: ì¸ê¸° ìˆëŠ” ë…€ì„ì€ ëª¨ë‘ ì£½ì—¬ë¼...", true, false, false, CL_small_danger);
 		break;
 	case GT_HINA:
-		printlog("È÷³ª: ±×·³ ¾×¶«ÀÛ¾÷À» °è¼Ó ÇÏ°Ú¾î", true, false, false, CL_hina);
+		printlog("íˆë‚˜: ê·¸ëŸ¼ ì•¡ë•œì‘ì—…ì„ ê³„ì† í•˜ê² ì–´", true, false, false, CL_hina);
 		break;
 	case GT_YUKARI:
-		printlog("À¯Ä«¸®: µ¹¾Æ¿Ô±¸³ª", true, false, false, CL_yukari);
+		printlog("ìœ ì¹´ë¦¬: ëŒì•„ì™”êµ¬ë‚˜", true, false, false, CL_yukari);
 		break;
 	case GT_EIRIN:
-		printlog("¿¡ÀÌ¸°: »õ·Î¿î ½ÇÇèÃ¼°¡ ÇÊ¿äÇØÁ³¾î", true, false, false, CL_small_danger);
+		printlog("ì—ì´ë¦°: ìƒˆë¡œìš´ ì‹¤í—˜ì²´ê°€ í•„ìš”í•´ì¡Œì–´", true, false, false, CL_small_danger);
 		break;
 	case GT_YUYUKO:
-		printlog("À¯À¯ÄÚ: Â÷¶óµµ ÇÑÀÜ ÇÒ·¡?", true, false, false, CL_yuyuko);
+		printlog("ìœ ìœ ì½”: ì°¨ë¼ë„ í•œì” í• ë˜?", true, false, false, CL_yuyuko);
 		break;
 	case GT_SATORI:
-		printlog("»çÅä¸®: ¸¶À½´ë·Î ¶Ù¾î ³ë¼¼¿ä. ´øÀüÀº ³ĞÀ¸´Ï±î¿ä.", true, false, false, CL_danger);
+		printlog("ì‚¬í† ë¦¬: ë§ˆìŒëŒ€ë¡œ ë›°ì–´ ë…¸ì„¸ìš”. ë˜ì „ì€ ë„“ìœ¼ë‹ˆê¹Œìš”.", true, false, false, CL_danger);
 		break;
 	case GT_TENSI:
-		printlog("ÅÙ½Ã: Ãµ°è´Â Áö·çÇØ! ³Í ³¯ Àç¹Õ°Ô ÇØÁÙ°ÅÁö?", true, false, false, CL_tensi);
+		printlog("í…ì‹œ: ì²œê³„ëŠ” ì§€ë£¨í•´! ë„Œ ë‚  ì¬ë°Œê²Œ í•´ì¤„ê±°ì§€?", true, false, false, CL_tensi);
 		break;
 	case GT_SEIJA:
-		printlog("¼¼ÀÌÀÚ: ÀÚ, ·¹Áö½ºÅÁ½º È°µ¿ÀÇ °³½Ã´Ù!", true, false, false, CL_seija);
+		printlog("ì„¸ì´ì: ì, ë ˆì§€ìŠ¤íƒ•ìŠ¤ í™œë™ì˜ ê°œì‹œë‹¤!", true, false, false, CL_seija);
 		break;
 	case GT_LILLY:
-		printlog("¸±¸®: º½ÀÌ¿¡¿ä!", true, false, false, CL_lilly);
+		printlog("ë¦´ë¦¬: ë´„ì´ì—ìš”!", true, false, false, CL_lilly);
 		break;
 	case GT_MIKO:
-		printlog("¹ÌÄÚ: ¸ğµÎÀÇ ¿å¸ÁÀ» µé¾îº¸µµ·Ï ÇÏÁö!", true, false, false, CL_miko);
+		printlog("ë¯¸ì½”: ëª¨ë‘ì˜ ìš•ë§ì„ ë“¤ì–´ë³´ë„ë¡ í•˜ì§€!", true, false, false, CL_miko);
 		break;
 	case GT_OKINA:
-		printlog("¿ÀÅ°³ª: ÀÌ ¼¼°è¿¡¼­ ³ª¸¦ °¢ÀÎ½ÃÅ°µµ·Ï ", true, false, false, CL_okina);
+		printlog("ì˜¤í‚¤ë‚˜: ì´ ì„¸ê³„ì—ì„œ ë‚˜ë¥¼ ê°ì¸ì‹œí‚¤ë„ë¡ ", true, false, false, CL_okina);
 		break;
 	case GT_JUNKO:
-		printlog("¼øÈ£: »ó¾Æ¿©, º¸°í ÀÖ´Â°¡?", true, false, false, CL_junko);
+		printlog("ìˆœí˜¸: ìƒì•„ì—¬, ë³´ê³  ìˆëŠ”ê°€?", true, false, false, CL_junko);
 		break;
 	case GT_ERROR:
 	case GT_NONE:
 	default:
-		printlog("È¯»óÇâ¿¡ µ¹¾Æ¿Â°É È¯¿µÇÑ´Ù!", true, false, false, CL_normal);
+		printlog("í™˜ìƒí–¥ì— ëŒì•„ì˜¨ê±¸ í™˜ì˜í•œë‹¤!", true, false, false, CL_normal);
 		break;
 	}
 
@@ -4489,25 +4489,25 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("È÷Áö¸®: ¾Æ¾Æ, ¹ıÀÇ ¼¼°è¿¡ ºûÀÌ °¡µæÇØ", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ì•„ì•„, ë²•ì˜ ì„¸ê³„ì— ë¹›ì´ ê°€ë“í•´", true, false, false, CL_white_blue);
 			return true;
 		case 1:
-			printlog("È÷Áö¸®: ¿ì¸® ÀıÀº ÀÎ°£°ú ¿ä±«¸¦ Â÷º°ÇÏÁö¾Ê´Â´ä´Ï´Ù.", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ìš°ë¦¬ ì ˆì€ ì¸ê°„ê³¼ ìš”ê´´ë¥¼ ì°¨ë³„í•˜ì§€ì•ŠëŠ”ë‹µë‹ˆë‹¤.", true, false, false, CL_white_blue);
 			return true;
 		case 2:
-			printlog("È÷Áö¸®: °íµÈ ¼öÇàÀº ¸¶À½À» ±ú²ıÇÏ°Ô ÇÏÁö¿ä.", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ê³ ëœ ìˆ˜í–‰ì€ ë§ˆìŒì„ ê¹¨ë—í•˜ê²Œ í•˜ì§€ìš”.", true, false, false, CL_white_blue);
 			return true;
 		case 3:
-			printlog("È÷Áö¸®: ´ç½ÅÀÇ ³ë·ÂÀº °á½ÇÀ» ¸ÎÀ»°Å¶ø´Ï´Ù.", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ë‹¹ì‹ ì˜ ë…¸ë ¥ì€ ê²°ì‹¤ì„ ë§ºì„ê±°ëë‹ˆë‹¤.", true, false, false, CL_white_blue);
 			return true;
 		case 4:
-			printlog("È÷Áö¸®: ºñ·Ï ¸¶¹ıÀ» ¾²´ÂÀÚ¶óµµ ¸öÀ» ´Ü·ÃÇØ¾ßÇÕ´Ï´Ù.", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ë¹„ë¡ ë§ˆë²•ì„ ì“°ëŠ”ìë¼ë„ ëª¸ì„ ë‹¨ë ¨í•´ì•¼í•©ë‹ˆë‹¤.", true, false, false, CL_white_blue);
 			return true;
 		case 5:
-			printlog("È÷Áö¸®: ´ç½ÅÀÌ ¹è¿î ºÒ±³ÀÇ °¡¸£Ä§À» ¸ğµÎ¿¡°Ô ÀüÇÏ¼¼¿ä.", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ë‹¹ì‹ ì´ ë°°ìš´ ë¶ˆêµì˜ ê°€ë¥´ì¹¨ì„ ëª¨ë‘ì—ê²Œ ì „í•˜ì„¸ìš”.", true, false, false, CL_white_blue);
 			return true;
 		case 6:
-			printlog("È÷Áö¸®: ¾î¼­¿À¼¼¿ä. ÁøÁ¤ÇÑ ºÎÃ³´ÔÀÇ Á¦ÀÚ¿©", true, false, false, CL_white_blue);
+			printlog("íˆì§€ë¦¬: ì–´ì„œì˜¤ì„¸ìš”. ì§„ì •í•œ ë¶€ì²˜ë‹˜ì˜ ì œìì—¬", true, false, false, CL_white_blue);
 			return true;
 		}
 	case GT_ERROR:
@@ -4519,98 +4519,98 @@ bool God_PraySpeak()
 		default:
 		case 0:
 			if (randA(1))
-				printlog("ÁÒ¿Â: »õ·Î¿î È£±¸... ¾Æ´Ï °í°´ÀÌ ¿Ô³×!", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ìƒˆë¡œìš´ í˜¸êµ¬... ì•„ë‹ˆ ê³ ê°ì´ ì™”ë„¤!", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ¹è°íÇÁ´Ù...", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ë°°ê³ í”„ë‹¤...", true, false, false, CL_sion);
 			return true;
 		case 1:
 			if (randA(1))
-				printlog("ÁÒ¿Â: Á» ´õ ÆÅÆÅ ½áµµ µÈ´Ù°í", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ì¢€ ë” íŒíŒ ì¨ë„ ëœë‹¤ê³ ", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ¹äÀº ¾îµø¾î?", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ë°¥ì€ ì–´ë”¨ì–´?", true, false, false, CL_sion);
 			return true;
 		case 2:
 			if (randA(1))
-				printlog("ÁÒ¿Â: Àú±â »õ ¸íÇ° ÇÚµå¹éÀÌ »ç°í½ÍÀºµ¥ ¸»ÀÌ¾ß", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ì €ê¸° ìƒˆ ëª…í’ˆ í•¸ë“œë°±ì´ ì‚¬ê³ ì‹¶ì€ë° ë§ì´ì•¼", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ¿Ö ¿ªº´½ÅÀÎ ¿ì¸®¸¦ ¹Ï°íÀÖ´Â°Å¾ß?", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ì™œ ì—­ë³‘ì‹ ì¸ ìš°ë¦¬ë¥¼ ë¯¿ê³ ìˆëŠ”ê±°ì•¼?", true, false, false, CL_sion);
 			return true;
 		case 3:
 			if (randA(1))
-				printlog("ÁÒ¿Â: ÀÀ? Ä«µå°¡ ÇÊ¿äÇØ?", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ì‘? ì¹´ë“œê°€ í•„ìš”í•´?", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ºÒ¿ìÀÌ¿ôµ½±â´Â ¾î¶§?", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ë¶ˆìš°ì´ì›ƒë•ê¸°ëŠ” ì–´ë•Œ?", true, false, false, CL_sion);
 			return true;
 		case 4:
 			if (randA(1))
-				printlog("ÁÒ¿Â: ¾Æ³¢´Ù Á×À»¹Ù¿£ ¸ğµÎ ½á¹ö·Á!", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ì•„ë¼ë‹¤ ì£½ì„ë°”ì—” ëª¨ë‘ ì¨ë²„ë ¤!", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ÃÖ±Ù¿£ ¹è°íÆÄµµ Áñ°Å¿ö", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ìµœê·¼ì—” ë°°ê³ íŒŒë„ ì¦ê±°ì›Œ", true, false, false, CL_sion);
 			return true;
 		case 5:
 			if (randA(1))
-				printlog("ÁÒ¿Â: ¿ì¸®µéÀÌ¶ó¸é ¸ğµÎ¸¦ ÅĞ¾î¹ö¸± ¼ö ÀÖ¾î!", true, false, false, CL_joon);
+				printlog("ì£ ì˜¨: ìš°ë¦¬ë“¤ì´ë¼ë©´ ëª¨ë‘ë¥¼ í„¸ì–´ë²„ë¦´ ìˆ˜ ìˆì–´!", true, false, false, CL_joon);
 			else
-				printlog("½Ã¿Â: ³ªµµ µµ¿òÀÌ µÉ ¼ö ÀÖÀ»±î?", true, false, false, CL_sion);
+				printlog("ì‹œì˜¨: ë‚˜ë„ ë„ì›€ì´ ë  ìˆ˜ ìˆì„ê¹Œ?", true, false, false, CL_sion);
 			return true;
 		case 6:
-			printlog("ÁÒ¿Â&½Ã¿Â: ÃÖÈäÃÖ¾ÇÀÇ ÀÚ¸ÅÀÇ ÈûÀ» º¸¿©ÁÖÁö! ", false, false, false, CL_joon_and_sion);
+			printlog("ì£ ì˜¨&ì‹œì˜¨: ìµœí‰ìµœì•…ì˜ ìë§¤ì˜ í˜ì„ ë³´ì—¬ì£¼ì§€! ", false, false, false, CL_joon_and_sion);
 			return true;
 		}
 	case GT_KANAKO:
-		if (you.char_name.name.compare("»ç³ª¿¡") == 0)
+		if (you.char_name.name.compare("ì‚¬ë‚˜ì—") == 0)
 		{
-			printlog("Ä«³ªÄÚ: ¹«¸®´Â ÇÏÁö¸»·Å. »ç³ª¿¡", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ë¬´ë¦¬ëŠ” í•˜ì§€ë§ë ´. ì‚¬ë‚˜ì—", true, false, false, CL_help);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("Ä«³ªÄÚ: ²÷ÀÓ¾ø´Â ÀüÅõ·Î ½Å¾ÓÀ» Áõ¸íÇÏ°Å¶ó", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ëŠì„ì—†ëŠ” ì „íˆ¬ë¡œ ì‹ ì•™ì„ ì¦ëª…í•˜ê±°ë¼", true, false, false, CL_help);
 			return true;
 		case 1:
-			printlog("Ä«³ªÄÚ: ³ª¸¦ ºÎ¸¥ ÀÌ´Â ´©±¸ÀÎ°¡?", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ë‚˜ë¥¼ ë¶€ë¥¸ ì´ëŠ” ëˆ„êµ¬ì¸ê°€?", true, false, false, CL_help);
 			return true;
 		case 2:
-			printlog("Ä«³ªÄÚ: ½Å¾ÓÀ» ¹æÇØÇÏ´Â ÀÚ´Â ¸ğµÎ Á¦°ÅÇÏ¶ó", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ì‹ ì•™ì„ ë°©í•´í•˜ëŠ” ìëŠ” ëª¨ë‘ ì œê±°í•˜ë¼", true, false, false, CL_help);
 			return true;
 		case 3:
-			printlog("Ä«³ªÄÚ: ±×´ëÀÇ ½Å¾Ó¿¡´Â ÈûÀ¸·Î¼­ º¸´äÇÏÁö", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ê·¸ëŒ€ì˜ ì‹ ì•™ì—ëŠ” í˜ìœ¼ë¡œì„œ ë³´ë‹µí•˜ì§€", true, false, false, CL_help);
 			return true;
 		case 4:
-			printlog("Ä«³ªÄÚ: »êÀÇ ½Å¾ÓÀ» ´õ¿í ´õ ÆÛÆ®¸®µµ·Ï", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ì‚°ì˜ ì‹ ì•™ì„ ë”ìš± ë” í¼íŠ¸ë¦¬ë„ë¡", true, false, false, CL_help);
 			return true;
 		case 5:
-			printlog("Ä«³ªÄÚ: ÇÑ¶§ ÀüÅõÀÇ ½ÅÀ¸·Î ºÒ·È´ø ¸ö. ±× ÈûÀ» ´À³¢°ÔÇØÁÖÁö", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: í•œë•Œ ì „íˆ¬ì˜ ì‹ ìœ¼ë¡œ ë¶ˆë ¸ë˜ ëª¸. ê·¸ í˜ì„ ëŠë¼ê²Œí•´ì£¼ì§€", true, false, false, CL_help);
 			return true;
 		case 6:
-			printlog("Ä«³ªÄÚ: ÁøÁ¤ÇÑ ÀüÅõÀÇ È­½ÅÀÌ¿© ¾ÕÀ¸·Î ³ª¾Æ°¡¶ó!", true, false, false, CL_help);
+			printlog("ì¹´ë‚˜ì½”: ì§„ì •í•œ ì „íˆ¬ì˜ í™”ì‹ ì´ì—¬ ì•ìœ¼ë¡œ ë‚˜ì•„ê°€ë¼!", true, false, false, CL_help);
 			return true;
 		}
 	case GT_SUWAKO:
-		if (you.char_name.name.compare("»ç³ª¿¡") == 0)
+		if (you.char_name.name.compare("ì‚¬ë‚˜ì—") == 0)
 		{
-			printlog("½º¿ÍÄÚ: ¿ä±«ÅğÄ¡ÀÇ ½Ã°£ÀÌ¾ß »ç³ª¿¡!", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ìš”ê´´í‡´ì¹˜ì˜ ì‹œê°„ì´ì•¼ ì‚¬ë‚˜ì—!", true, false, false, CL_swako);
 			return true;
 		}
 		switch (randA(4))
 		{
 		default:
 		case 0:
-			printlog("½º¿ÍÄÚ: ÀÀ? ³ª ºÒ·¶¾î?", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ì‘? ë‚˜ ë¶ˆë €ì–´?", true, false, false, CL_swako);
 			return true;
 		case 1:
-			printlog("½º¿ÍÄÚ: ÃÖ±ÙÀÇ ½ÅµµµéÀº ¿øÇÏ´Â°Ô ¸¹´Ù´Ï±ñ", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ìµœê·¼ì˜ ì‹ ë„ë“¤ì€ ì›í•˜ëŠ”ê²Œ ë§ë‹¤ë‹ˆê¹", true, false, false, CL_swako);
 			return true;
 		case 2:
-			printlog("½º¿ÍÄÚ: ³»°¡ Àç¾Ó½ÅÀÎ°É ÀØÁö¸»¾Æ~", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ë‚´ê°€ ì¬ì•™ì‹ ì¸ê±¸ ìŠì§€ë§ì•„~", true, false, false, CL_swako);
 			return true;
 		case 3:
-			printlog("½º¿ÍÄÚ: Á» ´õ ³ë·ÂÇÏ¶ó°í~", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ì¢€ ë” ë…¸ë ¥í•˜ë¼ê³ ~", true, false, false, CL_swako);
 			return true;
 		case 4:
-			printlog("½º¿ÍÄÚ: °ÆÁ¤ÇÏÁö¸¶, ÃæºĞÈ÷ ÈûÀº ÁÙÅ×´Ï±ñ", true, false, false, CL_swako);
+			printlog("ìŠ¤ì™€ì½”: ê±±ì •í•˜ì§€ë§ˆ, ì¶©ë¶„íˆ í˜ì€ ì¤„í…Œë‹ˆê¹", true, false, false, CL_swako);
 			return true;
 		}
 	case GT_MINORIKO:
@@ -4618,56 +4618,56 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("¹Ì³ë¸®ÄÚ: ´ç½Åµµ °¡À»¿¡ ¹İÇÑ°Å¾ß?", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ë‹¹ì‹ ë„ ê°€ì„ì— ë°˜í•œê±°ì•¼?", true, false, false, CL_warning);
 			return true;
 		case 1:
-			printlog("¹Ì³ë¸®ÄÚ: ¼öÈ®À» À§ÇØ¼± ±×¸¸Å­ÀÇ ³ë·ÂÀÌ ÇÊ¿äÇÑ°Å¾ß", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ìˆ˜í™•ì„ ìœ„í•´ì„  ê·¸ë§Œí¼ì˜ ë…¸ë ¥ì´ í•„ìš”í•œê±°ì•¼", true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("¹Ì³ë¸®ÄÚ: °¡À»Àº Á¤¸» ¾Æ¸§´Ù¿î °èÀıÀÌ¾ß!", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ê°€ì„ì€ ì •ë§ ì•„ë¦„ë‹¤ìš´ ê³„ì ˆì´ì•¼!", true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("¹Ì³ë¸®ÄÚ: ³»°¡ ÁØ °í±¸¸¶´Â ÀÔ¸À¿¡ ¸Â¾Æ?", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ë‚´ê°€ ì¤€ ê³ êµ¬ë§ˆëŠ” ì…ë§›ì— ë§ì•„?", true, false, false, CL_warning);
 			return true;
 		case 4:
-			printlog("¹Ì³ë¸®ÄÚ: ¹è´Â µçµçÇÏ°Ô ÇÏ°í ´Ù´ÏÁö?", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ë°°ëŠ” ë“ ë“ í•˜ê²Œ í•˜ê³  ë‹¤ë‹ˆì§€?", true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("¹Ì³ë¸®ÄÚ: ½×¾Æ¿Ã¸° ¸ğµç ³ë·ÂÀ» Ç³³âÀ¸·Î º¸´äÇÒ¶§¾ß!", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ìŒ“ì•„ì˜¬ë¦° ëª¨ë“  ë…¸ë ¥ì„ í’ë…„ìœ¼ë¡œ ë³´ë‹µí• ë•Œì•¼!", true, false, false, CL_warning);
 			return true;
 		case 6:
-			printlog("¹Ì³ë¸®ÄÚ: °¡À»ÀÇ »çµµ¿©! ³ª¾Æ°¡¼­ °¡À»ÀÇ À§´ëÇÔÀ» ¾Ë·Á¶ó!", true, false, false, CL_warning);
+			printlog("ë¯¸ë…¸ë¦¬ì½”: ê°€ì„ì˜ ì‚¬ë„ì—¬! ë‚˜ì•„ê°€ì„œ ê°€ì„ì˜ ìœ„ëŒ€í•¨ì„ ì•Œë ¤ë¼!", true, false, false, CL_warning);
 			return true;
 		}
 	case GT_MIMA:
-		if (you.char_name.name.compare("¸¶¸®»ç") == 0)
+		if (you.char_name.name.compare("ë§ˆë¦¬ì‚¬") == 0)
 		{
-			printlog("¹Ì¸¶: ¿À·§¸¸ÀÌ³×, Àß Áö³»°í ÀÖ¾î?", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ì˜¤ë«ë§Œì´ë„¤, ì˜ ì§€ë‚´ê³  ìˆì–´?", true, false, false, CL_green);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("¹Ì¸¶: »õ·Î¿î ÀÔ±³ Èñ¸ÁÀÚÀÎ°¡?", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ìƒˆë¡œìš´ ì…êµ í¬ë§ìì¸ê°€?", true, false, false, CL_green);
 			return true;
 		case 1:
-			printlog("¹Ì¸¶: »ç½Ç ÃÖ±Ù¿£ Á¦ÀÚ´Â ¹ŞÁö¾Ê¾Ò¾úÁö¸¸ Æ¯º°ÄÉÀÌ½º¾ß", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ì‚¬ì‹¤ ìµœê·¼ì—” ì œìëŠ” ë°›ì§€ì•Šì•˜ì—ˆì§€ë§Œ íŠ¹ë³„ì¼€ì´ìŠ¤ì•¼", true, false, false, CL_green);
 			return true;
 		case 2:
-			printlog("¹Ì¸¶: ¸¶¹ıÀÇ ±âº»Àº ÆÄ¿ö´Ù. Àû¾îµÎµµ·Ï", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ë§ˆë²•ì˜ ê¸°ë³¸ì€ íŒŒì›Œë‹¤. ì ì–´ë‘ë„ë¡", true, false, false, CL_green);
 			return true;
 		case 3:
-			printlog("¹Ì¸¶: ¼±¼öÇÊ½Â. ¸ÕÀú °ø°İÇÑ ÂÊÀÌ ÀÌ±ä´Ù.", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ì„ ìˆ˜í•„ìŠ¹. ë¨¼ì € ê³µê²©í•œ ìª½ì´ ì´ê¸´ë‹¤.", true, false, false, CL_green);
 			return true;
 		case 4:
-			printlog("¹Ì¸¶: ³» ±Ã±ØÀÇ ¸¶¹ıÀÌ ±Ã±İÇÑ°¡?", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ë‚´ ê¶ê·¹ì˜ ë§ˆë²•ì´ ê¶ê¸ˆí•œê°€?", true, false, false, CL_green);
 			return true;
 		case 5:
-			printlog("¹Ì¸¶: ´õ ÀÌ»ó ³»°¡ °¡¸£ÃÄÁÙ ¸¶¹ıÀº ¾ø´Ù.", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ë” ì´ìƒ ë‚´ê°€ ê°€ë¥´ì³ì¤„ ë§ˆë²•ì€ ì—†ë‹¤.", true, false, false, CL_green);
 			return true;
 		case 6:
-			printlog("¹Ì¸¶: ¸¶¹ıÀÇ ÈûÀ¸·Î ±æÀ» ¿­¾î¶ó!", true, false, false, CL_green);
+			printlog("ë¯¸ë§ˆ: ë§ˆë²•ì˜ í˜ìœ¼ë¡œ ê¸¸ì„ ì—´ì–´ë¼!", true, false, false, CL_green);
 			return true;
 		}
 	case GT_SHINKI:
@@ -4675,7 +4675,7 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("½ÅÅ°¿¡°Ô P¿Í ¿µÈ¥À»! ", true, false, false, CL_warning);
+			printlog("ì‹ í‚¤ì—ê²Œ Pì™€ ì˜í˜¼ì„! ", true, false, false, CL_warning);
 			return true;
 		}
 	case GT_YUUGI:
@@ -4683,25 +4683,25 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("À¯¿ì±â: ³Í ¾ó¸¶³ª °­ÇÏÁö?", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ë„Œ ì–¼ë§ˆë‚˜ ê°•í•˜ì§€?", true, false, false, CL_yuigi);
 			return true;
 		case 1:
-			printlog("À¯¿ì±â: °­ÇÑ Àû°ú ºÙ¾î¼­ ³ÊÀÇ °­ÇÔÀ» Áõ¸íÇØ!", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ê°•í•œ ì ê³¼ ë¶™ì–´ì„œ ë„ˆì˜ ê°•í•¨ì„ ì¦ëª…í•´!", true, false, false, CL_yuigi);
 			return true;
 		case 2:
-			printlog("À¯¿ì±â: ³­ °ÅÁş¸»À» ÇÏ´Â ³à¼®ÀÌ ½È¾î", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ë‚œ ê±°ì§“ë§ì„ í•˜ëŠ” ë…€ì„ì´ ì‹«ì–´", true, false, false, CL_yuigi);
 			return true;
 		case 3:
-			printlog("À¯¿ì±â: ¼úÀº ¸¹ÀÌ ¸¶½Ç ¼ö ÀÖ¾î?", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ìˆ ì€ ë§ì´ ë§ˆì‹¤ ìˆ˜ ìˆì–´?", true, false, false, CL_yuigi);
 			return true;
 		case 4:
-			printlog("À¯¿ì±â: ³×°¡ ½Î¿ì´Â°É º¸¸é ¿ØÁö Áñ°Å¿îµ¥!", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ë„¤ê°€ ì‹¸ìš°ëŠ”ê±¸ ë³´ë©´ ì™ ì§€ ì¦ê±°ìš´ë°!", true, false, false, CL_yuigi);
 			return true;
 		case 5:
-			printlog("À¯¿ì±â: ³ªÁß¿¡ ³ª¶û ÇÑ¹ø ½Î¿öº¸Áö¾ÊÀ»·¡?", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ë‚˜ì¤‘ì— ë‚˜ë‘ í•œë²ˆ ì‹¸ì›Œë³´ì§€ì•Šì„ë˜?", true, false, false, CL_yuigi);
 			return true;
 		case 6:
-			printlog("À¯¿ì±â: ´ÙÀ½¿£ ¼úÀÚ¸®¿¡ ÃÊ´ëÇÒÅ×´Ï ²À »ì¾Æ¼­ µ¹¾Æ¿À¶ó°í!", true, false, false, CL_yuigi);
+			printlog("ìœ ìš°ê¸°: ë‹¤ìŒì—” ìˆ ìë¦¬ì— ì´ˆëŒ€í• í…Œë‹ˆ ê¼­ ì‚´ì•„ì„œ ëŒì•„ì˜¤ë¼ê³ !", true, false, false, CL_yuigi);
 			return true;
 		}
 	case GT_SHIZUHA:
@@ -4711,17 +4711,17 @@ bool God_PraySpeak()
 		case 0:
 		case 1:
 		case 2:
-			printlog("½ÃÁîÇÏ´Â Á¶¿ëÈ÷ ´ç½ÅÀ» º¸°íÀÖ´Ù.", true, false, false, CL_warning);
+			printlog("ì‹œì¦ˆí•˜ëŠ” ì¡°ìš©íˆ ë‹¹ì‹ ì„ ë³´ê³ ìˆë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 3:
 		case 4:
-			printlog("½ÃÁîÇÏ´Â ´ç½ÅÀÇ ±âµµ¿¡ °í°³¸¦ ²ô´ö¿´´Ù.", true, false, false, CL_warning);
+			printlog("ì‹œì¦ˆí•˜ëŠ” ë‹¹ì‹ ì˜ ê¸°ë„ì— ê³ ê°œë¥¼ ë„ë•ì˜€ë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("½ÃÁîÇÏ: ...ÀÌÁ¦ ¿ì¸®µéÀÇ Â÷·Ê¾ß...", true, false, false, CL_small_danger);
+			printlog("ì‹œì¦ˆí•˜: ...ì´ì œ ìš°ë¦¬ë“¤ì˜ ì°¨ë¡€ì•¼...", true, false, false, CL_small_danger);
 			return true;
 		case 6:
-			printlog("½ÃÁîÇÏ: ´ÙÀ½ ÀÎ±âÅõÇ¥´Â ²À ºÎÅ¹ÇÒ°Ô", true, false, false, CL_small_danger);
+			printlog("ì‹œì¦ˆí•˜: ë‹¤ìŒ ì¸ê¸°íˆ¬í‘œëŠ” ê¼­ ë¶€íƒí• ê²Œ", true, false, false, CL_small_danger);
 			return true;
 		}
 	case GT_HINA:
@@ -4729,93 +4729,93 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("È÷³ª: ÀÌ °÷¿£ Àç¾×ÀÌ °¡µæÇØ", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ì´ ê³³ì—” ì¬ì•¡ì´ ê°€ë“í•´", true, false, false, CL_hina);
 			return true;
 		case 1:
-			printlog("È÷³ª: Á¶±İ¾¿ Á¶±İ¾¿ ¾×¶«À» ÇØ³ª°¡ÀÚ", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ì¡°ê¸ˆì”© ì¡°ê¸ˆì”© ì•¡ë•œì„ í•´ë‚˜ê°€ì", true, false, false, CL_hina);
 			return true;
 		case 2:
-			printlog("È÷³ª: ¾×¶«À» ¹æÇØÇÏ´Â ³à¼®µéÀº ¹èÁ¦ÇØµµ ÁÁ¾Æ", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ì•¡ë•œì„ ë°©í•´í•˜ëŠ” ë…€ì„ë“¤ì€ ë°°ì œí•´ë„ ì¢‹ì•„", true, false, false, CL_hina);
 			return true;
 		case 3:
-			printlog("È÷³ª: ´õ¿í ´õ ¸¹Àº ÀúÁÖ¸¦ ¸ğÀ¸µµ·Ï ÇØ", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ë”ìš± ë” ë§ì€ ì €ì£¼ë¥¼ ëª¨ìœ¼ë„ë¡ í•´", true, false, false, CL_hina);
 			return true;
 		case 4:
-			printlog("È÷³ª: ³ª¿¡°Õ ±×µ¿¾È ´©±¸µµ ¸»À» °É¾îÁÖÁö¾Ê¾Ò¾î", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ë‚˜ì—ê² ê·¸ë™ì•ˆ ëˆ„êµ¬ë„ ë§ì„ ê±¸ì–´ì£¼ì§€ì•Šì•˜ì–´", true, false, false, CL_hina);
 			return true;
 		case 5:
-			printlog("È÷³ª: ÀúÁÖ¸¦ ¸ğÀ¸´Â ÀÛ¾÷Àº ¿Ü·Î¿î°ÅÁö", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ì €ì£¼ë¥¼ ëª¨ìœ¼ëŠ” ì‘ì—…ì€ ì™¸ë¡œìš´ê±°ì§€", true, false, false, CL_hina);
 			return true;
 		case 6:
-			printlog("È÷³ª: ³Ê´Â ³ª¿Í ³¡±îÁö °°ÀÌ ÀÖ¾îÁÙ°ÅÁö?", true, false, false, CL_hina);
+			printlog("íˆë‚˜: ë„ˆëŠ” ë‚˜ì™€ ëê¹Œì§€ ê°™ì´ ìˆì–´ì¤„ê±°ì§€?", true, false, false, CL_hina);
 			return true;
 		}
 	case GT_YUKARI:
-		if (you.char_name.name.compare("·¹ÀÌ¹«") == 0)
+		if (you.char_name.name.compare("ë ˆì´ë¬´") == 0)
 		{
-			printlog("À¯Ä«¸®: È¯»óÇâÀÇ ¹«³àÀÇ º»ºĞÀÌ ¹ºÁö ±â¾ïÇÏ°íÀÖÁö?", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: í™˜ìƒí–¥ì˜ ë¬´ë…€ì˜ ë³¸ë¶„ì´ ë­”ì§€ ê¸°ì–µí•˜ê³ ìˆì§€?", true, false, false, CL_yukari);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("À¯Ä«¸®: ´ç½ÅÀÌ ³ªÀÇ »õ·Î¿î ½Ä½Å?", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ë‹¹ì‹ ì´ ë‚˜ì˜ ìƒˆë¡œìš´ ì‹ì‹ ?", true, false, false, CL_yukari);
 			return true;
 		case 1:
-			printlog("À¯Ä«¸®: È¯»óÇâÀº ¸ğµç °ÍÀ» ¼ö¿ëÇØ", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: í™˜ìƒí–¥ì€ ëª¨ë“  ê²ƒì„ ìˆ˜ìš©í•´", true, false, false, CL_yukari);
 			return true;
 		case 2:
-			printlog("À¯Ä«¸®: °á°èÀÇ º¸¼öÀÛ¾÷ÀÌ ÇÊ¿äÇØ", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ê²°ê³„ì˜ ë³´ìˆ˜ì‘ì—…ì´ í•„ìš”í•´", true, false, false, CL_yukari);
 			return true;
 		case 3:
-			printlog("À¯Ä«¸®: »çÅÂÀÇ ¿øÀÎÀ» ¾Ë±âÀ§ÇØ¼­¶óµµ ´õ ¸¹Àº Á¤º¸°¡ ÇÊ¿äÇØ", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ì‚¬íƒœì˜ ì›ì¸ì„ ì•Œê¸°ìœ„í•´ì„œë¼ë„ ë” ë§ì€ ì •ë³´ê°€ í•„ìš”í•´", true, false, false, CL_yukari);
 			return true;
 		case 4:
-			printlog("À¯Ä«¸®: ´ç½Å¸¸ ¹Ï°íÀÖ¾î. µµ¿òÀÌ ÇÊ¿äÇÏ¸é ¸»ÇØ", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ë‹¹ì‹ ë§Œ ë¯¿ê³ ìˆì–´. ë„ì›€ì´ í•„ìš”í•˜ë©´ ë§í•´", true, false, false, CL_yukari);
 			return true;
 		case 5:
-			printlog("À¯Ä«¸®: ³» ÈûÀ» ¹ŞÀ¸¸é ´õ ÀÌ»ó °æ°èÀÇ À¯¹«´Â ¹«ÀÇ¹ÌÇØ", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ë‚´ í˜ì„ ë°›ìœ¼ë©´ ë” ì´ìƒ ê²½ê³„ì˜ ìœ ë¬´ëŠ” ë¬´ì˜ë¯¸í•´", true, false, false, CL_yukari);
 			return true;
 		case 6:
-			printlog("À¯Ä«¸®: ´ç½Å¸¸ÀÌ ÇÒ ¼ö ÀÖ´Â ÀÏÀÌ¾ß", true, false, false, CL_yukari);
+			printlog("ìœ ì¹´ë¦¬: ë‹¹ì‹ ë§Œì´ í•  ìˆ˜ ìˆëŠ” ì¼ì´ì•¼", true, false, false, CL_yukari);
 			return true;
 		}
 	case GT_EIRIN:
-		if (you.char_name.name.compare("¸ğÄÚ¿ì") == 0)
+		if (you.char_name.name.compare("ëª¨ì½”ìš°") == 0)
 		{
-			printlog("¿¡ÀÌ¸°: ÃÖ±Ù¿¡µµ °øÁÖ´Ô°ú´Â »çÀÌÁÁ°Ô Áö³»³ª¿ä?", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ìµœê·¼ì—ë„ ê³µì£¼ë‹˜ê³¼ëŠ” ì‚¬ì´ì¢‹ê²Œ ì§€ë‚´ë‚˜ìš”?", true, false, false, CL_small_danger);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("¿¡ÀÌ¸°: »õ·Î¿î ½ÇÇèÃ¼°¡ ÇÊ¿äÇØ...", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ìƒˆë¡œìš´ ì‹¤í—˜ì²´ê°€ í•„ìš”í•´...", true, false, false, CL_small_danger);
 			return true;
 		case 1:
-			printlog("¿¡ÀÌ¸°: ÀÌ ¾àÀ» ¸Ô¾îº¸°í ºÎÀÛ¿ëÀº ¾ø¾ú¾î?", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ì´ ì•½ì„ ë¨¹ì–´ë³´ê³  ë¶€ì‘ìš©ì€ ì—†ì—ˆì–´?", true, false, false, CL_small_danger);
 			return true;
 		case 2:
-			printlog("¿¡ÀÌ¸°: Á» ´õ ¸¹Àº Ç¥º»ÀÌ ÇÊ¿äÇØ", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ì¢€ ë” ë§ì€ í‘œë³¸ì´ í•„ìš”í•´", true, false, false, CL_small_danger);
 			return true;
 		case 3:
-			printlog("¿¡ÀÌ¸°: µ¶À» ¾Ë¸é ¾àµµ ¸¸µé ¼ö ÀÖ´Â°Å¾ß", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ë…ì„ ì•Œë©´ ì•½ë„ ë§Œë“¤ ìˆ˜ ìˆëŠ”ê±°ì•¼", true, false, false, CL_small_danger);
 			return true;
 		case 4:
-			printlog("¿¡ÀÌ¸°: ºÎÀÛ¿ëÀ» µÎ·Á¿öÇÏÁö¸¶. È¿°ú´Â È®½ÇÇØ", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ë¶€ì‘ìš©ì„ ë‘ë ¤ì›Œí•˜ì§€ë§ˆ. íš¨ê³¼ëŠ” í™•ì‹¤í•´", true, false, false, CL_small_danger);
 			return true;
 		case 5:
-			printlog("¿¡ÀÌ¸°: ³»°¡ ÁØ ¾àÀÌ¶ó¸é ½ÇÆĞÇÏÁö¾ÊÀ»°Å¾ß", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ë‚´ê°€ ì¤€ ì•½ì´ë¼ë©´ ì‹¤íŒ¨í•˜ì§€ì•Šì„ê±°ì•¼", true, false, false, CL_small_danger);
 			return true;
 		case 6:
-			printlog("¿¡ÀÌ¸°: ÀÌ°ÍÀÌ ³ÊÀÇ »õ·Î¿î ¸ğ½ÀÀÌ¾ß", true, false, false, CL_small_danger);
+			printlog("ì—ì´ë¦°: ì´ê²ƒì´ ë„ˆì˜ ìƒˆë¡œìš´ ëª¨ìŠµì´ì•¼", true, false, false, CL_small_danger);
 			return true;
 		}
 	case GT_YUYUKO:
-		if (you.char_name.name.compare("¸ğÄÚ¿ì") == 0)
+		if (you.char_name.name.compare("ëª¨ì½”ìš°") == 0)
 		{
-			printlog("À¯À¯ÄÚ: ºÒ·ÎºÒ»çÀÎ ´ç½ÅÀÌ ¿Ö ³¯ ¹Ï´Â°Å¾ß?", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ë¶ˆë¡œë¶ˆì‚¬ì¸ ë‹¹ì‹ ì´ ì™œ ë‚  ë¯¿ëŠ”ê±°ì•¼?", true, false, false, CL_yuyuko);
 			return true;
 		}
 		switch (level_)
@@ -4823,20 +4823,20 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("À¯À¯ÄÚ: »õ·Î¿î ½Ä´ÜÀº ¾ÆÁ÷ÀÌ´Ï?", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ìƒˆë¡œìš´ ì‹ë‹¨ì€ ì•„ì§ì´ë‹ˆ?", true, false, false, CL_yuyuko);
 			return true;
 		case 2:
 		case 3:
-			printlog("À¯À¯ÄÚ: Á» ´õ ´À±ßÇÏ°Ô ÀÖ¾îµµ ÁÁ¾Æ.", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ì¢€ ë” ëŠê¸‹í•˜ê²Œ ìˆì–´ë„ ì¢‹ì•„.", true, false, false, CL_yuyuko);
 			return true;
 		case 4:
-			printlog("À¯À¯ÄÚ: À¯·ÉÀº Â÷°©°í ±Í¿±Áö¾Ê¾Æ?", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ìœ ë ¹ì€ ì°¨ê°‘ê³  ê·€ì—½ì§€ì•Šì•„?", true, false, false, CL_yuyuko);
 			return true;
 		case 5:
-			printlog("À¯À¯ÄÚ: Ä£±¸µéÀº ¸¶À½¿¡ µé¾î?", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ì¹œêµ¬ë“¤ì€ ë§ˆìŒì— ë“¤ì–´?", true, false, false, CL_yuyuko);
 			return true;
 		case 6:
-			printlog("À¯À¯ÄÚ: ¹°·Ğ Á×´õ¶óµµ ¿µÈ¥Àº ÇÔ²²¶õ´Ù", true, false, false, CL_yuyuko);
+			printlog("ìœ ìœ ì½”: ë¬¼ë¡  ì£½ë”ë¼ë„ ì˜í˜¼ì€ í•¨ê»˜ë€ë‹¤", true, false, false, CL_yuyuko);
 			return true;
 		}
 	case GT_SATORI:
@@ -4845,22 +4845,22 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("»çÅä¸®´Â ´ç½Å¿¡°Ô Å« °ü½ÉÀÌ ¾ø´Ù. ", true, false, false, CL_warning);
+			printlog("ì‚¬í† ë¦¬ëŠ” ë‹¹ì‹ ì—ê²Œ í° ê´€ì‹¬ì´ ì—†ë‹¤. ", true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("»çÅä¸®´Â ´ç½Å¿¡°Ô ¹Ì¼ÒÁö¾ú´Ù. ", true, false, false, CL_warning);
+			printlog("ì‚¬í† ë¦¬ëŠ” ë‹¹ì‹ ì—ê²Œ ë¯¸ì†Œì§€ì—ˆë‹¤. ", true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("»çÅä¸®: ¾Ö¿Ïµ¿¹°ÀÇ Àç·ÕÀº ¾ğÁ¦³ª º¸±â ÁÁ±º¿ä.", true, false, false, CL_danger);
+			printlog("ì‚¬í† ë¦¬: ì• ì™„ë™ë¬¼ì˜ ì¬ë¡±ì€ ì–¸ì œë‚˜ ë³´ê¸° ì¢‹êµ°ìš”.", true, false, false, CL_danger);
 			return true;
 		case 4:
-			printlog("»çÅä¸®´Â ´ç½ÅÀ» ¾²´Ùµë¾ú´Ù. ", true, false, false, CL_warning);
+			printlog("ì‚¬í† ë¦¬ëŠ” ë‹¹ì‹ ì„ ì“°ë‹¤ë“¬ì—ˆë‹¤. ", true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("»çÅä¸®: ¿À´ÃÀÇ »ç·á´Â ÀÔ¸À¿¡ ¸Â³ª¿ä?", true, false, false, CL_danger);
+			printlog("ì‚¬í† ë¦¬: ì˜¤ëŠ˜ì˜ ì‚¬ë£ŒëŠ” ì…ë§›ì— ë§ë‚˜ìš”?", true, false, false, CL_danger);
 			return true;
 		case 6:
-			printlog("»çÅä¸®: ´ÙÀ½¿¡ °°ÀÌ »êÃ¥ÇÏ·¯ °¡Áö ¾ÊÀ»·¡¿ä?", true, false, false, CL_danger);
+			printlog("ì‚¬í† ë¦¬: ë‹¤ìŒì— ê°™ì´ ì‚°ì±…í•˜ëŸ¬ ê°€ì§€ ì•Šì„ë˜ìš”?", true, false, false, CL_danger);
 			return true;
 		}
 	case GT_TENSI:
@@ -4868,34 +4868,34 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("ÅÙ½Ã: ¹¹¾ß! Áö±İ ¹Ùºü!", true, false, false, CL_tensi);
+			printlog("í…ì‹œ: ë­ì•¼! ì§€ê¸ˆ ë°”ë¹ !", true, false, false, CL_tensi);
 			return true;
 		case 1:
-			printlog("ÅÙ½Ã: ±âµµÇÏ´Â°Å¸¸À¸·Î ¿äÇàÀ» ¹Ù¶ó´Â°Ç ³Ê¹« ÀÌ±âÀûÀÌÁö ¾Ê¾Æ?", true, false, false, CL_tensi);
+			printlog("í…ì‹œ: ê¸°ë„í•˜ëŠ”ê±°ë§Œìœ¼ë¡œ ìš”í–‰ì„ ë°”ë¼ëŠ”ê±´ ë„ˆë¬´ ì´ê¸°ì ì´ì§€ ì•Šì•„?", true, false, false, CL_tensi);
 			return true;
 		case 2:
-			printlog("ÅÙ½Ã: Àç¹ÌÀÖ´Â ÀÏÀº ¾ø´Â°Å¾ß?", true, false, false, CL_tensi);
+			printlog("í…ì‹œ: ì¬ë¯¸ìˆëŠ” ì¼ì€ ì—†ëŠ”ê±°ì•¼?", true, false, false, CL_tensi);
 			return true;
 		case 3:
-			printlog("ÅÙ½Ã: ¿À·§¸¸¿¡ ÁöÁøÀ» ÀÏÀ¸ÄÑº¼±î...", true, false, false, CL_tensi);
+			printlog("í…ì‹œ: ì˜¤ë«ë§Œì— ì§€ì§„ì„ ì¼ìœ¼ì¼œë³¼ê¹Œ...", true, false, false, CL_tensi);
 			return true;
 		case 4:
-			printlog("ÅÙ½Ã: ÇÑ¹ø¸¸ ´õ ±ÍÂú°ÔÇÏ¸é µ¹À» ´øÁú²¨¾ß!", true, false, false, CL_tensi);
+			printlog("í…ì‹œ: í•œë²ˆë§Œ ë” ê·€ì°®ê²Œí•˜ë©´ ëŒì„ ë˜ì§ˆêº¼ì•¼!", true, false, false, CL_tensi);
 			return true;
 		case 5:
-			printlog("ÅÙ½Ã´Â ´ç½Å¿¡°Ô µ¹À» ´øÁ³´Ù.", true, false, false, CL_warning);
+			printlog("í…ì‹œëŠ” ë‹¹ì‹ ì—ê²Œ ëŒì„ ë˜ì¡Œë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 6:
-			printlog("ÅÙ½Ã´Â ´ç½ÅÀ» º¸°í Å°µæÅ°µæ ¿ô°íÀÖ´Ù.", true, false, false, CL_warning);
+			printlog("í…ì‹œëŠ” ë‹¹ì‹ ì„ ë³´ê³  í‚¤ë“í‚¤ë“ ì›ƒê³ ìˆë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 7:
-			printlog("ÅÙ½Ã´Â ´ç½ÅÀ» º¸°í µûºĞÇÑµí ÇÏÇ°ÇÏ°í ÀÖ´Ù.", true, false, false, CL_warning);
+			printlog("í…ì‹œëŠ” ë‹¹ì‹ ì„ ë³´ê³  ë”°ë¶„í•œë“¯ í•˜í’ˆí•˜ê³  ìˆë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 8:
-			printlog("ÅÙ½Ã´Â ´ç½ÅÀÇ ±âµµ¸¦ ¹«½ÃÇß´Ù.", true, false, false, CL_warning);
+			printlog("í…ì‹œëŠ” ë‹¹ì‹ ì˜ ê¸°ë„ë¥¼ ë¬´ì‹œí–ˆë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 9:
-			printlog("ÅÙ½Ã´Â »ê°¥Ä¡·Î ´ç½ÅÀÇ ¸Ó¸®¸¦ ¶§·È´Ù.", true, false, false, CL_warning);
+			printlog("í…ì‹œëŠ” ì‚°ê°ˆì¹˜ë¡œ ë‹¹ì‹ ì˜ ë¨¸ë¦¬ë¥¼ ë•Œë ¸ë‹¤.", true, false, false, CL_warning);
 			return true;
 		}
 	case GT_SEIJA:
@@ -4904,22 +4904,22 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("¼¼ÀÌÀÚ´Â ´ç½ÅÀÇ ±âµµ¸¦ ¹«½ÃÇß´Ù.", true, false, false, CL_warning);
+			printlog("ì„¸ì´ìëŠ” ë‹¹ì‹ ì˜ ê¸°ë„ë¥¼ ë¬´ì‹œí–ˆë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("¼¼ÀÌÀÚ´Â ´ç½Å¿¡ Å« °ü½ÉÀÌ ¾ø¾îº¸ÀÎ´Ù.", true, false, false, CL_warning);
+			printlog("ì„¸ì´ìëŠ” ë‹¹ì‹ ì— í° ê´€ì‹¬ì´ ì—†ì–´ë³´ì¸ë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("¼¼ÀÌÀÚÀÇ Ç¥Á¤Àº ±×´ÙÁö ¾È ÁÁ¾Æº¸ÀÎ´Ù.", true, false, false, CL_warning);
+			printlog("ì„¸ì´ìì˜ í‘œì •ì€ ê·¸ë‹¤ì§€ ì•ˆ ì¢‹ì•„ë³´ì¸ë‹¤.", true, false, false, CL_warning);
 			return true;
 		case 4:
-			printlog("¼¼ÀÌÀÚ: ¹İÄ¢ÀÌ¶óµµ »ì¾Æ³²´Â´Ù¸é ±×°É·Î ÃæºĞÇØ", true, false, false, CL_seija);
+			printlog("ì„¸ì´ì: ë°˜ì¹™ì´ë¼ë„ ì‚´ì•„ë‚¨ëŠ”ë‹¤ë©´ ê·¸ê±¸ë¡œ ì¶©ë¶„í•´", true, false, false, CL_seija);
 			return true;
 		case 5:
-			printlog("¼¼ÀÌÀÚ: ·¹Áö½ºÅÁ½º »ıÈ°Àº ¸¶À½¿¡ µé¾î?", true, false, false, CL_seija);
+			printlog("ì„¸ì´ì: ë ˆì§€ìŠ¤íƒ•ìŠ¤ ìƒí™œì€ ë§ˆìŒì— ë“¤ì–´?", true, false, false, CL_seija);
 			return true;
 		case 6:
-			printlog("¼¼ÀÌÀÚ: ¿ì¸° ÃÖ°íÀÇ ÆÄÆ®³Ê¾ß Ä£±¸!", true, false, false, CL_seija);
+			printlog("ì„¸ì´ì: ìš°ë¦° ìµœê³ ì˜ íŒŒíŠ¸ë„ˆì•¼ ì¹œêµ¬!", true, false, false, CL_seija);
 			return true;
 		}
 	case GT_LILLY:
@@ -4931,25 +4931,25 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("¿ÀÅ°³ª: ³×°¡ Á¦ ¼öÇà¿øÀ¸·Î ¸Ã´ÂÁö Å×½ºÆ®ÇØº¼°Å¾ß.", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ë„¤ê°€ ì œ ìˆ˜í–‰ì›ìœ¼ë¡œ ë§¡ëŠ”ì§€ í…ŒìŠ¤íŠ¸í•´ë³¼ê±°ì•¼.", true, false, false, CL_okina);
 			return true;
 		case 1:
-			printlog("¿ÀÅ°³ª: ¸éÁ¢Àº ¾ø¾î, ½ÇÀü Å×½ºÆ®·Î Ã¤¿ëÀ» °áÁ¤ÇÏÁö", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ë©´ì ‘ì€ ì—†ì–´, ì‹¤ì „ í…ŒìŠ¤íŠ¸ë¡œ ì±„ìš©ì„ ê²°ì •í•˜ì§€", true, false, false, CL_okina);
 			return true;
 		case 2:
-			printlog("¿ÀÅ°³ª: ³ªÀÇ Á¸Àç´Â Ç×»ó ¾Ë·ÁÁ®¾ß¸¸ ÇÑ´Ù", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ë‚˜ì˜ ì¡´ì¬ëŠ” í•­ìƒ ì•Œë ¤ì ¸ì•¼ë§Œ í•œë‹¤", true, false, false, CL_okina);
 			return true;
 		case 3:
-			printlog("¿ÀÅ°³ª: µî µÚÀÇ ¹®À¸·Î ³» ÈûÀ» ¹Şµµ·Ï ÇØ¶ó", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ë“± ë’¤ì˜ ë¬¸ìœ¼ë¡œ ë‚´ í˜ì„ ë°›ë„ë¡ í•´ë¼", true, false, false, CL_okina);
 			return true;
 		case 4:
-			printlog("¿ÀÅ°³ª: ½½½½ ¸¶ÀÌ¿Í »çÅä³ë´Â ÇØ¹æ½ÃÄÑÁÙ±î »ı°¢ÁßÀÌ´Ù", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ìŠ¬ìŠ¬ ë§ˆì´ì™€ ì‚¬í† ë…¸ëŠ” í•´ë°©ì‹œì¼œì¤„ê¹Œ ìƒê°ì¤‘ì´ë‹¤", true, false, false, CL_okina);
 			return true;
 		case 5:
-			printlog("¿ÀÅ°³ª: ½Ç·Î ³× ºÎÇÏ¿¡ ¸Â´Â ÀÎÀç·Î±¸³ª. ÇÕ°İÀÌ´Ù!", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ì‹¤ë¡œ ë„¤ ë¶€í•˜ì— ë§ëŠ” ì¸ì¬ë¡œêµ¬ë‚˜. í•©ê²©ì´ë‹¤!", true, false, false, CL_okina);
 			return true;
 		case 6:
-			printlog("¿ÀÅ°³ª: º¸¶ó! µéÀ¸¶ó! ¸»ÇÏ¶ó! ºñ½ÅÀÇ ÁøÁ¤ÇÑ ¸¶·ÂÀ» ¹Ş¾Æ¶ó!", true, false, false, CL_okina);
+			printlog("ì˜¤í‚¤ë‚˜: ë³´ë¼! ë“¤ìœ¼ë¼! ë§í•˜ë¼! ë¹„ì‹ ì˜ ì§„ì •í•œ ë§ˆë ¥ì„ ë°›ì•„ë¼!", true, false, false, CL_okina);
 			return true;
 		}
 	case GT_JUNKO:
@@ -4957,7 +4957,7 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("¼øÈ£: »ó¾Æ¿© º¸°íÀÖ´Â°¡!", true, false, false, CL_junko);
+			printlog("ìˆœí˜¸: ìƒì•„ì—¬ ë³´ê³ ìˆëŠ”ê°€!", true, false, false, CL_junko);
 			return true;
 		}
 	}

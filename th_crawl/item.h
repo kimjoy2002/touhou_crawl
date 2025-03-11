@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: item.h
+// íŒŒì¼ì´ë¦„: item.h
 //
-// ³»¿ë: ¾ÆÀÌÅÛ Å¬·¡½º ¼±¾ğ
+// ë‚´ìš©: ì•„ì´í…œ í´ë˜ìŠ¤ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +44,7 @@ struct item_infor
 	bool curse;
 
 	bool artifact;
-	item_infor():name("¾øÀ½",true), name2("",true) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
+	item_infor():name("ì—†ìŒ",true), name2("",true) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
 		num(1),value0(0),value1(0),value2(0),value3(0),value4(0),value5(0),value6(0), value7(0), value8(0)
 		, curse(false), artifact(false)
 	{};
@@ -68,7 +68,7 @@ struct potion_iden
 };
 struct scroll_iden
 {
-	char iden; //1Àº »ç¿ëÇÔ, 2´Â ¼±ÅÃ»ç¿ëÇÔ, 3Àº ½Äº°
+	char iden; //1ì€ ì‚¬ìš©í•¨, 2ëŠ” ì„ íƒì‚¬ìš©í•¨, 3ì€ ì‹ë³„
 	int type;
 	scroll_iden():
 	iden(false), type(0)
@@ -76,7 +76,7 @@ struct scroll_iden
 };
 struct ring_iden
 {
-	char iden; //1Àº »ç¿ëÇÔ, 2´Â ½Äº°
+	char iden; //1ì€ ì‚¬ìš©í•¨, 2ëŠ” ì‹ë³„
 	int type;
 	ring_iden():
 	iden(false), type(0)
@@ -84,7 +84,7 @@ struct ring_iden
 };
 struct amulet_iden
 {
-	char iden; //1Àº »ç¿ëÇÔ, 2´Â ½Äº°
+	char iden; //1ì€ ì‚¬ìš©í•¨, 2ëŠ” ì‹ë³„
 	int type;
 	amulet_iden():
 	iden(false), type(0)
@@ -92,7 +92,7 @@ struct amulet_iden
 };
 struct spellcard_iden
 {
-	char iden; //1Àº »ç¿ëÇÔ, 2´Â ½Äº°
+	char iden; //1ì€ ì‚¬ìš©í•¨, 2ëŠ” ì‹ë³„
 	int type;
 	spellcard_iden():
 	iden(false), type(0)
@@ -123,11 +123,11 @@ enum iden_check
 
 	IDEN_CHECK_BOOK_START = IDEN_CHECK_SPC_END,
 
-	IDEN_CHECK_BOOK_END = IDEN_CHECK_BOOK_START + 1 + BOOK_LAST, //1Àº ¹Ì°¨Á¤ Ã¥
+	IDEN_CHECK_BOOK_END = IDEN_CHECK_BOOK_START + 1 + BOOK_LAST, //1ì€ ë¯¸ê°ì • ì±…
 
 	IDEN_CHECK_ETC_START = IDEN_CHECK_BOOK_END,
 
-	IDEN_CHECK_ETC_END = IDEN_CHECK_ETC_START +  2 + TMT_MAX, //2Àº P¾ÆÀÌÅÛ, À½½Ä
+	IDEN_CHECK_ETC_END = IDEN_CHECK_ETC_START +  2 + TMT_MAX, //2ì€ Pì•„ì´í…œ, ìŒì‹
 
 	IDEN_CHECK_END = IDEN_CHECK_ETC_END
 };
@@ -169,28 +169,28 @@ public:
 	bool can_throw; 
 	bool drop;
 	bool throw_item;
-	bool hamme_gift; //¸ÁÄ¡ÀÇ ¹İ´ëÈ¿°ú°¡ ¹ßµ¿µÇ¸é ÀüºÎ »¯¾î°¨
+	bool hamme_gift; //ë§ì¹˜ì˜ ë°˜ëŒ€íš¨ê³¼ê°€ ë°œë™ë˜ë©´ ì „ë¶€ ëºì–´ê°
 	int waste;
 	int delay_turn;
 
-	int value0; //ºñ»ó¿ë - Ã¥-Á¾·ù(ÀÌ °ÍÀº ÇÊ¿äÇÑ ¾ÆÀÌÅÛ¾Æ´Ï¸é »ç¿ëÇÏÁö ¾Ê´Â º¯¼ö´Ù.)
+	int value0; //ë¹„ìƒìš© - ì±…-ì¢…ë¥˜(ì´ ê²ƒì€ í•„ìš”í•œ ì•„ì´í…œì•„ë‹ˆë©´ ì‚¬ìš©í•˜ì§€ ì•ŠëŠ” ë³€ìˆ˜ë‹¤.)
 
 	
-	int value1; //value1 - ¹«±â,Åº¸·-¸íÁß·Â ¹æ¾î±¸-AC ¹æÆĞ-SH À½½Ä,¹°¾à,½ºÅ©·Ñ,¸µ-Á¾·ù Ã¥-¸¶¹ı ½ºÆçÄ«µå-È½¼ö ¹ßµ¿ÅÛ-Á¾·ù
+	int value1; //value1 - ë¬´ê¸°,íƒ„ë§‰-ëª…ì¤‘ë ¥ ë°©ì–´êµ¬-AC ë°©íŒ¨-SH ìŒì‹,ë¬¼ì•½,ìŠ¤í¬ë¡¤,ë§-ì¢…ë¥˜ ì±…-ë§ˆë²• ìŠ¤í ì¹´ë“œ-íšŸìˆ˜ ë°œë™í…œ-ì¢…ë¥˜
 	
-	int value2; //value2 - ¹«±â,Åº¸·-°ø°İ·Â ¹æ¾î±¸,¹æÆĞ-EV  À½½Ä-¸¸º¹µµ ¸µ-¼öÄ¡ ½ºÆçÄ«µå-Á¾·ù ¾Æ¹Ä·¿-(¿ÀÄÃÆ®)
+	int value2; //value2 - ë¬´ê¸°,íƒ„ë§‰-ê³µê²©ë ¥ ë°©ì–´êµ¬,ë°©íŒ¨-EV  ìŒì‹-ë§Œë³µë„ ë§-ìˆ˜ì¹˜ ìŠ¤í ì¹´ë“œ-ì¢…ë¥˜ ì•„ë®¬ë ›-(ì˜¤ì»¬íŠ¸)
 
-	int value3;	//value3 - ¹æ¾î±¸-ÃÖ¼Ò EVÆĞ³ÎÆ¼ Åº¸·-ÀÎÃ¦Æ® À½½Ä-½Å¼±µµ ½ºÆçÄ«µå-»ç¿ë¿¹ÃøÈ½¼ö ¾Æ¹Ä·¿-¿ÀÄÃÆ®¹ßµ¿¿©ºÎ
+	int value3;	//value3 - ë°©ì–´êµ¬-ìµœì†Œ EVíŒ¨ë„í‹° íƒ„ë§‰-ì¸ì±ˆíŠ¸ ìŒì‹-ì‹ ì„ ë„ ìŠ¤í ì¹´ë“œ-ì‚¬ìš©ì˜ˆì¸¡íšŸìˆ˜ ì•„ë®¬ë ›-ì˜¤ì»¬íŠ¸ë°œë™ì—¬ë¶€
 	
-	int value4; //value4 - ¹«±â-ÀÎÃ¦Æ® ¹æ¾î±¸-AC+ ¹æÆĞ-SH+ Åº¸·-Á¾·ù À½½Ä(pÅÛ)-¸ó½ºÅÍid 
+	int value4; //value4 - ë¬´ê¸°-ì¸ì±ˆíŠ¸ ë°©ì–´êµ¬-AC+ ë°©íŒ¨-SH+ íƒ„ë§‰-ì¢…ë¥˜ ìŒì‹(pí…œ)-ëª¬ìŠ¤í„°id 
 
-	int value5;	//value5 - ¹«±â-¼Ó¼º ¹æ¾î±¸-ÀúÇ× À½½Ä-pow»ó½ÂÄ¡
+	int value5;	//value5 - ë¬´ê¸°-ì†ì„± ë°©ì–´êµ¬-ì €í•­ ìŒì‹-powìƒìŠ¹ì¹˜
 	
-	int value6; //value6 - ¼Ó¼ºÀÎÃ¦Æ® ½Ã°£. 0ÀÌ¸é ¹ÌÈ®ÀÎ.-1ÀÌ¸é ½Äº°+¹«ÇÑ, ¾ç¼ö¸é ½Äº°+À¯ÇÑ
+	int value6; //value6 - ì†ì„±ì¸ì±ˆíŠ¸ ì‹œê°„. 0ì´ë©´ ë¯¸í™•ì¸.-1ì´ë©´ ì‹ë³„+ë¬´í•œ, ì–‘ìˆ˜ë©´ ì‹ë³„+ìœ í•œ
 
-	int value7; //value7 - ¹«±â - ÃÖ´ë°ø¼Ó
+	int value7; //value7 - ë¬´ê¸° - ìµœëŒ€ê³µì†
 	
-	int value8; //value8 - ¹«±â - ÃÖ¼Ò°ø¼Ó
+	int value8; //value8 - ë¬´ê¸° - ìµœì†Œê³µì†
 
 	
 	vector<atifact_infor> atifact_vector;
@@ -206,15 +206,15 @@ public:
 	const D3DCOLOR item_color();
 	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
 
-	bool isSimpleType(item_type_simple type_); //ÇØ´ç Å¸ÀÔÀÌ ¸Â³ª È®ÀÎÇÑ´Ù.
-	bool isRightType(equip_type type_); //ÇØ´ç ºÎÀ§¿¡ ÀåÂøÇÒ ¼ö ÀÖ´ÂÁö È®ÀÎÇÑ´Ù.
-	equip_type GetArmorType();//¹æ¾î±¸ Å¸ÀÔÀ¸·Î ¸®ÅÏÇÑ´Ù.
+	bool isSimpleType(item_type_simple type_); //í•´ë‹¹ íƒ€ì…ì´ ë§ë‚˜ í™•ì¸í•œë‹¤.
+	bool isRightType(equip_type type_); //í•´ë‹¹ ë¶€ìœ„ì— ì¥ì°©í•  ìˆ˜ ìˆëŠ”ì§€ í™•ì¸í•œë‹¤.
+	equip_type GetArmorType();//ë°©ì–´êµ¬ íƒ€ì…ìœ¼ë¡œ ë¦¬í„´í•œë‹¤.
 	bool SameItem(const item &item_);
 	float GetStabPercent();
 	int GetValue(int i);
 
-	void TurnSave();//´Ù¸¥ÃşÀ¸·Î µµ¸ÁÃÆ´Ù.
-	void TurnLoad();//´Ù¸¥Ãş¿¡¼­ µµ¸Á¿Ô´Ù.
+	void TurnSave();//ë‹¤ë¥¸ì¸µìœ¼ë¡œ ë„ë§ì³¤ë‹¤.
+	void TurnLoad();//ë‹¤ë¥¸ì¸µì—ì„œ ë„ë§ì™”ë‹¤.
 
 	bool isweapon();
 	bool isarmor();
@@ -229,12 +229,12 @@ public:
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();
 	bool Enchant(equip_type kind_, int acc_);
-	bool pick(); //¸®ÅÏ°ªÀº ´øÁö±â ¹«±âÀÏ¶§
+	bool pick(); //ë¦¬í„´ê°’ì€ ë˜ì§€ê¸° ë¬´ê¸°ì¼ë•Œ
 
-	void Identify();//°Á½Äº°
-	void autoIdentify();//Àå½Å±¸°è¿­ÀÇ ÀÚµ¿½Äº°
+	void Identify();//ê±ì‹ë³„
+	void autoIdentify();//ì¥ì‹ êµ¬ê³„ì—´ì˜ ìë™ì‹ë³„
 	void equipIdentify();
-	void income_view(); //½Ã¾ß¿¡ µé¾î¿À´Ù.
+	void income_view(); //ì‹œì•¼ì— ë“¤ì–´ì˜¤ë‹¤.
 
 	int action(int delay_);
 	bool offsetmove(const coord_def &c);

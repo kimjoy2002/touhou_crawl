@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: lilly.cpp
+// íŒŒì¼ì´ë¦„: lilly.cpp
 //
-// ³»¿ë: ¸±¸®
+// ë‚´ìš©: ë¦´ë¦¬
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -19,27 +19,27 @@ int getMaxFairyName(){return 20;};
 
 name_infor fairy_name[] =
 {
-	name_infor("¸ŞÀÌ",false),
-	name_infor("¹ÌÅä¸®",false),
-	name_infor("³ª³ë",false),
-	name_infor("³ª³ª",false),
-	name_infor("»çÃ÷Å°",false),
-	name_infor("¾ÆÄ«",false),
-	name_infor("¾Æ¿À",false),
-	name_infor("¾ÆÀÌ",false),
-	name_infor("¿ì¹Ì",false),
-	name_infor("ÇÇÄ«",false),
+	name_infor("ë©”ì´",false),
+	name_infor("ë¯¸í† ë¦¬",false),
+	name_infor("ë‚˜ë…¸",false),
+	name_infor("ë‚˜ë‚˜",false),
+	name_infor("ì‚¬ì¸ í‚¤",false),
+	name_infor("ì•„ì¹´",false),
+	name_infor("ì•„ì˜¤",false),
+	name_infor("ì•„ì´",false),
+	name_infor("ìš°ë¯¸",false),
+	name_infor("í”¼ì¹´",false),
 
-	name_infor("¸¶Àú¸®",false),
-	name_infor("¼Ò³Ä",false),
-	name_infor("¹Ì¾Æ",false),
-	name_infor("»şÀÎ",true),
-	name_infor("ÆÄÀÌ",false),
-	name_infor("·ç½Ã",false),
-	name_infor("¸®ÀÚ",false),
-	name_infor("ÀÌºê",false),
-	name_infor("¿¡¸®Ä«",false),
-	name_infor("¼ÒÁ¶º¸",false)
+	name_infor("ë§ˆì €ë¦¬",false),
+	name_infor("ì†Œëƒ",false),
+	name_infor("ë¯¸ì•„",false),
+	name_infor("ìƒ¤ì¸",true),
+	name_infor("íŒŒì´",false),
+	name_infor("ë£¨ì‹œ",false),
+	name_infor("ë¦¬ì",false),
+	name_infor("ì´ë¸Œ",false),
+	name_infor("ì—ë¦¬ì¹´",false),
+	name_infor("ì†Œì¡°ë³´",false)
 };
 
 
@@ -60,32 +60,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 				switch(randA(5))
 				{
 				case 0:
-					sprintf_s(temp_speak,100,"%s%s²ÉÀ» ´ç½Å¿¡°Ô ¼±¹°Çß´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%sê½ƒì„ ë‹¹ì‹ ì—ê²Œ ì„ ë¬¼í–ˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				case 1:
-					sprintf_s(temp_speak,100,"%s%s´ç½Å¿¡°Ô ¿ô¾îº¸¿´´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%së‹¹ì‹ ì—ê²Œ ì›ƒì–´ë³´ì˜€ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;					
 				case 2:
-					sprintf_s(temp_speak,100,"%s%s¼öÁİÀºµí °í°³¸¦ µ¹·È´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%sìˆ˜ì¤ì€ë“¯ ê³ ê°œë¥¼ ëŒë ¸ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;				
 				case 3:
-					sprintf_s(temp_speak,100,"%s%s³¯°³¸¦ ÆÄ´Ú¿´´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%së‚ ê°œë¥¼ íŒŒë‹¥ì˜€ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;	
 				case 4:
-					sprintf_s(temp_speak,100,"%s%s´ç½Å¿¡°Ô ¼ÕÀ» Èçµé¾ú´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%së‹¹ì‹ ì—ê²Œ ì†ì„ í”ë“¤ì—ˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				case 5:
-					sprintf_s(temp_speak,100,"%s%s²ÉÀ» Áİ°íÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+					sprintf_s(temp_speak,100,"%s%sê½ƒì„ ì¤ê³ ìˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 					return temp_speak;
 				}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s°í°³¸¦ ²ô´ö¿´´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sê³ ê°œë¥¼ ë„ë•ì˜€ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¸¶À½À» ±»°Ô ¸ÔÀºµíÇÏ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§ˆìŒì„ êµ³ê²Œ ë¨¹ì€ë“¯í•˜ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¹İ°©°Ô ÀÎ»ç¸¦ Çß´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së°˜ê°‘ê²Œ ì¸ì‚¬ë¥¼ í–ˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 	case MON_SUNNY:
@@ -95,33 +95,33 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"º¸ÀÌÁö¾ÊÀ¸¸é ¸ô·¡ ´Ù°¡°¥ ¼ö ÀÖ¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë³´ì´ì§€ì•Šìœ¼ë©´ ëª°ë˜ ë‹¤ê°€ê°ˆ ìˆ˜ ìˆì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌÁ¦ ¿äÁ¤ÀÇ ½Ã´ë°¡ ¿Â°Å¾ß!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ì œ ìš”ì •ì˜ ì‹œëŒ€ê°€ ì˜¨ê±°ì•¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤ÀÇ ÈûÀ» ÇÑµ¥ ¸ğÀ»¶§°¡ ¿Ô¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ì˜ í˜ì„ í•œë° ëª¨ì„ë•Œê°€ ì™”ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Áú »ı°¢ÀÌ µéÁö¾Ê´Â°É!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì§ˆ ìƒê°ì´ ë“¤ì§€ì•ŠëŠ”ê±¸!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³­ Áö±İÀÌ °¡Àå Àç¹ÌÀÖ´Â °Í °°¾Æ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚œ ì§€ê¸ˆì´ ê°€ì¥ ì¬ë¯¸ìˆëŠ” ê²ƒ ê°™ì•„!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Á¡Á¡ °­ÇØÁö´Â ±âºĞÀÌ µé¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì ì  ê°•í•´ì§€ëŠ” ê¸°ë¶„ì´ ë“¤ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 			break;
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤ÀÇ ÈûÀ» ¸ğÀ» ¼ö ÀÖ´Ù¸é °¡¼¼ÇÏ°Ú¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ì˜ í˜ì„ ëª¨ì„ ìˆ˜ ìˆë‹¤ë©´ ê°€ì„¸í•˜ê² ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"ÁøÂ¥ ÆÀ¿öÅ©¸¦ º¸¿©ÁÖ°Ú¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì§„ì§œ íŒ€ì›Œí¬ë¥¼ ë³´ì—¬ì£¼ê² ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"½á´Ï µµÂø!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì¨ë‹ˆ ë„ì°©!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -132,33 +132,33 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"°¡²û¾¿Àº Á¶¿ëÈ÷ Ä¿ÇÇ¸¦ ¸¶½Ã°í ½Í¾î.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ê°€ë”ì”©ì€ ì¡°ìš©íˆ ì»¤í”¼ë¥¼ ë§ˆì‹œê³  ì‹¶ì–´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÆÀÀ» ±¸¼ºÇÏ¸é ¿äÁ¤ÀÌ¶óµµ ²Ï °­ÇÑ°Å³×.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"íŒ€ì„ êµ¬ì„±í•˜ë©´ ìš”ì •ì´ë¼ë„ ê½¤ ê°•í•œê±°ë„¤.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌ·¸°Ô ±í°Ô µé¾î¿ÂÀûÀº Ã³À½ÀÎµ¥.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ë ‡ê²Œ ê¹Šê²Œ ë“¤ì–´ì˜¨ì ì€ ì²˜ìŒì¸ë°.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¼Ò¸®¸¦ Á×ÀÌ¸é ±ÍÂúÀº ¸¶¹ıµµ ¸·À» ¼ö ÀÖ¾î.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì†Œë¦¬ë¥¼ ì£½ì´ë©´ ê·€ì°®ì€ ë§ˆë²•ë„ ë§‰ì„ ìˆ˜ ìˆì–´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àá±ñ ¾É¾Æ¼­ Ã¥ÀÌ¶óµµ ÀĞÁö ¾ÊÀ»·¡?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì ê¹ ì•‰ì•„ì„œ ì±…ì´ë¼ë„ ì½ì§€ ì•Šì„ë˜?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿ª½Ã ¿äÁ¤Àº ¹°·®ÀÌ ÃÖ°íÁö.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì—­ì‹œ ìš”ì •ì€ ë¬¼ëŸ‰ì´ ìµœê³ ì§€.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 			break;
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"µ¿·á°¡ µÇ¸é ¶§¸®Áö¾ÊÀ»°Å¾ß?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë™ë£Œê°€ ë˜ë©´ ë•Œë¦¬ì§€ì•Šì„ê±°ì•¼?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"³ªµµ ÇÒ¶© ÇÑ´Ù°í!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ë‚˜ë„ í• ë• í•œë‹¤ê³ !\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¾ÆÇÂ°Ç ½È¾î...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì•„í”ˆê±´ ì‹«ì–´...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -169,33 +169,33 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤ÀÌ ¸ğÀÌ¸é ÀÌ·¸°Ô °­ÇÑ°É!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ì´ ëª¨ì´ë©´ ì´ë ‡ê²Œ ê°•í•œê±¸!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¾Æ Àá±ñ¸¸, ÀÌ°÷¿¡ ÁÁÀº ½ÄÀç·á°¡\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì•„ ì ê¹ë§Œ, ì´ê³³ì— ì¢‹ì€ ì‹ì¬ë£Œê°€\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÁÖº¯¿¡ ¸¹Àº ¹İÀÀÀÌ ÀÖ¾î, ¸ö Á¶½ÉÇØ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì£¼ë³€ì— ë§ì€ ë°˜ì‘ì´ ìˆì–´, ëª¸ ì¡°ì‹¬í•´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿ØÁö º¸¹°Ã£±â °°¾Æ¼­ Áñ°Å¿ö!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì™ ì§€ ë³´ë¬¼ì°¾ê¸° ê°™ì•„ì„œ ì¦ê±°ì›Œ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³» Å½Áö ´É·ÂÀ¸·Ğ Á¤È®ÇÑ ÀûÀº ¾Ë ¼ö ¾ø¾î.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚´ íƒì§€ ëŠ¥ë ¥ìœ¼ë¡  ì •í™•í•œ ì ì€ ì•Œ ìˆ˜ ì—†ì–´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¹¹ ¸Ô°í ½ÍÀº °Í ¾ø¾î? °¡²û¾¿Àº ¿ä¸®¸¦ ÇÒ±î ÇÏ´Âµ¥\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë­ ë¨¹ê³  ì‹¶ì€ ê²ƒ ì—†ì–´? ê°€ë”ì”©ì€ ìš”ë¦¬ë¥¼ í• ê¹Œ í•˜ëŠ”ë°\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 			break;
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"´ç½Å Æí¿¡ ºÙ´Â°Ô ´õ ÀÌµæÀÏ°Å °°³×.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‹¹ì‹  í¸ì— ë¶™ëŠ”ê²Œ ë” ì´ë“ì¼ê±° ê°™ë„¤.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤µéÀÇ ÁøÁ¤ÇÑ °øÆ÷¸¦ º¸¿©ÁÖ´Â°Å¾ß!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ë“¤ì˜ ì§„ì •í•œ ê³µí¬ë¥¼ ë³´ì—¬ì£¼ëŠ”ê±°ì•¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"°Ü¿ì µ¹¾Æ¿Ô¾î. ´ÙÀ½¿£ Á¶½ÉÇÏÁö¾ÊÀ¸¸é...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ê²¨ìš° ëŒì•„ì™”ì–´. ë‹¤ìŒì—” ì¡°ì‹¬í•˜ì§€ì•Šìœ¼ë©´...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -206,32 +206,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³¯ µû¶ó¿Í!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚  ë”°ë¼ì™€!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"´õ °­ÇÑ ÀûÀÌ ÇÊ¿äÇØ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë” ê°•í•œ ì ì´ í•„ìš”í•´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³» ÁøÂ¥ ÈûÀ» º¸¿©ÁÙ°Ô!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚´ ì§„ì§œ í˜ì„ ë³´ì—¬ì¤„ê²Œ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s´ç½Å¿¡°Ô ³Ãµ¿°³±¸¸®¸¦ ÀÚ¶û½º·´°Ô °Ç³×Áá´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së‹¹ì‹ ì—ê²Œ ëƒ‰ë™ê°œêµ¬ë¦¬ë¥¼ ìë‘ìŠ¤ëŸ½ê²Œ ê±´ë„¤ì¤¬ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³»°¡ ³Î ÁöÄÑÁÙ°Ô!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚´ê°€ ë„ ì§€ì¼œì¤„ê²Œ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌ ¸öÀÇ µÚ¿¡ ÀÖÀ¸¸é ¾ÈÀüÇÒ°Å¶ó°í!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ ëª¸ì˜ ë’¤ì— ìˆìœ¼ë©´ ì•ˆì „í• ê±°ë¼ê³ !\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"Æ¯º°È÷ ÀÌ ¸öÀÇ ºÎÇÏ·Î »ï¾ÆÁÖÁö!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"íŠ¹ë³„íˆ ì´ ëª¸ì˜ ë¶€í•˜ë¡œ ì‚¼ì•„ì£¼ì§€!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"ÀÌ·±°Ç ³ª È¥ÀÚ¼­µµ ÃæºĞÇØ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì´ëŸ°ê±´ ë‚˜ í˜¼ìì„œë„ ì¶©ë¶„í•´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"¹æ±İÀü¿£ ½Ç¼ö¿´¾î! ¹æ±İ ±× ³à¼®Àº ¾îµğ¾ß??\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ë°©ê¸ˆì „ì—” ì‹¤ìˆ˜ì˜€ì–´! ë°©ê¸ˆ ê·¸ ë…€ì„ì€ ì–´ë””ì•¼??\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -242,32 +242,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌ ºÒ²ÉÀ» º¸°í ¸ÖÂÄÇß´ø »ç¶÷Àº ¾ø¾ú¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ ë¶ˆê½ƒì„ ë³´ê³  ë©€ì©¡í–ˆë˜ ì‚¬ëŒì€ ì—†ì—ˆì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Á» ´õ ±¤±â¸¦!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¢€ ë” ê´‘ê¸°ë¥¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Á¤¸» Àç¹Õ¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì •ë§ ì¬ë°Œì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%sÈ¶ºÒÀ» ÀÌ¸®Àú¸® Èçµé°í ÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%síšƒë¶ˆì„ ì´ë¦¬ì €ë¦¬ í”ë“¤ê³  ìˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Á» ´õ ¼Óµµ¸¦ ¿Ã·Á¼­ °¡ÀÚ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¢€ ë” ì†ë„ë¥¼ ì˜¬ë ¤ì„œ ê°€ì!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤µéÀÇ ¼¼»óÀÌ´Ù!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ë“¤ì˜ ì„¸ìƒì´ë‹¤!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"¾Ë°Ú¾î! ±× ÂÊÀÌ ´õ Áñ°Å¿ï°Å°°¾Æ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì•Œê² ì–´! ê·¸ ìª½ì´ ë” ì¦ê±°ìš¸ê±°ê°™ì•„!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"ÀÕÃ÷! ·ç³ªÆ½ Å¸ÀÓ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì‡ì¸ ! ë£¨ë‚˜í‹± íƒ€ì„!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"À£ÄÄ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì›°ì»´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -278,32 +278,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch (randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100, "%s%s¸»Çß´Ù. \"¿Í¾Æ! ¸ğµÎ µ¹°İ!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së§í–ˆë‹¤. \"ì™€ì•„! ëª¨ë‘ ëŒê²©!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100, "%s%s¸»Çß´Ù. \"¿À´Ãµû¶ó ÈûÀÌ ³ÑÃÄÈê·¯!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së§í–ˆë‹¤. \"ì˜¤ëŠ˜ë”°ë¼ í˜ì´ ë„˜ì³í˜ëŸ¬!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 2:
-				sprintf_s(temp_speak,100, "%s%s¸»Çß´Ù. \"¿äÁ¤ºÎ´ë Ãâ°İÀÌ´Ù!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së§í–ˆë‹¤. \"ìš”ì •ë¶€ëŒ€ ì¶œê²©ì´ë‹¤!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 3:
-				sprintf_s(temp_speak,100, "%s%s´ç½ÅÀÇ ¾Õ¿¡¼­ ³¯°³ ÃãÀ» Ãß¾ú´Ù.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së‹¹ì‹ ì˜ ì•ì—ì„œ ë‚ ê°œ ì¶¤ì„ ì¶”ì—ˆë‹¤.", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 4:
-				sprintf_s(temp_speak,100, "%s%s¸»Çß´Ù. \"Á¡Á¡ °­ÇØÁö´Â °Í °°¾Æ!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së§í–ˆë‹¤. \"ì ì  ê°•í•´ì§€ëŠ” ê²ƒ ê°™ì•„!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 5:
-				sprintf_s(temp_speak,100, "%s%s¸»Çß´Ù. \"´ÙÀ½¿£ ¾îµğ¼­ ³î±î?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100, "%s%së§í–ˆë‹¤. \"ë‹¤ìŒì—” ì–´ë””ì„œ ë†€ê¹Œ?\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100, "%s%s¿ÜÃÆ´Ù. \"³Ê Á¤¸» °­ÇÏ±¸³ª! Àß ºÎÅ¹ÇØ!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100, "%s%sì™¸ì³¤ë‹¤. \"ë„ˆ ì •ë§ ê°•í•˜êµ¬ë‚˜! ì˜ ë¶€íƒí•´!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100, "%s%s¿ÜÃÆ´Ù. \"ÇÑ ¿©¸§¹ãÀÇ ÀüÀïÀÌ´Ù!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100, "%s%sì™¸ì³¤ë‹¤. \"í•œ ì—¬ë¦„ë°¤ì˜ ì „ìŸì´ë‹¤!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100, "%s%s¿ÜÃÆ´Ù. \"ºÎ¿ìÈ°!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100, "%s%sì™¸ì³¤ë‹¤. \"ë¶€ìš°í™œ!\"", monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -325,32 +325,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àå³­À» ½È¾îÇÏ´Â ¿äÁ¤Àº ¾ø¾î.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¥ë‚œì„ ì‹«ì–´í•˜ëŠ” ìš”ì •ì€ ì—†ì–´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"°¡²û¾¿Àº ³ªµµ ¸ŞÀÌµå¸¦ ÇØº¼±î »ı°¢ÀÌ µé°ïÇØ.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ê°€ë”ì”©ì€ ë‚˜ë„ ë©”ì´ë“œë¥¼ í•´ë³¼ê¹Œ ìƒê°ì´ ë“¤ê³¤í•´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¾î¶² Àå³­À» Ä¥¶§º¸´Ù Áö±İÀÌ Á¦ÀÏ Àç¹Õ¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì–´ë–¤ ì¥ë‚œì„ ì¹ ë•Œë³´ë‹¤ ì§€ê¸ˆì´ ì œì¼ ì¬ë°Œì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿ì¸° ÃÖ°íÀÇ ÆÀÀÌ¾ß!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš°ë¦° ìµœê³ ì˜ íŒ€ì´ì•¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"»õ·Î¿î Ä£±¸µé°ú ¸¸³ª´Â°Ç Ç×»ó ¼³·¹¿©!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìƒˆë¡œìš´ ì¹œêµ¬ë“¤ê³¼ ë§Œë‚˜ëŠ”ê±´ í•­ìƒ ì„¤ë ˆì—¬!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"¿äÁ¤ÀÌ ÇÌ¹Ú¹ŞÁö ¾ÊÀº ½Ã´ë¸¦ À§ÇÏ¿©!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ìš”ì •ì´ í•ë°•ë°›ì§€ ì•Šì€ ì‹œëŒ€ë¥¼ ìœ„í•˜ì—¬!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³ª¶óµµ µµ¿òÀÌ µÉ ¼ö ÀÖÀ»±î?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚˜ë¼ë„ ë„ì›€ì´ ë  ìˆ˜ ìˆì„ê¹Œ?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"¿äÁ¤À» À§ÇÏ¿©!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ìš”ì •ì„ ìœ„í•˜ì—¬!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤Àº Á×Áö¾Ê¾Æ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ì€ ì£½ì§€ì•Šì•„!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -361,32 +361,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àú±â... °í¸¶¿ö\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì €ê¸°... ê³ ë§ˆì›Œ\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¾ó±¼À» ºÓÈ÷°í ÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%sì–¼êµ´ì„ ë¶‰íˆê³  ìˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%sÁ¶½É½º·´°Ô ¸»Çß´Ù. \"³ªµµ ÈûÀÌ µÇ°í ÀÖÁö?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%sì¡°ì‹¬ìŠ¤ëŸ½ê²Œ ë§í–ˆë‹¤. \"ë‚˜ë„ í˜ì´ ë˜ê³  ìˆì§€?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s´ç½Å¿¡°Ô Á¸°æÀÇ ½Ã¼±À» ³¯¸°´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së‹¹ì‹ ì—ê²Œ ì¡´ê²½ì˜ ì‹œì„ ì„ ë‚ ë¦°ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¹«¸®ÇÏÁö¸¶...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë¬´ë¦¬í•˜ì§€ë§ˆ...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸¶À½À» ",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§ˆìŒì„ ",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¼öÁİ°Ô °í°³¸¦ ²ô´ö¿´´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sìˆ˜ì¤ê²Œ ê³ ê°œë¥¼ ë„ë•ì˜€ë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"...¿­½ÉÈ÷ ÇØº¼°Ô!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"...ì—´ì‹¬íˆ í•´ë³¼ê²Œ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ºÎÈ°ÇÒ ¼ö ÀÖ¾îµµ Á×´Â°Ç ½È¾î...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë¶€í™œí•  ìˆ˜ ìˆì–´ë„ ì£½ëŠ”ê±´ ì‹«ì–´...\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -397,32 +397,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"´©±¸µµ ¿ì¸± ¸·À» ¼ø ¾ø¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ëˆ„êµ¬ë„ ìš°ë¦´ ë§‰ì„ ìˆœ ì—†ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Áö±İ Áú °Í °°Àº »ı°¢ÀÌ µéÁö ¾Ê¾Æ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì§€ê¸ˆ ì§ˆ ê²ƒ ê°™ì€ ìƒê°ì´ ë“¤ì§€ ì•Šì•„!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³­ ½Î¿ì´Â°Ô Á¦ÀÏ Àç¹Õ¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚œ ì‹¸ìš°ëŠ”ê²Œ ì œì¼ ì¬ë°Œì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÚ, ´ÙÀ½ »ó´ë´Â ´©±¸¾ß?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì, ë‹¤ìŒ ìƒëŒ€ëŠ” ëˆ„êµ¬ì•¼?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³­ ÃÖ°­ÀÌ µÉ°Å¾ß!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚œ ìµœê°•ì´ ë ê±°ì•¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¿äÁ¤ÀÌ ¼¼»óÀ» Áö¹èÇÏ´Â°Å¾ß!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìš”ì •ì´ ì„¸ìƒì„ ì§€ë°°í•˜ëŠ”ê±°ì•¼!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%sÀÚ½ÅÀÖ°Ô ¿ÜÃÆ´Ù. \"ÀÌÁ¦ºÎÅÏ ³ªÇÑÅ× ¸Ã°Ü!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sìì‹ ìˆê²Œ ì™¸ì³¤ë‹¤. \"ì´ì œë¶€í„´ ë‚˜í•œí…Œ ë§¡ê²¨!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"µ¹°İ ¾ÕÀ¸·Î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ëŒê²© ì•ìœ¼ë¡œ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌÁ¨ °ÆÁ¤¸¶! ³»°¡ µ¹¾Æ¿Ô¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ì   ê±±ì •ë§ˆ! ë‚´ê°€ ëŒì•„ì™”ì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -433,32 +433,32 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀÌÁ¨ ¿äÁ¤µµ ¸Ó¸®¸¦ ¾²´Â ½Ã´ë¾ß.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì´ì   ìš”ì •ë„ ë¨¸ë¦¬ë¥¼ ì“°ëŠ” ì‹œëŒ€ì•¼.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%s°¡Áö°í ÀÖ´ø Ã¥À» ÀĞ°í ÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%sê°€ì§€ê³  ìˆë˜ ì±…ì„ ì½ê³  ìˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÀûÀÇ Á¤º¸¸¦ ¾Ë¸é »ó´ëµµ ½¬¿ï°Å¾ß\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì ì˜ ì •ë³´ë¥¼ ì•Œë©´ ìƒëŒ€ë„ ì‰¬ìš¸ê±°ì•¼\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"°¡Áö°í ÀÖ´Â ¹°°ÇÀº Ç×»ó Ã¼Å©ÇÏ°íÀÖ¾î?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ê°€ì§€ê³  ìˆëŠ” ë¬¼ê±´ì€ í•­ìƒ ì²´í¬í•˜ê³ ìˆì–´?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³­ ³Î ¹Ï°íÀÖ¾î\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë‚œ ë„ ë¯¿ê³ ìˆì–´\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"µ¿·á´Â ¸¹À» ¼ö·Ï ÁÁ¾Æ\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë™ë£ŒëŠ” ë§ì„ ìˆ˜ë¡ ì¢‹ì•„\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"ÁÁ¾Æ. ÈûÀ» ºô·ÁÁÙ°Ô\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¢‹ì•„. í˜ì„ ë¹Œë ¤ì¤„ê²Œ\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¾Ë°Ú¾î ±× ÀÛÀü´ë·Î ÇÏÀÚ\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì•Œê² ì–´ ê·¸ ì‘ì „ëŒ€ë¡œ í•˜ì\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¹æ±İ Àü¿£ ½Ç¼ö¿´¾î.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë°©ê¸ˆ ì „ì—” ì‹¤ìˆ˜ì˜€ì–´.\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
@@ -469,38 +469,38 @@ const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type)
 			switch(randA(5))
 			{
 			case 0:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"³îÀÚ! ³îÀÚ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ë†€ì! ë†€ì!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			case 1:
-				sprintf_s(temp_speak,100,"%s%sÁ¤½Å¾øÀÌ ºñÇàÇÏ°íÀÖ´Ù.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%sì •ì‹ ì—†ì´ ë¹„í–‰í•˜ê³ ìˆë‹¤.",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;		
 			case 2:
-				sprintf_s(temp_speak,100,"%s%s´ç½Å¿¡°Ô µ¹¸æÀÌ¸¦ ³»¹Ğ¾ú´Ù. \"³»°¡ ÁÖ¿î µ¹¸æÀÌ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së‹¹ì‹ ì—ê²Œ ëŒë©©ì´ë¥¼ ë‚´ë°€ì—ˆë‹¤. \"ë‚´ê°€ ì£¼ìš´ ëŒë©©ì´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 3:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àç¹Õ´Â Àå³­ÀÌ ¶°¿Ã¶ú¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¬ë°ŒëŠ” ì¥ë‚œì´ ë– ì˜¬ëì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 4:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àú±âÀú±â, ¼û¹Ú²ÀÁúÇÏÁö ¾ÊÀ»·¡?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì €ê¸°ì €ê¸°, ìˆ¨ë°•ê¼­ì§ˆí•˜ì§€ ì•Šì„ë˜?\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;			
 			case 5:
-				sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"Àç¹Õ¾î! Àç¹Õ¾î!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+				sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì¬ë°Œì–´! ì¬ë°Œì–´!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 				return temp_speak;
 			}
 		case FS_ENTER:
-			sprintf_s(temp_speak,100,"%s%s¿ÜÃÆ´Ù. \"Àú±âÀú±â, ¹¹ÇÏ°í ³î²¨¾ß??\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%sì™¸ì³¤ë‹¤. \"ì €ê¸°ì €ê¸°, ë­í•˜ê³  ë†€êº¼ì•¼??\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_FAIRY_WAR:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"»õ·Î¿î ³îÀÌ¾ß? ³ªµµ ³¥·¡ ³¥·¡!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ìƒˆë¡œìš´ ë†€ì´ì•¼? ë‚˜ë„ ë‚„ë˜ ë‚„ë˜!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		case FS_REVIVE:
-			sprintf_s(temp_speak,100,"%s%s¸»Çß´Ù. \"¾ÆÁ÷ ¾È ³¡³µÁö? °è¼Ó ³îÀÚ!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
+			sprintf_s(temp_speak,100,"%s%së§í–ˆë‹¤. \"ì•„ì§ ì•ˆ ëë‚¬ì§€? ê³„ì† ë†€ì!\"",monster_info->GetName()->name.c_str(), monster_info->GetName()->name_is(true));
 			return temp_speak;
 		}
 		break;
 	}
 	
-	return "<¸±¸® ¿äÁ¤ ¿¡·¯¸Ş¼¼Áö>";
+	return "<ë¦´ë¦¬ ìš”ì • ì—ëŸ¬ë©”ì„¸ì§€>";
 
 }
 
@@ -528,7 +528,7 @@ void GetFairyExp(int exp)
 							it->LevelUpdown(1,6.0f,1.0f);
 							if(it->isYourShight())
 							{
-								printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"°­ÇØÁ³´Ù. ");
+								printarray(false,false,false,CL_normal,3,it->name.name.c_str(),it->name.name_is(true),"ê°•í•´ì¡Œë‹¤. ");
 								enter_++;
 								if(enter_>=4)
 									enterlog();
@@ -620,7 +620,7 @@ void GetFairyExp(int exp)
 									enterlog();
 									enter_ = 0;
 								}
-								printarray(true,false,false,CL_normal,6,"±×µ¿¾È ½×Àº °æÇèÀ¸·Î ",mondata[prev_id].name.name.c_str(),"¿¡¼­ ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"µÇ¾ú´Ù.");
+								printarray(true,false,false,CL_normal,6,"ê·¸ë™ì•ˆ ìŒ“ì€ ê²½í—˜ìœ¼ë¡œ ",mondata[prev_id].name.name.c_str(),"ì—ì„œ ",mondata[it->id].name.name.c_str(),mondata[it->id].name.name_do(true),"ë˜ì—ˆë‹¤.");
 								
 							}
 						}					

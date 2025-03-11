@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: localization.h
+// íŒŒì¼ì´ë¦„: localization.h
 //
-// ³»¿ë: ´Ù±¹¾î Ã³¸®
+// ë‚´ìš©: ë‹¤êµ­ì–´ ì²˜ë¦¬
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -117,9 +117,9 @@ enum LOCALIZATION_TYPE {
     X(LOC_SYSTEM_ON_THE_TERRAIN) \
     X(LOC_SYSTEM_ON_THE_ITEM_SINGLE) \
     X(LOC_SYSTEM_ON_THE_ITEM_MULTIPLE) \
-    X(LOC_MAX) // ¸¶Áö¸· ENUM
+    X(LOC_MAX) // ë§ˆì§€ë§‰ ENUM
 
-// **ENUM Á¤ÀÇ**
+// **ENUM ì •ì˜**
 enum LOCALIZATION_ENUM_KEY {
 #define X(name) name,
     LOCALIZATION_ENUM_LIST
@@ -148,7 +148,7 @@ public:
 
 class LocalzationManager {
 private:
-// Àü¿ª º¯¼ö·Î »ç¿ë
+// ì „ì—­ ë³€ìˆ˜ë¡œ ì‚¬ìš©
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
 	static unordered_map<monster_index, string> monster_name_map;

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: environment.cpp
+// íŒŒì¼ì´ë¦„: environment.cpp
 //
-// ³»¿ë: ¸Ê°ú °ÔÀÓµ¥ÀÌÅÍ
+// ë‚´ìš©: ë§µê³¼ ê²Œì„ë°ì´í„°
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -196,11 +196,11 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		forbid_list.push_back(temp);
 	}
-	//----ENV·ÎµùºÎºĞ¿¡¼­ ÀÓ½Ã Å¸°ÙÆÃÀ» Àâ¾ÆÁà¾ßÇÑ´Ù.
+	//----ENVë¡œë”©ë¶€ë¶„ì—ì„œ ì„ì‹œ íƒ€ê²ŸíŒ…ì„ ì¡ì•„ì¤˜ì•¼í•œë‹¤.
 	
 	for(vector<monster>::iterator it=mon_vector.begin();it!=mon_vector.end();it++)
 	{
-		if((*it).temp_target_map_id !=  -1) //ÁöÁ¤ÇÒ ´ë»óÀÌ ÀÖ¾î
+		if((*it).temp_target_map_id !=  -1) //ì§€ì •í•  ëŒ€ìƒì´ ìˆì–´
 		{
 			(*it).target = GetMapIDtoUnit((*it).temp_target_map_id);
 		}
@@ -225,7 +225,7 @@ bool environment::MakeMap(bool return_)
 		}	
 
 		if(floor>=SUBTERRANEAN_LEVEL && floor <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
-		{ //ÁöÀú¿¡¼± ¸ğµÎ ±ú¾îÀÖ´Ù.
+		{ //ì§€ì €ì—ì„  ëª¨ë‘ ê¹¨ì–´ìˆë‹¤.
 			for(auto it = env[floor].mon_vector.begin();it!= env[floor].mon_vector.end(); it++)
 			{
 				it->state.SetState(MS_NORMAL);
@@ -266,7 +266,7 @@ bool environment::MakeMap(bool return_)
 		case ZIGURRAT_LEVEL:
 			{
 				char temp2[200];
-				sprintf_s(temp2,200,"´øÀü ÁøÇà: %s¿¡ µé¾î¼¹´Ù.",CurrentLevelString(floor));
+				sprintf_s(temp2,200,"ë˜ì „ ì§„í–‰: %sì— ë“¤ì–´ì„°ë‹¤.",CurrentLevelString(floor));
 				AddNote(you.turn,CurrentLevelString(floor),temp2,CL_normal);
 			}
 			break;
@@ -276,7 +276,7 @@ bool environment::MakeMap(bool return_)
 	}
 	else if(floor == ZIGURRAT_LEVEL){
 		char temp2[200];
-		sprintf_s(temp2, 200, "´øÀü ÁøÇà: %s¿¡ µé¾î¼¹´Ù.", CurrentLevelString(floor));
+		sprintf_s(temp2, 200, "ë˜ì „ ì§„í–‰: %sì— ë“¤ì–´ì„°ë‹¤.", CurrentLevelString(floor));
 		AddNote(you.turn, CurrentLevelString(floor), temp2, CL_normal);
 	}
 	return false;
@@ -284,7 +284,7 @@ bool environment::MakeMap(bool return_)
 void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 {
 	if (floor == current_level) {
-	//°°Àº Ãş³¢¸® ¿òÁ÷ÀÌ´Â°Å¶ó¸é ¸ó½ºÅÍ¸¦ ²ø¾î¿À¸é ¾ÈµÈ´Ù.
+	//ê°™ì€ ì¸µë¼ë¦¬ ì›€ì§ì´ëŠ”ê±°ë¼ë©´ ëª¬ìŠ¤í„°ë¥¼ ëŒì–´ì˜¤ë©´ ì•ˆëœë‹¤.
 		dq.clear();
 	}
 	for(vector<monster>::iterator it =  env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
@@ -328,7 +328,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		you.SetXY(pos_);
 	you.prev_position = you.position;
 	{
-		//¹ÌÄÚ¿¡ ÀÇÇÑ ¹öÇÁ ÃÊ±âÈ­
+		//ë¯¸ì½”ì— ì˜í•œ ë²„í”„ ì´ˆê¸°í™”
 		you.reSetMikoBuff();
 	}
 	if(you.s_silence)
@@ -391,7 +391,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 
 	if(first_ && current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 	{
-		printlog("ÀÌ °÷¿¡´Â °­·ÂÇÑ ±â¿îÀÌ ´À²¸Áø´Ù. ·éÀÌ ÀÌ Ãş¿¡ Á¸ÀçÇÑ´Ù!",true,false,false,CL_danger);
+		printlog("ì´ ê³³ì—ëŠ” ê°•ë ¥í•œ ê¸°ìš´ì´ ëŠê»´ì§„ë‹¤. ë£¬ì´ ì´ ì¸µì— ì¡´ì¬í•œë‹¤!",true,false,false,CL_danger);
 		MoreWait();
 	}
 	
@@ -475,7 +475,7 @@ int environment::isStair(int x_, int y_)
 	for(vector<stair_info>::iterator it = stair_vector.begin(); it != stair_vector.end(); it++)
 	{
 		if(x_ == it->pos.x && y_ == it->pos.y )
-			return 5; //ÀÓ½Ã
+			return 5; //ì„ì‹œ
 	}
 	return 0;
 }
@@ -633,11 +633,11 @@ const char* environment::getTileHelp(int x_, int y_)
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
-		return "(>Å°·Î ³»·Á°¡±â)";
+		return "(>í‚¤ë¡œ ë‚´ë ¤ê°€ê¸°)";
 	case DG_UP_STAIR:
-		return floor==0?"":"(<Å°·Î ¿Ã¶ó°¡±â)";
+		return floor==0?"":"(<í‚¤ë¡œ ì˜¬ë¼ê°€ê¸°)";
 	case DG_RETURN_STAIR:
-		return "(<Å°·Î ¿Ã¶ó°¡±â)";
+		return "(<í‚¤ë¡œ ì˜¬ë¼ê°€ê¸°)";
 	case DG_TEMPLE_JOON_AND_SION:
 	case DG_TEMPLE_BYAKUREN:
 	case DG_TEMPLE_KANAKO:
@@ -658,7 +658,7 @@ const char* environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_MIKO:
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
-		return "(pÅ°·Î ±âµµ)";
+		return "(pí‚¤ë¡œ ê¸°ë„)";
 	}
 	return "";
 }
@@ -786,7 +786,7 @@ void environment::calculateAutoTile(coord_def pos, AUTOTILE_KIND kind)
 		i++;
 	}
 	{
-		//³× ²ÀÁöÁ¡Àº ÀÎÁ¢ÇÑ Å¸ÀÏÀÌ ¾øÀ¸¸é °è»ê¿¡¼­ Á¦¿ÜÇØ¾ßÇÑ´Ù.
+		//ë„¤ ê¼­ì§€ì ì€ ì¸ì ‘í•œ íƒ€ì¼ì´ ì—†ìœ¼ë©´ ê³„ì‚°ì—ì„œ ì œì™¸í•´ì•¼í•œë‹¤.
 
 		//0 -> 1,3
 		//2 -> 1,4
@@ -1020,7 +1020,7 @@ monster* environment::AddMonster_Summon(int id_, int flag_, coord_def position_,
 	{
 		mon_->sm_info = info_;
 
-		if(mon_->sm_info.summon_id != SKD_OTHER && mon_->sm_info.max_num > 0) //ÃÖ´ë ¼ÒÈ¯¼ö°¡ Á¤ÇØÁ®ÀÖ´Â°æ¿ì
+		if(mon_->sm_info.summon_id != SKD_OTHER && mon_->sm_info.max_num > 0) //ìµœëŒ€ ì†Œí™˜ìˆ˜ê°€ ì •í•´ì ¸ìˆëŠ”ê²½ìš°
 		{
 			vector<monster*> temp_list_;
 			for( auto it = mon_vector.begin();it != mon_vector.end();it++)
@@ -1063,7 +1063,7 @@ void environment::SummonClear(int map_id_)
 void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, const string &name_)
 {
 	if(isBamboo())
-		return; //Á×¸²¿¡¼± ¸¸µéÁö ¾Ê´Â´Ù.
+		return; //ì£½ë¦¼ì—ì„  ë§Œë“¤ì§€ ì•ŠëŠ”ë‹¤.
 	WaitForSingleObject(mutx, INFINITE);
 	list<shadow>::iterator it;
 	for(it = shadow_list.begin();;it++)
@@ -1135,9 +1135,9 @@ bool environment::MakeFloorEffect(const coord_def &c, textures *t, textures *t2,
 
 	if(floor_effect* floor_= isFloorEffectPos(c.x,c.y))
 	{
-		//±× À§Ä¡¿¡ ÀÌ¹Ì floorÈ¿°ú°¡ ÀÖÀ¸¸é µ¤¾î¾º¿î´Ù.
+		//ê·¸ ìœ„ì¹˜ì— ì´ë¯¸ flooríš¨ê³¼ê°€ ìˆìœ¼ë©´ ë®ì–´ì”Œìš´ë‹¤.
 		return floor_->Update(t, t2, type_, time_, pt_temp);
-		//»óÀ§ ÀÌÆåÆ®·Î µ¤¾î¾º¿ï¼öµµÀÖ¾î?
+		//ìƒìœ„ ì´í™íŠ¸ë¡œ ë®ì–´ì”Œìš¸ìˆ˜ë„ìˆì–´?
 	}
 	else
 	{
@@ -1197,11 +1197,11 @@ void environment::AllySafeClear(int new_floor_, coord_def pos_)
 	if(new_floor_ == floor)
 		return;
 	if(you.god == GT_YUYUKO)
-	{ //¸Á·ÉÀÌ Á¸ÀçÇÏ´Â°¡ È®ÀÎ
+	{ //ë§ë ¹ì´ ì¡´ì¬í•˜ëŠ”ê°€ í™•ì¸
 		for(auto it = mon_vector.begin();it != mon_vector.end();it++)
 		{
 			if(it->isLive() && (*it).isUserAlly() && it->map_id == you.god_value[GT_YUYUKO][0])
-			{//¸Á·ÉÀÌ ÀÖÀ¸¸é new_floor_·Î µ¹·Áº¸³½´Ù.
+			{//ë§ë ¹ì´ ìˆìœ¼ë©´ new_floor_ë¡œ ëŒë ¤ë³´ë‚¸ë‹¤.
 				rand_rect_iterator rect_(pos_,2,2);				
 				while(!rect_.end())
 				{
@@ -1213,7 +1213,7 @@ void environment::AllySafeClear(int new_floor_, coord_def pos_)
 		}
 	}
 	if(you.god == GT_LILLY)
-	{ //¿äÁ¤ÀÇ Á¸Àç È®ÀÎ
+	{ //ìš”ì •ì˜ ì¡´ì¬ í™•ì¸
 		
 		for(int i = 0; i<5;i++)
 		{		
@@ -1645,7 +1645,7 @@ bool environment::DisableMove(coord_def pos_, bool view_)
 	if(you.s_dimension)
 	{
 		if(abs(pos_.x - you.god_value[GT_YUKARI][0])>8 || abs(pos_.y - you.god_value[GT_YUKARI][1])>8)
-			return true; //Â÷¿ø°íÁ¤ÀÇ ¹üÀ§ ¹Û¿¡ ÀÖ´Ù.
+			return true; //ì°¨ì›ê³ ì •ì˜ ë²”ìœ„ ë°–ì— ìˆë‹¤.
 	}
 	return false;
 
@@ -1653,7 +1653,7 @@ bool environment::DisableMove(coord_def pos_, bool view_)
 bool environment::MakeSilence(coord_def center_, int length_, bool on_)
 {
 	length_++;
-	for(int i=-length_/2;i<=length_/2;i++) //³ªÁß¿¡ ¿øÇü¹İº¹ÀÚ¸¸µé¸é °íÄ¡±â?
+	for(int i=-length_/2;i<=length_/2;i++) //ë‚˜ì¤‘ì— ì›í˜•ë°˜ë³µìë§Œë“¤ë©´ ê³ ì¹˜ê¸°?
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
@@ -1678,7 +1678,7 @@ bool environment::MakeSilence(coord_def center_, int length_, bool on_)
 bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 {
 	length_++;
-	for(int i=-length_/2;i<=length_/2;i++) //³ªÁß¿¡ ¿øÇü¹İº¹ÀÚ¸¸µé¸é °íÄ¡±â?
+	for(int i=-length_/2;i<=length_/2;i++) //ë‚˜ì¤‘ì— ì›í˜•ë°˜ë³µìë§Œë“¤ë©´ ê³ ì¹˜ê¸°?
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
@@ -1702,7 +1702,7 @@ bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
 {
 	length_++;
-	for (int i = -length_ / 2; i <= length_ / 2; i++) //³ªÁß¿¡ ¿øÇü¹İº¹ÀÚ¸¸µé¸é °íÄ¡±â?
+	for (int i = -length_ / 2; i <= length_ / 2; i++) //ë‚˜ì¤‘ì— ì›í˜•ë°˜ë³µìë§Œë“¤ë©´ ê³ ì¹˜ê¸°?
 	{
 		for (int j = -length_ / 2; j <= length_ / 2; j++)
 		{
@@ -1890,7 +1890,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 }
 bool environment::PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_)
 {
-	//³ªÁß¿¡ ½Ã¾ßÃ³¸® ·çÆ¾Àº ÀüºÎ ÀÌ°É È£ÃâÇÏµµ·ÏÇÏÀÚ
+	//ë‚˜ì¤‘ì— ì‹œì•¼ì²˜ë¦¬ ë£¨í‹´ì€ ì „ë¶€ ì´ê±¸ í˜¸ì¶œí•˜ë„ë¡í•˜ì
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
@@ -1910,7 +1910,7 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 			}
 
 
-			if(length_ == 0) //½Ã¾ß°¡ ´Ù ´Ş¾Ò´Ù.
+			if(length_ == 0) //ì‹œì•¼ê°€ ë‹¤ ë‹¬ì•˜ë‹¤.
 			{
 				intercept = true;
 				break;
@@ -2003,7 +2003,7 @@ bool environment::MakeMapping(coord_def center_, int length_, bool passed_, int 
 					while(!intercept && !it.end())
 					{
 						cd_set.insert(*it);
-						if(length_ == 0) //½Ã¾ß°¡ ´Ù ´Ş¾Ò´Ù.
+						if(length_ == 0) //ì‹œì•¼ê°€ ë‹¤ ë‹¬ì•˜ë‹¤.
 						{
 							intercept = true;
 							break;
@@ -2158,7 +2158,7 @@ monster* environment::getRandomMonster(bool except_melee)
 	return mon_list.pop();
 }
 
-int environment::insight_mon(monster_enemy_type type_) //Å¸ÀÔÀº µ¿¸Í,Àûµîµî.. ³ªÁß¿¡ ÇÊ¿äÇÏ¸é Á¶°Ç³Ö±â
+int environment::insight_mon(monster_enemy_type type_) //íƒ€ì…ì€ ë™ë§¹,ì ë“±ë“±.. ë‚˜ì¤‘ì— í•„ìš”í•˜ë©´ ì¡°ê±´ë„£ê¸°
 {
 	int num_=0;
 	vector<monster>::iterator it;
@@ -2212,7 +2212,7 @@ void environment::item_view_set()
 int environment::new_item_interupt()
 {
 	int num_=0;
-	int auto_pick=0;//ÀÚµ¿Áİ±â°¡ ºä¿¡ º¸ÀÏ°æ¿ì
+	int auto_pick=0;//ìë™ì¤ê¸°ê°€ ë·°ì— ë³´ì¼ê²½ìš°
 	list<item>::iterator it;
 	item *itme_[3];
 	it = item_list.begin();
@@ -2221,7 +2221,7 @@ int environment::new_item_interupt()
 		if((*it).not_find && env[current_level].isInSight((*it).position))
 		{
 			(*it).income_view();
-			if(!Auto_Pick_Up(it)) //ÀÚµ¿Áİ±â°¡ ¾Æ´Ò°æ¿ì 
+			if(!Auto_Pick_Up(it)) //ìë™ì¤ê¸°ê°€ ì•„ë‹ê²½ìš° 
 			{
 				if(num_<=2)
 					itme_[num_] = &(*it);
@@ -2246,12 +2246,12 @@ int environment::new_item_interupt()
 				printlog(itme_[i]->GetName(),false,false,false,itme_[i]->item_color());
 			}
 			printlog(itme_[i-1]->GetNameInfor().name_to(true),false,false,false,CL_normal);
-			printlog("¹ß°ßÇß´Ù.",true,false,false,CL_normal);
+			printlog("ë°œê²¬í–ˆë‹¤.",true,false,false,CL_normal);
 		}
 		else
-			printlog("¿©·¯ ¾ÆÀÌÅÛÀ» ¹ß°ßÇß´Ù.",true,false,false,CL_normal);
+			printlog("ì—¬ëŸ¬ ì•„ì´í…œì„ ë°œê²¬í–ˆë‹¤.",true,false,false,CL_normal);
 	}
-	else if(auto_pick) //½Ã¾ß¿¡ ÀÚµ¿Áİ±â ÅÛÀÌ ÀÖÀ»°æ¿ì -1À» ¸®ÅÏ. ÀÌ°ÍÀº Á¤Áö¸¦ ÀÏÀ¸Å°Áø¾ÊÁö¸¸ ÅÛÀ» Áİ±âÀ§ÇØ ¹æÇâÀ» ¹Ù²Û´Ù.
+	else if(auto_pick) //ì‹œì•¼ì— ìë™ì¤ê¸° í…œì´ ìˆì„ê²½ìš° -1ì„ ë¦¬í„´. ì´ê²ƒì€ ì •ì§€ë¥¼ ì¼ìœ¼í‚¤ì§„ì•Šì§€ë§Œ í…œì„ ì¤ê¸°ìœ„í•´ ë°©í–¥ì„ ë°”ê¾¼ë‹¤.
 		return -1;
 	return num_;
 }
@@ -2264,7 +2264,7 @@ item* environment::close_item(vector<item*> &item_vector_)
 	it = item_list.begin();
 	for(;it != item_list.end() ;it++)
 	{
-		if(env[current_level].isExplore((*it).position.x, (*it).position.y)/*env[current_level].isInSight((*it).position)*/) //ÀÌÁ¦ ½Ã¾ß ¹Û¿¡ ÀÖ´Â ÅÛµµ °¡Á®°¡°Ô?
+		if(env[current_level].isExplore((*it).position.x, (*it).position.y)/*env[current_level].isInSight((*it).position)*/) //ì´ì œ ì‹œì•¼ ë°–ì— ìˆëŠ” í…œë„ ê°€ì ¸ê°€ê²Œ?
 		{
 			int dis2_ = max(abs(you.position.x-(*it).position.x),abs(you.position.y-(*it).position.y));
 			if(dis2_ && (*it).isautopick())
@@ -2290,9 +2290,9 @@ item* environment::close_item(vector<item*> &item_vector_)
 }
 unit* environment::GetMapIDtoUnit(int Map_id_)
 {
-	if(Map_id_ == -1) //´ë»ó¾øÀ½
+	if(Map_id_ == -1) //ëŒ€ìƒì—†ìŒ
 		return NULL;
-	else if(Map_id_ == -2) //ÇÃ·¹ÀÌ¾î
+	else if(Map_id_ == -2) //í”Œë ˆì´ì–´
 		return &you;
 	else{
 		
@@ -2302,7 +2302,7 @@ unit* environment::GetMapIDtoUnit(int Map_id_)
 				return &(*it);
 		}
 	}
-	return NULL; //¾øÀ»¼öÀÖ³ª?
+	return NULL; //ì—†ì„ìˆ˜ìˆë‚˜?
 }
 
 list<item>::iterator environment::GetPositiontoitem(coord_def position_)
@@ -2360,7 +2360,7 @@ void SaveFile()
 
 
 	fclose(fp);
-	//printlog("ÀúÀåÇß½À´Ï´Ù.",true,false,false,CL_normal);
+	//printlog("ì €ì¥í–ˆìŠµë‹ˆë‹¤.",true,false,false,CL_normal);
 
 
 	ReleaseMutex(mutx);
@@ -2409,7 +2409,7 @@ void LoadFile()
 	//	}
 	//}
 
-	//printlog("ºÒ·¯¿Ô½À´Ï´Ù.",true,false,false,CL_normal);
+	//printlog("ë¶ˆëŸ¬ì™”ìŠµë‹ˆë‹¤.",true,false,false,CL_normal);
 	ReleaseMutex(mutx);
 }
 
@@ -2429,55 +2429,55 @@ char* CurrentLevelString(int level)
 
 
 	if(isArena())
-		sprintf_s(temp,30,"¾Æ·¹³ª");
+		sprintf_s(temp,30,"ì•„ë ˆë‚˜");
 	else if (isSprint())
-		sprintf_s(temp,30, "½ºÇÁ¸°Æ®");
+		sprintf_s(temp,30, "ìŠ¤í”„ë¦°íŠ¸");
 	else if(level_<TEMPLE_LEVEL)
-		sprintf_s(temp,30,"´øÀü %dÃş", level_+1);
+		sprintf_s(temp,30,"ë˜ì „ %dì¸µ", level_+1);
 	else if(level_ == TEMPLE_LEVEL)
-		sprintf_s(temp,30,"½ÅÀü");
+		sprintf_s(temp,30,"ì‹ ì „");
 	else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-		sprintf_s(temp,30,"¾È°³È£¼ö %dÃş", level_+1-MISTY_LAKE_LEVEL);
+		sprintf_s(temp,30,"ì•ˆê°œí˜¸ìˆ˜ %dì¸µ", level_+1-MISTY_LAKE_LEVEL);
 	else if(level_ >= YOUKAI_MOUNTAIN_LEVEL && level_ <= YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
-		sprintf_s(temp,30,"¿ä±«ÀÇ»ê %dÃş", level_+1-YOUKAI_MOUNTAIN_LEVEL);
+		sprintf_s(temp,30,"ìš”ê´´ì˜ì‚° %dì¸µ", level_+1-YOUKAI_MOUNTAIN_LEVEL);
 	else if(level_ >= SCARLET_LEVEL && level_ <= SCARLET_LEVEL+MAX_SCARLET_LEVEL)
-		sprintf_s(temp,30,"È«¸¶°ü %dÃş", level_+1-SCARLET_LEVEL);
+		sprintf_s(temp,30,"í™ë§ˆê´€ %dì¸µ", level_+1-SCARLET_LEVEL);
 	else if(level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL)
-		sprintf_s(temp,30,"È«¸¶°ü µµ¼­°ü");
+		sprintf_s(temp,30,"í™ë§ˆê´€ ë„ì„œê´€");
 	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
-		sprintf_s(temp,30,"È«¸¶°ü ÁöÇÏ½Ç");
+		sprintf_s(temp,30,"í™ë§ˆê´€ ì§€í•˜ì‹¤");
 	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
-		sprintf_s(temp,30,"¹Ì±ÃÀÇ Á×¸²");
+		sprintf_s(temp,30,"ë¯¸ê¶ì˜ ì£½ë¦¼");
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
-		sprintf_s(temp,30,"¿µ¿øÁ¤");
+		sprintf_s(temp,30,"ì˜ì›ì •");
 	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf_s(temp,30,"ÁöÀú %dÃş", level_+1-SUBTERRANEAN_LEVEL);
+		sprintf_s(temp,30,"ì§€ì € %dì¸µ", level_+1-SUBTERRANEAN_LEVEL);
 	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf_s(temp,30,"ÀÛ¿­Áö¿ÁÅÍ");	
+		sprintf_s(temp,30,"ì‘ì—´ì§€ì˜¥í„°");	
 	else if(level_ >= YUKKURI_LEVEL && level_ <=  YUKKURI_LAST_LEVEL)
-		sprintf_s(temp,30,"ÀµÄí¸®µÕÁö %dÃş", level_+1-YUKKURI_LEVEL);
+		sprintf_s(temp,30,"ìœ³ì¿ ë¦¬ë‘¥ì§€ %dì¸µ", level_+1-YUKKURI_LEVEL);
 	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)
-		sprintf_s(temp,30,"Áü½Â±æ %dÃş", level_+1-DEPTH_LEVEL);
+		sprintf_s(temp,30,"ì§ìŠ¹ê¸¸ %dì¸µ", level_+1-DEPTH_LEVEL);
 	else if(level_ >= DREAM_LEVEL && level_ <=  DREAM_LAST_LEVEL)
-		sprintf_s(temp,30,"²ŞÀÇ ¼¼°è");
+		sprintf_s(temp,30,"ê¿ˆì˜ ì„¸ê³„");
 	else if(level_ >= MOON_LEVEL && level_ <=  MOON_LAST_LEVEL)
-		sprintf_s(temp,30,"´ŞÀÇ µµ½Ã");
+		sprintf_s(temp,30,"ë‹¬ì˜ ë„ì‹œ");
 	else if(level_ == PANDEMONIUM_LEVEL)
-		sprintf_s(temp,30,"¸¶°è");
+		sprintf_s(temp,30,"ë§ˆê³„");
 	else if(level_ == PANDEMONIUM_LEVEL+1)
-		sprintf_s(temp,30,"¹ı°è");
+		sprintf_s(temp,30,"ë²•ê³„");
 	else if(level_ == PANDEMONIUM_LEVEL+2)
-		sprintf_s(temp,30,"ºù°á¼¼°è");
+		sprintf_s(temp,30,"ë¹™ê²°ì„¸ê³„");
 	else if(level_ == PANDEMONIUM_LEVEL+3)
-		sprintf_s(temp,30,"ÆÇµ¥¸ğ´Ï¾ö");
+		sprintf_s(temp,30,"íŒë°ëª¨ë‹ˆì—„");
 	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
-		sprintf_s(temp,30,"ÇÏÄí·¹ÀÌ %dÃş", level_+1-HAKUREI_LEVEL);
+		sprintf_s(temp,30,"í•˜ì¿ ë ˆì´ %dì¸µ", level_+1-HAKUREI_LEVEL);
 	else if (level_ == OKINA_LEVEL)
-		sprintf_s(temp,30, "¹® µÚÀÇ ¼¼°è");
+		sprintf_s(temp,30, "ë¬¸ ë’¤ì˜ ì„¸ê³„");
 	else if (level_ == ZIGURRAT_LEVEL)
-		sprintf_s(temp,30, "±¤¸ùÀÇ¼¼°è %dÃş", you.ziggurat_level);
+		sprintf_s(temp,30, "ê´‘ëª½ì˜ì„¸ê³„ %dì¸µ", you.ziggurat_level);
 	else
-		sprintf_s(temp,30,"¾Ë¼ö¾ø´Â Ãş");
+		sprintf_s(temp,30,"ì•Œìˆ˜ì—†ëŠ” ì¸µ");
 
 	return temp;
 }
@@ -2490,7 +2490,7 @@ int GetLevelMonsterNum(int level, bool item_)
 
 		if (int penalty_turn_ = you.CheckPeanltyTurn(level))
 		{
-			//1000ºÎÅÍ ½ÃÀÛÇØ¼­ 5000ÅÏºÎÅÍ ¸ó½ºÅÍ 2¹è
+			//1000ë¶€í„° ì‹œì‘í•´ì„œ 5000í„´ë¶€í„° ëª¬ìŠ¤í„° 2ë°°
 			if (penalty_turn_ >= 1000) {
 				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
 			}
@@ -2513,7 +2513,7 @@ int GetLevelMonsterNum(int level, bool item_)
 		else
 			return 9 * multi_;
 	}
-	else{ //¾ÆÀÌÅÛ
+	else{ //ì•„ì´í…œ
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)
 			return 0;
 		if(level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)

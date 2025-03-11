@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: ring.cpp
+// íŒŒì¼ì´ë¦„: ring.cpp
 //
-// ³»¿ë: ¸µ°ú ¾Æ¹Ä·¿ Á¤º¸µé
+// ë‚´ìš©: ë§ê³¼ ì•„ë®¬ë › ì •ë³´ë“¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,53 +13,53 @@
 
 char *ring_uniden_string[RGT_MAX]=
 {
-	"³ª¹« ",
-	"¾Ë·ç¹Ì´½ ",
-	"Ã¶ ",
-	"¾ó·è ",
-	"»¡°£ ",
+	"ë‚˜ë¬´ ",
+	"ì•Œë£¨ë¯¸ëŠ„ ",
+	"ì²  ",
+	"ì–¼ë£© ",
+	"ë¹¨ê°„ ",
 
-	"ÆÄ¶û ",
-	"ÃÊ·Ï ",
-	"²Ê¹è±â ",
-	"º¸¼® ",
-	"°¥»ö ",
+	"íŒŒë‘ ",
+	"ì´ˆë¡ ",
+	"ê½ˆë°°ê¸° ",
+	"ë³´ì„ ",
+	"ê°ˆìƒ‰ ",
 
-	"µ¹ ",
-	"¾ãÀº ±İ¼Ó ",
-	"±¸½½ÀÌ ¹ÚÈù ",
-	"Èò ",
-	"°ËÀº ",
+	"ëŒ ",
+	"ì–‡ì€ ê¸ˆì† ",
+	"êµ¬ìŠ¬ì´ ë°•íŒ ",
+	"í° ",
+	"ê²€ì€ ",
 
-	"ºñÃë",
-	"±İ",
-	"Àº",
-	"¿¡¸Ş¶öµå "
-	//"º¸¶ó "
+	"ë¹„ì·¨",
+	"ê¸ˆ",
+	"ì€",
+	"ì—ë©”ë„ë“œ "
+	//"ë³´ë¼ "
 };
 
 const char *ring_iden_string[RGT_MAX]=
 {	
-	"ÈûÀÇ ",
-	"¹ÎÃ¸ÀÇ ",
-	"Áö´ÉÀÇ ",
-	"Çã±âÀÇ ",
-	"Æ÷¸¸°¨ÀÇ ",
-	"°ø°£ÀÌµ¿ÀÇ ",
-	"µ¶ÀúÇ×ÀÇ ",
-	"È­¿°ÀúÇ×ÀÇ ",
-	"³Ã±âÀúÇ×ÀÇ ",
-	"Åõ¸í°¨ÁöÀÇ ",
-	//"±×·¹ÀÌÁî ",
-	"ºñÇà ",
-	"Åõ¸í ",
-	"¿µ·Â ",
-	"¸¶¹ı»çÀÇ ",
-	"¹æ¾îÀÇ ",
-	"È¸ÇÇÀÇ ",
-	"È¥¶õÀúÇ×ÀÇ ",
-	"Àü±âÀúÇ×ÀÇ ",
-	"¸¶¹ıÀúÇ×ÀÇ "
+	"í˜ì˜ ",
+	"ë¯¼ì²©ì˜ ",
+	"ì§€ëŠ¥ì˜ ",
+	"í—ˆê¸°ì˜ ",
+	"í¬ë§Œê°ì˜ ",
+	"ê³µê°„ì´ë™ì˜ ",
+	"ë…ì €í•­ì˜ ",
+	"í™”ì—¼ì €í•­ì˜ ",
+	"ëƒ‰ê¸°ì €í•­ì˜ ",
+	"íˆ¬ëª…ê°ì§€ì˜ ",
+	//"ê·¸ë ˆì´ì¦ˆ ",
+	"ë¹„í–‰ ",
+	"íˆ¬ëª… ",
+	"ì˜ë ¥ ",
+	"ë§ˆë²•ì‚¬ì˜ ",
+	"ë°©ì–´ì˜ ",
+	"íšŒí”¼ì˜ ",
+	"í˜¼ë€ì €í•­ì˜ ",
+	"ì „ê¸°ì €í•­ì˜ ",
+	"ë§ˆë²•ì €í•­ì˜ "
 };
 
 
@@ -162,25 +162,25 @@ bool equipring(ring_type kind, int value)
 	{
 	case RGT_STR:
 		if(value>0)
-			printlog("´ç½ÅÀº °­·ÂÇØÁ³´Ù.",true,false,false,CL_good);
+			printlog("ë‹¹ì‹ ì€ ê°•ë ¥í•´ì¡Œë‹¤.",true,false,false,CL_good);
 		else
-			printlog("´ç½ÅÀº ¾àÇØÁ³´Ù.",true,false,false,CL_small_danger);
+			printlog("ë‹¹ì‹ ì€ ì•½í•´ì¡Œë‹¤.",true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_DEX:
 		if(value>0)
-			printlog("´ç½ÅÀº ¹ÎÃ¸ÇØÁ³´Ù.",true,false,false,CL_good);
+			printlog("ë‹¹ì‹ ì€ ë¯¼ì²©í•´ì¡Œë‹¤.",true,false,false,CL_good);
 		else
-			printlog("´ç½ÅÀº µĞÇØÁ³´Ù.",true,false,false,CL_small_danger);
+			printlog("ë‹¹ì‹ ì€ ë‘”í•´ì¡Œë‹¤.",true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_INT:
 		if(value>0)
-			printlog("´ç½ÅÀº ¶È¶ÈÇØÁ³´Ù.",true,false,false,CL_good);
+			printlog("ë‹¹ì‹ ì€ ë˜‘ë˜‘í•´ì¡Œë‹¤.",true,false,false,CL_good);
 		else
-			printlog("´ç½ÅÀº ¸ÛÃ»ÇØÁ³´Ù.",true,false,false,CL_small_danger);
+			printlog("ë‹¹ì‹ ì€ ë©ì²­í•´ì¡Œë‹¤.",true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
@@ -191,9 +191,9 @@ bool equipring(ring_type kind, int value)
 		break;
 	case RGT_TELEPORT:
 		if(value>0)
-			printlog("°ø°£ÀÇ ÀÏ±×·¯ÁüÀ» ´À²¼´Ù.",true,false,false,CL_normal);
+			printlog("ê³µê°„ì˜ ì¼ê·¸ëŸ¬ì§ì„ ëŠê¼ˆë‹¤.",true,false,false,CL_normal);
 		else
-			printlog("ÁÖº¯ÀÇ °ø°£ÀÌ ¾ÈÁ¤µÇ¾ú´Ù.",true,false,false,CL_normal);
+			printlog("ì£¼ë³€ì˜ ê³µê°„ì´ ì•ˆì •ë˜ì—ˆë‹¤.",true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;		
@@ -209,7 +209,7 @@ bool equipring(ring_type kind, int value)
 	/*case RGT_GRAZE:
 		{
 			if(value>0)
-				printlog("Åº¸·À» ÇÇÇÏ´Â °¨°¢ÀÌ ³¯Ä«·Î¿öÁüÀ» ´À²¼´Ù.",true,false,false,CL_normal);
+				printlog("íƒ„ë§‰ì„ í”¼í•˜ëŠ” ê°ê°ì´ ë‚ ì¹´ë¡œì›Œì§ì„ ëŠê¼ˆë‹¤.",true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
@@ -217,7 +217,7 @@ bool equipring(ring_type kind, int value)
 	case RGT_LEVITATION:
 		{
 			if(value>0)
-				printlog("¸öÀÌ ºØ ¶ß´Â °ÍÀ» ´À²¼´Ù.",true,false,false,CL_normal);
+				printlog("ëª¸ì´ ë¶• ëœ¨ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
@@ -225,40 +225,40 @@ bool equipring(ring_type kind, int value)
 	case RGT_INVISIBLE:
 		{
 			if(value>0)
-				printlog("¹İÁö¿¡ ÀÇÇØ ¸öÀÌ ±ô¹Ú°Å·È´Ù.",true,false,false,CL_normal);
+				printlog("ë°˜ì§€ì— ì˜í•´ ëª¸ì´ ê¹œë°•ê±°ë ¸ë‹¤.",true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
 		}
 	case RGT_MANA:
 		if(value>0)
-			printlog("¿µ·ÂÀÌ ³ÑÃÄÈå¸£±â ½ÃÀÛÇß´Ù.",true,false,false,CL_normal);
+			printlog("ì˜ë ¥ì´ ë„˜ì³íë¥´ê¸° ì‹œì‘í–ˆë‹¤.",true,false,false,CL_normal);
 		else
-			printlog("¿µ·ÂÀÌ ¸ö¼Ó¿¡¼­ ºüÁ®³ª°¬´Ù.",true,false,false,CL_normal);
+			printlog("ì˜ë ¥ì´ ëª¸ì†ì—ì„œ ë¹ ì ¸ë‚˜ê°”ë‹¤.",true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_MAGACIAN:
 		if(value>0)
-			printlog("´ç½ÅÀº ¸¶¹ı Áö½ÄÀÌ ´Ã¾î³­ °Í °°´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì€ ë§ˆë²• ì§€ì‹ì´ ëŠ˜ì–´ë‚œ ê²ƒ ê°™ë‹¤.",true,false,false,CL_normal);
 		else
-			printlog("´ç½ÅÀÇ ¸¶¹ı Áö½ÄÀº ºüÁ®°¬´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì˜ ë§ˆë²• ì§€ì‹ì€ ë¹ ì ¸ê°”ë‹¤.",true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_AC:
 		if(value>0)
-			printlog("´ç½ÅÀº º¸È£µÇ°íÀÖ´Ù.",true,false,false,CL_good);
+			printlog("ë‹¹ì‹ ì€ ë³´í˜¸ë˜ê³ ìˆë‹¤.",true,false,false,CL_good);
 		else
-			printlog("º¸È£°¡ Ç®·È´Ù.",true,false,false,CL_small_danger);
+			printlog("ë³´í˜¸ê°€ í’€ë ¸ë‹¤.",true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_EV:
 		if(value>0)
-			printlog("´ç½ÅÀº Àç»¡¶óÁ³´Ù.",true,false,false,CL_good);
+			printlog("ë‹¹ì‹ ì€ ì¬ë¹¨ë¼ì¡Œë‹¤.",true,false,false,CL_good);
 		else
-			printlog("´ç½ÅÀº µĞÇØÁ³´Ù.",true,false,false,CL_small_danger);
+			printlog("ë‹¹ì‹ ì€ ë‘”í•´ì¡Œë‹¤.",true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;

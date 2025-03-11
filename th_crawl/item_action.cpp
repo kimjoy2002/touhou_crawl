@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: item_action.cpp
+// íŒŒì¼ì´ë¦„: item_action.cpp
 //
-// ³»¿ë: playerÀÇ Çàµ¿µé(¾ÆÀÌÅÛ °ü·Ã Çàµ¿µé)
+// ë‚´ìš©: playerì˜ í–‰ë™ë“¤(ì•„ì´í…œ ê´€ë ¨ í–‰ë™ë“¤)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,11 +26,11 @@ void PickUp()
 {		
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹«¾ğ°¡¸¦ ÁÖ¿ï ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë¬´ì–¸ê°€ë¥¼ ì£¼ìš¸ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ÁÖ¿ï ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ì£¼ìš¸ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	int num=0;
@@ -90,7 +90,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 			if(isPick(&(*temp)))
 			{
 				printlog((*temp).GetName(),false,false,false,(*temp).item_color());
-				printlog("À» Áİ½À´Ï±î? (¿¹:y ¾Æ´Ï¿À:n ¸ğµÎ:a ¼±ÅÃ:*?g,)",true,false,false,CL_help);
+				printlog("ì„ ì¤ìŠµë‹ˆê¹Œ? (ì˜ˆ:y ì•„ë‹ˆì˜¤:n ëª¨ë‘:a ì„ íƒ:*?g,)",true,false,false,CL_help);
 				switch(waitkeyinput())
 				{
 				case 'y':
@@ -112,7 +112,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 					iteminfor_pick();
 					return;
 				case 'o':
-					//ÀÚµ¿Å½»öÀ» ³Ö´Â´Ù.
+					//ìë™íƒìƒ‰ì„ ë„£ëŠ”ë‹¤.
 					break;
 				}
 			}
@@ -136,7 +136,7 @@ bool PickUpNum(list<item>::iterator it, int num, bool no_delay)
 					you.time_delay+=you.GetNormalDelay();
 					you.TurnEnd(&item_delete);
 					if(item_delete)
-						return true; //¾ÆÀÌÅÛÀ» Áİ´Â µµÁß ¾ÆÀÌÅÛÀÌ »èÁ¦µÇ¾ú´Ù.
+						return true; //ì•„ì´í…œì„ ì¤ëŠ” ë„ì¤‘ ì•„ì´í…œì´ ì‚­ì œë˜ì—ˆë‹¤.
 				}
 				return true;
 			}
@@ -158,7 +158,7 @@ int isPick(const item* t)
 
 void iteminfor_pick()
 {
-	view_item(IVT_PICK,"¹«½¼ ¾ÆÀÌÅÛÀ» Áİ°Ú½À´Ï±î?");
+	view_item(IVT_PICK,"ë¬´ìŠ¨ ì•„ì´í…œì„ ì¤ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -166,13 +166,13 @@ void iteminfor_pick()
 		{
 			CheckKey(key_);
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -181,7 +181,7 @@ void iteminfor_pick()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if( key_ == ',' )
 		{
 			AllCheckKey();
@@ -236,28 +236,28 @@ void discard(list<item>::iterator it, int number)
 	if (drop_number >= 1) {
 		item *temp2 = env[current_level].AddItem(you.position, &(*it), drop_number);
 		temp2->drop = true;
-		temp2->waste = 10000; //Ç×»ó ¼Ò¸ê Á¤µµ¸¦ ÃÊ±âÈ­
-		printlog("´ç½ÅÀº ",false,false,false,CL_normal);					
+		temp2->waste = 10000; //í•­ìƒ ì†Œë©¸ ì •ë„ë¥¼ ì´ˆê¸°í™”
+		printlog("ë‹¹ì‹ ì€ ",false,false,false,CL_normal);					
 		printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
 		printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);
 	}
 	else {
-		printlog("´ç½ÅÀº ", false, false, false, CL_normal);
+		printlog("ë‹¹ì‹ ì€ ", false, false, false, CL_normal);
 		printlog((*it).GetName(number), false, false, false, (*it).item_color());
 		printlog((*it).GetNameInfor().name_to(true), false, false, false, CL_normal);
 	}
 	if (drop_number == number) {
-		printlog("³»·Á³õ¾Ò´Ù.", true, false, false, CL_normal);
+		printlog("ë‚´ë ¤ë†“ì•˜ë‹¤.", true, false, false, CL_normal);
 	}
 	else if(drop_number>=1) {
-		printlog("³»·Á³õ¾Ò´Ù. ", false, false, false, CL_normal);
+		printlog("ë‚´ë ¤ë†“ì•˜ë‹¤. ", false, false, false, CL_normal);
 		char temp[100];
-		sprintf_s(temp, 100, "ºó°ï½ÅÀÇ ÀúÁÖ·Î %d°³°¡ »ç¶óÁ³´Ù.", number-drop_number);
+		sprintf_s(temp, 100, "ë¹ˆê³¤ì‹ ì˜ ì €ì£¼ë¡œ %dê°œê°€ ì‚¬ë¼ì¡Œë‹¤.", number-drop_number);
 		printarray(true, false, false, CL_small_danger, 1, temp);
 	}
 	else  {
-		printlog("³»·Á³õ¾Ò´Ù. ", false, false, false, CL_normal);
-		printlog("±×·¯³ª ºó°ï½ÅÀÇ ÀúÁÖ·Î »ç¶óÁ³´Ù.", true, false, false, CL_small_danger);
+		printlog("ë‚´ë ¤ë†“ì•˜ë‹¤. ", false, false, false, CL_normal);
+		printlog("ê·¸ëŸ¬ë‚˜ ë¹ˆê³¤ì‹ ì˜ ì €ì£¼ë¡œ ì‚¬ë¼ì¡Œë‹¤.", true, false, false, CL_small_danger);
 	}
 	you.DeleteItem(it,number);
 	changedisplay(DT_GAME);
@@ -271,15 +271,15 @@ void iteminfor_discard()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹«¾ğ°¡¸¦ ¹ö¸± ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë¬´ì–¸ê°€ë¥¼ ë²„ë¦´ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ¹ö¸± ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë²„ë¦´ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	int i=0;
-	view_item(IVT_DISCARD,"¹«½¼ ¾ÆÀÌÅÛÀ» ¹ö¸®°Ú½À´Ï±î?");
+	view_item(IVT_DISCARD,"ë¬´ìŠ¨ ì•„ì´í…œì„ ë²„ë¦¬ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -287,13 +287,13 @@ void iteminfor_discard()
 		{
 			CheckKey(key_,i);
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -302,7 +302,7 @@ void iteminfor_discard()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if((key_ >= '0' && key_ <= '9'))
 		{
 			i= i*10+key_-'0';
@@ -337,11 +337,11 @@ void fast_discard()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¹«¾ğ°¡¸¦ ¹ö¸± ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë¬´ì–¸ê°€ë¥¼ ë²„ë¦´ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ¹ö¸± ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë²„ë¦´ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if(!you.final_item)
@@ -365,24 +365,24 @@ void Eatting(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¸ÔÀ» ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë¨¹ì„ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ¸ÔÀ» ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë¨¹ì„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ¸ÔÀ» ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ë¨¹ì„ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
 	{
-		printlog("´ç½ÅÀº ÀÌ¹Ì Ç®ÆÄ¿ö´Ù!",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì´ë¯¸ í’€íŒŒì›Œë‹¤!",true,false,false,CL_normal);
 		return;
 	}
-	view_item(IVT_FOOD,"¹«¾ùÀ» ¸Ô°Ú½À´Ï±î?");
+	view_item(IVT_FOOD,"ë¬´ì—‡ì„ ë¨¹ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = auto_;
@@ -395,13 +395,13 @@ void Eatting(char auto_)
 			you.SetPrevAction('e', key_);
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -410,9 +410,9 @@ void Eatting(char auto_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» ¸Ô°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ë¨¹ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -424,19 +424,19 @@ void Drinking(char auto_)
 {
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¸¶½Ç ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë§ˆì‹¤ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ¸¶½Ç ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ë§ˆì‹¤ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ¸¶½Ç ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ë§ˆì‹¤ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
-	view_item(IVT_POTION,"¹«¾ùÀ» ¸¶½Ã°Ú½À´Ï±î?");
+	view_item(IVT_POTION,"ë¬´ì—‡ì„ ë§ˆì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = auto_;
@@ -447,7 +447,7 @@ void Drinking(char auto_)
 			if(you.Drink(key_))
 			{			
 				you.time_delay += you.GetNormalDelay();
-				you.doingActionDump(DACT_USE, "¹°¾à");
+				you.doingActionDump(DACT_USE, "ë¬¼ì•½");
 				changedisplay(DT_GAME);
 				if(you.god == GT_EIRIN)
 				{
@@ -462,13 +462,13 @@ void Drinking(char auto_)
 			}
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -477,9 +477,9 @@ void Drinking(char auto_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» ¸¶½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ë§ˆì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -492,12 +492,12 @@ void Drinking(char auto_)
 //{
 //	if(!you.equipment[ET_NECK])
 //	{
-//		printlog("½ºÆçÄ«µå¸¦ ÀåÂøÇÏ°í ÀÖÁö ¾Ê´Ù.",true,false,false,CL_normal);
+//		printlog("ìŠ¤í ì¹´ë“œë¥¼ ì¥ì°©í•˜ê³  ìˆì§€ ì•Šë‹¤.",true,false,false,CL_normal);
 //		return;
 //	}
 //	if(you.GetSpellcard())
 //	{
-//		printlog("ÀÌ¹Ì ¼±¾ğ ÁßÀÌ´Ù.",true,false,false,CL_normal);
+//		printlog("ì´ë¯¸ ì„ ì–¸ ì¤‘ì´ë‹¤.",true,false,false,CL_normal);
 //		return;
 //	}
 //	if(declare_spellcard((spellcard_declare_type)you.equipment[ET_NECK]->value1, 20+you.level*5)){
@@ -511,11 +511,11 @@ void Spelllcard_Evoke(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÇÒ ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ í•  ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	int i=0;
-	view_item(IVT_EVOKE,"¹«½¼ ¾ÆÀÌÅÛÀ» ¹ßµ¿ÇÏ½Ã°Ú½À´Ï±î?");
+	view_item(IVT_EVOKE,"ë¬´ìŠ¨ ì•„ì´í…œì„ ë°œë™í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = auto_;
@@ -533,13 +533,13 @@ void Spelllcard_Evoke(char auto_)
 			break;
 		//	CheckKey(key_,i);
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -548,9 +548,9 @@ void Spelllcard_Evoke(char auto_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» ¹ßµ¿ÇÏ½Ã°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ë°œë™í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -564,24 +564,24 @@ void Reading(char auto_)
 {
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ÀĞÀ» ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ì½ì„ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¹«¾ğ°¡¸¦ ÀĞÀ» ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë¬´ì–¸ê°€ë¥¼ ì½ì„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ÀĞÀ» ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ì½ì„ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
 	if(env[current_level].isSilence(you.position))
 	{
-		printlog("´ç½ÅÀº ¼Ò¸®¸¦ ³¾ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì†Œë¦¬ë¥¼ ë‚¼ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 		return;
 	}
-	view_item(IVT_SCROLL,"¹«¾ùÀ» ÀĞ°Ú½À´Ï±î?");
+	view_item(IVT_SCROLL,"ë¬´ì—‡ì„ ì½ê² ìŠµë‹ˆê¹Œ?");
 	while(1)
 	{
 		int key_ = auto_;
@@ -616,13 +616,13 @@ void Reading(char auto_)
 						{
 							if (you.isMemorize(spell_)) {
 								changedisplay(DT_GAME);
-								printlog("ÀÌ¹Ì ±â¾ïÇÏ°íÀÖ´Â ¸¶¹ıÀÔ´Ï´Ù. ", true, false, false, CL_normal);
+								printlog("ì´ë¯¸ ê¸°ì–µí•˜ê³ ìˆëŠ” ë§ˆë²•ì…ë‹ˆë‹¤. ", true, false, false, CL_normal);
 								return;
 							}
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";
-							SetText() += "mÀ» ´©¸£¸é ¸¶¹ıÀ» ±â¾ïÇÒ ¼ö ÀÖ½À´Ï´Ù.\n";
+							SetText() += "mì„ ëˆ„ë¥´ë©´ ë§ˆë²•ì„ ê¸°ì–µí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n";
 							ReleaseMutex(mutx);
 							int memory_ = waitkeyinput();
 
@@ -634,7 +634,7 @@ void Reading(char auto_)
 							continue;
 						}	
 					}
-					view_item(IVT_SCROLL,"¹«¾ùÀ» ÀĞ°Ú½À´Ï±î?");
+					view_item(IVT_SCROLL,"ë¬´ì—‡ì„ ì½ê² ìŠµë‹ˆê¹Œ?");
 					break;
 				}
 			}
@@ -642,7 +642,7 @@ void Reading(char auto_)
 			{
 				if(you.Read(key_))
 				{
-					you.doingActionDump(DACT_USE, "µÎ·ç¸¶¸®");
+					you.doingActionDump(DACT_USE, "ë‘ë£¨ë§ˆë¦¬");
 					you.time_delay += you.GetNormalDelay();
 					changedisplay(DT_GAME);
 					you.TurnEnd();
@@ -651,13 +651,13 @@ void Reading(char auto_)
 			}
 			break;
 		}
-		else if(key_ == VK_DOWN)//-----ÀÌµ¿Å°-------
+		else if(key_ == VK_DOWN)//-----ì´ë™í‚¤-------
 		{
-			changemove(32);  //À§
+			changemove(32);  //ìœ„
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //¾Æ·¡
+			changemove(-32); //ì•„ë˜
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -666,9 +666,9 @@ void Reading(char auto_)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----ÀÌµ¿Å°³¡-------
+		}						//-----ì´ë™í‚¤ë-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"¹«¾ùÀ» ÀĞ°Ú½À´Ï±î?");
+			view_item(IVT_SELECT,"ë¬´ì—‡ì„ ì½ê² ìŠµë‹ˆê¹Œ?");
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

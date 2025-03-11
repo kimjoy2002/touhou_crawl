@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: skill_use.h
+// íŒŒì¼ì´ë¦„: skill_use.h
 //
-// ³»¿ë: ½ºÅ³ ½ºÆç(¿¹Á¤)
+// ë‚´ìš©: ìŠ¤í‚¬ ìŠ¤í (ì˜ˆì •)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -152,28 +152,28 @@ enum skill_list
 
 enum skill_flag
 {
-	S_FLAG_SMITE = 1<<0, //½º¸¶ÀÌÆ®½ÄÀÎ°¡? false: ºöÇüÅÂ
-	S_FLAG_PENETRATE = 1<<1, //°üÅëµÇ³ª?
-	S_FLAG_CLOSE_DANGER = 1<<2, //±ÙÁ¢»ç¿ë½Ã À§ÇèÇÑ°¡?
-	S_FLAG_SEIF = 1<<3, //ÀÚ½Å¿¡°Ô »ç¿ëÇÒ¼öÀÖ´Â°¡?
-	S_FLAG_CLOUD = 1<<4, //±¸¸§½ÄÀÎ°¡? (±¸¸§½ÄÀÌ ÀÌ¹Ì »ó´ë À§¿¡ ÀÖ´Ù¸é ½îÁö¾Ê´Â´Ù.)
-	S_FLAG_HEAL = 1<<5, //È¸º¹
-	S_FLAG_DEBUF = 1<<6, //µğ¹öÇÁ±â
-	S_FLAG_SUMMON = 1<<7, //¼ÒÈ¯±â
-	S_FLAG_SPEAK = 1<<8, //ÁÖ¹®ÀÌ ÇÊ¿äÇÑ°¡
-	S_FLAG_IMMEDIATELY = 1<<9, //½ÃÀüÁï½Ã ¹ßµ¿ÇÏ´Â°¡?
-	S_FLAG_DIREC = 1<<10, //¹æÇâÀ¸·Î ¹ßµ¿ÇÏ´Â°¡? (S_FLAG_IMMEDIATELY¿Í ÁßÃ¸ºÒ°¡)
-	S_FLAG_NO_COM = 1<<11, //AI°¡ »ç¿ëÇÏÁö¾Ê´Â ±â¼úÀÎ°¡?
-	S_FLAG_TOGLE = 1<<12, //Åä±ÛÇü ±â¼úÀÎÁö?(ÇÑ¹ø »ç¿ëÇÏ¸é ÀØ°Å³ª ´Ù½Ã »ç¿ëÇÒ¶§±îÁö ²¨ÁöÁö¾ÊÀ½)
-	S_FLAG_BUF = 1<<13, //¹öÇÁ±â
-	S_FLAG_OTHER_BUF = 1<<14, //³²À» ¹öÇÁ½ÃÄÑÁÖ´Â ±â¼ú(º¸Åë ai¿ë)
-	S_FLAG_RANGE_ATTACK = 1<<15, //ÀÌ °ÍÀº (ÁÖ·Î ai°¡) »ç°Å¸®¾È¿¡ ¿Ã¶§ °ø°İ°¡´ÉÇÑ ±â¼úÀÌ´Ù.
-	S_FLAG_SUKIMA = 1<<16, //½ºÅ°¸¶¿ë
-	S_FLAG_RECT = 1<<17, //»ç°¢Çü ½Ã¾ß
-	S_FLAG_NO_TARGET = 1<<18, //¸ó½ºÅÍ¸¦ Å¸°ÙÀ¸·Î ÀâÁö¾Ê´Â´Ù.
-	S_FLAG_UNSIGHT = 1<<19, //½Ã¾ß¿¡ °¡·Áµµ »ç¿ë°¡´É.
-	S_FLAG_GOD = 1<<20, //½ÅÀÇ ½ºÅ³
-	S_FLAG_DELAYED = 1<<21, //ÇÇ·Î°¡ ½×ÀÌ¸é ¾µ ¼ö ¾ø´Ù.
+	S_FLAG_SMITE = 1<<0, //ìŠ¤ë§ˆì´íŠ¸ì‹ì¸ê°€? false: ë¹”í˜•íƒœ
+	S_FLAG_PENETRATE = 1<<1, //ê´€í†µë˜ë‚˜?
+	S_FLAG_CLOSE_DANGER = 1<<2, //ê·¼ì ‘ì‚¬ìš©ì‹œ ìœ„í—˜í•œê°€?
+	S_FLAG_SEIF = 1<<3, //ìì‹ ì—ê²Œ ì‚¬ìš©í• ìˆ˜ìˆëŠ”ê°€?
+	S_FLAG_CLOUD = 1<<4, //êµ¬ë¦„ì‹ì¸ê°€? (êµ¬ë¦„ì‹ì´ ì´ë¯¸ ìƒëŒ€ ìœ„ì— ìˆë‹¤ë©´ ì˜ì§€ì•ŠëŠ”ë‹¤.)
+	S_FLAG_HEAL = 1<<5, //íšŒë³µ
+	S_FLAG_DEBUF = 1<<6, //ë””ë²„í”„ê¸°
+	S_FLAG_SUMMON = 1<<7, //ì†Œí™˜ê¸°
+	S_FLAG_SPEAK = 1<<8, //ì£¼ë¬¸ì´ í•„ìš”í•œê°€
+	S_FLAG_IMMEDIATELY = 1<<9, //ì‹œì „ì¦‰ì‹œ ë°œë™í•˜ëŠ”ê°€?
+	S_FLAG_DIREC = 1<<10, //ë°©í–¥ìœ¼ë¡œ ë°œë™í•˜ëŠ”ê°€? (S_FLAG_IMMEDIATELYì™€ ì¤‘ì²©ë¶ˆê°€)
+	S_FLAG_NO_COM = 1<<11, //AIê°€ ì‚¬ìš©í•˜ì§€ì•ŠëŠ” ê¸°ìˆ ì¸ê°€?
+	S_FLAG_TOGLE = 1<<12, //í† ê¸€í˜• ê¸°ìˆ ì¸ì§€?(í•œë²ˆ ì‚¬ìš©í•˜ë©´ ìŠê±°ë‚˜ ë‹¤ì‹œ ì‚¬ìš©í• ë•Œê¹Œì§€ êº¼ì§€ì§€ì•ŠìŒ)
+	S_FLAG_BUF = 1<<13, //ë²„í”„ê¸°
+	S_FLAG_OTHER_BUF = 1<<14, //ë‚¨ì„ ë²„í”„ì‹œì¼œì£¼ëŠ” ê¸°ìˆ (ë³´í†µ aiìš©)
+	S_FLAG_RANGE_ATTACK = 1<<15, //ì´ ê²ƒì€ (ì£¼ë¡œ aiê°€) ì‚¬ê±°ë¦¬ì•ˆì— ì˜¬ë•Œ ê³µê²©ê°€ëŠ¥í•œ ê¸°ìˆ ì´ë‹¤.
+	S_FLAG_SUKIMA = 1<<16, //ìŠ¤í‚¤ë§ˆìš©
+	S_FLAG_RECT = 1<<17, //ì‚¬ê°í˜• ì‹œì•¼
+	S_FLAG_NO_TARGET = 1<<18, //ëª¬ìŠ¤í„°ë¥¼ íƒ€ê²Ÿìœ¼ë¡œ ì¡ì§€ì•ŠëŠ”ë‹¤.
+	S_FLAG_UNSIGHT = 1<<19, //ì‹œì•¼ì— ê°€ë ¤ë„ ì‚¬ìš©ê°€ëŠ¥.
+	S_FLAG_GOD = 1<<20, //ì‹ ì˜ ìŠ¤í‚¬
+	S_FLAG_DELAYED = 1<<21, //í”¼ë¡œê°€ ìŒ“ì´ë©´ ì“¸ ìˆ˜ ì—†ë‹¤.
 };
 
 float GetSpellSector(spell_list spell_);
@@ -192,28 +192,28 @@ int SpellMiscastingLevel(int level_, int fail_);
 int SpellMiscasting(int miscasting_level_);
 int SpellHunger(int level);
 skill_type SpellSchool(spell_list skill, int num);
-bool SpellAiCondition(spell_list skill, monster *mon); //ÀÎ°øÁö´ÉÀÌ ¸¶¹ıÀ» ¾²´Â Ãß°¡ Á¶°Ç(true°¡ »ç¿ë°¡´É false°¡ »ç¿ëºÒ°¡)
+bool SpellAiCondition(spell_list skill, monster *mon); //ì¸ê³µì§€ëŠ¥ì´ ë§ˆë²•ì„ ì“°ëŠ” ì¶”ê°€ ì¡°ê±´(trueê°€ ì‚¬ìš©ê°€ëŠ¥ falseê°€ ì‚¬ìš©ë¶ˆê°€)
 
 
 
 
 bool SkillFlagCheck(skill_list skill, skill_flag flag);
 int SkillLength(skill_list skill);
-const char* SkillString(skill_list skill); //½ºÅ³ ÀÌ¸§
-int SkillCap(skill_list skill);//½ºÅ³ÆÄ¿ö »óÇÑ
-int SkillNoise(skill_list skill); //½ºÅ³ ¼ÒÀ½
+const char* SkillString(skill_list skill); //ìŠ¤í‚¬ ì´ë¦„
+int SkillCap(skill_list skill);//ìŠ¤í‚¬íŒŒì›Œ ìƒí•œ
+int SkillNoise(skill_list skill); //ìŠ¤í‚¬ ì†ŒìŒ
 int SkillSpeed(skill_list skill);
-int SkillPow(skill_list skill);//½ºÅ³ÀÇ ÆÄ¿ö¸¦ ¸®ÅÏ
-int SkillDiffer(skill_list skill);//100À» ÃÖ°í·Î ¼º°ø·üÀ» ¸®ÅÏÇÑ´Ù.
-int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3);//°£´ÜÇÑ ¼º°ø·ü °ø½ÄÀ» ¼¼¿î´Ù.
-int SkillMana(skill_list skill);//»ç¿ë¿¡ µå´Â ¸¶³ª¸¦ °è»ê
-bool SkillPlusCost(skill_list skill,bool check_);//Ãß°¡ÀûÀÎ ÄÚ½ºÆ® 
+int SkillPow(skill_list skill);//ìŠ¤í‚¬ì˜ íŒŒì›Œë¥¼ ë¦¬í„´
+int SkillDiffer(skill_list skill);//100ì„ ìµœê³ ë¡œ ì„±ê³µë¥ ì„ ë¦¬í„´í•œë‹¤.
+int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3);//ê°„ë‹¨í•œ ì„±ê³µë¥  ê³µì‹ì„ ì„¸ìš´ë‹¤.
+int SkillMana(skill_list skill);//ì‚¬ìš©ì— ë“œëŠ” ë§ˆë‚˜ë¥¼ ê³„ì‚°
+bool SkillPlusCost(skill_list skill,bool check_);//ì¶”ê°€ì ì¸ ì½”ìŠ¤íŠ¸ 
 void SkillUseTraning(skill_list skill);
-const char* SkillCostString(skill_list skill);//ÄÚ½ºÆ®Ç¥Çö¹®Àå
+const char* SkillCostString(skill_list skill);//ì½”ìŠ¤íŠ¸í‘œí˜„ë¬¸ì¥
 
 monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range_, unit* order, coord_def target, SUMMON_KIND kind_, int max_num_);
 void BaseBomb(coord_def pos, textures* t_, attack_infor& att_, unit* except_ = NULL);
-int GetSpellBombRange(skill_list skill);//Æø¹ß³ĞÀÌ
+int GetSpellBombRange(skill_list skill);//í­ë°œë„“ì´
 int GetSpellBombRange(spell_list spell);
 
 

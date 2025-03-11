@@ -1,4 +1,4 @@
-#include "network.h"
+ï»¿#include "network.h"
 #include "replay.h"
 #include "option_manager.h"
 bool is_little_endian()
@@ -153,7 +153,7 @@ bool NetClient::SendFile(const char* c,const char* name)
 	memset(fstring,0,256);
 	memset(fsize,0,64);
 	memset(fsize2,0,64);
-	//strcpy(fname,"ÀÌ¸§¾øÀ½-20160329-043601.txt");
+	//strcpy(fname,"ì´ë¦„ì—†ìŒ-20160329-043601.txt");
 	strcpy(fname+strlen(fname),"\0");
 	strcpy(fname2+strlen(fname2),"\0");
 	sprintf_s(fstring,256,c);

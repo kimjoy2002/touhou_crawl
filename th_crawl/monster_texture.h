@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: monster_texture.h
+// íŒŒì¼ì´ë¦„: monster_texture.h
 //
-// ³»¿ë: ¸ó½ºÅÍ ÅØ½ºÃÄ ¼±¾ğ(¸ó½ºÅÍ¸»°íµµ ¾ÆÀÌÅÛ, ÀÌÆåÆ®ÀÇ ÅØ½ºÃÄµµ ¼ö·Ï)
+// ë‚´ìš©: ëª¬ìŠ¤í„° í…ìŠ¤ì³ ì„ ì–¸(ëª¬ìŠ¤í„°ë§ê³ ë„ ì•„ì´í…œ, ì´í™íŠ¸ì˜ í…ìŠ¤ì³ë„ ìˆ˜ë¡)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -24,7 +24,7 @@ extern textures img_auto_water[48];
 extern textures img_auto_hell_wall[48];
 extern textures img_auto_lava[48];
 extern textures img_mons_default;
-//¿©±âÃß°¡ÇÏ¸é texturetointµµ Ãß°¡ÇØ¾ßÇÔ
+//ì—¬ê¸°ì¶”ê°€í•˜ë©´ texturetointë„ ì¶”ê°€í•´ì•¼í•¨
 extern textures img_mons_reimu_yukkuri;
 extern textures img_mons_rat;
 extern textures img_mons_fairy_green;
@@ -400,17 +400,17 @@ extern textures img_item_goal;
 extern textures img_item_cat_tree;
 extern textures img_item_rune;
 
-extern textures img_tanmac_bill[]; //¾ÆÀÌÅÛ ÀÌ¹ÌÁö·Ğ 1¸¸ ¾¹´Ï´Ù. 
-extern textures img_tanmac_amulet[]; //0¾¸
-extern textures img_tanmac_fire_big[]; //¾ÆÀÌÅÛ ÀÌ¹ÌÁö·Ğ 1¸¸ ¾¹´Ï´Ù. 
-extern textures img_tanmac_fire_small[];//¾ÆÀÌÅÛ ÀÌ¹ÌÁö·Ğ 1¸¸ ¾¹´Ï´Ù. 
-extern textures img_tanmac_ice[]; //0¾¸
-extern textures img_tanmac_ice_big[];  //0¾¸
-extern textures img_tanmac_ice_small[]; //0¾¸
-extern textures img_tanmac_poison_big[];  //0¾¸
-extern textures img_tanmac_poison_small[]; //0¾¸
+extern textures img_tanmac_bill[]; //ì•„ì´í…œ ì´ë¯¸ì§€ë¡  1ë§Œ ì”ë‹ˆë‹¤. 
+extern textures img_tanmac_amulet[]; //0ì”€
+extern textures img_tanmac_fire_big[]; //ì•„ì´í…œ ì´ë¯¸ì§€ë¡  1ë§Œ ì”ë‹ˆë‹¤. 
+extern textures img_tanmac_fire_small[];//ì•„ì´í…œ ì´ë¯¸ì§€ë¡  1ë§Œ ì”ë‹ˆë‹¤. 
+extern textures img_tanmac_ice[]; //0ì”€
+extern textures img_tanmac_ice_big[];  //0ì”€
+extern textures img_tanmac_ice_small[]; //0ì”€
+extern textures img_tanmac_poison_big[];  //0ì”€
+extern textures img_tanmac_poison_small[]; //0ì”€
 extern textures img_tanmac_air[]; //0
-extern textures img_tanmac_rock_small[]; //0¾¸
+extern textures img_tanmac_rock_small[]; //0ì”€
 extern textures img_tanmac_rock_big[]; 
 extern textures img_tanmac_doggojeo[];
 extern textures img_tanmac_sion[];

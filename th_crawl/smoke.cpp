@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: smoke.cpp
+// íŒŒì¼ì´ë¦„: smoke.cpp
 //
-// ³»¿ë: ¿¬±â°ü·Ã
+// ë‚´ìš©: ì—°ê¸°ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -160,20 +160,20 @@ bool smoke::effectSmoke(unit* unit_)
 	default:
 		return false;
 	case SMT_FIRE:
-		unit_->damage(attack_infor(rand_int(5,15),15,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("È­¿° ±¸¸§",true)), true);
+		unit_->damage(attack_infor(rand_int(5,15),15,99,NULL,parent,ATT_CLOUD_FIRE,name_infor("í™”ì—¼ êµ¬ë¦„",true)), true);
 		return true;
 	case SMT_COLD:
-		unit_->damage(attack_infor(rand_int(3,12),12,99,NULL,parent,ATT_CLOUD_COLD,name_infor("³Ã±â ±¸¸§",true)), true);
+		unit_->damage(attack_infor(rand_int(3,12),12,99,NULL,parent,ATT_CLOUD_COLD,name_infor("ëƒ‰ê¸° êµ¬ë¦„",true)), true);
 		unit_->SetFrozen(randA_1(7));
 		return true;
 	case SMT_ELEC:
-		unit_->damage(attack_infor(rand_int(7,17),17,99,NULL,parent,ATT_CLOUD_ELEC,name_infor("Àü±â ±¸¸§",true)), true);
+		unit_->damage(attack_infor(rand_int(7,17),17,99,NULL,parent,ATT_CLOUD_ELEC,name_infor("ì „ê¸° êµ¬ë¦„",true)), true);
 		return true;
 	case SMT_TWIST:
-		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("Æ®À§½ºÆ®",false)), true);
+		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("íŠ¸ìœ„ìŠ¤íŠ¸",false)), true);
 		return true;
 	case SMT_WHIRLWIND:
-		unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("È¸¿À¸®¹Ù¶÷",true)), true);
+		unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor("íšŒì˜¤ë¦¬ë°”ëŒ",true)), true);
 		return true;
 	case SMT_POISON:
 		{
@@ -198,7 +198,7 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_CURSE:
 		if(!unit_->isplayer() || you.god != GT_HINA)
 		{
-			unit_->damage(attack_infor(randA_1(5),5,99,NULL,parent,ATT_CLOUD_CURSE,name_infor("ÀúÁÖ",false)), true);
+			unit_->damage(attack_infor(randA_1(5),5,99,NULL,parent,ATT_CLOUD_CURSE,name_infor("ì €ì£¼",false)), true);
 			bool return_ = unit_->SetPoison(rand_int(5,10), 150, true);
 			if(randA(7)>4)
 				return_ = (unit_->SetSlow(randA(10))?true:return_);
@@ -213,7 +213,7 @@ bool smoke::effectSmoke(unit* unit_)
 					return false;
 			}
 		}
-		unit_->damage(attack_infor(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor("ºí¸®ÀÚµå",false)), true);
+		unit_->damage(attack_infor(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor("ë¸”ë¦¬ìë“œ",false)), true);
 		return true;
 	}
 	return false;
@@ -325,7 +325,7 @@ bool MakeCloud(const coord_def &c, random_extraction<textures*> rand_t, smoke_ty
 	}
 	list<coord_node*> Open;
 
-	priqueue_push(Open,cloud_node[c.x][c.y].Set(c,0));//½ºÅ¸Æ®ÁöÁ¡À» ¿ÀÇÂ Çª½Ã
+	priqueue_push(Open,cloud_node[c.x][c.y].Set(c,0));//ìŠ¤íƒ€íŠ¸ì§€ì ì„ ì˜¤í”ˆ í‘¸ì‹œ
 
 	cloud_node[c.x][c.y].opcl = true;
 	while(!Open.empty() && num_>0)

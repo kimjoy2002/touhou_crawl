@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: debuf.h
+// íŒŒì¼ì´ë¦„: debuf.h
 //
-// ³»¿ë: µğ¹öÇÁ °ü·Ã
+// ë‚´ìš©: ë””ë²„í”„ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -16,8 +16,8 @@ class unit;
 
 unit* DebufBeam(spell_list spell_, unit* order, coord_def target);
 unit* DebufBeam(skill_list skill_, unit* order, coord_def target);
-int GetDebufPower(spell_list skill, int power_);//µğ¹öÇÁÀÇ ÆÄ¿ö
-int GetDebufPower(skill_list skill, int power_);//µğ¹öÇÁÀÇ ÆÄ¿ö(½ºÅ³µé)
+int GetDebufPower(spell_list skill, int power_);//ë””ë²„í”„ì˜ íŒŒì›Œ
+int GetDebufPower(skill_list skill, int power_);//ë””ë²„í”„ì˜ íŒŒì›Œ(ìŠ¤í‚¬ë“¤)
 float getDebufPercent(int resist, int power);
 
 #endif // __DEBUF_H__

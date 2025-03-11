@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: Astar.cpp
+// íŒŒì¼ì´ë¦„: Astar.cpp
 //
-// ³»¿ë: Astar¾Ë°í¸®Áò
+// ë‚´ìš©: Astarì•Œê³ ë¦¬ì¦˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,7 +92,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 		}
 	}
 
-	priqueue_push(Open,astar_node[start.x][start.y].Set(start,0,PathCost(start,goal),NULL));//½ºÅ¸Æ®ÁöÁ¡À» ¿ÀÇÂ Çª½Ã
+	priqueue_push(Open,astar_node[start.x][start.y].Set(start,0,PathCost(start,goal),NULL));//ìŠ¤íƒ€íŠ¸ì§€ì ì„ ì˜¤í”ˆ í‘¸ì‹œ
 
 	while(!Open.empty())
 	{
@@ -100,7 +100,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 		Open.pop_front();
 		node->opcl &= ~1;
 		node->opcl |= 2;
-		if((node->pos == goal && type != ST_SEARCH ) || (type == ST_SEARCH && ano_goal !=  start && ano_goal ==  node->pos)) //°ñÀÎ
+		if((node->pos == goal && type != ST_SEARCH ) || (type == ST_SEARCH && ano_goal !=  start && ano_goal ==  node->pos)) //ê³¨ì¸
 		{
 			searchnode* path = node;
 			while(path && path->pos != start)
@@ -110,7 +110,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 			}
 			return true;
 		}
-		else //»õ·Î¿î Á¤º¸¸¦ °»½Å
+		else //ìƒˆë¡œìš´ ì •ë³´ë¥¼ ê°±ì‹ 
 		{
 			rect_iterator it(node->pos,1,1);
 			for(;!it.end();it++)
@@ -125,7 +125,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				bool is_close = (newnode->opcl & 2);
 				bool is_mapping = env[floor_].isMapping(it->x,it->y);
 				bool is_explore = (env[floor_].isExplore(it->x,it->y) || type >= ST_MONSTER_NORMAL);
-				bool is_door = (env[floor_].isDoor(it->x,it->y) && type < ST_MONSTER_NORMAL);//¿­¼öÀÖ´Â ¹®ÀÌ³Ä
+				bool is_door = (env[floor_].isDoor(it->x,it->y) && type < ST_MONSTER_NORMAL);//ì—´ìˆ˜ìˆëŠ” ë¬¸ì´ëƒ
 				bool is_forbid = env[floor_].isForbidZone(it->x, it->y) && type < ST_MONSTER_NORMAL;
 				bool is_block = env[floor_].isBlockPos(it->x, it->y) && type < ST_MONSTER_NORMAL;
 				
@@ -143,7 +143,7 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				{
 					continue;
 				}
-				//else   <- ÀÚµ¿Å½»ö¶§¹®¿¡ type == ST_SEARCH
+				//else   <- ìë™íƒìƒ‰ë•Œë¬¸ì— type == ST_SEARCH
 				{	
 					newnode->Set(coord_def(it->x,it->y),newcost, heuristic*PathCost(coord_def(it->x,it->y),goal),node);
 					if(is_close)

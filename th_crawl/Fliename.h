@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: Fliename.h
+// íŒŒì¼ì´ë¦„: Fliename.h
 //
-// ³»¿ë: »ç¿ë ÆÄÀÏÀÇ ÀÌ¸§ ¸ğÀ½
+// ë‚´ìš©: ì‚¬ìš© íŒŒì¼ì˜ ì´ë¦„ ëª¨ìŒ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 #ifndef  __FILENAME_H__
@@ -43,7 +43,7 @@ const char imgfile_dot_mapping_floor[] = "./data/dot/mf.png";
 const char imgfile_dot_mapping_wall[] = "./data/dot/mw.png";
 const char imgfile_sight_rect[] = "./data/dot/sight.tga";
 
-//¿©±â¿¡ Ãß°¡ÇÏ¸é monster_texture.h, texture.h, texture.cpp
+//ì—¬ê¸°ì— ì¶”ê°€í•˜ë©´ monster_texture.h, texture.h, texture.cpp
 
 
 #endif // __FILENAME_H__

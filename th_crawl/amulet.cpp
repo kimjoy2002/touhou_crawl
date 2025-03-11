@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: amulet.cpp
+// íŒŒì¼ì´ë¦„: amulet.cpp
 //
-// ³»¿ë: ºÎÀû
+// ë‚´ìš©: ë¶€ì 
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,28 +21,28 @@
 
 char *amulet_uniden_string[AMT_MAX] =
 {
-	"Áã°¡ ±×·ÁÁø ",
-	"¼Ò°¡ ±×·ÁÁø ",
-	"È£¶ûÀÌ°¡ ±×·ÁÁø ",
-	"µÅÁö°¡ ±×·ÁÁø ",
-	"Åä³¢°¡ ±×·ÁÁø ",
-	"¹ìÀÌ ±×·ÁÁø ",
-	"¸»ÀÌ ±×·ÁÁø ",
-	"¾çÀÌ ±×·ÁÁø ",
-	"¿ø¼şÀÌ°¡ ±×·ÁÁø "
+	"ì¥ê°€ ê·¸ë ¤ì§„ ",
+	"ì†Œê°€ ê·¸ë ¤ì§„ ",
+	"í˜¸ë‘ì´ê°€ ê·¸ë ¤ì§„ ",
+	"ë¼ì§€ê°€ ê·¸ë ¤ì§„ ",
+	"í† ë¼ê°€ ê·¸ë ¤ì§„ ",
+	"ë±€ì´ ê·¸ë ¤ì§„ ",
+	"ë§ì´ ê·¸ë ¤ì§„ ",
+	"ì–‘ì´ ê·¸ë ¤ì§„ ",
+	"ì›ìˆ­ì´ê°€ ê·¸ë ¤ì§„ "
 };
 
 const char *amulet_iden_string[AMT_MAX] =
 {
-	"¿ÏÀü¹«°áÀÇ ",
-	"»ï¶ó°á°èÀÇ ",
-	"°¢ºÎÀÇ ",
-	"½Å¾ÓÀÇ ",
-	"ÀüÆÄÀÇ ",
-	"½Å·ÉÀÇ ",
-	"±×·¹ÀÌÁîÀÇ ",
-	"³¯¾¾ÀÇ ",
-	"¿ÀÄÃÆ®ÀÇ "
+	"ì™„ì „ë¬´ê²°ì˜ ",
+	"ì‚¼ë¼ê²°ê³„ì˜ ",
+	"ê°ë¶€ì˜ ",
+	"ì‹ ì•™ì˜ ",
+	"ì „íŒŒì˜ ",
+	"ì‹ ë ¹ì˜ ",
+	"ê·¸ë ˆì´ì¦ˆì˜ ",
+	"ë‚ ì”¨ì˜ ",
+	"ì˜¤ì»¬íŠ¸ì˜ "
 };
 
 
@@ -122,7 +122,7 @@ bool chargingFinish(amulet_type kind, int value)
 			int temp = you.Ability(SKL_GRAZE_OFF, false, true, 1);
 			if (temp) {
 				you.Ability(SKL_GRAZE_OFF, false, false, temp);
-				//±×·¹ÀÌÁî¸¦ Á¶Á¾ÁßÀÌ¸é ±×·¹ÀÌÁî¸¦ ²ôÁö¾ÊÀ½
+				//ê·¸ë ˆì´ì¦ˆë¥¼ ì¡°ì¢…ì¤‘ì´ë©´ ê·¸ë ˆì´ì¦ˆë¥¼ ë„ì§€ì•ŠìŒ
 			} else 
 			{
 				you.s_graze = 0;
@@ -131,28 +131,28 @@ bool chargingFinish(amulet_type kind, int value)
 		break; 
 	case AMT_WAVE:
 		if (value > 0) {
-			printlog("ºÎÀû¿¡ ÀÇÇØ ¿µ·Â È¸º¹·ÂÀÌ ¿Ã¶ó°¬´Ù!", true, false, false, CL_blue);
+			printlog("ë¶€ì ì— ì˜í•´ ì˜ë ¥ íšŒë³µë ¥ì´ ì˜¬ë¼ê°”ë‹¤!", true, false, false, CL_blue);
 		}
 		else {
-			printlog("´õ ÀÌ»ó ºÎÀûÀ¸·ÎºÎÅÍ ¿µ·Â È¸º¹·ÂÀ» ¹ŞÁö ¸øÇÑ´Ù.", true, false, false, CL_blue);
+			printlog("ë” ì´ìƒ ë¶€ì ìœ¼ë¡œë¶€í„° ì˜ë ¥ íšŒë³µë ¥ì„ ë°›ì§€ ëª»í•œë‹¤.", true, false, false, CL_blue);
 		}
 		break;
 	/*case AMT_WEATHER:
 		if (value > 0) {
-			printlog("ºÎÀû¿¡ ÀÇÇØ Ã¼·Â Àç»ı·ÂÀÌ ¿Ã¶ó°¬´Ù!", true, false, false, CL_blue);
+			printlog("ë¶€ì ì— ì˜í•´ ì²´ë ¥ ì¬ìƒë ¥ì´ ì˜¬ë¼ê°”ë‹¤!", true, false, false, CL_blue);
 		}
 		else {
-			printlog("´õ ÀÌ»ó ºÎÀûÀ¸·ÎºÎÅÍ Àç»ı·ÂÀ» ¹ŞÁö ¸øÇÑ´Ù.", true, false, false, CL_blue);
+			printlog("ë” ì´ìƒ ë¶€ì ìœ¼ë¡œë¶€í„° ì¬ìƒë ¥ì„ ë°›ì§€ ëª»í•œë‹¤.", true, false, false, CL_blue);
 		}
 		break;*/
 	case AMT_FAITH:
 		if (value > 0) {
 			if (you.god == GT_NONE) {
-				printlog("´ç½ÅÀº ½Å¾ÓÀÌ ¾ø±â¶§¹®¿¡ ¸ğÀº ½Å¾Ó½ÉÀÌ ÇÏ´Ã·Î ³¯¶ó°¬´Ù.", true, false, false, CL_blue);
+				printlog("ë‹¹ì‹ ì€ ì‹ ì•™ì´ ì—†ê¸°ë•Œë¬¸ì— ëª¨ì€ ì‹ ì•™ì‹¬ì´ í•˜ëŠ˜ë¡œ ë‚ ë¼ê°”ë‹¤.", true, false, false, CL_blue);
 				you.resetAmuletPercent(kind);
 			}
 			else {
-				printlog("ºÎÀû¿¡ ÀÇÇØ ½Å°ú ±³°¨ÇÏ¿´´Ù!", true, false, false, CL_blue);
+				printlog("ë¶€ì ì— ì˜í•´ ì‹ ê³¼ êµê°í•˜ì˜€ë‹¤!", true, false, false, CL_blue);
 				if (you.god != GT_SEIJA)
 					you.PietyUpDown(10);
 				you.GiftCount(10);
@@ -180,11 +180,11 @@ bool evokeAmulet(amulet_type kind, int value_)
 	{
 	case AMT_PERFECT:
 	case AMT_FAITH:
-		//¹ßµ¿ÇÏÁö¾ÊÀ½
+		//ë°œë™í•˜ì§€ì•ŠìŒ
 		break;
 	case AMT_BLOSSOM:
 		soundmanager.playSound("soul_shot");
-		printlog("ÆÎ! ", false, false, false, CL_white_blue);
+		printlog("íŒ¡! ", false, false, false, CL_white_blue);
 		skill_soul_shot(0, &you, you.position);
 		break;
 	case AMT_TIMES:
@@ -206,18 +206,18 @@ bool evokeAmulet(amulet_type kind, int value_)
 	}
 	case AMT_WAVE:
 		soundmanager.playSound("buff");
-		printlog("´ç½ÅÀº ¿µ·ÂÀ» È¸º¹Çß´Ù. ", false, false, false, CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì˜ë ¥ì„ íšŒë³µí–ˆë‹¤. ", false, false, false, CL_normal);
 		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
 		/*if (env[current_level].isBamboo())
 		{
-			printlog("ÁöÇü Å½Áö´Â ¹Ì±ÃÀÇ Á×¸²¿¡¼± È¿°ú¸¦ º¸Áö ¸øÇÑ´Ù.", true, false, false, CL_normal);
+			printlog("ì§€í˜• íƒì§€ëŠ” ë¯¸ê¶ì˜ ì£½ë¦¼ì—ì„  íš¨ê³¼ë¥¼ ë³´ì§€ ëª»í•œë‹¤.", true, false, false, CL_normal);
 			return false;
 		}
 		else
 		{
 			soundmanager.playSound("buff");
 			env[current_level].MakeMapping(100);
-			printlog("´ç½ÅÀº ÇöÀç ÃşÀ» °¨ÁöÇØ³Â´Ù.", true, false, false, CL_normal);
+			printlog("ë‹¹ì‹ ì€ í˜„ì¬ ì¸µì„ ê°ì§€í•´ëƒˆë‹¤.", true, false, false, CL_normal);
 		}*/
 		break;
 	case AMT_SPIRIT:
@@ -227,7 +227,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 	case AMT_GRAZE:
 		soundmanager.playSound("buff");
 		you.SetSuperGraze(rand_int(10, 15));
-		printlog("´ç½ÅÀº ¼ø°£ÀûÀ¸·Î È¸ÇÇ¿¡ ¸ğµç ½Å°æÀ» ½ñ´Â´Ù!", false, false, false, CL_white_blue);
+		printlog("ë‹¹ì‹ ì€ ìˆœê°„ì ìœ¼ë¡œ íšŒí”¼ì— ëª¨ë“  ì‹ ê²½ì„ ìŸëŠ”ë‹¤!", false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
 		{
@@ -238,15 +238,15 @@ bool evokeAmulet(amulet_type kind, int value_)
 			switch (weather_)
 			{
 			case 1:
-				printlog("ÇÑÄ¡ ¾ÕÀÌ ¾Èº¸ÀÌ´Â Â£Àº ¾È°³°¡ ±ò¸®±â ½ÃÀÛÇß´Ù.", true, false, false, CL_normal);
+				printlog("í•œì¹˜ ì•ì´ ì•ˆë³´ì´ëŠ” ì§™ì€ ì•ˆê°œê°€ ê¹”ë¦¬ê¸° ì‹œì‘í–ˆë‹¤.", true, false, false, CL_normal);
 				you.SetWeather(1, time_);
 				break;
 			case 2:
-				printlog("´øÀü¿¡ ¸¹Àº ºñ¿Í ÃµµÕ¹ø°³°¡ ÈÖ¸ô¾ÆÄ¡±â ½ÃÀÛÇÑ´Ù.", true, false, false, CL_normal);
+				printlog("ë˜ì „ì— ë§ì€ ë¹„ì™€ ì²œë‘¥ë²ˆê°œê°€ íœ˜ëª°ì•„ì¹˜ê¸° ì‹œì‘í•œë‹¤.", true, false, false, CL_normal);
 				you.SetWeather(2, time_);
 				break;
 			case 3:
-				printlog("´øÀü¿¡ °­ÇÑ ÇŞºûÀÌ µé±â ½ÃÀÛÇß´Ù.", true, false, false, CL_normal);
+				printlog("ë˜ì „ì— ê°•í•œ í–‡ë¹›ì´ ë“¤ê¸° ì‹œì‘í–ˆë‹¤.", true, false, false, CL_normal);
 				you.SetWeather(3, time_);
 				break;
 			default:
@@ -254,7 +254,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 			}
 		}
 		/*soundmanager.playSound("buff");
-		printlog("´ç½ÅÀº Ã¼·ÂÀ» È¸º¹Çß´Ù. ", false, false, false, CL_normal);
+		printlog("ë‹¹ì‹ ì€ ì²´ë ¥ì„ íšŒë³µí–ˆë‹¤. ", false, false, false, CL_normal);
 		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);*/
 		break;
 	case AMT_OCCULT:
@@ -263,23 +263,23 @@ bool evokeAmulet(amulet_type kind, int value_)
 		switch (value_)
 		{
 		case OCT_NESI:
-			printlog("¿ÀÄÃÆ®ÀÇ ÈûÀ¸·Î µµ½ÃÀü¼³ ³×½Ã°¡ ÃâÇöÇß´Ù!", true, false, false, CL_magic);
+			printlog("ì˜¤ì»¬íŠ¸ì˜ í˜ìœ¼ë¡œ ë„ì‹œì „ì„¤ ë„¤ì‹œê°€ ì¶œí˜„í–ˆë‹¤!", true, false, false, CL_magic);
 			skill_summon_occult_nesi(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_LONG:
-			printlog("¿ÀÄÃÆ®ÀÇ ÈûÀ¸·Î µµ½ÃÀü¼³ ÆÈÃ´±Í½ÅÀÌ ÃâÇöÇß´Ù!", true, false, false, CL_magic);
+			printlog("ì˜¤ì»¬íŠ¸ì˜ í˜ìœ¼ë¡œ ë„ì‹œì „ì„¤ íŒ”ì²™ê·€ì‹ ì´ ì¶œí˜„í–ˆë‹¤!", true, false, false, CL_magic);
 			skill_summon_occult_long(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_SHORT:
-			printlog("¿ÀÄÃÆ®ÀÇ ÈûÀ¸·Î µµ½ÃÀü¼³ ¸®Æ² ±×¸°¸ÇµéÀÌ ÃâÇöÇß´Ù!", true, false, false, CL_magic);
+			printlog("ì˜¤ì»¬íŠ¸ì˜ í˜ìœ¼ë¡œ ë„ì‹œì „ì„¤ ë¦¬í‹€ ê·¸ë¦°ë§¨ë“¤ì´ ì¶œí˜„í–ˆë‹¤!", true, false, false, CL_magic);
 			skill_summon_occult_small(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_DISH:
-			printlog("¿ÀÄÃÆ®ÀÇ ÈûÀ¸·Î µµ½ÃÀü¼³ ¹İÃİ»ç¶ó¾ß½ÃÅ°°¡ ÃâÇöÇß´Ù!", true, false, false, CL_magic);
+			printlog("ì˜¤ì»¬íŠ¸ì˜ í˜ìœ¼ë¡œ ë„ì‹œì „ì„¤ ë°˜ìµ¸ì‚¬ë¼ì•¼ì‹œí‚¤ê°€ ì¶œí˜„í–ˆë‹¤!", true, false, false, CL_magic);
 			skill_summon_occult_dish(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_KUNEKUNE:
-			printlog("¿ÀÄÃÆ®ÀÇ ÈûÀ¸·Î µµ½ÃÀü¼³ Äí³×Äí³×°¡ ÃâÇöÇß´Ù!", true, false, false, CL_magic);
+			printlog("ì˜¤ì»¬íŠ¸ì˜ í˜ìœ¼ë¡œ ë„ì‹œì „ì„¤ ì¿ ë„¤ì¿ ë„¤ê°€ ì¶œí˜„í–ˆë‹¤!", true, false, false, CL_magic);
 			skill_summon_occult_kunekune(you.level * 5, false, &you, you.position);
 			break;
 		}
@@ -293,17 +293,17 @@ const char* getOccultName(occult_type kind)
 	switch (kind)
 	{
 	case OCT_NESI:
-		return "³×½Ã";
+		return "ë„¤ì‹œ";
 	case OCT_LONG:
-		return "ÆÈÃ´±Í½Å";
+		return "íŒ”ì²™ê·€ì‹ ";
 	case OCT_SHORT:
-		return "¸®Æ²±×¸°¸Ç";
+		return "ë¦¬í‹€ê·¸ë¦°ë§¨";
 	case OCT_DISH:
-		return "¹İÃİ»ç¶ó¾ß½ÃÅ°";
+		return "ë°˜ìµ¸ì‚¬ë¼ì•¼ì‹œí‚¤";
 	case OCT_KUNEKUNE:
-		return "Äí³×Äí³×";
+		return "ì¿ ë„¤ì¿ ë„¤";
 	}
-	return "Á¤Ã¼ºÒ¸í";
+	return "ì •ì²´ë¶ˆëª…";
 }
 
 bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target) {

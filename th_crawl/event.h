@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: event.h
+// íŒŒì¼ì´ë¦„: event.h
 //
-// ³»¿ë: ÀÌº¥Æ® Å¬·¡½º ¼±¾ð
+// ë‚´ìš©: ì´ë²¤íŠ¸ í´ëž˜ìŠ¤ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,41 +15,41 @@
 enum event_list
 {
 	EVL_KISME=100,
-	EVL_SIGHT_P, //½Ã¾ß¿¡ µé¾î¿Í¾ß »ý±â´Â P
-	EVL_FLOOR, //¶¥ÀÌ µÈ´Ù
-	EVL_DREAM_FLOOR, //¶¥ÀÌ µÈ´Ù2
-	EVL_BAMBOO, //¹Ì±ÃÀÇÁ×¸²
-	EVL_LUNATICTIME, //·ç³ªÆ½ Å¸ÀÓ!
-	EVL_KOGASA, //Å°½º¸Þ¸¦ µû¶óÇÏ´Â ÄÚ°¡»ç
-	EVL_NOISE,//¼ÒÀ½
-	EVL_VIOLET,//ÇÊµå ¹ÙÀÌ¿Ã·¿
-	EVL_DREAM_MONSTER,//µå¸²¹æ ¸ó½ºÅÍ »ý¼º
-	EVL_DREAM_MESSAGE, //²ÞÀÇ ¼¼°è°¡ ÆîÃÄÁø´Ù.
-	EVL_AGRO, //¸ðµç ¸÷ÀÌ ÇÃ·¹ÀÌ¾î¿¡°Ô ¾î±×·Î°¡ ²ø¸°´Ù.
-	EVL_REGEN, //¸÷ÀÇ ¸®Á¨ (²ÞÀÇ ¼¼°è).
-	EVL_REGEN2, //¸÷ÀÇ ¸®Á¨ (ÁöÀú).
-	EVL_ARENA, //¾Æ·¹³ª
-	EVL_NAMAZ, //³ª¸¶Áî ¶³±¸±â
+	EVL_SIGHT_P, //ì‹œì•¼ì— ë“¤ì–´ì™€ì•¼ ìƒê¸°ëŠ” P
+	EVL_FLOOR, //ë•…ì´ ëœë‹¤
+	EVL_DREAM_FLOOR, //ë•…ì´ ëœë‹¤2
+	EVL_BAMBOO, //ë¯¸ê¶ì˜ì£½ë¦¼
+	EVL_LUNATICTIME, //ë£¨ë‚˜í‹± íƒ€ìž„!
+	EVL_KOGASA, //í‚¤ìŠ¤ë©”ë¥¼ ë”°ë¼í•˜ëŠ” ì½”ê°€ì‚¬
+	EVL_NOISE,//ì†ŒìŒ
+	EVL_VIOLET,//í•„ë“œ ë°”ì´ì˜¬ë ›
+	EVL_DREAM_MONSTER,//ë“œë¦¼ë°© ëª¬ìŠ¤í„° ìƒì„±
+	EVL_DREAM_MESSAGE, //ê¿ˆì˜ ì„¸ê³„ê°€ íŽ¼ì³ì§„ë‹¤.
+	EVL_AGRO, //ëª¨ë“  ëª¹ì´ í”Œë ˆì´ì–´ì—ê²Œ ì–´ê·¸ë¡œê°€ ëŒë¦°ë‹¤.
+	EVL_REGEN, //ëª¹ì˜ ë¦¬ì   (ê¿ˆì˜ ì„¸ê³„).
+	EVL_REGEN2, //ëª¹ì˜ ë¦¬ì   (ì§€ì €).
+	EVL_ARENA, //ì•„ë ˆë‚˜
+	EVL_NAMAZ, //ë‚˜ë§ˆì¦ˆ ë–¨êµ¬ê¸°
 	EVL_KOISHI,
-	EVL_KYOKO, //°øÆ÷ÀÇ ÄìÄÚ
-	EVL_AUTUMN, //´ÜÇ³
-	EVL_SUKIMA, //½ºÅ°¸¶
-	EVL_RUN_FAIRY, //µµ¸ÁÄ¡´Â »ï¿ùÁ¤
-	EVL_SCALET_TRAP, //È«¸¶°ü Æ®·¦
-	EVL_KOGASATIME, //ÄÚ°¡»ç Å¸ÀÓ!
-	EVL_SANTUARY, //¼º¿ª
-	EVL_HOJOK, //È£Á·³­¹«
-	EVL_KOGASA3, //ÄÚ°¡»ç¾È°³
-	EVL_MEDI, //¸Þµð½¼
-	EVL_LOCK_DOOR, //¹Ù·Î ¹®À» Àá±Ù´Ù.
-	EVL_SMOKE, //¿¬±â¹ß»ý
+	EVL_KYOKO, //ê³µí¬ì˜ ì¿„ì½”
+	EVL_AUTUMN, //ë‹¨í’
+	EVL_SUKIMA, //ìŠ¤í‚¤ë§ˆ
+	EVL_RUN_FAIRY, //ë„ë§ì¹˜ëŠ” ì‚¼ì›”ì •
+	EVL_SCALET_TRAP, //í™ë§ˆê´€ íŠ¸ëž©
+	EVL_KOGASATIME, //ì½”ê°€ì‚¬ íƒ€ìž„!
+	EVL_SANTUARY, //ì„±ì—­
+	EVL_HOJOK, //í˜¸ì¡±ë‚œë¬´
+	EVL_KOGASA3, //ì½”ê°€ì‚¬ì•ˆê°œ
+	EVL_MEDI, //ë©”ë””ìŠ¨
+	EVL_LOCK_DOOR, //ë°”ë¡œ ë¬¸ì„ ìž ê·¼ë‹¤.
+	EVL_SMOKE, //ì—°ê¸°ë°œìƒ
 	EVL_CHEN,
-	EVL_BROKEN_NESI, //¼ö¸®°¡ ³¡³ªÁö¾ÊÀº ³×½Ã
+	EVL_BROKEN_NESI, //ìˆ˜ë¦¬ê°€ ëë‚˜ì§€ì•Šì€ ë„¤ì‹œ
 	EVL_FIRE_SMOKE,
 	EVL_COLD_SMOKE,
 	EVL_SILENCE,
 	EVL_SION_DELETE,
-	EVL_WATER //ÀÓ½Ã·Î ¹°ÀÌ µÈ´Ù.
+	EVL_WATER //ìž„ì‹œë¡œ ë¬¼ì´ ëœë‹¤.
 };
 
 class events

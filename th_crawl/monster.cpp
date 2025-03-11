@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: monster.cpp
+// íŒŒì¼ì´ë¦„: monster.cpp
 //
-// ³»¿ë: ¸÷ÀÇ ÇÔ¼öÁ¤ÀÇ
+// ë‚´ìš©: ëª¹ì˜ í•¨ìˆ˜ì •ì˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,7 +35,7 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
-: map_id(-1), id(0), level(1), exper(0), name("¾øÀ½",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
+: map_id(-1), id(0), level(1), exper(0), name("ì—†ìŒ",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
 ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
@@ -135,8 +135,8 @@ void monster::SaveDatas(FILE *fp)
 		SaveData<int>(fp, pop_.y);
 		will_move.pop_front();
 	}
-	//SaveData<int>(fp, target);  //¸¶Âù°¡ÁöÀÌÀ¯
-	//temp_target_map_id ÀÌ º¯¼ö´Â ÀúÀåÇÒ ÇÊ¿ä°¡ ¾ø´Ù.
+	//SaveData<int>(fp, target);  //ë§ˆì°¬ê°€ì§€ì´ìœ 
+	//temp_target_map_id ì´ ë³€ìˆ˜ëŠ” ì €ì¥í•  í•„ìš”ê°€ ì—†ë‹¤.
 	if(target)
 		SaveData<int>(fp, target->GetMapId());
 	else
@@ -255,7 +255,7 @@ void monster::LoadDatas(FILE *fp)
 		will_move.push_back(pop_);
 	}
 	//LoadData<int>(fp, will_move);
-	//LoadData<int>(fp, target); Å¸°Ù º¯¼ö´Â ¿©±â¼­ È£ÃâÇÏÁø ¾Ê´Â´Ù.
+	//LoadData<int>(fp, target); íƒ€ê²Ÿ ë³€ìˆ˜ëŠ” ì—¬ê¸°ì„œ í˜¸ì¶œí•˜ì§„ ì•ŠëŠ”ë‹¤.
 	LoadData<int>(fp, temp_target_map_id);
 	sm_info.LoadDatas(fp);
 
@@ -491,7 +491,7 @@ void monster::FirstContact()
 				{
 					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
 					if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
-					{ //fly¿Í swimÀÌ ÀÌ Ä³¸¯ÅÍ ¼³Á¤À¸·Î µÇ¾îÀÖ´Â°Ç ÀÌ Ä³¸¯ÅÍ°¡ °¡º¼¼öÀÖ´Â À§Ä¡¿´´Ù. ¶ó´Â°Í
+					{ //flyì™€ swimì´ ì´ ìºë¦­í„° ì„¤ì •ìœ¼ë¡œ ë˜ì–´ìˆëŠ”ê±´ ì´ ìºë¦­í„°ê°€ ê°€ë³¼ìˆ˜ìˆëŠ” ìœ„ì¹˜ì˜€ë‹¤. ë¼ëŠ”ê²ƒ
 						env[current_level].MakeMapping(coord_def(x_,y_),rand_int(min_size_,max_size_),false,percent_);
 						break;
 					}
@@ -510,13 +510,13 @@ void monster::FirstContact()
 		int length__ = max(abs(you.position.x-position.x),abs(you.position.y-position.y));
 		for(int i = 0; i < length__; i++)
 			percent_ *= 1.0f-detect_;
-		sprintf_s(temp,200,"µéÅ³È®·ü-RandB(%d,%d) Áï%f%% (ÃÖÁ¾ ¾Ï»ì ¼º°øÀ²%f%%)",you.GetStealth(),GetDetect(),100.0f*detect_, percent_*100.0f);
+		sprintf_s(temp,200,"ë“¤í‚¬í™•ë¥ -RandB(%d,%d) ì¦‰%f%% (ìµœì¢… ì•”ì‚´ ì„±ê³µìœ¨%f%%)",you.GetStealth(),GetDetect(),100.0f*detect_, percent_*100.0f);
 		printlog(temp,true,false,false,CL_danger);
 	}
 	if(flag & M_FLAG_UNIQUE && !(flag & M_FLAG_SUMMON) && id != MON_ENSLAVE_GHOST )
 	{		
 		char temp[200];
-		sprintf_s(temp,200,"³×ÀÓµå %s%s ¹ß°ßÇß´Ù.",name.name.c_str(),name.name_to());
+		sprintf_s(temp,200,"ë„¤ì„ë“œ %s%s ë°œê²¬í–ˆë‹¤.",name.name.c_str(),name.name_to());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
 	first_contact = false;
@@ -526,7 +526,7 @@ void monster::TurnSave()
 	delay_turn = you.turn;
 }
 void monster::TurnLoad()
-{ //³ªÁß¿¡ ÁÖÀÎ°ø ±ÙÃ³·Î ¿Å°Ü¿À´Â°Íµµ »ı°¢ÇÑ´Ù.
+{ //ë‚˜ì¤‘ì— ì£¼ì¸ê³µ ê·¼ì²˜ë¡œ ì˜®ê²¨ì˜¤ëŠ”ê²ƒë„ ìƒê°í•œë‹¤.
 	int temp_turn = you.turn-delay_turn;
 	if(s_poison-temp_turn>0)
 		s_poison-=temp_turn;
@@ -667,7 +667,7 @@ void monster::TurnLoad()
 	else
 		force_turn =0;
 
-	//s_changed µĞ°©Àº ´Ù¸¥ Ãş¿¡ Áö³ª¿Íµµ ½Ã°£ ¸®¼ÂÀÌ ¾ÈµÇ°Ô(Ã³¸®°¡ ±ÍÂú)
+	//s_changed ë‘”ê°‘ì€ ë‹¤ë¥¸ ì¸µì— ì§€ë‚˜ì™€ë„ ì‹œê°„ ë¦¬ì…‹ì´ ì•ˆë˜ê²Œ(ì²˜ë¦¬ê°€ ê·€ì°®)
 
 	if (s_invincibility != -1)
 	{
@@ -746,7 +746,7 @@ char monster::getAsciiDot()
 void monster::LevelUpdown(int level_, float hp_, float atk_)
 {
 
-	//·¹º§´Ù¿îÀº ³ªÁß¿¡ ±¸ÇöÇØº»´Ù.
+	//ë ˆë²¨ë‹¤ìš´ì€ ë‚˜ì¤‘ì— êµ¬í˜„í•´ë³¸ë‹¤.
 	if(level_ <= 0)
 		return;
 	while(level_>0)
@@ -785,13 +785,13 @@ void monster::CheckSightNewTarget()
 	if(isUserAlly())
 	{		
 		if(target && !target->isplayer())
-		{//ÀûÀÌ ÀÌ¹Ì ÀÖ´Â °æ¿ì
+		{//ì ì´ ì´ë¯¸ ìˆëŠ” ê²½ìš°
 			if(target->isLive() && isEnemyMonster((monster*)target))
-				return;	//ÇØ´çÀûÀÌ Á×Áö¾Ê¾ÒÀ¸¸é¼­ Àû¸ó½ºÅÍÀÌ¸é ±¸Áö ¹Ù²Ü ÇÊ¿ä°¡ ¾ø´Ù. 
+				return;	//í•´ë‹¹ì ì´ ì£½ì§€ì•Šì•˜ìœ¼ë©´ì„œ ì ëª¬ìŠ¤í„°ì´ë©´ êµ¬ì§€ ë°”ê¿€ í•„ìš”ê°€ ì—†ë‹¤. 
 		}
 
 					
-		{ //¿©±âºÎÅÍ ½Ã¾ß³» ¸ó½ºÅÍÃ£±â ½ÃÀÛ
+		{ //ì—¬ê¸°ë¶€í„° ì‹œì•¼ë‚´ ëª¬ìŠ¤í„°ì°¾ê¸° ì‹œì‘
 
 			vector<monster>::iterator it;
 			it = env[current_level].mon_vector.begin();
@@ -812,15 +812,15 @@ void monster::CheckSightNewTarget()
 	else
 	{
 		unit* prev_target_ = target;
-		int distant_ = 999;//ÀûÀÏ¶© °Å¸®°¡ Áß¿äÇÏ´Ù.
+		int distant_ = 999;//ì ì¼ë• ê±°ë¦¬ê°€ ì¤‘ìš”í•˜ë‹¤.
 		if(target)
-		{//ÀûÀÌ ÀÌ¹Ì ÀÖ´Â °æ¿ì
+		{//ì ì´ ì´ë¯¸ ìˆëŠ” ê²½ìš°
 			if(!target->isplayer())
 			{
 				if(target->isLive() && isEnemyMonster((monster*)target))
 				{
-					distant_ = distan_coord(target->position, position);	//ÇØ´çÀûÀÌ Á×Áö¾Ê¾ÒÀ¸¸é¼­ Àû¸ó½ºÅÍÀÌ¸é ±¸Áö ¹Ù²Ü ÇÊ¿ä°¡ ¾ø´Ù. 
-					distant_ = max(1,distant_-1); //¹º°¡¿¡ ¸·ÇôÀÖÀ¸¸é ¿ì¼±¼øÀ§°¡ ³·¾ÆÁü ±¸ÇöÇÏ±â
+					distant_ = distan_coord(target->position, position);	//í•´ë‹¹ì ì´ ì£½ì§€ì•Šì•˜ìœ¼ë©´ì„œ ì ëª¬ìŠ¤í„°ì´ë©´ êµ¬ì§€ ë°”ê¿€ í•„ìš”ê°€ ì—†ë‹¤. 
+					distant_ = max(1,distant_-1); //ë­”ê°€ì— ë§‰í˜€ìˆìœ¼ë©´ ìš°ì„ ìˆœìœ„ê°€ ë‚®ì•„ì§ êµ¬í˜„í•˜ê¸°
 				}
 				else
 					prev_target_ = NULL;
@@ -832,7 +832,7 @@ void monster::CheckSightNewTarget()
 			}
 		}
 
-		{ //¿©±âºÎÅÍ ½Ã¾ß³» ¸ó½ºÅÍÃ£±â ½ÃÀÛ
+		{ //ì—¬ê¸°ë¶€í„° ì‹œì•¼ë‚´ ëª¬ìŠ¤í„°ì°¾ê¸° ì‹œì‘
 			vector<monster>::iterator it;
 			it = env[current_level].mon_vector.begin();
 			for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
@@ -1078,14 +1078,14 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_NONE_DAMAGE:
 		default:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"¿¡°Ô ¸íÁßÇß´Ù. ");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"ì—ê²Œ ëª…ì¤‘í–ˆë‹¤. ");
 			break;
 		case ATT_SLEEP:
 			if (state.GetState() != MS_SLEEP)
 			{
 				if (a.order)
 				{
-					printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "ÀÇ ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "¿¡°Ô ¸íÁßÇß´Ù. ");
+					printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "ì˜ ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "ì—ê²Œ ëª…ì¤‘í–ˆë‹¤. ");
 					
 				}
 			}
@@ -1093,59 +1093,59 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			{
 				if (a.order)
 				{
-					printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "ÀÇ ²ŞÀ» ¸Ô¾ú´Ù. ");
+					printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "ì˜ ê¿ˆì„ ë¨¹ì—ˆë‹¤. ");
 				}
 			}
 			break;
 		case ATT_FIRE:
 		case ATT_FIRE_WEAK:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"¿¡°Ô ¸íÁßÇÏ°í ºÒÅ¸¿Ã¶ú´Ù. ");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"ì—ê²Œ ëª…ì¤‘í•˜ê³  ë¶ˆíƒ€ì˜¬ëë‹¤. ");
 			break;
 		case ATT_COLD:
 		case ATT_COLD_WEAK:
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"¿¡°Ô ¸íÁßÇÏ°í ¾ó¾îºÙ¾ú´Ù. ");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"ì—ê²Œ ëª…ì¤‘í•˜ê³  ì–¼ì–´ë¶™ì—ˆë‹¤. ");
 			break;
 		case ATT_NORMAL_HIT:			
 			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"¿¡°Ô µé¾î°¬´Ù. ");
+				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"ì—ê²Œ ë“¤ì–´ê°”ë‹¤. ");
 			break;
 		case ATT_SMITE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,"¹«¾ùÀÎ°¡ ",GetName()->name.c_str(),GetName()->name_to(true),"°­Å¸Çß´Ù. ");
+				printarray(false,false,false,CL_normal,4,"ë¬´ì—‡ì¸ê°€ ",GetName()->name.c_str(),GetName()->name_to(true),"ê°•íƒ€í–ˆë‹¤. ");
 			}
 			break;
 		case ATT_SMASH:
 			if (a.order)
 			{
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "Áı¾î´øÁøÈÄ ¹Ù´Ú¿¡ ³»ÆØ°ÜÃÄÁ³´Ù. ");
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ì§‘ì–´ë˜ì§„í›„ ë°”ë‹¥ì— ë‚´íŒ½ê²¨ì³ì¡Œë‹¤. ");
 			}
 			break;
 		case ATT_BLOOD:	
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ÇÇ°¡ ÅÍÁ®³ª¿Ô´Ù. ");
+				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ í”¼ê°€ í„°ì ¸ë‚˜ì™”ë‹¤. ");
 			}
 			break;
 		case ATT_NOISE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,3,"±²À½ÀÌ ",GetName()->name.c_str(),"ÀÇ ´ŞÆØÀÌ°üÀ» °­Å¸Çß´Ù. ");
+				printarray(false,false,false,CL_normal,3,"êµ‰ìŒì´ ",GetName()->name.c_str(),"ì˜ ë‹¬íŒ½ì´ê´€ì„ ê°•íƒ€í–ˆë‹¤. ");
 			}
 			break;
 		case ATT_CLOUD_FIRE:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"È­¿°¿¡ ÈÛ½Î¿´´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í™”ì—¼ì— íœ©ì‹¸ì˜€ë‹¤. ");
 			break;
 		case ATT_CLOUD_COLD:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¾ó¾îºÙ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì–¼ì–´ë¶™ì—ˆë‹¤. ");
 			break;		
 		case ATT_CLOUD_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"°¨ÀüµÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê°ì „ë˜ì—ˆë‹¤. ");
 			break;				
 		case ATT_STONE_TRAP:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"»ÏÁ·ÇÑ ¹ÙÀ§¸¦ ¹â¾Ò´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¾°ì¡±í•œ ë°”ìœ„ë¥¼ ë°Ÿì•˜ë‹¤. ");
 			break;			
 		case ATT_FIRE_BLAST:
 		case ATT_COLD_BLAST: 
@@ -1156,53 +1156,53 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_POISON_BLAST:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ÀÇ Æø¹ß¿¡ ÈÖ¸»·È´Ù. ");
+				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"ì˜ í­ë°œì— íœ˜ë§ë ¸ë‹¤. ");
 			}
 			break;
 		case ATT_SUN_BLAST:
 			if (a.order)
 			{
-				printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "¿¡ ÀÇÇØ Å¸µé¾î°¬´Ù. ");
+				printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "ì— ì˜í•´ íƒ€ë“¤ì–´ê°”ë‹¤. ");
 			}
 			break;
 		case ATT_COLD_PYSICAL_BLAST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´«º¸¶ó¿¡ ÈÖ¸»·È´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ëˆˆë³´ë¼ì— íœ˜ë§ë ¸ë‹¤. ");
 			break;			
 		case ATT_BURST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Æø¹ßÇß´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í­ë°œí–ˆë‹¤. ");
 			break;
 		case ATT_CLOUD_NORMAL:
 		case ATT_CLOUD_CURSE:
 			break;
 		case ATT_VEILING:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷ °©¿Ê¿¡ º£¿´´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°”ëŒ ê°‘ì˜·ì— ë² ì˜€ë‹¤. ");
 			break;
 		case ATT_RUSH:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¸Â¾Ò´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë§ì•˜ë‹¤. ");
 			break;
 		case ATT_WALL:			
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"ºÎµúÇû´Ù. ");
+				printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"ë¶€ë”ªí˜”ë‹¤. ");
 			}
 			else
 			{
-				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"º®¿¡ ºÎµúÇû´Ù. ");
+				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë²½ì— ë¶€ë”ªí˜”ë‹¤. ");
 			}
 			break;
 		case ATT_PSYCHO:
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹Ù´Ú¿¡ ³»ÆØ°ÜÃÄÁ³´Ù. ");
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë°”ë‹¥ì— ë‚´íŒ½ê²¨ì³ì¡Œë‹¤. ");
 			break;
 		case ATT_ELEC:
 		case ATT_ELEC_WEAK:
 			if (a.order)
-				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "ÀÇ ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "¿¡°Ô ¸íÁßÇÏ°í °¨ÀüµÇ¾ú´Ù. ");
+				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "ì˜ ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "ì—ê²Œ ëª…ì¤‘í•˜ê³  ê°ì „ë˜ì—ˆë‹¤. ");
 			break;
 		case ATT_THROW_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"°¨ÀüµÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê°ì „ë˜ì—ˆë‹¤. ");
 			break;
 		case ATT_DROWNING:
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹°¿¡ ºüÁ³´Ù. ");
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë¬¼ì— ë¹ ì¡Œë‹¤. ");
 			break;
 		case ATT_THROW_NONE_MASSAGE:
 			break;
@@ -1214,30 +1214,30 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		{
 			if(a.type == ATT_SLEEP && state.GetState() == MS_SLEEP)
 			{
-				printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "ÀÇ ²ŞÀ» ¸Ô¾ú´Ù. ");
+				printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "ì˜ ê¿ˆì„ ë¨¹ì—ˆë‹¤. ");
 				return;
 			}
 			switch(a.order->GetAttackType())
 			{	
 			case AWT_SHORTBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"µÚ¿¡¼­ ²ç¶Õ¾ú´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë’¤ì—ì„œ ê¿°ëš«ì—ˆë‹¤. ");
 				break;
 			case AWT_LONGBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"µÚ¿¡¼­ Àß¶ó³Â´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë’¤ì—ì„œ ì˜ë¼ëƒˆë‹¤. ");
 				break;
 			case AWT_MACE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"µÚ¿¡¼­ ³»¸®ÃÆ´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë’¤ì—ì„œ ë‚´ë¦¬ì³¤ë‹¤. ");
 				break;
 			case AWT_AXE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"µÚ¿¡¼­ Âï¾ú´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë’¤ì—ì„œ ì°ì—ˆë‹¤. ");
 				break;
 			case AWT_SPEAR:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),name.name.c_str(),name.name_to(true),"µÚ¿¡¼­ ²ç¶Õ¾ú´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),name.name.c_str(),name.name_to(true),"ë’¤ì—ì„œ ê¿°ëš«ì—ˆë‹¤. ");
 				break;
 			case AWT_UNARMOUR:
 			case AWT_NONE:
 			default:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"µÚ¿¡¼­ ±â½ÀÇß´Ù. ");
+				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë’¤ì—ì„œ ê¸°ìŠµí–ˆë‹¤. ");
 				break;
 			}
 		}
@@ -1277,7 +1277,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_THROW_ELEC:
 	case ATT_NORMAL_HIT:	
 	default:
-		printlog("±×·¯³ª ¾Æ¹«·± µ¥¹ÌÁöµµ ÁÖÁö ¸øÇß´Ù",true,false,false,CL_normal);
+		printlog("ê·¸ëŸ¬ë‚˜ ì•„ë¬´ëŸ° ë°ë¯¸ì§€ë„ ì£¼ì§€ ëª»í–ˆë‹¤",true,false,false,CL_normal);
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
@@ -1299,13 +1299,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 {
 	int back_stab = 0;
 	if(a.type < ATT_THROW_NORMAL)
-	{ //¹é½ºÅÇ·¹º§  3-¸Æ½ºµ¥¹ÌÁö 2-°£°£È÷ Å©¸®µ¥¹ÌÁö 1-¾ÆÁÖ µå¹® Å©¸®µ¥¹ÌÁö
+	{ //ë°±ìŠ¤íƒ­ë ˆë²¨  3-ë§¥ìŠ¤ë°ë¯¸ì§€ 2-ê°„ê°„íˆ í¬ë¦¬ë°ë¯¸ì§€ 1-ì•„ì£¼ ë“œë¬¸ í¬ë¦¬ë°ë¯¸ì§€
 		if(state.GetState() == MS_SLEEP || state.GetState() == MS_REST)
 			back_stab = 3;
 		else if(s_confuse || s_fear || s_paralyse)
 			back_stab = 2;
 		else if(a.order && !(a.order)->isView(this))
-		{ //Åõ¸íÀÏ¶§ Á¶°Ç
+		{ //íˆ¬ëª…ì¼ë•Œ ì¡°ê±´
 			back_stab = 2;
 		}		
 		else if(s_lunatic)
@@ -1323,11 +1323,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 	}
 	if(back_stab<=1 && GetMindReading() && a.order == &you)
-		back_stab = 2; //°£ÆÄ½Ã ¾Ï½À°¡´É
+		back_stab = 2; //ê°„íŒŒì‹œ ì•”ìŠµê°€ëŠ¥
 	if(back_stab == 2 && randA(3))
-		back_stab = 0; //75%ÀÇ È®·ü·Î 2·¹º§ ¾Ï½ÀÀº ½ÇÆĞ
+		back_stab = 0; //75%ì˜ í™•ë¥ ë¡œ 2ë ˆë²¨ ì•”ìŠµì€ ì‹¤íŒ¨
 	if(back_stab == 1 && randA(9))
-		back_stab = 0; //90% 1·¹º§ ¾Ï½ÀÀº ½ÇÆĞ
+		back_stab = 0; //90% 1ë ˆë²¨ ì•”ìŠµì€ ì‹¤íŒ¨
 
 	bool player_joon_punch_ = false;
 
@@ -1335,13 +1335,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		&& you.god_value[GT_JOON_AND_SION][0] == 1 && pietyLevel(you.piety) >= 2 &&
 		you.power >= 10 )
 	{
-		//±ÙÁ¢¸¸ ÀÌ¾ú´Âµ¥ ¼öÁ¤ÇÔ
+		//ê·¼ì ‘ë§Œ ì´ì—ˆëŠ”ë° ìˆ˜ì •í•¨
 		player_joon_punch_ = true;
 	}
 
 	if (player_joon_punch_)
 	{
-		//ÁÒ¿Â µ¥¹ÌÁö ºÎ½ºÆ® 1.3~1.9¹è (½Å¾Ó½Éºñ·Ê)
+		//ì£ ì˜¨ ë°ë¯¸ì§€ ë¶€ìŠ¤íŠ¸ 1.3~1.9ë°° (ì‹ ì•™ì‹¬ë¹„ë¡€)
 		float multi_= rand_float(1.3f, 1.3f + 0.1f*pietyLevel(you.piety));
 		a.damage *= multi_;
 		a.max_damage *= multi_;
@@ -1366,9 +1366,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 
 	if(s_glow)
-		accuracy_+=5; //ºû³¯°æ¿ì ¸íÁß Áõ°¡
+		accuracy_+=5; //ë¹›ë‚ ê²½ìš° ëª…ì¤‘ ì¦ê°€
 	if(GetMindReading() && a.order == &you)
-		accuracy_+=10; //°£ÆÄ´çÇß´Ù.
+		accuracy_+=10; //ê°„íŒŒë‹¹í–ˆë‹¤.
 	if(a.order)
 	{
 		if(a.order->isplayer() && !isView())
@@ -1395,7 +1395,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(damage_>0)
 		{
 			char temp[100];
-			sprintf_s(temp,100,"½Çµ¥¹ÌÁö-%d °ø°İ-%d ¾Ï½À-%d ¸íÁß-%d ¸íÁß·ü-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
+			sprintf_s(temp,100,"ì‹¤ë°ë¯¸ì§€-%d ê³µê²©-%d ì•”ìŠµ-%d ëª…ì¤‘-%d ëª…ì¤‘ë¥ -%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
 			printlog(temp,true,false,false,CL_help);
 		}
 	}
@@ -1415,7 +1415,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					if(sight_ || only_invisible_)
 					{
 						char temp[128];
-						sprintf_s(temp,128,"%s%s %s%s °¨½Õ´Ù!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
+						sprintf_s(temp,128,"%s%s %s%s ê°ìŒŒë‹¤!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
 						printlog(temp,true,false,false,CL_magic);
 					}
 					PositionSwap(&(*it));
@@ -1426,17 +1426,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		
 		if(back_stab != 3 && isHaveSpell(SPL_MAMIZO_EVADE) && randA(4) == 0)
-		{ //20%ÀÇ È®·ü·Î °ø°İÀ» ¹«È¿ÇÏ°í ºí¸µÅ©			
+		{ //20%ì˜ í™•ë¥ ë¡œ ê³µê²©ì„ ë¬´íš¨í•˜ê³  ë¸”ë§í¬			
 			if(sight_ || only_invisible_)
 			{
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),name.name_is(true),"ÁöÀåÀ¸·Î º¯È­ÇÏ¿© °ø°İÀ» ÇÇÇß´Ù!");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),name.name_is(true),"ì§€ì¥ìœ¼ë¡œ ë³€í™”í•˜ì—¬ ê³µê²©ì„ í”¼í–ˆë‹¤!");
 			}
 			Blink(10);
 			return false;
 		}
 		if (env[current_level].isSanctuary(position))
 		{
-			//¼º¿ª¿¡¼± ¸ğµç µ¥¹ÌÁö°¡ 0
+			//ì„±ì—­ì—ì„  ëª¨ë“  ë°ë¯¸ì§€ê°€ 0
 			damage_ = 0;
 		}
 
@@ -1470,7 +1470,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				{
 					a.order->HpUpDown(damage_/3,DR_EFFECT);	
 					if(sight_ || only_invisible_)
-						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true), GetName()->name.c_str(),"ÀÇ Ã¼·ÂÀ» Èí¼öÇß´Ù.");
+						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true), GetName()->name.c_str(),"ì˜ ì²´ë ¥ì„ í¡ìˆ˜í–ˆë‹¤.");
 			
 				}
 			}
@@ -1507,7 +1507,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("º£ÀÏ¸µ",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("ë² ì¼ë§",true)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1537,16 +1537,16 @@ bool monster::damage(attack_infor &a, bool perfect_)
 						}
 
 						if (id == MON_REIMU) {
-							printarray(true, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "Æ´»õ¼ÓÀ¸·Î »ç¶óÁ³´Ù.");
+							printarray(true, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "í‹ˆìƒˆì†ìœ¼ë¡œ ì‚¬ë¼ì¡Œë‹¤.");
 						}
 						else {
-							printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "ÆÄ±«µÇ¾ú´Ù. " : "Á×¾ú´Ù. ");
+							printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "íŒŒê´´ë˜ì—ˆë‹¤. " : "ì£½ì—ˆë‹¤. ");
 						}
 
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
-						printlog("°æÇèÀÌ Áõ°¡ÇÏ´Â °ÍÀ» ´À²¼´Ù.",true,false,false,CL_normal);
+						printlog("ê²½í—˜ì´ ì¦ê°€í•˜ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",true,false,false,CL_normal);
 						if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 							auto_pick_onoff(true);
 					}
@@ -1558,7 +1558,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			
 
 			if(id == MON_SEIGA && randA(3) )
-			{ //¼¼ÀÌ°¡´Â °ø°İÀ» ´çÇÏ¸é ¼ûÀ» ¼ö ÀÖ´Â º®¿¡ ¼û´Â´Ù.
+			{ //ì„¸ì´ê°€ëŠ” ê³µê²©ì„ ë‹¹í•˜ë©´ ìˆ¨ì„ ìˆ˜ ìˆëŠ” ë²½ì— ìˆ¨ëŠ”ë‹¤.
 				rand_rect_iterator rect_(position,1,1);
 				while(!rect_.end())
 				{
@@ -1579,7 +1579,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			if(sight_ || only_invisible_)
 				print_no_damage_message(a);
 		}
-		//µ¶Àº µ¥¹ÌÁö¸¦ ÁÖÁö¾Ê¾Æµµ µé¾î°¡¾ßÇÔ
+		//ë…ì€ ë°ë¯¸ì§€ë¥¼ ì£¼ì§€ì•Šì•„ë„ ë“¤ì–´ê°€ì•¼í•¨
 		if(a.type == ATT_S_POISON && randA(1))
 		{
 			SetPoison(15+randA(10), 50, false);
@@ -1637,14 +1637,14 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(!confuse_resist)
 				{
-					printarray(false,false,false,CL_normal,3,"´ç½ÅÀÇ °ø°İÀÌ ",GetName()->name.c_str(),"ÀÇ Çã¸¦ Âñ·¶´Ù! ");
+					printarray(false,false,false,CL_normal,3,"ë‹¹ì‹ ì˜ ê³µê²©ì´ ",GetName()->name.c_str(),"ì˜ í—ˆë¥¼ ì°”ë €ë‹¤! ");
 					SetConfuse(rand_int(2,4));
 				}
 			}
 
 		}
 
-		//ÀáÀÚ´Â°Ç °ø°İ´çÇÑ ÈÄ¿¡ Àû¿ëµÊ
+		//ì ìëŠ”ê±´ ê³µê²©ë‹¹í•œ í›„ì— ì ìš©ë¨
 		if (a.type == ATT_SLEEP) {
 			SetSleep(rand_int(10, 25));
 		}
@@ -1658,9 +1658,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.order && (sight_ || only_invisible_))
 		{			
 			if(!graze_)
-				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ºø³ª°¬´Ù.");
+				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ë¹—ë‚˜ê°”ë‹¤.");
 			else
-				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"ÀÇ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"±×·¹ÀÌÁîµÇ¾ú´Ù.");
+				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"ì˜ ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"ê·¸ë ˆì´ì¦ˆë˜ì—ˆë‹¤.");
 		}
 		return false;
 	}
@@ -1717,25 +1717,25 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 		return false;
 
 	if(state.GetState() == MS_ATACK)
-	{//°ø°İ»óÅÂÀÌ¸é¼­
+	{//ê³µê²©ìƒíƒœì´ë©´ì„œ
 		if(target)
-		{//Å¸°ÙÀÌ Á¤ÇØÁ®ÀÖ°í
+		{//íƒ€ê²Ÿì´ ì •í•´ì ¸ìˆê³ 
 			if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))<=1)
-			{//Å¸°Ù°ú °Å¸®°¡ 1Ä­¹Ì¸¸ÀÏ¶§
+			{//íƒ€ê²Ÿê³¼ ê±°ë¦¬ê°€ 1ì¹¸ë¯¸ë§Œì¼ë•Œ
 				rand_rect_iterator new_pos_(target->position,1,1,true);
 
 				while(!new_pos_.end())
 				{
 					if(max(abs(position.x - new_pos_->x),abs(position.y -  new_pos_->y))<=1)
-					{//¿òÁ÷ÀÏ¼öÀÖ´Â À§Ä¡
+					{//ì›€ì§ì¼ìˆ˜ìˆëŠ” ìœ„ì¹˜
 						if(env[current_level].isMove(new_pos_->x, new_pos_->y, isFly(), isSwim(),flag & M_FLAG_CANT_GROUND))
-						{ //ÀÌµ¿ÇÒ¼öÀÖ´Â À§Ä¡´Ù.				
+						{ //ì´ë™í• ìˆ˜ìˆëŠ” ìœ„ì¹˜ë‹¤.				
 							unit *unit_ = env[current_level].isMonsterPos(new_pos_->x, new_pos_->y);
 							if(unit_)
-							{//ºñÅ³ ¼ö ÀÖ´Â À¯´ÖÀÎÁö
+							{//ë¹„í‚¬ ìˆ˜ ìˆëŠ” ìœ ë‹›ì¸ì§€
 								if(unit_ != this && !unit_->isplayer() && ((monster*)unit_)->isAllyMonster(this))
 								{
-									if(!((monster*)unit_)->smartmove(x_mov,y_mov, num_-1)){ //ºñÅ°Áö ¸øÇÔ
+									if(!((monster*)unit_)->smartmove(x_mov,y_mov, num_-1)){ //ë¹„í‚¤ì§€ ëª»í•¨
 										
 										new_pos_++;
 										continue;
@@ -1748,7 +1748,7 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 								}
 							}
 
-							//¿òÁ÷ÀÏ ¼ö ÀÖÀ¸¸é ¿òÁ÷ÀÎ´Ù.
+							//ì›€ì§ì¼ ìˆ˜ ìˆìœ¼ë©´ ì›€ì§ì¸ë‹¤.
 							SetXY(coord_def(new_pos_->x,new_pos_->y));
 							PlusTimeDelay(-GetSpeed());
 							return true;
@@ -1825,7 +1825,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
-				if(((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH)) //ÀûÀÏ¶§
+				if(((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH)) //ì ì¼ë•Œ
 				{
 					if(only_move)
 						return 0;
@@ -1854,8 +1854,8 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				{
 					if (distan_coord(position, target_pos) > 16)
 					{
-						//½º¹Ì·¹ÄÚ Æ¯º° ±â¼ú
-						//½º¹Ì·¹ÄÚ´Â »ó´ë¿Í °Å¸®°¡ ¸Ö¾îÁö¸é ÀÚ½ÅÀÌ ¼ÒÈ¯ÇÑ ¾²·¹±â´õ¹Ì¿Í ÀÚ¸® ±³È¯ÀÌ °¡´ÉÇÏ´Ù.
+						//ìŠ¤ë¯¸ë ˆì½” íŠ¹ë³„ ê¸°ìˆ 
+						//ìŠ¤ë¯¸ë ˆì½”ëŠ” ìƒëŒ€ì™€ ê±°ë¦¬ê°€ ë©€ì–´ì§€ë©´ ìì‹ ì´ ì†Œí™˜í•œ ì“°ë ˆê¸°ë”ë¯¸ì™€ ìë¦¬ êµí™˜ì´ ê°€ëŠ¥í•˜ë‹¤.
 						if (it->sm_info.parent_map_id == map_id &&
 							it->sm_info.summon_id == GetSummonKind(SPL_SUMMON_TRASH))
 						{
@@ -1936,11 +1936,11 @@ bool monster::OpenDoor(const coord_def &c)
 			{
 				if(env[current_level].isInSight(position))
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹®À» ¿­¾ú´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¬¸ì„ ì—´ì—ˆë‹¤.");
 				}
 				else
 				{
-					printlog("¹®ÀÌ ¿­·È´Ù.",true,false,false,CL_normal);
+					printlog("ë¬¸ì´ ì—´ë ¸ë‹¤.",true,false,false,CL_normal);
 				}
 				you.resetLOS();
 			}
@@ -1975,7 +1975,7 @@ int monster::longmove()
 		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<8;i++)
 		{
-			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND)) //³ª´Â ¸÷Àº 2¹øÂ°ÀÎÀÚ
+			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND)) //ë‚˜ëŠ” ëª¹ì€ 2ë²ˆì§¸ì¸ì
 			{
 				direction = dq[i];
 			}
@@ -2048,7 +2048,7 @@ int monster::atkmove(int is_sight, bool only_move)
 						}
 						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
 						{
-							Noise(position,SpellNoise(id_),this); //½ºÆçÀ» »ç¿ëÇÑÈÄ ´Ù¸¥ ¸ó½ºÅÍ·Î µĞ°©ÇÒ ¼ö ÀÖ¾î. itÀ» »ç¿ëÇÏ¸é ¾ÈµÊ
+							Noise(position,SpellNoise(id_),this); //ìŠ¤í ì„ ì‚¬ìš©í•œí›„ ë‹¤ë¥¸ ëª¬ìŠ¤í„°ë¡œ ë‘”ê°‘í•  ìˆ˜ ìˆì–´. itì„ ì‚¬ìš©í•˜ë©´ ì•ˆë¨
 							return true;
 						}
 					}
@@ -2117,7 +2117,7 @@ int monster::atkmove(int is_sight, bool only_move)
 		{
 			target_pos = target_pos+c;
 			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
-			{ //º®¿¡ ¸·È÷¸é 8¹æÇâ ·£´ıÀ¸·Î ¹æÇâÆ´
+			{ //ë²½ì— ë§‰íˆë©´ 8ë°©í–¥ ëœë¤ìœ¼ë¡œ ë°©í–¥í‹ˆ
 				deque<int> dq;
 				for(int i=0;i<8;i++)
 					dq.push_back(i);
@@ -2202,7 +2202,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	}
 	if(s_catch)	
 		you.SetCatch(NULL);
-	if(s_changed) //Á×À¸¸é ³Ê±¸¸®·Î µ¹¾Æ¿È
+	if(s_changed) //ì£½ìœ¼ë©´ ë„ˆêµ¬ë¦¬ë¡œ ëŒì•„ì˜´
 	{
 		ChangeMonster(MON_RACCON,0);
 	}
@@ -2225,15 +2225,15 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			}
 
 			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), 
-				id == MON_REIMU ? "Æ´»õ¼ÓÀ¸·Î »ç¶óÁ³´Ù." : (flag & M_FLAG_INANIMATE ?"ÆÄ±«µÇ¾ú´Ù. ":"Á×¾ú´Ù. "));
+				id == MON_REIMU ? "í‹ˆìƒˆì†ìœ¼ë¡œ ì‚¬ë¼ì¡Œë‹¤." : (flag & M_FLAG_INANIMATE ?"íŒŒê´´ë˜ì—ˆë‹¤. ":"ì£½ì—ˆë‹¤. "));
 
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
-				printlog("ÀüÀÇ»ó½ÇÇÑ Àû¿¡°Õ °æÇèÄ¡¸¦ ¹ŞÀ» ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+				printlog("ì „ì˜ìƒì‹¤í•œ ì ì—ê² ê²½í—˜ì¹˜ë¥¼ ë°›ì„ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 			}
 		}
 		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear != -1)
 		{
-			printlog("°æÇèÀÌ Áõ°¡ÇÏ´Â °ÍÀ» ´À²¼´Ù. ",true,false,false,CL_normal);
+			printlog("ê²½í—˜ì´ ì¦ê°€í•˜ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤. ",true,false,false,CL_normal);
 			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 				auto_pick_onoff(true);
 		}
@@ -2255,7 +2255,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			if(you.god_value[GT_YUYUKO][0] == map_id && you.god_value[GT_YUYUKO][1] == current_level)
 			{
 				char temp[200];
-				sprintf_s(temp,200,"%s%sÁ×¾ú´Ù.",name.name.c_str(),name.name_do(true));
+				sprintf_s(temp,200,"%s%sì£½ì—ˆë‹¤.",name.name.c_str(),name.name_do(true));
 				AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
 				you.god_value[GT_YUYUKO][0] = 0;
 				you.god_value[GT_YUYUKO][1] = 0;
@@ -2266,7 +2266,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				sprintf_s(temp,200,"you god_value(%d, %d) mon value(%d, %d)",
 					you.god_value[GT_YUYUKO][0] ,you.god_value[GT_YUYUKO][1],
 					map_id, current_level);
-				printarray(true,false,false,CL_danger,3,"¡Ø¿µÈ¥±¸¼Ó ¹ö±× : ",GetName()->name.c_str(), temp);
+				printarray(true,false,false,CL_danger,3,"â€»ì˜í˜¼êµ¬ì† ë²„ê·¸ : ",GetName()->name.c_str(), temp);
 			}
 		}
 	}
@@ -2280,11 +2280,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			{				
 				if(it->isYourShight())
 				{
-					printarray(true,false,false,CL_small_danger,3,it->name.name.c_str(),it->name.name_is(true),"ºĞ³ë¿¡ ¼Ò¸®ÃÆ´Ù. ÀÚ½ÅÀÇ ´É·Â¿¡ °¢¼ºÇÏ¿´´Ù!");
+					printarray(true,false,false,CL_small_danger,3,it->name.name.c_str(),it->name.name_is(true),"ë¶„ë…¸ì— ì†Œë¦¬ì³¤ë‹¤. ìì‹ ì˜ ëŠ¥ë ¥ì— ê°ì„±í•˜ì˜€ë‹¤!");
 				}
 				else
 				{
-					printarray(true,false,false,CL_small_danger,1,"¸Ö¸®¼­ ºĞ³ë¿¡ Âù ºñ¸íÀ» µé¾ú´Ù.");
+					printarray(true,false,false,CL_small_danger,1,"ë©€ë¦¬ì„œ ë¶„ë…¸ì— ì°¬ ë¹„ëª…ì„ ë“¤ì—ˆë‹¤.");
 				}
 				it->LevelUpdown(5,5.0f,0.0f);
 
@@ -2310,7 +2310,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			if(you.lilly_allys[i].map_id == map_id && you.lilly_allys[i].floor == current_level)
 			{
 				you.god_value[GT_LILLY][i] = 2;
-				you.lilly_allys[i].cooldown = rand_int(2,4); //ºÎÈ°ÁØºñ
+				you.lilly_allys[i].cooldown = rand_int(2,4); //ë¶€í™œì¤€ë¹„
 			}
 		}
 	}
@@ -2319,13 +2319,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
 	{
-		if (reason_ == PRT_PLAYER && s_fear != -1) //ÇÃ·¹ÀÌ¾î°¡ Á×¿´´Ù.
+		if (reason_ == PRT_PLAYER && s_fear != -1) //í”Œë ˆì´ì–´ê°€ ì£½ì˜€ë‹¤.
 		{
 			you.GetExp(exper);
 		}
-		else if (reason_ == PRT_ALLY && s_fear != -1) //µ¿¸ÍÀÌ Á×¿´´Ù.
+		else if (reason_ == PRT_ALLY && s_fear != -1) //ë™ë§¹ì´ ì£½ì˜€ë‹¤.
 		{
-			you.GetExp(exper/*(exper+1)/2*/); //´õÀÌ»ó µ¿¸ÍÀ¸·Î °æÇèÄ¡ Àı¹İÀº µÇÁö¾Ê´Â´Ù.
+			you.GetExp(exper/*(exper+1)/2*/); //ë”ì´ìƒ ë™ë§¹ìœ¼ë¡œ ê²½í—˜ì¹˜ ì ˆë°˜ì€ ë˜ì§€ì•ŠëŠ”ë‹¤.
 		}
 		if(!randA(1+you.GetPunish(GT_SHINKI)?1:0) && !isArena())
 		{
@@ -2368,13 +2368,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
 			char temp[200];
-			sprintf_s(temp,200,"³×ÀÓµå %s%s Á×¿´´Ù.",name.name.c_str(),name.name_to());
+			sprintf_s(temp,200,"ë„¤ì„ë“œ %s%s ì£½ì˜€ë‹¤.",name.name.c_str(),name.name_to());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 		}
 		else
 		{
 			char temp[200];
-			sprintf_s(temp,200,"³×ÀÓµå %s%s Á×¾ú´Ù.",name.name.c_str(),name.name_is());
+			sprintf_s(temp,200,"ë„¤ì„ë“œ %s%s ì£½ì—ˆë‹¤.",name.name.c_str(),name.name_is());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 
 		}
@@ -2390,7 +2390,7 @@ int monster::action(int delay_)
 	{
 		if(first_contact)
 			FirstContact();
-		is_sight = true; //ÇöÀç ´«¿¡ º¸ÀÌ´ÂÁö
+		is_sight = true; //í˜„ì¬ ëˆˆì— ë³´ì´ëŠ”ì§€
 	}
 	else
 	{
@@ -2405,7 +2405,7 @@ int monster::action(int delay_)
 
 
 
-	time_delay+=delay_ * rand_int(9,11) / 10; //¿òÁ÷ÀÓ randomizing
+	time_delay+=delay_ * rand_int(9,11) / 10; //ì›€ì§ì„ randomizing
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 	if(flag & M_FLAG_SUMMON && summon_time>=0)
@@ -2416,12 +2416,12 @@ int monster::action(int delay_)
 			if (id == MON_CLOSE_DOOR) {
 				env[current_level].changeTile(position, DG_CLOSE_DOOR);
 				if (is_sight)
-					printarray(true, false, false, CL_okina, 3, GetName()->name.c_str(), GetName()->name_is(true), "Æò¹üÇÑ ¹®À¸·Î µ¹¾Æ¿Ô´Ù.");
+					printarray(true, false, false, CL_okina, 3, GetName()->name.c_str(), GetName()->name_is(true), "í‰ë²”í•œ ë¬¸ìœ¼ë¡œ ëŒì•„ì™”ë‹¤.");
 			}
 			else {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 				if (is_sight && id != MON_TRASH) {
-					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "¿¬±â ¼ÓÀ¸·Î »ç¶óÁ³´Ù.");
+					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "ì—°ê¸° ì†ìœ¼ë¡œ ì‚¬ë¼ì¡Œë‹¤.");
 					soundmanager.playSound("kill_banashed");
 				}
 			}
@@ -2439,7 +2439,7 @@ int monster::action(int delay_)
 				hp -= randA_1(3)*poison_damage(s_poison);
 				if(hp<=0)
 				{
-					dead(poison_reason, true); //¾ÆÁ÷ ÇÃ·¹ÀÌ¾îÀÇ µ¶Àº ¾ø´Ù.
+					dead(poison_reason, true); //ì•„ì§ í”Œë ˆì´ì–´ì˜ ë…ì€ ì—†ë‹¤.
 					return 1;
 				}
 			}
@@ -2449,7 +2449,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_poison)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"µ¶¿¡¼­ È¸º¹µÇ¾ú´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë…ì—ì„œ íšŒë³µë˜ì—ˆë‹¤.");
 			}
 		}	
 
@@ -2459,7 +2459,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_might)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ÈûÀÌ °­ÇÏÁö ¾Ê´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ í˜ì´ ê°•í•˜ì§€ ì•Šë‹¤.");
 			}
 		}
 		if (s_clever)
@@ -2468,7 +2468,7 @@ int monster::action(int delay_)
 			if (is_sight && isView())
 			{
 				//if (!s_clever)
-				//	printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "´õ ÀÌ»ó ÀÌ °­ÇÏÁö ¾Ê´Ù.");
+				//	printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë” ì´ìƒ ì´ ê°•í•˜ì§€ ì•Šë‹¤.");
 			}
 		}
 		if(s_tele)
@@ -2486,7 +2486,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_haste)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ºü¸£Áö ¾Ê´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ë¹ ë¥´ì§€ ì•Šë‹¤.");
 			}
 		}
 
@@ -2497,7 +2497,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_confuse)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"È¥¶õ½º·¯¿òÀ» ¶³ÃÄ³Â´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í˜¼ë€ìŠ¤ëŸ¬ì›€ì„ ë–¨ì³ëƒˆë‹¤.");
 			}
 		}
 		if(s_slow)
@@ -2506,7 +2506,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_slow)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ´À¸®Áö ¾Ê´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ëŠë¦¬ì§€ ì•Šë‹¤.");
 			}
 		}
 		if(s_frozen)
@@ -2515,7 +2515,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_frozen)
-					printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ¾óÀ½ÀÌ ³ì¾Ò´Ù.");
+					printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ì–¼ìŒì´ ë…¹ì•˜ë‹¤.");
 			}
 		}	
 		if(s_ally>0)
@@ -2524,7 +2524,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_ally)
-						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õÀÌ»ó ¸Å·á»óÅÂ°¡ ¾Æ´Ï´Ù.");
+						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ì´ìƒ ë§¤ë£Œìƒíƒœê°€ ì•„ë‹ˆë‹¤.");
 			}
 		}	
 		
@@ -2538,7 +2538,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_elec)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹æÀüÀ» ¸ØÃè´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°©ì „ì„ ë©ˆì·„ë‹¤.");
 			}
 		}
 		if(s_paralyse)
@@ -2547,7 +2547,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_paralyse)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´Ù½Ã ¿òÁ÷ÀÏ ¼ö ÀÖ°Ô µÇ¾ú´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë‹¤ì‹œ ì›€ì§ì¼ ìˆ˜ ìˆê²Œ ë˜ì—ˆë‹¤.");
 			}
 		}
 		if(s_glow)
@@ -2558,7 +2558,7 @@ int monster::action(int delay_)
 				if (is_sight && isView())
 				{
 					if (!s_glow)
-						printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ºû³ª´Â °ÍÀ» ¸ØÃè´Ù.");
+						printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë¹›ë‚˜ëŠ” ê²ƒì„ ë©ˆì·„ë‹¤.");
 				}
 			}
 		}
@@ -2573,7 +2573,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_graze)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ±×·¹ÀÌÁî¸¦ ÇÏÁö ¾Ê´Â´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ê·¸ë ˆì´ì¦ˆë¥¼ í•˜ì§€ ì•ŠëŠ”ë‹¤.");
 			}
 		}
 		if(s_sick)
@@ -2582,7 +2582,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_sick)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ¾ÆÇÁÁö ¾Ê´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ì•„í”„ì§€ ì•Šë‹¤.");
 			}
 		}	
 		if(s_silence)
@@ -2601,7 +2601,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_silence)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"°¨½Î´Â Á¤ÀûÀÌ »ç¶óÁ³´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"ê°ì‹¸ëŠ” ì •ì ì´ ì‚¬ë¼ì¡Œë‹¤.");
 			}
 		}
 		if(s_veiling)
@@ -2610,7 +2610,7 @@ int monster::action(int delay_)
 			if(is_sight && isView())
 			{
 				if(!s_veiling)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"ÈÖ°¨´ø ¹Ù¶÷ÀÌ »ç¶óÁ³´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"íœ˜ê°ë˜ ë°”ëŒì´ ì‚¬ë¼ì¡Œë‹¤.");
 			}
 		}
 		if(s_invisible>0)
@@ -2622,10 +2622,10 @@ int monster::action(int delay_)
 				if(!s_invisible)
 				{
 					if(prev_view_)
-						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"Åõ¸íÀÌ Ç®·È´Ù.");
+						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"íˆ¬ëª…ì´ í’€ë ¸ë‹¤.");
 					else
 					{
-						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"Åõ¸íÀÌ Ç®¸®¸é¼­ ¸ğ½ÀÀ» µå·¯³Â´Ù.");
+						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"íˆ¬ëª…ì´ í’€ë¦¬ë©´ì„œ ëª¨ìŠµì„ ë“œëŸ¬ëƒˆë‹¤.");
 						if(you.auto_pickup==0)
 							auto_pick_onoff(true);
 					}
@@ -2639,7 +2639,7 @@ int monster::action(int delay_)
 			{
 				if(!s_mute)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó º¡¾î¸®°¡ ¾Æ´Ï´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ë²™ì–´ë¦¬ê°€ ì•„ë‹ˆë‹¤.");
 				}
 			}
 		}
@@ -2655,7 +2655,7 @@ int monster::action(int delay_)
 			{
 				if(!s_ghost)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ¿µÈ¥ÀÌ ºÙÀâÇôÀÖÁö¾Ê´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ì˜í˜¼ì´ ë¶™ì¡í˜€ìˆì§€ì•Šë‹¤.");
 				}
 			}
 		}
@@ -2669,7 +2669,7 @@ int monster::action(int delay_)
 			{
 				if(!s_lunatic)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ ÀÌ»ó ¹ÌÄ¡Áö ¾Ê¾Ò´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë” ì´ìƒ ë¯¸ì¹˜ì§€ ì•Šì•˜ë‹¤.");
 				}
 			}
 		}
@@ -2687,9 +2687,9 @@ int monster::action(int delay_)
 				if(!force_turn)
 				{
 					if(force_strong)
-						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ °­È­°¡ ³¡³µ´Ù. ");
+						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ê°•í™”ê°€ ëë‚¬ë‹¤. ");
 					else
-						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ¾àÈ­°¡ ³¡³µ´Ù. ");
+						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ì•½í™”ê°€ ëë‚¬ë‹¤. ");
 				}
 			}
 		}
@@ -2700,7 +2700,7 @@ int monster::action(int delay_)
 			{
 				if(is_sight && isView())
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"µĞ°©ÀÌ Ç®·Á¼­ ³Ê±¸¸®·Î µ¹¾Æ¿Ô´Ù.");
+					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë‘”ê°‘ì´ í’€ë ¤ì„œ ë„ˆêµ¬ë¦¬ë¡œ ëŒì•„ì™”ë‹¤.");
 				}
 				ChangeMonster(MON_RACCON,0);
 			}
@@ -2714,7 +2714,7 @@ int monster::action(int delay_)
 			{
 				if (is_sight && isView())
 				{
-					printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "´õ ÀÌ»ó ¹«ÀûÀÌ ¾Æ´Ï´Ù.");
+					printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë” ì´ìƒ ë¬´ì ì´ ì•„ë‹ˆë‹¤.");
 				}
 			}
 		}
@@ -2774,12 +2774,12 @@ int monster::action(int delay_)
 				}
 				break;
 			default:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"µ¿·á¸¦ ²ø¾î¸ğÀ¸°í ÀÖ´Ù.");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"ë™ë£Œë¥¼ ëŒì–´ëª¨ìœ¼ê³  ìˆë‹¤.");
 			}
 		}
 		else if(!s_paralyse)
 		{
-			if(target) //Åõ¸í¸÷À» »ó´ëÇÒ¶§
+			if(target) //íˆ¬ëª…ëª¹ì„ ìƒëŒ€í• ë•Œ
 			{	
 				if(!target->isView(this))
 				{
@@ -2842,7 +2842,7 @@ int monster::action(int delay_)
 				if (flag & M_FLAG_SHIELD || isUserAlly()) {
 					if (distan_coord(position, first_position) > 4 * 4)
 					{
-						//ÀÌ ¸÷Àº ÀÚ¸®¸¦ ÁöÅ°±â À§ÇØ ¿ø·¡ ÀÚ¸®·Î µ¹¾Æ°£´Ù.
+						//ì´ ëª¹ì€ ìë¦¬ë¥¼ ì§€í‚¤ê¸° ìœ„í•´ ì›ë˜ ìë¦¬ë¡œ ëŒì•„ê°„ë‹¤.
 						stack<coord_def> will_move_;
 						will_move.clear();
 						if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
@@ -2859,7 +2859,7 @@ int monster::action(int delay_)
 						}
 					}
 				}
-				if (randA(9)) //º¸ÅëÀº ÇÃ·¹ÀÌ¾î¸¸ Ã£´Â´Ù.(ºü¸¥ Ã³¸®¸¦ À§ÇØ)
+				if (randA(9)) //ë³´í†µì€ í”Œë ˆì´ì–´ë§Œ ì°¾ëŠ”ë‹¤.(ë¹ ë¥¸ ì²˜ë¦¬ë¥¼ ìœ„í•´)
 					sightcheck(is_sight);
 				else
 					CheckSightNewTarget();
@@ -2872,7 +2872,7 @@ int monster::action(int delay_)
 					break;
 				}
 				target = NULL;
-				if (is_sight && you_detect())//½Ã¾ß ¾È¿¡ ÀÖÀ»¶§ ½ºÅÚ½º Ã¼Å©
+				if (is_sight && you_detect())//ì‹œì•¼ ì•ˆì— ìˆì„ë•Œ ìŠ¤í…”ìŠ¤ ì²´í¬
 				{
 					FoundTarget(&you, FoundTime());
 					int percent_ = 1;
@@ -2899,18 +2899,18 @@ int monster::action(int delay_)
 					state.StateTransition(MSI_LOST);
 				}
 				else if (is_sight && you.isView(this) && !isUserAlly())
-				{ //ÀûÀÎµ¥ ½Ã¾ß ¾È¿¡ ÀÖÀ¸¸é¼­ ÇÃ·¹ÀÌ¾î°¡ º¸ÀÌ´Â »óÅÂ
+				{ //ì ì¸ë° ì‹œì•¼ ì•ˆì— ìˆìœ¼ë©´ì„œ í”Œë ˆì´ì–´ê°€ ë³´ì´ëŠ” ìƒíƒœ
 					if (!s_fear)
 						CheckSightNewTarget();
 					//FoundTarget(&you,FoundTime());
 					if (flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.GetPunish(GT_SHINKI) && pietyLevel(you.piety) >= 3)
 					{
-						//½ÅÅ°´Â ¼ÒÈ¯¼ö¸¦ ¹æÇØÇÑ´Ù.
+						//ì‹ í‚¤ëŠ” ì†Œí™˜ìˆ˜ë¥¼ ë°©í•´í•œë‹¤.
 						if (randA(1))
 							break;
 					}
 
-					if (flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000, (flag & M_FLAG_UNIQUE) ? 66 : 3)) {//¸ó½ºÅÍ ¸»ÇÏ±â
+					if (flag & M_FLAG_SPEAK && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position) && randB(1000, (flag & M_FLAG_UNIQUE) ? 66 : 3)) {//ëª¬ìŠ¤í„° ë§í•˜ê¸°
 
 						if (s_confuse || s_lunatic)
 						{
@@ -2926,7 +2926,7 @@ int monster::action(int delay_)
 
 				}
 				else if (!isUserAlly())
-				{//ÀûÀÎµ¥ ½Ã¾ß¾È¿¡ ¾ø°Å³ª ÇÃ·¹ÀÌ¾î°¡ º¸ÀÌÁö ¾Ê´Â »óÅÂ
+				{//ì ì¸ë° ì‹œì•¼ì•ˆì— ì—†ê±°ë‚˜ í”Œë ˆì´ì–´ê°€ ë³´ì´ì§€ ì•ŠëŠ” ìƒíƒœ
 					if (memory_time > 0)
 					{
 						if (!s_fear)
@@ -2938,7 +2938,7 @@ int monster::action(int delay_)
 						target = NULL;
 
 						if (flag & M_FLAG_SHIELD) {
-							//ÀÌ ¸÷Àº ÀÚ¸®¸¦ ÁöÅ°±â À§ÇØ ¿ø·¡ ÀÚ¸®·Î µ¹¾Æ°£´Ù.
+							//ì´ ëª¹ì€ ìë¦¬ë¥¼ ì§€í‚¤ê¸° ìœ„í•´ ì›ë˜ ìë¦¬ë¡œ ëŒì•„ê°„ë‹¤.
 							stack<coord_def> will_move_;
 							will_move.clear();
 							if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
@@ -2966,7 +2966,7 @@ int monster::action(int delay_)
 				{
 					atkmove(is_sight);
 					if (!is_sight && env[current_level].isInSight(position, true))
-					{ //ÇÃ·¹ÀÌ¾î¸¦ ¹ß°ßÇÏ°ÔµÈ´Ù.
+					{ //í”Œë ˆì´ì–´ë¥¼ ë°œê²¬í•˜ê²Œëœë‹¤.
 						if (target == &you)
 							FoundTarget(target, FoundTime());
 					}
@@ -3008,11 +3008,11 @@ int monster::action(int delay_)
 						coord_def c_ = will_move.back();
 						will_move.pop_back();
 						int success_ = MoveToPos(c_, false);
-						if (success_ != 2) //ÀÌµ¿½ÇÆĞ
+						if (success_ != 2) //ì´ë™ì‹¤íŒ¨
 						{
 							will_move.push_back(c_);
 						}
-						if (is_sight && !isUserAlly() && you_detect())//½Ã¾ß ¾È¿¡ ÀÖÀ»¶§ ½ºÅÚ½º Ã¼Å©
+						if (is_sight && !isUserAlly() && you_detect())//ì‹œì•¼ ì•ˆì— ìˆì„ë•Œ ìŠ¤í…”ìŠ¤ ì²´í¬
 						{
 							FoundTarget(&you, FoundTime());
 							int percent_ = 1;
@@ -3034,7 +3034,7 @@ int monster::action(int delay_)
 		special_action(is_sight, false);
 		time_delay-=GetSpeed();
 		if (!is_sight && s_fear == -1) {
-			//ÀüÀÇ»ó½ÇÇÑ ¸ó½ºÅÍ´Â ½Ã¾ß¹Û¿¡ ³ª°¡¸é »ç¶óÁü
+			//ì „ì˜ìƒì‹¤í•œ ëª¬ìŠ¤í„°ëŠ” ì‹œì•¼ë°–ì— ë‚˜ê°€ë©´ ì‚¬ë¼ì§
 			dead(PRT_NEUTRAL, false, true);
 		}
 
@@ -3063,13 +3063,13 @@ int monster::action(int delay_)
 	if (env[current_level].dgtile[position.x][position.y].tile == DG_SEA &&
 		!isFly() && !isSwim())
 	{
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹°¿¡ ºüÁ³´Ù. ");
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë¬¼ì— ë¹ ì¡Œë‹¤. ");
 		dead(PRT_PLAYER, true);
 	}
 	else if (env[current_level].dgtile[position.x][position.y].tile == DG_LAVA &&
 		!isFly())
 	{
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "¿ë¾Ï¿¡ ºüÁ³´Ù. ");
+		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "ìš©ì•”ì— ë¹ ì¡Œë‹¤. ");
 		dead(PRT_PLAYER, true);
 	}
 
@@ -3082,7 +3082,7 @@ void monster::sightcheck(bool is_sight_)
 {	
 	if(!isUserAlly() )
 	{
-		if(is_sight_ && you_detect())//½Ã¾ß ¾È¿¡ ÀÖÀ»¶§ ½ºÅÚ½º Ã¼Å©
+		if(is_sight_ && you_detect())//ì‹œì•¼ ì•ˆì— ìˆì„ë•Œ ìŠ¤í…”ìŠ¤ ì²´í¬
 		{
 			FoundTarget(&you, FoundTime());
 		}
@@ -3176,7 +3176,7 @@ void monster::special_action(int delay_, bool smoke_)
 		if (!smoke_){
 			if (hp <= max_hp / 2) {
 				if (env[current_level].isInSight(position))
-					printlog("Ã¼·ÂÀ» ÀÒÀº ÄÉÀÌ³×°¡ ¹éÅÃÀ¸·Î º¯È­ÇÏ¿´´Ù! ", true, false, false, CL_magic);
+					printlog("ì²´ë ¥ì„ ìƒì€ ì¼€ì´ë„¤ê°€ ë°±íƒìœ¼ë¡œ ë³€í™”í•˜ì˜€ë‹¤! ", true, false, false, CL_magic);
 				ChangeMonster(MON_KEINE2, 0);
 			}
 		}
@@ -3242,7 +3242,7 @@ void monster::special_action(int delay_, bool smoke_)
 	case MON_ELEC_BALL:
 	{
 		if (!smoke_) {
-			exper++; //ÀÓ½Ã º¯¼ö
+			exper++; //ì„ì‹œ ë³€ìˆ˜
 			if (exper == 3) {
 				skill_elec_ball_bomb(level * 5, this);
 				summon_time = 0;
@@ -3256,7 +3256,7 @@ void monster::special_action(int delay_, bool smoke_)
 	case MON_BOMB:
 	{
 		if (!smoke_) {
-			exper++; //ÀÓ½Ã º¯¼ö
+			exper++; //ì„ì‹œ ë³€ìˆ˜
 			if (exper == 3) {
 				env[current_level].MakeNoise(position, 20, NULL);
 				evoke_bomb(level * 5, false, this, position);
@@ -3292,9 +3292,9 @@ bool monster::SetPoison(int poison_, int max_, bool strong_)
 	if(isYourShight())
 	{
 		if(!s_poison)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"µ¶¿¡ °É·È´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë…ì— ê±¸ë ¸ë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ µ¶Àº ½ÉÇØÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ë…ì€ ì‹¬í•´ì¡Œë‹¤. ");
 	}
 
 	s_poison += poison_;
@@ -3352,11 +3352,11 @@ bool monster::SetTele(int tele_)
 	{
 		if(!s_tele)
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ÁÖº¯ °ø°£ÀÌ ºÒ¾ÈÁ¤ÇØÁ³´Ù. ");
+			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ì£¼ë³€ ê³µê°„ì´ ë¶ˆì•ˆì •í•´ì¡Œë‹¤. ");
 		}
 		else
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ ÁÖº¯ °ø°£Àº ¾ÈÁ¤À» µÇÃ£¾Ò´Ù. ");
+			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ì£¼ë³€ ê³µê°„ì€ ì•ˆì •ì„ ë˜ì°¾ì•˜ë‹¤. ");
 		}
 	}
 	if(!s_tele)
@@ -3374,10 +3374,10 @@ bool monster::SetMight(int might_)
 	{
 		if(!s_might)
 		{
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ÈûÀÌ °­ÇØÁ³´Ù. ");
+			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í˜ì´ ê°•í•´ì¡Œë‹¤. ");
 		}
 		else
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ÈûÀÌ ´õ¿í °­ÇØÁ³´Ù. ");
+			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í˜ì´ ë”ìš± ê°•í•´ì¡Œë‹¤. ");
 	}
 	s_might += might_;
 	if(s_might>100)
@@ -3404,9 +3404,9 @@ bool monster::SetHaste(int haste_)
 	if(isYourShight())
 	{
 		if(!s_haste)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"»¡¶óÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¹¨ë¼ì¡Œë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"»¡¶óÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¹¨ë¼ì¡Œë‹¤. ");
 	}
 	s_haste += haste_;
 	if(s_haste>100)
@@ -3423,9 +3423,9 @@ bool monster::SetConfuse(int confuse_, bool strong_)
 	if(isYourShight())
 	{
 		if(!s_confuse)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"È¥¶õ½º·¯¿öÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"í˜¼ë€ìŠ¤ëŸ¬ì›Œì¡Œë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ¿í È¥¶õ½º·¯¿öÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ìš± í˜¼ë€ìŠ¤ëŸ¬ì›Œì¡Œë‹¤. ");
 	}
 	s_confuse += confuse_;
 	if(s_confuse>50)
@@ -3439,9 +3439,9 @@ bool monster::SetSlow(int slow_)
 	if(isYourShight())
 	{
 		if(!s_slow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´À·ÁÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ëŠë ¤ì¡Œë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ¿í ´À·ÁÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ìš± ëŠë ¤ì¡Œë‹¤. ");
 	}
 	s_slow += slow_;
 	if(s_slow>100)
@@ -3459,9 +3459,9 @@ bool monster::SetFrozen(int frozen_)
 	if(isYourShight())
 	{
 		if(!s_frozen)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¾ó¾îºÙ¾î ¿òÁ÷ÀÓÀÌ µĞÇØÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì–¼ì–´ë¶™ì–´ ì›€ì§ì„ì´ ë‘”í•´ì¡Œë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ¿í ¾ó¾îºÙ¾î ¿òÁ÷ÀÓÀÌ µĞÇØÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ìš± ì–¼ì–´ë¶™ì–´ ì›€ì§ì„ì´ ë‘”í•´ì¡Œë‹¤. ");
 	}
 	s_frozen += frozen_;
 	if(s_frozen>25)
@@ -3476,9 +3476,9 @@ bool monster::SetCharm(int charm_)
 	if(isYourShight())
 	{
 		if(!s_ally)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¸Å·áµÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë§¤ë£Œë˜ì—ˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ¿í ¸Å·áµÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ìš± ë§¤ë£Œë˜ì—ˆë‹¤. ");
 	}
 	s_ally += charm_;
 	if(s_ally>200)
@@ -3493,9 +3493,9 @@ bool monster::SetElec(int elec_)
 	if(isYourShight())
 	{
 		if(!s_elec)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹æÀüµÇ°íÀÖ´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°©ì „ë˜ê³ ìˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹æÀüµÇ°íÀÖ´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°©ì „ë˜ê³ ìˆë‹¤. ");
 	}
 	s_elec += elec_;
 	if(s_elec>40)
@@ -3509,7 +3509,7 @@ bool monster::SetParalyse(int paralyse_)
 		
 	if(isYourShight())
 	{
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¸¶ºñµÇ¾ú´Ù. ");
+		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë§ˆë¹„ë˜ì—ˆë‹¤. ");
 	}
 	s_paralyse += paralyse_;
 	if(s_paralyse>100)
@@ -3527,9 +3527,9 @@ bool monster::SetGlow(int glow_, bool no_speak)
 	if(isYourShight() && !no_speak)
 	{
 		if(!s_glow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ºû³ª°íÀÖ´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¹›ë‚˜ê³ ìˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"´õ¿í ºû³ª°íÀÖ´Ù.");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë”ìš± ë¹›ë‚˜ê³ ìˆë‹¤.");
 	}
 	s_glow += glow_;
 	if(s_glow>100)
@@ -3543,9 +3543,9 @@ bool monster::SetGraze(int graze_)
 	if(isYourShight())
 	{
 		if(!s_graze)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"±×·¹ÀÌÁî¸¦ ÇÏ±â ½ÃÀÛÇß´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê·¸ë ˆì´ì¦ˆë¥¼ í•˜ê¸° ì‹œì‘í–ˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"±×·¹ÀÌÁî¸¦ ÇÏ±â ½ÃÀÛÇß´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê·¸ë ˆì´ì¦ˆë¥¼ í•˜ê¸° ì‹œì‘í–ˆë‹¤. ");
 	}
 	s_graze += graze_;
 	if(s_graze>100)
@@ -3559,7 +3559,7 @@ bool monster::SetSilence(int silence_, int silence_range_)
 	if(isYourShight())
 	{
 		if(!s_silence)
-			printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"ÁÖº¯ÀÇ ¼Ò¸®¸¦ Áö¿ü´Ù.");
+			printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"ì£¼ë³€ì˜ ì†Œë¦¬ë¥¼ ì§€ì› ë‹¤.");
 	}
 	if(s_silence)
 		env[current_level].MakeSilence(position, s_silence_range, false);
@@ -3577,9 +3577,9 @@ bool monster::SetSick(int sick_)
 	if(isYourShight())
 	{
 		if(!s_sick)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"º´¿¡ °É·È´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë³‘ì— ê±¸ë ¸ë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ º´Àº ½ÉÇØÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ë³‘ì€ ì‹¬í•´ì¡Œë‹¤. ");
 	}
 	s_sick += sick_;
 	if(s_sick>200)
@@ -3593,9 +3593,9 @@ bool monster::SetVeiling(int veiling_, int value_)
 	if(isYourShight())
 	{
 		if(!s_veiling)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹Ù¶÷À» °¨½Õ´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë°”ëŒì„ ê°ìŒŒë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"°¨½Î´Â ¹Ù¶÷ÀÌ °­ÇØÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"ê°ì‹¸ëŠ” ë°”ëŒì´ ê°•í•´ì¡Œë‹¤. ");
 	}
 	s_veiling += veiling_;
 	s_value_veiling = value_;
@@ -3622,13 +3622,13 @@ bool monster::SetInvisible(int invisible_)
 		if(isYourShight())
 		{
 			if(!prev_invisible_)
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"Åõ¸íÇÏ°Ô º¯ÇÑ´Ù. ");
+				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"íˆ¬ëª…í•˜ê²Œ ë³€í•œë‹¤. ");
 			else
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"´õ¿í Åõ¸íÇÏ°Ô º¯ÇÑ´Ù. ");
+				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"ë”ìš± íˆ¬ëª…í•˜ê²Œ ë³€í•œë‹¤. ");
 		}
 		else
 		{
-			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"Åõ¸íÇØÁö¸é¼­ »ç¶óÁ³´Ù. ");
+			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"íˆ¬ëª…í•´ì§€ë©´ì„œ ì‚¬ë¼ì¡Œë‹¤. ");
 			if(you.auto_pickup>0)
 				auto_pick_onoff(true);
 		}
@@ -3642,9 +3642,9 @@ bool monster::SetMute(int mute_)
 	if(isYourShight())
 	{
 		if(!s_mute)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"º¡¾î¸®°¡ µÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë²™ì–´ë¦¬ê°€ ë˜ì—ˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ Ä§¹¬ÀÌ ±æ¾îÁ³´Ù. ");
+			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ì¹¨ë¬µì´ ê¸¸ì–´ì¡Œë‹¤. ");
 	}
 	s_mute += mute_;
 	if(s_mute>100)
@@ -3657,29 +3657,29 @@ bool monster::SetGhost(int ghost_)
 		return false;
 	if(flag & M_FLAG_INANIMATE)
 	{		
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¹«»ı¹°ÀÌ±â¿¡ ¿µÈ¥ÀÌ ¾ø´Ù. ");	
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë¬´ìƒë¬¼ì´ê¸°ì— ì˜í˜¼ì´ ì—†ë‹¤. ");	
 		return false;
 	}
 	if (id == MON_REIMU)
 	{
-		printlog("³«¿øÀÇ ¸ÚÁø ¹«³à´Â ¸ğµç °ÍÀ¸·ÎºÎÅÍ ¼Ó¹ÚµÇÁö¾Ê´Â´Ù.", true, false, false, CL_normal);
+		printlog("ë‚™ì›ì˜ ë©‹ì§„ ë¬´ë…€ëŠ” ëª¨ë“  ê²ƒìœ¼ë¡œë¶€í„° ì†ë°•ë˜ì§€ì•ŠëŠ”ë‹¤.", true, false, false, CL_normal);
 		return false;
 	}
 
 	if (dream)
 	{
-		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "²ŞÀÇ ÁÖ¹ÎÀÌ±â¿¡ ¼Ó¹ÚÇÒ ¼ö ¾ø´Ù. ");
+		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ê¿ˆì˜ ì£¼ë¯¼ì´ê¸°ì— ì†ë°•í•  ìˆ˜ ì—†ë‹¤. ");
 		return false;
 	}
 
 	if(flag & M_FLAG_SUMMON)
 	{
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ÀÌ¹Ì Á¾¼ÓµÇ¾îÀÖ´Ù. ");	
+		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì´ë¯¸ ì¢…ì†ë˜ì–´ìˆë‹¤. ");	
 		return false;
 	}
 	if(isYourShight())
 	{
-		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"ÀÇ ¿µÈ¥ÀÌ ºÙÀâÇû´Ù. Áö¼Ó½Ã°£³»·Î ÀâÀ¸¸é ´ç½ÅÀÇ µ¿·á°¡ µÈ´Ù. ");
+		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"ì˜ ì˜í˜¼ì´ ë¶™ì¡í˜”ë‹¤. ì§€ì†ì‹œê°„ë‚´ë¡œ ì¡ìœ¼ë©´ ë‹¹ì‹ ì˜ ë™ë£Œê°€ ëœë‹¤. ");
 	}
 	s_ghost += ghost_;
 	if(s_ghost>100)
@@ -3706,7 +3706,7 @@ bool monster::SetFear(int fear_)
 		if (isYourShight())
 		{
 			if (!s_fear)
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "°øÆ÷¿¡ Áú·Á¼­ ÀüÀÇ¸¦ ¿ÏÀü »ó½ÇÇß´Ù. ");
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ê³µí¬ì— ì§ˆë ¤ì„œ ì „ì˜ë¥¼ ì™„ì „ ìƒì‹¤í–ˆë‹¤. ");
 	}
 
 		s_fear = fear_;
@@ -3716,7 +3716,7 @@ bool monster::SetFear(int fear_)
 		if (isYourShight())
 		{
 			if (!s_fear)
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "°øÆ÷¿¡ Áú·È´Ù. ");
+				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ê³µí¬ì— ì§ˆë ¸ë‹¤. ");
 		}
 	s_fear += fear_;
 		if (s_fear > 50)
@@ -3733,9 +3733,9 @@ bool monster::SetMindReading(int mind_)
 	{
 		if(!s_mind_reading){			
 			if(flag & M_FLAG_ANIMAL)
-				printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ÀÇ »ı°¢À» ¾Ë°ÔµÇ¾î Ä£ÇØÁ³´Ù. ");
+				printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"ì˜ ìƒê°ì„ ì•Œê²Œë˜ì–´ ì¹œí•´ì¡Œë‹¤. ");
 			else
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¸¶À½À» °£ÆÄ´çÇß´Ù. ");
+				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ë§ˆìŒì„ ê°„íŒŒë‹¹í–ˆë‹¤. ");
 		}
 	}
 	s_mind_reading = mind_;
@@ -3755,7 +3755,7 @@ bool monster::SetLunatic(int lunatic_)
 	if(isYourShight())
 	{
 		if(!s_lunatic)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"±¤±â¿¡ ÈÛ½Î¿´´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê´‘ê¸°ì— íœ©ì‹¸ì˜€ë‹¤. ");
 	}
 	s_lunatic = lunatic_;
 	if(s_lunatic>20)
@@ -3780,13 +3780,13 @@ bool monster::SetCommunication(int s_communication_)
 			switch(id)
 			{
 			case MON_MOON_RABIT_SUPPORT:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"µ¿·á¿¡ µµ¿òÀ» Ã»ÇÏ´Â ÀüÆÄ¸¦ º¸³»±â ½ÃÀÛÇß´Ù. ");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"ë™ë£Œì— ë„ì›€ì„ ì²­í•˜ëŠ” ì „íŒŒë¥¼ ë³´ë‚´ê¸° ì‹œì‘í–ˆë‹¤. ");
 				break;
 			case MON_HELL_HOUND:
-				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"ÀÇ ¼Ò¸®¿¡ ÀÌ²ø·Á ¶Ç ´Ù¸¥ Áö¿Á°³µéÀÌ ¸ô·Á¿À±â ½ÃÀÛÇÑ´Ù. ");
+				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"ì˜ ì†Œë¦¬ì— ì´ëŒë ¤ ë˜ ë‹¤ë¥¸ ì§€ì˜¥ê°œë“¤ì´ ëª°ë ¤ì˜¤ê¸° ì‹œì‘í•œë‹¤. ");
 				break;
 			default:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"µ¿·á¸¦ ²ø¾î¸ğÀ¸°í ÀÖ´Ù. ");
+				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"ë™ë£Œë¥¼ ëŒì–´ëª¨ìœ¼ê³  ìˆë‹¤. ");
 			}
 
 		}
@@ -3809,9 +3809,9 @@ bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 	if(isYourShight() && speak_)
 	{
 		if(!force_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"¾àÈ­µÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ì•½í™”ë˜ì—ˆë‹¤. ");
 		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"°­È­µÇ¾ú´Ù. ");
+			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê°•í™”ë˜ì—ˆë‹¤. ");
 	}
 
 	force_strong = force_;
@@ -3825,7 +3825,7 @@ bool monster::SetInvincibility(int s_invincibility_, bool speak_)
 		return false;
 	if (isYourShight() && speak_)
 	{
-		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "¹«Àû»óÅÂ°¡ µÇ¾ú´Ù. ");
+		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ë¬´ì ìƒíƒœê°€ ë˜ì—ˆë‹¤. ");
 	}
 	s_invincibility = s_invincibility_;
 	return true;
@@ -3840,7 +3840,7 @@ bool monster::SetSleep(int s_sleep_)
 	if (s_sleep_ >= randA_1(100)) {
 
 		if(isYourShight() && state.GetState() != MS_SLEEP)
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "Àá¿¡ ºüÁ³´Ù. ");
+			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "ì ì— ë¹ ì¡Œë‹¤. ");
 		state.SetState(MS_SLEEP);
 		return true;
 	}
@@ -3869,7 +3869,7 @@ bool monster::AttackedTarget(unit *order_)
 			}
 			memory_time= FoundTime();
 		}
-		if(state.GetState() == MS_SLEEP) //ÀÚ°íÀÖÀ»¶§ ±ú¾î³ª¸é¼­ ¿ÜÄ¥ ¼ö ÀÖÀ½
+		if(state.GetState() == MS_SLEEP) //ìê³ ìˆì„ë•Œ ê¹¨ì–´ë‚˜ë©´ì„œ ì™¸ì¹  ìˆ˜ ìˆìŒ
 		{			
 			int percent_ = 1;
 			if(you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA) )
@@ -3900,9 +3900,9 @@ bool monster::Blink(int time_)
 {
 	int x_ = position.x, temp_x_ = x_, prev_x=x_;
 	int y_ = position.y, temp_y_ = y_, prev_y=y_;
-	//xy_ : ÇöÀç ºí¸µÅ©¿¡ µµÂøÇÒ À§Ä¡(¿¹Á¤)  
-	//temp_xy_ : ºí¸µÅ©ÇÒ À§Ä¡¸¦ ¹Ì¸® Ã£¾Æ¼­ ÀÌµ¿°¡´ÉÇÑÁö È®ÀÎÇÑ´Ù.
-	//prev_xy_ : ºí¸µÅ© ÇÒ ¼ö ÀÖ´Â ¾ÈÀüÇÑ À§Ä¡ ÀúÀå(¸¸¾à xy_°¡ ³¡±îÁö ¾ÈÀüÇÑ À§Ä¡¸¦ ¸øÃ£À» °æ¿ì)
+	//xy_ : í˜„ì¬ ë¸”ë§í¬ì— ë„ì°©í•  ìœ„ì¹˜(ì˜ˆì •)  
+	//temp_xy_ : ë¸”ë§í¬í•  ìœ„ì¹˜ë¥¼ ë¯¸ë¦¬ ì°¾ì•„ì„œ ì´ë™ê°€ëŠ¥í•œì§€ í™•ì¸í•œë‹¤.
+	//prev_xy_ : ë¸”ë§í¬ í•  ìˆ˜ ìˆëŠ” ì•ˆì „í•œ ìœ„ì¹˜ ì €ì¥(ë§Œì•½ xy_ê°€ ëê¹Œì§€ ì•ˆì „í•œ ìœ„ì¹˜ë¥¼ ëª»ì°¾ì„ ê²½ìš°)
 	for(int i=0;i<time_+10;i++)
 	{
 		temp_x_=x_+rand_int(-1,1);
@@ -3942,9 +3942,9 @@ bool monster::Teleport()
 			SetXY(x_, y_);
 			bool curr_sight_ = isYourShight();
 			if(prev_sight_ && !curr_sight_)
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"°ø°£ÀÌµ¿À» ÅëÇØ ½Ã¾ß¿¡¼­ »ç¶óÁ³´Ù. ");
+				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"ê³µê°„ì´ë™ì„ í†µí•´ ì‹œì•¼ì—ì„œ ì‚¬ë¼ì¡Œë‹¤. ");
 			else if(!prev_sight_ && curr_sight_)
-				printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_do(true),"°©ÀÚ±â ³ªÅ¸³µ´Ù. ");
+				printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_do(true),"ê°‘ìê¸° ë‚˜íƒ€ë‚¬ë‹¤. ");
 
 			return true;
 		}
@@ -3971,7 +3971,7 @@ bool monster::you_detect()
 	if(isArena())
 		return false;
 	if (you.god == GT_OKINA) {
-		//¿ÀÅ°³ª¶ó¸é ¹®À¸·Î Åõ°úÇÒ¶© º¸ÀÌÁö ¾Ê¾Æ¾ß ÇÔ
+		//ì˜¤í‚¤ë‚˜ë¼ë©´ ë¬¸ìœ¼ë¡œ íˆ¬ê³¼í• ë• ë³´ì´ì§€ ì•Šì•„ì•¼ í•¨
 		if (isMonsterSight(you.position, true) == false)
 			return false;
 	}
@@ -4013,14 +4013,14 @@ bool monster::isPassedBullet(unit* order)
 {
 	
 	if(!order)
-	{ //ÀÌ°ÍÀº Áß¸³ÅºÈ¯ÀÌ´Ù.
+	{ //ì´ê²ƒì€ ì¤‘ë¦½íƒ„í™˜ì´ë‹¤.
 		if(flag & M_FLAG_PASSED_ENEMY)
 			return true;
 		else 
 			return false;
 	}
 	else if(order == &you)
-	{ //ÀÌ°ÍÀÌ ÇÃ·¹ÀÌ¾îÀÇ ÅºÈ¯ÀÏ¶§
+	{ //ì´ê²ƒì´ í”Œë ˆì´ì–´ì˜ íƒ„í™˜ì¼ë•Œ
 		if(isUserAlly() && flag & M_FLAG_PASSED_ALLY)
 			return true;
 		else if(isUserAlly() && flag & M_FLAG_PASSED_ENEMY)
@@ -4031,7 +4031,7 @@ bool monster::isPassedBullet(unit* order)
 			return false;
 	}
 	else
-	{ //ÀÌ°ÍÀÌ ¸ó½ºÅÍÀÇ ÅºÈ¯ÀÏ¶§
+	{ //ì´ê²ƒì´ ëª¬ìŠ¤í„°ì˜ íƒ„í™˜ì¼ë•Œ
 		if(flag & M_FLAG_PASSED_ENEMY  && isEnemyMonster((monster*)order))
 			return true;
 		else if(flag & M_FLAG_PASSED_ALLY  && isAllyMonster((monster*)order))
@@ -4073,7 +4073,7 @@ bool monster::isSightnonblocked(coord_def c)
 						
 			coord_def check_pos_ = (*it);
 
-			if(length_ == 0) //½Ã¾ß°¡ ´Ù ´Ş¾Ò´Ù.
+			if(length_ == 0) //ì‹œì•¼ê°€ ë‹¤ ë‹¬ì•˜ë‹¤.
 			{
 				intercept = true;
 				break;
@@ -4090,7 +4090,7 @@ bool monster::isSightnonblocked(coord_def c)
 			break;
 		else if(i == RT_END - 1)
 		{
-			return false; //°ø°İºÒ°¡´ÉÇÑ À§Ä¡
+			return false; //ê³µê²©ë¶ˆê°€ëŠ¥í•œ ìœ„ì¹˜
 		}
 		else
 			intercept = false;
@@ -4108,7 +4108,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 		while(!intercept && !it.end())
 		{
 			coord_def check_pos_ = (*it);
-			if(length_ == 0) //½Ã¾ß°¡ ´Ù ´Ş¾Ò´Ù.
+			if(length_ == 0) //ì‹œì•¼ê°€ ë‹¤ ë‹¬ì•˜ë‹¤.
 			{
 				intercept = true;
 				break;
@@ -4119,7 +4119,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 				break;
 			}
 			if (you.s_weather == 1 && you.s_weather_turn > 0) {
-				//¾È°³È¿°ú·Î Ç×»ó ½Ã¾ß¸¦ ÁÙÀÓ
+				//ì•ˆê°œíš¨ê³¼ë¡œ í•­ìƒ ì‹œì•¼ë¥¼ ì¤„ì„
 				block_cloud--;
 				if (block_cloud < 0)
 				{
@@ -4147,7 +4147,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 			break;
 		else if(i == RT_END - 1)
 		{
-			return false; //¸ó½ºÅÍ¿¡°Ô º¸ÀÌÁö¾Ê´Â À§Ä¡
+			return false; //ëª¬ìŠ¤í„°ì—ê²Œ ë³´ì´ì§€ì•ŠëŠ” ìœ„ì¹˜
 		}
 		else
 			intercept = false;

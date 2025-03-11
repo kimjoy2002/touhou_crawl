@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: d3dUtility.cpp
+// íŒŒì¼ì´ë¦„: d3dUtility.cpp
 //
-// ³»¿ë: ´ÙÀÌ·ºÆ®X À¯Æ¿ Á¤ÀÇ ¸ðÀ½
+// ë‚´ìš©: ë‹¤ì´ë ‰íŠ¸X ìœ í‹¸ ì •ì˜ ëª¨ìŒ
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,7 @@
 
 
 
-//µð¹ÙÀÌ½º
+//ë””ë°”ì´ìŠ¤
 extern IDirectInput8* Input;
 extern IDirectInputDevice8* Keyboard;
 extern IDirectInputDevice8* Mouse;
@@ -77,7 +77,7 @@ bool d3d::InitD3D(
 	IDirect3DDevice9** device)
 {
 	//
-	// À©µµ¿ìÃ¢À» »ý¼ºÇÑ´Ù.
+	// ìœˆë„ìš°ì°½ì„ ìƒì„±í•œë‹¤.
 	//
 
 
@@ -128,7 +128,7 @@ bool d3d::InitD3D(
 	::UpdateWindow(hwnd);
 
 	//
-	// ´ÙÀÌ·ºÆ®3d ÃÊ±âÈ­
+	// ë‹¤ì´ë ‰íŠ¸3d ì´ˆê¸°í™”
 	//
 
 	HRESULT hr = 0;
@@ -185,7 +185,7 @@ bool d3d::InitD3D(
 
 	if( FAILED(hr) )
 	{
-		// ½ÇÆÐ½Ã 16ºñÆ® ±íÀÌ·Î ´Ù½Ã½Ãµµ?!
+		// ì‹¤íŒ¨ì‹œ 16ë¹„íŠ¸ ê¹Šì´ë¡œ ë‹¤ì‹œì‹œë„?!
 		d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 		
 		hr = d3d9->CreateDevice(
@@ -198,20 +198,20 @@ bool d3d::InitD3D(
 
 		if( FAILED(hr) )
 		{
-			d3d9->Release(); // d3d9¸¦ Ç®¾îÁØ´Ù.
+			d3d9->Release(); // d3d9ë¥¼ í’€ì–´ì¤€ë‹¤.
 			::MessageBox(0, "CreateDevice() - FAILED", 0, 0);
 			return false;
 		}
 	}
 
-	(*device)->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);  //¾ÕµÚ ¸ðµÎ ±×¸°´Ù.
-	//(*device)->SetRenderState(D3DRS_LIGHTING, FALSE);  //±¤¿øÈ¿°ú¸¦ ¹«½ÃÇÑ´Ù.(¾ÈÁÖ¸é ÀüºÎ °Å¸Å)
+	(*device)->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);  //ì•žë’¤ ëª¨ë‘ ê·¸ë¦°ë‹¤.
+	//(*device)->SetRenderState(D3DRS_LIGHTING, FALSE);  //ê´‘ì›íš¨ê³¼ë¥¼ ë¬´ì‹œí•œë‹¤.(ì•ˆì£¼ë©´ ì „ë¶€ ê±°ë§¤)
     (*device)->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	(*device)->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
     (*device)->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
 
-	d3d9->Release(); // d3d9¸¦ Ç®¾îÁØ´Ù.
+	d3d9->Release(); // d3d9ë¥¼ í’€ì–´ì¤€ë‹¤.
 	
 	return true;
 }
@@ -240,7 +240,7 @@ int d3d::EnterMsgLoop()
 		Sleep(16);
 		if(!Display(0))
 		{
-			::MessageBox(0, "µð½ºÇÃ·¹ÀÌ ¿¡·¯", 0, 0);
+			::MessageBox(0, "ë””ìŠ¤í”Œë ˆì´ ì—ëŸ¬", 0, 0);
 		}
 		InputUpdate();
 		//UpdateBGM();
@@ -257,7 +257,7 @@ int d3d::EnterMsgLoop()
 	while(g_ThreadCnt > 0 && i++ <= 50)
 		Sleep(200);
 	if(i>50)
-		::MessageBox(0, "¾²·¹µå Á¾·á ½ÇÆÐ", 0, 0);
+		::MessageBox(0, "ì“°ë ˆë“œ ì¢…ë£Œ ì‹¤íŒ¨", 0, 0);
 	return msg.wParam;
 }
 
@@ -337,13 +337,13 @@ unsigned int WINAPI GameLoop(void *arg)
 		{
 			{
 				char temp[256];
-				sprintf_s(temp,256,"¾Æ·¹³ª ·¹º§ %d",you.level);
+				sprintf_s(temp,256,"ì•„ë ˆë‚˜ ë ˆë²¨ %d",you.level);
 				ReplayClass.StopReplay(temp);
 			}
 		}
 		else if (isSprint())
 		{
-			ReplayClass.StopReplay("½ºÇÁ¸°Æ®");
+			ReplayClass.StopReplay("ìŠ¤í”„ë¦°íŠ¸");
 		}
 		else if(!isNormalGame())
 		{

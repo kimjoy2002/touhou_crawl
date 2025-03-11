@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: spellcard.h
+// íŒŒì¼ì´ë¦„: spellcard.h
 //
-// ³»¿ë: ½ºÆçÄ«µå ¼±¾ğ
+// ë‚´ìš©: ìŠ¤í ì¹´ë“œ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@ enum skill_flag;
 
 //
 //bool declare_spellcard(spellcard_declare_type kind, int power);
-bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_, bool auto_);//fail_Àº ¹«Á¶°Ç ½ÇÆĞ iden_Àº ¹Ì½Äº°»óÅÂ¿¡¼­ Á¶ÁØ½ÇÆĞ½Ã true¸®ÅÏ
+bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_, bool auto_);//fail_ì€ ë¬´ì¡°ê±´ ì‹¤íŒ¨ iden_ì€ ë¯¸ì‹ë³„ìƒíƒœì—ì„œ ì¡°ì¤€ì‹¤íŒ¨ì‹œ trueë¦¬í„´
 //bool passive_spellcard(spellcard_passive_type kind, int power, int value, int turn_);
 //int spellcard_turn(spellcard_declare_type kind1, spellcard_evoke_type kind2, spellcard_passive_type kind3);
 

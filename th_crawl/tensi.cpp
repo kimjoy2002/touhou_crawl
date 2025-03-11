@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: tensi.cpp
+// íŒŒì¼ì´ë¦„: tensi.cpp
 //
-// ³»¿ë: ÅÙ½Ã Å¬·¡½º
+// ë‚´ìš©: í…ì‹œ í´ë˜ìŠ¤
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,9 +26,9 @@ const char* tensi_talk(bool good_, tensi_do_list list_);
 
 int GetHazard()
 {
-	float total_danger_ = 0; //À§Çèµµ
+	float total_danger_ = 0; //ìœ„í—˜ë„
 
-	int num_=0; //¾î´ÀÁ¤µµ À§ÇùÀÌ µÇ´Â ÀûÀÇ ¼ö
+	int num_=0; //ì–´ëŠì •ë„ ìœ„í˜‘ì´ ë˜ëŠ” ì ì˜ ìˆ˜
 	vector<monster>::iterator it;
 	it = env[current_level].mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
@@ -37,25 +37,25 @@ int GetHazard()
 		{
 			float danger_ = 0;
 			if((*it).flag & M_FLAG_UNHARM)
-			{ //¹«°üÇÑ ÀûÀÌ´Ù.
+			{ //ë¬´ê´€í•œ ì ì´ë‹¤.
 
 			}				
 			else if((*it).isUserAlly())
-			{ //¾Æ±ºÀÌ´Ù. 
+			{ //ì•„êµ°ì´ë‹¤. 
 
 			}
 			else
-			{ //ÀûÀÌ´Ù.
+			{ //ì ì´ë‹¤.
 				danger_ = 10;
 				if((*it).level > you.level)
-					danger_ = 800+((*it).level - you.level)*300; //ÀÚ½Åº¸´Ù ·¹º§ÀÌ ³ôÀ¸¸é À§Çèµµ 800ºÎÅÍ
+					danger_ = 800+((*it).level - you.level)*300; //ìì‹ ë³´ë‹¤ ë ˆë²¨ì´ ë†’ìœ¼ë©´ ìœ„í—˜ë„ 800ë¶€í„°
 				else if( you.level - (*it).level <= 6)
-					danger_ = 500+70*((*it).level - you.level); //¾à°£ ¾àÇÏ´Ù
-				//³ª¸ÓÁö´Â °ÅÀÇ ÀÇ¹Ì¾ø´Â ¼öÁØ À§Çèµµ 1¸¸ ÁØ´Ù.
+					danger_ = 500+70*((*it).level - you.level); //ì•½ê°„ ì•½í•˜ë‹¤
+				//ë‚˜ë¨¸ì§€ëŠ” ê±°ì˜ ì˜ë¯¸ì—†ëŠ” ìˆ˜ì¤€ ìœ„í—˜ë„ 1ë§Œ ì¤€ë‹¤.
 
 				int min_ = 0;
-				if((*it).level>=10)//·¹º§ÀÌ 10ÀÌ»óÀÌ¸é ´Ù¾çÇÑ Æ¯¼ö´É·Â¶§¹®¿¡ ¸¸·¾¿¡°Ôµµ ¾à°£¾¿ À§ÇùÀ» ÁØ´Ù.
-					min_ = 100; //ÃÖ¼Ò À§ÇùÄ¡ 100
+				if((*it).level>=10)//ë ˆë²¨ì´ 10ì´ìƒì´ë©´ ë‹¤ì–‘í•œ íŠ¹ìˆ˜ëŠ¥ë ¥ë•Œë¬¸ì— ë§Œë ™ì—ê²Œë„ ì•½ê°„ì”© ìœ„í˜‘ì„ ì¤€ë‹¤.
+					min_ = 100; //ìµœì†Œ ìœ„í˜‘ì¹˜ 100
 				if((*it).level>=13)
 					min_ = 200;
 				if((*it).level>=15)
@@ -69,11 +69,11 @@ int GetHazard()
 
 				if(!you.isSightnonblocked(it->position))
 					danger_ = 1;
-				//º®µî¿¡ ¸·ÇôÀÖ´Ù.
+				//ë²½ë“±ì— ë§‰í˜€ìˆë‹¤.
 				
 				int distant_ = pow((float)abs(it->position.x-you.position.x),2)+pow((float)abs(it->position.y-you.position.y),2);
-				bool melee_ = true;//ÀÌ ¸÷Àº ±ÙÁ¢¸÷ÀÌ´Ù.
-				bool smite_ = false;//ÀÌ ¸÷Àº Àû°ú °¡·Î¸·ÇôÀÖ¾îµµ À§ÇùÀûÀÌ´Ù.
+				bool melee_ = true;//ì´ ëª¹ì€ ê·¼ì ‘ëª¹ì´ë‹¤.
+				bool smite_ = false;//ì´ ëª¹ì€ ì ê³¼ ê°€ë¡œë§‰í˜€ìˆì–´ë„ ìœ„í˜‘ì ì´ë‹¤.
 
 				if(!(*it).s_mute || env[current_level].isSilence(it->position))
 				{
@@ -84,17 +84,17 @@ int GetHazard()
 						{
 							if(SpellFlagCheck((spell_list)it2->num,S_FLAG_RANGE_ATTACK))
 							{
-								melee_ = false; //¿ø°Å¸® ¸÷ÀÌ´Ù.
+								melee_ = false; //ì›ê±°ë¦¬ ëª¹ì´ë‹¤.
 							}		
 							//if(SpellFlagCheck((spell_list)it2->num,S_FLAG_RANGE_ATTACK)|| SpellFlagCheck((spell_list)it2->num,S_FLAG_DEBUF))
 							//{
-							//	//°Å¸®°¡ ¸Ö¾îÁ®ÀÖ¾îµµ ´ç½Å¿¡°Ô À§ÇùÀÌ µÉ °¡´É¼ºÀÌ ÀÖÀ½
+							//	//ê±°ë¦¬ê°€ ë©€ì–´ì ¸ìˆì–´ë„ ë‹¹ì‹ ì—ê²Œ ìœ„í˜‘ì´ ë  ê°€ëŠ¥ì„±ì´ ìˆìŒ
 							//}
-							//µğ¹öÇÁ´Â Á÷Á¢ÀûÀ¸·Î À§ÇùÀÌ µÇÁö ¾Ê´Â´Ù.
+							//ë””ë²„í”„ëŠ” ì§ì ‘ì ìœ¼ë¡œ ìœ„í˜‘ì´ ë˜ì§€ ì•ŠëŠ”ë‹¤.
 							if(SpellFlagCheck((spell_list)it2->num,S_FLAG_SUMMON) || SpellFlagCheck((spell_list)it2->num,S_FLAG_SMITE))
 							{
-								//¼ÒÈ¯°ú ½º¸¶ÀÌÆ®
-								melee_ = false; //¿ø°Å¸® ¸÷ÀÌ´Ù.
+								//ì†Œí™˜ê³¼ ìŠ¤ë§ˆì´íŠ¸
+								melee_ = false; //ì›ê±°ë¦¬ ëª¹ì´ë‹¤.
 								smite_ = true;
 								break;
 							}
@@ -107,9 +107,9 @@ int GetHazard()
 					
 
 				if(melee_)
-				{ //¹Ğ¸®¸÷Àº °Å¸®¿¡ µû¶ó¼­ º¸Á¤ 
+				{ //ë°€ë¦¬ëª¹ì€ ê±°ë¦¬ì— ë”°ë¼ì„œ ë³´ì • 
 					float mul_ = 1.2f-0.075f*max(abs(you.position.x-it->position.x),abs(you.position.y-it->position.y));
-					//°¡Àå ¸Ö¸® ÀÖÀ»¶§ 0.6f ¹ĞÂø½Ã 1.2ÀÓ
+					//ê°€ì¥ ë©€ë¦¬ ìˆì„ë•Œ 0.6f ë°€ì°©ì‹œ 1.2ì„
 					danger_*=mul_;
 				}
 				
@@ -126,15 +126,15 @@ int GetHazard()
 							{
 								danger_*=0.5f;
 								break;
-								//°¡¸®°íÀÖÀ¸¸é À§Çèµµ´Â ¸¹ÀÌ ÁÙ¾îµç´Ù.
+								//ê°€ë¦¬ê³ ìˆìœ¼ë©´ ìœ„í—˜ë„ëŠ” ë§ì´ ì¤„ì–´ë“ ë‹¤.
 							}
 						}
 					}
 				}
 				else
-					danger_*=1.5f; //½º¸¶ÀÌÆ®¸÷Àº ´ëÃ¼·Î À§Çèµµ°¡ ³ô´Ù.
+					danger_*=1.5f; //ìŠ¤ë§ˆì´íŠ¸ëª¹ì€ ëŒ€ì²´ë¡œ ìœ„í—˜ë„ê°€ ë†’ë‹¤.
 
-				if((*it).s_confuse || (*it).s_paralyse || (*it).s_fear) //È¥¶õ ¸¶ºñ °øÆ÷´Â °ÅÀÇ À§Çèµµ¸¦ ³ôÀÌÁö¾ÊÀ½.
+				if((*it).s_confuse || (*it).s_paralyse || (*it).s_fear) //í˜¼ë€ ë§ˆë¹„ ê³µí¬ëŠ” ê±°ì˜ ìœ„í—˜ë„ë¥¼ ë†’ì´ì§€ì•ŠìŒ.
 					danger_ *= 0.05f;
 				if((*it).s_slow)
 					danger_ *= 0.5f;
@@ -145,13 +145,13 @@ int GetHazard()
 				if((*it).s_might)
 					danger_ *= 1.5f;
 				if((*it).state.GetState() != MS_ATACK)
-					danger_ *= 0.2f; //°ø°İÀÌ ¾Æ´Ï´Ù.
+					danger_ *= 0.2f; //ê³µê²©ì´ ì•„ë‹ˆë‹¤.
 
 				danger_ *=  0.5f+0.5f*((float)(*it).hp)/(*it).max_hp;
 
 				
 				if((*it).flag & M_FLAG_UNIQUE)
-					danger_*=2.0f; //³×ÀÓµå´Â À§ÇèÇÔ
+					danger_*=2.0f; //ë„¤ì„ë“œëŠ” ìœ„í—˜í•¨
 
 				num_++;
 			}
@@ -177,12 +177,12 @@ int GetHazard()
 	if(you.s_might || you.s_clever || you.s_dex)
 		total_danger_ *= 0.7f;
 
-	if(((float)you.GetHp())/you.GetMaxHp() <= 0.5f) //Ã¼·ÂÀÌ Àı¹İÀÌÇÏ
+	if(((float)you.GetHp())/you.GetMaxHp() <= 0.5f) //ì²´ë ¥ì´ ì ˆë°˜ì´í•˜
 		total_danger_ *=  3.0f-2.0f*((float)you.GetHp())/you.GetMaxHp();
 	
 	if (!you.pure_mp)
 	{
-		if (you.GetMaxMp() >= 5 && ((float)you.GetMp()) / you.GetMaxMp() <= 0.5f) //¸¶³ª°¡ Àı¹İÀÌÇÏ
+		if (you.GetMaxMp() >= 5 && ((float)you.GetMp()) / you.GetMaxMp() <= 0.5f) //ë§ˆë‚˜ê°€ ì ˆë°˜ì´í•˜
 			total_danger_ *= 3.0f - 2.0f*((float)you.GetMp()) / you.GetMaxMp();
 	}
 
@@ -221,15 +221,15 @@ void tensi_weather(int type_, int good_)
 	switch (type_)
 	{
 	case 1:
-		printlog("ÇÑÄ¡ ¾ÕÀÌ ¾Èº¸ÀÌ´Â Â£Àº ¾È°³°¡ ±ò¸®±â ½ÃÀÛÇß´Ù.", true, false, false, CL_normal);
+		printlog("í•œì¹˜ ì•ì´ ì•ˆë³´ì´ëŠ” ì§™ì€ ì•ˆê°œê°€ ê¹”ë¦¬ê¸° ì‹œì‘í–ˆë‹¤.", true, false, false, CL_normal);
 		you.SetWeather(1, 100);
 		break;
 	case 2:
-		printlog("´øÀü¿¡ ¸¹Àº ºñ¿Í ÃµµÕ¹ø°³°¡ ÈÖ¸ô¾ÆÄ¡±â ½ÃÀÛÇÑ´Ù.", true, false, false, CL_normal);
+		printlog("ë˜ì „ì— ë§ì€ ë¹„ì™€ ì²œë‘¥ë²ˆê°œê°€ íœ˜ëª°ì•„ì¹˜ê¸° ì‹œì‘í•œë‹¤.", true, false, false, CL_normal);
 		you.SetWeather(2, 100);
 		break;
 	case 3:
-		printlog("´øÀü¿¡ °­ÇÑ ÇŞºûÀÌ µé±â ½ÃÀÛÇß´Ù.", true, false, false, CL_normal);
+		printlog("ë˜ì „ì— ê°•í•œ í–‡ë¹›ì´ ë“¤ê¸° ì‹œì‘í–ˆë‹¤.", true, false, false, CL_normal);
 		you.SetWeather(3, 100);
 		break;
 	default:
@@ -401,7 +401,7 @@ void tensi_tele(bool good_)
 	else
 	{
 		if(wiz_list.wizard_mode == 1)
-			printlog("ÅÙ½Ã ÅÚ·¹Æ÷Æ® ½ÇÆĞ",true,false,false,CL_tensi);
+			printlog("í…ì‹œ í…”ë ˆí¬íŠ¸ ì‹¤íŒ¨",true,false,false,CL_tensi);
 		you.Teleport();
 	}
 }
@@ -420,7 +420,7 @@ void tensi_earthquake(int good_)
 					env[current_level].changeTile(pos, env[current_level].base_floor);
 			}
 		}
-	}//¸ÊÀ» ÆÄ±«ÇÑ´Ù.
+	}//ë§µì„ íŒŒê´´í•œë‹¤.
 
 	for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -433,20 +433,20 @@ void tensi_earthquake(int good_)
 				att_/=2;
 				m_att_/=2;
 			}
-			attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("ÁöÁø",true));
+			attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("ì§€ì§„",true));
 			it->damage(temp_att, true);
 		}
-	}//¸ğµç ¸ó½ºÅÍ¿¡°Ô µ¥¹ÌÁö¸¦ ÁÜ
+	}//ëª¨ë“  ëª¬ìŠ¤í„°ì—ê²Œ ë°ë¯¸ì§€ë¥¼ ì¤Œ
 
 	soundmanager.playSound("earthquake"); 
-	env[current_level].MakeNoise(you.position,30,NULL); //°Å´ëÇÑ ¼ÒÀ½À» ¸¸µç´Ù. ÅÙ½Ã´Â ¾Æ¹«µµ ¾øÀ»¶§ ÁöÁøÀ» ¾²±âµµ ÇÏÁö!
+	env[current_level].MakeNoise(you.position,30,NULL); //ê±°ëŒ€í•œ ì†ŒìŒì„ ë§Œë“ ë‹¤. í…ì‹œëŠ” ì•„ë¬´ë„ ì—†ì„ë•Œ ì§€ì§„ì„ ì“°ê¸°ë„ í•˜ì§€!
 	you.resetLOS();
 }
 void tensi_munyum(int good_)
 {
 	soundmanager.playSound("buff");
 	you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(100,200));
-	//ÅÙ½ÃÀÇ ¹«³ä¹«»ó ¹öÇÁ´Â ±æ´Ù!
+	//í…ì‹œì˜ ë¬´ë…ë¬´ìƒ ë²„í”„ëŠ” ê¸¸ë‹¤!
 }
 void tensi_burst(int good_)
 {
@@ -467,7 +467,7 @@ void tensi_burst(int good_)
 			}
 			else
 			{
-				pos_ = you.position; //¾ÈÁÁÀº Æø¹ßÀÏ°æ¿ì ÇÃ·¹ÀÌ¾î±îÁö ÈÛ¾µ¸± ¼ö ÀÖ´Ù.
+				pos_ = you.position; //ì•ˆì¢‹ì€ í­ë°œì¼ê²½ìš° í”Œë ˆì´ì–´ê¹Œì§€ íœ©ì“¸ë¦´ ìˆ˜ ìˆë‹¤.
 
 			}
 
@@ -509,11 +509,11 @@ void tensi_burst(int good_)
 								int m_att_ = 3 * (8 + you.level / 3);
 
 								if (hit_->isplayer())
-								{ //ÇÃ·¹ÀÌ¾î´Â Á×Áö ¾ÊÀ»Á¤µµ¸¸
+								{ //í”Œë ˆì´ì–´ëŠ” ì£½ì§€ ì•Šì„ì •ë„ë§Œ
 									if (att_ >= hit_->GetHp())
 										att_ = hit_->GetHp() - 1;
 								}
-								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("ÅÙ½Ã", false));
+								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("í…ì‹œ", false));
 								hit_->damage(temp_att, true);
 								soundmanager.playSound("bomb");
 							}
@@ -530,10 +530,10 @@ void tensi_burst(int good_)
 			env[current_level].ClearEffect();
 			break;
 		}
-	}//¸ğµç ¸ó½ºÅÍ¿¡°Ô µ¥¹ÌÁö¸¦ ÁÜ
+	}//ëª¨ë“  ëª¬ìŠ¤í„°ì—ê²Œ ë°ë¯¸ì§€ë¥¼ ì¤Œ
 	
 	
-	env[current_level].MakeNoise(you.position,16,NULL); //»ó´çÇÑ ¼ÒÀ½À» ¸¸µç´Ù.
+	env[current_level].MakeNoise(you.position,16,NULL); //ìƒë‹¹í•œ ì†ŒìŒì„ ë§Œë“ ë‹¤.
 
 }
 
@@ -542,18 +542,18 @@ void tensi_weapon(int doing_)
 {
 	if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 	{
-		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ºñ»óÀÇ ±â¿îÀÌ »Õ¾îÁ®³ª¿Â´Ù.");
+		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë¹„ìƒì˜ ê¸°ìš´ì´ ë¿œì–´ì ¸ë‚˜ì˜¨ë‹¤.");
 		you.equipment[ET_WEAPON]->value5 = WB_WEATHER;
 		you.equipment[ET_WEAPON]->value6 = (70+randA(50))*(doing_>0?doing_*2:1);
 	}
 	else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_WEATHER && you.equipment[ET_WEAPON]->value6>0)
 	{
-		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"´õ¿í ºñ»óÀÇ ÈûÀÌ ±æ¾îÁ³´Ù.");
+		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"ë”ìš± ë¹„ìƒì˜ í˜ì´ ê¸¸ì–´ì¡Œë‹¤.");
 		you.equipment[ET_WEAPON]->value6 += (90+randA(50))*(doing_>0?doing_:1);
 	}
 	else
 	{
-		printlog("±×·¯³ª ¾Æ¹«ÀÏµµ ÀÏ¾î³ªÁö ¾Ê¾Ò´Ù.",true,false,false,CL_normal);
+		printlog("ê·¸ëŸ¬ë‚˜ ì•„ë¬´ì¼ë„ ì¼ì–´ë‚˜ì§€ ì•Šì•˜ë‹¤.",true,false,false,CL_normal);
 	}
 }
 
@@ -615,7 +615,7 @@ void tensi_action()
 	{
 		char temp[256];
 
-		sprintf_s(temp,256,"[ÅÏ:%d ÅÙ¼Ç:%d]",you.turn, you.CheckTension());
+		sprintf_s(temp,256,"[í„´:%d í…ì…˜:%d]",you.turn, you.CheckTension());
 	
 		printlog(temp,false,false,false,CL_tensi);
 		
@@ -631,12 +631,12 @@ void tensi_action()
 
 		if(rand_>44+(you.GetPunish(GT_TENSI)?50:0))
 		{
-			type = "[ÆòÈ­:0]";
+			type = "[í‰í™”:0]";
 			action_ = TENSI_NOTHING;
 		}
 		else
 		{
-			type = "[ÆòÈ­:-1]";
+			type = "[í‰í™”:-1]";
 			switch(randA(7)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
@@ -652,13 +652,13 @@ void tensi_action()
 	else
 	{
 		if(100+randA(4000)<randA(you.CheckTension()) && randA(9)>0)
-		{ //ÅÙ½ÃÀÇ Æ÷ÅÙ¼È Æø¹ß!	
-			type = "[À§±â:3]";
+		{ //í…ì‹œì˜ í¬í…ì…œ í­ë°œ!	
+			type = "[ìœ„ê¸°:3]";
 			switch(randA(8)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_MUNYUM; break;
-			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //ÅÙ½Ã´Â ÀüÅõ¸¦ ÁÁ¾ÆÇÏ±â¶§¹®¿¡ ÅÚÆ÷´Â ¸¹ÀÌ ¾È¾´´Ù.
+			case 3:doing_ = 1; action_ =  TENSI_TELE; break; //í…ì‹œëŠ” ì „íˆ¬ë¥¼ ì¢‹ì•„í•˜ê¸°ë•Œë¬¸ì— í…”í¬ëŠ” ë§ì´ ì•ˆì“´ë‹¤.
 			case 4:doing_ = 2; action_ = TENSI_KANAME; break;
 			case 5:doing_ = 1; action_ = TENSI_FIELD; break;
 			case 6:doing_ = 2; action_ = TENSI_BUFF_DEBUFF; break;
@@ -667,8 +667,8 @@ void tensi_action()
 			}
 		}
 		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
-		{ //±×·°Àú·° ÁÁÀºÀÏ
-			type = "[À§±â:2]";
+		{ //ê·¸ëŸ­ì €ëŸ­ ì¢‹ì€ì¼
+			type = "[ìœ„ê¸°:2]";
 			switch(randA(7)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
@@ -681,8 +681,8 @@ void tensi_action()
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
-		{ //±¦Âú³×
-			type = "[À§±â:1]";
+		{ //ê´œì°®ë„¤
+			type = "[ìœ„ê¸°:1]";
 			switch(randA(3)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
@@ -691,8 +691,8 @@ void tensi_action()
 			}
 		}
 		else
-		{ //¿îÀÌ ³ª»¦¾î
-			type = "[À§±â:-1]";
+		{ //ìš´ì´ ë‚˜ë¹´ì–´
+			type = "[ìœ„ê¸°:-1]";
 			switch(randA(10)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
@@ -722,20 +722,20 @@ void tensi_action()
 	case TENSI_NOTHING:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ¾Æ¹«ÀÏµµ¾ÈÇÔ. ÅÙ¼Ç %d", type.c_str(), you.CheckTension());
+			sprintf_s(temp,256,"%sí…ì‹œ: ì•„ë¬´ì¼ë„ì•ˆí•¨. í…ì…˜ %d", type.c_str(), you.CheckTension());
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ¾Æ¹«ÀÏµµ¾ÈÇÔ");
+			sprintf_s(temp, 256, "í…ì‹œ: ì•„ë¬´ì¼ë„ì•ˆí•¨");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		break;
 	case TENSI_POTION:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: Æ÷¼Ç. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: í¬ì…˜. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: %s Æ÷¼Ç", (doing_>0) ? "ÁÁÀº" : "³ª»Û");
+			sprintf_s(temp, 256, "í…ì‹œ: %s í¬ì…˜", (doing_>0) ? "ì¢‹ì€" : "ë‚˜ìœ");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_potion(doing_>0);
@@ -743,10 +743,10 @@ void tensi_action()
 	case TENSI_SUMMON:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ¼ÒÈ¯. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: ì†Œí™˜. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: %s ¼ÒÈ¯", (doing_>0)?"¿ìÈ£Àû":"Àû´ëÀû");
+			sprintf_s(temp, 256, "í…ì‹œ: %s ì†Œí™˜", (doing_>0)?"ìš°í˜¸ì ":"ì ëŒ€ì ");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_summon(doing_);
@@ -754,10 +754,10 @@ void tensi_action()
 	case TENSI_TELE:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ÅÚ·¹Æ÷Æ®. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: í…”ë ˆí¬íŠ¸. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: %s ÅÚ·¹Æ÷Æ®", (doing_>0) ? "¾ÈÀüÇÑ" : "À§ÇèÇÑ");
+			sprintf_s(temp, 256, "í…ì‹œ: %s í…”ë ˆí¬íŠ¸", (doing_>0) ? "ì•ˆì „í•œ" : "ìœ„í—˜í•œ");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_tele(doing_);
@@ -765,10 +765,10 @@ void tensi_action()
 	case TENSI_EARTHQUAKE:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ÁöÁø. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: ì§€ì§„. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ÁöÁø");
+			sprintf_s(temp, 256, "í…ì‹œ: ì§€ì§„");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_earthquake(doing_);
@@ -776,10 +776,10 @@ void tensi_action()
 	case TENSI_MUNYUM:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ¹«³ä¹«»ó. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: ë¬´ë…ë¬´ìƒ. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ¹«³ä¹«»ó ¹öÇÁ");
+			sprintf_s(temp, 256, "í…ì‹œ: ë¬´ë…ë¬´ìƒ ë²„í”„");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_munyum(doing_);
@@ -787,10 +787,10 @@ void tensi_action()
 	case TENSI_BURST:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: Æø¹ß. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: í­ë°œ. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: %s Æø¹ß", (doing_>0) ? "¾ÈÀüÇÑ" : "À§ÇèÇÑ");
+			sprintf_s(temp, 256, "í…ì‹œ: %s í­ë°œ", (doing_>0) ? "ì•ˆì „í•œ" : "ìœ„í—˜í•œ");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_burst(doing_);
@@ -798,10 +798,10 @@ void tensi_action()
 	case TENSI_WEAPON:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%sÅÙ½Ã: ºñ»óÀÇ°Ë. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp,256,"%sí…ì‹œ: ë¹„ìƒì˜ê²€. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ºñ»óÀÇ°Ë ºÎ¿©");
+			sprintf_s(temp, 256, "í…ì‹œ: ë¹„ìƒì˜ê²€ ë¶€ì—¬");
 		}
 		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
 		tensi_weapon(doing_);
@@ -809,10 +809,10 @@ void tensi_action()
 	case TENSI_KANAME:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: Ä«³ª¸Ş¼®. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ì¹´ë‚˜ë©”ì„. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: %s Ä«³ª¸Ş¼® ¼ÒÈ¯", (doing_>0) ? "¿ìÈ£Àû" : "Àû´ëÀû ");
+			sprintf_s(temp, 256, "í…ì‹œ: %s ì¹´ë‚˜ë©”ì„ ì†Œí™˜", (doing_>0) ? "ìš°í˜¸ì " : "ì ëŒ€ì  ");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_kaname(doing_);
@@ -820,10 +820,10 @@ void tensi_action()
 	case TENSI_FIELD:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ÇÊµå»ı¼º. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: í•„ë“œìƒì„±. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: Æ¯¼ö ÇÊµå »ı¼º");
+			sprintf_s(temp, 256, "í…ì‹œ: íŠ¹ìˆ˜ í•„ë“œ ìƒì„±");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_field(doing_);
@@ -831,10 +831,10 @@ void tensi_action()
 	case TENSI_BLIND:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ½Ç¸í. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ì‹¤ëª…. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ½Ç¸í");
+			sprintf_s(temp, 256, "í…ì‹œ: ì‹¤ëª…");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_blind(doing_);
@@ -842,10 +842,10 @@ void tensi_action()
 	case TENSI_BUFF_DEBUFF:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ±¤¿ª°¡¼Ó°¨¼Ó. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ê´‘ì—­ê°€ì†ê°ì†. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ±¤¿ª %s", (doing_>0) ? "°¨¼Ó" : "°¡¼Ó");
+			sprintf_s(temp, 256, "í…ì‹œ: ê´‘ì—­ %s", (doing_>0) ? "ê°ì†" : "ê°€ì†");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_buf_debuf(doing_);
@@ -853,10 +853,10 @@ void tensi_action()
 	case TENSI_SUCIDE:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ÀÚÆøÅä³¢. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ìí­í† ë¼. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ÀÚÆøÅä³¢ ¼ÒÈ¯");
+			sprintf_s(temp, 256, "í…ì‹œ: ìí­í† ë¼ ì†Œí™˜");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_sucide(doing_);
@@ -864,10 +864,10 @@ void tensi_action()
 	case TENSI_WEATHER_FOG:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ¾È°³. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ì•ˆê°œ. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ¾È°³");
+			sprintf_s(temp, 256, "í…ì‹œ: ì•ˆê°œ");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(1, doing_);
@@ -875,10 +875,10 @@ void tensi_action()
 	case TENSI_WEATHER_THUNDER:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ¹ø°³. ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ë²ˆê°œ. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ÃµµÕ¹ø°³");
+			sprintf_s(temp, 256, "í…ì‹œ: ì²œë‘¥ë²ˆê°œ");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(2, doing_);
@@ -886,10 +886,10 @@ void tensi_action()
 	case TENSI_WEATHER_SUN:
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%sÅÙ½Ã: ÄèÃ». ÅÙ¼Ç %d Çàµ¿ %d", type.c_str(), you.CheckTension(), doing_);
+			sprintf_s(temp, 256, "%sí…ì‹œ: ì¾Œì²­. í…ì…˜ %d í–‰ë™ %d", type.c_str(), you.CheckTension(), doing_);
 		}
 		else {
-			sprintf_s(temp, 256, "ÅÙ½Ã: ÄèÃ»");
+			sprintf_s(temp, 256, "í…ì‹œ: ì¾Œì²­");
 		}
 		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
 		tensi_weather(3, doing_);
@@ -966,37 +966,37 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 {
 	static char temp[256];
 	if(list_ != TENSI_NOTHING && randA(2))
-	{//°ø¿ë´ë»ç
+	{//ê³µìš©ëŒ€ì‚¬
 		if(good_)
 		{
 			switch(randA(12))
 			{
 			case 0:
-				return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô È£ÀÇÀûÀÎ ½Ã¼±À» ÁÖ¾ú´Ù.";
+				return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ í˜¸ì˜ì ì¸ ì‹œì„ ì„ ì£¼ì—ˆë‹¤.";
 			case 1:
-				return "ÅÙ½ÃÀÇ ÈûÀÌ ´ç½Å¿¡°Ô ´ê¾Ò´Ù.";
+				return "í…ì‹œì˜ í˜ì´ ë‹¹ì‹ ì—ê²Œ ë‹¿ì•˜ë‹¤.";
 			case 2:
-				return "ÅÙ½Ã: Èûµé¾îº¸ÀÌ³×!";
+				return "í…ì‹œ: í˜ë“¤ì–´ë³´ì´ë„¤!";
 			case 3:
-				return "ÅÙ½Ã: µµ¿ÍÁÙ°Ô!";
+				return "í…ì‹œ: ë„ì™€ì¤„ê²Œ!";
 			case 4:
-				return "´ç½ÅÀº ÅÙ½ÃÀÇ ¿ôÀ½ ¼Ò¸®¸¦ µé¾ú´Ù.";
+				return "ë‹¹ì‹ ì€ í…ì‹œì˜ ì›ƒìŒ ì†Œë¦¬ë¥¼ ë“¤ì—ˆë‹¤.";
 			case 5:
-				return "ÅÙ½Ã°¡ Èï¹ÌÁøÁøÇÑ ½Ã¼±À» ÇâÇß´Ù.";
+				return "í…ì‹œê°€ í¥ë¯¸ì§„ì§„í•œ ì‹œì„ ì„ í–¥í–ˆë‹¤.";
 			case 6:
-				return "ÅÙ½ÃÀÇ ¹Ú¼ö¼Ò¸®¸¦ µé¾ú´Ù.";
+				return "í…ì‹œì˜ ë°•ìˆ˜ì†Œë¦¬ë¥¼ ë“¤ì—ˆë‹¤.";
 			case 7:
-				return "´ç½Å ÁÖº¯¿¡ ±âºĞ ÁÁÀº ±â¿îÀÌ °¨µµ´Â°ÍÀ» ´À²¼´Ù.";
+				return "ë‹¹ì‹  ì£¼ë³€ì— ê¸°ë¶„ ì¢‹ì€ ê¸°ìš´ì´ ê°ë„ëŠ”ê²ƒì„ ëŠê¼ˆë‹¤.";
 			case 8:
-				return "ÅÙ½Ã: Á» ´õ Áñ°Ì°Ô ÇØÁà!";
+				return "í…ì‹œ: ì¢€ ë” ì¦ê²ê²Œ í•´ì¤˜!";
 			case 9:
-				return "ÅÙ½Ã: ¾ÆÁ÷ ´õ ÇÒ ¼ö ÀÖÁö?";
+				return "í…ì‹œ: ì•„ì§ ë” í•  ìˆ˜ ìˆì§€?";
 			case 10:
-				return "ÅÙ½Ã: Èû³»!";
+				return "í…ì‹œ: í˜ë‚´!";
 			case 11:
-				return "ÅÙ½ÃÀÇ °­·ÂÇÑ ÈûÀ» ¹Ş¾Ò´Ù.";
+				return "í…ì‹œì˜ ê°•ë ¥í•œ í˜ì„ ë°›ì•˜ë‹¤.";
 			case 12:
-				return "ÅÙ½Ã´Â Èï¹ÌÁøÁøÇÏ°Ô ´ç½ÅÀÇ ¸ğÇèÀ» ¹Ù¶óº¸°íÀÖ´Ù.";
+				return "í…ì‹œëŠ” í¥ë¯¸ì§„ì§„í•˜ê²Œ ë‹¹ì‹ ì˜ ëª¨í—˜ì„ ë°”ë¼ë³´ê³ ìˆë‹¤.";
 			}
 		}
 		else
@@ -1004,35 +1004,35 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			switch(randA(14))
 			{
 			case 0:
-				return "ÅÙ½ÃÀÇ »ç¾ÇÇÑ ½Ã¼±ÀÌ ´À²¸Áø´Ù.";
+				return "í…ì‹œì˜ ì‚¬ì•…í•œ ì‹œì„ ì´ ëŠê»´ì§„ë‹¤.";
 			case 1:
-				return "ÅÙ½Ã°¡ ¿ô±â ½ÃÀÛÇß´Ù.";
+				return "í…ì‹œê°€ ì›ƒê¸° ì‹œì‘í–ˆë‹¤.";
 			case 2:
-				return "ÅÙ½Ã°¡ ´ç½ÅÀÇ ¸ğÇèÀ» Áö·çÇÏ´Ù°í »ı°¢Çß´Ù.";
+				return "í…ì‹œê°€ ë‹¹ì‹ ì˜ ëª¨í—˜ì„ ì§€ë£¨í•˜ë‹¤ê³  ìƒê°í–ˆë‹¤.";
 			case 3:
-				return "ÅÙ½Ã: ÀÌ·±°Ç ¾î¶³±î?";
+				return "í…ì‹œ: ì´ëŸ°ê±´ ì–´ë–¨ê¹Œ?";
 			case 4:
-				return "ÅÙ½Ã: Á» ´õ ½º¸±ÀÖ°Ô ÇØÁÙ°Ô!";
+				return "í…ì‹œ: ì¢€ ë” ìŠ¤ë¦´ìˆê²Œ í•´ì¤„ê²Œ!";
 			case 5:
-				return "ÅÙ½Ã: ³Ê¹« ÆòÈ­·ÓÁö ¾Ê¾Æ?";
+				return "í…ì‹œ: ë„ˆë¬´ í‰í™”ë¡­ì§€ ì•Šì•„?";
 			case 6:
-				return "ÅÙ½ÃÀÇ Àå³­±â¾î¸° ¿ôÀ½À» µé¾ú´Ù.";
+				return "í…ì‹œì˜ ì¥ë‚œê¸°ì–´ë¦° ì›ƒìŒì„ ë“¤ì—ˆë‹¤.";
 			case 7:
-				return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô ½Ã·ÃÀ» ÁÖ·ÁÇÏ°í ÀÖ´Ù.";
+				return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ ì‹œë ¨ì„ ì£¼ë ¤í•˜ê³  ìˆë‹¤.";
 			case 8:
-				return "ÅÙ½Ã: Áö·çÇÑ °Íº¸´Ü ³´Áö?";
+				return "í…ì‹œ: ì§€ë£¨í•œ ê²ƒë³´ë‹¨ ë‚«ì§€?";
 			case 9:
-				return "ÅÙ½Ã: ´õ È­¸¦ ³»Áà!";
+				return "í…ì‹œ: ë” í™”ë¥¼ ë‚´ì¤˜!";
 			case 10:
-				return "ÅÙ½Ã: Àü·ÂÀ» ´ÙÇÏÁö ¾ÊÀ¸¸é Á×À»Áöµµ ¸ô¶ó!";
+				return "í…ì‹œ: ì „ë ¥ì„ ë‹¤í•˜ì§€ ì•Šìœ¼ë©´ ì£½ì„ì§€ë„ ëª°ë¼!";
 			case 11:
-				return "ÅÙ½Ã: °Ç¹æÁ®!";
+				return "í…ì‹œ: ê±´ë°©ì ¸!";
 			case 12:
-				return "ÅÙ½Ã: Áö·çÇÏÀİ¾Æ!";
+				return "í…ì‹œ: ì§€ë£¨í•˜ì–ì•„!";
 			case 13:
-				return "ÅÙ½Ã: ³Ê¹« °­ÇÑ°Å ¾Æ´Ï¾ß?";
+				return "í…ì‹œ: ë„ˆë¬´ ê°•í•œê±° ì•„ë‹ˆì•¼?";
 			case 14:
-				return "ÅÙ½Ã: ¾ÈÀüÇÑ°Ç µü Áú»öÀÌ¾ß!";
+				return "í…ì‹œ: ì•ˆì „í•œê±´ ë”± ì§ˆìƒ‰ì´ì•¼!";
 			}
 		}
 
@@ -1045,52 +1045,52 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			switch(randA(20))
 			{
 			case 0:
-				return "ÀÛÀº µ¹ÀÌ ³¯¶ó¿Í¼­ ´ç½ÅÀÇ ¸Ó¸®¿¡ ¸Â¾Ò´Ù.";
+				return "ì‘ì€ ëŒì´ ë‚ ë¼ì™€ì„œ ë‹¹ì‹ ì˜ ë¨¸ë¦¬ì— ë§ì•˜ë‹¤.";
 			case 1:
-				return "°©ÀÚ±â ¹Ù´ÚÀÌ Áøµ¿Çß´Ù.";
+				return "ê°‘ìê¸° ë°”ë‹¥ì´ ì§„ë™í–ˆë‹¤.";
 			case 2:
-				return "ÅÙ½Ã: ³ª¶û ÀÌ¾ß±â ÇÏÁö ¾ÊÀ»·¡?";
+				return "í…ì‹œ: ë‚˜ë‘ ì´ì•¼ê¸° í•˜ì§€ ì•Šì„ë˜?";
 			case 3:
-				return "ÅÙ½Ã: ÁÁ¾ÆÇÏ´Â À½½ÄÀº ¹¹¾ß?";
+				return "í…ì‹œ: ì¢‹ì•„í•˜ëŠ” ìŒì‹ì€ ë­ì•¼?";
 			case 4:
-				return "ÅÙ½Ã: Ãµ°è´Â ³Ê¹« ½É½ÉÇØ!";
+				return "í…ì‹œ: ì²œê³„ëŠ” ë„ˆë¬´ ì‹¬ì‹¬í•´!";
 			case 5:
-				return "ÅÙ½Ã: Á» ´õ ´ë´ãÇÏ°Ô Çàµ¿ÇØÁà!";
+				return "í…ì‹œ: ì¢€ ë” ëŒ€ë‹´í•˜ê²Œ í–‰ë™í•´ì¤˜!";
 			case 6:
-				return "ÅÙ½Ã: ³­ Àç¹ÌÀÖ´Â°É º¸°í ½Í¾î!";
+				return "í…ì‹œ: ë‚œ ì¬ë¯¸ìˆëŠ”ê±¸ ë³´ê³  ì‹¶ì–´!";
 			case 7:
-				return "ÅÙ½Ã: ³»°¡ Á» ´õ Àç¹Õ°Ô ÇØÁÙ ¼ö ÀÖ´Âµ¥";
+				return "í…ì‹œ: ë‚´ê°€ ì¢€ ë” ì¬ë°Œê²Œ í•´ì¤„ ìˆ˜ ìˆëŠ”ë°";
 			case 8:
-				return "ÅÙ½Ã: Áö·çÇÏ°Ô ÇÏ¸é ¾ËÁö?";
+				return "í…ì‹œ: ì§€ë£¨í•˜ê²Œ í•˜ë©´ ì•Œì§€?";
 			case 9:
-				return "¹ß¿¡ ³¯Ä«·Î¿î ¹ÙÀ§°¡ Æ¢¾î³ª¿Í ³Ñ¾îÁú»·Çß°í, ´©±º°¡ÀÇ ¿ôÀ½¼Ò¸®°¡ µé·È´Ù.";
+				return "ë°œì— ë‚ ì¹´ë¡œìš´ ë°”ìœ„ê°€ íŠ€ì–´ë‚˜ì™€ ë„˜ì–´ì§ˆë»”í–ˆê³ , ëˆ„êµ°ê°€ì˜ ì›ƒìŒì†Œë¦¬ê°€ ë“¤ë ¸ë‹¤.";
 			case 10:
-				return "´ç½ÅÀÇ ¹Ù·Î ¿·¿¡ ³¯Ä«·Î¿î ¿ä¼®ÀÌ ¶³¾îÁ³´Ù. \"¾Æ±õ³×!\"";
+				return "ë‹¹ì‹ ì˜ ë°”ë¡œ ì˜†ì— ë‚ ì¹´ë¡œìš´ ìš”ì„ì´ ë–¨ì–´ì¡Œë‹¤. \"ì•„ê¹ë„¤!\"";
 			case 11:
-				return "ÅÙ½Ã: ÀÌ À§¿¡¼­ Èñ»ı¾çµéÀ» ¹Ù¶óº¸°íÀÖ´Â°Ô ³» ³«ÀÌ¾ß!";
+				return "í…ì‹œ: ì´ ìœ„ì—ì„œ í¬ìƒì–‘ë“¤ì„ ë°”ë¼ë³´ê³ ìˆëŠ”ê²Œ ë‚´ ë‚™ì´ì•¼!";
 			case 12:
-				return "ÅÙ½Ã: ¹Ù·Î Á×Áø¾ÊÀ»°ÅÁö? Á» ´õ ¹öÆ¿ ¼ö ÀÖÁö?";
+				return "í…ì‹œ: ë°”ë¡œ ì£½ì§„ì•Šì„ê±°ì§€? ì¢€ ë” ë²„í‹¸ ìˆ˜ ìˆì§€?";
 			case 13:
-				return "ÅÙ½Ã: Àú±âÀú±â, ¾î¶»°Ô Á×À»Áö ³»±â¶óµµ ÇÏÁö ¾ÊÀ»·¡?";
+				return "í…ì‹œ: ì €ê¸°ì €ê¸°, ì–´ë–»ê²Œ ì£½ì„ì§€ ë‚´ê¸°ë¼ë„ í•˜ì§€ ì•Šì„ë˜?";
 			case 14:
-				sprintf_s(temp,256,"ÅÙ½Ã: Àú¹ø¿¡ ÁöÄÑº¸´ø ¾ÆÀÌ´Â %s¿¡ Á×¾î¹ö·È¾î.",mondata[randA(MON_MAX-1)].name.name.c_str());
+				sprintf_s(temp,256,"í…ì‹œ: ì €ë²ˆì— ì§€ì¼œë³´ë˜ ì•„ì´ëŠ” %sì— ì£½ì–´ë²„ë ¸ì–´.",mondata[randA(MON_MAX-1)].name.name.c_str());
 				return temp;
 			case 15:
 				{
 					int rand_name_ = randA(MON_MAX-1);
-					sprintf_s(temp,256,"ÅÙ½Ã: %s%s ¿Ö ÀÌ·¸°Ô %s°É±î? ",mondata[rand_name_].name.name.c_str(),mondata[rand_name_].name.name_is(),randA(1)?"ÅÍÇÁÇÑ":"±Í¿©¿î");
+					sprintf_s(temp,256,"í…ì‹œ: %s%s ì™œ ì´ë ‡ê²Œ %sê±¸ê¹Œ? ",mondata[rand_name_].name.name.c_str(),mondata[rand_name_].name.name_is(),randA(1)?"í„°í”„í•œ":"ê·€ì—¬ìš´");
 					return temp;
 				}
 			case 16:
-				return "ÅÙ½Ã: Á¶±İ¸¸ ±â´Ù·Á, ±ôÂ¦ ÆÄÆ¼¸¦ ÁØºñÇÏ°í ÀÖÀ¸´Ï±î!";
+				return "í…ì‹œ: ì¡°ê¸ˆë§Œ ê¸°ë‹¤ë ¤, ê¹œì§ íŒŒí‹°ë¥¼ ì¤€ë¹„í•˜ê³  ìˆìœ¼ë‹ˆê¹Œ!";
 			case 17:
-				return "´ç½ÅÀÇ ÀÌ¸¶¿¡ Á¶±×¸¸ µ¹ÀÌ ³¯¶ó¿Í ºÎµúÇû´Ù.";
+				return "ë‹¹ì‹ ì˜ ì´ë§ˆì— ì¡°ê·¸ë§Œ ëŒì´ ë‚ ë¼ì™€ ë¶€ë”ªí˜”ë‹¤.";
 			case 18:
-				return "ÅÙ½Ã: Àç¹Õ´Â ÀÌ¾ß±â¶óµµ ÇØÁà!";
+				return "í…ì‹œ: ì¬ë°ŒëŠ” ì´ì•¼ê¸°ë¼ë„ í•´ì¤˜!";
 			case 19:
-				return "ÅÙ½Ã´Â ´ç½ÅÀ» °ñ¸®±â À§ÇÑ °èÈ¹À» ¼¼¿ì°í ÀÖ´Ù.";
+				return "í…ì‹œëŠ” ë‹¹ì‹ ì„ ê³¨ë¦¬ê¸° ìœ„í•œ ê³„íšì„ ì„¸ìš°ê³  ìˆë‹¤.";
 			case 20:
-				return "ÅÙ½Ã´Â µûºĞÇÑµí ÇÏÇ°À» Çß´Ù.";
+				return "í…ì‹œëŠ” ë”°ë¶„í•œë“¯ í•˜í’ˆì„ í–ˆë‹¤.";
 			}	
 		case TENSI_POTION:
 			if(good_)
@@ -1098,15 +1098,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô »õ·Î¿î ÈûÀ» ÁÖ¾ú´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ ìƒˆë¡œìš´ í˜ì„ ì£¼ì—ˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ¸ñ¸¶¸£Áö¾Ê¾Æ?";
+					return "í…ì‹œ: ëª©ë§ˆë¥´ì§€ì•Šì•„?";
 				case 2:
-					return "ÅÙ½Ã: ÀÌ°É·Î Á» ´õ ½Î¿ö!";
+					return "í…ì‹œ: ì´ê±¸ë¡œ ì¢€ ë” ì‹¸ì›Œ!";
 				case 3:
-					return "ÅÙ½Ã: ¾ÆÁ÷ ´õ Áñ°Ì°Ô ÇØÁÙ ¼ö ÀÖÁö?";
+					return "í…ì‹œ: ì•„ì§ ë” ì¦ê²ê²Œ í•´ì¤„ ìˆ˜ ìˆì§€?";
 				case 4:
-					return "´ç½ÅÀº ÅÙ½Ã°¡ ³»·ÁÁØ ¹°¾àÀ» ¹Ş¾Ò´Ù.";
+					return "ë‹¹ì‹ ì€ í…ì‹œê°€ ë‚´ë ¤ì¤€ ë¬¼ì•½ì„ ë°›ì•˜ë‹¤.";
 				}
 			}
 			else
@@ -1114,15 +1114,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½ÃÀÇ ¿ôÀ½¼Ò¸®°¡ ´ç½ÅÀÇ ¸Ó¸®¿¡ ¿ï·È´Ù.";
+					return "í…ì‹œì˜ ì›ƒìŒì†Œë¦¬ê°€ ë‹¹ì‹ ì˜ ë¨¸ë¦¬ì— ìš¸ë ¸ë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ¿ì¸®Áı Ã¢°í ±¸¼®¿¡¼­ ¹ß°ßÇÑ ¹°¾àÀÌ¾ß!";
+					return "í…ì‹œ: ìš°ë¦¬ì§‘ ì°½ê³  êµ¬ì„ì—ì„œ ë°œê²¬í•œ ë¬¼ì•½ì´ì•¼!";
 				case 2:
-					return "ÅÙ½Ã: ¹úÀÌ¾ß!";
+					return "í…ì‹œ: ë²Œì´ì•¼!";
 				case 3:
-					return "ÅÙ½Ã: ³Ê¸¦ À§ÇØ ¸¸µç Æ¯Á¦ µå¸µÅ©¾ß!";
+					return "í…ì‹œ: ë„ˆë¥¼ ìœ„í•´ ë§Œë“  íŠ¹ì œ ë“œë§í¬ì•¼!";
 				case 4:
-					return "´ç½ÅÀº ÅÙ½Ã¿¡°Ô ¾ïÁö·Î ¹°¾àÀ» µéÀÌÄÑÁ³´Ù.";
+					return "ë‹¹ì‹ ì€ í…ì‹œì—ê²Œ ì–µì§€ë¡œ ë¬¼ì•½ì„ ë“¤ì´ì¼œì¡Œë‹¤.";
 				}
 			}
 		case TENSI_SUMMON:
@@ -1131,15 +1131,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô µ¿·á¸¦ ³»·ÁÁÖ¾ú´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ ë™ë£Œë¥¼ ë‚´ë ¤ì£¼ì—ˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: Ä£±¸°¡ ÇÊ¿äÇØ?";
+					return "í…ì‹œ: ì¹œêµ¬ê°€ í•„ìš”í•´?";
 				case 2:
-					return "ÅÙ½Ã: Áö¿ø±ºÀÌ¾ß!";
+					return "í…ì‹œ: ì§€ì›êµ°ì´ì•¼!";
 				case 3:
-					return "ÅÙ½Ã: ÀÌ°Å¸é µµ¸ÁÄ¡Áö ¾Ê¾Æµµ µÇ°ÚÁö?";
+					return "í…ì‹œ: ì´ê±°ë©´ ë„ë§ì¹˜ì§€ ì•Šì•„ë„ ë˜ê² ì§€?";
 				case 4:
-					return "ÅÙ½Ã°¡ ´ç½ÅÀÇ ÁÖº¯¿¡ ¿ìÈ£ÀûÀÎ ¼ÒÈ¯¹°À» ¼ÒÈ¯Çß´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì˜ ì£¼ë³€ì— ìš°í˜¸ì ì¸ ì†Œí™˜ë¬¼ì„ ì†Œí™˜í–ˆë‹¤.";
 				}
 			}
 			else
@@ -1147,15 +1147,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô ÀûÀçÀûÀÎ ¼ÒÈ¯¼ö¸¦ ³»·Áº¸³Â´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ ì ì¬ì ì¸ ì†Œí™˜ìˆ˜ë¥¼ ë‚´ë ¤ë³´ëƒˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ½Î¿ìÁö¾ÊÀ»°Å¸é... ³»°¡ ½Î¿ì°ÔÇÒ°Å¾ß!";
+					return "í…ì‹œ: ì‹¸ìš°ì§€ì•Šì„ê±°ë©´... ë‚´ê°€ ì‹¸ìš°ê²Œí• ê±°ì•¼!";
 				case 2:
-					return "ÅÙ½Ã: ¾ó¸¶³ª °­ÇØÁ³´ÂÁö º¸°í ½Í¾î!";
+					return "í…ì‹œ: ì–¼ë§ˆë‚˜ ê°•í•´ì¡ŒëŠ”ì§€ ë³´ê³  ì‹¶ì–´!";
 				case 3:
-					return "ÅÙ½Ã: ³Ê¹« ¿ìÂáÇØÁø°Å ¾Æ´Ï¾ß?";
+					return "í…ì‹œ: ë„ˆë¬´ ìš°ì­í•´ì§„ê±° ì•„ë‹ˆì•¼?";
 				case 4:
-					return "ÅÙ½ÃÀÇ »ç¾ÇÇÑ ½Ã¼±À» ´À²¼´Ù.";
+					return "í…ì‹œì˜ ì‚¬ì•…í•œ ì‹œì„ ì„ ëŠê¼ˆë‹¤.";
 				}
 			}	
 		case TENSI_TELE:
@@ -1164,15 +1164,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½Ã°¡ ´ç½ÅÀÇ °ø°£À» µÚÈçµé¾ú´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì˜ ê³µê°„ì„ ë’¤í”ë“¤ì—ˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ¿©±âº¸´Ü ¾ÈÀüÇÒ°Å¾ß!";
+					return "í…ì‹œ: ì—¬ê¸°ë³´ë‹¨ ì•ˆì „í• ê±°ì•¼!";
 				case 2:
-					return "ÅÙ½Ã: ÇÑ¼û µ¹¸®´Â°Ç ¾î¶§?";
+					return "í…ì‹œ: í•œìˆ¨ ëŒë¦¬ëŠ”ê±´ ì–´ë•Œ?";
 				case 3:
-					return "ÅÙ½Ã: ÁÁÀº ÀáÀÚ¸®¸¦ Ã£¾Æ³Â¾î!";
+					return "í…ì‹œ: ì¢‹ì€ ì ìë¦¬ë¥¼ ì°¾ì•„ëƒˆì–´!";
 				case 4:
-					return "´ç½ÅÀº °ø°£ÀÌ ÀÏ±×·¯Áö°í ÀÖ´Â °É ´À²¼´Ù.";
+					return "ë‹¹ì‹ ì€ ê³µê°„ì´ ì¼ê·¸ëŸ¬ì§€ê³  ìˆëŠ” ê±¸ ëŠê¼ˆë‹¤.";
 				}
 			}
 			else
@@ -1180,72 +1180,72 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "ÅÙ½Ã°¡ ´ç½ÅÀ» ¶Ç ´Ù¸¥ °÷À¸·Î ³¯·Áº¸³Â´Ù.";
+					return "í…ì‹œê°€ ë‹¹ì‹ ì„ ë˜ ë‹¤ë¥¸ ê³³ìœ¼ë¡œ ë‚ ë ¤ë³´ëƒˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ÀÌ °÷º¸´Ü ¸ÚÁø Àå¼Ò¾ß!";
+					return "í…ì‹œ: ì´ ê³³ë³´ë‹¨ ë©‹ì§„ ì¥ì†Œì•¼!";
 				case 2:
-					return "ÅÙ½Ã: Á» ´õ Àç¹Õ´Â °÷À» ¾Ë·ÁÁÙ°Ô!";
+					return "í…ì‹œ: ì¢€ ë” ì¬ë°ŒëŠ” ê³³ì„ ì•Œë ¤ì¤„ê²Œ!";
 				case 3:
-					return "ÅÙ½Ã: Áö·çÇÏ³×, º¯È­¸¦ Áàº¼±î?";
+					return "í…ì‹œ: ì§€ë£¨í•˜ë„¤, ë³€í™”ë¥¼ ì¤˜ë³¼ê¹Œ?";
 				case 4:
-					return "´ç½ÅÀº ½Ã¾ß°¡ ÇÎÇÎµµ´Â ´À³¦À» ¹Ş¾Ò´Ù.";
+					return "ë‹¹ì‹ ì€ ì‹œì•¼ê°€ í•‘í•‘ë„ëŠ” ëŠë‚Œì„ ë°›ì•˜ë‹¤.";
 				}
 			}	
 		case TENSI_EARTHQUAKE:
 			switch(randA(4))
 			{
 			case 0:
-				return "´ç½ÅÀº ´ëÁö°¡ µÚÁıÈ÷´Â ´À³¦À» ¹Ş¾Ò´Ù.";
+				return "ë‹¹ì‹ ì€ ëŒ€ì§€ê°€ ë’¤ì§‘íˆëŠ” ëŠë‚Œì„ ë°›ì•˜ë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: °¥¶óÁ®¶ó!";
+				return "í…ì‹œ: ê°ˆë¼ì ¸ë¼!";
 			case 2:
-				return "ÅÙ½Ã: Ä« Å©·¡½¬!";
+				return "í…ì‹œ: ì¹´ í¬ë˜ì‰¬!";
 			case 3:
-				return "ÅÙ½Ã: ÁöÁøÀÌ´Ù!";
+				return "í…ì‹œ: ì§€ì§„ì´ë‹¤!";
 			case 4:
-				return "°­·ÂÇÑ ÁöÁøÀÌ ÀÏ¾î³µ´Ù!";
+				return "ê°•ë ¥í•œ ì§€ì§„ì´ ì¼ì–´ë‚¬ë‹¤!";
 			}
 		case TENSI_MUNYUM:
 			switch(randA(4))
 			{
 			case 0:
-				return "´ç½ÅÀº ¸öÀÌ ¾ÆÁÖ ´Ü´ÜÇØÁö´Â °ÍÀ» ´À²¼´Ù.";
+				return "ë‹¹ì‹ ì€ ëª¸ì´ ì•„ì£¼ ë‹¨ë‹¨í•´ì§€ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: ÀÌ º¹¼ş¾Æ ¸Ô¾îº¼·¡?";
+				return "í…ì‹œ: ì´ ë³µìˆ­ì•„ ë¨¹ì–´ë³¼ë˜?";
 			case 2:
-				return "ÅÙ½Ã: ÃµÀÎÀÇ ÈûÀÌ¾ß!";
+				return "í…ì‹œ: ì²œì¸ì˜ í˜ì´ì•¼!";
 			case 3:
-				return "ÅÙ½Ã: ÀÌÁ¨ ¸Â´Â °Íµµ ¾È ¾ÆÇÃ°Å¾ß!";
+				return "í…ì‹œ: ì´ì   ë§ëŠ” ê²ƒë„ ì•ˆ ì•„í”Œê±°ì•¼!";
 			case 4:
-				return "ÅÙ½Ã°¡ ´ç½Å¿¡°Ô ¹«³ä¹«»óÀÇ ÈûÀ» ÁÖ¾ú´Ù.";
+				return "í…ì‹œê°€ ë‹¹ì‹ ì—ê²Œ ë¬´ë…ë¬´ìƒì˜ í˜ì„ ì£¼ì—ˆë‹¤.";
 			}
 		case TENSI_BURST:
 			switch(randA(2))
 			{
 			case 0:
-				return "ÅÙ½Ã: Äç!";
+				return "í…ì‹œ: ì¾…!";
 			case 1:
-				return "ÅÙ½Ã: ÈÖ¸»¸®Áö ¾Ê°Ô Á¶½ÉÇØ!";
+				return "í…ì‹œ: íœ˜ë§ë¦¬ì§€ ì•Šê²Œ ì¡°ì‹¬í•´!";
 			case 2:
-				return "ÅÙ½Ã: ÀÌ°Ç ¾î¶³±î?";
+				return "í…ì‹œ: ì´ê±´ ì–´ë–¨ê¹Œ?";
 			}
 		case TENSI_WEAPON:
 			switch(randA(6))
 			{
 			case 0:
-				return "´ç½ÅÀÇ ¼Õ¿¡ ºÓÀº ±â¿îÀÌ ¸ğÀÌ±â ½ÃÀÛÇß´Ù.";
+				return "ë‹¹ì‹ ì˜ ì†ì— ë¶‰ì€ ê¸°ìš´ì´ ëª¨ì´ê¸° ì‹œì‘í–ˆë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: ¹«±â°¡ º¼Ç°¾øÀİ¾Æ?";
+				return "í…ì‹œ: ë¬´ê¸°ê°€ ë³¼í’ˆì—†ì–ì•„?";
 			case 2:
-				return "ÅÙ½Ã: Á¶±İ¸¸ ºô·ÁÁÖ´Â°Å¾ß!";
+				return "í…ì‹œ: ì¡°ê¸ˆë§Œ ë¹Œë ¤ì£¼ëŠ”ê±°ì•¼!";
 			case 3:
-				return "ÅÙ½Ã: ÀÌÁ¨ ´©±¸¿¡°Ôµµ ÁöÁö¾ÊÀ»°É?";
+				return "í…ì‹œ: ì´ì   ëˆ„êµ¬ì—ê²Œë„ ì§€ì§€ì•Šì„ê±¸?";
 			case 4:
-				return "ÅÙ½Ã: ¸ô·¡ ºô·ÁÁÖ´Â°Å´Ï±î ´©±¸¿¡°Ô ¸»ÇÏÁö¸¶!";
+				return "í…ì‹œ: ëª°ë˜ ë¹Œë ¤ì£¼ëŠ”ê±°ë‹ˆê¹Œ ëˆ„êµ¬ì—ê²Œ ë§í•˜ì§€ë§ˆ!";
 			case 5:
-				return "ÅÙ½Ã: ²À µ¹·ÁÁà¾ßÇØ?";
+				return "í…ì‹œ: ê¼­ ëŒë ¤ì¤˜ì•¼í•´?";
 			case 6:
-				return "ÅÙ½Ã: µéÅ°¸é ÀÌÄí¿¡°Ô È¥³ª´Ï±ñ...";
+				return "í…ì‹œ: ë“¤í‚¤ë©´ ì´ì¿ ì—ê²Œ í˜¼ë‚˜ë‹ˆê¹...";
 			}
 		case TENSI_KANAME:
 			if (good_)
@@ -1253,61 +1253,61 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch (randA(5))
 				{
 				case 0:
-					return "ÅÙ½Ã´Â ´ç½Å¿¡°Ô Áö¿ø±ºÀ» ³»·ÁÁÖ¾ú´Ù.";
+					return "í…ì‹œëŠ” ë‹¹ì‹ ì—ê²Œ ì§€ì›êµ°ì„ ë‚´ë ¤ì£¼ì—ˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ÀÌ°Ô ÀÖ´Ù¸é ÁöÁö´Â ¾Ê°ÚÁö?";
+					return "í…ì‹œ: ì´ê²Œ ìˆë‹¤ë©´ ì§€ì§€ëŠ” ì•Šê² ì§€?";
 				case 2:
-					return "ÅÙ½Ã: ³»°¡ ±Í¿©¿ö ÇÏ´Â ¾ÖµéÀÌ¾ß!";
+					return "í…ì‹œ: ë‚´ê°€ ê·€ì—¬ì›Œ í•˜ëŠ” ì• ë“¤ì´ì•¼!";
 				case 3:
-					return "ÅÙ½Ã: ¾Ö¿Ï¿ë µ¹ÀÌ¶õ°Å µé¾îºÃ¾î?";
+					return "í…ì‹œ: ì• ì™„ìš© ëŒì´ë€ê±° ë“¤ì–´ë´¤ì–´?";
 				case 4:
-					return "ÅÙ½Ã: Á¶½ÉÈ÷ ´Ù·ïÁà!";
+					return "í…ì‹œ: ì¡°ì‹¬íˆ ë‹¤ë¤„ì¤˜!";
 				case 5:
-					return "ÅÙ½Ã: Ä«³ª¸Ş ÆÇ³Ú!";
+					return "í…ì‹œ: ì¹´ë‚˜ë©” íŒë„¬!";
 				}
 			}
 			else {
 				switch (randA(5))
 				{
 				case 0:
-					return "ÅÙ½Ã: °Å±â¼­ ¸Ö¾îÁö´Â°Ô ÁÁÀ»°Å¾ß";
+					return "í…ì‹œ: ê±°ê¸°ì„œ ë©€ì–´ì§€ëŠ”ê²Œ ì¢‹ì„ê±°ì•¼";
 				case 1:
-					return "ÅÙ½Ã: µ¹ Ä§´ë¶ó°í µé¾îºÃ¾î?";
+					return "í…ì‹œ: ëŒ ì¹¨ëŒ€ë¼ê³  ë“¤ì–´ë´¤ì–´?";
 				case 2:
-					return "ÅÙ½Ã: ³» µ¹Àº »ç¶÷À» ¹°Áø¾Ê¾Æ... ½î±ä ÇÏÁö¸¸!";
+					return "í…ì‹œ: ë‚´ ëŒì€ ì‚¬ëŒì„ ë¬¼ì§„ì•Šì•„... ì˜ê¸´ í•˜ì§€ë§Œ!";
 				case 3:
-					return "ÅÙ½Ã: ¿©±â¼­ »ì¾Æ°¥ ¼ö ÀÖÀ»Áö ½ÃÇèÇØºÁ¾ß°Ú¾î!";
+					return "í…ì‹œ: ì—¬ê¸°ì„œ ì‚´ì•„ê°ˆ ìˆ˜ ìˆì„ì§€ ì‹œí—˜í•´ë´ì•¼ê² ì–´!";
 				case 4:
-					return "ÅÙ½Ã: ÀÌ¹ø¿¡ »õ·Î ¸¸µç ½ºÆçÄ«µåÀÎµ¥, ½ÃÇè Á» ÇØÁÙ·¡?";
+					return "í…ì‹œ: ì´ë²ˆì— ìƒˆë¡œ ë§Œë“  ìŠ¤í ì¹´ë“œì¸ë°, ì‹œí—˜ ì¢€ í•´ì¤„ë˜?";
 				case 5:
-					return "ÅÙ½Ã: »ç°İ¿¬½ÀÀ» ÇØº¸Áö¾ÊÀ»·¡? ¹°·Ğ ³Ê°¡ Ç¥ÀûÀÌ¾ß!";
+					return "í…ì‹œ: ì‚¬ê²©ì—°ìŠµì„ í•´ë³´ì§€ì•Šì„ë˜? ë¬¼ë¡  ë„ˆê°€ í‘œì ì´ì•¼!";
 				}
 			}
 		case TENSI_FIELD:
 			switch (randA(4))
 			{
 			case 0:
-				return "´ç½ÅÀ» Áß½ÉÀ¸·Î ¹«¾ğ°¡ °Å´ëÇÑ Àå¸·ÀÌ ÆîÃÄÁüÀ» ´À²¼´Ù.";
+				return "ë‹¹ì‹ ì„ ì¤‘ì‹¬ìœ¼ë¡œ ë¬´ì–¸ê°€ ê±°ëŒ€í•œ ì¥ë§‰ì´ í¼ì³ì§ì„ ëŠê¼ˆë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: »õ·Î¿î ÇÊµå°¡ ÇÊ¿äÇØ?";
+				return "í…ì‹œ: ìƒˆë¡œìš´ í•„ë“œê°€ í•„ìš”í•´?";
 			case 2:
-				return "ÅÙ½Ã: ¿©±â¼­ ½Î¿ì´Â°Ô Á» ´õ Àç¹Õ¾îº¸ÀÌ´Âµ¥!";
+				return "í…ì‹œ: ì—¬ê¸°ì„œ ì‹¸ìš°ëŠ”ê²Œ ì¢€ ë” ì¬ë°Œì–´ë³´ì´ëŠ”ë°!";
 			case 3:
-				return "ÅÙ½Ã: ÅÙÆ® Á» ÆîÄ¥Å×´Ï±î µµ¿ÍÁÙ·¡?";
+				return "í…ì‹œ: í…íŠ¸ ì¢€ í¼ì¹ í…Œë‹ˆê¹Œ ë„ì™€ì¤„ë˜?";
 			case 4:
-				return "ÅÙ½Ã: Á» ´õ ÁÁÀº È¯°æÀÌ ÀÖ´Âµ¥ ½ÃÇèÇØº¼·¡?";
+				return "í…ì‹œ: ì¢€ ë” ì¢‹ì€ í™˜ê²½ì´ ìˆëŠ”ë° ì‹œí—˜í•´ë³¼ë˜?";
 			}
 		case TENSI_BLIND:
 			switch (randA(3))
 			{
 			case 0:
-				return "ÅÙ½Ã: ÇÑ ¼û ÀßÅ×´Ï±î ºÒ Á» ²¨¾ß°Ú¾î";
+				return "í…ì‹œ: í•œ ìˆ¨ ì˜í…Œë‹ˆê¹Œ ë¶ˆ ì¢€ êº¼ì•¼ê² ì–´";
 			case 1:
-				return "ÅÙ½Ã: ³Ê¹« ¹àÁö¾Ê¾Æ?";
+				return "í…ì‹œ: ë„ˆë¬´ ë°ì§€ì•Šì•„?";
 			case 2:
-				return "ÅÙ½Ã: ÀÌ°Ô Á» ´õ Àç¹ÌÀÖÀ» °Å °°Áö¾Ê¾Æ?";
+				return "í…ì‹œ: ì´ê²Œ ì¢€ ë” ì¬ë¯¸ìˆì„ ê±° ê°™ì§€ì•Šì•„?";
 			case 3:
-				return "ÅÙ½Ã: ´«¿¡ º¸ÀÌ´Â °ÍÀÌ ÀüºÎ´Â ¾Æ´Ï¾ß!";
+				return "í…ì‹œ: ëˆˆì— ë³´ì´ëŠ” ê²ƒì´ ì „ë¶€ëŠ” ì•„ë‹ˆì•¼!";
 			}
 		case TENSI_BUFF_DEBUFF:
 			if (good_)
@@ -1315,109 +1315,109 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch (randA(5))
 				{
 				case 0:
-					return "ÅÙ½Ã´Â ÁÖº¯ÀÇ Èå¸§À» Á¶ÀıÇß´Ù.";
+					return "í…ì‹œëŠ” ì£¼ë³€ì˜ íë¦„ì„ ì¡°ì ˆí–ˆë‹¤.";
 				case 1:
-					return "ÅÙ½Ã: ¿©±â±îÁö ÇØÁá´Âµ¥µµ Áø´Ù¸é °¢¿ÀÇÏ´Â°Ô ÁÁÀ»°Å¾ß";
+					return "í…ì‹œ: ì—¬ê¸°ê¹Œì§€ í•´ì¤¬ëŠ”ë°ë„ ì§„ë‹¤ë©´ ê°ì˜¤í•˜ëŠ”ê²Œ ì¢‹ì„ê±°ì•¼";
 				case 2:
-					return "ÅÙ½Ã: ÀÌ¹ø¿£ ±âºĞÀÌ ÁÁÀ¸´Ï±î Æ¯º° ¼±¹°ÀÌ¾ß!";
+					return "í…ì‹œ: ì´ë²ˆì—” ê¸°ë¶„ì´ ì¢‹ìœ¼ë‹ˆê¹Œ íŠ¹ë³„ ì„ ë¬¼ì´ì•¼!";
 				case 3:
-					return "ÅÙ½Ã: ÀÌ°Ô ÀûÀÌ ´À·Áº¸ÀÎ´Ù°°Àº°ÅÁö?";
+					return "í…ì‹œ: ì´ê²Œ ì ì´ ëŠë ¤ë³´ì¸ë‹¤ê°™ì€ê±°ì§€?";
 				case 4:
-					return "ÅÙ½Ã: ÀÌ°É·Î ÃæºĞÇÏ·Á³ª?";
+					return "í…ì‹œ: ì´ê±¸ë¡œ ì¶©ë¶„í•˜ë ¤ë‚˜?";
 				case 5:
-					return "ÅÙ½Ã: ±Àº¬ÀÌ °°Àº °Íµé!";
+					return "í…ì‹œ: êµ¼ë²µì´ ê°™ì€ ê²ƒë“¤!";
 				}
 			}
 			else {
 				switch (randA(5))
 				{
 				case 0:
-					return "ÅÙ½Ã: ¸ğµÎ¿¡°Ô º¯È­¸¦ Á» Áàº¼±î?";
+					return "í…ì‹œ: ëª¨ë‘ì—ê²Œ ë³€í™”ë¥¼ ì¢€ ì¤˜ë³¼ê¹Œ?";
 				case 1:
-					return "ÅÙ½Ã: ÆÄÆ¼ÀÇ ½ÃÀÛÀÌ¾ß!";
+					return "í…ì‹œ: íŒŒí‹°ì˜ ì‹œì‘ì´ì•¼!";
 				case 2:
-					return "ÅÙ½Ã: ¶Ù¾î¼­ µµ¸ÁÄ¡´Â°Ç Àç¹Ì¾øÀ¸´Ï±î, ¸ğµÎ¸¦ ºü¸£°Ô ÇØº¸¾ÒÁö!";
+					return "í…ì‹œ: ë›°ì–´ì„œ ë„ë§ì¹˜ëŠ”ê±´ ì¬ë¯¸ì—†ìœ¼ë‹ˆê¹Œ, ëª¨ë‘ë¥¼ ë¹ ë¥´ê²Œ í•´ë³´ì•˜ì§€!";
 				case 3:
-					return "ÅÙ½Ã: ÀÌÁ¦ µµ¸ÁÄ¥ ¼ø ¾øÀ»²¬?";
+					return "í…ì‹œ: ì´ì œ ë„ë§ì¹  ìˆœ ì—†ì„ê»„?";
 				case 4:
-					return "ÅÙ½Ã: ³Ê¹« ½±°Ô ÀÌ±æ°Å°°À¸´Ï±î, Á» °­È­½ÃÄÑÁàºÃÁö!";
+					return "í…ì‹œ: ë„ˆë¬´ ì‰½ê²Œ ì´ê¸¸ê±°ê°™ìœ¼ë‹ˆê¹Œ, ì¢€ ê°•í™”ì‹œì¼œì¤˜ë´¤ì§€!";
 				case 5:
-					return "ÅÙ½Ã: Á» ´õ ½º¸±ÀÌ ÀÖ¾î¾ß°ÚÁö?";
+					return "í…ì‹œ: ì¢€ ë” ìŠ¤ë¦´ì´ ìˆì–´ì•¼ê² ì§€?";
 				}
 			}
 		case TENSI_SUCIDE:
 			switch (randA(6))
 			{
 			case 0:
-				return "ÅÙ½Ã: ÁÁÀº Ä£±¸µéÀ» ¼Ò°³ÇØÁÙ°Ô!";
+				return "í…ì‹œ: ì¢‹ì€ ì¹œêµ¬ë“¤ì„ ì†Œê°œí•´ì¤„ê²Œ!";
 			case 1:
-				return "ÅÙ½Ã: ±¦ÂúÀº ¾ÖµéÀÌ¶ó°í! Á» °­°æÆÄÀÎ°É Á¦¿ÜÇÏ¸é ¸»ÀÌÁö";
+				return "í…ì‹œ: ê´œì°®ì€ ì• ë“¤ì´ë¼ê³ ! ì¢€ ê°•ê²½íŒŒì¸ê±¸ ì œì™¸í•˜ë©´ ë§ì´ì§€";
 			case 2:
-				return "ÅÙ½Ã: ÆøÆÄÇÏ´Â°Å ÁÁ¾ÆÇØ?";
+				return "í…ì‹œ: í­íŒŒí•˜ëŠ”ê±° ì¢‹ì•„í•´?";
 			case 3:
-				return "ÅÙ½Ã: ¿ë¸ÍÇÏÁö¸¸ ¾Æ±ºÀ» ½Å°æ¾²Áö¾Ê´Â°Ô ´ÜÁ¡ÀÌ±äÇÏÁö";
+				return "í…ì‹œ: ìš©ë§¹í•˜ì§€ë§Œ ì•„êµ°ì„ ì‹ ê²½ì“°ì§€ì•ŠëŠ”ê²Œ ë‹¨ì ì´ê¸´í•˜ì§€";
 			case 4:
-				return "ÅÙ½Ã: Àá±ñÀÌÁö¸¸ »çÀÌÁÁ°Ô Áö³»Áà!";
+				return "í…ì‹œ: ì ê¹ì´ì§€ë§Œ ì‚¬ì´ì¢‹ê²Œ ì§€ë‚´ì¤˜!";
 			case 5:
-				return "ÅÙ½Ã: ÀÚÆøÆ¯°øÀÌ¶õ°Ç Àß ÀÌÇØÇÒ ¼ö ¾ø¾î... ¹«½¼ Á¾±³¶óµµ ¹Ï´Â°É±î?";
+				return "í…ì‹œ: ìí­íŠ¹ê³µì´ë€ê±´ ì˜ ì´í•´í•  ìˆ˜ ì—†ì–´... ë¬´ìŠ¨ ì¢…êµë¼ë„ ë¯¿ëŠ”ê±¸ê¹Œ?";
 			case 6:
-				return "ÅÙ½Ã: ÁÖº¯À» ½Ï Á¤¸®ÇÏ´Âµ¥´Â ÀÌ¸¸ÇÑ°Ô ¾øÁö!";
+				return "í…ì‹œ: ì£¼ë³€ì„ ì‹¹ ì •ë¦¬í•˜ëŠ”ë°ëŠ” ì´ë§Œí•œê²Œ ì—†ì§€!";
 			}
 		case TENSI_WEATHER_FOG:
 			switch (randA(5))
 			{
 			case 0:
-				return "ÅÙ½Ã: ¿À´ÃÀÇ ³¯¾¾´Â ¸Å¿ì Èå¸®°Ú½À´Ï´Ù.";
+				return "í…ì‹œ: ì˜¤ëŠ˜ì˜ ë‚ ì”¨ëŠ” ë§¤ìš° íë¦¬ê² ìŠµë‹ˆë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: ³­ ¾È°³³¤³¯Àº º°·Î ÁÁ¾ÆÇÏÁö¾Ê¾Æ.";
+				return "í…ì‹œ: ë‚œ ì•ˆê°œë‚€ë‚ ì€ ë³„ë¡œ ì¢‹ì•„í•˜ì§€ì•Šì•„.";
 			case 2:
-				return "ÅÙ½Ã: ÀÌ·± ³¯¾¾¿¡¼­µµ ½Î¿ï ¼ö ÀÖ¾î?";
+				return "í…ì‹œ: ì´ëŸ° ë‚ ì”¨ì—ì„œë„ ì‹¸ìš¸ ìˆ˜ ìˆì–´?";
 			case 3:
-				return "ÅÙ½Ã: ½È´Ù. ½ÀÇÏ°í ¾îµÓÀİ¾Æ!";
+				return "í…ì‹œ: ì‹«ë‹¤. ìŠµí•˜ê³  ì–´ë‘¡ì–ì•„!";
 			case 4:
-				return "ÅÙ½Ã: ¸öÀ» ¼û±â±â¿£ Àû´çÇÑ ³¯¾¾Áö!";
+				return "í…ì‹œ: ëª¸ì„ ìˆ¨ê¸°ê¸°ì—” ì ë‹¹í•œ ë‚ ì”¨ì§€!";
 			case 5:
-				return "ÅÙ½Ã: ±â»ó¹ßÇö!";
+				return "í…ì‹œ: ê¸°ìƒë°œí˜„!";
 			}
 		case TENSI_WEATHER_THUNDER:
 			switch (randA(6))
 			{
 			case 0:
-				return "ÅÙ½Ã: ¿À´ÃÀÇ ³¯¾¾´Â Å« ÃµµÕ¹ø°³°¡ Ä¡°Ú½À´Ï´Ù!";
+				return "í…ì‹œ: ì˜¤ëŠ˜ì˜ ë‚ ì”¨ëŠ” í° ì²œë‘¥ë²ˆê°œê°€ ì¹˜ê² ìŠµë‹ˆë‹¤!";
 			case 1:
-				return "ÅÙ½Ã: È­²öÇÏ°Ô °¡ÀÚ°í!";
+				return "í…ì‹œ: í™”ëˆí•˜ê²Œ ê°€ìê³ !";
 			case 2:
-				return "ÅÙ½Ã: ¹ø°³¿¡ ¸ÂÀ» È®·üÀÌ ¾ó¸¶³ª µÇÁö?";
+				return "í…ì‹œ: ë²ˆê°œì— ë§ì„ í™•ë¥ ì´ ì–¼ë§ˆë‚˜ ë˜ì§€?";
 			case 3:
-				return "ÅÙ½Ã: ÀÌ·±°Ç ÇÇÇÒ ¼ö ¾øÀ»²¬?";
+				return "í…ì‹œ: ì´ëŸ°ê±´ í”¼í•  ìˆ˜ ì—†ì„ê»„?";
 			case 4:
-				return "ÅÙ½Ã: ÀÔ°íÀÖ´Â ¿ÊÀÌ Àı¿¬¼ÒÀçÀÌ±æ ¹Ù¶ö°Ô!";
+				return "í…ì‹œ: ì…ê³ ìˆëŠ” ì˜·ì´ ì ˆì—°ì†Œì¬ì´ê¸¸ ë°”ë„ê²Œ!";
 			case 5:
-				return "ÅÙ½Ã: ¿ì¸£¸ª ÄçÄç!";
+				return "í…ì‹œ: ìš°ë¥´ë¦‰ ì¾…ì¾…!";
 			case 6:
-				return "ÅÙ½Ã: ºñ»óÀÇ °ËÀÌ¿©! ÇÏ´Ã¿¡ ÃµµÕ¹ø°³¸¦ ¸ğ¾Æ¶ó!";
+				return "í…ì‹œ: ë¹„ìƒì˜ ê²€ì´ì—¬! í•˜ëŠ˜ì— ì²œë‘¥ë²ˆê°œë¥¼ ëª¨ì•„ë¼!";
 			}
 		case TENSI_WEATHER_SUN:
 			switch (randA(6))
 			{
 			case 0:
-				return "ÅÙ½Ã: ¿À´ÃÀÇ ³¯¾¾´Â ±¸¸§ ÇÑÁ¡¾øÀÌ Â¸Â¸ÇÏ°Ú½À´Ï´Ù.";
+				return "í…ì‹œ: ì˜¤ëŠ˜ì˜ ë‚ ì”¨ëŠ” êµ¬ë¦„ í•œì ì—†ì´ ì¨ì¨í•˜ê² ìŠµë‹ˆë‹¤.";
 			case 1:
-				return "ÅÙ½Ã: ¾î¶»°Ô ´øÀü¿¡ ÇŞºûÀÌ ºñÄ¡´Â°ÅÁö? ¹¹ ¾î¶§!";
+				return "í…ì‹œ: ì–´ë–»ê²Œ ë˜ì „ì— í–‡ë¹›ì´ ë¹„ì¹˜ëŠ”ê±°ì§€? ë­ ì–´ë•Œ!";
 			case 2:
-				return "ÅÙ½Ã: ÀÌ·± ÅÂ¾çºû ¾Æ·¡¼­ °ú¿¬ ´©°¡ ¼ûÀ» ¼ö ÀÖÀ»±î?";
+				return "í…ì‹œ: ì´ëŸ° íƒœì–‘ë¹› ì•„ë˜ì„œ ê³¼ì—° ëˆ„ê°€ ìˆ¨ì„ ìˆ˜ ìˆì„ê¹Œ?";
 			case 3:
-				return "ÅÙ½Ã: Àá½Ã »¡·¡¸¦ ¸»·Á¾ßÇÏ´Ï±î!";
+				return "í…ì‹œ: ì ì‹œ ë¹¨ë˜ë¥¼ ë§ë ¤ì•¼í•˜ë‹ˆê¹Œ!";
 			case 4:
-				return "ÅÙ½Ã: ÇŞºûÀÌ¿©!";
+				return "í…ì‹œ: í–‡ë¹›ì´ì—¬!";
 			case 5:
-				return "ÅÙ½Ã: ºñ»óÀÇ °ËÀ¸·Ğ ÀÌ·± °Íµµ ÇÒ ¼ö ÀÖÁö!";
+				return "í…ì‹œ: ë¹„ìƒì˜ ê²€ìœ¼ë¡  ì´ëŸ° ê²ƒë„ í•  ìˆ˜ ìˆì§€!";
 			case 6:
-				return "ÅÙ½Ã: ¿À´ÃÀº ¼ÒÇ³°¡´Â ³¯ÀÌ¾ß!";
+				return "í…ì‹œ: ì˜¤ëŠ˜ì€ ì†Œí’ê°€ëŠ” ë‚ ì´ì•¼!";
 			}	
 		}
 
 	}
-	return "ÅÙ½Ã´Â ¾Èµé¸®´Â ¸ñ¼Ò¸®·Î ¼Ò±Ù°Å·È´Ù.";
+	return "í…ì‹œëŠ” ì•ˆë“¤ë¦¬ëŠ” ëª©ì†Œë¦¬ë¡œ ì†Œê·¼ê±°ë ¸ë‹¤.";
 
 }

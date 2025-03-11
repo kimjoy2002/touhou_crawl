@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: swako.cpp
+// íŒŒì¼ì´ë¦„: swako.cpp
 //
-// ³»¿ë: ½º¿ÍÄÚ ±Ç´É °ü·Ã
+// ë‚´ìš©: ìŠ¤ì™€ì½” ê¶ŒëŠ¥ ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,41 +21,41 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	case SWAKO_1_JUMP:		
 		switch(kind)
 		{
-		case SWAKO_NAME: return "°³±¸¸® Á¡ÇÁ";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÂªÀº °Å¸®¸¦ Á¡ÇÁÇÒ ¼ö ÀÖ´Ù.                             (P, ¿µ·Â)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ÂªÀº °Å¸®¸¦ Á¡ÇÁÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÂªÀº °Å¸®¸¦ Á¡ÇÁÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ê°œêµ¬ë¦¬ ì í”„";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì§§ì€ ê±°ë¦¬ë¥¼ ì í”„í•  ìˆ˜ ìˆë‹¤.                             (P, ì˜ë ¥)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ì§§ì€ ê±°ë¦¬ë¥¼ ì í”„í•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì§§ì€ ê±°ë¦¬ë¥¼ ì í”„í•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_1_TEMPLE:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "½ÅÀü ¼¼¿ì±â";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ½ÅÀüÀ» ¼¼¿ö ½Å¾Ó½ÉÀ» ¹ú ¼ö ÀÖ´Ù.                              (P)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ½ÅÀüÀ» ¼¼¿ï ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ½ÅÀüÀ» ¼¼¿ï ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì‹ ì „ ì„¸ìš°ê¸°";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì‹ ì „ì„ ì„¸ì›Œ ì‹ ì•™ì‹¬ì„ ë²Œ ìˆ˜ ìˆë‹¤.                              (P)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ì‹ ì „ì„ ì„¸ìš¸ ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì‹ ì „ì„ ì„¸ìš¸ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_1_WATER_GUN:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "¹°ÃÑ";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ¸Ö¸®ÀÖ´Â Àû¿¡ ¹°ÀÇ Åº¸·À» ³¯¸± ¼ö ÀÖ´Ù.                    (¿µ·Â)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¹°ÃÑÀ» ³¯¸± ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ¹°ÃÑÀ» ³¯¸± ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ë¬¼ì´";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë©€ë¦¬ìˆëŠ” ì ì— ë¬¼ì˜ íƒ„ë§‰ì„ ë‚ ë¦´ ìˆ˜ ìˆë‹¤.                    (ì˜ë ¥)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë¬¼ì´ì„ ë‚ ë¦´ ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë¬¼ì´ì„ ë‚ ë¦´ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_1_TONGUE:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "°³±¸¸® Çô";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ¸Ö¸®ÀÖ´Â ÀûÀ» ²ø¾î ´ç±æ ¼ö ÀÖ´Ù.                        (P, ¿µ·Â)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¸Ö¸®ÀÖ´Â ÀûÀ» ²ø¾î´ç±æ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÀûÀ» ²ø¾î´ç±æ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ê°œêµ¬ë¦¬ í˜€";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë©€ë¦¬ìˆëŠ” ì ì„ ëŒì–´ ë‹¹ê¸¸ ìˆ˜ ìˆë‹¤.                        (P, ì˜ë ¥)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë©€ë¦¬ìˆëŠ” ì ì„ ëŒì–´ë‹¹ê¸¸ ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì ì„ ëŒì–´ë‹¹ê¸¸ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 const char* GetSwakoString2(swako_2_power power, swako_string kind)
@@ -65,50 +65,50 @@ const char* GetSwakoString2(swako_2_power power, swako_string kind)
 	case SWAKO_2_KILL_HP:		
 		switch(kind)
 		{
-		case SWAKO_NAME: return "Á×ÀÏ¶§ Ã¼·ÂÈ¸º¹";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÀûÀ» Á×ÀÏ¶§¸¶´Ù È®·üÀûÀ¸·Î Ã¼·ÂÀ» È¸º¹ÇÑ´Ù.              (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ÀûÀ» Á×ÀÓÀ¸·Î Ã¼·ÂÀ» È¸º¹ÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÀûÀ» Á×¿©¼­ Ã¼·ÂÀ» È¸º¹ÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì£½ì¼ë•Œ ì²´ë ¥íšŒë³µ";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì ì„ ì£½ì¼ë•Œë§ˆë‹¤ í™•ë¥ ì ìœ¼ë¡œ ì²´ë ¥ì„ íšŒë³µí•œë‹¤.              (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ì ì„ ì£½ì„ìœ¼ë¡œ ì²´ë ¥ì„ íšŒë³µí•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì ì„ ì£½ì—¬ì„œ ì²´ë ¥ì„ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_2_KILL_MP:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "Á×ÀÏ¶§ ¿µ·ÂÈ¸º¹";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÀûÀ» Á×ÀÏ¶§¸¶´Ù ¿µ·ÂÀ» È¸º¹ÇÑ´Ù.                         (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ÀûÀ» Á×ÀÓÀ¸·Î ¿µ·ÂÀ» È¸º¹ÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÀûÀ» Á×¿©¼­ ¿µ·ÂÀ» È¸º¹ÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì£½ì¼ë•Œ ì˜ë ¥íšŒë³µ";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì ì„ ì£½ì¼ë•Œë§ˆë‹¤ ì˜ë ¥ì„ íšŒë³µí•œë‹¤.                         (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ì ì„ ì£½ì„ìœ¼ë¡œ ì˜ë ¥ì„ íšŒë³µí•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì ì„ ì£½ì—¬ì„œ ì˜ë ¥ì„ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_2_KILL_POWER:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "Á×ÀÏ¶§ ÆÄ¿öÈ¸º¹";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÀûÀ» Á×ÀÏ¶§¸¶´Ù È®·üÀûÀ¸·Î ÆÄ¿ö¸¦ È¸º¹ÇÑ´Ù.              (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ÀûÀ» Á×ÀÓÀ¸·Î ÆÄ¿ö¸¦ È¸º¹ÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÀûÀ» Á×¿©¼­ ÆÄ¿ö¸¦ È¸º¹ÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì£½ì¼ë•Œ íŒŒì›ŒíšŒë³µ";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì ì„ ì£½ì¼ë•Œë§ˆë‹¤ í™•ë¥ ì ìœ¼ë¡œ íŒŒì›Œë¥¼ íšŒë³µí•œë‹¤.              (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ì ì„ ì£½ì„ìœ¼ë¡œ íŒŒì›Œë¥¼ íšŒë³µí•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì ì„ ì£½ì—¬ì„œ íŒŒì›Œë¥¼ íšŒë³µí•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_2_SWIM:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "¼ö¿µ";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ¼ö¿µÇÒ ¼ö ÀÖ´Ù. ¹°¿¡¼­ È¸ÇÇ º¸³Ê½º¸¦ ¾ò´Â´Ù.             (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¼ö¿µÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¸ÆÁÖº´ÀÌ´Ù.";
+		case SWAKO_NAME: return "ìˆ˜ì˜";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ìˆ˜ì˜í•  ìˆ˜ ìˆë‹¤. ë¬¼ì—ì„œ íšŒí”¼ ë³´ë„ˆìŠ¤ë¥¼ ì–»ëŠ”ë‹¤.             (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ìˆ˜ì˜í•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë§¥ì£¼ë³‘ì´ë‹¤.";
 		}
 		break;
 	case SWAKO_2_DEAD_PROTECT:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "Á×À½À¸·ÎºÎÅÍÀÇ º¸È£";
-		case SWAKO_SIMPLE_INFOR: return "½º¿ÍÄÚ°¡ °¡²û ´ç½ÅÀ» Á×À½À¸·ÎºÎÅÍ º¸È£ÇÑ´Ù.                     (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ½º¿ÍÄÚ·ÎºÎÅÍ º¸È£¹Ş´Â´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ½º¿ÍÄÚ·ÎºÎÅÍ º¸È£¹ŞÀ» ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì£½ìŒìœ¼ë¡œë¶€í„°ì˜ ë³´í˜¸";
+		case SWAKO_SIMPLE_INFOR: return "ìŠ¤ì™€ì½”ê°€ ê°€ë” ë‹¹ì‹ ì„ ì£½ìŒìœ¼ë¡œë¶€í„° ë³´í˜¸í•œë‹¤.                     (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ìŠ¤ì™€ì½”ë¡œë¶€í„° ë³´í˜¸ë°›ëŠ”ë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ìŠ¤ì™€ì½”ë¡œë¶€í„° ë³´í˜¸ë°›ì„ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 const char* GetSwakoString3(swako_3_power power, swako_string kind)
@@ -118,41 +118,41 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	case SWAKO_3_CURSE:		
 		switch(kind)
 		{
-		case SWAKO_NAME: return "ÅäÂø½ÅÀÇ Àç¾Ó";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº »ó´ë¿¡ Àç¾ÓÀ» °É ¼ö ÀÖ´Ù.                               (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ »ó´ë¸¦ ÀúÁÖÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ÀúÁÖ¸¦ °É ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "í† ì°©ì‹ ì˜ ì¬ì•™";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ìƒëŒ€ì— ì¬ì•™ì„ ê±¸ ìˆ˜ ìˆë‹¤.                               (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ìƒëŒ€ë¥¼ ì €ì£¼í•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ì €ì£¼ë¥¼ ê±¸ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_3_DIGGING:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "±¼Âø";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº º®À» ¹«³Ê¶ß¸± ¼ö ÀÖ´Ù.                                  (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ º®À» ¹«³Ê¶ß¸± ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó º®À» ¹«³Ê¶ß¸± ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "êµ´ì°©";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë²½ì„ ë¬´ë„ˆëœ¨ë¦´ ìˆ˜ ìˆë‹¤.                                  (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë²½ì„ ë¬´ë„ˆëœ¨ë¦´ ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë²½ì„ ë¬´ë„ˆëœ¨ë¦´ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_3_SUMMON_FLOG:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "°³±¸¸® ¼ÒÈ¯";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº °³±¸¸® µ¿·á¸¦ ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.                           (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ °³±¸¸®¸¦ ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó °³±¸¸®¸¦ ¼ÒÈ¯ÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ê°œêµ¬ë¦¬ ì†Œí™˜";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ê°œêµ¬ë¦¬ ë™ë£Œë¥¼ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.                           (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ê°œêµ¬ë¦¬ë¥¼ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ê°œêµ¬ë¦¬ë¥¼ ì†Œí™˜í•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_3_STATUE:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "¼®»ó ¼¼¿ì±â";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÀÏÁ¤½Ã°£µ¿¾È ¼®»óÀ» ¼¼¿ï ¼ö ÀÖ´Ù.                       (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ±Í¿©¿î °³±¸¸® ¼®»óÀ» ¼¼¿ï ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó °³±¸¸® ¼®»óÀ» ¼¼¿ï ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ì„ìƒ ì„¸ìš°ê¸°";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì¼ì •ì‹œê°„ë™ì•ˆ ì„ìƒì„ ì„¸ìš¸ ìˆ˜ ìˆë‹¤.                       (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ê·€ì—¬ìš´ ê°œêµ¬ë¦¬ ì„ìƒì„ ì„¸ìš¸ ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ê°œêµ¬ë¦¬ ì„ìƒì„ ì„¸ìš¸ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 const char* GetSwakoString4(swako_4_power power, swako_string kind)
@@ -162,50 +162,50 @@ const char* GetSwakoString4(swako_4_power power, swako_string kind)
 	case SWAKO_4_COLD_RESIST:		
 		switch(kind)
 		{
-		case SWAKO_NAME: return "³Ã±â ÀúÇ×";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ³Ã±â¿¡ ÀúÇ×ÀÌ ÀÖ´Ù.                                      (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ³Ã±â¿¡ °­ÇÏ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ³Ã±â¿¡ °­ÇÏÁö ¾Ê´Ù.";
+		case SWAKO_NAME: return "ëƒ‰ê¸° ì €í•­";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ëƒ‰ê¸°ì— ì €í•­ì´ ìˆë‹¤.                                      (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ëƒ‰ê¸°ì— ê°•í•˜ë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ëƒ‰ê¸°ì— ê°•í•˜ì§€ ì•Šë‹¤.";
 		}
 		break;
 	case SWAKO_4_FIRE_RESIST:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "È­¿° ÀúÇ×";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº È­¿°¿¡ ÀúÇ×ÀÌ ÀÖ´Ù.                                      (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ È­¿°¿¡ °­ÇÏ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó È­¿°¿¡ °­ÇÏÁö ¾Ê´Ù.";
+		case SWAKO_NAME: return "í™”ì—¼ ì €í•­";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ í™”ì—¼ì— ì €í•­ì´ ìˆë‹¤.                                      (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ í™”ì—¼ì— ê°•í•˜ë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ í™”ì—¼ì— ê°•í•˜ì§€ ì•Šë‹¤.";
 		}
 		break;
 	case SWAKO_4_AC:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "ÇÇºÎ °­È­";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº AC°¡ Áõ°¡ÇÑ´Ù.                                           (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ÇÇºÎ°¡ ´Ü´ÜÇØÁ³´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀÇ ÇÇºÎ´Â ¹°··ÇØÁ³´Ù.";
+		case SWAKO_NAME: return "í”¼ë¶€ ê°•í™”";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ACê°€ ì¦ê°€í•œë‹¤.                                           (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ í”¼ë¶€ê°€ ë‹¨ë‹¨í•´ì¡Œë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì˜ í”¼ë¶€ëŠ” ë¬¼ë í•´ì¡Œë‹¤.";
 		}
 		break;
 	case SWAKO_4_CONFUSE_RESIST:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "È¥¶õ ÀúÇ×";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº È¥¶õ¿¡ ÀúÇ×ÀÌ ÀÖ´Ù.                                      (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¸Ö¹Ì¸¦ ÇÏÁö ¾Ê´Â´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ¸Ö¹Ì¿¡ °­ÇÏÁö ¾Ê´Ù.";
+		case SWAKO_NAME: return "í˜¼ë€ ì €í•­";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ í˜¼ë€ì— ì €í•­ì´ ìˆë‹¤.                                      (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë©€ë¯¸ë¥¼ í•˜ì§€ ì•ŠëŠ”ë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë©€ë¯¸ì— ê°•í•˜ì§€ ì•Šë‹¤.";
 		}
 		break;
 	case SWAKO_4_POISON_RESIST:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "µ¶ ÀúÇ×";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº µ¶¿¡ ÀúÇ×ÀÌ ÀÖ´Ù.                                        (ÆĞ½Ãºê)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ µ¶¿¡ °­ÇÏ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó µ¶¿¡ °­ÇÏÁö ¾Ê´Ù.";
+		case SWAKO_NAME: return "ë… ì €í•­";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë…ì— ì €í•­ì´ ìˆë‹¤.                                        (íŒ¨ì‹œë¸Œ)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë…ì— ê°•í•˜ë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë…ì— ê°•í•˜ì§€ ì•Šë‹¤.";
 		}
 		break;
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 const char* GetSwakoString5(swako_5_power power, swako_string kind)
@@ -215,41 +215,41 @@ const char* GetSwakoString5(swako_5_power power, swako_string kind)
 	case SWAKO_5_RAIN:		
 		switch(kind)
 		{
-		case SWAKO_NAME: return "ºñ ³»¸®±â";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ÁÖº¯À» ¹°¹Ù´Ù·Î ¸¸µé ¼ö ÀÖ´Ù.                           (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ °Å´ëÇÑ ºñ¸¦ ³»¸®°Ô ÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ºñ¸¦ ³»¸± ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ë¹„ ë‚´ë¦¬ê¸°";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ì£¼ë³€ì„ ë¬¼ë°”ë‹¤ë¡œ ë§Œë“¤ ìˆ˜ ìˆë‹¤.                           (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ê±°ëŒ€í•œ ë¹„ë¥¼ ë‚´ë¦¬ê²Œ í•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë¹„ë¥¼ ë‚´ë¦´ ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_5_SLEEP:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "µ¿¸é";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ¶¥¼Ó¿¡ ¼û¾î¼­ µ¿¸éÀ» ÃëÇÒ ¼ö ÀÖ´Ù.                      (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ µ¿¸éÀ» ÇÑ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó µ¿¸éÀ» ÇÏÁö ¾Ê´Â´Ù.";
+		case SWAKO_NAME: return "ë™ë©´";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë•…ì†ì— ìˆ¨ì–´ì„œ ë™ë©´ì„ ì·¨í•  ìˆ˜ ìˆë‹¤.                      (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë™ë©´ì„ í•œë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë™ë©´ì„ í•˜ì§€ ì•ŠëŠ”ë‹¤.";
 		}
 		break;
 	case SWAKO_5_MISYAGUZI:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "¹Ì»ş±¸Áö´Ô ¼ÒÈ¯";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ¹Ì»ş±¸Áö´ÔÀ» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.                            (P, ½Å¾Ó)";
-		case SWAKO_GET_STRING: return "´ç½ÅÀº ÀÌÁ¦ ¹«½Ã¹«½ÃÇÑ ¹Ì»ş±¸Áö´ÔÀ» ¼ÒÈ¯ÇÒ ¼ö ÀÖ´Ù.";
-		case SWAKO_UNGET_STRING: return "´ç½ÅÀº ´õ ÀÌ»ó ¹Ì»ş±¸Áö´ÔÀ» ¼ÒÈ¯ÇÒ ¼ö ¾ø´Ù.";
+		case SWAKO_NAME: return "ë¯¸ìƒ¤êµ¬ì§€ë‹˜ ì†Œí™˜";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ë¯¸ìƒ¤êµ¬ì§€ë‹˜ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.                            (P, ì‹ ì•™)";
+		case SWAKO_GET_STRING: return "ë‹¹ì‹ ì€ ì´ì œ ë¬´ì‹œë¬´ì‹œí•œ ë¯¸ìƒ¤êµ¬ì§€ë‹˜ì„ ì†Œí™˜í•  ìˆ˜ ìˆë‹¤.";
+		case SWAKO_UNGET_STRING: return "ë‹¹ì‹ ì€ ë” ì´ìƒ ë¯¸ìƒ¤êµ¬ì§€ë‹˜ì„ ì†Œí™˜í•  ìˆ˜ ì—†ë‹¤.";
 		}
 		break;
 	case SWAKO_5_SWAKO_HAT:
 		switch(kind)
 		{
-		case SWAKO_NAME: return "½º¿ÍÄÚ´ÔÀÇ ¸ğÀÚ";
-		case SWAKO_SIMPLE_INFOR: return "´ç½ÅÀº ½º¿ÍÄÚ´ÔÀÇ ±Í¿©¿î ¸ğÀÚ¸¦ ¹Ş¾Ò´Ù.";
+		case SWAKO_NAME: return "ìŠ¤ì™€ì½”ë‹˜ì˜ ëª¨ì";
+		case SWAKO_SIMPLE_INFOR: return "ë‹¹ì‹ ì€ ìŠ¤ì™€ì½”ë‹˜ì˜ ê·€ì—¬ìš´ ëª¨ìë¥¼ ë°›ì•˜ë‹¤.";
 		case SWAKO_GET_STRING: return "";
 		case SWAKO_UNGET_STRING: return "";
 		}
 		break;
 	}
-	return "¹ö±×";
+	return "ë²„ê·¸";
 }
 
 bool GetSwakoAbility(int level, bool plus)

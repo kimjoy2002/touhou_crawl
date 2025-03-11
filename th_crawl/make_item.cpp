@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: make_item.cpp
+// íŒŒì¼ì´ë¦„: make_item.cpp
 //
-// ³»¿ë: ¾ÆÀÌÅÛ ¸¸µé±â°ü·Ã ÇÔ¼ö
+// ë‚´ìš©: ì•„ì´í…œ ë§Œë“¤ê¸°ê´€ë ¨ í•¨ìˆ˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,11 +47,11 @@ public:
 };
 
 etcStruct etcList[EIT_LAST] = {
-	etcStruct("½ÇÁ¾ Æ÷½ºÅÍ", false, &img_item_goal),
-	etcStruct("°³´Ù·¡ ³ª¹«", false, &img_item_cat_tree),
-	etcStruct("ºÎ¼ÅÁø Ä«¸Ş¶ó", false, &img_item_broken_camera),
-	etcStruct("Àâµ¿»ç´Ï", false, &img_item_kappa_trash),
-	etcStruct("»çÁø", true, &img_item_goal)
+	etcStruct("ì‹¤ì¢… í¬ìŠ¤í„°", false, &img_item_goal),
+	etcStruct("ê°œë‹¤ë˜ ë‚˜ë¬´", false, &img_item_cat_tree),
+	etcStruct("ë¶€ì…”ì§„ ì¹´ë©”ë¼", false, &img_item_broken_camera),
+	etcStruct("ì¡ë™ì‚¬ë‹ˆ", false, &img_item_kappa_trash),
+	etcStruct("ì‚¬ì§„", true, &img_item_goal)
 };
 
 
@@ -78,7 +78,7 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t)
 	t->is_pile = true;
 	t->can_throw = false;
 	t->image = &img_item_food_p_item;
-	t->name.name = "PÅÛ";
+	t->name.name = "Pí…œ";
 	t->name.name_type = true;
 	t->name2.name = "";
 	t->name2.name_type = true;
@@ -96,7 +96,7 @@ item_infor& makeCustomBook(item_infor* t)
 	t->num = 1;
 	t->curse = false;
 	{
-		t->name2.name = "¶³¾îÁø ¸¶¹ıÃ¥";
+		t->name2.name = "ë–¨ì–´ì§„ ë§ˆë²•ì±…";
 		t->name2.name_type = true;
 		t->value0 = BOOK_CUSTOM_BOOK;
 		t->value1 = 0;
@@ -110,7 +110,7 @@ item_infor& makeCustomBook(item_infor* t)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_book[0];
-		t->name.name = "¶³¾îÁø ¸¶¹ıÃ¥";
+		t->name.name = "ë–¨ì–´ì§„ ë§ˆë²•ì±…";
 		t->name.name_type = true;
 		t->weight = 5.0f;
 		t->value = 150;
@@ -131,7 +131,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 
 	//	if(rune_)
 	//	{
-	//		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+	//		t->name2.name = "ë£¬ì´ ìƒˆê²¨ì§„ ";
 	//		t->name2.name_type = true;
 	//	}
 	//}
@@ -170,7 +170,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_helmet[type_];
 		t->equip_image = &img_play_item_hat[type_];
-		t->name.name = (type_==1 || type_ == 4)?"¸®º»":((type_ == 2)? "¸Ó¸®¶ì" :"¸ğÀÚ");
+		t->name.name = (type_==1 || type_ == 4)?"ë¦¬ë³¸":((type_ == 2)? "ë¨¸ë¦¬ë " :"ëª¨ì");
 		t->name.name_type = (type_ == 1 || type_ == 4) ? true: false;
 		t->weight = 5.0f;
 		t->value = 70;
@@ -187,7 +187,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_cloak;
 		t->equip_image = &img_play_item_cloak[0];
-		t->name.name = "¸ÁÅä";
+		t->name.name = "ë§í† ";
 		t->name.name_type = false;
 		t->weight = 3.0f;
 		t->value = 70;
@@ -203,7 +203,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_glove;
 		t->equip_image = &img_play_item_glove[0];
-		t->name.name = "Àå°©";
+		t->name.name = "ì¥ê°‘";
 		t->name.name_type = true;
 		t->weight = 2.0f;
 		t->value = 70;
@@ -219,7 +219,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_boot;
 		t->equip_image = &img_play_item_boot[0];
-		t->name.name = "½Å¹ß";
+		t->name.name = "ì‹ ë°œ";
 		t->name.name_type = true;
 		t->weight = 4.0f;
 		t->value = 70;
@@ -241,7 +241,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_ring[iden_list.ring_list[t->value1].type];
-		t->name.name = "¹İÁö";
+		t->name.name = "ë°˜ì§€";
 		t->name.name_type = false;
 		t->weight = 1.0f;
 		t->value = 200;
@@ -256,7 +256,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_spellcard;
-		t->name.name = "½ºÆçÄ«µå";
+		t->name.name = "ìŠ¤í ì¹´ë“œ";
 		t->name.name_type = false;
 		t->weight = 2.0f;
 		t->value = 200;
@@ -273,7 +273,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_amulet;
-		t->name.name = "ºÎÀû";
+		t->name.name = "ë¶€ì ";
 		t->name.name_type = false;
 		t->weight = 1.0f;
 		t->value = 200;
@@ -292,7 +292,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->is_pile = true;
 			t->can_throw = false;
 			t->image = &img_item_food_bread;
-			t->name.name = "»§";
+			t->name.name = "ë¹µ";
 			t->name.name_type = true;
 			t->weight = 2.0f;
 			t->value = 30;
@@ -308,7 +308,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = rand_int(1,3);
 			t->image = &img_item_sweet_potato;
-			t->name.name = "°í±¸¸¶";
+			t->name.name = "ê³ êµ¬ë§ˆ";
 			t->name.name_type = false;
 			t->weight = 1.0f*t->num;
 			t->value = 30;
@@ -324,7 +324,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = 2;
 			t->image = &img_item_chocolet;
-			t->name.name = "ÃÊÄİ·¿";
+			t->name.name = "ì´ˆì½œë ›";
 			t->name.name_type = true;
 			t->weight = 1.0f*t->num;
 			t->value = 30;
@@ -340,7 +340,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = 1;
 			t->image = &img_item_cucumber;
-			t->name.name = "¿ÀÀÌ";
+			t->name.name = "ì˜¤ì´";
 			t->name.name_type = false;
 			t->weight = 1.0f*t->num;
 			t->value = 30;
@@ -357,7 +357,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_potion[iden_list.potion_list[t->value1].color];
-		t->name.name = "¹°¾à";
+		t->name.name = "ë¬¼ì•½";
 		t->name.name_type = true;
 		t->weight = 4.0f;
 		t->value = 120;
@@ -372,7 +372,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_scroll;
-		t->name.name = "µÎ·ç¸¶¸®";
+		t->name.name = "ë‘ë£¨ë§ˆë¦¬";
 		t->name.name_type = false;
 		t->weight = 2.0f;
 		t->value = 120;
@@ -414,7 +414,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_rune;
-		t->name.name = "·é";
+		t->name.name = "ë£¬";
 		t->name.name_type = true;
 		t->weight = 1.0f;
 		t->value = 10000;
@@ -429,7 +429,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_mons_yinyan;
-		t->name.name = "À½¾ç¿Á";
+		t->name.name = "ìŒì–‘ì˜¥";
 		t->name.name_type = true;
 		t->weight = 1.0f;
 		t->value = 10000;
@@ -461,7 +461,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	return (*t);
 }	
 
-int baditem(const item_infor *item_) //randA(9)+1<=¸®ÅÏ°ªÀÏ¶§ ÀúÁÖ°É¸²
+int baditem(const item_infor *item_) //randA(9)+1<=ë¦¬í„´ê°’ì¼ë•Œ ì €ì£¼ê±¸ë¦¼
 {
 	if(item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST)
 	{
@@ -565,58 +565,58 @@ int shieldPanaltyOfWeapon(item_type type, int weapon_kind)
 	case ITM_WEAPON_SHORTBLADE:
 		switch (weapon_kind)
 		{
-		case 0: //´ë°Å
-		case 1: //ÅõÃ´¿ë ³ªÀÌÇÁ
-		case 2: //¼ô¼Òµå
+		case 0: //ëŒ€ê±°
+		case 1: //íˆ¬ì²™ìš© ë‚˜ì´í”„
+		case 2: //ìˆì†Œë“œ
 			return 0;
 		}
 		break;
 	case ITM_WEAPON_LONGBLADE:
 		switch (weapon_kind)
 		{
-		case 0: //µµ°Ë
-		case 1: //¾ğ¿ùµµ
-		case 3: //Ã¶·û
+		case 0: //ë„ê²€
+		case 1: //ì–¸ì›”ë„
+		case 3: //ì² ë¥œ
 			return 1;
-		case 2: //´ë°Ë
+		case 2: //ëŒ€ê²€
 			return 3;
 		}
 		break;
 	case ITM_WEAPON_MACE:
 		switch (weapon_kind)
 		{
-		case 0: //°íÇìÀÌ
+		case 0: //ê³ í—¤ì´
 			return 0;
-		case 1: //ºøÀÚ·ç
-		case 2: //¾ç»ê
+		case 1: //ë¹—ìë£¨
+		case 2: //ì–‘ì‚°
 			return 1;
-		case 3: //´Ù¿ìÂ¡·Îµå
-		case 4: //¿Â¹Ù½Ã¶ó
+		case 3: //ë‹¤ìš°ì§•ë¡œë“œ
+		case 4: //ì˜¨ë°”ì‹œë¼
 			return 3;
 		}
 		break;
 	case ITM_WEAPON_AXE:
 		switch (weapon_kind)
 		{
-		case 0: //¼Õµµ³¢
+		case 0: //ì†ë„ë¼
 			return 0;
-		case 1: //ÀüÅõµµ³¢
+		case 1: //ì „íˆ¬ë„ë¼
 			return 1;
-		case 2: //´é
+		case 2: //ë‹»
 			return 3;
 		}
 		break;
 	case ITM_WEAPON_SPEAR:
 		switch (weapon_kind)
 		{
-		case 0: //Ã¢
-		case 1: //ÅõÃ¢
+		case 0: //ì°½
+		case 1: //íˆ¬ì°½
 			return 1;
-		case 2: //³´
+		case 2: //ë‚«
 			return 2;
-		case 3: //»ïÁöÃ¢
+		case 3: //ì‚¼ì§€ì°½
 			return 1;
-		case 4: //Á×Ã¢
+		case 4: //ì£½ì°½
 			return 2;
 		}
 		break;
@@ -637,7 +637,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 
 	if(good_bad)
 	{
-		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+		t->name2.name = "ë£¬ì´ ìƒˆê²¨ì§„ ";
 		t->name2.name_type = true;		
 	}
 
@@ -658,8 +658,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_dagger;
 				t->equip_image = &img_play_item_weapon[0];
-				t->name.name = "´ë°Å";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ëŒ€ê±°";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 2.0f;
 				t->value = 50;
 				return;
@@ -676,8 +676,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_knife;
 				t->equip_image = &img_play_item_weapon[1];
-				t->name.name = "ÅõÃ´¿ë ³ªÀÌÇÁ";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "íˆ¬ì²™ìš© ë‚˜ì´í”„";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 1.5f;
 				t->value = 50;
 				return;
@@ -693,8 +693,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_shortsword;
 				t->equip_image = &img_play_item_weapon[2];
-				t->name.name = "¼ô¼Òµå";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ìˆì†Œë“œ";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 3.0f;
 				t->value = 50;
 				return;
@@ -714,8 +714,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_katana;
 				t->equip_image = &img_play_item_weapon[3];
-				t->name.name = "µµ°Ë";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ë„ê²€";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 4.0f;
 				t->value = 100;
 				return;
@@ -731,8 +731,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_scimitar;
 				t->equip_image = &img_play_item_weapon[4];
-				t->name.name = "¾ğ¿ùµµ";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì–¸ì›”ë„";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 5.0f;
 				t->value = 120;
 				return;
@@ -748,8 +748,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_greatsword;
 				t->equip_image = &img_play_item_weapon[5];
-				t->name.name = "´ë°Ë";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ëŒ€ê²€";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 12.0f;
 				t->value = 200;
 				return;
@@ -765,8 +765,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_chakram;
 				t->equip_image = &img_play_item_weapon[6];
-				t->name.name = "Ã¶·û";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì² ë¥œ";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 3.0f;
 				t->value = 200;
 				return;
@@ -786,8 +786,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_handaxe;
 				t->equip_image = &img_play_item_weapon[12];
-				t->name.name = "¼Õµµ³¢";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì†ë„ë¼";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 3.0f;
 				t->value = 60;
 				return;
@@ -803,8 +803,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_battleaxe;
 				t->equip_image = &img_play_item_weapon[13];
-				t->name.name = "ÀüÅõµµ³¢";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì „íˆ¬ë„ë¼";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 6.0f;
 				t->value = 60;
 				return;
@@ -820,8 +820,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_anchor;
 				t->equip_image = &img_play_item_weapon[14];
-				t->name.name = "´é";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ë‹»";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 12.0f;
 				t->value = 250;
 				return;
@@ -842,8 +842,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = ran_?&img_item_weapon_gohey:&img_item_weapon_gohey2;
 				t->equip_image = ran_?&img_play_item_weapon[7]: &img_play_item_weapon[8];
-				t->name.name = "°íÇìÀÌ";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ê³ í—¤ì´";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 3.0f;
 				t->value = 60;
 				return;
@@ -859,8 +859,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_broomstick;
 				t->equip_image = &img_play_item_weapon[20];
-				t->name.name = "ºøÀÚ·ç";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ë¹—ìë£¨";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 4.0f;
 				t->value = 80;
 				return;
@@ -876,8 +876,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_umbrella;
 				t->equip_image = &img_play_item_weapon[9];
-				t->name.name = "¾ç»ê";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì–‘ì‚°";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 3.0f;
 				t->value = 50;
 				return;
@@ -893,8 +893,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_dauzing_rod;
 				t->equip_image = &img_play_item_weapon[10];
-				t->name.name = "´Ù¿ìÂ¡ ·Îµå";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ë‹¤ìš°ì§• ë¡œë“œ";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 5.0f;
 				t->value = 140;
 				return;
@@ -910,8 +910,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_onbasira;
 				t->equip_image = &img_play_item_weapon[11];
-				t->name.name = "¿Â¹Ù½Ã¶ó";
-				t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì˜¨ë°”ì‹œë¼";
+				t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 20.0f;
 				t->value = 300;
 				return;
@@ -931,8 +931,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_spear;
 				t->equip_image = &img_play_item_weapon[15];
-				t->name.name = "Ã¢";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì°½";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 4.0f;
 				t->value = 70;
 				return;
@@ -948,8 +948,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_javelin;
 				t->equip_image = &img_play_item_weapon[16];
-				t->name.name = "ÅõÃ´¿ë Ã¢";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "íˆ¬ì²™ìš© ì°½";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 4.0f;
 				t->value = 70;
 				return;
@@ -965,8 +965,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_scythe;
 				t->equip_image = &img_play_item_weapon[17];
-				t->name.name = "³´";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ë‚«";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 7.0f;
 				t->value = 120;
 				return;
@@ -982,8 +982,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_trident;
 				t->equip_image = &img_play_item_weapon[18];
-				t->name.name = "»ïÁöÃ¢";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì‚¼ì§€ì°½";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 6.0f;
 				t->value = 140;
 				return;
@@ -999,8 +999,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_bamboo_spear;
 				t->equip_image = &img_play_item_weapon[19];
-				t->name.name = "Á×Ã¢";
-				t->name.name_type = true; //true ¹ŞÄ§ÀÖÀ½
+				t->name.name = "ì£½ì°½";
+				t->name.name_type = true; //true ë°›ì¹¨ìˆìŒ
 				t->weight = 6.0f;
 				t->value = 140;
 				return;
@@ -1017,8 +1017,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value6 = 10;
 	t->can_throw = true;
 	t->image = &img_item_weapon_knife;
-	t->name.name = "¹ö±×";
-	t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+	t->name.name = "ë²„ê·¸";
+	t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 	t->weight = 1.0f;
 	t->value = 0;
 }
@@ -1036,7 +1036,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	
 	if(good_bad)
 	{
-		t->name2.name = "·éÀÌ »õ°ÜÁø ";
+		t->name2.name = "ë£¬ì´ ìƒˆê²¨ì§„ ";
 		t->name2.name_type = true;		
 	}
 
@@ -1051,7 +1051,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_roundshield;
 		t->equip_image = &img_play_item_shield[0];
-		t->name.name = "³ª¹«¹æÆĞ";
+		t->name.name = "ë‚˜ë¬´ë°©íŒ¨";
 		t->name.name_type = false;
 		t->weight = 3.0f;
 		t->value = 30;
@@ -1066,7 +1066,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_shield;
 		t->equip_image = &img_play_item_shield[1];
-		t->name.name = "Ã¶¹æÆĞ";
+		t->name.name = "ì² ë°©íŒ¨";
 		t->name.name_type = false;
 		t->weight = 5.0f;
 		t->value = 100;
@@ -1081,7 +1081,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_kiteshield;
 		t->equip_image = &img_play_item_shield[3];
-		t->name.name = "Ä«ÀÌÆ®½Çµå";
+		t->name.name = "ì¹´ì´íŠ¸ì‹¤ë“œ";
 		t->name.name_type = false;
 		t->weight = 10.0f;
 		t->value = 250;
@@ -1093,8 +1093,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	t->value6 = 0;
 	t->can_throw = true;
 	t->image = &img_item_weapon_roundshield;
-	t->name.name = "¹ö±×¹æÆĞ";
-	t->name.name_type = false; //true ¹ŞÄ§ÀÖÀ½
+	t->name.name = "ë²„ê·¸ë°©íŒ¨";
+	t->name.name_type = false; //true ë°›ì¹¨ìˆìŒ
 	t->weight = 1.0f;
 	t->value = 0;
 }
@@ -1143,9 +1143,9 @@ item_type RandomItemType()
 
 
 
-void init_identify() //¹Ì½Äº°¾ÆÀÌÅÛÀ» ±¸º°¸øÇÏ°Ô ¼¯À½
+void init_identify() //ë¯¸ì‹ë³„ì•„ì´í…œì„ êµ¬ë³„ëª»í•˜ê²Œ ì„ìŒ
 {
-	{//¹°¾à
+	{//ë¬¼ì•½
 		deque<int> dq;
 		for(int i=0;i<PT_MAX;i++)
 			dq.push_back(i);
@@ -1155,8 +1155,8 @@ void init_identify() //¹Ì½Äº°¾ÆÀÌÅÛÀ» ±¸º°¸øÇÏ°Ô ¼¯À½
 			iden_list.potion_list[i].color = dq[i];
 
 		}
-	}//³¡
-	{//µÎ·ç¸¶¸®
+	}//ë
+	{//ë‘ë£¨ë§ˆë¦¬
 		deque<int> dq;
 		for(int i=0;i<SCT_MAX;i++)
 			dq.push_back(i);
@@ -1165,8 +1165,8 @@ void init_identify() //¹Ì½Äº°¾ÆÀÌÅÛÀ» ±¸º°¸øÇÏ°Ô ¼¯À½
 		{
 			iden_list.scroll_list[i].type = dq[i];
 		}
-	}//³¡
-	{//¹İÁö
+	}//ë
+	{//ë°˜ì§€
 		deque<int> dq;
 		for(int i=0;i<RGT_MAX;i++)
 			dq.push_back(i);
@@ -1175,8 +1175,8 @@ void init_identify() //¹Ì½Äº°¾ÆÀÌÅÛÀ» ±¸º°¸øÇÏ°Ô ¼¯À½
 		{
 			iden_list.ring_list[i].type = dq[i];
 		}
-	}//³¡
-	{//¸ñ°ÉÀÌ
+	}//ë
+	{//ëª©ê±¸ì´
 		deque<int> dq;
 		for(int i=0;i<AMT_MAX;i++)
 			dq.push_back(i);
@@ -1185,7 +1185,7 @@ void init_identify() //¹Ì½Äº°¾ÆÀÌÅÛÀ» ±¸º°¸øÇÏ°Ô ¼¯À½
 		{
 			iden_list.amulet_list[i].type = dq[i];
 		}
-	}//³¡
+	}//ë
 
 
 

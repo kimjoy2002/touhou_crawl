@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: potion.cpp
+// íŒŒì¼ì´ë¦„: potion.cpp
 //
-// ³»¿ë: ¹°¾àµé(ÀÌÀü ¹°¾à)
+// ë‚´ìš©: ë¬¼ì•½ë“¤(ì´ì „ ë¬¼ì•½)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,43 +13,43 @@ extern HANDLE mutx;
 
 const char *potion_uniden_string[PT_MAX]=
 {
-	"»õÇÏ¾á ",
-	"ÃÊ·Ï»ö ",
-	"»¡°­»ö ",
-	"ÆÄ¶û»ö ",
-	"³ë¶û»ö ",
-	"°ËÁ¤»ö ",
-	"È¸»ö ",
-	"ºĞÈ«»ö ",
-	"°ÅÇ°³¤ ÃÊ·Ï»ö ",
-	"°ÅÇ°³¤ »¡°­»ö ",
-	"°ÅÇ°³¤ ÆÄ¶û»ö ",
-	"°ÅÇ°³¤ ³ë¶û»ö ",
-	"°ÅÇ°³¤ °ËÁ¤»ö ",
-	"¹«»ö ",
-	"°¥»ö ",
-	"°ÅÇ°³¤ È¸»ö ",
-	"°ÅÇ°³¤ Åõ¸íÇÑ "
+	"ìƒˆí•˜ì–€ ",
+	"ì´ˆë¡ìƒ‰ ",
+	"ë¹¨ê°•ìƒ‰ ",
+	"íŒŒë‘ìƒ‰ ",
+	"ë…¸ë‘ìƒ‰ ",
+	"ê²€ì •ìƒ‰ ",
+	"íšŒìƒ‰ ",
+	"ë¶„í™ìƒ‰ ",
+	"ê±°í’ˆë‚€ ì´ˆë¡ìƒ‰ ",
+	"ê±°í’ˆë‚€ ë¹¨ê°•ìƒ‰ ",
+	"ê±°í’ˆë‚€ íŒŒë‘ìƒ‰ ",
+	"ê±°í’ˆë‚€ ë…¸ë‘ìƒ‰ ",
+	"ê±°í’ˆë‚€ ê²€ì •ìƒ‰ ",
+	"ë¬´ìƒ‰ ",
+	"ê°ˆìƒ‰ ",
+	"ê±°í’ˆë‚€ íšŒìƒ‰ ",
+	"ê±°í’ˆë‚€ íˆ¬ëª…í•œ "
 };
 const char *potion_iden_string[PT_MAX]=
 {
-	"±×³É ",
-	"Ä¡À¯ ",
-	"µ¶ ",
-	"Ã¼·ÂÈ¸º¹ ",
-	"Èû ",
-	"°¡¼Ó ",
-	"È¥¶õ ",
-	"°¨¼Ó ",
-	"¸¶ºñ ",
-	"Áö´É ",
-	"¹ÎÃ¸ ",
-	"¿µ·Â ",
-	"ºñÇà ",
-	"ÆÄ¿ö ",
-	"´É·ÂÄ¡°¨¼Ò ",
-	"´É·ÂÄ¡È¸º¹ ",
-	"¼ú "
+	"ê·¸ëƒ¥ ",
+	"ì¹˜ìœ  ",
+	"ë… ",
+	"ì²´ë ¥íšŒë³µ ",
+	"í˜ ",
+	"ê°€ì† ",
+	"í˜¼ë€ ",
+	"ê°ì† ",
+	"ë§ˆë¹„ ",
+	"ì§€ëŠ¥ ",
+	"ë¯¼ì²© ",
+	"ì˜ë ¥ ",
+	"ë¹„í–‰ ",
+	"íŒŒì›Œ ",
+	"ëŠ¥ë ¥ì¹˜ê°ì†Œ ",
+	"ëŠ¥ë ¥ì¹˜íšŒë³µ ",
+	"ìˆ  "
 };
 bool skill_soul_shot(int power, unit* order, coord_def target);
 
@@ -112,11 +112,11 @@ void drinkpotion(potion_type kind, bool waste_)
 	switch(kind)
 	{
 	case PT_WATER:
-		printlog("±×³É ¹°¾à ¸ÀÀÌ´Ù.",false,false,false,CL_normal);
+		printlog("ê·¸ëƒ¥ ë¬¼ì•½ ë§›ì´ë‹¤.",false,false,false,CL_normal);
 		//you.HungerApply(50);
 		return;
 	case PT_HEAL:
-		printlog("Ä¡À¯°¡ µÇ´Â °ÍÀ» ´À²¼´Ù.",false,false,false,CL_normal);
+		printlog("ì¹˜ìœ ê°€ ë˜ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",false,false,false,CL_normal);
 		you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
 		//you.HungerApply(50);
 		you.s_confuse = 0;
@@ -127,7 +127,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		{
 			int time_ = rand_int(25,50+bonus*15);
 			bool ok_= false;
-			printlog("ÀÌ ¹°¾àÀº ¿ª°Ü¿î ¸ÀÀÌ´Ù.",false,false,false,you.poison_resist>0?CL_normal:CL_warning);
+			printlog("ì´ ë¬¼ì•½ì€ ì—­ê²¨ìš´ ë§›ì´ë‹¤.",false,false,false,you.poison_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetPoison(time_,150,false);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_POISON_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -136,7 +136,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
-				printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÌ ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ²ø¾î¿À°ÔÇß´Ù. ",false,false,false,CL_small_danger); 
+				printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì´ ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ëŒì–´ì˜¤ê²Œí–ˆë‹¤. ",false,false,false,CL_small_danger); 
 				you.SetSwift(time_);
 			}
 			//you.HungerApply(50);
@@ -144,7 +144,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			return;	
 		}
 	case PT_HEAL_WOUND:
-		printlog("Ã¼·ÂÀÌ È¸º¹µÇ´Â µÇ´Â °ÍÀ» ´À²¼´Ù.",false,false,false,CL_normal);
+		printlog("ì²´ë ¥ì´ íšŒë³µë˜ëŠ” ë˜ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",false,false,false,CL_normal);
 		you.HpUpDown(15+bonus*5+randA_1(30+bonus*15),DR_POTION);
 		//you.HungerApply(50);
 		return;
@@ -159,7 +159,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_CONFUSE:
 		{
 			bool ok_= false;
-			printlog("ÀÌ ¹°¾àÀº ¸Ö¹Ì³ª´Â ¸ÀÀÌ´Ù.",false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
+			printlog("ì´ ë¬¼ì•½ì€ ë©€ë¯¸ë‚˜ëŠ” ë§›ì´ë‹¤.",false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetConfuse(rand_int(15,30)+bonus*10);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_CONFUSE_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -168,8 +168,8 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=3 && ok_)
 			{
 				enterlog();
-				printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÌ ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ²ø¾î¿À°ÔÇß´Ù. ",false,false,false,CL_small_danger);  
-				printlog("¿µ·ÂÀÌ Â÷¿À¸£´Â °ÍÀ» ´À³¤´Ù.",true,false,false,CL_white_blue);
+				printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì´ ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ëŒì–´ì˜¤ê²Œí–ˆë‹¤. ",false,false,false,CL_small_danger);  
+				printlog("ì˜ë ¥ì´ ì°¨ì˜¤ë¥´ëŠ” ê²ƒì„ ëŠë‚€ë‹¤.",true,false,false,CL_white_blue);
 				you.MpUpDown(15+randA_1(15));
 			}
 			//you.HungerApply(50);
@@ -184,7 +184,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
-				printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÌ ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ²ø¾î¿À°ÔÇß´Ù. ",true,false,false,CL_small_danger); 
+				printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì´ ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ëŒì–´ì˜¤ê²Œí–ˆë‹¤. ",true,false,false,CL_small_danger); 
 				you.SetInvisible(time_);
 			}
 			return;
@@ -197,8 +197,8 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=5 && ok_)
 			{
 				enterlog();
-				printlog("¿¡ÀÌ¸°Àº ¹°¾àÀ¸·ÎºÎÅÍÀÇ ¸¶ºñ¸¦ ¸·¾ÆÁÖ°í »õ·Î¿î ÈûÀ» ²ø¾î¿À°ÔÇß´Ù. ",false,false,false,CL_small_danger);  
-				printlog("´ç½ÅÀº Æø¹ßÇß´Ù!",true,false,false,CL_small_danger);
+				printlog("ì—ì´ë¦°ì€ ë¬¼ì•½ìœ¼ë¡œë¶€í„°ì˜ ë§ˆë¹„ë¥¼ ë§‰ì•„ì£¼ê³  ìƒˆë¡œìš´ í˜ì„ ëŒì–´ì˜¤ê²Œí–ˆë‹¤. ",false,false,false,CL_small_danger);  
+				printlog("ë‹¹ì‹ ì€ í­ë°œí–ˆë‹¤!",true,false,false,CL_small_danger);
 				ReleaseMutex(mutx);
 				changedisplay(DT_GAME);
 				skill_soul_shot(0, &you, you.position);
@@ -215,7 +215,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_MAGIC:
-		printlog("»ó´çÇÑ ¿µ·ÂÀÌ ´À²¸Áø´Ù.",false,false,false,CL_normal);
+		printlog("ìƒë‹¹í•œ ì˜ë ¥ì´ ëŠê»´ì§„ë‹¤.",false,false,false,CL_normal);
 		you.MpUpDown(9+bonus*5+randA_1(15));
 		//you.HungerApply(50);
 		return;
@@ -224,20 +224,20 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_POWER:
-		printlog("ÆÄ¿ö°¡ ÇÑ´Ü°è »ó½ÂÇÑ ´À³¦ÀÌ µç´Ù.",false,false,false,CL_normal);
+		printlog("íŒŒì›Œê°€ í•œë‹¨ê³„ ìƒìŠ¹í•œ ëŠë‚Œì´ ë“ ë‹¤.",false,false,false,CL_normal);
 		you.PowUpDown(100+bonus*100);
 		//you.HungerApply(50);
 		return;
 	case PT_DOWN_STAT:
 		{
-			printlog("ÀÌ ¹°¾àÀº ±¸¿ªÁúÀÌ ³­´Ù.",false,false,false,CL_normal);
+			printlog("ì´ ë¬¼ì•½ì€ êµ¬ì—­ì§ˆì´ ë‚œë‹¤.",false,false,false,CL_normal);
 			int rand_ = randA_1(3);
 			randA(2)?(randA(1)?you.StatUpDown(-rand_,STAT_STR,true):you.StatUpDown(-rand_,STAT_DEX,true)):you.StatUpDown(-rand_,STAT_INT,true);
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=2)
 			{
 				enterlog();
-				printlog("¿¡ÀÌ¸°Àº ´ç½ÅÀÌ ¹°¾à¿¡¼­ »õ·Î¿î ÈûÀ» ²ø¾î¿À°ÔÇß´Ù. ",false,false,false,CL_small_danger); 
-				printlog("»óÃ³°¡ Ä¡·á°¡ µÇ´Â °ÍÀ» ´À²¼´Ù.",true,false,false,CL_normal);
+				printlog("ì—ì´ë¦°ì€ ë‹¹ì‹ ì´ ë¬¼ì•½ì—ì„œ ìƒˆë¡œìš´ í˜ì„ ëŒì–´ì˜¤ê²Œí–ˆë‹¤. ",false,false,false,CL_small_danger); 
+				printlog("ìƒì²˜ê°€ ì¹˜ë£Œê°€ ë˜ëŠ” ê²ƒì„ ëŠê¼ˆë‹¤.",true,false,false,CL_normal);
 				you.HpUpDown(15+randA_1(35),DR_POTION);
 			}
 			//you.HungerApply(50);
@@ -246,7 +246,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_RECOVER_STAT:
 		{
 			bool up_ = false;
-			printlog("ÀÌ ¹°¾à¿¡¼± ±ò²ûÇÑ ¸ÀÀÌ ³­´Ù.",false,false,false,CL_normal);
+			printlog("ì´ ë¬¼ì•½ì—ì„  ê¹”ë”í•œ ë§›ì´ ë‚œë‹¤.",false,false,false,CL_normal);
 			if(you.s_str < you.m_str)
 			{
 				you.StatUpDown(min(you.m_str-you.s_str,rand_int(1,5)),STAT_STR,true);
@@ -263,7 +263,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				up_ = true;
 			}
 			if(up_)
-				printlog("´ç½ÅÀº ÀÒ¾î¹ö¸° ´É·ÂÄ¡¸¦ È¸º¹Çß´Ù.",false,false,false,CL_blue);
+				printlog("ë‹¹ì‹ ì€ ìƒì–´ë²„ë¦° ëŠ¥ë ¥ì¹˜ë¥¼ íšŒë³µí–ˆë‹¤.",false,false,false,CL_blue);
 			//you.HungerApply(50);
 		}
 		return;

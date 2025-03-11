@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: unit.h
+// íŒŒì¼ì´ë¦„: unit.h
 //
-// ³»¿ë: unit°ü·Ã
+// ë‚´ìš©: unitê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -27,13 +27,13 @@ public:
 	bool name_type;
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	const char* name_is(bool blank=false)/*Àº´Â*/const{return (name_type?(blank?"Àº ":"Àº"):(blank?"´Â ":"´Â"));}
-	const char* name_to(bool blank=false)/*À»¸¦*/const{return (name_type?(blank?"À» ":"À»"):(blank?"¸¦ ":"¸¦"));}
-	const char* name_do(bool blank=false)/*ÀÌ°¡*/const{return (name_type?(blank?"ÀÌ ":"ÀÌ"):(blank?"°¡ ":"°¡"));}
-	const char* name_and(bool blank=false)/*°ú¿Í*/const{return (name_type?(blank?"°ú ":"°ú"):(blank?"¿Í ":"¿Í"));}
-	const char* name_by(bool blank=false)/*À¸·Î·Î*/const{return (name_type?(blank?"À¸·Î ":"À¸·Î"):(blank?"·Î ":"·Î"));}
+	const char* name_is(bool blank=false)/*ì€ëŠ”*/const{return (name_type?(blank?"ì€ ":"ì€"):(blank?"ëŠ” ":"ëŠ”"));}
+	const char* name_to(bool blank=false)/*ì„ë¥¼*/const{return (name_type?(blank?"ì„ ":"ì„"):(blank?"ë¥¼ ":"ë¥¼"));}
+	const char* name_do(bool blank=false)/*ì´ê°€*/const{return (name_type?(blank?"ì´ ":"ì´"):(blank?"ê°€ ":"ê°€"));}
+	const char* name_and(bool blank=false)/*ê³¼ì™€*/const{return (name_type?(blank?"ê³¼ ":"ê³¼"):(blank?"ì™€ ":"ì™€"));}
+	const char* name_by(bool blank=false)/*ìœ¼ë¡œë¡œ*/const{return (name_type?(blank?"ìœ¼ë¡œ ":"ìœ¼ë¡œ"):(blank?"ë¡œ ":"ë¡œ"));}
 	name_infor(monster_index name_key){this->name_key=name_key;}
-	name_infor(string name_ = "¾øÀ½", bool name_type_ = true){name=name_;name_type=name_type_;}
+	name_infor(string name_ = "ì—†ìŒ", bool name_type_ = true){name=name_;name_type=name_type_;}
 	name_infor(const name_infor &t){name=t.name;name_type=t.name_type;}
 	string getName(){return name;};
 };
@@ -57,10 +57,10 @@ struct beam_infor
 	int accuracy;
 	unit *order;
 	parent_type p_type;
-	int length; //»çÁ¤°Å¸®
-	int penetrate; //°üÅë·Â
-	beam_type type1; //ºöÀÇ Å¸ÀÔ. Á÷¼±Çü, ½º¸¶ÀÌÆ®µîµî
-	attack_type type2; //ºöÀÇ ¼Ó¼º
+	int length; //ì‚¬ì •ê±°ë¦¬
+	int penetrate; //ê´€í†µë ¥
+	beam_type type1; //ë¹”ì˜ íƒ€ì…. ì§ì„ í˜•, ìŠ¤ë§ˆì´íŠ¸ë“±ë“±
+	attack_type type2; //ë¹”ì˜ ì†ì„±
 	name_infor name;
 	beam_infor(int damage_, int max_damage_, int accuracy_, unit *order_, parent_type p_type_, int length_, int penetrate_, beam_type type1_, attack_type type2_,name_infor name_){damage=damage_;max_damage=max_damage_;accuracy=accuracy_;length=length_;penetrate=penetrate_;order=order_;p_type=p_type_;type1=type1_;type2=type2_;name = name_;}
 };
@@ -84,9 +84,9 @@ public:
 	virtual void SetXY(int x_, int y_){position.set(x_,y_);};
 	virtual void SetXY(coord_def pos_){SetXY(pos_.x,pos_.y);};
 	//virtual int move(short_move x_mov, short_move y_mov)=0;
-	//Æ¯Á¤À§Ä¡·Î ÀÌµ¿ÇÏ±â
+	//íŠ¹ì •ìœ„ì¹˜ë¡œ ì´ë™í•˜ê¸°
 	//virtual int move(const coord_def &c)=0;
-	virtual bool offsetmove(const coord_def &c) = 0; //offset¿¡ µû¶ó À§È­°¨¾øÀÌ ¸ÊÀ» ÀÌµ¿ÇÑ´Ù. ¸®ÅÏÀº true´Â ¼º°ø false´Â ¸ÊÀ» ¹ş¾î³²
+	virtual bool offsetmove(const coord_def &c) = 0; //offsetì— ë”°ë¼ ìœ„í™”ê°ì—†ì´ ë§µì„ ì´ë™í•œë‹¤. ë¦¬í„´ì€ trueëŠ” ì„±ê³µ falseëŠ” ë§µì„ ë²—ì–´ë‚¨
 	virtual bool isLive()=0;
 	virtual bool isFly()=0;
 	virtual bool isSwim()=0;
@@ -138,19 +138,19 @@ public:
 	};
 
 	virtual int PlusTimeDelay(int delay_)
-	{ //ÇöÀç °¡Áö°íÀÖ´Â timedelay¸¦ ´Ã¸°´Ù
-		//¸ó½ºÅÍ´Â timedelay°¡ ´Ã¾î³ª¸é ±×¸¸Å­ Çàµ¿ÇÒ ¼ö ÀÖ°í
-		//ÇÃ·¹ÀÌ¾î´Â timedelay°¡ ´Ã¾î³ª¸é ±×¸¸Å­ Çàµ¿À¸´Ï·ÁÁö´Â°Í°ú µ¿ÀÏ
-		//ÇöÀç´Â ¸ó½ºÅÍÀÇ timedelay¸¸ º¯°æÇÒ ¼ö ÀÖ°Ô ÇÔ
+	{ //í˜„ì¬ ê°€ì§€ê³ ìˆëŠ” timedelayë¥¼ ëŠ˜ë¦°ë‹¤
+		//ëª¬ìŠ¤í„°ëŠ” timedelayê°€ ëŠ˜ì–´ë‚˜ë©´ ê·¸ë§Œí¼ í–‰ë™í•  ìˆ˜ ìˆê³ 
+		//í”Œë ˆì´ì–´ëŠ” timedelayê°€ ëŠ˜ì–´ë‚˜ë©´ ê·¸ë§Œí¼ í–‰ë™ìœ¼ë‹ˆë ¤ì§€ëŠ”ê²ƒê³¼ ë™ì¼
+		//í˜„ì¬ëŠ” ëª¬ìŠ¤í„°ì˜ timedelayë§Œ ë³€ê²½í•  ìˆ˜ ìˆê²Œ í•¨
 		return 0;
 	}
-	virtual bool AttackedTarget(unit *order_){return false;};//°ø°İ¹Ş´Â´Ù.
-	virtual bool LostTarget(){return false;};//Å¸°ÙÀ» ÀÒ´Â´Ù.
-	virtual void CheckSightNewTarget(){return;};//»õ·Î¿î Å¸°ÙÀ» Ã£´Â´Ù.
+	virtual bool AttackedTarget(unit *order_){return false;};//ê³µê²©ë°›ëŠ”ë‹¤.
+	virtual bool LostTarget(){return false;};//íƒ€ê²Ÿì„ ìƒëŠ”ë‹¤.
+	virtual void CheckSightNewTarget(){return;};//ìƒˆë¡œìš´ íƒ€ê²Ÿì„ ì°¾ëŠ”ë‹¤.
 
 
 	virtual int GetId()=0;
-	virtual int GetMapId()=0; //ÇÃ·¹ÀÌ¾î -2ÀÓ (Áß¿ä!)
+	virtual int GetMapId()=0; //í”Œë ˆì´ì–´ -2ì„ (ì¤‘ìš”!)
 	virtual int GetLevel()=0;
 	virtual int GetInvisible() = 0;
 	virtual int GetSaved() = 0;
@@ -177,9 +177,9 @@ public:
 	virtual bool isEnemyUnit(unit* unit_info){return unit_info->isUserAlly();};
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}
-	virtual bool isPassedBullet(unit* order){return false;}; //ÇØ´ç ÃÑÀÌ ÀÌ Ä³¸¯ÅÍ¿¡°Ô °üÅë °¡´ÉÇÑÁö.
+	virtual bool isPassedBullet(unit* order){return false;}; //í•´ë‹¹ ì´ì´ ì´ ìºë¦­í„°ì—ê²Œ ê´€í†µ ê°€ëŠ¥í•œì§€.
 	virtual parent_type GetParentType() = 0;
-	virtual bool isSightnonblocked(coord_def c) = 0;//º¸ÀÌ´Â ÀÌ À§Ä¡°¡ ½ÇÁ¦·Î °ø°İ°¡´ÉÇÑÁö?(À¯¸®º®)
+	virtual bool isSightnonblocked(coord_def c) = 0;//ë³´ì´ëŠ” ì´ ìœ„ì¹˜ê°€ ì‹¤ì œë¡œ ê³µê²©ê°€ëŠ¥í•œì§€?(ìœ ë¦¬ë²½)
 };
 
 

@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: projectile.cpp
+// íŒŒì¼ì´ë¦„: projectile.cpp
 //
-// ³»¿ë: ¹ß»çÃ³¸®(¹ß»ç¹° °æ·Î ¼±ÅÃ°úÁ¤)
+// ë‚´ìš©: ë°œì‚¬ì²˜ë¦¬(ë°œì‚¬ë¬¼ ê²½ë¡œ ì„ íƒê³¼ì •)
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,21 +26,21 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 	deletelog();
 	if(infor_->spell == -2 || infor_->spell == -3 || infor_->spell == -4)
 	{
-		printlog("¸ñÇ¥¸¦ Á¤ÇÏ¼¼¿ä.",true,false,true,CL_help);
-		//printlog(it!=you.item_list.end()?it->GetName():"¹ß»ç¹°ÀÌ ¾ø½À´Ï´Ù.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
-		//printlog("(i - ÀÎº¥Åä¸®   (,) - ´Ù¸¥ ¹ß»ç¹°)",true,false,true,CL_help);
+		printlog("ëª©í‘œë¥¼ ì •í•˜ì„¸ìš”.",true,false,true,CL_help);
+		//printlog(it!=you.item_list.end()?it->GetName():"ë°œì‚¬ë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
+		//printlog("(i - ì¸ë²¤í† ë¦¬   (,) - ë‹¤ë¥¸ ë°œì‚¬ë¬¼)",true,false,true,CL_help);
 	}
 	else if(infor_->spell == -1)
 	{
-		printlog("¹ß»ç¹°:",false,false,true,CL_help);
-		printlog(it!=you.item_list.end()?it->GetName():"¹ß»ç¹°ÀÌ ¾ø½À´Ï´Ù.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
-		printlog("(i - ÀÎº¥Åä¸®   (,) - ´Ù¸¥ ¹ß»ç¹°)",true,false,true,CL_help);
+		printlog("ë°œì‚¬ë¬¼:",false,false,true,CL_help);
+		printlog(it!=you.item_list.end()?it->GetName():"ë°œì‚¬ë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
+		printlog("(i - ì¸ë²¤í† ë¦¬   (,) - ë‹¤ë¥¸ ë°œì‚¬ë¬¼)",true,false,true,CL_help);
 	}
 	else
 	{
-		printlog("¸¶¹ı:",false,false,true,CL_help);
+		printlog("ë§ˆë²•:",false,false,true,CL_help);
 		printlog(infor_->skill?SkillString((skill_list)infor_->spell):SpellString((spell_list)infor_->spell),true,false,true,CL_help);
-		//printlog("(i - ÀÎº¥Åä¸®   (,) - ´Ù¸¥ ¹ß»ç¹°)",true,false,true,CL_help);
+		//printlog("(i - ì¸ë²¤í† ë¦¬   (,) - ë‹¤ë¥¸ ë°œì‚¬ë¬¼)",true,false,true,CL_help);
 	}
 }
 
@@ -265,7 +265,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		case '-':
 			{
 				int i = 0;
-				while(i < env[current_level].mon_vector.size()) //³ªÁß¿¡ ºü¸¥ ´øÁö±â ¹«±â·Î ¹Ù²Ù±â
+				while(i < env[current_level].mon_vector.size()) //ë‚˜ì¤‘ì— ë¹ ë¥¸ ë˜ì§€ê¸° ë¬´ê¸°ë¡œ ë°”ê¾¸ê¸°
 				{
 					if(it2 != env[current_level].mon_vector.begin())
 						it2--;
@@ -304,13 +304,13 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			}
 			break;
 
-			//¾ÆÀÌÅÛ ´øÁö±â Àü¿ë
+			//ì•„ì´í…œ ë˜ì§€ê¸° ì „ìš©
 		case ')':
 			if(infor_->isitem)
 			{
 				int i = 0;
 				refreshPath_before(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
-				while(i < you.item_list.size()) //³ªÁß¿¡ ºü¸¥ ´øÁö±â ¹«±â·Î ¹Ù²Ù±â
+				while(i < you.item_list.size()) //ë‚˜ì¤‘ì— ë¹ ë¥¸ ë˜ì§€ê¸° ë¬´ê¸°ë¡œ ë°”ê¾¸ê¸°
 				{
 					if(it != you.item_list.end())
 						it++;
@@ -330,7 +330,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			{
 				int i = 0;
 				refreshPath_before(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
-				while(i < you.item_list.size()) //³ªÁß¿¡ ºü¸¥ ´øÁö±â ¹«±â·Î ¹Ù²Ù±â
+				while(i < you.item_list.size()) //ë‚˜ì¤‘ì— ë¹ ë¥¸ ë˜ì§€ê¸° ë¬´ê¸°ë¡œ ë°”ê¾¸ê¸°
 				{
 					if(it != you.item_list.begin())
 						it--;
@@ -387,7 +387,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 {
 	while(1)
 	{
-		printlog("¾î´À ¹æÇâÀ¸·Î ¹ß»çÇÏ½Ã°Ú½À´Ï±î?",true,false,true,CL_help);
+		printlog("ì–´ëŠ ë°©í–¥ìœ¼ë¡œ ë°œì‚¬í•˜ì‹œê² ìŠµë‹ˆê¹Œ?",true,false,true,CL_help);
 		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput());
 		switch(key_)
 		{
@@ -422,7 +422,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 			deletelog();
 			return 0;
 		default:
-			printlog("Àß¸øµÈ ¼±ÅÃÀÔ´Ï´Ù.",true,false,true,CL_help);
+			printlog("ì˜ëª»ëœ ì„ íƒì…ë‹ˆë‹¤.",true,false,true,CL_help);
 		}
 	}
 	return 0;

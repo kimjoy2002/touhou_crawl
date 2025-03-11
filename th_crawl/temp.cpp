@@ -1,4 +1,4 @@
-//
+ï»¿//
 //
 //void map_algorithms01(int num)
 //{
@@ -13,7 +13,7 @@
 //	
 //
 //	int rand_dummy = rand_int(20,30);
-//	for(int i=0;i<rand_dummy;i++) //rand_dummy¸¸Å­ÀÇ ¸Ê´õ¹Ì¸¦ »ı»ê
+//	for(int i=0;i<rand_dummy;i++) //rand_dummyë§Œí¼ì˜ ë§µë”ë¯¸ë¥¼ ìƒì‚°
 //	{
 //		int repeat = 10;
 //		int pattern_ = 0;
@@ -21,43 +21,43 @@
 //		if(!special_enter.empty())
 //		{
 //			special_ = true;
-//			repeat = 99999;//Æ¯¼öÆĞÅÏÀº (°ÅÀÇ)¹«ÇÑ¹İº¹½ÃÅ´
+//			repeat = 99999;//íŠ¹ìˆ˜íŒ¨í„´ì€ (ê±°ì˜)ë¬´í•œë°˜ë³µì‹œí‚´
 //			pattern_ = special_enter.back();
 //			special_enter.pop_back();
 //		}
-//		for(int j=0;j<repeat;j++) //¹«ÇÑ¹İº¹ Á¦°Å¿ë
+//		for(int j=0;j<repeat;j++) //ë¬´í•œë°˜ë³µ ì œê±°ìš©
 //		{
 //			bool success= true;
 //			int r_size_x = rand_int(3,8);
 //			int r_size_y = rand_int(3,8);
 //			int m_size=5;
 //			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
-//			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_); //·£´ıÇÑ ¸Ê´õ¹Ì
+//			map_dummy* temp = new map_dummy(temp_coord, true,r_size_x,r_size_y, pattern_); //ëœë¤í•œ ë§µë”ë¯¸
 //			
 //			vector<map_dummy*>::iterator it;
 //			for (it=vec_map.begin();it!=vec_map.end();it++) 
 //			{
-//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //				{
 //					success = false;
 //					break;
 //				}
 //			}	
-//			if(success) //°ãÄ¡Áö ¾ÊÀ»¶§ ¸Ê´õ¹ÌÇª½¬
+//			if(success) //ê²¹ì¹˜ì§€ ì•Šì„ë•Œ ë§µë”ë¯¸í‘¸ì‰¬
 //			{
 //				vec_map.push_back(temp);
 //				break;
 //			}
 //			else
 //			{
-//				delete temp; //°ãÄ¡¸é ¸Ş¸ğ¸® ÇØÁ¦ÇÏ°í ´Ù½Ã ¸Ê´õ¹Ì »ı¼º
+//				delete temp; //ê²¹ì¹˜ë©´ ë©”ëª¨ë¦¬ í•´ì œí•˜ê³  ë‹¤ì‹œ ë§µë”ë¯¸ ìƒì„±
 //				continue;
 //			}
 //		}
 //	}
 //
 //	vector<map_dummy*>::iterator it;
-//	for(it=vec_map.begin();it!=vec_map.end();it++)  //¹æµéÀ» ¸¶½ºÅ©ÁÖ±â
+//	for(it=vec_map.begin();it!=vec_map.end();it++)  //ë°©ë“¤ì„ ë§ˆìŠ¤í¬ì£¼ê¸°
 //		(*it)->mask(env[num]);
 //
 //	stack<coord_def> path_stack;
@@ -65,7 +65,7 @@
 //	map_dummy* temp = vec_map.back();
 //	for(it=vec_map.begin();it!=vec_map.end();it++) 
 //	{
-//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //		{
 //			(*it)->SetConnectExit(true);
 //			temp->SetConnectEnter(true);
@@ -75,13 +75,13 @@
 //
 //	{
 //		vector<map_dummy*>::iterator it2 = vec_map.begin();
-//		for(it=vec_map.begin();it!=vec_map.end();it++)  //¿¬°áÀÌ ¾ÈµÈ ¹æµéÀ» ´Ù½Ã ¿¬°á½Ãµµ
+//		for(it=vec_map.begin();it!=vec_map.end();it++)  //ì—°ê²°ì´ ì•ˆëœ ë°©ë“¤ì„ ë‹¤ì‹œ ì—°ê²°ì‹œë„
 //		{
 //			for(;!(*it)->GetConnect() && it2 != vec_map.end();it2++)
 //			{
 //				if(it == it2)
 //					continue;
-//				if(PathSearch((*it)->GetEntrance(),(*it2)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//				if(PathSearch((*it)->GetEntrance(),(*it2)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //				{
 //					(*it)->SetConnectEnter(true);
 //					temp->SetConnectExit(true);
@@ -93,19 +93,19 @@
 //
 //	for(int i = 0;i<DG_MAX_X;i++)
 //		for(int j = 0;j<DG_MAX_Y;j++)
-//			env[num].dgtile[i][j].tile = DG_WALL; //´Ù½Ã ÀüºÎ º®À¸·Î
+//			env[num].dgtile[i][j].tile = DG_WALL; //ë‹¤ì‹œ ì „ë¶€ ë²½ìœ¼ë¡œ
 //
 //
 //	while(!path_stack.empty())
 //	{
 //		coord_def path_temp = path_stack.top();
-//		env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ÀúÀåÇÑ µµ·Î¸¦ Ä¥ÇÏ±â
+//		env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ì €ì¥í•œ ë„ë¡œë¥¼ ì¹ í•˜ê¸°
 //		path_stack.pop();
 //	}
 //
 //	int percent_ = randA(10);
 //	for(it=vec_map.begin();it!=vec_map.end();it++) 
-//	{//¹æÀ» ¸¸µç´Ù.
+//	{//ë°©ì„ ë§Œë“ ë‹¤.
 //		(*it)->make_map(env[num]);
 //		if(!(*it)->pattern && randA(10)>=percent_)
 //			(*it)->make_door(env[num]);
@@ -150,7 +150,7 @@
 //	int step = 0;
 //
 //	int rand_dummy = special_enter.size();
-//	for(int i=0;i<rand_dummy;i++) //rand_dummy¸¸Å­ÀÇ ¸Ê´õ¹Ì¸¦ »ı»ê
+//	for(int i=0;i<rand_dummy;i++) //rand_dummyë§Œí¼ì˜ ë§µë”ë¯¸ë¥¼ ìƒì‚°
 //	{	
 //		int repeat = 10;
 //		int pattern_ = 1;
@@ -158,36 +158,36 @@
 //		if(!special_enter.empty())
 //		{
 //			special_ = true;
-//			repeat = 99999;//Æ¯¼öÆĞÅÏÀº (°ÅÀÇ)¹«ÇÑ¹İº¹½ÃÅ´
+//			repeat = 99999;//íŠ¹ìˆ˜íŒ¨í„´ì€ (ê±°ì˜)ë¬´í•œë°˜ë³µì‹œí‚´
 //			pattern_ = special_enter.back();
 //			special_enter.pop_back();
 //		}
-//		for(int j=0;j<repeat;j++) //¹«ÇÑ¹İº¹ Á¦°Å¿ë
+//		for(int j=0;j<repeat;j++) //ë¬´í•œë°˜ë³µ ì œê±°ìš©
 //		{
 //			bool success= true;
 //			int r_size_x = rand_int(2+piece/3,4+piece/3);
 //			int r_size_y = rand_int(2+piece/3,4+piece/3);
 //			int m_size=5;
 //			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);		
-//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //·£´ıÇÑ ¸Ê´õ¹Ì
+//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //ëœë¤í•œ ë§µë”ë¯¸
 //			
 //			vector<map_dummy*>::iterator it;
 //			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //			{
-//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //				{
 //					success = false;
 //					break;
 //				}
 //			}		
-//			if(success) //°ãÄ¡Áö ¾ÊÀ»¶§ ¸Ê´õ¹ÌÇª½¬
+//			if(success) //ê²¹ì¹˜ì§€ ì•Šì„ë•Œ ë§µë”ë¯¸í‘¸ì‰¬
 //			{
 //				vec_special_map.push_back(temp);
 //				break;
 //			}
 //			else
 //			{
-//				delete temp; //°ãÄ¡¸é ¸Ş¸ğ¸® ÇØÁ¦ÇÏ°í ´Ù½Ã ¸Ê´õ¹Ì »ı¼º
+//				delete temp; //ê²¹ì¹˜ë©´ ë©”ëª¨ë¦¬ í•´ì œí•˜ê³  ë‹¤ì‹œ ë§µë”ë¯¸ ìƒì„±
 //				continue;
 //			}
 //		}
@@ -197,7 +197,7 @@
 //	for(int i=0;i<25-piece;i++)
 //	{
 //		int j=0;
-//		for(;j<20;j++) //¹«ÇÑ¹İº¹ Á¦°Å¿ë
+//		for(;j<20;j++) //ë¬´í•œë°˜ë³µ ì œê±°ìš©
 //		{
 //			bool success= true;
 //			int next_x=0,next_y=0;
@@ -215,7 +215,7 @@
 //				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 //
 //			coord_def temp_coord(next_x,next_y);		
-//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,0); //·£´ıÇÑ ¸Ê´õ¹Ì
+//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,0); //ëœë¤í•œ ë§µë”ë¯¸
 //
 //			if(step)
 //			{
@@ -235,7 +235,7 @@
 //			{
 //				for (it=vec_map.begin();it!=vec_map.end();it++) 
 //				{
-//					if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//					if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //					{
 //						success = false;
 //						break;
@@ -244,13 +244,13 @@
 //			}
 //			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //			{
-//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //				{
 //					success = false;
 //					break;
 //				}
 //			}
-//			if(success) //°ãÄ¡Áö ¾ÊÀ»¶§ ¸Ê´õ¹ÌÇª½¬
+//			if(success) //ê²¹ì¹˜ì§€ ì•Šì„ë•Œ ë§µë”ë¯¸í‘¸ì‰¬
 //			{
 //				step = (step!=-1)?-1:1;
 //				prev_x = next_x+rand_int(-r_size_x+1,r_size_x-1);
@@ -261,7 +261,7 @@
 //			}
 //			else
 //			{
-//				delete temp; //°ãÄ¡¸é ¸Ş¸ğ¸® ÇØÁ¦ÇÏ°í ´Ù½Ã ¸Ê´õ¹Ì »ı¼º
+//				delete temp; //ê²¹ì¹˜ë©´ ë©”ëª¨ë¦¬ í•´ì œí•˜ê³  ë‹¤ì‹œ ë§µë”ë¯¸ ìƒì„±
 //				continue;
 //			}
 //		}
@@ -272,7 +272,7 @@
 //	}
 //
 //	vector<map_dummy*>::iterator it;
-//	for(it=vec_special_map.begin();it!=vec_special_map.end();it++)  //¹æµéÀ» ¸¶½ºÅ©ÁÖ±â
+//	for(it=vec_special_map.begin();it!=vec_special_map.end();it++)  //ë°©ë“¤ì„ ë§ˆìŠ¤í¬ì£¼ê¸°
 //		(*it)->mask(env[num]);
 //
 //
@@ -281,7 +281,7 @@
 //	
 //	for(it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //	{
-//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //		{
 //			path_stack.push((*it)->GetEntrance());
 //			(*it)->SetConnectExit(true);
@@ -291,7 +291,7 @@
 //	}
 //	for(it=vec_map.begin();it!=vec_map.end();it++) 
 //	{
-//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//		if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //		{
 //			path_stack.push((*it)->GetEntrance());
 //			(*it)->SetConnectExit(true);
@@ -303,14 +303,14 @@
 //
 //	for(int i = 0;i<DG_MAX_X;i++)
 //		for(int j = 0;j<DG_MAX_Y;j++)
-//			env[num].dgtile[i][j].tile = DG_WALL; //´Ù½Ã ÀüºÎ º®À¸·Î
+//			env[num].dgtile[i][j].tile = DG_WALL; //ë‹¤ì‹œ ì „ë¶€ ë²½ìœ¼ë¡œ
 //
 //
 //
 //
 //
 //	for(it=vec_map.begin();it!=vec_map.end();it++) 
-//	{//¹æÀ» ¸¸µç´Ù.
+//	{//ë°©ì„ ë§Œë“ ë‹¤.
 //		(*it)->make_map(env[num], false);
 //		/*(*it)->make_door(env[num]);*/
 //	}
@@ -318,11 +318,11 @@
 //	while(!path_stack.empty())
 //	{
 //		coord_def path_temp = path_stack.top();
-//		env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ÀúÀåÇÑ µµ·Î¸¦ Ä¥ÇÏ±â
+//		env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ì €ì¥í•œ ë„ë¡œë¥¼ ì¹ í•˜ê¸°
 //		path_stack.pop();
 //	}	
 //	for(it=vec_special_map.begin();it!=vec_special_map.end();it++) 
-//	{//¹æÀ» ¸¸µç´Ù.
+//	{//ë°©ì„ ë§Œë“ ë‹¤.
 //		(*it)->make_map(env[num], false);
 //	}
 //
@@ -376,7 +376,7 @@
 //	for(int i=0;i<40;i++)
 //	{
 //		int j=0;
-//		for(;j<50;j++) //¹«ÇÑ¹İº¹ Á¦°Å¿ë
+//		for(;j<50;j++) //ë¬´í•œë°˜ë³µ ì œê±°ìš©
 //		{
 //			bool success= false;
 //			int next_x=0,next_y=0;
@@ -394,7 +394,7 @@
 //				next_y = prev_y+rand_int(-r_size_y+1,r_size_y-1);
 //
 //			coord_def temp_coord(next_x,next_y);		
-//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,1); //·£´ıÇÑ ¸Ê´õ¹Ì
+//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,1); //ëœë¤í•œ ë§µë”ë¯¸
 //
 //			if(step)
 //			{
@@ -423,13 +423,13 @@
 //			}
 //			//for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //			//{
-//			//	if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//			//	if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //			//	{
 //			//		success = false;
 //			//		break;
 //			//	}
 //			//}
-//			if(success) //°ãÄ¡Áö ¾ÊÀ»¶§ ¸Ê´õ¹ÌÇª½¬
+//			if(success) //ê²¹ì¹˜ì§€ ì•Šì„ë•Œ ë§µë”ë¯¸í‘¸ì‰¬
 //			{
 //				step = (step!=-1)?-1:1;
 //				prev_x = next_x+rand_int(-r_size_x+1,r_size_x-1);
@@ -440,7 +440,7 @@
 //			}
 //			else
 //			{
-//				delete temp; //°ãÄ¡¸é ¸Ş¸ğ¸® ÇØÁ¦ÇÏ°í ´Ù½Ã ¸Ê´õ¹Ì »ı¼º
+//				delete temp; //ê²¹ì¹˜ë©´ ë©”ëª¨ë¦¬ í•´ì œí•˜ê³  ë‹¤ì‹œ ë§µë”ë¯¸ ìƒì„±
 //				continue;
 //			}
 //		}
@@ -452,7 +452,7 @@
 //
 //
 //	int rand_dummy = special_enter.size();
-//	for(int i=0;i<rand_dummy;i++) //rand_dummy¸¸Å­ÀÇ ¸Ê´õ¹Ì¸¦ »ı»ê
+//	for(int i=0;i<rand_dummy;i++) //rand_dummyë§Œí¼ì˜ ë§µë”ë¯¸ë¥¼ ìƒì‚°
 //	{	
 //		int repeat = 10;
 //		int pattern_ = 1;
@@ -460,18 +460,18 @@
 //		if(!special_enter.empty())
 //		{
 //			special_ = true;
-//			repeat = 99999;//Æ¯¼öÆĞÅÏÀº (°ÅÀÇ)¹«ÇÑ¹İº¹½ÃÅ´
+//			repeat = 99999;//íŠ¹ìˆ˜íŒ¨í„´ì€ (ê±°ì˜)ë¬´í•œë°˜ë³µì‹œí‚´
 //			pattern_ = special_enter.back();
 //			special_enter.pop_back();
 //		}
-//		for(int j=0;j<repeat;j++) //¹«ÇÑ¹İº¹ Á¦°Å¿ë
+//		for(int j=0;j<repeat;j++) //ë¬´í•œë°˜ë³µ ì œê±°ìš©
 //		{
 //			bool success= false;
 //			int r_size_x = rand_int(3,8);
 //			int r_size_y = rand_int(3,8);
 //			int m_size=20;
 //			coord_def temp_coord(randA(DG_MAX_X-(6+2)*2-1-m_size*2)+6+2+m_size,randA(DG_MAX_Y-(6+2)*2-1-m_size*2)+6+2+m_size);		
-//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //·£´ıÇÑ ¸Ê´õ¹Ì
+//			map_dummy* temp = new map_dummy(temp_coord, false,r_size_x,r_size_y,pattern_); //ëœë¤í•œ ë§µë”ë¯¸
 //			
 //			vector<map_dummy*>::iterator it;
 //			for (it=vec_map.begin();it!=vec_map.end();it++) 
@@ -484,7 +484,7 @@
 //			}
 //			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //			{
-//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //¸Ê´õ¹ÌÃæµ¹½Ã¿£ ¸¸µéÁö ¾ÊÀ½
+//				if((*it)->collution(temp_coord,r_size_x,r_size_y) || (*it)->plus_collution(temp_coord,r_size_x,r_size_y)) //ë§µë”ë¯¸ì¶©ëŒì‹œì—” ë§Œë“¤ì§€ ì•ŠìŒ
 //				{
 //					success = false;
 //					break;
@@ -492,14 +492,14 @@
 //			}
 //
 //
-//			if(success) //°ãÄ¡Áö ¾ÊÀ»¶§ ¸Ê´õ¹ÌÇª½¬
+//			if(success) //ê²¹ì¹˜ì§€ ì•Šì„ë•Œ ë§µë”ë¯¸í‘¸ì‰¬
 //			{
 //				vec_special_map.push_back(temp);
 //				break;
 //			}
 //			else
 //			{
-//				delete temp; //°ãÄ¡¸é ¸Ş¸ğ¸® ÇØÁ¦ÇÏ°í ´Ù½Ã ¸Ê´õ¹Ì »ı¼º
+//				delete temp; //ê²¹ì¹˜ë©´ ë©”ëª¨ë¦¬ í•´ì œí•˜ê³  ë‹¤ì‹œ ë§µë”ë¯¸ ìƒì„±
 //				continue;
 //			}
 //		}
@@ -509,7 +509,7 @@
 //
 //
 //	vector<map_dummy*>::iterator it;
-//	//for(it=vec_special_map.begin();it!=vec_special_map.end();it++)  //¹æµéÀ» ¸¶½ºÅ©ÁÖ±â
+//	//for(it=vec_special_map.begin();it!=vec_special_map.end();it++)  //ë°©ë“¤ì„ ë§ˆìŠ¤í¬ì£¼ê¸°
 //	//	(*it)->mask(env[num]);
 //
 //
@@ -518,7 +518,7 @@
 //	//
 //	//for(it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 //	//{
-//	//	if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//	//	if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //	//	{
 //	//		path_stack.push((*it)->GetEntrance());
 //	//		(*it)->SetConnectExit(true);
@@ -528,7 +528,7 @@
 //	//}
 //	//for(it=vec_map.begin();it!=vec_map.end();it++) 
 //	//{
-//	//	if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//¹æ¿¡ °É¸° ¸¶½ºÅ©¸¦ ÇÇÇØ¼­ °æ·ÎÀúÀå
+//	//	if(PathSearch(temp->GetEntrance(),(*it)->GetExit(),path_stack,ST_MAP,num))//ë°©ì— ê±¸ë¦° ë§ˆìŠ¤í¬ë¥¼ í”¼í•´ì„œ ê²½ë¡œì €ì¥
 //	//	{
 //	//		path_stack.push((*it)->GetEntrance());
 //	//		(*it)->SetConnectExit(true);
@@ -540,14 +540,14 @@
 //
 //	for(int i = 0;i<DG_MAX_X;i++)
 //		for(int j = 0;j<DG_MAX_Y;j++)
-//			env[num].dgtile[i][j].tile = DG_WALL; //´Ù½Ã ÀüºÎ º®À¸·Î
+//			env[num].dgtile[i][j].tile = DG_WALL; //ë‹¤ì‹œ ì „ë¶€ ë²½ìœ¼ë¡œ
 //
 //
 //
 //
 //
 //	for(it=vec_map.begin();it!=vec_map.end();it++) 
-//	{//¹æÀ» ¸¸µç´Ù.
+//	{//ë°©ì„ ë§Œë“ ë‹¤.
 //		(*it)->make_map(env[num], false);
 //		/*(*it)->make_door(env[num]);*/
 //	}
@@ -555,11 +555,11 @@
 //	//while(!path_stack.empty())
 //	//{
 //	//	coord_def path_temp = path_stack.top();
-//	//	env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ÀúÀåÇÑ µµ·Î¸¦ Ä¥ÇÏ±â
+//	//	env[num].dgtile[path_temp.x][path_temp.y].tile = DG_FLOOR; //ì €ì¥í•œ ë„ë¡œë¥¼ ì¹ í•˜ê¸°
 //	//	path_stack.pop();
 //	//}	
 //	for(it=vec_special_map.begin();it!=vec_special_map.end();it++) 
-//	{//¹æÀ» ¸¸µç´Ù.
+//	{//ë°©ì„ ë§Œë“ ë‹¤.
 //		(*it)->make_map(env[num], false);
 //	}
 //
@@ -598,7 +598,7 @@
 //	}
 //
 //
-//	{//ÀÓ½Ã
+//	{//ì„ì‹œ
 //		//while(num == YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
 //		//{
 //		//	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);

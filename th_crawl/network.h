@@ -1,4 +1,6 @@
-
+﻿
+#ifndef  __NETWORK_H__
+#define  __NETWORK_H__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,3 +36,5 @@ public:
 
 
 void sendScore(const char *c, const char *file);
+
+#endif // __NETWORK_H__

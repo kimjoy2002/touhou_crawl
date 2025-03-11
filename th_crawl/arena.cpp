@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: arena.cpp
+// íŒŒì¼ì´ë¦„: arena.cpp
 //
-// ³»¿ë: ¾Æ·¹³ª
+// ë‚´ìš©: ì•„ë ˆë‚˜
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -82,7 +82,7 @@ void SeleteArenaMonster(int num, int level)
 
 	
 	char temp[200];
-	sprintf_s(temp,200,"========== ·¹º§ %d ========== ",level);
+	sprintf_s(temp,200,"========== ë ˆë²¨ %d ========== ",level);
 	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
 
 
@@ -114,7 +114,7 @@ void SeleteArenaMonster(int num, int level)
 			return mondata[lf].level < mondata[rf].level;
 		});
 
-		if(i==1)//µÎ ÆÀÀÌ ¿Ïº®È÷ µ¿ÀÏ±¸¼ºÀÏ¶§ ¸·¾Æ¾ßµÊ
+		if(i==1)//ë‘ íŒ€ì´ ì™„ë²½íˆ ë™ì¼êµ¬ì„±ì¼ë•Œ ë§‰ì•„ì•¼ë¨
 		{
 			bool same = true;
 			if(team_list_[0].size() == team_list_[1].size())
@@ -147,7 +147,7 @@ void SeleteArenaMonster(int num, int level)
 
 		for(int j=0; j < team_list_[i].size(); j++)
 		{
-			sprintf_s(temp,200,"%sÆÀ: %s",i==0?"ÁÂÃø":"¿ìÃø", mondata[team_list_[i][j]].name.name.c_str());
+			sprintf_s(temp,200,"%síŒ€: %s",i==0?"ì¢Œì¸¡":"ìš°ì¸¡", mondata[team_list_[i][j]].name.name.c_str());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_green);
 			createarenamon(num, team_list_[i][j], i == 0);
 		}
@@ -166,8 +166,8 @@ void arena_event(int num)
 		
 		if(you.level == 27)
 		{
-			printlog("Å¬¸®¾î¸¦ ÃàÇÏÇÑ´Ù! ´ç½ÅÀº ³î¶ó¿î Âï½ÅÀÌ±º!",true,false,false,CL_help);
-			AddNote(you.turn,CurrentLevelString(),"·¹º§27 ´Ş¼º! ´ç½ÅÀº °ÔÀÓÀ» Å¬¸®¾îÇß´Ù.",CL_help);
+			printlog("í´ë¦¬ì–´ë¥¼ ì¶•í•˜í•œë‹¤! ë‹¹ì‹ ì€ ë†€ë¼ìš´ ì°ì‹ ì´êµ°!",true,false,false,CL_help);
+			AddNote(you.turn,CurrentLevelString(),"ë ˆë²¨27 ë‹¬ì„±! ë‹¹ì‹ ì€ ê²Œì„ì„ í´ë¦¬ì–´í–ˆë‹¤.",CL_help);
 		}
 		else
 		{
@@ -195,9 +195,9 @@ void arena_event(int num)
 			map_list.bamboo_rate = 0;
 			
 			if(you.level == 26)
-				printlog("¸¶Áö¸· ÀüÅõ´Ù. ÁØºñ´Â µÇ¾ú´Â°¡?",true,false,false,CL_normal);
+				printlog("ë§ˆì§€ë§‰ ì „íˆ¬ë‹¤. ì¤€ë¹„ëŠ” ë˜ì—ˆëŠ”ê°€?",true,false,false,CL_normal);
 			else
-				printlog("ÀÚ ´©°¡ ÀÌ±æÁö ¼±ÅÃÇÏ¶ó!",true,false,false,CL_normal);
+				printlog("ì ëˆ„ê°€ ì´ê¸¸ì§€ ì„ íƒí•˜ë¼!",true,false,false,CL_normal);
 		}
 
 	}
@@ -215,7 +215,7 @@ void arena_event(int num)
 		if(you.position.x == DG_MAX_X/2)
 			you.Blink(1);
 		
-		printlog("°³½Ã!",true,false,false,CL_normal);
+		printlog("ê°œì‹œ!",true,false,false,CL_normal);
 	}
 
 	
@@ -242,29 +242,29 @@ void arena_event(int num)
 
 		if(left_dead_ && !right_dead_)
 		{
-			printlog("ÇÑÆÇ! ¿À¸¥ÂÊÀÇ ½Â¸®´Ù!",true,false,false,CL_help);
+			printlog("í•œíŒ! ì˜¤ë¥¸ìª½ì˜ ìŠ¹ë¦¬ë‹¤!",true,false,false,CL_help);
 			if(you.position.x > DG_MAX_X/2)
 			{
 				map_list.bamboo_count = -10;
 				you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-				AddNote(you.turn,CurrentLevelString(),"Á¤´ä! ¿ìÃøÆÀÀÇ ½Â¸®´Ù",CL_normal);
+				AddNote(you.turn,CurrentLevelString(),"ì •ë‹µ! ìš°ì¸¡íŒ€ì˜ ìŠ¹ë¦¬ë‹¤",CL_normal);
 			}
 			else
 			{
-				AddNote(you.turn,CurrentLevelString(),"¿À´ä... ¿ìÃøÆÀÀÇ ½Â¸®´Ù",CL_danger);
+				AddNote(you.turn,CurrentLevelString(),"ì˜¤ë‹µ... ìš°ì¸¡íŒ€ì˜ ìŠ¹ë¦¬ë‹¤",CL_danger);
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
 					char temp[200];
-					sprintf_s(temp,200,"¿À´äÀÌ´Ù! ³²Àº ±âÈ¸ %d",3-map_list.god_num);
+					sprintf_s(temp,200,"ì˜¤ë‹µì´ë‹¤! ë‚¨ì€ ê¸°íšŒ %d",3-map_list.god_num);
 					printlog(temp,true,false,false,CL_danger);
-					sprintf_s(temp,200,"³²Àº ±âÈ¸ %d",3-map_list.god_num);
+					sprintf_s(temp,200,"ë‚¨ì€ ê¸°íšŒ %d",3-map_list.god_num);
 					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
 					map_list.bamboo_count = -10;
 				}
 				else
 				{
-					printlog("¿À´äÀÌ´Ù!",true,false,false,CL_danger);
+					printlog("ì˜¤ë‹µì´ë‹¤!",true,false,false,CL_danger);
 					map_list.bamboo_count = 121;
 				}
 		
@@ -274,29 +274,29 @@ void arena_event(int num)
 		}
 		if(!left_dead_ && right_dead_)
 		{
-			printlog("ÇÑÆÇ! ¿ŞÂÊÀÇ ½Â¸®´Ù!",true,false,false,CL_help);	
+			printlog("í•œíŒ! ì™¼ìª½ì˜ ìŠ¹ë¦¬ë‹¤!",true,false,false,CL_help);	
 			if(you.position.x < DG_MAX_X/2)
 			{
 				map_list.bamboo_count = -10;
 				you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-				AddNote(you.turn,CurrentLevelString(),"Á¤´ä! ÁÂÃøÆÀÀÇ ½Â¸®´Ù",CL_normal);
+				AddNote(you.turn,CurrentLevelString(),"ì •ë‹µ! ì¢Œì¸¡íŒ€ì˜ ìŠ¹ë¦¬ë‹¤",CL_normal);
 			}
 			else
 			{
-				AddNote(you.turn,CurrentLevelString(),"¿À´ä... ÁÂÃøÆÀÀÇ ½Â¸®´Ù",CL_danger);
+				AddNote(you.turn,CurrentLevelString(),"ì˜¤ë‹µ... ì¢Œì¸¡íŒ€ì˜ ìŠ¹ë¦¬ë‹¤",CL_danger);
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
 					char temp[200];
-					sprintf_s(temp,200,"¿À´äÀÌ´Ù! ³²Àº ±âÈ¸ %d",3-map_list.god_num);
+					sprintf_s(temp,200,"ì˜¤ë‹µì´ë‹¤! ë‚¨ì€ ê¸°íšŒ %d",3-map_list.god_num);
 					printlog(temp,true,false,false,CL_danger);
-					sprintf_s(temp,200,"³²Àº ±âÈ¸ %d",3-map_list.god_num);
+					sprintf_s(temp,200,"ë‚¨ì€ ê¸°íšŒ %d",3-map_list.god_num);
 					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
 					map_list.bamboo_count = -10;
 				}
 				else
 				{
-					printlog("¿À´äÀÌ´Ù!",true,false,false,CL_danger);
+					printlog("ì˜¤ë‹µì´ë‹¤!",true,false,false,CL_danger);
 					map_list.bamboo_count = 121;
 				}
 
@@ -305,20 +305,20 @@ void arena_event(int num)
 		}
 		if(left_dead_ && right_dead_)
 		{
-			printlog("¹«½ÂºÎ! ÀÌ¹ø ´ëÀüÀº ¹«È¿´Ù.",true,false,false,CL_help);	
+			printlog("ë¬´ìŠ¹ë¶€! ì´ë²ˆ ëŒ€ì „ì€ ë¬´íš¨ë‹¤.",true,false,false,CL_help);	
 			map_list.bamboo_count = -10;		
 			map_list.bamboo_rate = 3;
-			AddNote(you.turn,CurrentLevelString(),"¹«½ÂºÎ·Î ÀÎÇÑ Àç°æ±â",CL_small_danger);
+			AddNote(you.turn,CurrentLevelString(),"ë¬´ìŠ¹ë¶€ë¡œ ì¸í•œ ì¬ê²½ê¸°",CL_small_danger);
 		}
 
 	}
 
 	if(map_list.bamboo_count == 120)
 	{
-		printlog("½ÃÇÑÃÊ°ú! ¹«½ÂºÎ! ÀÌ¹ø ´ëÀüÀº ¹«È¿´Ù.",true,false,false,CL_help);	
+		printlog("ì‹œí•œì´ˆê³¼! ë¬´ìŠ¹ë¶€! ì´ë²ˆ ëŒ€ì „ì€ ë¬´íš¨ë‹¤.",true,false,false,CL_help);	
 		map_list.bamboo_count = -10;		
 		map_list.bamboo_rate = 3;
-		AddNote(you.turn,CurrentLevelString(),"½ÃÇÑÃÊ°ú·Î ÀÎÇÑ Àç°æ±â",CL_small_danger);
+		AddNote(you.turn,CurrentLevelString(),"ì‹œí•œì´ˆê³¼ë¡œ ì¸í•œ ì¬ê²½ê¸°",CL_small_danger);
 
 		auto it = env[num].mon_vector.begin();
 		for( ;it != env[num].mon_vector.end();it++)
@@ -335,9 +335,9 @@ void arena_event(int num)
 	if(map_list.bamboo_count == 130)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"´ç½ÅÀÇ ±â·ÏÀº %d·¹º§ÀÌ´Ù. ´ÙÀ½¿¡ ´õ¿í ³ôÀº ·¹º§¿¡ µµÀüÇÏµµ·Ï! (?:·Î ±â·ÏÈ®ÀÎ)",you.level);
+		sprintf_s(temp,200,"ë‹¹ì‹ ì˜ ê¸°ë¡ì€ %dë ˆë²¨ì´ë‹¤. ë‹¤ìŒì— ë”ìš± ë†’ì€ ë ˆë²¨ì— ë„ì „í•˜ë„ë¡! (?:ë¡œ ê¸°ë¡í™•ì¸)",you.level);
 		printlog(temp,true,false,false,CL_help);
-		sprintf_s(temp,200,"´ç½ÅÀÇ ±â·ÏÀº %d·¹º§ÀÌ´Ù.",you.level);
+		sprintf_s(temp,200,"ë‹¹ì‹ ì˜ ê¸°ë¡ì€ %dë ˆë²¨ì´ë‹¤.",you.level);
 		AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
 	}
 

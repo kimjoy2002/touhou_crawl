@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: player.h
+// íŒŒì¼ì´ë¦„: player.h
 //
-// ³»¿ë: playerÅ¬·¡½º ¼±¾ğ
+// ë‚´ìš©: playerí´ë˜ìŠ¤ ì„ ì–¸
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,7 +25,7 @@ extern enum ALCHEMY_LIST;
 extern enum dump_action_type;
 extern enum amulet_type;
 
-enum stat_up //½ºÅÈ¹öÇÁ´Â µû·Î µÎÁö¾Ê´Â´Ù. °ãÄ¥ °¡´É¼ºÀ» À§ÇØ
+enum stat_up //ìŠ¤íƒ¯ë²„í”„ëŠ” ë”°ë¡œ ë‘ì§€ì•ŠëŠ”ë‹¤. ê²¹ì¹  ê°€ëŠ¥ì„±ì„ ìœ„í•´
 {
 	BUFFSTAT_STR=0,
 	BUFFSTAT_INT,
@@ -51,7 +51,7 @@ enum stat_up //½ºÅÈ¹öÇÁ´Â µû·Î µÎÁö¾Ê´Â´Ù. °ãÄ¥ °¡´É¼ºÀ» À§ÇØ
 	BUFFSTAT_MAX
 };
 
-enum buff_type //°ãÃÄÁ®¼± ¾ÈµÇ´Â ¹öÇÁµé
+enum buff_type //ê²¹ì³ì ¸ì„  ì•ˆë˜ëŠ” ë²„í”„ë“¤
 {
 	BUFF_DUPLE=-1,
 	BUFF_TEST=0,
@@ -62,7 +62,7 @@ enum buff_type //°ãÃÄÁ®¼± ¾ÈµÇ´Â ¹öÇÁµé
 	BUFF_AUTUMN_RF,
 	BUFF_JOON_AC,
 	BUFF_MIKO_START,
-	BUFF_MIKO_RF = BUFF_MIKO_START, //¹ÌÄÚ¹öÇÁµéÀº °è´ÜÀ» ¿Å±â¸é »ç¶óÁü
+	BUFF_MIKO_RF = BUFF_MIKO_START, //ë¯¸ì½”ë²„í”„ë“¤ì€ ê³„ë‹¨ì„ ì˜®ê¸°ë©´ ì‚¬ë¼ì§
 	BUFF_MIKO_RI,
 	BUFF_MIKO_RE,
 	BUFF_MIKO_RP,
@@ -92,7 +92,7 @@ enum action_type
 struct buff_class
 {
 	stat_up stat;
-	buff_type id;//-1ÀÌ ¾Æ´Ï¸é °ãÄ¥°æ¿ì °ãÃÄÁöÁö¾Ê´Â´Ù. 
+	buff_type id;//-1ì´ ì•„ë‹ˆë©´ ê²¹ì¹ ê²½ìš° ê²¹ì³ì§€ì§€ì•ŠëŠ”ë‹¤. 
 	int value;
 	int turn;
 	buff_class():stat(BUFFSTAT_STR),id(BUFF_DUPLE),value(0),turn(1){};
@@ -119,7 +119,7 @@ struct lilly_ally
 	int id;
 	int name;
 	int personality;
-	int cooldown; //ºÎÈ°½Ã°£
+	int cooldown; //ë¶€í™œì‹œê°„
 	
 	lilly_ally():map_id(0),floor(0),level(0),exp(0),id(0),name(0),personality(0),cooldown(0){};
 };
@@ -187,11 +187,11 @@ public:
 	int m_int;
 	int acc_plus;
 	int dam_plus;
-	int as_penalty;//¾Æ¸Ó¿Í ½Çµå ÆĞ³ÎÆ¼
+	int as_penalty;//ì•„ë¨¸ì™€ ì‹¤ë“œ íŒ¨ë„í‹°
 	int magic_resist;
-	int tension_gauge; //ÅÙ¼Ç °ÔÀÌÁö
-	bool tension_turn; //ÀÌ¹øÅÏ¿¡ ÀÌ¹Ì ÅÙ¼ÇÀ» Ã¼Å©Çß´Â°¡
-	bool already_swap; //swapÇß´Â°¡
+	int tension_gauge; //í…ì…˜ ê²Œì´ì§€
+	bool tension_turn; //ì´ë²ˆí„´ì— ì´ë¯¸ í…ì…˜ì„ ì²´í¬í–ˆëŠ”ê°€
+	bool already_swap; //swapí–ˆëŠ”ê°€
 	int ziggurat_level;
 	int reimu_level;
 	int reimu_turn;
@@ -213,32 +213,32 @@ public:
 	action_type prev_action;
 	prev_action_struct prev_action_key;
 
-	item* equipment[ET_LAST]; //ÀåÂø ¾ÆÀÌÅÛ
+	item* equipment[ET_LAST]; //ì¥ì°© ì•„ì´í…œ
 
-	int time_delay; //Çàµ¿½Ã°£
-	int speed; //ÀÌµ¿¼Óµµ
-	int turn; //ÅÏ
-	int real_turn; //ÅÏ
-	int prev_real_turn; //ÅÏ
-	bool player_move;//ÇÃ·¹ÀÌ¾îÀÇ ¿òÁ÷ÀÓÀÌ ÀÖ¾ú´Ù.
-	int explore_map; //Å½ÇèÇÑ °Å¸®
-	int penalty_turn[4]; //³Ê¹« ¿À·¡ÀÖÀ»¶§ ÆĞ³ÎÆ¼
+	int time_delay; //í–‰ë™ì‹œê°„
+	int speed; //ì´ë™ì†ë„
+	int turn; //í„´
+	int real_turn; //í„´
+	int prev_real_turn; //í„´
+	bool player_move;//í”Œë ˆì´ì–´ì˜ ì›€ì§ì„ì´ ìˆì—ˆë‹¤.
+	int explore_map; //íƒí—˜í•œ ê±°ë¦¬
+	int penalty_turn[4]; //ë„ˆë¬´ ì˜¤ë˜ìˆì„ë•Œ íŒ¨ë„í‹°
 
-	char final_item; //¸¶Áö¸·¿¡ ÁÖ¿î ÅÛ
-	int final_num; //¸¶Áö¸·¿¡ ÁÖ¿î ÅÛÀÇ ¼ö·®
+	char final_item; //ë§ˆì§€ë§‰ì— ì£¼ìš´ í…œ
+	int final_num; //ë§ˆì§€ë§‰ì— ì£¼ìš´ í…œì˜ ìˆ˜ëŸ‰
 	
 
 	//int hunger;
 	//int hunger_per_turn;
 
-	stack<coord_def> will_move; //¿òÁ÷ÀÌ´Â °æ·Î
+	stack<coord_def> will_move; //ì›€ì§ì´ëŠ” ê²½ë¡œ
 
 	int auto_pickup;
 
 	interupt_type inter;
 
 
-	//¿©±âºÎÅÍ ¿©·¯»óÅÂµé
+	//ì—¬ê¸°ë¶€í„° ì—¬ëŸ¬ìƒíƒœë“¤
 	int s_poison;
 	int s_tele;
 	int s_might;
@@ -285,8 +285,8 @@ public:
 	int s_eirin_poison_time;
 	int s_exhausted;
 	int s_stasis;
-	bool force_strong; //°­È­/¾àÈ­(À§·Â 2¹è 1/2¹è)
-	int force_turn; //°­È­/¾àÈ­ÅÏ
+	bool force_strong; //ê°•í™”/ì•½í™”(ìœ„ë ¥ 2ë°° 1/2ë°°)
+	int force_turn; //ê°•í™”/ì•½í™”í„´
 	int s_unluck;
 	int s_super_graze;
 	int s_none_move;
@@ -295,7 +295,7 @@ public:
 	int s_sleep;
 	int s_pure;
 	int s_pure_turn;
-	bool drowned;//ÀÍ»çÁß(ÀÓ½Ã ¼ö¿µ°¡´É)
+	bool drowned;//ìµì‚¬ì¤‘(ì„ì‹œ ìˆ˜ì˜ê°€ëŠ¥)
 	int s_weather;
 	int s_weather_turn;
 	int s_evoke_ghost;
@@ -315,9 +315,9 @@ public:
 	int confuse_resist;
 	int invisible_view;
 	int power_keep;
-	bool togle_invisible; //½ºÆçÄ«µå·Î¸¸ ¾ò´Â Åõ¸í
-	int battle_count; //ÀüÅõÁßÀÌ´Ù. °ø°İÇÏ¸é 100ºÎÅÍ ½ÃÀÛ
-	bool youMaxiExp; //°æÇèÄ¡°¡ °¡µæÂ÷¼­ °æ°í
+	bool togle_invisible; //ìŠ¤í ì¹´ë“œë¡œë§Œ ì–»ëŠ” íˆ¬ëª…
+	int battle_count; //ì „íˆ¬ì¤‘ì´ë‹¤. ê³µê²©í•˜ë©´ 100ë¶€í„° ì‹œì‘
+	bool youMaxiExp; //ê²½í—˜ì¹˜ê°€ ê°€ë“ì°¨ì„œ ê²½ê³ 
 
 	int uniden_poison_resist;
 	int uniden_fire_resist;
@@ -346,10 +346,10 @@ public:
 	int gift_count;
 	punish_struct punish[GT_LAST];
 	int god_turn;
-	int god_value[GT_LAST][5];//ÀÌ°Ç ½Å¿¡ µû¶ó ÀûÀıÇÑ ¼öÄ¡·Î ÀÌ¿ë
-	lilly_ally lilly_allys[5]; //¸±¸®ÀÇ µ¿·á
-	int suwako_meet; //½º¿ÍÄÚ¸¦ ¹ÏÀºÀûÀÌ ÀÖ´ÂÁö
-	int half_youkai[4];//¹İ¿ä º¯ÀÌ ¼öÄ¡
+	int god_value[GT_LAST][5];//ì´ê±´ ì‹ ì— ë”°ë¼ ì ì ˆí•œ ìˆ˜ì¹˜ë¡œ ì´ìš©
+	lilly_ally lilly_allys[5]; //ë¦´ë¦¬ì˜ ë™ë£Œ
+	int suwako_meet; //ìŠ¤ì™€ì½”ë¥¼ ë¯¿ì€ì ì´ ìˆëŠ”ì§€
+	int half_youkai[4];//ë°˜ìš” ë³€ì´ ìˆ˜ì¹˜
 	int rune[RUNE_MAX];
 
 	bool sight_reset;
@@ -378,7 +378,7 @@ public:
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
-	void youAttack(unit* unit_); //´©±º°¡¸¦ °ø°İÇÏ´Ù.
+	void youAttack(unit* unit_); //ëˆ„êµ°ê°€ë¥¼ ê³µê²©í•˜ë‹¤.
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
 	void CalcuHP();
@@ -395,7 +395,7 @@ public:
 	int GetAtkDelay();
 	//int GetArmourPanlty();
 	//int GetShieldPanlty();
-	int ReSetASPanlty(); //»õ·Î¿î ¾Æ¸Ó½Çµå ÆĞ³ÎÆ¼¸¦ ÁöÁ¤
+	int ReSetASPanlty(); //ìƒˆë¡œìš´ ì•„ë¨¸ì‹¤ë“œ íŒ¨ë„í‹°ë¥¼ ì§€ì •
 	int GetPenaltyMinus(int level_);
 	int GetThrowAttack(const item* it, bool max_);
 	int GetThrowHit(const item* it);
@@ -408,7 +408,7 @@ public:
 	int GetSpellSuccess(int spell_);
 	int GetSpellHungry(int spell_);
 	int GetStealth();
-	int GetBuffOk(stat_up stat_);//ÇØ´ç½ºÅÈ ¹öÇÁ°¡ ÀÖÀ¸¸é true¸®ÅÏ. º¸Åë display¿ë
+	int GetBuffOk(stat_up stat_);//í•´ë‹¹ìŠ¤íƒ¯ ë²„í”„ê°€ ìˆìœ¼ë©´ trueë¦¬í„´. ë³´í†µ displayìš©
 	char getAsciiDot() { return '@'; };
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
@@ -475,7 +475,7 @@ public:
 	bool SetSaved(int saved){return true;};
 	bool SetTogleInvisible(bool off_);
 	bool SetBattleCount(int count_);
-	void ChangeBattleCount(bool on_); //¹èÆ²Ä«¿îÅÍ°¡ ÄÑÁö°Å³ª ²¨Áú¶§ Ã³¸® 
+	void ChangeBattleCount(bool on_); //ë°°í‹€ì¹´ìš´í„°ê°€ ì¼œì§€ê±°ë‚˜ êº¼ì§ˆë•Œ ì²˜ë¦¬ 
 	bool SetSwift(int swift_);
 	bool SetManaRegen(int mana_regen_);
 	bool SetSuperMan(int superman_);
@@ -498,7 +498,7 @@ public:
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
 	int isSetMikoBuff(int temp_);
 	int reSetMikoBuff();
-	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true ¸®ÅÏÀº ±âÁ¸ÀÇ ¹öÇÁ°¡ ÀÖ¾î¼­ µ¤¾î¾º¿ü´Ù.
+	bool SetBuff(stat_up stat_, buff_type id_, int value_, int turn_); //true ë¦¬í„´ì€ ê¸°ì¡´ì˜ ë²„í”„ê°€ ìˆì–´ì„œ ë®ì–´ì”Œì› ë‹¤.
 	bool SetProperty(tribe_proper_type type_, int value_);
 	bool SetStatBoost(int sdi_, int value_);
 	bool SetEirinHeal(int value_, bool punish_);
@@ -540,7 +540,7 @@ public:
 	vector<monster>::iterator GetTargetIter();
 	interupt_type resetLOS(bool speak_ = true);
 	void MakeLOSPattern();
-	interupt_type TurnEnd(bool *item_delete_ = NULL); //0Àº µüÈ÷ÀÏ¾ø°í, 1ÀÌ»óºÎÅÍ ÀÎÅÍ·´Æ®
+	interupt_type TurnEnd(bool *item_delete_ = NULL); //0ì€ ë”±íˆì¼ì—†ê³ , 1ì´ìƒë¶€í„° ì¸í„°ëŸ½íŠ¸
 	bool TraningStealth();
 	int additem(item *t, bool speak_ = true);
 	bool DeleteItem(const list<item>::iterator it, int num_ = 0);
@@ -568,7 +568,7 @@ public:
 	bool equipjewerly(char id_);
 	bool unequip(char id_);
 	bool unequip(list<item>::iterator it, equip_type type_);
-	bool possibleunequip(list<item>::iterator it); //ÀåÂøÇÏ°íÀÖ´Ù¸é Àåºñ¹ş±â. ÀåÂø¾ÈÇØµµ ½ÇÆĞÃ³¸®´Â ¾Æ´Ô
+	bool possibleunequip(list<item>::iterator it); //ì¥ì°©í•˜ê³ ìˆë‹¤ë©´ ì¥ë¹„ë²—ê¸°. ì¥ì°©ì•ˆí•´ë„ ì‹¤íŒ¨ì²˜ë¦¬ëŠ” ì•„ë‹˜
 	int isequip(list<item>::iterator it);
 	int isequip(item* item_);
 	int haveGoal();
@@ -596,7 +596,7 @@ public:
 	bool isView(){return true;};
 	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	
-	bool isSightnonblocked(coord_def c);//º¸ÀÌ´Â ÀÌ À§Ä¡°¡ ½ÇÁ¦·Î °ø°İ°¡´ÉÇÑÁö?(À¯¸®º®)
+	bool isSightnonblocked(coord_def c);//ë³´ì´ëŠ” ì´ ìœ„ì¹˜ê°€ ì‹¤ì œë¡œ ê³µê²©ê°€ëŠ¥í•œì§€?(ìœ ë¦¬ë²½)
 	parent_type GetParentType();
 	interupt_type SetInter(interupt_type inter_);
 
@@ -605,22 +605,22 @@ void GameOver();
 
 extern players you;
 
-int action_Move(int key, const coord_def &c); //¸ŞÀÎ·çÇÁ¿¡¼­ÀÇ ÀÌµ¿
-int Move(const coord_def &c); //ÀÌµ¿ÇÑ´Ù.
-void Long_Move(const coord_def &c); //±æ°Ô ÀÌµ¿ÇÑ´Ù.
+int action_Move(int key, const coord_def &c); //ë©”ì¸ë£¨í”„ì—ì„œì˜ ì´ë™
+int Move(const coord_def &c); //ì´ë™í•œë‹¤.
+void Long_Move(const coord_def &c); //ê¸¸ê²Œ ì´ë™í•œë‹¤.
 void repeat_action();
-void auto_battle();//ÀÚµ¿ÀüÅõ
-void auto_Move(); //ÀÚµ¿À¸·Î ÀÌµ¿ÇÑ´Ù.
+void auto_battle();//ìë™ì „íˆ¬
+void auto_Move(); //ìë™ìœ¼ë¡œ ì´ë™í•œë‹¤.
 void long_rest();
 
-void Search(); //ÁÖº¯À» Å½»öÇÑ´Ù.
-void Wide_Search(); //³ĞÀº¹üÀ§¸¦ Å½»öÇÑ´Ù.
+void Search(); //ì£¼ë³€ì„ íƒìƒ‰í•œë‹¤.
+void Wide_Search(); //ë„“ì€ë²”ìœ„ë¥¼ íƒìƒ‰í•œë‹¤.
 
-void PickUp(); //Áİ±â
+void PickUp(); //ì¤ê¸°
 void PickUpAll(list<item>::iterator it);
 void PickUpSelect(list<item>::iterator it, int num);
 bool PickUpNum(list<item>::iterator it, int num, bool no_delay);
-int isPick(const item *t); //1 ¸®ÅÏÀÌ ok. ¸¶ÀÌ³Ê½º°¡ ¾ÈµÊ
+int isPick(const item *t); //1 ë¦¬í„´ì´ ok. ë§ˆì´ë„ˆìŠ¤ê°€ ì•ˆë¨
 void iteminfor(bool gameover = false);
 void iteminfor_pick();
 void turn_skip(); 
@@ -633,11 +633,11 @@ void Drinking(char auto_);
 //void Spelllcard_Declare();
 void Spelllcard_Evoke(char auto_);
 void Reading(char auto_);
-void Equip_Weapon(); //¹«±âÀåÂø
-void weapon_swap(); //¹«±â½º¿Ò
-void Equip_Armor(); //¹æ¾î±¸ÀåÂø
-void Unequip_Armor(); //¹æ¾î±¸ÇØÁ¦
-void Equip_Jewelry(); //Àå½Å±¸ÀåÂø
+void Equip_Weapon(); //ë¬´ê¸°ì¥ì°©
+void weapon_swap(); //ë¬´ê¸°ìŠ¤ì™‘
+void Equip_Armor(); //ë°©ì–´êµ¬ì¥ì°©
+void Unequip_Armor(); //ë°©ì–´êµ¬í•´ì œ
+void Equip_Jewelry(); //ì¥ì‹ êµ¬ì¥ì°©
 void Unequip_Jewelry();
 void Close_door();
 void Open_door();

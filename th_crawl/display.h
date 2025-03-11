@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: display.h
+// íŒŒì¼ì´ë¦„: display.h
 //
-// ³»¿ë: ¸ÊÀÇ Ãâ·Â°ü·Ã
+// ë‚´ìš©: ë§µì˜ ì¶œë ¥ê´€ë ¨
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -155,7 +155,7 @@ void SetSpellSight(int sight, int sight_type_);
 
 void SetDisplayTexture(textures *texture_);
 
-void view_item(item_view_type type, char* message_ = "¹«½¼ ¾ÆÀÌÅÛÀ» °í¸£°Ú½À´Ï±î?");
+void view_item(item_view_type type, char* message_ = "ë¬´ìŠ¨ ì•„ì´í…œì„ ê³ ë¥´ê² ìŠµë‹ˆê¹Œ?");
 void view_spell(char* message_);
 void view_skill(char* message_);
 void CheckKey(char key_, int num_ = 0);

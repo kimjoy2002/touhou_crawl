@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: spell.cpp
+// íŒŒì¼ì´ë¦„: spell.cpp
 //
-// ³»¿ë: ½ºÆç»ç¿ë°Ç
+// ë‚´ìš©: ìŠ¤í ì‚¬ìš©ê±´
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -232,8 +232,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_FIRE_BRAND:
 	case SPL_COLD_BRAND:
 	case SPL_POISON_BRAND:
-	case SPL_SUICIDE_BOMB: //ÀÌ°Ç ÆĞ½Ãºê
-	case SPL_MAMIZO_EVADE: //ÀÌ°Ç ÆĞ½Ãºê
+	case SPL_SUICIDE_BOMB: //ì´ê±´ íŒ¨ì‹œë¸Œ
+	case SPL_MAMIZO_EVADE: //ì´ê±´ íŒ¨ì‹œë¸Œ
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
 	default:
 		return false;
@@ -410,307 +410,307 @@ const char* SpellString(spell_list skill)
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
-		return "¼ÒÇü Åº¸·";
+		return "ì†Œí˜• íƒ„ë§‰";
 	case SPL_MON_TANMAC_MIDDLE:
-		return "ÁßÇü Åº¸·";
+		return "ì¤‘í˜• íƒ„ë§‰";
 	case SPL_MON_WATER_GUN:
-		return "¹°ÃÑ";
+		return "ë¬¼ì´";
 	case SPL_FROST:
-		return "³Ã±âÀÇ Åº¸·";
+		return "ëƒ‰ê¸°ì˜ íƒ„ë§‰";
 	case SPL_MEDICINE_CLOUD:
-		return "½ºÀ§Æ® Æ÷ÀÌÁğ";
+		return "ìŠ¤ìœ„íŠ¸ í¬ì´ì¦Œ";
 	case SPL_COLD_BEAM:
-		return "³Ãµ¿ºö";
+		return "ëƒ‰ë™ë¹”";
 	case SPL_CONFUSE:
-		return "È¥¶õ";
+		return "í˜¼ë€";
 	case SPL_SLOW:
-		return "°¨¼Ó";
+		return "ê°ì†";
 	case SPL_SMITE:
-		return "°­Å¸";
+		return "ê°•íƒ€";
 	case SPL_FLAME:
-		return "È­¿°ÀÇ Åº¸·";	
+		return "í™”ì—¼ì˜ íƒ„ë§‰";	
 	case SPL_SUMMON_BUG:
-		return "°ïÃæ ¼ÒÈ¯";
+		return "ê³¤ì¶© ì†Œí™˜";
 	case SPL_SELF_HEAL:
-		return "¼ÒÈ¸º¹";
+		return "ì†ŒíšŒë³µ";
 	case SPL_BLINK:
-		return "ºí¸µÅ©";
+		return "ë¸”ë§í¬";
 	case SPL_BURN:
-		return "ºÒ²É";
+		return "ë¶ˆê½ƒ";
 	case SPL_FROZEN:
-		return "³Ã±â";
+		return "ëƒ‰ê¸°";
 	case SPL_FIRE_WALL:
-		return "È­¿°±âµÕ";
+		return "í™”ì—¼ê¸°ë‘¥";
 	case SPL_FREEZE:
-		return "±Ş¼Ó ³Ãµ¿";
+		return "ê¸‰ì† ëƒ‰ë™";
 	case SPL_STING:
-		return "µ¶ÀÇ Åº¸·";
+		return "ë…ì˜ íƒ„ë§‰";
 	case SPL_CURE_POISON:
-		return "µ¶Ä¡·á";
+		return "ë…ì¹˜ë£Œ";
 	case SPL_TWIST:
-		return "Æ®À§½ºÆ®";
+		return "íŠ¸ìœ„ìŠ¤íŠ¸";
 	case SPL_SUMMON_MOOK:
-		return "¸ğ¿Á ¼ÒÈ¯";
+		return "ëª¨ì˜¥ ì†Œí™˜";
 	case SPL_FIRE_BRAND:
-		return "È­¿°ÀÇ ¹«±â";
+		return "í™”ì—¼ì˜ ë¬´ê¸°";
 	case SPL_COLD_BRAND:
-		return "³Ã±âÀÇ ¹«±â";
+		return "ëƒ‰ê¸°ì˜ ë¬´ê¸°";
 	case SPL_POISON_BRAND:	
-		return "¸Íµ¶ÀÇ ¹«±â";
+		return "ë§¹ë…ì˜ ë¬´ê¸°";
 	case SPL_SHOCK:
-		return "Àü°İ";
+		return "ì „ê²©";
 	case SPL_CHAIN_LIGHTNING:
-		return "Ã¼ÀÎ ¶óÀÌÆ®´×";
+		return "ì²´ì¸ ë¼ì´íŠ¸ë‹";
 	case SPL_DISCHARGE:
-		return "¹æÀü";
+		return "ë°©ì „";
 	case SPL_LEVITATION:
-		return "ÀÚ±âºÎ»ó";
+		return "ìê¸°ë¶€ìƒ";
 	case SPL_GLOW:
-		return "Á¶¸í";
+		return "ì¡°ëª…";
 	case SPL_GRAZE:
-		return "±×·¹ÀÌÁî";
+		return "ê·¸ë ˆì´ì¦ˆ";
 	case SPL_VEILING:
-		return "º£ÀÏ¸µ";
+		return "ë² ì¼ë§";
 	case SPL_INVISIBLE:
-		return "Åõ¸í";
+		return "íˆ¬ëª…";
 	case SPL_HASTE:
-		return "¾Æµå·¹³¯¸°";
+		return "ì•„ë“œë ˆë‚ ë¦°";
 	case SPL_SILENCE:
-		return "Á¤Àû";
+		return "ì •ì ";
 	case SPL_SWIFT:
-		return "½Å¼Ó";
+		return "ì‹ ì†";
 	case SPL_MAGIC_TANMAC:
-		return "¸¶¹ıÀÇ Åº¸·";
+		return "ë§ˆë²•ì˜ íƒ„ë§‰";
 	case SPL_FIRE_BALL:
-		return "È­¿°±¸";
+		return "í™”ì—¼êµ¬";
 	case SPL_FIRE_BOLT:
-		return "ÆÄÀÌ¾îº¼Æ®";
+		return "íŒŒì´ì–´ë³¼íŠ¸";
 	case SPL_ICE_BOLT:
-		return "¾ÆÀÌ½ºº¼Æ®";
+		return "ì•„ì´ìŠ¤ë³¼íŠ¸";
 	case SPL_VENOM_BOLT:
-		return "º£³ğº¼Æ®";
+		return "ë² ë†ˆë³¼íŠ¸";
 	case SPL_CONFUSE_CLOUD:
-		return "¾ÇÃëÀÇ ±¸¸§";
+		return "ì•…ì·¨ì˜ êµ¬ë¦„";
 	case SPL_POISON_CLOUD:
-		return "µ¶ÀÇ ±¸¸§";
+		return "ë…ì˜ êµ¬ë¦„";
 	case SPL_ICE_CLOUD:
-		return "³Ã±âÀÇ ±¸¸§";
+		return "ëƒ‰ê¸°ì˜ êµ¬ë¦„";
 	case SPL_SUMMON_BIRD:
-		return "»õ ¼ÒÈ¯";
+		return "ìƒˆ ì†Œí™˜";
 	case SPL_RECALL:
-		return "¸®Äİ";
+		return "ë¦¬ì½œ";
 	case SPL_TELEPORT_OTHER:
-		return "¸ñÇ¥ÀÇ °ø°£ÀÌµ¿";
+		return "ëª©í‘œì˜ ê³µê°„ì´ë™";
 	case SPL_TELEPORT_SELF:
-		return "ÀÚ½ÅÀÇ °ø°£ÀÌµ¿";
+		return "ìì‹ ì˜ ê³µê°„ì´ë™";
 	case SPL_WHIRLWIND:
-		return "Ç³¼±Ç³";
+		return "í’ì„ í’";
 	case SPL_SUMMON_PENDULUM:
-		return "Ææµâ·³ ¼ÒÈ¯";
+		return "íœë“ˆëŸ¼ ì†Œí™˜";
 	case SPL_SUMMON_SEKIBANKI:
-		return "¸Ó¸® ¼ÒÈ¯";
+		return "ë¨¸ë¦¬ ì†Œí™˜";
 	case SPL_WATER_CANNON:
-		return "¿öÅÍÄ³³í";
+		return "ì›Œí„°ìºë…¼";
 	case SPL_KYOKO_SMITE:
-		return "±Ø´ë ¸Ş¾Æ¸®";
+		return "ê·¹ëŒ€ ë©”ì•„ë¦¬";
 	case SPL_SUMMON_OPTION:
-		return "¿É¼Ç ¼ÒÈ¯";
+		return "ì˜µì…˜ ì†Œí™˜";
 	case SPL_SUMMON_GOLEM:
-		return "°ñ·½ ¼ÒÈ¯";
+		return "ê³¨ë ˜ ì†Œí™˜";
 	case SPL_HYPNOSIS:
-		return "ÃÖ¸é";
+		return "ìµœë©´";
 	case SPL_MUTE:
-		return "½Ç¾îÁõ";
+		return "ì‹¤ì–´ì¦";
 	case SPL_SELF_INJURY:
-		return "ÀÚÇØ";
+		return "ìí•´";
 	case SPL_CHARM:
-		return "¸Å·á";
+		return "ë§¤ë£Œ";
 	case SPL_LASER:
-		return "·¹ÀÌÀú";
+		return "ë ˆì´ì €";
 	case SPL_SPARK:
-		return "½ºÆÄÅ©";
+		return "ìŠ¤íŒŒí¬";
 	case SPL_SUMMON_UNZAN:
-		return "¿îÀÜ ¼ÒÈ¯";
+		return "ìš´ì” ì†Œí™˜";
 	case SPL_SUMMON_UNZAN_PUNCH:
-		return "¿îÀÜ Ã¶±Ç";
+		return "ìš´ì” ì² ê¶Œ";
 	case SPL_SUMMON_ZOMBIE_FAIRY:
-		return "Á»ºñÆä¾î¸® ¼ÒÈ¯";
+		return "ì¢€ë¹„í˜ì–´ë¦¬ ì†Œí™˜";
 	case SPL_SUMMON_UFO:
-		return "º¥Åä¶ó ¼ÒÈ¯";
+		return "ë²¤í† ë¼ ì†Œí™˜";
 	case SPL_HASTE_OTHER:
-		return "¾Æ±º °¡¼Ó";
+		return "ì•„êµ° ê°€ì†";
 	case SPL_HEAL_OTHER:
-		return "¾Æ±º È¸º¹";
+		return "ì•„êµ° íšŒë³µ";
 	case SPL_MIND_BENDING:
-		return "¸¶ÀÎµå º¥µù";
+		return "ë§ˆì¸ë“œ ë²¤ë”©";
 	case SPL_STONE_PUNCH:
-		return "µ¹ ÁÖ¸Ô";
+		return "ëŒ ì£¼ë¨¹";
 	case SPL_STONE_ARROW: 
-		return "¹ÙÀ§ÀÇ Åº¸·";
+		return "ë°”ìœ„ì˜ íƒ„ë§‰";
 	case SPL_STONE_TRAP:
-		return "¾ĞÁ¤ ¹ÙÀ§";
+		return "ì••ì • ë°”ìœ„";
 	case SPL_STONE_UPLIFT:
-		return "Áö¹İ À¶±â";
+		return "ì§€ë°˜ ìœµê¸°";
 	case SPL_KANAME_DRILL:
-		return "Ä«³ª¸Ş µå¸±";
+		return "ì¹´ë‚˜ë©” ë“œë¦´";
 	case SPL_DIAMOND_HARDNESS:
-		return "´ÙÀÌ¾Æ¸óµå ÇÏµå´Ï½º";
+		return "ë‹¤ì´ì•„ëª¬ë“œ í•˜ë“œë‹ˆìŠ¤";
 	case SPL_POISON_SKIN:
-		return "Æ÷ÀÌÁğ ¹Ùµğ";
+		return "í¬ì´ì¦Œ ë°”ë””";
 	case SPL_STONE_FORM:
-		return "¹«³ä¹«»óÀÇ °æÁö";
+		return "ë¬´ë…ë¬´ìƒì˜ ê²½ì§€";
 	case SPL_KNIFE_COLLECT:
-		return "Åº¸· È¸¼ö";
+		return "íƒ„ë§‰ íšŒìˆ˜";
 	case SPL_FLAN_BUSIN:
-		return "Æ÷ ¿Àºê ¾îÄ«ÀÎµå";
+		return "í¬ ì˜¤ë¸Œ ì–´ì¹´ì¸ë“œ";
 	case SPL_BURST:
-		return "ÆøÆÄ";
+		return "í­íŒŒ";
 	case SPL_SUICIDE_BOMB:
-		return "ÀÚÆø";
+		return "ìí­";
 	case SPL_RABBIT_HORN:
-		return "Á×¸²ÀÇ ³ªÆÈ";
+		return "ì£½ë¦¼ì˜ ë‚˜íŒ”";
 	case SPL_SUMMON_LESSOR_DEMON:
-		return "¸¶Á· ¼ÒÈ¯";
+		return "ë§ˆì¡± ì†Œí™˜";
 	case SPL_LUMINUS_STRIKE:
-		return "·ç¹Ì³Ê½º ½ºÆ®¶óÀÌÅ©";
+		return "ë£¨ë¯¸ë„ˆìŠ¤ ìŠ¤íŠ¸ë¼ì´í¬";
 	case SPL_FIRE_STORM:
-		return "È­¿° ÆøÇ³";
+		return "í™”ì—¼ í­í’";
 	case SPL_BLIZZARD: 
-		return "ºí¸®ÀÚµå";
+		return "ë¸”ë¦¬ìë“œ";
 	case SPL_PERFERT_FREEZE: 
-		return "ÆÛÆåÆ® ÇÁ¸®Áî";
+		return "í¼í™íŠ¸ í”„ë¦¬ì¦ˆ";
 	case SPL_DRAW_POWER:
-		return "»ó´ÜÈ¸¼ö";
+		return "ìƒë‹¨íšŒìˆ˜";
 	case SPL_ANIMAL_CHANGE:
-		return "°­Á¦µ¿¹°º¯È­";
+		return "ê°•ì œë™ë¬¼ë³€í™”";
 	case SPL_FIELD_VIOLET:
-		return "ÇÊµå¿ïÆ®¶ó¹ÙÀÌ¿Ã·¿";
+		return "í•„ë“œìš¸íŠ¸ë¼ë°”ì´ì˜¬ë ›";
 	case SPL_TIME_PARADOX: 
-		return "Å¸ÀÓ ÆĞ·¯µ¶½º";
+		return "íƒ€ì„ íŒ¨ëŸ¬ë…ìŠ¤";
 	case SPL_PRIVATE_SQ: 
-		return "ÇÁ¶óÀÌºø ½ºÄù¾î";
+		return "í”„ë¼ì´ë¹— ìŠ¤í€˜ì–´";
 	case SPL_CONTROLED_BLINK: 
-		return "Á¦¾î ¼ø°£ÀÌµ¿";
+		return "ì œì–´ ìˆœê°„ì´ë™";
 	case SPL_THE_WORLD:
-		return "´õ ¿ùµå";
+		return "ë” ì›”ë“œ";
 	case SPL_HASTE_ALL:
-		return "´ÜÃ¼ °¡¼Ó";
+		return "ë‹¨ì²´ ê°€ì†";
 	case SPL_HEAL_ALL:
-		return "´ÜÃ¼ È¸º¹";
+		return "ë‹¨ì²´ íšŒë³µ";
 	case SPL_MOON_COMMUNICATION:
-		return "ÀüÆÄ ¼ö½Å";
+		return "ì „íŒŒ ìˆ˜ì‹ ";
 	case SPL_MOON_GUN:
-		return "´ŞÀÇ ÃÑ";
+		return "ë‹¬ì˜ ì´";
 	case SPL_SUMMON_DREAM:
-		return "²ŞÀÇ ¼ÒÈ¯";
+		return "ê¿ˆì˜ ì†Œí™˜";
 	case SPL_MANA_DRAIN:
-		return "¿µ·ÂÈí¼ö";
+		return "ì˜ë ¥í¡ìˆ˜";
 	case SPL_INSANE:
-		return "±¤±â";
+		return "ê´‘ê¸°";
 	case SPL_BLOOD_SMITE:
-		return "ÇÇÀÇ ÀÀ½Ã";
+		return "í”¼ì˜ ì‘ì‹œ";
 	case SPL_CALL_HOUND:
-		return "µ¿·áºÎ¸£±â";
+		return "ë™ë£Œë¶€ë¥´ê¸°";
 	case SPL_CANNON:
-		return "À½¾çÅº";
+		return "ìŒì–‘íƒ„";
 	case SPL_DOLLS_WAR:
-		return "µ¹Áî¿ö";
+		return "ëŒì¦ˆì›Œ";
 	case SPL_FAKE_DOLLS_WAR:
-		return "¸ğÁ¶ µ¹Áî¿ö";
+		return "ëª¨ì¡° ëŒì¦ˆì›Œ";
 	case SPL_FIRE_SPREAD:
-		return "È­¿° ºĞÃâ";
+		return "í™”ì—¼ ë¶„ì¶œ";
 	case SPL_STASIS:
-		return "Ã¼Å©¸ŞÀÌÆ®";
+		return "ì²´í¬ë©”ì´íŠ¸";
 	case SPL_JUMP_ATTACK:
-		return "µµ¾à°ø°İ";
+		return "ë„ì•½ê³µê²©";
 	case SPL_ALERT_NOISE: 
-		return "°æ°íÀÇ ¸Ş¾Æ¸®";
+		return "ê²½ê³ ì˜ ë©”ì•„ë¦¬";
 	case SPL_SUMMON_NAMAZ:
-		return "³ª¸¶Áî ¼ÒÈ¯";		
+		return "ë‚˜ë§ˆì¦ˆ ì†Œí™˜";		
 	case SPL_SCHEMA_TANMAC:
-		return "°æ°è Åº¸·";
+		return "ê²½ê³„ íƒ„ë§‰";
 	case SPL_CHANGE:
-		return "µĞ°©¼ú";
+		return "ë‘”ê°‘ìˆ ";
 	case SPL_UNLUCK:
-		return "ÆÄ±¹ÀÇ °³¹®";
+		return "íŒŒêµ­ì˜ ê°œë¬¸";
 	case SPL_THUNDER:
-		return "¿ë½ÅÀÇ ¹ø°³";
+		return "ìš©ì‹ ì˜ ë²ˆê°œ";
 	case SPL_AIR_STRIKE:
-		return "ÁúÇ³¼±";
+		return "ì§ˆí’ì„ ";
 	case SPL_SUMMON_RACOON:
-		return "³Ê±¸¸® Åº¸·º¯È­";
+		return "ë„ˆêµ¬ë¦¬ íƒ„ë§‰ë³€í™”";
 	case SPL_SUMMON_YOUKAI:
-		return "¹é±Í¾ßÇà";
+		return "ë°±ê·€ì•¼í–‰";
 	case SPL_MAMIZO_EVADE:
-		return "ÀÌ½ÂÁöÀåº¯È­";
+		return "ì´ìŠ¹ì§€ì¥ë³€í™”";
 	case SPL_MACRO_BURST:
-		return "¸ÅÅ©·Î¹ö½ºÆ®";
+		return "ë§¤í¬ë¡œë²„ìŠ¤íŠ¸";
 	case SPL_SHATTER:
-		return "ºĞ¼â";
+		return "ë¶„ì‡„";
 	case SPL_SUMMON_YOSHIKA:
-		return "°­·É ¿ä½ÃÄ«";
+		return "ê°•ë ¹ ìš”ì‹œì¹´";
 	case SPL_NESY_CANNON:
-		return "³×½Ã ¹°´ëÆ÷";
+		return "ë„¤ì‹œ ë¬¼ëŒ€í¬";
 	case SPL_MERMAID_SONG:
-		return "ÀÎ¾îÀÇ ³ë·¡";
+		return "ì¸ì–´ì˜ ë…¸ë˜";
 	case SPL_EMERALD_CITY:
-		return "¿¡¸Ş¶öµå ½ÃÆ¼";
+		return "ì—ë©”ë„ë“œ ì‹œí‹°";
 	case SPL_AUTUMN_BLADE:
-		return "¾îÅÒ ºí·¹ÀÌµå";
+		return "ì–´í…€ ë¸”ë ˆì´ë“œ";
 	case SPL_PHILOSOPHERS_STONE:
-		return "ÇöÀÚÀÇ µ¹";
+		return "í˜„ìì˜ ëŒ";
 	case SPL_SUMMON_ANCHOR:
-		return "Ä§¸ô ¾ŞÄ¿";
+		return "ì¹¨ëª° ì•µì»¤";
 	case SPL_REAPER_MET:
-		return "»ç½ÅÀÇ¸¶Áß Ã¼ÇèÆÇ";
+		return "ì‚¬ì‹ ì˜ë§ˆì¤‘ ì²´í—˜íŒ";
 	case SPL_AFTERLITE:
-		return "¾ó¸¶¾ø´Â ¿©»ı";
+		return "ì–¼ë§ˆì—†ëŠ” ì—¬ìƒ";
 	case SPL_PRISM_CALL:
-		return "ÇÁ¸®Áò ÄÜÃ¼¸£Åä";
+		return "í”„ë¦¬ì¦˜ ì½˜ì²´ë¥´í† ";
 	case SPL_PSYCHOKINESIS:
-		return "ÅÚ·¹Å°³×½Ã½º";
+		return "í…”ë ˆí‚¤ë„¤ì‹œìŠ¤";
 	case SPL_SUMMON_TRASH:
-		return "¾î¹ø »çÀÌÄÚÅ°³×½Ã½º";
+		return "ì–´ë²ˆ ì‚¬ì´ì½”í‚¤ë„¤ì‹œìŠ¤";
 	case SPL_TRASH_RUSH:
-		return "¾î¹ø »çÀÌÄÚÅ°³×½Ã½º »çÃâ";
+		return "ì–´ë²ˆ ì‚¬ì´ì½”í‚¤ë„¤ì‹œìŠ¤ ì‚¬ì¶œ";
 	case SPL_KOKORO_CHANGE:
-		return "ÄÚÄÚ·Î ·ê·¿";
+		return "ì½”ì½”ë¡œ ë£°ë ›";
 	case SPL_THUNDER_BOLT:
-		return "½ã´õº¼Æ®";
+		return "ì¬ë”ë³¼íŠ¸";
 	case SPL_SANTUARY:
-		return "¼º¿ª";
+		return "ì„±ì—­";
 	case SPL_MISTIA_SONG:
-		return "¹ãÂü»õÀÇ ³ë·¡";
+		return "ë°¤ì°¸ìƒˆì˜ ë…¸ë˜";
 	case SPL_THROW_DISH:
-		return "Á¢½Ã´øÁö±â";
+		return "ì ‘ì‹œë˜ì§€ê¸°";
 	case SPL_MESS_CONFUSION:
-		return "±¤¿ª È¥¶õ";
+		return "ê´‘ì—­ í˜¼ë€";
 	case SPL_SLEEP_SMITE:
-		return "²ŞÀ¸·Î ÀÎµµ";
+		return "ê¿ˆìœ¼ë¡œ ì¸ë„";
 	case SPL_TARGET_ELEC:
-		return "Àü±â Ãæ°İ";
+		return "ì „ê¸° ì¶©ê²©";
 	case SPL_SUMMON_ELEC_BALL:
-		return "¿ë±ÃÀÇ»çÀÚ À¯¿µÅº";
+		return "ìš©ê¶ì˜ì‚¬ì ìœ ì˜íƒ„";
 	case SPL_DREAM_CALL:
-		return "µå¸²Ä³ÃÄ";
+		return "ë“œë¦¼ìºì³";
 	case SPL_HYPER_BEAM:
-		return "ÆÄ±«±¤¼±";
+		return "íŒŒê´´ê´‘ì„ ";
 	case SPL_KAGUYA_SPELL:
-		return "5°³ÀÇ ³­Á¦";
+		return "5ê°œì˜ ë‚œì œ";
 	case SPL_THROW_SWORD:
-		return "°Ë ´øÁö±â";
+		return "ê²€ ë˜ì§€ê¸°";
 	case SPL_THROW_KNIFE:
-		return "³ªÀÌÇÁ ´øÁö±â";
+		return "ë‚˜ì´í”„ ë˜ì§€ê¸°";
 	case SPL_THROW_PLAYER:
-		return "Ãµ¼ö·Â³² ´øÁö±â";
+		return "ì²œìˆ˜ë ¥ë‚¨ ë˜ì§€ê¸°";
 	case SPL_THROW_AMULET:
-		return "ºÎÀû ´øÁö±â";
+		return "ë¶€ì  ë˜ì§€ê¸°";
 	case SPL_WARP_KICK:
-		return "¾Æ°øÇ÷";
+		return "ì•„ê³µí˜ˆ";
 	case SPL_REIMU_BARRIER:
-		return "ºÀ¸¶Áø";
+		return "ë´‰ë§ˆì§„";
 	default:
-		return "¾Ë¼ö¾ø´Â ¸¶¹ı";
+		return "ì•Œìˆ˜ì—†ëŠ” ë§ˆë²•";
 	}
 }
 int SpellLevel(spell_list skill)
@@ -908,7 +908,7 @@ int SpellNoise(spell_list skill)
 	case SPL_MAMIZO_EVADE:
 	case SPL_PRISM_CALL:
 	case SPL_SLEEP_SMITE:
-		return 0;//¼ÒÀ½¾øÀ½
+		return 0;//ì†ŒìŒì—†ìŒ
 	case SPL_SHOCK:
 	case SPL_VEILING:
 	case SPL_STING:
@@ -951,7 +951,7 @@ int SpellNoise(spell_list skill)
 	case SPL_THROW_KNIFE:
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
-		return 4; //ÀûÀº ¼ÒÀ½
+		return 4; //ì ì€ ì†ŒìŒ
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
 	case SPL_MON_TANMAC_MIDDLE:
@@ -1009,7 +1009,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_TRASH:
 	case SPL_DREAM_CALL:
 	case SPL_THROW_PLAYER:
-		return 8; //±âº» ¼ÒÀ½
+		return 8; //ê¸°ë³¸ ì†ŒìŒ
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
 	case SPL_CHAIN_LIGHTNING:
@@ -1030,17 +1030,17 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
-		return 12; //»ó´çÇÑ ¼ÒÀ½ ½Ã¾ß¹Û±îÁö ¿µÇâ
+		return 12; //ìƒë‹¹í•œ ì†ŒìŒ ì‹œì•¼ë°–ê¹Œì§€ ì˜í–¥
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
 	case SPL_FIRE_STORM:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
 	case SPL_REIMU_BARRIER:
-		return 16; //±²ÀåÇÑ ¼ÒÀ½
+		return 16; //êµ‰ì¥í•œ ì†ŒìŒ
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
-		return 24; //´ëÇü¼ÒÀ½
+		return 24; //ëŒ€í˜•ì†ŒìŒ
 	default:
 		return 0;
 	}
@@ -1623,15 +1623,15 @@ int SpellMiscasting(int miscasting_level_)
 	default:
 		return 0;
 	case 1:
-		printlog("¸¶¹ı ºÎÀÛ¿ëÀ¸·Î °¡º­¿î Çö±âÁõÀ» ´À²¼´Ù.",true,false,false,CL_small_danger);
+		printlog("ë§ˆë²• ë¶€ì‘ìš©ìœ¼ë¡œ ê°€ë²¼ìš´ í˜„ê¸°ì¦ì„ ëŠê¼ˆë‹¤.",true,false,false,CL_small_danger);
 		you.StatUpDown(-1,STAT_INT,true);
 		return 1;
 	case 2:
-		printlog("¸¶¹ı ºÎÀÛ¿ëÀ¸·Î ¸Ó¸®¿¡ ½ÉÇÑ µÎÅëÀ» ´À²¼´Ù.",true,false,false,CL_small_danger);
+		printlog("ë§ˆë²• ë¶€ì‘ìš©ìœ¼ë¡œ ë¨¸ë¦¬ì— ì‹¬í•œ ë‘í†µì„ ëŠê¼ˆë‹¤.",true,false,false,CL_small_danger);
 		you.StatUpDown(-rand_int(2,3),STAT_INT,true);
 		return 2;
 	case 3:
-		printlog("¸¶¹ı ºÎÀÛ¿ëÀ¸·Î ¸Ó¸®¿¡ ²ûÂïÇÑ ¼Õ»óÀÌ ¿Ô´Ù.",true,false,false,CL_small_danger);
+		printlog("ë§ˆë²• ë¶€ì‘ìš©ìœ¼ë¡œ ë¨¸ë¦¬ì— ë”ì°í•œ ì†ìƒì´ ì™”ë‹¤.",true,false,false,CL_small_danger);
 		you.StatUpDown(-rand_int(4,7),STAT_INT,true);
 		return 3;
 
@@ -1704,7 +1704,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 			return false;		
 		
 		int max_ = 8;
-		//ÄİÇÏ¿îµå·Î ºÎ¸¦ ¼ö ÀÖ´Â ÇÑ°è´Â ÃÖ´ë 8¸¶¸®
+		//ì½œí•˜ìš´ë“œë¡œ ë¶€ë¥¼ ìˆ˜ ìˆëŠ” í•œê³„ëŠ” ìµœëŒ€ 8ë§ˆë¦¬
 		for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
 			if (it->isLive() && it->id == MON_HELL_HOUND)
@@ -1815,40 +1815,40 @@ void SpellUse(char auto_, int auto_direc_)
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
 	{
-		printlog("±¤±â¿¡ ÈÛ½ÎÀÎ »óÅÂ·Î ¸¶¹ıÀº ¾µ ¼ö ¾ø´Ù!",true,false,false,CL_danger);
+		printlog("ê´‘ê¸°ì— íœ©ì‹¸ì¸ ìƒíƒœë¡œ ë§ˆë²•ì€ ì“¸ ìˆ˜ ì—†ë‹¤!",true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("À¯·É »óÅÂ¿¡¼± ¸¶¹ıÀ» ¾µ ¼ö ¾ø´Ù. ", true, false, false, CL_normal);
+		printlog("ìœ ë ¹ ìƒíƒœì—ì„  ë§ˆë²•ì„ ì“¸ ìˆ˜ ì—†ë‹¤. ", true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
 	{
-		printlog("¹°¿¡ ºüÁø »óÅÂ¿¡¼± ¸¶¹ıÀº ¾µ ¼ö ¾ø´Ù!", true, false, false, CL_danger);
+		printlog("ë¬¼ì— ë¹ ì§„ ìƒíƒœì—ì„  ë§ˆë²•ì€ ì“¸ ìˆ˜ ì—†ë‹¤!", true, false, false, CL_danger);
 		return;
 	}
 	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
 	if (!sion_ && you.power < 100)
-	{ //ÆÄ¿ö 100ÀÌÇÏ¿¡¼± ¸¶¹ıÀ» ¾µ ¼ö ¾ø´Ù. (½Ã¿ÂÀÏ °æ¿ì °¡´É)
-		printlog("¸¶¹ıÀ» ¾µ·Á¸é ÃÖ¼Ò ÆÄ¿ö°¡ 1ÀÌ»ó ÀÖ¾î¾ßÇÑ´Ù! ", true, false, false, CL_danger);
+	{ //íŒŒì›Œ 100ì´í•˜ì—ì„  ë§ˆë²•ì„ ì“¸ ìˆ˜ ì—†ë‹¤. (ì‹œì˜¨ì¼ ê²½ìš° ê°€ëŠ¥)
+		printlog("ë§ˆë²•ì„ ì“¸ë ¤ë©´ ìµœì†Œ íŒŒì›Œê°€ 1ì´ìƒ ìˆì–´ì•¼í•œë‹¤! ", true, false, false, CL_danger);
 		return;
 	}
 	if(you.currentSpellNum)
 	{
 		if(!you.GetProperty(TPT_FINGER_MAGIC) && silence_)
 		{
-			printlog("´ç½ÅÀº ¼Ò¸®¸¦ ³¾ ¼ö ¾ø´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì€ ì†Œë¦¬ë¥¼ ë‚¼ ìˆ˜ ì—†ë‹¤.",true,false,false,CL_normal);
 			return;
 		}
 		if(you.s_confuse)
 		{
-			printlog("´ç½ÅÀº È¥¶õ½º·´´Ù.",true,false,false,CL_normal);
+			printlog("ë‹¹ì‹ ì€ í˜¼ë€ìŠ¤ëŸ½ë‹¤.",true,false,false,CL_normal);
 			return;
 		}
 		bool blood_ = false;
 		bool use_ = true;
 		int i=0;
-		view_spell("»ç¿ëÇÒ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä.  ( ?Å°·Î ¼³¸íÀ» º¼ ¼ö ÀÖ´Ù. )");
+		view_spell("ì‚¬ìš©í•  ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”.  ( ?í‚¤ë¡œ ì„¤ëª…ì„ ë³¼ ìˆ˜ ìˆë‹¤. )");
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -1864,19 +1864,19 @@ void SpellUse(char auto_, int auto_direc_)
 					{
 						if (you.pure_mp && SpellLevel(spell_) >= you.GetMp())
 						{
-							printlog("´õ ÀÌ»ó ¼øÈ­µÈ ¸¶·ÂÀ» »ç¿ëÇÏ¸é Á×À»°Å¾ß!", true, false, false, CL_normal);
+							printlog("ë” ì´ìƒ ìˆœí™”ëœ ë§ˆë ¥ì„ ì‚¬ìš©í•˜ë©´ ì£½ì„ê±°ì•¼!", true, false, false, CL_normal);
 							break;
 						}
 						else if(SpellLevel(spell_)>you.GetMp())
 						{
 							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.GetHp())
 							{
-								printlog("´ç½ÅÀº ÇÇ¸¦ ´ë°¡·Î ¸¶¹ıÀ» ¿µÃ¢Çß´Ù!",true,false,false,CL_danger);	
+								printlog("ë‹¹ì‹ ì€ í”¼ë¥¼ ëŒ€ê°€ë¡œ ë§ˆë²•ì„ ì˜ì°½í–ˆë‹¤!",true,false,false,CL_danger);	
 								blood_ = true;
 							}
 							else
 							{
-								printlog("´ç½ÅÀÇ ¿µ·ÂÀÌ ¸ğÀÚ¶õ´Ù.",true,false,false,CL_normal);	
+								printlog("ë‹¹ì‹ ì˜ ì˜ë ¥ì´ ëª¨ìë€ë‹¤.",true,false,false,CL_normal);	
 								break;
 							}
 						}
@@ -1993,7 +1993,7 @@ void SpellUse(char auto_, int auto_direc_)
 							changedisplay(DT_TEXT);
 							waitkeyinput();
 
-							view_spell("¼³¸íÀ» º¼ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä. ( ?Å°·Î ¸¶¹ıÀ» »ç¿ë )");
+							view_spell("ì„¤ëª…ì„ ë³¼ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”. ( ?í‚¤ë¡œ ë§ˆë²•ì„ ì‚¬ìš© )");
 							//changedisplay(DT_SPELL);
 						}
 					}
@@ -2003,12 +2003,12 @@ void SpellUse(char auto_, int auto_direc_)
 			{
 				if(use_)
 				{
-					view_spell("¼³¸íÀ» º¼ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä. ( ?Å°·Î ¸¶¹ıÀ» »ç¿ë )");
+					view_spell("ì„¤ëª…ì„ ë³¼ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”. ( ?í‚¤ë¡œ ë§ˆë²•ì„ ì‚¬ìš© )");
 					use_ = false;
 				}
 				else
 				{					
-					view_spell("»ç¿ëÇÒ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä.  ( ?Å°·Î ¼³¸íÀ» º¼ ¼ö ÀÖ´Ù. )");
+					view_spell("ì‚¬ìš©í•  ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”.  ( ?í‚¤ë¡œ ì„¤ëª…ì„ ë³¼ ìˆ˜ ìˆë‹¤. )");
 					use_ = true;
 				}
 			}
@@ -2018,7 +2018,7 @@ void SpellUse(char auto_, int auto_direc_)
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("¾ÆÁ÷ ¾Ë°íÀÖ´Â ¸¶¹ıÀÌ ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì•„ì§ ì•Œê³ ìˆëŠ” ë§ˆë²•ì´ ì—†ë‹¤.",true,false,false,CL_normal);	
 }
 
 
@@ -2031,7 +2031,7 @@ void SpellView()
 	{
 		int i=0;
 		
-		view_spell("¼³¸íÀ» º¼ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä.");
+		view_spell("ì„¤ëª…ì„ ë³¼ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”.");
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -2047,7 +2047,7 @@ void SpellView()
 					changedisplay(DT_TEXT);
 					waitkeyinput();
 
-					view_spell("¼³¸íÀ» º¼ ¸¶¹ıÀ» ¼±ÅÃÇÏ¼¼¿ä.");
+					view_spell("ì„¤ëª…ì„ ë³¼ ë§ˆë²•ì„ ì„ íƒí•˜ì„¸ìš”.");
 					//changedisplay(DT_SPELL);
 				}
 			}
@@ -2057,6 +2057,6 @@ void SpellView()
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("¾ÆÁ÷ ¾Ë°íÀÖ´Â ¸¶¹ıÀÌ ¾ø´Ù.",true,false,false,CL_normal);	
+		printlog("ì•„ì§ ì•Œê³ ìˆëŠ” ë§ˆë²•ì´ ì—†ë‹¤.",true,false,false,CL_normal);	
 }
 

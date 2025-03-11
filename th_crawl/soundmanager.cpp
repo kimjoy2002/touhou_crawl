@@ -1,8 +1,8 @@
-//////////////////////////////////////////////////////////////////////////////////////////////////
+ï»¿//////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// ÆÄÀÏÀÌ¸§: sound.cpp
+// íŒŒì¼ì´ë¦„: sound.cpp
 //
-// ³»¿ë: »ç¿îµå- by audiere-1.9.4
+// ë‚´ìš©: ì‚¬ìš´ë“œ- by audiere-1.9.4
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -519,7 +519,7 @@ void SOUNDMANAGER::addBgm(const char* name, char* path)
 	SOUNDBUFFER* new_sound = new SOUNDBUFFER();
 	new_sound->lazy_loading = false;
 	new_sound->path = path;
-	//new_sound->Load(Sound, path, true, true, false); ³ªÁß¿¡ ·ÎµùÇÑ´Ù.
+	//new_sound->Load(Sound, path, true, true, false); ë‚˜ì¤‘ì— ë¡œë”©í•œë‹¤.
 	new_sound->Volume = option_mg.getBgmVolume();
 	new_sound->SetVolume();
 	bgmList[name] = new_sound;

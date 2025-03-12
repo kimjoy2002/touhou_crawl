@@ -3930,7 +3930,11 @@ void players::MakeLOSPattern()
 	//만들고나서 안거지만 던전크롤은 이 알고리즘으로 동작하지않는다.
 	//쓰지말것
 	FILE *f;
-	f= fopen("shadowpattern.txt","wt");
+	
+    if (_wfopen_s(&f, L"shadowpattern.txt", L"wt") != 0 || !f) {
+        return;
+    }
+	
 	int yy_ = 0;
 
 	char arrays[9][9];

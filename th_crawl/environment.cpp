@@ -2328,6 +2328,7 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 	return it;
 }
 
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 void SaveFile()
 { 
@@ -2338,7 +2339,12 @@ void SaveFile()
 		return;
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
-	fp = fopen(save_file.c_str(),"wb");
+
+	std::wstring wfilename = ConvertUTF8ToUTF16(save_file);
+    if (_wfopen_s(&fp, wfilename.c_str(), L"wb") != 0 || !fp) {
+        return;
+    }
+
 	SaveData<int>(fp, current_level);
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
@@ -2371,7 +2377,12 @@ void LoadFile()
 {
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
-	fp = fopen(save_file.c_str(),"rb");
+
+	std::wstring wfilename = ConvertUTF8ToUTF16(save_file);
+    if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
+        return;
+    }
+
 	LoadData<int>(fp, current_level);
 
 	for(int i = 0; i < MAXLEVEL; i++)

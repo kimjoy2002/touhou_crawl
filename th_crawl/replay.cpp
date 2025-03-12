@@ -168,11 +168,11 @@ bool replay_class::LoadReplayStart()
 	mkdir("replay");
 	
 	sprintf_s(filename,512,"%s",replay_string.c_str());
-		
-	play_fp = fopen(filename,"rb");
 
-	if(!play_fp)
-	{
+	
+	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+
+	if (_wfopen_s(&play_fp, wfilename.c_str(), L"rb") != 0 || !play_fp) {
 		auto_key = false;
 		play = false;
 		init = false;
@@ -249,8 +249,10 @@ bool replay_class::StopReplay(const char* str)
 		char filename[512];
 		FILE *fp;  
 		sprintf_s(filename,512,"%s",replay_string.c_str());
-		fp = fopen(filename,"r+b");
-		if(fp)
+
+		std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+
+		if(_wfopen_s(&fp, wfilename.c_str(), L"r+b") == 0 && fp)
 		{
 			//rewind(fp);
 			fwrite(&infor,sizeof(base_infor),1,fp);
@@ -304,9 +306,10 @@ bool replay_menu(int value_)
 				
 				sprintf_s(filename,512,"replay/%s",findFileData.cFileName);
 				
-				FILE *fp = fopen(filename,"rb");
+				std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+				FILE *fp;
 				base_infor temp_infor;
-				if(fp)
+				if(_wfopen_s(&fp, wfilename.c_str(), L"rb") == 0 && fp)
 				{
 					fread(&temp_infor,sizeof(base_infor),1,fp);
 					fclose(fp);

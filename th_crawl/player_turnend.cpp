@@ -1234,6 +1234,8 @@ void resurectionlog(char* reason)
 int caculScore();
 
 
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
+
 void GameOver()
 {
 	StopCurrentBGM();
@@ -1321,9 +1323,9 @@ void GameOver()
 
 		if(dump_ok)
 		{
-			FILE *fp = fopen(dump_.c_str(),"rt");
-
-			if(fp)
+			FILE *fp;
+			std::wstring wfilename = ConvertUTF8ToUTF16(dump_);
+			if(_wfopen_s(&fp, wfilename.c_str(), L"rt") == 0 && fp)
 			{
 				char temp[256];
 			

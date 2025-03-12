@@ -16,7 +16,7 @@ extern HANDLE mutx;
 string save_file = "save.dat";
 string user_name_file = "user_name.txt";
 
-
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 void delete_file()
 {
 	remove(save_file.c_str());
@@ -103,8 +103,10 @@ bool load_name(const char* path)
 	{	
 		FILE *fp;
 		char name[21];
-		fp = fopen(user_name_file.c_str(),"rt");
-		if(!fp)
+
+		std::wstring wfilename = ConvertUTF8ToUTF16(user_name_file);
+
+		if(_wfopen_s(&fp, wfilename.c_str(), L"rt") != 0 || !fp)
 			return false;
 		int i=0,ii=0;		
 		int pass = 0;

@@ -122,6 +122,8 @@ int NetClient::SendBuf(void *buf,int len)
     }    
     return trans;
 }
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
+
 
 bool NetClient::SendFile(const char* c,const char* name)
 {
@@ -133,11 +135,16 @@ bool NetClient::SendFile(const char* c,const char* name)
 	sprintf_s(fname,256,name);
 	memset(fname2,0,256);
 	sprintf_s(fname2,256,"%s",ReplayClass.replay_string.c_str());
-	fp = fopen(fname,"rb");
-	fp2 = fopen(fname2,"rb");
 
-	if(fp == 0 || fp2 == 0)
+
+	std::wstring wfilename = ConvertUTF8ToUTF16(fname);
+	std::wstring wfilename2 = ConvertUTF8ToUTF16(fname2);
+	if(_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp){
         return false;  
+	}
+	if(_wfopen_s(&fp, wfilename2.c_str(), L"rb") != 0 || !fp2){
+        return false;  
+	}
  
     int len = 0,len2=0;
 	fseek(fp,0,SEEK_END);

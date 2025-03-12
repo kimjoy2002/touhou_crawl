@@ -32,16 +32,17 @@ void test_rand(const char* tt)
 
 	if(!fpfpfp)
 	{
-		fpfpfp = fopen("replay/test_random2.txt","rt"); 
-
-
+		_wfopen_s(&fpfpfp, L"replay/test_random2.txt", L"rt");
 	}
 	if(fpfpfp)
 		fgets(test_test,256,fpfpfp);
 	linelin++;
 
 	FILE *fp;  
-	fp = fopen("replay/test_random.txt","at");
+
+    if (_wfopen_s(&fp, L"replay/test_random.txt", L"at") != 0 || !fp) {
+        return;
+    }
 	
 	fprintf(fp,"|%30s|%ud\n",tt,map_list.random_number);
 	

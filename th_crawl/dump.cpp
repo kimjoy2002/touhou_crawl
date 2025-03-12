@@ -111,7 +111,7 @@ int caculScore()
 
 
 
-
+extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 bool Dump(int type, string *filename_)
 {
@@ -132,7 +132,12 @@ bool Dump(int type, string *filename_)
 		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
 		you.user_name.name.c_str(),
 		1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
-	fp = fopen(filename, "wt");
+
+
+	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+	if(_wfopen_s(&fp, wfilename.c_str(), L"wt") != 0 || !fp){
+		return false;  
+	}
 
 	fprintf_s(fp, "동방크롤 %s 덤프 파일\n\n", version_string);
 	if (type == 1)

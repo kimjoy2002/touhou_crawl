@@ -2328,7 +2328,6 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 	return it;
 }
 
-extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 void SaveFile()
 { 

@@ -46,30 +46,44 @@ extern void init_identify();
 
 
 
+
+void LoadEmbeddedFont(const std::wstring& fontPath)
+{
+	int result = AddFontResourceExW(fontPath.c_str(), FR_PRIVATE, NULL);
+	if(result == 0){
+		::MessageBox(0, "Font Init Fail. 폰트를 초기화하는데 실패하였습니다.", 0, 0);
+	}
+}
+
 //
 // 초기화 함수
 //
-
 bool Setup()
-{    
+{ 
+	LoadEmbeddedFont(L"./data/font/NotoSansMono-Bold.ttf");
+
 	bool return_ = true;
 	D3DXFONT_DESC fontDesc;
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
-	fontDesc.Height = 14;
-	fontDesc.Weight = 300;
+	fontDesc.Height = 20;
+	fontDesc.Weight = 500;
 	fontDesc.Width = 7;
-	fontDesc.Quality = DRAFT_QUALITY;
+	fontDesc.Quality = CLEARTYPE_QUALITY;
 	fontDesc.Italic = false;
-	fontDesc.CharSet = HANGUL_CHARSET;
+	fontDesc.CharSet = DEFAULT_CHARSET;
 	fontDesc.OutputPrecision = OUT_DEFAULT_PRECIS;
 	fontDesc.PitchAndFamily = FF_DONTCARE;
 	fontDesc.MipLevels = 1;
 
-	strcpy(fontDesc.FaceName, "바탕체");
+	strcpy(fontDesc.FaceName, "Noto Sans Mono");
 	
 
-	D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);
+	HRESULT hr = D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);
 
+    if (FAILED(hr) || g_pfont == nullptr)
+    {
+		::MessageBox(0, "Font loading fail. 폰트를 로딩하는데 실패했습니다.", 0, 0);
+    }
 
 	if( FAILED(D3DXCreateSprite(Device, &g_pSprite)))
 		return_ =  false;

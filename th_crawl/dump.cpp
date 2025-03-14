@@ -110,9 +110,6 @@ int caculScore()
 
 
 
-
-extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
-
 bool Dump(int type, string *filename_)
 {
 	if (ReplayClass.ReplayMode())
@@ -138,6 +135,8 @@ bool Dump(int type, string *filename_)
 	if(_wfopen_s(&fp, wfilename.c_str(), L"wt") != 0 || !fp){
 		return false;  
 	}
+	unsigned char utf8_bom[] = { 0xEF, 0xBB, 0xBF };
+	fwrite(utf8_bom, sizeof(unsigned char), 3, fp);
 
 	fprintf_s(fp, "동방크롤 %s 덤프 파일\n\n", version_string);
 	if (type == 1)
@@ -686,9 +685,8 @@ bool Dump(int type, string *filename_)
 		}
 		float x = 0, y = 0;
 		for(i = 0;i < view_length && it != DisplayManager.text_log.text_list.end();it++)
-		{			
-			
-			fprintf_s(fp,"%s", (*it)->text.c_str());
+		{
+			fprintf_s(fp,"%s", ConvertUTF16ToUTF8((*it)->text).c_str());
 			if((*it)->enter)
 			{
 				fprintf_s(fp,"\n");

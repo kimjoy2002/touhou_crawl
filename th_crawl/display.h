@@ -19,15 +19,19 @@ class textures;
 class text_dummy
 {
 public:
-	string text;
+	wstring text;
+	float width;
 	bool enter;
 	bool log;
 	bool temp;
 	D3DCOLOR color;
 
-	text_dummy(string text_):text(text_),enter(true),log(false),color(D3DCOLOR_RGBA(0, 0, 0, 255)){};
-	text_dummy(string text_, bool enter_, bool log_, bool temp_):text(text_),enter(enter_),log(log_),temp(temp_),color(D3DCOLOR_RGBA(255, 255, 255, 255)){};
-	text_dummy(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_):text(text_),enter(enter_),log(log_),temp(temp_),color(color_){};
+
+	text_dummy(string text_):text(ConvertUTF8ToUTF16(text_)),enter(true),log(false),color(D3DCOLOR_RGBA(0, 0, 0, 255)){calculateWitdh();};
+	text_dummy(string text_, bool enter_, bool log_, bool temp_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(D3DCOLOR_RGBA(255, 255, 255, 255)){calculateWitdh();};
+	text_dummy(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(color_){calculateWitdh();};
+
+	void calculateWitdh();
 };
 
 class text_manager

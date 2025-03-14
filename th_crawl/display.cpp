@@ -53,6 +53,14 @@ int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
 
 
+
+
+void text_dummy::calculateWitdh() {
+	RECT rc={ (LONG)0, (LONG)0, 32*17+16, (LONG)(DisplayManager.fontDesc.Height)};
+	g_pfont->DrawTextW(g_pSprite, PreserveTrailingSpaces(text).c_str(), -1, &rc, DT_SINGLELINE | DT_CALCRECT, color);
+	width = rc.right;
+}
+
 infoBox::infoBox() 
 {
 	x_size = 240;
@@ -161,14 +169,14 @@ void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str) {
-    int size_needed = MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, NULL, 0);
-    std::wstring utf16Str(size_needed, 0);
-    MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, &utf16Str[0], size_needed);
-    return utf16Str;
+
+int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+    if (!pFont || !text || !pRect) {
+        return 0;
+    }
+
+    return pFont->DrawTextW(pSprite, text, count, pRect, format, color);
 }
-
-
 
 int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     if (!pFont || !text || !pRect) {
@@ -1063,7 +1071,6 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 }
-
 
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
@@ -2315,7 +2322,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			else
 			{
-				x+=(*it)->text.length()*fontDesc.Width;
+				x+=(*it)->width;
 			}
 		}
 	}
@@ -2592,7 +2599,7 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			else
 			{
-				x+=(*it)->text.length()*fontDesc.Width;
+				x+=(*it)->width;
 			}
 		}
 	}
@@ -2628,7 +2635,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		float x = 0, y = 0;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{			
-			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
+			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
 			{
@@ -2638,7 +2645,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			else
 			{
-				x+=(*it)->text.length()*fontDesc.Width;
+				x+=(*it)->width;
 			}
 		}
 	}

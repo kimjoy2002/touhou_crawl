@@ -6,6 +6,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #include <process.h>
+#include <string>
 #include <d3dx9.h>
 #include <time.h>
 #include <vector>
@@ -21,7 +22,6 @@ struct coord_def;
 
 int LoopSelect(int min, int max, int cur);
 int CutSelect(int min, int max, int cur);
-
 
 
 void rand_seed(unsigned int seed_);
@@ -301,6 +301,10 @@ public:
 
 int distan_coord(const coord_def& a, const coord_def& b);
 
+wstring ConvertUTF8ToUTF16(const string& utf8Str);
+string ConvertUTF16ToUTF8(const wstring& utf16Str);
 
+int PrintCharWidth(const string& text);
+wstring PreserveTrailingSpaces(const wstring& text);
 
 #endif // __COMMON_H__

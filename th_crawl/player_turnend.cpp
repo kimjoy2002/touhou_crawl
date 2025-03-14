@@ -1234,7 +1234,6 @@ void resurectionlog(char* reason)
 int caculScore();
 
 
-extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 void GameOver()
 {

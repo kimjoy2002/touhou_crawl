@@ -40,7 +40,7 @@ void test_rand(const char* tt)
 
 	FILE *fp;  
 
-    if (_wfopen_s(&fp, L"replay/test_random.txt", L"at") != 0 || !fp) {
+if (_wfopen_s(&fp, L"replay/test_random.txt", L"at") != 0 || !fp) {
         return;
     }
 	
@@ -336,5 +336,70 @@ int randC(int dice, int x)
 int distan_coord(const coord_def& a, const coord_def& b)
 {
 	return (a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y);
+	
+}
 
+wstring ConvertUTF8ToUTF16(const string& utf8Str) {
+	int size_needed = MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, NULL, 0);
+	std::wstring utf16Str(size_needed, 0);
+	MultiByteToWideChar(CP_UTF8, 0, utf8Str.c_str(), -1, &utf16Str[0], size_needed);
+	return utf16Str;
+}
+
+string ConvertUTF16ToUTF8(const wstring& utf16Str) {
+	if (utf16Str.empty()) return std::string();
+
+	int size_needed = WideCharToMultiByte(CP_UTF8, 0, utf16Str.c_str(), -1, NULL, 0, NULL, NULL);
+	std::string utf8Str(size_needed - 1, 0);
+	WideCharToMultiByte(CP_UTF8, 0, utf16Str.c_str(), -1, &utf8Str[0], size_needed, NULL, NULL);
+	
+	return utf8Str;
+	
+}
+
+bool IsCJKWideChar(wchar_t ch)
+{
+	return (
+		(ch >= 0x1100 && ch <= 0x11FF) ||  // 한글 자모
+		(ch >= 0x2E80 && ch <= 0xA4CF) ||  // 중국어·일본어 범위
+		(ch >= 0xAC00 && ch <= 0xD7A3) ||  // 한글 완성형 (가~힣)
+		(ch >= 0xF900 && ch <= 0xFAFF) ||  // 한중일 호환용 한자
+		(ch >= 0xFF01 && ch <= 0xFF60) ||  // 전각 문자 (？！＠ 등)
+		(ch >= 0xFFE0 && ch <= 0xFFE6)	 // 전각 기호 (￥ 등)
+	);
+}
+
+int PrintCharWidth(const string& text)
+{
+	wstring wtext = ConvertUTF8ToUTF16(text);
+	int len = 0;
+	for (wchar_t ch : wtext)
+	{
+		if (IsCJKWideChar(ch))
+			len+=2;
+		else if(ch ==  '\0' || ch == '\n')
+			continue;
+		else
+			len++;
+	}
+	return len;
+}
+
+wstring PreserveTrailingSpaces(const wstring& text)
+{
+	if (text.empty()) return text;
+
+	std::wstring tempText = text;
+
+	for (auto it = tempText.rbegin(); it != tempText.rend(); ++it)
+	{
+		if (*it == L'\0' || *it == L'\n') continue;
+		else if (*it == L' ') {
+			*it = L'_'; 
+			break;
+		}
+		else break;
+	}
+
+	return tempText;
 }

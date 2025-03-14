@@ -395,8 +395,7 @@ void random_identity_scroll()
 		if (rand_item != NULL)
 		{
 			rand_item->Identify();
-			char temp[2];
-			sprintf_s(temp,2, "%c", rand_item->id);
+			std::string temp(1, rand_item->id);
 			printlog(temp, false, false, false, rand_item->item_color());
 			printlog(" - ", false, false, false, rand_item->item_color());
 			printlog(rand_item->GetName(), true, false, false, rand_item->item_color());
@@ -421,8 +420,7 @@ bool identity_scroll(bool pre_iden_)
 				if(!item_->isiden())
 				{
 					item_->Identify();
-					char temp[2];
-					sprintf_s(temp,2,"%c",item_->id);
+					std::string temp(1, item_->id);
 					printlog(temp,false,false,false,item_->item_color());
 					printlog(" - ",false,false,false,item_->item_color());
 					printlog(item_->GetName(),true,false,false,item_->item_color());

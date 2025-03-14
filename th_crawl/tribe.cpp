@@ -1144,6 +1144,8 @@ void LevelUpTribe(int level_)
 		}
 		break;
 	case TRI_HALFYOKAI:
+	{
+		ostringstream oss;
 		if(level_%5 == 0)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
@@ -1156,29 +1158,29 @@ void LevelUpTribe(int level_)
 				printlog("당신에겐 수인의 피가 흐르고 있다! 당신의 특성은 전사에 적합하다.",true,false,false,CL_small_danger);
 				printlog("당신에게 손톱이 자라났다.",true,false,false,CL_small_danger);
 				you.SetProperty(TPT_CLAW,1);
-				sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_CLAW, 1).c_str());
-				AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+				oss << "반요 변이발현: " << getTribeProperty(TPT_CLAW, 1);
+				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 1:
 				printlog("당신에겐 오니의 피가 흐르고 있다! 당신의 특성은 강한 맷집으로 이어진다.",true,false,false,CL_small_danger);
 				printlog("당신에게 뿔이 자라났다.",true,false,false,CL_small_danger);
 				you.SetProperty(TPT_HORN,1);
-				sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_HORN, 1).c_str());
-				AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+				oss << "반요 변이발현: " << getTribeProperty(TPT_HORN, 1);
+				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 2:
 				printlog("당신에겐 용의 피가 흐르고 있다! 당신의 특성은 속성을 다루는데 능숙하다.",true,false,false,CL_small_danger);
 				printlog("당신에게 비늘이 자라났다.",true,false,false,CL_small_danger);
 				you.SetProperty(TPT_SCALE,1);
-				sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_SCALE, 1).c_str());
-				AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+				oss << "반요 변이발현: " << getTribeProperty(TPT_SCALE, 1);
+				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 3:
 				printlog("당신에겐 악마의 피가 흐르고 있다! 당신의 특성은 마법사용에 집중된다.",true,false,false,CL_small_danger);
 				printlog("당신은 마나재생력이 빨라졌다.",true,false,false,CL_small_danger);
 				you.SetProperty(TPT_MP_REGEN,1);
-				sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_MP_REGEN, 1).c_str());
-				AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+				oss << "반요 변이발현: " << getTribeProperty(TPT_MP_REGEN, 1);
+				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			}
 		}
@@ -1192,20 +1194,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 강한 턱이 자라났다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_JAW,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_JAW, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_JAW, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("수인의 혈통이 더욱 강해졌다. 당신의 다리는 도약할수있을만큼 강해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FOOT,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FOOT, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FOOT, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("수인의 혈통이 더욱 강해졌다. 당신의 시력이 좋아졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_EYE,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_EYE, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_EYE, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1215,20 +1217,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("오니의 혈통이 더욱 강해졌다. 당신은 튼튼해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_HP,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_HP, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_HP, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("오니의 혈통이 더욱 강해졌다. 당신은 독에 저항이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_POISON_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_POISON_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_POISON_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("오니의 혈통이 더욱 강해졌다. 당신은 마법저항이 높아졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_MAGIC_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_MAGIC_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_MAGIC_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1238,20 +1240,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("용의 혈통이 더욱 강해졌다. 당신은 화염에 저항이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FIRE_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FIRE_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FIRE_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("용의 혈통이 더욱 강해졌다. 당신은 냉기에 저항이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_COLD_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_COLD_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_COLD_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("용의 혈통이 더욱 강해졌다. 당신은 전기에 저항이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_ELEC_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_ELEC_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_ELEC_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1261,20 +1263,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("악마의 혈통이 더욱 강해졌다. 당신에 큰 날개가 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FLY,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FLY, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FLY, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("악마의 혈통이 더욱 강해졌다. 당신은 명석해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CONFUSE_RESIST,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_CONFUSE_RESIST, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_CONFUSE_RESIST, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("악마의 혈통이 더욱 강해졌다. 당신은 은밀해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_STEALTH,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_STEALTH, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_STEALTH, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1291,20 +1293,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 푹신푹신한 털이 자라났다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FUR,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FUR, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FUR, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("수인의 혈통이 더욱 강해졌다. 당신의 발이 빨라졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SPEED,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_SPEED, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_SPEED, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("수인의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_REGEN,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_REGEN, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_REGEN, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1314,20 +1316,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("오니의 혈통이 더욱 강해졌다. 당신의 피부는 단단해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SKIN_AC,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_SKIN_AC, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_SKIN_AC, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("오니의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_REGEN,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_REGEN, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_REGEN, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("오니의 혈통이 더욱 강해졌다. 당신은 엄청난 힘이 생겼다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_STR,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_STR, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_STR, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1337,40 +1339,40 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("용의 혈통이 더욱 강해졌다. 당신은 구름을 몰고 다닌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CLOUD,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_CLOUD, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_CLOUD, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("용의 혈통이 더욱 강해졌다. 당신은 입에서 브레스를 쏠 수 있다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_BREATH,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_BREATH, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_BREATH, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("용의 혈통이 더욱 강해졌다. 당신의 비늘은 더욱 두꺼워졌다.",true,false,false,CL_small_danger);
 					you.DeleteProperty(TPT_SCALE);
 					you.SetProperty(TPT_SCALE,2);
-					sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_SCALE, 2).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이강화: " << getTribeProperty(TPT_SCALE, 2);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					switch(you.half_youkai[1])
 					{
 					case 0:
 						you.DeleteProperty(TPT_FIRE_RESIST);
 						you.SetProperty(TPT_FIRE_RESIST,2);
-						sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_FIRE_RESIST, 2).c_str());
-						AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+						oss << "반요 변이강화: " << getTribeProperty(TPT_FIRE_RESIST, 2);
+						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					case 1:
 						you.DeleteProperty(TPT_COLD_RESIST);
 						you.SetProperty(TPT_COLD_RESIST,2);
-						sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_COLD_RESIST, 2).c_str());
-						AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+						oss << "반요 변이강화: " << getTribeProperty(TPT_COLD_RESIST, 2);
+						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					case 2:		
 						you.DeleteProperty(TPT_ELEC_RESIST);		
 						you.SetProperty(TPT_ELEC_RESIST,2);
-						sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_ELEC_RESIST, 2).c_str());
-						AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+						oss << "반요 변이강화: " << getTribeProperty(TPT_ELEC_RESIST, 2);
+						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					}
 					break;
@@ -1382,20 +1384,20 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("악마의 혈통이 더욱 강해졌다. 당신의 마법은 더욱 강력해졌다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SPELL_POWER,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_SPELL_POWER, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_SPELL_POWER, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("악마의 혈통이 더욱 강해졌다. 당신은 손짓만으로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FINGER_MAGIC,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FINGER_MAGIC, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FINGER_MAGIC, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
 					printlog("악마의 혈통이 더욱 강해졌다. 당신은 자신의 피로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_BLOOD_MAGIC,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_BLOOD_MAGIC, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_BLOOD_MAGIC, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1412,14 +1414,14 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("수인의 마지막 특성이 발현되었다. 당신은 동물적인 전투감각을 깨우쳤다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SLAY,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_SLAY, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_SLAY, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("수인의 마지막 특성이 발현되었다. 당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CONFUSE_ATTACK,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_CONFUSE_ATTACK, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_CONFUSE_ATTACK, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1432,20 +1434,20 @@ void LevelUpTribe(int level_)
 					{
 						you.DeleteProperty(TPT_HP);
 						you.SetProperty(TPT_HP,3);
-						sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_HP, 3).c_str());
-						AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+						oss << "반요 변이강화: " << getTribeProperty(TPT_HP, 3);
+						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					}
 					else {
 						you.SetProperty(TPT_HP, 2);
-						sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_HP, 2).c_str());
-						AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+						oss << "반요 변이발현: " << getTribeProperty(TPT_HP, 2);
+						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					}
 					break;
 				case 1:
 					printlog("오니의 마지막 특성이 발현되었다. 당신은 초월적인 회피재능에 눈을 떴다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_EV,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_EV, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_EV, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1455,14 +1457,14 @@ void LevelUpTribe(int level_)
 				case 0:	
 					printlog("용의 마지막 특성이 발현되었다. 당신은 공기의 흐름을 다룰 수 있게 되었다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_GRAZE_CONTROL,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_GRAZE_CONTROL, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_GRAZE_CONTROL, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("용의 마지막 특성이 발현되었다. 당신은 자연의 힘을 몸에 두르게 되었다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FORCE_OF_NATURE,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_FORCE_OF_NATURE, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_FORCE_OF_NATURE, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
@@ -1473,20 +1475,21 @@ void LevelUpTribe(int level_)
 					printlog("악마의 마지막 특성이 발현되었다. 당신은 초월적인 영력회복속도를 얻었다.",true,false,false,CL_small_danger);
 					you.DeleteProperty(TPT_MP_REGEN);
 					you.SetProperty(TPT_MP_REGEN,3);
-					sprintf_s(temp, 100, "반요 변이강화: %s", getTribeProperty(TPT_MP_REGEN, 3).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이강화: " << getTribeProperty(TPT_MP_REGEN, 3);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
 					printlog("악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.",true,false,false,CL_small_danger);
 					you.SetProperty(TPT_TORMENT,1);
-					sprintf_s(temp, 100, "반요 변이발현: %s", getTribeProperty(TPT_TORMENT, 1).c_str());
-					AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+					oss << "반요 변이발현: " << getTribeProperty(TPT_TORMENT, 1);
+					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
 				break;
 			}
 		}
 		break;
+	}
 	case TRI_WRAITH:
 		if(level_%5 == 0)
 		{

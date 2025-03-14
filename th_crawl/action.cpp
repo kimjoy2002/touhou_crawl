@@ -536,32 +536,34 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 						printlog(")", false, false, true, CL_normal);
 					if (type_ == VT_DEBUF)
 					{
-						printlog("(", false, false, true, CL_normal);
-						char temp[64];
 						float percent_ = getDebufPercent((*it).GetResist(), value_);
 						if (it->s_mind_reading)
 							percent_ = 0;
-
-						sprintf_s(temp, 64, "%s: %.0f%%", LocalzationManager::locString(LOC_SYSTEM_SUCCESS_PERCENT), percent_);
-						printlog(temp, false, false, true, CL_normal);
-						printlog(")", false, false, true, CL_normal);
+						ostringstream oss;
+						oss.precision(0);
+						oss << std::fixed; 
+						oss << "(";
+						oss << LocalzationManager::locString(LOC_SYSTEM_SUCCESS_PERCENT) << ": " << std::round(percent_) << "%";
+						oss << ")";
+						printlog(oss.str(), false, false, true, CL_normal);
 					}
 					else if (type_ == VT_SATORI && !it->s_mind_reading)
 					{
-						printlog("(", false, false, true, CL_normal);
-						char temp[64];
+						ostringstream oss;
+						oss <<"(";
 
 						int turn_ = 2 + it->level / 3 + it->resist * 3;
-
 						turn_ = max(1, turn_ - you.level / 4);
 
-						if (turn_ >= 20 || it->id == MON_KOISHI)
-							sprintf_s(temp, 64, LocalzationManager::locString(LOC_SYSTEM_IMPOSSIBLE).c_str());
-						else
-							sprintf_s(temp, 64, "%d%s", turn_, LocalzationManager::locString(turn_>1?LOC_SYSTEM_TURNS:LOC_SYSTEM_TURN));
+						if (turn_ >= 20 || it->id == MON_KOISHI) {
+							oss << LocalzationManager::locString(LOC_SYSTEM_IMPOSSIBLE);
+						}
+						else {
+							oss << turn_ << LocalzationManager::locString(turn_>1?LOC_SYSTEM_TURNS:LOC_SYSTEM_TURN);
+						}
+						oss <<")";
 
-						printlog(temp, false, false, true, CL_normal);
-						printlog(")", false, false, true, CL_normal);
+						printlog(oss.str(), false, false, true, CL_normal);
 
 					}
 				}

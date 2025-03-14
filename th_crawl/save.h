@@ -21,9 +21,9 @@ template <typename T>
 void SaveData(FILE *fp, const T &input, int size = 1)
 {
 	char *var;
-	fprintf(fp, "%d ",sizeof(T)*size);
+	fprintf(fp, "%d ",(int)sizeof(T)*size);
 	var = (char*)(&input);
-	for(unsigned int i=0;i<sizeof(T)*size;i++)
+	for(unsigned int i=0;i<(unsigned int)sizeof(T)*size;i++)
 	{
 		fputc(var[i],fp);
 	}

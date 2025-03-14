@@ -85,87 +85,87 @@ int GetAtifactValue(ring_type ring_, int good_bad_)
 	return 1;
 }
 
-const char* GetAtifactString(ring_type ring_, int value_)
+string GetAtifactString(ring_type ring_, int value_)
 {	
-	static char temp[32];
+    std::ostringstream oss;
 	switch(ring_)
 	{
 	case RGT_STR:
-		sprintf_s(temp,32,"힘%s%d",value_<0?"":"+",value_);
+		oss << "힘" << ((value_ < 0) ? "" : "+") << value_;
 		break;
 	case RGT_DEX:
-		sprintf_s(temp,32,"민첩%s%d",value_<0?"":"+",value_);
+		oss << "민첩" << ((value_ < 0) ? "" : "+") << value_;
 		break;
 	case RGT_INT:
-		sprintf_s(temp,32,"지능%s%d",value_<0?"":"+",value_);
+		oss << "지능" << ((value_ < 0) ? "" : "+") << value_;
 		break;
 	case RGT_HUNGRY:
-		sprintf_s(temp,32,"허기");
+		oss << "허기";
 		break;
 	case RGT_FULL:
-		sprintf_s(temp,32,"포만감");
+		oss << "포만감";
 		break;
 	case RGT_TELEPORT:
-		sprintf_s(temp,32,"*전이");
+		oss << "*전이";
 		break;
 	case RGT_POISON_RESIS:
-		sprintf_s(temp,32,"독저항%s",value_>0?"+":"-");
+		oss << "독저항" << (value_>0?"+":"-");
 		break;
 	case RGT_FIRE_RESIS:
-		sprintf_s(temp,32,"화염저항%s",(value_==3?"+++":
+		oss << "화염저항" << (value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
 			(value_==-2?"--":
 			(value_==-3?"---":"?"
-			)))))));
+			))))));
 		break;
 	case RGT_ICE_RESIS:
-		sprintf_s(temp,32,"냉기저항%s",(value_==3?"+++":
+		oss << "냉기저항" << (value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
 			(value_==-2?"--":
 			(value_==-3?"---":"?"
-			)))))));
+			))))));
 		break;
 	case RGT_SEE_INVISIBLE:
-		sprintf_s(temp,32,"투명감지");
+		oss << "투명감지";
 		break;
 	//case RGT_GRAZE:
-	//	sprintf_s(temp,32,"+그레이즈");
+	//	oss << "+그레이즈";
 	//	break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,32,"+비행");
+		oss << "+비행";
 		break;
 	case RGT_INVISIBLE:
-		sprintf_s(temp,32,"+투명");
+		oss << "+투명";
 		break;
 	case RGT_MANA:
-		sprintf_s(temp,32,"영력");
+		oss << "영력";
 		break;
 	case RGT_MAGACIAN:
-		sprintf_s(temp,32,"마법사");
+		oss << "마법사";
 		break;
 	case RGT_AC:
-		sprintf_s(temp,32,"AC%s%d",value_<0?"":"+",value_);
+		oss << "AC" << (value_<0?"":"+") << value_;
 		break;
 	case RGT_EV:
-		sprintf_s(temp,32,"EV%s%d",value_<0?"":"+",value_);
+		oss << "EV" << (value_<0?"":"+") << value_;
 		break;
 	case RGT_CONFUSE_RESIS:
-		sprintf_s(temp,32,"혼란저항");
+		oss << "혼란저항";
 		break;
 	case RGT_ELEC_RESIS:
-		sprintf_s(temp,32,"전기저항");
+		oss << "전기저항";
 		break;
 	case RGT_MAGIC_RESIS:
-		sprintf_s(temp,32,"마법저항");
+		oss << "마법저항";
 		break;
 	case RGT_SKILL_UP:
-		sprintf_s(temp, 32, "%s+%d", skill_string((skill_type)(value_ %100)), value_/100);
+		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
 	}
-	return temp;
+	return oss.str();
 }
 
 

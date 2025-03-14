@@ -161,14 +161,14 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 	mon_->flag |= M_FLAG_NONE_STAIR;
 	mon_->dream = true;
 	int level_up_ = min(9, randA(max(0,level_ - mon_->level/2)));
-	char temp[100];
+	ostringstream oss;
 	if (level_up_ > 0) {
-		sprintf_s(temp, 100, "꿈의 주민 %s+%d", mon_->name.name.c_str(), level_up_);
+		oss << "꿈의 주민 " << mon_->name.name.c_str() << "+" << level_up_;
 	}
 	else {
-		sprintf_s(temp, 100, "꿈의 주민 %s", mon_->name.name.c_str());
+		oss << "꿈의 주민 " << mon_->name.name.c_str();
 	}
-	mon_->name = name_infor(temp, mon_->name.name_type);
+	mon_->name = name_infor(oss.str(), mon_->name.name_type);
 	while (level_up_ > 0) {
 		mon_->LevelUpdown(2,6.0f,1.0f);
 		level_up_--;

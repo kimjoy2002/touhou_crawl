@@ -1223,17 +1223,13 @@ string GetSkillInfor(skill_list skill)
 
 string GetSpellSchoolString(spell_list spell)
 {
-	string str_;
+    std::ostringstream oss;
 	int k=0;
-	char temp[50];
 	for(int i=0;i<3 && SpellSchool(spell,i) != SKT_ERROR;i++)
 	{
-		if(i)
-		{
-			k+=sprintf_s(temp+k,50-k,"/");
-		}
-		k+=sprintf_s(temp+k,50-k,"%s",skill_string(SpellSchool(spell,i)));
+        if (i > 0)
+            oss << "/";
+		oss << skill_string(SpellSchool(spell, i));
 	}
-	str_ = temp;
-	return temp;
+	return oss.str();
 }

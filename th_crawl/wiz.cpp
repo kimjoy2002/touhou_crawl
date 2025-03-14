@@ -577,15 +577,16 @@ void wiz_mode()
 		case 'm': 
 		{
 			int id_ = 0;
-			char temp[100];
-			sprintf_s(temp, 100, "몬스터만들기(0~%d) :", MON_MAX - 1);
-			printlog(temp, false, false, false, CL_help);
+			ostringstream oss;
+			oss << "몬스터만들기(0~" << (MON_MAX - 1) << ") :";
+			printlog(oss.str(), false, false, false, CL_help);
 
 
 			while (true) {
 				deletelog();
-				sprintf_s(temp, 100, "%d (%s)", id_, mondata[id_].name.name.c_str());
-				printlog(temp, false, false, true, CL_normal);
+				ostringstream oss;
+				oss << id_ << " (" << mondata[id_].name.name.c_str() << ")";
+				printlog(oss.str(), false, false, true, CL_normal);
 
 				key_ = waitkeyinput(true);
 				switch (key_) {
@@ -696,9 +697,11 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				char temp[200];
-				sprintf_s(temp,200,"일반던전 %d층까지 레벨:%d (경험치양 %d)",map_list.dungeon_enter[MISTY_LAKE].floor+1, you.level,exp_-prevexp_);
-				printlog(temp,true,false,false,CL_normal);
+				{
+					ostringstream oss;
+					oss << "일반던전 " << map_list.dungeon_enter[MISTY_LAKE].floor+1 << "층까지 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
 				prevexp_ = exp_;
 				 
 				for(int i = MISTY_LAKE_LEVEL; i <= MISTY_LAKE_LAST_LEVEL; i++)
@@ -711,8 +714,11 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"안개호수클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-				printlog(temp,true,false,false,CL_normal);
+				{
+					ostringstream oss;
+					oss << "안개호수 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
 				prevexp_ = exp_;
 
 
@@ -726,8 +732,9 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"남은던전 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-				printlog(temp,true,false,false,CL_normal);
+				ostringstream oss;
+				oss << "남은던전 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+				printlog(oss.str(),true,false,false,CL_normal);
 				prevexp_ = exp_;
 
 
@@ -741,8 +748,11 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"요괴의산 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-				printlog(temp,true,false,false,CL_normal);
+				{
+					ostringstream oss;
+					oss << "요괴의산 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
 				prevexp_ = exp_;
 
 				for(int i = SCARLET_LEVEL; i <= SCARLET_LEVEL_LAST_LEVEL; i++)
@@ -755,8 +765,11 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				sprintf_s(temp,200,"홍마관 클리어 레벨:%d (경험치양 %d)", you.level,exp_-prevexp_);
-				printlog(temp,true,false,false,CL_normal);
+				{
+					ostringstream oss;
+					oss << "홍마관 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
 				prevexp_ = exp_;
 			}
 			break;
@@ -764,10 +777,12 @@ void wiz_mode()
 			god_punish(you.god);
 			break;
 		case 'e':
-			char temp[100];
-			sprintf_s(temp, 100, "현재좌표: <%d, %d> ", you.position.x, you.position.y);
-			printlog(temp, true, false, false, CL_magic);
+		{
+			ostringstream oss;
+			oss << "현재좌표: <" <<  you.position.x << ", " << you.position.y << "> ";
+			printlog(oss.str(), true, false, false, CL_magic);
 			break;
+		}
 		case '?'://도움말
 
 			WaitForSingleObject(mutx, INFINITE);

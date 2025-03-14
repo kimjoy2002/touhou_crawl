@@ -141,7 +141,7 @@ const coord_def* close_beam_iterator::operator->() const
 close_beam_iterator& close_beam_iterator::operator ++()
 {
 	count++;
-	if(count%2 == direc)
+	if(count%2 == static_cast<int>(direc))
 	{
 		pos = LoopSelect(0,7,pos+count);
 	}

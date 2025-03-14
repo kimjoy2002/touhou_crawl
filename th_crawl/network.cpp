@@ -140,7 +140,7 @@ bool NetClient::SendFile(const char* c,const char* name)
 	if(_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp){
         return false;  
 	}
-	if(_wfopen_s(&fp, wfilename2.c_str(), L"rb") != 0 || !fp2){
+	if(_wfopen_s(&fp2, wfilename2.c_str(), L"rb") != 0 || !fp2){
         return false;  
 	}
  

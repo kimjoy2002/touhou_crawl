@@ -6,7 +6,7 @@
         {
             "label": "cmake build and run",
             "type": "shell",
-            "command": "cmake .. -G 'Visual Studio 16 2019' -A x64; cmake --build ./; cd ./Debug; ./th_crawl.exe",
+            "command": "cmake .. -G 'Visual Studio 16 2019' -A x64; cmake --build ./;",
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },

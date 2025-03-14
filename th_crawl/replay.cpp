@@ -23,7 +23,6 @@ typedef struct _finddata_t  FILE_SEARCH;
 extern const char *version_string;
 
 replay_class ReplayClass;
-extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 
 replay_class::~replay_class()
 {
@@ -140,9 +139,8 @@ bool replay_class::SaveReplayInput(DWORD time_, int key_)
 
     if (!replay_string.empty()) {
         FILE* fp = nullptr;
-        std::wstring wfilename = ConvertUTF8ToUTF16(replay_string); // UTF-8 → UTF-16 변환
+        std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
 
-        // UTF-16 경로를 사용하여 파일 열기 (append binary mode)
         if (_wfopen_s(&fp, wfilename.c_str(), L"ab") == 0 && fp) {
             fwrite(&time_, sizeof(DWORD), 1, fp);
             fwrite(&key_, sizeof(unsigned int), 1, fp);

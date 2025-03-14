@@ -16,7 +16,6 @@ extern HANDLE mutx;
 string save_file = "save.dat";
 string user_name_file = "user_name.txt";
 
-extern std::wstring ConvertUTF8ToUTF16(const std::string& utf8Str);
 void delete_file()
 {
 	remove(save_file.c_str());

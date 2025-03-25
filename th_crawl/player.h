@@ -147,8 +147,8 @@ public:
 	coord_def prev_position;
 
 	name_infor name;
-	name_infor char_name;
-	name_infor user_name;
+	unique_starting_type char_type;
+	string user_name;
 	textures *image;
 	tribe_type tribe;
 	job_type job;
@@ -533,9 +533,8 @@ public:
 	bool Tele_check(bool preiden_, bool ctele_);
 	void LevelUp(bool speak_);
 	const name_infor* GetName(){return &name;};
-	const string* GetNameString(){return &(name.name);};
-	const name_infor* GetCharName(){return &char_name;};
-	const string* GetCharNameString(){return &(char_name.name);};
+	string GetNameString(){return name.getName();};
+	string GetCharNameString();
 	list<item>::iterator GetThrowIter();
 	vector<monster>::iterator GetTargetIter();
 	interupt_type resetLOS(bool speak_ = true);

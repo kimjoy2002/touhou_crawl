@@ -628,7 +628,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	{//지형확인
 		
 		string s = "[" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN) +": ";
-		s += dungeon_tile_tribe_type_string[env[current_level].dgtile[you.search_pos.x][you.search_pos.y].tile];
+		s += LocalzationManager::locString(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.search_pos.x][you.search_pos.y].tile]);
 		if(env[current_level].isSilence(you.search_pos))
 			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN) + ")";
 		if(env[current_level].isViolet(you.search_pos))
@@ -680,7 +680,7 @@ int Player_Move(const coord_def &c)
 			bool type = false;
 			if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
 			{
-				printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile]), false,false,false,CL_normal);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])), false,false,false,CL_normal);
 				printlog(env[current_level].getTileHelp(you.position.x, you.position.y), true, false, false, CL_normal);
 				
 			}
@@ -1989,10 +1989,10 @@ void rune_Show()
 	for(int i = 0; i<RUNE_HAKUREI_ORB;i++)
 	{
 		remain = 10;
-		remain -= strlen(rune_string[i]);
+		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
 		for(;remain>0;remain--)
 			SetText() += " ";
-		SetText() += rune_string[i];
+		SetText() += LocalzationManager::locString(rune_string[i]);
 		SetText() += "의 룬 :";
 
 
@@ -2311,7 +2311,7 @@ void Simple_State_Show()
 void Experience_Show()
 {
 	char temp [100];
-	sprintf_s(temp,100,"당신은 %d레벨 %s %s입니다.", you.level, tribe_type_string[you.tribe], job_type_string[you.job]);
+	sprintf_s(temp,100,"당신은 %d레벨 %s %s입니다.", you.level, LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str());
 	printlog(temp,true,false,false,CL_normal);
 	if(you.GetNeedExp(you.level-1) > 0)
 	{
@@ -2452,7 +2452,7 @@ void dungeonView()
 					printsub(temp,false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_YOUKAI_MOUNTAIN]);
+					sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_YOUKAI_MOUNTAIN]).c_str());
 					printsub(temp,true,you.rune[RUNE_YOUKAI_MOUNTAIN]?CL_magic:CL_bad);
 					//***룬끝
 
@@ -2478,7 +2478,7 @@ void dungeonView()
 							printsub(temp,false,CL_help);
 
 							//***룬있음
-							sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_YUKKURI]);
+							sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_YUKKURI]).c_str());
 							printsub(temp,true,you.rune[RUNE_YUKKURI]?CL_magic:CL_bad);
 							//***룬끝
 
@@ -2535,7 +2535,7 @@ void dungeonView()
 						printsub(temp,false,CL_help);
 
 						//***룬있음
-						sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_SCARLET]);
+						sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SCARLET]).c_str());
 						printsub(temp,true,you.rune[RUNE_SCARLET]?CL_magic:CL_bad);
 						//***룬끝
 						
@@ -2544,7 +2544,7 @@ void dungeonView()
 							if(map_list.dungeon_enter[SCARLET_L].detected)
 							{
 								printsub(blank,false,CL_warning);
-								printsub("│　├",false,CL_normal);
+								printsub("│  ├",false,CL_normal);
 								printsub("홍마관 도서관 ",false,CL_warning);
 				
 								sprintf_s(temp,32,"홍마관 %d층  ",map_list.dungeon_enter[SCARLET_L].floor+1-SCARLET_LEVEL);
@@ -2553,7 +2553,7 @@ void dungeonView()
 							else
 							{
 								printsub(blank,false,CL_warning);
-								printsub("│　├",false,CL_normal);
+								printsub("│  ├",false,CL_normal);
 								printsub("홍마관 도서관 ",false,CL_bad);
 								printsub("홍마관 2층~3층",true,CL_STAT);
 							}
@@ -2563,7 +2563,7 @@ void dungeonView()
 							if(map_list.dungeon_enter[SCARLET_U].detected)
 							{
 								printsub(blank,false,CL_warning);
-								printsub("│　└",false,CL_normal);
+								printsub("│  └",false,CL_normal);
 								printsub("홍마관 지하실 ",false,CL_warning);
 				
 
@@ -2571,14 +2571,14 @@ void dungeonView()
 								printsub(temp,false,CL_help);
 
 								//***룬있음
-								sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_SCARLET_UNDER]);
+								sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SCARLET_UNDER]).c_str());
 								printsub(temp,true,you.rune[RUNE_SCARLET_UNDER]?CL_magic:CL_bad);
 								//***룬끝
 							}
 							else
 							{
 								printsub(blank,false,CL_warning);
-								printsub("│　└",false,CL_normal);
+								printsub("│  └",false,CL_normal);
 								printsub("홍마관 지하실 ",false,CL_bad);
 								printsub("홍마관 4층",true,CL_STAT);
 							}
@@ -2639,7 +2639,7 @@ void dungeonView()
 					printsub(temp,false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_EIENTEI]);
+					sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_EIENTEI]).c_str());
 					printsub(temp,true,you.rune[RUNE_EIENTEI]?CL_magic:CL_bad);
 					//***룬끝
 				}
@@ -2730,7 +2730,7 @@ void dungeonView()
 									printsub(temp,false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_MOON]);
+									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_MOON]).c_str());
 									printsub(temp,true,you.rune[RUNE_MOON]?CL_magic:CL_bad);
 									//***룬끝
 								}
@@ -2792,7 +2792,7 @@ void dungeonView()
 									printsub(temp,false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_SUBTERRANEAN]);
+									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SUBTERRANEAN]).c_str());
 									printsub(temp,true,you.rune[RUNE_SUBTERRANEAN]?CL_magic:CL_bad);
 									//***룬끝
 								}
@@ -2847,7 +2847,7 @@ void dungeonView()
 									printsub(temp,false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_PANDEMONIUM_MAGIC]);
+									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_MAGIC]).c_str());
 									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_MAGIC]?CL_magic:CL_bad);
 									//***룬끝
 								}
@@ -2868,7 +2868,7 @@ void dungeonView()
 									printsub(temp,false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_PANDEMONIUM_ICE]);
+									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_ICE]).c_str());
 									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_ICE]?CL_magic:CL_bad);
 									//***룬끝
 								}
@@ -2889,7 +2889,7 @@ void dungeonView()
 									printsub(temp,false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",rune_string[RUNE_PANDEMONIUM_SHINKI]);
+									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_SHINKI]).c_str());
 									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_SHINKI]?CL_magic:CL_bad);
 									//***룬끝
 								}
@@ -2939,7 +2939,7 @@ void dungeonView()
 					printsub(temp,false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s* ",rune_string[RUNE_HAKUREI_ORB]);
+					sprintf_s(temp,32,"*%s* ",LocalzationManager::locString(rune_string[RUNE_HAKUREI_ORB]).c_str());
 					printsub(temp,true,you.rune[RUNE_HAKUREI_ORB]?CL_danger:CL_bad);
 					//***룬끝
 				}

@@ -10,13 +10,14 @@
 #define  __LILLY_H__
 
 #include <string>
+#include "enumMapBuilder.h"
 
 using namespace std;
 
 
 class name_infor;
 class monster;
-extern name_infor fairy_name[];
+extern LOCALIZATION_ENUM_KEY fairy_name[];
 
 
 
@@ -39,7 +40,7 @@ enum FAIRY_SPEAK
 };
 
 int getMaxFairyName();
-const char* fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type);
+string fairy_speak(monster* monster_info, int personal, FAIRY_SPEAK type);
 void GetFairyExp(int exp);
 
 

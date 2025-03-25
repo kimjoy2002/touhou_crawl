@@ -763,7 +763,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							ReleaseMutex(mutx);
 							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
-							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor(LOC_SYSTEM_ATT_THUNDER));
 							BaseBomb(pos_, &img_blast[2], temp_att);
 							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
@@ -785,7 +785,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 							ReleaseMutex(mutx);
 							soundmanager.playSound("thunder");
 							int damage_ = you.GetMaxHp() / 3;
-							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor("번개", false));
+							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor(LOC_SYSTEM_ATT_THUNDER));
 							BaseBomb(pos_, &img_blast[2], temp_att);
 							env[current_level].MakeNoise(pos_, 20, NULL);
 							WaitForSingleObject(mutx, INFINITE);
@@ -1006,7 +1006,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("질식", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN)), true);
 		SetInter(IT_DAMAGE);
 	}	
 	else if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA &&
@@ -1014,10 +1014,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 3;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor("용암", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor(LOC_SYSTEM_ATT_LAVA)), true);
 
 		damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor("질식", true)), true);
+		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN)), true);
 		SetInter(IT_DAMAGE);
 	}
 	else
@@ -1206,20 +1206,19 @@ void deadlog()
 	{
 		char temp[200];	
 		if(you.dead_order && you.dead_order->order)
-			sprintf_s(temp,200,"%s에게 죽었다.",you.dead_order->order->GetName()->name.c_str());
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_DEAD_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName())),CL_normal);
 		else if(you.dead_reason == DR_HUNGRY)
-			sprintf_s(temp,200,"굶어죽었다.");
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_HUNGRY),CL_normal);
 		else if(you.dead_reason == DR_QUIT)
-			sprintf_s(temp,200,"게임을 포기했다.");
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_QUIT),CL_normal);
 		else if(you.dead_reason == DR_ESCAPE)
-			sprintf_s(temp,200,"던전을 탈출했다.");
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_ESCAPE),CL_normal);
 		else if(you.dead_reason == DR_POISON)
-			sprintf_s(temp,200,"독에 중독되어 죽었다.");
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_POISON),CL_normal);
 		else if(you.dead_reason == DR_EFFECT)
-			sprintf_s(temp,200,"부작용에 의해 죽었다.");
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_EFFECT),CL_normal);
 		else
-			sprintf_s(temp,200,"죽었다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD),CL_normal);
 	}
 }
 
@@ -1246,28 +1245,31 @@ void GameOver()
 
 	if(isNormalGame())
 	{
-		char temp[256];
-		sprintf_s(temp,256,"%d    레벨 %d의 %s %s %s \"%s\"",caculScore(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str(), you.user_name.name.c_str());
-
-
-		ReplayClass.StopReplay(temp);
-
+		ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE, 
+			PlaceHolderHelper(to_string(caculScore())),
+			PlaceHolderHelper(to_string(you.level)),
+			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
+			PlaceHolderHelper(you.GetCharNameString()),
+			PlaceHolderHelper(you.user_name)));
 	}
 	else if(isArena())
 	{
 		{
-			char temp[256];
-			sprintf_s(temp,256,"아레나 레벨 %d",you.level);
-			ReplayClass.StopReplay(temp);
+			ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE_ARENA, 
+				PlaceHolderHelper(to_string(you.level)),
+				PlaceHolderHelper(you.user_name)));
 		}
 	}
 	else if (isSprint())
 	{
-		char temp[256];
-		sprintf_s(temp, 256, "%d    레벨 %d의 %s %s %s \"%s\"", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str());
-
-
-		ReplayClass.StopReplay(temp);
+		ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE, 
+			PlaceHolderHelper(to_string(caculScore())),
+			PlaceHolderHelper(to_string(you.level)),
+			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
+			PlaceHolderHelper(you.GetCharNameString()),
+			PlaceHolderHelper(you.user_name)));
 	}
 	else
 	{

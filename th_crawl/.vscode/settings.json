@@ -51,6 +51,8 @@
         "cstring": "cpp",
         "regex": "cpp",
         "unordered_set": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "xstring": "cpp",
+        "iomanip": "cpp"
     }
 }

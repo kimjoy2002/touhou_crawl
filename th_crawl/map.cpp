@@ -1818,10 +1818,8 @@ void map_algorithms_tuto01(int num)
 	t.value8 = 7;
 	t.can_throw = false;
 	t.image = &img_item_weapon_gohey2;
-	t.name.name = "고헤이";
-	t.name.name_type = false; //true 받침있음
-	t.name2.name = "";
-	t.name2.name_type = true;
+	t.name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_GOHEI);
+	t.name2 = name_infor();
 	t.weight = 3.0f;
 	t.value = 60;
 

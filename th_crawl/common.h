@@ -25,12 +25,14 @@ int CutSelect(int min, int max, int cur);
 
 
 void rand_seed(unsigned int seed_);
+void init_nonlogic_seed(unsigned int seed_);
 
 
 
 float rand_float(float min, float max);
 
 int rand_int(int min, int max);
+int rand_int_with_nonlogic(int min, int max); //이 무작위는 게임에 영향을 주지않아야함
 
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y);
 
@@ -65,6 +67,9 @@ char asctonum(char a);
 int randA(int x); /*0부터 X까지의 랜덤난수 리턴*/
 
 int randA_1(int x); /*1부터 X까지의 랜덤난수 리턴*/
+
+int randA_nonlogic(int x); /*0부터 X까지의 랜덤난수 리턴*/
+int randA_1_nonlogic(int x); /*1부터 X까지의 랜덤난수 리턴*/
 
 bool randB(int x, int point); /*0부터 X가 point를 작거나같을때 true리턴*/
 
@@ -307,4 +312,5 @@ string ConvertUTF16ToUTF8(const wstring& utf16Str);
 int PrintCharWidth(const string& text);
 wstring PreserveTrailingSpaces(const wstring& text);
 
+void replaceAll(string& str, const string& from, const string& to);
 #endif // __COMMON_H__

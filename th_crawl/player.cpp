@@ -48,22 +48,53 @@ extern bool widesearch; //X커맨드용
 
 void name_infor::SaveDatas(FILE *fp)
 {
+	SaveData<monster_index>(fp, name_key);
+	SaveData<LOCALIZATION_ENUM_KEY>(fp, system_key);
+	SaveData<monster_index>(fp, name_param);
+	SaveData<LOCALIZATION_ENUM_KEY>(fp, param);
 	char temp[100];
-	sprintf_s(temp,100,"%s",name.c_str());
+	sprintf_s(temp,100,"%s",postfix.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
-	SaveData<bool>(fp, name_type);
 }	
 
 void name_infor::LoadDatas(FILE *fp)
 {
+	LoadData<monster_index>(fp, name_key);
+	LoadData<LOCALIZATION_ENUM_KEY>(fp, system_key);
+	LoadData<monster_index>(fp, name_param);
+	LoadData<LOCALIZATION_ENUM_KEY>(fp, param);
 	char temp[100];
 	LoadData<char>(fp, *temp);
-	name = temp;
-	LoadData<bool>(fp, name_type);
+	postfix = temp;
 }
 
+string name_infor::getName() const {
+	string return_string;
+	if(system_key != LOC_NONE) {
+		if(name_param != MON_NONE_MONSTER) {
+			return_string = LocalzationManager::formatString(system_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
+		} else if (param != LOC_NONE){
+			return_string = LocalzationManager::formatString(system_key, PlaceHolderHelper(param));
+		} else {
+			return_string = LocalzationManager::locString(system_key);
+		}
+	} else if(name_key != MON_NONE_MONSTER)  {
+		if(name_param != MON_NONE_MONSTER) {
+			return_string = LocalzationManager::formatString(name_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
+		} else if (param != LOC_NONE){
+			return_string = LocalzationManager::formatString(name_key, PlaceHolderHelper(param));
+		} else {
+			return_string = LocalzationManager::monString(name_key);
+		}
+	}
+	if(!postfix.empty()) {
+		return_string+=postfix;
+	}
+	return return_string;
+};
+
 players::players():
-prev_position(0,0), name("당신",true), char_name("레이무",false), user_name("이름없음",true), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
+prev_position(0,0), name(LOC_SYSTEM_YOU), char_type(UNIQ_START_NONE), user_name("-"), image(NULL), tribe(TRI_FIRST), job(JOB_FIRST),
 hp(10), max_hp(10), hp_recov(0), mp(0), max_mp(0), mp_recov(0), pure_mp(false), power(300),	power_decre(0), level(1), exper(0), exper_recovery(10), exper_aptit(10), skill_exper(0), system_exp(1,1),
 ac(0), ev(10), sh(0),real_ac(0),bonus_ac(0), real_ev(10), bonus_ev(0),real_sh(0), bonus_sh(0), s_str(10), s_dex(10), s_int(10), m_str(10), m_dex(10), m_int(10), acc_plus(0), dam_plus(0),
 as_penalty(0), magic_resist(0), tension_gauge(0), tension_turn(false), already_swap(false), ziggurat_level(0),
@@ -122,8 +153,12 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prev_position.x);
 	SaveData<int>(fp, prev_position.y);
 	name.SaveDatas(fp);
-	char_name.SaveDatas(fp);
-	user_name.SaveDatas(fp);
+	SaveData<unique_starting_type>(fp, char_type);
+	{
+		char temp[100];
+		sprintf_s(temp,100,"%s",user_name.c_str());
+		SaveData<char>(fp,*temp, strlen(temp)+1);
+	}
 	SaveData<int>(fp, texturetoint(image));
 	SaveData<tribe_type>(fp, tribe);
 	SaveData<job_type>(fp, job);
@@ -332,8 +367,12 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_position.x);
 	LoadData<int>(fp, prev_position.y);
 	name.LoadDatas(fp);
-	char_name.LoadDatas(fp);
-	user_name.LoadDatas(fp);
+	LoadData<unique_starting_type>(fp, char_type);
+	{
+		char temp[100];
+		LoadData<char>(fp, *temp);
+		user_name = temp;
+	}
 	int it;
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
@@ -586,7 +625,7 @@ bool players::Draw(LPD3DXSPRITE pSprite, float x_, float y_)
 	if (s_veiling) {
 		img_effect_veiling.draw(pSprite, x_, y_, 255);
 	}
-	if (!GetCharNameString()->empty())
+	if (!GetCharNameString().empty())
 	{
 		if (you.image) {
 			return you.image->draw(pSprite, x_, y_, 255);
@@ -777,10 +816,10 @@ int players::move(short_move x_mov, short_move y_mov)
 			attack_type brand_ = ATT_NORMAL;
 			if(equipment[ET_WEAPON])
 				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
-			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor("돌주먹",true):name_infor("공격",true));
+			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 			{
-				doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.name);
+				doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.getName());
 				//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
 				//나중에 무기 이름으로 바꾸기
 			}
@@ -799,7 +838,8 @@ int players::move(short_move x_mov, short_move y_mov)
 			{
 				if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
 				{
-					printarray(false,false,false,CL_yuigi,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_to(true),"잡았다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUUGI_CATCH,false,false,false,CL_yuigi,
+						PlaceHolderHelper(mon_->GetName()->getName()));
 					you.SetCatch(mon_);
 				}
 				if(alchemy_buff == ALCT_STONE_FIST)
@@ -816,7 +856,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				int hit_ = 12+level/3;
 				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
 				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
-					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("박치기",false));
+					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_HEADBUTT));
 					mon_->damage(temp_att_, false);
 				}
 			}
@@ -826,7 +866,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				int hit_ = 12+level/3;
 				if(randA(3)<1)
 				{
-					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor("깨물기",false));
+					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_CRUNCH));
 					mon_->damage(temp_att_, false);
 				}
 			}
@@ -2114,16 +2154,16 @@ void players::FairyRevive(bool speak_)
 							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY, coord_def(rit->x, rit->y));
 							if (!(mon_->flag & M_FLAG_UNIQUE))
 							{
-								mon_->name.name = fairy_name[you.lilly_allys[i].name].name;
-								mon_->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
+								mon_->name = name_infor(fairy_name[you.lilly_allys[i].name]);
 							}
 							if (mon_->isYourShight() && speak_)
 							{
-								printarray(true, false, false, CL_lilly, 3, mon_->name.name.c_str(), mon_->name.name_is(true), "부활했다!");
+								LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_LILLY_REVIVE,true,false,false,CL_lilly,
+									 PlaceHolderHelper(mon_->name.getName()));
 								if (mon_->CanSpeak())
 									printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE), true, false, false, CL_normal);
 							}
-							if (mon_->id == MON_LUNAR && you.char_name.name.compare("써니") == 0) {
+							if (mon_->id == MON_LUNAR && you.char_type == UNIQ_START_SUNNY) {
 								mon_->spell_lists.clear();
 								mon_->spell_lists.push_back(spell(SPL_SELF_HEAL, 25));
 							}
@@ -2312,15 +2352,17 @@ void players::CheckPunish(int delay_)
 					punish[i].number--;
 
 					if(punish[i].number == 0)
-					{						
-						printarray(true,false,false,CL_white_blue,4,"당신은 ", GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터 ":"로부터 ","용서받았다.");
+					{
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_FORGIVE,true,false,false,CL_white_blue,
+							 PlaceHolderHelper(GetGodString((god_type)i)));
 	
 						char temp[200];
-						if(you.god==GT_SATORI)
-							sprintf_s(temp,200,"%s%s 포기했다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"은":"는");
-						else
-							sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
-						AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+						if(you.god==GT_SATORI) {
+							AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIVEUP, PlaceHolderHelper(GetGodString((god_type)i))),CL_small_danger);
+						}
+						else {
+							AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_FORGIVE, PlaceHolderHelper(GetGodString((god_type)i))),CL_small_danger);
+						}
 					}
 
 				}
@@ -3648,6 +3690,32 @@ void players::LevelUp(bool speak_)
 		}
 	}
 }
+string players::GetCharNameString(){
+	switch(char_type) {
+	case UNIQ_START_REIMU:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_REIMU);
+	case UNIQ_START_MARISA:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_MARISA);
+	case UNIQ_START_SANAE:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_SANAE);
+	case UNIQ_START_MOMIZI:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOMIZI);
+	case UNIQ_START_KOISHI:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_KOISHI);
+	case UNIQ_START_MOKOU:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU);
+	case UNIQ_START_NITORI:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_NITORI);
+	case UNIQ_START_SUNNY:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_SUNNY);
+	case UNIQ_START_STAR:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_STAR);
+	case UNIQ_START_LUNA:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
+	default:
+		return "";
+	}
+};
 list<item>::iterator players::GetThrowIter()
 {
 	list<item>::iterator it = you.item_list.begin();
@@ -3889,7 +3957,7 @@ interupt_type players::resetLOS(bool speak_)
 
 							if(speak_)
 							{
-								printlog(dungeon_tile_tribe_type_string[env[current_level].dgtile[check_pos_.x][check_pos_.y].tile],false,false,false,CL_normal);
+								printlog(LocalzationManager::locString(dungeon_tile_tribe_type_string[env[current_level].dgtile[check_pos_.x][check_pos_.y].tile]),false,false,false,CL_normal);
 								printlog("을 발견했다.",true,false,false,CL_normal);	
 							}
 							interrupt_ = IT_MAP_FIND;
@@ -4028,9 +4096,9 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	if(t->type == ITM_GOAL)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"당신은 %s의 룬을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",rune_string[t->value1]);
+		sprintf_s(temp,200,"당신은 %s의 룬을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",LocalzationManager::locString(rune_string[t->value1]).c_str());
 		printlog(temp,true,false,false,CL_good);
-		sprintf_s(temp,200,"%s의 룬을 얻었다.",rune_string[t->value1]);
+		sprintf_s(temp,200,"%s의 룬을 얻었다.",LocalzationManager::locString(rune_string[t->value1]).c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		rune[t->value1]++;
 		ReleaseMutex(mutx);
@@ -4345,9 +4413,8 @@ bool players::Drink(char id_)
 
 					if (use_num_ > 1) {
 						enterlog();
-						char temp[100];
-						sprintf_s(temp, 100, "역병신의 저주로 인해 %d개의 %s%s 낭비하여 사용하였다.", use_num_, it->GetName(-2).c_str(), it->GetNameInfor().name_to());
-						printarray(true, false, false, CL_small_danger, 1, temp);
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,true,false,false,CL_small_danger,
+							PlaceHolderHelper(to_string(use_num_)), PlaceHolderHelper(it->GetName(-2)));
 					}
 					DeleteItem(it, use_num_);
 					enterlog();
@@ -4415,7 +4482,7 @@ bool players::Evoke(char id_, bool auto_)
 					(*it).value3++;//사용예측 횟수를 늘린다.
 					ReleaseMutex(mutx);
 					
-					you.doingActionDump(DACT_EVOKE, (*it).name.name);
+					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					return true;
 				}
 				return false;
@@ -4426,7 +4493,7 @@ bool players::Evoke(char id_, bool auto_)
 
 				if(evoke_evokable(auto_, 0, (evoke_kind)(*it).value1))
 				{
-					you.doingActionDump(DACT_EVOKE, (*it).name.name);
+					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					return true;
 				}
 				else {
@@ -4456,7 +4523,7 @@ bool players::Evoke(char id_, bool auto_)
 				ReleaseMutex(mutx);
 				if (evokeAmulet((amulet_type)(*it).value1, (*it).value2)) {
 					(*it).value3++;
-					you.doingActionDump(DACT_EVOKE, (*it).name.name);
+					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					resetAmuletPercent((amulet_type)(*it).value1);
 					return true;
 				}
@@ -4489,9 +4556,9 @@ bool players::Read(char id_)
 				WaitForSingleObject(mutx, INFINITE);
 				if((*it).type == ITM_SCROLL)
 				{
-
 					soundmanager.playSound("scroll");
-					printarray(true,false,false,CL_normal,3,it->GetName(-2).c_str(),it->GetNameInfor().name_to(true),"읽었다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_READ_SCROLL,true,false,false,CL_normal,
+						 PlaceHolderHelper(it->GetName(-2)));
 					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
 					int use_num_ = 1;
 					if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
@@ -4529,12 +4596,13 @@ bool players::Read(char id_)
 
 					if(iden_list.scroll_list[(*it).value1].iden == 3)
 					{
-						if(!pre_iden_)
-							printarray(true,false,false,CL_normal,3,"이것은 ",it->GetName(-2).c_str(),it->GetNameInfor().name_type?"이다":"다.");
+						if(!pre_iden_) {
+							LocalzationManager::printLogWithKey(LOC_SYSTEM_IDENTIFY_ITEM,true,false,false,CL_normal,
+								 PlaceHolderHelper(it->GetName(-2)));
+						}
 						if (use_num_ > 1) {
-							char temp[100];
-							sprintf_s(temp, 100, "역병신의 저주로 인해 %d개의 %s%s 낭비하여 사용하였다.", use_num_, it->GetName(-2).c_str(), it->GetNameInfor().name_to());
-							printarray(true, false, false, CL_small_danger, 1, temp);
+							LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,true,false,false,CL_small_danger,
+								PlaceHolderHelper(to_string(use_num_)), PlaceHolderHelper(it->GetName(-2)));
 						}
 						(*it).identify = true;
 					}
@@ -4731,9 +4799,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 	else if(speak_)
 	{
-		char temp[100];
-		sprintf_s(temp,100,"%s의 신도가 되었다.",GetGodString(god));	
-		printlog(temp,true,false,false,CL_help);	
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),true,false,false,CL_help);	
 	}
 
 
@@ -4750,9 +4816,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 	else
 	{
-		char temp[200];
-		sprintf_s(temp,200,"%s의 신도가 되었다.",GetGodString(god));
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),CL_help);
 	}
 	you.punish[god].number = 0;
 	you.punish[god].punish = false;
@@ -4852,9 +4916,7 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 	if(god_ == GT_NONE)
 		god_ = god;
 	punish[god_].number = absolutely_?punish_:punish_+punish[god_].number;
-	char temp[100];
-	sprintf_s(temp,100,"%s의 분노를 느꼈다.",GetGodString(god_));
-	printlog(temp,true,false,false,CL_danger);
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_WRATH, PlaceHolderHelper(GetGodString(god_))),true,false,false,CL_danger);
 	return true;
 	
 }
@@ -4903,7 +4965,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 				soundmanager.playSound("throw");
 				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
 				int power_ = GetSkillLevel(SKT_TANMAC, true)*5;
-				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("물보라",false));
+				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_KIKU_SPRAY));
 				soundmanager.playSound("bomb"); 
 				BaseBomb(c_,&img_fog_cold[0],temp_att);
 			}
@@ -4922,7 +4984,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		}
 		you.SetParadox(0);
 
-		doingActionDump(DACT_SHOOT, (*it).name.name);
+		doingActionDump(DACT_SHOOT, (*it).name.getName());
 
 
 		time_delay += GetThrowDelay((*it).type);
@@ -5427,8 +5489,9 @@ bool players::unequip(equip_type type_, bool force_)
 				time_delay += 3*you.GetNormalDelay();
 			else
 				time_delay += you.GetNormalDelay()/2;
-			printlog(equipment[type_]->GetName(),false,false,false,equipment[type_]->item_color());
-			printarray(true,false,false,CL_normal,2,equipment[type_]->GetNameInfor().name_to(true),"벗었다.");
+			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_UNEQUIP_ITEM,true,false,false,CL_normal,
+				PlaceHolderHelper(equipment[type_]->GetName(), equipment[type_]->item_color()));
 		}
 		equipment[type_] = NULL;
 		ReSetASPanlty();
@@ -5596,7 +5659,7 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				equipArmour((armour_kind)(*it).value5, plus_);
 
 
-			if(where_ == ET_ARMOR && !strncmp((*it).name.name.c_str(),"단풍",4))
+			if(where_ == ET_ARMOR && (*it).value5==AMK_AUTUMN)
 			{
 				ResistUpDown(-1*plus_,RST_FIRE);
 			}

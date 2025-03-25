@@ -31,6 +31,7 @@
 #include "spellcard.h"
 #include "throw.h"
 #include "mon_infor.h"
+#include "localization.h"
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -396,7 +397,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				rc.left = two_;
 				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s스펠카드", index, iden_list.autopickup[i] ? '+' : '-', SpellcardName((spellcard_evoke_type)cur_));
+				sprintf_s(temp, 100, "%c %c %s스펠카드", index, iden_list.autopickup[i] ? '+' : '-', SpellcardName((spellcard_evoke_type)cur_).c_str());
 				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -428,7 +429,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				else
 				{
 					img_item_book[cur_ % (RANDOM_BOOK_NUM - 1)].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', static_book_list[cur_ - 1].name.c_str());
+					sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', LocalzationManager::locString(static_book_list[cur_ - 1].key).c_str());
 				}
 				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
@@ -464,7 +465,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			else if (cur_ >= 2)
 			{
 				GetTanmacBaseGraphic(cur_-2)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', GetTanmacString(cur_-2).name.c_str());
+				sprintf_s(temp, 100, "%c %c %s", index, iden_list.autopickup[i] ? '+' : '-', LocalzationManager::locString(GetTanmacKey(cur_-2)).c_str());
 			}
 			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 			rc.top += 2 * fontDesc.Height;
@@ -533,7 +534,7 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		{
 			skill_list skill_ = (skill_list)you.MemorizeSkill[i];
 			char sp_char = i>=26?('A'+i-26):('a'+i);
-			sprintf_s(temp,100,"%c      - %s",sp_char,SkillString(skill_));
+			sprintf_s(temp,100,"%c      - %s",sp_char,SkillString(skill_).c_str());
 			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += 250;
 			{
@@ -680,7 +681,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={30, 10, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
-	sprintf_s(temp,100,"%s (%d레벨 %s %s %s)",you.user_name.name.c_str(),you.level,tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
+	sprintf_s(temp,100,"%s (%d레벨 %s %s %s)",you.GetCharNameString().c_str(),you.level,LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(),LocalzationManager::locString(job_type_string[you.job]).c_str(),you.GetCharNameString().c_str());
 	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 	rc.left += 300;
 	sprintf_s(temp,100,"턴: %d",you.turn);	
@@ -693,12 +694,12 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else if (you.god == GT_TENSI)
 	{
-		sprintf_s(temp, 100, "신앙: %s", GetGodString(you.god));
+		sprintf_s(temp, 100, "신앙: %s", GetGodString(you.god).c_str());
 		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{
-		sprintf_s(temp,100,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+		sprintf_s(temp,100,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god).c_str(),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
 		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left = 30;
@@ -1051,7 +1052,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		{
 			if(i!=0)
 				rune_temp += ", ";
-			rune_temp += rune_string[i];
+			rune_temp += LocalzationManager::locString(rune_string[i]);
 		}
 	}
 	DrawTextUTF8(pfont,pSprite,rune_temp.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
@@ -1085,7 +1086,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		sprintf_s(temp,128,"%d레벨",you.level);
 		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*7;
-		DrawTextUTF8(pfont,pSprite,you.user_name.name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,you.user_name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		
 		if(ReplayClass.play)
 		{
@@ -1108,11 +1109,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		rc.top += fontDesc.Height;
 		rc.left = 32*16+50;
-		DrawTextUTF8(pfont,pSprite,tribe_type_string[you.tribe], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*(strlen(tribe_type_string[you.tribe])+1);
-		DrawTextUTF8(pfont,pSprite,job_type_string[you.job], -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*(strlen(job_type_string[you.job])+1);
-		DrawTextUTF8(pfont,pSprite,you.GetCharNameString()->c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		string tribe_string = LocalzationManager::locString(tribe_type_string[you.tribe]);
+		DrawTextUTF8(pfont,pSprite,tribe_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*(tribe_string.size()+1);
+		string job_string = LocalzationManager::locString(job_type_string[you.job]);
+		DrawTextUTF8(pfont,pSprite,job_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*(job_string.size()+1);
+		DrawTextUTF8(pfont,pSprite,you.GetCharNameString().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left = 32*16+50;
 		rc.top += fontDesc.Height;
 
@@ -1123,15 +1126,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		else if (you.god == GT_MIKO) 
 		{
-			sprintf_s(temp, 128, "신앙: %s (인기도 %d%%)", GetGodString(you.god), you.piety/2);
+			sprintf_s(temp, 128, "신앙: %s (인기도 %d%%)", GetGodString(you.god).c_str(), you.piety/2);
 		}
 		else if (you.god == GT_TENSI)
 		{
-			sprintf_s(temp, 128, "신앙: %s", GetGodString(you.god));
+			sprintf_s(temp, 128, "신앙: %s", GetGodString(you.god).c_str());
 		}
 		else
 		{
-			sprintf_s(temp,128,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+			sprintf_s(temp,128,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god).c_str(),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
 		}
 		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 
@@ -1317,7 +1320,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			char temp2[64];
 			if (_item->type == ITM_AMULET)
 			{
-				sprintf_s(temp2, 64, "%s%s", iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], _item->name.name.c_str());
+				sprintf_s(temp2, 64, "%s%s", iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], _item->name.getName().c_str());
 			}
 			sprintf_s(temp, 128, "%c) %s (%d%%)", you.equipment[ET_NECK]->id, temp2, you.getAmuletPercent());
 			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
@@ -2281,8 +2284,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				if (abs((*it).position.x - x_ - 8) <= 8 && abs((*it).position.y - y_ - 8) <= 8)
 				{
 					RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
-					rc.left -= fontDesc.Width*(*it).GetName()->name.size() / 2;
-					DrawTextUTF8(pfont,pSprite, (*it).GetName()->name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+					rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
+					DrawTextUTF8(pfont,pSprite, (*it).GetName()->getName().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 				}
 			}
 		}
@@ -2541,7 +2544,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				{
 					rc.top += 16;
 					rc.left -= 48;
-					DrawTextUTF8(pfont,pSprite,GetItemTypeSting(i), -1, &rc, DT_NOCLIP,CL_help);
+					DrawTextUTF8(pfont,pSprite,GetItemTypeSting(i).c_str(), -1, &rc, DT_NOCLIP,CL_help);
 					rc.top += 32;
 					rc.left += 48;
 					exist = true;

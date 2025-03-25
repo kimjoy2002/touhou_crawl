@@ -131,21 +131,6 @@ void MakeTanmac(item_infor* t, int select_)
 
 	switch(type)
 	{
-	/*case TMT_BILL:
-		t->value1 = 5;
-		t->value2 = 5;
-		t->value3 = 0;
-		t->value4 = TMT_BILL;
-		t->value5 = 0;
-		t->value6 = 0;
-		t->num = (select_ != -1)?30:rand_int(10,30);
-		t->is_pile = true;
-		t->can_throw = true;
-		t->image = GetTanmacBaseGraphic(t->value4);
-		t->name = GetTanmacString(t->value4);
-		t->weight = 0.1f*t->num;
-		t->value = 2;
-		break;*/
 	case TMT_AMULET:
 		t->value1 = 15;
 		t->value2 = 8;
@@ -157,7 +142,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
-		t->name = GetTanmacString(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
 		t->weight = 0.5f*t->num;
 		t->value = 20;
 		break;
@@ -172,7 +157,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
-		t->name = GetTanmacString(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
 		t->weight = 0.1f*t->num;
 		t->value = 2;
 		break;
@@ -187,7 +172,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
-		t->name = GetTanmacString(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
 		t->weight = 0.5f*t->num;
 		t->value = 100;
 		break;
@@ -202,7 +187,7 @@ void MakeTanmac(item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
-		t->name = GetTanmacString(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
 		t->weight = 0.5f*t->num;
 		t->value = 20;
 		break;
@@ -357,22 +342,20 @@ textures* GetTanmacBaseGraphic(int type)
 	}
 }
 
-name_infor GetTanmacString(int type)
+LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 {
 	switch(type)
 	{
 	default://없음 이거 뜨면 버그
-		return name_infor("버그탄막",true);
-	//case TMT_BILL:
-	//	return name_infor("부적",true);
+		return LOC_SYSTEM_ITEM_TANMAC_BUG;
 	case TMT_AMULET:
-		return name_infor("호밍아뮬렛",true);
+		return LOC_SYSTEM_ITEM_TANMAC_AMULET;
 	case TMT_POISON_NEEDLE:
-		return name_infor("맹독 수리검",true);
+		return LOC_SYSTEM_ITEM_TANMAC_POISON_NEEDLE;
 	case TMT_KIKU_COMPRESSER:
-		return name_infor("키쿠이치몬지 컴프레서",false);
+		return LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER;
 	case TMT_DOGGOJEO:
-		return name_infor("독고저", false);
+		return LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO;
 	}
 }
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)

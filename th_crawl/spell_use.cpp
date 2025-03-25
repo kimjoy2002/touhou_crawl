@@ -402,7 +402,7 @@ bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randA_1(2 + pow / 3), 2 + pow / 3, 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("탄막", true));
+		beam_infor temp_infor(randA_1(2 + pow / 3), 2 + pow / 3, 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -423,7 +423,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -444,7 +444,7 @@ bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,15+pow/4),15+pow/4,12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("물총",true));
+		beam_infor temp_infor(randC(1,15+pow/4),15+pow/4,12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -464,7 +464,7 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("불꽃",true));
+		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -486,7 +486,7 @@ bool skill_flame(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
 		int damage_ = 15+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor("불꽃",true));
+		beam_infor temp_infor(randC(1,damage_),damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -506,7 +506,7 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
+		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -528,7 +528,7 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
 		int damage_ = 14+pow/5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor("냉기",false));
+		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -551,12 +551,12 @@ bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{	
-		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
+		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 		target_unit->damage(temp_att, true);
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("cold");
 		}
-		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor("냉기",false));
+		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 		//if(short_)
 		//	temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		//throwtanmac(19,beam,temp_infor,NULL);
@@ -569,7 +569,7 @@ bool skill_sting(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor("독탄막",true));
+		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -646,7 +646,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉동빔",true));
+		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -699,8 +699,9 @@ bool skill_confuse(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->SetConfuse(rand_int(10,20)+randA(pow/10));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -717,8 +718,9 @@ bool skill_slow(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->SetSlow(rand_int(15,30)+randA(pow/8));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -769,7 +771,7 @@ bool skill_smite(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{
-		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor("강타",false));
+		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor(LOC_SYSTEM_ATT_SMITE));
 		
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
@@ -802,7 +804,8 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"불타오르기 시작했다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_FIRE_BRAND,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_FIRE;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -811,7 +814,8 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_FIRE && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 더 불타오르기 시작했다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_FIRE_BRAND_MORE,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -832,7 +836,8 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"냉기를 뿜기 시작했다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_COLD_BRAND,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_COLD;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -841,7 +846,8 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_COLD && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 냉기를 뿜기 시작했다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_COLD_BRAND_MORE,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -863,7 +869,8 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"독을 떨어뜨리기 시작했다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_POISON_BRAND,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_POISON;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
@@ -872,7 +879,8 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
 		{
-			printarray(true,false,false,CL_white_blue,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 독이 진해졌다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,true,false,false,CL_white_blue,
+				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
@@ -943,7 +951,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect(); 
@@ -1006,7 +1014,7 @@ bool skill_elec_passive(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -1064,7 +1072,7 @@ bool skill_elec_ball_bomb(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("전기", false));
+		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(42, order->position, hit_mon->position, temp_infor);
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -1131,7 +1139,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor("전기",false));
+		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -1254,8 +1262,9 @@ bool skill_glow(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->SetGlow(rand_int(15,30)+randA(pow/8));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1330,7 +1339,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:1;//몬스터가 쓸때 패널티
 		int damage_ = 6+pow/3-mon_panlty_;
-		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -1352,12 +1361,12 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("화염구",false));
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor("화염구",false));
+			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 			
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("bomb");
@@ -1376,7 +1385,7 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor("화염",true));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1398,7 +1407,7 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor("냉기",false));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1418,7 +1427,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor("맹독",false));
+		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1440,7 +1449,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_CONFUSE_CLOUD));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("악취탄",true));
+		beam_infor temp_infor(0,0,10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_CONFUSE_POISON));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -1553,7 +1562,8 @@ bool skill_recall(int pow, bool short_, unit* order, coord_def target)
 			dq[i]->SetXY(rit->x,rit->y);
 			if(dq[i]->isYourShight())
 			{
-				printarray(false,false,false,CL_normal,3,dq[i]->GetName()->name.c_str(),dq[i]->GetName()->name_is(true),"리콜되었다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RECALL,false,false,false,CL_normal,
+					 PlaceHolderHelper(dq[i]->GetName()->getName()));
 				j++;
 				if(j%3==0)
 					enterlog();
@@ -1575,8 +1585,9 @@ bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->SetTele(rand_int(3,6));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1634,7 +1645,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 						//		int att_ = randC(9,10+power/20);
 						//		int m_att_ = 9*(10+power/20);
 
-						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("화염폭풍",true));
+						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_FIRESTORM));
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
@@ -1694,7 +1705,7 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/6),3*(5+pow/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("수압",true));
+		beam_infor temp_infor(randC(3,5+pow/6),3*(5+pow/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1727,7 +1738,8 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 				}
 				if(real_knock_)
 				{
-					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"튕겨져나갔다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_KNOCKBACK,true,false,false,CL_normal,
+						 PlaceHolderHelper(unit_->GetName()->getName()));
 				}
 			}
 		}
@@ -1746,7 +1758,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
 		}
-		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor("굉음",false));
+		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor(LOC_SYSTEM_ATT_NOISE));
 		target_unit->damage(temp_att, true);
 		if(randA(10)==0)
 			target_unit->SetConfuse(rand_int(3,6));
@@ -1813,7 +1825,7 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 				if (env[current_level].isInSight(order->position)) {
 					soundmanager.playSound("stone");
 				}
-				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor("충돌",true));
+				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 				hit_mon->damage(temp_att, true);
 			}
 			else if(unit_)
@@ -1822,17 +1834,18 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 					soundmanager.playSound("stone");
 				}
 				{
-					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor("충돌",true));
+					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 					hit_mon->damage(temp_att, true);
 				}				
 				{
-					attack_infor temp_att(randC(1,6+pow/8),(6+pow/8),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor("충돌",true));
+					attack_infor temp_att(randC(1,6+pow/8),(6+pow/8),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 					unit_->damage(temp_att, true);
 				}
 			}
 			else
 			{
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"최면에 걸린채로 움직였다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,true,false,false,CL_normal,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				hit_mon->SetXY(rit->x,rit->y);
 			}
 			if(randA(4) == 0)
@@ -1843,8 +1856,9 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		return true;
 	}
@@ -1860,8 +1874,9 @@ bool skill_mute(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->SetMute(rand_int(20+pow/2,40+pow/2));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1913,14 +1928,15 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				int damage_ = you.GetAttack(false);
 				damage_*=1.4f;
 				attack_infor temp_att(damage_,1.4f*you.GetAttack(true),
-					99,&you,order->GetParentType(),brand_,name_infor("공격",true));					
+					99,&you,order->GetParentType(),brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));					
 				hit_mon->damage(temp_att, true);
 
 			}
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1937,8 +1953,9 @@ bool skill_charm(int pow, bool short_, unit* order, coord_def target)
 			hit_mon->CheckSightNewTarget();
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1951,7 +1968,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
+		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1975,7 +1992,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("spark");
 		}
-		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor("스파크",false));
+		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
 		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
@@ -2164,8 +2181,10 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 	monster* final_target = target_mon_list.back();
 	
 	final_target->HpUpDown(rand_int(2+pow/10,10+pow/5),DR_NONE);
-	if(env[current_level].isInSight(final_target->position))
-		printarray(true,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"회복되었다.");
+	if(env[current_level].isInSight(final_target->position)) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HEALED,true,false,false,CL_normal,
+			PlaceHolderHelper(final_target->GetName()->getName()));
+	}
 
 	return true;
 
@@ -2175,7 +2194,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -2192,8 +2211,9 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 					hit_mon->SetSlow(rand_int(10,20)+randA(pow/12));
 				}
 				else if(hit_mon->isYourShight())
-				{					
-					printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+						 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				}
 				hit_mon->AttackedTarget(order);
 			}
@@ -2224,7 +2244,7 @@ bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
 		int damage_ = 19+pow/5.5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("돌멩이",false));
+		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2298,7 +2318,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("바위",false)), true);
+					hit_->damage(attack_infor(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_ROCK)), true);
 		
 					//hit_->damage(att_, true);
 				}
@@ -2318,7 +2338,7 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	{
 		if (!order->isplayer()) //카나메드릴은 너무 쎄서 몬스터 보정이 좀 더 필요
 			pow *= 0.7f;
-		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("카나메드릴",true));
+		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_KANAMEDRILL));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2407,7 +2427,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
 					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) //플랑은 면역(나중에 폭팔면역추가?)
-						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor("폭발",true)), true);
+						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST)), true);
 				}
 
 			}
@@ -2476,7 +2496,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(4,13+power/20);
 								int m_att_ = 4*(13+power/20);
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("자폭",true));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SUICIDE));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -2493,7 +2513,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			//attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("폭발",true));
+			//attack_infor temp_att(order->GetHp()/2,order->GetHp()/2,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
 			//order->damage(temp_att, true);
 		}
 		return true;
@@ -2546,7 +2566,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	{		
 		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//몬스터가 쓸때 패널티
 		int damage_ = (14+power/6)*mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("광탄",true));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LIGHTTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -2561,7 +2581,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 			int max_len_ = max(abs(order->position.x - pos.x),abs( order->position.y - pos.y));
 			if(max_len_ >= 3)
 			{
-				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor("폭발",true));
+				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BURST));
 				BaseBomb(pos, &img_blast[2],temp_att,hit_mon);
 			}
 		}
@@ -2611,7 +2631,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(9,10+power/20);
 								int m_att_ = 9*(10+power/20);
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("화염폭풍",true));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_FIRESTORM));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -2664,7 +2684,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 						//		int att_ = randC(9,10+power/20);
 						//		int m_att_ = 9*(10+power/20);
 
-						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor("화염폭풍",true));
+						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_FIRESTORM));
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
@@ -2692,7 +2712,7 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 				soundmanager.playSound("timestop");
 			}
 			int att_ = 10+pow/7;				
-			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor("냉기",false));
+			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor(LOC_SYSTEM_ATT_COLD));
 			it->damage(temp_att, true);
 			it->SetFrozen(randA(30));			
 		}
@@ -2741,7 +2761,8 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 		
 		if(!hit_mon->isplayer() && ((monster*)hit_mon)->flag & M_FLAG_ANIMAL)
 		{
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"이미 동물이기에 변신에 걸리지않는다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 			return false;
 		}
 
@@ -2758,7 +2779,8 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 					 animal_id_ = randA(1)?MON_FROG:MON_ORANGE_CAT;
 				else/* if(hit_mon->GetLevel()<16)*/
 					 animal_id_ = randA(2)==0?MON_EAGLE:randA(1)?MON_RAIJUU:MON_TIGER;
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"동물로 변해버렸다!");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,true,false,false,CL_normal,
+				  PlaceHolderHelper(hit_mon->GetName()->getName()));
 				
 				if(!hit_mon->isplayer() && (order->isplayer() || order->isUserAlly()))
 				{
@@ -2773,8 +2795,9 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 			}
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -2824,8 +2847,9 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 				it->SetSlow(rand_int(15,30)+randA(power/8));
 			}
 			else if(it->isYourShight())
-			{					
-				printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"저항했다.");
+			{
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+					 PlaceHolderHelper(it->GetName()->getName()));
 			}
 			it->AttackedTarget(order);			
 		}
@@ -2947,8 +2971,10 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 	{
 		monster* final_target = (*it);	
 		final_target->HpUpDown(rand_int(2+power/10,10+power/5),DR_NONE);		
-		if(env[current_level].isInSight(final_target->position))
-			printarray(false,false,false,CL_normal,3,final_target->GetName()->name.c_str(),final_target->GetName()->name_is(true),"회복되었다.");
+		if(env[current_level].isInSight(final_target->position)) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HEALED,false,false,false,CL_normal,
+				PlaceHolderHelper(final_target->GetName()->getName()));
+		}
 	}
 
 	return true;
@@ -2979,7 +3005,7 @@ bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = 6+power/8;
-		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("총알",true));
+		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BULLET));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -3000,7 +3026,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 	if(order->GetExhausted())
 		return false;
 	vector<int> list_;
-	string speak_; 
+	LOCALIZATION_ENUM_KEY speak_; 
 	switch(randA(6))
 	{
 	case 0: //요정
@@ -3009,7 +3035,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_FAIRY_SOCERER);
 		list_.push_back(MON_FAIRY_SUN_FLOWER);
 		list_.push_back(MON_FAIRY_HERO);
-		speak_ = "안개의 호수의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_LAKE;
 		break;
 	case 1: //요괴산
 		list_.push_back(MON_CROW_TENGU);
@@ -3017,7 +3043,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_HANATACA_TENGU);
 		list_.push_back(MON_KATPA_WATER_WIZARD);
 		list_.push_back(MON_KATPA_SPEAR);
-		speak_ = "요괴의 산의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_MOUNTAIN;
 		break;
 	case 2: //홍마관
 		list_.push_back(MON_HOBGOBRIN_MAID);
@@ -3025,7 +3051,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_HOBGOBRIN_TEMP);
 		list_.push_back(MON_MAID_FAIRY);
 		list_.push_back(MON_CHUPARCABRA);
-		speak_ = "홍마관의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_SCARLET;
 		break;
 	case 3: //윳쿠리
 		list_.push_back(MON_REIMUYUKKURI);
@@ -3034,7 +3060,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_REMILIAYUKKURI);
 		list_.push_back(MON_ALICEYUKKURI);
 		list_.push_back(MON_YOUMUYUKKURI);
-		speak_ = "윳쿠리 둥지의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_YUKKURI;
 		break;
 	case 4: //죽림
 		list_.push_back(MON_RABIT_BOMB);
@@ -3043,7 +3069,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_RABIT_SUPPORT);
 		list_.push_back(MON_RABIT_MAGIC);
 		list_.push_back(MON_RABIT_SPEAR);
-		speak_ = "미궁의 죽림의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_BAMBOO;
 		break;
 	case 5: //지저
 		list_.push_back(MON_HAUNT);
@@ -3051,7 +3077,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_HELL_SPIDER);
 		list_.push_back(MON_BLOOD_HAUNT);
 		list_.push_back(MON_HELL_CROW);
-		speak_ = "지저의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_SUBTERRANEAN;
 		break;
 	case 6: //마계
 		list_.push_back(MON_SARA);
@@ -3059,7 +3085,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 		list_.push_back(MON_ELIS);
 		list_.push_back(MON_EVIL_EYE);
 		list_.push_back(MON_LITTLE_IMP);
-		speak_ = "마계의 꿈을 불러냈다!";
+		speak_ = LOC_SYSTEM_MAGIC_SUMMON_DREAM_PANDEMONIUM;
 		break;
 	}
 
@@ -3077,8 +3103,10 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 	if(return_)
 	{
 		order->SetExhausted(rand_int(20,30));
-		if(order && env[current_level].isInSight(order->position))
-			printarray(true,false,false,CL_magic,3,order->GetName()->name.c_str(),order->GetName()->name_is(true),speak_.c_str());
+		if(order && env[current_level].isInSight(order->position)) {
+			LocalzationManager::printLogWithKey(speak_,true,false,false,CL_magic,
+				PlaceHolderHelper(order->GetName()->getName()));
+		}
 
 	} 
 	if (return_) {
@@ -3104,7 +3132,8 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
 			///reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
-			printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "당신의 마나를 흡수하였다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_MANA_DRAIN,true,false,false,CL_small_danger,
+				PlaceHolderHelper(order->GetName()->getName()));
 			you.MpUpDown(rand_int(-7,-12));
 		}
 		else //몬스터는 저항력으로 따짐
@@ -3112,7 +3141,7 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 			//monster *mon_ = (monster*)target_unit;
 			//reduce_damage_ = max(1,randA(mon_->level+mon_->resist*5)/2);
 		}
-		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor("악몽",true));
+		//attack_infor temp_att(randA_1(reduce_damage_),damage_,99,order,order->GetParentType(),ATT_SMITE,name_infor(LOC_SYSTEM_ATT_NIGHTMARE - 없음)); 
 		//target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -3130,8 +3159,9 @@ bool skill_insane(int power, bool short_, unit* order, coord_def target)
 			hit_mon->SetLunatic(time_);
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -3148,15 +3178,16 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 	{
 		if(order && target_unit->isplayer())
 		{
-			printarray(true,false,false,CL_danger,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),target_unit->GetName()->name_to(true),"뚫어지게 응시했다.");
-
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_BLOOD_STARE,true,false,false,CL_danger,
+				 PlaceHolderHelper(order->GetName()->getName()),
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
 		}
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
 		}
 
 		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
-		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor("피의 응시",false));
+		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor(LOC_SYSTEM_ATT_BLOOD_STARE));
 		target_unit->damage(temp_att, true);
 		order->SetExhausted(rand_int(3, 5));
 		return true;
@@ -3193,12 +3224,12 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 	length_ = min(length_,SpellLength(SPL_CANNON));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("음양탄",true));
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_YINYANG_TANMAC));
 
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor("음양탄",true));
+			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor(LOC_SYSTEM_ATT_YINYANG_TANMAC));
 			
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("bomb");
@@ -3258,7 +3289,7 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("fire");
 		}
-		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("불바다",false));
+		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_SEAOFFIRE));
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
 			if(order->isSightnonblocked(c_))
 			{
@@ -3285,8 +3316,9 @@ bool skill_stasis(int power, bool short_, unit* order, coord_def target)
 			hit_mon->SetStasis(rand_int(10,40));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -3323,9 +3355,11 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 			
 			if (env[current_level].isInSight((*rit))) {
 				soundmanager.playSound("howl");
-				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "에게 도약했다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_JUMP_ATTACK,false,false,false,CL_normal,
+					 PlaceHolderHelper(order->GetName()->getName()),
+					 PlaceHolderHelper(unit_->GetName()->getName()));
 			}
-			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor("도약",true));
+			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_LEAP));
 			unit_->damage(temp_att,false);
 			if(order)
 			{
@@ -3404,7 +3438,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 							int att_ = randC(8,6+power/30);
 							int m_att_ = 8*(6+power/30);
 
-							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
+							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SHOCKWAVE));
 							hit_->damage(temp_att, true);
 						}
 					}
@@ -3428,7 +3462,7 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = order?1+order->GetLevel():6;
-		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("탄막",true));
+		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -3474,14 +3508,14 @@ bool skill_change(int power, bool short_, unit* order, coord_def target)
 		return mondata[lf].level + (mondata[lf].flag & M_FLAG_UNIQUE?3:0) > mondata[rf].level + (mondata[rf].flag & M_FLAG_UNIQUE?3:0);
 	}); //레벨이 높은 순서대로 나열(네임드는 레벨 보정치를 3 높게 잡음)
 	
-	if(env[current_level].isInSight(mon_order->position))
-		printarray(true,false,false,CL_magic,5,order->GetName()->name.c_str(),order->GetName()->name_is(true),mondata[target_mon_list[0]].name.name.c_str(),mondata[target_mon_list[0]].name.name_by(true),"둔갑하였다!");
+	if(env[current_level].isInSight(mon_order->position)) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_DISGUISE,true,false,false,CL_magic,
+			PlaceHolderHelper(order->GetName()->getName()),
+			PlaceHolderHelper(mondata[target_mon_list[0]].name.getName()));
+	}
 			
 	mon_order->ChangeMonster(target_mon_list[0],0);
-	mon_order->flag &= ~M_FLAG_UNIQUE; //유니크 태그는 지운다.
-
-	mon_order->name.name = "둔갑한 " + mon_order->name.name;
-	
+	mon_order->flag &= ~M_FLAG_UNIQUE; //유니크 태그는 지운다.	
 	mon_order->s_changed = rand_int(20,30);//둔갑턴
 
 	return true;
@@ -3497,7 +3531,9 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 		{
 			you.SetUnluck(3);
 
-			printarray(false,false,false,CL_small_danger,4,order->GetName()->name.c_str(),order->GetName()->name_do(true),target_unit->GetName()->name.c_str(),"의 운기를 조작했다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_UNLUCK,false,false,false,CL_small_danger,
+				PlaceHolderHelper(order->GetName()->getName()),
+				PlaceHolderHelper(target_unit->GetName()->getName()));
 			
 			if(you.s_unluck<=3)
 				printlog("약간의 불행이 느껴졌다.",false,false,false,CL_small_danger);
@@ -3510,7 +3546,10 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printarray(true,false,false,CL_small_danger,7,order->GetName()->name.c_str(),order->GetName()->name_is(true),target_unit->GetName()->name.c_str(),"의 운기를 조작했다.",target_unit->GetName()->name.c_str(),target_unit->GetName()->name_is(true),"왠지 불행해보인다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_UNLUCK_TO_MONSTER,true,false,false,CL_small_danger,
+				 PlaceHolderHelper(order->GetName()->getName()),
+				 PlaceHolderHelper(target_unit->GetName()->getName()),
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
 			return true;
 		}
 	}
@@ -3546,7 +3585,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("번개",false)), true);
+					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_THUNDER)), true);
 				}
 			}
 		}
@@ -3565,7 +3604,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("wind");
 		}
 		int damage_ = 2*(8+power/8);
-		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor("바람의 탄환",true));
+		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_AIRSTRIKE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3702,7 +3741,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y,&you))
 				{
-					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor("매크로 버스트",false)), true);
+					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_MACROBURST)), true);
 					
 				}
 				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
@@ -3737,7 +3776,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 			int damage_ = 5*(3+power/5);
 			if(it->isFly())
 				damage_ /= 3;
-			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("지진",true));
+			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EARTHQUAKE));
 			it->damage(temp_att, true);			
 		}
 	}
@@ -3786,7 +3825,9 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 			seiga_->SetSaved(true);
 			if(yosika->isYourShight())
 			{
-				printarray(true,false,false,CL_normal,4,yosika->GetName()->name.c_str(),yosika->GetName()->name_is(true),seiga_->GetName()->name.c_str(),"의 옆으로 불려왔다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RECALL_YOSHIKA,true,false,false,CL_normal,
+					 PlaceHolderHelper(yosika->GetName()->getName()),
+					 PlaceHolderHelper(seiga_->GetName()->getName()));
 			}
 		}
 	}
@@ -3803,7 +3844,9 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 			//mon_->ReturnEnemy();
 			if(mon_->isYourShight())
 			{
-				printarray(true,false,false,CL_normal,5,seiga_->GetName()->name.c_str(),seiga_->name.name_is(true),mon_->name.name.c_str(),mon_->name.name_to(true),"부활시켰다!");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_REVIVE_YOSHIKA,true,false,false,CL_normal,
+					 PlaceHolderHelper(seiga_->GetName()->getName()),
+					 PlaceHolderHelper(mon_->name.getName()));
 			}
 		}
 	}
@@ -3815,7 +3858,7 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("수압",true));
+		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3843,7 +3886,8 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 		{
 			if(you.confuse_resist>0)
 			{
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				return true;
 			}
 
@@ -3857,7 +3901,9 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 				{
 					hit_mon->SetXY(*beam);
 					hit_mon->AttackedTarget(order);
-					printarray(true,false,false,CL_normal,4,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),order->GetName()->name.c_str(),"의 노래소리에 끌려 걸어갔다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_MERMAID_SONG,true,false,false,CL_normal,
+						 PlaceHolderHelper(hit_mon->GetName()->getName()),
+						 PlaceHolderHelper(order->GetName()->getName()));
 					return true;
 				}
 			}
@@ -3897,7 +3943,7 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
 					int damage_ = 10+power/6;
-					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("에메랄드",false)), true);
+					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD)), true);
 				}
 
 			}
@@ -3964,7 +4010,9 @@ bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 				}
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
-				printarray(true, false, false, CL_normal, 4, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), order->GetName()->name.c_str(), "에게 빨려들어갔다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_TASTE_OF_DEATH,true,false,false,CL_normal,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()),
+					 PlaceHolderHelper(order->GetName()->getName()));
 				hit_mon->SetSwift(rand_int(-30, -20));
 				return true;
 			}
@@ -3985,8 +4033,9 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("sickle");
 		}
 		int damage_ = hit_mon->GetHp() / 2;
-		printarray(true, false, false, CL_small_danger, 3, order->GetName()->name.c_str(), order->GetName()->name_is(true), "당신을 향해 낫을 내리쳤다.");
-		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor("얼마없는 여생", true)), true);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_AFTERLIFE,true,false,false,CL_small_danger,
+			 PlaceHolderHelper(order->GetName()->getName()));
+		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor(LOC_SYSTEM_ATT_SHORT_LIFE_EXPECTACNY)), true);
 		if (order)
 		{
 			order->SetExhausted(rand_int(10, 15));
@@ -4002,7 +4051,7 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 		return false;
 	monster* mon_ = (monster*)order;
 
-	printlog("프리즘 콘체르토! ", false, false, false, CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC_PRISM_CONCERTO) + " ", false, false, false, CL_normal);
 	deque<monster*> dq;
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -4022,7 +4071,8 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 			dq[i]->SetXY(rit->x, rit->y);
 			if (dq[i]->isYourShight())
 			{
-				printarray(false, false, false, CL_normal, 3, dq[i]->GetName()->name.c_str(), dq[i]->GetName()->name_is(true), "합주에 참가하였다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_PRISM_CALL,false,false,false,CL_normal,
+					 PlaceHolderHelper(dq[i]->GetName()->getName()));
 				j++;
 				if (j % 3 == 0)
 					enterlog();
@@ -4050,8 +4100,9 @@ bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("blink");
 		}
 		target_unit->Blink(25);
-		printarray(true, false, false, CL_normal, 3, target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true), "염동력에 의해 튕겨져나갔다. ");
-		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor("염동력", true));
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_PSYCHOKINESIS,true,false,false,CL_normal,
+			 PlaceHolderHelper(target_unit->GetName()->getName()));
+		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor(LOC_SYSTEM_ATT_PSYCHOKINESIS));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -4185,7 +4236,16 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 		soundmanager.playSound("spellcard");
 	}
 	mon_->ChangeMonster(id_, 0);
-	printarray(true, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), id_ == MON_KOKORO1 ?"분노": id_ == MON_KOKORO2 ?"슬픔":"기쁨","의 가면을 착용했다. ");
+	if(id_ == MON_KOKORO1) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_RED,true,false,false,CL_normal,
+			PlaceHolderHelper(order->GetName()->getName()));
+	} else if(id_ == MON_KOKORO2) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_BLUE,true,false,false,CL_normal,
+			PlaceHolderHelper(order->GetName()->getName()));
+	} else {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_GREEN,true,false,false,CL_normal,
+			PlaceHolderHelper(order->GetName()->getName()));
+	}
 	if (monster* mask_mon_ = BaseSummon(mask_, rand_int(80,100), true, true, 2, order, target, SKD_SUMMON_MASK, GetSummonMaxNumber(SPL_KOKORO_CHANGE))) {
 
 	}
@@ -4199,7 +4259,7 @@ bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer() ? 0 : 2;//몬스터가 쓸때 패널티
 		int damage_ = 11 + pow / 6 - mon_panlty_;
-		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor("번개", false));
+		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_THUNDER));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4246,7 +4306,7 @@ bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("접시", false));
+		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_DISH));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4274,7 +4334,8 @@ bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
 			}
 			else if (it->isYourShight())
 			{
-				printarray(false, false, false, CL_normal, 3, it->GetName()->name.c_str(), it->GetName()->name_is(true), "저항했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,false,false,false,CL_normal,
+					 PlaceHolderHelper(it->GetName()->getName()));
 			}
 			it->AttackedTarget(order);
 			i++;
@@ -4308,8 +4369,11 @@ bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("smite");
 		}
-		if(order && order->isYourShight())
-			printarray(false, false, false, CL_normal, 5, order->GetName()->name.c_str(), order->GetName()->name_is(true), target_unit->GetName()->name.c_str(), target_unit->GetName()->name_to(true), "꿈으로 인도했다. ");
+		if(order && order->isYourShight()) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SLEEP_SMITE,false,false,false,CL_normal,
+				PlaceHolderHelper(order->GetName()->getName()),
+				PlaceHolderHelper(target_unit->GetName()->getName()));
+		}
 		target_unit->SetSleep(rand_int(15,25));
 		return true;
 	} 
@@ -4327,7 +4391,7 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("elec");
 		}
-		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor("전기", false));
+		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21, order->position, target_unit->position, temp_infor);
 		Sleep(120);
 		env[current_level].ClearEffect();
@@ -4407,7 +4471,7 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor("파괴광선", true));
+		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_HYPERBEAM));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4449,7 +4513,7 @@ bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (8 + pow / 15);
-		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("검", true));
+		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_SWORD));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4471,7 +4535,7 @@ bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (6 + pow / 11);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("나이프", false));
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_KNIFE));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4499,7 +4563,7 @@ bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
 		}
 		target_unit->Blink(40);
 		int damage_ = 70;
-		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor("천수력남 던지기", false));
+		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor(LOC_SYSTEM_ATT_THROWING_ATLAS));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
@@ -4512,7 +4576,7 @@ bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
 	if (CheckThrowPath(order->position, target, beam))
 	{
 		int damage_ = (5 + pow / 12);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("부적", true));
+		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_BILL));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4559,9 +4623,11 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 
 			if (env[current_level].isInSight((*rit))) {
 				soundmanager.playSound("blink");
-				printarray(false, false, false, CL_normal, 4, order->GetName()->name.c_str(), order->GetName()->name_is(true), unit_->GetName()->name.c_str(), "에게 순간적으로 이동하며 발차기를 날렸다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,false,false,false,CL_normal,
+					 PlaceHolderHelper(order->GetName()->getName()),
+					 PlaceHolderHelper(unit_->GetName()->getName()));
 			}
-			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor("아공혈", true));
+			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor(LOC_SYSTEM_ATT_DIMENSIONAL_RIFT));
 			unit_->damage(temp_att, false);
 			return true;
 		}
@@ -4673,8 +4739,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		makeitem(ITM_ARMOR_HEAD, 1, &t);
 		t.image = &img_item_armor_helmet[4];
 		t.equip_image = &img_play_item_hat[4];
-		t.name.name = "리본";
-		t.name.name_type = true; 
+		t.name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON);
 		item_list_->push_back(t);
 		break;
 	}
@@ -5171,17 +5236,17 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_DESIRE:
 	{
 		if (mon_->fire_resist > 2) {
-			mon_->name.name = "빨간 " + mon_->name.name;
+			mon_->name = name_infor(LOC_SYSTEM_MON_RED_DESIRE);
 			mon_->atk_type[0] = ATT_FIRE_WEAK;
 			mon_->image = &img_mons_desire_red;
 		}
 		else if (mon_->ice_resist > 2) {
-			mon_->name.name = "파란 " + mon_->name.name;
+			mon_->name = name_infor(LOC_SYSTEM_MON_BLUE_DESIRE);
 			mon_->atk_type[0] = ATT_COLD_WEAK;
 			mon_->image = &img_mons_desire_blue;
 		}
 		else if (mon_->elec_resist > 2) {
-			mon_->name.name = "초록 " + mon_->name.name;
+			mon_->name = name_infor(LOC_SYSTEM_MON_GREEN_DESIRE);
 			mon_->atk_type[0] = ATT_ELEC_WEAK;
 			mon_->image = &img_mons_desire_green;
 		}
@@ -5218,7 +5283,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_REIMU:
 	{
-		if (you.char_name.name.compare("레이무") == 0)
+		if (you.char_type == UNIQ_START_REIMU)
 		{
 			mon_->image = &img_named_reimu2;
 		}
@@ -5475,7 +5540,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	if (order->s_clever) {
 		power *= 1.5f;
 		if(wiz_list.wizard_mode == 1)
-			printarray(false, false, false, CL_danger,3,"디버그)",order->GetName()->name.c_str()," 마법증폭");
+			printarray(false, false, false, CL_danger,3,"debug)",order->GetName()->getName()," clever");
 
 	}
 	power=max(0,min(SpellCap(skill),power));

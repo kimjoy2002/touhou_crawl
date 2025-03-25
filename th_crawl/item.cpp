@@ -42,7 +42,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 
 
 item::item()
-:name("없음",true), second_name("",true), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
+:name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
 can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 atifact_vector()
@@ -265,9 +265,9 @@ string item::GetName(int num_)
 			sprintf_s(temp2, 20,"%c%d ",value4>=0?'+':'-',abs(value4));
 			temp += temp2;
 		}
-		else if(!value6 && second_name.name.size())
+		else if(!value6 && !second_name.isEmpty())
 		{
-			temp += second_name.name;
+			temp += second_name.getName() + " ";
 		}
 	}
 	if(type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST)
@@ -278,9 +278,9 @@ string item::GetName(int num_)
 			sprintf_s(temp2,10,"%c%d ",value4>=0?'+':'-',abs(value4));
 			temp += temp2;
 		}
-		else if(second_name.name.size())
+		else if(!second_name.isEmpty())
 		{
-			temp += second_name.name;
+			temp += second_name.getName() + " ";
 		}
 	}
 
@@ -300,9 +300,9 @@ string item::GetName(int num_)
 			}
 			temp += iden_list.ring_list[value1].iden == 2 ?ring_iden_string[value1]:ring_uniden_string[iden_list.ring_list[value1].type];	
 		}
-		else if(second_name.name.size())
+		else if(!second_name.isEmpty())
 		{
-			temp += second_name.name;
+			temp += second_name.getName() + " ";
 		}
 	}
 	
@@ -323,7 +323,7 @@ string item::GetName(int num_)
 	{
 		temp += GetBrandString((weapon_brand)value5, false);
 	}
-	temp += name.name;
+	temp += name.getName();
 	if (type == ITM_AMULET)
 	{
 		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_OCCULT && value3 > 0) {
@@ -413,10 +413,17 @@ string item::GetName(int num_)
 
 
 	if (type == ITM_BOOK && !iden_list.books_list[value0]) {
-		temp = second_name.name ;
+		temp = second_name.getName() + " ";
 	}
 
 	return temp;
+}
+
+string item::GetNameString() {
+	if(type == ITM_BOOK && !identify)
+		return second_name.getName();
+	else
+		return name.getName();
 }
 
 name_infor item::GetNameInfor()
@@ -496,7 +503,7 @@ const D3DCOLOR item::item_color()
 		}
 		break;
 	}
-	if(((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && second_name.name.size() && !identify)
+	if(((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && !second_name.isEmpty() && !identify)
 	{
 		return_ = CL_white_blue;
 	}
@@ -1225,48 +1232,35 @@ bool item::offsetmove(const coord_def &c)
 }
 
 
-const char* GetItemTypeSting(item_type_simple type)
+string GetItemTypeSting(item_type_simple type)
 {
 	switch(type)
 	{
 	case ITMS_WEAPON:
-		return item_weapon_string;
-		break;
+		return LocalzationManager::locString(item_weapon_string);
 	case ITMS_THROW:
-		return item_throw_string;
-		break;
+		return LocalzationManager::locString(item_throw_string);
 	case ITMS_ARMOR:
-		return item_armor_string;
-		break;
+		return LocalzationManager::locString(item_armor_string);
 	case ITMS_POTION:
-		return item_potion_string;
-		break;
+		return LocalzationManager::locString(item_potion_string);
 	case ITMS_FOOD:
-		return item_food_string;
-		break;
+		return LocalzationManager::locString(item_food_string);
 	case ITMS_SCROLL:
-		return item_scroll_string;
-		break;
+		return LocalzationManager::locString(item_scroll_string);
 	case ITMS_SPELL:
-		return item_spell_string;
-		break;
+		return LocalzationManager::locString(item_spell_string);
 	case ITMS_JEWELRY:
-		return item_jewelry_string;
-		break;
+		return LocalzationManager::locString(item_jewelry_string);
 	case ITMS_BOOK:
-		return item_book_string;
-		break;
+		return LocalzationManager::locString(item_book_string);
 	case ITMS_MISCELLANEOUS:
-		return item_miscellaneous_string;
-		break;
+		return LocalzationManager::locString(item_miscellaneous_string);
 	case ITMS_GOAL:
-		return item_goal_string;
-		break;
+		return LocalzationManager::locString(item_goal_string);
 	case ITMS_OTHER:
-		return item_other_string;
-		break;
+		return LocalzationManager::locString(item_other_string);
 	default:
-		return item_miscellaneous_string;
-		break;
+		return LocalzationManager::locString(item_miscellaneous_string);
 	}
 }

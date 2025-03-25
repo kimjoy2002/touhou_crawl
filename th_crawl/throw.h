@@ -29,7 +29,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_ = VT_NORMAL, int 
 
 int GetTanmacGraphicType(tanmac_type type);
 textures* GetTanmacBaseGraphic(int type);
-name_infor GetTanmacString(int type);
+LOCALIZATION_ENUM_KEY GetTanmacKey(int type);
 attack_type GetTanmacAttackType(tanmac_type type);
 attack_type GetWeapontoTanmac(weapon_brand brand);
 bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_);

@@ -13,6 +13,8 @@
 #include <list>
 #include "enum.h"
 
+using namespace std;
+
 class textures;
 
 

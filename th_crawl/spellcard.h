@@ -23,7 +23,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 
 float SpellcardSector(spellcard_evoke_type skill);
 void createSpellCard(int goodbad, int select_, item_infor* t);
-const char* SpellcardName(spellcard_evoke_type skill);
+std::string SpellcardName(spellcard_evoke_type skill);
 int SpellcardMaxCharge(spellcard_evoke_type skill);
 
 bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* order, name_infor bomb_name, coord_def target);

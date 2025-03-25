@@ -101,7 +101,7 @@ int caculScore()
 	{ //클리어 했다.
 		base += 6250000000 * (rune_*rune_) / (you.turn + 80000);
 	}
-	if(!you.GetCharNameString()->empty()) //캐릭터 패널티
+	if(you.char_type != UNIQ_START_NONE) //캐릭터 패널티
 	{		
 		base*=0.7;
 	}
@@ -127,7 +127,7 @@ bool Dump(int type, string *filename_)
 
 	sprintf_s(filename, 100, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
 		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
-		you.user_name.name.c_str(),
+		you.user_name.c_str(),
 		1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 
 
@@ -152,7 +152,7 @@ bool Dump(int type, string *filename_)
 		{
 			fprintf_s(fp, "*세이브 보존*\n");
 		}
-		fprintf_s(fp, "%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.user_name.name.c_str(), you.GetHp(), you.GetMaxHp());
+		fprintf_s(fp, "%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), you.user_name.c_str(), you.GetHp(), you.GetMaxHp());
 		fprintf_s(fp, "             %s에서 ", CurrentLevelString());
 		switch (you.dead_reason)
 		{
@@ -164,7 +164,7 @@ bool Dump(int type, string *filename_)
 				strncat(death_reason, temp_reason, 64);
 				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason, 64, ",%s", you.dead_order->order->GetName()->name.c_str());
+					sprintf_s(temp_reason, 64, ",%s", you.dead_order->order->GetName()->getName().c_str());
 					strncat(death_reason, temp_reason, 64);
 
 				}
@@ -177,7 +177,7 @@ bool Dump(int type, string *filename_)
 			{
 				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
 					strncat(death_reason, temp_reason, 64);
 				}
 				switch (you.dead_order->type)
@@ -351,7 +351,7 @@ bool Dump(int type, string *filename_)
 			{
 				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
 					strncat(death_reason, temp_reason, 64);
 					strncat(death_reason, "의 ", 64);
 				}
@@ -373,7 +373,7 @@ bool Dump(int type, string *filename_)
 		case DR_SLEEP:
 			if (you.dead_order || you.dead_order->order)
 			{
-				sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->name.c_str());
+				sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
 				strncat(death_reason, temp_reason, 64);
 				strncat(death_reason, "에 의해 ", 64);
 			}
@@ -402,14 +402,14 @@ bool Dump(int type, string *filename_)
 		fprintf_s(fp, "%s\n             ", death_reason);
 		fprintf_s(fp, "최종턴 %d\n\n", you.turn);
 
-		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.name.c_str(), you.level, caculScore(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), death_reason,
-			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
+		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason,
+			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god).c_str(), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
 		);
 
 
 	}
 
-	fprintf_s(fp, "%s (%s %s %s)      턴: %d      ", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str(), you.turn);
+	fprintf_s(fp, "%s (%s %s %s)      턴: %d      ", you.user_name.c_str(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), you.turn);
 
 
 
@@ -420,15 +420,15 @@ bool Dump(int type, string *filename_)
 	}
 	else if (you.god == GT_MIKO)
 	{
-		fprintf_s(fp, "신앙: %s (인기도 %d%%)\n\n", GetGodString(you.god), you.piety / 2);
+		fprintf_s(fp, "신앙: %s (인기도 %d%%)\n\n", GetGodString(you.god).c_str(), you.piety / 2);
 	}
 	else if (you.god == GT_TENSI)
 	{
-		fprintf_s(fp, "신앙: %s\n\n", GetGodString(you.god));
+		fprintf_s(fp, "신앙: %s\n\n", GetGodString(you.god).c_str());
 	}
 	else
 	{
-		fprintf_s(fp, "신앙: %s %c%c%c%c%c%c\n\n", GetGodString(you.god), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
+		fprintf_s(fp, "신앙: %s %c%c%c%c%c%c\n\n", GetGodString(you.god).c_str(), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
 	}
 	fprintf_s(fp, "HP: %4d/%4d             AC:%4d             힘  :%4d\n", you.GetHp(), you.GetMaxHp(), you.ac, you.s_str);
 	if (!you.pure_mp)
@@ -538,7 +538,7 @@ bool Dump(int type, string *filename_)
 		{
 			if(first_rune_ !=0)
 				fprintf_s(fp,", ");
-			fprintf_s(fp,"%s",rune_string[i]);
+			fprintf_s(fp,"%s",LocalzationManager::locString(rune_string[i]).c_str());
 			first_rune_++;
 		}
 	}
@@ -587,7 +587,7 @@ bool Dump(int type, string *filename_)
 				int equip = you.isequip(it);
 				if(!exist)
 				{
-					fprintf_s(fp,"\n%s\n",GetItemTypeSting(i));
+					fprintf_s(fp,"\n%s\n",GetItemTypeSting(i).c_str());
 					exist = true;
 				}
 				fprintf_s(fp,"  %c - %s",(*it).id,(*it).GetName().c_str());
@@ -824,16 +824,16 @@ void makeAsciiDump(map<char, list<string >> *monster_list, char map_[17][17]) {
 									list<string> new_list;
 
 									if (target_mon->isUserAlly())
-										new_list.push_back(target_mon->name.name+"♡");
+										new_list.push_back(target_mon->name.getName()+"♡");
 									else 
-										new_list.push_back(target_mon->name.name);
+										new_list.push_back(target_mon->name.getName());
 									(*monster_list)[mon_dot] = new_list;
 								}
 								else {
 									if (target_mon->isUserAlly())
-										it->second.push_back(target_mon->name.name + "♡");
+										it->second.push_back(target_mon->name.getName() + "♡");
 									else
-										it->second.push_back(target_mon->name.name);
+										it->second.push_back(target_mon->name.getName());
 								}
 							}
 						}

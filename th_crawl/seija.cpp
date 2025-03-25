@@ -37,7 +37,7 @@ bool seija_gift()
 		//you.PunishUpDown(30, you.god , true);
 	
 		char temp[200];
-		sprintf_s(temp,200,"%s로부터 버려졌다.",GetGodString(you.god));
+		sprintf_s(temp,200,"%s로부터 버려졌다.",GetGodString(you.god).c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
 
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)

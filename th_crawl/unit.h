@@ -21,21 +21,27 @@ class monster;
 
 class name_infor
 {
+private:
+	monster_index name_key = MON_NONE_MONSTER;
+	LOCALIZATION_ENUM_KEY system_key = LOC_NONE;
+	monster_index name_param = MON_NONE_MONSTER;
+	LOCALIZATION_ENUM_KEY param = LOC_NONE;
+	string postfix; //로컬라이징과 상관없어야함
 public:
-	monster_index name_key;
-	string name;
-	bool name_type;
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	const char* name_is(bool blank=false)/*은는*/const{return (name_type?(blank?"은 ":"은"):(blank?"는 ":"는"));}
-	const char* name_to(bool blank=false)/*을를*/const{return (name_type?(blank?"을 ":"을"):(blank?"를 ":"를"));}
-	const char* name_do(bool blank=false)/*이가*/const{return (name_type?(blank?"이 ":"이"):(blank?"가 ":"가"));}
-	const char* name_and(bool blank=false)/*과와*/const{return (name_type?(blank?"과 ":"과"):(blank?"와 ":"와"));}
-	const char* name_by(bool blank=false)/*으로로*/const{return (name_type?(blank?"으로 ":"으로"):(blank?"로 ":"로"));}
+	name_infor(){};
 	name_infor(monster_index name_key){this->name_key=name_key;}
-	name_infor(string name_ = "없음", bool name_type_ = true){name=name_;name_type=name_type_;}
-	name_infor(const name_infor &t){name=t.name;name_type=t.name_type;}
-	string getName(){return name;};
+	name_infor(monster_index name_key, monster_index name_param){this->name_key=name_key; this->name_param = name_param;}
+	name_infor(monster_index name_key, LOCALIZATION_ENUM_KEY param){this->name_key=name_key; this->param = param;}
+	name_infor(LOCALIZATION_ENUM_KEY system_key){this->system_key=system_key;}
+	name_infor(LOCALIZATION_ENUM_KEY system_key, monster_index name_param){this->system_key=system_key; this->name_param = name_param;}
+	name_infor(LOCALIZATION_ENUM_KEY system_key, LOCALIZATION_ENUM_KEY param){this->system_key=system_key; this->param = param;}
+	name_infor(const name_infor &t){name_key=t.name_key;system_key=t.system_key;name_param=t.name_param;param=t.param;}
+	string getName() const;
+
+	void addPostFix(string postfix) {this->postfix+=postfix;}
+	bool isEmpty() {return (system_key == LOC_NONE && name_key == MON_NONE_MONSTER);} 
 };
 
 struct attack_infor
@@ -73,7 +79,7 @@ public:
 
 	unit():position(0,0){};
 	virtual const name_infor* GetName()=0;
-	virtual const string* GetNameString()=0;
+	virtual string GetNameString()=0;
 	virtual int GetHp()=0;
 	virtual int GetMaxHp()=0;	
 	virtual int GetAttack(bool max_)=0;

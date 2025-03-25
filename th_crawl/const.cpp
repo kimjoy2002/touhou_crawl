@@ -10,211 +10,153 @@
 #include "const.h"
 #include "unit.h"
 
-const char *tribe_type_string[TRI_MAX]=
+LOCALIZATION_ENUM_KEY tribe_type_string[TRI_MAX]=
 {
-	"인간",
-	"마녀",
-	"요정",
-	"카라스텐구",
-	"백랑텐구",
-	"캇파",
-	"네코마타",
-	"용궁의사자",
-	"츠쿠모가미",
-	"오니",
-	"반요",
-	"망령",
-	"흡혈귀",
-	"요괴"
-};
-const bool tribe_string_back[TRI_MAX]=
-{
-	true,
-	false,
-	true,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	true,
-	false,
-	false
+	LOC_SYSTEM_TRIBE_HUMAN,
+	LOC_SYSTEM_TRIBE_WIZARD,
+	LOC_SYSTEM_TRIBE_FAIRY,
+	LOC_SYSTEM_TRIBE_CROWTENGU,
+	LOC_SYSTEM_TRIBE_WOLFTENGU,
+	LOC_SYSTEM_TRIBE_KAPPA,
+	LOC_SYSTEM_TRIBE_NECOMATA,
+	LOC_SYSTEM_TRIBE_OARFISH,
+	LOC_SYSTEM_TRIBE_CHEUKUMOGAMI,
+	LOC_SYSTEM_TRIBE_ONI,
+	LOC_SYSTEM_TRIBE_HALFYOUKAI,
+	LOC_SYSTEM_TRIBE_WRAITH,
+	LOC_SYSTEM_TRIBE_VAMPIRE,
+	LOC_SYSTEM_TRIBE_YOUKAI
 };
 
 
-const char *job_type_string[JOB_MAX]=
+LOCALIZATION_ENUM_KEY job_type_string[JOB_MAX]=
 {
-	"전사",
-	"마법사",
-	"무녀",
-	"검투사",
-	"격투가",
-	"마전사",
-	"광전사",
-	"화염술사",
-	"냉기술사",
-	"대지술사",
-	"대기술사",
-	////"수술사",
-	"소환술사",
-	//"독술사",
-	//"전기술사",
-	"연금술사",
-	"심리학자",
-	"사신",
-	"광신도",
-	"암살자",
-	"농부",
-	"메이드",
-	"기술자",
-	"실종자"
+	LOC_SYSTEM_JOB_WARRIOR,
+	LOC_SYSTEM_JOB_WIZARD,
+	LOC_SYSTEM_JOB_SHAMAN,
+	LOC_SYSTEM_JOB_GLADIATOR,
+	LOC_SYSTEM_JOB_MONK,
+	LOC_SYSTEM_JOB_CRUSADER,
+	LOC_SYSTEM_JOB_BERSERKER,
+	LOC_SYSTEM_JOB_FIRE_WIZARD,
+	LOC_SYSTEM_JOB_COLD_WIZARD,
+	LOC_SYSTEM_JOB_EARTH_WIZARD,
+	LOC_SYSTEM_JOB_AIR_WIZARD,
+	LOC_SYSTEM_JOB_SUMMON_WIZARD,
+	LOC_SYSTEM_JOB_ALCHEMIST,
+	LOC_SYSTEM_JOB_PSYCHOLOGIST,
+	LOC_SYSTEM_JOB_REAPER,
+	LOC_SYSTEM_JOB_FANATIC,
+	LOC_SYSTEM_JOB_ASSASSIN,
+	LOC_SYSTEM_JOB_FARMER,
+	LOC_SYSTEM_JOB_MADE,
+	LOC_SYSTEM_JOB_ENGINEER,
+	LOC_SYSTEM_JOB_MISSING
 };
 
-const bool job_string_back[JOB_MAX]=
+LOCALIZATION_ENUM_KEY dungeon_tile_tribe_type_string[]=
 {
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false
+	LOC_SYSTEM_TILE_UNKNOWN,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,//5
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,//10
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_SYSTEM_TILE_FLOOR,
+	LOC_EMPTYSTRING,
+	LOC_SYSTEM_TILE_OPEN_DOOR,//15
+	LOC_SYSTEM_TILE_STAIR_DOWN,
+	LOC_SYSTEM_TILE_STAIR_UP,
+	LOC_SYSTEM_TILE_STAIR_TEMPLE,
+	LOC_SYSTEM_TILE_STAIR_MISTY_LAKE,
+	LOC_SYSTEM_TILE_STAIR_YOUKAI_MOUNTAIN,
+	LOC_SYSTEM_TILE_STAIR_SCARLET,
+	LOC_SYSTEM_TILE_STAIR_LIBRARY,
+	LOC_SYSTEM_TILE_STAIR_SCARLET_UNDER,
+	LOC_SYSTEM_TILE_STAIR_BAMBOO,
+	LOC_SYSTEM_TILE_STAIR_EIENTEI,
+	LOC_SYSTEM_TILE_STAIR_SUBTERRANEAN,
+	LOC_SYSTEM_TILE_STAIR_YUKKURI,
+	LOC_SYSTEM_TILE_STAIR_DEPTH,
+	LOC_SYSTEM_TILE_STAIR_DREAM,
+	LOC_SYSTEM_TILE_STAIR_MOON,
+	LOC_SYSTEM_TILE_STAIR_PANDEMONIUM,
+	LOC_SYSTEM_TILE_STAIR_HAKUREI,
+	LOC_SYSTEM_TILE_STAIR_ZIGURRAT,
+	LOC_SYSTEM_TILE_STAIR_RETURN,
+	LOC_SYSTEM_TILE_TEMPLE_JOON_AND_SION,
+	LOC_SYSTEM_TILE_TEMPLE_BYAKUREN,
+	LOC_SYSTEM_TILE_TEMPLE_KANAKO,
+	LOC_SYSTEM_TILE_TEMPLE_SUWAKO,
+	LOC_SYSTEM_TILE_TEMPLE_MINORIKO,
+	LOC_SYSTEM_TILE_TEMPLE_MIMA,
+	LOC_SYSTEM_TILE_TEMPLE_SHINKI,
+	LOC_SYSTEM_TILE_TEMPLE_YUUGI,
+	LOC_SYSTEM_TILE_TEMPLE_SHIZUHA,
+	LOC_SYSTEM_TILE_TEMPLE_HINA,
+	LOC_SYSTEM_TILE_TEMPLE_YUKARI,
+	LOC_SYSTEM_TILE_TEMPLE_EIRIN,
+	LOC_SYSTEM_TILE_TEMPLE_YUYUKO,
+	LOC_SYSTEM_TILE_TEMPLE_SATORI,
+	LOC_SYSTEM_TILE_TEMPLE_TENSI,
+	LOC_SYSTEM_TILE_TEMPLE_SEIJA,
+	LOC_SYSTEM_TILE_TEMPLE_LILLY,
+	LOC_SYSTEM_TILE_TEMPLE_MIKO,
+	LOC_SYSTEM_TILE_TEMPLE_OKINA,
+	LOC_SYSTEM_TILE_TEMPLE_JUNKO,
+	LOC_EMPTYSTRING,
+	LOC_EMPTYSTRING,
+	LOC_EMPTYSTRING,
+	LOC_EMPTYSTRING,
+	LOC_EMPTYSTRING,
+
+
+	LOC_SYSTEM_TILE_STONE_WALL,//60
+	LOC_SYSTEM_TILE_STONE_WALL,
+	LOC_SYSTEM_TILE_RED_WALL,
+	LOC_SYSTEM_TILE_BOOK_WALL,
+	LOC_SYSTEM_TILE_BAMBOO_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_PANDEMONIUM_WALL,
+	LOC_SYSTEM_TILE_WOOD,
+	LOC_SYSTEM_TILE_SUNFLOWER,
+	LOC_SYSTEM_TILE_HELL_WALL,
+	LOC_SYSTEM_TILE_IRON_WALL,
+	LOC_SYSTEM_TILE_WALL,
+	LOC_SYSTEM_TILE_WALL,
+	LOC_SYSTEM_TILE_CLOSE_DOOR,
+	LOC_SYSTEM_TILE_GRASS,
+	LOC_SYSTEM_TILE_STATUE,
+	LOC_SYSTEM_TILE_BUDDHA_STATUE,
+	LOC_SYSTEM_TILE_DEEP_WATER,
+	LOC_SYSTEM_TILE_LAVA
 };
 
-
-extern const char *dungeon_tile_tribe_type_string[]=
-{
-	"알수없음",
-	"지면",
-	"지면",
-	"지면",
-	"지면",
-	"지면",//5
-	"지면",
-	"지면",
-	"지면",
-	"지면",
-	"지면",//10
-	"지면",
-	"지면",
-	"지면",
-	"",
-	"열린문",//15
-	"내려가는 계단",
-	"올라가는 계단",
-	"모든 신전으로 가는 계단",
-	"안개호수로 가는 계단",
-	"요괴의 산으로 가는 계단",
-	"홍마관으로 가는 계단",
-	"도서관으로 가는 계단",
-	"지하실로 가는 계단",
-	"미궁의 죽림을 가는 길",
-	"영원정으로 가는 계단",
-	"지저로 가는 구멍",	
-	"윳쿠리 둥지로 가는 계단",
-	"짐승길로 향하는 길",
-	"꿈의 세계로 가는 포탈",
-	"달의 도시로 가는 길",
-	"마계로 가는 포탈",
-	"하쿠레이 신사의 계단",
-	"광몽의 세계로 가는 포탈",
-	"입구로 돌아가는 계단",
-	"죠온&시온의 최악최흉 제단",
-	"뱌쿠렌의 명련사 제단",
-	"카나코의 분사 제단",
-	"스와코의 미샤구지 제단",
-	"미노리코의 풍요 제단",
-	"미마의 악령 제단",
-	"신키의 마신 제단",
-	"유우기의 괴력난신 제단",
-	"시즈하의 단풍 제단",
-	"히나의 재액 제단",
-	"유카리의 스키마 제단",
-	"에이린의 비약 제단",
-	"유유코의 요괴벚꽃 제단",
-	"사토리의 제3의눈 제단",
-	"텐시의 요석 제단",
-	"세이자의 뒤집힌 제단",	
-	"릴리의 해바라기 제단",
-	"미코의 쇼토쿠 제단",
-	"오키나의 백도어 제단",
-	"순호의 신령 제단",
-	"",
-	"",
-	"",
-	"",
-	"",
-
-
-	"돌벽",//60
-	"돌벽",
-	"붉은벽",
-	"책장",
-	"밀집된대나무",
-	"마계벽",
-	"마계벽",
-	"마계벽",
-	"마계벽",
-	"마계벽",
-	"마계벽",
-	"마계벽",
-	"나무",
-	"해바라기",
-	"지옥벽",
-	"철벽",
-	"벽",
-	"벽",
-	"닫힌문",
-	"유리",
-	"석상",
-	"지상보살상",
-	"깊은물",
-	"용암"
-};
-
-const char *state_string[] = 
-{
-	"아사",
-	"아사직전",
-	"배고픔",
-	"허기",
-	"", //이 부분은 표시되지않는다.
-	"배부름",
-	"포식",
-	"과식"
-};
-
-const char *rune_string[] =
+LOCALIZATION_ENUM_KEY rune_string[] =
 {	
-	"홍마관",
-	"요괴산",
-	"플랑드르",
-	"윳쿠리",
-	"영원정",
-	"지저",
-	"달",
-	"법계",
-	"빙결세계",
-	"판데모니엄",
-	"음양옥"
+	LOC_SYSTEM_ITEM_RUNE_SCARLET,
+	LOC_SYSTEM_ITEM_RUNE_YOUKAI_MOUNTAIN,
+	LOC_SYSTEM_ITEM_RUNE_FLANDRE,
+	LOC_SYSTEM_ITEM_RUNE_YUKKURI,
+	LOC_SYSTEM_ITEM_RUNE_EIENTEI,
+	LOC_SYSTEM_ITEM_RUNE_SUBTERRANEAN,
+	LOC_SYSTEM_ITEM_RUNE_MOON,
+	LOC_SYSTEM_ITEM_RUNE_HOKKAI,
+	LOC_SYSTEM_ITEM_RUNE_FROZEN_FIELD,
+	LOC_SYSTEM_ITEM_RUNE_PANDEMONIUM,
+	LOC_SYSTEM_ITEM_YINYANG
 };
 
 const D3DCOLOR CL_normal = D3DCOLOR_RGBA(255, 255, 255, 255);
@@ -253,21 +195,21 @@ const D3DCOLOR CL_joon_and_sion = D3DCOLOR_RGBA(255, 200, 0, 200);
 const D3DCOLOR CL_joon = D3DCOLOR_RGBA(255, 255, 0, 255);
 const D3DCOLOR CL_sion = D3DCOLOR_RGBA(50, 50, 255, 255);
 
-const name_infor string_that("그것",true);
-const name_infor string_something("무언가",false);
+const name_infor string_that(LOC_SYSTEM_THAT);
+const name_infor string_something(LOC_SYSTEM_SOMETHING);
 
-const char *item_weapon_string = "무기";
-const char *item_throw_string = "탄막";
-const char *item_armor_string = "방어구";
-const char *item_potion_string = "물약";
-const char *item_food_string = "음식";
-const char *item_scroll_string = "두루마리";
-const char *item_spell_string = "스펠카드";
-const char *item_jewelry_string = "장신구";
-const char *item_book_string = "책";
-const char *item_miscellaneous_string = "발동";
-const char *item_goal_string = "중요";
-const char *item_other_string = "기타";
+LOCALIZATION_ENUM_KEY item_weapon_string = LOC_SYSTEM_ITEM_CATEGORY_WEAPON;
+LOCALIZATION_ENUM_KEY item_throw_string = LOC_SYSTEM_ITEM_CATEGORY_TANMAC;
+LOCALIZATION_ENUM_KEY item_armor_string = LOC_SYSTEM_ITEM_CATEGORY_ARMOUR;
+LOCALIZATION_ENUM_KEY item_potion_string = LOC_SYSTEM_ITEM_CATEGORY_POTION;
+LOCALIZATION_ENUM_KEY item_food_string = LOC_SYSTEM_ITEM_CATEGORY_FOOD;
+LOCALIZATION_ENUM_KEY item_scroll_string = LOC_SYSTEM_ITEM_CATEGORY_SCROLL;
+LOCALIZATION_ENUM_KEY item_spell_string = LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD;
+LOCALIZATION_ENUM_KEY item_jewelry_string = LOC_SYSTEM_ITEM_CATEGORY_JEWELRY;
+LOCALIZATION_ENUM_KEY item_book_string = LOC_SYSTEM_ITEM_CATEGORY_BOOK;
+LOCALIZATION_ENUM_KEY item_miscellaneous_string = LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE;
+LOCALIZATION_ENUM_KEY item_goal_string = LOC_SYSTEM_ITEM_CATEGORY_GOAL;
+LOCALIZATION_ENUM_KEY item_other_string = LOC_SYSTEM_ITEM_CATEGORY_OTHER;
 
 
 

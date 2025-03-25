@@ -9,6 +9,11 @@
 #ifndef  __TENSI_H__
 #define  __TENSI_H__
 
+#include <iostream>
+
+using namespace std;
+
+
 enum tensi_do_list
 {
 	TENSI_NOTHING,
@@ -48,7 +53,7 @@ int GetChoas(unit* unit_, int damage_);
 int GetHazard(); //현재의 위험도를 계산
 void tensi_action();
 
-const char* tensi_talk(bool good_, tensi_do_list list_);
+string tensi_talk(bool good_, tensi_do_list list_);
 
 
 #endif // __TENSI_H__

@@ -35,7 +35,7 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
-: map_id(-1), id(0), level(1), exper(0), name("없음",true), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
+: map_id(-1), id(0), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
 ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
@@ -53,6 +53,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, position.y);
 	SaveData<int>(fp, map_id);
 	SaveData<int>(fp, id);
+	SaveData<int>(fp, id2);	
 	SaveData<int>(fp, level);
 	SaveData<int>(fp, exper);
 	name.SaveDatas(fp);
@@ -167,6 +168,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, position.y);
 	LoadData<int>(fp, map_id);
 	LoadData<int>(fp, id);
+	LoadData<int>(fp, id2);
 	LoadData<int>(fp, level);
 	LoadData<int>(fp, exper);
 	name.LoadDatas(fp);
@@ -514,10 +516,8 @@ void monster::FirstContact()
 		printlog(temp,true,false,false,CL_danger);
 	}
 	if(flag & M_FLAG_UNIQUE && !(flag & M_FLAG_SUMMON) && id != MON_ENSLAVE_GHOST )
-	{		
-		char temp[200];
-		sprintf_s(temp,200,"네임드 %s%s 발견했다.",name.name.c_str(),name.name_to());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+	{
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_UNIQUE_FIND,PlaceHolderHelper(name.getName())),CL_normal);
 	}
 	first_contact = false;
 }
@@ -889,11 +889,11 @@ const name_infor* monster::GetName()
 		return &string_that;
 	return &name;
 }
-const string* monster::GetNameString()
+string monster::GetNameString()
 {
 	if(!isView())
-		return &(string_that.name);
-	return &(name.name);
+		return string_that.getName();
+	return name.getName();
 }
 bool monster::isFly()
 {
@@ -1077,75 +1077,103 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_STRONG_POISON:
 		case ATT_THROW_NONE_DAMAGE:
 		default:
-			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중했다. ");
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
 			break;
 		case ATT_SLEEP:
 			if (state.GetState() != MS_SLEEP)
 			{
 				if (a.order)
 				{
-					printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중했다. ");
-					
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 			else
 			{
 				if (a.order)
 				{
-					printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "의 꿈을 먹었다. ");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DREAM,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 			break;
 		case ATT_FIRE:
 		case ATT_FIRE_WEAK:
-			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 불타올랐다. ");
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
 			break;
 		case ATT_COLD:
 		case ATT_COLD_WEAK:
-			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 명중하고 얼어붙었다. ");
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
 			break;
 		case ATT_NORMAL_HIT:			
-			if(a.order)
-				printarray(false,false,false,CL_normal,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),"에게 들어갔다. ");
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_GERMAN_SUPLEX,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
 			break;
 		case ATT_SMITE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMITE,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
 		case ATT_SMASH:
 			if (a.order)
 			{
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMASH,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
 		case ATT_BLOOD:	
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 피가 터져나왔다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLOOD,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
 		case ATT_NOISE:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,3,"굉음이 ",GetName()->name.c_str(),"의 달팽이관을 강타했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NOISE,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
 		case ATT_CLOUD_FIRE:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_FIRE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_CLOUD_COLD:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_COLD,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;		
 		case ATT_CLOUD_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_ELEC,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;				
 		case ATT_STONE_TRAP:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STONE_TRAP,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;			
 		case ATT_FIRE_BLAST:
 		case ATT_COLD_BLAST: 
@@ -1156,53 +1184,71 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_POISON_BLAST:
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()),
+					PlaceHolderHelper(a.name.getName()));
 			}
 			break;
 		case ATT_SUN_BLAST:
 			if (a.order)
 			{
-				printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "에 의해 타들어갔다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SUN_BLAST,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()),
+					PlaceHolderHelper(a.name.getName()));
 			}
 			break;
 		case ATT_COLD_PYSICAL_BLAST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"눈보라에 휘말렸다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLLIZARD,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;			
 		case ATT_BURST:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BURST,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_CLOUD_NORMAL:
 		case ATT_CLOUD_CURSE:
 			break;
 		case ATT_VEILING:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람 갑옷에 베였다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_TWIST,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_RUSH:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"맞았다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_RUSH,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_WALL:			
 			if(a.order)
 			{
-				printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"부딪혔다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BUMP,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()),
+					PlaceHolderHelper(name_.getName()));
 			}
 			else
 			{
-				printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BUMP_WALL,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
 		case ATT_PSYCHO:
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_PSYCHO,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_ELEC:
 		case ATT_ELEC_WEAK:
-			if (a.order)
-				printarray(false, false, false, CL_normal, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), GetName()->name.c_str(), "에게 명중하고 감전되었다. ");
+			if (a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ELEC,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
 			break;
-		case ATT_THROW_ELEC:
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+		case ATT_THROW_ELEC: 
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_THROW_ELEC,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_DROWNING:
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING_MONSTER,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 			break;
 		case ATT_THROW_NONE_MASSAGE:
 			break;
@@ -1214,30 +1260,44 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		{
 			if(a.type == ATT_SLEEP && state.GetState() == MS_SLEEP)
 			{
-				printarray(false, false, false, CL_normal , 4, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), "의 꿈을 먹었다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DREAM,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				return;
 			}
 			switch(a.order->GetAttackType())
 			{	
 			case AWT_SHORTBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 꿰뚫었다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_SHORTBLADE,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case AWT_LONGBLADE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 잘라냈다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_LONGBLADE,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case AWT_MACE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 내리쳤다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_MACE,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case AWT_AXE:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 찍었다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_AXE,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case AWT_SPEAR:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),name.name.c_str(),name.name_to(true),"뒤에서 꿰뚫었다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_SPEAR,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case AWT_UNARMOUR:
 			case AWT_NONE:
 			default:
-				printarray(false,false,false,CL_normal,5,name_.name.c_str(),name_.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"뒤에서 기습했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STAB_OTHER,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			}
 		}
@@ -1277,7 +1337,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_THROW_ELEC:
 	case ATT_NORMAL_HIT:	
 	default:
-		printlog("그러나 아무런 데미지도 주지 못했다",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NO_DAMAGE),true,false,false,CL_normal);
 		break;
 	case ATT_CLOUD_FIRE:
 	case ATT_CLOUD_COLD:
@@ -1414,9 +1474,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				{
 					if(sight_ || only_invisible_)
 					{
-						char temp[128];
-						sprintf_s(temp,128,"%s%s %s%s 감쌌다!",it->GetName()->name.c_str(),it->GetName()->name_is(), GetName()->name.c_str(),GetName()->name_to());
-						printlog(temp,true,false,false,CL_magic);
+						printlog(LocalzationManager::formatString(LOC_SYSTEM_FRIEND_SHIELD, 
+							PlaceHolderHelper(it->GetName()->getName()),
+							PlaceHolderHelper(GetName()->getName())),true,false,false,CL_magic);
 					}
 					PositionSwap(&(*it));
 					return it->damage(a,perfect_);
@@ -1429,7 +1489,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		{ //20%의 확률로 공격을 무효하고 블링크			
 			if(sight_ || only_invisible_)
 			{
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),name.name_is(true),"지장으로 변화하여 공격을 피했다!");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAMIZO_EVADE,true,false,false,CL_magic,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 			Blink(10);
 			return false;
@@ -1469,8 +1530,11 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				if(a.order)
 				{
 					a.order->HpUpDown(damage_/3,DR_EFFECT);	
-					if(sight_ || only_invisible_)
-						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true), GetName()->name.c_str(),"의 체력을 흡수했다.");
+					if(sight_ || only_invisible_) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_VAMP,true,false,false,CL_normal,
+							PlaceHolderHelper(a.order->GetName()->getName()),
+							PlaceHolderHelper(GetName()->getName()));
+					}
 			
 				}
 			}
@@ -1507,7 +1571,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1531,22 +1595,25 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				{
 					if (sight_) {
 						{
-							char* c_ = Get_Speak(id, this, MST_DEAD);
-							if (c_)
-								printlog(c_, true, false, false, CL_normal);
+							string str_ = Get_Speak(id, this, MST_DEAD);
+							if (!str_.empty())
+								printlog(str_, true, false, false, CL_normal);
 						}
 
 						if (id == MON_REIMU) {
-							printarray(true, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "틈새속으로 사라졌다.");
+							LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_REIMU,true,false,false,CL_danger,
+								PlaceHolderHelper(GetName()->getName()));
 						}
 						else {
-							printarray(true, false, false, CL_danger, 5, name_.name.c_str(), name_.name_is(true), GetName()->name.c_str(), GetName()->name_to(true), flag & M_FLAG_INANIMATE ? "파괴되었다. " : "죽었다. ");
+							LocalzationManager::printLogWithKey(flag & M_FLAG_INANIMATE ?LOC_SYSTEM_KILL_INANIMATE : LOC_SYSTEM_KILL_NORMAL,true,false,false,CL_danger,
+								PlaceHolderHelper(name_.getName()),
+								PlaceHolderHelper(GetName()->getName()));
 						}
 
 					}
 					else if(a.p_type == PRT_PLAYER || a.p_type == PRT_ALLY)
 					{
-						printlog("경험이 증가하는 것을 느꼈다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GAIN_EXPERIENCE),true,false,false,CL_normal);
 						if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 							auto_pick_onoff(true);
 					}
@@ -1637,7 +1704,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(!confuse_resist)
 				{
-					printarray(false,false,false,CL_normal,3,"당신의 공격이 ",GetName()->name.c_str(),"의 허를 찔렀다! ");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CONFUSE_ATTACK,false,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 					SetConfuse(rand_int(2,4));
 				}
 			}
@@ -1657,10 +1725,18 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	{
 		if(a.order && (sight_ || only_invisible_))
 		{			
-			if(!graze_)
-				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"빗나갔다.");
-			else
-				printarray(true,false,false,CL_bad,7,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),GetName()->name.c_str(),GetName()->name_to(true),"그레이즈되었다.");
+			if(!graze_) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,true,false,false,CL_bad,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(GetName()->getName()));
+			}
+			else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,true,false,false,CL_bad,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(GetName()->getName()));
+			}
 		}
 		return false;
 	}
@@ -1936,11 +2012,12 @@ bool monster::OpenDoor(const coord_def &c)
 			{
 				if(env[current_level].isInSight(position))
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"문을 열었다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MONSTER_OPEN_DOOR,true,false,false,CL_normal,
+						 PlaceHolderHelper(GetName()->getName()));
 				}
 				else
 				{
-					printlog("문이 열렸다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SUDDENLY_OPEN_DOOR),true,false,false,CL_normal);
 				}
 				you.resetLOS();
 			}
@@ -2041,9 +2118,9 @@ int monster::atkmove(int is_sight, bool only_move)
 							else
 							{
 								enterlog();
-								char* c_ = Get_Speak(id, this, MST_MAGIC);
-								if (c_ && (env[current_level].isInSight(position)))
-									printlog(c_, true, false, false, CL_magic);
+								string str_ = Get_Speak(id, this, MST_MAGIC);
+								if (!str_.empty() && (env[current_level].isInSight(position)))
+									printlog(str_, true, false, false, CL_magic);
 							}
 						}
 						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
@@ -2219,21 +2296,29 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				soundmanager.playSound("kill");
 			}
 			{
-				char* c_ = Get_Speak(id, this, MST_DEAD);
-				if (c_)
-					printlog(c_, true, false, false, CL_normal);
+				string str_  = Get_Speak(id, this, MST_DEAD);
+				if (!str_.empty())
+					printlog(str_, true, false, false, CL_normal);
+			}
+			
+			if(id == MON_REIMU) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_REIMU,false,false,false,CL_danger,
+					PlaceHolderHelper(GetName()->getName()));
+			} else if(flag & M_FLAG_INANIMATE) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_INANIMATE,false,false,false,CL_danger,
+					PlaceHolderHelper(GetName()->getName()));
+			} else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_NORMAL,false,false,false,CL_danger,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 
-			printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), 
-				id == MON_REIMU ? "틈새속으로 사라졌다." : (flag & M_FLAG_INANIMATE ?"파괴되었다. ":"죽었다. "));
-
 			if ((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear == -1) {
-				printlog("전의상실한 적에겐 경험치를 받을 수 없다. ", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GAIN_NO_EXPERIENCE_WITH_FEAR), true, false, false, CL_normal);
 			}
 		}
 		else if((reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !(flag & M_FLAG_SUMMON) && s_fear != -1)
 		{
-			printlog("경험이 증가하는 것을 느꼈다. ",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GAIN_EXPERIENCE),true,false,false,CL_normal);
 			if(!isView() && env[current_level].isInSight(position) && (you.auto_pickup==0))
 				auto_pick_onoff(true);
 		}
@@ -2254,9 +2339,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			if(you.god_value[GT_YUYUKO][0] == map_id && you.god_value[GT_YUYUKO][1] == current_level)
 			{
-				char temp[200];
-				sprintf_s(temp,200,"%s%s죽었다.",name.name.c_str(),name.name_do(true));
-				AddNote(you.turn,CurrentLevelString(),temp,CL_yuyuko);
+				AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ENSLAVE_DEAD,PlaceHolderHelper(name.getName())),CL_yuyuko);
 				you.god_value[GT_YUYUKO][0] = 0;
 				you.god_value[GT_YUYUKO][1] = 0;
 			}
@@ -2266,7 +2349,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				sprintf_s(temp,200,"you god_value(%d, %d) mon value(%d, %d)",
 					you.god_value[GT_YUYUKO][0] ,you.god_value[GT_YUYUKO][1],
 					map_id, current_level);
-				printarray(true,false,false,CL_danger,3,"※영혼구속 버그 : ",GetName()->name.c_str(), temp);
+				printarray(true,false,false,CL_danger,3,"※영혼구속 버그 : ",GetName()->getName().c_str(), temp);
 			}
 		}
 	}
@@ -2280,11 +2363,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			{				
 				if(it->isYourShight())
 				{
-					printarray(true,false,false,CL_small_danger,3,it->name.name.c_str(),it->name.name_is(true),"분노에 소리쳤다. 자신의 능력에 각성하였다!");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_BENYATH_RAGE,true,false,false,CL_small_danger,
+						PlaceHolderHelper(it->name.getName()));
 				}
 				else
 				{
-					printarray(true,false,false,CL_small_danger,1,"멀리서 분노에 찬 비명을 들었다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_BENYATH_RAGE_DISTANCE,true,false,false,CL_small_danger);
 				}
 				it->LevelUpdown(5,5.0f,0.0f);
 
@@ -2367,15 +2451,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
-			char temp[200];
-			sprintf_s(temp,200,"네임드 %s%s 죽였다.",name.name.c_str(),name.name_to());
-			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_UNIQUE_KILL,PlaceHolderHelper(name.getName())),CL_normal);
 		}
 		else
 		{
-			char temp[200];
-			sprintf_s(temp,200,"네임드 %s%s 죽었다.",name.name.c_str(),name.name_is());
-			AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_UNIQUE_DEAD,PlaceHolderHelper(name.getName())),CL_normal);
 
 		}
 	}
@@ -2415,13 +2495,16 @@ int monster::action(int delay_)
 			hp = 0;
 			if (id == MON_CLOSE_DOOR) {
 				env[current_level].changeTile(position, DG_CLOSE_DOOR);
-				if (is_sight)
-					printarray(true, false, false, CL_okina, 3, GetName()->name.c_str(), GetName()->name_is(true), "평범한 문으로 돌아왔다.");
+				if (is_sight) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_DOOR,true,false,false,CL_okina,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 			else {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 				if (is_sight && id != MON_TRASH) {
-					printarray(true, false, false, CL_bad, 3, GetName()->name.c_str(), GetName()->name_is(true), "연기 속으로 사라졌다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_SUMMON,true,false,false,CL_bad,
+						PlaceHolderHelper(GetName()->getName()));
 					soundmanager.playSound("kill_banashed");
 				}
 			}
@@ -2448,8 +2531,10 @@ int monster::action(int delay_)
 				s_poison = 0;
 			if(is_sight && isView())
 			{
-				if(!s_poison)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"독에서 회복되었다.");
+				if(!s_poison) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_RECORVER_POISON,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}	
 
@@ -2458,8 +2543,10 @@ int monster::action(int delay_)
 			s_might--;
 			if(is_sight && isView())
 			{
-				if(!s_might)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 힘이 강하지 않다.");
+				if(!s_might) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_STRONG,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if (s_clever)
@@ -2485,8 +2572,10 @@ int monster::action(int delay_)
 			s_haste--;
 			if(is_sight && isView())
 			{
-				if(!s_haste)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 빠르지 않다.");
+				if(!s_haste) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_HASTE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 
@@ -2496,8 +2585,10 @@ int monster::action(int delay_)
 			s_confuse--;
 			if(is_sight && isView())
 			{
-				if(!s_confuse)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"혼란스러움을 떨쳐냈다.");
+				if(!s_confuse) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_RECORVER_CONFUSE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_slow)
@@ -2505,8 +2596,10 @@ int monster::action(int delay_)
 			s_slow--;
 			if(is_sight && isView())
 			{
-				if(!s_slow)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 느리지 않다.");
+				if(!s_slow) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_SLOW,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_frozen)
@@ -2514,8 +2607,10 @@ int monster::action(int delay_)
 			s_frozen--;
 			if(is_sight && isView())
 			{
-				if(!s_frozen)
-					printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 얼음이 녹았다.");
+				if(!s_frozen) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_RECORVER_FROZEN,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}	
 		if(s_ally>0)
@@ -2523,8 +2618,10 @@ int monster::action(int delay_)
 			s_ally--;
 			if(is_sight && isView())
 			{
-				if(!s_ally)
-						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더이상 매료상태가 아니다.");
+				if(!s_ally) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_CHARM,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}	
 		
@@ -2537,8 +2634,10 @@ int monster::action(int delay_)
 			s_elec--;
 			if(is_sight && isView())
 			{
-				if(!s_elec)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전을 멈췄다.");
+				if(!s_elec) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_DISCHARGE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_paralyse)
@@ -2546,8 +2645,10 @@ int monster::action(int delay_)
 			s_paralyse--;
 			if(is_sight && isView())
 			{
-				if(!s_paralyse)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"다시 움직일 수 있게 되었다.");
+				if(!s_paralyse) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_RECORVER_PARALYSE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_glow)
@@ -2557,8 +2658,10 @@ int monster::action(int delay_)
 				s_glow--;
 				if (is_sight && isView())
 				{
-					if (!s_glow)
-						printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "빛나는 것을 멈췄다.");
+					if (!s_glow) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_GLOW,true,false,false,CL_normal,
+							PlaceHolderHelper(GetName()->getName()));
+					}
 				}
 			}
 		}
@@ -2572,8 +2675,10 @@ int monster::action(int delay_)
 			s_graze--;
 			if(is_sight && isView())
 			{
-				if(!s_graze)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 그레이즈를 하지 않는다.");
+				if(!s_graze) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_GRAZE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_sick)
@@ -2581,8 +2686,10 @@ int monster::action(int delay_)
 			s_sick--;
 			if(is_sight && isView())
 			{
-				if(!s_sick)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 아프지 않다.");
+				if(!s_sick) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_RECORVER_SICK,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}	
 		if(s_silence)
@@ -2600,8 +2707,10 @@ int monster::action(int delay_)
 	
 			if(is_sight && isView())
 			{
-				if(!s_silence)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"감싸는 정적이 사라졌다.");
+				if(!s_silence) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_SILENCE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_veiling)
@@ -2609,8 +2718,10 @@ int monster::action(int delay_)
 			s_veiling--;
 			if(is_sight && isView())
 			{
-				if(!s_veiling)
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"휘감던 바람이 사라졌다.");
+				if(!s_veiling) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_VEILING,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		if(s_invisible>0)
@@ -2621,11 +2732,14 @@ int monster::action(int delay_)
 			{
 				if(!s_invisible)
 				{
-					if(prev_view_)
-						printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"투명이 풀렸다.");
+					if(prev_view_) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_INVISIBLE,true,false,false,CL_normal,
+							PlaceHolderHelper(GetName()->getName()));
+					}
 					else
 					{
-						printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"투명이 풀리면서 모습을 드러냈다.");
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_INVISIBLE_AND_APPEAR,true,false,false,CL_small_danger,
+							PlaceHolderHelper(GetName()->getName()));
 						if(you.auto_pickup==0)
 							auto_pick_onoff(true);
 					}
@@ -2639,7 +2753,8 @@ int monster::action(int delay_)
 			{
 				if(!s_mute)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 벙어리가 아니다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_MUTE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 		}
@@ -2655,7 +2770,8 @@ int monster::action(int delay_)
 			{
 				if(!s_ghost)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 영혼이 붙잡혀있지않다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_ENSLAVE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 		}
@@ -2669,7 +2785,8 @@ int monster::action(int delay_)
 			{
 				if(!s_lunatic)
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더 이상 미치지 않았다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_LUNATIC,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 		}
@@ -2686,10 +2803,14 @@ int monster::action(int delay_)
 			{
 				if(!force_turn)
 				{
-					if(force_strong)
-						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 강화가 끝났다. ");
-					else
-						printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 약화가 끝났다. ");
+					if(force_strong) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_FORCE,false,false,false,CL_normal,
+							PlaceHolderHelper(GetName()->getName()));
+					}
+					else {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_WEAK,false,false,false,CL_normal,
+							PlaceHolderHelper(GetName()->getName()));
+					}
 				}
 			}
 		}
@@ -2700,7 +2821,8 @@ int monster::action(int delay_)
 			{
 				if(is_sight && isView())
 				{
-					printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"둔갑이 풀려서 너구리로 돌아왔다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_CHANGED,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 				}
 				ChangeMonster(MON_RACCON,0);
 			}
@@ -2714,7 +2836,8 @@ int monster::action(int delay_)
 			{
 				if (is_sight && isView())
 				{
-					printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 무적이 아니다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
 		}
@@ -2774,7 +2897,8 @@ int monster::action(int delay_)
 				}
 				break;
 			default:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ABIL_GATHERING,true,false,false,CL_magic,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 		}
 		else if(!s_paralyse)
@@ -2880,8 +3004,9 @@ int monster::action(int delay_)
 						percent_ = 4;
 					if (flag & M_FLAG_SPEAK && randA(percent_) == 0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 					{
-						if (char* c_ = Get_Speak(id, this, MST_FOUND)) {
-							printlog(c_, true, false, false, CL_speak);
+						string str_ =  Get_Speak(id, this, MST_FOUND);
+						if (!str_.empty()) {
+							printlog(str_, true, false, false, CL_speak);
 							Noise(position, 12, this);
 						}
 					}
@@ -2914,13 +3039,15 @@ int monster::action(int delay_)
 
 						if (s_confuse || s_lunatic)
 						{
-							if (char* c_ = Get_Speak(id, this, MST_CONFUSE))
-								printlog(c_, true, false, false, CL_speak);
+							string str_ = Get_Speak(id, this, MST_CONFUSE);
+							if (!str_.empty())
+								printlog(str_, true, false, false, CL_speak);
 						}
 						else if (!s_fear)
 						{
-							if (char* c_ = Get_Speak(id, this, MST_NORMAL))
-								printlog(c_, true, false, false, CL_speak);
+							string str_ = Get_Speak(id, this, MST_NORMAL);
+							if (!str_.empty())
+								printlog(str_, true, false, false, CL_speak);
 						}
 					}
 
@@ -3020,8 +3147,9 @@ int monster::action(int delay_)
 								percent_ = 4;
 							if (flag & M_FLAG_SPEAK && randA(percent_) == 0 && (env[current_level].isInSight(position)) && !env[current_level].isSilence(position))
 							{
-								if (char* c_ = Get_Speak(id, this, MST_FOUND)) {
-									printlog(c_, true, false, false, CL_speak);
+								string str_ = Get_Speak(id, this, MST_FOUND);
+								if (!str_.empty()) {
+									printlog(str_, true, false, false, CL_speak);
 									Noise(position, 12, this);
 								}
 							}
@@ -3063,13 +3191,15 @@ int monster::action(int delay_)
 	if (env[current_level].dgtile[position.x][position.y].tile == DG_SEA &&
 		!isFly() && !isSwim())
 	{
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠졌다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_DROWNED,false,false,false,CL_danger,
+			PlaceHolderHelper(GetName()->getName()));
 		dead(PRT_PLAYER, true);
 	}
 	else if (env[current_level].dgtile[position.x][position.y].tile == DG_LAVA &&
 		!isFly())
 	{
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "용암에 빠졌다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_FALL_LAVA,false,false,false,CL_danger,
+			PlaceHolderHelper(GetName()->getName()));
 		dead(PRT_PLAYER, true);
 	}
 
@@ -3154,9 +3284,9 @@ void monster::special_action(int delay_, bool smoke_)
 			{
 				if (!env[current_level].isSilence(position) && flag & M_FLAG_SPEAK) {
 					enterlog();
-					char* c_ = Get_Speak(id, this, MST_MAGIC);
-					if (c_ && (env[current_level].isInSight(position)))
-						printlog(c_, true, false, false, CL_magic);
+					string str_ = Get_Speak(id, this, MST_MAGIC);
+					if (!str_.empty() && (env[current_level].isInSight(position)))
+						printlog(str_, true, false, false, CL_magic);
 				}
 				MonsterUseSpell(SPL_SUMMON_SEKIBANKI, false, this, target_pos, 200);
 				ChangeMonster(MON_SEKIBANKI_BODY, 0);
@@ -3175,8 +3305,9 @@ void monster::special_action(int delay_, bool smoke_)
 	case MON_KEINE:
 		if (!smoke_){
 			if (hp <= max_hp / 2) {
-				if (env[current_level].isInSight(position))
-					printlog("체력을 잃은 케이네가 백택으로 변화하였다! ", true, false, false, CL_magic);
+				if (env[current_level].isInSight(position)) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,true,false,false,CL_magic);
+				}
 				ChangeMonster(MON_KEINE2, 0);
 			}
 		}
@@ -3291,10 +3422,14 @@ bool monster::SetPoison(int poison_, int max_, bool strong_)
 
 	if(isYourShight())
 	{
-		if(!s_poison)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"독에 걸렸다. ");
-		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 독은 심해졌다. ");
+		if(!s_poison) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_POISONED,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_POISONED,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 
 	s_poison += poison_;
@@ -3352,11 +3487,13 @@ bool monster::SetTele(int tele_)
 	{
 		if(!s_tele)
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간이 불안정해졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELE,true,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		else
 		{
-			printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 주변 공간은 안정을 되찾았다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELE_STABLE,true,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 	}
 	if(!s_tele)
@@ -3374,10 +3511,13 @@ bool monster::SetMight(int might_)
 	{
 		if(!s_might)
 		{
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 강해졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MIGHT,true,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
-		else
-			printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"힘이 더욱 강해졌다. ");
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_MIGHT,true,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_might += might_;
 	if(s_might>100)
@@ -3403,10 +3543,14 @@ bool monster::SetHaste(int haste_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_haste)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빨라졌다. ");
+		if(!s_haste) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_HASTE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_HASTE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_haste += haste_;
 	if(s_haste>100)
@@ -3422,10 +3566,14 @@ bool monster::SetConfuse(int confuse_, bool strong_)
 
 	if(isYourShight())
 	{
-		if(!s_confuse)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"혼란스러워졌다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 혼란스러워졌다. ");
+		if(!s_confuse) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_CONFUSE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_CONFUSE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_confuse += confuse_;
 	if(s_confuse>50)
@@ -3438,10 +3586,14 @@ bool monster::SetSlow(int slow_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_slow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"느려졌다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 느려졌다. ");
+		if(!s_slow) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_SLOW,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_SLOW,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_slow += slow_;
 	if(s_slow>100)
@@ -3458,10 +3610,14 @@ bool monster::SetFrozen(int frozen_)
 		
 	if(isYourShight())
 	{
-		if(!s_frozen)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙어 움직임이 둔해졌다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 얼어붙어 움직임이 둔해졌다. ");
+		if(!s_frozen) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_FROZEN,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_FROZEN,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_frozen += frozen_;
 	if(s_frozen>25)
@@ -3475,10 +3631,14 @@ bool monster::SetCharm(int charm_)
 
 	if(isYourShight())
 	{
-		if(!s_ally)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"매료되었다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 매료되었다. ");
+		if(!s_ally) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_CHARM,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_CHARM,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_ally += charm_;
 	if(s_ally>200)
@@ -3492,10 +3652,14 @@ bool monster::SetElec(int elec_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_elec)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"방전되고있다. ");
+		if(!s_elec) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_DISCARGE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_DISCARGE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_elec += elec_;
 	if(s_elec>40)
@@ -3509,7 +3673,8 @@ bool monster::SetParalyse(int paralyse_)
 		
 	if(isYourShight())
 	{
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마비되었다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_PARALYSE,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 	}
 	s_paralyse += paralyse_;
 	if(s_paralyse>100)
@@ -3526,10 +3691,14 @@ bool monster::SetGlow(int glow_, bool no_speak)
 		return false;
 	if(isYourShight() && !no_speak)
 	{
-		if(!s_glow)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"빛나고있다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"더욱 빛나고있다.");
+		if(!s_glow) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GLOW,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_GLOW,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_glow += glow_;
 	if(s_glow>100)
@@ -3542,10 +3711,14 @@ bool monster::SetGraze(int graze_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_graze)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"그레이즈를 하기 시작했다. ");
+		if(!s_graze) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GRAZE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_GRAZE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_graze += graze_;
 	if(s_graze>100)
@@ -3558,8 +3731,10 @@ bool monster::SetSilence(int silence_, int silence_range_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_silence)
-			printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_is(true),"주변의 소리를 지웠다.");
+		if(!s_silence) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_SILENCE,true,false,false,CL_small_danger,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	if(s_silence)
 		env[current_level].MakeSilence(position, s_silence_range, false);
@@ -3576,10 +3751,14 @@ bool monster::SetSick(int sick_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_sick)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"병에 걸렸다. ");
-		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 병은 심해졌다. ");
+		if(!s_sick) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_SICK,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_SICK,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_sick += sick_;
 	if(s_sick>200)
@@ -3592,10 +3771,14 @@ bool monster::SetVeiling(int veiling_, int value_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_veiling)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람을 감쌌다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_to(true),"감싸는 바람이 강해졌다. ");
+		if(!s_veiling) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_VEILING,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_VEILING,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_veiling += veiling_;
 	s_value_veiling = value_;
@@ -3609,8 +3792,7 @@ bool monster::SetInvisible(int invisible_)
 		return false;
 	bool prev_view_ = isYourShight();
 	int prev_invisible_ = s_invisible;
-	const char *prev_name = GetName()->name.c_str();
-	const char *prev_name_is = GetName()->name_is(true);
+	string prev_name = GetName()->getName();
 
 	
 	s_invisible += invisible_;
@@ -3621,14 +3803,19 @@ bool monster::SetInvisible(int invisible_)
 	{
 		if(isYourShight())
 		{
-			if(!prev_invisible_)
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"투명하게 변한다. ");
-			else
-				printarray(true,false,false,CL_normal,3,prev_name,prev_name_is,"더욱 투명하게 변한다. ");
+			if(!prev_invisible_) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_INVISIBLE,true,false,false,CL_normal,
+					PlaceHolderHelper(prev_name));
+			}
+			else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_INVISIBLE,true,false,false,CL_normal,
+					PlaceHolderHelper(prev_name));
+			}
 		}
 		else
 		{
-			printarray(true,false,false,CL_small_danger,3,prev_name,prev_name_is,"투명해지면서 사라졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_INVISIBLE_WARNING,true,false,false,CL_small_danger,
+				PlaceHolderHelper(prev_name));
 			if(you.auto_pickup>0)
 				auto_pick_onoff(true);
 		}
@@ -3641,10 +3828,14 @@ bool monster::SetMute(int mute_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_mute)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벙어리가 되었다. ");
-		else
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 침묵이 길어졌다. ");
+		if(!s_mute) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MUTE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_MUTE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_mute += mute_;
 	if(s_mute>100)
@@ -3656,30 +3847,34 @@ bool monster::SetGhost(int ghost_)
 	if(!ghost_)
 		return false;
 	if(flag & M_FLAG_INANIMATE)
-	{		
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"무생물이기에 영혼이 없다. ");	
+	{
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ENSLAVE_INANIMATE,true,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		return false;
 	}
 	if (id == MON_REIMU)
 	{
-		printlog("낙원의 멋진 무녀는 모든 것으로부터 속박되지않는다.", true, false, false, CL_normal);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ENSLAVE_REIMU,true,false,false,CL_normal);
 		return false;
 	}
 
 	if (dream)
 	{
-		printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "꿈의 주민이기에 속박할 수 없다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ENSLAVE_DREAM,true,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		return false;
 	}
 
 	if(flag & M_FLAG_SUMMON)
 	{
-		printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"이미 종속되어있다. ");	
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ENSLAVE_SUMMONED,true,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		return false;
 	}
 	if(isYourShight())
 	{
-		printarray(true,false,false,CL_yuyuko,2,GetName()->name.c_str(),"의 영혼이 붙잡혔다. 지속시간내로 잡으면 당신의 동료가 된다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ENSLAVE,true,false,false,CL_yuyuko,
+			PlaceHolderHelper(GetName()->getName()));
 	}
 	s_ghost += ghost_;
 	if(s_ghost>100)
@@ -3705,20 +3900,23 @@ bool monster::SetFear(int fear_)
 	{
 		if (isYourShight())
 		{
-			if (!s_fear)
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질려서 전의를 완전 상실했다. ");
-	}
-
+			if (s_fear != -1) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_FEAR,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
+		}
 		s_fear = fear_;
 	}
 	else
 	{
 		if (isYourShight())
 		{
-			if (!s_fear)
-				printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "공포에 질렸다. ");
+			if (!s_fear) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_FEAR,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
 		}
-	s_fear += fear_;
+		s_fear += fear_;
 		if (s_fear > 50)
 		s_fear = 50;
 	}
@@ -3731,11 +3929,15 @@ bool monster::SetMindReading(int mind_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_mind_reading){			
-			if(flag & M_FLAG_ANIMAL)
-				printarray(true,false,false,CL_normal,2,GetName()->name.c_str(),"의 생각을 알게되어 친해졌다. ");
-			else
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"마음을 간파당했다. ");
+		if(!s_mind_reading){
+			if(flag & M_FLAG_ANIMAL) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MIND_READING_ANIMAL,true,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
+			else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MIND_READING,true,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
 		}
 	}
 	s_mind_reading = mind_;
@@ -3754,8 +3956,10 @@ bool monster::SetLunatic(int lunatic_)
 		return false;
 	if(isYourShight())
 	{
-		if(!s_lunatic)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"광기에 휩싸였다. ");
+		if(!s_lunatic) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_LUNATIC,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 	s_lunatic = lunatic_;
 	if(s_lunatic>20)
@@ -3780,13 +3984,16 @@ bool monster::SetCommunication(int s_communication_)
 			switch(id)
 			{
 			case MON_MOON_RABIT_SUPPORT:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료에 도움을 청하는 전파를 보내기 시작했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GATHERING_MOON_RABBIT,true,false,false,CL_magic,
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			case MON_HELL_HOUND:
-				printarray(true,false,false,CL_small_danger,2,GetName()->name.c_str(),"의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GATHERING_HELL_HOUND,true,false,false,CL_small_danger,
+					PlaceHolderHelper(GetName()->getName()));
 				break;
 			default:
-				printarray(true,false,false,CL_magic,3,GetName()->name.c_str(),GetName()->name_is(true),"동료를 끌어모으고 있다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GATHERING,true,false,false,CL_magic,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 
 		}
@@ -3808,10 +4015,14 @@ bool monster::SetForceStrong(bool force_, int turn_, bool speak_)
 	
 	if(isYourShight() && speak_)
 	{
-		if(!force_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"약화되었다. ");
-		else
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"강화되었다. ");
+		if(!force_) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_WEAK,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_STRONG,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 	}
 
 	force_strong = force_;
@@ -3825,7 +4036,8 @@ bool monster::SetInvincibility(int s_invincibility_, bool speak_)
 		return false;
 	if (isYourShight() && speak_)
 	{
-		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "무적상태가 되었다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_INVINCIBILITY,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 	}
 	s_invincibility = s_invincibility_;
 	return true;
@@ -3839,8 +4051,10 @@ bool monster::SetSleep(int s_sleep_)
 {
 	if (s_sleep_ >= randA_1(100)) {
 
-		if(isYourShight() && state.GetState() != MS_SLEEP)
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "잠에 빠졌다. ");
+		if(isYourShight() && state.GetState() != MS_SLEEP) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_SLEEP,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		state.SetState(MS_SLEEP);
 		return true;
 	}
@@ -3879,8 +4093,9 @@ bool monster::AttackedTarget(unit *order_)
 				Noise(position,12,this);
 				if(env[current_level].isInSight(position))
 				{
-					if(char* c_ = Get_Speak(id,this,MST_FOUND)){
-						printlog(c_,true,false,false,CL_speak);
+					string str_ = Get_Speak(id,this,MST_FOUND);
+					if(!str_.empty()){
+						printlog(str_,true,false,false,CL_speak);
 					}
 				}
 			}	
@@ -3941,10 +4156,14 @@ bool monster::Teleport()
 			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 			SetXY(x_, y_);
 			bool curr_sight_ = isYourShight();
-			if(prev_sight_ && !curr_sight_)
-				printarray(true,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"공간이동을 통해 시야에서 사라졌다. ");
-			else if(!prev_sight_ && curr_sight_)
-				printarray(true,false,false,CL_small_danger,3,GetName()->name.c_str(),GetName()->name_do(true),"갑자기 나타났다. ");
+			if(prev_sight_ && !curr_sight_) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING,true,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
+			else if(!prev_sight_ && curr_sight_) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING_APPEAR,true,false,false,CL_small_danger,
+					PlaceHolderHelper(GetName()->getName()));
+			}
 
 			return true;
 		}

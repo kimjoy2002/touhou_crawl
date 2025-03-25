@@ -284,7 +284,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
-				printlog("하늘에서 키스메가 떨어졌다!", true, false, false, CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KISME_DROP), true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_EVENT, (*rit));
 				mon_->SetStrong(5);
 				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //키스메는 떨어지고 바로 공격하지않는다.
@@ -338,7 +338,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					env[current_level].changeTile(coord_def(event_->position.x - 1 + i, event_->position.y + 4 + j), DG_GLASS);
 			}
 		}
-		printlog("It's LUNATIC TIME!!", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_LUNATIC_TIME), true, false, false, CL_small_danger);
 		env[current_level].MakeNoise(event_->position, 16, NULL);
 		you.resetLOS();
 		MoreWait();
@@ -352,10 +352,10 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
-				printlog("하늘에서 코가사가 떨어졌다!", true, false, false, CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_DROP), true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, (*rit));
 				MoreWait();
-				printlog("...그러나 코가사는 땅바닥에 머리부터 부딪혔다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_DROP2), true, false, false, CL_normal);
 				mon_->SetConfuse(5 + randA(5));
 				mon_->SetStrong(5);
 				mon_->hp = mon_->hp * 2 / 3;
@@ -432,22 +432,22 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 		case 5:
 			you.resetLOS();
-			printlog("꿈의 세계가 넓어지기 시작한다! 자고 있던 적들이 깨어나기 시작한다!", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DREAM_OPEN1), true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 4:
 			you.resetLOS();
-			printlog("꿈의 세계가 넓어지고 있다!", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DREAM_OPEN2), true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 3:
 			you.resetLOS();
-			printlog("꿈의 세계가 또 다시 넓어졌다! 꿈의 주민들이 당신을 눈치챘다!", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DREAM_OPEN3), true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 2:
 			you.resetLOS();
-			printlog("꿈의 세계는 거의 대부분 열렸다! 곧 몬스터가 들끓기 시작한다!", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DREAM_OPEN4), true, false, false, CL_danger);
 			MoreWait();
 			break;
 		case 1:
@@ -501,7 +501,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				}
 			}
 			you.resetLOS();
-			printlog("꿈의 세계는 완전히 개방되었다! 달로 가는 포탈로 최대한 빨리 들어가야한다!", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DREAM_OPEN5), true, false, false, CL_danger);
 			MoreWait();
 			env[current_level].MakeEvent(EVL_REGEN, coord_def(0, 0), EVT_ALWAYS, 30);
 			break;
@@ -605,14 +605,14 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (event_->count == 10)
 		{
 			enterlog();
-			printlog("나, 메리씨", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_MARY_SAN1), true, false, false, CL_small_danger);
 			MoreWait();
 			you.SetInter(IT_EVENT);
 		}
 		if (event_->count == 5)
 		{
 			enterlog();
-			printlog("지금, 당신의", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_MARY_SAN2), true, false, false, CL_small_danger);
 			MoreWait();
 			you.SetInter(IT_EVENT);
 		}
@@ -626,7 +626,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 				{
 					enterlog();
-					printlog("등 뒤에 있어!", true, false, false, CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_MARY_SAN3), true, false, false, CL_danger);
 					MoreWait();
 					monster *mon_ = env[current_level].AddMonster(MON_KOISHI, M_FLAG_EVENT, (*rit));
 					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //코이시는 떨어지고 바로 공격하지않는다.
@@ -636,7 +636,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				}
 			}
 			enterlog();
-			printlog("... 보이지 않는 곳에 있어", true, false, false, CL_small_danger); //코이시 등장실패
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_MARY_SAN_FAIL), true, false, false, CL_small_danger); //코이시 등장실패
 			MoreWait();
 			return 1;
 		}
@@ -694,10 +694,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		sunny_->s_fear = 30 + randA(20);
 		star_->s_fear = 30 + randA(20);
 		lunar_->s_fear = 30 + randA(20);
-		char temp[100];
-		sprintf_s(temp, 100, "%s%s외쳤다. \"도망쳐!\"", star_->GetName()->name.c_str(), star_->GetName()->name_is(true));
-		printlog(temp, true, false, false, CL_speak);
-
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_RUN_TRHEEFAIRY,true,false,false,CL_speak,
+			 PlaceHolderHelper(star_->GetName()->getName()));
 		sunny_->SetInvisible(10);
 		lunar_->s_confuse = 5;
 		star_->SetHaste(10);
@@ -713,7 +711,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 
 		env[current_level].changeTile(coord_def(event_->position.x + 1, event_->position.y), DG_GLASS);
 
-		printlog("방어마법진작동. 칩입자를 처단하라!", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_SCALET_TRAP), true, false, false, CL_small_danger);
 		env[current_level].MakeNoise(event_->position, 8, NULL);
 	}
 	return 1;
@@ -740,11 +738,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					env[current_level].changeTile(coord_def(event_->position.x - 1 + i, event_->position.y + 4 + j), DG_GLASS);
 			}
 		}
-		printlog("It's SURPRISE TIME!!", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_TIME1), true, false, false, CL_small_danger);
 		env[current_level].MakeNoise(event_->position, 16, NULL);
 		you.resetLOS();
 		MoreWait();
-		printlog("...그러나 코가사는 무언가 잘못되었음을 느꼈다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_TIME2), true, false, false, CL_normal);
 	}
 	return 1;
 	case EVL_HOJOK:
@@ -757,9 +755,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y - 1), env[current_level].base_floor);
 
 			you.resetLOS();
-			char temp[100];
-			sprintf_s(temp, 100, "%s%s외쳤다. \"해치워주마!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
-			printlog(temp, true, false, false, CL_speak);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK1,true,false,false,CL_speak,
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer()) {
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
@@ -773,9 +770,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y - 1), env[current_level].base_floor);
 
 			you.resetLOS();
-			char temp[100];
-			sprintf_s(temp, 100, "%s%s외쳤다. \"저에게 맡겨주시길!\"", target_unit->GetName()->name.c_str(), target_unit->GetName()->name_is(true));
-			printlog(temp, true, false, false, CL_speak);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK2,true,false,false,CL_speak,
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer())
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
@@ -789,13 +785,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, NULL);
 		if (distan_coord(you.position, event_->position) <= 2) {
 			monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, event_->position);
-			char temp[100];
-			sprintf_s(temp, 100, "%s%s외쳤다. \"원망스럽...콜록, 콜록!\"", mon_->GetName()->name.c_str(), mon_->GetName()->name_is(true));
-			printlog(temp, true, false, false, CL_speak);
+			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_KOGASA_SMOKE1,true,false,false,CL_speak,
+				PlaceHolderHelper(mon_->GetName()->getName()));
 			env[current_level].MakeNoise(event_->position, 12, NULL);
 			you.resetLOS();
 			MoreWait();
-			printlog("...코가사는 준비해둔 연기를 너무 들이마신듯하다. ", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_TIME2), true, false, false, CL_normal);
 			mon_->SetSlow(rand_int(30, 40));
 			mon_->SetStrong(5);
 			return 1;
@@ -932,14 +928,16 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_SION_DELETE:
 	{
 		int num = 0;
-		string str_ = "아이템이 ";
+		bool isplural = false;
+		string str_ = LocalzationManager::locString(LOC_SYSTEM_EVENT_SION_ITEM);
 		list<item>::iterator it, first_it;
 		for (it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
 		{
 			list<item>::iterator temp = it++;
 			if ((*temp).position.x == event_->position.x && (*temp).position.y == event_->position.y)
 			{
-				str_ = temp->GetName() + temp->GetNameInfor().name_do(true);
+				str_ = temp->GetName();
+				isplural = (temp->num > 1);
 				env[current_level].DeleteItem(temp);
 				if (!num++)
 					first_it = temp;
@@ -948,11 +946,12 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				break;
 		}
 		if (num == 1) {
-			printarray(true, false, false, CL_small_danger, 2, str_.c_str(), "가까이가자 사라졌다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_SION_ITEM_DELETE,true,false,false,CL_small_danger,
+				PlaceHolderHelper(str_, isplural));
 			you.SetInter(IT_EVENT);
 		}
 		else if (num > 1) {
-			printarray(true, false, false, CL_small_danger, 1, "아이템들이 가까이가자 사라졌다.");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_SION_ITEMS_DELETE), true, false, false, CL_small_danger);
 			you.SetInter(IT_EVENT);
 		}
 		return 1;

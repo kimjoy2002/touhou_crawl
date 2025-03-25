@@ -2236,20 +2236,21 @@ int environment::new_item_interupt()
 	}
 	if(num_)
 	{
-		if(num_<=3)
-		{
-			int i;
-			for(i = 0; i < num_; i++)
-			{
-				if(i)
-					printlog(itme_[i-1]->GetNameInfor().name_and(true),false,false,false,CL_normal);
-				printlog(itme_[i]->GetName(),false,false,false,itme_[i]->item_color());
-			}
-			printlog(itme_[i-1]->GetNameInfor().name_to(true),false,false,false,CL_normal);
-			printlog("발견했다.",true,false,false,CL_normal);
+		if(num_ == 1) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_FIND_ONE,true,false,false,CL_normal,
+				 PlaceHolderHelper(itme_[0]->GetName(), itme_[0]->item_color(), (itme_[0]->num)>1));
+		} else if (num_ == 2) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_FIND_TWO,true,false,false,CL_normal,
+				 PlaceHolderHelper(itme_[0]->GetName(), itme_[0]->item_color(), (itme_[0]->num)>1),
+				 PlaceHolderHelper(itme_[1]->GetName(), itme_[1]->item_color(), (itme_[1]->num)>1));
+		} else if (num_ == 3) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_FIND_THREE,true,false,false,CL_normal,
+				 PlaceHolderHelper(itme_[0]->GetName(), itme_[0]->item_color(), (itme_[0]->num)>1),
+				 PlaceHolderHelper(itme_[1]->GetName(), itme_[1]->item_color(), (itme_[1]->num)>1),
+				 PlaceHolderHelper(itme_[2]->GetName(), itme_[2]->item_color(), (itme_[2]->num)>1));
 		}
 		else
-			printlog("여러 아이템을 발견했다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_FIND_MANY),true,false,false,CL_normal);
 	}
 	else if(auto_pick) //시야에 자동줍기 템이 있을경우 -1을 리턴. 이것은 정지를 일으키진않지만 템을 줍기위해 방향을 바꾼다.
 		return -1;

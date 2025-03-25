@@ -1501,14 +1501,12 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EIT_PHOTO:
 		{
 			if (it->value2 >= 0 && it->value2 < MON_MAX) {
-				char temp[100];
-				sprintf_s(temp, 100, "%s%s찍혀있는 사진이다.\n", mondata[it->value2].name.name.c_str(), mondata[it->value2].name.name_do(true));
-				text_ += temp;
+				text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1, PlaceHolderHelper( mondata[it->value2].name.getName()));
 			}
 			else {
-				text_ += "미소녀가 찍혀있는 사진이다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2);
 			}
-			text_ += "딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3);
 			break;
 		}
 		}

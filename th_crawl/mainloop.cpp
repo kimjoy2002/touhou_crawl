@@ -43,8 +43,8 @@ const char *version_string = "ver1.0";
 void Initialize();
 
 
-void SetJob(job_type select_, string name_);
-void TouhouPlayerble(const string name_, bool aptit_);
+void SetJobs(job_type select_, unique_starting_type type);
+void TouhouPlayerble(unique_starting_type type, bool aptit_);
 skill_type itemtoskill(item_type type_);
 
 
@@ -59,8 +59,7 @@ void Test_char_init(item_type item_, int bonus)
 	t.value3 = (int)(bonus == 6);
 	t.value4 = (int)(bonus == 6);
 	t.is_pile = false;
-	t.name2.name = "";
-	t.name2.name_type = true;
+	t.name2 = name_infor(LOC_NONE);
 	switch(item_)
 	{
 	case ITM_WEAPON_SHORTBLADE:
@@ -72,8 +71,7 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 5;
 		t.can_throw = true;
 		t.image = &img_item_weapon_dagger;
-		t.name.name = "대거";
-		t.name.name_type = false; //true 받침있음
+		t.name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER);
 		t.weight = 2.0f;
 		t.value = 50;
 		break;
@@ -86,8 +84,7 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = true;
 		t.image = &img_item_weapon_handaxe;
-		t.name.name = "손도끼";
-		t.name.name_type = false; //true 받침있음
+		t.name = name_infor(LOC_SYSTEM_ITEM_WEAPON_AXE_HANDAXE);
 		t.weight = 3.0f;
 		t.value = 60;
 		break;
@@ -100,8 +97,7 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = false;
 		t.image = randA(1)?&img_item_weapon_gohey:&img_item_weapon_gohey2;
-		t.name.name = "고헤이";
-		t.name.name_type = false; //true 받침있음
+		t.name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_GOHEI);
 		t.weight = 3.0f;
 		t.value = 60;
 		break;
@@ -114,8 +110,7 @@ void Test_char_init(item_type item_, int bonus)
 		t.value8 = 7;
 		t.can_throw = true;
 		t.image = &img_item_weapon_spear;
-		t.name.name = "창";
-		t.name.name_type = true; //true 받침있음
+		t.name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_SPEAR);
 		t.weight = 4.0f;
 		t.value = 70;
 		break;
@@ -144,8 +139,7 @@ void Test_char_init(item_type item_, int bonus)
 	t.is_pile = false;
 	t.can_throw = false;
 	t.image = &img_item_armor_robe;
-	t.name.name = "무녀복";
-	t.name.name_type = true;
+	t.name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_MIKO, LOC_SYSTEM_ITEM_ARMOUR_M_ROBE);
 	t.weight = 6.0f;
 	t.value = 40;
 
@@ -168,8 +162,7 @@ void Test_char_init(item_type item_, int bonus)
 	t.is_pile = true;
 	t.can_throw = false;
 	t.image = &img_item_food_bread;
-	t.name.name = "빵";
-	t.name.name_type = true;
+	t.name = name_infor(LOC_SYSTEM_ITEM_FOOD_BREAD);
 	t.weight = 5.0f;
 	t.value = 30;
 	it = env[current_level].MakeItem(you.position,t);
@@ -275,14 +268,14 @@ void charter_selete()
 	string user_name = option_mg.getName();
 	if (user_name.size() != 0)
 	{
-		you.user_name.name = user_name;
+		you.user_name = user_name;
 	}
 
 	SetText() += "당신의 이름은 \"";
-	SetText() += you.user_name.name;
+	SetText() += you.user_name;
 	SetText() += "\" 이다.\n";
 
-	if (you.user_name.name.compare("이름없음") == 0) {
+	if (you.user_name.compare("이름없음") == 0) {
 		SetText() += "config.ini에서 당신의 이름을 바꿀 수 있어.\n";
 	}
 
@@ -326,13 +319,13 @@ void charter_selete()
 	if(isNormalGame() && !saveexit)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.name.c_str(),tribe_type_string[you.tribe],job_type_string[you.job],you.GetCharNameString()->c_str());
+		sprintf_s(temp,200,"%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.c_str(),LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(),LocalzationManager::locString(job_type_string[you.job]).c_str(),you.GetCharNameString().c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 
 		SetTribe(you.tribe);
-		TouhouPlayerble(you.char_name.name, true);
-		SetJob(you.job,you.char_name.name);
-		TouhouPlayerble(you.char_name.name, false);
+		TouhouPlayerble(you.char_type, true);
+		SetJobs(you.job,you.char_type);
+		TouhouPlayerble(you.char_type, false);
 		/*Test_char_init(item_, bonus);*/
 		you.CalcuHP();
 		Initialize();
@@ -340,7 +333,7 @@ void charter_selete()
 	else if(map_list.tutorial == GM_TUTORIAL)
 	{		
 		you.image = &img_play_sanae;
-		you.char_name.name = "사나에";
+		you.char_type = UNIQ_START_SANAE;
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
@@ -353,7 +346,7 @@ void charter_selete()
 	else if(map_list.tutorial == GM_TUTORIAL2)
 	{
 		you.image = &img_play_sanae;
-		you.char_name.name = "사나에";
+		you.char_type = UNIQ_START_SANAE;
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
@@ -365,7 +358,7 @@ void charter_selete()
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)
 	{
 		you.image = &img_play_sanae;
-		you.char_name.name = "사나에";
+		you.char_type = UNIQ_START_SANAE;
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
@@ -387,13 +380,13 @@ void charter_selete()
 	{
 
 		char temp[200];
-		sprintf_s(temp, 200, "%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.name.c_str(), tribe_type_string[you.tribe], job_type_string[you.job], you.GetCharNameString()->c_str());
+		sprintf_s(temp, 200, "%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.c_str(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str());
 		AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
 
 		SetTribe(you.tribe);
-		TouhouPlayerble(you.char_name.name, true);
-		SetJob(you.job, you.char_name.name);
-		TouhouPlayerble(you.char_name.name, false);
+		TouhouPlayerble(you.char_type, true);
+		SetJobs(you.job, you.char_type);
+		TouhouPlayerble(you.char_type, false);
 		/*Test_char_init(item_, bonus);*/
 		you.CalcuHP();
 		Initialize();

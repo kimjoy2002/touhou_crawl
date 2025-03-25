@@ -237,27 +237,21 @@ void discard(list<item>::iterator it, int number)
 		item *temp2 = env[current_level].AddItem(you.position, &(*it), drop_number);
 		temp2->drop = true;
 		temp2->waste = 10000; //항상 소멸 정도를 초기화
-		printlog("당신은 ",false,false,false,CL_normal);					
-		printlog(temp2->GetName(number),false,false,false,temp2->item_color());				
-		printlog(temp2->GetNameInfor().name_to(true),false,false,false,CL_normal);
+
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_DROP_ITEM,drop_number == number,false,false,CL_normal,
+			PlaceHolderHelper(temp2->GetName(number), temp2->item_color(), drop_number>1));
 	}
 	else {
-		printlog("당신은 ", false, false, false, CL_normal);
-		printlog((*it).GetName(number), false, false, false, (*it).item_color());
-		printlog((*it).GetNameInfor().name_to(true), false, false, false, CL_normal);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_DROP_ITEM,drop_number == number,false,false,CL_normal,
+			PlaceHolderHelper((*it).GetName(number), (*it).item_color(), drop_number>1));
 	}
-	if (drop_number == number) {
-		printlog("내려놓았다.", true, false, false, CL_normal);
-	}
-	else if(drop_number>=1) {
-		printlog("내려놓았다. ", false, false, false, CL_normal);
-		char temp[100];
-		sprintf_s(temp, 100, "빈곤신의 저주로 %d개가 사라졌다.", number-drop_number);
-		printarray(true, false, false, CL_small_danger, 1, temp);
-	}
-	else  {
-		printlog("내려놓았다. ", false, false, false, CL_normal);
-		printlog("그러나 빈곤신의 저주로 사라졌다.", true, false, false, CL_small_danger);
+	if(drop_number != number) {
+		if(drop_number>=1) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_DROP_ITEM_SION_ALL, PlaceHolderHelper(std::to_string(number-drop_number))), true, false, false, CL_small_danger);
+		}
+		else  {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DROP_ITEM_SION_ALL), true, false, false, CL_small_danger);
+		}
 	}
 	you.DeleteItem(it,number);
 	changedisplay(DT_GAME);

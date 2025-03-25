@@ -219,22 +219,19 @@ bool select_fairy(int value_)
 	default:
 		you.tribe = TRI_FAIRY;
 		you.job = JOB_WIZARD;
-		you.char_name.name = "써니";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_SUNNY;
 		you.image = &img_named_sunny;
 		break;
 	case 1:
 		you.tribe = TRI_FAIRY;
 		you.job = JOB_CRUSADER;
-		you.char_name.name = "스타";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_STAR;
 		you.image = &img_named_star;
 		break;
 	case 2:
 		you.tribe = TRI_FAIRY;
 		you.job = JOB_ASSASSIN;
-		you.char_name.name = "루나";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_LUNA;
 		you.image = &img_named_lunar;
 		break;
 	}
@@ -252,50 +249,43 @@ bool select_named(int value_)
 	default:
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
-		you.char_name.name = "레이무";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_REIMU;
 		you.image = &img_play_reimu;
 		break;
 	case 1:
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_WIZARD;
-		you.char_name.name = "마리사";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_MARISA;
 		you.image = &img_play_marisa;
 		break;
 	case 2:
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_SHAMAN;
-		you.char_name.name = "사나에";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_SANAE;
 		you.image = &img_play_sanae;
 		break;
 	case 3:
 		you.tribe = TRI_WOLFTENGU;
 		you.job = JOB_WARRIOR;
-		you.char_name.name = "모미지";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_MOMIZI;
 		you.image = &img_play_momizi;
 		break;
 	case 4:
 		you.tribe = TRI_YOKAI;
 		you.job = JOB_ASSASSIN;
-		you.char_name.name = "코이시";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_KOISHI;
 		you.image = &img_named_koishi;
 		break;
 	case 5:
 		you.tribe = TRI_HUMAN;
 		you.job = JOB_MONK;
-		you.char_name.name = "모코우";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_MOKOU;
 		you.image = &img_play_mokou[0];
 		break;
 	case 6:
 		you.tribe = TRI_KAPPA;
 		you.job = JOB_ENGINEER;
-		you.char_name.name = "니토리";
-		you.char_name.name_type = false;
+		you.char_type = UNIQ_START_NITORI;
 		you.image = &img_named_nitori;
 		break;
 	case 7:
@@ -322,7 +312,7 @@ bool select_job(int value_)
 	else if (you.tribe == TRI_WOLFTENGU)
 		color = 9;
 	you.image = &img_playable_character[color][sytle];
-	you.char_name.name = "";
+	you.char_type = UNIQ_START_NONE;
 	return true;
 }
 
@@ -430,7 +420,7 @@ void start_mainmenu()
 	for(int i=0;i<TRI_MAX-1;i++)
 	{
 		char tempchar[64];
-		sprintf_s(tempchar,"%c - %s",'a'+i,tribe_type_string[i]);
+		sprintf_s(tempchar,"%c - %s",'a'+i,LocalzationManager::locString(tribe_type_string[i]).c_str());
 		int remain_num_ = 23-strlen(tempchar);
 		temp += tempchar;
 		if(i%2 ==0)
@@ -505,7 +495,7 @@ void start_mainmenu()
 	for(int i=0;i<JOB_MAX;i++)
 	{
 		char tempchar[64];
-		sprintf_s(tempchar,"%c - %s",'a'+i,job_type_string[i]);
+		sprintf_s(tempchar,"%c - %s",'a'+i,LocalzationManager::locString(job_type_string[i]).c_str());
 		int remain_num_ = 23-strlen(tempchar);
 		temp += tempchar;
 		if(i%2 ==0)

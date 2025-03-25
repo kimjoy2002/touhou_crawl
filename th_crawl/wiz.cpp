@@ -585,7 +585,7 @@ void wiz_mode()
 			while (true) {
 				deletelog();
 				ostringstream oss;
-				oss << id_ << " (" << mondata[id_].name.name.c_str() << ")";
+				oss << id_ << " (" << mondata[id_].name.getName().c_str() << ")";
 				printlog(oss.str(), false, false, true, CL_normal);
 
 				key_ = waitkeyinput(true);

@@ -80,10 +80,10 @@ void replay_class::init_class()
 	time(&now);
 	t=localtime(&now);
 	char filename[512];
-	sprintf_s(filename,512,"replay/%s-%04d%02d%02d-%02d%02d%02d.rpy",you.user_name.name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
+	sprintf_s(filename,512,"replay/%s-%04d%02d%02d-%02d%02d%02d.rpy",you.user_name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
 	
 	replay_string = filename;
-	sprintf_s(infor.name,32,"%s",you.user_name.name.c_str());
+	sprintf_s(infor.name,32,"%s",you.user_name.c_str());
 	sprintf_s(infor.version,32,"%s",version_string);
 	memset(infor.infor,0,256);
 	infor.rand_num = map_list.random_number;
@@ -181,7 +181,7 @@ bool replay_class::LoadReplayStart()
 
 	if(!strcmp(version_string,infor.version))
 	{
-		you.user_name.name = infor.name;
+		you.user_name = string(infor.name);
 		map_list.random_number = infor.rand_num;
 		srand(map_list.random_number);
 		//rand_seed(map_list.random_number);
@@ -233,7 +233,7 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
 }
 
 
-bool replay_class::StopReplay(const char* str)
+bool replay_class::StopReplay(string str)
 {
 	if(play)
 	{//만약 리플레이모드로 실행중일때!
@@ -242,7 +242,7 @@ bool replay_class::StopReplay(const char* str)
 	}
 	else if(init)
 	{//그게 아니면 리플레이 저장중일것이다.
-		strcpy_s(infor.infor,256,str);
+		strcpy_s(infor.infor,256,str.c_str());
 		
 		char filename[512];
 		FILE *fp;  

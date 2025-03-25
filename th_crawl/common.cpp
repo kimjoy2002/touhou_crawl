@@ -20,6 +20,7 @@ int linelin =0;
 
 
 std::mt19937 rand_engine;
+std::mt19937 rand_engine_nonlogic;
 
 
 
@@ -64,6 +65,12 @@ if (_wfopen_s(&fp, L"replay/test_random.txt", L"at") != 0 || !fp) {
 void rand_seed(unsigned int seed_)
 {
 	rand_engine.seed((unsigned long)(seed_));
+
+}
+
+void init_nonlogic_seed(unsigned int seed_)
+{
+	rand_engine_nonlogic.seed((unsigned long)(seed_));
 
 }
 
@@ -157,6 +164,24 @@ int rand_int(int min, int max)
 
 	return min;
 }
+
+
+int rand_int_with_nonlogic(int min, int max)
+{
+	if(min == max)
+		return min;
+
+	if(min > max)
+	{
+		int temp = min;
+		min = max;
+		max = temp;
+	}	
+	int rand_ = rand_engine_nonlogic();
+	min = (rand_engine() % (max - min+1)) + min;
+	return min;
+}
+
 
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y)
 {
@@ -318,6 +343,21 @@ int randA_1(int x)
 		return 1;
 }
 
+int randA_nonlogic(int x)
+{
+	if(x>0)
+		return rand_int_with_nonlogic(0,x);
+	else
+		return 0;
+}
+
+int randA_1_nonlogic(int x)
+{
+	if(x>1)
+		return rand_int_with_nonlogic(1,x);
+	else
+		return 1;
+}
 
 bool randB(int x, int point)
 {
@@ -402,4 +442,12 @@ wstring PreserveTrailingSpaces(const wstring& text)
 	}
 
 	return tempText;
+}
+
+void replaceAll(string& str, const string& from, const string& to) {
+	size_t start_pos = 0;
+	while ((start_pos = str.find(from, start_pos)) != string::npos) {
+		str.replace(start_pos, from.length(), to);
+		start_pos += to.length();
+	}
 }

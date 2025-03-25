@@ -19,29 +19,17 @@
 #include "speak.h"
 
 
-const char *evoke_string[EVK_MAX]=
+LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
 {
-	"보탑",
-	"에어두루마리",
-	"몽혼",
-	"4척 매직봄",
-	"오쿠리쵸친",
-	"공중어뢰",
-	"요술망치",
-	"카메라"
+	LOC_SYSTEM_ITEM_EVOKE_PAGODA,
+	LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,
+	LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,
+	LOC_SYSTEM_ITEM_EVOKE_BOMB,
+	LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
+	LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
+	LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
+	LOC_SYSTEM_ITEM_EVOKE_CAMERA
 };
-const bool evoke_string_is[EVK_MAX]=
-{
-	true,
-	false,
-	true,
-	true,
-	true,
-	false,
-	false,
-	false
-};
-
 
 int getEvokeItem() {
 	random_extraction<int> random_evoke;
@@ -76,8 +64,7 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	kind_ == EVK_MAGIC_HAMMER ? &img_item_evo_hammer :
 	kind_ == EVK_CAMERA ? &img_item_broken_camera:
 	&img_mons_default;
-	t->name.name = evoke_string[kind_];
-	t->name.name_type = evoke_string_is[kind_];
+	t->name = name_infor(evoke_string[kind_]);
 	t->weight = 1.0f;
 	t->value = 300;
 }
@@ -287,7 +274,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		{
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
-				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor("레이저",false));
+				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -321,7 +308,8 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				}
 			}
 			soundmanager.playSound("summon");
-			printarray(true,false,false,CL_normal,3,"당신은 ",s_.c_str(),"의 꿈을 불러냈다!");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVOKE_DREAM_SOUL,true,false,false,CL_normal,
+				 PlaceHolderHelper(s_.c_str()));
 			return true;
 		}
 	case EVK_MAGIC_HAMMER:
@@ -522,7 +510,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("공중어뢰", false));
+			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -600,14 +588,14 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 
 						if (!mon_->s_paralyse && !mon_->s_confuse) {
-							char* c_ = Get_Speak(mon_->id, mon_, MST_CAMERA);
-							if (c_ && (env[current_level].isInSight(mon_->position)))
-								printlog(c_, true, false, false, CL_normal);
+							string str_ = Get_Speak(mon_->id, mon_, MST_CAMERA);
+							if (!str_.empty() && (env[current_level].isInSight(mon_->position)))
+								printlog(str_, true, false, false, CL_normal);
 						}
 
 						item_infor t;
 						item* it = env[current_level].MakeItem(you.position, makeitem(ITM_ETC, 1, &t, EIT_PHOTO));
-						it->name.name = mon_->name.name + "의 " + it->name.name;
+						it->name = name_infor(LOC_SYSTEM_ITEM_CAMERA_PHOTO, (monster_index)mon_->id);
 						it->value2 = mon_->id;
 						if (it->value2 == MON_KOKORO1 ||
 							it->value2 == MON_KOKORO2 ||
@@ -669,7 +657,7 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 								int att_ = randC(4, 8 + power / 25);
 								int m_att_ = 4 * (8 + power / 25);
 
-								attack_infor temp_att(att_, m_att_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("매직봄", true));
+								attack_infor temp_att(att_, m_att_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_MAGIC_BOMB));
 								hit_->damage(temp_att, true);
 							}
 						}

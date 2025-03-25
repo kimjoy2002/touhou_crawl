@@ -32,6 +32,7 @@ class monster: public unit
 public:
 	int map_id;
 	int id;
+	int id2; //ENSLAVE_GHOST용도
 	int level;
 	int exper;
 	name_infor name;
@@ -149,7 +150,7 @@ public:
 	void CheckSightNewTarget();
 	bool ReturnEnemy();
 	const name_infor* GetName();
-	const string* GetNameString();
+	string GetNameString();
 	bool isLive(){return (hp>0);}
 	bool isFly();
 	bool isSwim();

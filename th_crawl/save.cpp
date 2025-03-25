@@ -101,7 +101,7 @@ bool load_name(const char* path)
 	else
 	{	
 		FILE *fp;
-		char name[21];
+		char name[31];
 
 		std::wstring wfilename = ConvertUTF8ToUTF16(user_name_file);
 
@@ -124,7 +124,7 @@ bool load_name(const char* path)
 		}
 		name[ii] = '\0';
 		WaitForSingleObject(mutx, INFINITE);
-		you.user_name.name = name;
+		you.user_name = string(name);
 		ReleaseMutex(mutx);
 		if(strcmp(name,"이름없음"))
 			return true;

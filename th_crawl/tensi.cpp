@@ -22,7 +22,7 @@
 #include "soundmanager.h"
 
 
-const char* tensi_talk(bool good_, tensi_do_list list_);
+string tensi_talk(bool good_, tensi_do_list list_);
 
 int GetHazard()
 {
@@ -433,7 +433,7 @@ void tensi_earthquake(int good_)
 				att_/=2;
 				m_att_/=2;
 			}
-			attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor("지진",true));
+			attack_infor temp_att(att_,m_att_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EARTHQUAKE));
 			it->damage(temp_att, true);
 		}
 	}//모든 몬스터에게 데미지를 줌
@@ -513,7 +513,7 @@ void tensi_burst(int good_)
 									if (att_ >= hit_->GetHp())
 										att_ = hit_->GetHp() - 1;
 								}
-								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("텐시", false));
+								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_GOD_TENSI));
 								hit_->damage(temp_att, true);
 								soundmanager.playSound("bomb");
 							}
@@ -542,13 +542,15 @@ void tensi_weapon(int doing_)
 {
 	if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 	{
-		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"비상의 기운이 뿜어져나온다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_TENSI_BRAND_WEAPON,true,false,false,CL_tensi,
+			PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value5 = WB_WEATHER;
 		you.equipment[ET_WEAPON]->value6 = (70+randA(50))*(doing_>0?doing_*2:1);
 	}
 	else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_WEATHER && you.equipment[ET_WEAPON]->value6>0)
 	{
-		printarray(true,false,false,CL_tensi,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"더욱 비상의 힘이 길어졌다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,true,false,false,CL_tensi,
+			PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value6 += (90+randA(50))*(doing_>0?doing_:1);
 	}
 	else
@@ -962,7 +964,7 @@ int GetChoas(unit* unit_, int damage_)
 	return 0;
 }
 
-const char* tensi_talk(bool good_, tensi_do_list list_)
+string tensi_talk(bool good_, tensi_do_list list_)
 {
 	static char temp[256];
 	if(list_ != TENSI_NOTHING && randA(2))
@@ -972,31 +974,31 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			switch(randA(12))
 			{
 			case 0:
-				return "텐시가 당신에게 호의적인 시선을 주었다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD1);
 			case 1:
-				return "텐시의 힘이 당신에게 닿았다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD2);
 			case 2:
-				return "텐시: 힘들어보이네!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD3);
 			case 3:
-				return "텐시: 도와줄게!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD4);
 			case 4:
-				return "당신은 텐시의 웃음 소리를 들었다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD5);
 			case 5:
-				return "텐시가 흥미진진한 시선을 향했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD6);
 			case 6:
-				return "텐시의 박수소리를 들었다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD7);
 			case 7:
-				return "당신 주변에 기분 좋은 기운이 감도는것을 느꼈다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD8);
 			case 8:
-				return "텐시: 좀 더 즐겁게 해줘!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD9);
 			case 9:
-				return "텐시: 아직 더 할 수 있지?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD10);
 			case 10:
-				return "텐시: 힘내!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD11);
 			case 11:
-				return "텐시의 강력한 힘을 받았다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD12);
 			case 12:
-				return "텐시는 흥미진진하게 당신의 모험을 바라보고있다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_GOOD13);
 			}
 		}
 		else
@@ -1004,35 +1006,35 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			switch(randA(14))
 			{
 			case 0:
-				return "텐시의 사악한 시선이 느껴진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD1);
 			case 1:
-				return "텐시가 웃기 시작했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD2);
 			case 2:
-				return "텐시가 당신의 모험을 지루하다고 생각했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD3);
 			case 3:
-				return "텐시: 이런건 어떨까?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD4);
 			case 4:
-				return "텐시: 좀 더 스릴있게 해줄게!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD5);
 			case 5:
-				return "텐시: 너무 평화롭지 않아?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD6);
 			case 6:
-				return "텐시의 장난기어린 웃음을 들었다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD7);
 			case 7:
-				return "텐시가 당신에게 시련을 주려하고 있다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD8);
 			case 8:
-				return "텐시: 지루한 것보단 낫지?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD9);
 			case 9:
-				return "텐시: 더 화를 내줘!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD10);
 			case 10:
-				return "텐시: 전력을 다하지 않으면 죽을지도 몰라!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD11);
 			case 11:
-				return "텐시: 건방져!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD12);
 			case 12:
-				return "텐시: 지루하잖아!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD13);
 			case 13:
-				return "텐시: 너무 강한거 아니야?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD14);
 			case 14:
-				return "텐시: 안전한건 딱 질색이야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD15);
 			}
 		}
 
@@ -1045,52 +1047,47 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 			switch(randA(20))
 			{
 			case 0:
-				return "작은 돌이 날라와서 당신의 머리에 맞았다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING1);
 			case 1:
-				return "갑자기 바닥이 진동했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING2);
 			case 2:
-				return "텐시: 나랑 이야기 하지 않을래?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING3);
 			case 3:
-				return "텐시: 좋아하는 음식은 뭐야?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING4);
 			case 4:
-				return "텐시: 천계는 너무 심심해!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING5);
 			case 5:
-				return "텐시: 좀 더 대담하게 행동해줘!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING6);
 			case 6:
-				return "텐시: 난 재미있는걸 보고 싶어!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING7);
 			case 7:
-				return "텐시: 내가 좀 더 재밌게 해줄 수 있는데";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING8);
 			case 8:
-				return "텐시: 지루하게 하면 알지?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING9);
 			case 9:
-				return "발에 날카로운 바위가 튀어나와 넘어질뻔했고, 누군가의 웃음소리가 들렸다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING10);
 			case 10:
-				return "당신의 바로 옆에 날카로운 요석이 떨어졌다. \"아깝네!\"";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING11);
 			case 11:
-				return "텐시: 이 위에서 희생양들을 바라보고있는게 내 낙이야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING12);
 			case 12:
-				return "텐시: 바로 죽진않을거지? 좀 더 버틸 수 있지?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING13);
 			case 13:
-				return "텐시: 저기저기, 어떻게 죽을지 내기라도 하지 않을래?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING14);
 			case 14:
-				sprintf_s(temp,256,"텐시: 저번에 지켜보던 아이는 %s에 죽어버렸어.",mondata[randA(MON_MAX-1)].name.name.c_str());
-				return temp;
+				return LocalzationManager::formatString(LOC_SYSTEM_TENSI_NOTHING15, PlaceHolderHelper(mondata[randA_nonlogic(MON_MAX-1)].name.getName()));
 			case 15:
-				{
-					int rand_name_ = randA(MON_MAX-1);
-					sprintf_s(temp,256,"텐시: %s%s 왜 이렇게 %s걸까? ",mondata[rand_name_].name.name.c_str(),mondata[rand_name_].name.name_is(),randA(1)?"터프한":"귀여운");
-					return temp;
-				}
+				return LocalzationManager::formatString(LOC_SYSTEM_TENSI_NOTHING16, PlaceHolderHelper(mondata[randA_nonlogic(MON_MAX-1)].name.getName()));
 			case 16:
-				return "텐시: 조금만 기다려, 깜짝 파티를 준비하고 있으니까!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING17);
 			case 17:
-				return "당신의 이마에 조그만 돌이 날라와 부딪혔다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING18);
 			case 18:
-				return "텐시: 재밌는 이야기라도 해줘!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING19);
 			case 19:
-				return "텐시는 당신을 골리기 위한 계획을 세우고 있다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING20);
 			case 20:
-				return "텐시는 따분한듯 하품을 했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_NOTHING11);
 			}	
 		case TENSI_POTION:
 			if(good_)
@@ -1098,15 +1095,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시가 당신에게 새로운 힘을 주었다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_POTION1);
 				case 1:
-					return "텐시: 목마르지않아?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_POTION2);
 				case 2:
-					return "텐시: 이걸로 좀 더 싸워!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_POTION3);
 				case 3:
-					return "텐시: 아직 더 즐겁게 해줄 수 있지?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_POTION4);
 				case 4:
-					return "당신은 텐시가 내려준 물약을 받았다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_POTION5);
 				}
 			}
 			else
@@ -1114,15 +1111,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시의 웃음소리가 당신의 머리에 울렸다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_POTION1);
 				case 1:
-					return "텐시: 우리집 창고 구석에서 발견한 물약이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_POTION2);
 				case 2:
-					return "텐시: 벌이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_POTION3);
 				case 3:
-					return "텐시: 너를 위해 만든 특제 드링크야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_POTION4);
 				case 4:
-					return "당신은 텐시에게 억지로 물약을 들이켜졌다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_POTION5);
 				}
 			}
 		case TENSI_SUMMON:
@@ -1131,15 +1128,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시가 당신에게 동료를 내려주었다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUMMON1);
 				case 1:
-					return "텐시: 친구가 필요해?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUMMON2);
 				case 2:
-					return "텐시: 지원군이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUMMON3);
 				case 3:
-					return "텐시: 이거면 도망치지 않아도 되겠지?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUMMON4);
 				case 4:
-					return "텐시가 당신의 주변에 우호적인 소환물을 소환했다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUMMON5);
 				}
 			}
 			else
@@ -1147,15 +1144,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시가 당신에게 적재적인 소환수를 내려보냈다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_SUMMON1);
 				case 1:
-					return "텐시: 싸우지않을거면... 내가 싸우게할거야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_SUMMON2);
 				case 2:
-					return "텐시: 얼마나 강해졌는지 보고 싶어!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_SUMMON3);
 				case 3:
-					return "텐시: 너무 우쭐해진거 아니야?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_SUMMON4);
 				case 4:
-					return "텐시의 사악한 시선을 느꼈다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_SUMMON5);
 				}
 			}	
 		case TENSI_TELE:
@@ -1164,15 +1161,15 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시가 당신의 공간을 뒤흔들었다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_TELE1);
 				case 1:
-					return "텐시: 여기보단 안전할거야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_TELE2);
 				case 2:
-					return "텐시: 한숨 돌리는건 어때?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_TELE3);
 				case 3:
-					return "텐시: 좋은 잠자리를 찾아냈어!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_TELE4);
 				case 4:
-					return "당신은 공간이 일그러지고 있는 걸 느꼈다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_TELE5);
 				}
 			}
 			else
@@ -1180,72 +1177,72 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch(randA(4))
 				{
 				case 0:
-					return "텐시가 당신을 또 다른 곳으로 날려보냈다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_TELE1);
 				case 1:
-					return "텐시: 이 곳보단 멋진 장소야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_TELE2);
 				case 2:
-					return "텐시: 좀 더 재밌는 곳을 알려줄게!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_TELE3);
 				case 3:
-					return "텐시: 지루하네, 변화를 줘볼까?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_TELE4);
 				case 4:
-					return "당신은 시야가 핑핑도는 느낌을 받았다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_TELE5);
 				}
 			}	
 		case TENSI_EARTHQUAKE:
 			switch(randA(4))
 			{
 			case 0:
-				return "당신은 대지가 뒤집히는 느낌을 받았다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_EARHQUAKE1);
 			case 1:
-				return "텐시: 갈라져라!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_EARHQUAKE2);
 			case 2:
-				return "텐시: 카 크래쉬!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_EARHQUAKE3);
 			case 3:
-				return "텐시: 지진이다!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_EARHQUAKE4);
 			case 4:
-				return "강력한 지진이 일어났다!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_EARHQUAKE5);
 			}
 		case TENSI_MUNYUM:
 			switch(randA(4))
 			{
 			case 0:
-				return "당신은 몸이 아주 단단해지는 것을 느꼈다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUPERARMOR1);
 			case 1:
-				return "텐시: 이 복숭아 먹어볼래?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUPERARMOR2);
 			case 2:
-				return "텐시: 천인의 힘이야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUPERARMOR3);
 			case 3:
-				return "텐시: 이젠 맞는 것도 안 아플거야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUPERARMOR4);
 			case 4:
-				return "텐시가 당신에게 무념무상의 힘을 주었다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUPERARMOR5);
 			}
 		case TENSI_BURST:
 			switch(randA(2))
 			{
 			case 0:
-				return "텐시: 쾅!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BURST1);
 			case 1:
-				return "텐시: 휘말리지 않게 조심해!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BURST2);
 			case 2:
-				return "텐시: 이건 어떨까?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BURST3);
 			}
 		case TENSI_WEAPON:
 			switch(randA(6))
 			{
 			case 0:
-				return "당신의 손에 붉은 기운이 모이기 시작했다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON1);
 			case 1:
-				return "텐시: 무기가 볼품없잖아?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON2);
 			case 2:
-				return "텐시: 조금만 빌려주는거야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON3);
 			case 3:
-				return "텐시: 이젠 누구에게도 지지않을걸?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON4);
 			case 4:
-				return "텐시: 몰래 빌려주는거니까 누구에게 말하지마!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON5);
 			case 5:
-				return "텐시: 꼭 돌려줘야해?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON6);
 			case 6:
-				return "텐시: 들키면 이쿠에게 혼나니깐...";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_WEAPON7);
 			}
 		case TENSI_KANAME:
 			if (good_)
@@ -1253,61 +1250,61 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch (randA(5))
 				{
 				case 0:
-					return "텐시는 당신에게 지원군을 내려주었다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME1);
 				case 1:
-					return "텐시: 이게 있다면 지지는 않겠지?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME2);
 				case 2:
-					return "텐시: 내가 귀여워 하는 애들이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME3);
 				case 3:
-					return "텐시: 애완용 돌이란거 들어봤어?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME4);
 				case 4:
-					return "텐시: 조심히 다뤄줘!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME5);
 				case 5:
-					return "텐시: 카나메 판넬!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_KANAME6);
 				}
 			}
 			else {
 				switch (randA(5))
 				{
 				case 0:
-					return "텐시: 거기서 멀어지는게 좋을거야";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME1);
 				case 1:
-					return "텐시: 돌 침대라고 들어봤어?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME2);
 				case 2:
-					return "텐시: 내 돌은 사람을 물진않아... 쏘긴 하지만!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME3);
 				case 3:
-					return "텐시: 여기서 살아갈 수 있을지 시험해봐야겠어!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME4);
 				case 4:
-					return "텐시: 이번에 새로 만든 스펠카드인데, 시험 좀 해줄래?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME5);
 				case 5:
-					return "텐시: 사격연습을 해보지않을래? 물론 너가 표적이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_BAD_KANAME6);
 				}
 			}
 		case TENSI_FIELD:
 			switch (randA(4))
 			{
 			case 0:
-				return "당신을 중심으로 무언가 거대한 장막이 펼쳐짐을 느꼈다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FIELD1);
 			case 1:
-				return "텐시: 새로운 필드가 필요해?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FIELD2);
 			case 2:
-				return "텐시: 여기서 싸우는게 좀 더 재밌어보이는데!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FIELD3);
 			case 3:
-				return "텐시: 텐트 좀 펼칠테니까 도와줄래?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FIELD4);
 			case 4:
-				return "텐시: 좀 더 좋은 환경이 있는데 시험해볼래?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FIELD5);
 			}
 		case TENSI_BLIND:
 			switch (randA(3))
 			{
 			case 0:
-				return "텐시: 한 숨 잘테니까 불 좀 꺼야겠어";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BLIND1);
 			case 1:
-				return "텐시: 너무 밝지않아?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BLIND2);
 			case 2:
-				return "텐시: 이게 좀 더 재미있을 거 같지않아?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BLIND3);
 			case 3:
-				return "텐시: 눈에 보이는 것이 전부는 아니야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_BLIND4);
 			}
 		case TENSI_BUFF_DEBUFF:
 			if (good_)
@@ -1315,105 +1312,105 @@ const char* tensi_talk(bool good_, tensi_do_list list_)
 				switch (randA(5))
 				{
 				case 0:
-					return "텐시는 주변의 흐름을 조절했다.";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF1);
 				case 1:
-					return "텐시: 여기까지 해줬는데도 진다면 각오하는게 좋을거야";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF2);
 				case 2:
-					return "텐시: 이번엔 기분이 좋으니까 특별 선물이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF3);
 				case 3:
-					return "텐시: 이게 적이 느려보인다같은거지?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF4);
 				case 4:
-					return "텐시: 이걸로 충분하려나?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF5);
 				case 5:
-					return "텐시: 굼벵이 같은 것들!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF6);
 				}
 			}
 			else {
 				switch (randA(5))
 				{
 				case 0:
-					return "텐시: 모두에게 변화를 좀 줘볼까?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF1);
 				case 1:
-					return "텐시: 파티의 시작이야!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF2);
 				case 2:
-					return "텐시: 뛰어서 도망치는건 재미없으니까, 모두를 빠르게 해보았지!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF3);
 				case 3:
-					return "텐시: 이제 도망칠 순 없을껄?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF4);
 				case 4:
-					return "텐시: 너무 쉽게 이길거같으니까, 좀 강화시켜줘봤지!";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF5);
 				case 5:
-					return "텐시: 좀 더 스릴이 있어야겠지?";
+					return LocalzationManager::locString(LOC_SYSTEM_TENSI_DEBUFF6);
 				}
 			}
 		case TENSI_SUCIDE:
 			switch (randA(6))
 			{
 			case 0:
-				return "텐시: 좋은 친구들을 소개해줄게!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE1);
 			case 1:
-				return "텐시: 괜찮은 애들이라고! 좀 강경파인걸 제외하면 말이지";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE2);
 			case 2:
-				return "텐시: 폭파하는거 좋아해?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE3);
 			case 3:
-				return "텐시: 용맹하지만 아군을 신경쓰지않는게 단점이긴하지";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE4);
 			case 4:
-				return "텐시: 잠깐이지만 사이좋게 지내줘!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE5);
 			case 5:
-				return "텐시: 자폭특공이란건 잘 이해할 수 없어... 무슨 종교라도 믿는걸까?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE6);
 			case 6:
-				return "텐시: 주변을 싹 정리하는데는 이만한게 없지!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUCIDE7);
 			}
 		case TENSI_WEATHER_FOG:
 			switch (randA(5))
 			{
 			case 0:
-				return "텐시: 오늘의 날씨는 매우 흐리겠습니다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG1);
 			case 1:
-				return "텐시: 난 안개낀날은 별로 좋아하지않아.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG2);
 			case 2:
-				return "텐시: 이런 날씨에서도 싸울 수 있어?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG3);
 			case 3:
-				return "텐시: 싫다. 습하고 어둡잖아!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG4);
 			case 4:
-				return "텐시: 몸을 숨기기엔 적당한 날씨지!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG5);
 			case 5:
-				return "텐시: 기상발현!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_FOG6);
 			}
 		case TENSI_WEATHER_THUNDER:
 			switch (randA(6))
 			{
 			case 0:
-				return "텐시: 오늘의 날씨는 큰 천둥번개가 치겠습니다!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER1);
 			case 1:
-				return "텐시: 화끈하게 가자고!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER2);
 			case 2:
-				return "텐시: 번개에 맞을 확률이 얼마나 되지?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER3);
 			case 3:
-				return "텐시: 이런건 피할 수 없을껄?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER4);
 			case 4:
-				return "텐시: 입고있는 옷이 절연소재이길 바랄게!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER5);
 			case 5:
-				return "텐시: 우르릉 쾅쾅!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER6);
 			case 6:
-				return "텐시: 비상의 검이여! 하늘에 천둥번개를 모아라!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_THUNDER7);
 			}
 		case TENSI_WEATHER_SUN:
 			switch (randA(6))
 			{
 			case 0:
-				return "텐시: 오늘의 날씨는 구름 한점없이 쨍쨍하겠습니다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN1);
 			case 1:
-				return "텐시: 어떻게 던전에 햇빛이 비치는거지? 뭐 어때!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN2);
 			case 2:
-				return "텐시: 이런 태양빛 아래서 과연 누가 숨을 수 있을까?";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN3);
 			case 3:
-				return "텐시: 잠시 빨래를 말려야하니까!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN4);
 			case 4:
-				return "텐시: 햇빛이여!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN5);
 			case 5:
-				return "텐시: 비상의 검으론 이런 것도 할 수 있지!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN6);
 			case 6:
-				return "텐시: 오늘은 소풍가는 날이야!";
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN7);
 			}	
 		}
 

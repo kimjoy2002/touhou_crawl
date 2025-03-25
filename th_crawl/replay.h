@@ -48,7 +48,7 @@ public:
 
 	bool ReplayMode(){return play;};
 
-	bool StopReplay(const char* str);
+	bool StopReplay(string str);
 };
 
 

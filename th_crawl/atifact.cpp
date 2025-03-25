@@ -479,7 +479,6 @@ void MakeArtifact(item* item_, int good_bad_)
 	{
 		item_->image = &img_item_artifact_ring;
 	}
-	item_->second_name.name = "아티펙트 ";
-	item_->second_name.name_type = false;
+	item_->second_name= name_infor(LOC_SYSTEM_ITEM_ARTIFACT);
 
 }

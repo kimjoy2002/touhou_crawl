@@ -18,13 +18,12 @@ using namespace std;
 
 struct book_infor
 {
-	string name;
-	bool name_back;
+	LOCALIZATION_ENUM_KEY key;
 	int id;
 	int value;
 	int spell[8];
-	book_infor(string name_,bool name_back_, int id_, int value_, int s1,int s2,int s3,int s4,int s5,int s6,int s7,int s8):
-	name(name_),name_back(name_back_), id(id_), value(value_)
+	book_infor(LOCALIZATION_ENUM_KEY key, int id_, int value_, int s1,int s2,int s3,int s4,int s5,int s6,int s7,int s8):
+	key(key), id(id_), value(value_)
 	{
 		spell[0] = s1; spell[1] = s2; spell[2] = s3; spell[3] = s4; spell[4] = s5; spell[5] = s6; spell[6] = s7; spell[7] = s8; 
 	}
@@ -34,7 +33,7 @@ struct book_infor
 const int RANDOM_BOOK_NUM=7;
 
 extern book_infor static_book_list[BOOK_LAST]; 
-extern string random_book_list[RANDOM_BOOK_NUM];
+extern LOCALIZATION_ENUM_KEY random_book_list[RANDOM_BOOK_NUM];
 
 
 const char* GetBookInfor(book_list book_);

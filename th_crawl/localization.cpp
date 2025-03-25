@@ -15,21 +15,17 @@
 #include <sstream>
 
 
-// **ENUM ↔ 문자열 변환 맵 생성 함수**
-std::unordered_map<std::string, LOCALIZATION_ENUM_KEY> createEnumMap() {
-    std::unordered_map<std::string, LOCALIZATION_ENUM_KEY> map;
-#define X(name) map[#name] = name;
-    LOCALIZATION_ENUM_LIST
-#undef X
-    return map;
-}
 
-unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
-unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
+unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
+unordered_map<string, SPEAK_ENUM_KEY> LocalzationManager::speak_enum_map = createSpeakEnumMap();
+unordered_map<SPEAK_ENUM_KEY, string> LocalzationManager::speak_map;
+unordered_map<string, monster_index> LocalzationManager::monster_enum_map = createMonsterEnumMap();
+unordered_map<monster_index, string> LocalzationManager::monster_name_map;
+unordered_map<monster_index, string> LocalzationManager::monster_description_map;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
-	"은|는", "이|가", "을|를", "와|과"
+	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
 };
 unordered_set<string> LocalzationManager::english_verbs = {
 	"is|are"
@@ -37,6 +33,8 @@ unordered_set<string> LocalzationManager::english_verbs = {
 unordered_set<string> LocalzationManager::english_article = {
 	"a|an"
 };
+
+
 
 void LocalzationManager::init(LOCALIZATION_TYPE type) {
 	string filePath;
@@ -53,61 +51,67 @@ void LocalzationManager::init(LOCALIZATION_TYPE type) {
 		break;
 	}
 
-	ifstream file(filePath + "general.txt");
-	if (!file) {
-		string error_msg = "Error: Cannot open localization file: " + filePath + "general.txt";
-		//::MessageBoxA(0, error_msg.c_str(), 0, 0);
-		return;
-	}
+	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
+		localization_map[key] = values[0];
+		replaceAll(localization_map[key], "\\n", "\n");
+	});
 
-	string line;
-	while (getline(file, line)) {
-		istringstream iss(line);
-		string key, value;
+	initFile<SPEAK_ENUM_KEY>(filePath, "speak.txt", speak_enum_map, 1, [](SPEAK_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
+		speak_map[key] = values[0];
+	});
 
-		if (getline(iss, key, ',') && getline(iss, value)) {
-			key.erase(key.find_last_not_of(" \t\r\n") + 1);
-			value.erase(0, value.find_first_not_of(" \t\r\n"));
-
-			// 자동 매핑된 ENUM 확인
-			if (localization_enum_map.count(key)) {
-				localization_map[localization_enum_map[key]] = value;
-			} else {
-				string error_msg = "Warning: Unknown localization key: " + key;
-				//::MessageBoxA(0, error_msg.c_str(), 0, 0);
-			}
-		}
-	}
-	file.close();
+	initFile<monster_index>(filePath, "monsters.txt", monster_enum_map, 2, [](monster_index key, vector<string> values, vector<string> prev_values) {
+		monster_name_map[key] = (!values[0].empty())?values[0]:prev_values[0];
+		monster_description_map[key] = (!values[1].empty())?values[1]:prev_values[1];
+		replaceAll(monster_description_map[key], "\\n", "\n");
+	});
 }
 
-string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) {
+const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO) {} 문법이 이쓰면 formatString으로 바꾸기
 	if(localization_map.find(key) != localization_map.end()) {
 		return localization_map[key];
 	}
 	return localization_map[LOC_NONE];
 }
 
+const string& LocalzationManager::speakString(SPEAK_ENUM_KEY key) {
+	if(speak_map.find(key) != speak_map.end()) {
+		return speak_map[key];
+	}
+	return speak_map[SPEAK_NORMAL];
+}
+
 
 // 태그를 처리하는 함수
 string LocalzationManager::processTags(const string& template_str, const vector<PlaceHolderHelper>& values) {
     string result = template_str;
-    regex placeholder_regex(R"(\{(\d+)(?::([^}]+))?\})");
+    regex placeholder_regex(R"(\{(\d+(?::[^}]+)?)\}|\{([^0-9{:|}]+(?:\|[^0-9{:|}]+)+)\})");
     smatch match;
 
     while (regex_search(result, match, placeholder_regex)) {
-		int index = stoi(match[1].str());
 		string replacement;
+		if (match[1].matched) {
+			auto pair_placeholder = extractPlaceholder("{" + match[1].str() + "}");
+			int index = stoi(pair_placeholder.first);
+			if(index < values.size()) {
+				const PlaceHolderHelper& ph = values[index];
+				string value = (ph.key != LOC_NONE) ? locString(ph.key) : ph.name;
 
-		if (index < values.size()) {
-			const PlaceHolderHelper& ph = values[index];
-			string value = (ph.key != LOC_NONE) ? locString(ph.key) : ph.name;
-
-			if (match[2].matched) {
-				replacement = verb(value, match[2].str(), ph.plural, false);
-			} else {
-				replacement = value;
+				if (!pair_placeholder.second.empty()) {
+					replacement = verb(value, pair_placeholder.second, ph.plural, false);
+				} else {
+					replacement = value;
+				}
 			}
+		} else if(match[2].matched) {
+			std::string token_inner = match[2].str();
+			std::vector<std::string> options;
+			std::stringstream ss(token_inner);
+			std::string item;
+			while (std::getline(ss, item, '|')) {
+				options.push_back(item);
+			}
+			replacement = options[randA_nonlogic(options.size() - 1)];
 		}
 
 		result.replace(match.position(), match.length(), replacement);
@@ -163,11 +167,17 @@ std::string LocalzationManager::verb(const std::string& text, const std::string&
 
 	return only_verb?verb:text + verb;
 }
-string& LocalzationManager::monString(monster_index key) {
+const string& LocalzationManager::monString(monster_index key) {
 	if(monster_name_map.find(key) != monster_name_map.end()) {
 		return monster_name_map[key];
 	}
 	return monster_name_map[MON_REIMUYUKKURI];
+}
+const string& LocalzationManager::monDecsriptionString(monster_index key) {
+	if(monster_description_map.find(key) != monster_description_map.end()) {
+		return monster_description_map[key];
+	}
+	return monster_description_map[MON_REIMUYUKKURI];
 }
 string LocalzationManager::getCorrectParticle(const string& word, const string& opt1, const string& opt2) {
     if (word.empty()) return opt1;

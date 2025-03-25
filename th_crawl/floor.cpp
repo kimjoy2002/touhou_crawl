@@ -132,7 +132,7 @@ void floor_effect::onWalk(unit* unit_)
 			//if(it->GetPrevPos() != position)
 			//{
 		if(!unit_->isFly())
-			unit_->damage(attack_infor(rand_int(8,14),15,99,NULL,parent,ATT_STONE_TRAP,name_infor("바위 압정",true)), true);
+			unit_->damage(attack_infor(rand_int(8,14),15,99,NULL,parent,ATT_STONE_TRAP,name_infor(LOC_SYSTEM_ATT_STONE_TACK)), true);
 				/*return true;*/
 		//	}
 		//}

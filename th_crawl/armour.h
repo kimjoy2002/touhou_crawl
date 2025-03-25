@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
+#include "enumMapBuilder.h"
 
 struct item_infor;
 
@@ -45,7 +46,7 @@ enum armour_value
 	AMV_MIN_EV
 };
 
-string GetMaterialString(material_kind kind_);
+LOCALIZATION_ENUM_KEY GetMaterialStringKey(material_kind kind_);
 void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t);
 void MakeArmourEnchant(int good_bad, item_infor* t);
 int ArmourExceptopn(armour_kind type);

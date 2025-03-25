@@ -129,8 +129,7 @@ void createSpellCard(int goodbad, int select_, item_infor* t)
 	t->is_pile = false;
 	t->can_throw = false;
 	t->image = &img_mons_default;
-	t->name.name = "스펠카드";
-	t->name.name_type = false;
+	t->name = name_infor(LOC_SYSTEM_SPELLCARD);
 	t->weight = 2.0f;
 	t->value = 200;
 }
@@ -173,26 +172,26 @@ bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag)
 }
 
 
-const char* SpellcardName(spellcard_evoke_type skill)
+std::string SpellcardName(spellcard_evoke_type skill)
 {
 	switch(skill)
 	{
 	case SPC_V_INVISIBLE: //월-투명+회피
-		return "투명의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_INVISIBLE);
 	case SPC_V_FIRE: //화-구름생성
-		return "화염의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_FIRE);
 	case SPC_V_ICE: //수-관통형볼트
-		return "냉기의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_ICE);
 	case SPC_V_AIR: //목-밀쳐내기
-		return "대기의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_AIR);
 	case SPC_V_METAL://금-
-		return "금속의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_METAL);
 	case SPC_V_EARTH: //토-벽파괴
-		return "대지의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_EARTH);
 	case SPC_V_SUN://일-주변 몬스터 혼란+투명해제
-		return "태양의 ";
+		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_SUN);
 	default:
-		return false;
+		return "";
 	}
 }
 int SpellcardMaxCharge(spellcard_evoke_type skill)
@@ -279,7 +278,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		if (CheckThrowPath(you.position, target, beam))
 		{
 			soundmanager.playSound("fire");
-			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor("불바다", false));
+			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor(LOC_SYSTEM_ATT_V_FIRE));
 			ThrowSector(0, beam, temp_infor, GetSpellSector(SPL_FIRE_SPREAD), [&](coord_def c_) {
 				if (you.isSightnonblocked(c_))
 				{
@@ -294,7 +293,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor("냉기", true));
+			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor(LOC_SYSTEM_ATT_COLD));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -313,10 +312,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
 
-			//beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor("화염구",false));
+			//beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 			//coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
 
-			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor("암석탄", true));
+			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_EARTH_SHOT));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -340,7 +339,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 								{
 									if (unit* hit_ = env[current_level].isMonsterPos(pos.x + i, pos.y + j))
 									{
-										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor("암석파편", true));
+										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_V_EARTH_FRAG));
 										hit_->damage(temp_att, true);
 									}
 								}
@@ -356,7 +355,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if (!env[current_level].dgtile[pos.x][pos.y].isMove(true, true, false))
 				{
-					printarray(true, false, false, CL_normal, 3, "암석탄이 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile], "에 부딪혔지만 미동도 하지 않았다.");
+					printarray(true, false, false, CL_normal, 3, "암석탄이 ", LocalzationManager::locString(dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile]), "에 부딪혔지만 미동도 하지 않았다.");
 					env[current_level].MakeNoise(target, 8, NULL);
 				}
 				Sleep(300);
@@ -372,7 +371,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("바람", true));
+			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_AIR));
 
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++)
@@ -405,7 +404,8 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							if (real_knock_)
 							{
-								printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "바람에 밀려나갔다.");
+								LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELLCARD_AIR_EFFECT,false,false,false,CL_normal,
+									PlaceHolderHelper(unit_->GetName()->getName()));
 							}
 						}
 					}
@@ -426,7 +426,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(1, 10 + power / 6), 1 * (10 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("철가시", false));
+			beam_infor temp_infor(randC(1, 10 + power / 6), 1 * (10 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -453,7 +453,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN ||
 					it->id == MON_VAMPIER_BAT) {
 					int damage_ = 10 + power_ / 12;
-					it->damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("햇빛", true)), true);
+					it->damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN)), true);
 					power_ += 100;
 				}
 				if (it->flag & M_FLAG_INANIMATE)
@@ -472,7 +472,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		if (you.tribe == TRI_VAMPIRE) {
 			int damage_ = 8 + power / 12;
-			you.damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor("햇빛", true)), true);
+			you.damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN)), true);
 		}
 		return true;
 	}

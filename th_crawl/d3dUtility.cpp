@@ -317,6 +317,28 @@ unsigned int ExceptionGameLoop() {
 }
 
 
+void saveReplay_cpp() {
+	if(saveexit && isNormalGame() && !ReplayClass.ReplayMode())
+		SaveFile();
+	else if(isArena())
+	{
+		{
+			ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE_ARENA, 
+				PlaceHolderHelper(to_string(you.level)),
+				PlaceHolderHelper(you.user_name)));
+		}
+	}
+	else if (isSprint())
+	{
+		ReplayClass.StopReplay(LocalzationManager::locString(LOC_SYSTEM_REPLAY_TITLE_SPRINT));
+	}
+	else if(!isNormalGame())
+	{
+		ReplayClass.DeleteRpy();
+	}
+}
+
+
 unsigned int WINAPI GameLoop(void *arg)
 {
 	__try
@@ -331,24 +353,7 @@ unsigned int WINAPI GameLoop(void *arg)
 	}
 	__finally
 	{
-		if(saveexit && isNormalGame() && !ReplayClass.ReplayMode())
-			SaveFile();
-		else if(isArena())
-		{
-			{
-				char temp[256];
-				sprintf_s(temp,256,"아레나 레벨 %d",you.level);
-				ReplayClass.StopReplay(temp);
-			}
-		}
-		else if (isSprint())
-		{
-			ReplayClass.StopReplay("스프린트");
-		}
-		else if(!isNormalGame())
-		{
-			ReplayClass.DeleteRpy();
-		}
+		saveReplay_cpp();
 		g_ThreadCnt-=2;
 	}
 	return 0;

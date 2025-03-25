@@ -11,11 +11,10 @@
 
 #include "mon_infor.h"
 #include "enum.h"
-#include "monster.h"
 
+class monster;
+   
 
-
-char* Get_Speak(int mon_id, monster* monster_info, monster_speak_type type = MST_NORMAL);
-
+string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type);
 
 #endif // __SPEAK_H__

@@ -43,20 +43,20 @@ int GetMaterial(material_kind kind_, armour_value ac_)
 }
 
 
-string GetMaterialString(material_kind kind_)
+LOCALIZATION_ENUM_KEY GetMaterialStringKey(material_kind kind_)
 {
 	switch(kind_)
 	{
 	case MTK_ROBE: //천
-		return "천";
+		return LOC_SYSTEM_ITEM_ARMOUR_M_ROBE;
 	case MTK_LEATHER: //가죽
-		return "가죽";
+		return LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER;
 	case MTK_CHAIN: //사슬
-		return "사슬";
+		return LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN;
 	case MTK_PLATE: //판금
-		return "판금";
+		return LOC_SYSTEM_ITEM_ARMOUR_M_PLATE;
 	}
-	return 0;
+	return LOC_SYSTEM_ITEM_ARMOUR_M_ROBE;
 }
 
 
@@ -83,10 +83,8 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->equip_image = material == MTK_PLATE ? &img_play_item_body[4] :
 			material == MTK_CHAIN ? &img_play_item_body[3] :
 			material == MTK_LEATHER ? &img_play_item_body[2] : &img_play_item_body[1];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 일반옷";
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_NORMAL, GetMaterialStringKey(material));
 		t->value2 +=(material>=MTK_LEATHER)?((material>=MTK_CHAIN)?2:1):0;
-		t->name.name_type = true;
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 40+(material*20);
 		break;		
@@ -94,9 +92,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 	{
 		t->image = &img_item_armor_robe;
 		t->equip_image = &img_play_item_body[10];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 무녀옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_MIKO, GetMaterialStringKey(material));
 		t->weight = 6.0f*(material*0.5 + 1);
 		t->value = 80 + (material * 20);
 		break;
@@ -104,54 +100,42 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 	case AMK_WING:
 		t->image = &img_item_armor_relec;
 		t->equip_image = &img_play_item_body[12];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 날개옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_WING, GetMaterialStringKey(material));
 		t->weight = 3.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_KAPPA:
 		t->image = &img_item_armor_rcold;
 		t->equip_image = &img_play_item_body[13];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 캇파옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_FIRE:
 		t->image = &img_item_armor_rfire;
 		t->equip_image = &img_play_item_body[14];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 불쥐옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_FIRE, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_MAID:
 		t->image = &img_item_armor_rmagic;
 		t->equip_image = &img_play_item_body[15];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 메이드옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_MAID, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_POISON:
 		t->image = &img_item_armor_rpois;
 		t->equip_image = &img_play_item_body[16];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 인형옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_POISON, GetMaterialStringKey(material));
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;	
 	case AMK_AUTUMN:
 		t->image = &img_item_autumn_armour[material+1];
 		t->equip_image = &img_play_item_body[5 + material + 1];
-		t->name.name = GetMaterialString(material);
-		t->name.name += " 단풍옷";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN, GetMaterialStringKey(material));
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;	
@@ -179,15 +163,12 @@ void MakeArmourEnchant(int good_bad, item_infor* t)
 
 	if(good_bad)
 	{
-		t->name2.name = "룬이 새겨진 ";
-		t->name2.name_type = true;
+		t->name2 = name_infor(LOC_SYSTEM_ITEM_ARMOUR_RUNED);
 	}
 
 }
 void equipArmour(armour_kind type, int value)
 {
-
-	
 	switch(type)
 	{
 	case AMK_NORMAL:		

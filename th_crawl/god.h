@@ -26,8 +26,7 @@ enum GOD_CHECK_TYPE
 
 
 
-const char* GetGodString(god_type god);
-bool GetGodString_is(god_type god);
+string GetGodString(god_type god);
 int GetGodAbandonValue(god_type god);
 int pietyLevel(int piety);
 int GetGodGiftTime(god_type god);

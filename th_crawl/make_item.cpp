@@ -39,19 +39,19 @@ int armour_stat[5][3] =
 class etcStruct
 {
 public:
-	name_infor name;
+	LOCALIZATION_ENUM_KEY key;
 	textures* tex;
-	etcStruct(const char* name_, bool type_, textures* tex_):
-		name(name_, type_), tex(tex_)
+	etcStruct(LOCALIZATION_ENUM_KEY key_, textures* tex_):
+		key(key_), tex(tex_)
 	{}
 };
 
 etcStruct etcList[EIT_LAST] = {
-	etcStruct("실종 포스터", false, &img_item_goal),
-	etcStruct("개다래 나무", false, &img_item_cat_tree),
-	etcStruct("부셔진 카메라", false, &img_item_broken_camera),
-	etcStruct("잡동사니", false, &img_item_kappa_trash),
-	etcStruct("사진", true, &img_item_goal)
+	etcStruct(LOC_SYSTEM_ITEM_ETC_SATORI, &img_item_goal),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_CATNIP, &img_item_cat_tree),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA, &img_item_broken_camera),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH, &img_item_kappa_trash),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_PHOTO, &img_item_goal)
 };
 
 
@@ -78,10 +78,8 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t)
 	t->is_pile = true;
 	t->can_throw = false;
 	t->image = &img_item_food_p_item;
-	t->name.name = "P템";
-	t->name.name_type = true;
-	t->name2.name = "";
-	t->name2.name_type = true;
+	t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_P_ITEM);
+	t->name2 = name_infor();
 	t->weight = 1.0f;
 	t->value = 30;
 	return (*t);
@@ -96,8 +94,6 @@ item_infor& makeCustomBook(item_infor* t)
 	t->num = 1;
 	t->curse = false;
 	{
-		t->name2.name = "떨어진 마법책";
-		t->name2.name_type = true;
 		t->value0 = BOOK_CUSTOM_BOOK;
 		t->value1 = 0;
 		t->value2 = 0;
@@ -110,8 +106,8 @@ item_infor& makeCustomBook(item_infor* t)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_book[0];
-		t->name.name = "떨어진 마법책";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_BOOK_DROP);
+		t->name2 = name_infor(LOC_SYSTEM_ITEM_BOOK_DROP);
 		t->weight = 5.0f;
 		t->value = 150;
 	}
@@ -123,8 +119,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	t->type = type;
 	t->num = 1;
 	t->curse = false;
-	t->name2.name = "";
-	t->name2.name_type = true;
+	t->name2 = name_infor();
 	//if((t->type>=ITM_ARMOR_FIRST && t->type< ITM_ARMOR_LAST))
 	//{
 	//	int rune_ = abs(t->value4*3);
@@ -170,8 +165,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_helmet[type_];
 		t->equip_image = &img_play_item_hat[type_];
-		t->name.name = (type_==1 || type_ == 4)?"리본":((type_ == 2)? "머리띠" :"모자");
-		t->name.name_type = (type_ == 1 || type_ == 4) ? true: false;
+		t->name = name_infor((type_==1 || type_ == 4)?LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON:((type_ == 2)?LOC_SYSTEM_ITEM_ARMOUR_HEAD_HEADBAND :LOC_SYSTEM_ITEM_ARMOUR_HEAD_HAT));
 		t->weight = 5.0f;
 		t->value = 70;
 		break;
@@ -187,8 +181,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_cloak;
 		t->equip_image = &img_play_item_cloak[0];
-		t->name.name = "망토";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_CLOAK);
 		t->weight = 3.0f;
 		t->value = 70;
 		break;
@@ -203,8 +196,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_glove;
 		t->equip_image = &img_play_item_glove[0];
-		t->name.name = "장갑";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_GLOVE);
 		t->weight = 2.0f;
 		t->value = 70;
 		break;
@@ -219,8 +211,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_armor_boot;
 		t->equip_image = &img_play_item_boot[0];
-		t->name.name = "신발";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHOES);
 		t->weight = 4.0f;
 		t->value = 70;
 		break;
@@ -241,8 +232,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_ring[iden_list.ring_list[t->value1].type];
-		t->name.name = "반지";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_JEWELRY_RING);
 		t->weight = 1.0f;
 		t->value = 200;
 		break;
@@ -256,8 +246,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_spellcard;
-		t->name.name = "스펠카드";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_SPELLCARD);
 		t->weight = 2.0f;
 		t->value = 200;
 		break;
@@ -273,8 +262,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_amulet;
-		t->name.name = "부적";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_JEWELRY_AMULET);
 		t->weight = 1.0f;
 		t->value = 200;
 		break;
@@ -292,8 +280,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->is_pile = true;
 			t->can_throw = false;
 			t->image = &img_item_food_bread;
-			t->name.name = "빵";
-			t->name.name_type = true;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_BREAD);
 			t->weight = 2.0f;
 			t->value = 30;
 			break;
@@ -308,8 +295,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = rand_int(1,3);
 			t->image = &img_item_sweet_potato;
-			t->name.name = "고구마";
-			t->name.name_type = false;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_SWEETPOTATO);
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
@@ -324,8 +310,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = 2;
 			t->image = &img_item_chocolet;
-			t->name.name = "초콜렛";
-			t->name.name_type = true;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_CHOCOLET);
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
@@ -340,8 +325,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->can_throw = false;
 			t->num = 1;
 			t->image = &img_item_cucumber;
-			t->name.name = "오이";
-			t->name.name_type = false;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_CUCUMBER);
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
@@ -357,8 +341,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_potion[iden_list.potion_list[t->value1].color];
-		t->name.name = "물약";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_POTION_POTION);
 		t->weight = 4.0f;
 		t->value = 120;
 		break;
@@ -372,8 +355,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_scroll;
-		t->name.name = "두루마리";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_SCROLL_SCROLL);
 		t->weight = 2.0f;
 		t->value = 120;
 		break;		
@@ -381,8 +363,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		{
 			int book= select_!=-1?select_:rand_int(BOOK_FIRST,BOOK_LAST-1);	
 			int color_ = randA(RANDOM_BOOK_NUM-1);
-			t->name2.name = random_book_list[color_];
-			t->name2.name_type = true;
+			t->name2 = name_infor(random_book_list[color_]);
 			t->value0 = book;
 			t->value1 = static_book_list[book].spell[0];
 			t->value2 = static_book_list[book].spell[1];
@@ -395,8 +376,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->is_pile = false;
 			t->can_throw = false;
 			t->image = &img_item_book[color_];
-			t->name.name = static_book_list[book].name;
-			t->name.name_type = static_book_list[book].name_back;
+			t->name = name_infor(static_book_list[book].key);
 			t->weight = 5.0f;
 			t->value = static_book_list[book].value;
 		}
@@ -414,8 +394,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_rune;
-		t->name.name = "룬";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_RUNE_RUNE);
 		t->weight = 1.0f;
 		t->value = 10000;
 		break;
@@ -429,8 +408,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_mons_yinyan;
-		t->name.name = "음양옥";
-		t->name.name_type = true;
+		t->name = name_infor(LOC_SYSTEM_ITEM_YINYANG);
 		t->weight = 1.0f;
 		t->value = 10000;
 		break;
@@ -444,8 +422,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = etcList[select_].tex;
-		t->name.name = etcList[select_].name.name;
-		t->name.name_type = etcList[select_].name.name_type;
+		t->name = name_infor(etcList[select_].key);
 		t->weight = 1.0f;
 		t->value = 1;
 		break;
@@ -530,10 +507,8 @@ item_infor& CustomItem(item_infor* t, item_type type, textures* graphic,textures
 	t->can_throw = throw_;
 	t->image = graphic;
 	t->equip_image = equip_graphic;
-	t->name.name = name_.name;
-	t->name.name_type = name_.name_type;
-	t->name2.name = name2_.name;
-	t->name2.name_type = name2_.name_type;
+	t->name =  name_;
+	t->name2 = name2_;
 	t->weight = weight;
 	t->value = value;
 	return (*t);
@@ -632,13 +607,10 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	//t->value3 = randA(1)?0:randA(5*good_bad);
 	t->value4 = good_bad?randA_1(5)*(good_bad>=0?1:-1):0;
 	t->value5 = (good_bad>0 && randA(2)>1)?GetNewBrand(15):0;
-	t->name2.name = "";
-	t->name2.name_type = true;
-
+	t->name2 = name_infor();
 	if(good_bad)
 	{
-		t->name2.name = "룬이 새겨진 ";
-		t->name2.name_type = true;		
+		t->name2 = name_infor(LOC_SYSTEM_ITEM_ARMOUR_RUNED);		
 	}
 
 	t->is_pile = false;
@@ -658,8 +630,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_dagger;
 				t->equip_image = &img_play_item_weapon[0];
-				t->name.name = "대거";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER);
 				t->weight = 2.0f;
 				t->value = 50;
 				return;
@@ -676,8 +647,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_knife;
 				t->equip_image = &img_play_item_weapon[1];
-				t->name.name = "투척용 나이프";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE);
 				t->weight = 1.5f;
 				t->value = 50;
 				return;
@@ -693,8 +663,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_shortsword;
 				t->equip_image = &img_play_item_weapon[2];
-				t->name.name = "숏소드";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_SHORTSWORD);
 				t->weight = 3.0f;
 				t->value = 50;
 				return;
@@ -714,8 +683,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_katana;
 				t->equip_image = &img_play_item_weapon[3];
-				t->name.name = "도검";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_KATANA);
 				t->weight = 4.0f;
 				t->value = 100;
 				return;
@@ -731,8 +699,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_scimitar;
 				t->equip_image = &img_play_item_weapon[4];
-				t->name.name = "언월도";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_SCIMITAR);
 				t->weight = 5.0f;
 				t->value = 120;
 				return;
@@ -748,8 +715,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_greatsword;
 				t->equip_image = &img_play_item_weapon[5];
-				t->name.name = "대검";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_GREATSWORD);
 				t->weight = 12.0f;
 				t->value = 200;
 				return;
@@ -765,8 +731,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_chakram;
 				t->equip_image = &img_play_item_weapon[6];
-				t->name.name = "철륜";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_CHAKRAM);
 				t->weight = 3.0f;
 				t->value = 200;
 				return;
@@ -786,8 +751,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_handaxe;
 				t->equip_image = &img_play_item_weapon[12];
-				t->name.name = "손도끼";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_AXE_HANDAXE);
 				t->weight = 3.0f;
 				t->value = 60;
 				return;
@@ -803,8 +767,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_battleaxe;
 				t->equip_image = &img_play_item_weapon[13];
-				t->name.name = "전투도끼";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_AXE_BATTLEAXE);
 				t->weight = 6.0f;
 				t->value = 60;
 				return;
@@ -820,8 +783,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_anchor;
 				t->equip_image = &img_play_item_weapon[14];
-				t->name.name = "닻";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_AXE_ANCHOR);
 				t->weight = 12.0f;
 				t->value = 250;
 				return;
@@ -842,8 +804,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = ran_?&img_item_weapon_gohey:&img_item_weapon_gohey2;
 				t->equip_image = ran_?&img_play_item_weapon[7]: &img_play_item_weapon[8];
-				t->name.name = "고헤이";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_GOHEI);
 				t->weight = 3.0f;
 				t->value = 60;
 				return;
@@ -859,8 +820,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_broomstick;
 				t->equip_image = &img_play_item_weapon[20];
-				t->name.name = "빗자루";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_BROOMSTICK);
 				t->weight = 4.0f;
 				t->value = 80;
 				return;
@@ -876,8 +836,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_umbrella;
 				t->equip_image = &img_play_item_weapon[9];
-				t->name.name = "양산";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_UMBRELLA);
 				t->weight = 3.0f;
 				t->value = 50;
 				return;
@@ -893,8 +852,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_dauzing_rod;
 				t->equip_image = &img_play_item_weapon[10];
-				t->name.name = "다우징 로드";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_DAUZING_ROD);
 				t->weight = 5.0f;
 				t->value = 140;
 				return;
@@ -910,8 +868,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_onbasira;
 				t->equip_image = &img_play_item_weapon[11];
-				t->name.name = "온바시라";
-				t->name.name_type = false; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_MACE_ONBASIRA);
 				t->weight = 20.0f;
 				t->value = 300;
 				return;
@@ -931,8 +888,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_spear;
 				t->equip_image = &img_play_item_weapon[15];
-				t->name.name = "창";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_SPEAR);
 				t->weight = 4.0f;
 				t->value = 70;
 				return;
@@ -948,8 +904,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = true;
 				t->image = &img_item_weapon_javelin;
 				t->equip_image = &img_play_item_weapon[16];
-				t->name.name = "투척용 창";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_JAVELIN);
 				t->weight = 4.0f;
 				t->value = 70;
 				return;
@@ -965,8 +920,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_scythe;
 				t->equip_image = &img_play_item_weapon[17];
-				t->name.name = "낫";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_SCYTHE);
 				t->weight = 7.0f;
 				t->value = 120;
 				return;
@@ -982,8 +936,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_trident;
 				t->equip_image = &img_play_item_weapon[18];
-				t->name.name = "삼지창";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_TRIDENT);
 				t->weight = 6.0f;
 				t->value = 140;
 				return;
@@ -999,8 +952,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->can_throw = false;
 				t->image = &img_item_weapon_bamboo_spear;
 				t->equip_image = &img_play_item_weapon[19];
-				t->name.name = "죽창";
-				t->name.name_type = true; //true 받침있음
+				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_BAMBOO_SPEAR);
 				t->weight = 6.0f;
 				t->value = 140;
 				return;
@@ -1017,8 +969,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value6 = 10;
 	t->can_throw = true;
 	t->image = &img_item_weapon_knife;
-	t->name.name = "버그";
-	t->name.name_type = false; //true 받침있음
+	t->name = name_infor(LOC_SYSTEM_BUG);
 	t->weight = 1.0f;
 	t->value = 0;
 }
@@ -1031,13 +982,11 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	t->value3 = 0;
 	t->value4 = good_bad?randA_1(randA_1(3))*(good_bad>=0?1:-1):0;
 	t->is_pile = false;
-	t->name2.name = "";
-	t->name2.name_type = true;
+	t->name2 = name_infor();
 	
 	if(good_bad)
 	{
-		t->name2.name = "룬이 새겨진 ";
-		t->name2.name_type = true;		
+		t->name2 = name_infor(LOC_SYSTEM_ITEM_ARMOUR_RUNED);			
 	}
 
 
@@ -1051,8 +1000,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_roundshield;
 		t->equip_image = &img_play_item_shield[0];
-		t->name.name = "나무방패";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD);
 		t->weight = 3.0f;
 		t->value = 30;
 		return;
@@ -1066,8 +1014,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_shield;
 		t->equip_image = &img_play_item_shield[1];
-		t->name.name = "철방패";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD);
 		t->weight = 5.0f;
 		t->value = 100;
 		return;
@@ -1081,8 +1028,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = &img_item_weapon_kiteshield;
 		t->equip_image = &img_play_item_shield[3];
-		t->name.name = "카이트실드";
-		t->name.name_type = false;
+		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD);
 		t->weight = 10.0f;
 		t->value = 250;
 		return;
@@ -1093,8 +1039,7 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	t->value6 = 0;
 	t->can_throw = true;
 	t->image = &img_item_weapon_roundshield;
-	t->name.name = "버그방패";
-	t->name.name_type = false; //true 받침있음
+	t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHIELD_BUGSHIELD);
 	t->weight = 1.0f;
 	t->value = 0;
 }

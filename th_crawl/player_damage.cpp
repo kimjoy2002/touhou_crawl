@@ -608,7 +608,10 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	default:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중했다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				 PlaceHolderHelper(name_.getName()),
+				 PlaceHolderHelper(a.name.getName()),
+				 PlaceHolderHelper(name.getName()));
 		}
 		break;
 	case ATT_SLEEP:
@@ -616,14 +619,19 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		{
 			if (a.order)
 			{
-				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 6, name_.name.c_str(), "의 ", a.name.name.c_str(), a.name.name_is(true), name.name.c_str(), "에게 명중했다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
 			}
 		}
 		else
 		{
 			if (a.order)
 			{
-				printarray(false, false, false, a.order->isView() ? CL_normal : CL_small_danger, 4, name_.name.c_str(), name_.name_is(true), name.name.c_str(), "의 꿈을 먹었다. ");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DREAM,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(name.getName()));
 			}
 		}
 		break;
@@ -631,60 +639,81 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_FIRE_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 불타올랐다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				 PlaceHolderHelper(name_.getName()),
+				 PlaceHolderHelper(a.name.getName()),
+				 PlaceHolderHelper(name.getName()));
 		}
 		break;
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 얼어붙었다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				 PlaceHolderHelper(name_.getName()),
+				 PlaceHolderHelper(a.name.getName()),
+				 PlaceHolderHelper(name.getName()));
 		}
 		break;
 	case ATT_NORMAL_HIT:		
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 들어갔다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_GERMAN_SUPLEX,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				 PlaceHolderHelper(name_.getName()),
+				 PlaceHolderHelper(a.name.getName()),
+				 PlaceHolderHelper(name.getName()));
 		}	
 		break;
 	case ATT_SMITE:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,4,"무엇인가 ",GetName()->name.c_str(),GetName()->name_to(true),"강타했다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMITE,false,false,false,CL_normal,
+				 PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_SMASH:
 		if (a.order)
 		{
-			printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "집어던진후 바닥에 내팽겨쳐졌다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMASH,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_BLOOD:	
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,2,GetName()->name.c_str(),"의 피가 터져나왔다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLOOD,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_NOISE:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,3,"굉음이 ",GetName()->name.c_str(),"의 달팽이관을 강타했다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NOISE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_CLOUD_FIRE:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"화염에 휩싸였다. ");
+		if(damaged_) {
+			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_FIRE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		break;
 	case ATT_CLOUD_COLD:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"얼어붙었다. ");
+		if(damaged_) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_COLD,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		break;
 	case ATT_CLOUD_ELEC:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"감전되었다. ");
+		if(damaged_) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CLOUD_ELEC,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		break;
 	case ATT_STONE_TRAP:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"뾰족한 바위를 밟았다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_STONE_TRAP,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		break;
 	case ATT_NORMAL_BLAST:
 	case ATT_AC_REDUCE_BLAST:
@@ -695,57 +724,77 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_POISON_BLAST:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,4,GetName()->name.c_str(),GetName()->name_is(true),a.name.name.c_str(),"의 폭발에 휘말렸다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
+				 PlaceHolderHelper(GetName()->getName()),
+				 PlaceHolderHelper(a.name.getName()));
 		}
 		break;
 	case ATT_SUN_BLAST:
 		if (a.order)
 		{
-			printarray(false, false, false, CL_normal, 4, GetName()->name.c_str(), GetName()->name_is(true), a.name.name.c_str(), "에 의해 타들어갔다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SUN_BLAST,false,false,false,CL_normal,
+				 PlaceHolderHelper(GetName()->getName()),
+				 PlaceHolderHelper(a.name.getName()));
 		}
 		break;
 	case ATT_COLD_PYSICAL_BLAST:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"눈보라에 휘말렸다. ");
-		break;			
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLLIZARD,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
+		break;
 	case ATT_BURST:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"폭발했다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BURST,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		break;
 	case ATT_CLOUD_NORMAL:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람에 휩쓸렸다. ");
+		if(damaged_) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_TWIST,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		break;
 	case ATT_CLOUD_CURSE:
-		if(damaged_)
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"저주받고있다. ");
+		if(damaged_) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_CURSED,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
 		break;
 	case ATT_VEILING:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"바람 갑옷에 베였다. ");
-		break;		
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_VEILING,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
+		break;
 	case ATT_RUSH:
-		printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"맞았다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_RUSH,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		break;
 	case ATT_WALL:
 		if(a.order)
 		{
-			printarray(false,false,false,CL_normal,5,GetName()->name.c_str(),GetName()->name_is(true),name_.name.c_str(),name_.name_and(true),"부딪혔다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BUMP,false,false,false,CL_normal,
+				 PlaceHolderHelper(GetName()->getName()),
+				 PlaceHolderHelper(name_.getName()));
 		}
 		else
 		{
-			printarray(false,false,false,CL_normal,3,GetName()->name.c_str(),GetName()->name_is(true),"벽에 부딪혔다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BUMP_WALL,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_PSYCHO:
-		printarray(false, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "바닥에 내팽겨쳐졌다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_PSYCHO,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		break;
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
 		if(a.order)
 		{
-			printarray(false,false,false,a.order->isView()?CL_normal:CL_small_danger,6,name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_is(true),name.name.c_str(),"에게 명중하고 감전되었다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ELEC,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				 PlaceHolderHelper(name_.getName()),
+				 PlaceHolderHelper(a.name.getName()),
+				 PlaceHolderHelper(name.getName()));
 		}
 		break;
 	case ATT_DROWNING:
-		printarray(false, false, false, CL_danger, 3, GetName()->name.c_str(), GetName()->name_is(true), "물에 빠져 질식하고 있다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING,false,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
 		break;
 	case ATT_THROW_NONE_MASSAGE:
 		break;
@@ -774,7 +823,7 @@ void players::print_no_damage_message(attack_infor &a)
 			break;
 		default:
 		case ATT_NORMAL_HIT:
-			printlog("아무런 데미지도 받지 않았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NO_DAMAGE),true,false,false,CL_normal);
 			break;
 		}
 	}
@@ -918,15 +967,16 @@ bool players::damage(attack_infor &a, bool perfect_)
 				if(s_mirror && GetHp()>0 && a.order)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
-					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
+					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
 				}
 				if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 				{
 					if(a.order)
 					{
 						a.order->HpUpDown(damage_/3,DR_EFFECT);	
-						printarray(true,false,false,CL_normal,4,a.order->GetName()->name.c_str(),a.order->GetName()->name_is(true),  name.name.c_str(),"의 체력을 흡수했다.");
-			
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_VAMP,true,false,false,CL_normal,
+							 PlaceHolderHelper(a.order->GetName()->getName()),
+							 PlaceHolderHelper(name.getName()));
 					}
 				}
 				if (a.type == ATT_LUNATIC && randA(2) == 0) {
@@ -998,7 +1048,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor("베일링",true)), true);
+					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1011,19 +1061,19 @@ bool players::damage(attack_infor &a, bool perfect_)
 					switch(half_youkai[1])
 					{
 					case 0:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor("화염",true)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE)), true);
 						if(a.order->GetFireResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
 					case 1:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor("냉기",false)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor(LOC_SYSTEM_ATT_COLD)), true);
 						if(a.order->GetColdResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
 					case 2:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor("전격",true)), true);
+						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor(LOC_SYSTEM_ATT_ELEC)), true);
 						if(a.order->GetElecResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
@@ -1043,8 +1093,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			if(a.order)	
 			{
-				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"방패로 막았다.");
-				//SkillTraining(SKT_SHIELD,1);
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_BLOCK,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+					PlaceHolderHelper(name.getName()),
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()));
 				soundmanager.playSound("block");
 			}
 		}
@@ -1053,10 +1105,18 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{
 		if (a.order)
 		{
-			if (!graze_ || you.s_super_graze)
-				printarray(true,false,false,a.order->isView()?CL_bad:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"피했다.");
-			else 
-				printarray(true,false,false,a.order->isView()?CL_normal:CL_small_danger,7,name.name.c_str(),name.name_is(true),name_.name.c_str(),"의 ",a.name.name.c_str(),a.name.name_to(true),"그레이즈 했다.");
+			if (!graze_ || you.s_super_graze) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+					PlaceHolderHelper(name.getName()),
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()));
+			}
+			else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+					PlaceHolderHelper(name.getName()),
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()));
+			}
 			soundmanager.playSound("evade");
 			//if(GetArmourPanlty()<=2)
 			//	SkillTraining(SKT_DODGE,3+GetArmourPanlty());

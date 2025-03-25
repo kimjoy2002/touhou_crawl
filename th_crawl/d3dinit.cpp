@@ -108,6 +108,7 @@ bool Setup()
 
 	D3DXMatrixIdentity(&g_BaseMatrix);
 	map_list.random_number = (unsigned int)time(NULL);
+	init_nonlogic_seed((unsigned long)time(NULL));
 
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
 	if(!texture_title.loadingEX(Device))
@@ -173,9 +174,9 @@ bool Setup()
 	mutx=CreateMutex(NULL, FALSE, NULL);
 	DisplayManager.Getfontinfor();
 	
-	map_list.random_number = (unsigned long)time(NULL);	
+	map_list.random_number = (unsigned long)time(NULL);
+	init_nonlogic_seed((unsigned long)time(NULL));
 	srand((unsigned int)map_list.random_number);
-	//rand_seed(map_list.random_number);
 	return return_;
 }
 

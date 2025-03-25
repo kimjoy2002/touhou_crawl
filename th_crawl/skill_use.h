@@ -199,7 +199,7 @@ bool SpellAiCondition(spell_list skill, monster *mon); //인공지능이 마법�
 
 bool SkillFlagCheck(skill_list skill, skill_flag flag);
 int SkillLength(skill_list skill);
-const char* SkillString(skill_list skill); //스킬 이름
+string SkillString(skill_list skill); //스킬 이름
 int SkillCap(skill_list skill);//스킬파워 상한
 int SkillNoise(skill_list skill); //스킬 소음
 int SkillSpeed(skill_list skill);

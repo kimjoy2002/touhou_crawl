@@ -147,7 +147,7 @@ void SeleteArenaMonster(int num, int level)
 
 		for(int j=0; j < team_list_[i].size(); j++)
 		{
-			sprintf_s(temp,200,"%s팀: %s",i==0?"좌측":"우측", mondata[team_list_[i][j]].name.name.c_str());
+			sprintf_s(temp,200,"%s팀: %s",i==0?"좌측":"우측", mondata[team_list_[i][j]].name.getName().c_str());
 			AddNote(you.turn,CurrentLevelString(),temp,CL_green);
 			createarenamon(num, team_list_[i][j], i == 0);
 		}

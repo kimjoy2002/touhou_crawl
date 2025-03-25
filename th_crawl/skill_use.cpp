@@ -82,7 +82,7 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 					//multy_*=(13.0f+pow/5)/13;
 
 					soundmanager.playSound("wind");
-					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor("돌진",true));
+					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_RUSH));
 					unit_->damage(temp_att,false);
 					printlog("적에게 돌격했다!",true,false,false,CL_normal);	
 					return true;
@@ -282,7 +282,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 								smoke_ = SMT_FIRE;
 								break;
 							}
-							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor("물약",true));
+							beam_infor temp_infor(randA(power/10),randA(power/10),10,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
 							
 							for(int k=0;k<(order->GetParadox()?2:1);k++)
 							{
@@ -456,8 +456,9 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 					unit_->SetConfuse(rand_int(5,15)+randA(pow/20));
 				}
 				else if(unit_->isYourShight())
-				{					
-					printarray(true,false,false,CL_normal,3,unit_->GetName()->name.c_str(),unit_->GetName()->name_is(true),"저항했다.");
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+						 PlaceHolderHelper(unit_->GetName()->getName()));
 				}
 				number_++;
 			}
@@ -486,9 +487,9 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			printlog("이 아이템은 이미 단풍으로 되어있다.",true,false,false,CL_normal);
 			return false;
 		}
-			
 		
-		printarray(true,false,true,CL_help,3,you.equipment[ET_ARMOR]->name.name.c_str(),you.equipment[ET_ARMOR]->name.name_to(true),"단풍방어구로 강화하시겠습니까?(y/n)");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,true,false,true,CL_help,
+			PlaceHolderHelper(you.equipment[ET_ARMOR]->name.getName()));
 		
 		
 		switch(waitkeyinput())
@@ -507,10 +508,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 
 		equipArmour((armour_kind)you.equipment[ET_ARMOR]->value5, 1);
 
-		
-		you.equipment[ET_ARMOR]->name.name = GetMaterialString((material_kind)(you.equipment[ET_ARMOR]->type-ITM_ARMOR_BODY_ARMOUR_0));
-		you.equipment[ET_ARMOR]->name.name += " 단풍옷";
-
+		you.equipment[ET_ARMOR]->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,  GetMaterialStringKey((material_kind)(you.equipment[ET_ARMOR]->type-ITM_ARMOR_BODY_ARMOUR_0)));
 
 		switch(you.equipment[ET_ARMOR]->type)
 		{
@@ -752,8 +750,8 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 			int max_damage_ = you.GetAttack(true)*10/you.GetAtkDelay()*(1+pow/100.0f)+2*(2+pow/20);				
 
 			soundmanager.playSound("stone");
-			printlog("저먼 스플렉스! ",false,false,false,CL_yuigi);
-			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor("저먼 스플렉스",false));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ATT_GERMANSUPLEX) + "! ",false,false,false,CL_yuigi);
+			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor(LOC_SYSTEM_ATT_GERMANSUPLEX));
 			unit_->damage(temp_att,true);
 
 			if(!no_cost_)
@@ -799,7 +797,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 					mon_->SetXY(*rit);
 					break;
 				}
-				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
+				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SHOCKWAVE));
 
 				soundmanager.playSound("bomb"); 
 				BaseBomb(final_, &img_blast[2],temp_att,&you);
@@ -898,7 +896,7 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 									m_att_ *= 2;
 								}
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor("충격파",false));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SHOCKWAVE));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -944,8 +942,9 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 			hit_mon->SetFear(rand_int(25,40));
 		}
 		else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}
 		hit_mon->AttackedTarget(order);
 		return true;
@@ -1029,7 +1028,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 	if(return_)
 	{
 		soundmanager.playSound("summon");
-		printarray(true,false,false,CL_magic,1,"마계의 졸개들이 당신에게 소환되었다. ");	
+		printarray(true,false,false,CL_magic,1, LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC));	
 	}
 	return return_;
 }
@@ -1037,12 +1036,15 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 {
 	bool return_=false;
 	if(monster* mon_=BaseSummon(randA(2)==0?MON_SARA:(randA(1)?MON_LUIZE:MON_ELIS), rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
-	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
+	{
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
+			PlaceHolderHelper(mon_->name.getName()));
 		if(randA(99)<=3)
 		{
 			soundmanager.playSound("laugh");
-			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
+			
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,
+				PlaceHolderHelper(mon_->name.getName()));
 			mon_->ReturnEnemy();			
 		}
 		else {
@@ -1059,12 +1061,14 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	bool return_=false;
 	int id_ = randA(3)==0?MON_YUKI:(randA(2)==0?MON_MAI:randA(1)?MON_YUUGENMAGAN:MON_SARIEL);
 	if(monster* mon_=BaseSummon(id_, rand_int(90,120), true, false, 2, order, target, SKD_SUMMON_SHINKI, -1))
-	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
+	{
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
+			PlaceHolderHelper(mon_->name.getName()));
 		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
 			soundmanager.playSound("laugh");
-			printarray(false,false,false,CL_danger,2,mon_->name.name.c_str(),"의 기분이 썩 좋아보이지 않는다.");				
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,
+				PlaceHolderHelper(mon_->name.getName()));
 			mon_->ReturnEnemy();			
 		}
 		else {
@@ -1172,7 +1176,8 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		if(j>0)
 		{
 			soundmanager.playSound("summon");
-			printarray(true,false,false,CL_normal,2,unit_->GetName()->name.c_str(),"에게 유령을 내보냈다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUYUKO_RECALL,true,false,false,CL_normal,
+				 PlaceHolderHelper(unit_->GetName()->getName()));
 			unit_->AttackedTarget(order);
 			return true;
 		}
@@ -1214,8 +1219,9 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 		/*else if(hit_mon->isYourShight())
-		{					
-			printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_is(true),"저항했다.");
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}*/
 		soundmanager.playSound("debuf");
 		hit_mon->AttackedTarget(order);
@@ -1372,7 +1378,7 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor("물총",true));
+		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1401,7 +1407,8 @@ bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 				soundmanager.playSound("debuf");
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
-				printarray(true,false,false,CL_normal,3,hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_to(true),"끌어 당겼다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,true,false,false,CL_normal,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				return true;
 			}
 		}
@@ -1419,7 +1426,8 @@ bool skill_swako_curse(int power, bool short_, unit* order, coord_def target)
 		if(hit_mon->isYourShight())
 		{
 			soundmanager.playSound("curse");
-			printarray(false,false,false,CL_swako,2,hit_mon->GetName()->name.c_str(),"에 재앙을 내렸다.");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,true,false,false,CL_swako,
+				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 			hit_mon->SetSlow(rand_int(2,10)+randA(level_*3));
 			hit_mon->SetPoison(rand_int(20,35)+randA(level_*4),150,true);
 			hit_mon->SetPoisonReason(order->GetParentType());
@@ -1473,8 +1481,9 @@ bool skill_swako_summon_flog(int power, bool short_, unit* order, coord_def targ
 {	
 	bool return_=false;
 	if(monster* mon_=BaseSummon(MON_FROG, rand_int(60,80), true, false, 2, order, target, SKD_SUMMON_SWAKO_FLOG, -1))
-	{			
-		printarray(false,false,false,CL_magic,3,mon_->name.name.c_str(),mon_->name.name_do(true),"당신에게 소환되었다. ");		
+	{
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
+			PlaceHolderHelper(mon_->name.getName()));
 		return_ = true;
 		enterlog();
 	}
@@ -1547,7 +1556,8 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 	bool return_ = false;
 	if (monster* mon_ = BaseSummon(MON_MISYAGUZI, rand_int(90, 120), true, false, 2, order, target, SKD_SUMMON_MISYAGUZI, -1))
 	{
-		printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
+			PlaceHolderHelper(mon_->name.getName()));
 
 		soundmanager.playSound("summon");
 		return_ = true;
@@ -1663,17 +1673,16 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 			{
 				soundmanager.playSound("curse");
-				printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"저주의 힘으로 가득 차있다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,true,false,false,CL_hina,
+					 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 				you.equipment[ET_WEAPON]->value6 = rand_int(80,100);
 			}
 			else
 			{
 				soundmanager.playSound("curse");
-				printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
-				printlog(before_name,false,false,false,CL_small_danger);	
-				printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("검게 빛나면서 당신에게 신비한 힘이 들어온다.",true,false,false,CL_small_danger);		
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,true,false,false,CL_small_danger,
+					 PlaceHolderHelper(before_name));
 				you.SetMight(rand_int(80,100));
 			}
 			return true;
@@ -1715,10 +1724,8 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 									{
 										soundmanager.playSound("curse");
 										int time_ = rand_int(25,40);
-										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
-										printlog(before_name,false,false,false,CL_small_danger);	
-										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-										printlog("검게 빛나면서 당신은 모든 데미지를 반사한다.",true,false,false,CL_small_danger);	
+										LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,true,false,false,CL_small_danger,
+											 PlaceHolderHelper(before_name));
 										if(i == ET_ARMOR)	
 											time_*=3;
 										you.SetMirror(time_);
@@ -1801,10 +1808,8 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 									{
 										soundmanager.playSound("curse");
 										int bonus_ = rand_int(10,15)+you.GetMaxHp()*rand_float(0.25f,0.35f);
-										printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
-										printlog(before_name,false,false,false,CL_small_danger);	
-										printlog(you.equipment[i]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-										printlog("검게 빛나면서 당신은 회복한다.",true,false,false,CL_small_danger);											
+										LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,true,false,false,CL_small_danger,
+											 PlaceHolderHelper(before_name));	
 										you.HpUpDown(bonus_,DR_NONE);										
 										you.MpUpDown(you.max_mp *rand_float(0.3f,0.4f));
 										return true;
@@ -1877,11 +1882,13 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		soundmanager.playSound("buff");
-		printarray(true,false,false,CL_autumn,2,you.equipment[ET_WEAPON]->GetName().c_str(),"에서 쓸쓸하고도 종말적인 기운이 느껴진다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,true,false,false,CL_autumn,
+			 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
-		printlog("시즈하: 유용하게 쓰도록!",true,false,false,CL_autumn);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_autumn,
+			 PlaceHolderHelper(LOC_SYSTEM_GOD_SHIZUHA));
 		you.god_value[GT_SHIZUHA][0] = 1;
 		you.Ability(SKL_SIZUHA_3,true,true);
 	}
@@ -1910,11 +1917,13 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
 		soundmanager.playSound("curse");
-		printarray(true,false,false,CL_hina,3,you.equipment[ET_WEAPON]->GetName().c_str(),you.equipment[ET_WEAPON]->GetNameInfor().name_is(true),"저주의 힘으로 가득 차있다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_CURSE_BRAND,true,false,false,CL_hina,
+			 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value5 = WB_CURSE;
 		you.equipment[ET_WEAPON]->value6 = -1;
 		you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, randA_1(2));
-		printlog("히나: 유용하게 쓰도록!",true,false,false,CL_hina);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_hina,
+			 PlaceHolderHelper(LOC_SYSTEM_GOD_HINA));
 		you.god_value[GT_HINA][0] = 1;
 		you.Ability(SKL_HINA_5,true,true);
 	}
@@ -1932,24 +1941,24 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 		return false;
 
 
-	string str_ = "브레스";
+	LOCALIZATION_ENUM_KEY key_ = LOC_SYSTEM_SKL_BREATH;
 	attack_type type_ = ATT_THROW_COLD;
 	int graphic_ = 36;
 
 	switch(you.half_youkai[1])
 	{
 	case 0:
-		str_ = "화염 브레스";
+		key_ = LOC_SYSTEM_SKL_BREATH_FIRE;
 		type_ = ATT_THROW_FIRE;
 		graphic_ = 36;
 		break;
 	case 1:
-		str_ = "냉기 브레스";
+		key_ = LOC_SYSTEM_SKL_BREATH_COLDE;
 		type_ = ATT_THROW_COLD;
 		graphic_ = 40;
 		break;
 	case 2:
-		str_ = "전격 브레스";
+		key_ = LOC_SYSTEM_SKL_BREATH_ELEC;
 		type_ = ATT_THROW_ELEC;
 		graphic_ = 38;
 		break;
@@ -1962,7 +1971,7 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = 15+power/4;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),20,order,order->GetParentType(),SkillLength(SKL_BREATH),8,BMT_PENETRATE,type_,name_infor(str_,false));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),20,order,order->GetParentType(),SkillLength(SKL_BREATH),8,BMT_PENETRATE,type_,name_infor(key_));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1993,7 +2002,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 			it->AttackedTarget(order);
 			//int att_ = 13+pow/15;
 			//	
-			//attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor("냉기",false));
+			//attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 			//it->damage(temp_att, true);			
 		}
 	}
@@ -2003,7 +2012,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 {
-	bool sanae_ = !you.char_name.name.compare("사나에") && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
+	bool sanae_ = (you.char_type == UNIQ_START_SANAE) && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
 
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 	for (int i = 0; i < (junko_ ? 2 : 1); i++)
@@ -2029,22 +2038,25 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 
 
 
-	if (sanae_)
-		printarray(true, false, false, CL_danger, 7, "당신은 ", GetGodString(you.god), GetGodString_is(you.god) ? "을 " : "를 ", "버렸다. ", GetGodString(you.god), GetGodString_is(you.god) ? "은 " : "는 ", "당신의 독립을 눈물을 머금고 이해했다.");
-	else
-		printarray(true, false, false, CL_danger, 4, "당신은 ", GetGodString(you.god), GetGodString_is(you.god) ? "을 " : "를 ", you.god == GT_SATORI ? "버렸다." : "버렸다. 당신의 신은 분노했다!");
-
+	if (sanae_) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON_SANAE,true,false,false,CL_small_danger,
+			 PlaceHolderHelper(GetGodString(you.god)),
+			 PlaceHolderHelper(GetGodString(you.god)));
+	}
+	else if (you.god == GT_SATORI) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON_SATORI,true,false,false,CL_small_danger,
+			PlaceHolderHelper(GetGodString(you.god)));
+	} else {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON,true,false,false,CL_danger,
+			PlaceHolderHelper(GetGodString(you.god)));
+	}
 
 	if (!sanae_)
 	{
 		you.PunishUpDown(30, you.god, true);
 	}
 
-	char temp[200];
-	sprintf_s(temp, 200, "%s%s 버렸다.", GetGodString(you.god), GetGodString_is(you.god) ? "을" : "를");
-	AddNote(you.turn, CurrentLevelString(), temp, CL_small_danger);
-
-
+	AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_ABANDON, PlaceHolderHelper(GetGodString(you.god))), CL_small_danger);
 
 	for (int level_ = pietyLevel(you.piety); level_ >= 0; level_--)
 		GetGodAbility(level_, false);
@@ -2178,9 +2190,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	
 	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
 
-	char temp[200];
-	sprintf_s(temp,200,"세이자에게 선물을 받았다. (%s)", GetGodString(next_));
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_SEIJA_GIFT, PlaceHolderHelper(GetGodString(next_))),CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
 
@@ -2219,11 +2229,11 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	if(pietyLevel(you.piety) == 0)
 	{
 
-		printarray(true,false,false,CL_danger,4,"당신은 ", GetGodString(you.god),GetGodString_is(you.god)?"으로부터 ":"로부터 ","버려졌다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDONED,true,false,false,CL_danger,
+			PlaceHolderHelper(GetGodString(you.god)));
 		
-		char temp[200];
-		sprintf_s(temp,200,"%s%s 버려졌다.",GetGodString(you.god),GetGodString_is(you.god)?"으로부터":"로부터");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_ABANDONED, PlaceHolderHelper(GetGodString(you.god))),CL_small_danger);
 	
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
 			GetGodAbility(level_, false);	
@@ -2233,7 +2243,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 		item_infor t;
 		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
-		printlog("...세이자가 마지막 선물로 요술망치를 주고 갔다.", true, false, false, CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT), true, false, false, CL_dark_good);
 	}
 
 	you.Ability(SKL_SEIJA_GIFT,true,true);
@@ -2249,7 +2259,8 @@ bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 		you.SetXY(target.x,target.y);
 
 		soundmanager.playSound("blink");
-		printarray(true,false,false,CL_normal,4,"당신은 ", hit_mon->GetName()->name.c_str(),hit_mon->GetName()->name_and(true),"자리를 뒤집었다.");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,true,false,false,CL_normal,
+			 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		hit_mon->AttackedTarget(order);
 		return true;
 	}
@@ -2337,9 +2348,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				}
 				if(hit_mon->level > you.level)
 				{
-					char temp[100];
-					sprintf_s(temp,100,"이 요정을 권유하려면 %d레벨이상이 되어야한다.",hit_mon->level);
-					printlog(temp,true,false,false,CL_normal);
+					printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL, PlaceHolderHelper(to_string(hit_mon->level))),true,false,false,CL_normal);
 					return false;
 				}
 				
@@ -2382,10 +2391,11 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 
 				if(!(hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
 				{
-					printarray(true,false,false,CL_normal,6,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"자신의 이름이 ",fairy_name[you.lilly_allys[i].name].name.c_str(),fairy_name[you.lilly_allys[i].name].name_type?"이라고 ":"라고 ","소개했다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_LILLY_INVITE,true,false,false,CL_normal,
+						 PlaceHolderHelper(hit_mon->name.getName()),
+						 PlaceHolderHelper(fairy_name[you.lilly_allys[i].name]));
 		
-					hit_mon->name.name = fairy_name[you.lilly_allys[i].name].name;
-					hit_mon->name.name_type = fairy_name[you.lilly_allys[i].name].name_type;
+					hit_mon->name = name_infor(fairy_name[you.lilly_allys[i].name]);
 
 				}
 
@@ -2396,14 +2406,10 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				
 				if((hit_mon->flag & M_FLAG_UNIQUE)) //이름 지어주기
 				{
-					char temp[200];
-					sprintf_s(temp,200,"%s%s동료가 되었다.",hit_mon->name.name.c_str(),hit_mon->name.name_do(true));
-					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
+					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE, PlaceHolderHelper(hit_mon->name.getName())),CL_lilly);
 				}
-				else{					
-					char temp[200];
-					sprintf_s(temp,200,"%s(%s)%s동료가 되었다.",hit_mon->name.name.c_str(),mondata[hit_mon->id].name.name.c_str(),hit_mon->name.name_do(true));
-					AddNote(you.turn,CurrentLevelString(),temp,CL_lilly);
+				else{
+					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE, PlaceHolderHelper(hit_mon->name.getName()), PlaceHolderHelper(hit_mon->name.getName())),CL_lilly);
 				}
 
 				you.Ability(SKL_LILLY_1,true,true);
@@ -2419,22 +2425,28 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 							switch(it->id)
 							{
 							case MON_SUNNY:
-								if(hit_mon->id == MON_LUNAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"포기가 빠르다고 루나!\"");
-								else if(hit_mon->id == MON_STAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"스타?!\"");
+								if(hit_mon->id == MON_LUNAR) {
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_BETRAY_LUNAR), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
+								else if(hit_mon->id == MON_STAR){
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_BETRAY_STAR), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
 								break;
 							case MON_LUNAR:
-								if(hit_mon->id == MON_SUNNY)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"써니? 농담이지?\"");
-								else if(hit_mon->id == MON_STAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"어? 스타, 진심이야?\"");
+								if(hit_mon->id == MON_SUNNY) {
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_BETRAY_SUNNY), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
+								else if(hit_mon->id == MON_STAR) {
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_BETRAY_STAR), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
 								break;
 							case MON_STAR:
-								if(hit_mon->id == MON_SUNNY)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"우릴 배신하는거야 써니?\"");
-								else if(hit_mon->id == MON_LUNAR)
-									printarray(true,false,false,CL_normal,3,it->GetName()->name.c_str(),it->GetName()->name_is(true),"외쳤다. \"속지마 루나!\"");
+								if(hit_mon->id == MON_SUNNY) {
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_BETRAY_SUNNY), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
+								else if(hit_mon->id == MON_LUNAR) {
+									printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_BETRAY_LUNAR), PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_normal);
+								}
 							}
 						}
 					}
@@ -2547,8 +2559,8 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 					soundmanager.playSound("buff");
 					
 					hit_mon->HpUpDown(max(1,hit_mon->max_hp*rand_int(10,35)/100),DR_NONE);
-					printarray(true,false,false,CL_lilly,3,hit_mon->name.name.c_str(),hit_mon->name.name_is(true),"봄의 기운을 받아 체력이 회복되었다.");
-		
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,true,false,false,CL_lilly,
+						 PlaceHolderHelper(hit_mon->name.getName()));
 					return true;
 				}
 			}
@@ -2635,7 +2647,8 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 					beam++;
 				}
 
-				printarray(true, false, false, CL_okina, 3, "당신은 ", dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile], " 타일을 문으로 만들었다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,true,false,false,CL_okina,
+					PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile]));
 
 				soundmanager.playSound("stone");
 				env[current_level].changeTile(target, DG_CLOSE_DOOR);
@@ -2679,9 +2692,10 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 
 					if (!hit_ && !unit_hit_) {
 						//움직일수도있을때
-						printarray(false, false, false, CL_normal, 3, unit_->GetName()->name.c_str(), unit_->GetName()->name_is(true), "문에 밀쳐져 튕겨나갔다!");
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,false,false,false,CL_normal,
+							PlaceHolderHelper(unit_->GetName()->getName()));
 						unit_->SetXY(rit->x, rit->y);
-						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor("문", true));
+						attack_infor temp_att(randC(2, 3 + power / 10), 2*( 3 + (power / 10)), 99, unit_, order->GetParentType(), ATT_RUSH, name_infor(LOC_SYSTEM_ATT_DOOR));
 						unit_->damage(temp_att, true);
 						unit_->SetConfuse(5+randA(5));
 						unit_->PlusTimeDelay(-unit_->GetWalkDelay()); //1턴 행동을 쉰다.
@@ -2690,7 +2704,8 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 
 					rit++;
 					if (rit.end()) {
-						printarray(true, false, false, CL_normal, 4, "밀쳐낼 자리가 없어서 문 위에 있는 ", unit_->GetName()->name.c_str(), unit_->GetName()->name_to(true), "밀쳐낼 수 없다.");
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,true,false,false,CL_normal,
+							PlaceHolderHelper(unit_->GetName()->getName()));
 						return false;
 					}
 				}
@@ -2820,7 +2835,8 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 			if (mon_)
 				return_ = true;
 			mon_->LevelUpdown(you.level, 6);
-			printarray(false, false, false, CL_magic, 3, mon_->name.name.c_str(), mon_->name.name_do(true), "당신에게 소환되었다. ");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
+				PlaceHolderHelper(mon_->name.getName()));
 			if (!speak_ && mon_->isLive() && (*mon_).isUserAlly() && env[current_level].isInSight(coord_def(mon_->position.x, mon_->position.y)) && mon_->CanSpeak()) {
 					speak_ = mon_;
 			}
@@ -2837,10 +2853,10 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("summon");
 		if (speak_->GetId() == MON_MAI2) {
-			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"그럼 바로 응원을 시작하겠어!\"");
+			printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAI2_CHEERING), PlaceHolderHelper(speak_->GetName()->getName())) , true, false, false, CL_normal);
 		}
 		else if (speak_->GetId() == MON_SATONO) {
-			printarray(true, false, false, CL_normal, 3, speak_->GetName()->name.c_str(), speak_->GetName()->name_is(true), "외쳤다. \"뒤에서 응원할게!\"");
+			printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SATONO_CHEERING), PlaceHolderHelper(speak_->GetName()->getName())) , true, false, false, CL_normal);
 		}
 	}
 
@@ -2880,13 +2896,9 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	you.god_value[GT_OKINA][1] = you.position.x;
 	you.god_value[GT_OKINA][2] = you.position.y;
 	env[OKINA_LEVEL].EnterMap(0, dq);
-	printarray(true, false, false, CL_normal, 2, "이 곳은 문 뒤의 세계다. ", randA(2)?randA(1)?
-		"푹 쉬다 가도록! ":"환영하네! ":"여기는 안전해보인다. ");
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME), true, false, false, CL_normal);
 
-
-	char temp2[200];
-	sprintf_s(temp2, 200, "%s로 도망쳤다.", CurrentLevelString(current_level));
-	AddNote(you.turn, CurrentLevelString(current_level), temp2, CL_normal);
+	AddNote(you.turn, CurrentLevelString(current_level), LocalzationManager::formatString(LOC_SYSTEM_NOTE_RUN_AWAY, PlaceHolderHelper(CurrentLevelString(current_level))), CL_normal);
 	//you.resetLOS(false);
 	return true;
 }
@@ -2903,7 +2915,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 	int hit_ = 10 + power / 15;
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor("탄막", true));
+		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -3157,18 +3169,14 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				{
 					if ((item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST) || (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST))
 					{
-						char temp[100];
-						sprintf_s(temp, 100, "정말 %s 아이템을 순화할거야? (y/n)", item_->GetName().c_str());
-						printlog(temp, true, false, true, CL_small_danger);
+						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING, PlaceHolderHelper(item_->GetName())), true, false, true, CL_small_danger);
 						changedisplay(DT_GAME);
 
 						int key__ = waitkeyinput(true);
 						if (key__ == 'y' || key__ == 'Y')
 						{
-							sprintf_s(temp, 100, "순호는 당신의 %s 아이템을 순화하였다! ", item_->GetName().c_str());
-							printlog(temp, true, false, false, CL_junko);
-							sprintf_s(temp, 100, "순호로부터 아이템순화(%s) 축복", item_->GetName().c_str());
-							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH, PlaceHolderHelper(item_->GetName())), true, false, false, CL_junko);
+							AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM, PlaceHolderHelper(item_->GetName())), CL_junko);
 
 							if (item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST)
 							{
@@ -3396,7 +3404,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 			int damage_ = (20 + (you.level * 2))*(power+400.0f)/400;
 
 
-			attack_infor temp_att(randC(5, damage_/5), damage_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor("폭죽", true));
+			attack_infor temp_att(randC(5, damage_/5), damage_, 99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_FIRECRAKER));
 			it->damage(temp_att, true);
 			enter_++;
 			if (enter_ == 1)
@@ -3453,7 +3461,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor("시온", true));
+		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor(LOC_SYSTEM_ATT_SION));
 
 		soundmanager.playSound("wind");
 		coord_def c_ = throwtanmac(44, beam, temp_infor, NULL);
@@ -3463,7 +3471,8 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 			monster* mon_ = (monster*)hit_mon;
 			if (mon_->flag & M_FLAG_INANIMATE)
 			{
-				printarray(true, false, false, CL_sion, 3, hit_mon->GetName()->name.c_str(), hit_mon->GetName()->name_is(true), "무생물이기에 빙의할 수 없다.");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,true,false,false,CL_sion,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				return true;
 			}
 			soundmanager.playSound("smite");
@@ -3494,7 +3503,8 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 
 			if (hit_mon->isYourShight())
 			{
-				printarray(true, false, false, CL_sion, 2, hit_mon->GetName()->name.c_str(), "에 빈곤신이 빙의하였다!");
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,true,false,false,CL_sion,
+					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 			}
 			hit_mon->AttackedTarget(order);
 		}
@@ -3553,10 +3563,8 @@ bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 	}
 	if (ok_ > 0)
 	{
-		char temp[256];
-		sprintf_s(temp, 256, "시야안에 있는 %d명의 욕망을 읽어들였다!", ok_);
 		you.PietyUpDown(piety_);
-		printlog(temp, true, false, false, CL_miko);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING, PlaceHolderHelper(to_string(ok_))), true, false, false, CL_miko);
 		env[current_level].popular = 0;
 		soundmanager.playSound("powerup");
 		return true;
@@ -3589,7 +3597,8 @@ bool skill_miko_3(int power, bool short_, unit* order, coord_def target)
 	}
 	else {
 		soundmanager.playSound("buff");
-		printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
+			 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 		return true;
 	}
 	return true;
@@ -3662,7 +3671,8 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	else {
 		soundmanager.playSound("buff");
-		printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
+			 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 		return true;
 
 	}
@@ -3712,7 +3722,8 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		break;
 	}
 	soundmanager.playSound("buff");
-	printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+	LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
+		 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 	return true;
 }
 bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
@@ -3765,7 +3776,8 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		break;
 	}
 	soundmanager.playSound("buff");
-	printlog("미코: 유용하게 쓰도록!", true, false, false, CL_miko);
+	LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
+		 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 	return true;
 }
 

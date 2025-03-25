@@ -471,10 +471,8 @@ bool curse_weapon_scroll(bool pre_iden_)
 		string before_name = you.equipment[ET_WEAPON]->GetName(); //저주받기전 이름
 		if(you.equipment[ET_WEAPON]->Curse(true,ET_WEAPON))
 		{
-			printlog("장착하고 있던 ",false,false,false,CL_small_danger);	
-			printlog(before_name,false,false,false,CL_small_danger);	
-			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-			printlog("검게 빛났다.",true,false,false,CL_small_danger);		
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,true,false,false,CL_small_danger,
+				 PlaceHolderHelper(before_name));
 			return true;
 		}
 		else
@@ -515,10 +513,8 @@ bool curse_armour_scroll(bool pre_iden_)
 			string before_name = you.equipment[dq[i]]->GetName(); //저주받기전 이름
 			if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
 			{
-				printlog("장착하고 있던 ",false,false,false,CL_small_danger);		
-				printlog(before_name,false,false,false,CL_small_danger);	
-				printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("검게 빛났다.",true,false,false,CL_small_danger);		
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,true,false,false,CL_small_danger,
+					 PlaceHolderHelper(before_name));
 				return true;
 			}
 		}
@@ -691,10 +687,8 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 		string before_name = you.equipment[ET_WEAPON]->GetName();
 		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
-			printlog("장착하고 있던 ",false,false,false,CL_good);	
-			printlog(before_name,false,false,false,CL_good);	
-			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_good);
-			printlog("빨강색으로 빛났다.",true,false,false,CL_good);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,true,false,false,CL_good,
+				 PlaceHolderHelper(before_name));
 			you.equipment[ET_WEAPON]->curse = false;
 			you.equipment[ET_WEAPON]->identify_curse = true;
 			return true;
@@ -731,10 +725,8 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 		string before_name = you.equipment[ET_WEAPON]->GetName();
 		if(you.equipment[ET_WEAPON]->Enchant(ET_WEAPON, 1))
 		{
-			printlog("장착하고 있던 ",false,false,false,CL_good);	
-			printlog(before_name,false,false,false,CL_good);	
-			printlog(you.equipment[ET_WEAPON]->GetNameInfor().name_do(true),false,false,false,CL_good);
-			printlog("빨강색으로 빛났다.",true,false,false,CL_good);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,true,false,false,CL_good,
+				 PlaceHolderHelper(before_name));
 			you.equipment[ET_WEAPON]->curse = false;
 			you.equipment[ET_WEAPON]->identify_curse = true;
 			return true;
@@ -797,9 +789,8 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 				string before_name = item_->GetName();
 				if(item_->Enchant(ET_ARMOR, 1))
 				{
-					printlog(before_name,false,false,false,CL_good);	
-					printlog(item_->GetNameInfor().name_do(true),false,false,false,CL_good);
-					printlog("초록색으로 빛났다.",true,false,false,CL_good);
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,true,false,false,CL_good,
+						 PlaceHolderHelper(before_name));
 					item_->curse = false;
 					item_->identify_curse = true;
 					return true;
@@ -891,10 +882,8 @@ bool curse_jewelry_scroll(bool pre_iden_)
 			string before_name = you.equipment[dq[i]]->GetName(); //저주받기전 이름
 			if(you.equipment[dq[i]]->Curse(true,(equip_type)dq[i]))
 			{
-				printlog("장착하고 있던 ",false,false,false,CL_small_danger);		
-				printlog(before_name,false,false,false,CL_small_danger);	
-				printlog(you.equipment[dq[i]]->GetNameInfor().name_do(true),false,false,false,CL_small_danger);
-				printlog("검게 빛났다.",true,false,false,CL_small_danger);		
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,true,false,false,CL_small_danger,
+					 PlaceHolderHelper(before_name));
 				return true;
 			}
 		}
@@ -959,9 +948,8 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				{
 					int charging_= SpellcardMaxCharge((spellcard_evoke_type)item_->value2) * rand_float(0.3f,0.7f);
 
-					printlog(item_->GetName(),false,false,false,CL_good);	
-					printlog(item_->GetNameInfor().name_do(true),false,false,false,CL_good);
-					printlog("충전되었다.",true,false,false,CL_good);
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,true,false,false,CL_good,
+						PlaceHolderHelper(item_->GetName()));
 
 					item_->value1 += charging_;
 					if(item_->value1>SpellcardMaxCharge((spellcard_evoke_type)item_->value2))
@@ -1092,34 +1080,34 @@ bool brand_weapon_scroll(bool pre_iden_)
 			random.push(WB_FAST_CAST, 10);
 			random.push(WB_PROTECT, 20);
 			int brand_ = random.pop();
-			string weapon_string;
+			LOCALIZATION_ENUM_KEY weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL;
 
 			switch (brand_)
 			{
 			case WB_FIRE:
-				weapon_string = "불길에 휩싸였다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE;
 				break;
 			case WB_COLD:
-				weapon_string = "한기를 내뿜었다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_COLD;
 				break;
 			case WB_POISON:
-				weapon_string = "맹독을 뿜어냈다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_POISON;
 				break;
 			case WB_MANA_REGEN:
-				weapon_string = "마나를 내뿜고있다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN;
 				break;
 			case WB_FAST_CAST:
-				weapon_string = "신비로운 힘을 뿜어내고 있다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST;
 				break;
 			case WB_PROTECT:
-				weapon_string = "보호의 오오라를 내뿜고있다!";
+				weapon_type = LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT;
 				break;
 			}
-
-			printarray(true, false, false, CL_magic, 3, you.equipment[ET_WEAPON]->GetName().c_str(), you.equipment[ET_WEAPON]->GetNameInfor().name_do(true), weapon_string.c_str());
-			you.equipment[ET_WEAPON]->value5 = brand_;
+			
+			LocalzationManager::printLogWithKey(weapon_type,true,false,false,CL_magic,
+				PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value6 = -1;
-			printlog("당신의 무기에 마법이 부여되었다! ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON) + " ", false, false, false, CL_normal);
 			return true;
 		}
 		else

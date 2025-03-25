@@ -248,194 +248,194 @@ int SkillLength(skill_list skill)
 		return 0;
 	}
 }
-const char* SkillString(skill_list skill)
+string SkillString(skill_list skill)
 {
 	switch(skill)
 	{
 	case SKL_KANAKO_1:
-		return "건신초래돌";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KANAKO_1);
 	case SKL_KANAKO_2:
-		return "건신초래어주";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KANAKO_2);
 	case SKL_KANAKO_3:
-		return "건신초래풍";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KANAKO_3);
 	case SKL_GRAZE:
-		return "그레이즈 발동";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_GRAZE);
 	case SKL_GRAZE_OFF:
-		return "그레이즈 해제";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_GRAZE_OFF);
 	case SKL_LEVITATION:
-		return "비행 발동";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LEVITATION);
 	case SKL_LEVITATION_OFF:
-		return "비행 해제";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LEVITATION_OFF);
 	case SKL_INVISIBLE:
-		return "투명 발동";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_INVISIBLE);
 	case SKL_INVISIBLE_OFF:
-		return "투명 해제";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_INVISIBLE_OFF);
 	case SKL_EIRIN_0:
-		return "물약 던지기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_EIRIN_0);
 	case SKL_EIRIN_1:
-		return "신체개조";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_EIRIN_1);
 	case SKL_EIRIN_2:
-		return "긴급수혈";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_EIRIN_2);
 	case SKL_BYAKUREN_1:
-		return "지력강화";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_BYAKUREN_1);
 	case SKL_BYAKUREN_2:
-		return "각력강화";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_BYAKUREN_2);
 	case SKL_SIZUHA_1:
-		return "광기의 낙엽";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SIZUHA_1);
 	case SKL_SIZUHA_2:
-		return "단풍 방어구";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SIZUHA_2);
 	case SKL_SIZUHA_3:
-		return "단풍의 무기 부여";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SIZUHA_3);
 	case SKL_MINORIKO_1:
-		return "능력치 회복";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MINORIKO_1);
 	case SKL_MINORIKO_2:
-		return "체력 회복";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MINORIKO_2);
 	case SKL_YUUGI_1:
-		return "술 마시기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUUGI_1);
 	case SKL_YUUGI_2:
-		return "저먼 스플렉스";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUUGI_2);
 	case SKL_YUUGI_3:
 	case SKL_YUUGI_3_THROW:
-		return "집어던지기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUUGI_3);
 	case SKL_YUUGI_4:
-		return "괴멸의 포효";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUUGI_4);
 	case SKL_YUUGI_5:
-		return "삼보필살";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUUGI_5);
 	case SKL_SATORI_1:
-		return "트라우마";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SATORI_1);
 	case SKL_SATORI_2:
-		return "독심술";		
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SATORI_2);		
 	case SKL_SHINKI_1:
-		return "하급 마족 소환";		
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SHINKI_1);		
 	case SKL_SHINKI_2:
-		return "중급 마족 소환";		
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SHINKI_2);		
 	case SKL_SHINKI_3:
-		return "상급 마족 소환";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SHINKI_3);
 	case SKL_YUYUKO_ON:
-		return "유령 소환 발동";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUYUKO_ON);
 	case SKL_YUYUKO_OFF:
-		return "유령 소환 해제";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUYUKO_OFF);
 	case SKL_YUYUKO_1:	
-		return "유령 조종";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUYUKO_1);
 	case SKL_YUYUKO_2:
-		return "유령 소환 가속";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUYUKO_2);
 	case SKL_YUYUKO_3:		
-		return "유령 구속";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUYUKO_3);
 	case SKL_YUKARI_1:
-		return "변용을 보는 눈";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUKARI_1);
 	case SKL_YUKARI_2:
-		return "환상광상혈";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUKARI_2);
 	case SKL_YUKARI_3:
-		return "사중결계";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUKARI_3);
 	case SKL_YUKARI_4:
-		return "차원고정";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_YUKARI_4);
 	case SKL_SWAKO_JUMP:
-		return "개구리 점프";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_JUMP);
 	case SKL_SWAKO_TEMPLE:
-		return "신전 세우기";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_TEMPLE);
 	case SKL_SWAKO_WATER_GUN:
-		return "물총";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_WATER_GUN);
 	case SKL_SWAKO_TOUGUE:
-		return "개구리 혀";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_TOUGUE);
 	case SKL_SWAKO_CURSE:
-		return "토착신의 재앙";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_CURSE);
 	case SKL_SWAKO_DIGGING:
-		return "굴착";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_DIGGING);
 	case SKL_SWAKO_SUMMON_FLOG:
-		return "개구리 소환";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_SUMMON_FLOG);
 	case SKL_SWAKO_STATUE:
-		return "석상 세우기";	
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_STATUE);
 	case SKL_SWAKO_RAIN:
-		return "비 내리기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_RAIN);
 	case SKL_SWAKO_SLEEP:
-		return "동면";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_SLEEP);
 	case SKL_SWAKO_MISYAGUZI:
-		return "미샤구지님 소환";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_MISYAGUZI);
 	case SKL_HINA_1:
-		return "액땜";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HINA_1);
 	case SKL_HINA_2:
-		return "무기 저주(강화)";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HINA_2);
 	case SKL_HINA_3:
-		return "방어구 저주(반사)";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HINA_3);
 	case SKL_HINA_4:
-		return "장신구 저주(회복)";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HINA_4);
 	case SKL_HINA_5:
-		return "저주의 무기 부여";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HINA_5);
 	case SKL_JUMPING_ATTACK:
-		return "도약 공격";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JUMPING_ATTACK);
 	case SKL_BREATH:
-		return "브레스";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_BREATH);
 	case SKL_TORMENT:
-		return "지옥의 고통";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_TORMENT);
 	case SKL_ABANDON_GOD:
-		return "신을 버리기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_ABANDON_GOD);
 	case SKL_SEIJA_GIFT:
-		return "보물 받기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SEIJA_GIFT);
 	case SKL_SEIJA_1:
-		return "위치 뒤집기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SEIJA_1);
 	case SKL_SEIJA_2:
-		return "천하전복";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SEIJA_2);
 	case SKL_LILLY_1:
-		return "동료 권유";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LILLY_1);
 	case SKL_LILLY_2:
-		return "요정 부르기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LILLY_2);
 	case SKL_LILLY_3:		
-		return "봄의 치유";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LILLY_3);
 	case SKL_LILLY_4:
-		return "요정대전쟁";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_LILLY_4);
 	case SKL_PHILOSOPHERS_1:
-		return "화-화염구";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_PHILOSOPHERS_1);
 	case SKL_PHILOSOPHERS_2:
-		return "수-워터캐논";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_PHILOSOPHERS_2);
 	case SKL_PHILOSOPHERS_3:
-		return "목-질풍선";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_PHILOSOPHERS_3);
 	case SKL_PHILOSOPHERS_4:
-		return "금-에메랄드 시티";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_PHILOSOPHERS_4);
 	case SKL_PHILOSOPHERS_5:
-		return "토-지반 융기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_PHILOSOPHERS_5);
 	case SKL_OKINA_1:
-		return "문 생성";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_OKINA_1);
 	case SKL_OKINA_2:
-		return "문 잠그기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_OKINA_2);
 	case SKL_OKINA_3:
-		return "인투 백도어";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_OKINA_3);
 	case SKL_OKINA_4:
-		return "크레이지 백댄서즈";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_OKINA_4);
 	case SKL_OKINA_5:
-		return "백도어 긴급탈출";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_OKINA_5);
 	case SKL_JUNKO_1:
-		return "단순한 탄막";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JUNKO_1);
 	case SKL_JUNKO_2:
-		return "순수한 힘";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JUNKO_2);
 	case SKL_JUNKO_3:
-		return "순수한 살의";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JUNKO_3);
 	case SKL_JUNKO_4:
-		return "순화";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JUNKO_4);
 	case SKL_JOON_AND_SION_1:
-		return "빙의";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JOON_AND_SION_1);
 	case SKL_JOON_AND_SION_2:
-		return "퀸 오브 버블";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JOON_AND_SION_2);
 	case SKL_JOON_AND_SION_3:
-		return "미스찬스 스캐터";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JOON_AND_SION_3);
 	case SKL_JOON_AND_SION_4:
-		return "앱솔루트 루저";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JOON_AND_SION_4);
 	case SKL_JOON_AND_SION_OFF:
-		return "강제빙의해제";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_JOON_AND_SION_OFF);
 	case SKL_MIKO_1:
-		return "욕망모으기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_1);
 	case SKL_MIKO_2:
-		return "축지의 망토";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_2);
 	case SKL_MIKO_3:
-		return "후광";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_3);
 	case SKL_MIKO_4:
-		return "저항얻기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_4);
 	case SKL_MIKO_5:
-		return "빨간망토 파란망토";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_5);
 	case SKL_MIKO_6:
-		return "인기폭발";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_6);
 	case SKL_NONE:
 	default:
-		return "알수없는 능력";
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
 	}
 }
 int SkillCap(skill_list skill)

@@ -1508,7 +1508,7 @@ void LevelUpTribe(int level_)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
 		}
-		if(level_ == 15 && you.char_name.name.compare("코이시")==0)
+		if(level_ == 15 && you.char_type == UNIQ_START_KOISHI)
 		{
 			printlog("당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
 			you.SetProperty(TPT_CONFUSE_ATTACK,1);

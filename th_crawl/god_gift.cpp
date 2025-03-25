@@ -161,8 +161,7 @@ void swako_gift(bool speak_) {
 	makeitem(ITM_ARMOR_HEAD, 1, &t);
 	t.image = &img_item_armor_helmet[6];
 	t.equip_image = &img_play_item_hat[6];
-	t.name.name = "스와코의 모자";
-	t.name.name_type = false;
+	t.name = name_infor(LOC_SYSTEM_GOD_SWAWKO_HAT);
 	item* item_ = env[current_level].MakeItem(you.position, t);
 	MakeArtifact(item_, 2);
 

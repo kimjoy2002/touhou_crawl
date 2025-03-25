@@ -9,9 +9,9 @@
 #ifndef  __MON_INFOR_H__
 #define  __MON_INFOR_H__
 
+#include "unit.h"
 #include "texture.h"
 #include "monster_texture.h"
-#include "unit.h"
 
 struct mon_infor
 {

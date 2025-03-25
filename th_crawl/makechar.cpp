@@ -135,7 +135,6 @@ void MakeStartItem(start_item_type select_, int num)
 	switch(select_)
 	{
 	case SIT_SHORTBLADE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SHORTBLADE,&img_item_weapon_dagger,1,false,false,4,7,0,0,0,0,10,5,false,name_infor("대거",false),name_infor("",true),2.0f,50));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SHORTBLADE, 0, &t, 5));
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -152,7 +151,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_LONGBLADE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_LONGBLADE,&img_item_weapon_katana,1,false,false,1,9,0,0,0,0,13,7,false,name_infor("도검",true),name_infor("",true),4.0f,100));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_LONGBLADE, 0, &t, 15));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -161,7 +159,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_MACE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,0,0,0,0,13,7,false,name_infor("고헤이",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 5));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -170,7 +167,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_AXE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_AXE,&img_item_weapon_handaxe,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("손도끼",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_AXE, 0, &t, 5));	
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -179,7 +175,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SPEAR:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,0,0,0,0,13,7,false,name_infor("창",true),name_infor("",true),4.0f,70));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 5));
 		(*it).identify = true;
 		(*it).identify_curse = true;
@@ -188,7 +183,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_GOHEY:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_MACE,&img_item_weapon_gohey,1,false,false,4,7,1,1,0,0,13,7,false,name_infor("고헤이",false),name_infor("",true),3.0f,60));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_MACE, 0, &t, 5));	
 		//it->value3 = 1;
 		it->value4 = 1;
@@ -199,7 +193,6 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SICKLE:
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_WEAPON_SPEAR,&img_item_weapon_spear,1,false,false,2,8,1,1,0,0,13,7,false,name_infor("창",true),name_infor("",true),4.0f,70));
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_WEAPON_SPEAR, 0, &t, 25));	
 		//it->value3 = 2;
 		it->value4 = 3;
@@ -220,7 +213,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ROBE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -229,7 +221,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_KAPPA_ROBE:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_KAPPA));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -238,7 +229,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_MIKO:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MIKO));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -247,7 +237,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_MAID:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MAID));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_robe,1,false,false,armour_stat[0][0],armour_stat[0][1],armour_stat[0][2],0,0,0,0,0,false,name_infor("무녀복",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -265,7 +254,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ARMOUR_0:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_1, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_0,&img_item_armor_armour_0,1,false,false,armour_stat[1][0],armour_stat[1][1],armour_stat[1][2],0,0,0,0,0,false,name_infor("경갑옷",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -274,7 +262,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_ARMOUR_1:
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_BODY_ARMOUR_2, 0, &t, AMK_NORMAL));	
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_BODY_ARMOUR_1,&img_item_armor_armour_1,1,false,false,armour_stat[2][0],armour_stat[2][1],armour_stat[2][2],0,0,0,0,0,false,name_infor("중간 중갑옷",true),name_infor("",true),6.0f,40));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -283,7 +270,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;
 	case SIT_SMALL_SHIELD:
 		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 0));
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_roundshield, &img_play_item_shield[0],1,false,false,3,-1,0,0,0,0,0,0,false,name_infor("나무방패",false),name_infor("",true),3.0f,30));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -292,7 +278,6 @@ void MakeStartItem(start_item_type select_, int num)
 		break;	
 	case SIT_MIDDLE_SHIELD:
 		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 25));
-		//it = env[current_level].MakeItem(you.position,CustomItem(&t,ITM_ARMOR_SHIELD,&img_item_weapon_shield, &img_play_item_shield[1],1,false,false,7,-3,0,0,0,0,0,0,false,name_infor("철방패",false),name_infor("",true),5.0f,100));
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
@@ -422,7 +407,7 @@ void MakeStartItem(start_item_type select_, int num)
 
 
 
-void SetJob(job_type select_, string name_)
+void SetJobs(job_type select_, unique_starting_type type)
 {
 	int nse =  ceil(need_skill_exp(0,AptCal(you.skill[SKT_SPELLCASTING].aptit))/10.0f); //need_spellcast_exp;
 	switch(select_)
@@ -432,7 +417,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(5,STAT_STR);
 		you.StatUpDown(-6,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
-		if(name_.compare("모미지")) //모미지는 특수한 시작
+		if(type != UNIQ_START_MOMIZI) //모미지는 특수한 시작
 		{
 			you.GiveSkillExp(WeaponSelect(0),60,false);
 			if(!you.GetProperty(TPT_SIZE))
@@ -467,7 +452,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(6,STAT_INT);
 		you.StatUpDown(-6,STAT_STR);
 		MakeStartItem(SIT_ROBE,0);
-		if(name_.compare("마리사")) //마리사는 이 책을 얻지 않는다.
+		if(type != UNIQ_START_MARISA) //마리사는 이 책을 얻지 않는다.
 			MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
@@ -487,9 +472,9 @@ void SetJob(job_type select_, string name_)
 		you.GiveSkillExp(SKT_MACE,120,false);
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,50,false);
-		if(name_.compare("사나에") == 0) //레이무는 믿지않는다.
+		if(type == UNIQ_START_SANAE) //레이무는 믿지않는다.
 			you.Belief(GT_SUWAKO,35,false);
-		else if(name_.compare("레이무")) //레이무는 믿지않는다.
+		else if(type != UNIQ_START_REIMU) //레이무는 믿지않는다.
 			you.Belief(GT_KANAKO,35,false);
 		break;
 	case JOB_GLADIATOR:
@@ -768,7 +753,7 @@ void SetJob(job_type select_, string name_)
 		you.StatUpDown(-3,STAT_INT);
 		you.StatUpDown(1,STAT_DEX);
 		
-		if(name_.compare("니토리"))
+		if(type != UNIQ_START_NITORI)
 		{			
 			you.GiveSkillExp(WeaponSelect(0),60,false);
 			MakeStartItem(SIT_ROBE,1);
@@ -808,11 +793,11 @@ void SetJob(job_type select_, string name_)
 
 bool skill_lilly_1(int power, bool short_, unit* order, coord_def target);
 
-void TouhouPlayerble(const string name_, bool aptit_)
+void TouhouPlayerble(unique_starting_type type, bool aptit_)
 {
 	item_infor t;
 	item *it;
-	if(name_.compare("레이무")==0)
+	if(type == UNIQ_START_REIMU)
 	{	
 		if(aptit_)
 		{
@@ -824,8 +809,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_HEAD, 0, &t, -1));	
 			it->image = &img_item_armor_helmet[1];
 			it->equip_image = &img_play_item_hat[1];
-			it->name.name = "리본";
-			it->name.name_type = true;
+			it->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON);
 			it->value4 = 0;
 			it->curse = false;
 			it->Identify();
@@ -847,7 +831,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 	}
 
-	else if(name_.compare("마리사")==0)
+	else if(type == UNIQ_START_MARISA)
 	{
 		if(aptit_)
 		{
@@ -891,7 +875,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			//you.Memorize(SPL_CONTROLED_BLINK,true);		
 		}
 	}
-	else if(name_.compare("사나에")==0)
+	else if(type == UNIQ_START_SANAE)
 	{
 		if(aptit_)
 		{
@@ -920,7 +904,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("모미지")==0)
+	else if(type == UNIQ_START_MOMIZI)
 	{
 		if(aptit_)
 		{
@@ -963,7 +947,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			
 		}
 	}
-	else if(name_.compare("코이시")==0)
+	else if(type == UNIQ_START_KOISHI)
 	{
 		if(aptit_)
 		{
@@ -985,7 +969,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("모코우")==0)
+	else if(type == UNIQ_START_MOKOU)
 	{
 		if(aptit_)
 		{
@@ -1005,7 +989,7 @@ void TouhouPlayerble(const string name_, bool aptit_)
 		}
 
 	}
-	else if(name_.compare("니토리")==0)
+	else if(type == UNIQ_START_NITORI)
 	{
 		if(aptit_)
 		{
@@ -1030,21 +1014,21 @@ void TouhouPlayerble(const string name_, bool aptit_)
 			you.equip('a' + 4, ET_NECK, false);
 		}
 	}
-	else if (name_.compare("써니") == 0 || name_.compare("스타") == 0 || name_.compare("루나") == 0)
+	else if (type == UNIQ_START_SUNNY || type == UNIQ_START_STAR || type == UNIQ_START_LUNA)
 	{
 		if (aptit_)
 		{
-			if (name_.compare("써니") == 0) {
+			if (type == UNIQ_START_SUNNY) {
 				you.skill[SKT_SPELLCASTING].aptit += 1;
 				you.skill[SKT_CONJURE].aptit += 2;
 
 			}
-			if (name_.compare("스타") == 0) {
+			if (type == UNIQ_START_STAR) {
 				you.skill[SKT_FIGHT].aptit += 1;
 				you.skill[SKT_DODGE].aptit += 1;
 				you.skill[SKT_ALCHEMY].aptit += 1;
 			}
-			if (name_.compare("루나") == 0) {
+			if (type == UNIQ_START_LUNA) {
 				you.skill[SKT_SHORTBLADE].aptit += 1;
 				you.skill[SKT_STEALTH].aptit += 1;
 				you.skill[SKT_MENTAL].aptit += 1;
@@ -1063,20 +1047,20 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 
 
-			if (name_.compare("써니") == 0) {
+			if (type == UNIQ_START_STAR) {
 
 
 
 
 			}
-			if (name_.compare("스타") == 0) {
+			if (type == UNIQ_START_STAR) {
 				
 				you.SetProperty(TPT_SEE_INVI, 1);
 
 
 
 			}
-			if (name_.compare("루나") == 0) {
+			if (type == UNIQ_START_LUNA) {
 				for (int i = 0; i < 5; i++)
 				{
 					it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SILENCE));
@@ -1089,11 +1073,11 @@ void TouhouPlayerble(const string name_, bool aptit_)
 
 
 			vector<int> temp;
-			if (name_.compare("써니") != 0)
+			if (type == UNIQ_START_SUNNY)
 				temp.push_back(MON_SUNNY);
-			if (name_.compare("스타") != 0)
+			if (type == UNIQ_START_STAR)
 				temp.push_back(MON_STAR);
-			if (name_.compare("루나") != 0)
+			if (type == UNIQ_START_LUNA)
 				temp.push_back(MON_LUNAR);
 			
 

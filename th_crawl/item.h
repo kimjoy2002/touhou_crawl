@@ -44,7 +44,7 @@ struct item_infor
 	bool curse;
 
 	bool artifact;
-	item_infor():name("없음",true), name2("",true) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
+	item_infor():name(LOC_SYSTEM_NONE_STRING), name2(LOC_NONE) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
 		num(1),value0(0),value1(0),value2(0),value3(0),value4(0),value5(0),value6(0), value7(0), value8(0)
 		, curse(false), artifact(false)
 	{};
@@ -201,6 +201,7 @@ public:
 	void LoadDatas(FILE *fp);
 	
 	string GetName(int num_ = -1);
+	string GetNameString();
 	name_infor GetNameInfor();
 	textures *GetEquipTexture();
 	const D3DCOLOR item_color();
@@ -250,7 +251,7 @@ item_infor& CustomSimpleItem(item_infor* t, item_type type, int num, bool curse,
 int baditem(const item_infor *item_);
 item_type RandomItemType();
 
-const char* GetItemTypeSting(item_type_simple type);
+string GetItemTypeSting(item_type_simple type);
 
 
 bool GetItemofKey(list<item>::iterator it,list<item>::iterator it2);

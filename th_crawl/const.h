@@ -13,21 +13,17 @@
 
 #include "d3dUtility.h"
 #include "enum.h"
+#include "enumMapBuilder.h"
 
 class name_infor;
 
-extern const char *tribe_type_string[]; //종족스트링
-extern const char *job_type_string[]; //직업스트링
-
-extern const bool tribe_string_back[];
-extern const bool job_string_back[];
+extern LOCALIZATION_ENUM_KEY tribe_type_string[]; //종족스트링
+extern LOCALIZATION_ENUM_KEY job_type_string[]; //직업스트링
 
 
-extern const char *dungeon_tile_tribe_type_string[]; //타일스트링
+LOCALIZATION_ENUM_KEY dungeon_tile_tribe_type_string[]; //타일스트링
 
-extern const char *state_string[]; //상태이상스트링
-
-extern const char *rune_string[];
+extern LOCALIZATION_ENUM_KEY rune_string[];
 
 
 
@@ -69,18 +65,18 @@ extern const D3DCOLOR CL_sion;
 extern const name_infor string_that;
 extern const name_infor string_something;
 
-extern const char *item_weapon_string;
-extern const char *item_throw_string;
-extern const char *item_armor_string;
-extern const char *item_potion_string;
-extern const char *item_food_string;
-extern const char *item_scroll_string;
-extern const char *item_spell_string;
-extern const char *item_jewelry_string;
-extern const char *item_book_string;
-extern const char *item_miscellaneous_string;
-extern const char *item_goal_string;
-extern const char *item_other_string;
+extern LOCALIZATION_ENUM_KEY item_weapon_string;
+extern LOCALIZATION_ENUM_KEY item_throw_string;
+extern LOCALIZATION_ENUM_KEY item_armor_string;
+extern LOCALIZATION_ENUM_KEY item_potion_string;
+extern LOCALIZATION_ENUM_KEY item_food_string;
+extern LOCALIZATION_ENUM_KEY item_scroll_string;
+extern LOCALIZATION_ENUM_KEY item_spell_string;
+extern LOCALIZATION_ENUM_KEY item_jewelry_string;
+extern LOCALIZATION_ENUM_KEY item_book_string;
+extern LOCALIZATION_ENUM_KEY item_miscellaneous_string;
+extern LOCALIZATION_ENUM_KEY item_goal_string;
+extern LOCALIZATION_ENUM_KEY item_other_string;
 
 
 extern const int level_up_value[];

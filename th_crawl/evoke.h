@@ -6,6 +6,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "enumMapBuilder.h"
 
 enum evoke_kind
 {
@@ -20,7 +21,6 @@ enum evoke_kind
 	EVK_MAX
 };
 
-extern const char *evoke_string[EVK_MAX];
 struct item_infor;
 
 

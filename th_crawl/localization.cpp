@@ -15,7 +15,7 @@
 #include <sstream>
 
 
-
+LOCALIZATION_TYPE LocalzationManager::current_lang = LOCALIZATION_TYPE_ENG;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
 unordered_map<string, SPEAK_ENUM_KEY> LocalzationManager::speak_enum_map = createSpeakEnumMap();
@@ -35,10 +35,26 @@ unordered_set<string> LocalzationManager::english_article = {
 };
 
 
+string getLocalizationString(LOCALIZATION_TYPE type) {
+	switch(type) 
+	{
+	case LOCALIZATION_TYPE_ENG:
+	default:
+		return "ENG";
+	case LOCALIZATION_TYPE_KOR:
+		return "KOR";
+	}
+}
 
 void LocalzationManager::init(LOCALIZATION_TYPE type) {
+	current_lang = type;
 	string filePath;
 
+	localization_map.clear();
+	speak_map.clear();
+	monster_name_map.clear();
+	monster_description_map.clear();
+	
 	switch (type)
 	{
 	case LOCALIZATION_TYPE_ENG:

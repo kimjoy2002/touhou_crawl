@@ -25,10 +25,12 @@ using namespace std;
 
 
 enum LOCALIZATION_TYPE {
-	LOCALIZATION_TYPE_ENG,
-	LOCALIZATION_TYPE_KOR
+	LOCALIZATION_TYPE_ENG = 0,
+	LOCALIZATION_TYPE_KOR,
+	LOCALIZATION_TYPE_MAX
 };
 
+string getLocalizationString(LOCALIZATION_TYPE type);
 
 class PlaceHolderHelper {
 public:
@@ -146,6 +148,8 @@ private:
 
 
 public:
+    static LOCALIZATION_TYPE current_lang;
+
 	static void init(LOCALIZATION_TYPE type);
 
 	static const string& locString(LOCALIZATION_ENUM_KEY key);

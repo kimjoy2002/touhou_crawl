@@ -1,1080 +1,1080 @@
-﻿LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
-LOC_SYSTEM_LOS_NOMON,시야안에 몬스터가 없다.
-LOC_SYSTEM_CONFUSE_WARNING,당신은 혼란스럽다.
-LOC_SYSTEM_DIMENSTION,차원이 고정된 상태에서는 지원되지않는다.
-LOC_SYSTEM_MAP_DANGER,시야안에 위험 요소가 있다.
-LOC_SYSTEM_UNABLE_MOVE,그곳으로 이동할 수 없다.
-LOC_SYSTEM_AUTOBATTLE_DANGERHP,자동전투하기엔 당신의 체력이 너무 적다.
-LOC_SYSTEM_AUTOBATTLE_NOMON,공격할 수 있는 몬스터가 없다.
-LOC_SYSTEM_LUNATIC_PENALTY,광기에 휩싸인 상태로 할 수 없다!
-LOC_SYSTEM_AUTOTRAVEL_BAMBOO,이 곳에서는 자동으로 탐색할 수 없어 보인다.
-LOC_SYSTEM_DONE_EXPLORE,탐색 완료
-LOC_SYSTEM_NONE_STRING,없음
-LOC_SYSTEM_BUG,버그
-LOC_SYSTEM_REST_START,휴식을 시작합니다.
-LOC_SYSTEM_REST_HP,체력이 회복되었다.
-LOC_SYSTEM_REST_MP,영력이 회복되었다.
-LOC_SYSTEM_REST_DONE,휴식 완료
-LOC_SYSTEM_READ_SCROLL,{0:을|를} 읽었다.
-LOC_SYSTEM_HEALED,{0:은|는} 회복되었다.
-LOC_SYSTEM_HEALED2,회복되었다.
-LOC_SYSTEM_IDENTIFY_ITEM,이것은 {0:이다|다}.
-LOC_SYSTEM_UNEQUIP_ITEM,{0:을|를} 벗었다.
-LOC_SYSTEM_DROP_ITEM,당신은 {0:을|를} 내려놓았다.
-LOC_SYSTEM_DROP_ITEM_SION_ALL,그러나 빈곤신의 저주로 사라졌다.
-LOC_SYSTEM_DROP_ITEM_SION_SOME,빈곤신의 저주로 {0}개가 사라졌다.
-LOC_SYSTEM_COMMAND,명령어
-LOC_SYSTEM_DESCRIPTION,설명
-LOC_SYSTEM_EXPLORE,탐색
-LOC_SYSTEM_DANGER,위험구역설정
-LOC_SYSTEM_STAIR_TRAVEL,빠른 계단찾기
-LOC_SYSTEM_MONSTER,몬스터
-LOC_SYSTEM_SUCCESS_PERCENT,성공확률
-LOC_SYSTEM_IMPOSSIBLE,불가능
-LOC_SYSTEM_YOU,당신
-LOC_SYSTEM_TURN,턴
-LOC_SYSTEM_TURNS,턴
-LOC_SYSTEM_SLEEP,수면
-LOC_SYSTEM_REST,휴식
-LOC_SYSTEM_EXPLORING,탐험중
-LOC_SYSTEM_CANT_DETECTED,발각안됨
-LOC_SYSTEM_CONFUSE,혼란
-LOC_SYSTEM_POISON,독
-LOC_SYSTEM_MIGHT,힘강화
-LOC_SYSTEM_CLEVER,영력강화
-LOC_SYSTEM_HASTE,가속
-LOC_SYSTEM_SLOW,감속
-LOC_SYSTEM_SUMMONED,소환
-LOC_SYSTEM_FROZEN,빙결
-LOC_SYSTEM_ALLY,우호
-LOC_SYSTEM_ELEC,방전
-LOC_SYSTEM_PARALYSE,마비
-LOC_SYSTEM_GLOW,빛남
-LOC_SYSTEM_GRAZE,그레이즈
-LOC_SYSTEM_SILENCE,정적
-LOC_SYSTEM_SICK,병
-LOC_SYSTEM_VEILING,베일링
-LOC_SYSTEM_INVISIVLE,투명
-LOC_SYSTEM_TELE,공간불안정
-LOC_SYSTEM_MUTE,벙어리
-LOC_SYSTEM_CATCH,잡힘
-LOC_SYSTEM_GHOST,영혼구속
-LOC_SYSTEM_FEAR,공포
-LOC_SYSTEM_STRONG_FEAR,전의상실
-LOC_SYSTEM_MIND_READING,간파
-LOC_SYSTEM_LUNATIC,광기
-LOC_SYSTEM_ALLY_CALL,동료부르기
-LOC_SYSTEM_ENHANCE,강화
-LOC_SYSTEM_WEAKENING,약화
-LOC_SYSTEM_CHANGED,둔갑중
-LOC_SYSTEM_INVINCIBILITY,무적
-LOC_SYSTEM_HP_VERY_LOW,죽기 직전
-LOC_SYSTEM_HP_LOW,심각한 부상
-LOC_SYSTEM_HP_MIDDLE,상당한 부상
-LOC_SYSTEM_HP_HIGH,가벼운 부상
-LOC_SYSTEM_HP_VERY_HIGH,거의 멀쩡함
-LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
-LOC_SYSTEM_SMOKE_FOG,안개 구름
-LOC_SYSTEM_SMOKE_FIRE,화염 구름
-LOC_SYSTEM_SMOKE_COLD,냉기 구름
-LOC_SYSTEM_SMOKE_ELEC,전기 구름
-LOC_SYSTEM_SMOKE_DARK,암흑 구름
-LOC_SYSTEM_SMOKE_SION,빈곤 구름
-LOC_SYSTEM_SMOKE_POISON,독 구름
-LOC_SYSTEM_SMOKE_CONFUSE,혼란 구름
-LOC_SYSTEM_SMOKE_SLOW,스위트 포이즌
-LOC_SYSTEM_SMOKE_TWIST,트위스트
-LOC_SYSTEM_SMOKE_WHIRLWIND,회오리바람
-LOC_SYSTEM_SMOKE_CURSE,저주 구름
-LOC_SYSTEM_SMOKE_BLIZZARD,블리자드
-LOC_SYSTEM_MANY_ITEMS,많은 아이템들
-LOC_SYSTEM_TERRAIN_UNSEEN,보이지 않는 곳
-LOC_SYSTEM_TERRAIN,지형
-LOC_SYSTEM_TERRAIN_SILENCE,정적
-LOC_SYSTEM_TERRAIN_VIOLET,바이올렛필드
-LOC_SYSTEM_TERRAIN_SANCTUARY,성역
-LOC_SYSTEM_ON_THE_TERRAIN,{0}의 위에 서있다.
-LOC_SYSTEM_ON_THE_ITEM_SINGLE,여기엔 {0:이|가} 있다. (,키로 줍기)
-LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,여기엔 {0:이|가} 있다. (,키로 줍기)
-LOC_SYSTEM_MONSTER_OPEN_DOOR,{0:은|는} 문을 열었다.
-LOC_SYSTEM_SUDDENLY_OPEN_DOOR,문이 열렸다.
-LOC_SYSTEM_MON_RED_DESIRE,빨간 신령
-LOC_SYSTEM_MON_BLUE_DESIRE,파란 신령
-LOC_SYSTEM_MON_GREEN_DESIRE,초록 신령
-LOC_SYSTEM_MON_POISONED,{0:은|는} 독에 걸렸다.
-LOC_SYSTEM_MON_MORE_POISONED,{0}의 독은 심해졌다.
-LOC_SYSTEM_MON_TELE,{0}의 주변 공간이 불안정해졌다.
-LOC_SYSTEM_MON_TELE_STABLE,{0}의 주변 공간은 안정을 되찾았다.
-LOC_SYSTEM_MON_MIGHT,{0:은|는} 힘이 강해졌다.
-LOC_SYSTEM_MON_MORE_MIGHT,{0:은|는} 힘이 더욱 강해졌다.
-LOC_SYSTEM_MON_HASTE,{0:은|는} 빨라졌다.
-LOC_SYSTEM_MON_MORE_HASTE,{0:은|는} 빨라졌다.
-LOC_SYSTEM_MON_CONFUSE,{0:은|는} 혼란스러워졌다.
-LOC_SYSTEM_MON_MORE_CONFUSE,{0:은|는} 더욱 혼란스러워졌다.
-LOC_SYSTEM_MON_SLOW,{0:은|는} 느려졌다.
-LOC_SYSTEM_MON_MORE_SLOW,{0:은|는} 더욱 느려졌다.
-LOC_SYSTEM_MON_FROZEN,{0:은|는} 얼어붙어 움직임이 둔해졌다.
-LOC_SYSTEM_MON_MORE_FROZEN,{0:은|는} 더욱 얼어붙어 움직임이 둔해졌다.
-LOC_SYSTEM_MON_CHARM,{0:은|는} 매료되었다.
-LOC_SYSTEM_MON_MORE_CHARM,{0:은|는} 더욱 매료되었다.
-LOC_SYSTEM_MON_DISCARGE,{0:은|는} 방전되고있다.
-LOC_SYSTEM_MON_MORE_DISCARGE,{0:은|는} 방전되고있다.
-LOC_SYSTEM_MON_PARALYSE,{0:은|는} 마비되었다.
-LOC_SYSTEM_MON_GLOW,{0:은|는} 빛나고있다.
-LOC_SYSTEM_MON_MORE_GLOW,{0:은|는} 더욱 빛나고있다.
-LOC_SYSTEM_MON_GRAZE,{0:은|는} 그레이즈를 하기 시작했다.
-LOC_SYSTEM_MON_MORE_GRAZE,{0:은|는} 그레이즈를 하기 시작했다.
-LOC_SYSTEM_MON_SILENCE,{0:은|는} 주변의 소리를 지웠다.
-LOC_SYSTEM_MON_SICK,{0:은|는} 병에 걸렸다.
-LOC_SYSTEM_MON_MORE_SICK,{0}의 병은 심해졌다.
-LOC_SYSTEM_MON_VEILING,{0:은|는} 바람을 감쌌다.
-LOC_SYSTEM_MON_MORE_VEILING,{0:을|를} 감싸는 바람이 강해졌다.
-LOC_SYSTEM_MON_INVISIBLE,{0:은|는} 투명하게 변한다.
-LOC_SYSTEM_MON_MORE_INVISIBLE,{0:은|는} 더욱 투명하게 변한다.
-LOC_SYSTEM_MON_INVISIBLE_WARNING,{0:은|는} 투명해지면서 사라졌다.
-LOC_SYSTEM_MON_MUTE,{0:은|는} 벙어리가 되었다.
-LOC_SYSTEM_MON_MORE_MUTE,{0}의 침묵이 길어졌다.
-LOC_SYSTEM_MON_ENSLAVE_INANIMATE,{0:은|는} 무생물이기에 영혼이 없다.
-LOC_SYSTEM_MON_ENSLAVE_REIMU,낙원의 멋진 무녀는 모든 것으로부터 속박되지않는다.
-LOC_SYSTEM_MON_ENSLAVE_DREAM,{0:은|는} 꿈의 주민이기에 속박할 수 없다.
-LOC_SYSTEM_MON_ENSLAVE_SUMMONED,{0:은|는} 이미 종속되어있다.
-LOC_SYSTEM_MON_ENSLAVE,{0}의 영혼이 붙잡혔다. 지속시간내로 처치하면 당신의 동료가 된다.
-LOC_SYSTEM_MON_FEAR,{0:은|는} 공포에 질렸다.
-LOC_SYSTEM_MON_MORE_FEAR,{0:은|는} 공포에 질려서 전의를 완전 상실했다.
-LOC_SYSTEM_MON_MIND_READING,{0:은|는} 마음을 간파당했다.
-LOC_SYSTEM_MON_MIND_READING_ANIMAL,{0}의 생각을 알게되어 친해졌다.
-LOC_SYSTEM_MON_LUNATIC,{0:은|는} 광기에 휩싸였다.
-LOC_SYSTEM_MON_GATHERING,{0:은|는} 동료를 끌어모으고 있다.
-LOC_SYSTEM_MON_GATHERING_MOON_RABBIT,{0:은|는} 동료에 도움을 청하는 전파를 보내기 시작했다.
-LOC_SYSTEM_MON_GATHERING_HELL_HOUND,{0}의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다.
-LOC_SYSTEM_MON_STRONG,{0:은|는} 강화되었다.
-LOC_SYSTEM_MON_WEAK,{0:은|는} 약화되었다.
-LOC_SYSTEM_MON_INVINCIBILITY,{0:은|는} 무적상태가 되었다.
-LOC_SYSTEM_MON_SLEEP,{0:은|는} 잠에 빠졌다.
-LOC_SYSTEM_MON_TELEPORTING,{0:은|는} 공간이동을 통해 시야에서 사라졌다
-LOC_SYSTEM_MON_TELEPORTING_APPEAR,{0:이|가} 갑자기 나타났다.
-LOC_SYSTEM_MON_RECORVER_POISON,{0:은|는} 독에서 회복되었다.
-LOC_SYSTEM_MON_RECORVER_CONFUSE,{0:은|는} 혼란스러움을 떨쳐냈다.
-LOC_SYSTEM_MON_RECORVER_FROZEN,{0}의 얼음이 녹았다.
-LOC_SYSTEM_MON_RECORVER_PARALYSE,{0:은|는} 다시 움직일 수 있게 되었다.
-LOC_SYSTEM_MON_RECORVER_SICK,{0:은|는} 더 이상 아프지 않다.
-LOC_SYSTEM_MON_NO_LONGER_STRONG,{0:은|는} 더 이상 힘이 강하지 않다.
-LOC_SYSTEM_MON_NO_LONGER_HASTE,{0:은|는} 더 이상 빠르지 않다.
-LOC_SYSTEM_MON_NO_LONGER_SLOW,{0:은|는} 더 이상 느리지 않다.
-LOC_SYSTEM_MON_NO_LONGER_CHARM,{0:은|는} 더 이상 매료상태가 아니다.
-LOC_SYSTEM_MON_NO_LONGER_DISCHARGE,{0:은|는} 방전을 멈췄다.
-LOC_SYSTEM_MON_NO_LONGER_GLOW,{0:은|는} 빛나는 것을 멈췄다.
-LOC_SYSTEM_MON_NO_LONGER_GRAZE,{0:은|는} 더 이상 그레이즈를 하지 않는다.
-LOC_SYSTEM_MON_NO_LONGER_SILENCE,{0:을|를} 감싸는 정적이 사라졌다.
-LOC_SYSTEM_MON_NO_LONGER_VEILING,{0:을|를} 휘감던 바람이 사라졌다.
-LOC_SYSTEM_MON_NO_LONGER_INVISIBLE,{0:은|는} 투명이 풀렸다.
-LOC_SYSTEM_MON_NO_LONGER_INVISIBLE_AND_APPEAR,{0:은|는} 투명이 풀리면서 모습을 드러냈다.
-LOC_SYSTEM_MON_NO_LONGER_MUTE,{0:은|는} 더 이상 벙어리가 아니다.
-LOC_SYSTEM_MON_NO_LONGER_ENSLAVE,{0:은|는} 더 이상 영혼이 붙잡혀있지않다.
-LOC_SYSTEM_MON_NO_LONGER_LUNATIC,{0:은|는} 더 이상 미치지 않았다.
-LOC_SYSTEM_MON_NO_LONGER_FORCE,{0}의 강화가 끝났다.
-LOC_SYSTEM_MON_NO_LONGER_WEAK,{0}의 약화가 끝났다.
-LOC_SYSTEM_MON_NO_LONGER_CHANGED,{0:은|는} 둔갑이 풀려서 너구리로 돌아왔다.
-LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,{0:은|는} 더 이상 무적이 아니다.
-LOC_SYSTEM_MON_ABIL_GATHERING,{0:은|는} 동료를 끌어모으고 있다.
-LOC_SYSTEM_MON_DROWNED,{0:은|는} 물에 빠졌다.
-LOC_SYSTEM_MON_FALL_LAVA,{0:은|는} 용암에 빠졌다.
-LOC_SYSTEM_FIGHT_BLOCK,{0:은|는} {1}의 {2:을|를} 방패로 막았다.
-LOC_SYSTEM_FIGHT_EVADE,{0:은|는} {1}의 {2:을|를} 피했다.
-LOC_SYSTEM_FIGHT_GRAZE,{0:은|는} {1}의 {2:을|를} 그레이즈 했다.
-LOC_SYSTEM_FIGHT_MISS,{0}의 {1:이|가} {2:을|를} 빗나갔다.
-LOC_SYSTEM_FIGHT_GRAZED,{0}의 {1:이|가} {2}에게 그레이즈당했다.
-LOC_SYSTEM_MAGIC_RESIST,{0:은|는} 저항했다.
-LOC_SYSTEM_MAGIC_SUMMON,{0:이|가} 당신에게 소환되었다.
-LOC_SYSTEM_MAGIC_FIRE_BRAND,{0:은|는} 불타오르기 시작했다.
-LOC_SYSTEM_MAGIC_FIRE_BRAND_MORE,{0:은|는} 더욱 불타오르기 시작했다.
-LOC_SYSTEM_MAGIC_COLD_BRAND,{0:은|는} 냉기를 뿜기 시작했다
-LOC_SYSTEM_MAGIC_COLD_BRAND_MORE,{0:은|는} 더욱 냉기를 뿜기 시작했다
-LOC_SYSTEM_MAGIC_POISON_BRAND,{0:은|는} 독을 떨어뜨리기 시작했다.
-LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,{0:은|는} 더욱 독이 진해졌다.
-LOC_SYSTEM_MAGIC_RECALL,{0:은|는} 리콜되었다.
-LOC_SYSTEM_MAGIC_KNOCKBACK,{0:은|는} 튕겨져나갔다.
-LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0:은|는} 최면에 걸린채로 움직였다.
-LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0:은|는} 이미 동물이기에 변신에 걸리지않는다.
-LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,{0:은|는} 동물로 변해버렸다.
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_LAKE,{0:은|는} 안개의 호수의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_MOUNTAIN,{0:은|는} 요괴의 산의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_SCARLET,{0:은|는} 홍마관의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_YUKKURI,{0:은|는} 윳쿠리 둥지의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_BAMBOO,{0:은|는} 미궁의 죽림의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_SUBTERRANEAN,{0:은|는} 지저의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_SUMMON_DREAM_PANDEMONIUM,{0:은|는} 마계의 꿈을 불러냈다!
-LOC_SYSTEM_MAGIC_MANA_DRAIN,{0:은|는} 당신의 마나를 흡수하였다.
-LOC_SYSTEM_MAGIC_BLOOD_STARE,{0:은|는} {1:을|를} 뚫어지게 응시했다.
-LOC_SYSTEM_MAGIC_JUMP_ATTACK,{0:은|는} {1}에게 도약했다.
-LOC_SYSTEM_MAGIC_DISGUISE,{0:은|는} {1:으로|로} 둔갑하였다!
-LOC_SYSTEM_MAGIC_RECALL_YOSHIKA,{0:은|는} {1}의 옆으로 불려왔다.
-LOC_SYSTEM_MAGIC_REVIVE_YOSHIKA,{0:은|는} {1:을|를} 부활시켰다!
-LOC_SYSTEM_MAGIC_TASTE_OF_DEATH,{0:은|는} {1}에게 빨려들어갔다.
-LOC_SYSTEM_MAGIC_AFTERLIFE,{0:은|는} 당신을 향해 낫을 내리쳤다.
-LOC_SYSTEM_MAGIC_PRISM_CONCERTO,프리즘 콘체르토!
-LOC_SYSTEM_MAGIC_PRISM_CALL,{0:은|는} 합주에 참가하였다.
-LOC_SYSTEM_MAGIC_UNLUCK,{0:은|는} {1}의 운기를 조작했다.
-LOC_SYSTEM_MAGIC_UNLUCK_TO_MONSTER,{0:은|는} {1}의 운기를 조작했다. {2:은|는} 왠지 불행해보인다.
-LOC_SYSTEM_MAGIC_MERMAID_SONG,{0:은|는} {1}의 노래소리에 끌려 걸어갔다.
-LOC_SYSTEM_MAGIC_PSYCHOKINESIS,{0:은|는} 염동력에 의해 튕겨져나갔다.
-LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_RED,{0:은|는} 분노의 가면을 착용했다.
-LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_BLUE,{0:은|는} 슬픔의 가면을 착용했다.
-LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_GREEN,{0:은|는} 기쁨의 가면을 착용했다.
-LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0:은|는} {1:을|를} 꿈으로 인도했다.
-LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0:은|는} {1}에게 순간적으로 이동하며 발차기를 날렸다.
-LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
-LOC_SYSTEM_HIT_DREAM,{0:은|는} {1}의 꿈을 먹었다.
-LOC_SYSTEM_HIT_FIRE,{0}의 {1:은|는} {2}에게 명중하고 불타올랐다.
-LOC_SYSTEM_HIT_COLD,{0}의 {1:은|는} {2}에게 명중하고 얼어붙었다.
-LOC_SYSTEM_HIT_ELEC,{0}의 {1:은|는} {2}에게 명중하고 감전되었다.
-LOC_SYSTEM_HIT_GERMAN_SUPLEX,{0}의 {1:은|는} {2}에게 들어갔다.
-LOC_SYSTEM_HIT_SMITE,무엇인가 {0:을|를} 강타했다.
-LOC_SYSTEM_HIT_SMASH,{0:은|는} 집어던져진후 바닥에 내팽겨쳐졌다.
-LOC_SYSTEM_HIT_BLOOD,{0}의 피가 터져나왔다.
-LOC_SYSTEM_HIT_NOISE,굉음이 {0}의 달팽이관을 강타했다.
-LOC_SYSTEM_HIT_CLOUD_FIRE,{0:은|는} 화염에 휩싸였다.
-LOC_SYSTEM_HIT_CLOUD_COLD,{0:은|는} 얼어붙었다.
-LOC_SYSTEM_HIT_CLOUD_ELEC,{0:은|는} 감전되었다.
-LOC_SYSTEM_HIT_STONE_TRAP,{0:은|는} 뾰족한 바위를 밟았다.
-LOC_SYSTEM_HIT_BLAST,{0:은|는} {1}의 폭발에 휘말렸다.
-LOC_SYSTEM_HIT_SUN_BLAST,{0:은|는} {1}에 의해 타들어갔다.
-LOC_SYSTEM_HIT_BLLIZARD,{0:은|는} 눈보라에 휘말렸다.
-LOC_SYSTEM_HIT_BURST,{0:은|는} 폭발했다.
-LOC_SYSTEM_HIT_TWIST,{0:은|는} 바람에 휩쓸렸다.
-LOC_SYSTEM_HIT_CURSED,{0:은|는} 저주받고있다.
-LOC_SYSTEM_HIT_VEILING,{0:은|는} 바람 갑옷에 베였다.
-LOC_SYSTEM_HIT_RUSH,{0:은|는} 맞았다.
-LOC_SYSTEM_HIT_BUMP,{0:은|는} {1:과|와} 부딪혔다.
-LOC_SYSTEM_HIT_BUMP_WALL,{0:은|는} 벽에 부딪혔다.
-LOC_SYSTEM_HIT_PSYCHO,{0:은|는} 바닥에 내팽겨쳐졌다.
-LOC_SYSTEM_HIT_DROWNING,{0:은|는} 물에 빠져 질식하고 있다.
-LOC_SYSTEM_HIT_DROWNING_MONSTER,{0:은|는} 물에 빠졌다.
-LOC_SYSTEM_HIT_VAMP,{0:은|는} {1}의 체력을 흡수했다.
-LOC_SYSTEM_HIT_THROW_ELEC,{0:은|는} 감전되었다.
-LOC_SYSTEM_HIT_CONFUSE_ATTACK,당신의 공격이 {0}의 허를 찔렀다!
-LOC_SYSTEM_HIT_STAB_SHORTBLADE,{0:은|는} {1:을|를} 뒤에서 꿰뚫었다.
-LOC_SYSTEM_HIT_STAB_LONGBLADE,{0:은|는} {1:을|를} 뒤에서 잘라냈다.
-LOC_SYSTEM_HIT_STAB_MACE,{0:은|는} {1:을|를} 뒤에서 내리쳤다.
-LOC_SYSTEM_HIT_STAB_AXE,{0:은|는} {1:을|를} 뒤에서 찍었다.
-LOC_SYSTEM_HIT_STAB_SPEAR,{0:은|는} {1:을|를} 뒤에서 꿰뚫었다.
-LOC_SYSTEM_HIT_STAB_OTHER,{0:은|는} {1:을|를} 뒤에서 기습했다.
-LOC_SYSTEM_NO_DAMAGE,아무런 데미지도 받지 않았다.
-LOC_SYSTEM_BUT_NO_DAMAGE,그러나 아무런 데미지도 주지 못했다.
-LOC_SYSTEM_FRIEND_SHIELD,{0:은|는} {1:을|를} 감쌌다!
-LOC_SYSTEM_MAMIZO_EVADE,{0:은|는} 지장으로 변화하여 공격을 피했다!
-LOC_SYSTEM_KILL_NORMAL,{0:은|는} {1:을|를} 죽였다.
-LOC_SYSTEM_KILL_INANIMATE,{0:은|는} {1:을|를} 파괴했다.
-LOC_SYSTEM_DEAD_NORMAL,{0:은|는} 죽었다.
-LOC_SYSTEM_DEAD_INANIMATE,{0:은|는} 파괴되었다.
-LOC_SYSTEM_DEAD_DOOR,{0:은|는} 평범한 문으로 돌아왔다.
-LOC_SYSTEM_DEAD_SUMMON,{0:은|는} 연기 속으로 사라졌다.
-LOC_SYSTEM_DEAD_REIMU,{0:은|는} 틈새속으로 사라졌다.
-LOC_SYSTEM_GAIN_EXPERIENCE,경험이 증가하는 것을 느꼈다.
-LOC_SYSTEM_GAIN_NO_EXPERIENCE_WITH_FEAR,전의상실한 적에겐 경험치를 받을 수 없다.
-LOC_SYSTEM_NOTE_UNIQUE_FIND,네임드 {0:을|를} 발견했다.
-LOC_SYSTEM_NOTE_UNIQUE_KILL,네임드 {0:을|를} 죽였다.
-LOC_SYSTEM_NOTE_UNIQUE_DEAD,네임드 {0:이|가} 죽었다.
-LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0:이|가} 죽었다.
-LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0:이|가} 동료가 되었다.
-LOC_SYSTEM_NOTE_INVITE_FAIRY,{0:이|가}({1}) 동료가 되었다.
-LOC_SYSTEM_NOTE_GOD_WORSHIP,{0}의 신도가 되었다.
-LOC_SYSTEM_NOTE_GOD_GIVEUP,{0:은|는} 포기했다.
-LOC_SYSTEM_NOTE_GOD_FORGIVE,{0:으로|로}부터 용서받았다.
-LOC_SYSTEM_NOTE_GOD_ABANDON,{0:을|를} 버렸다.
-LOC_SYSTEM_NOTE_GOD_ABANDONED,{0:으로|로}부터 버려졌다.
-LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,{0:을|를} 구속했다.
-LOC_SYSTEM_NOTE_SEIJA_GIFT,세이자에게 선물을 받았다. ({0})
-LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,순호로부터 아이템순화({0}) 축복
-LOC_SYSTEM_NOTE_RUN_AWAY,{0:으로|로} 도망쳤다.
-LOC_SYSTEM_NOTE_DEAD,죽었다.
-LOC_SYSTEM_NOTE_DEAD_BY,{0}에게 죽었다.
-LOC_SYSTEM_NOTE_DEAD_HUNGRY,굶어죽었다.
-LOC_SYSTEM_NOTE_DEAD_QUIT,게임을 포기했다.
-LOC_SYSTEM_NOTE_DEAD_ESCAPE,던전을 탈출했다.
-LOC_SYSTEM_NOTE_DEAD_POISON,독에 중독되어 죽었다.
-LOC_SYSTEM_NOTE_DEAD_EFFECT,부작용에 의해 죽었다.
-LOC_SYSTEM_REPLAY_TITLE,{0}    레벨 {1}의 {2} {3} {4} "{5}"
-LOC_SYSTEM_REPLAY_TITLE_ARENA,아레나 레벨 {0} "{1}"
-LOC_SYSTEM_REPLAY_TITLE_SPRINT,스프린트
-LOC_SYSTEM_UNIQUE_BENYATH_RAGE,{0:은|는} 분노에 소리쳤다. 자신의 능력에 각성하였다!
-LOC_SYSTEM_UNIQUE_BENYATH_RAGE_DISTANCE,멀리서 분노에 찬 비명을 들었다.
-LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,체력을 잃은 케이네가 백택으로 변화하였다!
-LOC_SYSTEM_TENSI_GOOD1,텐시가 당신에게 호의적인 시선을 주었다.
-LOC_SYSTEM_TENSI_GOOD2,텐시의 힘이 당신에게 닿았다.
-LOC_SYSTEM_TENSI_GOOD3,텐시: 힘들어보이네!
-LOC_SYSTEM_TENSI_GOOD4,텐시: 도와줄게!
-LOC_SYSTEM_TENSI_GOOD5,당신은 텐시의 웃음 소리를 들었다.
-LOC_SYSTEM_TENSI_GOOD6,텐시가 흥미진진한 시선을 향했다.
-LOC_SYSTEM_TENSI_GOOD7,텐시의 박수소리를 들었다.
-LOC_SYSTEM_TENSI_GOOD8,당신 주변에 기분 좋은 기운이 감도는것을 느꼈다.
-LOC_SYSTEM_TENSI_GOOD9,텐시: 좀 더 즐겁게 해줘!
-LOC_SYSTEM_TENSI_GOOD10,텐시: 아직 더 할 수 있지?
-LOC_SYSTEM_TENSI_GOOD11,텐시: 힘내!
-LOC_SYSTEM_TENSI_GOOD12,텐시의 강력한 힘을 받았다.
-LOC_SYSTEM_TENSI_GOOD13,텐시는 흥미진진하게 당신의 모험을 바라보고있다.
-LOC_SYSTEM_TENSI_BAD1,텐시의 사악한 시선이 느껴진다.
-LOC_SYSTEM_TENSI_BAD2,텐시가 웃기 시작했다.
-LOC_SYSTEM_TENSI_BAD3,텐시가 당신의 모험을 지루하다고 생각했다.
-LOC_SYSTEM_TENSI_BAD4,텐시: 이런건 어떨까?
-LOC_SYSTEM_TENSI_BAD5,텐시: 좀 더 스릴있게 해줄게!
-LOC_SYSTEM_TENSI_BAD6,텐시: 너무 평화롭지 않아?
-LOC_SYSTEM_TENSI_BAD7,텐시의 장난기어린 웃음을 들었다.
-LOC_SYSTEM_TENSI_BAD8,텐시가 당신에게 시련을 주려하고 있다.
-LOC_SYSTEM_TENSI_BAD9,텐시: 지루한 것보단 낫지?
-LOC_SYSTEM_TENSI_BAD10,텐시: 더 화를 내줘!
-LOC_SYSTEM_TENSI_BAD11,텐시: 전력을 다하지 않으면 죽을지도 몰라!
-LOC_SYSTEM_TENSI_BAD12,텐시: 건방져!
-LOC_SYSTEM_TENSI_BAD13,텐시: 지루하잖아!
-LOC_SYSTEM_TENSI_BAD14,텐시: 너무 강한거 아니야?
-LOC_SYSTEM_TENSI_BAD15,텐시: 안전한건 딱 질색이야!
-LOC_SYSTEM_TENSI_NOTHING1,작은 돌이 날라와서 당신의 머리에 맞았다.
-LOC_SYSTEM_TENSI_NOTHING2,갑자기 바닥이 진동했다.
-LOC_SYSTEM_TENSI_NOTHING3,텐시: 나랑 이야기 하지 않을래?
-LOC_SYSTEM_TENSI_NOTHING4,텐시: 좋아하는 음식은 뭐야?
-LOC_SYSTEM_TENSI_NOTHING5,텐시: 천계는 너무 심심해!
-LOC_SYSTEM_TENSI_NOTHING6,텐시: 좀 더 대담하게 행동해줘!
-LOC_SYSTEM_TENSI_NOTHING7,텐시: 난 재미있는걸 보고 싶어!
-LOC_SYSTEM_TENSI_NOTHING8,텐시: 내가 좀 더 재밌게 해줄 수 있는데
-LOC_SYSTEM_TENSI_NOTHING9,텐시: 지루하게 하면 알지?
-LOC_SYSTEM_TENSI_NOTHING10,발에 날카로운 바위가 튀어나와 넘어질뻔했고, 누군가의 웃음소리가 들렸다.
-LOC_SYSTEM_TENSI_NOTHING11,당신의 바로 옆에 날카로운 요석이 떨어졌다. "아깝네!"
-LOC_SYSTEM_TENSI_NOTHING12,텐시: 이 위에서 희생양들을 바라보고있는게 내 낙이야!
-LOC_SYSTEM_TENSI_NOTHING13,텐시: 바로 죽진않을거지? 좀 더 버틸 수 있지?
-LOC_SYSTEM_TENSI_NOTHING14,텐시: 저기저기, 어떻게 죽을지 내기라도 하지 않을래?
-LOC_SYSTEM_TENSI_NOTHING15,텐시: 저번에 지켜보던 아이는 {0}에 죽어버렸어.
-LOC_SYSTEM_TENSI_NOTHING16,텐시: {0:은|는} 왜 이렇게 {터프한|귀여운}걸까?
-LOC_SYSTEM_TENSI_NOTHING17,텐시: 조금만 기다려, 깜짝 파티를 준비하고 있으니까!
-LOC_SYSTEM_TENSI_NOTHING18,당신의 이마에 조그만 돌이 날라와 부딪혔다.
-LOC_SYSTEM_TENSI_NOTHING19,텐시: 재밌는 이야기라도 해줘!
-LOC_SYSTEM_TENSI_NOTHING20,텐시는 당신을 골리기 위한 계획을 세우고 있다.
-LOC_SYSTEM_TENSI_NOTHING21,텐시는 따분한듯 하품을 했다.
-LOC_SYSTEM_TENSI_POTION1,텐시가 당신에게 새로운 힘을 주었다.
-LOC_SYSTEM_TENSI_POTION2,텐시: 목마르지않아?
-LOC_SYSTEM_TENSI_POTION3,텐시: 이걸로 좀 더 싸워!
-LOC_SYSTEM_TENSI_POTION4,텐시가 당신에게 새로운 힘을 주었다.
-LOC_SYSTEM_TENSI_POTION5,당신은 텐시가 내려준 물약을 받았다.
-LOC_SYSTEM_TENSI_BAD_POTION1,텐시의 웃음소리가 당신의 머리에 울렸다.
-LOC_SYSTEM_TENSI_BAD_POTION2,텐시: 우리집 창고 구석에서 발견한 물약이야!
-LOC_SYSTEM_TENSI_BAD_POTION3,텐시: 벌이야!
-LOC_SYSTEM_TENSI_BAD_POTION4,텐시: 너를 위해 만든 특제 드링크야!
-LOC_SYSTEM_TENSI_BAD_POTION5,당신은 텐시에게 억지로 물약을 들이켜졌다.
-LOC_SYSTEM_TENSI_SUMMON1,텐시가 당신에게 동료를 내려주었다.
-LOC_SYSTEM_TENSI_SUMMON2,텐시: 친구가 필요해?
-LOC_SYSTEM_TENSI_SUMMON3,텐시: 지원군이야!
-LOC_SYSTEM_TENSI_SUMMON4,텐시: 이거면 도망치지 않아도 되겠지?
-LOC_SYSTEM_TENSI_SUMMON5,텐시가 당신의 주변에 우호적인 소환물을 소환했다.
-LOC_SYSTEM_TENSI_BAD_SUMMON1,텐시가 당신에게 적재적인 소환수를 내려보냈다.
-LOC_SYSTEM_TENSI_BAD_SUMMON2,텐시: 싸우지않을거면... 내가 싸우게할거야!
-LOC_SYSTEM_TENSI_BAD_SUMMON3,텐시: 얼마나 강해졌는지 보고 싶어!
-LOC_SYSTEM_TENSI_BAD_SUMMON4,텐시: 너무 우쭐해진거 아니야?
-LOC_SYSTEM_TENSI_BAD_SUMMON5,텐시의 사악한 시선을 느꼈다.
-LOC_SYSTEM_TENSI_TELE1,텐시가 당신의 공간을 뒤흔들었다.
-LOC_SYSTEM_TENSI_TELE2,텐시: 여기보단 안전할거야!
-LOC_SYSTEM_TENSI_TELE3,텐시: 한숨 돌리는건 어때?
-LOC_SYSTEM_TENSI_TELE4,텐시: 좋은 잠자리를 찾아냈어!
-LOC_SYSTEM_TENSI_TELE5,당신은 공간이 일그러지고 있는 걸 느꼈다.
-LOC_SYSTEM_TENSI_BAD_TELE1,텐시가 당신을 또 다른 곳으로 날려보냈다.
-LOC_SYSTEM_TENSI_BAD_TELE2,텐시: 이 곳보단 멋진 장소야!
-LOC_SYSTEM_TENSI_BAD_TELE3,텐시: 좀 더 재밌는 곳을 알려줄게!
-LOC_SYSTEM_TENSI_BAD_TELE4,텐시: 지루하네, 변화를 줘볼까?
-LOC_SYSTEM_TENSI_BAD_TELE5,당신은 시야가 핑핑도는 느낌을 받았다.
-LOC_SYSTEM_TENSI_EARHQUAKE1,당신은 대지가 뒤집히는 느낌을 받았다.
-LOC_SYSTEM_TENSI_EARHQUAKE2,텐시: 갈라져라!
-LOC_SYSTEM_TENSI_EARHQUAKE3,텐시: 카 크래쉬!
-LOC_SYSTEM_TENSI_EARHQUAKE4,텐시: 지진이다!
-LOC_SYSTEM_TENSI_EARHQUAKE5,강력한 지진이 일어났다!
-LOC_SYSTEM_TENSI_SUPERARMOR1,당신은 몸이 아주 단단해지는 것을 느꼈다.
-LOC_SYSTEM_TENSI_SUPERARMOR2,텐시: 이 복숭아 먹어볼래?
-LOC_SYSTEM_TENSI_SUPERARMOR3,텐시: 천인의 힘이야!
-LOC_SYSTEM_TENSI_SUPERARMOR4,텐시: 이젠 맞는 것도 안 아플거야!
-LOC_SYSTEM_TENSI_SUPERARMOR5,텐시가 당신에게 무념무상의 힘을 주었다.
-LOC_SYSTEM_TENSI_BURST1,텐시: 쾅!
-LOC_SYSTEM_TENSI_BURST2,텐시: 휘말리지 않게 조심해!
-LOC_SYSTEM_TENSI_BURST3,텐시: 이건 어떨까?
-LOC_SYSTEM_TENSI_WEAPON1,당신의 손에 붉은 기운이 모이기 시작했다.
-LOC_SYSTEM_TENSI_WEAPON2,텐시: 무기가 볼품없잖아?
-LOC_SYSTEM_TENSI_WEAPON3,텐시: 조금만 빌려주는거야!
-LOC_SYSTEM_TENSI_WEAPON4,텐시: 이젠 누구에게도 지지않을걸?
-LOC_SYSTEM_TENSI_WEAPON5,텐시: 몰래 빌려주는거니까 누구에게 말하지마!
-LOC_SYSTEM_TENSI_WEAPON6,텐시: 꼭 돌려줘야해?
-LOC_SYSTEM_TENSI_WEAPON7,텐시: 들키면 이쿠에게 혼나니깐...
-LOC_SYSTEM_TENSI_KANAME1,텐시는 당신에게 지원군을 내려주었다.
-LOC_SYSTEM_TENSI_KANAME2,텐시: 이게 있다면 지지는 않겠지?
-LOC_SYSTEM_TENSI_KANAME3,텐시: 내가 귀여워 하는 애들이야!
-LOC_SYSTEM_TENSI_KANAME4,텐시: 애완용 돌이란거 들어봤어?
-LOC_SYSTEM_TENSI_KANAME5,텐시: 조심히 다뤄줘!
-LOC_SYSTEM_TENSI_KANAME6,텐시: 카나메 판넬!
-LOC_SYSTEM_TENSI_BAD_KANAME1,텐시: 거기서 멀어지는게 좋을거야
-LOC_SYSTEM_TENSI_BAD_KANAME2,텐시: 돌 침대라고 들어봤어?
-LOC_SYSTEM_TENSI_BAD_KANAME3,텐시: 내 돌은 사람을 물진않아... 쏘긴 하지만!
-LOC_SYSTEM_TENSI_BAD_KANAME4,텐시: 여기서 살아갈 수 있을지 시험해봐야겠어!
-LOC_SYSTEM_TENSI_BAD_KANAME5,텐시: 이번에 새로 만든 스펠카드인데, 시험 좀 해줄래?
-LOC_SYSTEM_TENSI_BAD_KANAME6,텐시: 사격연습을 해보지않을래? 물론 너가 표적이야!
-LOC_SYSTEM_TENSI_FIELD1,당신을 중심으로 무언가 거대한 장막이 펼쳐짐을 느꼈다.
-LOC_SYSTEM_TENSI_FIELD2,텐시: 새로운 필드가 필요해?
-LOC_SYSTEM_TENSI_FIELD3,텐시: 여기서 싸우는게 좀 더 재밌어보이는데!
-LOC_SYSTEM_TENSI_FIELD4,텐시: 텐트 좀 펼칠테니까 도와줄래?";
-LOC_SYSTEM_TENSI_FIELD5,텐시: 좀 더 좋은 환경이 있는데 시험해볼래?
-LOC_SYSTEM_TENSI_BLIND1,텐시: 한 숨 잘테니까 불 좀 꺼야겠어
-LOC_SYSTEM_TENSI_BLIND2,텐시: 너무 밝지않아?
-LOC_SYSTEM_TENSI_BLIND3,텐시: 이게 좀 더 재미있을 거 같지않아?
-LOC_SYSTEM_TENSI_BLIND4,텐시: 눈에 보이는 것이 전부는 아니야!
-LOC_SYSTEM_TENSI_DEBUFF1,텐시는 주변의 흐름을 조절했다.
-LOC_SYSTEM_TENSI_DEBUFF2,텐시: 여기까지 해줬는데도 진다면 각오하는게 좋을거야
-LOC_SYSTEM_TENSI_DEBUFF3,텐시: 이번엔 기분이 좋으니까 특별 선물이야!
-LOC_SYSTEM_TENSI_DEBUFF4,텐시: 이게 적이 느려보인다같은거지?
-LOC_SYSTEM_TENSI_DEBUFF5,텐시: 이걸로 충분하려나?
-LOC_SYSTEM_TENSI_DEBUFF6,텐시: 굼벵이 같은 것들!
-LOC_SYSTEM_TENSI_SUCIDE1,텐시: 좋은 친구들을 소개해줄게!
-LOC_SYSTEM_TENSI_SUCIDE2,텐시: 괜찮은 애들이라고! 좀 강경파인걸 제외하면 말이지
-LOC_SYSTEM_TENSI_SUCIDE3,텐시: 폭파하는거 좋아해?
-LOC_SYSTEM_TENSI_SUCIDE4,텐시: 용맹하지만 아군을 신경쓰지않는게 단점이긴하지
-LOC_SYSTEM_TENSI_SUCIDE5,텐시: 잠깐이지만 사이좋게 지내줘!
-LOC_SYSTEM_TENSI_SUCIDE6,텐시: 자폭특공이란건 잘 이해할 수 없어... 무슨 종교라도 믿는걸까?
-LOC_SYSTEM_TENSI_SUCIDE7,텐시: 주변을 싹 정리하는데는 이만한게 없지!
-LOC_SYSTEM_TENSI_FOG1,텐시: 오늘의 날씨는 매우 흐리겠습니다.
-LOC_SYSTEM_TENSI_FOG2,텐시: 난 안개낀날은 별로 좋아하지않아.
-LOC_SYSTEM_TENSI_FOG3,텐시: 이런 날씨에서도 싸울 수 있어?
-LOC_SYSTEM_TENSI_FOG4,텐시: 싫다. 습하고 어둡잖아!
-LOC_SYSTEM_TENSI_FOG5,텐시: 몸을 숨기기엔 적당한 날씨지!
-LOC_SYSTEM_TENSI_FOG6,텐시: 기상발현!
-LOC_SYSTEM_TENSI_THUNDER1,텐시: 오늘의 날씨는 큰 천둥번개가 치겠습니다!
-LOC_SYSTEM_TENSI_THUNDER2,텐시: 화끈하게 가자고!
-LOC_SYSTEM_TENSI_THUNDER3,텐시: 번개에 맞을 확률이 얼마나 되지?
-LOC_SYSTEM_TENSI_THUNDER4,텐시: 이런건 피할 수 없을껄?
-LOC_SYSTEM_TENSI_THUNDER5,텐시: 입고있는 옷이 절연소재이길 바랄게!
-LOC_SYSTEM_TENSI_THUNDER6,텐시: 우르릉 쾅쾅!
-LOC_SYSTEM_TENSI_THUNDER7,텐시: 비상의 검이여! 하늘에 천둥번개를 모아라!
-LOC_SYSTEM_TENSI_SUN1,텐시: 오늘의 날씨는 구름 한점없이 쨍쨍하겠습니다.
-LOC_SYSTEM_TENSI_SUN2,텐시: 어떻게 던전에 햇빛이 비치는거지? 뭐 어때!
-LOC_SYSTEM_TENSI_SUN3,텐시: 이런 태양빛 아래서 과연 누가 숨을 수 있을까?
-LOC_SYSTEM_TENSI_SUN4,텐시: 잠시 빨래를 말려야하니까!
-LOC_SYSTEM_TENSI_SUN5,텐시: 햇빛이여!
-LOC_SYSTEM_TENSI_SUN6,텐시: 비상의 검으론 이런 것도 할 수 있지!
-LOC_SYSTEM_TENSI_SUN7,텐시: 오늘은 소풍가는 날이야!
-LOC_SYSTEM_TENSI_BRAND_WEAPON,{0}에서 비상의 기운이 뿜어져나온다.
-LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0:은|는} 더욱 비상의 힘이 길어졌다.
-LOC_SYSTEM_PLAYER_REIMU,레이무
-LOC_SYSTEM_PLAYER_MARISA,마리사
-LOC_SYSTEM_PLAYER_SANAE,사나에
-LOC_SYSTEM_PLAYER_MOMIZI,모미지
-LOC_SYSTEM_PLAYER_KOISHI,코이시
-LOC_SYSTEM_PLAYER_MOKOU,모코우
-LOC_SYSTEM_PLAYER_NITORI,니토리
-LOC_SYSTEM_PLAYER_SUNNY,써니
-LOC_SYSTEM_PLAYER_STAR,스타
-LOC_SYSTEM_PLAYER_LUNA,루나
-LOC_SYSTEM_ATT_NORMAL,공격
-LOC_SYSTEM_ATT_CLAW,할퀴기
-LOC_SYSTEM_ATT_BITE,물기
-LOC_SYSTEM_ATT_SMASH,스매쉬
-LOC_SYSTEM_ATT_BODYCHECK,철산고
-LOC_SYSTEM_ATT_DRILL,드릴
-LOC_SYSTEM_ATT_DRAIN,흡혈
-LOC_SYSTEM_ATT_TORCH,횃불
-LOC_SYSTEM_ATT_DREAM,몽혼
-LOC_SYSTEM_ATT_VENOM_TEETH,독니
-LOC_SYSTEM_ATT_PECK,쪼기
-LOC_SYSTEM_ATT_HAKUROUKEN,백루검
-LOC_SYSTEM_ATT_ROUKANKEN,루관검
-LOC_SYSTEM_ATT_HEADBUTT,박치기
-LOC_SYSTEM_ATT_SICKLE,낫
-LOC_SYSTEM_ATT_ROBE,옷깃
-LOC_SYSTEM_ATT_CLEAVER,칼
-LOC_SYSTEM_ATT_FAN,부채
-LOC_SYSTEM_ATT_FIRE,화염
-LOC_SYSTEM_ATT_COLD,냉기
-LOC_SYSTEM_ATT_POISON,독기
-LOC_SYSTEM_ATT_VENOM,맹독
-LOC_SYSTEM_ATT_CONFUSE_POISON,악취탄
-LOC_SYSTEM_ATT_CRUNCH,깨물기
-LOC_SYSTEM_ATT_FIRE_SWORD,화염검
-LOC_SYSTEM_ATT_ELEC_SWORD,번개검
-LOC_SYSTEM_ATT_ELEC,전격
-LOC_SYSTEM_ATT_THUNDER,번개
-LOC_SYSTEM_ATT_DISH,접시
-LOC_SYSTEM_ATT_MAGIC_BOMB,매직봄
-LOC_SYSTEM_ATT_STONE_TACK,바위 압정
-LOC_SYSTEM_ATT_SUN,햇빛
-LOC_SYSTEM_ATT_EARTHQUAKE,지진
-LOC_SYSTEM_ATT_V_FIRE,불바다
-LOC_SYSTEM_ATT_V_METAL,철가시
-LOC_SYSTEM_ATT_V_AIR,바람
-LOC_SYSTEM_ATT_V_EARTH_SHOT,암석탄
-LOC_SYSTEM_ATT_V_EARTH_FRAG,암석파편
-LOC_SYSTEM_ATT_BACKSTAB,암습
-LOC_SYSTEM_ATT_GIANTSWING,자이언트스윙
-LOC_SYSTEM_ATT_GERMANSUPLEX,저먼 스플렉스
-LOC_SYSTEM_ATT_MIMA_MAGIC,마법
-LOC_SYSTEM_ATT_MIMA_FIRE_MAGIC,화염 마법
-LOC_SYSTEM_ATT_MIMA_EARTH_MAGIC,암석 마법
-LOC_SYSTEM_ATT_MIMA_ELEC_MAGIC,전기 마법
-LOC_SYSTEM_ATT_MIMA_POISION_MAGIC,맹독 마법
-LOC_SYSTEM_ATT_MIMA_ICE_MAGIC,냉기 마법
-LOC_SYSTEM_ATT_MIMA_CONJURE_MAGIC,마력
-LOC_SYSTEM_ATT_STONE_PUNCH,돌주먹
-LOC_SYSTEM_ATT_DROWN,질식
-LOC_SYSTEM_ATT_LAVA,용암
-LOC_SYSTEM_ATT_RUSH,돌진
-LOC_SYSTEM_ATT_WATERGUN,물총
-LOC_SYSTEM_ATT_DOOR,문
-LOC_SYSTEM_ATT_TANMAC,탄막
-LOC_SYSTEM_ATT_SION,시온
-LOC_SYSTEM_ATT_FIRECRAKER,폭죽
-LOC_SYSTEM_ATT_SHOCKWAVE,충격파
-LOC_SYSTEM_ATT_KIKU_SPRAY,물보라
-LOC_SYSTEM_ATT_CURSE,저주
-LOC_SYSTEM_ATT_BURN,불꽃
-LOC_SYSTEM_ATT_POISONTANMAC,독탄막
-LOC_SYSTEM_ATT_COLDBEAM,냉동빔
-LOC_SYSTEM_ATT_SMITE,강타
-LOC_SYSTEM_ATT_ELECTRIC,전기
-LOC_SYSTEM_ATT_FIREBALL,화염구
-LOC_SYSTEM_ATT_WATERPRESSURE,수압
-LOC_SYSTEM_ATT_NOISE,굉음
-LOC_SYSTEM_ATT_FIRESTORM,화염폭풍
-LOC_SYSTEM_ATT_CRASH,충돌
-LOC_SYSTEM_ATT_LASER,레이저
-LOC_SYSTEM_ATT_STONE,돌멩이
-LOC_SYSTEM_ATT_ROCK,바위
-LOC_SYSTEM_ATT_KANAMEDRILL,카나메드릴
-LOC_SYSTEM_ATT_BURST,폭발
-LOC_SYSTEM_ATT_SUICIDE,자폭
-LOC_SYSTEM_ATT_SPARK,스파크
-LOC_SYSTEM_ATT_LIGHTTANMAC,광탄
-LOC_SYSTEM_ATT_BULLET,총알
-LOC_SYSTEM_ATT_BLOOD_STARE,피의 응시
-LOC_SYSTEM_ATT_YINYANG_TANMAC,음양탄
-LOC_SYSTEM_ATT_SEAOFFIRE,불바다
-LOC_SYSTEM_ATT_LEAP,도약
-LOC_SYSTEM_ATT_AIRSTRIKE,바람의 탄환
-LOC_SYSTEM_ATT_MACROBURST,매크로 버스트
-LOC_SYSTEM_ATT_EMERALD,에메랄드
-LOC_SYSTEM_ATT_SHORT_LIFE_EXPECTACNY,얼마없는 여생
-LOC_SYSTEM_ATT_PSYCHOKINESIS,염동력
-LOC_SYSTEM_ATT_HYPERBEAM,파괴광선
-LOC_SYSTEM_ATT_SWORD,검
-LOC_SYSTEM_ATT_KNIFE,나이프
-LOC_SYSTEM_ATT_THROWING_ATLAS,천수력남 던지기
-LOC_SYSTEM_ATT_BILL,부적
-LOC_SYSTEM_ATT_DIMENSIONAL_RIFT,아공혈
-LOC_SYSTEM_THAT,그것
-LOC_SYSTEM_SOMETHING,무언가
-LOC_SYSTEM_FIND_ONE,{0:을|를} 발견했다.
-LOC_SYSTEM_FIND_TWO,{0:와|과} {1:을|를} 발견했다.
-LOC_SYSTEM_FIND_THREE,{0:와|과} {1:와|과} {2:을|를} 발견했다.
-LOC_SYSTEM_FIND_MANY,여러 아이템을 발견했다.
-LOC_SYSTEM_EVENT_KISME_DROP,하늘에서 키스메가 떨어졌다!
-LOC_SYSTEM_EVENT_LUNATIC_TIME,It's LUNATIC TIME!!
-LOC_SYSTEM_EVENT_KOGASA_DROP,하늘에서 코가사가 떨어졌다!
-LOC_SYSTEM_EVENT_KOGASA_DROP2,...그러나 코가사는 땅바닥에 머리부터 부딪혔다.
-LOC_SYSTEM_EVENT_DREAM_OPEN1,꿈의 세계가 넓어지기 시작한다! 자고 있던 적들이 깨어나기 시작한다!
-LOC_SYSTEM_EVENT_DREAM_OPEN2,꿈의 세계가 넓어지고 있다!
-LOC_SYSTEM_EVENT_DREAM_OPEN3,꿈의 세계가 또 다시 넓어졌다! 꿈의 주민들이 당신을 눈치챘다!
-LOC_SYSTEM_EVENT_DREAM_OPEN4,꿈의 세계는 거의 대부분 열렸다! 곧 몬스터가 들끓기 시작한다!
-LOC_SYSTEM_EVENT_DREAM_OPEN5,꿈의 세계는 완전히 개방되었다! 달로 가는 포탈로 최대한 빨리 들어가야한다!
-LOC_SYSTEM_EVENT_MARY_SAN1,나, 메리씨
-LOC_SYSTEM_EVENT_MARY_SAN2,지금, 당신의
-LOC_SYSTEM_EVENT_MARY_SAN3,등 뒤에 있어!
-LOC_SYSTEM_EVENT_MARY_SAN_FAIL,... 보이지 않는 곳에 있어
-LOC_SYSTEM_EVENT_RUN_TRHEEFAIRY,{0:은|는} 외쳤다. "도망쳐!"
-LOC_SYSTEM_EVENT_SCALET_TRAP,방어마법진작동. 칩입자를 처단하라!
+LOC_SYSTEM_LOS_MON,You see a monster.
+LOC_SYSTEM_LOS_NOMON,No monsters in sight.
+LOC_SYSTEM_CONFUSE_WARNING,You feel confused.
+LOC_SYSTEM_DIMENSTION,Action not supported while the dimension is fixed.
+LOC_SYSTEM_MAP_DANGER,Danger detected within your view.
+LOC_SYSTEM_UNABLE_MOVE,You can't move there.
+LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
+LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
+LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
+LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
+LOC_SYSTEM_DONE_EXPLORE,Exploration complete.
+LOC_SYSTEM_NONE_STRING,None
+LOC_SYSTEM_BUG,Bug
+LOC_SYSTEM_REST_START,You begin to rest.
+LOC_SYSTEM_REST_HP,Your HP is restored.
+LOC_SYSTEM_REST_MP,Your MP is restored.
+LOC_SYSTEM_REST_DONE,You finish resting.
+LOC_SYSTEM_READ_SCROLL,You read {0}.
+LOC_SYSTEM_HEALED,{0} is healed.
+LOC_SYSTEM_HEALED2,You are healed.
+LOC_SYSTEM_IDENTIFY_ITEM,This is {0}.
+LOC_SYSTEM_UNEQUIP_ITEM,You unequip {0}.
+LOC_SYSTEM_DROP_ITEM,You drop {0}.
+LOC_SYSTEM_DROP_ITEM_SION_ALL,But it vanished due to the curse of the Poverty God.
+LOC_SYSTEM_DROP_ITEM_SION_SOME,{0} disappeared due to the curse of the Poverty God.
+LOC_SYSTEM_COMMAND,Command
+LOC_SYSTEM_DESCRIPTION,Description
+LOC_SYSTEM_EXPLORE,Explore
+LOC_SYSTEM_DANGER,Mark Danger Zone
+LOC_SYSTEM_STAIR_TRAVEL,Quick Stair Travel
+LOC_SYSTEM_MONSTER,Monster
+LOC_SYSTEM_SUCCESS_PERCENT,Success Chance
+LOC_SYSTEM_IMPOSSIBLE,Impossible
+LOC_SYSTEM_YOU,You
+LOC_SYSTEM_TURN,Turn
+LOC_SYSTEM_TURNS,Turns
+LOC_SYSTEM_SLEEP,Sleep
+LOC_SYSTEM_REST,Rest
+LOC_SYSTEM_EXPLORING,Exploring
+LOC_SYSTEM_CANT_DETECTED,Undetected
+LOC_SYSTEM_CONFUSE,Confused
+LOC_SYSTEM_POISON,Poisoned
+LOC_SYSTEM_MIGHT,Might
+LOC_SYSTEM_CLEVER,Focus
+LOC_SYSTEM_HASTE,Haste
+LOC_SYSTEM_SLOW,Slowed
+LOC_SYSTEM_SUMMONED,Summoned
+LOC_SYSTEM_FROZEN,Frozen
+LOC_SYSTEM_ALLY,Friendly
+LOC_SYSTEM_ELEC,Electrified
+LOC_SYSTEM_PARALYSE,Paralyzed
+LOC_SYSTEM_GLOW,Glowing
+LOC_SYSTEM_GRAZE,Graze
+LOC_SYSTEM_SILENCE,Silence
+LOC_SYSTEM_SICK,Sickened
+LOC_SYSTEM_VEILING,Veiling
+LOC_SYSTEM_INVISIVLE,Invisible
+LOC_SYSTEM_TELE,Unstable Space
+LOC_SYSTEM_MUTE,Muted
+LOC_SYSTEM_CATCH,Caught
+LOC_SYSTEM_GHOST,Soul Bound
+LOC_SYSTEM_FEAR,Fear
+LOC_SYSTEM_STRONG_FEAR,Crushed Will
+LOC_SYSTEM_MIND_READING,Mind Read
+LOC_SYSTEM_LUNATIC,Lunacy
+LOC_SYSTEM_ALLY_CALL,Call Ally
+LOC_SYSTEM_ENHANCE,Enhanced
+LOC_SYSTEM_WEAKENING,Weakened
+LOC_SYSTEM_CHANGED,Disguised
+LOC_SYSTEM_INVINCIBILITY,Invincible
+LOC_SYSTEM_HP_VERY_LOW,Near Death
+LOC_SYSTEM_HP_LOW,Severely Wounded
+LOC_SYSTEM_HP_MIDDLE,Wounded
+LOC_SYSTEM_HP_HIGH,Lightly Wounded
+LOC_SYSTEM_HP_VERY_HIGH,Almost Unharmed
+LOC_SYSTEM_SMOKE_NORMAL,Thin Smoke
+LOC_SYSTEM_SMOKE_FOG,Fog Cloud
+LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
+LOC_SYSTEM_SMOKE_COLD,Cold Mist
+LOC_SYSTEM_SMOKE_ELEC,Electric Cloud
+LOC_SYSTEM_SMOKE_DARK,Dark Cloud
+LOC_SYSTEM_SMOKE_SION,Cloud of Poverty
+LOC_SYSTEM_SMOKE_POISON,Poison Cloud
+LOC_SYSTEM_SMOKE_CONFUSE,Confusion Cloud
+LOC_SYSTEM_SMOKE_SLOW,Sweet Poison
+LOC_SYSTEM_SMOKE_TWIST,Twister
+LOC_SYSTEM_SMOKE_WHIRLWIND,Whirlwind
+LOC_SYSTEM_SMOKE_CURSE,Cursed Cloud
+LOC_SYSTEM_SMOKE_BLIZZARD,Blizzard
+LOC_SYSTEM_MANY_ITEMS,Many Items
+LOC_SYSTEM_TERRAIN_UNSEEN,Unseen Area
+LOC_SYSTEM_TERRAIN,Terrain
+LOC_SYSTEM_TERRAIN_SILENCE,Silent Field
+LOC_SYSTEM_TERRAIN_VIOLET,Violet Field
+LOC_SYSTEM_TERRAIN_SANCTUARY,Sanctuary
+LOC_SYSTEM_ON_THE_TERRAIN,You are standing on {0}.
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press ',' to pick up)
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press ',' to pick up)
+LOC_SYSTEM_MONSTER_OPEN_DOOR,{0} opened the door.
+LOC_SYSTEM_SUDDENLY_OPEN_DOOR,The door opens suddenly.
+LOC_SYSTEM_MON_RED_DESIRE,Red Spirit
+LOC_SYSTEM_MON_BLUE_DESIRE,Blue Spirit
+LOC_SYSTEM_MON_GREEN_DESIRE,Green Spirit
+LOC_SYSTEM_MON_POISONED,{0} is poisoned.
+LOC_SYSTEM_MON_MORE_POISONED,{0}'s poison worsens.
+LOC_SYSTEM_MON_TELE,The space around {0} becomes unstable.
+LOC_SYSTEM_MON_TELE_STABLE,The space around {0} stabilizes.
+LOC_SYSTEM_MON_MIGHT,{0} grows stronger.
+LOC_SYSTEM_MON_MORE_MIGHT,{0} grows even stronger.
+LOC_SYSTEM_MON_HASTE,{0} speeds up.
+LOC_SYSTEM_MON_MORE_HASTE,{0} becomes even faster.
+LOC_SYSTEM_MON_CONFUSE,{0} becomes confused.
+LOC_SYSTEM_MON_MORE_CONFUSE,{0} becomes even more confused.
+LOC_SYSTEM_MON_SLOW,{0} slows down.
+LOC_SYSTEM_MON_MORE_SLOW,{0} slows down even more.
+LOC_SYSTEM_MON_FROZEN,{0} is frozen and slowed.
+LOC_SYSTEM_MON_MORE_FROZEN,{0} is further frozen and slowed.
+LOC_SYSTEM_MON_CHARM,{0} is charmed.
+LOC_SYSTEM_MON_MORE_CHARM,{0} is even more charmed.
+LOC_SYSTEM_MON_DISCARGE,{0} is discharging electricity.
+LOC_SYSTEM_MON_MORE_DISCARGE,{0} continues discharging electricity.
+LOC_SYSTEM_MON_PARALYSE,{0} is paralyzed.
+LOC_SYSTEM_MON_GLOW,{0} is glowing.
+LOC_SYSTEM_MON_MORE_GLOW,{0} glows even brighter.
+LOC_SYSTEM_MON_GRAZE,{0} starts grazing attacks.
+LOC_SYSTEM_MON_MORE_GRAZE,{0} starts grazing attacks.
+LOC_SYSTEM_MON_SILENCE,{0} silences the surroundings.
+LOC_SYSTEM_MON_SICK,{0} falls ill.
+LOC_SYSTEM_MON_MORE_SICK,{0}'s illness worsens.
+LOC_SYSTEM_MON_VEILING,{0} is wrapped in wind.
+LOC_SYSTEM_MON_MORE_VEILING,The wind around {0} grows stronger.
+LOC_SYSTEM_MON_INVISIBLE,{0} turns invisible.
+LOC_SYSTEM_MON_MORE_INVISIBLE,{0} becomes even more invisible.
+LOC_SYSTEM_MON_INVISIBLE_WARNING,{0} fades away into invisibility.
+LOC_SYSTEM_MON_MUTE,{0} becomes mute.
+LOC_SYSTEM_MON_MORE_MUTE,{0}'s silence deepens.
+LOC_SYSTEM_MON_ENSLAVE_INANIMATE,{0} has no soul to bind—it's inanimate.
+LOC_SYSTEM_MON_ENSLAVE_REIMU,The shrine maiden of paradise cannot be bound by anything.
+LOC_SYSTEM_MON_ENSLAVE_DREAM,{0} dwells in dreams and cannot be bound.
+LOC_SYSTEM_MON_ENSLAVE_SUMMONED,{0} is already bound to a master.
+LOC_SYSTEM_MON_ENSLAVE,{0}'s soul is bound. Defeat it before the effect ends to make it your ally.
+LOC_SYSTEM_MON_FEAR,{0} is gripped by fear.
+LOC_SYSTEM_MON_MORE_FEAR,{0} is overwhelmed by fear and loses the will to fight.
+LOC_SYSTEM_MON_MIND_READING,{0}'s thoughts are laid bare.
+LOC_SYSTEM_MON_MIND_READING_ANIMAL,You sense {0}'s mind and grow closer.
+LOC_SYSTEM_MON_LUNATIC,{0} is consumed by madness.
+LOC_SYSTEM_MON_GATHERING,{0} is calling for allies.
+LOC_SYSTEM_MON_GATHERING_MOON_RABBIT,{0} starts sending out signals for reinforcements.
+LOC_SYSTEM_MON_GATHERING_HELL_HOUND,Drawn by {0}’s howl, more Hellhounds are approaching.
+LOC_SYSTEM_MON_STRONG,{0} is empowered.
+LOC_SYSTEM_MON_WEAK,{0} is weakened.
+LOC_SYSTEM_MON_INVINCIBILITY,{0} becomes invincible.
+LOC_SYSTEM_MON_SLEEP,{0} falls asleep.
+LOC_SYSTEM_MON_TELEPORTING,{0} vanishes through teleportation.
+LOC_SYSTEM_MON_TELEPORTING_APPEAR,{0} suddenly appears.
+LOC_SYSTEM_MON_RECORVER_POISON,{0} recovers from poison.
+LOC_SYSTEM_MON_RECORVER_CONFUSE,{0} shakes off the confusion.
+LOC_SYSTEM_MON_RECORVER_FROZEN,The ice on {0} melts away.
+LOC_SYSTEM_MON_RECORVER_PARALYSE,{0} regains mobility.
+LOC_SYSTEM_MON_RECORVER_SICK,{0} is no longer sick.
+LOC_SYSTEM_MON_NO_LONGER_STRONG,{0} is no longer empowered.
+LOC_SYSTEM_MON_NO_LONGER_HASTE,{0} is no longer fast.
+LOC_SYSTEM_MON_NO_LONGER_SLOW,{0} is no longer slowed.
+LOC_SYSTEM_MON_NO_LONGER_CHARM,{0} is no longer charmed.
+LOC_SYSTEM_MON_NO_LONGER_DISCHARGE,{0} stops discharging.
+LOC_SYSTEM_MON_NO_LONGER_GLOW,{0} stops glowing.
+LOC_SYSTEM_MON_NO_LONGER_GRAZE,{0} stops grazing.
+LOC_SYSTEM_MON_NO_LONGER_SILENCE,The silence around {0} fades.
+LOC_SYSTEM_MON_NO_LONGER_VEILING,The wind veiling {0} disperses.
+LOC_SYSTEM_MON_NO_LONGER_INVISIBLE,{0} is no longer invisible.
+LOC_SYSTEM_MON_NO_LONGER_INVISIBLE_AND_APPEAR,{0} becomes visible once more.
+LOC_SYSTEM_MON_NO_LONGER_MUTE,{0} is no longer mute.
+LOC_SYSTEM_MON_NO_LONGER_ENSLAVE,{0}'s soul is no longer bound.
+LOC_SYSTEM_MON_NO_LONGER_LUNATIC,{0} regains sanity.
+LOC_SYSTEM_MON_NO_LONGER_FORCE,{0}'s power boost fades.
+LOC_SYSTEM_MON_NO_LONGER_WEAK,{0}'s weakening ends.
+LOC_SYSTEM_MON_NO_LONGER_CHANGED,{0} reverts from disguise—back to a raccoon!
+LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,{0} is no longer invincible.
+LOC_SYSTEM_MON_ABIL_GATHERING,{0} is rallying allies.
+LOC_SYSTEM_MON_DROWNED,{0} drowns.
+LOC_SYSTEM_MON_FALL_LAVA,{0} falls into lava.
+LOC_SYSTEM_FIGHT_BLOCK,{0} blocks {1}’s {2} with a shield.
+LOC_SYSTEM_FIGHT_EVADE,{0} evades {1}’s {2}.
+LOC_SYSTEM_FIGHT_GRAZE,{0} grazes {1}’s {2}.
+LOC_SYSTEM_FIGHT_MISS,{0}’s {1} misses {2}.
+LOC_SYSTEM_FIGHT_GRAZED,{0}’s {1} is grazed by {2}.
+LOC_SYSTEM_MAGIC_RESIST,{0} resists the effect.
+LOC_SYSTEM_MAGIC_SUMMON,{0} is summoned to your side.
+LOC_SYSTEM_MAGIC_FIRE_BRAND,{0} is set ablaze.
+LOC_SYSTEM_MAGIC_FIRE_BRAND_MORE,{0} burns even brighter.
+LOC_SYSTEM_MAGIC_COLD_BRAND,{0} begins to emit cold air.
+LOC_SYSTEM_MAGIC_COLD_BRAND_MORE,{0} radiates even more intense cold.
+LOC_SYSTEM_MAGIC_POISON_BRAND,{0} begins to ooze poison.
+LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,{0}'s poison grows more potent.
+LOC_SYSTEM_MAGIC_RECALL,{0} is recalled.
+LOC_SYSTEM_MAGIC_KNOCKBACK,{0} is knocked back.
+LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0} moves under hypnosis.
+LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0} is already an animal—transformation fails.
+LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,{0} is transformed into an animal.
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_LAKE,{0} summons a dream of the Misty Lake!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_MOUNTAIN,{0} summons a dream of the Youkai Mountain!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_SCARLET,{0} summons a dream of the Scarlet Mansion!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_YUKKURI,{0} summons a dream of the Yukkuri Nest!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_BAMBOO,{0} summons a dream of the Bamboo Labyrinth!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_SUBTERRANEAN,{0} summons a dream of the Underworld!
+LOC_SYSTEM_MAGIC_SUMMON_DREAM_PANDEMONIUM,{0} summons a dream of Pandemonium!
+LOC_SYSTEM_MAGIC_MANA_DRAIN,{0} drains your mana.
+LOC_SYSTEM_MAGIC_BLOOD_STARE,{0} stares intently at {1}.
+LOC_SYSTEM_MAGIC_JUMP_ATTACK,{0} leaps at {1}.
+LOC_SYSTEM_MAGIC_DISGUISE,{0} disguises itself as {1}!
+LOC_SYSTEM_MAGIC_RECALL_YOSHIKA,{0} is summoned next to {1}.
+LOC_SYSTEM_MAGIC_REVIVE_YOSHIKA,{0} revives {1}!
+LOC_SYSTEM_MAGIC_TASTE_OF_DEATH,{0} is drawn into {1}.
+LOC_SYSTEM_MAGIC_AFTERLIFE,{0} swings a scythe toward you.
+LOC_SYSTEM_MAGIC_PRISM_CONCERTO,Prism Concerto!
+LOC_SYSTEM_MAGIC_PRISM_CALL,{0} joins the ensemble.
+LOC_SYSTEM_MAGIC_UNLUCK,{0} manipulates {1}’s fortune.
+LOC_SYSTEM_MAGIC_UNLUCK_TO_MONSTER,{0} manipulates {1}’s fortune. {2} seems oddly unlucky.
+LOC_SYSTEM_MAGIC_MERMAID_SONG,{0} is drawn toward {1}’s song.
+LOC_SYSTEM_MAGIC_PSYCHOKINESIS,{0} is thrown by telekinesis.
+LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_RED,{0} dons the Mask of Rage.
+LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_BLUE,{0} dons the Mask of Sorrow.
+LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_GREEN,{0} dons the Mask of Joy.
+LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0} leads {1} into a dream.
+LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0} warps to {1} and delivers a swift kick.
+LOC_SYSTEM_HIT_NORMAL,{0}’s {1} hits {2}.
+LOC_SYSTEM_HIT_DREAM,{0} devours {1}’s dream.
+LOC_SYSTEM_HIT_FIRE,{0}’s {1} hits {2}, setting them ablaze.
+LOC_SYSTEM_HIT_COLD,{0}’s {1} hits {2}, freezing them.
+LOC_SYSTEM_HIT_ELEC,{0}’s {1} hits {2}, shocking them.
+LOC_SYSTEM_HIT_GERMAN_SUPLEX,{0}’s {1} slams into {2}.
+LOC_SYSTEM_HIT_SMITE,Something smites {0}.
+LOC_SYSTEM_HIT_SMASH,{0} is thrown and slammed into the ground.
+LOC_SYSTEM_HIT_BLOOD,{0}’s blood bursts out.
+LOC_SYSTEM_HIT_NOISE,A deafening sound strikes {0}’s ears.
+LOC_SYSTEM_HIT_CLOUD_FIRE,{0} is engulfed in flames.
+LOC_SYSTEM_HIT_CLOUD_COLD,{0} is frozen solid.
+LOC_SYSTEM_HIT_CLOUD_ELEC,{0} is electrified.
+LOC_SYSTEM_HIT_STONE_TRAP,{0} steps on a sharp stone.
+LOC_SYSTEM_HIT_BLAST,{0} is caught in {1}’s explosion.
+LOC_SYSTEM_HIT_SUN_BLAST,{0} is scorched by {1}.
+LOC_SYSTEM_HIT_BLLIZARD,{0} is swept into the blizzard.
+LOC_SYSTEM_HIT_BURST,{0} explodes.
+LOC_SYSTEM_HIT_TWIST,{0} is swept up in the wind.
+LOC_SYSTEM_HIT_CURSED,{0} is cursed.
+LOC_SYSTEM_HIT_VEILING,{0} is cut by the wind armor.
+LOC_SYSTEM_HIT_RUSH,{0} is struck.
+LOC_SYSTEM_HIT_BUMP,{0} bumps into {1}.
+LOC_SYSTEM_HIT_BUMP_WALL,{0} crashes into a wall.
+LOC_SYSTEM_HIT_PSYCHO,{0} is slammed into the ground.
+LOC_SYSTEM_HIT_DROWNING,{0} is drowning.
+LOC_SYSTEM_HIT_DROWNING_MONSTER,{0} falls into the water.
+LOC_SYSTEM_HIT_VAMP,{0} drains {1}’s HP.
+LOC_SYSTEM_HIT_THROW_ELEC,{0} is electrocuted.
+LOC_SYSTEM_HIT_CONFUSE_ATTACK,Your attack catches {0} off guard!
+LOC_SYSTEM_HIT_STAB_SHORTBLADE,{0} stabs {1} from behind.
+LOC_SYSTEM_HIT_STAB_LONGBLADE,{0} slashes {1} from behind.
+LOC_SYSTEM_HIT_STAB_MACE,{0} smashes {1} from behind.
+LOC_SYSTEM_HIT_STAB_AXE,{0} cleaves {1} from behind.
+LOC_SYSTEM_HIT_STAB_SPEAR,{0} pierces {1} from behind.
+LOC_SYSTEM_HIT_STAB_OTHER,{0} ambushes {1} from behind.
+LOC_SYSTEM_NO_DAMAGE,No damage taken.
+LOC_SYSTEM_BUT_NO_DAMAGE,But it dealt no damage.
+LOC_SYSTEM_FRIEND_SHIELD,{0} shields {1}!
+LOC_SYSTEM_MAMIZO_EVADE,{0} transforms into paper charms and evades the attack!
+LOC_SYSTEM_KILL_NORMAL,{0} kills {1}.
+LOC_SYSTEM_KILL_INANIMATE,{0} destroys {1}.
+LOC_SYSTEM_DEAD_NORMAL,{0} dies.
+LOC_SYSTEM_DEAD_INANIMATE,{0} is destroyed.
+LOC_SYSTEM_DEAD_DOOR,{0} returns to being an ordinary door.
+LOC_SYSTEM_DEAD_SUMMON,{0} vanishes into smoke.
+LOC_SYSTEM_DEAD_REIMU,{0} slips into the gap.
+LOC_SYSTEM_GAIN_EXPERIENCE,You feel your experience grow.
+LOC_SYSTEM_GAIN_NO_EXPERIENCE_WITH_FEAR,No experience gained from enemies that lost the will to fight.
+LOC_SYSTEM_NOTE_UNIQUE_FIND,You’ve encountered the named foe: {0}.
+LOC_SYSTEM_NOTE_UNIQUE_KILL,You’ve slain the named foe: {0}.
+LOC_SYSTEM_NOTE_UNIQUE_DEAD,The named foe {0} has died.
+LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0} has died.
+LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined as an ally.
+LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined as an ally.
+LOC_SYSTEM_NOTE_GOD_WORSHIP,You have become a follower of {0}.
+LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
+LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
+LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
+LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
+LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
+LOC_SYSTEM_NOTE_SEIJA_GIFT,You received a gift from Seija. ({0})
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,Blessing of purification from Junko: {0}
+LOC_SYSTEM_NOTE_RUN_AWAY,Fled toward {0}.
+LOC_SYSTEM_NOTE_DEAD,You have died.
+LOC_SYSTEM_NOTE_DEAD_BY,Killed by {0}.
+LOC_SYSTEM_NOTE_DEAD_HUNGRY,Died of starvation.
+LOC_SYSTEM_NOTE_DEAD_QUIT,Gave up the game.
+LOC_SYSTEM_NOTE_DEAD_ESCAPE,Escaped from the dungeon.
+LOC_SYSTEM_NOTE_DEAD_POISON,Died from poison.
+LOC_SYSTEM_NOTE_DEAD_EFFECT,Died from side effects.
+LOC_SYSTEM_REPLAY_TITLE,{0}, Level {1} {2} {3} {4} "{5}"
+LOC_SYSTEM_REPLAY_TITLE_ARENA,Arena Level {0} "{1}"
+LOC_SYSTEM_REPLAY_TITLE_SPRINT,Sprint
+LOC_SYSTEM_UNIQUE_BENYATH_RAGE,{0} lets out a roar of rage and awakens their true power!
+LOC_SYSTEM_UNIQUE_BENYATH_RAGE_DISTANCE,You hear a furious scream in the distance.
+LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,Wounded Keine transforms into a White-Haired Beast!
+LOC_SYSTEM_TENSI_GOOD1,Tenshi gives you a friendly glance.
+LOC_SYSTEM_TENSI_GOOD2,Tenshi's power reaches you.
+LOC_SYSTEM_TENSI_GOOD3,Tenshi: You look like you're struggling!
+LOC_SYSTEM_TENSI_GOOD4,Tenshi: Let me help you!
+LOC_SYSTEM_TENSI_GOOD5,You hear Tenshi's laughter.
+LOC_SYSTEM_TENSI_GOOD6,Tenshi watches you with great interest.
+LOC_SYSTEM_TENSI_GOOD7,You hear Tenshi clapping.
+LOC_SYSTEM_TENSI_GOOD8,You feel a pleasant energy surrounding you.
+LOC_SYSTEM_TENSI_GOOD9,Tenshi: Make it more fun!
+LOC_SYSTEM_TENSI_GOOD10,Tenshi: You’re not done yet, are you?
+LOC_SYSTEM_TENSI_GOOD11,Tenshi: You got this!
+LOC_SYSTEM_TENSI_GOOD12,You are blessed with Tenshi’s overwhelming power.
+LOC_SYSTEM_TENSI_GOOD13,Tenshi watches your adventure with excitement.
+LOC_SYSTEM_TENSI_BAD1,You feel Tenshi’s wicked gaze.
+LOC_SYSTEM_TENSI_BAD2,Tenshi starts to laugh.
+LOC_SYSTEM_TENSI_BAD3,Tenshi finds your adventure boring.
+LOC_SYSTEM_TENSI_BAD4,Tenshi: How about this, then?
+LOC_SYSTEM_TENSI_BAD5,Tenshi: Let’s spice things up!
+LOC_SYSTEM_TENSI_BAD6,Tenshi: Isn’t it a little too peaceful?
+LOC_SYSTEM_TENSI_BAD7,You hear Tenshi’s mischievous giggle.
+LOC_SYSTEM_TENSI_BAD8,Tenshi seems ready to challenge you.
+LOC_SYSTEM_TENSI_BAD9,Tenshi: Better than being boring, right?
+LOC_SYSTEM_TENSI_BAD10,Tenshi: Get angrier!
+LOC_SYSTEM_TENSI_BAD11,Tenshi: If you don’t give it your all, you might die!
+LOC_SYSTEM_TENSI_BAD12,Tenshi: How arrogant!
+LOC_SYSTEM_TENSI_BAD13,Tenshi: You’re boring me!
+LOC_SYSTEM_TENSI_BAD14,Tenshi: Aren’t you a little *too* strong?
+LOC_SYSTEM_TENSI_BAD15,Tenshi: I *hate* playing it safe!
+LOC_SYSTEM_TENSI_NOTHING1,A small rock flies in and hits you on the head.
+LOC_SYSTEM_TENSI_NOTHING2,The ground suddenly trembles.
+LOC_SYSTEM_TENSI_NOTHING3,Tenshi: Wanna have a chat with me?
+LOC_SYSTEM_TENSI_NOTHING4,Tenshi: What's your favorite food?
+LOC_SYSTEM_TENSI_NOTHING5,Tenshi: Life in Heaven is *so* boring!
+LOC_SYSTEM_TENSI_NOTHING6,Tenshi: Be a little bolder, will you?
+LOC_SYSTEM_TENSI_NOTHING7,Tenshi: I wanna see something *fun*!
+LOC_SYSTEM_TENSI_NOTHING8,Tenshi: You know, I could make this *way* more exciting.
+LOC_SYSTEM_TENSI_NOTHING9,Tenshi: Don’t you dare bore me, okay?
+LOC_SYSTEM_TENSI_NOTHING10,You nearly trip over a sharp rock—then hear someone giggling.
+LOC_SYSTEM_TENSI_NOTHING11,A jagged keystone drops right beside you. “So close~!”
+LOC_SYSTEM_TENSI_NOTHING12,Tenshi: Watching sacrifices from up here is my favorite pastime!
+LOC_SYSTEM_TENSI_NOTHING13,Tenshi: You're not gonna die *that* fast, right? Hang in there a bit longer!
+LOC_SYSTEM_TENSI_NOTHING14,Tenshi: Hey, hey—wanna bet how you'll die?
+LOC_SYSTEM_TENSI_NOTHING15,Tenshi: That kid I watched last time? Got killed by {0}.
+LOC_SYSTEM_TENSI_NOTHING16,Tenshi: Why is {0} so {tough|adorable}, huh?
+LOC_SYSTEM_TENSI_NOTHING17,Tenshi: Just wait a little~ I’m setting up a surprise party!
+LOC_SYSTEM_TENSI_NOTHING18,A pebble hits you right on the forehead.
+LOC_SYSTEM_TENSI_NOTHING19,Tenshi: Tell me a fun story or something!
+LOC_SYSTEM_TENSI_NOTHING20,Tenshi is plotting how best to mess with you.
+LOC_SYSTEM_TENSI_NOTHING21,Tenshi yawns, clearly bored.
+LOC_SYSTEM_TENSI_POTION1,Tenshi grants you newfound strength.
+LOC_SYSTEM_TENSI_POTION2,Tenshi: Aren’t you thirsty?
+LOC_SYSTEM_TENSI_POTION3,Tenshi: Use this and keep fighting!
+LOC_SYSTEM_TENSI_POTION4,Tenshi blesses you with another power boost.
+LOC_SYSTEM_TENSI_POTION5,You receive a potion sent down by Tenshi.
+LOC_SYSTEM_TENSI_BAD_POTION1,Tenshi’s laughter echoes in your mind.
+LOC_SYSTEM_TENSI_BAD_POTION2,Tenshi: Found this potion in a corner of my family’s storage!
+LOC_SYSTEM_TENSI_BAD_POTION3,Tenshi: This is your punishment!
+LOC_SYSTEM_TENSI_BAD_POTION4,Tenshi: A special drink I made just for you~
+LOC_SYSTEM_TENSI_BAD_POTION5,Tenshi forces a potion down your throat.
+LOC_SYSTEM_TENSI_SUMMON1,Tenshi grants you an ally from above.
+LOC_SYSTEM_TENSI_SUMMON2,Tenshi: Need a friend?
+LOC_SYSTEM_TENSI_SUMMON3,Tenshi: Reinforcements—incoming!
+LOC_SYSTEM_TENSI_SUMMON4,Tenshi: Now you don’t have to run away, right?
+LOC_SYSTEM_TENSI_SUMMON5,Tenshi summons friendly spirits around you.
+LOC_SYSTEM_TENSI_BAD_SUMMON1,Tenshi sends down a hostile summon to test you.
+LOC_SYSTEM_TENSI_BAD_SUMMON2,Tenshi: If you won’t fight... then I’ll make you fight!
+LOC_SYSTEM_TENSI_BAD_SUMMON3,Tenshi: I wanna see how strong you’ve gotten!
+LOC_SYSTEM_TENSI_BAD_SUMMON4,Tenshi: You’re getting a bit too cocky, don’t you think?
+LOC_SYSTEM_TENSI_BAD_SUMMON5,You feel Tenshi’s wicked gaze.
+LOC_SYSTEM_TENSI_TELE1,Tenshi distorts the space around you.
+LOC_SYSTEM_TENSI_TELE2,Tenshi: It’s safer over there!
+LOC_SYSTEM_TENSI_TELE3,Tenshi: How about a quick breather?
+LOC_SYSTEM_TENSI_TELE4,Tenshi: Found you a cozy place to rest!
+LOC_SYSTEM_TENSI_TELE5,You feel space begin to warp.
+LOC_SYSTEM_TENSI_BAD_TELE1,Tenshi flings you somewhere else.
+LOC_SYSTEM_TENSI_BAD_TELE2,Tenshi: This place is way cooler!
+LOC_SYSTEM_TENSI_BAD_TELE3,Tenshi: Let me show you somewhere more *fun*!
+LOC_SYSTEM_TENSI_BAD_TELE4,Tenshi: Boring~ Time to shake things up!
+LOC_SYSTEM_TENSI_BAD_TELE5,Your vision spins wildly.
+LOC_SYSTEM_TENSI_EARHQUAKE1,You feel the earth overturn beneath you.
+LOC_SYSTEM_TENSI_EARHQUAKE2,Tenshi: Shatter!
+LOC_SYSTEM_TENSI_EARHQUAKE3,Tenshi: *Car crash!* (CRACK!)
+LOC_SYSTEM_TENSI_EARHQUAKE4,Tenshi: It’s an earthquake!
+LOC_SYSTEM_TENSI_EARHQUAKE5,A massive earthquake erupts!
+LOC_SYSTEM_TENSI_SUPERARMOR1,You feel your body harden like stone.
+LOC_SYSTEM_TENSI_SUPERARMOR2,Tenshi: Wanna try this peach?
+LOC_SYSTEM_TENSI_SUPERARMOR3,Tenshi: It’s the power of a celestial!
+LOC_SYSTEM_TENSI_SUPERARMOR4,Tenshi: Getting hit won’t even hurt anymore!
+LOC_SYSTEM_TENSI_SUPERARMOR5,Tenshi grants you the power of a mind free from thought.
+LOC_SYSTEM_TENSI_BURST1,Tenshi: Boom!
+LOC_SYSTEM_TENSI_BURST2,Tenshi: Careful not to get caught in that!
+LOC_SYSTEM_TENSI_BURST3,Tenshi: How about *this*?
+LOC_SYSTEM_TENSI_WEAPON1,A red aura begins to gather in your hands.
+LOC_SYSTEM_TENSI_WEAPON2,Tenshi: That weapon looks lame!
+LOC_SYSTEM_TENSI_WEAPON3,Tenshi: Just borrowing it for a bit!
+LOC_SYSTEM_TENSI_WEAPON4,Tenshi: Now you won't lose to anyone!
+LOC_SYSTEM_TENSI_WEAPON5,Tenshi: This is a secret, okay? Don’t tell anyone!
+LOC_SYSTEM_TENSI_WEAPON6,Tenshi: Do I *have* to return it?
+LOC_SYSTEM_TENSI_WEAPON7,Tenshi: If I get caught, Iku's gonna yell at me...
+LOC_SYSTEM_TENSI_KANAME1,Tenshi sends reinforcements to your side.
+LOC_SYSTEM_TENSI_KANAME2,Tenshi: With this, you won’t lose, right?
+LOC_SYSTEM_TENSI_KANAME3,Tenshi: They’re my favorite little cuties!
+LOC_SYSTEM_TENSI_KANAME4,Tenshi: Ever heard of a *pet rock*?
+LOC_SYSTEM_TENSI_KANAME5,Tenshi: Handle them with care!
+LOC_SYSTEM_TENSI_KANAME6,Tenshi: Kaname Funnels—go!
+LOC_SYSTEM_TENSI_BAD_KANAME1,Tenshi: You might wanna step back.
+LOC_SYSTEM_TENSI_BAD_KANAME2,Tenshi: Ever slept on a *rock bed*?
+LOC_SYSTEM_TENSI_BAD_KANAME3,Tenshi: My rocks don’t bite… but they *do* shoot!
+LOC_SYSTEM_TENSI_BAD_KANAME4,Tenshi: Let’s see if you can survive *here*!
+LOC_SYSTEM_TENSI_BAD_KANAME5,Tenshi: Just made this new spell card—wanna help me test it?
+LOC_SYSTEM_TENSI_BAD_KANAME6,Tenshi: How about some target practice? You're the target, of course!
+LOC_SYSTEM_TENSI_FIELD1,You feel a great barrier forming around you.
+LOC_SYSTEM_TENSI_FIELD2,Tenshi: Need a new battlefield?
+LOC_SYSTEM_TENSI_FIELD3,Tenshi: Looks way more fun to fight *here*!
+LOC_SYSTEM_TENSI_FIELD4,Tenshi: I’m pitching a tent—mind lending a hand?
+LOC_SYSTEM_TENSI_FIELD5,Tenshi: Want to try fighting in better conditions?
+LOC_SYSTEM_TENSI_BLIND1,Tenshi: I’m gonna nap—can you dim the lights?
+LOC_SYSTEM_TENSI_BLIND2,Tenshi: Isn’t it *way* too bright?
+LOC_SYSTEM_TENSI_BLIND3,Tenshi: Don’t you think this’ll be more *fun*?
+LOC_SYSTEM_TENSI_BLIND4,Tenshi: What you see isn’t always the truth!
+LOC_SYSTEM_TENSI_DEBUFF1,Tenshi manipulates the flow around you.
+LOC_SYSTEM_TENSI_DEBUFF2,Tenshi: If you still lose after all this… you better be ready.
+LOC_SYSTEM_TENSI_DEBUFF3,Tenshi: I’m in a good mood today, so here’s a special gift!
+LOC_SYSTEM_TENSI_DEBUFF4,Tenshi: This one’s more like… making your enemies *look* slow?
+LOC_SYSTEM_TENSI_DEBUFF5,Tenshi: Think this’ll be enough?
+LOC_SYSTEM_TENSI_DEBUFF6,Tenshi: You all move like slugs!
+LOC_SYSTEM_TENSI_SUCIDE1,Tenshi: Let me introduce you to some *fun* friends!
+LOC_SYSTEM_TENSI_SUCIDE2,Tenshi: They’re nice folks—aside from being a bit... *aggressive*!
+LOC_SYSTEM_TENSI_SUCIDE3,Tenshi: Do you like explosions?
+LOC_SYSTEM_TENSI_SUCIDE4,Tenshi: Brave, sure—but they don’t really watch out for allies.
+LOC_SYSTEM_TENSI_SUCIDE5,Tenshi: Play nice together, even if it’s just for a moment!
+LOC_SYSTEM_TENSI_SUCIDE6,Tenshi: I don’t really get suicide charges... Do they follow some weird faith or something?
+LOC_SYSTEM_TENSI_SUCIDE7,Tenshi: Nothing clears a room like this!
+LOC_SYSTEM_TENSI_FOG1,Tenshi: Today’s forecast—thick fog!
+LOC_SYSTEM_TENSI_FOG2,Tenshi: I don’t really like foggy days.
+LOC_SYSTEM_TENSI_FOG3,Tenshi: Can you even fight in this weather?
+LOC_SYSTEM_TENSI_FOG4,Tenshi: Ugh, it’s all damp and dark!
+LOC_SYSTEM_TENSI_FOG5,Tenshi: Perfect weather to stay hidden!
+LOC_SYSTEM_TENSI_FOG6,Tenshi: Weather manifestation—activate!
+LOC_SYSTEM_TENSI_THUNDER1,Tenshi: Today’s weather—heavy thunder and lightning!
+LOC_SYSTEM_TENSI_THUNDER2,Tenshi: Let’s make this flashy!
+LOC_SYSTEM_TENSI_THUNDER3,Tenshi: What’s the chance you’ll get struck?
+LOC_SYSTEM_TENSI_THUNDER4,Tenshi: Yeah… you’re not dodging *this* one.
+LOC_SYSTEM_TENSI_THUNDER5,Tenshi: Hope you’re wearing something non-conductive!
+LOC_SYSTEM_TENSI_THUNDER6,Tenshi: *Boom! Boom! Rumble!*
+LOC_SYSTEM_TENSI_THUNDER7,Tenshi: O blade of the storm—gather thunder from the skies!
+LOC_SYSTEM_TENSI_SUN1,Tenshi: Today’s forecast—clear skies and blazing sun!
+LOC_SYSTEM_TENSI_SUN2,Tenshi: How is sunlight even reaching the dungeon? Eh, who cares!
+LOC_SYSTEM_TENSI_SUN3,Tenshi: Who could possibly hide under sunlight like this?
+LOC_SYSTEM_TENSI_SUN4,Tenshi: Gotta dry some laundry real quick!
+LOC_SYSTEM_TENSI_SUN5,Tenshi: Sunlight—shine!
+LOC_SYSTEM_TENSI_SUN6,Tenshi: The Sword of Hisou can do this too!
+LOC_SYSTEM_TENSI_SUN7,Tenshi: Today’s perfect for a picnic!
+LOC_SYSTEM_BRAND_WEAPON,The aura of Hisou surges from {0}.
+LOC_SYSTEM_MORE_BRAND_WEAPON,{0} is further empowered by the force of Hisou.
+LOC_SYSTEM_PLAYER_REIMU,Reimu
+LOC_SYSTEM_PLAYER_MARISA,Marisa
+LOC_SYSTEM_PLAYER_SANAE,Sanae
+LOC_SYSTEM_PLAYER_MOMIZI,Momiji
+LOC_SYSTEM_PLAYER_KOISHI,Koishi
+LOC_SYSTEM_PLAYER_MOKOU,Mokou
+LOC_SYSTEM_PLAYER_NITORI,Nitori
+LOC_SYSTEM_PLAYER_SUNNY,Sunny
+LOC_SYSTEM_PLAYER_STAR,Star
+LOC_SYSTEM_PLAYER_LUNA,Luna
+LOC_SYSTEM_ATT_NORMAL,Attack
+LOC_SYSTEM_ATT_CLAW,Claw
+LOC_SYSTEM_ATT_BITE,Bite
+LOC_SYSTEM_ATT_SMASH,Smash
+LOC_SYSTEM_ATT_BODYCHECK,Shoulder Bash
+LOC_SYSTEM_ATT_DRILL,Drill
+LOC_SYSTEM_ATT_DRAIN,Drain
+LOC_SYSTEM_ATT_TORCH,Torch
+LOC_SYSTEM_ATT_DREAM,Dream
+LOC_SYSTEM_ATT_VENOM_TEETH,Venom Fangs
+LOC_SYSTEM_ATT_PECK,Peck
+LOC_SYSTEM_ATT_HAKUROUKEN,Hakurouken
+LOC_SYSTEM_ATT_ROUKANKEN,Roukanken
+LOC_SYSTEM_ATT_HEADBUTT,Headbutt
+LOC_SYSTEM_ATT_SICKLE,Sickle
+LOC_SYSTEM_ATT_ROBE,Sleeve
+LOC_SYSTEM_ATT_CLEAVER,Cleaver
+LOC_SYSTEM_ATT_FAN,Fan
+LOC_SYSTEM_ATT_FIRE,Fire
+LOC_SYSTEM_ATT_COLD,Cold
+LOC_SYSTEM_ATT_POISON,Poison
+LOC_SYSTEM_ATT_VENOM,Venom
+LOC_SYSTEM_ATT_CONFUSE_POISON,Stink Bomb
+LOC_SYSTEM_ATT_CRUNCH,Crunch
+LOC_SYSTEM_ATT_FIRE_SWORD,Flame Blade
+LOC_SYSTEM_ATT_ELEC_SWORD,Thunder Blade
+LOC_SYSTEM_ATT_ELEC,Shock
+LOC_SYSTEM_ATT_THUNDER,Lightning
+LOC_SYSTEM_ATT_DISH,Dish
+LOC_SYSTEM_ATT_MAGIC_BOMB,Magic Bomb
+LOC_SYSTEM_ATT_STONE_TACK,Stone Tacks
+LOC_SYSTEM_ATT_SUN,Sunlight
+LOC_SYSTEM_ATT_EARTHQUAKE,Earthquake
+LOC_SYSTEM_ATT_V_FIRE,Sea of Fire
+LOC_SYSTEM_ATT_V_METAL,Iron Thorns
+LOC_SYSTEM_ATT_V_AIR,Gale
+LOC_SYSTEM_ATT_V_EARTH_SHOT,Rock Shot
+LOC_SYSTEM_ATT_V_EARTH_FRAG,Rock Shards
+LOC_SYSTEM_ATT_BACKSTAB,Backstab
+LOC_SYSTEM_ATT_GIANTSWING,Giant Swing
+LOC_SYSTEM_ATT_GERMANSUPLEX,German Suplex
+LOC_SYSTEM_ATT_MIMA_MAGIC,Magic
+LOC_SYSTEM_ATT_MIMA_FIRE_MAGIC,Fire Magic
+LOC_SYSTEM_ATT_MIMA_EARTH_MAGIC,Earth Magic
+LOC_SYSTEM_ATT_MIMA_ELEC_MAGIC,Electric Magic
+LOC_SYSTEM_ATT_MIMA_POISION_MAGIC,Venom Magic
+LOC_SYSTEM_ATT_MIMA_ICE_MAGIC,Ice Magic
+LOC_SYSTEM_ATT_MIMA_CONJURE_MAGIC,Arcane Power
+LOC_SYSTEM_ATT_STONE_PUNCH,Stone Fist
+LOC_SYSTEM_ATT_DROWN,Drowning
+LOC_SYSTEM_ATT_LAVA,Lava
+LOC_SYSTEM_ATT_RUSH,Rush
+LOC_SYSTEM_ATT_WATERGUN,Water Gun
+LOC_SYSTEM_ATT_DOOR,Door
+LOC_SYSTEM_ATT_TANMAC,Danmaku
+LOC_SYSTEM_ATT_SION,Sion
+LOC_SYSTEM_ATT_FIRECRAKER,Firecracker
+LOC_SYSTEM_ATT_SHOCKWAVE,Shockwave
+LOC_SYSTEM_ATT_KIKU_SPRAY,Water Spray
+LOC_SYSTEM_ATT_CURSE,Curse
+LOC_SYSTEM_ATT_BURN,Flame
+LOC_SYSTEM_ATT_POISONTANMAC,Poison Danmaku
+LOC_SYSTEM_ATT_COLDBEAM,Freeze Beam
+LOC_SYSTEM_ATT_SMITE,Smite
+LOC_SYSTEM_ATT_ELECTRIC,Electric
+LOC_SYSTEM_ATT_FIREBALL,Fireball
+LOC_SYSTEM_ATT_WATERPRESSURE,Water Pressure
+LOC_SYSTEM_ATT_NOISE,Blast Noise
+LOC_SYSTEM_ATT_FIRESTORM,Firestorm
+LOC_SYSTEM_ATT_CRASH,Crash
+LOC_SYSTEM_ATT_LASER,Laser
+LOC_SYSTEM_ATT_STONE,Stone
+LOC_SYSTEM_ATT_ROCK,Boulder
+LOC_SYSTEM_ATT_KANAMEDRILL,Kaname Drill
+LOC_SYSTEM_ATT_BURST,Burst
+LOC_SYSTEM_ATT_SUICIDE,Self-Destruct
+LOC_SYSTEM_ATT_SPARK,Spark
+LOC_SYSTEM_ATT_LIGHTTANMAC,Light Danmaku
+LOC_SYSTEM_ATT_BULLET,Bullet
+LOC_SYSTEM_ATT_BLOOD_STARE,Blood Stare
+LOC_SYSTEM_ATT_YINYANG_TANMAC,Yin-Yang Danmaku
+LOC_SYSTEM_ATT_SEAOFFIRE,Sea of Fire
+LOC_SYSTEM_ATT_LEAP,Leap
+LOC_SYSTEM_ATT_AIRSTRIKE,Bullet of Wind
+LOC_SYSTEM_ATT_MACROBURST,Macroburst
+LOC_SYSTEM_ATT_EMERALD,Emerald
+LOC_SYSTEM_ATT_SHORT_LIFE_EXPECTACNY,Short Lifespan
+LOC_SYSTEM_ATT_PSYCHOKINESIS,Psychokinesis
+LOC_SYSTEM_ATT_HYPERBEAM,Hyper Beam
+LOC_SYSTEM_ATT_SWORD,Sword
+LOC_SYSTEM_ATT_KNIFE,Knife
+LOC_SYSTEM_ATT_THROWING_ATLAS,Thousand-Handed Toss
+LOC_SYSTEM_ATT_BILL,Talisman
+LOC_SYSTEM_ATT_DIMENSIONAL_RIFT,Dimensional Rift
+LOC_SYSTEM_THAT,That
+LOC_SYSTEM_SOMETHING,Something
+LOC_SYSTEM_FIND_ONE,Found {0}.
+LOC_SYSTEM_FIND_TWO,Found {0} and {1}.
+LOC_SYSTEM_FIND_THREE,Found {0}, {1}, and {2}.
+LOC_SYSTEM_FIND_MANY,Found several items.
+LOC_SYSTEM_EVENT_KISME_DROP,Kisume dropped from the sky!
+LOC_SYSTEM_EVENT_LUNATIC_TIME,It’s LUNATIC TIME!!
+LOC_SYSTEM_EVENT_KOGASA_DROP,Kogasa dropped from the sky!
+LOC_SYSTEM_EVENT_KOGASA_DROP2,...But Kogasa landed headfirst on the ground.
+LOC_SYSTEM_EVENT_DREAM_OPEN1,The dream world begins to expand! Sleeping enemies are waking up!
+LOC_SYSTEM_EVENT_DREAM_OPEN2,The dream world continues to grow...
+LOC_SYSTEM_EVENT_DREAM_OPEN3,The dream world expands once more! Its denizens have noticed you!
+LOC_SYSTEM_EVENT_DREAM_OPEN4,Most of the dream world has opened! Monsters will soon flood in!
+LOC_SYSTEM_EVENT_DREAM_OPEN5,The dream world is fully open! Enter the portal to the moon as soon as possible!
+LOC_SYSTEM_EVENT_MARY_SAN1,It’s me, Mary-san.
+LOC_SYSTEM_EVENT_MARY_SAN2,I’m right behind
+LOC_SYSTEM_EVENT_MARY_SAN3,you...
+LOC_SYSTEM_EVENT_MARY_SAN_FAIL,...You can’t see me, but I’m here.
+LOC_SYSTEM_EVENT_RUN_TRHEEFAIRY,{0} shouted, "Run for it!"
+LOC_SYSTEM_EVENT_SCALET_TRAP,Defensive magic circle activated. Eliminate the intruder!
 LOC_SYSTEM_EVENT_KOGASA_TIME1,It's SURPRISE TIME!!
-LOC_SYSTEM_EVENT_KOGASA_TIME2,...그러나 코가사는 무언가 잘못되었음을 느꼈다.
-LOC_SYSTEM_EVENT_HOJOK1,{0:은|는} 외쳤다. "해치워주마!"
-LOC_SYSTEM_EVENT_HOJOK2,{0:은|는} 외쳤다. "저에게 맡겨주시길!"
-LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0:은|는} 외쳤다. "원망스럽...콜록, 콜록!"
-LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...코가사는 준비해둔 연기를 너무 들이마신듯하다.
-LOC_SYSTEM_EVENT_SION_ITEM,아이템
-LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0:이|가} 가까이가자 사라졌다.
-LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,아이템들이 가까이가자 사라졌다.
-LOC_SYSTEM_MON_DREAM_UNIQUE,꿈의 주민 {0}
-LOC_SYSTEM_EVOKE_DREAM_SOUL,당신은 {0}의 꿈을 불러냈다!
-LOC_SYSTEM_TRIBE_HUMAN,인간
-LOC_SYSTEM_TRIBE_WIZARD,마녀
-LOC_SYSTEM_TRIBE_FAIRY,요정
-LOC_SYSTEM_TRIBE_CROWTENGU,카라스텐구
-LOC_SYSTEM_TRIBE_WOLFTENGU,백랑텐구
-LOC_SYSTEM_TRIBE_KAPPA,캇파
-LOC_SYSTEM_TRIBE_NECOMATA,네코마타
-LOC_SYSTEM_TRIBE_OARFISH,용궁의사자
-LOC_SYSTEM_TRIBE_CHEUKUMOGAMI,츠쿠모가미
-LOC_SYSTEM_TRIBE_ONI,오니
-LOC_SYSTEM_TRIBE_HALFYOUKAI,반요
-LOC_SYSTEM_TRIBE_WRAITH,망령
-LOC_SYSTEM_TRIBE_VAMPIRE,흡혈귀
-LOC_SYSTEM_TRIBE_YOUKAI,요괴
-LOC_SYSTEM_JOB_WARRIOR,전사
-LOC_SYSTEM_JOB_WIZARD,마법사
-LOC_SYSTEM_JOB_SHAMAN,무녀
-LOC_SYSTEM_JOB_GLADIATOR,검투사
-LOC_SYSTEM_JOB_MONK,격투가
-LOC_SYSTEM_JOB_CRUSADER,마전사
-LOC_SYSTEM_JOB_BERSERKER,광전사
-LOC_SYSTEM_JOB_FIRE_WIZARD,화염술사
-LOC_SYSTEM_JOB_COLD_WIZARD,냉기술사
-LOC_SYSTEM_JOB_EARTH_WIZARD,대지술사
-LOC_SYSTEM_JOB_AIR_WIZARD,대기술사
-LOC_SYSTEM_JOB_SUMMON_WIZARD,소환술사
-LOC_SYSTEM_JOB_ALCHEMIST,연금술사
-LOC_SYSTEM_JOB_PSYCHOLOGIST,심리학자
-LOC_SYSTEM_JOB_REAPER,사신
-LOC_SYSTEM_JOB_FANATIC,광신도
-LOC_SYSTEM_JOB_ASSASSIN,암살자
-LOC_SYSTEM_JOB_FARMER,농부
-LOC_SYSTEM_JOB_MADE,메이드
-LOC_SYSTEM_JOB_ENGINEER,기술자
-LOC_SYSTEM_JOB_MISSING,실종자
-LOC_SYSTEM_TILE_UNKNOWN,알수없음
-LOC_SYSTEM_TILE_FLOOR,지면
-LOC_SYSTEM_TILE_OPEN_DOOR,열린문
-LOC_SYSTEM_TILE_STAIR_DOWN,내려가는 계단
-LOC_SYSTEM_TILE_STAIR_UP,올라가는 계단
-LOC_SYSTEM_TILE_STAIR_TEMPLE,모든 신전으로 가는 계단
-LOC_SYSTEM_TILE_STAIR_MISTY_LAKE,안개호수로 가는 계단
-LOC_SYSTEM_TILE_STAIR_YOUKAI_MOUNTAIN,요괴의 산으로 가는 계단
-LOC_SYSTEM_TILE_STAIR_SCARLET,홍마관으로 가는 계단
-LOC_SYSTEM_TILE_STAIR_LIBRARY,도서관으로 가는 계단
-LOC_SYSTEM_TILE_STAIR_SCARLET_UNDER,지하실로 가는 계단
-LOC_SYSTEM_TILE_STAIR_BAMBOO,미궁의 죽림을 가는 길
-LOC_SYSTEM_TILE_STAIR_EIENTEI,영원정으로 가는 계단
-LOC_SYSTEM_TILE_STAIR_SUBTERRANEAN,지저로 가는 구멍
-LOC_SYSTEM_TILE_STAIR_YUKKURI,윳쿠리 둥지로 가는 계단
-LOC_SYSTEM_TILE_STAIR_DEPTH,짐승길로 향하는 입구
-LOC_SYSTEM_TILE_STAIR_DREAM,꿈의 세계로 가는 포탈
-LOC_SYSTEM_TILE_STAIR_MOON,달의 도시로 가는 길
-LOC_SYSTEM_TILE_STAIR_PANDEMONIUM,마계로 가는 포탈
-LOC_SYSTEM_TILE_STAIR_HAKUREI,하쿠레이 신사의 계단
-LOC_SYSTEM_TILE_STAIR_ZIGURRAT,광몽의 세계로 가는 포탈
-LOC_SYSTEM_TILE_STAIR_RETURN,입구로 돌아가는 계단
-LOC_SYSTEM_TILE_TEMPLE_JOON_AND_SION,죠온&시온의 최악최흉 제단
-LOC_SYSTEM_TILE_TEMPLE_BYAKUREN,뱌쿠렌의 명련사 제단
-LOC_SYSTEM_TILE_TEMPLE_KANAKO,카나코의 분사 제단
-LOC_SYSTEM_TILE_TEMPLE_SUWAKO,스와코의 미샤구지 제단
-LOC_SYSTEM_TILE_TEMPLE_MINORIKO,미노리코의 풍요 제단
-LOC_SYSTEM_TILE_TEMPLE_MIMA,미마의 악령 제단
-LOC_SYSTEM_TILE_TEMPLE_SHINKI,신키의 마신 제단
-LOC_SYSTEM_TILE_TEMPLE_YUUGI,유우기의 괴력난신 제단
-LOC_SYSTEM_TILE_TEMPLE_SHIZUHA,시즈하의 단풍 제단
-LOC_SYSTEM_TILE_TEMPLE_HINA,히나의 재액 제단
-LOC_SYSTEM_TILE_TEMPLE_YUKARI,유카리의 스키마 제단
-LOC_SYSTEM_TILE_TEMPLE_EIRIN,에이린의 비약 제단
-LOC_SYSTEM_TILE_TEMPLE_YUYUKO,유유코의 요괴벚꽃 제단
-LOC_SYSTEM_TILE_TEMPLE_SATORI,사토리의 제3의눈 제단
-LOC_SYSTEM_TILE_TEMPLE_TENSI,텐시의 요석 제단
-LOC_SYSTEM_TILE_TEMPLE_SEIJA,세이자의 뒤집힌 제단	
-LOC_SYSTEM_TILE_TEMPLE_LILLY,릴리의 해바라기 제단
-LOC_SYSTEM_TILE_TEMPLE_MIKO,미코의 쇼토쿠 제단
-LOC_SYSTEM_TILE_TEMPLE_OKINA,오키나의 백도어 제단
-LOC_SYSTEM_TILE_TEMPLE_JUNKO,순호의 신령 제단
-LOC_SYSTEM_TILE_STONE_WALL,돌벽
-LOC_SYSTEM_TILE_RED_WALL,붉은벽
-LOC_SYSTEM_TILE_BOOK_WALL,책장
-LOC_SYSTEM_TILE_BAMBOO_WALL,밀집된 대나무
-LOC_SYSTEM_TILE_PANDEMONIUM_WALL,마계벽
-LOC_SYSTEM_TILE_WOOD,나무
-LOC_SYSTEM_TILE_SUNFLOWER,해바라기
-LOC_SYSTEM_TILE_HELL_WALL,지옥벽
-LOC_SYSTEM_TILE_IRON_WALL,철벽
-LOC_SYSTEM_TILE_WALL,벽
-LOC_SYSTEM_TILE_CLOSE_DOOR,닫힌문
-LOC_SYSTEM_TILE_GRASS,유리
-LOC_SYSTEM_TILE_STATUE,석상
-LOC_SYSTEM_TILE_BUDDHA_STATUE,지장보살상
-LOC_SYSTEM_TILE_DEEP_WATER,깊은물
-LOC_SYSTEM_TILE_LAVA,용암
-LOC_SYSTEM_SKL_KANAKO_1,건신초래돌
-LOC_SYSTEM_SKL_KANAKO_2,건신초래어주
-LOC_SYSTEM_SKL_KANAKO_3,건신초래풍
-LOC_SYSTEM_SKL_GRAZE,그레이즈 발동
-LOC_SYSTEM_SKL_GRAZE_OFF,그레이즈 해제
-LOC_SYSTEM_SKL_LEVITATION,비행 발동
-LOC_SYSTEM_SKL_LEVITATION_OFF,비행 해제
-LOC_SYSTEM_SKL_INVISIBLE,투명 발동
-LOC_SYSTEM_SKL_INVISIBLE_OFF,투명 해제
-LOC_SYSTEM_SKL_EIRIN_0,물약 던지기
-LOC_SYSTEM_SKL_EIRIN_1,신체개조
-LOC_SYSTEM_SKL_EIRIN_2,긴급수혈
-LOC_SYSTEM_SKL_BYAKUREN_1,지력강화
-LOC_SYSTEM_SKL_BYAKUREN_2,각력강화
-LOC_SYSTEM_SKL_SIZUHA_1,광기의 낙엽
-LOC_SYSTEM_SKL_SIZUHA_2,단풍 방어구
-LOC_SYSTEM_SKL_SIZUHA_3,단풍의 무기 부여
-LOC_SYSTEM_SKL_MINORIKO_1,능력치 회복
-LOC_SYSTEM_SKL_MINORIKO_2,체력 회복
-LOC_SYSTEM_SKL_YUUGI_1,술 마시기
-LOC_SYSTEM_SKL_YUUGI_2,저먼 스플렉스
-LOC_SYSTEM_SKL_YUUGI_3,집어던지기
-LOC_SYSTEM_SKL_YUUGI_4,괴멸의 포효
-LOC_SYSTEM_SKL_YUUGI_5,삼보필살
-LOC_SYSTEM_SKL_SATORI_1,트라우마
-LOC_SYSTEM_SKL_SATORI_2,독심술	
-LOC_SYSTEM_SKL_SHINKI_1,하급 마족 소환	
-LOC_SYSTEM_SKL_SHINKI_2,중급 마족 소환	
-LOC_SYSTEM_SKL_SHINKI_3,상급 마족 소환
-LOC_SYSTEM_SKL_YUYUKO_ON,유령 소환 발동
-LOC_SYSTEM_SKL_YUYUKO_OFF,유령 소환 해제
-LOC_SYSTEM_SKL_YUYUKO_1,유령 조종
-LOC_SYSTEM_SKL_YUYUKO_2,유령 소환 가속
-LOC_SYSTEM_SKL_YUYUKO_3,유령 구속
-LOC_SYSTEM_SKL_YUKARI_1,변용을 보는 눈
-LOC_SYSTEM_SKL_YUKARI_2,환상광상혈
-LOC_SYSTEM_SKL_YUKARI_3,사중결계
-LOC_SYSTEM_SKL_YUKARI_4,차원고정
-LOC_SYSTEM_SKL_SWAKO_JUMP,개구리 점프
-LOC_SYSTEM_SKL_SWAKO_TEMPLE,신전 세우기
-LOC_SYSTEM_SKL_SWAKO_WATER_GUN,물총
-LOC_SYSTEM_SKL_SWAKO_TOUGUE,개구리 혀
-LOC_SYSTEM_SKL_SWAKO_CURSE,토착신의 재앙
-LOC_SYSTEM_SKL_SWAKO_DIGGING,굴착
-LOC_SYSTEM_SKL_SWAKO_SUMMON_FLOG,개구리 소환
-LOC_SYSTEM_SKL_SWAKO_STATUE,석상 세우기
-LOC_SYSTEM_SKL_SWAKO_RAIN,비 내리기
-LOC_SYSTEM_SKL_SWAKO_SLEEP,동면
-LOC_SYSTEM_SKL_SWAKO_MISYAGUZI,미샤구지님 소환
-LOC_SYSTEM_SKL_HINA_1,액땜
-LOC_SYSTEM_SKL_HINA_2,무기 저주(강화)
-LOC_SYSTEM_SKL_HINA_3,방어구 저주(반사)
-LOC_SYSTEM_SKL_HINA_4,장신구 저주(회복)
-LOC_SYSTEM_SKL_HINA_5,저주의 무기 부여
-LOC_SYSTEM_SKL_JUMPING_ATTACK,도약 공격
-LOC_SYSTEM_SKL_BREATH,브레스
-LOC_SYSTEM_SKL_BREATH_FIRE,화염 브레스
-LOC_SYSTEM_SKL_BREATH_COLDE,냉기 브레스
-LOC_SYSTEM_SKL_BREATH_ELEC,전격 브레스
-LOC_SYSTEM_SKL_TORMENT,지옥의 고통
-LOC_SYSTEM_SKL_ABANDON_GOD,신을 버리기
-LOC_SYSTEM_SKL_SEIJA_GIFT,보물 받기
-LOC_SYSTEM_SKL_SEIJA_1,위치 뒤집기
-LOC_SYSTEM_SKL_SEIJA_2,천하전복
-LOC_SYSTEM_SKL_LILLY_1,동료 권유
-LOC_SYSTEM_SKL_LILLY_2,요정 부르기
-LOC_SYSTEM_SKL_LILLY_3,봄의 치유
-LOC_SYSTEM_SKL_LILLY_4,요정대전쟁
-LOC_SYSTEM_SKL_PHILOSOPHERS_1,화-화염구
-LOC_SYSTEM_SKL_PHILOSOPHERS_2,수-워터캐논
-LOC_SYSTEM_SKL_PHILOSOPHERS_3,목-질풍선
-LOC_SYSTEM_SKL_PHILOSOPHERS_4,금-에메랄드 시티
-LOC_SYSTEM_SKL_PHILOSOPHERS_5,토-지반 융기
-LOC_SYSTEM_SKL_OKINA_1,문 생성
-LOC_SYSTEM_SKL_OKINA_2,문 잠그기
-LOC_SYSTEM_SKL_OKINA_3,인투 백도어
-LOC_SYSTEM_SKL_OKINA_4,크레이지 백댄서즈
-LOC_SYSTEM_SKL_OKINA_5,백도어 긴급탈출
-LOC_SYSTEM_SKL_JUNKO_1,단순한 탄막
-LOC_SYSTEM_SKL_JUNKO_2,순수한 힘
-LOC_SYSTEM_SKL_JUNKO_3,순수한 살의
-LOC_SYSTEM_SKL_JUNKO_4,순화
-LOC_SYSTEM_SKL_JOON_AND_SION_1,빙의
-LOC_SYSTEM_SKL_JOON_AND_SION_2,퀸 오브 버블
-LOC_SYSTEM_SKL_JOON_AND_SION_3,미스찬스 스캐터
-LOC_SYSTEM_SKL_JOON_AND_SION_4,앱솔루트 루저
-LOC_SYSTEM_SKL_JOON_AND_SION_OFF,강제빙의해제
-LOC_SYSTEM_SKL_MIKO_1,욕망모으기
-LOC_SYSTEM_SKL_MIKO_2,축지의 망토
-LOC_SYSTEM_SKL_MIKO_3,후광
-LOC_SYSTEM_SKL_MIKO_4,저항얻기
-LOC_SYSTEM_SKL_MIKO_5,빨간망토 파란망토
-LOC_SYSTEM_SKL_MIKO_6,인기폭발
-LOC_SYSTEM_SKL_UKNOWN,알수없는 능력
-LOC_SYSTEM_ITEM_CATEGORY_WEAPON,무기
-LOC_SYSTEM_ITEM_CATEGORY_TANMAC,탄막
-LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,방어구
-LOC_SYSTEM_ITEM_CATEGORY_POTION,물약
-LOC_SYSTEM_ITEM_CATEGORY_FOOD,음식
-LOC_SYSTEM_ITEM_CATEGORY_SCROLL,두루마리
-LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD,스펠카드
-LOC_SYSTEM_ITEM_CATEGORY_JEWELRY,장신구
-LOC_SYSTEM_ITEM_CATEGORY_BOOK,책
-LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,발동
-LOC_SYSTEM_ITEM_CATEGORY_GOAL,중요
-LOC_SYSTEM_ITEM_CATEGORY_OTHER,기타
-LOC_SYSTEM_SPELLCARD,스펠카드
-LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}의 스펠카드
-LOC_SYSTEM_SPELLCARD_INVISIBLE,투명
-LOC_SYSTEM_SPELLCARD_FIRE,화염
-LOC_SYSTEM_SPELLCARD_ICE,냉기
-LOC_SYSTEM_SPELLCARD_AIR,대기
-LOC_SYSTEM_SPELLCARD_METAL,금속
-LOC_SYSTEM_SPELLCARD_EARTH,대지
-LOC_SYSTEM_SPELLCARD_SUN,태양
-LOC_SYSTEM_SPELLCARD_AIR_EFFECT,{0:은|는} 바람에 밀려나갔다.
-LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER,대거
-LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE,투척용 나이프
-LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_SHORTSWORD,숏소드
-LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_KATANA,도검
-LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_SCIMITAR,언월도
-LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_GREATSWORD,대검
-LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_CHAKRAM,철륜
-LOC_SYSTEM_ITEM_WEAPON_AXE_HANDAXE,손도끼
-LOC_SYSTEM_ITEM_WEAPON_AXE_BATTLEAXE,전투도끼
-LOC_SYSTEM_ITEM_WEAPON_AXE_ANCHOR,닻
-LOC_SYSTEM_ITEM_WEAPON_MACE_GOHEI,고헤이
-LOC_SYSTEM_ITEM_WEAPON_MACE_BROOMSTICK,빗자루
-LOC_SYSTEM_ITEM_WEAPON_MACE_UMBRELLA,양산
-LOC_SYSTEM_ITEM_WEAPON_MACE_DAUZING_ROD,다우징 로드
-LOC_SYSTEM_ITEM_WEAPON_MACE_ONBASIRA,온바시라
-LOC_SYSTEM_ITEM_WEAPON_SPEAR_SPEAR,창
-LOC_SYSTEM_ITEM_WEAPON_SPEAR_JAVELIN,투척용 창
-LOC_SYSTEM_ITEM_WEAPON_SPEAR_SCYTHE,낫
-LOC_SYSTEM_ITEM_WEAPON_SPEAR_TRIDENT,삼지창
-LOC_SYSTEM_ITEM_WEAPON_SPEAR_BAMBOO_SPEAR,죽창
-LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,천
-LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,가죽
-LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,사슬
-LOC_SYSTEM_ITEM_ARMOUR_M_PLATE,판금
-LOC_SYSTEM_ITEM_ARMOUR_T_NORMAL,{0} 일반옷
-LOC_SYSTEM_ITEM_ARMOUR_T_MIKO,{0} 무녀옷
-LOC_SYSTEM_ITEM_ARMOUR_T_WING,{0} 날개옷
-LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0} 캇파옷
-LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0} 불쥐옷
-LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} 메이드옷
-LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0} 인형옷
-LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} 단풍옷
-LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,나무방패
-LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD,철방패
-LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD,철방패
-LOC_SYSTEM_ITEM_ARMOUR_SHIELD_BUGSHIELD,버그방패
-LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON,리본
-LOC_SYSTEM_ITEM_ARMOUR_HEAD_HEADBAND,머리띠
-LOC_SYSTEM_ITEM_ARMOUR_HEAD_HAT,모자
-LOC_SYSTEM_ITEM_ARMOUR_CLOAK,망토
-LOC_SYSTEM_ITEM_ARMOUR_GLOVE,장갑
-LOC_SYSTEM_ITEM_ARMOUR_SHOES,신발
-LOC_SYSTEM_ITEM_ARMOUR_RUNED,룬이 새겨진
-LOC_SYSTEM_ITEM_ARTIFACT,아티팩트
-LOC_SYSTEM_ITEM_JEWELRY_RING,반지
-LOC_SYSTEM_ITEM_JEWELRY_AMULET,부적
-LOC_SYSTEM_ITEM_FOOD_BREAD,빵
-LOC_SYSTEM_ITEM_FOOD_SWEETPOTATO,고구마
-LOC_SYSTEM_ITEM_FOOD_CHOCOLET,초콜렛
-LOC_SYSTEM_ITEM_FOOD_CUCUMBER,오이
-LOC_SYSTEM_ITEM_FOOD_P_ITEM,P템
-LOC_SYSTEM_ITEM_POTION_POTION,물약
-LOC_SYSTEM_ITEM_SCROLL_SCROLL,두루마리
-LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,장착하고 있던 {0:이|가} 검게 빛났다.
-LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,장착하고 있던 {0:이|가} 빨강색으로 빛났다.
-LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0:이|가} 초록색으로 빛났다.
-LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0:이|가} 충전되었다.
-LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0:이|가} 알수없는 빛에 휩싸였다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE,{0:이|가} 불길에 휩싸였다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_COLD,{0:이|가} 한기를 내뿜었다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_POISON,{0:이|가} 맹독을 뿜어냈다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN,{0:이|가} 마나를 내뿜고있다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0:이|가} 신비로운 힘을 뿜어내고 있다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0:이|가} 보호의 오오라를 내뿜고있다!
-LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,당신의 무기에 마법이 부여되었다!
-LOC_SYSTEM_ITEM_BOOK_DROP,떨어진 마법책
-LOC_SYSTEM_ITEM_BOOK_FIRE_BASE,초보 화염술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_COLD_BASE,초보 냉기술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_POISON_BASE,초보 독술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_WIZARD_BASE,초보 마법사의 마법책
-LOC_SYSTEM_ITEM_BOOK_EARTH_BASE,초보 대지술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_AIR_BASE,초보 대기술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_SUMMON_BASE,초보 소환술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_ALCHMIST_BASE,초보 연금술사의 마법책
-LOC_SYSTEM_ITEM_BOOK_PSYCHOLOGIST_BASE,초보 심리학자의 마법책
-LOC_SYSTEM_ITEM_BOOK_BRAND_BASE,초보 마법전사의 마법책
-LOC_SYSTEM_ITEM_BOOK_MAID_BASE,메이드의 기본소양
-LOC_SYSTEM_ITEM_BOOK_SHOCK,전격의 마법책
-LOC_SYSTEM_ITEM_BOOK_PRACTICE,원소 연습의 마법책
-LOC_SYSTEM_ITEM_BOOK_SUB,보조의 마법책
-LOC_SYSTEM_ITEM_BOOK_STALKING,암살자의 마법책
-LOC_SYSTEM_ITEM_BOOK_CLOUD,구름의 마법책
-LOC_SYSTEM_ITEM_BOOK_CONJURE,파괴의 마법책
-LOC_SYSTEM_ITEM_BOOK_HEX,매혹의 마법책
-LOC_SYSTEM_ITEM_BOOK_DEFENSE,방어의 마법책
-LOC_SYSTEM_ITEM_BOOK_ENCHANT,풍수지리학 개요
-LOC_SYSTEM_ITEM_BOOK_TRANSITION,전이의 마법책
-LOC_SYSTEM_ITEM_BOOK_TENSI,텐시의 비전서
-LOC_SYSTEM_ITEM_BOOK_TEST_ANNIHILATE,미마의 봉인서
-LOC_SYSTEM_ITEM_BOOK_DEBUF,정신 지배학
-LOC_SYSTEM_ITEM_BOOK_MAID_ULTI,메이드 비전서
-LOC_SYSTEM_ITEM_BOOK_ICE_ULTI,얼음요정 비전서
-LOC_SYSTEM_ITEM_BOOK_SUMMON_ULTI,앨리스의 마도서
-LOC_SYSTEM_ITEM_BOOK_AIR_ULTI,텐구의 활극 만화
-LOC_SYSTEM_ITEM_BOOK_ALCHMY_ULTI,마그눔 오푸스
-LOC_SYSTEM_ITEM_BOOK_RANDOM1,빨간 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM2,초록 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM3,파란 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM4,노란 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM5,분홍 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM6,주황 커버의 책
-LOC_SYSTEM_ITEM_BOOK_RANDOM7,보라 커버의 책
-LOC_SYSTEM_ITEM_TANMAC_BUG,버그탄막
-LOC_SYSTEM_ITEM_TANMAC_AMULET,호밍아뮬렛
-LOC_SYSTEM_ITEM_TANMAC_POISON_NEEDLE,맹독 수리검
-LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER,키쿠이치몬지 컴프레서
-LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO,독고저
-LOC_SYSTEM_ITEM_EVOKE_PAGODA,보탑
-LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,에어두루마리
-LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,몽혼
-LOC_SYSTEM_ITEM_EVOKE_BOMB,4척 매직봄
-LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,오쿠리쵸친
-LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,공중어뢰
-LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,요술망치
-LOC_SYSTEM_ITEM_EVOKE_CAMERA,카메라
-LOC_SYSTEM_ITEM_RUNE_RUNE,룬
-LOC_SYSTEM_ITEM_RUNE_SCARLET,홍마관
-LOC_SYSTEM_ITEM_RUNE_YOUKAI_MOUNTAIN,요괴산
-LOC_SYSTEM_ITEM_RUNE_FLANDRE,플랑드르
-LOC_SYSTEM_ITEM_RUNE_YUKKURI,윳쿠리
-LOC_SYSTEM_ITEM_RUNE_EIENTEI,영원정
-LOC_SYSTEM_ITEM_RUNE_SUBTERRANEAN,지저
-LOC_SYSTEM_ITEM_RUNE_MOON,달
-LOC_SYSTEM_ITEM_RUNE_HOKKAI,법계
-LOC_SYSTEM_ITEM_RUNE_FROZEN_FIELD,빙결세계
-LOC_SYSTEM_ITEM_RUNE_PANDEMONIUM,판데모니엄
-LOC_SYSTEM_ITEM_YINYANG,음양옥
-LOC_SYSTEM_ITEM_CAMERA_PHOTO,{0}의 사진
-LOC_SYSTEM_ITEM_ETC_SATORI,실종 포스터
-LOC_SYSTEM_ITEM_ETC_CATNIP,개다래 나무
-LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,부셔진 카메라
-LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,잡동사니
-LOC_SYSTEM_ITEM_ETC_PHOTO,사진
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0:이|가} 찍혀있는 사진이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,미소녀가 찍혀있는 사진이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\n
-LOC_SYSTEM_ENSLAVE_GHOST,{0}의 영혼
-LOC_SYSTEM_GOD_ERROR,알수없는신
-LOC_SYSTEM_GOD_JOON_AND_SION,죠온&시온
-LOC_SYSTEM_GOD_BYAKUREN,뱌쿠렌
-LOC_SYSTEM_GOD_KANAKO,카나코
-LOC_SYSTEM_GOD_SUWAKO,스와코
-LOC_SYSTEM_GOD_MINORIKO,미노리코
-LOC_SYSTEM_GOD_MIMA,미마
-LOC_SYSTEM_GOD_SHINKI,신키
-LOC_SYSTEM_GOD_YUUGI,유우기
-LOC_SYSTEM_GOD_SHIZUHA,시즈하
-LOC_SYSTEM_GOD_HINA,히나
-LOC_SYSTEM_GOD_YUKARI,유카리
-LOC_SYSTEM_GOD_EIRIN,에이린
-LOC_SYSTEM_GOD_YUYUKO,유유코
-LOC_SYSTEM_GOD_SATORI,사토리
-LOC_SYSTEM_GOD_TENSI,텐시
-LOC_SYSTEM_GOD_SEIJA,세이자
-LOC_SYSTEM_GOD_LILLY,릴리
-LOC_SYSTEM_GOD_MIKO,미코
-LOC_SYSTEM_GOD_OKINA,오키나
-LOC_SYSTEM_GOD_JUNKO,순호
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,당신은 이제 죠온이나 시온을 빙의할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,더 이상 당신은 이제 죠온이나 시온을 빙의할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_ADD,빙의상태에서 빙의된 신에 따라 파워를 이용한 효과를 얻게 된다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_REMOVE,더 이상 빙의상태에서 파워를 이용한 효과를 얻을 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_ADD,빙의상태에서 빙의된 신에 따라 소모품을 이용한 효과를 얻게 된다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_REMOVE,더 이상 빙의상태에서 소모품을 이용한 효과를 얻을 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_ADD,빙의할때마다 한번만 빙의된 신의 필살기를 사용할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_REMOVE,더 이상 빙의된 신의 필살기를 사용할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_ADD,이제 당신은 무조건 이길 수 있는 최흉최악의 전법을 사용할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_REMOVE,더 이상 최흉최악의 전법을 사용할 수 없다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_ADD,히지리는 당신의 배울 수 있는 마법레벨 한계를 늘려준다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_REMOVE,더 이상 당신의 배울 수 있는 마법레벨 한계를 늘려주지않는다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_ADD,당신은 순간적으로 지력을 강화시킬 수 있다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_REMOVE,더 이상 순간적인 지력강화를 사용할 수 없다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,당신은 이제 강화된 근력으로 낮은 갑옷패널티의 마법실패율을 무시한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_REMOVE,더 이상 근력강화의 축복을 받지 못한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_ADD,히지리는 이제 당신의 강화마법들을 보조해준다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_REMOVE,더 이상 강화마법들을 보조받지 못한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_ADD,당신은 이제 히지리의 축복으로 초인같은 각력으로 달릴 수 있게 된다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_REMOVE,더 이상 초인같은 각력을 사용할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_ADD,당신은 순간적으로 상대에게 돌진할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_REMOVE,더 이상 순간적인 돌진을 사용할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_ADD,당신은 기둥을 소환 할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_REMOVE,더 이상 기둥을 소환 할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_ADD,당신은 이제 바람을 감은 공격을 할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_REMOVE,더 이상 바람을 감아 공격할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_ADD,당신은 파워가 높을수록 체력과 영력회복속도가 빨라진다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_REMOVE,더 이상 체력과 영력회복속도가 빨라지지않는다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_ADD,당신은 이제 상태이상과 능력치저하를 회복할 수 있다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_REMOVE,더 이상 상태이상과 능력치저하를 회복할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_ADD,당신은 이제 음식을 빨리 먹을 수 있고 영력을 조금 회복한다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_REMOVE,더 이상 음식을 빨리 먹지 못한다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_ADD,당신은 이제 음식과 P를 소모하여 체력을 크게 회복할 수 있다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_REMOVE,더 이상 음식으로 체력을 회복할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_ADD,당신은 이제 음식을 먹은 직후 화염과 냉기에 강해진다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_REMOVE,더 이상 음식을 먹어도 화염과 냉기에 강하지않다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_ADD,당신은 최대영력이 신앙심에 비례해서 증가한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_REMOVE,당신의 최대영력은 감소했다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_ADD,당신은 적을 죽였을때 영력을 얻는다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_REMOVE,더 이상 적을 죽였을때 영력을 얻지 못한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_ADD,미마는 이제 파괴술이 들어간 마법의 위력을 보조한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE,더 이상 파괴술 위력을 보조받지 못한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_ADD,미마는 이제 파괴술이 들어간 마법의 성공율을 올려준다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE,더 이상 파괴술 성공율을 보정받지 못한다.
-LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,역병신의 저주로 인해 {0}개의 {1:을|를} 낭비하여 사용하였다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0:은|는} 무생물이기에 빙의할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,{0}에 빈곤신이 빙의하였다!
-LOC_SYSTEM_GOD_SWAWKO_HAT,스와코의 모자
-LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,{0:을|를} 끌어당겼다
-LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,{0}에 재앙을 내렸다.
-LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0:은|는} {연기를 내며|고약한 냄새를 풍기며|빛을 내면서} {1:으로|로} 바뀌었다.
-LOC_SYSTEM_GOD_EIRIN_PRAY_2,에이린은 흡족히 여겼다.
-LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,미마가 강력한 {0:을|를} 당신에 겨냥했다!
-LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,마계의 졸개들이 당신에게 소환되었다.
-LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0}의 기분이 썩 좋아보이지 않는다.
-LOC_SYSTEM_GOD_YUUGI_CATCH,{0:을|를} 잡았다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,{0:을|를} 단풍방어구로 강화하시겠습니까?(y/n)
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0}에서 쓸쓸하고도 종말적인 기운이 느껴진다.
-LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,히나는 당신의 장비에 액을 주입했다!
-LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,장착하고 있던 {0:이|가} 검게 빛났다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0:은|는} 저주의 힘으로 가득 차있다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,장착하고 있던 {0:이|가} 검게 빛나면서 당신에게 신비한 힘이 들어온다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 모든 데미지를 반사한다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 회복한다.
-LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0}에서 차갑고 공허한 저주의 기운이 느껴진다.
-LOC_SYSTEM_GOD_YUYUKO_RECALL,{0}에게 유령을 내보냈다.
-LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0:이|가} 당신의 동료가 되었다.
-LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,당신은 {0:와|과} 자리를 뒤집었다.
-LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT,...세이자가 마지막 선물로 요술망치를 주고 갔다.
-LOC_SYSTEM_GOD_UI_LILLIY1,===당신의 동료 요정===
-LOC_SYSTEM_GOD_UI_LILLIY1_ALLY,{0}번째 동료:
-LOC_SYSTEM_GOD_UI_LILLIY1_LEVEL,레벨:
-LOC_SYSTEM_GOD_UI_LILLIY1_STATE,상태:
-LOC_SYSTEM_GOD_UI_LILLIY1_LIVE,생존
-LOC_SYSTEM_GOD_UI_LILLIY1_REVIVE,부활대기중
-LOC_SYSTEM_GOD_UI_LILLIY1_EMPTY,공석
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME1,메이
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME2,미토리
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME3,나노
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME4,나나
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME5,사츠키
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME6,아카
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME7,아오
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME8,아이
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME9,우미
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME10,피카
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME11,마저리
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME12,소냐
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME13,미아
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME14,샤인
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME15,파이
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME16,루시
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME17,리자
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME18,이브
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME19,에리카
-LOC_SYSTEM_GOD_LILLY_FAIRY_NAME20,소조보
-LOC_SYSTEM_GOD_LILLY_LEVEL_UP,{0:은|는} 강해졌다.
-LOC_SYSTEM_GOD_LILLY_CLASS_CHANGE,그동안 쌓은 경험으로 {0}에서 {1:이|가} 되었다.
-LOC_SYSTEM_GOD_LILLY_REVIVE,{0:은|는} 부활했다!
-LOC_SYSTEM_GOD_LILLY_INVITE,{0:은|는} 자신의 이름이 {1:이라|라}고 소개했다.
-LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL,이 요정을 권유하려면 {0}레벨이상이 되어야한다.
-LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,{0:은|는} 봄의 기운을 받아 체력이 회복되었다.
-LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,시야안에 있는 {0}명의 욕망을 읽어들였다.
-LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,당신은 {0} 타일을 문으로 만들었다.
-LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0:은|는} 문에 밀쳐져 튕겨나갔다!
-LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,밀쳐낼 자리가 없어서 문 위에 있는 {0:을|를} 밀쳐낼 수 없다.
-LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,이 곳은 문 뒤의 세계다. {푹 쉬다 가도록!|환영하네!|여기는 안전해보인다.}
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,정말 {0} 아이템을 순화할거야? (y/n)
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,순호는 당신의 {0} 아이템을 순화하였다!
-LOC_SYSTEM_GOD_PRAY1,당신은 {0}에게 기도헀다.
-LOC_SYSTEM_GOD_PRAY2,{0:은|는} 심기가 불편해보인다.
-LOC_SYSTEM_GOD_GIFT,{0}: 유용하게 쓰도록!
-LOC_SYSTEM_GOD_WRATH,{0}의 분노를 느꼈다.
-LOC_SYSTEM_GOD_FORGIVE,당신은 {0:으로|로}부터 용서받았다.
-LOC_SYSTEM_GOD_NOT_YET_FORGIVE,{0:은|는} 아직 당신을 용서하지않았다.
-LOC_SYSTEM_GOD_ABANDON,당신은 {0:을|를} 버렸다. 당신의 신은 분노했다.
-LOC_SYSTEM_GOD_ABANDONED,당신은 {0:으로|로}부터 버려졌다.
-LOC_SYSTEM_GOD_ABANDON_SATORI,당신은 {0:을|를} 버렸다. 당신의 신은 크게 신경쓰지 않는것 같다.
-LOC_SYSTEM_GOD_ABANDON_SANAE,당신은 {0:을|를} 버렸다. {1:은|는} 당신의 독립을 눈물을 머금고 이해했다.
+LOC_SYSTEM_EVENT_KOGASA_TIME2,...But Kogasa senses something went wrong.
+LOC_SYSTEM_EVENT_HOJOK1,{0} shouted, "I'll finish this!"
+LOC_SYSTEM_EVENT_HOJOK2,{0} shouted, "Leave it to me!"
+LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0} shouted, "I'll get you—*cough cough!*"
+LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...Looks like Kogasa inhaled too much of her own smoke.
+LOC_SYSTEM_EVENT_SION_ITEM,Item
+LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0} vanished as you got too close.
+LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,Items vanished as you got too close.
+LOC_SYSTEM_MON_DREAM_UNIQUE,Dream Dweller {0}
+LOC_SYSTEM_EVOKE_DREAM_SOUL,You have evoked the dream of {0}!
+LOC_SYSTEM_TRIBE_HUMAN,Human
+LOC_SYSTEM_TRIBE_WIZARD,Witch
+LOC_SYSTEM_TRIBE_FAIRY,Fairy
+LOC_SYSTEM_TRIBE_CROWTENGU,Crow Tengu
+LOC_SYSTEM_TRIBE_WOLFTENGU,Wolf Tengu
+LOC_SYSTEM_TRIBE_KAPPA,Kappa
+LOC_SYSTEM_TRIBE_NECOMATA,Nekomata
+LOC_SYSTEM_TRIBE_OARFISH,Messenger of the Dragon Palace
+LOC_SYSTEM_TRIBE_CHEUKUMOGAMI,Tsukumogami
+LOC_SYSTEM_TRIBE_ONI,Oni
+LOC_SYSTEM_TRIBE_HALFYOUKAI,Half-Youkai
+LOC_SYSTEM_TRIBE_WRAITH,Wraith
+LOC_SYSTEM_TRIBE_VAMPIRE,Vampire
+LOC_SYSTEM_TRIBE_YOUKAI,Youkai
+LOC_SYSTEM_JOB_WARRIOR,Warrior
+LOC_SYSTEM_JOB_WIZARD,Magician
+LOC_SYSTEM_JOB_SHAMAN,Shrine Maiden
+LOC_SYSTEM_JOB_GLADIATOR,Gladiator
+LOC_SYSTEM_JOB_MONK,Martial Artist
+LOC_SYSTEM_JOB_CRUSADER,Spellblade
+LOC_SYSTEM_JOB_BERSERKER,Berserker
+LOC_SYSTEM_JOB_FIRE_WIZARD,Pyromancer
+LOC_SYSTEM_JOB_COLD_WIZARD,Cryomancer
+LOC_SYSTEM_JOB_EARTH_WIZARD,Geomancer
+LOC_SYSTEM_JOB_AIR_WIZARD,Aeromancer
+LOC_SYSTEM_JOB_SUMMON_WIZARD,Summoner
+LOC_SYSTEM_JOB_ALCHEMIST,Alchemist
+LOC_SYSTEM_JOB_PSYCHOLOGIST,Psychologist
+LOC_SYSTEM_JOB_REAPER,Reaper
+LOC_SYSTEM_JOB_FANATIC,Fanatic
+LOC_SYSTEM_JOB_ASSASSIN,Assassin
+LOC_SYSTEM_JOB_FARMER,Farmer
+LOC_SYSTEM_JOB_MADE,Maid
+LOC_SYSTEM_JOB_ENGINEER,Engineer
+LOC_SYSTEM_JOB_MISSING,Missing Person
+LOC_SYSTEM_TILE_UNKNOWN,Unknown
+LOC_SYSTEM_TILE_FLOOR,Floor
+LOC_SYSTEM_TILE_OPEN_DOOR,Open Door
+LOC_SYSTEM_TILE_STAIR_DOWN,Stairs Down
+LOC_SYSTEM_TILE_STAIR_UP,Stairs Up
+LOC_SYSTEM_TILE_STAIR_TEMPLE,Stairs to the Divine Temples
+LOC_SYSTEM_TILE_STAIR_MISTY_LAKE,Stairs to the Misty Lake
+LOC_SYSTEM_TILE_STAIR_YOUKAI_MOUNTAIN,Stairs to Youkai Mountain
+LOC_SYSTEM_TILE_STAIR_SCARLET,Stairs to the Scarlet Mansion
+LOC_SYSTEM_TILE_STAIR_LIBRARY,Stairs to the Library
+LOC_SYSTEM_TILE_STAIR_SCARLET_UNDER,Stairs to the Basement
+LOC_SYSTEM_TILE_STAIR_BAMBOO,Path to the Bamboo Labyrinth
+LOC_SYSTEM_TILE_STAIR_EIENTEI,Stairs to Eientei
+LOC_SYSTEM_TILE_STAIR_SUBTERRANEAN,Hole to the Subterranean World
+LOC_SYSTEM_TILE_STAIR_YUKKURI,Stairs to the Yukkuri Nest
+LOC_SYSTEM_TILE_STAIR_DEPTH,Entrance to the Beastpath
+LOC_SYSTEM_TILE_STAIR_DREAM,Portal to the Dream World
+LOC_SYSTEM_TILE_STAIR_MOON,Path to the Lunar Capital
+LOC_SYSTEM_TILE_STAIR_PANDEMONIUM,Portal to Pandemonium
+LOC_SYSTEM_TILE_STAIR_HAKUREI,Stairs to the Hakurei Shrine
+LOC_SYSTEM_TILE_STAIR_ZIGURRAT,Portal to the World of Delirium
+LOC_SYSTEM_TILE_STAIR_RETURN,Stairs Returning to the Entrance
+LOC_SYSTEM_TILE_TEMPLE_JOON_AND_SION,The Dread Altar of Joon & Shion
+LOC_SYSTEM_TILE_TEMPLE_BYAKUREN,Byakuren’s Myouren Altar
+LOC_SYSTEM_TILE_TEMPLE_KANAKO,Kanako’s Moriya Altar
+LOC_SYSTEM_TILE_TEMPLE_SUWAKO,Suwako’s Mishaguji Altar
+LOC_SYSTEM_TILE_TEMPLE_MINORIKO,Minoriko’s Harvest Altar
+LOC_SYSTEM_TILE_TEMPLE_MIMA,Mima’s Spirit Altar
+LOC_SYSTEM_TILE_TEMPLE_SHINKI,Shinki’s Demon God Altar
+LOC_SYSTEM_TILE_TEMPLE_YUUGI,Yuugi’s Superhuman Strength Altar
+LOC_SYSTEM_TILE_TEMPLE_SHIZUHA,Shizuha’s Maple Altar
+LOC_SYSTEM_TILE_TEMPLE_HINA,Hina’s Misfortune Altar
+LOC_SYSTEM_TILE_TEMPLE_YUKARI,Yukari’s Gap Altar
+LOC_SYSTEM_TILE_TEMPLE_EIRIN,Eirin’s Elixir Altar
+LOC_SYSTEM_TILE_TEMPLE_YUYUKO,Yuyuko’s Phantom Blossom Altar
+LOC_SYSTEM_TILE_TEMPLE_SATORI,Satori’s Third Eye Altar
+LOC_SYSTEM_TILE_TEMPLE_TENSI,Tenshi’s Keystone Altar
+LOC_SYSTEM_TILE_TEMPLE_SEIJA,Seija’s Inverted Altar
+LOC_SYSTEM_TILE_TEMPLE_LILLY,Lily’s Sunflower Altar
+LOC_SYSTEM_TILE_TEMPLE_MIKO,Miko’s Shoutoku Altar
+LOC_SYSTEM_TILE_TEMPLE_OKINA,Okina’s Backdoor Altar
+LOC_SYSTEM_TILE_TEMPLE_JUNKO,Junko’s Divine Spirit Altar
+LOC_SYSTEM_TILE_STONE_WALL,Stone Wall
+LOC_SYSTEM_TILE_RED_WALL,Red Wall
+LOC_SYSTEM_TILE_BOOK_WALL,Bookshelf
+LOC_SYSTEM_TILE_BAMBOO_WALL,Dense Bamboo
+LOC_SYSTEM_TILE_PANDEMONIUM_WALL,Pandemonium Wall
+LOC_SYSTEM_TILE_WOOD,Wood
+LOC_SYSTEM_TILE_SUNFLOWER,Sunflower
+LOC_SYSTEM_TILE_HELL_WALL,Hell Wall
+LOC_SYSTEM_TILE_IRON_WALL,Iron Wall
+LOC_SYSTEM_TILE_WALL,Wall
+LOC_SYSTEM_TILE_CLOSE_DOOR,Closed Door
+LOC_SYSTEM_TILE_GRASS,Glass
+LOC_SYSTEM_TILE_STATUE,Statue
+LOC_SYSTEM_TILE_BUDDHA_STATUE,Jizo Statue
+LOC_SYSTEM_TILE_DEEP_WATER,Deep Water
+LOC_SYSTEM_TILE_LAVA,Lava
+LOC_SYSTEM_SKL_KANAKO_1,Summon Divine Rock
+LOC_SYSTEM_SKL_KANAKO_2,Summon Divine Rain
+LOC_SYSTEM_SKL_KANAKO_3,Summon Divine Wind
+LOC_SYSTEM_SKL_GRAZE,Activate Graze
+LOC_SYSTEM_SKL_GRAZE_OFF,Deactivate Graze
+LOC_SYSTEM_SKL_LEVITATION,Activate Levitation
+LOC_SYSTEM_SKL_LEVITATION_OFF,Deactivate Levitation
+LOC_SYSTEM_SKL_INVISIBLE,Activate Invisibility
+LOC_SYSTEM_SKL_INVISIBLE_OFF,Deactivate Invisibility
+LOC_SYSTEM_SKL_EIRIN_0,Throw Potion
+LOC_SYSTEM_SKL_EIRIN_1,Bodily Enhancement
+LOC_SYSTEM_SKL_EIRIN_2,Emergency Transfusion
+LOC_SYSTEM_SKL_BYAKUREN_1,Mind Empowerment
+LOC_SYSTEM_SKL_BYAKUREN_2,Body Empowerment
+LOC_SYSTEM_SKL_SIZUHA_1,Leaves of Madness
+LOC_SYSTEM_SKL_SIZUHA_2,Autumn Armor
+LOC_SYSTEM_SKL_SIZUHA_3,Imbue Weapon with Autumn
+LOC_SYSTEM_SKL_MINORIKO_1,Restore Attributes
+LOC_SYSTEM_SKL_MINORIKO_2,Restore Health
+LOC_SYSTEM_SKL_YUUGI_1,Drink Sake
+LOC_SYSTEM_SKL_YUUGI_2,German Suplex
+LOC_SYSTEM_SKL_YUUGI_3,Throw
+LOC_SYSTEM_SKL_YUUGI_4,Howl of Annihilation
+LOC_SYSTEM_SKL_YUUGI_5,Triple Ultimate Technique
+LOC_SYSTEM_SKL_SATORI_1,Trauma
+LOC_SYSTEM_SKL_SATORI_2,Mind Reading
+LOC_SYSTEM_SKL_SHINKI_1,Summon Lesser Demon
+LOC_SYSTEM_SKL_SHINKI_2,Summon Intermediate Demon
+LOC_SYSTEM_SKL_SHINKI_3,Summon Greater Demon
+LOC_SYSTEM_SKL_YUYUKO_ON,Ghost Summoning Activated
+LOC_SYSTEM_SKL_YUYUKO_OFF,Ghost Summoning Deactivated
+LOC_SYSTEM_SKL_YUYUKO_1,Command Ghosts
+LOC_SYSTEM_SKL_YUYUKO_2,Hasten Ghost Summoning
+LOC_SYSTEM_SKL_YUYUKO_3,Bind Ghosts
+LOC_SYSTEM_SKL_YUKARI_1,Eye That Sees Distortion
+LOC_SYSTEM_SKL_YUKARI_2,Phantasm Reflecting Blood Illusion
+LOC_SYSTEM_SKL_YUKARI_3,Quadruple Barrier
+LOC_SYSTEM_SKL_YUKARI_4,Dimensional Lock
+LOC_SYSTEM_SKL_SWAKO_JUMP,Frog Jump
+LOC_SYSTEM_SKL_SWAKO_TEMPLE,Erect Shrine
+LOC_SYSTEM_SKL_SWAKO_WATER_GUN,Water Gun
+LOC_SYSTEM_SKL_SWAKO_TOUGUE,Frog Tongue
+LOC_SYSTEM_SKL_SWAKO_CURSE,Curse of the Native God
+LOC_SYSTEM_SKL_SWAKO_DIGGING,Excavation
+LOC_SYSTEM_SKL_SWAKO_SUMMON_FLOG,Summon Frogs
+LOC_SYSTEM_SKL_SWAKO_STATUE,Erect Statue
+LOC_SYSTEM_SKL_SWAKO_RAIN,Call Rain
+LOC_SYSTEM_SKL_SWAKO_SLEEP,Hibernate
+LOC_SYSTEM_SKL_SWAKO_MISYAGUZI,Summon Mishaguji
+LOC_SYSTEM_SKL_HINA_1,Dispel Misfortune
+LOC_SYSTEM_SKL_HINA_2,Curse Weapon (Empower)
+LOC_SYSTEM_SKL_HINA_3,Curse Armor (Reflect)
+LOC_SYSTEM_SKL_HINA_4,Curse Accessory (Regeneration)
+LOC_SYSTEM_SKL_HINA_5,Imbue Weapon with Curse
+LOC_SYSTEM_SKL_JUMPING_ATTACK,Jumping Attack
+LOC_SYSTEM_SKL_BREATH,Breath
+LOC_SYSTEM_SKL_BREATH_FIRE,Fire Breath
+LOC_SYSTEM_SKL_BREATH_COLDE,Cold Breath
+LOC_SYSTEM_SKL_BREATH_ELEC,Electric Breath
+LOC_SYSTEM_SKL_TORMENT,Torment of Hell
+LOC_SYSTEM_SKL_ABANDON_GOD,Renounce Deity
+LOC_SYSTEM_SKL_SEIJA_GIFT,Receive Treasure
+LOC_SYSTEM_SKL_SEIJA_1,Reverse Position
+LOC_SYSTEM_SKL_SEIJA_2,Inversion of Heaven and Earth
+LOC_SYSTEM_SKL_LILLY_1,Invite Ally
+LOC_SYSTEM_SKL_LILLY_2,Call Fairies
+LOC_SYSTEM_SKL_LILLY_3,Healing of Spring
+LOC_SYSTEM_SKL_LILLY_4,Great Fairy War
+LOC_SYSTEM_SKL_PHILOSOPHERS_1,Fire - Fireball
+LOC_SYSTEM_SKL_PHILOSOPHERS_2,Water - Water Cannon
+LOC_SYSTEM_SKL_PHILOSOPHERS_3,Wood - Gale Balloon
+LOC_SYSTEM_SKL_PHILOSOPHERS_4,Metal - Emerald City
+LOC_SYSTEM_SKL_PHILOSOPHERS_5,Earth - Tectonic Uplift
+LOC_SYSTEM_SKL_OKINA_1,Create Door
+LOC_SYSTEM_SKL_OKINA_2,Lock Door
+LOC_SYSTEM_SKL_OKINA_3,Into the Backdoor
+LOC_SYSTEM_SKL_OKINA_4,Crazy Backdancers
+LOC_SYSTEM_SKL_OKINA_5,Backdoor Emergency Escape
+LOC_SYSTEM_SKL_JUNKO_1,Simple Danmaku
+LOC_SYSTEM_SKL_JUNKO_2,Pure Strength
+LOC_SYSTEM_SKL_JUNKO_3,Pure Killing Intent
+LOC_SYSTEM_SKL_JUNKO_4,Purification
+LOC_SYSTEM_SKL_JOON_AND_SION_1,Possession
+LOC_SYSTEM_SKL_JOON_AND_SION_2,Queen of Bubble
+LOC_SYSTEM_SKL_JOON_AND_SION_3,Misschance Scatter
+LOC_SYSTEM_SKL_JOON_AND_SION_4,Absolute Loser
+LOC_SYSTEM_SKL_JOON_AND_SION_OFF,Forced Unpossession
+LOC_SYSTEM_SKL_MIKO_1,Desire Accumulation
+LOC_SYSTEM_SKL_MIKO_2,Cloak of Teleportation
+LOC_SYSTEM_SKL_MIKO_3,Halo
+LOC_SYSTEM_SKL_MIKO_4,Gain Resistance
+LOC_SYSTEM_SKL_MIKO_5,Red Cloak, Blue Cloak
+LOC_SYSTEM_SKL_MIKO_6,Popularity Boom
+LOC_SYSTEM_SKL_UKNOWN,Unknown Ability
+LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
+LOC_SYSTEM_ITEM_CATEGORY_TANMAC,Danmaku
+LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,Armor
+LOC_SYSTEM_ITEM_CATEGORY_POTION,Potion
+LOC_SYSTEM_ITEM_CATEGORY_FOOD,Food
+LOC_SYSTEM_ITEM_CATEGORY_SCROLL,Scroll
+LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD,Spell Card
+LOC_SYSTEM_ITEM_CATEGORY_JEWELRY,Accessory
+LOC_SYSTEM_ITEM_CATEGORY_BOOK,Book
+LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,Evocable
+LOC_SYSTEM_ITEM_CATEGORY_GOAL,Important
+LOC_SYSTEM_ITEM_CATEGORY_OTHER,Miscellaneous
+LOC_SYSTEM_SPELLCARD,Spell Card
+LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}’s Spell Card
+LOC_SYSTEM_SPELLCARD_INVISIBLE,Invisibility
+LOC_SYSTEM_SPELLCARD_FIRE,Fire
+LOC_SYSTEM_SPELLCARD_ICE,Ice
+LOC_SYSTEM_SPELLCARD_AIR,Wind
+LOC_SYSTEM_SPELLCARD_METAL,Metal
+LOC_SYSTEM_SPELLCARD_EARTH,Earth
+LOC_SYSTEM_SPELLCARD_SUN,Sun
+LOC_SYSTEM_SPELLCARD_AIR_EFFECT,{0} was blown away by the wind.
+LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER,Dagger
+LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE,Throwing Knife
+LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_SHORTSWORD,Shortsword
+LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_KATANA,Katana
+LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_SCIMITAR,Scimitar
+LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_GREATSWORD,Greatsword
+LOC_SYSTEM_ITEM_WEAPON_LONGBLADE_CHAKRAM,Chakram
+LOC_SYSTEM_ITEM_WEAPON_AXE_HANDAXE,Hand Axe
+LOC_SYSTEM_ITEM_WEAPON_AXE_BATTLEAXE,Battle Axe
+LOC_SYSTEM_ITEM_WEAPON_AXE_ANCHOR,Anchor
+LOC_SYSTEM_ITEM_WEAPON_MACE_GOHEI,Gohei
+LOC_SYSTEM_ITEM_WEAPON_MACE_BROOMSTICK,Broomstick
+LOC_SYSTEM_ITEM_WEAPON_MACE_UMBRELLA,Parasol
+LOC_SYSTEM_ITEM_WEAPON_MACE_DAUZING_ROD,Dowsing Rod
+LOC_SYSTEM_ITEM_WEAPON_MACE_ONBASIRA,Onbashira
+LOC_SYSTEM_ITEM_WEAPON_SPEAR_SPEAR,Spear
+LOC_SYSTEM_ITEM_WEAPON_SPEAR_JAVELIN,Javelin
+LOC_SYSTEM_ITEM_WEAPON_SPEAR_SCYTHE,Scythe
+LOC_SYSTEM_ITEM_WEAPON_SPEAR_TRIDENT,Trident
+LOC_SYSTEM_ITEM_WEAPON_SPEAR_BAMBOO_SPEAR,Bamboo Spear
+LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,Cloth
+LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,Leather
+LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,Chain
+LOC_SYSTEM_ITEM_ARMOUR_M_PLATE,Plate
+LOC_SYSTEM_ITEM_ARMOUR_T_NORMAL,{0}'s Outfit
+LOC_SYSTEM_ITEM_ARMOUR_T_MIKO,{0}'s Shrine Maiden Robe
+LOC_SYSTEM_ITEM_ARMOUR_T_WING,{0}'s Winged Garment
+LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0}'s Kappa Suit
+LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0}'s Fire-Rat Robe
+LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0}'s Maid Outfit
+LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0}'s Doll Dress
+LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0}'s Autumn Garment
+LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,Wooden Shield
+LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD,Iron Shield
+LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD,Kite Shield
+LOC_SYSTEM_ITEM_ARMOUR_SHIELD_BUGSHIELD,Bug Shield
+LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON,Ribbon
+LOC_SYSTEM_ITEM_ARMOUR_HEAD_HEADBAND,Headband
+LOC_SYSTEM_ITEM_ARMOUR_HEAD_HAT,Hat
+LOC_SYSTEM_ITEM_ARMOUR_CLOAK,Cloak
+LOC_SYSTEM_ITEM_ARMOUR_GLOVE,Gloves
+LOC_SYSTEM_ITEM_ARMOUR_SHOES,Shoes
+LOC_SYSTEM_ITEM_ARMOUR_RUNED,Rune-Inscribed
+LOC_SYSTEM_ITEM_ARTIFACT,Artifact
+LOC_SYSTEM_ITEM_JEWELRY_RING,Ring
+LOC_SYSTEM_ITEM_JEWELRY_AMULET,Amulet
+LOC_SYSTEM_ITEM_FOOD_BREAD,Bread
+LOC_SYSTEM_ITEM_FOOD_SWEETPOTATO,Roasted Sweet Potato
+LOC_SYSTEM_ITEM_FOOD_CHOCOLET,Chocolate
+LOC_SYSTEM_ITEM_FOOD_CUCUMBER,Cucumber
+LOC_SYSTEM_ITEM_FOOD_P_ITEM,P-Item
+LOC_SYSTEM_ITEM_POTION_POTION,Potion
+LOC_SYSTEM_ITEM_SCROLL_SCROLL,Scroll
+LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,The equipped {0} shone black.
+LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,The equipped {0} shone red.
+LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0} shone green.
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0} has been recharged.
+LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0} was engulfed in an unknown light!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE,{0} was engulfed in flames!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_COLD,{0} emitted a chilling aura!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_POISON,{0} released a toxic cloud!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN,{0} began emitting mana!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0} radiated mysterious energy!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0} glowed with a protective aura!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,Your weapon has been enchanted with magic!
+LOC_SYSTEM_ITEM_BOOK_DROP,Dropped Spellbook
+LOC_SYSTEM_ITEM_BOOK_FIRE_BASE,Beginner's Pyromancy Book
+LOC_SYSTEM_ITEM_BOOK_COLD_BASE,Beginner's Cryomancy Book
+LOC_SYSTEM_ITEM_BOOK_POISON_BASE,Beginner's Toxicology Book
+LOC_SYSTEM_ITEM_BOOK_WIZARD_BASE,Beginner's Wizardry Book
+LOC_SYSTEM_ITEM_BOOK_EARTH_BASE,Beginner's Geomancy Book
+LOC_SYSTEM_ITEM_BOOK_AIR_BASE,Beginner's Aeromancy Book
+LOC_SYSTEM_ITEM_BOOK_SUMMON_BASE,Beginner's Summoning Book
+LOC_SYSTEM_ITEM_BOOK_ALCHMIST_BASE,Beginner's Alchemy Book
+LOC_SYSTEM_ITEM_BOOK_PSYCHOLOGIST_BASE,Beginner's Psychology Book
+LOC_SYSTEM_ITEM_BOOK_BRAND_BASE,Beginner's Spellblade Manual
+LOC_SYSTEM_ITEM_BOOK_MAID_BASE,Maid’s Code of Conduct
+LOC_SYSTEM_ITEM_BOOK_SHOCK,Book of Shock
+LOC_SYSTEM_ITEM_BOOK_PRACTICE,Book of Elemental Practice
+LOC_SYSTEM_ITEM_BOOK_SUB,Book of Support
+LOC_SYSTEM_ITEM_BOOK_STALKING,Book of Assassination
+LOC_SYSTEM_ITEM_BOOK_CLOUD,Book of Clouds
+LOC_SYSTEM_ITEM_BOOK_CONJURE,Book of Destruction
+LOC_SYSTEM_ITEM_BOOK_HEX,Book of Enchantment
+LOC_SYSTEM_ITEM_BOOK_DEFENSE,Book of Defense
+LOC_SYSTEM_ITEM_BOOK_ENCHANT,Introduction to Feng Shui
+LOC_SYSTEM_ITEM_BOOK_TRANSITION,Book of Transposition
+LOC_SYSTEM_ITEM_BOOK_TENSI,Tenshi’s Secret Tome
+LOC_SYSTEM_ITEM_BOOK_TEST_ANNIHILATE,Mima’s Sealed Grimoire
+LOC_SYSTEM_ITEM_BOOK_DEBUF,Handbook of Mind Domination
+LOC_SYSTEM_ITEM_BOOK_MAID_ULTI,Maid’s Secret Tome
+LOC_SYSTEM_ITEM_BOOK_ICE_ULTI,Fairy of Ice: Secret Arts
+LOC_SYSTEM_ITEM_BOOK_SUMMON_ULTI,Alice’s Book of Thaumaturgy
+LOC_SYSTEM_ITEM_BOOK_AIR_ULTI,Tengu’s Action Manga
+LOC_SYSTEM_ITEM_BOOK_ALCHMY_ULTI,Magnum Opus
+LOC_SYSTEM_ITEM_BOOK_RANDOM1,Book with a Red Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM2,Book with a Green Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM3,Book with a Blue Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM4,Book with a Yellow Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM5,Book with a Pink Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM6,Book with an Orange Cover
+LOC_SYSTEM_ITEM_BOOK_RANDOM7,Book with a Purple Cover
+LOC_SYSTEM_ITEM_TANMAC_BUG,Bug Danmaku
+LOC_SYSTEM_ITEM_TANMAC_AMULET,Homing Amulet
+LOC_SYSTEM_ITEM_TANMAC_POISON_NEEDLE,Venom Shuriken
+LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER,Kiku-ichimonji Compressor
+LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO,Doggojeo
+LOC_SYSTEM_ITEM_EVOKE_PAGODA,Pagoda
+LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,Air Scroll
+LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,Dream Soul
+LOC_SYSTEM_ITEM_EVOKE_BOMB,Type-4 Magic Bomb
+LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,Okuri-Chochin
+LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,Sky Torpedo
+LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,Magic Hammer
+LOC_SYSTEM_ITEM_EVOKE_CAMERA,Camera
+LOC_SYSTEM_ITEM_RUNE_RUNE,Rune
+LOC_SYSTEM_ITEM_RUNE_SCARLET,Scarlet Devil Mansion
+LOC_SYSTEM_ITEM_RUNE_YOUKAI_MOUNTAIN,Youkai Mountain
+LOC_SYSTEM_ITEM_RUNE_FLANDRE,Flandre
+LOC_SYSTEM_ITEM_RUNE_YUKKURI,Yukkuri
+LOC_SYSTEM_ITEM_RUNE_EIENTEI,Eientei
+LOC_SYSTEM_ITEM_RUNE_SUBTERRANEAN,Underground
+LOC_SYSTEM_ITEM_RUNE_MOON,Moon
+LOC_SYSTEM_ITEM_RUNE_HOKKAI,Hokkai
+LOC_SYSTEM_ITEM_RUNE_FROZEN_FIELD,Frozen Field
+LOC_SYSTEM_ITEM_RUNE_PANDEMONIUM,Pandemonium
+LOC_SYSTEM_ITEM_YINYANG,Yin-Yang Orb
+LOC_SYSTEM_ITEM_CAMERA_PHOTO,Photo of {0}
+LOC_SYSTEM_ITEM_ETC_SATORI,Missing Poster
+LOC_SYSTEM_ITEM_ETC_CATNIP,Catnip Tree
+LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,Broken Camera
+LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,Kappa Junk
+LOC_SYSTEM_ITEM_ETC_PHOTO,Photograph
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
+LOC_SYSTEM_ENSLAVE_GHOST,Soul of {0}
+LOC_SYSTEM_GOD_ERROR,Unknown Deity
+LOC_SYSTEM_GOD_JOON_AND_SION,Joon & Shion
+LOC_SYSTEM_GOD_BYAKUREN,Byakuren
+LOC_SYSTEM_GOD_KANAKO,Kanako
+LOC_SYSTEM_GOD_SUWAKO,Suwako
+LOC_SYSTEM_GOD_MINORIKO,Minoriko
+LOC_SYSTEM_GOD_MIMA,Mima
+LOC_SYSTEM_GOD_SHINKI,Shinki
+LOC_SYSTEM_GOD_YUUGI,Yuugi
+LOC_SYSTEM_GOD_SHIZUHA,Shizuha
+LOC_SYSTEM_GOD_HINA,Hina
+LOC_SYSTEM_GOD_YUKARI,Yukari
+LOC_SYSTEM_GOD_EIRIN,Eirin
+LOC_SYSTEM_GOD_YUYUKO,Yuyuko
+LOC_SYSTEM_GOD_SATORI,Satori
+LOC_SYSTEM_GOD_TENSI,Tenshi
+LOC_SYSTEM_GOD_SEIJA,Seija
+LOC_SYSTEM_GOD_LILLY,Lily
+LOC_SYSTEM_GOD_MIKO,Miko
+LOC_SYSTEM_GOD_OKINA,Okina
+LOC_SYSTEM_GOD_JUNKO,Junko
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,You begin to waste and lose consumables due to the curses of the Plague and Poverty gods.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,You can now possess Joon or Shion.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,You can no longer possess Joon or Shion.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_ADD,While possessed, you gain effects that consume Power depending on the possessed god.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_REMOVE,You no longer gain Power-based effects while possessed.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_ADD,While possessed, you gain effects that consume items depending on the possessed god.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_REMOVE,You no longer gain item-based effects while possessed.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_ADD,Each time you possess, you can use that god's ultimate skill once.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_REMOVE,You can no longer use the god’s ultimate skill during possession.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_ADD,You can now use the ultimate and most ruthless strategy that guarantees victory.
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_REMOVE,You can no longer use the ultimate and most ruthless strategy.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_ADD,Hijiri increases your maximum learnable magic level.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_REMOVE,Your maximum learnable magic level is no longer increased.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_ADD,You can now temporarily boost your Intelligence.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_REMOVE,You can no longer boost your Intelligence temporarily.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,With enhanced Strength, you ignore low armor penalties to magic failure.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_REMOVE,You no longer receive the blessing of Strength enhancement.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_ADD,Hijiri now assists your enhancement spells.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_REMOVE,You are no longer assisted by Hijiri’s enhancement support.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_ADD,Blessed by Hijiri, you can now sprint with superhuman Dexterity.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_REMOVE,You can no longer sprint with superhuman Dexterity.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_ADD,You can now lunge at enemies instantly.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_REMOVE,You can no longer perform instant lunges.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_ADD,You can now summon a sacred pillar.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_REMOVE,You can no longer summon a sacred pillar.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_ADD,You can now strike with wind-imbued attacks.
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_REMOVE,You can no longer strike with wind-imbued attacks.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_ADD,The higher your Power, the faster you regenerate HP and MP.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_REMOVE,You no longer regenerate HP and MP faster based on Power.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_ADD,You can now recover from status ailments and stat debuffs.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_REMOVE,You can no longer recover from status ailments and stat debuffs.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_ADD,You can now eat faster and recover a bit of MP.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_REMOVE,You can no longer eat quickly.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_ADD,You can now consume food and P to recover a large amount of HP.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_REMOVE,You can no longer recover HP through food.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_ADD,You gain resistance to fire and cold right after eating.
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_REMOVE,Eating no longer grants resistance to fire or cold.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_ADD,Your max MP increases in proportion to your faith.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_REMOVE,Your max MP has decreased.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_ADD,You gain MP when you slay an enemy.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_REMOVE,You no longer gain MP from killing enemies.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_ADD,Mima now empowers destructive magic.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE,Destructive magic is no longer empowered.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_ADD,Mima now boosts the success rate of destructive spells.
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE,Destructive spells are no longer assisted in success rate.
+LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, you wasted {0} {1}.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cannot be possessed.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
+LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,Pulled in {0}.
+LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,A calamity was cast upon {0}.
+LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
+LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
+LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,Mima aimed a powerful {0} at you!
+LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,Low-ranking demons of Makai have been summoned to aid you.
+LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0} doesn't look very pleased.
+LOC_SYSTEM_GOD_YUUGI_CATCH,Caught {0}.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense? (y/n)
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
+LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,Hina infused your equipment with misfortune!
+LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,{0} you were wearing glowed darkly.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0} is brimming with cursed power.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,{0} glowed darkly, filling you with mysterious strength.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly — you now reflect all damage.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly — you feel yourself healing.
+LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0} emanates a cold, hollow aura of curse.
+LOC_SYSTEM_GOD_YUYUKO_RECALL,Sent a ghost to {0}.
+LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
+LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,You swapped places with {0}.
+LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT,...Seija left behind a magic hammer as her final gift.
+LOC_SYSTEM_GOD_UI_LILLIY1,===Your Fairy Companions===
+LOC_SYSTEM_GOD_UI_LILLIY1_ALLY,Companion {0}:
+LOC_SYSTEM_GOD_UI_LILLIY1_LEVEL,Level:
+LOC_SYSTEM_GOD_UI_LILLIY1_STATE,Status:
+LOC_SYSTEM_GOD_UI_LILLIY1_LIVE,Alive
+LOC_SYSTEM_GOD_UI_LILLIY1_REVIVE,Awaiting Revival
+LOC_SYSTEM_GOD_UI_LILLIY1_EMPTY,Empty Slot
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME1,Mei
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME2,Mitori
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME3,Nano
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME4,Nana
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME5,Satsuki
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME6,Aka
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME7,Ao
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME8,Ai
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME9,Umi
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME10,Pika
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME11,Marjorie
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME12,Sonya
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME13,Mia
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME14,Shine
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME15,Pai
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME16,Lucy
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME17,Liza
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME18,Eve
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME19,Erika
+LOC_SYSTEM_GOD_LILLY_FAIRY_NAME20,Sojobo
+LOC_SYSTEM_GOD_LILLY_LEVEL_UP,{0} has grown stronger.
+LOC_SYSTEM_GOD_LILLY_CLASS_CHANGE,Through accumulated experience, {1} has evolved from {0}.
+LOC_SYSTEM_GOD_LILLY_REVIVE,{0} has revived!
+LOC_SYSTEM_GOD_LILLY_INVITE,{0} introduced herself as {1}.
+LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL,You must be at least level {0} to recruit this fairy.
+LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,{0} was healed by the essence of spring.
+LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
+LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,You turned the {0} tile into a door.
+LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0} was pushed away by the closing door!
+LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,There’s no space to push away {0} on the door.
+LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,This is the world beyond the door. {Take a good rest!|Welcome!|This place looks safe.}
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify the item {0}? (y/n)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
+LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.
+LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
+LOC_SYSTEM_GOD_GIFT,{0}: Use this well!
+LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.
+LOC_SYSTEM_GOD_FORGIVE,You have been forgiven by {0}.
+LOC_SYSTEM_GOD_NOT_YET_FORGIVE,{0} has not forgiven you yet.
+LOC_SYSTEM_GOD_ABANDON,You abandoned {0}. Your god is enraged.
+LOC_SYSTEM_GOD_ABANDONED,You were forsaken by {0}.
+LOC_SYSTEM_GOD_ABANDON_SATORI,You abandoned {0}. Your god doesn’t seem to mind much.
+LOC_SYSTEM_GOD_ABANDON_SANAE,You abandoned {0}. {1} tearfully accepted your independence.

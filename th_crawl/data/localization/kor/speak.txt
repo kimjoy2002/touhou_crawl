@@ -1492,7 +1492,7 @@ SPEAK_FAIRY_SHY_FREIND1,{0:은|는} 말했다. "저기... 고마워"
 SPEAK_FAIRY_SHY_FREIND2,{0:은|는} 얼굴을 붉히고 있다.
 SPEAK_FAIRY_SHY_FREIND3,{0:은|는} 조심스럽게 말했다. "나도 힘이 되고 있지?"
 SPEAK_FAIRY_SHY_FREIND4,{0:은|는} 당신에게 존경의 시선을 날린다.
-SPEAK_FAIRY_SHY_FREIND5,{0:은|COMMON는} 말했다. "무리하지마..."
+SPEAK_FAIRY_SHY_FREIND5,{0:은|는} 말했다. "무리하지마..."
 SPEAK_FAIRY_SHY_FREIND6,{0:은|는} 근처에서 꽃을 따고 있다.
 SPEAK_FAIRY_SHY_ENTER,{0:은|는} 수줍게 고개를 끄덕였다.
 SPEAK_FAIRY_SHY_FAIRY_WAR,{0:은|는} 외쳤다. "...열심히 해볼게!"

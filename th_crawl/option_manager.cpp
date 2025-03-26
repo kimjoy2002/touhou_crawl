@@ -13,6 +13,7 @@
 optionManager option_mg("./config.ini");
 
 optionManager::optionManager(string fileName) {
+	this->fileName = fileName;
 	struct stat stStat = { 0 };
 
 	if (stat(fileName.c_str(), &stStat) == -1){
@@ -43,6 +44,8 @@ optionManager::optionManager(string fileName) {
 		GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		server_port = _tstoi(szBuf);
 
+		GetPrivateProfileString(_T("config"), _T("language"), _T("ENG"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		lang = TCHARToString(szBuf);
 	}
 }
 
@@ -74,7 +77,21 @@ void optionManager::createNewFile(string fileName) {
 	strString = _T("12345");
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
+
+	strString = _T("ENG");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("language"), tchr, fileName.c_str());
 }
+
+void optionManager::setLang(const string& lang_value) {
+    lang = lang_value;  // lang이 string일 경우
+
+	if(!fileName.empty()) {
+		CString strLang(lang_value.c_str());
+		WritePrivateProfileString(_T("config"), _T("language"), strLang, fileName.c_str());
+	}
+}
+
 
 string optionManager::TCHARToString(const TCHAR* ptsz)
 {

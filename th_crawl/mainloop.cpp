@@ -249,8 +249,24 @@ void Test_char_init(item_type item_, int bonus)
 void addItem_temp(item_type item_type_, int item_id, int num);
 extern void start_mainmenu();
 
+
+LOCALIZATION_TYPE getDefaultLang() {
+	string lang = option_mg.getLang();
+    std::transform(lang.begin(), lang.end(), lang.begin(), ::tolower);
+
+	if(lang == "eng") {
+		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_ENG;
+	}
+	else if (lang == "kor") {
+		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_KOR;
+	} else {
+		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_ENG;
+	}
+}
+
+
 void init_localization() {
-	LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_KOR);
+	LocalzationManager::init(getDefaultLang());
 }
 
 
@@ -696,4 +712,56 @@ void MainLoop()
 			break;
 		}
 	}
+}
+
+
+
+bool option_menu(int value_)
+{
+	char blank[32];
+	sprintf_s(blank,32,"            ");
+
+	while(1)
+	{
+		deletesub();
+
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub(blank,false,CL_warning);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_START),true,CL_help);
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE),true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_ESC),true,CL_normal);
+		
+		changedisplay(DT_SUB_TEXT);
+		int input_ = waitkeyinput(true);
+
+		if(input_ >= 'a' && input_ <= 'a')
+		{
+			if(input_ == 'a') {
+				int cur = (int)LocalzationManager::current_lang;
+
+				cur++;
+				if(cur == LOCALIZATION_TYPE::LOCALIZATION_TYPE_MAX)  {
+					cur = 0;
+				}
+				
+				LocalzationManager::init((LOCALIZATION_TYPE)cur);
+				option_mg.setLang(getLocalizationString((LOCALIZATION_TYPE)cur));
+			}
+		}
+		else if(input_ == VK_ESCAPE)
+		{
+			break;
+		}
+
+	}
+	changedisplay(DT_TEXT);
+	start_mainmenu();
+
+	return false;
 }

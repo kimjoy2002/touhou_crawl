@@ -17,7 +17,7 @@
 
 using namespace std;
 class optionManager {
-
+	string fileName;
 	string name;
 
 	int height;
@@ -28,6 +28,8 @@ class optionManager {
 	
 	string server_ip;
 	int server_port;
+
+	string lang;
 
 private:
 	optionManager() {};
@@ -50,6 +52,9 @@ public:
 
 	string getServerIp() { return server_ip; };
 	int getServerPort() { return server_port; };
+
+	void setLang(const string& lang_value);
+	string getLang() { return lang; };
 
 private:
 	string TCHARToString(const TCHAR* ptsz);

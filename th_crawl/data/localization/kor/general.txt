@@ -1,4 +1,7 @@
-﻿LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
+﻿LOC_SYSTEM_OPTION_MENU_START,======옵션======
+LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - 언어 : 한국어
+LOC_SYSTEM_OPTION_MENU_ESC,esc - 뒤로가기
+LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
 LOC_SYSTEM_LOS_NOMON,시야안에 몬스터가 없다.
 LOC_SYSTEM_CONFUSE_WARNING,당신은 혼란스럽다.
 LOC_SYSTEM_DIMENSTION,차원이 고정된 상태에서는 지원되지않는다.

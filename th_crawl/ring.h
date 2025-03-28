@@ -12,8 +12,8 @@
 
 #include "player.h"
 
-extern char *ring_uniden_string[RGT_MAX];
-extern const char *ring_iden_string[RGT_MAX];
+extern LOCALIZATION_ENUM_KEY ring_uniden_string[RGT_MAX];
+extern LOCALIZATION_ENUM_KEY ring_iden_string[RGT_MAX];
 
 
 int isRingGotValue(ring_type ring_);

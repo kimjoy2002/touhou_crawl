@@ -21,7 +21,7 @@ extern LOCALIZATION_ENUM_KEY tribe_type_string[]; //종족스트링
 extern LOCALIZATION_ENUM_KEY job_type_string[]; //직업스트링
 
 
-LOCALIZATION_ENUM_KEY dungeon_tile_tribe_type_string[]; //타일스트링
+extern LOCALIZATION_ENUM_KEY dungeon_tile_tribe_type_string[]; //타일스트링
 
 extern LOCALIZATION_ENUM_KEY rune_string[];
 

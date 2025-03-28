@@ -3984,7 +3984,9 @@ bool god_punish(god_type god)
 				
 			while(god_ == GT_SEIJA || god_ == GT_SATORI)
 				god_ = (god_type)rand_int(GT_BYAKUREN,GT_LILLY);
-			printarray(true,false,false,CL_seija,3,"세이자는 당신과 ",GetGodString(god_),"의 관계를 이간질했다!");
+				
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SEIJA_PUNISH,true,false,false,CL_seija,
+				PlaceHolderHelper(GetGodString(god_)));
 			
 			you.PunishUpDown(rand_int(3,4),god_);
 		}

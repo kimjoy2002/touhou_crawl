@@ -2318,7 +2318,8 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_ROCK)), true);
+					attack_infor attack_infor_(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_ROCK));
+					hit_->damage(attack_infor_, true);
 		
 					//hit_->damage(att_, true);
 				}
@@ -2426,10 +2427,11 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) //플랑은 면역(나중에 폭팔면역추가?)
-						hit_->damage(attack_infor(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST)), true);
+					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) { //플랑은 면역(나중에 폭팔면역추가?)
+						attack_infor attack_infor_(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST));
+						hit_->damage(attack_infor_, true);				
+					}
 				}
-
 			}
 		}
 		Sleep(300);
@@ -3585,7 +3587,8 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					hit_->damage(attack_infor(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_THUNDER)), true);
+					attack_infor attack_infor_(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_THUNDER));
+					hit_->damage(attack_infor_, true);
 				}
 			}
 		}
@@ -3741,7 +3744,8 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y,&you))
 				{
-					hit_->damage(attack_infor(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_MACROBURST)), true);
+					attack_infor attack_infor_(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_MACROBURST));
+					hit_->damage(attack_infor_, true);
 					
 				}
 				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
@@ -3943,7 +3947,8 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
 					int damage_ = 10+power/6;
-					hit_->damage(attack_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD)), true);
+					attack_infor attack_infor_(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD));
+					hit_->damage(attack_infor_, true);
 				}
 
 			}
@@ -4035,7 +4040,8 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 		int damage_ = hit_mon->GetHp() / 2;
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_AFTERLIFE,true,false,false,CL_small_danger,
 			 PlaceHolderHelper(order->GetName()->getName()));
-		hit_mon->damage(attack_infor(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor(LOC_SYSTEM_ATT_SHORT_LIFE_EXPECTACNY)), true);
+		attack_infor attack_infor_(damage_, damage_, 99, order, order->GetParentType(), ATT_SMITE, name_infor(LOC_SYSTEM_ATT_SHORT_LIFE_EXPECTACNY));
+		hit_mon->damage(attack_infor_, true);
 		if (order)
 		{
 			order->SetExhausted(rand_int(10, 15));
@@ -5539,8 +5545,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	}
 	if (order->s_clever) {
 		power *= 1.5f;
-		if(wiz_list.wizard_mode == 1)
-			printarray(false, false, false, CL_danger,3,"debug)",order->GetName()->getName()," clever");
+		if(wiz_list.wizard_mode == 1) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_DEBUG_CLEVER,false,false,false,CL_danger,
+				PlaceHolderHelper(order->GetName()->getName()));
+		}
 
 	}
 	power=max(0,min(SpellCap(skill),power));
@@ -5852,7 +5860,7 @@ bool CheckDangerSpell(int danger_)
 			break;
 		case 'N':
 		default:
-			printlog(" 현명하군.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_normal);
 			return false;
 		}
 	}

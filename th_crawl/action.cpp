@@ -725,7 +725,7 @@ int Player_Move(const coord_def &c)
 				}
 				else if(num<=4)
 				{
-					printlog("여기엔 다음과 같은 물건이 있다. (,키로 줍기)",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_SOME),true,false,false,CL_normal);
 					while(num>0)
 					{
 						printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
@@ -736,7 +736,7 @@ int Player_Move(const coord_def &c)
 				}
 				else
 				{
-					printlog("여기엔 여러개의 물건이 있다. (,키로 줍기)",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_MANY),true,false,false,CL_normal);
 				}
 			}
 
@@ -1118,7 +1118,7 @@ void Close_door()
 	}
 	if(door_num>1)
 	{
-		printlog("어느 쪽 문을 닫을꺼지?",true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_CLOSE_DOOR),true,false,false,CL_help);
 		
 		while(door_num>1)
 		{
@@ -1165,23 +1165,23 @@ void Close_door()
 		int close_= 0;
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
 		{				
-			printlog("문을 닫았다. ",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
 		}
 		else if(close_ == -1)
 		{
-			printlog("무엇인가가 닫을려는데 방해되고 있다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR_FAIL),true,false,false,CL_normal);
 		}
 		else
 		{
-			printlog("그곳엔 닫을 수 있는 것이 없다!",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR_EMPTY),true,false,false,CL_normal);
 		}
 		you.SetPrevAction('C');
 	}
 	else
 	{
-		printlog("근처에 닫을만한 것이 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR_NONE),true,false,false,CL_normal);
 		you.SetPrevAction('C');
 	}
 }
@@ -1204,7 +1204,7 @@ void Open_door()
 	}
 	if(door_num>1)
 	{
-		printlog("어느 쪽 문을 열꺼지?",true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_OPEN_DOOR),true,false,false,CL_help);
 		
 		while(door_num>1)
 		{
@@ -1250,7 +1250,7 @@ void Open_door()
 		int result = you.OpenDoor(temp, false);
 		if(result == 0)
 		{
-			printlog("그곳엔 열 수 있는 것이 없다!",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR_EMPTY),true,false,false,CL_normal);
 		}		
 		else if(result > 0)
 			you.TurnEnd();
@@ -1258,7 +1258,7 @@ void Open_door()
 	}
 	else
 	{
-		printlog("근처에 열만한 것이 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR_NONE),true,false,false,CL_normal);
 		you.SetPrevAction('O');
 	}
 	
@@ -1269,14 +1269,14 @@ void Open_door()
 bool CheckDimension()
 {
 	if (you.god != GT_YUKARI) {
-		printlog("결계로 인해 계단을 이용할 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_STAIR), true, false, false, CL_danger);
 		return false;
 	}
 
 
 	while(1)
 	{
-		printlog("계단을 이용하면 차원고정이 풀립니다. 진짜로 이용합니까?(Y/N)",false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_STAIT_WARN) + " ",false,false,false,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -1285,7 +1285,7 @@ bool CheckDimension()
 			return true;
 		case 'N':
 		default:
-			printlog(" 계속하도록!",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_CRAWL),true,false,false,CL_help);
 			return false;
 		}
 	}
@@ -1298,7 +1298,7 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_YUKKURI_STAIR:
 		if(down)
 		{
-			printlog("여긴 정말 위험해보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN) + " ",false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -1307,7 +1307,7 @@ bool warning(dungeon_tile_type type, bool down)
 				return true;
 			case 'N':
 			default:
-				printlog(" 현명하군!",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_help);
 				return false;
 			}
 		}
@@ -1315,7 +1315,7 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_SCARLET_U_STAIR:
 		if(down)
 		{
-			printlog("여긴 정말 위험해보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN) + " ",false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -1324,7 +1324,7 @@ bool warning(dungeon_tile_type type, bool down)
 				return true;
 			case 'N':
 			default:
-				printlog(" 현명하군!",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_help);
 				return false;
 			}
 		}
@@ -1332,7 +1332,7 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_BAMBOO_STAIR:
 		if(down)
 		{
-			printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -1341,7 +1341,7 @@ bool warning(dungeon_tile_type type, bool down)
 				return true;
 			case 'N':
 			default:
-				printlog(" 좋은 선택이야!",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
 				return false;
 			}
 		}
@@ -1351,7 +1351,7 @@ bool warning(dungeon_tile_type type, bool down)
 		{
 			if(!(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL))
 			{
-				printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
 				switch(waitkeyinput())
 				{
 				case 'Y':
@@ -1360,7 +1360,7 @@ bool warning(dungeon_tile_type type, bool down)
 					return true;
 				case 'N':
 				default:
-					printlog(" 좋은 선택이야!",true,false,false,CL_help);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
 					return false;
 				}
 			}
@@ -1373,7 +1373,7 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 				if(!you.rune[RUNE_PANDEMONIUM_MAGIC + current_level - PANDEMONIUM_LEVEL-1])
 				{
-					printlog("여기서 빠져나가면 이 층의 룬은 다신 얻을 수 없다. 정말로 나갈거야?(Y/N)",false,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE) + " ",false,false,false,CL_danger);
 					switch(waitkeyinput())
 					{
 					case 'Y':
@@ -1382,7 +1382,7 @@ bool warning(dungeon_tile_type type, bool down)
 						return true;
 					case 'N':
 					default:
-						printlog(" OK!",true,false,false,CL_help);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_OK),true,false,false,CL_help);
 						return false;
 					}
 				}
@@ -1392,20 +1392,20 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_ZIGURRAT_STAIR:
 		if (down && current_level != ZIGURRAT_LEVEL)
 		{
-			printlog("이 곳은 룬은 없지만 한번만 들어갈 수 있는 악몽의 던전이다. 준비되었어? (Y/N)", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT) + " ", false, false, false, CL_danger);
 			switch (waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				if (you.ziggurat_level) {
-					printlog("이미 들어간 적이 있으면 더 이상 들어갈 수 없어! ", true, false, false, CL_help);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY), true, false, false, CL_help);
 					return false;
 				}
 				enterlog();
 				return true;
 			case 'N':
 			default:
-				printlog("좀 더 신중히 준비하도록!", true, false, false, CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NEED_PREPARATION), true, false, false, CL_help);
 				return false;
 			}
 		}
@@ -1413,7 +1413,7 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_DREAM_STAIR:
 		if(down)
 		{
-			printlog("이 곳은 들어가면 나오기 힘들어보인다. 그래도 내려갈거야?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -1422,7 +1422,7 @@ bool warning(dungeon_tile_type type, bool down)
 				return true;
 			case 'N':
 			default:
-				printlog(" 좋은 선택이야!",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
 				return false;
 			}
 		}
@@ -1432,12 +1432,12 @@ bool warning(dungeon_tile_type type, bool down)
 		{
 			if(you.haveGoal()<3)
 			{
-				printlog("이 곳을 들어가기위해선 3개의 룬이 필요하다!",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_THREE_RUNE),true,false,false,CL_normal);
 				return false;
 			}
 			else 
 			{
-				printlog("당신은 3개의 룬을 입구에 꽂았다. 소음을 일으키며 문이 열렸다!",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_THREE_RUNE_OPEN),true,false,false,CL_normal);
 				MoreWait();
 			}
 		}
@@ -1488,7 +1488,7 @@ void Stair_move(bool down)
 	case STAIR_KIND_DOWN_BASE:
 		if(!down)
 		{
-			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_CANT_UP),true,false,false,CL_normal);
 			break;
 		}
 
@@ -1528,7 +1528,7 @@ void Stair_move(bool down)
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					env[current_level+1].EnterMap(i,dq);
-					printlog("계단을 내려왔다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 					GodAccpect_Stair(true, false);
 					soundmanager.playSound("stair");
 					//you.resetLOS(false);
@@ -1539,13 +1539,13 @@ void Stair_move(bool down)
 		}
 		else
 		{
-			printlog("더 이상 내려갈 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_LOWEST_DOWN),true,false,false,CL_normal);
 		}
 		break;
 	case STAIR_KIND_DOWN_SPECIAL:
 		if(!down)
 		{
-			printlog("여기선 올라갈 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_CANT_UP),true,false,false,CL_normal);
 			break;
 		}
 		{
@@ -1646,7 +1646,7 @@ void Stair_move(bool down)
 			}
 
 			env[next_].EnterMap(0,dq); 
-			printlog("계단을 내려왔다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 			GodAccpect_Stair(true, true);
 			soundmanager.playSound("stair");
 			//you.resetLOS(false);
@@ -1657,7 +1657,7 @@ void Stair_move(bool down)
 	case STAIR_KIND_UP_BASE:
 		if(down)
 		{
-			printlog("여기선 내려갈 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_CANT_DOWN),true,false,false,CL_normal);
 			break;
 		}
 		if(current_level>0)
@@ -1690,7 +1690,7 @@ void Stair_move(bool down)
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					env[current_level-1].EnterMap(i,dq);
-					printlog("계단을 올라왔다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_UP),true,false,false,CL_normal);
 					GodAccpect_Stair(false, false);
 					soundmanager.playSound("stair");
 					//you.resetLOS(false);
@@ -1713,11 +1713,11 @@ void Stair_move(bool down)
 			{
 				if(you.haveGoal())
 				{
-					printlog("음양옥을 줍기전까진, 당신은 게임 패배로 인정될거야. 그래도 나갈거야?(Y/N)",true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_WARN),true,false,false,CL_danger);
 				}
 				else
 				{
-					printlog("정말로 던전을 탈출하겠습니까?(Y/N)",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION),true,false,false,CL_normal);
 
 				}				
 				
@@ -1728,14 +1728,14 @@ void Stair_move(bool down)
 					GameOver();
 					break;
 				}
-				printlog("계속 탐험하도록!",true,false,false,CL_normal);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_EXPRO),true,false,false,CL_normal);	
 			}
 		}
 		break;
 	case STAIR_KIND_UP_SPECIAL:
 		if(down)
 		{
-			printlog("여기선 내려갈 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_CANT_DOWN),true,false,false,CL_normal);
 			break;
 		}
 		{
@@ -1872,7 +1872,7 @@ void Stair_move(bool down)
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
 			env[floor_return].EnterMap(-1,dq,pos_return);
-			printlog("던전으로 돌아왔다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
 			GodAccpect_Stair(false, true);
 			soundmanager.playSound("stair");
 			//you.resetLOS(false);
@@ -1881,7 +1881,7 @@ void Stair_move(bool down)
 		}
 		break;
 	default:
-		printlog("여기엔 계단이 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_EMPTY),true,false,false,CL_normal);
 		break;
 	}
 }
@@ -1959,7 +1959,7 @@ void skill_view()
 		if (allMax == true)
 			ok_ = true;
 		if(ok_==false)
-			view_skill("최소한 하나의 스킬을 켜야됩니다!");
+			view_skill(LocalzationManager::locString(LOC_SYSTEM_SKILL_LEAST_ONE));
 	}
 	while(!ok_);
 
@@ -1982,7 +1982,7 @@ void rune_Show()
 	if(!isNormalGame())
 		return;
 	int remain = 10;
-	SetText() = "  <얻어야할 룬>\n\n\n";
+	SetText() = "  <" + LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_TITLE) + ">\n\n\n";
 
 
 
@@ -1992,13 +1992,13 @@ void rune_Show()
 		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
 		for(;remain>0;remain--)
 			SetText() += " ";
-		SetText() += LocalzationManager::locString(rune_string[i]);
-		SetText() += "의 룬 :";
+		SetText() += LocalzationManager::formatString(LOC_SYSTEM_UI_RUNE_NAME, PlaceHolderHelper(rune_string[i]));
+		SetText() += " :";
 
 
 		if(you.rune[i])
 		{
-			SetText() += " 획득";
+			SetText() += " " + LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_GAIN);
 		}
 		else
 		{
@@ -2010,12 +2010,12 @@ void rune_Show()
 	
 	if(you.rune[RUNE_HAKUREI_ORB])
 	{
-		SetText() += "음양옥을 얻었습니다! 탈출하세요!\n";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_WIN) + "\n";
 	}
 	else
 	{
-		SetText() += "아직 음양옥을 얻지 못했습니다.\n\n";
-		SetText() += "룬을 3개이상먹으면 음양옥이 있는 하쿠레이 신사의 문이 열립니다.";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_NOT_WIN) + "\n\n";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_WIN_CONDITION);
 	}
 
 
@@ -2121,7 +2121,7 @@ void Weapon_Show()
 {
 	deletelog();
 	char temp [100];
-	printlog("무기: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_WEAPON])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
@@ -2129,11 +2129,11 @@ void Weapon_Show()
 	}
 	else
 	{
-		printlog("맨손",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED),true,false,true,CL_normal);
 	}
 
 
-	printlog("탄막: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) + ": ",false,false,true,CL_normal);
 	if(you.throw_weapon)
 	{
 		sprintf_s(temp,100,"%c) %s",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
@@ -2141,7 +2141,7 @@ void Weapon_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 }
 
@@ -2149,7 +2149,7 @@ void Armour_Show()
 {
 	deletelog();
 	char temp [100];
-	printlog("몸통: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_BODY) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_ARMOR])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
@@ -2157,10 +2157,10 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE) ,true,false,true,CL_normal);
 	}
 
-	printlog("방패: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_SHIELD])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
@@ -2168,10 +2168,10 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}	
 	
-	printlog("머리: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_HEAD) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_HELMET])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
@@ -2179,11 +2179,11 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 
 	
-	printlog("망토: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_CLOAK) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_CLOAK])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
@@ -2191,10 +2191,10 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 
-	printlog("손: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_HAND) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_GLOVE])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
@@ -2202,10 +2202,10 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 
-	printlog("발: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_FOOT) + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_BOOTS])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
@@ -2213,7 +2213,7 @@ void Armour_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 
 
@@ -2226,7 +2226,7 @@ void Amulet_Show()
 {
 	deletelog();
 	char temp [100];
-	printlog("목걸이  : ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_AMULET) + "  : ",false,false,true,CL_normal);
 	if(you.equipment[ET_NECK])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
@@ -2234,10 +2234,10 @@ void Amulet_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 
-	printlog("왼반지  : ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING) + "  : ",false,false,true,CL_normal);
 	if(you.equipment[ET_LEFT])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_LEFT]->id,you.equipment[ET_LEFT]->GetName().c_str());
@@ -2245,10 +2245,10 @@ void Amulet_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 	
-	printlog("오른반지: ",false,false,true,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING) +  + ": ",false,false,true,CL_normal);
 	if(you.equipment[ET_RIGHT])
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
@@ -2256,7 +2256,7 @@ void Amulet_Show()
 	}
 	else
 	{
-		printlog("없음",true,false,true,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UI_NONE),true,false,true,CL_normal);
 	}
 }
 
@@ -3230,7 +3230,8 @@ void shout(char auto_)
 			}
 			beam_iterator beam(you.position,you.position);
 			projectile_infor infor(8,false,true, -3);
-			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,-1, 0.0f, auto_>0))
+			auto it = you.item_list.end();
+			if(Common_Throw(it, you.GetTargetIter(), beam, &infor,-1, 0.0f, auto_>0))
 			{
 				if(unit* target = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 				{

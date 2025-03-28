@@ -1006,7 +1006,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN)), true);
+		attack_infor attack_infor_(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN));
+		you.damage(attack_infor_, true);
 		SetInter(IT_DAMAGE);
 	}	
 	else if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA &&
@@ -1014,10 +1015,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		drowned = true;
 		int damage_ = you.GetMaxHp() / 3;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor(LOC_SYSTEM_ATT_LAVA)), true);
+		attack_infor attack_infor_(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_CLOUD_FIRE, name_infor(LOC_SYSTEM_ATT_LAVA));
+		you.damage(attack_infor_, true);
 
 		damage_ = you.GetMaxHp() / 10;
-		you.damage(attack_infor(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN)), true);
+		attack_infor attack_infor2_(damage_ + 1, damage_ + 1, 99, &you, you.GetParentType(), ATT_DROWNING, name_infor(LOC_SYSTEM_ATT_DROWN));
+		you.damage(attack_infor2_, true);
 		SetInter(IT_DAMAGE);
 	}
 	else

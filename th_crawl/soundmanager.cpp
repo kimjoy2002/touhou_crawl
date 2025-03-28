@@ -505,7 +505,7 @@ void SOUNDMANAGER::Update()
 }
 
 
-void SOUNDMANAGER::addSound(const char* name, char* path, bool Looping, bool overlab) 
+void SOUNDMANAGER::addSound(const char* name, const char* path, bool Looping, bool overlab) 
 {
 	SOUNDBUFFER* new_sound = new SOUNDBUFFER();
 	new_sound->lazy_loading = true;
@@ -514,7 +514,7 @@ void SOUNDMANAGER::addSound(const char* name, char* path, bool Looping, bool ove
 	new_sound->SetVolume();
 	soundList[name] = new_sound;
 }
-void SOUNDMANAGER::addBgm(const char* name, char* path)
+void SOUNDMANAGER::addBgm(const char* name, const char* path)
 {
 	SOUNDBUFFER* new_sound = new SOUNDBUFFER();
 	new_sound->lazy_loading = false;

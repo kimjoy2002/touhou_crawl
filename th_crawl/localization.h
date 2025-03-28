@@ -45,9 +45,9 @@ public:
     PlaceHolderHelper(string name, bool plural) : name(name), plural(plural){};
     PlaceHolderHelper(LOCALIZATION_ENUM_KEY key) : key(key){};
     PlaceHolderHelper(string name, D3DCOLOR color) : name(name), color(color){hasColor = true;};
-    PlaceHolderHelper(LOCALIZATION_ENUM_KEY key, D3DCOLOR color) : name(name), color(color){hasColor = true;};
-    PlaceHolderHelper(string name, D3DCOLOR color, bool plural) : name(name), color(color), plural(plural){hasColor = true;};
-    PlaceHolderHelper(LOCALIZATION_ENUM_KEY key, D3DCOLOR color, bool plural) : name(name), color(color), plural(plural){hasColor = true;};
+    PlaceHolderHelper(LOCALIZATION_ENUM_KEY key, D3DCOLOR color) : name(), color(color){hasColor = true;};
+    PlaceHolderHelper(string name, D3DCOLOR color, bool plural) : name(name), plural(plural), color(color){hasColor = true;};
+    PlaceHolderHelper(LOCALIZATION_ENUM_KEY key, D3DCOLOR color, bool plural) : name(), plural(plural), color(color){hasColor = true;};
 };
 
 

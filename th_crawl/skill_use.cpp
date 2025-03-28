@@ -776,7 +776,8 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 			projectile_infor infor(throw_length_,false,false,SKL_YUUGI_3_THROW,true);
 			int temp_flag = mon_->flag;
 			mon_->flag |= M_FLAG_PASSED_ENEMY;
-			if(Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, throw_length_, 0.0f))
+			auto it = you.item_list.end();
+			if(Common_Throw(it, you.GetTargetIter(), beam, &infor, throw_length_, 0.0f))
 			{		
 				int length_ = ceil(sqrt(pow((float)abs(order->position.x-you.search_pos.x),2)+pow((float)abs(order->position.y-you.search_pos.y),2)));
 				printlog("날라가라! ",false,false,false,CL_yuigi);
@@ -1028,7 +1029,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 	if(return_)
 	{
 		soundmanager.playSound("summon");
-		printarray(true,false,false,CL_magic,1, LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC));	
+		printlog( LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC) ,true,false,false,CL_magic);
 	}
 	return return_;
 }

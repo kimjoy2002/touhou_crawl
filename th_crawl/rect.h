@@ -21,8 +21,8 @@ class rect_iterator //원하는 사각형을 출력한다.
 
 public:
 	rect_iterator(const coord_def &start_, int x_size, int y_size);
-	coord_def rect_iterator::operator *() const;
-	const coord_def* rect_iterator::operator->() const;
+	coord_def operator *() const;
+	const coord_def* operator->() const;
 	rect_iterator& operator ++ ();
 	rect_iterator operator ++ (int);
 	bool end();
@@ -41,8 +41,8 @@ class rand_rect_iterator //특정 범위안을 무작위순서로 추출해낸�
 
 public:
 	rand_rect_iterator(const coord_def &start_, int x_size, int y_size, bool no_inside = true);
-	coord_def rand_rect_iterator::operator *() const;
-	const coord_def* rand_rect_iterator::operator->() const;
+	coord_def operator *() const;
+	const coord_def* operator->() const;
 	rand_rect_iterator& operator ++ ();
 	rand_rect_iterator operator ++ (int);
 	bool end() const; 
@@ -59,8 +59,8 @@ class dif_rect_iterator //특정 위치부터 점차 퍼지면서 무작위로 �
 public:
 	dif_rect_iterator(const coord_def &start_, int distan, bool random_ = false);
 	void sort_distan(bool close_); //가까이있는 순서로 정렬
-	coord_def dif_rect_iterator::operator *() const;
-	const coord_def* dif_rect_iterator::operator->() const;
+	coord_def operator *() const;
+	const coord_def* operator->() const;
 	dif_rect_iterator& operator ++ ();
 	dif_rect_iterator operator ++ (int);
 	bool end() const; 

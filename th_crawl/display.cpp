@@ -32,6 +32,7 @@
 #include "throw.h"
 #include "mon_infor.h"
 #include "localization.h"
+#include <sstream>
 
 extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
@@ -179,6 +180,7 @@ int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, LPCWSTR text, int count
     return pFont->DrawTextW(pSprite, text, count, pRect, format, color);
 }
 
+
 int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     if (!pFont || !text || !pRect) {
         return 0;
@@ -194,7 +196,9 @@ int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const char* text, int c
     return pFont->DrawTextW(pSprite, utf16Text.c_str(), count, pRect, format, color);
 }
 
-
+int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const std::string& text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+    return DrawTextUTF8(pFont, pSprite, text.c_str(), count, pRect, format, color);
+}
 
 void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
@@ -257,6 +261,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	int num = 0;
 	RECT rc = { 30, 10 - move, option_mg.getWidth(), option_mg.getHeight() };
 	char temp[100];
+	stringstream ss;
 	int one_ = 50, two_ = 100;
 
 	DrawTextUTF8(pfont,pSprite, "식별된 아이템 & 자동 줍기 설정", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -346,8 +351,11 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_ring[iden_list.ring_list[cur_].type].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_ring_kind[min(RGT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s반지", index, iden_list.autopickup[i] ? '+' : '-', ring_iden_string[cur_]);
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				
+				ss.str("");
+				ss.clear();
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -797,8 +805,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -831,8 +838,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_ARMOR, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -986,8 +992,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1010,8 +1015,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1033,8 +1037,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	else
 	{
-		sprintf_s(temp,100,"없음");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1327,8 +1330,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		else
 		{
-			sprintf_s(temp, 128, "없음");
-			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+			DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 		}
 		rc.left = 32 * 16 + 50;
 		rc.top += fontDesc.Height;
@@ -1408,8 +1410,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		else
 		{
-			sprintf_s(temp,128,"없음");
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		}
 		rc.left -= fontDesc.Width*6;
 
@@ -2656,7 +2657,7 @@ void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-void display_manager::start_spellview(char* message_)
+void display_manager::start_spellview(string message_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	state = DT_SPELL;
@@ -2665,7 +2666,7 @@ void display_manager::start_spellview(char* message_)
 	ReleaseMutex(mutx);
 }
 
-void display_manager::start_skillview(char* message_)
+void display_manager::start_skillview(string message_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	state = DT_SKILL;
@@ -2675,7 +2676,7 @@ void display_manager::start_skillview(char* message_)
 }
 
 
-void display_manager::start_itemview(item_view_type type, char* message_)
+void display_manager::start_itemview(item_view_type type, string message_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	for(int i=0;i<52;i++)
@@ -2742,15 +2743,15 @@ int GetDisplayMove()
 {
 	return DisplayManager.move;
 }
-void view_item(item_view_type type, char* message_)
+void view_item(item_view_type type, string message_)
 {
 	DisplayManager.start_itemview(type, message_);
 }
-void view_spell(char* message_)
+void view_spell(string message_)
 {
 	DisplayManager.start_spellview(message_);
 }
-void view_skill(char* message_)
+void view_skill(string message_)
 {
 	DisplayManager.start_skillview(message_);
 }

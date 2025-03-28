@@ -64,7 +64,7 @@ public:
 	int y_comma;
 	bool draw;
 	string info;
-	infoBox::infoBox();
+	infoBox();
 	void setBox(int x_, int y_, const char* info_) {
 		x = x_;
 		y = y_;
@@ -117,9 +117,9 @@ public:
 	void item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void start_spellview(char* message_);
-	void start_skillview(char* message_);
-	void start_itemview(item_view_type type, char* message_);
+	void start_spellview(string message_);
+	void start_skillview(string message_);
+	void start_itemview(item_view_type type, string message_);
 	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, const char* message);
 	void drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 };
@@ -161,9 +161,9 @@ void SetSpellSight(int sight, int sight_type_);
 
 void SetDisplayTexture(textures *texture_);
 
-void view_item(item_view_type type, char* message_ = "무슨 아이템을 고르겠습니까?");
-void view_spell(char* message_);
-void view_skill(char* message_);
+void view_item(item_view_type type, string message_ = "무슨 아이템을 고르겠습니까?");
+void view_spell(string message_);
+void view_skill(string message_);
 void CheckKey(char key_, int num_ = 0);
 void AllCheckKey();
 #endif // __DISPLAY_H__

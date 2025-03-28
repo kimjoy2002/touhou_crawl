@@ -1921,7 +1921,8 @@ void SpellUse(char auto_, int auto_direc_)
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
-							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), auto_>0))
+							auto it = you.item_list.end();
+							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), auto_>0))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)

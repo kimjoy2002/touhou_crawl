@@ -44,7 +44,11 @@ force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boos
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
-{	
+{
+	for(int i = 0; i < 3; i++) {
+		atk_type[i] = ATT_NONE;
+		atk_name[i] = name_infor();
+	}
 	base_state_setup(state,MS_SLEEP);
 }
 void monster::SaveDatas(FILE *fp)
@@ -1571,7 +1575,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
+					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
+					a.order->damage(attack_infor_, true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}

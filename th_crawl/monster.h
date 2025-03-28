@@ -181,7 +181,7 @@ public:
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();
 	bool HpRecover(int trun_ = 1);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = false);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
 	void SetStrong(int strong_) {strong = strong_;};
 	bool SetTele(int tele_);
 	bool SetMight(int might_);

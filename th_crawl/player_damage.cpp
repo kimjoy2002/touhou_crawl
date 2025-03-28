@@ -1048,7 +1048,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
 				{
-					a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
+					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
+					a.order->damage(attack_infor_, true);
 					s_veiling = 0;
 					s_value_veiling = 0;
 				}
@@ -1061,23 +1062,32 @@ bool players::damage(attack_infor &a, bool perfect_)
 					switch(half_youkai[1])
 					{
 					case 0:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE)), true);
+					{
+						attack_infor attack_infor_(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
+						a.order->damage(attack_infor_, true);
 						if(a.order->GetFireResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
+					}
 					case 1:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor(LOC_SYSTEM_ATT_COLD)), true);
+					{
+						attack_infor attack_infor_(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+						a.order->damage(attack_infor_, true);
 						if(a.order->GetColdResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
+					}
 					case 2:
-						a.order->damage(attack_infor(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor(LOC_SYSTEM_ATT_ELEC)), true);
+					{
+						attack_infor attack_infor_(randC(5,3),randC(5,3),99,NULL,GetParentType(),ATT_CLOUD_ELEC,name_infor(LOC_SYSTEM_ATT_ELEC));
+						a.order->damage(attack_infor_, true);
 						if(a.order->GetElecResist()>=1.0f){
 							a.order->SetSlow(10+randA(5));
 						}
 						break;
+					}
 					}
 				}
 			}

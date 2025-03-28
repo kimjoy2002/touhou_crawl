@@ -16,14 +16,14 @@
 #include "skill.h"
 
 
-extern class monster;
-extern class beam_iterator;
-extern class tribe_property;
-extern class action_class;
-extern enum tribe_proper_type;
-extern enum ALCHEMY_LIST;
-extern enum dump_action_type;
-extern enum amulet_type;
+class monster;
+class beam_iterator;
+class tribe_property;
+class action_class;
+enum tribe_proper_type;
+enum ALCHEMY_LIST;
+enum dump_action_type;
+enum amulet_type;
 
 enum stat_up //스탯버프는 따로 두지않는다. 겹칠 가능성을 위해
 {
@@ -413,7 +413,7 @@ public:
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = false);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
 	int MpRecoverDelay(int delay_ = 0,bool set_ = false);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);

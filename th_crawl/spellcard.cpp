@@ -77,7 +77,8 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
 		projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
-		if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
+		auto it = you.item_list.end();
+		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
 		{
 			if(fail_)
 				return true;
@@ -355,7 +356,8 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if (!env[current_level].dgtile[pos.x][pos.y].isMove(true, true, false))
 				{
-					printarray(true, false, false, CL_normal, 3, "암석탄이 ", LocalzationManager::locString(dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile]), "에 부딪혔지만 미동도 하지 않았다.");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELLCARD_EARTH_CANT_BREAK,true,false,false,CL_normal,
+						 PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile]));
 					env[current_level].MakeNoise(target, 8, NULL);
 				}
 				Sleep(300);
@@ -453,7 +455,8 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN ||
 					it->id == MON_VAMPIER_BAT) {
 					int damage_ = 10 + power_ / 12;
-					it->damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN)), true);
+					attack_infor attack_infor_(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN));
+					it->damage(attack_infor_, true);
 					power_ += 100;
 				}
 				if (it->flag & M_FLAG_INANIMATE)
@@ -472,7 +475,8 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		if (you.tribe == TRI_VAMPIRE) {
 			int damage_ = 8 + power / 12;
-			you.damage(attack_infor(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN)), true);
+			attack_infor attack_infor_(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN));
+			you.damage(attack_infor_, true);
 		}
 		return true;
 	}

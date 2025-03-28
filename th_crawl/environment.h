@@ -98,7 +98,7 @@ public:
 		switch (i)
 		{
 		case AUTOTILE_WALL:
-			if (tile >= DG_WALL && tile <= DG_GLASS || tile == DG_OPEN_DOOR)
+			if ((tile >= DG_WALL && tile <= DG_GLASS) || tile == DG_OPEN_DOOR)
 				return true;
 			break;
 		case AUTOTILE_WATER:

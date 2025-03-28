@@ -1839,8 +1839,7 @@ void SkillUse(char auto_)
 		return;
 	}
 	if(you.currentSkillNum)
-	{	
-		int i=0;
+	{
 		changedisplay(DT_SKILL_USE);
 		while(1)
 		{
@@ -1870,7 +1869,8 @@ void SkillUse(char auto_)
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SkillLength(skill_),false,SkillFlagCheck(skill_, S_FLAG_SMITE),skill_,true);
-							if(int short_ = Common_Throw(you.item_list.end(), you.GetTargetIter(), beam, &infor,-1,0.0f, auto_>0))
+							auto it = you.item_list.end();
+							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,-1,0.0f, auto_>0))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)

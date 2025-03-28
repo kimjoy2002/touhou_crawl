@@ -160,21 +160,37 @@ bool smoke::effectSmoke(unit* unit_)
 	default:
 		return false;
 	case SMT_FIRE:
-		unit_->damage(attack_infor(rand_int(5,15),15,99,NULL,parent,ATT_CLOUD_FIRE,name_infor(LOC_SYSTEM_SMOKE_FIRE)), true);
+	{
+		attack_infor attack_infor_(rand_int(5,15),15,99,NULL,parent,ATT_CLOUD_FIRE,name_infor(LOC_SYSTEM_SMOKE_FIRE));
+		unit_->damage(attack_infor_, true);
 		return true;
+	}
 	case SMT_COLD:
-		unit_->damage(attack_infor(rand_int(3,12),12,99,NULL,parent,ATT_CLOUD_COLD,name_infor(LOC_SYSTEM_SMOKE_COLD)), true);
+	{
+		attack_infor attack_infor_(rand_int(3,12),12,99,NULL,parent,ATT_CLOUD_COLD,name_infor(LOC_SYSTEM_SMOKE_COLD));
+		unit_->damage(attack_infor_, true);
 		unit_->SetFrozen(randA_1(7));
 		return true;
+	}
 	case SMT_ELEC:
-		unit_->damage(attack_infor(rand_int(7,17),17,99,NULL,parent,ATT_CLOUD_ELEC,name_infor(LOC_SYSTEM_SMOKE_ELEC)), true);
+	{
+		attack_infor attack_infor_(rand_int(7,17),17,99,NULL,parent,ATT_CLOUD_ELEC,name_infor(LOC_SYSTEM_SMOKE_ELEC));
+		unit_->damage(attack_infor_, true);
+		
 		return true;
+	}
 	case SMT_TWIST:
-		unit_->damage(attack_infor(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor(LOC_SYSTEM_SMOKE_TWIST)), true);
+	{
+		attack_infor attack_infor_(randA_1(8),8,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor(LOC_SYSTEM_SMOKE_TWIST));
+		unit_->damage(attack_infor_, true);
 		return true;
+	}
 	case SMT_WHIRLWIND:
-		unit_->damage(attack_infor(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor(LOC_SYSTEM_SMOKE_WHIRLWIND)), true);
+	{
+		attack_infor attack_infor_(randA_1(30),30,99,NULL,parent,ATT_CLOUD_NORMAL,name_infor(LOC_SYSTEM_SMOKE_WHIRLWIND));
+		unit_->damage(attack_infor_, true);
 		return true;
+	}
 	case SMT_POISON:
 		{
 			bool return_ = unit_->SetPoison(rand_int(10,15), 150, false);
@@ -198,7 +214,8 @@ bool smoke::effectSmoke(unit* unit_)
 	case SMT_CURSE:
 		if(!unit_->isplayer() || you.god != GT_HINA)
 		{
-			unit_->damage(attack_infor(randA_1(5),5,99,NULL,parent,ATT_CLOUD_CURSE,name_infor(LOC_SYSTEM_ATT_CURSE)), true);
+			attack_infor attack_infor_(randA_1(5),5,99,NULL,parent,ATT_CLOUD_CURSE,name_infor(LOC_SYSTEM_ATT_CURSE));
+			unit_->damage(attack_infor_, true);
 			bool return_ = unit_->SetPoison(rand_int(5,10), 150, true);
 			if(randA(7)>4)
 				return_ = (unit_->SetSlow(randA(10))?true:return_);
@@ -212,9 +229,10 @@ bool smoke::effectSmoke(unit* unit_)
 				if(mon_->flag & M_FLAG_RESIST_BLIZARD)
 					return false;
 			}
+			attack_infor attack_infor_(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor(LOC_SYSTEM_SMOKE_BLIZZARD));
+			unit_->damage(attack_infor_, true);
+			return true;
 		}
-		unit_->damage(attack_infor(rand_int(25,35),30,99,NULL,parent,ATT_COLD_PYSICAL_BLAST,name_infor(LOC_SYSTEM_SMOKE_BLIZZARD)), true);
-		return true;
 	}
 	return false;
 }

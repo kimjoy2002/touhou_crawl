@@ -240,6 +240,7 @@ void item::LoadDatas(FILE *fp)
 
 string item::GetName(int num_)
 {
+	bool overwriteName = false;
 	string temp;
 
 	if(identify_curse && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
@@ -294,11 +295,17 @@ string item::GetName(int num_)
 		{
 			if(isRingGotValue((ring_type)value1) && iden_list.ring_list[value1].iden == 2 && identify)
 			{
-				char temp2[10];
-				sprintf_s(temp2,10,"%c%d ",value2>=0?'+':'-',abs(value2));
-				temp += temp2;
+				if(iden_list.ring_list[value1].iden == 2)  {
+					temp += LocalzationManager::formatString(ring_iden_string[value1], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));
+				} else {
+					temp += LocalzationManager::formatString(ring_uniden_string[iden_list.ring_list[value1].type], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));				
+				}
+			} else if(iden_list.ring_list[value1].iden == 2)  {
+				temp += LocalzationManager::locString(ring_iden_string[value1]);
+			} else {
+				temp += LocalzationManager::locString(ring_uniden_string[iden_list.ring_list[value1].type]);				
 			}
-			temp += iden_list.ring_list[value1].iden == 2 ?ring_iden_string[value1]:ring_uniden_string[iden_list.ring_list[value1].type];	
+			overwriteName = true;
 		}
 		else if(!second_name.isEmpty())
 		{
@@ -323,7 +330,9 @@ string item::GetName(int num_)
 	{
 		temp += GetBrandString((weapon_brand)value5, false);
 	}
-	temp += name.getName();
+	if(!overwriteName) {
+		temp += name.getName();
+	}
 	if (type == ITM_AMULET)
 	{
 		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_OCCULT && value3 > 0) {

@@ -179,7 +179,7 @@ public:
 	virtual bool Blink(int time_)=0;
 	virtual bool Tele_check(bool preiden_, bool ctele_){return true;};
 	virtual attack_weapon_type GetAttackType()=0;
-	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = false)=0;
+	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr)=0;
 	virtual bool isEnemyUnit(unit* unit_info){return unit_info->isUserAlly();};
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}

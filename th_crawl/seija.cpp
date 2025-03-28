@@ -32,13 +32,12 @@ bool seija_gift()
 		
 		MoreWait();
 		
-		printarray(true,false,false,CL_danger,3,"당신은 ", GetGodString(you.god), "로부터 버려졌다!");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDONED,true,false,false,CL_danger,
+			PlaceHolderHelper(GetGodString(you.god)));
 	
 		//you.PunishUpDown(30, you.god , true);
-	
-		char temp[200];
-		sprintf_s(temp,200,"%s로부터 버려졌다.",GetGodString(you.god).c_str());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
+
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_ABANDONED, PlaceHolderHelper(GetGodString(you.god))),CL_small_danger);
 
 		for(int level_ = pietyLevel(you.piety);level_>=0;level_--)
 			GetGodAbility(level_, false);
@@ -47,7 +46,7 @@ bool seija_gift()
 
 		item_infor t;
 		env[current_level].MakeItem(you.position, makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_MAGIC_HAMMER));
-		printlog("...세이자가 마지막 선물로 요술망치를 주고 갔다.", true, false, false, CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT), true, false, false, CL_dark_good);
 		return true;
 	}
 

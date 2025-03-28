@@ -1904,9 +1904,9 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 			if(s_dimension_)
 			{
 				if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
-					check_pos_.x += (you.god_value[0] - check_pos_.x)>0?17:-17;
+					check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
 				if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
-					check_pos_.y += (you.god_value[1] - check_pos_.y)>0?17:-17;
+					check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
 			}
 
 

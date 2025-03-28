@@ -88,8 +88,8 @@ public:
 	//void Duplicate(SOUNDBUFFER **buffer_);
 	void Update();
 
-	void addSound(const char* name, char* path, bool Looping, bool overlab);
-	void addBgm(const char* name, char* path);
+	void addSound(const char* name, const char* path, bool Looping, bool overlab);
+	void addBgm(const char* name, const char* path);
 
 	void playSound(const char* name);
 	boolean playBgm(const char* name);

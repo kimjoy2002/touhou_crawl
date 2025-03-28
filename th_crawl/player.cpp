@@ -914,7 +914,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				case 'n':
 				case VK_ESCAPE:
 					loop_ = false;
-					printlog("잘 생각했다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
 					return 0;
 				default:
 					break;
@@ -1094,7 +1094,7 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 	{
 		if (env[current_level].isForbidZone(c.x, c.y) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog("정말 열거야?(y/n) ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_REALLY_OPEN_DOOR) + " ", false, false, false, CL_danger);
 			bool loop_ = true;
 			while (loop_)
 			{
@@ -1109,7 +1109,7 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 				case 'n':
 				case VK_ESCAPE:
 					loop_ = false;
-					printlog("잘 생각했다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
 					return -1;
 				default:
 					break;
@@ -1121,7 +1121,7 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 		{
 			env[current_level].CheckForbid(c);
 			if (no_turn == false) {
-				printlog("문을 열었다. ", false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR) + " ", false, false, false, CL_normal);
 				time_delay += GetWalkDelay();
 			}
 			return 1;
@@ -5473,7 +5473,7 @@ bool players::unequip(equip_type type_, bool force_)
 					break;
 				case 'N':
 				case 'n':
-					printlog("계속하도록. ", false, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_CRAWL), false, false, false, CL_normal);
 					return false;
 				}
 			}

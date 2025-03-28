@@ -354,7 +354,8 @@ void charter_selete()
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
 		you.CalcuHP();
-		env[current_level].EnterMap(0,deque<monster*>());	
+		deque<monster*> dq;
+		env[current_level].EnterMap(0,dq);	
 		printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
 		printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
@@ -367,7 +368,8 @@ void charter_selete()
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
 		you.CalcuHP();
-		env[current_level].EnterMap(0,deque<monster*>());	
+		deque<monster*> dq;
+		env[current_level].EnterMap(0,dq);	
 		printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
 		printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
 	}
@@ -379,7 +381,8 @@ void charter_selete()
 		you.job = JOB_SHAMAN;
 		SetTribe(you.tribe);
 		you.CalcuHP();
-		env[current_level].EnterMap(0,deque<monster*>());	
+		deque<monster*> dq;
+		env[current_level].EnterMap(0,dq);	
 	
 		item_infor t;
 		item *it;
@@ -456,7 +459,8 @@ void addItem_temp(item_type item_type_, int item_id, int num_)
 
 void Initialize()
 {
-	env[current_level].EnterMap(0,deque<monster*>());
+	deque<monster*> dq;
+	env[current_level].EnterMap(0,dq);
 
 	printlog("환상향에 온걸 환영한다!",true,false,false,CL_normal);
 	//you.resetLOS(false);

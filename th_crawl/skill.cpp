@@ -116,102 +116,81 @@ int skill_exp_penalty(int total_skill_exp)
 	return penalty_;
 }
 
-char* skill_string(skill_type skill)
+string skill_string(skill_type skill)
 {
 	switch(skill)
 	{
 	case SKT_FIGHT:
-		return "전투";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_FIGHT);
 		break;
 	case SKT_UNWEAPON:
-		return "맨손격투";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_UNWEAPON);
 		break;
 	case SKT_SHORTBLADE:
-		return "단검";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE);
 		break;
 	case SKT_LONGBLADE:
-		return "장검";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE);
 		break;
 	case SKT_MACE:
-		return "둔기";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE);
 		break;
 	case SKT_AXE:
-		return "도끼";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE);
 		break;
 	case SKT_SPEAR:
-		return "창";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR);
 		break;
-	//case SKT_BOW:
-	//	return "활";
-	//	break;
 	case SKT_TANMAC:
-		return "탄막";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_TANMAC);
 		break;
 	case SKT_DODGE:
-		return "회피";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_DODGE);
 		break;
 	case SKT_STEALTH:
-		return "은밀";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_STEALTH);
 		break;
 	case SKT_ARMOUR:
-		return "갑옷";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_ARMOUR);
 		break;
 	case SKT_SHIELD:
-		return "방패";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_SHIELD);
 		break;
-	//case SKT_BACKSTAB:
-	//	return "암습";
-	//	break;
-	//case SKT_TRAP:
-	//	return "기계공학";
-	//	break;
 	case SKT_SPELLCASTING:
-		return "주문시전";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_SPELLCASTING);
 		break;
-	//case SKT_ENCHARM:
-	//	return "강화";
-	//	break;
 	case SKT_FIRE:
-		return "화염마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_FIRE);
 		break;
 	case SKT_COLD:
-		return "냉기마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_COLD);
 		break;
 	case SKT_EARTH:
-		return "대지마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_EARTH);
 		break;
 	case SKT_AIR:
-		return "대기마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_AIR);
 		break;
 	case SKT_CONJURE:
-		return "파괴마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_CONJURE);
 		break;
 	case SKT_ALCHEMY:
-		return "연금술";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_ALCHEMY);
 		break;
 	case SKT_MENTAL:
-		return "정신마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_MENTAL);
 		break;
 	case SKT_SUMMON:
-		return "소환마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_SUMMON);
 		break;
 	case SKT_TRANS:
-		return "시공마법";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_TRANS);
 		break;
-	//case SKT_WATER:
-	//	return "물마법";
-	//	break;
-	//case SKT_POISON:
-	//	return "독마법";
-	//	break;
-	//case SKT_ELEC:
-	//	return "전기마법";
-	//	break;
 	case SKT_EVOCATE:
-		return "발동";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_EVOCATE);
 		break;
 	default:
-		return "알수없음";
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_UNKNOWN);
 		break;
 	}
 }

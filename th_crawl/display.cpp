@@ -299,8 +299,12 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_potion[iden_list.potion_list[cur_].color].draw(pSprite, rc.left-24, rc.top+6, 255);
 				img_item_potion_kind[min(PT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left-24, rc.top+6, 255);
-				sprintf_s(temp, 100, "%c %c %s물약", index, iden_list.autopickup[i]?'+':'-', potion_iden_string[cur_]);
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+
+				ss.str("");
+				ss.clear();
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(potion_iden_string[cur_]);
+
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -325,8 +329,12 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_scroll.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s두루마리", index, iden_list.autopickup[i] ? '+' : '-', scroll_iden_string[cur_]);
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				
+				ss.str("");
+				ss.clear();
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(scroll_iden_string[cur_]);
+
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -380,8 +388,12 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				rc.left = two_;
 				img_item_amulet.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_amulet_kind[min(AMT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
-				sprintf_s(temp, 100, "%c %c %s부적", index, iden_list.autopickup[i] ? '+' : '-', amulet_iden_string[cur_]);
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				
+				
+				ss.str("");
+				ss.clear();
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(amulet_iden_string[cur_]);
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -585,7 +597,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i<1;i++)
 		{
 
-			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt), you.GetSkillLevel(skt, true));
+			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, true));
 			sk_char++;
 
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
@@ -1319,14 +1331,18 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 		if (you.equipment[ET_NECK])
 		{
+			stringstream ss_amulet;
 			item* _item = you.equipment[ET_NECK];
 			char temp2[64];
 			if (_item->type == ITM_AMULET)
 			{
-				sprintf_s(temp2, 64, "%s%s", iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], _item->name.getName().c_str());
+				//ss_amulet << you.equipment[ET_NECK]->id << ") " << LocalzationManager::formatString(iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], PlaceHolderHelper(""))
+				// << "(" << to_string(you.getAmuletPercent()) << "%)";
+				ss_amulet << _item->id << ") " << _item->GetName() << " (" << to_string(you.getAmuletPercent()) << "%)";
+			} else {
+				ss_amulet << _item->id << ") " << _item->GetName();
 			}
-			sprintf_s(temp, 128, "%c) %s (%d%%)", you.equipment[ET_NECK]->id, temp2, you.getAmuletPercent());
-			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.equipment[ET_NECK]->item_color());
+			DrawTextUTF8(pfont,pSprite, ss_amulet.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, _item->item_color());
 		}
 		else
 		{

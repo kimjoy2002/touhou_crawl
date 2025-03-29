@@ -247,7 +247,7 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 		sprintf_s(temp,128,"마법 저항이 생긴다.(%d)",20+value_*20);
 		break;
 	case RGT_SKILL_UP:
-		sprintf_s(temp, 128, "지정된 스킬레벨이 올라간다.(%s+%d)", skill_string((skill_type)(value_ % 100)), value_ / 100);
+		sprintf_s(temp, 128, "지정된 스킬레벨이 올라간다.(%s+%d)", skill_string((skill_type)(value_ % 100)).c_str(), value_ / 100);
 		break;
 
 	}

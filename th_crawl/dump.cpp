@@ -605,10 +605,10 @@ bool Dump(int type, string *filename_)
 	{
 		if (you.pure_skill == skt)
 		{
-			fprintf_s(fp, "  %4s %3d (순화)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false));
+			fprintf_s(fp, "  %4s %3d (순화)\n", skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, false));
 		}
 		else if (you.GetSkillLevel(skt, false)) {
-			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
+			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
 		}
 		skt++;
 	}

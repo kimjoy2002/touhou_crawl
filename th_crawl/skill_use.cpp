@@ -3077,7 +3077,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					else
 					{
 						char temp[100];
-						sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num), you.GetSkillLevel(num, false));
+						sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num).c_str(), you.GetSkillLevel(num, false));
 
 						printlog(temp, true, false, true, CL_danger);
 						changedisplay(DT_GAME);
@@ -3086,9 +3086,9 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 						if (key__ == 'y' || key__ == 'Y')
 						{
 							you.SetPureSkill(num);
-							sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num));
+							sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num).c_str());
 							printlog(temp, true, false, false, CL_junko);
-							sprintf_s(temp, 100, "순호로부터 스킬순화(%s) 축복", skill_string((skill_type)num));
+							sprintf_s(temp, 100, "순호로부터 스킬순화(%s) 축복", skill_string((skill_type)num).c_str());
 							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
 							break;
 						}

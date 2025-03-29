@@ -236,7 +236,7 @@ void baseCircleMap(map_dummy* map)
 void TempleEnterMap(map_dummy* map)
 {
 
-	char *temp = temple_pattern(map);
+	const char *temp = temple_pattern(map);
 	map->tiles = new dungeon_tile_type*[map->size_x*2+1];
 	for(int i=0;i<map->size_x*2+1;i++)
 		map->tiles[i] = new dungeon_tile_type[map->size_y*2+1];
@@ -282,7 +282,7 @@ void TempleEnterMap(map_dummy* map)
 void YoukaiEnterMap(map_dummy* map)
 {
 
-	char *temp = temple_pattern(map);
+	const char *temp = temple_pattern(map);
 	map->tiles = new dungeon_tile_type*[map->size_x*2+1];
 	for(int i=0;i<map->size_x*2+1;i++)
 		map->tiles[i] = new dungeon_tile_type[map->size_y*2+1];
@@ -327,7 +327,7 @@ void YoukaiEnterMap(map_dummy* map)
 
 bool CommonValutMap(map_dummy* map, int pattern)
 {
-	char *temp;
+	const char *temp;
 	switch(pattern)
 	{
 	case VP_YOUKAI_MOUNTAIN_LAST:
@@ -405,7 +405,7 @@ bool CommonValutMap(map_dummy* map, int pattern)
 
 
 
-bool PixedMap(map_dummy* map, char *temp)
+bool PixedMap(map_dummy* map, const char *temp)
 {
 	int sp_tile_index = 0;
 

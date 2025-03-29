@@ -114,6 +114,8 @@ void Test_char_init(item_type item_, int bonus)
 		t.weight = 4.0f;
 		t.value = 70;
 		break;
+	default:
+		break;
 	}
 	item *it;
 	if(item_ != ITM_LAST)
@@ -147,7 +149,7 @@ void Test_char_init(item_type item_, int bonus)
 	it->identify = true;
 	it->identify_curse = true;
 	you.additem(it,false);
-	you.equiparmor(item_ != ITMS_LAST?'b':'a',false);
+	you.equiparmor(item_ != ITM_LAST?'b':'a',false);
 	env[current_level].DeleteItem(it);
 
 	t.type = ITM_FOOD;
@@ -470,7 +472,6 @@ void Initialize()
 
 void MainLoop()
 {
-	int a=0,b=0;
 	while(1)
 	{
 		you.player_move = true;

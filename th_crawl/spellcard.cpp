@@ -47,7 +47,6 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 
 	soundmanager.playSound("spellcard");
 
-	int i=0;
 	/*if(SpellcardFlagCheck(kind, S_FLAG_DIREC))
 	{
 		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);

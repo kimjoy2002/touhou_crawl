@@ -25,7 +25,6 @@ void bamboo_count(int num);
 
 void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
-	int d_x = 10, d_y = 10;
 	for(int x = 0; x<DG_MAX_X; x++)
 	{	
 		for(int y=0; y<DG_MAX_Y; y++)

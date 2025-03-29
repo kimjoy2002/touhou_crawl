@@ -88,7 +88,8 @@ float getAmuletCharge(amulet_type kind)
 	case AMT_WEATHER:
 	case AMT_TIMES:
 		return 0.6f;
-
+	default:
+		break;
 	}
 	return 1.0f;
 }
@@ -98,6 +99,8 @@ bool isCanCharge(amulet_type kind)
 	case AMT_FAITH:
 	case AMT_PERFECT:
 		return false;
+	default:
+		break;
 	}
 	return true;
 }
@@ -159,6 +162,8 @@ bool chargingFinish(amulet_type kind, int value)
 				you.resetAmuletPercent(kind);
 			}
 		}
+		break;
+	default:
 		break;
 	}
 	return true;
@@ -282,28 +287,34 @@ bool evokeAmulet(amulet_type kind, int value_)
 			printlog("오컬트의 힘으로 도시전설 쿠네쿠네가 출현했다!", true, false, false, CL_magic);
 			skill_summon_occult_kunekune(you.level * 5, false, &you, you.position);
 			break;
+		default:
+			break;
 		}
+		break;
+	default:
 		break;
 	}
 	return true;
 }
 
-const char* getOccultName(occult_type kind)
+string getOccultName(occult_type kind)
 {
 	switch (kind)
 	{
 	case OCT_NESI:
-		return "네시";
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_NESI);
 	case OCT_LONG:
-		return "팔척귀신";
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_LONG);
 	case OCT_SHORT:
-		return "리틀그린맨";
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_SHORT);
 	case OCT_DISH:
-		return "반쵸사라야시키";
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_NESI);
 	case OCT_KUNEKUNE:
-		return "쿠네쿠네";
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE);
+	default:
+		break;
 	}
-	return "정체불명";
+	return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_UNKNOWN);
 }
 
 bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target) {

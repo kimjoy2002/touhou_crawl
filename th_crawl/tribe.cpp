@@ -210,6 +210,8 @@ string tribe_property::GetName()
 		return "순수한 생명";
 	case TPT_PURE_SYSTEM:
 		return "순수한 시스템";
+	default:
+		break;
 	}
 	return "버그특성";
 }
@@ -476,6 +478,8 @@ string tribe_property::GetInfor()
 		return value>1?"당신은 2개의 추가 생명이 남아있다.":"당신은 1개의 추가 생명이 남아있다."; 
 	case TPT_PURE_SYSTEM:
 		return "당신은 순화 상태에서도 스펠카드를 사용할 수 있으며 부적의 충전속도가 3배가 된다.";
+	default:
+		break;
 	}
 	return "이 특성은 버그다.";
 }
@@ -702,6 +706,8 @@ string tribe_property::GetDetail()
 			"당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 1개 남았다.";
 	case TPT_PURE_SYSTEM:
 		return "당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 스펠카드가 사용이 가능하게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.";
+	default:
+		break;
 	}
 	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
 }
@@ -719,6 +725,8 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_PURE_LIFE:	
 	case TPT_PURE_SYSTEM:
 		return CL_junko;
+	default:
+		break;
 	}
 	return CL_STAT;
 }
@@ -896,13 +904,15 @@ void tribe_property::gain(bool gain_)
 		return;
 	case TPT_PURE_SYSTEM:
 		return;
+	default:
+		break;
 	}
+	return;
 }
 
 
 void PropertyView()
 {
-	int i=0;
 	changedisplay(DT_PROPERTY);
 	while(1)
 	{
@@ -1028,6 +1038,8 @@ void SetTribe(tribe_type select_)
 		you.SetProperty(TPT_EYE,1);
 		you.SetProperty(TPT_BLOOD_MAGIC,1);
 		break;
+	default:
+		break;
 	}
 	for(int i=0;i<SKT_MAX;i++)
 		you.skill[i].aptit = aptitude[select_][i];
@@ -1036,7 +1048,6 @@ void SetTribe(tribe_type select_)
 
 void LevelUpTribe(int level_)
 {
-	char temp[100];
 	switch(you.tribe)
 	{
 	case TRI_HUMAN:
@@ -1513,6 +1524,8 @@ void LevelUpTribe(int level_)
 			printlog("당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
 			you.SetProperty(TPT_CONFUSE_ATTACK,1);
 		}
+		break;
+	default:
 		break;
 	}
 }

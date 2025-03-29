@@ -112,7 +112,7 @@ s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evo
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), gift_count(0), piety(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -1430,6 +1430,7 @@ int players::GetBuffOk(stat_up stat_)
 	case BUFFSTAT_MREGEN:
 	case BUFFSTAT_HASTE:
 	case BUFFSTAT_HALO:
+	default:
 		return value_;
 		break;
 	}
@@ -1514,7 +1515,7 @@ interupt_type players::HpRecover(int delay_)
 }
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
 void deadlog();
-void resurectionlog(char* reason);
+void resurectionlog(string reason);
 int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 {
 	int prev_value_ = value_;
@@ -1859,6 +1860,8 @@ void players::UpDownBuff(stat_up stat_, int value_)
 		break;
 	case BUFFSTAT_MREGEN:
 		break;
+	default:
+		break;
 	}
 }
 void players::doingActionDump(dump_action_type type_, string name_)
@@ -1927,8 +1930,6 @@ int players::PowUpDown(int value_, bool big_)
 {
 	if (GetProperty(TPT_PURE_POWER))
 		return power; //풀파워 모드면 떨어지지않음
-
-	bool full_power_ = power>=500?true:false;
 
 	if(big_ && value_<0 && power>500)
 		power = 500;
@@ -2010,6 +2011,8 @@ bool players::ResistUpDown(int value_, resist_type resist_)
 	case RST_POWER:
 		power_keep += value_;
 		break;
+	default:
+		break;
 	}
 	return true;
 }
@@ -2037,6 +2040,8 @@ bool players::UnidenResistUpDown(int value_, resist_type resist_)
 		break;
 	case RST_POWER:
 		uniden_power_keep += value_;
+		break;
+	default:
 		break;
 	}
 	return true;
@@ -2356,7 +2361,6 @@ void players::CheckPunish(int delay_)
 						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_FORGIVE,true,false,false,CL_white_blue,
 							 PlaceHolderHelper(GetGodString((god_type)i)));
 	
-						char temp[200];
 						if(you.god==GT_SATORI) {
 							AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIVEUP, PlaceHolderHelper(GetGodString((god_type)i))),CL_small_danger);
 						}
@@ -3952,6 +3956,8 @@ interupt_type players::resetLOS(bool speak_)
 								break;
 							case DG_ZIGURRAT_STAIR:
 								map_list.dungeon_enter[ZIGURRAT].detected = true;
+								break;
+							default:
 								break;
 							}
 

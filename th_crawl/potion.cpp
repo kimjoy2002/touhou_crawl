@@ -102,6 +102,8 @@ int isGoodPotion(potion_type kind)
 	case PT_PARALYSIS:
 	case PT_DOWN_STAT:
 		return -1;
+	default:
+		break;
 	}
 	return 1;
 }
@@ -275,5 +277,8 @@ void drinkpotion(potion_type kind, bool waste_)
 			you.SetDrunken(turn_);
 		}
 		return;
+	default:
+		break;
 	}
+	return;
 }

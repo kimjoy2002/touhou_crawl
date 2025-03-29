@@ -120,6 +120,8 @@ int isGoodRing(ring_type kind, int value)
 	case RGT_TELEPORT:
 	case RGT_HUNGRY:
 		return -1;
+	default:
+		break;
 	}
 	return 1;
 }
@@ -146,6 +148,8 @@ int isPickableRIng(ring_type kind)
 	case RGT_TELEPORT:
 	case RGT_HUNGRY:
 		return -1;
+	default:
+		break;
 	}
 	return 1;
 }
@@ -261,6 +265,8 @@ bool equipring(ring_type kind, int value)
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 1;
 		break;
+	default:
+		break;
 	}
 	return effectartifact(kind,value);
 }
@@ -291,6 +297,8 @@ bool unidenequipring(ring_type kind, int value)
 	case RGT_ELEC_RESIS:
 		you.UnidenResistUpDown(value,RST_ELEC);
 		return true;
+	default:
+		break;
 	}
 	return false;
 }

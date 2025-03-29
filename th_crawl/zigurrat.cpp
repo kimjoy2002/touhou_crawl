@@ -174,7 +174,7 @@ void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
 
 void addZigguratMonsterInner(int num, int mon_id_, int x_, int y_)
 {
-	monster* mon_ = env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
+	env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
 }
 int getZigguratType(int level)
 {
@@ -242,7 +242,7 @@ void addZigguratItem(int num, int x_, int y_, int item_num)
 		{
 			//아이템이 이 자리에 없을때~ 라는 조건이 필요함
 			item_infor t;
-			item* it = env[num].MakeItem((*rect_), CreateFloorItem(DEPTH_LEVEL, &t));
+			env[num].MakeItem((*rect_), CreateFloorItem(DEPTH_LEVEL, &t));
 			item_num--;
 		}
 		rect_++;

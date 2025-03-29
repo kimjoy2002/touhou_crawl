@@ -440,7 +440,6 @@ void wiz_mode()
 			break;
 		case 'w': //날씨발현
 		{
-			int next_ = DG_TEMPLE_FIRST;
 			printlog("a - 안개 b - 천둥번개 c - 쾌청", true, false, false, CL_help);
 			printlog("어느 날씨를 발현할건가?", false, false, false, CL_help);
 			wiz_list.wizard_mode = true;
@@ -661,7 +660,8 @@ void wiz_mode()
 			int j = 0;
 			for (int i = 0; i < 27; i++) {
 				char temp[100];
-				printlog(itoa(need_skill_exp(i, 100), temp, 10), false, false, false, color_[j]);
+				_itoa_s(need_skill_exp(i, 100), temp, sizeof(temp), 10);
+				printlog(temp, false, false, false, color_[j]);
 				printlog(" ", false, false, false, CL_normal);
 				if (i == 13)
 					enterlog();

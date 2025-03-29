@@ -78,6 +78,7 @@ public:
 	coord_def position;
 
 	unit():position(0,0){};
+	virtual ~unit() = default;
 	virtual const name_infor* GetName()=0;
 	virtual string GetNameString()=0;
 	virtual int GetHp()=0;

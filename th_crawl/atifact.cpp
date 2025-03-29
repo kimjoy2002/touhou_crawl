@@ -43,7 +43,6 @@ void atifact_infor::LoadDatas(FILE *fp)
 int GetAtifactValue(ring_type ring_, int good_bad_)
 {	
 	int a_ = good_bad_>=0?1:-1;
-	static char temp[32];
 	switch(ring_)
 	{
 	case RGT_STR:
@@ -81,6 +80,8 @@ int GetAtifactValue(ring_type ring_, int good_bad_)
 			skill_ += randA_1(4) * 100;
 			return skill_;
 		}
+	default:
+		break;
 	}
 	return 1;
 }
@@ -164,6 +165,9 @@ string GetAtifactString(ring_type ring_, int value_)
 		break;
 	case RGT_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
+		break;
+	default:
+		break;
 	}
 	return oss.str();
 }
@@ -249,7 +253,8 @@ const char* GetAtifactInfor(ring_type ring_, int value_)
 	case RGT_SKILL_UP:
 		sprintf_s(temp, 128, "지정된 스킬레벨이 올라간다.(%s+%d)", skill_string((skill_type)(value_ % 100)).c_str(), value_ / 100);
 		break;
-
+	default:
+		break;
 	}
 	return temp;
 }
@@ -358,6 +363,8 @@ bool effectartifact(ring_type kind, int value)
 
 	}
 		break;
+	default:
+		break;
 	}
 	return false;
 }
@@ -383,7 +390,9 @@ int ArmourExceptopn(armour_kind type)
 	case AMK_POISON:
 		return RGT_POISON_RESIS;
 	case AMK_AUTUMN:
-		break;		
+		break;
+	default:
+		break;
 	}
 	return -1;
 }

@@ -37,6 +37,8 @@ int GetMaterial(material_kind kind_, armour_value ac_)
 			:(ac_==AMV_MAX_EV? -11 
 			:(ac_==AMV_MIN_EV? -4
 			:0));
+	default:
+		break;
 	}
 
 	return 0;
@@ -55,6 +57,8 @@ LOCALIZATION_ENUM_KEY GetMaterialStringKey(material_kind kind_)
 		return LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN;
 	case MTK_PLATE: //판금
 		return LOC_SYSTEM_ITEM_ARMOUR_M_PLATE;
+	default:
+		break;
 	}
 	return LOC_SYSTEM_ITEM_ARMOUR_M_ROBE;
 }
@@ -139,6 +143,8 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		t->weight = 6.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;	
+	default:
+		break;
 	}
 }
 
@@ -192,6 +198,8 @@ void equipArmour(armour_kind type, int value)
 		you.ResistUpDown(value,RST_POISON);
 		break;	
 	case AMK_AUTUMN:
-		break;		
+		break;
+	default:
+		break;
 	}
 }

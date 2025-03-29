@@ -28,7 +28,7 @@ events::events()
 }
 
 events::events(int id_, coord_def position_, event_type type_, int count_)
-:id(id_),position(position_),type(type_),prev_sight(false), count(count_), value(0)
+:id(id_),position(position_),type(type_), count(count_),prev_sight(false), value(0)
 {
 	start();
 }

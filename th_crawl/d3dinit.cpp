@@ -75,7 +75,7 @@ bool Setup()
 	fontDesc.PitchAndFamily = FF_DONTCARE;
 	fontDesc.MipLevels = 1;
 
-	strcpy(fontDesc.FaceName, "Noto Sans Mono");
+	strcpy_s(fontDesc.FaceName, sizeof(fontDesc.FaceName), "Noto Sans Mono");
 	
 
 	HRESULT hr = D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);

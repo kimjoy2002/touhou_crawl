@@ -125,6 +125,7 @@ public:
 
 
 	monster();
+	virtual ~monster() = default;
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	void ReTarget();

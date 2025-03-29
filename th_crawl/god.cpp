@@ -33,6 +33,7 @@ string GetGodString(god_type god)
 	case GT_ERROR:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_ERROR);
 	case GT_NONE:
+	default:
 		return "";
 	case GT_JOON_AND_SION:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION);
@@ -158,6 +159,7 @@ bool GetGodAbility(int level, bool plus)
 	switch(you.god)
 	{
 	case GT_ERROR:
+	default:
 		return false;
 	case GT_NONE:
 		return false;
@@ -982,6 +984,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	switch(you.god)
 	{
 	case GT_ERROR:
+	default:
 		return false;
 	case GT_NONE:
 		return false;
@@ -1084,7 +1087,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog("미노리코는 흥분한 상태로 외쳤다.\"바로 그거야!\"",true,false,false,CL_warning);
-					you.PietyUpDown(5*isSprint()?5:1);
+					you.PietyUpDown(5*(isSprint()?5:1));
 				}
 			}
 		}
@@ -1361,6 +1364,7 @@ bool GodAccpect_Entering()
 	case GT_SATORI:
 	case GT_BYAKUREN:
 	case GT_TENSI:
+	default:
 		return false;
 	case GT_SEIJA:
 		printlog(seija_talk(GT_NONE, 0),true,false,false,CL_seija);
@@ -1392,6 +1396,7 @@ bool GodAccpect_GetPitem()
 	}
 	case GT_ERROR:
 	case GT_NONE:
+	default:
 		return false;
 	case GT_JOON_AND_SION:
 	{
@@ -1454,6 +1459,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_NONE:
 	case GT_JOON_AND_SION:
 	case GT_KANAKO:
+	default:
 		break;
 	case GT_SUWAKO:		
 		if(!you.GetPunish(GT_SUWAKO) && pietyLevel(you.piety)>=2)
@@ -1530,6 +1536,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_SUWAKO:
 	case GT_MIMA:
 	case GT_SHINKI:
+	default:
 		return false;
 	case GT_YUUGI:
 		printlog("유우기는 당신의 마법에 분노했다!",true,false,false,CL_small_danger);
@@ -1597,6 +1604,7 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	default:
 		return false;
 	}
 	return false;
@@ -1625,6 +1633,7 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 	case GT_TENSI:
 	case GT_SEIJA:
 	case GT_LILLY:
+	default:
 		return false;
 	case GT_MIKO:
 	{
@@ -1674,6 +1683,7 @@ bool GodAccpect_Explore_100()
 	case GT_SHINKI:
 	case GT_YUUGI:
 	case GT_SHIZUHA:
+	default:
 		return false;
 	case GT_HINA:
 	{
@@ -1777,6 +1787,7 @@ bool GodAccpect_Exp_get()
 	case GT_YUYUKO:
 	case GT_SATORI:
 	case GT_TENSI:
+	default:
 		return false;
 	case GT_SEIJA:
 	{
@@ -1831,6 +1842,7 @@ bool GodAccpect_First_contact()
 	case GT_YUKARI:
 	case GT_EIRIN:
 	case GT_YUYUKO:
+	default:
 		return false;
 	case GT_SATORI: //사토리와 텐시는 조절?
 		if(randA(1)==0)
@@ -1878,6 +1890,7 @@ bool GodAccpect_Abandon(god_type god)
 	case GT_SATORI:
 	case GT_TENSI:
 	case GT_SEIJA:
+	default:
 		return false;
 	case GT_LILLY:		
 		{
@@ -1928,6 +1941,7 @@ bool GodAccpect_turn(int turn)
 	switch(you.god)
 	{
 	case GT_ERROR:
+	default:
 		return false;
 	case GT_NONE:
 		return false;
@@ -2534,6 +2548,7 @@ void God_show()
 	switch(you.god)
 	{
 	case GT_ERROR:
+	default:
 		break;
 	case GT_NONE:
 		break;
@@ -3269,7 +3284,7 @@ void God_show()
 	ReleaseMutex(mutx);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		waitkeyinput(true);
 		break;
 	}
 	changedisplay(DT_GAME);
@@ -3281,6 +3296,7 @@ bool God_pray(const list<item>::iterator it)
 	switch(you.god)
 	{
 	case GT_ERROR:
+	default:
 		break;
 	case GT_NONE:
 		break;
@@ -3373,6 +3389,7 @@ bool god_punish(god_type god)
 	switch(god)
 	{
 	case GT_ERROR:
+	default:
 		break;
 	case GT_NONE:
 		break;
@@ -4473,6 +4490,7 @@ bool God_PraySpeak()
 		}
 	case GT_ERROR:
 	case GT_NONE:
+	default:
 		return false; 
 	case GT_JOON_AND_SION:
 		switch (level_)

@@ -671,13 +671,13 @@ int Player_Move(const coord_def &c)
 	int move_type; //0은 이동불가. 1은 이동하진 않음(주로 공격). 2는 이동했음
 	bool pick_ups = false;
 	coord_def tempPos = you.position;
-	if(move_type = you.move(c))
+	move_type = you.move(c);
+	if(move_type)
 	{
 		if(move_type != 1) //한칸이라도 이동했을때
 		{
 			//아이템이 땅에 있으면 메세지 출력
 			int num=0;
-			bool type = false;
 			if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
 			{
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])), false,false,false,CL_normal);
@@ -1442,6 +1442,8 @@ bool warning(dungeon_tile_type type, bool down)
 			}
 		}
 		break;
+	default:
+		break;
 	}
 	return true;
 }
@@ -1474,6 +1476,8 @@ void Stair_move_all() {
 	case DG_UP_STAIR:
 	case DG_RETURN_STAIR:
 		Stair_move(false);
+		break;
+	default:
 		break;
 	}
 }
@@ -1643,6 +1647,8 @@ void Stair_move(bool down)
 				case DG_HAKUREI_STAIR:
 					next_ = HAKUREI_LEVEL;
 					break;			
+				default:
+					break;
 			}
 
 			env[next_].EnterMap(0,dq); 
@@ -1970,7 +1976,7 @@ void stat_view()
 	changedisplay(DT_STATE);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		waitkeyinput(true);
 		break;
 	}
 	changedisplay(DT_GAME);
@@ -2024,7 +2030,7 @@ void rune_Show()
 
 	while(1)
 	{
-		int key_ = waitkeyinput(true);		
+		waitkeyinput(true);		
 		break;
 	}
 	changedisplay(DT_GAME);
@@ -2034,9 +2040,7 @@ void rune_Show()
 
 void Iden_Show()
 {
-	int line = 1, num=0;
 	vector<int> curList;
-
 
 	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
 		if (i >= IDEN_CHECK_POTION_START && i < IDEN_CHECK_POTION_END) {
@@ -3324,7 +3328,6 @@ void auto_pick_onoff(bool auto_)
 
 void floorMove()
 {
-	int current_level_ = current_level;
 	dungeon_level next_ = TEMPLE_LEVEL;
 
 

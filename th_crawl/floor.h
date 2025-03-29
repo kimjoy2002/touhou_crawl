@@ -54,7 +54,7 @@ public:
 	static bool isSwim(floor_type type_); //물위 배치가능(물위 가능)
 	static bool isNoGround(floor_type type_); //지상 배치불가?
 
-	char* GetName();
+	string GetName();
 };
 
 

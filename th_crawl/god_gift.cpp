@@ -36,6 +36,7 @@ int GetGodGiftTime(god_type god)
 	case GT_ERROR:
 	case GT_NONE:
 	case GT_SUWAKO:
+	default:
 		return 0;
 	case GT_JOON_AND_SION:
 		return (you.god_value[GT_JOON_AND_SION][1] == -1)?6:0;
@@ -73,6 +74,7 @@ bool GodGift(god_type god, int piety)
 	{
 	case GT_ERROR:
 	case GT_NONE:
+	default:
 		return false;
 	case GT_SUWAKO:
 		swako_gift(true);
@@ -153,7 +155,7 @@ public:
 
 struct compare { 
 	bool operator()(const temp_class &a,const temp_class &b) const
-	{return (a.level != b.level)?a.level < b.level:a.exp<a.exp;}
+	{return (a.level != b.level)?a.level < b.level:a.exp<b.exp;}
 };
 
 void swako_gift(bool speak_) {

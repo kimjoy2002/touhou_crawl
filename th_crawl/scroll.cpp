@@ -148,6 +148,8 @@ int isGoodScroll(scroll_type kind)
 	case SCT_CURSE_ARMOUR:
 	case SCT_CURSE_JEWELRY:
 		return -1;
+	default:
+		break;
 	}
 	return 1;
 }
@@ -374,6 +376,8 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			bool return_ = brand_weapon_scroll(pre_iden_);
 			return return_;
 		}
+	default:
+		break;
 	}
 	return true;
 }
@@ -1010,7 +1014,6 @@ bool amnesia_scroll(bool pre_iden_)
 
 	if(you.currentSpellNum)
 	{
-		int i=0;
 		view_spell("잊을 마법을 선택하세요. ( ?키로 설명을 볼 수 있다. )");
 		//changedisplay(DT_SPELL);
 		while(1)

@@ -102,7 +102,6 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 		return true;
 	}
 
-	int i=0;
 	if(EvokeFlagCheck(kind, S_FLAG_DIREC))
 	{
 		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
@@ -271,6 +270,8 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	
 	switch(kind)
 	{
+	default:
+		break;
 	case EVK_PAGODA:
 		{
 			beam_iterator beam(you.position,target);
@@ -327,7 +328,6 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			while (loop_)
 			{
 				int percent_ = 9;
-				int select_ = 0;
 				deletelog();
 				printlog("요술망치로 무슨 소원을 빌거야?", true, false, true, CL_help);
 				printlog("a - 날 회복시켜줘!", true, false, true, CL_normal);

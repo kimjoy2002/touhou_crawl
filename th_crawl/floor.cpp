@@ -16,10 +16,10 @@
 
 
 floor_effect::floor_effect()
-:image(NULL), image2(NULL), position(), type(FLOORT_NORMAL), time(1), parent(PRT_NEUTRAL)
+: position(), image(NULL), image2(NULL), time(1), type(FLOORT_NORMAL), parent(PRT_NEUTRAL)
 {}
 floor_effect::floor_effect(const coord_def &c, textures *t, textures *t2, floor_type type_, int time_, parent_type parent_)
-:image(t), image2(t2), position(c), type(type_), time(time_*10), parent(parent_)
+: position(c), image(t), image2(t2), time(time_*10), type(type_), parent(parent_)
 {
 }
 	
@@ -184,7 +184,7 @@ bool floor_effect::isNoGround(floor_type type_)
 }
 int floor_effect::danger(unit* unit_, bool first_)
 {
-	int prev_danger=0, danger_=0;
+	int danger_=0;
 	if(first_ && env[current_level].isSmokePos(unit_->position.x,unit_->position.y))
 	{
 		return 0;
@@ -204,20 +204,20 @@ int floor_effect::danger(unit* unit_, bool first_)
 	}
 }
 		
-char* floor_effect::GetName()
+string floor_effect::GetName()
 {
 	switch(type)
 	{
 	case FLOORT_AUTUMN:
-		return "단풍잎";
+		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_AUTUMN);
 	case FLOORT_STONE:
-		return "바위 압정";
+		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_STONE);
 	case FLOORT_SCHEMA:
-		return "틈새";
+		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_SCHEMA);
 	case FLOORT_GOLD:
-		return "동전";
+		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_GOLD);
 	case FLOORT_NORMAL:
 	default:
-		return 0;
+		return "";
 	}
 }

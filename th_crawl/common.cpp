@@ -177,8 +177,7 @@ int rand_int_with_nonlogic(int min, int max)
 		min = max;
 		max = temp;
 	}	
-	int rand_ = rand_engine_nonlogic();
-	min = (rand_engine() % (max - min+1)) + min;
+	min = (rand_engine_nonlogic() % (max - min+1)) + min;
 	return min;
 }
 
@@ -322,7 +321,7 @@ float ceil_up(float x)
 {
    return ((x>0) ? floor(x+0.999f) : ceil(x-0.001f));
 }
-char asctonum(char a)
+unsigned char asctonum(char a)
 {
 	return (a>='a'&&a<='z')?(a-'a'):((a>='A'&&a<='Z')?(a-'A'+26):0);
 }

@@ -68,6 +68,8 @@ attack_type GetTanmacAttackType(tanmac_type type)
 			return ATT_THROW_NORMAL;			
 		case TMT_POISON_NEEDLE:
 			return ATT_THROW_WEAK_POISON;
+		default:
+			break;
 	}
 	return ATT_THROW_NORMAL;
 }
@@ -108,6 +110,8 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 			return isCanDelete_?true:(randA(9)==0);
 		case TMT_KIKU_COMPRESSER:
 			return true;
+		default:
+			break;
 	}
 	return false;
 }
@@ -190,6 +194,8 @@ void MakeTanmac(item_infor* t, int select_)
 		t->name = name_infor(GetTanmacKey(t->value4));
 		t->weight = 0.5f*t->num;
 		t->value = 20;
+		break;
+	default:
 		break;
 	}
 
@@ -541,9 +547,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 	
 	beam.init();
 	coord_def prev = beam.start_pos();
-	int penetrate = infor_.penetrate;
 	int direc = beam.GetDirec();
-	int length = 1;
 	int count = 0;
 	int path = 8;
 	switch(infor_.type1)
@@ -588,7 +592,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 				{
 					temp_len_++;
 					Sleep(16);
-					if(infor_.type1 == BMT_NORMAL || infor_.type2 == BMT_WALL)
+					if(infor_.type1 == BMT_NORMAL || infor_.type1 == BMT_WALL)
 						env[current_level].ClearEffect();
 				}	
 				if(env[current_level].isMove(it->pos,true) && (!infor_.order || !infor_.order->isplayer() || env[current_level].isInSight(it->pos)) 
@@ -742,7 +746,6 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 		sort(vec_.begin(),vec_.end(),[](sector_check& s1, sector_check& s2){
 			return s1.length < s2.length;
 		});
-		int temp_len_ = 1;
 		for(auto it = vec_.begin();it!=vec_.end();it++)
 		{
 			if(env[current_level].isMove(it->pos,true) && env[current_level].isInSight(it->pos) && you.isSightnonblocked(it->pos))
@@ -896,8 +899,8 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 	}
 	beam_iterator beam(you.position,you.position);
 	projectile_infor infor(8,true,false);
-	int short_ = 0;
-	if(short_ = Common_Throw(it, it2, beam, &infor, -1,  0, auto_))
+	int short_ = Common_Throw(it, it2, beam, &infor, -1,  0, auto_);
+	if(short_)
 	{
 		if(it != you.item_list.end())
 		{

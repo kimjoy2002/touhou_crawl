@@ -372,7 +372,7 @@ void seija_real_gift(int key_)
 				for(int i = rand_int(4,8); i > 0; i--)
 				{	
 					item_infor t;
-					item* it = env[current_level].MakeItem(you.position,CreateFloorItem(0,&t));
+					env[current_level].MakeItem(you.position,CreateFloorItem(0,&t));
 				}
 			}
 			break;
@@ -381,7 +381,7 @@ void seija_real_gift(int key_)
 				for(int i = rand_int(4,7); i > 0; i--)
 				{	
 					item_infor t;
-					item* it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t));
+					env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 0, &t));
 				}
 			}
 			break;
@@ -390,7 +390,7 @@ void seija_real_gift(int key_)
 			for (int i = 2; i > 0; i--)
 			{
 				item_infor t;
-				item* it = env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t));
+				env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t));
 			}
 		}
 		break;

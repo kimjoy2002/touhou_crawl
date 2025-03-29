@@ -31,7 +31,7 @@ public:
 	int SendBuf(void *buf,int len);
 	bool SendFile(const char* c, const char* name);
 	void Close();
-	void ErrorHandling(char* message);
+	void ErrorHandling(string message);
 };
 
 

@@ -211,8 +211,8 @@ string LocalzationManager::getCorrectParticle(const string& word, const string& 
         return opt1; 
     }
 
-    int cho = index / (21 * 28);
-    int jung = (index % (21 * 28)) / 28;
+    //int cho = index / (21 * 28);
+   // int jung = (index % (21 * 28)) / 28;
     int jong = index % 28;
 
     return jong?opt2:opt1;

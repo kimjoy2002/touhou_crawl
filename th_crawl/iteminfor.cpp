@@ -605,6 +605,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				break;
 			}
 			break;
+		default:
+			break;
 		}
 
 		if (it->value5 && it->value6)
@@ -750,6 +752,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			text_ += "단풍으로 만들어진 옷. 의외로 제대로된 옷이다.\n";
 			text_ += "시즈하를 믿고있을때 주변의 풍경에 동화되어서 은밀이 급격하게 올라간다.\n\n";
 			break;
+		default:
+			break;
 		}
 		switch (it->type)
 		{
@@ -768,6 +772,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case ITM_ARMOR_BODY_ARMOUR_3:
 			text_ += "강철로 된 판금을 덧댄 갑옷.\n";
 			text_ += "마법과 움직임을 방해하지만 당신의 안전을 책임진다.\n";
+			break;
+		default:
 			break;
 		}
 		char temp[100];
@@ -915,6 +921,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 					if (key) key->insert('u');
 				}
 			}
+			break;
+		default:
 			break;
 		}
 		char temp[100];

@@ -268,8 +268,6 @@ unsigned int WINAPI SoundLoop(void *arg)
 	{
 		__try
 		{
-			DWORD lastTime = timeGetTime();
-			DWORD currTime = lastTime;
 			MSG msg;
 			while (1)
 			{

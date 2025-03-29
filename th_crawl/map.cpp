@@ -20,8 +20,8 @@
 
 
 map_dummy::map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_,dungeon_tile_type wall_tex_):
-floor(floor_), pos(pos_),wall(wall_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),floor_tex(floor_tex_),wall_tex(wall_tex_),
-connect_enter(false),connect_exit(false)
+pos(pos_),wall(wall_),floor(floor_),size_x(size_x_),size_y(size_y_),pattern(pattern_),flag(0), m_entrance(0,0),m_exit(0,0),
+connect_enter(false),connect_exit(false),floor_tex(floor_tex_),wall_tex(wall_tex_)
 {
 	//if(!pattern_)
 	//{
@@ -456,7 +456,6 @@ void make_lake(int num, int repeat, boolean lava)
 	bool no_lake_ = false;
 	for(int j=0;j<repeat;j++) //무한반복 제거용
 	{
-		bool success= true;
 		int r_size_x = rand_int(2,5);
 		int r_size_y = r_size_x==2?rand_int(3,5):(randA(3)?r_size_x:2);
 		int m_size=10;
@@ -467,7 +466,7 @@ void make_lake(int num, int repeat, boolean lava)
 		{
 			for(int y_ = temp_coord.y-r_size_y+1; y_ < temp_coord.y+r_size_y; y_++)
 			{
-				if(!(env[num].dgtile[x_][y_].tile >= DG_FLOOR && env[num].dgtile[x_][y_].tile <= DG_FLOOR_END || env[num].dgtile[x_][y_].tile == DG_SEA || env[num].dgtile[x_][y_].tile == DG_LAVA))
+				if(!((env[num].dgtile[x_][y_].tile >= DG_FLOOR && env[num].dgtile[x_][y_].tile <= DG_FLOOR_END) || env[num].dgtile[x_][y_].tile == DG_SEA || env[num].dgtile[x_][y_].tile == DG_LAVA))
 				{
 					no_lake_ = true;
 					x_ = temp_coord.x+r_size_x-1;
@@ -730,7 +729,6 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 
 		if(make_room_)
 		{
-			int percent_ = door_percent_;
 			for(it=vec_map.begin();it!=vec_map.end();it++) 
 			{//방을 만든다.
 				(*it)->make_map(env[num],make_wall_);
@@ -918,7 +916,6 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 
 		if(make_room_)
 		{
-			int percent_ = door_percent_;
 			it=vec_map.begin();
 			for(int i = 0 ; i < divide_ ; i++)
 			{

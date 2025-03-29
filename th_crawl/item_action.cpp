@@ -232,7 +232,6 @@ void discard(list<item>::iterator it, int number)
 			}
 		}
 	}
-	item *temp2 = NULL;
 	if (drop_number >= 1) {
 		item *temp2 = env[current_level].AddItem(you.position, &(*it), drop_number);
 		temp2->drop = true;
@@ -508,7 +507,6 @@ void Spelllcard_Evoke(char auto_)
 		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
 		return;
 	}
-	int i=0;
 	view_item(IVT_EVOKE,"무슨 아이템을 발동하시겠습니까?");
 	while(1)
 	{

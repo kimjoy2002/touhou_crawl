@@ -48,7 +48,7 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 
 void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
 {
-	bool rect_ = (infor_->skill) ? SkillFlagCheck((skill_list)infor_->spell, S_FLAG_RECT) : SpellFlagCheck((spell_list)infor_->spell, S_FLAG_RECT);
+	(infor_->skill) ? SkillFlagCheck((skill_list)infor_->spell, S_FLAG_RECT) : SpellFlagCheck((spell_list)infor_->spell, S_FLAG_RECT);
 
 
 	if (infor_->smite)

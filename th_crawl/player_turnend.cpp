@@ -1207,7 +1207,6 @@ interupt_type players::SetInter(interupt_type inter_)
 void deadlog()
 {
 	{
-		char temp[200];	
 		if(you.dead_order && you.dead_order->order)
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_DEAD_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName())),CL_normal);
 		else if(you.dead_reason == DR_HUNGRY)
@@ -1226,10 +1225,10 @@ void deadlog()
 }
 
 
-void resurectionlog(char* reason)
+void resurectionlog(string reason)
 {
 	char temp[200];
-	sprintf_s(temp, 200, "%s에 의해서 부활했다.", reason);
+	sprintf_s(temp, 200, "%s에 의해서 부활했다.", reason.c_str());
 	AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
 }
 

@@ -596,6 +596,8 @@ int shieldPanaltyOfWeapon(item_type type, int weapon_kind)
 			return 2;
 		}
 		break;
+	default:
+		break;
 	}
 	return 0;
 }
@@ -1167,7 +1169,6 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 				iden_list.autopickup[i] = false;
 		}
 		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
-			int cur = i - IDEN_CHECK_SPC_START;
 			iden_list.autopickup[i] = true;
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {

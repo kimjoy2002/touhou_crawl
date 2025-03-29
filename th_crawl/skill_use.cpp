@@ -528,6 +528,8 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			you.equipment[ET_ARMOR]->image = &img_item_autumn_armour[4];
 			you.equipment[ET_ARMOR]->equip_image = &img_play_item_body[9];
 			break;
+		default:
+			break;
 		}
 		soundmanager.playSound("buff");
 		printlog("당신의 방어구는 커다란 단풍잎으로 변했다!",true,false,false,CL_normal);
@@ -2195,27 +2197,6 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
 
-	switch(next_)
-	{
-	case GT_NONE:
-	case GT_BYAKUREN:
-	case GT_KANAKO:
-	case GT_SUWAKO:
-	case GT_MINORIKO:
-	case GT_MIMA:
-	case GT_SHINKI:
-	case GT_YUUGI:
-	case GT_SHIZUHA:
-	case GT_HINA:
-	case GT_YUKARI:
-	case GT_EIRIN:
-	case GT_YUYUKO:
-	case GT_SATORI:
-	case GT_TENSI:
-	case GT_LILLY:
-		break;
-	}
-
 	you.PunishUpDown(GetGodGiftTime(GT_SEIJA)-1,next_);
 	you.gift_count = GetGodGiftTime(GT_SEIJA);
 	
@@ -3061,7 +3042,6 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		while (true)
 		{
 			view_skill("어떤 스킬을 순화할거지?");
-			int move_ = 1;
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
@@ -4052,6 +4032,8 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 				break;
 			case SKL_PHILOSOPHERS_5:
 				return skill_stone_uplift(power,short_,&you,target);
+			default:
+				break;
 			}
 		}
 		break;
@@ -4114,6 +4096,8 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_MIKO_6:
 		return skill_miko_6(power, short_, &you, target);
+		break;
+	default:
 		break;
 	}
 	return 0;

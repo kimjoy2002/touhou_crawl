@@ -75,12 +75,12 @@ void replay_class::init_class()
 	DeleteRpy();
 
 
-	struct tm *t;
+	struct tm t;
 	time_t now;
 	time(&now);
-	t=localtime(&now);
+	localtime_s(&t, &now);
 	char filename[512];
-	sprintf_s(filename,512,"replay/%s-%04d%02d%02d-%02d%02d%02d.rpy",you.user_name.c_str(),1900+t->tm_year,t->tm_mon+1,t->tm_mday,t->tm_hour,t->tm_min,t->tm_sec);
+	sprintf_s(filename,512,"replay/%s-%04d%02d%02d-%02d%02d%02d.rpy",you.user_name.c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
 	
 	replay_string = filename;
 	sprintf_s(infor.name,32,"%s",you.user_name.c_str());
@@ -108,10 +108,10 @@ bool replay_class::SaveReplayStart()
     _mkdir("replay");  // Windows에서 mkdir 대신 _mkdir 사용
 
     FILE* fp = nullptr;
-    struct tm* t;
+    struct tm t;
     time_t now;
     time(&now);
-    t = localtime(&now);
+	localtime_s(&t, &now);
 
     if (replay_string.empty()) {
         replay_string = "replay/temp.rpy";
@@ -163,7 +163,7 @@ bool replay_class::LoadReplayStart()
 	}
 
 	char filename[512];
-	mkdir("replay");
+	_mkdir("replay");
 	
 	sprintf_s(filename,512,"%s",replay_string.c_str());
 
@@ -335,7 +335,7 @@ bool replay_menu(int value_)
 		sort(file_vector.begin(),file_vector.end());
 		int page=0;
 		int file_num=file_vector.size();
-		int max_page=(file_num+9)/10;
+		//int max_page=(file_num+9)/10;
 
 		while(1)
 		{

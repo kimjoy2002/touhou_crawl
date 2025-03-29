@@ -119,9 +119,9 @@ bool Display(float timeDelta)
 }
 
 
-display_manager::display_manager():tile_type(0),text_log(),text_sub(),state(DT_TEXT),item_view(), item_vt(IVT_INFOR),
-item_view_message("무슨 아이템을 고르겠습니까?"), image(NULL), log_length(1), move(0), max_y(1), sight_type(0), 
-spell_sight(0), scale_x(0), scale_y(0)
+display_manager::display_manager():tile_type(0),text_log(),text_sub(),state(DT_TEXT),
+scale_x(0), scale_y(0),item_view(), item_vt(IVT_INFOR), item_view_message("무슨 아이템을 고르겠습니까?"), image(NULL),
+log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
 {
 	for(int i=0;i<52;i++)
 		item_view[i] = 0;
@@ -209,11 +209,9 @@ void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 
 void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
-{	
-	int i=0;
+{
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
-	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	
 	DrawTextUTF8(pfont,pSprite,item_view_message.c_str(), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
@@ -529,11 +527,9 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	return;
 }
 void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
-{	
-	int i=0;
+{
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	char temp[100];
-	char sp_char = (i<27)?('a'+i):('A'+i-27);
 	if(move == 0)
 		DrawTextUTF8(pfont,pSprite,"어느 스킬을 사용하겠습니까?", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 	else
@@ -558,7 +554,7 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += 250;
 			{
-				int k = sprintf_s(temp,100,"%s",SkillCostString(skill_));
+				sprintf_s(temp,100,"%s",SkillCostString(skill_));
 				DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			}
 			rc.left = 500;
@@ -628,7 +624,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				int base_skill = GetBaseSkillExp();
 				int skill_pecent = GetMaxSkillExp(you.skill[skt]);
-				float multi_ = exp_to_skill_exp(you.GetSkillLevel(skt, false));
+				exp_to_skill_exp(you.GetSkillLevel(skt, false));
 
 				float value_ = (float)skill_pecent / base_skill;
 
@@ -1231,8 +1227,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayAc());
-		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ (you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0;
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0);
+		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, (temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT)));
 		rc.left += fontDesc.Width*left_;
 
 		left_ = sprintf_s(temp,128,"    힘  :");
@@ -1333,7 +1329,6 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		{
 			stringstream ss_amulet;
 			item* _item = you.equipment[ET_NECK];
-			char temp2[64];
 			if (_item->type == ITM_AMULET)
 			{
 				//ss_amulet << you.equipment[ET_NECK]->id << ") " << LocalzationManager::formatString(iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], PlaceHolderHelper(""))
@@ -2009,6 +2004,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					case DOT_SEA:
 						dot_sea.draw(pSprite,GetDotX(i+offset_.x),GetDotY(j+offset_.y),255);
 						break;
+					default:
+						break;
 					}
 				}
 			}
@@ -2265,9 +2262,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
 				{
 					if((env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_)))
-					{	
-						bool sight = true;	
-					
+					{					
 						//if(!env[current_level].isExplore(i+x_,j+y_))
 						if(map_effect==1)
 							img_effect_freeze.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
@@ -2750,6 +2745,8 @@ void changemove(int var)
 			break;
 		case DT_SKILL_USE:
 			DisplayManager.move = DisplayManager.move?0:1;
+			break;
+		default:
 			break;
 	}
 	ReleaseMutex(mutx);

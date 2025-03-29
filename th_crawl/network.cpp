@@ -1,6 +1,8 @@
 ﻿#include "network.h"
 #include "replay.h"
 #include "option_manager.h"
+#include <winsock2.h>
+#include <ws2tcpip.h>
 bool is_little_endian()
 {
 	const int x = 1;
@@ -23,27 +25,44 @@ void cccc(char *b, int s, char k)
 
 void sendScore(const char *c, const char *file)
 {
-	if (option_mg.getServerIp().size() == 0)
+	if (option_mg.getServerIp().empty())
 		return;
 
 	NetClient client;
-
 	client.StartUp();
-	//client.Connect("127.0.0.1",12345);
-	struct hostent *host_entry = gethostbyname(option_mg.getServerIp().c_str());
-	if (!host_entry)
-	{
+
+	addrinfo hints = {}, *result = nullptr;
+	hints.ai_family = AF_INET;        // IPv4
+	hints.ai_socktype = SOCK_STREAM;  // TCP
+
+	std::string serverIp = option_mg.getServerIp();
+	std::string serverPort = std::to_string(option_mg.getServerPort());
+
+	int res = getaddrinfo(serverIp.c_str(), serverPort.c_str(), &hints, &result);
+	if (res != 0 || result == nullptr) {
+		printf("getaddrinfo 실패: %d\n", res);
 		return;
 	}
-	client.Connect(inet_ntoa(*(struct in_addr*)host_entry->h_addr_list[0]), option_mg.getServerPort());
+
+	// IP 주소 문자열로 변환
+	char ipStr[INET_ADDRSTRLEN] = {0};
+	sockaddr_in *addr = (sockaddr_in *)result->ai_addr;
+	inet_ntop(AF_INET, &(addr->sin_addr), ipStr, INET_ADDRSTRLEN);
+
+	// 연결 시도
+	client.Connect(ipStr, option_mg.getServerPort());
+
+	// 데이터 전송
 	packet data;
-	strcpy(data.str,"hello world"); 
+	strcpy_s(data.str, sizeof(data.str), "hello world");
 	data.str[11] = 0;
+
 	//client.SendData(data);
 	client.SendFile(c, file);
 	client.Close();
-	return;
 
+	freeaddrinfo(result);
+	return;
 }
 
 
@@ -66,9 +85,15 @@ bool NetClient::StartUp()
 bool NetClient::Connect(char *ip, int port)
 {
 	ZeroMemory(&serverAddress, sizeof(serverAddress));
-	NetClient::serverAddress.sin_addr.s_addr=inet_addr(ip);
 	NetClient::serverAddress.sin_family=AF_INET;
 	NetClient::serverAddress.sin_port=htons(port);
+
+	if (inet_pton(AF_INET, ip, &serverAddress.sin_addr) <= 0) {
+		ErrorHandling("inet_pton() fail");
+		ok = false;
+		return false;
+	}
+
 	if(connect(Socket, (SOCKADDR *)&(serverAddress), sizeof(serverAddress))==SOCKET_ERROR)
 	{
 		ErrorHandling("connect() error");
@@ -159,10 +184,10 @@ bool NetClient::SendFile(const char* c,const char* name)
 	memset(fsize,0,64);
 	memset(fsize2,0,64);
 	//strcpy(fname,"이름없음-20160329-043601.txt");
-	strcpy(fname+strlen(fname),"\0");
-	strcpy(fname2+strlen(fname2),"\0");
+	strcpy_s(fname+strlen(fname), 1,"\0");
+	strcpy_s(fname2+strlen(fname2), 1,"\0");
 	sprintf_s(fstring,256,c);
-	strcpy(fstring+strlen(fstring),"\0");
+	strcpy_s(fstring+strlen(fstring), 1,"\0");
 	SendBuf(fstring,256);
 	SendBuf(fname,256);
 	sprintf_s(fsize, 64,"%d",len);
@@ -217,7 +242,7 @@ void NetClient::Close()
 }
 
 
-void NetClient::ErrorHandling(char* message)
+void NetClient::ErrorHandling(string message)
 {
 	//fputs(message, stderr);
 	//fputc('\n', stderr);

@@ -15,11 +15,11 @@
 
 
 smoke::smoke()
-:image(NULL), position(), type(SMT_NORMAL), time(1), expand(0), parent(PRT_NEUTRAL)
+: position(), image(NULL),type(SMT_NORMAL), time(1), expand(0), parent(PRT_NEUTRAL)
 {}
 
 smoke::smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_)
-:image(t), position(c), type(type_), time(time_), expand(expand_), parent(parent_)
+:position(c), image(t), type(type_), time(time_), expand(expand_), parent(parent_)
 {
 	env[current_level].dgtile[c.x][c.y].flag |= FLAG_SMOKE;
 	if(sight_inter())

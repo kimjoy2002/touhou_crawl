@@ -53,7 +53,7 @@ MapNode mapNode_zigurrat("꿈의세계 루나틱", ZIGURRAT_LEVEL, 1);
 
 
 MapNode::MapNode(const char* name_, int map_id_, int max_level_):
-name(name_), map_id(map_id_), max_level(max_level_)
+map_id(map_id_), max_level(max_level_), name(name_)
 {
 	unique_id = ++seqence;
 }

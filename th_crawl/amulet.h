@@ -11,6 +11,7 @@
 
 #include "enumMapBuilder.h"
 
+using namespace std;
 
 enum amulet_type
 {
@@ -57,6 +58,6 @@ bool isCanCharge(amulet_type kind);
 bool isCanEvoke(amulet_type kind);
 bool chargingFinish(amulet_type kind, int value);
 bool evokeAmulet(amulet_type kind, int value_);
-const char* getOccultName(occult_type kind);
+string getOccultName(occult_type kind);
 
 #endif // __AMULET_H__

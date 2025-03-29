@@ -118,17 +118,17 @@ bool Dump(int type, string *filename_)
 
 	char filename[100];
 	char sql_[256];
-	mkdir("morgue");
+	_mkdir("morgue");
 	FILE *fp;
-	struct tm *t;
+	struct tm t;
 	time_t now;
 	time(&now);
-	t = localtime(&now);
+	localtime_s(&t, &now);
 
 	sprintf_s(filename, 100, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
 		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
 		you.user_name.c_str(),
-		1900 + t->tm_year, t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
+		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec);
 
 
 	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
@@ -141,8 +141,7 @@ bool Dump(int type, string *filename_)
 	fprintf_s(fp, "동방크롤 %s 덤프 파일\n\n", version_string);
 	if (type == 1)
 	{
-		char death_reason[64] = "";
-		char temp_reason[64];
+		stringstream death_reason;
 
 		if (wiz_list.wizard_mode == 1)
 		{
@@ -157,57 +156,67 @@ bool Dump(int type, string *filename_)
 		switch (you.dead_reason)
 		{
 		case DR_NONE:
-			strncat(death_reason, "알수없는 이유", 64);
+		{
+			stringstream temp_reason;
 			if (you.dead_order)
 			{
-				sprintf_s(temp_reason, 64, "(%d 데미지", you.dead_order->damage);
-				strncat(death_reason, temp_reason, 64);
+				temp_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE);
 				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason, 64, ",%s", you.dead_order->order->GetName()->getName().c_str());
-					strncat(death_reason, temp_reason, 64);
+					temp_reason << "," << you.dead_order->order->GetName()->getName();
 
 				}
-				strncat(death_reason, ")", 64);
+				temp_reason << ")";
 			}
-			strncat(death_reason, "에 의해 죽었다.", 64);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN, PlaceHolderHelper(temp_reason.str()));
 			break;
+		}
 		case DR_HITTING:
 			if (you.dead_order)
 			{
+				stringstream temp_reason;
 				if (you.dead_order->order)
 				{
-					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
-					strncat(death_reason, temp_reason, 64);
+					temp_reason << you.dead_order->order->GetName()->getName();
 				}
 				switch (you.dead_order->type)
 				{
 				case ATT_NONE:
 				case ATT_SMITE:
 				default:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE);
+					}
 					break;
 				case ATT_SMASH:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "바닥에 집어던져졌다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE);
+					}
 					break;
 				case ATT_BLOOD:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "피를 토하며 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD);
+					}
 					break;
 				case ATT_NOISE:
-					if (you.dead_order->order)
-						strncat(death_reason, "의 굉음에 의해 ", 64);
-					strncat(death_reason, "고막이 터져죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE);
+					}
 					break;
 				case ATT_SPEAR:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "찔려죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR);
+					}
 					break;
 				case ATT_NORMAL:
 				case ATT_S_POISON:
@@ -220,56 +229,72 @@ bool Dump(int type, string *filename_)
 				case ATT_CHOAS:
 				case ATT_LUNATIC:
 				case ATT_SLEEP:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "맞아죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL);
+					}
 					break;
 				case ATT_VAMP:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "빨려죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP);
+					}
 					break;
 				case ATT_VEILING:
-					if (you.dead_order->order)
-						strncat(death_reason, "의 ", 64);
-					strncat(death_reason, "바람갑옷에 베여죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING);
+					}
 					break;
 				case ATT_RUSH:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "교통사고로 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH);
+					}
 					break;
 				case ATT_WALL:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					else
-						strncat(death_reason, "벽에 ", 64);
-					strncat(death_reason, "부딪혀 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_WALL);
+					}
 					break;
 				case ATT_PSYCHO:
-					if (you.dead_order->order)
-						strncat(death_reason, "의 ", 64);
-					strncat(death_reason, "염동력에 의해 날라가 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO);
+					}
 					break;
 				case ATT_STONE_TRAP:
-					strncat(death_reason, "바위에 새끼발가락을 찧여 죽었다.", 64);
+					death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_TRAP);
 					break;
 				case ATT_THROW_NORMAL:
 				case ATT_THROW_WATER:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "피탄당했다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC);
+					}
 					break;
 				case ATT_NORMAL_BLAST:
 				case ATT_AC_REDUCE_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에게 ", 64);
-					strncat(death_reason, "폭사당했다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST);
+					}
 					break;
 				case ATT_SUN_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "의 ", 64);
-					strncat(death_reason, "햇빛에 타들어죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SUN);
+					}
 					break;
 				case ATT_FIRE:
 				case ATT_FIRE_WEAK:
@@ -277,9 +302,11 @@ bool Dump(int type, string *filename_)
 				case ATT_CLOUD_FIRE:
 				case ATT_FIRE_BLAST:
 				case ATT_FIRE_PYSICAL_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "불타죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE);
+					}
 					break;
 				case ATT_COLD:
 				case ATT_COLD_WEAK:
@@ -287,122 +314,122 @@ bool Dump(int type, string *filename_)
 				case ATT_CLOUD_COLD:
 				case ATT_COLD_BLAST:
 				case ATT_COLD_PYSICAL_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "얼어죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_COLD);
+					}
 					break;
 				case ATT_ELEC:
 				case ATT_ELEC_WEAK:
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "감전되어 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC);
+					}
 					break;
 				case ATT_POISON_BLAST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "독살당했다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_POISON);
+					}
 					break;
 				case ATT_CLOUD_NORMAL:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "바람에 휩쓸려 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_WIND);
+					}
 					break;
 				case ATT_CLOUD_CURSE:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "저주받아 죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE);
+					}
 					break;
 				case ATT_BURST:
-					if (you.dead_order->order)
-						strncat(death_reason, "에 의해 ", 64);
-					strncat(death_reason, "터져죽었다.", 64);
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY, PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BURST);
+					}
 					break;
 				case ATT_DROWNING:
-					strncat(death_reason, "은 질식하여 죽었다.", 64);
+					death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_DROWNING);
 					break;
 				}
-				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
-				strncat(death_reason, temp_reason, 64);
+				death_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 			}
-			else
-				strncat(death_reason, "알수없는 데미지에 의해 죽었다.", 64);
+			else {
+				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE);
+			}
 			break;
 		case DR_POISON:
-			strncat(death_reason, "독에 중독되어 죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION);
 			break;
 		case DR_POTION:
-			strncat(death_reason, "물약에 의해", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_POTION);
 			if (you.dead_order) {
-				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
-				strncat(death_reason, temp_reason, 64);
+				death_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 			}
-			strncat(death_reason, "에 의해 죽었다.", 64);
 			break;
 		case DR_QUIT:
-			strncat(death_reason, "게임을 포기했다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_QUIT);
 			break;
 		case DR_HUNGRY:
-			strncat(death_reason, "굶어죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY);
 			break;
 		case DR_MIRROR:
-			if (you.dead_order)
-			{
-				if (you.dead_order->order)
-				{
-					sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
-					strncat(death_reason, temp_reason, 64);
-					strncat(death_reason, "의 ", 64);
-				}
-
+			if (you.dead_order && you.dead_order->order) {
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
+			} else {
+				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR);
 			}
-			strncat(death_reason, "반사데미지로 죽었다.", 64);
 			if (you.dead_order)
 			{
-				sprintf_s(temp_reason, 64, "(%d 데미지)", you.dead_order->damage);
-				strncat(death_reason, temp_reason, 64);
+				death_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 			}
 			break;
 		case DR_MP:
-			strncat(death_reason, "순화한 영력이 전부 소모되어 죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP);
 			break;
 		case DR_JUNKO:
-			strncat(death_reason, "순호에 의해 사예가 순화되어 죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT);
 			break;
 		case DR_SLEEP:
-			if (you.dead_order || you.dead_order->order)
-			{
-				sprintf_s(temp_reason, 64, "%s", you.dead_order->order->GetName()->getName().c_str());
-				strncat(death_reason, temp_reason, 64);
-				strncat(death_reason, "에 의해 ", 64);
+			if (you.dead_order && you.dead_order->order) {
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
+			} else {
+				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP);
 			}
-			strncat(death_reason, "행복한 꿈을 꾸다 죽었다.", 64);
 			break;
 		case DR_GHOST:
-			strncat(death_reason, "오쿠리쵸친에 생명력이 빨려 죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_GHOST);
 			break;
 		case DR_EFFECT:
-			strncat(death_reason, "부작용에 의해 죽었다.", 64);
+			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT);
 			break;
 		case DR_ESCAPE:
 			if (you.haveOrb()) {
-				sprintf_s(temp_reason, 64, "음양옥과 %d개의 룬을 들고 탈출하는데 성공했다.", you.haveGoal());
-				strncat(death_reason, temp_reason, 64);
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIN, PlaceHolderHelper(to_string(you.haveGoal())));
 			}
 			else if (you.haveGoal()) {
-				sprintf_s(temp_reason, 64, "%d개의 룬만 들고 도망쳤다.", you.haveGoal());
-				strncat(death_reason, temp_reason, 64);
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COWARD, PlaceHolderHelper(to_string(you.haveGoal())));
 			}
-			else
-				strncat(death_reason, "성과없이 탈출했다.", 64);
+			else {
+				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_FAIL);
+			}
 			break;
 		}
 
-		fprintf_s(fp, "%s\n             ", death_reason);
+		fprintf_s(fp, "%s\n             ", death_reason.str().c_str());
 		fprintf_s(fp, "최종턴 %d\n\n", you.turn);
 
-		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason,
+		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason.str().c_str(),
 			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god).c_str(), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
 		);
 
@@ -683,7 +710,6 @@ bool Dump(int type, string *filename_)
 				}
 			}
 		}
-		float x = 0, y = 0;
 		for(i = 0;i < view_length && it != DisplayManager.text_log.text_list.end();it++)
 		{
 			fprintf_s(fp,"%s", ConvertUTF16ToUTF8((*it)->text).c_str());

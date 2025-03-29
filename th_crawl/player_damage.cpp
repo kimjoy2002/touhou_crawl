@@ -479,7 +479,6 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_AC_REDUCE_BLAST:
 		{
 			float percent_ = 1.0f;
-			int ac_dec=0;
 			for(int i = ac/2; i>0; i--)
 				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
 		}
@@ -524,6 +523,8 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_WEATHER:
 		type_ = GetWeatherType(this, damage_, bonus_damage);
 		break;
+	default:
+		break;
 	}
 	damage_ += bonus_damage;
 
@@ -567,6 +568,8 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_CLOUD_NORMAL:
 	case ATT_CLOUD_CURSE:
 		damage_ *= GetCloudResist()?0.5f:1.0f;
+		break;
+	default:
 		break;
 	}
 

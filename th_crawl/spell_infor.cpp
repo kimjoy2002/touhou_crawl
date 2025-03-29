@@ -1224,7 +1224,6 @@ string GetSkillInfor(skill_list skill)
 string GetSpellSchoolString(spell_list spell)
 {
     std::ostringstream oss;
-	int k=0;
 	for(int i=0;i<3 && SpellSchool(spell,i) != SKT_ERROR;i++)
 	{
         if (i > 0)

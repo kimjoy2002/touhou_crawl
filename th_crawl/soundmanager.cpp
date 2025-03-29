@@ -77,22 +77,22 @@ void SOUNDBUFFER::Load(IDirectSound8* Sound, const char* WaveFileName, bool Stre
 	MMCKINFO ckRIFF;
 	ZeroMemory(&ckRIFF, sizeof(MMCKINFO));
 	ckRIFF.fccType = mmioFOURCC('W', 'A', 'V', 'E');
-	MMRESULT a = mmioDescend(hmmio, &ckRIFF, NULL, MMIO_FINDRIFF);
+	mmioDescend(hmmio, &ckRIFF, NULL, MMIO_FINDRIFF);
 
 
 	MMCKINFO ckChunk;
 	ZeroMemory(&ckChunk, sizeof(MMCKINFO));
 	ckChunk.fccType = mmioFOURCC('f', 'm', 't', ' ');
-	MMRESULT b = mmioDescend(hmmio, &ckChunk, &ckRIFF, MMIO_FINDCHUNK);
+	mmioDescend(hmmio, &ckChunk, &ckRIFF, MMIO_FINDCHUNK);
 
 
 	WAVEFORMATEX WaveFormat;
 	ZeroMemory(&WaveFormat, sizeof(WAVEFORMATEX));
-	MMRESULT c = mmioRead(hmmio, (char*)&WaveFormat, sizeof(WAVEFORMATEX));
+	mmioRead(hmmio, (char*)&WaveFormat, sizeof(WAVEFORMATEX));
 
 	mmioAscend(hmmio, &ckChunk, 0);
 	ckChunk.ckid = mmioFOURCC('d', 'a', 't', 'a');
-	MMRESULT d = mmioDescend(hmmio, &ckChunk, &ckRIFF, MMIO_FINDCHUNK);
+	mmioDescend(hmmio, &ckChunk, &ckRIFF, MMIO_FINDCHUNK);
 
 	if (Streaming == true)
 	{

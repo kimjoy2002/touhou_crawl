@@ -335,7 +335,7 @@ void tensi_kaname(int good_)
 			flag_ |= M_FLAG_ALLY;
 		int id_ = MON_KANAME;
 
-		if (monster* mon_ = BaseSummon(MON_KANAME, rand_int(60, 100), false, true, 4, good_>0?&you:NULL, you.position, SKD_OTHER, -1))
+		if (monster* mon_ = BaseSummon(id_, rand_int(60, 100), false, true, 4, good_>0?&you:NULL, you.position, SKD_OTHER, -1))
 		{
 			int fanalty_ = randA(randA(you.level));
 			mon_->LevelUpdown(you.level - fanalty_);
@@ -604,7 +604,7 @@ void tensi_sucide(int doing_)
 	for (int i = randA_1(you.level/6+1); i> 0; i--)
 	{
 		int id_ = MON_RABIT_BOMB;
-		if (monster* mon_ = BaseSummon(MON_RABIT_BOMB, rand_int(20, 30), false, true, 2, &you, you.position, SKD_OTHER, -1))
+		if (monster* mon_ = BaseSummon(id_, rand_int(20, 30), false, true, 2, &you, you.position, SKD_OTHER, -1))
 		{
 			mon_->CheckSightNewTarget();
 		}
@@ -966,7 +966,6 @@ int GetChoas(unit* unit_, int damage_)
 
 string tensi_talk(bool good_, tensi_do_list list_)
 {
-	static char temp[256];
 	if(list_ != TENSI_NOTHING && randA(2))
 	{//공용대사
 		if(good_)

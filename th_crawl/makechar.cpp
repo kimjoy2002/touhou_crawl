@@ -780,6 +780,8 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_EVOCATE, 60, false);
 		you.GiveSkillExp(SKT_STEALTH, 60, false);
 		break;
+	default:
+		break;
 	}
 	you.skill_exper = 25;
 	you.hp=you.max_hp;

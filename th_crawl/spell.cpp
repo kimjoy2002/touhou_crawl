@@ -1847,7 +1847,6 @@ void SpellUse(char auto_, int auto_direc_)
 		}
 		bool blood_ = false;
 		bool use_ = true;
-		int i=0;
 		view_spell("사용할 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
 		//changedisplay(DT_SPELL);
 		while(1)
@@ -1884,9 +1883,9 @@ void SpellUse(char auto_, int auto_direc_)
 						{
 							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
 							changedisplay(DT_GAME);
-							int direc_;
 							coord_def target_;
-							if(direc_ = Direc_Throw(auto_direc_, &target_))
+							int direc_ = Direc_Throw(auto_direc_, &target_);
+							if(direc_)
 							{
 								if(PlayerUseSpell(spell_, false, target_))
 								{	
@@ -2029,9 +2028,7 @@ void SpellView()
 {
 
 	if(you.currentSpellNum)
-	{
-		int i=0;
-		
+	{		
 		view_spell("설명을 볼 마법을 선택하세요.");
 		//changedisplay(DT_SPELL);
 		while(1)

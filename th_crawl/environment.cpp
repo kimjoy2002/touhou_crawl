@@ -454,6 +454,8 @@ bool environment::magicmapping(int x_, int y_)
 	case DG_ZIGURRAT_STAIR:
 		map_list.dungeon_enter[ZIGURRAT].detected = true;
 		break;
+	default:
+		break;
 	}
 
 	dgtile[x_][y_].flag = dgtile[x_][y_].flag | FLAG_MAPPING;
@@ -659,6 +661,8 @@ const char* environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
 		return "(p키로 기도)";
+	default:
+		break;
 	}
 	return "";
 }
@@ -1011,7 +1015,7 @@ monster* environment::AddMonster(monster *mon_, coord_def position_, int time_)
 		}
 	}
 	ReleaseMutex(mutx);
-	return false;
+	return nullptr;
 }
 monster* environment::AddMonster_Summon(int id_, int flag_, coord_def position_, summon_info &info_, int time_ = 0)
 {
@@ -2121,7 +2125,7 @@ floor_effect* environment::isFloorEffectPos(int x_,int y_, const floor_effect* e
 			return &(*it);
 		}
 	}
-	return false;	
+	return nullptr;	
 }
 smoke* environment::isSmokePos2(int x_,int y_, const smoke* excep_)
 {
@@ -2139,7 +2143,6 @@ smoke* environment::isSmokePos2(int x_,int y_, const smoke* excep_)
 monster* environment::getRandomMonster(bool except_melee)
 {
 	random_extraction<monster*> mon_list;
-	int num_=0;
 	vector<monster>::iterator it;
 	it = mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)

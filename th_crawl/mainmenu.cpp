@@ -327,7 +327,6 @@ void start_mainmenu()
 	string temp;
 	
 	temp = "메인 게임\n\n";
-	int size = temp.size();
 	temp += "a - 게임시작\n";
 	temp += "b - 튜토리얼(초심자)\n";
 	temp += "c - 튜토리얼(돌죽경험자용, 임시)\n";

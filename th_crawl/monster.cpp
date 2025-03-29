@@ -1002,6 +1002,8 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_WEATHER:
 		type_ = GetWeatherType(this, damage_, bonus_damage);
 		break;
+	default:
+		break;
 	}
 	damage_ += bonus_damage;
 
@@ -1045,6 +1047,8 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		damage_ *= GetCloudResist()?0.0f:1.0f;
 		break;
 	case ATT_CLOUD_CURSE:
+		break;
+	default:
 		break;
 	}
 	return damage_;
@@ -2416,7 +2420,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}
-		if(!randA(1+you.GetPunish(GT_SHINKI)?1:0) && !isArena())
+		if(!randA(1+(you.GetPunish(GT_SHINKI)?1:0)) && !isArena())
 		{
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
@@ -2967,6 +2971,7 @@ int monster::action(int delay_)
 			switch (state.GetState())
 			{
 			case MS_NORMAL:
+			default:
 				longmove();
 				if (flag & M_FLAG_SHIELD || isUserAlly()) {
 					if (distan_coord(position, first_position) > 4 * 4)
@@ -4530,7 +4535,6 @@ bool monster::GetCloudResist()
 
 bool monster::isSimpleState(monster_state_simple state_)
 {
-	monster_state_simple temp = MSS_NONE;
 	switch (state_)
 	{
 		case MSS_WANDERING:
@@ -4556,6 +4560,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return ((flag & M_FLAG_SUMMON) != 0);
 		case MSS_ALLY:
 			return (isUserAlly());
+		default:
+			break;
 	}
 	return false;
 }

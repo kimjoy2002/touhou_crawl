@@ -72,17 +72,19 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 		case SKT_FIRE:
 			resist_[RST_FIRE] = true;
 			break;
+		default:
+			break;
 		}
 	} 
 	
 	//각 속성공격에 해당되는데 해당 저항이 없는 경우 위험한 공격임
 	if(resist_[RST_POISON] && target_->poison_resist<=0)
 		return true;
-	if(resist_[RST_ELEC] && target_->elec_resist<=danger_ ?2:1)
+	if(resist_[RST_ELEC] && (target_->elec_resist<=(danger_ ?2:1)))
 		return true;
-	if(resist_[RST_FIRE] && target_->fire_resist<=danger_?2:1)
+	if(resist_[RST_FIRE] &&(target_->fire_resist<=(danger_?2:1)))
 		return true;
-	if(resist_[RST_ICE] && target_->ice_resist<=danger_ ?2:1)
+	if(resist_[RST_ICE] && (target_->ice_resist<=(danger_ ?2:1)))
 		return true;
 
 	if(!resist_[RST_POISON] && !resist_[RST_ELEC] && !resist_[RST_FIRE] && !resist_[RST_ICE])
@@ -1199,6 +1201,8 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 		break;
 	case ATT_POISON_BLAST:
 		image_ = &img_blast[3];
+		break;
+	default:
 		break;
 	}
 	int ball_size = size*size;
@@ -2398,9 +2402,7 @@ bool skill_knife_collect(int pow, bool short_, unit* order, coord_def target)
 }
 
 bool skill_burst(int pow, bool short_, unit* order, coord_def target)
-{	
-	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
-
+{
 	if(env[current_level].isMove(target.x, target.y))
 	{
 		if (env[current_level].isInSight(order->position)) {
@@ -3129,8 +3131,6 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("wind");
 		}
-		int damage_ = 20+power/8;
-		int reduce_damage_ = damage_;
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
 			///reduce_damage_ = max(1,reduce_damage_-randA(you.s_int)/2);
@@ -3633,7 +3633,6 @@ bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 	int id_ = MON_RACCON;
 	int time_ = rand_int(20,30)+randA(power);
 
-	int pow_ = power/3+randA(power*2/3);
 	int i = 3;
 
 	for(; i>0 ; i--)
@@ -3678,7 +3677,6 @@ bool skill_mamizo_evade(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 {
-	unit *hit_mon=NULL;
 	int direc = (GetPosToDirec(order->position, target) + 4)%8;
 	int max_length=6;
 	
@@ -3872,7 +3870,7 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("shoot_heavy");
 			}
-			coord_def temp = throwtanmac(22,beam,temp_infor,NULL);
+			throwtanmac(22,beam,temp_infor,NULL);
 		}
 		order->SetParadox(0); 
 		
@@ -4188,7 +4186,7 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 		int damage_ = (13 + power / 16);
 		beam_iterator beam(trash->position, target);
 		beam_infor temp_infor(randC(1, damage_), damage_, 99, order, order->GetParentType(), 8, 1, BMT_PENETRATE, ATT_THROW_NORMAL, trash->name);
-		coord_def final_ = throwtanmac(trash->image, beam, temp_infor, NULL);
+		throwtanmac(trash->image, beam, temp_infor, NULL);
 		max_++;
 
 		dif_rect_iterator rit(target, 3);
@@ -5490,6 +5488,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			break;
 		case AMK_MAID:
 			mon_->resist++;
+			break;
+		default:
 			break;
 		}
 	}

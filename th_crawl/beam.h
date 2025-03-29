@@ -52,7 +52,7 @@ class close_beam_iterator
 	coord_def target;
 	coord_def current;
 	char count;
-	char pos;
+	unsigned char pos;
 	bool direc;
 
 public:

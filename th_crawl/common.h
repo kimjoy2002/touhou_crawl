@@ -62,7 +62,7 @@ float round_up(float x);
 
 float ceil_up(float x);
 
-char asctonum(char a);
+unsigned char asctonum(char a);
 
 int randA(int x); /*0부터 X까지의 랜덤난수 리턴*/
 

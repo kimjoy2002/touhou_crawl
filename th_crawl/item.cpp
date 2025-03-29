@@ -529,6 +529,8 @@ const D3DCOLOR item::item_color()
 			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger: CL_STAT);
 		}
 		break;
+	default:
+		break;
 	}
 	if(((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && !second_name.isEmpty() && !identify)
 	{
@@ -915,6 +917,8 @@ bool item::isautopick()
 		return true;
 	case ITM_THROW_TANMAC:
 		return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
+	default:
+		break;
 	}
 	return false;
 }
@@ -982,6 +986,8 @@ void item::Identify()
 		if (value0 >= 0) {
 			iden_list.books_list[value0] = true;
 		}
+		break;
+	default:
 		break;
 	}
 	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value5 && value6)

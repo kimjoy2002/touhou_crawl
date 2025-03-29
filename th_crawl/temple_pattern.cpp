@@ -109,7 +109,7 @@ void makeAunnTemple(map_dummy* map, coord_def c)
 }
 
 
-char* real_altar_pattern(map_dummy* map, int id_)
+const char* real_altar_pattern(map_dummy* map, int id_)
 {
 	switch(id_)
 	{
@@ -705,7 +705,7 @@ char* real_altar_pattern(map_dummy* map, int id_)
 }
 
 
-char* altar_pattern(map_dummy* map, god_type god_)
+const char* altar_pattern(map_dummy* map, god_type god_)
 {
 
 	vector<int> id_list;

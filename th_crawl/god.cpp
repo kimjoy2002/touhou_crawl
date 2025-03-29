@@ -3222,7 +3222,7 @@ void God_show()
 					switch (you.god_value[GT_JUNKO][3])
 					{
 					case 1:
-						sprintf_s(temp, 100, " └스킬순화: 당신의 %s 스킬레벨은 캐릭터 레벨과 항상 같다. ", skill_string((skill_type)you.pure_skill));
+						sprintf_s(temp, 100, " └스킬순화: 당신의 %s 스킬레벨은 캐릭터 레벨과 항상 같다. ", skill_string((skill_type)you.pure_skill).c_str());
 						printsub(temp, true, CL_junko);
 						break;
 					case 2:
@@ -3934,7 +3934,8 @@ bool god_punish(god_type god)
 					potion_.push(PT_CONFUSE);
 					potion_.push(PT_POISON);
 					potion_type p_ = potion_.choice();
-					printarray(true,false,false,CL_small_danger,3,"에이린은 당신에게 억지로 ",potion_iden_string[p_],"물약을 먹였다!");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,true,false,false,CL_small_danger,
+						 PlaceHolderHelper(potion_iden_string[p_]));
 					drinkpotion(p_, false);
 				}
 				break;

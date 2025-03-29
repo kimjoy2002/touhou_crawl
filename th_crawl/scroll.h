@@ -43,8 +43,8 @@ enum scroll_type
 
 scroll_type goodbadscroll(int good_bad);
 
-extern char *scroll_uniden_string[SCT_MAX]; //스크롤 스트링
-extern const char *scroll_iden_string[SCT_MAX];
+extern LOCALIZATION_ENUM_KEY scroll_uniden_string[SCT_MAX]; //스크롤 스트링
+extern LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX];
 
 int isGoodScroll(scroll_type kind);
 bool readscroll(scroll_type kind, bool pre_iden_, bool waste_);

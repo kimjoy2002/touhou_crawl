@@ -469,7 +469,11 @@ const char* seija_talk(god_type god_, int piety)
 	{
 		switch(god_)
 		{
-		
+		case GT_ERROR:
+		case GT_NONE:
+		case GT_SEIJA:
+		default:
+			break;
 		case GT_JOON_AND_SION:
 			switch(randA(3))
 			{

@@ -146,35 +146,35 @@ extern map_infor map_list;
 
 void initMap();
 void map_algorithms(int num);
-char* common_base_pattern(int floor_, map_dummy* map);
-char* temple_pattern(map_dummy* map);
-char* misty_lake_pattern(map_dummy* map);
-char* youkai_mountain_pattern(map_dummy* map);
-char* scarlet_pattern(map_dummy* map);
+const char* common_base_pattern(int floor_, map_dummy* map);
+const char* temple_pattern(map_dummy* map);
+const char* misty_lake_pattern(map_dummy* map);
+const char* youkai_mountain_pattern(map_dummy* map);
+const char* scarlet_pattern(map_dummy* map);
 
-char* scarlet_library_pattern(map_dummy* map);
-char* scarlet_under_pattern(map_dummy* map);
-char* bamboo_pattern(map_dummy* map);
-char* subterranean_pattern(map_dummy* map);
+const char* scarlet_library_pattern(map_dummy* map);
+const char* scarlet_under_pattern(map_dummy* map);
+const char* bamboo_pattern(map_dummy* map);
+const char* subterranean_pattern(map_dummy* map);
 
-char* yukkuri_pattern(map_dummy* map);
-char* depth_pattern(map_dummy* map);
-char* dream_pattern(map_dummy* map);
-char* pandemonium_pattern(map_dummy* map);
-char* hakurei_pattern(map_dummy* map);
-char* zigurrat_pattern(map_dummy* map);
-
-
+const char* yukkuri_pattern(map_dummy* map);
+const char* depth_pattern(map_dummy* map);
+const char* dream_pattern(map_dummy* map);
+const char* pandemonium_pattern(map_dummy* map);
+const char* hakurei_pattern(map_dummy* map);
+const char* zigurrat_pattern(map_dummy* map);
 
 
-char* youkai_last_vault_pattern(map_dummy* map);
-char* scarlet_last_vault_pattern(map_dummy* map);
-char* eientei_vault_pattern(map_dummy* map);
-char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
-char* pandemonium_ice_last_vault_pattern(map_dummy* map);
-char* pandemonium_shinki_last_vault_pattern(map_dummy* map);
-char* yukkuri_last_vault_pattern(map_dummy* map);
-char* moon_last_vault_pattern(map_dummy* map);
-char* subterranean_last_vault_pattern(map_dummy* map);
-char* hakurei_last_vault_pattern(map_dummy* map);
-char* altar_pattern(map_dummy* map, god_type god_);
+
+
+const char* youkai_last_vault_pattern(map_dummy* map);
+const char* scarlet_last_vault_pattern(map_dummy* map);
+const char* eientei_vault_pattern(map_dummy* map);
+const char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
+const char* pandemonium_ice_last_vault_pattern(map_dummy* map);
+const char* pandemonium_shinki_last_vault_pattern(map_dummy* map);
+const char* yukkuri_last_vault_pattern(map_dummy* map);
+const char* moon_last_vault_pattern(map_dummy* map);
+const char* subterranean_last_vault_pattern(map_dummy* map);
+const char* hakurei_last_vault_pattern(map_dummy* map);
+const char* altar_pattern(map_dummy* map, god_type god_);

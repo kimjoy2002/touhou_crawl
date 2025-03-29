@@ -9,6 +9,8 @@
 #ifndef  __AMULET_H__
 #define  __AMULET_H__
 
+#include "enumMapBuilder.h"
+
 
 enum amulet_type
 {
@@ -41,8 +43,8 @@ enum occult_type
 };
 
 
-extern char *amulet_uniden_string[AMT_MAX];
-extern const char *amulet_iden_string[AMT_MAX];
+extern LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX];
+extern LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX];
 
 
 int isAmuletGotValue(amulet_type amulet_);

@@ -617,7 +617,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			//스킬레벨 설명해주기
 			char temp[100];
-			sprintf_s(temp, 100, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_), skill_string(ski_), you.GetSkillLevel(ski_, true));
+			sprintf_s(temp, 100, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_).c_str(), skill_string(ski_).c_str(), you.GetSkillLevel(ski_, true));
 			text_ += temp;
 
 			sprintf_s(temp,100, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);

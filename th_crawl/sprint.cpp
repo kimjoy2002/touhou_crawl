@@ -53,7 +53,7 @@ enum REWARD_ITEM_TYPE
 
 void reward_random_init();
 void set_sprint_map(map_dummy* map_dummy_);
-bool PixedMap(map_dummy* map, char *temp);
+bool PixedMap(map_dummy* map, const char *temp);
 bool addMonster_sprint(int num, int mon_id, map_dummy* map);
 bool reward_item(int num, REWARD_ITEM_TYPE reward_id, map_dummy* map);
 
@@ -612,7 +612,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_POTION, -1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -629,7 +629,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 					}
 					item_infor t;
 					makeitem(ITM_SCROLL, -1, &t, id_);
-					item* item_ = env[num].MakeItem(c, t);
+					env[num].MakeItem(c, t);
 				}
 				break;
 			}
@@ -642,7 +642,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_POTION, -1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -658,7 +658,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_RING, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -686,7 +686,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_SPELL, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -702,7 +702,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_BOOK, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -738,7 +738,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_AMULET, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -844,7 +844,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				}
 				item_infor t;
 				makeitem(ITM_MISCELLANEOUS, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -860,7 +860,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 			for (int i = rand_int(1,2); i > 0; i--) {
 				item_infor t;
 				makeitem(ITM_THROW_TANMAC, 1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -871,7 +871,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				id_ = rand_scroll_option.choice();
 				item_infor t;
 				makeitem(ITM_SCROLL, -1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -882,7 +882,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 				id_ = rand_potion_option.choice();
 				item_infor t;
 				makeitem(ITM_POTION, -1, &t, id_);
-				item* item_ = env[num].MakeItem(c, t);
+				env[num].MakeItem(c, t);
 			}
 			break;
 		}
@@ -896,42 +896,42 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 		{
 			item_infor t;
 			makeitem(ITM_GOAL, -1, &t, RUNE_SCARLET);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 		case REWARD_YOUKAI_RUNE:
 		{
 			item_infor t;
 			makeitem(ITM_GOAL, -1, &t, RUNE_YOUKAI_MOUNTAIN);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 		case REWARD_MOON_RUNE:
 		{
 			item_infor t;
 			makeitem(ITM_GOAL, -1, &t, RUNE_MOON);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 		case REWARD_PANDE_RUNE:
 		{
 			item_infor t;
 			makeitem(ITM_GOAL, -1, &t, RUNE_PANDEMONIUM_SHINKI);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 		case REWARD_HELL_RUNE:
 		{
 			item_infor t;
 			makeitem(ITM_GOAL, -1, &t, RUNE_SUBTERRANEAN);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 		case REWARD_GOAL:
 		{
 			item_infor t;
 			makeitem(ITM_ORB, -1, &t);
-			item* item_ = env[num].MakeItem(c, t);
+			env[num].MakeItem(c, t);
 			break;
 		}
 	}
@@ -940,7 +940,7 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 
 
 
-char* create_sprint_map()
+const char* create_sprint_map()
 {
 	return "\
 ##########################((((((((((((((((((((((((((((((((([[[[[[[[\

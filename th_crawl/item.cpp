@@ -285,10 +285,23 @@ string item::GetName(int num_)
 		}
 	}
 
-	if(type==ITM_POTION)
-		temp += iden_list.potion_list[value1].iden?potion_iden_string[value1]:potion_uniden_string[iden_list.potion_list[value1].color];
-	if(type==ITM_SCROLL)
-		temp += iden_list.scroll_list[value1].iden == 3?scroll_iden_string[value1]:scroll_uniden_string[iden_list.scroll_list[value1].type];
+	if(type==ITM_POTION) {
+		
+		if(iden_list.potion_list[value1].iden)  {
+			temp += LocalzationManager::locString(potion_iden_string[value1]);
+		} else {
+			temp += LocalzationManager::locString(potion_uniden_string[iden_list.potion_list[value1].color]);				
+		}
+		overwriteName = true;
+	}
+	if(type==ITM_SCROLL) {
+		if(iden_list.scroll_list[value1].iden == 3)  {
+			temp += LocalzationManager::locString(scroll_iden_string[value1]);
+		} else {
+			temp += LocalzationManager::locString(scroll_uniden_string[iden_list.scroll_list[value1].type]);				
+		}
+		overwriteName = true;
+	}
 	if(type==ITM_RING)
 	{			
 		if(!isArtifact())
@@ -324,7 +337,12 @@ string item::GetName(int num_)
 	}
 	if(type==ITM_AMULET)
 	{
-		temp += iden_list.amulet_list[value1].iden == 2 ?amulet_iden_string[value1]:amulet_uniden_string[iden_list.amulet_list[value1].type];
+		if(iden_list.amulet_list[value1].iden == 2)  {
+			temp += LocalzationManager::locString(amulet_iden_string[value1]);
+		} else {
+			temp += LocalzationManager::locString(amulet_uniden_string[iden_list.amulet_list[value1].type]);
+		}
+		overwriteName = true;
 	}
 	if(!isArtifact() && type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 	{

@@ -16,9 +16,9 @@
 
 
 dungeon_tile_type randomTemple(); 
-char* pande_pattern(map_dummy* map);
+const char* pande_pattern(map_dummy* map);
 
-char* common_enter_pattern(map_dummy* map)
+const char* common_enter_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -46,7 +46,7 @@ char* common_enter_pattern(map_dummy* map)
 
 
 
-char* common_base_pattern(int floor_, map_dummy* map)
+const char* common_base_pattern(int floor_, map_dummy* map)
 {
 	if (floor_ >= PANDEMONIUM_LEVEL && floor_ <= PANDEMONIUM_LAST_LEVEL)
 		return pande_pattern(map);
@@ -907,7 +907,6 @@ $$$...$$$";
 			}
 		case 32:
 			{
-			bool hw_ = randA(1);
 			map->size_x = 3;
 			map->size_y = 3;	
 			map->m_entrance.x = 0;
@@ -928,7 +927,6 @@ $$$...$$$";
 			}
 		case 33:
 			{
-			bool hw_ = randA(1);
 			map->size_x = 3;
 			map->size_y = 2;	
 			map->m_entrance.x = -map->size_x;
@@ -947,7 +945,6 @@ EEEEEEE\
 			}
 		case 34:
 			{
-			bool hw_ = randA(1);
 			map->size_x = 2;
 			map->size_y = 3;	
 			map->m_entrance.x = 0;
@@ -1784,7 +1781,7 @@ TT.....TT\
 }
 
 
-char* pande_pattern(map_dummy* map)
+const char* pande_pattern(map_dummy* map)
 {
 
 	switch (randA(21))
@@ -2475,7 +2472,7 @@ $$$...$$$";
 
 
 
-char* temple_pattern(map_dummy* map)
+const char* temple_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_TEMPLE_STAIR); //0은 템플 입구로 친다.
@@ -2647,7 +2644,7 @@ char* temple_pattern(map_dummy* map)
 	}
 }
 
-char* lake_enter_pattern(map_dummy* map)
+const char* lake_enter_pattern(map_dummy* map)
 {
 	switch (randA(0))
 	{
@@ -2683,7 +2680,7 @@ char* lake_enter_pattern(map_dummy* map)
 }
 
 
-char* youkai_enter_pattern(map_dummy* map)
+const char* youkai_enter_pattern(map_dummy* map)
 {
 	switch (randA(0))
 	{
@@ -2713,7 +2710,8 @@ char* youkai_enter_pattern(map_dummy* map)
 	}
 }
 
-char* yukkuri_enter_pattern(map_dummy* map)
+
+const char* yukkuri_enter_pattern(map_dummy* map)
 {
 	switch (randA(0))
 	{
@@ -2746,7 +2744,7 @@ char* yukkuri_enter_pattern(map_dummy* map)
 }
 
 
-char* dream_enter_pattern(map_dummy* map)
+const char* dream_enter_pattern(map_dummy* map)
 {
 	switch (randA(0))
 	{
@@ -2775,74 +2773,74 @@ char* dream_enter_pattern(map_dummy* map)
 }
 
 
-char* misty_lake_pattern(map_dummy* map)
+const char* misty_lake_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_MISTY_LAKE_STAIR);
 	return lake_enter_pattern(map);
 }
-char* youkai_mountain_pattern(map_dummy* map)
+const char* youkai_mountain_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_YOUKAI_MOUNTAIN_STAIR);
 	return youkai_enter_pattern(map);
 }
 
-char* scarlet_library_pattern(map_dummy* map)
+const char* scarlet_library_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SCARLET_L_STAIR);
 	return common_enter_pattern(map);
 }
-char* scarlet_under_pattern(map_dummy* map)
+const char* scarlet_under_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SCARLET_U_STAIR);
 	return common_enter_pattern(map);
 }
-char* bamboo_pattern(map_dummy* map)
+const char* bamboo_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_BAMBOO_STAIR);
 	return common_enter_pattern(map);
 }
-char* subterranean_pattern(map_dummy* map)
+const char* subterranean_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SUBTERRANEAN_STAIR);
 	return common_enter_pattern(map);
 }
-char* yukkuri_pattern(map_dummy* map)
+const char* yukkuri_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_YUKKURI_STAIR);
 	return yukkuri_enter_pattern(map);
 }
-char* depth_pattern(map_dummy* map)
+const char* depth_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_DEPTH_STAIR);
 	return common_enter_pattern(map);
 }
-char* dream_pattern(map_dummy* map)
+const char* dream_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_DREAM_STAIR);
 	return dream_enter_pattern(map);
 }
-char* pandemonium_pattern(map_dummy* map)
+const char* pandemonium_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_PANDEMONIUM_STAIR);
 	return common_enter_pattern(map);
 }
-char* hakurei_pattern(map_dummy* map)
+const char* hakurei_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_HAKUREI_STAIR);
 	return common_enter_pattern(map);
 }
-char* zigurrat_pattern(map_dummy* map)
+const char* zigurrat_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_ZIGURRAT_STAIR);
@@ -2850,7 +2848,7 @@ char* zigurrat_pattern(map_dummy* map)
 }
 
 
-char* scarlet_pattern(map_dummy* map)
+const char* scarlet_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SCARLET_STAIR);	
@@ -2884,7 +2882,7 @@ char* scarlet_pattern(map_dummy* map)
 
 
 
-char* youkai_last_vault_pattern(map_dummy* map)
+const char* youkai_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(1))
 	{
@@ -3012,7 +3010,7 @@ char* youkai_last_vault_pattern(map_dummy* map)
 
 
 
-char* scarlet_last_vault_pattern(map_dummy* map)
+const char* scarlet_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3066,7 +3064,7 @@ char* scarlet_last_vault_pattern(map_dummy* map)
 	}
 }
 
-char* eientei_vault_pattern(map_dummy* map)
+const char* eientei_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3142,7 +3140,7 @@ char* eientei_vault_pattern(map_dummy* map)
 	}
 }
 
-char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
+const char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3210,7 +3208,7 @@ $$$$$$$...$$$$$$$";
 
 
 
-char* pandemonium_ice_last_vault_pattern(map_dummy* map)
+const char* pandemonium_ice_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3254,7 +3252,7 @@ char* pandemonium_ice_last_vault_pattern(map_dummy* map)
 
 
 
-char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
+const char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3324,7 +3322,7 @@ $$$$=.=...=.=$$$$";
 
 
 	
-char* yukkuri_last_vault_pattern(map_dummy* map)
+const char* yukkuri_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3399,7 +3397,7 @@ char* yukkuri_last_vault_pattern(map_dummy* map)
 
 
 
-char* moon_last_vault_pattern(map_dummy* map)
+const char* moon_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3466,7 +3464,7 @@ char* moon_last_vault_pattern(map_dummy* map)
 
 
 	
-char* subterranean_last_vault_pattern(map_dummy* map)
+const char* subterranean_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{
@@ -3535,7 +3533,7 @@ char* subterranean_last_vault_pattern(map_dummy* map)
 
 
 
-char* hakurei_last_vault_pattern(map_dummy* map)
+const char* hakurei_last_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))
 	{

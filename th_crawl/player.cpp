@@ -2439,12 +2439,12 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		if(speak_)
 		{
 			enterlog();
-			sprintf_s(temp,50,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_),skill[skill_].level);
+			sprintf_s(temp,50,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
 			printlog(temp,true,false,false,CL_good);
 			if(skill[skill_].level == 1 || skill[skill_].level % 5 == 0 || skill[skill_].level == 27)
 			{
 				char temp2[200];
-				sprintf_s(temp2,200,"스킬 %s의 레벨업. 스킬레벨 %d",skill_string(skill_),skill[skill_].level);
+				sprintf_s(temp2,200,"스킬 %s의 레벨업. 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
 				AddNote(you.turn,CurrentLevelString(),temp2,CL_normal);
 			}
 		}

@@ -3066,7 +3066,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			{
 				i += sprintf_s(temp+i,500-i,"/");
 			}
-			i += sprintf_s(temp+i,500-i,"%s",skill_string(SpellSchool((spell_list)it->second,j)));
+			i += sprintf_s(temp+i,500-i,"%s",skill_string(SpellSchool((spell_list)it->second,j)).c_str());
 		}
 		for(;i<450/7;i++)
 			temp[i] = ' ';

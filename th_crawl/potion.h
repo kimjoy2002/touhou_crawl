@@ -12,8 +12,8 @@
 
 #include "player.h"
 potion_type goodbadpotion(int good_bad);
-extern const char *potion_uniden_string[PT_MAX]; //물약색스트링
-extern const char *potion_iden_string[PT_MAX];
+extern LOCALIZATION_ENUM_KEY potion_uniden_string[PT_MAX]; //물약색스트링
+extern LOCALIZATION_ENUM_KEY potion_iden_string[PT_MAX];
 int isGoodPotion(potion_type kind);
 void drinkpotion(potion_type kind, bool waste_);
 

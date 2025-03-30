@@ -48,14 +48,16 @@ string getLocalizationString(LOCALIZATION_TYPE type) {
 	}
 }
 
-void LocalzationManager::init(LOCALIZATION_TYPE type) {
+void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 	current_lang = type;
 	string filePath;
 
-	localization_map.clear();
-	speak_map.clear();
-	monster_name_map.clear();
-	monster_description_map.clear();
+	if(init_) {
+		localization_map.clear();
+		speak_map.clear();
+		monster_name_map.clear();
+		monster_description_map.clear();
+	}
 	
 	switch (type)
 	{

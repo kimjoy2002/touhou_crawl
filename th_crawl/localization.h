@@ -25,6 +25,7 @@ using namespace std;
 
 
 enum LOCALIZATION_TYPE {
+    LOCALIZATION_TYPE_DEFAULT = 1, //LOCALIZATION_TYPE_KOR
 	LOCALIZATION_TYPE_ENG = 0,
 	LOCALIZATION_TYPE_KOR,
 	LOCALIZATION_TYPE_MAX
@@ -152,7 +153,7 @@ private:
 public:
     static LOCALIZATION_TYPE current_lang;
 
-	static void init(LOCALIZATION_TYPE type);
+	static void init(LOCALIZATION_TYPE type, bool init_);
 
 	static const string& locString(LOCALIZATION_ENUM_KEY key);
 	static const string& speakString(SPEAK_ENUM_KEY key);

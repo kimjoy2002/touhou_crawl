@@ -268,7 +268,10 @@ LOCALIZATION_TYPE getDefaultLang() {
 
 
 void init_localization() {
-	LocalzationManager::init(getDefaultLang());
+	LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT, true);
+	if(getDefaultLang() != LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT) {
+		LocalzationManager::init(getDefaultLang(), false);
+	}
 }
 
 
@@ -755,7 +758,10 @@ bool option_menu(int value_)
 					cur = 0;
 				}
 				
-				LocalzationManager::init((LOCALIZATION_TYPE)cur);
+				LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT, true);
+				if((LOCALIZATION_TYPE)cur != LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT) {
+					LocalzationManager::init((LOCALIZATION_TYPE)cur, false);
+				}
 				option_mg.setLang(getLocalizationString((LOCALIZATION_TYPE)cur));
 			}
 		}

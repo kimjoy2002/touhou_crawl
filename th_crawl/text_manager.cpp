@@ -156,6 +156,27 @@ int printsub(string text_, bool enter_, D3DCOLOR color_)
 
 	return text_.size();
 }
+
+int printsub_blank(int final_index, int next_index)
+{
+	if (final_index >= next_index) {
+		return final_index;
+	}
+	ostringstream oss;
+	int remain = next_index - final_index;
+	for(int i=0;i<remain;i++)
+		oss << " ";
+	printsub(oss.str(),false,CL_normal);
+	return next_index;
+}
+
+int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_)
+{
+	printsub(text_, enter_, color_);
+
+	return PrintCharWidth(text_);
+}
+
 void deletesub()
 {
 	WaitForSingleObject(mutx, INFINITE);

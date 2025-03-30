@@ -772,7 +772,6 @@ bool option_menu(int value_)
 
 	}
 	changedisplay(DT_TEXT);
-	start_mainmenu();
 
 	return false;
 }

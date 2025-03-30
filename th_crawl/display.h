@@ -152,6 +152,8 @@ void enterlog();
 void printarray(bool enter_, bool log_, bool temp_, D3DCOLOR color_, int num_, ...);
 
 int printsub(string text_, bool enter_, D3DCOLOR color_);
+int printsub_blank(int final_index, int next_index);
+int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_);
 void deletesub();
 void entersub();
 int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...);

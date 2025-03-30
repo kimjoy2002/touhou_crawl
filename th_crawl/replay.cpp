@@ -335,7 +335,7 @@ bool replay_menu(int value_)
 		sort(file_vector.begin(),file_vector.end());
 		int page=0;
 		int file_num=file_vector.size();
-		//int max_page=(file_num+9)/10;
+		int max_page=(file_num+9)/10;
 
 		while(1)
 		{
@@ -410,6 +410,41 @@ bool replay_menu(int value_)
 				printsub(temp,true,CL_help);
 			}
 
+
+			changedisplay(DT_SUB_TEXT);
+			int input_ = waitkeyinput(true);
+
+			bool out_ = false;
+			if(input_ >= 'a' && input_ <= 'l')
+			{
+				int select_ = page*10+ (input_ - 'a');
+
+				if(select_<file_num)
+				{
+					char temp[512];
+					sprintf_s(temp,512,"replay/%s",file_vector[select_].path.c_str());
+					ReplayClass.init_replay(temp);
+					ReplayClass.LoadReplayStart();
+					out_ = true;
+				}
+			}
+			else if(input_ == VK_LEFT)
+			{
+				if(page>0)
+					page--;
+			}
+			else if(input_ == VK_RIGHT)
+			{
+				if(max_page>page+1)
+					page++;
+			}
+			else if(input_ == VK_ESCAPE)
+
+			{
+				out_= true;
+			}
+			if(out_)
+				break;
 		}
 
 

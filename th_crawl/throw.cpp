@@ -890,11 +890,11 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_THROW),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 던질 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_THROW), true, false, false, CL_normal);
 		return;
 	}
 	beam_iterator beam(you.position,you.position);
@@ -928,11 +928,11 @@ void Select_Throw()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 던질 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_THROW),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 던질 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_THROW), true, false, false, CL_normal);
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();

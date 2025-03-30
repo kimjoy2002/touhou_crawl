@@ -181,7 +181,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag);
 int SpellLength(spell_list skill);
 bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_);
 bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target);
-const char* SpellString(spell_list skill);
+string SpellString(spell_list skill);
 int SpellCap(spell_list skill);
 int SpellLevel(spell_list skill);
 int SpellNoise(spell_list skill);

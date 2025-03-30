@@ -815,7 +815,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 
 			if (s_evoke_ghost) {
-				printlog("유령 상태에선 적을 공격할 수 없다. ", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_ATTACK), true, false, false, CL_normal);
 				return 0;
 			}
 
@@ -2439,7 +2439,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	GodAccpect_Practice(up_point,skill_);
 	if(need_exp <= skill[skill_].exper)
 	{
-		char temp[50];
+		char temp[100];
 		int exp_pool = (skill[skill_].exper - need_exp)*exp_panalty/10;
 		skill[skill_].level+=1;
 		skill[skill_].exper = need_exp;
@@ -2451,7 +2451,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		if(speak_)
 		{
 			enterlog();
-			sprintf_s(temp,50,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
+			sprintf_s(temp,100,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
 			printlog(temp,true,false,false,CL_good);
 			if(skill[skill_].level == 1 || skill[skill_].level % 5 == 0 || skill[skill_].level == 27)
 			{
@@ -4414,7 +4414,7 @@ bool players::Drink(char id_)
 
 						if(iden_list.potion_list[(*it).value1].iden == false)
 						{		
-							printarray(false,false,false,CL_normal,3,"이것은 ",potion_iden_string[(*it).value1],"물약이다. ");		
+							printarray(false,false,false,CL_normal,3,"이것은 ",LocalzationManager::locString(potion_iden_string[(*it).value1]).c_str(),"물약이다. ");		
 						}
 						iden_list.potion_list[(*it).value1].iden = true;
 						(*it).identify = true;
@@ -4690,7 +4690,7 @@ bool players::Memorize(int spell_, bool immediately)
 		printlog("주문을 익히는데 성공했다.",true,false,false,CL_normal);
 
 		char temp[200];
-		sprintf_s(temp,200,"주문 기억 : %d레벨 %s",SpellLevel((spell_list)spell_),SpellString((spell_list)spell_));
+		sprintf_s(temp,200,"주문 기억 : %d레벨 %s",SpellLevel((spell_list)spell_),SpellString((spell_list)spell_).c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
 	}
 	you.remainSpellPoiont-=skill_level_;

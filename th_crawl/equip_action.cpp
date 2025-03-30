@@ -18,11 +18,11 @@ void Equip_Weapon()
 {
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 무기를 바꿀 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무기를 바꿀 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_WEAPON), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -79,11 +79,11 @@ void weapon_swap()
 {
 	if (you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 장비를 바꿀 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_EQUIP), true, false, false, CL_normal);
 		return;
 	}
 
@@ -141,11 +141,11 @@ void Equip_Armor()
 {
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 방어구를 바꿀 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 방어구를 바꿀 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_ARMOUR), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -192,11 +192,11 @@ void Unequip_Armor()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 방어구를 벗을 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_ARMOUR),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 방어구를 벗을 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_ARMOUR), true, false, false, CL_normal);
 		return;
 	}
 	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 벗겠습니까?");
@@ -240,11 +240,11 @@ void Equip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 장신구를 낄 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 장신구를 낄 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_EQUIP_JEWELRY), true, false, false, CL_normal);
 		return;
 	}
 	view_item(IVT_EQ_JEWELRY,"무슨 장신구를 장착하겠습니까?");
@@ -286,11 +286,11 @@ void Unequip_Jewelry()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 장신구를 벗을 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_JEWELRY),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 장신구를 벗을 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_JEWELRY), true, false, false, CL_normal);
 		return;
 	}
 	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 벗겠습니까?");

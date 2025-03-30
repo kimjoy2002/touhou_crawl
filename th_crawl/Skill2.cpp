@@ -1835,7 +1835,7 @@ void SkillUse(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return;
 	}
 	if(you.currentSkillNum)

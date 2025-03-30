@@ -26,11 +26,11 @@ void PickUp()
 {		
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 무언가를 주울 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_PICKUP),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 주울 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_PICKUP), true, false, false, CL_normal);
 		return;
 	}
 	int num=0;
@@ -264,11 +264,11 @@ void iteminfor_discard()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 버릴 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_DISCRAD), true, false, false, CL_normal);
 		return;
 	}
 	int i=0;
@@ -330,11 +330,11 @@ void fast_discard()
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 무언가를 버릴 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 버릴 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_DISCRAD), true, false, false, CL_normal);
 		return;
 	}
 	if(!you.final_item)
@@ -358,11 +358,11 @@ void Eatting(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 먹을 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EAT),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 먹을 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_EAT), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -417,11 +417,11 @@ void Drinking(char auto_)
 {
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 마실 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DRINK),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 마실 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_DRINK), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -504,7 +504,7 @@ void Spelllcard_Evoke(char auto_)
 {	
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return;
 	}
 	view_item(IVT_EVOKE,"무슨 아이템을 발동하시겠습니까?");
@@ -556,11 +556,11 @@ void Reading(char auto_)
 {
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 읽을 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_READ),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 무언가를 읽을 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_READ), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -570,7 +570,7 @@ void Reading(char auto_)
 	}
 	if(env[current_level].isSilence(you.position))
 	{
-		printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
 		return;
 	}
 	view_item(IVT_SCROLL,"무엇을 읽겠습니까?");
@@ -608,7 +608,7 @@ void Reading(char auto_)
 						{
 							if (you.isMemorize(spell_)) {
 								changedisplay(DT_GAME);
-								printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+								printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
 								return;
 							}
 							WaitForSingleObject(mutx, INFINITE);

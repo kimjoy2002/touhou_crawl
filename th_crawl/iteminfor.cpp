@@ -126,7 +126,7 @@ void iteminfor(bool gameover)
 							{
 								if (you.isMemorize(spell_)) {
 									changedisplay(DT_GAME);
-									printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
 									return;
 								}
 								memorize_action(spell_);
@@ -214,11 +214,11 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 
@@ -253,11 +253,11 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
@@ -306,11 +306,11 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
@@ -338,11 +338,11 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
@@ -356,11 +356,11 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost) {
-									printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 								if (you.drowned)
@@ -380,7 +380,7 @@ void iteminfor(bool gameover)
 								changedisplay(DT_GAME);
 								if (you.s_lunatic)
 								{
-									printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.s_evoke_ghost &&
@@ -401,11 +401,11 @@ void iteminfor(bool gameover)
 									changedisplay(DT_GAME);
 									if (you.s_lunatic)
 									{
-										printlog("광기에 휩싸인 상태로 할 수 없다!", true, false, false, CL_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 										return;
 									}
 									if (you.s_evoke_ghost) {
-										printlog("유령 상태에선 할 수 없다. ", true, false, false, CL_normal);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 										return;
 									}
 									bool discard_ = false;
@@ -1386,7 +1386,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				spell_list spell_;
 				if ((spell_ = (spell_list)it->GetValue(i + 1)) != SPL_NONE)
 				{
-					sprintf_s(temp,100, "%c - %-30s%-30s%d\n", sp_char++, SpellString(spell_), GetSpellSchoolString(spell_).c_str(), SpellLevel(spell_));
+					sprintf_s(temp,100, "%c - %-30s%-30s%d\n", sp_char++, SpellString(spell_).c_str(), GetSpellSchoolString(spell_).c_str(), SpellLevel(spell_));
 					text_ += temp;
 				}
 			}

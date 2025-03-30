@@ -3115,11 +3115,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 {		
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 할 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 마법을 배울 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_LEARN_SPELL), true, false, false, CL_normal);
 		return;
 	}
 	//if(you.skill[SKT_SPELLCASTING].level == 0)
@@ -3131,13 +3131,29 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 	for(int i=0;i<2;i++)
 		printsub("",true,CL_STAT); 
 	{	
-		char temp[100];
-		sprintf_s(temp,100,"당신은 %d개의 마법을 배우고 있으며 %d의 마법 레벨이 남았다.",you.currentSpellNum,you.remainSpellPoiont);
-		printsub(temp,true,CL_help);
+		printsub(LocalzationManager::formatString(LOC_SYSTEM_UI_LEARN_SPELL_REMAIN, PlaceHolderHelper(to_string(you.currentSpellNum)),
+			PlaceHolderHelper(to_string(you.remainSpellPoiont))),true,CL_help);
 	}
 	for(int i=0;i<1;i++)
-		printsub("",true,CL_STAT); 
-	printsub("       단축키 - 이름               학파                          실패율              레벨",true,CL_STAT);
+		printsub("",true,CL_STAT);
+
+	int offset[5] = {7, 14, 35, 65, 85};
+	int cur_ = 0;
+
+	cur_ = printsub_blank(0, offset[0]);
+	cur_ += printsub_utf8witdh(LocalzationManager::locString(LOC_SYSTEM_HOTKEY),false,CL_STAT);
+	cur_ = printsub_blank(cur_, offset[1]);
+	cur_ += printsub_utf8witdh("- " + LocalzationManager::locString(LOC_SYSTEM_NAME),false,CL_STAT);
+	cur_ = printsub_blank(cur_, offset[2]);
+	cur_ += printsub_utf8witdh(LocalzationManager::locString(LOC_SYSTEM_SCHOOL),false,CL_STAT);
+	cur_ = printsub_blank(cur_, offset[3]);
+	cur_ += printsub_utf8witdh(LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE),false,CL_STAT);
+	cur_ = printsub_blank(cur_, offset[4]);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_LEVEL),true,CL_STAT);
+
+
+
+
 	set<int> set_skill;
 	multimap<int,int> map_skill;
 
@@ -3184,27 +3200,31 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
 			(miscast_level_==2?CL_small_danger:
 			(miscast_level_==1?CL_warning:CL_STAT)));
+		if(!you.CanMemorizeSpell(it->second)) {
+			spell_color_ = CL_bad;
+		}
 
-		char temp[500];
-		int i = 0;
-		i += sprintf_s(temp,500,"       %c      - %s",sp_char,SpellString((spell_list)it->second));
-		for(;i<250/7;i++)
-			temp[i] = ' ';
+		cur_ = printsub_blank(0, offset[0]);
+		cur_ += printsub_utf8witdh(std::string(1, sp_char),false,spell_color_);
+		cur_ = printsub_blank(cur_, offset[1]);
+		cur_ += printsub_utf8witdh("- " + SpellString((spell_list)it->second),false,spell_color_);
+		cur_ = printsub_blank(cur_, offset[2]);
 		for(int j=0;j<3 && SpellSchool((spell_list)it->second,j) != SKT_ERROR;j++)
 		{
 			if(j)
 			{
-				i += sprintf_s(temp+i,500-i,"/");
+				cur_ += printsub_utf8witdh("/",false,spell_color_);
 			}
-			i += sprintf_s(temp+i,500-i,"%s",skill_string(SpellSchool((spell_list)it->second,j)).c_str());
+			cur_ += printsub_utf8witdh(skill_string(SpellSchool((spell_list)it->second,j)),false,spell_color_);
 		}
-		for(;i<450/7;i++)
-			temp[i] = ' ';
-		i += sprintf_s(temp+i,500-i,"%3d%%",it->first);
-		for(;i<600/7;i++)
-			temp[i] = ' ';
-		i += sprintf_s(temp+i,500-i,"%d",SpellLevel((spell_list)it->second));
-		printsub(temp,true,you.CanMemorizeSpell(it->second)?spell_color_:CL_bad);
+		cur_ = printsub_blank(cur_, offset[3]);
+		{
+			std::ostringstream oss;
+			oss << std::setw(3) << it->first << '%';
+			cur_ += printsub_utf8witdh(oss.str(),false,spell_color_);
+		}
+		cur_ = printsub_blank(cur_, offset[4]);
+		printsub(to_string(SpellLevel((spell_list)it->second)),true,spell_color_);
 		if(sp_char=='z')
 			sp_char = 'A';
 		else if(sp_char=='Z')
@@ -3232,40 +3252,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			}
 			if (you.isMemorize(spell_)) {
 				changedisplay(DT_GAME);
-				printlog("이미 기억하고있는 마법입니다. ", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
 				return;
 			}
 
 			memorize_action(spell_);
-			/*
-			changedisplay(DT_GAME);
-			if(spell_ == SPL_NONE)
-				printlog("존재하지 않는 스펠입니다.",true,false,false,CL_normal);
-			else
-			{		
-				bool ok_ = true;
-				while(ok_)
-				{
-					printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
-					printlog(" 주문을 익히시겠습니까? (y/n)",true,false,false,CL_help);
-					switch(waitkeyinput())
-					{
-					case 'Y':
-					case 'y':
-						you.Memorize(spell_);
-						ok_ = false;
-						break;
-					case 'N':
-					case 'n':
-					case VK_ESCAPE:
-						ok_ = false;
-						break;
-					default:
-						printlog("Y와 N중에 선택해주세요.",true,false,false,CL_help);
-						break;
-					}
-				}
-			}*/
 			break;
 		}
 		else if(key_ == VK_UP)
@@ -3296,46 +3287,59 @@ void shout(char auto_)
 {	
 	if(env[current_level].isSilence(you.position))
 	{
-		printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
 		return;
 	}
 	int rare_shout = 0;
-	string shout_ = "소리 지르기";
+	string shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT);
 	if(randA(50)<1)
 	{
 		rare_shout = randA_1(5);
 		switch(rare_shout)
 		{
 		case 1:
-			shout_ = "원망스러워라! ";
+			shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_RARE1);
 			break;
 		case 2:
-			shout_ = "안녕하세요! ";
+			shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_RARE2);
 			break;
 		case 3:
-			shout_ = "만세! ";
+			shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_RARE3);
 			break;
 		case 4:
-			shout_ = "야호! ";
+			shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_RARE4);
 			break;
 		case 5:
-			shout_ = "와! ";
+			shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_RARE5);
 			break;
 		}
 	}
 	if (you.drowned)
 	{
 		rare_shout = 1;
-		shout_ = "살려줘! ";
+		shout_ = LocalzationManager::locString(LOC_SYSTEM_SHOUT_DROWNED);
 	}
 
 	if (auto_ == 0) {
-		printlog("무엇을 외치겠습니까?", true, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU), true, false, false, CL_help);
 		printlog("t - ", false, false, false, CL_normal);
 		printlog(shout_, true, false, false, CL_normal);
-		printlog("아군에게 명령 : a - 공격해라!   s - 공격을 멈춰!", true, false, false, CL_normal);
-		printlog("                w - 대기해라.   f - 따라와라.", true, false, false, CL_normal);
-		printlog("그외의 키 - 조용히 한다.", true, false, false, CL_normal);
+		{
+			ostringstream oss;
+			oss << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ALLY) << " : a - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ATTACK) << "   s - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_STOP);
+			printlog(oss.str(), true, false, false, CL_normal);
+		}
+		{
+			ostringstream oss;
+			oss << "                w - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_WAIT) << "   s - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_COME);
+			printlog(oss.str(), true, false, false, CL_normal);
+		}
+
+		{
+			ostringstream oss;
+			oss << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_OTHRE) << " - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_SILENCE);
+			printlog(oss.str(), true, false, false, CL_normal);
+		}
 	}
 
 	int key_ = auto_;
@@ -3345,7 +3349,7 @@ void shout(char auto_)
 	{
 	case 't':
 		if(!rare_shout)
-			printlog("당신은 소리를 쳐서 주의를 끌었다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_FINISH),true,false,false,CL_normal);
 		else
 			printlog(shout_,true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
@@ -3356,7 +3360,7 @@ void shout(char auto_)
 	case 'a':	
 		{
 			if (auto_ == 0) {
-				printlog("누구를 공격하게 명령하시겠습니까?", true, false, false, CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_WHO), true, false, false, CL_help);
 			}
 			beam_iterator beam(you.position,you.position);
 			projectile_infor infor(8,false,true, -3);
@@ -3377,7 +3381,7 @@ void shout(char auto_)
 							}
 						}
 					}
-					printlog("공격!",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_ATTACK),true,false,false,CL_normal);
 					you.time_delay += you.GetNormalDelay();
 					you.TurnEnd();
 					//Noise(you.position, 12);
@@ -3396,7 +3400,7 @@ void shout(char auto_)
 				it->state.SetState(MS_NORMAL);
 			}
 		}
-		printlog("멈춰!",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_STOP),true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		//Noise(you.position, 12);
@@ -3413,7 +3417,7 @@ void shout(char auto_)
 				it->state.SetState(MS_NORMAL);
 			}
 		}
-		printlog("기다려!",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_WAIT),true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		you.SetPrevAction('t', 'w');
@@ -3426,13 +3430,13 @@ void shout(char auto_)
 				it->state.SetState(MS_FOLLOW);
 			}
 		}
-		printlog("따라와!",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_COME),true,false,false,CL_normal);
 		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
 		you.SetPrevAction('t', 'f');
 		break;
 	default:
-		printlog("아무것도 외치지 않았다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_COME),true,false,false,CL_normal);
 		break;
 	}
 }
@@ -3441,12 +3445,12 @@ void auto_pick_onoff(bool auto_)
 {
 	if((you.auto_pickup==0) || (!auto_ && you.auto_pickup==-1))
 	{
-		printlog("자동 줍기를 활성화했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOPICKUP_ON),true,false,false,CL_normal);
 		you.auto_pickup = 1;
 	}
 	else
 	{
-		printlog("자동 줍기를 해제했다. (Ctrl + a 키로 다시 활성화 가능)",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_AUTOPICKUP_OFF, PlaceHolderHelper("Ctrl + a")),true,false,false,CL_small_danger);
 		you.auto_pickup = auto_?0:-1;
 	}
 }
@@ -3458,33 +3462,33 @@ void floorMove()
 
 
 	list<pair<char, string>> enter_;
-	enter_.push_back(pair<char, string>('d', "던전"));
+	enter_.push_back(pair<char, string>('d',  LocalzationManager::locString(LOC_SYSTEM_DUNGEON)));
 	if (map_list.dungeon_enter[TEMPLE].detected)
-		enter_.push_back(pair<char, string>('t', "신전"));
+		enter_.push_back(pair<char, string>('t', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_TEMPLE)));
 	if (map_list.dungeon_enter[MISTY_LAKE].detected)
-		enter_.push_back(pair<char, string>('l', "안개의 호수"));
+		enter_.push_back(pair<char, string>('l', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)));
 	if (map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected)
-		enter_.push_back(pair<char, string>('m', "요괴의 산"));
+		enter_.push_back(pair<char, string>('m', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN)));
 	if (map_list.dungeon_enter[SCARLET_M].detected)
-		enter_.push_back(pair<char, string>('s', "홍마관"));
+		enter_.push_back(pair<char, string>('s', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)));
 	if (map_list.dungeon_enter[SCARLET_L].detected)
-		enter_.push_back(pair<char, string>('b', "홍마관도서관"));
+		enter_.push_back(pair<char, string>('b', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY)));
 	if (map_list.dungeon_enter[SCARLET_U].detected)
-		enter_.push_back(pair<char, string>('u', "홍마관지하"));
+		enter_.push_back(pair<char, string>('u', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER)));
 	if (map_list.dungeon_enter[BAMBOO].detected)
-		enter_.push_back(pair<char, string>('a', "미궁의죽림"));
+		enter_.push_back(pair<char, string>('a', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO)));
 	if (map_list.dungeon_enter[YUKKURI_D].detected)
-		enter_.push_back(pair<char, string>('y', "윳쿠리둥지"));
+		enter_.push_back(pair<char, string>('y', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI)));
 	if (map_list.dungeon_enter[DEPTH].detected)
-		enter_.push_back(pair<char, string>('p', "짐승길"));
+		enter_.push_back(pair<char, string>('p', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)));
 	if (map_list.dungeon_enter[SUBTERRANEAN].detected)
-		enter_.push_back(pair<char, string>('h', "지령전"));
+		enter_.push_back(pair<char, string>('h', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN)));
 	if (map_list.dungeon_enter[DREAM_D].detected)
-		enter_.push_back(pair<char, string>('r', "꿈의 세계"));
+		enter_.push_back(pair<char, string>('r', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM)));
 	if (map_list.dungeon_enter[PANDEMONIUM].detected)
-		enter_.push_back(pair<char, string>('k', "마계"));
+		enter_.push_back(pair<char, string>('k', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM)));
 	if (map_list.dungeon_enter[HAKUREI_D].detected)
-		enter_.push_back(pair<char, string>('z', "하쿠레이신사"));
+		enter_.push_back(pair<char, string>('z', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI)));
 	/* 지구랏은 아직
 	if (map_list.dungeon_enter[ZIGURRAT].detected)
 		enter_.push_back(pair<char, string>('z', "하쿠레이신사"));*/
@@ -3504,7 +3508,7 @@ void floorMove()
 	//printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
 	//printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
 	//printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
-	printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOEXPLORE_WHERE), false, false, false, CL_help);
 	int key_ = waitkeyinput();
 
 	bool ok_ = false;
@@ -3517,7 +3521,7 @@ void floorMove()
 		}
 	}
 	if (!ok_) {
-		printlog(" 취소", true, false, false, CL_help);
+		printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 		return;
 	}
 
@@ -3598,7 +3602,7 @@ void floorMove()
 		next_ = HAKUREI_LAST_LEVEL;
 		break;
 	default:
-		printlog(" 취소", true, false, false, CL_help);
+		printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 		return;
 	}
 

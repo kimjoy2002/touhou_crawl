@@ -179,7 +179,7 @@ string GetMonsterInfor(monster *it)
 				char sp_char = (i<27)?('a'+i):('A'+i-27);
 				spell_list spell_ = (spell_list)its->num;
 			
-				sprintf_s(temp,100,"%c - %s",sp_char,SpellString(spell_));
+				sprintf_s(temp,100,"%c - %s",sp_char,SpellString(spell_).c_str());
 				text_+=temp;
 				if(SpellFlagCheck(spell_, S_FLAG_DEBUF))
 				{

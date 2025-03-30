@@ -56,10 +56,12 @@ class LocalzationManager {
 private:
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
+	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
 	static unordered_map<string, SPEAK_ENUM_KEY> speak_enum_map;
 	static unordered_map<SPEAK_ENUM_KEY, string> speak_map;
     static unordered_map<string, monster_index> monster_enum_map;
+    static unordered_map<monster_index, string> monster_enum_reverse_map;
 	static unordered_map<monster_index, string> monster_name_map;
 	static unordered_map<monster_index, string> monster_description_map;
 
@@ -156,6 +158,11 @@ public:
 	static const string& speakString(SPEAK_ENUM_KEY key);
 	static const string& monString(monster_index key);
     static const string& monDecsriptionString(monster_index key);
+
+    static const string& getMonsterEnumString(monster_index key);
+    static monster_index getMonsterEnumKey(const string& str);
+    static const string& getLocalizationEnumString(LOCALIZATION_ENUM_KEY key);
+    static LOCALIZATION_ENUM_KEY getLocalizationEnumKey(const string& str);
 
 	template<typename... Args>
 	static std::string formatString(const std::string& template_str, Args... args) {

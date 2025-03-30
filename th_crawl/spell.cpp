@@ -405,7 +405,7 @@ int SpellLength(spell_list skill)
 	}
 }
 
-const char* SpellString(spell_list skill)
+string SpellString(spell_list skill)
 {
 	switch(skill)
 	{
@@ -1815,11 +1815,11 @@ void SpellUse(char auto_, int auto_direc_)
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
 	{
-		printlog("광기에 휩싸인 상태로 마법은 쓸 수 없다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SPELL),true,false,false,CL_danger);
 		return;
 	}
 	if (you.s_evoke_ghost) {
-		printlog("유령 상태에선 마법을 쓸 수 없다. ", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SPELL), true, false, false, CL_normal);
 		return;
 	}
 	if (you.drowned)
@@ -1837,7 +1837,7 @@ void SpellUse(char auto_, int auto_direc_)
 	{
 		if(!you.GetProperty(TPT_FINGER_MAGIC) && silence_)
 		{
-			printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
 			return;
 		}
 		if(you.s_confuse)

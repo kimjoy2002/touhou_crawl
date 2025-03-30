@@ -649,7 +649,7 @@ bool Dump(int type, string *filename_)
 		if(you.MemorizeSpell[i])
 		{
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
-			fprintf_s(fp,"\n%c - %-30s %-20s %-3d%%",i<26?'a'+i:'A'+(i-26),SpellString(spell_),GetSpellSchoolString(spell_).c_str(),100-you.GetSpellSuccess(spell_));
+			fprintf_s(fp,"\n%c - %-30s %-20s %-3d%%",i<26?'a'+i:'A'+(i-26),SpellString(spell_).c_str(),GetSpellSchoolString(spell_).c_str(),100-you.GetSpellSuccess(spell_));
 		}
 	}
 	if(you.currentSpellNum)

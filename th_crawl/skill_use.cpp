@@ -3778,7 +3778,7 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 	int power=min(SkillCap(skill),SkillPow(skill));
 	if(SkillFlagCheck(skill, S_FLAG_SPEAK) && env[current_level].isSilence(you.position))
 	{
-		printlog("당신은 소리를 낼 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
 		return 0;		
 	}
 	

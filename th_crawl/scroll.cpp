@@ -1026,7 +1026,7 @@ bool amnesia_scroll(bool pre_iden_)
 				{				
 					
 					changedisplay(DT_GAME);
-					printarray(true,false,false,CL_help,2,SpellString(spell_)," 마법을 잊겠습니까? (Y/N)");
+					printarray(true,false,false,CL_help,2,SpellString(spell_).c_str()," 마법을 잊겠습니까? (Y/N)");
 					switch(waitkeyinput())
 					{
 					case 'Y':
@@ -1038,7 +1038,7 @@ bool amnesia_scroll(bool pre_iden_)
 							you.remainSpellPoiont+=SpellLevel(spell_);
 							you.currentSpellNum--;
 							ReleaseMutex(mutx);
-							printarray(true,false,false,CL_normal,3,"당신은 ",SpellString(spell_)," 마법을 잊었다.");	
+							printarray(true,false,false,CL_normal,3,"당신은 ",SpellString(spell_).c_str()," 마법을 잊었다.");	
 							return true;
 						}
 					case 'N':

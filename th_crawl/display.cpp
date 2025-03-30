@@ -237,7 +237,7 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				(miscast_level_==1?CL_warning:CL_STAT)));
 
 			char sp_char = (i<26)?('a'+i):('A'+i-26);
-			sprintf_s(temp,100,"%c      - %s",sp_char,SpellString(spell_));
+			sprintf_s(temp,100,"%c      - %s",sp_char,SpellString(spell_).c_str());
 			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			rc.left += 200;
 			DrawTextUTF8(pfont,pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);

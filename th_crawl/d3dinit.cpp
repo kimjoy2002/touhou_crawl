@@ -60,14 +60,14 @@ void LoadEmbeddedFont(const std::wstring& fontPath)
 //
 bool Setup()
 { 
-	LoadEmbeddedFont(L"./data/font/NotoSansMono-Bold.ttf");
+	LoadEmbeddedFont(L"./data/font/D2Coding-Ver1.3.2-20180524.ttf");
 
 	bool return_ = true;
 	D3DXFONT_DESC fontDesc;
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
 	fontDesc.Height = 20;
 	fontDesc.Weight = 500;
-	fontDesc.Width = 7;
+	fontDesc.Width = 8;
 	fontDesc.Quality = CLEARTYPE_QUALITY;
 	fontDesc.Italic = false;
 	fontDesc.CharSet = DEFAULT_CHARSET;
@@ -75,7 +75,7 @@ bool Setup()
 	fontDesc.PitchAndFamily = FF_DONTCARE;
 	fontDesc.MipLevels = 1;
 
-	strcpy_s(fontDesc.FaceName, sizeof(fontDesc.FaceName), "Noto Sans Mono");
+	strcpy_s(fontDesc.FaceName, sizeof(fontDesc.FaceName), "D2Coding");
 	
 
 	HRESULT hr = D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);

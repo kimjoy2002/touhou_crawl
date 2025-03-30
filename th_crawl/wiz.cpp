@@ -101,7 +101,7 @@ void wiz_mode()
 					}
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -127,7 +127,7 @@ void wiz_mode()
 					}
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -146,7 +146,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -165,7 +165,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -198,7 +198,7 @@ void wiz_mode()
 
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -240,7 +240,7 @@ void wiz_mode()
 					enterlog();
 				}
 				else {
-					printlog(" 취소", true, false, false, CL_help);
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
 			}
 			return;
@@ -252,7 +252,7 @@ void wiz_mode()
 			}
 			return;
 			default:
-				printlog(" 취소", true, false, false, CL_help);
+				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				return;
 			}
 
@@ -406,7 +406,7 @@ void wiz_mode()
 				next_ = ZIGURRAT_LEVEL;
 				break;
 			default:
-				printlog(" 취소", true, false, false, CL_help);
+				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				return;
 			}
 			enterlog();
@@ -556,7 +556,7 @@ void wiz_mode()
 					next_ = DG_TEMPLE_JUNKO;
 					break;
 			default:
-				printlog(" 취소", true, false, false, CL_help);
+				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				return;
 			}
 			enterlog();
@@ -855,7 +855,7 @@ void save_mode()
 			enterlog();
 			break;
 		default:
-			printlog("취소",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_help);
 			return;
 		}
 

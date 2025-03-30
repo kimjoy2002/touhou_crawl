@@ -48,22 +48,30 @@ extern bool widesearch; //X커맨드용
 
 void name_infor::SaveDatas(FILE *fp)
 {
-	SaveData<monster_index>(fp, name_key);
-	SaveData<LOCALIZATION_ENUM_KEY>(fp, system_key);
-	SaveData<monster_index>(fp, name_param);
-	SaveData<LOCALIZATION_ENUM_KEY>(fp, param);
-	char temp[100];
-	sprintf_s(temp,100,"%s",postfix.c_str());
+	char temp[256];
+	sprintf_s(temp,256,"%s",LocalzationManager::getMonsterEnumString(name_key).c_str());
+	SaveData<char>(fp,*temp, strlen(temp)+1);
+	sprintf_s(temp,256,"%s",LocalzationManager::getLocalizationEnumString(system_key).c_str());
+	SaveData<char>(fp,*temp, strlen(temp)+1);
+	sprintf_s(temp,256,"%s",LocalzationManager::getMonsterEnumString(name_param).c_str());
+	SaveData<char>(fp,*temp, strlen(temp)+1);
+	sprintf_s(temp,256,"%s",LocalzationManager::getLocalizationEnumString(param).c_str());
+	SaveData<char>(fp,*temp, strlen(temp)+1);
+	sprintf_s(temp,256,"%s",postfix.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 }	
 
 void name_infor::LoadDatas(FILE *fp)
 {
-	LoadData<monster_index>(fp, name_key);
-	LoadData<LOCALIZATION_ENUM_KEY>(fp, system_key);
-	LoadData<monster_index>(fp, name_param);
-	LoadData<LOCALIZATION_ENUM_KEY>(fp, param);
-	char temp[100];
+	char temp[256];
+	LoadData<char>(fp, *temp);
+	name_key = LocalzationManager::getMonsterEnumKey(temp);	
+	LoadData<char>(fp, *temp);
+	system_key = LocalzationManager::getLocalizationEnumKey(temp);	
+	LoadData<char>(fp, *temp);
+	name_param = LocalzationManager::getMonsterEnumKey(temp);	
+	LoadData<char>(fp, *temp);
+	param = LocalzationManager::getLocalizationEnumKey(temp);
 	LoadData<char>(fp, *temp);
 	postfix = temp;
 }

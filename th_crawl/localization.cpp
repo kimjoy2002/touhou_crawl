@@ -17,10 +17,12 @@
 
 LOCALIZATION_TYPE LocalzationManager::current_lang = LOCALIZATION_TYPE_ENG;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
+unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_enum_reverse_map = createEnumReverseMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
 unordered_map<string, SPEAK_ENUM_KEY> LocalzationManager::speak_enum_map = createSpeakEnumMap();
 unordered_map<SPEAK_ENUM_KEY, string> LocalzationManager::speak_map;
 unordered_map<string, monster_index> LocalzationManager::monster_enum_map = createMonsterEnumMap();
+unordered_map<monster_index, string> LocalzationManager::monster_enum_reverse_map = createMonsterEnumReverseMap();
 unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<monster_index, string> LocalzationManager::monster_description_map;
 
@@ -97,6 +99,33 @@ const string& LocalzationManager::speakString(SPEAK_ENUM_KEY key) {
 	return speak_map[SPEAK_NORMAL];
 }
 
+const string& LocalzationManager::getMonsterEnumString(monster_index key) {
+	if (monster_enum_reverse_map.find(key) != monster_enum_reverse_map.end()) {
+		return monster_enum_reverse_map[key];
+	}
+	return monster_enum_reverse_map[MON_NONE_MONSTER];
+}
+
+monster_index LocalzationManager::getMonsterEnumKey(const string& str) {
+	if (monster_enum_map.find(str) != monster_enum_map.end()) {
+		return monster_enum_map[str];
+	}
+	return MON_NONE_MONSTER;
+}
+
+const string& LocalzationManager::getLocalizationEnumString(LOCALIZATION_ENUM_KEY key) {
+	if (localization_enum_reverse_map.find(key) != localization_enum_reverse_map.end()) {
+		return localization_enum_reverse_map[key];
+	}
+	return localization_enum_reverse_map[LOC_NONE];
+}
+
+LOCALIZATION_ENUM_KEY LocalzationManager::getLocalizationEnumKey(const string& str) {
+	if (localization_enum_map.find(str) != localization_enum_map.end()) {
+		return localization_enum_map[str];
+	}
+	return LOC_NONE;
+}
 
 // 태그를 처리하는 함수
 string LocalzationManager::processTags(const string& template_str, const vector<PlaceHolderHelper>& values) {

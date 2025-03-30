@@ -578,11 +578,11 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
-	char temp[100];
+	char temp[256];
 	int skt = 0, i=0; 
 	char sk_char = 'a';
 
-	sprintf_s(temp, 100, "      스킬명  레벨    현재  적성   비용          스킬명  레벨    현재  적성   비용");
+	sprintf_s(temp, 256, "      스킬명  레벨    현재  적성   비용          스킬명  레벨    현재  적성   비용");
 	DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 	rc.top += 2*fontDesc.Height;
 
@@ -593,7 +593,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		for(i = 0;i<1;i++)
 		{
 
-			sprintf_s(temp,100,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, true));
+			sprintf_s(temp,256,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, true));
 			sk_char++;
 
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
@@ -605,18 +605,18 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			rc.left += 150;
 			//if(move ==0)
 			if(you.GetSkillLevel(skt, false)<27 && !you.cannotSkillup(skt))
-				sprintf_s(temp,100,"(%2d%%)",GetSkillPercent(you.skill[skt]));
+				sprintf_s(temp,256,"(%2d%%)",GetSkillPercent(you.skill[skt]));
 			else 
-				sprintf_s(temp,100,"");
+				sprintf_s(temp,256,"");
 
 			//else if(move == 1)
-			//	sprintf_s(temp,100,"%d",you.skill[skt].aptit);
+			//	sprintf_s(temp,256,"%d",you.skill[skt].aptit);
 			//else
-			//	sprintf_s(temp,100,"%d",you.skill[skt].exper);
+			//	sprintf_s(temp,256,"%d",you.skill[skt].exper);
 			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += 50;
 						
-			sprintf_s(temp,100,"%3d",you.skill[skt].aptit);
+			sprintf_s(temp,256,"%3d",you.skill[skt].aptit);
 			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
 
 			rc.left += 50;
@@ -628,7 +628,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				float value_ = (float)skill_pecent / base_skill;
 
-				sprintf_s(temp, 100, "%3.1f", value_);
+				sprintf_s(temp, 256, "%3.1f", value_);
 				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 			else if (you.pure_skill == skt)
@@ -639,7 +639,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			else
 			{
-				sprintf_s(temp, 100, " -   ");
+				sprintf_s(temp, 256, " -   ");
 				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 

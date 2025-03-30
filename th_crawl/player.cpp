@@ -4110,9 +4110,9 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	if(t->type == ITM_GOAL)
 	{
 		char temp[200];
-		sprintf_s(temp,200,"당신은 %s의 룬을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",LocalzationManager::locString(rune_string[t->value1]).c_str());
+		sprintf_s(temp,200,"당신은 %s을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",LocalzationManager::locString(rune_string[t->value1]).c_str());
 		printlog(temp,true,false,false,CL_good);
-		sprintf_s(temp,200,"%s의 룬을 얻었다.",LocalzationManager::locString(rune_string[t->value1]).c_str());
+		sprintf_s(temp,200,"%s을 얻었다.",LocalzationManager::locString(rune_string[t->value1]).c_str());
 		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
 		rune[t->value1]++;
 		ReleaseMutex(mutx);

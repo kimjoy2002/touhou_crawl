@@ -8,6 +8,7 @@
 
 #include <set>
 #include <algorithm>
+#include <iomanip>
 #include "environment.h"
 #include "display.h"
 #include "localization.h"
@@ -1994,7 +1995,7 @@ void rune_Show()
 
 	for(int i = 0; i<RUNE_HAKUREI_ORB;i++)
 	{
-		remain = 10;
+		remain = 15;
 		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
 		for(;remain>0;remain--)
 			SetText() += " ";
@@ -2275,17 +2276,17 @@ void Simple_State_Show()
 	case 0:
 		break;
 	case 1:
-		printlog("당신의 방어구는 편한 편이다. ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY1) + " ",false,false,false,CL_normal);
 		break;
 	case 2:
-		printlog("당신의 방어구는 불편하다. ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY2) + " ",false,false,false,CL_normal);
 		break;
 	case 3:
-		printlog("당신의 방어구는 매우 불편하다. ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY3) + " ",false,false,false,CL_normal);
 		break;
 	case 4:
 	default:
-		printlog("방어구가 당신을 입고있다. ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY4) + " ",false,false,false,CL_normal);
 		break;
 	}/*
 	switch(you.GetShieldPanlty())
@@ -2314,18 +2315,18 @@ void Simple_State_Show()
 }
 void Experience_Show()
 {
-	char temp [100];
-	sprintf_s(temp,100,"당신은 %d레벨 %s %s입니다.", you.level, LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str());
-	printlog(temp,true,false,false,CL_normal);
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_EXPERIENCE_SHOW_LEVEL,
+		PlaceHolderHelper(to_string(you.level)),
+		PlaceHolderHelper(tribe_type_string[you.tribe]),
+		PlaceHolderHelper(job_type_string[you.job])),true,false,false,CL_normal);
 	if(you.GetNeedExp(you.level-1) > 0)
 	{
-		sprintf_s(temp,100,"다음 레벨까지 %d의 경험치가 남았습니다.",you.GetNeedExp(you.level-1) - you.exper);
-		printlog(temp,true,false,false,CL_normal);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_EXPERIENCE_SHOW_REMAIN,
+			PlaceHolderHelper(to_string(you.GetNeedExp(you.level-1) - you.exper))),true,false,false,CL_normal);
 	}
 	else
 	{
-		sprintf_s(temp,100,"당신은 현재 최고 레벨에 도달해있습니다.");
-		printlog(temp,true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EXPERIENCE_SHOW_MAX),true,false,false,CL_normal);
 	}
 }
 
@@ -2360,9 +2361,9 @@ void dungeonView()
 	if(!isNormalGame())
 		return;
 
-	char temp[32];
-	char blank[32];
-	sprintf_s(blank,32,"            ");
+	std::ostringstream oss;
+	std::ostringstream blank;
+	blank << "            ";
 
 	int floor_ = 0;
 	deletesub();
@@ -2371,45 +2372,53 @@ void dungeonView()
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub(blank,false,CL_warning);
-	printsub("<던전 진행도>",true,CL_warning);
+	printsub(blank.str(),false,CL_warning);
+	printsub("<" + LocalzationManager::locString(LOC_SYSTEM_UI_DUNGEON_VIEW) + ">",true,CL_warning);
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub(blank,false,CL_warning);
-	printsub("던전 ",false,CL_warning);
+	printsub(blank.str(),false,CL_warning);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON) + " ",false,CL_warning);
 	for(int i=0;i<=MAX_DUNGEUN_LEVEL;i++)
 	{
 		if(env[i].make)
 			floor_++;
 		else
 			break;
-	}	
-	sprintf_s(temp,32,"(%2d/%2d)",floor_,MAX_DUNGEUN_LEVEL+1);
-	printsub(temp,true,CL_normal);
-	printsub(blank,false,CL_warning);
+	}
+	oss<<'('<<setw(2)<<setfill(' ')<<floor_<<'/'<<setw(2)<<setfill(' ')<<(MAX_DUNGEUN_LEVEL + 1)<<')';
+	printsub(oss.str(),true,CL_normal);
+	printsub(blank.str(),false,CL_warning);
 	printsub("│",true,CL_normal);
 	if(floor_>=3) //신전등장
 	{
 		if(map_list.dungeon_enter[TEMPLE].detected)
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("신전 ",false,CL_warning);			
-			sprintf_s(temp,32,"(%2d/%2d) ",env[TEMPLE_LEVEL].make?1:0,1);
-			printsub(temp,false,CL_normal);
-				
-			sprintf_s(temp,32,"던전 %d층",map_list.dungeon_enter[TEMPLE].floor+1);
-			printsub(temp,true,CL_help);
-			printsub(blank,false,CL_warning);
+			printsub("신전 ",false,CL_warning);
+			oss.str("");
+			oss.clear();
+			oss<<'('<<setw(2)<<setfill(' ')<<(env[TEMPLE_LEVEL].make?1:0)<<"/1)";
+			printsub(oss.str(),false,CL_normal);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[TEMPLE].floor+1)));
+			printsub(oss.str(),true,CL_help);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 		}
 		else
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("신전 ",false,CL_bad);
-			printsub("던전 3층~6층",true,CL_STAT);
-			printsub(blank,false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_TEMPLE) + " ",false,CL_bad);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("3"))<<'~' <<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("6"));
+			printsub(oss.str(),true,CL_STAT);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 		}
 	}	
@@ -2417,9 +2426,9 @@ void dungeonView()
 	{
 		if(map_list.dungeon_enter[MISTY_LAKE].detected)
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("안개의 호수 ",false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE) + " ",false,CL_warning);
 			int floor2_ = 0;	
 			for(int i=MISTY_LAKE_LEVEL;i<=MISTY_LAKE_LAST_LEVEL;i++)
 			{
@@ -2428,19 +2437,23 @@ void dungeonView()
 				else
 					break;
 			}
-			sprintf_s(temp,32,"(%2d/%2d) ",floor2_,MAX_MISTY_LAKE_LEVEL+1);
-			printsub(temp,false,CL_normal);
+			oss.str("");
+			oss.clear();
+			oss<<'('<<setw(2)<<setfill(' ')<<floor2_<<'/'<<setw(2)<<setfill(' ')<<(MAX_MISTY_LAKE_LEVEL+1)<<')';
+			printsub(oss.str(),false,CL_normal);
 				
-			sprintf_s(temp,32,"던전 %d층",map_list.dungeon_enter[MISTY_LAKE].floor+1);
-			printsub(temp,true,CL_help);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[MISTY_LAKE].floor+1)))<<' ';
+			printsub(oss.str(),true,CL_help);
 
 			if(floor2_>=2) //요괴의산
 			{
 				if(map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected)
 				{
-					printsub(blank,false,CL_warning);
+					printsub(blank.str(),false,CL_warning);
 					printsub("│├",false,CL_normal);
-					printsub("요괴의 산 ",false,CL_warning);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN) + " ",false,CL_warning);
 					int floor3_ = 0;	
 					for(int i=YOUKAI_MOUNTAIN_LEVEL;i<=YOUKAI_MOUNTAIN_LAST_LEVEL;i++)
 					{
@@ -2449,24 +2462,30 @@ void dungeonView()
 						else
 							break;
 					}
-					sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_YOUKAI_MOUNTAIN_LEVEL+1);
-					printsub(temp,false,CL_normal);
+					oss.str("");
+					oss.clear();
+					oss<<'('<<setw(2)<<setfill(' ')<<floor3_<<'/'<<setw(2)<<setfill(' ')<<(MAX_YOUKAI_MOUNTAIN_LEVEL+1)<<')';
+					printsub(oss.str(),false,CL_normal);
 				
-					sprintf_s(temp,32,"안개의 호수 %d층  ",map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor+1-MISTY_LAKE_LEVEL);
-					printsub(temp,false,CL_help);
+					oss.str("");
+					oss.clear();
+					oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor+1-MISTY_LAKE_LEVEL)))<<' ';
+					printsub(oss.str(),false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_YOUKAI_MOUNTAIN]).c_str());
-					printsub(temp,true,you.rune[RUNE_YOUKAI_MOUNTAIN]?CL_magic:CL_bad);
+					oss.str("");
+					oss.clear();
+					oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_YOUKAI_MOUNTAIN])<<"* ";
+					printsub(oss.str(),true,you.rune[RUNE_YOUKAI_MOUNTAIN]?CL_magic:CL_bad);
 					//***룬끝
 
 					if(floor3_>=MAX_YOUKAI_MOUNTAIN_LEVEL+1) //윳쿠리굴
 					{
 						if(map_list.dungeon_enter[YUKKURI_D].detected)
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("││└",false,CL_normal);
-							printsub("윳쿠리둥지 ",false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI) + " ",false,CL_warning);
 							int floor4_ = 0;	
 							for(int i=YUKKURI_LEVEL;i<=YUKKURI_LAST_LEVEL;i++)
 							{
@@ -2475,43 +2494,59 @@ void dungeonView()
 								else
 									break;
 							}
-							sprintf_s(temp,32,"(%2d/%2d) ",floor4_,MAX_YUKKURI_LEVEL+1);
-							printsub(temp,false,CL_normal);
+							oss.str("");
+							oss.clear();
+							oss<<'('<<setw(2)<<setfill(' ')<<floor4_<<'/'<<setw(2)<<setfill(' ')<<(MAX_YUKKURI_LEVEL+1)<<')';
+							printsub(oss.str(),false,CL_normal);
 				
-							sprintf_s(temp,32,"요괴의 산 %d층  ",map_list.dungeon_enter[YUKKURI_D].floor+1-YOUKAI_MOUNTAIN_LEVEL);
-							printsub(temp,false,CL_help);
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[YUKKURI_D].floor+1-YOUKAI_MOUNTAIN_LEVEL)))<<"  ";
+							printsub(oss.str(),false,CL_help);
 
 							//***룬있음
-							sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_YUKKURI]).c_str());
-							printsub(temp,true,you.rune[RUNE_YUKKURI]?CL_magic:CL_bad);
+							oss.str("");
+							oss.clear();
+							oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_YUKKURI])<<"* ";
+							printsub(oss.str(),true,you.rune[RUNE_YUKKURI]?CL_magic:CL_bad);
 							//***룬끝
 
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("││",true,CL_normal);
 						}
 						else
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("││└",false,CL_normal);
-							printsub("윳쿠리둥지 ",false,CL_bad);
-							printsub("요괴의 산 4층",true,CL_STAT);
-							printsub(blank,false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI) +  " ",false,CL_bad);
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN)<<' '<<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+							printsub(oss.str(),true,CL_STAT);
+							printsub(blank.str(),false,CL_warning);
 							printsub("││",true,CL_normal);
 						}
 					}
 					else
 					{
-						printsub(blank,false,CL_warning);
+						printsub(blank.str(),false,CL_warning);
 						printsub("││",true,CL_normal);
 					}
 				}
 				else
 				{
-					printsub(blank,false,CL_warning);
+					printsub(blank.str(),false,CL_warning);
 					printsub("│├",false,CL_normal);
-					printsub("요괴의 산 ",false,CL_bad);
-					printsub("안개의 호수 2층~3층",true,CL_STAT);
-					printsub(blank,false,CL_warning);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN) + " ",false,CL_bad);
+					
+					oss.str("");
+					oss.clear();
+					oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<
+						LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("2")) << '~' <<
+						LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("3"));
+					printsub(oss.str(),true,CL_STAT);
+					printsub(blank.str(),false,CL_warning);
 					printsub("│",true,CL_normal);
 				}
 
@@ -2521,9 +2556,9 @@ void dungeonView()
 				{
 					if(map_list.dungeon_enter[SCARLET_M].detected)
 					{
-						printsub(blank,false,CL_warning);
+						printsub(blank.str(),false,CL_warning);
 						printsub("│└",false,CL_normal);
-						printsub("홍마관 ",false,CL_warning);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET) + " ",false,CL_warning);
 						int floor3_ = 0;	
 						for(int i=SCARLET_LEVEL;i<=SCARLET_LEVEL_LAST_LEVEL;i++)
 						{
@@ -2532,72 +2567,99 @@ void dungeonView()
 							else
 								break;
 						}
-						sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_SCARLET_LEVEL+1);
-						printsub(temp,false,CL_normal);
+						oss.str("");
+						oss.clear();
+						oss<<'('<<setw(2)<<setfill(' ')<<floor3_<<'/'<<setw(2)<<setfill(' ')<<(MAX_SCARLET_LEVEL+1)<<')';
+						printsub(oss.str(),false,CL_normal);
 				
-						sprintf_s(temp,32,"안개의 호수 %d층  ",map_list.dungeon_enter[SCARLET_M].floor+1-MISTY_LAKE_LEVEL);
-						printsub(temp,false,CL_help);
+						oss.str("");
+						oss.clear();
+						oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[SCARLET_M].floor+1-MISTY_LAKE_LEVEL)))<<"  ";
+						printsub(oss.str(),false,CL_help);
 
 						//***룬있음
-						sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SCARLET]).c_str());
-						printsub(temp,true,you.rune[RUNE_SCARLET]?CL_magic:CL_bad);
+						oss.str("");
+						oss.clear();
+						oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_SCARLET])<<"* ";
+						printsub(oss.str(),true,you.rune[RUNE_SCARLET]?CL_magic:CL_bad);
 						//***룬끝
 						
 						if(floor3_>=2) //도서관
 						{
 							if(map_list.dungeon_enter[SCARLET_L].detected)
 							{
-								printsub(blank,false,CL_warning);
+								printsub(blank.str(),false,CL_warning);
 								printsub("│  ├",false,CL_normal);
-								printsub("홍마관 도서관 ",false,CL_warning);
-				
-								sprintf_s(temp,32,"홍마관 %d층  ",map_list.dungeon_enter[SCARLET_L].floor+1-SCARLET_LEVEL);
-								printsub(temp,true,CL_help);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY) + " ",false,CL_warning);
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)<<' '<<
+									LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[SCARLET_L].floor+1-SCARLET_LEVEL)));
+								printsub(oss.str(),true,CL_help);
 							}
 							else
 							{
-								printsub(blank,false,CL_warning);
+								printsub(blank.str(),false,CL_warning);
 								printsub("│  ├",false,CL_normal);
-								printsub("홍마관 도서관 ",false,CL_bad);
-								printsub("홍마관 2층~3층",true,CL_STAT);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY) + " ",false,CL_bad);
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)<<' '<<
+									LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("2")) << '~' <<
+									LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("3"));
+								printsub(oss.str(),true,CL_STAT);
 							}
 						}
 						if(floor3_>=4) //지하실
 						{
 							if(map_list.dungeon_enter[SCARLET_U].detected)
 							{
-								printsub(blank,false,CL_warning);
+								printsub(blank.str(),false,CL_warning);
 								printsub("│  └",false,CL_normal);
-								printsub("홍마관 지하실 ",false,CL_warning);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER) + " ",false,CL_warning);
 				
 
-								sprintf_s(temp,32,"홍마관 %d층  ",map_list.dungeon_enter[SCARLET_U].floor+1-SCARLET_LEVEL);
-								printsub(temp,false,CL_help);
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[SCARLET_U].floor+1-SCARLET_LEVEL)))<<"  ";
+								printsub(oss.str(),false,CL_help);
 
 								//***룬있음
-								sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SCARLET_UNDER]).c_str());
-								printsub(temp,true,you.rune[RUNE_SCARLET_UNDER]?CL_magic:CL_bad);
+								oss.str("");
+								oss.clear();
+								oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_SCARLET_UNDER])<<"* ";
+								printsub(oss.str(),true,you.rune[RUNE_SCARLET_UNDER]?CL_magic:CL_bad);
 								//***룬끝
 							}
 							else
 							{
-								printsub(blank,false,CL_warning);
+								printsub(blank.str(),false,CL_warning);
 								printsub("│  └",false,CL_normal);
-								printsub("홍마관 지하실 ",false,CL_bad);
-								printsub("홍마관 4층",true,CL_STAT);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER) + " ",false,CL_bad);
+								
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)<<' '<<
+									LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+								printsub(oss.str(),true,CL_STAT);
 							}
 						}
 
-						printsub(blank,false,CL_warning);
+						printsub(blank.str(),false,CL_warning);
 						printsub("│",true,CL_normal);
 					}
 					else
 					{
-						printsub(blank,false,CL_warning);
+						printsub(blank.str(),false,CL_warning);
 						printsub("│└",false,CL_normal);
-						printsub("홍마관 ",false,CL_bad);
-						printsub("안개의 호수 4층~5층",true,CL_STAT);
-						printsub(blank,false,CL_warning);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET) + " ",false,CL_bad);
+						oss.str("");
+						oss.clear();
+						oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<
+							LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4")) << '~' <<
+							LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("5"));
+						printsub(oss.str(),true,CL_STAT);
+						printsub(blank.str(),false,CL_warning);
 						printsub("│",true,CL_normal);
 					}
 
@@ -2606,17 +2668,22 @@ void dungeonView()
 			}
 			else
 			{
-				printsub(blank,false,CL_warning);
+				printsub(blank.str(),false,CL_warning);
 				printsub("│",true,CL_normal);
 			}
 		}
 		else
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("안개의 호수 ",false,CL_bad);
-			printsub("던전 8층~10층",true,CL_STAT);
-			printsub(blank,false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE) + " ",false,CL_bad);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("8")) << '~' <<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("10"));
+			printsub(oss.str(),true,CL_STAT);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 		}
 	}
@@ -2625,47 +2692,56 @@ void dungeonView()
 	{
 		if(map_list.dungeon_enter[BAMBOO].detected)
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("미궁의 죽림 ",false,CL_warning);
-				
-			sprintf_s(temp,32,"던전 %d층  ",map_list.dungeon_enter[BAMBOO].floor+1);
-			printsub(temp,true,CL_help);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO) + " ",false,CL_warning);
+			
+
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[BAMBOO].floor+1)));
+			printsub(oss.str(),true,CL_help);
 
 			{
 				if(env[EIENTEI_LEVEL].make)
 				{
-					printsub(blank,false,CL_warning);
+					printsub(blank.str(),false,CL_warning);
 					printsub("│└",false,CL_normal);
-					printsub("영원정 ",false,CL_warning);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_EINENTEI) + " ",false,CL_warning);
 				
-					sprintf_s(temp,32,"미궁의 죽림  ");
-					printsub(temp,false,CL_help);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO) + "  ",false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_EIENTEI]).c_str());
-					printsub(temp,true,you.rune[RUNE_EIENTEI]?CL_magic:CL_bad);
+					oss.str("");
+					oss.clear();
+					oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_EIENTEI])<<"* ";
+					printsub(oss.str(),true,you.rune[RUNE_EIENTEI]?CL_magic:CL_bad);
 					//***룬끝
 				}
 				else
 				{
-					printsub(blank,false,CL_warning);
+					printsub(blank.str(),false,CL_warning);
 					printsub("│└",false,CL_normal);
-					printsub("영원정 ",false,CL_bad);
-					printsub("미궁의 죽림",true,CL_STAT);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_EINENTEI) + " ",false,CL_bad);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO),true,CL_STAT);
 				}
 			}
 
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 		}
 		else
 		{
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("미궁의 죽림 ",false,CL_bad);
-			printsub("던전 11층~14층",true,CL_STAT);
-			printsub(blank,false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO) + " ",false,CL_bad);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("11")) << '~' <<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("14"));
+			printsub(oss.str(),true,CL_STAT);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 		}
 	}
@@ -2678,8 +2754,8 @@ void dungeonView()
 	{
 		if(map_list.dungeon_enter[DEPTH].detected)
 		{
-			printsub(blank,false,CL_warning);
-			printsub("요괴짐승길 ",false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH) + " ",false,CL_warning);
 				
 			
 			int floor2_ = 0;	
@@ -2690,13 +2766,17 @@ void dungeonView()
 				else
 					break;
 			}
-			sprintf_s(temp,32,"(%2d/%2d) ",floor2_,MAX_DEPTH_LEVEL+1);
-			printsub(temp,false,CL_normal);
+			oss.str("");
+			oss.clear();
+			oss<<'('<<setw(2)<<setfill(' ')<<floor2_<<'/'<<setw(2)<<setfill(' ')<<(MAX_DEPTH_LEVEL+1)<<')';
+			printsub(oss.str(),false,CL_normal);
 
-			sprintf_s(temp,32,"던전 %d층  ",map_list.dungeon_enter[DEPTH].floor+1);
-			printsub(temp,true,CL_help);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[DEPTH].floor+1)))<<"  ";
+			printsub(oss.str(),true,CL_help);
 
-			printsub(blank,false,CL_warning);
+			printsub(blank.str(),false,CL_warning);
 			printsub("│",true,CL_normal);
 
 			bool see_[3];
@@ -2715,47 +2795,58 @@ void dungeonView()
 
 						if(map_list.dungeon_enter[DREAM_D].detected)
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("꿈의 세계 ",false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM) + " ",false,CL_warning);
 				
-							sprintf_s(temp,32,"짐승길 %d층  ",map_list.dungeon_enter[DREAM_D].floor+1-DEPTH_LEVEL);
-							printsub(temp,true,CL_help);
+
+
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[DREAM_D].floor+1-DEPTH_LEVEL)))<<"  ";
+							printsub(oss.str(),true,CL_help);
 						
 							if(env[DREAM_LEVEL].make)
 							{
 								if(env[MOON_LEVEL].make) //달의 도시
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("달의 도시 ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MOON) + " ",false,CL_warning);
 				
-									sprintf_s(temp,32,"꿈의 세계  ");
-									printsub(temp,false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM) + "  ",false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_MOON]).c_str());
-									printsub(temp,true,you.rune[RUNE_MOON]?CL_magic:CL_bad);
+									oss.str("");
+									oss.clear();
+									oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_MOON])<<"* ";
+									printsub(oss.str(),true,you.rune[RUNE_MOON]?CL_magic:CL_bad);
 									//***룬끝
 								}
 								else
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("달의 도시 ",false,CL_bad);
-									printsub("꿈의 세계 ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MOON) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM) + " ",true,CL_STAT);
 								}
 							}
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						else
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("꿈의 세계 ",false,CL_bad);
-							printsub("짐승길 2층~4층",true,CL_STAT);
-							printsub(blank,false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM) + " ",false,CL_bad);
+							
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("2")) << '~' <<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+							printsub(oss.str(),true,CL_STAT);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						see_[0] = true;
@@ -2767,9 +2858,9 @@ void dungeonView()
 					{
 						if(map_list.dungeon_enter[SUBTERRANEAN].detected)
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("지저 ",false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) + " ",false,CL_warning);
 							int floor3_ = 0;	
 							for(int i=SUBTERRANEAN_LEVEL;i<=SUBTERRANEAN_LEVEL_LAST_LEVEL;i++)
 							{
@@ -2778,48 +2869,58 @@ void dungeonView()
 								else
 									break;
 							}
-							sprintf_s(temp,32,"(%2d/%2d) ",floor3_,MAX_SUBTERRANEAN_LEVEL+1);
-							printsub(temp,false,CL_normal);
+							oss.str("");
+							oss.clear();
+							oss<<'('<<setw(2)<<setfill(' ')<<floor3_<<'/'<<setw(2)<<setfill(' ')<<(MAX_SUBTERRANEAN_LEVEL+1)<<')';
+							printsub(oss.str(),false,CL_normal);
 				
-							sprintf_s(temp,32,"짐승길 %d층  ",map_list.dungeon_enter[SUBTERRANEAN].floor+1-DEPTH_LEVEL);
-							printsub(temp,true,CL_help);
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[SUBTERRANEAN].floor+1-DEPTH_LEVEL)))<<"  ";
+							printsub(oss.str(),true,CL_help);
 
 							if(env[SUBTERRANEAN_LEVEL].make)
 							{
 								if(env[SUBTERRANEAN_LEVEL_LAST_LEVEL].make) //작열지옥터
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("작열지옥터 ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " ",false,CL_warning);
 				
-									sprintf_s(temp,32,"지저 최하층  ");
-									printsub(temp,false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + "  ",false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_SUBTERRANEAN]).c_str());
-									printsub(temp,true,you.rune[RUNE_SUBTERRANEAN]?CL_magic:CL_bad);
+									oss.str("");
+									oss.clear();
+									oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_SUBTERRANEAN])<<"* ";
+									printsub(oss.str(),true,you.rune[RUNE_SUBTERRANEAN]?CL_magic:CL_bad);
 									//***룬끝
 								}
 								else
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("작열지옥터 ",false,CL_bad);
-									printsub("지저 최하층 ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + " ",true,CL_STAT);
 								}
 							}
 
 
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						else
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("지저 ",false,CL_bad);
-							printsub("짐승길 2층~4층",true,CL_STAT);
-							printsub(blank,false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) + " ",false,CL_bad);
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("2")) << '~' <<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+							printsub(oss.str(),true,CL_STAT);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						see_[1] = true;
@@ -2832,89 +2933,100 @@ void dungeonView()
 					{
 						if(map_list.dungeon_enter[PANDEMONIUM].detected)
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("마계 ",false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + " ",false,CL_warning);
 				
-							sprintf_s(temp,32,"짐승길 %d층  ",map_list.dungeon_enter[PANDEMONIUM].floor+1-DEPTH_LEVEL);
-							printsub(temp,true,CL_help);
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[PANDEMONIUM].floor+1-DEPTH_LEVEL)))<<"  ";
+							printsub(oss.str(),true,CL_help);
 
 							if(env[PANDEMONIUM_LEVEL].make)
 							{
 								if(env[PANDEMONIUM_LEVEL+1].make) //법계
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│├",false,CL_normal);
-									printsub("법계 ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HOKKAI) + " ",false,CL_warning);
 				
-									sprintf_s(temp,32,"마계  ");
-									printsub(temp,false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + "  ",false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_MAGIC]).c_str());
-									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_MAGIC]?CL_magic:CL_bad);
+									oss.str("");
+									oss.clear();
+									oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_MAGIC])<<"* ";
+									printsub(oss.str(),true,you.rune[RUNE_PANDEMONIUM_MAGIC]?CL_magic:CL_bad);
 									//***룬끝
 								}
 								else
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│├",false,CL_normal);
-									printsub("법계 ",false,CL_bad);
-									printsub("마계 ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HOKKAI) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + " ",true,CL_STAT);
 								}
 								if(env[PANDEMONIUM_LEVEL+2].make) //빙결세계
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│├",false,CL_normal);
-									printsub("빙결세계 ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FROZEN_FIELD) + " ",false,CL_warning);
 				
-									sprintf_s(temp,32,"마계  ");
-									printsub(temp,false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + "  ",false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_ICE]).c_str());
-									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_ICE]?CL_magic:CL_bad);
+									oss.str("");
+									oss.clear();
+									oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_ICE])<<"* ";
+									printsub(oss.str(),true,you.rune[RUNE_PANDEMONIUM_ICE]?CL_magic:CL_bad);
 									//***룬끝
 								}
 								else
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│├",false,CL_normal);
-									printsub("빙결세계 ",false,CL_bad);
-									printsub("마계 ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FROZEN_FIELD) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + " ",true,CL_STAT);
 								}
 								if(env[PANDEMONIUM_LEVEL+3].make) //판데모니엄
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("판데모니엄 ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST) + " ",false,CL_warning);
 				
-									sprintf_s(temp,32,"마계  ");
-									printsub(temp,false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + "  ",false,CL_help);
 
 									//***룬있음
-									sprintf_s(temp,32,"*%s의 룬* ",LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_SHINKI]).c_str());
-									printsub(temp,true,you.rune[RUNE_PANDEMONIUM_SHINKI]?CL_magic:CL_bad);
+									oss.str("");
+									oss.clear();
+									oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_PANDEMONIUM_SHINKI])<<"* ";
+									printsub(oss.str(),true,you.rune[RUNE_PANDEMONIUM_SHINKI]?CL_magic:CL_bad);
 									//***룬끝
 								}
 								else
 								{
-									printsub(blank,false,CL_warning);
+									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub("판데모니엄 ",false,CL_bad);
-									printsub("마계 ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + " ",true,CL_STAT);
 								}
 							}
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						else
 						{
-							printsub(blank,false,CL_warning);
+							printsub(blank.str(),false,CL_warning);
 							printsub("├",false,CL_normal);
-							printsub("마계 ",false,CL_bad);
-							printsub("짐승길 2층~4층",true,CL_STAT);
-							printsub(blank,false,CL_warning);
+							printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM) + " ",false,CL_bad);
+							
+							oss.str("");
+							oss.clear();
+							oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("2")) << '~' <<
+								LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+							printsub(oss.str(),true,CL_STAT);
+							printsub(blank.str(),false,CL_warning);
 							printsub("│",true,CL_normal);
 						}
 						see_[2] = true;
@@ -2926,8 +3038,8 @@ void dungeonView()
 			{
 				if(map_list.dungeon_enter[HAKUREI_D].detected)
 				{
-					printsub(blank,false,CL_warning);
-					printsub("하쿠레이신사 ",false,CL_warning);
+					printsub(blank.str(),false,CL_warning);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI) + " ",false,CL_warning);
 					int floor4_ = 0;	
 					for(int i=HAKUREI_LEVEL;i<=HAKUREI_LAST_LEVEL;i++)
 					{
@@ -2936,30 +3048,44 @@ void dungeonView()
 						else
 							break;
 					}
-					sprintf_s(temp,32,"(%2d/%2d) ",floor4_,MAX_HAKUREI_LEVEL+1);
-					printsub(temp,false,CL_normal);
+					oss.str("");
+					oss.clear();
+					oss<<'('<<setw(2)<<setfill(' ')<<floor4_<<'/'<<setw(2)<<setfill(' ')<<(MAX_HAKUREI_LEVEL+1)<<')';
+					printsub(oss.str(),false,CL_normal);
 				
-					sprintf_s(temp,32,"짐승길 %d층  ",map_list.dungeon_enter[HAKUREI_D].floor+1-DEPTH_LEVEL);
-					printsub(temp,false,CL_help);
+					oss.str("");
+					oss.clear();
+					oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[HAKUREI_D].floor+1-DEPTH_LEVEL)))<<"  ";
+					printsub(oss.str(),false,CL_help);
 
 					//***룬있음
-					sprintf_s(temp,32,"*%s* ",LocalzationManager::locString(rune_string[RUNE_HAKUREI_ORB]).c_str());
-					printsub(temp,true,you.rune[RUNE_HAKUREI_ORB]?CL_danger:CL_bad);
+					oss.str("");
+					oss.clear();
+					oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_HAKUREI_ORB])<<"* ";
+					printsub(oss.str(),true,you.rune[RUNE_HAKUREI_ORB]?CL_danger:CL_bad);
 					//***룬끝
 				}
 				else
 				{
-					printsub(blank,false,CL_warning);
-					printsub("하쿠레이신사 ",false,CL_bad);
-					printsub("짐승길 5층",true,CL_STAT);
+					printsub(blank.str(),false,CL_warning);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI) + " ",false,CL_bad);
+					oss.str("");
+					oss.clear();
+					oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH)<<' '<<
+						LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("5"));
+					printsub(oss.str(),true,CL_STAT);
 				}
 			}
 		}
 		else
 		{
-			printsub(blank,false,CL_warning);
-			printsub("요괴짐승길 ",false,CL_bad);
-			printsub("던전 15층",true,CL_STAT);
+			printsub(blank.str(),false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH) + " ",false,CL_bad);
+			oss.str("");
+			oss.clear();
+			oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON)<<' '<<
+				LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("15"));
+			printsub(oss.str(),true,CL_STAT);
 		}
 
 

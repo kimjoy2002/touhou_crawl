@@ -1,4 +1,4 @@
-LOC_SYSTEM_OPTION_MENU_START,======옵션======
+LOC_SYSTEM_OPTION_MENU_START,======OPTION======
 LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - LANGUAGE : ENGLISH
 LOC_SYSTEM_OPTION_MENU_ESC,esc - back
 LOC_SYSTEM_LOS_MON,You see a monster.
@@ -606,8 +606,8 @@ LOC_SYSTEM_TENSI_SUN4,Tenshi: Gotta dry some laundry real quick!
 LOC_SYSTEM_TENSI_SUN5,Tenshi: Sunlight—shine!
 LOC_SYSTEM_TENSI_SUN6,Tenshi: The Sword of Hisou can do this too!
 LOC_SYSTEM_TENSI_SUN7,Tenshi: Today’s perfect for a picnic!
-LOC_SYSTEM_TENSI_BRAND_WEAPON,{0}에서 비상의 기운이 뿜어져나온다.
-LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0:은|는} 더욱 비상의 힘이 길어졌다.
+LOC_SYSTEM_TENSI_BRAND_WEAPON,The aura of Hisou surges from {0}.
+LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0} is further empowered by the force of Hisou.
 LOC_SYSTEM_PLAYER_REIMU,Reimu
 LOC_SYSTEM_PLAYER_MARISA,Marisa
 LOC_SYSTEM_PLAYER_SANAE,Sanae

@@ -81,9 +81,7 @@ void SeleteArenaMonster(int num, int level)
 	vector<int> team_list_[2];
 
 	
-	char temp[200];
-	sprintf_s(temp,200,"========== 레벨 %d ========== ",level);
-	AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA, PlaceHolderHelper(to_string(level))),CL_help);
 
 
 	for(int i = 0; i<2; i++)
@@ -147,8 +145,8 @@ void SeleteArenaMonster(int num, int level)
 
 		for(int j=0; j < team_list_[i].size(); j++)
 		{
-			sprintf_s(temp,200,"%s팀: %s",i==0?"좌측":"우측", mondata[team_list_[i][j]].name.getName().c_str());
-			AddNote(you.turn,CurrentLevelString(),temp,CL_green);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(i==0?LOC_SYSTEM_NOTE_ARENA_TEAM_LEFT:LOC_SYSTEM_NOTE_ARENA_TEAM_RIGHT, 
+				PlaceHolderHelper(mondata[team_list_[i][j]].name.getName())),CL_green);
 			createarenamon(num, team_list_[i][j], i == 0);
 		}
 		if(i==0)
@@ -166,8 +164,8 @@ void arena_event(int num)
 		
 		if(you.level == 27)
 		{
-			printlog("클리어를 축하한다! 당신은 놀라운 찍신이군!",true,false,false,CL_help);
-			AddNote(you.turn,CurrentLevelString(),"레벨27 달성! 당신은 게임을 클리어했다.",CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_CLEAR),true,false,false,CL_help);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN),CL_help);
 		}
 		else
 		{
@@ -195,9 +193,9 @@ void arena_event(int num)
 			map_list.bamboo_rate = 0;
 			
 			if(you.level == 26)
-				printlog("마지막 전투다. 준비는 되었는가?",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_LAST_BATTLE),true,false,false,CL_normal);
 			else
-				printlog("자 누가 이길지 선택하라!",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_CHOOSE),true,false,false,CL_normal);
 		}
 
 	}
@@ -215,7 +213,7 @@ void arena_event(int num)
 		if(you.position.x == DG_MAX_X/2)
 			you.Blink(1);
 		
-		printlog("개시!",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_START),true,false,false,CL_normal);
 	}
 
 	
@@ -242,29 +240,32 @@ void arena_event(int num)
 
 		if(left_dead_ && !right_dead_)
 		{
-			printlog("한판! 오른쪽의 승리다!",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_RIGHT_WIN),true,false,false,CL_help);
 			if(you.position.x > DG_MAX_X/2)
 			{
 				map_list.bamboo_count = -10;
 				you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-				AddNote(you.turn,CurrentLevelString(),"정답! 우측팀의 승리다",CL_normal);
+				AddNote(you.turn,CurrentLevelString(),
+					LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_SUCCESS) + " " + LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN_RIGHT)
+					,CL_normal);
 			}
 			else
 			{
-				AddNote(you.turn,CurrentLevelString(),"오답... 우측팀의 승리다",CL_danger);
+				AddNote(you.turn,CurrentLevelString(),
+					LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_FAIL) + " " + LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN_RIGHT)
+					,CL_danger);
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
 					char temp[200];
 					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
 					printlog(temp,true,false,false,CL_danger);
-					sprintf_s(temp,200,"남은 기회 %d",3-map_list.god_num);
-					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
+					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))) ,CL_danger);
 					map_list.bamboo_count = -10;
 				}
 				else
 				{
-					printlog("오답이다!",true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_FAIL),true,false,false,CL_danger);
 					map_list.bamboo_count = 121;
 				}
 		
@@ -274,29 +275,32 @@ void arena_event(int num)
 		}
 		if(!left_dead_ && right_dead_)
 		{
-			printlog("한판! 왼쪽의 승리다!",true,false,false,CL_help);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_LEFT_WIN),true,false,false,CL_help);	
 			if(you.position.x < DG_MAX_X/2)
 			{
 				map_list.bamboo_count = -10;
 				you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-				AddNote(you.turn,CurrentLevelString(),"정답! 좌측팀의 승리다",CL_normal);
+				AddNote(you.turn,CurrentLevelString(),
+					LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_SUCCESS) + " " + LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN_LEFT)
+					,CL_normal);
 			}
 			else
 			{
-				AddNote(you.turn,CurrentLevelString(),"오답... 좌측팀의 승리다",CL_danger);
+				AddNote(you.turn,CurrentLevelString(),
+					LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_FAIL) + " " + LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN_LEFT)
+					,CL_danger);
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
 					char temp[200];
 					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
 					printlog(temp,true,false,false,CL_danger);
-					sprintf_s(temp,200,"남은 기회 %d",3-map_list.god_num);
-					AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
+					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))),CL_danger);
 					map_list.bamboo_count = -10;
 				}
 				else
 				{
-					printlog("오답이다!",true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_FAIL),true,false,false,CL_danger);
 					map_list.bamboo_count = 121;
 				}
 
@@ -305,20 +309,20 @@ void arena_event(int num)
 		}
 		if(left_dead_ && right_dead_)
 		{
-			printlog("무승부! 이번 대전은 무효다.",true,false,false,CL_help);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_DRAW),true,false,false,CL_help);	
 			map_list.bamboo_count = -10;		
 			map_list.bamboo_rate = 3;
-			AddNote(you.turn,CurrentLevelString(),"무승부로 인한 재경기",CL_small_danger);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_DRAW),CL_small_danger);
 		}
 
 	}
 
 	if(map_list.bamboo_count == 120)
 	{
-		printlog("시한초과! 무승부! 이번 대전은 무효다.",true,false,false,CL_help);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_TIMEOVER),true,false,false,CL_help);	
 		map_list.bamboo_count = -10;		
 		map_list.bamboo_rate = 3;
-		AddNote(you.turn,CurrentLevelString(),"시한초과로 인한 재경기",CL_small_danger);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_TIMEOVER),CL_small_danger);
 
 		auto it = env[num].mon_vector.begin();
 		for( ;it != env[num].mon_vector.end();it++)
@@ -334,11 +338,10 @@ void arena_event(int num)
 	
 	if(map_list.bamboo_count == 130)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"당신의 기록은 %d레벨이다. 다음에 더욱 높은 레벨에 도전하도록! (?:로 기록확인)",you.level);
-		printlog(temp,true,false,false,CL_help);
-		sprintf_s(temp,200,"당신의 기록은 %d레벨이다.",you.level);
-		AddNote(you.turn,CurrentLevelString(),temp,CL_danger);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_ARENA_TIMEOVER,
+			PlaceHolderHelper(to_string(you.level)),
+			PlaceHolderHelper("?:")),true,false,false,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_FINAL_SCORE, PlaceHolderHelper(to_string(you.level))),CL_danger);
 	}
 
 

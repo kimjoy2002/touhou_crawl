@@ -240,7 +240,7 @@ int d3d::EnterMsgLoop()
 		Sleep(16);
 		if(!Display(0))
 		{
-			::MessageBox(0, "디스플레이 에러", 0, 0);
+			::MessageBox(0, "Display Error", 0, 0);
 		}
 		InputUpdate();
 		//UpdateBGM();
@@ -257,7 +257,7 @@ int d3d::EnterMsgLoop()
 	while(g_ThreadCnt > 0 && i++ <= 50)
 		Sleep(200);
 	if(i>50)
-		::MessageBox(0, "쓰레드 종료 실패", 0, 0);
+		::MessageBox(0, "Thread Exit Fail", 0, 0);
 	return msg.wParam;
 }
 

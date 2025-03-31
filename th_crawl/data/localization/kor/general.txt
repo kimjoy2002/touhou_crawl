@@ -114,6 +114,8 @@ LOC_SYSTEM_DROP_ITEM_SION_SOME,빈곤신의 저주로 {0}개가 사라졌다.
 LOC_SYSTEM_HOTKEY,단축키
 LOC_SYSTEM_NAME,이름
 LOC_SYSTEM_SCHOOL,학파
+LOC_SYSTEM_COST,비용
+LOC_SYSTEM_SUCCESS_RATE,성공률
 LOC_SYSTEM_FAILURE_RATE,실패율
 LOC_SYSTEM_LEVEL,레벨
 LOC_SYSTEM_COMMAND,명령어
@@ -223,6 +225,42 @@ LOC_SYSTEM_STAIR_ESCAPE_WARN,음양옥을 줍기전까진, 당신은 게임 패�
 LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION,정말로 던전을 탈출하여 승리를 확정하겠습니까?(Y/N)
 LOC_SYSTEM_STAIR_RETURN,던전으로 돌아왔다.
 LOC_SYSTEM_STAIR_EMPTY,여기엔 계단이 없다.
+LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM,무슨 아이템을 고르겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON,무슨 무기를 장착하시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR,무슨 방어구를 장착하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR,무슨 방어구를 벗겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY,무슨 장신구를 장착하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY,무슨 장신구를 벗겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_PICK,무슨 아이템을 줍겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_DISCARD,무슨 아이템을 버리겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_FOOD,무엇을 먹겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_DRINK,무엇을 마시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_EVOKE,무엇을 발동하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_READ,무엇을 읽겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR,무슨 아이템을 확인하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER,당신의 아이템
+LOC_SYSTEM_DISPLAY_MANAGER_USE,무엇을 사용하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_USE_TO,무슨 아이템에 사용하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_IDEN,무슨 아이템을 식별하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR,무슨 방어구를 고르시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,무슨 방어구를 강화하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY,무슨 장신구를 고르시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,무슨 아이템을 순화할거야?
+LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,어떤 스킬을 순화할거지?
+LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,무슨 스펠카드를 충전하시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_THROW,무엇을 던지겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,사용할 마법을 선택하세요. (?키로 설명을 볼 수 있다.)
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,잊을 마법을 선택하세요. (?키로 설명을 볼 수 있다.)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,설명을 볼 마법을 선택하세요. (?키로 마법을 사용)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,설명을 볼 마법을 선택하세요.
+LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,식별된 아이템 & 자동 줍기 설정
+LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,식별된 아이템이 없습니다.
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,당신의 특성들 (알파벳을 누르면 상세한 정보가 나옵니다.)
+LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY,당신의 특성이 없습니다.
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_USE,어느 스킬을 사용하겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_INFO,어느 스킬의 설명을 보시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_HELP_INFO,{0}나 {1}를 눌러서 설명을 볼 수 있습니다.
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_HELP_USE,{0}나 {1}를 눌러서 스킬 사용을 할 수 있습니다.
 LOC_SYSTEM_UI_RUNE_TITLE,얻어야할 룬
 LOC_SYSTEM_UI_RUNE_NAME,{0}의 룬
 LOC_SYSTEM_UI_RUNE_GAIN,획득
@@ -1268,6 +1306,8 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN,{0:이|가} 마나를 내뿜고있다!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0:이|가} 신비로운 힘을 뿜어내고 있다!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0:이|가} 보호의 오오라를 내뿜고있다!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,당신의 무기에 마법이 부여되었다!
+LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,마법책
+LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,미확인 마법책
 LOC_SYSTEM_ITEM_BOOK_DROP,떨어진 마법책
 LOC_SYSTEM_ITEM_BOOK_FIRE_BASE,초보 화염술사의 마법책
 LOC_SYSTEM_ITEM_BOOK_COLD_BASE,초보 냉기술사의 마법책
@@ -1336,6 +1376,36 @@ LOC_SYSTEM_ITEM_ETC_CATNIP,개다래 나무
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,부셔진 카메라
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,잡동사니
 LOC_SYSTEM_ITEM_ETC_PHOTO,사진
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,독에 대한 기초적인 마법이 들어 있는 책\n독마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,다양하고 가성비 좋은 저레벨 마법들이 들어 있는 책\n고레벨은 없지만 구성이 알차다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,대지에 대한 기초적인 마법이 들어 있는 책\n대지마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,대기에 대한 기초적인 마법이 들어 있는 책\n대기마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,소환에 대한 기초적인 마법이 들어 있는 책\n소환마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,연금술을 가르치는 책\n마법을 통해서 간단한 연금술을 시험해볼 수 있는 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,정신을 조종하는 기초적인 마법이 들어 있는 책\n심리마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,초보 마전사를 위해 만들어진 마법책\n전사들에게 유용한 마법들로 구성이 되어있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,메이드들이 기본적으로 가져야할 소양이라고 적혀있다. 홍마관에서 배포중이다.\n메이드의 길은 멀고도 험하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,다양한 전기마법이 적혀있는 마법책\n만지기만해도 짜릿짜릿하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,간단한 원소연습을 할 수 있게 되어있는 마법책\n하지만 빅토리댄스는 이제 없다고!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,다양한 보조마법이 적혀있는 마법책.\n마법사 입문에 좋아보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,마법암살자를 꿈꾸는 사람들을 위한 마법책\n아직은 마법이 모자라보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,구름을 만드는 노하우가 적혀있는 마법책\n왠지 책도 축축해보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,강력한 파괴의 기초 마법이 적혀있는 책\n탄막은 파워!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,정신마법계열의 마법이 적혀있는 책\n요괴들은 정신공격에 약하다고들 한다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,풍수지리에 해박한 모노노베노 후토가 편찬한 책.\n바람을 다루는 것부터 대지를 일으키는 일, 물을 다루면서 운기를 다루는 법이 적혀있다\n왜인지 방화하는 법에 대한 세세한 부록이 끼워져있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,불량천인 텐시가 직접 자필한 마법책\n예측불가인 그녀지만 그녀의 대지를 다루는 기술은 배울만하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,미마가 적은 궁극의 파괴술서\n모든 파괴법사가 꿈꾸고있는 그 책이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,지저세계에 살고있는 사토리가 적은 정신을 지배하는 법\n왠지 책에게 마음을 읽히고 있는 듯한 느낌이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,홍마관의 메이드장이 유능한 메이드를 길러내기 위해 만들었다는 그 책이다.\n홍마관엔 사쿠야이외에 유능한 메이드가 없을뿐더러 아무도 책을 이해하지 못했기에 전설로만 남겨진 책이다.\n마법 뿐만이 아니라 청소하는 법, 빨래하는 법등이 부록으로 적혀있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적은 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘치는 모험 만화.\n내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0:이|가} 찍혀있는 사진이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,미소녀가 찍혀있는 사진이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\n
@@ -1556,3 +1626,4 @@ LOC_SYSTEM_DUMP_DEATHREASON_WIN,음양옥과 {0}개의 룬을 들고 탈출하�
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,{0}개의 룬만 들고 도망쳤다.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,성과없이 탈출했다.
 LOC_SYSTEM_DEBUG_CLEVER,디버그) {0} 마법 강화
+LOC_SYSTEM_DEBUG_CALC_MR,디버프계산: 몬스터({0}) - 파워({1}) < randC(2,100)

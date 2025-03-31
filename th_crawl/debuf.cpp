@@ -95,9 +95,7 @@ bool unit::CalcuateMR(int power)
 {
 	if (wiz_list.wizard_mode == 1)
 	{
-		char temp[100];
-		sprintf_s(temp, 100, "디버프계산: 몬스터(%d) - 파워(%d) < randC(2,100)", GetResist(), power);
-		printarray(true, false, false, CL_help, 1, temp);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_CALC_MR, PlaceHolderHelper(to_string(GetResist())), PlaceHolderHelper(to_string(power))), true, false, false, CL_help);
 	}
 	return GetMindReading() ? true : power_calculate(GetResist(), power) < randC(2, 100);
 }

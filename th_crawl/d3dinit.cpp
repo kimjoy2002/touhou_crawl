@@ -51,7 +51,7 @@ void LoadEmbeddedFont(const std::wstring& fontPath)
 {
 	int result = AddFontResourceExW(fontPath.c_str(), FR_PRIVATE, NULL);
 	if(result == 0){
-		::MessageBox(0, "Font Init Fail. 폰트를 초기화하는데 실패하였습니다.", 0, 0);
+		::MessageBox(0, "Font Init Fail.", 0, 0);
 	}
 }
 
@@ -82,7 +82,7 @@ bool Setup()
 
     if (FAILED(hr) || g_pfont == nullptr)
     {
-		::MessageBox(0, "Font loading fail. 폰트를 로딩하는데 실패했습니다.", 0, 0);
+		::MessageBox(0, "Font loading fail.", 0, 0);
     }
 
 	if( FAILED(D3DXCreateSprite(Device, &g_pSprite)))
@@ -240,13 +240,13 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
 	{
-		::MessageBox(0, "D3를 초기화하는데 실패하였습니다.", 0, 0);
+		::MessageBox(0, "InitD3D fail", 0, 0);
 		return 0;
 	}
 		
 	if(!Setup())
 	{
-		::MessageBox(0, "일부 정상적으로 로딩되지못한 이미지파일이 있습니다.", 0, 0);
+		::MessageBox(0, "Init Image fail", 0, 0);
 	}
 	InitSound(hwnd);
 

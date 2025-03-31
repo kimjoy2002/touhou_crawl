@@ -410,9 +410,9 @@ void random_identity_scroll()
 bool identity_scroll(bool pre_iden_)
 {
 	if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
-		view_item(IVT_UNIDEN,"무슨 아이템을 식별시겠습니까?");
+		view_item(IVT_UNIDEN,LOC_SYSTEM_DISPLAY_MANAGER_IDEN);
 	else
-		view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
+		view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -451,9 +451,9 @@ bool identity_scroll(bool pre_iden_)
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
-				view_item(IVT_SELECT,"무슨 아이템을 식별시겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_IDEN);
 			else
-				view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -768,9 +768,9 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 
 	if (!waste_) {
 		if (iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
-			view_item(IVT_ARMOR_ENCHANT, "무슨 방어구를 강화하시겠습니까?");
+			view_item(IVT_ARMOR_ENCHANT, LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR);
 		else
-			view_item(IVT_SELECT, "무슨 아이템에 사용하시겠습니까?");
+			view_item(IVT_SELECT, LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 	}
 	while(1)
 	{
@@ -838,9 +838,9 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
-				view_item(IVT_SELECT,"무슨 방어구를 강화하시겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR);
 			else
-				view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -926,9 +926,9 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				return true;
 		}
 		if (iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-			view_item(IVT_SPELLCARD, "무슨 스펠카드를 충전하시겠습니까?");
+			view_item(IVT_SPELLCARD, LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
 		else
-			view_item(IVT_SELECT, "무슨 아이템에 사용하시겠습니까?");
+			view_item(IVT_SELECT, LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 	}
 	while(1)
 	{
@@ -989,9 +989,9 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-				view_item(IVT_SPELLCARD,"무슨 스펠카드를 충전하시겠습니까?");
+				view_item(IVT_SPELLCARD,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
 			else
-				view_item(IVT_SELECT,"무슨 아이템에 사용하시겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == VK_ESCAPE)
 		{
@@ -1014,7 +1014,7 @@ bool amnesia_scroll(bool pre_iden_)
 
 	if(you.currentSpellNum)
 	{
-		view_spell("잊을 마법을 선택하세요. ( ?키로 설명을 볼 수 있다. )");
+		view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -1043,7 +1043,7 @@ bool amnesia_scroll(bool pre_iden_)
 						}
 					case 'N':
 					default:
-						view_spell("잊을 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+						view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
 						//changedisplay(DT_SPELL);
 						break;
 					}

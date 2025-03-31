@@ -313,7 +313,7 @@ string getOccultName(occult_type kind)
 	case OCT_SHORT:
 		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_SHORT);
 	case OCT_DISH:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_NESI);
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_DISH);
 	case OCT_KUNEKUNE:
 		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE);
 	default:

@@ -776,24 +776,24 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		default:
 			break;
 		}
-		char temp[100];
-		sprintf_s(temp,100, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
+		char temp[256];
+		sprintf_s(temp,256, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf_s(temp,100, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
+		sprintf_s(temp,256, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
+		sprintf_s(temp,256, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
 			(it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3), you.GetSkillLevel(SKT_ARMOUR, true));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
+		sprintf_s(temp,256, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf_s(temp,100, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
+		sprintf_s(temp,256, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
 		text_ += temp;
 
 
@@ -816,24 +816,24 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		text_ += "상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n";
 		text_ += "상대의 탄막을 막는 반칙적인 활용도 가능하다.\n";
-		char temp[100];
-		sprintf_s(temp,100, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
+		char temp[256];
+		sprintf_s(temp,256, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
 		text_ += temp;
-		sprintf_s(temp,100, "패널티는 방패 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n"); 
+		sprintf_s(temp,256, "패널티는 방패 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n"); 
 		text_ += temp;
-		sprintf_s(temp,100, "현재 착용시 방어력: %d    패널티 : %d (현재 방패 스킬 레벨 : %d)\n\n",
+		sprintf_s(temp,256, "현재 착용시 방어력: %d    패널티 : %d (현재 방패 스킬 레벨 : %d)\n\n",
 			(it->isiden() ? it->value4 : 0) + (int)(it->value1*(1.0f + (you.s_dex / 5.0f + you.GetSkillLevel(SKT_SHIELD, true)) / 15.0f)*(you.GetProperty(TPT_SLAY)?1.2f:1.0f)),
 			min(it->value3, it->value2 + you.GetSkillLevel(SKT_SHIELD, true) / 3), you.GetSkillLevel(SKT_SHIELD, true));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
+		sprintf_s(temp,256, "합계 패널티만큼 회피와 은밀, 마법성공율, 은밀이 감소합니다.\n");
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
 		text_ += temp;
-		sprintf_s(temp,100, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
+		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
 		text_ += temp;
-		sprintf_s(temp,100, "이 아이템은 +%d까지 인챈트가 가능하다.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
+		sprintf_s(temp,256, "이 아이템은 +%d까지 인챈트가 가능하다.", it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9));
 		text_ += temp;
 
 		if (can_use_)

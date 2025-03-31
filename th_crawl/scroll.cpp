@@ -321,7 +321,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			ReleaseMutex(mutx);
 			changedisplay(DT_GAME);
 			you.PowUpDown(-100,true);
-			printlog("팡! ",false,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ",false,false,false,CL_white_blue);
 			soundmanager.playSound("soul_shot");
 			skill_soul_shot(0, &you, you.position);
 			WaitForSingleObject(mutx, INFINITE);
@@ -329,7 +329,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		else
 		{
 			if (!waste_) //낭비시엔 의미가 없음
-				printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 		}
 		return true;
 		}
@@ -348,7 +348,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 		else
 		{
-			printlog("아무 일도 일어나지않았다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND), true, false, false, CL_normal);
 		}
 		return true;
 	}
@@ -486,7 +486,7 @@ bool curse_weapon_scroll(bool pre_iden_)
 				return false;
 			}
 			else{
-				printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -498,7 +498,7 @@ bool curse_weapon_scroll(bool pre_iden_)
 			return false;
 		}
 		else{
-			printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -528,7 +528,7 @@ bool curse_armour_scroll(bool pre_iden_)
 		return false;
 	}
 	else{
-		printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 		return true;
 	}
 }
@@ -548,7 +548,7 @@ bool remove_curse_scroll(bool pre_iden_)
 					if(iden_==false && you.GetPunish(GT_HINA) && randA(2))
 					{
 						printlog("히나가 당신의 액땜을 방해했다! ",false,false,false,CL_hina);						
-						printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 						return true;
 					}
 					you.equipment[i]->curse = false;
@@ -571,7 +571,7 @@ bool remove_curse_scroll(bool pre_iden_)
 			return false;
 		}
 		else{
-			printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -704,7 +704,7 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 				return false;
 			}
 			else{
-				printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -716,7 +716,7 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 			return false;
 		}
 		else{
-			printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -742,7 +742,7 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 				return false;
 			}
 			else{
-				printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 				return true;
 			}
 		}
@@ -754,7 +754,7 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 			return false;
 		}
 		else{
-			printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -809,7 +809,7 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 						return false;
 					}
 					else{
-						printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 						return true;
 					}
 				}
@@ -897,7 +897,7 @@ bool curse_jewelry_scroll(bool pre_iden_)
 		return false;
 	}
 	else{
-		printlog("아무 일도 일어나지않았다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 		return true;
 	}
 }

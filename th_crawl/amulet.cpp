@@ -134,10 +134,10 @@ bool chargingFinish(amulet_type kind, int value)
 		break; 
 	case AMT_WAVE:
 		if (value > 0) {
-			printlog("부적에 의해 영력 회복력이 올라갔다!", true, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP), true, false, false, CL_blue);
 		}
 		else {
-			printlog("더 이상 부적으로부터 영력 회복력을 받지 못한다.", true, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP), true, false, false, CL_blue);
 		}
 		break;
 	/*case AMT_WEATHER:
@@ -151,11 +151,11 @@ bool chargingFinish(amulet_type kind, int value)
 	case AMT_FAITH:
 		if (value > 0) {
 			if (you.god == GT_NONE) {
-				printlog("당신은 신앙이 없기때문에 모은 신앙심이 하늘로 날라갔다.", true, false, false, CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL), true, false, false, CL_blue);
 				you.resetAmuletPercent(kind);
 			}
 			else {
-				printlog("부적에 의해 신과 교감하였다!", true, false, false, CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING), true, false, false, CL_blue);
 				if (you.god != GT_SEIJA)
 					you.PietyUpDown(10);
 				you.GiftCount(10);
@@ -189,7 +189,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 		break;
 	case AMT_BLOSSOM:
 		soundmanager.playSound("soul_shot");
-		printlog("팡! ", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
 		skill_soul_shot(0, &you, you.position);
 		break;
 	case AMT_TIMES:
@@ -211,7 +211,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 	}
 	case AMT_WAVE:
 		soundmanager.playSound("buff");
-		printlog("당신은 영력을 회복했다. ", false, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL) + " ", false, false, false, CL_normal);
 		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
 		/*if (env[current_level].isBamboo())
 		{
@@ -232,7 +232,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 	case AMT_GRAZE:
 		soundmanager.playSound("buff");
 		you.SetSuperGraze(rand_int(10, 15));
-		printlog("당신은 순간적으로 회피에 모든 신경을 쏟는다!", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER), false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
 		{
@@ -243,15 +243,15 @@ bool evokeAmulet(amulet_type kind, int value_)
 			switch (weather_)
 			{
 			case 1:
-				printlog("한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE), true, false, false, CL_normal);
 				you.SetWeather(1, time_);
 				break;
 			case 2:
-				printlog("던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN), true, false, false, CL_normal);
 				you.SetWeather(2, time_);
 				break;
 			case 3:
-				printlog("던전에 강한 햇빛이 들기 시작했다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY), true, false, false, CL_normal);
 				you.SetWeather(3, time_);
 				break;
 			default:
@@ -268,23 +268,28 @@ bool evokeAmulet(amulet_type kind, int value_)
 		switch (value_)
 		{
 		case OCT_NESI:
-			printlog("오컬트의 힘으로 도시전설 네시가 출현했다!", true, false, false, CL_magic);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
+				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_NESI)), true, false, false, CL_magic);
 			skill_summon_occult_nesi(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_LONG:
-			printlog("오컬트의 힘으로 도시전설 팔척귀신이 출현했다!", true, false, false, CL_magic);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
+				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_LONG)), true, false, false, CL_magic);
 			skill_summon_occult_long(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_SHORT:
-			printlog("오컬트의 힘으로 도시전설 리틀 그린맨들이 출현했다!", true, false, false, CL_magic);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,
+				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_SHORT)), true, false, false, CL_magic);
 			skill_summon_occult_small(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_DISH:
-			printlog("오컬트의 힘으로 도시전설 반쵸사라야시키가 출현했다!", true, false, false, CL_magic);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
+				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_DISH)), true, false, false, CL_magic);
 			skill_summon_occult_dish(you.level * 5, false, &you, you.position);
 			break;
 		case OCT_KUNEKUNE:
-			printlog("오컬트의 힘으로 도시전설 쿠네쿠네가 출현했다!", true, false, false, CL_magic);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
+				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE)), true, false, false, CL_magic);
 			skill_summon_occult_kunekune(you.level * 5, false, &you, you.position);
 			break;
 		default:

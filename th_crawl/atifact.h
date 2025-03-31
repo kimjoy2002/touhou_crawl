@@ -31,7 +31,7 @@ public:
 
 
 std::string GetAtifactString(ring_type ring_, int value_);
-const char* GetAtifactInfor(ring_type ring_, int value_);
+std::string GetAtifactInfor(ring_type ring_, int value_);
 bool effectartifact(ring_type kind, int value);
 void MakeArtifact(item* item_, int good_bad_);
 

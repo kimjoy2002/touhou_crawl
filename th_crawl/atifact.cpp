@@ -92,76 +92,76 @@ string GetAtifactString(ring_type ring_, int value_)
 	switch(ring_)
 	{
 	case RGT_STR:
-		oss << "힘" << ((value_ < 0) ? "" : "+") << value_;
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_STR, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case RGT_DEX:
-		oss << "민첩" << ((value_ < 0) ? "" : "+") << value_;
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_DEX, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case RGT_INT:
-		oss << "지능" << ((value_ < 0) ? "" : "+") << value_;
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INT, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case RGT_HUNGRY:
-		oss << "허기";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HUNGRY);
 		break;
 	case RGT_FULL:
-		oss << "포만감";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FULL);
 		break;
 	case RGT_TELEPORT:
-		oss << "*전이";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_TELEPORT);
 		break;
 	case RGT_POISON_RESIS:
-		oss << "독저항" << (value_>0?"+":"-");
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_POISON_RESIST, PlaceHolderHelper((value_>0?"+":"-")));
 		break;
 	case RGT_FIRE_RESIS:
-		oss << "화염저항" << (value_==3?"+++":
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_FIRE_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
 			(value_==-2?"--":
 			(value_==-3?"---":"?"
-			))))));
+			))))))));
 		break;
 	case RGT_ICE_RESIS:
-		oss << "냉기저항" << (value_==3?"+++":
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_COLD_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
 			(value_==-2?"--":
 			(value_==-3?"---":"?"
-			))))));
+			))))))));
 		break;
 	case RGT_SEE_INVISIBLE:
-		oss << "투명감지";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE);
 		break;
 	//case RGT_GRAZE:
 	//	oss << "+그레이즈";
 	//	break;
 	case RGT_LEVITATION:
-		oss << "+비행";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT);
 		break;
 	case RGT_INVISIBLE:
-		oss << "+투명";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INVISIBLE);
 		break;
 	case RGT_MANA:
-		oss << "영력";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MANA);
 		break;
 	case RGT_MAGACIAN:
-		oss << "마법사";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN);
 		break;
 	case RGT_AC:
-		oss << "AC" << (value_<0?"":"+") << value_;
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_AC, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_EV:
-		oss << "EV" << (value_<0?"":"+") << value_;
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_EV, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_CONFUSE_RESIS:
-		oss << "혼란저항";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST);
 		break;
 	case RGT_ELEC_RESIS:
-		oss << "전기저항";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST);
 		break;
 	case RGT_MAGIC_RESIS:
-		oss << "마법저항";
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST);
 		break;
 	case RGT_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
@@ -173,90 +173,99 @@ string GetAtifactString(ring_type ring_, int value_)
 }
 
 
-const char* GetAtifactInfor(ring_type ring_, int value_)
-{	
-	static char temp[128];
+std::string GetAtifactInfor(ring_type ring_, int value_)
+{
+    std::ostringstream oss;
 	switch(ring_)
 	{
 	case RGT_STR:
-		sprintf_s(temp,128,"힘이 수치만큼 증감한다.(%s%d)",value_<0?"":"+",value_);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_STR,
+			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_DEX:
-		sprintf_s(temp,128,"민첩이 수치만큼 증감한다.(%s%d)",value_<0?"":"+",value_);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_DEX,
+			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_INT:
-		sprintf_s(temp,128,"지능이 수치만큼 증감한다.(%s%d)",value_<0?"":"+",value_);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_INT,
+			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_HUNGRY:
-		sprintf_s(temp,128,"파워가 빠른 속도로 소모된다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_HUNGRY);
 		break;
 	case RGT_FULL:
-		sprintf_s(temp,128,"파워가 천천히 소모된다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FULL);
 		break;
 	case RGT_TELEPORT:
-		sprintf_s(temp,128,"무작위로 공간이동을 한다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_TELEPORT);
 		break;
 	case RGT_POISON_RESIS:
-		sprintf_s(temp,128,"%s",value_>0?"독에 면역이 생긴다.":"독에 취약해진다.");
+		oss << LocalzationManager::locString(value_>0?LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_GOOD:LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_BAD);
 		break;
 	case RGT_FIRE_RESIS:
-		sprintf_s(temp,128,"화염저항이 증감한다.(%s)",(value_==3?"+++":
-			(value_==2?"++":
-			(value_==1?"+":
-			(value_==-1?"-":
-			(value_==-2?"--":
-			(value_==-3?"---":"?"
-			)))))));
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FIRE_RESIST,
+			PlaceHolderHelper((value_==3?"+++":
+				(value_==2?"++":
+				(value_==1?"+":
+				(value_==-1?"-":
+				(value_==-2?"--":
+				(value_==-3?"---":"?"
+				))))))));
 		break;
-	case RGT_ICE_RESIS:
-		sprintf_s(temp,128,"냉기저항이 증감한다.(%s)",(value_==3?"+++":
-			(value_==2?"++":
-			(value_==1?"+":
-			(value_==-1?"-":
-			(value_==-2?"--":
-			(value_==-3?"---":"?"
-			)))))));
+	case RGT_ICE_RESIS:	
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_COLD_RESIST,
+			PlaceHolderHelper((value_==3?"+++":
+				(value_==2?"++":
+				(value_==1?"+":
+				(value_==-1?"-":
+				(value_==-2?"--":
+				(value_==-3?"---":"?"
+				))))))));
 		break;
 	case RGT_SEE_INVISIBLE:
-		sprintf_s(temp,128,"투명을 감지할 수 있다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SEE_INVISIBLE);
 		break;
 	//case RGT_GRAZE:
 	//	sprintf_s(temp,128,"그레이즈를 발동할 수 있다.");
 	//	break;
 	case RGT_LEVITATION:
-		sprintf_s(temp,128,"비행을 발동할 수 있다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FLIGHT);
 		break;
 	case RGT_INVISIBLE:
-		sprintf_s(temp,128,"투명을 발동할 수 있다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_INVISIBLE);
 		break;
 	case RGT_MANA:
-		sprintf_s(temp,128,"영력의 최대치가 올라간다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MANA);
 		break;
 	case RGT_MAGACIAN:
-		sprintf_s(temp,128,"마법성공율이 올라간다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN);
 		break;
 	case RGT_AC:
-		sprintf_s(temp,128,"방어가 증감한다.(%s%d)",value_<0?"":"+",value_);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,
+			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_EV:
-		sprintf_s(temp,128,"회피가 증감한다.(%s%d)",value_<0?"":"+",value_);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,
+			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case RGT_CONFUSE_RESIS:
-		sprintf_s(temp,128,"혼란에 저항이 생긴다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST);
 		break;
 	case RGT_ELEC_RESIS:
-		sprintf_s(temp,128,"전기에 저항이 생긴다.");
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST);
 		break;
 	case RGT_MAGIC_RESIS:
-		sprintf_s(temp,128,"마법 저항이 생긴다.(%d)",20+value_*20);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,
+			PlaceHolderHelper(to_string(20+value_*20)));
 		break;
 	case RGT_SKILL_UP:
-		sprintf_s(temp, 128, "지정된 스킬레벨이 올라간다.(%s+%d)", skill_string((skill_type)(value_ % 100)).c_str(), value_ / 100);
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,
+			PlaceHolderHelper(skill_string((skill_type)(value_ % 100)) + to_string(value_ / 100)));
 		break;
 	default:
 		break;
 	}
-	return temp;
+	return oss.str();
 }
 
 

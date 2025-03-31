@@ -93,7 +93,7 @@ void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator
 
 void iteminfor(bool gameover)
 {
-	view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");
+	view_item(IVT_INFOR,gameover?LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER:LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -436,7 +436,7 @@ void iteminfor(bool gameover)
 					}
 					break;
 				}
-				view_item(IVT_INFOR,gameover?"당신의 아이템":"무슨 아이템을 확인하겠습니까?");
+				view_item(IVT_INFOR,gameover?LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER:LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
 				setDisplayMove(get_item_move_);
 			}
 		}

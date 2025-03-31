@@ -848,7 +848,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 
 list<item>::iterator ThrowSelect()
 {
-	view_item(IVT_THROW,"무엇을 던지겠습니까?");
+	view_item(IVT_THROW,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -878,7 +878,7 @@ list<item>::iterator ThrowSelect()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 던지겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

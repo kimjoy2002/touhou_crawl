@@ -242,7 +242,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 	length_ = min(length_,SkillLength(SKL_EIRIN_0));
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		view_item(IVT_POTION,"무엇을 던지겠습니까?");
+		view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -335,7 +335,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 				changemove(option_mg.getHeight());
 			}						//-----이동키끝-------
 			else if(key_ == '*')
-				view_item(IVT_SELECT,"무엇을 던지겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -612,7 +612,7 @@ bool skill_minoriko_restore(int pow, bool short_, unit* order, coord_def target)
 	
 bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 {		
-	view_item(IVT_FOOD,"무엇을 사용하겠습니까?");
+	view_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -660,7 +660,7 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 사용하시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -671,7 +671,7 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 {
 	{
-		view_item(IVT_POTION,"무엇을 사용하겠습니까?");
+		view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 		while(1)
 		{
 			int key_ = waitkeyinput(true);
@@ -718,7 +718,7 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 				changemove(option_mg.getHeight());
 			}						//-----이동키끝-------
 			else if(key_ == '*')
-				view_item(IVT_SELECT,"무엇을 사용하겠습니까?");
+				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -1570,7 +1570,7 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 }
 bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_CURSE_ENCHANT,"무슨 아이템을 고르시겠습니까?");
+	view_item(IVT_CURSE_ENCHANT,LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1654,7 +1654,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 아이템을 고르시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1702,7 +1702,7 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 }
 bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 고르시겠습니까?");
+	view_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1777,7 +1777,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 방어구를 고르시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1786,7 +1786,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 }
 bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target)
 {
-	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 고르시겠습니까?");
+	view_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -1860,7 +1860,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 장신구를 고르시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -3041,7 +3041,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	case 1: //스킬순화
 		while (true)
 		{
-			view_skill("어떤 스킬을 순화할거지?");
+			view_skill(LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL);
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
@@ -3141,7 +3141,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	case 6:
 		while (1)
 		{
-			view_item(IVT_PURE_ITEM, "무슨 아이템을 순화할거야?");
+			view_item(IVT_PURE_ITEM, LOC_SYSTEM_DISPLAY_MANAGER_JUNKO);
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
@@ -3217,7 +3217,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			}						//-----이동키끝-------
 			else if (key_ == '*')
 			{
-				view_item(IVT_SELECT, "무슨 아이템을 순화할거야?");
+				view_item(IVT_SELECT, LOC_SYSTEM_DISPLAY_MANAGER_JUNKO);
 			}
 			else if (key_ == VK_ESCAPE)
 			{

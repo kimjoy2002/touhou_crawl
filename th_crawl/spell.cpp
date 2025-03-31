@@ -1847,7 +1847,7 @@ void SpellUse(char auto_, int auto_direc_)
 		}
 		bool blood_ = false;
 		bool use_ = true;
-		view_spell("사용할 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+		view_spell(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL);
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -1993,7 +1993,7 @@ void SpellUse(char auto_, int auto_direc_)
 							changedisplay(DT_TEXT);
 							waitkeyinput();
 
-							view_spell("설명을 볼 마법을 선택하세요. ( ?키로 마법을 사용 )");
+							view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL);
 							//changedisplay(DT_SPELL);
 						}
 					}
@@ -2003,12 +2003,12 @@ void SpellUse(char auto_, int auto_direc_)
 			{
 				if(use_)
 				{
-					view_spell("설명을 볼 마법을 선택하세요. ( ?키로 마법을 사용 )");
+					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL);
 					use_ = false;
 				}
 				else
 				{					
-					view_spell("사용할 마법을 선택하세요.  ( ?키로 설명을 볼 수 있다. )");
+					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL);
 					use_ = true;
 				}
 			}
@@ -2029,7 +2029,7 @@ void SpellView()
 
 	if(you.currentSpellNum)
 	{		
-		view_spell("설명을 볼 마법을 선택하세요.");
+		view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE);
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
@@ -2045,7 +2045,7 @@ void SpellView()
 					changedisplay(DT_TEXT);
 					waitkeyinput();
 
-					view_spell("설명을 볼 마법을 선택하세요.");
+					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE);
 					//changedisplay(DT_SPELL);
 				}
 			}

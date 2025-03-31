@@ -31,7 +31,7 @@ void Equip_Weapon()
 		return;
 	}
 
-	view_item(IVT_EQ_WEAPON,"무슨 무기를 장착하시겠습니까?");
+	view_item(IVT_EQ_WEAPON,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -58,7 +58,7 @@ void Equip_Weapon()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 무기를 장착하시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 		else if(key_ == '-')
 		{
 			if(!you.unequip(ET_WEAPON))
@@ -153,7 +153,7 @@ void Equip_Armor()
 		printlog("물에 빠진 상태에선 방어구를 바꿀 수 없다!", true, false, false, CL_danger);
 		return;
 	}
-	view_item(IVT_EQ_ARMOR,"무슨 방어구를 장착하겠습니까?");
+	view_item(IVT_EQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -180,7 +180,7 @@ void Equip_Armor()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 방어구를 장착하겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -199,7 +199,7 @@ void Unequip_Armor()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_ARMOUR), true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_UEQ_ARMOR,"무슨 방어구를 벗겠습니까?");
+	view_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -227,7 +227,7 @@ void Unequip_Armor()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 방어구를 벗겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -247,7 +247,7 @@ void Equip_Jewelry()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_EQUIP_JEWELRY), true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_EQ_JEWELRY,"무슨 장신구를 장착하겠습니까?");
+	view_item(IVT_EQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -274,7 +274,7 @@ void Equip_Jewelry()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 장신구를 장착하겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -293,7 +293,7 @@ void Unequip_Jewelry()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_JEWELRY), true, false, false, CL_normal);
 		return;
 	}
-	view_item(IVT_UEQ_JEWELRY,"무슨 장신구를 벗겠습니까?");
+	view_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
 	while(1)
 	{
 		int key_ = waitkeyinput();
@@ -320,7 +320,7 @@ void Unequip_Jewelry()
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무슨 장신구를 벗겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

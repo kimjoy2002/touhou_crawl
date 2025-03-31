@@ -158,7 +158,7 @@ int isPick(const item* t)
 
 void iteminfor_pick()
 {
-	view_item(IVT_PICK,"무슨 아이템을 줍겠습니까?");
+	view_item(IVT_PICK,LOC_SYSTEM_DISPLAY_MANAGER_PICK);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -272,7 +272,7 @@ void iteminfor_discard()
 		return;
 	}
 	int i=0;
-	view_item(IVT_DISCARD,"무슨 아이템을 버리겠습니까?");
+	view_item(IVT_DISCARD,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
 	while(1)
 	{
 		int key_ = waitkeyinput(true);
@@ -375,7 +375,7 @@ void Eatting(char auto_)
 		printlog("당신은 이미 풀파워다!",true,false,false,CL_normal);
 		return;
 	}
-	view_item(IVT_FOOD,"무엇을 먹겠습니까?");
+	view_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 	while(1)
 	{
 		int key_ = auto_;
@@ -405,7 +405,7 @@ void Eatting(char auto_)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 먹겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -429,7 +429,7 @@ void Drinking(char auto_)
 		printlog("물에 빠진 상태에선 마실 수 없다!", true, false, false, CL_danger);
 		return;
 	}
-	view_item(IVT_POTION,"무엇을 마시겠습니까?");
+	view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 	while(1)
 	{
 		int key_ = auto_;
@@ -472,7 +472,7 @@ void Drinking(char auto_)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 마시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -507,7 +507,7 @@ void Spelllcard_Evoke(char auto_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return;
 	}
-	view_item(IVT_EVOKE,"무슨 아이템을 발동하시겠습니까?");
+	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 	while(1)
 	{
 		int key_ = auto_;
@@ -542,7 +542,7 @@ void Spelllcard_Evoke(char auto_)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 발동하시겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -573,7 +573,7 @@ void Reading(char auto_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
 		return;
 	}
-	view_item(IVT_SCROLL,"무엇을 읽겠습니까?");
+	view_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 	while(1)
 	{
 		int key_ = auto_;
@@ -626,7 +626,7 @@ void Reading(char auto_)
 							continue;
 						}	
 					}
-					view_item(IVT_SCROLL,"무엇을 읽겠습니까?");
+					view_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 					break;
 				}
 			}
@@ -660,7 +660,7 @@ void Reading(char auto_)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == '*')
-			view_item(IVT_SELECT,"무엇을 읽겠습니까?");
+			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

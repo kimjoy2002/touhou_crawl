@@ -1922,7 +1922,7 @@ void view_log()
 
 void skill_view()
 {
-	view_skill("");
+	view_skill(LOC_EMPTYSTRING);
 	int move_ = 1;
 	bool ok_ = false;
 	do
@@ -1966,7 +1966,7 @@ void skill_view()
 		if (allMax == true)
 			ok_ = true;
 		if(ok_==false)
-			view_skill(LocalzationManager::locString(LOC_SYSTEM_SKILL_LEAST_ONE));
+			view_skill(LOC_SYSTEM_SKILL_LEAST_ONE);
 	}
 	while(!ok_);
 

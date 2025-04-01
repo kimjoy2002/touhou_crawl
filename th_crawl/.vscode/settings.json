@@ -53,6 +53,7 @@
         "unordered_set": "cpp",
         "codecvt": "cpp",
         "xstring": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "xmemory": "cpp"
     }
 }

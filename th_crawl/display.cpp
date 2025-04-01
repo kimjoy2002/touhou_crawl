@@ -623,12 +623,66 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
-	char temp[256];
 	int skt = 0, i=0; 
 	char sk_char = 'a';
 
-	sprintf_s(temp, 256, "      스킬명  레벨    현재  적성   비용          스킬명  레벨    현재  적성   비용");
-	DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	ostringstream ss;
+
+	int max_skillname = 10;
+	for(int i = SKT_FIGHT; i < SKT_MAX; i++) {
+		max_skillname = min(20, max(max_skillname, PrintCharWidth(skill_string((skill_type)i))));
+	}
+
+	int dif[6] = {4, 10, 5, 6, 7, 11};
+	if(dif[1] < max_skillname)
+		dif[1] = max_skillname;
+	int offset[6];
+	for(int j = 0; j < 6; j++) {
+		offset[j] = dif[j]*fontDesc.Width;
+	}
+
+	rc.left += offset[0];
+	ss.str("");
+	ss.clear();
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME)) < (dif[1]-2))
+		ss << std::string((dif[1]-2)-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME);
+	DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[1];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[2];	
+	ss.str("");
+	ss.clear();
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP)) < (dif[3]-1))
+		ss << std::string((dif[3]-1)-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP);
+	DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[3];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_ATTIT), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[4];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[5];
+	rc.left += offset[0];
+	ss.str("");
+	ss.clear();
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME)) < (dif[1]-2))
+		ss << std::string((dif[1]-2)-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SKILL_NAME);
+	DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[1];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[2];
+	ss.str("");
+	ss.clear();
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP)) < (dif[3]-1))
+		ss << std::string((dif[3]-1)-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_CURRENT_EXP);
+	DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[3];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_ATTIT), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	rc.left += offset[4];
+	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+	
 	rc.top += 2*fontDesc.Height;
 
 	rc.left = 50;
@@ -637,34 +691,43 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	{
 		for(i = 0;i<1;i++)
 		{
-
-			sprintf_s(temp,256,"%c %c %8s %4d", you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt) ?' ':sk_char,(you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) ?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-'))),skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, true));
-			sk_char++;
-
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
 				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_bad))) :
 				you.pure_skill == skt ? CL_junko : CL_warning;
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
-			rc.left += 150;
-			//if(move ==0)
+			ss.str("");
+			ss.clear();
+			ss << ((you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt)) ?' ':sk_char) << ' ' << ((you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) )?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-')));
+			sk_char++;
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			rc.left += offset[0];
+			ss.str("");
+			ss.clear();
+			if(PrintCharWidth(skill_string((skill_type)skt)) < (dif[1]-2))
+				ss << std::string((dif[1]-2)-PrintCharWidth(skill_string((skill_type)skt)), ' ');
+			ss << skill_string((skill_type)skt);
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			rc.left += offset[1];
+			ss.str("");
+			ss.clear();
+			ss << std::setw(2) << std::right << you.GetSkillLevel(skt, true);
+			DrawTextUTF8(pfont,pSprite,	ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			rc.left += offset[2];
+			ss.str("");
+			ss.clear();
 			if(you.GetSkillLevel(skt, false)<27 && !you.cannotSkillup(skt))
-				sprintf_s(temp,256,"(%2d%%)",GetSkillPercent(you.skill[skt]));
-			else 
-				sprintf_s(temp,256,"");
-
-			//else if(move == 1)
-			//	sprintf_s(temp,256,"%d",you.skill[skt].aptit);
-			//else
-			//	sprintf_s(temp,256,"%d",you.skill[skt].exper);
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
-			rc.left += 50;
-						
-			sprintf_s(temp,256,"%3d",you.skill[skt].aptit);
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
-
-			rc.left += 50;
+				ss << "(" << std::setw(2) << std::right << GetSkillPercent(you.skill[skt]) << "%)";
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
+			rc.left += offset[3];
+			ss.str("");
+			ss.clear();
+			ss << std::setw(3) << std::right << you.skill[skt].aptit;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
+			rc.left += offset[4];
+			
+			ss.str("");
+			ss.clear();
 			if (you.GetSkillLevel(skt, false) < 27 && !you.cannotSkillup(skt))
 			{
 				int base_skill = GetBaseSkillExp();
@@ -673,22 +736,19 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				float value_ = (float)skill_pecent / base_skill;
 
-				sprintf_s(temp, 256, "%3.1f", value_);
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+				ss << std::fixed << std::setw(3) << std::setprecision(1) << value_;
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 			else if (you.pure_skill == skt)
 			{
-
-				DrawTextUTF8(pfont,pSprite, "순화 ", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
-
+				DrawTextUTF8(pfont,pSprite,  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
 			}
 			else
 			{
-				sprintf_s(temp, 256, " -   ");
-				DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+				ss << " -";
+				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			}
 
-			rc.left += 200;
 			if(sk_char == 'z'+1)
 				sk_char = 'A';
 			switch (skt)
@@ -707,11 +767,11 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			if(skt == SKT_SPELLCASTING - 1)
 			{
-				rc.left = 800;
+				rc.left += offset[0]+offset[1]+offset[2]+offset[3]+offset[4]+offset[5];
 				rc.top = 50+fontDesc.Height;
 			}
 		}
-		rc.left -= 450*i;
+		rc.left -= offset[0]+offset[1]+offset[2]+offset[3]+offset[4];
 		rc.top += fontDesc.Height;
 		skt++;
 	}
@@ -723,17 +783,15 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	if (LocalzationManager::locString(item_view_message).size() < 1)
 	{
-		DrawTextUTF8(pfont,pSprite, "현재 당신의 스킬레벨을 확인하고 경험치 분배 비율을 조절할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_HELP1), -1, &rc, DT_NOCLIP, CL_normal);
 		rc.top += fontDesc.Height * 1;
 
-		DrawTextUTF8(pfont,pSprite, "알파벳 키를 눌러서 원하는 스킬로 경험치를 분배할 수 있습니다.", -1, &rc, DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_HELP2), -1, &rc, DT_NOCLIP, CL_normal);
 
 		rc.top += fontDesc.Height * 2;
 		if (wiz_list.wizard_mode == 1)
 		{
-			char temp[50];
-			sprintf_s(temp, 50, "[현재 경험치 패널티 %d]", exp_to_skill_exp(0));
-			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_NOCLIP, CL_help);
+			DrawTextUTF8(pfont,pSprite,  LocalzationManager::formatString(LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_DEBUG, PlaceHolderHelper(to_string(exp_to_skill_exp(0)))), -1, &rc, DT_NOCLIP, CL_help);
 		}
 	}
 
@@ -741,53 +799,81 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
 	RECT rc={30, 10, option_mg.getWidth(), option_mg.getHeight()};
-	char temp[100];
-	sprintf_s(temp,100,"%s (%d레벨 %s %s %s)",you.user_name.c_str(),you.level,LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(),LocalzationManager::locString(job_type_string[you.job]).c_str(),you.GetCharNameString().c_str());
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
-	rc.left += 300;
-	sprintf_s(temp,100,"턴: %d",you.turn);	
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ostringstream ss;
+	ss.str("");
+	ss.clear();
+	ss << you.user_name << " (" << you.level << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.level))) << ' '
+	   << LocalzationManager::locString(tribe_type_string[you.tribe]) << ' ' << LocalzationManager::locString(job_type_string[you.job]) << ' ' <<you.GetCharNameString() << ')';
+
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
+	rc.left += 350;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ": " << you.turn;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 200;
 	if(you.god == GT_NONE)
 	{
-		sprintf_s(temp,100,"무신앙");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_AHTEISM), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else if (you.god == GT_TENSI)
 	{
-		sprintf_s(temp, 100, "신앙: %s", GetGodString(you.god).c_str());
-		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god);
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{
-		sprintf_s(temp,100,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god).c_str(),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << ' ' 
+			<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.');
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left = 30;
-	rc.top += fontDesc.Height;		
+	rc.top += fontDesc.Height;
 
-	sprintf_s(temp,100,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ss.str("");
+	ss.clear();
+	ss << "HP: " << you.GetHp() << "/" << you.GetMaxHp();
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"AC:%4d",you.ac);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += 150;
-	sprintf_s(temp,100,"힘  :%4d",you.s_str);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ss.str("");
+	ss.clear();
+	ss << "AC:" << std::setw(4) << std::right << you.ac;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += 200;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_STR);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)) < 4)
+		ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)), ' ');
+	ss << ":" << std::setw(4) << std::right << you.s_str;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
 	if (!you.pure_mp)
 	{
-		sprintf_s(temp, 100, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
-		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		ss.str("");
+		ss.clear();
+		ss << "MP: " << you.GetMp() << "/" << you.GetMaxMp();
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left += 150;
-	sprintf_s(temp,100,"EV:%4d",you.ev);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += 150;
-	sprintf_s(temp,100,"민첩:%4d",you.s_dex);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ss.str("");
+	ss.clear();
+	ss << "EV:" << std::setw(4) << std::right << you.ev;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += 200;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
+		ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');
+	ss << ":" << std::setw(4) << std::right << you.s_dex;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 
@@ -796,65 +882,112 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	{
 		int pow_ = min(you.power, 500);
-		sprintf_s(temp, 100, "파워: %d.%02d", pow_ / 100, pow_ % 100);
-		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER)), ' ');
+		ss << ":" << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
+		ss << std::setfill(' ');
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	rc.left += 150;
-	sprintf_s(temp,100,"SH:%4d",you.sh);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += 150;
-	sprintf_s(temp,100,"지능:%4d",you.s_int);
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ss.str("");
+	ss.clear();
+	ss << "SH:" << std::setw(4) << std::right << you.sh;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += 200;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_INT);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)) < 4)
+		ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)), ' ');
+	ss << ":" << std::setw(4) << std::right << you.s_int;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
 	rc.top += fontDesc.Height;		
 
 	int resist_ = you.fire_resist - you.uniden_fire_resist;
-	if(resist_>=100)
-		sprintf_s(temp, 100, "화염저항: ∞");
-	else
-		sprintf_s(temp,100,"화염저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST)), ' ');
+	if(resist_>=100) {
+		ss << ": ∞";
+	}
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.')) << ' ' << (resist_>=2?'+':(resist_<=-2?'-':'.')) << ' ' << (resist_>=3?'+':(resist_<=-3?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.confuse_resist- you.uniden_confuse_resist;
-	sprintf_s(temp,100,"혼란저항: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_CONFUSE_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_CONFUSE_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_CONFUSE_RESIST)), ' ');
+	ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"무기: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_WEAPON])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,"맨손");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED);
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
 
 	resist_ = you.ice_resist - you.uniden_ice_resist;
-	if (resist_ >= 100)
-		sprintf_s(temp, 100, "냉기저항: ∞");
-	else
-		sprintf_s(temp,100,"냉기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_COLD_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_COLD_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_COLD_RESIST)), ' ');
+	if(resist_>=100) {
+		ss << ": ∞";
+	}
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.')) << ' ' << (resist_>=2?'+':(resist_<=-2?'-':'.')) << ' ' << (resist_>=3?'+':(resist_<=-3?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	resist_ = you.invisible_view- you.uniden_invisible_view;
-	sprintf_s(temp,100,"투명보기: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	resist_ = you.invisible_view- you.uniden_invisible_view;	
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE)), ' ');
+	ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"탄막: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.throw_weapon)
 	{
-		sprintf_s(temp,100,"%c) %s",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
 	}
 	else
 	{
@@ -863,31 +996,47 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
-	resist_ = you.elec_resist - you.uniden_elec_resist;
-	if (resist_ >= 100)
-		sprintf_s(temp, 100, "전기저항: ∞");
-	else
-		sprintf_s(temp,100,"전기저항: %c %c %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'),resist_>=2?'+':(resist_<=-2?'-':'.'),resist_>=3?'+':(resist_<=-3?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	resist_ = you.elec_resist - you.uniden_elec_resist;	
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)), ' ');
+	if(resist_>=100) {
+		ss << ": ∞";
+	}
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.')) << ' ' << (resist_>=2?'+':(resist_<=-2?'-':'.')) << ' ' << (resist_>=3?'+':(resist_<=-3?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	resist_ = you.power_keep- you.uniden_power_keep;
 
-
-	if (you.power == 1000) {
-		sprintf_s(temp, 100, "파워유지: ∞");
-		resist_ = 1;
+	
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)), ' ');
+	if(you.power == 1000) {
+		ss << ": ∞";
 	}
-	else
-		sprintf_s(temp,100,"파워유지: %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
-	sprintf_s(temp,100,"몸통: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_BODY) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_ARMOR])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_ARMOR]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_ARMOR]->id << ") " << you.equipment[ET_ARMOR]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_ARMOR]->item_color());
 	}
 	else
 	{
@@ -898,24 +1047,32 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 	
 	resist_ = you.poison_resist - you.uniden_poison_resist;
-	sprintf_s(temp,100,"독저항  : %c" ,resist_>=1?'+':(resist_<=-1?'-':'.'));
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)), ' ');
+	ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"방패: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_SHIELD])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_SHIELD, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite, you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -937,24 +1094,32 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 	}
-	sprintf_s(temp,100,"마법저항: %s" , resist_text_.c_str());
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST)), ' ');
+	ss << ": " << resist_text_;
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"머리: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_HEAD) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_HELMET])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_HELMET]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_HELMET]->id << ") " << you.equipment[ET_HELMET]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_HELMET]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_HELMET, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -966,18 +1131,21 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"망토: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_CLOAK) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_CLOAK])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_CLOAK]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_CLOAK]->id << ") " << you.equipment[ET_CLOAK]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_CLOAK]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_CLOAK, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -989,18 +1157,20 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"손  : ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_HAND) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_GLOVE])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_GLOVE]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_GLOVE]->id << ") " << you.equipment[ET_GLOVE]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_GLOVE]->item_color());
 	}
-	else
-	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_GLOVE, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+	else {
+		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1012,18 +1182,21 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"발  : ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*6;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_FOOT) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_BOOTS])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_BOOTS]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_BOOTS]->id << ") " << you.equipment[ET_BOOTS]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_BOOTS]->item_color());
 	}
 	else
 	{
-		sprintf_s(temp,100,you.isImpossibeEquip(ET_BOOTS, false)?"없음":"착용불가");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1035,13 +1208,20 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"목걸이  : ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*10;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_AMULET);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_AMULET)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_AMULET)), ' ');
+	ss << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_NECK])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_NECK]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_NECK]->id << ") " << you.equipment[ET_NECK]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_NECK]->item_color());
 	}
 	else
 	{
@@ -1058,13 +1238,20 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"왼반지  : ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*10;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING)), ' ');
+	ss << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_LEFT])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_LEFT]->id,you.equipment[ET_LEFT]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_LEFT]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_LEFT]->id << ") " << you.equipment[ET_LEFT]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_LEFT]->item_color());
 	}
 	else
 	{
@@ -1080,13 +1267,20 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
-	sprintf_s(temp,100,"오른반지: ");
-	DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*10;
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING)), ' ');
+	ss << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
 	if(you.equipment[ET_RIGHT])
 	{
-		sprintf_s(temp,100,"%c) %s",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_RIGHT]->item_color());
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_RIGHT]->id << ") " << you.equipment[ET_RIGHT]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_RIGHT]->item_color());
 	}
 	else
 	{
@@ -1099,33 +1293,31 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 	
-	string rune_temp;
-	
-	rune_temp = "룬:";
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_RUNE_RUNE) << ": ";
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
 		if(you.rune[i])
 		{
 			if(i!=0)
-				rune_temp += ", ";
-			rune_temp += LocalzationManager::locString(rune_string[i]);
+				ss << ", ";
+			ss <<  LocalzationManager::locString(rune_string[i]);
 		}
 	}
-	DrawTextUTF8(pfont,pSprite,rune_temp.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 	
 	if(you.rune[RUNE_HAKUREI_ORB])
 	{
-		DrawTextUTF8(pfont,pSprite,"음양옥", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_ITEM_YINYANG), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{				
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
-
-
 
 }
 

@@ -3,6 +3,7 @@ LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - LANGUAGE : ENGLISH
 LOC_SYSTEM_OPTION_MENU_ESC,esc - back
 LOC_SYSTEM_LOS_MON,You see a monster.
 LOC_SYSTEM_LOS_NOMON,No monsters in sight.
+LOC_SYSTEM_NOTHING_HAPPEND,Nothing happened.
 LOC_SYSTEM_CONFUSE_WARNING,You feel confused.
 LOC_SYSTEM_DIMENSTION,Action not supported while the dimension is fixed.
 LOC_SYSTEM_MAP_DANGER,Danger detected within your view.
@@ -48,7 +49,7 @@ LOC_SYSTEM_SHOUT_MENU_WAIT,Hold position.
 LOC_SYSTEM_SHOUT_MENU_COME,Follow me.
 LOC_SYSTEM_SHOUT_MENU_OTHRE,Other keys
 LOC_SYSTEM_SHOUT_MENU_SILENCE,Stay quiet.
-LOC_SYSTEM_SHOUT_MENU,What would you like to shout?
+LOC_SYSTEM_SHOUT,Shout
 LOC_SYSTEM_SHOUT_RARE1,How resentful!
 LOC_SYSTEM_SHOUT_RARE2,Hello!
 LOC_SYSTEM_SHOUT_RARE3,Hooray!
@@ -112,9 +113,16 @@ LOC_SYSTEM_DROP_ITEM_SION_ALL,But it vanished due to the curse of the Poverty Go
 LOC_SYSTEM_DROP_ITEM_SION_SOME,{0} disappeared due to the curse of the Poverty God.
 LOC_SYSTEM_HOTKEY,Hotkey
 LOC_SYSTEM_NAME,Name
+LOC_SYSTEM_SKILL_NAME,Skill
 LOC_SYSTEM_SCHOOL,School
+LOC_SYSTEM_CURRENT_EXP,Exp
+LOC_SYSTEM_ATTIT,Aptit
+LOC_SYSTEM_COST,Cost
+LOC_SYSTEM_SKILL_JUNKA,Purify
+LOC_SYSTEM_SUCCESS_RATE,Success Rate
 LOC_SYSTEM_FAILURE_RATE,Failure Rate
 LOC_SYSTEM_LEVEL,Level
+LOC_SYSTEM_LEVEL_WITH_NUMBER,Level {0}
 LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_DESCRIPTION,Description
 LOC_SYSTEM_CANCLE,Cancel
@@ -125,9 +133,23 @@ LOC_SYSTEM_MONSTER,Monster
 LOC_SYSTEM_DAMAGE,Damage
 LOC_SYSTEM_SUCCESS_PERCENT,Success Chance
 LOC_SYSTEM_IMPOSSIBLE,Impossible
+LOC_SYSTEM_AHTEISM,Atheism
+LOC_SYSTEM_FAITH,Faith
 LOC_SYSTEM_YOU,You
 LOC_SYSTEM_TURN,Turn
 LOC_SYSTEM_TURNS,Turns
+LOC_SYSTEM_SHORT_STR,Str
+LOC_SYSTEM_SHORT_DEX,Dex
+LOC_SYSTEM_SHORT_INT,Int
+LOC_SYSTEM_SHORT_POWER,Power
+LOC_SYSTEM_SHORT_FIRE_RESIST,rFire
+LOC_SYSTEM_SHORT_COLD_RESIST,rCold
+LOC_SYSTEM_SHORT_ELEC_RESIST,rElec
+LOC_SYSTEM_SHORT_POISON_RESIST,rPois
+LOC_SYSTEM_SHORT_CONFUSE_RESIST,rConfuse
+LOC_SYSTEM_SHORT_SEE_INVISIBLE,See Invi
+LOC_SYSTEM_SHORT_POWER_KEEP,Power Sus
+LOC_SYSTEM_SHORT_MAGIC_RESIST,Magic Resist
 LOC_SYSTEM_SLEEP,Sleep
 LOC_SYSTEM_REST,Rest
 LOC_SYSTEM_EXPLORING,Exploring
@@ -222,6 +244,45 @@ LOC_SYSTEM_STAIR_ESCAPE_WARN,Leaving before picking up the Yin-Yang Orb will cou
 LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION,Do you really want to leave the dungeon and claim victory? (Y/N)
 LOC_SYSTEM_STAIR_RETURN,You returned to the dungeon.
 LOC_SYSTEM_STAIR_EMPTY,There are no stairs here.
+LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM,Which item would you like to choose?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON,Which weapon would you like to equip?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR,Which armor would you like to equip?
+LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR,Which armor would you like to unequip?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY,Which accessory would you like to equip?
+LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY,Which accessory would you like to unequip?
+LOC_SYSTEM_DISPLAY_MANAGER_PICK,Which item would you like to pick up?
+LOC_SYSTEM_DISPLAY_MANAGER_DISCARD,Which item would you like to discard?
+LOC_SYSTEM_DISPLAY_MANAGER_FOOD,What would you like to eat?
+LOC_SYSTEM_DISPLAY_MANAGER_DRINK,What would you like to drink?
+LOC_SYSTEM_DISPLAY_MANAGER_EVOKE,What would you like to activate?
+LOC_SYSTEM_DISPLAY_MANAGER_READ,What would you like to read?
+LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR,Which item would you like to inspect?
+LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER,Your items
+LOC_SYSTEM_DISPLAY_MANAGER_USE,What would you like to use?
+LOC_SYSTEM_DISPLAY_MANAGER_USE_TO,Which item would you like to use it on?
+LOC_SYSTEM_DISPLAY_MANAGER_IDEN,Which item would you like to identify?
+LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR,Which armor would you like to choose?
+LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,Which armor would you like to enhance?
+LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY,Which accessory would you like to choose?
+LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,Which item would you like to purify?
+LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,Which skill would you like to purify?
+LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,Which spell card would you like to recharge?
+LOC_SYSTEM_DISPLAY_MANAGER_THROW,What would you like to throw?
+LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,Select a spell to use. (Press ? for details.)
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,Select a spell to forget. (Press ? for details.)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,Select a spell to view details. (? to cast)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,Select a spell to view details.
+LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,Identified items & Auto-pickup settings
+LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,No identified items.
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your properties (Press a letter for detailed info.)
+LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY,You have no properties.
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_USE,Which skill would you like to use?
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_INFO,Which skill's description would you like to view?
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_HELP_INFO,Press {0} or {1} to view the description.
+LOC_SYSTEM_DISPLAY_MANAGER_SKILL_HELP_USE,Press {0} or {1} to use the skill.
+LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_HELP1,You can check your current skill levels and adjust the XP distribution ratio.
+LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_HELP2,Press an alphabet key to allocate XP to the desired skill.
+LOC_SYSTEM_DISPLAY_MANAGER_ATTITUDE_DEBUG,[Current XP penalty: {0}]
 LOC_SYSTEM_UI_RUNE_TITLE,Runes to Collect
 LOC_SYSTEM_UI_RUNE_NAME,Rune of {0}
 LOC_SYSTEM_UI_RUNE_GAIN,Acquired
@@ -439,6 +500,18 @@ LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
 LOC_SYSTEM_NOTE_SEIJA_GIFT,You received a gift from Seija. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,Blessing of purification from Junko: {0}
+LOC_SYSTEM_NOTE_ARENA,========== 레벨 {0} ==========
+LOC_SYSTEM_NOTE_ARENA_TEAM_LEFT,{0} Team: Left
+LOC_SYSTEM_NOTE_ARENA_TEAM_RIGHT,{0} Team: Right
+LOC_SYSTEM_NOTE_ARENA_SUCCESS,Correct!
+LOC_SYSTEM_NOTE_ARENA_FAIL,Incorrect...
+LOC_SYSTEM_NOTE_ARENA_WIN_LEFT,Left team wins.
+LOC_SYSTEM_NOTE_ARENA_WIN_RIGHT,Right team wins.
+LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE,Remaining chances: {0}
+LOC_SYSTEM_NOTE_ARENA_DRAW,Rematch due to a draw.
+LOC_SYSTEM_NOTE_ARENA_TIMEOVER,Rematch due to timeout.
+LOC_SYSTEM_NOTE_ARENA_FINAL_SCORE,Your final record: Level {0}.
+LOC_SYSTEM_NOTE_ARENA_WIN,Level 27 reached! You've cleared the game.
 LOC_SYSTEM_NOTE_RUN_AWAY,Fled toward {0}.
 LOC_SYSTEM_NOTE_DEAD,You have died.
 LOC_SYSTEM_NOTE_DEAD_BY,Killed by {0}.
@@ -841,6 +914,25 @@ LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,Fallen Leaves
 LOC_SYSTEM_FLOOR_EFFECT_STONE,Rock Spikes
 LOC_SYSTEM_FLOOR_EFFECT_SCHEMA,Crack
 LOC_SYSTEM_FLOOR_EFFECT_GOLD,Coins
+LOC_SYSTEM_SPELL_ALCHEMY_LONG,The buff from your alchemy has been extended.
+LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_ON,Your fists have become as hard as stone.
+LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_OFF,Your fists have returned to normal.
+LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_ON,당신의 몸은 바위처럼 단단해졌다.
+LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_OFF,당신의 몸은 원래대로 돌아왔다.
+LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_ON,당신의 몸은 독 기운을 뿜어내기 시작했다.
+LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_OFF,당신의 몸은 더이상 독을 뿜어내지 않는다.
+LOC_SYSTEM_SPELL_ALCHEMY_HASTE_ON,Your alchemy granted you speed.
+LOC_SYSTEM_SPELL_ALCHEMY_HASTE_OFF,Your speed has returned to normal.
+LOC_SYSTEM_SPELL_ALCHEMY_HASTE_ALMOST_OFF,Your speed is wearing off.
+LOC_SYSTEM_SPELL_ALCHEMY_ENLIGHTENMENT_ON,You have reached a state of perfect serenity.
+LOC_SYSTEM_SPELL_ALCHEMY_ENLIGHTENMENT_OFF,Your state of serenity has ended.
+LOC_SYSTEM_SPELL_ALCHEMY_ENLIGHTENMENT_ALMOST_OFF,Your serenity is fading.
+LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ON,You engraved gears onto your hands.
+LOC_SYSTEM_SPELL_ALCHEMY_BLADE_OFF,The gears have vanished.
+LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,The alchemical power on your hands is weakening.
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone. (Use additional magic with {0})
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally vanished.
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
 LOC_SYSTEM_SKILL_FIGHT,Combat
 LOC_SYSTEM_SKILL_UNWEAPON,Unarmed Combat
 LOC_SYSTEM_SKILL_SHORTBLADE,Short Blade
@@ -1027,6 +1119,46 @@ LOC_SYSTEM_ITEM_ARMOUR_GLOVE,Gloves
 LOC_SYSTEM_ITEM_ARMOUR_SHOES,Shoes
 LOC_SYSTEM_ITEM_ARMOUR_RUNED,Rune-Inscribed
 LOC_SYSTEM_ITEM_ARTIFACT,Artifact
+LOC_SYSTEM_ITEM_ARTIFACT_STR,Strength {0}
+LOC_SYSTEM_ITEM_ARTIFACT_DEX,Dexterity {0}
+LOC_SYSTEM_ITEM_ARTIFACT_INT,Intelligence {0}
+LOC_SYSTEM_ITEM_ARTIFACT_HUNGRY,Hunger
+LOC_SYSTEM_ITEM_ARTIFACT_FULL,Fullness
+LOC_SYSTEM_ITEM_ARTIFACT_TELEPORT,*Teleport
+LOC_SYSTEM_ITEM_ARTIFACT_POISON_RESIST,Poison Resist {0}
+LOC_SYSTEM_ITEM_ARTIFACT_FIRE_RESIST,Fire Resist {0}
+LOC_SYSTEM_ITEM_ARTIFACT_COLD_RESIST,Cold Resist {0}
+LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE,See Invisible
+LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT,+Flight
+LOC_SYSTEM_ITEM_ARTIFACT_INVISIBLE,+Invisibility
+LOC_SYSTEM_ITEM_ARTIFACT_MANA,MP
+LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN,Magician
+LOC_SYSTEM_ITEM_ARTIFACT_AC,AC{0}
+LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
+LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,Confusion Resist
+LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,Electric Resist
+LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,Magic Resist
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_STR,Strength changes by the value. ({0})
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_DEX,Dexterity changes by the value. ({0})
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INT,Intelligence changes by the value. ({0})
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_HUNGRY,Power is consumed rapidly.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_FULL,Power is consumed slowly.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_TELEPORT,You teleport randomly.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_GOOD,You gain immunity to poison.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_BAD,You become vulnerable to poison.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_FIRE_RESIST,Fire resistance changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_COLD_RESIST,Cold resistance changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SEE_INVISIBLE,Allows you to detect invisibility.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_FLIGHT,You can activate flight.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INVISIBLE,You can become invisible.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MANA,Your maximum MP increases.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN,Increases spell success rate.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,Defense changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,Evasion changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,Grants resistance to confusion.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,Grants resistance to electricity.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,Grants magic resistance ({0}).
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,The specified skill level increases ({0}).
 LOC_SYSTEM_ITEM_JEWELRY_RING,Ring
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_STR,Ring of Strength {0}
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_DEX,Ring of Dexterity {0}
@@ -1085,6 +1217,17 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN6,Amulet with a Snake
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,Amulet with a Horse
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,Amulet with a Sheep
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,Amulet with a Monkey
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,You have recovered MP.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP,Your MP recovery increased due to the amulet!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from the amulet.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING,You communed with a god through the amulet!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,"Without faith, your gathered piety faded into the sky."
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER,You focus all your senses on evasion for a moment!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,"A thick fog rolls in, obscuring everything."
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,"Through occult power, urban legend {0} has appeared!"
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,"Through occult power, multiple {0} urban legends have appeared!"
 LOC_SYSTEM_ITEM_OCCULT_NESI,Nessie
 LOC_SYSTEM_ITEM_OCCULT_LONG,Tall Ghost
 LOC_SYSTEM_ITEM_OCCULT_SHORT,Little Green Man
@@ -1175,6 +1318,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20,Bark Scroll with Ink Writing
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,The equipped {0} shone black.
 LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,The equipped {0} shone red.
 LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0} shone green.
+LOC_SYSTEM_ITEM_SCROLL_SOULSHOT,Bang!
 LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0} has been recharged.
 LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0} was engulfed in an unknown light!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE,{0} was engulfed in flames!
@@ -1184,6 +1328,8 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN,{0} began emitting mana!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0} radiated mysterious energy!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0} glowed with a protective aura!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,Your weapon has been enchanted with magic!
+LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,Spellbook
+LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,Unidentified Spellbook
 LOC_SYSTEM_ITEM_BOOK_DROP,Dropped Spellbook
 LOC_SYSTEM_ITEM_BOOK_FIRE_BASE,Beginner's Pyromancy Book
 LOC_SYSTEM_ITEM_BOOK_COLD_BASE,Beginner's Cryomancy Book
@@ -1252,6 +1398,36 @@ LOC_SYSTEM_ITEM_ETC_CATNIP,Catnip Tree
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,Broken Camera
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,Kappa Junk
 LOC_SYSTEM_ITEM_ETC_PHOTO,Photograph
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,독에 대한 기초적인 마법이 들어 있는 책\n독마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,다양하고 가성비 좋은 저레벨 마법들이 들어 있는 책\n고레벨은 없지만 구성이 알차다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,대지에 대한 기초적인 마법이 들어 있는 책\n대지마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,대기에 대한 기초적인 마법이 들어 있는 책\n대기마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,소환에 대한 기초적인 마법이 들어 있는 책\n소환마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,연금술을 가르치는 책\n마법을 통해서 간단한 연금술을 시험해볼 수 있는 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,정신을 조종하는 기초적인 마법이 들어 있는 책\n심리마법에 입문하고 싶은 당신에게 추천\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,초보 마전사를 위해 만들어진 마법책\n전사들에게 유용한 마법들로 구성이 되어있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,메이드들이 기본적으로 가져야할 소양이라고 적혀있다. 홍마관에서 배포중이다.\n메이드의 길은 멀고도 험하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,다양한 전기마법이 적혀있는 마법책\n만지기만해도 짜릿짜릿하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,간단한 원소연습을 할 수 있게 되어있는 마법책\n하지만 빅토리댄스는 이제 없다고!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,다양한 보조마법이 적혀있는 마법책.\n마법사 입문에 좋아보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,마법암살자를 꿈꾸는 사람들을 위한 마법책\n아직은 마법이 모자라보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,구름을 만드는 노하우가 적혀있는 마법책\n왠지 책도 축축해보인다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,강력한 파괴의 기초 마법이 적혀있는 책\n탄막은 파워!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,정신마법계열의 마법이 적혀있는 책\n요괴들은 정신공격에 약하다고들 한다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,"풍수지리에 해박한 모노노베노 후토가 편찬한 책.\n바람을 다루는 것부터 대지를 일으키는 일, 물을 다루면서 운기를 다루는 법이 적혀있다\n왜인지 방화하는 법에 대한 세세한 부록이 끼워져있다.\n"
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,불량천인 텐시가 직접 자필한 마법책\n예측불가인 그녀지만 그녀의 대지를 다루는 기술은 배울만하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,미마가 적은 궁극의 파괴술서\n모든 파괴법사가 꿈꾸고있는 그 책이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,지저세계에 살고있는 사토리가 적은 정신을 지배하는 법\n왠지 책에게 마음을 읽히고 있는 듯한 느낌이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,"홍마관의 메이드장이 유능한 메이드를 길러내기 위해 만들었다는 그 책이다.\n홍마관엔 사쿠야이외에 유능한 메이드가 없을뿐더러 아무도 책을 이해하지 못했기에 전설로만 남겨진 책이다.\n마법 뿐만이 아니라 청소하는 법, 빨래하는 법등이 부록으로 적혀있다.\n"
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적은 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,"마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n"
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘치는 모험 만화.\n내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
@@ -1399,6 +1575,17 @@ LOC_SYSTEM_GOD_ABANDON,You abandoned {0}. Your god is enraged.
 LOC_SYSTEM_GOD_ABANDONED,You were forsaken by {0}.
 LOC_SYSTEM_GOD_ABANDON_SATORI,You abandoned {0}. Your god doesn’t seem to mind much.
 LOC_SYSTEM_GOD_ABANDON_SANAE,You abandoned {0}. {1} tearfully accepted your independence.
+LOC_SYSTEM_ARENA_CLEAR,Congratulations on clearing it! You're truly blessed by luck!
+LOC_SYSTEM_ARENA_LAST_BATTLE,The final battle. Are you ready?
+LOC_SYSTEM_ARENA_CHOOSE,Now, choose who will win!
+LOC_SYSTEM_ARENA_START,Begin!
+LOC_SYSTEM_ARENA_RIGHT_WIN,Round over! The right side wins!
+LOC_SYSTEM_ARENA_LEFT_WIN,Round over! The left side wins!
+LOC_SYSTEM_ARENA_FAIL,Wrong answer!
+LOC_SYSTEM_ARENA_LEFT_LIFE,Remaining chances: {0}
+LOC_SYSTEM_ARENA_DRAW,Draw! This match is void.
+LOC_SYSTEM_ARENA_TIMEOVER,Time over! It's a draw. This match is void.
+LOC_SYSTEM_ARENA_GAMEOVER,Your record is Level {0}. Aim for a higher level next time! (Check records with {1})
 LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN,Died for an unknown reason{0}.
 LOC_SYSTEM_DUMP_DEATHREASON_NORMAL,Was beaten to death.
 LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY,Was beaten to death by {0}.
@@ -1445,9 +1632,9 @@ LOC_SYSTEM_DUMP_DEATHREASON_BURST,Burst apart.
 LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY,Burst by {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_DROWNING,Drowned.
 LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Died from unknown damage.
-LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,독에 중독되어 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_POTION,물약에 의해 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_QUIT,게임을 포기했다.
+LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Died from poison.
+LOC_SYSTEM_DUMP_DEATHREASON_POTION,Died due to a potion.
+LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up on the game.
 LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,굶어죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,반사데미지로 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,{0}의 반사데미지로 죽었다.
@@ -1457,7 +1644,8 @@ LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,행복한 꿈을 꾸다 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,{0}에 의해 행복한 꿈을 꾸다 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_GHOST,오쿠리쵸친에 생명력이 빨려 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,부작용에 의해 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_WIND,Swept away by wind.
+LOC_SYSTEM_DUMP_DEATHREASON_WIN,음양옥과 {0}개의 룬을 들고 탈출하는데 성공했다.
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,{0}개의 룬만 들고 도망쳤다.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,성과없이 탈출했다.
 LOC_SYSTEM_DEBUG_CLEVER,디버그) {0} 마법 강화
+LOC_SYSTEM_DEBUG_CALC_MR,디버프계산: 몬스터({0}) - 파워({1}) < randC(2,100)

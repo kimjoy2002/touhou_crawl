@@ -618,16 +618,16 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		{
 			//스킬레벨 설명해주기
-			char temp[100];
-			sprintf_s(temp, 100, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_).c_str(), skill_string(ski_).c_str(), you.GetSkillLevel(ski_, true));
+			char temp[256];
+			sprintf_s(temp, 256, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_).c_str(), skill_string(ski_).c_str(), you.GetSkillLevel(ski_, true));
 			text_ += temp;
 
-			sprintf_s(temp,100, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+			sprintf_s(temp,256, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 			text_ += temp;
-			sprintf_s(temp,100, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
+			sprintf_s(temp,256, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
 			text_ += temp;
 			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
-				sprintf_s(temp,100, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
+				sprintf_s(temp,256, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
 				text_ += temp;
 			}
 		}
@@ -635,10 +635,10 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		if (it->can_throw)
 		{
-			char temp[100];
-			sprintf_s(temp,100, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
+			char temp[256];
+			sprintf_s(temp,256, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
 			text_ += temp;
-			sprintf_s(temp,100, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+			sprintf_s(temp,256, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 			text_ += temp;
 		}
 
@@ -696,10 +696,10 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			text_ += "다른 탄막과 다르게 적들을 관통하여 공격이 가능하다.\n";
 			break;
 		}
-		char temp[100];
-		sprintf_s(temp,100, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
+		char temp[256];
+		sprintf_s(temp,256, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
 		text_ += temp;
-		sprintf_s(temp,100, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
+		sprintf_s(temp,256, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
 		text_ += temp;
 
 		if (can_use_)

@@ -41,97 +41,97 @@ string tribe_property::GetName()
 	switch(id)
 	{
 	case TPT_FIRE_RESIST:
-		return "화염저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST);
 	case TPT_COLD_RESIST:
-		return "냉기저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST);
 	case TPT_ELEC_RESIST:
-		return "전기저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_ELEC_RESIST);
 	case TPT_POISON_RESIST:
-		return "독저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POISON_RESIST);
 	case TPT_STEALTH:
-		return "은밀함";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_STEALTH);
 	case TPT_FLY:
-		return "비행";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FLY);
 	case TPT_SWIM:
-		return "수영";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SWIM);
 	case TPT_SIZE:
 		{
 			switch(value)
 			{
 			case 1:
-				return "거대사이즈";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SIZE1);
 			case -1:
-				return "미니사이즈";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SIZE2);
 			default:
-				return "버그사이즈";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_HORN:
-		return "뿔";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_HORN);
 	case TPT_GHOST_FOOT:
-		return "유령다리";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_GHOST_FOOT);
 	case TPT_CHEUKUMOGAMI:
-		return "츠쿠모가미";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CHEUKUMOGAMI);
 	case TPT_HP:
 		{
 			switch(value)
 			{
 			case 3:
-				return "체력적성(+30%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+30"));
 			case 2:
-				return "체력적성(+20%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+20");
 			case 1:
-				return "체력적성(+10%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+10");
 			case -1:
-				return "체력적성(-10%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-10");
 			case -2:
-				return "체력적성(-20%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-20");
 			case -3:
-				return "체력적성(-30%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-30");
 			default:
-				return "버그사이즈";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_INVISIBLE:
-		return "영구투명";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_INVISIBLE);
 	case TPT_POWER_SAVE:
 		{
 			switch(value)
 			{
 			case 1:
-				return "파워보존";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE1);
 			case -1:
-				return "피에 굶주림";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE2);
 			default:
-				return "버그파워";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_9_LIFE:
-		return "리저렉션";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE);
 	case TPT_18_LIFE:
-		return "리저렉션";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE);
 	case TPT_SPEED:
 		{
 			switch(value)
 			{
 			case 1:
-				return "민첩함";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPEED1);
 			case -1:
-				return "둔함";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPEED2);
 			default:
-				return "버그이속";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_CLAW:
-		return "손톱";		
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLAW);		
 	case TPT_JAW:
-		return "강한 턱";	
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_JAW);	
 	case TPT_FOOT:
-		return "강한 다리";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FOOT);
 	case TPT_EYE:
-		return "뛰어난 눈";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_EYE);
 	case TPT_FUR:
-		return "푹신한 털";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FUR);
 	case TPT_REGEN:
 		{
 			switch(value)
@@ -139,81 +139,81 @@ string tribe_property::GetName()
 			case 1:
 			case 2:
 			case 3:
-				return "강한 재생력";	
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_REGEN1);	
 			case -1:
 			case -2:
 			case -3:
-				return "약한 재생력";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_REGEN2);
 			default:
-				return "버그재생";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_SLAY:
-		return "전투감각";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SLAY);
 	case TPT_CONFUSE_ATTACK:
-		return "허찌르기";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_ATTACK);
 	case TPT_MAGIC_RESIST:
-		return "마법저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MAGIC_RESIST);
 	case TPT_SKIN_AC:
-		return "강한 피부";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SKIN_AC);
 	case TPT_STR:
-		return "힘증가";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_STR);
 	case TPT_EV:
-		return "회피증가";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_EV);
 	case TPT_CLOUD:
-		return "구름 컨트롤";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLOUD);
 	case TPT_BREATH:
-		return "브레스";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BREATH);
 	case TPT_SCALE:
-		return "비늘";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SCALE);
 	case TPT_GRAZE_CONTROL:
-		return "공기의 흐름";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_GRAZE_CONTROL);
 	case TPT_FORCE_OF_NATURE:
-		return "자연의 힘";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FORCE_OF_NATURE);
 	case TPT_MP_REGEN:
 		{
 			switch(value)
 			{
 			case 1:
-				return "영력 회복 증가";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN1);
 			case -1:
-				return "영력 회복 감소";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN2);
 			default:
-				return "버그영력회복";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}
 		}
 	case TPT_CONFUSE_RESIST:
-		return "혼란 저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_RESIST);
 	case TPT_SPELL_POWER:
-		return "강화 마법";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPELL_POWER);
 	case TPT_FINGER_MAGIC:
-		return "손짓 마법";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FINGER_MAGIC);
 	case TPT_BLOOD_MAGIC:
-		return "피의 마법";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BLOOD_MAGIC);
 	case TPT_TORMENT:
-		return "지옥의 고통";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_TORMENT);
 	case TPT_CLOUD_RESIST:
-		return "구름 저항";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLOUD_RESIST);
 	case TPT_SEE_INVI:
-		return "투명 보기";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SEE_INVI);
 	case TPT_FIRE_IMUNE:
-		return "화염 면역";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FIRE_IMUNE);
 	case TPT_COLD_IMUNE:
-		return "냉기 면역";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_COLD_IMUNE);
 	case TPT_ELEC_IMUNE:
-		return "전기 면역";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_ELEC_IMUNE);
 	case TPT_PURE_MP:
-		return "순수한 마력";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_MP);
 	case TPT_PURE_POWER:
-		return "순수한 파워";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_POWER);
 	case TPT_PURE_LIFE:
-		return "순수한 생명";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE);
 	case TPT_PURE_SYSTEM:
-		return "순수한 시스템";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM);
 	default:
 		break;
 	}
-	return "버그특성";
+	return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 }
 string tribe_property::GetInfor()
 {
@@ -225,16 +225,16 @@ string tribe_property::GetInfor()
 			{
 			case 3:
 			case 2:
-				return "당신은 화염에 아주 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST1);
 			case 1:
-				return "당신은 화염에 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST2);
 			case -1:
-				return "당신은 화염에 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST3);
 			case -2:
 			case -3:
-				return "당신은 화염에 아주 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST4);
 			default:
-				return "버그화염저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_COLD_RESIST:
@@ -243,16 +243,16 @@ string tribe_property::GetInfor()
 			{
 			case 3:
 			case 2:
-				return "당신은 냉기에 아주 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST1);
 			case 1:
-				return "당신은 냉기에 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST2);
 			case -1:
-				return "당신은 냉기에 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST3);
 			case -2:
 			case -3:
-				return "당신은 냉기에 아주 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST4);
 			default:
-				return "버그냉기저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_ELEC_RESIST:
@@ -261,105 +261,105 @@ string tribe_property::GetInfor()
 			{
 			case 3:
 			case 2:
-				return "당신은 전기에 아주 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST1);
 			case 1:
-				return "당신은 전기에 강하다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST2);
 			case -1:
-				return "당신은 전기에 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST3);
 			case -2:
 			case -3:
-				return "당신은 전기에 아주 약하다";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST4);
 			default:
-				return "버그전기저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_POISON_RESIST:
-		return "당신은 독에 강하다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_RESIST);
 	case TPT_STEALTH:
 		{
 			switch(value)
 			{
 			case 3:
-				return "당신은 은밀하게 움직인다.(+3)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STEALTH, PlaceHolderHelper("+3"));
 			case 2:
-				return "당신은 은밀하게 움직인다.(+2)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STEALTH, PlaceHolderHelper("+2"));
 			case 1:
-				return "당신은 은밀하게 움직인다.(+1)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STEALTH, PlaceHolderHelper("+1"));
 			case -1:
 			default:
-				return "버그은밀";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}	
 	case TPT_FLY:
-		return "당신은 큰 날개를 가졌다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FLY);
 	case TPT_SWIM:
-		return "당신은 수영할 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SWIM);
 	case TPT_SIZE:
 		{
 			switch(value)
 			{
 			case 1:
-				return "당신은 몸집이 커서 큰 갑옷이 몸에 안 맞는다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE1);
 			case -1:
-				return "당신은 몸집이 작아서 큰 갑옷이 몸에 안 맞는다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE2);
 			default:
-				return "당신은 몸집이 버그다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_HORN:
-		return "당신은 머리에 뿔이 달려있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HORN);
 	case TPT_GHOST_FOOT:
-		return "당신의 망령이기에 다리가 없다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GHOST_FOOT);
 	case TPT_CHEUKUMOGAMI:
-		return "당신의 본체는 도구이다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CHEUKUMOGAMI);
 	case TPT_HP:
 		{
 			switch(value)
 			{
 			case 3:
-				return "당신은 매우 튼튼하다.(체력 +30%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP1, PlaceHolderHelper("+30"));
 			case 2:
-				return "당신은 꽤 튼튼하다.(체력 +20%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP2, PlaceHolderHelper("+20"));
 			case 1:
-				return "당신은 튼튼하다.(체력 +10%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP3, PlaceHolderHelper("+10"));
 			case -1:
-				return "당신은 연약하다.(체력 -10%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP4, PlaceHolderHelper("-10"));
 			case -2:
-				return "당신은 꽤 연약하다.(체력 -20%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP5, PlaceHolderHelper("-20"));
 			case -3:
-				return "당신은 매우 연약하다.(체력 -30%)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP6, PlaceHolderHelper("-30"));
 			default:
-				return "버그사이즈";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_INVISIBLE:
-		return "무의식인 당신은 항상 투명해져있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INVISIBLE);
 	case TPT_POWER_SAVE:
 		{
 			switch(value)
 			{
 			case 1:
-				return "당신은 P의 자연소모가 느리다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE1);
 			case -1:
-				return "당신은 P에 굶주려 있다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE2);
 			default:
-				return "버그파워";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_9_LIFE:
-		return "당신은 9레벨이전에 한번 부활할 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE);
 	case TPT_18_LIFE:
-		return "당신은 18레벨이전에 한번 부활할 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE);
 	case TPT_SPEED:
 		{
 			switch(value)
 			{
 			case 1:
-				return "당신은 이동속도가 빠르다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED1);
 			case -1:
-				return "당신은 이동속도는 느리다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED2);
 			default:
-				return "버그이속";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}
 	case TPT_CLAW:
@@ -367,121 +367,121 @@ string tribe_property::GetInfor()
 			switch(value)
 			{
 			case 3:
-				return "당신은 손톱이 아주 길다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW1);
 			case 2:
-				return "당신은 손톱이 상당히 길다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW2);
 			case 1:
-				return "당신은 손톱이 길다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW3);
 			default:
-				return "버그손톱";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}	
 	case TPT_JAW:
-		return "당신은 강한 턱을 지녔다.";	
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_JAW);	
 	case TPT_FOOT:
-		return "당신은 도약하기 충분한 강한 다리를 지녔다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FOOT);
 	case TPT_EYE:
-		return "당신은 뛰어난 눈을 가졌다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_EYE);
 	case TPT_FUR:
-		return "당신은 푹신한 털로 덮여있다. (AC+3, 냉기저항 1단계)";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FUR, PlaceHolderHelper("+3"));
 	case TPT_REGEN:
 		{
 			switch(value)
 			{
 			case 3:
-				return "당신은 체력 재생력이 높다.(+3)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN1, PlaceHolderHelper("+3"));
 			case 2:
-				return "당신은 체력 재생력이 높다.(+2)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN1, PlaceHolderHelper("+2"));
 			case 1:
-				return "당신은 체력 재생력이 높다.(+1)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN1, PlaceHolderHelper("+1"));
 			case -1:
-				return "당신은 체력 재생력이 낮다.(-1)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN2, PlaceHolderHelper("-1"));
 			default:
-				return "버그재생력";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}	
 	case TPT_SLAY:
-		return "당신은 공격과 방패를 다루는 전투감각이 뛰어나다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SLAY);
 	case TPT_CONFUSE_ATTACK:
-		return "당신의 공격은 가끔 상대의 허를 찌른다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CONFUSE_ATTACK);
 	case TPT_MAGIC_RESIST:
-		return "당신은 마법저항력이 높다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MAGIC_RESIST);
 	case TPT_SKIN_AC:
-		return "당신은 강한 피부를 지녔다. (AC+5)";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SKIN_AC, PlaceHolderHelper("+5"));
 	case TPT_STR:
-		return "당신은 강한 힘을 지녔다.(힘+5)";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STR, PlaceHolderHelper("+5"));
 	case TPT_EV:
-		return "당신은 초월적인 회피재능이 있다. (EV+10)";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_EV, PlaceHolderHelper("+10"));
 	case TPT_CLOUD:
-		return "당신은 구름을 몰고 다닌다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLOUD);
 	case TPT_BREATH:
-		return "당신은 브레스를 쏠 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BREATH);
 	case TPT_SCALE:
 		{
 			switch(value)
 			{
 			case 3:
-				return "당신은 아주 단단한 비늘로 덮여있다. (AC+9)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE1, PlaceHolderHelper("+9"));
 			case 2:
-				return "당신은 두꺼운 비늘로 덮여있다. (AC+6)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE2, PlaceHolderHelper("+6"));
 			case 1:
-				return "당신은 비늘로 덮여있다. (AC+3)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE3, PlaceHolderHelper("+3"));
 			default:
-				return "버그비늘";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}	
 	case TPT_GRAZE_CONTROL:
-		return "당신은 공기의 흐름을 다루는 것에 능하다. (그레이즈강화)";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GRAZE_CONTROL);
 	case TPT_FORCE_OF_NATURE:
-		return "당신은 몸에 자연의 힘을 두르고 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FORCE_OF_NATURE);
 	case TPT_MP_REGEN:
 		{
 			switch(value)
 			{
 			case 3:
-				return "당신은 영력 재생력이 높다.(+3)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN1, PlaceHolderHelper("+3"));
 			case 2:
-				return "당신은 영력 재생력이 높다.(+2)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN1, PlaceHolderHelper("+2"));
 			case 1:
-				return "당신은 영력 재생력이 높다.(+1)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN1, PlaceHolderHelper("+1"));
 			case -1:
-				return "당신은 영력 재생력이 낮다.(-1)";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN2, PlaceHolderHelper("-1"));
 			default:
-				return "버그재생력";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 			}
 		}	
 	case TPT_CONFUSE_RESIST:
-		return "당신은 혼란에 저항이 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CONFUSE_RESIST);
 	case TPT_SPELL_POWER:
-		return "당신이 쓰는 마법의 힘은 강력해진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPELL_POWER);
 	case TPT_FINGER_MAGIC:
-		return "당신은 손짓으로 마법을 쓸 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FINGER_MAGIC);
 	case TPT_BLOOD_MAGIC:
-		return "당신은 영력이 없어도 피를 이용하여 마법을 쓸 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BLOOD_MAGIC);
 	case TPT_TORMENT:
-		return "당신은 지옥의 고통을 불러올 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TORMENT);
 	case TPT_CLOUD_RESIST:
-		return "당신은 구름에 영향을 적게 받는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLOUD_RESIST);
 	case TPT_SEE_INVI:
-		return "당신은 투명을 볼 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SEE_INVI);
 	case TPT_FIRE_IMUNE:
-		return "당신은 화염에 면역이다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_IMUNE);
 	case TPT_COLD_IMUNE:
-		return "당신은 냉기에 면역이다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_IMUNE);
 	case TPT_ELEC_IMUNE:
-		return "당신은 전기에 면역이다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_IMUNE);
 	case TPT_PURE_MP:
-		return "당신의 체력과 영력은 동일시 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_MP);
 	case TPT_PURE_POWER:
-		return "당신은 항상 풀파워다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_POWER);
 	case TPT_PURE_LIFE:
-		return value>1?"당신은 2개의 추가 생명이 남아있다.":"당신은 1개의 추가 생명이 남아있다."; 
+		return value>1?LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1):LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2); 
 	case TPT_PURE_SYSTEM:
-		return "당신은 순화 상태에서도 스펠카드를 사용할 수 있으며 부적의 충전속도가 3배가 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM);
 	default:
 		break;
 	}
-	return "이 특성은 버그다.";
+	return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG);
 }
 string tribe_property::GetDetail()
 {
@@ -492,19 +492,19 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 3:
-				return "화염 저항이 3단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1, PlaceHolderHelper("3"));
 			case 2:
-				return "화염 저항이 2단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1, PlaceHolderHelper("2"));
 			case 1:
-				return "화염 저항이 1단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1, PlaceHolderHelper("1"));
 			case -1:
-				return "화염 저항이 1단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2, PlaceHolderHelper("1"));
 			case -2:
-				return "화염 저항이 2단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2, PlaceHolderHelper("2"));
 			case -3:
-				return "화염 저항이 3단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2, PlaceHolderHelper("3"));
 			default:
-				return "버그화염저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_COLD_RESIST:
@@ -512,19 +512,19 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 3:
-				return "냉기 저항이 3단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST1, PlaceHolderHelper("3"));
 			case 2:
-				return "냉기 저항이 2단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST1, PlaceHolderHelper("2"));
 			case 1:
-				return "냉기 저항이 1단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST1, PlaceHolderHelper("1"));
 			case -1:
-				return "냉기 저항이 1단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST2, PlaceHolderHelper("1"));
 			case -2:
-				return "냉기 저항이 2단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST2, PlaceHolderHelper("2"));
 			case -3:
-				return "냉기 저항이 3단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST2, PlaceHolderHelper("3"));
 			default:
-				return "버그냉기저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_ELEC_RESIST:
@@ -532,89 +532,89 @@ string tribe_property::GetDetail()
 			switch(value)
 			{
 			case 3:
-				return "전기 저항이 3단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST1, PlaceHolderHelper("3"));
 			case 2:
-				return "전기 저항이 2단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST1, PlaceHolderHelper("2"));
 			case 1:
-				return "전기 저항이 1단계 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST1, PlaceHolderHelper("1"));
 			case -1:
-				return "전기 저항이 1단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST2, PlaceHolderHelper("1"));
 			case -2:
-				return "전기 저항이 2단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST2, PlaceHolderHelper("2"));
 			case -3:
-				return "전기 저항이 3단계 감소한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST2, PlaceHolderHelper("3"));
 			default:
-				return "버그전기저항";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_POISON_RESIST:
-		return "독 저항이 증가한다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_RESIST);
 	case TPT_STEALTH:
-		return "은밀도가 오른다. 은밀한 정도는 수치만큼 곱해진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STEALTH);
 	case TPT_FLY:
-		return "비행을 능력을 통해 키고 끌 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FLY);
 	case TPT_SWIM:
-		return "깊은 물에서도 평지처럼 이동해 다닐 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SWIM);
 	case TPT_SIZE:
 		{
 			switch(value)
 			{
 			case 1:
-				return "천과 가죽 이외의 몸통 방어구를 입을 수 없다.\n또한 당신의 큰 사이즈는 또한 회피에 패널티를 준다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE1);
 			case -1:
-				return "천과 가죽 이외의 몸통 방어구를 입을 수 없다.\n그러나 당신의 작은 사이즈는 회피에 보너스를 준다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE2);
 			default:
-				return "천과 가죽 이외의 몸통 방어구를 못입긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_HORN:
-		return "뿔에 의한 박치기 공격이 추가된다.\n매 공격마다 일정확률로 박치기가 나가며 맨손으로 싸울때 더 높은 확률로 나간다.\n머리방어구를 착용할 수 없다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HORN);
 	case TPT_GHOST_FOOT:
-		return "당신의 다리는 유령처럼 존재하지않는다.\n다리방어구를 착용할 수 없다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GHOST_FOOT);
 	case TPT_CHEUKUMOGAMI:
-		return "당신의 본체인 도구는 버릴 수 없다.\n당신의 본체를 손에 들고 있으면 그 장비와 연관된 스킬이 5증가하는 보너스를 받는다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CHEUKUMOGAMI, PlaceHolderHelper("5"));
 	case TPT_HP:
-		return "당신은 유전적으로 체력이 결정되어있다.\n최종 체력치가 수치만큼 곱해진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP);
 	case TPT_INVISIBLE:
-		return "비전투중일때는 당신은 상시 투명을 유지한다.\n만약 당신이 공격을 시도하면 투명이 풀린다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE);
 	case TPT_POWER_SAVE:		
 		{
 			switch(value)
 			{
 			case 1:
-				return "턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1);
 			case -1:
-				return "턴이 지남에 따라 소모되는 P의 자연 감소율이 증가한다.\n또한 가속과 투명에 의한 P 소모폭도 증가한다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2);
 			default:
-				return "버그파워";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_9_LIFE:
-		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 9가 되면 사라진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE);
 	case TPT_18_LIFE:
-		return "죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 18이 되면 사라진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE);
 	case TPT_SPEED:
 		{
 			switch(value)
 			{
 			case 1:
-				return "이동시 다른 종족보다 80%의 딜레이만을 가진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1);
 			case -1:
-				return "이동시 다른 종족보다 120%의 딜레이를 가진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2);
 			default:
-				return "이동속도는 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_CLAW:
-		return "맨손격투시 추가 데미지를 준다.\n장갑을 낄 수 없게 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW);
 	case TPT_JAW:
-		return "매 공격마다 일정확률로 깨물기 공격이 들어간다.";	
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_JAW);	
 	case TPT_FOOT:
-		return "파워를 사용하여 적에게 순식간에 점프해서 접근할 수 있다.\n연속 사용은 불가능하다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FOOT);
 	case TPT_EYE:
-		return "투명한 적을 볼 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_EYE);
 	case TPT_FUR:
-		return "방어력이 3증가하고 냉기에 대한 저항을 1단계 얻는다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FUR, PlaceHolderHelper("3"));
 	case TPT_REGEN:
 		{
 			switch(value)
@@ -622,47 +622,47 @@ string tribe_property::GetDetail()
 			case 3:
 			case 2:
 			case 1:
-				return "체력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_REGEN1);
 			case -1:
-				return "체력 재생력이 낮다.\n마이너스 수치가 높을수록 회복력이 느려진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_REGEN2);
 			default:
-				return "체력 재생력이 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_SLAY:
-		return "+6의 전투력 보너스와 방패 수치에 보너스를 받는다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SLAY, PlaceHolderHelper("+6"));
 	case TPT_CONFUSE_ATTACK:
-		return "근접공격시 가끔 상대의 허를 찔러서 혼란에 빠뜨린다.\n";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CONFUSE_ATTACK);
 	case TPT_MAGIC_RESIST:
-		return "마법저항력이 증가한다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MAGIC_RESIST);
 	case TPT_SKIN_AC:
-		return "방어력이 5 증가한다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SKIN_AC, PlaceHolderHelper("5"));
 	case TPT_STR:
-		return "힘이 5 증가한다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STR, PlaceHolderHelper("5"));
 	case TPT_EV:
-		return "회피가 10 증가한다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_EV, PlaceHolderHelper("10"));
 	case TPT_CLOUD:
-		return "용의 특성으로 발현되어있는 속성 구름에 면역이다.\n또한 공격당할때 해당 속성의 구름을 흩뿌린다.\n";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLOUD);
 	case TPT_BREATH:
-		return "당신은 용의 특성으로 발현되어있는 속성 브레스를 쏠 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BREATH);
 	case TPT_SCALE:
 		{
 			switch(value)
 			{
 			case 3:
-				return "아주 단단한 비늘에 의해 방어력이 9 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE1, PlaceHolderHelper("9"));
 			case 2:
-				return "두꺼운 비늘에 의해 방어력이 6 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE2, PlaceHolderHelper("6"));
 			case 1:
-				return "비늘에 의해 방어력이 3 증가한다.";
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE3, PlaceHolderHelper("3"));
 			default:
-				return "버그비늘";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}	
 	case TPT_GRAZE_CONTROL:
-		return "그레이즈를 발동할 수 있고\n 그레이즈의 효율이 2배로 증가한다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GRAZE_CONTROL);
 	case TPT_FORCE_OF_NATURE:
-		return "근접공격에 대해 용의 특성으로 발현되어있는 속성으로 반격을 한다.\n만약 해당 속성에 면역이 없는 적이면 저항할 수 없는 감속을 건다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FORCE_OF_NATURE);
 	case TPT_MP_REGEN:
 		{
 			switch(value)
@@ -670,46 +670,45 @@ string tribe_property::GetDetail()
 			case 3:
 			case 2:
 			case 1:
-				return "영력 재생력이 높다.\n플러스 수치가 높을수록 회복력이 빨라진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MP_REGEN1);
 			case -1:
-				return "영력 재생력이 낮다.\n마이너스 수치가 높을수록 회복력이 느려진다.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MP_REGEN2);
 			default:
-				return "영력 재생력이 놀랍긴 개뿔 버그다.\n제작자에게 신고하자.";
+				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 			}
 		}
 	case TPT_CONFUSE_RESIST:
-		return "혼란에 대한 저항력이 생긴다.\n또한 광기에도 면역이 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CONFUSE_RESIST);
 	case TPT_SPELL_POWER:
-		return "모든 마법의 파워가 1.3배가 된다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPELL_POWER, PlaceHolderHelper("1.3"));
 	case TPT_FINGER_MAGIC:
-		return "마법 사용에 의한 소음이 70%로 줄어든다.\n침묵에서도 마법을 사용할 수 있다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FINGER_MAGIC, PlaceHolderHelper("70"));
 	case TPT_BLOOD_MAGIC:
-		return "영력이 부족할때 마법을 사용하면 영력의 2배만큼 체력을 소모하여 마법을 쓸 수 있다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BLOOD_MAGIC);
 	case TPT_TORMENT:
-		return "파워를 1칸 소모하여 시야내의 있는 모든 적의 각각의 체력을 절반으로 한다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TORMENT);
 	case TPT_CLOUD_RESIST:
-		return "자연현상 그 자체인 당신은 각종 구름의 영향을 적게 받는다.\n구름으로 인해 받는 데미지가 절반이 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLOUD_RESIST);
 	case TPT_SEE_INVI:
-		return "투명한 적을 볼 수 있게 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SEE_INVI);
 	case TPT_FIRE_IMUNE:
-		return "당신은 순호의 축복으로 화염에 면역이기에 화염 속성에 데미지를 입지 않는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_IMUNE);
 	case TPT_COLD_IMUNE:
-		return "당신은 순호의 축복으로 냉기에 면역이기에 냉기 속성에 데미지를 입지 않는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_IMUNE);
 	case TPT_ELEC_IMUNE:
-		return "당신은 순호의 축복으로 전기에 면역이기에 전기 속성에 데미지를 입지 않는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE);
 	case TPT_PURE_MP:
-		return "당신은 순호의 축복으로 영력과 체력이 동일시 되었다.\n체력과 영력이 동일한 수치로 관리되어 데미지를 입을때, 마법을 사용할때 사용할 수 있다.\n또한 기존의 체력회복력과 영력회복력이 합산되어 더 빠른 회복을 하게된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP);
 	case TPT_PURE_POWER:
-		return "당신은 순호의 축복으로 항상 풀파워모드이며 떨어지지않는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER);
 	case TPT_PURE_LIFE:
-		return value>1 ? "당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 2개 남았다." : 
-			"당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 1개 남았다.";
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE, PlaceHolderHelper(value>1?"2":"1"));
 	case TPT_PURE_SYSTEM:
-		return "당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 스펠카드가 사용이 가능하게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM);
 	default:
 		break;
 	}
-	return "이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.";
+	return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG);
 }
 
 D3DCOLOR tribe_property::getColor()
@@ -768,7 +767,7 @@ void tribe_property::gain(bool gain_)
 		{
 			if(you.unequip(ET_HELMET, true))
 			{
-				printlog("당신이 쓰고있던 머리방어구가 벗겨졌다!",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP),true,false,false,CL_danger);
 			}
 		}
 		return;
@@ -777,7 +776,7 @@ void tribe_property::gain(bool gain_)
 		{
 			if(you.unequip(ET_BOOTS,true))
 			{
-				printlog("당신이 쓰고있던 다리방어구가 벗겨졌다!",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP),true,false,false,CL_danger);
 			}
 		}
 		return;
@@ -800,7 +799,7 @@ void tribe_property::gain(bool gain_)
 		{
 			if(you.unequip(ET_GLOVE,true))
 			{
-				printlog("당신이 쓰고있던 손방어구가 벗겨졌다!",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP),true,false,false,CL_danger);
 			}
 		}
 		return;
@@ -923,8 +922,8 @@ void PropertyView()
 			if(num < you.property_vector.size())
 			{
 				WaitForSingleObject(mutx, INFINITE);
-				SetText() = "특성 : " + you.property_vector[num].GetName();
-				SetText() += "\n\n효과 : " + you.property_vector[num].GetDetail();
+				SetText() = LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY) + " : " + you.property_vector[num].GetName();
+				SetText() += "\n\n" + LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_EFFECT) + " : " + you.property_vector[num].GetDetail();
 				changedisplay(DT_TEXT);
 				ReleaseMutex(mutx);
 				waitkeyinput();
@@ -1110,7 +1109,7 @@ void LevelUpTribe(int level_)
 		}
 		if(level_ == 15)
 		{
-			printlog("당신에게 푹신푹신한 털이 자라났다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_NECOMATA_FUR),true,false,false,CL_small_danger);
 			you.SetProperty(TPT_FUR,1);
 		}
 		break;
@@ -1121,13 +1120,13 @@ void LevelUpTribe(int level_)
 		}
 		if(level_ == 9)
 		{
-			printlog("당신의 비늘이 단단해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE1),true,false,false,CL_small_danger);
 			you.DeleteProperty(TPT_SCALE);
 			you.SetProperty(TPT_SCALE,2);
 		}
 		if(level_ == 18)
 		{
-			printlog("당신의 비늘이 더욱 단단해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE2),true,false,false,CL_small_danger);
 			you.DeleteProperty(TPT_SCALE);
 			you.SetProperty(TPT_SCALE,3);
 		}
@@ -1166,31 +1165,31 @@ void LevelUpTribe(int level_)
 			switch(you.half_youkai[0])
 			{
 			case 0:
-				printlog("당신에겐 수인의 피가 흐르고 있다! 당신의 특성은 전사에 적합하다.",true,false,false,CL_small_danger);
-				printlog("당신에게 손톱이 자라났다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST),true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_1),true,false,false,CL_small_danger);
 				you.SetProperty(TPT_CLAW,1);
-				oss << "반요 변이발현: " << getTribeProperty(TPT_CLAW, 1);
+				oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_CLAW, 1);
 				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 1:
-				printlog("당신에겐 오니의 피가 흐르고 있다! 당신의 특성은 강한 맷집으로 이어진다.",true,false,false,CL_small_danger);
-				printlog("당신에게 뿔이 자라났다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI),true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_1),true,false,false,CL_small_danger);
 				you.SetProperty(TPT_HORN,1);
-				oss << "반요 변이발현: " << getTribeProperty(TPT_HORN, 1);
+				oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_HORN, 1);
 				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 2:
-				printlog("당신에겐 용의 피가 흐르고 있다! 당신의 특성은 속성을 다루는데 능숙하다.",true,false,false,CL_small_danger);
-				printlog("당신에게 비늘이 자라났다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON),true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_1),true,false,false,CL_small_danger);
 				you.SetProperty(TPT_SCALE,1);
-				oss << "반요 변이발현: " << getTribeProperty(TPT_SCALE, 1);
+				oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_SCALE, 1);
 				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			case 3:
-				printlog("당신에겐 악마의 피가 흐르고 있다! 당신의 특성은 마법사용에 집중된다.",true,false,false,CL_small_danger);
-				printlog("당신은 마나재생력이 빨라졌다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON),true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_1),true,false,false,CL_small_danger);
 				you.SetProperty(TPT_MP_REGEN,1);
-				oss << "반요 변이발현: " << getTribeProperty(TPT_MP_REGEN, 1);
+				oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_MP_REGEN, 1);
 				AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 				break;
 			}
@@ -1203,21 +1202,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[1])
 				{
 				case 0:	
-					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 강한 턱이 자라났다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_JAW),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_JAW,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_JAW, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_JAW, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("수인의 혈통이 더욱 강해졌다. 당신의 다리는 도약할수있을만큼 강해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_FOOT),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FOOT,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FOOT, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FOOT, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("수인의 혈통이 더욱 강해졌다. 당신의 시력이 좋아졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_EYE),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_EYE,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_EYE, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_EYE, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1226,21 +1225,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[1])
 				{
 				case 0:	
-					printlog("오니의 혈통이 더욱 강해졌다. 당신은 튼튼해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_HP),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_HP,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_HP, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_HP, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("오니의 혈통이 더욱 강해졌다. 당신은 독에 저항이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_POISON),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_POISON_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_POISON_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_POISON_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("오니의 혈통이 더욱 강해졌다. 당신은 마법저항이 높아졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_MR),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_MAGIC_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_MAGIC_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_MAGIC_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1249,21 +1248,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[1])
 				{
 				case 0:	
-					printlog("용의 혈통이 더욱 강해졌다. 당신은 화염에 저항이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_FIRE),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FIRE_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FIRE_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FIRE_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("용의 혈통이 더욱 강해졌다. 당신은 냉기에 저항이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_COLD),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_COLD_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_COLD_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_COLD_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("용의 혈통이 더욱 강해졌다. 당신은 전기에 저항이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_ELEC),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_ELEC_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_ELEC_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_ELEC_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1272,21 +1271,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[1])
 				{
 				case 0:	
-					printlog("악마의 혈통이 더욱 강해졌다. 당신에 큰 날개가 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_FLY),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FLY,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FLY, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FLY, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("악마의 혈통이 더욱 강해졌다. 당신은 명석해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_RCONFUSE),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CONFUSE_RESIST,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_CONFUSE_RESIST, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_CONFUSE_RESIST, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("악마의 혈통이 더욱 강해졌다. 당신은 은밀해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_STEALTH),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_STEALTH,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_STEALTH, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_STEALTH, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1302,21 +1301,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[2])
 				{
 				case 0:	
-					printlog("수인의 혈통이 더욱 강해졌다. 당신에게 푹신푹신한 털이 자라났다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_FUR),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FUR,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FUR, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FUR, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("수인의 혈통이 더욱 강해졌다. 당신의 발이 빨라졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_SPEED),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SPEED,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_SPEED, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_SPEED, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("수인의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_REGEN),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_REGEN,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_REGEN, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_REGEN, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1325,21 +1324,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[2])
 				{
 				case 0:	
-					printlog("오니의 혈통이 더욱 강해졌다. 당신의 피부는 단단해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_AC),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SKIN_AC,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_SKIN_AC, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_SKIN_AC, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("오니의 혈통이 더욱 강해졌다. 당신은 강한 재생력이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_REGEN),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_REGEN,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_REGEN, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_REGEN, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("오니의 혈통이 더욱 강해졌다. 당신은 엄청난 힘이 생겼다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_STR),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_STR,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_STR, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_STR, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1348,41 +1347,41 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[2])
 				{
 				case 0:	
-					printlog("용의 혈통이 더욱 강해졌다. 당신은 구름을 몰고 다닌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_CLOUD),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CLOUD,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_CLOUD, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_CLOUD, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("용의 혈통이 더욱 강해졌다. 당신은 입에서 브레스를 쏠 수 있다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_BREATH),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_BREATH,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_BREATH, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_BREATH, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("용의 혈통이 더욱 강해졌다. 당신의 비늘은 더욱 두꺼워졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_SCALE),true,false,false,CL_small_danger);
 					you.DeleteProperty(TPT_SCALE);
 					you.SetProperty(TPT_SCALE,2);
-					oss << "반요 변이강화: " << getTribeProperty(TPT_SCALE, 2);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_SCALE, 2);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					switch(you.half_youkai[1])
 					{
 					case 0:
 						you.DeleteProperty(TPT_FIRE_RESIST);
 						you.SetProperty(TPT_FIRE_RESIST,2);
-						oss << "반요 변이강화: " << getTribeProperty(TPT_FIRE_RESIST, 2);
+						oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_FIRE_RESIST, 2);
 						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					case 1:
 						you.DeleteProperty(TPT_COLD_RESIST);
 						you.SetProperty(TPT_COLD_RESIST,2);
-						oss << "반요 변이강화: " << getTribeProperty(TPT_COLD_RESIST, 2);
+						oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_COLD_RESIST, 2);
 						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					case 2:		
 						you.DeleteProperty(TPT_ELEC_RESIST);		
 						you.SetProperty(TPT_ELEC_RESIST,2);
-						oss << "반요 변이강화: " << getTribeProperty(TPT_ELEC_RESIST, 2);
+						oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_ELEC_RESIST, 2);
 						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 						break;
 					}
@@ -1393,21 +1392,21 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[2])
 				{
 				case 0:	
-					printlog("악마의 혈통이 더욱 강해졌다. 당신의 마법은 더욱 강력해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_SPELL_POWER),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SPELL_POWER,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_SPELL_POWER, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_SPELL_POWER, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("악마의 혈통이 더욱 강해졌다. 당신은 손짓만으로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_FINGER_MAGIC),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FINGER_MAGIC,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FINGER_MAGIC, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FINGER_MAGIC, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 2:
-					printlog("악마의 혈통이 더욱 강해졌다. 당신은 자신의 피로 마법을 영창할 수 있다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_BLOOD_MAGIC),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_BLOOD_MAGIC,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_BLOOD_MAGIC, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_BLOOD_MAGIC, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1423,15 +1422,15 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[3])
 				{
 				case 0:	
-					printlog("수인의 마지막 특성이 발현되었다. 당신은 동물적인 전투감각을 깨우쳤다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_4_SLAY),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_SLAY,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_SLAY, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_SLAY, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("수인의 마지막 특성이 발현되었다. 당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_4_CONFUSE_ATTACK),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_CONFUSE_ATTACK,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_CONFUSE_ATTACK, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_CONFUSE_ATTACK, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1440,24 +1439,24 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[3])
 				{
 				case 0:	
-					printlog("오니의 마지막 특성이 발현되었다. 당신은 놀랄만큼 튼튼해졌다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_4_HP),true,false,false,CL_small_danger);
 					if(you.half_youkai[1]==0)
 					{
 						you.DeleteProperty(TPT_HP);
 						you.SetProperty(TPT_HP,3);
-						oss << "반요 변이강화: " << getTribeProperty(TPT_HP, 3);
+						oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_HP, 3);
 						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					}
 					else {
 						you.SetProperty(TPT_HP, 2);
-						oss << "반요 변이발현: " << getTribeProperty(TPT_HP, 2);
+						oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_HP, 2);
 						AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					}
 					break;
 				case 1:
-					printlog("오니의 마지막 특성이 발현되었다. 당신은 초월적인 회피재능에 눈을 떴다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_4_EV),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_EV,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_EV, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_EV, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1466,15 +1465,15 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[3])
 				{
 				case 0:	
-					printlog("용의 마지막 특성이 발현되었다. 당신은 공기의 흐름을 다룰 수 있게 되었다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_4_GRAZE_CONTROL),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_GRAZE_CONTROL,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_GRAZE_CONTROL, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_GRAZE_CONTROL, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("용의 마지막 특성이 발현되었다. 당신은 자연의 힘을 몸에 두르게 되었다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_4_FORCE_OF_NATURE),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_FORCE_OF_NATURE,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_FORCE_OF_NATURE, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_FORCE_OF_NATURE, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1483,16 +1482,16 @@ void LevelUpTribe(int level_)
 				switch(you.half_youkai[3])
 				{
 				case 0:	
-					printlog("악마의 마지막 특성이 발현되었다. 당신은 초월적인 영력회복속도를 얻었다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN),true,false,false,CL_small_danger);
 					you.DeleteProperty(TPT_MP_REGEN);
 					you.SetProperty(TPT_MP_REGEN,3);
-					oss << "반요 변이강화: " << getTribeProperty(TPT_MP_REGEN, 3);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW) << ": " << getTribeProperty(TPT_MP_REGEN, 3);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				case 1:
-					printlog("악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT),true,false,false,CL_small_danger);
 					you.SetProperty(TPT_TORMENT,1);
-					oss << "반요 변이발현: " << getTribeProperty(TPT_TORMENT, 1);
+					oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN) << ": " << getTribeProperty(TPT_TORMENT, 1);
 					AddNote(you.turn, CurrentLevelString(), oss.str(), CL_normal);
 					break;
 				}	
@@ -1521,7 +1520,7 @@ void LevelUpTribe(int level_)
 		}
 		if(level_ == 15 && you.char_type == UNIQ_START_KOISHI)
 		{
-			printlog("당신의 뛰어난 공격은 상대를 혼란하게 만든다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK),true,false,false,CL_small_danger);
 			you.SetProperty(TPT_CONFUSE_ATTACK,1);
 		}
 		break;

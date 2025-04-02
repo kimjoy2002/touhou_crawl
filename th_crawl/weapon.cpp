@@ -78,59 +78,58 @@ int GetAttType(weapon_brand brand)
 	}
 	return att_type;	
 }
-const char* GetBrandString(weapon_brand brand, bool artifact_)
+LOCALIZATION_ENUM_KEY GetBrandString(weapon_brand brand, bool artifact_)
 {
 	switch(brand)
 	{
 		case WB_FIRE:
-			return !artifact_?"화염의 ":"화염";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FIRE:LOC_SYSTEM_ITEM_WEAPON_BRAND_FIRE;
 		case WB_COLD:
-			return !artifact_?"냉기의 ":"냉기";
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_COLD:LOC_SYSTEM_ITEM_WEAPON_BRAND_COLD;
 		case WB_POISON:
-			return !artifact_?"맹독의 ":"맹독";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_POISON:LOC_SYSTEM_ITEM_WEAPON_BRAND_POISON;
 		case WB_CURSE:		
-			return !artifact_?"저주의 ":"저주";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_CURSE:LOC_SYSTEM_ITEM_WEAPON_BRAND_CURSE;
 		case WB_WEATHER	:
-			return !artifact_?"비상의 ":"비상";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_WEATHER:LOC_SYSTEM_ITEM_WEAPON_BRAND_WEATHER;
 		case WB_AUTUMN:
-			return !artifact_?"단풍의 ":"단풍";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_AUTUMN:LOC_SYSTEM_ITEM_WEAPON_BRAND_AUTUMN;
 		case WB_MANA_REGEN:
-			return !artifact_?"영력회복의 ":"영력회복";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_MANA_REGEN:LOC_SYSTEM_ITEM_WEAPON_BRAND_MANA_REGEN;
 		case WB_FAST_CAST:
-			return !artifact_?"고속영창의 ":"고속영창";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FASTCAST:LOC_SYSTEM_ITEM_WEAPON_BRAND_FASTCAST;
 		case WB_PROTECT:
-			return !artifact_?"보호의 ":"보호";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_PROTECT:LOC_SYSTEM_ITEM_WEAPON_BRAND_PROTECT;
 		default:
-			return !artifact_?"알수없는 ":"버그";	
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_BUG:LOC_SYSTEM_ITEM_WEAPON_BRAND_BUG;
 	}	
 
 }
 
-
-const char* GetBrandInfor(weapon_brand brand)
+string GetBrandInfor(weapon_brand brand)
 {
 	switch(brand)
 	{
 		case WB_FIRE:
-			return "이 무기는 화염으로 덮여있다. 데미지에 1/3의 추가 화염 데미지를 더한다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FIRE);
 		case WB_COLD:
-			return "이 무기는 냉기가 휘감겨있다. 데미지에 1/3의 추가 냉기 데미지를 더한다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_COLD);
 		case WB_POISON:
-			return "이 무기는 맹독이 발라져있다. 공격한 적을 중독시킨다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_POISON);
 		case WB_CURSE:		
-			return "이 무기는 저주가 뿜어져나오고 있다. 공격한 적에 저항할 수 없는 독과 일정확률로 감속을 건다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_CURSE);
 		case WB_WEATHER	:
-			return "이 무기는 다양한 속성의 공격이 무작위로 베어나온다. 날씨가 발현중이라면 50%의 추가 데미지를 준다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_WEATHER);
 		case WB_AUTUMN:
-			return "이 무기는 단검 수준의 암습이 가능하게 되고 이미 단검인 경우엔 깨어난 적도 암습할 수 있다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_AUTUMN);
 		case WB_MANA_REGEN:
-			return "들고있는것만으로 영력의 회복속도를 늘려준다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_MANA_REGEN);
 		case WB_FAST_CAST:
-			return "이 무기는 들고있는것만으로도 당신의 모든 마법 영창시간을 80%로 줄여준다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FASTCAST);
 		case WB_PROTECT:
-			return "이 무기는 들고있는것만으로도 당신의 AC를 5 증가시켜준다.";
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_PROTECT);
 		default:
-			return "이 무기는 버그의 브랜드를 두르고 있다. 신고하세요!";	
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG);	
 	}	
 
 }

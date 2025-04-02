@@ -9,7 +9,8 @@
 #ifndef  __WEAPON_H__
 #define  __WEAPON_H__
 
-
+#include "enumMapBuilder.h"
+using namespace std;
 
 enum weapon_brand
 {

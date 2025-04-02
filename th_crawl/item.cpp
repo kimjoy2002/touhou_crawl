@@ -405,7 +405,7 @@ string item::GetName(int num_)
 			bool base_ = false;
 			if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 			{
-				arti_ += GetBrandString((weapon_brand)value5, true);
+				arti_ += LocalzationManager::locString(GetBrandString((weapon_brand)value5, true));
 				base_ = true;
 			}
 			if(type==ITM_RING)

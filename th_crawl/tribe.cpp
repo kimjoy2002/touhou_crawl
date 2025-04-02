@@ -79,15 +79,15 @@ string tribe_property::GetName()
 			case 3:
 				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+30"));
 			case 2:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+20");
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+20"));
 			case 1:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+10");
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+10"));
 			case -1:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-10");
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-10"));
 			case -2:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-20");
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-20"));
 			case -3:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-30");
+				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-30"));
 			default:
 				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
 			}

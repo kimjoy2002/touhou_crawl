@@ -275,6 +275,8 @@ LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,Select a spell to view details.
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,Identified items & Auto-pickup settings
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,No identified items.
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your properties (Press a letter for detailed info.)
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY,Traits
+LOC_SYSTEM_DISPLAY_MANAGER_EFFECT,Effects
 LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY,You have no properties.
 LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_USE,Which skill would you like to use?
 LOC_SYSTEM_DISPLAY_MANAGER_SKILL_VIEW_INFO,Which skill's description would you like to view?
@@ -497,10 +499,12 @@ LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
 LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
+LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
+LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,Half-Youkai Mutation Strengthened
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
 LOC_SYSTEM_NOTE_SEIJA_GIFT,You received a gift from Seija. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,Blessing of purification from Junko: {0}
-LOC_SYSTEM_NOTE_ARENA,========== 레벨 {0} ==========
+LOC_SYSTEM_NOTE_ARENA,========== Level {0} ==========
 LOC_SYSTEM_NOTE_ARENA_TEAM_LEFT,{0} Team: Left
 LOC_SYSTEM_NOTE_ARENA_TEAM_RIGHT,{0} Team: Right
 LOC_SYSTEM_NOTE_ARENA_SUCCESS,Correct!
@@ -831,6 +835,241 @@ LOC_SYSTEM_TRIBE_HALFYOUKAI,Half-Youkai
 LOC_SYSTEM_TRIBE_WRAITH,Wraith
 LOC_SYSTEM_TRIBE_VAMPIRE,Vampire
 LOC_SYSTEM_TRIBE_YOUKAI,Youkai
+LOC_SYSTEM_TRIBE_GROW_NECOMATA_FUR,Soft, fluffy fur has grown on your body.
+LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE1,Your scales have hardened.
+LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE2,Your scales have become even tougher.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST,You carry the blood of a beastkin! Your traits are fit for a warrior.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_1,Claws have grown from your hands.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_JAW,Your beastkin heritage grows stronger. A powerful jaw has developed.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_FOOT,Your beastkin blood intensifies. Your legs are strong enough to leap.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_2_EYE,Your beastkin blood intensifies. Your vision has improved.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_FUR,Your beastkin blood intensifies. Fluffy fur now covers you.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_SPEED,Your beastkin blood intensifies. Your feet move faster.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_3_REGEN,Your beastkin blood intensifies. You’ve gained powerful regeneration.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_4_SLAY,The final trait of your beastkin heritage has awakened. You’ve gained primal combat instincts.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_BEAST_4_CONFUSE_ATTACK,The final beastkin trait has awakened. Your fierce strikes confuse your enemies.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI,You carry the blood of an Oni! Your traits grant you remarkable endurance.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_1,Horns have sprouted from your head.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_HP,Your Oni blood strengthens. You’ve become more durable.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_POISON,Your Oni blood strengthens. You’ve gained resistance to poison.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_2_MR,Your Oni blood strengthens. Your magic resistance has increased.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_AC,Your Oni blood strengthens. Your skin has toughened.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_REGEN,Your Oni blood strengthens. You’ve gained powerful regeneration.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_3_STR,Your Oni blood strengthens. You’ve gained immense strength.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_4_HP,The final trait of your Oni blood has awakened. You’ve become astonishingly resilient.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_ONI_4_EV,The final Oni trait has awakened. You’ve awakened supernatural evasion skills.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON,You carry the blood of a dragon! Your traits excel at handling elements.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_1,Scales have grown on your body.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_FIRE,Your dragon blood intensifies. You’ve gained resistance to fire.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_COLD,Your dragon blood intensifies. You’ve gained resistance to cold.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_2_ELEC,Your dragon blood intensifies. You’ve gained resistance to electricity.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_CLOUD,Your dragon blood intensifies. You now move with stormy clouds.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_BREATH,Your dragon blood intensifies. You can now unleash breath attacks.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_3_SCALE,Your dragon blood intensifies. Your scales have thickened.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_4_GRAZE_CONTROL,The final trait of your dragon blood has awakened. You can now control the flow of air.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DRAGON_4_FORCE_OF_NATURE,The final trait of your dragon blood has awakened. You are now cloaked in the power of nature.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON,You carry the blood of a demon! Your traits focus on magic use.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_1,Your mana regeneration has increased.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_FLY,Your demon blood strengthens. Large wings have sprouted from your back.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_RCONFUSE,Your demon blood strengthens. Your mind has become sharper.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_2_STEALTH,Your demon blood strengthens. You’ve become stealthier.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_SPELL_POWER,Your demon blood strengthens. Your magic has become more powerful.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_FINGER_MAGIC,Your demon blood strengthens. You can cast spells with mere gestures.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_BLOOD_MAGIC,Your demon blood strengthens. You can cast spells using your own blood.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,The final trait of your demon blood has awakened. You’ve gained transcendent MP regeneration.
+LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,The final trait of your demon blood has awakened. You can now unleash the torment of hell.
+LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,Your subconscious attacks confuse your enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_BUG,Bug Trait
+LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST,Fire Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST,Cold Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_ELEC_RESIST,Electric Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_POISON_RESIST,Poison Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_STEALTH,Stealth
+LOC_SYSTEM_TRIBE_PROPERTY_FLY,Flight
+LOC_SYSTEM_TRIBE_PROPERTY_SWIM,Swimming
+LOC_SYSTEM_TRIBE_PROPERTY_SIZE1,Giant Size
+LOC_SYSTEM_TRIBE_PROPERTY_SIZE2,Mini Size
+LOC_SYSTEM_TRIBE_PROPERTY_HORN,Horns
+LOC_SYSTEM_TRIBE_PROPERTY_GHOST_FOOT,Ghostly Legs
+LOC_SYSTEM_TRIBE_PROPERTY_CHEUKUMOGAMI,Tsukumogami
+LOC_SYSTEM_TRIBE_PROPERTY_HP,HP Aptitude ({0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_INVISIBLE,Gene of the Subconscious
+LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE1,Power Conservation
+LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE2,Blood Hunger
+LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE,Resurrection
+LOC_SYSTEM_TRIBE_PROPERTY_SPEED1,Agility
+LOC_SYSTEM_TRIBE_PROPERTY_SPEED2,Clumsiness
+LOC_SYSTEM_TRIBE_PROPERTY_CLAW,Claws
+LOC_SYSTEM_TRIBE_PROPERTY_JAW,Strong Jaw
+LOC_SYSTEM_TRIBE_PROPERTY_FOOT,Strong Legs
+LOC_SYSTEM_TRIBE_PROPERTY_EYE,Keen Eyes
+LOC_SYSTEM_TRIBE_PROPERTY_FUR,Fluffy Fur
+LOC_SYSTEM_TRIBE_PROPERTY_REGEN1,Powerful Regeneration
+LOC_SYSTEM_TRIBE_PROPERTY_REGEN2,Weak Regeneration
+LOC_SYSTEM_TRIBE_PROPERTY_SLAY,Combat Instincts
+LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_ATTACK,Confusing Strike
+LOC_SYSTEM_TRIBE_PROPERTY_MAGIC_RESIST,Magic Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_SKIN_AC,Tough Skin
+LOC_SYSTEM_TRIBE_PROPERTY_STR,Increased Strength
+LOC_SYSTEM_TRIBE_PROPERTY_EV,Increased Evasion
+LOC_SYSTEM_TRIBE_PROPERTY_CLOUD,Cloud Control
+LOC_SYSTEM_TRIBE_PROPERTY_BREATH,Breath Attack
+LOC_SYSTEM_TRIBE_PROPERTY_SCALE,Scales
+LOC_SYSTEM_TRIBE_PROPERTY_GRAZE_CONTROL,Flow of Air
+LOC_SYSTEM_TRIBE_PROPERTY_FORCE_OF_NATURE,Force of Nature
+LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN1,Increased MP Regeneration
+LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN2,Decreased MP Regeneration
+LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_RESIST,Confusion Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_SPELL_POWER,Empowered Magic
+LOC_SYSTEM_TRIBE_PROPERTY_FINGER_MAGIC,Gesture Magic
+LOC_SYSTEM_TRIBE_PROPERTY_BLOOD_MAGIC,Blood Magic
+LOC_SYSTEM_TRIBE_PROPERTY_TORMENT,Torment of Hell
+LOC_SYSTEM_TRIBE_PROPERTY_CLOUD_RESIST,Cloud Resistance
+LOC_SYSTEM_TRIBE_PROPERTY_SEE_INVI,See Invisibility
+LOC_SYSTEM_TRIBE_PROPERTY_FIRE_IMUNE,Fire Immunity
+LOC_SYSTEM_TRIBE_PROPERTY_COLD_IMUNE,Cold Immunity
+LOC_SYSTEM_TRIBE_PROPERTY_ELEC_IMUNE,Electric Immunity
+LOC_SYSTEM_TRIBE_PROPERTY_PURE_MP,Pure Mana
+LOC_SYSTEM_TRIBE_PROPERTY_PURE_POWER,Pure Power
+LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE,Pure Life
+LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM,Pure System
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG,This trait is a bug.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST1,You are highly resistant to fire.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST2,You are resistant to fire.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST3,You are vulnerable to fire.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST4,You are highly vulnerable to fire.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST1,You are highly resistant to cold.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST2,You are resistant to cold.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST3,You are vulnerable to cold.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_RESIST4,You are highly vulnerable to cold.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST1,You are highly resistant to electricity.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST2,You are resistant to electricity.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST3,You are vulnerable to electricity.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_RESIST4,You are highly vulnerable to electricity.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_RESIST,You are resistant to poison.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STEALTH,You move stealthily. ({0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FLY,You have large wings that allow you to fly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SWIM,You can swim.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE1,You are too large for heavy armor to fit properly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE2,You are too small for heavy armor to fit properly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HORN,You have horns on your head.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GHOST_FOOT,As a ghost, you have no legs.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CHEUKUMOGAMI,Your true body is a tool.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP1,You are very sturdy. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP2,You are quite sturdy. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP3,You are sturdy. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP4,You are fragile. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP5,You are quite fragile. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP6,You are very fragile. (HP{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INVISIBLE,As a subconscious being, you are always invisible.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE1,Your natural P consumption is slow.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE2,You are starved for P.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,You can resurrect once before level 9.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,You can resurrect once before level 18.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED1,You move quickly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED2,You move slowly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW1,Your claws are very long.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW2,Your claws are quite long.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW3,Your claws are long.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_JAW,You have a strong jaw.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FOOT,You have powerful legs strong enough to leap.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_EYE,You have keen eyes.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FUR,You are covered in fluffy fur. (AC{0}, Cold Resistance Lv. 1)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN1,You have high health regeneration. ({0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_REGEN2,You have low health regeneration. ({0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SLAY,You have excellent combat instincts for handling weapons and shields.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CONFUSE_ATTACK,Your attacks occasionally catch the enemy off guard.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MAGIC_RESIST,You have high resistance to magic.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SKIN_AC,You have tough skin. (AC{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STR,You possess great strength. (Str{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_EV,You have transcendent evasion abilities. (EV{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLOUD,You are always shrouded in clouds.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BREATH,You can unleash a breath attack.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE1,You are covered in extremely hard scales. (AC{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE2,You are covered in thick scales. (AC{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SCALE3,You are covered in scales. (AC{0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GRAZE_CONTROL,You excel at manipulating the flow of air. (Enhanced Graze)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FORCE_OF_NATURE,You are cloaked in the power of nature.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN1,You have high MP regeneration. ({0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_MP_REGEN2,You have low MP regeneration. ({0})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CONFUSE_RESIST,You are resistant to confusion and madness.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPELL_POWER,The magic you use becomes more powerful.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FINGER_MAGIC,You can cast magic with a mere gesture.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BLOOD_MAGIC,You can use your blood to cast magic even without MP.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TORMENT,You can unleash the torment of hell.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLOUD_RESIST,You are less affected by clouds.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SEE_INVI,You can see invisible enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_IMUNE,You are immune to fire.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_COLD_IMUNE,You are immune to cold.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_ELEC_IMUNE,You are immune to electricity.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_MP,Your HP and MP are treated as the same.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_POWER,You are always at full power.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1,You have 2 extra lives remaining.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2,You have 1 extra life remaining.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,You can use spell cards while purified, and talisman recharge speed is tripled.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG,This trait is a bug and should not exist.\nReport it to the developer.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1,Your fire resistance increases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2,Your fire resistance decreases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST1,Your cold resistance increases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_RESIST2,Your cold resistance decreases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST1,Your electric resistance increases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_RESIST2,Your electric resistance decreases by {0} levels.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_RESIST,Your poison resistance increases.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STEALTH,Your stealth increases. The stealth effect is multiplied by the value.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FLY,You can toggle flying through abilities.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SWIM,You can move through deep water as if it were flat ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE1,You can't wear armor heavier than cloth or leather.\nYour large size also penalizes evasion.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE2,You can't wear armor heavier than cloth or leather.\nHowever, your small size boosts evasion.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HORN,You gain a headbutt attack from your horns.\nIt triggers occasionally during attacks and more often when unarmed.\nYou can't wear headgear.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GHOST_FOOT,Your legs are ghostly and don't physically exist.\nYou can't wear leg armor.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CHEUKUMOGAMI,You can't drop your true form, the tool.\nWhen wielding it, related skills gain a bonus of {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP,Your HP is genetically determined.\nFinal HP is multiplied by the value.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE,You remain invisible while out of combat.\nAttacking cancels the effect.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1,Natural P consumption over turns is reduced.\nP costs for haste and invisibility are also lowered.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2,Natural P consumption over turns is increased.\nP costs for haste and invisibility are also higher.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 9.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 18.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,Your movement delay is only 80% compared to other races.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,Your movement delay is 120% compared to other races.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW,You deal additional unarmed damage.\nYou can't wear gloves.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_JAW,You have a chance to bite with each attack.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FOOT,You can instantly leap toward enemies using Power.\nCannot be used repeatedly.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_EYE,You can see invisible enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FUR,Your defense increases by {0}, and you gain Lv. 1 Cold Resistance.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_REGEN1,You have high health regeneration.\nHigher values increase the regeneration rate.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_REGEN2,You have low health regeneration.\nHigher negative values slow down recovery.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SLAY,You gain bonuses to combat and shield values by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CONFUSE_ATTACK,Your melee attacks sometimes confuse the enemy by catching them off guard.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MAGIC_RESIST,Your magic resistance increases.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SKIN_AC,Your defense increases by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STR,Your strength increases by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_EV,Your evasion increases by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLOUD,You are immune to elemental clouds granted by dragon traits.\nYou scatter clouds of that element when hit.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BREATH,You can breathe elemental attacks granted by dragon traits.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE1,Your extremely hard scales increase defense by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE2,Your thick scales increase defense by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SCALE3,Your scales increase defense by {0}.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GRAZE_CONTROL,You can use Graze,\nand its efficiency is doubled.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FORCE_OF_NATURE,You counter melee attacks with elemental force from your dragon traits.\nEnemies not immune to the element are inflicted with irresistible slow.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MP_REGEN1,Your MP regeneration is high.\nThe higher the value, the faster you recover.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_MP_REGEN2,Your MP regeneration is low.\nThe more negative the value, the slower your recovery.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CONFUSE_RESIST,You gain resistance to confusion and immunity to madness.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPELL_POWER,All your magic becomes {0} times more powerful.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FINGER_MAGIC,Magic noise is reduced to {0}%.\nYou can also cast magic in silence.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BLOOD_MAGIC,If you lack MP, you can cast spells by consuming HP equal to twice the MP cost.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TORMENT,Spend 1 Power to halve the HP of all enemies in sight.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLOUD_RESIST,As a being of nature itself, you are less affected by clouds.\nDamage from clouds is halved.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SEE_INVI,You can see invisible enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_IMUNE,Blessed by Sunho, you are immune to fire and take no fire damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_IMUNE,Blessed by Sunho, you are immune to cold and take no cold damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE,Blessed by Sunho, you are immune to electricity and take no electric damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,Blessed by Sunho, your HP and MP are unified.\nYou use the same value for both taking damage and casting spells.\nHP and MP regeneration are also combined for faster recovery.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,Blessed by Sunho, you are always in full power mode and never lose power.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,Blessed by Sunho, you can revive after death.\nHowever, death caused by betraying Sunho cannot be reversed.\nYou have {0} extra lives remaining.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Sunho, item effects from the shooting system are enhanced.\nYou can use spell cards even while purified.\nTalisman recharge speed is tripled.
+LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
+LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
+LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
 LOC_SYSTEM_JOB_WARRIOR,Warrior
 LOC_SYSTEM_JOB_WIZARD,Magician
 LOC_SYSTEM_JOB_SHAMAN,Shrine Maiden
@@ -917,10 +1156,10 @@ LOC_SYSTEM_FLOOR_EFFECT_GOLD,Coins
 LOC_SYSTEM_SPELL_ALCHEMY_LONG,The buff from your alchemy has been extended.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_ON,Your fists have become as hard as stone.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_OFF,Your fists have returned to normal.
-LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_ON,당신의 몸은 바위처럼 단단해졌다.
-LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_OFF,당신의 몸은 원래대로 돌아왔다.
-LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_ON,당신의 몸은 독 기운을 뿜어내기 시작했다.
-LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_OFF,당신의 몸은 더이상 독을 뿜어내지 않는다.
+LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_ON,Your body has become as hard as stone.
+LOC_SYSTEM_SPELL_ALCHEMY_DIAMOND_HARDNESS_OFF,Your body has returned to normal.
+LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_ON,Your body begins to emit a poisonous aura.
+LOC_SYSTEM_SPELL_ALCHEMY_POISON_BODY_OFF,Your body no longer emits poison.
 LOC_SYSTEM_SPELL_ALCHEMY_HASTE_ON,Your alchemy granted you speed.
 LOC_SYSTEM_SPELL_ALCHEMY_HASTE_OFF,Your speed has returned to normal.
 LOC_SYSTEM_SPELL_ALCHEMY_HASTE_ALMOST_OFF,Your speed is wearing off.
@@ -1095,6 +1334,36 @@ LOC_SYSTEM_ITEM_WEAPON_SPEAR_JAVELIN,Javelin
 LOC_SYSTEM_ITEM_WEAPON_SPEAR_SCYTHE,Scythe
 LOC_SYSTEM_ITEM_WEAPON_SPEAR_TRIDENT,Trident
 LOC_SYSTEM_ITEM_WEAPON_SPEAR_BAMBOO_SPEAR,Bamboo Spear
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FIRE,{0} of Flame
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_COLD,{0} of Frost
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_POISON,{0} of Venom
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_CURSE,{0} of Curse
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_WEATHER,{0} of Tempest
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_AUTUMN,{0} of Autumn
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_MANA_REGEN,{0} of Mana Regen
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FASTCAST,{0} of Quickcasting
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_PROTECT,{0} of Protection
+LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_BUG,Unknown
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FIRE,Flame
+LOC_SYSTEM_ITEM_WEAPON_BRAND_COLD,Frost
+LOC_SYSTEM_ITEM_WEAPON_BRAND_POISON,Venom
+LOC_SYSTEM_ITEM_WEAPON_BRAND_CURSE,Curse
+LOC_SYSTEM_ITEM_WEAPON_BRAND_WEATHER,Tempest
+LOC_SYSTEM_ITEM_WEAPON_BRAND_AUTUMN,Autumn
+LOC_SYSTEM_ITEM_WEAPON_BRAND_MANA_REGEN,Mana Regen
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FASTCAST,Quickcasting
+LOC_SYSTEM_ITEM_WEAPON_BRAND_PROTECT,Protect
+LOC_SYSTEM_ITEM_WEAPON_BRAND_BUG,Bug
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FIRE,This weapon is engulfed in flames. It deals an additional 1/3 fire damage.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_COLD,This weapon is wrapped in frost. It deals an additional 1/3 cold damage.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_POISON,This weapon is coated in venom. It poisons enemies on hit.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_CURSE,This weapon emits a curse. It applies irresistible poison and has a chance to slow enemies.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_WEATHER,This weapon unleashes random elemental attacks. Deals 50% extra damage during weather effects.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_AUTUMN,This weapon enables dagger-level sneak attacks. If already a dagger, it can even backstab alerted enemies.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_MANA_REGEN,Simply holding this weapon increases MP regeneration speed.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FASTCAST,Simply holding this weapon reduces all magic casting time to 80%.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_PROTECT,Simply holding this weapon increases your AC by 5.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG,This weapon is branded with a bug. Please report it!
 LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,Cloth
 LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,Leather
 LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,Chain
@@ -1398,36 +1667,36 @@ LOC_SYSTEM_ITEM_ETC_CATNIP,Catnip Tree
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,Broken Camera
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,Kappa Junk
 LOC_SYSTEM_ITEM_ETC_PHOTO,Photograph
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,독에 대한 기초적인 마법이 들어 있는 책\n독마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,다양하고 가성비 좋은 저레벨 마법들이 들어 있는 책\n고레벨은 없지만 구성이 알차다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,대지에 대한 기초적인 마법이 들어 있는 책\n대지마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,대기에 대한 기초적인 마법이 들어 있는 책\n대기마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,소환에 대한 기초적인 마법이 들어 있는 책\n소환마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,연금술을 가르치는 책\n마법을 통해서 간단한 연금술을 시험해볼 수 있는 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,정신을 조종하는 기초적인 마법이 들어 있는 책\n심리마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,초보 마전사를 위해 만들어진 마법책\n전사들에게 유용한 마법들로 구성이 되어있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,메이드들이 기본적으로 가져야할 소양이라고 적혀있다. 홍마관에서 배포중이다.\n메이드의 길은 멀고도 험하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,다양한 전기마법이 적혀있는 마법책\n만지기만해도 짜릿짜릿하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,간단한 원소연습을 할 수 있게 되어있는 마법책\n하지만 빅토리댄스는 이제 없다고!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,다양한 보조마법이 적혀있는 마법책.\n마법사 입문에 좋아보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,마법암살자를 꿈꾸는 사람들을 위한 마법책\n아직은 마법이 모자라보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,구름을 만드는 노하우가 적혀있는 마법책\n왠지 책도 축축해보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,강력한 파괴의 기초 마법이 적혀있는 책\n탄막은 파워!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,정신마법계열의 마법이 적혀있는 책\n요괴들은 정신공격에 약하다고들 한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,"풍수지리에 해박한 모노노베노 후토가 편찬한 책.\n바람을 다루는 것부터 대지를 일으키는 일, 물을 다루면서 운기를 다루는 법이 적혀있다\n왜인지 방화하는 법에 대한 세세한 부록이 끼워져있다.\n"
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,불량천인 텐시가 직접 자필한 마법책\n예측불가인 그녀지만 그녀의 대지를 다루는 기술은 배울만하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,미마가 적은 궁극의 파괴술서\n모든 파괴법사가 꿈꾸고있는 그 책이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,지저세계에 살고있는 사토리가 적은 정신을 지배하는 법\n왠지 책에게 마음을 읽히고 있는 듯한 느낌이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,"홍마관의 메이드장이 유능한 메이드를 길러내기 위해 만들었다는 그 책이다.\n홍마관엔 사쿠야이외에 유능한 메이드가 없을뿐더러 아무도 책을 이해하지 못했기에 전설로만 남겨진 책이다.\n마법 뿐만이 아니라 청소하는 법, 빨래하는 법등이 부록으로 적혀있다.\n"
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적은 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,"마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n"
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘치는 모험 만화.\n내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,A book containing various spells.\nIt may not be a named tome, but still offers useful magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,A book of basic fire magic.\nRecommended for beginners in fire magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,A book of basic cold magic.\nRecommended for beginners in cold magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,A book of basic poison magic.\nRecommended for beginners in poison magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,A book of diverse and cost-effective low-level spells.\nIt lacks high-tier spells but has a solid lineup.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,A book of basic earth magic.\nRecommended for beginners in earth magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,A book of basic air magic.\nRecommended for beginners in air magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,A book of basic summoning magic.\nRecommended for beginners in summoning.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,A book teaching alchemy.\nIt seems to let you experiment with simple alchemy through magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,A book of basic mind control magic.\nRecommended for beginners in psychology magic.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,A magic book made for novice battlemages.\nFilled with useful spells for warriors.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,A book of proper maid conduct, distributed by the Scarlet Devil Mansion.\nThe path of a maid is long and arduous.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,A book filled with various electric spells.\nJust touching it sends a tingle through your body.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,A magic book for practicing basic elemental skills.\nBut no more Victory Dance!
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,A book of various support spells.\nGreat for aspiring mages.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,A magic book for those dreaming of becoming magical assassins.\nStill lacking in spells for now.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,A magic book containing cloud creation techniques.\nThe book itself feels oddly damp.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,A book of basic destructive magic.\nDanmaku is power!
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,A book of mental magic spells.\nYoukai are said to be weak to mental attacks.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,A book filled with defensive spells.\nSurvival is top priority.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,A book compiled by Mononobe no Futo, expert in geomancy.\nCovers wind, earth, water manipulation, and fortune control.\nMysteriously includes an appendix on arson.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,A magic book on teleportation.\nHandling time and space is always dangerous.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,A spellbook handwritten by the delinquent celestial Tenshi.\nUnpredictable as she is, her earth-manipulating skills are worth learning.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,The ultimate spellbook of destruction written by Mima.\nThe dream tome for every destruction mage.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,A book written by Satori of the Underworld on mental domination.\nIt feels like the book is reading your mind.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,A legendary book said to have been created by the chief maid of the Scarlet Devil Mansion to train elite maids.\nAside from Sakuya, no one could understand it.\nIncludes appendices on cleaning, laundry, and more.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy from the lake to prove her ultimate strength.\nIt’s filled with wiggly handwriting and drawings like a picture book.\nIts abstract explanations make it surprisingly hard to understand—only someone with great insight might comprehend it.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by the puppeteer living in the Forest of Magic.\nIt details intricate methods of controlling dolls that can also apply to summoning.\nStrangely, it includes notes on handling explosives and cursing others... Let’s pretend we didn’t see that.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
@@ -1635,17 +1904,17 @@ LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Died from unknown damage.
 LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Died from poison.
 LOC_SYSTEM_DUMP_DEATHREASON_POTION,Died due to a potion.
 LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up on the game.
-LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,굶어죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,반사데미지로 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,{0}의 반사데미지로 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,순화한 영력이 전부 소모되어 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,순호에 의해 사예가 순화되어 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,행복한 꿈을 꾸다 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,{0}에 의해 행복한 꿈을 꾸다 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_GHOST,오쿠리쵸친에 생명력이 빨려 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,부작용에 의해 죽었다.
-LOC_SYSTEM_DUMP_DEATHREASON_WIN,음양옥과 {0}개의 룬을 들고 탈출하는데 성공했다.
-LOC_SYSTEM_DUMP_DEATHREASON_COWARD,{0}개의 룬만 들고 도망쳤다.
-LOC_SYSTEM_DUMP_DEATHREASON_FAIL,성과없이 탈출했다.
-LOC_SYSTEM_DEBUG_CLEVER,디버그) {0} 마법 강화
-LOC_SYSTEM_DEBUG_CALC_MR,디버프계산: 몬스터({0}) - 파워({1}) < randC(2,100)
+LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Died of starvation.
+LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,Died from reflected damage.
+LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Died from {0}'s reflected damage.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Died as all purified MP was depleted.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their karma was purified by Sunho.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while having a happy dream.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Died while having a happy dream caused by {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Died as life force was drained by Okurichochin.
+LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects.
+LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Onmyo Orb and {0} runes.
+LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
+LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.
+LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
+LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)

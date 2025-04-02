@@ -346,7 +346,8 @@ string item::GetName(int num_)
 	}
 	if(!isArtifact() && type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 	{
-		temp += GetBrandString((weapon_brand)value5, false);
+		temp += LocalzationManager::formatString(GetBrandString((weapon_brand)value5, false), PlaceHolderHelper(name.getName()));
+		overwriteName = true;
 	}
 	if(!overwriteName) {
 		temp += name.getName();

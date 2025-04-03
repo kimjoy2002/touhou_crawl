@@ -424,6 +424,34 @@ int PrintCharWidth(const string& text)
 	return len;
 }
 
+vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength) {
+    wstring wtext = ConvertUTF8ToUTF16(text); 
+    vector<string> result;
+    string currentToken;
+    int currentLength = 0;
+    bool isFirstToken = true; 
+
+    for (wchar_t ch : wtext) {
+        int charWidth = IsCJKWideChar(ch) ? 2 : 1; 
+        int maxLength = isFirstToken ? firstLength : nextLength;
+
+        if (currentLength + charWidth > maxLength) {
+            result.push_back(currentToken);
+            currentToken.clear();
+            currentLength = 0;
+            isFirstToken = false; 
+        }
+        currentToken.push_back(static_cast<char>(ch)); 
+        currentLength += charWidth;
+    }
+    
+    if (!currentToken.empty()) {
+        result.push_back(currentToken);
+    }
+
+    return result;
+}
+
 wstring PreserveTrailingSpaces(const wstring& text)
 {
 	if (text.empty()) return text;

@@ -532,7 +532,7 @@ string GetSpellInfor(spell_list spell)
 	}
 	oss << "\n";
 	if (int length_ = SpellLength(spell)) {
-		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILE): LocalzationManager::locString(LOC_SYSTEM_TILES));
+		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << " " << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILE): LocalzationManager::locString(LOC_SYSTEM_TILES));
 	}
 	oss << "\n";
 	return oss.str();

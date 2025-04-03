@@ -311,6 +311,7 @@ string ConvertUTF16ToUTF8(const wstring& utf16Str);
 
 int PrintCharWidth(const string& text);
 wstring PreserveTrailingSpaces(const wstring& text);
+vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength);
 
 void replaceAll(string& str, const string& from, const string& to);
 #endif // __COMMON_H__

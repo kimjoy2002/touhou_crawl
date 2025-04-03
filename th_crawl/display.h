@@ -65,7 +65,7 @@ public:
 	bool draw;
 	string info;
 	infoBox();
-	void setBox(int x_, int y_, const char* info_) {
+	void setBox(int x_, int y_, string info_) {
 		x = x_;
 		y = y_;
 		info = info_;
@@ -120,7 +120,7 @@ public:
 	void start_spellview(LOCALIZATION_ENUM_KEY message_);
 	void start_skillview(LOCALIZATION_ENUM_KEY message_);
 	void start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY message_);
-	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, const char* message);
+	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, string message);
 	void drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 };
 
@@ -134,7 +134,7 @@ class stateBox
 	int current;
 public:
 	stateBox(LPD3DXSPRITE pSprite_, ID3DXFont* pfont_, RECT start_rc_);
-	void addState(const char* name, D3DCOLOR color, const char* info, display_manager* display);
+	void addState(string name, D3DCOLOR color, string info, display_manager* display);
 	void enter(display_manager* display);
 };
 

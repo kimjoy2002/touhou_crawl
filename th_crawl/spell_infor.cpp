@@ -494,7 +494,7 @@ string GetSpellInfor(spell_list spell)
 	{
 		if (GetSummonMaxNumber(spell) > 0)
 		{
-			oss << LocalzationManager::formatString(LOC_SYSTEM_SPL_DESCRIBE_SUMMONING, PlaseHolderHelper(to_string(GetSummonMaxNumber(spell))));
+			oss << LocalzationManager::formatString(LOC_SYSTEM_SPL_DESCRIBE_SUMMONING, PlaceHolderHelper(to_string(GetSummonMaxNumber(spell))));
 		}
 	}
 	if (!SpellFlagCheck(spell, S_FLAG_SPEAK))
@@ -504,8 +504,8 @@ string GetSpellInfor(spell_list spell)
 
 	oss << "\n\n";
 
-	oss << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaseHolderHelper(to_string(SpellLevel(spell))));
-	oss << "     "
+	oss << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(SpellLevel(spell))));
+	oss << "     ";
 	oss << LocalzationManager::locString(LOC_SYSTEM_SCHOOL) + ": ";
 	oss << GetSpellSchoolString(spell);
 	oss << "\n";
@@ -532,7 +532,7 @@ string GetSpellInfor(spell_list spell)
 	}
 	oss << "\n";
 	if (int length_ = SpellLength(spell)) {
-		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILES): LocalzationManager::locString(LOC_SYSTEM_GREED));
+		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILE): LocalzationManager::locString(LOC_SYSTEM_TILES));
 	}
 	oss << "\n";
 	return oss.str();

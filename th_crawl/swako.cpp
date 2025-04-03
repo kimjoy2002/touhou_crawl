@@ -14,7 +14,7 @@
 
 
 
-const char* GetSwakoString1(swako_1_power power, swako_string kind)
+string GetSwakoString1(swako_1_power power, swako_string kind)
 {
 	switch(power)
 	{
@@ -60,7 +60,7 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	return "버그";
 }
 
-const char* GetSwakoString2(swako_2_power power, swako_string kind)
+string GetSwakoString2(swako_2_power power, swako_string kind)
 {
 	switch(power)
 	{
@@ -115,7 +115,7 @@ const char* GetSwakoString2(swako_2_power power, swako_string kind)
 	return "버그";
 }
 
-const char* GetSwakoString3(swako_3_power power, swako_string kind)
+string GetSwakoString3(swako_3_power power, swako_string kind)
 {
 	switch(power)
 	{
@@ -161,7 +161,7 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	return "버그";
 }
 
-const char* GetSwakoString4(swako_4_power power, swako_string kind)
+string GetSwakoString4(swako_4_power power, swako_string kind)
 {
 	switch(power)
 	{
@@ -216,7 +216,7 @@ const char* GetSwakoString4(swako_4_power power, swako_string kind)
 	return "버그";
 }
 
-const char* GetSwakoString5(swako_5_power power, swako_string kind)
+string GetSwakoString5(swako_5_power power, swako_string kind)
 {
 	switch(power)
 	{

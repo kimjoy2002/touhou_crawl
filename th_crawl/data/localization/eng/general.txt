@@ -1348,6 +1348,7 @@ LOC_SYSTEM_SPL_DESCRIBE_COLD_BEAM,Freezes the air in a straight line to strike t
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_BUG,Summons small insects.\n
 LOC_SYSTEM_SPL_DESCRIBE_CONFUSE,A mental-type spell that causes temporary confusion.\nConfused enemies cannot act of their own will.\nThere’s a chance to resist.\n
 LOC_SYSTEM_SPL_DESCRIBE_SLOW,A mental-type spell that slows the enemy temporarily.\nActions become 1.6x slower.\nThere’s a chance to resist.\n
+LOC_SYSTEM_SPL_DESCRIBE_SELF_HEAL,자신을 약간 치료한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_BLINK,A teleportation spell that moves you a short distance.\nAvoids clouds, traps, and water, and the location is random.\nWith teleport control, you can roughly choose the direction.\n
 LOC_SYSTEM_SPL_DESCRIBE_SMITE,Calls down divine punishment on an enemy in sight.\nIt never misses.\n
 LOC_SYSTEM_SPL_DESCRIBE_BURN,A basic fire spell that burns nearby enemies.\nDeals good damage, but may miss.\n
@@ -1405,6 +1406,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HASTE_OTHER,Speeds up nearby allies.\nGrants acceleratio
 LOC_SYSTEM_SPL_DESCRIBE_HEAL_OTHER,Heals nearby allies.\nRestores health to those within range.\n
 LOC_SYSTEM_SPL_DESCRIBE_MIND_BENDING,Fires danmaku imbued with wave distortion.\nDeals damage and may slow enemies if they fail to resist.\nHowever, its damage scaling is low, it can be resisted, and it can be dodged.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_PUNCH,An alchemy spell that empowers your bare hands with the strength of stone.\nBoosts damage of your next unarmed attack.\nCannot be used while wielding a weapon.\n
+LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW,바위로 만들어진 탄막.\n맞으면 아프지만 멀리 못날라가고 움직임이 직선적이라 피하기가 쉽다.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,Places sharp, painful rocks in a 3×3 area for a short time.\nHurts anyone who walks over it, friend or foe.\nFlying enemies ignore it.\nMore Power means more tiles.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_UPLIFT,Raises the ground rapidly beneath a chosen area, creating sharp rocks.\nDeals high damage in a small AoE.\nLow Power may result in no explosion.\n
 LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL,Launches a solid stone shard in a straight line.\nDeals more damage as it spins on hit.\nCannot pierce enemies.\n
@@ -1419,9 +1421,14 @@ LOC_SYSTEM_SPL_DESCRIBE_RABBIT_HORN,A rabbit uses a horn to call in allies.\nGre
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_LESSOR_DEMON,Summons a weak demon from Makai.\n
 LOC_SYSTEM_SPL_DESCRIBE_LUMINUS_STRIKE,Fires a fast, powerful, non-elemental orb that cannot be grazed.\nIf it hits a distant enemy, it creates a small explosion that deals splash damage.\nDamage to the main target does not increase with distance.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIRE_STORM,Creates a massive flame storm at a selected location.\nLeaves a lingering fire cloud.\nAlso deals partial physical damage, making it effective even against fire-resistant foes.\n
+LOC_SYSTEM_SPL_DESCRIBE_BLIZZARD,선택한 위치에서 강력한 얼음 가시가 떨어지도록 한다.\n순간 데미지는 낮지만 지속적으로 맞출 경우 엄청난 데미지를 주며 물리데미지도 겸비한다.\n사용시 해당 위치에 있는 모든 구름을 걷어낸다.\n
+LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE,화면상의 모든 적에게 강력한 냉기를 방출하는 마법.\n사용한 적들에게 강력한 빙결 상태이상을 부여한다.\n다만 순수 냉기 속성이므로 냉기저항이 있는 적에겐 데미지가 거의 안들어간다.\n
 LOC_SYSTEM_SPL_DESCRIBE_DRAW_POWER,Pulls all dropped P items within view to the caster and restores P.\nBut where is “up” in top-down view?\nDoes it even exist?\n
 LOC_SYSTEM_SPL_DESCRIBE_ANIMAL_CHANGE,A terrifying spell that permanently turns an enemy into an animal.\nCan’t be used on animals.\nTransformed enemies become allies and give EXP.\nThey can’t descend stairs but remain as allies.\nThe stronger the target, the stronger the resulting animal.\nHard to succeed, but powerful when it does.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIELD_VIOLET,Spreads a violet wave in a selected area, inducing madness.\nAll characters inside lose their ability to distinguish ally from enemy.\nEXP is granted normally even if mad enemies die.\nBeware: allies and even the player can be affected.\n
+LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,탄막의 도플갱어를 만들어내서 2번 공격한다.\n사용후 패러독스 상태가 되면 딱 1번에 한해서 사용한 탄막 혹은 탄막마법이 2번 나간다.\n스파크나 화염폭풍같은 탄막이라고 보기 힘든 기술엔 적용되지 않는다.\n2번째 탄막은 탄막의 소모도 마나의 소모도 없으니 안심.\n
+LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ,주변의 시간을 느리게하여 상대적인 가속효과를 얻는 마법.\n시야 내의 모든 적에게 슬로우를 건다. 저항할 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK,원하는 위치로 정밀하게 순간이동할 수 있는 시공마법의 꽃.\n사용후 높은 시공부작용을 받는다.\n
 LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD,The ultimate spacetime spell, usable only by masters.\nStops time for a short while, letting you act freely—even attack.\nSevere temporal backlash occurs, so it can’t be used repeatedly.\n
 LOC_SYSTEM_SPL_DESCRIBE_HASTE_ALL,Grants acceleration to all allies within view.\n
 LOC_SYSTEM_SPL_DESCRIBE_HEAL_ALL,Heals all allies within view.\n
@@ -1438,6 +1445,7 @@ LOC_SYSTEM_SPL_DESCRIBE_FAKE_DOLLS_WAR,상해인형이나 봉래인형을 소환
 LOC_SYSTEM_SPL_DESCRIBE_FIRE_SPREAD,전방에 부채꼴모양으로 화염의 구름을 흩뿌린다.\n
 LOC_SYSTEM_SPL_DESCRIBE_STASIS,대상의 전이를 방해한다. 일정시간 전이불가 디버프를 건다.\n
 LOC_SYSTEM_SPL_DESCRIBE_JUMP_ATTACK,거리가 떨어져있는 적에게 순식간에 접근한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ALERT_NOISE,주변의 몬스터들을 깨우는 아주 큰 소음을 낸다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,해당 위치에 거대한 나마즈를 낙하시킨다.\n낙하엔 일정시간이 걸리며 떨어진 위치에 큰 폭발이 일어난다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,경계 저편에서 날라오는 탄막.\n높은 레벨에서의 스키마는 더욱 강력한 탄막을 발사한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHANGE,너구리의 특기인 둔갑술. 주변에 무엇이든지 둔갑할 수 있다.\n사용하면 근처에 보이는 가장 강한 몬스터로 둔갑한다. 같은 너구리로는 둔갑하지않는다.\n둔갑하면 잠시간 그 몬스터의 능력치와 마법을 쓸 수 있다. 다만 둔갑되도 소환술은 쓰지못한다.\n일정시간이 지나면 다시 원래 모습으로 돌아오고 죽여도 본래의 경험치를 준다.\n
@@ -1630,8 +1638,12 @@ LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3,밀착한 상대를 들어올려 멀리 던져�
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4,오니의 힘을 빌어 굉장한 소리로 포효한다.\n시야내의 적들은 일정 확률로 포효에 기가 죽어 벙어리 상태가 된다.\n벙어리 상태가 된 적은 당분간 마법을 사용할 수 없다.\n만약 잡고있는 상태라면 해당 상대에겐 무조건 벙어리 상태로 만든다.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,오니의 궁극기인 삼보필살을 사용한다. 3턴간 3번의 폭발이 순차적으로 일어난다.\n폭발 범위는 점차 커져서 거의 시야 전체를 커버한다.\n만약 잡고있는 상태라면 해당 상대에겐 보통의 2배 데미지를 입힌다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,상대의 마음을 읽고 트라우마를 일깨운다.\n성공하면 상대는 공포 상태가 되어 이쪽으로부터 도망치기 시작한다.\n좀 더 낮은 확률로 상대는 공포를 넘어서서 완전한 전의상실할 가능성이 생긴다.\n전의상실한 순간 경험치의 절반을 얻을 수 있으며 상대는 영구적인 공포상태로 변한다.\n이렇게 전의상실한 상대는 죽여도 경험치를 주지않으며 시야밖으로 나가면 사라진다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,상대의 마음을 읽어낸다. 사용한 상대의 모든 생각을 읽게 된다.\n만약 대상이 동물형인경우 호감을 사서 영구적인 아군이 된다. 그러나 계단이용은 불가능해진다.\n동물형이 아닌 경우엔 명중과 회피가 매우 큰 폭으로 떨어지며 디버프에 대한 저항력이 사라진다.\n사용할때 적의 마법저항력에 비례해서 시전 턴수가 필요하며 그동안 아무행동도 할 수 없다.\n시간동안 시야에서 사라지거나 혼란,마비가 걸리면 실패하고 자신의 레벨이 올라갈수록 턴수는 줄어든다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,하급 마족들의 작은 무리를 소환한다.\n하급 마족들은 전투엔 별다른 도움은 안되겠지만 신앙심소모가 매우 적고 양으로 승부할 수 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2,중급 마족 1명을 무작위로 소환한다.\n사라, 루이즈, 엘리스중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3,상급 마족 1명을 무작위로 소환한다.\n유키, 마이, 유겐마간중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON,유령의 소환을 시작한다.\n유령의 소환에는 비용이 들지않으며 한번 발동해두면 끝없이 유령을 불러들인다.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF,유령의 소환을 종료한다.\n언제든지 원할때 다시 유령을 불러들일 수 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1,유령을 원하는 위치로 이동시킬 수 있다.\n지정한 위치로 주변에 있는 유령들이 한꺼번에 이동된다.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2,유령의 소환을 잠시간 가속한다.\n일정시간동안 어마어마한 속도로 유령의 수가 불어난다.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3,1명의 영혼을 구속시켜서 자신의 노예로 삼는다.\n영혼이 구속된 상대를 일정시간 내에 잡으면 영구적인 아군으로 삼을 수 있다.\n구속된 영혼은 원본보다는 약해지지만 원본이 쓰는 마법이나 특징을 그대로 가지고 있다.\n또한 구속된 영혼은 1체까지 밖에 들고다닐 수 없다. 2번째 대상을 포획하면 원래가지고있던 영혼이 풀려난다.\n

@@ -9,7 +9,9 @@
 #ifndef  __SWAKO_H__
 #define  __SWAKO_H__
 
+#include <iostream>
 
+using namespace std;
 
 enum swako_1_power //신앙이 들지않는 사용형 권능들
 {
@@ -67,11 +69,11 @@ enum swako_string //무슨 정보가 필요한가
 };
 
 
-const char* GetSwakoString1(swako_1_power power, swako_string kind);
-const char* GetSwakoString2(swako_2_power power, swako_string kind);
-const char* GetSwakoString3(swako_3_power power, swako_string kind);
-const char* GetSwakoString4(swako_4_power power, swako_string kind);
-const char* GetSwakoString5(swako_5_power power, swako_string kind);
+string GetSwakoString1(swako_1_power power, swako_string kind);
+string GetSwakoString2(swako_2_power power, swako_string kind);
+string GetSwakoString3(swako_3_power power, swako_string kind);
+string GetSwakoString4(swako_4_power power, swako_string kind);
+string GetSwakoString5(swako_5_power power, swako_string kind);
 
 
 bool GetSwakoAbility(int level, bool plus);

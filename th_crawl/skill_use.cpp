@@ -2131,7 +2131,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		for (int i = GT_FIRST; i < GT_LAST; i++) {
 			if (you.god_value[GT_SEIJA][2] & (1 << i)) {
 				char temp[100];
-				sprintf_s(temp, 100, "%c - %s", num_+'a', seija_god_string(i, 0));
+				sprintf_s(temp, 100, "%c - %s", num_+'a', seija_god_string(i, 0).c_str());
 				select_[num_++] = (god_type)i;
 				printlog(temp, true, false, true, CL_help);
 			}

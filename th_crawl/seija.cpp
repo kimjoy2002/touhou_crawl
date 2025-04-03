@@ -71,7 +71,8 @@ bool seija_gift()
 
 	}
 }
-const char* seija_god_string(int god, int num) {
+
+string seija_god_string(int god, int num) {
 
 	switch (god)
 	{
@@ -170,7 +171,7 @@ const char* seija_god_string(int god, int num) {
 		switch (num) {
 		case 0: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA1);
 		case 1: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA2);
-		case 2: return LocalzationManager::locString(LOC_SYSTEM_EMPTYSTRING);
+		case 2: return LocalzationManager::locString(LOC_EMPTYSTRING);
 		}
 	case GT_LILLY:
 		switch (num) {
@@ -202,7 +203,7 @@ const char* seija_god_string(int god, int num) {
 		switch (num) {
 		case 0: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT1);
 		case 1: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT2);
-		case 2: return LocalzationManager::locString(LOC_SYSTEM_EMPTYSTRING);
+		case 2: return LocalzationManager::locString(LOC_EMPTYSTRING);
 		}
 	
 	}
@@ -434,7 +435,7 @@ void seija_real_gift(int key_)
 	}
 }
 
-const char* seija_summon_buff() {
+string seija_summon_buff() {
 
 	switch (randA(9))
 	{
@@ -464,7 +465,7 @@ const char* seija_summon_buff() {
 }
 
 
-const char* seija_talk(god_type god_, int piety)
+string seija_talk(god_type god_, int piety)
 {
 	if(piety >= 1 && piety <= 3)
 	{

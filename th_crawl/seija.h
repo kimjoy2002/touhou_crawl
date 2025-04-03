@@ -9,16 +9,18 @@
 #ifndef  __SEIJA_H__
 #define  __SEIJA_H__
 
+#include <iostream>
 
 enum god_type;
+using namespace std;
 
 bool seija_gift();
 
 void seija_real_gift(int next_);
-const char* seija_talk(god_type god_, int piety);
+string seija_talk(god_type god_, int piety);
 
-const char* seija_god_string(int god, int num);
-const char* seija_summon_buff();
+string seija_god_string(int god, int num);
+string seija_summon_buff();
 
 
 #endif // __SEIJA_H__

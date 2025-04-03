@@ -1323,6 +1323,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 {
+	ostringstream ss;
 	GetClientRect(hwnd, &windowSize);
 	scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidthCommon();
 	scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeightCommon();
@@ -1330,26 +1331,36 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	{
 		int i=0;
 		RECT rc={32*16+50, 10, option_mg.getWidth(), option_mg.getHeight()};
-		char temp[128];
-		sprintf_s(temp,128,"%d레벨",you.level);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*7;
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.level)));
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*(2 + PrintCharWidth(ss.str()));
 		DrawTextUTF8(pfont,pSprite,you.user_name.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		
 		if(ReplayClass.play)
 		{
-			rc.left = 32*16+180;			
-			DrawTextUTF8(pfont,pSprite,"*리플레이 중*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, wiz_list.wizard_mode == 1?CL_help:(wiz_list.wizard_mode == 2?CL_magic:CL_warning));
+			rc.left = 32*16+180;
+			ss.str("");
+			ss.clear();
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_REPLAY_MODE) << "*";
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, wiz_list.wizard_mode == 1?CL_help:(wiz_list.wizard_mode == 2?CL_magic:CL_warning));
 		}
 		else if(wiz_list.wizard_mode == 1)
 		{
-			rc.left = 32*16+180;			
-			DrawTextUTF8(pfont,pSprite,"*위자드 모드*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			rc.left = 32*16+180;
+			ss.str("");
+			ss.clear();
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*";
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 		}
 		else if(wiz_list.wizard_mode == 2)
 		{
-			rc.left = 32*16+180;			
-			DrawTextUTF8(pfont,pSprite,"*세이브 보존*", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
+			rc.left = 32*16+180;
+			ss.str("");
+			ss.clear();
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*";			
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_magic);
 		}
 
 
@@ -1359,37 +1370,42 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.left = 32*16+50;
 		string tribe_string = LocalzationManager::locString(tribe_type_string[you.tribe]);
 		DrawTextUTF8(pfont,pSprite,tribe_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*(tribe_string.size()+1);
+		rc.left += fontDesc.Width*(PrintCharWidth(tribe_string)+1);
 		string job_string = LocalzationManager::locString(job_type_string[you.job]);
 		DrawTextUTF8(pfont,pSprite,job_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*(job_string.size()+1);
+		rc.left += fontDesc.Width*(PrintCharWidth(job_string)+1);
 		DrawTextUTF8(pfont,pSprite,you.GetCharNameString().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left = 32*16+50;
 		rc.top += fontDesc.Height;
 
 
+		ss.str("");
+		ss.clear();
 		if(you.god == GT_NONE)
 		{
-			sprintf_s(temp,128,"무신앙");
+			ss << LocalzationManager::locString(LOC_SYSTEM_AHTEISM);
 		}
 		else if (you.god == GT_MIKO) 
 		{
-			sprintf_s(temp, 128, "신앙: %s (인기도 %d%%)", GetGodString(you.god).c_str(), you.piety/2);
+			ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_POULARITY) << ' ' << you.piety/2 << "%)";
 		}
 		else if (you.god == GT_TENSI)
 		{
-			sprintf_s(temp, 128, "신앙: %s", GetGodString(you.god).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god);
 		}
 		else
 		{
-			sprintf_s(temp,128,"신앙: %s %c%c%c%c%c%c",GetGodString(you.god).c_str(),pietyLevel(you.piety)>=1?'*':'.',pietyLevel(you.piety)>=2?'*':'.',pietyLevel(you.piety)>=3?'*':'.',pietyLevel(you.piety)>=4?'*':'.',pietyLevel(you.piety)>=5?'*':'.',pietyLevel(you.piety)>=6?'*':'.');
+			ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << ' ' 
+				<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.');
 		}
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 
 		rc.top += fontDesc.Height;
 
-		sprintf_s(temp,128,"HP: %d/%d",you.GetHp(),you.GetMaxHp());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		ss.str("");
+		ss.clear();
+		ss << "HP: " << you.GetHp() << "/" << you.GetMaxHp();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		rc.left += fontDesc.Width*14;
 		{
 			int Hp_bar = max(you.GetHp() *18/you.GetMaxHp(),min(you.prev_hp[0],you.GetMaxHp())*18/you.GetMaxHp());
@@ -1418,8 +1434,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		rc.top += fontDesc.Height;
 		if (!you.pure_mp)
 		{
-			sprintf_s(temp, 128, "MP: %d/%d", you.GetMp(), you.GetMaxMp());
-			DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			ss.str("");
+			ss.clear();
+			ss << "MP: " << you.GetMp() << "/" << you.GetMaxMp();
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			if (you.GetMaxMp())
 			{
 				rc.left += fontDesc.Width * 14;
@@ -1440,12 +1458,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 
-		int left_ =0 ;
-
 		int pow_ = min(you.power,500);
 		img_item_food_p_item.draw(pSprite,rc.left+7,rc.top+7,255);
-		left_ = sprintf_s(temp,128,"   %d.%02d",pow_/100,pow_%100);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
+
+		ss.str("");
+		ss.clear();
+		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
 		//임시		
 		//rc.left += fontDesc.Width*left_;
 		//sprintf_s(temp,50,"%6d",you.hunger);
@@ -1456,27 +1475,39 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 
 		rc.top += fontDesc.Height;
-		left_ = sprintf_s(temp,128,"AC:");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		ss.str("");
+		ss.clear();
+		ss << "AC:";
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 				
 		int temp_buff_value_ = 0;
 
 
-		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayAc());
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.GetDisplayAc();
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, (temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT)));
-		rc.left += fontDesc.Width*left_;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT)));
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
-		left_ = sprintf_s(temp,128,"    힘  :");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		ss.str("");
+		ss.clear();
+		ss << "    ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_STR);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)), ' ');
+		ss << ":" ;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
-		if(you.s_str == you.m_str)
-			sprintf_s(temp,128,"%4d",you.s_str);
-		else
-			sprintf_s(temp,128,"%4d (%2d)",you.s_str,you.m_str);
-		
+
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.s_str;
+		if(you.s_str != you.m_str) {
+			ss << " (" << std::setw(2) << you.m_str <<")";
+		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_STR);
 		{
 			D3DCOLOR color_ = 
@@ -1485,30 +1516,42 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==1?CL_white_puple:
 				(you.s_str != you.m_str)?CL_warning:CL_STAT;
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
-		left_ = sprintf_s(temp,128,"EV:");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		ss.str("");
+		ss.clear();
+		ss << "EV:";
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
-		
-		left_ = sprintf_s(temp,128,"%4d", you.GetDisplayEv());
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.GetDisplayEv();
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_EV);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
-		rc.left += fontDesc.Width*left_;
-
-		left_ = sprintf_s(temp,128,"    민첩:");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
 
-		if(you.s_dex == you.m_dex)
-			sprintf_s(temp,128,"%4d",you.m_dex);
-		else
-			sprintf_s(temp,128,"%4d (%2d)",you.s_dex,you.m_dex);
+		ss.str("");
+		ss.clear();
+		ss << "    ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');
+		ss << ":" ;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+
+
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.s_dex;
+		if(you.s_dex != you.m_dex) {
+			ss << " (" << std::setw(2) << you.m_dex <<")";
+		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_DEX);
 		{
 			D3DCOLOR color_ = 
@@ -1517,33 +1560,42 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==2?CL_white_puple:
 				(you.s_dex != you.m_dex)?CL_warning:CL_STAT;
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
-		left_ = sprintf_s(temp,128,"SH:");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		ss.str("");
+		ss.clear();
+		ss << "SH:";
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
-		left_ = sprintf_s(temp,128,"%4d",you.GetDisplaySh());
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.GetDisplaySh();
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_SH);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, temp_buff_value_>0?CL_white_blue:temp_buff_value_<0?CL_small_danger:CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
-		left_ = sprintf_s(temp,128,"    지능:");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*left_;
+		ss.str("");
+		ss.clear();
+		ss << "    ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_INT);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)), ' ');
+		ss << ":" ;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
 
-
-		if(you.s_int == you.m_int)
-			sprintf_s(temp,128,"%4d",you.m_int);
-		else
-			sprintf_s(temp,128,"%4d (%2d)",you.s_int,you.m_int);
+		ss.str("");
+		ss.clear();
+		ss << std::setfill(' ') << std::setw(4) << you.s_int;
+		if(you.s_int != you.m_int) {
+			ss << " (" << std::setw(2) << you.m_int <<")";
+		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_INT);
-
-		
 		{
 			D3DCOLOR color_ =
 				you.s_int<=0?CL_danger:
@@ -1551,30 +1603,34 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp_buff_value_<0?CL_small_danger:
 				you.s_stat_boost==3?CL_white_puple:
 				(you.s_int != you.m_int)?CL_warning:CL_STAT;
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
 			rc.left = 32*16+50;
 		}
 
 		rc.top += fontDesc.Height;
 
 
-		sprintf_s(temp, 128, "부적: ");
-		DrawTextUTF8(pfont,pSprite, temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width * 6;
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET);
+		ss << ": " ;
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width * PrintCharWidth(ss.str());
 
 		if (you.equipment[ET_NECK])
 		{
-			stringstream ss_amulet;
+			ss.str("");
+			ss.clear();
 			item* _item = you.equipment[ET_NECK];
 			if (_item->type == ITM_AMULET)
 			{
-				//ss_amulet << you.equipment[ET_NECK]->id << ") " << LocalzationManager::formatString(iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], PlaceHolderHelper(""))
+				//ss << you.equipment[ET_NECK]->id << ") " << LocalzationManager::formatString(iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], PlaceHolderHelper(""))
 				// << "(" << to_string(you.getAmuletPercent()) << "%)";
-				ss_amulet << _item->id << ") " << _item->GetName() << " (" << to_string(you.getAmuletPercent()) << "%)";
+				ss << _item->id << ") " << _item->GetName() << " (" << to_string(you.getAmuletPercent()) << "%)";
 			} else {
-				ss_amulet << _item->id << ") " << _item->GetName();
+				ss << _item->id << ") " << _item->GetName();
 			}
-			DrawTextUTF8(pfont,pSprite, ss_amulet.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, _item->item_color());
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, _item->item_color());
 		}
 		else
 		{
@@ -1582,85 +1638,55 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 		rc.left = 32 * 16 + 50;
 		rc.top += fontDesc.Height;
-
-		sprintf_s(temp,128,"무기: ");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*6;
+		
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON);
+		ss << ": " ;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 		if(you.equipment[ET_WEAPON])
 		{
-			sprintf_s(temp,128,"%c) %s",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
-			int prev_space_=0;
-			int one_line = 0;
-			int max_len_ = 29;
-			for(unsigned int i = 0 ; i < strlen(temp)+1;i++)
-			{
-				if(temp[i] == ' ')
-					prev_space_ = one_line;
-				one_line++;
-				if(one_line == max_len_)
-				{
-					if(prev_space_ == 0)
-					{
-						DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
-						rc.left = 32*16+50;
-						rc.top +=fontDesc.Height;
-						max_len_ = 36;
-						break;
-					}
-					else{
-						char tempchar2[128];
-						int j = 0;
-						for(j = 0; j<prev_space_;j++)
-							tempchar2[j] = temp[i - one_line+1+j];
-						tempchar2[j] = NULL;			
+			ss.str("");
+			ss.clear();
+			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName();
 
-						DrawTextUTF8(pfont,pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
-						rc.left = 32*16+50;
-						rc.top +=fontDesc.Height;
-						max_len_ = 36;
-					}
-					i -= one_line-prev_space_-1;
-					one_line = 0;
-					prev_space_ = 0;
-				}
-				else if(i == strlen(temp))
-				{
-					char tempchar2[128];
-					int j = 0;
-					for(j = 0; j<one_line;j++)
-						tempchar2[j] = temp[i - one_line+1+j];
-					tempchar2[j] = NULL;
-			
-					DrawTextUTF8(pfont,pSprite,tempchar2, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
-					rc.left = 32*16+50;
-					rc.top +=fontDesc.Height;
-					max_len_ = 36;
-				}
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 29, 36); 
+
+			for (const string& token : tokens ) {
+				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+				rc.left = 32*16+50;
+				rc.top +=fontDesc.Height;
 			}
 		}
 		else
 		{
-			sprintf_s(temp,128,"맨손");
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 			rc.left = 32*16+50;
 			rc.top +=fontDesc.Height;
 		}
 		//rc.left -= fontDesc.Width*6;
 
 		//rc.top += fontDesc.Height;
-		sprintf_s(temp,128,"탄막: ");
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*6;
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC);
+		ss << ": " ;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 		if(you.throw_weapon)
 		{
-			sprintf_s(temp,128,"%c) %s",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+			ss.str("");
+			ss.clear();
+			ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName();
+
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		}
-		rc.left -= fontDesc.Width*6;
+		rc.left = 32*16+50;
 
 
 
@@ -1669,30 +1695,40 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		if(you.GetNeedExp(you.level-1) > 0)
 		{
 			rc.top += fontDesc.Height;
-			sprintf_s(temp,128,"다음레벨까지:");
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-			rc.left += fontDesc.Width*14;
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_REMAIN_EXP);
+			ss << ":" ;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 		
-			sprintf_s(temp,128,"%d%%",(you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)));
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
-			rc.left -= fontDesc.Width*14;
+			ss.str("");
+			ss.clear();
+			ss << (you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)) << "%";
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
+			rc.left = 32*16+50;
 		}
 		else
 		{
 			rc.top += fontDesc.Height;
-			sprintf_s(temp,128,"최고 레벨");
-			DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
+			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 
 		}
 
 
 		rc.top += fontDesc.Height;
-		sprintf_s(temp,128,"%s",CurrentLevelString());
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*15;
-		sprintf_s(temp,128,"턴: %g (%g)",you.real_turn/10.0f, you.prev_real_turn/10.0f);
-		DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);		
-		rc.left -= fontDesc.Width*15;
+		ss.str("");
+		ss.clear();
+		ss << CurrentLevelString();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+		rc.left += fontDesc.Width*max(15, PrintCharWidth(ss.str()) + 1) ;
+		
+		
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ": " << you.real_turn/10.0f << " (" << you.prev_real_turn/10.0f << ")"; 
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);	
+		rc.left = 32*16+50;
 		rc.top += fontDesc.Height;
 		//sprintf_s(temp,128,"남은스킬경험치: %d",you.skill_exper);
 		//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -1713,8 +1749,10 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 			if(wiz_list.wizard_mode == 1)
 			{
-				sprintf_s(temp,128,"위험도(%d)",you.tension_gauge);
-				stateDraw.addState(temp, CL_small_danger, "위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.", this);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_DEBUG_RISK) << "(" << you.tension_gauge << ")"; 
+				stateDraw.addState(ss.str(), CL_small_danger, "위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.", this);
 				stateDraw.enter(this);
 			}
 			if (you.s_weather>0 && you.s_weather_turn)
@@ -1739,8 +1777,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.as_penalty>you.GetPenaltyMinus(2)?CL_small_danger: //이동패널티
 					you.as_penalty>you.GetPenaltyMinus(1)?CL_warning: //명중
 					CL_bad;
-				sprintf_s(temp,128,"장비패널티(%d)",you.as_penalty);
-				stateDraw.addState(temp, color_,
+		
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EQUIP_PENALTY) << "(" << you.as_penalty << ")"; 
+				stateDraw.addState(ss.str(), color_,
 					you.as_penalty > you.GetPenaltyMinus(3) ? "갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다." : //끔찍
 					you.as_penalty>you.GetPenaltyMinus(2) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.": //이동패널티
 					you.as_penalty>you.GetPenaltyMinus(1) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중이 감소합니다." : //명중
@@ -1893,22 +1934,22 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.s_eirin_poison_time)
 			{
 				D3DCOLOR color_ = you.s_eirin_poison_time>11 ? CL_small_danger : CL_danger;
-				sprintf_s(temp, 128, "부작용(%d)", you.s_eirin_poison);
-				stateDraw.addState(temp, color_,
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EIRIN_POISON) << "(" << you.tension_gauge << ")"; 
+				stateDraw.addState(ss.str(), color_,
 					"시간이 지나면 수치만큼 지속데미지를 받습니다.", this);
 			}
 			if(you.s_stasis)
 			{				
 				D3DCOLOR color_ = CL_danger;
-				sprintf_s(temp,128,"전이불가");
-				stateDraw.addState(temp, color_,
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STASIS), color_,
 					"전이관련 마법과 아이템을 사용할 수 없습니다.", this);
 			}
 			if(you.force_turn)
 			{				
 				D3DCOLOR color_ = you.force_strong?CL_white_blue:CL_danger;
-				sprintf_s(temp,128,you.force_strong?"강화":"약화");
-				stateDraw.addState(temp, color_,
+				stateDraw.addState(you.force_strong?LocalzationManager::locString(LOC_SYSTEM_ENHANCE):LocalzationManager::locString(LOC_SYSTEM_WEAKENING), color_,
 					you.force_strong ? "당신의 모든 공격과 마법은 강화되었습니다." :
 					"당신의 모든 공격과 마법은 약화되었습니다.", this);
 			}
@@ -2016,33 +2057,43 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				int rp_ = you.GetBuffOk(BUFFSTAT_RP);
 				int rconf_ = you.GetBuffOk(BUFFSTAT_RCONF);
 				if(rf_)
-				{			
-					sprintf_s(temp,128,"화저%s",(rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")));
-					stateDraw.addState(temp, rf_>0 ? CL_good : CL_danger,
+				{
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RFIRE, PlaceHolderHelper((rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")))); 
+					stateDraw.addState(ss.str(), rf_>0 ? CL_good : CL_danger,
 						(rf_>0 ? "화염 저항이 높아졌습니다." : "화염 저항이 낮아졌습니다."), this);
 				}
 				if(rc_)
 				{
-					sprintf_s(temp,128,"냉저%s", (rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")));
-					stateDraw.addState(temp, rc_>0 ? CL_good : CL_danger,
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RCOLD, PlaceHolderHelper((rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")))); 
+					stateDraw.addState(ss.str(), rc_>0 ? CL_good : CL_danger,
 						(rc_>0 ? "냉기 저항이 높아졌습니다." : "냉기 저항이 낮아졌습니다."), this);
 				}
 				if (re_)
 				{
-					sprintf_s(temp, 128, "뇌저%s", (re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-")));
-					stateDraw.addState(temp, re_>0 ? CL_good : CL_danger,
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RELEC, PlaceHolderHelper((re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-"))));
+					stateDraw.addState(ss.str(), re_>0 ? CL_good : CL_danger,
 						(re_>0 ? "전기 저항이 높아졌습니다." : "전기 저항이 낮아졌습니다."), this);
 				}
 				if (rp_)
 				{
-					sprintf_s(temp, 128, "독저%s", rp_>0 ? "+" : "-");
-					stateDraw.addState(temp, rp_>0 ? CL_good : CL_danger,
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RPOIS, PlaceHolderHelper(rp_>0 ? "+" : "-"));
+					stateDraw.addState(ss.str(), rp_>0 ? CL_good : CL_danger,
 						(rp_>0 ? "독 저항이 높아졌습니다." : "독 저항이 낮아졌습니다."), this);
 				}
 				if (rconf_)
 				{
-					sprintf_s(temp, 128, "혼란저%s", rconf_>0 ? "+" : "-");
-					stateDraw.addState(temp, rconf_>0 ? CL_good : CL_danger,
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RCONF, PlaceHolderHelper(rconf_>0 ? "+" : "-"));
+					stateDraw.addState(ss.str(), rconf_>0 ? CL_good : CL_danger,
 						(rconf_ >0 ? "혼란 저항이 높아졌습니다." : "혼란 저항이 낮아졌습니다."), this);
 				}
 			}
@@ -2116,8 +2167,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if(you.s_slaying)
 			{
-				sprintf_s(temp,128,"전투력(%s%d)",you.s_slaying>0?"+":"",you.s_slaying);
-				stateDraw.addState(temp, you.s_slaying>0 ? CL_white_blue : CL_danger,
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_SLAY) << "(" << (you.s_slaying>0?"+":"") << you.s_slaying<< ")"; 
+				
+				stateDraw.addState(ss.str(), you.s_slaying>0 ? CL_white_blue : CL_danger,
 					"당신의 근접, 탄막공격력이 변화되었습니다.", this);
 			}
 			if (you.s_none_move)
@@ -2132,8 +2186,11 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 			if (you.s_sleep>0)
 			{
-				sprintf_s(temp, 128, "졸음(%02d)", min(99,you.s_sleep));
-				stateDraw.addState(temp, CL_small_danger,
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_SLEEPING) << "(" << std::setfill('0') << std::setw(2) << min(99,you.s_sleep) << ")"; 
+			
+				stateDraw.addState(ss.str(), CL_small_danger,
 					"졸음이 오고있습니다. 수치가 100이 되면 강제로 잠을 잡니다.", this);
 			}
 			else if (you.s_sleep<0)
@@ -2147,11 +2204,14 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					you.s_pure < 10 ? CL_bad :
 					you.s_pure < 20 ? CL_darkblue :
 					you.s_pure < 30 ? CL_blue : CL_white_blue;
-				if(you.s_pure_turn == -1)
-					sprintf_s(temp, 128, "순화");
-				else
-					sprintf_s(temp, 128, "순화(%d단계)", you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3)));
-				stateDraw.addState(temp, color_,
+
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA);
+				if(you.s_pure_turn != -1) {
+					ss << "(" <<LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3))))) << ")";
+				}
+				stateDraw.addState(ss.str(), color_,
 					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? "두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
 					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
 					(you.s_pure >= 20) ? "스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
@@ -2592,9 +2652,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 }
 extern POINT MousePoint;
 
-void stateBox::addState(const char* name, D3DCOLOR color, const char* info, display_manager* display)
+void stateBox::addState(string name, D3DCOLOR color, string info, display_manager* display)
 {
-	int sizeOfName = strlen(name);
+	int sizeOfName = PrintCharWidth(name);
 	if (current + (sizeOfName + 1) > width)
 	{
 		enter(display);
@@ -2610,7 +2670,7 @@ void stateBox::enter(display_manager* display)
 	rc.top += display->fontDesc.Height;
 	current = 0;
 }
-void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, const char* message)
+void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, string message)
 {
 	if (MousePoint.x >= rc.left*scale_x && MousePoint.x <= (rc.left + width_)*scale_x &&
 		MousePoint.y >= rc.top*scale_y && MousePoint.y <= (rc.top + height_)*scale_y

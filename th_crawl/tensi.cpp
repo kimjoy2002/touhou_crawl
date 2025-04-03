@@ -221,15 +221,15 @@ void tensi_weather(int type_, int good_)
 	switch (type_)
 	{
 	case 1:
-		printlog("한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TENSI_WEATHER1), true, false, false, CL_normal);
 		you.SetWeather(1, 100);
 		break;
 	case 2:
-		printlog("던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TENSI_WEATHER2), true, false, false, CL_normal);
 		you.SetWeather(2, 100);
 		break;
 	case 3:
-		printlog("던전에 강한 햇빛이 들기 시작했다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TENSI_WEATHER3), true, false, false, CL_normal);
 		you.SetWeather(3, 100);
 		break;
 	default:
@@ -401,7 +401,7 @@ void tensi_tele(bool good_)
 	else
 	{
 		if(wiz_list.wizard_mode == 1)
-			printlog("텐시 텔레포트 실패",true,false,false,CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL),true,false,false,CL_tensi);
 		you.Teleport();
 	}
 }
@@ -555,7 +555,7 @@ void tensi_weapon(int doing_)
 	}
 	else
 	{
-		printlog("그러나 아무일도 일어나지 않았다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NOTHING_HAPPEND),true,false,false,CL_normal);
 	}
 }
 
@@ -615,11 +615,10 @@ void tensi_action()
 	string type;
 	if(wiz_list.wizard_mode == 1)
 	{
-		char temp[256];
+		ostringstream oss;
+		oss << "[" << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ":" << you.turn << " " << LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_TENSION) << ":" << you.CheckTension() << "]";
 
-		sprintf_s(temp,256,"[턴:%d 텐션:%d]",you.turn, you.CheckTension());
-	
-		printlog(temp,false,false,false,CL_tensi);
+		printlog(oss.str(),false,false,false,CL_tensi);
 		
 	}
 
@@ -633,12 +632,12 @@ void tensi_action()
 
 		if(rand_>44+(you.GetPunish(GT_TENSI)?50:0))
 		{
-			type = "[평화:0]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_PEACE) + "0]";
 			action_ = TENSI_NOTHING;
 		}
 		else
 		{
-			type = "[평화:-1]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_PEACE) + "-1]";
 			switch(randA(7)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = rand_int(-1,-2); action_ =  TENSI_SUMMON; break;
@@ -655,7 +654,7 @@ void tensi_action()
 	{
 		if(100+randA(4000)<randA(you.CheckTension()) && randA(9)>0)
 		{ //텐시의 포텐셜 폭발!	
-			type = "[위기:3]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "3]";
 			switch(randA(8)){
 			case 0:doing_ = 1; action_ =  TENSI_EARTHQUAKE; break;
 			case 1:doing_ = 2; action_ =  TENSI_SUMMON; break;
@@ -670,7 +669,7 @@ void tensi_action()
 		}
 		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
 		{ //그럭저럭 좋은일
-			type = "[위기:2]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "2]";
 			switch(randA(7)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
@@ -684,7 +683,7 @@ void tensi_action()
 		}
 		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
 		{ //괜찮네
-			type = "[위기:1]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "1]";
 			switch(randA(3)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
@@ -694,7 +693,7 @@ void tensi_action()
 		}
 		else
 		{ //운이 나빴어
-			type = "[위기:-1]";
+			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "-1]";
 			switch(randA(10)){
 			case 0:doing_ = -1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = -1; action_ =  TENSI_SUMMON; break;
@@ -718,182 +717,153 @@ void tensi_action()
 		
 
 	printlog(tensi_talk(doing_>0, action_),true,false,false,CL_tensi);
-	char temp[256];
+	ostringstream oss;
+	if (wiz_list.wizard_mode == 1) {
+		oss << type;
+	}
 	switch(action_)
 	{
 	case TENSI_NOTHING:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_NOTHING);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 아무일도안함. 텐션 %d", type.c_str(), you.CheckTension());
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG1, PlaceHolderHelper(to_string(you.CheckTension())));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 아무일도안함");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		break;
 	case TENSI_POTION:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_POTION : LOC_SYSTEM_NOTE_TENSI_BAD_POTION);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 포션. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: %s 포션", (doing_>0) ? "좋은" : "나쁜");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_potion(doing_>0);
 		break;
 	case TENSI_SUMMON:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_SUMMON : LOC_SYSTEM_NOTE_TENSI_BAD_SUMMON);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 소환. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: %s 소환", (doing_>0)?"우호적":"적대적");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_summon(doing_);
 		break;
 	case TENSI_TELE:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_TELEPORT : LOC_SYSTEM_NOTE_TENSI_BAD_TELEPORT);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 텔레포트. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: %s 텔레포트", (doing_>0) ? "안전한" : "위험한");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_tele(doing_);
 		break;
 	case TENSI_EARTHQUAKE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_EARTHQUAKE);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 지진. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 지진");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_earthquake(doing_);
 		break;
 	case TENSI_MUNYUM:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_ENLIGHTENMENT);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 무념무상. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 무념무상 버프");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_munyum(doing_);
 		break;
 	case TENSI_BURST:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_BURST : LOC_SYSTEM_NOTE_TENSI_BAD_BURST);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 폭발. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: %s 폭발", (doing_>0) ? "안전한" : "위험한");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_burst(doing_);
 		break;
 	case TENSI_WEAPON:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_BRAND_WEAPON);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp,256,"%s텐시: 비상의검. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 비상의검 부여");
-		}
-		AddNote(you.turn,CurrentLevelString(),temp,CL_tensi);
+		AddNote(you.turn,CurrentLevelString(),oss.str(),CL_tensi);
 		tensi_weapon(doing_);
 		break;
 	case TENSI_KANAME:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_KANAME : LOC_SYSTEM_NOTE_TENSI_BAD_KANAME);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 카나메석. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: %s 카나메석 소환", (doing_>0) ? "우호적" : "적대적 ");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_kaname(doing_);
 		break;
 	case TENSI_FIELD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_FIELD);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 필드생성. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 특수 필드 생성");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_field(doing_);
 		break;
 	case TENSI_BLIND:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_BLIND);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 실명. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 실명");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_blind(doing_);
 		break;
 	case TENSI_BUFF_DEBUFF:
+		oss << LocalzationManager::locString((doing_>0) ? LOC_SYSTEM_NOTE_TENSI_GOOD_AOE : LOC_SYSTEM_NOTE_TENSI_BAD_AOE);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 광역가속감속. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 광역 %s", (doing_>0) ? "감속" : "가속");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_buf_debuf(doing_);
 		break;
 	case TENSI_SUCIDE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_SUCIDE);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 자폭토끼. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 자폭토끼 소환");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_sucide(doing_);
 		break;
 	case TENSI_WEATHER_FOG:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_WEATHER_FOG);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 안개. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 안개");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_weather(1, doing_);
 		break;
 	case TENSI_WEATHER_THUNDER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_WEATHER_THUNDER);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 번개. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 천둥번개");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_weather(2, doing_);
 		break;
 	case TENSI_WEATHER_SUN:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN);
 		if (wiz_list.wizard_mode == 1)
 		{
-			sprintf_s(temp, 256, "%s텐시: 쾌청. 텐션 %d 행동 %d", type.c_str(), you.CheckTension(), doing_);
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
 		}
-		else {
-			sprintf_s(temp, 256, "텐시: 쾌청");
-		}
-		AddNote(you.turn, CurrentLevelString(), temp, CL_tensi);
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_weather(3, doing_);
 		break;
 	}
@@ -1414,6 +1384,6 @@ string tensi_talk(bool good_, tensi_do_list list_)
 		}
 
 	}
-	return "텐시는 안들리는 목소리로 소근거렸다.";
+	return LocalzationManager::locString(LOC_SYSTEM_TENSI_WHISPERING);
 
 }

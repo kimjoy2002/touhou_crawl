@@ -122,7 +122,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
 		makeAunnTemple(map,coord_def(0, 0));
-		map->name = "공용제단_다이아문방";
+		map->name = "COMMON_ALTAR_DIAMOND";
 		return  "\
 ###+###\
 #..#..#\
@@ -139,7 +139,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		makeAunnTemple(map, coord_def(0, 0));
-		map->name = "공용제단_가로_일자통로";
+		map->name = "COMMON_ALTAR_HORIZONTAL_PATH";
 		return  "\
 #######\
 #0+....\
@@ -156,7 +156,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "공용제단_기둥";
+			map->name = "COMMON_ALTAR_PILLAR";
 			return  "\
 .......\
 .#.#.#.\
@@ -189,7 +189,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				set_exist_named(MON_DIEFAIRY);
 			}
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "제단_아키샌드";
+			map->name = "ALTAR_AKISAND";
 			return  "\
 #######\
 #0=.=1#\
@@ -215,7 +215,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem((item_type)randA(ITM_ARMOR_BODY_ARMOUR_3), 0, &t, AMK_MIKO);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_모리야신사";
+			map->name = "ALTAR_MORIYA";
 			return  "\
 #######\
 #.###.#\
@@ -237,7 +237,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			makeAunnTemple(map, coord_def(0, 2));
-			map->name = "공용제단_작은_방";
+			map->name = "COMMON_ALTAR_SMALL_ROOM";
 			return  "\
 .......\
 .......\
@@ -270,7 +270,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "공용제단_동서남북";
+			map->name = "COMMON_ALTAR_NSEW";
 			return  "\
 .......\
 ...1...\
@@ -293,7 +293,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.push_back(DG_TEMPLE_SHINKI);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "제단_구작결계";
+			map->name = "COMMON_ALTAR_OLDBORDER";
 			return  "\
 #######\
 #.1.2.#\
@@ -318,7 +318,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(1,-1)));
 			map->monster_list.push_back(mapdummy_mon(MON_CROW,0,coord_def(3,1)));
 			makeAunnTemple(map, coord_def(0, 3));
-			map->name = "제단_사토리_사육터";
+			map->name = "ALTAR_SAROTI_FARM";
 			return  "\
 #############\
 #.=========.#\
@@ -345,7 +345,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem(ITM_BOOK, 0, &t, 0);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_뱌쿠렌_책선물";
+			map->name = "ALTAR_BYAKUREN_BOOK";
 			return  "\
 .....\
 ..0..\
@@ -375,7 +375,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			makeitem(ITM_POTION, -1, &t);
 			map->item_list.push_back(mapdummy_item(t,coord_def(2,1)));
 			makeAunnTemple(map, coord_def(0, -1));
-			map->name = "제단_에이린_포션";
+			map->name = "ALTAR_EIRIN_POTION";
 			return  "\
 #.....#\
 #..0..#\
@@ -405,7 +405,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_신키_P";
+			map->name = "ALTAR_SHINKI_P_ITEM";
 			return  "\
 .......\
 .......\
@@ -430,7 +430,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_SUWAKO);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_스와코_바다";
+			map->name = "ALTAR_SWAKO_SEA";
 			return  "\
 .......\
 .#.~#~.\
@@ -455,7 +455,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_HINA);
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_히나_액지형";
+			map->name = "ALTAR_HINA_VORTEX";
 			return  "\
 .............\
 .............\
@@ -493,7 +493,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_미노리코_고구마";
+			map->name = "ALTAR_MINORIKO_SWEET_POTATO";
 			return  "\
 .......\
 .......\
@@ -526,7 +526,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_FROG,0,coord_def(0,0)));
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
 			makeAunnTemple(map, coord_def(0, -3));
-			map->name = "제단_스와코_치르노징벌";
+			map->name = "ALTAR_SWAKO_CIRNO";
 			return  "\
 #.........#\
 #.=======.#\
@@ -557,7 +557,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				map->monster_list.push_back(mapdummy_mon(MON_RABBIT,0,coord_def(0,-1)));
 			}
 			makeAunnTemple(map, coord_def(0, 1));
-			map->name = "제단_유유코_식단";
+			map->name = "ALTAR_YUYUKO_DINER";
 			return  "\
 #######\
 #.=.=.#\
@@ -589,7 +589,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				i--;
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_시즈하_단풍";
+			map->name = "ALTAR_SHIZUHA_AUTUMN";
 			return  "\
 .......\
 .......\
@@ -615,7 +615,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);
 			makeAunnTemple(map, coord_def(0, -3));
-			map->name = "제단_유우기_투기장";
+			map->name = "ALTAR_YUUGI_ARENA";
 			return  "\
 ###########\
 .....0.....\
@@ -645,7 +645,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				map->event_list.push_back(mapdummy_event(EVL_SUKIMA, coord_def(1, i), EVT_APPROACH_SMALL));
 			}
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "제단_유카리_스키마";
+			map->name = "ALTAR_YUKARI_SUKIMA";
 			return  "\
 #####\
 #.0.#\
@@ -684,7 +684,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 				map->item_list.push_back(mapdummy_item(t, c_));
 			}
 			makeAunnTemple(map, coord_def(-1, 5));
-			map->name = "제단_죠온시온_낚시";
+			map->name = "ALTAR_JOON_AND_SION_FISHING";
 			return  "\
 ##...##\
 ###...#\

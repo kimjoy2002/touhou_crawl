@@ -16,1207 +16,812 @@
 
 string GetSpellInfor(spell_list spell)
 {
-	string text_ = SpellString(spell);
-	text_ += "\n\n";
+	ostringstream oss;
+	oss << SpellString(spell) << "\n\n";
 	switch(spell)
-	{	
+	{
 	case SPL_NONE:
-		text_ += "존재하지 않는 마법이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_NONE);
 		break;
 	case SPL_MON_TANMAC_SMALL:
-		text_ += "작은 탄막을 발사한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL);
 		break;
 	case SPL_MON_TANMAC_MIDDLE:
-		text_ += "적당한 탄막을 발사한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_MIDDLE);
 		break;
 	case SPL_MON_WATER_GUN:
-		text_ += "물총을 발사한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MON_WATER_GUN);
 		break;
 	case SPL_FLAME:
-		text_ += "작은 화염을 탄막으로 날린다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FLAME);
 		break;
 	case SPL_FROST:
-		text_ += "작은 냉기를 탄막으로 날린다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FROST);
 		break;	
 	case SPL_MEDICINE_CLOUD:
-		text_ += "콘파로~ 콘파로~ 은방울꽃의 독이 주 성분\n";
-		text_ += "이 독에 갇히면 이동속도가 느려지고 중독상태가 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MEDICINE_CLOUD);
 		break;
 	case SPL_COLD_BEAM:
-		text_ += "공기를 일직선으로 얼려서 상대에게 타격을 준다.\n";
-		text_ += "냉기구름도 생기기도 한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_COLD_BEAM);
 		break;
 	case SPL_SUMMON_BUG:
-		text_ += "작은 곤충들을 소환해낸다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_BUG);
 		break;
 	case SPL_CONFUSE:
-		text_ += "적에게 일시적으로 혼란을 거는 정신계열마법. 혼란에 빠진 상대는 자신의 의지대로 움직이지 못한다.\n";
-		text_ += "저항할 확률이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CONFUSE);
 		break;
 	case SPL_SLOW:
-		text_ += "적에게 일시적으로 감속을 거는 정신계열마법. 감속에 걸리면 모든 행동이 1.6배로 느려진다.\n";
-		text_ += "저항할 확률이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SLOW);
 		break;
-	case SPL_SELF_HEAL:	
-		text_ += "자신을 약간 치료한다.\n";
+	case SPL_SELF_HEAL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SELF_HEAL);
 		break;
 	case SPL_BLINK:
-		text_ += "짧은 거리를 순식간에 이동하는 전이계열마법.\n";
-		text_ += "구름, 함정, 물같이 위험한 위치로는 이동하지 않으며 이동하는 위치는 무작위로 결정된다.\n";
-		text_ += "공간이동제어가 있을 경우, 방향을 지정하여 이동하는 위치를 대략 정할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BLINK);
 		break;
 	case SPL_SMITE:
-		text_ += "상대방에게 천벌을 내린다. 시야안에 있기만 하면 성공하며 피할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SMITE);
 		break;
 	case SPL_BURN:
-		text_ += "짧은거리의 상대방을 불꽃으로 태워버리는 화염속성 기초마법.\n";
-		text_ += "데미지가 좋지만 빗나갈 확률이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BURN);
 		break;
 	case SPL_FIRE_WALL:
-		text_ += "원하는 위치에 불기둥을 생성하는 화염계열 마법.\n";
-		text_ += "이미 몬스터가 존재하는 곳에는 사용할 수 없으며 생성이 되면 일정시간후에 저절로 사라진다.\n";
-		text_ += "상대의 진로를 막거나 불기둥으로 데미지를 줄 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_WALL);
 		break;
 	case SPL_FROZEN:
-		text_ += "밀착한 상대의 온도를 빼앗는 냉기속성 기초마법.\n";
-		text_ += "밀착한 상대에게만 사용할 수 있지만 상대는 피할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FROZEN);
 		break;
 	case SPL_FREEZE:
-		text_ += "짧은 범위안 1명의 적 주변의 공기를 순식간에 냉동시키는 마법.\n";
-		text_ += "피할 수 없으며 추가로 상대를 얼려 이동속도를 느리게하는 추가 효과가 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FREEZE);
 		break;
 	case SPL_STING:
-		text_ += "마법으로 독침을 구현하여 탄막으로 발사하는 독속성 기초마법.\n";
-		text_ += "맞은 상대는 약한 독에 걸리며 여러번 맞출 경우 독은 중첩된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STING);
 		break;
 	case SPL_CURE_POISON:
-		text_ += "자신에게 걸려있는 독을 해독하는 마법.\n";
-		text_ += "사용즉시 효과를 발휘한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CURE_POISON);
 		break;
 	case SPL_TWIST:
-		text_ += "원하는 위치의 공기의 흐름을 비트는 대기마법. 몬스터가 있는 위치에도 사용할 수 있다. \n";
-		text_ += "사용한 위치에 생성되어서 몇턴간 지속된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TWIST);
 		break;
 	case SPL_SUMMON_MOOK:
-		text_ += "주변에 모옥을 소환하는 소환계열 기초마법.\n";
-		text_ += "모옥이 1~2마리가 자신의 주변에 아군으로 소환된다. 소환물은 시간이 지나면 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_MOOK);
 		break;
 	case SPL_FIRE_BRAND:
-		text_ += "장착하고 있는 무기에 화염속성을 일시적으로 부여하는 마법. 화염속성은 화염데미지를 준다.\n";
-		text_ += "이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_BRAND);
 		break;
 	case SPL_COLD_BRAND:
-		text_ += "장착하고 있는 무기에 냉기속성을 일시적으로 부여하는 마법. 냉기속성은 냉기데미지를 준다.\n";
-		text_ += "이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_COLD_BRAND);
 		break;
 	case SPL_POISON_BRAND:
-		text_ += "장착하고 있는 무기에 독속성을 일시적으로 부여하는 마법. 독속성은 때릴때 독을 건다.\n";
-		text_ += "이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_POISON_BRAND);
 		break;
 	case SPL_SHOCK:
-		text_ += "1인적에게 전기를 통하게 하는 전기속성 기초마법.\n";
-		text_ += "전기의 궤도는 정할 수 없지만 방향을 정하면 해당 방향으로 마법을 사용한다.\n";
-		text_ += "해당 방향에 존재하는 적중에서 무작위의 적에게 전기가 통하여 데미지를 준다.\n";
-		text_ += "전기저항이 없거나, 가까이있는 적에게 전기가 통할 확률이 높다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SHOCK);
 		break;
 	case SPL_CHAIN_LIGHTNING:
-		text_ += "전기가 적을 차례대로 타고가면서 다수의 적을 공격하는 강력한 전기속성마법.\n";
-		text_ += "적에게 직접 조준하는건 불가능하지만 방향을 지정하여 가까이있는 적부터 차례대로 전기가 통한다.\n";
-		text_ += "2번이상 전기가 타고갔을때, 시야밖에 있는 적에게도 공격이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CHAIN_LIGHTNING);
 		break;
 	case SPL_DISCHARGE:
-		text_ += "전기를 내뿜어 방전시키는 전기마법. 방전상태가되면 몇턴마다 무작위로 주위적에 전격을 시전한다.\n";
-		text_ += "모티브는 이쿠의 뇌운극어라는 설이...\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DISCHARGE);
 		break;
 	case SPL_LEVITATION:
-		text_ += "전극을 이용하여 일시적인 비행상태가 되는 마법. 깊은물같은 지형을 통과할 수 있게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_LEVITATION);
 		break;
 	case SPL_GLOW:
-		text_ += "조명으로 적을 비춘다. 조명으로 비춰진 적은 일시적으로 회피가 감소한다.\n";
-		text_ += "저항할 확률이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_GLOW);
 		break;
 	case SPL_GRAZE:
-		text_ += "일시적인 그레이즈 상태가 된다. 그레이즈 상태에선 모든 원거리 탄막을 회피할 확률이 생긴다.\n";
-		text_ += "틱틱틱 소리는 미지원이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_GRAZE);
 		break;
 	case SPL_VEILING:
-		text_ += "잠시 공기의 보호막을 만드는 대기속성 기초마법. 일시적으로 베이링상태가 된다.\n";
-		text_ += "베이링 상태에서 적에게 근접 공격을 맞으면 데미지를 준다.\n";
-		text_ += "1회용 마법으로 한번 데미지를 주면 보호막은 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_VEILING);
 		break;
 	case SPL_INVISIBLE:
-		text_ += "일시적 투명화할 수 있는 마법. 투명상태에서는 상대에게 들킬 확률이 현저히 줄어든다.\n";
-		text_ += "이미 밀착해있으면 낌새를 눈치채서 따라올 수 있으며 투명을 보는 상대도 존재한다.\n";
-		text_ += "투명상태에서는 P의 소모가 매우 빨라지니 주의해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_INVISIBLE);
 		break;
 	case SPL_HASTE:
-		text_ += "일시적인 가속을 거는 마법. 가속 상태에서는 모든 움직임이 빨라진다.\n";
-		text_ += "연금술로 인한 가속이지만 다른 방법으로 얻는 가속과 중첩되진 않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HASTE);
 		break;
 	case SPL_SILENCE:
-		text_ += "주의의 소음을 없애는 마법. 주변의 소리를 내는 행동을 금지한다.\n";
-		text_ += "마법사용, 권능사용, 두루마리 읽기등이 금지된다. \n";
-		text_ += "소리가 사라져 부자연스럽기때문에 은밀에 오히려 악영향을 준다. \n";
-		text_ += "사용하면 범위안에 효과를 주지만 시간이 지나면 범위가 줄어든다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SILENCE);
 		break;
 	case SPL_SWIFT:
-		text_ += "잠시동안 빠른 이동속도를 가지게 된다.\n";
-		text_ += "이동외의 행동속도에는 영향을 주지 않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SWIFT);
 		break;
 	case SPL_MAGIC_TANMAC:
-		text_ += "영력을 이용해 간단한 탄막을 날리는 기초 요술마법. 플레이어의 쇼트라고 보면 된다.\n";
-		text_ += "무조건 명중하지만 데미지는 약한 편이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MAGIC_TANMAC);
 		break;
 	case SPL_FIRE_BALL:
-		text_ += "화염구를 만들어 날리는 화염계 공격마법.\n";
-		text_ += "적에 부딪히거나 목표에서 터지며 주변에 폭발데미지를 입힌다.\n";
-		text_ += "자신도 가까이 있으면 데미지를 받을 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_BALL);
 		break;
 	case SPL_FIRE_BOLT:
-		text_ += "거대한 화염의 탄환을 발사하는 강력한 화염계 공격마법.\n";
-		text_ += "적을 관통하는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_BOLT);
 		break;
 	case SPL_ICE_BOLT:
-		text_ += "거대한 냉기의 탄환을 발사하는 강력한 냉기계 공격마법.\n";
-		text_ += "적을 관통하는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ICE_BOLT);
 		break;
 	case SPL_VENOM_BOLT:
-		text_ += "강력한 맹독의 탄환을 발사하는 강력한 독속성 공격마법.\n";
-		text_ += "맞은 적은 독에 걸리며 적을 관통하는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_VENOM_BOLT);
 		break;
 	case SPL_CONFUSE_CLOUD:
-		text_ += "악취가 나는 구름의 구슬을 발사한다. 해당지점에서 폭발해서 구름을 만들어낸다.\n";
-		text_ += "구름에 쌓이게되면 혼란에 걸리게된다. 자기자신도 걸릴 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_CLOUD);
 		break;
 	case SPL_POISON_CLOUD:
-		text_ += "시야내 원하는 위치에 독구름 뭉치를 만들어낼 수 있다.\n";
-		text_ += "시야내라면 어디든지 만들어 낼 수 있고 좁은 골목일 경우 넓게 퍼지는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_POISON_CLOUD);
 		break;
 	case SPL_ICE_CLOUD:
-		text_ += "시야내 원하는 위치에 냉기구름 뭉치를 만들어낼 수 있다.\n";
-		text_ += "시야내라면 어디든지 만들어 낼 수 있고 좁은 골목일 경우 넓게 퍼지는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ICE_CLOUD);
 		break;
 	case SPL_SUMMON_BIRD:
-		text_ += "다양한 새들을 소환할 수 있는 소환계 마법.\n";
-		text_ += "파워가 높아질수록 더욱 더 강한 새들을 소환할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_BIRD);
 		break;
 	case SPL_RECALL:
-		text_ += "현재 층에 있는 모든 소환물들을 자신의 주변에 불러들인다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_RECALL);
 		break;
 	case SPL_TELEPORT_OTHER:
-		text_ += "상대방에게 공간이동을 거는 마법. 바로 공간이동 되지 않고 약간의 딜레이가 있다.\n";
-		text_ += "저항할 확률이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TELEPORT_OTHER);
 		break;
 	case SPL_TELEPORT_SELF:
-		text_ += "자신에게 공간이동을 거는 마법. 바로 공간이동 되지 않고 약간의 딜레이가 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TELEPORT_SELF);
 		break;
 	case SPL_WHIRLWIND:
-		text_ += "강한 회오리 바람을 상대위치에 생성시킨다.\n";
-		text_ += "지속적인 데미지를 준다. 시전자인 아야는 이 바람에 면역이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WHIRLWIND);
 		break;
 	case SPL_SUMMON_PENDULUM:
-		text_ += "펜듈럼을 소환한다.\n";
-		text_ += "펜듈럼은 공격하지않지만 소환수로의 공격을 대신 막아준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_PENDULUM);
 		break;
 	case SPL_SUMMON_SEKIBANKI:
-		text_ += "세키반키가 자신의 머리를 띄운다.\n";
-		text_ += "본체가 취약해지므로 본체를 노리자.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_SEKIBANKI);
 		break;
 	case SPL_WATER_CANNON:
-		text_ += "물을 압축하여 발사한다.\n";
-		text_ += "맞은 상대를 밀쳐낼 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WATER_CANNON);
 		break;
 	case SPL_KYOKO_SMITE:
-		text_ += "쿄코의 특수 스킬. 굉음으로 상대에게 인사를 한다\n";
-		text_ += "너무나도 큰 소리에 직접적인 데미지를 받는다.\n";
-		text_ += "어떤 방어도 듣지않으며 아주 짧은 혼란이 걸리기도 한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_KYOKO_SMITE);
 		break;
 	case SPL_SUMMON_OPTION:
-		text_ += "옵션을 소환하는 마법. 옵션은 소환사의 주변을 멤돌면서 시야내의 적을 요격한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_OPTION);
 		break;
 	case SPL_SUMMON_GOLEM:
-		text_ += "마법의 골렘을 소환한다.\n";
-		text_ += "골렘은 사용자의 파워에 따라 위력이 천차만별이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_GOLEM);
 		break;
 	case SPL_HYPNOSIS:
-		text_ += "상대가 인지못할정도의 작은 최면을 걸어서 상대를 자기 의지와 다르게 움직이게 할 수 있다.\n";
-		text_ += "상대는 앞으로 걷고있다고 생각하는 도중에 무의식중에 랜덤한 방향으로 1칸 이동하게 된다.\n";
-		text_ += "이 이동하는 방향에 벽이 있거나 다른 몬스터가 있으면 큰 데미지를 입게된다. 가끔 자신의 타겟을 잃어버린다.\n";
-		text_ += "계단을 내려가는데 계단이 있는줄알고 내려갔을때 계단이 없었을때 받는 정신적 충격과 비슷한 효과이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HYPNOSIS);
 		break;
 	case SPL_MUTE:
-		text_ += "상대를 마법으로 짧은 실어증을 만든다.\n";
-		text_ += "마법에 의한 실어증으로 이는 배우고 있는 마법자체를 잠시동안 잊게 하여 마법을 못쓰게한다.\n";
-		text_ += "상대가 말을 안하고 마법을 쓸 수 있어도 마법에 의한 실어증이므로 이 동안은 마법을 쓸 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MUTE);
 		break;
 	case SPL_SELF_INJURY:
-		text_ += "상대를 자해하게 만든다. 상대의 데미지가 높을수록 큰데미지를 입힌다.\n";
-		text_ += "상대가 강할수록 효과가 좋지만 상대가 강할수록 저항할 확률도 높아지므로 조심해야한다.\n";
-		//text_ += "아군인 상대에게 쓰면 충실한 아군이 자살할 수 있는 부가 효과가 있다.\n";
-		//text_ += "단, 저항하는데 성공하면 아군에서 적으로 변화할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SELF_INJURY);
 		break;
 	case SPL_CHARM:
-		text_ += "상대를 마법으로 일시적인 아군으로 만든다.\n";
-		text_ += "일시적인 아군이 되면 주변의 무리들과 싸우게 된다. 시간이 지나면 다시 적으로 돌아가게 된다.\n";
-		//text_ += "이렇게 일시적 아군인 상태에서 자해마법을 사용하면 자살하게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CHARM);
 		break;
 	case SPL_LASER:
-		text_ += "일직선으로 데미지를 주는 순수 요술마법.\n";
-		text_ += "적을 관통할 수 있으므로 유용하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_LASER);
 		break;
 	case SPL_SPARK:
-		text_ += "강력하고 거대한 빔을 쏘는 마법.\n";
-		text_ += "스파크와 레이저는 로망이다. 탄막은 화력이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SPARK);
 		break;
 	case SPL_SUMMON_UNZAN:
-		text_ += "거대한 운잔을 소환하는 마법.\n";
-		text_ += "마법이라기보단 기본이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN);
 		break;
 	case SPL_SUMMON_UNZAN_PUNCH:
-		text_ += "운잔이 자신의 주먹을 상대 옆에 소환하는 마법.\n";
-		text_ += "주먹에 맞으면 매우 아프다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN_PUNCH);
 		break;
 	case SPL_SUMMON_ZOMBIE_FAIRY:
-		text_ += "상대 주변에 좀비페어리를 소환하는 마법.\n";
-		text_ += "굉장히 많은 좀비페어리들이 소환되므로 귀찮다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ZOMBIE_FAIRY);
 		break;
 	case SPL_SUMMON_UFO:
-		text_ += "미확인 비행물체를 소환하는 마법.\n";
-		text_ += "벤토라는 저절로 색깔을 바꿔가면서 다른 속성 다른 저항으로 변화된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UFO);
 		break;
 	case SPL_HASTE_OTHER:
-		text_ += "아군을 가속시키는 마법.\n";
-		text_ += "근처의 아군에 가속을 걸어준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HASTE_OTHER);
 		break;
 	case SPL_HEAL_OTHER:
-		text_ += "아군을 회복시키는 마법.\n";
-		text_ += "근처의 아군을 회복시킨다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HEAL_OTHER);
 		break;
 	case SPL_MIND_BENDING:
-		text_ += "파장을 담은 탄막을 발사하여 맞은 상대의 파장을 굽힌다.\n";
-		text_ += "자체에도 데미지가 있고 저항에 실패하면 상대의 속도를 낮추는 우수한 기술이지만\n";
-		text_ += "파워가 올라도 데미지 상승폭이 적고 슬로우는 저항할 가능성이 있으며\n";
-		text_ += "다른 디버프와 달리 상대가 회피할 수 있다는 단점이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MIND_BENDING);
 		break;
 	case SPL_STONE_PUNCH:
-		text_ += "맨손에 바위의 힘을 담는 연금술 마법.\n";
-		text_ += "다음 1번의 공격에 한해서 맨손에 강력한 힘을 담아서 데미지를 증가시킨다.\n";
-		text_ += "무기를 끼고 있을때는 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STONE_PUNCH);
 		break;
-	case SPL_STONE_ARROW: 
-		text_ += "바위로 만들어진 탄막.\n";
-		text_ += "맞으면 아프지만 멀리 못날라가고 움직임이 직선적이라 피하기가 쉽다.\n";
+	case SPL_STONE_ARROW:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW);
 		break;
 	case SPL_STONE_TRAP:
-		text_ += "일정시간 3*3 바닥에 밟으면 아픈 뾰족한 바위를 설치한다.\n";
-		text_ += "그 위를 지나가면 피아불문 작은 데미지를 입는다. 그러나 날고 있으면 무시할 수 있다.\n";
-		text_ += "파워가 높아질수록 더 많이 설치 할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP);
 		break;
 	case SPL_STONE_UPLIFT:
-		text_ += "원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n";
-		text_ += "뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n";
-		text_ += "파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STONE_UPLIFT);
 		break;
 	case SPL_KANAME_DRILL:
-		text_ += "단단한 요석을 직선으로 날린다.\n";
-		text_ += "요석은 타겟에 맞으면 회전하면서 데미지를 증가시킨다.\n";
-		text_ += "높은 데미지를 줄 순 있지만 적을 관통하진 못한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL);
 		break;
 	case SPL_DIAMOND_HARDNESS:
-		text_ += "연금술의 힘으로 대지의 단단함을 몸에 두르는 기술.\n";
-		text_ += "잠깐동안 약간의 방어력을 얻는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DIAMOND_HARDNESS);
 		break;
 	case SPL_POISON_SKIN:
-		text_ += "자신의 몸에서 독기를 뿜어나오게 한다.\n";
-		text_ += "방어적인 효과는 없지만 시전시간중에 근접한 모든 적에게 독을 건다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_POISON_SKIN);
 		break;
 	case SPL_STONE_FORM:
-		text_ += "잠시간 모든 고통에서 해방되는 무념무상의 상태가 된다.\n";
-		text_ += "모든 데미지를 어느정도 반감하고 맨손 데미지가 강력해지지만 이동속도 또한 느려진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STONE_FORM);
 		break;
 	case SPL_KNIFE_COLLECT:
-		text_ += "지속시간중에는 던진 탄막이 자동으로 회수하는 편리한 기술.\n";
-		text_ += "명중 또한 소량 오른다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_KNIFE_COLLECT);
 		break;
 	case SPL_FLAN_BUSIN:
-		text_ += "플랑드르의 분신을 3체 만들어내는 스펠.\n";
-		text_ += "분신들은 본체보다 약하지만 폭파스펠을 똑같이 쓸 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FLAN_BUSIN);
 		break;
 	case SPL_BURST:
-		text_ += "적을 원거리에서 터트려버린다. 저항할수도 회피할수도 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BURST);
 		break;
 	case SPL_SUICIDE_BOMB:
-		text_ += "공격할시 자동으로 자폭한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUICIDE_BOMB);
 		break;
 	case SPL_RABBIT_HORN:
-		text_ += "토끼가 큰 나팔을 이용하여 아군을 소집한다.\n";
-		text_ += "사용직후 잠시동안 죽림의 몬스터 리젠율이 오른다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_RABBIT_HORN);
 		break;
 	case SPL_SUMMON_LESSOR_DEMON:
-		text_ += "마계의 약한 마족을 소환한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_LESSOR_DEMON);
 		break;
 	case SPL_LUMINUS_STRIKE:
-		text_ += "그레이즈 되지않는한 필중이며 빠르고 강력한 무속성 구체를 발사한다.\n";
-		text_ += "일정 거리 이상의 적에게 명중시 작은 폭발이 일어나서 주변에 약한 광역데미지를 준다.\n";
-		text_ += "그러나 거리가 멀어진다고 단일 타겟의 데미지는 증가하진않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_LUMINUS_STRIKE);
 		break;
 	case SPL_FIRE_STORM:
-		text_ += "선택한 위치에서 거대한 화염 폭풍이 일어난다.\n";
-		text_ += "폭발한 범위 내에선 잠시간 화염구름이 남는다.\n";
-		text_ += "절반 정도의 물리데미지가 있어서 화염저항이 높은 상대에도 잘 먹힌다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_STORM);
 		break;
-	case SPL_BLIZZARD: 
-		text_ += "선택한 위치에서 강력한 얼음 가시가 떨어지도록 한다.\n";
-		text_ += "순간 데미지는 낮지만 지속적으로 맞출 경우 엄청난 데미지를 주며 물리데미지도 겸비한다.\n";
-		text_ += "사용시 해당 위치에 있는 모든 구름을 걷어낸다.\n";
+	case SPL_BLIZZARD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BLIZZARD);
 		break;
-	case SPL_PERFERT_FREEZE: 
-		text_ += "화면상의 모든 적에게 강력한 냉기를 방출하는 마법.\n";
-		text_ += "사용한 적들에게 강력한 빙결 상태이상을 부여한다.\n";
-		text_ += "다만 순수 냉기 속성이므로 냉기저항이 있는 적에겐 데미지가 거의 안들어간다.\n";
+	case SPL_PERFERT_FREEZE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE);
 		break;
 	case SPL_DRAW_POWER:
-		text_ += "시야내의 땅에 떨어져있는 모든 P템을 끌어모아서 P를 회복하는 마법.\n";
-		text_ += "탑뷰방식에서 상단은 어디인가. 애초에 존재하긴 하는걸까?\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DRAW_POWER);
 		break;
 	case SPL_ANIMAL_CHANGE:
-		text_ += "상대 한명을 영구히 동물로 만들어버리는 무서운 마법. 물론 동물에겐 쓸 수 없다.\n";
-		text_ += "동물이 되면 강제로 자신의 동료가 된다. 또한 변신성공시 경험치도 그대로 받는다.\n";
-		text_ += "동물이 된 동료는 영구적인 아군이지만 계단을 탈 수 없다.\n";
-		text_ += "상대의 세기에 따라 더욱 강력한 동물로 변한다. 성공시키는건 어렵지만 성공시 효과는 탁월.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ANIMAL_CHANGE);
 		break;
 	case SPL_FIELD_VIOLET:
-		text_ += "파장을 조종하여 선택한 범위에 파이올렛 파장을 뿌린다.\n";
-		text_ += "파장안에 든 모든 캐릭터는 적과 아군을 분간하지못하고 광기에 휩싸인다.\n";
-		text_ += "이 상태로 죽은 적이라도 제대로 경험치를 받는다. 아군이나 플레이어도 광기에 휩싸일 수 있으니 조심.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIELD_VIOLET);
 		break;
-	case SPL_TIME_PARADOX: 				
-		text_ += "탄막의 도플갱어를 만들어내서 2번 공격한다.\n";
-		text_ += "사용후 패러독스 상태가 되면 딱 1번에 한해서 사용한 탄막 혹은 탄막마법이 2번 나간다.\n";
-		text_ += "스파크나 화염폭풍같은 탄막이라고 보기 힘든 기술엔 적용되지 않는다.\n";
-		text_ += "2번째 탄막은 탄막의 소모도 마나의 소모도 없으니 안심.\n";
+	case SPL_TIME_PARADOX:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX);
 		break;
-	case SPL_PRIVATE_SQ: 
-		text_ += "주변의 시간을 느리게하여 상대적인 가속효과를 얻는 마법.\n";
-		text_ += "시야 내의 모든 적에게 슬로우를 건다. 저항할 수 있다.\n";
+	case SPL_PRIVATE_SQ:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ);
 		break;
-	case SPL_CONTROLED_BLINK: 
-		text_ += "원하는 위치로 정밀하게 순간이동할 수 있는 시공마법의 꽃.\n";
-		text_ += "사용후 높은 시공부작용을 받는다.\n";
+	case SPL_CONTROLED_BLINK:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK);
 		break;
 	case SPL_THE_WORLD:
-		text_ += "시공마법의 정점에 오른 자만이 쓸 수 있다는 궁극의 시공마법.\n";
-		text_ += "잠시간 모든 시간을 멈추고 일방적으로 행동할 수 있다. 공격도 가능하다.\n";
-		text_ += "어마어마한 시공부작용을 받는다. 연속으로 쓰는건 무리가 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD);
 		break;
 	case SPL_HASTE_ALL:
-		text_ += "시야 내의 아군들에게 가속을 전부 부여한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HASTE_ALL);
 		break;
 	case SPL_HEAL_ALL:
-		text_ += "시야 내의 아군들을 모두 회복시킨다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HEAL_ALL);
 		break;
 	case SPL_MOON_COMMUNICATION:
-		text_ += "전파를 통신하여 아군 달토끼들을 불러모은다.\n";
-		text_ += "사용중엔 움직일 수 없지만 천천히 아군들이 집결된다. 소환된 달토끼는 가속 버프를 받는다.\n";
-		text_ += "이 소환된 달토끼는 경험치는 주지않지만 소환된 몬스터가 아니기때문에 시전자가 죽어도 사라지지않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MOON_COMMUNICATION);
 		break;
 	case SPL_MOON_GUN:
-		text_ += "달의 기술을 집결하여 만든 총을 쏜다.\n";
-		text_ += "달의 하이테크치고는 겉모양은 별거 아닌거처럼 보인다.\n";
-		text_ += "짜증나는 원시적 공격이로군!\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MOON_GUN);
 		break;
 	case SPL_SUMMON_DREAM:
-		text_ += "꿈을 구현화시켜 다양한 장소에서의 몬스터들을 소환하는 맥 특유의 기술.\n";
-		text_ += "특정 장소에서 나오는 몬스터들이 한번에 여럿 소환된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_DREAM);
 		break;
 	case SPL_MANA_DRAIN:
-		text_ += "악몽을 보여줘서 시야내의 적의 영력을 흡수하는 스마이트형 공격.\n";
-		text_ += "다른 데미지를 받진않지만 영력을 빠른 속도로 고갈시킨다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MANA_DRAIN);
 		break;
 	case SPL_INSANE:
-		text_ += "대상을 미치게 만들어버린다. 저항하지 못한 상대는 광기에 빠진다.\n";
-		text_ += "마법저항으로 저항할 수 있으며 혼란저항으론 완벽하게 방지가 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_INSANE);
 		break;
 	case SPL_BLOOD_SMITE:
-		text_ += "대상의 최대 체력에 비례한 저항불가능한 스마이트형 공격.\n";
-		text_ += "최대체력이 높을수록 데미지가 커지고 데미지 반감이 되지 않으므로 전사에게도 위험하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BLOOD_SMITE);
 		break;
 	case SPL_CALL_HOUND:
-		text_ += "주변의 개들을 끌어모으는 울부짖음을 외친다.\n";
-		text_ += "모인 개들도 다시 동료를 끌어 모을 수 있으니 되도록 빠르게 처리해야한다.\n";
-		text_ += "모여든 개들을 모두 처리하더라도 얻을 수 있는 총 경험치는 똑같다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CALL_HOUND);
 		break;
 	case SPL_CANNON:
-		text_ += "음양옥의 기운을 담은 탄막을 발사하여 폭발후 회피불가능한 데미지를 준다.\n";
-		text_ += "이 공격은 방어력을 어느정도 관통한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CANNON);
 		break;
 	case SPL_DOLLS_WAR:
-		text_ += "근접과 공격에 강력한 상해인형과 원거리와 방어에 특화된 봉래인형을 같이 소환한다.\n";
-		text_ += "상해인형은 빠르게 적을 공격하고 봉래인형은 적들의 어그로를 효과적으로 끌어모은다.\n";
-		text_ += "공격뿐만 아니라 소환사가 취약한 소환술의 약점을 확실하게 보완하는 공방일체 소환술.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DOLLS_WAR);
 		break;
 	case SPL_FAKE_DOLLS_WAR:
-		text_ += "상해인형이나 봉래인형을 소환한다.\n";
-		text_ += "모조기때문에 원조의 인형보단 훨씬 약하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FAKE_DOLLS_WAR);
 		break;
 	case SPL_FIRE_SPREAD:
-		text_ += "전방에 부채꼴모양으로 화염의 구름을 흩뿌린다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_FIRE_SPREAD);
 		break;
 	case SPL_STASIS:
-		text_ += "대상의 전이를 방해한다. 일정시간 전이불가 디버프를 건다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_STASIS);
 		break;
 	case SPL_JUMP_ATTACK:
-		text_ += "거리가 떨어져있는 적에게 순식간에 접근한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_JUMP_ATTACK);
 		break;
-	case SPL_ALERT_NOISE: 
-		text_ += "주변의 몬스터들을 깨우는 아주 큰 소음을 낸다.\n";
+	case SPL_ALERT_NOISE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ALERT_NOISE);
 		break;
 	case SPL_SUMMON_NAMAZ:
-		text_ += "해당 위치에 거대한 나마즈를 낙하시킨다.\n";
-		text_ += "낙하엔 일정시간이 걸리며 떨어진 위치에 큰 폭발이 일어난다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ);
 		break;
 	case SPL_SCHEMA_TANMAC:
-		text_ += "경계 저편에서 날라오는 탄막.\n";
-		text_ += "높은 레벨에서의 스키마는 더욱 강력한 탄막을 발사한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC);
 		break;
 	case SPL_CHANGE:
-		text_ += "너구리의 특기인 둔갑술. 주변에 무엇이든지 둔갑할 수 있다.\n";
-		text_ += "사용하면 근처에 보이는 가장 강한 몬스터로 둔갑한다. 같은 너구리로는 둔갑하지않는다.\n";
-		text_ += "둔갑하면 잠시간 그 몬스터의 능력치와 마법을 쓸 수 있다. 다만 둔갑되도 소환술은 쓰지못한다.\n";
-		text_ += "일정시간이 지나면 다시 원래 모습으로 돌아오고 죽여도 본래의 경험치를 준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CHANGE);
 		break;
 	case SPL_UNLUCK:
-		text_ += "풍수를 통하여 주변의 운기를 조작한다.\n";
-		text_ += "주변의 운기를 내려 지정한 상대의 불행을 초래하게 한다.\n";
-		text_ += "운기가 내려간 적은 흉, 대흉, 불멸의 3가지 단계를 거치게 되며 \n";
-		text_ += "공격이 잘 맞지않게되고, 피하기 힘들어지며 좋은 아이템을 얻는 운이 내려가게 된다.\n";
-		text_ += "대흉이나 불멸은 가끔씩 단순히 불운하단 정도론 넘어가기 힘든만큼의 불행이 찾아온다.\n";
-		text_ += "최대 데미지로 공격을 맞는다던지, 하늘에서 UFO가 떨어진다던지...\n";
-		text_ += "하늘에서 UFO라고? 농담인게 당연하잖아!\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UNLUCK);
 		break;	
 	case SPL_THUNDER:
-		text_ += "하늘에서 벼락을 떨어뜨리는 마법.\n";
-		text_ += "지정한 위치에서 3*3의 크기로 강력한 전기공격을 가한다.\n";
-		text_ += "번개는 종잡을 수 없기 때문에 꼭 3*3의 범위에 모두 직격한다는 보장은 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THUNDER);
 		break;
 	case SPL_AIR_STRIKE:
-		text_ += "빠른 대기의 탄환을 적에게 날리는 마법.\n";
-		text_ += "적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n";
-		text_ += "다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE);
 		break;
 	case SPL_SUMMON_RACOON:
-		text_ += "다수의 너구리 부하를 한꺼번에 소환해내는 마미조의 특기.\n";
-		text_ += "소환된 너구리는 강하지않지만 너구리들도 둔갑을 하기때문에 놔두면 귀찮은 일이 될지 모른다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON);
 		break;
 	case SPL_SUMMON_YOUKAI:
-		text_ += "다양한 강력한 요괴를 불러내는 마법.\n";
-		text_ += "오니, 제등요괴, 설녀가 소환된다. 한번에 하나씩 소환이 가능하다\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI);
 		break;
 	case SPL_MAMIZO_EVADE:
-		text_ += "공격을 받으면 자동으로 지장으로 변하여 공격을 피하는 마미조의 둔갑술.\n";
-		text_ += "이 기술로 인해서 마미조를 공격하기란 여간 어려워보인다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MAMIZO_EVADE);
 		break;
 	case SPL_MACRO_BURST:
-		text_ += "선택한 앞쪽 2칸 범위로 강력한 선풍의 일격을 날리면서 반대방향으로 탄력을 받아 날라간다.\n";
-		text_ += "바람이 강타한 위치엔 작은 회오리 바람이 생겨서 지속적으로 적에게 데미지를 입힌다.\n";
-		text_ += "순간적인 이동이 가능하단 점에서 공격기가 아니라 이동기로도 사용이 가능하다.\n";
-		text_ += "만약 이동할 위치가 부족하면 마법을 사용할 수 없다.\n";
-		text_ += "이 마법은 선택한 반대 방향으로 강제로 이동된다는 것에 주의하자.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MACRO_BURST);
 		break;
 	case SPL_SHATTER:
-		text_ += "거대한 지진을 일으키는 대지술의 궁극 마법.\n";
-		text_ += "거대한 소음과 시야내의 모든 적에게 데미지를 입히고 지형을 파괴한다.\n";
-		text_ += "그러나 날고 있는 적에겐 1/3의 데미지밖에 주지 못한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SHATTER);
 		break;
 	case SPL_SUMMON_YOSHIKA:
-		text_ += "강시인 요시카를 불러오는 청아의 특기 술법.\n";
-		text_ += "요시카가 죽더라도 부활시킬 수 있는 청아의 주력 마법이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA);
 		break;
 	case SPL_NESY_CANNON:
-		text_ += "네시에 탑재되어있는 강력한 물대포.\n";
-		text_ += "너무 강력한 수압으로 인해 적을 날려버려 조준을 방해하는 단점을 개선하면서도\n";
-		text_ += "위력은 낮추지않은 캇파의 기술력이 돋보이는 기술이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON);
 		break;
 	case SPL_MERMAID_SONG:
-		text_ += "와카사기히메가 자랑하는 애창곡.\n";
-		text_ += "인어의 노래엔 특수한 효과가 있어서 그 아름다운 노래에 자동으로 발이 끌려가게 된다.\n";
-		text_ += "노래를 들을수록 1칸씩 와카사기히메에게 이끌리듯이 걸어가지만 깊은물에 빠지진않는다.\n";
-		text_ += "마법저항으론 막을 수 없지만 혼란저항이 있다면 인어의 노래의 영향을 받지않게된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG);
 		break;
 	case SPL_EMERALD_CITY:
-		text_ += "연금술을 이용한 에메랄드의 벽을 만들어내는 마법.\n";
-		text_ += "주변 8타일에 강한 물리데미지를 입힐 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY);
 		break;
 	case SPL_AUTUMN_BLADE:
-		text_ += "연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n";
-		text_ += "사용중엔 모든 근접공격 데미지가 3배가 되는 심플하면서 강력한 마법.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE);
 		break;
 	case SPL_PHILOSOPHERS_STONE:
-		text_ += "연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n";
-		text_ += "현자의 돌이 시전되고 있는 동안엔 다양한 학파의 마법을 아주 적은 영력만으로 난사할 수 있다.\n";
-		text_ += "화염구, 워터캐논, 질풍선, 에메랄드시티, 지반융기 마법을 연금술에 비례한 파워로 사용한다.\n";
-		text_ += "시전후 a를 통한 능력사용으로 속성 마법을 사용가능하다.\n";
-		text_ += "이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE);
 		break;
 	case SPL_SUMMON_ANCHOR:
-		text_ += "목표로 한 적의 바로 근처에 거대한 닻을 떨어뜨린다.\n";
-		text_ += "닻 자체에는 데미지나 공격기능이 없지만 닻에 꽂힌 상대는 움직임을 봉인당한다.\n";
-		text_ += "움직이기위해서는 먼저 닻을 파괴하던지 닻이 자연스럽게 사라질때까지 기다려야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR);
 		break;
 	case SPL_REAPER_MET:
-		text_ += "멀리 있는 상대와 자신의 거리를 조절하여 순식간에 눈 앞으로 끌어당긴다.\n";
-		text_ += "끌어당김과 동시에 상대의 발을 묶기 때문에 이동속도 또한 일정시간동안 감소한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET);
 		break;
 	case SPL_AFTERLITE:
-		text_ += "거리안의 지정한 대상의 남은 체력을 문답무용으로 절반 깎아 버리는 무시무시한 기술.\n";
-		text_ += "이 기술에 저항하는건 불가능하지만 사용 후에는 딜레이가 생기므로 연속으로 사용할 순 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE);
 		break;
 	case SPL_PRISM_CALL:
-		text_ += "프리즘리버 자매가 바로 한자리에 집합하는 마법. 아군 소환을 하는 그 이상의 의미는 없다.\n";
-		text_ += "프리즘리버는 언제나 3명이 모여 합주를 할 준비가 되어있다!\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_PRISM_CALL);
 		break;
 	case SPL_PSYCHOKINESIS:
-		text_ += "염동력을 이용하여 지정한 상대를 튕겨내면서 데미지를 준다\n";
-		text_ += "선택한 대상을 무작위한 방향으로 날려버리면서 물리 데미지를 준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_PSYCHOKINESIS);
 		break;
 	case SPL_SUMMON_TRASH:
-		text_ += "주변의 쓰레기들을 모아서 하늘에 부유시키는 기술.\n";
-		text_ += "쓰레기들은 제자리에 떠다니면서 움직임을 방해한다. 직접적인 공격 능력은 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_TRASH);
 		break;
 	case SPL_TRASH_RUSH:
-		text_ += "어번 사이코키네시스로 떠오른 쓰레기 더미들을 지정한 상대에게 모두 투척한다.\n";
-		text_ += "쓰레기들은 경로상에 데미지를 줌과 동시에 그 자리에 유지하며 이동을 추가적으로 방해한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TRASH_RUSH);
 		break;
 	case SPL_KOKORO_CHANGE:
-		text_ += "코코로가 룰렛을 통하여 가면의 색을 결정한다.\n";
-		text_ += "가면의 색에 따라서 코코로의 속성이 결정된다. 상대 유리한 속성이 선택될 가능성이 높아진다.\n";
-		text_ += "속성이 정해진 후엔 같이 떠다니는 가면이 파괴되면 다시 원상태로 돌아온다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_KOKORO_CHANGE);
 		break;
 	case SPL_THUNDER_BOLT:
-		text_ += "거대한 번개의 탄환을 발사하는 강력한 번개계열 공격마법.\n";
-		text_ += "적을 관통하는 특징이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THUNDER_BOLT);
 		break;
 	case SPL_SANTUARY:
-		text_ += "사용시 넓은 범위에 성역을 펼친다. 이 성역안에선 어느 데미지도 무효로 되서 입지 않는다.\n";
-		text_ += "시간이 흐를수록 성역의 범위는 점차 좁아진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SANTUARY);
 		break;
 	case SPL_MISTIA_SONG:
-		text_ += "밤참새의 노랫소리로 눈을 멀게 한다. 시야에 들어올때 이 노래를 들으면 야맹증이 걸리게 된다.\n";
-		text_ += "야맹증에 걸리면 눈이 멀어서 시야가 급격하게 줄어든다. 시간이 지나면 원래대로 돌아온다.\n";
-		text_ += "투명보기가 있다면 야맹증에 걸리지않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MISTIA_SONG);
 		break;
 	case SPL_THROW_DISH:
-		text_ += "탄막으로 접시를 던지는 심플한 기술. 상당히 돈이 필요한 탄막으로 보인다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_DISH);
 		break;
 	case SPL_MESS_CONFUSION:
-		text_ += "시야내의 모든 적에게 혼란을 시도하는 마법. 각자마다 마법저항을 체크한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MESS_CONFUSION);
 		break;
 	case SPL_SLEEP_SMITE:
-		text_ += "시야내의 적에게 잠을 유발하는 마법. 데미지는 없지만 저항할 수 없다.\n";
-		text_ += "또한 장애물을 무시하고 직접 시전이 가능하다.\n";
-		text_ += "잠에 빠지면 일정 턴 무방비상태가 되며 공격을 받으면 큰 데미지와 함께 깨어난다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SLEEP_SMITE);
 		break;
 	case SPL_TARGET_ELEC:
-		text_ += "원하는 상대에게 약한 전류를 흐르게 만드는 공격 마법.\n";
-		text_ += "일반적인 마법과 다르게, 지정한 대상에게 정확하게 전류를 흘려보낸다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TARGET_ELEC);
 		break;
 	case SPL_SUMMON_ELEC_BALL:
-		text_ += "주변에 떠다니는 전기 구슬을 만들어내는 마법.\n";
-		text_ += "떠다니는 전기 구슬은 당장 데미지를 줄 순 없고 주변을 떠돌아 다닌다.\n";
-		text_ += "몇 턴이 지나게되면 전기구슬은 주변의 적에게 강력한 전류를 흘려보내고 사라진다.\n";
-		text_ += "전류를 흘려보내기전에 적에게 공격받아서 사라지거나 대상을 정할 수 없는 단점이 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ELEC_BALL);
 		break;
 	case SPL_DREAM_CALL:
-		text_ += "최종 형태가 된 도레미의 궁극의 기술.\n";
-		text_ += "주변의 꿈의 주민들을 적의 주변에 순간이동시켜 둘러쌓이게하는 마법\n";
-		text_ += "멀리있는 적이 있어도 순식간에 전송시킬 수 있다. 특히 강한 적을 더 보내는 경향이 있다.\n";
-		text_ += "당연한 얘기지만 주변에 몬스터가 없으면 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DREAM_CALL);
 		break;
 	case SPL_HYPER_BEAM:
-		text_ += "일직선으로 관통하는 강력한 빔을 발사한다.\n";
-		text_ += "왜 빔이 나가는건진 모르겠지만 로봇처럼 생겼으니까 빔을 붙여봤다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HYPER_BEAM);
 		break;
 	case SPL_KAGUYA_SPELL:
-		text_ += "카구야가 낸 다섯개의 난제. \n";
-		text_ += "상대의 주변에 고정된 5개의 난제가 소환되어 주변의 적을 요격한다.\n";
-		text_ += "각각의 난제가 쓰는 공격은 강하진않지만 다양한 속성의 공격을 하며\n";
-		text_ += "난제 자체는 파괴되지않고 무적이므로 시전자인 카구야를 우선적으로 공격해야 멈출 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_KAGUYA_SPELL);
 		break;
 	case SPL_THROW_SWORD:
-		text_ += "검은 꼭 휘둘러야된다는 고정관념을 깨트려 거대한 장검을 던지는 기술.\n";
-		text_ += "이런 거대한 검을 던져서 맞으면 아플것이 분명하다.\n";
-		text_ += "가까이 있으면 던지진 못하나 가까이서 휘두른 검으로 맞던 멀리서 던진 검에 맞건 비슷할 듯 싶다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_SWORD);
 		break;
 	case SPL_THROW_KNIFE:
-		text_ += "은제 나이프를 탄막으로서 던지는 단순한 기술.\n";
-		text_ += "평범한 탄막과 다를바가 없지만 날이 서있고 사용자의 기술이 붙어서 상당한 위력을 가지게 되었다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_KNIFE);
 		break;
 	case SPL_THROW_PLAYER:
-		text_ += "단지 적을 잡아서 던지는 심플한 기술. 그러나 오니의 근력이 붙으면서 그 어떤 기술보다 무서워졌다.\n";
-		text_ += "이 기술은 방어도, 회피도, 방패로도 막을 수 없다. 때문에 고정적으로 아주 큰 데미지를 받게 된다.\n";
-		text_ += "사용하기위해선 딱 달라붙어있어야 하며 던지는 위치는 무작위다. 어딘가의 강철지옥의 거인이 썼다고 한다 \n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_PLAYER);
 		break;
 	case SPL_THROW_AMULET:
-		text_ += "요괴를 퇴치하는 부적을 던진다. 물론 요괴가 아니더라도 효과가 있다.\n";
-		text_ += "단순히 던져도 저절로 적에게 호밍되서 날라간다. 피하는게 쉽지않다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET);
 		break;
 	case SPL_WARP_KICK:
-		text_ += "레이무가 틈새를 이용해서 적의 옆으로 순식간에 날라가서 차버린다.\n";
-		text_ += "멀어져도 방심할 수 없는 이유중 하나. 생각보다 발차기가 아프다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK);
 		break;
 	case SPL_REIMU_BARRIER:
-		text_ += "레이무가 잠시 결계를 고정시켜서 상대를 도망가지 못하게 막는다.\n";
-		text_ += "결계가 고정된 상태에서 결계 밖으로 나갈 수 없게된다. \n";
-		text_ += "기본적으로 예방법은 없지만 지속시간이 짧으며 한번 사용하면 당분간은 사용할 수 없는 듯하다. \n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER);
 		if (you.god == GT_YUKARI) {
-			text_ += "단, 유카리라면 이 주문을 잘 알고있어서 사전에 막아줄 수 있을듯하다.\n";
+			oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI);
 		}
 		break;
 	default:
-		text_ += "설명이 존재하지 않는 마법.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;
 	}
-	text_ += "\n";
+	oss << "\n";
 
 	if ((SpellSchool(spell, 0) == SKT_ALCHEMY ||
 		SpellSchool(spell, 1) == SKT_ALCHEMY ||
 		SpellSchool(spell, 2) == SKT_ALCHEMY)
 		&& SpellFlagCheck(spell, S_FLAG_BUF))
 	{
-		text_ += "이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n";
-		text_ += "다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY);
 	}
 
 	if (SpellFlagCheck(spell, S_FLAG_SUMMON))
 	{
 		if (GetSummonMaxNumber(spell) > 0)
 		{
-			char c_temp[128];
-			sprintf_s(c_temp, 128, "이 마법은 최대 %d마리까지 소환수를 소환할 수 있다.\n", GetSummonMaxNumber(spell));
-			text_ += c_temp;
+			oss << LocalzationManager::formatString(LOC_SYSTEM_SPL_DESCRIBE_SUMMONING, PlaseHolderHelper(to_string(GetSummonMaxNumber(spell))));
 		}
 	}
 	if (!SpellFlagCheck(spell, S_FLAG_SPEAK))
 	{
-		text_ += "이 마법은 침묵 상태에서도 사용이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CAN_USE_SILIENCE);
 	}
 
-	text_ += "\n\n";
+	oss << "\n\n";
 
-	text_ += '0'+SpellLevel(spell);
-	text_ += "레벨     학파: ";
-	text_ += GetSpellSchoolString(spell);
-	text_ += "\n";
-	text_ += "소음: ";
+	oss << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaseHolderHelper(to_string(SpellLevel(spell))));
+	oss << "     "
+	oss << LocalzationManager::locString(LOC_SYSTEM_SCHOOL) + ": ";
+	oss << GetSpellSchoolString(spell);
+	oss << "\n";
+	oss << LocalzationManager::locString(LOC_SYSTEM_NOISE) << ": ";
 	switch (SpellNoise(spell)) {
 	case 0:
-		text_ += "없음";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_NONE);
 		break;
 	case 4:
-		text_ += "작음";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_QUIET);
 		break;
 	case 8:
-		text_ += "보통";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_MODERATE);
 		break;
 	case 12:
-		text_ += "큼";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_LOUD);
 		break;
 	case 16:
-		text_ += "굉장함";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_VERY_LOUD);
 		break;
 	case 24:
-		text_ += "소음공해";
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOISE_DEAFENING);
 		break;
 	}
-	text_ += "\n";
+	oss << "\n";
 	if (int length_ = SpellLength(spell)) {
-		char c_temp[128];
-		sprintf_s(c_temp, 128, "사거리: %d칸", length_);
-		text_ += c_temp;
+		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILES): LocalzationManager::locString(LOC_SYSTEM_GREED));
 	}
-	text_ += "\n";
-	return text_;
+	oss << "\n";
+	return oss.str();
 }
 
 string GetSkillInfor(skill_list skill)
 {
-	string text_ = SkillString(skill);
-	text_ += "\n\n";
+	ostringstream oss;
+	oss << SkillString(skill) << "\n\n";
 	switch(skill)
-	{	
+	{
 	case SKL_NONE:
-		text_ += "존재하지 않는 능력이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_NONE);
 		break;
 	case SKL_KANAKO_1:
-		text_ += "카나코님의 힘을 구현화하여 상대에게 순간적인 돌진을 할 수 있게된다.\n";
-		text_ += "자신의 근접공격력, 신앙심과 거리에 비례해서 데미지가 들어가며\n";
-		text_ += "사용후 이동속도가 느려지는 버프를 받게된다.\n";
-		text_ += "이 버프중엔 건신초래돌을 추가적으로 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KANAKO_1);
 		break;
 	case SKL_KANAKO_2:
-		text_ += "카나코님의 기둥을 땅에 꽂는다.\n";
-		text_ += "기둥은 캐릭터들의 이동을 막으며 신앙심에 비례한 체력을 가지게 된다.\n";
-		text_ += "다만 기둥은 적이던 아군이건 원거리 공격을 맞지않고 통과시킨다.\n";
-		text_ += "또한 신자는 이 기둥 옆에 있을때는 약간의 데미지증가 버프를 받게 된다.\n";
-		text_ += "기둥은 한번에 여러개를 꽂을 수 있으나 버프는 중첩되지않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KANAKO_2);
 		break;
 	case SKL_KANAKO_3:
-		text_ += "카나코님의 바람을 구현화하여 무기에 휘감게 된다.\n";
-		text_ += "이때 하는 공격은 바람의 힘을 받아 넓은 범위를 공격할 수 있게된다.\n";
-		text_ += "근접 공격은 주변 8방향의 모든 적을 한번에 공격하고 원거리 공격은 모든 적을 관통하게된다.\n";
-		text_ += "신앙심에 비례하여 지속시간이 늘어나며 공격력은 늘어나지 않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KANAKO_3);
 		break;
 	case SKL_GRAZE:
-		text_ += "그레이즈 상태가 된다. 그레이즈 상태에선 모든 원거리 탄막을 회피할 확률이 생긴다.\n";
-		text_ += "틱틱틱 소리는 미지원이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_GRAZE);
 		break;
 	case SKL_GRAZE_OFF:
-		text_ += "그레이즈 상태를 없앤다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_GRAZE_OFF);
 		break;
 	case SKL_LEVITATION:
-		text_ += "일시적인 비행 상태가 된다. 깊은물같은 지형을 통과할 수 있게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LEVITATION);
 		break;
 	case SKL_LEVITATION_OFF:
-		text_ += "비행 상태를 없앤다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF);
 		break;
 	case SKL_INVISIBLE:
-		text_ += "일시적 투명화할 수 있는 능력. 투명상태에서는 상대에게 들킬 확률이 현저히 줄어든다.\n";
-		text_ += "이미 밀착해있으면 낌새를 눈치채서 따라올 수 있으며 투명을 보는 상대도 존재한다.\n";
-		text_ += "또 투명상태에서는 P의 소모가 매우 빨라지니 주의해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE);
 		break;
 	case SKL_INVISIBLE_OFF:
-		text_ += "투명 상태를 없앤다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF);
 		break;
 	case SKL_EIRIN_0:
-		text_ += "당신은 가지고 있는 물약을 던질 수 있다.\n";
-		text_ += "던진 위치엔 3*3크기로 구름이 생성된다. 구름의 종류는 물약의 종류에따라 정해진다.\n";
-		text_ += "이로운 물약은 던져도 연기구름만 생긴다. 해로운 물약을 던져야 강력한 구름이 나온다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0);
 		break;
 	case SKL_EIRIN_1:
-		text_ += "에이린에게 몸을 맡겨 원하는대로 몸을 개조한다.\n";
-		text_ += "원하는 스탯을 선택하면 그 외의 스탯이 모두 원하는 스탯으로 반영구적으로 옮겨진다.\n";
-		text_ += "옮겨지는 수치는 신앙심에 따라 2~5로 유동적으로 변하며 언제라도 다시 스탯을 옮길 수 있다.\n";
-		text_ += "중첩은 되지않는다. 한번 스탯을 선택하면 다시 개조하기전엔 계속 효과가 이어진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1);
 		break;
 	case SKL_EIRIN_2:
-		text_ += "높은 신앙심과 파워1칸을 소모하여 순간적으로 체력을 대부분 채워주는 에이린의 궁극 권능.\n";
-		text_ += "효과는 강력하지만 사용후 일정시간이 지나면 회복한 수치만큼 그대로 부작용 데미지를 받게된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2);
 		break;
 	case SKL_BYAKUREN_1:
-		text_ += "일시적으로 지능을 강화시키는 뱌쿠렌의 신체강화마법.\n";
-		text_ += "지능이 5증가하고 마법성공률, 파워가 증가하며 마나 회복속도도 증가한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1);
 		break;
 	case SKL_BYAKUREN_2:
-		text_ += "일시적으로 각력을 강화시키는 뱌쿠렌의 신체강화마법. (W)\n";
-		text_ += "이동속도가 매우 매우 빨라진다. 신속과 중첩되지 않으며 지속시간은 짧은 편이다.\n";
-		text_ += "가히 초인이라 부를만 하군!\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2);
 		break;
 	case SKL_SIZUHA_1:
-		text_ += "단풍의 위에 서있는 적들에게 광기를 불어넣는다.\n";
-		text_ += "단풍 위에 있는 적들에게 마법저항을 비교하여 혼란을 전부 건다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1);
 		break;
 	case SKL_SIZUHA_2:
-		text_ += "당신이 끼고 있는 아티펙트가 아닌 몸통 방어구를 단풍 방어구로 바꾼다.\n";
-		text_ += "단풍방어구는 시즈하를 믿고있는동안 당신의 은밀을 크게 올려준다.\n";
-		text_ += "단, 옷의 종류가 단풍옷으로 바꿔져서 기존의 저항력은 사라진다.\n";
-		text_ += "이 단풍방어구는 한번 바꾸면 기존의 방어구로는 되돌릴 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2);
 		break;		
 	case SKL_SIZUHA_3:
-		text_ += "당신이 들고있는 무기에 영구적으로 단풍브랜드와 +1~2의 인챈트를 부여한다.\n";
-		text_ += "단풍브랜드가 붙은 무기는 단검이 아니라도 커다란 암습데미지를 줄 수 있고\n";
-		text_ += "단검인 경우엔 평범한 공격에도 암습의 확률을 준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3);
 		break;		
 	case SKL_MINORIKO_1:
-		text_ += "당신에게 걸려있는 나쁜 디버프와 능력치 저하를 회복한다.\n";
-		text_ += "즉시 회복되나 사용에는 신앙심과 적은양의 P를 소모한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1);
 		break;		
 	case SKL_MINORIKO_2:
-		text_ += "당신이 들고 있는 음식을 소모하여 체력을 크게 회복한다.\n";
-		text_ += "높은 신앙과 마나는 물론 또한 P도 1칸을 소모하는 고비용의 권능이다.\n";
-		text_ += "만복도를 많이 회복하는 음식이 체력회복량도 조금 더 많다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2);
 		break;
 	case SKL_YUUGI_1:
-		text_ += "당신이 가지고있는 물약 1개를 소모하여 취기를 얻는다.\n";
-		text_ += "원래 물약의 성능은 얻지못한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUUGI_1);
 		break;		
 	case SKL_YUUGI_2:
-		text_ += "밀착한 상대를 잡아 저먼 스플렉스를 건다.\n";
-		text_ += "상당한 데미지를 주면서 위치를 바꿀 수 있다.\n";
-		text_ += "만약 잡고있는 상태라면 해당 상대에겐 신앙심 소모없이 기술을 사용할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUUGI_2);
 		break;		
 	case SKL_YUUGI_3:
-		text_ += "밀착한 상대를 들어올려 멀리 던져버린다.\n";
-		text_ += "던진 위치엔 큰 충격파가 일어나 날라간 상대 주위로 범위 데미지를 준다.\n";
-		text_ += "플레이어는 이 충격파에 면역이 되어있다.\n";
-		text_ += "만약 잡고있는 상태라면 해당 상대에겐 신앙심 소모없이 기술을 사용할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3);
 		break;		
 	case SKL_YUUGI_4:
-		text_ += "오니의 힘을 빌어 굉장한 소리로 포효한다.\n";
-		text_ += "시야내의 적들은 일정 확률로 포효에 기가 죽어 벙어리 상태가 된다.\n";
-		text_ += "벙어리 상태가 된 적은 당분간 마법을 사용할 수 없다.\n";
-		text_ += "만약 잡고있는 상태라면 해당 상대에겐 무조건 벙어리 상태로 만든다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4);
 		break;		
 	case SKL_YUUGI_5:
-		text_ += "오니의 궁극기인 삼보필살을 사용한다. 3턴간 3번의 폭발이 순차적으로 일어난다.\n";
-		text_ += "폭발 범위는 점차 커져서 거의 시야 전체를 커버한다.\n";
-		text_ += "만약 잡고있는 상태라면 해당 상대에겐 보통의 2배 데미지를 입힌다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5);
 		break;	
 	case SKL_SATORI_1:
-		text_ += "상대의 마음을 읽고 트라우마를 일깨운다.\n";
-		text_ += "성공하면 상대는 공포 상태가 되어 이쪽으로부터 도망치기 시작한다.\n";
-		text_ += "좀 더 낮은 확률로 상대는 공포를 넘어서서 완전한 전의상실할 가능성이 생긴다.\n";
-		text_ += "전의상실한 순간 경험치의 절반을 얻을 수 있으며 상대는 영구적인 공포상태로 변한다.\n";
-		text_ += "이렇게 전의상실한 상대는 죽여도 경험치를 주지않으며 시야밖으로 나가면 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SATORI_1);
 		break;		
 	case SKL_SATORI_2:	
-		text_ += "상대의 마음을 읽어낸다. 사용한 상대의 모든 생각을 읽게 된다.\n";
-		text_ += "만약 대상이 동물형인경우 호감을 사서 영구적인 아군이 된다. 그러나 계단이용은 불가능해진다.\n";
-		text_ += "동물형이 아닌 경우엔 명중과 회피가 매우 큰 폭으로 떨어지며 디버프에 대한 저항력이 사라진다.\n";
-		text_ += "사용할때 적의 마법저항력에 비례해서 시전 턴수가 필요하며 그동안 아무행동도 할 수 없다.\n";
-		text_ += "시간동안 시야에서 사라지거나 혼란,마비가 걸리면 실패하고 자신의 레벨이 올라갈수록 턴수는 줄어든다.\n";
-		break;	
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SATORI_2);
+		break;		
 	case SKL_SHINKI_1:
-		text_ += "하급 마족들의 작은 무리를 소환한다.\n";
-		text_ += "하급 마족들은 전투엔 별다른 도움은 안되겠지만 신앙심소모가 매우 적고 양으로 승부할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1);
 		break;
 	case SKL_SHINKI_2:
-		text_ += "중급 마족 1명을 무작위로 소환한다.\n";
-		text_ += "사라, 루이즈, 엘리스중에 무작위로 소환되어 당신을 도와준다.\n";
-		text_ += "4%의 확률로 당신을 배신할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2);
 		break;
 	case SKL_SHINKI_3:	
-		text_ += "상급 마족 1명을 무작위로 소환한다.\n";
-		text_ += "유키, 마이, 유겐마간중에 무작위로 소환되어 당신을 도와준다.\n";
-		text_ += "4%의 확률로 당신을 배신할 수 있다.\n";
-		break;
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3);
+		break;		
 	case SKL_YUYUKO_ON:	
-		text_ += "유령의 소환을 시작한다.\n";
-		text_ += "유령의 소환에는 비용이 들지않으며 한번 발동해두면 끝없이 유령을 불러들인다.\n";
-		break;
-	case SKL_YUYUKO_OFF:	
-		text_ += "유령의 소환을 종료한다.\n";
-		text_ += "언제든지 원할때 다시 유령을 불러들일 수 있다.\n";
-		break;
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON);
+		break;		
+	case SKL_YUYUKO_OFF:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF);
+		break;		
 	case SKL_YUYUKO_1:
-		text_ += "유령을 원하는 위치로 이동시킬 수 있다.\n";
-		text_ += "지정한 위치로 주변에 있는 유령들이 한꺼번에 이동된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1);
 		break;
 	case SKL_YUYUKO_2:
-		text_ += "유령의 소환을 잠시간 가속한다.\n";
-		text_ += "일정시간동안 어마어마한 속도로 유령의 수가 불어난다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2);
 		break;
 	case SKL_YUYUKO_3:
-		text_ += "1명의 영혼을 구속시켜서 자신의 노예로 삼는다.\n";
-		text_ += "영혼이 구속된 상대를 일정시간 내에 잡으면 영구적인 아군으로 삼을 수 있다.\n";
-		text_ += "구속된 영혼은 원본보다는 약해지지만 원본이 쓰는 마법이나 특징을 그대로 가지고 있다.\n";
-		text_ += "또한 구속된 영혼은 1체까지 밖에 들고다닐 수 없다. 2번째 대상을 포획하면 원래가지고있던 영혼이 풀려난다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3);
 		break;
 	case SKL_YUKARI_1:
-		text_ += "시야내의 원하는 틈새로부터 지원사격을 요청한다.\n";
-		text_ += "틈새로부터 적을 응시하는 이형의 눈이 나타나 적을 공격한다.\n";
-		text_ += "이형의 눈은 낮은 체력을 가지고 있으므로 주의.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUKARI_1);
 		break;
 	case SKL_YUKARI_2:
-		text_ += "시야내의 원하는 틈새로 공간이동을 할 수 있다. 한번 사용한 틈새는 닫힌다.\n";
-		text_ += "영력과 신앙심을 제외한 별다른 디메리트 없이 순식간에 이동이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUKARI_2);
 		break;
 	case SKL_YUKARI_3:
-		text_ += "공격을 막아주는 결계를 잠시동안 소환한다.\n";
-		text_ += "결계를 사용하면 방패처럼 사용할 수 있으며 방패를 장착하고있어도 성능을 상승시킨다.\n";
-		text_ += "결계로 만들어진 방패는 마법패널티등을 받지 않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUKARI_3);
 		break;
 	case SKL_YUKARI_4:
-		text_ += "유카리가 경계를 건드려서 일정턴동안 선택한 위치를 중심으로 화면이 그대로 고정된다.\n";
-		text_ += "고정된 상태의 지형은 시야가 이동되지않으며 상하좌우가 루프된다.\n";
-		text_ += "또한 고정된 지형에 들어오지않은 적들은 차원고정이 끝나기전에 움직일 수 없다.\n";
-		text_ += "계단을 타게되면 차원 고정은 풀린다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_YUKARI_4);
 		break;
 	case SKL_SWAKO_JUMP:
-		text_ += "2칸의 짧은 거리를 한번에 이동할 수 있다.\n";
-		text_ += "효과는 적지만 영력소모가 적고 연속으로 쓸 수 있다.\n";
-		text_ += "비행이나 수영이 가능해도 물가로는 점프할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_JUMP);
 		break;
 	case SKL_SWAKO_TEMPLE:
-		text_ += "현재 서있는 위치에 스와코님의 신전을 세울 수 있다.\n";
-		text_ += "사용시 큰 파워가 소모되지만 신앙심을 얻을 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TEMPLE);
 		break;
 	case SKL_SWAKO_WATER_GUN:
-		text_ += "원거리의 적에게 물총을 쏠 수 있다.\n";
-		text_ += "위력은 낮지만 큰 비용없이 연사할 수 있는 것이 장점이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_WATER_GUN);
 		break;
 	case SKL_SWAKO_TOUGUE:
-		text_ += "원거리의 적에게 커다란 혀를 이용하여 근처로 끌고 온다.\n";
-		text_ += "사격형식으로 나가므로 사이에 막혀있다면 맞출 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TOUGUE);
 		break;
 	case SKL_SWAKO_CURSE:
-		text_ += "적 하나에 재앙을 내려서 독과 감속효과를 건다.\n";
-		text_ += "독저항이 있어도 마법저항이 높아도 상관없이 걸 수 있지만\n";
-		text_ += "적이 나보다 강력할수록 감속 시간은 짧아진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_CURSE);
 		break;
 	case SKL_SWAKO_DIGGING:
-		text_ += "사거리안의 일직선상에 있는 모든 벽을 굴착한다.\n";
-		text_ += "사용시 생각보다 큰 소음이 난다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_DIGGING);
 		break;
 	case SKL_SWAKO_SUMMON_FLOG:
-		text_ += "잠시동안 아군의 개구리를 소환한다.\n";
-		text_ += "신도의 레벨에 비례해서 강력한 개구리가 나온다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SUMMON_FLOG);
 		break;
 	case SKL_SWAKO_STATUE:
-		text_ += "잠시동안 개구리 석상을 위치에 소환한다.\n";
-		text_ += "석상은 유리 벽과 같아서 시야는 통하지만 이동과 사격을 모두 막을 수 있다.\n";
-		text_ += "일정 시간이 지나면 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_STATUE);
 		break;
 	case SKL_SWAKO_RAIN:
-		text_ += "주변에 거대한 물웅덩이를 만든다.\n";
-		text_ += "깊은 물은 날거나 수영할 수 없는 적의 이동을 막는다.\n";
-		text_ += "추가로 아군 개구리를 여럿 소환한다.\n";
-		text_ += "자신이 날 수 없거나 수영할 수 없으면 자신도 움직일 수 없게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_RAIN);
 		break;
 	case SKL_SWAKO_SLEEP:
-		text_ += "잠시동안 땅속에 박혀서 모든 공격으로부터 무적이 되고 체력과 영력을 회복한다.\n";
-		text_ += "또한 턴동안 주변의 적들이 플레이어를 놓치고 이리저리 이동하게 된다.\n";
-		text_ += "일정 시간이 지나면 잠에서 깨지만 그 반작용으로 짧은 감속에 걸린다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SLEEP);
 		break;
 	case SKL_SWAKO_MISYAGUZI:
-		text_ += "스와코님이 사역하고있는 강력한 미샤구지님을 잠시동안 소환한다.\n";
-		text_ += "1번에 하나의 미샤구지님만 소환할 수 있지만 강력한 저주 공격을 가하는 듬직한 소환수다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SWAKO_MISYAGUZI);
 		break;
 	case SKL_HINA_1:
-		text_ += "저주가 걸려있는 장비의 마이너스 인챈트를 플러스로 바꾼다.\n";
-		text_ += "P의 소모를 제외한 별다른 비용은 들지 않는다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HINA_1);
 		break;
 	case SKL_HINA_2:
-		text_ += "현재 들고있는 무기에 저주를 걸면서 일시적으로 저주 브랜드가 부여된다.\n";
-		text_ += "저주브랜드가 붙은 무기는 저항이 불가능한 독데미지를 적에게 줄 수 있고\n";
-		text_ += "일정 확률로 감속 효과를 준다. 브랜드가 걸려있거나 걸 수 없으면 힘이 강화된다.\n";
-		text_ += "들고있는 무기에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HINA_2);
 		break;
 	case SKL_HINA_3:
-		text_ += "현재 장착하고 있는 방어구에 저주를 걸면서 일시적으로 모든 데미지를 반사한다.\n";
-		text_ += "몸통 방어구에 저주를 걸때는 더욱 더 긴 지속시간을 가진다.\n";
-		text_ += "장착하고 있는 방어구에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HINA_3);
 		break;
 	case SKL_HINA_4:
-		text_ += "현재 장착하고 있는 장신구에 저주를 걸면서 체력과 영력을 회복한다.\n";
-		text_ += "장착하고 있는 장신구에 이미 저주가 걸려있으면 사용할 수 없다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HINA_4);
 		break;
 	case SKL_HINA_5:
-		text_ += "당신이 들고있는 무기에 영구적으로 저주브랜드와 +1~2의 인챈트를 부여한다.\n";
-		text_ += "저주브랜드가 붙은 무기는 저항이 불가능한 독데미지를 적에게 줄 수 있고\n";
-		text_ += "일정 확률로 감속 효과를 준다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HINA_5);
 		break;		
 	case SKL_JUMPING_ATTACK: 
-		text_ += "사거리 안에 든 목표 주변 8타일로 순식간에 접근하며 공격한다.\n";
-		text_ += "단, 밀착한 대상으론 쓸 수 없다.\n";
-		text_ += "사용후 일정시간 피로가 쌓여서 연속 사용은 안된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_JUMPING_ATTACK);
 		break;
 	case SKL_BREATH:
-		text_ += "발현된 용의 속성에 맞는 브레스를 일직선으로 발사한다.\n";
-		text_ += "사용후 일정시간 피로가 쌓여서 연속 사용은 안된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_BREATH);
 		break;
 	case SKL_TORMENT:
-		text_ += "시야내의 있는 적들의 체력을 절반으로 만들어버리는 무서운 기술.\n";
-		text_ += "당신이 악마의 피를 이어받고있기때문에, 당신은 이 피해로부터 면역이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_TORMENT);
 		break;
 	case SKL_ABANDON_GOD:
-		text_ += "당신이 믿고 있는 신을 버린다.\n";
-		text_ += "신을 버린 순간 신에게 얻은 권능과 이점이 사라지며 신의 분노를 사게된다.\n";
-		text_ += "당신이 신의 분노를 사는 동안엔 신의 징벌을 받게 됩니다. 많은 시간이 지나면 징벌은 사라진다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD);
 		break;
 	case SKL_SEIJA_GIFT:
-		text_ += "세이자가 다른 신들에게서 훔쳐온 보물을 선물로 받는다.\n";
-		text_ += "선택한 신의 훔쳐온 보물을 받는 대신에 선택한 신의 징벌상태가 된다.\n";
-		text_ += "또한 세이자로부터의 신용을 조금씩 잃습니다. 선택한 신의 징벌이 끝나면 다시 받을 수 있다.\n";
-		text_ += "이 권능은 일정 시간이 흐르면 자동으로 사라지면서 신앙심 또한 똑같이 감소한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SEIJA_GIFT);
 		break;
 	case SKL_SEIJA_1:
-		text_ += "시야내의 선택한 적과 자리를 즉시 뒤집어 바꾼다.\n";
-		text_ += "이 권능은 타겟과 사이에 다른 적이나 아군이 있어도 자리를 바꿀 수 있지만 벽을 넘어서는 안된다.\n";
-		text_ += "신앙심과 영력소모없이 파워소모만으로 사용할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SEIJA_1);
 		break;
 	case SKL_SEIJA_2:
-		text_ += "시야내의 모든 몬스터의 시야와 장소를 뒤집어서 약간의 데미지와 저항불가 혼란을 준다.\n";
-		text_ += "이 권능으로는 치명적인 데미지는 주지 못하지만 아무리 강한 적이라도 순식간에 뒤집히는 시야에는\n";
-		text_ += "빠르게 대처할 수 없을 것이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SEIJA_2);
 		break;
 	case SKL_LILLY_1:
-		text_ += "선택한 요정을 자신의 동료로 권유한다. 권유할 수 있는 횟수는 제한이 있다.\n";
-		text_ += "릴리화이트는 신앙심 1칸마다 권유할 수 있는 요정을 1명씩 늘려준다. 최종적으론 5명까지 권유한다.\n";
-		text_ += "권유에 성공한 요정은 영구적으로 동료가 된다.\n";
-		text_ += "\n";
-		text_ += "자신보다 레벨이 높은 요정은 권유를 거부한다. 레벨을 올려서 나중에 다시 권유할 수 있다.\n";
-		text_ += "이미 메이드같은 직업을 가지고있는 요정들은 권유가 힘들어보인다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LILLY_1);
 		break;
 	case SKL_LILLY_2:
-		text_ += "모든 동료 요정을 자신의 주변으로 불러들인다.\n";
-		text_ += "죽은 요정은 경험치를 모아서 다시 부활하기전까진 불러오지못한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LILLY_2);
 		break;
 	case SKL_LILLY_3:
-		text_ += "아군 요정 1명의 체력을 회복시킨다.\n";
-		text_ += "회복하는 양은 선택한 요정의 최대체력과 신앙심에 비례한다.\n";
-		text_ += "신앙심의 소모는 없지만 P를 약간 소모한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LILLY_3);
 		break;
 	case SKL_LILLY_4:
-		text_ += "시야내의 아군 요정들에게 자신의 힘을 나눠주어 강력한 버프를 건다.\n";
-		text_ += "이 기술은 자신의 힘을 나눠주는 것이므로 사용한 플레이어는 역으로 전투패널티가 걸린다.\n";
-		text_ += "전투패널티는 명중과 공격이 내려가고 스펠파워가 절반이 된다.\n";
-		text_ += "신앙심의 소모는 없지만 P를 1칸 소모한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_LILLY_4);
 		break;
 	case SKL_OKINA_1:
-		text_ += "시야내에서 지정한 파괴가능 벽을 문으로 만든다.\n";
-		text_ += "시전 위치와 플레이어의 사이에 적이라던지 장해물이 있으면 만들 수 없다.\n";
-		text_ += "만들어진 문은 닫힌 상태로 생성되며 다른 문과 같이 투시와 이동과 함께 여닫는게 가능하다.\n";
-		text_ += "이 권능은 소음이 없으므로 몰래 적의 등뒤를 살피는 것이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_OKINA_1);
 		break;
 	case SKL_OKINA_2:
-		text_ += "시야내에서 지정한 문을 신의 힘으로 잠가버린다.\n";
-		text_ += "만약 열려있다면 닫히고 문 위에 누군가 있었다면 밀쳐내면서 약한 데미지와 혼란을 준다.\n";
-		text_ += "이렇게 잠겨진 문은 누구도 통과할 수 없으며 심지어 신도조차 드나드는건 할 수 없다.\n";
-		text_ += "대신 이렇게 만들어진 문은 적의 공격대상이 되며 일정 데미지를 받으면 다시 열리게 된다.\n";
-		text_ += "잠긴지 일정시간이 되면 원래대로 돌아오면서 평범한 문으로 바뀐다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_OKINA_2);
 		break;
 	case SKL_OKINA_3:
-		text_ += "지정한 적의 등 뒤에 문을 만들어 순식간에 이동한다.\n";
-		text_ += "이동하는데는 소리도 없이 이동하며 이동하는 적의 주의도 분산시킬 수 있다.\n";
-		text_ += "적의 등 뒤에 파괴가능한 지형이면 강제로 문을 만들어 이동할 수 있으나\n";
-		text_ += "적의 뒤에 다른 적이 있거나 계단같은 지형이라 문을 만들 수 없는 경우엔 사용이 불가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_OKINA_3);
 		break;
 	case SKL_OKINA_4:
-		text_ += "오키나가 부하인 마이와 사토노를 일시적으로 소환시킨다.\n";
-		text_ += "마이와 사토노는 자체적인 전투능력은 없지만 뒤에서 춤을 추기 시작하며\n";
-		text_ += "시야 안에 있는 아군의 체력과 영력을 지속적으로 회복시켜준다.\n";
-		text_ += "마이는 체력을, 사토노는 영력을 회복시키며 신앙심을 2배 쓰는것으로 둘다 소환도 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_OKINA_4);
 		break;
 	case SKL_OKINA_5:
-		text_ += "언제든지 오키나의 신도는 자신의 등뒤의 문을 열고 뒷 문의 세계로 도망칠 수 있다.\n";
-		text_ += "자신이 서있는 위치에 문을 만들 수 있는 상태라면 (계단이나 물위에선 만들 수 없다.)\n";
-		text_ += "언제든지 오키나의 신도는 자신의 등뒤의 문을 열고 뒷 문의 세계로 도망칠 수 있다.\n";
-		text_ += "뒷 문의 세계는 마이와 사토노 이외엔 아무도 없는 조용한 공간이며\n";
-		text_ += "마이와 사토노는 이 세계에선 항상 무적이며 신도의 체력과 영력을 회복시킨다.\n";
-		text_ += "도망칠때 가까이있는 적은 뒷 문의 세계로 따라올 수 있으니 주의하자.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_OKINA_5);
 		break;
 	case SKL_JUNKO_1:
-		text_ += "단순하지만 강력한 물리 탄막을 쏜다. 캐릭터의 레벨에 비례해서 강해진다.\n";
-		text_ += "순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n";
-		text_ += "2번 사용할때마다 순화가 1단계씩 증가한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1);
 		break;
 	case SKL_JUNKO_2:
-		text_ += "순수하게 강력한 힘을 일시적으로 얻는다. \n";
-		text_ += "힘이 5증가하고 근접, 탄막공격력에 추가데미지가 생긴다.\n";
-		text_ += "순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n";
-		text_ += "1번 사용할때마다 순화가 1단계씩 증가한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2);
 		break;
 	case SKL_JUNKO_3:
-		text_ += "적에 대한 살의를 증폭시켜 일시적으로 빠른 가속을 얻는다. \n";
-		text_ += "모든 행동속도가 1.5배 빨라지지만 시야내의 적이 사라지게되면 살의 역시 사라진다.\n";
-		text_ += "순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n";
-		text_ += "1번 사용할때마다 순화가 2단계씩 증가한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3);
 		break;
 	case SKL_JUNKO_4:
-		text_ += "순호로부터 영구적인 순화의 축복을 받을 수 있다. 오로지 1번만 사용할 수 있다. \n";
-		text_ += "스탯이 영구적으로 증가하고 3가지중 선택하여 순화 능력을 영구적으로 부여받을 수 있지만\n";
-		text_ += "더 이상 순호의 권능을 사용할 수 없으며 영구적인 순화상태로 소모품 사용이 불가능해진다.\n";
-		text_ += "만약 원하는 순화 선택지가 없으면 잠시 순화를 다음 선택으로 미룰 수 있지만 미루게되면\n";
-		text_ += "다시 다음 순화 선택지가 나올때까지는 신앙을 다시 모아야 선택이 가능해진다.\n";
-		text_ += "또한, 순화된 상태에서 순호를 배신하게되면 순화의 힘으로 무조건 죽게 된다.\n\n";
-		text_ += "당신은 배신할수도 없으며 권능도 소모품도 사용할 수 없는 패널티를 감수할 각오가 되어있는가?\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4);
 		break;
 	case SKL_JOON_AND_SION_1:
-		text_ += "당신은 역병신인 죠온이나 빈곤신인 시온을 자신의 몸에 빙의시킬 수 있다.\n";
-		text_ += "역병신과 빈곤신을 빙의하는 부담으로 둘의 저주가 강화되는 패널티를 안게되지만\n";
-		text_ += "빙의는 일정시간 지속되며 빙의하는 동안엔 빙의 된 신의 권능을 사용할 수 있으며\n";
-		text_ += "빙의가 끝나면 일정 신앙심을 얻은 후에 다시 빙의를 할 수 있게 된다.\n\n";
-		text_ += "죠온은 빙의와 동시에 파워를 가득 채워주지만 소모품을 항상 2~3개씩 낭비하게 될것이며\n";
-		text_ += "빙의가 풀렸을때 파워가 3.00이상 남아있을 경우는 강제로 파워가 3.00으로 줄어든다.\n";
-		text_ += "시온은 빙의와 동시에 체력과 영력을 회복시키며 파워가 낮을때 받는 패널티를 없애주지만\n";
-		text_ += "땅에 떨어진 소모품들이 사라지는 속도가 가속되며 땅에 떨어뜨린 소모품은 무조건 사라질것이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1);
 		break;
 	case SKL_JOON_AND_SION_2:
-		text_ += "죠온에게 빙의하는 동안에 죠온의 스펠카드인 퀸 오브 버블을 사용할 수 있다.\n";
-		text_ += "시야 내의 모든 적에게 저항불가능한 짧은 혼란을 걸며 시전자의 레벨에 비례한 데미지를 준다.\n";
-		text_ += "사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2);
 		break;
 	case SKL_JOON_AND_SION_3:
-		text_ += "시온에게 빙의하는 동안에 시온의 스펠카드인 미스찬스 스캐터을 사용할 수 있다.\n";
-		text_ += "시야 내의 모든 적에게 저항불가능한 감속을 걸며 시야를 가리는 안개를 자신의 주변에 흩뿌린다.\n";
-		text_ += "사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3);
 		break;
 	case SKL_JOON_AND_SION_4:
-		text_ += "빈곤신인 시온을 상대에게 강제로 빙의시키는 것으로 상대의 승리운을 없애버리는 최흉최악의 전법\n";
-		text_ += "투사체형태의 시온을 맞은 상대는 저항할 수 없이 시온이 빙의되어 레벨과 전투력을 잃어버린다.\n";
-		text_ += "신자는 빙의상태에서만 이 전법을 쓸 수 있으며 사용시 빙의된 신은 죠온으로 바뀐다.\n";
-		text_ += "강력하지만 신앙심이 고정적으로 별 다섯개로 떨어지기에 다시 사용하기위해선\n";
-		text_ += "다시 많은 신앙심을 모아야하며 비생명체에는 사용이 불가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4);
 		break;
 	case SKL_JOON_AND_SION_OFF:
-		text_ += "빙의상태를 강제로 해제한다.\n";
-		text_ += "해제자체는 시간이 지나서 해제하는 것과 다를바 없으며 다시 빙의하기 위해선\n";
-		text_ += "똑같이 일정 신앙심을 올려야 다시 빙의할 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_OFF);
 		break;
 	case SKL_MIKO_1:
-		text_ += "시야내에 있는 모든 적들의 욕망을 읽어내서 인기도를 올린다.\n";
-		text_ += "시야내에 존재하는 적이 많을수록, 강할수록 얻는 인기도가 많아진다.\n";
-		text_ += "패널티 없이 인기도를 올릴 수 있는 방법이지만 새로 들어간 층마다 1번씩만 사용이 가능하다.\n";
-		text_ += "만약 그 층을 벗어나게되면 더 이상 사용할 수 없게됨을 주의하자.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_1);
 		break;
 	case SKL_MIKO_2:
-		text_ += "순식간의 몸을 감춰서 랜덤한 위치에서 등장하는 도술.\n";
-		text_ += "인기도는 매우 작게 쓰지만 단순한 위기탈출용 랜덤 순간이동에 그치는 수수한 도술.\n";
-		text_ += "다른 권능들과 다르게 일회용이다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_2);
 		break;
 	case SKL_MIKO_3:
-		text_ += "성인의 기운을 받아서 신성한 후광을 두른다.\n";
-		text_ += "인기도는 적게 사용하지만 시야내의 모든 적을 빛나게하여 회피를 낮추는 다소 수수한 도술\n";
-		text_ += "명중 보너스와 더불어 투명한 적도 보이게 하는 부가효과도 있다.\n";
-		text_ += "후광에 의한 빛나게하는 효과는 신도에게도 영향을 미쳐 똑같이 회피를 낮추니 주의.\n\n";
-		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_3);
 		break;
 	case SKL_MIKO_4:
-		text_ += "미코에게 원하는 저항을 부여받을 수 있다.\n";
-		text_ += "화염, 냉기, 전기, 독, 혼란저항중에 원하는 저항을 선택하여 1단계 올릴 수 있다.\n";
-		text_ += "한 층에서 여러 번 사용하면 효과 중첩이 가능하다.\n\n";
-		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_4);
 		break;
 	case SKL_MIKO_5:
-		text_ += "미코에게서 망토를 선택받아서 타격과 마법 둘중 하나를 강화 있다.\n";
-		text_ += "빨간색을 선택시 근접 공격에 전투력 보너스를 받아 공격력과 명중률이 상승하며\n";
-		text_ += "파란색을 선택시 스펠파워와 성공율이 크게 상승한다.\n";
-		text_ += "한번 색을 선택하면 층을 바꾸기전까진 다시 선택할 수 없게된다.\n\n";
-		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_5);
 		break;
 	case SKL_MIKO_6:
-		text_ += "가득 찬 인기도를 폭발시키고 전부 소모하여 강력한 버프를 얻는다.\n";
-		text_ += "최대 체력이 2배가 되거나, 영력회복속도를 엄청나게 상승시키거나, 반영구적인 가속중 선택할 수 있다.\n\n";
-		text_ += "미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MIKO_6);
 		break;
 	case SKL_PHILOSOPHERS_1:
-		text_ += "화염구를 만들어 날리는 화염계 공격마법.\n";
-		text_ += "적에 부딪히거나 목표에서 터지며 주변에 폭발데미지를 입힌다.\n";
-		text_ += "자신도 가까이 있으면 데미지를 받을 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_1);
 		break;
 	case SKL_PHILOSOPHERS_2:
-		text_ += "물을 압축하여 발사한다.\n";
-		text_ += "맞은 상대를 밀쳐낼 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2);
 		break;
 	case SKL_PHILOSOPHERS_3:
-		text_ += "빠른 대기의 탄환을 적에게 날리는 마법.\n";
-		text_ += "적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n";
-		text_ += "다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3);
 		break;
 	case SKL_PHILOSOPHERS_4:
-		text_ += "주변에 커다란 에메랄드로 된 벽을 솓구친다.\n";
-		text_ += "밀착하여 가까이 있는 상대에게 데미지를 줄 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4);
 		break;
 	case SKL_PHILOSOPHERS_5:
-		text_ += "원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n";
-		text_ += "뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n";
-		text_ += "파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5);
 		break;
 	default:
-		text_ += "모르는 능력.\n";
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5);
 		break;
 	}
-	return text_;
+	return oss.str();
 }
 
 

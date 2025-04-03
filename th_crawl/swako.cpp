@@ -21,7 +21,7 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	case SWAKO_1_JUMP:		
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "개구리 점프";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_JUMP);
 		case SWAKO_SIMPLE_INFOR: return "당신은 짧은 거리를 점프할 수 있다.                             (P, 영력)";
 		case SWAKO_GET_STRING: return "당신은 이제 짧은 거리를 점프할 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 짧은 거리를 점프할 수 없다.";
@@ -30,7 +30,7 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	case SWAKO_1_TEMPLE:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "신전 세우기";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_TEMPLE);
 		case SWAKO_SIMPLE_INFOR: return "당신은 신전을 세워 신앙심을 벌 수 있다.                              (P)";
 		case SWAKO_GET_STRING: return "당신은 이제 신전을 세울 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 신전을 세울 수 없다.";
@@ -39,7 +39,7 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	case SWAKO_1_WATER_GUN:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "물총";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_WATER_GUN);
 		case SWAKO_SIMPLE_INFOR: return "당신은 멀리있는 적에 물의 탄막을 날릴 수 있다.                    (영력)";
 		case SWAKO_GET_STRING: return "당신은 이제 물총을 날릴 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 물총을 날릴 수 없다.";
@@ -48,7 +48,7 @@ const char* GetSwakoString1(swako_1_power power, swako_string kind)
 	case SWAKO_1_TONGUE:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "개구리 혀";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_TOUGUE);
 		case SWAKO_SIMPLE_INFOR: return "당신은 멀리있는 적을 끌어 당길 수 있다.                        (P, 영력)";
 		case SWAKO_GET_STRING: return "당신은 이제 멀리있는 적을 끌어당길 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 적을 끌어당길 수 없다.";
@@ -122,7 +122,7 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	case SWAKO_3_CURSE:		
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "토착신의 재앙";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_CURSE);
 		case SWAKO_SIMPLE_INFOR: return "당신은 상대에 재앙을 걸 수 있다.                               (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 상대를 저주할 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 저주를 걸 수 없다.";
@@ -131,7 +131,7 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	case SWAKO_3_DIGGING:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "굴착";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_DIGGING);
 		case SWAKO_SIMPLE_INFOR: return "당신은 벽을 무너뜨릴 수 있다.                                  (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 벽을 무너뜨릴 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 벽을 무너뜨릴 수 없다.";
@@ -140,7 +140,7 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	case SWAKO_3_SUMMON_FLOG:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "개구리 소환";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_SUMMON_FLOG);
 		case SWAKO_SIMPLE_INFOR: return "당신은 개구리 동료를 소환할 수 있다.                           (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 개구리를 소환할 수 있다";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 개구리를 소환할 수 없다.";
@@ -149,7 +149,7 @@ const char* GetSwakoString3(swako_3_power power, swako_string kind)
 	case SWAKO_3_STATUE:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "석상 세우기";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_STATUE);
 		case SWAKO_SIMPLE_INFOR: return "당신은 일정시간동안 석상을 세울 수 있다.                       (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 귀여운 개구리 석상을 세울 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 개구리 석상을 세울 수 없다.";
@@ -223,7 +223,7 @@ const char* GetSwakoString5(swako_5_power power, swako_string kind)
 	case SWAKO_5_RAIN:		
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "비 내리기";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_RAIN);
 		case SWAKO_SIMPLE_INFOR: return "당신은 주변을 물바다로 만들 수 있다.                           (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 거대한 비를 내리게 할 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 비를 내릴 수 없다.";
@@ -232,7 +232,7 @@ const char* GetSwakoString5(swako_5_power power, swako_string kind)
 	case SWAKO_5_SLEEP:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "동면";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_SLEEP);
 		case SWAKO_SIMPLE_INFOR: return "당신은 땅속에 숨어서 동면을 취할 수 있다.                      (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 동면을 한다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 동면을 하지 않는다.";
@@ -241,7 +241,7 @@ const char* GetSwakoString5(swako_5_power power, swako_string kind)
 	case SWAKO_5_MISYAGUZI:
 		switch(kind)
 		{
-		case SWAKO_NAME: case SWAKO_STRING: return "미샤구지님 소환";
+		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_MISYAGUZI);
 		case SWAKO_SIMPLE_INFOR: return "당신은 미샤구지님을 소환할 수 있다.                            (P, 신앙)";
 		case SWAKO_GET_STRING: return "당신은 이제 무시무시한 미샤구지님을 소환할 수 있다.";
 		case SWAKO_UNGET_STRING: return "당신은 더 이상 미샤구지님을 소환할 수 없다.";

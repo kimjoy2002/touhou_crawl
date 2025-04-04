@@ -349,7 +349,7 @@ bool replay_menu(int value_)
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub(blank,false,CL_warning);
-			printsub("리플레이 목록!",true,CL_help);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_REPLAY_TITLE),true,CL_help);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 
@@ -380,9 +380,14 @@ bool replay_menu(int value_)
 					}
 
 					{
-						char temp[128];
-						sprintf_s(temp,128,"%d년 %d월 %d일 %d시 %d분",stC.wYear, stC.wMonth,stC.wDay, stC.wHour, stC.wMinute);
-						printsub(temp,true,CL_help);
+						ostringstream ss;
+						ss << LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TIMELINE,
+							PlaceHolderHelper(to_string(stC.wYear)),
+							PlaceHolderHelper(to_string(stC.wMonth)),
+							PlaceHolderHelper(to_string(stC.wDay)),
+							PlaceHolderHelper(to_string(stC.wHour)),
+							PlaceHolderHelper(to_string(stC.wMinute)));
+						printsub(ss.str(),true,CL_help);
 					}
 
 
@@ -398,16 +403,14 @@ bool replay_menu(int value_)
 			{
 			
 				printsub(blank,false,CL_warning);
-				printsub("파일이 없어요!",true,CL_danger);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_REPLAY_NOTEXIST),true,CL_danger);
 				printsub("",true,CL_normal);
 
 			}
 			
 			{
-				char temp[128];
-				sprintf_s(temp,128,"%d페이지",page+1);
 				printsub(blank,false,CL_warning);
-				printsub(temp,true,CL_help);
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(to_string(page+1))),true,CL_help);
 			}
 
 

@@ -54,7 +54,7 @@ bool seija_gift()
 	
 	if(temp)
 	{	
-		printlog("선물을 받지않은지 너무 오랜시간이 지나서 선물이 취소되었다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT),true,false,false,CL_small_danger);
 		MoreWait();
 		printlog(seija_talk(GT_NONE, seija_level_), true,false,false,CL_seija);
 		you.StepUpDownPiety(-1);
@@ -62,8 +62,8 @@ bool seija_gift()
 	}
 	else
 	{
-		printlog("이제 세이자로부터 선물을 요구할 수 있다. ",false,false,false,CL_seija);
-		printlog("(a키로 선물을 요청)",true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_ON) + " ",false,false,false,CL_seija);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_SEIJA_GIFT_HELP, PlaceHolderHelper("a")),true,false,false,CL_help);
 		MoreWait();
 
 		you.Ability(SKL_SEIJA_GIFT,true,false);

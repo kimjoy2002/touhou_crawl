@@ -31,7 +31,7 @@ void saveandcheckexit()
 {
 	while(1)
 	{
-		printlog("저장후 종료하시겠습니까?(Y/N)",false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN),false,false,false,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -41,11 +41,11 @@ void saveandcheckexit()
 			return;
 		case 'N':
 		case VK_ESCAPE:
-			printlog("종료를 취소.",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
 			return;
 		default:
 			enterlog();
-			printlog("Y와 N중에 선택해주세요.",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
 			break;
 		}
 	}
@@ -55,7 +55,7 @@ void nosaveandexit()
 {	
 	while(1)
 	{
-		printlog("저장하지않고 종료하시겠습니까?(Y/N)",false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NONSAVE_QUIT_YN),false,false,false,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -67,11 +67,11 @@ void nosaveandexit()
 			return;
 		case 'N':
 		case VK_ESCAPE:
-			printlog("종료를 취소.",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
 			return;
 		default:
 			enterlog();
-			printlog("Y와 N중에 선택해주세요.",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
 			break;
 		}
 	}

@@ -161,25 +161,25 @@ bool equipring(ring_type kind, int value)
 	{
 	case RGT_STR:
 		if(value>0)
-			printlog("당신은 강력해졌다.",true,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_STR),true,false,false,CL_good);
 		else
-			printlog("당신은 약해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_STR),true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_DEX:
 		if(value>0)
-			printlog("당신은 민첩해졌다.",true,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_DEX),true,false,false,CL_good);
 		else
-			printlog("당신은 둔해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_DEX),true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_INT:
 		if(value>0)
-			printlog("당신은 똑똑해졌다.",true,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INT),true,false,false,CL_good);
 		else
-			printlog("당신은 멍청해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_INT),true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
@@ -190,9 +190,9 @@ bool equipring(ring_type kind, int value)
 		break;
 	case RGT_TELEPORT:
 		if(value>0)
-			printlog("공간의 일그러짐을 느꼈다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_TELE),true,false,false,CL_normal);
 		else
-			printlog("주변의 공간이 안정되었다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_TELE),true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;		
@@ -208,7 +208,7 @@ bool equipring(ring_type kind, int value)
 	/*case RGT_GRAZE:
 		{
 			if(value>0)
-				printlog("탄막을 피하는 감각이 날카로워짐을 느꼈다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_GRAZE),true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
@@ -216,7 +216,7 @@ bool equipring(ring_type kind, int value)
 	case RGT_LEVITATION:
 		{
 			if(value>0)
-				printlog("몸이 붕 뜨는 것을 느꼈다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_LEV),true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
@@ -224,40 +224,40 @@ bool equipring(ring_type kind, int value)
 	case RGT_INVISIBLE:
 		{
 			if(value>0)
-				printlog("반지에 의해 몸이 깜박거렸다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INV),true,false,false,CL_normal);
 			if(iden_list.ring_list[kind].iden == 0)
 				iden_list.ring_list[kind].iden = 2;
 			break;
 		}
 	case RGT_MANA:
 		if(value>0)
-			printlog("영력이 넘쳐흐르기 시작했다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MANA),true,false,false,CL_normal);
 		else
-			printlog("영력이 몸속에서 빠져나갔다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MANA),true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_MAGACIAN:
 		if(value>0)
-			printlog("당신은 마법 지식이 늘어난 것 같다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MAGICIAN),true,false,false,CL_normal);
 		else
-			printlog("당신의 마법 지식은 빠져갔다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MAGICIAN),true,false,false,CL_normal);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_AC:
 		if(value>0)
-			printlog("당신은 보호되고있다.",true,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_AC),true,false,false,CL_good);
 		else
-			printlog("보호가 풀렸다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_AC),true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_EV:
 		if(value>0)
-			printlog("당신은 재빨라졌다.",true,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_EV),true,false,false,CL_good);
 		else
-			printlog("당신은 둔해졌다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_EV),true,false,false,CL_small_danger);
 		if(iden_list.ring_list[kind].iden == 0)
 			iden_list.ring_list[kind].iden = 2;
 		break;

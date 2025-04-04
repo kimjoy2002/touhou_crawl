@@ -26,19 +26,26 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 	deletelog();
 	if(infor_->spell == -2 || infor_->spell == -3 || infor_->spell == -4)
 	{
-		printlog("목표를 정하세요.",true,false,true,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_TARGET),true,false,true,CL_help);
 		//printlog(it!=you.item_list.end()?it->GetName():"발사물이 없습니다.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
 		//printlog("(i - 인벤토리   (,) - 다른 발사물)",true,false,true,CL_help);
 	}
 	else if(infor_->spell == -1)
 	{
-		printlog("발사물:",false,false,true,CL_help);
-		printlog(it!=you.item_list.end()?it->GetName():"발사물이 없습니다.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
-		printlog("(i - 인벤토리   (,) - 다른 발사물)",true,false,true,CL_help);
+		ostringstream ss;
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE) + ":",false,false,true,CL_help);
+		printlog(it!=you.item_list.end()?it->GetName():LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_NOT_EXIST),false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
+		
+		ss << "(i - " << LocalzationManager::locString(LOC_SYSTEM_INVENTORY);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_INVENTORY)) < 10)
+			ss << std::string(10-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_INVENTORY)), ' ');
+		ss << " (,) - " << LocalzationManager::locString(LOC_SYSTEM_OTTER_PROJECTILE) << ")";
+		
+		printlog(ss.str(),true,false,true,CL_help);
 	}
 	else
 	{
-		printlog("마법:",false,false,true,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC) + ":",false,false,true,CL_help);
 		printlog(infor_->skill?SkillString((skill_list)infor_->spell):SpellString((spell_list)infor_->spell),true,false,true,CL_help);
 		//printlog("(i - 인벤토리   (,) - 다른 발사물)",true,false,true,CL_help);
 	}
@@ -387,7 +394,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 {
 	while(1)
 	{
-		printlog("어느 방향으로 발사하시겠습니까?",true,false,true,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_DIRECTION),true,false,true,CL_help);
 		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput());
 		switch(key_)
 		{
@@ -422,7 +429,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 			deletelog();
 			return 0;
 		default:
-			printlog("잘못된 선택입니다.",true,false,true,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_WRONG_CHOOSE),true,false,true,CL_help);
 		}
 	}
 	return 0;

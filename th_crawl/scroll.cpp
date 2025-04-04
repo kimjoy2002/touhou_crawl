@@ -169,7 +169,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			kind != SCT_REMOVE_CURSE &&
 			kind != SCT_AMNESIA)
 		{
-			printlog("당신은 두루마리의 효과를 사용하기엔 너무 순화되어있다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_SCROLL), true, false, false, CL_normal);
 			iden_list.scroll_list[kind].iden = 3;
 			return !pre_iden_;
 		}
@@ -206,7 +206,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		{
 		if (waste_) //낭비시엔 의미가 없음
 			return true;
-		printlog("이 두루마리에 써있는 것은 낙서같다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_JUST_DOODLE),true,false,false,CL_normal);
 		iden_list.scroll_list[kind].iden = 3;
 		return true;
 		}
@@ -250,7 +250,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			iden_list.scroll_list[kind].iden = 3;
 			if(env[current_level].isBamboo())
 			{				
-				printlog("지형탐지는 미궁의 죽림에선 효과를 보지 못한다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO),true,false,false,CL_normal);
 				if(pre_iden_){
 					return false;
 				}
@@ -261,7 +261,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			else
 			{
 				env[current_level].MakeMapping(100);	
-				printlog("당신은 현재 층을 감지해냈다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_MAPPING_SUCCESS),true,false,false,CL_normal);
 			}
 			return true;
 		 }
@@ -482,7 +482,7 @@ bool curse_weapon_scroll(bool pre_iden_)
 		else
 		{
 			if(pre_iden_){
-				printlog("이 아이템은 저주를 더 걸 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM_FAIL),true,false,false,CL_normal);
 				return false;
 			}
 			else{
@@ -494,7 +494,7 @@ bool curse_weapon_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("무기를 끼고 있지 않다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_CARRYING_WEAPON),true,false,false,CL_normal);
 			return false;
 		}
 		else{
@@ -524,7 +524,7 @@ bool curse_armour_scroll(bool pre_iden_)
 		}
 	}
 	if(pre_iden_){
-		printlog("저주걸 수 있는 방어구를 끼고 있지 않다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL),true,false,false,CL_normal);
 		return false;
 	}
 	else{
@@ -547,7 +547,7 @@ bool remove_curse_scroll(bool pre_iden_)
 				{		
 					if(iden_==false && you.GetPunish(GT_HINA) && randA(2))
 					{
-						printlog("히나가 당신의 액땜을 방해했다! ",false,false,false,CL_hina);						
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_HINA_FAIL) + " ",false,false,false,CL_hina);						
 						printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);
 						return true;
 					}
@@ -561,13 +561,13 @@ bool remove_curse_scroll(bool pre_iden_)
 	}
 	if(iden_)
 	{
-		printlog("가지고있던 장비의 저주가 풀렸다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE),true,false,false,CL_normal);
 		return true;
 	}
 	else
 	{
 		if(pre_iden_){
-			printlog("저주가 걸린 장비가 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_FAIL),true,false,false,CL_normal);
 			return false;
 		}
 		else{
@@ -583,7 +583,7 @@ bool blink_scroll(bool pre_iden_)
 	changedisplay(DT_GAME);
 	if (current_level == ZIGURRAT_LEVEL ) {
 		if (pre_iden_) {
-			printlog("광몽의 세계에선 순간이동의 제어가 불가능하다. 정말로 쓸거야? (y/n)", true, true, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), true, true, false, CL_small_danger);
 
 			switch (waitkeyinput())
 			{
@@ -593,7 +593,7 @@ bool blink_scroll(bool pre_iden_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
-				printlog("취소하였다.", true, true, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
 				return false;
 			}
 		}
@@ -653,10 +653,10 @@ bool blink_scroll(bool pre_iden_)
 			break;
 		case VK_ESCAPE:	
 			if(pre_iden_){
-				printlog("정말로 순간이동을 취소하시겠습니까? (y/n)",true,true,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),true,true,false,CL_help);
 			}
 			else{
-				printlog("정말로 순간이동을 취소하시겠습니까? 스크롤은 사라집니다! (y/n)",true,true,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK),true,true,false,CL_help);
 			}
 			bool repeat_ = true;
 			while(repeat_)
@@ -700,7 +700,7 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 		else
 		{
 			if(pre_iden_){
-				printlog("더 이상 강화 할 수 없는 무기다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ENCHANT_WEAPON_FAIL),true,false,false,CL_normal);
 				return false;
 			}
 			else{
@@ -712,7 +712,7 @@ bool enchant_weapon_1_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("장비한 무기가 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_CARRYING_WEAPON),true,false,false,CL_normal);
 			return false;
 		}
 		else{
@@ -738,7 +738,7 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 		else
 		{
 			if(pre_iden_){
-				printlog("더 이상 강화 할 수 없는 무기다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ENCHANT_WEAPON_FAIL),true,false,false,CL_normal);
 				return false;
 			}
 			else{
@@ -750,7 +750,7 @@ bool enchant_weapon_2_scroll(bool pre_iden_)
 	else
 	{
 		if(pre_iden_){
-			printlog("장비한 무기가 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_CARRYING_WEAPON),true,false,false,CL_normal);
 			return false;
 		}
 		else{
@@ -805,7 +805,7 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 						changedisplay(DT_GAME);
 					}
 					if(pre_iden_){
-						printlog("이 아이템은 강화할 수 없다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CANT_ENCHANT_ITEM),true,false,false,CL_normal);
 						return false;
 					}
 					else{
@@ -869,7 +869,7 @@ bool detect_curse_scroll(bool pre_iden_)
 	{
 		it->identify_curse = true;
 	}
-	printlog("인벤토리의 저주를 탐지했다.",true,true,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_DETECT_CURSE),true,true,false,CL_normal);
 	return true;
 }
 bool curse_jewelry_scroll(bool pre_iden_)
@@ -893,7 +893,7 @@ bool curse_jewelry_scroll(bool pre_iden_)
 		}
 	}
 	if(pre_iden_){
-		printlog("저주걸 수 있는 장신구가 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CURSE_JEWELLY_FAIL),true,false,false,CL_normal);
 		return false;
 	}
 	else{
@@ -919,7 +919,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		}
 		if(!ok_)
 		{
-			printlog("당신의 소지품에 충전할 수 있는 스펠카드가 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL),true,false,false,CL_normal);
 			if(pre_iden_)
 				return false;
 			else
@@ -1026,7 +1026,8 @@ bool amnesia_scroll(bool pre_iden_)
 				{				
 					
 					changedisplay(DT_GAME);
-					printarray(true,false,false,CL_help,2,SpellString(spell_).c_str()," 마법을 잊겠습니까? (Y/N)");
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,true,false,false,CL_help,
+						PlaceHolderHelper(SpellString(spell_)));
 					switch(waitkeyinput())
 					{
 					case 'Y':
@@ -1038,7 +1039,8 @@ bool amnesia_scroll(bool pre_iden_)
 							you.remainSpellPoiont+=SpellLevel(spell_);
 							you.currentSpellNum--;
 							ReleaseMutex(mutx);
-							printarray(true,false,false,CL_normal,3,"당신은 ",SpellString(spell_).c_str()," 마법을 잊었다.");	
+							LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,true,false,false,CL_normal,
+								PlaceHolderHelper(SpellString(spell_)));
 							return true;
 						}
 					case 'N':
@@ -1056,7 +1058,7 @@ bool amnesia_scroll(bool pre_iden_)
 	}
 	else
 	{
-		printlog("아직 알고있는 마법이 없다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_REMEMBER_SPELL),true,false,false,CL_normal);	
 	}
 
 	if(pre_iden_){
@@ -1116,11 +1118,11 @@ bool brand_weapon_scroll(bool pre_iden_)
 		else
 		{
 			if (pre_iden_) {
-				printlog("이 무기엔 마법을 부여할 수 없다. ", false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON_FAIL) + " ", false, false, false, CL_normal);
 				return false;
 			}
 			else {
-				printlog("아무 일도 일어나지않았다. ", false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND) + " ", false, false, false, CL_normal);
 				return true;
 			}
 		}
@@ -1128,11 +1130,11 @@ bool brand_weapon_scroll(bool pre_iden_)
 	else
 	{
 		if (pre_iden_) {
-			printlog("장비한 무기가 없다. ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_CARRYING_WEAPON) + " ", false, false, false, CL_normal);
 			return false;
 		}
 		else {
-			printlog("아무 일도 일어나지않았다. ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND) + " ", false, false, false, CL_normal);
 			return true;
 		}
 	}

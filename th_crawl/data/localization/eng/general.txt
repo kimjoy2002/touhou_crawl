@@ -11,6 +11,9 @@ LOC_SYSTEM_UNABLE_MOVE,You can't move there.
 LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
+LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
+LOC_SYSTEM_DO_CANCLE,Cancelled.
+LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
@@ -40,6 +43,7 @@ LOC_SYSTEM_GHOST_PENALTY_READ,You can't read as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_ATTACK,You can't attack as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_SPELL,You can't use magic as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_THROW,You can't throw as a ghost.
+LOC_SYSTEM_PURITY_PENALTY_SCROLL,You are too purified to use the scroll's effects.
 LOC_SYSTEM_SILENCE_PENALTY,You can't make a sound.
 LOC_SYSTEM_SHOUT_MENU,What would you like to shout?
 LOC_SYSTEM_SHOUT_MENU_ALLY,Command allies
@@ -136,10 +140,10 @@ LOC_SYSTEM_REMAIN_EXP,Next Level
 LOC_SYSTEM_LEVEL,Level
 LOC_SYSTEM_LEVEL_WITH_NUMBER,Level {0}
 LOC_SYSTEM_MAX_LEVEL,Max Level
-LOC_SYSTEM_GRADE,{0}단계
-LOC_SYSTEM_REPLAY_MODE,리플레이 중
-LOC_SYSTEM_WIZARD_MODE,위자드 모드
-LOC_SYSTEM_SAVEREMAIN_MODE,세이브 보존
+LOC_SYSTEM_GRADE,Grade {0}
+LOC_SYSTEM_REPLAY_MODE,Replay Mode
+LOC_SYSTEM_WIZARD_MODE,Wizard Mode
+LOC_SYSTEM_SAVEREMAIN_MODE,Save Retention
 LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_DESCRIPTION,Description
 LOC_SYSTEM_CANCLE,Cancel
@@ -152,7 +156,7 @@ LOC_SYSTEM_SUCCESS_PERCENT,Success Chance
 LOC_SYSTEM_IMPOSSIBLE,Impossible
 LOC_SYSTEM_AHTEISM,Atheism
 LOC_SYSTEM_FAITH,Faith
-LOC_SYSTEM_POULARITY,인기도
+LOC_SYSTEM_POULARITY,Popularity
 LOC_SYSTEM_YOU,You
 LOC_SYSTEM_TURN,Turn
 LOC_SYSTEM_TURNS,Turns
@@ -207,16 +211,16 @@ LOC_SYSTEM_HP_LOW,Severely Wounded
 LOC_SYSTEM_HP_MIDDLE,Wounded
 LOC_SYSTEM_HP_HIGH,Lightly Wounded
 LOC_SYSTEM_HP_VERY_HIGH,Almost Unharmed
-LOC_SYSTEM_BUFF_EQUIP_PENALTY,장비패널티
-LOC_SYSTEM_BUFF_EIRIN_POISON,부작용
-LOC_SYSTEM_BUFF_STASIS,전이불가
-LOC_SYSTEM_BUFF_RFIRE,화저{0}
-LOC_SYSTEM_BUFF_RCOLD,냉저{0}
-LOC_SYSTEM_BUFF_RELEC,뇌저{0}
-LOC_SYSTEM_BUFF_RPOIS,독저{0}
-LOC_SYSTEM_BUFF_RCONF,혼란저{0}
-LOC_SYSTEM_BUFF_SLAY,전투력
-LOC_SYSTEM_BUFF_SLEEPING,졸음
+LOC_SYSTEM_BUFF_EQUIP_PENALTY,Equipment Penalty
+LOC_SYSTEM_BUFF_EIRIN_POISON,Side Effect
+LOC_SYSTEM_BUFF_STASIS,Stasis
+LOC_SYSTEM_BUFF_RFIRE,rFire{0}
+LOC_SYSTEM_BUFF_RCOLD,rCold{0}
+LOC_SYSTEM_BUFF_RELEC,rElec{0}
+LOC_SYSTEM_BUFF_RPOIS,rPois{0}
+LOC_SYSTEM_BUFF_RCONF,rConf{0}
+LOC_SYSTEM_BUFF_SLAY,Slay
+LOC_SYSTEM_BUFF_SLEEPING,Drowsiness
 LOC_SYSTEM_SMOKE_NORMAL,Thin Smoke
 LOC_SYSTEM_SMOKE_FOG,Fog Cloud
 LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
@@ -1365,7 +1369,7 @@ LOC_SYSTEM_SPL_DESCRIBE_COLD_BEAM,Freezes the air in a straight line to strike t
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_BUG,Summons small insects.\n
 LOC_SYSTEM_SPL_DESCRIBE_CONFUSE,A mental-type spell that causes temporary confusion.\nConfused enemies cannot act of their own will.\nThere’s a chance to resist.\n
 LOC_SYSTEM_SPL_DESCRIBE_SLOW,A mental-type spell that slows the enemy temporarily.\nActions become 1.6x slower.\nThere’s a chance to resist.\n
-LOC_SYSTEM_SPL_DESCRIBE_SELF_HEAL,자신을 약간 치료한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_SELF_HEAL,Heals yourself slightly.\n
 LOC_SYSTEM_SPL_DESCRIBE_BLINK,A teleportation spell that moves you a short distance.\nAvoids clouds, traps, and water, and the location is random.\nWith teleport control, you can roughly choose the direction.\n
 LOC_SYSTEM_SPL_DESCRIBE_SMITE,Calls down divine punishment on an enemy in sight.\nIt never misses.\n
 LOC_SYSTEM_SPL_DESCRIBE_BURN,A basic fire spell that burns nearby enemies.\nDeals good damage, but may miss.\n
@@ -1423,7 +1427,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HASTE_OTHER,Speeds up nearby allies.\nGrants acceleratio
 LOC_SYSTEM_SPL_DESCRIBE_HEAL_OTHER,Heals nearby allies.\nRestores health to those within range.\n
 LOC_SYSTEM_SPL_DESCRIBE_MIND_BENDING,Fires danmaku imbued with wave distortion.\nDeals damage and may slow enemies if they fail to resist.\nHowever, its damage scaling is low, it can be resisted, and it can be dodged.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_PUNCH,An alchemy spell that empowers your bare hands with the strength of stone.\nBoosts damage of your next unarmed attack.\nCannot be used while wielding a weapon.\n
-LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW,바위로 만들어진 탄막.\n맞으면 아프지만 멀리 못날라가고 움직임이 직선적이라 피하기가 쉽다.\n
+LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW,A danmaku made of stone.\nIt hurts if it hits, but it doesn't travel far and moves in a straight line, making it easy to dodge.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,Places sharp, painful rocks in a 3×3 area for a short time.\nHurts anyone who walks over it, friend or foe.\nFlying enemies ignore it.\nMore Power means more tiles.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_UPLIFT,Raises the ground rapidly beneath a chosen area, creating sharp rocks.\nDeals high damage in a small AoE.\nLow Power may result in no explosion.\n
 LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL,Launches a solid stone shard in a straight line.\nDeals more damage as it spins on hit.\nCannot pierce enemies.\n
@@ -1438,14 +1442,14 @@ LOC_SYSTEM_SPL_DESCRIBE_RABBIT_HORN,A rabbit uses a horn to call in allies.\nGre
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_LESSOR_DEMON,Summons a weak demon from Makai.\n
 LOC_SYSTEM_SPL_DESCRIBE_LUMINUS_STRIKE,Fires a fast, powerful, non-elemental orb that cannot be grazed.\nIf it hits a distant enemy, it creates a small explosion that deals splash damage.\nDamage to the main target does not increase with distance.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIRE_STORM,Creates a massive flame storm at a selected location.\nLeaves a lingering fire cloud.\nAlso deals partial physical damage, making it effective even against fire-resistant foes.\n
-LOC_SYSTEM_SPL_DESCRIBE_BLIZZARD,선택한 위치에서 강력한 얼음 가시가 떨어지도록 한다.\n순간 데미지는 낮지만 지속적으로 맞출 경우 엄청난 데미지를 주며 물리데미지도 겸비한다.\n사용시 해당 위치에 있는 모든 구름을 걷어낸다.\n
-LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE,화면상의 모든 적에게 강력한 냉기를 방출하는 마법.\n사용한 적들에게 강력한 빙결 상태이상을 부여한다.\n다만 순수 냉기 속성이므로 냉기저항이 있는 적에겐 데미지가 거의 안들어간다.\n
+LOC_SYSTEM_SPL_DESCRIBE_BLIZZARD,Summons powerful ice spikes at the targeted location.\nWhile the initial damage is low, sustained hits deal massive damage and also inflict physical damage.\nRemoves all clouds at the location.\n
+LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE,Releases a wave of cold that hits all enemies on screen, applying a strong freeze debuff.\nDeals little damage to enemies with cold resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_DRAW_POWER,Pulls all dropped P items within view to the caster and restores P.\nBut where is “up” in top-down view?\nDoes it even exist?\n
 LOC_SYSTEM_SPL_DESCRIBE_ANIMAL_CHANGE,A terrifying spell that permanently turns an enemy into an animal.\nCan’t be used on animals.\nTransformed enemies become allies and give EXP.\nThey can’t descend stairs but remain as allies.\nThe stronger the target, the stronger the resulting animal.\nHard to succeed, but powerful when it does.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIELD_VIOLET,Spreads a violet wave in a selected area, inducing madness.\nAll characters inside lose their ability to distinguish ally from enemy.\nEXP is granted normally even if mad enemies die.\nBeware: allies and even the player can be affected.\n
-LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,탄막의 도플갱어를 만들어내서 2번 공격한다.\n사용후 패러독스 상태가 되면 딱 1번에 한해서 사용한 탄막 혹은 탄막마법이 2번 나간다.\n스파크나 화염폭풍같은 탄막이라고 보기 힘든 기술엔 적용되지 않는다.\n2번째 탄막은 탄막의 소모도 마나의 소모도 없으니 안심.\n
-LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ,주변의 시간을 느리게하여 상대적인 가속효과를 얻는 마법.\n시야 내의 모든 적에게 슬로우를 건다. 저항할 수 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK,원하는 위치로 정밀하게 순간이동할 수 있는 시공마법의 꽃.\n사용후 높은 시공부작용을 받는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,Creates a doppelgänger of your danmaku to attack twice.\nWhen in Paradox state, the next danmaku or danmaku spell is cast twice.\nDoesn’t apply to non-danmaku spells like Spark or Firestorm.\nThe second attack consumes no MP or ammo.\n
+LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ,Slows down time around you, giving a relative speed boost.\nApplies Slow to all enemies in sight. Can be resisted.\n
+LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK,A precise teleportation spell that lets you move exactly where you want.\nCauses severe spatial aftereffects.\n
 LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD,The ultimate spacetime spell, usable only by masters.\nStops time for a short while, letting you act freely—even attack.\nSevere temporal backlash occurs, so it can’t be used repeatedly.\n
 LOC_SYSTEM_SPL_DESCRIBE_HASTE_ALL,Grants acceleration to all allies within view.\n
 LOC_SYSTEM_SPL_DESCRIBE_HEAL_ALL,Heals all allies within view.\n
@@ -1456,60 +1460,60 @@ LOC_SYSTEM_SPL_DESCRIBE_MANA_DRAIN,Shows the enemy a nightmare and drains their 
 LOC_SYSTEM_SPL_DESCRIBE_INSANE,Drives the target insane.\nIf they fail to resist, they go mad.\nCan be resisted with magic resistance; complete immunity requires confusion resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_BLOOD_SMITE,A smite-type spell that deals unresistable damage based on the target’s max HP.\nHigher HP means more damage.\nThe damage cannot be reduced and is dangerous even to warriors.\n
 LOC_SYSTEM_SPL_DESCRIBE_CALL_HOUND,Lets out a howl that draws nearby dogs.\nEach summoned dog can call more.\nYou must deal with them quickly.\nTotal EXP gained is the same regardless of how many appear.\n
-LOC_SYSTEM_SPL_DESCRIBE_CANNON,음양옥의 기운을 담은 탄막을 발사하여 폭발후 회피불가능한 데미지를 준다.\n이 공격은 방어력을 어느정도 관통한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_DOLLS_WAR,근접과 공격에 강력한 상해인형과 원거리와 방어에 특화된 봉래인형을 같이 소환한다.\n상해인형은 빠르게 적을 공격하고 봉래인형은 적들의 어그로를 효과적으로 끌어모은다.\n공격뿐만 아니라 소환사가 취약한 소환술의 약점을 확실하게 보완하는 공방일체 소환술.\n
-LOC_SYSTEM_SPL_DESCRIBE_FAKE_DOLLS_WAR,상해인형이나 봉래인형을 소환한다.\n모조기때문에 원조의 인형보단 훨씬 약하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_FIRE_SPREAD,전방에 부채꼴모양으로 화염의 구름을 흩뿌린다.\n
-LOC_SYSTEM_SPL_DESCRIBE_STASIS,대상의 전이를 방해한다. 일정시간 전이불가 디버프를 건다.\n
-LOC_SYSTEM_SPL_DESCRIBE_JUMP_ATTACK,거리가 떨어져있는 적에게 순식간에 접근한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_ALERT_NOISE,주변의 몬스터들을 깨우는 아주 큰 소음을 낸다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,해당 위치에 거대한 나마즈를 낙하시킨다.\n낙하엔 일정시간이 걸리며 떨어진 위치에 큰 폭발이 일어난다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,경계 저편에서 날라오는 탄막.\n높은 레벨에서의 스키마는 더욱 강력한 탄막을 발사한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_CHANGE,너구리의 특기인 둔갑술. 주변에 무엇이든지 둔갑할 수 있다.\n사용하면 근처에 보이는 가장 강한 몬스터로 둔갑한다. 같은 너구리로는 둔갑하지않는다.\n둔갑하면 잠시간 그 몬스터의 능력치와 마법을 쓸 수 있다. 다만 둔갑되도 소환술은 쓰지못한다.\n일정시간이 지나면 다시 원래 모습으로 돌아오고 죽여도 본래의 경험치를 준다.\n
-LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,풍수를 통하여 주변의 운기를 조작한다.\n주변의 운기를 내려 지정한 상대의 불행을 초래하게 한다.\n운기가 내려간 적은 흉, 대흉, 불멸의 3가지 단계를 거치게 되며 \n공격이 잘 맞지않게되고, 피하기 힘들어지며 좋은 아이템을 얻는 운이 내려가게 된다.\n대흉이나 불멸은 가끔씩 단순히 불운하단 정도론 넘어가기 힘든만큼의 불행이 찾아온다.\n최대 데미지로 공격을 맞는다던지, 하늘에서 UFO가 떨어진다던지...\n하늘에서 UFO라고? 농담인게 당연하잖아!\n
-LOC_SYSTEM_SPL_DESCRIBE_THUNDER,하늘에서 벼락을 떨어뜨리는 마법.\n지정한 위치에서 3*3의 크기로 강력한 전기공격을 가한다.\n번개는 종잡을 수 없기 때문에 꼭 3*3의 범위에 모두 직격한다는 보장은 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,빠른 대기의 탄환을 적에게 날리는 마법.\n적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,다수의 너구리 부하를 한꺼번에 소환해내는 마미조의 특기.\n소환된 너구리는 강하지않지만 너구리들도 둔갑을 하기때문에 놔두면 귀찮은 일이 될지 모른다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,다양한 강력한 요괴를 불러내는 마법.\n오니, 제등요괴, 설녀가 소환된다. 한번에 하나씩 소환이 가능하다\n
-LOC_SYSTEM_SPL_DESCRIBE_MAMIZO_EVADE,공격을 받으면 자동으로 지장으로 변하여 공격을 피하는 마미조의 둔갑술.\n이 기술로 인해서 마미조를 공격하기란 여간 어려워보인다.\n
-LOC_SYSTEM_SPL_DESCRIBE_MACRO_BURST,선택한 앞쪽 2칸 범위로 강력한 선풍의 일격을 날리면서 반대방향으로 탄력을 받아 날라간다.\n바람이 강타한 위치엔 작은 회오리 바람이 생겨서 지속적으로 적에게 데미지를 입힌다.\n순간적인 이동이 가능하단 점에서 공격기가 아니라 이동기로도 사용이 가능하다.\n만약 이동할 위치가 부족하면 마법을 사용할 수 없다.\n이 마법은 선택한 반대 방향으로 강제로 이동된다는 것에 주의하자.\n
-LOC_SYSTEM_SPL_DESCRIBE_SHATTER,거대한 지진을 일으키는 대지술의 궁극 마법.\n거대한 소음과 시야내의 모든 적에게 데미지를 입히고 지형을 파괴한다.\n그러나 날고 있는 적에겐 1/3의 데미지밖에 주지 못한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA,강시인 요시카를 불러오는 청아의 특기 술법.\n요시카가 죽더라도 부활시킬 수 있는 청아의 주력 마법이다.\n
-LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,네시에 탑재되어있는 강력한 물대포.\n너무 강력한 수압으로 인해 적을 날려버려 조준을 방해하는 단점을 개선하면서도\n위력은 낮추지않은 캇파의 기술력이 돋보이는 기술이다.\n
-LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,와카사기히메가 자랑하는 애창곡.\n인어의 노래엔 특수한 효과가 있어서 그 아름다운 노래에 자동으로 발이 끌려가게 된다.\n노래를 들을수록 1칸씩 와카사기히메에게 이끌리듯이 걸어가지만 깊은물에 빠지진않는다.\n마법저항으론 막을 수 없지만 혼란저항이 있다면 인어의 노래의 영향을 받지않게된다.\n
-LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,연금술을 이용한 에메랄드의 벽을 만들어내는 마법.\n주변 8타일에 강한 물리데미지를 입힐 수 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n사용중엔 모든 근접공격 데미지가 3배가 되는 심플하면서 강력한 마법.\n
-LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n현자의 돌이 시전되고 있는 동안엔 다양한 학파의 마법을 아주 적은 영력만으로 난사할 수 있다.\n화염구, 워터캐논, 질풍선, 에메랄드시티, 지반융기 마법을 연금술에 비례한 파워로 사용한다.\n시전후 a를 통한 능력사용으로 속성 마법을 사용가능하다.\n이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,목표로 한 적의 바로 근처에 거대한 닻을 떨어뜨린다.\n닻 자체에는 데미지나 공격기능이 없지만 닻에 꽂힌 상대는 움직임을 봉인당한다.\n움직이기위해서는 먼저 닻을 파괴하던지 닻이 자연스럽게 사라질때까지 기다려야한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,멀리 있는 상대와 자신의 거리를 조절하여 순식간에 눈 앞으로 끌어당긴다.\n끌어당김과 동시에 상대의 발을 묶기 때문에 이동속도 또한 일정시간동안 감소한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE,거리안의 지정한 대상의 남은 체력을 문답무용으로 절반 깎아 버리는 무시무시한 기술.\n이 기술에 저항하는건 불가능하지만 사용 후에는 딜레이가 생기므로 연속으로 사용할 순 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_PRISM_CALL,프리즘리버 자매가 바로 한자리에 집합하는 마법. 아군 소환을 하는 그 이상의 의미는 없다.\n프리즘리버는 언제나 3명이 모여 합주를 할 준비가 되어있다!\n
-LOC_SYSTEM_SPL_DESCRIBE_PSYCHOKINESIS,염동력을 이용하여 지정한 상대를 튕겨내면서 데미지를 준다\n선택한 대상을 무작위한 방향으로 날려버리면서 물리 데미지를 준다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_TRASH,주변의 쓰레기들을 모아서 하늘에 부유시키는 기술.\n쓰레기들은 제자리에 떠다니면서 움직임을 방해한다. 직접적인 공격 능력은 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_TRASH_RUSH,어번 사이코키네시스로 떠오른 쓰레기 더미들을 지정한 상대에게 모두 투척한다.\n쓰레기들은 경로상에 데미지를 줌과 동시에 그 자리에 유지하며 이동을 추가적으로 방해한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_KOKORO_CHANGE,코코로가 룰렛을 통하여 가면의 색을 결정한다.\n가면의 색에 따라서 코코로의 속성이 결정된다. 상대 유리한 속성이 선택될 가능성이 높아진다.\n속성이 정해진 후엔 같이 떠다니는 가면이 파괴되면 다시 원상태로 돌아온다.\n
-LOC_SYSTEM_SPL_DESCRIBE_THUNDER_BOLT,거대한 번개의 탄환을 발사하는 강력한 번개계열 공격마법.\n적을 관통하는 특징이 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SANTUARY,사용시 넓은 범위에 성역을 펼친다. 이 성역안에선 어느 데미지도 무효로 되서 입지 않는다.\n시간이 흐를수록 성역의 범위는 점차 좁아진다.\n
-LOC_SYSTEM_SPL_DESCRIBE_MISTIA_SONG,밤참새의 노랫소리로 눈을 멀게 한다. 시야에 들어올때 이 노래를 들으면 야맹증이 걸리게 된다.\n야맹증에 걸리면 눈이 멀어서 시야가 급격하게 줄어든다. 시간이 지나면 원래대로 돌아온다.\n투명보기가 있다면 야맹증에 걸리지않는다.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_DISH,탄막으로 접시를 던지는 심플한 기술. 상당히 돈이 필요한 탄막으로 보인다.\n
-LOC_SYSTEM_SPL_DESCRIBE_MESS_CONFUSION,시야내의 모든 적에게 혼란을 시도하는 마법. 각자마다 마법저항을 체크한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SLEEP_SMITE,시야내의 적에게 잠을 유발하는 마법. 데미지는 없지만 저항할 수 없다.\n또한 장애물을 무시하고 직접 시전이 가능하다.\n잠에 빠지면 일정 턴 무방비상태가 되며 공격을 받으면 큰 데미지와 함께 깨어난다.\n
-LOC_SYSTEM_SPL_DESCRIBE_TARGET_ELEC,원하는 상대에게 약한 전류를 흐르게 만드는 공격 마법.\n일반적인 마법과 다르게, 지정한 대상에게 정확하게 전류를 흘려보낸다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ELEC_BALL,주변에 떠다니는 전기 구슬을 만들어내는 마법.\n떠다니는 전기 구슬은 당장 데미지를 줄 순 없고 주변을 떠돌아 다닌다.\n몇 턴이 지나게되면 전기구슬은 주변의 적에게 강력한 전류를 흘려보내고 사라진다.\n전류를 흘려보내기전에 적에게 공격받아서 사라지거나 대상을 정할 수 없는 단점이 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_DREAM_CALL,최종 형태가 된 도레미의 궁극의 기술.\n주변의 꿈의 주민들을 적의 주변에 순간이동시켜 둘러쌓이게하는 마법\n멀리있는 적이 있어도 순식간에 전송시킬 수 있다. 특히 강한 적을 더 보내는 경향이 있다.\n당연한 얘기지만 주변에 몬스터가 없으면 사용할 수 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_HYPER_BEAM,일직선으로 관통하는 강력한 빔을 발사한다.\n왜 빔이 나가는건진 모르겠지만 로봇처럼 생겼으니까 빔을 붙여봤다.\n
-LOC_SYSTEM_SPL_DESCRIBE_KAGUYA_SPELL,카구야가 낸 다섯개의 난제. \n상대의 주변에 고정된 5개의 난제가 소환되어 주변의 적을 요격한다.\n각각의 난제가 쓰는 공격은 강하진않지만 다양한 속성의 공격을 하며\n난제 자체는 파괴되지않고 무적이므로 시전자인 카구야를 우선적으로 공격해야 멈출 수 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_SWORD,검은 꼭 휘둘러야된다는 고정관념을 깨트려 거대한 장검을 던지는 기술.\n이런 거대한 검을 던져서 맞으면 아플것이 분명하다.\n가까이 있으면 던지진 못하나 가까이서 휘두른 검으로 맞던 멀리서 던진 검에 맞건 비슷할 듯 싶다.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_KNIFE,은제 나이프를 탄막으로서 던지는 단순한 기술.\n평범한 탄막과 다를바가 없지만 날이 서있고 사용자의 기술이 붙어서 상당한 위력을 가지게 되었다.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_PLAYER,단지 적을 잡아서 던지는 심플한 기술. 그러나 오니의 근력이 붙으면서 그 어떤 기술보다 무서워졌다.\n이 기술은 방어도, 회피도, 방패로도 막을 수 없다. 때문에 고정적으로 아주 큰 데미지를 받게 된다.\n사용하기위해선 딱 달라붙어있어야 하며 던지는 위치는 무작위다. 어딘가의 강철지옥의 거인이 썼다고 한다 \n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,요괴를 퇴치하는 부적을 던진다. 물론 요괴가 아니더라도 효과가 있다.\n단순히 던져도 저절로 적에게 호밍되서 날라간다. 피하는게 쉽지않다.\n
-LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,레이무가 틈새를 이용해서 적의 옆으로 순식간에 날라가서 차버린다.\n멀어져도 방심할 수 없는 이유중 하나. 생각보다 발차기가 아프다.\n
-LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,레이무가 잠시 결계를 고정시켜서 상대를 도망가지 못하게 막는다.\n결계가 고정된 상태에서 결계 밖으로 나갈 수 없게된다. \n기본적으로 예방법은 없지만 지속시간이 짧으며 한번 사용하면 당분간은 사용할 수 없는 듯하다. \n
-LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI,단, 유카리라면 이 주문을 잘 알고있어서 사전에 막아줄 수 있을듯하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
-LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_CAN_USE_SILIENCE,이 마법은 침묵 상태에서도 사용이 가능하다.\n
+LOC_SYSTEM_SPL_DESCRIBE_CANNON,Fires a danmaku charged with the power of the Yin-Yang Orb.\nExplodes on impact and deals unavoidable damage.\nPartially penetrates defense.\n
+LOC_SYSTEM_SPL_DESCRIBE_DOLLS_WAR,Summons a melee-focused Injury Doll and a defense-oriented Hourai Doll.\nThe Injury Doll attacks quickly while the Hourai Doll draws enemy attention.\nA perfect balance of offense and defense to cover a summoner’s weaknesses.\n
+LOC_SYSTEM_SPL_DESCRIBE_FAKE_DOLLS_WAR,Summons either an Injury Doll or Hourai Doll.\nBeing a fake, they are much weaker than the originals.\n
+LOC_SYSTEM_SPL_DESCRIBE_FIRE_SPREAD,Spreads a fan-shaped cloud of flames in front of you.\n
+LOC_SYSTEM_SPL_DESCRIBE_STASIS,Prevents the target from teleporting.\nApplies the 'Stasis' debuff for a duration.\n
+LOC_SYSTEM_SPL_DESCRIBE_JUMP_ATTACK,Instantly jumps to a distant enemy.\n
+LOC_SYSTEM_SPL_DESCRIBE_ALERT_NOISE,Makes a loud noise that wakes up nearby monsters.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,Drops a giant Namazu at the targeted location.\nIt takes some time to fall, and causes a large explosion on impact.\n
+LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,Danmaku that flies in from beyond the boundary.\nHigh-level Schema casts stronger danmaku.\n
+LOC_SYSTEM_SPL_DESCRIBE_CHANGE,A raccoon’s specialty transformation magic.\nTransforms into the strongest visible enemy nearby, but not into another raccoon.\nTemporarily gains the stats and spells of that monster, except summoning. Reverts after some time and grants full EXP when defeated.\n
+LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,Manipulates local fortune using feng shui.\nInflicts misfortune on a targeted enemy, reducing their luck through three stages: Misfortune, Great Misfortune, and Calamity.\nBad luck makes attacks land more, dodging harder, and item drops worse.\nCalamity can lead to absurd disasters—like a UFO falling from the sky.\nA UFO? Just kidding! Maybe.\n
+LOC_SYSTEM_SPL_DESCRIBE_THUNDER,Calls down a thunderbolt from the sky, striking a 3x3 area with powerful electric damage.\nHowever, the lightning is unpredictable and may not hit every spot.\n
+LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,Fires fast-moving air bullets at the enemy.\nNot very powerful or piercing, but casts much faster than other spells—up to twice as fast.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,Mamizou’s specialty that summons multiple raccoon minions at once.\nThey're weak, but since raccoons can also transform, leaving them alone might cause trouble.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,Summons a variety of powerful youkai.\nOni, lantern youkai, and yuki-onna may appear.\nOnly one can be summoned at a time.\n
+LOC_SYSTEM_SPL_DESCRIBE_MAMIZO_EVADE,Mamizou's transformation art that lets her automatically turn into a jizo statue to evade attacks.\nMakes her very difficult to hit.\n
+LOC_SYSTEM_SPL_DESCRIBE_MACRO_BURST,Strikes a two-tile range ahead with a powerful whirlwind and launches you backward.\nLeaves small whirlwinds that deal continuous damage.\nCan be used as a mobility spell.\nCannot be used if there’s no space to move.\nNote: You’ll be forcibly moved in the opposite direction.\n
+LOC_SYSTEM_SPL_DESCRIBE_SHATTER,An ultimate earth magic that causes a massive earthquake.\nDeals damage and destroys terrain within sight with a loud rumble.\nDeals only one-third damage to flying enemies.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA,Seiga’s signature technique that summons the jiangshi Yoshika.\nYoshika can be revived even if defeated, making this Seiga's main summoning spell.\n
+LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\nHigh water pressure used to knock back enemies, but now refined to reduce knockback without sacrificing power—showcasing Kappa engineering.\n
+LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,Wakasagihime's favorite song.\nThe magical melody pulls enemies toward her one tile at a time.\nCannot be blocked by magic resistance but is nullified by confusion resistance.\n
+LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,Creates emerald walls using alchemy.\nDeals heavy physical damage in the surrounding 8 tiles.\n
+LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active—simple and deadly.\n
+LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate alchemy spell that creates the Philosopher's Stone.\nWhile active, you can rapidly cast elemental spells with minimal MP cost, based on your alchemy power.\nAllows silent casting of certain spells like Fireball, Water Cannon, Wind Blade, Emerald City, and Ground Raise using the 'a' key.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,Drops a giant anchor near the targeted enemy.\nThe anchor itself does no damage but pins the target in place.\nThe enemy must destroy the anchor or wait for it to disappear to move again.\n
+LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,Instantly pulls a distant enemy toward you and binds their feet, reducing their movement speed for a short time.\n
+LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE,Halves the remaining HP of a target within range without question.\nCannot be resisted but has a cooldown, so it can’t be used in succession.\n
+LOC_SYSTEM_SPL_DESCRIBE_PRISM_CALL,Summons all Prismriver sisters to the same spot.\nPurely for gathering summoned allies.\nThey’re always ready to play in harmony!\n
+LOC_SYSTEM_SPL_DESCRIBE_PSYCHOKINESIS,Uses psychokinesis to knock the target away and deal physical damage.\nLaunches the enemy in a random direction.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_TRASH,Gathers nearby trash and levitates it in the air.\nThe floating garbage obstructs movement but doesn't deal damage.\n
+LOC_SYSTEM_SPL_DESCRIBE_TRASH_RUSH,Throws all the floating trash at a designated target.\nThe trash deals damage along its path and stays on the ground, further hindering movement.\n
+LOC_SYSTEM_SPL_DESCRIBE_KOKORO_CHANGE,Kokoro spins a roulette to determine her mask color.\nThe mask sets her element, often favoring the enemy's weakness.\nOnce the mask is destroyed, she reverts to her original state.\n
+LOC_SYSTEM_SPL_DESCRIBE_THUNDER_BOLT,Fires a massive lightning bullet that pierces through enemies.\n
+LOC_SYSTEM_SPL_DESCRIBE_SANTUARY,Casts a sanctuary over a wide area.\nWhile inside, all damage is nullified.\nThe sanctuary gradually shrinks over time.\n
+LOC_SYSTEM_SPL_DESCRIBE_MISTIA_SONG,The night sparrow’s song blinds enemies.\nHearing it causes night blindness, drastically reducing vision.\nIt wears off over time.\nTransparency detection prevents the effect.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_DISH,A simple danmaku technique of throwing plates.\nLooks like it costs quite a bit to use.\n
+LOC_SYSTEM_SPL_DESCRIBE_MESS_CONFUSION,Attempts to confuse all enemies in sight.\nEach enemy checks their magic resistance individually.\n
+LOC_SYSTEM_SPL_DESCRIBE_SLEEP_SMITE,A sleep-inducing spell that affects all enemies in sight.\nCannot be resisted, and bypasses obstacles.\nSleeping enemies become defenseless and take extra damage when hit.\n
+LOC_SYSTEM_SPL_DESCRIBE_TARGET_ELEC,Casts a weak electric current on a designated enemy.\nUnlike most spells, it targets a specific foe precisely.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ELEC_BALL,Creates floating electric orbs that drift around.\nThey don't deal damage immediately but release a powerful current after several turns.\nOrbs disappear if attacked or if they fail to find a target.\n
+LOC_SYSTEM_SPL_DESCRIBE_DREAM_CALL,Doremy’s ultimate spell in her final form.\nTeleports dream dwellers around a distant enemy to surround them.\nStronger enemies are more likely to be summoned.\nCannot be used if no monsters are nearby.\n
+LOC_SYSTEM_SPL_DESCRIBE_HYPER_BEAM,Fires a powerful straight-line beam that pierces through targets.\nNo real reason for the beam—it just looks cool on a robot.\n
+LOC_SYSTEM_SPL_DESCRIBE_KAGUYA_SPELL,Kaguya’s five impossible requests.\nFive immobile challenges appear around the enemy and attack nearby foes with various elemental spells.\nThe challenges are invincible and must be stopped by attacking Kaguya directly.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_SWORD,Breaks the stereotype that swords must be swung—throws a massive greatsword instead.\nCan’t throw it at close range, but it hurts all the same whether swung or thrown.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_KNIFE,Throws silver knives as danmaku.\nThough simple, the sharp blades and user skill make them quite powerful.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_PLAYER,Grabs and throws the enemy—a simple move, but terrifying with oni strength.\nIgnores defense, dodge, and shields, dealing massive fixed damage.\nMust be adjacent to use.\nInspired by the iron hell giant?\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,Throws a charm that exorcises youkai.\nHomes in on the target, making it hard to dodge.\nEffective even on non-youkai.\n
+LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,Reimu uses a gap to instantly warp next to an enemy and deliver a powerful kick.\nJust because she’s far doesn’t mean you’re safe.\n
+LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,Reimu fixes a barrier in place to prevent escape.\nWhile active, nothing can pass through.\nIt’s hard to counter but lasts only briefly and has a cooldown.\n
+LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI,However, Yukari may be able to counter this spell in advance, as she’s well-versed in it.\n
+LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
+LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n
+LOC_SYSTEM_SPL_DESCRIBE_CAN_USE_SILIENCE,This spell can be used even while silenced.\n
 LOC_SYSTEM_SKILL_FIGHT,Fight
 LOC_SYSTEM_SKILL_UNWEAPON,Unarmed Combat
 LOC_SYSTEM_SKILL_SHORTBLADE,Short Blade
@@ -1629,97 +1633,97 @@ LOC_SYSTEM_SKL_MIKO_4,Gain Resistance
 LOC_SYSTEM_SKL_MIKO_5,Red Cloak, Blue Cloak
 LOC_SYSTEM_SKL_MIKO_6,Popularity Boom
 LOC_SYSTEM_SKL_UKNOWN,Unknown Ability
-LOC_SYSTEM_SKL_DESCRIBE_NONE,존재하지 않는 능력이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_KANAKO_1,카나코님의 힘을 구현화하여 상대에게 순간적인 돌진을 할 수 있게된다.\n자신의 근접공격력, 신앙심과 거리에 비례해서 데미지가 들어가며\n사용후 이동속도가 느려지는 버프를 받게된다.\n이 버프중엔 건신초래돌을 추가적으로 사용할 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_KANAKO_2,카나코님의 기둥을 땅에 꽂는다.\n기둥은 캐릭터들의 이동을 막으며 신앙심에 비례한 체력을 가지게 된다.\n다만 기둥은 적이던 아군이건 원거리 공격을 맞지않고 통과시킨다.\n또한 신자는 이 기둥 옆에 있을때는 약간의 데미지증가 버프를 받게 된다.\n기둥은 한번에 여러개를 꽂을 수 있으나 버프는 중첩되지않는다.\n
-LOC_SYSTEM_SKL_DESCRIBE_KANAKO_3,카나코님의 바람을 구현화하여 무기에 휘감게 된다.\n이때 하는 공격은 바람의 힘을 받아 넓은 범위를 공격할 수 있게된다.\n근접 공격은 주변 8방향의 모든 적을 한번에 공격하고 원거리 공격은 모든 적을 관통하게된다.\n신앙심에 비례하여 지속시간이 늘어나며 공격력은 늘어나지 않는다.\n
-LOC_SYSTEM_SKL_DESCRIBE_GRAZE,그레이즈 상태가 된다. 그레이즈 상태에선 모든 원거리 탄막을 회피할 확률이 생긴다.\n틱틱틱 소리는 미지원이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_GRAZE_OFF,그레이즈 상태를 없앤다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LEVITATION,일시적인 비행 상태가 된다. 깊은물같은 지형을 통과할 수 있게 된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,비행 상태를 없앤다.\n
-LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,일시적 투명화할 수 있는 능력. 투명상태에서는 상대에게 들킬 확률이 현저히 줄어든다.\n이미 밀착해있으면 낌새를 눈치채서 따라올 수 있으며 투명을 보는 상대도 존재한다.\n또 투명상태에서는 P의 소모가 매우 빨라지니 주의해야한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,투명 상태를 없앤다.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,당신은 가지고 있는 물약을 던질 수 있다.\n던진 위치엔 3*3크기로 구름이 생성된다. 구름의 종류는 물약의 종류에따라 정해진다.\n이로운 물약은 던져도 연기구름만 생긴다. 해로운 물약을 던져야 강력한 구름이 나온다.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,에이린에게 몸을 맡겨 원하는대로 몸을 개조한다.\n원하는 스탯을 선택하면 그 외의 스탯이 모두 원하는 스탯으로 반영구적으로 옮겨진다.\n옮겨지는 수치는 신앙심에 따라 2~5로 유동적으로 변하며 언제라도 다시 스탯을 옮길 수 있다.\n중첩은 되지않는다. 한번 스탯을 선택하면 다시 개조하기전엔 계속 효과가 이어진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,높은 신앙심과 파워1칸을 소모하여 순간적으로 체력을 대부분 채워주는 에이린의 궁극 권능.\n효과는 강력하지만 사용후 일정시간이 지나면 회복한 수치만큼 그대로 부작용 데미지를 받게된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,일시적으로 지능을 강화시키는 뱌쿠렌의 신체강화마법.\n지능이 5증가하고 마법성공률, 파워가 증가하며 마나 회복속도도 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,일시적으로 각력을 강화시키는 뱌쿠렌의 신체강화마법. (W)\n이동속도가 매우 매우 빨라진다. 신속과 중첩되지 않으며 지속시간은 짧은 편이다.\n가히 초인이라 부를만 하군!\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1,단풍의 위에 서있는 적들에게 광기를 불어넣는다.\n단풍 위에 있는 적들에게 마법저항을 비교하여 혼란을 전부 건다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,당신이 끼고 있는 아티펙트가 아닌 몸통 방어구를 단풍 방어구로 바꾼다.\n단풍방어구는 시즈하를 믿고있는동안 당신의 은밀을 크게 올려준다.\n단, 옷의 종류가 단풍옷으로 바꿔져서 기존의 저항력은 사라진다.\n이 단풍방어구는 한번 바꾸면 기존의 방어구로는 되돌릴 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,당신이 들고있는 무기에 영구적으로 단풍브랜드와 +1~2의 인챈트를 부여한다.\n단풍브랜드가 붙은 무기는 단검이 아니라도 커다란 암습데미지를 줄 수 있고\n단검인 경우엔 평범한 공격에도 암습의 확률을 준다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1,당신에게 걸려있는 나쁜 디버프와 능력치 저하를 회복한다.\n즉시 회복되나 사용에는 신앙심과 적은양의 P를 소모한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2,당신이 들고 있는 음식을 소모하여 체력을 크게 회복한다.\n높은 신앙과 마나는 물론 또한 P도 1칸을 소모하는 고비용의 권능이다.\n만복도를 많이 회복하는 음식이 체력회복량도 조금 더 많다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_1,당신이 가지고있는 물약 1개를 소모하여 취기를 얻는다.\n원래 물약의 성능은 얻지못한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_2,밀착한 상대를 잡아 저먼 스플렉스를 건다.\n상당한 데미지를 주면서 위치를 바꿀 수 있다.\n만약 잡고있는 상태라면 해당 상대에겐 신앙심 소모없이 기술을 사용할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3,밀착한 상대를 들어올려 멀리 던져버린다.\n던진 위치엔 큰 충격파가 일어나 날라간 상대 주위로 범위 데미지를 준다.\n플레이어는 이 충격파에 면역이 되어있다.\n만약 잡고있는 상태라면 해당 상대에겐 신앙심 소모없이 기술을 사용할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4,오니의 힘을 빌어 굉장한 소리로 포효한다.\n시야내의 적들은 일정 확률로 포효에 기가 죽어 벙어리 상태가 된다.\n벙어리 상태가 된 적은 당분간 마법을 사용할 수 없다.\n만약 잡고있는 상태라면 해당 상대에겐 무조건 벙어리 상태로 만든다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,오니의 궁극기인 삼보필살을 사용한다. 3턴간 3번의 폭발이 순차적으로 일어난다.\n폭발 범위는 점차 커져서 거의 시야 전체를 커버한다.\n만약 잡고있는 상태라면 해당 상대에겐 보통의 2배 데미지를 입힌다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,상대의 마음을 읽고 트라우마를 일깨운다.\n성공하면 상대는 공포 상태가 되어 이쪽으로부터 도망치기 시작한다.\n좀 더 낮은 확률로 상대는 공포를 넘어서서 완전한 전의상실할 가능성이 생긴다.\n전의상실한 순간 경험치의 절반을 얻을 수 있으며 상대는 영구적인 공포상태로 변한다.\n이렇게 전의상실한 상대는 죽여도 경험치를 주지않으며 시야밖으로 나가면 사라진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,상대의 마음을 읽어낸다. 사용한 상대의 모든 생각을 읽게 된다.\n만약 대상이 동물형인경우 호감을 사서 영구적인 아군이 된다. 그러나 계단이용은 불가능해진다.\n동물형이 아닌 경우엔 명중과 회피가 매우 큰 폭으로 떨어지며 디버프에 대한 저항력이 사라진다.\n사용할때 적의 마법저항력에 비례해서 시전 턴수가 필요하며 그동안 아무행동도 할 수 없다.\n시간동안 시야에서 사라지거나 혼란,마비가 걸리면 실패하고 자신의 레벨이 올라갈수록 턴수는 줄어든다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,하급 마족들의 작은 무리를 소환한다.\n하급 마족들은 전투엔 별다른 도움은 안되겠지만 신앙심소모가 매우 적고 양으로 승부할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2,중급 마족 1명을 무작위로 소환한다.\n사라, 루이즈, 엘리스중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3,상급 마족 1명을 무작위로 소환한다.\n유키, 마이, 유겐마간중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON,유령의 소환을 시작한다.\n유령의 소환에는 비용이 들지않으며 한번 발동해두면 끝없이 유령을 불러들인다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF,유령의 소환을 종료한다.\n언제든지 원할때 다시 유령을 불러들일 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1,유령을 원하는 위치로 이동시킬 수 있다.\n지정한 위치로 주변에 있는 유령들이 한꺼번에 이동된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2,유령의 소환을 잠시간 가속한다.\n일정시간동안 어마어마한 속도로 유령의 수가 불어난다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3,1명의 영혼을 구속시켜서 자신의 노예로 삼는다.\n영혼이 구속된 상대를 일정시간 내에 잡으면 영구적인 아군으로 삼을 수 있다.\n구속된 영혼은 원본보다는 약해지지만 원본이 쓰는 마법이나 특징을 그대로 가지고 있다.\n또한 구속된 영혼은 1체까지 밖에 들고다닐 수 없다. 2번째 대상을 포획하면 원래가지고있던 영혼이 풀려난다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUKARI_1,시야내의 원하는 틈새로부터 지원사격을 요청한다.\n틈새로부터 적을 응시하는 이형의 눈이 나타나 적을 공격한다.\n이형의 눈은 낮은 체력을 가지고 있으므로 주의.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUKARI_2,시야내의 원하는 틈새로 공간이동을 할 수 있다. 한번 사용한 틈새는 닫힌다.\n영력과 신앙심을 제외한 별다른 디메리트 없이 순식간에 이동이 가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUKARI_3,공격을 막아주는 결계를 잠시동안 소환한다.\n결계를 사용하면 방패처럼 사용할 수 있으며 방패를 장착하고있어도 성능을 상승시킨다.\n결계로 만들어진 방패는 마법패널티등을 받지 않는다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUKARI_4,유카리가 경계를 건드려서 일정턴동안 선택한 위치를 중심으로 화면이 그대로 고정된다.\n고정된 상태의 지형은 시야가 이동되지않으며 상하좌우가 루프된다.\n또한 고정된 지형에 들어오지않은 적들은 차원고정이 끝나기전에 움직일 수 없다.\n계단을 타게되면 차원 고정은 풀린다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_JUMP,2칸의 짧은 거리를 한번에 이동할 수 있다.\n효과는 적지만 영력소모가 적고 연속으로 쓸 수 있다.\n비행이나 수영이 가능해도 물가로는 점프할 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TEMPLE,현재 서있는 위치에 스와코님의 신전을 세울 수 있다.\n사용시 큰 파워가 소모되지만 신앙심을 얻을 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_WATER_GUN,원거리의 적에게 물총을 쏠 수 있다.\n위력은 낮지만 큰 비용없이 연사할 수 있는 것이 장점이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TOUGUE,원거리의 적에게 커다란 혀를 이용하여 근처로 끌고 온다.\n사격형식으로 나가므로 사이에 막혀있다면 맞출 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_CURSE,적 하나에 재앙을 내려서 독과 감속효과를 건다.\n독저항이 있어도 마법저항이 높아도 상관없이 걸 수 있지만\n적이 나보다 강력할수록 감속 시간은 짧아진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_DIGGING,사거리안의 일직선상에 있는 모든 벽을 굴착한다.\n사용시 생각보다 큰 소음이 난다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SUMMON_FLOG,잠시동안 아군의 개구리를 소환한다.\n신도의 레벨에 비례해서 강력한 개구리가 나온다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_STATUE,잠시동안 개구리 석상을 위치에 소환한다.\n석상은 유리 벽과 같아서 시야는 통하지만 이동과 사격을 모두 막을 수 있다.\n일정 시간이 지나면 사라진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_RAIN,주변에 거대한 물웅덩이를 만든다.\n깊은 물은 날거나 수영할 수 없는 적의 이동을 막는다.\n추가로 아군 개구리를 여럿 소환한다.\n자신이 날 수 없거나 수영할 수 없으면 자신도 움직일 수 없게 된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SLEEP,잠시동안 땅속에 박혀서 모든 공격으로부터 무적이 되고 체력과 영력을 회복한다.\n또한 턴동안 주변의 적들이 플레이어를 놓치고 이리저리 이동하게 된다.\n일정 시간이 지나면 잠에서 깨지만 그 반작용으로 짧은 감속에 걸린다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SWAKO_MISYAGUZI,스와코님이 사역하고있는 강력한 미샤구지님을 잠시동안 소환한다.\n1번에 하나의 미샤구지님만 소환할 수 있지만 강력한 저주 공격을 가하는 듬직한 소환수다.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_1,저주가 걸려있는 장비의 마이너스 인챈트를 플러스로 바꾼다.\nP의 소모를 제외한 별다른 비용은 들지 않는다.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_2,현재 들고있는 무기에 저주를 걸면서 일시적으로 저주 브랜드가 부여된다.\n저주브랜드가 붙은 무기는 저항이 불가능한 독데미지를 적에게 줄 수 있고\n일정 확률로 감속 효과를 준다. 브랜드가 걸려있거나 걸 수 없으면 힘이 강화된다.\n들고있는 무기에 이미 저주가 걸려있으면 사용할 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_3,현재 장착하고 있는 방어구에 저주를 걸면서 일시적으로 모든 데미지를 반사한다.\n몸통 방어구에 저주를 걸때는 더욱 더 긴 지속시간을 가진다.\n장착하고 있는 방어구에 이미 저주가 걸려있으면 사용할 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_4,현재 장착하고 있는 장신구에 저주를 걸면서 체력과 영력을 회복한다.\n장착하고 있는 장신구에 이미 저주가 걸려있으면 사용할 수 없다.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_5,당신이 들고있는 무기에 영구적으로 저주브랜드와 +1~2의 인챈트를 부여한다.\n저주브랜드가 붙은 무기는 저항이 불가능한 독데미지를 적에게 줄 수 있고\n일정 확률로 감속 효과를 준다.\n
-LOC_SYSTEM_SKL_DESCRIBE_BREATH,발현된 용의 속성에 맞는 브레스를 일직선으로 발사한다.\n사용후 일정시간 피로가 쌓여서 연속 사용은 안된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_TORMENT,시야내의 있는 적들의 체력을 절반으로 만들어버리는 무서운 기술.\n당신이 악마의 피를 이어받고있기때문에, 당신은 이 피해로부터 면역이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD,당신이 믿고 있는 신을 버린다.\n신을 버린 순간 신에게 얻은 권능과 이점이 사라지며 신의 분노를 사게된다.\n당신이 신의 분노를 사는 동안엔 신의 징벌을 받게 됩니다. 많은 시간이 지나면 징벌은 사라진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SEIJA_GIFT,세이자가 다른 신들에게서 훔쳐온 보물을 선물로 받는다.\n선택한 신의 훔쳐온 보물을 받는 대신에 선택한 신의 징벌상태가 된다.\n또한 세이자로부터의 신용을 조금씩 잃습니다. 선택한 신의 징벌이 끝나면 다시 받을 수 있다.\n이 권능은 일정 시간이 흐르면 자동으로 사라지면서 신앙심 또한 똑같이 감소한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SEIJA_1,시야내의 선택한 적과 자리를 즉시 뒤집어 바꾼다.\n이 권능은 타겟과 사이에 다른 적이나 아군이 있어도 자리를 바꿀 수 있지만 벽을 넘어서는 안된다.\n신앙심과 영력소모없이 파워소모만으로 사용할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SEIJA_2,시야내의 모든 몬스터의 시야와 장소를 뒤집어서 약간의 데미지와 저항불가 혼란을 준다.\n이 권능으로는 치명적인 데미지는 주지 못하지만 아무리 강한 적이라도 순식간에 뒤집히는 시야에는\n빠르게 대처할 수 없을 것이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LILLY_1,선택한 요정을 자신의 동료로 권유한다. 권유할 수 있는 횟수는 제한이 있다.\n릴리화이트는 신앙심 1칸마다 권유할 수 있는 요정을 1명씩 늘려준다. 최종적으론 5명까지 권유한다.\n권유에 성공한 요정은 영구적으로 동료가 된다.\n\n자신보다 레벨이 높은 요정은 권유를 거부한다. 레벨을 올려서 나중에 다시 권유할 수 있다.\n이미 메이드같은 직업을 가지고있는 요정들은 권유가 힘들어보인다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LILLY_2,모든 동료 요정을 자신의 주변으로 불러들인다.\n죽은 요정은 경험치를 모아서 다시 부활하기전까진 불러오지못한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LILLY_3,아군 요정 1명의 체력을 회복시킨다.\n회복하는 양은 선택한 요정의 최대체력과 신앙심에 비례한다.\n신앙심의 소모는 없지만 P를 약간 소모한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_LILLY_4,시야내의 아군 요정들에게 자신의 힘을 나눠주어 강력한 버프를 건다.\n이 기술은 자신의 힘을 나눠주는 것이므로 사용한 플레이어는 역으로 전투패널티가 걸린다.\n전투패널티는 명중과 공격이 내려가고 스펠파워가 절반이 된다.\n신앙심의 소모는 없지만 P를 1칸 소모한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_1,시야내에서 지정한 파괴가능 벽을 문으로 만든다.\n시전 위치와 플레이어의 사이에 적이라던지 장해물이 있으면 만들 수 없다.\n만들어진 문은 닫힌 상태로 생성되며 다른 문과 같이 투시와 이동과 함께 여닫는게 가능하다.\n이 권능은 소음이 없으므로 몰래 적의 등뒤를 살피는 것이 가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_2,시야내에서 지정한 문을 신의 힘으로 잠가버린다.\n만약 열려있다면 닫히고 문 위에 누군가 있었다면 밀쳐내면서 약한 데미지와 혼란을 준다.\n이렇게 잠겨진 문은 누구도 통과할 수 없으며 심지어 신도조차 드나드는건 할 수 없다.\n대신 이렇게 만들어진 문은 적의 공격대상이 되며 일정 데미지를 받으면 다시 열리게 된다.\n잠긴지 일정시간이 되면 원래대로 돌아오면서 평범한 문으로 바뀐다.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_3,지정한 적의 등 뒤에 문을 만들어 순식간에 이동한다.\n이동하는데는 소리도 없이 이동하며 이동하는 적의 주의도 분산시킬 수 있다.\n적의 등 뒤에 파괴가능한 지형이면 강제로 문을 만들어 이동할 수 있으나\n적의 뒤에 다른 적이 있거나 계단같은 지형이라 문을 만들 수 없는 경우엔 사용이 불가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_4,오키나가 부하인 마이와 사토노를 일시적으로 소환시킨다.\n마이와 사토노는 자체적인 전투능력은 없지만 뒤에서 춤을 추기 시작하며\n시야 안에 있는 아군의 체력과 영력을 지속적으로 회복시켜준다.\n마이는 체력을, 사토노는 영력을 회복시키며 신앙심을 2배 쓰는것으로 둘다 소환도 가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,언제든지 오키나의 신도는 자신의 등뒤의 문을 열고 뒷 문의 세계로 도망칠 수 있다.\n자신이 서있는 위치에 문을 만들 수 있는 상태라면 (계단이나 물위에선 만들 수 없다.)\n언제든지 오키나의 신도는 자신의 등뒤의 문을 열고 뒷 문의 세계로 도망칠 수 있다.\n뒷 문의 세계는 마이와 사토노 이외엔 아무도 없는 조용한 공간이며\n마이와 사토노는 이 세계에선 항상 무적이며 신도의 체력과 영력을 회복시킨다.\n도망칠때 가까이있는 적은 뒷 문의 세계로 따라올 수 있으니 주의하자.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,단순하지만 강력한 물리 탄막을 쏜다. 캐릭터의 레벨에 비례해서 강해진다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n2번 사용할때마다 순화가 1단계씩 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,순수하게 강력한 힘을 일시적으로 얻는다. \n힘이 5증가하고 근접, 탄막공격력에 추가데미지가 생긴다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n1번 사용할때마다 순화가 1단계씩 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,적에 대한 살의를 증폭시켜 일시적으로 빠른 가속을 얻는다. \n모든 행동속도가 1.5배 빨라지지만 시야내의 적이 사라지게되면 살의 역시 사라진다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n1번 사용할때마다 순화가 2단계씩 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,순호로부터 영구적인 순화의 축복을 받을 수 있다. 오로지 1번만 사용할 수 있다. \n스탯이 영구적으로 증가하고 3가지중 선택하여 순화 능력을 영구적으로 부여받을 수 있지만\n더 이상 순호의 권능을 사용할 수 없으며 영구적인 순화상태로 소모품 사용이 불가능해진다.\n만약 원하는 순화 선택지가 없으면 잠시 순화를 다음 선택으로 미룰 수 있지만 미루게되면\n다시 다음 순화 선택지가 나올때까지는 신앙을 다시 모아야 선택이 가능해진다.\n또한, 순화된 상태에서 순호를 배신하게되면 순화의 힘으로 무조건 죽게 된다.\n\n당신은 배신할수도 없으며 권능도 소모품도 사용할 수 없는 패널티를 감수할 각오가 되어있는가?\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,당신은 역병신인 죠온이나 빈곤신인 시온을 자신의 몸에 빙의시킬 수 있다.\n역병신과 빈곤신을 빙의하는 부담으로 둘의 저주가 강화되는 패널티를 안게되지만\n빙의는 일정시간 지속되며 빙의하는 동안엔 빙의 된 신의 권능을 사용할 수 있으며\n빙의가 끝나면 일정 신앙심을 얻은 후에 다시 빙의를 할 수 있게 된다.\n\n죠온은 빙의와 동시에 파워를 가득 채워주지만 소모품을 항상 2~3개씩 낭비하게 될것이며\n빙의가 풀렸을때 파워가 3.00이상 남아있을 경우는 강제로 파워가 3.00으로 줄어든다.\n시온은 빙의와 동시에 체력과 영력을 회복시키며 파워가 낮을때 받는 패널티를 없애주지만\n땅에 떨어진 소모품들이 사라지는 속도가 가속되며 땅에 떨어뜨린 소모품은 무조건 사라질것이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,죠온에게 빙의하는 동안에 죠온의 스펠카드인 퀸 오브 버블을 사용할 수 있다.\n시야 내의 모든 적에게 저항불가능한 짧은 혼란을 걸며 시전자의 레벨에 비례한 데미지를 준다.\n사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,시온에게 빙의하는 동안에 시온의 스펠카드인 미스찬스 스캐터을 사용할 수 있다.\n시야 내의 모든 적에게 저항불가능한 감속을 걸며 시야를 가리는 안개를 자신의 주변에 흩뿌린다.\n사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4,빈곤신인 시온을 상대에게 강제로 빙의시키는 것으로 상대의 승리운을 없애버리는 최흉최악의 전법\n투사체형태의 시온을 맞은 상대는 저항할 수 없이 시온이 빙의되어 레벨과 전투력을 잃어버린다.\n신자는 빙의상태에서만 이 전법을 쓸 수 있으며 사용시 빙의된 신은 죠온으로 바뀐다.\n강력하지만 신앙심이 고정적으로 별 다섯개로 떨어지기에 다시 사용하기위해선\n다시 많은 신앙심을 모아야하며 비생명체에는 사용이 불가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_OFF,빙의상태를 강제로 해제한다.\n해제자체는 시간이 지나서 해제하는 것과 다를바 없으며 다시 빙의하기 위해선\n똑같이 일정 신앙심을 올려야 다시 빙의할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_1,시야내에 있는 모든 적들의 욕망을 읽어내서 인기도를 올린다.\n시야내에 존재하는 적이 많을수록, 강할수록 얻는 인기도가 많아진다.\n패널티 없이 인기도를 올릴 수 있는 방법이지만 새로 들어간 층마다 1번씩만 사용이 가능하다.\n만약 그 층을 벗어나게되면 더 이상 사용할 수 없게됨을 주의하자.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_2,순식간의 몸을 감춰서 랜덤한 위치에서 등장하는 도술.\n인기도는 매우 작게 쓰지만 단순한 위기탈출용 랜덤 순간이동에 그치는 수수한 도술.\n다른 권능들과 다르게 일회용이다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_3,성인의 기운을 받아서 신성한 후광을 두른다.\n인기도는 적게 사용하지만 시야내의 모든 적을 빛나게하여 회피를 낮추는 다소 수수한 도술\n명중 보너스와 더불어 투명한 적도 보이게 하는 부가효과도 있다.\n후광에 의한 빛나게하는 효과는 신도에게도 영향을 미쳐 똑같이 회피를 낮추니 주의.\n\n미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_4,미코에게 원하는 저항을 부여받을 수 있다.\n화염, 냉기, 전기, 독, 혼란저항중에 원하는 저항을 선택하여 1단계 올릴 수 있다.\n한 층에서 여러 번 사용하면 효과 중첩이 가능하다.\n\n미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_5,미코에게서 망토를 선택받아서 타격과 마법 둘중 하나를 강화 있다.\n빨간색을 선택시 근접 공격에 전투력 보너스를 받아 공격력과 명중률이 상승하며\n파란색을 선택시 스펠파워와 성공율이 크게 상승한다.\n한번 색을 선택하면 층을 바꾸기전까진 다시 선택할 수 없게된다.\n\n미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MIKO_6,가득 찬 인기도를 폭발시키고 전부 소모하여 강력한 버프를 얻는다.\n최대 체력이 2배가 되거나, 영력회복속도를 엄청나게 상승시키거나, 반영구적인 가속중 선택할 수 있다.\n\n미코의 버프는 해당 층에서는 영구적이지만 층을 옮기면 효과가 사라지기에 다시 사용해야한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_1,화염구를 만들어 날리는 화염계 공격마법.\n적에 부딪히거나 목표에서 터지며 주변에 폭발데미지를 입힌다.\n자신도 가까이 있으면 데미지를 받을 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2,물을 압축하여 발사한다.\n맞은 상대를 밀쳐낼 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,빠른 대기의 탄환을 적에게 날리는 마법.\n적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,주변에 커다란 에메랄드로 된 벽을 솓구친다.\n밀착하여 가까이 있는 상대에게 데미지를 줄 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,모르는 능력.\n
+LOC_SYSTEM_SKL_DESCRIBE_NONE,A non-existent ability.\n
+LOC_SYSTEM_SKL_DESCRIBE_KANAKO_1,Manifests the power of Kanako, allowing you to charge at an enemy.\nDamage scales with melee power, faith, and distance.\nApplies a slow movement buff after use.\nCannot use the Divine Pillar skill while this buff is active.\n
+LOC_SYSTEM_SKL_DESCRIBE_KANAKO_2,Plants Kanako’s sacred pillar into the ground.\nIt blocks movement and has HP based on faith.\nIt does not block ranged attacks.\nAllies near the pillar receive a small damage buff.\nMultiple pillars can be placed, but the buff does not stack.\n
+LOC_SYSTEM_SKL_DESCRIBE_KANAKO_3,Enchants your weapon with Kanako’s wind, enabling wide-range attacks.\nMelee attacks hit all 8 surrounding tiles, and ranged attacks pierce all enemies.\nDuration scales with faith, but damage does not increase.\n
+LOC_SYSTEM_SKL_DESCRIBE_GRAZE,Enters Graze mode.\nWhile active, you gain a chance to evade ranged danmaku attacks.\n(Sound effects not supported.)\n
+LOC_SYSTEM_SKL_DESCRIBE_GRAZE_OFF,Cancels Graze mode.\n
+LOC_SYSTEM_SKL_DESCRIBE_LEVITATION,Grants temporary flight, allowing you to pass over deep water and other terrain.\n
+LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,Cancels flight state.\n
+LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,Grants temporary invisibility.\nGreatly reduces the chance of being detected.\nEnemies nearby may still notice you, and some can see through invisibility.\nRapidly drains MP while active.\n
+LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,Cancels invisibility.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,Allows you to throw potions in your inventory.\nCreates a 3x3 cloud at the landing spot.\nBeneficial potions create harmless smoke, while harmful ones release powerful clouds.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,Let Eirin modify your body at will.\nTransfers all other stats into one chosen stat based on your faith.\nThe transferred amount ranges from 2–5 and can be changed anytime.\nThe effect is semi-permanent until modified again.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,Eirin’s ultimate divine technique.\nConsumes high faith and 1 MP segment to restore most of your HP instantly.\nAfter a while, you take damage equal to the amount healed.\n
+LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,Byakuren’s body enhancement magic that temporarily boosts Intelligence.\nIncreases INT by 5, improves spell success and power recovery rate.\n
+LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,Byakuren’s body enhancement magic that temporarily boosts Dexterity (W).\nMovement speed increases dramatically.\nDoes not stack with Haste and lasts briefly.\nSuperhuman speed!\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1,Drives enemies standing on autumn leaves into madness.\nInflicts Confusion by comparing their magic resistance.\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,Replaces your non-artifact body armor with Maple Armor.\nIncreases stealth while you have faith in Shizuha.\nHowever, it removes previous resistances.\nMaple Armor cannot be reverted once equipped.\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,Permanently enchants your weapon with the Maple brand and +1–2.\nMaple-branded weapons can deal large backstab damage, even if not a dagger.\nDaggers gain a backstab chance on normal attacks.\n
+LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1,Removes harmful debuffs and stat reductions.\nConsumes faith and a small amount of MP.\n
+LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2,Consumes a food item in your inventory to greatly restore HP.\nCosts high faith, mana, and 1 MP segment.\nBetter food restores more HP.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_1,Consumes one potion in your inventory to gain drunkenness.\nThe original potion effect is not applied.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_2,Grabs an adjacent enemy and performs a German Suplex.\nDeals heavy damage and switches positions.\nIf you’re already grabbing the enemy, it costs no Faith.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3,Lifts a nearby enemy and throws them far away, creating a shockwave that deals area damage.\nThe player is immune to this shockwave.\nIf grabbing, the skill costs no Faith.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4,Borrows oni power to roar mightily.\nEnemies in sight may become Silenced by fear.\nIf used while grabbing, the target is guaranteed to be Silenced.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,Uses the oni’s ultimate—Triple Destruction.\nThree explosions occur over 3 turns, each with increasing range, eventually covering nearly the entire screen.\nIf used while grabbing, deals double damage.\n
+LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,Reads the enemy's mind and triggers trauma.\nCauses Fear, making the enemy flee.\nRarely causes them to completely lose will, granting EXP and permanent fear, but they give no EXP when killed and vanish off-screen.\n
+LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,Reads the enemy’s thoughts.\nIf the target is an animal, they become a permanent ally but cannot use stairs.\nOther enemies suffer reduced hit and evasion rates and lose debuff resistance.\nTakes several turns based on the target’s magic resistance.\nInterrupts on status effects or if they leave sight.\nRequired turns decrease with level.\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,Summons a small group of low-tier demons.\nThey aren’t very strong but cost very little Faith and can overwhelm with numbers.\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2,Summons one random mid-tier demon: Sara, Louise, or Elis.\nHas a 4% chance to betray you.\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3,Summons one random high-tier demon: Yuki, Mai, or YuugenMagan.\nHas a 4% chance to betray you.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON,Begins summoning ghosts.\nOnce activated, ghosts continuously appear without cost.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF,Stops summoning ghosts.\nYou can resume summoning at any time.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1,Moves ghosts to a designated location.\nAll nearby ghosts gather at the selected point.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2,Temporarily accelerates ghost summoning.\nA massive number of ghosts appear in a short time.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3,Binds a soul and makes it your servant.\nCapture them in time to make them a permanent ally.\nBound souls are weaker than the original but retain their abilities.\nOnly one soul can be carried at a time.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUKARI_1,Requests support fire from a gap.\nEldritch eyes appear and attack enemies.\nThe eyes have low HP, so protect them.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUKARI_2,Teleports through a chosen gap within sight.\nOnce used, the gap closes.\nFast and free of penalties aside from Faith and MP cost.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUKARI_3,Summons a protective barrier that blocks attacks.\nFunctions like a shield and boosts shield performance.\nMagic penalties do not apply.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUKARI_4,Yukari fixes the terrain in place for several turns, centering the view and looping screen edges.\nEnemies outside the fixed zone can’t move until the effect ends.\nEnds when using stairs.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_JUMP,Jumps two tiles at once.\nLow impact but low MP cost and can be used consecutively.\nCannot jump onto water even with flight or swimming.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TEMPLE,Constructs Suwako’s shrine at your current location.\nCosts a large amount of MP but grants Faith.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_WATER_GUN,Shoots a water gun at a distant enemy.\nLow damage, but can be fired repeatedly at low cost.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_TOUGUE,Uses a giant tongue to pull a distant enemy closer.\nIt's a projectile, so it won't hit if obstructed.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_CURSE,Curses an enemy with poison and slow.\nIgnores poison and magic resistance, but slow duration is shorter against stronger enemies.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_DIGGING,Digs through all walls in a straight line within range.\nMakes more noise than expected.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SUMMON_FLOG,Summons an allied frog for a short time.\nThe frog’s strength scales with your Faith level.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_STATUE,Summons a frog statue at a location.\nIt functions like a glass wall: allows vision but blocks movement and projectiles.\nDisappears after a while.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_RAIN,Creates a large puddle of water around you.\nPrevents movement for non-flying or non-swimming enemies.\nAlso summons allied frogs.\nYou’ll be unable to move as well if you can’t fly or swim.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SLEEP,Burrows underground for a short time, becoming invincible and recovering HP and MP.\nEnemies lose sight of you and wander.\nAfter awakening, you suffer a brief slow.\n
+LOC_SYSTEM_SKL_DESCRIBE_SWAKO_MISYAGUZI,Temporarily summons the powerful Mishaguji deity under Suwako’s command.\nOnly one can be summoned at a time.\nIt deals strong curse-based attacks.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_1,Converts negative cursed equipment enchantments into positive ones.\nCosts only MP.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_2,Temporarily curses your current weapon with the Curse Brand.\nDeals unavoidable poison damage and has a chance to slow enemies.\nIf already cursed, strengthens instead.\nCannot be used on already cursed weapons.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_3,Temporarily curses your armor to reflect all incoming damage.\nLasts longer on body armor.\nCannot be used on already cursed armor.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_4,Temporarily curses your accessory, restoring HP and MP.\nCannot be used if already cursed.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_5,Permanently enchants your weapon with the Curse Brand and +1–2.\nDeals unavoidable poison damage and may slow the enemy.\n
+LOC_SYSTEM_SKL_DESCRIBE_BREATH,Fires a straight-line breath matching your dragon element.\nCauses fatigue, preventing immediate reuse.\n
+LOC_SYSTEM_SKL_DESCRIBE_TORMENT,Reduces the HP of all visible enemies by half.\nYou are immune due to your demonic heritage.\n
+LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD,Abandons your current deity.\nAll divine powers and benefits are lost, and the god becomes enraged.\nYou’ll suffer divine punishment for a time, but it fades eventually.\n
+LOC_SYSTEM_SKL_DESCRIBE_SEIJA_GIFT,Receive a stolen treasure from Seija taken from another god.\nGrants the treasure but puts you under divine punishment from that god.\nAlso slightly reduces Seija’s favor.\nYou can receive another after the punishment ends.\nThis power fades over time, reducing Faith accordingly.\n
+LOC_SYSTEM_SKL_DESCRIBE_SEIJA_1,Instantly swap positions with a visible enemy.\nWorks even if allies or enemies are between you, but not through walls.\nCosts only Power, no Faith or MP.\n
+LOC_SYSTEM_SKL_DESCRIBE_SEIJA_2,Flips the vision and position of all enemies in sight, dealing minor damage and inflicting unavoidable Confusion.\nEven the strongest enemies may struggle to react to their vision being suddenly flipped.\n
+LOC_SYSTEM_SKL_DESCRIBE_LILLY_1,Recruits a selected fairy as an ally.\nThe number of fairies you can recruit increases by 1 for each point of Faith, up to 5.\nHigher-level fairies reject you, and working fairies (like maids) are hard to recruit.\n
+LOC_SYSTEM_SKL_DESCRIBE_LILLY_2,Calls all allied fairies to your side.\nFallen fairies cannot be summoned until revived by gathering EXP.\n
+LOC_SYSTEM_SKL_DESCRIBE_LILLY_3,Heals an allied fairy.\nThe amount healed scales with the fairy’s max HP and your Faith.\nCosts a small amount of MP.\n
+LOC_SYSTEM_SKL_DESCRIBE_LILLY_4,Buffs all visible fairy allies, sharing your strength with them.\nYou gain a combat penalty: reduced accuracy, attack, and halved spell power.\nCosts 1 MP bar, no Faith.\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_1,Turns a destructible wall within sight into a door.\nCannot be created if blocked by enemies or obstacles.\nThe door starts closed and functions like any other door—quietly sneak behind enemies!\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_2,Locks a door within sight with divine power.\nIf open, it closes and pushes back anyone on it, dealing minor damage and Confusion.\nThe door becomes impassable—even to deities—until it is damaged enough or the effect ends.\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_3,Creates a door behind a target enemy and teleports behind them silently.\nWorks on destructible terrain.\nFails if terrain or enemies prevent door placement.\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_4,Temporarily summons Mai and Satono, Okina’s followers.\nThey dance behind you, healing nearby allies.\nMai restores HP, Satono restores MP.\nSpend double Faith to summon both.\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,Okina’s followers can escape into the Back Door World at any time by opening a door behind themselves.\nOnly works on valid terrain (not stairs or water).\nInside, only Mai and Satono exist, are invincible, and restore HP/MP.\nEnemies may follow if nearby.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,Fires a simple but powerful physical danmaku.\nDamage scales with level.\nEach use increases a Purification level, limiting item use.\nTwo uses = +1 Purification.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,Temporarily gains pure power.\nSTR +5, boosts melee and danmaku damage.\nEach use increases Purification level by 1, limiting item use.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,Enhances bloodlust for a burst of speed.\nAll actions are 1.5x faster while enemies are in sight.\nBloodlust fades if no enemies remain.\nEach use increases Purification by 2.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects and gain permanent stat boosts.\nYou can no longer use Junko’s powers or items.\nIf you betray Junko in this state, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,Become possessed by Joon (plague god) or Shion (poverty god).\nWhile possessed, use their powers but suffer stronger curses.\nAfter possession ends, gain Faith before reusing.\nJoon fills your MP but wastes 2–3 items and resets MP to 3.00 if over.\nShion restores HP/MP, removes low MP penalties, but causes all dropped items to vanish faster.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,While possessed by Joon, use Queen of Bubble.\nConfuses all enemies briefly and deals damage based on your level.\nUnavailable until the next possession.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,While possessed by Shion, use Misfortune Scatter.\nSlows all enemies and spreads mist to obscure vision.\nUnavailable until the next possession.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4,Forcefully possess an enemy with Shion, nullifying their luck.\nHit enemies lose levels and combat power.\nCan only be used while possessed.\nCosts 5 Faith.\nDoes not work on non-living targets.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_OFF,Manually ends possession.\nFunctions the same as natural expiration.\nMust regain Faith to possess again.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_1,Reads the desires of all enemies in sight to gain Popularity.\nThe more and stronger the enemies, the more Popularity you gain.\nCan only be used once per floor.\nAfter changing floors, it becomes unusable.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_2,A quick ninja art that makes you vanish and reappear at a random location.\nCosts a tiny amount of Popularity.\nA humble one-time-use escape spell.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_3,Borrows the aura of a saint to gain a divine halo.\nSlightly lowers enemy evasion in sight and reveals invisible foes.\nHowever, it also reduces your own evasion.\nEffect lasts for the floor only.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_4,Receive a resistance buff of your choice from Miko: fire, cold, electric, poison, or confusion.\nCan be stacked multiple times on the same floor.\nEffect resets on floor change.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_5,Choose a red or blue cloak from Miko.\nRed boosts melee attack and accuracy; blue increases spell power and success rate.\nOnly one can be selected per floor.\n
+LOC_SYSTEM_SKL_DESCRIBE_MIKO_6,Explodes your full Popularity bar to gain a powerful buff.\nChoose between doubled max HP, massively boosted MP recovery, or semi-permanent speed.\nLasts for the floor only.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_1,Creates a fireball that explodes on contact.\nDeals splash damage and may hurt you if too close.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2,Fires compressed water that pushes the enemy back.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,Shoots a fast air bullet.\nIt’s not strong or piercing, but casts much faster than other spells—about twice as fast.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,Erupts large emerald walls around you.\nDeals damage to nearby enemies.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,Raises spiked earth at a location.\nDeals heavy damage in a small area.\nMay fail if Power is too low.\n
+LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,Danmaku
 LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,Armor
@@ -1732,8 +1736,8 @@ LOC_SYSTEM_ITEM_CATEGORY_BOOK,Book
 LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,Evocable
 LOC_SYSTEM_ITEM_CATEGORY_GOAL,Important
 LOC_SYSTEM_ITEM_CATEGORY_OTHER,Miscellaneous
-LOC_SYSTEM_SPELLCARD,Spell Card
-LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}’s Spell Card
+LOC_SYSTEM_SPELLCARD,SpellCard
+LOC_SYSTEM_SPELLCARD_IDENTIFY,SpellCard of {0}
 LOC_SYSTEM_SPELLCARD_INVISIBLE,Invisibility
 LOC_SYSTEM_SPELLCARD_FIRE,Fire
 LOC_SYSTEM_SPELLCARD_ICE,Ice
@@ -2013,11 +2017,29 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN17,Water-Soaked Paper Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN18,Cloth Scroll with Muddy Writing
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN19,Thin Translucent Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20,Bark Scroll with Ink Writing
+LOC_SYSTEM_ITEM_SCROLL_JUST_DOODLE,This scroll appears to be nothing but doodles.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,The equipped {0} shone black.
+LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM_FAIL,You can’t curse this item any further.
+LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL,You’re not wearing any armor that can be cursed.
+LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE,The curse on your equipment has been lifted.
+LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_FAIL,None of your equipment is cursed.
+LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_HINA_FAIL,Hina interfered with your misfortune cleansing!
+LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT,Teleportation cannot be controlled in the world of delusions. Use it anyway? (y/n)
+LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK,Are you sure you want to cancel the teleport? (y/n)
+LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK,Are you sure you want to cancel the teleport? The scroll will be lost! (y/n)
+LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO,Terrain detection doesn't work in the Bamboo Forest Labyrinth.
+LOC_SYSTEM_ITEM_SCROLL_MAPPING_SUCCESS,You have mapped the current floor.
 LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,The equipped {0} shone red.
+LOC_SYSTEM_ITEM_SCROLL_CANT_ENCHANT_ITEM,This item cannot be enhanced.
+LOC_SYSTEM_ITEM_SCROLL_ENCHANT_WEAPON_FAIL,This weapon can no longer be upgraded.
 LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0} shone green.
+LOC_SYSTEM_ITEM_SCROLL_DETECT_CURSE,You detected curses in your inventory.
+LOC_SYSTEM_ITEM_SCROLL_CURSE_JEWELLY_FAIL,You are not wearing any accessory that can be cursed.
 LOC_SYSTEM_ITEM_SCROLL_SOULSHOT,Bang!
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL,You have no spell cards in your inventory that can be recharged.
 LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0} has been recharged.
+LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,Forget the {0} spell? (Y/N)
+LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,You forgot the {0} spell.
 LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0} was engulfed in an unknown light!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE,{0} was engulfed in flames!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_COLD,{0} emitted a chilling aura!
@@ -2026,6 +2048,7 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_MANA_REGEN,{0} began emitting mana!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0} radiated mysterious energy!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0} glowed with a protective aura!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,Your weapon has been enchanted with magic!
+LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON_FAIL,This weapon cannot be branded with magic.
 LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,Spellbook
 LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,Unidentified Spellbook
 LOC_SYSTEM_ITEM_BOOK_DROP,Dropped Spellbook
@@ -2222,67 +2245,67 @@ LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
 LOC_SYSTEM_GOD_SEIJA_PUNISH,Seija sowed discord between you and {0}!
 LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,You swapped places with {0}.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,뱌쿠렌: 무작위 마법책을 몇 권 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,뱌쿠렌은 징벌로 당신을 느리게하거나 영력이나 스탯을 일시적으로 감소시킵니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN3,또한 뱌쿠렌의 징벌중엔 항상 일정 확률로 시전한 마법이 실패합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION1,죠온&시온: 무작위 부적을 약간 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION2,죠온과 시온은 당신의 아이템을 낭비하고 잃어버리도록 만듭니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,또한 징벌로 당신에게 강제로 빙의되어 체력, 영력이나 파워를 잃게 만듭니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,카나코: 무작위 무작위 무기를 여럿을 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,카나코는 징벌로 당신에게 데미지를 주거나 온바시라를 꽂아서 발을 묶거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,던전의 적대적인 몬스터들을 당신의 주위로 불러들이기도 합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,스와코: 스펠카드를 몇 개 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,스와코는 당신에게 저주를 걸어 저항할 수 없는 감속과 독을 걸거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,당신의 주변에 적대적인 개구리들을 소환합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,미노리코: 다수의 고구마를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO2,미노리코는 징벌로 당신의 파워를 절반으로 만들거나 건강을 빼앗아
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO3,병에 걸리게하기도하며 능력치를 일시적으로 감소시킬 수 있습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA1,미마: 미마의 봉인서를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA2,미마는 징벌로 당신에게 다양한 속성의 파괴마법을 직접 날립니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA3,또한 미마에 징벌을 받는 동안엔 모든 마법의 파워가 절반이 됩니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI1,신키: 영격두루마리 몇개를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI2,신키는 징벌로 당신의 주변에 적대적인 마계인들을 소환합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI3,또한 징벌중엔 적이 P아이템을 떨어뜨릴 확률을 낮춥니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,유우기: 무작위 방어구를 여럿 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI2,유우기는 당신을 강제로 취하게 만들거나 데미지와 함께 집어던지거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI3,당신 주변에 강력한 오니를 소환하기도 합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA1,시즈하: 단풍브랜드의 무기를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA2,시즈하는 징벌로 당신을 혼란시키거나 큰 데미지를 주거나 큰 소음과 함께
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA3,당신을 감속시킵니다. 단풍잎을 밟으면 큰 소음이 나며 화염에 약해집니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_HINA1,히나: 무작위 반지를 여럿 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_HINA2,히나는 징벌로 당신에 저항불가능한 독과 감속을 걸거나 당신의 장비에 저주를
-LOC_SYSTEM_GOD_SEIJA_GIFT_HINA3,걸기도하며 혼란을 겁니다. 징벌중엔 저주해제는 항상 실패할 가능성이 생깁니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI1,유카리: 공간이동 소모품을 여럿을 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI2,유카리는 징벌로 혼란과 함께 공간이동을 시키거나 공간이동을 금지시킨후 주변에
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI3,적들을 불러오기도하며 이형의 눈을 소환시키기도 합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN1,에이린: 무작위 물약 더미를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN2,에이린은 당신에 나쁜 물약을 먹이거나 당신에게 수상한 실험을 하여 부작용을
-LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN3,남깁니다. 또한 징벌중에 당신이 마시는 물약의 효과가 일정 확률로 사라집니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,유유코: 무작위 발동템들을 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO2,유유코는 징벌로 당신의 주변에 많은 적대적인 유령들을 소환시킵니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO3,소환되는 유령들은 당신이 강해질수록 강해집니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI1,사토리: 식별두루마리 여럿을 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI2,사토리는 당신을 징벌하진 않지만 무언가를 찾는 전단지를 던전에 뿌립니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI3,이 일정시간동안 뿌려지는 전단지는 던전의 아이템과 교체되어 생성됩니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI1,텐시: 무작위 아이템을 여럿 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI2,텐시는 징벌일지라도 당신을 언제나 가지고 놀 것입니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI3,그 징벌은 평소의 텐시의 행동보다 조금 더 나쁜 효과일 확률이 높습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA1,세이자: 나로부터 받을 것은 없다!
-LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA2,아마 이 선택지는 버그입니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY1,릴리: 탄막 뭉치를 받습니다
-LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY2,릴리는 징벌로 당신의 주변에 적대적인 요정들을 소환하거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY3,당신을 약화시켜 일시적으로 공격력과 마법의 파워를 절반으로 낮춥니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO1,미코: 아티펙트 망토를 하나 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO2,미코는 징벌로 당신의 최대체력을 일시적으로 절반으로 줄이거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO3,감속을 걸거나 화염과 냉기저항을 일시적으로 한단계 낮춥니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA1,오키나: 약간의 성역 두루마리를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA2,오키나는 당신의 주변에 적대적인 백댄서를 소환하여 주변의 몬스터들을
-LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA3,응원하거나 당신의 체력과 영력을 흡수합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO1,순호: 무기강화와 방어구강화 두루마리를 여럿 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2,순호는 징벌로 당신을 약화시키거나 감속을 시키거나 당신의 능력치를
-LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3,일시적으로 감소시킵니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT1,버그신: 잘못된 신입니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT2,대부분은 버그입니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,Byakuren: Receive several random spellbooks.
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,Byakuren's punishment slows you down or temporarily reduces your MP or stats.
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN3,During Byakuren’s punishment, your spells may randomly fail.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION1,Joon & Shion: Receive a few random charms.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION2,Joon and Shion will waste or cause you to lose items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,Their punishment may also forcibly possess you, draining HP, MP, or Power.
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,Kanako: Receive several random weapons.
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,Kanako may punish you with damage or pin you in place using Onbashira pillars,
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,or summon hostile monsters around you.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,Suwako: Receive several spell cards.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,Suwako may curse you with unavoidable Slow and Poison,
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,or summon hostile frogs around you.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,Minoriko: Receive several sweet potatoes.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO2,Minoriko may punish you by halving your Power or draining your health,
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO3,causing illness or temporarily lowering your stats.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA1,Mima: Receive sealed scrolls of Mima.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA2,Mima may punish you with direct destructive magic of various elements.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA3,While under Mima’s punishment, all your spell power is halved.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI1,Shinki: Receive several spirit scrolls.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI2,Shinki may punish you by summoning hostile Makai dwellers around you.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI3,During her punishment, the drop rate of P-items from enemies is reduced.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,Yuugi: Receive several random pieces of armor.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI2,Yuugi may force you into drunkenness, throw you while dealing damage,
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI3,or summon powerful oni around you.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA1,Shizuha: Receive a weapon with the Maple brand.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA2,Shizuha may punish you with confusion, heavy damage, or loud noise,
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA3,and slow you down. Stepping on maple leaves creates loud noise and makes you more vulnerable to fire.
+LOC_SYSTEM_GOD_SEIJA_GIFT_HINA1,Hina: Receive several random rings.
+LOC_SYSTEM_GOD_SEIJA_GIFT_HINA2,Hina may punish you with unavoidable Poison and Slow, or curse your equipment,
+LOC_SYSTEM_GOD_SEIJA_GIFT_HINA3,and also inflict Confusion. While under punishment, curse removal may always fail.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI1,Yukari: Receive several teleportation items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI2,Yukari may punish you by teleporting you with confusion, or blocking teleportation and
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI3,summoning enemies around you or calling forth eldritch eyes.
+LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN1,Eirin: Receive a batch of random potions.
+LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN2,Eirin may force you to drink bad potions or conduct suspicious experiments
+LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN3,that leave side effects. During her punishment, potion effects may randomly fail.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,Yuyuko: Receive several random activatable items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO2,Yuyuko may punish you by summoning many hostile ghosts around you.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO3,The summoned ghosts become stronger as you grow stronger.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI1,Satori: Receive several identification scrolls.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI2,Satori does not punish you directly but spreads missing pet flyers in the dungeon.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI3,These flyers temporarily replace items generated in the dungeon.
+LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI1,Tenshi: Receive several random items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI2,Even as punishment, Tenshi will always mess with you for fun.
+LOC_SYSTEM_GOD_SEIJA_GIFT_TENSI3,Her punishments tend to be slightly worse than her usual antics.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA1,Seija: I have nothing more to give you!
+LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA2,This choice is probably a bug.
+LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY1,Lily: Receive a bundle of danmaku.
+LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY2,Lily may punish you by summoning hostile fairies around you,
+LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY3,or weakening you by halving your attack and magic power temporarily.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO1,Miko: Receive an artifact cloak.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO2,Miko may punish you by temporarily halving your max HP,
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO3,inflicting Slow, or temporarily lowering your fire and cold resistance by one level.
+LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA1,Okina: Receive several sanctuary scrolls.
+LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA2,Okina may summon hostile backup dancers around you to cheer on nearby monsters,
+LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA3,or drain your HP and MP.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO1,Junko: Receive several weapon and armor enhancement scrolls.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2,Junko may punish you by weakening, slowing, or
+LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3,temporarily reducing your stats.
+LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT1,Bug God: Invalid deity.
+LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT2,Most of this is a bug.
 LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT,...Seija left behind a magic hammer as her final gift.
 LOC_SYSTEM_GOD_UI_LILLIY1,===Your Fairy Companions===
 LOC_SYSTEM_GOD_UI_LILLIY1_ALLY,Companion {0}:
@@ -2408,8 +2431,8 @@ LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
-LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,텐시 텔레포트 실패
-LOC_SYSTEM_DEBUG_TENSI_TENSION,텐션
-LOC_SYSTEM_DEBUG_TENSI_CRISIS,위기
-LOC_SYSTEM_DEBUG_TENSI_PEACE,평화
-LOC_SYSTEM_DEBUG_RISK,위험도
+LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed
+LOC_SYSTEM_DEBUG_TENSI_TENSION,Tension
+LOC_SYSTEM_DEBUG_TENSI_CRISIS,Crisis
+LOC_SYSTEM_DEBUG_TENSI_PEACE,Peace
+LOC_SYSTEM_DEBUG_RISK,Risk Level

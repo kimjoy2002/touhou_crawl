@@ -114,11 +114,11 @@ void drinkpotion(potion_type kind, bool waste_)
 	switch(kind)
 	{
 	case PT_WATER:
-		printlog("그냥 물약 맛이다.",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_JUST_WATER),false,false,false,CL_normal);
 		//you.HungerApply(50);
 		return;
 	case PT_HEAL:
-		printlog("치유가 되는 것을 느꼈다.",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL),false,false,false,CL_normal);
 		you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
 		//you.HungerApply(50);
 		you.s_confuse = 0;
@@ -129,7 +129,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		{
 			int time_ = rand_int(25,50+bonus*15);
 			bool ok_= false;
-			printlog("이 물약은 역겨운 맛이다.",false,false,false,you.poison_resist>0?CL_normal:CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POISON),false,false,false,you.poison_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetPoison(time_,150,false);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_POISON_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -138,7 +138,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
-				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger); 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",false,false,false,CL_small_danger); 
 				you.SetSwift(time_);
 			}
 			//you.HungerApply(50);
@@ -146,7 +146,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			return;	
 		}
 	case PT_HEAL_WOUND:
-		printlog("체력이 회복되는 되는 것을 느꼈다.",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL_WOUND),false,false,false,CL_normal);
 		you.HpUpDown(15+bonus*5+randA_1(30+bonus*15),DR_POTION);
 		//you.HungerApply(50);
 		return;
@@ -161,7 +161,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_CONFUSE:
 		{
 			bool ok_= false;
-			printlog("이 물약은 멀미나는 맛이다.",false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_CONFUSE),false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetConfuse(rand_int(15,30)+bonus*10);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_CONFUSE_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -170,8 +170,8 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=3 && ok_)
 			{
 				enterlog();
-				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger);  
-				printlog("영력이 차오르는 것을 느낀다.",true,false,false,CL_white_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",false,false,false,CL_small_danger);  
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC),true,false,false,CL_white_blue);
 				you.MpUpDown(15+randA_1(15));
 			}
 			//you.HungerApply(50);
@@ -186,7 +186,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
-				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",true,false,false,CL_small_danger); 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",true,false,false,CL_small_danger); 
 				you.SetInvisible(time_);
 			}
 			return;
@@ -199,10 +199,11 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=5 && ok_)
 			{
 				enterlog();
-				printlog("에이린은 물약으로부터의 마비를 막아주고 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger);  
-				printlog("당신은 폭발했다!",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER) + " ",false,false,false,CL_small_danger);  
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT),true,false,false,CL_white_blue);
 				ReleaseMutex(mutx);
 				changedisplay(DT_GAME);
+				soundmanager.playSound("soul_shot");
 				skill_soul_shot(0, &you, you.position);
 				WaitForSingleObject(mutx, INFINITE);
 			}
@@ -217,7 +218,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_MAGIC:
-		printlog("상당한 영력이 느껴진다.",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC),false,false,false,CL_normal);
 		you.MpUpDown(9+bonus*5+randA_1(15));
 		//you.HungerApply(50);
 		return;
@@ -226,20 +227,20 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_POWER:
-		printlog("파워가 한단계 상승한 느낌이 든다.",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POWER),false,false,false,CL_normal);
 		you.PowUpDown(100+bonus*100);
 		//you.HungerApply(50);
 		return;
 	case PT_DOWN_STAT:
 		{
-			printlog("이 물약은 구역질이 난다.",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_DOWN_STAT),false,false,false,CL_normal);
 			int rand_ = randA_1(3);
 			randA(2)?(randA(1)?you.StatUpDown(-rand_,STAT_STR,true):you.StatUpDown(-rand_,STAT_DEX,true)):you.StatUpDown(-rand_,STAT_INT,true);
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=2)
 			{
 				enterlog();
-				printlog("에이린은 당신이 물약에서 새로운 힘을 끌어오게했다. ",false,false,false,CL_small_danger); 
-				printlog("상처가 치료가 되는 것을 느꼈다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",false,false,false,CL_small_danger); 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL_WOUND),true,false,false,CL_normal);
 				you.HpUpDown(15+randA_1(35),DR_POTION);
 			}
 			//you.HungerApply(50);
@@ -248,7 +249,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_RECOVER_STAT:
 		{
 			bool up_ = false;
-			printlog("이 물약에선 깔끔한 맛이 난다.",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_RECOVER_STAT),false,false,false,CL_normal);
 			if(you.s_str < you.m_str)
 			{
 				you.StatUpDown(min(you.m_str-you.s_str,rand_int(1,5)),STAT_STR,true);
@@ -265,7 +266,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				up_ = true;
 			}
 			if(up_)
-				printlog("당신은 잃어버린 능력치를 회복했다.",false,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT),false,false,false,CL_blue);
 			//you.HungerApply(50);
 		}
 		return;

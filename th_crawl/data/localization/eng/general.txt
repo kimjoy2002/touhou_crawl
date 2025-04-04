@@ -15,6 +15,12 @@ LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
+LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
+LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
+LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
+LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
+LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
+LOC_SYSTEM_RECORVER_STAT,You have recovered your lost stats.
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_ARMOUR,You can't remove armor while consumed by madness!
@@ -130,6 +136,10 @@ LOC_SYSTEM_NOISE_DEAFENING,Deafening
 LOC_SYSTEM_RANGE,Range
 LOC_SYSTEM_TILE,Tile
 LOC_SYSTEM_TILES,Tiles
+LOC_SYSTEM_INVENTORY,Inventory
+LOC_SYSTEM_PROJECTILE,Projectile
+LOC_SYSTEM_OTTER_PROJECTILE,Other Projectile
+LOC_SYSTEM_MAGIC,Magic
 LOC_SYSTEM_CURRENT_EXP,Exp
 LOC_SYSTEM_ATTIT,Aptit
 LOC_SYSTEM_COST,Cost
@@ -276,6 +286,9 @@ LOC_SYSTEM_STAIR_ESCAPE_WARN,Leaving before picking up the Yin-Yang Orb will cou
 LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION,Do you really want to leave the dungeon and claim victory? (Y/N)
 LOC_SYSTEM_STAIR_RETURN,You returned to the dungeon.
 LOC_SYSTEM_STAIR_EMPTY,There are no stairs here.
+LOC_SYSTEM_PROJECTILE_TARGET,Choose a target.
+LOC_SYSTEM_PROJECTILE_NOT_EXIST,No projectiles available.
+LOC_SYSTEM_PROJECTILE_DIRECTION,Which direction do you want to fire?
 LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM,Which item would you like to choose?
 LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON,Which weapon would you like to equip?
 LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR,Which armor would you like to equip?
@@ -1900,6 +1913,24 @@ LOC_SYSTEM_ITEM_JEWELRY_RING_UNIDEN16,Jade Ring
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNIDEN17,Gold Ring
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNIDEN18,Silver Ring
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNIDEN19,Emerald Ring
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_STR,You feel stronger.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_STR,You feel weaker.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_DEX,You feel more agile.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_DEX,You feel sluggish.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INT,You feel smarter.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_INT,You feel duller.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_TELE,You sense a distortion in space.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_TELE,The surrounding space stabilizes.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_LEV,You feel yourself rising.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INV,Your body flickers from the ring's power.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MANA,MP begins to overflow.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MANA,MP drains from your body.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MAGICIAN,You feel more knowledgeable in magic.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MAGICIAN,Your magical knowledge fades.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_AC,You feel protected.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_AC,The protection fades away.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_EV,You feel quicker.
+LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_EV,You feel sluggish.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET,Amulet
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT,Amulet of Perfection
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM,Amulet of Samsara Barrier
@@ -1976,6 +2007,15 @@ LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN14,Colorless Potion
 LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN15,Brown Potion
 LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN16,Bubbling Gray Potion
 LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN17,Bubbling Clear Potion
+LOC_SYSTEM_ITEM_POTION_JUST_WATER,Tastes just like water.
+LOC_SYSTEM_ITEM_POTION_HEAL,You feel a light healing effect.
+LOC_SYSTEM_ITEM_POTION_POISON,This potion tastes disgusting.
+LOC_SYSTEM_ITEM_POTION_HEAL_WOUND,You feel your wounds healing.
+LOC_SYSTEM_ITEM_POTION_CONFUSE,This potion gives you motion sickness.
+LOC_SYSTEM_ITEM_POTION_MAGIC,You feel your MP restoring.
+LOC_SYSTEM_ITEM_POTION_POWER,You feel your Power has increased by one level.
+LOC_SYSTEM_ITEM_POTION_DOWN_STAT,This potion makes you nauseous.
+LOC_SYSTEM_ITEM_POTION_RECOVER_STAT,This potion has a clean, refreshing taste.
 LOC_SYSTEM_ITEM_SCROLL_SCROLL,Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT,Scroll of Teleportation
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_IDENTIFY,Scroll of Identification
@@ -2227,6 +2267,8 @@ LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,You pulled {0}.
 LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,A calamity was cast upon {0}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
+LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
+LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
 LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,Mima aimed a powerful {0} at you!
 LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,Low-ranking demons of Makai have been summoned to aid you.
@@ -2245,6 +2287,9 @@ LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
 LOC_SYSTEM_GOD_SEIJA_PUNISH,Seija sowed discord between you and {0}!
 LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,You swapped places with {0}.
+LOC_SYSTEM_GOD_SEIJA_GIFT_ON,You can now request Seija for a gift.
+LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,(Press {0} to request a gift)
+LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT,Too much time has passed without receiving a gift, so the request was canceled.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,Byakuren: Receive several random spellbooks.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,Byakuren's punishment slows you down or temporarily reduces your MP or stats.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN3,During Byakuren’s punishment, your spells may randomly fail.
@@ -2429,6 +2474,10 @@ LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects.
 LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Onmyo Orb and {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.
+LOC_SYSTEM_REPLAY_TITLE,Replay List!
+LOC_SYSTEM_REPLAY_TIMELINE,{0}-{1}-{2} {3}:{4}
+LOC_SYSTEM_REPLAY_NOTEXIST,The file doesn't exist!
+LOC_SYSTEM_REPLAY_PAGE,Page {0}
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
 LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed

@@ -1651,7 +1651,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			ss.clear();
 			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName();
 
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 29, 36); 
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 35); 
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
@@ -2643,9 +2643,9 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	if(ReplayClass.play)
 	{
 		RECT rc={50, 400, option_mg.getWidth(), option_mg.getHeight()};
-		DrawTextUTF8(pfont,pSprite,"리플레이 모드중", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_REPLAYING), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;	
-		DrawTextUTF8(pfont,pSprite,"(z-일시정지 x-보통속도 c-배속)", -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(LOC_SYSTEM_REPLAY_KEY_HELP, PlaceHolderHelper("z"), PlaceHolderHelper("x"), PlaceHolderHelper("c")), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	drawInfoBox(pSprite, pfont);
 
@@ -2726,7 +2726,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	case IVT_CURSE_ENCHANT:
 	{
     	std::ostringstream oss;
-		oss << "<인벤토리>  (아이템 갯수 " << you.item_list.size() << " / 52)";
+		oss << "<"<< LocalzationManager::locString(LOC_SYSTEM_INVENTORY) <<">  (" << LocalzationManager::locString(LOC_SYSTEM_INVENTORY_ITEM) <<" " << you.item_list.size() << " / 52)";
 		DrawTextUTF8(pfont,pSprite,oss.str().c_str(), -1, &rc, DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;
 		break;
@@ -2863,7 +2863,9 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				temp+=item_view[asctonum((*it).id)]?(item_num[asctonum((*it).id)]?" # ":" + "):" - ";
 				temp+=(*it).GetName().c_str();
 				if(equip)
-					temp += (equip==1?"(장착)":(equip==2?"(왼손)":"(오른손)"));
+					temp += (equip==1?("(" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) + ")"):
+					(equip==2?("(" + LocalzationManager::locString(LOC_SYSTEM_LEFT_HAND) + ")"):
+					("(" + LocalzationManager::locString(LOC_SYSTEM_RIGHT_HAND) + ")")));
 				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
 				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
 				DrawTextUTF8(pfont,pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());

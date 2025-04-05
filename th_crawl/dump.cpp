@@ -9,6 +9,7 @@
 #include <direct.h>
 #include <stdio.h>
 #include <time.h>
+#include <iomanip>
 #include "player.h"
 #include "display.h"
 #include "environment.h"
@@ -116,8 +117,9 @@ bool Dump(int type, string *filename_)
 		return false;
 
 
-	char filename[100];
-	char sql_[256];
+	ostringstream ss;
+	char filename[256];
+	//char sql_[256];
 	_mkdir("morgue");
 	FILE *fp;
 	struct tm t;
@@ -125,11 +127,10 @@ bool Dump(int type, string *filename_)
 	time(&now);
 	localtime_s(&t, &now);
 
-	sprintf_s(filename, 100, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
+	sprintf_s(filename, 256, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
 		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
 		you.user_name.c_str(),
 		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec);
-
 
 	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
 	if(_wfopen_s(&fp, wfilename.c_str(), L"wt") != 0 || !fp){
@@ -138,21 +139,22 @@ bool Dump(int type, string *filename_)
 	unsigned char utf8_bom[] = { 0xEF, 0xBB, 0xBF };
 	fwrite(utf8_bom, sizeof(unsigned char), 3, fp);
 
-	fprintf_s(fp, "동방크롤 %s 덤프 파일\n\n", version_string);
+	ss << LocalzationManager::formatString(LOC_SYSTEM_DUMP_TITLE, PlaceHolderHelper(version_string)) << "\n\n";
+
 	if (type == 1)
 	{
 		stringstream death_reason;
 
 		if (wiz_list.wizard_mode == 1)
 		{
-			fprintf_s(fp, "*위자드 모드*\n");
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*\n";
 		}
 		else if (wiz_list.wizard_mode == 2)
 		{
-			fprintf_s(fp, "*세이브 보존*\n");
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*\n";
 		}
-		fprintf_s(fp, "%d    레벨 %d의 %s %s %s \"%s\" (HP %d/%d)\n", caculScore(), you.level, LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), you.user_name.c_str(), you.GetHp(), you.GetMaxHp());
-		fprintf_s(fp, "             %s에서 ", CurrentLevelString());
+		ss << caculScore() << "    " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << " " << you.level << " " << LocalzationManager::locString(tribe_type_string[you.tribe]) << LocalzationManager::locString(job_type_string[you.job]) << " " << you.GetCharNameString() << " \"" << you.user_name << "\" (HP " << you.GetHp() << "/" << you.GetMaxHp() << ")";
+		ss << "             ";
 		switch (you.dead_reason)
 		{
 		case DR_NONE:
@@ -168,7 +170,7 @@ bool Dump(int type, string *filename_)
 				}
 				temp_reason << ")";
 			}
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN, PlaceHolderHelper(temp_reason.str()));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 			break;
 		}
 		case DR_HITTING:
@@ -185,37 +187,37 @@ bool Dump(int type, string *filename_)
 				case ATT_SMITE:
 				default:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_SMASH:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_BLOOD:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_NOISE:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_SPEAR:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_NORMAL:
@@ -230,70 +232,70 @@ bool Dump(int type, string *filename_)
 				case ATT_LUNATIC:
 				case ATT_SLEEP:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_VAMP:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_VEILING:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_RUSH:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_WALL:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_WALL);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_PSYCHO:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_STONE_TRAP:
-					death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_TRAP);
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TRAP, PlaceHolderHelper(CurrentLevelString()));
 					break;
 				case ATT_THROW_NORMAL:
 				case ATT_THROW_WATER:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_NORMAL_BLAST:
 				case ATT_AC_REDUCE_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_SUN_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SUN);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_FIRE:
@@ -303,9 +305,9 @@ bool Dump(int type, string *filename_)
 				case ATT_FIRE_BLAST:
 				case ATT_FIRE_PYSICAL_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_COLD:
@@ -315,9 +317,9 @@ bool Dump(int type, string *filename_)
 				case ATT_COLD_BLAST:
 				case ATT_COLD_PYSICAL_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_COLD);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_ELEC:
@@ -325,69 +327,69 @@ bool Dump(int type, string *filename_)
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_POISON_BLAST:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_POISON);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_CLOUD_NORMAL:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_WIND);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_CLOUD_CURSE:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY, PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_BURST:
 					if (you.dead_order->order) {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY, PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_BURST);
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_DROWNING:
-					death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_DROWNING);
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_DROWNING), PlaceHolderHelper(CurrentLevelString());
 					break;
 				}
 				death_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 			}
 			else {
-				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE);
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE, PlaceHolderHelper(CurrentLevelString()));
 			}
 			break;
 		case DR_POISON:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_POTION:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_POTION);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POTION, PlaceHolderHelper(CurrentLevelString()));
 			if (you.dead_order) {
 				death_reason << "(" << to_string(you.dead_order->damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 			}
 			break;
 		case DR_QUIT:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_QUIT);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_QUIT, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_HUNGRY:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_MIRROR:
 			if (you.dead_order && you.dead_order->order) {
-				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
 			} else {
-				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR);
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR, PlaceHolderHelper(CurrentLevelString()));
 			}
 			if (you.dead_order)
 			{
@@ -395,23 +397,23 @@ bool Dump(int type, string *filename_)
 			}
 			break;
 		case DR_MP:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_JUNKO:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_SLEEP:
 			if (you.dead_order && you.dead_order->order) {
-				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY, PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(you.dead_order->order->GetName()->getName()));
 			} else {
-				death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP);
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP, PlaceHolderHelper(CurrentLevelString()));
 			}
 			break;
 		case DR_GHOST:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_GHOST);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_GHOST, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_EFFECT:
-			death_reason << LocalzationManager::locString(LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT);
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT, PlaceHolderHelper(CurrentLevelString()));
 			break;
 		case DR_ESCAPE:
 			if (you.haveOrb()) {
@@ -426,82 +428,208 @@ bool Dump(int type, string *filename_)
 			break;
 		}
 
-		fprintf_s(fp, "%s\n             ", death_reason.str().c_str());
-		fprintf_s(fp, "최종턴 %d\n\n", you.turn);
 
-		sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason.str().c_str(),
-			you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god).c_str(), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
-		);
+		ss << death_reason.str() << "\n             ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_FINAL_TURN) <<  ' ' << you.turn << "\n\n";
+
+		//스팀 API로 변경
+		// sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason.str().c_str(),
+		// 	you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god).c_str(), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
+		// );
 
 
 	}
 
-	fprintf_s(fp, "%s (%s %s %s)      턴: %d      ", you.user_name.c_str(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), you.turn);
-
-
+	if(!you.GetCharNameString().empty()) {
+		ss <<  you.user_name << " (" << LocalzationManager::locString(tribe_type_string[you.tribe]) << ' ' << LocalzationManager::locString(job_type_string[you.job]) << ' ' << you.GetCharNameString() << ")      " << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ": " << you.turn << "      ";
+	} 
+	else {
+		ss <<  you.user_name << " (" << LocalzationManager::locString(tribe_type_string[you.tribe]) << ' ' << LocalzationManager::locString(job_type_string[you.job]) << ")      " << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ": " << you.turn << "      ";
+	}
 
 
 	if (you.god == GT_NONE)
 	{
-		fprintf_s(fp, "무신앙\n\n");
+		ss << LocalzationManager::locString(LOC_SYSTEM_AHTEISM) << "\n\n";
 	}
-	else if (you.god == GT_MIKO)
+	else if (you.god == GT_MIKO) 
 	{
-		fprintf_s(fp, "신앙: %s (인기도 %d%%)\n\n", GetGodString(you.god).c_str(), you.piety / 2);
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_POULARITY) << ' ' << you.piety/2 << "%)\n\n";
 	}
 	else if (you.god == GT_TENSI)
 	{
-		fprintf_s(fp, "신앙: %s\n\n", GetGodString(you.god).c_str());
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << "\n\n";
 	}
 	else
 	{
-		fprintf_s(fp, "신앙: %s %c%c%c%c%c%c\n\n", GetGodString(you.god).c_str(), pietyLevel(you.piety) >= 1 ? '*' : '.', pietyLevel(you.piety) >= 2 ? '*' : '.', pietyLevel(you.piety) >= 3 ? '*' : '.', pietyLevel(you.piety) >= 4 ? '*' : '.', pietyLevel(you.piety) >= 5 ? '*' : '.', pietyLevel(you.piety) >= 6 ? '*' : '.');
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << ' ' 
+			<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.') << "\n\n";
 	}
-	fprintf_s(fp, "HP: %4d/%4d             AC:%4d             힘  :%4d\n", you.GetHp(), you.GetMaxHp(), you.ac, you.s_str);
+	ss << "HP: " << std::setfill(' ') << std::setw(4) << you.GetHp() << "/" << std::setw(4) << you.GetMaxHp() << "             AC:" << std::setw(4) << you.ac << "             ";
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_STR);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)) < 4)
+		ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_STR)), ' ');
+	ss << ":" << you.s_str << "\n";
+	
 	if (!you.pure_mp)
 	{
-		fprintf_s(fp, "MP: %4d/%4d             EV:%4d             민첩:%4d\n", you.GetMp(), you.GetMaxMp(), you.ev, you.s_dex);
+		ss << "MP: " << std::setw(4) << you.GetMp() << "/" << std::setw(4) << you.GetMaxHp() << "             EV:" << std::setw(4) << you.ev << "             ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');
+		ss << ":" << you.s_dex  << "\n";
 	}
 	else
 	{
-		fprintf_s(fp, "(마력순화)                EV:%4d             민첩:%4d\n", you.ev, you.s_dex);
+		ss << "(" << LocalzationManager::locString(LOC_SYSTEM_MP_PURITY) << ")";
+
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_MP_PURITY)) < 24)
+		ss << std::string(24-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_MP_PURITY)), ' ');
+		ss << "EV:" << std::setw(4) << you.ev << "             ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');
+		ss << ":" << you.s_dex << "\n";
 	}
 												
 	{
 		int pow_ = min(you.power, 500);
-		fprintf_s(fp, "파워: %d.%02d                SH:%4d             지능:%4d\n\n", pow_ / 100, pow_ % 100, you.sh, you.s_int);
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER) << ": " << pow_ / 100 << '.' << std::setfill('0') << std::setw(2) << pow_ % 100;
+
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER)) < 20)
+			ss << std::string(20-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER)), ' ');
+		ss << "SH:" << std::setfill(' ') << std::setw(4) << you.sh << "             ";
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_INT);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)), ' ');
+		ss << ":" << you.s_int << "\n";
 	}
+
+	int max_length_fcep = 4;
+	max_length_fcep = max(max_length_fcep, PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST)));
+	max_length_fcep = max(max_length_fcep, PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_COLD_RESIST)));
+	max_length_fcep = max(max_length_fcep, PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)));
+	max_length_fcep = max(max_length_fcep, PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)));
+	
+
+
 
 	int resist_ = you.fire_resist;
 	int resist2_ = you.confuse_resist;
-	fprintf_s(fp,"화염저항: %s%c %c      혼란저항: %c           무기: " , resist_>=100?"∞":(resist_>=1?"+ ":(resist_<=-1?"- ":". ")), resist_ >= 100 ? ' ' : (resist_>=2?'+':(resist_<=-2?'-':'.')), resist_ >= 100 ? ' ' : (resist_>=3?'+':(resist_<=-3?'-':'.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
-	if(you.equipment[ET_WEAPON])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_WEAPON]->id,you.equipment[ET_WEAPON]->GetName().c_str());
-	else
-		fprintf_s(fp,"맨손\n");
+	string fire_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST);
+	if(PrintCharWidth(fire_resist_string) < max_length_fcep) {
+		fire_resist_string = std::string(max_length_fcep-PrintCharWidth(fire_resist_string), ' ') + fire_resist_string;
+	}
+
+	int offset1_ = PrintCharWidth(fire_resist_string) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_CONFUSE_RESIST)); 
+	ss << fire_resist_string << ": "
+		<< ((resist_ >= 100) ? "∞" :
+			(resist_ >= 1) ? "+" :
+			(resist_ <= -1) ? "-" : ".")
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 2) ? '+' :
+			(resist_ <= -2) ? '-' : '.')
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 3) ? '+' :
+			(resist_ <= -3) ? '-' : '.');
+	if(offset1_ < 23)
+		ss << std::string(23-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_CONFUSE_RESIST) << ": " << (resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON)) < 16)
+		ss << std::string(16-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON) << ": ";
+	if(you.equipment[ET_WEAPON]) {
+		ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName() << "\n";
+	}
+	else {
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED) << "\n";
+	}
+	
+
+
 	resist_ = you.ice_resist;
 	resist2_ = you.invisible_view;
-	fprintf_s(fp,"냉기저항: %s%c %c      투명보기: %c           탄막: " , resist_ >= 100 ? "∞" : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),resist2_>=1?'+':(resist2_<=-1?'-':'.'));
-	if(you.throw_weapon)
-		fprintf_s(fp,"%c) %s\n",you.throw_weapon->id,you.throw_weapon->GetName().c_str());
-	else
-		fprintf_s(fp,"없음\n");
+	string ice_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_COLD_RESIST);
+	if(PrintCharWidth(ice_resist_string) < max_length_fcep) {
+		ice_resist_string = std::string(max_length_fcep-PrintCharWidth(ice_resist_string), ' ') + ice_resist_string;
+	}
+
+	offset1_ = PrintCharWidth(ice_resist_string) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE)); 
+	ss << ice_resist_string << ": " 
+		<< ((resist_ >= 100) ? "∞" :
+			(resist_ >= 1) ? "+" :
+			(resist_ <= -1) ? "-" : ".")
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 2) ? '+' :
+			(resist_ <= -2) ? '-' : '.')
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 3) ? '+' :
+			(resist_ <= -3) ? '-' : '.');
+	if(offset1_ < 23)
+		ss << std::string(23-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE) << ": " << (resist2_>=1?'+':(resist2_<=-1?'-':'.'));
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)) < 16)
+		ss << std::string(16-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) << ": ";
+	if(you.throw_weapon) {
+		ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName() << "\n";
+	}
+	else {
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
+	}
+
+
 	
 	resist_ = you.elec_resist;
 	resist2_ = you.power_keep;
-	fprintf_s(fp,"전기저항: %s%c %c      파워유지: %s          몸통: " , resist_ >= 100 ? "∞ " : (resist_ >= 1 ? "+ " : (resist_ <= -1 ? "- " : ". ")), resist_ >= 100 ? ' ' : (resist_ >= 2 ? '+' : (resist_ <= -2 ? '-' : '.')), resist_ >= 100 ? ' ' : (resist_ >= 3 ? '+' : (resist_ <= -3 ? '-' : '.')),you.power == 1000 ? "∞": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
-	if(you.equipment[ET_ARMOR])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_ARMOR]->id,you.equipment[ET_ARMOR]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_ARMOR, false)?"없음\n":"착용불가\n");
+	string elec_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST);
+	if(PrintCharWidth(elec_resist_string) < max_length_fcep) {
+		elec_resist_string = std::string(max_length_fcep-PrintCharWidth(elec_resist_string), ' ') + elec_resist_string;
+	}
+	offset1_ = PrintCharWidth(elec_resist_string) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)); 
+	ss << elec_resist_string << ": " 
+		<< ((resist_ >= 100) ? "∞" :
+			(resist_ >= 1) ? "+" :
+			(resist_ <= -1) ? "-" : ".")
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 2) ? '+' :
+			(resist_ <= -2) ? '-' : '.')
+		<< ((resist_ >= 100) ? ' ' :
+			(resist_ >= 3) ? '+' :
+			(resist_ <= -3) ? '-' : '.');
+	if(offset1_ < 23)
+		ss << std::string(23-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP) << ": " << (you.power == 1000 ? "∞": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_BODY)) < 15)
+		ss << std::string(15-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_BODY)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_BODY) << ": ";
+	if(you.equipment[ET_ARMOR]) {
+		ss << you.equipment[ET_ARMOR]->id << ") " << you.equipment[ET_ARMOR]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
 
 	
 	resist_ = you.poison_resist;
-	fprintf_s(fp,"독저항  : %c                                방패: ",resist_>=1?'+':(resist_<=-1?'-':'.'));
-	if(you.equipment[ET_SHIELD])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_SHIELD, false)?"없음\n":"착용불가\n");	
+	string poison_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
+	if(PrintCharWidth(poison_resist_string) < max_length_fcep) {
+		poison_resist_string = std::string(max_length_fcep-PrintCharWidth(poison_resist_string), ' ') + poison_resist_string;
+	}
+	offset1_ = PrintCharWidth(poison_resist_string) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD)); 
+	ss << poison_resist_string << ": " << (resist_>=1?('+'):(resist_<=-1?'-':'.'));
+	if(offset1_ < 44)
+		ss << std::string(44-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) << ": ";
+	if(you.equipment[ET_SHIELD]) {
+		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
+
+
+
 
 
 	string resist_text_ = "";
@@ -515,88 +643,131 @@ bool Dump(int type, string *filename_)
 			}
 		}
 	}
-	fprintf_s(fp,"마법저항: %s                       머리: ", resist_text_.c_str());
-	if(you.equipment[ET_HELMET])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_HELMET]->id,you.equipment[ET_HELMET]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_HELMET, false)?"없음\n":"착용불가\n");
+	string magic_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST);
+	if(PrintCharWidth(magic_resist_string) < 8) {
+		magic_resist_string = std::string(8-PrintCharWidth(magic_resist_string), ' ') + magic_resist_string;
+	}
+	offset1_ = PrintCharWidth(magic_resist_string) + PrintCharWidth(resist_text_) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_HEAD)); 
+	ss << magic_resist_string << ": " << resist_text_;
+	if(offset1_ < 45)
+		ss << std::string(45-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_HEAD) << ": ";
+	if(you.equipment[ET_HELMET]) {
+		ss << you.equipment[ET_HELMET]->id << ") " << you.equipment[ET_HELMET]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
 
-	fprintf_s(fp,"                                           망토: ");
-	if(you.equipment[ET_CLOAK])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_CLOAK]->id,you.equipment[ET_CLOAK]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_CLOAK, false)?"없음\n":"착용불가\n");
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_CLOAK));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_CLOAK) << ": ";
+	if(you.equipment[ET_CLOAK]) {
+		ss << you.equipment[ET_CLOAK]->id << ") " << you.equipment[ET_CLOAK]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
 
-	fprintf_s(fp,"                                           손  : ");
-	if(you.equipment[ET_GLOVE])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_GLOVE]->id,you.equipment[ET_GLOVE]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_GLOVE, false)?"없음\n":"착용불가\n");
 
-	fprintf_s(fp,"                                           발  : ");
-	if(you.equipment[ET_BOOTS])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_BOOTS]->id,you.equipment[ET_BOOTS]->GetName().c_str());
-	else
-		fprintf_s(fp,you.isImpossibeEquip(ET_BOOTS, false)?"없음\n":"착용불가\n");
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_HAND));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_HAND) << ": ";
+	if(you.equipment[ET_GLOVE]) {
+		ss << you.equipment[ET_GLOVE]->id << ") " << you.equipment[ET_GLOVE]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
 
-	fprintf_s(fp,"                                           목걸이  : ");
-	if(you.equipment[ET_NECK])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_NECK]->id,you.equipment[ET_NECK]->GetName().c_str());
-	else
-		fprintf_s(fp,"없음\n");		
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_FOOT));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_FOOT) << ": ";
+	if(you.equipment[ET_BOOTS]) {
+		ss << you.equipment[ET_BOOTS]->id << ") " << you.equipment[ET_BOOTS]->GetName() << "\n";
+	}
+	else {
+		ss << (you.isImpossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+	}
 
-	fprintf_s(fp,"                                           왼반지  : ");
-	if(you.equipment[ET_LEFT])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_LEFT]->id,you.equipment[ET_LEFT]->GetName().c_str());
-	else
-		fprintf_s(fp,"없음\n");
 
-	fprintf_s(fp,"                                           오른반지: ");      
-	if(you.equipment[ET_RIGHT])
-		fprintf_s(fp,"%c) %s\n",you.equipment[ET_RIGHT]->id,you.equipment[ET_RIGHT]->GetName().c_str());
-	else
-		fprintf_s(fp,"없음\n");
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_AMULET));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_AMULET) << ": ";
+	if(you.equipment[ET_NECK]) {
+		ss << you.equipment[ET_NECK]->id << ") " << you.equipment[ET_NECK]->GetName() << "\n";
+	}
+	else {
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
+	}
+
+
+
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_LEFT_RING) << ": ";
+	if(you.equipment[ET_LEFT]) {
+		ss << you.equipment[ET_LEFT]->id << ") " << you.equipment[ET_LEFT]->GetName() << "\n";
+	}
+	else {
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
+	}
+
+	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING));
+	if(offset1_ < 47)
+		ss << std::string(47-offset1_, ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_RIGHT_RING) << ": ";
+	if(you.equipment[ET_RIGHT]) {
+		ss << you.equipment[ET_RIGHT]->id << ") " << you.equipment[ET_RIGHT]->GetName() << "\n";
+	}
+	else {
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
+	}
+
 	
-	fprintf_s(fp,"\n룬:");
+	ss << "\n" << LocalzationManager::locString(LOC_SYSTEM_ITEM_RUNE_RUNE) << ":";
 	int first_rune_ = 0;
 	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
 	{		
 		if(you.rune[i])
 		{
 			if(first_rune_ !=0)
-				fprintf_s(fp,", ");
-			fprintf_s(fp,"%s",LocalzationManager::locString(rune_string[i]).c_str());
+				ss << ", ";
+			ss << LocalzationManager::locString(rune_string[i]);
 			first_rune_++;
 		}
 	}
-	fprintf_s(fp,"\n");
+	ss << "\n";
 	if(you.rune[RUNE_HAKUREI_ORB])
 	{
-		fprintf_s(fp,"음양옥\n");
+		ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_YINYANG);
 	}
 	else
 	{				
-		fprintf_s(fp,"\n");
+		ss << "\n";
 	}
 
-	fprintf_s(fp, "\n\n\n<특성>\n"/*,you.item_weight,you.max_item_weight*/);
+	ss << "\n\n\n<" << LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY) << ">\n";
 
 	if (you.property_vector.empty())
 	{
-		fprintf_s(fp, "당신의 특성이 없습니다.\n");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY) << ">\n";
 	}
 	else {
 		for (auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 		{
-			fprintf_s(fp, "%s\n", it->GetInfor().c_str());
+			ss << it->GetInfor() << "\n";
 		}
 	}
 
+	ss << "\n\n" << LocalzationManager::formatString(LOC_SYSTEM_DUMP_PLACE_IN, PlaceHolderHelper(CurrentLevelString())) << "\n";
 
-
-	fprintf_s(fp,"\n\n당신은 %s에 있다.\n",CurrentLevelString());
-
-	fprintf_s(fp,"\n\n\n<인벤토리>\n"/*,you.item_weight,you.max_item_weight*/);
+	ss << "\n\n\n<" << LocalzationManager::locString(LOC_SYSTEM_INVENTORY) << ">\n"; 
 
 	
 	list<item>::iterator first,end;
@@ -614,53 +785,98 @@ bool Dump(int type, string *filename_)
 				int equip = you.isequip(it);
 				if(!exist)
 				{
-					fprintf_s(fp,"\n%s\n",GetItemTypeSting(i).c_str());
+					ss << "\n" << GetItemTypeSting(i) << "\n";
 					exist = true;
 				}
-				fprintf_s(fp,"  %c - %s",(*it).id,(*it).GetName().c_str());
-				if(equip)
-					fprintf_s(fp,"%s",(equip==1?"(장착)":(equip==2?"(왼손)":"(오른손)")));
-				fprintf_s(fp,"\n");
+				ss  << "  " << (*it).id << " - " << (*it).GetName();
+				if(equip) {
+					ss  << "(";
+					if(equip == 1) {
+						ss  << LocalzationManager::locString(LOC_SYSTEM_EQUIP);
+					}
+					else if(equip == 2) {
+						ss  << LocalzationManager::locString(LOC_SYSTEM_LEFT_HAND);
+					}
+					else  {
+						ss  << LocalzationManager::locString(LOC_SYSTEM_RIGHT_HAND);
+					}
+					ss  << ")";
+				}
+				ss << "\n";
 			}
 		}
 	}
 
-	fprintf_s(fp,"\n\n\n<스킬>\n\n");
+	ss << "\n\n\n<" << LocalzationManager::locString(LOC_SYSTEM_SKILL) << ">\n"; 
 
 	int skt = 0;
 	while(skt < SKT_MAX)
 	{
 		if (you.pure_skill == skt)
 		{
-			fprintf_s(fp, "  %4s %3d (순화)\n", skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, false));
+			if(PrintCharWidth(skill_string((skill_type)skt)) < 12) {
+				ss << std::string(12-PrintCharWidth(skill_string((skill_type)skt)), ' ');
+			}
+			ss << skill_string((skill_type)skt);
+			ss << ' ' << std::setw(3) << you.GetSkillLevel(skt, false) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA) << ")\n";
 		}
 		else if (you.GetSkillLevel(skt, false)) {
-			fprintf_s(fp, "  %4s %3d (%d%%)\n", skill_string((skill_type)skt).c_str(), you.GetSkillLevel(skt, false), GetSkillPercent(you.skill[skt]));
+			if(PrintCharWidth(skill_string((skill_type)skt)) < 12) {
+				ss << std::string(12-PrintCharWidth(skill_string((skill_type)skt)), ' ');
+			}
+			ss << skill_string((skill_type)skt);
+			ss << ' ' << std::setw(3) << you.GetSkillLevel(skt, false) << " (" << GetSkillPercent(you.skill[skt]) << "%)\n";
 		}
 		skt++;
 	}
 
 
-	fprintf_s(fp,"\n\n\n기억하고 있는 주문들\n");
-	if(you.currentSpellNum)
-		fprintf_s(fp,"\n%-34s %-20s %s","마법이름","학파","실패율");
+	ss << "\n\n\n<" << LocalzationManager::locString(LOC_SYSTEM_REMEMBER_MAGIC) << ">\n"; 
+	if(you.currentSpellNum) {
+		ss << "\n";
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_NAME)) < 34) {
+			ss << std::string(34-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_NAME)), ' ');
+		}
+		ss << LocalzationManager::locString(LOC_SYSTEM_NAME) << " ";
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SCHOOL)) < 20) {
+			ss << std::string(20-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SCHOOL)), ' ');
+		}
+		ss << LocalzationManager::locString(LOC_SYSTEM_SCHOOL) << " ";
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE)) < 12) {
+			ss << std::string(12-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE)), ' ');
+		}
+		ss << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << " ";
+	}
 	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSpell[i])
 		{
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
-			fprintf_s(fp,"\n%c - %-30s %-20s %-3d%%",i<26?'a'+i:'A'+(i-26),SpellString(spell_).c_str(),GetSpellSchoolString(spell_).c_str(),100-you.GetSpellSuccess(spell_));
+
+			ss << "\n" << (char)(i<26?('a'+i):('A'+(i-26))) << " - ";
+			if(PrintCharWidth(SpellString(spell_)) < 30) {
+				ss << std::string(30-PrintCharWidth(SpellString(spell_)), ' ');
+			}
+			ss << SpellString(spell_) << " ";
+			if(PrintCharWidth(GetSpellSchoolString(spell_)) < 20) {
+				ss << std::string(20-PrintCharWidth(GetSpellSchoolString(spell_)), ' ');
+			}
+			ss << GetSpellSchoolString(spell_) << " ";
+			if(PrintCharWidth(to_string(100-you.GetSpellSuccess(spell_))) < 9) {
+				ss << std::string(9-PrintCharWidth(to_string(100-you.GetSpellSuccess(spell_))), ' ');
+			}
+			ss << to_string(100-you.GetSpellSuccess(spell_)) << "%";
 		}
 	}
-	if(you.currentSpellNum)
-		fprintf_s(fp,"\n\n당신은 %d개의 마법을 배우고 있으며 %d의 마법 레벨이 남았다.\n",you.currentSpellNum,you.remainSpellPoiont);
-	else
-		fprintf_s(fp,"\n당신은 마법을 배우고 있지 않다.\n");
+	if(you.currentSpellNum) {
+		ss << "\n\n" << LocalzationManager::formatString(LOC_SYSTEM_UI_LEARN_SPELL_REMAIN, PlaceHolderHelper(to_string(you.currentSpellNum)), PlaceHolderHelper(to_string(you.remainSpellPoiont))) << "\n"; 
+	}
+	else {
+		ss << "\n" << LocalzationManager::locString(LOC_SYSTEM_UI_NOT_LEARN_SPELL) << "\n"; 
+	}
 
 
-
-	
-	fprintf_s(fp,"\n\n\n");
+	ss << "\n\n\n";
 
 	
 
@@ -670,23 +886,23 @@ bool Dump(int type, string *filename_)
 		makeAsciiDump(&monster_list,temp_map_);
 		for (int y = 0; y < 17; y++) {
 			for (int x = 0; x < 17; x++) {
-				fprintf_s(fp, "%c", temp_map_[x][y]);
+				ss << temp_map_[x][y];
 			}
-			fprintf_s(fp, "\n");
+			ss << "\n";
 		}
 		for (auto it = monster_list.begin(); it != monster_list.end(); it++) {
-			fprintf_s(fp, "%c:", it->first);
+			ss << it->first << ":";
 			boolean first = true;
 			for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++) {
 				if(!first)
-					fprintf_s(fp, ", ");
-				fprintf_s(fp, "%s", it2->c_str());
+					ss << ", ";
+				ss << it2->c_str();
 				first = false;
 			}
-			fprintf_s(fp, "\n");
+			ss << "\n";
 		}
 	}
-	fprintf_s(fp, "\n\n\n");
+	ss << "\n\n\n";
 
 	if(!DisplayManager.text_log.text_list.empty())
 	{
@@ -712,55 +928,81 @@ bool Dump(int type, string *filename_)
 		}
 		for(i = 0;i < view_length && it != DisplayManager.text_log.text_list.end();it++)
 		{
-			fprintf_s(fp,"%s", ConvertUTF16ToUTF8((*it)->text).c_str());
+			ss << ConvertUTF16ToUTF8((*it)->text);
 			if((*it)->enter)
 			{
-				fprintf_s(fp,"\n");
+				ss << "\n";
 			}
 		}
 	}
 
 	if (type == 1)
 	{
-		fprintf_s(fp, "\n\n\n<생성된 특수지형들>\n\n");
+		ss << "\n\n\n<" << LocalzationManager::locString(LOC_SYSTEM_DUMP_SPIECIAL_VAULT) << ">\n\n"; 
 		for (int i = 0; i < MAXLEVEL; i++)
 		{
 			if (!env[i].speciel_map_name.empty())
 			{
 				int k = 0;
-				fprintf_s(fp, "%12s:", CurrentLevelString(i));
+
+				if(PrintCharWidth(CurrentLevelString(i)) < 12) {
+					ss << std::string(12-PrintCharWidth(CurrentLevelString(i)), ' ');
+				}
+				ss << CurrentLevelString(i) << ":";
+
 				for (auto it = env[i].speciel_map_name.begin(); it != env[i].speciel_map_name.end(); )
 				{
-					fprintf_s(fp, "%s", (*it).c_str());
+					ss << (*it);
 					it++;
 					k++;
 					if (it != env[i].speciel_map_name.end())
 					{
-						fprintf_s(fp, ", ");
+						ss << ", ";
 						if (k % 5 == 0)
 						{
-							fprintf_s(fp, "\n%13s","");
+							ss << "\n" << std::string(13, ' ');
 						}
 					}
 				}
-				fprintf_s(fp, "\n");
+				ss << "\n";
 			}
 		}
 	}
 
-	fprintf_s(fp,"\n\n\n");
-	fprintf_s(fp,"%8s|%-18s|%s\n","턴","장소","내용");
+	ss << "\n\n\n";
+
+
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)) < 8) {
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)), ' ');
+	}
+	ss << LocalzationManager::locString(LOC_SYSTEM_TURNS) << "|";
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_PLACE)) < 18) {
+		ss << std::string(18-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_PLACE)), ' ');
+	}
+	ss << LocalzationManager::locString(LOC_SYSTEM_PLACE) << "|";
+	ss << LocalzationManager::locString(LOC_SYSTEM_NOTE) << "\n";
+
 
 	for(list<note_dummy>::iterator it = save_note.note_list.begin(); it != save_note.note_list.end(); it++)
 	{
-		fprintf_s(fp,"%8d|%-18s|%s\n",it->turn,it->place.c_str(),it->text.c_str());
+		if(PrintCharWidth(to_string(it->turn)) < 8) {
+			ss << std::string(8-PrintCharWidth(to_string(it->turn)), ' ');
+		}
+		ss << to_string(it->turn) << "|";
+		if(PrintCharWidth(it->place) < 18) {
+			ss << std::string(18-PrintCharWidth(it->place), ' ');
+		}
+		ss << it->place << "|";
+		ss << it->text << "\n";
 	}
-	fprintf_s(fp,"\n\n\n");
+	ss << "\n\n\n";
+
 	
-	fprintf_s(fp,"%-26s","  ");
-	for(int i=0;i<9;i++)
-		fprintf_s(fp,"│ %2d-%2d",1+i*3,3+i*3);
-	fprintf_s(fp,"┃  합계\n");
+	ss << std::string(26, ' '); 
+	for(int i=0;i<9;i++) {
+		ss << "│ " << std::setw(2) << 1+i*3 << "-" << std::setw(2) << 3+i*3;
+	}
+	ss << "┃ " << LocalzationManager::locString(LOC_SYSTEM_SUM) << "\n";
 
 
 
@@ -772,30 +1014,40 @@ bool Dump(int type, string *filename_)
 		{
 			type_ = it->type;
 
-			fprintf_s(fp,"%-4s----------------------",GetDumpActionString(type_));
+			ss << GetDumpActionString(type_);
+			if(PrintCharWidth(GetDumpActionString(type_)) < 26) {
+				ss << std::string(26-PrintCharWidth(GetDumpActionString(type_)), '-');
+			}
+
 			for(int i=0;i<9;i++)
-				fprintf_s(fp,"┼------");
-			fprintf_s(fp,"╂───\n");
+				ss << "┼------";
+			ss << "╂───\n";
 		}
 
-		fprintf_s(fp,"%26s",it->name.c_str());
+		if(PrintCharWidth(it->name) < 26) {
+			ss << std::string(26-PrintCharWidth(it->name), ' ');
+		}
+		ss << it->name;
+
 		for(int i=0;i<9;i++)
 		{
 			int add_ = it->num[0+i*3]+it->num[1+i*3]+it->num[2+i*3];
-			fprintf_s(fp,"│%6d",add_);
+			ss << "│" << std::setw(6) << add_;
 			total_ += add_;
 		}
 
-		fprintf_s(fp,"┃%6d\n",total_);
+		ss << "┃" << std::setw(6) << total_ << "\n";
 	}
 
 
 
 
+	fprintf_s(fp,"%s",ss.str().c_str());
 
 	fclose(fp);
-	if((isNormalGame() || isArena() || isSprint()) && type == 1 && !wiz_list.wizard_mode)
-		sendScore(sql_,filename);
+	//TODO) 파일로 변경
+	//if((isNormalGame() || isArena() || isSprint()) && type == 1 && !wiz_list.wizard_mode)
+	//	sendScore(sql_,filename);
 	if(filename_)
 	{
 		(*filename_) = filename;
@@ -804,24 +1056,24 @@ bool Dump(int type, string *filename_)
 
 	return true;
 }
-const char* GetDumpActionString(dump_action_type type_)
+string GetDumpActionString(dump_action_type type_)
 {
 	switch(type_)
 	{
 	case DACT_MELEE:
-		return "근접";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_MELEE);
 	case DACT_SHOOT:
-		return "탄막";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_SHOOT);
 	case DACT_SPELL:
-		return "마법";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_SPELL);
 	case DACT_INVOKE:
-		return "권능";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_INVOKE);
 	case DACT_EVOKE:
-		return "발동";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_EVOKE);
 	case DACT_USE:
-		return "소모";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_USE);
 	default:
-		return "기타";
+		return LocalzationManager::locString(LOC_SYSTEM_DUMP_ACTION_TYPE_ETC);
 	}
 
 }

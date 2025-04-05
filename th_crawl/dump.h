@@ -36,7 +36,7 @@ public:
 	void plus(int level_){num[level_-1]++;}
 };
 
-const char* GetDumpActionString(dump_action_type type_);
+string GetDumpActionString(dump_action_type type_);
 
 
 bool Dump(int type, string *filename_);

@@ -237,7 +237,7 @@ public:
 
 	stair_kind getStairKind(int x_, int y_);
 	char getAsciiDot(int x_, int y_);
-	const char* getTileHelp(int x_, int y_);
+	string getTileHelp(int x_, int y_);
 
 
 	bool magicmapping(int x_, int y_);
@@ -344,7 +344,7 @@ int sprintMulti();
 
 float GetDotX(int x);
 float GetDotY(int y);
-char* CurrentLevelString(int level = -1);
+string CurrentLevelString(int level = -1);
 int GetLevelMonsterNum(int level, bool item_);
 void Noise(coord_def center_, int length_, const unit* excep_=NULL);
 bool Auto_Pick_Up(list<item>::iterator it);

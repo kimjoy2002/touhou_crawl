@@ -265,9 +265,7 @@ bool environment::MakeMap(bool return_)
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
 		case ZIGURRAT_LEVEL:
 			{
-				char temp2[200];
-				sprintf_s(temp2,200,"던전 진행: %s에 들어섰다.",CurrentLevelString(floor));
-				AddNote(you.turn,CurrentLevelString(floor),temp2,CL_normal);
+				AddNote(you.turn,CurrentLevelString(floor),LocalzationManager::formatString(LOC_SYSTEM_NOTE_DUNGEON_ENTER, PlaceHolderHelper(CurrentLevelString(floor))), CL_normal);
 			}
 			break;
 		}
@@ -275,9 +273,7 @@ bool environment::MakeMap(bool return_)
 		return true;
 	}
 	else if(floor == ZIGURRAT_LEVEL){
-		char temp2[200];
-		sprintf_s(temp2, 200, "던전 진행: %s에 들어섰다.", CurrentLevelString(floor));
-		AddNote(you.turn, CurrentLevelString(floor), temp2, CL_normal);
+		AddNote(you.turn, CurrentLevelString(floor), LocalzationManager::formatString(LOC_SYSTEM_NOTE_DUNGEON_ENTER, PlaceHolderHelper(CurrentLevelString(floor))), CL_normal);
 	}
 	return false;
 }
@@ -391,7 +387,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 
 	if(first_ && current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 	{
-		printlog("이 곳에는 강력한 기운이 느껴진다. 룬이 이 층에 존재한다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_PANDEMONIUM_RUNE),true,false,false,CL_danger);
 		MoreWait();
 	}
 	
@@ -614,7 +610,7 @@ char environment::getAsciiDot(int x_, int y_)
 		return ' ';
 	}
 }
-const char* environment::getTileHelp(int x_, int y_)
+string environment::getTileHelp(int x_, int y_)
 {
 	switch(dgtile[x_][y_].tile)
 	{
@@ -635,11 +631,11 @@ const char* environment::getTileHelp(int x_, int y_)
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
-		return "(>키로 내려가기)";
+		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_DOWN);
 	case DG_UP_STAIR:
-		return floor==0?"":"(<키로 올라가기)";
+		return floor==0?LocalzationManager::locString(LOC_EMPTYSTRING):LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_UP);
 	case DG_RETURN_STAIR:
-		return "(<키로 올라가기)";
+		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_UP);
 	case DG_TEMPLE_JOON_AND_SION:
 	case DG_TEMPLE_BYAKUREN:
 	case DG_TEMPLE_KANAKO:
@@ -660,11 +656,11 @@ const char* environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_MIKO:
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
-		return "(p키로 기도)";
+		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_PRAY);
 	default:
 		break;
 	}
-	return "";
+	return LocalzationManager::locString(LOC_EMPTYSTRING);
 }
 int environment::getAutoTileNum(unsigned char bit)
 {
@@ -2436,64 +2432,65 @@ float GetDotY(int y)
 	return 340.0f+y*3;
 }
 
-char* CurrentLevelString(int level)
+string CurrentLevelString(int level)
 {
-	static char temp[30];
+	ostringstream ss;
+
 	int level_ = level>=0?level:current_level;
 
 
 	if(isArena())
-		sprintf_s(temp,30,"아레나");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ARENA);
 	else if (isSprint())
-		sprintf_s(temp,30, "스프린트");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SPRINT);
 	else if(level_<TEMPLE_LEVEL)
-		sprintf_s(temp,30,"던전 %d층", level_+1);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1)));
 	else if(level_ == TEMPLE_LEVEL)
-		sprintf_s(temp,30,"신전");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_TEMPLE);
 	else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-		sprintf_s(temp,30,"안개호수 %d층", level_+1-MISTY_LAKE_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-MISTY_LAKE_LEVEL)));
 	else if(level_ >= YOUKAI_MOUNTAIN_LEVEL && level_ <= YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL)
-		sprintf_s(temp,30,"요괴의산 %d층", level_+1-YOUKAI_MOUNTAIN_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-YOUKAI_MOUNTAIN_LEVEL)));
 	else if(level_ >= SCARLET_LEVEL && level_ <= SCARLET_LEVEL+MAX_SCARLET_LEVEL)
-		sprintf_s(temp,30,"홍마관 %d층", level_+1-SCARLET_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-SCARLET_LEVEL)));
 	else if(level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL+MAX_SCARLET_LIBRARY_LEVEL)
-		sprintf_s(temp,30,"홍마관 도서관");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY);
 	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
-		sprintf_s(temp,30,"홍마관 지하실");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER);
 	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
-		sprintf_s(temp,30,"미궁의 죽림");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO);
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
-		sprintf_s(temp,30,"영원정");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_EINENTEI);
 	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf_s(temp,30,"지저 %d층", level_+1-SUBTERRANEAN_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-SUBTERRANEAN_LEVEL)));
 	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		sprintf_s(temp,30,"작열지옥터");	
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST);
 	else if(level_ >= YUKKURI_LEVEL && level_ <=  YUKKURI_LAST_LEVEL)
-		sprintf_s(temp,30,"윳쿠리둥지 %d층", level_+1-YUKKURI_LEVEL);
-	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)
-		sprintf_s(temp,30,"짐승길 %d층", level_+1-DEPTH_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-YUKKURI_LEVEL)));
+	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)		
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-DEPTH_LEVEL)));
 	else if(level_ >= DREAM_LEVEL && level_ <=  DREAM_LAST_LEVEL)
-		sprintf_s(temp,30,"꿈의 세계");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DREAM);
 	else if(level_ >= MOON_LEVEL && level_ <=  MOON_LAST_LEVEL)
-		sprintf_s(temp,30,"달의 도시");
-	else if(level_ == PANDEMONIUM_LEVEL)
-		sprintf_s(temp,30,"마계");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MOON);
+	else if(level_ == PANDEMONIUM_LEVEL)		
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM);
 	else if(level_ == PANDEMONIUM_LEVEL+1)
-		sprintf_s(temp,30,"법계");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HOKKAI);
 	else if(level_ == PANDEMONIUM_LEVEL+2)
-		sprintf_s(temp,30,"빙결세계");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FROZEN_FIELD);
 	else if(level_ == PANDEMONIUM_LEVEL+3)
-		sprintf_s(temp,30,"판데모니엄");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST);
 	else if(level_ >= HAKUREI_LEVEL && level_ <=  HAKUREI_LAST_LEVEL)
-		sprintf_s(temp,30,"하쿠레이 %d층", level_+1-HAKUREI_LEVEL);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-HAKUREI_LEVEL)));
 	else if (level_ == OKINA_LEVEL)
-		sprintf_s(temp,30, "문 뒤의 세계");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_OKINA);
 	else if (level_ == ZIGURRAT_LEVEL)
-		sprintf_s(temp,30, "광몽의세계 %d층", you.ziggurat_level);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(you.ziggurat_level)));
 	else
-		sprintf_s(temp,30,"알수없는 층");
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON);
 
-	return temp;
+	return ss.str();
 }
 int GetLevelMonsterNum(int level, bool item_)
 {

@@ -57,7 +57,7 @@ void memorize_action(int spell_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
-				printlog("취소했다.",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_help);
 				ok_ = false;
 				break;
 			default:
@@ -226,7 +226,7 @@ void iteminfor(bool gameover)
 								{
 									if (you.drowned)
 									{
-										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 										return;
 									}
 									you.equip(item_->id, ET_WEAPON);
@@ -235,7 +235,7 @@ void iteminfor(bool gameover)
 								{
 									if (you.drowned)
 									{
-										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 										return;
 									}
 									you.equiparmor(item_->id);
@@ -264,19 +264,19 @@ void iteminfor(bool gameover)
 								{
 									if (you.drowned)
 									{
-										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 										return;
 									}
 									if (!you.unequip(ET_WEAPON))
 									{
-										printlog("저주에 걸려 있어서 장비를 벗을 수 없다.", true, false, false, CL_normal);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_normal);
 									}
 								}
 								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
 								{
 									if (you.drowned)
 									{
-										printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 										return;
 									}
 									you.unequiparmor(item_->id);
@@ -315,7 +315,7 @@ void iteminfor(bool gameover)
 								}
 								if (you.drowned)
 								{
-									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if (you.Drink(item_->id))
@@ -347,7 +347,7 @@ void iteminfor(bool gameover)
 								}
 								if (you.drowned)
 								{
-									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								you.Eat(item_->id);
@@ -365,7 +365,7 @@ void iteminfor(bool gameover)
 								}
 								if (you.drowned)
 								{
-									printlog("물에 빠진 상태에선 할 수 없다!", true, false, false, CL_danger);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 									return;
 								}
 								if(you.Read(item_->id))

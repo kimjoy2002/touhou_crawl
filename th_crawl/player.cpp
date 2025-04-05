@@ -5118,7 +5118,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		if(!unequip(type_))
 		{
 			if (equipment[type_] && equipment[type_]->curse)
-				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
 			return 0;
 		}
 		if(speak_)
@@ -5378,7 +5378,7 @@ bool players::possibleunequip(list<item>::iterator it)
 		{
 			if(!unequip(i))
 			{
-				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
 				return 0;
 			}
 			break;
@@ -5525,7 +5525,7 @@ bool players::unequiparmor(char id_)
 			if(!unequip(i))
 			{
 				if(equipment[i]->curse)
-					printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
 				return 0;
 			}
 			return 1;
@@ -5550,7 +5550,7 @@ bool players::unequipjewerly(char id_)
 			if(!unequip(i))
 			{
 				if (equipment[i]->curse)
-					printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
 				return 0;
 			}
 			return 1;

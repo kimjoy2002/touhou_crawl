@@ -2803,7 +2803,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2888,7 +2888,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->position == target)
 	{
-		printlog("자살할거야?", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_SUICIDE), true, false, false, CL_small_danger);
 		return false;
 	}
 	beam_iterator beam(order->position, order->position);
@@ -3018,7 +3018,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			case 'n':
 			case 'N':
 			default:
-				printlog("취소하였다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 				return false;
 			}
 		}
@@ -3026,7 +3026,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3280,7 +3280,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3622,7 +3622,7 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3685,7 +3685,7 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -3740,7 +3740,7 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		default:
 			break;
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
 	}

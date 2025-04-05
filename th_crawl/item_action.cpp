@@ -367,7 +367,7 @@ void Eatting(char auto_)
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 먹을 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_EAT), true, false, false, CL_danger);
 		return;
 	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
@@ -426,7 +426,7 @@ void Drinking(char auto_)
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 마실 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_DRINK), true, false, false, CL_danger);
 		return;
 	}
 	view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
@@ -565,7 +565,7 @@ void Reading(char auto_)
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 읽을 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_READ), true, false, false, CL_danger);
 		return;
 	}
 	if(env[current_level].isSilence(you.position))

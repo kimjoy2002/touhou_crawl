@@ -27,7 +27,7 @@ void Equip_Weapon()
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 무기를 바꿀 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_WEAPON), true, false, false, CL_danger);
 		return;
 	}
 
@@ -63,7 +63,7 @@ void Equip_Weapon()
 		{
 			if(!you.unequip(ET_WEAPON))
 			{				
-				printlog("저주에 걸려 있어서 장비를 벗을 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
 			}
 			break;
 		}
@@ -150,7 +150,7 @@ void Equip_Armor()
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 방어구를 바꿀 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_ARMOUR), true, false, false, CL_danger);
 		return;
 	}
 	view_item(IVT_EQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);

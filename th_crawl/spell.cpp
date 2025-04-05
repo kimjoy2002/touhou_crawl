@@ -1824,7 +1824,7 @@ void SpellUse(char auto_, int auto_direc_)
 	}
 	if (you.drowned)
 	{
-		printlog("물에 빠진 상태에선 마법은 쓸 수 없다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_MAGIC), true, false, false, CL_danger);
 		return;
 	}
 	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
@@ -1842,7 +1842,7 @@ void SpellUse(char auto_, int auto_direc_)
 		}
 		if(you.s_confuse)
 		{
-			printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_normal);
 			return;
 		}
 		bool blood_ = false;

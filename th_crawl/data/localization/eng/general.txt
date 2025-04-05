@@ -14,13 +14,13 @@ LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
 LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
-LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
 LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
 LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
 LOC_SYSTEM_RECORVER_STAT,You have recovered your lost stats.
+LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_ARMOUR,You can't remove armor while consumed by madness!

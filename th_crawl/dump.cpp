@@ -153,7 +153,7 @@ bool Dump(int type, string *filename_)
 		{
 			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*\n";
 		}
-		ss << caculScore() << "    " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << " " << you.level << " " << LocalzationManager::locString(tribe_type_string[you.tribe]) << LocalzationManager::locString(job_type_string[you.job]) << " " << you.GetCharNameString() << " \"" << you.user_name << "\" (HP " << you.GetHp() << "/" << you.GetMaxHp() << ")";
+		ss << caculScore() << "    " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << " " << you.level << " " << LocalzationManager::locString(tribe_type_string[you.tribe]) << LocalzationManager::locString(job_type_string[you.job]) << " " << you.GetCharNameString() << " \"" << you.user_name << "\" (HP " << you.GetHp() << "/" << you.GetMaxHp() << ")\n";
 		ss << "             ";
 		switch (you.dead_reason)
 		{

@@ -86,19 +86,19 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
 	{
-		printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_normal);
 		return false;
 	}
 
 	if(you.power < Evokeusepower(kind,true))
 	{
-		printlog("발동하기엔 당신의 P가 모자란다.",true,false,false,CL_small_danger);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_P_EVOKE),true,false,false,CL_small_danger);	
 		return false;
 	}
 
 	if(randA(99) >= EvokeSuccece(kind))
 	{		
-		printlog("아무런 일도 일어나지 않았다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);	
 		return true;
 	}
 
@@ -258,10 +258,10 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	if(target == you.position && !EvokeFlagCheck(kind,S_FLAG_SEIF) && !EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		if (kind == EVK_CAMERA) {
-			printlog("셀카를 찍을꺼야?", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_SELF), true, false, false, CL_small_danger);
 		}
 		else {
-			printlog("자살할거야?", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_SUICIDE), true, false, false, CL_small_danger);
 		}
 		return false;
 	}
@@ -292,7 +292,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	case EVK_AIR_SCROLL:
 		{
 			soundmanager.playSound("buff");
-			printlog("에어두루마리로부터 영력을 얻었다!",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_AIRSCROLL),false,false,false,CL_normal);
 			int value_ = 8 + level_ / 3 + randA(3 + level_ / 3);
 			you.MpUpDown(value_);
 			//발동0 8~11에서 발동만렙 17~29
@@ -329,11 +329,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			{
 				int percent_ = 9;
 				deletelog();
-				printlog("요술망치로 무슨 소원을 빌거야?", true, false, true, CL_help);
-				printlog("a - 날 회복시켜줘!", true, false, true, CL_normal);
-				printlog("b - 날 강하게 만들어줘!", true, false, true, CL_normal);
-				printlog("c - 많은 동료를 원해!", true, false, true, CL_normal);
-				printlog("d - 보물을 원해!", true, false, true, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ASK), true, false, true, CL_help);
+				printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER1), true, false, true, CL_normal);
+				printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER2), true, false, true, CL_normal);
+				printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER3), true, false, true, CL_normal);
+				printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER4), true, false, true, CL_normal);
 				int key_ = waitkeyinput();
 				switch (key_) {
 					case 'a':
@@ -344,7 +344,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							you.HpUpDown(you.GetMaxHp() - you.GetHp(), DR_EFFECT);
 							if (!you.pure_mp)
 								you.MpUpDown(you.GetMaxMp() - you.GetMp());
-							printlog("요술망치가 당신을 최대로 회복시켰다!", true, false, false, CL_good);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_HEAL), true, false, false, CL_good);
 							loop_ = false;
 						}
 						else {
@@ -352,7 +352,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							if (!you.pure_mp)
 								you.MpUpDown(-you.GetMp());
 							soundmanager.playSound("laugh");
-							printlog("요술망치의 마력이 역류하였다! 당신의 체력과 영력이 빨려들었다!", true, false, false, CL_danger);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_HEAL_BACKFIRE), true, false, false, CL_danger);
 							loop_ = false;
 						}
 						break;
@@ -362,7 +362,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						if (randA(percent_)) {
 							soundmanager.playSound("buff");
 							you.SetForceStrong(true, rand_int(30, 60), true);
-							printlog("요술망치가 당신을 강하게 만들었다!", true, false, false, CL_good);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF), true, false, false, CL_good);
 							loop_ = false;
 						}
 						else {
@@ -370,7 +370,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							you.SetSlow(time_);
 							you.SetForceStrong(false, time_, true);
 							soundmanager.playSound("laugh");
-							printlog("요술망치의 마력이 역류하였다! 당신은 약해졌다!", true, false, false, CL_danger);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF_BACKFIRE), true, false, false, CL_danger);
 							loop_ = false;
 						}
 						break;
@@ -402,11 +402,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						}
 						if (good_) {
 							soundmanager.playSound("buff");
-							printlog("요술망치가 동료들을 불러냈다!", true, false, false, CL_good);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON), true, false, false, CL_good);
 						}
 						else {
 							soundmanager.playSound("laugh");
-							printlog("요술망치의 마력이 역류하였다! 동료가 모두 적대적으로 변했다!", true, false, false, CL_danger);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON_BACKFIRE), true, false, false, CL_danger);
 						}
 						loop_ = false;
 						break;
@@ -417,7 +417,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						if (randA(percent_)) {
 							HammerPresent();
 							soundmanager.playSound("buff");
-							printlog("요술망치가 보물을 만들어냈다!", true, false, false, CL_good);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT), true, false, false, CL_good);
 						}
 						else {
 							returnHammerItem();
@@ -440,14 +440,14 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 								}
 							}
 							soundmanager.playSound("laugh");
-							printlog("요술망치의 마력이 역류하였다! 보물이 모두 회수되었다!", true, false, false, CL_danger);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE), true, false, false, CL_danger);
 						}
 
 						loop_ = false;
 						break;
 					}
 					case VK_ESCAPE:
-						printlog("취소했다.", true, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 						return false;
 					default:
 						break;
@@ -479,7 +479,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		if (env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_SEA || 
 			env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_LAVA) {
 			soundmanager.playSound("water");
-			printlog("4척 매직봄은 물에 빠져버렸다. ", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN), true, false, false, CL_normal);
 
 		}
 		else if (monster *mon_ = BaseSummon(MON_BOMB, 10, true, false, 2, &you, final_postion_, SKD_OTHER, -1))
@@ -494,12 +494,12 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	{
 		soundmanager.playSound("ufo");
 		if (you.s_evoke_ghost) {
-			printlog("당신은 오쿠리쵸친으로부터 손을 놓았다. ", true, false, false, CL_magic);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE), true, false, false, CL_magic);
 			you.PowUpDown(50, true);
 			you.SetEvokeGhost(0);
 		}
 		else {
-			printlog("당신은 생명력을 대가로 유령화하였다! 한번 더 발동해서 해제할 수 있다.", true, false, false, CL_magic);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL), true, false, false, CL_magic);
 			float bonus_ = 1.0f - (1.0f * level_ / 27);
 			int hp_ = min(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
 			you.HpUpDown(-hp_, DR_EFFECT);
@@ -530,17 +530,17 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 		if (goal_ == NULL ||
 			!goal_->isView()) {
-			printlog("허공을 찍을 여유는 없다. ", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST), true, false, false, CL_normal);
 			return false;
 		}
 		if (!goal_->isplayer()) {
 			monster* mon_ = (monster*)goal_;
 			if (!mon_->isUnique()) {
-				printlog("좀 더 이쁜 미소녀를 찍고 싶은데. ", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE), true, false, false, CL_normal);
 				return false;
 			}
 			if (mon_->id == MON_FORTUNE_TELLER) {
-				printlog("남자는 찍고 싶지 않아. ", true, false, false, CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_NOT_GIRL), true, false, false, CL_danger);
 				return false;
 			}
 		}
@@ -561,26 +561,26 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				if (unit_)
 				{
 					if ((*temp) != target && unit_->isView()) {
-						printlog("누군가가 사진을 찍는걸 방해하고 있어! ", true, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_INTERRUPT), true, false, false, CL_normal);
 						return false;
 					}
 					if (unit_ == goal_ && !unit_->isplayer()) {
 						monster* mon_ = (monster*)unit_;
 						env[current_level].MakeNoise(you.position, 8, NULL);
-						printlog("찰칵! ", false, false, false, CL_warning);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_SHUTTER) + " ", false, false, false, CL_warning);
 						soundmanager.playSound("camera");
 
 						if (mon_->id == MON_SAKUYA && !mon_->s_confuse
 							&& !mon_->s_paralyse &&  mon_->state.GetState() != MS_SLEEP)
 						{
 							if (you.s_the_world) {
-								printlog("내가 시간을 멈추었다...", true, false, false, CL_warning);
+								printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_THE_WORLD), true, false, false, CL_warning);
 
 							}
 							else {
 								mon_->Blink(10);
 								if (mon_->position != target) {
-									printlog("그러나 촬영 대상이 사라졌다! ", true, false, false, CL_warning);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_SAKUYA), true, false, false, CL_warning);
 									return true;
 								}
 							}
@@ -785,7 +785,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_FAIRY_SOCERER,15);
 		if(level_>21)
 			mon_list_.push(MON_FAIRY_SUN_FLOWER,5);
-		msg_ = "안개의 호수";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE);
 		break;
 	case 1: //요괴산
 		if(level_<=6)
@@ -806,7 +806,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_HANATACA_TENGU,10);
 		if(level_>21)
 			mon_list_.push(MON_SANPEI_FIGHTER,3);
-		msg_ = "요괴의 산";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN);
 		break;
 	case 2: //홍마관
 		if(level_<=13)
@@ -823,7 +823,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_VAMPIER_BAT,10);			
 		if(level_>21)
 			mon_list_.push(MON_CHUPARCABRA,3);
-		msg_ = "홍마관";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET);
 		break;
 	case 3: //윳쿠리
 		if(level_<=9)
@@ -838,7 +838,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_YOUMUYUKKURI,2);
 		if(level_>21)
 			mon_list_.push(MON_ALICEYUKKURI,2);
-		msg_ = "윳쿠리 둥지";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI);
 		break;
 	case 4: //죽림
 		if(level_<=12)
@@ -851,7 +851,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_RABIT_SUPPORT,3);
 		if(level_>15)
 			mon_list_.push(MON_RABIT_MAGIC,10);
-		msg_ = "미궁의 죽림";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO);
 		break;
 	case 5: //지저
 		if(level_<=8)
@@ -870,7 +870,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(randA(1)?MON_ONI:MON_BLUE_ONI,8);
 		if(level_>24)
 			mon_list_.push(MON_FIRE_CAR,3);				
-		msg_ = "지저";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN);
 		break;
 	case 6: //마계
 		if(level_<=12)
@@ -891,7 +891,7 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_YUKI,3);
 		if(level_>23)
 			mon_list_.push(MON_MAI,3);		
-		msg_ = "마계";
+		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM);
 		break;
 	}
 

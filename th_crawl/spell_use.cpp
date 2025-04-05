@@ -2880,7 +2880,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 		case 'N':
 		case 'n':
 		case VK_ESCAPE:
-			printlog("취소하였다.", true, true, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
 			return false;
 		}
 		you.Blink(25);
@@ -5874,7 +5874,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 	
 	if(pos == target && !self)
 	{
-		printlog("자살할거야?",true,false,false,CL_small_danger);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_SUICIDE),true,false,false,CL_small_danger);	
 		return false;
 	}
 	beam_iterator beam(pos,target);

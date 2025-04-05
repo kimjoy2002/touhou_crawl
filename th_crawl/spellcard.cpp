@@ -30,7 +30,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 {
 	if(you.s_confuse)
 	{
-		printlog("당신은 혼란스럽다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_normal);
 		return false;
 	}
 	if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
@@ -265,7 +265,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 {
 	if(target == you.position && !SpellcardFlagCheck(kind,S_FLAG_SEIF) && !SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		printlog("자살할거야?",true,false,false,CL_small_danger);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_SUICIDE),true,false,false,CL_small_danger);	
 		return false;
 	}
 

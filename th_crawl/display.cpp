@@ -1651,7 +1651,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			ss.clear();
 			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName();
 
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 35); 
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 26, 34);
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
@@ -1752,7 +1752,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_DEBUG_RISK) << "(" << you.tension_gauge << ")"; 
-				stateDraw.addState(ss.str(), CL_small_danger, "위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.", this);
+				stateDraw.addState(ss.str(), CL_small_danger, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RISK), this);
 				stateDraw.enter(this);
 			}
 			if (you.s_weather>0 && you.s_weather_turn)
@@ -1760,13 +1760,13 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				D3DCOLOR color_ = CL_normal;
 				switch (you.s_weather) {
 				case 1:
-					stateDraw.addState("안개", color_, "짙은 안개로 인하여 모두의 시야가 급격히 줄어듭니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_FOG), color_, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_FOG), this);
 					break;
 				case 2:
-					stateDraw.addState("천둥번개", color_, "주변에 무작위로 천둥번개가 떨어집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_THUNDER), color_, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_THUNDER), this);
 					break;
 				case 3:
-					stateDraw.addState("쾌청", color_, "주변의 모두가 빛나게되어 회피가 낮아지고 투명이 효과를 잃습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_SUNNY), color_, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SUNNY), this);
 					break;
 				}
 				stateDraw.enter(this);
@@ -1782,154 +1782,154 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EQUIP_PENALTY) << "(" << you.as_penalty << ")"; 
 				stateDraw.addState(ss.str(), color_,
-					you.as_penalty > you.GetPenaltyMinus(3) ? "갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다." : //끔찍
-					you.as_penalty>you.GetPenaltyMinus(2) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.": //이동패널티
-					you.as_penalty>you.GetPenaltyMinus(1) ? "갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중이 감소합니다." : //명중
-					"갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.", this);
+					you.as_penalty > you.GetPenaltyMinus(3) ?  LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1) : //끔찍
+					you.as_penalty>you.GetPenaltyMinus(2) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2): //이동패널티
+					you.as_penalty>you.GetPenaltyMinus(1) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY3) : //명중
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY4), this);
 			}
 			bool haste_temp_ = false;
 
 			if (you.god == GT_MIKO)
 			{
 				if (env[current_level].popular == 1) {
-					stateDraw.addState("새로운장소", CL_normal, "이 층에선 욕망부르기를 아직 사용하지않았습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_NEWPLACE), CL_normal, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE), this);
 				}
 				int mikocloak_ = you.isSetMikoBuff(0);
 				if (mikocloak_ == 1) {
-					stateDraw.addState("빨간망토", CL_danger, "층을 옮기기 전까지 전투력보너스 +6과 체력재생력을 얻고 있습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_REDCLOAK), CL_danger, LocalzationManager::formatString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK, PlaceHolderHelper("+6")), this);
 				}
 				else if (mikocloak_ == 2) {
-					stateDraw.addState("파랑망토", CL_blue, "층을 옮기기 전까지는 스펠 파워 1.5배와 영력재생력을 얻고 있습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_BLUECLOAK), CL_blue, LocalzationManager::formatString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK, PlaceHolderHelper("1.5")), this);
 				}
 				int ulti_ = you.isSetMikoBuff(1);
 				if (ulti_ >= 1 && ulti_ <= 3) {
-					stateDraw.addState(ulti_ == 1 ? "인기폭발(체력)":(ulti_ == 2 ? "인기폭발(영력)" : "인기폭발(가속)"),
+					stateDraw.addState(ulti_ == 1 ?LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_ULT1):(ulti_ == 2 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_ULT2) : LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_ULT3)),
 						CL_miko, 
-						ulti_ == 1 ? "최대 체력이 두배가 됩니다."
-						: (ulti_ == 2 ? "영력 회복속도가 폭증합니다." : 
-							"당신의 모든 행동속도는 1.5배 빨라집니다."), this);
+						ulti_ == 1 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT1)
+						: (ulti_ == 2 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT2) : 
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT3)), this);
 					if (ulti_ == 3) {
 						haste_temp_ = true;
 					}
 				}
 				if (you.GetBuffOk(BUFFSTAT_HALO)) {
-					stateDraw.addState("후광", CL_normal,
-						"주변의 적의 회피를 낮추고 투명을 보이게 하지만 당신의 은밀과 회피도 낮아집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_HALO), CL_normal,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_HALO), this);
 				}
 			}
 			else if (you.GetPunish(GT_MIKO)) {
 				if (you.GetBuffOk(BUFFSTAT_HP) < 0) {
-					stateDraw.addState("허약", CL_danger,
-						"최대 체력이 절반으로 줄었습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_MIKO_PUNISH), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_MIKO_PUNISH), this);
 				}
 			}
 			if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-					stateDraw.addState("빙의(죠온)", CL_joon, you.GetPunish(GT_JOON_AND_SION)?"소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다.":
-						"소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다. 빙의가 풀리면 파워 3.00로 내려갑니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_JOON), CL_joon, you.GetPunish(GT_JOON_AND_SION)?LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JOON1):
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JOON2), this);
 				}
 				if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-					stateDraw.addState("빙의(시온)", CL_sion, you.GetPunish(GT_JOON_AND_SION) ? "줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다." : 
-						"줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_SION), CL_sion, you.GetPunish(GT_JOON_AND_SION) ?LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SION1) : 
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SION2), this);
 				}
 			}
 			if (you.drowned)
 			{
-				stateDraw.addState("익사중", CL_danger, "물에 빠졌습니다!", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_DROWNING), CL_danger, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_DROWNING), this);
 			}
 			if (current_level == ZIGURRAT_LEVEL)
 			{
-				stateDraw.addState("전이제어방해", CL_danger, "이 곳에서는 제어된 순간이동을 할 수 없다. 제어된 순간이동은 무작위 순간이동으로 바뀐다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_CTELE_INTERUPT), CL_danger, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_CTELE_INTERUPT), this);
 			}
 			if(you.GetStatPanalty())
 			{
-				stateDraw.addState("스탯패널티", CL_danger, "스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PANALTY), CL_danger,  LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PANALTY), this);
 			}
 			if(you.s_exhausted)
 			{
-				stateDraw.addState("피로", CL_warning, "피로한 동안엔 몇몇 행동이 불가능합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_EXHAUTED), CL_warning,  LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_EXHAUTED), this);
 			}
 			if (you.s_super_graze)
 			{
-				stateDraw.addState("근성회피", you.s_super_graze>3 ? CL_normal : CL_white_blue, "회피가능한 모든 공격을 100% 회피합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE), you.s_super_graze>3 ? CL_normal : CL_white_blue, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPER_GRAZE), this);
 			}
 			if(you.s_trans_panalty)
 			{
-				stateDraw.addState("시공부작용", you.s_trans_panalty <= 2 ? CL_bad : (you.s_trans_panalty<5 ? CL_warning : CL_small_danger), 
-					"시공마법의 성공율이 대폭 감소합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_TRANS_PANALTY), you.s_trans_panalty <= 2 ? CL_bad : (you.s_trans_panalty<5 ? CL_warning : CL_small_danger), 
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRANS_PANALTY), this);
 			}
 			if(you.s_spellcard)
 			{
-				stateDraw.addState("스펠카드", you.s_spellcard>5 ? CL_white_blue : CL_blue, 
-					"당신은 스펠카드를 사용하고 있습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SPELLCARD), you.s_spellcard>5 ? CL_white_blue : CL_blue, 
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SPELLCARD), this);
 			}
 			if(you.s_autumn>0)
 			{
-				stateDraw.addState("공기화", you.s_autumn>0 ? CL_autumn : CL_danger, 
-					"당신은 믿을 수 없을 정도로 은밀합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_AUTMMN_INVISIBLE), you.s_autumn>0 ? CL_autumn : CL_danger, 
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTMMN_INVISIBLE), this);
 			}
 			if(you.s_wind)
 			{
-				stateDraw.addState("건신초래풍", CL_white_blue,
-					"모든 근접, 원거리공격이 범위 공격이 됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_KANAKO_WIND), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_KANAKO_WIND), this);
 			}
 			if(you.s_knife_collect)
 			{
-				stateDraw.addState("탄막회수", CL_white_blue,
-					"당신이 쏜 탄막 아이템은 던지자마자 인벤토리로 회수됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_KNIFECOLLECT), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_KNIFECOLLECT), this);
 			}
 			if(you.s_drunken)
 			{
-				stateDraw.addState("음주", CL_warning,
-					"술이 취해있습니다. 올바르게 걷기 힘들며 마법 성공율이 약간 내려갑니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DRUNKEN), CL_warning,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DRUNKEN), this);
 			}
 			if(you.s_lunatic)
 			{
-				stateDraw.addState("광기", CL_danger,
-					"대부분의 복잡한 행동이 불가능해지지만 근접 공격력이 대폭 상승합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_LUNATIC), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_LUNATIC), this);
 			}
 			if(you.s_catch)
 			{
-				stateDraw.addState("잡기", CL_yuigi,
-					"당신은 근접한 상대를 잡고 있습니다. 권능에 부가 효과가 생깁니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_CATCH), CL_yuigi,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_CATCH), this);
 			}
 			if(you.s_ghost)
 			{
-				stateDraw.addState("유령", you.s_ghost>1 ? CL_white_blue : CL_yuyuko,
-					"당신의 주변엔 유령들이 꼬이고 있습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_GHOST), you.s_ghost>1 ? CL_white_blue : CL_yuyuko,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOST), this);
 			}
 			if(you.s_dimension)
 			{
-				stateDraw.addState("차원고정", you.s_dimension>3 ? CL_yukari : CL_blue,
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DIMENSION), you.s_dimension>3 ? CL_yukari : CL_blue,
 				 (you.god == GT_YUKARI)?
-						"당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.":
-					"강제로 결계에 의해 차원이 고정되어 지속시간동안 결계 밖으로 나갈 수 없습니다!" , this);
+				 	LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION1):
+					 LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION2), this);
 			}
 			if(you.s_mirror)
 			{
-				stateDraw.addState("반사", CL_normal,
-					"받은 모든 공격을 상대에게 되돌려 줍니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MIRROR), CL_normal,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MIRROR), this);
 			}
 			if(you.s_paradox)
 			{
-				stateDraw.addState("패러독스", CL_white_blue,
-					"탄막이나 일부 마법을 사용하면 연달아 2번 나갑니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PARADOX), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARADOX), this);
 			}
 			if(you.s_the_world)
 			{
-				stateDraw.addState("시간정지", you.s_the_world>1 ? CL_white_blue : you.s_the_world<0 ? CL_normal : CL_blue,
-					"당신을 제외한 모든 물체는 움직일 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_THE_WORLD), you.s_the_world>1 ? CL_white_blue : you.s_the_world<0 ? CL_normal : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_THE_WORLD), this);
 			}
 			if(you.s_mana_delay)
 			{
-				stateDraw.addState("영력회복지연", CL_warning,
-					"영력이 자연적으로 회복되지않습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MANA_DELAY), CL_warning,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MANA_DELAY), this);
 			}
 			if (env[current_level].isSilence(you.position))
 			{
-				stateDraw.addState("침묵", CL_white_blue,
-					"당신은 소리를 내어 말하는 것이 불가능합니다. 마법과 두루마리, 일부 권능을 사용할 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SILENCE_FIELD), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE_FIELD), this);
 			}
 			if(you.s_eirin_poison_time)
 			{
@@ -1938,25 +1938,25 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EIRIN_POISON) << "(" << you.tension_gauge << ")"; 
 				stateDraw.addState(ss.str(), color_,
-					"시간이 지나면 수치만큼 지속데미지를 받습니다.", this);
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON), this);
 			}
 			if(you.s_stasis)
 			{				
 				D3DCOLOR color_ = CL_danger;
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STASIS), color_,
-					"전이관련 마법과 아이템을 사용할 수 없습니다.", this);
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STASIS), this);
 			}
 			if(you.force_turn)
 			{				
 				D3DCOLOR color_ = you.force_strong?CL_white_blue:CL_danger;
-				stateDraw.addState(you.force_strong?LocalzationManager::locString(LOC_SYSTEM_ENHANCE):LocalzationManager::locString(LOC_SYSTEM_WEAKENING), color_,
-					you.force_strong ? "당신의 모든 공격과 마법은 강화되었습니다." :
-					"당신의 모든 공격과 마법은 약화되었습니다.", this);
+				stateDraw.addState(you.force_strong?LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ENHANCE):LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_WEAKENING), color_,
+					you.force_strong ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENHANCE) :
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_WEAKENING), this);
 			}
 			if (you.s_evoke_ghost)
 			{
-				stateDraw.addState("유령화", CL_normal,
-					"당신은 모든 공격을 받지않습니다. 단, 이동 이외의 공격, 마법, 아이템등의 모든 행동을 사용할 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_GHOSTFORM), CL_normal,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOSTFORM), this);
 			}
 
 			
@@ -1968,84 +1968,84 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			if(you.power<=200)
 			{
 				bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
-				stateDraw.addState("파워부족", sion_ ? CL_bad:(you.power <= 100 ? CL_danger : CL_warning),
-					sion_ ? "시온이 당신의 파워 패널티를 막고있습니다." :(you.power <= 100 ? "파워가 부족하여 공격력이 매우 약해졌습니다.": "파워가 부족하여 공격력이 약해졌습니다."), this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POWER_PANALTY), sion_ ? CL_bad:(you.power <= 100 ? CL_danger : CL_warning),
+					sion_ ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY_SION) :(you.power <= 100 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY2): LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY1)), this);
 			}
 			if(you.s_poison)
 			{
-				stateDraw.addState("독", you.s_poison <= 50 ? CL_warning : (you.s_poison <= 100 ? CL_small_danger : CL_danger),
-					"지속적으로 독 데미지를 받고있습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POISON), you.s_poison <= 50 ? CL_warning : (you.s_poison <= 100 ? CL_small_danger : CL_danger),
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON), this);
 			}
 			if(you.s_tele)
 			{
-				stateDraw.addState("공간", CL_blue,
-					"일정 턴이 지나면 같은 층 무작위 위치로 이동됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_TELE), CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_TELE), this);
 			}
 			if((you.s_pure_haste || you.s_haste || you.alchemy_buff == ALCT_HASTE) && !you.s_slow)
 			{
 				if ((you.s_haste || you.alchemy_buff == ALCT_HASTE) && !haste_temp_)
-					stateDraw.addState("가속", you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
-						"당신의 모든 행동속도는 1.5배 빨라집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_HASTE), you.alchemy_buff == ALCT_HASTE ? CL_alchemy : (you.s_haste>10 ? CL_white_blue : CL_blue),
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE), this);
 				else if (you.s_pure_haste)
-					stateDraw.addState("살의",CL_junko,
-						"당신의 모든 행동속도는 1.5배 빨라집니다. 시야에 적이 안보이게되면 버프가 사라집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MURDEROUS),CL_junko,
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MURDEROUS), this);
 			}
 			else if(you.s_slow && !(you.s_haste || you.alchemy_buff == ALCT_HASTE))
 			{
-				stateDraw.addState("감속", CL_danger,
-					"당신의 모든 행동속도는 0.7배로 느려집니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLOW), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLOW), this);
 			}
 			else if((you.s_haste || you.alchemy_buff == ALCT_HASTE) && you.s_slow)
 			{
-				stateDraw.addState("가속+감속", CL_magic,
-					"가속과 감속효과를 동시에 받아 안정된 상태입니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_HASTE_SLOW), CL_magic,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE_SLOW), this);
 			}
 			if(you.alchemy_buff == ALCT_STONE_FIST)
 			{
-				stateDraw.addState("돌주먹", CL_alchemy,
-					"당신의 다음 맨손 공격은 추가 데미지를 줍니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_STONEFIST), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST), this);
 			}
 			if(you.alchemy_buff == ALCT_DIAMOND_HARDNESS)
 			{
-				stateDraw.addState("다이아", CL_alchemy,
-					"잠깐동안 추가 방어력을 얻습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DIAMOND), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND), this);
 			}
 			if(you.alchemy_buff == ALCT_POISON_BODY)
 			{
-				stateDraw.addState("포이즌", CL_alchemy,
-					"주변 8타일의 적에게 지속적으로 독 데미지를 줍니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POISON_BODY), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY), this);
 			}
 			if(you.alchemy_buff == ALCT_STONE_FORM)
 			{
-				stateDraw.addState("무념무상", CL_alchemy,
-					"근접 공격력이 상승하고 받는 데미지가 66%가 되지만 이동속도가 1.3배 느려집니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ENLIGHTENMENT), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT), this);
 			}
 			if(you.alchemy_buff == ALCT_AUTUMN_BLADE)
 			{
-				stateDraw.addState("블레이드", CL_alchemy,
-					"근접 공격력이 3배가 됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_AUTUMN_BLADE), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE), this);
 			}
 			if(you.alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 			{
-				stateDraw.addState("현자의돌", CL_alchemy,
-					"능력사용(a키)으로 5원소의 마법이 저렴하게 사용가능합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS), this);
 			}
 			if(you.s_unluck > 0)
 			{
 				if(you.s_unluck <= 3)
 				{
-					stateDraw.addState("흉", CL_warning,
-						"당신은 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_UNLUCKY1), CL_warning,
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1), this);
 				}
 				else if(you.s_unluck <= 6)
 				{
-					stateDraw.addState("대흉", CL_small_danger,
-						"당신은 아주 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_UNLUCKY2), CL_small_danger,
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2), this);
 				}
 				else
 				{
-					stateDraw.addState("불멸", CL_danger,
-						"당신은 끔찍하게 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.", this);
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_UNLUCKY3), CL_danger,
+						LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3), this);
 				}
 			}
 
@@ -2062,7 +2062,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					ss.clear();
 					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RFIRE, PlaceHolderHelper((rf_>0? (rf_>1 ? (rf_>2 ? "+++" : "++") : "+") : (rf_<-1 ? (rf_<-2 ? "---" : "--") : "-")))); 
 					stateDraw.addState(ss.str(), rf_>0 ? CL_good : CL_danger,
-						(rf_>0 ? "화염 저항이 높아졌습니다." : "화염 저항이 낮아졌습니다."), this);
+						(rf_>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_UP) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_DOWN)), this);
 				}
 				if(rc_)
 				{
@@ -2070,7 +2070,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					ss.clear();
 					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RCOLD, PlaceHolderHelper((rc_>0 ? (rc_>1 ? (rc_>2 ? "+++" : "++") : "+") : (rc_<-1 ? (rc_<-2 ? "---" : "--") : "-")))); 
 					stateDraw.addState(ss.str(), rc_>0 ? CL_good : CL_danger,
-						(rc_>0 ? "냉기 저항이 높아졌습니다." : "냉기 저항이 낮아졌습니다."), this);
+						(rc_>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_UP) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_DOWN)), this);
 				}
 				if (re_)
 				{
@@ -2078,7 +2078,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					ss.clear();
 					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RELEC, PlaceHolderHelper((re_>0 ? (re_>1 ? (re_>2 ? "+++" : "++") : "+") : (re_<-1 ? (re_<-2 ? "---" : "--") : "-"))));
 					stateDraw.addState(ss.str(), re_>0 ? CL_good : CL_danger,
-						(re_>0 ? "전기 저항이 높아졌습니다." : "전기 저항이 낮아졌습니다."), this);
+						(re_>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RELEC_UP) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RELEC_DOWN)), this);
 				}
 				if (rp_)
 				{
@@ -2086,7 +2086,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					ss.clear();
 					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RPOIS, PlaceHolderHelper(rp_>0 ? "+" : "-"));
 					stateDraw.addState(ss.str(), rp_>0 ? CL_good : CL_danger,
-						(rp_>0 ? "독 저항이 높아졌습니다." : "독 저항이 낮아졌습니다."), this);
+						(rp_>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_UP) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_DOWN)), this);
 				}
 				if (rconf_)
 				{
@@ -2094,76 +2094,76 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 					ss.clear();
 					ss << LocalzationManager::formatString(LOC_SYSTEM_BUFF_RCONF, PlaceHolderHelper(rconf_>0 ? "+" : "-"));
 					stateDraw.addState(ss.str(), rconf_>0 ? CL_good : CL_danger,
-						(rconf_ >0 ? "혼란 저항이 높아졌습니다." : "혼란 저항이 낮아졌습니다."), this);
+						(rconf_ >0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RCONF_UP)  : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RCONF_DOWN)), this);
 				}
 			}
 
 
 			if(you.s_confuse)
 			{
-				stateDraw.addState("혼란", CL_danger,
-					"이동을 포함한 대부분의 행동을 제대로 할 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_CONFUSE), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_CONFUSE), this);
 			}
 			if(you.s_frozen)
 			{
-				stateDraw.addState("빙결", you.s_frozen>5 ? CL_blue : CL_bad,
-					"이동속도가 저하됩니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_FROZEN), you.s_frozen>5 ? CL_blue : CL_bad,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_FROZEN), this);
 			}
 			if(you.s_elec)
 			{
-				stateDraw.addState("방전", CL_normal,
-					"일정 턴마다 주변의 생물체에게 전기공격이 가해집니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ELEC), CL_normal,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ELEC), this);
 			}
 			if(you.s_paralyse)
 			{
-				stateDraw.addState("마비", CL_danger,
-					"움직일 수 없습니다!", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PARALYSE), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARALYSE), this);
 			}
 			if(you.s_levitation)
 			{
-				stateDraw.addState("비행", you.s_levitation>10 ? CL_white_blue : CL_blue,
-					"하늘을 날아 몇몇 지형물체를 뛰어넘을 수 있습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_LEVITATION), you.s_levitation>10 ? CL_white_blue : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_LEVITATION), this);
 			}
 			else if(you.s_glow)
 			{
-				stateDraw.addState("빛남", CL_white_blue,
-					"당신에게 빛이 비춰지고 있어 회피율이 낮아집니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_GLOW), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLOW), this);
 			}
 			if(you.s_graze && !you.s_super_graze)
 			{
-				stateDraw.addState("그레이즈", you.s_graze<0 ? CL_normal : you.s_graze>10 ? CL_white_blue : CL_blue,
-					"회피 가능한 탄막을 손쉽게 피할 수 있습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_GRAZE), you.s_graze<0 ? CL_normal : you.s_graze>10 ? CL_white_blue : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GRAZE), this);
 			}
 			if(you.s_silence)
 			{
-				stateDraw.addState("정적", you.s_silence>5 ? CL_white_blue : CL_blue,
-					"당신은 소리내는 행동을 할 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SILENCE), you.s_silence>5 ? CL_white_blue : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE), this);
 			}
 			if(you.s_sick)
 			{
-				stateDraw.addState("병", you.s_sick>50 ? (you.s_sick>100 ? CL_danger : CL_small_danger) : CL_warning,
-					"지속시간동안 자연 체력회복이 불가능합니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SICK), you.s_sick>50 ? (you.s_sick>100 ? CL_danger : CL_small_danger) : CL_warning,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SICK), this);
 			}
 			if(you.s_veiling)
 			{
-				stateDraw.addState("베일링", CL_normal,
-					"당신에게 근접공격을 하려는 상대에게 데미지를 입히고 사라집니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_VEILING), CL_normal,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_VEILING), this);
 			}
 			if(you.s_invisible || you.togle_invisible)
 			{
 				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
-				stateDraw.addState("투명", glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
-					glow_? "투명해졌지만 빛나고 있기에 아무런 효과가 없습니다." :"투명해져서 투명을 볼 수 없는 적의 눈에 띄지 않습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+					glow_? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE), this);
 			}
 			if(you.s_swift)
 			{
-				stateDraw.addState(you.s_swift>0 ? "신속" : "이속감소", you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
-					you.s_swift > 0 ? "당신의 이동속도는 빠릅니다." : "당신의 이동속도는 느립니다.", this);
+				stateDraw.addState(you.s_swift>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLUGGISH), you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
+					you.s_swift > 0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLUGGISH), this);
 			}
 			if(you.s_superman)
 			{
-				stateDraw.addState("초인", you.s_superman>5 ? CL_white_puple : CL_magic,
-					"초인과 같이 이동속도가 빨라졌습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPERMAN), you.s_superman>5 ? CL_white_puple : CL_magic,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPERMAN), this);
 			}
 			if(you.s_slaying)
 			{
@@ -2172,17 +2172,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_SLAY) << "(" << (you.s_slaying>0?"+":"") << you.s_slaying<< ")"; 
 				
 				stateDraw.addState(ss.str(), you.s_slaying>0 ? CL_white_blue : CL_danger,
-					"당신의 근접, 탄막공격력이 변화되었습니다.", this);
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SLAY), this);
 			}
 			if (you.s_none_move)
 			{
-				stateDraw.addState("이동불가", CL_danger,
-					"무엇인가에 잡혀서 이동할 수 없습니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_NONE_MOVE), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_NONE_MOVE), this);
 			}
 			if (you.s_night_sight_turn)
 			{
-				stateDraw.addState("야맹증", CL_danger,
-					"당신은 한치앞도 보이지않습니다. 당신의 시야가 극적으로 줄어듭니다.", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_NIGHT_SIGHT), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_NIGHT_SIGHT), this);
 			}
 			if (you.s_sleep>0)
 			{
@@ -2191,12 +2191,12 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_SLEEPING) << "(" << std::setfill('0') << std::setw(2) << min(99,you.s_sleep) << ")"; 
 			
 				stateDraw.addState(ss.str(), CL_small_danger,
-					"졸음이 오고있습니다. 수치가 100이 되면 강제로 잠을 잡니다.", this);
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SLEEPING), this);
 			}
 			else if (you.s_sleep<0)
 			{
-				stateDraw.addState("수면", CL_danger,
-					"당신은 잠을 자고 있습니다!", this);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLEEP), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP), this);
 			}
 			if (you.s_pure>0 && you.s_pure_turn)
 			{
@@ -2207,15 +2207,15 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				ss.str("");
 				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA);
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_JUNKA);
 				if(you.s_pure_turn != -1) {
 					ss << "(" <<LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.s_pure < 10 ? 0 :(you.s_pure <20 ? 1 : (you.s_pure < 30 ? 2 : 3))))) << ")";
 				}
 				stateDraw.addState(ss.str(), color_,
-					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? "두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
-					((you.s_pure_turn == -1) || you.s_pure >= 30) ? "스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
-					(you.s_pure >= 20) ? "스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)" :
-					(you.s_pure >= 10) ? "스펠카드를 사용할 수 없습니다." : "당신은 아직 순화의 패널티를 받고있지 않습니다." , this);
+					((you.s_pure_turn == -1) || you.GetProperty(TPT_PURE_SYSTEM)) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA1) :
+					((you.s_pure_turn == -1) || you.s_pure >= 30) ?LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2) :
+					(you.s_pure >= 20) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3) :
+					(you.s_pure >= 10) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0) , this);
 			}
 		}
 

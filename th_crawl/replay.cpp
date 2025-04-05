@@ -349,7 +349,7 @@ bool replay_menu(int value_)
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub(blank,false,CL_warning);
-			printsub(LocalzationManager::locString(LOC_SYSTEM_REPLAY_TITLE),true,CL_help);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_REPLAY_LIST),true,CL_help);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 

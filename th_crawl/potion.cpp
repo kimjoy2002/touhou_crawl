@@ -9,6 +9,7 @@
 
 #include "potion.h"
 #include "god.h"
+#include "soundmanager.h"
 extern HANDLE mutx;
 
 LOCALIZATION_ENUM_KEY potion_uniden_string[PT_MAX]=

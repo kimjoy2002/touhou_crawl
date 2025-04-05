@@ -441,7 +441,9 @@ vector<string> SplitStringByFontWidth(const string& text, int firstLength, int n
             currentLength = 0;
             isFirstToken = false; 
         }
-        currentToken.push_back(static_cast<char>(ch)); 
+        wstring tmp(1, ch);
+        string charStr = ConvertUTF16ToUTF8(tmp);
+        currentToken.append(charStr);
         currentLength += charWidth;
     }
     

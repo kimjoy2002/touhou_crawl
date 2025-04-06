@@ -135,146 +135,146 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	enterlog();
 	switch (id)
 	{
-	case 1:
-		printlog("카나코는 말했다 : 문을 열때는 문 옆에서 O키를, 닫을때는 C키로 닫을 수 있지.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 방향키로 밀어서 자동으로 열기도 한단다.", true, false, false, CL_warning);
+		case 1:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL1), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL2), true, false, false, CL_warning);
 		return 1;
 	case 2:
-		printlog("카나코는 말했다 : 키패드의 방향키나 y u b n키로 대각선을 움직여보자.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : o키를 누르면 탐색 안한 지역으로 자동으로 이동하지.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL3), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL4), true, false, false, CL_warning);
 		return 1;
 	case 3:
-		printlog("카나코는 말했다 : ,나 g를 눌러서 아이템을 주워서 장착해보렴.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : w키로 무기, W키로 방어구장착, i키는 설명, d키는 버리기야.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL5), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL6), true, false, false, CL_warning);
 		return 1;
 	case 4:
-		printlog("카나코는 말했다 : 크롤은 언제나 전투의 연속이지, 공격은 직접 부딪히면 돼.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 약한 상대라도 1:1로 싸우는게 유리하니 골목으로 유인하렴.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL7), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL8), true, false, false, CL_warning);
 		return 1;
 	case 5:
-		printlog("카나코는 말했다 : 항상 싸움의 후엔 체력을 채우는 습관을 들이렴.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : .키는 1턴 휴식을, 5키는 100턴 휴식을 할 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : m키를 눌러서 나오는 창에선 얻은 스킬 투자 방향을 정할 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 파워는 허기조절, 능력사용, 근접데미지 상승에 도움을 주지.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL9), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL10), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL11), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL12), true, false, false, CL_warning);
 		return 1;
 	case 6:
-		printlog("카나코는 말했다 : 계단을 내려갈때는 >키, 올라올땐 <키로 올라올 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 이미 정리한 층에선 볼게 없으니 다음 층으로 내려가자.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL13), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL14), true, false, false, CL_warning);
 		return 1;
 	case 7:
 		if (you.power > 150)
 			you.PowUpDown(-(you.power - 150), true);
-		printlog("카나코는 말했다 : 파워가 2.00이하가 되면 공격력이 감소해버린단다.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 적을 잡아서 나오는 P템을 먹거나 음식을 통해서 회복이 가능해.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : e키를 눌러서 빵을 먹으면 파워를 회복할 수 있어.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL15), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL16), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17), true, false, false, CL_warning);
 		return 1;
 	case 8:
-		printlog("카나코는 말했다 : 원거리 공격은 언제나 편하지. 부적을 주워보렴.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL18), true, false, false, CL_warning);
 		return 1;
 	case 9:
-		printlog("카나코는 말했다 : 원거리 무기를 던질때는 F키를 누르고 던질 템을 골라.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : f키론 준비되어있는 탄막을 바로 던질 수 있단다.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL19), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL20), true, false, false, CL_warning);
 		return 1;
 	case 10:
-		printlog("카나코는 말했다 : 효과를 알 수 없는 장신구와 두루마리군. 일단 사용해보자.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 일단 반지를 주워서 P키로 장착해. R키론 벗을 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 두루마리를 읽는건 r키야. 선택창이 뜨면 반지에 사용해봐.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL21), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL22), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL23), true, false, false, CL_warning);
 		return 1;
 	case 11:
-		printlog("카나코는 말했다 : 하하, 허기의 반지는 전혀 도움이 안되지. d키로 버릴 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 물약이 보이는군. 물약은 q키로 먹을 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 역시 먹기전엔 효과를 알 수 없고 가끔 나쁜 효과도 있지.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL24), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL25), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL26), true, false, false, CL_warning);
 		return 1;
 	case 12:
 		you.GiveSkillExp(SKT_SPELLCASTING, 20, true);
 		you.GiveSkillExp(SKT_CONJURE, 100, true);
-		printlog("카나코는 말했다 : 마법을 배우려면 책에서 주문을 먼저 배워야하지.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 일단 책을 주워서 M키로 마법의탄막을 배워보자.", true, false, false, CL_warning); \
-			return 1;
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL27), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28), true, false, false, CL_warning);
+		return 1;
 	case 13:
-		printlog("카나코는 말했다 : 마법을 사용하기위해선 z키나 Z키를 누르고 사용할수있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 방법은 부적던지기와 똑같단다! 자 몹을 마법으로 잡아보렴.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL29), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL30), true, false, false, CL_warning);
 		return 1;
 	case 14:
-		printlog("카나코는 말했다 : <키로 다시 위층으로 올라갈 수 있어.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL31), true, false, false, CL_warning);
 		return 1;
 	case 15:
-		printlog("신성한 기운이 감돌고 있다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_TEMPLE), true, false, false, CL_normal);
 		return 1;
 	case 16:
-		printlog("카나코는 말했다 : 싸우고난 후엔 5키로 휴식 기억하고있지? 독이 걸렸다면 풀어둬.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 제단을 찾으면 위에서 p키로 기도를 할 수 있어.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 내 신전이니까 한번 믿어보렴. 믿고난후 ^키로 설명이 보여.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL32), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL33), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34), true, false, false, CL_warning);
 		return 1;
 	case 17:
-		printlog("카나코는 말했다 : a키를 눌러서 권능을 한번 사용해서 싸워보렴.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 권능은 일정 신앙심이 되면 점점 늘어나게되지.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 특히 내 권능은 신앙심을 일정량 소모하니까 주의해서 써.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL35), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL36), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL37), true, false, false, CL_warning);
 		return 1;
 	case 18:
-		printlog("카나코는 말했다 : 신마다 신앙심을 얻는 방법이 다르고 싫어하는 것도 있단다.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 나의 경우는 적을 죽일때마다 신앙심이 조금씩 오른단다.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 나 같은 경우는 적을 죽이면 자동으로 신앙심이 오르지.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL38), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL39), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL40), true, false, false, CL_warning);
 		return 1;
 	case 19:
-		printlog("카나코는 말했다 : 요괴 우산이구나. 머리위에 이름이 새겨진 몹은 네임드란다.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 네임드몹은 보통 적보다 강하지. 수단과 방법을 가리지마.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 그동안 나온 아이템과 방법을 활용해서 잡을 수 있을지 시험해보자.", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL41), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL42), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL43), true, false, false, CL_warning);
 		return 1;
 	case 20:
-		printlog("카나코는 말했다 : 튜토리얼은 여기서 끝이란다 사나에.", true, false, false, CL_warning);
-		printlog("카나코는 말했다 : 실제 게임에서는 죽음을 두려워하지말거라!", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL44), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL45), true, false, false, CL_warning);
 		return 1;
 	case 21:
-		printlog("강력한 광기가 느껴진다. 지금이라도 도망쳐!", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_SCARLET_UNDER), true, false, false, CL_small_danger);
 		return 1;
 	case 22:
-		printlog("여긴 분명 만들다 말았군. 못된 제작자 놈!", true, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_BUG), true, false, false, CL_help);
 		return 1;
 	case 23:
-		printlog("이 곳은 끔찍한 미궁이군! 출구를 찾아야 한다. 아니면 새로운 장소를 찾을지도..?", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_BAMBOO), true, false, false, CL_small_danger);
 		return 1;
 	case 24:
 		return 1;
 	case 25:
-		printlog("동방크롤에선 모든 무기를 한손이나 양손으로 들 수 있습니다.", true, false, false, CL_warning);
-		printlog("단, 몇몇 무기는 양손으로 들때 효율이 많이 떨어집니다.", true, false, false, CL_warning);
-		printlog("단검은 양손으로 써도 패널티가 없지만 다우징은 양손시 큰 패널티가 있습니다.", true, false, false, CL_warning);
+		// printlog("동방크롤에선 모든 무기를 한손이나 양손으로 들 수 있습니다.", true, false, false, CL_warning);
+		// printlog("단, 몇몇 무기는 양손으로 들때 효율이 많이 떨어집니다.", true, false, false, CL_warning);
+		// printlog("단검은 양손으로 써도 패널티가 없지만 다우징은 양손시 큰 패널티가 있습니다.", true, false, false, CL_warning);
 		return 1;
 	case 26:
-		printlog("몸통방어구엔 재질과 종류로 나뉘어있고 그외엔 보조방어구와 방패가 있습니다.", true, false, false, CL_warning);
-		printlog("갑옷엔 재질에 따라 장비패널티가 존재하여 합산되어 우측창에 표시됩니다.", true, false, false, CL_warning);
+		// printlog("몸통방어구엔 재질과 종류로 나뉘어있고 그외엔 보조방어구와 방패가 있습니다.", true, false, false, CL_warning);
+		// printlog("갑옷엔 재질에 따라 장비패널티가 존재하여 합산되어 우측창에 표시됩니다.", true, false, false, CL_warning);
 		return 1;
 	case 27:
-		you.GiveSkillExp(SKT_ARMOUR, 1200, true);
-		you.GiveSkillExp(SKT_SHIELD, 300, true);
-		printlog("이 장비패널티는 힘과 갑옷,방패 스킬에 따라 감소됩니다.", true, false, false, CL_warning);
-		printlog("자세한 수치나 정도는 i를 눌러서 자세한 수치를 확인해보세요.", true, false, false, CL_warning);
+		// you.GiveSkillExp(SKT_ARMOUR, 1200, true);
+		// you.GiveSkillExp(SKT_SHIELD, 300, true);
+		// printlog("이 장비패널티는 힘과 갑옷,방패 스킬에 따라 감소됩니다.", true, false, false, CL_warning);
+		// printlog("자세한 수치나 정도는 i를 눌러서 자세한 수치를 확인해보세요.", true, false, false, CL_warning);
 		return 1;
 	case 28:
-		printlog("동방크롤엔 활이나 블로우건같은 원거리 무기가 없지만 모두 손으로 던질 수 있습니다.", true, false, false, CL_warning);
-		printlog("투척용단검, 투척용창, 철륜은 무기로도 쓸 수 있지만 투척용으로도 사용가능합니다.", true, false, false, CL_warning);
-		printlog("소모성 탄막과 투척용 무기 모두 탄막 스킬에 영향을 받습니다.", true, false, false, CL_warning);
+		// printlog("동방크롤엔 활이나 블로우건같은 원거리 무기가 없지만 모두 손으로 던질 수 있습니다.", true, false, false, CL_warning);
+		// printlog("투척용단검, 투척용창, 철륜은 무기로도 쓸 수 있지만 투척용으로도 사용가능합니다.", true, false, false, CL_warning);
+		// printlog("소모성 탄막과 투척용 무기 모두 탄막 스킬에 영향을 받습니다.", true, false, false, CL_warning);
 		return 1;
 	case 29:
-		printlog("동방크롤엔 허기의 개념이 없는 대신에 비슷한 P라는 게이지가 존재합니다.", true, false, false, CL_warning);
-		printlog("아사는 존재하지않는 대신 2칸이하로 떨어지면 전투패널티가 있습니다.", true, false, false, CL_warning);
-		printlog("모든 적은 일정확률로 P템을 떨어뜨리며 이것을 주으면 P가 회복됩니다.", true, false, false, CL_warning);
+		// printlog("동방크롤엔 허기의 개념이 없는 대신에 비슷한 P라는 게이지가 존재합니다.", true, false, false, CL_warning);
+		// printlog("아사는 존재하지않는 대신 2칸이하로 떨어지면 전투패널티가 있습니다.", true, false, false, CL_warning);
+		// printlog("모든 적은 일정확률로 P템을 떨어뜨리며 이것을 주으면 P가 회복됩니다.", true, false, false, CL_warning);
 		return 1;
 	case 30:
-		printlog("스펠카드는 돌죽의 완드를 대체하는 아이템입니다.", true, false, false, CL_warning);
-		printlog("{발동}이 붙은 템은 P를 소모하여 발동하는 영구적인 비소모발동템입니다.", true, false, false, CL_warning);
-		printlog("둘다 V로 발동이 가능하며 발동스킬에 영향을 받아 강력해집니다.", true, false, false, CL_warning);
+		// printlog("스펠카드는 돌죽의 완드를 대체하는 아이템입니다.", true, false, false, CL_warning);
+		// printlog("{발동}이 붙은 템은 P를 소모하여 발동하는 영구적인 비소모발동템입니다.", true, false, false, CL_warning);
+		// printlog("둘다 V로 발동이 가능하며 발동스킬에 영향을 받아 강력해집니다.", true, false, false, CL_warning);
 		return 1;
 	case 31:
-		printlog("부적은 돌죽의 아뮬렛에 대체되는 아이템입니다.", true, false, false, CL_warning);
-		printlog("낀 즉시 효과는 없지만 끼고 몬스터를 잡으면 퍼센티지가 채워집니다.", true, false, false, CL_warning);
-		printlog("100%가 되면 V키로 효과를 사용가능합니다. 일부는 끼기만 해도 효과가 있습니다.", true, false, false, CL_warning);
+		// printlog("부적은 돌죽의 아뮬렛에 대체되는 아이템입니다.", true, false, false, CL_warning);
+		// printlog("낀 즉시 효과는 없지만 끼고 몬스터를 잡으면 퍼센티지가 채워집니다.", true, false, false, CL_warning);
+		// printlog("100%가 되면 V키로 효과를 사용가능합니다. 일부는 끼기만 해도 효과가 있습니다.", true, false, false, CL_warning);
 		return 1;
 	case 32:
-		printlog("동방크롤엔 총 10개의 룬이 있고 조트의 방을 대체하는 하쿠레이 신사가 존재하여", true, false, false, CL_warning);
-		printlog("조트의 오브를 대체하는 음양옥이란 템을 주워서 탈출하면 게임에서 승리합니다.", true, false, false, CL_warning);
-		printlog("모자란 게임이지만 잘 부탁드립니다.", true, false, false, CL_warning);
+		// printlog("동방크롤엔 총 10개의 룬이 있고 조트의 방을 대체하는 하쿠레이 신사가 존재하여", true, false, false, CL_warning);
+		// printlog("조트의 오브를 대체하는 음양옥이란 템을 주워서 탈출하면 게임에서 승리합니다.", true, false, false, CL_warning);
+		// printlog("모자란 게임이지만 잘 부탁드립니다.", true, false, false, CL_warning);
 		return 1;
 	case EVL_KISME:
 	{

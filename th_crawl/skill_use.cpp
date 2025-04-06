@@ -2191,7 +2191,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	seija_real_gift(next_);
 	
-	printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_SEIJA_GIFT, PlaceHolderHelper(GetGodString(next_))),CL_help);
 	you.god_value[GT_SEIJA][2] = 0;

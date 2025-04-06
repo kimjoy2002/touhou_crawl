@@ -85,7 +85,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			Teleport();
 			soundmanager.playSound("blink");
-			printlog("갑자기 당신 주변이 변화했다.",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT),false,false,false,CL_normal);
 			SetInter(IT_TELE);
 		}
 		if(s_tele)

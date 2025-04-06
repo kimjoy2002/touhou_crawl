@@ -10,9 +10,11 @@ LOC_SYSTEM_MAP_DANGER,Danger detected within your view.
 LOC_SYSTEM_UNABLE_MOVE,You can't move there.
 LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
+LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
 LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
 LOC_SYSTEM_DO_CANCLE,Cancelled.
+LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
@@ -51,6 +53,14 @@ LOC_SYSTEM_GHOST_PENALTY_SPELL,You can't use magic as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_THROW,You can't throw as a ghost.
 LOC_SYSTEM_PURITY_PENALTY_SCROLL,You are too purified to use the scroll's effects.
 LOC_SYSTEM_SILENCE_PENALTY,You can't make a sound.
+LOC_SYSTEM_DROWNED_PENALTY,You can't do that while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_WEAPON,You can't change weapons while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_ARMOUR,You can't change armor while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_EAT,You can't eat while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_DRINK,You can't drink while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_READ,You can't read while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_MAGIC,You can't cast magic while drowning!
+LOC_SYSTEM_CURSED_PENALTY,You're cursed and can't unequip your gear.
 LOC_SYSTEM_SHOUT_MENU,What would you like to shout?
 LOC_SYSTEM_SHOUT_MENU_ALLY,Command allies
 LOC_SYSTEM_SHOUT_MENU_ATTACK,Attack!
@@ -77,6 +87,8 @@ LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
 LOC_SYSTEM_AUTOPICKUP_ON,Auto-pickup enabled.
 LOC_SYSTEM_AUTOPICKUP_OFF,Auto-pickup disabled. (Press {0} to enable again)
 LOC_SYSTEM_AUTOEXPLORE_WHERE,Which dungeon shall we explore? (Use uppercase for the last floor)
+LOC_SYSTEM_TURN_TELEPORT,Suddenly, your surroundings have changed.
+LOC_SYSTEM_TURN_TELEPORT_SAME,You noticed a slight spatial distortion.
 LOC_SYSTEM_DONE_EXPLORE,Exploration complete.
 LOC_SYSTEM_NONE_STRING,None
 LOC_SYSTEM_DUNGEON,Dungeon
@@ -99,15 +111,16 @@ LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST,Pandemonium
 LOC_SYSTEM_DUNGEON_HOKKAI,Hokkai
 LOC_SYSTEM_DUNGEON_FROZEN_FIELD,Frozen Field
 LOC_SYSTEM_DUNGEON_HAKUREI,Hakurei Shrine
-LOC_SYSTEM_DUNGEON_OKINA,문 뒤의 세계
-LOC_SYSTEM_DUNGEON_ZIGURRAT,광몽의 세계
-LOC_SYSTEM_DUNGEON_ARENA,아레나
-LOC_SYSTEM_DUNGEON_SPRINT,스프린트
-LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON,알수없는 층
+LOC_SYSTEM_DUNGEON_OKINA,The world beyond the door
+LOC_SYSTEM_DUNGEON_ZIGURRAT,World of Delirium
+LOC_SYSTEM_DUNGEON_ARENA,Arena
+LOC_SYSTEM_DUNGEON_SPRINT,Sprint
+LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON,Unknown Floor
 LOC_SYSTEM_DUNGEON_FLOOR,Floor {0}
 LOC_SYSTEM_DUNGEON_LAST_FLOOR,Last Floor
 LOC_SYSTEM_BUG,Bug
 LOC_SYSTEM_BUT_NOTHING_HAPPEND,However, nothing happened.
+LOC_SYSTEM_RECOVER_POWER,Power has been restored.
 LOC_SYSTEM_REST_START,You begin to rest.
 LOC_SYSTEM_REST_HP,Your HP is restored.
 LOC_SYSTEM_REST_MP,Your MP is restored.
@@ -131,7 +144,7 @@ LOC_SYSTEM_HOTKEY,Hotkey
 LOC_SYSTEM_NAME,Name
 LOC_SYSTEM_SKILL_NAME,Skill Name
 LOC_SYSTEM_SKILL,Skill
-LOC_SYSTEM_REMEMBER_MAGIC,기억하고 있는 주문들
+LOC_SYSTEM_REMEMBER_MAGIC,Remembered Spells
 LOC_SYSTEM_SCHOOL,School
 LOC_SYSTEM_NOISE,Noise
 LOC_SYSTEM_NOISE_NONE,None
@@ -144,7 +157,7 @@ LOC_SYSTEM_RANGE,Range
 LOC_SYSTEM_TILE,Tile
 LOC_SYSTEM_TILES,Tiles
 LOC_SYSTEM_INVENTORY,Inventory
-LOC_SYSTEM_INVENTORY_ITEM,아이템 갯수
+LOC_SYSTEM_INVENTORY_ITEM,Number of Items
 LOC_SYSTEM_EQUIP,Equip
 LOC_SYSTEM_LEFT_HAND,Left Hand
 LOC_SYSTEM_RIGHT_HAND,Right Hand
@@ -317,105 +330,105 @@ LOC_SYSTEM_BUFF_STAT_SUPERMAN,Super
 LOC_SYSTEM_BUFF_STAT_NONE_MOVE,-Move
 LOC_SYSTEM_BUFF_STAT_NIGHT_SIGHT,Blind
 LOC_SYSTEM_BUFF_STAT_SLEEP,Sleep
-LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY3,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중이 감소합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY4,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON,시간이 지나면 수치만큼 지속데미지를 받습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STASIS,전이관련 마법과 아이템을 사용할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_UP,화염 저항이 높아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_DOWN,화염 저항이 낮아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_UP,냉기 저항이 높아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_DOWN,냉기 저항이 낮아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RELEC_UP,전기 저항이 높아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RELEC_DOWN,전기 저항이 낮아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_UP,독 저항이 높아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_DOWN,독 저항이 낮아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RCONF_UP,혼란 저항이 높아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_RCONF_DOWN,혼란 저항이 낮아졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_SLAY,당신의 근접, 탄막공격력이 수치만큼 증감합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_SLEEPING,졸음이 오고있습니다. 수치가 100이 되면 강제로 잠을 잡니다.
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0,당신은 아직 순화의 패널티를 받고있지 않습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA1,두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,스펠카드를 사용할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_FOG,짙은 안개로 인하여 모두의 시야가 급격히 줄어듭니다.
-LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,주변에 무작위로 천둥번개가 떨어집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,주변의 모두가 빛나게되어 회피가 낮아지고 투명이 효과를 잃습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE,이 층에선 욕망부르기를 아직 사용하지않았습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK,층을 옮기기 전까지 전투력보너스 {0}과 체력재생력을 얻고 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK,층을 옮기기 전까지는 스펠 파워 {0}배와 영력재생력을 얻고 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT1,최대 체력이 두배가 됩니다
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT2,영력 회복속도가 폭증합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT3,당신의 모든 행동속도는 1.5배 빨라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_HALO,주변의 적의 회피를 낮추고 투명을 보이게 하지만 당신의 은밀과 회피도 낮아집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_MIKO_PUNISH,최대 체력이 절반으로 줄었습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_JOON1,소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_JOON2,소모품을 사용시 무조건 2~3개씩 낭비하여 사용합니다. 빙의가 풀리면 파워 3.00로 내려갑니다.
-LOC_SYSTEM_BUFF_DESCRIBE_SION1,줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_SION2,줍지않은 소모품은 빠른속도로 사라지며 소모품을 버리면 무조건 사라집니다. 파워패널티를 안 받습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_DROWNING,물에 빠졌습니다!
-LOC_SYSTEM_BUFF_DESCRIBE_CTELE_INTERUPT,이 곳에서는 제어된 순간이동을 할 수 없습니다. 제어된 순간이동은 무작위 순간이동으로 바뀝니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PANALTY,스탯이 0이 된 패널티로 모든 행동 딜레이가 2배가 됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_EXHAUTED,피로한 동안엔 몇몇 행동이 불가능합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPER_GRAZE,회피가능한 모든 공격을 100% 회피합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRANS_PANALTY,시공마법의 성공율이 대폭 감소합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SPELLCARD,당신은 스펠카드를 사용하고 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTMMN_INVISIBLE,당신은 믿을 수 없을 정도로 은밀합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_KANAKO_WIND,모든 근접, 원거리공격이 범위 공격이 됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_KNIFECOLLECT,당신이 쏜 탄막 아이템은 던지자마자 인벤토리로 회수됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON,지속적으로 독 데미지를 받고있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_DRUNKEN,술이 취해있습니다. 올바르게 걷기 힘들며 마법 성공율이 약간 내려갑니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_LUNATIC,대부분의 복잡한 행동이 불가능해지지만 근접 공격력이 대폭 상승합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_CATCH,당신은 근접한 상대를 잡고 있습니다. 권능에 부가 효과가 생깁니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOST,당신의 주변엔 유령들이 꼬이고 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION1,당신은 현재 차원을 고정시켜 상하좌우의 차원을 넘나들 수 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION2,강제로 결계에 의해 차원이 고정되어 지속시간동안 결계 밖으로 나갈 수 없습니다!
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_MIRROR,받은 모든 공격을 상대에게 되돌려 줍니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARADOX,탄막이나 일부 마법을 사용하면 연달아 2번 나갑니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_THE_WORLD,당신을 제외한 모든 물체는 움직일 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_MANA_DELAY,영력이 자연적으로 회복되지않습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOSTFORM,당신은 모든 공격을 받지않습니다. 단, 이동 이외의 공격, 마법, 아이템등의 모든 행동을 사용할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY1,파워가 부족하여 공격력이 약해졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY2,파워가 부족하여 공격력이 매우 약해졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY_SION,시온이 당신의 파워 패널티를 막고있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE_FIELD,당신은 소리를 내어 말하는 것이 불가능합니다. 마법과 두루마리, 일부 권능을 사용할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENHANCE,당신의 모든 공격과 마법은 강화되었습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_WEAKENING,당신의 모든 공격과 마법은 약화되었습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_MURDEROUS,당신의 모든 행동속도는 1.5배 빨라집니다. 시야에 적이 안보이게되면 버프가 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_TELE,일정 턴이 지나면 같은 층 무작위 위치로 이동됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE,당신의 모든 행동속도는 1.5배 빨라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLOW,당신의 모든 행동속도는 0.7배로 느려집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE_SLOW,가속과 감속효과를 동시에 받아 안정된 상태입니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST,당신의 다음 맨손 공격은 추가 데미지를 줍니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,잠깐동안 추가 방어력을 얻습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,주변 8타일의 적에게 지속적으로 독 데미지를 줍니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,근접 공격력이 상승하고 받는 데미지가 66%가 되지만 이동속도가 1.3배 느려집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,근접 공격력이 3배가 됩니다.
+LOC_SYSTEM_BUFF_DESCRIBE_RISK,Risk indicates how dangerous your current situation is.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,Your armor and shield are too heavy! Your evasion, stealth, magic, accuracy, and movement speed are reduced by the penalty.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,This is the total penalty from your armor and shield. Your evasion, stealth, magic success rate, accuracy, and movement speed are reduced accordingly.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY3,This is the total penalty from your armor and shield. It reduces your evasion, stealth, magic success rate, and accuracy.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY4,This is the total penalty from your armor and shield. It lowers your evasion, stealth, and magic success rate.
+LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON,You will take continuous damage over time based on the value.
+LOC_SYSTEM_BUFF_DESCRIBE_STASIS,You can't use translocation magic or items.
+LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_UP,Your fire resistance has increased.
+LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_DOWN,Your fire resistance has decreased.
+LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_UP,Your cold resistance has increased.
+LOC_SYSTEM_BUFF_DESCRIBE_RCOLD_DOWN,Your cold resistance has decreased.
+LOC_SYSTEM_BUFF_DESCRIBE_RELEC_UP,Your electricity resistance has increased.
+LOC_SYSTEM_BUFF_DESCRIBE_RELEC_DOWN,Your electricity resistance has decreased.
+LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_UP,Your poison resistance has increased.
+LOC_SYSTEM_BUFF_DESCRIBE_RPOIS_DOWN,Your poison resistance has decreased.
+LOC_SYSTEM_BUFF_DESCRIBE_RCONF_UP,Your confusion resistance has increased.
+LOC_SYSTEM_BUFF_DESCRIBE_RCONF_DOWN,Your confusion resistance has decreased.
+LOC_SYSTEM_BUFF_DESCRIBE_SLAY,Your melee and danmaku attack power changes based on the value.
+LOC_SYSTEM_BUFF_DESCRIBE_SLEEPING,You're getting sleepy. At 100, you'll fall asleep automatically.
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0,You are not currently affected by the purification penalty.
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA1,You can't use scrolls or potions. (Some enchanted scrolls may be allowed.)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,You can't use spell cards, scrolls, or potions. (Some enchanted scrolls may be allowed.)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,You can't use spell cards or scrolls. (Some enchanted scrolls may be allowed.)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,You can't use spell cards.
+LOC_SYSTEM_BUFF_DESCRIBE_FOG,A thick fog greatly reduces everyone's vision.
+LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,Lightning strikes randomly around the area.
+LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,Everyone around you glows, lowering evasion and nullifying invisibility.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE,Desire Summon has not been used on this floor.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK,Until changing floors, you gain {0} bonus power and HP regeneration.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK,Until changing floors, you gain {0}x spell power and MP regeneration.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT1,Your maximum HP is doubled.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT2,Your MP recovery speed greatly increases.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT3,All your action speeds are 1.5x faster.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_HALO,Lowers nearby enemies' evasion and reveals invisibility, but also reduces your stealth and evasion.
+LOC_SYSTEM_BUFF_DESCRIBE_MIKO_PUNISH,Your maximum HP is halved.
+LOC_SYSTEM_BUFF_DESCRIBE_JOON1,Using consumables always wastes 2–3 of them at once.
+LOC_SYSTEM_BUFF_DESCRIBE_JOON2,Using consumables always wastes 2–3 of them. When possession ends, you gain a 3.00x power bonus.
+LOC_SYSTEM_BUFF_DESCRIBE_SION1,Uncollected consumables disappear quickly. Discarded ones vanish immediately.
+LOC_SYSTEM_BUFF_DESCRIBE_SION2,Uncollected consumables disappear quickly. Discarded ones vanish immediately. There's also a power penalty.
+LOC_SYSTEM_BUFF_DESCRIBE_DROWNING,You're drowning!
+LOC_SYSTEM_BUFF_DESCRIBE_CTELE_INTERUPT,Controlled teleportation is disabled here. It will result in random teleportation instead.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PANALTY,Your stats have dropped to 0, doubling all action delays.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_EXHAUTED,While exhausted, some actions cannot be performed.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPER_GRAZE,You evade all avoidable attacks with 100% certainty.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRANS_PANALTY,The success rate of spatial magic is greatly reduced.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SPELLCARD,You are using a Spell Card.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTMMN_INVISIBLE,You are incredibly stealthy.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KANAKO_WIND,All melee and ranged attacks become area attacks.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KNIFECOLLECT,Thrown danmaku items return to your inventory immediately.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON,You are taking continuous poison damage.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DRUNKEN,You're drunk. It's hard to walk straight, and your magic success rate slightly decreases.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_LUNATIC,Most complex actions become impossible, but your melee attack power greatly increases.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_CATCH,You are grabbing a nearby target. Additional effects apply to your powers.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOST,Ghosts are gathering around you.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION1,You've fixed your dimension and can move across vertical and horizontal planes.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIMENSION2,Your dimension is forcibly locked by a barrier. You can't leave it for the duration!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MIRROR,All attacks you receive are reflected back to the attacker.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARADOX,Danmaku or some magic will be cast twice in a row.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_THE_WORLD,Everything except you is frozen in time.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MANA_DELAY,MP does not regenerate naturally.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_GHOSTFORM,You are immune to all attacks but cannot perform any action except movement.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY1,Your power is low, and your attack strength has weakened.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY2,Your power is very low, and your attack strength has greatly weakened.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POWER_PANALTY_SION,Sion is shielding you from the power penalty.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE_FIELD,You are unable to speak. Magic, scrolls, and some abilities cannot be used.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENHANCE,All your attacks and spells have been enhanced.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_WEAKENING,All your attacks and spells have been weakened.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MURDEROUS,All your action speeds increase by 1.5x. The buff disappears if no enemies are in sight.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_TELE,After a few turns, you will teleport to a random spot on the same floor.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE,All your action speeds increase by 1.5x.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLOW,All your action speeds decrease to 0.7x.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_HASTE_SLOW,You are under both haste and slow effects, resulting in a stable state.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST,Your next unarmed attack deals extra damage.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,You gain extra defense for a short time.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,Continuously deals poison damage to enemies in the surrounding 8 tiles.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,Melee damage increases, damage taken is reduced to 66%, but your movement speed decreases to 0.77x.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Your melee attack power is tripled.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,능력사용(a키)으로 5원소의 마법이 저렴하게 사용가능합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,당신은 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2,당신은 아주 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3,당신은 끔찍하게 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_CONFUSE,이동을 포함한 대부분의 행동을 제대로 할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_FROZEN,이동속도가 저하됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_ELEC,일정 턴마다 주변의 생물체에게 전기공격이 가해집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARALYSE,움직일 수 없습니다!
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_LEVITATION,하늘을 날아 몇몇 지형물체를 뛰어넘을 수 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLOW,당신에게 빛이 비춰지고 있어 회피율이 낮아집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_GRAZE,회피 가능한 탄막을 손쉽게 피할 수 있습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE,당신은 소리내는 행동을 할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SICK,지속시간동안 자연 체력회복이 불가능합니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_VEILING,당신에게 근접공격을 하려는 상대에게 데미지를 입히고 사라집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE,투명해져서 투명을 볼 수 없는 적의 눈에 띄지 않습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS,투명해졌지만 빛나고 있기에 아무런 효과가 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SWIFT,당신의 이동속도는 빠릅니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLUGGISH,당신의 이동속도는 느립니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPERMAN,초인과 같이 이동속도가 빨라졌습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_NONE_MOVE,무엇인가에 잡혀서 이동할 수 없습니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_NIGHT_SIGHT,당신은 한치앞도 보이지않습니다. 당신의 시야가 극적으로 줄어듭니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP,당신은 잠을 자고 있습니다!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,You are unlucky! This state can only be removed by gaining experience.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2,You are very unlucky! This state can only be removed by gaining experience.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3,You are terribly unlucky! This state can only be removed by gaining experience.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_CONFUSE,You can't perform most actions properly, including movement.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_FROZEN,Your movement speed is reduced.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_ELEC,Every few turns, nearby creatures are hit by electric shocks.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARALYSE,You can't move!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_LEVITATION,You are flying and can pass over certain terrain.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLOW,A light is shining on you, reducing your evasion rate.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_GRAZE,You can easily graze avoidable danmaku.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE,You cannot perform any sound-based actions.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SICK,Natural HP regeneration is disabled during the duration.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_VEILING,Damages enemies who try to melee you and then vanishes.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE,You are invisible to enemies that can't detect invisibility.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS,You're invisible, but glowing, making it ineffective.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SWIFT,Your movement speed is increased.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLUGGISH,Your movement speed is reduced.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPERMAN,Your movement speed has greatly increased, like a superhuman.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_NONE_MOVE,You're held by something and cannot move.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_NIGHT_SIGHT,You can't see a thing. Your vision is drastically reduced.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP,You are asleep!
 LOC_SYSTEM_SMOKE_NORMAL,Thin Smoke
 LOC_SYSTEM_SMOKE_FOG,Fog Cloud
 LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
@@ -459,7 +472,7 @@ LOC_SYSTEM_STAIR_SUBDUNGEON_WARN,This place looks really dangerous. Go down anyw
 LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE,Once you enter, it will be hard to get out. Still want to go down? (Y/N)
 LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE,Leaving now means you can never get this floor's rune again. Leave anyway? (Y/N)
 LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT,This place has no rune, but it's a one-time nightmare dungeon. Are you ready? (Y/N)
-LOC_SYSTEM_STAIR_SUBDUNGEON_PANDEMONIUM_RUNE,이 곳에는 강력한 기운이 느껴진다. 룬이 이 층에 존재한다!
+LOC_SYSTEM_STAIR_SUBDUNGEON_PANDEMONIUM_RUNE,You sense a powerful presence. A rune exists on this floor!
 LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY,You can't enter again if you've already been here!
 LOC_SYSTEM_STAIR_THREE_RUNE,You need 3 runes to enter this place!
 LOC_SYSTEM_STAIR_THREE_RUNE_OPEN,You inserted the 3 runes at the entrance. With a loud noise, the door opened!
@@ -726,10 +739,11 @@ LOC_SYSTEM_NOTE_UNIQUE_DEAD,The named foe {0} has died.
 LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0} has died.
 LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined as an ally.
 LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined as an ally.
-LOC_SYSTEM_NOTE_DUNGEON_ENTER,던전 진행: {0}에 들어섰다.
+LOC_SYSTEM_NOTE_DUNGEON_ENTER,Dungeon Progress: Entered {0}.
 LOC_SYSTEM_NOTE_GOD_WORSHIP,You have become a follower of {0}.
 LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
 LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
+LOC_SYSTEM_NOTE_GOD_GIFT,Received a gift from {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
@@ -1182,6 +1196,55 @@ LOC_SYSTEM_FIND_ONE,Found {0}.
 LOC_SYSTEM_FIND_TWO,Found {0} and {1}.
 LOC_SYSTEM_FIND_THREE,Found {0}, {1}, and {2}.
 LOC_SYSTEM_FIND_MANY,Found several items.
+LOC_SYSTEM_TUTORIAL1,카나코는 말했다 : 문을 열때는 문 옆에서 O키를, 닫을때는 C키로 닫을 수 있지.
+LOC_SYSTEM_TUTORIAL2,Kanako said: You can bump into doors with the arrow keys to open them automatically.
+LOC_SYSTEM_TUTORIAL3,카나코는 말했다 : 키패드의 방향키나 y u b n키로 대각선을 움직여보자.
+LOC_SYSTEM_TUTORIAL4,카나코는 말했다 : o키를 누르면 탐색 안한 지역으로 자동으로 이동하지.
+LOC_SYSTEM_TUTORIAL5,카나코는 말했다 : ,나 g를 눌러서 아이템을 주워서 장착해보렴.
+LOC_SYSTEM_TUTORIAL6,카나코는 말했다 : w키로 무기, W키로 방어구장착, i키는 설명, d키는 버리기야.
+LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat—just run into enemies to attack.
+LOC_SYSTEM_TUTORIAL8,Kanako said: Even weak enemies are easier to deal with one-on-one. Try luring them into corridors.
+LOC_SYSTEM_TUTORIAL9,Kanako said: Always get in the habit of healing after a fight.
+LOC_SYSTEM_TUTORIAL10,Kanako said: Press `.` to rest for 1 turn, or `5` to rest for 100 turns.
+LOC_SYSTEM_TUTORIAL11,카나코는 말했다 : m키를 눌러서 나오는 창에선 얻은 스킬 투자 방향을 정할 수 있어.
+LOC_SYSTEM_TUTORIAL12,Kanako said: Power helps manage hunger, use abilities, and boost melee damage.
+LOC_SYSTEM_TUTORIAL13,Kanako said: Use `>` to go down stairs and `<` to come back up.
+LOC_SYSTEM_TUTORIAL14,Kanako said: If you've cleared a floor, there's nothing left—let's head down.
+LOC_SYSTEM_TUTORIAL15,Kanako said: If your power drops below 2.00, your attack strength will decrease.
+LOC_SYSTEM_TUTORIAL16,카나코는 말했다 : 적을 잡아서 나오는 P템을 먹거나 음식을 통해서 회복이 가능해.
+LOC_SYSTEM_TUTORIAL17,카나코는 말했다 : e키를 눌러서 빵을 먹으면 파워를 회복할 수 있어.
+LOC_SYSTEM_TUTORIAL18,Kanako said: Ranged attacks are always useful. Try picking up a talisman.
+LOC_SYSTEM_TUTORIAL19,카나코는 말했다 : 원거리 무기를 던질때는 F키를 누르고 던질 템을 골라.
+LOC_SYSTEM_TUTORIAL20,카나코는 말했다 : f키론 준비되어있는 탄막을 바로 던질 수 있단다.
+LOC_SYSTEM_TUTORIAL21,Kanako said: Those accessories and scrolls are unidentified. Let's use one and see.
+LOC_SYSTEM_TUTORIAL22,카나코는 말했다 : 일단 반지를 주워서 P키로 장착해. R키론 벗을 수 있어.
+LOC_SYSTEM_TUTORIAL23,카나코는 말했다 : 두루마리를 읽는건 r키야. 선택창이 뜨면 반지에 사용해봐.
+LOC_SYSTEM_TUTORIAL24,카나코는 말했다 : 하하, 허기의 반지는 전혀 도움이 안되지. d키로 버릴 수 있어.
+LOC_SYSTEM_TUTORIAL25,카나코는 말했다 : 물약이 보이는군. 물약은 q키로 먹을 수 있어.
+LOC_SYSTEM_TUTORIAL26,Kanako said: You never know the effect of food until you eat it—sometimes it’s bad.
+LOC_SYSTEM_TUTORIAL27,Kanako said: To learn magic, you first have to study a spell from a book.
+LOC_SYSTEM_TUTORIAL28,카나코는 말했다 : 일단 책을 주워서 M키로 마법의탄막을 배워보자.
+LOC_SYSTEM_TUTORIAL29,카나코는 말했다 : 마법을 사용하기위해선 z키나 Z키를 누르고 사용할수있어.
+LOC_SYSTEM_TUTORIAL30,Kanako said: It works just like throwing a talisman! Try taking out a mob with magic.
+LOC_SYSTEM_TUTORIAL31,Kanako said: You can go back upstairs using the `<` key.
+LOC_SYSTEM_TUTORIAL32,Kanako said: Remember to rest with `5` after battle. If you're poisoned, cure it too.
+LOC_SYSTEM_TUTORIAL33,카나코는 말했다 : 제단을 찾으면 위에서 p키로 기도를 할 수 있어.
+LOC_SYSTEM_TUTORIAL34,Kanako said: It's my shrine, so trust me! Once you do, press `^` to view the explanation.
+LOC_SYSTEM_TUTORIAL35,카나코는 말했다 : a키를 눌러서 권능을 한번 사용해서 싸워보렴.
+LOC_SYSTEM_TUTORIAL36,Kanako said: Powers grow stronger as your faith increases.
+LOC_SYSTEM_TUTORIAL37,Kanako said: My powers consume a set amount of faith—use them wisely.
+LOC_SYSTEM_TUTORIAL38,Kanako said: Each god has different ways to gain faith and dislikes different things.
+LOC_SYSTEM_TUTORIAL39,Kanako said: In my case, my faith increases a little each time I kill an enemy.
+LOC_SYSTEM_TUTORIAL40,Kanako said: For me, my faith rises automatically whenever I defeat an enemy.
+LOC_SYSTEM_TUTORIAL41,Kanako said: Ah, a yokai umbrella. Enemies with names above their heads are called named monsters.
+LOC_SYSTEM_TUTORIAL42,Kanako said: Named monsters are stronger than normal. Use whatever it takes to win.
+LOC_SYSTEM_TUTORIAL43,Kanako said: Let’s test whether you can take it down using the items and methods you've gained so far.
+LOC_SYSTEM_TUTORIAL44,Kanako said: That’s the end of the tutorial, Sanae.
+LOC_SYSTEM_TUTORIAL45,Kanako said: Don’t fear death in the real game!
+LOC_SYSTEM_EVENT_TEMPLE,A holy aura surrounds the area.
+LOC_SYSTEM_EVENT_SCARLET_UNDER,You sense a powerful force. Run while you still can!
+LOC_SYSTEM_EVENT_BUG,This is an unfinished bug area.
+LOC_SYSTEM_EVENT_BAMBOO,This place is a dreadful maze! Find the exit—or maybe discover somewhere new...?
 LOC_SYSTEM_EVENT_KISME_DROP,Kisume dropped from the sky!
 LOC_SYSTEM_EVENT_LUNATIC_TIME,It’s LUNATIC TIME!!
 LOC_SYSTEM_EVENT_KOGASA_DROP,Kogasa dropped from the sky!
@@ -1207,7 +1270,32 @@ LOC_SYSTEM_EVENT_SION_ITEM,Item
 LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0} vanished as you got too close.
 LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,Items vanished as you got too close.
 LOC_SYSTEM_MON_DREAM_UNIQUE,Dream Dweller {0}
+LOC_SYSTEM_EVOKE_AIRSCROLL,You gained MP from the Air Scroll!
 LOC_SYSTEM_EVOKE_DREAM_SOUL,You have evoked the dream of {0}!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ASK,What will you wish for with the magic hammer?
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER1,Heal me!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER2,Make me stronger!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER3,I want many allies!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER4,I want treasure!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_HEAL,The magic hammer fully healed you!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_HEAL_BACKFIRE,The magic hammer backfired! Your HP and MP were drained!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF,The magic hammer made you stronger!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF_BACKFIRE,The magic hammer backfired! You became weaker!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON,The magic hammer summoned allies!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON_BACKFIRE,The magic hammer backfired! All your allies turned hostile!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT,The magic hammer created treasure!
+LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE,The magic hammer backfired! All the treasure disappeared!
+LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN,The Four-Shaku Magic Bomb fell into the water.
+LOC_SYSTEM_EVOKE_GHOST_BALL,You turned into a ghost at the cost of life! Use the skill again to cancel.
+LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE,You let go of the Okurichōchin.
+LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST,No time to take photos of thin air.
+LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE,I'd rather photograph a prettier girl.
+LOC_SYSTEM_EVOKE_CAMERA_NOT_GIRL,I don't want to photograph a guy.
+LOC_SYSTEM_EVOKE_CAMERA_INTERRUPT,Someone is interfering with the photo!
+LOC_SYSTEM_EVOKE_CAMERA_SHUTTER,*Click!*
+LOC_SYSTEM_EVOKE_CAMERA_SAKUYA,The subject suddenly vanished!
+LOC_SYSTEM_EVOKE_CAMERA_THE_WORLD,I have stopped time...
+LOC_SYSTEM_EVOKE_CAMERA_SELF,Are you taking a selfie?
 LOC_SYSTEM_TRIBE_HUMAN,Human
 LOC_SYSTEM_TRIBE_WIZARD,Witch
 LOC_SYSTEM_TRIBE_FAIRY,Fairy
@@ -1536,8 +1624,8 @@ LOC_SYSTEM_TILE_STATUE,Statue
 LOC_SYSTEM_TILE_BUDDHA_STATUE,Jizo Statue
 LOC_SYSTEM_TILE_DEEP_WATER,Deep Water
 LOC_SYSTEM_TILE_LAVA,Lava
-LOC_SYSTEM_TILE_HELP_DOWN,(>키로 내려가기)
-LOC_SYSTEM_TILE_HELP_UP,(<키로 올라가기)
+LOC_SYSTEM_TILE_HELP_DOWN,(Press `>` to go down)
+LOC_SYSTEM_TILE_HELP_UP,(Press `<` to go up)
 LOC_SYSTEM_TILE_HELP_PRAY,(p키로 기도)
 LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,Fallen Leaves
 LOC_SYSTEM_FLOOR_EFFECT_STONE,Rock Spikes
@@ -2405,6 +2493,48 @@ LOC_SYSTEM_GOD_LILLY,Lily
 LOC_SYSTEM_GOD_MIKO,Miko
 LOC_SYSTEM_GOD_OKINA,Okina
 LOC_SYSTEM_GOD_JUNKO,Junko
+LOC_SYSTEM_GOD_SUWAKO_TITLE,Moriya Suwako - Pinnacle of the Native Gods
+LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.\n스와코는 신자들에게 변덕스러운 권능을 준다.\n그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.
+LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit Who Entrusted Fate to a Distant Dream
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,미마는 재앙신격인 존재로 악령이다.\n신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.\n특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.
+LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Phantom Girl of the Nether Pavilion
+LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,유유코는 백옥루에 사는 사이교우지의 아가씨이다.\n그녀는 죽음을 조종 할 수 있는 강력한 능력을 가지고 있어서 신도들에게 죽음의 힘을 선물해준다.\n그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.
+LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Yorigami Joon & Shion - The Most Wicked Sisters
+LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.\n죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서\n믿는 것만으로도 소모품을 낭비하고 잃어버리는 불행이 생기게 될 것이다.\n그럼에도 둘을 신앙한다면 직접 빙의하는 것으로 직접적으로 그녀들의 권능들을 사용하게 된다.\n그녀들의 권능은 강력하지만, 빙의와 동시에 그에 따른 그녀들의 불운도 더욱 강해질것이다.\n신도들은 다른 적들을 죽여서 그들의 돈을 갈취하는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_SHINKI_TITLE,Shinki - Goddess of Makai
+LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,신키는 마계의 주인이자 마계를 창조한 마계의 신이다.\n창조의 능력을 이용해서 신키는 신도들에게 강력한 마족들을 선물한다.\n또한 신키는 당신을 적대적인 소환수로부터 지켜주거나 P를 모을때마다 체력과 영력을 회복시켜준다.\n일정수준 이상의 마족들은 당신을 언제라도 배신할 수 있는 걸 염두해야된다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_MINORIKO_TITLE,Aki Minoriko - Symbol of Abundance and Harvest
+LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,미노리코는 가을의 수확을 상징하는 신으로 신도에게 풍족함을 선사한다.\n신도들은 미노리코에게 풍족한 음식을 내려받게 되고 포만감과 체력을 보장받는다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_SHIZUHA_TITLE,Aki Shizuha - Symbol of Loneliness and Passing
+LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,아키 시즈하는 단풍의 신이다.\n시즈하는 신도들의 당신의 존재감을 낮추어 은밀하게 다닐 수 있게 도와준다.\n그녀의 권능은 암살자들에게 큰 혜택을 주며 중갑옷의 패널티도 크게 상쇄받을 수 있다.\n시즈하는 시끄러운 자들의 시체가 낙엽처럼 떨어지는 것을 기뻐한다.
+LOC_SYSTEM_GOD_EIRIN_TITLE,Yagokoro Eirin - Brain of the Moon
+LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,그녀는 모든 약을 제조할 수 있는 달의 최고의 현자로 천재 약사이다.\n그녀의 신도로 들어가면 여러가지 물약들을 받게되고 추가적인 효과를 얻게 된다.\n또한 자신의 몸을 개조하거나 부작용을 감당하는 극적인 치료도 가능해진다.\n신도는 그녀의 실험대상이 될 각오를 할 수 있다면 그만큼의 보답을 받을 수 있을 것이다.\n신도는 이로운 물약의 위에서 기도를 하여 포션을 바치거나 물약을 마시는 것으로 신앙심을 얻을 수 있다.\n또한 자주는 아니지만 적을 죽였을때 가끔씩 신앙심을 얻을 수 도 있다.
+LOC_SYSTEM_GOD_KANAKO_TITLE,Yasaka Kanako - Avatar of Mountains and Lakes
+LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,카나코는 건(하늘)을 창조하는 능력을 가진 신으로 본래는 바람의 신이지만 산의 신으로 모셔지고 있다.\n그녀는 신자들에게 신앙을 받는 것으로 강력한 전투 능력을 보답한다.\n특히 근접전사와 원거리탄막으로 싸우는 자에게 큰 도움이 될 것이다.\n신자들은 계속되는 전투로 그녀에게 신앙을 바쳐야한다.
+LOC_SYSTEM_GOD_YUKARI_TITLE,Yakumo Yukari - Youkai Hidden Within Boundaries
+LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,야쿠모 유카리는 환상향에서도 이름있는 강력한 경계의 요괴다.\n유카리의 식신으로 들어가게 되면 그녀에게 경계와 관련된 능력을 얻을 수 있다.\n강력한 전이능력을 제공받지만 권능을 제외한 다른 전이능력을 금지하고\n제어하기 힘든 강력한 전이 능력은 역으로 신도를 위험하게 만들수도 있다.
+LOC_SYSTEM_GOD_HINA_TITLE,Kagiyama Hina - Hidden Doll Goddess of Misfortune
+LOC_SYSTEM_GOD_HINA_DESCRIPTION,히나는 액을 모아서 재앙을 방지하는 재앙신이다.\n그녀로부터 액을 받아서 저주를 몸에 지니는 것으로 그녀의 권능을 얻을 수 있다.\n던전을 탐험하는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_SATORI_TITLE,Komeiji Satori - Girl Even Spirits Fear
+LOC_SYSTEM_GOD_SATORI_DESCRIPTION,사토리는 지령전의 주인으로 마음을 읽는 요괴이다.\n사토리를 믿는다는 것은 그녀의 펫이 된다는 얘기와도 같고 그녀의 힘을 받을 수 있게 된다.\n사토리는 방임주의이기때문에 전투에 직접 관련된 능력은 별로 주진 않는다.\n그러나 그녀의 마음을 읽는 능력으로 던전의 지형 정보를 얻거나 위치를 알아낼 수 있다.\n또한 상대의 마음 속으로부터 트라우마를 읽어내거나 상대의 생각을 통째로 읽어내 농락할수도 있다.\n생각을 간파당한 상대는 모든 디버프 마법에 취약해지므로 정신술을 연마한 사람에게 도움이 될 것이다.\n그녀의 애완동물들은 던전을 탐험하는 것으로 그녀의 호감을 얻을 수 있다.
+LOC_SYSTEM_GOD_YUUGI_TITLE,Hoshiguma Yuugi - Notorious Oni of Super Strength
+LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,유우기는 지하의 옛도시에 살고 있는 오니이다. 유우기는 괴력난신의 오니로 강력한 힘을 신도에게 준다.\n그녀의 힘은 근접 전투를 하면서 상대를 매치거나 집어던지는 등 레슬링같은 전투를 해낼 수 있다.\n또한 오니의 힘으로 포효를 하여 상대를 벙어리로 만들거나 오니의 궁극기 또한 사용할 수 있게 된다.\n단, 유우기는 신도가 마법의 힘에 의지해 싸우는 것을 싫어한다.\n그녀의 신앙심은 전투에서 승리하는 것으로 얻을 수 있다.
+LOC_SYSTEM_GOD_TENSI_TITLE,Hinanawi Tenshi - Girl of Bhavaagra, the Celestial Realm
+LOC_SYSTEM_GOD_TENSI_DESCRIPTION,텐시는 유정천의 제멋대로인 천인 아가씨이다.\n그녀는 지루한 천계생활에 따분해하던차 이 이변을 계기로 자신을 믿고자하는 신도들을 장난감처럼 취급한다.\n텐시는 신도에게 어떠한 권능도 내려주지않는다. 모든 행동은 그녀의 변덕대로 이루어진다. \n신도가 항상 위험천만한 전투를 반복하여 그녀의 흥미를 최대한으로 끌어낸다면 강력한 도움을 받을 수 있다.\n하지만 신도가 안이한 안전을 바란다면 곧 자신의 생각을 후회하게 될 것이다.
+LOC_SYSTEM_GOD_BYAKUREN_TITLE,Hijiri Byakuren - Sealed Great Magician
+LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,뱌쿠렌은 마계에 봉인되어있었던 대마법사로 환상향에 절인 명련사를 세워 불교의 가르침을 전한다.\n그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.\n그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.\n신도는 만나보지못한 새로운 사람들을 만나는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_SEIJA_TITLE,Kijin Seija - The Rebellious Amanojaku
+LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.\n세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.\n현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.\n그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고\n그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.\n그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.
+LOC_SYSTEM_GOD_LILLY_TITLE,Lily White - Fairy Who Heralds Spring
+LOC_SYSTEM_GOD_LILLY_DESCRIPTION,릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.\n그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.\n그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.\n동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.\n당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. \n본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.\n릴리화이트는 이 세상을 탐험하는 것을 좋아한다.
+LOC_SYSTEM_GOD_MIKO_TITLE,Toyosatomimi no Miko - Omniscient Taoist Governing the Cosmos
+LOC_SYSTEM_GOD_MIKO_DESCRIPTION,토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.\n그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.\n인기도는 빠른 속도로 오르며 적들의 욕망을 읽거나 죽임으로서 인기도를 모을 수 있지만\n층을 올라가거나 서브던전이 바뀌면 인기도가 떨어지며 권능은 인기도를 크게 소모하게 된다.\n미코의 권능인 도술은 반영구적이며 지속시간없이 유지되지만 층을 이동할 경우 사라진다.
+LOC_SYSTEM_GOD_OKINA_TITLE,Matara Okina - The Ultimate Hidden God
+LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.\n그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.\n그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.\n문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.\n또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.\n그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.
+LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
+LOC_SYSTEM_GOD_BUG_TITLE,Bug God
+LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,You begin to waste and lose consumables due to the curses of the Plague and Poverty gods.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,You can now possess Joon or Shion.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,You can no longer possess Joon or Shion.
@@ -2450,23 +2580,322 @@ LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_ADD,Mima now empowers destructive magic.
 LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE,Destructive magic is no longer empowered.
 LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_ADD,Mima now boosts the success rate of destructive spells.
 LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE,Destructive spells are no longer assisted in success rate.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_ADD,You can summon a small group of lesser demons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_REMOVE,You can no longer summon a small group of lesser demons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_ADD,You can summon Shinki's mid-tier demons at your own risk.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_REMOVE,You can no longer summon mid-tier demons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_ADD,Shinki protects you from hostile summons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_REMOVE,You are no longer protected from hostile summons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_ADD,You can summon Shinki's advanced demons at great risk.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_REMOVE,You can no longer summon advanced demons.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD,이제 당신은 P로부터 힘을 얻는다.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE,더 이상 P로부터 힘을 얻지 못한다.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_ADD,You're good at dodging while drunk.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_REMOVE,You can no longer dodge while drunk.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_ADD,You can drink potions as if they were alcohol.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_REMOVE,You can no longer drink potions like alcohol.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_ADD,You can perform a German Suplex on enemies.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_REMOVE,You can no longer use the German Suplex.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_ADD,You can grab and throw enemies.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_REMOVE,You can no longer grab and throw enemies.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_ADD,You can unleash the Oni’s Roar.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_REMOVE,You can no longer roar.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_ADD,You can finally use the Three-Step Finisher.
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_REMOVE,You can no longer use the Three-Step Finisher.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_ADD,Shizuha greatly reduces the chance of enemies waking up and shouting.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_REMOVE,Shizuha no longer reduces the chance of enemy shouting.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_ADD,You leave behind stealthy traces of autumn leaves.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_REMOVE,You no longer leave leaf traces behind.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_ADD,You can inflict confusion on monsters standing on leaves.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_REMOVE,You can no longer confuse monsters standing on leaves.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD,You can turn your equipped armor into leaf armor.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE,You can no longer turn your armor into leaf armor.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_ADD,You can move very quickly when walking on leaves.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_REMOVE,You can no longer move quickly on leaves.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_ADD,You can imbue your weapon with the power of leaves once.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_REMOVE,You can no longer imbue your weapon with the power of leaves.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY0_ADD,You can now detect curses on items.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_ADD,You can convert negative enchantments on cursed items into positive ones.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_REMOVE,You can no longer reverse enchantments on cursed items.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_ADD,You can curse your weapon to gain powerful strength.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_REMOVE,You can no longer gain strength by cursing your weapon.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD,You can curse your armor to reflect all damage.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE,You can no longer reflect damage through cursed armor.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_ADD,You can curse your accessories to recover HP and MP.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_REMOVE,You can no longer recover HP and MP by cursing accessories.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_ADD,You now spread curses wherever you go.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_REMOVE,You no longer spread curses.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_ADD,You can imbue your weapon with the power of curses once.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_REMOVE,You can no longer imbue your weapon with the power of curses.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_ADD,When taking damage, you sometimes teleport.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_REMOVE,You no longer teleport when taking damage.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_ADD,You can call in support fire from the boundaries.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_REMOVE,You can no longer call for support fire.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_ADD,You can travel through boundaries.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_REMOVE,You can no longer travel through boundaries.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_ADD,You can create barriers.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_REMOVE,You can no longer create barriers.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_ADD,You can lock dimensions in place.
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_REMOVE,You can no longer lock dimensions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_ADD,Eirin enhances potion effects. You can pray over good potions to create bad ones.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_REMOVE,You no longer enhance potion effects or create bad ones.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_ADD,You gain new power from poison potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_REMOVE,You can no longer gain power from poison potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_ADD,You can throw potions and gain new power from stat-reduction potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_REMOVE,You can no longer throw potions or gain power from stat-reduction potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_ADD,You can perform bodily modification. You now gain power from confusion potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_REMOVE,You can no longer modify your body or gain power from confusion potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_ADD,You gain power from slow potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_REMOVE,You can no longer gain power from slow potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_ADD,Emergency transfusions are now possible. You also gain power from paralysis potions.
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_REMOVE,You can no longer perform emergency transfusions or gain power from paralysis potions.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_ADD,Ghosts always gather around you.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_REMOVE,Ghosts no longer gather around you.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_ADD,You can move ghosts to your desired location.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_REMOVE,You can no longer move ghosts.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_ADD,You can temporarily increase ghost spawn frequency.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_REMOVE,You can no longer increase ghost spawn frequency.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_ADD,You can bind the soul of a single enemy.
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_REMOVE,You can no longer bind souls.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_ADD,You can now detect invisibility.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_REMOVE,You can no longer detect invisibility.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_ADD,You can show trauma to enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_REMOVE,You can no longer show trauma to enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_ADD,You can read the dungeon layout from enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_REMOVE,You can no longer read the dungeon layout from enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_ADD,You can sense the presence of nearby enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_REMOVE,You can no longer sense the presence of nearby enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_ADD,You can read the minds of enemies.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_REMOVE,You can no longer read minds.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_ADD,You are Satori-sama's beloved pet under her direct care.
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_REMOVE,Satori no longer manages you directly.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_ADD,Seija helps you escape divine punishment.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_REMOVE,Seija no longer helps you escape punishment.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_ADD,You can reverse your position.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_REMOVE,You can no longer reverse your position.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_ADD,You can now invert everyone's vision.
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_REMOVE,You can no longer invert everyone's vision.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_ADD,You can now recruit fairies as allies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_REMOVE,You can no longer recruit fairies as allies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_ADD,You can now summon fairies to your location.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_REMOVE,You can no longer summon fairies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD,You can now recruit one more fairy.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_FINAL_ADD,You can recruit the final fairy ally.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_ADD,You can now heal fairies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_REMOVE,You can no longer heal fairies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_ADD,You can now temporarily share your power with fairies.
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_REMOVE,You can no longer wage fairy wars.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_ADD,You can now pass through doors freely and see through them.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_REMOVE,You can no longer move through doors at will.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_ADD,You can now create doors on any wall.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_REMOVE,You can no longer create doors.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_ADD,You can now forcefully close distant open doors.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_REMOVE,You can no longer force doors shut.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_ADD,You can now create a backdoor behind enemies and move through it.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_REMOVE,You can no longer create backdoors behind enemies.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_ADD,You can now summon the Crazy Back Dancers.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_REMOVE,You can no longer summon the Crazy Back Dancers.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_ADD,You can now open a door behind you to escape.
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_REMOVE,You can no longer escape through a door behind you.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_ADD,You can now fire simple danmaku.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_REMOVE,You can no longer fire simple danmaku.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_ADD,You can now gain pure power.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_REMOVE,You can no longer gain pure power.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_ADD,You can now harbor pure murderous intent.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_REMOVE,You can no longer harbor pure murderous intent.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_ADD,You can now purify.
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE,You can no longer purify.
+LOC_SYSTEM_GOD_SHOW_AHTEISM,You do not believe in any god yet.
+LOC_SYSTEM_GOD_SHOW_PASSIVE,(Passive)
+LOC_SYSTEM_GOD_SHOW_ACTIVE,(Active)
+LOC_SYSTEM_GOD_SHOW_NONE,(None)
+LOC_SYSTEM_GOD_SHOW_PIETY,(Faith)
+LOC_SYSTEM_GOD_SHOW_MP,(MP)
+LOC_SYSTEM_GOD_SHOW_P,(P)
+LOC_SYSTEM_GOD_SHOW_POTION,(Potion)
+LOC_SYSTEM_GOD_SHOW_CURSE,(Curse)
+LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(MP, Faith)
+LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(Time, Faith)
+LOC_SYSTEM_GOD_SHOW_P_AND_PIETY,(P, 신앙)
+LOC_SYSTEM_GOD_SHOW_P_AND_POTION,(P, 물약)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP,(P, 영력)
+LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY,(Potion, Faith)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY,(P, 영력, 신앙)
+LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY,(P, 음식, 신앙)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON,(Once Only)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR,(Once per Floor)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(Once upon Possession)
+LOC_SYSTEM_GOD_SHOW_POPULAR,(Popularity {0})
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,You are cursed by the gods of pestilence and poverty.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,└ Sometimes you consume 2–3 consumables at once.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,└ You always consume 2–3 consumables at once. (Enhanced)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,└ Uncollected consumables slowly disappear. Discarded items have a chance to vanish.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,└ Uncollected consumables disappear quickly. Discarded items always vanish. (Enhanced)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,You can temporarily become possessed by Joon or Shion.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3,While possessed, Joon or Shion uses your power.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1,While Joon is in control, all damage is amplified, but power is consumed each time.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2,While Shion is in control, collecting power doesn't increase it, but restores HP instead.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4,While possessed, Joon or Shion uses your consumables.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1,While Joon is in control, wasting items gives random buffs.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2,While Shion is in control, death is nullified at the cost of losing many consumables.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5,While possessed, you can use Joon or Shion's area powers.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1,You can inflict confusion and damage to enemies in sight.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2,You can slow enemies in sight and spread vision-obscuring mist.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6,While possessed, you can use the Most Dreadful Strategy.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,You can use the ultimate strategy to possess the enemy with the Poverty Goddess.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1,Byakuren increases the maximum spell level you can learn.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,You can momentarily boost your intelligence.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,Your strength increases, allowing you to ignore magic failure from low-tier armor penalties.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,Byakuren supports your enhancement spells.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,You can momentarily boost your willpower.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,You can charge forward with Kanako's power.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,You can manifest Kanako’s pillar.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,You can be enveloped in Kanako’s wind power.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,You can eat even at full power and maintain max power longer.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,The fuller your power, the faster your HP and MP recover.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,Minoriko cures your status ailments and stat reductions.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,You eat faster and recover a bit of MP when doing so.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,Minoriko consumes your food to greatly restore HP.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,After eating, Minoriko briefly grants 1 level of fire and cold resistance.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1,Max MP increases with your faith.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2,You gain MP from slain enemies based on their strength.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,Mima increases the power of destruction-type spells.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,Mima boosts the success rate of destruction-type spells.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,You can summon a horde of lesser demons.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,You can summon mid-tier demons.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,You can occasionally disrupt hostile summons.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,You can summon high-tier demons.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,당신은 P를 주울때마다 체력과 영력이 차오른다.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,While drunk, you recover HP slightly and gain high evasion.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,You can convert a potion into booze and drink it.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,You sometimes grab enemies in battle, letting you use grab skills without faith cost.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4,You can grab and perform a German Suplex.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5,You can grab and throw enemies.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6,You can let out a mighty roar that silences nearby enemies.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7,You can use the oni’s ultimate move, the Three-Step Finisher.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1,Shizuha reduces the chance of enemies shouting when they wake up.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2,You leave behind autumn leaves when you move or defeat enemies.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3,Walking on leaves lets you move very stealthily.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4,You can confuse all enemies standing on leaves.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5,You can turn your armor into leaf armor.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6,You move very quickly while walking on leaves.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7,You can imbue your weapon with the leaf brand once.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1,You can detect and identify cursed equipment in your sight.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2,You can convert negative enchantments on equipped cursed gear into positives.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3,You can temporarily imbue your weapon with the power of curses.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4,You can temporarily reflect all damage using cursed armor.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5,You can temporarily imbue accessories with curses to heal HP.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6,Wearing cursed items spreads curses around you.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7,You can imbue your weapon with a curse brand once.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1,The gap watches over you.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2,When you take damage, you sometimes teleport.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3,You can receive support fire from the gap.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4,You can travel through gaps.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5,You can create barriers.
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6,You can temporarily lock dimensions.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1,Eirin enhances the effects of potions.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2,Praying over a good potion can create a bad one.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3,You receive bonus effects from the following potions:
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1, └Poison Potion: Increases movement speed.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2, └Stat-Down Potion: Restores HP.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3, └Confusion Potion: Restores MP.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4, └Slow Potion: Grants invisibility.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5, └Paralysis Potion: Reduces paralysis duration and unleashes a spirit blast.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,You can throw your potions.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,You can modify your body to adjust your stats.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,You can regenerate at the cost of side effects.
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,You attract spirits.
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2,You can send spirits to a desired location.
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3,You can temporarily increase spirit spawn rate.
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4,You can capture the soul of one enemy.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1,You can see invisibility.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2,You can draw out an enemy’s trauma.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3,You can read the map layout from enemies’ memories.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4,You can sense the presence of mobs.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5,You can completely read the thoughts of one enemy.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6,Satori occasionally feeds you — the more danger, the more frequent.
+LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY,Tenshi’s actions are unpredictable!
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,You are receiving stat boosts from Seija.
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,She helps you escape divine punishment chases.
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3,You can swap positions with a target of your choice.
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4,You can invert the vision of all enemies and allies.
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1,You can share EXP with fairies; dead ones revive if they gain EXP.
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2,You can recruit fairies as allies.
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,You can summon fairies nearby.
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4,You can heal allied fairies.
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5,You can share your power with fairies.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1,Popularity increases with the following actions:
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,Kill enemies — stronger ones give more popularity.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,Use Desire Gather to collect desires from enemies in sight.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,Enter a new sub-dungeon.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,Popularity decreases with the following actions:
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,Changing floors — the higher you go, the more popularity you lose.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,Changing sub-dungeons — all popularity is lost.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,Using Miko’s divine powers.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,You can collect popularity from nearby enemies.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,You can randomly teleport at high speed.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3,You gain a radiant aura that illuminates surroundings on this floor.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4,You can gain your desired resistance on this floor.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5,You can boost your chosen combat ability on this floor.
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6,You receive the ultimate blessing on this floor.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1,You can freely move through and see beyond doors.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2,You can create a door on any wall.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,You can forcibly shut and lock doors.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,You can teleport behind an enemy.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,You can summon the Crazy Back Dancer.
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,You can open a door behind you to escape anytime.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You are permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,└You cannot use certain scrolls and potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,└You cannot use spell cards, and some scrolls and potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,└All your stats are increased by 5.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,Junko’s power is strong, but temporarily purifies you.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,└Stage 1: You cannot use spell cards.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,└Stage 2: You cannot use the effects of some scrolls.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,└Stage 3: You are unaffected by potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,You can unleash simple but powerful danmaku.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,You can gain pure power.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,You can gain pure murderous intent.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can be permanently purified by Junko's blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You have been permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, └Skill Purity: Your {0} skill level always matches your character level.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, └Resistance Purity: Your {0} is infinite.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4, └Magic Purity: Your HP and MP are treated as the same.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5, └Power Purity: You are always at full power.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6, └Life Purity: You received an extra life.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7, └Equipment Purity: Your gear has been purified.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8, └System Purity: You can now use spell cards, and amulet charge rate is tripled.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,└Unknown Bug Purity
+LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
+LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} rejoiced at your kill.
+LOC_SYSTEM_GOD_COMMON_PROTECT,You were protected!
+LOC_SYSTEM_GOD_COMMON_RAGE,{0} is enraged by your actions. Repent!
+LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,Joon and Shion rejoiced in robbing enemies’ wallets.
 LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, you wasted {0} {1}.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cannot be possessed.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
 LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat
 LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,You pulled {0}.
 LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,A calamity was cast upon {0}.
+LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
+LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT,Minoriko exclaimed with excitement, "That's it!"
 LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,Mima aimed a powerful {0} at you!
+LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P,P로부터 회복하였다.
 LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,Low-ranking demons of Makai have been summoned to aid you.
 LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0} doesn't look very pleased.
+LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi rejoiced in your victory.
 LOC_SYSTEM_GOD_YUUGI_CATCH,You caught {0}.
+LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC,Yuugi was enraged by your magic!
+LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,Shizuha rejoiced as your enemies fell like autumn leaves.
+LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,Shizuha clapped. "Splendid."
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense? (y/n)
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
+LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,Stepping on the leaves made a loud rustling noise.
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,Hina infused your equipment with misfortune!
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,{0} you were wearing glowed darkly.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0} is brimming with cursed power.
@@ -2474,8 +2903,10 @@ LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,{0} glowed darkly, filling you with 
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly — you now reflect all damage.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly — you feel yourself healing.
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0} emanates a cold, hollow aura of curse.
+LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,Yukari was furious at your reckless use of teleportation magic!
 LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
+LOC_SYSTEM_GOD_SATORI_FEED,Lady Satori has fed you!
 LOC_SYSTEM_GOD_SEIJA_PUNISH,Seija sowed discord between you and {0}!
 LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,You swapped places with {0}.
 LOC_SYSTEM_GOD_SEIJA_GIFT_ON,You can now request Seija for a gift.
@@ -2576,6 +3007,11 @@ LOC_SYSTEM_GOD_LILLY_REVIVE,{0} has revived!
 LOC_SYSTEM_GOD_LILLY_INVITE,{0} introduced herself as {1}.
 LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL,You must be at least level {0} to recruit this fairy.
 LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,{0} was healed by the essence of spring.
+LOC_SYSTEM_GOD_LILLY_ABANDON,You betrayed Lilly, and all your fairy allies turned against you!
+LOC_SYSTEM_GOD_MIKO_ENTER_NEW_DUNGEON,Entering a new dungeon resets your popularity.
+LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,Changing dungeons has reset your popularity.
+LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,Your popularity dropped slightly when changing floors.
+LOC_SYSTEM_GOD_MIKO_UP_FLOOR,Your popularity dropped significantly when climbing stairs.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
 LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,You turned the {0} tile into a door.
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0} was pushed away by the closing door!
@@ -2585,7 +3021,11 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify t
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
 LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.
 LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
+LOC_SYSTEM_GOD_PRAY_AHTEISM,You took a moment to contemplate the meaning of life.
+LOC_SYSTEM_GOD_PRAY_TEMPLE,You prayed at the altar.
+LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,신도가 되려면 Y키를, 취소하려면 N키를 누른다.
 LOC_SYSTEM_GOD_GIFT,{0}: Use this well!
+LOC_SYSTEM_GOD_GIFT_APPEAR,Something appeared beneath your feet!
 LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.
 LOC_SYSTEM_GOD_FORGIVE,You have been forgiven by {0}.
 LOC_SYSTEM_GOD_NOT_YET_FORGIVE,{0} has not forgiven you yet.
@@ -2679,8 +3119,8 @@ LOC_SYSTEM_REPLAY_LIST,Replay List!
 LOC_SYSTEM_REPLAY_TIMELINE,{0}-{1}-{2} {3}:{4}
 LOC_SYSTEM_REPLAY_NOTEXIST,The file doesn't exist!
 LOC_SYSTEM_REPLAY_PAGE,Page {0}
-LOC_SYSTEM_REPLAYING,리플레이 모드중
-LOC_SYSTEM_REPLAY_KEY_HELP,({0}-일시정지 {1}-보통속도 {2}-배속)
+LOC_SYSTEM_REPLAYING,Replaying Mode
+LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
 LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed

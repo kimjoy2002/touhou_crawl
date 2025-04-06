@@ -180,11 +180,10 @@ void swako_gift(bool speak_) {
 
 	if (speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!", true, false, false, CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR), true, false, false, CL_dark_good);
 
-		char temp[200];
-		sprintf_s(temp, 200, "스와코에게 선물을 받았다.");
-		AddNote(you.turn, CurrentLevelString(), temp, CL_help);
+
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_SUWAKO)) , CL_help);
 
 		MoreWait();
 	}
@@ -192,7 +191,7 @@ void swako_gift(bool speak_) {
 void joon_sion_gift(bool speak_)
 {
 	if (speak_) {
-		printlog("당신은 다시 빙의를 할 수 있다.", true, false, false, CL_joon_and_sion);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY), true, false, false, CL_joon_and_sion);
 		MoreWait();
 	}
 	you.god_value[GT_JOON_AND_SION][1] = 0;
@@ -207,11 +206,9 @@ void minoriko_gift(bool speak_)
 	
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
-		char temp[200];
-		sprintf_s(temp,200,"미노리코에게 선물을 받았다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_MINORIKO)),CL_help);
 
 		MoreWait();
 	}
@@ -246,11 +243,9 @@ void byakuren_gift(bool speak_)
 	
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
-		char temp[200];
-		sprintf_s(temp,200,"뱌쿠렌에게 선물을 받았다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_BYAKUREN)),CL_help);
 
 		MoreWait();
 	}
@@ -263,17 +258,15 @@ void mima_gift(book_list book_)
 		item_infor t;
 		env[current_level].MakeItem(you.position,makeitem(ITM_BOOK, 0, &t, book_));
 		
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
-		char temp[200];
-		sprintf_s(temp,200,"미마에게 선물을 받았다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_MIMA)),CL_help);
 		MoreWait();
 	}
 }
 void satori_gift()
 {
-	printlog("사토리님이 당신에게 먹이를 주셨다!",false,false,false,CL_green);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_FEED),false,false,false,CL_green);
 	if(1)
 	{//체력회복
 		you.HpUpDown(5+randA_1(25),DR_POTION);
@@ -345,11 +338,9 @@ void kanako_gift(bool speak_)
 		MakeArtifact(it,1);
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
-		char temp[200];
-		sprintf_s(temp,200,"카나코에게 선물을 받았다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)),CL_help);
 
 		MoreWait();
 	}
@@ -431,7 +422,7 @@ item* armour_gift(bool speak_, bool artifact_)
 
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		MoreWait();
 	}
@@ -465,7 +456,7 @@ item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		MoreWait();
 	}
@@ -491,11 +482,10 @@ void eirin_gift(bool speak_)
 		env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t,(int)type_));
 	if(speak_)
 	{
-		printlog("당신의 발밑에 무언가 나타났다!",true,false,false,CL_dark_good);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 	
-		char temp[200];
-		sprintf_s(temp,200,"에이린에게 선물을 받았다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_help);
+
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_EIRIN)),CL_help);
 
 		MoreWait();
 	}

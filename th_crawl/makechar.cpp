@@ -1075,11 +1075,11 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 
 			vector<int> temp;
-			if (type == UNIQ_START_SUNNY)
+			if (type != UNIQ_START_SUNNY)
 				temp.push_back(MON_SUNNY);
-			if (type == UNIQ_START_STAR)
+			if (type != UNIQ_START_STAR)
 				temp.push_back(MON_STAR);
-			if (type == UNIQ_START_LUNA)
+			if (type != UNIQ_START_LUNA)
 				temp.push_back(MON_LUNAR);
 			
 

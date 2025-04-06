@@ -22,7 +22,9 @@
 #include "seija.h"
 #include "lilly.h"
 #include "tribe.h"
+#include "localization.h"
 #include <iomanip>
+#include <string>
 
 extern HANDLE mutx;
 
@@ -394,35 +396,35 @@ bool GetGodAbility(int level, bool plus)
 			case 1:
 				you.Ability(SKL_SHINKI_1,true,!plus);
 				if(plus)
-					printlog("당신은 하급 마족의 작은 무리를 소환할 수 있다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_ADD),true,false,false,CL_white_puple);
 				else
-					printlog("더 이상 하급 마족의 작은 무리를 소환할 수 없다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE),true,false,false,CL_white_puple);
 				break;
 			case 2:
 				you.Ability(SKL_SHINKI_2,true,!plus);
 				if(plus)
-					printlog("당신은 위험을 무릅쓰고 신키의 중급 마족을 소환할 수 있다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_ADD),true,false,false,CL_white_puple);
 				else
-					printlog("더 이상 중급 마족을 소환할 수 없다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_REMOVE),true,false,false,CL_white_puple);
 				break;
 			case 3:
 				if(plus)
-					printlog("신키는 당신을 적대적인 소환수로부터 지켜준다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_ADD),true,false,false,CL_white_puple);
 				else
-					printlog("더 이상 적대적인 소환수로부터 보호받지 못한다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_REMOVE),true,false,false,CL_white_puple);
 				break;
 			case 4:
 				you.Ability(SKL_SHINKI_3,true,!plus);
 				if(plus)
-					printlog("당신은 위험을 무릅쓰고 신키의 상급 마족을 소환할 수 있다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_ADD),true,false,false,CL_white_puple);
 				else
-					printlog("더 이상 상급 마족을 소환할 수 없다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_REMOVE),true,false,false,CL_white_puple);
 				break;
 			case 5:
 				if(plus)
-					printlog("이제 당신은 P로부터 힘을 얻는다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD),true,false,false,CL_white_puple);
 				else
-					printlog("더 이상 P로부터 힘을 얻지 못한다.",true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE),true,false,false,CL_white_puple);
 				break;
 		}
 		return false;
@@ -431,44 +433,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 0:
 			if(plus)
-				printlog("당신은 취했을때 잘 피할 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 취해도 피하지 못한다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_REMOVE),true,false,false,CL_yuigi);
 			break;
 		case 1:
 			you.Ability(SKL_YUUGI_1,true,!plus);
 			if(plus)
-				printlog("당신은 물약을 술로 바꿔 마실 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 물약을 술로 바꿔 마실 수 없다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_REMOVE),true,false,false,CL_yuigi);
 			break;
 		case 2:
 			you.Ability(SKL_YUUGI_2,true,!plus);
 			if(plus)
-				printlog("당신은 적에게 저먼 스플렉스를 걸 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 적에게 저먼 스플렉스를 걸 수 없다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_REMOVE),true,false,false,CL_yuigi);
 			break;
 		case 3:
 			you.Ability(SKL_YUUGI_3,true,!plus);
 			if(plus)
-				printlog("당신은 적을 집어 던질 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 적을 집어 던질 수 없다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_REMOVE),true,false,false,CL_yuigi);
 			break;
 		case 4:
 			you.Ability(SKL_YUUGI_4,true,!plus);
 			if(plus)
-				printlog("당신은 오니의 포효를 외칠 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 포효할 수 없다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_REMOVE),true,false,false,CL_yuigi);
 			break;
 		case 5:
 			you.Ability(SKL_YUUGI_5,true,!plus);
 			if(plus)
-				printlog("당신은 드디어 삼보필살을 사용할 수 있다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_ADD),true,false,false,CL_yuigi);
 			else
-				printlog("더 이상 삼보필살을 사용할 수 없다.",true,false,false,CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_REMOVE),true,false,false,CL_yuigi);
 			break;
 		}
 		return false;
@@ -477,44 +479,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 			case 0:
 				if(plus)
-					printlog("시즈하는 잠에서 깬 적들이 외치는 확률을 크게 줄여준다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_ADD),true,false,false,CL_autumn);
 				else
-					printlog("더 이상 시즈하는 적의 외침을 줄여주지 않는다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_REMOVE),true,false,false,CL_autumn);
 				break;
 			case 1:
 				if(plus)
-					printlog("당신은 은밀하게 움직일 수 있는 단풍의 발자취를 남긴다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_ADD),true,false,false,CL_autumn);
 				else
-					printlog("더 이상 당신은 발자취에 단풍을 남기지 못한다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_REMOVE),true,false,false,CL_autumn);
 				break;
 			case 2:
 				you.Ability(SKL_SIZUHA_1,true,!plus);
 				if(plus)
-					printlog("당신은 단풍위에 있는 몬스터들에게 혼란을 걸 수 있다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_ADD),true,false,false,CL_autumn);
 				else
-					printlog("더 이상 당신은 단풍위의 몬스터들에게 혼란을 걸 수 없다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_REMOVE),true,false,false,CL_autumn);
 				break;
 			case 3:
 				you.Ability(SKL_SIZUHA_2,true,!plus);
 				if(plus)
-					printlog("당신은 끼고있는 방어구를 단풍 방어구로 만들 수 있다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD),true,false,false,CL_autumn);
 				else
-					printlog("더 이상 당신은 끼고있는 방어구를 단풍 방어구로 만들 수 없다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE),true,false,false,CL_autumn);
 				break;
 			case 4:
 				if(plus)
-					printlog("당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_ADD),true,false,false,CL_autumn);
 				else
-					printlog("더 이상 당신은 단풍 위에서 빠르게 움직일 수 없다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_REMOVE),true,false,false,CL_autumn);
 				break;
 			case 6:
 				if(you.god_value[GT_SHIZUHA][0]==0)
 				{
 					you.Ability(SKL_SIZUHA_3,true,!plus);
 					if(plus)
-						printlog("당신은 딱 한번 당신의 무기에 단풍의 힘을 불어넣을 수 있다.",true,false,false,CL_autumn);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_ADD),true,false,false,CL_autumn);
 					else
-						printlog("더 이상 당신은 당신의 무기에 단풍의 힘을 불어넣을 수 없다.",true,false,false,CL_autumn);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_REMOVE),true,false,false,CL_autumn);
 				}
 				break;
 		}
@@ -530,51 +532,51 @@ bool GetGodAbility(int level, bool plus)
 				{
 					it->identify_curse = true;
 				}
-				printlog("당신은 이제 아이템의 저주를 탐지할 수 있다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY0_ADD),true,false,false,CL_hina);
 			}
 			break;
 		case 1:
 			you.Ability(SKL_HINA_1,true,!plus);
 			if(plus)
-				printlog("당신은 저주걸린 아이템의 마이너스 인챈트를 플러스로 바꿀 수 있다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_ADD),true,false,false,CL_hina);
 			else
-				printlog("더 이상 저주걸린 아이템의 인챈트를 역전할 수 없다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_REMOVE),true,false,false,CL_hina);
 			break;
 		case 2:
 			you.Ability(SKL_HINA_2,true,!plus);
 			if(plus)
-				printlog("당신은 무기에 저주를 걸어서 강력한 힘을 얻을 수 있다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_ADD),true,false,false,CL_hina);
 			else
-				printlog("더 이상 무기에 저주를 걸어서 힘을 얻을 수 없다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_REMOVE),true,false,false,CL_hina);
 			break;
 		case 3:
 			you.Ability(SKL_HINA_3,true,!plus);
 			if(plus)
-				printlog("당신은 방어구에 저주를 걸어서 모든 데미지를 반사시킬 수 있다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD),true,false,false,CL_hina);
 			else
-				printlog("더 이상 방어구에 저주를 걸어서 데미지를 반사시킬 수 없다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE),true,false,false,CL_hina);
 			break;
 		case 4:
 			you.Ability(SKL_HINA_4,true,!plus);
 			if(plus)
-				printlog("당신은 장신구에 저주를 걸어서 체력과 영력을 회복할 수 있다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_ADD),true,false,false,CL_hina);
 			else
-				printlog("더 이상 장신구에 저주를 걸어서 체력과 영력을 회복할 수 없다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_REMOVE),true,false,false,CL_hina);
 			break;
 		case 5:
 			if(plus)
-				printlog("당신은 이제 저주를 흩뿌리고 다닌다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_ADD),true,false,false,CL_hina);
 			else
-				printlog("더 이상 저주를 흩뿌리고 다니지 않는다.",true,false,false,CL_hina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_REMOVE),true,false,false,CL_hina);
 			break;
 		case 6:
 			if(you.god_value[GT_HINA][0]==0)
 			{
 				you.Ability(SKL_HINA_5,true,!plus);
 				if(plus)
-					printlog("당신은 딱 한번 당신의 무기에 저주의 힘을 불어넣을 수 있다.",true,false,false,CL_hina);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_ADD),true,false,false,CL_hina);
 				else
-					printlog("더 이상 당신은 당신의 무기에 저주의 힘을 불어넣을 수 없다.",true,false,false,CL_hina);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_REMOVE),true,false,false,CL_hina);
 			}
 			break;
 		}
@@ -584,37 +586,37 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 1:
 			if(plus)
-				printlog("당신은 일정 데미지를 받으면 가끔 순간이동된다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_ADD),true,false,false,CL_yukari);
 			else
-				printlog("더 이상 데미지를 받을때 순간이동되지 않는다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_REMOVE),true,false,false,CL_yukari);
 			break;
 		case 2:
 			you.Ability(SKL_YUKARI_1,true,!plus);
 			if(plus)
-				printlog("당신은 경계로부터 지원사격을 요청할 수 있다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_ADD),true,false,false,CL_yukari);
 			else
-				printlog("더 이상 지원사격을 요청할 수 없다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_REMOVE),true,false,false,CL_yukari);
 			break;
 		case 3:
 			you.Ability(SKL_YUKARI_2,true,!plus);
 			if(plus)
-				printlog("당신은 경계를 타고 이동할 수 있다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_ADD),true,false,false,CL_yukari);
 			else
-				printlog("더 이상 경계를 타고 이동할 수 없다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_REMOVE),true,false,false,CL_yukari);
 			break;
 		case 4:
 			you.Ability(SKL_YUKARI_3,true,!plus);
 			if(plus)
-				printlog("당신은 결계를 만들 수 있다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_ADD),true,false,false,CL_yukari);
 			else
-				printlog("더 이상 결계를 만들 수 없다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_REMOVE),true,false,false,CL_yukari);
 			break;
 		case 5:
 			you.Ability(SKL_YUKARI_4,true,!plus);
 			if(plus)
-				printlog("당신은 차원을 고정시킬 수 있다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_ADD),true,false,false,CL_yukari);
 			else
-				printlog("더 이상 차원을 고정시킬 수 없다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_REMOVE),true,false,false,CL_yukari);
 			break;
 		}
 		return false;
@@ -624,7 +626,7 @@ bool GetGodAbility(int level, bool plus)
 		case 0:
 			if(plus)
 			{
-				printlog("에이린은 물약작용을 올려준다. 좋은물약위에서 기도하여 나쁜물약을 만들 수 있다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_ADD),true,false,false,CL_small_danger);
 				iden_list.potion_list[PT_POISON].iden = true;
 				iden_list.potion_list[PT_DOWN_STAT].iden = true;
 				iden_list.potion_list[PT_CONFUSE].iden = true;
@@ -633,49 +635,49 @@ bool GetGodAbility(int level, bool plus)
 			}
 			else
 			{
-				printlog("더 이상 물약의 작용을 올려주지 않는다. 더이상 나쁜 물약을 만들 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_REMOVE),true,false,false,CL_small_danger);
 			}
 			break;
 		case 1:
 			if(plus)
-				printlog("당신은 독물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_ADD),true,false,false,CL_small_danger);
 			else
-				printlog("더 이상 독물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_REMOVE),true,false,false,CL_small_danger);
 			break;
 		case 2:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 1);
 			you.Ability(SKL_EIRIN_0,true,!plus);
 			if(plus)
-				printlog("당신은 물약을 던질 수 있다. 이제 능력치감소물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_ADD),true,false,false,CL_small_danger);
 			else
-				printlog("더 이상 물약을 던질 수 없다. 능력치감소물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_REMOVE),true,false,false,CL_small_danger);
 			break;
 		case 3:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 2);
 			you.Ability(SKL_EIRIN_1,true,!plus);
 			if(plus)
-				printlog("당신은 신체개조를 할 수 있다. 당신은 이제 혼란물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_ADD),true,false,false,CL_small_danger);
 			else
-				printlog("더 이상 신체개조를 할 수 없다. 더 이상 혼란물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_REMOVE),true,false,false,CL_small_danger);
 			break;
 		case 4:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 3);
 			if(plus)
-				printlog("당신은 감속물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_ADD),true,false,false,CL_small_danger);
 			else
-				printlog("더 이상 감속물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_REMOVE),true,false,false,CL_small_danger);
 			break;
 		case 5:
 			if(you.s_stat_boost)
 				you.SetStatBoost(you.s_stat_boost, 4);
 			you.Ability(SKL_EIRIN_2,true,!plus);
 			if(plus)
-				printlog("이제 긴급수혈이 가능하다. 이제 마비물약에서 새로운 힘을 얻는다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_ADD),true,false,false,CL_small_danger);
 			else
-				printlog("더이상 긴급수혈을 할 수 없다. 더 이상 마비물약에서 새로운 힘을 얻을 수 없다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_REMOVE),true,false,false,CL_small_danger);
 			break;
 		case 6:
 			if(you.s_stat_boost)
@@ -705,30 +707,30 @@ bool GetGodAbility(int level, bool plus)
 				you.Ability(SKL_YUYUKO_ON,true,plus);
 			}
 			if(plus)
-				printlog("당신 주변엔 항상 유령이 모여든다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_ADD),true,false,false,CL_yuyuko);
 			else
-				printlog("더 이상 당신 주변에 유령이 모여들지 않는다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_REMOVE),true,false,false,CL_yuyuko);
 			break;
 		case 2:
 			you.Ability(SKL_YUYUKO_1,true,!plus);
 			if(plus)
-				printlog("유령을 원하는 곳으로 이동시킬 수 있다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_ADD),true,false,false,CL_yuyuko);
 			else
-				printlog("더 이상 유령을 이동시킬 수 없다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_REMOVE),true,false,false,CL_yuyuko);
 			break;
 		case 3:
 			you.Ability(SKL_YUYUKO_2,true,!plus);
 			if(plus)
-				printlog("잠시동안 유령의 빈도를 증가시킬 수 있다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_ADD),true,false,false,CL_yuyuko);
 			else
-				printlog("더 이상 유령의 빈도를 증가시킬 수 없다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_REMOVE),true,false,false,CL_yuyuko);
 			break;
 		case 5:
 			you.Ability(SKL_YUYUKO_3,true,!plus);
 			if(plus)
-				printlog("적 한명의 영혼을 속박할 수 있다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_ADD),true,false,false,CL_yuyuko);
 			else
-				printlog("더 이상 영혼을 속박할 수 없다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_REMOVE),true,false,false,CL_yuyuko);
 			break;
 		}
 		return false;
@@ -738,41 +740,41 @@ bool GetGodAbility(int level, bool plus)
 		case 0:
 			you.ResistUpDown(plus,RST_INVISIBLE);
 			if(plus)
-				printlog("당신은 이제 투명을 감지할 수 있다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 투명을 감지할 수 없다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_REMOVE),true,false,false,CL_danger);
 			break;
 		case 1:
 			you.Ability(SKL_SATORI_1,true,!plus);
 			if(plus)
-				printlog("당신은 적에게 트라우마를 보여줄 수 있다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 적에게 트라우마를 보여줄 수 없다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_REMOVE),true,false,false,CL_danger);
 			break;
 		case 2:
 			if(plus)
-				printlog("당신은 적으로부터 던전의 모양을 읽어낼 수 있다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 적으로부터 던전의 모양을 읽지 못한다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_REMOVE),true,false,false,CL_danger);
 			break;
 		case 3:
 			if(plus)
-				printlog("당신은 주변의 적의 기척을 읽을 수 있다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 주변의 적의 기척을 읽을 수 없다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_REMOVE),true,false,false,CL_danger);
 			break;
 		case 4:
 			you.Ability(SKL_SATORI_2,true,!plus);
 			if(plus)
-				printlog("당신은 적의 생각을 읽어낼 수 있다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 생각을 읽을 수 없다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_REMOVE),true,false,false,CL_danger);
 			break;
 		case 5:
 			if(plus)
-				printlog("당신은 사토리님의 관리를 직접 받는 소중한 애완동물이다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_ADD),true,false,false,CL_danger);
 			else
-				printlog("더 이상 사토리님은 당신을 직접 관리하지않는다.",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_REMOVE),true,false,false,CL_danger);
 			break;
 		}
 		return false;
@@ -794,28 +796,28 @@ bool GetGodAbility(int level, bool plus)
 		}
 		case 2:
 			if (plus) {
-				printlog("세이자는 당신의 징벌로부터의 도주를 돕는다.", true, false, false, CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_ADD), true, false, false, CL_seija);
 			}
 			else {
-				printlog("세이자는 더 이상 징벌로부터 당신을 돕지 않는다.", true, false, false, CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_REMOVE), true, false, false, CL_seija);
 			}
 			break;
 		case 3:
 			you.Ability(SKL_SEIJA_1,true,!plus);
 			if (plus) {
-				printlog("당신은 위치를 뒤집을 수 있다.", true, false, false, CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_ADD), true, false, false, CL_seija);
 			}
 			else {
-				printlog("더 이상 위치를 뒤집을 수 없다.",true,false,false,CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_REMOVE),true,false,false,CL_seija);
 		    }
 			break;
 		case 5:
 			you.Ability(SKL_SEIJA_2,true,!plus);
 			you.Ability(SKL_SEIJA_GIFT, true, true);
 			if(plus)
-				printlog("당신은 이제 모두의 시야를 뒤집을 수 있다.",true,false,false,CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_ADD),true,false,false,CL_seija);
 			else
-				printlog("더 이상 모두의 시야를 뒤집을 수 없다.",true,false,false,CL_seija);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_REMOVE),true,false,false,CL_seija);
 			break;
 		}
 		return false;
@@ -826,43 +828,43 @@ bool GetGodAbility(int level, bool plus)
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_2,true,!plus);
 			if(plus)
-				printlog("당신은 이제 요정들을 동료로 권유할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_ADD),true,false,false,CL_lilly);
 			else
-				printlog("더 이상 요정을 동료로 권유할 수 없다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_REMOVE),true,false,false,CL_lilly);
 			if(plus)
-				printlog("당신은 이제 요정들을 근처로 호출할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_ADD),true,false,false,CL_lilly);
 			else
-				printlog("더 이상 요정을 호출할 수 없다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_REMOVE),true,false,false,CL_lilly);
 			break;
 		case 2:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			if(plus)
-				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD),true,false,false,CL_lilly);
 			break;
 		case 3:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_3,true,!plus);
 			if(plus)
-				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD),true,false,false,CL_lilly);
 			if(plus)
-				printlog("당신은 이제 요정을 치유 할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_ADD),true,false,false,CL_lilly);
 			else
-				printlog("더 이상 요정을 치유 할 수 없다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_REMOVE),true,false,false,CL_lilly);
 			break;
 		case 4:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			if(plus)
-				printlog("당신은 이제 한명의 요정을 더 권유할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD),true,false,false,CL_lilly);
 			break;
 		case 5:
 			you.Ability(SKL_LILLY_1,true,!plus);
 			you.Ability(SKL_LILLY_4,true,!plus);
 			if(plus)
-				printlog("당신은 마지막 동료가 될 요정을 권유할 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_FINAL_ADD),true,false,false,CL_lilly);
 			if(plus)
-				printlog("당신은 이제 일시적으로 자신의 힘을 요정들에게 나눠줄 수 있다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_ADD),true,false,false,CL_lilly);
 			else
-				printlog("더 이상 요정대전쟁을 벌일 수 없다.",true,false,false,CL_lilly);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_REMOVE),true,false,false,CL_lilly);
 			break;
 		}
 		return false;
@@ -884,44 +886,44 @@ bool GetGodAbility(int level, bool plus)
 		{
 		case 0:
 			if (plus)
-				printlog("당신은 이제 문을 자유자재로 넘나들며 투시할 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 문을 자유자재로 드나들 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_REMOVE), true, false, false, CL_okina);
 			break;
 		case 1:
 			you.Ability(SKL_OKINA_1, true, !plus);
 			if (plus)
-				printlog("당신은 이제 원하는 벽에 문을 만들 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 문을 만들어 낼 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_REMOVE), true, false, false, CL_okina);
 			break;
 		case 2:
 			you.Ability(SKL_OKINA_2, true, !plus);
 			if (plus)
-				printlog("당신은 이제 멀리 떨어진 열린 문을 강제로 닫아 잠글 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 문을 강제로 닫을 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_REMOVE), true, false, false, CL_okina);
 			break;
 		case 3:
 			you.Ability(SKL_OKINA_3, true, !plus);
 			if (plus)
-				printlog("당신은 이제 적의 등 뒤에 백도어를 만들어 이동할 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 적의 등뒤에 백도어를 만들 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_REMOVE), true, false, false, CL_okina);
 			break;
 		case 4:
 			you.Ability(SKL_OKINA_4, true, !plus);
 			if (plus)
-				printlog("당신은 이제 크레이지 백댄서즈를 호출할 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 크레이지 백댄서즈를 호출할 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_REMOVE), true, false, false, CL_okina);
 			break;
 		case 5:
 			you.Ability(SKL_OKINA_5, true, !plus);
 			if (plus)
-				printlog("당신은 이제 등 뒤의 문을 열고 도망칠 수 있다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_ADD), true, false, false, CL_okina);
 			else
-				printlog("더 이상 등 뒤의 문으로 도망칠 수 없다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_REMOVE), true, false, false, CL_okina);
 			break;
 		}
 		return false;
@@ -931,28 +933,28 @@ bool GetGodAbility(int level, bool plus)
 		case 1:
 			you.Ability(SKL_JUNKO_1, true, !plus);
 			if (plus)
-				printlog("당신은 이제 단순한 탄막을 쏠 수 있다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_ADD), true, false, false, CL_junko);
 			else
-				printlog("더 이상 당신은 단순한 탄막을 쏠 수 없다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_REMOVE), true, false, false, CL_junko);
 			break;
 		case 2:
 			you.Ability(SKL_JUNKO_2, true, !plus);
 			if (plus)
-				printlog("당신은 이제 순수한 힘을 얻을 수 있다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_ADD), true, false, false, CL_junko);
 			else
-				printlog("더 이상 당신은 순수한 힘을 얻을 수 없다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_REMOVE), true, false, false, CL_junko);
 			break;
 		case 4:
 			you.Ability(SKL_JUNKO_3, true, !plus);
 			if (plus)
-				printlog("당신은 이제 순수한 살의를 지닐 수 있다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_ADD), true, false, false, CL_junko);
 			else
-				printlog("더 이상 당신은 순수한 살의를 지닐 수 없다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_REMOVE), true, false, false, CL_junko);
 			break;
 		case 6:
 			you.Ability(SKL_JUNKO_4, true, !plus);
 			if (plus) {
-				printlog("당신은 이제 순화할 수 있다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_ADD), true, false, false, CL_junko);
 				if (you.god_value[GT_JUNKO][0] == 0)
 				{
 					random_extraction<int> rand_;
@@ -971,7 +973,7 @@ bool GetGodAbility(int level, bool plus)
 				MoreWait();
 			}
 			else
-				printlog("더 이상 당신은 순화할 수 없다.", true, false, false, CL_junko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE), true, false, false, CL_junko);
 			break;
 		}
 		return false;
@@ -993,7 +995,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("죠온과 시온은 적의 지갑을 강탈하는 것을 기뻐했다.", true, false, false, CL_joon_and_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT), true, false, false, CL_joon_and_sion);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1014,7 +1016,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("카나코는 당신의 살생을 기뻐했다.", true, false, false, CL_help);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)), true, false, false, CL_help);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1028,7 +1030,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			}
 			else
 			{ //아군일때
-				printlog("카나코는 당신의 행동에 분노했다. 참회하라!", true, false, false, CL_small_danger);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_RAGE, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)), true, false, false, CL_small_danger);
 				you.PietyUpDown(-5);
 				return true;
 			}
@@ -1039,7 +1041,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("스와코는 당신의 살생을 기뻐했다.", true, false, false, CL_swako);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_SUWAKO)), true, false, false, CL_swako);
 
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1068,7 +1070,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					case SWAKO_2_KILL_POWER:
 						if (randA(200) < you.piety)
 						{
-							printlog("파워가 회복되었다.", false, false, false, CL_normal);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_RECOVER_POWER), false, false, false, CL_normal);
 							you.PowUpDown(rand_int(3, 5) + randA(mon_->level / 4));
 						}
 						break;
@@ -1086,7 +1088,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{
 				if(!mon_->isUserAlly())
 				{ //적일때
-					printlog("미노리코는 흥분한 상태로 외쳤다.\"바로 그거야!\"",true,false,false,CL_warning);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT),true,false,false,CL_warning);
 					you.PietyUpDown(5*(isSprint()?5:1));
 				}
 			}
@@ -1097,7 +1099,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("미마는 당신의 살생을 기뻐했다.", false, false, false, CL_green);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_MIMA)), false, false, false, CL_green);
 
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
@@ -1111,7 +1113,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				{
 					if (randA(120) < you.piety)
 					{
-						printlog("영력이 회복되었다.", false, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_REST_MP), false, false, false, CL_normal);
 						you.MpUpDown(randA_1(1 + mon_->level / 3));
 					}
 				}
@@ -1127,7 +1129,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("유우기는 당신의 승리를 기뻐했다.", true, false, false, CL_yuigi);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_ACCECPT), true, false, false, CL_yuigi);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1164,11 +1166,11 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				if(mon_->id == MON_LETTY)
 				{
-					printlog("시즈하는 박수를 쳤다.\"훌륭해\"",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT),true,false,false,CL_autumn);
 					you.PietyUpDown(4);
 				}
 				else
-					printlog("시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.",true,false,false,CL_autumn);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_ACCECPT),true,false,false,CL_autumn);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1188,7 +1190,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if(!mon_->isUserAlly())
 			{ //적일때
-				printlog("유카리는 당신의 살생을 기뻐했다.",true,false,false,CL_yukari);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_YUKARI)),true,false,false,CL_yukari);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1217,7 +1219,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						}
 					}
 					if(return_)
-						printlog("에이린은 당신의 강함에 관심을 가졌다.", true, false, false, CL_small_danger);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_ACCECPT), true, false, false, CL_small_danger);
 					return return_;
 				}
 			}
@@ -1266,7 +1268,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if(!mon_->isUserAlly())
 			{ //적일때
-				printlog("유유코는 당신의 살생을 기뻐했다.",true,false,false,CL_yuyuko);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_YUYUKO)),true,false,false,CL_yuyuko);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1305,7 +1307,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{ //적일때
-				printlog("오키나는 당신의 살생을 기뻐했다.", true, false, false, CL_okina);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_OKINA)), true, false, false, CL_okina);
 				bool return_ = false;
 				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
@@ -1325,7 +1327,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{
 				if (!mon_->isUserAlly())
 				{ //적일때
-					printlog("순호는 당신의 살생을 기뻐했다.", true, false, false, CL_junko);
+					printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_JUNKO)), true, false, false, CL_junko);
 					bool return_ = false;
 					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
 						if (getPietyPercent(2, mon_->SetStrong()))
@@ -1403,7 +1405,7 @@ bool GodAccpect_GetPitem()
 		if (you.god_value[GT_JOON_AND_SION][0] == 2 && !you.GetPunish(GT_JOON_AND_SION) && pietyLevel(you.piety) >= 2)
 		{
 			int hp_ = rand_int(you.GetMaxHp() * 6 / 100, you.GetMaxHp() * 10 / 100) + 1;
-			printlog("P로부터 회복하였다. ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P) + " ", false, false, false, CL_normal);
 			you.HpUpDown(hp_, DR_EFFECT);
 			return true;
 		}
@@ -1472,7 +1474,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 					if(you.GetHp() -value_>0)
 					{
 						you.hp-=value_;
-						printlog("보호되었다!",false,false,false,CL_swako);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_PROTECT),false,false,false,CL_swako);
 					}
 				}
 				break;
@@ -1498,9 +1500,9 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 				{
 					you.Teleport();
 					if(env[current_level].isInSight(you.position))
-						printlog("당신은 약간 공간이 어긋난 것을 눈치챘다.",false,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_SAME),false,false,false,CL_normal);
 					else
-						printlog("갑자기 당신 주변이 변화했다.",false,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT),false,false,false,CL_normal);
 				}
 				else
 				{
@@ -1539,7 +1541,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	default:
 		return false;
 	case GT_YUUGI:
-		printlog("유우기는 당신의 마법에 분노했다!",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC),true,false,false,CL_small_danger);
 		you.PietyUpDown(-5);
 		return false;
 	case GT_SHIZUHA:
@@ -1547,7 +1549,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_YUKARI:
 		if(spell_ == SPL_BLINK || spell_ == SPL_TELEPORT_SELF)
 		{			
-			printlog("유카리는 당신의 위험한 전이마법 사용에 분노했다!",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE),true,false,false,CL_small_danger);
 			you.PietyUpDown(-5);
 			return false;
 		}
@@ -1641,22 +1643,22 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 		{
 			you.PietyUpDown(-200);
 			if (down_ && env[current_level].popular == 1) {
-				printlog("새로운 던전에 진입하면서 새로운 인기도로 시작한다.", true, false, false, CL_miko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_ENTER_NEW_DUNGEON), true, false, false, CL_miko);
 				you.PietyUpDown(60, true);
 			}
 			else {
-				printlog("던전을 옮기면서 인기도가 초기화되었다.", true, false, false, CL_miko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON), true, false, false, CL_miko);
 
 			}
 		}
 		else if (down_)
 		{
-			printlog("층을 옮기면서 인기도가 조금 내려갔다.", true, false, false, CL_miko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR), true, false, false, CL_miko);
 			you.PietyUpDown(-10);
 		}
 		else
 		{
-			printlog("계단을 타고 올라가면서 인기도가 크게 내려갔다", true, false, false, CL_miko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_UP_FLOOR), true, false, false, CL_miko);
 			you.PietyUpDown(-30);
 		}
 	}
@@ -1913,7 +1915,7 @@ bool GodAccpect_Abandon(god_type god)
 			}
 			if(k>0)
 			{
-				printarray(true,false,false,CL_danger,1,"릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABANDON), true,false,false,CL_danger);
 			}
 		}
 		return false;
@@ -2181,17 +2183,10 @@ void Pray()
 	else
 	{
 		enterlog();
-		dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
-		if(type == DG_TEMPLE_SUWAKO && isTutorial() && !you.s_poison)
-		{
-			printlog("스와코는 말했다 : 던전에서 죽는다고 진짜 죽는건 아니야. 모든 기록은 사라지지만.",true,false,false,CL_warning);
-			printlog("스와코는 말했다 : 그래서 크롤의 세계에선 죽는 것도 일이란다! 다음에 보자 사나에!",true,false,false,CL_warning);
-			you.SetPoison(150, 150,true);
-		}
-		
+		dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;		
 		if(type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST)
 		{
-			printlog("당신은 제단에 기도를 드렸다.",true,false,false,CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE),true,false,false,CL_warning);
 			MoreWait();
 
 
@@ -2213,7 +2208,7 @@ void Pray()
 				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
-				printsub("신도가 되려면 Y키를, 취소하려면 N키를 누른다.",true,CL_help);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),true,CL_help);
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);
 				bool ok_= true;
@@ -2244,7 +2239,7 @@ void Pray()
 		}
 		else
 		{
-			printlog("당신은 삶의 의미에 대해 잠시 생각했다.",true,false,false,CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_AHTEISM),true,false,false,CL_warning);
 		}
 
 		//switch(type)
@@ -2317,223 +2312,397 @@ void Pray()
 
 void GodInfor(god_type god)
 {
-	printsub("                                                    신앙",true,CL_normal);
+	printsub("                                                    " + LocalzationManager::locString(LOC_SYSTEM_FAITH),true,CL_normal);
 	switch(god)
 	{
 	case GT_SUWAKO:
-		printsub("모리야 스와코 - 토착신의 정점",true,CL_swako);
-		printsub("",true,CL_normal);
-		printsub("스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.",true,CL_normal);
-		printsub("스와코는 신자들에게 변덕스러운 권능을 준다.",true,CL_normal);
-		printsub("그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.",true,CL_normal);
-		printsub("",true,CL_normal);
-		break;
-	case GT_MIMA:
-		printsub("미마 - 아득한 꿈에 운명을 맡긴 정신",true,CL_green);
-		printsub("",true,CL_normal);
-		printsub("미마는 재앙신격인 존재로 악령이다.",true,CL_normal);
-		printsub("신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.",true,CL_normal);
-		printsub("특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.",true,CL_normal);
-		printsub("",true,CL_normal);
-		break;
-	case GT_YUYUKO:
-		printsub("사이교우지 유유코 - 저승누각의 망령소녀",true,CL_yuyuko);
-		printsub("",true,CL_normal);
-		printsub("유유코는 백옥루에 사는 사이교우지의 아가씨이다.",true,CL_normal);
-		printsub("그녀는 죽음을 조종 할 수 있는 강력한 능력을 가지고 있어서 신도들에게 죽음의 힘을 선물해준다.",true,CL_normal);
-		printsub("그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.",true,CL_normal);
-		printsub("",true,CL_normal);
-		break;
-	case GT_JOON_AND_SION:
-		printsub("요리가미 죠온 & 시온 - 최흉최악의 자매",true, CL_joon_and_sion);
-		printsub("",true,CL_normal);
-		printsub("낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.",true,CL_normal);
-		printsub("죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서",true,CL_normal);
-		printsub("믿는 것만으로도 소모품을 낭비하고 잃어버리는 불행이 생기게 될 것이다.",true,CL_normal);
-		printsub("그럼에도 둘을 신앙한다면 직접 빙의하는 것으로 직접적으로 그녀들의 권능들을 사용하게 된다.", true, CL_normal);
-		printsub("그녀들의 권능은 강력하지만, 빙의와 동시에 그에 따른 그녀들의 불운도 더욱 강해질것이다.", true, CL_normal);
-		printsub("신도들은 다른 적들을 죽여서 그들의 돈을 갈취하는 것으로 신앙심을 얻을 수 있다.", true, CL_normal);
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TITLE), true, CL_swako);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
 		printsub("", true, CL_normal);
 		break;
-	case GT_SHINKI:
-		printsub("신키 - 마계의 신",true,CL_white_puple);
-		printsub("",true,CL_normal);
-		printsub("신키는 마계의 주인이자 마계를 창조한 마계의 신이다.",true,CL_normal);
-		printsub("창조의 능력을 이용해서 신키는 신도들에게 강력한 마족들을 선물한다.",true,CL_normal);
-		printsub("또한 신키는 당신을 적대적인 소환수로부터 지켜주거나 P를 모을때마다 체력과 영력을 회복시켜준다.",true,CL_normal);
-		printsub("일정수준 이상의 마족들은 당신을 언제라도 배신할 수 있는 걸 염두해야된다.",true,CL_normal);
-		printsub("신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_MIMA: {
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TITLE), true, CL_green);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
+	}
+	case GT_YUYUKO: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TITLE), true, CL_yuyuko);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
+		break;
+	}
+	case GT_JOON_AND_SION: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TITLE), true, CL_joon_and_sion);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
+		break;
+	}
+	case GT_SHINKI: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_TITLE), true, CL_white_puple);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
+		break;
+	}
 	case GT_MINORIKO:
-		printsub("아키 미노리코 - 풍족과 수확의 상징",true,CL_warning);
-		printsub("미노리코는 가을의 수확을 상징하는 신으로 신도에게 풍족함을 선사한다.",true,CL_normal);
-		printsub("신도들은 미노리코에게 풍족한 음식을 내려받게 되고 포만감과 체력을 보장받는다.",true,CL_normal);
-		printsub("신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TITLE), true, CL_warning);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_SHIZUHA:
-		printsub("아키 시즈하 - 외로움과 임종의 상징",true,CL_small_danger);
-		printsub("",true,CL_normal);
-		printsub("아키 시즈하는 단풍의 신이다.",true,CL_normal);
-		printsub("시즈하는 신도들의 당신의 존재감을 낮추어 은밀하게 다닐 수 있게 도와준다.",true,CL_normal);
-		printsub("그녀의 권능은 암살자들에게 큰 혜택을 주며 중갑옷의 패널티도 크게 상쇄받을 수 있다.",true,CL_normal);
-		printsub("시즈하는 시끄러운 자들의 시체가 낙엽처럼 떨어지는 것을 기뻐한다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_SHIZUHA: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TITLE), true, CL_small_danger);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_EIRIN:
-		printsub("야고코로 에이린 - 달의 두뇌",true,CL_small_danger);
-		printsub("",true,CL_normal);
-		printsub("그녀는 모든 약을 제조할 수 있는 달의 최고의 현자로 천재 약사이다.",true,CL_normal);
-		printsub("그녀의 신도로 들어가면 여러가지 물약들을 받게되고 추가적인 효과를 얻게 된다.",true,CL_normal);
-		printsub("또한 자신의 몸을 개조하거나 부작용을 감당하는 극적인 치료도 가능해진다.",true,CL_normal);
-		printsub("신도는 그녀의 실험대상이 될 각오를 할 수 있다면 그만큼의 보답을 받을 수 있을 것이다.",true,CL_normal);
-		printsub("신도는 이로운 물약의 위에서 기도를 하여 포션을 바치거나 물약을 마시는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
-		printsub("또한 자주는 아니지만 적을 죽였을때 가끔씩 신앙심을 얻을 수 도 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_EIRIN: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TITLE), true, CL_small_danger);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_KANAKO:
-		printsub("야사카 카나코 - 산판과 호수의 권화",true,CL_help);
-		printsub("",true,CL_normal);
-		printsub("카나코는 건(하늘)을 창조하는 능력을 가진 신으로 본래는 바람의 신이지만 산의 신으로 모셔지고 있다.",true,CL_normal);
-		printsub("그녀는 신자들에게 신앙을 받는 것으로 강력한 전투 능력을 보답한다.",true,CL_normal);
-		printsub("특히 근접전사와 원거리탄막으로 싸우는 자에게 큰 도움이 될 것이다.",true,CL_normal);
-		printsub("신자들은 계속되는 전투로 그녀에게 신앙을 바쳐야한다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_KANAKO: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TITLE), true, CL_help);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
+	}
 	case GT_YUKARI:
-		printsub("야쿠모 유카리 - 경계속에 숨은 요괴",true,CL_yukari);
-		printsub("야쿠모 유카리는 환상향에서도 이름있는 강력한 경계의 요괴다.",true,CL_normal);
-		printsub("유카리의 식신으로 들어가게 되면 그녀에게 경계와 관련된 능력을 얻을 수 있다.",true,CL_normal);
-		printsub("강력한 전이능력을 제공받지만 권능을 제외한 다른 전이능력을 금지하고",true,CL_normal);
-		printsub("제어하기 힘든 강력한 전이 능력은 역으로 신도를 위험하게 만들수도 있다.",true,CL_normal);
-		//printsub("그녀의 신전은 스키마 안쪽이라는 특수한 던전에 주로 존재하며 그녀의 식신들은 여기에서 시작하게 된다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TITLE), true, CL_yukari);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_HINA:
-		printsub("카기야마 히나 - 숨어있는 액막이 인형 신",true,CL_hina);
-		printsub("",true,CL_normal);
-		printsub("히나는 액을 모아서 재앙을 방지하는 재앙신이다.",true,CL_normal);
-		printsub("그녀로부터 액을 받아서 저주를 몸에 지니는 것으로 그녀의 권능을 얻을 수 있다.",true,CL_normal);
-		printsub("던전을 탐험하는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_HINA: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TITLE), true, CL_hina);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_SATORI:
-		printsub("코메이지 사토리 - 원령도 두려워하는 소녀",true,CL_danger);
-		printsub("",true,CL_normal);
-		printsub("사토리는 지령전의 주인으로 마음을 읽는 요괴이다.",true,CL_normal);
-		printsub("사토리를 믿는다는 것은 그녀의 펫이 된다는 얘기와도 같고 그녀의 힘을 받을 수 있게 된다.",true,CL_normal);
-		printsub("사토리는 방임주의이기때문에 전투에 직접 관련된 능력은 별로 주진 않는다.",true,CL_normal);
-		printsub("그러나 그녀의 마음을 읽는 능력으로 던전의 지형 정보를 얻거나 위치를 알아낼 수 있다.",true,CL_normal);
-		printsub("또한 상대의 마음 속으로부터 트라우마를 읽어내거나 상대의 생각을 통째로 읽어내 농락할수도 있다.",true,CL_normal);
-		printsub("생각을 간파당한 상대는 모든 디버프 마법에 취약해지므로 정신술을 연마한 사람에게 도움이 될 것이다.",true,CL_normal);
-		printsub("그녀의 애완동물들은 던전을 탐험하는 것으로 그녀의 호감을 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_SATORI: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TITLE), true, CL_danger);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
+	}
 	case GT_YUUGI:
-		printsub("호시구마 유우기 - 일컬어지는 괴력난신",true,CL_yuigi);
-		printsub("",true,CL_normal);
-		printsub("유우기는 지하의 옛도시에 살고 있는 오니이다. 유우기는 괴력난신의 오니로 강력한 힘을 신도에게 준다.",true,CL_normal);
-		printsub("그녀의 힘은 근접 전투를 하면서 상대를 매치거나 집어던지는 등 레슬링같은 전투를 해낼 수 있다.",true,CL_normal);
-		printsub("또한 오니의 힘으로 포효를 하여 상대를 벙어리로 만들거나 오니의 궁극기 또한 사용할 수 있게 된다.",true,CL_normal);
-		printsub("단, 유우기는 신도가 마법의 힘에 의지해 싸우는 것을 싫어한다.",true,CL_normal);
-		printsub("그녀의 신앙심은 전투에서 승리하는 것으로 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TITLE), true, CL_yuigi);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_TENSI:
-		printsub("히나나이 텐시 - 비상비비상천의 아가씨",true,CL_tensi);
-		printsub("",true,CL_normal);
-		printsub("텐시는 유정천의 제멋대로인 천인 아가씨이다.",true,CL_normal);
-		printsub("그녀는 지루한 천계생활에 따분해하던차 이 이변을 계기로 자신을 믿고자하는 신도들을 장난감처럼 취급한다.",true,CL_normal);
-		printsub("텐시는 신도에게 어떠한 권능도 내려주지않는다. 모든 행동은 그녀의 변덕대로 이루어진다. ",true,CL_normal);
-		printsub("신도가 항상 위험천만한 전투를 반복하여 그녀의 흥미를 최대한으로 끌어낸다면 강력한 도움을 받을 수 있다.",true,CL_normal);
-		printsub("하지만 신도가 안이한 안전을 바란다면 곧 자신의 생각을 후회하게 될 것이다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_TENSI: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TITLE), true, CL_tensi);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_BYAKUREN:
-		printsub("히지리 뱌쿠렌 - 봉인된 대마법사",true,CL_white_blue);
-		printsub("",true,CL_normal);
-		printsub("뱌쿠렌은 마계에 봉인되어있었던 대마법사로 환상향에 절인 명련사를 세워 불교의 가르침을 전한다.",true,CL_normal);
-		printsub("그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.",true,CL_normal);
-		printsub("그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.",true,CL_normal);
-		printsub("신도는 만나보지못한 새로운 사람들을 만나는 것으로 신앙심을 얻을 수 있다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_BYAKUREN: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TITLE), true, CL_white_blue);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_SEIJA:
-		printsub("키진 세이자 - 역습의 아마노자쿠",true,CL_seija);
-		printsub("",true,CL_normal);
-		printsub("세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.",true,CL_normal);
-		printsub("세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.",true,CL_normal);
-		printsub("현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.",true,CL_normal);
-		printsub("그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고",true,CL_normal);
-		printsub("그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.",true,CL_normal);
-		printsub("그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_SEIJA: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TITLE), true, CL_seija);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_LILLY:
-		printsub("릴리 화이트 - 봄을 나르는 요정",true,CL_lilly);
-		printsub("",true,CL_lilly);
-		printsub("릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.",true,CL_normal);
-		printsub("그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.",true,CL_normal);
-		printsub("그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.",true,CL_normal);
-		printsub("동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.",true,CL_normal);
-		printsub("당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. ",true,CL_normal);
-		printsub("본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.",true,CL_normal);
-		printsub("릴리화이트는 이 세상을 탐험하는 것을 좋아한다.",true,CL_normal);
-		printsub("",true,CL_normal);
+	}
+	case GT_LILLY: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_TITLE), true, CL_lilly);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_MIKO:
-		printsub("토요사토미미노 미코 - 우주를 관장하는 전능 도사", true, CL_miko);
-		printsub("", true, CL_miko);
-		printsub("토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.", true, CL_normal);
-		printsub("그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.", true, CL_normal);
-		printsub("인기도는 빠른 속도로 오르며 적들의 욕망을 읽거나 죽임으로서 인기도를 모을 수 있지만", true, CL_normal);
-		printsub("층을 올라가거나 서브던전이 바뀌면 인기도가 떨어지며 권능은 인기도를 크게 소모하게 된다.", true, CL_normal);
-		printsub("미코의 권능인 도술은 반영구적이며 지속시간없이 유지되지만 층을 이동할 경우 사라진다.", true, CL_normal);
-		printsub("", true, CL_miko);
+	}
+	case GT_MIKO: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TITLE), true, CL_miko);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_OKINA:
-		printsub("마타라 오키나 - 궁극의 절대비신", true, CL_okina);
-		printsub("", true, CL_okina);
-		printsub("마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.", true, CL_normal);
-		printsub("그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.", true, CL_normal);
-		printsub("그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.", true, CL_normal);
-		printsub("문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.", true, CL_normal);
-		printsub("또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.", true, CL_normal);
-		printsub("그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.", true, CL_normal);
-		printsub("", true, CL_okina);
+	}
+	case GT_OKINA: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TITLE), true, CL_okina);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	case GT_JUNKO:
-		printsub("순호", true, CL_junko);
-		printsub("", true, CL_junko);
-		printsub("순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.", true, CL_normal);
-		printsub("그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.", true, CL_normal);
-		printsub("그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고", true, CL_normal);
-		printsub("순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.", true, CL_normal);
-		printsub("기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.", true, CL_normal);
-		printsub("그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.", true, CL_normal);
-		printsub("그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.", true, CL_normal);
+	}
+	case GT_JUNKO: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_TITLE), true, CL_junko);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
-	default:
-		printsub("버그신",true,CL_danger);
-		printsub("",true,CL_normal);
-		printsub("이 신은 버그다!",true,CL_normal);
-		printsub("버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.",true,CL_normal);
-		printsub("이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.",true,CL_normal);
-		printsub("버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.",true,CL_normal);
-		printsub("",true,CL_normal);
-		printsub("버그신은 동방크롤에서 가장 악한 신이다.",true,CL_danger);
-		printsub("",true,CL_normal);
+	}
+	default: 
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_BUG_TITLE), true, CL_danger);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_BUG_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
 		break;
+	}
 	}
 }
 
 
 void God_show()
 {
+	const int cost_pos = 90;
+	ostringstream ss;
 	if(you.god == GT_NONE)
 	{
-		printlog("당신은 아직 신을 믿고 있지 않다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_AHTEISM),true,false,false,CL_normal);
 		return;
 	}
 	deletesub();
@@ -2542,7 +2711,11 @@ void God_show()
 	GodInfor(you.god);
 	printsub("",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub("권능들:                                                           (비용)",true,CL_normal);
+	ss << LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ":";
+	string cost = "(" + LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ")";
+	ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+
+	printsub(ss.str(),true,CL_normal);
 	printsub("",true,CL_normal);
 	int level_ = pietyLevel(you.piety);
 	switch(you.god)
@@ -2555,79 +2728,144 @@ void God_show()
 	case GT_JOON_AND_SION:
 		if (level_ >= 0)
 		{
-			printsub("당신은 역병신과 빈곤신의 저주를 받고 있다.                                            (패시브)", true, CL_joon_and_sion);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_joon_and_sion);
 			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
-				printsub(" └ 당신은 소모품을 사용할때 가끔 2~3개를 한번에 소모한다.", true, CL_joon_and_sion);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1), true, CL_joon_and_sion);
 			}
 			else {
-				printsub(" └ 당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)", true, CL_joon);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2), true, CL_joon);
 			}
 			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
-				printsub(" └ 줍지않은 소모품은 천천히 사라져간다. 소모품을 버리면 일정 확률로 사라진다.", true, CL_joon_and_sion);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3), true, CL_joon_and_sion);
 			}
 			else {
-				printsub(" └ 줍지않은 소모품은 빠른 속도로 사라져간다. 소모품을 버리면 무조건 사라진다. (강화됨)", true, CL_sion);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4), true, CL_sion);
 			}
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_JOON_AND_SION))
 		{
-			printsub("당신은 잠시동안 죠온이나 시온을 빙의할 수 있다.                                       (액티브)", true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ACTIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("죠온이 빙의한 동안엔 모든 데미지가 증폭되며 데미지를 줄때마다 파워가 소모된다.        (패시브)", true, CL_joon);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("시온이 빙의한 동안엔 파워를 주워도 파워가 오르지 않는 대신 체력을 회복한다.           (패시브)", true, CL_sion);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 죠온이나 시온이 당신의 파워를 이용한다.                               (패시브)", true, CL_bad);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 4 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("죠온이 빙의한 동안엔 소모품을 낭비하면 무작위 버프를 얻는다.                          (패시브)", true, CL_joon);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("시온이 빙의한 동안엔 사망시 소모품을 대량으로 잃는 대신 죽음을 무효로 한다.           (패시브)", true, CL_sion);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 죠온이나 시온이 당신의 소모품을 이용한다.                             (패시브)", true, CL_bad);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				printsub("당신은 시야내 적에게 혼란과 데미지를 줄 수 있다.                               (빙의시 한번만)", true, CL_joon);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
 			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				printsub("당신은 시야내 적에게 감속을 건 후에 시야를 가리는 안개를 뿌릴 수 있다.         (빙의시 한번만)", true, CL_sion);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 죠온이나 시온의 범위 권능을 사용할 수 있다.                    (빙의시 한번만)", true, CL_bad);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
 		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
 		{
 			if (you.god_value[GT_JOON_AND_SION][0] != 0) {
-				printsub("당신은 빈곤신을 상대에 빙의시키는 필승의 전략을 사용할 수 있다.                         (신앙)", true, CL_joon_and_sion);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_joon_and_sion);
 				printsub("", true, CL_normal);
 			}
 			else {
-				printsub("빙의를 하게되면 최흉최악의 전략을 사용할 수 있다.                                       (신앙)", true, CL_bad);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
 		}
@@ -2635,44 +2873,84 @@ void God_show()
 	case GT_BYAKUREN:
 		if(level_ >= 1 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("히지리는 당신이 배울 수 있는 마법레벨의 한계를 늘린다.                     (패시브)",true,CL_white_blue);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("당신은 순간적으로 지능을 강화시킬 수 있다.                                   (신앙)",true,CL_white_blue);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("당신은 근력이 강화되어 낮은 수준의 갑옷패널티의 마법실패율을 무시한다.     (패시브)",true,CL_white_blue);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("히지리는 당신의 강화 마법들을 보조해준다.                                  (패시브)",true,CL_white_blue);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_BYAKUREN))
 		{
-			printsub("당신은 순간적으로 각력을 강화시킬 수 있다.                             (영력, 신앙)",true,CL_white_blue);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_KANAKO:
 		if(level_ >= 1 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("당신은 카나코님의 힘으로 돌진할 수 있다.                    (영력, 신앙)",true,CL_help);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("당신은 카나코님의 기둥을 구현할 수 있다.                    (영력, 신앙)",true,CL_help);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_KANAKO))
 		{
-			printsub("당신은 카나코님의 바람의 힘을 휘감을 수 있다.               (영력, 신앙)",true,CL_help);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		break;
@@ -2706,343 +2984,653 @@ void God_show()
 	case GT_MINORIKO:
 		if(level_ >= 0)
 		{
-			printsub("파워가 가득차도 음식을 먹을 수 있고 최대 파워를 오래 유지할 수 있다.       (패시브)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("당신이 파워가 가득차있을수록 체력과 영력회복속도가 빨라진다.               (패시브)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("미노리코는 당신에게 걸린 상태이상과 능력저하를 회복시켜준다.              (P, 신앙)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_MINORIKO))
 		{ //이때부터 고구마 선물을 해준다.
-			printsub("당신은 음식을 더 빨리 먹을 수 있고 먹을때 영력도 조금 회복한다.            (패시브)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("미노리코는 당신이 가진 음식을 소모하여 체력을 크게 회복할 수 있다.  (P, 음식, 신앙)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_MINORIKO))
 		{
-			printsub("미노리코는 당신이 음식을 먹은 직후 일시적으로 불,냉기저항을 1단계 준다.    (패시브)",true,CL_warning);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_MIMA:
 		if(level_ >= 0 && !you.GetPunish(GT_MIMA))
 		{ 
-			printsub("신앙심에 비례해서 최대영력이 올라간다.                                     (패시브)",true,CL_green);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("적을 죽였을때 적의 세기에 따라 영력을 얻을 수 있다.                        (패시브)",true,CL_green);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("미마는 파괴술이 들어간 마법의 위력을 증가시킨다.                           (패시브)",true,CL_green);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_MIMA))
 		{
-			printsub("미마는 파괴술이 들어간 마법의 성공율을 증가시킨다.                         (패시브)",true,CL_green);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHINKI:
 		if(level_ >= 1 && !you.GetPunish(GT_SHINKI))
-		{ 
-			printsub("당신은 하급 마족 무리를 소환할 수 있다.                                    (P, 신앙)",true,CL_white_puple);
+		{
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("당신은 중급 마족을 소환할 수 있다.                                         (P, 신앙)",true,CL_white_puple);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("적대적인 소환수의 행동을 일정확률로 방해한다.                               (패시브)",true,CL_white_puple);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("당신은 상급 마족을 소환할 수 있다.                                         (P, 신앙)",true,CL_white_puple);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SHINKI))
 		{ 
-			printsub("당신은 P를 주울때마다 체력과 영력이 차오른다.                               (패시브)",true,CL_white_puple);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUUGI:
 		if(level_ >= 0 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("취기가 오른 상태에서 약간의 체력회복력과 높은 회피를 얻는다.                (패시브)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("물약 1개를 술로 바꿔서 마실 수 있다.                                    (물약, 신앙)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("전투중 가끔 상대를 잡는다. 잡으면 잡기기술을 신앙소모없이 쓸 수 있다.       (패시브)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("상대를 잡아 저먼 스플렉스를 걸 수 있다.                                    (P, 신앙)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("상대를 잡아 집어 던질 수 있다.                                             (P, 신앙)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("주변의 상대를 침묵시키는 강력한 포효를 할 수 있다.                         (P, 신앙)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUUGI))
 		{ 
-			printsub("오니의 궁극기, 삼보필살을 쓸 수 있다.                                      (P, 신앙)",true,CL_yuigi);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SHIZUHA:
 		if(level_ >= 0 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.           (패시브)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("당신은 움직이거나 적을 죽였을때 단풍잎의 자취를 남긴다.         (패시브)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
-			printsub("단풍 위를 걸으면 매우 은밀하게 움직일 수 있다.                  (패시브) ",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("당신은 단풍 위에 서있는 모든 적에 혼란을 걸 수 있다.        (영력, 신앙)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("당신은 방어구를 단풍방어구로 바꿀 수 있다.                        (신앙)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.             (패시브)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 6 && you.god_value[GT_SHIZUHA][0]==0 && !you.GetPunish(GT_SHIZUHA))
 		{
-			printsub("당신은 딱 한번 당신의 무기에 단풍브랜드를 부여할 수 있다.       (한번만)",true,CL_autumn);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_HINA:
 		if(level_ >= 0)
 		{ 
-			printsub("당신은 시야내의 장비에 저주가 걸려있는지 확인하고 식별할 수 있다.                (패시브)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("당신은 장착중인 저주가 걸린 장비의 마이너스 인챈트를 플러스로 바꿀 수 있다.           (P)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("당신은 무기에 잠시동안 저주의 힘을 담아 강화 시킬 수 있다.                         (저주)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("당신은 방어구에 잠시동안 저주의 힘을 담아 모든 공격을 반사시킬 수 있다.            (저주)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("당신은 장신구에 잠시동안 저주의 힘을 담아 생명력을 치유 할 수 있다.                (저주)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_HINA))
 		{ 
-			printsub("당신은 저주된 아이템을 끼고 있으면 저주를 흩뿌리고 다닌다.                       (패시브)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 6 && you.god_value[GT_HINA][0]==0 && !you.GetPunish(GT_HINA))
 		{
-			printsub("당신은 딱 한번 당신의 무기에 저주브랜드를 부여할 수 있다.						   (한번만)",true,CL_hina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUKARI:
 		if(level_ >= 0 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("틈새가 당신을 지켜본다.                                         (패시브)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("당신은 일정 데미지를 입으면 공간이동이 일어난다.                (패시브)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("당신은 틈새로부터 사격지원을 받을 수 있다.                  (영력, 신앙)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("당신은 틈새를 타고다닐 수 있다.                             (영력, 신앙)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("당신은 결계를 만들 수 있다.                                 (영력, 신앙)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUKARI))
 		{
-			printsub("당신은 잠시동안 차원을 고정시킬 수 있다.                    (영력, 신앙)",true,CL_yukari);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_EIRIN:
 		if(!you.GetPunish(GT_EIRIN))
 		{
-			printsub("에이린은 물약들의 효과를 상승시켜준다.                          (패시브)",true,CL_small_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
-			printsub("좋은 물약위에서 기도하는 것으로 나쁜 물약을 만들 수 있다.         (물약)",true,CL_small_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 			if(level_ >= 1)
 			{
-				printsub("당신은 다음의 물약을 마실때 추가 효과를 받는다.                 (패시브)",true,CL_small_danger);
-				printsub(" └독물약 : 이동속도가 빨라진다.",true,CL_small_danger);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(),true,CL_small_danger);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1),true,CL_small_danger);
 				if(level_ >= 2)
-					printsub(" └능력치감소물약 : 체력을 회복한다.",true,CL_small_danger);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2),true,CL_small_danger);
 				if(level_ >= 3)
-					printsub(" └혼란물약 : 영력을 회복한다.",true,CL_small_danger);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3),true,CL_small_danger);
 				if(level_ >= 4)
-					printsub(" └감속물약 : 투명해진다.",true,CL_small_danger);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4),true,CL_small_danger);
 				if(level_ >= 5)
-					printsub(" └마비물약 : 마비시간이 줄어들고 영격을 사용한다.",true,CL_small_danger);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5),true,CL_small_danger);
 				entersub();
 				printsub("",true,CL_normal);
 			}
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("당신의 물약을 던질 수 있다.                                    (P, 물약)",true,CL_small_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_POTION);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("당신은 신체개조를 통해 능력치를 조절할 수 있다.                   (신앙)",true,CL_small_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_EIRIN))
 		{
-			printsub("당신은 부작용을 대가로 몸을 재생할 수 있다.              (P, 영력, 신앙)",true,CL_small_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_YUYUKO:
 		if(level_ >= 1 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("당신은 유령을 불러들인다.                                      (패시브)",true,CL_yuyuko);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("원하는 위치에 유령들을 보낼 수 있다.                          (P, 영력)",true,CL_yuyuko);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("잠시동안 유령을 불러들이는 빈도를 높힐 수 있다.            (신앙, 영력)",true,CL_yuyuko);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_YUYUKO))
 		{ 
-			printsub("적 한명의 영혼을 잡을 수 있다.                             (신앙, 영력)",true,CL_yuyuko);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SATORI:
 		if(level_ >= 0 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("당신은 투명을 볼 수 있다.                                       (패시브)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("당신은 상대의 트라우마를 끌어낼 수 있다.                          (신앙)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("당신은 적의 기억속에서 맵의 형태를 읽어낸다.                    (패시브)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("당신은 몹의 기척을 탐지할 수 있다.                              (패시브)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("적 한명의 생각을 완벽하게 독파할 수 있다.                   (시간, 신앙)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SATORI))
 		{ 
-			printsub("사토리는 가끔 당신에게 먹이를 준다. 위험할수록 자주 준다.       (패시브)",true,CL_danger);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal); 
 		}
 		break;
 	case GT_TENSI:
 		if(level_ >= 0 && !you.GetPunish(GT_TENSI))
 		{ 
-			printsub("텐시의 행동은 예측할 수 없다!                                           ",true,CL_tensi);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY),true,CL_tensi);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_SEIJA:
 		if(level_ >= 1 && !you.GetPunish(GT_SEIJA))
 		{ 
-			printsub("당신은 세이자로부터 스탯을 강화받고있다.                        (패시브)",true,CL_seija);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_SEIJA))
 		{
-			printsub("징벌에 의한 추격으로부터 당신을 돕는다.                         (패시브)", true, CL_seija);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_seija);
 			printsub("", true, CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SEIJA))
 		{
-			printsub("원하는 상대방과 위치를 뒤집을 수 있다.                               (P)",true,CL_seija);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SEIJA))
 		{ 
-			printsub("모든 적, 아군의 시야를 뒤집을 수 있다.                               (P)",true,CL_seija);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
 		break;
@@ -3096,92 +3684,193 @@ void God_show()
 		}
 		if(level_ >= 0 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("요정에 경험치를 나눠주며 죽은 요정도 경험치를 먹으면 부활한다.  (패시브)",true,CL_lilly);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("당신은 요정들을 동료로 권유할 수 있다.                            (없음)",true,CL_lilly);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("당신은 요정들을 근처로 호출할 수 있다.                            (영력)",true,CL_lilly);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("당신은 동료 요정을 치유할 수 있다.                             (P, 영력)",true,CL_lilly);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_LILLY))
 		{ 
-			printsub("당신은 요정들에게 힘을 나눠줄 수 있다.                         (P, 영력)",true,CL_lilly);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
 		break;
 	case GT_MIKO:
 		if (level_ >= 0 && !you.GetPunish(GT_MIKO))
 		{
-			printsub("인기도는 다음 행동을 할 경우 올라간다.", true, CL_normal);
-			printsub("    적을 죽인다. 강할수록 더 많이 올라간다.", true, CL_miko);
-			printsub("    욕망모으기를 이용해 시야내의 적들의 욕망을 모은다.", true, CL_miko);
-			printsub("    새로운 서브던전에 입장한다.", true, CL_miko);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1), true, CL_normal);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1), true, CL_miko);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2), true, CL_miko);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3), true, CL_miko);
 			printsub("", true, CL_normal);
-			printsub("인기도는 다음 행동을 할 경우 내려간다.", true, CL_normal);
-			printsub("    층을 옮긴다. 올라갈수록 더 많은 인기도가 떨어진다.", true, CL_miko);
-			printsub("    서브던전을 옮긴다. 모든 인기도가 떨어진다.", true, CL_miko);
-			printsub("    미코의 권능을 사용한다.", true, CL_miko);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2), true, CL_normal);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1), true, CL_miko);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2), true, CL_miko);
+			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3), true, CL_miko);
 			printsub("", true, CL_normal);
-			printsub("주변의 적들로부터 인기도를 모을 수 있다.                 (층마다 한번만)", true, CL_miko);
+			{
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, CL_miko);
+			}
 			printsub("", true, CL_normal);
-			char temp[256];
-			sprintf_s(temp, 256, "빠른 속도로 랜덤한 순간이동을 할 수 있다.                  (인기도 %3d%%)", getMikoPiety(0) / 2);
-			printsub(temp, true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
+			{
+				std::ostringstream popcost;
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2);
+				popcost << std::setw(3) << (getMikoPiety(0) / 2) << "%";
+				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
+			}
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "해당 층에서 주변을 비추는 후광을 얻을 수 있다.             (인기도 %3d%%)", getMikoPiety(1) / 2);
-			printsub(temp, true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
+			{
+				std::ostringstream popcost;
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3);
+				popcost << std::setw(3) << (getMikoPiety(1) / 2) << "%";
+				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
+			}
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "해당 층에서 원하는 저항을 얻을 수 있다.                    (인기도 %3d%%)", getMikoPiety(2) / 2);
-			printsub(temp, true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
+			{
+				std::ostringstream popcost;
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4);
+				popcost << std::setw(3) << (getMikoPiety(2) / 2) << "%";
+				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
+			}
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "해당 층에서 원하는 전투능력을 강화시킬 수 있다.            (인기도 %3d%%)", getMikoPiety(3) / 2);
-			printsub(temp, true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
+			{
+				std::ostringstream popcost;
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5);
+				popcost << std::setw(3) << (getMikoPiety(3) / 2) << "%";
+				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
+			}
 			printsub("", true, CL_normal);
-			sprintf_s(temp, 256, "해당 층에서의 궁극의 축복을 받을 수 있다.                  (인기도 %3d%%)", getMikoPiety(4) / 2);
-			printsub(temp, true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
+			{
+				std::ostringstream popcost;
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6);
+				popcost << std::setw(3) << (getMikoPiety(4) / 2) << "%";
+				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
+			}
 			printsub("", true, CL_normal);
 		}
 		break;
 	case GT_OKINA:
 		if (level_ >= 0 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 자유자재로 문의 이동과 투시가 가능하다.                  (패시브)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 1 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 원하는 벽에 문을 만들 수 있다.                           (P, 영력)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 2 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 문을 강제로 닫고 잠글 수 있다.                        (신앙, 영력)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 3 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 적의 등뒤로 이동할 수 있다.                           (신앙, 영력)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 4 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 크레이지 백댄서를 불러올 수 있다.                           (신앙)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		if (level_ >= 5 && !you.GetPunish(GT_OKINA))
 		{
-			printsub("당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.       (신앙, 영력)", true, CL_okina);
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6);
+			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
 		break;
@@ -3193,87 +3882,109 @@ void God_show()
 			{
 				if (already_pure)
 				{
-					printsub("당신은 순호의 축복에 의해 영구적으로 순화되었다.                 (패시브)", true, CL_junko);
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1);
+					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					printsub(ss.str(), true, CL_junko);
 					if (you.god_value[GT_JUNKO][3] == 7)
-						printsub(" └당신은 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
 					else
-						printsub(" └당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-					printsub(" └당신은 모든 스탯이 5 증가한다.", true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3), true, CL_junko);
 					printsub("", true, CL_normal);
 				}
 				else
 				{
-					printsub("순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.             (패시브)", true, CL_junko);
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1);
+					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
+					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					printsub(ss.str(), true, CL_junko);
 					if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 					{
-						printsub(" └1단계: 당신은 스펠카드를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-						printsub(" └2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.", true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
-						printsub(" └3단계: 당신은 물약의 효과를 받지 않는다.", true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2), true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3), true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
 						printsub("", true, CL_normal);
 					}
 				}
 			}
 			if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("당신은 단순하지만 강력한 탄막을 날릴 수 있다.                  (P, 영력)", true, already_pure? CL_bad : CL_junko);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, already_pure? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("당신은 순수한 힘을 얻을 수 있다.                                  (신앙)", true, already_pure ? CL_bad : CL_junko);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
 			{
-				printsub("당신은 순수한 살의를 얻을 수 있다.                                (신앙)", true, already_pure ? CL_bad : CL_junko);
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4);
+				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
+				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
 			if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
 			{
 				if (already_pure)
 				{
-					printsub("당신은 순호의 축복으로 영구적으로 순화되었다.", true, CL_junko);
-					char temp[100];
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1), true, CL_junko);
 					switch (you.god_value[GT_JUNKO][3])
 					{
 					case 1:
-						sprintf_s(temp, 100, " └스킬순화: 당신의 %s 스킬레벨은 캐릭터 레벨과 항상 같다. ", skill_string((skill_type)you.pure_skill).c_str());
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, PlaceHolderHelper(skill_string((skill_type)you.pure_skill))), true, CL_junko);
 						break;
 					case 2:
 					{
-						sprintf_s(temp, 100, " └저항순화: 당신의 %s 저항은 면역이다. ", you.GetProperty(TPT_FIRE_IMUNE)?"화염":(you.GetProperty(TPT_COLD_IMUNE) ? "냉기" : (you.GetProperty(TPT_ELEC_IMUNE) ? "전기" : "버그")));
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, PlaceHolderHelper(you.GetProperty(TPT_FIRE_IMUNE)?LOC_SYSTEM_SHORT_FIRE_RESIST:(you.GetProperty(TPT_COLD_IMUNE) ? LOC_SYSTEM_SHORT_COLD_RESIST : (you.GetProperty(TPT_ELEC_IMUNE) ? LOC_SYSTEM_SHORT_ELEC_RESIST : LOC_SYSTEM_BUG)))), true, CL_junko);
 						break;
 					}
 					case 3:
-						sprintf_s(temp, 100, " └마력순화: 당신의 체력과 영력은 동일시된다. ");
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4), true, CL_junko);
 						break;
 					case 4:
-						sprintf_s(temp, 100, " └파워순화: 당신은 항상 풀파워다. ");
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5), true, CL_junko);
 						break;
 					case 5:
-						sprintf_s(temp, 100, " └생명순화: 당신은 추가 목숨을 받았다. ");
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6), true, CL_junko);
 						break;
 					case 6:
-						sprintf_s(temp, 100, " └장비순화: 당신은 가지고 있던 장비를 순화했다. ");
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7), true, CL_junko);
 						break;
 					case 7:
-						sprintf_s(temp, 100, " └시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다. ");
-						printsub(temp, true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8), true, CL_junko);
 						break;
 					default:
-						printsub(" └알수없는 버그 순화", true, CL_junko);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG), true, CL_junko);
 						break;
 					}
 				}
 				else
 				{
-					printsub("당신은 순호의 축복으로 영구적으로 순화할 수 있다.               (한번만)", true, CL_junko);
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5);
+					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
+					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					printsub(ss.str(), true, CL_junko);
 				}
 				printsub("", true, CL_normal);
 			}

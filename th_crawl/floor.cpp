@@ -145,7 +145,7 @@ void floor_effect::onWalk(unit* unit_)
 			env[current_level].MakeNoise(you.position,20,NULL);
 			
 			if(!you.s_autumn)
-				printarray(true,false,false,CL_autumn,1,"단풍잎을 밟을때 바스락거리는 시끄러운 소리가 났다.");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE), true,false,false,CL_autumn);
 		}
 		break;	
 	case FLOORT_NORMAL:

@@ -3591,7 +3591,7 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 				enterlog();
 				if(you.god == GT_YUKARI)
 				{
-					printlog("유카리는 당신의 위험한 전이마법에 분노했다!",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE),true,false,false,CL_small_danger);
 					you.PietyUpDown(-5);
 				}
 				break;

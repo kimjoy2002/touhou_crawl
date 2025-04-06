@@ -329,20 +329,19 @@ void start_mainmenu()
 	temp = "메인 게임\n\n";
 	temp += "a - 게임시작\n";
 	temp += "b - 튜토리얼(초심자)\n";
-	temp += "c - 튜토리얼(돌죽경험자용, 임시)\n";
 	temp += "\n\n미니 게임\n\n";
-	temp += "d - 아레나\n";
-	temp += "e - 스프린트\n";
+	temp += "c - 아레나\n";
+	temp += "d - 스프린트\n";
 	temp += "\n\n기타\n\n";
-	temp += "f - 옵션\n";
+	temp += "e - 옵션\n";
 	temp += "R - 리플레이";
 	m_mgr.menu_puls(0,temp);
 	m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 	m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
-	m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
-	m_mgr.menu_input_puls(0,'d',0,"",false,sprint1s,0);
-	m_mgr.menu_input_puls(0, 'e', 1, "", false, sprint2s, 0);
-	m_mgr.menu_input_puls(0,'f',0,"",false,option_menu,0);
+	//m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
+	m_mgr.menu_input_puls(0,'c',0,"",false,sprint1s,0);
+	m_mgr.menu_input_puls(0, 'd', 1, "", false, sprint2s, 0);
+	m_mgr.menu_input_puls(0,'e',0,"",false,option_menu,0);
 	m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 	
 

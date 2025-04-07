@@ -243,28 +243,13 @@ string item::GetName(int num_)
 	bool overwriteName = false;
 	string temp;
 
-	if(identify_curse && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
-	{
-		if( (((type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST) || (type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && !identify) || curse || (type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST))
-		{
-			if(curse || !isArtifact())
-				temp += curse?"저주받은 ":"저주받지않은 ";
-		}
-	}
-	if(is_pile && num >1 && num_ != -2)
-	{
-		char buf[20]; 
-		sprintf_s(buf, 20,"%d개의 ",num_!=-1?num_!=0?num_:num:num);
-		temp += buf;
-	}
 	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST)
 	{	
 		if(identify)
 		{
-			char temp2[20];
-			//sprintf_s(temp2, 20,"%c%d,%c%d ",value3>=0?'+':'-',abs(value3),value4>=0?'+':'-',abs(value4));
-			sprintf_s(temp2, 20,"%c%d ",value4>=0?'+':'-',abs(value4));
-			temp += temp2;
+			std::ostringstream ss;
+			ss << (value4 >= 0 ? '+' : '-') << abs(value4) << " ";
+			temp += ss.str();
 		}
 		else if(!value6 && !second_name.isEmpty())
 		{
@@ -275,9 +260,9 @@ string item::GetName(int num_)
 	{		
 		if(identify)
 		{
-			char temp2[10];
-			sprintf_s(temp2,10,"%c%d ",value4>=0?'+':'-',abs(value4));
-			temp += temp2;
+			std::ostringstream ss;
+			ss << (value4 >= 0 ? '+' : '-') << abs(value4) << " ";
+			temp += ss.str();
 		}
 		else if(!second_name.isEmpty())
 		{
@@ -285,8 +270,7 @@ string item::GetName(int num_)
 		}
 	}
 
-	if(type==ITM_POTION) {
-		
+	if(type==ITM_POTION) {		
 		if(iden_list.potion_list[value1].iden)  {
 			temp += LocalzationManager::locString(potion_iden_string[value1]);
 		} else {
@@ -352,6 +336,30 @@ string item::GetName(int num_)
 	if(!overwriteName) {
 		temp += name.getName();
 	}
+
+
+	if(identify_curse && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
+	{
+		if( (((type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST) || (type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)) && !identify) || curse || (type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST))
+		{
+			if(curse || !isArtifact()) {
+				if(curse) {
+					temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_CURSED,
+						PlaceHolderHelper(temp));
+				} else {					
+					temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_UNCURSED,
+						PlaceHolderHelper(temp));
+				}
+			}
+		}
+	}
+	if(is_pile && num >1 && num_ != -2)
+	{
+		temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_PILED, 
+			PlaceHolderHelper(to_string(num_!=-1?num_!=0?num_:num:num)),
+			PlaceHolderHelper(temp));
+	}
+
 	if (type == ITM_AMULET)
 	{
 		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_OCCULT && value3 > 0) {
@@ -361,9 +369,9 @@ string item::GetName(int num_)
 		}
 	}
 	if(!isArtifact() && ((type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 1) || (type==ITM_RING && iden_list.ring_list[value1].iden == 1)))
-		temp += "(사용)";
+		temp += "("+LocalzationManager::locString(LOC_SYSTEM_ITEM_USED)+")";
 	if(!isArtifact() && (type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 2))
-		temp += "(선택사용)";
+		temp += "("+LocalzationManager::locString(LOC_SYSTEM_ITEM_SELECTED_USED)+")";
 	if(type==ITM_SPELL)
 	{
 		if(identify)
@@ -374,27 +382,25 @@ string item::GetName(int num_)
 		}
 		if(!identify && value3)
 		{
-			char temp2[32];
+			std::ostringstream ss;
 			if(value3>0)
-				sprintf_s(temp2,32,"(사용횟수: %d)",value3);
+				ss<<"("<<LocalzationManager::formatString(LOC_SYSTEM_ITEM_SPELLCARD_USED, PlaceHolderHelper(to_string(value3))) << ")";
 			else if(value3 == -1)
-				sprintf_s(temp2,32,"(비어있음)");
+				ss<<"("<<LocalzationManager::locString(LOC_SYSTEM_ITEM_SPELLCARD_EMPTY) << ")";
 			else if(value3 == -2)
-				sprintf_s(temp2,32,"(충전됨)");
-
-
-			temp += temp2;
+				ss<<"("<<LocalzationManager::locString(LOC_SYSTEM_ITEM_SPELLCARD_CHARGED) << ")";
+			temp += ss.str();
 		}
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{
-		temp += " {발동}";
+		temp += " {" + LocalzationManager::locString(LOC_SYSTEM_ITEM_EVOKE) + "}";
 	}
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{
-		char temp2[32];
-		sprintf_s(temp2, 32, " (%d%%)", you.getAmuletPercent());
-		temp += temp2;
+		std::ostringstream ss;
+		ss << " (" << you.getAmuletPercent() << "%%)";  // ostringstream 사용
+		temp += ss.str();
 	}
 	
 	if(isArtifact() && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
@@ -435,7 +441,7 @@ string item::GetName(int num_)
 		}
 		else
 		{
-			temp+=" {아티펙트}";
+			temp+=" {"+ LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT) +"}";
 		}
 	}
 
@@ -1243,7 +1249,7 @@ int item::action(int delay_)
 		}
 		if (you.tribe == TRI_NECOMATA && distan_coord(you.position, position) <= 2) {
 			if (you.s_drunken == 0) {
-				printlog("당신은 개다래나무의 향기에 취했다!",true,false,false, CL_warning);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ETC_CATNIP_CONFUSE),true,false,false, CL_warning);
 			}
 			you.s_drunken = 15;
 		}

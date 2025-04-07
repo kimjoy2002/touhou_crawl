@@ -236,7 +236,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 
 int MoreWait()
 {
-	printlog("----------다음장----------",true,false,true,CL_normal);
+	printlog("----------" + LocalzationManager::locString(LOC_SYSTEM_MORE) + "----------",true,false,true,CL_normal);
 	while(1)
 	{
 		int select = waitkeyinput();

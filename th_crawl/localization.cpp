@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+#include "const.h"
 #include "localization.h"
 #include <iostream>
 #include <regex>
@@ -25,6 +26,8 @@ unordered_map<string, monster_index> LocalzationManager::monster_enum_map = crea
 unordered_map<monster_index, string> LocalzationManager::monster_enum_reverse_map = createMonsterEnumReverseMap();
 unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<monster_index, string> LocalzationManager::monster_description_map;
+vector<TextHelper> LocalzationManager::help_command;
+vector<TextHelper> LocalzationManager::help_credit;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
 	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
@@ -57,6 +60,8 @@ void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 		speak_map.clear();
 		monster_name_map.clear();
 		monster_description_map.clear();
+		help_command.clear();
+		help_credit.clear();
 	}
 	
 	switch (type)
@@ -70,6 +75,8 @@ void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 	default:
 		break;
 	}
+	initFileSimple(filePath, "help.txt", help_command);
+	initFileSimple(filePath, "credit.txt", help_credit);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localization_map[key] = values[0];
@@ -85,6 +92,66 @@ void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 		monster_description_map[key] = (!values[1].empty())?values[1]:prev_values[1];
 		replaceAll(monster_description_map[key], "\\n", "\n");
 	});
+}
+
+D3DCOLOR LocalzationManager::getColorFromCode(const string& code) {
+	if (code == "§r") return D3DCOLOR_RGBA(220, 80, 80, 255);     // Red
+	if (code == "§g") return D3DCOLOR_RGBA(100, 200, 100, 255);   // Green
+	if (code == "§y") return D3DCOLOR_RGBA(240, 200, 100, 255);   // Yellow
+	if (code == "§b") return D3DCOLOR_RGBA(100, 160, 240, 255);   // Blue
+	if (code == "§m") return D3DCOLOR_RGBA(200, 120, 220, 255);   // Magenta
+	if (code == "§c") return D3DCOLOR_RGBA(100, 220, 220, 255);   // Cyan
+	if (code == "§w") return D3DCOLOR_RGBA(255, 255, 255, 255);  // White
+	return D3DCOLOR_RGBA(255, 255, 255, 255); // Default
+}
+
+
+D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor) {
+	size_t i = 0;
+	string currentText;
+
+	while (i < line.size()) {
+		if (i + 2 < line.size() && line.substr(i, 2) == "§") {
+			if (!currentText.empty()) {
+				outVector.emplace_back(currentText, false, currentColor);
+				currentText.clear();
+			}
+			string tag = line.substr(i, 3); 
+			currentColor = getColorFromCode(tag);
+			i += 3;
+		} else {
+			currentText += line[i++];
+		}
+	}
+
+	outVector.emplace_back(currentText, true, currentColor);
+	return currentColor;
+}
+
+void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector) {
+	ifstream file(path + filename);
+	if (!file) {
+		return;
+	}
+
+	saveVector.clear();
+	string line;
+	bool first_line = true;
+	D3DCOLOR color_ = CL_normal;
+	while (getline(file, line)) {
+		if (first_line) {
+			//BOM제거
+			first_line = false;
+			if (!line.empty() && static_cast<unsigned char>(line[0]) == 0xEF &&
+				line.size() >= 3 &&
+				static_cast<unsigned char>(line[1]) == 0xBB &&
+				static_cast<unsigned char>(line[2]) == 0xBF) {
+				line = line.substr(3); // BOM 제거
+			}
+		}
+
+		color_ = parseMultiColorLine(line, saveVector, color_);
+	}
 }
 
 const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO) {} 문법이 이쓰면 formatString으로 바꾸기

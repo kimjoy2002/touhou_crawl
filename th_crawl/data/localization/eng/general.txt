@@ -1,7 +1,7 @@
-LOC_SYSTEM_OPTION_MENU_START,======OPTION======
+LOC_SYSTEM_OPTION_MENU_START,======Options======
 LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - LANGUAGE : ENGLISH
 LOC_SYSTEM_OPTION_MENU_ESC,esc - back
-LOC_SYSTEM_WELCOME,환상향에 돌아온걸 환영한다!
+LOC_SYSTEM_WELCOME,Welcome back to Gensokyo!
 LOC_SYSTEM_LOS_MON,You see a monster.
 LOC_SYSTEM_LOS_NOMON,No monsters in sight.
 LOC_SYSTEM_NOTHING_HAPPEND,Nothing happened.
@@ -13,9 +13,14 @@ LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
+LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST,That spell does not exist.
+LOC_SYSTEM_MEMORIZE_SPELL_ASK,Would you like to memorize this spell? (y/n)
+LOC_SYSTEM_MEMORIZE_HELP,Press {0} to memorize a spell.
+LOC_SYSTEM_ALPHABET_ASK,Which alphabet would you like to change to?
 LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
+LOC_SYSTEM_MORE,More
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
@@ -23,7 +28,7 @@ LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
 LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
 LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
 LOC_SYSTEM_RECORVER_STAT,You have recovered your lost stats.
-LOC_SYSTEM_GAIN_AC,당신은 단단해졌다.
+LOC_SYSTEM_GAIN_AC,You feel tougher.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
@@ -85,6 +90,8 @@ LOC_SYSTEM_SHOUT_COME,Follow me!
 LOC_SYSTEM_SHOUT_FINISH,You shouted and drew attention.
 LOC_SYSTEM_SHOUT_WHO,Who do you want to order an attack on?
 LOC_SYSTEM_SHOUT_CANCLE,You didn't shout anything.
+LOC_SYSTEM_ALREADY_FULL_POWER,You are already at full power!
+LOC_SYSTEM_PICKUP_SELECT_ASK,Pick up {0}? (Yes:{1} No:{2} All:{3} Choose:{4})
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
 LOC_SYSTEM_AUTOPICKUP_ON,Auto-pickup enabled.
 LOC_SYSTEM_AUTOPICKUP_OFF,Auto-pickup disabled. (Press {0} to enable again)
@@ -143,6 +150,7 @@ LOC_SYSTEM_DROP_ITEM,You drop {0}.
 LOC_SYSTEM_DROP_ITEM_SION_ALL,But it vanished due to the curse of the Poverty God.
 LOC_SYSTEM_DROP_ITEM_SION_SOME,{0} disappeared due to the curse of the Poverty God.
 LOC_SYSTEM_HOTKEY,Hotkey
+LOC_SYSTEM_HOTKEYCHANGE,Change Hotkey
 LOC_SYSTEM_NAME,Name
 LOC_SYSTEM_SKILL_NAME,Skill Name
 LOC_SYSTEM_SKILL,Skill
@@ -161,12 +169,14 @@ LOC_SYSTEM_TILES,Tiles
 LOC_SYSTEM_INVENTORY,Inventory
 LOC_SYSTEM_INVENTORY_ITEM,Number of Items
 LOC_SYSTEM_EQUIP,Equip
+LOC_SYSTEM_UNEQUIP,Unequip
 LOC_SYSTEM_LEFT_HAND,Left Hand
 LOC_SYSTEM_RIGHT_HAND,Right Hand
+LOC_SYSTEM_EQUIP_TANMAC,Danmaku
 LOC_SYSTEM_PROJECTILE,Projectile
 LOC_SYSTEM_OTTER_PROJECTILE,Other Projectile
 LOC_SYSTEM_MAGIC,Magic
-LOC_SYSTEM_PUNISH,징벌
+LOC_SYSTEM_PUNISH,Punishment
 LOC_SYSTEM_CURRENT_EXP,Exp
 LOC_SYSTEM_ATTIT,Aptit
 LOC_SYSTEM_COST,Cost
@@ -174,6 +184,7 @@ LOC_SYSTEM_SKILL_JUNKA,Purify
 LOC_SYSTEM_MP_PURITY,Purify MP
 LOC_SYSTEM_SUCCESS_RATE,Success Rate
 LOC_SYSTEM_FAILURE_RATE,Failure Rate
+LOC_SYSTEM_REMAIN_SPELLPOINT,Remaining Spell Levels
 LOC_SYSTEM_REMAIN_EXP,Next Level
 LOC_SYSTEM_LEVEL,Level
 LOC_SYSTEM_LEVEL_WITH_NUMBER,Level {0}
@@ -182,11 +193,11 @@ LOC_SYSTEM_GRADE,Grade {0}
 LOC_SYSTEM_REPLAY_MODE,Replay Mode
 LOC_SYSTEM_WIZARD_MODE,Wizard Mode
 LOC_SYSTEM_SAVEREMAIN_MODE,Save Retention
-LOC_SYSTEM_TOUHOUCRAWL_HELP,동방 크롤 도움말 목록
+LOC_SYSTEM_TOUHOUCRAWL_HELP,Touhou Crawl Help List
 LOC_SYSTEM_COMMAND,Command
-LOC_SYSTEM_COMMAND_LIST,명령어 목록
-LOC_SYSTEM_PROCESS_NOTE,진행 노트
-LOC_SYSTEM_PROCESS_CREDIT,크레딧
+LOC_SYSTEM_COMMAND_LIST,Command List
+LOC_SYSTEM_PROCESS_NOTE,Progress Notes
+LOC_SYSTEM_PROCESS_CREDIT,Credits
 LOC_SYSTEM_DESCRIPTION,Description
 LOC_SYSTEM_CANCLE,Cancel
 LOC_SYSTEM_EXPLORE,Explore
@@ -199,6 +210,15 @@ LOC_SYSTEM_IMPOSSIBLE,Impossible
 LOC_SYSTEM_AHTEISM,Atheism
 LOC_SYSTEM_FAITH,Faith
 LOC_SYSTEM_POULARITY,Popularity
+LOC_SYSTEM_ATTACK_VALUE,Attack Power
+LOC_SYSTEM_HIT_VALUE,Accuracy
+LOC_SYSTEM_CURRENT_ATTACK_SPEED,Current Attack Speed
+LOC_SYSTEM_BASE_ATTACK_SPEED,Base Attack Speed
+LOC_SYSTEM_MINIMUM_ATTACK_SPEED,Minimum Attack Speed
+LOC_SYSTEM_CURRENT_TANMAC_SPEED,Current Danmaku Speed
+LOC_SYSTEM_DEFAULT_DEFENSE,Base Defense
+LOC_SYSTEM_DEFAULT_PENALTY,Base Penalty
+LOC_SYSTEM_MINIMUM_PENALTY,Minimum Penalty
 LOC_SYSTEM_YOU,You
 LOC_SYSTEM_TURN,Turn
 LOC_SYSTEM_TURNS,Turns
@@ -414,7 +434,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,You gain extra defense for a short time.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,Continuously deals poison damage to enemies in the surrounding 8 tiles.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,Melee damage increases, damage taken is reduced to 66%, but your movement speed decreases to 0.77x.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Your melee attack power is tripled.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,능력사용(a키)으로 5원소의 마법이 저렴하게 사용가능합니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,Using abilities (A key) allows cheaper access to the five elemental spells.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,You are unlucky! This state can only be removed by gaining experience.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2,You are very unlucky! This state can only be removed by gaining experience.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3,You are terribly unlucky! This state can only be removed by gaining experience.
@@ -1203,41 +1223,41 @@ LOC_SYSTEM_FIND_ONE,Found {0}.
 LOC_SYSTEM_FIND_TWO,Found {0} and {1}.
 LOC_SYSTEM_FIND_THREE,Found {0}, {1}, and {2}.
 LOC_SYSTEM_FIND_MANY,Found several items.
-LOC_SYSTEM_TUTORIAL1,카나코는 말했다 : 문을 열때는 문 옆에서 O키를, 닫을때는 C키로 닫을 수 있지.
+LOC_SYSTEM_TUTORIAL1,Kanako said: To open a door, press O near it. To close it, press C.
 LOC_SYSTEM_TUTORIAL2,Kanako said: You can bump into doors with the arrow keys to open them automatically.
-LOC_SYSTEM_TUTORIAL3,카나코는 말했다 : 키패드의 방향키나 y u b n키로 대각선을 움직여보자.
-LOC_SYSTEM_TUTORIAL4,카나코는 말했다 : o키를 누르면 탐색 안한 지역으로 자동으로 이동하지.
-LOC_SYSTEM_TUTORIAL5,카나코는 말했다 : ,나 g를 눌러서 아이템을 주워서 장착해보렴.
-LOC_SYSTEM_TUTORIAL6,카나코는 말했다 : w키로 무기, W키로 방어구장착, i키는 설명, d키는 버리기야.
+LOC_SYSTEM_TUTORIAL3,Kanako said: Use the numpad or the Y, U, B, N keys to move diagonally.
+LOC_SYSTEM_TUTORIAL4,Kanako said: Press O to automatically move to unexplored areas.
+LOC_SYSTEM_TUTORIAL5,Kanako said: Press , or G to pick up items and try equipping them.
+LOC_SYSTEM_TUTORIAL6,Kanako said: Press W to equip armor, w for weapons, I for info, and D to drop.
 LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat—just run into enemies to attack.
 LOC_SYSTEM_TUTORIAL8,Kanako said: Even weak enemies are easier to deal with one-on-one. Try luring them into corridors.
 LOC_SYSTEM_TUTORIAL9,Kanako said: Always get in the habit of healing after a fight.
 LOC_SYSTEM_TUTORIAL10,Kanako said: Press `.` to rest for 1 turn, or `5` to rest for 100 turns.
-LOC_SYSTEM_TUTORIAL11,카나코는 말했다 : m키를 눌러서 나오는 창에선 얻은 스킬 투자 방향을 정할 수 있어.
+LOC_SYSTEM_TUTORIAL11,Kanako said: Press M to open the skill window and decide how to invest your skills.
 LOC_SYSTEM_TUTORIAL12,Kanako said: Power helps manage hunger, use abilities, and boost melee damage.
 LOC_SYSTEM_TUTORIAL13,Kanako said: Use `>` to go down stairs and `<` to come back up.
 LOC_SYSTEM_TUTORIAL14,Kanako said: If you've cleared a floor, there's nothing left—let's head down.
 LOC_SYSTEM_TUTORIAL15,Kanako said: If your power drops below 2.00, your attack strength will decrease.
-LOC_SYSTEM_TUTORIAL16,카나코는 말했다 : 적을 잡아서 나오는 P템을 먹거나 음식을 통해서 회복이 가능해.
-LOC_SYSTEM_TUTORIAL17,카나코는 말했다 : e키를 눌러서 빵을 먹으면 파워를 회복할 수 있어.
+LOC_SYSTEM_TUTORIAL16,Kanako said: Recover HP by picking up P items from enemies or by eating food.
+LOC_SYSTEM_TUTORIAL17,Kanako said: Press E to eat bread and restore your power.
 LOC_SYSTEM_TUTORIAL18,Kanako said: Ranged attacks are always useful. Try picking up a talisman.
-LOC_SYSTEM_TUTORIAL19,카나코는 말했다 : 원거리 무기를 던질때는 F키를 누르고 던질 템을 골라.
-LOC_SYSTEM_TUTORIAL20,카나코는 말했다 : f키론 준비되어있는 탄막을 바로 던질 수 있단다.
+LOC_SYSTEM_TUTORIAL19,Kanako said: To throw a ranged weapon, press F and choose what to throw.
+LOC_SYSTEM_TUTORIAL20,Kanako said: Use F to instantly throw your prepared danmaku.
 LOC_SYSTEM_TUTORIAL21,Kanako said: Those accessories and scrolls are unidentified. Let's use one and see.
-LOC_SYSTEM_TUTORIAL22,카나코는 말했다 : 일단 반지를 주워서 P키로 장착해. R키론 벗을 수 있어.
-LOC_SYSTEM_TUTORIAL23,카나코는 말했다 : 두루마리를 읽는건 r키야. 선택창이 뜨면 반지에 사용해봐.
-LOC_SYSTEM_TUTORIAL24,카나코는 말했다 : 하하, 허기의 반지는 전혀 도움이 안되지. d키로 버릴 수 있어.
-LOC_SYSTEM_TUTORIAL25,카나코는 말했다 : 물약이 보이는군. 물약은 q키로 먹을 수 있어.
+LOC_SYSTEM_TUTORIAL22,Kanako said: Pick up a ring and equip it with P. You can remove it with R.
+LOC_SYSTEM_TUTORIAL23,Kanako said: To read a scroll, press R. Try using it on a ring when prompted.
+LOC_SYSTEM_TUTORIAL24,Kanako said: Haha, the Ring of Hunger is totally useless. You can drop it with D.
+LOC_SYSTEM_TUTORIAL25,Kanako said: I see a potion. You can drink it with Q.
 LOC_SYSTEM_TUTORIAL26,Kanako said: You never know the effect of food until you eat it—sometimes it’s bad.
 LOC_SYSTEM_TUTORIAL27,Kanako said: To learn magic, you first have to study a spell from a book.
-LOC_SYSTEM_TUTORIAL28,카나코는 말했다 : 일단 책을 주워서 M키로 마법의탄막을 배워보자.
-LOC_SYSTEM_TUTORIAL29,카나코는 말했다 : 마법을 사용하기위해선 z키나 Z키를 누르고 사용할수있어.
+LOC_SYSTEM_TUTORIAL28,Kanako said: Pick up the book and use M to learn magic danmaku.
+LOC_SYSTEM_TUTORIAL29,Kanako said: To use magic, press Z or z.
 LOC_SYSTEM_TUTORIAL30,Kanako said: It works just like throwing a talisman! Try taking out a mob with magic.
 LOC_SYSTEM_TUTORIAL31,Kanako said: You can go back upstairs using the `<` key.
 LOC_SYSTEM_TUTORIAL32,Kanako said: Remember to rest with `5` after battle. If you're poisoned, cure it too.
-LOC_SYSTEM_TUTORIAL33,카나코는 말했다 : 제단을 찾으면 위에서 p키로 기도를 할 수 있어.
+LOC_SYSTEM_TUTORIAL33,Kanako said: If you find an altar, you can pray on it by pressing P.
 LOC_SYSTEM_TUTORIAL34,Kanako said: It's my shrine, so trust me! Once you do, press `^` to view the explanation.
-LOC_SYSTEM_TUTORIAL35,카나코는 말했다 : a키를 눌러서 권능을 한번 사용해서 싸워보렴.
+LOC_SYSTEM_TUTORIAL35,Kanako said: Try using your power by pressing A to fight.
 LOC_SYSTEM_TUTORIAL36,Kanako said: Powers grow stronger as your faith increases.
 LOC_SYSTEM_TUTORIAL37,Kanako said: My powers consume a set amount of faith—use them wisely.
 LOC_SYSTEM_TUTORIAL38,Kanako said: Each god has different ways to gain faith and dislikes different things.
@@ -1633,7 +1653,7 @@ LOC_SYSTEM_TILE_DEEP_WATER,Deep Water
 LOC_SYSTEM_TILE_LAVA,Lava
 LOC_SYSTEM_TILE_HELP_DOWN,(Press `>` to go down)
 LOC_SYSTEM_TILE_HELP_UP,(Press `<` to go up)
-LOC_SYSTEM_TILE_HELP_PRAY,(p키로 기도)
+LOC_SYSTEM_TILE_HELP_PRAY,(Press P to pray)
 LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,Fallen Leaves
 LOC_SYSTEM_FLOOR_EFFECT_STONE,Rock Spikes
 LOC_SYSTEM_FLOOR_EFFECT_SCHEMA,Crack
@@ -2035,6 +2055,15 @@ LOC_SYSTEM_ITEM_CATEGORY_BOOK,Book
 LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,Evocable
 LOC_SYSTEM_ITEM_CATEGORY_GOAL,Important
 LOC_SYSTEM_ITEM_CATEGORY_OTHER,Miscellaneous
+LOC_SYSTEM_ITEM_CURSED,Cursed {0}
+LOC_SYSTEM_ITEM_UNCURSED,Uncursed {0}
+LOC_SYSTEM_ITEM_PILED,{1} x {0}
+LOC_SYSTEM_ITEM_USED,Used
+LOC_SYSTEM_ITEM_SELECTED_USED,Use Selected
+LOC_SYSTEM_ITEM_SPELLCARD_USED,Uses: {0}
+LOC_SYSTEM_ITEM_SPELLCARD_EMPTY,Empty
+LOC_SYSTEM_ITEM_SPELLCARD_CHARGED,Charged
+LOC_SYSTEM_ITEM_NOT_EXIST,That item does not exist.
 LOC_SYSTEM_SPELLCARD,SpellCard
 LOC_SYSTEM_SPELLCARD_IDENTIFY,SpellCard of {0}
 LOC_SYSTEM_SPELLCARD_INVISIBLE,Invisibility
@@ -2419,6 +2448,7 @@ LOC_SYSTEM_ITEM_TANMAC_AMULET,Homing Amulet
 LOC_SYSTEM_ITEM_TANMAC_POISON_NEEDLE,Venom Shuriken
 LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER,Kiku-ichimonji Compressor
 LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO,Doggojeo
+LOC_SYSTEM_ITEM_EVOKE,Evoke
 LOC_SYSTEM_ITEM_EVOKE_PAGODA,Pagoda
 LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,Air Scroll
 LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,Dream Soul
@@ -2445,6 +2475,61 @@ LOC_SYSTEM_ITEM_ETC_CATNIP,Catnip Tree
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,Broken Camera
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,Kappa Junk
 LOC_SYSTEM_ITEM_ETC_PHOTO,Photograph
+LOC_SYSTEM_ITEM_ETC_CATNIP_CONFUSE,You're intoxicated by the scent of catnip!
+LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT,This item can be enchanted up to {0}.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE,A short-bladed sword. It attacks quickly.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER,A small and easily portable dagger. More effective for quietly slitting throats than direct combat.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE,A dagger optimized for throwing. It can be used in melee, but not effectively.\nAlthough you need to retrieve it after throwing, if that issue is solved, it's a very useful ranged weapon.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD,A longer blade than most daggers, making it viable even for direct combat.\nIf you're the kind who insists on fighting head-on with a dagger, this is your choice.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE,A long-bladed sword for stabbing and slashing enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA,A standard sword with no particular traits—simple and easy to use.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR,A large, curved longsword often carried by White Wolf Tengu.\nIts larger blade delivers more damage than regular longswords.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD,A massive double-edged sword. It's hard to wield even with two hands.\nIt boasts immense destructive power, but handling it well requires training.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM,A circular throwing weapon often used by some local deity.\nIf spun and thrown properly, it might even return to the user.\nIt might not look like a sword, but it can be wielded like one.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE,A blunt weapon that can be used in combat.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI,A ceremonial tool used by shrine maidens...\nthough in Gensokyo, it's often repurposed as a blunt weapon.\nNot the most efficient choice, but might be worth a try.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK,A broomstick often carried by magicians. It doesn't enhance magic power.\nThere's no real reason to cling to a broom, but magicians are oddly attached to them.\nYou might as well use it as a blunt weapon.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA,A parasol used by the fashionable. Stronger youkai seem to like them.\nIt might not be too practical, but if you want to look cool, why not give it a shot?\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD,A rod believed to help find treasure, though it's likely just a myth.\nWhile it may not help with treasure hunting, it's a solid metal rod usable in combat.\nIt's designed for two-handed use, so not very effective with a shield.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA,A massive pillar. It's surprising anyone thought of using it as a weapon.\nEven if you're used to it, swinging it would take a long time.\nHard to hit with, but if it connects, the damage is immense.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR,A long spear for thrusting at enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR,A plain and unremarkable spear. Good for thrusting.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN,A large spear made for throwing. Throw it hard to hit the target.\nIt can be used in melee too, but not great for swinging.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE,A huge scythe said to be wielded by reapers.\nIt seems difficult to use as a weapon, but with enough practice, it's pretty strong.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT,A long trident with three tips, specialized for stabbing.\nLight and easy to handle, but not very powerful.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR,A spear carved from bamboo.\nIt may look plain, but it hides surprising power.\nMastering it takes serious training.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE,An axe with a massive blade for chopping enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE,A small hand axe that can be wielded with one hand. It doesn’t deal great damage, but it’s easy to use.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE,A large axe with a big blade attached to a long handle.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR,A massive anchor often carried by a ghostly sailor.\nIncredibly powerful, but swinging something like this takes great skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO1,This weapon's power scales with your {0} skill. (Current {0} skill level: {1})
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO2,However, using this weapon with a shield will slow your attack speed by an additional {0}.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3,This item can be used as a melee weapon or thrown as danmaku.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4,In that case, its current danmaku speed is {0}. (Current danmaku skill level: {1})
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_INFO,(Current danmaku skill level: {0})
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO1,The penalty decreases as your armor skill increases, but cannot go below the minimum.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO2,With your current skill, you gain {0} ac and {1} penalty. (Armor skill level: {2})
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO3,The total penalty reduces evasion, stealth, and spell success rate.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO4,If the total penalty exceeds {0}, your accuracy decreases by the same amount.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO5,If the total penalty exceeds {0}, your movement speed decreases.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO6,If the total penalty exceeds {0}, all actions will be delayed by twice as much.
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG,A basic danmaku used for bullet hell games. You throw it to hit the enemy.\nThe problem is… it's a bugged danmaku.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET,This cheap amulet used by Reimu has powerful homing capabilities.\nIt’s a simple danmaku, but boasts high accuracy.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE,A shuriken that embeds into the target when thrown.\nIt deals little damage, but appears to be coated in poison.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,One of the Kappa's inventions—a bomb filled with highly compressed water.\nWhen thrown, it bursts all at once.\nLikely to hit a wide area.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,An ancient Indian weapon said to be used by Buddhist monks during training.\nIt looks like an ordinary handle, but releases magic when thrown with great force.\nUnlike other danmaku, this one pierces through enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,Comfortable clothing for everyday wear.\nSignificantly reduces the base penalty for non-fabric armor.\nHowever, since the minimum penalty is the same as other outfits, this benefit disappears once you're used to armor.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,A shrine maiden's garment.\nBlessed by the gods, it protects the mind and grants confusion resistance while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING,A winged robe said to be worn by the messengers of the Dragon Palace.\nConducts electricity, granting resistance to lightning while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,A blue uniform worn like standard attire among Kappa.\nDesigned to withstand river chills, granting cold resistance while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE,Clothing imbued with the spirit of the fire rat.\nIt appears capable of withstanding intense heat, granting fire resistance while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID,Uniforms worn by the maids of the Scarlet Devil Mansion.\nSpecially enchanted by the library there, it increases magic resistance while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,A doll from the lily-of-the-valley field wore this, but it's large enough to wear.\nThe flower's energy protects you, granting poison resistance while worn.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,A garment made of autumn leaves—surprisingly, it's properly crafted.\nWith faith in Shizuha, you'll blend into your surroundings and drastically increase stealth.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,A cloth outfit designed for easy movement.\nMade from tough fabric that withstands frequent grazing!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,A suit made of durable material.\nLess flexible than cloth, but quite lightweight.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,Armor bound with chains.\nSturdy, but not as protective as plate armor.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,Armor reinforced with steel plates.\nHinders magic and movement, but ensures your safety.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,A book containing various spells.\nIt may not be a named tome, but still offers useful magic.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,A book of basic fire magic.\nRecommended for beginners in fire magic.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,A book of basic cold magic.\nRecommended for beginners in cold magic.
@@ -2501,47 +2586,47 @@ LOC_SYSTEM_GOD_MIKO,Miko
 LOC_SYSTEM_GOD_OKINA,Okina
 LOC_SYSTEM_GOD_JUNKO,Junko
 LOC_SYSTEM_GOD_SUWAKO_TITLE,Moriya Suwako - Pinnacle of the Native Gods
-LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.\n스와코는 신자들에게 변덕스러운 권능을 준다.\n그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.
+LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,Suwako is a native goddess with the power to create earth.\nShe grants her followers unpredictable blessings.\nAs a result, they receive various powers, though not necessarily the ones they want.
 LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit Who Entrusted Fate to a Distant Dream
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,미마는 재앙신격인 존재로 악령이다.\n신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.\n특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a divine spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate magic: Spark.
 LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Phantom Girl of the Nether Pavilion
-LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,유유코는 백옥루에 사는 사이교우지의 아가씨이다.\n그녀는 죽음을 조종 할 수 있는 강력한 능력을 가지고 있어서 신도들에게 죽음의 힘을 선물해준다.\n그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.
+LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,Yuyuko is the lady of Saigyouji, residing in Hakugyokurou.\nShe wields the power of death and grants it to her followers.\nHer devotees gain control over death and receive many spirits.
 LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Yorigami Joon & Shion - The Most Wicked Sisters
-LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.\n죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서\n믿는 것만으로도 소모품을 낭비하고 잃어버리는 불행이 생기게 될 것이다.\n그럼에도 둘을 신앙한다면 직접 빙의하는 것으로 직접적으로 그녀들의 권능들을 사용하게 된다.\n그녀들의 권능은 강력하지만, 빙의와 동시에 그에 따른 그녀들의 불운도 더욱 강해질것이다.\n신도들은 다른 적들을 죽여서 그들의 돈을 갈취하는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,Joon and Shion are goddesses of waste and poverty, bringing misfortune to their followers.\nJoon causes wealth to be wasted, while Shion brings poverty.\nJust believing in them causes you to lose items and resources.\nHowever, devout worshipers are directly possessed and can wield their powers.\nTheir powers are strong, but so is the misfortune they bring.\nYou gain faith by killing enemies and taking their money.
 LOC_SYSTEM_GOD_SHINKI_TITLE,Shinki - Goddess of Makai
-LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,신키는 마계의 주인이자 마계를 창조한 마계의 신이다.\n창조의 능력을 이용해서 신키는 신도들에게 강력한 마족들을 선물한다.\n또한 신키는 당신을 적대적인 소환수로부터 지켜주거나 P를 모을때마다 체력과 영력을 회복시켜준다.\n일정수준 이상의 마족들은 당신을 언제라도 배신할 수 있는 걸 염두해야된다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,Shinki is the goddess and creator of Makai.\nShe uses her power of creation to summon strong demons for her followers.\nShe protects you from hostile summons and restores HP and MP whenever you gather P.\nHowever, strong demons may betray you.\nYou gain faith by picking up P items.
 LOC_SYSTEM_GOD_MINORIKO_TITLE,Aki Minoriko - Symbol of Abundance and Harvest
-LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,미노리코는 가을의 수확을 상징하는 신으로 신도에게 풍족함을 선사한다.\n신도들은 미노리코에게 풍족한 음식을 내려받게 되고 포만감과 체력을 보장받는다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,Minoriko is the goddess of autumn harvests and blesses her followers with abundance.\nHer followers receive bountiful food that restores fullness and HP.\nYou gain faith by picking up P items.
 LOC_SYSTEM_GOD_SHIZUHA_TITLE,Aki Shizuha - Symbol of Loneliness and Passing
-LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,아키 시즈하는 단풍의 신이다.\n시즈하는 신도들의 당신의 존재감을 낮추어 은밀하게 다닐 수 있게 도와준다.\n그녀의 권능은 암살자들에게 큰 혜택을 주며 중갑옷의 패널티도 크게 상쇄받을 수 있다.\n시즈하는 시끄러운 자들의 시체가 낙엽처럼 떨어지는 것을 기뻐한다.
+LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,Aki Shizuha is the goddess of autumn leaves.\nShe lowers your presence, allowing you to move stealthily.\nHer powers greatly benefit assassins and reduce heavy armor penalties.\nShe delights in watching loud enemies fall like leaves.
 LOC_SYSTEM_GOD_EIRIN_TITLE,Yagokoro Eirin - Brain of the Moon
-LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,그녀는 모든 약을 제조할 수 있는 달의 최고의 현자로 천재 약사이다.\n그녀의 신도로 들어가면 여러가지 물약들을 받게되고 추가적인 효과를 얻게 된다.\n또한 자신의 몸을 개조하거나 부작용을 감당하는 극적인 치료도 가능해진다.\n신도는 그녀의 실험대상이 될 각오를 할 수 있다면 그만큼의 보답을 받을 수 있을 것이다.\n신도는 이로운 물약의 위에서 기도를 하여 포션을 바치거나 물약을 마시는 것으로 신앙심을 얻을 수 있다.\n또한 자주는 아니지만 적을 죽였을때 가끔씩 신앙심을 얻을 수 도 있다.
+LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,She is the moon's top sage and a genius pharmacist who can make any medicine.\nHer followers receive potions with additional effects.\nDramatic treatments such as body modifications are also possible.\nThose who accept becoming test subjects are rewarded.\nYou gain faith by praying over beneficial potions or drinking them.\nOccasionally, you may also gain faith by defeating enemies.
 LOC_SYSTEM_GOD_KANAKO_TITLE,Yasaka Kanako - Avatar of Mountains and Lakes
-LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,카나코는 건(하늘)을 창조하는 능력을 가진 신으로 본래는 바람의 신이지만 산의 신으로 모셔지고 있다.\n그녀는 신자들에게 신앙을 받는 것으로 강력한 전투 능력을 보답한다.\n특히 근접전사와 원거리탄막으로 싸우는 자에게 큰 도움이 될 것이다.\n신자들은 계속되는 전투로 그녀에게 신앙을 바쳐야한다.
+LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,Kanako is a goddess with the power to create Heaven. Though originally a wind deity, she is now revered as a mountain goddess.\nShe grants powerful combat abilities in exchange for faith.\nEspecially helpful for melee fighters and ranged danmaku users.\nHer followers must continue fighting to offer faith.
 LOC_SYSTEM_GOD_YUKARI_TITLE,Yakumo Yukari - Youkai Hidden Within Boundaries
-LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,야쿠모 유카리는 환상향에서도 이름있는 강력한 경계의 요괴다.\n유카리의 식신으로 들어가게 되면 그녀에게 경계와 관련된 능력을 얻을 수 있다.\n강력한 전이능력을 제공받지만 권능을 제외한 다른 전이능력을 금지하고\n제어하기 힘든 강력한 전이 능력은 역으로 신도를 위험하게 만들수도 있다.
+LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,Yakumo Yukari is a famous boundary youkai in Gensokyo.\nAs her shikigami, you gain powers related to boundaries.\nShe grants powerful teleportation abilities but bans other teleportation outside her divine powers.\nHer uncontrolled powers can sometimes backfire and endanger followers.
 LOC_SYSTEM_GOD_HINA_TITLE,Kagiyama Hina - Hidden Doll Goddess of Misfortune
-LOC_SYSTEM_GOD_HINA_DESCRIPTION,히나는 액을 모아서 재앙을 방지하는 재앙신이다.\n그녀로부터 액을 받아서 저주를 몸에 지니는 것으로 그녀의 권능을 얻을 수 있다.\n던전을 탐험하는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_HINA_DESCRIPTION,Hina is a disaster goddess who absorbs misfortune to prevent calamity.\nBy accepting curses from her, you gain her divine powers.\nFaith is gained through dungeon exploration.
 LOC_SYSTEM_GOD_SATORI_TITLE,Komeiji Satori - Girl Even Spirits Fear
-LOC_SYSTEM_GOD_SATORI_DESCRIPTION,사토리는 지령전의 주인으로 마음을 읽는 요괴이다.\n사토리를 믿는다는 것은 그녀의 펫이 된다는 얘기와도 같고 그녀의 힘을 받을 수 있게 된다.\n사토리는 방임주의이기때문에 전투에 직접 관련된 능력은 별로 주진 않는다.\n그러나 그녀의 마음을 읽는 능력으로 던전의 지형 정보를 얻거나 위치를 알아낼 수 있다.\n또한 상대의 마음 속으로부터 트라우마를 읽어내거나 상대의 생각을 통째로 읽어내 농락할수도 있다.\n생각을 간파당한 상대는 모든 디버프 마법에 취약해지므로 정신술을 연마한 사람에게 도움이 될 것이다.\n그녀의 애완동물들은 던전을 탐험하는 것으로 그녀의 호감을 얻을 수 있다.
+LOC_SYSTEM_GOD_SATORI_DESCRIPTION,Satori is the mistress of the Palace of Earth Spirits and can read minds.\nTo believe in her is to become her pet and receive her powers.\nShe doesn't provide direct combat abilities but allows you to read maps and detect positions.\nShe can read enemy traumas and manipulate their thoughts.\nEnemies exposed become vulnerable to all debuffs, aiding mental magic users.\nPets earn her favor through dungeon exploration.
 LOC_SYSTEM_GOD_YUUGI_TITLE,Hoshiguma Yuugi - Notorious Oni of Super Strength
-LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,유우기는 지하의 옛도시에 살고 있는 오니이다. 유우기는 괴력난신의 오니로 강력한 힘을 신도에게 준다.\n그녀의 힘은 근접 전투를 하면서 상대를 매치거나 집어던지는 등 레슬링같은 전투를 해낼 수 있다.\n또한 오니의 힘으로 포효를 하여 상대를 벙어리로 만들거나 오니의 궁극기 또한 사용할 수 있게 된다.\n단, 유우기는 신도가 마법의 힘에 의지해 싸우는 것을 싫어한다.\n그녀의 신앙심은 전투에서 승리하는 것으로 얻을 수 있다.
+LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,Yuugi is an oni who lives in the Old Capital underground.\nShe bestows overwhelming strength to her followers.\nHer powers enable wrestling-like combat, such as grabbing and slamming enemies.\nShe also grants roars that silence enemies and access to her ultimate technique.\nHowever, she despises relying on magic.\nFaith is earned by winning battles.
 LOC_SYSTEM_GOD_TENSI_TITLE,Hinanawi Tenshi - Girl of Bhavaagra, the Celestial Realm
-LOC_SYSTEM_GOD_TENSI_DESCRIPTION,텐시는 유정천의 제멋대로인 천인 아가씨이다.\n그녀는 지루한 천계생활에 따분해하던차 이 이변을 계기로 자신을 믿고자하는 신도들을 장난감처럼 취급한다.\n텐시는 신도에게 어떠한 권능도 내려주지않는다. 모든 행동은 그녀의 변덕대로 이루어진다. \n신도가 항상 위험천만한 전투를 반복하여 그녀의 흥미를 최대한으로 끌어낸다면 강력한 도움을 받을 수 있다.\n하지만 신도가 안이한 안전을 바란다면 곧 자신의 생각을 후회하게 될 것이다.
+LOC_SYSTEM_GOD_TENSI_DESCRIPTION,Tenshi is a spoiled celestial from the Celestial Realm.\nBored with heaven, she toys with followers who worship her during this incident.\nShe grants no powers, and all outcomes depend on her whim.\nIf you amuse her with constant risky battles, she may help you.\nIf you seek safety, you’ll regret your decision.
 LOC_SYSTEM_GOD_BYAKUREN_TITLE,Hijiri Byakuren - Sealed Great Magician
-LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,뱌쿠렌은 마계에 봉인되어있었던 대마법사로 환상향에 절인 명련사를 세워 불교의 가르침을 전한다.\n그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.\n그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.\n신도는 만나보지못한 새로운 사람들을 만나는 것으로 신앙심을 얻을 수 있다.
+LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,Byakuren is a great sorceress once sealed in Makai, now a Buddhist teacher in Myouren Temple.\nShe teaches magic—especially buffs that enhance physical abilities.\nHer powers grant intelligence, speed, and reduction in magic penalties.\nFaith is earned by meeting new people.
 LOC_SYSTEM_GOD_SEIJA_TITLE,Kijin Seija - The Rebellious Amanojaku
-LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.\n세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.\n현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.\n그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고\n그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.\n그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.
+LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,Seija is a wanted amanojaku fleeing with stolen goods.\nAligning with her grants powerful stolen items.\nShe welcomes you now, but only to use you.\nShe will use you as a shield and abandon you once you're no longer useful.\nFaith in her draws eternal scorn from other gods.\nShe hates the strong and distrusts all; if you reach level 9, she rejects you.
 LOC_SYSTEM_GOD_LILLY_TITLE,Lily White - Fairy Who Heralds Spring
-LOC_SYSTEM_GOD_LILLY_DESCRIPTION,릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.\n그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.\n그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.\n동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.\n당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. \n본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.\n릴리화이트는 이 세상을 탐험하는 것을 좋아한다.
+LOC_SYSTEM_GOD_LILLY_DESCRIPTION,Lily White is the fairy of spring, known to bloom flowers just by passing.\nShe shares her power to empower other fairies.\nBelieving in her lets you recruit wandering fairies as immortal allies.\nFairies resurrect endlessly while following you.\nYou must share some XP with them, allowing them to grow alongside you.\nThough originally a fairy-only deity, she doesn't refuse outsiders.\nLily enjoys exploring the world.
 LOC_SYSTEM_GOD_MIKO_TITLE,Toyosatomimi no Miko - Omniscient Taoist Governing the Cosmos
-LOC_SYSTEM_GOD_MIKO_DESCRIPTION,토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.\n그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.\n인기도는 빠른 속도로 오르며 적들의 욕망을 읽거나 죽임으로서 인기도를 모을 수 있지만\n층을 올라가거나 서브던전이 바뀌면 인기도가 떨어지며 권능은 인기도를 크게 소모하게 된다.\n미코의 권능인 도술은 반영구적이며 지속시간없이 유지되지만 층을 이동할 경우 사라진다.
+LOC_SYSTEM_GOD_MIKO_DESCRIPTION,Toyosatomimi no Miko is a sage of the Mausoleum with the power to read desires.\nHer followers use Popularity instead of Piety.\nPopularity increases quickly via reading or defeating enemies.\nHowever, it drops when floors or subdungeons change, and powers consume large amounts.\nHer Taoist arts last indefinitely but vanish when changing floors.
 LOC_SYSTEM_GOD_OKINA_TITLE,Matara Okina - The Ultimate Hidden God
-LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.\n그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.\n그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.\n문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.\n또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.\n그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.
+LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding—you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
 LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, but her favorite followers may be permanently purified.\nHer blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.\nShe enjoys slaying every visible enemy.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
-LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
+LOC_SYSTEM_GOD_BUG_DESCRIPTION,This god is a bug!\nThe Bug God is the most evil deity in TouhouCrawl.\nIt deeply affects gameplay and causes immense stress.\nIts mere existence might crash the game or delete your character.\nTo appease it, report the bug to the developers.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,You begin to waste and lose consumables due to the curses of the Plague and Poverty gods.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,You can now possess Joon or Shion.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,You can no longer possess Joon or Shion.
@@ -2595,8 +2680,8 @@ LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_ADD,Shinki protects you from hostile summon
 LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_REMOVE,You are no longer protected from hostile summons.
 LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_ADD,You can summon Shinki's advanced demons at great risk.
 LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_REMOVE,You can no longer summon advanced demons.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD,이제 당신은 P로부터 힘을 얻는다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE,더 이상 P로부터 힘을 얻지 못한다.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD,You now gain power from P.
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE,You no longer gain power from P.
 LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_ADD,You're good at dodging while drunk.
 LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_REMOVE,You can no longer dodge while drunk.
 LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_ADD,You can drink potions as if they were alcohol.
@@ -2723,12 +2808,12 @@ LOC_SYSTEM_GOD_SHOW_POTION,(Potion)
 LOC_SYSTEM_GOD_SHOW_CURSE,(Curse)
 LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(MP, Faith)
 LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(Time, Faith)
-LOC_SYSTEM_GOD_SHOW_P_AND_PIETY,(P, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_POTION,(P, 물약)
-LOC_SYSTEM_GOD_SHOW_P_AND_MP,(P, 영력)
+LOC_SYSTEM_GOD_SHOW_P_AND_PIETY,(P, Faith)
+LOC_SYSTEM_GOD_SHOW_P_AND_POTION,(P, Potion)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP,(P, MP)
 LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY,(Potion, Faith)
-LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY,(P, 영력, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY,(P, 음식, 신앙)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY,(P, MP, Faith)
+LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY,(P, Food, Faith)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON,(Once Only)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR,(Once per Floor)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(Once upon Possession)
@@ -2900,104 +2985,104 @@ LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,죠온이 당신에게 강제로 빙의
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!
 LOC_SYSTEM_GOD_BYAKUREN_WELCOME,히지리: 어서오세요. 신도여
 LOC_SYSTEM_GOD_BYAKUREN_TALK1,히지리: 아아, 법의 세계에 빛이 가득해
-LOC_SYSTEM_GOD_BYAKUREN_TALK2,히지리: 우리 절은 인간과 요괴를 차별하지않는답니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK3,히지리: 고된 수행은 마음을 깨끗하게 하지요.
-LOC_SYSTEM_GOD_BYAKUREN_TALK4,히지리: 당신의 노력은 결실을 맺을거랍니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK5,히지리: 비록 마법을 쓰는자라도 몸을 단련해야합니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK6,히지리: 당신이 배운 불교의 가르침을 모두에게 전하세요.
-LOC_SYSTEM_GOD_BYAKUREN_TALK7,히지리: 어서오세요. 진정한 부처님의 제자여
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_MP,히지리의 분노로 당신의 영력이 흡수되었다!
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_BYAKUREN,히지리의 분노로 당신의 스탯이 감소되었다!
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_SLOW,히지리의 분노로 당신은 느려졌다!
-LOC_SYSTEM_GOD_KANAKO_WELCOME,카나코: 끊임없는 전투로 신앙을 보이도록 하여라!
-LOC_SYSTEM_GOD_KANAKO_WELCOME_SANAE,카나코: 앞으로 나아가거라, 사나에!
-LOC_SYSTEM_GOD_KANAKO_TALK1,카나코: 너무 무리는 하지말렴. 사나에
-LOC_SYSTEM_GOD_KANAKO_TALK2,카나코: 끊임없는 전투로 신앙을 증명하거라
-LOC_SYSTEM_GOD_KANAKO_TALK3,카나코: 나를 부른 이는 누구인가?
-LOC_SYSTEM_GOD_KANAKO_TALK4,카나코: 신앙을 방해하는 자는 모두 제거하라
-LOC_SYSTEM_GOD_KANAKO_TALK5,카나코: 그대의 신앙에는 힘으로서 보답하지
-LOC_SYSTEM_GOD_KANAKO_TALK6,카나코: 산의 신앙을 더욱 더 퍼트리도록
-LOC_SYSTEM_GOD_KANAKO_TALK7,카나코: 한때 전투의 신으로 불렸던 몸. 그 힘을 느끼게해주지
-LOC_SYSTEM_GOD_KANAKO_TALK8,카나코: 진정한 전투의 화신이여 앞으로 나아가라!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,카나코는 당신에게 강력한 일격을 날렸다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,카나코는 당신에게 강력한 일격을 날렸다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL,카나코는 당신을 전투로 강제로 이끌었다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL,카나코는 당신을 전투로 이끌려했지만 적당한 적이 없었다.
-LOC_SYSTEM_GOD_SWAWKO_WELCOME,스와코: 하하하! 재밌어졌어
-LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,스와코: 사나에! 요즘은 어때, 익숙해졌어?
-LOC_SYSTEM_GOD_SUWAKO_TALK1,스와코: 요괴퇴치의 시간이야 사나에!
-LOC_SYSTEM_GOD_SUWAKO_TALK2,스와코: 응? 나 불렀어?
-LOC_SYSTEM_GOD_SUWAKO_TALK3,스와코: 최근의 신도들은 원하는게 많다니깐
-LOC_SYSTEM_GOD_SUWAKO_TALK4,스와코: 내가 재앙신인걸 잊지말아~
-LOC_SYSTEM_GOD_SUWAKO_TALK5,스와코: 좀 더 노력하라고~
-LOC_SYSTEM_GOD_SUWAKO_TALK6,스와코: 걱정하지마, 충분히 힘은 줄테니깐
+LOC_SYSTEM_GOD_BYAKUREN_TALK2,Byakuren: Our temple does not discriminate between humans and youkai.
+LOC_SYSTEM_GOD_BYAKUREN_TALK3,Byakuren: Harsh training purifies the heart.
+LOC_SYSTEM_GOD_BYAKUREN_TALK4,Byakuren: Your efforts will bear fruit.
+LOC_SYSTEM_GOD_BYAKUREN_TALK5,Byakuren: Even magic users must train their bodies.
+LOC_SYSTEM_GOD_BYAKUREN_TALK6,Byakuren: Spread the teachings of Buddhism you have learned to all.
+LOC_SYSTEM_GOD_BYAKUREN_TALK7,Byakuren: Welcome, true disciple of the Buddha.
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_MP,Byakuren's wrath drains your MP!
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_BYAKUREN,Byakuren's wrath has reduced your stats!
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_SLOW,Byakuren's wrath has made you slower!
+LOC_SYSTEM_GOD_KANAKO_WELCOME,Kanako: Prove your faith through unending battle!
+LOC_SYSTEM_GOD_KANAKO_WELCOME_SANAE,Kanako: Move forward, Sanae!
+LOC_SYSTEM_GOD_KANAKO_TALK1,Kanako: Don’t overdo it, Sanae.
+LOC_SYSTEM_GOD_KANAKO_TALK2,Kanako: Show your faith through constant combat.
+LOC_SYSTEM_GOD_KANAKO_TALK3,Kanako: Who dares call upon me?
+LOC_SYSTEM_GOD_KANAKO_TALK4,Kanako: Eliminate all who would hinder faith.
+LOC_SYSTEM_GOD_KANAKO_TALK5,Kanako: I shall repay your faith with strength.
+LOC_SYSTEM_GOD_KANAKO_TALK6,Kanako: Spread the faith of the mountain far and wide.
+LOC_SYSTEM_GOD_KANAKO_TALK7,Kanako: Once called the god of battle—let me show you that power.
+LOC_SYSTEM_GOD_KANAKO_TALK8,Kanako: Avatar of true battle, march forward!
+LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,Kanako struck you with a mighty blow!
+LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,Kanako struck you with a powerful blow!
+LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL,Kanako forcibly dragged you into battle!
+LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL,Kanako tried to summon you into battle, but there were no suitable enemies.
+LOC_SYSTEM_GOD_SWAWKO_WELCOME,Suwako: Hahaha! Now this is getting fun!
+LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,Suwako: Sanae! How’s it going? Getting used to things?
+LOC_SYSTEM_GOD_SUWAKO_TALK1,Suwako: Time to exterminate some youkai, Sanae!
+LOC_SYSTEM_GOD_SUWAKO_TALK2,Suwako: Hm? Did you call me?
+LOC_SYSTEM_GOD_SUWAKO_TALK3,Suwako: Lately, followers want too much.
+LOC_SYSTEM_GOD_SUWAKO_TALK4,Suwako: Don’t forget—I’m a goddess of curses too!
+LOC_SYSTEM_GOD_SUWAKO_TALK5,Suwako: Put in a bit more effort~!
+LOC_SYSTEM_GOD_SUWAKO_TALK6,Suwako: Don’t worry, I’ll give you plenty of power.
 LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat
 LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,You pulled {0}.
 LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,A calamity was cast upon {0}.
-LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,스와코는 당신에게 저주를 내렸다!
-LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,스와코는 당신에게 적대적인 개구리 무리를 선물했다!
-LOC_SYSTEM_GOD_MINORIKO_WELCOME,미노리코: 이 땅에 가을의 축복을!
-LOC_SYSTEM_GOD_MINORIKO_TALK1,미노리코: 당신도 가을에 반한거야?
-LOC_SYSTEM_GOD_MINORIKO_TALK2,미노리코: 수확을 위해선 그만큼의 노력이 필요한거야
-LOC_SYSTEM_GOD_MINORIKO_TALK3,미노리코: 가을은 정말 아름다운 계절이야!
-LOC_SYSTEM_GOD_MINORIKO_TALK4,미노리코: 내가 준 고구마는 입맛에 맞아?
-LOC_SYSTEM_GOD_MINORIKO_TALK5,미노리코: 배는 든든하게 하고 다니지?
-LOC_SYSTEM_GOD_MINORIKO_TALK6,미노리코: 쌓아올린 모든 노력을 풍년으로 보답할때야!
-LOC_SYSTEM_GOD_MINORIKO_TALK7,미노리코: 가을의 사도여! 나아가서 가을의 위대함을 알려라!
+LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,Suwako has placed a curse on you!
+LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,Suwako has gifted you with a hostile swarm of frogs!
+LOC_SYSTEM_GOD_MINORIKO_WELCOME,Minoriko: May autumn's blessings fall upon this land!
+LOC_SYSTEM_GOD_MINORIKO_TALK1,Minoriko: Have you fallen in love with autumn too?
+LOC_SYSTEM_GOD_MINORIKO_TALK2,Minoriko: A great harvest requires just as much effort.
+LOC_SYSTEM_GOD_MINORIKO_TALK3,Minoriko: Autumn truly is a beautiful season!
+LOC_SYSTEM_GOD_MINORIKO_TALK4,Minoriko: Did the sweet potato I gave you suit your taste?
+LOC_SYSTEM_GOD_MINORIKO_TALK5,Minoriko: You’re keeping your belly full, right?
+LOC_SYSTEM_GOD_MINORIKO_TALK6,Minoriko: Now it’s time to repay all your hard work with a bountiful harvest!
+LOC_SYSTEM_GOD_MINORIKO_TALK7,Minoriko: Apostle of Autumn! Go forth and spread the greatness of the season!
 LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT,Minoriko exclaimed with excitement, "That's it!"
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER,미노리코는 당신의 배고픔을 가속시켰다!
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK,미노리코는 당신의 건강을 빼앗아갔다!
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT,미노리코는 당신의 능력치를 깍아내렸다!
-LOC_SYSTEM_GOD_MIMA_WELCOME,미마: 압도적인 마법으로!
-LOC_SYSTEM_GOD_MIMA_TALK1,미마: 오랫만이네, 잘 지내고 있어?
-LOC_SYSTEM_GOD_MIMA_TALK2,미마: 새로운 입교 희망자인가?
-LOC_SYSTEM_GOD_MIMA_TALK3,미마: 사실 최근엔 제자는 받지않았었지만 특별케이스야
-LOC_SYSTEM_GOD_MIMA_TALK4,미마: 마법의 기본은 파워다. 적어두도록
-LOC_SYSTEM_GOD_MIMA_TALK5,미마: 선수필승. 먼저 공격한 쪽이 이긴다.
-LOC_SYSTEM_GOD_MIMA_TALK6,미마: 내 궁극의 마법이 궁금한가?
-LOC_SYSTEM_GOD_MIMA_TALK7,미마: 더 이상 내가 가르쳐줄 마법은 없다.
-LOC_SYSTEM_GOD_MIMA_TALK8,미마: 마법의 힘으로 길을 열어라!
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER,Minoriko has accelerated your hunger!
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK,Minoriko has taken away your health!
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT,Minoriko has lowered your stats!
+LOC_SYSTEM_GOD_MIMA_WELCOME,Mima: With overwhelming magic!
+LOC_SYSTEM_GOD_MIMA_TALK1,Mima: Long time no see. Are you doing well?
+LOC_SYSTEM_GOD_MIMA_TALK2,Mima: A new recruit hoping to join?
+LOC_SYSTEM_GOD_MIMA_TALK3,Mima: Honestly, I haven't taken students recently, but you’re a special case.
+LOC_SYSTEM_GOD_MIMA_TALK4,Mima: The basics of magic? Power. Write that down.
+LOC_SYSTEM_GOD_MIMA_TALK5,Mima: Strike first—whoever attacks first wins.
+LOC_SYSTEM_GOD_MIMA_TALK6,Mima: Curious about my ultimate magic?
+LOC_SYSTEM_GOD_MIMA_TALK7,Mima: I have no more magic left to teach you.
+LOC_SYSTEM_GOD_MIMA_TALK8,Mima: Use the power of magic to carve a path!
 LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,Mima aimed a powerful {0} at you!
-LOC_SYSTEM_GOD_SHINKI_WELCOME,신키에게 P와 영혼을!
-LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P,P로부터 회복하였다.
+LOC_SYSTEM_GOD_SHINKI_WELCOME,Offer P and souls to Shinki!
+LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P,You’ve recovered using P.
 LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,Low-ranking demons of Makai have been summoned to aid you.
 LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0} doesn't look very pleased.
-LOC_SYSTEM_GOD_SHINKI_PUNISH_SUMMON,신키가 적대적인 마계인을 창조해냈다!
-LOC_SYSTEM_GOD_YUUGI_WELCOME,유우기: 더 강한 상대를 찾아라!
-LOC_SYSTEM_GOD_YUUGI_TALK1,유우기: 넌 얼마나 강하지?
-LOC_SYSTEM_GOD_YUUGI_TALK2,유우기: 강한 적과 붙어서 너의 강함을 증명해!
-LOC_SYSTEM_GOD_YUUGI_TALK3,유우기: 난 거짓말을 하는 녀석이 싫어
-LOC_SYSTEM_GOD_YUUGI_TALK4,유우기: 술은 많이 마실 수 있어?
-LOC_SYSTEM_GOD_YUUGI_TALK5,유우기: 네가 싸우는걸 보면 왠지 즐거운데!
-LOC_SYSTEM_GOD_YUUGI_TALK6,유우기: 나중에 나랑 한번 싸워보지않을래?
-LOC_SYSTEM_GOD_YUUGI_TALK7,유우기: 다음엔 술자리에 초대할테니 꼭 살아서 돌아오라고!
+LOC_SYSTEM_GOD_SHINKI_PUNISH_SUMMON,Shinki has created a hostile Makai being!
+LOC_SYSTEM_GOD_YUUGI_WELCOME,Yuugi: Find a stronger opponent!
+LOC_SYSTEM_GOD_YUUGI_TALK1,Yuugi: Just how strong are you?
+LOC_SYSTEM_GOD_YUUGI_TALK2,Yuugi: Prove your strength by facing strong foes!
+LOC_SYSTEM_GOD_YUUGI_TALK3,Yuugi: I hate liars.
+LOC_SYSTEM_GOD_YUUGI_TALK4,Yuugi: Can you hold your liquor?
+LOC_SYSTEM_GOD_YUUGI_TALK5,Yuugi: Watching you fight somehow makes me happy!
+LOC_SYSTEM_GOD_YUUGI_TALK6,Yuugi: Want to spar with me sometime?
+LOC_SYSTEM_GOD_YUUGI_TALK7,Yuugi: I’ll invite you for drinks next time—just make sure you survive!
 LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi rejoiced in your victory.
 LOC_SYSTEM_GOD_YUUGI_CATCH,You caught {0}.
 LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC,Yuugi was enraged by your magic!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK,유우기가 강한 술을 당신에게 강제로 먹였다!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW,유우기가 당신을 집어던졌다!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_ONI,유우기가 당신을 벌하기위해 동료 오니들을 불러냈다!
-LOC_SYSTEM_GOD_SHIZUHA_WELCOME,시즈하: 인기 있는 녀석은 모두 죽여라...
-LOC_SYSTEM_GOD_SHIZUHA_TALK1,시즈하는 조용히 당신을 보고있다.
-LOC_SYSTEM_GOD_SHIZUHA_TALK2,시즈하는 당신의 기도에 고개를 끄덕였다.
-LOC_SYSTEM_GOD_SHIZUHA_TALK3,시즈하: ...이제 우리들의 차례야...
-LOC_SYSTEM_GOD_SHIZUHA_TALK4,시즈하: 다음 인기투표는 꼭 부탁할게
+LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK,Yuugi forced you to drink some powerful booze!
+LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW,Yuugi grabbed you and threw you!
+LOC_SYSTEM_GOD_YUUGI_PUNISH_ONI,Yuugi summoned fellow oni to punish you!
+LOC_SYSTEM_GOD_SHIZUHA_WELCOME,Shizuha: Kill all those who are popular...
+LOC_SYSTEM_GOD_SHIZUHA_TALK1,Shizuha silently watches you.
+LOC_SYSTEM_GOD_SHIZUHA_TALK2,Shizuha nods quietly at your prayer.
+LOC_SYSTEM_GOD_SHIZUHA_TALK3,Shizuha: ...Now it's our turn...
+LOC_SYSTEM_GOD_SHIZUHA_TALK4,Shizuha: Be sure to vote for me in the next popularity poll.
 LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,Shizuha rejoiced as your enemies fell like autumn leaves.
 LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,Shizuha clapped. "Splendid."
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense? (y/n)
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
 LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,Stepping on the leaves made a loud rustling noise.
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,시즈하는 당신에 광기의 낙엽을 흩날렸다!
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_BACKSTAB,시즈하가 당신의 등 뒤를 찔렀다!
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_NOISE_AND_DEBUFF,시즈하가 엄청난 소음과 함께 당신을 지목했다!
-LOC_SYSTEM_GOD_HINA_WELCOME,히나: 그럼 액땜작업을 계속 하겠어
-LOC_SYSTEM_GOD_HINA_TALK1,히나: 이 곳엔 재액이 가득해
-LOC_SYSTEM_GOD_HINA_TALK2,히나: 조금씩 조금씩 액땜을 해나가자
-LOC_SYSTEM_GOD_HINA_TALK3,히나: 액땜을 방해하는 녀석들은 배제해도 좋아
-LOC_SYSTEM_GOD_HINA_TALK4,히나: 더욱 더 많은 저주를 모으도록 해
-LOC_SYSTEM_GOD_HINA_TALK5,히나: 나에겐 그동안 누구도 말을 걸어주지않았어
-LOC_SYSTEM_GOD_HINA_TALK6,히나: 저주를 모으는 작업은 외로운거지
-LOC_SYSTEM_GOD_HINA_TALK7,히나: 너는 나와 끝까지 같이 있어줄거지?
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,Shizuha scattered leaves of madness around you!
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_BACKSTAB,Shizuha stabbed you in the back!
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_NOISE_AND_DEBUFF,Shizuha targeted you with deafening noise!
+LOC_SYSTEM_GOD_HINA_WELCOME,Hina: Let's continue the curse cleansing.
+LOC_SYSTEM_GOD_HINA_TALK1,Hina: This place is full of misfortune.
+LOC_SYSTEM_GOD_HINA_TALK2,Hina: Let’s remove the misfortune bit by bit.
+LOC_SYSTEM_GOD_HINA_TALK3,Hina: It’s okay to eliminate those who interfere with purification.
+LOC_SYSTEM_GOD_HINA_TALK4,Hina: Gather even more curses.
+LOC_SYSTEM_GOD_HINA_TALK5,Hina: No one has spoken to me in a long time.
+LOC_SYSTEM_GOD_HINA_TALK6,Hina: Gathering curses is such a lonely task.
+LOC_SYSTEM_GOD_HINA_TALK7,Hina: You'll stay with me until the end, right?
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,Hina infused your equipment with misfortune!
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,{0} you were wearing glowed darkly.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0} is brimming with cursed power.
@@ -3005,74 +3090,74 @@ LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,{0} glowed darkly, filling you with 
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly — you now reflect all damage.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly — you feel yourself healing.
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0} emanates a cold, hollow aura of curse.
-LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,히나는 액을 당신에게 직접 주입했다!
-LOC_SYSTEM_GOD_HINA_PUNISH_SPIN,히나는 당신을 빙빙 돌렸다!
-LOC_SYSTEM_GOD_YUKARI_WELCOME,유카리: 돌아왔구나
-LOC_SYSTEM_GOD_YUKARI_TALK1,유카리: 환상향의 무녀의 본분이 뭔지 기억하고있지?
-LOC_SYSTEM_GOD_YUKARI_TALK2,유카리: 당신이 나의 새로운 식신?
-LOC_SYSTEM_GOD_YUKARI_TALK3,유카리: 환상향은 모든 것을 수용해
-LOC_SYSTEM_GOD_YUKARI_TALK4,유카리: 결계의 보수작업이 필요해
-LOC_SYSTEM_GOD_YUKARI_TALK5,유카리: 사태의 원인을 알기위해서라도 더 많은 정보가 필요해
-LOC_SYSTEM_GOD_YUKARI_TALK6,유카리: 당신만 믿고있어. 도움이 필요하면 말해
-LOC_SYSTEM_GOD_YUKARI_TALK7,유카리: 내 힘을 받으면 더 이상 경계의 유무는 무의미해
-LOC_SYSTEM_GOD_YUKARI_TALK8,유카리: 당신만이 할 수 있는 일이야
+LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,Hina has directly infused you with misfortune!
+LOC_SYSTEM_GOD_HINA_PUNISH_SPIN,Hina spun you around and around!
+LOC_SYSTEM_GOD_YUKARI_WELCOME,Yukari: So you've returned.
+LOC_SYSTEM_GOD_YUKARI_TALK1,Yukari: Do you still remember the duty of Gensokyo's shrine maiden?
+LOC_SYSTEM_GOD_YUKARI_TALK2,Yukari: So you're my new shikigami?
+LOC_SYSTEM_GOD_YUKARI_TALK3,Yukari: Gensokyo accepts all things.
+LOC_SYSTEM_GOD_YUKARI_TALK4,Yukari: The boundary needs maintenance.
+LOC_SYSTEM_GOD_YUKARI_TALK5,Yukari: We'll need more information to understand what's happening.
+LOC_SYSTEM_GOD_YUKARI_TALK6,Yukari: I'm counting on you. Let me know if you need help.
+LOC_SYSTEM_GOD_YUKARI_TALK7,Yukari: Once you gain my power, boundaries no longer matter.
+LOC_SYSTEM_GOD_YUKARI_TALK8,Yukari: This is something only you can do.
 LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,Yukari was furious at your reckless use of teleportation magic!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,유카리는 당신을 강제로 텔레포트 시켰다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,유카리는 당신의 주변에 몹들을 강제로 이동시켰다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_STASIS,유카리는 당신의 공간이동을 막았다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_EYES,유카리는 당신을 감시하는 이형의 눈을 소환했다!
-LOC_SYSTEM_GOD_EIRIN_WELCOME,에이린: 새로운 실험체가 필요해졌어
-LOC_SYSTEM_GOD_EIRIN_TALK1,에이린: 최근에도 공주님과는 사이좋게 지내나요?
-LOC_SYSTEM_GOD_EIRIN_TALK2,에이린: 새로운 실험체가 필요해...
-LOC_SYSTEM_GOD_EIRIN_TALK3,에이린: 이 약을 먹어보고 부작용은 없었어?
-LOC_SYSTEM_GOD_EIRIN_TALK4,에이린: 좀 더 많은 표본이 필요해
-LOC_SYSTEM_GOD_EIRIN_TALK5,에이린: 독을 알면 약도 만들 수 있는거야
-LOC_SYSTEM_GOD_EIRIN_TALK6,에이린: 부작용을 두려워하지마. 효과는 확실해
-LOC_SYSTEM_GOD_EIRIN_TALK7,에이린: 내가 준 약이라면 실패하지않을거야
-LOC_SYSTEM_GOD_EIRIN_TALK8,에이린: 이것이 너의 새로운 모습이야
+LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,Yukari forcibly teleported you!
+LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,Yukari forcibly moved monsters near you!
+LOC_SYSTEM_GOD_YUKARI_PUNISH_STASIS,Yukari has sealed your teleportation!
+LOC_SYSTEM_GOD_YUKARI_PUNISH_EYES,Yukari summoned alien eyes to watch over you!
+LOC_SYSTEM_GOD_EIRIN_WELCOME,Eirin: I’m in need of a new test subject.
+LOC_SYSTEM_GOD_EIRIN_TALK1,Eirin: Are you still getting along with the princess lately?
+LOC_SYSTEM_GOD_EIRIN_TALK2,Eirin: I’m in need of new test subjects...
+LOC_SYSTEM_GOD_EIRIN_TALK3,Eirin: Did you try this medicine? No side effects?
+LOC_SYSTEM_GOD_EIRIN_TALK4,Eirin: I need more samples.
+LOC_SYSTEM_GOD_EIRIN_TALK5,Eirin: If you understand poisons, you can make antidotes too.
+LOC_SYSTEM_GOD_EIRIN_TALK6,Eirin: Don’t fear the side effects. The effects are guaranteed.
+LOC_SYSTEM_GOD_EIRIN_TALK7,Eirin: If it’s my medicine, it won’t fail.
+LOC_SYSTEM_GOD_EIRIN_TALK8,Eirin: This is your new form now.
 LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
-LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,에이린이 당신의 몸에 강제로 실험을 했다!
-LOC_SYSTEM_GOD_YUYUKO_WELCOME,유유코: 차라도 한잔 할래?
-LOC_SYSTEM_GOD_YUYUKO_TALK1,유유코: 불로불사인 당신이 왜 날 믿는거야?
-LOC_SYSTEM_GOD_YUYUKO_TALK2,유유코: 새로운 식단은 아직이니?
-LOC_SYSTEM_GOD_YUYUKO_TALK3,유유코: 좀 더 느긋하게 있어도 좋아.
-LOC_SYSTEM_GOD_YUYUKO_TALK4,유유코: 유령은 차갑고 귀엽지않아?
-LOC_SYSTEM_GOD_YUYUKO_TALK5,유유코: 친구들은 마음에 들어?
-LOC_SYSTEM_GOD_YUYUKO_TALK6,유유코: 물론 죽더라도 영혼은 함께란다
+LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,Eirin forcibly experimented on your body!
+LOC_SYSTEM_GOD_YUYUKO_WELCOME,Yuyuko: Care for a cup of tea?
+LOC_SYSTEM_GOD_YUYUKO_TALK1,Yuyuko: Why would an immortal like you believe in me?
+LOC_SYSTEM_GOD_YUYUKO_TALK2,Yuyuko: Have you started your new diet yet?
+LOC_SYSTEM_GOD_YUYUKO_TALK3,Yuyuko: You can take your time here, you know.
+LOC_SYSTEM_GOD_YUYUKO_TALK4,Yuyuko: Aren’t ghosts cold and cute?
+LOC_SYSTEM_GOD_YUYUKO_TALK5,Yuyuko: Do you like your new friends?
+LOC_SYSTEM_GOD_YUYUKO_TALK6,Yuyuko: Even if you die, your soul will stay with us.
 LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
-LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,유유코는 당신의 주변에 유령을 끌어모았다!
-LOC_SYSTEM_GOD_SATORI_WELCOME,사토리: 마음대로 뛰어 노세요. 던전은 넓으니까요.
-LOC_SYSTEM_GOD_SATORI_TALK1,사토리는 당신에게 큰 관심이 없다.
-LOC_SYSTEM_GOD_SATORI_TALK2,사토리는 당신에게 미소지었다.
-LOC_SYSTEM_GOD_SATORI_TALK3,사토리: 애완동물의 재롱은 언제나 보기 좋군요.
-LOC_SYSTEM_GOD_SATORI_TALK4,사토리는 당신을 쓰다듬었다.
-LOC_SYSTEM_GOD_SATORI_TALK5,사토리: 오늘의 사료는 입맛에 맞나요?
-LOC_SYSTEM_GOD_SATORI_TALK6,사토리: 다음에 같이 산책하러 가지 않을래요?
+LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,Yuyuko gathered ghosts all around you!
+LOC_SYSTEM_GOD_SATORI_WELCOME,Satori: Feel free to roam as you like. The dungeon is vast.
+LOC_SYSTEM_GOD_SATORI_TALK1,Satori doesn’t seem very interested in you.
+LOC_SYSTEM_GOD_SATORI_TALK2,Satori gave you a gentle smile.
+LOC_SYSTEM_GOD_SATORI_TALK3,Satori: A pet’s little tricks are always a delight to see.
+LOC_SYSTEM_GOD_SATORI_TALK4,Satori gently patted you.
+LOC_SYSTEM_GOD_SATORI_TALK5,Satori: Did today's pet food suit your taste?
+LOC_SYSTEM_GOD_SATORI_TALK6,Satori: Would you like to go on a walk with me sometime?
 LOC_SYSTEM_GOD_SATORI_FEED,Lady Satori has fed you!
-LOC_SYSTEM_GOD_TENSI_WELCOME,텐시: 천계는 지루해! 넌 날 재밌게 해줄거지?
-LOC_SYSTEM_GOD_TENSI_TALK1,텐시: 뭐야! 지금 바빠!
-LOC_SYSTEM_GOD_TENSI_TALK2,텐시: 기도하는거만으로 요행을 바라는건 너무 이기적이지 않아?
-LOC_SYSTEM_GOD_TENSI_TALK3,텐시: 재미있는 일은 없는거야?
-LOC_SYSTEM_GOD_TENSI_TALK4,텐시: 오랫만에 지진을 일으켜볼까...
-LOC_SYSTEM_GOD_TENSI_TALK5,텐시: 한번만 더 귀찮게하면 돌을 던질꺼야!
-LOC_SYSTEM_GOD_TENSI_TALK6,텐시는 당신에게 돌을 던졌다.
-LOC_SYSTEM_GOD_TENSI_TALK7,텐시는 당신을 보고 키득키득 웃고있다.
-LOC_SYSTEM_GOD_TENSI_TALK8,텐시는 당신을 보고 따분한듯 하품하고 있다.
-LOC_SYSTEM_GOD_TENSI_TALK9,텐시는 당신의 기도를 무시했다.
-LOC_SYSTEM_GOD_TENSI_TALK10,텐시는 산갈치로 당신의 머리를 때렸다.
-LOC_SYSTEM_GOD_SEIJA_WELCOME,세이자: 자, 레지스탕스 활동의 개시다!
-LOC_SYSTEM_GOD_SEIJA_TALK1,세이자는 당신의 기도를 무시했다.
-LOC_SYSTEM_GOD_SEIJA_TALK2,세이자는 당신에 큰 관심이 없어보인다.
-LOC_SYSTEM_GOD_SEIJA_TALK3,세이자의 표정은 그다지 안 좋아보인다.
-LOC_SYSTEM_GOD_SEIJA_TALK4,세이자: 반칙이라도 살아남는다면 그걸로 충분해
-LOC_SYSTEM_GOD_SEIJA_TALK5,세이자: 레지스탕스 생활은 마음에 들어?
-LOC_SYSTEM_GOD_SEIJA_TALK6,세이자: 우린 최고의 파트너야 친구!
+LOC_SYSTEM_GOD_TENSI_WELCOME,Tenshi: Heaven is so boring! You'll entertain me, right?
+LOC_SYSTEM_GOD_TENSI_TALK1,Tenshi: What! I'm busy right now!
+LOC_SYSTEM_GOD_TENSI_TALK2,Tenshi: Isn't it selfish to pray and expect luck?
+LOC_SYSTEM_GOD_TENSI_TALK3,Tenshi: Isn't there anything fun happening?
+LOC_SYSTEM_GOD_TENSI_TALK4,Tenshi: Maybe I should trigger an earthquake today...
+LOC_SYSTEM_GOD_TENSI_TALK5,Tenshi: Bother me one more time and I’ll throw a rock!
+LOC_SYSTEM_GOD_TENSI_TALK6,Tenshi threw a rock at you.
+LOC_SYSTEM_GOD_TENSI_TALK7,Tenshi giggles as she watches you.
+LOC_SYSTEM_GOD_TENSI_TALK8,Tenshi yawns at you, looking bored.
+LOC_SYSTEM_GOD_TENSI_TALK9,Tenshi ignored your prayer.
+LOC_SYSTEM_GOD_TENSI_TALK10,Tenshi hit you on the head with a saury.
+LOC_SYSTEM_GOD_SEIJA_WELCOME,Seija: Let the resistance begin!
+LOC_SYSTEM_GOD_SEIJA_TALK1,Seija ignored your prayer.
+LOC_SYSTEM_GOD_SEIJA_TALK2,Seija doesn't seem very interested in you.
+LOC_SYSTEM_GOD_SEIJA_TALK3,Seija’s expression doesn’t look too pleased.
+LOC_SYSTEM_GOD_SEIJA_TALK4,Seija: As long as you survive, even cheating is fine.
+LOC_SYSTEM_GOD_SEIJA_TALK5,Seija: How do you like the resistance lifestyle?
+LOC_SYSTEM_GOD_SEIJA_TALK6,Seija: We're the best partners, my friend!
 LOC_SYSTEM_GOD_SEIJA_PUNISH,Seija sowed discord between you and {0}!
 LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,You swapped places with {0}.
 LOC_SYSTEM_GOD_SEIJA_GIFT_ON,You can now request Seija for a gift.
@@ -3140,7 +3225,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3,temporarily reducing your stats.
 LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT1,Bug God: Invalid deity.
 LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT2,Most of this is a bug.
 LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT,...Seija left behind a magic hammer as her final gift.
-LOC_SYSTEM_GOD_LILLY_WELCOME,릴리: 봄이에요!
+LOC_SYSTEM_GOD_LILLY_WELCOME,Lily: It's spring!
 LOC_SYSTEM_GOD_UI_LILLY1,===Your Fairy Companions===
 LOC_SYSTEM_GOD_UI_LILLY1_ALLY,Companion {0}:
 LOC_SYSTEM_GOD_UI_LILLY1_LEVEL,Level:
@@ -3174,51 +3259,51 @@ LOC_SYSTEM_GOD_LILLY_REVIVE,{0} has revived!
 LOC_SYSTEM_GOD_LILLY_INVITE,{0} introduced herself as {1}.
 LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL,You must be at least level {0} to recruit this fairy.
 LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,{0} was healed by the essence of spring.
-LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK,릴리는 당신의 힘을 빼앗았다!
-LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!
+LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK,Lily has drained your strength!
+LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,You betrayed Lily—all your fairy allies have turned against you!
 LOC_SYSTEM_GOD_LILLY_ABANDON,You betrayed Lilly, and all your fairy allies turned against you!
-LOC_SYSTEM_GOD_MIKO_WELCOME,미코: 모두의 욕망을 들어보도록 하지!
-LOC_SYSTEM_GOD_MIKO_TALK1,미코: 여기선 아직 아무도 널 모르는구나, 명성을 퍼트려라!
-LOC_SYSTEM_GOD_MIKO_TALK2,미코: 귀를 기울여라, 적들의 욕망을 듣거라.
-LOC_SYSTEM_GOD_MIKO_TALK3,미코: 신앙은 인기싸움이지, 신도들을 끌어모아라.
-LOC_SYSTEM_GOD_MIKO_TALK4,미코: 강해지고 싶다는 네 욕망이 들리는구나.
-LOC_SYSTEM_GOD_MIKO_TALK5,미코: 슬슬 관객들이 모이기 시작했구나.
-LOC_SYSTEM_GOD_MIKO_TALK6,미코: 얼마 안 남았다. 이 곳을 지배하도록
-LOC_SYSTEM_GOD_MIKO_TALK7,미코: 우리를 칭송하는 모두의 환호성이 들리는가? 나아가라!
+LOC_SYSTEM_GOD_MIKO_WELCOME,Miko: Let me hear the desires of all!
+LOC_SYSTEM_GOD_MIKO_TALK1,Miko: No one knows you yet—go spread your fame!
+LOC_SYSTEM_GOD_MIKO_TALK2,Miko: Listen closely and hear your enemies' desires.
+LOC_SYSTEM_GOD_MIKO_TALK3,Miko: Faith is a popularity contest. Gather your followers!
+LOC_SYSTEM_GOD_MIKO_TALK4,Miko: I hear your desire to become stronger.
+LOC_SYSTEM_GOD_MIKO_TALK5,Miko: The crowd is finally starting to gather.
+LOC_SYSTEM_GOD_MIKO_TALK6,Miko: Not much longer. Soon you'll rule this place.
+LOC_SYSTEM_GOD_MIKO_TALK7,Miko: Can you hear the cheers of those praising us? Go forth!
 LOC_SYSTEM_GOD_MIKO_ENTER_NEW_DUNGEON,Entering a new dungeon resets your popularity.
 LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,Changing dungeons has reset your popularity.
 LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,Your popularity dropped slightly when changing floors.
 LOC_SYSTEM_GOD_MIKO_UP_FLOOR,Your popularity dropped significantly when climbing stairs.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
-LOC_SYSTEM_GOD_MIKO_PUNISH_HP,미코는 당신의 체력을 빼앗아갔다!
-LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,미코는 당신을 느리게했다!
-LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,미코는 당신의 저항을 낮추었다!
-LOC_SYSTEM_GOD_OKINA_WELCOME,오키나: 이 세계에서 나를 각인시키도록
-LOC_SYSTEM_GOD_OKINA_TALK1,오키나: 네가 제 수행원으로 맡는지 테스트해볼거야.
-LOC_SYSTEM_GOD_OKINA_TALK2,오키나: 면접은 없어, 실전 테스트로 채용을 결정하지
-LOC_SYSTEM_GOD_OKINA_TALK3,오키나: 나의 존재는 항상 알려져야만 한다
-LOC_SYSTEM_GOD_OKINA_TALK4,오키나: 등 뒤의 문으로 내 힘을 받도록 해라
-LOC_SYSTEM_GOD_OKINA_TALK5,오키나: 슬슬 마이와 사토노는 해방시켜줄까 생각중이다
-LOC_SYSTEM_GOD_OKINA_TALK6,오키나: 실로 네 부하에 맞는 인재로구나. 합격이다!
-LOC_SYSTEM_GOD_OKINA_TALK7,오키나: 보라! 들으라! 말하라! 비신의 진정한 마력을 받아라!
+LOC_SYSTEM_GOD_MIKO_PUNISH_HP,Miko has drained your HP!
+LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,Miko has slowed you down!
+LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,Miko has lowered your resistance!
+LOC_SYSTEM_GOD_OKINA_WELCOME,Okina: Engrave my presence into this world!
+LOC_SYSTEM_GOD_OKINA_TALK1,Okina: I'm going to test whether you're fit to be my attendant.
+LOC_SYSTEM_GOD_OKINA_TALK2,Okina: No interviews here—your performance decides everything.
+LOC_SYSTEM_GOD_OKINA_TALK3,Okina: My presence must always be known.
+LOC_SYSTEM_GOD_OKINA_TALK4,Okina: Open the door behind you and receive my power.
+LOC_SYSTEM_GOD_OKINA_TALK5,Okina: I’m thinking of finally releasing Mai and Satono.
+LOC_SYSTEM_GOD_OKINA_TALK6,Okina: Truly a talent worthy of serving under you. You're hired!
+LOC_SYSTEM_GOD_OKINA_TALK7,Okina: Look! Listen! Speak! Receive the true power of the hidden god!
 LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,You turned the {0} tile into a door.
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0} was pushed away by the closing door!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,There’s no space to push away {0} on the door.
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,This is the world beyond the door. {Take a good rest!|Welcome!|This place looks safe.}
-LOC_SYSTEM_GOD_OKINA_PUNISH_BACKDANCER,오키나는 백댄서를 불러냈다!
-LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,오키나의 분노로 당신의 체력과 영력이 흡수되었다!
-LOC_SYSTEM_GOD_JUNKO_WELCOME,순호: 상아여, 보고 있는가?
-LOC_SYSTEM_GOD_JUNKO_TALK,순호: 상아여 보고있는가!
+LOC_SYSTEM_GOD_OKINA_PUNISH_BACKDANCER,Okina summoned backdancers!
+LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,Okina’s rage has drained your HP and MP!
+LOC_SYSTEM_GOD_JUNKO_WELCOME,Junko: Chang’e, are you watching?
+LOC_SYSTEM_GOD_JUNKO_TALK,Junko: Chang’e, are you watching!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify the item {0}? (y/n)
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
-LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,순호는 당신의 힘을 약화하였다!
-LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,순호는 당신의 속도를 빼앗았다!
-LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,순호는 당신의 능력치를 빼앗았다!
+LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,Junko has weakened your strength!
+LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,Junko has taken your speed!
+LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,Junko has drained your stats!
 LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.
 LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
 LOC_SYSTEM_GOD_PRAY_AHTEISM,You took a moment to contemplate the meaning of life.
 LOC_SYSTEM_GOD_PRAY_TEMPLE,You prayed at the altar.
-LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,신도가 되려면 Y키를, 취소하려면 N키를 누른다.
+LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,Press Y to become a follower, N to cancel.
 LOC_SYSTEM_GOD_GIFT,{0}: Use this well!
 LOC_SYSTEM_GOD_GIFT_APPEAR,Something appeared beneath your feet!
 LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.

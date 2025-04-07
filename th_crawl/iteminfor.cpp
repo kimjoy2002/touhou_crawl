@@ -35,18 +35,19 @@ void memorize_action(int spell_)
 {
 	changedisplay(DT_GAME);
 	if(spell_ == SPL_NONE)
-		printlog("존재하지 않는 스펠입니다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST),true,false,false,CL_normal);
 	else
 	{		
 		bool ok_ = true;
 		while(ok_)
 		{
 			printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
-			printlog(" 주문을 익히시겠습니까? (y/n)",false,false,false,CL_help);
-			char temp[128];
-			sprintf_s(temp,128," [마법실패율: %d%% 남은 마법 레벨: %d]",100-you.GetSpellSuccess(spell_),you.remainSpellPoiont);
-
-			printlog(temp,true,false,false,CL_warning);
+			printlog(" " + LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ASK),false,false,false,CL_help);
+			ostringstream ss;
+			ss << " [" <<  LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ": " << (100-you.GetSpellSuccess(spell_)) << "% " << 
+				LocalzationManager::locString(LOC_SYSTEM_REMAIN_SPELLPOINT) << ": " << you.remainSpellPoiont << "]"; 
+			
+			printlog(ss.str(),true,false,false,CL_warning);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -61,7 +62,7 @@ void memorize_action(int spell_)
 				ok_ = false;
 				break;
 			default:
-				printlog("Y와 N중에 선택해주세요.",true,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
 				break;
 			}
 		}
@@ -118,7 +119,8 @@ void iteminfor(bool gameover)
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";
-							SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
+							SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
+							SetText() += "\n";
 							ReleaseMutex(mutx);
 							int memory_ = waitkeyinput();
 
@@ -145,7 +147,7 @@ void iteminfor(bool gameover)
 							case '=': //단축키 바꾸기
 							{
 								changedisplay(DT_GAME);
-								printlog("무슨 알파벳으로 바꿀거지? (a-z, A-Z)", true, false, false, CL_help);
+								printlog(LocalzationManager::locString(LOC_SYSTEM_ALPHABET_ASK) + " (a-z, A-Z)", true, false, false, CL_help);
 								{
 									int alphabet_ = waitkeyinput();
 									if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
@@ -170,18 +172,15 @@ void iteminfor(bool gameover)
 										if (new_ == you.item_list.end())
 											break;
 
-										char temp[100];
 										if (old_ != you.item_list.end())
 										{
 											old_->id = item_->id;
 											new_->id = alphabet_;
 											swap_list_items(you.item_list, old_, new_);
 
-											sprintf_s(temp, 100, "%c", old_->id);
-											printlog(temp, false, false, false, old_->item_color());
-											printlog(" - ", false, false, false, old_->item_color());
-											printlog(old_->GetName(), false, false, false, old_->item_color());
-											printlog(", ", false, false, false, old_->item_color());
+											ostringstream ss;
+											ss << old_->id << " - " << old_->GetName() << ", ";
+											printlog(ss.str(), false, false, false, old_->item_color());
 										}
 										else
 										{
@@ -201,11 +200,9 @@ void iteminfor(bool gameover)
 												you.item_list.splice(it, you.item_list, new_);
 											}
 										}
-										sprintf_s(temp, 100, "%c", new_->id);
-										printlog(temp, false, false, false, new_->item_color());
-										printlog(" - ", false, false, false, new_->item_color());
-										printlog(new_->GetName(), false, false, false, new_->item_color());
-										printlog(" ", false, false, false, new_->item_color());
+										ostringstream ss;
+										ss << new_->id << " - " << new_->GetName() << " ";
+										printlog(ss.str(), false, false, false, new_->item_color());
 									}
 								}
 								return;
@@ -294,12 +291,9 @@ void iteminfor(bool gameover)
 							{
 								changedisplay(DT_GAME);
 								you.throw_weapon = item_;
-								char temp[100];
-								sprintf_s(temp, 100, "%c", item_->id);
-								printlog(temp, false, false, false, item_->item_color());
-								printlog(" - ", false, false, false, item_->item_color());
-								printlog(item_->GetName(), false, false, false, item_->item_color());
-								printlog("(탄막) ", false, false, false, item_->item_color());
+								ostringstream ss;
+								ss << item_->id << " - " << item_->GetName() << "(" << LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) << ") ";
+								printlog(ss.str(), false, false, false, item_->item_color());
 							}
 								return;
 							case 'q': //마시기
@@ -321,7 +315,7 @@ void iteminfor(bool gameover)
 								if (you.Drink(item_->id))
 								{
 									you.time_delay += you.GetNormalDelay();
-									you.doingActionDump(DACT_USE, "물약");
+									you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
 									changedisplay(DT_GAME);
 									if (you.god == GT_EIRIN)
 									{
@@ -370,7 +364,7 @@ void iteminfor(bool gameover)
 								}
 								if(you.Read(item_->id))
 								{
-									you.doingActionDump(DACT_USE, "두루마리");
+									you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SCROLL));
 									you.time_delay += you.GetNormalDelay();
 									changedisplay(DT_GAME);
 									you.TurnEnd();
@@ -386,7 +380,7 @@ void iteminfor(bool gameover)
 								if (you.s_evoke_ghost &&
 									!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
 									) {
-									printlog("유령상태에선 할 수 없다. ", true, false, false, CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
 									return;
 								}
 								if (you.Evoke(item_->id, false))
@@ -427,7 +421,7 @@ void iteminfor(bool gameover)
 									}
 									if (!discard_)
 									{
-										printlog("존재하지 않는 템입니다.", true, false, false, CL_normal);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST), true, false, false, CL_normal);
 									}
 									return;
 								}
@@ -471,7 +465,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 	if (can_use_)
 	{
-		use_text_ += "(=)단축키변경, ";
+		use_text_ += "(=)" + LocalzationManager::locString(LOC_SYSTEM_HOTKEYCHANGE) + ", ";
 		if (key) key->insert('=');
 	}
 	switch (it->type)
@@ -490,118 +484,96 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_WEAPON_SHORTBLADE:
-			text_ += "날이 짧은 검이다. 빠른 속도로 공격할 수 있다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE);
 			ski_ = SKT_SHORTBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "휴대하기 좋은 작은 단검. 직접적인 전투보다 조용히 적의 목을 따버리는데 효율적이다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER);
 				break;
 			case 1:
-				text_ += "던지는 무기로 최적화된 단검. 근접전투로도 쓸 순 있지만 효율은 떨어진다.\n";
-				text_ += "비록 던지고나선 다시 주워야하지만 이를 해결할 수 있다면 유용한 투척수단이 된다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE);
 				break;
 			case 2:
-				text_ += "다른 단검에 비해선 근접 전투에서도 쓸 수 있을 정도로 날이 긴 무기다.\n";
-				text_ += "구지 단검으로 정면전을 하고싶은 사람이라면 쓰게될 것이다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD);
 				break;
 			}
 			break;
 		case ITM_WEAPON_LONGBLADE:
-			text_ += "날이 긴 장검이다. 찌르거나 베면서 상대를 공격한다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE);
 			ski_ = SKT_LONGBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "평범한 도검으로 마땅히 특징이랄게 없을 정도로 쓰기 편한 평범한 검.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA);
 				break;
 			case 1:
-				text_ += "백랑텐구들이 자주 들고다니는 날이 크고 구부러져있는 장검.\n";
-				text_ += "날이 훨씬 크기 때문에 보통의 장검보다 더 큰 데미지를 준다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR);
 				break;
 			case 2:
-				text_ += "아주 거대한 양날이 달린 검. 양손으로도 제대로 들기가 힘들다.\n";
-				text_ += "그 크기에 걸맞는 파괴력을 보여주지만 제대로 다루기엔 수련이 필요하다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD);
 				break;
 			case 3:
-				text_ += "어딘가의 토착신이 자주 사용하는 둥그렇게 날이 달린 투척용 무기.\n";
-				text_ += "손으로 빙빙돌려서 던지면 그 회전력으로 다시 자신에게 돌아올 수 도 있다.\n";
-				text_ += "이걸 검이라고 볼 수 있을진 모르겠지만 손에 들고 검처럼도 사용할 수 있다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM);
 				break;
 			}
 			break;
 		case ITM_WEAPON_MACE:
-			text_ += "뭉툭한 둔기다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE);
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "신사의 무녀들이 제사를 할때 사용하는 제사용구... 였으나\n";
-				text_ += "오히려 이 환상향의 무녀들은 물리적인 공격도구로 사용하는 일이 많다.\n";
-				text_ += "그렇게 효율적인 무기는 아닐지도 모르지만 시도해볼 가치는 있다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI);
 				break;
 			case 1:
-				text_ += "마법사들이 흔히 쓰고 다니는 빗자루. 마법력을 올려주거나 그런 용도는 없다.\n";
-				text_ += "굳이 빗자루를 고집할 이유는 없지만 마법사는 빗자루라는 특유의 고집인듯 하다.\n";
-				text_ += "둔기로서 사용하는게 그나마 활용해볼 수 있다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK);
 				break;
 			case 2:
-				text_ += "멋쟁이들이 사용한다는 양산. 강한 요괴일수록 양산을 사용하려는 풍조가 있는듯하다.\n";
-				text_ += "그렇게 효과적이진않을지 몰라도 강한척을 하고 싶은 사람들이라면 사용해보는게 어떨까?\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA);
 				break;
 			case 3:
-				text_ += "보물을 찾는데 도움을 준다고 믿어지는 봉. 그러나 이런 속설은 미신인듯 싶다.\n";
-				text_ += "보물을 찾는데 도움은 되지않지만 다루기 쉬운 금속 봉으로 전투에서 쓸 수 있다.\n";
-				text_ += "양손으로 다루는데 특화되어있어서, 방패와 함께라면 효율이 떨어진다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD);
 				break;
 			case 4:
-				text_ += "아주 거대한 기둥으로 이런 것을 무기로 쓰려 생각했다는게 신기할 정도다.\n";
-				text_ += "보통 익숙하지만 휘두르는데만 엄청난 시간이 걸릴듯 하다.\n";
-				text_ += "맞추기도 쉽지않아보이지만 맞춘다면 엄청난 데미지를 줄 수 있다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA);
 				break;
 			}
 			ski_ = SKT_MACE;
 			break;
 		case ITM_WEAPON_SPEAR:
-			text_ += "길다란 창이다. 적을 찔러서 공격할 수 있다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR);
 			ski_ = SKT_SPEAR;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "딱히 큰 특징이 없는 평범한 창. 찌르는데 쓸 수 있다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR);
 				break;
 			case 1:
-				text_ += "던지는데 특화되어있는 거대한 창. 힘껏 던져서 적에게 맞출 수 있다.\n";
-				text_ += "근접전투에서도 충분히 사용이 가능하지만 휘두르기엔 적합하지않다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN);
 				break;
 			case 2:
-				text_ += "사신이 자주 들고다닌다는 거대한 낫.\n";
-				text_ += "생각보다 무기로서 사용하기엔 어려워보이는 큰 낫이지만 익숙해지면 나름 강하다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE);
 				break;
 			case 3:
-				text_ += "날이 3개달린 기다란 작살으로 찍는데 특화된 창이다.\n";
-				text_ += "가볍고 쓰기 좋지만 높은 위력은 나오지않는다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT);
 				break;
 			case 4:
-				text_ += "대나무로 깎아서 만든 창. \n";
-				text_ += "아주 평범한 창처럼 보이지만 놀랄만한 위력을 숨기고 있다.\n";
-				text_ += "제대로 다루려면 상당한 연습이 필요하다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR);
 				break;
 			}
 			break;
 		case ITM_WEAPON_AXE:
-			text_ += "적을 찍을 수 있는 도끼. 거대한 날을 지녔다.\n";
-			ski_ = SKT_AXE;
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE);
 			switch (it->value0)
 			{
 			case 0:
-				text_ += "한손으로 들 수 있는 작은 손도끼다. 큰 위력은 나오지않지만 다루기 쉽다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE);
 				break;
 			case 1:
-				text_ += "길다란 자루에 큰 도끼날이 달린 거대한 도끼다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE);
 				break;
 			case 2:
-				text_ += "어딘가의 배유령이 자주 들고다니는 거대한 낯이다.\n";
-				text_ += "아주 강력하지만 이런걸 휘두를려면 어마어마한 실력이 필요하다.\n";
+				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR);
 				break;
 			}
 			break;
@@ -618,34 +590,69 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		{
 			//스킬레벨 설명해주기
-			char temp[256];
-			sprintf_s(temp, 256, "\n\n이 무기는 %s 스킬에 비례하여 강해진다. (현재 %s 스킬 레벨 : %d)", skill_string(ski_).c_str(), skill_string(ski_).c_str(), you.GetSkillLevel(ski_, true));
-			text_ += temp;
+			ostringstream ss;
+			ostringstream temp;
 
-			sprintf_s(temp,256, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
-			text_ += temp;
-			sprintf_s(temp,256, "\n현재공격속도 : %g    ( 기본공격속도 : %g       최소공격속도 : %g )", max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f, it->value7 / 10.0f, it->value8/10.0f);
-			text_ += temp;
+			ss << "\n\n";
+			ss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO1,
+					PlaceHolderHelper(skill_string(ski_)),
+					PlaceHolderHelper(to_string(you.GetSkillLevel(ski_, true))));
+			ss << "\n";
+
+			temp << LocalzationManager::locString(LOC_SYSTEM_ATTACK_VALUE) << ": " << it->value2;;
+			ss << temp.str();
+			if(PrintCharWidth(temp.str()) < 30)
+				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+			temp.str("");
+			temp.clear();
+			temp << LocalzationManager::locString(LOC_SYSTEM_HIT_VALUE) << ": " << it->value1;
+			ss << temp.str() << "\n";
+
+
+			temp.str("");
+			temp.clear();
+			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f);
+			ss << temp.str();
+			if(PrintCharWidth(temp.str()) < 30)
+				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+
+			temp.str("");
+			temp.clear();
+			temp << "( " << LocalzationManager::locString(LOC_SYSTEM_BASE_ATTACK_SPEED) << ": " << (it->value7 / 10.0f);
+			ss << temp.str();
+			if(PrintCharWidth(temp.str()) < 30)
+				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+
+			temp.str("");
+			temp.clear();
+			temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_ATTACK_SPEED) << ": " << ( it->value8/10.0f) << " )";
+			ss << temp.str();
+
 			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
-				sprintf_s(temp,256, "\n단, 이 무기는 방패를 들게되면 공격속도가 %g만큼 추가적으로 느려진다.", shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f);
-				text_ += temp;
+				ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO2, 
+					PlaceHolderHelper(to_string(shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f)));
 			}
+			text_ += ss.str();
 		}
 
 
 		if (it->can_throw)
 		{
-			char temp[256];
-			sprintf_s(temp,256, "\n\n이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.");
-			text_ += temp;
-			sprintf_s(temp,256, "\n이 경우 현재 투척속도는 %g이다. (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
-			text_ += temp;
+			text_ += "\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3);
+			text_ += "\n";
+			text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
+					PlaceHolderHelper(to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
+					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true))));
 		}
 
 		{
-			char temp[100];
-			sprintf_s(temp,100, "\n\n이 아이템은 +9까지 인챈트가 가능하다.");
-			text_ += temp;
+			text_ += "\n\n";
+			text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+					PlaceHolderHelper("+9"));
 		}
 
 
@@ -653,17 +660,17 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			if (you.equipment[ET_WEAPON] != it)
 			{
-				use_text_ += "(w)장착, ";
+				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)해제, ";
+				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
 				if (key) key->insert('u');
 			}
 			if (it->can_throw)
 			{
-				use_text_ += "(f)탄막, ";
+				use_text_ += "(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) +", ";
 				if (key) key->insert('f');
 			}
 		}
@@ -674,39 +681,56 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value4)
 		{
 		default://없음 이거 뜨면 버그
-			text_ += "탄막 놀이의 기본이 되는 탄막이다. 적에게 던져서 맞춘다.\n";
-			text_ += "문제는 이게 버그 탄막이라는 것이다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG);
 			break;
 		case TMT_AMULET:
-			text_ += "레이무가 쓰는 이 치사한 아뮬렛에는 고성능의 호밍성능이 붙어있다.\n";
-			text_ += "특별한 특징이 없는 탄막이지만 높은 명중율이 자랑이다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET);
 			break;
 		case TMT_POISON_NEEDLE:
-			text_ += "이것은 던지면서 상대에게 박히는 수리검이다.\n";
-			text_ += "데미지는 낮지만 이 수리검에는 특별히 독이 발라져있는것 같다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE);
 			break;
 		case TMT_KIKU_COMPRESSER:
-			text_ += "캇파들의 발명품중 하나다. 물을 가득 압축하고있는 폭탄이다.\n";
-			text_ += "상대에게 던지면 압축되어있던 물이 한번에 터진다.\n";
-			text_ += "넓은 범위 공격할 수 있을 것 같다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER);
 			break;
 		case TMT_DOGGOJEO:
-			text_ += "불교의 승려들이 수행할때 사용했다고 하는 고대 인도의 무기.\n";
-			text_ += "평소엔 평범한 손잡이처럼 생겼지만 강한 힘으로 던지면 마력이 방출된다.\n";
-			text_ += "다른 탄막과 다르게 적들을 관통하여 공격이 가능하다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO);
 			break;
 		}
-		char temp[256];
-		sprintf_s(temp,256, "\n공격력 : %d       명중력 : %d", it->value2, it->value1);
-		text_ += temp;
-		sprintf_s(temp,256, "\n현재 투척속도 : %g (현재 탄막 스킬 레벨 : %d)", you.GetThrowDelay((*it).type, false) / 10.0f, you.GetSkillLevel(SKT_TANMAC, true));
-		text_ += temp;
+
+
+		ostringstream ss;
+		ostringstream temp;
+
+		ss << "\n\n";
+		temp << LocalzationManager::locString(LOC_SYSTEM_ATTACK_VALUE) << ": " << it->value2;;
+		ss << temp.str();
+		if(PrintCharWidth(temp.str()) < 30)
+			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+		temp.str("");
+		temp.clear();
+		temp << LocalzationManager::locString(LOC_SYSTEM_HIT_VALUE) << ": " << it->value1;
+		ss << temp.str() << "\n";
+
+
+		temp.str("");
+		temp.clear();
+		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay((*it).type, false) / 10.0f);
+		ss << temp.str();
+		if(PrintCharWidth(temp.str()) < 30)
+			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+		temp.str("");
+		temp.clear();
+		temp << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_INFO, PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true))));
+		ss << temp.str();
+		text_ += ss.str();
 
 		if (can_use_)
 		{
 			if (it->can_throw)
 			{
-				use_text_ += "(f)탄막, ";
+				use_text_ += "(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) +", ";
 				if (key) key->insert('f');
 			}
 		}
@@ -720,37 +744,28 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value5)
 		{
 		case AMK_NORMAL:
-			text_ += "평상시에 입는 편한 옷.\n";
-			text_ += "천이 아닌 재질의 갑옷 기본패널티가 상당히 내려간다. \n";
-			text_ += "그러나 최소패널티는 다른 옷과 동일하므로 갑옷에 익숙해지면 이점이 없어진다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL);
 			break;
 		case AMK_MIKO:
-			text_ += "무녀들이 입는 옷.\n";
-			text_ += "신의 가호를 받아서 정신을 보호해준다. 입고있는 동안 혼란저항이 생긴다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO);
 			break;
 		case AMK_WING:
-			text_ += "용궁의 사자들이 입는다는 날개옷.\n";
-			text_ += "전기를 흘려보내는 특징을 가지고 있다. 입고있는 동안 전기저항이 생긴다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING);
 			break;
 		case AMK_KAPPA:
-			text_ += "캇파들이 유니폼처럼 입고 있는 파란색 옷이다.\n";
-			text_ += "강의 추위에도 견딜 수 있게 디자인 되어있다. 입고있는 동안 냉기저항이 생긴다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA);
 			break;
 		case AMK_FIRE:
-			text_ += "불쥐의 기운이 서려있는 옷이다.\n";
-			text_ += "뜨거운 열에도 견딜 수 있을 것 같다. 입고있는 동안 화염저항이 생긴다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE);
 			break;
 		case AMK_MAID:
-			text_ += "홍마관의 메이드들이 입는 옷.\n";
-			text_ += "홍마관 도서관표 특수한 마법적 처리가 되어있다. 입고있는 동안 마법저항이 올라간다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID);
 			break;
 		case AMK_POISON:
-			text_ += "은방울 꽃밭의 인형이 입고 있던 옷이지만 꽤 사이즈가 커서 입을 수 있을 것 같다.\n";
-			text_ += "은방울 꽃의 기운이 당신을 보호해준다. 입고있는 동안 독저항이 생긴다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON);
 			break;
 		case AMK_AUTUMN:
-			text_ += "단풍으로 만들어진 옷. 의외로 제대로된 옷이다.\n";
-			text_ += "시즈하를 믿고있을때 주변의 풍경에 동화되어서 은밀이 급격하게 올라간다.\n\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN);
 			break;
 		default:
 			break;
@@ -758,55 +773,77 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_BODY_ARMOUR_0:
-			text_ += "움직이기 편하게 천으로 되어있는 옷.\n";
-			text_ += "잦은 그레이즈에도 끄덕없는 질긴 옷감으로 되어있다!\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0);
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_1:
-			text_ += "질긴 재질로 되어있는 옷.\n";
-			text_ += "천보단 움직이기 불편하지만 꽤 가볍다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1);
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_2:
-			text_ += "사슬로 얽혀있는 갑옷.\n";
-			text_ += "꽤 단단하지만 판금으로된 갑옷보다는 못하다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2);
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_3:
-			text_ += "강철로 된 판금을 덧댄 갑옷.\n";
-			text_ += "마법과 움직임을 방해하지만 당신의 안전을 책임진다.\n";
+			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3);
 			break;
 		default:
 			break;
 		}
-		char temp[256];
-		sprintf_s(temp,256, "\n\n기본 방어력 : %d   기본 패널티 : %d   최소 패널티 : %d\n", it->value1, it->value2, it->value3);
-		text_ += temp;
-		sprintf_s(temp,256, "패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.\n");
-		text_ += temp;
-		sprintf_s(temp,256, "현재 착용시 방어력: %d     패널티 : %d (현재 갑옷 스킬 레벨 : %d)\n\n", 
-			(it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)),
-			min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3), you.GetSkillLevel(SKT_ARMOUR, true));
-		text_ += temp;
-		sprintf_s(temp,256, "합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.\n");
-		text_ += temp;
-		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.\n", you.GetPenaltyMinus(1));
-		text_ += temp;
-		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 패널티만큼 이동속도가 감소합니다.\n", you.GetPenaltyMinus(2));
-		text_ += temp;
-		sprintf_s(temp,256, "합계 패널티가 %d보다 높으면 모든 행동이 2배 딜레이됩니다.\n\n", you.GetPenaltyMinus(3));
-		text_ += temp;
-		sprintf_s(temp,256, "\n이 아이템은 +%d까지 인챈트가 가능하다.", it->value1);
-		text_ += temp;
+		
+		ostringstream ss;
+		ostringstream temp;
+		ss<< "\n\n";
+
+		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_DEFENSE) << ": " << it->value1;;
+		ss << temp.str();
+		if(PrintCharWidth(temp.str()) < 30)
+			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+		temp.str("");
+		temp.clear();
+		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << it->value2;
+		ss << temp.str();
+		if(PrintCharWidth(temp.str()) < 30)
+			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+
+		temp.str("");
+		temp.clear();
+		temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_PENALTY) << ": " << it->value3;
+		ss << temp.str() << "\n";
+
+
+
+		ss <<  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO1) << "\n";		
+
+		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO2, 
+			PlaceHolderHelper(to_string((it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)))),
+			PlaceHolderHelper(to_string(min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3))),
+			PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_ARMOUR, true)))) << "\n\n";
+		
+		ss <<  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO3) << "\n";	
+
+		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO4, 
+			PlaceHolderHelper(to_string(you.GetPenaltyMinus(1)))) << "\n";		
+
+		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO5, 
+			PlaceHolderHelper(to_string(you.GetPenaltyMinus(2)))) << "\n";		
+			
+		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO6, 
+			PlaceHolderHelper(to_string(you.GetPenaltyMinus(3)))) << "\n\n";
+			
+		ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+			PlaceHolderHelper("+" + to_string(it->value1)));
+		text_ +=ss.str();
 
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_ARMOR] != it)
 			{
-				use_text_ += "(w)장착, ";
+				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)해제, ";
+				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
 				if (key) key->insert('u');
 			}
 		}

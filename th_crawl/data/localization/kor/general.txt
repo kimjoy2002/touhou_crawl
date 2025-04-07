@@ -13,9 +13,14 @@ LOC_SYSTEM_AUTOBATTLE_DANGERHP,자동전투하기엔 당신의 체력이 너무 
 LOC_SYSTEM_AUTOBATTLE_NOMON,공격할 수 있는 몬스터가 없다.
 LOC_SYSTEM_TOO_LOW_P_EVOKE,발동하기엔 당신의 P가 모자란다.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,이미 기억하고있는 마법입니다.
+LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST,존재하지 않는 스펠입니다.
+LOC_SYSTEM_MEMORIZE_SPELL_ASK,주문을 익히시겠습니까? (y/n)
+LOC_SYSTEM_MEMORIZE_HELP,{0:을|를} 누르면 마법을 기억할 수 있습니다.
+LOC_SYSTEM_ALPHABET_ASK,무슨 알파벳으로 바꿀거지?
 LOC_SYSTEM_NOT_CARRYING_WEAPON,무기를 끼고 있지 않다.
 LOC_SYSTEM_DO_CANCLE,취소하였다.
 LOC_SYSTEM_ASK_SUICIDE,자살할거야?
+LOC_SYSTEM_MORE,다음장
 LOC_SYSTEM_NOT_REMEMBER_SPELL,아직 알고있는 마법이 없다.
 LOC_SYSTEM_SAVE_QUIT_YN,저장후 종료하시겠습니까?(Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,저장하지않고 종료하시겠습니까?(Y/N)
@@ -85,6 +90,8 @@ LOC_SYSTEM_SHOUT_COME,따라와!
 LOC_SYSTEM_SHOUT_FINISH,당신은 소리를 쳐서 주의를 끌었다.
 LOC_SYSTEM_SHOUT_WHO,누구를 공격하게 명령하시겠습니까?
 LOC_SYSTEM_SHOUT_CANCLE,아무것도 외치지 않았다.
+LOC_SYSTEM_ALREADY_FULL_POWER,당신은 이미 풀파워다!
+LOC_SYSTEM_PICKUP_SELECT_ASK,{0:을|를} 줍습니까? (예:{1} 아니오:{2} 모두:{3} 선택:{4}) 
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,이 곳에서는 자동으로 탐색할 수 없어 보인다.
 LOC_SYSTEM_AUTOPICKUP_ON,자동 줍기를 활성화했다.
 LOC_SYSTEM_AUTOPICKUP_OFF,자동 줍기를 해제했다. ({0} 키로 다시 활성화 가능)
@@ -143,6 +150,7 @@ LOC_SYSTEM_DROP_ITEM,당신은 {0:을|를} 내려놓았다.
 LOC_SYSTEM_DROP_ITEM_SION_ALL,그러나 빈곤신의 저주로 사라졌다.
 LOC_SYSTEM_DROP_ITEM_SION_SOME,빈곤신의 저주로 {0}개가 사라졌다.
 LOC_SYSTEM_HOTKEY,단축키
+LOC_SYSTEM_HOTKEYCHANGE,단축키변경
 LOC_SYSTEM_NAME,이름
 LOC_SYSTEM_SKILL_NAME,스킬명
 LOC_SYSTEM_SKILL,스킬
@@ -161,8 +169,10 @@ LOC_SYSTEM_TILES,칸
 LOC_SYSTEM_INVENTORY,인벤토리
 LOC_SYSTEM_INVENTORY_ITEM,아이템 갯수
 LOC_SYSTEM_EQUIP,장착
+LOC_SYSTEM_UNEQUIP,해제
 LOC_SYSTEM_LEFT_HAND,왼손
 LOC_SYSTEM_RIGHT_HAND,오른손
+LOC_SYSTEM_EQUIP_TANMAC,탄막
 LOC_SYSTEM_PROJECTILE,발사물
 LOC_SYSTEM_OTTER_PROJECTILE,다른 발사물
 LOC_SYSTEM_MAGIC,마법
@@ -174,6 +184,7 @@ LOC_SYSTEM_SKILL_JUNKA,순화
 LOC_SYSTEM_MP_PURITY,마력순화
 LOC_SYSTEM_SUCCESS_RATE,성공률
 LOC_SYSTEM_FAILURE_RATE,실패율
+LOC_SYSTEM_REMAIN_SPELLPOINT,남은 마법 레벨
 LOC_SYSTEM_REMAIN_EXP,다음레벨까지
 LOC_SYSTEM_LEVEL,레벨
 LOC_SYSTEM_LEVEL_WITH_NUMBER,{0}레벨
@@ -199,6 +210,15 @@ LOC_SYSTEM_IMPOSSIBLE,불가능
 LOC_SYSTEM_AHTEISM,무신앙
 LOC_SYSTEM_FAITH,신앙
 LOC_SYSTEM_POULARITY,인기도
+LOC_SYSTEM_ATTACK_VALUE,공격력
+LOC_SYSTEM_HIT_VALUE,명중력
+LOC_SYSTEM_CURRENT_ATTACK_SPEED,현재공격속도
+LOC_SYSTEM_BASE_ATTACK_SPEED,기본공격속도
+LOC_SYSTEM_MINIMUM_ATTACK_SPEED,최소공격속도
+LOC_SYSTEM_CURRENT_TANMAC_SPEED,현재 탄막속도
+LOC_SYSTEM_DEFAULT_DEFENSE,기본 방어력
+LOC_SYSTEM_DEFAULT_PENALTY,기본 패널티
+LOC_SYSTEM_MINIMUM_PENALTY,최소 패널티
 LOC_SYSTEM_YOU,당신
 LOC_SYSTEM_TURN,턴
 LOC_SYSTEM_TURNS,턴
@@ -2035,6 +2055,15 @@ LOC_SYSTEM_ITEM_CATEGORY_BOOK,책
 LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,발동
 LOC_SYSTEM_ITEM_CATEGORY_GOAL,중요
 LOC_SYSTEM_ITEM_CATEGORY_OTHER,기타
+LOC_SYSTEM_ITEM_CURSED,저주받은 {0}
+LOC_SYSTEM_ITEM_UNCURSED,저주받지않은 {0}
+LOC_SYSTEM_ITEM_PILED,{0}개의 {1}
+LOC_SYSTEM_ITEM_USED,사용
+LOC_SYSTEM_ITEM_SELECTED_USED,선택사용
+LOC_SYSTEM_ITEM_SPELLCARD_USED,사용횟수: {0}
+LOC_SYSTEM_ITEM_SPELLCARD_EMPTY,비어있음
+LOC_SYSTEM_ITEM_SPELLCARD_CHARGED,충전됨
+LOC_SYSTEM_ITEM_NOT_EXIST,존재하지 않는 아이템입니다.
 LOC_SYSTEM_SPELLCARD,스펠카드
 LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}의 스펠카드
 LOC_SYSTEM_SPELLCARD_INVISIBLE,투명
@@ -2419,6 +2448,7 @@ LOC_SYSTEM_ITEM_TANMAC_AMULET,호밍아뮬렛
 LOC_SYSTEM_ITEM_TANMAC_POISON_NEEDLE,맹독 수리검
 LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER,키쿠이치몬지 컴프레서
 LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO,독고저
+LOC_SYSTEM_ITEM_EVOKE,발동
 LOC_SYSTEM_ITEM_EVOKE_PAGODA,보탑
 LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,에어두루마리
 LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,몽혼
@@ -2445,6 +2475,61 @@ LOC_SYSTEM_ITEM_ETC_CATNIP,개다래 나무
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,부셔진 카메라
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,잡동사니
 LOC_SYSTEM_ITEM_ETC_PHOTO,사진
+LOC_SYSTEM_ITEM_ETC_CATNIP_CONFUSE,당신은 개다래나무의 향기에 취했다!
+LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT,이 아이템은 {0}까지 인챈트가 가능하다.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE,날이 짧은 검이다. 빠른 속도로 공격할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER,휴대하기 좋은 작은 단검. 직접적인 전투보다 조용히 적의 목을 따버리는데 효율적이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE,던지는 무기로 최적화된 단검. 근접전투로도 쓸 순 있지만 효율은 떨어진다.\n비록 던지고나선 다시 주워야하지만 이를 해결할 수 있다면 유용한 투척수단이 된다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD,다른 단검에 비해선 근접 전투에서도 쓸 수 있을 정도로 날이 긴 무기다.\n구지 단검으로 정면전을 하고싶은 사람이라면 쓰게될 것이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE,날이 긴 장검이다. 찌르거나 베면서 상대를 공격한다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA,평범한 도검으로 마땅히 특징이랄게 없을 정도로 쓰기 편한 평범한 검.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR,백랑텐구들이 자주 들고다니는 날이 크고 구부러져있는 장검.\n날이 훨씬 크기 때문에 보통의 장검보다 더 큰 데미지를 준다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD,아주 거대한 양날이 달린 검. 양손으로도 제대로 들기가 힘들다.\n그 크기에 걸맞는 파괴력을 보여주지만 제대로 다루기엔 수련이 필요하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM,어딘가의 토착신이 자주 사용하는 둥그렇게 날이 달린 투척용 무기.\n손으로 빙빙돌려서 던지면 그 회전력으로 다시 자신에게 돌아올 수 도 있다.\n이걸 검이라고 볼 수 있을진 모르겠지만 손에 들고 검처럼도 사용할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE,무기로 쓸 수 있는 뭉툭한 둔기다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI,신사의 무녀들이 제사를 할때 사용하는 제사용구... 였으나\n환상향의 무녀들은 물리적인 공격도구로 사용하는 일이 많다.\n그렇게 효율적인 무기는 아닐지도 모르지만 시도해볼 가치는 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK,마법사들이 흔히 쓰고 다니는 빗자루. 마법력을 올려주거나 그런 용도는 없다.\n굳이 빗자루를 고집할 이유는 없지만 마법사는 빗자루라는 특유의 고집인듯 하다.\n둔기로서 사용하는게 그나마 활용해볼 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA,멋쟁이들이 사용한다는 양산. 강한 요괴일수록 양산을 사용하려는 풍조가 있는듯하다.\n그렇게 효과적이진않을지 몰라도 강한척을 하고 싶은 사람들이라면 사용해보는게 어떨까?\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD,보물을 찾는데 도움을 준다고 믿어지는 봉. 그러나 이런 속설은 미신인듯 싶다.\n보물을 찾는데 도움은 되지않지만 다루기 쉬운 금속 봉으로 전투에서 쓸 수 있다.\n양손으로 다루는데 특화되어있어서, 방패와 함께라면 효율이 떨어진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA,아주 거대한 기둥으로 이런 것을 무기로 쓰려 생각했다는게 신기할 정도다.\n보통 익숙하지만 휘두르는데만 엄청난 시간이 걸릴듯 하다.\n맞추기도 쉽지않아보이지만 맞춘다면 엄청난 데미지를 줄 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR,길다란 창이다. 적을 찔러서 공격할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR,딱히 큰 특징이 없는 평범한 창. 찌르는데 쓸 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN,던지는데 특화되어있는 거대한 창. 힘껏 던져서 적에게 맞출 수 있다.\n근접전투에서도 충분히 사용이 가능하지만 휘두르기엔 적합하지않다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE,사신이 자주 들고다닌다는 거대한 낫.\n생각보다 무기로서 사용하기엔 어려워보이는 큰 낫이지만 익숙해지면 나름 강하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT,날이 3개달린 기다란 작살으로 찍는데 특화된 창이다.\n가볍고 쓰기 좋지만 높은 위력은 나오지않는다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR,대나무로 깎아서 만든 창.\n아주 평범한 창처럼 보이지만 놀랄만한 위력을 숨기고 있다.\n제대로 다루려면 상당한 연습이 필요하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE,적을 찍을 수 있는 도끼. 거대한 날을 지녔다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE,한손으로 들 수 있는 작은 손도끼다. 큰 위력은 나오지않지만 다루기 쉽다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE,길다란 자루에 큰 도끼날이 달린 거대한 도끼다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR,어딘가의 배유령이 자주 들고다니는 거대한 닻이다.\n아주 강력하지만 이런걸 휘두를려면 어마어마한 실력이 필요하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO1,이 무기는 {0} 스킬에 비례하여 강해진다. (현재 {0} 스킬 레벨 : {1})
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO2,단, 이 무기는 방패를 들게되면 공격속도가 {0}만큼 추가적으로 느려진다.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3,이 아이템은 근접 무기로도 사용가능하지만 던져서 탄막으로도 사용할 수 있다.
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4,이 경우 현재 탄막속도는 {0}이다. (현재 탄막 스킬 레벨 : {1})
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_INFO,(현재 탄막 스킬 레벨 : {0})
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO1,패널티는 갑옷 스킬을 올릴수록 줄어듭니다. 최소 패널티이하로는 줄일수 없습니다.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO2,현재 스킬로 착용시 얻는 방어력은 {0}이고 패널티는 {1}다. (현재 갑옷 스킬 레벨 : {2})
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO3,합계 패널티만큼 회피와 은밀, 마법성공율이 감소합니다.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO4,합계 패널티가 {0}보다 높으면 패널티만큼 추가적으로 명중율이 감소합니다.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO5,합계 패널티가 {0}보다 높으면 패널티만큼 이동속도가 감소합니다.
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO6,합계 패널티가 {0}보다 높으면 모든 행동이 2배 딜레이됩니다.
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG,탄막 놀이의 기본이 되는 탄막이다. 적에게 던져서 맞춘다.\n문제는 이게 버그 탄막이라는 것이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET,레이무가 쓰는 이 치사한 아뮬렛에는 고성능의 호밍성능이 붙어있다.\n특별한 특징이 없는 탄막이지만 높은 명중율이 자랑이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE,이것은 던지면서 상대에게 박히는 수리검이다.\n데미지는 낮지만 이 수리검에는 특별히 독이 발라져있는것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,캇파들의 발명품중 하나다. 물을 가득 압축하고있는 폭탄이다.\n상대에게 던지면 압축되어있던 물이 한번에 터진다.\n넓은 범위 공격할 수 있을 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,불교의 승려들이 수행할때 사용했다고 하는 고대 인도의 무기.\n평소엔 평범한 손잡이처럼 생겼지만 강한 힘으로 던지면 마력이 방출된다.\n다른 탄막과 다르게 적들을 관통하여 공격이 가능하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,평상시에 입는 편한 옷.\n천이 아닌 재질의 갑옷 기본패널티가 상당히 내려간다.\n그러나 최소패널티는 다른 옷과 동일하므로 갑옷에 익숙해지면 이점이 없어진다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,무녀들이 입는 옷.\n신의 가호를 받아서 정신을 보호해준다. 입고있는 동안 혼란저항이 생긴다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING,용궁의 사자들이 입는다는 날개옷.\n전기를 흘려보내는 특징을 가지고 있다. 입고있는 동안 전기저항이 생긴다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,캇파들이 유니폼처럼 입고 있는 파란색 옷이다.\n강의 추위에도 견딜 수 있게 디자인 되어있다. 입고있는 동안 냉기저항이 생긴다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE,불쥐의 기운이 서려있는 옷이다.\n뜨거운 열에도 견딜 수 있을 것 같다. 입고있는 동안 화염저항이 생긴다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID,홍마관의 메이드들이 입는 옷.\n홍마관 도서관표 특수한 마법적 처리가 되어있다. 입고있는 동안 마법저항이 올라간다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,은방울 꽃밭의 인형이 입고 있던 옷이지만 꽤 사이즈가 커서 입을 수 있을 것 같다.\n은방울 꽃의 기운이 당신을 보호해준다. 입고있는 동안 독저항이 생긴다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,단풍으로 만들어진 옷. 의외로 제대로된 옷이다.\n시즈하를 믿고있을때 주변의 풍경에 동화되어서 은밀이 급격하게 올라간다.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,움직이기 편하게 천으로 되어있는 옷.\n잦은 그레이즈에도 끄덕없는 질긴 옷감으로 되어있다!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,질긴 재질로 되어있는 옷.\n천보단 움직이기 불편하지만 꽤 가볍다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,사슬로 얽혀있는 갑옷.\n꽤 단단하지만 판금으로된 갑옷보다는 못하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,강철로 된 판금을 덧댄 갑옷.\n마법과 움직임을 방해하지만 당신의 안전을 책임진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n

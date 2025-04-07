@@ -89,8 +89,13 @@ void PickUpSelect(list<item>::iterator it, int num)
 		{
 			if(isPick(&(*temp)))
 			{
-				printlog((*temp).GetName(),false,false,false,(*temp).item_color());
-				printlog("을 줍습니까? (예:y 아니오:n 모두:a 선택:*?g,)",true,false,false,CL_help);
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_PICKUP_SELECT_ASK, true, false, false, CL_help,
+					PlaceHolderHelper((*temp).GetName(), (*temp).item_color(), (*temp).num > 1 ? true : false), 				
+					PlaceHolderHelper("y"),
+					PlaceHolderHelper("n"),
+					PlaceHolderHelper("a"),
+					PlaceHolderHelper("*?g,")
+				);
 				switch(waitkeyinput())
 				{
 				case 'y':
@@ -372,7 +377,7 @@ void Eatting(char auto_)
 	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
 	{
-		printlog("당신은 이미 풀파워다!",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
 		return;
 	}
 	view_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
@@ -440,7 +445,7 @@ void Drinking(char auto_)
 			if(you.Drink(key_))
 			{			
 				you.time_delay += you.GetNormalDelay();
-				you.doingActionDump(DACT_USE, "물약");
+				you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
 				changedisplay(DT_GAME);
 				if(you.god == GT_EIRIN)
 				{
@@ -614,7 +619,8 @@ void Reading(char auto_)
 							WaitForSingleObject(mutx, INFINITE);
 							SetText() = GetSpellInfor((spell_list)spell_);
 							SetText() += "\n\n";
-							SetText() += "m을 누르면 마법을 기억할 수 있습니다.\n";
+							SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
+							SetText() += "\n";
 							ReleaseMutex(mutx);
 							int memory_ = waitkeyinput();
 
@@ -634,7 +640,7 @@ void Reading(char auto_)
 			{
 				if(you.Read(key_))
 				{
-					you.doingActionDump(DACT_USE, "두루마리");
+					you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL));
 					you.time_delay += you.GetNormalDelay();
 					changedisplay(DT_GAME);
 					you.TurnEnd();

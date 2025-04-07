@@ -16,6 +16,7 @@
 #include <functional>
 #include <regex>
 #include "d3dUtility.h"
+#include "d3d9types.h"
 #include <initializer_list>
 #include <vector>
 #include "enum.h"
@@ -51,6 +52,14 @@ public:
     PlaceHolderHelper(LOCALIZATION_ENUM_KEY key, D3DCOLOR color, bool plural) : name(), plural(plural), color(color){hasColor = true;};
 };
 
+class TextHelper {
+public:
+    string text;
+    bool enter;
+    D3DCOLOR color;
+    TextHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
+};
+
 
 
 class LocalzationManager {
@@ -65,12 +74,19 @@ private:
     static unordered_map<monster_index, string> monster_enum_reverse_map;
 	static unordered_map<monster_index, string> monster_name_map;
 	static unordered_map<monster_index, string> monster_description_map;
+	static vector<TextHelper> help_command;
+	static vector<TextHelper> help_credit;
 
 	static unordered_set<string> korean_verbs;
 	static unordered_set<string> english_verbs;
 	static unordered_set<string> english_article;
 
 private:
+    static D3DCOLOR getColorFromCode(const string& code);
+    static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor);
+    static pair<string, D3DCOLOR> parseColorTag(const string& line);
+    static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector);
+
     template<typename EnumType>
     static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
         ifstream file(path + filename);
@@ -159,6 +175,8 @@ public:
 	static const string& speakString(SPEAK_ENUM_KEY key);
 	static const string& monString(monster_index key);
     static const string& monDecsriptionString(monster_index key);
+	static const vector<TextHelper>& getHelpCommand(){return help_command;};
+	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
 
     static const string& getMonsterEnumString(monster_index key);
     static monster_index getMonsterEnumKey(const string& str);

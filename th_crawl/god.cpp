@@ -2241,67 +2241,6 @@ void Pray()
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_AHTEISM),true,false,false,CL_warning);
 		}
-
-		//switch(type)
-		//{
-		//case DG_TEMPLE_SHIKIEIKI:
-		//	printlog("시키에이키는 말했다 : 최대한 빨리 그 쪽지를 지상으로 가져다주세요.",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_BYAKUREN:
-		//	printlog("뱌쿠렌은 말했다 : 아아, 크롤의 세계 안에 빛이 가득해.",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_KANAKO:
-		//	printlog("카나코는 말했다 : 이것은 신앙을 모을 기회입니다.",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_SUWAKO:
-		//	if(isNormalGame() || you.s_poison)
-		//	{
-		//		printlog("스와코는 말했다 : 아하하, 재미있어졌어.",true,false,false,CL_warning);
-		//	}
-		//	else
-		//	{
-		//		printlog("스와코는 말했다 : 던전에서 죽는다고 진짜 죽는건 아니야. 모든 기록은 사라지지만.",true,false,false,CL_warning);
-		//		printlog("스와코는 말했다 : 그래서 크롤의 세계에선 죽는 것도 일이란다! 다음에 보자 사나에!",true,false,false,CL_warning);
-		//		you.SetPoison(150,true);
-		//	}
-		//	break;
-		//case DG_TEMPLE_MINORIKO:
-		//	printlog("미노리코는 말했다 : 던전탐험도 식후경!",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_MIMA:
-		//	printlog("미마는 말했다 : 기분좋게 자고있었는데, 어떻게 된거지?",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_SHINKI:
-		//	printlog("신키는 말했다 : 마계도 엉망이야...",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_YUUGI:
-		//	printlog("유우기는 말했다 : 강한 녀석들을 많이 보겠는걸!",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_SHIZUHA:
-		//	printlog("잘 들리지않는 부스럭거리는 소리가 들린다.",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_HINA:
-		//	printlog("히나는 말했다 : 액이 넘쳐나! 액땜할 시간이야!",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_YUKARI:
-		//	printlog("유카리는 말했다 : 내 탓은 아니라구?",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_EIRIN:
-		//	printlog("에이린은 말했다 : 힘을 원한다면, 나의 실험재료가 되는건 어때?",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_YUYUKO:
-		//	printlog("유유코는 말했다 : 이왕 이렇게 된거 즐기면 되잖아?",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_SATORI:
-		//	printlog("사토리는 말했다 : 애완동물들은 어디로 갔을까요...",true,false,false,CL_warning);
-		//	break;
-		//case DG_TEMPLE_TENSI:
-		//	printlog("텐시는 미친듯이 웃었다.",true,false,false,CL_warning);
-		//	break;
-		//default:
-		//	printlog("당신은 삶의 의미에 대해 잠시 생각했다.",true,false,false,CL_warning);
-		//	break;
-		//}
 	}
 	you.time_delay += you.GetNormalDelay();
 	you.TurnEnd();
@@ -3637,11 +3576,11 @@ void God_show()
 	case GT_LILLY:
 		if(level_ >= 1 )
 		{ 
-			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLIY1),true,CL_lilly);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1),true,CL_lilly);
 			printsub("",true,CL_normal);
 			for(int i = 0; i < min(5,level_); i++)
 			{
-				printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_UI_LILLIY1_ALLY,PlaceHolderHelper(std::to_string(i+1))) + " ",false,CL_warning);
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_UI_LILLY1_ALLY,PlaceHolderHelper(std::to_string(i+1))) + " ",false,CL_warning);
 				if(you.god_value[GT_LILLY][i])
 				{
 					int lenght_ =0;
@@ -3660,7 +3599,7 @@ void God_show()
 					{
 						
 						ostringstream oss;
-						oss << LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLIY1_LEVEL) << " ";
+						oss << LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1_LEVEL) << " ";
 						lenght_ += printsub(oss.str(),false,CL_warning);
 						oss.clear();
 						oss.str("");
@@ -3671,12 +3610,12 @@ void God_show()
 
 					for(;lenght_<40;lenght_++)
 						printsub(" ",false,CL_normal);
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLIY1_STATE) + " ",false,CL_warning);
-					printsub(LocalzationManager::locString(you.god_value[GT_LILLY][i]==1?LOC_SYSTEM_GOD_UI_LILLIY1_LIVE:LOC_SYSTEM_GOD_UI_LILLIY1_REVIVE),true,you.god_value[GT_LILLY][i]==1?CL_white_blue:CL_danger);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1_STATE) + " ",false,CL_warning);
+					printsub(LocalzationManager::locString(you.god_value[GT_LILLY][i]==1?LOC_SYSTEM_GOD_UI_LILLY1_LIVE:LOC_SYSTEM_GOD_UI_LILLY1_REVIVE),true,you.god_value[GT_LILLY][i]==1?CL_white_blue:CL_danger);
 				}
 				else
 				{
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLIY1_EMPTY),true,CL_bad);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1_EMPTY),true,CL_bad);
 				}
 			}
 			printsub("",true,CL_normal);
@@ -4095,7 +4034,7 @@ bool god_punish(god_type god)
 
 	if(wiz_list.wizard_mode == 1)
 	{
-		printarray(true,false,false,CL_small_danger,1,"***징벌!***");
+		printlog("***" + LocalzationManager::locString(LOC_SYSTEM_PUNISH) + "!***",true,false,false,CL_small_danger);
 	}
 	switch(god)
 	{
@@ -4115,7 +4054,7 @@ bool god_punish(god_type god)
 			you.god_value[GT_JOON_AND_SION][0] = 1;
 			you.god_value[GT_JOON_AND_SION][1] = rand_int(250, 400);
 			you.PowUpDown(-100);
-			printarray(true, false, false, CL_white_blue, 1, "죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON), true, false, false, CL_white_blue);
 			break;
 		case 1:
 			you.god_value[GT_JOON_AND_SION][0] = 2;
@@ -4123,7 +4062,7 @@ bool god_punish(god_type god)
 			you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
 			if (!you.pure_mp)
 				you.MpUpDown(-you.max_mp / 2);
-			printarray(true, false, false, CL_white_blue, 1, "시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION), true, false, false, CL_white_blue);
 			break;
 		}
 	}
@@ -4138,15 +4077,15 @@ bool god_punish(god_type god)
 			{
 			case 0:
 				you.MpUpDown(!you.pure_skill? -you.GetMaxMp(): -you.GetMaxMp()/2);
-				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 영력이 흡수되었다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_PUNISH_MP), true,false,false,CL_white_blue);
 				break;
 			case 1:
 				(randA(1)?you.StatUpDown(-rand_int(1,5),STAT_STR,true):you.StatUpDown(-rand_int(3,7),STAT_INT,true));
-				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신의 스탯이 감소되었다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_PUNISH_BYAKUREN), true,false,false,CL_white_blue);
 				break;
 			case 2:
 				you.SetSlow(rand_int(80,100));
-				printarray(true,false,false,CL_white_blue,1,"뱌쿠렌의 분노로 당신은 느려졌다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_PUNISH_SLOW), true,false,false,CL_white_blue);
 				break;
 			}
 		}
@@ -4161,7 +4100,7 @@ bool god_punish(god_type god)
 			{
 			case 0:	
 				{
-					printarray(true,false,false,CL_help,1,"카나코는 당신에게 강력한 일격을 날렸다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE), true,false,false,CL_help);
 					int damage_ = you.GetHp()*rand_int(40,80)/100;
 					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor(LOC_SYSTEM_SKL_KANAKO_1));
 					you.damage(temp_att, true);
@@ -4175,7 +4114,7 @@ bool god_punish(god_type god)
 					{
 						BaseSummon(MON_ONBASIRA, rand_int(10,30), true, false, 2, NULL, you.position, SKD_OTHER, -1);
 					}
-					printarray(true,false,false,CL_help,1,"카나코는 당신에게 온바시라를 꽂았다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA), true,false,false,CL_help);
 					env[current_level].MakeNoise(you.position,16,NULL);
 					break;
 				}
@@ -4197,7 +4136,7 @@ bool god_punish(god_type god)
 					dif_rect_iterator rit(you.position,2,true);
 					if(!dq.empty())
 					{							
-						printarray(true,false,false,CL_help,1,"카나코는 당신을 전투로 강제로 이끌었다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL), true,false,false,CL_help);
 						summon_ = true;
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
@@ -4214,7 +4153,7 @@ bool god_punish(god_type god)
 					}
 					else
 					{
-						printarray(true,false,false,CL_help,1,"카나코는 당신을 전투로 이끌려했지만 적당한 적이 없었다.");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL), true,false,false,CL_help);
 					}
 				}
 				break;
@@ -4243,7 +4182,7 @@ bool god_punish(god_type god)
 						}
 					}
 					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_FOG,rand_int(6,12),0,&you);
-					printarray(true,false,false,CL_swako,1,"스와코는 당신에게 저주를 내렸다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE), true,false,false,CL_swako);
 				}
 				break;
 			case 1:
@@ -4258,7 +4197,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_swako,1,"스와코는 당신에게 적대적인 개구리 무리를 선물했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG), true,false,false,CL_swako);
 				}
 				break;
 			}
@@ -4274,20 +4213,20 @@ bool god_punish(god_type god)
 			{
 			case 0:				
 				you.PowUpDown(-min(you.power,500)/2,true);
-				printarray(true,false,false,CL_warning,1,"미노리코는 당신의 배고픔을 가속시켰다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER), true,false,false,CL_warning);
 				break;
 			case 1:
 				{
 					you.HpUpDown(-max(1, you.GetHp() / 2), DR_EFFECT, NULL);
 					you.SetSick(rand_int(80,120));
-					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 건강을 빼앗아갔다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK), true,false,false,CL_warning);
 					break;
 				}
 			case 2:
 				{
 					for(int i=0;i<3;i++)
 						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
-					printarray(true,false,false,CL_warning,1,"미노리코는 당신의 능력치를 깍아내렸다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT), true,false,false,CL_warning);
 					break;
 				}
 			}
@@ -4398,7 +4337,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_white_puple,1,"신키가 적대적인 마계인을 창조해냈다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_PUNISH_SUMMON),true,false,false,CL_white_puple);
 				}
 				break;
 			}
@@ -4413,13 +4352,13 @@ bool god_punish(god_type god)
 			switch(rand_.pop())
 			{
 			case 0:			
-				printarray(true,false,false,CL_yuigi,1,"유우기가 강한 술을 당신에게 강제로 먹였다!");	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK),true,false,false,CL_yuigi);	
 				you.SetConfuse(rand_int(9,30));
 				you.SetDrunken(rand_int(50,100));
 				break;
 			case 1:
 				{
-					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 집어던졌다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW),true,false,false,CL_yuigi);
 					you.Blink(40);
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
 					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY, ATT_SMASH,name_infor(LOC_SYSTEM_ATT_GIANTSWING));
@@ -4428,7 +4367,7 @@ bool god_punish(god_type god)
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_yuigi,1,"유우기가 당신을 벌하기위해 동료 오니들을 불러냈다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_PUNISH_ONI),true,false,false,CL_yuigi);
 					random_extraction<int> oni_;
 					oni_.push(MON_ONI);
 					oni_.push(MON_BLUE_ONI);
@@ -4461,7 +4400,7 @@ bool god_punish(god_type god)
 			switch(rand_.pop())
 			{
 			case 0:			
-				printarray(true,false,false,CL_autumn,1,"시즈하는 당신에 광기의 낙엽을 흩날렸다!");	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE),true,false,false,CL_autumn);	
 				you.SetConfuse(rand_int(12,45), true);
 				break;
 			case 1:
@@ -4480,7 +4419,7 @@ bool god_punish(god_type god)
 					int rand_ = randA(1);
 					env[current_level].MakeFloorEffect(coord_def(you.position.x,you.position.y),&img_effect_autumn_leave[rand_*2],&img_effect_autumn_leave[rand_*2+1],FLOORT_AUTUMN,3+you.piety/20,&you);
 	
-					printarray(true,false,false,CL_autumn,1,"시즈하가 당신의 등 뒤를 찔렀다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_PUNISH_BACKSTAB),true,false,false,CL_autumn);
 					int damage_ = you.GetHp()*rand_int(30,60)/100;
 					attack_infor temp_att(damage_,damage_,99,NULL,PRT_ENEMY,ATT_SMITE,name_infor(LOC_SYSTEM_ATT_BACKSTAB));
 					you.damage(temp_att, true);
@@ -4489,7 +4428,7 @@ bool god_punish(god_type god)
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_autumn,1,"시즈하가 엄청난 소음과 함께 당신을 지목했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_PUNISH_NOISE_AND_DEBUFF),true,false,false,CL_autumn);
 					env[current_level].MakeNoise(you.position,30,NULL);
 					int time_ = rand_int(40,60);
 					you.SetGlow(time_);
@@ -4522,7 +4461,7 @@ bool god_punish(god_type god)
 						}
 					}
 					env[current_level].MakeSmoke(you.position,img_fog_dark,SMT_CURSE,rand_int(6,12),0,&you);
-					printarray(true,false,false,CL_hina,1,"히나는 액을 당신에게 직접 주입했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE),true,false,false,CL_hina);
 				}
 				break;
 			case 1:
@@ -4554,14 +4493,14 @@ bool god_punish(god_type god)
 					}
 					if(!curse_)
 					{
-						printarray(true,false,false,CL_hina,1,"그러나 아무일도 일어나지 않았다.");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NOTHING_HAPPEND), true,false,false,CL_hina);
 
 					}
 				}
 				break;
 			case 2:
 				{
-					printarray(true,false,false,CL_autumn,1,"히나는 당신을 빙빙 돌렸다!");	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_PUNISH_SPIN),true,false,false,CL_hina);	
 					you.SetConfuse(rand_int(12,45), true);
 					break;
 				}
@@ -4580,7 +4519,7 @@ bool god_punish(god_type god)
 				{
 					you.SetConfuse(rand_int(6,18), true);
 					you.Teleport();
-					printarray(true,false,false,CL_yukari,1,"유카리는 당신을 강제로 텔레포트 시켰다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT),true,false,false,CL_yukari);
 				}
 				break;
 			case 1:
@@ -4603,7 +4542,7 @@ bool god_punish(god_type god)
 					if(!dq.empty())
 					{
 						summon_ = true;
-						printarray(true,false,false,CL_yukari,1,"유카리는 당신의 주변에 몹들을 강제로 이동시켰다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL),true,false,false,CL_yukari);
 						for(int i = 0;!rit.end() && i < dq.size();rit++)
 						{
 							if(env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
@@ -4623,14 +4562,14 @@ bool god_punish(god_type god)
 					}
 					else
 					{
-						printarray(true,false,false,CL_yukari,1,"유카리는 당신의 공간이동을 막았다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_PUNISH_STASIS),true,false,false,CL_yukari);
 					}
 				}
 				break;
 			case 2:
 				{
 
-					printarray(true,false,false,CL_yukari,1,"유카리는 당신을 감시하는 이형의 눈을 소환했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_PUNISH_EYES),true,false,false,CL_yukari);
 					summon_ = true;
 					int i = rand_int(2+you.level/8,3+you.level/5);
 					for(; i>0 ; i--)
@@ -4669,7 +4608,7 @@ bool god_punish(god_type god)
 				break;
 			case 1:
 				{
-					printarray(true,false,false,CL_small_danger,1,"에이린이 당신의 몸에 강제로 실험을 했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT),true,false,false,CL_small_danger);
 					you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,true);
 					for(int i=0;i<3;i++)
 						you.StatUpDown(-rand_int(1,4),randA(2)?(randA(1)?STAT_STR:STAT_DEX):STAT_INT,true);
@@ -4696,7 +4635,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_yuyuko,1,"유유코는 당신의 주변에 유령을 끌어모았다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST),true,false,false,CL_yuyuko);
 				}
 				break;
 			}
@@ -4730,7 +4669,7 @@ bool god_punish(god_type god)
 			case 0:		
 				{
 					you.SetForceStrong(false, rand_int(20,40),true);
-					printarray(true,false,false,CL_lilly,1,"릴리는 당신의 힘을 빼앗았다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK),true,false,false,CL_lilly);
 				}
 				break;
 			case 1:
@@ -4781,7 +4720,7 @@ bool god_punish(god_type god)
 						}
 					}
 					summon_ = true;
-					printarray(true,false,false,CL_lilly,1,"릴리는 당신에게 적대적인 요정의 무리를 소환했다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON),true,false,false,CL_lilly);
 				}
 				break;
 			}
@@ -4799,19 +4738,19 @@ bool god_punish(god_type god)
 		{
 		case 0:
 		{
-			printarray(false, false, false, CL_miko, 1, "미코는 당신의 체력을 빼앗아갔다! ");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_PUNISH_HP) + " ", false, false, false, CL_miko);
 			you.SetBuff(BUFFSTAT_HP, BUFF_DUPLE, -(you.GetMaxHp()/2), time_);
 		}
 		break;
 		case 1:
 		{
-			printarray(false, false, false, CL_junko, 1, "미코는 당신을 느리게했다! ");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW) + " ", false, false, false, CL_miko);
 			you.SetSlow(time_);
 		}
 		break;
 		case 2:
 		{
-			printarray(false, false, false, CL_junko, 1, "미코는 당신의 저항을 낮추었다! ");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST) + " ", false, false, false, CL_miko);
 			you.SetBuff(BUFFSTAT_RF, BUFF_MIKO_RF_MINUS, -1, time_);
 			you.SetBuff(BUFFSTAT_RC, BUFF_MIKO_RC_MINUS, -1, time_);
 		}
@@ -4842,7 +4781,7 @@ bool god_punish(god_type god)
 
 					if (isYourSight)
 					{
-						printarray(true, false, false, CL_okina, 1, "오키나는 백댄서를 불러냈다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_PUNISH_BACKDANCER),true, false, false, CL_okina);
 
 						int time_ = rand_int(40, 60);
 						if (monster *mon_ = BaseSummon(MON_MAI2, time_, true, true, 3, NULL, you.position, SKD_OTHER, -1))
@@ -4861,7 +4800,7 @@ bool god_punish(god_type god)
 						you.HpUpDown(-you.GetMaxHp() / 2, DR_EFFECT);
 						if(!you.pure_mp)
 							you.MpUpDown(-you.max_mp / 2);
-						printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN),true, false, false, CL_okina);
 						break;
 					}
 				}
@@ -4871,7 +4810,7 @@ bool god_punish(god_type god)
 					you.HpUpDown(-you.GetMaxHp()/2, DR_EFFECT);
 					if (!you.pure_mp)
 						you.MpUpDown(-you.max_mp/2);
-					printarray(true, false, false, CL_okina, 1, "오키나의 분노로 당신의 체력과 영력이 흡수되었다!");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN),true, false, false, CL_okina);
 					break;
 				}
 				break;
@@ -4890,19 +4829,19 @@ bool god_punish(god_type god)
 			{
 			case 0:
 			{
-				printarray(false, false, false, CL_junko, 1, "순호는 당신의 힘을 약화하였다! ");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK) + " ",false, false, false, CL_junko);
 				you.SetForceStrong(false, time_, true);
 			}
 			break;
 			case 1:
 			{
-				printarray(false, false, false, CL_junko, 1, "순호는 당신의 속도를 빼앗았다! ");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW) + " ",false, false, false, CL_junko);
 				you.SetSlow(time_);
 			}
 			break;
 			case 2:
 			{
-				printarray(false, false, false, CL_junko, 1, "순호는 당신의 능력치를 빼앗았다! ");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT) + " ", false, false, false, CL_junko);
 				for (int i = 0; i<3; i++)
 					you.StatUpDown(-rand_int(1, 2), randA(2) ? (randA(1) ? STAT_STR : STAT_DEX) : STAT_INT, true);
 			}
@@ -4970,7 +4909,7 @@ void joonRandomBuff() {
 		you.SetClever(rand_int(30, 60));
 		break;
 	case 4:
-		printlog("당신은 단단해졌다. ", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GAIN_AC) + " ", false, false, false, CL_white_blue);
 		you.SetBuff(BUFFSTAT_AC, BUFF_JOON_AC, 8, rand_int(30, 60));
 		break;
 	}
@@ -5075,84 +5014,93 @@ int getMikoPiety(int kind) {
 void printReEnter()
 {
 	if (you.GetPunish(you.god)) {
-		printlog("환상향에 돌아온걸 환영한다!", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_WELCOME), true, false, false, CL_normal);
 		return;
 	}
 	switch (you.god)
 	{
-	case GT_BYAKUREN:
-		printlog("히지리: 어서오세요. 신도여", true, false, false, CL_white_blue);
-		break;
 	case GT_JOON_AND_SION:
 		switch (randA(1))
 		{
 		case 0:
-			printlog("죠온: 한푼도 남김없이 모두 털어버리자고!", true, false, false, CL_joon);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1), true, false, false, CL_joon);
 			break;
 		case 1:
-			printlog("시온: 배고파...", true, false, false, CL_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2), true, false, false, CL_sion);
 			break;
 		}
 		break;
+	case GT_BYAKUREN:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_WELCOME), true, false, false, CL_white_blue);
+		break;
 	case GT_KANAKO:
-		//사나에전용 대사 필요
-		printlog("카나코: 끊임없는 전투로 신앙을 보이도록 하여라!", true, false, false, CL_help);
+		if(you.char_type == UNIQ_START_SANAE) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_WELCOME_SANAE), true, false, false, CL_help);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_WELCOME), true, false, false, CL_help);
+		}
 		break;
 	case GT_SUWAKO:
-		printlog("스와코: 하하하! 재밌어졌어", true, false, false, CL_swako);
+		if(you.char_type == UNIQ_START_SANAE) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE), true, false, false, CL_swako);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_WELCOME), true, false, false, CL_swako);
+		}
 		break;
 	case GT_MINORIKO:
-		printlog("미노리코: 이 땅에 가을의 축복을!", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_WELCOME), true, false, false, CL_warning);
 		break;
 	case GT_MIMA:
-		printlog("미마: 압도적인 마법으로!", true, false, false, CL_green);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_WELCOME), true, false, false, CL_green);
 		break;
 	case GT_SHINKI:
-		printlog("신키에게 P와 영혼을!", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_WELCOME), true, false, false, CL_white_puple);
 		break;
 	case GT_YUUGI:
-		printlog("유우기: 더 강한 상대를 찾아라!", true, false, false, CL_yuigi);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_WELCOME), true, false, false, CL_yuigi);
 		break;
 	case GT_SHIZUHA:
-		printlog("시즈하: 인기 있는 녀석은 모두 죽여라...", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_WELCOME), true, false, false, CL_autumn);
 		break;
 	case GT_HINA:
-		printlog("히나: 그럼 액땜작업을 계속 하겠어", true, false, false, CL_hina);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_WELCOME), true, false, false, CL_hina);
 		break;
 	case GT_YUKARI:
-		printlog("유카리: 돌아왔구나", true, false, false, CL_yukari);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_WELCOME), true, false, false, CL_yukari);
 		break;
 	case GT_EIRIN:
-		printlog("에이린: 새로운 실험체가 필요해졌어", true, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_WELCOME), true, false, false, CL_small_danger);
 		break;
 	case GT_YUYUKO:
-		printlog("유유코: 차라도 한잔 할래?", true, false, false, CL_yuyuko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_WELCOME), true, false, false, CL_yuyuko);
 		break;
 	case GT_SATORI:
-		printlog("사토리: 마음대로 뛰어 노세요. 던전은 넓으니까요.", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_WELCOME), true, false, false, CL_danger);
 		break;
 	case GT_TENSI:
-		printlog("텐시: 천계는 지루해! 넌 날 재밌게 해줄거지?", true, false, false, CL_tensi);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_WELCOME), true, false, false, CL_tensi);
 		break;
 	case GT_SEIJA:
-		printlog("세이자: 자, 레지스탕스 활동의 개시다!", true, false, false, CL_seija);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_WELCOME), true, false, false, CL_seija);
 		break;
 	case GT_LILLY:
-		printlog("릴리: 봄이에요!", true, false, false, CL_lilly);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_WELCOME), true, false, false, CL_lilly);
 		break;
 	case GT_MIKO:
-		printlog("미코: 모두의 욕망을 들어보도록 하지!", true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_WELCOME), true, false, false, CL_miko);
 		break;
 	case GT_OKINA:
-		printlog("오키나: 이 세계에서 나를 각인시키도록 ", true, false, false, CL_okina);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_WELCOME), true, false, false, CL_okina);
 		break;
 	case GT_JUNKO:
-		printlog("순호: 상아여, 보고 있는가?", true, false, false, CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_WELCOME), true, false, false, CL_junko);
 		break;
 	case GT_ERROR:
 	case GT_NONE:
 	default:
-		printlog("환상향에 돌아온걸 환영한다!", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_WELCOME), true, false, false, CL_normal);
 		break;
 	}
 
@@ -5178,25 +5126,25 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("히지리: 아아, 법의 세계에 빛이 가득해", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK1), true, false, false, CL_white_blue);
 			return true;
 		case 1:
-			printlog("히지리: 우리 절은 인간과 요괴를 차별하지않는답니다.", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK2), true, false, false, CL_white_blue);
 			return true;
 		case 2:
-			printlog("히지리: 고된 수행은 마음을 깨끗하게 하지요.", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK3), true, false, false, CL_white_blue);
 			return true;
 		case 3:
-			printlog("히지리: 당신의 노력은 결실을 맺을거랍니다.", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK4), true, false, false, CL_white_blue);
 			return true;
 		case 4:
-			printlog("히지리: 비록 마법을 쓰는자라도 몸을 단련해야합니다.", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK5), true, false, false, CL_white_blue);
 			return true;
 		case 5:
-			printlog("히지리: 당신이 배운 불교의 가르침을 모두에게 전하세요.", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK6), true, false, false, CL_white_blue);
 			return true;
 		case 6:
-			printlog("히지리: 어서오세요. 진정한 부처님의 제자여", true, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BYAKUREN_TALK7), true, false, false, CL_white_blue);
 			return true;
 		}
 	case GT_ERROR:
@@ -5209,98 +5157,98 @@ bool God_PraySpeak()
 		default:
 		case 0:
 			if (randA(1))
-				printlog("죠온: 새로운 호구... 아니 고객이 왔네!", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK1), true, false, false, CL_joon);
 			else
-				printlog("시온: 배고프다...", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK2), true, false, false, CL_sion);
 			return true;
 		case 1:
 			if (randA(1))
-				printlog("죠온: 좀 더 팍팍 써도 된다고", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK3), true, false, false, CL_joon);
 			else
-				printlog("시온: 밥은 어딨어?", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK4), true, false, false, CL_sion);
 			return true;
 		case 2:
 			if (randA(1))
-				printlog("죠온: 저기 새 명품 핸드백이 사고싶은데 말이야", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK5), true, false, false, CL_joon);
 			else
-				printlog("시온: 왜 역병신인 우리를 믿고있는거야?", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK6), true, false, false, CL_sion);
 			return true;
 		case 3:
 			if (randA(1))
-				printlog("죠온: 응? 카드가 필요해?", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK7), true, false, false, CL_joon);
 			else
-				printlog("시온: 불우이웃돕기는 어때?", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK8), true, false, false, CL_sion);
 			return true;
 		case 4:
 			if (randA(1))
-				printlog("죠온: 아끼다 죽을바엔 모두 써버려!", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK9), true, false, false, CL_joon);
 			else
-				printlog("시온: 최근엔 배고파도 즐거워", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK10), true, false, false, CL_sion);
 			return true;
 		case 5:
 			if (randA(1))
-				printlog("죠온: 우리들이라면 모두를 털어버릴 수 있어!", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK11), true, false, false, CL_joon);
 			else
-				printlog("시온: 나도 도움이 될 수 있을까?", true, false, false, CL_sion);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK12), true, false, false, CL_sion);
 			return true;
 		case 6:
-			printlog("죠온&시온: 최흉최악의 자매의 힘을 보여주지! ", false, false, false, CL_joon_and_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_TALK13), false, false, false, CL_joon_and_sion);
 			return true;
 		}
 	case GT_KANAKO:
 		if (you.char_type == UNIQ_START_SANAE)
 		{
-			printlog("카나코: 무리는 하지말렴. 사나에", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK1), true, false, false, CL_help);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("카나코: 끊임없는 전투로 신앙을 증명하거라", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK2), true, false, false, CL_help);
 			return true;
 		case 1:
-			printlog("카나코: 나를 부른 이는 누구인가?", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK3), true, false, false, CL_help);
 			return true;
 		case 2:
-			printlog("카나코: 신앙을 방해하는 자는 모두 제거하라", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK4), true, false, false, CL_help);
 			return true;
 		case 3:
-			printlog("카나코: 그대의 신앙에는 힘으로서 보답하지", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK5), true, false, false, CL_help);
 			return true;
 		case 4:
-			printlog("카나코: 산의 신앙을 더욱 더 퍼트리도록", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK6), true, false, false, CL_help);
 			return true;
 		case 5:
-			printlog("카나코: 한때 전투의 신으로 불렸던 몸. 그 힘을 느끼게해주지", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK7), true, false, false, CL_help);
 			return true;
 		case 6:
-			printlog("카나코: 진정한 전투의 화신이여 앞으로 나아가라!", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_TALK8), true, false, false, CL_help);
 			return true;
 		}
 	case GT_SUWAKO:
 		if (you.char_type == UNIQ_START_SANAE)
 		{
-			printlog("스와코: 요괴퇴치의 시간이야 사나에!", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK1), true, false, false, CL_swako);
 			return true;
 		}
 		switch (randA(4))
 		{
 		default:
 		case 0:
-			printlog("스와코: 응? 나 불렀어?", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK2), true, false, false, CL_swako);
 			return true;
 		case 1:
-			printlog("스와코: 최근의 신도들은 원하는게 많다니깐", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK3), true, false, false, CL_swako);
 			return true;
 		case 2:
-			printlog("스와코: 내가 재앙신인걸 잊지말아~", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK4), true, false, false, CL_swako);
 			return true;
 		case 3:
-			printlog("스와코: 좀 더 노력하라고~", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK5), true, false, false, CL_swako);
 			return true;
 		case 4:
-			printlog("스와코: 걱정하지마, 충분히 힘은 줄테니깐", true, false, false, CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SUWAKO_TALK6), true, false, false, CL_swako);
 			return true;
 		}
 	case GT_MINORIKO:
@@ -5308,56 +5256,56 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("미노리코: 당신도 가을에 반한거야?", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK1), true, false, false, CL_warning);
 			return true;
 		case 1:
-			printlog("미노리코: 수확을 위해선 그만큼의 노력이 필요한거야", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK2), true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("미노리코: 가을은 정말 아름다운 계절이야!", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK3), true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("미노리코: 내가 준 고구마는 입맛에 맞아?", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK4), true, false, false, CL_warning);
 			return true;
 		case 4:
-			printlog("미노리코: 배는 든든하게 하고 다니지?", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK5), true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("미노리코: 쌓아올린 모든 노력을 풍년으로 보답할때야!", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK6), true, false, false, CL_warning);
 			return true;
 		case 6:
-			printlog("미노리코: 가을의 사도여! 나아가서 가을의 위대함을 알려라!", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_TALK7), true, false, false, CL_warning);
 			return true;
 		}
 	case GT_MIMA:
 		if (you.char_type == UNIQ_START_MARISA)
 		{
-			printlog("미마: 오랫만이네, 잘 지내고 있어?", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK1), true, false, false, CL_green);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("미마: 새로운 입교 희망자인가?", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK2), true, false, false, CL_green);
 			return true;
 		case 1:
-			printlog("미마: 사실 최근엔 제자는 받지않았었지만 특별케이스야", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK3), true, false, false, CL_green);
 			return true;
 		case 2:
-			printlog("미마: 마법의 기본은 파워다. 적어두도록", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK4), true, false, false, CL_green);
 			return true;
 		case 3:
-			printlog("미마: 선수필승. 먼저 공격한 쪽이 이긴다.", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK5), true, false, false, CL_green);
 			return true;
 		case 4:
-			printlog("미마: 내 궁극의 마법이 궁금한가?", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK6), true, false, false, CL_green);
 			return true;
 		case 5:
-			printlog("미마: 더 이상 내가 가르쳐줄 마법은 없다.", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK7), true, false, false, CL_green);
 			return true;
 		case 6:
-			printlog("미마: 마법의 힘으로 길을 열어라!", true, false, false, CL_green);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_TALK8), true, false, false, CL_green);
 			return true;
 		}
 	case GT_SHINKI:
@@ -5365,7 +5313,7 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("신키에게 P와 영혼을! ", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_WELCOME), true, false, false, CL_warning);
 			return true;
 		}
 	case GT_YUUGI:
@@ -5373,25 +5321,25 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("유우기: 넌 얼마나 강하지?", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK1), true, false, false, CL_yuigi);
 			return true;
 		case 1:
-			printlog("유우기: 강한 적과 붙어서 너의 강함을 증명해!", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK2), true, false, false, CL_yuigi);
 			return true;
 		case 2:
-			printlog("유우기: 난 거짓말을 하는 녀석이 싫어", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK3), true, false, false, CL_yuigi);
 			return true;
 		case 3:
-			printlog("유우기: 술은 많이 마실 수 있어?", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK4), true, false, false, CL_yuigi);
 			return true;
 		case 4:
-			printlog("유우기: 네가 싸우는걸 보면 왠지 즐거운데!", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK5), true, false, false, CL_yuigi);
 			return true;
 		case 5:
-			printlog("유우기: 나중에 나랑 한번 싸워보지않을래?", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK6), true, false, false, CL_yuigi);
 			return true;
 		case 6:
-			printlog("유우기: 다음엔 술자리에 초대할테니 꼭 살아서 돌아오라고!", true, false, false, CL_yuigi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_TALK7), true, false, false, CL_yuigi);
 			return true;
 		}
 	case GT_SHIZUHA:
@@ -5401,17 +5349,17 @@ bool God_PraySpeak()
 		case 0:
 		case 1:
 		case 2:
-			printlog("시즈하는 조용히 당신을 보고있다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TALK1), true, false, false, CL_warning);
 			return true;
 		case 3:
 		case 4:
-			printlog("시즈하는 당신의 기도에 고개를 끄덕였다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TALK2), true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("시즈하: ...이제 우리들의 차례야...", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TALK3), true, false, false, CL_autumn);
 			return true;
 		case 6:
-			printlog("시즈하: 다음 인기투표는 꼭 부탁할게", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TALK4), true, false, false, CL_autumn);
 			return true;
 		}
 	case GT_HINA:
@@ -5419,93 +5367,93 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("히나: 이 곳엔 재액이 가득해", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK1), true, false, false, CL_hina);
 			return true;
 		case 1:
-			printlog("히나: 조금씩 조금씩 액땜을 해나가자", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK2), true, false, false, CL_hina);
 			return true;
 		case 2:
-			printlog("히나: 액땜을 방해하는 녀석들은 배제해도 좋아", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK3), true, false, false, CL_hina);
 			return true;
 		case 3:
-			printlog("히나: 더욱 더 많은 저주를 모으도록 해", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK4), true, false, false, CL_hina);
 			return true;
 		case 4:
-			printlog("히나: 나에겐 그동안 누구도 말을 걸어주지않았어", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK5), true, false, false, CL_hina);
 			return true;
 		case 5:
-			printlog("히나: 저주를 모으는 작업은 외로운거지", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK6), true, false, false, CL_hina);
 			return true;
 		case 6:
-			printlog("히나: 너는 나와 끝까지 같이 있어줄거지?", true, false, false, CL_hina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_TALK7), true, false, false, CL_hina);
 			return true;
 		}
 	case GT_YUKARI:
 		if (you.char_type == UNIQ_START_REIMU)
 		{
-			printlog("유카리: 환상향의 무녀의 본분이 뭔지 기억하고있지?", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK1), true, false, false, CL_yukari);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("유카리: 당신이 나의 새로운 식신?", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK2), true, false, false, CL_yukari);
 			return true;
 		case 1:
-			printlog("유카리: 환상향은 모든 것을 수용해", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK3), true, false, false, CL_yukari);
 			return true;
 		case 2:
-			printlog("유카리: 결계의 보수작업이 필요해", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK4), true, false, false, CL_yukari);
 			return true;
 		case 3:
-			printlog("유카리: 사태의 원인을 알기위해서라도 더 많은 정보가 필요해", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK5), true, false, false, CL_yukari);
 			return true;
 		case 4:
-			printlog("유카리: 당신만 믿고있어. 도움이 필요하면 말해", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK6), true, false, false, CL_yukari);
 			return true;
 		case 5:
-			printlog("유카리: 내 힘을 받으면 더 이상 경계의 유무는 무의미해", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK7), true, false, false, CL_yukari);
 			return true;
 		case 6:
-			printlog("유카리: 당신만이 할 수 있는 일이야", true, false, false, CL_yukari);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TALK8), true, false, false, CL_yukari);
 			return true;
 		}
 	case GT_EIRIN:
 		if (you.char_type == UNIQ_START_MOKOU)
 		{
-			printlog("에이린: 최근에도 공주님과는 사이좋게 지내나요?", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK1), true, false, false, CL_small_danger);
 			return true;
 		}
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("에이린: 새로운 실험체가 필요해...", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK2), true, false, false, CL_small_danger);
 			return true;
 		case 1:
-			printlog("에이린: 이 약을 먹어보고 부작용은 없었어?", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK3), true, false, false, CL_small_danger);
 			return true;
 		case 2:
-			printlog("에이린: 좀 더 많은 표본이 필요해", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK4), true, false, false, CL_small_danger);
 			return true;
 		case 3:
-			printlog("에이린: 독을 알면 약도 만들 수 있는거야", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK5), true, false, false, CL_small_danger);
 			return true;
 		case 4:
-			printlog("에이린: 부작용을 두려워하지마. 효과는 확실해", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK6), true, false, false, CL_small_danger);
 			return true;
 		case 5:
-			printlog("에이린: 내가 준 약이라면 실패하지않을거야", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK7), true, false, false, CL_small_danger);
 			return true;
 		case 6:
-			printlog("에이린: 이것이 너의 새로운 모습이야", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_TALK8), true, false, false, CL_small_danger);
 			return true;
 		}
 	case GT_YUYUKO:
 		if (you.char_type == UNIQ_START_MOKOU)
 		{
-			printlog("유유코: 불로불사인 당신이 왜 날 믿는거야?", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK1), true, false, false, CL_yuyuko);
 			return true;
 		}
 		switch (level_)
@@ -5513,20 +5461,20 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("유유코: 새로운 식단은 아직이니?", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK2), true, false, false, CL_yuyuko);
 			return true;
 		case 2:
 		case 3:
-			printlog("유유코: 좀 더 느긋하게 있어도 좋아.", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK3), true, false, false, CL_yuyuko);
 			return true;
 		case 4:
-			printlog("유유코: 유령은 차갑고 귀엽지않아?", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK4), true, false, false, CL_yuyuko);
 			return true;
 		case 5:
-			printlog("유유코: 친구들은 마음에 들어?", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK5), true, false, false, CL_yuyuko);
 			return true;
 		case 6:
-			printlog("유유코: 물론 죽더라도 영혼은 함께란다", true, false, false, CL_yuyuko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_TALK6), true, false, false, CL_yuyuko);
 			return true;
 		}
 	case GT_SATORI:
@@ -5535,22 +5483,22 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("사토리는 당신에게 큰 관심이 없다. ", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK1), true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("사토리는 당신에게 미소지었다. ", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK2), true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("사토리: 애완동물의 재롱은 언제나 보기 좋군요.", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK3), true, false, false, CL_danger);
 			return true;
 		case 4:
-			printlog("사토리는 당신을 쓰다듬었다. ", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK4), true, false, false, CL_warning);
 			return true;
 		case 5:
-			printlog("사토리: 오늘의 사료는 입맛에 맞나요?", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK5), true, false, false, CL_danger);
 			return true;
 		case 6:
-			printlog("사토리: 다음에 같이 산책하러 가지 않을래요?", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_TALK6), true, false, false, CL_danger);
 			return true;
 		}
 	case GT_TENSI:
@@ -5558,34 +5506,34 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("텐시: 뭐야! 지금 바빠!", true, false, false, CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK1), true, false, false, CL_tensi);
 			return true;
 		case 1:
-			printlog("텐시: 기도하는거만으로 요행을 바라는건 너무 이기적이지 않아?", true, false, false, CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK2), true, false, false, CL_tensi);
 			return true;
 		case 2:
-			printlog("텐시: 재미있는 일은 없는거야?", true, false, false, CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK3), true, false, false, CL_tensi);
 			return true;
 		case 3:
-			printlog("텐시: 오랫만에 지진을 일으켜볼까...", true, false, false, CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK4), true, false, false, CL_tensi);
 			return true;
 		case 4:
-			printlog("텐시: 한번만 더 귀찮게하면 돌을 던질꺼야!", true, false, false, CL_tensi);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK5), true, false, false, CL_tensi);
 			return true;
 		case 5:
-			printlog("텐시는 당신에게 돌을 던졌다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK6), true, false, false, CL_warning);
 			return true;
 		case 6:
-			printlog("텐시는 당신을 보고 키득키득 웃고있다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK7), true, false, false, CL_warning);
 			return true;
 		case 7:
-			printlog("텐시는 당신을 보고 따분한듯 하품하고 있다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK8), true, false, false, CL_warning);
 			return true;
 		case 8:
-			printlog("텐시는 당신의 기도를 무시했다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK9), true, false, false, CL_warning);
 			return true;
 		case 9:
-			printlog("텐시는 산갈치로 당신의 머리를 때렸다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI_TALK10), true, false, false, CL_warning);
 			return true;
 		}
 	case GT_SEIJA:
@@ -5594,52 +5542,92 @@ bool God_PraySpeak()
 		default:
 		case 0:
 		case 1:
-			printlog("세이자는 당신의 기도를 무시했다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK1), true, false, false, CL_warning);
 			return true;
 		case 2:
-			printlog("세이자는 당신에 큰 관심이 없어보인다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK2), true, false, false, CL_warning);
 			return true;
 		case 3:
-			printlog("세이자의 표정은 그다지 안 좋아보인다.", true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK3), true, false, false, CL_warning);
 			return true;
 		case 4:
-			printlog("세이자: 반칙이라도 살아남는다면 그걸로 충분해", true, false, false, CL_seija);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK4), true, false, false, CL_seija);
 			return true;
 		case 5:
-			printlog("세이자: 레지스탕스 생활은 마음에 들어?", true, false, false, CL_seija);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK5), true, false, false, CL_seija);
 			return true;
 		case 6:
-			printlog("세이자: 우린 최고의 파트너야 친구!", true, false, false, CL_seija);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_TALK6), true, false, false, CL_seija);
 			return true;
 		}
 	case GT_LILLY:
-		return false;
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_WELCOME), true, false, false, CL_lilly);
+			return true;
+		}
 	case GT_MIKO:
-		return false;
+	{
+		level_ = (you.piety/40)+1; //0,1~19,21~39,40~59,60~79,80~99,100
+		if(you.piety == 0)
+			level_ = 0;
+		if(you.isSetMikoBuff(0) && level_ < 3)
+			level_ = 3;
+		if(you.isSetMikoBuff(1)) {
+			level_ = 6;
+		}
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK1), true, false, false, CL_miko);
+			return true;
+		case 1:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK2), true, false, false, CL_miko);
+			return true;
+		case 2:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK3), true, false, false, CL_miko);
+			return true;
+		case 3:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK4), true, false, false, CL_miko);
+			return true;
+		case 4:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK5), true, false, false, CL_miko);
+			return true;
+		case 5:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK6), true, false, false, CL_miko);
+			return true;
+		case 6:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_TALK7), true, false, false, CL_miko);
+			return true;
+		}
+	}
 	case GT_OKINA:
 		switch (level_)
 		{
 		default:
 		case 0:
-			printlog("오키나: 네가 제 수행원으로 맡는지 테스트해볼거야.", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK1), true, false, false, CL_okina);
 			return true;
 		case 1:
-			printlog("오키나: 면접은 없어, 실전 테스트로 채용을 결정하지", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK2), true, false, false, CL_okina);
 			return true;
 		case 2:
-			printlog("오키나: 나의 존재는 항상 알려져야만 한다", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK3), true, false, false, CL_okina);
 			return true;
 		case 3:
-			printlog("오키나: 등 뒤의 문으로 내 힘을 받도록 해라", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK4), true, false, false, CL_okina);
 			return true;
 		case 4:
-			printlog("오키나: 슬슬 마이와 사토노는 해방시켜줄까 생각중이다", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK5), true, false, false, CL_okina);
 			return true;
 		case 5:
-			printlog("오키나: 실로 네 부하에 맞는 인재로구나. 합격이다!", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK6), true, false, false, CL_okina);
 			return true;
 		case 6:
-			printlog("오키나: 보라! 들으라! 말하라! 비신의 진정한 마력을 받아라!", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_TALK7), true, false, false, CL_okina);
 			return true;
 		}
 	case GT_JUNKO:
@@ -5647,7 +5635,7 @@ bool God_PraySpeak()
 		{
 		default:
 		case 0:
-			printlog("순호: 상아여 보고있는가!", true, false, false, CL_junko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_TALK), true, false, false, CL_junko);
 			return true;
 		}
 	}

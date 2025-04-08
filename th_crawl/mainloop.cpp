@@ -283,28 +283,27 @@ void charter_selete()
 	
 
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() = "touhou crawl ";
+	SetText() = LocalzationManager::locString(LOC_SYSTEM_TITLE_TOUHOUCRAWL);
+	SetText() += " ";
 	SetText() += version_string;
-	SetText() += "\n동방프로젝트와 던전크롤의 동인게임\n\n";
+	SetText() += "\n";
+	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
+	SetText() += "\n\n";
 	string user_name = option_mg.getName();
 	if (user_name.size() != 0)
 	{
 		you.user_name = user_name;
 	}
 
-	SetText() += "당신의 이름은 \"";
-	SetText() += you.user_name;
-	SetText() += "\" 이다.\n";
-
-	if (you.user_name.compare("이름없음") == 0) {
-		SetText() += "config.ini에서 당신의 이름을 바꿀 수 있어.\n";
-	}
+	SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
+	SetText() += "\n";
 
 	SetDisplayTexture(&img_title);
 	ReleaseMutex(mutx);
 	waitkeyinput();	
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() += "시작한다!\n";
+	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
+	SetText() += "\n";
 	ReleaseMutex(mutx);
 	Sleep(500);
 	SetDisplayTexture(NULL);
@@ -339,9 +338,11 @@ void charter_selete()
 
 	if(isNormalGame() && !saveexit)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.c_str(),LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(),LocalzationManager::locString(job_type_string[you.job]).c_str(),you.GetCharNameString().c_str());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
+			PlaceHolderHelper(you.user_name),
+			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
+			PlaceHolderHelper(you.GetCharNameString())),CL_normal);
 
 		SetTribe(you.tribe);
 		TouhouPlayerble(you.char_type, true);
@@ -361,23 +362,23 @@ void charter_selete()
 		you.CalcuHP();
 		deque<monster*> dq;
 		env[current_level].EnterMap(0,dq);	
-		printlog("카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.",true,false,false,CL_warning);
-		printlog("카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.",true,false,false,CL_warning);
-		printlog("카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.",true,false,false,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START1),true,false,false,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START2),true,false,false,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3),true,false,false,CL_warning);
 	}
-	else if(map_list.tutorial == GM_TUTORIAL2)
-	{
-		you.image = &img_play_sanae;
-		you.char_type = UNIQ_START_SANAE;
-		you.tribe = TRI_HUMAN;
-		you.job = JOB_SHAMAN;
-		SetTribe(you.tribe);
-		you.CalcuHP();
-		deque<monster*> dq;
-		env[current_level].EnterMap(0,dq);	
-		printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
-		printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
-	}
+	// else if(map_list.tutorial == GM_TUTORIAL2)
+	// {
+	// 	you.image = &img_play_sanae;
+	// 	you.char_type = UNIQ_START_SANAE;
+	// 	you.tribe = TRI_HUMAN;
+	// 	you.job = JOB_SHAMAN;
+	// 	SetTribe(you.tribe);
+	// 	you.CalcuHP();
+	// 	deque<monster*> dq;
+	// 	env[current_level].EnterMap(0,dq);	
+	// 	printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
+	// 	printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
+	// }
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)
 	{
 		you.image = &img_play_sanae;
@@ -397,15 +398,16 @@ void charter_selete()
 		you.equip('a',ET_LEFT,false);
 		env[current_level].DeleteItem(it);
 
-		printlog("아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!",true,false,false,CL_help);
-		printlog("만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버! 기회는 3번...",true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_START1),true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_START2),true,false,false,CL_help);
 	}
 	else if (map_list.tutorial == GM_SPRINT2_MINISTAGE)
 	{
-
-		char temp[200];
-		sprintf_s(temp, 200, "%s, %s %s %s. 던전의 탐험을 시작했다.", you.user_name.c_str(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str());
-		AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
+			PlaceHolderHelper(you.user_name),
+			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
+			PlaceHolderHelper(you.GetCharNameString())), CL_normal);
 
 		SetTribe(you.tribe);
 		TouhouPlayerble(you.char_type, true);
@@ -467,7 +469,7 @@ void Initialize()
 	deque<monster*> dq;
 	env[current_level].EnterMap(0,dq);
 
-	printlog("환상향에 온걸 환영한다!",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_WELCOME_FIRST),true,false,false,CL_normal);
 	//you.resetLOS(false);
 	you.FairyRevive(false);
 }
@@ -489,7 +491,7 @@ void MainLoop()
 
 		while (you.youMaxiExp) {
 			enterlog();
-			printlog("당신은 배우고 있던 스킬을 마스터했다!", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_MASTER), true, false, false, CL_normal);
 			MoreWait();
 
 			skill_view();
@@ -667,7 +669,7 @@ void MainLoop()
 			break;
 		case '#':
 			if(Dump(0,NULL))
-				printlog("덤프에 성공했습니다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DUMP_SUCCESS),true,false,false,CL_normal);
 			break;
 		case 'Z':
 		case 'z':
@@ -738,7 +740,9 @@ bool option_menu(int value_)
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
-		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_START),true,CL_help);
+		printsub("======",false,CL_warning);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION),true,CL_help);
+		printsub("======",false,CL_warning);
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE),true,CL_normal);

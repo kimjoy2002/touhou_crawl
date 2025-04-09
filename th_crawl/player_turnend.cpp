@@ -829,24 +829,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if(s_spellcard)
 	{
 		s_spellcard--;
-		//if(!s_spellcard)
-		//{
-		//	printlog("스펠 브레이크!",true,false,false,CL_danger);
-		//	if(equipment[ET_NECK])
-		//	{
-		//		passive_spellcard((spellcard_passive_type)equipment[ET_NECK]->value3, equipment[ET_NECK]->value4, -1, 0);
-		//	}
-		//	else
-		//	{
-		//		printlog("[BUG]스펠카드를 끼지않은 채로 스펠선언",true,false,false,CL_danger);
-		//	}
-		//	SetInter(IT_STAT);
-		//}
-		//if(s_spellcard == 5)
-		//{
-		//	printlog("스펠카드의 시간이 거의 다 끝나간다.",false,false,false,CL_small_danger);
-		//	SetInter(IT_STAT);
-		//}
 	}
 
 	if(s_swift>0)

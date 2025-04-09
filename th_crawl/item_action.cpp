@@ -486,25 +486,6 @@ void Drinking(char auto_)
 	changedisplay(DT_GAME);
 }
 
-//void Spelllcard_Declare()
-//{
-//	if(!you.equipment[ET_NECK])
-//	{
-//		printlog("스펠카드를 장착하고 있지 않다.",true,false,false,CL_normal);
-//		return;
-//	}
-//	if(you.GetSpellcard())
-//	{
-//		printlog("이미 선언 중이다.",true,false,false,CL_normal);
-//		return;
-//	}
-//	if(declare_spellcard((spellcard_declare_type)you.equipment[ET_NECK]->value1, 20+you.level*5)){
-//		int turn_ = spellcard_turn((spellcard_declare_type)you.equipment[ET_NECK]->value1, (spellcard_evoke_type)you.equipment[ET_NECK]->value2, (spellcard_passive_type)you.equipment[ET_NECK]->value3);
-//		you.SetSpellcard(turn_);
-//		passive_spellcard((spellcard_passive_type)you.equipment[ET_NECK]->value3, you.equipment[ET_NECK]->value4, 1, turn_-1);
-//	}
-//}
-
 void Spelllcard_Evoke(char auto_)
 {	
 	if(you.s_lunatic)

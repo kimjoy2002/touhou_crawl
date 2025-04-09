@@ -1730,20 +1730,8 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);	
 		rc.left = 32*16+50;
 		rc.top += fontDesc.Height;
-		//sprintf_s(temp,128,"남은스킬경험치: %d",you.skill_exper);
-		//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		//rc.top += fontDesc.Height;
 
-		{ //상태이상 표시!
-			/*const char *state_str;*/
-			/*int hunger = you.GetHunger();
-			if(hunger != HT_NORMAL)
-			{
-				state_str = state_string[hunger];
-				DrawTextUTF8(pfont,pSprite,state_str, -1, &rc, DT_SINGLELINE | DT_NOCLIP,hunger==HT_STARVING?CL_danger:(hunger<=HT_HUNGRY?CL_warning:CL_good));
-				rc.left += fontDesc.Width*(strlen(state_str)+1);				
-			}*/
-
+		{ 
 			stateBox stateDraw(pSprite, pfont, rc);
 
 

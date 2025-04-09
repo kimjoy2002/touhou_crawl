@@ -1163,22 +1163,6 @@ bool item::pick()
 		throw_item = false;
 	}
 	prev_sight = false;
-	//if(type == ITM_GOAL && value1 ==0)
-	//{
-	//	printlog("당신은 룬을 주웠다!",true,false,false,CL_good);
-	//	char temp[200];
-	//	sprintf_s(temp,200,"룬을 얻었다.");
-	//	AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
-	//	value1++;
-	//}
-	//if(type == ITM_ORB && value1 ==0)
-	//{
-	//	printlog("당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다!",true,false,false,CL_good);
-	//	char temp[200];
-	//	sprintf_s(temp,200,"음양옥을 얻었다.");
-	//	AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
-	//	value1++;
-	//}
 	return return_;
 }
 int item::action(int delay_)

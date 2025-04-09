@@ -2570,11 +2570,6 @@ int monster::action(int delay_)
 		if (s_clever)
 		{
 			s_clever--;
-			if (is_sight && isView())
-			{
-				//if (!s_clever)
-				//	printarray(true, false, false, CL_normal, 3, GetName()->name.c_str(), GetName()->name_is(true), "더 이상 이 강하지 않다.");
-			}
 		}
 		if(s_tele)
 		{

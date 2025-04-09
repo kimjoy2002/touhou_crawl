@@ -265,13 +265,6 @@ bool MapNode::getFloorStairToStack(queue<list<coord_def>> *stairMap, int dungeon
 
 void testLoopAndPrint(MapNode* node, int prev, int depth)
 {
-	//char temp[100];
-	//sprintf_s(temp, 100, "테스트) %d번째 - %s", node->getUniqueId(), node->getName().c_str());
-	//for (int i = 0; i<depth; i++)
-	//	printlog("ㄴ", false, false, false, CL_help);
-	//printlog(temp, true, false, false, CL_help);
-
-
 	auto *list = node->getMap();
 	auto it = list->begin();
 	for (; it != node->getMap()->end(); it++)
@@ -300,9 +293,6 @@ bool getShortCut(stack<MapNode*>* stack_, MapNode* node, MapNode* goal, int prev
 		if (prev != (*it)->getUniqueId())
 		{
 			if ((*it) == goal) {
-				//char temp[100];
-				//sprintf_s(temp, 100, "도착) %s", (*it)->getName().c_str());
-				//printlog(temp, true, false, false, CL_help);
 				stack_->push((*it));
 				return true;
 			}
@@ -310,9 +300,6 @@ bool getShortCut(stack<MapNode*>* stack_, MapNode* node, MapNode* goal, int prev
 
 			if (getShortCut(stack_, (*it), goal, node->getUniqueId(), depth + 1))
 			{
-				//char temp[100];
-				//sprintf_s(temp, 100, "역추적) %s" , (*it)->getName().c_str());
-				//printlog(temp, true, false, false, CL_help);
 				stack_->push((*it));
 				return true;
 			}
@@ -350,9 +337,6 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 			stackMap.pop();
 			if (stackMap.empty())
 			{
-				//char temp[100];
-				//sprintf_s(temp, 100, "[도착]%d", start_level);
-				//printlog(temp, false, false, false, CL_magic);
 				break;
 			}
 			MapNode* next_dungeon = stackMap.top();
@@ -360,9 +344,6 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 
 			while (current_dungeon->isCurrentFloor(start_level))
 			{
-				//char temp[100];
-				//sprintf_s(temp, 100, "%d-", start_level);
-				//printlog(temp, false, false, false, CL_magic);
 
 				int stair_level = current_dungeon->getFloorStair(next_dungeon->getMapId());
 				if (stair_level == start_level) 
@@ -413,7 +394,6 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 
 	if(return_)
 	{
-		//printlog("위치를 정상적으로 찾았습니다.", false, false, false, CL_help);
 		return true;
 	}
 	else

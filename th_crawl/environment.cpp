@@ -2365,7 +2365,6 @@ void SaveFile()
 
 
 	fclose(fp);
-	//printlog("저장했습니다.",true,false,false,CL_normal);
 
 
 	ReleaseMutex(mutx);
@@ -2410,16 +2409,6 @@ void LoadFile()
 
 
 	fclose(fp);
-
-	//for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
-	//{
-	//	if(it->isLive() && it->memory_time)
-	//	{
-	//		it->target = env[current_level].isMonsterPos(it->target_pos.x,it->target_pos.y,&(*it));
-	//	}
-	//}
-
-	//printlog("불러왔습니다.",true,false,false,CL_normal);
 	ReleaseMutex(mutx);
 }
 

@@ -183,7 +183,6 @@ bool NetClient::SendFile(const char* c,const char* name)
 	memset(fstring,0,256);
 	memset(fsize,0,64);
 	memset(fsize2,0,64);
-	//strcpy(fname,"이름없음-20160329-043601.txt");
 	strcpy_s(fname+strlen(fname), 1,"\0");
 	strcpy_s(fname2+strlen(fname2), 1,"\0");
 	sprintf_s(fstring,256,c);

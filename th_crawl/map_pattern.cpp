@@ -30,8 +30,7 @@ const char* common_enter_pattern(map_dummy* map)
 		map->m_entrance.y = 0;
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
-		map->name = "공용_서브던전입구";
-		/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
+		map->name = "COMMON_SUBDUNGEON_ENTER";
 		return  "\
 #######\
 #.....#\

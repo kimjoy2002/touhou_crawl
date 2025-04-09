@@ -38,39 +38,10 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 		printlog("당신은 스펠카드를 쓰기엔 너무 순화되어있다.", true, false, false, CL_normal);
 		return false;
 	}
-	//if(you.power < Spellcardusepower(kind,true))
-	//{
-	//	printlog("스펠을 선언하기엔 당신의 P가 모자란다.",true,false,false,CL_small_danger);	
-	//	return false;
-	//}
 
 
 	soundmanager.playSound("spellcard");
 
-	/*if(SpellcardFlagCheck(kind, S_FLAG_DIREC))
-	{
-		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
-		coord_def target_;
-		if(Direc_Throw(&target_))
-		{
-			if(fail_)
-				return true;
-			if(EvokeSpellcard(kind, false, power, target_))
-			{
-				you.PowUpDown(-1* Spellcardusepower(kind,false),true);
-				return true;
-			}
-		}
-		else
-		{
-			if(iden_)
-				return false;
-			else
-				return true;
-		}
-
-	}
-	else */
 	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);

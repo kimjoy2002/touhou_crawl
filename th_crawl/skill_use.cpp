@@ -1747,7 +1747,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 								}
 							}
 						}
-						printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_EQUIP_ITEM),true,false,false,CL_normal);
 						return false;	
 					}
 					else
@@ -1830,7 +1830,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 								}
 							}
 						}
-						printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_EQUIP_ITEM),true,false,false,CL_normal);
 						return false;	
 					}
 					else

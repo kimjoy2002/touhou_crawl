@@ -158,7 +158,7 @@ string GetMonsterInfor(monster *it)
 	}
 	else
 	{
-		text_ += LocalzationManager::locString(LOC_SYSTEM_MAGIC_RESIST);
+		text_ += LocalzationManager::locString(LOC_SYSTEM_MAGICRESIST);
 		text_ += ": ";
 		for (int i = 0; i < 10; i++ ) {
 			if (it->GetResist() > 110 + i * 20) {
@@ -223,7 +223,7 @@ string GetMonsterInfor(monster *it)
 				ss << "\n";
 				i++;
 			}
-			text_ += ss;
+			text_ += ss.str();
 		}
 
 	}

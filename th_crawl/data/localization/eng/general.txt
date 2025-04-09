@@ -1,6 +1,6 @@
 LOC_SYSTEM_TITLE_TOUHOUCRAWL,Touhou Crawl
 LOC_SYSTEM_TITLE_SHORTINFO,동방프로젝트와 던전크롤의 동인게임
-LOC_SYSTEM_TITLE_YOUR_NAME,당신의 이름은 {0:이|이다}.
+LOC_SYSTEM_TITLE_YOUR_NAME,당신의 이름은 {0:이다|다}.
 LOC_SYSTEM_TITLE_START,시작한다!
 LOC_SYSTEM_MAINMENU_MAINGAME,메인 게임
 LOC_SYSTEM_MAINMENU_GAMESTART,게임시작
@@ -96,6 +96,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 침묵 두루마리를 5�
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.
+LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON,원하시는 무기를 선택하세요.
+LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC,누구의 광신도가 될건가?
 LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY,같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.
 LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - LANGUAGE : ENGLISH
 LOC_SYSTEM_OPTION_MENU_ESC,esc - back
@@ -111,23 +113,69 @@ LOC_SYSTEM_UNABLE_MOVE,You can't move there.
 LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
+LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL,이 주문을 배우기엔 레벨이 모자란다.
+LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,남은 마법 레벨이 {0}만큼 모자란다.
+LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY,당신은 더 이상 주문을 기억할 공간이 없다.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
 LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST,That spell does not exist.
 LOC_SYSTEM_MEMORIZE_SPELL_ASK,Would you like to memorize this spell? (y/n)
+LOC_SYSTEM_MEMORIZE_SPELL_START,마법을 익히기 시작했다.
+LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS,주문을 익히는데 성공했다.
 LOC_SYSTEM_MEMORIZE_HELP,Press {0} to memorize a spell.
 LOC_SYSTEM_ALPHABET_ASK,Which alphabet would you like to change to?
 LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
+LOC_SYSTEM_ALREADY_EQUIP,이미 장착하고 있다.
+LOC_SYSTEM_ALREADY_USE,이 아이템은 이미 사용중이다.
+LOC_SYSTEM_ALREADY_EQUIP_JEWERLY,이미 장착하고 있는 장신구다.
+LOC_SYSTEM_EQUIP_ISNT_ARMOUR,이 아이템은 방어구가 아니다.
+LOC_SYSTEM_EQUIP_ISNT_JEWERLY,이 아이템은 장신구가 아니다.
+LOC_SYSTEM_EQUIP_TOO_BIG,당신은 이 방어구를 착용하기엔 몸이 너무 크다.
+LOC_SYSTEM_EQUIP_TOO_SMALL,당신은 이 방어구를 착용하기엔 몸이 너무 작다.
+LOC_SYSTEM_EQUIP_CURSE_ITEM,헉! 이 아이템은 끔찍하게 차갑다.
+LOC_SYSTEM_EQUIP_ALLITEM_CURSE,모든 아이템이 저주에 걸려있다.
+LOC_SYSTEM_EQUIP_PANALTY_WARN1,불편한 방어구는 당신의 명중에 영향을 준다.
+LOC_SYSTEM_EQUIP_PANALTY_WARN2,불편한 방어구는 당신의 이동속도와 명중에 영향을 준다.
+LOC_SYSTEM_EQUIP_PANALTY_WARN3,방어구로 인해 극심한 패널티를 받고 있다.
+LOC_SYSTEM_EQUIP_CANT_SPELLCARD,스펠카드 선언중엔 스펠카드 탈착이 불가능하다.
+LOC_SYSTEM_SHEILD_PANALTY1,방패와 무기를 함께 착용했다. (공격속도 0.1 느려짐)
+LOC_SYSTEM_SHEILD_PANALTY2,이 무기는 방패와 같이 쓰기엔 약간 불편하다. (공격속도 0.2 느려짐)
+LOC_SYSTEM_SHEILD_PANALTY3,이 무기는 방패와 같이 쓰기엔 아주 버겁다. (공격속도 0.3 느려짐)
+LOC_SYSTEM_CANT_EQUIP_LIKEIT,그렇게 장착할 수 없다.
+LOC_SYSTEM_CANT_EQUIP_HORN,당신의 뿔이 이 장비를 쓰는걸 방해한다.
+LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,당신은 다리가 없다!
+LOC_SYSTEM_CANT_EQUIP_CLAW,당신의 손톱때문에 장갑을 낄 수 없다!
+LOC_SYSTEM_CANT_UNEQUIP_EXIST,벗을 아이템이 없다.
+LOC_SYSTEM_NOT_EQUIP_ITEM,그것을 입고 있지 않다!
+LOC_SYSTEM_UNEQUIP_AMULET_YN,정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
+LOC_SYSTEM_OUCH,아얏!
+LOC_SYSTEM_OUCH_THIS_REALLY_HURTS,악! 이건 정말로 아프다!
+LOC_SYSTEM_LOW_HEALTH_WARNING,낮은 체력 경고
+LOC_SYSTEM_WAKEUP_WITH_DAMAGE,데미지에 의해 잠에서 깼다!
 LOC_SYSTEM_MORE,More
+LOC_SYSTEM_OR,{0} 또는 {1}
+LOC_SYSTEM_LEVELUP_MESSGE,당신의 레벨이 올랐다! 레벨 {0}
+LOC_SYSTEM_LEVELUP_STAT_MESSGE,당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능
+LOC_SYSTEM_LEVELUP_STR,강력해졌다.
+LOC_SYSTEM_LEVELUP_DEX,민첩해졌다.
+LOC_SYSTEM_LEVELUP_INT,똑똑해졌다.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
+LOC_SYSTEM_FORBIDZONE_YN,정말 들어갈거야?(y/n)
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
 LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
 LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
 LOC_SYSTEM_RECORVER_STAT,You have recovered your lost stats.
+LOC_SYSTEM_RECORVER_STAT_STR,잃어버린 힘이 회복되었다.
+LOC_SYSTEM_RECORVER_STAT_DEX,잃어버린 민첩이 회복되었다.
+LOC_SYSTEM_RECORVER_STAT_INT,잃어버린 지능이 회복되었다.
 LOC_SYSTEM_GAIN_AC,You feel tougher.
+LOC_SYSTEM_SWAP_ALLY,위치를 서로 바꿨다.
+LOC_SYSTEM_CANT_SWAP_ALLY,이동할 수 없다.
+LOC_SYSTEM_CANT_MOVE_WITH_OBJECT,움직일수 없다! 무엇인가 당신을 고정시키고있다!
+LOC_SYSTEM_STASIS_PENALTY,당신은 전이방해도중에 전이를 사용할 수 없다.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
@@ -190,7 +238,18 @@ LOC_SYSTEM_SHOUT_FINISH,You shouted and drew attention.
 LOC_SYSTEM_SHOUT_WHO,Who do you want to order an attack on?
 LOC_SYSTEM_SHOUT_CANCLE,You didn't shout anything.
 LOC_SYSTEM_ALREADY_FULL_POWER,You are already at full power!
+LOC_SYSTEM_IS_EQUIP_ITEM,장착중인 아이템이다.
+LOC_SYSTEM_PICKUP_PITEM,P가 증가했다.
+LOC_SYSTEM_PICKUP_RUNE,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
+LOC_SYSTEM_PICKUP_YINYANG_ORB,당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다
 LOC_SYSTEM_PICKUP_SELECT_ASK,Pick up {0}? (Yes:{1} No:{2} All:{3} Choose:{4})
+LOC_SYSTEM_PICKUP_NUMBER,({0}개 획득)
+LOC_SYSTEM_PICKUP_LIMIT,가질 수 있는 갯수를 초과했다.
+LOC_SYSTEM_EAT_STARTING,음식을 먹기 시작했다.
+LOC_SYSTEM_EAT_FINISH,음식을 전부 먹었다.
+LOC_SYSTEM_EAT_NOT_FOOD,이건 음식이 아니다.
+LOC_SYSTEM_DRINK_NOT_POTION,이건 마실 수 없다.
+LOC_SYSTEM_DISCORVER_SOMETHING,{0:을|를} 발견했다.
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
 LOC_SYSTEM_AUTOPICKUP_ON,Auto-pickup enabled.
 LOC_SYSTEM_AUTOPICKUP_OFF,Auto-pickup disabled. (Press {0} to enable again)
@@ -234,6 +293,7 @@ LOC_SYSTEM_REST_HP,Your HP is restored.
 LOC_SYSTEM_REST_MP,Your MP is restored.
 LOC_SYSTEM_REST_DONE,finish resting.
 LOC_SYSTEM_READ_SCROLL,You read {0}.
+LOC_SYSTEM_READ_CANT_READ,이건 읽을 수 없다.
 LOC_SYSTEM_HEALED,{0} is healed.
 LOC_SYSTEM_HEALED2,You are healed.
 LOC_SYSTEM_IDENTIFY_ITEM,This is {0}.
@@ -294,6 +354,7 @@ LOC_SYSTEM_REMAIN_EXP,Next Level
 LOC_SYSTEM_LEVEL,Level
 LOC_SYSTEM_LEVEL_WITH_NUMBER,Level {0}
 LOC_SYSTEM_MAX_LEVEL,Max Level
+LOC_SYSTEM_LEVELUP,레벨업
 LOC_SYSTEM_GRADE,Grade {0}
 LOC_SYSTEM_REPLAY_MODE,Replay Mode
 LOC_SYSTEM_WIZARD_MODE,Wizard Mode
@@ -343,7 +404,7 @@ LOC_SYSTEM_SHORT_POISON_RESIST,rPois
 LOC_SYSTEM_SHORT_CONFUSE_RESIST,rConfuse
 LOC_SYSTEM_SHORT_SEE_INVISIBLE,See Invi
 LOC_SYSTEM_SHORT_POWER_KEEP,Power Sus
-LOC_SYSTEM_SHORT_MAGIC_RESIST,MR
+LOC_SYSTEM_SHORT_MAGICRESIST,MR
 LOC_SYSTEM_STR,Strength
 LOC_SYSTEM_DEX,Dexterity
 LOC_SYSTEM_INT,Intelligence
@@ -355,7 +416,7 @@ LOC_SYSTEM_POISON_RESIST,Poison Resist
 LOC_SYSTEM_CONFUSE_RESIST,Confuse Resist
 LOC_SYSTEM_SEE_INVISIBLE,See Invisible
 LOC_SYSTEM_POWER_KEEP,Power Sustain
-LOC_SYSTEM_MAGIC_RESIST,Magic Resist
+LOC_SYSTEM_MAGICRESIST,Magic Resist
 LOC_SYSTEM_SLEEP,Sleep
 LOC_SYSTEM_REST,Rest
 LOC_SYSTEM_EXPLORING,Exploring
@@ -684,6 +745,7 @@ LOC_SYSTEM_UI_NONE,None
 LOC_SYSTEM_UI_CANT_EQUIP,Cannot Equip
 LOC_SYSTEM_UI_WEAPON,Weapon
 LOC_SYSTEM_UI_UNARMED,Unarmed
+LOC_SYSTEM_UI_INEFFICIENT,엉터리
 LOC_SYSTEM_UI_TANMAC,Danmaku
 LOC_SYSTEM_UI_BODY,Body
 LOC_SYSTEM_UI_HEAD,Head
@@ -703,7 +765,73 @@ LOC_SYSTEM_CONTINUE_CRAWL,Carry on!
 LOC_SYSTEM_CONTINUE_EXPRO,Keep exploring!
 LOC_SYSTEM_GOOD_CHOICE,Good choice!
 LOC_SYSTEM_NEED_PREPARATION,Be more prepared next time!
+LOC_SYSTEM_DANGER_MSG,위험해!
 LOC_SYSTEM_OK,Got it!
+LOC_SYSTEM_YOU_POISONED,당신은 독에 걸렸다.
+LOC_SYSTEM_YOU_MORE_POISONED,당신의 독은 심해졌다.
+LOC_SYSTEM_YOU_TELE,당신은 공간의 불안정함을 느꼈다.
+LOC_SYSTEM_YOU_TELE_STABLE,당신 주위의 공간은 안정되었다.
+LOC_SYSTEM_YOU_MIGHT,당신은 강력해졌다.
+LOC_SYSTEM_YOU_MORE_MIGHT,당신의 더욱 더 강력해졌다.
+LOC_SYSTEM_YOU_CLEVER,당신은 똑똑해졌다.
+LOC_SYSTEM_YOU_MORE_CLEVER,당신의 더욱 더 똑똑해졌다.
+LOC_SYSTEM_YOU_AGILITY,당신은 민첩해졌다.
+LOC_SYSTEM_YOU_MORE_AGILITY,당신의 더욱 더 민첩해졌다.
+LOC_SYSTEM_YOU_HASTE,당신은 빨라졌다.
+LOC_SYSTEM_YOU_MORE_HASTE,당신의 가속은 좀 더 길어졌다.
+LOC_SYSTEM_YOU_PURE_HASTE,당신은 살의에 의해 빨라졌다.
+LOC_SYSTEM_YOU_MORE_PURE_HASTE,당신의 살의는 좀 더 길어졌다.
+LOC_SYSTEM_YOU_CONFUSE,당신은 혼란스러워졌다.
+LOC_SYSTEM_YOU_MORE_CONFUSE,당신은 더욱 혼란스러워졌다.
+LOC_SYSTEM_YOU_SLOW,당신은 느려졌다.
+LOC_SYSTEM_YOU_MORE_SLOW,당신의 더욱 더 느려졌다.
+LOC_SYSTEM_YOU_FROZEN,당신은 몸이 얼어붙어 움직이기 힘들어졌다.
+LOC_SYSTEM_YOU_MORE_FROZEN,당신의 더욱 몸이 얼어붙어 움직이기 힘들어졌다.
+LOC_SYSTEM_YOU_ELEC,당신은 전기를 방출하기 시작했다.
+LOC_SYSTEM_YOU_MORE_ELEC,당신은 더 오랫동안 전기를 방출한다.
+LOC_SYSTEM_YOU_PARALYSE,당신은 마비되었다.
+LOC_SYSTEM_YOU_FLY,당신은 공중에 뜨기 시작했다.
+LOC_SYSTEM_YOU_MORE_FLY,당신은 더 오랫동안 공중에 뜨게 되었다.
+LOC_SYSTEM_YOU_GLOW,당신은 빛을 내기 시작했다.
+LOC_SYSTEM_YOU_MORE_GLOW,당신은 더 강한 빛을 내고 있다.
+LOC_SYSTEM_YOU_GRAZE,당신의 탄막을 피하는 감각이 좋아졌다.
+LOC_SYSTEM_YOU_MORE_GRAZE,당신의 탄막을 피하는 감각이 지속된다.
+LOC_SYSTEM_YOU_SILENCE,당신은 주변의 소리를 지웠다.
+LOC_SYSTEM_YOU_MORE_SILENCE,당신의 고요가 더욱 길어졌다.
+LOC_SYSTEM_YOU_SICK,당신은 아파졌다.
+LOC_SYSTEM_YOU_MORE_SICK,당신은 더욱 아파졌다.
+LOC_SYSTEM_YOU_VEILING,당신 주변에 바람이 휘감긴다.
+LOC_SYSTEM_YOU_MORE_VEILING,당신 주변에 휘감긴 바람이 좀 더 오래간다.
+LOC_SYSTEM_YOU_INVISIBLE,당신은 투명해졌다.
+LOC_SYSTEM_YOU_MORE_INVISIBLE,당신은 더 오래 투명해졌다.
+LOC_SYSTEM_YOU_SWIFT,당신은 다리가 빨라졌다.
+LOC_SYSTEM_YOU_SLUGGISH,당신은 다리가 느려졌다
+LOC_SYSTEM_YOU_MORE_SWIFT,당신은 더 오래 달릴 수 있다.
+LOC_SYSTEM_YOU_SWIFT_FROM_SLUGGISH,당신은 느린 걸음을 고쳐세웠다.
+LOC_SYSTEM_YOU_SLUGGISH_FROM_SWIFT,당신은 가볍던 발이 무거워진 것을 느꼈다.
+LOC_SYSTEM_YOU_MORE_SLUGGISH,당신은 다리가 느려졌다.
+LOC_SYSTEM_YOU_SUPERMAN,당신은 다리가 엄청나게 빨라졌다.
+LOC_SYSTEM_YOU_MORE_SUPERMAN,당신은 더 오래 달릴 수 있다.
+LOC_SYSTEM_YOU_WIND,당신의 주변에 바람이 휘감겼다.
+LOC_SYSTEM_YOU_MORE_WIND,당신의 주변에 바람이 더 휘감겼다.
+LOC_SYSTEM_YOU_KNIFE_COLLECT,당신은 자동으로 탄막을 회수하기 시작한다.
+LOC_SYSTEM_YOU_MORE_KNIFE_COLLECT,탄막을 회수하는 시간이 길어졌다.
+LOC_SYSTEM_YOU_DRUNKEN,당신은 취했다.
+LOC_SYSTEM_YOU_MORE_DRUNKEN,당신은 주정뱅이다.
+LOC_SYSTEM_YOU_LUNATIC,당신은 광기에 휩싸였다.
+LOC_SYSTEM_YOU_MIRROR,당신은 모든 데미지를 반사한다.
+LOC_SYSTEM_YOU_PARADOX,당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다.
+LOC_SYSTEM_YOU_TRANS_PANALTY1,약간의 시공간 부작용을 받았다.
+LOC_SYSTEM_YOU_TRANS_PANALTY2,상당한 시공간 부작용을 받았다.
+LOC_SYSTEM_YOU_TRANS_PANALTY3,어마어마한 시공간 부작용을 받았다.
+LOC_SYSTEM_YOU_THE_WORLD,더 월드!
+LOC_SYSTEM_YOU_STASIS,당신은 전이를 방해받았다.
+LOC_SYSTEM_YOU_MORE_STASIS,당신의 전이 방해는 더욱 길어졌다.
+LOC_SYSTEM_YOU_FORCE_WEAK,당신은 공격과 마법의 위력이 대폭 감소했다.
+LOC_SYSTEM_YOU_FORCE_STRONG,당신의 공격과 마법의 위력은 대폭 증가했다.
+LOC_SYSTEM_YOU_BLIND,당신의 눈은 침침해졌다.
+LOC_SYSTEM_YOU_MORE_BLIND,당신의 눈은 더욱 더 침침해졌다!
+LOC_SYSTEM_YOU_SLEEP,당신은 잠에 빠졌다!
 LOC_SYSTEM_MON_RED_DESIRE,Red Spirit
 LOC_SYSTEM_MON_BLUE_DESIRE,Blue Spirit
 LOC_SYSTEM_MON_GREEN_DESIRE,Green Spirit
@@ -886,12 +1014,18 @@ LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0} has died.
 LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined as an ally.
 LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined as an ally.
 LOC_SYSTEM_NOTE_DUNGEON_ENTER,Dungeon Progress: Entered {0}.
+LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,스킬 {0}의 레벨업. 스킬레벨 {1}
+LOC_SYSTEM_NOTE_MEMORIZE_SPELL,주문 기억 : {0}레벨 {1}
+LOC_SYSTEM_NOTE_GET_ITEM,{0:을|를} 얻었다.
+LOC_SYSTEM_NOTE_GET_YINYANG_ORB,음양옥을 얻었다.
 LOC_SYSTEM_NOTE_GOD_WORSHIP,You have become a follower of {0}.
 LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
 LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
 LOC_SYSTEM_NOTE_GOD_GIFT,Received a gift from {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
+LOC_SYSTEM_NOTE_SATORI_REUNION,사토리와 재회했다.
+LOC_SYSTEM_NOTE_SATORI_WORSHIP,사토리의 애완동물이 되었다.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,Half-Youkai Mutation Strengthened
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
@@ -1243,6 +1377,8 @@ LOC_SYSTEM_PLAYER_THREE_FAIRIES,삼월정
 LOC_SYSTEM_PLAYER_SUNNY,Sunny
 LOC_SYSTEM_PLAYER_STAR,Star
 LOC_SYSTEM_PLAYER_LUNA,Luna
+LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION,리저렉션
+LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT,리저렉션!
 LOC_SYSTEM_ATT_NORMAL,Attack
 LOC_SYSTEM_ATT_CLAW,Claw
 LOC_SYSTEM_ATT_BITE,Bite
@@ -1438,6 +1574,7 @@ LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE,The magic hammer backfired! All t
 LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN,The Four-Shaku Magic Bomb fell into the water.
 LOC_SYSTEM_EVOKE_GHOST_BALL,You turned into a ghost at the cost of life! Use the skill again to cancel.
 LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE,You let go of the Okurichōchin.
+LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,유령상태에선 오쿠리쵸친을 제외한 아이템을 발동하는건 불가능해!
 LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST,No time to take photos of thin air.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE,I'd rather photograph a prettier girl.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_GIRL,I don't want to photograph a guy.
@@ -1446,6 +1583,11 @@ LOC_SYSTEM_EVOKE_CAMERA_SHUTTER,*Click!*
 LOC_SYSTEM_EVOKE_CAMERA_SAKUYA,The subject suddenly vanished!
 LOC_SYSTEM_EVOKE_CAMERA_THE_WORLD,I have stopped time...
 LOC_SYSTEM_EVOKE_CAMERA_SELF,Are you taking a selfie?
+LOC_SYSTEM_EVOKE_EMPTY,남은 횟수가 없다.
+LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET,끼고있는 부적만을 발동할 수 있다.
+LOC_SYSTEM_EVOKE_PASSIVE_AMULET,이 부적은 발동할 수 있는 부적이 아니다.
+LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET,부적의 충전율이 100%가 되어야 발동할 수 있다.
+LOC_SYSTEM_EVOKE_CANT,이것은 발동할 수 없다.
 LOC_SYSTEM_TRIBE_HUMAN,Human
 LOC_SYSTEM_TRIBE_WIZARD,Witch
 LOC_SYSTEM_TRIBE_FAIRY,Fairy
@@ -1695,6 +1837,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Sunho, item effects from
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
+LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,당신은 충분히 성장하여 부활능력을 하나 잃었다.
+LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,당신은 충분히 성장하여 부활능력을 모두 잃었다.
 LOC_SYSTEM_JOB_WARRIOR,Warrior
 LOC_SYSTEM_JOB_WIZARD,Magician
 LOC_SYSTEM_JOB_SHAMAN,Shrine Maiden
@@ -1800,6 +1944,8 @@ LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,The alchemical power on your hands is 
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone. (Use additional magic with {0})
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally vanished.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
+LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
+LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
 LOC_SYSTEM_SPL_DESCRIBE_NONE,This magic doesn’t exist.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,Fires a small danmaku.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_MIDDLE,Fires a decent danmaku spread.\n
@@ -1982,6 +2128,8 @@ LOC_SYSTEM_SKILL_STEALTH,Stealth
 LOC_SYSTEM_SKILL_UNKNOWN,Unknown
 LOC_SYSTEM_SKILL_LEAST_ONE,You must enable at least one skill!
 LOC_SYSTEM_SKILL_MASTER,당신은 배우고 있던 스킬을 마스터했다!
+LOC_SYSTEM_SKILL_EXP_ERROR,스킬경험치에 에러가 발생했습니다.
+LOC_SYSTEM_SKILL_LEVEL_UP,{0} 스킬레벨이 올랐다! 스킬레벨 {1}
 LOC_SYSTEM_SKL_KANAKO_1,Summon Divine Rock
 LOC_SYSTEM_SKL_KANAKO_2,Summon Divine Rain
 LOC_SYSTEM_SKL_KANAKO_3,Summon Divine Wind
@@ -2249,6 +2397,26 @@ LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_MANA_REGEN,Simply holding this weapon incr
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FASTCAST,Simply holding this weapon reduces all magic casting time to 80%.
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_PROTECT,Simply holding this weapon increases your AC by 5.
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG,This weapon is branded with a bug. Please report it!
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FIRE,무기가 불로 타오르기 시작했다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_COLD,무기가 차가운 냉기를 내뿜기 시작했다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_POISON,무기에서 독이 떨어지기 시작했다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_CURSE,무기는 저주의 힘으로 가득 차있다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_WEATHER,무기에서 비상의 기운이 뿜어져나온다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_AUTUMN,무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_MANA_REGEN,영력의 흐름이 느껴진다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FASTCAST,머리회전이 빨라진 느낌이 든다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_PROTECT,보호받는 기분이 든다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG,이 무기는 버그를 내뿜고있다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIRE,무기가 타오르는 것을 멈췄다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_COLD,무기에서 나오던 냉기가 그쳤다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_POISON,더 이상 무기에서 독이 떨어지지 않는다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_CURSE,무기에서 저주의 힘이 약해졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_WEATHER,무기에서 비상의 기운은 더이상 느껴지지않는다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_AUTUMN,무기는 더이상 쓸쓸해보이지 않는다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_MANA_REGEN,영력의 흐름이 사라졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FASTCAST,머리회전이 다시 둔해졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT,보호가 사라졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG,방금 무기는 버그에 걸려있다.
 LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,Cloth
 LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,Leather
 LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,Chain
@@ -2389,6 +2557,9 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN6,Amulet with a Snake
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,Amulet with a Horse
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,Amulet with a Sheep
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,Amulet with a Monkey
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE,부적의 힘이 모두 채워졌다!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE,그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,You have recovered MP.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP,Your MP recovery increased due to the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from the amulet.
@@ -2412,22 +2583,22 @@ LOC_SYSTEM_ITEM_FOOD_CHOCOLET,Chocolate
 LOC_SYSTEM_ITEM_FOOD_CUCUMBER,Cucumber
 LOC_SYSTEM_ITEM_FOOD_P_ITEM,P-Item
 LOC_SYSTEM_ITEM_POTION_POTION,Potion
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_WATER,Plain Potion
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL,Healing Potion
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POISON,Poison Potion
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL_WOUND,Healing Potion
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_WATER,Potion of Water
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL,Potion of Curing
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POISON,Potion of Poison
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL_WOUND,Potion of Heal Wound
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MIGHT,Potion of Might
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HASTE,Potion of Haste
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CONFUSE,Potion of Confusion
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_SLOW,Potion of Slowness
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CONFUSE,Potion of Confuse
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_SLOW,Potion of Slow
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_PARALYSIS,Potion of Paralysis
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CLEVER,Potion of Intelligence
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY,Potion of Dexterity
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MAGIC,Potion of MP
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MAGIC,Potion of Mana
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_LEVETATION,Potion of Levitation
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POWER,Potion of Power
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_DOWN_STAT,Potion of Stat Loss
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_RECOVER_STAT,Potion of Stat Recovery
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_DOWN_STAT,Potion of Degeneration
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_RECOVER_STAT,Potion of Recovery
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_ALCOHOL,Potion of Alcohol
 LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN1,Milky White Potion
 LOC_SYSTEM_ITEM_POTION_POTION_UNIDEN2,Green Potion
@@ -2798,9 +2969,50 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BUG,버그템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,꿈의 세계에 살고 있는 주민\n환상향의 주민과 똑같이 닮았지만 꿈의 세계에 살고있는 다른 존재.\n원본에서 좀 더 욕망에 충실한 성격을 지녔다고 한다.\n
+LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,이 레이무는 %d번 컨티뉴했다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,이 상대는 무시해도 될 정도로 약해보인다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,이 상대는 약해보인다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,이 상대는 위험해보인다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONGER,이 상대는 위험해보인다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_RESIST,독에 대한 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_WEAKNESS,독에 대한 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_IMMUN,화염을 완벽하게 방어한다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST_MORE,화염에 대한 상당한 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST,화염에 대한 약간의 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_WEAKNESS,화염에 취약하다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_IMMUN,냉기를 완벽하게 방어한다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST_MORE,냉기에 대한 상당한 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST,냉기에 대한 약간의 저항력이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_WEAKNESS,냉기에 취약하다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_IMMUN,절연이다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST_MORE,전기가 거의 통하지않는다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST,전기가 잘 통하지 않는다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_WEAKNESS,전기에 취약하다
+LOC_SYSTEM_MONSTER_DESCRIPTION_CONFUSE_RESIST,혼란과 광기에 대해 면역이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WIND_RESIST,회오리 바람에 면역이 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED1,행동이 매우 빠르다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED2,행동이 빠르다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED3,행동이 약간 빠르다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED4,행동이 약간 느리다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,행동이 느리다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,행동이 매우 느리다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,하늘을 날 수 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,수영을 할 수 있다
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,투명을 볼 수 있다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,무생물이다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,눈보라에 면역이 있다. 달자매의 힘으로
+LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,디버프 마법에 대한 면역력이 무한이다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,침묵된 상태에서도 마법이 사용가능하다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,이 몬스터는 꿈의 주민이기에 당신의 동료권유나 영혼을 빼앗는 것이 불가능할지도 모른다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,사용하는 마법
+LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,이 몬스터의 마법은 고정되어있지 않다. 무슨 마법을 쓸지 몰라!
 LOC_SYSTEM_ENSLAVE_GHOST,Soul of {0}
 LOC_SYSTEM_GOD_ERROR,Unknown Deity
 LOC_SYSTEM_GOD_JOON_AND_SION,Joon & Shion
+LOC_SYSTEM_GOD_JOON,죠온
+LOC_SYSTEM_GOD_SION,시온
 LOC_SYSTEM_GOD_BYAKUREN,Byakuren
 LOC_SYSTEM_GOD_KANAKO,Kanako
 LOC_SYSTEM_GOD_SUWAKO,Suwako
@@ -3196,6 +3408,10 @@ LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} rejoiced at your kill.
 LOC_SYSTEM_GOD_COMMON_PROTECT,You were protected!
 LOC_SYSTEM_GOD_COMMON_RAGE,{0} is enraged by your actions. Repent!
+LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,존재하지 않는 신입니다.
+LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,배신자에겐 입교란 없다!
+LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.
+LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,이미 믿고 있는 신입니다.
 LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,죠온: 한푼도 남김없이 모두 털어버리자고!
 LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,시온: 배고파...
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,죠온: 새로운 호구... 아니 고객이 왔네!
@@ -3218,6 +3434,7 @@ LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cann
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!
+LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,시온이 당신의 소모품을 대가로 당신을 부활시켰다!
 LOC_SYSTEM_GOD_BYAKUREN_WELCOME,히지리: 어서오세요. 신도여
 LOC_SYSTEM_GOD_BYAKUREN_TALK1,히지리: 아아, 법의 세계에 빛이 가득해
 LOC_SYSTEM_GOD_BYAKUREN_TALK2,Byakuren: Our temple does not discriminate between humans and youkai.
@@ -3336,6 +3553,8 @@ LOC_SYSTEM_GOD_YUKARI_TALK5,Yukari: We'll need more information to understand wh
 LOC_SYSTEM_GOD_YUKARI_TALK6,Yukari: I'm counting on you. Let me know if you need help.
 LOC_SYSTEM_GOD_YUKARI_TALK7,Yukari: Once you gain my power, boundaries no longer matter.
 LOC_SYSTEM_GOD_YUKARI_TALK8,Yukari: This is something only you can do.
+LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?(Y/N)
+LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.
 LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,Yukari was furious at your reckless use of teleportation magic!
 LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,Yukari forcibly teleported you!
 LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,Yukari forcibly moved monsters near you!
@@ -3355,6 +3574,7 @@ LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking fo
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
+LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,Eirin forcibly experimented on your body!
 LOC_SYSTEM_GOD_YUYUKO_WELCOME,Yuyuko: Care for a cup of tea?
@@ -3375,6 +3595,8 @@ LOC_SYSTEM_GOD_SATORI_TALK4,Satori gently patted you.
 LOC_SYSTEM_GOD_SATORI_TALK5,Satori: Did today's pet food suit your taste?
 LOC_SYSTEM_GOD_SATORI_TALK6,Satori: Would you like to go on a walk with me sometime?
 LOC_SYSTEM_GOD_SATORI_FEED,Lady Satori has fed you!
+LOC_SYSTEM_GOD_SATORI_REUNION,사토리는 당신과의 재회를 기뻐했다.
+LOC_SYSTEM_GOD_SATORI_BELIEVE,사토리의 애완동물이 되었다.
 LOC_SYSTEM_GOD_TENSI_WELCOME,Tenshi: Heaven is so boring! You'll entertain me, right?
 LOC_SYSTEM_GOD_TENSI_TALK1,Tenshi: What! I'm busy right now!
 LOC_SYSTEM_GOD_TENSI_TALK2,Tenshi: Isn't it selfish to pray and expect luck?
@@ -3510,6 +3732,7 @@ LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,Changing dungeons has reset your popularit
 LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,Your popularity dropped slightly when changing floors.
 LOC_SYSTEM_GOD_MIKO_UP_FLOOR,Your popularity dropped significantly when climbing stairs.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,인기 폭발!
 LOC_SYSTEM_GOD_MIKO_PUNISH_HP,Miko has drained your HP!
 LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,Miko has slowed you down!
 LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,Miko has lowered your resistance!
@@ -3522,6 +3745,7 @@ LOC_SYSTEM_GOD_OKINA_TALK5,Okina: I’m thinking of finally releasing Mai and Sa
 LOC_SYSTEM_GOD_OKINA_TALK6,Okina: Truly a talent worthy of serving under you. You're hired!
 LOC_SYSTEM_GOD_OKINA_TALK7,Okina: Look! Listen! Speak! Receive the true power of the hidden god!
 LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,You turned the {0} tile into a door.
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR,오키나가 문을 잠가버렸다!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0} was pushed away by the closing door!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,There’s no space to push away {0} on the door.
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,This is the world beyond the door. {Take a good rest!|Welcome!|This place looks safe.}
@@ -3534,6 +3758,9 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,Junko has weakened your strength!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,Junko has taken your speed!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,Junko has drained your stats!
+LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK,당신은 물약의 맛을 느끼기엔 너무 순화되어있다.
+LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY,순호의 생명순화
+LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE,죽어가던 당신의 생명력이 돌아왔다!
 LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.
 LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
 LOC_SYSTEM_GOD_PRAY_AHTEISM,You took a moment to contemplate the meaning of life.
@@ -3641,6 +3868,11 @@ LOC_SYSTEM_REPLAYING,Replaying Mode
 LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
+LOC_SYSTEM_DEBUG_CALC_BACKSTAB,들킬확률-RandB({0},{1}) 즉{2}% (최종 암살 성공율{3}%)
+LOC_SYSTEM_DEBUG_CALC_DAMAGE,실데미지-{0} 공격-{1} 암습-{2} 명중-{3} 명중률-{4}%
+LOC_SYSTEM_DEBUG_ENSLAVE_BUG,※영혼구속 버그 : {0} god_value({1},{2}) mon_value({3},{4})
+LOC_SYSTEM_DEBUG_GAIN_EXP_FOR_TRIGGER,일정량의 스킬 경험치 획득
+LOC_SYSTEM_DEBUG_REVIVE_YN,죽어? (Y/N)
 LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed
 LOC_SYSTEM_DEBUG_TENSI_TENSION,Tension
 LOC_SYSTEM_DEBUG_TENSI_CRISIS,Crisis

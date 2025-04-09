@@ -643,7 +643,7 @@ bool Dump(int type, string *filename_)
 			}
 		}
 	}
-	string magic_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST);
+	string magic_resist_string = LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGICRESIST);
 	if(PrintCharWidth(magic_resist_string) < 8) {
 		magic_resist_string = std::string(8-PrintCharWidth(magic_resist_string), ' ') + magic_resist_string;
 	}

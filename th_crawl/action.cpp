@@ -517,8 +517,8 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 				{
 					for (monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss = (monster_state_simple)(mss + 1))
 					{
-						char temp[30];
-						D3DCOLOR color_ = (*it).GetStateString(mss, temp);
+						ostringstream ss;
+						D3DCOLOR color_ = (*it).GetStateString(mss, ss);
 						if (color_ != CL_none)
 						{
 							if (!state_)
@@ -530,7 +530,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 							{
 								printlog(", ", false, false, true, CL_normal);
 							}
-							printlog(temp, false, false, true, color_);
+							printlog(ss.str(), false, false, true, color_);
 						}
 					}
 					if (state_)

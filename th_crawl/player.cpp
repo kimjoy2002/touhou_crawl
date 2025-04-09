@@ -37,6 +37,7 @@
 #include "map.h"
 #include "lilly.h"
 #include "soundmanager.h"
+#include <iomanip>
 
 
 players you;
@@ -950,7 +951,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'n':
 					case VK_ESCAPE:
 						loop_ = false;
-						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER),true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
 						return 0;
 					default:
 						break;
@@ -979,7 +980,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'n':
 					case VK_ESCAPE:
 						loop_ = false;
-						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER),true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
 						return 0;
 					default:
 						break;
@@ -2461,7 +2462,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 				AddNote(you.turn,CurrentLevelString(),
 				LocalzationManager::formatString(LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,
 				PlaceHolderHelper(skill_string(skill_)),
-				PlaceHolderHelper(to_string(skill[skill_].level)),
+				PlaceHolderHelper(to_string(skill[skill_].level))),
 				CL_normal);
 			}
 		}
@@ -3693,6 +3694,7 @@ void players::LevelUp(bool speak_)
 	{
 		if (!you.pure_mp)
 		{
+			ostringstream ss;
 			ss << LocalzationManager::locString(LOC_SYSTEM_LEVELUP) << " : " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << 
 			   " " << std::setw(2) << level
 			   << ". HP: " << std::setw(4) << GetHp()
@@ -4425,7 +4427,7 @@ bool players::Drink(char id_)
 					}
 					else
 					{
-						printarray(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
 						drinkpotion(PT_WATER, false);
 					}
 
@@ -4634,7 +4636,7 @@ bool players::Read(char id_)
 				}
 				else
 				{
-					printlog("이건 읽을 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_READ_CANT_READ),true,false,false,CL_normal);
 					ReleaseMutex(mutx);
 					return false;		
 				}							
@@ -4663,39 +4665,33 @@ bool players::Memorize(int spell_, bool immediately)
 	//}
 	if(!immediately && you.level<skill_level_)
 	{
-		printlog("이 주문을 배우기엔 레벨이 모자란다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL),true,false,false,CL_normal);
 		return false;
 	}
 	if(you.remainSpellPoiont<skill_level_)
 	{
-		char temp[100];
-		sprintf_s(temp,100,"남은 마법 레벨이 %d만큼 모자란다.",skill_level_-you.remainSpellPoiont);
-		printlog(temp,true,false,false,CL_normal);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,PlaceHolderHelper(to_string(skill_level_-you.remainSpellPoiont))),true,false,false,CL_normal);
 		return false;
 	}
 	if(currentSpellNum == 52)
 	{
-		printlog("당신은 더 이상 주문을 기억할 공간이 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY),true,false,false,CL_normal);
 		return false;
 	}
 	if(!immediately)
 	{
-		printlog("마법을 익히기 시작했다.",true,false,false,CL_bad);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_START),true,false,false,CL_bad);
 		for(int i=0;i<skill_level_;i++)//맞아서 취소되기 추가
 		{
 			time_delay += you.GetNormalDelay();
 			TurnEnd();
 		}
-		if(0/*randA_1(100)>GetSpellSuccess(spell_)*/)
-		{
-			printlog("주문을 익히는데 실패했다.",true,false,false,CL_normal);
-			return false;		
-		}
-		printlog("주문을 익히는데 성공했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS),true,false,false,CL_normal);
 
-		char temp[200];
-		sprintf_s(temp,200,"주문 기억 : %d레벨 %s",SpellLevel((spell_list)spell_),SpellString((spell_list)spell_).c_str());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_normal);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,
+			PlaceHolderHelper(to_string(SpellLevel((spell_list)spell_))),
+			PlaceHolderHelper(SpellString((spell_list)spell_))
+		),CL_normal);
 	}
 	you.remainSpellPoiont-=skill_level_;
 	for(int i = 0; i < 52; i++){
@@ -4775,7 +4771,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(god_<GT_FIRST || god_>=GT_LAST)
 	{
 		if(speak_)
-			printlog("존재하지 않는 신입니다.",true,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD),true,false,false,CL_danger);
 		return false;
 	}
 
@@ -4783,12 +4779,12 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(you.god_value[GT_SEIJA][0] == 1)
 	{		
 		if(speak_)
-			printlog("배신자에겐 입교란 없다!",true,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY),true,false,false,CL_danger);
 		return false;
 	}
 	if(god == GT_SEIJA && you.level >= 10)
 	{
-		printlog("세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG),true,false,false,CL_small_danger);
 	}
 
 
@@ -4797,7 +4793,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 		if(god == god_)
 		{
 			if(speak_)
-				printlog("이미 믿고 있는 신입니다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_ALREADY_GOD),true,false,false,CL_normal);
 			return false;
 		}		
 		PietyUpDown(0,true);
@@ -4810,9 +4806,9 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(god == GT_SATORI)
 	{
 		if(you.punish[god].number)
-			printlog("사토리는 당신과의 재회를 기뻐했다.",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_REUNION),true,false,false,CL_help);
 		else
-			printlog("사토리의 애완동물이 되었다.",true,false,false,CL_help);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_BELIEVE),true,false,false,CL_help);	
 
 	}
 	else if(speak_)
@@ -4827,9 +4823,9 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(god == GT_SATORI)
 	{
 		if(you.punish[god].number)
-			AddNote(you.turn,CurrentLevelString(),"사토리와 재회했다.",CL_help);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_SATORI_REUNION),CL_help);
 		else
-			AddNote(you.turn,CurrentLevelString(),"사토리의 애완동물이 되었다.",CL_help);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_SATORI_WORSHIP),CL_help);
 
 	}
 	else
@@ -4898,7 +4894,7 @@ bool players::PietyUpDown(int piety_, bool absolutely_)
 			if (you.god == GT_MIKO) {
 				enterlog();
 				soundmanager.playSound("spellcard");
-				printlog("인기 폭발!", true, false, false, CL_miko);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST), true, false, false, CL_miko);
 			}
 		}
 
@@ -5092,9 +5088,9 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		if(equipment[i] == &(*it))
 		{
 			if(i == type_)
-				printlog("이미 장착하고 있다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_EQUIP),true,false,false,CL_normal);
 			else
-				printlog("이 아이템은 이미 사용중이다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_USE),true,false,false,CL_normal);
 			return 0;
 		}
 	}
@@ -5104,12 +5100,12 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		int your_size_ = GetProperty(TPT_SIZE);
 		if(your_size_>0)
 		{
-			printlog("당신은 이 방어구를 착용하기엔 몸이 너무 크다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_BIG),true,false,false,CL_normal);
 			return 0;
 		}
 		if(your_size_<0)
 		{
-			printlog("당신은 이 방어구를 착용하기엔 몸이 너무 작다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_SMALL),true,false,false,CL_normal);
 			return 0;
 		}
 	}
@@ -5150,7 +5146,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		if(type_ != ET_WEAPON || ((*it).type >= ITM_WEAPON_FIRST && (*it).type < ITM_WEAPON_LAST)) //무기를 장착했을때
 		{
 			if(equipment[type_]->curse)
-				printlog("헉! 이 아이템은 끔찍하게 차갑다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_CURSE_ITEM),true,false,false,CL_small_danger);
 			equipment[type_]->identify_curse = true;
 		}
 		if(throw_weapon == &(*it)) //만약 던지는 무기로 설정된 아이템을 착용했을 경우
@@ -5168,12 +5164,9 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 		if(speak_)
 		{
-			char temp[2];
-			sprintf_s(temp,2,"%c",(*it).id);
-			printlog(temp,false,false,false,(*it).item_color());
-			printlog(" - ",false,false,false,(*it).item_color());
-			printlog((*it).GetName(),false,false,false,(*it).item_color());
-			printlog(" (장착)",true,false,false,(*it).item_color());
+			ostringstream ss;
+			ss << (*it).id << " - " << (*it).GetName() << " (" << LocalzationManager::locString(LOC_SYSTEM_EQUIP) << ")";
+			printlog(ss.str(),true,false,false,(*it).item_color());
 
 			
 			if(type_ == ET_ARMOR)
@@ -5200,14 +5193,14 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				case 1:
 					break;
 				case 2:
-					printlog("불편한 방어구는 당신의 명중에 영향을 준다. ",true,false,false,CL_warning);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY_WARN1),true,false,false,CL_warning);
 					break;
 				case 3:
-					printlog("불편한 방어구는 당신의 이동속도와 명중에 영향을 준다. ",true,false,false,CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY_WARN2),true,false,false,CL_small_danger);
 					break;
 				case 4:
 				default:
-					printlog("방어구로 인해 극심한 패널티를 받고 있다. ",true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY_WARN3),true,false,false,CL_danger);
 					break;
 				}
 			}
@@ -5222,13 +5215,13 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 					case 0:
 						break;
 					case 1:
-						printlog("방패와 무기를 함께 착용했다. (공격속도 0.1 느려짐)", true, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY1), true, false, false, CL_normal);
 						break;
 					case 2:
-						printlog("이 무기는 방패와 같이 쓰기엔 약간 불편하다. (공격속도 0.2 느려짐)", true, false, false, CL_small_danger);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY2), true, false, false, CL_small_danger);
 						break;
 					case 3:
-						printlog("이 무기는 방패와 같이 쓰기엔 아주 버겁다. (공격속도 0.3 느려짐)", true, false, false, CL_danger);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY3), true, false, false, CL_danger);
 						break;
 					}
 
@@ -5243,7 +5236,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 	}
 	else
 	{
-		printlog("그렇게 장착할 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_LIKEIT),true,false,false,CL_normal);
 		ReleaseMutex(mutx);
 		return 0;
 	}
@@ -5259,7 +5252,7 @@ bool players::equiparmor(char id_, bool speak_)
 		{
 			if(!(*it).isarmor())
 			{
-				printlog("이 아이템은 방어구가 아니다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_ISNT_ARMOUR),true,false,false,CL_normal);
 				return 0;
 			}
 			return equip(it,(*it).GetArmorType(),speak_);
@@ -5279,17 +5272,17 @@ bool players::equipjewerly(char id_)
 		{
 			if(!(*it).isjewerly())
 			{
-				printlog("이 아이템은 장신구가 아니다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_ISNT_JEWERLY),true,false,false,CL_normal);
 				return 0;
 			}
 			if(&(*it) == equipment[ET_LEFT] || &(*it) == equipment[ET_RIGHT])
 			{
-				printlog("이미 장착하고 있는 장신구다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_EQUIP_JEWERLY),true,false,false,CL_normal);
 				return 0;
 			}
 			if(s_spellcard && (*it).isRightType(ET_NECK))
 			{
-				printlog("스펠카드 선언중엔 스펠카드 탈착이 불가능하다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_CANT_SPELLCARD),true,false,false,CL_normal);
 				return 0;
 			}
 
@@ -5298,17 +5291,21 @@ bool players::equipjewerly(char id_)
 			{
 				if(equipment[ET_LEFT] && equipment[ET_RIGHT] && (!equipment[ET_LEFT]->curse && !equipment[ET_RIGHT]->curse))
 				{
-					char temp[2];
+					ostringstream ss;
 					changedisplay(DT_GAME);
-					printlog("< 또는 ",false,false,false,CL_normal);
-					sprintf_s(temp,2,"%c",equipment[ET_LEFT]->id);
-					printlog(temp,false,false,false,CL_normal);
-					printlog(" - ",false,false,false,CL_normal);
+					ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+					 	PlaceHolderHelper("<"),
+						PlaceHolderHelper(string(1, equipment[ET_LEFT]->id))) << " - ";
+					printlog(ss.str(),false,false,false,CL_normal);
 					printlog(equipment[ET_LEFT]->GetName(),true,false,false,equipment[ET_LEFT]->item_color());
-					printlog("> 또는 ",false,false,false,CL_normal);
-					sprintf_s(temp,2,"%c",equipment[ET_RIGHT]->id);
-					printlog(temp,false,false,false,CL_normal);
-					printlog(" - ",false,false,false,CL_normal);
+					
+					
+					ss.str("");
+					ss.clear();
+					ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+					 	PlaceHolderHelper(">"),
+						PlaceHolderHelper(string(1, equipment[ET_RIGHT]->id))) << " - ";
+					printlog(ss.str(),false,false,false,CL_normal);
 					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color());
 					while(1)
 					{
@@ -5331,7 +5328,7 @@ bool players::equipjewerly(char id_)
 				}
 				else if (equipment[ET_LEFT] && equipment[ET_RIGHT]) {
 					if (equipment[ET_LEFT]->curse && equipment[ET_RIGHT]->curse) {
-						printlog("모든 아이템이 저주에 걸려있다.", true, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_ALLITEM_CURSE), true, false, false, CL_normal);
 						return 0;
 					}
 					else if (equipment[ET_LEFT]->curse)
@@ -5364,7 +5361,7 @@ bool players::unequip(char id_)
 			return unequip(i);
 		}
 	}
-	printlog("벗을 아이템이 없다.",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_UNEQUIP_EXIST),true,false,false,CL_normal);
 	return 0;
 }
 
@@ -5449,19 +5446,19 @@ bool players::isImpossibeEquip(equip_type type_, bool massage_)
 	if(type_ == ET_HELMET && GetProperty(TPT_HORN) )
 	{
 		if(massage_)
-			printlog("당신의 뿔이 이 장비를 쓰는걸 방해한다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_HORN),true,false,false,CL_normal);
 		return false;
 	}
 	if(type_ == ET_BOOTS &&GetProperty(TPT_GHOST_FOOT) )
 	{
 		if(massage_)
-			printlog("당신은 다리가 없다!",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT),true,false,false,CL_normal);
 		return false;
 	}
 	if(type_ == ET_GLOVE &&GetProperty(TPT_CLAW) )
 	{
 		if(massage_)
-			printlog("당신의 손톱때문에 장갑을 낄 수 없다!",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_CLAW),true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -5479,7 +5476,7 @@ bool players::unequip(equip_type type_, bool force_)
 
 		if (!force_ && type_ == ET_NECK && getAmuletPercent() > 0)
 		{
-			printlog("정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_AMULET_YN), true, false, false, CL_small_danger);
 			bool repeat_ = true;
 			while (repeat_)
 			{
@@ -5535,7 +5532,7 @@ bool players::unequiparmor(char id_)
 			return 1;
 		}
 	}
-	printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_EQUIP_ITEM),true,false,false,CL_normal);
 	return 0;
 }
 
@@ -5560,7 +5557,7 @@ bool players::unequipjewerly(char id_)
 			return 1;
 		}
 	}
-	printlog("그것을 입고 있지 않다!",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_EQUIP_ITEM),true,false,false,CL_normal);
 	return 0;
 }
 
@@ -5580,37 +5577,37 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			switch((*it).value5)
 			{
 			case WB_FIRE:			
-				printlog("무기가 불로 타오르기 시작했다.",true,false,false,CL_white_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FIRE),true,false,false,CL_white_blue);
 				break;
 			case WB_COLD:			
-				printlog("무기가 차가운 냉기를 내뿜기 시작했다.",true,false,false,CL_white_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_COLD),true,false,false,CL_white_blue);
 				break;		
 			case WB_POISON:			
-				printlog("무기에서 독이 떨어지기 시작했다.",true,false,false,CL_white_blue);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_POISON),true,false,false,CL_white_blue);	
 				break;
 			case WB_CURSE:
 				(*it).Curse(true,ET_WEAPON);
-				printlog("무기는 저주의 힘으로 가득 차있다.",true,false,false,CL_hina);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_CURSE),true,false,false,CL_hina);	
 				break;
 			case WB_WEATHER	:
-				printlog("무기에서 비상의 기운이 뿜어져나온다.",true,false,false,CL_tensi);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_WEATHER),true,false,false,CL_tensi);	
 				break;
 			case WB_AUTUMN:
-				printlog("무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.",true,false,false,CL_autumn);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_AUTUMN),true,false,false,CL_autumn);	
 				break;
 			case WB_MANA_REGEN:
 				//SetManaDelay(1);
-				printlog("영력의 흐름이 느껴진다.",true,false,false,CL_white_blue);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_MANA_REGEN),true,false,false,CL_white_blue);	
 				break;
 			case WB_FAST_CAST:
-				printlog("머리회전이 빨라진 느낌이 든다.",true,false,false,CL_white_blue);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FASTCAST),true,false,false,CL_white_blue);	
 				break;
 			case WB_PROTECT:
 				AcUpDown(0,5);
-				printlog("보호받는 기분이 든다.",true,false,false,CL_white_blue);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_PROTECT),true,false,false,CL_white_blue);	
 				break;
 			default:			
-				printlog("이 무기는 버그를 내뿜고있다.",true,false,false,CL_danger);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG),true,false,false,CL_danger);	
 				break;		
 			}
 		}
@@ -5626,35 +5623,35 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				switch((*it).value5)
 				{
 				case WB_FIRE:			
-					printlog("무기가 타오르는 것을 멈췄다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIRE),true,false,false,CL_normal);
 					break;
 				case WB_COLD:			
-					printlog("무기에서 나오던 냉기가 그쳤다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_COLD),true,false,false,CL_normal);
 					break;		
 				case WB_POISON:			
-					printlog("더이상 무기에서 독이 떨어지지 않는다.",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_POISON),true,false,false,CL_normal);	
 					break;
 				case WB_CURSE:		
-					printlog("무기에서 저주의 힘이 약해졌다.",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_CURSE),true,false,false,CL_normal);	
 					break;
 				case WB_WEATHER	:
-					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다.",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_WEATHER),true,false,false,CL_normal);	
 					break;
 				case WB_AUTUMN:
-					printlog("무기는 더이상 쓸쓸해보이지 않는다.",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_AUTUMN),true,false,false,CL_normal);	
 					break;
 				case WB_MANA_REGEN:
-					printlog("영력의 흐름이 사라졌다.",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_MANA_REGEN),true,false,false,CL_white_blue);	
 					break;
 				case WB_FAST_CAST:
-					printlog("머리회전이 다시 둔해졌다.",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FASTCAST),true,false,false,CL_white_blue);	
 					break;
 				case WB_PROTECT:
 					AcUpDown(0,-5);
-					printlog("보호가 사라졌다.",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT),true,false,false,CL_white_blue);	
 					break;
 				default:			
-					printlog("방금 무기는 버그에 걸려있다.",true,false,false,CL_danger);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG),true,false,false,CL_danger);	
 					break;		
 				}
 			}

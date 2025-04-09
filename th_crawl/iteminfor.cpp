@@ -1209,7 +1209,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_AMULET:
 	{
 		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET);
-		if (iden_list.amulet_list[it->value1].iden == 2)
+		if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
 		{
 			switch (it->value1)
 			{
@@ -1267,7 +1267,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	break;
 	case ITM_RING:
 	{
-		if (iden_list.ring_list[it->value1].iden == 2)
+		if ((it->isArtifact() && it->identify) || iden_list.ring_list[it->value1].iden == 2)
 		{
 			switch (it->value1)
 			{

@@ -164,37 +164,27 @@ bool equipring(ring_type kind, int value)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_STR),true,false,false,CL_good);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_STR),true,false,false,CL_small_danger);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_DEX:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_DEX),true,false,false,CL_good);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_DEX),true,false,false,CL_small_danger);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_INT:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INT),true,false,false,CL_good);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_INT),true,false,false,CL_small_danger);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_HUNGRY:
 	case RGT_FULL:
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 1;
 		break;
 	case RGT_TELEPORT:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_TELE),true,false,false,CL_normal);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_TELE),true,false,false,CL_normal);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;		
 	case RGT_POISON_RESIS:
 	case RGT_FIRE_RESIS:
@@ -202,8 +192,6 @@ bool equipring(ring_type kind, int value)
 	case RGT_SEE_INVISIBLE:
 	case RGT_ELEC_RESIS:
 	case RGT_MAGIC_RESIS:
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 1;
 		break;
 	/*case RGT_GRAZE:
 		{
@@ -217,16 +205,12 @@ bool equipring(ring_type kind, int value)
 		{
 			if(value>0)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_LEV),true,false,false,CL_normal);
-			if(iden_list.ring_list[kind].iden == 0)
-				iden_list.ring_list[kind].iden = 2;
 			break;
 		}
 	case RGT_INVISIBLE:
 		{
 			if(value>0)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_INV),true,false,false,CL_normal);
-			if(iden_list.ring_list[kind].iden == 0)
-				iden_list.ring_list[kind].iden = 2;
 			break;
 		}
 	case RGT_MANA:
@@ -234,36 +218,26 @@ bool equipring(ring_type kind, int value)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MANA),true,false,false,CL_normal);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MANA),true,false,false,CL_normal);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_MAGACIAN:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MAGICIAN),true,false,false,CL_normal);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MAGICIAN),true,false,false,CL_normal);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_AC:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_AC),true,false,false,CL_good);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_AC),true,false,false,CL_small_danger);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_EV:
 		if(value>0)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_EV),true,false,false,CL_good);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_EV),true,false,false,CL_small_danger);
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 2;
 		break;
 	case RGT_CONFUSE_RESIS:
-		if(iden_list.ring_list[kind].iden == 0)
-			iden_list.ring_list[kind].iden = 1;
 		break;
 	default:
 		break;

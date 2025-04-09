@@ -166,7 +166,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				it++;
 				if(!p_del)
 				{
-					printlog("인벤토리에 있는 P템이 사라졌다. ",false,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DISAPPEAR_P_ITEM) + " ",false,false,false,CL_normal);
 					p_del = true;
 				}
 				DeleteItem(temp);
@@ -182,35 +182,35 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				switch(it->value5)
 				{
 				case WB_FIRE:			
-					printlog("무기가 타오르는 것을 멈췄다. ",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIRE),true,false,false,CL_normal);
 					break;
 				case WB_COLD:			
-					printlog("무기에서 나오던 냉기가 그쳤다. ",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_COLD),true,false,false,CL_normal);
 					break;		
 				case WB_POISON:			
-					printlog("더이상 무기에서 독이 떨어지지 않는다. ",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_POISON),true,false,false,CL_normal);
 					break;	
 				case WB_CURSE:		
-					printlog("무기에서 저주의 힘이 약해졌다. ",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_CURSE),true,false,false,CL_normal);	
 					break;
 				case WB_WEATHER	:
-					printlog("무기에서 비상의 기운은 더이상 느껴지지않는다. ",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_WEATHER),true,false,false,CL_normal);
 					break;
 				case WB_AUTUMN:
-					printlog("무기는 더이상 쓸쓸해보이지 않는다. ",true,false,false,CL_normal);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_AUTUMN),true,false,false,CL_normal);
 					break;
 				case WB_MANA_REGEN:
-					printlog("영력의 흐름이 사라졌다. ",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_MANA_REGEN),true,false,false,CL_white_blue);
 					break;
 				case WB_FAST_CAST:
-					printlog("머리회전이 다시 둔해졌다. ",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FASTCAST),true,false,false,CL_white_blue);
 					break;
 				case WB_PROTECT:
 					AcUpDown(0,-5);
-					printlog("보호가 사라졌다. ",true,false,false,CL_white_blue);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT),true,false,false,CL_white_blue);
 					break;
 				default:			
-					printlog("방금 무기는 버그에 걸려있다. ",true,false,false,CL_danger);	
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG),true,false,false,CL_danger);
 					break;		
 				}
 				it->value5 = 0;
@@ -247,27 +247,27 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			damage_ = HpUpDown(-poison_damage(s_poison),DR_POISON);
 			if(damage_==-1)
 			{
-				printlog("독의 데미지를 받고 있다. ",false,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DAMAGED_BY_POISON1) + " ",false,false,false,CL_normal);
 				if(GetHp()<30)
 					SetInter(IT_POISON);
 			}
 			else if(damage_>=-4)
 			{
-				printlog("심한 독의 데미지를 받고 있다. ",false,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DAMAGED_BY_POISON2) + " ",false,false,false,CL_small_danger);
 				if(GetHp()<100)
 					SetInter(IT_POISON);
 			}
 			else
 			{
-				printlog("매우 심한 독의 데미지를 받고 있다. ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DAMAGED_BY_POISON3) + " ",false,false,false,CL_danger);
 				SetInter(IT_POISON);
 			}
 		}
 		s_poison--;
 		if(!s_poison)
-			printlog("독이 치료되었다. ",false,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_HEALED_POISON1) + " ",false,false,false,CL_good);
 		else if(s_poison%30 == 0)
-			printlog("독에서 약간 회복되었다. ",false,false,false,CL_good);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_HEALED_POISON2) + " ",false,false,false,CL_good);
 	}
 	WaitForSingleObject(mutx, INFINITE);
 	if(s_might)
@@ -275,7 +275,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_might--;
 		if(!s_might)
 		{
-			printlog("힘이 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MIGHT_END) + " ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_STR);
 			SetInter(IT_STAT);
 		}
@@ -285,7 +285,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_clever--;
 		if(!s_clever)
 		{
-			printlog("지능이 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_CLEVER_END) + " ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_INT);
 			SetInter(IT_STAT);
 		}
@@ -295,7 +295,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_agility--;
 		if(!s_agility)
 		{
-			printlog("민첩이 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_AGILITY_END) + " ",false,false,false,CL_blue);
 			StatUpDown(-5, STAT_DEX);
 			EvUpDown(0,-5);
 			SetInter(IT_STAT);
@@ -305,17 +305,17 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_str < m_str && randA_1(20000) <= delay_)
 		{
 			s_str++;
-			printlog("잃어버린 힘이 회복되었다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_STR) + " ",false,false,false,CL_blue);
 		}	
 		else if(s_dex < m_dex && randA_1(20000) <= delay_)
 		{
 			s_dex++;
-			printlog("잃어버린 민첩이 회복되었다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_DEX) + " ",false,false,false,CL_blue);
 		}
 		else if(s_int < m_int && randA_1(20000) <= delay_)
 		{
 			s_int++;
-			printlog("잃어버린 지능이 회복되었다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_INT) + " ",false,false,false,CL_blue);
 		}
 	}
 	if(s_haste)
@@ -323,12 +323,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_haste--;
 		if(!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
 		{
-			printlog("속도가 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_HASTE_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_haste == 10 && s_pure_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time<10))
 		{
-			printlog("속도가 돌아오고 있다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_HASTE_ALMOST_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -337,12 +337,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_pure_haste--;
 		if (!s_pure_haste && !s_haste && alchemy_buff != ALCT_HASTE)
 		{
-			printlog("살의가 사라졌다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_PURE_HASTE) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_pure_haste == 10 && s_haste <= 10 && (alchemy_buff != ALCT_HASTE || alchemy_time < 10))
 		{
-			printlog("살의가 사라지고 있다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PURE_HASTE_ALMOST_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -359,7 +359,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			}
 			if (!least_one) {
 				s_pure_haste = 0;
-				printlog("시야내에 적이 사라져 살의가 사라졌다. ", false, false, false, CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PURE_HASTE_END_LOS) + " ", false, false, false, CL_blue);
 				SetInter(IT_STAT);
 			}
 		}
@@ -370,7 +370,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_wind--;
 		if(!s_wind)
 		{
-			printlog("당신에게 감겨있던 바람이 빠져나갔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_WIND_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -379,7 +379,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_knife_collect--;
 		if(!s_knife_collect)
 		{
-			printlog("더이상 탄막이 자동으로 회수되지 않는다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_KNIFE_COLLECT_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -388,7 +388,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_drunken--;
 		if(!s_drunken)
 		{
-			printlog("당신은 제정신을 차렸다. ",false,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_DRUNKEN_END) + " ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -399,7 +399,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_lunatic--;
 		if(!s_lunatic)
 		{
-			printlog("당신의 광기는 끝났다. ",false,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_LUNATIC_END) + " ",false,false,false,CL_white_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -409,7 +409,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		you.god_value[GT_JOON_AND_SION][1]--;
 		if (you.god_value[GT_JOON_AND_SION][1] <= 0)
 		{
-			printlog("당신의 빙의가 끝났다. ", false, false, false, CL_joon_and_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END) + " ", false, false, false, CL_joon_and_sion);
 			if(!you.GetPunish(GT_JOON_AND_SION)) 
 			{
 				if (you.god_value[GT_JOON_AND_SION][0] == 1) {
@@ -458,7 +458,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_confuse--;
 		if(!s_confuse)
 		{
-			printlog("혼란스러움이 사라졌다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_CONFUSE_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -467,7 +467,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_slow--;
 		if(!s_slow)
 		{
-			printlog("속도가 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLOW_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -476,7 +476,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_frozen--;
 		if(!s_frozen)
 		{
-			printlog("얼어붙었던 몸이 녹았다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLOW_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -492,7 +492,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_elec--;
 		if(!s_elec)
 		{
-			printlog("방전이 멈췄다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_ELEC_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -502,7 +502,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_paralyse--;
 		if(!s_paralyse)
 		{
-			printlog("다시 움직일 수 있게 되었다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PARALYSE_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -513,13 +513,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA)
 			{
-				printlog("당신은 물 위에 떨어졌다. ", false, false, false, you.isSwim()? CL_blue :CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_WATER) + " ", false, false, false, you.isSwim()? CL_blue :CL_danger);
 			}
 			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
-				printlog("당신은 용암 위에 떨어졌다. ", false, false, false, CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_LAVA) + " ", false, false, false, CL_danger);
 			}
 			else {
-				printlog("땅에 부드럽게 착지했다. ", false, false, false, CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END) + " ", false, false, false, CL_blue);
 			}
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 			if(temp)
@@ -528,7 +528,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_levitation == 10)
 		{
-			printlog("몸이 무거워지고 있다. ",false,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END_ALMOST) + " ",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
 		}
 	}
@@ -537,7 +537,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_graze--;
 		if(!s_graze)
 		{
-			printlog("더 이상 그레이즈를 하지 않는다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GRAZE_END) + " ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_GRAZE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_GRAZE,false,false,temp);
@@ -545,7 +545,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_graze == 10)
 		{
-			printlog("그레이즈가 무뎌지고있다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GRAZE_END_ALMOST) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -562,7 +562,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(!s_silence)
 		{
-			printlog("소리를 지우는 정적이 사라졌다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SILENCE_END) + " ",false,false,false,CL_blue);
 			env[current_level].MakeSilence(position, s_silence_range, false);
 			SetInter(IT_STAT);
 		}
@@ -572,7 +572,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sick--;
 		if(!s_sick)
 		{
-			printlog("병이 나았다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SICK_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -581,7 +581,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_veiling--;
 		if(!s_veiling)
 		{
-			printlog("휘감던 바람이 잠잠해졌다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_VEILING_END) + " ",false,false,false,CL_blue);
 			s_value_veiling = 0;
 			SetInter(IT_STAT);
 		}
@@ -591,7 +591,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_invisible--;
 		if(!s_invisible)
 		{
-			printlog("몸이 다시 불투명해졌다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_INVISIBLE_END) + " ",false,false,false,CL_blue);
 			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_INVISIBLE,false,false,temp);
@@ -599,7 +599,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 		if(s_invisible == 10)
 		{
-			printlog("당신의 투명한 몸이 깜박이고있다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_INVISIBLE_END_ALMOST) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -609,12 +609,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift = 0;
 		if(!s_superman)
 		{
-			printlog("당신은 더이상 다리가 빠르지않다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SUPERMAN_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_superman == 5)
 		{
-			printlog("당신의 다리가 무거워지고있다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SUPERMAN_END_ALMOST) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -625,7 +625,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_eirin_poison_time--;
 		if(s_eirin_poison_time == 11)
 		{			
-			printlog("치유로 인한 부작용이 시작되었다!",true,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT),true,false,false,CL_danger);
 			enterlog();
 			SetInter(IT_STAT);
 		}
@@ -655,7 +655,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_stasis--;
 		if(!s_stasis)
 		{
-			printlog("전이 방해가 풀렸다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_STASIS_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -664,7 +664,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		force_turn--;
 		if(!force_turn)
 		{
-			printlog("위력이 원래대로 돌아왔다. ",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FORCE_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -674,12 +674,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_super_graze--;
 		if (!s_super_graze)
 		{
-			printlog("당신의 근성 회피는 끝났다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_super_graze == 3)
 		{
-			printlog("당신의 근성 회피가 끝나가고있다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -689,7 +689,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_night_sight_turn--;
 		if (!s_night_sight_turn)
 		{
-			printlog("당신의 야맹증은 회복되었다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_BLIND_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -699,7 +699,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_sleep--;
 		if (!s_sleep)
 		{
-			printlog("당신은 졸음을 깼다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLEEP_END1) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -708,7 +708,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_sleep++;
 		if (!s_sleep)
 		{
-			printlog("당신은 잠에서 깼다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLEEP_END2) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -719,7 +719,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if (!you.s_pure_turn)
 		{
 			you.s_pure = 0;
-			printlog("당신의 일시적 순화가 해제되었다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURE_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -741,7 +741,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if (you.power <= 0) {
 			soundmanager.playSound("ufo");
 			you.s_evoke_ghost = 0;
-			printlog("당신은 파워가 전부 소모되어 유령화가 해제되었다. ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_END) + " ", false, false, false, CL_danger);
 			SetInter(IT_STAT);
 		}
 
@@ -802,7 +802,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			you.s_weather = 0;
 			resetLOS();
-			printlog("날씨가 원래대로 돌아왔다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -814,7 +814,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_glow--;
 		if (!s_glow)
 		{
-			printlog("당신의 몸에서 빛나는 것이 멈췄다. ", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GLOW_END) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -854,12 +854,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift--;
 		if(!s_swift)
 		{
-			printlog("당신은 더 이상 다리가 빠르지않다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SWIFT_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 		if(s_swift == 10)
 		{
-			printlog("당신의 다리가 무거워지고있다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SWIFT_END_ALMOST) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -868,12 +868,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_swift++;
 		if (!s_swift)
 		{
-			printlog("당신은 더 이상 다리가 느리지않다.", false, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH_END) + " ", false, false, false, CL_white_blue);
 			SetInter(IT_STAT);
 		}
 		if (s_swift == -5)
 		{
-			printlog("당신의 다리가 돌아오고 있다.", false, false, false, CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH_END_ALMOST) + " ", false, false, false, CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -882,7 +882,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_mana_regen--;
 		if(!s_mana_regen)
 		{
-			printlog("영력회복속도가 정상이 되었다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MANA_BUFF_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -892,7 +892,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		if(s_ghost == 1)
 		{
-			printlog("유령의 빈도가 정상이 되었다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -902,7 +902,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(!s_mirror)
 		{
-			printlog("데미지 반사가 끝났다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MIRROR_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 
@@ -914,7 +914,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_dimension == 0)
 		{			
 			resetLOS(false);
-			printlog("차원이 원래대로 돌아왔다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -924,7 +924,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(s_timestep == 0)
 		{
-			printlog("당신은 동면을 끝냈다. 아직 잠에서 덜 깼다. ",false,false,false,CL_swako);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_TIMESTEP_END) + " ",false,false,false,CL_swako);
 			you.SetSlow(rand_int(4,6));
 			SetInter(IT_STAT);
 		}
@@ -934,7 +934,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_paradox--;
 		if(s_paradox == 0)
 		{			
-			printlog("도플갱어가 사라졌다.",false,false,false,CL_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PARADOX_END) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -944,7 +944,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 		if(s_the_world == 1)
 		{
-			printlog("그리고 시간은 움직이기 시작한다...",false,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_THE_WORLD_END) + " ",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
 		}
 
@@ -1087,7 +1087,7 @@ bool orbRun() {
 
 			mon_->flag &= ~M_FLAG_SUMMON;
 			mon_->ReturnEnemy();
-			printlog("틈새로부터 열받은 하쿠레이 신사의 무녀가 나타났다! ", true, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MON_REIMU_APPEAR), true, false, false, CL_danger);
 
 			MoreWait();
 		}
@@ -1227,9 +1227,7 @@ void deadlog()
 
 void resurectionlog(string reason)
 {
-	char temp[200];
-	sprintf_s(temp, 200, "%s에 의해서 부활했다.", reason.c_str());
-	AddNote(you.turn, CurrentLevelString(), temp, CL_normal);
+	AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_REVIVE,PlaceHolderHelper(reason)), CL_normal);
 }
 
 int caculScore();
@@ -1282,11 +1280,11 @@ void GameOver()
 
 
 	if(you.dead_reason != DR_ESCAPE)
-		printlog("죽었다...",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DEAD_YOU),true,false,false,CL_normal);
 	else
-		printlog("던전을 탈출했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DEAD_ESCAPE),true,false,false,CL_normal);
 
-	printlog("------------다음장------------",true,false,false,CL_normal);
+	printlog("------------" + LocalzationManager::locString(LOC_SYSTEM_MORE) + "------------",true,false,false,CL_normal);
 
 	deadlog();
 	string dump_;
@@ -1345,17 +1343,15 @@ void GameOver()
 				printsub("",true,CL_magic);
 				if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 				{
-					if(wiz_list.wizard_mode == 1)
-						printsub("플레이해주셔서 감사합니다! 다음엔 위자드모드없이 도전해봅시다!",true,CL_magic);
-					else if(wiz_list.wizard_mode == 2)
-						printsub("플레이해주셔서 감사합니다! 다음엔 세이브없이 도전해봅시다!",true,CL_magic);
+					if(wiz_list.wizard_mode == 1 || wiz_list.wizard_mode == 2)
+						printsub(LocalzationManager::locString(LOC_SYSTEM_WIN_WIZARDMODE),true,CL_magic);
 					else
-						printsub("클리어 축하드립니다! 그리고 플레이해주셔서 감사합니다!",true,CL_magic);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_WIN),true,CL_magic);
 				}
 				printsub("",true,CL_help);
-				printsub("기록은 게임의 morgue폴더에 저장되어있습니다.",true,CL_help);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_MORGUE),true,CL_help);
 				printsub("",true,CL_help);
-				printsub("종료하시려면 Enter나 ESC를 누르세요.",true,CL_help);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_ESC),true,CL_help);
 				bool end_ = false;
 				while(!end_)
 				{

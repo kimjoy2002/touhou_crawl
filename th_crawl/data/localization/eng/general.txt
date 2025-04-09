@@ -113,6 +113,7 @@ LOC_SYSTEM_UNABLE_MOVE,You can't move there.
 LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
+LOC_SYSTEM_DISAPPEAR_P_ITEM,The P item in your inventory has disappeared.
 LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL,Your level is too low to learn this spell.
 LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,You need {0} more spell level(s) to learn this.
 LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY,You have no more space to memorize new spells.
@@ -149,11 +150,20 @@ LOC_SYSTEM_NOT_EQUIP_ITEM,You’re not wearing that!
 LOC_SYSTEM_UNEQUIP_AMULET_YN,Are you sure you want to unequip the charged amulet? Charge will be lost! (y/n)
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
+LOC_SYSTEM_DAMAGED_BY_POISON1,You're taking poison damage.
+LOC_SYSTEM_DAMAGED_BY_POISON2,You're taking heavy poison damage.
+LOC_SYSTEM_DAMAGED_BY_POISON3,You're taking severe poison damage.
+LOC_SYSTEM_HEALED_POISON1,The poison has been cured.
+LOC_SYSTEM_HEALED_POISON2,You've slightly recovered from the poison.
 LOC_SYSTEM_OUCH,Ouch!
 LOC_SYSTEM_OUCH_THIS_REALLY_HURTS,Agh! That really hurts!
 LOC_SYSTEM_LOW_HEALTH_WARNING,Low Health Warning
 LOC_SYSTEM_WAKEUP_WITH_DAMAGE,Woke up from the damage!
 LOC_SYSTEM_MORE,More
+LOC_SYSTEM_WIN,Congratulations on clearing! And thank you for playing!
+LOC_SYSTEM_WIN_WIZARDMODE,Thank you for playing! Next time, try it without Wizard Mode!
+LOC_SYSTEM_HELP_MORGUE,Your record is saved in the game's morgue folder.
+LOC_SYSTEM_HELP_ESC,Press Enter or ESC to quit.
 LOC_SYSTEM_OR,{0} or {1}
 LOC_SYSTEM_LEVELUP_MESSGE,Your level increased! Level {0}
 LOC_SYSTEM_LEVELUP_STAT_MESSGE,Choose a stat to increase. (S)tr - Strength, (D)ex - Dexterity, (I)nt - Intelligence
@@ -401,10 +411,10 @@ LOC_SYSTEM_SHORT_FIRE_RESIST,rFire
 LOC_SYSTEM_SHORT_COLD_RESIST,rCold
 LOC_SYSTEM_SHORT_ELEC_RESIST,rElec
 LOC_SYSTEM_SHORT_POISON_RESIST,rPois
-LOC_SYSTEM_SHORT_CONFUSE_RESIST,rConfuse
-LOC_SYSTEM_SHORT_SEE_INVISIBLE,See Invi
-LOC_SYSTEM_SHORT_POWER_KEEP,Power Sus
-LOC_SYSTEM_SHORT_MAGICRESIST,MR
+LOC_SYSTEM_SHORT_CONFUSE_RESIST,rConf
+LOC_SYSTEM_SHORT_SEE_INVISIBLE,sInv
+LOC_SYSTEM_SHORT_POWER_KEEP,PKeep
+LOC_SYSTEM_SHORT_MAGICRESIST,MR+
 LOC_SYSTEM_STR,Strength
 LOC_SYSTEM_DEX,Dexterity
 LOC_SYSTEM_INT,Intelligence
@@ -674,6 +684,7 @@ LOC_SYSTEM_MONSTER_OPEN_DOOR,{0} opened the door.
 LOC_SYSTEM_SUDDENLY_OPEN_DOOR,The door opens suddenly.
 LOC_SYSTEM_DIMENSION_STAIR,You can't use the stairs due to the barrier!
 LOC_SYSTEM_DIMENSION_STAIT_WARN,Using the stairs will break dimensional lock. Proceed anyway? (Y/N)
+LOC_SYSTEM_DIMENSION_END,The dimension has returned to normal.
 LOC_SYSTEM_STAIR_SUBDUNGEON_WARN,This place looks really dangerous. Go down anyway? (Y/N)
 LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE,Once you enter, it will be hard to get out. Still want to go down? (Y/N)
 LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE,Leaving now means you can never get this floor's rune again. Leave anyway? (Y/N)
@@ -773,65 +784,109 @@ LOC_SYSTEM_YOU_TELE,You felt spatial instability.
 LOC_SYSTEM_YOU_TELE_STABLE,The space around you stabilized.
 LOC_SYSTEM_YOU_MIGHT,You feel powerful.
 LOC_SYSTEM_YOU_MORE_MIGHT,You feel even more powerful.
+LOC_SYSTEM_YOU_MIGHT_END,Your strength has returned to normal.
 LOC_SYSTEM_YOU_CLEVER,You feel clever.
 LOC_SYSTEM_YOU_MORE_CLEVER,You feel even more clever.
+LOC_SYSTEM_YOU_CLEVER_END,Your intelligence has returned to normal.
 LOC_SYSTEM_YOU_AGILITY,You feel agile.
 LOC_SYSTEM_YOU_MORE_AGILITY,You feel even more agile.
+LOC_SYSTEM_YOU_AGILITY_END,Your agility has returned to normal.
 LOC_SYSTEM_YOU_HASTE,You became faster.
 LOC_SYSTEM_YOU_MORE_HASTE,Your haste lasts longer.
+LOC_SYSTEM_YOU_HASTE_ALMOST_END,Your speed is returning.
+LOC_SYSTEM_YOU_HASTE_END,Your speed has returned to normal.
 LOC_SYSTEM_YOU_PURE_HASTE,You became faster with murderous intent.
 LOC_SYSTEM_YOU_MORE_PURE_HASTE,Your murderous speed lasted longer.
+LOC_SYSTEM_YOU_PURE_HASTE_ALMOST_END,Your bloodlust is fading.
+LOC_SYSTEM_YOU_PURE_HASTE_END,Your bloodlust has vanished.
+LOC_SYSTEM_YOU_PURE_HASTE_END_LOS,An enemy left your sight, and your bloodlust faded.
 LOC_SYSTEM_YOU_CONFUSE,You became confused.
 LOC_SYSTEM_YOU_MORE_CONFUSE,You became even more confused.
+LOC_SYSTEM_YOU_CONFUSE_END,Your confusion has cleared.
 LOC_SYSTEM_YOU_SLOW,You became slower.
 LOC_SYSTEM_YOU_MORE_SLOW,You became even slower.
+LOC_SYSTEM_YOU_SLOW_END,Your speed has returned to normal.
 LOC_SYSTEM_YOU_FROZEN,You were frozen and can barely move.
 LOC_SYSTEM_YOU_MORE_FROZEN,You became even more frozen and immobile.
+LOC_SYSTEM_YOU_FROZEN_END,Your frozen body has thawed.
 LOC_SYSTEM_YOU_ELEC,You started discharging electricity.
 LOC_SYSTEM_YOU_MORE_ELEC,You continue discharging electricity longer.
+LOC_SYSTEM_YOU_ELEC_END,The discharge has stopped.
 LOC_SYSTEM_YOU_PARALYSE,You are paralyzed.
+LOC_SYSTEM_YOU_PARALYSE_END,You can move again.
 LOC_SYSTEM_YOU_FLY,You started floating in the air.
 LOC_SYSTEM_YOU_MORE_FLY,You floated in the air for a longer time.
+LOC_SYSTEM_YOU_FLY_END_ALMOST,Your body is getting heavier.
+LOC_SYSTEM_YOU_FLY_END,You landed softly on the ground.
+LOC_SYSTEM_YOU_FLY_WATER,You fell onto the water.
+LOC_SYSTEM_YOU_FLY_LAVA,You fell onto the lava.
 LOC_SYSTEM_YOU_GLOW,You began to emit light.
 LOC_SYSTEM_YOU_MORE_GLOW,You emitted a stronger light.
+LOC_SYSTEM_YOU_GLOW_END,The glow from your body has faded.
 LOC_SYSTEM_YOU_GRAZE,Your sense for grazing bullets improved.
 LOC_SYSTEM_YOU_MORE_GRAZE,Your bullet-grazing sense continues.
+LOC_SYSTEM_YOU_GRAZE_END_ALMOST,Your grazing is weakening.
+LOC_SYSTEM_YOU_GRAZE_END,You are no longer grazing.
 LOC_SYSTEM_YOU_SILENCE,You silenced the surrounding sounds.
 LOC_SYSTEM_YOU_MORE_SILENCE,Your silence lasted longer.
+LOC_SYSTEM_YOU_SILENCE_END,The silence that muffled sound has faded.
 LOC_SYSTEM_YOU_SICK,You became ill.
 LOC_SYSTEM_YOU_MORE_SICK,Your illness worsened.
+LOC_SYSTEM_YOU_SICK_END,You have recovered from illness.
 LOC_SYSTEM_YOU_VEILING,Wind swirled around you.
 LOC_SYSTEM_YOU_MORE_VEILING,The swirling wind around you lasted longer.
+LOC_SYSTEM_YOU_VEILING_END,The swirling wind has calmed down.
 LOC_SYSTEM_YOU_INVISIBLE,You turned invisible.
 LOC_SYSTEM_YOU_MORE_INVISIBLE,You remained invisible longer.
+LOC_SYSTEM_YOU_INVISIBLE_END_ALMOST,Your transparent body is flickering.
+LOC_SYSTEM_YOU_INVISIBLE_END,Your body has become visible again.
 LOC_SYSTEM_YOU_SWIFT,Your legs became faster.
+LOC_SYSTEM_YOU_SWIFT_END_ALMOST,Your legs are getting heavier.
+LOC_SYSTEM_YOU_SWIFT_END,Your legs are no longer fast.
 LOC_SYSTEM_YOU_SLUGGISH,Your legs became sluggish.
+LOC_SYSTEM_YOU_SLUGGISH_END_ALMOST,Your legs are coming back to normal.
+LOC_SYSTEM_YOU_SLUGGISH_END,Your legs are no longer sluggish.
 LOC_SYSTEM_YOU_MORE_SWIFT,You can run for longer.
 LOC_SYSTEM_YOU_SWIFT_FROM_SLUGGISH,You shook off your slow pace.
 LOC_SYSTEM_YOU_SLUGGISH_FROM_SWIFT,Your once-light steps now feel heavy.
 LOC_SYSTEM_YOU_MORE_SLUGGISH,Your legs became even more sluggish.
 LOC_SYSTEM_YOU_SUPERMAN,Your legs became incredibly fast.
 LOC_SYSTEM_YOU_MORE_SUPERMAN,You can run even longer.
+LOC_SYSTEM_YOU_SUPERMAN_END_ALMOST,Your legs are getting heavier.
+LOC_SYSTEM_YOU_SUPERMAN_END,Your legs are no longer fast.
 LOC_SYSTEM_YOU_WIND,Wind wrapped around you.
 LOC_SYSTEM_YOU_MORE_WIND,Even more wind wrapped around you.
+LOC_SYSTEM_YOU_WIND_END,The wind surrounding you has dissipated.
 LOC_SYSTEM_YOU_KNIFE_COLLECT,You began automatically retrieving bullets.
 LOC_SYSTEM_YOU_MORE_KNIFE_COLLECT,The bullet retrieval duration increased.
+LOC_SYSTEM_YOU_KNIFE_COLLECT_END,Bullets are no longer automatically collected.
 LOC_SYSTEM_YOU_DRUNKEN,You became drunk.
 LOC_SYSTEM_YOU_MORE_DRUNKEN,You’re completely wasted.
+LOC_SYSTEM_YOU_DRUNKEN_END,You've sobered up.
 LOC_SYSTEM_YOU_LUNATIC,You were consumed by madness.
+LOC_SYSTEM_YOU_LUNATIC_END,Your madness has ended.
 LOC_SYSTEM_YOU_MIRROR,You reflected all damage.
+LOC_SYSTEM_YOU_MIRROR_END,Damage reflection has ended.
 LOC_SYSTEM_YOU_PARADOX,You're ready to fire consecutive danmaku through your doppelgänger.
+LOC_SYSTEM_YOU_PARADOX_END,The doppelgänger has vanished.
 LOC_SYSTEM_YOU_TRANS_PANALTY1,Suffered a minor space-time side effect.
 LOC_SYSTEM_YOU_TRANS_PANALTY2,Suffered a significant space-time side effect.
 LOC_SYSTEM_YOU_TRANS_PANALTY3,Suffered an extreme space-time side effect.
 LOC_SYSTEM_YOU_THE_WORLD,The World!
+LOC_SYSTEM_YOU_THE_WORLD_END,And time begins to move once more...
 LOC_SYSTEM_YOU_STASIS,Your teleportation was interrupted.
 LOC_SYSTEM_YOU_MORE_STASIS,Your teleportation block lasted longer.
+LOC_SYSTEM_YOU_STASIS_END,Stasis interference has been lifted.
 LOC_SYSTEM_YOU_FORCE_WEAK,Your physical and magical power greatly decreased.
 LOC_SYSTEM_YOU_FORCE_STRONG,Your physical and magical power greatly increased.
+LOC_SYSTEM_YOU_FORCE_END,Your power has returned to normal.
 LOC_SYSTEM_YOU_BLIND,Your vision became blurry.
 LOC_SYSTEM_YOU_MORE_BLIND,Your vision became even blurrier!
+LOC_SYSTEM_YOU_BLIND_END,Your night blindness has healed.
 LOC_SYSTEM_YOU_SLEEP,You fell asleep!
+LOC_SYSTEM_YOU_SLEEP_END1,You shook off drowsiness.
+LOC_SYSTEM_YOU_SLEEP_END2,You woke up from sleep.
+LOC_SYSTEM_YOU_MANA_BUFF_END,MP recovery rate has normalized.
 LOC_SYSTEM_MON_RED_DESIRE,Red Spirit
 LOC_SYSTEM_MON_BLUE_DESIRE,Blue Spirit
 LOC_SYSTEM_MON_GREEN_DESIRE,Green Spirit
@@ -892,6 +947,7 @@ LOC_SYSTEM_MON_RECORVER_CONFUSE,{0} shakes off the confusion.
 LOC_SYSTEM_MON_RECORVER_FROZEN,The ice on {0} melts away.
 LOC_SYSTEM_MON_RECORVER_PARALYSE,{0} regains mobility.
 LOC_SYSTEM_MON_RECORVER_SICK,{0} is no longer sick.
+LOC_SYSTEM_MON_REIMU_APPEAR,An angry shrine maiden from Hakurei Shrine appeared from the gap!
 LOC_SYSTEM_MON_NO_LONGER_STRONG,{0} is no longer empowered.
 LOC_SYSTEM_MON_NO_LONGER_HASTE,{0} is no longer fast.
 LOC_SYSTEM_MON_NO_LONGER_SLOW,{0} is no longer slowed.
@@ -999,6 +1055,8 @@ LOC_SYSTEM_FRIEND_SHIELD,{0} shields {1}!
 LOC_SYSTEM_MAMIZO_EVADE,{0} transforms into paper charms and evades the attack!
 LOC_SYSTEM_KILL_NORMAL,{0} kills {1}.
 LOC_SYSTEM_KILL_INANIMATE,{0} destroys {1}.
+LOC_SYSTEM_DEAD_YOU,You died...
+LOC_SYSTEM_DEAD_ESCAPE,You escaped the dungeon.
 LOC_SYSTEM_DEAD_NORMAL,{0} dies.
 LOC_SYSTEM_DEAD_INANIMATE,{0} is destroyed.
 LOC_SYSTEM_DEAD_DOOR,{0} returns to being an ordinary door.
@@ -1068,6 +1126,7 @@ LOC_SYSTEM_NOTE_ARENA_TIMEOVER,Rematch due to timeout.
 LOC_SYSTEM_NOTE_ARENA_FINAL_SCORE,Your final score: Level {0}.
 LOC_SYSTEM_NOTE_ARENA_WIN,Level 27 reached! You've cleared the game.
 LOC_SYSTEM_NOTE_RUN_AWAY,Fled toward {0}.
+LOC_SYSTEM_NOTE_REVIVE,Revived by {0}.
 LOC_SYSTEM_NOTE_DEAD,You have died.
 LOC_SYSTEM_NOTE_DEAD_BY,Killed by {0}.
 LOC_SYSTEM_NOTE_DEAD_HUNGRY,Died of starvation.
@@ -1575,6 +1634,7 @@ LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN,The Four-Shaku Magic Bomb fell into 
 LOC_SYSTEM_EVOKE_GHOST_BALL,You turned into a ghost at the cost of life! Use the skill again to cancel.
 LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE,You let go of the Okurichōchin.
 LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,You can't activate items except Okurichochin while in ghost state!
+LOC_SYSTEM_EVOKE_GHOST_BALL_END,Your power has run out and ghost mode has ended.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST,No time to take photos of thin air.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE,I'd rather photograph a prettier girl.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_GIRL,I don't want to photograph a guy.
@@ -2566,9 +2626,12 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from 
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING,You communed with a god through the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,"Without faith, your gathered piety faded into the sky."
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER,You focus all your senses on evasion for a moment!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your grit-based grazing is about to end.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your grit-based grazing has ended.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,"A thick fog rolls in, obscuring everything."
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END,The weather has returned to normal.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,"Through occult power, urban legend {0} has appeared!"
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,"Through occult power, multiple {0} urban legends have appeared!"
 LOC_SYSTEM_ITEM_OCCULT_NESI,Nessie
@@ -3432,6 +3495,7 @@ LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, yo
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cannot be possessed.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END,Your possession has ended.
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,Joon forcibly possessed you! Power decreased!
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,Shion forcibly possessed you! Lost HP and MP!
 LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,Shion revived you in exchange for consumables!
@@ -3471,6 +3535,7 @@ LOC_SYSTEM_GOD_SUWAKO_TALK6,Suwako: Don’t worry, I’ll give you plenty of pow
 LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat
 LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,You pulled {0}.
 LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,A calamity was cast upon {0}.
+LOC_SYSTEM_GOD_SWAWKO_TIMESTEP_END,You’ve finished your hibernation. You’re still groggy.
 LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,Suwako has placed a curse on you!
 LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,Suwako has gifted you with a hostile swarm of frogs!
 LOC_SYSTEM_GOD_MINORIKO_WELCOME,Minoriko: May autumn's blessings fall upon this land!
@@ -3572,6 +3637,7 @@ LOC_SYSTEM_GOD_EIRIN_TALK8,Eirin: This is your new form now.
 LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
+LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,Side effects from healing have begun!
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,Eirin turned your potion into plain water!
@@ -3585,6 +3651,7 @@ LOC_SYSTEM_GOD_YUYUKO_TALK4,Yuyuko: Aren’t ghosts cold and cute?
 LOC_SYSTEM_GOD_YUYUKO_TALK5,Yuyuko: Do you like your new friends?
 LOC_SYSTEM_GOD_YUYUKO_TALK6,Yuyuko: Even if you die, your soul will stay with us.
 LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_END,Ghost frequency has returned to normal.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
 LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,Yuyuko gathered ghosts all around you!
 LOC_SYSTEM_GOD_SATORI_WELCOME,Satori: Feel free to roam as you like. The dungeon is vast.
@@ -3759,6 +3826,7 @@ LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,Junko has weakened your strength!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,Junko has taken your speed!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,Junko has drained your stats!
 LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK,You're too pure to taste this potion.
+LOC_SYSTEM_GOD_JUNKO_PURE_END,Your temporary purification has ended.
 LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY,Junko’s Life Purification
 LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE,Your fading life was restored!
 LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.

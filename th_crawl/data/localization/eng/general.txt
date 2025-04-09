@@ -1,107 +1,107 @@
 LOC_SYSTEM_TITLE_TOUHOUCRAWL,Touhou Crawl
-LOC_SYSTEM_TITLE_SHORTINFO,동방프로젝트와 던전크롤의 동인게임
-LOC_SYSTEM_TITLE_YOUR_NAME,당신의 이름은 {0:이다|다}.
-LOC_SYSTEM_TITLE_START,시작한다!
-LOC_SYSTEM_MAINMENU_MAINGAME,메인 게임
-LOC_SYSTEM_MAINMENU_GAMESTART,게임시작
-LOC_SYSTEM_MAINMENU_TUTORIAL,튜토리얼
-LOC_SYSTEM_MAINMENU_MINIGAME,미니 게임
-LOC_SYSTEM_MAINMENU_ARENA,아레나
-LOC_SYSTEM_MAINMENU_SPRINT,스프린트
-LOC_SYSTEM_MAINMENU_ETC,기타
+LOC_SYSTEM_TITLE_SHORTINFO,A Touhou Project and Dungeon Crawl fan game
+LOC_SYSTEM_TITLE_YOUR_NAME,Your name is {0}.
+LOC_SYSTEM_TITLE_START,Begin!
+LOC_SYSTEM_MAINMENU_MAINGAME,Main Game
+LOC_SYSTEM_MAINMENU_GAMESTART,Start Game
+LOC_SYSTEM_MAINMENU_TUTORIAL,Tutorial
+LOC_SYSTEM_MAINMENU_MINIGAME,Mini Game
+LOC_SYSTEM_MAINMENU_ARENA,Arena
+LOC_SYSTEM_MAINMENU_SPRINT,Sprint
+LOC_SYSTEM_MAINMENU_ETC,Etc
 LOC_SYSTEM_MAINMENU_OPTION,Option
-LOC_SYSTEM_MAINMENU_REPLAY,리플레이
-LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT,무슨 모드로 시작할거야?
-LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY,동방 캐릭터로 시작하기 (EASY)
-LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY_SELECT,제일 좋은 것을 부탁해.
-LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL,직접 캐릭터로 시작하기 (NORMAL)
-LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL_SELECT,괜찮다. 문제없어.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT,캐릭터를 선택합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1,안티패턴 초 유도형. 비겁한 호밍무녀로 모든 적을 섬멸하자!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,적성보너스) 탄막적성 +3, 회피적성 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3,보너스) 24개의 호밍아뮬렛, 신은 믿고 시작하지않는다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4,초보자팁) f로 부적을 발사할 수 있습니다. 꼭 근접하기전에 부적을 먼저 던집시다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,무한관통 & 상시공격형. 탄막은 파워! 보이자마자 죽이자!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,적성보너스) 주문시전적성 +2, 파괴마법적성 +3, 회피적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,보너스) +2,+2 빗자루, 영력의 반지, 파괴의 마법책
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,초보자팁) z키로 마법을 쓰고 M키로 마법을 배웁니다. 항상 5키로 마나를 가득 채우고 다닙시다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,고위력 & 광범위 작렬형. 스와코님의 말씀대로!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스)  대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 스펠카드가 사용가능합니다. 대지의 스펠카드는 벽에 맞춰서 폭발데미지를 줍시다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,자동탐색 & 자동공격형. O와 TAB이 당신을 지켜줄지어니
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,적성보너스) 장검적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,보너스) +2,+2 언월도, +2 철방패, +2 사슬 중갑옷, 상처치료물약 2개, 힘물약 2개, 투명감지 반지
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,초보자팁) tab은 자동공격, o는 자동탐색으로 편하게 진행 가능합니다. 위기엔 q로 포션을 마시세요.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,본포! 당신의 뒤에 있어요. 무의식의 힘으로 모두 암살해라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,적성보너스) 단검적성 +2, 정신마법정석 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,보너스) 영구투명특성, 파워보존특성, 15렙에 허찌르기(혼란을 유발하는 근접공격)
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,초보자팁) 전투중이 아닐땐 항상 투명이 된 상태입니다. 조심하세요! 전투중에는 투명이 풀립니다.\n 자고있는 상대를 찌르면 암습과 단검스킬에 비례해서 치명적인 큰 데미지가 들어갑니다.\n x를 누른 상태에서 몬스터위에 커서를 두고 v를 누르면 정보가 뜹니다. 투명보기가 있는지 확인하세요!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,격열! 인간 인페르노. 죽어도 살아나서 돌파하라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,적성보너스) 체력 +20%, 전투적성 +2, 화염마법적성 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 2번까지 부활가능(9레벨, 18레벨에 다다르면 삭제)
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 죽어도 2번에 한해서 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n 죽지않고 9레벨, 18레벨에 다다르면 부활능력이 1개씩 사라집니다. 그러니 죽는 것에 두려워하지마세요!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2  발동적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 천 캇파옷과 공중어뢰, 네시의 오컬트 부적을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 이용하여 발동템을 사용 가능합니다. 공중어뢰는 장거리 탄막을 발사합니다.\n 장착중인 오컬트 부적은 경험치를 모아서 충전이 가능합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!\n 발동템은 영구적인 템이지만 P의 소모가 격렬하니 남용은 금물입니다. 위험한 적과 싸울때 사용합시다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,요정대전쟁! 빛의 삼요정. 혼자보단 같이 싸워라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,보너스) 릴리를 믿고 다른 두 요정과 동료가 되어 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,종족을 선택합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,평범한 스탯과 평범한 적성. 레벨업이 빠르다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,종족으로서의 마법사. 근접전투에 약하고 마법을 잘 다룬다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 무거운 갑옷을 입지 못한다.\n빠른 체력, 영력 재생력과 높은 스텔스를 들고 시작하며 구름의 데미지를 반감해서 받는다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,비행이 가능. 괜찮은 전투능력과 좋은 대기마법 적성을 가졌다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% 높은체력, 높은 근접 전투 적성을 가졌다. 마법은 잘 못 다룬다.\n강한 턱 변이를 들고 시작해 근접공격에서 추가공격을 할 수 있다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,높은 창스킬 숙련도를 가지고있으며 수영이 가능하다.\n불과 대지마법을 제외한 괜찮은 마법 적성을 가졌다. 또한 매우 높은 발동적성을 지녔다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,빠른 이동속도를 지녔고, 손톱이 자라있어 맨손격투에 강하다.\n체력이 약하고 무기,갑옷,방패는 잘 다루지 못한다.\n속성마법은 잘 다루지못하지만 연금술, 정신마법, 특히 전이마법에 강하다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,느린 이동속도를 지녔지만 높은 체력과 레벨에 따라 단단해지는 비늘 변이가 있다.\n무기적성은 좀 나쁘고 무난한 마법적성을 지녔지만 유독 대기술이 특출나게 높다.\n수영을 할 수 있고 전기저항을 1단계 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,몸집이 작고 독저항을 가지고 시작한다.\n전투적인 적성이 좋은 편이고 마법 적성은 그리 좋지 못하다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,높은 전투력을 가지고있으나 무기와 마법은 잘 다루지 못한다.\n몸집이 커서 무거운 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,성장이 느리고 적성이 골고루 나쁘지만 성장해가면서\n요괴의 특성이 발현되어 점점 강력해진다. 4레벨, 9레벨, 13레벨, 18레벨에 특성을 얻는다.\n4레벨에 어느 요괴의 피를 이어받았는지 밝혀지며 이후 특성은 거기에 맞춰서 진행된다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,냉기저항과 독저항을 들고 시작하고 높은 은신치를 가졌다.\n전체적인 적성이 나쁜대신 다른 종족에 비해 체력적성은 괜찮은 편이다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,높은 체력재생력과 낮은 영력재생력을 지녔고 체력을 소모하여 마법을 쓸 수 있다.\n좋은 전투,은밀,회피적성을 지녔지만 무기,갑옷적성이 나쁘다. 마법적성은 전체적으로 나쁘지않지만\n연금술은 잘 못다루는 편이고 소환술 적성이 높다. 투명보기가 있고 P의 자연소모가 빠른 편이다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,직업을 선택합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,전형적인 근접 전투를 선호하는 중갑 전사\n선택한 무기와 무거운 방패, 갑옷을 끼고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,다양한 상황에서 응용할 수 있는 마법을 골고루 사용한다.\n초보 마법사의 책을 들고 마법의 탄막을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,카나코의 무녀로 카나코의 힘을 사용하여 전투하는 근접전투 직업이다.\n무기로는 고헤이(둔기)를 들며 무녀복과 카나코를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_GLADIATOR,원거리와 근접을 골고루 챙기는 하이브리드 회피형전사.\n선택한 무기와 몇개의 탄막, 그리고 작은 방패를 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MONK,맨손격투에 재능이 있는 격투가.\n맨손격투스킬을 높게 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_CRUSADER,마법과 근접전투를 둘다 챙기는 버프에 능한 마법전사.\n선택한 무기와 초보 마전사의 책과 베일링을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_BERSERKER,극단적인 스탯으로 매우 공격적인 장비를 들고 시작한다.\n도끼와 로브를끼고있으며 힘물약2개를 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FIRE_WIZARD,화염을 다루는 화염마법을 배우고 시작하는 원소마법사.\n초보 화염술사의 책을 들고 불꽃을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_COLD_WIZARD,냉기를 다루는 냉기마법을 배우고 시작하는 원소마법사.\n초보 냉기술사의 책을 들고 냉기를 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_EARTH_WIZARD,대지를 다루는 대지마법을 배우고 시작하는 원소마법사.\n초보 대지술사의 책을 들고 돌주먹을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_AIR_WIZARD,대기와 전기를 다루는 대기마법을 배우고 시작하는 원소마법사.\n초보 대기술사의 책을 들고 전격을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,소환수를 다루는 소환마법을 배우고 시작하는 마법사.\n초보 소환술사의 책을 들고 모옥 소환을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ALCHEMIST,연금술을 사용하여 근접전투를 하는 마법사 겸 연금술사.\n초보 연금술사의 책을 들고 돌주먹을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_PSYCHOLOGIST,상대를 조종하는 심리마법을 배우는 디버프에 능한 마법사.\n초보 심리학자의 책을 들고 최면을 배우고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_REAPER,직업을 상징하는 거대한 낫을 들고 시작하는 무서운 존재들.\n저주받은 +3 낫과 로브를 끼고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FANATIC,특정 신에 광적인 믿음을 가지고 있는 신자들.\n텐시 또는 유카리를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ASSASSIN,은신술과 암살의 대가들로 적을 비겁하게 기습한다.\n단검과 독침, 높은 은신치를 가지고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FARMER,우리들이 밥을 먹을 수 있도록 농사를 지으시는 고마우신 분들.\n선택한 무기와 3개의 빵, 미노리코를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MADE,단검정도 던지는건 메이드의 기본 소양 아닌가요?\n빗자루와 4개의 투척용 나이프와 메이드의 복, 그리고 메이드의 기본소양을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,도구를 잘 다루는 만능 기술자.\n선택한 무기와 냉기 스펠카드를 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,우연히 환상향에 흘러들어가버린 우리들이다?\n음식과 전혀 전투에 도움되지않는 카메라만 들고 시작한다.\n아무런 능력도 힘도 없지만 죽기전에 기념촬영 정도는 할 수 있을 것 같다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,3요정중 빛을 다루는 햇빛의 요정.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,적성보너스) 주문시전적성 +1, 파괴마법적성 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,보너스) 루나가 침묵마법 대신 소회복을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,3요정중 기척을 감지하는 별빛의 요정.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,적성보너스) 전투적성 +1, 회피적성 +1, 연금술적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,보너스) 투명보기 특성을 가지고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,3요정중 소리를 지우는 달빛의 요정.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,적성보너스) 단검적성+1, 은밀적성 +1, 정신마법적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 침묵 두루마리를 5장 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON,원하시는 무기를 선택하세요.
-LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC,누구의 광신도가 될건가?
-LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY,같은 키를 한번 더 누르거나 엔터를 쳐서 진행한다.
+LOC_SYSTEM_MAINMENU_REPLAY,Replay
+LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT,Which mode would you like to start with?
+LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY,Start with a Touhou character (EASY)
+LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY_SELECT,Give me the best one.
+LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL,Start with a custom character (NORMAL)
+LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL_SELECT,Alright. No problem.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT,Choose your character.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1,Anti-pattern ultra homing type. Wipe out every enemy as the cowardly homing shrine maiden!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,Aptitude Bonus) Danmaku Aptitude +3, Evasion Aptitude +3
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3,Bonus) 24 Homing Amulets. Start without relying on the gods.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4,Beginner Tip: Press 'f' to fire amulets. Always throw them before getting close!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,Infinite piercing & always-on attacks. Danmaku is power! Kill on sight!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,Aptitude Bonus) Spellcasting +2, Destruction Magic +3, Evasion +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2,+2 Broom, MP Ring, Book of Destruction
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,Beginner Tip: Use 'z' to cast spells and 'M' to learn new ones. Keep your MP full with the 5 key!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & wide explosion type. Just as Suwako commands!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) Combat +2, Evasion +1, Activation +3
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Earth Spell Card (9), Air Spell Card (9), Starts with faith in Suwako.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & auto-attack type. Let 'O' and 'TAB' guard you.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) Longsword +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2,+2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Strength Potions, Ring of Detect Invisibility
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,Beginner Tip: 'TAB' for auto-attack, 'O' for auto-explore. Press 'Q' to drink a potion in emergencies!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Form! I'm right behind you. Assassinate them all with the power of the unconscious!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) Dagger +2, Mind Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,Bonus) Permanent Invisibility Trait, MP Preservation Trait, Lv15 Stab (Confusion-inducing melee attack)
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful—it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Intense! Human Inferno. Revive and break through even after death!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, Combat +2, Fire Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) Can revive twice (removed at Lv9 and Lv18)
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip: You can revive twice after dying. When revived, you explode and restore HP and MP.\nIf you reach Lv9 and Lv18 without dying, the revive abilities disappear one by one. Don’t be afraid to die!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Prehistoric! Triassic Kappa. Break through with the power of items!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) Blunt Weapon +2, Activation +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to activate items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nActivatable items are permanent but consume lots of MP. Use them wisely in tough battles.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Light. It's better to fight together!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your race.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,Balanced stats and aptitude. Levels up quickly.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by race. Weak in melee but excels at magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armor.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,Can fly. Decent combat abilities and strong air magic aptitude.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% more HP, excellent melee aptitude, but poor with magic.\nStarts with a strong jaw mutation for bonus melee attacks.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent activation aptitude.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armor.\nWeak in elemental magic, but strong in alchemy, mind magic, and especially teleportation.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutations that harden with level.\nMediocre weapon aptitude, average magic skills, but excels in air techniques.\nCan swim and starts with 1 level of electricity resistance.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armor. Has high HP and horns for bonus damage.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,Grows slowly and has poor overall aptitude, but evolves with yokai traits.\nAt Lv4, you discover your yokai bloodline, gaining traits at Lv4, 9, 13, and 18.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other races.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armor aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude. Can see invisibility and has fast MP drain.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,Choose your job.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,A typical heavy-armored melee fighter.\nStarts with a chosen weapon, heavy shield, and armor.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,Uses a wide variety of spells adaptable to many situations.\nStarts with a beginner’s spellbook and learns magic danmaku.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,A melee fighter who uses Kanako’s power as her shrine maiden.\nWields a gohei (blunt weapon) and starts with shrine maiden clothes and Kanako’s blessing.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_GLADIATOR,A hybrid evasion fighter skilled in both ranged and melee combat.\nStarts with a chosen weapon, some danmaku, and a small shield.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MONK,A martial artist talented in unarmed combat.\nStarts with high unarmed skill.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_CRUSADER,A magic warrior that uses both melee and buffs.\nStarts with a chosen weapon, a novice magic warrior's book, and the Veiling spell.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_BERSERKER,Equipped with extremely aggressive gear based on extreme stats.\nStarts with an axe, a robe, and 2 strength potions.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FIRE_WIZARD,An elemental mage specializing in fire magic.\nStarts with a novice pyromancer’s book and learns fireball.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_COLD_WIZARD,An elemental mage specializing in cold magic.\nStarts with a novice cryomancer’s book and learns frost.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_EARTH_WIZARD,An elemental mage specializing in earth magic.\nStarts with a novice geomancer’s book and learns rock punch.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_AIR_WIZARD,An elemental mage specializing in air and electricity magic.\nStarts with a novice aeromancer’s book and learns lightning strike.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,A summoner who begins with summoning magic.\nStarts with a novice summoner’s book and learns call Mook.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ALCHEMIST,A close-combat mage who uses alchemy.\nStarts with a novice alchemist’s book and learns rock punch.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_PSYCHOLOGIST,A debuffing mage who uses mind-controlling psychic spells.\nStarts with a novice psychologist’s book and learns hypnosis.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_REAPER,Frightening beings who wield a giant scythe as a job symbol.\nStarts with a cursed +3 scythe and a robe.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FANATIC,Fanatics with blind devotion to a specific god.\nStarts with belief in Tenshi or Yukari.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ASSASSIN,Masters of stealth and assassination who ambush enemies.\nStarts with a dagger, poison darts, and high stealth.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FARMER,The kind souls who farm so we can eat.\nStarts with a chosen weapon, 3 loaves of bread, and belief in Minoriko.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MADE,Throwing knives is just basic maid etiquette, right?\nStarts with a broom, 4 throwing knives, a maid outfit, and maid basics.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,A versatile technician skilled with tools.\nStarts with a chosen weapon and a cold spell card.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,People like us who accidentally ended up in Gensokyo?\nStarts with food and a useless camera that won’t help in combat.\nHas no powers or strength, but might be able to take a memorial photo before dying.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,One of the Three Fairies of Light, controls sunlight.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,Aptitude Bonus) Spellcasting +1, Destruction Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,Bonus) Luna starts with Minor Healing instead of Silence.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,One of the Three Fairies of Light, senses presences via starlight.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,Aptitude Bonus) Combat +1, Evasion +1, Alchemy +1
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,Bonus) Starts with See Invisibility trait.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,One of the Three Fairies of Light, erases sound with moonlight.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,Aptitude Bonus) Dagger +1, Stealth +1, Mind Magic +1
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Starts with 5 Scrolls of Silence.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,Beginner Tip: The Three Fairies always fight as a team, not alone.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,Remember: your life comes first when in danger. Allies will revive even if they fall.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,If you’re alone, don’t save consumables. You’re most vulnerable without allies.
+LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON,Choose your preferred weapon.
+LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC,Which deity will you become a fanatic for?
+LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY,Press the same key again or Enter to proceed.
 LOC_SYSTEM_OPTION_MENU_LANGUAGE,a - LANGUAGE : ENGLISH
 LOC_SYSTEM_OPTION_MENU_ESC,esc - back
-LOC_SYSTEM_WELCOME_FIRST,환상향에 온걸 환영한다!
+LOC_SYSTEM_WELCOME_FIRST,Welcome to Gensokyo!
 LOC_SYSTEM_WELCOME,Welcome back to Gensokyo!
 LOC_SYSTEM_LOS_MON,You see a monster.
 LOC_SYSTEM_LOS_NOMON,No monsters in sight.
@@ -113,69 +113,69 @@ LOC_SYSTEM_UNABLE_MOVE,You can't move there.
 LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
-LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL,이 주문을 배우기엔 레벨이 모자란다.
-LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,남은 마법 레벨이 {0}만큼 모자란다.
-LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY,당신은 더 이상 주문을 기억할 공간이 없다.
+LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL,Your level is too low to learn this spell.
+LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,You need {0} more spell level(s) to learn this.
+LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY,You have no more space to memorize new spells.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
 LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST,That spell does not exist.
 LOC_SYSTEM_MEMORIZE_SPELL_ASK,Would you like to memorize this spell? (y/n)
-LOC_SYSTEM_MEMORIZE_SPELL_START,마법을 익히기 시작했다.
-LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS,주문을 익히는데 성공했다.
+LOC_SYSTEM_MEMORIZE_SPELL_START,You started memorizing the spell.
+LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS,You successfully memorized the spell.
 LOC_SYSTEM_MEMORIZE_HELP,Press {0} to memorize a spell.
 LOC_SYSTEM_ALPHABET_ASK,Which alphabet would you like to change to?
 LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
-LOC_SYSTEM_ALREADY_EQUIP,이미 장착하고 있다.
-LOC_SYSTEM_ALREADY_USE,이 아이템은 이미 사용중이다.
-LOC_SYSTEM_ALREADY_EQUIP_JEWERLY,이미 장착하고 있는 장신구다.
-LOC_SYSTEM_EQUIP_ISNT_ARMOUR,이 아이템은 방어구가 아니다.
-LOC_SYSTEM_EQUIP_ISNT_JEWERLY,이 아이템은 장신구가 아니다.
-LOC_SYSTEM_EQUIP_TOO_BIG,당신은 이 방어구를 착용하기엔 몸이 너무 크다.
-LOC_SYSTEM_EQUIP_TOO_SMALL,당신은 이 방어구를 착용하기엔 몸이 너무 작다.
-LOC_SYSTEM_EQUIP_CURSE_ITEM,헉! 이 아이템은 끔찍하게 차갑다.
-LOC_SYSTEM_EQUIP_ALLITEM_CURSE,모든 아이템이 저주에 걸려있다.
-LOC_SYSTEM_EQUIP_PANALTY_WARN1,불편한 방어구는 당신의 명중에 영향을 준다.
-LOC_SYSTEM_EQUIP_PANALTY_WARN2,불편한 방어구는 당신의 이동속도와 명중에 영향을 준다.
-LOC_SYSTEM_EQUIP_PANALTY_WARN3,방어구로 인해 극심한 패널티를 받고 있다.
-LOC_SYSTEM_EQUIP_CANT_SPELLCARD,스펠카드 선언중엔 스펠카드 탈착이 불가능하다.
-LOC_SYSTEM_SHEILD_PANALTY1,방패와 무기를 함께 착용했다. (공격속도 0.1 느려짐)
-LOC_SYSTEM_SHEILD_PANALTY2,이 무기는 방패와 같이 쓰기엔 약간 불편하다. (공격속도 0.2 느려짐)
-LOC_SYSTEM_SHEILD_PANALTY3,이 무기는 방패와 같이 쓰기엔 아주 버겁다. (공격속도 0.3 느려짐)
-LOC_SYSTEM_CANT_EQUIP_LIKEIT,그렇게 장착할 수 없다.
-LOC_SYSTEM_CANT_EQUIP_HORN,당신의 뿔이 이 장비를 쓰는걸 방해한다.
-LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,당신은 다리가 없다!
-LOC_SYSTEM_CANT_EQUIP_CLAW,당신의 손톱때문에 장갑을 낄 수 없다!
-LOC_SYSTEM_CANT_UNEQUIP_EXIST,벗을 아이템이 없다.
-LOC_SYSTEM_NOT_EQUIP_ITEM,그것을 입고 있지 않다!
-LOC_SYSTEM_UNEQUIP_AMULET_YN,정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)
+LOC_SYSTEM_ALREADY_EQUIP,Already equipped.
+LOC_SYSTEM_ALREADY_USE,This item is already in use.
+LOC_SYSTEM_ALREADY_EQUIP_JEWERLY,You are already wearing this piece of jewelry.
+LOC_SYSTEM_EQUIP_ISNT_ARMOUR,This item is not armor.
+LOC_SYSTEM_EQUIP_ISNT_JEWERLY,This item is not jewelry.
+LOC_SYSTEM_EQUIP_TOO_BIG,This armor is too big for you to wear.
+LOC_SYSTEM_EQUIP_TOO_SMALL,This armor is too small for you to wear.
+LOC_SYSTEM_EQUIP_CURSE_ITEM,Yikes! This item is terrifyingly cold.
+LOC_SYSTEM_EQUIP_ALLITEM_CURSE,All your equipment is cursed.
+LOC_SYSTEM_EQUIP_PANALTY_WARN1,Uncomfortable armor affects your accuracy.
+LOC_SYSTEM_EQUIP_PANALTY_WARN2,Uncomfortable armor affects both your movement speed and accuracy.
+LOC_SYSTEM_EQUIP_PANALTY_WARN3,You’re receiving severe penalties from your armor.
+LOC_SYSTEM_EQUIP_CANT_SPELLCARD,You can’t unequip a spell card while declaring it.
+LOC_SYSTEM_SHEILD_PANALTY1,You equipped a weapon and shield together. (Attack speed -0.1)
+LOC_SYSTEM_SHEILD_PANALTY2,This weapon is a bit awkward to use with a shield. (Attack speed -0.2)
+LOC_SYSTEM_SHEILD_PANALTY3,This weapon is very difficult to use with a shield. (Attack speed -0.3)
+LOC_SYSTEM_CANT_EQUIP_LIKEIT,You can’t equip it like that.
+LOC_SYSTEM_CANT_EQUIP_HORN,Your horns prevent you from using this equipment.
+LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,You have no legs!
+LOC_SYSTEM_CANT_EQUIP_CLAW,You can’t wear gloves because of your claws!
+LOC_SYSTEM_CANT_UNEQUIP_EXIST,You have nothing to unequip.
+LOC_SYSTEM_NOT_EQUIP_ITEM,You’re not wearing that!
+LOC_SYSTEM_UNEQUIP_AMULET_YN,Are you sure you want to unequip the charged amulet? Charge will be lost! (y/n)
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
-LOC_SYSTEM_OUCH,아얏!
-LOC_SYSTEM_OUCH_THIS_REALLY_HURTS,악! 이건 정말로 아프다!
-LOC_SYSTEM_LOW_HEALTH_WARNING,낮은 체력 경고
-LOC_SYSTEM_WAKEUP_WITH_DAMAGE,데미지에 의해 잠에서 깼다!
+LOC_SYSTEM_OUCH,Ouch!
+LOC_SYSTEM_OUCH_THIS_REALLY_HURTS,Agh! That really hurts!
+LOC_SYSTEM_LOW_HEALTH_WARNING,Low Health Warning
+LOC_SYSTEM_WAKEUP_WITH_DAMAGE,Woke up from the damage!
 LOC_SYSTEM_MORE,More
-LOC_SYSTEM_OR,{0} 또는 {1}
-LOC_SYSTEM_LEVELUP_MESSGE,당신의 레벨이 올랐다! 레벨 {0}
-LOC_SYSTEM_LEVELUP_STAT_MESSGE,당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능
-LOC_SYSTEM_LEVELUP_STR,강력해졌다.
-LOC_SYSTEM_LEVELUP_DEX,민첩해졌다.
-LOC_SYSTEM_LEVELUP_INT,똑똑해졌다.
+LOC_SYSTEM_OR,{0} or {1}
+LOC_SYSTEM_LEVELUP_MESSGE,Your level increased! Level {0}
+LOC_SYSTEM_LEVELUP_STAT_MESSGE,Choose a stat to increase. (S)tr - Strength, (D)ex - Dexterity, (I)nt - Intelligence
+LOC_SYSTEM_LEVELUP_STR,Became stronger.
+LOC_SYSTEM_LEVELUP_DEX,Became more agile.
+LOC_SYSTEM_LEVELUP_INT,Became smarter.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
-LOC_SYSTEM_FORBIDZONE_YN,정말 들어갈거야?(y/n)
+LOC_SYSTEM_FORBIDZONE_YN,Are you really going in? (y/n)
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
 LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
 LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
 LOC_SYSTEM_RECORVER_STAT,You have recovered your lost stats.
-LOC_SYSTEM_RECORVER_STAT_STR,잃어버린 힘이 회복되었다.
-LOC_SYSTEM_RECORVER_STAT_DEX,잃어버린 민첩이 회복되었다.
-LOC_SYSTEM_RECORVER_STAT_INT,잃어버린 지능이 회복되었다.
+LOC_SYSTEM_RECORVER_STAT_STR,Your lost strength has been restored.
+LOC_SYSTEM_RECORVER_STAT_DEX,Your lost dexterity has been restored.
+LOC_SYSTEM_RECORVER_STAT_INT,Your lost intelligence has been restored.
 LOC_SYSTEM_GAIN_AC,You feel tougher.
-LOC_SYSTEM_SWAP_ALLY,위치를 서로 바꿨다.
-LOC_SYSTEM_CANT_SWAP_ALLY,이동할 수 없다.
-LOC_SYSTEM_CANT_MOVE_WITH_OBJECT,움직일수 없다! 무엇인가 당신을 고정시키고있다!
-LOC_SYSTEM_STASIS_PENALTY,당신은 전이방해도중에 전이를 사용할 수 없다.
+LOC_SYSTEM_SWAP_ALLY,Switched places with your ally.
+LOC_SYSTEM_CANT_SWAP_ALLY,You can’t move.
+LOC_SYSTEM_CANT_MOVE_WITH_OBJECT,You can’t move! Something is holding you in place!
+LOC_SYSTEM_STASIS_PENALTY,You can’t teleport while stasis interference is active.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
@@ -238,18 +238,18 @@ LOC_SYSTEM_SHOUT_FINISH,You shouted and drew attention.
 LOC_SYSTEM_SHOUT_WHO,Who do you want to order an attack on?
 LOC_SYSTEM_SHOUT_CANCLE,You didn't shout anything.
 LOC_SYSTEM_ALREADY_FULL_POWER,You are already at full power!
-LOC_SYSTEM_IS_EQUIP_ITEM,장착중인 아이템이다.
-LOC_SYSTEM_PICKUP_PITEM,P가 증가했다.
-LOC_SYSTEM_PICKUP_RUNE,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
-LOC_SYSTEM_PICKUP_YINYANG_ORB,당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다
+LOC_SYSTEM_IS_EQUIP_ITEM,This item is currently equipped.
+LOC_SYSTEM_PICKUP_PITEM,P increased.
+LOC_SYSTEM_PICKUP_RUNE,You picked up {0}! (Press ] to view collected runes)
+LOC_SYSTEM_PICKUP_YINYANG_ORB,You picked up the Yin-Yang Orb. Carry it to Floor 1 for victory.
 LOC_SYSTEM_PICKUP_SELECT_ASK,Pick up {0}? (Yes:{1} No:{2} All:{3} Choose:{4})
-LOC_SYSTEM_PICKUP_NUMBER,({0}개 획득)
-LOC_SYSTEM_PICKUP_LIMIT,가질 수 있는 갯수를 초과했다.
-LOC_SYSTEM_EAT_STARTING,음식을 먹기 시작했다.
-LOC_SYSTEM_EAT_FINISH,음식을 전부 먹었다.
-LOC_SYSTEM_EAT_NOT_FOOD,이건 음식이 아니다.
-LOC_SYSTEM_DRINK_NOT_POTION,이건 마실 수 없다.
-LOC_SYSTEM_DISCORVER_SOMETHING,{0:을|를} 발견했다.
+LOC_SYSTEM_PICKUP_NUMBER,(Acquired {0})
+LOC_SYSTEM_PICKUP_LIMIT,You’ve exceeded the item limit.
+LOC_SYSTEM_EAT_STARTING,You began eating the food.
+LOC_SYSTEM_EAT_FINISH,You finished eating.
+LOC_SYSTEM_EAT_NOT_FOOD,This is not food.
+LOC_SYSTEM_DRINK_NOT_POTION,This is not drinkable.
+LOC_SYSTEM_DISCORVER_SOMETHING,Discovered {0}.
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
 LOC_SYSTEM_AUTOPICKUP_ON,Auto-pickup enabled.
 LOC_SYSTEM_AUTOPICKUP_OFF,Auto-pickup disabled. (Press {0} to enable again)
@@ -293,7 +293,7 @@ LOC_SYSTEM_REST_HP,Your HP is restored.
 LOC_SYSTEM_REST_MP,Your MP is restored.
 LOC_SYSTEM_REST_DONE,finish resting.
 LOC_SYSTEM_READ_SCROLL,You read {0}.
-LOC_SYSTEM_READ_CANT_READ,이건 읽을 수 없다.
+LOC_SYSTEM_READ_CANT_READ,You can’t read this.
 LOC_SYSTEM_HEALED,{0} is healed.
 LOC_SYSTEM_HEALED2,You are healed.
 LOC_SYSTEM_IDENTIFY_ITEM,This is {0}.
@@ -312,7 +312,7 @@ LOC_SYSTEM_HOTKEY,Hotkey
 LOC_SYSTEM_HOTKEYCHANGE,Change Hotkey
 LOC_SYSTEM_NAME,Name
 LOC_SYSTEM_SKILL_NAME,Skill Name
-LOC_SYSTEM_SPELL_NAME,마법명
+LOC_SYSTEM_SPELL_NAME,Spell Name
 LOC_SYSTEM_SKILL,Skill
 LOC_SYSTEM_REMEMBER_MAGIC,Remembered Spells
 LOC_SYSTEM_SCHOOL,School
@@ -330,11 +330,11 @@ LOC_SYSTEM_INVENTORY,Inventory
 LOC_SYSTEM_INVENTORY_ITEM,Number of Items
 LOC_SYSTEM_EQUIP,Equip
 LOC_SYSTEM_UNEQUIP,Unequip
-LOC_SYSTEM_DRINK,마시기
-LOC_SYSTEM_READ,읽기
-LOC_SYSTEM_EAT,먹기
-LOC_SYSTEM_EVOKE,발동
-LOC_SYSTEM_DISCARD,버리기
+LOC_SYSTEM_DRINK,Drink
+LOC_SYSTEM_READ,Read
+LOC_SYSTEM_EAT,Eat
+LOC_SYSTEM_EVOKE,Evoke
+LOC_SYSTEM_DISCARD,Discard
 LOC_SYSTEM_LEFT_HAND,Left Hand
 LOC_SYSTEM_RIGHT_HAND,Right Hand
 LOC_SYSTEM_EQUIP_TANMAC,Danmaku
@@ -354,7 +354,7 @@ LOC_SYSTEM_REMAIN_EXP,Next Level
 LOC_SYSTEM_LEVEL,Level
 LOC_SYSTEM_LEVEL_WITH_NUMBER,Level {0}
 LOC_SYSTEM_MAX_LEVEL,Max Level
-LOC_SYSTEM_LEVELUP,레벨업
+LOC_SYSTEM_LEVELUP,Level Up
 LOC_SYSTEM_GRADE,Grade {0}
 LOC_SYSTEM_REPLAY_MODE,Replay Mode
 LOC_SYSTEM_WIZARD_MODE,Wizard Mode
@@ -383,7 +383,7 @@ LOC_SYSTEM_BASE_ATTACK_SPEED,Base Attack Speed
 LOC_SYSTEM_MINIMUM_ATTACK_SPEED,Minimum Attack Speed
 LOC_SYSTEM_CURRENT_TANMAC_SPEED,Current Danmaku Speed
 LOC_SYSTEM_DEFAULT_DEFENSE,Base Defense
-LOC_SYSTEM_DEFAULT_SHIELD,기본 방어력
+LOC_SYSTEM_DEFAULT_SHIELD,Base Defense
 LOC_SYSTEM_DEFAULT_PENALTY,Base Penalty
 LOC_SYSTEM_MINIMUM_PENALTY,Minimum Penalty
 LOC_SYSTEM_YOU,You
@@ -745,7 +745,7 @@ LOC_SYSTEM_UI_NONE,None
 LOC_SYSTEM_UI_CANT_EQUIP,Cannot Equip
 LOC_SYSTEM_UI_WEAPON,Weapon
 LOC_SYSTEM_UI_UNARMED,Unarmed
-LOC_SYSTEM_UI_INEFFICIENT,엉터리
+LOC_SYSTEM_UI_INEFFICIENT,Useless
 LOC_SYSTEM_UI_TANMAC,Danmaku
 LOC_SYSTEM_UI_BODY,Body
 LOC_SYSTEM_UI_HEAD,Head
@@ -765,73 +765,73 @@ LOC_SYSTEM_CONTINUE_CRAWL,Carry on!
 LOC_SYSTEM_CONTINUE_EXPRO,Keep exploring!
 LOC_SYSTEM_GOOD_CHOICE,Good choice!
 LOC_SYSTEM_NEED_PREPARATION,Be more prepared next time!
-LOC_SYSTEM_DANGER_MSG,위험해!
+LOC_SYSTEM_DANGER_MSG,Danger!
 LOC_SYSTEM_OK,Got it!
-LOC_SYSTEM_YOU_POISONED,당신은 독에 걸렸다.
-LOC_SYSTEM_YOU_MORE_POISONED,당신의 독은 심해졌다.
-LOC_SYSTEM_YOU_TELE,당신은 공간의 불안정함을 느꼈다.
-LOC_SYSTEM_YOU_TELE_STABLE,당신 주위의 공간은 안정되었다.
-LOC_SYSTEM_YOU_MIGHT,당신은 강력해졌다.
-LOC_SYSTEM_YOU_MORE_MIGHT,당신의 더욱 더 강력해졌다.
-LOC_SYSTEM_YOU_CLEVER,당신은 똑똑해졌다.
-LOC_SYSTEM_YOU_MORE_CLEVER,당신의 더욱 더 똑똑해졌다.
-LOC_SYSTEM_YOU_AGILITY,당신은 민첩해졌다.
-LOC_SYSTEM_YOU_MORE_AGILITY,당신의 더욱 더 민첩해졌다.
-LOC_SYSTEM_YOU_HASTE,당신은 빨라졌다.
-LOC_SYSTEM_YOU_MORE_HASTE,당신의 가속은 좀 더 길어졌다.
-LOC_SYSTEM_YOU_PURE_HASTE,당신은 살의에 의해 빨라졌다.
-LOC_SYSTEM_YOU_MORE_PURE_HASTE,당신의 살의는 좀 더 길어졌다.
-LOC_SYSTEM_YOU_CONFUSE,당신은 혼란스러워졌다.
-LOC_SYSTEM_YOU_MORE_CONFUSE,당신은 더욱 혼란스러워졌다.
-LOC_SYSTEM_YOU_SLOW,당신은 느려졌다.
-LOC_SYSTEM_YOU_MORE_SLOW,당신의 더욱 더 느려졌다.
-LOC_SYSTEM_YOU_FROZEN,당신은 몸이 얼어붙어 움직이기 힘들어졌다.
-LOC_SYSTEM_YOU_MORE_FROZEN,당신의 더욱 몸이 얼어붙어 움직이기 힘들어졌다.
-LOC_SYSTEM_YOU_ELEC,당신은 전기를 방출하기 시작했다.
-LOC_SYSTEM_YOU_MORE_ELEC,당신은 더 오랫동안 전기를 방출한다.
-LOC_SYSTEM_YOU_PARALYSE,당신은 마비되었다.
-LOC_SYSTEM_YOU_FLY,당신은 공중에 뜨기 시작했다.
-LOC_SYSTEM_YOU_MORE_FLY,당신은 더 오랫동안 공중에 뜨게 되었다.
-LOC_SYSTEM_YOU_GLOW,당신은 빛을 내기 시작했다.
-LOC_SYSTEM_YOU_MORE_GLOW,당신은 더 강한 빛을 내고 있다.
-LOC_SYSTEM_YOU_GRAZE,당신의 탄막을 피하는 감각이 좋아졌다.
-LOC_SYSTEM_YOU_MORE_GRAZE,당신의 탄막을 피하는 감각이 지속된다.
-LOC_SYSTEM_YOU_SILENCE,당신은 주변의 소리를 지웠다.
-LOC_SYSTEM_YOU_MORE_SILENCE,당신의 고요가 더욱 길어졌다.
-LOC_SYSTEM_YOU_SICK,당신은 아파졌다.
-LOC_SYSTEM_YOU_MORE_SICK,당신은 더욱 아파졌다.
-LOC_SYSTEM_YOU_VEILING,당신 주변에 바람이 휘감긴다.
-LOC_SYSTEM_YOU_MORE_VEILING,당신 주변에 휘감긴 바람이 좀 더 오래간다.
-LOC_SYSTEM_YOU_INVISIBLE,당신은 투명해졌다.
-LOC_SYSTEM_YOU_MORE_INVISIBLE,당신은 더 오래 투명해졌다.
-LOC_SYSTEM_YOU_SWIFT,당신은 다리가 빨라졌다.
-LOC_SYSTEM_YOU_SLUGGISH,당신은 다리가 느려졌다
-LOC_SYSTEM_YOU_MORE_SWIFT,당신은 더 오래 달릴 수 있다.
-LOC_SYSTEM_YOU_SWIFT_FROM_SLUGGISH,당신은 느린 걸음을 고쳐세웠다.
-LOC_SYSTEM_YOU_SLUGGISH_FROM_SWIFT,당신은 가볍던 발이 무거워진 것을 느꼈다.
-LOC_SYSTEM_YOU_MORE_SLUGGISH,당신은 다리가 느려졌다.
-LOC_SYSTEM_YOU_SUPERMAN,당신은 다리가 엄청나게 빨라졌다.
-LOC_SYSTEM_YOU_MORE_SUPERMAN,당신은 더 오래 달릴 수 있다.
-LOC_SYSTEM_YOU_WIND,당신의 주변에 바람이 휘감겼다.
-LOC_SYSTEM_YOU_MORE_WIND,당신의 주변에 바람이 더 휘감겼다.
-LOC_SYSTEM_YOU_KNIFE_COLLECT,당신은 자동으로 탄막을 회수하기 시작한다.
-LOC_SYSTEM_YOU_MORE_KNIFE_COLLECT,탄막을 회수하는 시간이 길어졌다.
-LOC_SYSTEM_YOU_DRUNKEN,당신은 취했다.
-LOC_SYSTEM_YOU_MORE_DRUNKEN,당신은 주정뱅이다.
-LOC_SYSTEM_YOU_LUNATIC,당신은 광기에 휩싸였다.
-LOC_SYSTEM_YOU_MIRROR,당신은 모든 데미지를 반사한다.
-LOC_SYSTEM_YOU_PARADOX,당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다.
-LOC_SYSTEM_YOU_TRANS_PANALTY1,약간의 시공간 부작용을 받았다.
-LOC_SYSTEM_YOU_TRANS_PANALTY2,상당한 시공간 부작용을 받았다.
-LOC_SYSTEM_YOU_TRANS_PANALTY3,어마어마한 시공간 부작용을 받았다.
-LOC_SYSTEM_YOU_THE_WORLD,더 월드!
-LOC_SYSTEM_YOU_STASIS,당신은 전이를 방해받았다.
-LOC_SYSTEM_YOU_MORE_STASIS,당신의 전이 방해는 더욱 길어졌다.
-LOC_SYSTEM_YOU_FORCE_WEAK,당신은 공격과 마법의 위력이 대폭 감소했다.
-LOC_SYSTEM_YOU_FORCE_STRONG,당신의 공격과 마법의 위력은 대폭 증가했다.
-LOC_SYSTEM_YOU_BLIND,당신의 눈은 침침해졌다.
-LOC_SYSTEM_YOU_MORE_BLIND,당신의 눈은 더욱 더 침침해졌다!
-LOC_SYSTEM_YOU_SLEEP,당신은 잠에 빠졌다!
+LOC_SYSTEM_YOU_POISONED,You are poisoned.
+LOC_SYSTEM_YOU_MORE_POISONED,Your poisoning worsened.
+LOC_SYSTEM_YOU_TELE,You felt spatial instability.
+LOC_SYSTEM_YOU_TELE_STABLE,The space around you stabilized.
+LOC_SYSTEM_YOU_MIGHT,You feel powerful.
+LOC_SYSTEM_YOU_MORE_MIGHT,You feel even more powerful.
+LOC_SYSTEM_YOU_CLEVER,You feel clever.
+LOC_SYSTEM_YOU_MORE_CLEVER,You feel even more clever.
+LOC_SYSTEM_YOU_AGILITY,You feel agile.
+LOC_SYSTEM_YOU_MORE_AGILITY,You feel even more agile.
+LOC_SYSTEM_YOU_HASTE,You became faster.
+LOC_SYSTEM_YOU_MORE_HASTE,Your haste lasts longer.
+LOC_SYSTEM_YOU_PURE_HASTE,You became faster with murderous intent.
+LOC_SYSTEM_YOU_MORE_PURE_HASTE,Your murderous speed lasted longer.
+LOC_SYSTEM_YOU_CONFUSE,You became confused.
+LOC_SYSTEM_YOU_MORE_CONFUSE,You became even more confused.
+LOC_SYSTEM_YOU_SLOW,You became slower.
+LOC_SYSTEM_YOU_MORE_SLOW,You became even slower.
+LOC_SYSTEM_YOU_FROZEN,You were frozen and can barely move.
+LOC_SYSTEM_YOU_MORE_FROZEN,You became even more frozen and immobile.
+LOC_SYSTEM_YOU_ELEC,You started discharging electricity.
+LOC_SYSTEM_YOU_MORE_ELEC,You continue discharging electricity longer.
+LOC_SYSTEM_YOU_PARALYSE,You are paralyzed.
+LOC_SYSTEM_YOU_FLY,You started floating in the air.
+LOC_SYSTEM_YOU_MORE_FLY,You floated in the air for a longer time.
+LOC_SYSTEM_YOU_GLOW,You began to emit light.
+LOC_SYSTEM_YOU_MORE_GLOW,You emitted a stronger light.
+LOC_SYSTEM_YOU_GRAZE,Your sense for grazing bullets improved.
+LOC_SYSTEM_YOU_MORE_GRAZE,Your bullet-grazing sense continues.
+LOC_SYSTEM_YOU_SILENCE,You silenced the surrounding sounds.
+LOC_SYSTEM_YOU_MORE_SILENCE,Your silence lasted longer.
+LOC_SYSTEM_YOU_SICK,You became ill.
+LOC_SYSTEM_YOU_MORE_SICK,Your illness worsened.
+LOC_SYSTEM_YOU_VEILING,Wind swirled around you.
+LOC_SYSTEM_YOU_MORE_VEILING,The swirling wind around you lasted longer.
+LOC_SYSTEM_YOU_INVISIBLE,You turned invisible.
+LOC_SYSTEM_YOU_MORE_INVISIBLE,You remained invisible longer.
+LOC_SYSTEM_YOU_SWIFT,Your legs became faster.
+LOC_SYSTEM_YOU_SLUGGISH,Your legs became sluggish.
+LOC_SYSTEM_YOU_MORE_SWIFT,You can run for longer.
+LOC_SYSTEM_YOU_SWIFT_FROM_SLUGGISH,You shook off your slow pace.
+LOC_SYSTEM_YOU_SLUGGISH_FROM_SWIFT,Your once-light steps now feel heavy.
+LOC_SYSTEM_YOU_MORE_SLUGGISH,Your legs became even more sluggish.
+LOC_SYSTEM_YOU_SUPERMAN,Your legs became incredibly fast.
+LOC_SYSTEM_YOU_MORE_SUPERMAN,You can run even longer.
+LOC_SYSTEM_YOU_WIND,Wind wrapped around you.
+LOC_SYSTEM_YOU_MORE_WIND,Even more wind wrapped around you.
+LOC_SYSTEM_YOU_KNIFE_COLLECT,You began automatically retrieving bullets.
+LOC_SYSTEM_YOU_MORE_KNIFE_COLLECT,The bullet retrieval duration increased.
+LOC_SYSTEM_YOU_DRUNKEN,You became drunk.
+LOC_SYSTEM_YOU_MORE_DRUNKEN,You’re completely wasted.
+LOC_SYSTEM_YOU_LUNATIC,You were consumed by madness.
+LOC_SYSTEM_YOU_MIRROR,You reflected all damage.
+LOC_SYSTEM_YOU_PARADOX,You're ready to fire consecutive danmaku through your doppelgänger.
+LOC_SYSTEM_YOU_TRANS_PANALTY1,Suffered a minor space-time side effect.
+LOC_SYSTEM_YOU_TRANS_PANALTY2,Suffered a significant space-time side effect.
+LOC_SYSTEM_YOU_TRANS_PANALTY3,Suffered an extreme space-time side effect.
+LOC_SYSTEM_YOU_THE_WORLD,The World!
+LOC_SYSTEM_YOU_STASIS,Your teleportation was interrupted.
+LOC_SYSTEM_YOU_MORE_STASIS,Your teleportation block lasted longer.
+LOC_SYSTEM_YOU_FORCE_WEAK,Your physical and magical power greatly decreased.
+LOC_SYSTEM_YOU_FORCE_STRONG,Your physical and magical power greatly increased.
+LOC_SYSTEM_YOU_BLIND,Your vision became blurry.
+LOC_SYSTEM_YOU_MORE_BLIND,Your vision became even blurrier!
+LOC_SYSTEM_YOU_SLEEP,You fell asleep!
 LOC_SYSTEM_MON_RED_DESIRE,Red Spirit
 LOC_SYSTEM_MON_BLUE_DESIRE,Blue Spirit
 LOC_SYSTEM_MON_GREEN_DESIRE,Green Spirit
@@ -1006,7 +1006,7 @@ LOC_SYSTEM_DEAD_SUMMON,{0} vanishes into smoke.
 LOC_SYSTEM_DEAD_REIMU,{0} slips into the gap.
 LOC_SYSTEM_GAIN_EXPERIENCE,You feel your experience grow.
 LOC_SYSTEM_GAIN_NO_EXPERIENCE_WITH_FEAR,No experience gained from enemies that lost the will to fight.
-LOC_SYSTEM_NOTE_START,{0}, {1} {2} {3}. 던전의 탐험을 시작했다.
+LOC_SYSTEM_NOTE_START,{0}, {1} {2} {3}. began their dungeon adventure.
 LOC_SYSTEM_NOTE_UNIQUE_FIND,You’ve encountered the named foe: {0}.
 LOC_SYSTEM_NOTE_UNIQUE_KILL,You’ve slain the named foe: {0}.
 LOC_SYSTEM_NOTE_UNIQUE_DEAD,The named foe {0} has died.
@@ -1014,18 +1014,18 @@ LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0} has died.
 LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined as an ally.
 LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined as an ally.
 LOC_SYSTEM_NOTE_DUNGEON_ENTER,Dungeon Progress: Entered {0}.
-LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,스킬 {0}의 레벨업. 스킬레벨 {1}
-LOC_SYSTEM_NOTE_MEMORIZE_SPELL,주문 기억 : {0}레벨 {1}
-LOC_SYSTEM_NOTE_GET_ITEM,{0:을|를} 얻었다.
-LOC_SYSTEM_NOTE_GET_YINYANG_ORB,음양옥을 얻었다.
+LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,Skill {0} leveled up. Skill Level {1}
+LOC_SYSTEM_NOTE_MEMORIZE_SPELL,Spell memorized: Level {0} {1}
+LOC_SYSTEM_NOTE_GET_ITEM,Obtained {0}.
+LOC_SYSTEM_NOTE_GET_YINYANG_ORB,Obtained the Yin-Yang Orb.
 LOC_SYSTEM_NOTE_GOD_WORSHIP,You have become a follower of {0}.
 LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
 LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
 LOC_SYSTEM_NOTE_GOD_GIFT,Received a gift from {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
 LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
-LOC_SYSTEM_NOTE_SATORI_REUNION,사토리와 재회했다.
-LOC_SYSTEM_NOTE_SATORI_WORSHIP,사토리의 애완동물이 되었다.
+LOC_SYSTEM_NOTE_SATORI_REUNION,Reunited with Satori.
+LOC_SYSTEM_NOTE_SATORI_WORSHIP,Became Satori’s pet.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,Half-Youkai Mutation Strengthened
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
@@ -1373,12 +1373,12 @@ LOC_SYSTEM_PLAYER_MOMIZI,Momiji
 LOC_SYSTEM_PLAYER_KOISHI,Koishi
 LOC_SYSTEM_PLAYER_MOKOU,Mokou
 LOC_SYSTEM_PLAYER_NITORI,Nitori
-LOC_SYSTEM_PLAYER_THREE_FAIRIES,삼월정
+LOC_SYSTEM_PLAYER_THREE_FAIRIES,Three Fairies
 LOC_SYSTEM_PLAYER_SUNNY,Sunny
 LOC_SYSTEM_PLAYER_STAR,Star
 LOC_SYSTEM_PLAYER_LUNA,Luna
-LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION,리저렉션
-LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT,리저렉션!
+LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION,Resurrection
+LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT,Resurrection!
 LOC_SYSTEM_ATT_NORMAL,Attack
 LOC_SYSTEM_ATT_CLAW,Claw
 LOC_SYSTEM_ATT_BITE,Bite
@@ -1479,9 +1479,9 @@ LOC_SYSTEM_FIND_ONE,Found {0}.
 LOC_SYSTEM_FIND_TWO,Found {0} and {1}.
 LOC_SYSTEM_FIND_THREE,Found {0}, {1}, and {2}.
 LOC_SYSTEM_FIND_MANY,Found several items.
-LOC_SYSTEM_TUTORIAL_START1,카나코는 말했다 : 환영한다, 사나에! 이번 튜토리얼은 내가 담당하지.
-LOC_SYSTEM_TUTORIAL_START2,카나코는 말했다 : 지나간 말은 컨트롤+P로 로그를 확인하고 궁금한건 ?를 눌러.
-LOC_SYSTEM_TUTORIAL_START3,카나코는 말했다 : 일단 h j k l나 방향키로 움직일 수 있어. 대소문자에 조심해.
+LOC_SYSTEM_TUTORIAL_START1,Kanako says: Welcome, Sanae! I’ll be guiding you through this tutorial.
+LOC_SYSTEM_TUTORIAL_START2,Kanako says: You can check past messages with Ctrl+P and press '?' for help.
+LOC_SYSTEM_TUTORIAL_START3,Kanako says: You can move using h, j, k, l or arrow keys. Watch out for case sensitivity.
 LOC_SYSTEM_TUTORIAL1,Kanako said: To open a door, press O near it. To close it, press C.
 LOC_SYSTEM_TUTORIAL2,Kanako said: You can bump into doors with the arrow keys to open them automatically.
 LOC_SYSTEM_TUTORIAL3,Kanako said: Use the numpad or the Y, U, B, N keys to move diagonally.
@@ -1574,7 +1574,7 @@ LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE,The magic hammer backfired! All t
 LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN,The Four-Shaku Magic Bomb fell into the water.
 LOC_SYSTEM_EVOKE_GHOST_BALL,You turned into a ghost at the cost of life! Use the skill again to cancel.
 LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE,You let go of the Okurichōchin.
-LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,유령상태에선 오쿠리쵸친을 제외한 아이템을 발동하는건 불가능해!
+LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,You can't activate items except Okurichochin while in ghost state!
 LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST,No time to take photos of thin air.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE,I'd rather photograph a prettier girl.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_GIRL,I don't want to photograph a guy.
@@ -1583,11 +1583,11 @@ LOC_SYSTEM_EVOKE_CAMERA_SHUTTER,*Click!*
 LOC_SYSTEM_EVOKE_CAMERA_SAKUYA,The subject suddenly vanished!
 LOC_SYSTEM_EVOKE_CAMERA_THE_WORLD,I have stopped time...
 LOC_SYSTEM_EVOKE_CAMERA_SELF,Are you taking a selfie?
-LOC_SYSTEM_EVOKE_EMPTY,남은 횟수가 없다.
-LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET,끼고있는 부적만을 발동할 수 있다.
-LOC_SYSTEM_EVOKE_PASSIVE_AMULET,이 부적은 발동할 수 있는 부적이 아니다.
-LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET,부적의 충전율이 100%가 되어야 발동할 수 있다.
-LOC_SYSTEM_EVOKE_CANT,이것은 발동할 수 없다.
+LOC_SYSTEM_EVOKE_EMPTY,No uses left.
+LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET,You can only activate equipped amulets.
+LOC_SYSTEM_EVOKE_PASSIVE_AMULET,This amulet cannot be activated.
+LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET,You need 100% charge to activate the amulet.
+LOC_SYSTEM_EVOKE_CANT,This cannot be activated.
 LOC_SYSTEM_TRIBE_HUMAN,Human
 LOC_SYSTEM_TRIBE_WIZARD,Witch
 LOC_SYSTEM_TRIBE_FAIRY,Fairy
@@ -1837,8 +1837,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Sunho, item effects from
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
-LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,당신은 충분히 성장하여 부활능력을 하나 잃었다.
-LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,당신은 충분히 성장하여 부활능력을 모두 잃었다.
+LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,You've grown strong enough to lose one resurrection.
+LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,You've grown strong enough to lose all resurrections.
 LOC_SYSTEM_JOB_WARRIOR,Warrior
 LOC_SYSTEM_JOB_WIZARD,Magician
 LOC_SYSTEM_JOB_SHAMAN,Shrine Maiden
@@ -1944,8 +1944,8 @@ LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,The alchemical power on your hands is 
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone. (Use additional magic with {0})
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally vanished.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
-LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
-LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
+LOC_SYSTEM_SPELL_UNLUCK_UFO,Unbelievable! A UFO fell from the sky!
+LOC_SYSTEM_SPELL_UNLUCK_RECORVER,Your fortune has returned to normal.
 LOC_SYSTEM_SPL_DESCRIBE_NONE,This magic doesn’t exist.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,Fires a small danmaku.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_MIDDLE,Fires a decent danmaku spread.\n
@@ -2127,9 +2127,9 @@ LOC_SYSTEM_SKILL_EVOCATE,Evocation
 LOC_SYSTEM_SKILL_STEALTH,Stealth
 LOC_SYSTEM_SKILL_UNKNOWN,Unknown
 LOC_SYSTEM_SKILL_LEAST_ONE,You must enable at least one skill!
-LOC_SYSTEM_SKILL_MASTER,당신은 배우고 있던 스킬을 마스터했다!
-LOC_SYSTEM_SKILL_EXP_ERROR,스킬경험치에 에러가 발생했습니다.
-LOC_SYSTEM_SKILL_LEVEL_UP,{0} 스킬레벨이 올랐다! 스킬레벨 {1}
+LOC_SYSTEM_SKILL_MASTER,You’ve mastered the skill you were learning!
+LOC_SYSTEM_SKILL_EXP_ERROR,Skill experience error occurred.
+LOC_SYSTEM_SKILL_LEVEL_UP,{0} skill level increased! Skill level {1}
 LOC_SYSTEM_SKL_KANAKO_1,Summon Divine Rock
 LOC_SYSTEM_SKL_KANAKO_2,Summon Divine Rain
 LOC_SYSTEM_SKL_KANAKO_3,Summon Divine Wind
@@ -2397,26 +2397,26 @@ LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_MANA_REGEN,Simply holding this weapon incr
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FASTCAST,Simply holding this weapon reduces all magic casting time to 80%.
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_PROTECT,Simply holding this weapon increases your AC by 5.
 LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG,This weapon is branded with a bug. Please report it!
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FIRE,무기가 불로 타오르기 시작했다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_COLD,무기가 차가운 냉기를 내뿜기 시작했다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_POISON,무기에서 독이 떨어지기 시작했다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_CURSE,무기는 저주의 힘으로 가득 차있다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_WEATHER,무기에서 비상의 기운이 뿜어져나온다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_AUTUMN,무기에서 쓸쓸하고도 종말적인 기운이 느껴진다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_MANA_REGEN,영력의 흐름이 느껴진다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FASTCAST,머리회전이 빨라진 느낌이 든다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_PROTECT,보호받는 기분이 든다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG,이 무기는 버그를 내뿜고있다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIRE,무기가 타오르는 것을 멈췄다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_COLD,무기에서 나오던 냉기가 그쳤다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_POISON,더 이상 무기에서 독이 떨어지지 않는다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_CURSE,무기에서 저주의 힘이 약해졌다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_WEATHER,무기에서 비상의 기운은 더이상 느껴지지않는다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_AUTUMN,무기는 더이상 쓸쓸해보이지 않는다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_MANA_REGEN,영력의 흐름이 사라졌다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FASTCAST,머리회전이 다시 둔해졌다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT,보호가 사라졌다.
-LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG,방금 무기는 버그에 걸려있다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FIRE,Your weapon started burning with fire.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_COLD,Your weapon began emitting cold energy.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_POISON,Your weapon started dripping poison.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_CURSE,Your weapon is filled with cursed power.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_WEATHER,Your weapon exudes a sense of calamity.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_AUTUMN,Your weapon feels lonely and apocalyptic.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_MANA_REGEN,You sense a flow of MP.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FASTCAST,You feel your mind speeding up.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_PROTECT,You feel protected.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG,This weapon is emitting bugs.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIRE,Your weapon stopped burning.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_COLD,The cold from your weapon dissipated.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_POISON,Your weapon no longer drips poison.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_CURSE,The curse on your weapon has weakened.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_WEATHER,Your weapon no longer feels calamitous.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_AUTUMN,Your weapon no longer feels lonely.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_MANA_REGEN,The flow of MP has vanished.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FASTCAST,Your mind has slowed down again.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT,The feeling of protection is gone.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG,This weapon was bugged.
 LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,Cloth
 LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,Leather
 LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,Chain
@@ -2557,9 +2557,9 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN6,Amulet with a Snake
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,Amulet with a Horse
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,Amulet with a Sheep
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,Amulet with a Monkey
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE,부적의 힘이 모두 채워졌다!
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE,그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,The amulet is fully charged! You can now activate it with 'v'.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE,The amulet is fully charged!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE,The perfect amulet shattered, but you felt your power return!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,You have recovered MP.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP,Your MP recovery increased due to the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from the amulet.
@@ -2826,95 +2826,95 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,A cloth outfit designed for easy mo
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,A suit made of durable material.\nLess flexible than cloth, but quite lightweight.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,Armor bound with chains.\nSturdy, but not as protective as plate armor.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,Armor reinforced with steel plates.\nHinders magic and movement, but ensures your safety.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n상대의 탄막을 막는 반칙적인 활용도 가능하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,머리에 달 수 있는 장신구. 패션의 기본\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,몸에 두르는 폼나는 망토.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,손에 낄 수 있는 장갑이다. 장갑에 저주가 걸려있으면 반지를 빼고 낄 수 없다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,발을 보호하는 신발. 던전의 바닥을 맨발로 다니고 싶지않으면 꼭 착용하자.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,단순한 물이 들어간 병이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,치료 물약이다. 마시면 혼란, 독, 병으로부터 회복되고 체력도 소량 회복된다.\n효과도 마신 즉시 발휘되는 신비의 물약\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,독이 들어있는 물약이다. 역겨운 맛이 나고 마시면 끔찍한 독에 걸린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,상처를 치료하는 물약이다. 먹으면 순간적으로 많은 체력을 치료한다.\n다만 상태이상을 치료하지는 못한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,순간적으로 강한 근력을 발휘하게 되는 물약. 공격력도 강해진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE,빠른 속도로 움직이게 도와주는 물약. 이동, 행동 모두 2배속이 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE,마시면 정신에 혼란을 가져다주는 물약.\n혼란이 가라앉을때까지 제자리에 서서 가만히 기다리는 것도 방법이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW,움직임이 둔해지는 물약. 모든 이동, 행동이 1/2배속이 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS,마시면 몇턴간 몸이 마비되는 물약. 위험하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER,마시면 일시적으로 지능이 높아지는 물약.\n지능과 함께 마법성공률, 마법파워도 같이 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,마시면 일시적으로 민첩이 높아지는 물약.\n민첩과 함께 회피도 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC,마시면 영력을 순식간에 채워주는 마력의 물약.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION,마시면 일시적으로 비행상태가 되는 물약. 비행상태에서는 깊은물따위를 건널 수 있게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER,마시면 파워가 상승하는 파워의 물약.\n마신 즉시 P가 1.00증가하게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT,마시면 일시적으로 능력치가 감소하게 되는 역겨운 물약.\n힘 지능 민첩중 무작위 능력치가 일시적으로 감소된다. 시간이 지나면 되돌아 온다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT,마시면 일시적으로 잃어버린 능력치를 일정량 회복시켜주는 물약.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,이것은 술이다. 마시면 취한다.\n술에 취한 상태면 똑바로 움직이기 힘들어 진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG,이건 버그 물약이다. 끔찍하군!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN,뭔가 의심스러운 액체가 들어있는 병. 마셔보지 않고선 알 수 없을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_FOOD,먹을 수 있는 음식이다. 던전에 이런 음식들이 떨어져있는 것도 수상하지만 먹을 순 있어 보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL,소리내어서 읽으면 두루마리에 담겨진 미지의 힘을 끌어낼 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT,읽으면 이상한 공간이동을 일으키는 두루마리. 단, 읽자마자 공간이동이 되진 않는다.\n몇턴의 준비기간이 필요하다. 공간이동이 걸린 상태에서 읽으면 그 힘을 중화시켜 억제할 수 도 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY,식별의 두루마리. 읽고나서 손에 댄 물건을 식별할 수 있게 된다. 매우 중요한 두루마리\n모 반요 가게주인의 능력과 매우 흡사하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE,장난꾸러기 요정들이 의미없이 써놓은 낙서군!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON,들고있는 무기에 저주를 건다. 저주에 걸린 장비는 저주가 풀리기전까지 해제할 수 없게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,들고있는 방어구에 저주를 건다. 저주에 걸린 장비는 저주가 풀리기전까지 해제할 수 없게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE,들고있는 장비의 저주를 해제한다. 기분 나쁨도 사라진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK,시야내의 임의의 위치에 순간이동을 하게 도와주는 두루마리.\n위기탈출용으로 최고의 두루마리다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING,현재 있는 층의 맵을 밝혀주는 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_,현재 장착되어있는 무기의 공격력과 명중력을 강화시킬 수 있다. 또한 저주도 없애준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,선택한 방어구의 방어력을 강화시킬 수 있다. 또한 저주도 없애준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG,연기를 만들어 내는 두루마리.\n연기는 상대와 자신의 시야를 가려준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,소지품중에 저주가 걸린 아이템을 탐지하는 두루마리.\n탐지할 아이템이 없어도 식별은 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,장착하고 있는 장신구에 저주를 거는 두루마리.\n반지와 목걸이중 무작위 한개의 장신구에 저주가 걸린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,주변의 소음을 줄이는 두루마리. 일시적으로 정적상태가 된다.\n정적범위안에 있는 적은 마법을 사용하지못하며 범위는 시간이 지나면 점점 줄어든다.\n단, 자신도 소리를 내야하는 마법과 두루마리, 권능을 사용하지 못하게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,영격을 사용하는 두루마리, 주변의 적에게 저항할 수 없는 짧은 마비를 건다.\n효과는 절대적이지만 P를 한칸 강제로 소모하게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,스펠카드를 충전하는 두루마리. 어느정도 사용한 스펠카드의 충전양을 충전한다.\n스펠카드의 최대치가 높을수록 충전하는 양도 늘어난다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,배운 마법을 잊는 망각의 두루마리. 사용시 배우고 있는 마법중에 하나를 선택하여 잊는다.\n마법을 배울때 사용한 레벨은 돌려받는다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,읽은 순간 넓은 성역을 펼치는 두루마리. 성역에서는 모든 공격의 데미지를 무효로 한다.\n산 속에 사는 어느 야만바가 만들었다고 하는 귀한 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,지금 들고 있는 무기에 마법적인 힘을 부여하는 두루마리.\n어떤 마법이 부여될지는 알 수 없으며 기존에 부여된 마법적인 힘은 덮어씌워진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,버그의 두루마리. 얼른 제작자에게 버그로 신고해버리자!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,알 수 없는 문자들이 나열되어있는 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,스펠카드는 정해진 횟수내에서 마음대로 사용할 수 있으나 초과하면 더이상 사용할 수 없게된다.\n정확한 남은 갯수는 식별을 해야 확인할 수 있다. 스펠카드는 발동술에 비례해서 위력이 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,화염의 기운을 담은 스펠카드다.\n사용하면 원하는 방향의 넓은 범위로 화염구름을 생성한다.\n발동스킬이 높으면 구름의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,냉기의 기운을 담은 스펠카드다.\n상대에게 강력한 냉기공격을 가한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,대지의 기운을 담은 스펠카드다.\n자체 위력은 낮지만 벽에 부딪히면 벽을 폭발시켜 높은 범위 데미지를 입힌다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,대기의 기운을 담은 스펠카드다.\n부채꼴의 넓은 범위에 탄막을 날려 범위내의 적들을 날려버린다.\n발동스킬이 높으면 날리는 정도와 위력이 강해진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,달빛의 기운을 담은 스펠카드다.\n사용한 사람을 일정시간 투명하게 만든다.\n발동스킬이 높으면 투명의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,금속의 기운을 담은 스펠카드다.\n사용하면 전방으로 철가시를 3연속으로 발사한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,태양의 기운을 담은 스펠카드다.\n사용하면 큰 빛을 발산하여 주변의 적을 빛나게 하고 혼란을 건다.\n혼란은 강할수록 저항할 수 있으며 무생물에겐 걸리지않는다.\n또한, 흡혈귀에겐 단순한 혼란효과 이상의 데미지를 줄 수 있다고 한다.\n발동스킬이 높으면 지속시간과 혼란이 걸릴 확률이 늘어난다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,버그의 스펠카드다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,미지의 힘이 담겨있는 부적. 기본적으론 아무런 힘도 가지고 있지않는 평범한 부적이지만\n착용한 채로 경험치를 얻으면 부적의 충전량이 점점 충전되며 100%가 되면 힘을 발휘한다.\n만약 착용하고있는 부적을 벗으면 그 즉시 충전량이 0%로 떨어지므로 주의해야한다.\n\n";
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,미래를 체험한다고 하는 에이린의 감주약의 효능이 녹아들어있는 부적.\n다른 부적에 비해 아주 느린 속도로 충전이 되지만 힘이 모이면 죽음을 회피할 수 있다.\n100%가 된 부적을 착용한 채로 죽게되면 체력이 전부 회복되어 부활한다.\n단, 이 방법으로 부활하게되면 부적은 불타 사라지게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,춘설이변에 쓰인 봄의 기운을 모아서 특수한 결계를 발동시킬 수 있는 부적.\n착용하고 있으면 주변의 봄의 기운이 모이고 충전이 되면 영격을 발동할 수 있게 된다.\n100%가 된 부적을 착용한 채로 v를 누르면 영격이 발동되어 주변의 적을 일정시간 마비시킨다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 주변에 파워아이템이 떨어진다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,모리야신사에서 개발한 신앙의 힘을 모을 수 있는 부적.\n착용하고 있으면 주변의 신앙이 모이고 충전이 되면 신들과의 관계가 좋아진다.\n100%가 되면 자동으로 현재 신앙심이 조금 오른후 충전치가 다시 0%이 된다.\n몇몇 신은 신앙을 모으지않기때문에 이 부적의 효능이 없을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 스펠카드에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 스펠카드 1장을 충전할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 무작위 날씨가 발현되며 체력재생력을 높게 올린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n";
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,손에 낀 착용자의 근력을 강화시키거나 약화시키는 힘의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX,손에 낀 착용자의 민첩성을 강화시키거나 약화시키는 민첩의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT,손에 낀 착용자의 지능을 강화시키거나 약화시키는 지능의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY,착용한 자의 자연적인 P템 소모가 빠르게 되는 배고픔의 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL,미노리코님의 축복이 담겨있는 반지로 착용한 자가 포만감을 느끼게 된다.\n신진대사가 느려져서 착용자는 자연적인 P템 소모가 느려지게 된다.\n가속이나 투명상태에서의 P소모 가속도 줄여준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT,착용자에게 공간이동의 능력을 부여하는 반지.\n그 부작용으로 끼고 있는 동안 무작위의 공간이동이 간간히 발생하게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,독에 대한 내성을 얻는 반지. 거의 모든 독에 내성이 생긴다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,화염에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,냉기에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,착용하고 있으면 투명한 적을 볼 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,비행을 사용할 수 있는 반지. 착용하면 능력사용에서 비행발동이 생긴다.\n비행상태에서는 깊은물따위를 건널 수 있게된다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,투명을 사용할 수 있는 반지. 착용하면 능력사용에서 투명발동이 생긴다.\n투명상태에서는 적에게 들킬 확률이 매우 낮아지게 된다.\n투명상태에서는 P의 소모량이 가속되는 단점이 있다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,착용시 최대마나가 증가하는 반지.\n착용해제시 원래대로 돌아온다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,착용시 마법성공률과 마법파워를 상승시키는 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,착용시 방어가 증감하는 반지.\n증감 되는 수치는 반지에 적혀진 숫자와 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV,착용시 회피가 증가하는 반지.\n증감 되는 수치는 반지에 적혀진 숫자와 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS,착용시 혼란과 광기에 저항이 생기는 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS,착용시 전기저항이 올라가는 반지.\n완벽하게 막아주진 않지만 상당한 데미지를 줄여준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS,착용시 마법저항이 올라가는 반지.\n마법저항은 데미지를 줄여주진 못하지만 디버프같은 마법으로부터 보호해준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG,버그의 힘이 깃든 반지다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN,미지의 힘이 담겨있는 반지.\n착용시 바로 그 힘을 알 수 있는 반지도 있는 반면. 눈치채기 힘든 반지도 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,A shield used to block enemy attacks. Cannot be equipped with two-handed weapons.\nAlso works (unfairly) to block danmaku.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,An accessory worn on the head. The foundation of fashion.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,A stylish cloak worn over the body.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,Gloves for your hands. Cursed gloves must be worn before rings.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,Shoes that protect your feet. Don’t walk barefoot in the dungeon—wear these!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,A bottle filled with plain water.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion. Recovers confusion, poison, sickness, and some HP.\nInstant effect upon drinking—truly mysterious.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,A potion filled with poison. It tastes awful and causes severe poisoning.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,A potion that heals wounds. Instantly restores a lot of HP,\nbut doesn’t cure status effects.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,A potion that grants temporary super strength. Also increases attack power.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE,A potion that makes you move fast. Both movement and actions are doubled.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE,A potion that confuses the mind.\nIf confused, it’s sometimes best to stand still until it passes.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW,A potion that slows you down. All movement and actions are halved.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS,A potion that causes paralysis for several turns. Very dangerous.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER,A potion that temporarily boosts intelligence.\nAlso increases magic success rate and power.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,A potion that temporarily boosts agility.\nAlso increases evasion.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC,A magic potion that instantly restores MP.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION,A potion that lets you fly for a while.\nWhile flying, you can cross deep water.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER,A potion that increases Power.\nImmediately increases P by 1.00 when consumed.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT,Disgusting potion that temporarily lowers stats.\nRandomly reduces one of Strength, Intelligence, or Agility. Wears off over time.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT,A potion that temporarily restores lost stats.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,This is alcohol. Drinking it gets you drunk.\nWhile drunk, movement becomes difficult.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG,This is a bug potion. Horrifying!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN,A bottle containing a suspicious liquid. You won’t know what it does until you drink it.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD,Edible food. Suspicious how it’s just lying around the dungeon, but it looks edible enough.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL,Reading aloud unleashes the mysterious power sealed in the scroll.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT,A scroll that causes strange teleportation. Doesn’t teleport instantly.\nRequires a few turns to activate. If you’re already teleporting, reading it cancels the effect.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY,Scroll of Identification. Allows you to identify items you’re holding. Very important.\nSaid to resemble the power of a certain half-demon shopkeeper.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE,Just some scribbles left by prankster fairies!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON,Curses your current weapon. Cursed gear can’t be removed until the curse is lifted.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,Curses your current armor. Cursed gear can’t be removed until the curse is lifted.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE,Lifts curses on your equipment. Also removes that unpleasant feeling.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK,Teleports you to a random visible location.\nExcellent for emergency escapes.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING,Reveals the map of your current floor.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_,Enhances the attack and accuracy of your current weapon. Also removes curses.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,Enhances the defense of your selected armor. Also removes curses.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG,Creates fog.\nThe fog blocks vision for both you and enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,A scroll that detects cursed items in your inventory.\nIt still works even if nothing is cursed.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,A scroll that curses your jewelry.\nRandomly curses either a ring or necklace you’re wearing.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,A scroll that reduces surrounding noise. Creates temporary silence.\nEnemies inside the silence zone can’t cast spells, and the zone shrinks over time.\nYou also can’t use sound-based magic, scrolls, or abilities.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,A scroll that uses spirit energy to paralyze nearby enemies briefly.\nUnresistable effect, but it forcibly consumes 1 P.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,A scroll that recharges spell cards. Restores partial charge.\nThe more max charge the card has, the more it restores.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,A scroll of amnesia that makes you forget a learned spell.\nYou choose which spell to forget and regain the level used to learn it.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,A scroll that creates a wide sanctuary when read. All damage is nullified inside.\nSaid to be made by a mountain-dwelling yamamba. Very rare.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,A scroll that enchants your current weapon with magic.\nThe type of enchantment is random and overwrites any existing one.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,A bugged scroll. Report it to the developer immediately!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,A scroll filled with unknown symbols.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,Spell cards can be used freely until they run out. Once depleted, they cannot be reused.\nExact usage count must be identified. Power scales with Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,A spell card imbued with fire energy.\nCreates a wide fire cloud in the chosen direction.\nDuration increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,A spell card imbued with cold energy.\nDeals strong cold damage to the enemy.\nDamage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,A spell card imbued with earth energy.\nDeals low base damage, but explodes upon hitting a wall for high AoE damage.\nDamage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,A spell card imbued with air energy.\nFires danmaku in a wide fan that pushes back enemies.\nStrength and knockback increase with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,A spell card imbued with moonlight.\nTemporarily turns the user invisible.\nDuration increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,A spell card imbued with metal energy.\nFires three spiked projectiles forward.\nDamage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,A spell card imbued with solar energy.\nEmits a bright light that confuses nearby enemies.\nStronger confusion effects can be resisted and don’t affect non-living beings.\nVampires take extra damage. Duration and confusion chance increase with Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,A bugged spell card.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,A charm containing mysterious power. It’s just a normal charm until charged with EXP.\nOnce fully charged, it activates. Removing it resets charge to 0%, so be careful.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,A charm infused with Eirin’s elixir said to let you experience the future.\nCharges very slowly but revives you when fully charged and you die.\nThe amulet burns away upon revival.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,A charm containing spring energy from the Spring Snow Incident.\nCharges with ambient spring energy and activates a binding spell.\nWhen fully charged, press 'v' to paralyze nearby enemies.\nResets charge to 0% afterward.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,A charm infused with spell power used during the Imperishable Night Incident.\nCharges with ambient time energy and produces Power items.\nWhen fully charged, press 'v' to drop Power items.\nResets charge to 0% afterward.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,A charm developed by the Moriya Shrine that collects faith.\nAutomatically increases faith when fully charged, then resets.\nSome gods ignore this, so it might not work on all.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,A charm modified to send long-distance signals underground.\nIncreases MP regen when equipped at full charge.\nPress 'v' while fully charged to instantly restore MP.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown Prince in the Dream Mausoleum.\nCharges with spirits and recharges one spell card when full.\nPress 'v' to activate.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,A charm filled with the essence of Graze.\nWhile equipped, gradually charges and provides Graze ability at full charge.\nPress 'v' to dodge all avoidable attacks for a few turns.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nCharges with ambient weather energy and randomly triggers a weather effect.\nRestores HP regen greatly upon activation.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,A charm powered by the Occult Ball that manifests urban legends.\nCharges with occult energy and can banish all summoned enemies in sight.\nAlso grants a random yokai effect.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,This bugged charm is neither stylish nor useful.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,The powers of this charm are unknown.\nEquip it to find out what it does.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,A ring that increases or decreases the wearer's Strength.\nEffect depends on the ring’s value.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX,A ring that increases or decreases the wearer's Dexterity.\nEffect depends on the ring’s value.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT,A ring that increases or decreases the wearer’s Intelligence.\nEffect depends on the ring’s value.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY,A ring of hunger. Greatly increases natural P consumption.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL,A ring blessed by Minoriko.\nSlows metabolism, decreasing P consumption rate.\nAlso reduces P drain during Haste and Invisibility.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT,A ring that grants teleportation.\nRandom teleportation may trigger while worn.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,A ring that grants strong poison resistance.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,A ring that grants fire resistance. Stacks up to 3 levels.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,A ring that grants ice resistance. Stacks up to 3 levels.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,Wearing this allows you to see invisible enemies.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,A ring that allows flight. Grants a fly ability when equipped.\nWhile flying, you can cross deep water.\nRequires Activation skill and consumes a small amount of MP.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,A ring that grants invisibility. Adds an invisibility ability when equipped.\nGreatly reduces detection chance by enemies.\nInvisibility consumes MP quickly. Requires Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,A ring that increases max MP.\nMP returns to normal when unequipped.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,A ring that boosts magic success rate and power.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,A ring that modifies defense.\nAmount is based on the number shown on the ring.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV,A ring that increases evasion.\nAmount is based on the number shown on the ring.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS,A ring that grants resistance to confusion and madness.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS,A ring that increases electric resistance.\nDoesn’t block completely but reduces damage significantly.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS,A ring that increases magic resistance.\nDoesn’t reduce damage, but protects against debuff spells.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG,A ring infused with bug energy.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN,A ring of unknown power.\nSome reveal their effect when worn, others don’t.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,A book containing various spells.\nIt may not be a named tome, but still offers useful magic.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,A book of basic fire magic.\nRecommended for beginners in fire magic.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,A book of basic cold magic.\nRecommended for beginners in cold magic.
@@ -2945,74 +2945,74 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy 
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by the puppeteer living in the Forest of Magic.\nIt details intricate methods of controlling dolls that can also apply to summoning.\nStrangely, it includes notes on handling explosives and cursing others... Let’s pretend we didn’t see that.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n발동 스킬이 높아지면 회복되는 영력이 많아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n폭탄은 한 칸을 차지하며 적에 의해 파괴되면 폭파하지않고 파괴되어버린다.\n발동템이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n발동 스킬이 높아지면 데미지와 폭탄의 체력이 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n만약 당신이 어떤 이유로 파워가 낮아지지 않는다면 오쿠리쵸친은 다른 무언가를 대신 가져갈 것이다.\n발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n잘 생각해보면 미사일과 별반 다를게 없다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,소인족이 다룬다고 하는 요술망치. 본래 주인은 오니라고 한다.\n사용하면 실로 엄청난 효과들을 원하는대로 파워 1칸만으로 사용할 수 있게 된다.\n단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,환상향에 떨어지기전에 우연히 들고오게된 카메라.\n기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 발동템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 템은 횟수제한없이 발동이 가능한 템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,V키로 파워를 소모하여 발동할 수 있다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한
-LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,이것은 각종 던전을 정복한 증거인 룬이다.\n3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,이것은 강대한 힘을 가진 음양옥이다. 신사 내부에 정중하게 모셔져 있다.\n이 것을 가지고 탈출하면 이 이변을 끝내거나 엄청난 힘을 얻을 수 있을 것 같다.\n어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,"잃어버린 애완동물을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n당신의 사진이 붙어있다...\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,"잃어버린 물건을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,개다래 나무다. 그렇게 유용하진않아보이지만 고양이과들은 맥을 못 추는듯하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,부셔져있는 텐구의 카메라다. 아무래도 캇파들이 수리를 위해 보관하고 있는 듯 하다.\n심하게 부셔져있기때문에 쓰임새는 전혀 없어보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,캇파들이 쓰고 남은 재료와 공구들이다. 쓰임새는 없을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BUG,버그템이다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen activated, releases stored energy as a laser.\nDamage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after activation. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use—powered by mysterious magic.\nDamage and bomb HP scale with Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state—untouchable, invisible.\nConsumes 30–70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nStronger Activation reduces HP loss and MP drain.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,A magic hammer wielded by the small people, once owned by an oni.\nAllows powerful effects with only 1 P.\nHowever, has a 10% chance to cause the opposite of the intended effect.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,A camera brought by accident to Gensokyo.\nUses mysterious energy to take pictures without film.\nWon’t help in battle but can photograph beautiful girls.\nToo weak to shoot distant subjects.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused activatable item.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be activated without usage limits.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be activated without usage limits. Its power scales with your Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to activate using Power.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this activatable item is used, it requires
+LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power—but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,A flyer reading “Lost Item - Komeiji Satori.”\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,It’s catnip. Not very useful, but cats seem helpless against it.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,A broken tengu camera, likely being kept by kappas for repair.\nIt’s so broken it seems unusable.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,Leftover tools and materials from kappas. Doesn’t seem useful.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BUG,This is a bug item.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
-LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,꿈의 세계에 살고 있는 주민\n환상향의 주민과 똑같이 닮았지만 꿈의 세계에 살고있는 다른 존재.\n원본에서 좀 더 욕망에 충실한 성격을 지녔다고 한다.\n
-LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,이 레이무는 %d번 컨티뉴했다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,이 상대는 무시해도 될 정도로 약해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,이 상대는 약해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,이 상대는 위험해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_STRONGER,이 상대는 위험해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_RESIST,독에 대한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_WEAKNESS,독에 대한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_IMMUN,화염을 완벽하게 방어한다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST_MORE,화염에 대한 상당한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST,화염에 대한 약간의 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_WEAKNESS,화염에 취약하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_IMMUN,냉기를 완벽하게 방어한다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST_MORE,냉기에 대한 상당한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST,냉기에 대한 약간의 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_WEAKNESS,냉기에 취약하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_IMMUN,절연이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST_MORE,전기가 거의 통하지않는다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST,전기가 잘 통하지 않는다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_WEAKNESS,전기에 취약하다
-LOC_SYSTEM_MONSTER_DESCRIPTION_CONFUSE_RESIST,혼란과 광기에 대해 면역이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WIND_RESIST,회오리 바람에 면역이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED1,행동이 매우 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED2,행동이 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED3,행동이 약간 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED4,행동이 약간 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,행동이 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,행동이 매우 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,하늘을 날 수 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,수영을 할 수 있다
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,투명을 볼 수 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,무생물이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,눈보라에 면역이 있다. 달자매의 힘으로
-LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,디버프 마법에 대한 면역력이 무한이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,침묵된 상태에서도 마법이 사용가능하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다
-LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,이 몬스터는 꿈의 주민이기에 당신의 동료권유나 영혼을 빼앗는 것이 불가능할지도 모른다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,사용하는 마법
-LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,이 몬스터의 마법은 고정되어있지 않다. 무슨 마법을 쓸지 몰라!
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,Resident of the dream world.\nLooks like a Gensokyo native, but is a different entity.\nSaid to be more desire-driven than their original.\n
+LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,This Reimu has continued %d times.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,This enemy looks weak enough to ignore.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,This enemy looks weak.
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,This enemy looks dangerous.
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONGER,This enemy looks dangerous.
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_RESIST,Has resistance to poison.
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_WEAKNESS,Has resistance to poison.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_IMMUN,Completely immune to fire.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST_MORE,Highly resistant to fire.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST,Slightly resistant to fire.
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_WEAKNESS,Weak to fire.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_IMMUN,Completely immune to cold.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST_MORE,Highly resistant to cold.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST,Slightly resistant to cold.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_WEAKNESS,Weak to cold.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_IMMUN,Electrically insulated.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST_MORE,Almost immune to electricity.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST,Some resistance to electricity.
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_WEAKNESS,Weak to electricity.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CONFUSE_RESIST,Immune to confusion and madness.
+LOC_SYSTEM_MONSTER_DESCRIPTION_WIND_RESIST,Immune to tornado effects.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED1,Extremely fast.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED2,Fast.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED3,Slightly fast.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED4,Slightly slow.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,Slow.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,Very slow.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,Can fly.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,Can swim.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,Can see invisible entities.
+LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,An inanimate object.
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,Immune to blizzards—thanks to the power of the moon sisters.
+LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,Completely immune to debuff magic.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,Can cast spells even while silenced.
+LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,This monster was summoned and will disappear over time.\nAlso gives no EXP.
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,As a dream-being, this monster can’t be befriended or have its soul taken.
+LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,Spells used:
+LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,This monster uses random magic. Who knows what it’ll cast?!
 LOC_SYSTEM_ENSLAVE_GHOST,Soul of {0}
 LOC_SYSTEM_GOD_ERROR,Unknown Deity
 LOC_SYSTEM_GOD_JOON_AND_SION,Joon & Shion
-LOC_SYSTEM_GOD_JOON,죠온
-LOC_SYSTEM_GOD_SION,시온
+LOC_SYSTEM_GOD_JOON,Joon
+LOC_SYSTEM_GOD_SION,Shion
 LOC_SYSTEM_GOD_BYAKUREN,Byakuren
 LOC_SYSTEM_GOD_KANAKO,Kanako
 LOC_SYSTEM_GOD_SUWAKO,Suwako
@@ -3304,7 +3304,7 @@ LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,You can summon a horde of lesser demons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,You can summon mid-tier demons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,You can occasionally disrupt hostile summons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,You can summon high-tier demons.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,당신은 P를 주울때마다 체력과 영력이 차오른다.
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,You recover HP and MP whenever you pick up P.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,While drunk, you recover HP slightly and gain high evasion.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,You can convert a potion into booze and drink it.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,You sometimes grab enemies in battle, letting you use grab skills without faith cost.
@@ -3408,35 +3408,35 @@ LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} rejoiced at your kill.
 LOC_SYSTEM_GOD_COMMON_PROTECT,You were protected!
 LOC_SYSTEM_GOD_COMMON_RAGE,{0} is enraged by your actions. Repent!
-LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,존재하지 않는 신입니다.
-LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,배신자에겐 입교란 없다!
-LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.
-LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,이미 믿고 있는 신입니다.
-LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,죠온: 한푼도 남김없이 모두 털어버리자고!
-LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,시온: 배고파...
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,죠온: 새로운 호구... 아니 고객이 왔네!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK2,시온: 배고프다...
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK3,죠온: 좀 더 팍팍 써도 된다고
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK4,시온: 밥은 어딨어?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK5,죠온: 저기 새 명품 핸드백이 사고싶은데 말이야
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK6,시온: 왜 역병신인 우리를 믿고있는거야?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK7,죠온: 응? 카드가 필요해?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK8,시온: 불우이웃돕기는 어때?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK9,죠온: 아끼다 죽을바엔 모두 써버려!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK10,시온: 최근엔 배고파도 즐거워
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK11,죠온: 우리들이라면 모두를 털어버릴 수 있어!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK12,시온: 나도 도움이 될 수 있을까?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,죠온&시온: 최흉최악의 자매의 힘을 보여주지!
+LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,This god doesn’t exist.
+LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,Traitors don’t get converted!
+LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,Seija doesn’t accept strong followers over level 9.
+LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,You’re already following a god.
+LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,Joon: Let’s rob them of every last coin!
+LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,Shion: I'm hungry...
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,Joon: A new sucker—I mean customer!
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK2,Shion: I'm hungry...
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK3,Joon: You could spend a bit more, you know.
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK4,Shion: Where's the food...?
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK5,Joon: I saw a new luxury handbag I want!
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK6,Shion: Why would you believe in us, the misfortune gods?
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK7,Joon: Huh? Need a card?
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK8,Shion: How about donating to the unfortunate?
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK9,Joon: Better to spend it all than die saving it!
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK10,Shion: Lately, I’ve been happy even while hungry.
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK11,Joon: With us, we can rob everyone blind!
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK12,Shion: Do you think I can be helpful too...?
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,Joon & Shion: Time to show you the power of the most fearsome sisters!
 LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,Joon and Shion rejoiced in robbing enemies’ wallets.
 LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, you wasted {0} {1}.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cannot be possessed.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
-LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!
-LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!
-LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,시온이 당신의 소모품을 대가로 당신을 부활시켰다!
-LOC_SYSTEM_GOD_BYAKUREN_WELCOME,히지리: 어서오세요. 신도여
-LOC_SYSTEM_GOD_BYAKUREN_TALK1,히지리: 아아, 법의 세계에 빛이 가득해
+LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,Joon forcibly possessed you! Power decreased!
+LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,Shion forcibly possessed you! Lost HP and MP!
+LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,Shion revived you in exchange for consumables!
+LOC_SYSTEM_GOD_BYAKUREN_WELCOME,Byakuren: Welcome, faithful one.
+LOC_SYSTEM_GOD_BYAKUREN_TALK1,Byakuren: Ah, the world of Dharma is full of light.
 LOC_SYSTEM_GOD_BYAKUREN_TALK2,Byakuren: Our temple does not discriminate between humans and youkai.
 LOC_SYSTEM_GOD_BYAKUREN_TALK3,Byakuren: Harsh training purifies the heart.
 LOC_SYSTEM_GOD_BYAKUREN_TALK4,Byakuren: Your efforts will bear fruit.
@@ -3553,8 +3553,8 @@ LOC_SYSTEM_GOD_YUKARI_TALK5,Yukari: We'll need more information to understand wh
 LOC_SYSTEM_GOD_YUKARI_TALK6,Yukari: I'm counting on you. Let me know if you need help.
 LOC_SYSTEM_GOD_YUKARI_TALK7,Yukari: Once you gain my power, boundaries no longer matter.
 LOC_SYSTEM_GOD_YUKARI_TALK8,Yukari: This is something only you can do.
-LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?(Y/N)
-LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.
+LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,Yukari forbids dangerous teleportation. Still use it? (Y/N)
+LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,Yukari allowed your dangerous teleport item use just this once.
 LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,Yukari was furious at your reckless use of teleportation magic!
 LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,Yukari forcibly teleported you!
 LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,Yukari forcibly moved monsters near you!
@@ -3574,7 +3574,7 @@ LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking fo
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
-LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!
+LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,Eirin turned your potion into plain water!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,Eirin forcibly experimented on your body!
 LOC_SYSTEM_GOD_YUYUKO_WELCOME,Yuyuko: Care for a cup of tea?
@@ -3595,8 +3595,8 @@ LOC_SYSTEM_GOD_SATORI_TALK4,Satori gently patted you.
 LOC_SYSTEM_GOD_SATORI_TALK5,Satori: Did today's pet food suit your taste?
 LOC_SYSTEM_GOD_SATORI_TALK6,Satori: Would you like to go on a walk with me sometime?
 LOC_SYSTEM_GOD_SATORI_FEED,Lady Satori has fed you!
-LOC_SYSTEM_GOD_SATORI_REUNION,사토리는 당신과의 재회를 기뻐했다.
-LOC_SYSTEM_GOD_SATORI_BELIEVE,사토리의 애완동물이 되었다.
+LOC_SYSTEM_GOD_SATORI_REUNION,Satori was happy to see you again.
+LOC_SYSTEM_GOD_SATORI_BELIEVE,You became Satori’s pet.
 LOC_SYSTEM_GOD_TENSI_WELCOME,Tenshi: Heaven is so boring! You'll entertain me, right?
 LOC_SYSTEM_GOD_TENSI_TALK1,Tenshi: What! I'm busy right now!
 LOC_SYSTEM_GOD_TENSI_TALK2,Tenshi: Isn't it selfish to pray and expect luck?
@@ -3732,7 +3732,7 @@ LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,Changing dungeons has reset your popularit
 LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,Your popularity dropped slightly when changing floors.
 LOC_SYSTEM_GOD_MIKO_UP_FLOOR,Your popularity dropped significantly when climbing stairs.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
-LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,인기 폭발!
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,Popularity burst!
 LOC_SYSTEM_GOD_MIKO_PUNISH_HP,Miko has drained your HP!
 LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,Miko has slowed you down!
 LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,Miko has lowered your resistance!
@@ -3745,7 +3745,7 @@ LOC_SYSTEM_GOD_OKINA_TALK5,Okina: I’m thinking of finally releasing Mai and Sa
 LOC_SYSTEM_GOD_OKINA_TALK6,Okina: Truly a talent worthy of serving under you. You're hired!
 LOC_SYSTEM_GOD_OKINA_TALK7,Okina: Look! Listen! Speak! Receive the true power of the hidden god!
 LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,You turned the {0} tile into a door.
-LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR,오키나가 문을 잠가버렸다!
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR,Okina locked the door!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0} was pushed away by the closing door!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,There’s no space to push away {0} on the door.
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,This is the world beyond the door. {Take a good rest!|Welcome!|This place looks safe.}
@@ -3758,9 +3758,9 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,Junko has weakened your strength!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,Junko has taken your speed!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,Junko has drained your stats!
-LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK,당신은 물약의 맛을 느끼기엔 너무 순화되어있다.
-LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY,순호의 생명순화
-LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE,죽어가던 당신의 생명력이 돌아왔다!
+LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK,You're too pure to taste this potion.
+LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY,Junko’s Life Purification
+LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE,Your fading life was restored!
 LOC_SYSTEM_GOD_PRAY1,You prayed to {0}.
 LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
 LOC_SYSTEM_GOD_PRAY_AHTEISM,You took a moment to contemplate the meaning of life.
@@ -3775,8 +3775,8 @@ LOC_SYSTEM_GOD_ABANDON,You abandoned {0}. Your god is enraged.
 LOC_SYSTEM_GOD_ABANDONED,You were forsaken by {0}.
 LOC_SYSTEM_GOD_ABANDON_SATORI,You abandoned {0}. Your god doesn’t seem to mind much.
 LOC_SYSTEM_GOD_ABANDON_SANAE,You abandoned {0}. {1} tearfully accepted your independence.
-LOC_SYSTEM_ARENA_START1,아레나에 온걸 환영한다! 승리할 것 같은 팀의 방향에 서있어라!
-LOC_SYSTEM_ARENA_START2,만약 승자를 맞추게되면 레벨이 1 오른다. 틀리면 게임 오버! 기회는 3번...
+LOC_SYSTEM_ARENA_START1,Welcome to the Arena! Stand on the side you think will win!
+LOC_SYSTEM_ARENA_START2,Guess the winner to gain 1 level. Guess wrong—game over! You get 3 chances...
 LOC_SYSTEM_ARENA_CLEAR,Congratulations on clearing it! You're truly blessed by luck!
 LOC_SYSTEM_ARENA_LAST_BATTLE,The final battle. Are you ready?
 LOC_SYSTEM_ARENA_CHOOSE,Now, choose who will win!
@@ -3788,7 +3788,7 @@ LOC_SYSTEM_ARENA_LEFT_LIFE,Remaining chances: {0}
 LOC_SYSTEM_ARENA_DRAW,Draw! This match is void.
 LOC_SYSTEM_ARENA_TIMEOVER,Time over! It's a draw. This match is void.
 LOC_SYSTEM_ARENA_GAMEOVER,Your record is Level {0}. Aim for a higher level next time! (Check records with {1})
-LOC_SYSTEM_DUMP_SUCCESS,덤프에 성공했습니다.
+LOC_SYSTEM_DUMP_SUCCESS,Dump successful.
 LOC_SYSTEM_DUMP_TITLE,Touhou Crawl {0} Dump File
 LOC_SYSTEM_DUMP_PLACE_IN,You're in the {0}.
 LOC_SYSTEM_DUMP_SPIECIAL_VAULT,Generated Special Vaults
@@ -3868,11 +3868,11 @@ LOC_SYSTEM_REPLAYING,Replaying Mode
 LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
-LOC_SYSTEM_DEBUG_CALC_BACKSTAB,들킬확률-RandB({0},{1}) 즉{2}% (최종 암살 성공율{3}%)
-LOC_SYSTEM_DEBUG_CALC_DAMAGE,실데미지-{0} 공격-{1} 암습-{2} 명중-{3} 명중률-{4}%
-LOC_SYSTEM_DEBUG_ENSLAVE_BUG,※영혼구속 버그 : {0} god_value({1},{2}) mon_value({3},{4})
-LOC_SYSTEM_DEBUG_GAIN_EXP_FOR_TRIGGER,일정량의 스킬 경험치 획득
-LOC_SYSTEM_DEBUG_REVIVE_YN,죽어? (Y/N)
+LOC_SYSTEM_DEBUG_CALC_BACKSTAB,DetectionChance-RandB({0},{1}) = {2}% (Final backstab success rate: {3}%)
+LOC_SYSTEM_DEBUG_CALC_DAMAGE,RealDamage={0} Attack={1} Backstab={2} Hit={3} Accuracy={4}%
+LOC_SYSTEM_DEBUG_ENSLAVE_BUG,*Enslave bug: {0} god_value({1},{2}) mon_value({3},{4})
+LOC_SYSTEM_DEBUG_GAIN_EXP_FOR_TRIGGER,Gained some skill EXP.
+LOC_SYSTEM_DEBUG_REVIVE_YN,Revive? (Y/N)
 LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed
 LOC_SYSTEM_DEBUG_TENSI_TENSION,Tension
 LOC_SYSTEM_DEBUG_TENSI_CRISIS,Crisis

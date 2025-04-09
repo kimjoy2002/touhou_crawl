@@ -263,7 +263,7 @@ public:
 	bool GetCloudResist();
 	bool isSimpleState(monster_state_simple state_);
 	monster_state_simple GetSimpleState();
-	D3DCOLOR GetStateString(monster_state_simple state_, char* string_);
+	D3DCOLOR GetStateString(monster_state_simple state_, ostringstream& string_);
 	bool isplayer(){return false;};
 	int GetId(){return id;};
 	int GetMapId(){return map_id;};

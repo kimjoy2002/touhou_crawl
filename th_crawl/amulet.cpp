@@ -140,14 +140,6 @@ bool chargingFinish(amulet_type kind, int value)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP), true, false, false, CL_blue);
 		}
 		break;
-	/*case AMT_WEATHER:
-		if (value > 0) {
-			printlog("부적에 의해 체력 재생력이 올라갔다!", true, false, false, CL_blue);
-		}
-		else {
-			printlog("더 이상 부적으로부터 재생력을 받지 못한다.", true, false, false, CL_blue);
-		}
-		break;*/
 	case AMT_FAITH:
 		if (value > 0) {
 			if (you.god == GT_NONE) {
@@ -213,17 +205,6 @@ bool evokeAmulet(amulet_type kind, int value_)
 		soundmanager.playSound("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL) + " ", false, false, false, CL_normal);
 		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
-		/*if (env[current_level].isBamboo())
-		{
-			printlog("지형 탐지는 미궁의 죽림에선 효과를 보지 못한다.", true, false, false, CL_normal);
-			return false;
-		}
-		else
-		{
-			soundmanager.playSound("buff");
-			env[current_level].MakeMapping(100);
-			printlog("당신은 현재 층을 감지해냈다.", true, false, false, CL_normal);
-		}*/
 		break;
 	case AMT_SPIRIT:
 		soundmanager.playSound("buff");
@@ -258,9 +239,6 @@ bool evokeAmulet(amulet_type kind, int value_)
 				break;
 			}
 		}
-		/*soundmanager.playSound("buff");
-		printlog("당신은 체력을 회복했다. ", false, false, false, CL_normal);
-		you.HpUpDown(rand_int(10, 15) + you.GetMaxHp()*rand_float(0.15f, 0.25f), DR_NONE);*/
 		break;
 	case AMT_OCCULT:
 		soundmanager.playSound("summon");

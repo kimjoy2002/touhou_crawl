@@ -2066,51 +2066,6 @@ void players::SetPureSkill(int skill_)
 	pure_skill = skill_;
 	skill[skill_].onoff = 0;
 }
-//interupt_type players::HungerApply(int hunger_)
-//{
-//	hunger_type temp = GetHunger();
-//	if(!hunger_)
-//	{
-//		hunger -= hunger_per_turn>0?hunger_per_turn:1;
-//	}
-//	else
-//	{
-//		hunger += hunger_;
-//		if(hunger>12000)
-//			hunger = 12000;
-//	}
-//	if(hunger<=0)
-//	{
-//		dead_reason = DR_HUNGRY;
-//		GameOver();
-//	}
-//	if(temp !=  GetHunger())
-//	{
-//		switch(GetHunger())
-//		{	
-//			case HT_STARVING:
-//				printlog("굶어죽기 일보직전이다!",true,false,false,CL_danger);
-//				break;
-//			case HT_NEARSTARVING:
-//				printlog("배고파서 쓰러질 것 같다.",true,false,false,CL_warning);
-//				break;
-//			case HT_VERYHUNGRY:
-//				printlog("상당한 배고픔을 느꼈다.",true,false,false,CL_warning);
-//				break;
-//			case HT_HUNGRY:
-//				printlog("당신은 배고파졌다.",true,false,false,CL_warning);
-//				break;
-//			case HT_NORMAL:
-//			case HT_FULL:
-//			case HT_VERYFULL:
-//			case HT_ENGORGED:
-//				break;
-//		}
-//		return IT_HUNGRY;
-//	}
-//	return IT_NONE;
-//}
-
 
 bool players::GetExp(int exper_, bool speak_)
 {
@@ -2329,22 +2284,7 @@ void players::ExpRecovery(int exper_)
 
 			if(punish[i].number && !punish[i].punish)
 			{
-				//god_punish((god_type)i);
 				punish[i].punish = true;
-/*
-				if(punish[i]==0)
-				{
-
-					
-					printarray(true,false,false,CL_white_blue,4,"당신은 ", GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터 ":"로부터 ","용서받았다.");
-	
-	
-					char temp[200];
-					sprintf_s(temp,200,"%s%s 용서받았다.",GetGodString((god_type)i),GetGodString_is((god_type)i)?"으로부터":"로부터");
-					AddNote(you.turn,CurrentLevelString(),temp,CL_small_danger);
-
-
-				}*/
 			}
 		}
 		GodAccpect_Exp_get();
@@ -3111,10 +3051,7 @@ bool players::SetLunatic(int s_lunatic_)
 		return false;
 	if(!s_lunatic)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_LUNATIC) + " ",false,false,false,CL_danger);
-	else
-	{
-		//printlog("당신은 더욱 더 미쳤다. ",false,false,false,CL_warning);
-	}
+
 	s_lunatic = s_lunatic_;
 	if(s_lunatic>20)
 		s_lunatic = 20;
@@ -4191,32 +4128,9 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 					if (speak_)
 						soundmanager.playSound("pickup");
 					return 1;
-				//}
-				//else
-				//{
-				//	printlog("더 가지기엔 너무 무겁다!",true,false,false,CL_normal);
-				//	ReleaseMutex(mutx);
-				//	return 0;
-				//}
 			}
 		}
 	}
-	//for(;num == 'Z';num++)
-	//{
-	//	bool check_ = false;
-	//	for(it = item_list.begin(); it != item_list.end() ;it++)
-	//	{
-	//		if((*it).id == num)
-	//		{
-	//			check_ = true;
-	//			break;
-	//		}
-	//	}
-	//	if(check_ == false)
-	//		break;
-	//	if(num=='z')
-	//		num = 'A'-1;
-	//}
 	for(it = item_list.begin(); it != item_list.end() && num != 'Z'+1;it++,num++)
 	{
 		if((*it).id != num)
@@ -4226,40 +4140,31 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	}
 	if((num >= 'a' && num <= 'z') || (num >= 'A' && num <= 'Z'))
 	{
-		//if(max_item_weight >= item_weight + t->weight)
-		//{
-			t->id = num;
-			item_weight += t->weight;
-			list<item>::iterator it_temp = item_list.insert(it,*t);
-			if(!throw_weapon && t->can_throw)
-			{
-				throw_weapon = &(*it_temp);
-			}
-			if(speak_)
-			{
-				char temp[2];
-				sprintf_s(temp, 2,"%c",(*t).id);
-				printlog(temp,false,false,false,(*t).item_color());
-				printlog(" - ",false,false,false,(*t).item_color());
-				printlog((*t).GetName(),true,false,false,(*t).item_color());
-			}
-			if (it_temp->pick()) {
-				throw_weapon = &(*it_temp);
-			}
+		t->id = num;
+		item_weight += t->weight;
+		list<item>::iterator it_temp = item_list.insert(it,*t);
+		if(!throw_weapon && t->can_throw)
+		{
+			throw_weapon = &(*it_temp);
+		}
+		if(speak_)
+		{
+			char temp[2];
+			sprintf_s(temp, 2,"%c",(*t).id);
+			printlog(temp,false,false,false,(*t).item_color());
+			printlog(" - ",false,false,false,(*t).item_color());
+			printlog((*t).GetName(),true,false,false,(*t).item_color());
+		}
+		if (it_temp->pick()) {
+			throw_weapon = &(*it_temp);
+		}
 
-			final_item = t->id;
-			final_num = t->num;
-			ReleaseMutex(mutx);
-			if (speak_)
-				soundmanager.playSound("pickup");
-			return 1;
-		//}
-		//else
-		//{
-		//	printlog("더 가지기엔 너무 무겁다!",true,false,false,CL_normal);
-		//	ReleaseMutex(mutx);
-		//	return 0;
-		//}
+		final_item = t->id;
+		final_num = t->num;
+		ReleaseMutex(mutx);
+		if (speak_)
+			soundmanager.playSound("pickup");
+		return 1;
 	}
 	else
 	{
@@ -4309,12 +4214,6 @@ bool players::Eat(char id_)
 			{
 				if(!you.isequip(it))
 				{
-					//if(it->value1 == 0 && GetHunger() >= HT_NORMAL)
-					//{
-					//	printlog("당신은 아직 배고프지 않다.",true,false,false,CL_normal);
-					//	ReleaseMutex(mutx);
-					//	return false;		
-					//}
 					if((*it).value1 == 0)
 						(*it).value3 = 100;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_STARTING),true,false,false,CL_bad);
@@ -4658,11 +4557,6 @@ bool players::Memorize(int spell_, bool immediately)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	
-	//if(you.skill[SKT_SPELLCASTING].level == 0)
-	//{
-	//	printlog("당신은 아직 주문을 배울 수 없다!",true,false,false,CL_normal);
-	//	return false;
-	//}
 	if(!immediately && you.level<skill_level_)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL),true,false,false,CL_normal);
@@ -5542,11 +5436,6 @@ bool players::unequipjewerly(char id_)
 	{
 		if(equipment[i] && equipment[i]->id == id_)
 		{
-			/*if(s_spellcard && equipment[i]->isRightType(ET_NECK))
-			{
-				printlog("스펠카드 선언중엔 스펠카드 탈착이 불가능하다.",true,false,false,CL_normal);
-				return 0;
-			}*/
 
 			if(!unequip(i))
 			{

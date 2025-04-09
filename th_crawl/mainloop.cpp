@@ -366,19 +366,6 @@ void charter_selete()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START2),true,false,false,CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3),true,false,false,CL_warning);
 	}
-	// else if(map_list.tutorial == GM_TUTORIAL2)
-	// {
-	// 	you.image = &img_play_sanae;
-	// 	you.char_type = UNIQ_START_SANAE;
-	// 	you.tribe = TRI_HUMAN;
-	// 	you.job = JOB_SHAMAN;
-	// 	SetTribe(you.tribe);
-	// 	you.CalcuHP();
-	// 	deque<monster*> dq;
-	// 	env[current_level].EnterMap(0,dq);	
-	// 	printlog("안녕하세요. Dungeon Crawl Stone Soup (이하 돌죽) 팬게임 동방크롤입니다.",true,false,false,CL_warning);
-	// 	printlog("여기에선 돌죽 경험자분을 위한 튜토리얼입니다.",true,false,false,CL_warning);
-	// }
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)
 	{
 		you.image = &img_play_sanae;
@@ -425,21 +412,6 @@ void charter_selete()
 		addItem_temp(ITM_POTION, PT_HEAL, 2);
 
 		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
-		/*you.image = &img_play_sanae;
-		you.char_name.name = "사나에";
-		you.tribe = TRI_HUMAN;
-		you.job = JOB_SHAMAN;
-		SetTribe(you.tribe);
-		you.CalcuHP();
-		env[current_level].EnterMap(0, deque<monster*>());
-
-		item_infor t;
-		item *it;
-		it = env[current_level].MakeItem(you.position, makeitem(ITM_RING, 1, &t, RGT_SEE_INVISIBLE));
-		it->Identify();
-		you.additem(it, false);
-		you.equip('a', ET_LEFT, false);
-		env[current_level].DeleteItem(it);*/
 	}
 
 

@@ -121,16 +121,6 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	t->num = 1;
 	t->curse = false;
 	t->name2 = name_infor();
-	//if((t->type>=ITM_ARMOR_FIRST && t->type< ITM_ARMOR_LAST))
-	//{
-	//	int rune_ = abs(t->value4*3);
-
-	//	if(rune_)
-	//	{
-	//		t->name2.name = "룬이 새겨진 ";
-	//		t->name2.name_type = true;
-	//	}
-	//}
 	switch(type)
 	{
 	case ITM_WEAPON_SHORTBLADE:

@@ -133,9 +133,6 @@ string GetAtifactString(ring_type ring_, int value_)
 	case RGT_SEE_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE);
 		break;
-	//case RGT_GRAZE:
-	//	oss << "+그레이즈";
-	//	break;
 	case RGT_LEVITATION:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT);
 		break;
@@ -225,9 +222,6 @@ std::string GetAtifactInfor(ring_type ring_, int value_)
 	case RGT_SEE_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SEE_INVISIBLE);
 		break;
-	//case RGT_GRAZE:
-	//	sprintf_s(temp,128,"그레이즈를 발동할 수 있다.");
-	//	break;
 	case RGT_LEVITATION:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FLIGHT);
 		break;

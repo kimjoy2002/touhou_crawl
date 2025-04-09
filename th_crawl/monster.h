@@ -240,7 +240,7 @@ public:
 	bool isAllyMonster(const monster* monster_info); //이 몹이 아군인지
 	bool isUserAlly() const; //유저에 친밀한가?
 	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지
-	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 "몬스터"의 시야에 들어왔는가?
+	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 몬스터의 시야에 들어왔는가?
 	bool CanChase();
 	parent_type GetParentType();
 	bool isUnique();

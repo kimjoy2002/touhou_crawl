@@ -258,15 +258,6 @@ void auto_Move()
 		return;
 	}
 	you.search = false;
-	/*if(you.GetHunger() == HT_STARVING)	
-	{
-		printlog("배고픈 상태다.",false,false,false,CL_danger);
-		if(you.power>=100)
-			printlog("c를 눌러서 허기를 채워라!",true,false,false,CL_danger);
-		else
-			printlog("무언가를 먹어라!",true,false,false,CL_danger);
-		return;
-	}*/
 	if(env[current_level].insight_mon(MET_ENEMY))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
@@ -488,16 +479,13 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	{	
 		deletelog();
 		if(!wide)
-			//"(명령어: v - 설명   . - 탐색   e - 위험구역설정)"
 			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5} - {6})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
 		else
-			//"(명령어: v - 설명   . - 탐색   <,> - 빠른 계단찾기   e - 위험구역설정)"
 			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5},{6} - {7}   {8} - {9})", PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "<", ">", PlaceHolderHelper(LOC_SYSTEM_STAIR_TRAVEL), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
 
 	}
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
 	{
-		//"(명령어: v - 설명)"
 		printlog(LocalzationManager::formatString("({0}: {1} - {2})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v", PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),true,false,true,CL_help);	
 	}
 	else
@@ -719,10 +707,6 @@ int Player_Move(const coord_def &c)
 				if(num==1)
 				{
 					LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1));
-					// printlog("여기엔 ",false,false,false,CL_normal);
-					// printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
-					// printlog((*start_it).GetNameInfor().name_do(true),false,false,false,CL_normal);
-					// printlog("있다. (,키로 줍기)",true,false,false,CL_normal);
 				}
 				else if(num<=4)
 				{
@@ -2288,29 +2272,7 @@ void Simple_State_Show()
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_PANALTY4) + " ",false,false,false,CL_normal);
 		break;
-	}/*
-	switch(you.GetShieldPanlty())
-	{
-	case 0:
-		break;
-	case 1:
-		printlog("당신의 방패는 편한 편이다.",false,false,false,CL_normal);
-		break;
-	case 2:
-	case 3:
-		printlog("당신의 방패는 약간 불편하다.",false,false,false,CL_normal);
-		break;
-	case 4:
-		printlog("당신의 방패는 불편하다.",false,false,false,CL_normal);
-		break;
-	case 5:
-	case 6:
-		printlog("당신의 방패는 매우 불편하다.",false,false,false,CL_normal);
-		break;
-	default:
-		printlog("당신은 방패에 끌려다닌다.",false,false,false,CL_normal);
-		break;
-	}*/
+	}
 	enterlog();
 }
 void Experience_Show()
@@ -2330,31 +2292,6 @@ void Experience_Show()
 	}
 }
 
-//bool Eat_Power()
-//{
-//	if(HT_NORMAL <= you.GetHunger())
-//	{
-//		printlog("당신은 아직 배고프지 않다.",true,false,false,CL_normal);
-//		return false;
-//	}
-//	else if(you.power < 100)
-//	{
-//		printlog("파워가 부족하다.",true,false,false,CL_normal);
-//		return false;
-//	}
-//	printlog("P를 1 소모하여 만복도를 채우시겠습니까?(y/n)",true,false,false,CL_help);
-//	int temp = waitkeyinput();
-//	if(temp == 'y' || temp == 'Y')
-//	{
-//		you.PowUpDown(-100, true);
-//		you.HungerApply(3000);
-//		printlog("당신은 포만감을 느꼈다.",true,false,false,CL_normal);
-//		you.time_delay += 10;
-//		you.TurnEnd();
-//		return true;
-//	}
-//	return false;
-//}
 
 void dungeonView()
 {
@@ -2395,7 +2332,7 @@ void dungeonView()
 		{
 			printsub(blank.str(),false,CL_warning);
 			printsub("├",false,CL_normal);
-			printsub("신전 ",false,CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_TEMPLE) + " ",false,CL_warning);
 			oss.str("");
 			oss.clear();
 			oss<<'('<<setw(2)<<setfill(' ')<<(env[TEMPLE_LEVEL].make?1:0)<<"/1)";
@@ -3122,11 +3059,6 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_LEARN_SPELL), true, false, false, CL_normal);
 		return;
 	}
-	//if(you.skill[SKT_SPELLCASTING].level == 0)
-	//{
-	//	printlog("당신은 아직 주문을 배울 수 없다!",true,false,false,CL_normal);
-	//	return;
-	//}
 	deletesub();
 	for(int i=0;i<2;i++)
 		printsub("",true,CL_STAT); 
@@ -3489,9 +3421,6 @@ void floorMove()
 		enter_.push_back(pair<char, string>('k', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM)));
 	if (map_list.dungeon_enter[HAKUREI_D].detected)
 		enter_.push_back(pair<char, string>('z', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI)));
-	/* 지구랏은 아직
-	if (map_list.dungeon_enter[ZIGURRAT].detected)
-		enter_.push_back(pair<char, string>('z', "하쿠레이신사"));*/
 
 	int num_ = 0;
 	for (auto it = enter_.begin(); it != enter_.end(); it++) {
@@ -3505,9 +3434,6 @@ void floorMove()
 		}
 	}
 	enterlog();
-	//printlog("d - 던전     t - 신전      l - 안개의 호수     m - 요괴의 산     s - 홍마관", true, false, false, CL_help);
-	//printlog("b - 홍마관도서관   u - 홍마관지하   a - 미궁의죽림  e - 영원정   y - 윳쿠리둥지 ", true, false, false, CL_help);
-	//printlog("p - 짐승길  h - 지령전  r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사", true, false, false, CL_help);
 	printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOEXPLORE_WHERE), false, false, false, CL_help);
 	int key_ = waitkeyinput();
 

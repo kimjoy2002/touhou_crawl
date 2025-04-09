@@ -237,44 +237,20 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case 24:
 		return 1;
 	case 25:
-		// printlog("동방크롤에선 모든 무기를 한손이나 양손으로 들 수 있습니다.", true, false, false, CL_warning);
-		// printlog("단, 몇몇 무기는 양손으로 들때 효율이 많이 떨어집니다.", true, false, false, CL_warning);
-		// printlog("단검은 양손으로 써도 패널티가 없지만 다우징은 양손시 큰 패널티가 있습니다.", true, false, false, CL_warning);
 		return 1;
 	case 26:
-		// printlog("몸통방어구엔 재질과 종류로 나뉘어있고 그외엔 보조방어구와 방패가 있습니다.", true, false, false, CL_warning);
-		// printlog("갑옷엔 재질에 따라 장비패널티가 존재하여 합산되어 우측창에 표시됩니다.", true, false, false, CL_warning);
 		return 1;
 	case 27:
-		// you.GiveSkillExp(SKT_ARMOUR, 1200, true);
-		// you.GiveSkillExp(SKT_SHIELD, 300, true);
-		// printlog("이 장비패널티는 힘과 갑옷,방패 스킬에 따라 감소됩니다.", true, false, false, CL_warning);
-		// printlog("자세한 수치나 정도는 i를 눌러서 자세한 수치를 확인해보세요.", true, false, false, CL_warning);
 		return 1;
 	case 28:
-		// printlog("동방크롤엔 활이나 블로우건같은 원거리 무기가 없지만 모두 손으로 던질 수 있습니다.", true, false, false, CL_warning);
-		// printlog("투척용단검, 투척용창, 철륜은 무기로도 쓸 수 있지만 투척용으로도 사용가능합니다.", true, false, false, CL_warning);
-		// printlog("소모성 탄막과 투척용 무기 모두 탄막 스킬에 영향을 받습니다.", true, false, false, CL_warning);
 		return 1;
 	case 29:
-		// printlog("동방크롤엔 허기의 개념이 없는 대신에 비슷한 P라는 게이지가 존재합니다.", true, false, false, CL_warning);
-		// printlog("아사는 존재하지않는 대신 2칸이하로 떨어지면 전투패널티가 있습니다.", true, false, false, CL_warning);
-		// printlog("모든 적은 일정확률로 P템을 떨어뜨리며 이것을 주으면 P가 회복됩니다.", true, false, false, CL_warning);
 		return 1;
 	case 30:
-		// printlog("스펠카드는 돌죽의 완드를 대체하는 아이템입니다.", true, false, false, CL_warning);
-		// printlog("{발동}이 붙은 템은 P를 소모하여 발동하는 영구적인 비소모발동템입니다.", true, false, false, CL_warning);
-		// printlog("둘다 V로 발동이 가능하며 발동스킬에 영향을 받아 강력해집니다.", true, false, false, CL_warning);
 		return 1;
 	case 31:
-		// printlog("부적은 돌죽의 아뮬렛에 대체되는 아이템입니다.", true, false, false, CL_warning);
-		// printlog("낀 즉시 효과는 없지만 끼고 몬스터를 잡으면 퍼센티지가 채워집니다.", true, false, false, CL_warning);
-		// printlog("100%가 되면 V키로 효과를 사용가능합니다. 일부는 끼기만 해도 효과가 있습니다.", true, false, false, CL_warning);
 		return 1;
 	case 32:
-		// printlog("동방크롤엔 총 10개의 룬이 있고 조트의 방을 대체하는 하쿠레이 신사가 존재하여", true, false, false, CL_warning);
-		// printlog("조트의 오브를 대체하는 음양옥이란 템을 주워서 탈출하면 게임에서 승리합니다.", true, false, false, CL_warning);
-		// printlog("모자란 게임이지만 잘 부탁드립니다.", true, false, false, CL_warning);
 		return 1;
 	case EVL_KISME:
 	{

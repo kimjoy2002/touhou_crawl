@@ -76,13 +76,32 @@ void Help_Show()
 			{	
 				WaitForSingleObject(mutx, INFINITE);
 				deletesub();
-				char temp[300];
-				sprintf_s(temp,300,"%8s|%-18s|%s\n","턴","장소","내용");
-				printsub(temp,true,CL_normal);
+				ostringstream ss;
+				int offset_[2] = {8,20};
+
+				if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)) < offset_[0]) {
+					ss << string(offset_[0]-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)), ' ');
+				}
+				ss << LocalzationManager::locString(LOC_SYSTEM_TURNS) << '|';
+				if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_PLACE)) < offset_[1]) {
+					ss << string(offset_[1]-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_PLACE)), ' ');
+				}
+				ss << LocalzationManager::locString(LOC_SYSTEM_PLACE) << '|' << LocalzationManager::locString(LOC_SYSTEM_NOTE) << "\n";
+				
+				printsub(ss.str(),true,CL_normal);
 				for(list<note_dummy>::iterator it = save_note.note_list.begin(); it != save_note.note_list.end(); it++)
 				{
-					sprintf_s(temp,300,"%8d|%-18s|%s",it->turn,it->place.c_str(),it->text.c_str());
-					printsub(temp,true,it->color);
+					ss.str("");
+					ss.clear();
+					if(PrintCharWidth(to_string(it->turn)) < offset_[0]) {
+						ss << string(offset_[0]-PrintCharWidth(to_string(it->turn)), ' ');
+					}
+					ss << to_string(it->turn) << '|';
+					if(PrintCharWidth(it->place) < offset_[1]) {
+						ss << string(offset_[1]-PrintCharWidth(it->place), ' ');
+					}
+					ss << it->place << '|' <<  it->text;
+					printsub(ss.str(),true,it->color);
 				}
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);	

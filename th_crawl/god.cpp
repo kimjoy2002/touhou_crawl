@@ -2196,10 +2196,6 @@ void Pray()
 					 PlaceHolderHelper(GetGodString((god_type)(type-DG_TEMPLE_FIRST))));
 
 			}
-			/*else if (type == DG_TEMPLE_MIKO)
-			{
-				printlog("이 신은 당신의 입교를 받아주기엔 아직 너무 바쁘다!.",true,false,false,CL_warning);
-			}*/
 			else
 			{
 				WaitForSingleObject(mutx, INFINITE);
@@ -3955,17 +3951,6 @@ bool God_pray(const list<item>::iterator it)
 	case GT_BYAKUREN:
 		break;
 	case GT_KANAKO:
-		//if(it->type == ITM_FOOD && it->value1 == 0)
-		//{
-		//	printlog("P템은 불기둥에 휩싸여 사라졌다. 카나코는 공물을 받아들였다.",true,false,false,CL_small_danger);
-		//	env[current_level].DeleteItem(it);
-		//	if(randA(1))
-		//	{
-		//		you.PietyUpDown(1);	
-		//		you.GiftCount(1);
-		//	}
-		//	return true;		
-		//}
 		break;
 	case GT_SUWAKO:
 		break;
@@ -3984,14 +3969,6 @@ bool God_pray(const list<item>::iterator it)
 	case GT_YUKARI:
 		break;
 	case GT_EIRIN:
-		//if(it->type == ITM_FOOD && it->value1 == 0)
-		//{
-		//	printlog("P템은 불기둥에 휩싸여 사라졌다. 에이린은 공물을 받아들였다.",true,false,false,CL_small_danger);
-		//	env[current_level].DeleteItem(it);
-		//	you.PietyUpDown(1);	
-		//	you.GiftCount(1);
-		//	return true;		
-		//}
 		if(it->type == ITM_POTION && iden_list.potion_list[it->value1].iden && isGoodPotion((potion_type)it->value1)>0)
 		{
 			int per_ = randA(100);

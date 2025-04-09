@@ -27,8 +27,6 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 	if(infor_->spell == -2 || infor_->spell == -3 || infor_->spell == -4)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_TARGET),true,false,true,CL_help);
-		//printlog(it!=you.item_list.end()?it->GetName():"발사물이 없습니다.",false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
-		//printlog("(i - 인벤토리   (,) - 다른 발사물)",true,false,true,CL_help);
 	}
 	else if(infor_->spell == -1)
 	{
@@ -47,7 +45,6 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC) + ":",false,false,true,CL_help);
 		printlog(infor_->skill?SkillString((skill_list)infor_->spell):SpellString((spell_list)infor_->spell),true,false,true,CL_help);
-		//printlog("(i - 인벤토리   (,) - 다른 발사물)",true,false,true,CL_help);
 	}
 }
 

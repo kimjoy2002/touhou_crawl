@@ -1531,12 +1531,6 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 	text_ += "\n\n\n";
 	text_ += use_text_;
-	//char temp[100];
-	//if(!it->is_pile || it->num == 1)
-	//	sprintf_s(temp, 100,"\n\n\n무게 : %g\n",it->weight);
-	//else
-	//	sprintf_s(temp, 100,"\n\n\n무게 : %g * %d\n",it->weight/it->num,it->num);
-	//text_ += temp;
 	return text_;
 
 }

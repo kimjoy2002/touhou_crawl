@@ -65,12 +65,23 @@ void MakeStartItem(start_item_type select_, int num);
 
 skill_type WeaponSelect(int num)
 {
-		SetText() = "원하시는 무기를 선택합니다.\n\n\n";
-		SetText() += "a - 단검\n";
-		SetText() += "b - 도끼\n";
-		SetText() += "c - 둔기\n";
-		SetText() += "d - 창\n";
-		SetText() += "e - 장검\n";
+		SetText() = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON);
+		SetText() += "\n\n\n";
+		SetText() += "a - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE);
+		SetText() += "\n";
+		SetText() += "b - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE);
+		SetText() += "\n";
+		SetText() += "c - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE);
+		SetText() += "\n";
+		SetText() += "d - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR);
+		SetText() += "\n";
+		SetText() += "e - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE);
+		SetText() += "\n";
 
 		while(1)
 		{
@@ -104,9 +115,14 @@ skill_type WeaponSelect(int num)
 
 god_type FanaticSelect()
 {
-		SetText() = "누구의 광신도가 될건가?\n\n\n";
-		SetText() += "a - 텐시\n";
-		SetText() += "b - 유카리\n";
+		SetText() = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC);
+		SetText() += "\n\n\n";
+		SetText() += "a - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI);
+		SetText() += "\n";
+		SetText() += "b - ";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI);
+		SetText() += "\n";
 
 		while(1)
 		{
@@ -459,7 +475,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,60),false);
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_TRANS,20,false);
-			you.Memorize(SPL_MAGIC_TANMAC,true);
+		you.Memorize(SPL_MAGIC_TANMAC,true);
 		break;
 	case JOB_SHAMAN:
 		you.max_hp+=1;
@@ -828,8 +844,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 			
 
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 	}
 
@@ -870,8 +884,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 			you.mp = you.max_mp;
 
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 
 			
 			//you.Memorize(SPL_CONTROLED_BLINK,true);		
@@ -900,9 +912,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.skill[SKT_EVOCATE].onoff = 1;
 
 
-			
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -944,8 +953,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			set_exist_named(MON_MOMIZI);	
 
 
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			
 		}
 	}
@@ -966,8 +973,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.skill[SKT_TANMAC].onoff = 1;
 			set_exist_named(MON_KOISHI);	
 			
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -985,9 +990,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.SetProperty(TPT_18_LIFE,1);
 			set_exist_named(MON_MOKOU);	
 
-
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -1011,8 +1013,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 			set_exist_named(MON_NITORI);
 
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
-			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.equip('a' + 4, ET_NECK, false);
 		}
 	}
@@ -1042,8 +1042,6 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			set_exist_named(MON_STAR);
 			set_exist_named(MON_LUNAR);
 
-			you.GetExp(you.GetNeedExp(you.level - 1) - you.exper, false);
-			you.GetExp(you.GetNeedExp(you.level - 1) - you.exper, false);
 
 			you.Belief(GT_LILLY, 55, false);
 

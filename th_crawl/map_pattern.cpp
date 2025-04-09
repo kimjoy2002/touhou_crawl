@@ -75,7 +75,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_entrance.y = -2;
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 2;
-			map->name = "기본_S지형";
+			map->name = "COMMON_S_VAULT";
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 			return  "\
 ###########\
@@ -97,7 +97,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_바둑판";
+			map->name = "COMMON_GRID";
 			return  "\
 #.#.#.#.#\
 .#.#.#.#.\
@@ -120,7 +120,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-				map->name = "기본_섬";
+				map->name = "COMMON_ISLAND";
 				return  "\
 ...........\
 ...___.....\
@@ -161,7 +161,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 					}
 				}
 				map->event_list.push_back(mapdummy_event(EVL_LUNATICTIME,coord_def(0,-4),EVT_SIGHT));
-				map->name = "클라운피스_루나틱타임";
+				map->name = "CLOWNPIECE_LUNATICTIME";
 				return  "\
 #############\
 #.#.......#.#\
@@ -184,7 +184,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-1,1);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_가로하수구";
+			map->name = "COMMON_HORIZONTAL_DRAIN";
 			return  "\
 #################\
 ~~~~~~~~~~~~~~~~~\
@@ -205,7 +205,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-				map->name = "기본_33강철벽";
+				map->name = "COMMON_33_IRONWALL";
 				return  "\
 .....\
 .$$$.\
@@ -243,7 +243,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 					map->monster_list.push_back(mapdummy_mon(MON_SEKIBANKI,0,coord_def(0,0)));
 					set_exist_named(MON_SEKIBANKI);
 				}
-				map->name = "풀뿌리_네트워크";
+				map->name = "GRASSROOTS_NETWORK";
 				return  "\
 .......\
 .~~~~~.\
@@ -274,7 +274,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 					map->monster_list.push_back(mapdummy_mon(MON_MISTIA,0,coord_def(1,-1)));
 					set_exist_named(MON_MISTIA);
 				}
-				map->name = "쿄코_미스치_콘서트";
+				map->name = "KYOUKO_MISTIA_CONCERT";
 				return  "\
 $$$$$$$$$\
 $$.....$$\
@@ -292,7 +292,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_세로좁은길";
+			map->name = "COMMON_NARROW_STREET";
 			return  "\
 ##.##\
 ##.##\
@@ -318,7 +318,7 @@ $$$...$$$";
 					map->event_list.push_back(mapdummy_event(EVL_KOGASA,coord_def(0,0),EVT_APPROACH_SMALL));
 					set_exist_named(MON_KOGASA);
 				}
-				map->name = "코가사_급습";
+				map->name = "KOGASA_FALL";
 				return  "\
 ####.\
 #....\
@@ -351,7 +351,7 @@ $$$...$$$";
 				set_exist_named(MON_SUNNY);
 			}
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
-			map->name = "요정대전쟁";
+			map->name = "FARIY_WAR";
 			return  "\
 #############\
 #...........#\
@@ -373,7 +373,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_육각형방";
+			map->name = "COMMON_HEXAGON_ROOM";
 			return  "\
 #########\
 ##.....##\
@@ -396,7 +396,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_강철십자가";
+			map->name = "COMMON_IRON_CROSS";
 			return  "\
 .......\
 ...$...\
@@ -415,7 +415,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_성게방";
+			map->name = "COMMON_URCHIN_ROOM";
 			return  "\
 ####.####\
 #.#.#.#.#\
@@ -435,7 +435,7 @@ $$$...$$$";
 			map->m_exit.x = rand_int(1,3);
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_세로_지그재그방";
+			map->name = "COMMON_VERICAL_ZIGZAG";
 			return  "\
 #...#####\
 ##...####\
@@ -463,7 +463,7 @@ $$$...$$$";
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI,0,coord_def(3,-1)));	
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_윳쿠리집";
+			map->name = "COMMON_YUKKURI_HOUSE";
 			return  "\
 ..[.[........\
 ...[[...####.\
@@ -482,7 +482,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_비어있는_집";
+			map->name = "COMMON_EMPTY_HOUSE";
 			return  "\
 ####+####\
 #.......#\
@@ -507,7 +507,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_다중_문방";
+			map->name = "COMMON_MANY_DOOR";
 			return  "\
 .......\
 .#+###.\
@@ -526,7 +526,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_ㄷ_강철방";
+			map->name = "COMMON_C_IRONROOM";
 			return  "\
 #########\
 #.......#\
@@ -544,7 +544,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-1,1);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_가로_유리통로";
+			map->name = "COMMON_HORIZONTAL_GLASSPATH";
 			return  "\
 ###############\
 ....=.....=....\
@@ -576,7 +576,7 @@ $$$...$$$";
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));		
 
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "나즈린_보탑발견";
+			map->name = "NAZRIN_PAGODA";
 			return  "\
 #########\
 #.......#\
@@ -605,7 +605,7 @@ $$$...$$$";
 				set_exist_named(MON_KYOUKO);
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "쿄코_학살자";
+			map->name = "KYOUKO_MURDER";
 			return  "\
 #########\
 #$$$$$$$#\
@@ -636,7 +636,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "초반_작은_연못";
+			map->name = "EALRY_SMALL_LAKE";
 			return  "\
 .......\
 ..~~~..\
@@ -660,7 +660,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_ITEM;
-			map->name = "초반_강철_아이템상자";
+			map->name = "EARLY_IRON_ITEMBOX";
 			return  "\
 .......\
 .$$$$$.\
@@ -682,7 +682,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "초반_십자벽_통로";
+			map->name = "EARLY_CROSS_DOOR";
 			return  "\
 ...#...\
 ...#...\
@@ -706,7 +706,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "초반_작은_섬";
+			map->name = "EARLY_SMALL_ISLAND";
 			return  "\
 ...........\
 ..~~~~~~~..\
@@ -738,7 +738,7 @@ $$$...$$$";
 			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(0,0)));
 			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(1,0)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "초반_벤토라_신호등";
+			map->name = "EARLY_UFO_BLINKER";
 			return  "\
 .......\
 .=====.\
@@ -767,7 +767,7 @@ $$$...$$$";
 				set_exist_named(MON_LUNAR);
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "삼월정_도주";
+			map->name = "THREE_FAIRES_RUN";
 			return  "\
 #######\
 #.....#\
@@ -796,7 +796,7 @@ $$$...$$$";
 			item_infor t;
 			makeitem(ITM_BOOK, 0, &t, -1);
 			map->item_list.push_back(mapdummy_item(t,coord_def(3,0)));
-			map->name = "홍마관_책_트랩";
+			map->name = "SCARLET_BOOK_TRAP";
 			return  "\
 #########\
 #.#.#####\
@@ -831,7 +831,7 @@ $$$...$$$";
 
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-			map->name = "요괴의산_수족관";
+			map->name = "TOUKAI_MOUNTAIN_AQUARIUM";
 			return  "\
 .......\
 .=====.\
@@ -868,7 +868,7 @@ $$$...$$$";
 					}
 				}
 				map->event_list.push_back(mapdummy_event(EVL_KOGASATIME,coord_def(0,-4),EVT_SIGHT));
-				map->name = "코가사_서프라이즈타임";
+				map->name = "KOGASA_SURPRISE_TIME";
 				return  "\
 #############\
 #.#.......#.#\
@@ -894,7 +894,7 @@ $$$...$$$";
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_작은기둥들";
+			map->name = "COMMON_SMALL_PILLARS";
 			return  "\
 .......\
 .#.#.#.\
@@ -914,7 +914,7 @@ $$$...$$$";
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_석상방";
+			map->name = "COMMON_STATUE_ROOM";
 			return  "\
 #######\
 #.....#\
@@ -934,7 +934,7 @@ $$$...$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 0;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_가로_책통로";
+			map->name = "COMMON_HORIZONTAL_BOOK_PATH";
 			return  "\
 #######\
 EEEEEEE\
@@ -952,7 +952,7 @@ EEEEEEE\
 			map->m_exit.x = 0;
 			map->m_exit.y = -map->size_y;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "기본_세로_책통로";
+			map->name = "COMMON_VERICAL_BOOK_PATH";
 			return  "\
 #E.E#\
 #E.E#\
@@ -974,7 +974,7 @@ EEEEEEE\
 				map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-				map->name = "기본_석상_연못";
+				map->name = "COMMON_STATUE_POND";
 				return  "\
 .....\
 .~~~.\
@@ -1001,7 +1001,7 @@ EEEEEEE\
 					makeitem(ITM_BOOK, 0, &t, -1);
 					map->item_list.push_back(mapdummy_item(t,coord_def(rand_int(-2,2),rand_int(-1,0))));	
 				}
-				map->name = "기본_숨겨진_책방";
+				map->name = "COMMON_HIDDEN_BOOKROOM";
 				return  "\
 ####&####\
 #E.....E#\
@@ -1021,7 +1021,7 @@ EEEEEEE\
 				map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 				map->sp_tile_list.push_back(randomTemple());
-				map->name = "기본_숨겨진_제단";
+				map->name = "COMMON_HIDDEN_TEMPLE";
 				return  "\
 .....\
 .###.\
@@ -1045,7 +1045,7 @@ EEEEEEE\
 					map->monster_list.push_back(mapdummy_mon(MON_NARUMI, 0, coord_def(2, 2)));
 					set_exist_named(MON_NARUMI);
 				}
-				map->name = "나루미_요괴산_지상보살";
+				map->name = "NARUMI_YOUKAIN_MOUNTAIN_STATUE";
 				return  "\
 TTT.TTT\
 TB...BT\
@@ -1080,7 +1080,7 @@ TTT.TTT";
 				}
 				map->flag = FLAG_NO_STAIR;
 				map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(-2, 0), EVT_ALWAYS));
-				map->name = "네무노하타테_격리방";
+				map->name = "NEMUNO_HATATE_HOUSE";
 				return  "\
 $$$$$TTTTTTTT\
 $...$TTT.TTTT\
@@ -1112,7 +1112,7 @@ $$$$$TTTTTTTT";
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, -1)));
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(-1, 1)));
 				map->monster_list.push_back(mapdummy_mon(MON_BUTTERFLY, 0, coord_def(1, 1)));
-				map->name = "라바_나비밭";
+				map->name = "LAVA_BUTTERFLY";
 				return  "\
 ..._...\
 .T___T.\
@@ -1147,7 +1147,7 @@ _______\
 				set_exist_named(MON_FUTO);
 			}
 			map->event_list.push_back(mapdummy_event(EVL_HOJOK, coord_def(0, -2), EVT_APPROACH_MIDDLE));
-			map->name = "호족난무";
+			map->name = "FUTO_AND_TOZIKO";
 			return  "\
 $$$$$$$$$$$\
 $.$iiiii$.$\
@@ -1179,7 +1179,7 @@ $.........$";
 				map->event_list.push_back(mapdummy_event(EVL_KOGASA3, coord_def(0, 0), EVT_ALWAYS));
 				set_exist_named(MON_KOGASA);
 			}
-			map->name = "코가사_연막";
+			map->name = "KOGASA_SMOKE";
 			return  "\
 .....\
 .....\
@@ -1204,7 +1204,7 @@ $.........$";
 				map->event_list.push_back(mapdummy_event(EVL_MEDI, coord_def(0, 0), EVT_ALWAYS));
 				set_exist_named(MON_MEDICINE);
 			}
-			map->name = "메디슨_대량학살";
+			map->name = "MEDICINE_GENOCIDE";
 			return  "\
 #.......#\
 #.......#\
@@ -1229,7 +1229,7 @@ $.........$";
 			item_infor t;
 			makeitem(ITM_FOOD, 0, &t);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, 1)));
-			map->name = "기본_지상보살_공양";
+			map->name = "COMMON_STATUE_OFFERING";
 			return  "\
 .....\
 .###.\
@@ -1272,7 +1272,7 @@ $.........$";
 				map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, (*rlt2)));
 			}
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(3, 0), EVT_ALWAYS));
-			map->name = "초반_안개호수_가득찬_적";
+			map->name = "EARLY_MANY_ENEMY_ROOM";
 			return  "\
 #######\
 #.....#\
@@ -1296,7 +1296,7 @@ $.........$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			map->flag = FLAG_NO_STAIR;
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
-			map->name = "초반_만자_아이템";
+			map->name = "EARLY_SWASTIKA_ITEM";
 			return  "\
 .........\
 .........\
@@ -1333,7 +1333,7 @@ $.........$";
 			{
 				map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, coord_def(-4+i*2,0)));
 			}
-			map->name = "초반_벽안의_보물";
+			map->name = "EALRY_ITEM_IN_WALL";
 			return  "\
 ...............\
 .#############.\
@@ -1358,7 +1358,7 @@ $.........$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 			map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(0, 0), EVT_ALWAYS));
-			map->name = "초반_온천";
+			map->name = "EALRY_SPA";
 			return  "\
 .....\
 .~~~.\
@@ -1394,7 +1394,7 @@ $.........$";
 					map->monster_list.push_back(mapdummy_mon(rand_.choice(), 0, (*rlt2)));
 			}
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(-2, 0), EVT_ALWAYS));
-			map->name = "리글_벌레유리방";
+			map->name = "WRIGGLE_GLASS_ROOM";
 			return  "\
 .......\
 .=====.\
@@ -1426,7 +1426,7 @@ $.........$";
 			item_infor t;
 			makeitem(ITM_ETC, 0, &t, EIT_CAT_TREE);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, 0)));
-			map->name = "첸_개다래나무";
+			map->name = "CHEN_CATNIP";
 			return  "\
 .....\
 .....\
@@ -1451,10 +1451,10 @@ $.........$";
 				set_exist_named(MON_NAZRIN);
 			}
 			item_infor t;
-			makeitem(ITM_FOOD, 0, &t,2);
+			makeitem(ITM_FOOD, 0, &t);
 			map->item_list.push_back(mapdummy_item(t, coord_def(-2, -2)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "나즈린_과자재료점";
+			map->name = "NAZRIN_HOUSE";
 			return  "\
 #########\
 #......$#\
@@ -1483,7 +1483,7 @@ $.........$";
 			map->monster_list.push_back(mapdummy_mon(MON_KATPA_WATER_WIZARD, 0, coord_def(2, 1)));
 			map->event_list.push_back(mapdummy_event(EVL_BROKEN_NESI, coord_def(1, 0), EVT_SIGHT));
 			map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(2, 0), EVT_ALWAYS));
-			map->name = "요괴산_네시수리중";
+			map->name = "YOUKAI_MOUNTAIN_BROKEN_NESI";
 			return  "\
 $$$$$$$\
 $.....$\
@@ -1529,7 +1529,7 @@ $$$$$$$";
 				map->item_list.push_back(mapdummy_item(t, coord_def(i*2-3, -3)));
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "요괴산_캇파마트";
+			map->name = "YOUKAI_MOUNTAIN_KAPPA_MART";
 			return  "\
 #########\
 #.i.i.i.#\
@@ -1565,7 +1565,7 @@ $$$$$$$";
 				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, 0, coord_def(0, 0)));
 			}
 			map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "홍마관_애완동물_우리";
+			map->name = "SCARLET_PET_HOUSE";
 			return  "\
 .........\
 .........\
@@ -1594,7 +1594,7 @@ $$$$$$$";
 			item_infor t;
 			makeitem(ITM_BOOK, 0, &t, -1);
 			map->item_list.push_back(mapdummy_item(t, coord_def(0, -5)));
-			map->name = "홍마관_간이_도서관";
+			map->name = "SCARLET_SMALL_LIBRARY";
 			return  "\
 #######\
 #.....#\
@@ -1621,7 +1621,7 @@ $$$$$$$";
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = 4;
 			map->flag = FLAG_NO_STAIR;
-			map->name = "안개호수_거대한_숲";
+			map->name = "MISTY_LAKE_BIG_FOREST";
 			return  "\
 `````TTTTTTTT````````\
 ``TTTT......TTTTT````\
@@ -1648,7 +1648,7 @@ TT......TT```````````\
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
 			map->flag = FLAG_NO_STAIR;
-			map->name = "안개호수_징검다리";
+			map->name = "MISTY_LAKE_STEPPING_STONE";
 			return  "\
 ``~~~.~T~``\
 `~~~~~.~~~`\
@@ -1668,7 +1668,7 @@ TT......TT```````````\
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = rand_int(-map->size_x, map->size_x);
 			map->m_exit.y = map->size_y;
-			map->name = "안개호수_나무_길";
+			map->name = "MISTY_LAKE_TREE_PATH";
 			return  "\
 T.T.T\
 ``.``\
@@ -1686,7 +1686,7 @@ T.T.T";
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = -1;
 			map->m_exit.y = map->size_y;
-			map->name = "안개호수_작은_숲";
+			map->name = "MISTY_LAKE_SMALL_FOREST";
 			return  "\
 ```.`\
 ``.T.\
@@ -1704,7 +1704,7 @@ T.T.T";
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
-			map->name = "안개호수_숲_안의_연못";
+			map->name = "MISTY_LAKE_POND_IN_FOREST";
 			return  "\
 `TTTTTTT`\
 TT.....TT\
@@ -1731,7 +1731,7 @@ TT.....TT\
 					map->event_list.push_back(mapdummy_event((i+j)%2? EVL_COLD_SMOKE:EVL_FIRE_SMOKE, coord_def(i*2-3, j*2-3), EVT_ALWAYS));
 				}
 			}
-			map->name = "홍마관_마력보관_전시대";
+			map->name = "SCARLET_ITEM_STAND";
 			return  "\
 .........\
 ..=====..\
@@ -1749,7 +1749,7 @@ TT.....TT\
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
 			map->m_exit.y = map->size_y;
-			map->name = "기본_다이아몬드_방";
+			map->name = "COMMON_DIAMOND_ROOM";
 			return  "\
 ```#.#```\
 ``#...#``\
@@ -1767,7 +1767,7 @@ TT.....TT\
 			map->m_entrance.y = rand_int(-map->size_y, map->size_y);
 			map->m_exit.x = map->size_x;
 			map->m_exit.y = rand_int(-map->size_y, map->size_y);
-			map->name = "기본_가로_모래시계방";
+			map->name = "COMMON_HORIZONTAL_HOURGLASS";
 			return  "\
 ...#`````##....\
 ....###`.......\
@@ -1795,7 +1795,7 @@ const char* pande_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_STAIR;
-		map->name = "마계_X자방";
+		map->name = "MAKAI_XROOM";
 		return  "\
 ###.###\
 ##...##\
@@ -1816,7 +1816,7 @@ const char* pande_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_STAIR;
-		map->name = "마계_유리방";
+		map->name = "MAKAI_GLASS_ROOM";
 		return  "\
 =.=.=.=.=.=\
 ...........\
@@ -1839,7 +1839,7 @@ const char* pande_pattern(map_dummy* map)
 		map->m_exit.x = -2;
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_STAIR;
-		map->name = "마계_ㄹ자_작은방";
+		map->name = "MAKAI_SROOM";
 	return  "\
 #####.#\
 #.....#\
@@ -1861,7 +1861,7 @@ const char* pande_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_STAIR;
-		map->name = "마계_다이아몬드방";
+		map->name = "MAKAI_DIAMOND_ROOM";
 		map->sp_tile_list.clear();
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
@@ -1893,7 +1893,7 @@ const char* pande_pattern(map_dummy* map)
 		map->m_exit.x = 1;
 		map->m_exit.y = map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_N방";
+		map->name = "MAKAI_NROOM";
 		return  "\
 $$$$$$$$$\
 $...M...$\
@@ -1918,7 +1918,7 @@ $$$...$$$";
 		map->m_entrance.y = -map->size_y;
 		map->m_exit.x = rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = -map->size_y;
-		map->name = "마계_지그재그";
+		map->name = "MAKAI_ZIGZAG";
 		return  "\
 #.............#\
 #.............#\
@@ -1948,7 +1948,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_유전자";
+		map->name = "MAKAI_DNA";
 		return  "\
 ...............\
 #.....###.....#\
@@ -1978,7 +1978,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_십자가";
+		map->name = "MAKAI_CROSS";
 		return  "\
 .............\
 .....#.#.....\
@@ -2006,7 +2006,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_클로버_작은방";
+		map->name = "MAKAI_CLOVER";
 		return  "\
 .............\
 .............\
@@ -2057,7 +2057,7 @@ $$$...$$$";
 				map->sp_tile_list.push_back(DG_GLASS);
 			}
 		}
-		map->name = "마계_물길";
+		map->name = "MAKAI_WATER_CROSS";
 		return  "\
 .............\
 ....==4==....\
@@ -2085,7 +2085,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_디스코";
+		map->name = "MAKAI_DISCO";
 		int add_ = randA(6);
 		for (int i = 0; i < 7; i++) {
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1+((i+ add_)%7)));
@@ -2117,7 +2117,7 @@ $$$...$$$";
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;		
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_무지개방";
+		map->name = "MAKAI_RAINBOW";
 		int add_ = randA(6);
 		for (int i = 0; i < 7; i++) {
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + ((i + add_) % 7)));
@@ -2151,7 +2151,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_호수_신전";
+		map->name = "MAKAI_LAKE_TEMPLE";
 		map->sp_tile_list.push_back(randomTemple());
 		return  "\
 .........\
@@ -2176,7 +2176,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_색다른방";
+		map->name = "MAKAI_COLORFUL_ROOM";
 		int rand_ = randA(3);
 		int rand2_ = randA(6);
 		for (int i = 0; i < 4; i++) {
@@ -2210,7 +2210,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_색다른방_몬스터";
+		map->name = "MAKAI_COLORFUL_MONSTER_ROOM";
 		int rand_ = randA(3);
 		int rand2_ = randA(6);
 		for (int i = 0; i < 4; i++) {
@@ -2243,7 +2243,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_보상함정방";
+		map->name = "MAKAI_REWARD_TRAP_ROOM";
 		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, 3), EVT_ALWAYS));
 		map->event_list.push_back(mapdummy_event(EVL_LOCK_DOOR, coord_def(0, -2), EVT_ALWAYS));
 		return  "\
@@ -2268,7 +2268,7 @@ $$$...$$$";
 		map->m_exit.x = 0;
 		map->m_exit.y = map->size_y;
 		//map->flag = FLAG_NO_STAIR;
-		map->name = "마계_유리와_문_방";
+		map->name = "MAKAI_GLASS_DOOR_ROOM";
 		return  "\
 ###.###\
 #.....#\
@@ -2287,7 +2287,7 @@ $$$...$$$";
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_유리_통로";
+		map->name = "MAKAI_GLASS_PATH";
 		return  "\
 ===#########===\
 =m=#########=M=\
@@ -2322,7 +2322,7 @@ $$$...$$$";
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1 + rand_));
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1 + rand_));
 		}
-		map->name = "마계_브로콜리";
+		map->name = "MAKAI_BROCCOLI";
 		return  "\
 ````00000````\
 ````01110````\
@@ -2350,7 +2350,7 @@ $$$...$$$";
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		//map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_벨트_통로";
+		map->name = "MAKAI_BELT_ROOM";
 		return  "\
 ```````````````\
 `$``#######``=`\
@@ -2376,7 +2376,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_꿈방";
+		map->name = "MAKAI_DERAM_ROOM";
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
 			if (rand_ == i)
@@ -2408,7 +2408,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_지저방";
+		map->name = "MAKAI_UNDER_ROOM";
 		int rand_ = randA(3);
 		for (int i = 0; i < 4; i++) {
 			if (rand_ == i)
@@ -2445,7 +2445,7 @@ $$$...$$$";
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "마계_템플릿";
+		map->name = "MAKAI_TEMPLATE";
 		return  "\
 ...............\
 ...............\
@@ -2487,7 +2487,7 @@ const char* temple_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "신전_다이아몬드_입구";
+		map->name = "TEMPLE_DIAMOND_ENTER";
 		return  "\
 ###.###\
 ##...##\
@@ -2505,7 +2505,7 @@ const char* temple_pattern(map_dummy* map)
 		map->m_exit.x = -map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "신전_가로_사슬입구";
+		map->name = "TEMPLE_HORIZONTAL_ENTER";
 		return  "\
 #####################\
 #.....#.....#.....###\
@@ -2521,7 +2521,7 @@ const char* temple_pattern(map_dummy* map)
 		map->m_exit.x = 4;
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "신전_회오리입구";
+		map->name = "TEMPLE_TORNADO_ENTER";
 		return  "\
 #########.#\
 #.......#.#\
@@ -2542,7 +2542,7 @@ const char* temple_pattern(map_dummy* map)
 		map->m_exit.x = map->size_x;
 		map->m_exit.y = 0;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "신전_십자입구";
+		map->name = "TEMPLE_CROSS_ENTER";
 		return  "\
 ###.###\
 #.#.#.#\
@@ -2560,7 +2560,7 @@ const char* temple_pattern(map_dummy* map)
 		map->m_exit.x = 0;
 		map->m_exit.y = -map->size_y;
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "신전_수족관입구";
+		map->name = "TEMPLE_AQUARIUM_ENTER";
 		return  "\
 ===+===\
 =~=0=~=\
@@ -2579,7 +2579,7 @@ const char* temple_pattern(map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "신전_호수입구";
+			map->name = "TEMPLE_LAKE_ENTER";
 			return  "\
 .........\
 ...~~~...\
@@ -2607,7 +2607,7 @@ const char* temple_pattern(map_dummy* map)
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(-1,-1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(1,1)));
 			map->monster_list.push_back(mapdummy_mon(randA(2)==0?MON_MOOK:randA(1)?MON_GREEN_MOOK:MON_GRAY_MOOK,0,coord_def(3,-1)));
-			map->name = "신전_모옥입구"; 
+			map->name = "TEMPLE_MOOK_ENTER"; 
 			return  "\
 .............\
 .===========.\
@@ -2629,7 +2629,7 @@ const char* temple_pattern(map_dummy* map)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			map->name = "신전_4개_수족관입구";
+			map->name = "TEMPLE_FOUR_AQUARIUM_ENTER";
 			return  "\
 .........\
 .===.===.\
@@ -2658,7 +2658,7 @@ const char* lake_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "안개의_호수_입구";
+		map->name = "MISTY_LAKE_BASE_ENTER";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		rand_rect_iterator rand_coord(coord_def(0, 0), map->size_x-1, map->size_y-1);
 		for (int i = 0; i < 10; i++) {
@@ -2694,7 +2694,7 @@ const char* youkai_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "요괴의_산_입구";
+		map->name = "YOUKAI_MOUNTAIN_BASE_ENTER";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return "\
 .........\
@@ -2725,7 +2725,7 @@ const char* yukkuri_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "윳쿠리_굴_입구";
+		map->name = "YUKKURI_BASE_ENTER";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(-1, 0)));
 		map->monster_list.push_back(mapdummy_mon(MON_REIMUYUKKURI, 0, coord_def(1, 0)));
@@ -2758,7 +2758,7 @@ const char* dream_enter_pattern(map_dummy* map)
 		hw_ = randA(1);
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
-		map->name = "꿈의_세계_입구";
+		map->name = "DREAM_BASE_ENTER";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		return "\
 ....^..\
@@ -2867,7 +2867,7 @@ const char* scarlet_pattern(map_dummy* map)
 			set_exist_named(MON_MEIRIN);
 		}
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "홍마관_기본입구";
+		map->name = "SCARLET_BASE_ENTER";
 		return  "\
 #######\
 #..0..#\
@@ -2919,7 +2919,7 @@ const char* youkai_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "요괴산_아야_룬";
+		map->name = "YOUKAI_MOUNTAIN_AYA_RUNE";
 		return  "\
 #################\
 ###...........###\
@@ -2982,7 +2982,7 @@ const char* youkai_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "요괴산_니토리_룬";
+		map->name = "YOUKAI_MOUNTAIN_NITORI_RUNE";
 		return  "\
 .................\
 .................\
@@ -3041,7 +3041,7 @@ const char* scarlet_last_vault_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(-3,1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT,0,coord_def(3,1)));	
 
-		map->name = "홍마관_기본_룬";
+		map->name = "SCARLET_REMILIA_RUNE";
 		return  "\
 #######+++#######\
 #...............#\
@@ -3113,7 +3113,7 @@ const char* eientei_vault_pattern(map_dummy* map)
 		}
 
 
-		map->name = "영원정_기본_룬";
+		map->name = "EIENTEI_KAGUYA_RUNE";
 
 		return  "\
 .......................................................................\
@@ -3181,7 +3181,7 @@ const char* pandemonium_baykuren_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "마계_법계_룬";
+		map->name = "MAKAI_HOKKAI_GURUGURU_RUNE";
 		return  "\
 $$$$$$$$$$$$$$$$$\
 $$$...........$$$\
@@ -3229,7 +3229,7 @@ const char* pandemonium_ice_last_vault_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,-1)));	
 		map->monster_list.push_back(mapdummy_mon(MON_MAI,0,coord_def(3,1)));		
 
-		map->name = "마계_빙결세계_룬";
+		map->name = "MAKAI_FROZEN_FIELD_YUKIMAI_RUNE";
 		return  "\
 ##~~~~~~~..~~~~~~~~##\
 #~~~~~~~.~~~~~~~~~~~#\
@@ -3291,7 +3291,7 @@ const char* pandemonium_shinki_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "마계_판데모니엄_룬";
+		map->name = "MAKAI_PANDEMONIUM_YUEMKO_RUNE";
 		return  "\
 $$$$$$$$$$$$$$$$$\
 $.##iiii.iiii##.$\
@@ -3356,7 +3356,7 @@ const char* yukkuri_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "윳쿠리_기본_룬";
+		map->name = "YUKKURI_BASE_RUNE";
 		return  "\
 ...............................\
 ...............................\
@@ -3439,7 +3439,7 @@ const char* moon_last_vault_pattern(map_dummy* map)
 				mon_num_--;
 			}
 		}
-		map->name = "달도시_기본_룬";
+		map->name = "MOON_BASE_RUNE";
 		return  "\
 ...............\
 .$$$.......$$$.\
@@ -3503,7 +3503,7 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 				set_exist_named(MON_UTSUHO);
 			}
 
-			map->name = "지저_기본_룬";
+			map->name = "SUBTERRANEAN_NUCLEAR_SIGN_RUNE";
 			return  "\
 .....................\
 .......#######.......\
@@ -3586,7 +3586,7 @@ const char* hakurei_last_vault_pattern(map_dummy* map)
 					mon_num_--;
 				}
 			}
-			map->name = "하쿠레이_기본_음양옥";
+			map->name = "HAKUREI_BASE_YINYANG_ORB";
 			return  "\
 #####$$$$$$$$$#####\
 ###$$$.......$$$###\

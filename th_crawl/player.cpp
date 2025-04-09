@@ -799,7 +799,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
 					PositionSwap(mon_);								
-					printlog("위치를 서로 바꿨다. ",false,false,false,CL_bad);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SWAP_ALLY) + " ",false,false,false,CL_bad);
 					time_delay += GetWalkDelay();//이동속도만큼 이동
 					prev_action = ACTT_WALK;
 					return 2;
@@ -809,7 +809,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 			else if(mon_->isUserAlly() && (mon_->flag & M_FLAG_NONE_MOVE))
 			{
-				printlog("이동할 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_SWAP_ALLY),true,false,false,CL_normal);
 				you.SetInter(IT_MAP_FIND);
 				return 0;
 			}
@@ -833,12 +833,12 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 			else if(!equipment[ET_WEAPON])
 			{
-				doingActionDump(DACT_MELEE, "맨손");
+				doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED));
 				//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
 			}
 			else
 			{
-				doingActionDump(DACT_MELEE, "엉터리");
+				doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_INEFFICIENT));
 			}
 
 
@@ -900,13 +900,13 @@ int players::move(short_move x_mov, short_move y_mov)
 
 		if(s_none_move)
 		{//온바시라 방해!			
-			printlog("움직일수 없다! 무엇인가 당신을 고정시키고있다!",true,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_MOVE_WITH_OBJECT),true,false,false,CL_danger);
 			return 0;
 		}
 
 		if (env[current_level].isForbidZone(move_x_, move_y_) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog("정말 들어갈거야?(y/n) ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ", false, false, false, CL_danger);
 			bool loop_ = true;
 			you.SetInter(IT_MAP_DANGER);
 			while (loop_)
@@ -934,7 +934,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
 			if(hp<temp_smoke->danger(this))
 			{		
-				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ",false,false,false,CL_danger);
 				bool loop_ = true;
 				you.SetInter(IT_SMOKE);
 				while(loop_)
@@ -950,7 +950,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'n':
 					case VK_ESCAPE:
 						loop_ = false;
-						printlog("위험해!",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER),true,false,false,CL_normal);
 						return 0;
 					default:
 						break;
@@ -962,7 +962,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if(hp<temp_floor->danger(this))
 			{
-				printlog("정말 들어갈거야?(y/n) ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ",false,false,false,CL_danger);
 				bool loop_ = true;
 				
 				you.SetInter(IT_SMOKE);
@@ -979,7 +979,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'n':
 					case VK_ESCAPE:
 						loop_ = false;
-						printlog("위험해!",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER),true,false,false,CL_normal);
 						return 0;
 					default:
 						break;
@@ -997,7 +997,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				if (monster *mon__ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(30), true, false, 0, NULL, coord_def(move_x_, move_y_), SKD_OTHER, -1))
 				{
 					mon__->LevelUpdown(you.level, 6);
-					printlog("오키나가 문을 잠가버렸다!", true, false, false, CL_small_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR), true, false, false, CL_small_danger);
 					return true;
 				}
 
@@ -1028,7 +1028,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				return 0;
 			if (s_slaying<0)
 			{//온바시라 방해!			
-				printlog("움직일수 없다! 온바시라가 당신을 고정시키고있다!", true, false, false, CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_MOVE_WITH_OBJECT), true, false, false, CL_danger);
 				return 0;
 			}
 			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim() || drowned))
@@ -1046,7 +1046,7 @@ int players::move(short_move x_mov, short_move y_mov)
 	else {
 		if (s_confuse || (s_drunken && drunken_ == 0))
 		{
-			printlog("아얏!", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_OUCH), true, false, false, CL_normal);
 			time_delay += GetWalkDelay();
 			return 1;
 		}
@@ -1533,7 +1533,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 	}
 
 	if(value_<0 && GetMaxHp()/2 <= -value_)
-		printlog("악! 이건 정말로 아프다!",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_OUCH_THIS_REALLY_HURTS),true,false,false,CL_danger);
 
 	if(order_)
 	{
@@ -1546,7 +1546,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		dead_order->type = ATT_NONE;
 	}
 	if (s_sleep < 0 && value_ < 0 && reason != DR_SLEEP) {
-		printlog("데미지에 의해 잠에서 깼다! ", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_WAKEUP_WITH_DAMAGE) + " ", false, false, false, CL_white_blue);
 		s_sleep = 0;
 	}
 	if (pure_mp && value_ < 0 && mp > 0)
@@ -1578,8 +1578,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			deadlog();
 			soundmanager.playSound("gameover");
 			MoreWait();
-			resurectionlog("완전 무결의 부적");
-			printlog("그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!", true, false, false, CL_white_blue);
+			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE), true, false, false, CL_white_blue);
 			hp = max_hp;
 			mp = max_mp;
 			for (list<item>::iterator it = item_list.begin(); it != item_list.end(); it++)
@@ -1595,8 +1595,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		{
 			deadlog();
 			soundmanager.playSound("gameover");
-			resurectionlog("리저렉션");
-			printlog("리저렉션!",true,false,false,CL_white_blue);
+			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT),true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
 			MoreWait();
 			hp = max_hp;
@@ -1608,8 +1608,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		{			
 			deadlog();
 			soundmanager.playSound("gameover");
-			resurectionlog("리저렉션");
-			printlog("리저렉션!",true,false,false,CL_white_blue);
+			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT),true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
 			MoreWait();
 			hp = max_hp;
@@ -1621,8 +1621,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		{
 			deadlog();
 			soundmanager.playSound("gameover");
-			resurectionlog("순호의 생명순화");
-			printlog("죽어가던 당신의 생명력이 돌아왔다!", true, false, false, CL_white_blue);
+			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE), true, false, false, CL_white_blue);
 			MoreWait();
 			hp = max_hp;
 			mp = max_mp;
@@ -1644,8 +1644,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			deadlog();
 			soundmanager.playSound("gameover");
 			MoreWait();
-			resurectionlog("시온");
-			printlog("시온이 당신의 소모품을 대가로 당신을 부활시켰다!", true, false, false, CL_sion);
+			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SION));
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE), true, false, false, CL_sion);
 			random_extraction<textures*> rand_t;
 			rand_t.push(img_fog_sion[0], 3);
 			rand_t.push(img_fog_sion[1], 1);
@@ -1656,7 +1656,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
-			printlog("죽어? (Y/N)",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_REVIVE_YN),true,false,false,CL_help);
 			int key_ = waitkeyinput();
 			switch(key_)
 			{
@@ -1677,7 +1677,9 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 	else if (prev_value_ < 0 &&  GetHp() <= GetDangerHp()) {
 		if (prev_hp_ > GetDangerHp()) {
 			soundmanager.playSound("lowhp");
-			printlog("============ 낮은 체력 경고 ============", true, false, false, CL_danger);
+			ostringstream ss;
+			ss << "============ " << LocalzationManager::locString(LOC_SYSTEM_LOW_HEALTH_WARNING) << " ============";
+			printlog(ss.str(), true, false, false, CL_danger);
 		}
 	}
 
@@ -2235,10 +2237,10 @@ void players::ExpRecovery(int exper_)
 				if (system_exp.value <= 0) {
 					soundmanager.playSound("charge");
 					if (isCanCharge((amulet_type)_item->value1)) {
-						printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 					}
 					else {
-						printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE), true, false, false, CL_white_puple);
 					}
 				}
 			}
@@ -2271,15 +2273,15 @@ void players::ExpRecovery(int exper_)
 			{
 			case 0:
 				s_str++;
-				printlog("잃어버린 힘이 회복되었다.",false,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_STR),false,false,false,CL_blue);
 				break;
 			case 1:
 				s_dex++;
-				printlog("잃어버린 민첩이 회복되었다.",false,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_DEX),false,false,false,CL_blue);
 				break;
 			case 2:
 				s_int++;
-				printlog("잃어버린 지능이 회복되었다.",false,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT_INT),false,false,false,CL_blue);
 				break;
 			}
 		}
@@ -2303,12 +2305,12 @@ void players::ExpRecovery(int exper_)
 					{
 					}
 				}
-				printlog("이럴수가! 하늘에서 UFO가 떨어졌다!",true,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_UNLUCK_UFO),true,false,false,CL_danger);
 				enterlog();
 			}
 			if(!s_unluck)
 			{
-				printlog("당신의 운세는 정상으로 돌아왔다.",true,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_UNLUCK_RECORVER),true,false,false,CL_blue);
 			}
 
 		}
@@ -2318,7 +2320,7 @@ void players::ExpRecovery(int exper_)
 
 		if(wiz_list.wizard_mode == 1)
 		{
-			printlog("일정량의 스킬 경험치 획득",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_GAIN_EXP_FOR_TRIGGER),true,false,false,CL_help);
 		}
 
 		for(int i=0;i<GT_LAST;i++)
@@ -2403,7 +2405,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	}
 	if(skill_ == SKT_ERROR)
 	{
-		printlog("스킬경험치에 에러가 발생했습니다.",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_EXP_ERROR),true,false,false,CL_danger);
 		return false;
 	}
 	int need_exp = need_skill_exp(GetSkillLevel(skill_, false),AptCal(skill[skill_].aptit));
@@ -2439,7 +2441,6 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	GodAccpect_Practice(up_point,skill_);
 	if(need_exp <= skill[skill_].exper)
 	{
-		char temp[100];
 		int exp_pool = (skill[skill_].exper - need_exp)*exp_panalty/10;
 		skill[skill_].level+=1;
 		skill[skill_].exper = need_exp;
@@ -2451,13 +2452,17 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		if(speak_)
 		{
 			enterlog();
-			sprintf_s(temp,100,"%s 스킬레벨이 올랐다! 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
-			printlog(temp,true,false,false,CL_good);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_LEVEL_UP,
+				PlaceHolderHelper(skill_string(skill_)),
+				PlaceHolderHelper(to_string(skill[skill_].level))
+			),true,false,false,CL_good);
 			if(skill[skill_].level == 1 || skill[skill_].level % 5 == 0 || skill[skill_].level == 27)
 			{
-				char temp2[200];
-				sprintf_s(temp2,200,"스킬 %s의 레벨업. 스킬레벨 %d",skill_string(skill_).c_str(),skill[skill_].level);
-				AddNote(you.turn,CurrentLevelString(),temp2,CL_normal);
+				AddNote(you.turn,CurrentLevelString(),
+				LocalzationManager::formatString(LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,
+				PlaceHolderHelper(skill_string(skill_)),
+				PlaceHolderHelper(to_string(skill[skill_].level)),
+				CL_normal);
 			}
 		}
 		if(skill_ == SKT_FIGHT)
@@ -2617,9 +2622,9 @@ bool players::SetPoison(int poison_, int max_, bool strong_)
 		poison_/=3;
 
 	if(!s_poison)
-		printlog("당신은 독에 걸렸다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_POISONED) + " ",false,false,false,CL_small_danger);
 	else
-		printlog("당신의 독은 심해졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_POISONED) + " ",false,false,false,CL_small_danger);
 
 	s_poison += poison_;
 	if(s_poison>150)
@@ -2635,12 +2640,12 @@ bool players::SetTele(int tele_)
 		return false;
 	if(!s_tele)
 	{
-		printlog("당신은 공간의 불안정함을 느꼈다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TELE) + " ",false,false,false,CL_white_blue);
 		s_tele = tele_;
 	}
 	else
 	{
-		printlog("당신 주위의 공간은 안정되었다. ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TELE_STABLE) + " ",false,false,false,CL_normal);
 		s_tele = 0;
 	}
 	return true;
@@ -2651,12 +2656,12 @@ bool players::SetMight(int might_)
 		return false;
 	if(!s_might)
 	{
-		printlog("당신은 강력해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MIGHT) + " ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_STR);
 	}
 	else
 	{
-		printlog("당신의 더욱 더 강력해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_MIGHT) + " ",false,false,false,CL_white_blue);
 
 	}
 	s_might += might_;
@@ -2670,12 +2675,12 @@ bool players::SetClever(int clever_)
 		return false;
 	if(!s_clever)
 	{
-		printlog("당신은 똑똑해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_CLEVER) + " ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_INT);
 	}
 	else
 	{
-		printlog("당신은 더욱 더 똑똑해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_CLEVER) + " ",false,false,false,CL_white_blue);
 
 	}
 	s_clever += clever_;
@@ -2689,13 +2694,13 @@ bool players::SetAgility(int agility_)
 		return false;
 	if(!s_agility)
 	{
-		printlog("당신은 민첩해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_AGILITY) + " ",false,false,false,CL_white_blue);
 		StatUpDown(5, STAT_DEX);
 		EvUpDown(0,5);
 	}
 	else
 	{
-		printlog("당신의 더욱 더 민첩해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_AGILITY) + " ",false,false,false,CL_white_blue);
 
 	}
 	s_agility += agility_;
@@ -2708,10 +2713,10 @@ bool players::SetHaste(int haste_)
 	if(!haste_)
 		return false;
 	if(!s_haste)
-		printlog("당신은 빨라졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_HASTE) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 가속은 좀 더 길어졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_HASTE) + " ",false,false,false,CL_white_blue);
 	}
 	s_haste += haste_;
 	power_decre = 0;
@@ -2725,10 +2730,10 @@ bool players::SetPureHaste(int haste_)
 	if (!haste_)
 		return false;
 	if (!s_pure_haste)
-		printlog("당신은 살의에 의해 빨라졌다. ", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PURE_HASTE) + " ", false, false, false, CL_white_blue);
 	else
 	{
-		printlog("당신의 살의는 좀 더 길어졌다. ", false, false, false, CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_PURE_HASTE) + " ", false, false, false, CL_white_blue);
 	}
 	s_pure_haste += haste_;
 	power_decre = 0;
@@ -2747,10 +2752,10 @@ bool players::SetConfuse(int confuse_, bool strong_)
 
 
 	if(!s_confuse)
-		printlog("당신은 혼란스러워졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_CONFUSE) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 더 혼란스러워졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_CONFUSE) + " ",false,false,false,CL_small_danger);
 		confuse_ /=2;
 	}
 	s_confuse += confuse_;
@@ -2763,10 +2768,10 @@ bool players::SetSlow(int slow_)
 	if(!slow_)
 		return false;
 	if(!s_slow)
-		printlog("당신은 느려졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLOW) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 더 느려졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SLOW) + " ",false,false,false,CL_small_danger);
 		slow_ /=2;
 	}
 	s_slow += slow_;
@@ -2782,10 +2787,10 @@ bool players::SetFrozen(int frozen_)
 		return false;
 		
 	if(!s_frozen)
-		printlog("당신은 몸이 얼어붙어 움직이기 힘들어졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FROZEN) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 더욱 몸이 얼어붙어 움직이기 힘들어졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_FROZEN) + " ",false,false,false,CL_small_danger);
 		frozen_ /=2;
 	}
 	s_frozen += frozen_;
@@ -2798,10 +2803,10 @@ bool players::SetElec(int elec_)
 	if(!elec_)
 		return false;
 	if(!s_elec)
-		printlog("당신은 전기를 방출하기 시작했다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_ELEC) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오랫동안 전기를 방출한다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_ELEC) + " ",false,false,false,CL_white_blue);
 	}
 	s_elec += elec_;
 	if(s_elec>40)
@@ -2813,7 +2818,7 @@ bool players::SetParalyse(int paralyse_)
 	if(!paralyse_ || s_paralyse)
 		return false;
 
-	printlog("당신은 마비되었다. ",false,false,false,CL_small_danger);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PARALYSE) + " ",false,false,false,CL_danger);
 
 	s_paralyse += paralyse_;
 	if(s_paralyse>100)
@@ -2825,10 +2830,10 @@ bool players::SetLevitation(int levitation_)
 	if(!levitation_)
 		return false;
 	if(!s_levitation)
-		printlog("당신은 공중에 뜨기 시작했다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오랫동안 공중에 뜨게 되었다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_FLY) + " ",false,false,false,CL_white_blue);
 	}
 	s_levitation += levitation_;
 	if(s_levitation>100)
@@ -2840,10 +2845,10 @@ bool players::SetGlow(int glow_, bool no_speak)
 	if(!glow_)
 		return false;
 	if(!s_glow)
-		printlog("당신은 빛을 내기 시작했다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GLOW) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신은 더 강한 빛을 내고 있다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_GLOW) + " ",false,false,false,CL_small_danger);
 		glow_ /=2;
 	}
 	s_glow += glow_;
@@ -2856,10 +2861,10 @@ bool players::SetGraze(int graze_)
 	if(!graze_)
 		return false;
 	if(!s_graze)
-		printlog("당신의 탄막을 피하는 감각이 좋아졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GRAZE) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 탄막을 피하는 감각이 지속된다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_GRAZE) + " ",false,false,false,CL_white_blue);
 	}
 	if(graze_>0)
 		s_graze += graze_;
@@ -2874,9 +2879,9 @@ bool players::SetSilence(int silence_, int silence_range_)
 	if(!silence_)
 		return false;
 	if(!s_silence)
-		printlog("당신은 주변의 소리를 지웠다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SILENCE) + " ",false,false,false,CL_white_blue);
 	else
-		printlog("당신은 주변의 소리를 지웠다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SILENCE) + " ",false,false,false,CL_white_blue);
 	if(s_silence)
 		env[current_level].MakeSilence(position, s_silence_range, false);
 	s_silence_range = silence_range_;
@@ -2891,10 +2896,10 @@ bool players::SetSick(int sick_)
 	if(!sick_)
 		return false;
 	if(!s_sick)
-		printlog("당신은 아파졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SICK) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신은 더욱 아파졌다. ",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SICK) + " ",false,false,false,CL_small_danger);
 	}
 	s_sick += sick_;
 	if(s_sick>200)
@@ -2906,10 +2911,10 @@ bool players::SetVeiling(int veiling_, int value_)
 	if(!veiling_)
 		return false;
 	if(!s_veiling)
-		printlog("당신 주변에 바람이 휘감긴다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_VEILING) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신 주변에 휘감긴 바람이 좀 더 오래간다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_VEILING) + " ",false,false,false,CL_white_blue);
 	}
 	s_veiling += veiling_;
 	s_value_veiling = value_;
@@ -2922,10 +2927,10 @@ bool players::SetInvisible(int invisible_)
 	if(!invisible_)
 		return false;
 	if(!s_invisible)
-		printlog("당신은 투명해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_INVISIBLE) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오래 투명해졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_INVISIBLE) + " ",false,false,false,CL_white_blue);
 	}
 	s_invisible += invisible_;
 	power_decre = 0;
@@ -2982,25 +2987,25 @@ bool players::SetSwift(int swift_)
 
 	if (!s_swift) {
 		if (swift_>0) {
-			printlog("당신은 다리가 빨라졌다. " , false, false, false, CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SWIFT) + " " , false, false, false, CL_white_blue);
 		}
 		else {
-			printlog("당신은 다리가 느려졌다. ", false, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH) + " ", false, false, false, CL_small_danger);
 		}
 	}
 	else
 	{
 		if (swift_ > 0) {
 			if(s_swift > 0)
-				printlog("당신은 더 오래 달릴 수 있다. ", false, false, false, CL_white_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SWIFT) + " ", false, false, false, CL_white_blue);
 			else 
-				printlog("당신은 느린 걸음을 고쳐세웠다. ", false, false, false, CL_white_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SWIFT_FROM_SLUGGISH) + " ", false, false, false, CL_white_blue);
 		}
 		else {
 			if (s_swift > 0)
-				printlog("당신은 가볍던 발이 무거워진 것을 느꼈다. ", false, false, false, CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH_FROM_SWIFT) + " ", false, false, false, CL_small_danger);
 			else
-				printlog("당신은 다리가 더욱 느려졌다. ", false, false, false, CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SLUGGISH) + " ", false, false, false, CL_small_danger);
 		}
 	}
 	s_swift += swift_;
@@ -3025,10 +3030,10 @@ bool players::SetSuperMan(int superman_)
 	if(!superman_)
 		return false;
 	if(!s_superman)
-		printlog("당신은 다리가 엄청나게 빨라졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SUPERMAN) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신은 더 오래 달릴 수 있다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_SUPERMAN) + " ",false,false,false,CL_white_blue);
 	}
 	s_superman += superman_;
 	s_swift = 0;
@@ -3055,10 +3060,10 @@ bool players::SetWind(int s_wind_)
 	if(!s_wind_)
 		return false;
 	if(!s_wind)
-		printlog("당신의 주변에 바람이 휘감겼다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_WIND) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("당신의 주변에 바람이 더 휘감겼다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_WIND) + " ",false,false,false,CL_white_blue);
 	}
 	s_wind += s_wind_;
 	if(s_wind>200)
@@ -3070,10 +3075,10 @@ bool players::SetKnifeCollect(int s_knife_collect_)
 	if(!s_knife_collect_)
 		return false;
 	if(!s_knife_collect)
-		printlog("당신은 자동으로 탄막을 회수하기 시작한다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_KNIFE_COLLECT) + " ",false,false,false,CL_white_blue);
 	else
 	{
-		printlog("탄막을 회수하는 시간이 길어졌다. ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_KNIFE_COLLECT) + " ",false,false,false,CL_white_blue);
 	}
 	s_knife_collect += s_knife_collect_;
 	if(s_knife_collect>100)
@@ -3086,10 +3091,10 @@ bool players::SetDrunken(int s_drunken_)
 	if(!s_drunken_)
 		return false;
 	if(!s_drunken)
-		printlog("당신은 취했다. ",false,false,false,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_DRUNKEN) + " ",false,false,false,CL_warning);
 	else
 	{
-		printlog("당신은 더욱 더 취했다. ",false,false,false,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_DRUNKEN) + " ",false,false,false,CL_warning);
 	}
 	s_drunken += s_drunken_;
 	if(s_drunken>100)
@@ -3104,7 +3109,7 @@ bool players::SetLunatic(int s_lunatic_)
 	if(confuse_resist>0)
 		return false;
 	if(!s_lunatic)
-		printlog("당신은 광기에 휩싸였다. ",false,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_LUNATIC) + " ",false,false,false,CL_danger);
 	else
 	{
 		//printlog("당신은 더욱 더 미쳤다. ",false,false,false,CL_warning);
@@ -3151,7 +3156,7 @@ bool players::SetTimeStep(int timestep_)
 }
 bool players::SetMirror(int mirror_)
 {
-	printlog("당신은 모든 데미지를 반사한다. ",false,false,false,CL_white_blue);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MIRROR) + " ",false,false,false,CL_white_blue);
 	s_mirror = mirror_;
 	return true;
 
@@ -3159,7 +3164,7 @@ bool players::SetMirror(int mirror_)
 bool players::SetParadox(int s_paradox_)
 {
 	if(s_paradox_)
-		printlog("당신은 도플갱어를 통해 탄막을 연달아 발사할 준비가 되었다. ",true,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_PARADOX) + " ",true,false,false,CL_white_blue);
 	s_paradox = s_paradox_;
 	return true;
 
@@ -3171,11 +3176,11 @@ bool players::SetTransPanalty(int s_trans_panalty_)
 		return false;
 
 	if(s_trans_panalty_<3)
-		printlog("약간의 시공간 부작용을 받았다. ",true,false,false,CL_bad);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TRANS_PANALTY1),true,false,false,CL_bad);
 	else if(s_trans_panalty_<5)
-		printlog("상당한 시공간 부작용을 받았다. ",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TRANS_PANALTY2),true,false,false,CL_normal);
 	else
-		printlog("어마어마한 시공간 부작용을 받았다. ",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TRANS_PANALTY3),true,false,false,CL_small_danger);
 	s_trans_panalty += s_trans_panalty_;
 	return true;
 }
@@ -3184,7 +3189,7 @@ bool players::SetTheWorld(int s_the_world_)
 	if(!s_the_world_)
 		return false;
 	if(!s_the_world)
-		printlog("더 월드! ",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_THE_WORLD) + " ",false,false,false,CL_white_blue);
 	else
 	{
 	}
@@ -3343,10 +3348,10 @@ bool players::SetStasis(int s_stasis_)
 	if(!s_stasis_)
 		return false;
 	if(!s_drunken)
-		printlog("당신은 전이를 방해받았다.",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_STASIS) + " ",false,false,false,CL_small_danger);
 	else
 	{
-		printlog("당신의 전이 방해는 더욱 길어졌다.",false,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_STASIS) + " ",false,false,false,CL_small_danger);
 	}
 	s_stasis += s_stasis_;
 	if(s_stasis>100)
@@ -3362,10 +3367,10 @@ bool players::SetForceStrong(bool force_, int turn_, bool speak_)
 	if(speak_)
 	{
 		if(!force_)
-			printlog("당신은 공격과 마법의 위력이 대폭 감소했다. ",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FORCE_WEAK),true,false,false,CL_small_danger);
 		else
 		{
-			printlog("당신의 공격과 마법의 위력은 대폭 증가했다. ", true,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FORCE_STRONG), true,false,false,CL_white_blue);
 		}
 	}
 
@@ -3398,9 +3403,9 @@ bool players::SetNightSight(int value_, int turn_, bool stong_)
 	if (!stong_ && (you.invisible_view))
 		return false;
 	if(!s_night_sight_turn)
-		printlog("당신의 눈은 침침해졌다.", false, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_BLIND) + " ", false, false, false, CL_small_danger);
 	else if(s_night_sight_turn && s_night_sight > value_)
-		printlog("당신의 눈은 더욱 더 침침해졌다!", false, false, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_BLIND) + " ", false, false, false, CL_small_danger);
 	s_night_sight = value_;
 	s_night_sight_turn = turn_;
 	return true;
@@ -3414,7 +3419,7 @@ bool players::SetSleep(int value_)
 
 	if (s_sleep > 99) {
 		s_sleep = -10;
-		printlog("당신은 잠에 빠졌다!", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLEEP), true, false, false, CL_danger);
 		MoreWait();
 	}
 	return true;
@@ -3570,7 +3575,7 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 	
 	if(s_stasis)
 	{
-		printlog("당신은 전이방해도중에 전이를 사용할 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STASIS_PENALTY),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -3578,12 +3583,12 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 	{
 		if(!preiden_)
 		{				
-			printlog("유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE),true,false,false,CL_small_danger);
 		}		
 		else
 		{
 			changedisplay(DT_GAME);
-			printlog("유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN),false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -3597,7 +3602,7 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 				break;
 			case 'N':
 			default:
-				printlog(" 취소하였다.",true,false,false,CL_normal);
+				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
 				return false;
 			}
 		}
@@ -3611,9 +3616,7 @@ void players::LevelUp(bool speak_)
 	level++;
 	if(speak_)
 	{
-		char temp[50];
-		sprintf_s(temp,50,"당신의 레벨이 올랐다! 레벨 %d",you.level);
-		printlog(temp,true,false,false,CL_good);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_LEVELUP_MESSGE, PlaceHolderHelper(to_string(you.level))),true,false,false,CL_good);
 		soundmanager.playSound("levelup");
 		MoreWait();
 	}
@@ -3622,7 +3625,7 @@ void players::LevelUp(bool speak_)
 		if(speak_)
 		{
 			bool end_ = false;
-			printlog("당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE),true,false,false,CL_help);
 			while(!end_)
 			{
 				switch(waitkeyinput())
@@ -3630,19 +3633,19 @@ void players::LevelUp(bool speak_)
 				case 'S':
 				case 's':
 					you.StatUpDown(1,STAT_STR);
-					printlog("강력해졌다.",true,false,false,CL_good);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STR),true,false,false,CL_good);
 					end_ = true;
 					break;
 				case 'D':
 				case 'd':
 					you.StatUpDown(1,STAT_DEX);
-					printlog("민첩해졌다.",true,false,false,CL_good);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_DEX),true,false,false,CL_good);
 					end_ = true;
 					break;
 				case 'I':
 				case 'i':
 					you.StatUpDown(1,STAT_INT);
-					printlog("똑똑해졌다.",true,false,false,CL_good);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_INT),true,false,false,CL_good);
 					end_ = true;
 					break;
 				}
@@ -3661,13 +3664,13 @@ void players::LevelUp(bool speak_)
 
 	if(level == 9 && GetProperty(TPT_9_LIFE))
 	{
-		printlog("당신은 충분히 성장하여 부활능력을 하나 잃었다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE),true,false,false,CL_small_danger);
 		image = &img_play_mokou[1];
 		DeleteProperty(TPT_9_LIFE);
 	}
 	if(level == 18 && GetProperty(TPT_18_LIFE))
 	{
-		printlog("당신은 충분히 성장하여 부활능력을 모두 잃었다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL),true,false,false,CL_small_danger);
 		image = &img_play_mokou[2];
 		DeleteProperty(TPT_18_LIFE);
 	}
@@ -3690,15 +3693,22 @@ void players::LevelUp(bool speak_)
 	{
 		if (!you.pure_mp)
 		{
-			char temp[200];
-			sprintf_s(temp, 200, "레벨업 : 레벨 %2d. HP: %4d/%4d , MP: %4d/%4d", level, GetHp(), GetMaxHp(), GetMp(), GetMaxMp());
-			AddNote(you.turn, CurrentLevelString(), temp, CL_good);
+			ss << LocalzationManager::locString(LOC_SYSTEM_LEVELUP) << " : " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << 
+			   " " << std::setw(2) << level
+			   << ". HP: " << std::setw(4) << GetHp()
+			   << "/" << std::setw(4) << GetMaxHp()
+			   << " , MP: " << std::setw(4) << GetMp()
+			   << "/" << std::setw(4) << GetMaxMp();
+			AddNote(you.turn, CurrentLevelString(), ss.str(), CL_good);
 		}
 		else
 		{
-			char temp[200];
-			sprintf_s(temp, 200, "레벨업 : 레벨 %2d. HP: %4d/%4d", level, GetHp(), GetMaxHp());
-			AddNote(you.turn, CurrentLevelString(), temp, CL_good);
+			std::stringstream ss;
+			ss << LocalzationManager::locString(LOC_SYSTEM_LEVELUP) << " : " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << 
+			   " " << std::setw(2) << level
+			   << ". HP: " << std::setw(4) << GetHp()
+			   << "/" << std::setw(4) << GetMaxHp();
+			AddNote(you.turn, CurrentLevelString(), ss.str(), CL_good);
 		}
 	}
 }
@@ -3971,8 +3981,9 @@ interupt_type players::resetLOS(bool speak_)
 
 							if(speak_)
 							{
-								printlog(LocalzationManager::locString(dungeon_tile_tribe_type_string[env[current_level].dgtile[check_pos_.x][check_pos_.y].tile]),false,false,false,CL_normal);
-								printlog("을 발견했다.",true,false,false,CL_normal);	
+								printlog(LocalzationManager::formatString(LOC_SYSTEM_DISCORVER_SOMETHING,								
+									PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[check_pos_.x][check_pos_.y].tile])
+								),true,false,false,CL_normal);	
 							}
 							interrupt_ = IT_MAP_FIND;
 							break;
@@ -4098,7 +4109,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		{
 			PowUpDown(t->value5);
 			if (speak_)
-				printlog("P가 증가했다.", false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_PITEM), false, false, false, CL_normal);
 		}
 		ReleaseMutex(mutx);
 		if (speak_)
@@ -4109,11 +4120,10 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 
 	if(t->type == ITM_GOAL)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"당신은 %s을 주웠다! ( ]키로 그동안 얻은 룬을 표시 )",LocalzationManager::locString(rune_string[t->value1]).c_str());
-		printlog(temp,true,false,false,CL_good);
-		sprintf_s(temp,200,"%s을 얻었다.",LocalzationManager::locString(rune_string[t->value1]).c_str());
-		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_RUNE, 
+			PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
+			PlaceHolderHelper(rune_string[t->value1])),CL_warning);
 		rune[t->value1]++;
 		ReleaseMutex(mutx);
 		if (speak_)
@@ -4123,10 +4133,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	if(t->type == ITM_ORB)
 	{
 		
-		printlog("당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다!",true,false,false,CL_good);
-		char temp[200];
-		sprintf_s(temp,200,"음양옥을 얻었다.");
-		AddNote(you.turn,CurrentLevelString(),temp,CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_YINYANG_ORB),true,false,false,CL_good);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_GET_YINYANG_ORB),CL_warning);
 		ReleaseMutex(mutx);
 		if (speak_)
 			soundmanager.playSound("rune");
@@ -4170,11 +4178,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 
 						if(t->num)
 						{
-							printlog(" (",false,false,false,CL_normal);
-							char temp_[16];
-							sprintf_s(temp_, 16,"%d",t->num);
-							printlog(temp_,false,false,false,CL_normal);
-							printlog("개 획득)",true,false,false,CL_normal);
+							printlog(" " + LocalzationManager::formatString(LOC_SYSTEM_PICKUP_NUMBER, PlaceHolderHelper(to_string(t->num))),true,false,false,CL_normal);
 						}
 					}
 					if (t->pick())
@@ -4257,7 +4261,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	}
 	else
 	{
-		printlog("가질 수 있는 갯수를 초과했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_LIMIT),true,false,false,CL_normal);
 		ReleaseMutex(mutx);
 		return 0;
 	}
@@ -4311,7 +4315,7 @@ bool players::Eat(char id_)
 					//}
 					if((*it).value1 == 0)
 						(*it).value3 = 100;
-					printlog("음식을 먹기 시작했다.",true,false,false,CL_bad);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_STARTING),true,false,false,CL_bad);
 					soundmanager.playSound("powerup");
 					time_delay += you.GetNormalDelay();
 					TurnEnd();
@@ -4333,7 +4337,7 @@ bool players::Eat(char id_)
 						time_delay += you.GetNormalDelay();
 						TurnEnd();
 					}
-					printlog("음식을 전부 먹었다.",false,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_FINISH),false,false,false,CL_normal);
 					PowUpDown((*it).value5);
 					DeleteItem(it,1);
 					enterlog();
@@ -4342,20 +4346,20 @@ bool players::Eat(char id_)
 				}
 				else
 				{
-					printlog("장착중인 아이템이다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_IS_EQUIP_ITEM),true,false,false,CL_normal);
 					ReleaseMutex(mutx);
 					return false;		
 				}		
 			}
 			else
 			{
-				printlog("이건 음식이 아니다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_NOT_FOOD),true,false,false,CL_normal);
 				ReleaseMutex(mutx);
 				return false;				
 			}
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	ReleaseMutex(mutx);
 	return false;
 }
@@ -4363,7 +4367,7 @@ bool players::Drink(char id_)
 {
 	if (you.s_pure_turn && you.s_pure >= 20)
 	{
-		printlog("당신은 물약의 맛을 느끼기엔 너무 순화되어있다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK), true, false, false, CL_normal);
 		return false;
 	}
 
@@ -4414,14 +4418,14 @@ bool players::Drink(char id_)
 
 						if(iden_list.potion_list[(*it).value1].iden == false)
 						{		
-							printarray(false,false,false,CL_normal,3,"이것은 ",LocalzationManager::locString(potion_iden_string[(*it).value1]).c_str(),"물약이다. ");		
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_IDENTIFY_ITEM, PlaceHolderHelper(potion_iden_string[(*it).value1])), false,false,false,CL_normal);		
 						}
 						iden_list.potion_list[(*it).value1].iden = true;
 						(*it).identify = true;
 					}
 					else
 					{
-						printarray(true,false,false,CL_small_danger,1,"에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!");
+						printarray(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
 						drinkpotion(PT_WATER, false);
 					}
 
@@ -4437,20 +4441,20 @@ bool players::Drink(char id_)
 				}
 				else
 				{
-					printlog("장착중인 아이템이다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_IS_EQUIP_ITEM),true,false,false,CL_normal);
 					ReleaseMutex(mutx);
 					return false;		
 				}					
 			}
 			else
 			{
-				printlog("이건 마실 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DRINK_NOT_POTION),true,false,false,CL_normal);
 				ReleaseMutex(mutx);
 				return false;				
 			}
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return false;
 }
 bool players::Evoke(char id_, bool auto_)
@@ -4465,7 +4469,7 @@ bool players::Evoke(char id_, bool auto_)
 			if (you.s_evoke_ghost &&
 				!((*it).type == ITM_MISCELLANEOUS && (*it).value1 == EVK_GHOST_BALL)
 				) {
-				printlog("유령상태에선 오쿠리쵸친을 제외한 아이템을 발동하는건 불가능해! ", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_WARN), true, false, false, CL_normal);
 				return false;
 			}
 			WaitForSingleObject(mutx, INFINITE);
@@ -4473,7 +4477,7 @@ bool players::Evoke(char id_, bool auto_)
 			{
 				if(((*it).identify || (*it).value3 == -1) && (*it).value1 <= 0)
 				{
-					printlog("남은 횟수가 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
 					ReleaseMutex(mutx);
 					return false;	
 				}
@@ -4484,7 +4488,7 @@ bool players::Evoke(char id_, bool auto_)
 					WaitForSingleObject(mutx, INFINITE);
 					if(!(*it).value1)
 					{
-						printlog("남은 횟수가 없다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
 						(*it).value3 = -1; //-1이면 비어있는것이 확정
 						ReleaseMutex(mutx);
 						return true;
@@ -4518,19 +4522,19 @@ bool players::Evoke(char id_, bool auto_)
 			{
 				if (equipment[ET_NECK] != &(*it))
 				{
-					printlog("끼고있는 부적만을 발동할 수 있다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET), true, false, false, CL_normal);
 					ReleaseMutex(mutx);
 					return false;
 				}
 				if (!isCanEvoke((amulet_type)(*it).value1))
 				{
-					printlog("이 부적은 발동할 수 있는 부적이 아니다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_PASSIVE_AMULET), true, false, false, CL_normal);
 					ReleaseMutex(mutx);
 					return false;
 				}
 				if (you.getAmuletPercent() < 100)
 				{
-					printlog("부적의 충전율이 100%가 되어야 발동할 수 있다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET), true, false, false, CL_normal);
 					ReleaseMutex(mutx);
 					return false;
 				}
@@ -4548,13 +4552,13 @@ bool players::Evoke(char id_, bool auto_)
 			}
 			else
 			{
-				printlog("이것은 발동할 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CANT),true,false,false,CL_normal);
 				ReleaseMutex(mutx);
 				return false;	
 			}
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	ReleaseMutex(mutx);
 	return false;
 }
@@ -4637,13 +4641,13 @@ bool players::Read(char id_)
 			}
 			else
 			{
-				printlog("장착중인 아이템이다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_IS_EQUIP_ITEM),true,false,false,CL_normal);
 				ReleaseMutex(mutx);
 				return false;				
 			}
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return false;
 }
 bool players::Memorize(int spell_, bool immediately)
@@ -5049,7 +5053,7 @@ bool players::equip(char id_, equip_type type_, bool speak_)
 		if((*it).id == id_)
 			return equip(it,type_,speak_);
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return 0;
 }
 void players::auto_equip_iden()
@@ -5261,7 +5265,7 @@ bool players::equiparmor(char id_, bool speak_)
 			return equip(it,(*it).GetArmorType(),speak_);
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return 0;
 }
 
@@ -5344,7 +5348,7 @@ bool players::equipjewerly(char id_)
 			return equip(it,type_);
 		}
 	}
-	printlog("존재하지 않는 아이템",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return 0;
 }
 

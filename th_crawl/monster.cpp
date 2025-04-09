@@ -508,16 +508,19 @@ void monster::FirstContact()
 		}
 	}
 	if(wiz_list.wizard_mode == 1)
-	{		
-		char temp[200];
+	{
 		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect()+1)/(you.GetStealth()+1);
 		if(detect_<0 || detect_>1.0f)
 			detect_ = 1.0f;
 		int length__ = max(abs(you.position.x-position.x),abs(you.position.y-position.y));
 		for(int i = 0; i < length__; i++)
 			percent_ *= 1.0f-detect_;
-		sprintf_s(temp,200,"들킬확률-RandB(%d,%d) 즉%f%% (최종 암살 성공율%f%%)",you.GetStealth(),GetDetect(),100.0f*detect_, percent_*100.0f);
-		printlog(temp,true,false,false,CL_danger);
+		printlog(LocalzationManager::formatString( LOC_SYSTEM_DEBUG_CALC_BACKSTAB,
+			PlaceHolderHelper(to_string(you.GetStealth())),
+			PlaceHolderHelper(to_string(GetDetect())),
+			PlaceHolderHelper(to_string(100.0f*detect_)),
+			PlaceHolderHelper(to_string(percent_*100.0f))
+		),true,false,false,CL_danger);
 	}
 	if(flag & M_FLAG_UNIQUE && !(flag & M_FLAG_SUMMON) && id != MON_ENSLAVE_GHOST )
 	{
@@ -1462,9 +1465,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	{		
 		if(damage_>0)
 		{
-			char temp[100];
-			sprintf_s(temp,100,"실데미지-%d 공격-%d 암습-%d 명중-%d 명중률-%d%%",damage_,a.damage,a.max_damage,a.accuracy,percent_);
-			printlog(temp,true,false,false,CL_help);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_FRIEND_SHIELD, 
+							PlaceHolderHelper(to_string(damage_)), 
+							PlaceHolderHelper(to_string(a.damage)), 
+							PlaceHolderHelper(to_string(a.max_damage)),
+							PlaceHolderHelper(to_string(a.accuracy)), 
+							PlaceHolderHelper(to_string(percent_))
+							,true,false,false,CL_help);
 		}
 	}
 
@@ -2354,11 +2361,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			}
 			else
 			{
-				char temp[200];
-				sprintf_s(temp,200,"you god_value(%d, %d) mon value(%d, %d)",
-					you.god_value[GT_YUYUKO][0] ,you.god_value[GT_YUYUKO][1],
-					map_id, current_level);
-				printarray(true,false,false,CL_danger,3,"※영혼구속 버그 : ",GetName()->getName().c_str(), temp);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_ENSLAVE_BUG,
+					PlaceHolderHelper(GetName()->getName()),
+					PlaceHolderHelper(to_string(you.god_value[GT_YUYUKO][0])),
+					PlaceHolderHelper(to_string(you.god_value[GT_YUYUKO][1])),
+					PlaceHolderHelper(to_string(map_id)),
+					PlaceHolderHelper(to_string(current_level)),
+				,true,false,false,CL_danger);
 			}
 		}
 	}
@@ -4597,7 +4606,7 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_ALLY;
 	return temp;
 }
-D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
+D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 {
 	switch(state_)
 	{
@@ -4611,12 +4620,12 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_SLEEP:
 		if(state.GetState() == MS_SLEEP)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_SLEEP).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_SLEEP);
 			return CL_normal;
 		}
 		else if(state.GetState() == MS_REST)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_REST).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_REST);
 			return CL_normal;
 		}
 		else
@@ -4624,7 +4633,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_WANDERING:
 		if(state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_EXPLORE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_EXPLORE);
 			return CL_normal;
 		}
 		else
@@ -4632,7 +4641,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_NO_NOTICE:
 		if(state.GetState() == MS_ATACK && !isUserAlly() && target != &you)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_CANT_DETECTED).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_CANT_DETECTED);
 			return CL_normal;
 		}
 		else
@@ -4640,7 +4649,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_CONFUSE:
 		if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_CONFUSE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_CONFUSE);
 			return CL_normal;
 		}
 		else
@@ -4648,7 +4657,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_POISON:
 		if(s_poison)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_POISON).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_POISON);
 			return CL_normal;
 		}
 		else
@@ -4658,7 +4667,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_MIGHT:
 		if(s_might)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_MIGHT).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_MIGHT);
 			return CL_normal;
 		}
 		else
@@ -4666,7 +4675,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_CLEVER:
 		if (s_clever)
 		{
-			sprintf_s(string_,30, LocalzationManager::locString(LOC_SYSTEM_CLEVER).c_str());
+			ss <<  LocalzationManager::locString(LOC_SYSTEM_CLEVER);
 			return CL_normal;
 		}
 		else
@@ -4674,7 +4683,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_HASTE:
 		if(s_haste && !s_slow)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HASTE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HASTE);
 			return CL_normal;
 		}
 		else
@@ -4682,7 +4691,7 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_SLOW:
 		if(s_slow && !s_haste)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_SLOW).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_SLOW);
 			return CL_normal;
 		}
 		else
@@ -4691,42 +4700,42 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
-			sprintf_s(string_,30,smoke_->GetName().c_str());
+			ss << smoke_->GetName();
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SUMMON:
 		if(flag & M_FLAG_SUMMON )
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_SUMMONED).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_SUMMONED);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_FROZEN:
 		if(s_frozen)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_FROZEN).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_FROZEN);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_ALLY:
 		if(isUserAlly())
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_ALLY).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_ALLY);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_ELEC:
 		if(s_elec)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_ELEC).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_ELEC);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_PARALYSE:
 		if(s_paralyse)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_PARALYSE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_PARALYSE);
 			return CL_normal;
 
 		}
@@ -4734,70 +4743,70 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 	case MSS_GLOW:
 		if(s_glow)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_GLOW).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_GLOW);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_GRAZE:
 		if(s_graze)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_GRAZE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_GRAZE);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SILENCE:
 		if(env[current_level].isSilence(position))
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_SILENCE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_SILENCE);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_SICK:
 		if(s_sick)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_SICK).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_SICK);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_VEILING:
 		if(s_veiling)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_VEILING).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_VEILING);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_INVISIVLE:
 		if(s_invisible)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_INVISIVLE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_INVISIVLE);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_TELE:
 		if(s_tele)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_TELE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_TELE);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_MUTE:
 		if(s_mute)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_MUTE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_MUTE);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_CATCH:
 		if(s_catch)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_CATCH).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_CATCH);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_GHOST:
 		if(s_ghost)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_GHOST).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_GHOST);
 			return CL_normal;
 		}
 		return CL_none;
@@ -4805,30 +4814,30 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(s_fear)
 		{
 			if (s_fear>0)
-				sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_FEAR).c_str());
+				ss << LocalzationManager::locString(LOC_SYSTEM_FEAR);
 			else
-				sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_STRONG_FEAR).c_str());
+				ss << LocalzationManager::locString(LOC_SYSTEM_STRONG_FEAR);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_MIND_READING:
 		if(s_mind_reading)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_MIND_READING).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_MIND_READING);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_LUNATIC:
 		if(s_lunatic)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_LUNATIC).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_LUNATIC);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_COMMUNICATION:
 		if(s_communication)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_ALLY_CALL).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_ALLY_CALL);
 			return CL_normal;
 		}
 		return CL_none;
@@ -4836,23 +4845,23 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		if(force_turn)
 		{
 			if(force_strong)
-				sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_ENHANCE).c_str());
+				ss << LocalzationManager::locString(LOC_SYSTEM_ENHANCE);
 			else				
-				sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_WEAKENING).c_str());
+				ss << LocalzationManager::locString(LOC_SYSTEM_WEAKENING);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_CHANGED:
 		if(s_changed)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_CHANGED).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_CHANGED);
 			return CL_normal;
 		}
 		return CL_none;
 	case MSS_INVINCIBILITY:
 		if (s_invincibility)
 		{
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_INVINCIBILITY).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_INVINCIBILITY);
 			return CL_normal;
 		}
 		return CL_none;
@@ -4862,19 +4871,19 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, char* string_)
 		switch (hp_)
 		{
 		case 0:
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HP_VERY_LOW).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HP_VERY_LOW);
 			return CL_danger;
 		case 1:
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HP_LOW).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HP_LOW);
 			return CL_small_danger;
 		case 2:
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HP_MIDDLE).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HP_MIDDLE);
 			return CL_warning;
 		case 3:
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HP_HIGH).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HP_HIGH);
 			return CL_good;
 		case 4:
-			sprintf_s(string_,30,LocalzationManager::locString(LOC_SYSTEM_HP_VERY_HIGH).c_str());
+			ss << LocalzationManager::locString(LOC_SYSTEM_HP_VERY_HIGH);
 			return CL_dark_good;
 		}
 		return CL_none;

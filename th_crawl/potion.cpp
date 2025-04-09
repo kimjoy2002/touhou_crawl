@@ -115,11 +115,11 @@ void drinkpotion(potion_type kind, bool waste_)
 	switch(kind)
 	{
 	case PT_WATER:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_JUST_WATER),false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_JUST_WATER) + " ",false,false,false,CL_normal);
 		//you.HungerApply(50);
 		return;
 	case PT_HEAL:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL),false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL) + " ",false,false,false,CL_normal);
 		you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
 		//you.HungerApply(50);
 		you.s_confuse = 0;
@@ -130,7 +130,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		{
 			int time_ = rand_int(25,50+bonus*15);
 			bool ok_= false;
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POISON),false,false,false,you.poison_resist>0?CL_normal:CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POISON) + " ",false,false,false,you.poison_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetPoison(time_,150,false);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_POISON_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -147,7 +147,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			return;	
 		}
 	case PT_HEAL_WOUND:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL_WOUND),false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL_WOUND) + " ",false,false,false,CL_normal);
 		you.HpUpDown(15+bonus*5+randA_1(30+bonus*15),DR_POTION);
 		//you.HungerApply(50);
 		return;
@@ -162,7 +162,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_CONFUSE:
 		{
 			bool ok_= false;
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_CONFUSE),false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_CONFUSE) + " ",false,false,false,you.confuse_resist>0?CL_normal:CL_warning);
 			ok_ = you.SetConfuse(rand_int(15,30)+bonus*10);
 			if(you.equipment[ET_LEFT] && you.equipment[ET_LEFT]->value1 == RGT_CONFUSE_RESIS)
 				you.equipment[ET_LEFT]->Identify();
@@ -187,7 +187,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN)  && pietyLevel(you.piety)>=1 && ok_)
 			{
 				enterlog();
-				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",true,false,false,CL_small_danger); 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER),true,false,false,CL_small_danger); 
 				you.SetInvisible(time_);
 			}
 			return;
@@ -219,7 +219,7 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_MAGIC:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC),false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC) + " ",false,false,false,CL_normal);
 		you.MpUpDown(9+bonus*5+randA_1(15));
 		//you.HungerApply(50);
 		return;
@@ -228,13 +228,13 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_POWER:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POWER),false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POWER) + " ",false,false,false,CL_normal);
 		you.PowUpDown(100+bonus*100);
 		//you.HungerApply(50);
 		return;
 	case PT_DOWN_STAT:
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_DOWN_STAT),false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_DOWN_STAT) + " ",false,false,false,CL_normal);
 			int rand_ = randA_1(3);
 			randA(2)?(randA(1)?you.StatUpDown(-rand_,STAT_STR,true):you.StatUpDown(-rand_,STAT_DEX,true)):you.StatUpDown(-rand_,STAT_INT,true);
 			if(you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN) && pietyLevel(you.piety)>=2)
@@ -250,7 +250,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_RECOVER_STAT:
 		{
 			bool up_ = false;
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_RECOVER_STAT),false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_RECOVER_STAT) + " ",false,false,false,CL_normal);
 			if(you.s_str < you.m_str)
 			{
 				you.StatUpDown(min(you.m_str-you.s_str,rand_int(1,5)),STAT_STR,true);
@@ -267,7 +267,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				up_ = true;
 			}
 			if(up_)
-				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT),false,false,false,CL_blue);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT) + " ",false,false,false,CL_blue);
 			//you.HungerApply(50);
 		}
 		return;

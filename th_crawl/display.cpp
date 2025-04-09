@@ -313,7 +313,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(potion_iden_string[cur_]);
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(potion_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
@@ -345,7 +345,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(scroll_iden_string[cur_]);
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(scroll_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
@@ -377,7 +377,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -409,7 +409,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << LocalzationManager::locString(amulet_iden_string[cur_]);
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(amulet_iden_string[cur_]);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc.top += 2*fontDesc.Height;
 				num++;
@@ -1096,9 +1096,9 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	ss.str("");
 	ss.clear();
-	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST);
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST)) < 8)
-		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGIC_RESIST)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGICRESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGICRESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MAGICRESIST)), ' ');
 	ss << ": " << resist_text_;
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;

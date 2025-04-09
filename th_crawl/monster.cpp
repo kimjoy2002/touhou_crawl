@@ -1465,12 +1465,12 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	{		
 		if(damage_>0)
 		{
-			printlog(LocalzationManager::formatString(LOC_SYSTEM_FRIEND_SHIELD, 
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_CALC_DAMAGE, 
 							PlaceHolderHelper(to_string(damage_)), 
 							PlaceHolderHelper(to_string(a.damage)), 
 							PlaceHolderHelper(to_string(a.max_damage)),
 							PlaceHolderHelper(to_string(a.accuracy)), 
-							PlaceHolderHelper(to_string(percent_))
+							PlaceHolderHelper(to_string(percent_)))
 							,true,false,false,CL_help);
 		}
 	}
@@ -2366,7 +2366,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 					PlaceHolderHelper(to_string(you.god_value[GT_YUYUKO][0])),
 					PlaceHolderHelper(to_string(you.god_value[GT_YUYUKO][1])),
 					PlaceHolderHelper(to_string(map_id)),
-					PlaceHolderHelper(to_string(current_level)),
+					PlaceHolderHelper(to_string(current_level)))
 				,true,false,false,CL_danger);
 			}
 		}

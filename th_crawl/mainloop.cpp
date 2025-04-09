@@ -740,9 +740,9 @@ bool option_menu(int value_)
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
-		printsub("======",false,CL_warning);
-		printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION),true,CL_help);
-		printsub("======",false,CL_warning);
+		printsub("======",false,CL_help);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION),false,CL_help);
+		printsub("======",true,CL_help);
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE),true,CL_normal);

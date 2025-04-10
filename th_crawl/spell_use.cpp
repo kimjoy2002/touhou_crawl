@@ -3335,7 +3335,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 	if(!unit_ && order->isEnemyUnit(unit_)) 
 	{
 		if(order->isplayer())
-			printlog("적 몬스터를 대상으로 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY),true,false,false,CL_normal);	
 		return false; //해당 위치에 몬스터가 없다.
 	}
 	if(order->position.distance_from(unit_->position)<=1)
@@ -4605,7 +4605,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 	if (!unit_ && order->isEnemyUnit(unit_))
 	{
 		if (order->isplayer())
-			printlog("적 몬스터를 대상으로 써야한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY), true, false, false, CL_normal);
 		return false; //해당 위치에 몬스터가 없다.
 	}
 	if (order->position.distance_from(unit_->position) <= 1)

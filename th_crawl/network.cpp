@@ -40,7 +40,7 @@ void sendScore(const char *c, const char *file)
 
 	int res = getaddrinfo(serverIp.c_str(), serverPort.c_str(), &hints, &result);
 	if (res != 0 || result == nullptr) {
-		printf("getaddrinfo 실패: %d\n", res);
+		printf("getaddrinfo fail: %d\n", res);
 		return;
 	}
 

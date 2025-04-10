@@ -1004,7 +1004,7 @@ void print_special_map(int floor_, vector<map_dummy*> &map_vector)
 		{
 			if (wiz_list.wizard_mode == 1)
 			{
-				printlog("특수지형:", false, false, false, CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_SPIECIAL_VAULT) + ":", false, false, false, CL_danger);
 			}
 		}
 		if ((*it)->name.size() > 0)

@@ -273,6 +273,7 @@ string GetSwakoString5(swako_5_power power, swako_string kind)
 		{
 		case SWAKO_NAME: case SWAKO_STRING: return LocalzationManager::locString(LOC_SYSTEM_SKL_SWAKO_SWAKO_HAT);
 		case SWAKO_SIMPLE_INFOR: return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT);
+		case SWAKO_COST: return "";
 		case SWAKO_GET_STRING: return "";
 		case SWAKO_UNGET_STRING: return "";
 		}

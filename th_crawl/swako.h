@@ -63,6 +63,7 @@ enum swako_string //무슨 정보가 필요한가
 {
 	SWAKO_NAME=0, //이름
 	SWAKO_SIMPLE_INFOR, //신앙창에서 보여주는 정보
+	SWAKO_COST, //신앙창에서 보여주는 정보(패시브)
 	SWAKO_GET_STRING, //권능을 얻었을때 정보
 	SWAKO_UNGET_STRING, //권능이 사라졌을때 정보
 	SWAKO_STRING

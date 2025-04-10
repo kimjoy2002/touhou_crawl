@@ -2892,27 +2892,52 @@ void God_show()
 	case GT_SUWAKO:
 		if(level_ >= 1 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			ss.str("");
+			ss.clear();
+			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_COST);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 2 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			ss.str("");
+			ss.clear();
+			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][1], SWAKO_COST);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 3 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			ss.str("");
+			ss.clear();
+			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][2], SWAKO_COST);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 4 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			ss.str("");
+			ss.clear();
+			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][3], SWAKO_COST);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		if(level_ >= 5 && !you.GetPunish(GT_SUWAKO))
 		{
-			printsub(GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR),true,CL_swako);
+			ss.str("");
+			ss.clear();
+			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][4], SWAKO_COST);
+			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
 		break;

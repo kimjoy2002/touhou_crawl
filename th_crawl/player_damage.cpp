@@ -137,10 +137,10 @@ int players::GetAttack(bool max_)
 
 	
 	if(wiz_list.wizard_mode == 1 && !max_)
-	{		
-		char temp[50];
-		sprintf_s(temp,50,"[맥뎀 %d]",cacul_max_);
-		printlog(temp,false,false,false,CL_help);
+	{
+		ostringstream ss;
+		ss << "[" << LocalzationManager::locString(LOC_SYSTEM_DEBUG_MAX_DAMAGE) << " " << cacul_max_ << "]";
+		printlog(ss.str(),false,false,false,CL_help);
 	}
 
 
@@ -404,7 +404,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		//대흉5%  불멸 10%		
 		if(wiz_list.wizard_mode == 1)
 		{	
-			printlog("풀다이스!",true,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_FULL_DICE),true,false,false,CL_danger);
 		}
 		damage_ = max_atk;
 
@@ -1100,9 +1100,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		{
 			if (wiz_list.wizard_mode == 1)
 			{
-				char temp[50];
-				sprintf_s(temp, 50, "shield수치: %f 또는 %g", shield_, shield_);
-				printlog(temp, true, false, false, CL_danger);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_SHIELD_VAULE, PlaceHolderHelper(to_string(shield_))), true, false, false, CL_danger);
 			}
 			if(a.order)	
 			{

@@ -10,6 +10,7 @@
 #include "display.h"
 #include "common.h"
 #include "mapsearching.h"
+#include "enumMapBuilder.h"
 #include "map.h"
 
 int seqence = 0;
@@ -33,27 +34,27 @@ int seqence = 0;
 ㄴ하쿠레이신사
 */
 
-MapNode mapNode_normal("일반던전", 0, MAX_DUNGEUN_LEVEL);
-MapNode mapNode_temple("신전", TEMPLE_LEVEL, 1);
-MapNode mapNode_misty("안개의호수", MISTY_LAKE_LEVEL, MAX_MISTY_LAKE_LEVEL);
-MapNode mapNode_scarlet("홍마관", SCARLET_LEVEL, MAX_SCARLET_LEVEL);
-MapNode mapNode_library("도서관", SCARLET_LIBRARY_LEVEL, MAX_SCARLET_LIBRARY_LEVEL);
-MapNode mapNode_flan("지하실", SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
-MapNode mapNode_moun("요괴의산", YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
-MapNode mapNode_yukku("윳쿠리굴", YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
-MapNode mapNode_bamboo("미궁의죽림", BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
-MapNode mapNode_eien("영원정", EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
-MapNode mapNode_depth("짐승길", DEPTH_LEVEL, MAX_DEPTH_LEVEL);
-MapNode mapNode_dream("꿈의세계", DREAM_LEVEL, MAX_DREAM_LEVEL);
-MapNode mapNode_moon("달의세계", MOON_LEVEL, MAX_MOON_LEVEL);
-MapNode mapNode_pande("마계", PANDEMONIUM_LEVEL, MAX_PANDEMONIUM_LEVEL);
-MapNode mapNode_hell("지저", SUBTERRANEAN_LEVEL, MAX_SUBTERRANEAN_LEVEL);
-MapNode mapNode_haku("하쿠레이신사", HAKUREI_LEVEL, MAX_HAKUREI_LEVEL);
-MapNode mapNode_zigurrat("꿈의세계 루나틱", ZIGURRAT_LEVEL, 1);
+MapNode mapNode_normal(LOC_SYSTEM_DUNGEON, 0, MAX_DUNGEUN_LEVEL);
+MapNode mapNode_temple(LOC_SYSTEM_DUNGEON_TEMPLE, TEMPLE_LEVEL, 1);
+MapNode mapNode_misty(LOC_SYSTEM_DUNGEON_MISTYLAKE, MISTY_LAKE_LEVEL, MAX_MISTY_LAKE_LEVEL);
+MapNode mapNode_scarlet(LOC_SYSTEM_DUNGEON_SCARLET, SCARLET_LEVEL, MAX_SCARLET_LEVEL);
+MapNode mapNode_library(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY, SCARLET_LIBRARY_LEVEL, MAX_SCARLET_LIBRARY_LEVEL);
+MapNode mapNode_flan(LOC_SYSTEM_DUNGEON_SCARLET_UNDER, SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
+MapNode mapNode_moun(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN, YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
+MapNode mapNode_yukku(LOC_SYSTEM_DUNGEON_YUKKURI, YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
+MapNode mapNode_bamboo(LOC_SYSTEM_DUNGEON_BAMBOO, BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
+MapNode mapNode_eien(LOC_SYSTEM_DUNGEON_EINENTEI, EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
+MapNode mapNode_depth(LOC_SYSTEM_DUNGEON_DEPTH, DEPTH_LEVEL, MAX_DEPTH_LEVEL);
+MapNode mapNode_dream(LOC_SYSTEM_DUNGEON_DREAM, DREAM_LEVEL, MAX_DREAM_LEVEL);
+MapNode mapNode_moon(LOC_SYSTEM_DUNGEON_MOON, MOON_LEVEL, MAX_MOON_LEVEL);
+MapNode mapNode_pande(LOC_SYSTEM_DUNGEON_PANDEMONIUM, PANDEMONIUM_LEVEL, MAX_PANDEMONIUM_LEVEL);
+MapNode mapNode_hell(LOC_SYSTEM_DUNGEON_SUBTERRANEAN, SUBTERRANEAN_LEVEL, MAX_SUBTERRANEAN_LEVEL);
+MapNode mapNode_haku(LOC_SYSTEM_DUNGEON_HAKUREI, HAKUREI_LEVEL, MAX_HAKUREI_LEVEL);
+MapNode mapNode_zigurrat(LOC_SYSTEM_DUNGEON_ZIGURRAT, ZIGURRAT_LEVEL, 1);
 
 
-MapNode::MapNode(const char* name_, int map_id_, int max_level_):
-map_id(map_id_), max_level(max_level_), name(name_)
+MapNode::MapNode(LOCALIZATION_ENUM_KEY key, int map_id_, int max_level_):
+map_id(map_id_), max_level(max_level_), key(key)
 {
 	unique_id = ++seqence;
 }
@@ -322,7 +323,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 	enterlog();
 	if (start == NULL || goal == NULL)
 	{
-		printlog("알 수 없는 위치.", false, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN) + " ", false, false, false, CL_help);
 		return false;
 	}
 
@@ -350,12 +351,12 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					int next_floor = next_dungeon->getFloorStair(current_dungeon->getMapId());
 					if (next_floor == -1) {
-						printlog("가는 길을 알 수 없습니다.", true, false, false, CL_help);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), true, false, false, CL_help);
 						return false;
 					}
 
 					if (!current_dungeon->getFloorStairToStack(stairMap, next_dungeon->getMapId())) {
-						printlog("가는 길을 알 수 없습니다.", false, false, false, CL_help);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
 						return false;
 					}
 
@@ -367,7 +368,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					if (!SetStairToStack(stairMap, start_level, false))
 					{
-						printlog("가는 길을 알 수 없습니다.", false, false, false, CL_help);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
 						return false;
 					}
 					start_level++;
@@ -376,7 +377,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 				{
 					if(!SetStairToStack(stairMap, start_level, true))
 					{
-						printlog("가는 길을 알 수 없습니다.", false, false, false, CL_help);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
 						return false;
 					}
 					start_level--;
@@ -398,7 +399,7 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 	}
 	else
 	{
-		printlog("그 곳까지 가는 길을 알 수 없습니다.", false, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
 		return false;
 	}
 }

@@ -257,9 +257,7 @@ void arena_event(int num)
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
-					char temp[200];
-					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
-					printlog(temp,true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_FAIL) + " " + LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))),true,false,false,CL_danger);
 					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))) ,CL_danger);
 					map_list.bamboo_count = -10;
 				}
@@ -292,9 +290,7 @@ void arena_event(int num)
 				map_list.god_num++;
 				if(map_list.god_num<3)
 				{
-					char temp[200];
-					sprintf_s(temp,200,"오답이다! 남은 기회 %d",3-map_list.god_num);
-					printlog(temp,true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_FAIL) + " " + LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))),true,false,false,CL_danger);
 					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_LEFT_LIFE, PlaceHolderHelper(to_string(3-map_list.god_num))),CL_danger);
 					map_list.bamboo_count = -10;
 				}

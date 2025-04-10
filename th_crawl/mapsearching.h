@@ -21,11 +21,11 @@ class MapNode //현재 이어지는 맵 노드 탐색
 	int map_id;
 	int max_level;
 	int unique_id;
-	string name;
+	LOCALIZATION_ENUM_KEY key;
 	map<int, int> floor_map;
 
 public:
-	MapNode(const char* name, int map_id_, int max_level_);
+	MapNode(LOCALIZATION_ENUM_KEY key, int map_id_, int max_level_);
 
 	void addNode(MapNode* node, int floor);
 	void addStair(MapNode* node, int floor);
@@ -38,7 +38,7 @@ public:
 
 	int getMapId() { return map_id; };
 	int getUniqueId() { return unique_id; };
-	string getName() { return name; };
+	LOCALIZATION_ENUM_KEY getKey() { return key; };
 	bool isCurrentFloor(int level);
 	int getFloorStair(int dungeon);
 	bool getFloorStairToStack(queue<list<coord_def>> *stairMap, int dungeon);

@@ -975,7 +975,7 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 			}
 			if(mon_->id == MON_KOISHI)
 			{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_KOISHI),false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SATORI_KOISHI),true,false,false,CL_small_danger);
 				return false;
 			}
 			if(mon_->s_mind_reading)
@@ -1192,11 +1192,11 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printarray(true,false,false,CL_normal,1,"유령이 없다.");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_NOT_EXIST), true,false,false,CL_normal);
 			return false;
 		}
 	}
-	printlog("유닛을 대상으로 사용해야한다.",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT),true,false,false,CL_normal);
 	return false;
 }
 bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
@@ -1204,7 +1204,7 @@ bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		soundmanager.playSound("spellcard");
-		printlog("당신은 대량의 유령을 불러들이기 시작한다!",true,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT),true,false,false,CL_white_blue);
 		int time_ = rand_int(35,45);
 		you.SetGhost(time_);
 	}
@@ -1258,12 +1258,12 @@ bool skill_yukari_supporter(int power, bool short_, unit* order, coord_def targe
 				}
 				else
 				{
-					printarray(true,false,false,CL_normal,1,"생성할 수 없는 위치다.");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_CANT_CREATE), true,false,false,CL_normal);
 					return false;
 				}
 			}
 		}
-		printarray(true,false,false,CL_normal,1,"틈새를 대상으로 지정해야한다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA),true,false,false,CL_normal);
 	}
 	return false;
 
@@ -1279,18 +1279,18 @@ bool skill_yukari_schema(int power, bool short_, unit* order, coord_def target)
 				if(you.control_blink(target))
 				{
 					soundmanager.playSound("blink");
-					printarray(true,false,false,CL_normal,1,"틈새를 타고 이동하였다.");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA), true,false,false,CL_normal);
 					hit_eff->time = 0;
 					return true;
 				}
 				else
 				{
-					printarray(true,false,false,CL_normal,1,"이동할 수 없는 위치다.");
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA), true,false,false,CL_normal);
 					return false;
 				}
 			}
 		}
-		printarray(true,false,false,CL_normal,1,"틈새를 대상으로 지정해야한다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA),true,false,false,CL_normal);
 	}
 	return false;
 
@@ -1301,7 +1301,7 @@ bool skill_yukari_shield(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("buff");
 		you.SetBuff(BUFFSTAT_SH,BUFF_YUKARI,15,rand_int(70,100));
-		printlog("결계가 당신을 보호하고 있다.",true,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHIELD),true,false,false,CL_white_blue);
 		return true;
 	}
 	return false;
@@ -1312,7 +1312,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 	{
 		if(env[current_level].isBamboo())
 		{
-			printlog("이 곳에서는 차원을 고정할 수 없다!",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO),true,false,false,CL_small_danger);
 			return false;
 		}
 		you.search_pos = target;
@@ -1320,7 +1320,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.search = true;
 
 	
-		printlog("이 위치로 차원을 고정할까? (Y/N)",false,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN),false,false,false,CL_danger);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -1329,7 +1329,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 			break;
 		case 'N':
 		default:
-			printlog(" 취소!",true,false,false,CL_normal);
+			printlog(" " + LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_normal);
 			widesearch = false;
 			you.search = false;
 			return false;
@@ -1343,7 +1343,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(50,70));
 		soundmanager.playSound("timestop");
-		printlog("차원이 고정되었다!",false,false,false,CL_white_blue);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX),false,false,false,CL_white_blue);
 		return true;
 	}
 	return false;
@@ -1359,7 +1359,7 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 		{
 			you.SetXY(target.x,target.y);
 			soundmanager.playSound("jump");
-			printarray(false,false,false,CL_normal,1,"점프! ");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_JUMP) + " " ,false,false,false,CL_normal);
 			return true;
 		}
 	}
@@ -1373,12 +1373,13 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 	{
 		soundmanager.playSound("stone");
 		env[current_level].changeTile(order->position, DG_TEMPLE_SUWAKO);
-		printlog("당신은 발밑에 스와코님의 신전을 세웠다. 신앙심이 풍족해지는 것을 느꼈다.",true,false,false,CL_swako);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_ALTAR1) + " ",false,false,false,CL_swako);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_ALTAR2),true,false,false,CL_swako);
 		you.PietyUpDown(2+randA(2));
 		return true;
 	}
 	else
-		printlog("여기엔 신전을 세울 수 없다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_ALTAR_FAIL),true,false,false,CL_small_danger);
 
 	return false;
 }
@@ -1421,7 +1422,7 @@ bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 				return true;
 			}
 		}
-		printlog("끌어 당길 수 없는 위치입니다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FAIL),true,false,false,CL_small_danger);
 
 	}
 	return false;
@@ -1515,10 +1516,10 @@ bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
 			return true;
 		}
 		else
-			printlog("여기엔 석상을 세울 수 없다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_STATUE_FAIL),true,false,false,CL_small_danger);
 	}
 	else
-		printlog("여기엔 석상을 세울 수 없다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_STATUE_FAIL),true,false,false,CL_small_danger);
 	return false;
 }
 bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
@@ -1550,7 +1551,7 @@ bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
 	}
 
 	soundmanager.playSound("spellcard");
-	printarray(true,false,false,CL_magic,1,"당신의 주변이 물바다가 되었다. ");	
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_RAIN),true,false,false,CL_magic);	
 	
 	return true;
 }
@@ -1602,7 +1603,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 									//	it->Enchant(ET_WEAPON, value3_*-2);
 									if(value4_<0)
 										it->Enchant(ET_WEAPON,value4_*-2);
-									printlog("히나는 당신의 무기의 액땜을 해주었다.",true,false,false,CL_hina);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_WEAPON_MINUS_TO_PLUS),true,false,false,CL_hina);
 									return true;	
 								}
 								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
@@ -1610,32 +1611,32 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 									soundmanager.playSound("curse");
 									if(it->value4<0)
 										it->Enchant(ET_ARMOR,it->value4*-2);
-									printlog("히나는 당신의 방어구의 액땜을 해주었다.",true,false,false,CL_hina);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS),true,false,false,CL_hina);
 								
 									return true;	
 
 								}
 								else
 								{
-									printlog("마이너스 인챈트가 되어있는 아이템만 선택할 수 있다.",true,false,false,CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ONLY_MINUS),true,false,false,CL_normal);
 									return false;	
 								}
 							}
 							else
 							{
-								printlog("저주 걸려있는 아이템에만 사용할 수 있다.",true,false,false,CL_normal);
+								printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ONLY_CURSE),true,false,false,CL_normal);
 								return false;	
 							}
 						}
 						else
 						{
-							printlog("아티펙트엔 사용할 수 없다.",true,false,false,CL_normal);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CANT_ARTIFACT),true,false,false,CL_normal);
 							return false;	
 						}
 					}
 					else
 					{
-						printlog("올바르지 않은 대상이다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_INCORRECT_TARGET),true,false,false,CL_normal);
 						return false;	
 					}
 				}
@@ -1673,7 +1674,7 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 	{
 		if(you.equipment[ET_WEAPON]->curse)
 		{
-			printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE),true,false,false,CL_normal);
 			return false;
 		}
 		string before_name = you.equipment[ET_WEAPON]->GetName(); //저주받기전 이름
@@ -1698,12 +1699,12 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 		}
 		else
 		{
-			printlog("이 무기는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL),true,false,false,CL_small_danger);
 			return false;
 		}
 
 	}
-	printlog("무기를 끼고 있어야 된다.",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_CARRYING_WEAPON),true,false,false,CL_normal);
 	return false;
 }
 bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def target)
@@ -1742,13 +1743,13 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 									}
 									else
 									{
-										printlog("이 방어구에는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL),true,false,false,CL_small_danger);
 										return false;	
 									}
 								}
 								else
 								{
-									printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE),true,false,false,CL_normal);
 									return false;	
 								}
 							}
@@ -1758,7 +1759,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 					}
 					else
 					{
-						printlog("방어구에만 사용이 가능하다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR),true,false,false,CL_normal);
 						return false;	
 					}
 				}
@@ -1825,13 +1826,13 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 									}
 									else
 									{
-										printlog("이 장신구에는 저주를 걸 수 없다.",true,false,false,CL_small_danger);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL),true,false,false,CL_small_danger);
 										return false;
 									}
 								}
 								else
 								{
-									printlog("이미 저주에 걸려있다.",true,false,false,CL_normal);
+									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE),true,false,false,CL_normal);
 									return false;	
 								}
 							}
@@ -1841,7 +1842,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 					}
 					else
 					{
-						printlog("장신구에만 사용이 가능하다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY),true,false,false,CL_normal);
 						return false;	
 					}
 				}
@@ -1875,7 +1876,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 }
 bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("딱 한번만 현재 무기에 단풍 브랜드를 부여할 수 있다. 할래?(Y/N)",false,false,false,CL_danger);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN),false,false,false,CL_danger);
 	switch(waitkeyinput())
 	{
 	case 'Y':
@@ -1884,7 +1885,7 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 		break;
 	case 'N':
 	default:
-		printlog(" 취소!",true,false,false,CL_normal);
+		printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -1903,14 +1904,14 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("여기엔 부여할 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_BRAND),true,false,false,CL_normal);
 		return false;
 	}
 	return true;
 }
 bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("딱 한번만 현재 무기에 저주 브랜드를 부여할 수 있다. 할래?(Y/N)",false,false,false,CL_danger);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN),false,false,false,CL_danger);
 	switch(waitkeyinput())
 	{
 	case 'Y':
@@ -1919,7 +1920,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 		break;
 	case 'N':
 	default:
-		printlog(" 취소!",true,false,false,CL_normal);
+		printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -1938,7 +1939,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("여기엔 부여할 수 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_BRAND),true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -2000,7 +2001,7 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog("당신은 지옥의 고통을 불렀다!",true,false,false,CL_normal);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_TORMENT),true,false,false,CL_normal);
 	
 	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
 	{	
@@ -2027,11 +2028,11 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	for (int i = 0; i < (junko_ ? 2 : 1); i++)
 	{
 		if (i == 1)
-			printlog("순호는 이미 순화된 당신을 언제든지 죽일 수 있다. 정말로 죽을거야?(Y/N)", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION), false, false, false, CL_danger);
 		else if (sanae_)
-			printlog("신을 버리면 당신의 신앙심은 전부 사라질것이다. 진짜로?(Y/N)", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_SANAE), false, false, false, CL_danger);
 		else
-			printlog("신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK), false, false, false, CL_danger);
 		switch (waitkeyinput())
 		{
 		case 'Y':
@@ -2040,7 +2041,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 			break;
 		case 'N':
 		default:
-			printlog(" 취소!", true, false, false, CL_normal);
+			printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2130,16 +2131,16 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	while(loop_)
 	{
 		deletelog();
-		printlog("세이자: 어느 신으로부터 훔친 선물을 줄까?",true,false,true,CL_seija);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_ASK),true,false,true,CL_seija);
 
 		int num_ = 0;
 		god_type select_[4];
 		for (int i = GT_FIRST; i < GT_LAST; i++) {
 			if (you.god_value[GT_SEIJA][2] & (1 << i)) {
-				char temp[100];
-				sprintf_s(temp, 100, "%c - %s", num_+'a', seija_god_string(i, 0).c_str());
+				ostringstream ss;
+				ss << string(1,(char)(num_+'a')) << " - " << seija_god_string(i, 0);
 				select_[num_++] = (god_type)i;
-				printlog(temp, true, false, true, CL_help);
+				printlog(ss.str(), true, false, true, CL_help);
 			}
 		}
 		int key_ = waitkeyinput();
@@ -2164,14 +2165,14 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			next_ = select_[3];
 			break;
 		default:
-			printlog("마음이 변하기전에 고르는게 좋을걸?", true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE), true, false, false, CL_small_danger);
 			return false;
 		}
 		deletelog();
 		printlog(seija_god_string(next_, 0), true, false, true, CL_help);
 		printlog(seija_god_string(next_, 1), true, false, true, CL_small_danger);
 		printlog(seija_god_string(next_, 2), true, false, true, CL_small_danger);
-		printlog("이 신의 보물을 요구하겠습니까? (Y/N)",true,false, true,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_YN),true,false, true,CL_help);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -2188,7 +2189,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.god_value[GT_SEIJA][1] & (1 << next_))
 	{
-		printlog("이미 한번 보물을 받았던 신이다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_ALREADY),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -2266,7 +2267,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 		{
 			int offset_ = min(4,max(-4,(you.level - it->level)));
 			if(!ok_)
-				printlog("세이자는 모두의 시야를 뒤집어버렸다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM),true,false,false,CL_normal);
 
 			it->SetConfuse(rand_int(20+2*offset_,5),true);
 			it->hp = max(1,it->hp*rand_float(0.3f,0.7f));
@@ -2286,7 +2287,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("시야내에 뒤집어버릴 상대가 없다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM_FAIL),true,false,false,CL_normal);
 		return false;	
 	}
 	return false;
@@ -2300,7 +2301,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 		{
 			if(pietyLevel(you.piety) <= i)
 			{
-				printlog("요정을 동료로 더 권유하려면 신앙심을 더 높여야된다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN),true,false,false,CL_normal);
 				return false;	
 			}
 
@@ -2311,27 +2312,27 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 
 				if(hit_mon->flag & M_FLAG_SUMMON)
 				{
-					printlog("소환된 몬스터는 권유할 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_SUMMON),true,false,false,CL_normal);
 					return false;	
 				}
 				if(!(hit_mon->flag & M_FLAG_FAIRY))
 				{
-					printlog("요정이 아니면 권유할 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ONLYFAIRY),true,false,false,CL_normal);
 					return false;	
 				}
 				if(hit_mon->id == MON_ZOMBIE_FAIRY)
 				{
-					printlog("이 요정은 좀비로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ZOMBIEFAIRY),true,false,false,CL_normal);
 					return false;
 				}
 				if(hit_mon->id == MON_MAID_FAIRY)
 				{
-					printlog("이 요정은 메이드로 취직중이다. 직업을 가진 요정은 권유할 수 없다.",true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_MAIDFAIRY),true,false,false,CL_normal);
 					return false;
 				}
 				if (hit_mon->dream)
 				{
-					printlog("이 요정은 꿈의 주민이다. 꿈의 존재는 권유할 수 없다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_DREAM), true, false, false, CL_normal);
 					return false;
 				}
 				if(hit_mon->level > you.level)
@@ -2344,7 +2345,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				{
 					if((you.lilly_allys[j].map_id == hit_mon->map_id && you.lilly_allys[j].floor == current_level) || hit_mon->flag & M_FLAG_ALLY)
 					{
-						printlog("이 요정은 이미 당신의 동료다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ALREADY),true,false,false,CL_normal);
 						return false;
 					}
 				}
@@ -2446,14 +2447,14 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 			}
 			else
 			{
-				printlog("여기엔 몬스터가 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_NOT_MONSTER),true,false,false,CL_normal);
 				return false;	
 			}
 		}
 	}
 
 	
-	printlog("더 이상의 권유는 할 수 없다.",true,false,false,CL_normal);	
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_FULL),true,false,false,CL_normal);	
 	you.Ability(SKL_LILLY_1,true,true);
 	return false;
 }
@@ -2510,12 +2511,12 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 	if(j>0)
 	{
 		soundmanager.playSound("summon");
-		printarray(true,false,false,CL_normal,1,"요정들을 자신의 주변으로 호출했다!");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_CALL),true,false,false,CL_normal);
 		return true;
 	}
 	else
 	{
-		printarray(true,false,false,CL_normal,1,"호출할 요정이 없다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_CALL_FAIL),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -2536,12 +2537,12 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 				{
 					if(hit_mon->hp >= hit_mon->max_hp)
 					{
-						printarray(true,false,false,CL_normal,1,"이 요정은 이미 체력이 가득 차있다.");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_FAIL),true,false,false,CL_normal);
 						return false;
 					}
 					if(!hit_mon->isUserAlly())
 					{						
-						printarray(true,false,false,CL_normal,1,"이 요정은 지금 당신에게 적대적이다.");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_NOT_ALLY),true,false,false,CL_normal);
 						return false;
 					}
 					soundmanager.playSound("buff");
@@ -2556,7 +2557,7 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 	}
 	
 	
-	printarray(true,false,false,CL_normal,1,"동료 요정을 대상으로 선택해야한다.");
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_TARGET),true,false,false,CL_normal);
 	return false;
 
 }
@@ -2581,7 +2582,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 				{
 					if(!speak_)
 					{ 
-						printarray(true,false,false,CL_lilly,1,"당신은 자신의 힘을 요정들에게 나눠주었다!");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR),true,false,false,CL_lilly);
 						if(it->CanSpeak())
 							printlog(fairy_speak(&(*it), you.lilly_allys[next_].personality, FS_FAIRY_WAR),true,false,false,CL_normal);
 					}
@@ -2601,7 +2602,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	}
 
 	
-	printarray(true,false,false,CL_normal,1,"주변에 힘을 전달할 동료 요정이 없다.");
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR_FAIL),true,false,false,CL_normal);
 	return false;
 }
 
@@ -2610,7 +2611,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR_FAIL), true, false, false, CL_normal);
 		return false;
 	}
 	if (order->isplayer())
@@ -2649,7 +2650,7 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 
 		}
 		else {
-			printlog("벽을 대상으로 써야 한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR_SHOULD_WALL), true, false, false, CL_normal);
 			return false; //해당 위치에 몬스터가 없다.
 
 		}
@@ -2662,7 +2663,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 	{
 		unit *unit_ = env[current_level].isMonsterPos(target.x, target.y, &you);
 		if (unit_ && unit_->GetId() == MON_CLOSE_DOOR) {
-			printlog("이미 잠겨있는 문이다.", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_ALREADY), false, false, false, CL_normal);
 			return false;
 		}
 
@@ -2706,12 +2707,12 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 			{
 				soundmanager.playSound("block");
 				mon_->LevelUpdown(you.level, 6);
-				printarray(true, false, false, CL_okina, 1, "당신은 문을 강제로 단단하게 잠갔다!");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_YOU),true, false, false, CL_okina);
 				return true;
 			}
 		}
 		else {
-			printlog("문을 대상으로 사용해야 한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_TARGET_DOOR), true, false, false, CL_normal);
 			return false;
 		}
 	}
@@ -2720,7 +2721,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("이 장소에선 문을 만들 수 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_FAIL), true, false, false, CL_normal);
 		return false;
 	}
 	if (order->isplayer())
@@ -2742,7 +2743,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 
 			unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
 			if (!unit_) {
-				printlog("해당 적에게 올바른 경로를 설정할 수 없다.", true, false, false, CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_PATH_FAIL), true, false, false, CL_danger);
 				return false;
 			}
 
@@ -2750,7 +2751,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 
 			unit *unit2_ = env[current_level].isMonsterPos(beam->x, beam->y, &you);
 			if (unit2_) {
-				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_CANT_CREATE), true, false, false, CL_normal);
 				return false;
 			}
 			if (!(env[current_level].dgtile[order->position.x][order->position.y].isFloor() ||
@@ -2759,7 +2760,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				!env[current_level].dgtile[beam->x][beam->y].isBreakable()
 				)
 			{
-				printlog("적의 등 뒤에 문을 설치할 수 없다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_CANT_CREATE), true, false, false, CL_normal);
 				return false;
 			}
 
@@ -2767,7 +2768,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 			env[current_level].changeTile((*beam), DG_OPEN_DOOR);
 			you.SetXY(beam->x, beam->y);
 			unit_->LostTarget();
-			printlog("적의 등 뒤의 문으로 빠져나왔다!", true, false, false, CL_okina);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR), true, false, false, CL_okina);
 			return true;
 		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_BLOCK_INSIGHT), true, false, false, CL_normal);
@@ -2778,17 +2779,17 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("이 곳에서는 백댄서를 소환할 필요가 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_NO_NEED), true, false, false, CL_normal);
 		return false;
 	}
 	int num_ = 1;
 	int id_ = MON_MAI2;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("어느 백댄서를 호출하시겠습니까?", true, false, false, CL_help);
-		printlog("a - 테이레이다 마이: 뒤에서 춤추는 것으로 체력을 회복시켜준다.", true, false, false, CL_okina);
-		printlog("b -   니시다 사토노: 뒤에서 춤추는 것으로 영력을 회복시켜준다.", true, false, false, CL_okina);
-		printlog("c -   백댄서즈 소환: 두명을 모두 소환한다. (신앙심소모 2배)", true, false, false, CL_okina);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK), true, false, false, CL_help);
+		printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI), true, false, false, CL_okina);
+		printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO), true, false, false, CL_okina);
+		printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS), true, false, false, CL_okina);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -2853,7 +2854,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
 	if (current_level == OKINA_LEVEL){
-		printlog("이 곳은 이미 뒷 문의 세계다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_ALREADY), true, false, false, CL_normal);
 		return false;
 	}
 
@@ -2863,14 +2864,14 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 		env[current_level].changeTile(order->position, DG_OPEN_DOOR);
 	}
 	else {
-		printlog("이 곳에는 문을 열만한 공간이 없다!", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_CANTDOOR), true, false, false, CL_normal);
 		return false;
 	}
 
 	//log에 오키나레벨로 도착함을 저장
 	deque<monster*> dq;
 	soundmanager.playSound("blink");
-	printlog("당신은 등 뒤의 문을 열고 도망쳤다!", true, false, false, CL_okina);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE), true, false, false, CL_okina);
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
 		if (it->isLive() && distan_coord(it->position, you.position) <= 2 && it->CanChase())
@@ -2946,7 +2947,7 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 		}
 		if (!least_one)
 		{
-			printlog("시야에 살의를 표출할 적이 있어야 한다. ", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL), true, false, false, CL_normal);
 			return false;
 		}
 		soundmanager.playSound("buff");
@@ -2957,7 +2958,7 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-const char* getJunkoString(int kind_)
+string getJunkoString(int kind_)
 {
 	switch (kind_)
 	{
@@ -2988,10 +2989,10 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN) +" ", false, false, false, CL_danger);
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK), true, false, false, CL_help);
-		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
-		printarray(true, false, false, CL_junko, 2, "b - ", getJunkoString(you.god_value[GT_JUNKO][1]));
-		printarray(true, false, false, CL_junko, 2, "c - ", getJunkoString(you.god_value[GT_JUNKO][2]));
-		printarray(true, false, false, CL_junko, 2, "d - ", LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER));
+		printlog("a - " + getJunkoString(you.god_value[GT_JUNKO][0]), true, false, false, CL_junko);
+		printlog("b - " + getJunkoString(you.god_value[GT_JUNKO][1]), true, false, false, CL_junko);
+		printlog("c - " + getJunkoString(you.god_value[GT_JUNKO][2]), true, false, false, CL_junko);
+		printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER), true, false, false, CL_junko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3038,7 +3039,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	if (kind_ == 0)
 	{
-		printlog("알 수 없는 선택", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_UNKNOWN_SELECT), true, false, false, CL_normal);
 		return false;
 	}
 
@@ -3062,34 +3063,30 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					}
 					else
 					{
-						char temp[100];
-						sprintf_s(temp, 100, "정말 %s 스킬을 순화할거야? (현재 레벨 %d) (y/n)", skill_string((skill_type)num).c_str(), you.GetSkillLevel(num, false));
-
-						printlog(temp, true, false, true, CL_danger);
+						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,
+						PlaceHolderHelper(skill_string((skill_type)num)),PlaceHolderHelper(to_string(you.GetSkillLevel(num, false)))), true, false, true, CL_danger);
 						changedisplay(DT_GAME);
 
 						int key__ = waitkeyinput(true);
 						if (key__ == 'y' || key__ == 'Y')
 						{
 							you.SetPureSkill(num);
-							sprintf_s(temp, 100, "순호는 당신의 %s 스킬을 순화하였다! ", skill_string((skill_type)num).c_str());
-							printlog(temp, true, false, false, CL_junko);
-							sprintf_s(temp, 100, "순호로부터 스킬순화(%s) 축복", skill_string((skill_type)num).c_str());
-							AddNote(you.turn, CurrentLevelString(), temp, CL_junko);
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS, PlaceHolderHelper(skill_string((skill_type)num))), true, false, false, CL_junko);
+							AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SKILL,PlaceHolderHelper(skill_string((skill_type)num))), CL_junko);
 							break;
 						}
 					}
 				}
 				else
 				{
-					printlog("이 스킬은 순화할 수 없어", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_CANT), true, false, false, CL_normal);
 					changedisplay(DT_GAME);
 					return false;
 				}
 			}
 			else
 			{
-				printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
 				changedisplay(DT_GAME);
 				return false;
 			}
@@ -3097,8 +3094,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	case 2:
 	{
-		printlog("어떤 저항을 순화할거지?", true, false, false, CL_junko);
-		printlog("a-화염 b-냉기 c-전기", true, false, false, CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ASK), true, false, false, CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ABC), true, false, false, CL_junko);
 
 		int key_ = waitkeyinput(true);
 		switch (key_)
@@ -3106,23 +3103,23 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'a':
 			you.DeleteProperty(TPT_FIRE_RESIST);
 			you.SetProperty(TPT_FIRE_IMUNE, 200);
-			printlog("순호는 당신의 화염에 대한 저항을 순화하였다!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(화염) 축복", CL_junko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_FIRE), true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_FIRERESIST), CL_junko);
 			break;
 		case 'b':
 			you.DeleteProperty(TPT_COLD_RESIST);
 			you.SetProperty(TPT_COLD_IMUNE, 200);
-			printlog("순호는 당신의 냉기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(냉기) 축복", CL_junko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_COLD), true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_COLDRESIST), CL_junko);
 			break;
 		case 'c':
 			you.DeleteProperty(TPT_ELEC_RESIST);
 			you.SetProperty(TPT_ELEC_IMUNE, 200);
-			printlog("순호는 당신의 전기에 대한 저항을 순화하였다!", true, false, false, CL_junko);
-			AddNote(you.turn, CurrentLevelString(), "순호로부터 저항순화(전기) 축복", CL_junko);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ELEC), true, false, false, CL_junko);
+			AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ELECRESIST), CL_junko);
 			break;
 		default:
-			printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
 			changedisplay(DT_GAME);
 			return false;
 		}
@@ -3130,19 +3127,19 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	case 3:
 		you.SetProperty(TPT_PURE_MP, 1);
-		printlog("순호는 당신의 마력을 순화하였다!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "순호로부터 마력순화 축복", CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_SUCCESS), true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_MP), CL_junko);
 		break;
 	case 4:
 		you.SetProperty(TPT_PURE_POWER, 1);
 		iden_list.autopickup[IDEN_CHECK_ETC_START] = false;
-		printlog("순호는 당신의 파워를 순화하였다!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "순호로부터 파워순화 축복", CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER_SUCCESS), true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_POWER), CL_junko);
 		break;
 	case 5:
 		you.SetProperty(TPT_PURE_LIFE, 2);
-		printlog("순호는 당신의 생명력을 순화하였다!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "순호로부터 생명순화 축복", CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE_SUCCESS), true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_LIFE), CL_junko);
 		break;
 	case 6:
 		while (1)
@@ -3198,7 +3195,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					}
 					else
 					{
-						printlog("이 아이템은 순화할 수 없다.", true, false, false, CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_CANT), true, false, false, CL_normal);
 						changedisplay(DT_GAME);
 						return false;
 					}
@@ -3227,7 +3224,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			}
 			else if (key_ == VK_ESCAPE)
 			{
-				printlog("취소하였다. 신중하게 고민하도록", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
 				changedisplay(DT_GAME);
 				return false;
 			}
@@ -3236,8 +3233,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	case 7:
 		you.SetProperty(TPT_PURE_SYSTEM, 1);
-		printlog("순호는 당신의 시스템을 순화하였다!", true, false, false, CL_junko);
-		AddNote(you.turn, CurrentLevelString(), "순호로부터 시스템순화 축복", CL_junko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM_SUCCESS), true, false, false, CL_junko);
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SYSTEM), CL_junko);
 		break;
 	}
 
@@ -3245,7 +3242,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 
 	soundmanager.playSound("levelup");
-	printlog("순호: 나의 축복을 받도록 해!", true, false, false, CL_junko);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK), true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_1, true, true);
 	you.Ability(SKL_JUNKO_2, true, true);
@@ -3384,7 +3381,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 				map_effect = 2;
 				Sleep(500);
 				map_effect = 0;
-				printlog("화려한 불빛과 폭죽이 주변의 적들에게 몰아친다! ", true, false, false, CL_joon);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_JOON_AOE), true, false, false, CL_joon);
 			} 
 
 			it->SetConfuse(rand_int(5,10)+randA(power/20), true);
@@ -3409,7 +3406,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 	}
 	else
 	{
-		printlog("시야내에 적이 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_NOMON), true, false, false, CL_normal);
 		return false;
 	}
 	return false;
@@ -3420,7 +3417,7 @@ bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target
 	map_effect = 3;
 	Sleep(500);
 	map_effect = 0;
-	printlog("거대한 불운의 소용돌이가 휘몰아친다! ", true, false, false, CL_sion);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_SION_AOE), true, false, false, CL_sion);
 	int enter_ = 0;
 	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -3508,7 +3505,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 }
 bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def target)
 {
-	printlog("당신의 빙의가 끝났다. ", false, false, false, CL_joon_and_sion);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END) + " ", false, false, false, CL_joon_and_sion);
 	if (you.god_value[GT_JOON_AND_SION][0] == 1) {
 		if (you.power >= 300)
 			you.PowUpDown(-(you.power - 300));
@@ -3527,10 +3524,10 @@ bool skill_joon_and_sion_off(int power, bool short_, unit* order, coord_def targ
 bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].popular == -1) {
-		printlog("이 곳은 인기를 모으기엔 너무 오래된 곳이다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_OLD), true, false, false, CL_normal);
 		return false;
 	} else if (env[current_level].popular == 0) {
-		printlog("이 곳은 이미 욕망을 모은 층이다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_ALREADY), true, false, false, CL_normal);
 		return false;
 	}
 
@@ -3558,7 +3555,7 @@ bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 	}
 	else
 	{
-		printlog("시야내에 욕망을 읽어낼 적이 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_FAIL), true, false, false, CL_normal);
 		return false;
 	}
 	return false;
@@ -3579,7 +3576,7 @@ bool skill_miko_3(int power, bool short_, unit* order, coord_def target)
 	bool already_ = you.SetBuff(BUFFSTAT_HALO, BUFF_MIKO_HALO, 1, -1);
 	if (already_)
 	{
-		printlog("이미 존재하는 저항이다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_ALREADY_FAIL), true, false, false, CL_normal);
 		return false;
 	}
 	else {
@@ -3595,9 +3592,9 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	int resist_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("미코: 어느 저항을 얻을거지? 버프는 층을 옮기기전까지 유지된단다.", true, false, false, CL_miko);
-		printlog("a - 화염저항    b - 냉기저항    c - 전기저항", true, false, false, CL_miko);
-		printlog("d - 독저항      e - 혼란저항", true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST_ASK), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST1), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST2), true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3653,7 +3650,7 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	}
 	if (already_)
 	{
-		printlog("이미 존재하는 저항이다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_ALREADY_FAIL), true, false, false, CL_normal);
 		return false;
 	}
 	else {
@@ -3667,7 +3664,7 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 {
 	if(you.isSetMikoBuff(0)) {
-		printlog("이미 이 층에선 망토를 선택했다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_ALREADY_CLOAK), true, false, false, CL_normal);
 		return false;
 	}
 	int bonus_ = 0;
@@ -3716,7 +3713,7 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 {
 	if (you.isSetMikoBuff(1)) {
-		printlog("이미 인기 폭발 상태다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ALREADY), true, false, false, CL_normal);
 		return false;
 	}
 	int bonus_ = 0;
@@ -3790,12 +3787,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 	
 	if(SkillFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
 	{
-		printlog("이 기술을 쓰기엔 피로가 쌓였다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DELAYED),true,false,false,CL_normal);	
 		return false;
 	}
 	if(randA_1(100) > SkillDiffer(skill))
 	{
-		printlog("당신은 스킬 사용에 실패했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_FAIL),true,false,false,CL_normal);
 		return 2;
 	}	
 	if(!SkillPlusCost(skill,true))

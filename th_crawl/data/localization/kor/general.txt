@@ -124,7 +124,7 @@ LOC_SYSTEM_MEMORIZE_SPELL_START,마법을 익히기 시작했다.
 LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS,주문을 익히는데 성공했다.
 LOC_SYSTEM_MEMORIZE_HELP,{0:을|를} 누르면 마법을 기억할 수 있습니다.
 LOC_SYSTEM_ALPHABET_ASK,무슨 알파벳으로 바꿀거지?
-LOC_SYSTEM_NOT_CARRYING_WEAPON,무기를 끼고 있지 않다.
+LOC_SYSTEM_NOT_CARRYING_WEAPON,무기를 끼고 있어야 한다.
 LOC_SYSTEM_ALREADY_EQUIP,이미 장착하고 있다.
 LOC_SYSTEM_ALREADY_USE,이 아이템은 이미 사용중이다.
 LOC_SYSTEM_ALREADY_EQUIP_JEWERLY,이미 장착하고 있는 장신구다.
@@ -146,6 +146,7 @@ LOC_SYSTEM_CANT_EQUIP_HORN,당신의 뿔이 이 장비를 쓰는걸 방해한다
 LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,당신은 다리가 없다!
 LOC_SYSTEM_CANT_EQUIP_CLAW,당신의 손톱때문에 장갑을 낄 수 없다!
 LOC_SYSTEM_CANT_UNEQUIP_EXIST,벗을 아이템이 없다.
+LOC_SYSTEM_CANT_BRAND,여기엔 부여할 수 없다.
 LOC_SYSTEM_NOT_EQUIP_ITEM,그것을 입고 있지 않다!
 LOC_SYSTEM_UNEQUIP_AMULET_YN,정말로 충전이 되어있는 부적을 벗습니까? 충전율이 사라집니다! (y/n)
 LOC_SYSTEM_DO_CANCLE,취소하였다.
@@ -779,7 +780,9 @@ LOC_SYSTEM_CONTINUE_EXPRO,계속 탐험하도록!
 LOC_SYSTEM_GOOD_CHOICE,좋은 선택이야!
 LOC_SYSTEM_NEED_PREPARATION,좀 더 신중히 준비하도록!
 LOC_SYSTEM_BE_PRUDENT,취소하였다. 신중하게 생각하도록!
+LOC_SYSTEM_CANCLE_EX,취소!
 LOC_SYSTEM_DANGER_MSG,위험해!
+LOC_SYSTEM_UNKNOWN_SELECT,알 수 없는 선택
 LOC_SYSTEM_OK,알겠어!
 LOC_SYSTEM_YOU_POISONED,당신은 독에 걸렸다.
 LOC_SYSTEM_YOU_MORE_POISONED,당신의 독은 심해졌다.
@@ -1092,6 +1095,14 @@ LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,반요 변이강화
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,{0:을|를} 구속했다.
 LOC_SYSTEM_NOTE_SEIJA_GIFT,세이자에게 선물을 받았다. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,순호로부터 아이템순화({0}) 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SKILL,순호로부터 스킬순화({0}) 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_FIRERESIST,순호로부터 저항순화(화염) 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_COLDRESIST,순호로부터 저항순화(냉기) 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ELECRESIST,순호로부터 저항순화(전기) 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_MP,순호로부터 마력순화 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_POWER,순호로부터 마력순화 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_LIFE,순호로부터 생명순화 축복.
+LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SYSTEM,순호로부터 시스템순화 축복.
 LOC_SYSTEM_NOTE_TENSI_NOTHING,텐시: 아무일도안함.
 LOC_SYSTEM_NOTE_TENSI_GOOD_POTION,텐시: 좋은 포션.
 LOC_SYSTEM_NOTE_TENSI_BAD_POTION,텐시: 나쁜 포션.
@@ -2182,9 +2193,9 @@ LOC_SYSTEM_SPL_DESCRIBE_STING,마법으로 독침을 구현하여 탄막으로 �
 LOC_SYSTEM_SPL_DESCRIBE_CURE_POISON,자신에게 걸려있는 독을 해독하는 마법.\n사용즉시 효과를 발휘한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_TWIST,원하는 위치의 공기의 흐름을 비트는 대기마법. 몬스터가 있는 위치에도 사용할 수 있다. \n사용한 위치에 생성되어서 몇턴간 지속된다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_MOOK,주변에 모옥을 소환하는 소환계열 기초마법.\n모옥이 1~2마리가 자신의 주변에 아군으로 소환된다. 소환물은 시간이 지나면 사라진다.\n
-LOC_SYSTEM_SPL_DESCRIBE_FIRE_BRAND,장착하고 있는 무기에 화염속성을 일시적으로 부여하는 마법. 화염속성은 화염데미지를 준다.\n이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_COLD_BRAND,장착하고 있는 무기에 냉기속성을 일시적으로 부여하는 마법. 냉기속성은 냉기데미지를 준다.\n이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n
-LOC_SYSTEM_SPL_DESCRIBE_POISON_BRAND,장착하고 있는 무기에 독속성을 일시적으로 부여하는 마법. 독속성은 때릴때 독을 건다.\n이미 속성이 있거나 맨손, 아티펙트무기에는 사용할 수 가 없다.\n
+LOC_SYSTEM_SPL_DESCRIBE_FIRE_BRAND,장착하고 있는 무기에 화염속성을 일시적으로 부여하는 마법. 화염속성은 화염데미지를 준다.\n이미 속성이 있거나 맨손, 아티팩트무기에는 사용할 수 가 없다.\n
+LOC_SYSTEM_SPL_DESCRIBE_COLD_BRAND,장착하고 있는 무기에 냉기속성을 일시적으로 부여하는 마법. 냉기속성은 냉기데미지를 준다.\n이미 속성이 있거나 맨손, 아티팩트무기에는 사용할 수 가 없다.\n
+LOC_SYSTEM_SPL_DESCRIBE_POISON_BRAND,장착하고 있는 무기에 독속성을 일시적으로 부여하는 마법. 독속성은 때릴때 독을 건다.\n이미 속성이 있거나 맨손, 아티팩트무기에는 사용할 수 가 없다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SHOCK,1인적에게 전기를 통하게 하는 전기속성 기초마법.\n전기의 궤도는 정할 수 없지만 방향을 정하면 해당 방향으로 마법을 사용한다.\n해당 방향에 존재하는 적중에서 무작위의 적에게 전기가 통하여 데미지를 준다.\n전기저항이 없거나, 가까이있는 적에게 전기가 통할 확률이 높다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHAIN_LIGHTNING,전기가 적을 차례대로 타고가면서 다수의 적을 공격하는 강력한 전기속성마법.\n적에게 직접 조준하는건 불가능하지만 방향을 지정하여 가까이있는 적부터 차례대로 전기가 통한다.\n2번이상 전기가 타고갔을때, 시야밖에 있는 적에게도 공격이 가능하다.\n
 LOC_SYSTEM_SPL_DESCRIBE_DISCHARGE,전기를 내뿜어 방전시키는 전기마법. 방전상태가되면 몇턴마다 무작위로 주위적에 전격을 시전한다.\n모티브는 이쿠의 뇌운극어라는 설이...\n
@@ -2357,6 +2368,9 @@ LOC_SYSTEM_SKILL_LEVITATION_STOP,그레이즈를 멈췄다.
 LOC_SYSTEM_SKILL_ALREADY_INVISIBLE,이미 투명한 도중에 사용할 수 없다.
 LOC_SYSTEM_SKILL_INVISIBLE_STOP,다시 보이기 시작했다.
 LOC_SYSTEM_SKILL_THIS_IS_NOT_POTION,그것은 물약이 아니다.
+LOC_SYSTEM_SKILL_TORMENT,당신은 지옥의 고통을 불렀다!
+LOC_SYSTEM_SKILL_DELAYED,이 기술을 쓰기엔 피로가 쌓였다.
+LOC_SYSTEM_SKILL_FAIL,당신은 스킬 사용에 실패했다.
 LOC_SYSTEM_SKILL_EXP_ERROR,스킬경험치에 에러가 발생했습니다.
 LOC_SYSTEM_SKILL_LEVEL_UP,{0} 스킬레벨이 올랐다! 스킬레벨 {1}
 LOC_SYSTEM_SKL_KANAKO_1,건신초래돌
@@ -2480,7 +2494,7 @@ LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,높은 신앙심과 파워1칸을 소모하여 �
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,일시적으로 지능을 강화시키는 뱌쿠렌의 신체강화마법.\n지능이 5증가하고 마법성공률, 파워가 증가하며 마나 회복속도도 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,일시적으로 각력을 강화시키는 뱌쿠렌의 신체강화마법. (W)\n이동속도가 매우 매우 빨라진다. 신속과 중첩되지 않으며 지속시간은 짧은 편이다.\n가히 초인이라 부를만 하군!\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1,단풍의 위에 서있는 적들에게 광기를 불어넣는다.\n단풍 위에 있는 적들에게 마법저항을 비교하여 혼란을 전부 건다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,당신이 끼고 있는 아티펙트가 아닌 몸통 방어구를 단풍 방어구로 바꾼다.\n단풍방어구는 시즈하를 믿고있는동안 당신의 은밀을 크게 올려준다.\n단, 옷의 종류가 단풍옷으로 바꿔져서 기존의 저항력은 사라진다.\n이 단풍방어구는 한번 바꾸면 기존의 방어구로는 되돌릴 수 없다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,당신이 끼고 있는 아티팩트가 아닌 몸통 방어구를 단풍 방어구로 바꾼다.\n단풍방어구는 시즈하를 믿고있는동안 당신의 은밀을 크게 올려준다.\n단, 옷의 종류가 단풍옷으로 바꿔져서 기존의 저항력은 사라진다.\n이 단풍방어구는 한번 바꾸면 기존의 방어구로는 되돌릴 수 없다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,당신이 들고있는 무기에 영구적으로 단풍브랜드와 +1~2의 인챈트를 부여한다.\n단풍브랜드가 붙은 무기는 단검이 아니라도 커다란 암습데미지를 줄 수 있고\n단검인 경우엔 평범한 공격에도 암습의 확률을 준다.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1,당신에게 걸려있는 나쁜 디버프와 능력치 저하를 회복한다.\n즉시 회복되나 사용에는 신앙심과 적은양의 P를 소모한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2,당신이 들고 있는 음식을 소모하여 체력을 크게 회복한다.\n높은 신앙과 마나는 물론 또한 P도 1칸을 소모하는 고비용의 권능이다.\n만복도를 많이 회복하는 음식이 체력회복량도 조금 더 많다.\n
@@ -3753,6 +3767,8 @@ LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4,시온: 모두가 평등하게 �
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0:은|는} 무생물이기에 빙의할 수 없다.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,{0}에 빈곤신이 빙의하였다!
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END,당신의 빙의가 끝났다.
+LOC_SYSTEM_GOD_JOON_AND_SION_JOON_AOE,화려한 불빛과 폭죽이 주변의 적들에게 몰아친다!
+LOC_SYSTEM_GOD_JOON_AND_SION_SION_AOE,거대한 불운의 소용돌이가 휘몰아친다!
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!
 LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!
 LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,시온이 당신의 소모품을 대가로 당신을 부활시켰다!
@@ -3790,8 +3806,15 @@ LOC_SYSTEM_GOD_SUWAKO_TALK4,스와코: 내가 재앙신인걸 잊지말아~
 LOC_SYSTEM_GOD_SUWAKO_TALK5,스와코: 좀 더 노력하라고~
 LOC_SYSTEM_GOD_SUWAKO_TALK6,스와코: 걱정하지마, 충분히 힘은 줄테니깐
 LOC_SYSTEM_GOD_SWAWKO_HAT,스와코의 모자
+LOC_SYSTEM_GOD_SWAWKO_JUMP,점프!
+LOC_SYSTEM_GOD_SWAWKO_ALTAR1,당신은 발밑에 스와코님의 신전을 세웠다.
+LOC_SYSTEM_GOD_SWAWKO_ALTAR2,신앙심이 풍족해지는 것을 느꼈다.
+LOC_SYSTEM_GOD_SWAWKO_ALTAR_FAIL,여기엔 신전을 세울 수 없다.
 LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,{0:을|를} 끌어당겼다.
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FAIL,끌어 당길 수 없는 위치입니다.
+LOC_SYSTEM_GOD_SWAWKO_STATUE_FAIL,여기엔 석상을 세울 수 없다.
 LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,{0}에 재앙을 내렸다.
+LOC_SYSTEM_GOD_SWAWKO_RAIN,당신의 주변이 물바다가 되었다.
 LOC_SYSTEM_GOD_SWAWKO_TIMESTEP_END,당신은 동면을 끝냈다. 아직 잠에서 덜 깼다.
 LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,스와코는 당신에게 저주를 내렸다!
 LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,스와코는 당신에게 적대적인 개구리 무리를 선물했다!
@@ -3855,11 +3878,12 @@ LOC_SYSTEM_GOD_SHIZUHA_TALK4,시즈하: 다음 인기투표는 꼭 부탁할게
 LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.
 LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,시즈하는 박수를 쳤다. "훌륭해"
 LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL,시야안 단풍위에 있는 적이 없다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,아티펙트는 변화할 수 없다.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,아티팩트는 변화할 수 없다.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,이 아이템은 이미 단풍으로 되어있다.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,당신은 방어구를 끼고 있지 않다.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,{0:을|를} 단풍방어구로 강화하시겠습니까?(y/n)
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,{0:을|를} 단풍방어구로 강화하시겠습니까?(y/n)
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,당신의 방어구는 커다란 단풍잎으로 변했다!
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,딱 한번만 현재 무기에 단풍 브랜드를 부여할 수 있다. 할래?(Y/N)
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0}에서 쓸쓸하고도 종말적인 기운이 느껴진다.
 LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,단풍잎을 밟을때 바스락거리는 시끄러운 소리가 났다.
 LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,시즈하는 당신에 광기의 낙엽을 흩날렸다!
@@ -3875,10 +3899,23 @@ LOC_SYSTEM_GOD_HINA_TALK6,히나: 저주를 모으는 작업은 외로운거지
 LOC_SYSTEM_GOD_HINA_TALK7,히나: 너는 나와 끝까지 같이 있어줄거지?
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,히나는 당신의 장비에 액을 주입했다!
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,장착하고 있던 {0:이|가} 검게 빛났다.
+LOC_SYSTEM_GOD_HINA_ABIL_WEAPON_MINUS_TO_PLUS,히나는 당신의 무기의 액땜을 해주었다.
+LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS,히나는 당신의 방어구의 액땜을 해주었다.
+LOC_SYSTEM_GOD_HINA_ABIL_ONLY_MINUS,마이너스 인챈트가 되어있는 아이템만 선택할 수 있다.
+LOC_SYSTEM_GOD_HINA_ABIL_ONLY_CURSE,저주 걸려있는 아이템에만 사용할 수 있다.
+LOC_SYSTEM_GOD_HINA_ABIL_CANT_ARTIFACT,아티팩트엔 사용할 수 없다.
+LOC_SYSTEM_GOD_HINA_ABIL_INCORRECT_TARGET,올바르지 않은 대상이다.
+LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE,이미 저주에 걸려있다.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0:은|는} 저주의 힘으로 가득 차있다.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL,이 무기는 저주를 걸 수 없다.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,장착하고 있던 {0:이|가} 검게 빛나면서 당신에게 신비한 힘이 들어온다.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,이 방어구에는 저주를 걸 수 없다.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,방어구에만 사용이 가능하다.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 모든 데미지를 반사한다.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,이 장신구에는 저주를 걸 수 없다.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,장신구에만 사용이 가능하다.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 회복한다.
+LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,딱 한번만 현재 무기에 저주 브랜드를 부여할 수 있다. 할래?(Y/N)
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0}에서 차갑고 공허한 저주의 기운이 느껴진다.
 LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,히나는 액을 당신에게 직접 주입했다!
 LOC_SYSTEM_GOD_HINA_PUNISH_SPIN,히나는 당신을 빙빙 돌렸다!
@@ -3891,6 +3928,14 @@ LOC_SYSTEM_GOD_YUKARI_TALK5,유카리: 사태의 원인을 알기위해서라도
 LOC_SYSTEM_GOD_YUKARI_TALK6,유카리: 당신만 믿고있어. 도움이 필요하면 말해
 LOC_SYSTEM_GOD_YUKARI_TALK7,유카리: 내 힘을 받으면 더 이상 경계의 유무는 무의미해
 LOC_SYSTEM_GOD_YUKARI_TALK8,유카리: 당신만이 할 수 있는 일이야
+LOC_SYSTEM_GOD_YUKARI_CANT_CREATE,생성할 수 없는 위치다.
+LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA,틈새를 대상으로 지정해야한다.
+LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK,틈새를 타고 이동하였다.
+LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK_FAIL,이동할 수 없는 위치다.
+LOC_SYSTEM_GOD_YUKARI_SHIELD,결계가 당신을 보호하고 있다.
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO,이 곳에서는 차원을 고정할 수 없다!
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN,이 위치로 차원을 고정할까? (Y/N)
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX,차원이 고정되었다!
 LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?(Y/N)
 LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.
 LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,유카리는 당신의 위험한 전이마법 사용에 분노했다!
@@ -3935,6 +3980,9 @@ LOC_SYSTEM_GOD_YUYUKO_RECALL,{0}에게 유령을 내보냈다.
 LOC_SYSTEM_GOD_YUYUKO_GHOST_START,유령을 불러들이기 시작한다.
 LOC_SYSTEM_GOD_YUYUKO_GHOST_ALREADY,이미 유령을 모으고 있다.
 LOC_SYSTEM_GOD_YUYUKO_GHOST_STOP,유령 소환을 멈췄다.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_NOT_EXIST,유령이 없다.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT,유닛을 대상으로 사용해야한다.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_BOOST,당신은 대량의 유령을 불러들이기 시작한다!
 LOC_SYSTEM_GOD_YUYUKO_GHOST_END,유령의 빈도가 정상이 되었다.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0:이|가} 당신의 동료가 되었다.
 LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,유유코는 당신의 주변에 유령을 끌어모았다!
@@ -3974,8 +4022,14 @@ LOC_SYSTEM_GOD_SEIJA_TALK5,세이자: 레지스탕스 생활은 마음에 들어
 LOC_SYSTEM_GOD_SEIJA_TALK6,세이자: 우린 최고의 파트너야 친구!
 LOC_SYSTEM_GOD_SEIJA_PUNISH,세이자는 당신과 {0}의 관계를 이간질했다!
 LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,당신은 {0:와|과} 자리를 뒤집었다.
+LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM,세이자는 모두의 시야를 뒤집어버렸다.
+LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM_FAIL,시야내에 뒤집어버릴 상대가 없다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_ON,이제 세이자로부터 선물을 요구할 수 있다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,({0}키로 선물을 요청)
+LOC_SYSTEM_GOD_SEIJA_GIFT_ASK,세이자: 어느 신으로부터 훔친 선물을 줄까?
+LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE,마음이 변하기전에 고르는게 좋을걸?
+LOC_SYSTEM_GOD_SEIJA_GIFT_YN,이 신의 보물을 요구하겠습니까? (Y/N)
+LOC_SYSTEM_GOD_SEIJA_GIFT_ALREADY,이미 한번 보물을 받았던 신이다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT,선물을 받지않은지 너무 오랜시간이 지나서 선물이 취소되었다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,뱌쿠렌: 무작위 마법책을 몇 권 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,뱌쿠렌은 징벌로 당신을 느리게하거나 영력이나 스탯을 일시적으로 감소시킵니다.
@@ -4027,7 +4081,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_SEIJA2,아마 이 선택지는 버그입니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY1,릴리: 탄막 뭉치를 받습니다
 LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY2,릴리는 징벌로 당신의 주변에 적대적인 요정들을 소환하거나
 LOC_SYSTEM_GOD_SEIJA_GIFT_LILLY3,당신을 약화시켜 일시적으로 공격력과 마법의 파워를 절반으로 낮춥니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO1,미코: 아티펙트 망토를 하나 받습니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO1,미코: 아티팩트 망토를 하나 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO2,미코는 징벌로 당신의 최대체력을 일시적으로 절반으로 줄이거나
 LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO3,감속을 걸거나 화염과 냉기저항을 일시적으로 한단계 낮춥니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA1,오키나: 약간의 성역 두루마리를 받습니다.
@@ -4072,7 +4126,23 @@ LOC_SYSTEM_GOD_LILLY_CLASS_CHANGE,그동안 쌓은 경험으로 {0}에서 {1:이
 LOC_SYSTEM_GOD_LILLY_REVIVE,{0:은|는} 부활했다!
 LOC_SYSTEM_GOD_LILLY_INVITE,{0:은|는} 자신의 이름이 {1:이라|라}고 소개했다.
 LOC_SYSTEM_GOD_LILLY_INVITE_FAIL_LEVEL,이 요정을 권유하려면 {0}레벨이상이 되어야한다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN,요정을 동료로 더 권유하려면 신앙심을 더 높여야된다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_SUMMON,소환된 몬스터는 권유할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ONLYFAIRY,요정이 아니면 권유할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ZOMBIEFAIRY,이 요정은 좀비로 취직중이다. 직업을 가진 요정은 권유할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_MAIDFAIRY,이 요정은 메이드로 취직중이다. 직업을 가진 요정은 권유할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_DREAM,이 요정은 꿈의 주민이다. 꿈의 존재는 권유할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ALREADY,이 요정은 이미 당신의 동료다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_NOT_MONSTER,여기엔 몬스터가 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_FULL,더 이상의 권유는 할 수 없다.
+LOC_SYSTEM_GOD_LILLY_ABIL_CALL,요정들을 자신의 주변으로 호출했다!
+LOC_SYSTEM_GOD_LILLY_ABIL_CALL_FAIL,호출할 요정이 없다.
 LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,{0:은|는} 봄의 기운을 받아 체력이 회복되었다.
+LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_FAIL,이 요정은 이미 체력이 가득 차있다.
+LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_NOT_ALLY,이 요정은 지금 당신에게 적대적이다.
+LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_TARGET,동료 요정을 대상으로 선택해야한다.
+LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR,당신은 자신의 힘을 요정들에게 나눠주었다!
+LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR_FAIL,주변에 힘을 전달할 동료 요정이 없다.
 LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK,릴리는 당신의 힘을 빼앗았다!
 LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!
 LOC_SYSTEM_GOD_LILLY_ABANDON,릴리를 배신하여 모든 동료 요정이 당신에게 등을 돌렸다!
@@ -4088,11 +4158,20 @@ LOC_SYSTEM_GOD_MIKO_ENTER_NEW_DUNGEON,새로운 던전에 진입하면서 새로
 LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,던전을 옮기면서 인기도가 초기화되었다.
 LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,층을 옮기면서 인기도가 조금 내려갔다.
 LOC_SYSTEM_GOD_MIKO_UP_FLOOR,계단을 타고 올라가면서 인기도가 크게 내려갔다.
+LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_OLD,이 곳은 인기를 모으기엔 너무 오래된 곳이다.
+LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_ALREADY,이 곳은 이미 욕망을 모은 층이다.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,시야안에 있는 {0}명의 욕망을 읽어들였다.
+LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING_FAIL,시야내에 욕망을 읽어낼 적이 없다.
+LOC_SYSTEM_GOD_MIKO_ALREADY_FAIL,이미 얻은 능력이다.
+LOC_SYSTEM_GOD_MIKO_RESIST_ASK,미코: 어느 저항을 얻을거지? 버프는 층을 옮기기전까지 유지된단다.
+LOC_SYSTEM_GOD_MIKO_RESIST1,a - 화염저항    b - 냉기저항    c - 전기저항
+LOC_SYSTEM_GOD_MIKO_RESIST2,d - 독저항      e - 혼란저항
 LOC_SYSTEM_GOD_MIKO_CLOAK_ASK,미코: 어느 망토를 고를건가? 버프는 층을 옮기기전까지 유지된단다.
 LOC_SYSTEM_GOD_MIKO_CLOAK_RED,a - 빨간망토 : 전투력보너스 +6과 체력재생력
 LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE,b - 파랑망토 : 스펠파워 1.5배 보너스와 영력재생력
+LOC_SYSTEM_GOD_MIKO_ALREADY_CLOAK,이미 이 층에선 망토를 선택했다.
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,인기 폭발!
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ALREADY,이미 인기 폭발 상태다.
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ASK,인기 폭발! 어느 보너스를 얻을건가?
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1,a - 층을 옮기기전까지 체력 2배
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2,b - 층을 옮기기전까지 영력 회복 속도 폭증
@@ -4109,14 +4188,32 @@ LOC_SYSTEM_GOD_OKINA_TALK5,오키나: 슬슬 마이와 사토노는 해방시켜
 LOC_SYSTEM_GOD_OKINA_TALK6,오키나: 실로 네 부하에 맞는 인재로구나. 합격이다!
 LOC_SYSTEM_GOD_OKINA_TALK7,오키나: 보라! 들으라! 말하라! 비신의 진정한 마력을 받아라!
 LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,당신은 {0} 타일을 문으로 만들었다.
+LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR_FAIL,이 장소에선 문을 만들 수 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR_SHOULD_WALL,벽을 대상으로 써야 한다.
 LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR,오키나가 문을 잠가버렸다!
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_YOU,당신은 문을 강제로 단단하게 잠갔다!
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_ALREADY,이미 잠겨있는 문이다.
+LOC_SYSTEM_GOD_OKINA_ABIL_TARGET_DOOR,문을 대상으로 사용해야 한다.
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT,{0:은|는} 문에 밀쳐져 튕겨나갔다!
 LOC_SYSTEM_GOD_OKINA_ABIL_CLOSE_DOOR_OUT_FAIL,밀쳐낼 자리가 없어서 문 위에 있는 {0:을|를} 밀쳐낼 수 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_FAIL,이 장소에선 문을 만들 수 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_PATH_FAIL,해당 적에게 올바른 경로를 설정할 수 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR_CANT_CREATE,적의 등 뒤에 문을 설치할 수 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDOOR,적의 등 뒤의 문으로 빠져나왔다!
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_NO_NEED,이 곳에서는 백댄서를 소환할 필요가 없다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK,어느 백댄서를 호출하시겠습니까?
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI,테이레이다 마이: 뒤에서 춤추는 것으로 체력을 회복시켜준다
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO,니시다 사토노: 뒤에서 춤추는 것으로 영력을 회복시켜준다.
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS,백댄서즈 소환: 두명을 모두 소환한다. (신앙심소모 2배)
+LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE,당신은 등 뒤의 문을 열고 도망쳤다!
+LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_ALREADY,이 곳은 이미 문 뒤의 세계다.
+LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_CANTDOOR,이 곳에는 문을 열만한 공간이 없다!
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME,이 곳은 문 뒤의 세계다. {푹 쉬다 가도록!|환영하네!|여기는 안전해보인다.}
 LOC_SYSTEM_GOD_OKINA_PUNISH_BACKDANCER,오키나는 백댄서를 불러냈다!
 LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,오키나의 분노로 당신의 체력과 영력이 흡수되었다!
 LOC_SYSTEM_GOD_JUNKO_WELCOME,순호: 상아여, 보고 있는가?
 LOC_SYSTEM_GOD_JUNKO_TALK,순호: 상아여 보고있는가!
+LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,시야에 살의를 표출할 적이 있어야 한다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,또한 한번 고른 순화는 되돌릴 수 없다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,어떤 능력을 순화하겠습니까?
@@ -4128,12 +4225,26 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,저항순화: 선택한 속성에 대�
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,마력순화: 체력과 영력이 동일시 되며 회복력이 합쳐진다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,파워순화: 항상 풀파워가 되며 떨어지지 않는다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,생명순화: 추가 목숨을 2개 얻는다.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티펙트도 가능.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티팩트도 가능.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG,버그순화: 버그이므로 이걸 선택하면 안된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT,적성이 0이상인 스킬만 선택할 수 있다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,정말 {0} 스킬을 순화할거야? (현재 레벨 {1}) (y/n)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_CANT,이 스킬은 순화할 수 없어
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS,순호는 당신의 {0} 스킬을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ASK,어떤 저항을 순화할거지?
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ABC,a-화염 b-냉기 c-전기
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_FIRE,순호는 당신의 화염에 대한 저항을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_COLD,순호는 당신의 냉기에 대한 저항을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ELEC,순호는 당신의 전기에 대한 저항을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_SUCCESS,순호는 당신의 마력을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER_SUCCESS,순호는 당신의 파워를 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE_SUCCESS,순호는 당신의 생명력을 순화하였다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,정말 {0} 아이템을 순화할거야? (y/n)
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,순호는 당신의 {0} 아이템을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_CANT,이 아이템은 순화할 수 없다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM_SUCCESS,순호는 당신의 시스템을 순화하였다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK,순호: 나의 축복을 받도록 해!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,순호는 당신의 힘을 약화하였다!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_SLOW,순호는 당신의 속도를 빼앗았다!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_STAT,순호는 당신의 능력치를 빼앗았다!
@@ -4151,6 +4262,9 @@ LOC_SYSTEM_GOD_GIFT_APPEAR,당신의 발밑에 무언가 나타났다!
 LOC_SYSTEM_GOD_WRATH,{0}의 분노를 느꼈다.
 LOC_SYSTEM_GOD_FORGIVE,당신은 {0:으로|로}부터 용서받았다.
 LOC_SYSTEM_GOD_NOT_YET_FORGIVE,{0:은|는} 아직 당신을 용서하지않았다.
+LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION,순호는 이미 순화된 당신을 언제든지 죽일 수 있다. 정말로 죽을거야?(Y/N)
+LOC_SYSTEM_GOD_ABANDON_ASK_SANAE,신을 버리면 당신의 신앙심은 전부 사라질것이다. 진짜로?(Y/N)
+LOC_SYSTEM_GOD_ABANDON_ASK,신을 버리면 당신은 신의 노여움을 살 것이다. 진짜로?(Y/N)
 LOC_SYSTEM_GOD_ABANDON,당신은 {0:을|를} 버렸다. 당신의 신은 분노했다.
 LOC_SYSTEM_GOD_ABANDONED,당신은 {0:으로|로}부터 버려졌다!
 LOC_SYSTEM_GOD_ABANDON_SATORI,당신은 {0:을|를} 버렸다. 당신의 신은 크게 신경쓰지 않는것 같다.

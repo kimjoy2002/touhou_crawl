@@ -295,6 +295,8 @@ LOC_SYSTEM_DUNGEON_SPRINT,Sprint
 LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON,Unknown Floor
 LOC_SYSTEM_DUNGEON_FLOOR,Floor {0}
 LOC_SYSTEM_DUNGEON_LAST_FLOOR,Last Floor
+LOC_SYSTEM_DUNGEON_UKNOWN,알 수 없는 위치.
+LOC_SYSTEM_DUNGEON_CANT_FINE_PATH,가는 길을 알 수 없습니다.
 LOC_SYSTEM_BUG,Bug
 LOC_SYSTEM_BUT_NOTHING_HAPPEND,However, nothing happened.
 LOC_SYSTEM_RECOVER_POWER,Power has been restored.
@@ -776,6 +778,7 @@ LOC_SYSTEM_CONTINUE_CRAWL,Carry on!
 LOC_SYSTEM_CONTINUE_EXPRO,Keep exploring!
 LOC_SYSTEM_GOOD_CHOICE,Good choice!
 LOC_SYSTEM_NEED_PREPARATION,Be more prepared next time!
+LOC_SYSTEM_BE_PRUDENT,취소하였다. 신중하게 생각하도록!
 LOC_SYSTEM_DANGER_MSG,Danger!
 LOC_SYSTEM_OK,Got it!
 LOC_SYSTEM_YOU_POISONED,You are poisoned.
@@ -2339,6 +2342,21 @@ LOC_SYSTEM_SKILL_STEALTH,Stealth
 LOC_SYSTEM_SKILL_UNKNOWN,Unknown
 LOC_SYSTEM_SKILL_LEAST_ONE,You must enable at least one skill!
 LOC_SYSTEM_SKILL_MASTER,You’ve mastered the skill you were learning!
+LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY,적 몬스터를 대상으로 써야한다.
+LOC_SYSTEM_SKILL_TOO_CLOSE,눈 앞의 상대에겐 돌진할 수 없다.
+LOC_SYSTEM_SKILL_CANT_CHARGE1,해당 위치엔 돌격할 수 없다.
+LOC_SYSTEM_SKILL_CANT_CHARGE2,돌진할 수 없다.
+LOC_SYSTEM_SKILL_BLOCK_INSIGHT,사이에 장애물이 있다.
+LOC_SYSTEM_SKILL_CHARGE_TO_ENEMY,해당 위치엔 돌격할 수 없다.
+LOC_SYSTEM_SKILL_CANT_CREATE_POSITION,생성할 수 없는 위치입니다.
+LOC_SYSTEM_SKILL_ALREADY_GRAZE,이미 그레이즈도중에 사용할 수 없다.
+LOC_SYSTEM_SKILL_AMULET_GRAZE,아뮬렛의 힘에 의해 그레이즈는 종료 시킬 수 없다.
+LOC_SYSTEM_SKILL_GRAZE_STOP,그레이즈를 멈췄다.
+LOC_SYSTEM_SKILL_ALREADY_LEVITATION,이미 비행도중에 사용할 수 없다.
+LOC_SYSTEM_SKILL_LEVITATION_STOP,그레이즈를 멈췄다.
+LOC_SYSTEM_SKILL_ALREADY_INVISIBLE,이미 투명한 도중에 사용할 수 없다.
+LOC_SYSTEM_SKILL_INVISIBLE_STOP,다시 보이기 시작했다.
+LOC_SYSTEM_SKILL_THIS_IS_NOT_POTION,그것은 물약이 아니다.
 LOC_SYSTEM_SKILL_EXP_ERROR,Skill experience error occurred.
 LOC_SYSTEM_SKILL_LEVEL_UP,{0} skill level increased! Skill level {1}
 LOC_SYSTEM_SKL_KANAKO_1,Summon Divine Rock
@@ -3719,6 +3737,19 @@ LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,Joon & Shion: Time to show you the power of 
 LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,Joon and Shion rejoiced in robbing enemies’ wallets.
 LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, you wasted {0} {1}.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK,어느 신을 빙의할거지?
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1,a - 요리가미 죠온: 빙의시 즉시 파워를 가득 채워준다. 다만 해제시엔 낭비된다.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2,또한 소모품을 사용하면 무조건 2~3개씩 낭비한다.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3,b - 요리가미 시온: 빙의시 즉시 체력과 영력을 회복한다. 버린 소모품이 사라짐.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4,땅에 떨어진 소모품 고갈속도증가. 파워패널티를 받지않는다.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1,죠온: 송두리채 빼앗아라!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK2,죠온: 값 나가는건 모조리 훔쳐!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3,죠온: 힘을 줄테니 모두 나에게 바치는거야!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK4,죠온: 수금 시간이야!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK1,시온: 자, 이제 베풀어주지 않을래?
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK2,시온: 가난은 더 이상 싫어!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK3,시온: 최흉최악은 나 혼자로도 충분해!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4,시온: 모두가 평등하게 불행한 시대가 올거야
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0} is an inanimate object and cannot be possessed.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,Shion has possessed {0}!
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END,Your possession has ended.
@@ -3773,6 +3804,10 @@ LOC_SYSTEM_GOD_MINORIKO_TALK5,Minoriko: You’re keeping your belly full, right?
 LOC_SYSTEM_GOD_MINORIKO_TALK6,Minoriko: Now it’s time to repay all your hard work with a bountiful harvest!
 LOC_SYSTEM_GOD_MINORIKO_TALK7,Minoriko: Apostle of Autumn! Go forth and spread the greatness of the season!
 LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT,Minoriko exclaimed with excitement, "That's it!"
+LOC_SYSTEM_GOD_MINORIKO_CURE,당신은 상태를 회복하였다.
+LOC_SYSTEM_GOD_MINORIKO_CURE_FAIL,당신은 회복할 상태가 없다.
+LOC_SYSTEM_GOD_MINORIKO_FOOD_HEAL,당신은 상태를 회복하였다.
+LOC_SYSTEM_GOD_MINORIKO_FOOD_FAIL,당신은 상태를 회복하였다.
 LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER,Minoriko has accelerated your hunger!
 LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK,Minoriko has taken away your health!
 LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT,Minoriko has lowered your stats!
@@ -3801,6 +3836,13 @@ LOC_SYSTEM_GOD_YUUGI_TALK6,Yuugi: Want to spar with me sometime?
 LOC_SYSTEM_GOD_YUUGI_TALK7,Yuugi: I’ll invite you for drinks next time—just make sure you survive!
 LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi rejoiced in your victory.
 LOC_SYSTEM_GOD_YUUGI_CATCH,You caught {0}.
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE,적에게 저먼 스플렉스를 걸 지면이 부족하다.
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_SOMEONE,저먼 스플렉스를 쓰는데 방해되는 누군가가 있다.
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX,저먼 스플렉스!
+LOC_SYSTEM_GOD_YUUGI_THROW,날라가라!
+LOC_SYSTEM_GOD_YUUGI_SHOUT,침묵하라!
+LOC_SYSTEM_GOD_YUUGI_SHOUT_FAIL,포효를 들을 상대가 없다.
+LOC_SYSTEM_GOD_YUUGI_THREE_STEP,삼보필살!
 LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC,Yuugi was enraged by your magic!
 LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK,Yuugi forced you to drink some powerful booze!
 LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW,Yuugi grabbed you and threw you!
@@ -3812,7 +3854,12 @@ LOC_SYSTEM_GOD_SHIZUHA_TALK3,Shizuha: ...Now it's our turn...
 LOC_SYSTEM_GOD_SHIZUHA_TALK4,Shizuha: Be sure to vote for me in the next popularity poll.
 LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,Shizuha rejoiced as your enemies fell like autumn leaves.
 LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,Shizuha clapped. "Splendid."
+LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL,시야안 단풍위에 있는 적이 없다.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,아티펙트는 변화할 수 없다.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,이 아이템은 이미 단풍으로 되어있다.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,당신은 방어구를 끼고 있지 않다.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense? (y/n)
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,{0:을|를} 단풍방어구로 강화하시겠습니까?(y/n)
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
 LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,Stepping on the leaves made a loud rustling noise.
 LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,Shizuha scattered leaves of madness around you!
@@ -3864,8 +3911,16 @@ LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,Side effects from healing have begun!
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,당신의 올릴 능력치를 고르세요. (S)tr - 힘, (D)ex - 민첩, (I)nt - 지능 (R)eturn - 복구
+LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,당신은 이미 그 능력치로 개조되어있다!
+LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,당신은 개조되어있는 몸이 아니다!
+LOC_SYSTEM_GOD_EIRIN_BOOST,에이린이 당신의 몸을 개조하였다!
+LOC_SYSTEM_GOD_EIRIN_BOOST_RETURN,에이린은 당신의 몸을 원래대로 되돌렸다.
+LOC_SYSTEM_GOD_EIRIN_MAYBE,아마도...
 LOC_SYSTEM_GOD_EIRIN_POTION_POWER,Eirin helps you draw new strength from the potion.
 LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,Eirin blocks the paralysis and grants you new strength from the potion.
+LOC_SYSTEM_GOD_EIRIN_HEAL,당신은 에이린의 임시 수혈로 회복되었다.
+LOC_SYSTEM_GOD_EIRIN_HEAL_WARN,이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!
 LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,Eirin turned your potion into plain water!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,Eirin forcefully fed you the {0}!
 LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,Eirin forcibly experimented on your body!
@@ -3877,6 +3932,9 @@ LOC_SYSTEM_GOD_YUYUKO_TALK4,Yuyuko: Aren’t ghosts cold and cute?
 LOC_SYSTEM_GOD_YUYUKO_TALK5,Yuyuko: Do you like your new friends?
 LOC_SYSTEM_GOD_YUYUKO_TALK6,Yuyuko: Even if you die, your soul will stay with us.
 LOC_SYSTEM_GOD_YUYUKO_RECALL,You sent a ghost to {0}.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_START,유령을 불러들이기 시작한다.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_ALREADY,이미 유령을 모으고 있다.
+LOC_SYSTEM_GOD_YUYUKO_GHOST_STOP,유령 소환을 멈췄다.
 LOC_SYSTEM_GOD_YUYUKO_GHOST_END,Ghost frequency has returned to normal.
 LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0} has become your ally.
 LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,Yuyuko gathered ghosts all around you!
@@ -3887,6 +3945,12 @@ LOC_SYSTEM_GOD_SATORI_TALK3,Satori: A pet’s little tricks are always a delight
 LOC_SYSTEM_GOD_SATORI_TALK4,Satori gently patted you.
 LOC_SYSTEM_GOD_SATORI_TALK5,Satori: Did today's pet food suit your taste?
 LOC_SYSTEM_GOD_SATORI_TALK6,Satori: Would you like to go on a walk with me sometime?
+LOC_SYSTEM_GOD_SATORI_KOISHI,동생의 마음은 닫혀있다.
+LOC_SYSTEM_GOD_SATORI_MINDREADING_TOO_COMPLEX,이 상대의 마음은 너무 복잡해서 읽을 수 없다.
+LOC_SYSTEM_GOD_SATORI_MINDREADING_ALREADY,이미 마음을 간파한 대상이다.
+LOC_SYSTEM_GOD_SATORI_MINDREADING,마음을 읽는중...
+LOC_SYSTEM_GOD_SATORI_MINDREADING_INTERRUPT,방해를 받아 마음을 읽는데 실패했다.
+LOC_SYSTEM_GOD_SATORI_MINDREADING_DISAPPREAR,대상이 시야에 사라져서 실패했다.
 LOC_SYSTEM_GOD_SATORI_FEED,Lady Satori has fed you!
 LOC_SYSTEM_GOD_SATORI_REUNION,Satori was happy to see you again.
 LOC_SYSTEM_GOD_SATORI_BELIEVE,You became Satori’s pet.
@@ -4025,7 +4089,14 @@ LOC_SYSTEM_GOD_MIKO_ENTER_OUT_DUNGEON,Changing dungeons has reset your popularit
 LOC_SYSTEM_GOD_MIKO_DOWN_FLOOR,Your popularity dropped slightly when changing floors.
 LOC_SYSTEM_GOD_MIKO_UP_FLOOR,Your popularity dropped significantly when climbing stairs.
 LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING,You absorbed the cravings of {0} beings within sight.
+LOC_SYSTEM_GOD_MIKO_CLOAK_ASK,미코: 어느 망토를 고를건가? 버프는 층을 옮기기전까지 유지된단다.
+LOC_SYSTEM_GOD_MIKO_CLOAK_RED,a - 빨간망토 : 전투력보너스 +6과 체력재생력
+LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE,b - 파랑망토 : 스펠파워 1.5배 보너스와 영력재생력
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,Popularity burst!
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ASK,인기 폭발! 어느 보너스를 얻을건가?
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1,a - 층을 옮기기전까지 체력 2배
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2,b - 층을 옮기기전까지 영력 회복 속도 폭증
+LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3,c - 층을 옮기기전까지 영구적인 가속
 LOC_SYSTEM_GOD_MIKO_PUNISH_HP,Miko has drained your HP!
 LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,Miko has slowed you down!
 LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,Miko has lowered your resistance!
@@ -4046,6 +4117,21 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_BACKDANCER,Okina summoned backdancers!
 LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,Okina’s rage has drained your HP and MP!
 LOC_SYSTEM_GOD_JUNKO_WELCOME,Junko: Chang’e, are you watching?
 LOC_SYSTEM_GOD_JUNKO_TALK,Junko: Chang’e, are you watching!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,또한 한번 고른 순화는 되돌릴 수 없다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,어떤 능력을 순화하겠습니까?
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,신앙심을 내리고 새로운 순화를 위해 이번 선택을 미룬다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,이번 선택을 미루면 다음 선택까지 시간이 걸립니다. 정말로 미루겠습니까? (Y/N)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY,순화 선택을 미뤘다. 다음 순화 선택까지 다시 신앙을 모아야한다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL,스킬순화: 선택한 적성0 이상의 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,저항순화: 선택한 속성에 대해 면역이 된다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,마력순화: 체력과 영력이 동일시 되며 회복력이 합쳐진다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,파워순화: 항상 풀파워가 되며 떨어지지 않는다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,생명순화: 추가 목숨을 2개 얻는다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티펙트도 가능.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG,버그순화: 버그이므로 이걸 선택하면 안된다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT,적성이 0이상인 스킬만 선택할 수 있다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify the item {0}? (y/n)
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
 LOC_SYSTEM_GOD_JUNKO_PUNISH_WEAK,Junko has weakened your strength!
@@ -4161,6 +4247,10 @@ LOC_SYSTEM_REPLAY_PAGE,Page {0}
 LOC_SYSTEM_REPLAYING,Replaying Mode
 LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
+LOC_SYSTEM_DEBUG_SPIECIAL_VAULT,특수지형
+LOC_SYSTEM_DEBUG_MAX_DAMAGE,맥뎀
+LOC_SYSTEM_DEBUG_FULL_DICE,풀다이스!
+LOC_SYSTEM_DEBUG_SHIELD_VAULE,실드수치: {0}
 LOC_SYSTEM_DEBUG_CALC_MR,Debuff Calc: Monster({0}) - Power({1}) < randC(2,100)
 LOC_SYSTEM_DEBUG_CALC_BACKSTAB,DetectionChance-RandB({0},{1}) = {2}% (Final backstab success rate: {3}%)
 LOC_SYSTEM_DEBUG_CALC_DAMAGE,RealDamage={0} Attack={1} Backstab={2} Hit={3} Accuracy={4}%

@@ -2962,36 +2962,36 @@ const char* getJunkoString(int kind_)
 	switch (kind_)
 	{
 	case 1:
-		return "스킬순화: 선택한 적성0 이상의 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL);
 	case 2:
-		return "저항순화: 선택한 속성에 대해 면역이 된다.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST);
 	case 3:
-		return "마력순화: 체력과 영력이 동일시 되며 회복력이 합쳐진다.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP);
 	case 4:
-		return "파워순화: 항상 풀파워가 되며 떨어지지 않는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER);
 	case 5:
-		return "생명순화: 추가 목숨을 2개 얻는다.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE);
 	case 6:
-		return "장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티펙트도 가능.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM);
 	case 7:
-		return "시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM);
 	}
 
-	return "버그순화: 버그이므로 이걸 선택하면 안된다.";
+	return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG);
 }
 bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 {
 
 	int kind_ = 0;
 	bool loop_ = true;
-	printlog("순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.", true, false, false, CL_danger);
-	printlog("또한 한번 고른 순화는 되돌릴 수 없다! ", false, false, false, CL_danger);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO), true, false, false, CL_danger);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN) +" ", false, false, false, CL_danger);
 	while (loop_) {
-		printlog("어떤 능력을 순화하겠습니까?", true, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK), true, false, false, CL_help);
 		printarray(true, false, false, CL_junko, 2, "a - ", getJunkoString(you.god_value[GT_JUNKO][0]));
 		printarray(true, false, false, CL_junko, 2, "b - ", getJunkoString(you.god_value[GT_JUNKO][1]));
 		printarray(true, false, false, CL_junko, 2, "c - ", getJunkoString(you.god_value[GT_JUNKO][2]));
-		printarray(true, false, false, CL_junko, 2, "d - ", "신앙심을 내리고 새로운 순화를 위해 이번 선택을 미룬다.");
+		printarray(true, false, false, CL_junko, 2, "d - ", LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER));
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3012,14 +3012,14 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'd':
 		case 'D':	
 		{
-			printlog("이번 선택을 미루면 다음 선택까지 시간이 걸립니다. 정말로 미루겠습니까? (Y/N)", true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY), true, false, false, CL_help);
 			switch (waitkeyinput())
 			{
 			case 'y':
 			case 'Y':
 				you.PietyUpDown(-(you.piety-140));
 				you.god_value[GT_JUNKO][0] = 0;
-				printlog("순화 선택을 미뤘다. 다음 순화 선택까지 다시 신앙을 모아야한다.", true, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY), true, false, false, CL_normal);
 				return true;
 			case 'n':
 			case 'N':
@@ -3057,7 +3057,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					if (you.skill[num].aptit < 0)
 					{
 						changedisplay(DT_GAME);
-						printlog("적성이 0이상인 스킬만 선택할 수 있다!", true, false, false, CL_warning);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT), true, false, false, CL_warning);
 						MoreWait();
 					}
 					else
@@ -3266,11 +3266,11 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 	int god_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("어느 신을 빙의할거지?", true, false, false, CL_help);
-		printlog("a - 요리가미 죠온: 빙의시 즉시 파워를 가득 채워준다. 다만 해제시엔 낭비된다.", true, false, false, CL_joon);
-		printlog("                   또한 소모품을 사용하면 무조건 2~3개씩 낭비한다.", true, false, false, CL_joon);
-		printlog("b - 요리가미 시온: 빙의시 즉시 체력과 영력을 회복한다. 버린 소모품이 사라짐.", true, false, false, CL_sion);
-		printlog("                   땅에 떨어진 소모품 고갈속도증가. 파워패널티를 받지않는다.", true, false, false, CL_sion);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK), true, false, false, CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), true, false, false, CL_joon);
+		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), true, false, false, CL_sion);
+		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3298,16 +3298,16 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 
 		switch (randA(3)) {
 		case 0:
-			printlog("죠온: 송두리채 빼앗아라!", true, false, false, CL_joon);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1), true, false, false, CL_joon);
 			break;
 		case 1:
-			printlog("죠온: 값 나가는건 모조리 훔쳐!", true, false, false, CL_joon);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK2), true, false, false, CL_joon);
 			break;
 		case 2:
-			printlog("죠온: 힘을 줄테니 모두 나에게 바치는거야!", true, false, false, CL_joon);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3), true, false, false, CL_joon);
 			break;
 		case 3:
-			printlog("죠온: 수금 시간이야!", true, false, false, CL_joon);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK4), true, false, false, CL_joon);
 			break;
 		}
 
@@ -3332,16 +3332,16 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		map_effect = 0;
 		switch (randA(3)) {
 		case 0:
-			printlog("시온: 자, 이제 베풀어주지 않을래?", true, false, false, CL_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK1), true, false, false, CL_sion);
 			break;
 		case 1:
-			printlog("시온: 가난은 더 이상 싫어!", true, false, false, CL_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK2), true, false, false, CL_sion);
 			break;
 		case 2:
-			printlog("시온: 최흉최악은 나 혼자로도 충분해!", true, false, false, CL_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK3), true, false, false, CL_sion);
 			break;
 		case 3:
-			printlog("시온: 모두가 평등하게 불행한 시대가 올거야", true, false, false, CL_sion);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4), true, false, false, CL_sion);
 			break;
 		}
 		soundmanager.playSound("buff");
@@ -3673,9 +3673,9 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 	int bonus_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("미코: 어느 망토를 고를건가? 버프는 층을 옮기기전까지 유지된단다.", true, false, false, CL_miko);
-		printlog("a - 빨간망토 : 전투력보너스 +6과 체력재생력", true, false, false, CL_miko);
-		printlog("b - 파랑망토 : 스펠파워 1.5배 보너스와 영력재생력", true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_ASK), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_RED), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE), true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':
@@ -3722,10 +3722,10 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 	int bonus_ = 0;
 	bool loop_ = true;
 	while (loop_) {
-		printlog("인기 폭발! 어느 보너스를 얻을건가?", true, false, false, CL_miko);
-		printlog("a - 층을 옮기기전까지 체력 2배", true, false, false, CL_miko);
-		printlog("b - 층을 옮기기전까지 영력 회복 속도 폭증", true, false, false, CL_miko);
-		printlog("c - 층을 옮기기전까지 영구적인 가속", true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ASK), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3), true, false, false, CL_miko);
 		switch (waitkeyinput())
 		{
 		case 'a':

@@ -70,7 +70,6 @@ TextureFile texture_item01(imgfile_item01);
 TextureFile texture_item02(imgfile_item02);
 TextureFile texture_item03(imgfile_item03);
 TextureFile texture_laser(imgfile_laser);
-TextureFile texture_test(imgfile_test);
 TextureFile texture_dot_floor(imgfile_dot_floor);
 TextureFile texture_dot_wall(imgfile_dot_wall);
 TextureFile texture_dot_monster(imgfile_dot_monster);
@@ -1386,7 +1385,6 @@ textures img_effect_gold(&texture_dungeon01, 352, 0, 384, 32, 255);
 textures img_effect_sleep(&texture_dungeon01, 960, 0, 992, 32, 255);
 textures img_effect_white(&texture_dungeon01, 992, 0, 1024, 32, 255);
 textures img_effect_sion(&texture_dungeon01, 0, 296, 32, 328, 255);
-textures img_mons_test(&texture_test, 0, 0, 32, 32, 255);
 
 
 
@@ -2265,8 +2263,8 @@ int texturetoint(textures* input)
 		return 123;
 	else if(input == &img_mons_new_kappa_wizard)
 		return 124;
-	else if(input == &img_mons_test)
-		return 125;
+	// else if(input == &img_mons_test)
+	// 	return 125;
 	else if(input == &img_mons_magic_book[0])
 		return 126;
 	else if(input == &img_mons_magic_book[1])
@@ -3305,7 +3303,8 @@ textures* inttotexture(int input)
 	case 124:
 		return &img_mons_new_kappa_wizard;
 	case 125:
-		return &img_mons_test;
+		// return &img_mons_test;
+		return &img_mons_new_kappa_wizard;
 	case 126:
 		return &img_mons_magic_book[0];
 	case 127:

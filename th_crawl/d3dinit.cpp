@@ -135,8 +135,6 @@ bool Setup()
 		return_ = false;
 	if(!texture_laser.loadingEX(Device))
 		return_ = false;
-	if(!texture_test.loadingEX(Device))
-		return_ = false;
 	
 
 

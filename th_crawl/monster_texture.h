@@ -173,9 +173,6 @@ extern textures img_mons_desire_green;
 extern textures img_mons_desire_blue;
 
 
-extern textures img_mons_test;
-
-
 
 
 extern textures img_named_rumia;

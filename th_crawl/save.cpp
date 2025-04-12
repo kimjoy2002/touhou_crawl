@@ -126,7 +126,7 @@ bool load_name(const char* path)
 		WaitForSingleObject(mutx, INFINITE);
 		you.user_name = string(name);
 		ReleaseMutex(mutx);
-		if(strcmp(name,"이름없음"))
+		if(strcmp(name,"Default"))
 			return true;
 		else
 			return false;

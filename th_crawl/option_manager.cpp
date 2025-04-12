@@ -23,7 +23,7 @@ optionManager::optionManager(string fileName) {
 
 		TCHAR szBuf[MAX_STR_SIZE] = { 0, };
 
-		GetPrivateProfileString(_T("config"), _T("name"), _T("이름없음"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		GetPrivateProfileString(_T("config"), _T("name"), _T("Default"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		name = TCHARToString(szBuf);
 
 		GetPrivateProfileString(_T("config"), _T("height"), _T("600"), szBuf, MAX_STR_SIZE, fileName.c_str());
@@ -38,11 +38,11 @@ optionManager::optionManager(string fileName) {
 		GetPrivateProfileString(_T("config"), _T("se_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		se_volume = _tstoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("server_ip"), _T("joy1999.codns.com"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		server_ip = TCHARToString(szBuf);
+		// GetPrivateProfileString(_T("config"), _T("server_ip"), _T("joy1999.codns.com"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		// server_ip = TCHARToString(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		server_port = _tstoi(szBuf);
+		// GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		// server_port = _tstoi(szBuf);
 
 		GetPrivateProfileString(_T("config"), _T("language"), _T("ENG"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		lang = TCHARToString(szBuf);
@@ -50,7 +50,7 @@ optionManager::optionManager(string fileName) {
 }
 
 void optionManager::createNewFile(string fileName) {
-	CString strString = _T("이름없음");
+	CString strString = _T("Default");
 	TCHAR  *tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("name"), tchr, fileName.c_str());
 
@@ -70,13 +70,13 @@ void optionManager::createNewFile(string fileName) {
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("se_volume"), tchr, fileName.c_str());
 
-	strString = _T("joy1999.codns.com");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("server_ip"), tchr, fileName.c_str());
+	// strString = _T("joy1999.codns.com");
+	// tchr = (TCHAR*)(LPCTSTR)strString;
+	// WritePrivateProfileString(_T("config"), _T("server_ip"), tchr, fileName.c_str());
 
-	strString = _T("12345");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
+	// strString = _T("12345");
+	// tchr = (TCHAR*)(LPCTSTR)strString;
+	// WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
 
 	strString = _T("ENG");
 	tchr = (TCHAR*)(LPCTSTR)strString;

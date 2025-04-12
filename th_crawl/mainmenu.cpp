@@ -10,6 +10,7 @@
 #include "map.h"
 #include "dump.h"
 #include "god.h"
+#include "steam_api.h"
 #include "throw.h"
 #include "skill_use.h"
 #include "note.h"
@@ -177,6 +178,7 @@ bool checkSavefile(int value_)
 
 	if(load_data(save_file.c_str()))
 	{
+		steam_mg.setCurrentInfo();
 		saveexit = true;
 		return true;
 	}

@@ -22,6 +22,7 @@
 #include "replay.h"
 #include "forbid.h"
 #include "soundmanager.h"
+#include "steam_api.h"
 #include <set>
 
 
@@ -383,6 +384,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	}
 	if(floor && isNormalGame())
 		SaveFile();
+	steam_mg.setCurrentInfo();
 	you.resetLOS(false);
 
 	if(first_ && current_level > PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)

@@ -22,6 +22,7 @@
 #include "key.h"
 #include "weapon.h"
 #include "god.h"
+#include "steam_api.h"
 #include "throw.h"
 #include "note.h"
 #include "spellcard.h"
@@ -3650,6 +3651,7 @@ void players::LevelUp(bool speak_)
 			AddNote(you.turn, CurrentLevelString(), ss.str(), CL_good);
 		}
 	}
+	steam_mg.setCurrentInfo();
 }
 string players::GetCharNameString(){
 	switch(char_type) {

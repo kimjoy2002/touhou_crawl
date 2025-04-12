@@ -1,0 +1,21 @@
+"lang"
+{
+	"english"
+	{
+		"tokens"
+		{
+			"#Playing"	"Playing: %charinfo% (Lv.%level%) - %floor%"
+			"#MainMenu"	"Main Menu"
+
+		}
+	}
+	"koreana"
+	{
+		"tokens"
+		{
+			"#Playing"	"게임중: %charinfo% (Lv.%level%) - %floor%"
+			"#MainMenu"	"메인 메뉴"
+
+		}
+	}
+}

@@ -22,6 +22,7 @@
 #include "note.h"
 #include "tribe.h"
 #include "network.h"
+#include "steam_api.h"
 #include "replay.h"
 #include "mon_infor.h"
 #include "mapsearching.h"
@@ -281,6 +282,7 @@ void charter_selete()
 	for(int i = 0; i<MAXLEVEL; i++)
 		env[i].floor = i;
 	
+	bool isSteamInit = steam_mg.steamInit();
 
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() = LocalzationManager::locString(LOC_SYSTEM_TITLE_TOUHOUCRAWL);
@@ -289,13 +291,16 @@ void charter_selete()
 	SetText() += "\n";
 	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
 	SetText() += "\n\n";
-	string user_name = option_mg.getName();
+	string user_name = steam_mg.getSteamUserName();
+	steam_mg.setCurrentMainMenuInfo();
 	if (user_name.size() != 0)
 	{
 		you.user_name = user_name;
 	}
 
 	SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
+	SetText() += "\n";
+	SetText() += LocalzationManager::locString(isSteamInit?LOC_SYSTEM_STEAM_INIT_SUCCESS:LOC_SYSTEM_STEAM_INIT_FAIL);
 	SetText() += "\n";
 
 	SetDisplayTexture(&img_title);
@@ -351,6 +356,7 @@ void charter_selete()
 		/*Test_char_init(item_, bonus);*/
 		you.CalcuHP();
 		Initialize();
+		steam_mg.setCurrentInfo();
 	}
 	else if(map_list.tutorial == GM_TUTORIAL)
 	{		
@@ -365,6 +371,7 @@ void charter_selete()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START1),true,false,false,CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START2),true,false,false,CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3),true,false,false,CL_warning);
+		steam_mg.setCurrentInfo();
 	}
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)
 	{
@@ -387,6 +394,7 @@ void charter_selete()
 
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_START1),true,false,false,CL_help);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_START2),true,false,false,CL_help);
+		steam_mg.setCurrentInfo();
 	}
 	else if (map_list.tutorial == GM_SPRINT2_MINISTAGE)
 	{
@@ -412,6 +420,7 @@ void charter_selete()
 		addItem_temp(ITM_POTION, PT_HEAL, 2);
 
 		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
+		steam_mg.setCurrentInfo();
 	}
 
 

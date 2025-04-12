@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "E:\\steamworks_sdk\\sdk\\public"
             ],
             "defines": [
                 "_DEBUG",

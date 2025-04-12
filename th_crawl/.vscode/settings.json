@@ -55,5 +55,6 @@
         "xstring": "cpp",
         "iomanip": "cpp",
         "xmemory": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }

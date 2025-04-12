@@ -34,12 +34,22 @@ set(DIRECTX_SDK "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)")
 include_directories(${DIRECTX_SDK}/Include)
 link_directories(${DIRECTX_SDK}/Lib/${ARCH})
 
+set(STEAMWORKS_SDK "E:/steamworks_sdk/sdk")
+include_directories(${STEAMWORKS_SDK}/public)
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    link_directories(${STEAMWORKS_SDK}/redistributable_bin/win64)
+    set(STEAM_API_LIB steam_api64)
+else()
+    link_directories(${STEAMWORKS_SDK}/redistributable_bin)
+    set(STEAM_API_LIB steam_api)
+endif()
+
 file(GLOB_RECURSE SRC_FILES *.cpp)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:WINDOWS)
-target_link_libraries(${PROJECT_NAME} d3d9 d3dx9)
+target_link_libraries(${PROJECT_NAME} d3d9 d3dx9 ${STEAM_API_LIB})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug Build")
@@ -84,6 +94,7 @@ set(DLL_FILES
     "${CMAKE_SOURCE_DIR}/dll/msvcp100.dll"
     "${CMAKE_SOURCE_DIR}/dll/msvcr100.dll"
     "${CMAKE_SOURCE_DIR}/dll/D3DX9_43.dll"
+    "${CMAKE_SOURCE_DIR}/dll/steam_api64.dll"
 )
 foreach(DLL ${DLL_FILES})
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

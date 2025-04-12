@@ -1623,15 +1623,15 @@ int SpellMiscasting(int miscasting_level_)
 	default:
 		return 0;
 	case 1:
-		printlog("마법 부작용으로 가벼운 현기증을 느꼈다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CAST_PANALTY1),true,false,false,CL_small_danger);
 		you.StatUpDown(-1,STAT_INT,true);
 		return 1;
 	case 2:
-		printlog("마법 부작용으로 머리에 심한 두통을 느꼈다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CAST_PANALTY2),true,false,false,CL_small_danger);
 		you.StatUpDown(-rand_int(2,3),STAT_INT,true);
 		return 2;
 	case 3:
-		printlog("마법 부작용으로 머리에 끔찍한 손상이 왔다.",true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CAST_PANALTY3),true,false,false,CL_small_danger);
 		you.StatUpDown(-rand_int(4,7),STAT_INT,true);
 		return 3;
 
@@ -1830,7 +1830,7 @@ void SpellUse(char auto_, int auto_direc_)
 	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
 	if (!sion_ && you.power < 100)
 	{ //파워 100이하에선 마법을 쓸 수 없다. (시온일 경우 가능)
-		printlog("마법을 쓸려면 최소 파워가 1이상 있어야한다! ", true, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NEED_POWER), true, false, false, CL_danger);
 		return;
 	}
 	if(you.currentSpellNum)
@@ -1863,19 +1863,19 @@ void SpellUse(char auto_, int auto_direc_)
 					{
 						if (you.pure_mp && SpellLevel(spell_) >= you.GetMp())
 						{
-							printlog("더 이상 순화된 마력을 사용하면 죽을거야!", true, false, false, CL_normal);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_WARN), true, false, false, CL_normal);
 							break;
 						}
 						else if(SpellLevel(spell_)>you.GetMp())
 						{
 							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.GetHp())
 							{
-								printlog("당신은 피를 대가로 마법을 영창했다!",true,false,false,CL_danger);	
+								printlog(LocalzationManager::locString(LOC_SYSTEM_BLOOD_MAGIC),true,false,false,CL_danger);	
 								blood_ = true;
 							}
 							else
 							{
-								printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
+								printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_MP),true,false,false,CL_normal);	
 								break;
 							}
 						}
@@ -2018,7 +2018,7 @@ void SpellUse(char auto_, int auto_direc_)
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("아직 알고있는 마법이 없다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_REMEMBER_SPELL),true,false,false,CL_normal);	
 }
 
 
@@ -2055,6 +2055,6 @@ void SpellView()
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("아직 알고있는 마법이 없다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_REMEMBER_SPELL),true,false,false,CL_normal);	
 }
 

@@ -3720,7 +3720,7 @@ void God_show()
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2);
-				popcost << std::setw(3) << (getMikoPiety(0) / 2) << "%";
+				popcost << std::setw(3) << (getMikoPiety(0) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
 				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
@@ -3731,7 +3731,7 @@ void God_show()
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3);
-				popcost << std::setw(3) << (getMikoPiety(1) / 2) << "%";
+				popcost << std::setw(3) << (getMikoPiety(1) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
 				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
@@ -3742,7 +3742,7 @@ void God_show()
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4);
-				popcost << std::setw(3) << (getMikoPiety(2) / 2) << "%";
+				popcost << std::setw(3) << (getMikoPiety(2) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
 				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
@@ -3753,7 +3753,7 @@ void God_show()
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5);
-				popcost << std::setw(3) << (getMikoPiety(3) / 2) << "%";
+				popcost << std::setw(3) << (getMikoPiety(3) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
 				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
@@ -3764,7 +3764,7 @@ void God_show()
 				ss.str("");
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6);
-				popcost << std::setw(3) << (getMikoPiety(4) / 2) << "%";
+				popcost << std::setw(3) << (getMikoPiety(4) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
 				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);

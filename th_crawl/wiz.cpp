@@ -34,8 +34,8 @@ void wiz_mode()
 	{
 
 		
-		printlog("#### 경고! 위자드모드는 점수등록이 안되며 재미를 큰폭으로 떨어뜨립니다. ### ",true,false,false,CL_danger);
-		printlog("진짜로 킬꺼야? (Y/N) ",false,false,false,CL_danger);
+		printlog("#### " + LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN) +" ### ",true,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN_YN)+ " ",false,false,false,CL_danger);
 
 		
 		int key_ = waitkeyinput();
@@ -45,7 +45,7 @@ void wiz_mode()
 			enterlog();
 			break;
 		default:
-			printlog("위자드모드를 취소",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WIZARD_CANCLE),true,false,false,CL_help);
 			return;
 		}
 
@@ -53,7 +53,7 @@ void wiz_mode()
 
 
 
-	printlog("<위자드모드> 어느 명령어?  ( ? - 도움말 )",true,false,false,CL_help);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WHICH),true,false,false,CL_help);
 	wiz_list.wizard_mode = 1;
 	while(1)
 	{
@@ -75,20 +75,56 @@ void wiz_mode()
 			break;
 		case 'A':
 		{
-			printlog("p-포션 s-스크롤 e-발동템 v-스펠카드 r-반지 b-책 a-방어구 R-목걸이 f-투척무기", true, false, false, CL_help);
-			printlog("어느 아이템을 얻어볼까?", false, false, false, CL_help);
+			ostringstream ss;
+			ss << "p-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_POTION)
+			   << " s-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL)
+			   << " e-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE)
+			   << " v-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD)
+			   << " r-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING)
+			   << " b-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_BOOK)
+			   << " a-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR)
+			   << " R-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET)
+			   << " f-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_TANMAC);
+
+
+			printlog(ss.str(), true, false, false, CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ITEM), false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
 			case 'p':
 			{
-				int list[] = { PT_WATER,	PT_HEAL, PT_POISON,	PT_HEAL_WOUND, PT_MIGHT, PT_HASTE, PT_CONFUSE,
+				int list[PT_MAX] = { PT_WATER,	PT_HEAL, PT_POISON,	PT_HEAL_WOUND, PT_MIGHT, PT_HASTE, PT_CONFUSE,
 					PT_SLOW, PT_PARALYSIS, PT_CLEVER, PT_AGILITY, PT_MAGIC, PT_LEVETATION, PT_POWER,
 					PT_DOWN_STAT, PT_RECOVER_STAT, PT_ALCOHOL };
+				LOCALIZATION_ENUM_KEY keylist[PT_MAX] = {
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_WATER_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POISON_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HEAL_WOUND_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MIGHT_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_HASTE_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CONFUSE_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_SLOW_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_PARALYSIS_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CLEVER_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MAGIC_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_LEVETATION_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POWER_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_DOWN_STAT_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_RECOVER_STAT_SHORT,
+					LOC_SYSTEM_ITEM_POTION_POTION_IDEN_ALCOHOL_SHORT
+				};
+					
 				enterlog();
-				printlog("a-물 b-치유 c-독 d-체력회복 e-힘 f-가속 g-혼란 h-감속 i-마비", true, false, false, CL_help);
-				printlog("j-지능 k-민첩 l-영력 m-비행 n-파워 o-능력치감소 p-능력치회복 q-술", true, false, false, CL_help);
-				printlog("어느 포션을 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < PT_MAX; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(), (i==PT_MAX-1?true:false), false, false, CL_help);
+				}
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_POTION), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'q')
 				{
@@ -107,14 +143,42 @@ void wiz_mode()
 			return;
 			case 's':
 			{
-				int list[] = { SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
+				int list[SCT_MAX-1] = { SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
 					SCT_BLINK,SCT_MAPPING,SCT_ENCHANT_WEAPON_1,	SCT_ENCHANT_ARMOUR,SCT_FOG,SCT_DETECT_CURSE,
 					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA, SCT_SANTUARY, SCT_BRAND_WEAPON };
+				
+				LOCALIZATION_ENUM_KEY keylist[SCT_MAX-1] = {
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_IDENTIFY_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_NONE_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_WEAPON_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_ARMOUR_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_REMOVE_CURSE_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BLINK_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_MAPPING_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ENCHANT_WEAPON_1_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ENCHANT_ARMOUR_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_FOG_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DETECT_CURSE_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_JEWELRY_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SILENCE_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SOUL_SHOT_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON_SHORT
+				};
+
 				enterlog();
-				printlog("a-텔포 b-식별 c-낙서 d-무기저주 e-방어구저주 f-저주해제 g-순간이동 h-마법지도", true, false, false, CL_help);
-				printlog("i-무기강화 j-방어구강화 k-연기 l-저주감지 m-장신구저주 n-정적 o-영격 p-스펠충전", true, false, false, CL_help);
-				printlog("q-망각 r-성역 s-마법무기", true, false, false, CL_help);
-				printlog("어느 스크롤을 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < SCT_MAX-1; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(), (i==SCT_MAX-2?true:false), false, false, CL_help);
+				}
+
+				
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_SCROLL), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 's')
 				{
@@ -133,10 +197,25 @@ void wiz_mode()
 			return;
 			case 'e':
 			{
-				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
+				int list[EVK_MAX-1] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
+				
+				LOCALIZATION_ENUM_KEY keylist[EVK_MAX-1] = {
+					LOC_SYSTEM_ITEM_EVOKE_PAGODA,
+					LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,
+					LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,
+					LOC_SYSTEM_ITEM_EVOKE_BOMB,
+					LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
+					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
+					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER
+				};
 				enterlog();
-				printlog("a-보탑 b-에어두루마리 c-몽혼 d-매직봄 e-오쿠리쵸친 f-공중어뢰 g-요술망치", true, false, false, CL_help);
-				printlog("어느 발동템을 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < EVK_MAX-1; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(), (i==EVK_MAX-2?true:false), false, false, CL_help);
+				}
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_EVOKE), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'g')
 				{
@@ -152,10 +231,26 @@ void wiz_mode()
 			return;
 			case 'v':
 			{
-				int list[] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE,SPC_V_METAL, SPC_V_SUN };
+				int list[SPC_V_MAX] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE,SPC_V_METAL, SPC_V_SUN };
+				
+				LOCALIZATION_ENUM_KEY keylist[SPC_V_MAX] = {
+					LOC_SYSTEM_SPELLCARD_FIRE,
+					LOC_SYSTEM_SPELLCARD_ICE,
+					LOC_SYSTEM_SPELLCARD_EARTH,
+					LOC_SYSTEM_SPELLCARD_AIR,
+					LOC_SYSTEM_SPELLCARD_INVISIBLE,
+					LOC_SYSTEM_SPELLCARD_METAL,
+					LOC_SYSTEM_SPELLCARD_SUN
+				};
+				
 				enterlog();
-				printlog("a-화염 b-냉기 c-대지 d-대기 e-투명 f-금속 g-태양", true, false, false, CL_help);
-				printlog("어느 스펠카드를 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < SPC_V_MAX; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(), (i==SPC_V_MAX-1?true:false), false, false, CL_help);
+				}
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_SPELLCARD), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'g')
 				{
@@ -171,14 +266,43 @@ void wiz_mode()
 			return;
 			case 'r':
 			{
-				int list[] = { RGT_STR,RGT_DEX,RGT_INT,RGT_HUNGRY,RGT_FULL,RGT_TELEPORT,RGT_POISON_RESIS,
+				int list[RGT_MAX] = { RGT_STR,RGT_DEX,RGT_INT,RGT_HUNGRY,RGT_FULL,RGT_TELEPORT,RGT_POISON_RESIS,
 					RGT_FIRE_RESIS,	RGT_ICE_RESIS,RGT_SEE_INVISIBLE/*,RGT_GRAZE*/,RGT_LEVITATION,RGT_INVISIBLE,
 					RGT_MANA,RGT_MAGACIAN,RGT_AC,RGT_EV,RGT_CONFUSE_RESIS,	RGT_ELEC_RESIS,RGT_MAGIC_RESIS };
+				
+				LOCALIZATION_ENUM_KEY keylist[RGT_MAX] = {
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_STR_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_DEX_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_INT_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_HUNGRY_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_FULL_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_TELEPORT_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_POISON_RESIST_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_FIRE_RESIST_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_ICE_RESIST_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_SEE_INVISIBLE_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_LEVITATION_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_INVISIBLE_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MANA_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MAGACIAN_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_AC_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_EV_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_CONFUSE_RESIS_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_ELEC_RESIS_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MAGIC_RESIS_SHORT
+				};
 				enterlog();
-				printlog("a-힘 b-민첩 c-지능 d-허기 e-만복도 f-공간이동 g-독저항 h-화염저항", true, false, false, CL_help);
-				printlog("i-냉기저항 j-투명보기 k-비행 l-투명 m-영력 n-마법사 o-방어", true, false, false, CL_help);
-				printlog("p-회피 q-혼란저항 r-전기저항 s-마법저항 !-아티펙트", true, false, false, CL_help);
-				printlog("어느 반지를 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < RGT_MAX; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(),false, false, false, CL_help);
+				}				
+				ss.str("");
+				ss.clear();
+				ss << string(1,'!') << "-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT);
+				printlog(ss.str(),true, false, false, CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_RING), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 's')
 				{
@@ -225,12 +349,27 @@ void wiz_mode()
 			return;
 			case 'R':
 			{
-				int list[] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
+				int list[AMT_MAX] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
 					AMT_WEATHER, AMT_OCCULT };
+				LOCALIZATION_ENUM_KEY keylist[AMT_MAX] = {
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_FAITH_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WAVE_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_SPIRIT_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER_SHORT,
+					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT
+				};
 				enterlog();
-				printlog("a-완전무결 b-삼라결계 c-각부 d-신앙 e-전파 f-신령 g-그레이즈 h-기질", true, false, false, CL_help);
-				printlog("i-오컬트", true, false, false, CL_help);
-				printlog("어느 부적을 얻어볼까?", false, false, false, CL_help);
+				for(int i = 0; i < AMT_MAX; i++) {
+					ss.str("");
+					ss.clear();
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					printlog(ss.str(), (i==AMT_MAX-1?true:false), false, false, CL_help);
+				}
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_AMULET), false, false, false, CL_help);
 				key_ = waitkeyinput();
 				if (key_ >= 'a' && key_ <= 'i')
 				{
@@ -263,10 +402,6 @@ void wiz_mode()
 				you.MpUpDown(you.max_mp);
 			you.PowUpDown(500, true);
 			break;
-		case 'g':
-			printlog("용의 마지막 특성이 발현되었다. 당신은 공기의 흐름을 다룰 수 있게 되었다.", true, false, false, CL_small_danger);
-			you.SetProperty(TPT_GRAZE_CONTROL, 1);
-			break;
 		case 'P':
 			you.system_exp.value = 0;
 			if (you.system_exp.value <= 0) {
@@ -276,10 +411,10 @@ void wiz_mode()
 					chargingFinish((amulet_type)_item->value1, 1);
 					if (you.system_exp.value <= 0) {
 						if (isCanCharge((amulet_type)_item->value1)) {
-							printlog("부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.", true, false, false, CL_white_puple);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 						}
 						else {
-							printlog("부적의 힘이 모두 채워졌다!", true, false, false, CL_white_puple);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE), true, false, false, CL_white_puple);
 						}
 					}
 				}
@@ -315,10 +450,33 @@ void wiz_mode()
 		{
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
-			printlog("d - 던전 t - 신전 l - 안개의 호수  m - 요괴의 산  s - 홍마관  b - 홍마관도서관", true, false, false, CL_help);
-			printlog("u - 홍마관지하 a - 미궁의죽림 e - 영원정 y - 윳쿠리둥지 p - 짐승길 h - 지령전", true, false, false, CL_help);
-			printlog("r - 꿈의 세계 o - 달의 세계  k - 마계  z - 하쿠레이신사 ! - 광몽의 세계", true, false, false, CL_help);
-			printlog("어느 던전으로 이동해볼까? (대문자로 마지막층)", false, false, false, CL_help);
+
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[17] = {
+				make_pair('d',LOC_SYSTEM_DUNGEON),
+				make_pair('t',LOC_SYSTEM_DUNGEON_TEMPLE),
+				make_pair('l',LOC_SYSTEM_DUNGEON_MISTYLAKE),
+				make_pair('m',LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN),
+				make_pair('s',LOC_SYSTEM_DUNGEON_SCARLET),
+				make_pair('b',LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY),
+				make_pair('u',LOC_SYSTEM_DUNGEON_SCARLET_UNDER),
+				make_pair('a',LOC_SYSTEM_DUNGEON_BAMBOO),
+				make_pair('e',LOC_SYSTEM_DUNGEON_EINENTEI),
+				make_pair('y',LOC_SYSTEM_DUNGEON_YUKKURI),
+				make_pair('p',LOC_SYSTEM_DUNGEON_DEPTH),
+				make_pair('h',LOC_SYSTEM_DUNGEON_SUBTERRANEAN),
+				make_pair('r',LOC_SYSTEM_DUNGEON_DREAM),
+				make_pair('o',LOC_SYSTEM_DUNGEON_MOON),
+				make_pair('k',LOC_SYSTEM_DUNGEON_PANDEMONIUM),
+				make_pair('z',LOC_SYSTEM_DUNGEON_HAKUREI),
+				make_pair('!',LOC_SYSTEM_DUNGEON_ZIGURRAT)
+			};
+			enterlog();
+			for(int i = 0; i < 17; i++) {
+				ostringstream ss;
+				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
+				printlog(ss.str(), (i==16?true:false), false, false, CL_help);
+			}
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_TRAVEL_DUNGEON), false, false, false, CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -411,7 +569,7 @@ void wiz_mode()
 			}
 			enterlog();
 			env[next_].EnterMap(0, dq);
-			printlog("계단을 내려왔다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN), true, false, false, CL_normal);
 			//you.resetLOS(false);
 			break;
 		}
@@ -426,22 +584,19 @@ void wiz_mode()
 		case 'b':
 			you.Blink(40);
 			break;
-		case 's':
-			//skill_summon_bug(10,false,&you,you.position);		
-			if (you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact())
-			{
-				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
-				you.equipment[ET_WEAPON]->value6 = -1;
-			}
-			else
-			{
-				printlog("마법이 듣지 않는다.", true, false, false, CL_normal);
-			}
-			break;
 		case 'w': //날씨발현
 		{
-			printlog("a - 안개 b - 천둥번개 c - 쾌청", true, false, false, CL_help);
-			printlog("어느 날씨를 발현할건가?", false, false, false, CL_help);
+			LOCALIZATION_ENUM_KEY keylist[3] = {
+				LOC_SYSTEM_BUFF_FOG,
+				LOC_SYSTEM_BUFF_THUNDER,
+				LOC_SYSTEM_BUFF_SUNNY
+			};
+			for(int i = 0; i < 3; i++) {
+				ostringstream ss;
+				ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+				printlog(ss.str(), (i==2?true:false), false, false, CL_help);
+			}
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_WEATHER), false, false, false, CL_help);
 			wiz_list.wizard_mode = true;
 			key_ = waitkeyinput();
 			switch (key_)
@@ -467,11 +622,36 @@ void wiz_mode()
 		case 'p':
 		{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
-			printlog("B - 뱌쿠렌     K - 카나코  W - 스와코   A - 미노리코",true,false,false,CL_help);
-			printlog("M - 미마       P - 신키    G - 유우기   Z - 시즈하  H - 히나     Y - 유카리 ",true,false,false,CL_help);
-			printlog("E - 에이린     U - 유유코  S - 사토리   T - 텐시    R - 세이자   L - 릴리", true, false, false, CL_help);
-			printlog("I - 미코       O - 오키나  J - 순호     X - 죠온&시온", true, false, false, CL_help);
-			printlog("어떤 신전을 만들까?",false,false,false,CL_help);
+
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[20] = {
+				make_pair('B',LOC_SYSTEM_GOD_BYAKUREN),
+				make_pair('K',LOC_SYSTEM_GOD_KANAKO),
+				make_pair('W',LOC_SYSTEM_GOD_SUWAKO),
+				make_pair('A',LOC_SYSTEM_GOD_MINORIKO),
+				make_pair('M',LOC_SYSTEM_GOD_MIMA),
+				make_pair('P',LOC_SYSTEM_GOD_SHINKI),
+				make_pair('G',LOC_SYSTEM_GOD_YUUGI),
+				make_pair('Z',LOC_SYSTEM_GOD_SHIZUHA),
+				make_pair('H',LOC_SYSTEM_GOD_HINA),
+				make_pair('Y',LOC_SYSTEM_GOD_YUKARI),
+				make_pair('E',LOC_SYSTEM_GOD_EIRIN),
+				make_pair('U',LOC_SYSTEM_GOD_YUYUKO),
+				make_pair('S',LOC_SYSTEM_GOD_SATORI),
+				make_pair('T',LOC_SYSTEM_GOD_TENSI),
+				make_pair('R',LOC_SYSTEM_GOD_SEIJA),
+				make_pair('L',LOC_SYSTEM_GOD_LILLY),
+				make_pair('I',LOC_SYSTEM_GOD_MIKO),
+				make_pair('O',LOC_SYSTEM_GOD_OKINA),
+				make_pair('J',LOC_SYSTEM_GOD_JUNKO),
+				make_pair('X',LOC_SYSTEM_GOD_JOON_AND_SION)
+			};
+			enterlog();
+			for(int i = 0; i < 20; i++) {
+				ostringstream ss;
+				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
+				printlog(ss.str(), (i==19?true:false), false, false, CL_help);
+			}
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ALTAR),false,false,false,CL_help);
 			key_ = waitkeyinput();
 			switch (key_)
 			{
@@ -535,26 +715,26 @@ void wiz_mode()
 			case 'T':
 				next_ = DG_TEMPLE_TENSI;
 				break;
-				case 'r':
-				case 'R':
+			case 'r':
+			case 'R':
 				next_ = DG_TEMPLE_SEIJA;
 				break;
 			case 'L':
 			case 'l':
 				next_ = DG_TEMPLE_LILLY;
 				break;
-				case 'i':
-				case 'I':
-					next_ = DG_TEMPLE_MIKO;
-					break;
-				case 'o':
-				case 'O':
-					next_ = DG_TEMPLE_OKINA;
-					break;
-				case 'j':
-				case 'J':
-					next_ = DG_TEMPLE_JUNKO;
-					break;
+			case 'i':
+			case 'I':
+				next_ = DG_TEMPLE_MIKO;
+				break;
+			case 'o':
+			case 'O':
+				next_ = DG_TEMPLE_OKINA;
+				break;
+			case 'j':
+			case 'J':
+				next_ = DG_TEMPLE_JUNKO;
+				break;
 			default:
 				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				return;
@@ -577,7 +757,7 @@ void wiz_mode()
 		{
 			int id_ = 0;
 			ostringstream oss;
-			oss << "몬스터만들기(0~" << (MON_MAX - 1) << ") :";
+			oss << LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_MONSTER) << "(0~" << (MON_MAX - 1) << ") :";
 			printlog(oss.str(), false, false, false, CL_help);
 
 
@@ -631,7 +811,7 @@ void wiz_mode()
 					break;
 				case VK_ESCAPE://esc
 					enterlog();
-					printlog("몬스터 생성을 취소", true, false, false, CL_help);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER), true, false, false, CL_help);
 					return;
 				}
 				if (id_ < 0)
@@ -699,7 +879,10 @@ void wiz_mode()
 				exp_ = you.exper;
 				{
 					ostringstream oss;
-					oss << "일반던전 " << map_list.dungeon_enter[MISTY_LAKE].floor+1 << "층까지 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LocalzationManager::locString(LOC_SYSTEM_DUNGEON) + " " + LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR,PlaceHolderHelper(to_string(map_list.dungeon_enter[MISTY_LAKE].floor+1)))),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 				prevexp_ = exp_;
@@ -716,7 +899,10 @@ void wiz_mode()
 				exp_ = you.exper;
 				{
 					ostringstream oss;
-					oss << "안개호수 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_MISTYLAKE),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 				prevexp_ = exp_;
@@ -732,9 +918,12 @@ void wiz_mode()
 					}
 				}
 				exp_ = you.exper;
-				ostringstream oss;
-				oss << "남은던전 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
-				printlog(oss.str(),true,false,false,CL_normal);
+				ostringstream oss_;
+				oss_ << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+					PlaceHolderHelper(LocalzationManager::locString(LOC_SYSTEM_DUNGEON) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR)),
+					PlaceHolderHelper(to_string(you.level)),
+					PlaceHolderHelper(to_string(exp_-prevexp_)));
+				printlog(oss_.str(),true,false,false,CL_normal);
 				prevexp_ = exp_;
 
 
@@ -750,7 +939,10 @@ void wiz_mode()
 				exp_ = you.exper;
 				{
 					ostringstream oss;
-					oss << "요괴의산 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 				prevexp_ = exp_;
@@ -767,7 +959,10 @@ void wiz_mode()
 				exp_ = you.exper;
 				{
 					ostringstream oss;
-					oss << "홍마관 클리어 레벨:" << you.level << " (경험치양 " << exp_-prevexp_ << ")";
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_SCARLET),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 				prevexp_ = exp_;
@@ -779,7 +974,9 @@ void wiz_mode()
 		case 'e':
 		{
 			ostringstream oss;
-			oss << "현재좌표: <" <<  you.position.x << ", " << you.position.y << "> ";
+			oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_CURRENT_POSITION,
+				PlaceHolderHelper(to_string(you.position.x)),
+				PlaceHolderHelper(to_string(you.position.y)));
 			printlog(oss.str(), true, false, false, CL_magic);
 			break;
 		}
@@ -787,85 +984,19 @@ void wiz_mode()
 
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			printsub("                             --- 위자드모드 커맨드 목록 ---",true,CL_normal);
+			printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_DEBUG_COMMAND_HELP) + " ---",true,CL_normal);
 			printsub("",true,CL_normal);
-			printsub(" X      - 1레벨업                         ",true,CL_normal);
-			printsub(" H      - 체력 영력 파워 회복             ",true,CL_normal);
-			printsub(" G      - 장소이동                        ",true,CL_normal);
-			printsub(" p      - 제단 생성                       ",true,CL_normal);
-			printsub(" ^      - 신앙심 10증가                   ",true,CL_normal);
-			printsub(" >      - 아랫층으로 내려가기             ",true,CL_normal);
-			printsub(" <      - 윗층으로 올라가기               ",true,CL_normal);
-			printsub(" A      - 아이템생성(베타)                ",true,CL_normal);
-			printsub(" w      - 날씨발현                        ", true, CL_normal);
-			printsub(" W      - 시간정지                        ",true,CL_normal);
-			printsub(" D      - 매직맵핑                        ",true,CL_normal);
-			printsub(" b      - 블링크                          ",true,CL_normal);
-			printsub(" R      - 현재 층 재구성                  ", true, CL_normal);
-			printsub(" m      - 몬스터 생성                     ", true, CL_normal);
-			printsub("                                          ",true,CL_normal);
-			printsub(" 이외의 커맨드는 불안정하니 비추천        ",true,CL_normal);
+			for(TextHelper text_ : LocalzationManager::getHelpWizard()) {
+				printsub(text_.text,text_.enter,text_.color);
+			}
 			changedisplay(DT_SUB_TEXT);
 			ReleaseMutex(mutx);
 			continue;
 		default:
-			printlog("없는 명령어",true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_COMMAND_UNKNOWN),true,false,false,CL_help);
 			break;
 		}
 	return;
 	}
 }
 
-
-void save_mode()
-{
-	
-	if(wiz_list.wizard_mode == 0)
-	{
-
-		
-		printlog("#### 경고! 이 모드는 온라인점수등록이 안됩니다! 치트로 취급됩니다! ### ",true,false,false,CL_danger);
-		printlog("#### 세이브는 층이동시, 수동저장시에 저장됩니다. ### ",true,false,false,CL_danger);
-		printlog("진짜로 킬꺼야? (Y/N) ",false,false,false,CL_danger);
-			
-		int key_ = waitkeyinput();
-		switch(key_)
-		{
-		case 'Y':
-			enterlog();
-			break;
-		default:
-			printlog("세이브보존모드를 취소",true,false,false,CL_help);
-			return;
-		}
-
-
-		wiz_list.wizard_mode = 2;
-	}
-	else if(wiz_list.wizard_mode == 1)
-	{		
-		printlog("위자드모드에서 세이브보존모드로 이동하더라도 점수등록은 되지않습니다.",true,false,false,CL_danger);
-		printlog("바꿀꺼야? (Y/N) ",false,false,false,CL_danger);
-
-
-		int key_ = waitkeyinput();
-		switch(key_)
-		{
-		case 'Y':
-			enterlog();
-			break;
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_help);
-			return;
-		}
-
-		wiz_list.wizard_mode = 2;
-	}
-	else  if(wiz_list.wizard_mode == 2)
-	{	
-		printlog("이미 당신은 세이브보존모드다. 이 모드에선 세이브파일이 삭제되지않는다. ",true,false,false,CL_normal);
-	}
-
-	return;
-
-}

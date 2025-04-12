@@ -2611,7 +2611,7 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 		float x = 0, y = 0;
-		for(;it != text_log.text_list.end();it++)
+		for(;it != text_log.text_list.end();)
 		{			
 			RECT rc={ (LONG)x, (LONG)y, 32*17+16, (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
@@ -2619,10 +2619,17 @@ void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			{
 				x = 0;
 				y+=fontDesc.Height;
+				it++;
 			}
 			else
 			{
+				bool first_ = (x == 0);
 				x+=(*it)->width;
+				it++;
+				if(!first_ && it != text_log.text_list.end() && (x+(*it)->width) > 32*17+16) {
+					x = 0;
+					y+=fontDesc.Height;
+				}
 			}
 		}
 	}
@@ -2891,8 +2898,9 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 			}
 		}
 		float x = 0, y = 0;
-		for(i = 0;i < view_length && it != text_log.text_list.end();it++)
-		{			
+		for(i = 0;i < view_length && it != text_log.text_list.end();)
+		{
+			int max_length = option_mg.getWidth();
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->text.length()*fontDesc.Width), (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			if((*it)->enter)
@@ -2900,10 +2908,17 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 				x = 0;
 				y+=fontDesc.Height;
 				i++;
+				it++;
 			}
 			else
 			{
+				bool first_ = (x == 0);
 				x+=(*it)->width;
+				it++;
+				if(!first_  && it != text_log.text_list.end() && (x+(*it)->width) > max_length) {
+					x = 0;
+					y+=fontDesc.Height;
+				}
 			}
 		}
 	}

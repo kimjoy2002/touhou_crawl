@@ -660,7 +660,6 @@ void auto_pick_onoff(bool auto_);
 void floorMove();
 
 void wiz_mode();
-void save_mode();
 
 bool poison_percent(int value);
 int poison_damage(int value);

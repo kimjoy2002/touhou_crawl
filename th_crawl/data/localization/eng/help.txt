@@ -1,0 +1,37 @@
+﻿§b<Movement>§d                                          §b<Magic>§d
+§cArrow keys§d - The following keys function the same   §yM§d - Memorize spells
+§y↖↑↗    7 8 9    y k u§d                               §yz,Z§d - Cast spells
+§y←·→ <> 4 5 6 <> h . l§d                               §yI§d - View memorized spells
+§y↙↓↘    1 2 3    b j n§d
+§yo§d      - Auto-explore
+§y`§d      - Repeat last action                         §b<Character Info>§d
+                                                    §y@§d - Quick character status
+§b<Dungeon Exploration>§d                               §y%§d - Detailed character info
+§y5§d      - Rest for 100 turns                         §y^§d - Religion status
+§yx§d      - Examine surroundings                       §y\§d - Identified items
+§ys§d or §y.§d - Wait for 1 turn                            §yA§d - View character traits
+§yX§d      - Open dungeon map                           §y[§d - View equipped armor
+§y<,>§d    - Use stairs (up/down)                       §y}§d - View current weapon
+§yO,C§d    - Open/close doors                           §y"§d - View current accessory
+                                                    §yE§d - View experience
+                                                    §ym§d - View skill list
+§b<Item Management>§d                                   §y]§d - View collected runes
+§yi§d      - Inventory                                  §cctrl-O§d - Dungeon progression
+§yg§d or §y,§d - Pick up items
+§yd§d      - Drop item
+§yD§d      - Drop most recent item                      §b<Non-Gameplay Commands>§d
+§ye§d      - Eat (food)                                 §cctrl-P§d - View message history
+§yr§d      - Read (scrolls, books)                      §yS§d - Save and quit
+§yq§d      - Drink (potions)                            §cctrl-S§d - Save and quit (no prompt)
+§yf/F§d    - Quick/targeted throw                       §cctrl-Q§d - Quit without saving
+§yv,V§d    - Use spell cards                            §y#§d - Create game dump
+§yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Toggle sound (if available)
+§yW/T§d    - Equip/unequip armor
+§yP/R§d    - Equip/unequip accessory
+§cctrl-A§d - Toggle auto-pickup                         §b<Cheat Mode>§d
+§y'§d      - Swap weapon (a, b hotkeys)                 §y&§d - Wizard mode
+                                                    §y_§d - Save-preserving quit
+                                                       
+§b<Abilities>§d                                        
+§yp§d - Pray                                            
+§ya§d - Use god powers or abilities

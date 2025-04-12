@@ -35,7 +35,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 	}
 	if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 	{
-		printlog("당신은 스펠카드를 쓰기엔 너무 순화되어있다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_SPELLCARD), true, false, false, CL_normal);
 		return false;
 	}
 
@@ -413,7 +413,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	}
 	case SPC_V_SUN:
 	{
-		printlog("강렬한 빛이 주변을 비추었다! ", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_SUN_SET), true, false, false, CL_warning);
 		map_effect = 2;
 		Sleep(500);
 		map_effect = 0;

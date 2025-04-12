@@ -1014,7 +1014,6 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 			else
 			{
 				soundmanager.playSound("debuf");
-				//printarray(true,false,false,CL_normal,3,mon_->GetName()->name.c_str(),mon_->GetName()->name_is(true),"마음을 간파당했다.");
 				mon_->SetMindReading(1);
 			}
 			return true;
@@ -4010,13 +4009,11 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 			
 			if(you.GetPunish(GT_MIMA))
 			{
-				printlog("미마는 당신이 쓰는 마법의 위력을 반감시켰다!",true,false,false,CL_green);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_SPELLDOWN),true,false,false,CL_green);
 			}
 			if(wiz_list.wizard_mode == 1)
 			{
-				char temp[50];
-				sprintf_s(temp,50,"스펠파워 %d / %d",power,SkillCap(skill));
-				printlog(temp,true,false,false,CL_help);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_SPELLPOWER, PlaceHolderHelper(to_string(power)),PlaceHolderHelper(to_string(SkillCap(skill)))),true,false,false,CL_help);
 			}
 
 			switch(skill)

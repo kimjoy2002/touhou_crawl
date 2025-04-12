@@ -28,6 +28,7 @@ unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<monster_index, string> LocalzationManager::monster_description_map;
 vector<TextHelper> LocalzationManager::help_command;
 vector<TextHelper> LocalzationManager::help_credit;
+vector<TextHelper> LocalzationManager::help_wizard;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
 	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
@@ -77,6 +78,7 @@ void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 	}
 	initFileSimple(filePath, "help.txt", help_command);
 	initFileSimple(filePath, "credit.txt", help_credit);
+	initFileSimple(filePath, "wizardhelp.txt", help_wizard);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localization_map[key] = values[0];

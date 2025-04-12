@@ -76,6 +76,7 @@ private:
 	static unordered_map<monster_index, string> monster_description_map;
 	static vector<TextHelper> help_command;
 	static vector<TextHelper> help_credit;
+	static vector<TextHelper> help_wizard;
 
 	static unordered_set<string> korean_verbs;
 	static unordered_set<string> english_verbs;
@@ -177,6 +178,7 @@ public:
     static const string& monDecsriptionString(monster_index key);
 	static const vector<TextHelper>& getHelpCommand(){return help_command;};
 	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
+	static const vector<TextHelper>& getHelpWizard(){return help_wizard;};
 
     static const string& getMonsterEnumString(monster_index key);
     static monster_index getMonsterEnumKey(const string& str);

@@ -672,9 +672,6 @@ void MainLoop()
 			//waitkeyinput();
 			wiz_mode();
 			break;
-		case '_':
-			save_mode();
-			break;
 		case 0x8B:
 			auto_pick_onoff(false);
 			break;

@@ -4268,7 +4268,7 @@ bool players::Drink(char id_)
 {
 	if (you.s_pure_turn && you.s_pure >= 20)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_TOO_PURE_TO_DRINK), true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_POTION), true, false, false, CL_normal);
 		return false;
 	}
 

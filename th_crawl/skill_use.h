@@ -209,7 +209,7 @@ int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3);
 int SkillMana(skill_list skill);//사용에 드는 마나를 계산
 bool SkillPlusCost(skill_list skill,bool check_);//추가적인 코스트 
 void SkillUseTraning(skill_list skill);
-const char* SkillCostString(skill_list skill);//코스트표현문장
+string SkillCostString(skill_list skill);//코스트표현문장
 
 monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range_, unit* order, coord_def target, SUMMON_KIND kind_, int max_num_);
 void BaseBomb(coord_def pos, textures* t_, attack_infor& att_, unit* except_ = NULL);

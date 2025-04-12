@@ -605,13 +605,13 @@ bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
 		if(env[current_level].isMonsterPos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("이미 누군가 있는 위치에 사용할 수 없습니다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXIST_POS),true,false,false,CL_small_danger);
 			return false;
 		}
 		if(env[current_level].isSmokePos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("구름이 존재하는 곳에 사용할 수 없습니다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXIST_SMOKE),true,false,false,CL_small_danger);
 			return false;
 		}
 		env[current_level].MakeSmoke(target, img_fog_fire, SMT_FIRE, rand_int(7,13)+pow/4,  0, order);
@@ -631,7 +631,7 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 		if(env[current_level].isSmokePos(target.x,target.y))
 		{
 			if(order->isplayer())
-				printlog("구름이 존재하는 곳에 사용할 수 없습니다.",true,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXIST_SMOKE),true,false,false,CL_small_danger);
 			return false;
 		}
 		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
@@ -755,12 +755,12 @@ bool skill_cure_poison(int pow, bool short_, unit* order, coord_def target)
 		players* player_pointer = (players*)order;
 		if(player_pointer->s_poison)
 		{
-			printlog("독이 치료되었다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CURE_POISON),true,false,false,CL_normal);
 			player_pointer->s_poison = 0;
 		}
 		else
 		{
-			printlog("독이 걸려있을때만 사용할 수 있다.",true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SHOULD_POISON),true,false,false,CL_small_danger);
 			return false;
 		}
 	}
@@ -827,7 +827,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_BRAND),true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -859,7 +859,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_BRAND),true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -892,7 +892,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 		}
 		else
 		{
-			printlog("마법이 듣지 않는다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_BRAND),true,false,false,CL_normal);
 		}
 	}
 	return true;
@@ -962,7 +962,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 	else
 	{
 		if(order->isplayer())
-			printlog("쏠 방향에 전기가 통하는 적이 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ELEC_FAIL),true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -1321,7 +1321,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 		return false;
 	if (env[current_level].isInSight(target)) {
 		soundmanager.playSound("spellcard");
-		printlog("성역이 펼쳐졌다! ", true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SANTUARY), true, false, false, CL_warning);
 	}
 	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
 
@@ -1620,7 +1620,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("wind");
 			}
-			printlog("회오리가 휘몰아친다! ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_WHIRLWIND) + " ", false, false, false, CL_normal);
 		}
 		{
 			dif_rect_iterator rit(target,1);
@@ -1900,13 +1900,13 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 				if(mon_->state.GetState() == MS_SLEEP)
 				{//자고있는데 자해할리가
 					if(order->isplayer())
-						printlog("자고 있는 몹은 자해할 수 없다.",true,false,false,CL_normal);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SELF_INJURY_SLEEP),true,false,false,CL_normal);
 					return false; 
 				}
 				if(mon_->flag & M_FLAG_NO_ATK){ //공격못하는애가 자해할리가
 					
 					if(order->isplayer())
-						printlog("이 몬스터는 스스로를 공격할 수 없다.",true,false,false,CL_normal);	
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SELF_INJURY_CANT),true,false,false,CL_normal);	
 					return false;
 				}
 
@@ -2233,7 +2233,7 @@ bool skill_stone_punch(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(you.equipment[ET_WEAPON])
 		{
-			printlog("무언가를 든 상태로 사용할 수 없다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SHOULD_UNARMED),true,false,false,CL_normal);
 			return false;
 		}
 		you.SetAlchemyBuff(ALCT_STONE_FIST,rand_int(8,15)+pow/5);
@@ -2270,12 +2270,12 @@ bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
 		if(!env[current_level].isMove(target.x,target.y,floor_effect::isFly(FLOORT_STONE),floor_effect::isSwim(FLOORT_STONE),floor_effect::isNoGround(FLOORT_STONE)))
 		{
 			if(order->isplayer())
-				printlog("이 위치에는 깔 수 없다.",true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_TRAP),true,false,false,CL_normal);
 			return false;
 		}
 
 		if(order == &you)
-			printlog("당신은 바닥에 뾰족한 바위를 깔았다.",true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_STONE_TRAP),true,false,false,CL_normal);
 		env[current_level].MakeFloorEffect(target,&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow/4,&you);
 		rand_rect_iterator rit(target,1,1);
 		for(;!rit.end();rit++)
@@ -2533,9 +2533,9 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 		if(order && env[current_level].isInSight(order->position))
 		{
 			if(order->GetId() == MON_TEWI)
-				printlog("테위가 큰소리로 토끼들을 모으고 있다.",false,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TEWI_HORN),false,false,false,CL_small_danger);
 			else
-				printlog("큰 나팔소리가 토끼들을 끌어모으고 있다.",false,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_RABBIT_HORN),false,false,false,CL_small_danger);
 		}
 		return true;
 	}
@@ -2618,7 +2618,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 		}
 		
 		if(env[current_level].isInSight(target))
-			printlog("화염폭풍이 터졌다!",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_FIRESTORM) + " ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2660,7 +2660,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("cold");
 		}
 		if(env[current_level].isInSight(target))
-			printlog("눈보라가 휘몰아친다! ",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_BLIZZARD) + " ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,2);
 		
@@ -2745,14 +2745,13 @@ bool skill_draw_power(int pow, bool short_, unit* order, coord_def target)
 
 	if(p_tem)
 	{
-		char temp[200];
-		sprintf_s(temp,200,"%d개의 P템을 한번에 회수했다.",p_tem);
-		printlog(temp,true,false,false,CL_normal);
+
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SPELL_P_COLLECT, PlaceHolderHelper(to_string(p_tem))),true,false,false,CL_normal);
 		return true;
 	}
 	else
 	{
-		printarray(true,false,false,CL_normal,1,"시야내에 P템이 없다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_P_COLLECT_NONE), true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -2816,7 +2815,7 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 		if((*it).id == EVL_VIOLET)
 		{
 			if(order->isplayer())
-				printarray(true,false,false,CL_normal,1,"층마다 1개의 파장만 조종할 수 있다.");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ONLY_ONE_FILED),true,false,false,CL_normal);
 			return false;
 		}
 	} 
@@ -2824,7 +2823,7 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 		soundmanager.playSound("spellcard");
 	}
 	if(env[current_level].isInSight(target))
-		printlog("보라색의 파장이 생겨났다! ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_FILED_VIOLET) + " ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+power/10);
 	return true;
 }
@@ -2870,7 +2869,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->Tele_check(true, true))
 		return false;	
 	if (current_level == ZIGURRAT_LEVEL) {
-		printlog("광몽의 세계에선 순간이동의 제어가 불가능하다. 정말로 쓸거야? (y/n) ", true, true, false, CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL), true, true, false, CL_small_danger);
 
 		switch (waitkeyinput())
 		{
@@ -3341,7 +3340,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 	if(order->position.distance_from(unit_->position)<=1)
 	{		
 		if(order->isplayer())
-			printlog("밀착한 대상에는 사용할 수 없다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TOO_CLOSE),true,false,false,CL_normal);	
 		return false; //해당 위치에 몬스터가 없다.
 	}
 
@@ -3372,7 +3371,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 		rit++;
 	}
 	if(order->isplayer())
-		printlog("그곳으론 도약할 수 없다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_LEAP),true,false,false,CL_normal);	
 	return false; //해당 위치에 몬스터가 없다.
 }
 bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
@@ -3393,12 +3392,12 @@ bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 		if((*it).id == EVL_NAMAZ)
 		{
 			if(order->isplayer())
-				printarray(true,false,false,CL_normal,1,"층마다 1개의 나마즈만 떨어뜨릴 수 있다.");
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ONLY_ONE_NAMAZ) ,true,false,false,CL_normal);
 			return false;
 		}
 	}
 	if(env[current_level].isInSight(target))
-		printlog("하늘에서 바람 소리가 들리고있다! ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NAMAZ_READY) + " ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_NAMAZ,coord_def(target.x,target.y),EVT_COUNT,4);
 	if (env[current_level].isInSight(order->position)) {
 		soundmanager.playSound("namaz");
@@ -3425,7 +3424,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 		}
 		
 		if(env[current_level].isInSight(target))
-			printlog("거대한 나마즈가 떨어졌다! ",false,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NAMAZ) + " ",false,false,false,CL_normal);
 		{
 			dif_rect_iterator rit(target,length_);
 		
@@ -3538,11 +3537,11 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 				PlaceHolderHelper(target_unit->GetName()->getName()));
 			
 			if(you.s_unluck<=3)
-				printlog("약간의 불행이 느껴졌다.",false,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_UNLUCKY1),false,false,false,CL_small_danger);
 			else if(you.s_unluck<=6)
-				printlog("상당히 불행해진 것 같다.",false,false,false,CL_small_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_UNLUCKY2),false,false,false,CL_small_danger);
 			else
-				printlog("세상의 악의가 느껴진다!",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_UNLUCKY3),false,false,false,CL_danger);
 
 			return true;
 		}
@@ -3708,7 +3707,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 
 	if(result_.GetSize() == 0)
 	{
-		printarray(true,false,false,CL_normal,1,"이 마법을 사용하기위해선 뒤에 충분한 공간이 필요하다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_MACRO_BURST_NEED_SPACE),true,false,false,CL_normal);
 		return false;
 	}
 
@@ -3734,7 +3733,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			}
 		}
 		
-		printarray(true,false,false,CL_normal,1,"강력한 돌풍을 동반한 발돋움과 함께 뒤쪽으로 도약했다!");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_MACRO_BURST),true,false,false,CL_normal);
 
 		for(auto it = vt_.begin();it != vt_.end();it++)
 		{
@@ -3757,7 +3756,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 	}
 	else{
 		
-		printarray(true,false,false,CL_normal,1,"발을 딛을 공간이 부족하다.");
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_MACRO_BURST_TARGET_MOVABLE),true,false,false,CL_normal);
 		return false;
 	}
 	return false;
@@ -3767,7 +3766,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 	if (env[current_level].isInSight(order->position)) {
 		soundmanager.playSound("earthquake");
 	}
-	printarray(false,false,false,CL_normal,1,"카-크래쉬! ");
+	printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EARTHQUAKE),false,false,false,CL_normal);
 	map_effect = 2;
 	Sleep(500);
 	
@@ -3988,7 +3987,7 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
 		{
 			if (env[current_level].isInSight(target))
-				printlog("거대한 닻이 바닥에 박혔다! ", false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ACNHOR) + " ", false, false, false, CL_normal);
 			return_ = true;
 		}
 	}
@@ -4095,7 +4094,7 @@ bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 		if (!target_unit->isplayer()) {
 			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
 				if (order->isplayer()) {
-					printlog("이 대상은 움직이지 못하기 때문에 텔레키네시스를 사용할 수 없다.", true, false, false, CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_PSYCHOKINESIS_FAIL), true, false, false, CL_normal);
 				}
 				return false; //이동불가인 적엔 사용 불가
 			}
@@ -4178,7 +4177,7 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 			soundmanager.playSound("shoot_heavy");
 		}
 		if (max_ == 0 && order->isYourShight()) {
-			printlog("쓰레기 더미가 날라오기 시작한다!", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TRASH_RUSH), true, false, false, CL_normal);
 		}
 
 
@@ -4288,7 +4287,7 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 	if (!order->isplayer())
 	{
 		if (env[current_level].isInSight(target)) {
-			printlog("밤참새의 노랫소리가 들려온다! ", false, false, false, CL_normal); 
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_MYSTIA_SONG) + " ", false, false, false, CL_normal); 
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("laugh");
 			}
@@ -4464,7 +4463,7 @@ bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (send_ == true) {
 		if (env[current_level].isInSight(order->position)) {
-			printlog("적들이 당신을 순식간에 둘러쌓았다! ", false, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_DREAM_CALL) + " ", false, false, false, CL_normal);
 			soundmanager.playSound("blink");
 		}
 	}
@@ -4611,7 +4610,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 	if (order->position.distance_from(unit_->position) <= 1)
 	{
 		if (order->isplayer())
-			printlog("밀착한 대상에는 사용할 수 없다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TOO_CLOSE), true, false, false, CL_normal);
 		return false; //해당 위치에 몬스터가 없다.
 	}
 
@@ -4638,7 +4637,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 		rit++;
 	}
 	if (order->isplayer())
-		printlog("그곳으론 도약할 수 없다.", true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_LEAP), true, false, false, CL_normal);
 	return false; //해당 위치에 몬스터가 없다.
 }
 
@@ -4656,7 +4655,7 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(15, 25));
 		soundmanager.playSound("timestop");
-		printlog("레이무에 의해 도망칠 수 없는 결계가 쳐졌다! ", false, false, false, CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_REIMU_BARRIER) + " ", false, false, false, CL_danger);
 		//((monster*)order)
 		if (order)
 		{
@@ -5851,7 +5850,7 @@ bool CheckDangerSpell(int danger_)
 {	
 	if(danger_>=3)
 	{
-		printlog("이 마법은 사용하기엔 너무 위험하다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TOO_DANGEROURS),false,false,false,CL_danger);
 		switch(waitkeyinput())
 		{
 		case 'Y':
@@ -5948,7 +5947,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 
 		if(warning_)
 		{
-			printlog("이 공격은 당신에게 피해를 줄 것이다. 그래도 쓸건가?(Y/N)",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SELF_HURT),false,false,false,CL_danger);
 			switch(waitkeyinput())
 			{
 			case 'Y':
@@ -5957,7 +5956,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 				break;
 			case 'N':
 			default:
-				printlog(" 취소하였다.",true,false,false,CL_normal);
+				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
 				return false;
 			}
 
@@ -5990,30 +5989,28 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	}
 	if(!you.isSightnonblocked(target))
 	{
-		printlog("여긴 막혀있다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_BLOCK),true,false,false,CL_normal);	
 		return false;
 	}
 	if(SpellFlagCheck(skill,S_FLAG_DELAYED) && you.GetExhausted())
 	{
-		printlog("이 마법을 쓰기엔 피로가 쌓였다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXHAUST),true,false,false,CL_normal);	
 		return false;
 	}
 	if(randA_1(100) > you.GetSpellSuccess(skill))
 	{
-		printlog("당신은 마법 주문에 실패했다.",true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CAST_FAIL),true,false,false,CL_normal);
 		SpellMiscasting(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill)));
 		return true;
 	}
 	if(you.GetPunish(GT_MIMA))
 	{
-		printlog("미마는 당신이 쓰는 마법의 위력을 반감시켰다!",true,false,false,CL_green);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_SPELLDOWN),true,false,false,CL_green);
 	}
 
 	if(wiz_list.wizard_mode == 1)
 	{
-		char temp[50];
-		sprintf_s(temp,50,"스펠파워 %d / %d",power,SpellCap(skill));
-		printlog(temp,true,false,false,CL_help);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_SPELLPOWER,PlaceHolderHelper(to_string(power)),PlaceHolderHelper(to_string(SpellCap(skill)))),true,false,false,CL_help);
 	}
 	switch(skill)
 	{

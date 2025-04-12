@@ -945,6 +945,7 @@ int SkillMana(skill_list skill)
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_4:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_MINORIKO_2:
 	case SKL_MIKO_1:
 	case SKL_MIKO_2:
 	case SKL_MIKO_3:
@@ -985,7 +986,6 @@ int SkillMana(skill_list skill)
 	case SKL_YUKARI_2:
 		return 4;
 	case SKL_EIRIN_2:
-	case SKL_MINORIKO_2:
 	case SKL_YUYUKO_3:
 	case SKL_LILLY_4:
 	case SKL_JUNKO_3:
@@ -1019,7 +1019,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_EIRIN_0:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1038,7 +1038,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_MINORIKO_1:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1062,7 +1062,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUYUKO_1:	
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1095,7 +1095,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_JUMP:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1104,7 +1104,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_TEMPLE:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1115,7 +1115,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_TOUGUE:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1124,7 +1124,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_CURSE:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1136,7 +1136,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_DIGGING:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1148,7 +1148,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_SUMMON_FLOG:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1160,7 +1160,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_STATUE:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1172,7 +1172,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_RAIN:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1184,7 +1184,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_SLEEP:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1196,7 +1196,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SWAKO_MISYAGUZI:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1208,7 +1208,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_1:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1219,7 +1219,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_2:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1230,7 +1230,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SHINKI_3:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1242,7 +1242,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SIZUHA_2:
 		if(check_ && !you.equipment[ET_ARMOR])
 		{
-			printlog("갑옷을 끼고 사용하여야 한다.",true,false,false,CL_small_danger);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD),true,false,false,CL_small_danger);	
 			return false;
 		}
 		if(!check_)
@@ -1251,7 +1251,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SIZUHA_3:
 		if(check_ && !you.equipment[ET_WEAPON])
 		{
-			printlog("무기를 끼고 사용하여야 한다.",true,false,false,CL_small_danger);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON),true,false,false,CL_small_danger);	
 			return false;
 		}
 		return true;
@@ -1266,12 +1266,12 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_EIRIN_2:
 		if(check_ && you.GetHp() ==  you.GetMaxHp())
 		{
-			printlog("이미 체력이 가득 차 있다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_HEAL_MAX),true,false,false,CL_normal);	
 			return false;
 		}
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1287,7 +1287,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_MINORIKO_2:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1299,7 +1299,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_2:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1311,7 +1311,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_3:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1323,7 +1323,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_4:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1335,7 +1335,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_YUUGI_5:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1347,7 +1347,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_HINA_1:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1360,14 +1360,14 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_HINA_5:
 		if(check_ && !you.equipment[ET_WEAPON])
 		{
-			printlog("무기를 끼고 사용하여야 한다.",true,false,false,CL_small_danger);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON),true,false,false,CL_small_danger);	
 			return false;
 		}
 		return true;	
 	case SKL_LEVITATION:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1376,7 +1376,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_INVISIBLE:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1385,7 +1385,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUMPING_ATTACK:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1394,7 +1394,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_BREATH:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1403,7 +1403,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_TORMENT:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1414,7 +1414,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SEIJA_1:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1423,7 +1423,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_SEIJA_2:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1437,7 +1437,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_LILLY_3:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1446,7 +1446,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_LILLY_4:
 		if(check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.",true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
 			return false;
 		}
 		if(!check_)
@@ -1457,7 +1457,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_OKINA_1:
 		if (check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1484,7 +1484,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_1:
 		if (check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1493,7 +1493,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_2:
 		if (check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1502,7 +1502,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_JUNKO_3:
 		if (check_ && you.power<100)
 		{
-			printlog("파워 1칸 이상에서 써야한다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1522,7 +1522,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(0))
 		{
-			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULAR_LACK), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1533,7 +1533,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(1))
 		{
-			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULAR_LACK), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1544,7 +1544,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(2))
 		{
-			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULAR_LACK), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1555,7 +1555,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(3))
 		{
-			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULAR_LACK), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1566,7 +1566,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	{
 		if (check_ && you.piety < getMikoPiety(4))
 		{
-			printlog("인기도가 모자란다.", true, false, false, CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULAR_LACK), true, false, false, CL_normal);
 			return false;
 		}
 		if (!check_)
@@ -1624,168 +1624,168 @@ void SkillUseTraning(skill_list skill)
 	//	return;
 	//}
 }
-const char* SkillCostString(skill_list skill)
+string SkillCostString(skill_list skill)
 {
 	switch(skill)
 	{
 	case SKL_KANAKO_1:
-		return "(영력 2, 신앙)";		
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_MINORIKO_1:
-		return "(영력 3, P 약간, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_BYAKUREN_1:
-		return "(신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
 	case SKL_YUUGI_1:
-		return "(물약, 신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY);
 	case SKL_YUUGI_2:
-		return "(신앙, P 소량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_PIETY);
 	case SKL_YUUGI_3:
-		return "(신앙, P 소량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_PIETY);
 	case SKL_YUUGI_4:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_YUUGI_5:
-		return "(신앙, P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY);
 	case SKL_KANAKO_2:
-		return "(영력 3, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_BYAKUREN_2:
-		return "(영력 4, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_KANAKO_3:
-		return "(영력 4, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_EIRIN_0:
-		return "(물약, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_POTION);
 	case SKL_EIRIN_1:
-		return "(신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
 	case SKL_EIRIN_2:
-		return "(영력 5, 신앙, P 대량)";	
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_MINORIKO_2:
-		return "(음식, 영력 5, P 대량, 신앙)";	
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_FOOD_AND_PIETY);
 	case SKL_SIZUHA_1:
-		return "(영력 4, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SIZUHA_2:
-		return "(신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
 	case SKL_SIZUHA_3:
-		return "(한번만)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 	case SKL_LEVITATION:
-		return "(영력 2, P 소량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_INVISIBLE:
-		return "(영력 2, P 약간)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SATORI_1:
-		return "(영력 2, 신앙)";	
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SATORI_2:
-		return "(영력 5, 시간, 신앙)";	
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
 	case SKL_SHINKI_1:
-		return "(신앙, P 소량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_PIETY);
 	case SKL_SHINKI_2:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_SHINKI_3:
-		return "(신앙, P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY);
 	case SKL_YUYUKO_1:
-		return "(영력 2, P 소량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUYUKO_2:
-		return "(영력 3, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUYUKO_3:
-		return "(영력 5, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUKARI_1:
-		return "(영력 2, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUKARI_2:
-		return "(영력 4, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUKARI_3:
-		return "(영력 3, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_YUKARI_4:
-		return "(영력 6, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SWAKO_JUMP:
-		return "(영력 2, P 소량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SWAKO_TEMPLE:
-		return "(P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
 	case SKL_SWAKO_WATER_GUN:
-		return "(영력 1)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SWAKO_TOUGUE:
-		return "(영력 2, P 소량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SWAKO_CURSE:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_SWAKO_DIGGING:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_SWAKO_SUMMON_FLOG:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_SWAKO_STATUE:
-		return "(신앙, P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY);
 	case SKL_SWAKO_RAIN:
-		return "(신앙, P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY);
 	case SKL_SWAKO_SLEEP:
-		return "(신앙, P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY);
 	case SKL_SWAKO_MISYAGUZI:
-		return "(신앙, P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY);
 	case SKL_HINA_1:
-		return "(P 소량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
 	case SKL_HINA_2:
-		return "(저주)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
 	case SKL_HINA_3:
-		return "(저주)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
 	case SKL_HINA_4:
-		return "(저주)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
 	case SKL_HINA_5:
-		return "(한번만)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 	case SKL_JUMPING_ATTACK:
-		return "(P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME);
 	case SKL_BREATH:
-		return "(P 소량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
 	case SKL_TORMENT:
-		return "(영력 6, P 대량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SEIJA_1:
-		return "(P 약간)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME);
 	case SKL_SEIJA_2:
-		return "(P 대량)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
 	case SKL_LILLY_1:
-		return "(없음)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_LILLY_2:
-		return "(영력 2)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_LILLY_3:
-		return "(영력 3, P 약간)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_LILLY_4:
-		return "(영력 5, P 대량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
-		return "(영력 1)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_OKINA_1:
-		return "(영력 2, P 약간)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_OKINA_2:
-		return "(영력 2, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_OKINA_3:
-		return "(영력 3, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_OKINA_4:
-		return "(신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
 	case SKL_OKINA_5:
-		return "(영력 6, 신앙)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JUNKO_1:
-		return "(영력 1, P 소량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JUNKO_2:
-		return "(영력 3, P 약간)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JUNKO_3:
-		return "(영력 5, P 대량)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JOON_AND_SION_1:
-		return "(없음)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_JOON_AND_SION_2:
-		return "(영력 5, 빙의중 한번만)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JOON_AND_SION_3:
-		return "(영력 5, 빙의중 한번만)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_JOON_AND_SION_4:
-		return "(신앙)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
 	case SKL_JOON_AND_SION_OFF:
-		return "(없음)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_MIKO_1:
-		return "(층마다 한번만)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR);
 	case SKL_MIKO_2:
-		return "(인기도 2%)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(0)/2)));
 	case SKL_MIKO_3:
-		return "(인기도 5%)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(1)/2)));
 	case SKL_MIKO_4:
-		return "(인기도 15%)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(2)/2)));
 	case SKL_MIKO_5:
-		return "(인기도 50%)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(3)/2)));
 	case SKL_MIKO_6:
-		return "(인기도 100%)";
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(4)/2)));
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
@@ -1796,7 +1796,7 @@ const char* SkillCostString(skill_list skill)
 	case SKL_ABANDON_GOD:
 	case SKL_SEIJA_GIFT:
 	default:
-		return "(없음)";
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	}
 }
 int GetSpellBombRange(skill_list skill)
@@ -1855,12 +1855,12 @@ void SkillUse(char auto_)
 					{
 						if(you.pure_mp && SkillMana(skill_)>=you.GetMp())
 						{
-							printlog("더 이상 순화된 마력을 사용하면 죽을거야!", true, false, false, CL_normal);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_WARN), true, false, false, CL_normal);
 							break;
 						}
 						else if(SkillMana(skill_)>you.GetMp())
 						{
-							printlog("당신의 영력이 모자란다.",true,false,false,CL_normal);	
+							printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_MP),true,false,false,CL_normal);	
 							break;
 						}
 						if(!SkillFlagCheck(skill_, S_FLAG_IMMEDIATELY))
@@ -1938,5 +1938,5 @@ void SkillUse(char auto_)
 		changedisplay(DT_GAME);
 	}
 	else
-		printlog("아직 알고있는 능력이 없다.",true,false,false,CL_normal);	
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DONT_HAVE),true,false,false,CL_normal);	
 }

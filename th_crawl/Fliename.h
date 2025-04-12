@@ -21,7 +21,6 @@ const char imgfile_item02[] = "./data/item2.png";
 const char imgfile_item03[] = "./data/item3.png";
 
 const char imgfile_laser[] = "./data/laser.png";
-const char imgfile_test[] = "./data/test.png";
 
 
 

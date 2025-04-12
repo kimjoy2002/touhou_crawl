@@ -68,7 +68,13 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
     message("Release Build")
     target_compile_definitions(${PROJECT_NAME} PRIVATE NDEBUG)
-    target_compile_options(${PROJECT_NAME} PRIVATE /MD)
+    target_compile_options(${PROJECT_NAME} PRIVATE 
+        -Wno-comment
+        -Wno-new-returns-null
+        /MD
+        -Wno-microsoft-enum-forward-reference
+        -Wno-microsoft-extra-qualification
+        )
 
     execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Release)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Release)

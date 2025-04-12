@@ -25,9 +25,6 @@ class optionManager {
 
 	int bgm_volume;
 	int se_volume;
-	
-	string server_ip;
-	int server_port;
 
 	string lang;
 
@@ -41,17 +38,13 @@ public:
 	string getName() { return name; };
 
 
-	int getHeight() { return 600; };
-	int getWidth() { return 800; };
+	int getHeight() { return height; };
+	int getWidth() { return width; };
 	int getHeightCommon() { return height; };
 	int getWidthCommon() { return width; };
 
 	int getBgmVolume() { return bgm_volume; };
 	int getSeVolume() { return se_volume; };
-
-
-	string getServerIp() { return server_ip; };
-	int getServerPort() { return server_port; };
 
 	void setLang(const string& lang_value);
 	string getLang() { return lang; };

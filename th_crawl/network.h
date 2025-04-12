@@ -19,9 +19,9 @@ typedef struct packet
 class NetClient
 {
 private:
-	bool ok;
-	WSADATA wsData;
-	SOCKADDR_IN serverAddress;
+	// bool ok;
+	// WSADATA wsData;
+	// SOCKADDR_IN serverAddress;
 public:
 	SOCKET Socket;
 	bool StartUp();

@@ -26,10 +26,10 @@ optionManager::optionManager(string fileName) {
 		GetPrivateProfileString(_T("config"), _T("name"), _T("Default"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		name = TCHARToString(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("height"), _T("600"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		GetPrivateProfileString(_T("config"), _T("height"), _T("720"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		height = _tstoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("width"), _T("800"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		GetPrivateProfileString(_T("config"), _T("width"), _T("1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
 
 		GetPrivateProfileString(_T("config"), _T("bgm_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());

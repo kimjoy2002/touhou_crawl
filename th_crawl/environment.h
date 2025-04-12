@@ -342,8 +342,8 @@ bool isArena();
 bool isSprint();
 int sprintMulti();
 
-float GetDotX(int x);
-float GetDotY(int y);
+float GetDotX(int x, int dungeon_x);
+float GetDotY(int y, int dungeon_y);
 string CurrentLevelString(int level = -1);
 int GetLevelMonsterNum(int level, bool item_);
 void Noise(coord_def center_, int length_, const unit* excep_=NULL);

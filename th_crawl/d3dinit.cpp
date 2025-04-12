@@ -65,9 +65,9 @@ bool Setup()
 	bool return_ = true;
 	D3DXFONT_DESC fontDesc;
 	ZeroMemory(&fontDesc, sizeof(fontDesc));
-	fontDesc.Height = 18;
+	fontDesc.Height = 20;
 	fontDesc.Weight = 500;
-	fontDesc.Width = 7;
+	fontDesc.Width = 8;
 	fontDesc.Quality = CLEARTYPE_QUALITY;
 	fontDesc.Italic = false;
 	fontDesc.CharSet = DEFAULT_CHARSET;

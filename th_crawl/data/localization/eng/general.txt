@@ -1,4 +1,4 @@
-LOC_SYSTEM_TITLE_TOUHOUCRAWL,Touhou Crawl
+﻿LOC_SYSTEM_TITLE_TOUHOUCRAWL,Touhou Crawl
 LOC_SYSTEM_TITLE_SHORTINFO,A Touhou Project and Dungeon Crawl fan game
 LOC_SYSTEM_TITLE_YOUR_NAME,Your name is {0}.
 LOC_SYSTEM_TITLE_START,Begin!
@@ -2902,16 +2902,16 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,You have recovered MP.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP,Your MP recovery increased due to the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from the amulet.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING,You communed with a god through the amulet!
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,"Without faith, your gathered piety faded into the sky."
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,Without faith, your gathered piety faded into the sky.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER,You focus all your senses on evasion for a moment!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your grit-based grazing is about to end.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your grit-based grazing has ended.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,"A thick fog rolls in, obscuring everything."
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,A thick fog rolls in, obscuring everything.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END,The weather has returned to normal.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,"Through occult power, urban legend {0} has appeared!"
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,"Through occult power, multiple {0} urban legends have appeared!"
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,Through occult power, urban legend {0} has appeared!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,Through occult power, multiple {0} urban legends have appeared!
 LOC_SYSTEM_ITEM_OCCULT_NESI,Nessie
 LOC_SYSTEM_ITEM_OCCULT_LONG,Tall Ghost
 LOC_SYSTEM_ITEM_OCCULT_SHORT,Little Green Man

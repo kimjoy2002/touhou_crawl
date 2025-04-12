@@ -399,7 +399,7 @@ string item::GetName(int num_)
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{
 		std::ostringstream ss;
-		ss << " (" << you.getAmuletPercent() << "%%)";  // ostringstream 사용
+		ss << " (" << you.getAmuletPercent() << "%)";  // ostringstream 사용
 		temp += ss.str();
 	}
 	

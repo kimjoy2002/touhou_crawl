@@ -2412,13 +2412,13 @@ void LoadFile()
 	ReleaseMutex(mutx);
 }
 
-float GetDotX(int x)
+float GetDotX(int x, int dungeon_x)
 {
-	return 555.0f+x*3;
+	return 43 + (32*(dungeon_x*2))+x*3;
 }
-float GetDotY(int y)
+float GetDotY(int y, int dungeon_y)
 {
-	return 340.0f+y*3;
+	return 340+y*3;
 }
 
 string CurrentLevelString(int level)

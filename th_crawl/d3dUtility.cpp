@@ -108,11 +108,11 @@ bool d3d::InitD3D(
 	//frameX = GetSystemMetrics(SM_CXFRAME);
 	//frameY = GetSystemMetrics(SM_CYFRAME);
 	//captionY = GetSystemMetrics(SM_CYCAPTION);
-	GetWindowSizeFromClientSize(WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX,false, option_mg.getWidthCommon(), option_mg.getHeightCommon(),frameX,frameY);
+	GetWindowSizeFromClientSize(WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,false, option_mg.getWidthCommon(), option_mg.getHeightCommon(),frameX,frameY);
 
 	sprintf_s(temp,50,"touhou crawl %s",version_string);
 	hwnd = ::CreateWindow("Direct3D9App", temp, 
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU | WS_SIZEBOX,
+		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 			0, 0, frameX/*option_mg.getWidth() + 6*/, frameY/*option_mg.getHeight() + 32*/,
 		0, 0 , hInstance, 0); 
 

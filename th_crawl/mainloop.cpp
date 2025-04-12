@@ -302,7 +302,7 @@ void charter_selete()
 	ReleaseMutex(mutx);
 	waitkeyinput();	
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
+	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_START);
 	SetText() += "\n";
 	ReleaseMutex(mutx);
 	Sleep(500);

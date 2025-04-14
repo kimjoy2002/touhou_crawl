@@ -10,9 +10,9 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-optionManager option_mg("./config.ini");
+optionManager option_mg;
 
-optionManager::optionManager(string fileName) {
+void optionManager::init(string fileName) {
 	this->fileName = fileName;
 	struct stat stStat = { 0 };
 
@@ -54,11 +54,11 @@ void optionManager::createNewFile(string fileName) {
 	TCHAR  *tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("name"), tchr, fileName.c_str());
 
-	strString = _T("600");
+	strString = _T("720");
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("height"), tchr, fileName.c_str());
 
-	strString = _T("800");
+	strString = _T("1280");
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
 

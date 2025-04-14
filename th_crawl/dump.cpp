@@ -26,7 +26,7 @@
 extern const char *version_string;
 
 
-
+extern string morgue_path;
 
 
 
@@ -120,14 +120,14 @@ bool Dump(int type, string *filename_)
 	ostringstream ss;
 	char filename[256];
 	//char sql_[256];
-	_mkdir("morgue");
+	_mkdir(morgue_path.c_str());
 	FILE *fp;
 	struct tm t;
 	time_t now;
 	time(&now);
 	localtime_s(&t, &now);
 
-	sprintf_s(filename, 256, "morgue/%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
+	sprintf_s(filename, 256, (morgue_path + "/%s-%s-%04d%02d%02d-%02d%02d%02d.txt").c_str(),
 		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
 		you.user_name.c_str(),
 		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec);

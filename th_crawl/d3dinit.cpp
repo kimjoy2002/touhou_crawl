@@ -224,7 +224,7 @@ LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	}
 	return ::DefWindowProc(hwnd, msg, wParam, lParam);
 }
-
+extern void init_save_paths();
 //
 // 윈메인
 //
@@ -235,6 +235,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   int showCmd)
 {
 	g_keyQueue = std::make_unique<KeyInputQueue>();
+	init_save_paths();
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))

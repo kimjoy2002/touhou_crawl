@@ -28,10 +28,9 @@ class optionManager {
 
 	string lang;
 
-private:
-	optionManager() {};
 public:
-	optionManager(string fileName);
+	optionManager() {};
+	void init(string fileName);
 
 	void createNewFile(string fileName);
 

@@ -9,13 +9,43 @@
 #include "environment.h"
 #include "key.h"
 #include "replay.h"
+#include "option_manager.h"
+#include <shlobj.h>
+#include <filesystem>
 
 extern bool saveexit;
 extern HANDLE mutx;
 extern std::atomic<bool> g_saveandexit;
 
-string save_file = "save.dat";
-string user_name_file = "user_name.txt";
+std::string save_file;
+std::string user_name_file;
+std::string replay_path;
+std::string morgue_path;
+
+
+void init_save_paths() {
+    wchar_t appDataPath[MAX_PATH];
+    if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, appDataPath))) {
+        std::filesystem::path base(appDataPath);
+        base /= L"AppData\\LocalLow\\TouhouCrawl\\TouhouCrawl";
+        std::filesystem::create_directories(base); // 폴더가 없으면 생성
+
+        save_file = (base / L"save.dat").string();
+        user_name_file = (base / L"user_name.txt").string();
+		replay_path = (base / L"replay").string();
+		morgue_path = (base / L"morgue").string();
+
+		option_mg.init((base / L"config.ini").string());
+    } else {
+        save_file = "save.dat";
+        user_name_file ="user_name.txt";
+		replay_path = "replay";
+		morgue_path = "morgue";
+
+		option_mg.init("./config.ini");
+    }
+}
+
 
 void delete_file()
 {

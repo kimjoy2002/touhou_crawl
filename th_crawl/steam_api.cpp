@@ -79,7 +79,6 @@ const char* steam_manager::getAchievementId(achievement_enum enum_) {
 void steam_manager::achievement(achievement_enum achievement) {
 	if(!init)
 		return;
-
 	const char* id = getAchievementId(achievement);
 	if (id == nullptr || strlen(id) == 0)
 		return;

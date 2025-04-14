@@ -181,8 +181,11 @@ int waitkeyinput(bool direction_, bool immedity_)
 	{
 		DWORD delay_;
 		int return_;
-		MSG msg = g_keyQueue->pop();
-		if(msg.message == WM_CHAR)
+		
+		MSG msg;
+		bool get_ = g_keyQueue->try_pop(msg);
+
+		if(get_ == true)
 		{
 			switch(msg.wParam)
 			{
@@ -195,9 +198,9 @@ int waitkeyinput(bool direction_, bool immedity_)
 			case 'z':
 				while(!g_shutdownRequested)
 				{
-					MSG msg = g_keyQueue->pop();
+					get_ = g_keyQueue->try_pop(msg);
 
-					if(msg.message == WM_CHAR)
+					if(get_ == true && msg.message == WM_CHAR)
 					{
 						if(msg.wParam == 'z' || msg.wParam == 'x' || msg.wParam == 'c')
 						{
@@ -208,6 +211,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 							break;
 						}
 					}
+					Sleep(1);
 				}
 				break;
 			}

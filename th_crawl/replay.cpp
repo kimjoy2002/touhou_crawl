@@ -22,6 +22,7 @@ typedef struct _finddata_t  FILE_SEARCH;
 
 
 extern const char *version_string;
+extern string replay_path;
 
 replay_class ReplayClass;
 
@@ -81,7 +82,7 @@ void replay_class::init_class()
 	time(&now);
 	localtime_s(&t, &now);
 	char filename[512];
-	sprintf_s(filename,512,"replay/%s-%04d%02d%02d-%02d%02d%02d.rpy",you.user_name.c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
+	sprintf_s(filename,512, (replay_path + "/%s-%04d%02d%02d-%02d%02d%02d.rpy").c_str(),you.user_name.c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
 	
 	replay_string = filename;
 	sprintf_s(infor.name,32,"%s",you.user_name.c_str());
@@ -106,7 +107,7 @@ bool replay_class::SaveReplayStart()
     if (!init || play)
         return false;
 
-    _mkdir("replay");  // Windows에서 mkdir 대신 _mkdir 사용
+    _mkdir(replay_path.c_str());  // Windows에서 mkdir 대신 _mkdir 사용
 
     FILE* fp = nullptr;
     struct tm t;
@@ -115,7 +116,7 @@ bool replay_class::SaveReplayStart()
 	localtime_s(&t, &now);
 
     if (replay_string.empty()) {
-        replay_string = "replay/temp.rpy";
+        replay_string = replay_path + "/temp.rpy";
     }
 	
     std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
@@ -164,7 +165,7 @@ bool replay_class::LoadReplayStart()
 	}
 
 	char filename[512];
-	_mkdir("replay");
+	_mkdir(replay_path.c_str());
 	
 	sprintf_s(filename,512,"%s",replay_string.c_str());
 
@@ -294,7 +295,7 @@ bool replay_menu(int value_)
 
 	
 		WIN32_FIND_DATAA findFileData;
-		HANDLE MyHandle = FindFirstFileA("./replay/*.rpy",&findFileData);
+		HANDLE MyHandle = FindFirstFileA((replay_path + "/*.rpy").c_str(),&findFileData);
 		
 		
 		std::vector<replay_sort> file_vector;
@@ -304,7 +305,7 @@ bool replay_menu(int value_)
 			{	
 				char filename[512];
 				
-				sprintf_s(filename,512,"replay/%s",findFileData.cFileName);
+				sprintf_s(filename,512,(replay_path + "/%s").c_str(),findFileData.cFileName);
 				
 				std::wstring wfilename = ConvertUTF8ToUTF16(filename);
 				FILE *fp;
@@ -426,7 +427,7 @@ bool replay_menu(int value_)
 				if(select_<file_num)
 				{
 					char temp[512];
-					sprintf_s(temp,512,"replay/%s",file_vector[select_].path.c_str());
+					sprintf_s(temp,512,(replay_path + "/%s").c_str(),file_vector[select_].path.c_str());
 					ReplayClass.init_replay(temp);
 					ReplayClass.LoadReplayStart();
 					out_ = true;

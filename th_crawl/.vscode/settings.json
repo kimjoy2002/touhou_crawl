@@ -54,7 +54,12 @@
         "codecvt": "cpp",
         "xstring": "cpp",
         "iomanip": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "condition_variable": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

@@ -61,14 +61,15 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         target_compile_options(${PROJECT_NAME} PRIVATE
             -Wno-comment
             -Wno-new-returns-null
-            /MDd
             -Wno-microsoft-enum-forward-reference
             -Wno-microsoft-extra-qualification
+            -Wno-deprecated-declarations
+            /MDd
         )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         message("Use MSVC")
         target_compile_options(${PROJECT_NAME} PRIVATE /MDd)
-        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi /Ob0 /Od /RTC1")
+        set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi /Ob0 /Od")
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /DEBUG")
     endif()
 
@@ -81,10 +82,16 @@ else()
     target_compile_options(${PROJECT_NAME} PRIVATE 
         -Wno-comment
         -Wno-new-returns-null
-        /MD
         -Wno-microsoft-enum-forward-reference
         -Wno-microsoft-extra-qualification
-        )
+        -Wno-deprecated-declarations
+        -Od
+        -Zi
+    )
+    target_link_options(${PROJECT_NAME} PRIVATE
+        -fsanitize=address
+        -Zi
+    )
 
     execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Release)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Release)

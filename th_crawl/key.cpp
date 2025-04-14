@@ -20,12 +20,18 @@ bool game_over= false;
 bool shift_check = false;
 bool ctrl_check = false;
 int replay_speed = 1;
+extern std::atomic<bool> g_shutdownRequested;
 
+
+std::unique_ptr<KeyInputQueue> g_keyQueue;
 
 bool isKeyinput()
 {
-	MSG msg;
-	return PeekMessage(&msg,NULL,0,0,PM_REMOVE);
+	MSG temp;
+	if(g_keyQueue->try_pop(temp))
+		return true;
+	else 
+		return false;
 }
 
 int waitkeyinput_inter(bool direction_, bool immedity_)
@@ -38,12 +44,12 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 			return 0;
 	}
 
-
-	MSG msg;
+	
 	if(game_over)
 		throw 0;
-	while(GetMessage(&msg,0,0,0))
+	while(!g_shutdownRequested) 
 	{
+		MSG msg = g_keyQueue->pop();
 		if(msg.message == WM_CHAR)
 		{
 			if(msg.wParam == 1) //A+컨트롤
@@ -147,7 +153,7 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 				ctrl_check = false;
 		}
 	}
-	if(msg.message == WM_QUIT)
+	if(g_shutdownRequested)
 	{
 		throw 0;
 	}
@@ -175,9 +181,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 	{
 		DWORD delay_;
 		int return_;
-		MSG msg;
-		bool end_ = false;
-		PeekMessage(&msg,NULL,0,0,PM_REMOVE);
+		MSG msg = g_keyQueue->pop();
 		if(msg.message == WM_CHAR)
 		{
 			switch(msg.wParam)
@@ -189,9 +193,9 @@ int waitkeyinput(bool direction_, bool immedity_)
 				replay_speed = 0;
 				break;
 			case 'z':
-				while(1)
+				while(!g_shutdownRequested)
 				{
-					GetMessage(&msg,0,0,0);
+					MSG msg = g_keyQueue->pop();
 
 					if(msg.message == WM_CHAR)
 					{
@@ -204,16 +208,12 @@ int waitkeyinput(bool direction_, bool immedity_)
 							break;
 						}
 					}
-					if (msg.message == WM_QUIT) {
-						end_ = true;
-						break;
-					}
 				}
 				break;
 			}
 		}
 
-		if(game_over || end_)
+		if(game_over || g_shutdownRequested)
 		{
 			throw 0;
 		}
@@ -221,7 +221,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 		{		
 			if(delay_>0)
 			{
-				for(int i = 0; i <(replay_speed==1?min(1000,delay_):0); i++)
+				for(int i = 0; i <(replay_speed==1?min(1000,(int)delay_):0); i++)
 					Sleep(1);
 			}
 
@@ -232,6 +232,49 @@ int waitkeyinput(bool direction_, bool immedity_)
 	}
 }
 
+
+void KeyInputQueue::push(MSG key) {
+	std::unique_lock<std::mutex> lock(mutex_);
+	queue_.push({ key, std::chrono::steady_clock::now() });
+	cv_.notify_one();
+}
+
+MSG KeyInputQueue::pop(int timeout_ms) {
+	std::unique_lock<std::mutex> lock(mutex_);
+
+	while (true) {
+		while (queue_.empty()) {
+			cv_.wait(lock);
+		}
+
+		auto now = std::chrono::steady_clock::now();
+
+		while (!queue_.empty()) {
+			TimedKey tk = queue_.front();
+			if (std::chrono::duration_cast<std::chrono::milliseconds>(now - tk.timestamp).count() <= timeout_ms) {
+				queue_.pop();
+				return tk.key;
+			}
+			else {
+				queue_.pop();
+			}
+		}
+	}
+}
+
+bool KeyInputQueue::try_pop(MSG& key) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    if (queue_.empty()) return false;
+
+    key = queue_.front().key;
+    queue_.pop();
+    return true;
+}
+
+bool KeyInputQueue::empty() {
+	std::lock_guard<std::mutex> lock(mutex_);
+	return queue_.empty();
+}
 
 
 int MoreWait()

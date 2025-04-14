@@ -270,6 +270,15 @@
     <ClCompile Include="zigurrat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="localization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="steam_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enumMapBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="alchemy.h">
@@ -456,6 +465,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="zigurrat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="localization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="steam_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="enumMapBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

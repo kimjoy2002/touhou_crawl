@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "replay.h"
 #include "option_manager.h"
+#include "key.h"
 #include "soundmanager.h"
 
 
@@ -26,7 +27,8 @@ extern void init_localization();
 extern void charter_selete();
 extern void MainLoop();
 extern void Initialize();
-
+std::atomic<bool> g_shutdownRequested = false;
+std::atomic<bool> g_saveandexit = false;
 
 char PreviousKeyboardState[256];
 char CurrentKeyboardState[256];
@@ -68,6 +70,7 @@ void InputInitialize(HINSTANCE hinstance);
 void InputUpdate();
 unsigned int WINAPI SoundLoop(void *arg);
 unsigned int WINAPI GameLoop(void *arg);
+unsigned int WINAPI DrawLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
 bool d3d::InitD3D(
 	HINSTANCE hInstance,
@@ -224,35 +227,30 @@ int d3d::EnterMsgLoop()
 	timeBeginPeriod(1);
 	unsigned int thid;
 	unsigned int thid_sound;
+	unsigned int thid_draw;
 
-	g_ThreadCnt = 3;
+	g_ThreadCnt = 4;
 	_beginthreadex(NULL, 0, GameLoop,NULL,0,&thid);
 	_beginthreadex(NULL, 0, SoundLoop, NULL, 0, &thid_sound);
-	while(msg.message != WM_QUIT)
+	_beginthreadex(NULL, 0, DrawLoop, NULL, 0, &thid_draw);
+	while(msg.message != WM_QUIT && !g_saveandexit)
 	{
-		if(::PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-		{
+        if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+            if (msg.message == WM_QUIT)
+                break;
 			if(msg.message == WM_KEYDOWN || msg.message == WM_CHAR || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
-				PostThreadMessage(thid,msg.message,msg.wParam,msg.lParam);
+          	    g_keyQueue->push(msg);
 			::TranslateMessage(&msg);
 			::DispatchMessage(&msg);
-		}
-		Sleep(16);
-		if(!Display(0))
-		{
-			::MessageBox(0, "Display Error", 0, 0);
-		}
+        }
+		Sleep(1);
 		InputUpdate();
-		//UpdateBGM();
-		if(g_ThreadCnt < 2)
+		if(g_ThreadCnt < 3)
 			break;
-		//if(0)
-		//{
-		//	PostQuitMessage(0);
-		//}
     }
-	PostThreadMessage(thid,WM_QUIT,msg.wParam,msg.lParam);
-	PostThreadMessage(thid_sound, WM_QUIT, msg.wParam, msg.lParam);
+	g_shutdownRequested = true;
+	msg.message = WM_QUIT;
+	g_keyQueue->push(msg);
 	int i=0;
 	while(g_ThreadCnt > 0 && i++ <= 50)
 		Sleep(200);
@@ -262,20 +260,46 @@ int d3d::EnterMsgLoop()
 }
 
 
+unsigned int WINAPI DrawLoop(void *arg)
+{
+	__try
+	{
+		__try
+		{
+			while (!g_shutdownRequested)
+			{
+				if(!Display(0))
+				{
+					::MessageBox(0, "Display Error", 0, 0);
+				}
+				Sleep(16);
+			}
+			return 1;
+		}
+		__except (1)
+		{
+		}
+	}
+	__finally
+	{
+		g_ThreadCnt--;
+	}
+	return 0;
+}
+
 unsigned int WINAPI SoundLoop(void *arg)
 {
 	__try
 	{
 		__try
 		{
-			MSG msg;
-			while (1)
+			while (!g_shutdownRequested)
 			{
-				if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-				{
-					if (msg.message == WM_QUIT)
-						break;
-				}
+				// if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+				// {
+				// 	if (msg.message == WM_QUIT)
+				// 		break;
+				// }
 
 				UpdateBGM();
 

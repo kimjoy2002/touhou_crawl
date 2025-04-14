@@ -16,6 +16,7 @@
 #include "rect.h"
 #include "floor.h"
 #include "tensi.h"
+#include "steam_api.h"
 #include "swako.h"
 #include "note.h"
 #include "rand_shuffle.h"
@@ -2221,6 +2222,7 @@ void Pray()
 						changedisplay(DT_GAME);
 						SetDisplayTexture(NULL);
 						you.Belief((god_type)(type-DG_TEMPLE_FIRST),15);
+						steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
 						MoreWait();
 					case 'N':
 					case 'n':

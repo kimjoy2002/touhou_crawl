@@ -14,15 +14,28 @@
 
 using namespace std;
 
+enum achievement_enum {
+	ACHIEVEMENT_DUNGEON_OF_FAITH,
+	ACHIEVEMENT_MAX
+};
+
+
 class steam_manager
 {
+private:
 	bool init = false;
+
+	const char* getAchievementId(achievement_enum enum_);
+
 public:
 	bool steamInit();
 	string getSteamUserName();
 	void setCurrentInfo();
 	void setCurrentMainMenuInfo();
 	void setCurrentInfo(string tribe, string job, string charname, int level, string which);
+	void achievement(achievement_enum achievement);
+	
+	void debugText();
 };
 
 extern steam_manager steam_mg;

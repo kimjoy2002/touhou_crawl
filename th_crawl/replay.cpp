@@ -16,6 +16,7 @@
 #include "save.h"
 #include "key.h"
 #include <windows.h>
+extern std::atomic<bool> g_saveandexit;
 
 typedef struct _finddata_t  FILE_SEARCH;
 
@@ -217,7 +218,7 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
 		{
 			auto_key = false;
 			init = false;
-			PostQuitMessage(0);
+			g_saveandexit = true;
 			return false;
 		}
 	}
@@ -225,7 +226,7 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
 	{
 		auto_key = false;
 		init = false;
-		PostQuitMessage(0);
+		g_saveandexit = true;
 		return false;
 	}
 	return true;

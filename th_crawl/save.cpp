@@ -12,6 +12,7 @@
 
 extern bool saveexit;
 extern HANDLE mutx;
+extern std::atomic<bool> g_saveandexit;
 
 string save_file = "save.dat";
 string user_name_file = "user_name.txt";
@@ -25,7 +26,7 @@ void delete_file()
 void saveandexit()
 {
 	if(!ReplayClass.ReplayMode())
-		PostQuitMessage(0);
+		g_saveandexit = true;
 }
 void saveandcheckexit()
 {
@@ -37,7 +38,7 @@ void saveandcheckexit()
 		case 'Y':
 			enterlog();	
 			if(!ReplayClass.ReplayMode())
-				PostQuitMessage(0);
+				g_saveandexit = true;
 			return;
 		case 'N':
 		case VK_ESCAPE:

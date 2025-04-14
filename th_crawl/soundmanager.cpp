@@ -407,7 +407,12 @@ SOUNDMANAGER :: ~SOUNDMANAGER()
 
 void SOUNDMANAGER::Initialize(HWND WindowHandle)
 {
-	DirectSoundCreate8(NULL, &Sound, NULL);
+	CoInitialize(NULL);
+	HRESULT hr = DirectSoundCreate8(NULL, &Sound, NULL);
+	if (FAILED(hr) || Sound == nullptr) {
+		OutputDebugStringA("DirectSoundCreate8 failed!\n");
+		return;
+	}
 
 	Sound->SetCooperativeLevel(WindowHandle, DSSCL_PRIORITY);
 

@@ -6,7 +6,7 @@
         {
             "label": "cmake build and run",
             "type": "shell",
-            "command": "cmake .. -G 'Visual Studio 16 2019' -T ClangCL -A x64; cmake --build ./;",
+            "command": "cmake .. -G 'Visual Studio 16 2019' -T ClangCL -A x64 -DCMAKE_BUILD_TYPE=Debug; cmake --build ./;",
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },

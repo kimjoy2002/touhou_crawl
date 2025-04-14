@@ -34,6 +34,7 @@ IDirectInputDevice8* Keyboard;
 IDirectInputDevice8* Mouse;
 HANDLE mutx;
 extern HWND hwnd;
+extern std::atomic<bool> g_saveandexit;
 
 
 HANDLE endmutx;
@@ -218,7 +219,7 @@ LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch( msg )
 	{
 	case WM_DESTROY:
-		::PostQuitMessage(0);
+		g_saveandexit = true;
 		break;
 	}
 	return ::DefWindowProc(hwnd, msg, wParam, lParam);
@@ -233,7 +234,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   PSTR cmdLine,
 				   int showCmd)
 {
-
+	g_keyQueue = std::make_unique<KeyInputQueue>();
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))

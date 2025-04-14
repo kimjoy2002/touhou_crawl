@@ -681,6 +681,9 @@ void MainLoop()
 			//waitkeyinput();
 			wiz_mode();
 			break;
+		case '_': //스팀 디버깅
+			steam_mg.debugText();
+			break;
 		case 0x8B:
 			auto_pick_onoff(false);
 			break;

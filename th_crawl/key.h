@@ -9,9 +9,13 @@
 #ifndef  __KEY_H__
 #define  __KEY_H__
 
+#include <queue>
+#include <chrono>
+
 int waitkeyinput(bool direction_ = false, bool immedity_ = false);
 int MoreWait();
 bool isKeyinput();
+
 
 extern bool game_over;
 

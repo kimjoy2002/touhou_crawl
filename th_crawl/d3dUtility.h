@@ -17,9 +17,13 @@
 #include <sstream>
 #include "common.h"
 #include <dinput.h>
+#include <mutex>
+#include <queue>
+#include <condition_variable>
 
 #pragma comment(lib, "d3d9")
 #pragma comment(lib, "d3dx9")
+#pragma comment(lib, "steam_api64")
 #pragma comment(lib, "winmm")
 #pragma comment(lib, "WS2_32")
 
@@ -55,6 +59,28 @@ struct Vertex{
 };
 
 
+
+
+
+struct TimedKey {
+    MSG key;
+    std::chrono::steady_clock::time_point timestamp;
+};
+
+class KeyInputQueue {
+public:
+    void push(MSG key);
+    MSG pop(int timeout_ms = 500); // timeout_ms: 허용된 최대 지연 시간
+    bool try_pop(MSG& key);
+    bool empty();
+
+private:
+    std::queue<TimedKey> queue_;
+    std::mutex mutex_;
+    std::condition_variable cv_;
+};
+
+extern std::unique_ptr<KeyInputQueue>  g_keyQueue;
 
 
 

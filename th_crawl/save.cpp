@@ -30,14 +30,14 @@ void init_save_paths() {
         base /= L"AppData\\LocalLow\\TouhouCrawl\\TouhouCrawl";
         std::filesystem::create_directories(base); // 폴더가 없으면 생성
 
-        save_file = (base / L"save.dat").string();
+        save_file = (base / L"save.sav").string();
         user_name_file = (base / L"user_name.txt").string();
 		replay_path = (base / L"replay").string();
 		morgue_path = (base / L"morgue").string();
 
 		option_mg.init((base / L"config.ini").string());
     } else {
-        save_file = "save.dat";
+        save_file = "save.sav";
         user_name_file ="user_name.txt";
 		replay_path = "replay";
 		morgue_path = "morgue";

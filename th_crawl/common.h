@@ -10,6 +10,7 @@
 #include <d3dx9.h>
 #include <time.h>
 #include <vector>
+#include <unordered_map>
 #include <list>
 #include <stack>
 #include <math.h>
@@ -74,6 +75,36 @@ int randA_1_nonlogic(int x); /*1부터 X까지의 랜덤난수 리턴*/
 bool randB(int x, int point); /*0부터 X가 point를 작거나같을때 true리턴*/
 
 int randC(int dice, int x); /*(dice)d(x)*/
+
+template<typename K, typename V>
+class OrderedMap {
+public:
+    void insert(const K& key, const V& value) {
+        if (map_.find(key) == map_.end()) {
+            entries_.emplace_back(key, value);
+            map_[key] = value;
+        }
+    }
+
+    const std::vector<std::pair<K, V>>& ordered_entries() const {
+        return entries_;
+    }
+    bool empty() {
+        return map_.empty();
+    }
+
+    V find(const K& key) {
+        auto it = map_.find(key);
+        if (it != map_.end()) {
+            return it->second;
+        }
+        return "";
+    }
+
+private:
+    std::vector<std::pair<K, V>> entries_;
+    std::unordered_map<K, V> map_;
+};
 
 
 

@@ -253,25 +253,24 @@ void addItem_temp(item_type item_type_, int item_id, int num);
 extern void start_mainmenu();
 
 
-LOCALIZATION_TYPE getDefaultLang() {
+string getDefaultLang() {
 	string lang = option_mg.getLang();
-    std::transform(lang.begin(), lang.end(), lang.begin(), ::tolower);
+    std::transform(lang.begin(), lang.end(), lang.begin(), ::toupper);
 
-	if(lang == "eng") {
-		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_ENG;
-	}
-	else if (lang == "kor") {
-		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_KOR;
+	if(!lang.empty()) {
+		return lang;
 	} else {
-		return LOCALIZATION_TYPE::LOCALIZATION_TYPE_ENG;
+		return LocalzationManager::baseLang();
 	}
 }
 
 
 void init_localization() {
-	LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT, true);
-	if(getDefaultLang() != LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT) {
-		LocalzationManager::init(getDefaultLang(), false);
+	LocalzationManager::initLocalization();
+	LocalzationManager::init(LocalzationManager::baseLang(), true);
+	string defaultLang = getDefaultLang();
+	if(defaultLang != LocalzationManager::baseLang()) {
+		LocalzationManager::init(defaultLang, false);
 	}
 }
 
@@ -712,6 +711,8 @@ bool option_menu(int value_)
 	char blank[32];
 	sprintf_s(blank,32,"            ");
 
+	string lang = LocalzationManager::current_lang;
+	LOCALIZATION_ENUM_KEY display = LOC_SYSTEM_OPTION_MENU_WINDOWED;
 	while(1)
 	{
 		deletesub();
@@ -726,32 +727,35 @@ bool option_menu(int value_)
 		printsub("======",true,CL_help);
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
-		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE),true,CL_normal);
+		printsub("a - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE) + ": " + LocalzationManager::langString(lang),true,CL_normal);
+		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": 1280 X 720",true,CL_normal);
+		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal);
 		printsub("",true,CL_normal);
-		printsub(LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_ESC),true,CL_normal);
+		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal);
 		
 		changedisplay(DT_SUB_TEXT);
 		int input_ = waitkeyinput(true);
 
-		if(input_ >= 'a' && input_ <= 'a')
+		if(input_ >= 'a' && input_ <= 'c')
 		{
 			if(input_ == 'a') {
-				int cur = (int)LocalzationManager::current_lang;
-
-				cur++;
-				if(cur == LOCALIZATION_TYPE::LOCALIZATION_TYPE_MAX)  {
-					cur = 0;
-				}
-				
-				LocalzationManager::init(LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT, true);
-				if((LOCALIZATION_TYPE)cur != LOCALIZATION_TYPE::LOCALIZATION_TYPE_DEFAULT) {
-					LocalzationManager::init((LOCALIZATION_TYPE)cur, false);
-				}
-				option_mg.setLang(getLocalizationString((LOCALIZATION_TYPE)cur));
+				lang = LocalzationManager::getNextLang(lang);
+			}
+			else if(input_ == 'b') {
+			}
+			else if(input_ == 'c') {
+				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
 			}
 		}
 		else if(input_ == VK_ESCAPE)
 		{
+			if(lang != LocalzationManager::current_lang) {
+				LocalzationManager::init(LocalzationManager::baseLang(), true);
+				if(lang != LocalzationManager::baseLang()) {
+					LocalzationManager::init(lang, false);
+				}
+				option_mg.setLang(lang);
+			}
 			break;
 		}
 

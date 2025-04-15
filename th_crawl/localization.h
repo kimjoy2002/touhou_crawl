@@ -24,16 +24,6 @@
 
 using namespace std;
 
-
-enum LOCALIZATION_TYPE {
-    LOCALIZATION_TYPE_DEFAULT = 1, //LOCALIZATION_TYPE_KOR
-	LOCALIZATION_TYPE_ENG = 0,
-	LOCALIZATION_TYPE_KOR,
-	LOCALIZATION_TYPE_MAX
-};
-
-string getLocalizationString(LOCALIZATION_TYPE type);
-
 class PlaceHolderHelper {
 public:
     string name;
@@ -64,6 +54,7 @@ public:
 
 class LocalzationManager {
 private:
+    static OrderedMap<string, string> localization_type;
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
@@ -168,10 +159,15 @@ private:
 
 
 public:
-    static LOCALIZATION_TYPE current_lang;
+    static string current_lang;
 
-	static void init(LOCALIZATION_TYPE type, bool init_);
+    static string baseLang(){return "ENG";};
+    static void initLocalization();
+	static void init(string type, bool init_);
 
+
+	static string langString(string key);
+	static string getNextLang(string cur);
 	static const string& locString(LOCALIZATION_ENUM_KEY key);
 	static const string& speakString(SPEAK_ENUM_KEY key);
 	static const string& monString(monster_index key);

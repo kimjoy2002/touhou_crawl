@@ -14,9 +14,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 
-LOCALIZATION_TYPE LocalzationManager::current_lang = LOCALIZATION_TYPE_ENG;
+string LocalzationManager::current_lang = "ENG";
+OrderedMap<string, string> LocalzationManager::localization_type;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_enum_reverse_map = createEnumReverseMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
@@ -41,18 +43,7 @@ unordered_set<string> LocalzationManager::english_article = {
 };
 
 
-string getLocalizationString(LOCALIZATION_TYPE type) {
-	switch(type) 
-	{
-	case LOCALIZATION_TYPE_ENG:
-	default:
-		return "ENG";
-	case LOCALIZATION_TYPE_KOR:
-		return "KOR";
-	}
-}
-
-void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
+void LocalzationManager::init(string type, bool init_) {
 	current_lang = type;
 	string filePath;
 
@@ -64,18 +55,11 @@ void LocalzationManager::init(LOCALIZATION_TYPE type, bool init_) {
 		help_command.clear();
 		help_credit.clear();
 	}
+	std::transform(type.begin(), type.end(), type.begin(),
+		[](unsigned char c) { return std::tolower(c); });
 	
-	switch (type)
-	{
-	case LOCALIZATION_TYPE_ENG:
-		filePath = "./data/localization/eng/";
-		break;
-	case LOCALIZATION_TYPE_KOR:
-		filePath = "./data/localization/kor/";
-		break;
-	default:
-		break;
-	}
+	filePath = "./data/localization/" +  type + "/";
+
 	initFileSimple(filePath, "help.txt", help_command);
 	initFileSimple(filePath, "credit.txt", help_credit);
 	initFileSimple(filePath, "wizardhelp.txt", help_wizard);
@@ -130,6 +114,51 @@ D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<Text
 	return currentColor;
 }
 
+void LocalzationManager::initLocalization() {
+	string filepath = "./data/localization/language.txt";
+	ifstream file(filepath);
+	if (file) {
+		string line;
+		bool first_line = true;		
+		while (getline(file, line)) {
+			if (first_line) {
+				//BOM제거
+				first_line = false;
+				if (!line.empty() && static_cast<unsigned char>(line[0]) == 0xEF &&
+					line.size() >= 3 &&
+					static_cast<unsigned char>(line[1]) == 0xBB &&
+					static_cast<unsigned char>(line[2]) == 0xBF) {
+					line = line.substr(3); // BOM 제거
+				}
+			}
+			int pos = line.find(",");
+
+			if(pos != string::npos && pos + 1 < line.size()) {
+				localization_type.insert(line.substr(0,pos),line.substr(pos+1));
+			}
+		}
+	}
+	if(localization_type.empty()) {
+		//기본값
+		localization_type.insert("ENG","English");
+		localization_type.insert("KOR","한국어");
+		if(!file) {
+			std::ofstream outfile(filepath, std::ios::binary);
+			if (outfile.is_open()) {
+				// UTF-8 BOM 쓰기
+				unsigned char bom[] = {0xEF, 0xBB, 0xBF};
+				outfile.write(reinterpret_cast<const char*>(bom), sizeof(bom));
+				
+				for (auto it : localization_type.ordered_entries()) {
+					outfile << it.first << "," << it.second << "\n";
+				}
+				outfile.close();
+			}
+		}
+	}	
+
+}
+
 void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector) {
 	ifstream file(path + filename);
 	if (!file) {
@@ -154,6 +183,27 @@ void LocalzationManager::initFileSimple(const string& path, const string& filena
 
 		color_ = parseMultiColorLine(line, saveVector, color_);
 	}
+}
+
+string LocalzationManager::langString(string key) {
+	return localization_type.find(key);
+}
+
+string LocalzationManager::getNextLang(string cur) {
+	bool next_ = false;
+	string first_;
+	for(pair<string, string> pair_ : localization_type.ordered_entries()) {
+		if(first_.empty()){
+			first_ = pair_.first;
+		}
+		if(next_) {
+			return pair_.first;
+		}
+		if(pair_.first == cur) {
+			next_ = true;
+		}
+	}
+	return first_;
 }
 
 const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO) {} 문법이 이쓰면 formatString으로 바꾸기

@@ -32,6 +32,9 @@ void optionManager::init(string fileName) {
 		GetPrivateProfileString(_T("config"), _T("width"), _T("1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
 
+		GetPrivateProfileString(_T("config"), _T("fullscreen"), _T("false"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		fullscreen = (_tcscmp(szBuf, _T("true")) == 0 || _tcscmp(szBuf, _T("1")) == 0);
+
 		GetPrivateProfileString(_T("config"), _T("bgm_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		bgm_volume = _tstoi(szBuf);
 
@@ -61,6 +64,10 @@ void optionManager::createNewFile(string fileName) {
 	strString = _T("1280");
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
+	
+	strString = _T("false");
+	fullscreen = (_tcscmp((LPCTSTR)strString, _T("true")) == 0 || _tcscmp((LPCTSTR)strString, _T("1")) == 0);
+	WritePrivateProfileString(_T("config"), _T("fullscreen"), tchr, fileName.c_str());
 
 	strString = _T("70");
 	tchr = (TCHAR*)(LPCTSTR)strString;
@@ -82,6 +89,16 @@ void optionManager::createNewFile(string fileName) {
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("language"), tchr, fileName.c_str());
 }
+
+void optionManager::setFullscreen(bool full_value) {
+    fullscreen = full_value; 
+
+	if(!fileName.empty()) {
+        CString strValue = full_value ? _T("true") : _T("false");
+        WritePrivateProfileString(_T("config"), _T("fullscreen"), strValue, fileName.c_str());
+	}
+}
+
 
 void optionManager::setLang(const string& lang_value) {
     lang = lang_value;  // lang이 string일 경우

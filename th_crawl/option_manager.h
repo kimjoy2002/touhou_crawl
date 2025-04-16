@@ -22,6 +22,7 @@ class optionManager {
 
 	int height;
 	int width;
+	bool fullscreen;
 
 	int bgm_volume;
 	int se_volume;
@@ -41,6 +42,9 @@ public:
 	int getWidth() { return width; };
 	int getHeightCommon() { return height; };
 	int getWidthCommon() { return width; };
+	bool getFullscreen() { return fullscreen; };
+	void setFullscreen(bool lang_value);
+
 
 	int getBgmVolume() { return bgm_volume; };
 	int getSeVolume() { return se_volume; };

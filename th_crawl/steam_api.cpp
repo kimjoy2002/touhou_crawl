@@ -22,7 +22,7 @@ steam_manager steam_mg;
 
 
 bool steam_manager::steamInit() {
-	if(0)
+	if(1)
 		return false;
 	bool result_ = SteamAPI_Init();
 	if(result_ == true) {

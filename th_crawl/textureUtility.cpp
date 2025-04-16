@@ -14,7 +14,7 @@
 // extern
 //
 
-extern IDirect3DDevice9* Device; //디바이스포인터
+extern IDirect3DDevice9Ex* DeviceEx; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
 extern D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
 
@@ -67,11 +67,11 @@ bool TextureScale(float x,float y)
 
 bool DrawTexture(IDirect3DTexture9* g_pTempTexture)
 {
-	Device->SetTransform(D3DTS_WORLD, &g_BaseMatrix);
-	Device->SetTexture(0, g_pTempTexture);
-	Device->SetStreamSource(0,g_pVB,0,sizeof(Vertex));
-	Device->SetFVF(D3DFVF_XYZ|D3DFVF_TEX1);
-	if(SUCCEEDED(Device->DrawPrimitive(D3DPT_TRIANGLESTRIP,0,2)))
+	DeviceEx->SetTransform(D3DTS_WORLD, &g_BaseMatrix);
+	DeviceEx->SetTexture(0, g_pTempTexture);
+	DeviceEx->SetStreamSource(0,g_pVB,0,sizeof(Vertex));
+	DeviceEx->SetFVF(D3DFVF_XYZ|D3DFVF_TEX1);
+	if(SUCCEEDED(DeviceEx->DrawPrimitive(D3DPT_TRIANGLESTRIP,0,2)))
 	{
 		D3DXMatrixIdentity(&g_BaseMatrix);
 		return true;

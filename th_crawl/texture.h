@@ -22,6 +22,7 @@ public:
 	~TextureFile();
 	bool loading(IDirect3DDevice9* Device);
 	bool loadingEX(IDirect3DDevice9* Device);
+	bool release();
 };
 
 class textures

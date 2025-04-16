@@ -104,6 +104,9 @@ public:
 	infoBox infobox;
 
 	display_manager();
+	void releaseResources();
+	void onLostResources();
+	bool createResources(IDirect3DDevice9Ex* Device);
 	void Getfontinfor();
 	void draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
 	void text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);

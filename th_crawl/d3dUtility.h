@@ -91,7 +91,7 @@ namespace d3d
 		int width, int height,     // [in] Backbuffer dimensions.
 		bool windowed,             // [in] Windowed (true)or full screen (false).
 		D3DDEVTYPE deviceType,     // [in] HAL or REF
-		IDirect3DDevice9** device);// [out]The created device.
+		IDirect3DDevice9Ex** DeviceEx);// [out]The created device.
 
 	int EnterMsgLoop();
 

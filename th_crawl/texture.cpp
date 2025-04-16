@@ -1860,7 +1860,7 @@ bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 		0,
 		0,
 		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
+		D3DPOOL_DEFAULT,
 		D3DX_FILTER_NONE, //2승수아니어도 제대로(이거 안쓰면 지포스가 아닌 컴에선 찌그러짐 조심)
 		D3DX_DEFAULT,
 		0,
@@ -1872,6 +1872,11 @@ bool TextureFile::loadingEX(IDirect3DDevice9* Device)
 	return true;
 }
 
+bool TextureFile::release() {
+	pTexture->Release();
+	return true;
+
+}
 //-----------------------------------------------------------
 //textures 클래스
 //-----------------------------------------------------------

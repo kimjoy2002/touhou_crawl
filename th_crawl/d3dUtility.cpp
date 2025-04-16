@@ -41,6 +41,7 @@ char string2[10];
 int g_ThreadCnt=0;
 extern HANDLE mutx;
 bool saveexit = false;
+D3DPRESENT_PARAMETERS d3dpp;
 
 
 
@@ -77,7 +78,7 @@ bool d3d::InitD3D(
 	int width, int height,
 	bool windowed,
 	D3DDEVTYPE deviceType,
-	IDirect3DDevice9** device)
+	IDirect3DDevice9Ex** DeviceEx)
 {
 	//
 	// 윈도우창을 생성한다.
@@ -114,8 +115,17 @@ bool d3d::InitD3D(
 	GetWindowSizeFromClientSize(WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,false, option_mg.getWidthCommon(), option_mg.getHeightCommon(),frameX,frameY);
 
 	sprintf_s(temp,50,"touhou crawl %s",version_string);
+	LONG style = windowed  ? (WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU) : WS_POPUP;
+
+	// 창 크기 설정
+	if (!windowed) {
+		width = GetSystemMetrics(SM_CXSCREEN);
+		height = GetSystemMetrics(SM_CYSCREEN);
+		frameX = width;
+		frameY = height;
+	}
 	hwnd = ::CreateWindow("Direct3D9App", temp, 
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		style,
 			0, 0, frameX/*option_mg.getWidth() + 6*/, frameY/*option_mg.getHeight() + 32*/,
 		0, 0 , hInstance, 0); 
 
@@ -137,12 +147,10 @@ bool d3d::InitD3D(
 	HRESULT hr = 0;
 
 	// Step 1: Create the IDirect3D9 object.
+	IDirect3D9Ex* d3d9ex = nullptr;
+    hr = Direct3DCreate9Ex(D3D_SDK_VERSION, &d3d9ex);
 
-	IDirect3D9* d3d9 = 0;
-    d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
-
-    if( !d3d9 )
-	{
+    if (FAILED(hr)) {
 		::MessageBox(0, "Direct3DCreate9() - FAILED", 0, 0);
 		return false;
 	}
@@ -150,7 +158,7 @@ bool d3d::InitD3D(
 	// Step 2: Check for hardware vp.
 
 	D3DCAPS9 caps;
-	d3d9->GetDeviceCaps(D3DADAPTER_DEFAULT, deviceType, &caps);
+	d3d9ex->GetDeviceCaps(D3DADAPTER_DEFAULT, deviceType, &caps);
 
 	int vp = 0;
 	if( caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT )
@@ -158,12 +166,12 @@ bool d3d::InitD3D(
 	else
 		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
 
+	vp |= D3DCREATE_MULTITHREADED;
 	// Step 3: Fill out the D3DPRESENT_PARAMETERS structure.
  
-	D3DPRESENT_PARAMETERS d3dpp;
 	d3dpp.BackBufferWidth            = width;
 	d3dpp.BackBufferHeight           = height;
-	d3dpp.BackBufferFormat           = D3DFMT_A8R8G8B8;
+	d3dpp.BackBufferFormat           = D3DFMT_X8R8G8B8;
 	d3dpp.BackBufferCount            = 1;
 	d3dpp.MultiSampleType            = D3DMULTISAMPLE_NONE;
 	d3dpp.MultiSampleQuality         = 0;
@@ -175,46 +183,52 @@ bool d3d::InitD3D(
 	d3dpp.Flags                      = 0;
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	d3dpp.PresentationInterval       = D3DPRESENT_INTERVAL_IMMEDIATE;
-
+	if (!windowed) {
+		d3dpp.FullScreen_RefreshRateInHz = 60; // 또는 75 등
+	}
 	// Step 4: 
 
-	hr = d3d9->CreateDevice(
+	hr = d3d9ex->CreateDeviceEx(
 		D3DADAPTER_DEFAULT, // primary adapter
 		deviceType,         // device type
 		hwnd,               // window associated with device
 		vp,                 // vertex processing
-	    &d3dpp,             // present parameters
-	    device);            // return created device
+	    &d3dpp,
+		nullptr,             // present parameters
+	    DeviceEx);            // return created device
 
 	if( FAILED(hr) )
 	{
 		// 실패시 16비트 깊이로 다시시도?!
 		d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
 		
-		hr = d3d9->CreateDevice(
+		hr = d3d9ex->CreateDeviceEx(
 			D3DADAPTER_DEFAULT,
 			deviceType,
 			hwnd,
 			vp,
 			&d3dpp,
-			device);
+			nullptr, 
+			DeviceEx);
 
 		if( FAILED(hr) )
 		{
-			d3d9->Release(); // d3d9를 풀어준다.
-			::MessageBox(0, "CreateDevice() - FAILED", 0, 0);
+			char msg[256];
+			sprintf_s(msg, "CreateDeviceEx failed with HRESULT = 0x%08X", hr);
+			MessageBoxA(0, msg, "Error", 0);
+			d3d9ex->Release(); // d3d9를 풀어준다.
 			return false;
 		}
 	}
 
-	(*device)->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);  //앞뒤 모두 그린다.
+	(*DeviceEx)->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);  //앞뒤 모두 그린다.
 	//(*device)->SetRenderState(D3DRS_LIGHTING, FALSE);  //광원효과를 무시한다.(안주면 전부 거매)
-    (*device)->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	(*device)->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-    (*device)->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+    (*DeviceEx)->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	(*DeviceEx)->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+    (*DeviceEx)->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 
 
-	d3d9->Release(); // d3d9를 풀어준다.
+	d3d9ex->Release();
 	
 	return true;
 }
@@ -413,18 +427,22 @@ void InputInitialize(HINSTANCE hinstance)
 void InputUpdate()
 {
 	//Keyboard -> Acquire();
-	Mouse -> Acquire();
+	if(Mouse) {
 
 
-	//CopyMemory(PreviousKeyboardState, CurrentKeyboardState, sizeof(char) * 256);;
-	//Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
+		Mouse -> Acquire();
 
-	PreviousMouseState = CurrentMouseState;
-	Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);
 
-	GetCursorPos(&MousePoint);
+		//CopyMemory(PreviousKeyboardState, CurrentKeyboardState, sizeof(char) * 256);;
+		//Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
 
-	ScreenToClient(hwnd, &MousePoint);
+		PreviousMouseState = CurrentMouseState;
+		Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);
+
+		GetCursorPos(&MousePoint);
+
+		ScreenToClient(hwnd, &MousePoint);
+	}
 
 	//itoa(MousePoint.x, string, 10);
 	//itoa(MousePoint.y, string2, 10);

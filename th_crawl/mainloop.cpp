@@ -704,8 +704,6 @@ void MainLoop()
 	}
 }
 
-
-
 bool option_menu(int value_)
 {
 	char blank[32];
@@ -756,6 +754,13 @@ bool option_menu(int value_)
 				}
 				option_mg.setLang(lang);
 			}
+			if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
+				option_mg.setFullscreen(true);
+			}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
+				option_mg.setFullscreen(false);
+			}
+
+			
 			break;
 		}
 

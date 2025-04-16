@@ -35,16 +35,13 @@
 #include <sstream>
 #include <iomanip>
 
-extern IDirect3DDevice9Ex* DeviceEx; //디바이스포인터
+extern IDirect3DDevice9* Device; //디바이스포인터
 extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
 extern D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
 extern LPD3DXSPRITE g_pSprite; //스프라이트포인터 
 extern ID3DXFont* g_pfont;
 extern HANDLE mutx;
 extern HWND hwnd;
-extern IDirectInput8* Input;
-extern IDirectInputDevice8* Keyboard;
-extern IDirectInputDevice8* Mouse;
 
 display_manager DisplayManager;
 
@@ -62,8 +59,6 @@ int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
 
 void text_dummy::calculateWitdh() {
-	if(g_pfont == nullptr || g_pSprite ==nullptr) 
-		return;
 	RECT rc={ (LONG)0, (LONG)0, 32*17+16, (LONG)(DisplayManager.fontDesc.Height)};
 	g_pfont->DrawTextW(g_pSprite, PreserveTrailingSpaces(text).c_str(), -1, &rc, DT_SINGLELINE | DT_CALCRECT, color);
 	width = rc.right;
@@ -99,44 +94,14 @@ void CalcFPS(float timeDelta)
 	}
 }
 
-extern D3DPRESENT_PARAMETERS d3dpp;
-bool first_reset_fail = false;
-
 bool Display(float timeDelta)
 {
-
-	HRESULT hr = DeviceEx->TestCooperativeLevel();
-	if (hr == D3DERR_DEVICELOST)
-	{
-		Sleep(16); // 과도한 CPU 사용 방지
-		return true;
-	}
-	else if (hr == D3DERR_DEVICENOTRESET)
-	{
-		DisplayManager.onLostResources();
-		HRESULT result = DeviceEx->ResetEx(&d3dpp, nullptr);
-		if (FAILED(result)) {
-			if(!first_reset_fail) {
-				char msg[128];
-				sprintf_s(msg, "D3D9 ResetEx Failed: 0x%08X", result);
-				 MessageBoxA(NULL, msg, "D3D9 ResetEx Error", 0);
-				first_reset_fail = true;
-			}
-            Sleep(500);
-            return true;
-        }
-		// 다시 리소스 생성
-		first_reset_fail = false;
-		DisplayManager.createResources(DeviceEx);
-	
-		return true;
-	}
 	WaitForSingleObject(mutx, INFINITE);
 	CalcFPS(timeDelta);
-	if( DeviceEx ) 
+	if( Device ) 
 	{
-		DeviceEx->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
-		if(SUCCEEDED(DeviceEx->BeginScene())){
+		Device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
+		if(SUCCEEDED(Device->BeginScene())){
 			
 			g_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	
@@ -145,9 +110,9 @@ bool Display(float timeDelta)
 
 			g_pSprite->End();
 
-			DeviceEx->EndScene();
+			Device->EndScene();
 		}
-		DeviceEx->Present(0, 0, 0, 0);
+		Device->Present(0, 0, 0, 0);
 	}
 	
 	ReleaseMutex(mutx);
@@ -162,243 +127,6 @@ log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
 	for(int i=0;i<52;i++)
 		item_view[i] = 0;
 }
-
-void display_manager::releaseResources() {
-	if(g_pSprite != nullptr) {
-		d3d::Release(g_pSprite); 
-		g_pSprite = nullptr;
-	}
-	if(g_pfont != nullptr) {
-		d3d::Release(g_pfont);
-		g_pfont = nullptr;
-	}
-	d3d::Release(g_pVB);  
-
-    texture_title.release();
-
-    for (int i = 0; i < GT_LAST; i++) {
-        texture_god[i].release();
-    }
-
-    /*texture_dungeon01.release();
-    texture_monster01.release();
-    texture_players01.release();
-    texture_item01.release();
-    texture_item02.release();
-    texture_item03.release();
-    texture_laser.release();
-
-    texture_dot_floor.release();
-    texture_dot_wall.release();
-    texture_dot_monster.release();
-    texture_dot_player.release();
-    texture_dot_up.release();
-    texture_dot_down.release();
-    texture_dot_item.release();
-    texture_dot_door.release();
-    texture_dot_temple.release();
-    texture_dot_sea.release();
-    texture_dot_mapping_floor.release();
-    texture_dot_mapping_wall.release();
-
-    texture_sight_rect.release();*/
-	
-	if(Keyboard != NULL)
-	{
-		Keyboard -> Unacquire();
-		Keyboard -> Release();
-		Keyboard = NULL;
-	}
-	if(Mouse != NULL)
-	{
-		Mouse -> Unacquire();
-		Mouse -> Release();
-		Mouse = NULL;
-	}
-
-
-	if(Input != NULL)
-	{
-		Input -> Release();
-		Input = NULL;
-	}
-}
-
-void display_manager::onLostResources() {
-	if(g_pSprite != nullptr) {
-		g_pSprite->OnLostDevice();
-	}
-	if(g_pfont != nullptr) {
-		g_pfont->OnLostDevice();
-	}
-	d3d::Release(g_pVB);  
-
-    texture_title.release();
-
-    for (int i = 0; i < GT_LAST; i++) {
-        texture_god[i].release();
-    }
-
-    texture_dungeon01.release();
-    texture_monster01.release();
-    texture_players01.release();
-    texture_item01.release();
-    texture_item02.release();
-    texture_item03.release();
-    texture_laser.release();
-
-    texture_dot_floor.release();
-    texture_dot_wall.release();
-    texture_dot_monster.release();
-    texture_dot_player.release();
-    texture_dot_up.release();
-    texture_dot_down.release();
-    texture_dot_item.release();
-    texture_dot_door.release();
-    texture_dot_temple.release();
-    texture_dot_sea.release();
-    texture_dot_mapping_floor.release();
-    texture_dot_mapping_wall.release();
-
-    texture_sight_rect.release();
-
-	
-	if(Keyboard != NULL)
-	{
-		Keyboard -> Unacquire();
-		Keyboard -> Release();
-		Keyboard = NULL;
-	}
-	if(Mouse != NULL)
-	{
-		Mouse -> Unacquire();
-		Mouse -> Release();
-		Mouse = NULL;
-	}
-
-
-	if(Input != NULL)
-	{
-		Input -> Release();
-		Input = NULL;
-	}
-}
-
-bool display_manager::createResources(IDirect3DDevice9Ex* DeviceEx) {
-
-	bool return_ = true;
-	D3DXFONT_DESC fontDesc;
-	ZeroMemory(&fontDesc, sizeof(fontDesc));
-	fontDesc.Height = 20;
-	fontDesc.Weight = 500;
-	fontDesc.Width = 8;
-	fontDesc.Quality = CLEARTYPE_QUALITY;
-	fontDesc.Italic = false;
-	fontDesc.CharSet = DEFAULT_CHARSET;
-	fontDesc.OutputPrecision = OUT_DEFAULT_PRECIS;
-	fontDesc.PitchAndFamily = FF_DONTCARE;
-	fontDesc.MipLevels = 1;
-
-	strcpy_s(fontDesc.FaceName, sizeof(fontDesc.FaceName), "D2Coding");
-	
-
-	HRESULT hr = D3DXCreateFontIndirect(DeviceEx, &fontDesc, &g_pfont);
-
-    if (FAILED(hr) || g_pfont == nullptr)
-    {
-		::MessageBox(0, "Font loading fail.", 0, 0);
-    }
-
-	if( FAILED(D3DXCreateSprite(DeviceEx, &g_pSprite)))
-		return_ =  false;
-
-	Getfontinfor();
-
-
-	hr = DeviceEx->CreateVertexBuffer(
-		4 * sizeof(Vertex),
-		NULL,
-		D3DFVF_XYZ|D3DFVF_TEX1,
-		D3DPOOL_DEFAULT,
-		&g_pVB,
-		NULL);
-
-	if (FAILED(hr)) {
-		char buf[128];
-		sprintf_s(buf, "CreateVertexBuffer failed: 0x%08X", hr);
-		MessageBoxA(NULL, buf, "VertexBuffer Error", 0);
-	}
-	Vertex* pVertices;
-
-	if(SUCCEEDED(g_pVB->Lock(0,0, (void**)&pVertices, 0))){
-		pVertices[0] = Vertex( -1.0f, 1.0f, 1.0f, 0.0f, 0.0f);
-		pVertices[1] = Vertex( 1.0f, 1.0f, 1.0f, 1.0f, 0.0f);
-		pVertices[2] = Vertex( -1.0f, -1.0f, 1.0f, 0.0f, 1.0f);
-		pVertices[3] = Vertex( 1.0f, -1.0f, 1.0f, 1.0f, 1.0f);
-		g_pVB->Unlock();
-	}
-
-	D3DXMatrixIdentity(&g_BaseMatrix);
-
-	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
-	if(!texture_title.loadingEX(DeviceEx))
-		return_ = false;
-
-	for (int i = 0; i < GT_LAST; i++)
-	{
-		int size_ = strlen(texture_god[i].name);
-		if (size_>1 && !texture_god[i].loadingEX(DeviceEx))
-			return_ = false;
-	}
-
-	if(!texture_dungeon01.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_monster01.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_players01.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_item01.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_item02.loadingEX(DeviceEx))
-		return_ = false;
-	if (!texture_item03.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_laser.loadingEX(DeviceEx))
-		return_ = false;
-	
-
-
-	if(!texture_dot_floor.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_wall.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_monster.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_player.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_up.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_down.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_item.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_door.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_temple.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_sea.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_mapping_floor.loadingEX(DeviceEx))
-		return_ = false;
-	if(!texture_dot_mapping_wall.loadingEX(DeviceEx))
-		return_ = false;
-	
-	if(!texture_sight_rect.loadingEX(DeviceEx))
-		return_ = false;
-
-	return return_;
-}
-
 void display_manager::Getfontinfor()
 {
 	g_pfont->GetDesc(&fontDesc);

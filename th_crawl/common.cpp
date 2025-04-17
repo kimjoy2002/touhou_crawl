@@ -7,7 +7,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
-
+#include <DirectXMath.h> 
 using namespace std;
 
 
@@ -184,7 +184,7 @@ int rand_int_with_nonlogic(int min, int max)
 
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y)
 {
-	return atan2(target_y - start_y, target_x - start_x) * 180 / D3DX_PI;
+	return atan2(target_y - start_y, target_x - start_x) * 180 / DirectX::XM_PI;
 
 }
 

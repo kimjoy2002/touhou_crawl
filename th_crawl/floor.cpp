@@ -43,7 +43,7 @@ void floor_effect::LoadDatas(FILE *fp)
 	LoadData<int>(fp, time);
 	LoadData<parent_type>(fp, parent);
 }
-bool floor_effect::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
+bool floor_effect::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
 {
 	bool return_ = false;
 	if(time>0)

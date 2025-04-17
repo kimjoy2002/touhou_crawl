@@ -69,7 +69,7 @@ public:
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
 	bool isStair(){ return (tile >= DG_DOWN_STAIR && tile <= DG_RETURN_STAIR); };
 	bool isTemple(){ return (tile >= DG_TEMPLE_FIRST && tile <= DG_TEMPLE_LAST); };
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color, int count_)
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, D3DCOLOR color, int count_)
 	{
 		bool temp;
 		temp = img_dungeon01[tile].draw(pSprite,x,y,color);
@@ -79,7 +79,7 @@ public:
 		}
 		return temp;
 	}
-	bool draw(LPD3DXSPRITE pSprite, int new_tile, float x, float y, D3DCOLOR color, int count_)
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, int new_tile, float x, float y, D3DCOLOR color, int count_)
 	{
 		bool temp;
 		temp = img_dungeon01[new_tile].draw(pSprite, x, y, color);
@@ -255,8 +255,8 @@ public:
 	int getAutoTileNum(unsigned char bit);
 	void calculateAutoTile(coord_def pos, AUTOTILE_KIND kind);
 	void allCalculateAutoTile();
-	void innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight);
-	void drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight);
+	void innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight);
+	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight);
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
 	monster* AddMonster(int id_, int flag_, coord_def position_, int time_ = 0);

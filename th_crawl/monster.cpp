@@ -1758,13 +1758,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	}
 	return true;
 }
-bool monster::simple_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
+bool monster::simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
 {
 	bool return_ = false;
 	return_ = image->draw(pSprite, x_, y_,D3DCOLOR_XRGB(120,120,255));
 	return return_;
 }
-bool monster::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
+bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
 {
 	bool return_ = false;
 	if (s_glow) {

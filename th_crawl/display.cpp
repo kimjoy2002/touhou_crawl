@@ -34,12 +34,14 @@
 #include "localization.h"
 #include <sstream>
 #include <iomanip>
+#include <wrl/client.h>  
 
-extern IDirect3DDevice9* Device; //디바이스포인터
-extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
-extern D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
-extern LPD3DXSPRITE g_pSprite; //스프라이트포인터 
-extern ID3DXFont* g_pfont;
+extern ID3D11Device* g_pd3dDevice;
+extern ID3D11DeviceContext* g_pImmediateContext;
+extern IDXGISwapChain*         g_pSwapChain;
+extern ID3D11RenderTargetView* g_pRenderTargetView;
+extern shared_ptr<DirectX::SpriteBatch> g_pSprite; //스프라이트포인터 
+extern shared_ptr<DirectX::SpriteFont> g_pfont;
 extern HANDLE mutx;
 extern HWND hwnd;
 
@@ -59,9 +61,13 @@ int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
 
 void text_dummy::calculateWitdh() {
-	RECT rc={ (LONG)0, (LONG)0, 32*17+16, (LONG)(DisplayManager.fontDesc.Height)};
-	g_pfont->DrawTextW(g_pSprite, PreserveTrailingSpaces(text).c_str(), -1, &rc, DT_SINGLELINE | DT_CALCRECT, color);
-	width = rc.right;
+	if (!g_pfont) return;
+
+	DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(PreserveTrailingSpaces(text).c_str());
+	DirectX::XMFLOAT2 size;
+	DirectX::XMStoreFloat2(&size, sizeVec);
+
+	width = size.x;
 }
 
 infoBox::infoBox() 
@@ -73,7 +79,7 @@ infoBox::infoBox()
 	draw = false;
 
 }	
-stateBox::stateBox(LPD3DXSPRITE pSprite_, ID3DXFont* pfont_, RECT start_rc_):
+stateBox::stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, shared_ptr<DirectX::SpriteFont> pfont_, RECT start_rc_):
 pSprite(pSprite_), pfont(pfont_), start_rc(start_rc_), rc(start_rc_),
 width(34), current(0)
 {
@@ -94,25 +100,38 @@ void CalcFPS(float timeDelta)
 	}
 }
 
+
+extern ID3D11Device* g_pd3dDevice;
+extern ID3D11DeviceContext* g_pImmediateContext;
+extern IDXGISwapChain*         g_pSwapChain;
+extern ID3D11RenderTargetView* g_pRenderTargetView;
+
+extern Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
+
+
+
 bool Display(float timeDelta)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	CalcFPS(timeDelta);
-	if( Device ) 
+	if (g_pImmediateContext && g_pRenderTargetView)
 	{
-		Device->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0,0,0), 1.0f, 0);
-		if(SUCCEEDED(Device->BeginScene())){
-			
-			g_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-	
-			//ddd
-			DisplayManager.draw(g_pSprite, g_pfont);
+		// Clear background (검정색)
+		const float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		g_pImmediateContext->ClearRenderTargetView(g_pRenderTargetView, clearColor);
 
-			g_pSprite->End();
 
-			Device->EndScene();
-		}
-		Device->Present(0, 0, 0, 0);
+		g_pSprite->Begin(
+            DirectX::SpriteSortMode_Deferred,
+            nullptr,
+            g_pPointSampler.Get(), // ✅ POINT filtering
+            nullptr, nullptr);
+
+		DisplayManager.draw(g_pSprite, g_pfont);
+		
+		g_pSprite->End();
+
+		g_pSwapChain->Present(1, 0);
 	}
 	
 	ReleaseMutex(mutx);
@@ -129,10 +148,24 @@ log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
 }
 void display_manager::Getfontinfor()
 {
-	g_pfont->GetDesc(&fontDesc);
-	log_length = (option_mg.getHeight()-50) / fontDesc.Height;
+	if (!g_pfont) return;
+
+	// 예시 텍스트로 평균적인 너비/높이 측정
+	std::wstring sample = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(sample.c_str());
+	DirectX::XMFLOAT2 size;
+	DirectX::XMStoreFloat2(&size, sizeVec);
+
+	// 폰트 높이 = 문자열 높이
+	// 폰트 폭 = 평균 글자 폭 = 전체 폭 / 글자 수
+	fontDesc.Height = size.y;
+	fontDesc.Width = size.x / sample.length();
+	fontDesc.Size = fontDesc.Height; // 실제 폰트 크기와 거의 일치
+
+	// 로그 영역 크기 계산
+	log_length = (option_mg.getHeight() - 50) / fontDesc.Height;
 }
-void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	switch(state)
 	{
@@ -172,36 +205,63 @@ void display_manager::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-
-int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     if (!pFont || !text || !pRect) {
         return 0;
     }
 
-    return pFont->DrawTextW(pSprite, text, count, pRect, format, color);
+	std::wstring wtext(text);
+
+    // 문자열 길이 제한
+    if (count >= 0 && count < (int)wtext.size()) {
+        wtext = wtext.substr(0, count);
+    }
+
+    // 색상 변환
+    DirectX::XMVECTOR colorVec = D3DCOLOR_to_XMVECTOR(color);
+
+    // 문자열 크기 측정
+    DirectX::XMVECTOR sizeVec = pFont->MeasureString(wtext.c_str());
+    DirectX::XMFLOAT2 size;
+    DirectX::XMStoreFloat2(&size, sizeVec);
+
+    // 정렬 계산
+    float x = (float)pRect->left;
+    float y = (float)pRect->top;
+
+    if (format & DT_CENTER)
+        x = (pRect->left + pRect->right - size.x) / 2.0f;
+    else if (format & DT_RIGHT)
+        x = (float)pRect->right - size.x;
+
+    if (format & DT_VCENTER)
+        y = (pRect->top + pRect->bottom - size.y) / 2.0f;
+    else if (format & DT_BOTTOM)
+        y = (float)pRect->bottom - size.y;
+
+    // Draw
+    pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
+
+    return (int)wtext.size();  // 반환값은 출력한 글자 수
 }
 
 
-int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     if (!pFont || !text || !pRect) {
         return 0;
     }
 
-    // UTF-8 문자열을 UTF-16으로 변환
-    std::wstring utf16Text = ConvertUTF8ToUTF16(text);
-    if (utf16Text.empty()) {
-        return 0;
-    }
-
-    // DrawTextW 함수 호출
-    return pFont->DrawTextW(pSprite, utf16Text.c_str(), count, pRect, format, color);
+    // UTF-8 → UTF-16 변환
+    std::wstring wtext = ConvertUTF8ToUTF16(text);
+    if (wtext.empty()) return 0;
+	return DrawTextUTF8(pFont, pSprite, wtext.c_str(), count, pRect, format, color);
 }
 
-int DrawTextUTF8(ID3DXFont* pFont, LPD3DXSPRITE pSprite, const std::string& text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const std::string& text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     return DrawTextUTF8(pFont, pSprite, text.c_str(), count, pRect, format, color);
 }
 
-void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	if(image)
 		image->draw(pSprite,255);
@@ -209,7 +269,7 @@ void display_manager::text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	DrawTextUTF8(pfont, pSprite, text.c_str(), -1, &rc, DT_NOCLIP,D3DCOLOR_XRGB(200,200,200));
 }
 
-void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	stringstream ss;
@@ -266,7 +326,7 @@ void display_manager::spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		}
 	}
 }
-void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	int num = 0;
 	RECT rc = { 30, 10 - move, option_mg.getWidth(), option_mg.getHeight() };
@@ -533,7 +593,7 @@ void display_manager::iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	rc.top += move + 64;
 	max_y = (rc.top - option_mg.getHeight()>0 ? rc.top - option_mg.getHeight() : 0);
 }
-void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {	
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	int i =0;
@@ -556,7 +616,7 @@ void display_manager::property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 	return;
 }
-void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 
@@ -620,7 +680,7 @@ void display_manager::skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	int skt = 0, i=0; 
@@ -796,7 +856,7 @@ void display_manager::skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 
 }
-void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	RECT rc={30, 10, option_mg.getWidth(), option_mg.getHeight()};
 	ostringstream ss;
@@ -1321,7 +1381,7 @@ void display_manager::state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 
 }
 
-void display_manager::game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	int sight_x = 12;
 	int sight_y = 10;
@@ -2668,7 +2728,7 @@ void stateBox::enter(display_manager* display)
 	rc.top += display->fontDesc.Height;
 	current = 0;
 }
-void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, string message)
+void display_manager::CheckMouseInfo(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, RECT& rc, int width_, int height_, string message)
 {
 	if (MousePoint.x >= rc.left*scale_x && MousePoint.x <= (rc.left + width_)*scale_x &&
 		MousePoint.y >= rc.top*scale_y && MousePoint.y <= (rc.top + height_)*scale_y
@@ -2678,7 +2738,7 @@ void display_manager::CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, REC
 		infobox.setBox(MousePoint.x/ scale_x, MousePoint.y/ scale_y, message);
 	}
 }
-void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	if (infobox.draw)
 	{
@@ -2698,7 +2758,7 @@ void display_manager::drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 		DrawTextUTF8(pfont,pSprite, infobox.info.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
 	}
 }
-void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	RECT rc={30, 10-move, option_mg.getWidth(), option_mg.getHeight()};
 	string s;
@@ -2875,7 +2935,7 @@ void display_manager::item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	max_y = (rc.top-option_mg.getHeight()>0?rc.top-option_mg.getHeight():0);
 }
 
-void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::log_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	//텍스트(위쪽에 숏로그)그리기
 	if(!text_log.text_list.empty())
@@ -2927,7 +2987,7 @@ void display_manager::log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
 	}
 }
 
-void display_manager::sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont)
+void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	if (image)
 		image->draw(pSprite, 255);

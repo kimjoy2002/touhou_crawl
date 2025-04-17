@@ -19,18 +19,13 @@
 #include "FSM.h"
 #include "option_manager.h"
 #include "soundmanager.h"
+#include <wrl/client.h>  
 
 
 //
 // 전역
 //
-IDirect3DDevice9* Device = NULL; //디바이스포인터
-IDirect3DVertexBuffer9* g_pVB = NULL; //버텍스버퍼포인터
-D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
-LPD3DXSPRITE g_pSprite = NULL; //스프라이트포인터 
-ID3DXFont* g_pfont = NULL;
 IDirectInput8* Input;
-IDirectInputDevice8* Keyboard;
 IDirectInputDevice8* Mouse;
 HANDLE mutx;
 extern HWND hwnd;
@@ -45,6 +40,18 @@ extern void init_identify();
 
 
 
+Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
+
+void InitSampler(ID3D11Device* device)
+{
+    D3D11_SAMPLER_DESC sampDesc = {};
+    sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT; // ✅ 필터 핵심
+    sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+    sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+    sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+    device->CreateSamplerState(&sampDesc, &g_pPointSampler);
+}
 
 
 
@@ -56,115 +63,97 @@ void LoadEmbeddedFont(const std::wstring& fontPath)
 	}
 }
 
+extern ID3D11Device* g_pd3dDevice;
+extern ID3D11DeviceContext* g_pImmediateContext;
+shared_ptr<DirectX::SpriteBatch> g_pSprite = NULL; //스프라이트포인터 
+shared_ptr<DirectX::SpriteFont> g_pfont = NULL;
 //
 // 초기화 함수
 //
 bool Setup()
 { 
-	LoadEmbeddedFont(L"./data/font/D2Coding-Ver1.3.2-20180524.ttf");
-
 	bool return_ = true;
-	D3DXFONT_DESC fontDesc;
-	ZeroMemory(&fontDesc, sizeof(fontDesc));
-	fontDesc.Height = 20;
-	fontDesc.Weight = 500;
-	fontDesc.Width = 8;
-	fontDesc.Quality = CLEARTYPE_QUALITY;
-	fontDesc.Italic = false;
-	fontDesc.CharSet = DEFAULT_CHARSET;
-	fontDesc.OutputPrecision = OUT_DEFAULT_PRECIS;
-	fontDesc.PitchAndFamily = FF_DONTCARE;
-	fontDesc.MipLevels = 1;
 
-	strcpy_s(fontDesc.FaceName, sizeof(fontDesc.FaceName), "D2Coding");
+	InitSampler(g_pd3dDevice);
+	// 글꼴 로드 (.spritefont 방식)
+	g_pfont = std::make_shared<DirectX::SpriteFont>(
+		g_pd3dDevice,
+		L"./data/font/D2Coding_16.spritefont");
+
+	// SpriteBatch 생성
+	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
+
+
+	// bool return_ = true;
+	// D3DXFONT_DESC fontDesc;
+	// ZeroMemory(&fontDesc, sizeof(fontDesc));
+	// fontDesc.Height = 20;
+	// fontDesc.Weight = 500;
+	// fontDesc.Width = 8;
+	// fontDesc.Quality = CLEARTYPE_QUALITY;
+	// fontDesc.Italic = false;
+	// fontDesc.CharSet = DEFAULT_CHARSET;
+	// fontDesc.OutputPrecision = OUT_DEFAULT_PRECIS;
+	// fontDesc.PitchAndFamily = FF_DONTCARE;
+	// fontDesc.MipLevels = 1;
+	// SpriteBatch 생성
+	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
+
 	
-
-	HRESULT hr = D3DXCreateFontIndirect(Device, &fontDesc, &g_pfont);
-
-    if (FAILED(hr) || g_pfont == nullptr)
-    {
-		::MessageBox(0, "Font loading fail.", 0, 0);
-    }
-
-	if( FAILED(D3DXCreateSprite(Device, &g_pSprite)))
-		return_ =  false;
-
-	Device->CreateVertexBuffer(
-		4 * sizeof(Vertex),
-		NULL,
-		D3DFVF_XYZ|D3DFVF_TEX1,
-		D3DPOOL_MANAGED,
-		&g_pVB,
-		NULL);
-
-	Vertex* pVertices;
-
-	if(SUCCEEDED(g_pVB->Lock(0,0, (void**)&pVertices, 0))){
-		pVertices[0] = Vertex( -1.0f, 1.0f, 1.0f, 0.0f, 0.0f);
-		pVertices[1] = Vertex( 1.0f, 1.0f, 1.0f, 1.0f, 0.0f);
-		pVertices[2] = Vertex( -1.0f, -1.0f, 1.0f, 0.0f, 1.0f);
-		pVertices[3] = Vertex( 1.0f, -1.0f, 1.0f, 1.0f, 1.0f);
-		g_pVB->Unlock();
-	}
-
-	D3DXMatrixIdentity(&g_BaseMatrix);
-	map_list.random_number = (unsigned int)time(NULL);
-	init_nonlogic_seed((unsigned long)time(NULL));
-
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
-	if(!texture_title.loadingEX(Device))
+	if(!texture_title.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 
 	for (int i = 0; i < GT_LAST; i++)
 	{
 		int size_ = strlen(texture_god[i].name);
-		if (size_>1 && !texture_god[i].loadingEX(Device))
+		if (size_>1 && !texture_god[i].loading(g_pd3dDevice, g_pImmediateContext))
 			return_ = false;
 	}
 
-	if(!texture_dungeon01.loadingEX(Device))
+	if(!texture_dungeon01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_monster01.loadingEX(Device))
+	if(!texture_monster01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_players01.loadingEX(Device))
+	if(!texture_players01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_item01.loadingEX(Device))
+	if(!texture_item01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_item02.loadingEX(Device))
+	if(!texture_item02.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if (!texture_item03.loadingEX(Device))
+	if (!texture_item03.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_laser.loadingEX(Device))
+	if(!texture_laser.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 	
 
 
-	if(!texture_dot_floor.loadingEX(Device))
+	if(!texture_dot_floor.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_wall.loadingEX(Device))
+	if(!texture_dot_wall.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_monster.loadingEX(Device))
+	if(!texture_dot_monster.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_player.loadingEX(Device))
+	if(!texture_dot_player.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_up.loadingEX(Device))
+	if(!texture_dot_up.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_down.loadingEX(Device))
+	if(!texture_dot_down.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_item.loadingEX(Device))
+	if(!texture_dot_item.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_door.loadingEX(Device))
+	if(!texture_dot_door.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_temple.loadingEX(Device))
+	if(!texture_dot_temple.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_sea.loadingEX(Device))
+	if(!texture_dot_sea.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_mapping_floor.loadingEX(Device))
+	if(!texture_dot_mapping_floor.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
-	if(!texture_dot_mapping_wall.loadingEX(Device))
+	if(!texture_dot_mapping_wall.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 	
-	if(!texture_sight_rect.loadingEX(Device))
+	if(!texture_sight_rect.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 
 
@@ -186,16 +175,9 @@ bool Setup()
 void Cleanup()
 {
 	WaitForSingleObject(endmutx, INFINITE);
-	timeEndPeriod(1); 
-	d3d::Release(g_pVB);  
-	d3d::Release(g_pSprite); 
-	d3d::Release(g_pfont);
-	if(Keyboard != NULL)
-	{
-		Keyboard -> Unacquire();
-		Keyboard -> Release();
-		Keyboard = NULL;
-	}
+	timeEndPeriod(1);
+	if (g_pSprite) { g_pSprite = nullptr; }
+	if (g_pfont)   { g_pfont = nullptr; }
 	if(Mouse != NULL)
 	{
 		Mouse -> Unacquire();
@@ -237,10 +219,10 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	g_keyQueue = std::make_unique<KeyInputQueue>();
 	init_save_paths();
 	//random_number = (unsigned int)time(NULL);
-	if(!d3d::InitD3D(hinstance,
-		option_mg.getWidth(), option_mg.getHeight(), true, D3DDEVTYPE_HAL, &Device))
+	if(!d3d::InitD3D11(hinstance,
+		option_mg.getWidth(), option_mg.getHeight(), true))
 	{
-		::MessageBox(0, "InitD3D fail", 0, 0);
+		::MessageBox(0, "InitD3D11 fail", 0, 0);
 		return 0;
 	}
 		
@@ -254,7 +236,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 
 	Cleanup();
 
-	Device->Release();
+	g_pd3dDevice->Release();
 	return 0;
 }
 

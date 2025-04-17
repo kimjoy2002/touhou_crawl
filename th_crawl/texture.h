@@ -17,11 +17,10 @@ class TextureFile
 {
 public:
 	LPCSTR name;
-	IDirect3DTexture9* pTexture;
+	ID3D11ShaderResourceView* pTexture;
 	TextureFile(LPCSTR _name);
 	~TextureFile();
-	bool loading(IDirect3DDevice9* Device);
-	bool loadingEX(IDirect3DDevice9* Device);
+    bool loading(ID3D11Device* device, ID3D11DeviceContext* context);
 };
 
 class textures
@@ -38,13 +37,13 @@ public:
 	textures(TextureFile* _texture, int mon_num);
 	textures(TextureFile* _texture);
 	~textures();
-	bool draw(LPD3DXSPRITE pSprite, int alphas);
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, int alphas);
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color);
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, int alphas);
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color);
-	bool draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas);
-	bool draw(LPD3DXSPRITE pSprite, RECT rc, int alphas);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, int alphas);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, int alphas);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, D3DCOLOR color);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, int alphas);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, RECT rc, int alphas);
 	bool isNormal() { return normal; }
 };
 

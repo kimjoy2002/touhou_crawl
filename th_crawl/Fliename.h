@@ -40,7 +40,7 @@ const char imgfile_dot_temple[] = "./data/dot/te.png";
 const char imgfile_dot_sea[] = "./data/dot/se.png";
 const char imgfile_dot_mapping_floor[] = "./data/dot/mf.png";
 const char imgfile_dot_mapping_wall[] = "./data/dot/mw.png";
-const char imgfile_sight_rect[] = "./data/dot/sight.tga";
+const char imgfile_sight_rect[] = "./data/dot/sight.png";
 
 //여기에 추가하면 monster_texture.h, texture.h, texture.cpp
 

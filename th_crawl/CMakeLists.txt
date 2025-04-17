@@ -30,9 +30,16 @@ if (MSVC)
     add_definitions(-D_HAS_STD_BYTE=0)
 endif()
 
-set(DIRECTX_SDK "C:/Program Files (x86)/Microsoft DirectX SDK (June 2010)")
-include_directories(${DIRECTX_SDK}/Include)
-link_directories(${DIRECTX_SDK}/Lib/${ARCH})
+
+
+
+
+set(DirectXTK "F:/Download/DirectXTK-main/DirectXTK-main/")
+include_directories(${DirectXTK}/Inc)
+link_directories(${DirectXTK}/Bin/Desktop_2019/x64/Debug)
+set(DirectXTK_LIB DirectXTK)
+
+
 
 set(STEAMWORKS_SDK "E:/steamworks_sdk/sdk")
 include_directories(${STEAMWORKS_SDK}/public)
@@ -49,7 +56,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:WINDOWS)
-target_link_libraries(${PROJECT_NAME} d3d9 d3dx9 ${STEAM_API_LIB})
+target_link_libraries(${PROJECT_NAME} d3d11 ${STEAM_API_LIB} ${DirectXTK_LIB})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug Build")

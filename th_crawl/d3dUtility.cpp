@@ -14,11 +14,11 @@
 #include "soundmanager.h"
 
 
+ID3D11Device*           g_pd3dDevice = nullptr;
+ID3D11DeviceContext*    g_pImmediateContext = nullptr;
+IDXGISwapChain*         g_pSwapChain = nullptr;
+ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
 
-//디바이스
-extern IDirectInput8* Input;
-extern IDirectInputDevice8* Keyboard;
-extern IDirectInputDevice8* Mouse;
 extern const char *version_string;
 
 extern HANDLE endmutx;
@@ -30,8 +30,6 @@ extern void Initialize();
 std::atomic<bool> g_shutdownRequested = false;
 std::atomic<bool> g_saveandexit = false;
 
-char PreviousKeyboardState[256];
-char CurrentKeyboardState[256];
 DIMOUSESTATE PreviousMouseState;
 DIMOUSESTATE CurrentMouseState;
 POINT MousePoint;
@@ -72,152 +70,64 @@ unsigned int WINAPI SoundLoop(void *arg);
 unsigned int WINAPI GameLoop(void *arg);
 unsigned int WINAPI DrawLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
-bool d3d::InitD3D(
-	HINSTANCE hInstance,
-	int width, int height,
-	bool windowed,
-	D3DDEVTYPE deviceType,
-	IDirect3DDevice9** device)
-{
-	//
-	// 윈도우창을 생성한다.
-	//
+bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
+    WNDCLASS wc = {};
+    wc.style = CS_HREDRAW | CS_VREDRAW;
+    wc.lpfnWndProc = d3d::WndProc;
+    wc.hInstance = hInstance;
+    wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    wc.lpszClassName = "D3D11WindowClass";
+    RegisterClass(&wc);
 
+	char temp[64];
+	sprintf_s(temp,64,"touhou crawl %s",version_string);
+    hwnd = CreateWindow("D3D11WindowClass", temp, WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, hInstance, nullptr);
 
-	WNDCLASS wc;
+    if (!hwnd) return false;
 
-	wc.style         = CS_HREDRAW | CS_VREDRAW;
-	wc.lpfnWndProc   = (WNDPROC)d3d::WndProc; 
-	wc.cbClsExtra    = 0;
-	wc.cbWndExtra    = 0;
-	wc.hInstance     = hInstance;
-	wc.hIcon         = LoadIcon(0, IDI_APPLICATION);
-	wc.hCursor       = LoadCursor(0, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
-	wc.lpszMenuName  = 0;
-	wc.lpszClassName = "Direct3D9App";
+    DXGI_SWAP_CHAIN_DESC sd = {};
+    sd.BufferCount = 1;
+    sd.BufferDesc.Width = width;
+    sd.BufferDesc.Height = height;
+    sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+    sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+    sd.OutputWindow = hwnd;
+    sd.SampleDesc.Count = 1;
+    sd.Windowed = windowed;
 
-	if( !RegisterClass(&wc) ) 
-	{
-		::MessageBox(0, "RegisterClass() - FAILED", 0, 0);
-		return false;
-	}
-		
-	char temp[50];
+    HRESULT hr = D3D11CreateDeviceAndSwapChain(
+        nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0, D3D11_SDK_VERSION,
+        &sd, &g_pSwapChain, &g_pd3dDevice, nullptr, &g_pImmediateContext);
 
-	
-	int frameX, frameY;
-	//int captionY;
-	//frameX = GetSystemMetrics(SM_CXFRAME);
-	//frameY = GetSystemMetrics(SM_CYFRAME);
-	//captionY = GetSystemMetrics(SM_CYCAPTION);
-	GetWindowSizeFromClientSize(WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,false, option_mg.getWidthCommon(), option_mg.getHeightCommon(),frameX,frameY);
+    if (FAILED(hr)) return false;
 
-	sprintf_s(temp,50,"touhou crawl %s",version_string);
-	hwnd = ::CreateWindow("Direct3D9App", temp, 
-		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
-			0, 0, frameX/*option_mg.getWidth() + 6*/, frameY/*option_mg.getHeight() + 32*/,
-		0, 0 , hInstance, 0); 
+    ID3D11Texture2D* pBackBuffer = nullptr;
+    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
+    if (FAILED(hr)) return false;
 
-	if( !hwnd )
-	{
-		::MessageBox(0, "CreateWindow() - FAILED", 0, 0);
-		return false;
-	}
+    hr = g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
+    pBackBuffer->Release();
+    if (FAILED(hr)) return false;
 
+    g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
 
-	::ShowWindow(hwnd, SW_SHOW);
+    D3D11_VIEWPORT vp;
+    vp.Width = (FLOAT)width;
+    vp.Height = (FLOAT)height;
+    vp.MinDepth = 0.0f;
+    vp.MaxDepth = 1.0f;
+    vp.TopLeftX = 0;
+    vp.TopLeftY = 0;
+    g_pImmediateContext->RSSetViewports(1, &vp);
+
+    ShowWindow(hwnd, SW_SHOW);
 	InputInitialize(hInstance);
-	::UpdateWindow(hwnd);
+    UpdateWindow(hwnd);
 
-	//
-	// 다이렉트3d 초기화
-	//
-
-	HRESULT hr = 0;
-
-	// Step 1: Create the IDirect3D9 object.
-
-	IDirect3D9* d3d9 = 0;
-    d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
-
-    if( !d3d9 )
-	{
-		::MessageBox(0, "Direct3DCreate9() - FAILED", 0, 0);
-		return false;
-	}
-
-	// Step 2: Check for hardware vp.
-
-	D3DCAPS9 caps;
-	d3d9->GetDeviceCaps(D3DADAPTER_DEFAULT, deviceType, &caps);
-
-	int vp = 0;
-	if( caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT )
-		vp = D3DCREATE_HARDWARE_VERTEXPROCESSING;
-	else
-		vp = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
-
-	// Step 3: Fill out the D3DPRESENT_PARAMETERS structure.
- 
-	D3DPRESENT_PARAMETERS d3dpp;
-	d3dpp.BackBufferWidth            = width;
-	d3dpp.BackBufferHeight           = height;
-	d3dpp.BackBufferFormat           = D3DFMT_A8R8G8B8;
-	d3dpp.BackBufferCount            = 1;
-	d3dpp.MultiSampleType            = D3DMULTISAMPLE_NONE;
-	d3dpp.MultiSampleQuality         = 0;
-	d3dpp.SwapEffect                 = D3DSWAPEFFECT_DISCARD; 
-	d3dpp.hDeviceWindow              = hwnd;
-	d3dpp.Windowed                   = windowed;
-	d3dpp.EnableAutoDepthStencil     = true; 
-	d3dpp.AutoDepthStencilFormat     = D3DFMT_D24S8;
-	d3dpp.Flags                      = 0;
-	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
-	d3dpp.PresentationInterval       = D3DPRESENT_INTERVAL_IMMEDIATE;
-
-	// Step 4: 
-
-	hr = d3d9->CreateDevice(
-		D3DADAPTER_DEFAULT, // primary adapter
-		deviceType,         // device type
-		hwnd,               // window associated with device
-		vp,                 // vertex processing
-	    &d3dpp,             // present parameters
-	    device);            // return created device
-
-	if( FAILED(hr) )
-	{
-		// 실패시 16비트 깊이로 다시시도?!
-		d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
-		
-		hr = d3d9->CreateDevice(
-			D3DADAPTER_DEFAULT,
-			deviceType,
-			hwnd,
-			vp,
-			&d3dpp,
-			device);
-
-		if( FAILED(hr) )
-		{
-			d3d9->Release(); // d3d9를 풀어준다.
-			::MessageBox(0, "CreateDevice() - FAILED", 0, 0);
-			return false;
-		}
-	}
-
-	(*device)->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);  //앞뒤 모두 그린다.
-	//(*device)->SetRenderState(D3DRS_LIGHTING, FALSE);  //광원효과를 무시한다.(안주면 전부 거매)
-    (*device)->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	(*device)->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-    (*device)->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-
-
-	d3d9->Release(); // d3d9를 풀어준다.
-	
-	return true;
+    return true;
 }
+
 
 int d3d::EnterMsgLoop()
 {
@@ -390,53 +300,37 @@ unsigned int WINAPI GameInnerLoop()
 	return 0;
 }
 
+//디바이스
+extern IDirectInput8* Input;
+extern IDirectInputDevice8* Mouse;
 void InputInitialize(HINSTANCE hinstance)
 {
-	DirectInput8Create(hinstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&Input, NULL);
-
-	Input -> CreateDevice(GUID_SysKeyboard, &Keyboard, NULL);
-	Input -> CreateDevice(GUID_SysMouse, &Mouse, NULL);
-
-	Keyboard -> SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
-	Keyboard -> SetDataFormat(&c_dfDIKeyboard);
-	Keyboard -> Acquire();
-
+    if (FAILED(DirectInput8Create(hinstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&Input, NULL))) {
+        MessageBoxA(nullptr, "DirectInput8Create failed!", "Error", MB_ICONERROR);
+        return;
+    }
+    if (FAILED(Input->CreateDevice(GUID_SysMouse, &Mouse, NULL))) {
+        MessageBoxA(nullptr, "CreateDevice (Mouse) failed!", "Error", MB_ICONERROR);
+        return;
+    }
 	Mouse -> SetCooperativeLevel(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	Mouse -> SetDataFormat(&c_dfDIMouse);
 	Mouse -> Acquire();
-
-	Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
-	Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);
 }
 
 
 void InputUpdate()
 {
-	//Keyboard -> Acquire();
+    if (!Mouse) return;
+
 	Mouse -> Acquire();
-
-
-	//CopyMemory(PreviousKeyboardState, CurrentKeyboardState, sizeof(char) * 256);;
-	//Keyboard -> GetDeviceState(sizeof(char) * 256, &CurrentKeyboardState);
-
 	PreviousMouseState = CurrentMouseState;
-	Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);
+	HRESULT hr = Mouse -> GetDeviceState(sizeof(DIMOUSESTATE), &CurrentMouseState);
+
+    if (FAILED(hr)) {
+        ZeroMemory(&CurrentMouseState, sizeof(CurrentMouseState));
+    }
 
 	GetCursorPos(&MousePoint);
-
 	ScreenToClient(hwnd, &MousePoint);
-
-	//itoa(MousePoint.x, string, 10);
-	//itoa(MousePoint.y, string2, 10);
-	//strcat(string, ", ");
-	//strcat(string, string2);
-	//SetWindowText(WindowHandle, string);
-
-
-	//if(PreviousKeyboardState[DIK_ESCAPE] == 0 && CurrentKeyboardState[DIK_ESCAPE] == -0x80)
-	//{
-	//	EscEsc();
-	//}
-
-
 }

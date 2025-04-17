@@ -21,8 +21,7 @@
 #include <queue>
 #include <condition_variable>
 
-#pragma comment(lib, "d3d9")
-#pragma comment(lib, "d3dx9")
+#pragma comment(lib,"d3d11.lib")
 #pragma comment(lib, "steam_api64")
 #pragma comment(lib, "winmm")
 #pragma comment(lib, "WS2_32")
@@ -60,8 +59,6 @@ struct Vertex{
 
 
 
-
-
 struct TimedKey {
     MSG key;
     std::chrono::steady_clock::time_point timestamp;
@@ -83,15 +80,15 @@ private:
 extern std::unique_ptr<KeyInputQueue>  g_keyQueue;
 
 
+extern ID3D11Device*           g_pd3dDevice;
+extern ID3D11DeviceContext*    g_pImmediateContext;
+extern IDXGISwapChain*         g_pSwapChain;
+extern ID3D11RenderTargetView* g_pRenderTargetView;
+
 
 namespace d3d
 {
-	bool InitD3D(
-		HINSTANCE hInstance,       // [in] Application instance.
-		int width, int height,     // [in] Backbuffer dimensions.
-		bool windowed,             // [in] Windowed (true)or full screen (false).
-		D3DDEVTYPE deviceType,     // [in] HAL or REF
-		IDirect3DDevice9** device);// [out]The created device.
+    bool InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed);
 
 	int EnterMsgLoop();
 
@@ -101,23 +98,6 @@ namespace d3d
 		WPARAM wParam,
 		LPARAM lParam);
 
-	template<class T> void Release(T t)
-	{
-		if( t )
-		{
-			t->Release();
-			t = 0;
-		}
-	}
-		
-	template<class T> void Delete(T t)
-	{
-		if( t )
-		{
-			delete t;
-			t = 0;
-		}
-	}
 }
 
 #endif // __d3dUtilityH__

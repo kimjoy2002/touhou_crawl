@@ -1641,8 +1641,8 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 
 	for(int i=1; i<21; i++)
 	{
-		float x = round((float)DG_MAX_X/2+sin(i*18.0f/180.0f*D3DX_PI)*10.0f);
-		float y = round((float)DG_MAX_Y/2+cos(i*18.0f/180.0f*D3DX_PI)*-10.0f);
+		float x = round((float)DG_MAX_X/2+sin(i*18.0f/180.0f*DirectX::XM_PI)*10.0f);
+		float y = round((float)DG_MAX_Y/2+cos(i*18.0f/180.0f*DirectX::XM_PI)*-10.0f);
 		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
 	}
 	setBaseFloorWall(num, floor_tex, wall_tex);

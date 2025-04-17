@@ -56,7 +56,7 @@ void smoke::LoadDatas(FILE *fp)
 	LoadData<int>(fp, expand);
 	LoadData<parent_type>(fp, parent);
 }
-bool smoke::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
+bool smoke::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
 {
 	bool return_ = false;
 	return_ = image[time>2?(time%2?0:1):(time==1?3:2)].draw(pSprite, x_, y_,200);

@@ -627,7 +627,7 @@ void players::LoadDatas(FILE *fp)
 	}
 }
 
-bool players::Draw(LPD3DXSPRITE pSprite, float x_, float y_)
+bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_)
 {
 	if (s_glow || you.GetBuffOk(BUFFSTAT_HALO)) {
 		img_effect_halo.draw(pSprite, x_, y_, 127);

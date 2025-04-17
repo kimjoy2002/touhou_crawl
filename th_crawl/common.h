@@ -7,17 +7,33 @@
 #include <windows.h>
 #include <process.h>
 #include <string>
-#include <d3dx9.h>
+#include <d3d11.h>
 #include <time.h>
 #include <vector>
 #include <unordered_map>
 #include <list>
 #include <stack>
 #include <math.h>
+#include <DirectXMath.h>
+#include <DirectXColors.h>
 using namespace std;
 
 
+#ifndef D3DCOLOR_DEFINED
+#define D3DCOLOR_DEFINED
+typedef uint32_t D3DCOLOR;
 
+#define D3DCOLOR_RGBA(r,g,b,a) \
+    ((D3DCOLOR)((((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)))
+
+inline DirectX::XMVECTOR D3DCOLOR_to_XMVECTOR(D3DCOLOR c) {
+    float r = ((c >> 16) & 0xFF) / 255.0f;
+    float g = ((c >> 8)  & 0xFF) / 255.0f;
+    float b = ((c >> 0)  & 0xFF) / 255.0f;
+    float a = ((c >> 24) & 0xFF) / 255.0f;
+    return DirectX::XMVectorSet(r, g, b, a);
+}
+#endif
 
 struct coord_def;
 

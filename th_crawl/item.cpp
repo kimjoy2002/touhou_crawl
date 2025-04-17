@@ -579,7 +579,7 @@ const D3DCOLOR item::item_color()
 
 
 
-bool item::draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_)
+bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
 {
 	if (image) {
 		bool return_ = image->draw(pSprite, x_, y_, 255);

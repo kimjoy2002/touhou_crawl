@@ -11,7 +11,7 @@
 
 #include <string>
 #include <list>
-#include <d3dx9.h>
+#include "common.h"
 
 using namespace std;
 

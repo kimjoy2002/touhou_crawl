@@ -13,11 +13,10 @@
 #include "const.h"
 
 
-extern IDirect3DDevice9* Device; //디바이스포인터
-extern IDirect3DVertexBuffer9* g_pVB; //버텍스버퍼포인터
-extern D3DXMATRIXA16 g_BaseMatrix; //매트릭스포인터
-extern LPD3DXSPRITE g_pSprite; //스프라이트포인터 
-extern ID3DXFont* g_pfont;
+extern ID3D11Device* g_pd3dDevice;
+extern ID3D11DeviceContext* g_pImmediateContext;
+extern shared_ptr<DirectX::SpriteBatch> g_pSprite; //스프라이트포인터 
+extern shared_ptr<DirectX::SpriteFont> g_pfont;
 extern HANDLE mutx;
 extern display_manager DisplayManager;
 

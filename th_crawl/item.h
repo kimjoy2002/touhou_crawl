@@ -205,7 +205,7 @@ public:
 	name_infor GetNameInfor();
 	textures *GetEquipTexture();
 	const D3DCOLOR item_color();
-	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_);
 
 	bool isSimpleType(item_type_simple type_); //해당 타입이 맞나 확인한다.
 	bool isRightType(equip_type type_); //해당 부위에 장착할 수 있는지 확인한다.

@@ -11,6 +11,8 @@
 
 #include <string>
 #include <list>
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
 #include "enum.h"
 
 using namespace std;
@@ -75,13 +77,23 @@ public:
 };
 
 
+struct FontInfo {
+    float Size;        // 폰트 크기 (픽셀 단위)
+    float Width;       // 글자 가로 폭 (평균값 or 고정폭 기준)
+    float Height;      // 글자 높이
+
+    FontInfo() = default;
+    FontInfo(float size_, float width_, float height_)
+        : Size(size_), Width(width_), Height(height_){}
+};
+
 class display_manager
 {
 public:
 	int tile_type;
 	text_manager text_log;
 	text_manager text_sub;
-	D3DXFONT_DESC fontDesc;
+	FontInfo fontDesc;
 	string text;
 	display_type state;
 	RECT windowSize;
@@ -105,35 +117,35 @@ public:
 
 	display_manager();
 	void Getfontinfor();
-	void draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void skill_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void spell_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void iden_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void property_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void skill2_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void state_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void game_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void item_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void log_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
-	void sub_text_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
+	void draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void log_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	void sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 	void start_spellview(LOCALIZATION_ENUM_KEY message_);
 	void start_skillview(LOCALIZATION_ENUM_KEY message_);
 	void start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY message_);
-	void CheckMouseInfo(LPD3DXSPRITE pSprite, ID3DXFont* pfont, RECT& rc, int width_, int height_, string message);
-	void drawInfoBox(LPD3DXSPRITE pSprite, ID3DXFont* pfont);
+	void CheckMouseInfo(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, RECT& rc, int width_, int height_, string message);
+	void drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 };
 
 class stateBox
 {
-	LPD3DXSPRITE pSprite;
-	ID3DXFont* pfont;
+	shared_ptr<DirectX::SpriteBatch> pSprite;
+	shared_ptr<DirectX::SpriteFont> pfont;
 	RECT start_rc;
 	RECT rc;
 	int width;
 	int current;
 public:
-	stateBox(LPD3DXSPRITE pSprite_, ID3DXFont* pfont_, RECT start_rc_);
+	stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, shared_ptr<DirectX::SpriteFont> pfont_, RECT start_rc_);
 	void addState(string name, D3DCOLOR color, string info, display_manager* display);
 	void enter(display_manager* display);
 };

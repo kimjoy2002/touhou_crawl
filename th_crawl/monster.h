@@ -155,8 +155,8 @@ public:
 	bool isLive(){return (hp>0);}
 	bool isFly();
 	bool isSwim();
-	bool simple_draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
-	bool draw(LPD3DXSPRITE pSprite, ID3DXFont* pfont, float x_, float y_);
+	bool simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_);
 	bool smartmove(short_move x_mov, short_move y_mov, int num_); //아군이 자리를 잡을 수 있게 길을 비켜주는 인공지능
 	int move(short_move x_mov, short_move y_mov, bool only_move);
 	int move(const coord_def &c, bool only_move);

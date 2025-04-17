@@ -829,7 +829,7 @@ void environment::allCalculateAutoTile()
 	}
 }
 
-void environment::innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight)
+void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight)
 {
 	if (dgtile[tile_x][tile_y].tile == DG_WALL) {
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
@@ -874,7 +874,7 @@ void environment::innerDrawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, fl
 	}
 }
 
-void environment::drawTile(LPD3DXSPRITE pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight)
 {
 	if (!isExplore(tile_x, tile_y))
 	{

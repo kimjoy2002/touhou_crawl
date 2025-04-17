@@ -11,6 +11,7 @@
 #include "monster_texture.h"
 #include "texture.h"
 #include "Fliename.h"
+#include <WICTextureLoader.h>
 #include <sys/stat.h>
 
 #include "option_manager.h"
@@ -1833,43 +1834,36 @@ TextureFile::TextureFile(LPCSTR _name)
 //TextureFile 클래스의 소멸자
 TextureFile::~TextureFile()
 {
-	d3d::Release(pTexture);  
-}
-
-//로딩
-bool TextureFile::loading(IDirect3DDevice9* Device)
-{
-	if(FAILED(D3DXCreateTextureFromFile(Device,name,&pTexture)))
-		return false;
-	return true;
-}
-
-//로딩
-bool TextureFile::loadingEX(IDirect3DDevice9* Device)
-{
-	struct stat stStat = { 0 };
-
-	if (stat(name, &stStat) == -1) {
-		return false;
+	if(pTexture) {
+		pTexture->Release();
+		pTexture = nullptr;
 	}
+}
 
-	if(FAILED(D3DXCreateTextureFromFileExA(Device,
-		name,
+//로딩
+bool TextureFile::loading(ID3D11Device* device, ID3D11DeviceContext* context)
+{
+    struct stat st = {};
+    if (stat(name, &st) == -1) {
+        return false;
+	}
+	std::wstring wname = ConvertUTF8ToUTF16(name);
+
+    HRESULT hr = DirectX::CreateWICTextureFromFileEx(
+        device,
+        context,
+		wname.c_str(),
+		0,
+		D3D11_USAGE_DEFAULT,
+		D3D11_BIND_SHADER_RESOURCE,
 		0,
 		0,
-		0,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE, //2승수아니어도 제대로(이거 안쓰면 지포스가 아닌 컴에선 찌그러짐 조심)
-		D3DX_DEFAULT,
-		0,
-		NULL,
-		NULL,
-		&pTexture
-		)))
-		return false;
-	return true;
+		DirectX::WIC_LOADER_FORCE_SRGB,
+        nullptr,
+        &pTexture
+    );
+
+    return SUCCEEDED(hr);
 }
 
 //-----------------------------------------------------------
@@ -1925,34 +1919,41 @@ textures::~textures()
 }
 
 //드로우(배경)
-bool textures::draw(LPD3DXSPRITE pSprite, int alphas)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, int alphas)
 {
 	if(!texture)
 		return true;
-	D3DXVECTOR3 Pos(option_mg.getWidth()/2, option_mg.getHeight()/2, 0);
-	D3DXVECTOR3 center((float)(rect.right-rect.left)/2, (float)(rect.bottom-rect.top)/2, 0);
+    float x = static_cast<float>(option_mg.getWidth()) / 2.0f;
+    float y = static_cast<float>(option_mg.getHeight()) / 2.0f;
 
-	if(FAILED(pSprite->Draw(texture->pTexture, &rect, &center, &Pos, D3DCOLOR_RGBA(255,255,255,alphas))))
-		return false;
-
-	return true;
+    return SpriteDraw(
+        pSprite,
+        rect,
+        1.0f, 1.0f,  // scale
+        0.0f,        // rotation
+        x, y,
+        texture->pTexture,
+        D3DCOLOR_RGBA(255, 255, 255, alphas)
+    );
 }
 
 //드로우(위치)
-bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, int alphas)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, int alphas)
 {	
 	if(!texture)
 		return true;
-	D3DXVECTOR3 Pos(x, y, 0);
-	D3DXVECTOR3 center((float)(rect.right-rect.left)/2, (float)(rect.bottom-rect.top)/2, 0);
-
-	if(FAILED(pSprite->Draw(texture->pTexture, &rect, &center, &Pos, D3DCOLOR_RGBA(255,255,255,alphas))))
-		return false;
-
-	return true;
+	return SpriteDraw(
+		pSprite,
+		rect,
+		1.0f, 1.0f,        // scale x/y
+		0.0f,              // rotation
+		x, y,              // position
+		texture->pTexture,
+		D3DCOLOR_RGBA(255, 255, 255, alphas)
+	);
 }
 //드로우(위치,색깔)
-bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, D3DCOLOR color)
 {
 	if(!texture)
 		return true;
@@ -1962,7 +1963,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, D3DCOLOR color)
 }
 
 //드로우(위치, 회전)
-bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, int alphas)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, int alphas)
 {
 	if(!texture)
 		return true;
@@ -1973,7 +1974,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, int 
 
 
 //드로우(위치, 회전, 크기)
-bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, float scale_x, float scale_y, int alphas)
 {
 	if(!texture)
 		return true;
@@ -1983,7 +1984,7 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, floa
 }
 
 //드로우(위치, 회전, 크기,색깔)
-bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float rotation, float scale_x, float scale_y, D3DCOLOR color)
 {
 	if(!texture)
 		return true;
@@ -1994,17 +1995,22 @@ bool textures::draw(LPD3DXSPRITE pSprite, float x, float y, float rotation, floa
 
 
 //드로우(배경, 특정 잘라쓰기)
-bool textures::draw(LPD3DXSPRITE pSprite, RECT rc, int alphas)
+bool textures::draw(shared_ptr<DirectX::SpriteBatch> pSprite, RECT rc, int alphas)
 {
 	if(!texture)
 		return true;
-	D3DXVECTOR3 Pos(option_mg.getWidth()/2, option_mg.getHeight()/2, 0);
-	D3DXVECTOR3 center((float)(rc.right-rc.left)/2, (float)(rc.bottom-rc.top)/2, 0);
+	float x = static_cast<float>(option_mg.getWidth()) / 2.0f;
+	float y = static_cast<float>(option_mg.getHeight()) / 2.0f;
 
-	if(FAILED(pSprite->Draw(texture->pTexture, &rc, &center, &Pos, D3DCOLOR_RGBA(255,255,255,alphas))))
-		return false;
-
-	return true;
+	return SpriteDraw(
+		pSprite,
+		rc,
+		1.0f, 1.0f,         // scale
+		0.0f,               // rotation
+		x, y,
+		texture->pTexture,
+		D3DCOLOR_RGBA(255, 255, 255, alphas)
+	);
 }
 
 

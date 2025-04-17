@@ -78,7 +78,7 @@ bool Setup()
 	// 글꼴 로드 (.spritefont 방식)
 	g_pfont = std::make_shared<DirectX::SpriteFont>(
 		g_pd3dDevice,
-		L"./data/font/D2Coding_16.spritefont");
+		L"./data/font/D2Coding_14.spritefont");
 
 	// SpriteBatch 생성
 	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);

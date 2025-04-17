@@ -79,10 +79,13 @@ bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
     wc.lpszClassName = "D3D11WindowClass";
     RegisterClass(&wc);
 
+	int winWidth, winHeight;
+	GetWindowSizeFromClientSize(WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
+		FALSE, width, height, winWidth, winHeight);
 	char temp[64];
 	sprintf_s(temp,64,"touhou crawl %s",version_string);
-    hwnd = CreateWindow("D3D11WindowClass", temp, WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, width, height, nullptr, nullptr, hInstance, nullptr);
+    hwnd = CreateWindow("D3D11WindowClass", temp, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
+        CW_USEDEFAULT, CW_USEDEFAULT, winWidth, winHeight, nullptr, nullptr, hInstance, nullptr);
 
     if (!hwnd) return false;
 

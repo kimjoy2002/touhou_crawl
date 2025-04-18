@@ -704,13 +704,15 @@ void MainLoop()
 	}
 }
 
+bool g_changefullscreen = false;
+
 bool option_menu(int value_)
 {
 	char blank[32];
 	sprintf_s(blank,32,"            ");
 
 	string lang = LocalzationManager::current_lang;
-	LOCALIZATION_ENUM_KEY display = LOC_SYSTEM_OPTION_MENU_WINDOWED;
+	LOCALIZATION_ENUM_KEY display = option_mg.getFullscreen()?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
 	while(1)
 	{
 		deletesub();
@@ -756,8 +758,11 @@ bool option_menu(int value_)
 			}
 			if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
 				option_mg.setFullscreen(true);
+				g_changefullscreen = true;
+
 			}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
 				option_mg.setFullscreen(false);
+				g_changefullscreen = true;
 			}
 
 			

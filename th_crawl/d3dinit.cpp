@@ -220,7 +220,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	init_save_paths();
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D11(hinstance,
-		option_mg.getWidth(), option_mg.getHeight(), true))
+		option_mg.getWidth(), option_mg.getHeight(), !option_mg.getFullscreen()))
 	{
 		::MessageBox(0, "InitD3D11 fail", 0, 0);
 		return 0;

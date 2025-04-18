@@ -12,6 +12,7 @@
 #include "option_manager.h"
 #include "key.h"
 #include "soundmanager.h"
+#include <wrl/client.h>  
 
 
 ID3D11Device*           g_pd3dDevice = nullptr;
@@ -98,6 +99,7 @@ bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
     sd.OutputWindow = hwnd;
     sd.SampleDesc.Count = 1;
     sd.Windowed = windowed;
+    sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH; 
 
     HRESULT hr = D3D11CreateDeviceAndSwapChain(
         nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, 0, nullptr, 0, D3D11_SDK_VERSION,
@@ -131,7 +133,134 @@ bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
     return true;
 }
 
+void OnResize(int width, int height)
+{
+    if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
+    if (g_pRenderTargetView) g_pRenderTargetView->Release();
 
+
+	if (option_mg.getFullscreen()) {
+		DXGI_OUTPUT_DESC outputDesc;
+		Microsoft::WRL::ComPtr<IDXGIOutput> output;
+		g_pSwapChain->GetContainingOutput(&output);
+		output->GetDesc(&outputDesc);
+		width = outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left;
+		height = outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top;
+	}
+
+    HRESULT hr = g_pSwapChain->ResizeBuffers(
+        1, width, height, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 0);
+    if (FAILED(hr)) return;
+
+    ID3D11Texture2D* pBackBuffer = nullptr;
+    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBackBuffer);
+    if (FAILED(hr)) return;
+
+    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
+    pBackBuffer->Release();
+
+    g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
+
+    // 새로운 해상도에 맞춰 뷰포트 재설정
+    D3D11_VIEWPORT vp;
+    vp.Width = (FLOAT)width;
+    vp.Height = (FLOAT)height;
+    vp.MinDepth = 0.0f;
+    vp.MaxDepth = 1.0f;
+    vp.TopLeftX = 0;
+    vp.TopLeftY = 0;
+    g_pImmediateContext->RSSetViewports(1, &vp);
+
+	if (!option_mg.getFullscreen()) {
+		// 창 모드 전환 시 윈도우 스타일 복원
+		SetWindowLong(hwnd, GWL_STYLE, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX);
+		
+		RECT rc = { 0, 0, option_mg.getWidth(), option_mg.getHeight() };
+		AdjustWindowRect(&rc, GetWindowLong(hwnd, GWL_STYLE), FALSE);
+		SetWindowPos(hwnd, HWND_NOTOPMOST, 100, 100, rc.right - rc.left, rc.bottom - rc.top, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+		ShowWindow(hwnd, SW_RESTORE);  // 창 다시 활성화
+	}
+}
+
+
+void ToggleFullscreen(bool fullscreen)
+{
+    if (!g_pSwapChain || !g_pd3dDevice) return;
+
+    UINT width = option_mg.getWidth();
+    UINT height = option_mg.getHeight();
+
+    // 디스플레이 해상도 전환
+    if (fullscreen)
+    {
+        DXGI_MODE_DESC targetMode = {};
+        targetMode.Width = width;
+        targetMode.Height = height;
+        targetMode.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+        targetMode.RefreshRate.Numerator = 60;
+        targetMode.RefreshRate.Denominator = 1;
+
+        Microsoft::WRL::ComPtr<IDXGIOutput> output;
+        if (SUCCEEDED(g_pSwapChain->GetContainingOutput(&output)))
+        {
+            DXGI_MODE_DESC closestMode = {};
+            if (SUCCEEDED(output->FindClosestMatchingMode(&targetMode, &closestMode, g_pd3dDevice)))
+            {
+                g_pSwapChain->ResizeTarget(&closestMode);
+            }
+        }
+
+        g_pSwapChain->SetFullscreenState(TRUE, nullptr);
+    }
+    else
+    {
+        DXGI_MODE_DESC windowedMode = {};
+        windowedMode.Width = width;
+        windowedMode.Height = height;
+        windowedMode.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+        windowedMode.RefreshRate.Numerator = 60;
+        windowedMode.RefreshRate.Denominator = 1;
+
+        g_pSwapChain->ResizeTarget(&windowedMode);
+        g_pSwapChain->SetFullscreenState(FALSE, nullptr);
+    }
+
+    Sleep(50); // 전환 대기 (안 하면 버퍼 접근 실패할 수 있음)
+
+    // 렌더타겟 및 뷰포트 재설정
+    if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
+    if (g_pRenderTargetView) { g_pRenderTargetView->Release(); g_pRenderTargetView = nullptr; }
+
+    Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
+    HRESULT hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
+    if (FAILED(hr)) return;
+
+    g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
+    g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
+
+    D3D11_VIEWPORT vp = {};
+    vp.TopLeftX = 0;
+    vp.TopLeftY = 0;
+    vp.Width = (FLOAT)width;
+    vp.Height = (FLOAT)height;
+    vp.MinDepth = 0.0f;
+    vp.MaxDepth = 1.0f;
+    g_pImmediateContext->RSSetViewports(1, &vp);
+
+	if (!option_mg.getFullscreen()) {
+		// 창 모드 전환 시 윈도우 스타일 복원
+		SetWindowLong(hwnd, GWL_STYLE, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX);
+		
+		RECT rc = { 0, 0, option_mg.getWidth(), option_mg.getHeight() };
+		AdjustWindowRect(&rc, GetWindowLong(hwnd, GWL_STYLE), FALSE);
+		SetWindowPos(hwnd, HWND_NOTOPMOST, 100, 100, rc.right - rc.left, rc.bottom - rc.top, SWP_FRAMECHANGED | SWP_SHOWWINDOW);
+		ShowWindow(hwnd, SW_RESTORE);  // 창 다시 활성화
+	}
+}
+
+
+
+extern bool g_changefullscreen;
 int d3d::EnterMsgLoop()
 {
 	MSG msg;
@@ -149,12 +278,18 @@ int d3d::EnterMsgLoop()
 	while(msg.message != WM_QUIT && !g_saveandexit)
 	{
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-            if (msg.message == WM_QUIT)
-                break;
-			if(msg.message == WM_KEYDOWN || msg.message == WM_CHAR || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
-          	    g_keyQueue->push(msg);
-			::TranslateMessage(&msg);
-			::DispatchMessage(&msg);
+			if(msg.message == WM_SYSKEYDOWN && (msg.wParam == VK_RETURN && (msg.lParam & (1 << 29))) ) {
+				// Alt + Enter 감지
+				option_mg.setFullscreen(!option_mg.getFullscreen());
+				g_changefullscreen = true;
+			} else {
+				if (msg.message == WM_QUIT)
+					break;
+				if(msg.message == WM_KEYDOWN || msg.message == WM_CHAR || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
+					  g_keyQueue->push(msg);
+				::TranslateMessage(&msg);
+				::DispatchMessage(&msg);
+			}
         }
 		Sleep(1);
 		InputUpdate();
@@ -197,6 +332,11 @@ unsigned int WINAPI DrawLoop(void *arg)
 	{
 		g_ThreadCnt--;
 	}
+    g_pSwapChain->SetFullscreenState(FALSE, NULL);
+	g_pd3dDevice->Release();
+	g_pImmediateContext->Release();
+	g_pSwapChain->Release();
+	g_pRenderTargetView->Release();
 	return 0;
 }
 

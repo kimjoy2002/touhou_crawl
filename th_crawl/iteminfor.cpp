@@ -266,7 +266,7 @@ void iteminfor(bool gameover)
 									}
 									if (!you.unequip(ET_WEAPON))
 									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_normal);
+										printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY), true, false, false, CL_normal);
 									}
 								}
 								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)

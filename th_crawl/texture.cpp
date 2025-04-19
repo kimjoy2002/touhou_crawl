@@ -1388,6 +1388,10 @@ textures img_effect_white(&texture_dungeon01, 992, 0, 1024, 32, 255);
 textures img_effect_sion(&texture_dungeon01, 0, 296, 32, 328, 255);
 
 
+textures img_item_empty_itembox(&texture_item03, 61, 255);
+textures img_item_select_itembox(&texture_item03, 62, 255);
+textures img_item_equip_itembox(&texture_item03, 63, 255);
+textures img_item_curse_itembox(&texture_item03, 64, 255);
 
 textures img_effect_tanmac_middle[] = 
 {
@@ -1804,18 +1808,18 @@ textures img_state_haste(&texture_item01, 110, 255);
 textures img_state_lunatic(&texture_item01, 219, 255);
 textures img_state_slow(&texture_item01, 239, 255);
 
-textures dot_floor(&texture_dot_floor, 0, 0, 3, 3, 255);
-textures dot_wall(&texture_dot_wall, 0, 0, 3, 3, 255);
-textures dot_monster(&texture_dot_monster, 0, 0, 3, 3, 255);
-textures dot_player(&texture_dot_player, 0, 0, 3, 3, 255);
-textures dot_up(&texture_dot_up, 0, 0, 3, 3, 255);
-textures dot_down(&texture_dot_down, 0, 0, 3, 3, 255);
-textures dot_item(&texture_dot_item, 0, 0, 3, 3, 255);
-textures dot_door(&texture_dot_door, 0, 0, 3, 3, 255);
-textures dot_temple(&texture_dot_temple, 0, 0, 3, 3, 255);
-textures dot_sea(&texture_dot_sea, 0, 0, 3, 3, 255);
-textures dot_mapping_floor(&texture_dot_mapping_floor, 0, 0, 3, 3, 255);
-textures dot_mapping_wall(&texture_dot_mapping_wall, 0, 0, 3, 3, 255);
+textures dot_floor(&texture_dot_floor, 0, 0, 1, 1, 255);
+textures dot_wall(&texture_dot_wall, 0, 0, 1, 1, 255);
+textures dot_monster(&texture_dot_monster, 0, 0, 1, 1, 255);
+textures dot_player(&texture_dot_player, 0, 0, 1, 1, 255);
+textures dot_up(&texture_dot_up, 0, 0, 1, 1, 255);
+textures dot_down(&texture_dot_down, 0, 0, 1, 1, 255);
+textures dot_item(&texture_dot_item, 0, 0, 1, 1, 255);
+textures dot_door(&texture_dot_door, 0, 0, 1, 1, 255);
+textures dot_temple(&texture_dot_temple, 0, 0, 1, 1, 255);
+textures dot_sea(&texture_dot_sea, 0, 0, 1, 1, 255);
+textures dot_mapping_floor(&texture_dot_mapping_floor, 0, 0, 1, 1, 255);
+textures dot_mapping_wall(&texture_dot_mapping_wall, 0, 0, 1, 1, 255);
 textures sight_rect(&texture_sight_rect, 0, 0, 64, 64, 255);
 textures explore_forbid_small(&texture_item02, 217, 255);
 textures explore_forbid_big(&texture_item02, 216, 255);

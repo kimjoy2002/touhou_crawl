@@ -874,7 +874,7 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 	}
 }
 
-void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight, bool onlyTile)
 {
 	if (!isExplore(tile_x, tile_y))
 	{
@@ -883,7 +883,9 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 	else if (dgtile[tile_x][tile_y].flag & FLAG_LIGHT)
 	{
 		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
-		img_effect_gold.draw(pSprite, x, y, 100);
+		if(!onlyTile){
+			img_effect_gold.draw(pSprite, x, y, 100);
+		}
 	}
 	else if (isInSight(coord_def(tile_x, tile_y)) && sight)
 	{
@@ -2414,13 +2416,13 @@ void LoadFile()
 	ReleaseMutex(mutx);
 }
 
-float GetDotX(int x, int dungeon_x)
+float GetDotX(int x, int dungeon_x, int magnification)
 {
-	return 43 + (32*(dungeon_x*2))+x*3;
+	return 43 + (32*(dungeon_x*2))+x*magnification;
 }
-float GetDotY(int y, int dungeon_y)
+float GetDotY(int offset_, int y, int dungeon_y, int magnification)
 {
-	return 340+y*3;
+	return offset_+y*magnification;
 }
 
 string CurrentLevelString(int level)

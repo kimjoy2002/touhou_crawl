@@ -63,7 +63,7 @@ void Equip_Weapon()
 		{
 			if(!you.unequip(ET_WEAPON))
 			{				
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY),true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 			}
 			break;
 		}

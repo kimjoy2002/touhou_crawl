@@ -447,6 +447,10 @@ extern textures img_effect_gold;
 extern textures img_effect_sleep;
 extern textures img_effect_white;
 extern textures img_effect_sion;
+extern textures img_item_empty_itembox;
+extern textures img_item_select_itembox;
+extern textures img_item_equip_itembox;
+extern textures img_item_curse_itembox;
 
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_gold_floor[];

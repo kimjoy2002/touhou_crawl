@@ -713,6 +713,11 @@ bool option_menu(int value_)
 
 	string lang = LocalzationManager::current_lang;
 	LOCALIZATION_ENUM_KEY display = option_mg.getFullscreen()?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
+	LOCALIZATION_ENUM_KEY origin_display = display;  
+	int width_ = option_mg.getWidth();
+	int height_ = option_mg.getHeight();
+	int origin_w = width_, origin_h = height_;
+	int current_pos_ = option_mg.getCurrentPos();
 	while(1)
 	{
 		deletesub();
@@ -728,7 +733,7 @@ bool option_menu(int value_)
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub("a - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE) + ": " + LocalzationManager::langString(lang),true,CL_normal);
-		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": 1280 X 720",true,CL_normal);
+		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": " + to_string(width_) +" X " +  to_string(height_),true,CL_normal);
 		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal);
 		printsub("",true,CL_normal);
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal);
@@ -742,6 +747,9 @@ bool option_menu(int value_)
 				lang = LocalzationManager::getNextLang(lang);
 			}
 			else if(input_ == 'b') {
+				auto next_resolution = option_mg.getNextScreen(current_pos_);
+				width_ = next_resolution.width;
+				height_ = next_resolution.height;
 			}
 			else if(input_ == 'c') {
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
@@ -756,13 +764,24 @@ bool option_menu(int value_)
 				}
 				option_mg.setLang(lang);
 			}
-			if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
-				option_mg.setFullscreen(true);
-				g_changefullscreen = true;
-
-			}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
-				option_mg.setFullscreen(false);
-				g_changefullscreen = true;
+			bool should_reload = false;
+			if( origin_w != width_ || origin_h != height_) {
+				option_mg.setWidth(width_);
+				option_mg.setHeight(height_);
+				should_reload = true;
+			}
+			if(origin_display != display) {
+				should_reload = true;
+			}
+			if(should_reload) {
+				if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
+					option_mg.setFullscreen(true);
+					g_changefullscreen = true;
+	
+				}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
+					option_mg.setFullscreen(false);
+					g_changefullscreen = true;
+				}
 			}
 
 			

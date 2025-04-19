@@ -12,6 +12,20 @@
 
 optionManager option_mg;
 
+
+vector<screen_info> able_screens = { 
+	{800 ,600}, 
+	{1024, 768}, 
+	{1152, 864}, 
+	{1280, 1024},
+	{1600, 1200}, 
+	{1280, 720}, 
+	{1440, 900},
+	{1680, 1050},
+	{1920, 1080},
+	{1920, 1200}
+};
+
 void optionManager::init(string fileName) {
 	this->fileName = fileName;
 	struct stat stStat = { 0 };
@@ -31,6 +45,25 @@ void optionManager::init(string fileName) {
 
 		GetPrivateProfileString(_T("config"), _T("width"), _T("1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
+
+		current_pos = -1;
+		int pos_ = -1;
+		for(auto& screen : able_screens) {
+			if(width < screen.width) {
+				current_pos = pos_;
+				break;
+			} else if (height == screen.height) {
+				if(height < screen.height) {
+					current_pos = pos_;
+					break;
+				} else if(height == screen.height) {
+					current_pos = pos_+1;
+					break;
+				}
+			}
+			pos_++;
+		}
+		calcTileXY();
 
 		GetPrivateProfileString(_T("config"), _T("fullscreen"), _T("false"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		fullscreen = (_tcscmp(szBuf, _T("true")) == 0 || _tcscmp(szBuf, _T("1")) == 0);
@@ -90,12 +123,55 @@ void optionManager::createNewFile(string fileName) {
 	WritePrivateProfileString(_T("config"), _T("language"), tchr, fileName.c_str());
 }
 
+void optionManager::calcTileXY() {
+	tile_max_x=1;
+	tile_max_y=1;
+	int minimum_check = 256;
+	while(width > 32*((tile_max_x+1)*2+1)+minimum_check) {
+		tile_max_x++;
+		if(tile_max_x>=10 && tile_max_x<=12) {
+			minimum_check+=50; //보정
+		}
+	}
+	while(height > 32*((tile_max_y+1)*2+1)) {
+		tile_max_y++;
+	}
+}
+
+screen_info optionManager::getNextScreen(int& pos) {
+	pos++;
+	if(pos<0)
+		pos = 0;
+	if(pos >= able_screens.size())
+		pos = 0;
+	return able_screens[pos];
+}
 void optionManager::setFullscreen(bool full_value) {
     fullscreen = full_value; 
 
 	if(!fileName.empty()) {
         CString strValue = full_value ? _T("true") : _T("false");
         WritePrivateProfileString(_T("config"), _T("fullscreen"), strValue, fileName.c_str());
+	}
+}
+
+
+void optionManager::setWidth(int w_value) {
+    width = w_value;  // lang이 string일 경우
+
+	if(!fileName.empty()) {
+		CString strW(to_string(w_value).c_str());
+		WritePrivateProfileString(_T("config"), _T("width"), strW, fileName.c_str());
+	}
+}
+
+
+void optionManager::setHeight(int h_value) {
+    height = h_value;  // lang이 string일 경우
+
+	if(!fileName.empty()) {
+		CString strH(to_string(h_value).c_str());
+		WritePrivateProfileString(_T("config"), _T("height"), strH, fileName.c_str());
 	}
 }
 

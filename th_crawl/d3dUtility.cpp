@@ -19,6 +19,8 @@ ID3D11Device*           g_pd3dDevice = nullptr;
 ID3D11DeviceContext*    g_pImmediateContext = nullptr;
 IDXGISwapChain*         g_pSwapChain = nullptr;
 ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
+extern shared_ptr<DirectX::SpriteBatch> g_pSprite;
+extern shared_ptr<DirectX::SpriteFont> g_pfont;
 
 extern const char *version_string;
 
@@ -246,6 +248,7 @@ void ToggleFullscreen(bool fullscreen)
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     g_pImmediateContext->RSSetViewports(1, &vp);
+
 
 	if (!option_mg.getFullscreen()) {
 		// 창 모드 전환 시 윈도우 스타일 복원

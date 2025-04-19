@@ -131,7 +131,6 @@ bool Display(float timeDelta)
 		const float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 		g_pImmediateContext->ClearRenderTargetView(g_pRenderTargetView, clearColor);
 
-
 		g_pSprite->Begin(
             DirectX::SpriteSortMode_Deferred,
             nullptr,
@@ -1394,12 +1393,12 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
-	int sight_x = 12;
-	int sight_y = 10;
+	int sight_x = option_mg.getTileMaxX();
+	int sight_y = option_mg.getTileMaxY();
 	ostringstream ss;
 	GetClientRect(hwnd, &windowSize);
-	scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidthCommon();
-	scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeightCommon();
+	scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidth();
+	scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeight();
 	infobox.init();
 	{
 		int i=0;
@@ -2754,8 +2753,8 @@ void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	if (infobox.draw)
 	{
 		RECT rc_ = { infobox.x, infobox.y, infobox.x + infobox.x_size, infobox.y + infobox.y_size };
-		if (rc_.left + infobox.x_size / 2  > option_mg.getWidthCommon()) {
-			int i = rc_.left + infobox.x_size / 2 - option_mg.getWidthCommon();
+		if (rc_.left + infobox.x_size / 2  > option_mg.getWidth()) {
+			int i = rc_.left + infobox.x_size / 2 - option_mg.getWidth();
 			rc_.left -= i;
 			rc_.right -= i;
 		}

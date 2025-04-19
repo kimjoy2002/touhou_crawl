@@ -229,12 +229,23 @@ void ToggleFullscreen(bool fullscreen)
 
     Sleep(50); // 전환 대기 (안 하면 버퍼 접근 실패할 수 있음)
 
+    if (g_pRenderTargetView) {
+        g_pRenderTargetView->Release();
+        g_pRenderTargetView = nullptr;
+    }
+
+    // 스왑체인 버퍼 리사이즈
+    HRESULT hr = g_pSwapChain->ResizeBuffers(
+        0, width, height, DXGI_FORMAT_UNKNOWN, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
+    if (FAILED(hr)) return;
+
+
     // 렌더타겟 및 뷰포트 재설정
     if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
     if (g_pRenderTargetView) { g_pRenderTargetView->Release(); g_pRenderTargetView = nullptr; }
 
     Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-    HRESULT hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
+    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
     if (FAILED(hr)) return;
 
     g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
@@ -281,6 +292,7 @@ int d3d::EnterMsgLoop()
 	while(msg.message != WM_QUIT && !g_saveandexit)
 	{
         if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+
 			if(msg.message == WM_SYSKEYDOWN && (msg.wParam == VK_RETURN && (msg.lParam & (1 << 29))) ) {
 				// Alt + Enter 감지
 				option_mg.setFullscreen(!option_mg.getFullscreen());

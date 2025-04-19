@@ -14,14 +14,13 @@ optionManager option_mg;
 
 
 vector<screen_info> able_screens = { 
-	{800 ,600}, 
-	{1024, 768}, 
-	{1152, 864}, 
-	{1280, 1024},
-	{1600, 1200}, 
+	{800 ,600},
+	{1024, 768},
 	{1280, 720}, 
+	{1366, 768}, 
 	{1440, 900},
 	{1680, 1050},
+	{1600, 1200}, 
 	{1920, 1080},
 	{1920, 1200}
 };
@@ -126,12 +125,9 @@ void optionManager::createNewFile(string fileName) {
 void optionManager::calcTileXY() {
 	tile_max_x=1;
 	tile_max_y=1;
-	int minimum_check = 256;
+	int minimum_check = 320;
 	while(width > 32*((tile_max_x+1)*2+1)+minimum_check) {
 		tile_max_x++;
-		if(tile_max_x>=10 && tile_max_x<=12) {
-			minimum_check+=50; //보정
-		}
 	}
 	while(height > 32*((tile_max_y+1)*2+1)) {
 		tile_max_y++;

@@ -768,6 +768,7 @@ bool option_menu(int value_)
 			if( origin_w != width_ || origin_h != height_) {
 				option_mg.setWidth(width_);
 				option_mg.setHeight(height_);
+				option_mg.calcTileXY();
 				should_reload = true;
 			}
 			if(origin_display != display) {

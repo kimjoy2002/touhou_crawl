@@ -2211,7 +2211,8 @@ void Pray()
 				bool ok_= true;
 				while(ok_)
 				{			
-					int select = waitkeyinput();
+					InputedKey inputedKey;
+					int select = waitkeyinput(inputedKey);
 					switch(select)
 					{
 					default:
@@ -2224,6 +2225,15 @@ void Pray()
 						you.Belief((god_type)(type-DG_TEMPLE_FIRST),15);
 						steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
 						MoreWait();
+						ok_ = false;
+						break;
+					case -1:
+						if(inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case 'N':
 					case 'n':
 					case VK_ESCAPE:

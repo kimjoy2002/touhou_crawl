@@ -61,7 +61,9 @@ int action_Move(int command, const coord_def &c)
 	if (you.search)
 		return Search_Move(c, widesearch);
 	else {
-		you.SetPrevAction(command);
+		if(command > 0) {
+			you.SetPrevAction(command);
+		}
 		return Player_Move(c);
 	}
 }
@@ -786,7 +788,8 @@ void Search()
 	Search_Move(coord_def(you.position.x,you.position.y), false);
 	while(1)
 	{
-		switch(waitkeyinput())
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey))
 		{
 		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //위
@@ -857,6 +860,14 @@ void Search()
 		case VK_RETURN:
 			you.search = false;
 			Long_Move(you.search_pos);
+			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 		case 'x':
 			deletelog();
@@ -3169,7 +3180,8 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 	changedisplay(DT_SUB_TEXT);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -3206,6 +3218,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		else if(key_ == VK_NEXT)
 		{
 			changemove(-DisplayManager.log_length);
+		}
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
 		}
 		else if(key_ == VK_ESCAPE)
 		{
@@ -3387,6 +3404,25 @@ void auto_pick_onoff(bool auto_)
 	}
 }
 
+
+void auto_tanmac_onoff()
+{
+	if(you.useMouseTammac == 0)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTANMAC_ON),true,false,false,CL_help);
+		you.useMouseTammac = 1;
+	}
+	else if(you.useMouseTammac == 1)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTANMAC_AUTO),true,false,false,CL_help);
+		you.useMouseTammac = 2;
+	}
+	else
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTANMAC_OFF),true,false,false,CL_help);
+		you.useMouseTammac = 0;
+	}
+}
 
 void floorMove()
 {

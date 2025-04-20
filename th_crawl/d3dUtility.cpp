@@ -307,7 +307,6 @@ int d3d::EnterMsgLoop()
 			}
         }
 		Sleep(1);
-		InputUpdate();
 		if(g_ThreadCnt < 3)
 			break;
     }
@@ -335,6 +334,7 @@ unsigned int WINAPI DrawLoop(void *arg)
 				{
 					::MessageBox(0, "Display Error", 0, 0);
 				}
+				InputUpdate();
 				Sleep(16);
 			}
 			return 1;
@@ -476,6 +476,48 @@ void InputInitialize(HINSTANCE hinstance)
 	Mouse -> Acquire();
 }
 
+bool one_turn_click = true;
+
+bool isClicked(MOUSE_BUTTON button) {
+	if(!one_turn_click || GetForegroundWindow() != hwnd) {
+		return false;
+	}
+
+	if(button == LEFT_CLICK) {
+		if((!(PreviousMouseState.rgbButtons[0] & 0x80) && (CurrentMouseState.rgbButtons[0] & 0x80))) {
+			one_turn_click = false;
+			return true;
+		}
+	}
+	else if(button == RIGHT_CLICK) {
+		if((!(PreviousMouseState.rgbButtons[1] & 0x80) && (CurrentMouseState.rgbButtons[1] & 0x80))) {
+			one_turn_click = false;
+			return true;
+		}
+	}
+	else if(button == MIDDLE_CLICK) {
+		if((!(PreviousMouseState.rgbButtons[2] & 0x80) && (CurrentMouseState.rgbButtons[2] & 0x80))) {
+			one_turn_click = false;
+			return true;
+		}
+	}
+	else if(button == MIDDLE_UP) {
+		if((CurrentMouseState.lZ > 0)) {
+			one_turn_click = false;
+			return true;
+		}
+	}
+	else if(button == MIDDLE_DOWN) {
+		if((CurrentMouseState.lZ < 0)) {
+			one_turn_click = false;
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 
 void InputUpdate()
 {
@@ -491,4 +533,5 @@ void InputUpdate()
 
 	GetCursorPos(&MousePoint);
 	ScreenToClient(hwnd, &MousePoint);
+	one_turn_click = true;
 }

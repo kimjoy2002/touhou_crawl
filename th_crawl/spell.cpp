@@ -1852,8 +1852,9 @@ void SpellUse(char auto_, int auto_direc_)
 		while(1)
 		{
 			int key_ = auto_;
+			InputedKey inputedKey;
 			if (key_ == 0)
-				key_ = waitkeyinput(true);
+				key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -2012,6 +2013,11 @@ void SpellUse(char auto_, int auto_direc_)
 					use_ = true;
 				}
 			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
+				}
+			}
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -2033,7 +2039,8 @@ void SpellView()
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -2047,6 +2054,11 @@ void SpellView()
 
 					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE);
 					//changedisplay(DT_SPELL);
+				}
+			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
 				}
 			}
 			else if(key_ == VK_ESCAPE)

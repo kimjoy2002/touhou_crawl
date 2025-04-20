@@ -256,7 +256,7 @@ public:
 	void calculateAutoTile(coord_def pos, AUTOTILE_KIND kind);
 	void allCalculateAutoTile();
 	void innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight);
-	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight, bool onlyTile);
+	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, bool sight, bool onlyTile);
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
 	monster* AddMonster(int id_, int flag_, coord_def position_, int time_ = 0);

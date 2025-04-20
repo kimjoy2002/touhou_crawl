@@ -767,7 +767,8 @@ void wiz_mode()
 				oss << id_ << " (" << mondata[id_].name.getName().c_str() << ")";
 				printlog(oss.str(), false, false, true, CL_normal);
 
-				key_ = waitkeyinput(true);
+				InputedKey inputedKey;
+				key_ = waitkeyinput(inputedKey,true);
 				switch (key_) {
 				case 'k':
 				case VK_UP:
@@ -808,7 +809,14 @@ void wiz_mode()
 					return;
 				case VK_BACK:
 					id_ = id_ / 10;
-					break;
+					break;					
+				case -1:
+					if(inputedKey.mouse == MKIND_RCLICK) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case VK_ESCAPE://esc
 					enterlog();
 					printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER), true, false, false, CL_help);

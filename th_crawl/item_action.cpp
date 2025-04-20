@@ -21,16 +21,23 @@
 extern HANDLE mutx;
 string GetItemInfor(item *it, bool can_use_, set<char> *key);
 
-
-void PickUp()
-{		
+bool pickup_prev_fail(bool no_speak) {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_PICKUP),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_PICKUP), true, false, false, CL_normal);
+		return true;
+	}
+	return false;
+}
+
+
+void PickUp()
+{
+	if(pickup_prev_fail(false)) {
 		return;
 	}
 	int num=0;
@@ -80,6 +87,18 @@ void PickUpAll(list<item>::iterator it)
 		}
 	}
 }
+
+
+
+void PickUpSelect_logic(list<item>::iterator& it) {
+	if(you.additem(&(*it)))
+	{
+		env[current_level].DeleteItem(it);
+		you.time_delay+=you.GetNormalDelay();
+		you.TurnEnd();
+	}
+}
+
 void PickUpSelect(list<item>::iterator it, int num)
 {	
 	for(;it != env[current_level].item_list.end() && num;num--)
@@ -100,12 +119,7 @@ void PickUpSelect(list<item>::iterator it, int num)
 				{
 				case 'y':
 				case 'Y':
-					if(you.additem(&(*temp)))
-					{
-						env[current_level].DeleteItem(temp);
-						you.time_delay+=you.GetNormalDelay();
-						you.TurnEnd();
-					}
+					PickUpSelect_logic(temp);
 					break;
 				case 'a':
 					PickUpNum(temp,num,false);
@@ -166,7 +180,8 @@ void iteminfor_pick()
 	view_item(IVT_PICK,LOC_SYSTEM_DISPLAY_MANAGER_PICK);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			CheckKey(key_);
@@ -214,6 +229,11 @@ void iteminfor_pick()
 				}
 			}
 			break;
+		}
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -280,7 +300,8 @@ void iteminfor_discard()
 	view_item(IVT_DISCARD,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			CheckKey(key_,i);
@@ -324,6 +345,11 @@ void iteminfor_discard()
 			}
 			break;
 		}
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 
@@ -359,33 +385,41 @@ void fast_discard()
 	}
 }
 
-void Eatting(char auto_)
-{	
+bool eat_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EAT),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_EAT), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_EAT), true, false, false, CL_danger);
-		return;
+		return true;
 	}
 	if(you.power >= 500 && !(you.god == GT_MINORIKO))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
+		return true;
+	}
+	return false;
+}
+
+void Eatting(char auto_)
+{
+	if(eat_prev_fail()) {
 		return;
 	}
 	view_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 	while(1)
 	{
 		int key_ = auto_;
+		InputedKey inputedKey;
 		if (key_ == 0)
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -411,6 +445,11 @@ void Eatting(char auto_)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -418,46 +457,59 @@ void Eatting(char auto_)
 }
 
 
-void Drinking(char auto_)
-{
+bool drink_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DRINK),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_DRINK), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_DRINK), true, false, false, CL_danger);
+		return true;
+	}
+	return false;
+}
+
+void drink_logic(int key_) {
+	if(you.Drink(key_))
+	{			
+		you.time_delay += you.GetNormalDelay();
+		you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
+		changedisplay(DT_GAME);
+		if(you.god == GT_EIRIN)
+		{
+			if(randA(2))
+			{
+				you.PietyUpDown(1);
+				you.GiftCount(1);
+			}
+		}
+		you.SetPrevAction('q', key_);
+		you.TurnEnd();
+	}
+}
+
+
+void Drinking(char auto_)
+{
+	if(drink_prev_fail()) {
 		return;
 	}
 	view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 	while(1)
 	{
 		int key_ = auto_;
+		InputedKey inputedKey;
 		if(key_ == 0 )
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
-			if(you.Drink(key_))
-			{			
-				you.time_delay += you.GetNormalDelay();
-				you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
-				changedisplay(DT_GAME);
-				if(you.god == GT_EIRIN)
-				{
-					if(randA(2))
-					{
-						you.PietyUpDown(1);
-						you.GiftCount(1);
-					}
-				}
-				you.SetPrevAction('q', key_);
-				you.TurnEnd();
-			}
+			drink_logic(key_);
 			break;
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
@@ -478,6 +530,11 @@ void Drinking(char auto_)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -486,28 +543,40 @@ void Drinking(char auto_)
 	changedisplay(DT_GAME);
 }
 
-void Spelllcard_Evoke(char auto_)
-{	
+bool evoke_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
+		return true;
+	}
+	return false;
+}
+
+void evoke_logic(int key_, char auto_) {
+	changedisplay(DT_GAME);
+	if(you.Evoke(key_, auto_>0))
+	{
+		you.time_delay += you.GetNormalDelay();
+		you.TurnEnd();
+		you.SetPrevAction('v', key_);
+	}
+}
+
+void Spelllcard_Evoke(char auto_)
+{
+	if(evoke_prev_fail()) {
 		return;
 	}
 	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 	while(1)
 	{
 		int key_ = auto_;
+		InputedKey inputedKey;
 		if (key_ == 0)
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
-			changedisplay(DT_GAME);
-			if(you.Evoke(key_, auto_>0))
-			{
-				you.time_delay += you.GetNormalDelay();
-				you.TurnEnd();
-				you.SetPrevAction('v', key_);
-			}
+			evoke_logic(key_,auto_);
 			break;
 		//	CheckKey(key_,i);
 		}
@@ -529,6 +598,11 @@ void Spelllcard_Evoke(char auto_)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -538,33 +612,107 @@ void Spelllcard_Evoke(char auto_)
 }
 
 void memorize_action(int spell_);
-void Reading(char auto_)
-{
+
+bool read_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_READ),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_READ), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_READ), true, false, false, CL_danger);
-		return;
+		return true;
 	}
 	if(env[current_level].isSilence(you.position))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
+		return true;
+	}
+	return false;
+}
+
+void Memorize_book(int key_) {
+	item* item_ = you.GetItem(key_);
+	if(item_ == nullptr)
+		return;
+	if(item_->value0>=0)	
+	{
+		iden_list.books_list[item_->value0] = true;
+		item_->identify = true;
+	}
+	if(item_->value0==-2)
+	{					
+		item_->identify = true;
+	}
+	while(1)
+	{
+		WaitForSingleObject(mutx, INFINITE);
+		SetText() = GetItemInfor(item_, false, NULL);
+		ReleaseMutex(mutx);
+		changedisplay(DT_TEXT);
+		int key_ = waitkeyinput(true);
+		if( (key_ >= 'a' && key_ <= 'f'))
+		{
+			if(int spell_ = item_->GetValue(key_ - 'a'+1))
+			{
+				if (you.isMemorize(spell_)) {
+					changedisplay(DT_GAME);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
+					return;
+				}
+				WaitForSingleObject(mutx, INFINITE);
+				SetText() = GetSpellInfor((spell_list)spell_);
+				SetText() += "\n\n";
+				SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
+				SetText() += "\n";
+				ReleaseMutex(mutx);
+				int memory_ = waitkeyinput();
+
+				if(memory_ == 'm')
+				{
+					memorize_action(spell_);
+					return;
+				}
+				continue;
+			}	
+		}
+		view_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
+		break;
+	}
+}
+
+
+void Reading_logic(int key_) {
+	item* item_ = you.GetItem(key_);
+	if(item_ == nullptr)
+		return;
+	if(you.Read(key_))
+	{
+		you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL));
+		you.time_delay += you.GetNormalDelay();
+		changedisplay(DT_GAME);
+		you.TurnEnd();
+		you.SetPrevAction('r', key_);
+	}
+}
+
+void Reading(char auto_)
+{
+	if(read_prev_fail()) {
 		return;
 	}
 	view_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 	while(1)
 	{
 		int key_ = auto_;
+		InputedKey inputedKey;
 		if (key_ == 0)
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			item* item_ = you.GetItem(key_);
@@ -572,61 +720,10 @@ void Reading(char auto_)
 				continue;
 			if(item_->type == ITM_BOOK)
 			{
-				if(item_->value0>=0)	
-				{
-					iden_list.books_list[item_->value0] = true;
-					item_->identify = true;
-				}
-				if(item_->value0==-2)
-				{					
-					item_->identify = true;
-				}
-				while(1)
-				{
-					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetItemInfor(item_, false, NULL);
-					ReleaseMutex(mutx);
-					changedisplay(DT_TEXT);
-					int key_ = waitkeyinput(true);
-					if( (key_ >= 'a' && key_ <= 'f'))
-					{
-						if(int spell_ = item_->GetValue(key_ - 'a'+1))
-						{
-							if (you.isMemorize(spell_)) {
-								changedisplay(DT_GAME);
-								printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
-								return;
-							}
-							WaitForSingleObject(mutx, INFINITE);
-							SetText() = GetSpellInfor((spell_list)spell_);
-							SetText() += "\n\n";
-							SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
-							SetText() += "\n";
-							ReleaseMutex(mutx);
-							int memory_ = waitkeyinput();
-
-							if(memory_ == 'm')
-							{
-								memorize_action(spell_);
-								return;
-							}
-							continue;
-						}	
-					}
-					view_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
-					break;
-				}
+				Memorize_book(key_);
 			}
 			else if(item_->type == ITM_SCROLL)
 			{
-				if(you.Read(key_))
-				{
-					you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL));
-					you.time_delay += you.GetNormalDelay();
-					changedisplay(DT_GAME);
-					you.TurnEnd();
-					you.SetPrevAction('r', key_);
-				}	
 			}
 			break;
 		}
@@ -648,6 +745,11 @@ void Reading(char auto_)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_READ);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

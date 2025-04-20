@@ -199,7 +199,6 @@ public:
 
 
 
-
 	bool search;
 	coord_def search_pos;
 	
@@ -354,6 +353,7 @@ public:
 
 	bool sight_reset;
 	int target;
+	int useMouseTammac = 2;
 	item *throw_weapon;
 
 	attack_infor *dead_order;

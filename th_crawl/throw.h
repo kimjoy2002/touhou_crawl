@@ -39,7 +39,7 @@ void MakeTanmac(item_infor* t, int select_);
 
 
 list<item>::iterator ThrowSelect();
-bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam);
+bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool passdoor = false);
 void paintpath(coord_def c_,beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len, float sector_);
 
 coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);

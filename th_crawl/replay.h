@@ -41,10 +41,10 @@ public:
 	void init_replay(const char* name);
 	
 	bool SaveReplayStart();
-	bool SaveReplayInput(DWORD time_, int key_);
+	bool SaveReplayInput(DWORD time_, int key_, InputedKey inputedkey);
 	
 	bool LoadReplayStart();
-	bool LoadReplayInput(DWORD *time_, int *key_);
+	bool LoadReplayInput(DWORD *time_, int *key_, InputedKey& inputedkey);
 
 	bool ReplayMode(){return play;};
 

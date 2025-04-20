@@ -1844,8 +1844,9 @@ void SkillUse(char auto_)
 		while(1)
 		{
 			int key_ = auto_;
+			InputedKey inputedKey;
 			if (key_ == 0)
-				key_ = waitkeyinput(true);
+				key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') ||  (key_ >= 'A' && key_ <= 'Z'))
 			{
 				int num = (key_ >= 'A' && key_ <= 'Z')?(key_-'A'+26):(key_-'a');
@@ -1931,6 +1932,11 @@ void SkillUse(char auto_)
 			else if(key_ == '!' || key_ == '?')
 			{
 				changemove(0);
+			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
+				}
 			}
 			else if(key_ == VK_ESCAPE)
 				break;

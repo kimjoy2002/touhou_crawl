@@ -1291,8 +1291,10 @@ void GameOver()
 	}
 	while(1)
 	{
-		int select = waitkeyinput();
-		if(select==VK_RETURN)
+		InputedKey inputedKey;
+		int select = waitkeyinput(inputedKey);
+		//마우스도 지정
+		if(select==VK_ESCAPE || select==VK_RETURN || select == -1) 
 		{
 			break;
 		}
@@ -1337,11 +1339,20 @@ void GameOver()
 				bool end_ = false;
 				while(!end_)
 				{
-					int key_ = waitkeyinput(true);
+					InputedKey inputedKey;
+					int key_ = waitkeyinput(inputedKey, true);
 					switch(key_)
 					{
 					default:
 						break;
+					case -1:
+						if(inputedKey.mouse == MKIND_LCLICK ||
+							inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case VK_RETURN:
 					case VK_ESCAPE:
 						end_ = true;

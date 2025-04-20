@@ -1392,6 +1392,27 @@ textures img_item_empty_itembox(&texture_item03, 61, 255);
 textures img_item_select_itembox(&texture_item03, 62, 255);
 textures img_item_equip_itembox(&texture_item03, 63, 255);
 textures img_item_curse_itembox(&texture_item03, 64, 255);
+textures img_item_evokable_itembox(&texture_item03, 65, 255);
+textures img_item_speciel_itembox(&texture_item03, 66, 255);
+
+textures img_command_autotravel(&texture_item03, 67, 255);
+textures img_command_autoattack(&texture_item03, 68, 255);
+textures img_command_100sleep(&texture_item03, 69, 255);
+textures img_command_magic(&texture_item03, 70, 255);
+textures img_command_skill(&texture_item03, 71, 255);
+textures img_command_skill_view(&texture_item03, 72, 255);
+textures img_command_tanmac_on(&texture_item03, 73, 255);
+textures img_command_tanmac_off(&texture_item03, 74, 255);
+textures img_command_tanmac_auto(&texture_item03, 75, 255);
+textures img_command_pickon(&texture_item03, 76, 255);
+textures img_command_pickoff(&texture_item03, 77, 255);
+textures img_command_help(&texture_item03, 78, 255);
+textures img_command_quit(&texture_item03, 79, 255);
+textures img_command_Y(&texture_item03, 80, 255);
+textures img_command_N(&texture_item03, 81, 255);
+textures img_command_empty(&texture_item03, 83, 255);
+
+
 
 textures img_effect_tanmac_middle[] = 
 {

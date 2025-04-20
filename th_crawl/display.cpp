@@ -45,6 +45,8 @@ extern shared_ptr<DirectX::SpriteFont> g_pfont;
 extern HANDLE mutx;
 extern HWND hwnd;
 
+extern POINT MousePoint;
+
 display_manager DisplayManager;
 
 DWORD FrameCnt = 0;
@@ -175,6 +177,24 @@ void display_manager::Getfontinfor()
 	// 로그 영역 크기 계산
 	log_length = (option_mg.getHeight() - 50) / fontDesc.Height;
 }
+
+void common_mouse_logic() {
+	if(isClicked(LEFT_CLICK)) {
+		g_keyQueue->push(InputedKey(MKIND_LCLICK,0,0));
+	} else if (isClicked(RIGHT_CLICK)) {
+		g_keyQueue->push(InputedKey(MKIND_RCLICK,0,0));
+	} 
+	// else if(isClickedMIDDLE_CLICK)) { //필요없을지도
+	// 	g_keyQueue->push(InputedKey(MKIND_MCLICK,0,0));
+	// }
+	else if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
+}
+
+
 void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	switch(state)
@@ -213,6 +233,7 @@ void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<
 			property_draw(pSprite,pfont);
 			break;
 	}
+	common_mouse_logic();
 }
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
@@ -2314,7 +2335,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							sight = false;
 						}
 					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, you.turn, sight, false);
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, 1.0f, you.turn, sight, false);
 				}
 				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
 				{
@@ -2336,7 +2357,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	int dot_start_y = buff_start_y + 2*fontDesc.Height;
 	int dot_size = 0;
 	int greed_max_x = 10;
-	int greed_max_y = 7;
+	int greed_max_y = 8;
 	int max_minimap_y = buff_start_y + 2*fontDesc.Height;
 
 	for(int dot_size_= 1; dot_size_ <=4; dot_size_++) {
@@ -2464,39 +2485,93 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		auto it = you.item_list.begin();
 		for(int j = 0; j < greed_max_y; j++) {
 			for(int i = 0; i < greed_max_x; i++) {
-				if(tile_count < 10) {
+				if(tile_count < 20) {
 					//명령어들
-					img_item_empty_itembox.draw(pSprite,start_x+i*32,start_y+j*32,255);
+					textures* pixel_ = &img_command_empty;
+					switch(tile_count) {
+						case SYSCMD_AUTOTRAVEL: pixel_ = &img_command_autotravel; break;
+						case SYSCMD_AUTOATTACK: pixel_ = &img_command_autoattack; break;
+						case SYSCMD_100REST: pixel_ = &img_command_100sleep; break;
+						case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
+						case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
+						case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
+						case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
+						case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
+						case SYSCMD_HELP: pixel_ = &img_command_help; break;
+						case SYSCMD_QUIT: pixel_ = &img_command_quit; break;
+						default: break;
+					}
+					int x_ = start_x+i*32, y_ = start_y+j*32;
+
+					pixel_->draw(pSprite,x_,y_,255);
+					if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+						MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+						img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+						if(isClicked(LEFT_CLICK)) {
+							g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
+						}
+					}
 				}
-				else if(tile_count>=10 && tile_count < 62) {
-					bool equip_ = false, curse = false, throw_ = false;
+				else if(tile_count>=20 && tile_count < 72) {
+					bool equip_ = false, curse = false, throw_ = false, evokable = false;
+					int x_ = start_x+i*32, y_ = start_y+j*32;
 					if(it != you.item_list.end()) {
 						equip_ = (you.isequip(it)>0);
 						throw_ = (you.throw_weapon == &(*it));
 						curse = it->curse;
+						if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent()) {
+							evokable = true;
+						}
 					}
 					if(equip_) {
-						if(curse) {
-							img_item_curse_itembox.draw(pSprite,start_x+i*32,start_y+j*32,255);
+						if(evokable) {
+							img_item_evokable_itembox.draw(pSprite,x_,y_,255);
+						}
+						else if(curse) {
+							img_item_curse_itembox.draw(pSprite,x_,y_,255);
 						} 
 						else {
-							img_item_equip_itembox.draw(pSprite,start_x+i*32,start_y+j*32,255);
+							img_item_equip_itembox.draw(pSprite,x_,y_,255);
 						}
 					} 
 					else if(throw_) {
-						img_item_select_itembox.draw(pSprite,start_x+i*32,start_y+j*32,255);
+						img_item_select_itembox.draw(pSprite,x_,y_,255);
 					} else {
-						img_item_empty_itembox.draw(pSprite,start_x+i*32,start_y+j*32,255);
+						img_item_empty_itembox.draw(pSprite,x_,y_,255);
 					}
 					if(it != you.item_list.end()) {
-						it->draw(pSprite,pfont,start_x+i*32,start_y+j*32);
+						it->draw(pSprite,pfont,x_,y_);						
+						{ //마우스
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								if(isClicked(LEFT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+								}
+								else if(isClicked(RIGHT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));
+								}
+							}
+
+						}
 						it++;
 					}
 				} else {
-					env[current_level].drawTile(pSprite, you.position.x, you.position.y, start_x+i*32,start_y+j*32, you.turn, true, true);
+					int x_ = start_x+i*32, y_ = start_y+j*32;
+					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true);
 					if(floor_items != env[current_level].item_list.end()) {
 						if(floor_items->position == you.position ) {
-							floor_items->draw(pSprite,pfont,start_x+i*32,start_y+j*32);
+							floor_items->draw(pSprite,pfont,x_,y_);
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								if(isClicked(LEFT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
+								}
+								else if(isClicked(RIGHT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_PICK_DESCRIPTION,tile_count-72,0));
+								}
+							}
 							floor_items++;
 						}
 					}

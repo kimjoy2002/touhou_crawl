@@ -915,7 +915,8 @@ void PropertyView()
 	changedisplay(DT_PROPERTY);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -932,6 +933,11 @@ void PropertyView()
 			}
 			else
 				break;
+		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
 		}
 		else if(key_ == VK_ESCAPE)
 			break;

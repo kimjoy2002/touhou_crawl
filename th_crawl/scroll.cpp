@@ -415,7 +415,8 @@ bool identity_scroll(bool pre_iden_)
 		view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			item *item_ = you.GetItem(key_);
@@ -454,6 +455,11 @@ bool identity_scroll(bool pre_iden_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_IDEN);
 			else
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
+		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -585,11 +591,19 @@ bool blink_scroll(bool pre_iden_)
 		if (pre_iden_) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), true, true, false, CL_small_danger);
 
-			switch (waitkeyinput())
+			InputedKey inputedKey;
+			switch (waitkeyinput(inputedKey))
 			{
 			case 'Y':
 			case 'y':
-				break;
+				break;				
+			case -1:
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					//ESC PASSTHORUGH
+				}
+				else {
+					break;
+				}
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
@@ -608,7 +622,8 @@ bool blink_scroll(bool pre_iden_)
 	Search_Move(coord_def(you.position.x,you.position.y), false,VT_BLINK);
 	while(1)
 	{
-		switch(waitkeyinput())
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey))
 		{
 		case 'k':
 			is_move = Search_Move(coord_def(you.position.x,you.position.y-1), false,VT_BLINK);  //위
@@ -650,7 +665,14 @@ bool blink_scroll(bool pre_iden_)
 					return true;
 				}
 			}
-			break;
+			break;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:	
 			if(pre_iden_){
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),true,true,false,CL_help);
@@ -776,8 +798,9 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 	{
 		int key_ = 0;
 
+		InputedKey inputedKey;
 		if (!waste_) {
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		}
 		else if (prev_key != 0) {
 			key_ = prev_key;
@@ -841,6 +864,11 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR);
 			else
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
+		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
 		}
 		else if(key_ == VK_ESCAPE)
 			break;
@@ -934,8 +962,9 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 	{
 		int key_ = 0;
 
+		InputedKey inputedKey;
 		if (!waste_) {
-			key_ = waitkeyinput(true);
+			key_ = waitkeyinput(inputedKey,true);
 		}
 		else if (prev_key != 0) {
 			key_ = prev_key;
@@ -993,6 +1022,11 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 			else
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 		{
 			break;
@@ -1018,7 +1052,8 @@ bool amnesia_scroll(bool pre_iden_)
 		//changedisplay(DT_SPELL);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -1049,6 +1084,11 @@ bool amnesia_scroll(bool pre_iden_)
 						//changedisplay(DT_SPELL);
 						break;
 					}
+				}
+			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
 				}
 			}
 			else if(key_ == VK_ESCAPE)

@@ -211,7 +211,8 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	bool good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 	while(1)
 	{
-		int key_ = auto_? VK_RETURN : waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = auto_? VK_RETURN : waitkeyinput(inputedKey);
 		switch(key_)
 		{
 		case 'k':
@@ -375,6 +376,13 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				deletelog();
 				you.search = false;
 				return 2;
+			}			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
 			}
 		case VK_ESCAPE:
 			deletelog();
@@ -392,7 +400,8 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 	while(1)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_DIRECTION),true,false,true,CL_help);
-		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput());
+		InputedKey inputedKey;
+		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput(inputedKey));
 		switch(key_)
 		{
 		case 'k':
@@ -422,6 +431,13 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 		case VK_RETURN:
 			(*c) = coord_def(you.position.x,you.position.y);
 			return VK_RETURN;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			deletelog();
 			return 0;

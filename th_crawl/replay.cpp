@@ -134,7 +134,7 @@ bool replay_class::SaveReplayStart()
 
 
 
-bool replay_class::SaveReplayInput(DWORD time_, int key_)
+bool replay_class::SaveReplayInput(DWORD time_, int key_, InputedKey inputedkey)
 {
     if (!init || play)
         return false;
@@ -145,7 +145,12 @@ bool replay_class::SaveReplayInput(DWORD time_, int key_)
 
         if (_wfopen_s(&fp, wfilename.c_str(), L"ab") == 0 && fp) {
             fwrite(&time_, sizeof(DWORD), 1, fp);
-            fwrite(&key_, sizeof(unsigned int), 1, fp);
+            fwrite(&key_, sizeof(int), 1, fp);
+			if(key_ == -1) {
+				fwrite(&inputedkey.mouse, sizeof(int), 1, fp);
+				fwrite(&inputedkey.val1, sizeof(int), 1, fp);
+				fwrite(&inputedkey.val2, sizeof(int), 1, fp);
+			}
             fclose(fp);
         }
     }
@@ -205,7 +210,7 @@ bool replay_class::LoadReplayStart()
 
 }
 
-bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
+bool replay_class::LoadReplayInput(DWORD *time_, int *key_, InputedKey& inputedkey)
 {
 	if(!init || !play)
 		return false;
@@ -213,8 +218,13 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_)
 	if(play_fp)
 	{
 		fread(time_,sizeof(DWORD),1,play_fp);
-		fread(key_,sizeof(unsigned int),1,play_fp);
-		
+		fread(key_,sizeof(int),1,play_fp);		
+		if(*key_ == -1) {
+			fread(&(inputedkey.mouse), sizeof(int), 1, play_fp);
+			fread(&(inputedkey.val1), sizeof(int), 1, play_fp);
+			fread(&(inputedkey.val2), sizeof(int), 1, play_fp);
+		}
+
 		if(feof(play_fp))
 		{
 			auto_key = false;
@@ -417,7 +427,8 @@ bool replay_menu(int value_)
 
 
 			changedisplay(DT_SUB_TEXT);
-			int input_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int input_ = waitkeyinput(inputedKey,true);
 
 			bool out_ = false;
 			if(input_ >= 'a' && input_ <= 'l')
@@ -442,6 +453,11 @@ bool replay_menu(int value_)
 			{
 				if(max_page>page+1)
 					page++;
+			}
+			else if(input_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					out_ = true;
+				}
 			}
 			else if(input_ == VK_ESCAPE)
 

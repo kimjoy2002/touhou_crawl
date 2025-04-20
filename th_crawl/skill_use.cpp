@@ -245,7 +245,8 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 		view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				changedisplay(DT_GAME);
@@ -336,6 +337,11 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 			}						//-----이동키끝-------
 			else if(key_ == '*')
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
+				}
+			}
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -355,7 +361,8 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_STAT_SELECT),true,false,false,CL_help);
 		while(!end_)
 		{
-			switch(waitkeyinput())
+			InputedKey inputedKey;
+			switch(waitkeyinput(inputedKey))
 			{
 			case 'S':
 				stat_ = 1;
@@ -372,7 +379,14 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 			case 'R':
 				stat_ = 0;
 				end_ = true;
-				break;
+				break;				
+			case -1:
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					//ESC PASSTHORUGH
+				}
+				else {
+					break;
+				}
 			case VK_ESCAPE:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_help);
 				return false;
@@ -615,7 +629,8 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 	view_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -661,6 +676,11 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -674,7 +694,8 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 		view_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				changedisplay(DT_GAME);
@@ -719,6 +740,11 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 			}						//-----이동키끝-------
 			else if(key_ == '*')
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE);
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					break;
+				}
+			}
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -1579,7 +1605,8 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 	view_item(IVT_CURSE_ENCHANT,LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1661,6 +1688,11 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1711,7 +1743,8 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 	view_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1784,6 +1817,11 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -1795,7 +1833,8 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 	view_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1867,6 +1906,11 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -2789,7 +2833,9 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 		printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI), true, false, false, CL_okina);
 		printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO), true, false, false, CL_okina);
 		printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS), true, false, false, CL_okina);
-		switch (waitkeyinput())
+		
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -2807,7 +2853,14 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 			loop_ = false;
 			break;
 		default:
-			break;
+			break;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -2992,7 +3045,9 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		printlog("b - " + getJunkoString(you.god_value[GT_JUNKO][1]), true, false, false, CL_junko);
 		printlog("c - " + getJunkoString(you.god_value[GT_JUNKO][2]), true, false, false, CL_junko);
 		printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER), true, false, false, CL_junko);
-		switch (waitkeyinput())
+		
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -3013,7 +3068,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'D':	
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY), true, false, false, CL_help);
-			switch (waitkeyinput())
+			
+			switch (waitkeyinput(inputedKey))
 			{
 			case 'y':
 			case 'Y':
@@ -3021,6 +3077,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				you.god_value[GT_JUNKO][0] = 0;
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY), true, false, false, CL_normal);
 				return true;
+			case -1:
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					//ESC PASSTHORUGH
+				}
+				else {
+					break;
+				}
 			case 'n':
 			case 'N':
 			default:
@@ -3031,6 +3094,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			break;
 		default:
 			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -3144,7 +3214,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		while (1)
 		{
 			view_item(IVT_PURE_ITEM, LOC_SYSTEM_DISPLAY_MANAGER_JUNKO);
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
 				item *item_ = you.GetItem(key_);
@@ -3221,6 +3292,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			{
 				view_item(IVT_SELECT, LOC_SYSTEM_DISPLAY_MANAGER_JUNKO);
 			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
+					changedisplay(DT_GAME);
+					return false;
+				}
+			}
 			else if (key_ == VK_ESCAPE)
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
@@ -3267,7 +3345,9 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), true, false, false, CL_sion);
 		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion);
-		switch (waitkeyinput())
+		
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -3281,6 +3361,13 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 			break;
 		default:
 			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -3594,7 +3681,8 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST_ASK), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST1), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST2), true, false, false, CL_miko);
-		switch (waitkeyinput())
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -3622,7 +3710,14 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 			loop_ = false;
 			break;
 		default:
-			break;
+			break;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -3672,7 +3767,8 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_ASK), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_RED), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE), true, false, false, CL_miko);
-		switch (waitkeyinput())
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -3685,7 +3781,14 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 			loop_ = false;
 			break;
 		default:
-			break;
+			break;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -3722,7 +3825,8 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2), true, false, false, CL_miko);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3), true, false, false, CL_miko);
-		switch (waitkeyinput())
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'a':
 		case 'A':
@@ -3741,6 +3845,13 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 			break;
 		default:
 			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;

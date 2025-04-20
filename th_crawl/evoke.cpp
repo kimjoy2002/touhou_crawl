@@ -334,7 +334,9 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER2), true, false, true, CL_normal);
 				printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER3), true, false, true, CL_normal);
 				printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER4), true, false, true, CL_normal);
-				int key_ = waitkeyinput();
+				
+				InputedKey inputedKey;
+				int key_ = waitkeyinput(inputedKey);
 				switch (key_) {
 					case 'a':
 					case 'A':
@@ -446,6 +448,13 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						loop_ = false;
 						break;
 					}
+					case -1:
+						if(inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case VK_ESCAPE:
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 						return false;

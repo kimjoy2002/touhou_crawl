@@ -451,6 +451,27 @@ extern textures img_item_empty_itembox;
 extern textures img_item_select_itembox;
 extern textures img_item_equip_itembox;
 extern textures img_item_curse_itembox;
+extern textures img_item_evokable_itembox;
+extern textures img_item_speciel_itembox;
+
+extern textures img_command_autotravel;
+extern textures img_command_autoattack;
+extern textures img_command_100sleep;
+extern textures img_command_magic;
+extern textures img_command_skill;
+extern textures img_command_skill_view;
+extern textures img_command_tanmac_on;
+extern textures img_command_tanmac_off;
+extern textures img_command_tanmac_auto;
+extern textures img_command_pickon;
+extern textures img_command_pickoff;
+extern textures img_command_help;
+extern textures img_command_quit;
+extern textures img_command_Y;
+extern textures img_command_N;
+extern textures img_command_empty;
+
+
 
 extern textures img_effect_autumn_leave[];
 extern textures img_effect_gold_floor[];

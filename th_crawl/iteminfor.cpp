@@ -48,13 +48,21 @@ void memorize_action(int spell_)
 				LocalzationManager::locString(LOC_SYSTEM_REMAIN_SPELLPOINT) << ": " << you.remainSpellPoiont << "]"; 
 			
 			printlog(ss.str(),true,false,false,CL_warning);
-			switch(waitkeyinput())
+			InputedKey inputedKey;
+			switch(waitkeyinput(inputedKey))
 			{
 			case 'Y':
 			case 'y':
 				you.Memorize(spell_);
 				ok_ = false;
 				break;
+			case -1:
+				if(inputedKey.mouse == MKIND_RCLICK) {
+					//ESC PASSTHORUGH
+				}
+				else {
+					break;
+				}
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
@@ -92,347 +100,355 @@ void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator
 }
 
 
+void iteminfor_(int key_, bool gameover) {
+
+	item *item_ = you.GetItem(key_);
+	if(item_)
+	{
+		int get_item_move_ = getDisplayMove();
+		while(1)
+		{
+			set<char> ket_list;
+			WaitForSingleObject(mutx, INFINITE);
+			SetText() = GetItemInfor(item_, !gameover, &ket_list);
+			ReleaseMutex(mutx);
+			changedisplay(DT_TEXT);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
+			if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
+			{
+				if(int spell_ = item_->GetValue(key_ - 'a'+1))
+				{	
+					WaitForSingleObject(mutx, INFINITE);
+					SetText() = GetSpellInfor((spell_list)spell_);
+					SetText() += "\n\n";
+					SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
+					SetText() += "\n";
+					ReleaseMutex(mutx);
+					int memory_ = waitkeyinput();
+
+					if(memory_ == 'm')
+					{
+						if (you.isMemorize(spell_)) {
+							changedisplay(DT_GAME);
+							printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
+							return;
+						}
+						memorize_action(spell_);
+						return;
+					}
+					continue;
+				}
+			}
+			else if (!ket_list.empty())
+			{
+
+				if (ket_list.count(key_) >= 1)
+				{
+					switch (key_)
+					{
+					case '=': //단축키 바꾸기
+					{
+						changedisplay(DT_GAME);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ALPHABET_ASK) + " (a-z, A-Z)", true, false, false, CL_help);
+						{
+							int alphabet_ = waitkeyinput();
+							if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
+								(alphabet_ >= 'A' && alphabet_ <= 'Z'))
+							{
+								list<item>::iterator old_;
+								list<item>::iterator new_;
+								for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
+								{
+									if (old_->id == alphabet_)
+									{
+										break;
+									}
+								}
+								for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
+								{
+									if (new_->id == item_->id)
+									{
+										break;
+									}
+								}
+								if (new_ == you.item_list.end())
+									break;
+
+								if (old_ != you.item_list.end())
+								{
+									old_->id = item_->id;
+									new_->id = alphabet_;
+									swap_list_items(you.item_list, old_, new_);
+
+									ostringstream ss;
+									ss << old_->id << " - " << old_->GetName() << ", ";
+									printlog(ss.str(), false, false, false, old_->item_color());
+								}
+								else
+								{
+									list<item>::iterator it;
+									for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+									{
+										if (compareAlphabet(it->id, alphabet_))
+										{
+											new_->id = alphabet_;
+											you.item_list.splice(it, you.item_list, new_);
+											break;
+										}
+									}
+									if (it == you.item_list.end())
+									{
+										new_->id = alphabet_;
+										you.item_list.splice(it, you.item_list, new_);
+									}
+								}
+								ostringstream ss;
+								ss << new_->id << " - " << new_->GetName() << " ";
+								printlog(ss.str(), false, false, false, new_->item_color());
+							}
+						}
+						return;
+					}
+					case 'w': //장착	
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+
+						if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
+						{
+							if (you.drowned)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+								return;
+							}
+							you.equip(item_->id, ET_WEAPON);
+						}
+						else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
+						{
+							if (you.drowned)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+								return;
+							}
+							you.equiparmor(item_->id);
+						}
+						else if (item_->type == ITM_AMULET)
+						{
+							you.equipjewerly(item_->id);
+						}
+						else if (item_->type == ITM_RING)
+						{
+							you.equipjewerly(item_->id);
+						}
+						return;
+					case 'u': //벗기
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+						if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
+						{
+							if (you.drowned)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+								return;
+							}
+							if (!you.unequip(ET_WEAPON))
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY), true, false, false, CL_normal);
+							}
+						}
+						else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
+						{
+							if (you.drowned)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+								return;
+							}
+							you.unequiparmor(item_->id);
+						}
+						else if (item_->type == ITM_AMULET)
+						{
+							you.unequipjewerly(item_->id);
+						}
+						else if (item_->type == ITM_RING)
+						{
+							you.unequipjewerly(item_->id);
+						}
+						return;
+					case 'f': //탄막
+					{
+						changedisplay(DT_GAME);
+						you.throw_weapon = item_;
+						ostringstream ss;
+						ss << item_->id << " - " << item_->GetName() << "(" << LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) << ") ";
+						printlog(ss.str(), false, false, false, item_->item_color());
+					}
+						return;
+					case 'q': //마시기
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+						if (you.drowned)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.Drink(item_->id))
+						{
+							you.time_delay += you.GetNormalDelay();
+							you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
+							changedisplay(DT_GAME);
+							if (you.god == GT_EIRIN)
+							{
+								if (randA(2))
+								{
+									you.PietyUpDown(1);
+									you.GiftCount(1);
+								}
+							}
+							you.TurnEnd();
+						}
+						return;
+					case 'e': //먹기
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+						if (you.drowned)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						you.Eat(item_->id);
+						return;
+					case 'r': //읽기
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+						if (you.drowned)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if(you.Read(item_->id))
+						{
+							you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SCROLL));
+							you.time_delay += you.GetNormalDelay();
+							changedisplay(DT_GAME);
+							you.TurnEnd();
+						}
+						return;
+					case 'v': //발동
+						changedisplay(DT_GAME);
+						if (you.s_lunatic)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+							return;
+						}
+						if (you.s_evoke_ghost &&
+							!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
+							) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+							return;
+						}
+						if (you.Evoke(item_->id, false))
+						{
+							you.time_delay += you.GetNormalDelay();
+							you.TurnEnd();
+						}
+						return;
+					case 'd': //버리기
+					case 'D':
+						{
+							changedisplay(DT_GAME);
+							if (you.s_lunatic)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
+								return;
+							}
+							if (you.s_evoke_ghost) {
+								printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
+								return;
+							}
+							bool discard_ = false;
+							for (auto it = you.item_list.begin(); it != you.item_list.end(); it++)
+							{
+								if (&(*it) == item_)
+								{
+									if (you.possibleunequip(it))
+									{
+										discard(it, GetItemofNum(it, you.item_list.end()));
+										discard_ = true;
+										break;
+									}
+									else
+									{
+										break;
+									}
+								}
+							}
+							if (!discard_)
+							{
+								printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST), true, false, false, CL_normal);
+							}
+							return;
+						}
+					}
+				}
+			}
+			break;
+		}
+		view_item(IVT_INFOR,gameover?LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER:LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
+		setDisplayMove(get_item_move_);
+	}
+}
+
+
 void iteminfor(bool gameover)
 {
 	view_item(IVT_INFOR,gameover?LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER:LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
 	while(1)
 	{
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
-			item *item_ = you.GetItem(key_);
-			if(item_)
-			{
-				int get_item_move_ = getDisplayMove();
-				while(1)
-				{
-					set<char> ket_list;
-					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetItemInfor(item_, !gameover, &ket_list);
-					ReleaseMutex(mutx);
-					changedisplay(DT_TEXT);
-					int key_ = waitkeyinput(true);
-					if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
-					{
-						if(int spell_ = item_->GetValue(key_ - 'a'+1))
-						{	
-							WaitForSingleObject(mutx, INFINITE);
-							SetText() = GetSpellInfor((spell_list)spell_);
-							SetText() += "\n\n";
-							SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
-							SetText() += "\n";
-							ReleaseMutex(mutx);
-							int memory_ = waitkeyinput();
-
-							if(memory_ == 'm')
-							{
-								if (you.isMemorize(spell_)) {
-									changedisplay(DT_GAME);
-									printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
-									return;
-								}
-								memorize_action(spell_);
-								return;
-							}
-							continue;
-						}
-					}
-					else if (!ket_list.empty())
-					{
-
-						if (ket_list.count(key_) >= 1)
-						{
-							switch (key_)
-							{
-							case '=': //단축키 바꾸기
-							{
-								changedisplay(DT_GAME);
-								printlog(LocalzationManager::locString(LOC_SYSTEM_ALPHABET_ASK) + " (a-z, A-Z)", true, false, false, CL_help);
-								{
-									int alphabet_ = waitkeyinput();
-									if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
-										(alphabet_ >= 'A' && alphabet_ <= 'Z'))
-									{
-										list<item>::iterator old_;
-										list<item>::iterator new_;
-										for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
-										{
-											if (old_->id == alphabet_)
-											{
-												break;
-											}
-										}
-										for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
-										{
-											if (new_->id == item_->id)
-											{
-												break;
-											}
-										}
-										if (new_ == you.item_list.end())
-											break;
-
-										if (old_ != you.item_list.end())
-										{
-											old_->id = item_->id;
-											new_->id = alphabet_;
-											swap_list_items(you.item_list, old_, new_);
-
-											ostringstream ss;
-											ss << old_->id << " - " << old_->GetName() << ", ";
-											printlog(ss.str(), false, false, false, old_->item_color());
-										}
-										else
-										{
-											list<item>::iterator it;
-											for (it = you.item_list.begin(); it != you.item_list.end(); it++)
-											{
-												if (compareAlphabet(it->id, alphabet_))
-												{
-													new_->id = alphabet_;
-													you.item_list.splice(it, you.item_list, new_);
-													break;
-												}
-											}
-											if (it == you.item_list.end())
-											{
-												new_->id = alphabet_;
-												you.item_list.splice(it, you.item_list, new_);
-											}
-										}
-										ostringstream ss;
-										ss << new_->id << " - " << new_->GetName() << " ";
-										printlog(ss.str(), false, false, false, new_->item_color());
-									}
-								}
-								return;
-							}
-							case 'w': //장착	
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-
-								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
-								{
-									if (you.drowned)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-										return;
-									}
-									you.equip(item_->id, ET_WEAPON);
-								}
-								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
-								{
-									if (you.drowned)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-										return;
-									}
-									you.equiparmor(item_->id);
-								}
-								else if (item_->type == ITM_AMULET)
-								{
-									you.equipjewerly(item_->id);
-								}
-								else if (item_->type == ITM_RING)
-								{
-									you.equipjewerly(item_->id);
-								}
-								return;
-							case 'u': //벗기
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-								if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
-								{
-									if (you.drowned)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-										return;
-									}
-									if (!you.unequip(ET_WEAPON))
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY), true, false, false, CL_normal);
-									}
-								}
-								else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
-								{
-									if (you.drowned)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-										return;
-									}
-									you.unequiparmor(item_->id);
-								}
-								else if (item_->type == ITM_AMULET)
-								{
-									you.unequipjewerly(item_->id);
-								}
-								else if (item_->type == ITM_RING)
-								{
-									you.unequipjewerly(item_->id);
-								}
-								return;
-							case 'f': //탄막
-							{
-								changedisplay(DT_GAME);
-								you.throw_weapon = item_;
-								ostringstream ss;
-								ss << item_->id << " - " << item_->GetName() << "(" << LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) << ") ";
-								printlog(ss.str(), false, false, false, item_->item_color());
-							}
-								return;
-							case 'q': //마시기
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-								if (you.drowned)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.Drink(item_->id))
-								{
-									you.time_delay += you.GetNormalDelay();
-									you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_POTION));
-									changedisplay(DT_GAME);
-									if (you.god == GT_EIRIN)
-									{
-										if (randA(2))
-										{
-											you.PietyUpDown(1);
-											you.GiftCount(1);
-										}
-									}
-									you.TurnEnd();
-								}
-								return;
-							case 'e': //먹기
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-								if (you.drowned)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								you.Eat(item_->id);
-								return;
-							case 'r': //읽기
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-								if (you.drowned)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if(you.Read(item_->id))
-								{
-									you.doingActionDump(DACT_USE, LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SCROLL));
-									you.time_delay += you.GetNormalDelay();
-									changedisplay(DT_GAME);
-									you.TurnEnd();
-								}
-								return;
-							case 'v': //발동
-								changedisplay(DT_GAME);
-								if (you.s_lunatic)
-								{
-									printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-									return;
-								}
-								if (you.s_evoke_ghost &&
-									!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
-									) {
-									printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-									return;
-								}
-								if (you.Evoke(item_->id, false))
-								{
-									you.time_delay += you.GetNormalDelay();
-									you.TurnEnd();
-								}
-								return;
-							case 'd': //버리기
-							case 'D':
-								{
-									changedisplay(DT_GAME);
-									if (you.s_lunatic)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-										return;
-									}
-									if (you.s_evoke_ghost) {
-										printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-										return;
-									}
-									bool discard_ = false;
-									for (auto it = you.item_list.begin(); it != you.item_list.end(); it++)
-									{
-										if (&(*it) == item_)
-										{
-											if (you.possibleunequip(it))
-											{
-												discard(it, GetItemofNum(it, you.item_list.end()));
-												discard_ = true;
-												break;
-											}
-											else
-											{
-												break;
-											}
-										}
-									}
-									if (!discard_)
-									{
-										printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST), true, false, false, CL_normal);
-									}
-									return;
-								}
-							}
-						}
-					}
-					break;
-				}
-				view_item(IVT_INFOR,gameover?LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER:LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
-				setDisplayMove(get_item_move_);
-			}
+			iteminfor_(key_, gameover);
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
@@ -450,6 +466,11 @@ void iteminfor(bool gameover)
 		{
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK || (inputedKey.mouse == MKIND_LCLICK && gameover)) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE || (key_ == VK_RETURN && gameover))
 			break;
 	}

@@ -31,6 +31,7 @@ environment env[MAXLEVEL];
 int current_level=0;
 extern HANDLE mutx;
 
+extern POINT MousePoint;
 
 
 
@@ -874,7 +875,7 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 	}
 }
 
-void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, bool sight, bool onlyTile)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, bool sight, bool onlyTile)
 {
 	if (!isExplore(tile_x, tile_y))
 	{
@@ -902,6 +903,20 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 128, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SANCTUARY)
 		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 255, 0));
+	if(!onlyTile){
+		if (MousePoint.x > x - scale*16 && MousePoint.x <= x + scale*16 &&
+		MousePoint.y > y - scale*16 && MousePoint.y <= y+ scale*16
+		)
+		{
+			img_effect_select.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
+			if(isClicked(LEFT_CLICK)) {
+				g_keyQueue->push(InputedKey(MKIND_MAP,tile_x,tile_y));
+			}
+			else if(isClicked(RIGHT_CLICK)) {
+				g_keyQueue->push(InputedKey(MKIND_MAP_DESCRIPTION,tile_x,tile_y));
+			}
+		}
+	}
 
 }
 bool environment::changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul)

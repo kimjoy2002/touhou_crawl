@@ -63,13 +63,21 @@ void saveandcheckexit()
 	while(1)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN),false,false,false,CL_help);
-		switch(waitkeyinput())
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey))
 		{
 		case 'Y':
 			enterlog();	
 			if(!ReplayClass.ReplayMode())
 				g_saveandexit = true;
-			return;
+			return;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case 'N':
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
@@ -87,7 +95,8 @@ void nosaveandexit()
 	while(1)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_NONSAVE_QUIT_YN),false,false,false,CL_help);
-		switch(waitkeyinput())
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey))
 		{
 		case 'Y':
 			enterlog();
@@ -95,7 +104,14 @@ void nosaveandexit()
 			GameOver();
 			//delete_file();
 			//PostQuitMessage(0);
-			return;
+			return;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case 'N':
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);

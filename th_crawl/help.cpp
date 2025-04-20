@@ -33,7 +33,8 @@ void Help_Show()
 	ReleaseMutex(mutx);
 	while(loop_)
 	{
-		input_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		input_ = waitkeyinput(inputedKey,true);
 		switch(input_)
 		{
 		case '?':
@@ -49,7 +50,8 @@ void Help_Show()
 			ReleaseMutex(mutx);
 			while(1)
 			{
-				switch(waitkeyinput(true))
+				InputedKey inputedKey;
+				switch(waitkeyinput(inputedKey,true))
 				{
 				case VK_UP:
 					changemove(1);  //위
@@ -63,6 +65,13 @@ void Help_Show()
 				case VK_NEXT:
 					changemove(-DisplayManager.log_length);
 					continue;
+				case -1:
+					if(inputedKey.mouse == MKIND_RCLICK) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case VK_ESCAPE:
 					loop_ = false;
 					break;
@@ -107,7 +116,7 @@ void Help_Show()
 				ReleaseMutex(mutx);	
 				while(1)
 				{
-					switch(waitkeyinput(true))
+					switch(waitkeyinput(inputedKey, true))
 					{
 					case VK_UP:
 						changemove(1);  //위
@@ -120,7 +129,14 @@ void Help_Show()
 						continue;
 					case VK_NEXT:
 						changemove(-DisplayManager.log_length);
-						continue;
+						continue;						
+					case -1:
+						if(inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case VK_ESCAPE:
 						loop_ = false;
 						break;
@@ -143,7 +159,8 @@ void Help_Show()
 			ReleaseMutex(mutx);
 			while(1)
 			{
-				switch(waitkeyinput(true))
+				InputedKey inputedKey;
+				switch(waitkeyinput(inputedKey,true))
 				{
 				case VK_UP:
 					changemove(1);  //위
@@ -157,6 +174,13 @@ void Help_Show()
 				case VK_NEXT:
 					changemove(-DisplayManager.log_length);
 					continue;
+				case -1:
+					if(inputedKey.mouse == MKIND_RCLICK) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case VK_ESCAPE:
 					loop_ = false;
 					break;
@@ -166,6 +190,13 @@ void Help_Show()
 				break;
 			}
 			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case VK_ESCAPE:
 			loop_ = false;
 			break;

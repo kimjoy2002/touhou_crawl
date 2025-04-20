@@ -14,27 +14,35 @@
 #include "monster_texture.h"
 #include "option_manager.h"
 
-void Equip_Weapon()
-{
+bool weapon_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_WEAPON), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_WEAPON), true, false, false, CL_danger);
+		return true;
+	}
+	return false;
+}
+
+void Equip_Weapon()
+{
+	if(weapon_prev_fail())
+	{
 		return;
 	}
-
 	view_item(IVT_EQ_WEAPON,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -67,6 +75,11 @@ void Equip_Weapon()
 			}
 			break;
 		}
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -77,16 +90,10 @@ void Equip_Weapon()
 
 void weapon_swap()
 {
-	if (you.s_lunatic)
+	if(weapon_prev_fail())
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
 		return;
 	}
-	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_EQUIP), true, false, false, CL_normal);
-		return;
-	}
-
 	item* aitem_ = you.GetItem('a');
 	item* bitem_ = you.GetItem('b');
 	if (aitem_ && !aitem_->isRightType(ET_WEAPON))
@@ -137,26 +144,37 @@ void weapon_swap()
 	}
 	you.SetPrevAction('\'');
 }
-void Equip_Armor()
-{
+
+
+bool armor_prev_fail(){
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SWAP_ARMOUR), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_ARMOUR), true, false, false, CL_danger);
+		return true;
+	}
+	return false;
+}
+
+
+void Equip_Armor()
+{
+	if(armor_prev_fail()) {
 		return;
 	}
 	view_item(IVT_EQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -181,6 +199,11 @@ void Equip_Armor()
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -190,19 +213,14 @@ void Equip_Armor()
 
 void Unequip_Armor()
 {	
-	if(you.s_lunatic)
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_ARMOUR),true,false,false,CL_danger);
-		return;
-	}
-	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_ARMOUR), true, false, false, CL_normal);
+	if(armor_prev_fail()) {
 		return;
 	}
 	view_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			
@@ -228,29 +246,41 @@ void Unequip_Armor()
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
 	changedisplay(DT_GAME);
 }
 
-
-
-void Equip_Jewelry()
-{	
+bool jewelry_prev_fail() {
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_EQUIP_JEWELRY), true, false, false, CL_normal);
+		return true;
+	}
+	return false;
+}
+
+
+void Equip_Jewelry()
+{
+	if(jewelry_prev_fail()) {
 		return;
 	}
 	view_item(IVT_EQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -275,6 +305,11 @@ void Equip_Jewelry()
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -283,20 +318,15 @@ void Equip_Jewelry()
 
 
 void Unequip_Jewelry()
-{	
-	if(you.s_lunatic)
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_JEWELRY),true,false,false,CL_danger);
-		return;
-	}
-	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_JEWELRY), true, false, false, CL_normal);
+{
+	if(jewelry_prev_fail()) {
 		return;
 	}
 	view_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -321,6 +351,11 @@ void Unequip_Jewelry()
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}

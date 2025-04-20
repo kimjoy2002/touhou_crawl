@@ -8,6 +8,7 @@
 
 #include "const.h"
 #include "display.h"
+#include "d3dUtility.h"
 #include "key.h"
 #include "replay.h"
 #include <conio.h>
@@ -27,14 +28,14 @@ std::unique_ptr<KeyInputQueue> g_keyQueue;
 
 bool isKeyinput()
 {
-	MSG temp;
+	InputedKey temp;
 	if(g_keyQueue->try_pop(temp))
 		return true;
 	else 
 		return false;
 }
 
-int waitkeyinput_inter(bool direction_, bool immedity_)
+int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_)
 {
 	if(immedity_)
 	{
@@ -49,108 +50,114 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 		throw 0;
 	while(!g_shutdownRequested) 
 	{
-		MSG msg = g_keyQueue->pop();
-		if(msg.message == WM_CHAR)
-		{
-			if(msg.wParam == 1) //A+컨트롤
-			{
-				//if(shift_check)
-					return 0x8B; //0x8B은 컨트롤A
-			}
-			if(msg.wParam == 16) //p+컨트롤
-			{
-				//if(shift_check)
-					return 0x88; //0x88은 컨트롤p
-			}
-			else if(msg.wParam == 17 ) //Q+컨트롤
-			{
-				//if(shift_check)
-					return 0x89; //0x89은 컨트롤Q
-			}
-			else if(msg.wParam == 19) //S+컨트롤
-			{
-				//if(shift_check)
-					return 0x8A; //0x8A은 컨트롤S
-			}
-			return msg.wParam; //엔터13 esc 27
-		}
-		else if(msg.message == WM_KEYDOWN)
-		{
-			switch(msg.wParam)
-			{
-			case '8':
-				if(direction_ || shift_check) break; //원래는 if(direction_)만있었는데 뭔가 꼬임
-				return (shift_check)?'*':'k';
-			case VK_UP:
-			case VK_NUMPAD8:
-				if(direction_) return VK_UP;
-				return (shift_check) ? 'K' : 'k';
-				break;
-			case '4':
-				if(direction_ || shift_check) break;
-				return (shift_check)?'$':'h';
-			case VK_LEFT:
-			case VK_NUMPAD4:	
-				if(direction_) return VK_LEFT;
-				return (shift_check) ? 'H' : 'h';
-				break;
-			case '6':
-				if(direction_ || shift_check) break;
-				return (shift_check)?'^':'l';
-			case VK_RIGHT:
-			case VK_NUMPAD6:	
-				if(direction_) return VK_RIGHT;
-				return (shift_check) ? 'L' : 'l';
-				break;
-			case '2':
-				if(direction_ || shift_check) break;
-				return (shift_check)?'@':'j';
-			case VK_DOWN:
-			case VK_NUMPAD2:	
-				if(direction_) return VK_DOWN;
-				return (shift_check) ? 'J' : 'j';
-				break;			
-			case '1':		
-				if(direction_ || shift_check) break;
-				return (shift_check)?'!':'b';
-			case VK_NUMPAD1:	
-			case 35:
-				return (shift_check) ? 'B' : 'b';
-			case '3':		
-				if(direction_ || shift_check) break;
-				return (shift_check)?'#':'n';
-			case 34:
-				if(direction_) return 34;
-			case VK_NUMPAD3:	
-				return (shift_check) ? 'N' : 'n';
-			case '7':	
-				if(direction_ || shift_check) break;
-				return (shift_check)?'&':'y';
-			case VK_NUMPAD7:	
-			case 36:
-				return (shift_check) ? 'Y' : 'y';
-			case '9':	
-				if(direction_ || shift_check) break;
-				return (shift_check)?'(':'u';	
-			case 33:
-				if(direction_) return 33;
-			case VK_NUMPAD9:	
-				return (shift_check) ? 'U' : 'u';
-			default:
-				break;
-			}			
-			if(msg.wParam == VK_SHIFT)
-				shift_check = true;
-			if(msg.wParam == VK_CONTROL)
-				ctrl_check = true;
+		inputedKey = g_keyQueue->pop();
+		if(inputedKey.mouse == MKIND_NONE) {
 
-		}
-		else if(msg.message == WM_KEYUP)
-		{
-			if(msg.wParam == VK_SHIFT)
-				shift_check = false;
-			if(msg.wParam == VK_CONTROL)
-				ctrl_check = false;
+			MSG msg = inputedKey.key;
+			if(msg.message == WM_CHAR)
+			{
+				if(msg.wParam == 1) //A+컨트롤
+				{
+					//if(shift_check)
+						return 0x8B; //0x8B은 컨트롤A
+				}
+				if(msg.wParam == 16) //p+컨트롤
+				{
+					//if(shift_check)
+						return 0x88; //0x88은 컨트롤p
+				}
+				else if(msg.wParam == 17 ) //Q+컨트롤
+				{
+					//if(shift_check)
+						return 0x89; //0x89은 컨트롤Q
+				}
+				else if(msg.wParam == 19) //S+컨트롤
+				{
+					//if(shift_check)
+						return 0x8A; //0x8A은 컨트롤S
+				}
+				return msg.wParam; //엔터13 esc 27
+			}
+			else if(msg.message == WM_KEYDOWN)
+			{
+				switch(msg.wParam)
+				{
+				case '8':
+					if(direction_ || shift_check) break; //원래는 if(direction_)만있었는데 뭔가 꼬임
+					return (shift_check)?'*':'k';
+				case VK_UP:
+				case VK_NUMPAD8:
+					if(direction_) return VK_UP;
+					return (shift_check) ? 'K' : 'k';
+					break;
+				case '4':
+					if(direction_ || shift_check) break;
+					return (shift_check)?'$':'h';
+				case VK_LEFT:
+				case VK_NUMPAD4:	
+					if(direction_) return VK_LEFT;
+					return (shift_check) ? 'H' : 'h';
+					break;
+				case '6':
+					if(direction_ || shift_check) break;
+					return (shift_check)?'^':'l';
+				case VK_RIGHT:
+				case VK_NUMPAD6:	
+					if(direction_) return VK_RIGHT;
+					return (shift_check) ? 'L' : 'l';
+					break;
+				case '2':
+					if(direction_ || shift_check) break;
+					return (shift_check)?'@':'j';
+				case VK_DOWN:
+				case VK_NUMPAD2:	
+					if(direction_) return VK_DOWN;
+					return (shift_check) ? 'J' : 'j';
+					break;			
+				case '1':		
+					if(direction_ || shift_check) break;
+					return (shift_check)?'!':'b';
+				case VK_NUMPAD1:	
+				case 35:
+					return (shift_check) ? 'B' : 'b';
+				case '3':		
+					if(direction_ || shift_check) break;
+					return (shift_check)?'#':'n';
+				case 34:
+					if(direction_) return 34;
+				case VK_NUMPAD3:	
+					return (shift_check) ? 'N' : 'n';
+				case '7':	
+					if(direction_ || shift_check) break;
+					return (shift_check)?'&':'y';
+				case VK_NUMPAD7:	
+				case 36:
+					return (shift_check) ? 'Y' : 'y';
+				case '9':	
+					if(direction_ || shift_check) break;
+					return (shift_check)?'(':'u';	
+				case 33:
+					if(direction_) return 33;
+				case VK_NUMPAD9:	
+					return (shift_check) ? 'U' : 'u';
+				default:
+					break;
+				}			
+				if(msg.wParam == VK_SHIFT)
+					shift_check = true;
+				if(msg.wParam == VK_CONTROL)
+					ctrl_check = true;
+	
+			}
+			else if(msg.message == WM_KEYUP)
+			{
+				if(msg.wParam == VK_SHIFT)
+					shift_check = false;
+				if(msg.wParam == VK_CONTROL)
+					ctrl_check = false;
+			}
+		} else {
+			return -1; //키보드 입력
 		}
 	}
 	if(g_shutdownRequested)
@@ -160,20 +167,23 @@ int waitkeyinput_inter(bool direction_, bool immedity_)
 	return 0;
 }
 
+int waitkeyinput(bool direction_, bool immedity_) {
+	InputedKey temp;
+	return waitkeyinput(temp, direction_,  immedity_);
+}
 
-
-int waitkeyinput(bool direction_, bool immedity_)
+int waitkeyinput(InputedKey& key, bool direction_, bool immedity_)
 {
 
 	if(ReplayClass.auto_key == false)
 	{
 		DWORD time_ = timeGetTime();
 
-		int return_ = waitkeyinput_inter(direction_,immedity_);
+		int return_ = waitkeyinput_inter(key, direction_,immedity_);
 	
 		DWORD time2_ = timeGetTime();
 
-		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_), return_);
+		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_), return_, key);
 
 		return return_;
 	}
@@ -181,39 +191,48 @@ int waitkeyinput(bool direction_, bool immedity_)
 	{
 		DWORD delay_;
 		int return_;
-		
+		InputedKey inputedkey;
 		MSG msg;
-		bool get_ = g_keyQueue->try_pop(msg);
+		bool get_ = g_keyQueue->try_pop(inputedkey);
 
 		if(get_ == true)
 		{
-			switch(msg.wParam)
-			{
-			case 'x':
-				replay_speed = 1;
-				break;
-			case 'c':
-				replay_speed = 0;
-				break;
-			case 'z':
-				while(!g_shutdownRequested)
+			if(inputedkey.mouse == MKIND_NONE) {
+				msg = inputedkey.key;
+				switch(msg.wParam)
 				{
-					get_ = g_keyQueue->try_pop(msg);
-
-					if(get_ == true && msg.message == WM_CHAR)
+				case 'x':
+					replay_speed = 1;
+					break;
+				case 'c':
+					replay_speed = 0;
+					break;
+				case 'z':
+					while(!g_shutdownRequested)
 					{
-						if(msg.wParam == 'z' || msg.wParam == 'x' || msg.wParam == 'c')
-						{
-							if (msg.wParam == 'x')
-								replay_speed = 1;
-							else if (msg.wParam == 'c')
-								replay_speed = 0;
-							break;
+						get_ = g_keyQueue->try_pop(inputedkey);
+	
+						if(get_ == true) {							
+							if(inputedkey.mouse == MKIND_NONE) {
+								msg = inputedkey.key;
+								if(msg.message == WM_CHAR)
+								{
+									if(msg.wParam == 'z' || msg.wParam == 'x' || msg.wParam == 'c')
+									{
+										if (msg.wParam == 'x')
+											replay_speed = 1;
+										else if (msg.wParam == 'c')
+											replay_speed = 0;
+										break;
+									}
+								}
+							}
+
 						}
+						Sleep(1);
 					}
-					Sleep(1);
+					break;
 				}
-				break;
 			}
 		}
 
@@ -221,7 +240,7 @@ int waitkeyinput(bool direction_, bool immedity_)
 		{
 			throw 0;
 		}
-		if(ReplayClass.LoadReplayInput(&delay_,&return_))
+		if(ReplayClass.LoadReplayInput(&delay_,&return_, key))
 		{		
 			if(delay_>0)
 			{
@@ -237,13 +256,17 @@ int waitkeyinput(bool direction_, bool immedity_)
 }
 
 
-void KeyInputQueue::push(MSG key) {
+void KeyInputQueue::push(InputedKey key) {
 	std::unique_lock<std::mutex> lock(mutex_);
 	queue_.push({ key, std::chrono::steady_clock::now() });
 	cv_.notify_one();
 }
 
-MSG KeyInputQueue::pop(int timeout_ms) {
+void KeyInputQueue::push(MSG key) {
+	push(InputedKey(key));
+}
+
+InputedKey KeyInputQueue::pop(int timeout_ms) {
 	std::unique_lock<std::mutex> lock(mutex_);
 
 	while (true) {
@@ -266,7 +289,7 @@ MSG KeyInputQueue::pop(int timeout_ms) {
 	}
 }
 
-bool KeyInputQueue::try_pop(MSG& key) {
+bool KeyInputQueue::try_pop(InputedKey& key) {
     std::lock_guard<std::mutex> lock(mutex_);
     if (queue_.empty()) return false;
 
@@ -286,8 +309,10 @@ int MoreWait()
 	printlog("----------" + LocalzationManager::locString(LOC_SYSTEM_MORE) + "----------",true,false,true,CL_normal);
 	while(1)
 	{
-		int select = waitkeyinput();
-		if(select==VK_RETURN)
+		InputedKey inputedKey;
+		int select = waitkeyinput(inputedKey);
+		//마우스도 지정
+		if(select==VK_ESCAPE || select==VK_RETURN || select == -1) 
 		{
 			break;
 		}

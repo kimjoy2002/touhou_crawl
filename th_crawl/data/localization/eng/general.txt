@@ -197,9 +197,7 @@ LOC_SYSTEM_STASIS_PENALTY,You can’t teleport while stasis interference is acti
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
-LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_ARMOUR,You can't remove armor while consumed by madness!
-LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY,You can't equip accessories while consumed by madness!
-LOC_SYSTEM_LUNATIC_PENALTY_TAKEOFF_JEWELRY,You can't remove accessories while consumed by madness!
+LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY,You can't switch jewelry while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_PICKUP,You can't pick anything up while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD,You can't discard anything while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_EAT,You can't eat while consumed by madness!
@@ -210,11 +208,8 @@ LOC_SYSTEM_LUNATIC_PENALTY_THROW,You can't throw while consumed by madness!
 LOC_SYSTEM_GHOST_PENALTY,You can't do that as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_LEARN_SPELL,You can't learn magic as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_SWAP_WEAPON,You can't switch weapons as a ghost.
-LOC_SYSTEM_GHOST_PENALTY_SWAP_EQUIP,You can't switch equipment as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_SWAP_ARMOUR,You can't switch armor as a ghost.
-LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_ARMOUR,You can't remove armor as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_EQUIP_JEWELRY,You can't equip accessories as a ghost.
-LOC_SYSTEM_GHOST_PENALTY_TAKEOFF_JEWELRY,You can't remove accessories as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_PICKUP,You can't pick things up as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_DISCRAD,You can't discard things as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_EAT,You can't eat as a ghost.
@@ -273,6 +268,9 @@ LOC_SYSTEM_DISCORVER_SOMETHING,Discovered {0}.
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,Auto-exploration doesn't seem possible here.
 LOC_SYSTEM_AUTOPICKUP_ON,Auto-pickup enabled.
 LOC_SYSTEM_AUTOPICKUP_OFF,Auto-pickup disabled. (Press {0} to enable again)
+LOC_SYSTEM_AUTOTANMAC_ON,Always use bullet when approaching enemies or Auto Battle.
+LOC_SYSTEM_AUTOTANMAC_OFF,Do not use bullet when approaching enemies or Auto Battle.
+LOC_SYSTEM_AUTOTANMAC_AUTO,Use bullet if the enemy is at a distance during approach or Auto Battle.
 LOC_SYSTEM_AUTOEXPLORE_WHERE,Which dungeon shall we explore? (Use uppercase for the last floor)
 LOC_SYSTEM_TURN_TELEPORT,Suddenly, your surroundings have changed.
 LOC_SYSTEM_TURN_TELEPORT_SAME,You noticed a slight spatial distortion.
@@ -4548,3 +4546,4 @@ LOC_SYSTEM_DEBUG_TENSI_TENSION,Tension
 LOC_SYSTEM_DEBUG_TENSI_CRISIS,Crisis
 LOC_SYSTEM_DEBUG_TENSI_PEACE,Peace
 LOC_SYSTEM_DEBUG_RISK,Risk Level
+LOC_SYSTEM_DEBUG_POSITION_BUG,Mouse Moving Bug ({0},{1})-({2},{3})

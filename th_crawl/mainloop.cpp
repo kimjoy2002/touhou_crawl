@@ -454,6 +454,23 @@ void Initialize()
 	you.FairyRevive(false);
 }
 
+void search_monspell_view(monster* mon_);
+void iteminfor_(int key_, bool gameover);
+bool weapon_prev_fail();
+bool armor_prev_fail();
+bool jewelry_prev_fail();
+bool pickup_prev_fail(bool no_speak);
+bool throw_prev_fail(bool no_speak);
+bool drink_prev_fail();
+bool read_prev_fail();
+bool eat_prev_fail();
+bool evoke_prev_fail();
+void Memorize_book(int key_);
+void drink_logic(int key_);
+void Reading_logic(int key_);
+void evoke_logic(int key_, char auto_);
+void auto_tanmac_onoff();
+void PickUpSelect_logic(list<item>::iterator& it);
 
 void MainLoop()
 {
@@ -477,7 +494,8 @@ void MainLoop()
 			skill_view();
 			you.youMaxiExp = false;
 		}
-		int char_ = waitkeyinput();
+		InputedKey inputedKey;
+		int char_ = waitkeyinput(inputedKey);
 
 		you.prev_hp[1] = you.GetHp();
 		you.prev_mp[1] = you.GetMp();
@@ -485,6 +503,268 @@ void MainLoop()
 
 		switch(char_)
 		{
+		case -1:
+			{
+				if(inputedKey.mouse == MKIND_MAP) {
+					coord_def target_pos(inputedKey.val1, inputedKey.val2);
+					if(target_pos == you.position) {
+						dungeon_tile_type tile_type = env[current_level].dgtile[you.position.x][you.position.y].tile;
+						stair_kind stair_kind = env[current_level].getStairKind(target_pos.x, target_pos.y);
+
+						bool unable_pickup = pickup_prev_fail(true);
+						int pick_num=0;
+						list<item>::iterator it;
+						for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
+						{
+							list<item>::iterator temp = it++;
+							if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
+							{
+								if(isPick(&(*temp)))
+								{
+									pick_num++;
+								}
+							}
+							else if(pick_num)
+								break;
+						}
+
+						//우선순위(아이템>계단>신전>1턴휴식)
+						if(!unable_pickup && pick_num > 0) {
+							PickUp();
+						} else if(stair_kind != STAIR_KIND_NOT_STAIR) {
+							switch(stair_kind) {
+							case STAIR_KIND_DOWN_BASE:
+							case STAIR_KIND_DOWN_SPECIAL:
+								Stair_move(true);
+								break;
+							case STAIR_KIND_UP_BASE:
+							case STAIR_KIND_UP_SPECIAL:
+								Stair_move(false);
+								break;
+							default:
+								break;
+							}
+						}
+						else if(tile_type >= DG_TEMPLE_FIRST && tile_type <= DG_TEMPLE_LAST)
+						{ 
+							Pray();
+						} else {
+							action_turn_skip();
+						}
+					}
+					else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || you.resetLOS() == IT_MAP_DANGER) {
+						//한칸씩 이동 
+						beam_iterator beam(you.position,target_pos);
+						if(CheckThrowPath(you.position,target_pos,beam, true)) {
+							beam.init();
+							int target_abs_ = (target_pos - you.position).abs();
+							int abs_ = ((*beam) - you.position).abs();
+							bool unable_throw = throw_prev_fail(true);
+							if(env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you) 
+							 && you.useMouseTammac > 0
+							 && !unable_throw 
+							 && you.throw_weapon
+							 && (target_abs_ > 2 || you.useMouseTammac == 1) ) {
+								Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
+							} else if(abs_ == 1 || abs_ == 2) {
+								action_Move(0, (*beam));
+							} else {
+								printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_POSITION_BUG,
+								   PlaceHolderHelper(to_string(you.position.x)),
+								   PlaceHolderHelper(to_string(you.position.y)),
+								   PlaceHolderHelper(to_string((*beam).x)),
+								   PlaceHolderHelper(to_string((*beam).y))) ,true,false,false,CL_danger);
+							}
+						}
+					} else {
+						Long_Move(coord_def(inputedKey.val1, inputedKey.val2));
+					}
+				} else if (inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+					coord_def target_pos(inputedKey.val1, inputedKey.val2);
+					if(unit *unit_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y, &you))
+					{
+						if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(target_pos))
+						{
+							search_monspell_view((monster*)unit_);
+							changedisplay(DT_GAME);
+						}
+					}
+				} else if (inputedKey.mouse == MKIND_ITEM) {
+					int key_ = inputedKey.val1;
+					item *item_ = you.GetItem(key_);
+					if(item_)
+					{
+						if(item_->isSimpleType(ITMS_WEAPON))
+						{
+							if(weapon_prev_fail())
+							{
+								return;
+							}
+							//무기->장착
+							else if(you.isequip(item_)>0) {
+								you.unequip(ET_WEAPON);
+							} else {
+								you.equip(key_,ET_WEAPON);
+							}
+						}
+						else if(item_->isSimpleType(ITMS_ARMOR)) {
+							//방어구->장착
+							if(armor_prev_fail()) {
+								break;
+							}
+							else if(you.isequip(item_)>0) {
+								you.unequiparmor(key_);
+							}
+							else {
+								you.equiparmor(key_);
+							}
+						}
+						else if(item_->isSimpleType(ITMS_JEWELRY)) {
+							//목걸이,반지->장착
+							//충전된 목걸이는 발동
+							if(item_->type == ITM_AMULET && 
+								you.equipment[ET_NECK] == item_ &&
+								isCanEvoke((amulet_type)(*item_).value1) &&
+								you.getAmuletPercent()) {
+								evoke_logic(key_, 0);
+								break;
+							}
+							if(jewelry_prev_fail()) {
+								break;
+							}
+							else if(you.isequip(item_)>0) {
+								you.unequipjewerly(key_);
+							}
+							else {
+								you.equipjewerly(key_);
+							}
+						}
+						else if(item_->isSimpleType(ITMS_THROW)) {
+							//탄막->주탄막으로 교체
+							if(you.throw_weapon == item_) {
+								you.throw_weapon = nullptr;
+							} else {
+								you.throw_weapon = item_;
+							}
+						}
+						else if(item_->isSimpleType(ITMS_POTION)) {
+							//포션->마시기
+							if(drink_prev_fail()) {
+								break;
+							}
+							else {
+								drink_logic(key_);
+							}
+						}
+						else if(item_->isSimpleType(ITMS_BOOK)) {
+							//책->읽기
+							if(read_prev_fail()) {
+								break;
+							} else{
+								Memorize_book(key_);
+								changedisplay(DT_GAME);
+							}
+						} else if(item_->isSimpleType(ITMS_SCROLL)) {
+							//두루마리->읽기
+							if(read_prev_fail()) {
+								break;
+							} else{
+								Reading_logic(key_);
+							}
+						} else if(item_->isSimpleType(ITMS_FOOD)) {
+							//음식->먹기
+							if(eat_prev_fail()) {
+								break;
+							} else{
+								you.Eat(key_);
+							}
+						} else if(item_->isSimpleType(ITMS_SPELL)) {
+							//스펠카드->발동
+							if(evoke_prev_fail()) {
+								break;
+							} else{
+								evoke_logic(key_, 0);
+							}
+						} else if(item_->isSimpleType(ITMS_MISCELLANEOUS)) {
+							//발동템
+							if(evoke_prev_fail()) {
+								break;
+							} else{
+								evoke_logic(key_, 0);
+							}
+						}
+					}
+				} else if (inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+					int key_ = inputedKey.val1;
+					iteminfor_(key_, false);
+					changedisplay(DT_GAME);
+				} else if(inputedKey.mouse == MKIND_SYSTEM) {
+					int key_ = inputedKey.val1;
+					switch(key_) {
+						case SYSCMD_AUTOTRAVEL:
+							auto_Move();
+							break;
+						case SYSCMD_AUTOATTACK:
+							auto_battle();
+							break;
+						case SYSCMD_100REST:
+							long_rest();
+							break;
+						case SYSCMD_MAGIC:
+							SpellUse(0, 0);
+							break;
+						case SYSCMD_SKILL:						
+							SkillUse(0);
+							break;
+						case SYSCMD_SKILL_VIEW:
+							skill_view();
+							break;
+						case SYSCMD_AUTOPICKUP:
+							auto_pick_onoff(false);
+							break;
+						case SYSCMD_AUTOTANMAC:
+							auto_tanmac_onoff();
+							break;
+						case SYSCMD_HELP:
+							Help_Show();
+							break;
+						case SYSCMD_QUIT:
+							saveandcheckexit();
+							break;
+						default: 
+							break;
+					}
+
+				} else if (inputedKey.mouse == MKIND_PICK  || inputedKey.mouse == MKIND_PICK_DESCRIPTION) {
+					if(inputedKey.mouse == MKIND_PICK && pickup_prev_fail(false)) {
+						break;
+					}
+
+					int key_ = inputedKey.val1;
+					list<item>::iterator it;
+
+					for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+					{
+						if(it->position == you.position) {
+							if(key_ == 0) {
+								break;
+							} else {
+								key_--;
+							}
+						}
+					}
+					if(it != env[current_level].item_list.end()) {
+						if(inputedKey.mouse == MKIND_PICK) {
+							PickUpSelect_logic(it);
+						}
+						else if(inputedKey.mouse == MKIND_PICK_DESCRIPTION) {
+							//not yet implement
+						}
+					}
+				}
+				//마우스
+			}
+			break;
 		case 'k':
 			action_Move('k', coord_def(you.position.x,you.position.y-1));  //위
 			break;
@@ -739,7 +1019,8 @@ bool option_menu(int value_)
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal);
 		
 		changedisplay(DT_SUB_TEXT);
-		int input_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int input_ = waitkeyinput(inputedKey,true);
 
 		if(input_ >= 'a' && input_ <= 'c')
 		{
@@ -753,6 +1034,11 @@ bool option_menu(int value_)
 			}
 			else if(input_ == 'c') {
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
+			}
+		}
+		else if(input_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
 			}
 		}
 		else if(input_ == VK_ESCAPE)

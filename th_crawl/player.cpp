@@ -365,7 +365,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<lilly_ally>(fp, *lilly_allys, 5);	
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	
-	SaveData<int>(fp, *rune, RUNE_MAX);		
+	SaveData<int>(fp, *rune, RUNE_MAX);
+	SaveData<int>(fp, useMouseTammac);
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 }
 void players::LoadDatas(FILE *fp)
@@ -610,6 +611,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
 	LoadData<int>(fp, *rune);		
+	LoadData<int>(fp, useMouseTammac);
 	{
 		char temp_id_=0;
 		item *temp_ = NULL;
@@ -913,13 +915,21 @@ int players::move(short_move x_mov, short_move y_mov)
 			you.SetInter(IT_MAP_DANGER);
 			while (loop_)
 			{
-				switch (waitkeyinput())
+				InputedKey inputedKey;
+				switch (waitkeyinput(inputedKey))
 				{
 				case 'Y':
 				case 'y':
 					loop_ = false;
 					enterlog();
 					break;
+				case -1:
+					if(inputedKey.mouse == MKIND_RCLICK) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case 'N':
 				case 'n':
 				case VK_ESCAPE:
@@ -941,13 +951,21 @@ int players::move(short_move x_mov, short_move y_mov)
 				you.SetInter(IT_SMOKE);
 				while(loop_)
 				{
-					switch(waitkeyinput())
+					InputedKey inputedKey;
+					switch(waitkeyinput(inputedKey))
 					{
 					case 'Y':
 					case 'y':
 						loop_ = false;
 						enterlog();
-						break;
+						break;						
+					case -1:
+						if(inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case 'N':
 					case 'n':
 					case VK_ESCAPE:
@@ -970,13 +988,21 @@ int players::move(short_move x_mov, short_move y_mov)
 				you.SetInter(IT_SMOKE);
 				while(loop_)
 				{
-					switch(waitkeyinput())
+					InputedKey inputedKey;
+					switch(waitkeyinput(inputedKey))
 					{
 					case 'Y':
 					case 'y':
 						loop_ = false;
 						enterlog();
 						break;
+					case -1:
+						if(inputedKey.mouse == MKIND_RCLICK) {
+							//ESC PASSTHORUGH
+						}
+						else {
+							break;
+						}
 					case 'N':
 					case 'n':
 					case VK_ESCAPE:
@@ -1108,13 +1134,21 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 			bool loop_ = true;
 			while (loop_)
 			{
-				switch (waitkeyinput())
+				InputedKey inputedKey;
+				switch (waitkeyinput(inputedKey))
 				{
 				case 'Y':
 				case 'y':
 					loop_ = false;
 					enterlog();
-					break;
+					break;					
+				case -1:
+					if(inputedKey.mouse == MKIND_RCLICK) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case 'N':
 				case 'n':
 				case VK_ESCAPE:
@@ -4362,9 +4396,6 @@ bool players::Drink(char id_)
 }
 bool players::Evoke(char id_, bool auto_)
 {
-
-
-
 	for(auto it = item_list.begin(); it != item_list.end(); it++)
 	{
 		if((*it).id == id_)
@@ -5205,7 +5236,8 @@ bool players::equipjewerly(char id_)
 					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color());
 					while(1)
 					{
-						int key_ = waitkeyinput(true);
+						InputedKey inputedKey;
+						int key_ = waitkeyinput(inputedKey,true);
 						if(key_ == '<' || key_ == equipment[ET_LEFT]->id)
 						{
 							type_ = ET_LEFT;
@@ -5215,7 +5247,12 @@ bool players::equipjewerly(char id_)
 						{
 							type_ = ET_RIGHT;
 							break;
-						}	
+						}
+						else if(key_ == -1) {
+							if(inputedKey.mouse == MKIND_RCLICK) {
+								return 0;
+							}
+						}
 						else if(key_ == VK_ESCAPE)
 						{
 							return 0;

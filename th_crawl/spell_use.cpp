@@ -2871,11 +2871,19 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if (current_level == ZIGURRAT_LEVEL) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL), true, true, false, CL_small_danger);
 
-		switch (waitkeyinput())
+		InputedKey inputedKey;
+		switch (waitkeyinput(inputedKey))
 		{
 		case 'Y':
 		case 'y':
-			break;
+			break;			
+		case -1:
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		case 'N':
 		case 'n':
 		case VK_ESCAPE:
@@ -5865,7 +5873,6 @@ bool CheckDangerSpell(int danger_)
 	}
 	return true;
 }
-bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam);
 
 
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite)

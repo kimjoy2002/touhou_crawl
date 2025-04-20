@@ -667,7 +667,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 	return true;
 }
 
-bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam)
+bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool passdoor)
 {
 	//if(!(env[current_level].dgtile[target.x][target.y].flag & FLAG_INSIGHT))
 	//	return false;
@@ -677,7 +677,7 @@ bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam)
 		beam_iterator it(start,target,(round_type)i);
 		while(!intercept && !it.end())
 		{
-			if(!env[current_level].dgtile[(*it).x][(*it).y].isMove(true,false,false))
+			if((!env[current_level].dgtile[(*it).x][(*it).y].isMove(true,false,false)) && (!passdoor || !env[current_level].dgtile[(*it).x][(*it).y].isCloseDoor()))
 			{
 				intercept = true;
 				break;
@@ -851,7 +851,8 @@ list<item>::iterator ThrowSelect()
 	view_item(IVT_THROW,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey);
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			list<item>::iterator it = you.GetItemIterator(key_);
@@ -879,6 +880,11 @@ list<item>::iterator ThrowSelect()
 		}						//-----이동키끝-------
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_RCLICK) {
+				break;
+			}
+		}
 		else if(key_ == VK_ESCAPE)
 			break;
 	}
@@ -886,15 +892,25 @@ list<item>::iterator ThrowSelect()
 	return you.item_list.end();
 }
 
-void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_)
-{	
+bool throw_prev_fail(bool no_speak){
 	if(you.s_lunatic)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_THROW),true,false,false,CL_danger);
-		return;
+		if(!no_speak)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_THROW),true,false,false,CL_danger);
+		return true;
 	}
 	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_THROW), true, false, false, CL_normal);
+		if(!no_speak)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_THROW), true, false, false, CL_normal);
+		return true;
+	}
+	return false;
+}
+
+void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_)
+{
+	if(throw_prev_fail(false))
+	{
 		return;
 	}
 	beam_iterator beam(you.position,you.position);
@@ -925,14 +941,9 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 
 
 void Select_Throw()
-{	
-	if(you.s_lunatic)
+{
+	if(throw_prev_fail(false))
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_THROW),true,false,false,CL_danger);
-		return;
-	}
-	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_THROW), true, false, false, CL_normal);
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();

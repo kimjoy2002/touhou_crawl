@@ -106,6 +106,13 @@ bool isCanCharge(amulet_type kind)
 }
 bool isCanEvoke(amulet_type kind)
 {
+	switch (kind) {
+	case AMT_FAITH:
+	case AMT_PERFECT:
+		return false;
+	default:
+		break;
+	}
 	return true;
 }
 bool chargingFinish(amulet_type kind, int value)

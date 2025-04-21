@@ -457,7 +457,7 @@ bool identity_scroll(bool pre_iden_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -589,7 +589,13 @@ bool blink_scroll(bool pre_iden_)
 	changedisplay(DT_GAME);
 	if (current_level == ZIGURRAT_LEVEL ) {
 		if (pre_iden_) {
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), true, true, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), false, true, false, CL_small_danger);
+			printlog(" (",false,false,false,CL_small_danger);
+			printlog("y",false,false,false,CL_small_danger, 'y');
+			printlog("/",false,false,false,CL_small_danger);
+			printlog("n",false,false,false,CL_small_danger, 'n');
+			printlog(") ",false,false,false,CL_small_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 
 			InputedKey inputedKey;
 			switch (waitkeyinput(inputedKey))
@@ -598,18 +604,15 @@ bool blink_scroll(bool pre_iden_)
 			case 'y':
 				break;				
 			case -1:
-				if(inputedKey.mouse == MKIND_RCLICK) {
-					//ESC PASSTHORUGH
-				}
-				else {
-					break;
-				}
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
+			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
+				endSelection();
 				return false;
 			}
+			endSelection();
 		}
 		you.Blink(25);
 		return true;
@@ -667,7 +670,7 @@ bool blink_scroll(bool pre_iden_)
 			}
 			break;			
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -675,11 +678,17 @@ bool blink_scroll(bool pre_iden_)
 			}
 		case VK_ESCAPE:	
 			if(pre_iden_){
-				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),true,true,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),false,true,false,CL_help);
 			}
 			else{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK),true,true,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK),false,true,false,CL_help);
 			}
+			printlog(" (",false,false,false,CL_help);
+			printlog("y",false,false,false,CL_help, 'y');
+			printlog("/",false,false,false,CL_help);
+			printlog("n",false,false,false,CL_help, 'n');
+			printlog(") ",false,false,false,CL_help);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			bool repeat_ = true;
 			while(repeat_)
 			{
@@ -689,6 +698,7 @@ bool blink_scroll(bool pre_iden_)
 				case 'y':
 					deletelog();
 					you.search = false;
+					endSelection();
 					if(pre_iden_){
 						return false;
 					}
@@ -697,7 +707,10 @@ bool blink_scroll(bool pre_iden_)
 					}
 				case 'N':
 				case 'n':
+					endSelection();
 					repeat_ = false;
+				default:
+					break;
 				}
 			}
 		}
@@ -866,7 +879,7 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -1023,7 +1036,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -1061,13 +1074,20 @@ bool amnesia_scroll(bool pre_iden_)
 				{				
 					
 					changedisplay(DT_GAME);
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,true,false,false,CL_help,
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,false,false,false,CL_help,
 						PlaceHolderHelper(SpellString(spell_)));
+					printlog(" (",false,false,false,CL_help);
+					printlog("y",false,false,false,CL_help, 'y');
+					printlog("/",false,false,false,CL_help);
+					printlog("n",false,false,false,CL_help, 'n');
+					printlog(") ",false,false,false,CL_help);
+					startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 					switch(waitkeyinput())
 					{
 					case 'Y':
 					case 'y':
 						{
+							endSelection();
 							changedisplay(DT_GAME);
 							WaitForSingleObject(mutx, INFINITE);
 							you.MemorizeSpell[num] = 0;
@@ -1080,6 +1100,7 @@ bool amnesia_scroll(bool pre_iden_)
 						}
 					case 'N':
 					default:
+						endSelection();
 						view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
 						//changedisplay(DT_SPELL);
 						break;
@@ -1087,7 +1108,7 @@ bool amnesia_scroll(bool pre_iden_)
 				}
 			}
 			else if(key_ == -1) {
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					break;
 				}
 			}

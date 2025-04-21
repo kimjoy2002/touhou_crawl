@@ -449,7 +449,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						break;
 					}
 					case -1:
-						if(inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {

@@ -1934,7 +1934,7 @@ void SkillUse(char auto_)
 				changemove(0);
 			}
 			else if(key_ == -1) {
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					break;
 				}
 			}

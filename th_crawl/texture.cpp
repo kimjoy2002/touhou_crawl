@@ -1400,6 +1400,7 @@ textures img_command_autoattack(&texture_item03, 68, 255);
 textures img_command_100sleep(&texture_item03, 69, 255);
 textures img_command_magic(&texture_item03, 70, 255);
 textures img_command_skill(&texture_item03, 71, 255);
+textures img_command_shout(&texture_item03, 162, 255);
 textures img_command_skill_view(&texture_item03, 72, 255);
 textures img_command_tanmac_on(&texture_item03, 73, 255);
 textures img_command_tanmac_off(&texture_item03, 74, 255);
@@ -1409,8 +1410,98 @@ textures img_command_pickoff(&texture_item03, 77, 255);
 textures img_command_help(&texture_item03, 78, 255);
 textures img_command_quit(&texture_item03, 79, 255);
 textures img_command_Y(&texture_item03, 80, 255);
-textures img_command_N(&texture_item03, 81, 255);
+textures img_command_N(&texture_item03, 84, 255);
 textures img_command_empty(&texture_item03, 83, 255);
+textures img_command_X(&texture_item03, 81, 255);
+
+
+textures img_command_alphabet_small[26] = {
+	textures(&texture_item03, 85, 255),
+	textures(&texture_item03, 86, 255),
+	textures(&texture_item03, 87, 255),
+	textures(&texture_item03, 88, 255),
+	textures(&texture_item03, 89, 255),
+	textures(&texture_item03, 90, 255),
+	textures(&texture_item03, 91, 255),
+	textures(&texture_item03, 92, 255),
+	textures(&texture_item03, 93, 255),
+	textures(&texture_item03, 94, 255),
+	textures(&texture_item03, 95, 255),
+	textures(&texture_item03, 96, 255),
+	textures(&texture_item03, 97, 255),
+	textures(&texture_item03, 98, 255),
+	textures(&texture_item03, 99, 255),
+	textures(&texture_item03, 100, 255),
+	textures(&texture_item03, 101, 255),
+	textures(&texture_item03, 102, 255),
+	textures(&texture_item03, 103, 255),
+	textures(&texture_item03, 104, 255),
+	textures(&texture_item03, 105, 255),
+	textures(&texture_item03, 106, 255),
+	textures(&texture_item03, 107, 255),
+	textures(&texture_item03, 108, 255),
+	textures(&texture_item03, 109, 255),
+	textures(&texture_item03, 110, 255)
+};
+
+
+textures img_command_alphabet_large[26]= {
+	textures(&texture_item03, 111, 255),
+	textures(&texture_item03, 112, 255),
+	textures(&texture_item03, 113, 255),
+	textures(&texture_item03, 114, 255),
+	textures(&texture_item03, 115, 255),
+	textures(&texture_item03, 116, 255),
+	textures(&texture_item03, 117, 255),
+	textures(&texture_item03, 118, 255),
+	textures(&texture_item03, 119, 255),
+	textures(&texture_item03, 120, 255),
+	textures(&texture_item03, 121, 255),
+	textures(&texture_item03, 122, 255),
+	textures(&texture_item03, 123, 255),
+	textures(&texture_item03, 124, 255),
+	textures(&texture_item03, 125, 255),
+	textures(&texture_item03, 126, 255),
+	textures(&texture_item03, 127, 255),
+	textures(&texture_item03, 128, 255),
+	textures(&texture_item03, 129, 255),
+	textures(&texture_item03, 130, 255),
+	textures(&texture_item03, 131, 255),
+	textures(&texture_item03, 132, 255),
+	textures(&texture_item03, 133, 255),
+	textures(&texture_item03, 134, 255),
+	textures(&texture_item03, 135, 255),
+	textures(&texture_item03, 136, 255)
+};
+
+
+textures img_command_number[25]= {
+	textures(&texture_item03, 137, 255),
+	textures(&texture_item03, 138, 255),
+	textures(&texture_item03, 139, 255),
+	textures(&texture_item03, 140, 255),
+	textures(&texture_item03, 141, 255),
+	textures(&texture_item03, 142, 255),
+	textures(&texture_item03, 143, 255),
+	textures(&texture_item03, 144, 255),
+	textures(&texture_item03, 145, 255),
+	textures(&texture_item03, 146, 255),
+	textures(&texture_item03, 147, 255),
+	textures(&texture_item03, 148, 255),
+	textures(&texture_item03, 149, 255),
+	textures(&texture_item03, 150, 255),
+	textures(&texture_item03, 151, 255),
+	textures(&texture_item03, 152, 255),
+	textures(&texture_item03, 153, 255),
+	textures(&texture_item03, 154, 255),
+	textures(&texture_item03, 155, 255),
+	textures(&texture_item03, 156, 255),
+	textures(&texture_item03, 157, 255),
+	textures(&texture_item03, 158, 255),
+	textures(&texture_item03, 159, 255),
+	textures(&texture_item03, 160, 255),
+	textures(&texture_item03, 161, 255)
+};
 
 
 

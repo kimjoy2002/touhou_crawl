@@ -459,6 +459,7 @@ extern textures img_command_autoattack;
 extern textures img_command_100sleep;
 extern textures img_command_magic;
 extern textures img_command_skill;
+extern textures img_command_shout;
 extern textures img_command_skill_view;
 extern textures img_command_tanmac_on;
 extern textures img_command_tanmac_off;
@@ -470,6 +471,11 @@ extern textures img_command_quit;
 extern textures img_command_Y;
 extern textures img_command_N;
 extern textures img_command_empty;
+extern textures img_command_X;
+
+extern textures img_command_alphabet_small[26];
+extern textures img_command_alphabet_large[26];
+extern textures img_command_number[25];
 
 
 

@@ -35,7 +35,13 @@ void wiz_mode()
 
 		
 		printlog("#### " + LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN) +" ### ",true,false,false,CL_danger);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN_YN)+ " ",false,false,false,CL_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN_YN),false,false,false,CL_danger);
+		printlog(" (",false,false,false,CL_danger);
+		printlog("Y",false,false,false,CL_danger, 'Y');
+		printlog("/",false,false,false,CL_danger);
+		printlog("N",false,false,false,CL_danger, 'N');
+		printlog(") ",false,false,false,CL_danger);
+		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 
 		
 		int key_ = waitkeyinput();
@@ -43,9 +49,11 @@ void wiz_mode()
 		{
 		case 'Y':
 			enterlog();
+			endSelection();
 			break;
 		default:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WIZARD_CANCLE),true,false,false,CL_help);
+			endSelection();
 			return;
 		}
 
@@ -811,7 +819,7 @@ void wiz_mode()
 					id_ = id_ / 10;
 					break;					
 				case -1:
-					if(inputedKey.mouse == MKIND_RCLICK) {
+					if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {

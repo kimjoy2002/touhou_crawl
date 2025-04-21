@@ -455,7 +455,7 @@ bool replay_menu(int value_)
 					page++;
 			}
 			else if(input_ == -1) {
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					out_ = true;
 				}
 			}

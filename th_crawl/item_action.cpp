@@ -108,32 +108,60 @@ void PickUpSelect(list<item>::iterator it, int num)
 		{
 			if(isPick(&(*temp)))
 			{
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_PICKUP_SELECT_ASK, true, false, false, CL_help,
-					PlaceHolderHelper((*temp).GetName(), (*temp).item_color(), (*temp).num > 1 ? true : false), 				
-					PlaceHolderHelper("y"),
-					PlaceHolderHelper("n"),
-					PlaceHolderHelper("a"),
-					PlaceHolderHelper("*?g,")
-				);
-				switch(waitkeyinput())
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_PICKUP_SELECT_ASK, false, false, false, CL_help,
+					PlaceHolderHelper((*temp).GetName(), (*temp).item_color(), (*temp).num > 1 ? true : false));
+					
+					
+				// 	PlaceHolderHelper("y"),
+				// 	PlaceHolderHelper("n"),
+				// 	PlaceHolderHelper("a"),
+				// 	PlaceHolderHelper("*?g,")
+				// );
+				// (Yes:{1} No:{2} All:{3} Choose:{4})
+				/// (예:{1} 아니오:{2} 모두:{3} 선택:{4})
+				printlog(" (",false,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YES) + ":y",false,false,false,CL_help, 'y');
+				printlog(" ",false,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NO) + ":n",false,false,false,CL_help, 'n');
+				printlog(" ",false,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALL) + ":a",false,false,false,CL_help, 'a');
+				printlog(" ",false,false,false,CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SELECT) + ":*?g,",false,false,false,CL_help, '*');
+				printlog(") ",true,false,false,CL_help);
+				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N, 'a', '*'});
+				InputedKey inputedKey;
+				switch(waitkeyinput(inputedKey))
 				{
+				case -1:
+					if(inputedKey.isLeftClick()) {
+						//편의를 위해 좌클릭은 아이템을 줍는다
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
 				case 'y':
 				case 'Y':
 					PickUpSelect_logic(temp);
 					break;
 				case 'a':
 					PickUpNum(temp,num,false);
+					endSelection();
 					return;
 				case '*':
 				case '?':
 				case 'g':
 				case ',':
 					iteminfor_pick();
+					endSelection();
 					return;
 				case 'o':
 					//자동탐색을 넣는다.
 					break;
+				default:
+					break;
 				}
+				endSelection();
 			}
 		}
 	}
@@ -156,8 +184,19 @@ bool PickUpNum(list<item>::iterator it, int num, bool no_delay)
 					you.TurnEnd(&item_delete);
 					if(item_delete)
 						return true; //아이템을 줍는 도중 아이템이 삭제되었다.
+
+					switch(you.inter)
+					{
+					case IT_POISON:
+					case IT_TELE:
+					case IT_SMOKE:
+					case IT_EVENT:
+					case IT_DAMAGE:
+						return true;
+					default:
+						break;
+					}
 				}
-				return true;
 			}
 			else
 				return false;
@@ -231,7 +270,7 @@ void iteminfor_pick()
 			break;
 		}
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -346,7 +385,7 @@ void iteminfor_discard()
 			break;
 		}
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -446,7 +485,7 @@ void Eatting(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -531,7 +570,7 @@ void Drinking(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -599,7 +638,7 @@ void Spelllcard_Evoke(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -746,7 +785,7 @@ void Reading(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

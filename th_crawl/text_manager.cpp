@@ -29,7 +29,7 @@ text_manager::~text_manager()
 	}
 }
 
-bool text_manager::add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_)
+bool text_manager::add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	while(!text_list.empty())
@@ -51,7 +51,7 @@ bool text_manager::add_text(string text_, bool enter_, bool log_, bool temp_, D3
 		else
 			break;
 	}
-	text_list.push_back(new text_dummy(text_,enter_,log_,temp_,color_));
+	text_list.push_back(new text_dummy(text_,enter_,log_,temp_,color_,char_));
 	if(enter)
 	{
 		if(short_len<6)
@@ -114,9 +114,9 @@ void text_manager::reset()
 }
 void text_manager::removeClickable() {
 	WaitForSingleObject(mutx, INFINITE);
-	for (it=text_list.begin();it!=text_list.end();it++)
+	for (auto it=text_list.begin();it!=text_list.end();it++)
 	{
-		it->clickable = 0;
+		(*it)->clickable = 0;
 	}
 	ReleaseMutex(mutx);
 }
@@ -127,6 +127,10 @@ string& SetText()
 void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_)
 {
 	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_);
+}
+void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_)
+{
+	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_, char_);
 }
 void deletelog()
 {
@@ -202,7 +206,7 @@ void startSelection(vector<int> select_list) {
 }
 void endSelection() {
 	WaitForSingleObject(mutx, INFINITE);
-	DisplayManager.text_sub.removeClickable();
+	DisplayManager.text_log.removeClickable();
 	DisplayManager.selection_vector.clear();
 	ReleaseMutex(mutx);	
 }

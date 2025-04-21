@@ -126,7 +126,7 @@ LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,You need {0} more spell level(s) to lear
 LOC_SYSTEM_MEMORIZE_SPELL_TOO_MANY,You have no more space to memorize new spells.
 LOC_SYSTEM_MEMORIZE_SPELL_ALREADY,You already know this spell.
 LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST,That spell does not exist.
-LOC_SYSTEM_MEMORIZE_SPELL_ASK,Would you like to memorize this spell? (y/n)
+LOC_SYSTEM_MEMORIZE_SPELL_ASK,Would you like to memorize this spell?
 LOC_SYSTEM_MEMORIZE_SPELL_START,You started memorizing the spell.
 LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS,You successfully memorized the spell.
 LOC_SYSTEM_MEMORIZE_HELP,Press {0} to memorize a spell.
@@ -155,9 +155,13 @@ LOC_SYSTEM_CANT_EQUIP_CLAW,You can’t wear gloves because of your claws!
 LOC_SYSTEM_CANT_UNEQUIP_EXIST,You have nothing to unequip.
 LOC_SYSTEM_CANT_BRAND,You can't brand anything here.
 LOC_SYSTEM_NOT_EQUIP_ITEM,You’re not wearing that!
-LOC_SYSTEM_UNEQUIP_AMULET_YN,Are you sure you want to unequip the charged amulet? Charge will be lost! (y/n)
+LOC_SYSTEM_UNEQUIP_AMULET_YN,Are you sure you want to unequip the charged amulet? Charge will be lost!
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
+LOC_SYSTEM_YES,Yes
+LOC_SYSTEM_NO,No
+LOC_SYSTEM_ALL,All
+LOC_SYSTEM_SELECT,Choose
 LOC_SYSTEM_DAMAGED_BY_POISON1,You're taking poison damage.
 LOC_SYSTEM_DAMAGED_BY_POISON2,You're taking heavy poison damage.
 LOC_SYSTEM_DAMAGED_BY_POISON3,You're taking severe poison damage.
@@ -174,14 +178,17 @@ LOC_SYSTEM_HELP_MORGUE,Your record is saved in the game's morgue folder.
 LOC_SYSTEM_HELP_ESC,Press Enter or ESC to quit.
 LOC_SYSTEM_OR,{0} or {1}
 LOC_SYSTEM_LEVELUP_MESSGE,Your level increased! Level {0}
-LOC_SYSTEM_LEVELUP_STAT_MESSGE,Choose a stat to increase. (S)tr - Strength, (D)ex - Dexterity, (I)nt - Intelligence
+LOC_SYSTEM_LEVELUP_STAT_MESSGE,Choose a stat to increase.
+LOC_SYSTEM_LEVELUP_STAT_MESSGE_S,(S)tr
+LOC_SYSTEM_LEVELUP_STAT_MESSGE_D,(D)ex
+LOC_SYSTEM_LEVELUP_STAT_MESSGE_I,(I)nt
 LOC_SYSTEM_LEVELUP_STR,Became stronger.
 LOC_SYSTEM_LEVELUP_DEX,Became more agile.
 LOC_SYSTEM_LEVELUP_INT,Became smarter.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
 LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit?
-LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
-LOC_SYSTEM_FORBIDZONE_YN,Are you really going in? (y/n)
+LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving?
+LOC_SYSTEM_FORBIDZONE_YN,Are you really going in?
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
 LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
 LOC_SYSTEM_WRONG_CHOOSE,Invalid choice.
@@ -257,7 +264,7 @@ LOC_SYSTEM_IS_EQUIP_ITEM,This item is currently equipped.
 LOC_SYSTEM_PICKUP_PITEM,P increased.
 LOC_SYSTEM_PICKUP_RUNE,You picked up {0}! (Press ] to view collected runes)
 LOC_SYSTEM_PICKUP_YINYANG_ORB,You picked up the Yin-Yang Orb. Carry it to Floor 1 for victory.
-LOC_SYSTEM_PICKUP_SELECT_ASK,Pick up {0}? (Yes:{1} No:{2} All:{3} Choose:{4})
+LOC_SYSTEM_PICKUP_SELECT_ASK,Pick up {0}?
 LOC_SYSTEM_PICKUP_NUMBER,(Acquired {0})
 LOC_SYSTEM_PICKUP_LIMIT,You’ve exceeded the item limit.
 LOC_SYSTEM_EAT_STARTING,You began eating the food.
@@ -687,18 +694,18 @@ LOC_SYSTEM_CLOSE_DOOR_EMPTY,There is nothing to close there!
 LOC_SYSTEM_CLOSE_DOOR_NONE,There's nothing nearby to close.
 LOC_SYSTEM_ASK_OPEN_DOOR,Which door do you want to open?
 LOC_SYSTEM_OPEN_DOOR,You opened the door.
-LOC_SYSTEM_REALLY_OPEN_DOOR,Are you sure you want to open it? (y/n)
+LOC_SYSTEM_REALLY_OPEN_DOOR,Are you sure you want to open it?
 LOC_SYSTEM_OPEN_DOOR_EMPTY,There is nothing to open there!
 LOC_SYSTEM_OPEN_DOOR_NONE,There's nothing nearby to open.
 LOC_SYSTEM_MONSTER_OPEN_DOOR,{0} opened the door.
 LOC_SYSTEM_SUDDENLY_OPEN_DOOR,The door opens suddenly.
 LOC_SYSTEM_DIMENSION_STAIR,You can't use the stairs due to the barrier!
-LOC_SYSTEM_DIMENSION_STAIT_WARN,Using the stairs will break dimensional lock. Proceed anyway? (Y/N)
+LOC_SYSTEM_DIMENSION_STAIT_WARN,Using the stairs will break dimensional lock. Proceed anyway?
 LOC_SYSTEM_DIMENSION_END,The dimension has returned to normal.
-LOC_SYSTEM_STAIR_SUBDUNGEON_WARN,This place looks really dangerous. Go down anyway? (Y/N)
-LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE,Once you enter, it will be hard to get out. Still want to go down? (Y/N)
-LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE,Leaving now means you can never get this floor's rune again. Leave anyway? (Y/N)
-LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT,This place has no rune, but it's a one-time nightmare dungeon. Are you ready? (Y/N)
+LOC_SYSTEM_STAIR_SUBDUNGEON_WARN,This place looks really dangerous. Go down anyway?
+LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE,Once you enter, it will be hard to get out. Still want to go down?
+LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE,Leaving now means you can never get this floor's rune again. Leave anyway?
+LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT,This place has no rune, but it's a one-time nightmare dungeon. Are you ready?
 LOC_SYSTEM_STAIR_SUBDUNGEON_PANDEMONIUM_RUNE,You sense a powerful presence. A rune exists on this floor!
 LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY,You can't enter again if you've already been here!
 LOC_SYSTEM_STAIR_THREE_RUNE,You need 3 runes to enter this place!
@@ -708,8 +715,8 @@ LOC_SYSTEM_STAIR_CANT_DOWN,You can't go down here.
 LOC_SYSTEM_STAIR_DOWN,You descended the stairs.
 LOC_SYSTEM_STAIR_UP,You ascended the stairs.
 LOC_SYSTEM_STAIR_LOWEST_DOWN,You can't go any deeper.
-LOC_SYSTEM_STAIR_ESCAPE_WARN,Leaving before picking up the Yin-Yang Orb will count as a loss. Leave anyway? (Y/N)
-LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION,Do you really want to leave the dungeon and claim victory? (Y/N)
+LOC_SYSTEM_STAIR_ESCAPE_WARN,Leaving before picking up the Yin-Yang Orb will count as a loss. Leave anyway?
+LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION,Do you really want to leave the dungeon and claim victory?
 LOC_SYSTEM_STAIR_RETURN,You returned to the dungeon.
 LOC_SYSTEM_STAIR_EMPTY,There are no stairs here.
 LOC_SYSTEM_PROJECTILE_TARGET,Choose a target.
@@ -2032,7 +2039,7 @@ LOC_SYSTEM_SPELL_P_COLLECT_NONE,{0} P items were collected at once.
 LOC_SYSTEM_SPELL_ONLY_ONE_FILED,No P items in sight.
 LOC_SYSTEM_SPELL_FILED_VIOLET,Only one wave can be controlled per floor.
 LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL,A violet wave has emerged!
-LOC_SYSTEM_SPELL_TOO_CLOSE,In the Dreamworld, teleportation can't be controlled. Are you sure? (y/n)
+LOC_SYSTEM_SPELL_TOO_CLOSE,In the Dreamworld, teleportation can't be controlled. Are you sure?
 LOC_SYSTEM_SPELL_CANT_LEAP,Too close to use on the target.
 LOC_SYSTEM_SPELL_ONLY_ONE_NAMAZ,You can't leap there.
 LOC_SYSTEM_SPELL_NAMAZ_READY,Only one catfish can be dropped per floor.
@@ -2051,8 +2058,8 @@ LOC_SYSTEM_SPELL_MYSTIA_SONG,A pile of trash starts flying your way!
 LOC_SYSTEM_SPELL_DREAM_CALL,You hear the song of the night sparrow!
 LOC_SYSTEM_SPELL_REIMU_BARRIER,Enemies have surrounded you in an instant!
 LOC_SYSTEM_SPELL_TOO_DANGEROURS,A barrier set by Reimu prevents escape!
-LOC_SYSTEM_SPELL_SELF_HURT,This spell is too dangerous to use. Still want to use it? (Y/N)
-LOC_SYSTEM_SPELL_BLOCK,This attack will hurt you too. Still want to use it? (Y/N)
+LOC_SYSTEM_SPELL_SELF_HURT,This spell is too dangerous to use. Still want to use it?
+LOC_SYSTEM_SPELL_BLOCK,This attack will hurt you too. Still want to use it?
 LOC_SYSTEM_SPELL_EXHAUST,This place is blocked.
 LOC_SYSTEM_SPELL_CAST_FAIL,You're too exhausted to use this spell.
 LOC_SYSTEM_SPELL_ALCHEMY_LONG,The buff from your alchemy has been extended.
@@ -3054,9 +3061,9 @@ LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL,You’re not wearing any armor that can
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE,The curse on your equipment has been lifted.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_FAIL,None of your equipment is cursed.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_HINA_FAIL,Hina interfered with your misfortune cleansing!
-LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT,Teleportation cannot be controlled in the world of delusions. Use it anyway? (y/n)
-LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK,Are you sure you want to cancel the teleport? (y/n)
-LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK,Are you sure you want to cancel the teleport? The scroll will be lost! (y/n)
+LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT,Teleportation cannot be controlled in the world of delusions. Use it anyway?
+LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK,Are you sure you want to cancel the teleport?
+LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK,Are you sure you want to cancel the teleport? The scroll will be lost!
 LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO,Terrain detection doesn't work in the Bamboo Forest Labyrinth.
 LOC_SYSTEM_ITEM_SCROLL_MAPPING_SUCCESS,You have mapped the current floor.
 LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ITEM,The equipped {0} shone red.
@@ -3068,7 +3075,7 @@ LOC_SYSTEM_ITEM_SCROLL_CURSE_JEWELLY_FAIL,You are not wearing any accessory that
 LOC_SYSTEM_ITEM_SCROLL_SOULSHOT,Bang!
 LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL,You have no spell cards in your inventory that can be recharged.
 LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0} has been recharged.
-LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,Forget the {0} spell? (Y/N)
+LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,Forget the {0} spell?
 LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,You forgot the {0} spell.
 LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0} was engulfed in an unknown light!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_FIRE,{0} was engulfed in flames!
@@ -4027,9 +4034,9 @@ LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,Artifacts cannot be transformed.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,This item is already turned into a maple leaf.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,You are not wearing any armor.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD,You must wear armor to use this.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense? (y/n)
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense?
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,Your armor has transformed into a giant maple leaf!
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,You can imbue your current weapon with the Maple Brand once. Proceed? (Y/N)
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,You can imbue your current weapon with the Maple Brand once. Proceed?
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
 LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,Stepping on the leaves made a loud rustling noise.
 LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,Shizuha scattered leaves of madness around you!
@@ -4061,7 +4068,7 @@ LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly — you now refle
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,This accessory cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,Can only be used on accessories.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly — you feel yourself healing.
-LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,You can only apply the cursed brand to your current weapon once. Proceed? (Y/N)
+LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,You can only apply the cursed brand to your current weapon once. Proceed?
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0} emanates a cold, hollow aura of curse.
 LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON,You must be wielding a weapon to use this.
 LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,Hina has directly infused you with misfortune!
@@ -4081,9 +4088,9 @@ LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK,You traveled through the gap.
 LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK_FAIL,You can't move to that location.
 LOC_SYSTEM_GOD_YUKARI_SHIELD,A barrier is protecting you.
 LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO,You can't anchor dimensions here!
-LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN,Anchor the dimension at this location? (Y/N)
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN,Anchor the dimension at this location?
 LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX,The dimension has been anchored!
-LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,Yukari forbids dangerous teleportation. Still use it? (Y/N)
+LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,Yukari forbids dangerous teleportation. Still use it?
 LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,Yukari allowed your dangerous teleport item use just this once.
 LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,Yukari was furious at your reckless use of teleportation magic!
 LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,Yukari forcibly teleported you!
@@ -4103,7 +4110,8 @@ LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,Side effects from healing have begun!
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,Choose the stat to increase: (S)tr - Strength, (D)ex - Dexterity, (I)nt - Intelligence, (R)eturn - Revert
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,Choose the stat to increase:
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)evert
 LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,You've already been enhanced for that stat!
 LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,You are not in an enhanced state!
 LOC_SYSTEM_GOD_EIRIN_BOOST,Eirin has modified your body!
@@ -4176,7 +4184,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_ON,You can now request Seija for a gift.
 LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,(Press {0} to request a gift)
 LOC_SYSTEM_GOD_SEIJA_GIFT_ASK,Seija: Which stolen divine gift should I give you?
 LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE,You'd better choose before you change your mind.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YN,Do you want this god's treasure? (Y/N)
+LOC_SYSTEM_GOD_SEIJA_GIFT_YN,Do you want this god's treasure?
 LOC_SYSTEM_GOD_SEIJA_GIFT_ALREADY,You've already received a treasure from this god.
 LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT,Too much time has passed without receiving a gift, so the request was canceled.
 LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,Byakuren: Receive several random spellbooks.
@@ -4367,7 +4375,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,The Blessing of Purification disables div
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Also, once you choose a purification, it cannot be undone!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,Which ability would you like to purify?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,Decrease faith and postpone this choice for a new purification.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,Postponing this choice will delay the next one. Are you sure you want to wait? (Y/N)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,Postponing this choice will delay the next one. Are you sure you want to wait?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY,You postponed your purification. You'll need to gather more faith for the next one.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL,Skill Purification: The chosen skill (with aptitude ≥ 0) will always match your character level.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,Resistance Purification: Gain immunity to the selected element.
@@ -4378,7 +4386,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,Equipment Purification: The chosen equipm
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,Purification System: Amulet recharge speed is tripled, and spell cards can still be used during purification.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG,Bug Purification: This is a bug. Do not choose this.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT,Only skills with an aptitude of 0 or higher can be selected!
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,Are you really going to purify the {0} skill? (Current level: {1}) (y/n)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,Are you really going to purify the {0} skill? (Current level: {1})
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_CANT,This skill cannot be purified.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS,Junko has purified your {0} skill!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ASK,Which resistance would you like to purify?
@@ -4390,7 +4398,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_SUCCESS,Junko has purified your MP!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_WARN,Using more purified MP will kill you!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER_SUCCESS,Junko has purified your power!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE_SUCCESS,Junko has purified your vitality!
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify the item {0}? (y/n)
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING,Are you sure you want to purify the item {0}?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH,Junko has purified your item: {0}!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_CANT,This item cannot be purified.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM_SUCCESS,Junko has purified your system!
@@ -4411,9 +4419,9 @@ LOC_SYSTEM_GOD_GIFT_APPEAR,Something appeared beneath your feet!
 LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.
 LOC_SYSTEM_GOD_FORGIVE,You have been forgiven by {0}.
 LOC_SYSTEM_GOD_NOT_YET_FORGIVE,{0} has not forgiven you yet.
-LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION,Junko can kill you at any time since you're already purified. Are you sure you want to die? (Y/N)
-LOC_SYSTEM_GOD_ABANDON_ASK_SANAE,If you abandon the god, all your faith will disappear. Are you really sure? (Y/N)
-LOC_SYSTEM_GOD_ABANDON_ASK,If you abandon the god, you will incur the wrath of the divine. Are you really sure? (Y/N)
+LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION,Junko can kill you at any time since you're already purified. Are you sure you want to die?
+LOC_SYSTEM_GOD_ABANDON_ASK_SANAE,If you abandon the god, all your faith will disappear. Are you really sure?
+LOC_SYSTEM_GOD_ABANDON_ASK,If you abandon the god, you will incur the wrath of the divine. Are you really sure?
 LOC_SYSTEM_GOD_ABANDON,You abandoned {0}. Your god is enraged.
 LOC_SYSTEM_GOD_ABANDONED,You were forsaken by {0}.
 LOC_SYSTEM_GOD_ABANDON_SATORI,You abandoned {0}. Your god doesn’t seem to mind much.
@@ -4510,7 +4518,7 @@ LOC_SYSTEM_REPLAY_PAGE,Page {0}
 LOC_SYSTEM_REPLAYING,Replaying Mode
 LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
 LOC_SYSTEM_DEBUG_WARN,Warning! Wizard Mode disables score submission and significantly reduces the fun.
-LOC_SYSTEM_DEBUG_WARN_YN,Are you really going to enable it? (Y/N)
+LOC_SYSTEM_DEBUG_WARN_YN,Are you really going to enable it?
 LOC_SYSTEM_DEBUG_WIZARD_CANCLE,Cancel Wizard Mode
 LOC_SYSTEM_DEBUG_WHICH,<Wizard Mode> Which command? (? - help)
 LOC_SYSTEM_DEBUG_CREATE_ITEM,Which item would you like to get?
@@ -4538,7 +4546,7 @@ LOC_SYSTEM_DEBUG_CALC_BACKSTAB,DetectionChance-RandB({0},{1}) = {2}% (Final back
 LOC_SYSTEM_DEBUG_CALC_DAMAGE,RealDamage={0} Attack={1} Backstab={2} Hit={3} Accuracy={4}%
 LOC_SYSTEM_DEBUG_ENSLAVE_BUG,*Enslave bug: {0} god_value({1},{2}) mon_value({3},{4})
 LOC_SYSTEM_DEBUG_GAIN_EXP_FOR_TRIGGER,Gained some skill EXP.
-LOC_SYSTEM_DEBUG_REVIVE_YN,Revive? (Y/N)
+LOC_SYSTEM_DEBUG_REVIVE_YN,Revive?
 LOC_SYSTEM_DEBUG_TENSI_TELEPORT_FAIL,Tenshi Teleport Failed
 LOC_SYSTEM_DEBUG_COMMAND_HELP,Wizard Mode Command List
 LOC_SYSTEM_DEBUG_COMMAND_UNKNOWN,Unknown Command

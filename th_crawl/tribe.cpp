@@ -935,7 +935,7 @@ void PropertyView()
 				break;
 		}
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

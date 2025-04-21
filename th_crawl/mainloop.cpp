@@ -716,6 +716,9 @@ void MainLoop()
 						case SYSCMD_SKILL:						
 							SkillUse(0);
 							break;
+						case SYSCMD_SHOUT:
+							shout(0);
+							break;
 						case SYSCMD_SKILL_VIEW:
 							skill_view();
 							break;
@@ -1037,7 +1040,7 @@ bool option_menu(int value_)
 			}
 		}
 		else if(input_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

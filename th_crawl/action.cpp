@@ -862,7 +862,7 @@ void Search()
 			Long_Move(you.search_pos);
 			break;
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -1272,16 +1272,24 @@ bool CheckDimension()
 
 	while(1)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_STAIT_WARN) + " ",false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_STAIT_WARN),false,false,false,CL_help);
+		printlog(" (",false,false,false,CL_help);
+		printlog("Y",false,false,false,CL_help, 'Y');
+		printlog("/",false,false,false,CL_help);
+		printlog("N",false,false,false,CL_help, 'N');
+		printlog(") ",false,false,false,CL_help);
+		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 		switch(waitkeyinput())
 		{
 		case 'Y':
 			you.s_dimension = 0;
 			enterlog();
+			endSelection();
 			return true;
 		case 'N':
 		default:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_CRAWL),true,false,false,CL_help);
+			endSelection();
 			return false;
 		}
 	}
@@ -1294,16 +1302,24 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_YUKKURI_STAIR:
 		if(down)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN) + " ",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN),false,false,false,CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch(waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				enterlog();
+				endSelection();
 				return true;
 			case 'N':
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_help);
+				endSelection();
 				return false;
 			}
 		}
@@ -1311,16 +1327,24 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_SCARLET_U_STAIR:
 		if(down)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN) + " ",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN),false,false,false,CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch(waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				enterlog();
+				endSelection();
 				return true;
 			case 'N':
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_help);
+				endSelection();
 				return false;
 			}
 		}
@@ -1328,16 +1352,24 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_BAMBOO_STAIR:
 		if(down)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE),false,false,false,CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch(waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				enterlog();
+				endSelection();
 				return true;
 			case 'N':
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
+				endSelection();
 				return false;
 			}
 		}
@@ -1347,16 +1379,24 @@ bool warning(dungeon_tile_type type, bool down)
 		{
 			if(!(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL))
 			{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE),false,false,false,CL_danger);
+				printlog(" (",false,false,false,CL_danger);
+				printlog("y",false,false,false,CL_danger, 'y');
+				printlog("/",false,false,false,CL_danger);
+				printlog("n",false,false,false,CL_danger, 'n');
+				printlog(") ",false,false,false,CL_danger);
+				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 				switch(waitkeyinput())
 				{
 				case 'Y':
 				case 'y':
 					enterlog();
+					endSelection();
 					return true;
 				case 'N':
 				default:
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
+					endSelection();
 					return false;
 				}
 			}
@@ -1369,16 +1409,24 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 				if(!you.rune[RUNE_PANDEMONIUM_MAGIC + current_level - PANDEMONIUM_LEVEL-1])
 				{
-					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE) + " ",false,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_RUNE),false,false,false,CL_danger);
+					printlog(" (",false,false,false,CL_danger);
+					printlog("y",false,false,false,CL_danger, 'y');
+					printlog("/",false,false,false,CL_danger);
+					printlog("n",false,false,false,CL_danger, 'n');
+					printlog(") ",false,false,false,CL_danger);
+					startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 					switch(waitkeyinput())
 					{
 					case 'Y':
 					case 'y':
 						enterlog();
+						endSelection();
 						return true;
 					case 'N':
 					default:
 						printlog(LocalzationManager::locString(LOC_SYSTEM_OK),true,false,false,CL_help);
+						endSelection();
 						return false;
 					}
 				}
@@ -1388,20 +1436,29 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_ZIGURRAT_STAIR:
 		if (down && current_level != ZIGURRAT_LEVEL)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT) + " ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT), false, false, false, CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch (waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				if (you.ziggurat_level) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY), true, false, false, CL_help);
+					endSelection();
 					return false;
 				}
 				enterlog();
+				endSelection();
 				return true;
 			case 'N':
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_NEED_PREPARATION), true, false, false, CL_help);
+				endSelection();
 				return false;
 			}
 		}
@@ -1409,16 +1466,24 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_DREAM_STAIR:
 		if(down)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE) + " ",false,false,false,CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_MAZE),false,false,false,CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch(waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				enterlog();
+				endSelection();
 				return true;
 			case 'N':
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOOD_CHOICE),true,false,false,CL_help);
+				endSelection();
 				return false;
 			}
 		}
@@ -1713,24 +1778,31 @@ void Stair_move(bool down)
 			}
 			else
 			{
-				if(you.haveGoal())
+				if(!you.haveGoal())
 				{
-					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_WARN),true,false,false,CL_danger);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_WARN) + " ",false,false,false,CL_danger);
 				}
 				else
 				{
-					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION),true,false,false,CL_normal);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_ESCAPE_LAST_QUESTION) + " ",false,false,false,CL_normal);
 
-				}				
+				}
+				printlog("(",false,false,false,you.haveGoal()?CL_normal:CL_danger);
+				printlog("Y",false,false,false,you.haveGoal()?CL_normal:CL_danger, 'Y');
+				printlog("/",false,false,false,you.haveGoal()?CL_normal:CL_danger);
+				printlog("N",false,false,false,you.haveGoal()?CL_normal:CL_danger, 'N');
+				printlog(")",false,false,false,you.haveGoal()?CL_normal:CL_danger);
+				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 				
 				int direc = waitkeyinput(true);
+				endSelection();
 				if(direc == 'Y')
 				{
 					you.dead_reason = DR_ESCAPE;
 					GameOver();
 					break;
 				}
-				printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_EXPRO),true,false,false,CL_normal);	
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_EXPRO),true,false,false,CL_normal);
 			}
 		}
 		break;
@@ -3220,7 +3292,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			changemove(-DisplayManager.log_length);
 		}
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -3271,29 +3343,35 @@ void shout(char auto_)
 
 	if (auto_ == 0) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU), true, false, false, CL_help);
-		printlog("t - ", false, false, false, CL_normal);
-		printlog(shout_, true, false, false, CL_normal);
+		printlog("t - " + shout_, true, false, false, CL_normal, 't');
 		{
 			ostringstream oss;
-			oss << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ALLY) << " : a - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ATTACK) << "   s - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_STOP);
-			printlog(oss.str(), true, false, false, CL_normal);
+			oss << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ALLY) << " : ";
+			printlog(oss.str(), false, false, false, CL_normal);
 		}
+		printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_ATTACK), false, false, false, CL_normal, 'a');
+		printlog("   ", false, false, false, CL_normal);
+		printlog("s - " + LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_STOP), true, false, false, CL_normal, 's');
 		{
 			ostringstream oss;
-			oss << "                w - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_WAIT) << "   s - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_COME);
-			printlog(oss.str(), true, false, false, CL_normal);
+			oss << "                ";
+			printlog(oss.str(), false, false, false, CL_normal);
 		}
-
+		printlog("w - " + LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_WAIT), false, false, false, CL_normal, 'w');
+		printlog("   ", false, false, false, CL_normal);
+		printlog("f - " + LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_COME), true, false, false, CL_normal, 'f');
 		{
 			ostringstream oss;
 			oss << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_OTHRE) << " - " << LocalzationManager::locString(LOC_SYSTEM_SHOUT_MENU_SILENCE);
-			printlog(oss.str(), true, false, false, CL_normal);
+			printlog(oss.str(), true, false, false, CL_normal, VK_ESCAPE);
 		}
+		startSelection({'t', 'a', 's', 'w', 'f', VK_ESCAPE});
 	}
 
 	int key_ = auto_;
 	if (key_ == 0)
 		key_ = waitkeyinput(true);
+	endSelection();
 	switch(key_)
 	{
 	case 't':
@@ -3385,7 +3463,7 @@ void shout(char auto_)
 		you.SetPrevAction('t', 'f');
 		break;
 	default:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_COME),true,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_CANCLE),true,false,false,CL_normal);
 		break;
 	}
 }

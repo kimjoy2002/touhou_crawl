@@ -76,7 +76,7 @@ void Equip_Weapon()
 			break;
 		}
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -200,7 +200,7 @@ void Equip_Armor()
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -247,7 +247,7 @@ void Unequip_Armor()
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -306,7 +306,7 @@ void Equip_Jewelry()
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -352,7 +352,7 @@ void Unequip_Jewelry()
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
 		else if( key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

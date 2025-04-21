@@ -378,7 +378,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				return 2;
 			}			
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -432,7 +432,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 			(*c) = coord_def(you.position.x,you.position.y);
 			return VK_RETURN;
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {

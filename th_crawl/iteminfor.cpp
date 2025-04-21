@@ -43,6 +43,12 @@ void memorize_action(int spell_)
 		{
 			printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
 			printlog(" " + LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ASK),false,false,false,CL_help);
+			printlog(" (",false,false,false,CL_help);
+			printlog("y",false,false,false,CL_help, 'y');
+			printlog("/",false,false,false,CL_help);
+			printlog("n",false,false,false,CL_help, 'n');
+			printlog(") ",false,false,false,CL_help);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			ostringstream ss;
 			ss << " [" <<  LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ": " << (100-you.GetSpellSuccess(spell_)) << "% " << 
 				LocalzationManager::locString(LOC_SYSTEM_REMAIN_SPELLPOINT) << ": " << you.remainSpellPoiont << "]"; 
@@ -54,10 +60,11 @@ void memorize_action(int spell_)
 			case 'Y':
 			case 'y':
 				you.Memorize(spell_);
+				endSelection();
 				ok_ = false;
 				break;
 			case -1:
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					//ESC PASSTHORUGH
 				}
 				else {
@@ -66,6 +73,7 @@ void memorize_action(int spell_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
+				endSelection();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_help);
 				ok_ = false;
 				break;
@@ -467,7 +475,7 @@ void iteminfor(bool gameover)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK || (inputedKey.mouse == MKIND_LCLICK && gameover)) {
+			if(inputedKey.isRightClick() || (inputedKey.isLeftClick() && gameover)) {
 				break;
 			}
 		}

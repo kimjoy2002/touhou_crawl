@@ -1346,8 +1346,8 @@ void GameOver()
 					default:
 						break;
 					case -1:
-						if(inputedKey.mouse == MKIND_LCLICK ||
-							inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isLeftClick() ||
+							inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {

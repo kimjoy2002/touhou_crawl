@@ -66,7 +66,7 @@ void Help_Show()
 					changemove(-DisplayManager.log_length);
 					continue;
 				case -1:
-					if(inputedKey.mouse == MKIND_RCLICK) {
+					if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -131,7 +131,7 @@ void Help_Show()
 						changemove(-DisplayManager.log_length);
 						continue;						
 					case -1:
-						if(inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {
@@ -175,7 +175,7 @@ void Help_Show()
 					changemove(-DisplayManager.log_length);
 					continue;
 				case -1:
-					if(inputedKey.mouse == MKIND_RCLICK) {
+					if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -191,7 +191,7 @@ void Help_Show()
 			}
 			break;
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {

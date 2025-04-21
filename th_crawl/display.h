@@ -20,6 +20,12 @@ using namespace std;
 class textures;
 
 
+enum SPECIAL_CLINKABLE { 
+	SPECIAL_CLINKABLE_START = 1000,
+	SPECIAL_CLINKABLE_Y = SPECIAL_CLINKABLE_START,
+	SPECIAL_CLINKABLE_N
+};
+
 class text_dummy
 {
 public:
@@ -50,7 +56,7 @@ public:
 
 	text_manager():length(0),short_len(0),enter(true){};
 	~text_manager();
-	bool add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_);
+	bool add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_ = 0);
 	void SetShowLength(int num){if(short_len>num){short_len = num;}};
 	void DeleteTemp();	
 	void SetEnter();
@@ -122,6 +128,7 @@ public:
 
 	display_manager();
 	void Getfontinfor();
+	int convertClickable(int id);
 	textures* getSelectTexure(int id);
 	void draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 	void text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
@@ -166,6 +173,7 @@ void changemove(int var);
 int GetDisplayMove();
 string& SetText();
 void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_);
+void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_);
 void deletelog();
 void enterlog();
 void printarray(bool enter_, bool log_, bool temp_, D3DCOLOR color_, int num_, ...);

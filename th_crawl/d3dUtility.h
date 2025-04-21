@@ -89,7 +89,7 @@ enum SYSTEM_COMMAND_KIND {
 	SYSCMD_100REST,
 	SYSCMD_MAGIC,
 	SYSCMD_SKILL,
-	SYSCMD_C_6,
+	SYSCMD_SHOUT,
 	SYSCMD_C_7,
 	SYSCMD_C_8,
 	SYSCMD_C_9,
@@ -117,6 +117,13 @@ struct InputedKey {
 	InputedKey(){};
 	InputedKey(MSG key):key(key){};
 	InputedKey(MOUSE_KIND mouse,int val1,int val2):mouse(mouse),val1(val1),val2(val2){};
+
+	bool isLeftClick() {
+		return (mouse == MKIND_MAP || mouse==MKIND_ITEM || mouse==MKIND_PICK || mouse==MKIND_SYSTEM || mouse==MKIND_LCLICK || mouse==MKIND_MENU);
+	}
+	bool isRightClick() {
+		return (mouse == MKIND_MAP_DESCRIPTION || mouse==MKIND_ITEM_DESCRIPTION || mouse==MKIND_PICK_DESCRIPTION || mouse==MKIND_RCLICK);
+	}
 };
 
 struct TimedKey {

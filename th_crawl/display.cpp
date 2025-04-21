@@ -178,14 +178,73 @@ void display_manager::Getfontinfor()
 	log_length = (option_mg.getHeight() - 50) / fontDesc.Height;
 }
 
-textures* display_manager::getSelectTexure(int id) {
+
+int display_manager::convertClickable(int id) {
 	switch(id) {
-		case 'Y';
-			return &img_command_Y;
-		case 'N';
-			return &img_command_N
+		case SPECIAL_CLINKABLE_Y:
+			return 'Y';
+		case SPECIAL_CLINKABLE_N:
+			return 'N';
 		default:
-			return &img_command_empty;
+			return id;
+	}
+}
+
+textures* display_manager::getSelectTexure(int id) {
+	if(id >= 'a' && id <= 'z') {
+		return &img_command_alphabet_small[id - 'a'];
+	}
+	else if(id >= 'A' && id <= 'Z') {
+		return &img_command_alphabet_large[id - 'A'];
+	}
+	else if(id >= '0' && id <= '9') {
+		return &img_command_number[id - '0'];
+	}
+
+
+	switch(id) {
+		case SPECIAL_CLINKABLE_Y:
+			return &img_command_Y;
+		case SPECIAL_CLINKABLE_N:
+			return &img_command_N;
+		case 'Y':
+			return &img_command_Y;
+		case 'N':
+			return &img_command_N;
+		case VK_ESCAPE:
+			return &img_command_X;
+		case '<':
+			return &img_command_number[10];
+		case '>':
+			return &img_command_number[11];
+		case '=':
+			return &img_command_number[12];
+		case '?':
+			return &img_command_number[13];
+		case '!':
+			return &img_command_number[14];
+		case '*':
+			return &img_command_number[15];
+		case '(':
+			return &img_command_number[16];
+		case ')':
+			return &img_command_number[17];
+		case '+':
+			return &img_command_number[18];
+		case '^':
+			return &img_command_number[19];
+		case '#':
+			return &img_command_number[20];
+		case '&':
+			return &img_command_number[21];
+		case '-':
+			return &img_command_number[22];
+		case '.':
+			return &img_command_number[23];
+		case ',':
+			return &img_command_number[24];
+		default:
+			return &img_command_number[13];
 	}
 }
 
@@ -2319,7 +2378,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 		}
 	}
-	
+	bool already_draw = false;
 	//텍스트 클릭용 사전 루프
 	if(!text_log.text_list.empty())
 	{
@@ -2344,17 +2403,18 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 		float x = 0, y = 0;
 		for(;it != text_log.text_list.end();)
-		{			
-			RECT rc={ (LONG)x, (LONG)y, 32*(sight_x*2+1)+16, (LONG)(y+fontDesc.Height)};
+		{
 			if((*it)->clickable > 0) {
-				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
-					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
+				RECT rc2={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
+				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 					if(isClicked(LEFT_CLICK)) {
 						MSG msg;
-						msg.message = WM_KEYDOWN;
+						msg.message = WM_CHAR;
 						msg.wParam =(*it)->clickable;
 						g_keyQueue->push(InputedKey(msg));
 					}
+					already_draw = true;
 				}
 			}
 			if((*it)->enter)
@@ -2404,7 +2464,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							sight = false;
 						}
 					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, 1.0f, you.turn, sight, false);
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, 1.0f, you.turn, sight, false, !already_draw);
 				}
 				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
 				{
@@ -2430,7 +2490,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	int max_minimap_y = buff_start_y + 2*fontDesc.Height;
 
 	for(int dot_size_= 1; dot_size_ <=4; dot_size_++) {
-		int start_y = option_mg.getHeight() - (32*greed_max_y);
+		int start_y = option_mg.getHeight() - (32*greed_max_y+10);
 		if(start_y > GetDotY(dot_start_y, DG_MAX_Y, sight_y, dot_size_)) {
 			dot_size = dot_size_;
 			max_minimap_y = GetDotY(dot_start_y, DG_MAX_Y, sight_y, dot_size_);
@@ -2571,8 +2631,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 								if(isClicked(LEFT_CLICK)) {
 									MSG msg;
-									msg.message = WM_KEYDOWN;
-									msg.wParam = selection_vector[tile_count];
+									msg.message = WM_CHAR;
+									msg.wParam = convertClickable(selection_vector[tile_count]);
 									g_keyQueue->push(InputedKey(msg));
 								}
 							}
@@ -2586,6 +2646,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							case SYSCMD_100REST: pixel_ = &img_command_100sleep; break;
 							case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
 							case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
+							case SYSCMD_SHOUT: pixel_ = &img_command_shout; break;
 							case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
 							case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
 							case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
@@ -2607,7 +2668,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 				else if(tile_count>=20 && tile_count < 72) {
 					bool equip_ = false, curse = false, throw_ = false, evokable = false;
-					int x_ = start_x+i*32, y_ = start_y+j*32;
+					int x_ = start_x+i*32, y_ = start_y+j*32+10;
 					if(it != you.item_list.end()) {
 						equip_ = (you.isequip(it)>0);
 						throw_ = (you.throw_weapon == &(*it));
@@ -2650,8 +2711,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						it++;
 					}
 				} else {
-					int x_ = start_x+i*32, y_ = start_y+j*32;
-					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true);
+					int x_ = start_x+i*32, y_ = start_y+j*32+10;
+					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true, false);
 					if(floor_items != env[current_level].item_list.end()) {
 						if(floor_items->position == you.position ) {
 							floor_items->draw(pSprite,pfont,x_,y_);
@@ -2949,9 +3010,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			RECT rc={ (LONG)x, (LONG)y, 32*(sight_x*2+1)+16, (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
 			if((*it)->clickable > 0) {
-				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
-					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
-					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				RECT rc2={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
+				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
 				}
 			}
 			if((*it)->enter)
@@ -3302,7 +3364,7 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
 					if(isClicked(LEFT_CLICK)) {
 						MSG msg;
-						msg.message = WM_KEYDOWN;
+						msg.message = WM_CHAR;
 						msg.wParam = (*it)->clickable;
 						g_keyQueue->push(InputedKey(msg));
 					}
@@ -3367,10 +3429,10 @@ bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spri
     float width  = right - left;
     float height = bottom - top;
 
-    dot_temple.draw(spriteBatch, left + width / 2, top + thickness / 2, 0.0f, width, (float)thickness, color);
-    dot_temple.draw(spriteBatch, left + width / 2, bottom - thickness / 2, 0.0f, width, (float)thickness, color);
-    dot_temple.draw(spriteBatch, left + thickness / 2, top + height / 2, 0.0f, (float)thickness, height, color);
-    dot_temple.draw(spriteBatch, right - thickness / 2, top + height / 2, 0.0f, (float)thickness, height, color);
+    dot_player.draw(spriteBatch, left, top, 0.0f, width, (float)thickness, color);
+    dot_player.draw(spriteBatch, left, bottom, 0.0f, width+1, (float)thickness, color);
+    dot_player.draw(spriteBatch, left, top, 0.0f, (float)thickness, height, color);
+    dot_player.draw(spriteBatch, right, top, 0.0f, (float)thickness, height+1, color);
 
     return true;
 }

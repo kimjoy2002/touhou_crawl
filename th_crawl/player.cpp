@@ -910,7 +910,13 @@ int players::move(short_move x_mov, short_move y_mov)
 
 		if (env[current_level].isForbidZone(move_x_, move_y_) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN), false, false, false, CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			bool loop_ = true;
 			you.SetInter(IT_MAP_DANGER);
 			while (loop_)
@@ -922,9 +928,10 @@ int players::move(short_move x_mov, short_move y_mov)
 				case 'y':
 					loop_ = false;
 					enterlog();
+					endSelection();
 					break;
 				case -1:
-					if(inputedKey.mouse == MKIND_RCLICK) {
+					if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -935,6 +942,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				case VK_ESCAPE:
 					loop_ = false;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
+					endSelection();
 					return 0;
 				default:
 					break;
@@ -946,7 +954,13 @@ int players::move(short_move x_mov, short_move y_mov)
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
 			if(hp<temp_smoke->danger(this))
 			{		
-				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN),false,false,false,CL_danger);
+				printlog(" (",false,false,false,CL_danger);
+				printlog("y",false,false,false,CL_danger, 'y');
+				printlog("/",false,false,false,CL_danger);
+				printlog("n",false,false,false,CL_danger, 'n');
+				printlog(") ",false,false,false,CL_danger);
+				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 				bool loop_ = true;
 				you.SetInter(IT_SMOKE);
 				while(loop_)
@@ -958,9 +972,10 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'y':
 						loop_ = false;
 						enterlog();
+						endSelection();
 						break;						
 					case -1:
-						if(inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {
@@ -971,6 +986,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case VK_ESCAPE:
 						loop_ = false;
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
+						endSelection();
 						return 0;
 					default:
 						break;
@@ -982,7 +998,13 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if(hp<temp_floor->danger(this))
 			{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN) + " ",false,false,false,CL_danger);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN),false,false,false,CL_danger);
+				printlog(" (",false,false,false,CL_danger);
+				printlog("y",false,false,false,CL_danger, 'y');
+				printlog("/",false,false,false,CL_danger);
+				printlog("n",false,false,false,CL_danger, 'n');
+				printlog(") ",false,false,false,CL_danger);
+				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 				bool loop_ = true;
 				
 				you.SetInter(IT_SMOKE);
@@ -995,9 +1017,10 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'y':
 						loop_ = false;
 						enterlog();
+						endSelection();
 						break;
 					case -1:
-						if(inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {
@@ -1008,6 +1031,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					case VK_ESCAPE:
 						loop_ = false;
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
+						endSelection();
 						return 0;
 					default:
 						break;
@@ -1130,7 +1154,13 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 	{
 		if (env[current_level].isForbidZone(c.x, c.y) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_REALLY_OPEN_DOOR) + " ", false, false, false, CL_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_REALLY_OPEN_DOOR), false, false, false, CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			bool loop_ = true;
 			while (loop_)
 			{
@@ -1141,9 +1171,10 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 				case 'y':
 					loop_ = false;
 					enterlog();
+					endSelection();
 					break;					
 				case -1:
-					if(inputedKey.mouse == MKIND_RCLICK) {
+					if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -1154,6 +1185,7 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 				case VK_ESCAPE:
 					loop_ = false;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
+					endSelection();
 					return -1;
 				default:
 					break;
@@ -1692,8 +1724,15 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
-			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_REVIVE_YN),true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_REVIVE_YN),false,false,false,CL_help);
+			printlog(" (",false,false,false,CL_help);
+			printlog("Y",false,false,false,CL_help, 'Y');
+			printlog("/",false,false,false,CL_help);
+			printlog("N",false,false,false,CL_help, 'N');
+			printlog(") ",false,false,false,CL_help);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			int key_ = waitkeyinput();
+			endSelection();
 			switch(key_)
 			{
 			case 'Y':
@@ -3562,11 +3601,18 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 		{
 			changedisplay(DT_GAME);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN),false,false,false,CL_danger);
+			printlog(" (",false,false,false,CL_danger);
+			printlog("y",false,false,false,CL_danger, 'y');
+			printlog("/",false,false,false,CL_danger);
+			printlog("n",false,false,false,CL_danger, 'n');
+			printlog(") ",false,false,false,CL_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			switch(waitkeyinput())
 			{
 			case 'Y':
 			case 'y':
 				enterlog();
+				endSelection();
 				if(you.god == GT_YUKARI)
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE),true,false,false,CL_small_danger);
@@ -3575,7 +3621,8 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 				break;
 			case 'N':
 			default:
-				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
+				endSelection();
 				return false;
 			}
 		}
@@ -3598,7 +3645,14 @@ void players::LevelUp(bool speak_)
 		if(speak_)
 		{
 			bool end_ = false;
-			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE),true,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE) + " ",false,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_S),false,false,false,CL_help, 'S');
+			printlog(", ",false,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_D),false,false,false,CL_help, 'D');
+			printlog(", ",false,false,false,CL_help);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_I),false,false,false,CL_help, 'I');
+			printlog(" ",false,false,false,CL_help);
+			startSelection({'S', 'D', 'I'});
 			while(!end_)
 			{
 				switch(waitkeyinput())
@@ -3621,8 +3675,11 @@ void players::LevelUp(bool speak_)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_INT),true,false,false,CL_good);
 					end_ = true;
 					break;
+				default:
+					break;
 				}
 			}
+			endSelection();
 		}
 		else
 		{
@@ -4153,7 +4210,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 
 						if(t->num)
 						{
-							printlog(" " + LocalzationManager::formatString(LOC_SYSTEM_PICKUP_NUMBER, PlaceHolderHelper(to_string(t->num))),true,false,false,CL_normal);
+							printlog(" " + LocalzationManager::formatString(LOC_SYSTEM_PICKUP_NUMBER, PlaceHolderHelper(to_string(t->num))),false,false,false,CL_normal);
 						}
 					}
 					if (t->pick())
@@ -4189,7 +4246,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			sprintf_s(temp, 2,"%c",(*t).id);
 			printlog(temp,false,false,false,(*t).item_color());
 			printlog(" - ",false,false,false,(*t).item_color());
-			printlog((*t).GetName(),true,false,false,(*t).item_color());
+			printlog((*t).GetName(),false,false,false,(*t).item_color());
 		}
 		if (it_temp->pick()) {
 			throw_weapon = &(*it_temp);
@@ -5249,7 +5306,7 @@ bool players::equipjewerly(char id_)
 							break;
 						}
 						else if(key_ == -1) {
-							if(inputedKey.mouse == MKIND_RCLICK) {
+							if(inputedKey.isRightClick()) {
 								return 0;
 							}
 						}
@@ -5410,6 +5467,12 @@ bool players::unequip(equip_type type_, bool force_)
 		if (!force_ && type_ == ET_NECK && getAmuletPercent() > 0)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_AMULET_YN), true, false, false, CL_small_danger);
+			printlog(" (",false,false,false,CL_small_danger);
+			printlog("y",false,false,false,CL_small_danger, 'y');
+			printlog("/",false,false,false,CL_small_danger);
+			printlog("n",false,false,false,CL_small_danger, 'n');
+			printlog(") ",false,false,false,CL_small_danger);
+			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			bool repeat_ = true;
 			while (repeat_)
 			{
@@ -5418,11 +5481,15 @@ bool players::unequip(equip_type type_, bool force_)
 				case 'Y':
 				case 'y':
 					repeat_ = false;
+					endSelection();
 					break;
 				case 'N':
 				case 'n':
 					printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_CRAWL), false, false, false, CL_normal);
+					endSelection();
 					return false;
+				default:
+					break;
 				}
 			}
 		}

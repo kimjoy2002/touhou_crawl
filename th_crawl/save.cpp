@@ -62,13 +62,13 @@ void saveandcheckexit()
 {
 	while(1)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN) + " ",false,false,false,CL_help);
-		printlog("(",false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN),false,false,false,CL_help);
+		printlog(" (",false,false,false,CL_help);
 		printlog("Y",false,false,false,CL_help, 'Y');
 		printlog("/",false,false,false,CL_help);
 		printlog("N",false,false,false,CL_help, 'N');
-		printlog(")",false,false,false,CL_help);
-		startSelection({'Y', 'N'});
+		printlog(") ",false,false,false,CL_help);
+		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 		
 		InputedKey inputedKey;
 		switch(waitkeyinput(inputedKey))
@@ -80,7 +80,7 @@ void saveandcheckexit()
 			endSelection();
 			return;			
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -104,6 +104,12 @@ void nosaveandexit()
 	while(1)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_NONSAVE_QUIT_YN),false,false,false,CL_help);
+		printlog(" (",false,false,false,CL_help);
+		printlog("Y",false,false,false,CL_help, 'Y');
+		printlog("/",false,false,false,CL_help);
+		printlog("N",false,false,false,CL_help, 'N');
+		printlog(") ",false,false,false,CL_help);
+		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 		InputedKey inputedKey;
 		switch(waitkeyinput(inputedKey))
 		{
@@ -111,11 +117,12 @@ void nosaveandexit()
 			enterlog();
 			you.dead_reason = DR_QUIT;
 			GameOver();
+			endSelection();
 			//delete_file();
 			//PostQuitMessage(0);
 			return;			
 		case -1:
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -124,6 +131,7 @@ void nosaveandexit()
 		case 'N':
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
+			endSelection();
 			return;
 		default:
 			enterlog();

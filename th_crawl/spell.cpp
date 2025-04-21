@@ -2014,7 +2014,7 @@ void SpellUse(char auto_, int auto_direc_)
 				}
 			}
 			else if(key_ == -1) {
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					break;
 				}
 			}
@@ -2057,7 +2057,7 @@ void SpellView()
 				}
 			}
 			else if(key_ == -1) {
-				if(inputedKey.mouse == MKIND_RCLICK) {
+				if(inputedKey.isRightClick()) {
 					break;
 				}
 			}

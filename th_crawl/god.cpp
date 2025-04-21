@@ -2228,7 +2228,7 @@ void Pray()
 						ok_ = false;
 						break;
 					case -1:
-						if(inputedKey.mouse == MKIND_RCLICK) {
+						if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {

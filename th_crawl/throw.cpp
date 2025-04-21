@@ -881,7 +881,7 @@ list<item>::iterator ThrowSelect()
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 		else if(key_ == -1) {
-			if(inputedKey.mouse == MKIND_RCLICK) {
+			if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

@@ -62,7 +62,14 @@ void saveandcheckexit()
 {
 	while(1)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN),false,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN) + " ",false,false,false,CL_help);
+		printlog("(",false,false,false,CL_help);
+		printlog("Y",false,false,false,CL_help, 'Y');
+		printlog("/",false,false,false,CL_help);
+		printlog("N",false,false,false,CL_help, 'N');
+		printlog(")",false,false,false,CL_help);
+		startSelection({'Y', 'N'});
+		
 		InputedKey inputedKey;
 		switch(waitkeyinput(inputedKey))
 		{
@@ -70,6 +77,7 @@ void saveandcheckexit()
 			enterlog();	
 			if(!ReplayClass.ReplayMode())
 				g_saveandexit = true;
+			endSelection();
 			return;			
 		case -1:
 			if(inputedKey.mouse == MKIND_RCLICK) {
@@ -81,6 +89,7 @@ void saveandcheckexit()
 		case 'N':
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
+			endSelection();
 			return;
 		default:
 			enterlog();

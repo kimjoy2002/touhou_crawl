@@ -29,11 +29,13 @@ public:
 	bool log;
 	bool temp;
 	D3DCOLOR color;
+	int clickable;
 
 
-	text_dummy(string text_):text(ConvertUTF8ToUTF16(text_)),enter(true),log(false),color(D3DCOLOR_RGBA(0, 0, 0, 255)){calculateWitdh();};
-	text_dummy(string text_, bool enter_, bool log_, bool temp_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(D3DCOLOR_RGBA(255, 255, 255, 255)){calculateWitdh();};
-	text_dummy(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(color_){calculateWitdh();};
+	text_dummy(string text_):text(ConvertUTF8ToUTF16(text_)),enter(true),log(false),color(D3DCOLOR_RGBA(0, 0, 0, 255)),clickable(0){calculateWitdh();};
+	text_dummy(string text_, bool enter_, bool log_, bool temp_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(D3DCOLOR_RGBA(255, 255, 255, 255)),clickable(0){calculateWitdh();};
+	text_dummy(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(color_),clickable(0){calculateWitdh();};
+	text_dummy(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int clickable):text(ConvertUTF8ToUTF16(text_)),enter(enter_),log(log_),temp(temp_),color(color_),clickable(clickable){calculateWitdh();};
 
 	void calculateWitdh();
 };
@@ -53,6 +55,7 @@ public:
 	void DeleteTemp();	
 	void SetEnter();
 	void reset();
+	void removeClickable();
 };
 
 class infoBox
@@ -106,6 +109,8 @@ public:
 	LOCALIZATION_ENUM_KEY item_view_message;
 
 	textures *image;
+	
+	vector<int> selection_vector;
 
 	int log_length;
 	int move;
@@ -117,6 +122,7 @@ public:
 
 	display_manager();
 	void Getfontinfor();
+	textures* getSelectTexure(int id);
 	void draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 	void text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 	void skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
@@ -134,6 +140,7 @@ public:
 	void start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY message_);
 	void CheckMouseInfo(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, RECT& rc, int width_, int height_, string message);
 	void drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
+	bool DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spriteBatch, const RECT& rc, int thickness, D3DCOLOR color);
 };
 
 class stateBox
@@ -168,6 +175,9 @@ int printsub_blank(int final_index, int next_index);
 int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_);
 void deletesub();
 void entersub();
+void startSelection(vector<int> select_list);
+void endSelection();
+
 int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...);
 
 void SetSpellSight(int sight, int sight_type_);

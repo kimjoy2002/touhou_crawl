@@ -179,7 +179,7 @@ LOC_SYSTEM_LEVELUP_STR,Became stronger.
 LOC_SYSTEM_LEVELUP_DEX,Became more agile.
 LOC_SYSTEM_LEVELUP_INT,Became smarter.
 LOC_SYSTEM_NOT_REMEMBER_SPELL,You don't know any spells yet.
-LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit? (Y/N)
+LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit?
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving? (Y/N)
 LOC_SYSTEM_FORBIDZONE_YN,Are you really going in? (y/n)
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.

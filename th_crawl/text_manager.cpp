@@ -104,8 +104,6 @@ void text_manager::SetEnter()
 	}
 	ReleaseMutex(mutx);
 }
-
-
 void text_manager::reset()
 {
 	WaitForSingleObject(mutx, INFINITE);
@@ -114,7 +112,14 @@ void text_manager::reset()
 	short_len=0;
 	ReleaseMutex(mutx);
 }
-
+void text_manager::removeClickable() {
+	WaitForSingleObject(mutx, INFINITE);
+	for (it=text_list.begin();it!=text_list.end();it++)
+	{
+		it->clickable = 0;
+	}
+	ReleaseMutex(mutx);
+}
 string& SetText()
 {
 	return DisplayManager.text;
@@ -188,6 +193,20 @@ void entersub()
 	DisplayManager.text_sub.SetEnter();
 	ReleaseMutex(mutx);
 }
+
+void startSelection(vector<int> select_list) {
+	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.selection_vector.clear();
+	DisplayManager.selection_vector = select_list;
+	ReleaseMutex(mutx);
+}
+void endSelection() {
+	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.text_sub.removeClickable();
+	DisplayManager.selection_vector.clear();
+	ReleaseMutex(mutx);	
+}
+
 
 int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...)
 {

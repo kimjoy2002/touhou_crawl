@@ -178,6 +178,17 @@ void display_manager::Getfontinfor()
 	log_length = (option_mg.getHeight() - 50) / fontDesc.Height;
 }
 
+textures* display_manager::getSelectTexure(int id) {
+	switch(id) {
+		case 'Y';
+			return &img_command_Y;
+		case 'N';
+			return &img_command_N
+		default:
+			return &img_command_empty;
+	}
+}
+
 void common_mouse_logic() {
 	if(isClicked(LEFT_CLICK)) {
 		g_keyQueue->push(InputedKey(MKIND_LCLICK,0,0));
@@ -2307,8 +2318,66 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					(you.s_pure >= 10) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0) , this);
 			}
 		}
-
 	}
+	
+	//텍스트 클릭용 사전 루프
+	if(!text_log.text_list.empty())
+	{
+		list<text_dummy*>::iterator it;
+		it = text_log.text_list.end();
+		it--;
+		int i = text_log.short_len;
+		while(i)
+		{
+			if(it == text_log.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+		float x = 0, y = 0;
+		for(;it != text_log.text_list.end();)
+		{			
+			RECT rc={ (LONG)x, (LONG)y, 32*(sight_x*2+1)+16, (LONG)(y+fontDesc.Height)};
+			if((*it)->clickable > 0) {
+				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
+					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
+					if(isClicked(LEFT_CLICK)) {
+						MSG msg;
+						msg.message = WM_KEYDOWN;
+						msg.wParam =(*it)->clickable;
+						g_keyQueue->push(InputedKey(msg));
+					}
+				}
+			}
+			if((*it)->enter)
+			{
+				x = 0;
+				y+=fontDesc.Height;
+				it++;
+			}
+			else
+			{
+				bool first_ = (x == 0);
+				x+=(*it)->width;
+				it++;
+				if(!first_ && it != text_log.text_list.end() && (x+(*it)->width) > 32*(sight_x*2+1)+16) {
+					x = 0;
+					y+=fontDesc.Height;
+				}
+			}
+		}
+	}
+	
+	
+	
 
 	//바탕 타일 그리기
 	int x_ = you.GetDisplayPos().x-sight_x;
@@ -2486,29 +2555,53 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		for(int j = 0; j < greed_max_y; j++) {
 			for(int i = 0; i < greed_max_x; i++) {
 				if(tile_count < 20) {
-					//명령어들
-					textures* pixel_ = &img_command_empty;
-					switch(tile_count) {
-						case SYSCMD_AUTOTRAVEL: pixel_ = &img_command_autotravel; break;
-						case SYSCMD_AUTOATTACK: pixel_ = &img_command_autoattack; break;
-						case SYSCMD_100REST: pixel_ = &img_command_100sleep; break;
-						case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
-						case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
-						case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
-						case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
-						case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
-						case SYSCMD_HELP: pixel_ = &img_command_help; break;
-						case SYSCMD_QUIT: pixel_ = &img_command_quit; break;
-						default: break;
-					}
-					int x_ = start_x+i*32, y_ = start_y+j*32;
+					if(selection_vector.size() > 0) {
+						textures* pixel_ = &img_command_empty;
+						
+						if(selection_vector.size() > tile_count) {
+							pixel_ = getSelectTexure(selection_vector[tile_count]);
+						}
+						int x_ = start_x+i*32, y_ = start_y+j*32;
 
-					pixel_->draw(pSprite,x_,y_,255);
-					if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-						MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-						img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-						if(isClicked(LEFT_CLICK)) {
-							g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
+						pixel_->draw(pSprite,x_,y_,255);
+						
+						if(pixel_ != &img_command_empty) {
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								if(isClicked(LEFT_CLICK)) {
+									MSG msg;
+									msg.message = WM_KEYDOWN;
+									msg.wParam = selection_vector[tile_count];
+									g_keyQueue->push(InputedKey(msg));
+								}
+							}
+						}
+					} else {					
+						//명령어들
+						textures* pixel_ = &img_command_empty;
+						switch(tile_count) {
+							case SYSCMD_AUTOTRAVEL: pixel_ = &img_command_autotravel; break;
+							case SYSCMD_AUTOATTACK: pixel_ = &img_command_autoattack; break;
+							case SYSCMD_100REST: pixel_ = &img_command_100sleep; break;
+							case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
+							case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
+							case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
+							case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
+							case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
+							case SYSCMD_HELP: pixel_ = &img_command_help; break;
+							case SYSCMD_QUIT: pixel_ = &img_command_quit; break;
+							default: break;
+						}
+						int x_ = start_x+i*32, y_ = start_y+j*32;
+
+						pixel_->draw(pSprite,x_,y_,255);
+						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+							if(isClicked(LEFT_CLICK)) {
+								g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
+							}
 						}
 					}
 				}
@@ -2855,6 +2948,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		{			
 			RECT rc={ (LONG)x, (LONG)y, 32*(sight_x*2+1)+16, (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
+			if((*it)->clickable > 0) {
+				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
+					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
+					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				}
+			}
 			if((*it)->enter)
 			{
 				x = 0;
@@ -3196,6 +3295,21 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 		{			
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
+			
+			if((*it)->clickable > 0) {				
+				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
+					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
+					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+					if(isClicked(LEFT_CLICK)) {
+						MSG msg;
+						msg.message = WM_KEYDOWN;
+						msg.wParam = (*it)->clickable;
+						g_keyQueue->push(InputedKey(msg));
+					}
+				}
+			}
+			
+			
 			if((*it)->enter)
 			{
 				x = 0;
@@ -3242,6 +3356,26 @@ void display_manager::start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY 
 	item_view_message = message_;
 	ReleaseMutex(mutx);
 }
+
+bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spriteBatch, const RECT& rc, int thickness, D3DCOLOR color){
+    if (!spriteBatch) return false;
+
+    float left   = (float)rc.left;
+    float right  = (float)rc.right;
+    float top    = (float)rc.top;
+    float bottom = (float)rc.bottom;
+    float width  = right - left;
+    float height = bottom - top;
+
+    dot_temple.draw(spriteBatch, left + width / 2, top + thickness / 2, 0.0f, width, (float)thickness, color);
+    dot_temple.draw(spriteBatch, left + width / 2, bottom - thickness / 2, 0.0f, width, (float)thickness, color);
+    dot_temple.draw(spriteBatch, left + thickness / 2, top + height / 2, 0.0f, (float)thickness, height, color);
+    dot_temple.draw(spriteBatch, right - thickness / 2, top + height / 2, 0.0f, (float)thickness, height, color);
+
+    return true;
+}
+
+
 
 void changedisplay(display_type set)
 {

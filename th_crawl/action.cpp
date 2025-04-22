@@ -3537,19 +3537,24 @@ void floorMove()
 		enter_.push_back(pair<char, string>('z', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI)));
 
 	int num_ = 0;
+	std::vector<int> listkey;
 	for (auto it = enter_.begin(); it != enter_.end(); it++) {
 		char temp[100];
 		sprintf_s(temp, 100, "%c - %s  ", it->first, it->second.c_str());
-		printlog(temp, false, false, false, CL_help);
+		printlog(temp, false, false, false, CL_help, it->first);
+		listkey.push_back(it->first);
 		num_++;
 		if (num_ == 5) {
 			enterlog();
 			num_ = 0;
 		}
 	}
+	startSelection(listkey);
+
 	enterlog();
 	printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOEXPLORE_WHERE), false, false, false, CL_help);
 	int key_ = waitkeyinput();
+	endSelection();
 
 	bool ok_ = false;
 	for (auto it = enter_.begin(); it != enter_.end(); it++) 

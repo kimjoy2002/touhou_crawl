@@ -330,13 +330,15 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				int percent_ = 9;
 				deletelog();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ASK), true, false, true, CL_help);
-				printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER1), true, false, true, CL_normal);
-				printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER2), true, false, true, CL_normal);
-				printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER3), true, false, true, CL_normal);
-				printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER4), true, false, true, CL_normal);
+				printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER1), true, false, true, CL_normal, 'a');
+				printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER2), true, false, true, CL_normal, 'b');
+				printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER3), true, false, true, CL_normal, 'c');
+				printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_ANSWER4), true, false, true, CL_normal, 'd');
 				
+				startSelection({'a', 'b', 'c', 'd', VK_ESCAPE});
 				InputedKey inputedKey;
 				int key_ = waitkeyinput(inputedKey);
+				endSelection();
 				switch (key_) {
 					case 'a':
 					case 'A':

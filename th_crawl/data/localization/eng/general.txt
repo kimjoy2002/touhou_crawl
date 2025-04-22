@@ -4390,7 +4390,6 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,Are you really going to purify the {
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_CANT,This skill cannot be purified.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS,Junko has purified your {0} skill!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ASK,Which resistance would you like to purify?
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ABC,a-Fire b-Cold c-Electric
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_FIRE,Junko has purified your resistance to fire!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_COLD,Junko has purified your resistance to cold!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ELEC,Junko has purified your resistance to electricity!

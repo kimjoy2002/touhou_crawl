@@ -5280,8 +5280,8 @@ bool players::equipjewerly(char id_)
 					ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
 					 	PlaceHolderHelper("<"),
 						PlaceHolderHelper(string(1, equipment[ET_LEFT]->id))) << " - ";
-					printlog(ss.str(),false,false,false,CL_normal);
-					printlog(equipment[ET_LEFT]->GetName(),true,false,false,equipment[ET_LEFT]->item_color());
+					printlog(ss.str(),false,false,false,CL_normal,'<');
+					printlog(equipment[ET_LEFT]->GetName(),true,false,false,equipment[ET_LEFT]->item_color(), '<');
 					
 					
 					ss.str("");
@@ -5289,8 +5289,9 @@ bool players::equipjewerly(char id_)
 					ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
 					 	PlaceHolderHelper(">"),
 						PlaceHolderHelper(string(1, equipment[ET_RIGHT]->id))) << " - ";
-					printlog(ss.str(),false,false,false,CL_normal);
-					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color());
+					printlog(ss.str(),false,false,false,CL_normal,'>');
+					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color(), '>');
+					startSelection({'<', '>', VK_ESCAPE});
 					while(1)
 					{
 						InputedKey inputedKey;
@@ -5298,20 +5299,24 @@ bool players::equipjewerly(char id_)
 						if(key_ == '<' || key_ == equipment[ET_LEFT]->id)
 						{
 							type_ = ET_LEFT;
+							endSelection();
 							break;
 						}
 						else if(key_ == '>' || key_ == equipment[ET_RIGHT]->id)
 						{
 							type_ = ET_RIGHT;
+							endSelection();
 							break;
 						}
 						else if(key_ == -1) {
 							if(inputedKey.isRightClick()) {
+								endSelection();
 								return 0;
 							}
 						}
 						else if(key_ == VK_ESCAPE)
 						{
+							endSelection();
 							return 0;
 						}								
 					}
@@ -5466,7 +5471,7 @@ bool players::unequip(equip_type type_, bool force_)
 
 		if (!force_ && type_ == ET_NECK && getAmuletPercent() > 0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_AMULET_YN), true, false, false, CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_AMULET_YN), false, false, false, CL_small_danger);
 			printlog(" (",false,false,false,CL_small_danger);
 			printlog("y",false,false,false,CL_small_danger, 'y');
 			printlog("/",false,false,false,CL_small_danger);

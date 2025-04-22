@@ -257,11 +257,6 @@ void common_mouse_logic() {
 	// else if(isClickedMIDDLE_CLICK)) { //필요없을지도
 	// 	g_keyQueue->push(InputedKey(MKIND_MCLICK,0,0));
 	// }
-	else if(isClicked(MIDDLE_UP)) {
-		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
-	} else if(isClicked(MIDDLE_DOWN)) {
-		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
-	}
 }
 
 
@@ -2512,7 +2507,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						if(env[current_level].isExplore(i,j))
 							dot_floor.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
 						else
-							dot_mapping_floor.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),255);
+							dot_mapping_floor.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_WALL:
 						if(env[current_level].isExplore(i,j))
@@ -3254,6 +3249,10 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					rc.left += 48;
 					exist = true;
 				}
+
+				
+
+
 				string temp;
 				temp+=(*it).id;
 				temp+=item_view[asctonum((*it).id)]?(item_num[asctonum((*it).id)]?" # ":" + "):" - ";
@@ -3265,12 +3264,39 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
 				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
 				DrawTextUTF8(pfont,pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
+
+				RECT rc2={ rc.left - 40, rc.top - 8, (LONG)(rc.left+PrintCharWidth(temp)*fontDesc.Width)+8,  rc.top + 24};
+				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+					
+					if(isClicked(LEFT_CLICK)) {						
+						MSG msg;
+						msg.message = WM_CHAR;
+						msg.wParam = convertClickable((*it).id);
+						g_keyQueue->push(InputedKey(msg));
+					}
+					else if(isClicked(RIGHT_CLICK)) {
+						g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,(*it).id,0));
+					}
+				}
 				rc.top += 32;
 			}
 		}
 	}
 	rc.top+=move+64;
 	max_y = (rc.top-option_mg.getHeight()>0?rc.top-option_mg.getHeight():0);
+	if(isClicked(LEFT_CLICK)) {
+		MSG msg;
+		msg.message = WM_CHAR;
+		msg.wParam = convertClickable(VK_RETURN);
+		g_keyQueue->push(InputedKey(msg));
+	}
+	else if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
 }
 
 void display_manager::log_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
@@ -3497,6 +3523,15 @@ int GetDisplayMove()
 void view_item(item_view_type type, LOCALIZATION_ENUM_KEY message_)
 {
 	DisplayManager.start_itemview(type, message_);
+}
+void rollback_item(item_view_type type, LOCALIZATION_ENUM_KEY message_)
+{
+	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.state = DT_ITEM;
+	DisplayManager.move= 0;
+	DisplayManager.item_vt = type;
+	DisplayManager.item_view_message = message_;
+	ReleaseMutex(mutx);
 }
 void view_spell(LOCALIZATION_ENUM_KEY message_)
 {

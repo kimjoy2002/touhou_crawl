@@ -515,11 +515,11 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,false,false,true,CL_help,
 			PlaceHolderHelper(you.equipment[ET_ARMOR]->name.getName()));
-		printlog(" (",false,false,false,CL_help);
-		printlog("y",false,false,false,CL_help, 'y');
-		printlog("/",false,false,false,CL_help);
-		printlog("n",false,false,false,CL_help, 'n');
-		printlog(") ",false,false,false,CL_help);
+		printlog(" (",false,false,true,CL_help);
+		printlog("y",false,false,true,CL_help, 'y');
+		printlog("/",false,false,true,CL_help);
+		printlog("n",false,false,true,CL_help, 'n');
+		printlog(") ",false,false,true,CL_help);
 		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 		
 		
@@ -2233,10 +2233,12 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 				ostringstream ss;
 				ss << string(1,(char)(num_+'a')) << " - " << seija_god_string(i, 0);
 				select_[num_++] = (god_type)i;
-				printlog(ss.str(), true, false, true, CL_help);
+				printlog(ss.str(), true, false, true, CL_help,(char)(num_+'a'));
 			}
 		}
+		startSelection({'a', 'b', 'c', 'd', VK_ESCAPE});
 		int key_ = waitkeyinput();
+		endSelection();
 
 
 		switch (key_)
@@ -2266,11 +2268,11 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		printlog(seija_god_string(next_, 1), true, false, true, CL_small_danger);
 		printlog(seija_god_string(next_, 2), true, false, true, CL_small_danger);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_YN),false,false, true,CL_help);
-		printlog(" (",false,false,false,CL_help);
-		printlog("y",false,false,false,CL_help, 'y');
-		printlog("/",false,false,false,CL_help);
-		printlog("n",false,false,false,CL_help, 'n');
-		printlog(") ",false,false,false,CL_help);
+		printlog(" (",false,false,true,CL_help);
+		printlog("y",false,false,true,CL_help, 'y');
+		printlog("/",false,false,true,CL_help);
+		printlog("n",false,false,true,CL_help, 'n');
+		printlog(") ",false,false,true,CL_help);
 		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 		switch(waitkeyinput())
 		{
@@ -2888,10 +2890,11 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 	bool loop_ = true;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK), true, false, false, CL_help);
-		printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI), true, false, false, CL_okina);
-		printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO), true, false, false, CL_okina);
-		printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS), true, false, false, CL_okina);
+		printlog("a - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI), true, false, false, CL_okina,'a');
+		printlog("b - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO), true, false, false, CL_okina, 'b');
+		printlog("c - " + LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS), true, false, false, CL_okina, 'c');
 		
+		startSelection({'a', 'b', 'c',VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -2899,28 +2902,34 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 		case 'A':
 			id_ = MON_MAI2;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			id_ = MON_SATONO;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'c':
 		case 'C':
 			num_ = 2;
 			loop_ = false;
+			endSelection();
 			break;
 		default:
+			endSelection();
 			break;			
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
+			endSelection();
 			return false;
 		}
 	}
@@ -3099,11 +3108,12 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN) +" ", false, false, false, CL_danger);
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK), true, false, false, CL_help);
-		printlog("a - " + getJunkoString(you.god_value[GT_JUNKO][0]), true, false, false, CL_junko);
-		printlog("b - " + getJunkoString(you.god_value[GT_JUNKO][1]), true, false, false, CL_junko);
-		printlog("c - " + getJunkoString(you.god_value[GT_JUNKO][2]), true, false, false, CL_junko);
-		printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER), true, false, false, CL_junko);
+		printlog("a - " + getJunkoString(you.god_value[GT_JUNKO][0]), true, false, false, CL_junko,'a');
+		printlog("b - " + getJunkoString(you.god_value[GT_JUNKO][1]), true, false, false, CL_junko, 'b');
+		printlog("c - " + getJunkoString(you.god_value[GT_JUNKO][2]), true, false, false, CL_junko, 'c');
+		printlog("d - " + LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER), true, false, false, CL_junko, 'd');
 		
+		startSelection({'a', 'b', 'c','d',VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -3111,20 +3121,24 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'A':
 			kind_ = you.god_value[GT_JUNKO][0];
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			kind_ = you.god_value[GT_JUNKO][1];
 			loop_ = false;
+			endSelection();
 			break;
 		case 'c':
 		case 'C':
 			kind_ = you.god_value[GT_JUNKO][2];
 			loop_ = false;
+			endSelection();
 			break;
 		case 'd':
 		case 'D':	
 		{
+			endSelection();
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY), false, false, false, CL_help);
 			printlog(" (",false,false,false,CL_help);
 			printlog("y",false,false,false,CL_help, 'y');
@@ -3153,15 +3167,18 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		}
 			break;
 		default:
+			endSelection();
 			break;
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
+			endSelection();
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
 		}
@@ -3194,11 +3211,11 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					{
 						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,
 						PlaceHolderHelper(skill_string((skill_type)num)),PlaceHolderHelper(to_string(you.GetSkillLevel(num, false)))), false, false, true, CL_danger);
-						printlog(" (",false,false,false,CL_danger);
-						printlog("y",false,false,false,CL_danger, 'y');
-						printlog("/",false,false,false,CL_danger);
-						printlog("n",false,false,false,CL_danger, 'n');
-						printlog(") ",false,false,false,CL_danger);
+						printlog(" (",false,false,true,CL_danger);
+						printlog("y",false,false,true,CL_danger, 'y');
+						printlog("/",false,false,true,CL_danger);
+						printlog("n",false,false,true,CL_danger, 'n');
+						printlog(") ",false,false,true,CL_danger);
 						startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 						changedisplay(DT_GAME);
 
@@ -3231,9 +3248,15 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	case 2:
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ASK), true, false, false, CL_junko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST_ABC), true, false, false, CL_junko);
+		printlog("a-"+LocalzationManager::locString(LOC_SYSTEM_FIRE_RESIST), false, false, false, CL_junko,'a');
+		printlog(" ", false, false, false, CL_junko);
+		printlog("b-"+LocalzationManager::locString(LOC_SYSTEM_COLD_RESIST), false, false, false, CL_junko,'b');
+		printlog(" ", false, false, false, CL_junko);
+		printlog("c-"+LocalzationManager::locString(LOC_SYSTEM_ELEC_RESIST), true, false, false, CL_junko,'c');
 
+		startSelection({'a', 'b', 'c', VK_ESCAPE});
 		int key_ = waitkeyinput(true);
+		endSelection();
 		switch (key_)
 		{
 		case 'a':
@@ -3291,11 +3314,11 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					if ((item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST) || (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST))
 					{
 						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING, PlaceHolderHelper(item_->GetName())), false, false, true, CL_small_danger);
-						printlog(" (",false,false,false,CL_small_danger);
-						printlog("y",false,false,false,CL_small_danger, 'y');
-						printlog("/",false,false,false,CL_small_danger);
-						printlog("n",false,false,false,CL_small_danger, 'n');
-						printlog(") ",false,false,false,CL_small_danger);
+						printlog(" (",false,false,true,CL_small_danger);
+						printlog("y",false,false,true,CL_small_danger, 'y');
+						printlog("/",false,false,true,CL_small_danger);
+						printlog("n",false,false,true,CL_small_danger, 'n');
+						printlog(") ",false,false,true,CL_small_danger);
 						startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 						changedisplay(DT_GAME);
 
@@ -3416,10 +3439,13 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK), true, false, false, CL_help);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), true, false, false, CL_joon);
-		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon);
+		printlog("                   ", false, false, false, CL_joon);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon,'a');
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), true, false, false, CL_sion);
-		printlog("                   " + LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion);
+		printlog("                   ", false, false, false, CL_sion);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion,'b');
 		
+		startSelection({'a', 'b', VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -3427,11 +3453,13 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		case 'A':
 			god_ = 1;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			god_ = 2;
 			loop_ = false;
+			endSelection();
 			break;
 		default:
 			break;
@@ -3440,10 +3468,12 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
+			endSelection();
 			return false;
 		}
 	}
@@ -3753,8 +3783,26 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 	bool loop_ = true;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST_ASK), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST1), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_RESIST2), true, false, false, CL_miko);
+
+		pair<char,LOCALIZATION_ENUM_KEY> resists[5] = {
+			make_pair('a',LOC_SYSTEM_FIRE_RESIST),
+			make_pair('b',LOC_SYSTEM_COLD_RESIST),
+			make_pair('c',LOC_SYSTEM_ELEC_RESIST),
+			make_pair('d',LOC_SYSTEM_POISON_RESIST),
+			make_pair('e',LOC_SYSTEM_CONFUSE_RESIST)
+		};
+		for(int i =0; i<5; i++) {
+			ostringstream ss;
+			ss << resists[i].first << '-' << LocalzationManager::locString(resists[i].second);
+			printlog(ss.str(), false, false, false, CL_miko, resists[i].first);
+			if(PrintCharWidth(ss.str()) < 16) {
+				printlog(string(16-PrintCharWidth(ss.str()),' '), false, false, false, CL_miko);
+			} else {
+				printlog(" ", false, false, false, CL_miko);
+			}
+
+		}
+		startSelection({'a', 'b', 'c', 'd', 'e', VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -3762,41 +3810,50 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		case 'A':
 			resist_ = 1;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			resist_ = 2;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'c':
 		case 'C':
 			resist_ = 3;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'd':
 		case 'D':
 			resist_ = 4;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'e':
 		case 'E':
 			resist_ = 5;
 			loop_ = false;
+			endSelection();
 			break;
 		default:
+			endSelection();
 			break;			
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
+			endSelection();
 			return false;
 		}
 	}
+	enterlog();
 	bool already_ = false;
 	switch (resist_)
 	{
@@ -3839,8 +3896,9 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 	bool loop_ = true;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_ASK), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_RED), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_RED), true, false, false, CL_miko, 'a');
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE), true, false, false, CL_miko, 'b');
+		startSelection({'a', 'b', VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -3848,23 +3906,28 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		case 'A':
 			bonus_ = 1;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			bonus_ = 2;
 			loop_ = false;
+			endSelection();
 			break;
 		default:
+		endSelection();
 			break;			
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
+			endSelection();
 			return false;
 		}
 	}
@@ -3896,9 +3959,10 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 	bool loop_ = true;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_ASK), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2), true, false, false, CL_miko);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3), true, false, false, CL_miko);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO1), true, false, false, CL_miko, 'a');
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO2), true, false, false, CL_miko, 'b');
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3), true, false, false, CL_miko, 'c');
+		startSelection({'a', 'b', 'c', VK_ESCAPE});
 		InputedKey inputedKey;
 		switch (waitkeyinput(inputedKey))
 		{
@@ -3906,28 +3970,34 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		case 'A':
 			bonus_ = 1;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'b':
 		case 'B':
 			bonus_ = 2;
 			loop_ = false;
+			endSelection();
 			break;
 		case 'c':
 		case 'C':
 			bonus_ = 3;
 			loop_ = false;
+			endSelection();
 			break;
 		default:
+			endSelection();
 			break;
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
+				endSelection();
 				break;
 			}
 		case VK_ESCAPE:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
+			endSelection();
 			return false;
 		}
 	}

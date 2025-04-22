@@ -590,11 +590,11 @@ bool blink_scroll(bool pre_iden_)
 	if (current_level == ZIGURRAT_LEVEL ) {
 		if (pre_iden_) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), false, true, false, CL_small_danger);
-			printlog(" (",false,false,false,CL_small_danger);
-			printlog("y",false,false,false,CL_small_danger, 'y');
-			printlog("/",false,false,false,CL_small_danger);
-			printlog("n",false,false,false,CL_small_danger, 'n');
-			printlog(") ",false,false,false,CL_small_danger);
+			printlog(" (",false,true,false,CL_small_danger);
+			printlog("y",false,true,false,CL_small_danger, 'y');
+			printlog("/",false,true,false,CL_small_danger);
+			printlog("n",false,true,false,CL_small_danger, 'n');
+			printlog(") ",false,true,false,CL_small_danger);
 			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 
 			InputedKey inputedKey;
@@ -683,11 +683,11 @@ bool blink_scroll(bool pre_iden_)
 			else{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK),false,true,false,CL_help);
 			}
-			printlog(" (",false,false,false,CL_help);
-			printlog("y",false,false,false,CL_help, 'y');
-			printlog("/",false,false,false,CL_help);
-			printlog("n",false,false,false,CL_help, 'n');
-			printlog(") ",false,false,false,CL_help);
+			printlog(" (",false,true,false,CL_help);
+			printlog("y",false,true,false,CL_help, 'y');
+			printlog("/",false,true,false,CL_help);
+			printlog("n",false,true,false,CL_help, 'n');
+			printlog(") ",false,true,false,CL_help);
 			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 			bool repeat_ = true;
 			while(repeat_)

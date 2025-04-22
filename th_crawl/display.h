@@ -194,6 +194,7 @@ void SetSpellSight(int sight, int sight_type_);
 void SetDisplayTexture(textures *texture_);
 
 void view_item(item_view_type type, LOCALIZATION_ENUM_KEY message_ = LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
+void rollback_item(item_view_type type, LOCALIZATION_ENUM_KEY message_);
 void view_spell(LOCALIZATION_ENUM_KEY message_);
 void view_skill(LOCALIZATION_ENUM_KEY message_);
 void CheckKey(char key_, int num_ = 0);

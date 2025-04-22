@@ -21,6 +21,8 @@
 extern HANDLE mutx;
 string GetItemInfor(item *it, bool can_use_, set<char> *key);
 
+void iteminfor_(int key_, bool gameover);
+
 bool pickup_prev_fail(bool no_speak) {
 	if(you.s_lunatic)
 	{
@@ -385,7 +387,19 @@ void iteminfor_discard()
 			break;
 		}
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				rollback_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
+				setDisplayMove(get_item_move_);
+			}
+			else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			}
+			else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			}
+			else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

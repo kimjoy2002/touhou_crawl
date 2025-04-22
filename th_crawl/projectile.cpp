@@ -376,7 +376,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				deletelog();
 				you.search = false;
 				return 2;
-			}			
+			}
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH

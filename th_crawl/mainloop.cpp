@@ -588,6 +588,24 @@ void MainLoop()
 							search_monspell_view((monster*)unit_);
 							changedisplay(DT_GAME);
 						}
+					} else {
+						//아이템 있는지 확인
+						list<item>::iterator last = env[current_level].item_list.end();
+						list<item>::iterator it;
+
+						for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+						{
+							if(it->position == target_pos) {
+								last = it;
+							} else if(last != env[current_level].item_list.end()) {
+								break;
+							}
+						}
+						
+						if(last != env[current_level].item_list.end()) {
+							iteminfor_(&(*last), true);
+							changedisplay(DT_GAME);
+						}
 					}
 				} else if (inputedKey.mouse == MKIND_ITEM) {
 					int key_ = inputedKey.val1;
@@ -761,7 +779,8 @@ void MainLoop()
 							PickUpSelect_logic(it);
 						}
 						else if(inputedKey.mouse == MKIND_PICK_DESCRIPTION) {
-							//not yet implement
+							iteminfor_(&(*it), true);
+							changedisplay(DT_GAME);
 						}
 					}
 				}

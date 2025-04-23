@@ -79,7 +79,8 @@ void Equip_Weapon()
 		else if( key_ == -1) {			
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_EQ_WEAPON,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -212,7 +213,8 @@ void Equip_Armor()
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_EQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -268,7 +270,8 @@ void Unequip_Armor()
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -336,7 +339,8 @@ void Equip_Jewelry()
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_EQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -391,7 +395,8 @@ void Unequip_Jewelry()
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {

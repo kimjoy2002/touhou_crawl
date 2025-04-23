@@ -340,7 +340,8 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 			else if(key_ == -1) {				
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 					int get_item_move_ = getDisplayMove();
-					iteminfor_(inputedKey.val1, true);
+					if(iteminfor_(inputedKey.val1, true))
+						break;
 					rollback_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 					setDisplayMove(get_item_move_);
 				} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -707,7 +708,8 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -780,7 +782,8 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 			else if(key_ == -1) {				
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 					int get_item_move_ = getDisplayMove();
-					iteminfor_(inputedKey.val1, true);
+					if(iteminfor_(inputedKey.val1, true))
+						break;
 					rollback_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_USE);
 					setDisplayMove(get_item_move_);
 				} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -1745,7 +1748,8 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_CURSE_ENCHANT,LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -1883,7 +1887,8 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 		else if(key_ == -1) {			
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_UEQ_ARMOR,LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -1981,7 +1986,8 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_UEQ_JEWELRY,LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -3446,7 +3452,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			else if(key_ == -1) {
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 					int get_item_move_ = getDisplayMove();
-					iteminfor_(inputedKey.val1, true);
+					if(iteminfor_(inputedKey.val1, true))
+						break;
 					rollback_item(IVT_PURE_ITEM,LOC_SYSTEM_DISPLAY_MANAGER_JUNKO);
 					setDisplayMove(get_item_move_);
 				} else if(inputedKey.mouse == MKIND_SCROLL_UP) {

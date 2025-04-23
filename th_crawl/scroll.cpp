@@ -459,7 +459,8 @@ bool identity_scroll(bool pre_iden_)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
 					rollback_item(IVT_UNIDEN,LOC_SYSTEM_DISPLAY_MANAGER_IDEN);
 				else
@@ -893,7 +894,8 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		else if(key_ == -1) {			
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				if(iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
 					rollback_item(IVT_ARMOR_ENCHANT,LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR);
 				else
@@ -1062,7 +1064,8 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
 					rollback_item(IVT_SPELLCARD,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
 				else

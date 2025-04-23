@@ -19,9 +19,9 @@
 #include <set>
 
 extern HANDLE mutx;
-string GetItemInfor(item *it, bool can_use_, set<char> *key);
+void GetItemInfor(item *it, bool can_use_, set<char> *key);
 
-void iteminfor_(int key_, bool gameover);
+bool iteminfor_(int key_, bool gameover);
 
 bool pickup_prev_fail(bool no_speak) {
 	if(you.s_lunatic)
@@ -410,7 +410,8 @@ void iteminfor_discard()
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_DISCARD,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
 				setDisplayMove(get_item_move_);
 			}
@@ -522,7 +523,8 @@ void Eatting(char auto_)
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -616,7 +618,8 @@ void Drinking(char auto_)
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -693,7 +696,8 @@ void Spelllcard_Evoke(char auto_)
 		else if( key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
@@ -737,7 +741,10 @@ bool read_prev_fail() {
 	return false;
 }
 
+void _infor_(string str);
+
 void Memorize_book(int key_) {
+	string blank(12,' ');
 	item* item_ = you.GetItem(key_);
 	if(item_ == nullptr)
 		return;
@@ -753,9 +760,13 @@ void Memorize_book(int key_) {
 	while(1)
 	{
 		WaitForSingleObject(mutx, INFINITE);
-		SetText() = GetItemInfor(item_, false, NULL);
+		deletesub();
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		GetItemInfor(item_, false, NULL);
 		ReleaseMutex(mutx);
-		changedisplay(DT_TEXT);
+		changedisplay(DT_SUB_TEXT);
 		int key_ = waitkeyinput(true);
 		if( (key_ >= 'a' && key_ <= 'f'))
 		{
@@ -767,10 +778,15 @@ void Memorize_book(int key_) {
 					return;
 				}
 				WaitForSingleObject(mutx, INFINITE);
-				SetText() = GetSpellInfor((spell_list)spell_);
-				SetText() += "\n\n";
-				SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
-				SetText() += "\n";
+				deletesub();
+				printsub("",true,CL_normal);
+				printsub("",true,CL_normal);
+				printsub("",true,CL_normal);
+				printsub(blank,false,CL_normal);
+				_infor_(GetSpellInfor((spell_list)spell_));
+				_infor_("\n\n");
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');
+				_infor_("\n");
 				ReleaseMutex(mutx);
 				int memory_ = waitkeyinput();
 
@@ -850,7 +866,8 @@ void Reading(char auto_)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {

@@ -29,7 +29,7 @@ extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 void discard(list<item>::iterator it, int number);
 
 
-string GetItemInfor(item *it, bool can_use_, set<char> *key);
+void GetItemInfor(item *it, bool can_use_, set<char> *key);
 
 void memorize_action(int spell_)
 {
@@ -108,15 +108,22 @@ void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator
 }
 
 
-void iteminfor_(item *item_, bool onlyinfor) {
+void _infor_(string str);
+
+bool iteminfor_(item *item_, bool onlyinfor) {
 	int get_item_move_ = getDisplayMove();
+	string blank(12,' ');
 	while(1)
 	{
 		set<char> ket_list;
 		WaitForSingleObject(mutx, INFINITE);
-		SetText() = GetItemInfor(item_, !onlyinfor, &ket_list);
+		deletesub();
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		GetItemInfor(item_, !onlyinfor, &ket_list);
 		ReleaseMutex(mutx);
-		changedisplay(DT_TEXT);
+		changedisplay(DT_SUB_TEXT);
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
 		if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
@@ -124,11 +131,16 @@ void iteminfor_(item *item_, bool onlyinfor) {
 			if(int spell_ = item_->GetValue(key_ - 'a'+1))
 			{	
 				WaitForSingleObject(mutx, INFINITE);
-				SetText() = GetSpellInfor((spell_list)spell_);
-				SetText() += "\n\n";
+				deletesub();
+				printsub("",true,CL_normal);
+				printsub("",true,CL_normal);
+				printsub("",true,CL_normal);
+				printsub(blank,false,CL_normal);
+				_infor_(GetSpellInfor((spell_list)spell_));
+				_infor_("\n\n");
 				if(!onlyinfor) {
-					SetText() += LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m"));
-					SetText() += "\n";
+					printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');
+					_infor_("\n");
 				}
 				ReleaseMutex(mutx);
 				int memory_ = waitkeyinput();
@@ -138,10 +150,10 @@ void iteminfor_(item *item_, bool onlyinfor) {
 					if (you.isMemorize(spell_)) {
 						changedisplay(DT_GAME);
 						printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ALREADY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					memorize_action(spell_);
-					return;
+					return true;
 				}
 				continue;
 			}
@@ -214,18 +226,18 @@ void iteminfor_(item *item_, bool onlyinfor) {
 							printlog(ss.str(), false, false, false, new_->item_color());
 						}
 					}
-					return;
+					return true;
 				}
 				case 'w': //장착	
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 
 					if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
@@ -233,7 +245,7 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						if (you.drowned)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-							return;
+							return true;
 						}
 						you.equip(item_->id, ET_WEAPON);
 					}
@@ -242,7 +254,7 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						if (you.drowned)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-							return;
+							return true;
 						}
 						you.equiparmor(item_->id);
 					}
@@ -254,24 +266,24 @@ void iteminfor_(item *item_, bool onlyinfor) {
 					{
 						you.equipjewerly(item_->id);
 					}
-					return;
+					return true;
 				case 'u': //벗기
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					if (item_->type >= ITM_WEAPON_FIRST &&item_->type < ITM_WEAPON_LAST)
 					{
 						if (you.drowned)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-							return;
+							return true;
 						}
 						if (!you.unequip(ET_WEAPON))
 						{
@@ -283,7 +295,7 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						if (you.drowned)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-							return;
+							return true;
 						}
 						you.unequiparmor(item_->id);
 					}
@@ -295,7 +307,7 @@ void iteminfor_(item *item_, bool onlyinfor) {
 					{
 						you.unequipjewerly(item_->id);
 					}
-					return;
+					return true;
 				case 'f': //탄막
 				{
 					changedisplay(DT_GAME);
@@ -304,22 +316,22 @@ void iteminfor_(item *item_, bool onlyinfor) {
 					ss << item_->id << " - " << item_->GetName() << "(" << LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) << ") ";
 					printlog(ss.str(), false, false, false, item_->item_color());
 				}
-					return;
+					return true;
 				case 'q': //마시기
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					if (you.drowned)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.Drink(item_->id))
 					{
@@ -336,40 +348,40 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						}
 						you.TurnEnd();
 					}
-					return;
+					return true;
 				case 'e': //먹기
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					if (you.drowned)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					you.Eat(item_->id);
-					return;
+					return true;
 				case 'r': //읽기
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					if (you.drowned)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if(you.Read(item_->id))
 					{
@@ -378,26 +390,26 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						changedisplay(DT_GAME);
 						you.TurnEnd();
 					}
-					return;
+					return true;
 				case 'v': //발동
 					changedisplay(DT_GAME);
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-						return;
+						return true;
 					}
 					if (you.s_evoke_ghost &&
 						!(item_->type == ITM_MISCELLANEOUS && item_->value1 == EVK_GHOST_BALL)
 						) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-						return;
+						return true;
 					}
 					if (you.Evoke(item_->id, false))
 					{
 						you.time_delay += you.GetNormalDelay();
 						you.TurnEnd();
 					}
-					return;
+					return true;
 				case 'd': //버리기
 				case 'D':
 					{
@@ -405,11 +417,11 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						if (you.s_lunatic)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
-							return;
+							return true;
 						}
 						if (you.s_evoke_ghost) {
 							printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY), true, false, false, CL_normal);
-							return;
+							return true;
 						}
 						bool discard_ = false;
 						for (auto it = you.item_list.begin(); it != you.item_list.end(); it++)
@@ -432,7 +444,7 @@ void iteminfor_(item *item_, bool onlyinfor) {
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST), true, false, false, CL_normal);
 						}
-						return;
+						return true;
 					}
 				}
 			}
@@ -443,16 +455,17 @@ void iteminfor_(item *item_, bool onlyinfor) {
 		view_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
 		setDisplayMove(get_item_move_);
 	}
-
+	return false;
 }
 
-void iteminfor_(int key_, bool onlyinfor) {
+bool iteminfor_(int key_, bool onlyinfor) {
 
 	item *item_ = you.GetItem(key_);
 	if(item_)
 	{
-		iteminfor_(item_, onlyinfor);
+		return iteminfor_(item_, onlyinfor);
 	}
+	return false;
 }
 
 
@@ -466,7 +479,8 @@ void iteminfor(bool gameover)
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int get_item_move_ = getDisplayMove();
-			iteminfor_(key_, gameover);
+			if(iteminfor_(key_, gameover))
+				break;
 			if(gameover) {
 				view_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER);
 				setDisplayMove(get_item_move_);
@@ -491,7 +505,8 @@ void iteminfor(bool gameover)
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, gameover);
+				if(iteminfor_(inputedKey.val1, gameover))
+					break;
 				if(gameover) {
 					view_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER);
 					setDisplayMove(get_item_move_);
@@ -510,22 +525,47 @@ void iteminfor(bool gameover)
 	changedisplay(DT_GAME);
 }
 
-string GetItemInfor(item *it, bool can_use_, set<char> *key)
-{
-	string use_text_;
+void _infor_(string str) {
+	string blank(12,' ');	
 	
-	string text_ = it->GetName();
-	text_ += "\n\n";
+	std::istringstream iss(str);
+	std::string line;
+	bool first_ = true;
+	while (std::getline(iss, line)) {
+		if(!first_) {
+			printsub("", true, CL_normal);
+			printsub(blank, false, CL_normal);
+		}
+		printsub(line, false, CL_normal);
+		first_ =  false;
+	}
+	if (!str.empty() && str.back() == '\n') {
+		printsub("", true, CL_normal);
+		printsub(blank, false, CL_normal);
+	}
+}
+
+
+void GetItemInfor(item *it, bool can_use_, set<char> *key)
+{
+	vector<pair<string,int>> use_text_;
+	vector<string> key_;
+	string blank(12,' ');
+	
+	printsub(blank,false,CL_normal);
+	printsub(it->GetName(),true,it->item_color());
+	printsub("",true,CL_normal);
+	printsub(blank,false,CL_normal);
 
 	if (can_use_)
 	{
-		use_text_ += "(=)" + LocalzationManager::locString(LOC_SYSTEM_HOTKEYCHANGE) + ", ";
+		use_text_.push_back({"(=)" + LocalzationManager::locString(LOC_SYSTEM_HOTKEYCHANGE), '='});
 		if (key) key->insert('=');
 	}
 	switch (it->type)
 	{
 		//case ITM_WEAPON_DAGGER:
-		//	text_ += "단검의 일종으로 작은 칼이다. 적을 기습하는데 특히 유용한 무기이다.\n\
+		//	_infor_("단검의 일종으로 작은 칼이다. 적을 기습하는데 특히 유용한 무기이다.\n\
 		//			  날려서 탄막으로 쓰는 것도 가능하다.\n";
 	case ITM_WEAPON_SHORTBLADE:
 	case ITM_WEAPON_LONGBLADE:
@@ -538,96 +578,96 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_WEAPON_SHORTBLADE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE));
 			ski_ = SKT_SHORTBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER));
 				break;
 			case 1:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE));
 				break;
 			case 2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD));
 				break;
 			}
 			break;
 		case ITM_WEAPON_LONGBLADE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE));
 			ski_ = SKT_LONGBLADE;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA));
 				break;
 			case 1:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR));
 				break;
 			case 2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD));
 				break;
 			case 3:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM));
 				break;
 			}
 			break;
 		case ITM_WEAPON_MACE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE));
 			switch (it->value0)
 			{
 			case 0:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI));
 				break;
 			case 1:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK));
 				break;
 			case 2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA));
 				break;
 			case 3:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD));
 				break;
 			case 4:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA));
 				break;
 			}
 			ski_ = SKT_MACE;
 			break;
 		case ITM_WEAPON_SPEAR:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR));
 			ski_ = SKT_SPEAR;
 			switch (it->value0)
 			{
 			case 0:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR));
 				break;
 			case 1:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN));
 				break;
 			case 2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE));
 				break;
 			case 3:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT));
 				break;
 			case 4:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR));
 				break;
 			}
 			break;
 		case ITM_WEAPON_AXE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE));
 			switch (it->value0)
 			{
 			case 0:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE));
 				break;
 			case 1:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE));
 				break;
 			case 2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR));
 				break;
 			}
 			break;
@@ -637,9 +677,9 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		if (it->value5 && it->value6)
 		{
-			text_ += "\n\n";
-			text_ += GetBrandInfor((weapon_brand)it->value5);
-			text_ += "\n";
+			_infor_("\n\n");
+			_infor_(GetBrandInfor((weapon_brand)it->value5));
+			_infor_("\n");
 		}
 		
 		{
@@ -689,24 +729,24 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 				ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO2, 
 					PlaceHolderHelper(to_string(shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f)));
 			}
-			text_ += ss.str();
+			_infor_(ss.str());
 		}
 
 
 		if (it->can_throw)
 		{
-			text_ += "\n\n";
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3);
-			text_ += "\n";
-			text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
+			_infor_("\n\n");
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3));
+			_infor_("\n");
+			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
 					PlaceHolderHelper(to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
-					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true))));
+					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true)))));
 		}
 
 		{
-			text_ += "\n\n";
-			text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
-					PlaceHolderHelper("+9"));
+			_infor_("\n\n");
+			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+					PlaceHolderHelper("+9")));
 		}
 
 
@@ -714,17 +754,17 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		{
 			if (you.equipment[ET_WEAPON] != it)
 			{
-				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+				use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+				use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 				if (key) key->insert('u');
 			}
 			if (it->can_throw)
 			{
-				use_text_ += "(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) +", ";
+				use_text_.push_back({"(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC),'f'});
 				if (key) key->insert('f');
 			}
 		}
@@ -735,19 +775,19 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value4)
 		{
 		default://없음 이거 뜨면 버그
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG));
 			break;
 		case TMT_AMULET:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET));
 			break;
 		case TMT_POISON_NEEDLE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE));
 			break;
 		case TMT_KIKU_COMPRESSER:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER));
 			break;
 		case TMT_DOGGOJEO:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO));
 			break;
 		}
 
@@ -778,13 +818,13 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		temp.clear();
 		temp << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_INFO, PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true))));
 		ss << temp.str();
-		text_ += ss.str();
+		_infor_(ss.str());
 
 		if (can_use_)
 		{
 			if (it->can_throw)
 			{
-				use_text_ += "(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC) +", ";
+				use_text_.push_back({"(f)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP_TANMAC),'f'});
 				if (key) key->insert('f');
 			}
 		}
@@ -798,28 +838,28 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value5)
 		{
 		case AMK_NORMAL:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL));
 			break;
 		case AMK_MIKO:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO));
 			break;
 		case AMK_WING:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING));
 			break;
 		case AMK_KAPPA:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA));
 			break;
 		case AMK_FIRE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE));
 			break;
 		case AMK_MAID:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID));
 			break;
 		case AMK_POISON:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON));
 			break;
 		case AMK_AUTUMN:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN));
 			break;
 		default:
 			break;
@@ -827,16 +867,16 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_BODY_ARMOUR_0:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0));
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_1:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1));
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_2:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2));
 			break;
 		case ITM_ARMOR_BODY_ARMOUR_3:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3));
 			break;
 		default:
 			break;
@@ -887,19 +927,19 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			
 		ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
 			PlaceHolderHelper("+" + to_string(it->value1)));
-		text_ +=ss.str();
+		_infor_(ss.str());
 
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_ARMOR] != it)
 			{
-				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+				use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+				use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 				if (key) key->insert('u');
 			}
 		}
@@ -907,7 +947,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	case ITM_ARMOR_SHIELD:
 	{
-		text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD));
 		
 		
 		ostringstream ss;
@@ -956,19 +996,19 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			
 		ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
 			PlaceHolderHelper("+" + to_string(it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9))));
-		text_ +=ss.str();
+		_infor_(ss.str());
 		
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_SHIELD] != it)
 			{
-				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+				use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+				use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 				if (key) key->insert('u');
 			}
 		}
@@ -982,65 +1022,65 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD));
 			if (can_use_)
 			{
 				if (you.equipment[ET_HELMET] != it)
 				{
-					use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+					use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+					use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_CLOAK:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK));
 			if (can_use_)
 			{
 				if (you.equipment[ET_CLOAK] != it)
 				{
-					use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+					use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+					use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_GLOVE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
 				if (you.equipment[ET_GLOVE] != it)
 				{
-					use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+					use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+					use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 					if (key) key->insert('u');
 				}
 			}
 			break;
 		case ITM_ARMOR_BOOT:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
 				if (you.equipment[ET_BOOTS] != it)
 				{
-					use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+					use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 					if (key) key->insert('w');
 				}
 				else
 				{
-					use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+					use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 					if (key) key->insert('u');
 				}
 			}
@@ -1054,7 +1094,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		ss << "\n\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
 			PlaceHolderHelper("+2"));
 			
-		text_ += ss.str();
+		_infor_(ss.str());
 	}
 	break;
 	case ITM_POTION:
@@ -1064,77 +1104,77 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case PT_WATER:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER));
 				break;
 			case PT_HEAL:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL));
 				break;
 			case PT_POISON:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON));
 				break;
 			case PT_HEAL_WOUND:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND));
 				break;
 			case PT_MIGHT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT));
 				break;
 			case PT_HASTE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE));
 				break;
 			case PT_CONFUSE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE));
 				break;
 			case PT_SLOW:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW));
 				break;
 			case PT_PARALYSIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS));
 				break;
 			case PT_CLEVER:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER));
 				break;
 			case PT_AGILITY:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY));
 				break;
 			case PT_MAGIC:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC));
 				break;
 			case PT_LEVETATION:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION));
 				break;
 			case PT_POWER:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER));
 				break;
 			case PT_DOWN_STAT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT));
 				break;
 			case PT_RECOVER_STAT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT));
 				break;
 			case PT_ALCOHOL:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL));
 				break;
 			default:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG));
 				break;
 			}
 		}
 		else
 		{
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN));
 		}
 		if (can_use_)
 		{
-			use_text_ += "(q)" + LocalzationManager::locString(LOC_SYSTEM_DRINK) +", ";
+			use_text_.push_back({"(q)" + LocalzationManager::locString(LOC_SYSTEM_DRINK),'q'});
 			if (key) key->insert('q');
 		}
 	}
 	break;
 	case ITM_FOOD:
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
 		if (can_use_)
 		{
-			use_text_ += "(e)" + LocalzationManager::locString(LOC_SYSTEM_EAT) +", ";
+			use_text_.push_back({"(e)" + LocalzationManager::locString(LOC_SYSTEM_EAT),'e'});
 			if (key) key->insert('e');
 		}
 		break;
@@ -1145,76 +1185,76 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case SCT_TELEPORT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT));
 				break;
 			case SCT_IDENTIFY:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY));
 				break;
 			case SCT_NONE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE));
 				break;
 			case SCT_CURSE_WEAPON:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON));
 				break;
 			case SCT_CURSE_ARMOUR:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR));
 				break;
 			case SCT_REMOVE_CURSE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE));
 				break;
 			case SCT_BLINK:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK));
 				break;
 			case SCT_MAPPING:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING));
 				break;
 			case SCT_ENCHANT_WEAPON_1:
 			case SCT_ENCHANT_WEAPON_2:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_));
 				break;
 			case SCT_ENCHANT_ARMOUR:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR));
 				break;
 			case SCT_FOG:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG));
 				break;
 			case SCT_DETECT_CURSE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE));
 				break;
 			case SCT_CURSE_JEWELRY:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY));
 				break;
 			case SCT_SILENCE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE));
 				break;
 			case SCT_SOUL_SHOT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT));
 				break;
 			case SCT_CHARGING:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING));
 				break;
 			case SCT_AMNESIA:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA));
 				break;
 			case SCT_SANTUARY:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY));
 				break;
 			case SCT_BRAND_WEAPON:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON));
 				break;
 			default:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG));
 				break;
 			}
 		}
 		else
 		{
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN));
 		}
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL));
 		if (can_use_)
 		{
-			use_text_ += "(r)" + LocalzationManager::locString(LOC_SYSTEM_READ) +", ";
+			use_text_.push_back({"(r)" + LocalzationManager::locString(LOC_SYSTEM_READ),'r'});
 			if (key) key->insert('r');
 		}
 	}
@@ -1226,94 +1266,94 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value2)
 			{
 			case SPC_V_FIRE:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE));
 				break;
 			case SPC_V_ICE:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE));
 				break;
 			case SPC_V_EARTH:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH));
 				break;
 			case SPC_V_AIR:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR));
 				break;
 			case SPC_V_INVISIBLE:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE));
 				break;
 			case SPC_V_METAL:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL));
 				break;
 			case SPC_V_SUN:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN));
 				break;
 			default:
-				text_ +=  LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG);
+				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG));
 				break;
 			}
-			text_ += "\n";
+			_infor_("\n");
 		}
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD));
 		if (can_use_)
 		{
-			use_text_ += "(v)" + LocalzationManager::locString(LOC_SYSTEM_EVOKE) +", ";
+			use_text_.push_back({"(v)" + LocalzationManager::locString(LOC_SYSTEM_EVOKE),'v'});
 			if (key) key->insert('v');
 		}
 	}
 	break;
 	case ITM_AMULET:
 	{
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET));
 		if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
 		{
 			switch (it->value1)
 			{
 			case AMT_PERFECT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT));
 				break;
 			case AMT_BLOSSOM:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM));
 				break;
 			case AMT_TIMES:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES));
 				break;
 			case AMT_FAITH:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH));
 				break;
 			case AMT_WAVE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE));
 				break;
 			case AMT_SPIRIT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT));
 				break;
 			case AMT_GRAZE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE));
 				break;
 			case AMT_WEATHER:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER));
 				break;
 			case AMT_OCCULT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
 				break;
 			default:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
 				break;
 			}
 		}
 		else
 		{
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN));
 		}		
 
 		if (can_use_)
 		{
 			if (you.equipment[ET_NECK] != it)
 			{
-				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+				use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+				use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 				if (key) key->insert('u');
 			}
 		}
@@ -1326,81 +1366,81 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			switch (it->value1)
 			{
 			case RGT_STR:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR));
 				break;
 			case RGT_DEX:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX));
 				break;
 			case RGT_INT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT));
 				break;
 			case RGT_HUNGRY:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY));
 				break;
 			case RGT_FULL:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL));
 				break;
 			case RGT_TELEPORT:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT));
 				break;
 			case RGT_POISON_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS));
 				break;
 			case RGT_FIRE_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS));
 				break;
 			case RGT_ICE_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS));
 				break;
 			case RGT_SEE_INVISIBLE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE));
 				break;
 			case RGT_LEVITATION:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION));
 				break;
 			case RGT_INVISIBLE:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE));
 				break;
 			case RGT_MANA:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA));
 				break;
 			case RGT_MAGACIAN:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN));
 				break;
 			case RGT_AC:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC));
 				break;
 			case RGT_EV:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV));
 				break;
 			case RGT_CONFUSE_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS));
 				break;
 			case RGT_ELEC_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS));
 				break;
 			case RGT_MAGIC_RESIS:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS));
 				break;
 			default:
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
 				break;
 			}
 		}
 		else
 		{
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN));
 		}
 		if (can_use_)
 		{
 			if (you.equipment[ET_RIGHT] != it && you.equipment[ET_LEFT] != it)
 			{
-				use_text_ += "(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) +", ";
+				use_text_.push_back({"(w)" + LocalzationManager::locString(LOC_SYSTEM_EQUIP),'w'});
 				if (key) key->insert('w');
 			}
 			else
 			{
-				use_text_ += "(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP) +", ";
+				use_text_.push_back({"(u)" + LocalzationManager::locString(LOC_SYSTEM_UNEQUIP),'u'});
 				if (key) key->insert('u');
 			}
 		}
@@ -1409,8 +1449,8 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_BOOK:
 	{
 
-		text_ += GetBookInfor((book_list)it->value0);
-		text_ += "\n\n";
+		_infor_(GetBookInfor((book_list)it->value0));
+		_infor_("\n\n");
 		if (it->identify)
 		{
 			
@@ -1432,13 +1472,16 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 			
 			ss << "\n";			
 			
+			_infor_(ss.str());
+
 			char sp_char = 'a';
 			for (int i = 0; i < 8; i++)
 			{
 				spell_list spell_;
 				if ((spell_ = (spell_list)it->GetValue(i + 1)) != SPL_NONE)
 				{
-					ss << (sp_char++) << " - ";
+					ostringstream ss;
+					ss << (sp_char) << " - ";
 					
 					if(PrintCharWidth(SpellString(spell_)) < 30)
 						ss << std::string(30-PrintCharWidth(SpellString(spell_)), ' ');
@@ -1451,10 +1494,13 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 					if(PrintCharWidth(to_string(SpellLevel(spell_))) < 6)
 						ss << std::string(6-PrintCharWidth(to_string(SpellLevel(spell_))), ' ');
 					ss << to_string(SpellLevel(spell_));
-					ss << "\n";
+
+					printsub(ss.str(), false, CL_normal, sp_char);
+					sp_char++;
+					printsub("", true, CL_normal, sp_char);
+					printsub(blank, false, CL_normal, sp_char);
 				}
 			}
-			text_ += ss.str();
 		}
 	}
 	break;
@@ -1463,59 +1509,59 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->value1)
 		{
 		case EVK_PAGODA:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA));
 			break;
 		case EVK_AIR_SCROLL:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL));
 			break;
 		case EVK_DREAM_SOUL:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL));
 			break;
 		case EVK_BOMB:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB));
 			break;
 		case EVK_GHOST_BALL:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL));
 			break;
 		case EVK_SKY_TORPEDO:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO));
 			break;
 		case EVK_MAGIC_HAMMER:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER));
 			break;
 		case EVK_CAMERA:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA));
 			break;
 		default:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG));
 			break;
 		}
-		text_ += "\n\n";
+		_infor_("\n\n");
 		if (it->value1 == EVK_CAMERA) {
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1));
 		}
 		else {
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2));
 		}
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3));
 		char temp[100];
 		sprintf_s(temp,100, ": %d.%02d\n", Evokeusepower((evoke_kind)it->value1, true) / 100, Evokeusepower((evoke_kind)it->value1, true) % 100);
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4);
-		text_ += temp;		
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4));
+		_infor_(temp);		
 
 		if (can_use_)
 		{
-			use_text_ += "(v)" + LocalzationManager::locString(LOC_SYSTEM_EVOKE) +", ";
+			use_text_.push_back({"(v)" + LocalzationManager::locString(LOC_SYSTEM_EVOKE),'v'});
 			if (key) key->insert('v');
 		}
 	}
 	break;
 
 	case ITM_GOAL:
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RUNE);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RUNE));
 		break;
 	case ITM_ORB:
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB));
 		break;
 	case ITM_ETC:
 		switch (it->value1)
@@ -1523,37 +1569,37 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EIT_SATORI:
 			if (you.god_value[GT_SATORI][0] == 1)
 			{
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1));
 			}
 			else
 			{
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2));
 			}
 			break;
 		case EIT_CAT_TREE:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP));
 			break;
 		case EIT_BROKEN_CAMERA:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA));
 			break;
 		case EIT_KAPPA_TRASH:
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH));
 			break;
 		case EIT_PHOTO:
 		{
 			if (it->value2 >= 0 && it->value2 < MON_MAX) {
-				text_ += LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1, PlaceHolderHelper( mondata[it->value2].name.getName()));
+				_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1, PlaceHolderHelper( mondata[it->value2].name.getName())));
 			}
 			else {
-				text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2);
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2));
 			}
-			text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3);
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3));
 			break;
 		}
 		}
 		break;
 	default:
-		text_ += LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_BUG);
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_BUG));
 		break;
 	}
 
@@ -1561,12 +1607,12 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		if (it->type == ITM_BOOK)
 		{
-			use_text_ += "(D)" + LocalzationManager::locString(LOC_SYSTEM_DISCARD);
+			use_text_.push_back({"(D)" + LocalzationManager::locString(LOC_SYSTEM_DISCARD),'D'});
 			if (key) key->insert('D');
 		}
 		else
 		{
-			use_text_ += "(d)" + LocalzationManager::locString(LOC_SYSTEM_DISCARD);
+			use_text_.push_back({"(d)" + LocalzationManager::locString(LOC_SYSTEM_DISCARD),'d'});
 			if (key) key->insert('d');
 		}
 	}
@@ -1575,17 +1621,24 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 	if(it->isArtifact() && it->identify)
 	{
-		text_ += "\n\n";
+		_infor_("\n\n");
 		for(auto it2 = it->atifact_vector.begin(); it2 != it->atifact_vector.end(); it2++)
 		{
-			text_ += GetAtifactInfor((ring_type)it2->kind, it2->value);
-			text_ += "\n";
+			_infor_(GetAtifactInfor((ring_type)it2->kind, it2->value));
+			_infor_("\n");
 		}
 	}
 
 
-	text_ += "\n\n\n";
-	text_ += use_text_;
-	return text_;
+	_infor_("\n\n\n");
+	bool first_ = true;
+	for(auto& use_text : use_text_) {
+		if(!first_) { 
+			printsub(", ", false, CL_normal);
+		}
+		printsub(use_text.first, false, CL_help, use_text.second);
+		first_ = false;
+	}
+	return;
 
 }

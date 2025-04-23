@@ -455,7 +455,7 @@ void Initialize()
 }
 
 void search_monspell_view(monster* mon_);
-void iteminfor_(int key_, bool gameover);
+bool iteminfor_(int key_, bool gameover);
 bool weapon_prev_fail();
 bool armor_prev_fail();
 bool jewelry_prev_fail();

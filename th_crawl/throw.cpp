@@ -883,7 +883,8 @@ list<item>::iterator ThrowSelect()
 		else if(key_ == -1) {			
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
-				iteminfor_(inputedKey.val1, true);
+				if(iteminfor_(inputedKey.val1, true))
+					break;
 				rollback_item(IVT_THROW,LOC_SYSTEM_DISPLAY_MANAGER_THROW);
 				setDisplayMove(get_item_move_);
 			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {

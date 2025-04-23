@@ -390,7 +390,7 @@ void iteminfor_discard()
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();
 				iteminfor_(inputedKey.val1, true);
-				rollback_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
+				rollback_item(IVT_DISCARD,LOC_SYSTEM_DISPLAY_MANAGER_DISCARD);
 				setDisplayMove(get_item_move_);
 			}
 			else if(inputedKey.mouse == MKIND_SCROLL_UP) {

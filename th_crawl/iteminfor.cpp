@@ -489,7 +489,18 @@ void iteminfor(bool gameover)
 			changemove(option_mg.getHeight());
 		}						//-----이동키끝-------
 		else if(key_ == -1) {
-			if(inputedKey.isRightClick() || (inputedKey.isLeftClick() && gameover)) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, gameover);
+				if(gameover) {
+					view_item(IVT_INFOR,LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER);
+					setDisplayMove(get_item_move_);
+				}
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if (inputedKey.isRightClick() || (inputedKey.isLeftClick() && gameover)) {
 				break;
 			}
 		}

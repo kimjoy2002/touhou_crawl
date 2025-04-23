@@ -457,7 +457,19 @@ bool identity_scroll(bool pre_iden_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				if(iden_list.scroll_list[SCT_IDENTIFY].iden == 3)
+					rollback_item(IVT_UNIDEN,LOC_SYSTEM_DISPLAY_MANAGER_IDEN);
+				else
+					rollback_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -878,8 +890,20 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 			else
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
-		else if(key_ == -1) {
-			if(inputedKey.isRightClick()) {
+		else if(key_ == -1) {			
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				if(iden_list.scroll_list[SCT_ENCHANT_ARMOUR].iden == 3)
+					rollback_item(IVT_ARMOR_ENCHANT,LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR);
+				else
+					rollback_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -1036,7 +1060,19 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
 		else if(key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
+					rollback_item(IVT_SPELLCARD,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
+				else
+					rollback_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

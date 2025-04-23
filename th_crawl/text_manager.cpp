@@ -165,6 +165,13 @@ int printsub(string text_, bool enter_, D3DCOLOR color_)
 	return text_.size();
 }
 
+int printsub(string text_, bool enter_, D3DCOLOR color_, int char_)
+{
+	DisplayManager.text_sub.add_text(text_, enter_, false, false, color_, char_);
+
+	return text_.size();
+}
+
 int printsub_blank(int final_index, int next_index)
 {
 	if (final_index >= next_index) {

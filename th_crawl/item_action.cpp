@@ -272,7 +272,28 @@ void iteminfor_pick()
 			break;
 		}
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				int getItemVal = asctonum(inputedKey.val1);
+				list<item>::iterator it = env[current_level].GetPositiontoitem(you.position);
+				list<item>::iterator end = env[current_level].GetPositiontoitemend(you.position);
+				for(;it != end;it++)
+				{
+					if(getItemVal==0)
+					{	
+						iteminfor_(&(*it), true);
+						break;
+					} else {
+						getItemVal--;
+					}
+				}
+				rollback_item(IVT_PICK,LOC_SYSTEM_DISPLAY_MANAGER_PICK);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if (inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -499,7 +520,16 @@ void Eatting(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				rollback_item(IVT_FOOD,LOC_SYSTEM_DISPLAY_MANAGER_FOOD);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -584,7 +614,16 @@ void Drinking(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				rollback_item(IVT_POTION,LOC_SYSTEM_DISPLAY_MANAGER_DRINK);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -652,7 +691,16 @@ void Spelllcard_Evoke(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				rollback_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -777,6 +825,7 @@ void Reading(char auto_)
 			}
 			else if(item_->type == ITM_SCROLL)
 			{
+				Reading_logic(key_);
 			}
 			break;
 		}
@@ -799,7 +848,16 @@ void Reading(char auto_)
 		else if(key_ == '*')
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_READ);
 		else if(key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int get_item_move_ = getDisplayMove();
+				iteminfor_(inputedKey.val1, true);
+				rollback_item(IVT_SCROLL,LOC_SYSTEM_DISPLAY_MANAGER_READ);
+				setDisplayMove(get_item_move_);
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}

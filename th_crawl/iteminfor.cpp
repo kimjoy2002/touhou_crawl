@@ -1451,6 +1451,7 @@ string GetItemInfor(item *it, bool can_use_, set<char> *key)
 					if(PrintCharWidth(to_string(SpellLevel(spell_))) < 6)
 						ss << std::string(6-PrintCharWidth(to_string(SpellLevel(spell_))), ' ');
 					ss << to_string(SpellLevel(spell_));
+					ss << "\n";
 				}
 			}
 			text_ += ss.str();

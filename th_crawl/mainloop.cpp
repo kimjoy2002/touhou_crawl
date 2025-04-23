@@ -1034,10 +1034,14 @@ bool option_menu(int value_)
 		printsub("======",true,CL_help);
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
+		printsub(blank,false,CL_warning);
 		printsub("a - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE) + ": " + LocalzationManager::langString(lang),true,CL_normal,'a');
+		printsub(blank,false,CL_warning);
 		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": " + to_string(width_) +" X " +  to_string(height_),true,CL_normal,'b');
+		printsub(blank,false,CL_warning);
 		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal,'c');
 		printsub("",true,CL_normal);
+		printsub(blank,false,CL_warning);
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
 		
 		changedisplay(DT_SUB_TEXT);
@@ -1095,7 +1099,7 @@ bool option_menu(int value_)
 		}
 
 	}
-	changedisplay(DT_TEXT);
+	changedisplay(DT_SUB_TEXT);
 
 	return false;
 }

@@ -1282,7 +1282,7 @@ LOC_SYSTEM_TENSI_BAD_KANAME6,텐시: 사격연습을 해보지않을래? 물론 
 LOC_SYSTEM_TENSI_FIELD1,당신을 중심으로 무언가 거대한 장막이 펼쳐짐을 느꼈다.
 LOC_SYSTEM_TENSI_FIELD2,텐시: 새로운 필드가 필요해?
 LOC_SYSTEM_TENSI_FIELD3,텐시: 여기서 싸우는게 좀 더 재밌어보이는데!
-LOC_SYSTEM_TENSI_FIELD4,텐시: 텐트 좀 펼칠테니까 도와줄래?";
+LOC_SYSTEM_TENSI_FIELD4,텐시: 텐트 좀 펼칠테니까 도와줄래?
 LOC_SYSTEM_TENSI_FIELD5,텐시: 좀 더 좋은 환경이 있는데 시험해볼래?
 LOC_SYSTEM_TENSI_BLIND1,텐시: 한 숨 잘테니까 불 좀 꺼야겠어
 LOC_SYSTEM_TENSI_BLIND2,텐시: 너무 밝지않아?
@@ -3269,7 +3269,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,달빛의 기운을 담은 스�
 LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,금속의 기운을 담은 스펠카드다.\n사용하면 전방으로 철가시를 3연속으로 발사한다.\n발동스킬이 높으면 데미지가 높아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,태양의 기운을 담은 스펠카드다.\n사용하면 큰 빛을 발산하여 주변의 적을 빛나게 하고 혼란을 건다.\n혼란은 강할수록 저항할 수 있으며 무생물에겐 걸리지않는다.\n또한, 흡혈귀에겐 단순한 혼란효과 이상의 데미지를 줄 수 있다고 한다.\n발동스킬이 높으면 지속시간과 혼란이 걸릴 확률이 늘어난다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,버그의 스펠카드다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,미지의 힘이 담겨있는 부적. 기본적으론 아무런 힘도 가지고 있지않는 평범한 부적이지만\n착용한 채로 경험치를 얻으면 부적의 충전량이 점점 충전되며 100%가 되면 힘을 발휘한다.\n만약 착용하고있는 부적을 벗으면 그 즉시 충전량이 0%로 떨어지므로 주의해야한다.\n\n";
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,미지의 힘이 담겨있는 부적. 기본적으론 아무런 힘도 가지고 있지않는 평범한 부적이지만\n착용한 채로 경험치를 얻으면 부적의 충전량이 점점 충전되며 100%가 되면 힘을 발휘한다.\n만약 착용하고있는 부적을 벗으면 그 즉시 충전량이 0%로 떨어지므로 주의해야한다.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,미래를 체험한다고 하는 에이린의 감주약의 효능이 녹아들어있는 부적.\n다른 부적에 비해 아주 느린 속도로 충전이 되지만 힘이 모이면 죽음을 회피할 수 있다.\n100%가 된 부적을 착용한 채로 죽게되면 체력이 전부 회복되어 부활한다.\n단, 이 방법으로 부활하게되면 부적은 불타 사라지게된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,춘설이변에 쓰인 봄의 기운을 모아서 특수한 결계를 발동시킬 수 있는 부적.\n착용하고 있으면 주변의 봄의 기운이 모이고 충전이 되면 영격을 발동할 수 있게 된다.\n100%가 된 부적을 착용한 채로 v를 누르면 영격이 발동되어 주변의 적을 일정시간 마비시킨다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 주변에 파워아이템이 떨어진다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
@@ -3280,7 +3280,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 무작위 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n";
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,손에 낀 착용자의 근력을 강화시키거나 약화시키는 힘의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX,손에 낀 착용자의 민첩성을 강화시키거나 약화시키는 민첩의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT,손에 낀 착용자의 지능을 강화시키거나 약화시키는 지능의 반지.\n그 증감량은 반지의 수치에 달려있다.\n

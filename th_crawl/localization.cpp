@@ -346,7 +346,7 @@ const string& LocalzationManager::monDecsriptionString(monster_index key) {
 	return monster_description_map[MON_REIMUYUKKURI];
 }
 string LocalzationManager::getCorrectParticle(const string& word, const string& opt1, const string& opt2) {
-    if (word.empty()) return opt1;
+    if (word.empty() || word.size() <= 1) return opt1;
 
     unsigned char first = word[word.length() - 2];
     unsigned char second = word[word.length() - 1];

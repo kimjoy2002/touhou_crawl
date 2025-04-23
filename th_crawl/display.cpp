@@ -394,7 +394,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	{
 		if(you.MemorizeSpell[i])
 		{
-			RECT rc2={ rc.left, rc.top,  rc.right,  rc.bottom};
+			RECT rc2={ rc.left, rc.top,  rc.right, (LONG)(rc.top+fontDesc.Height)};
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
 			int miscast_level_ = SpellMiscastingLevel(SpellLevel(spell_), 100-you.GetSpellSuccess(spell_));
 			D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
@@ -424,7 +424,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			ss << SpellLevel(spell_);
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			
-			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;			
+			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;			
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
@@ -497,7 +497,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(potion_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -531,7 +531,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(scroll_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -564,7 +564,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -598,7 +598,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(amulet_iden_string[cur_]);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -630,7 +630,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << SpellcardName((spellcard_evoke_type)cur_) << LocalzationManager::locString(LOC_SYSTEM_SPELLCARD);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -669,7 +669,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(static_book_list[cur_ - 1].key);
 				}
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -711,7 +711,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(GetTanmacKey(cur_-2));
 			}
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
-			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 			rc.top += 2 * fontDesc.Height;
 			num++;
 
@@ -764,7 +764,7 @@ void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 		char sp_char = (i<26)?('a'+i):('A'+i-26);
 		ss << sp_char << " - " << it->GetInfor();
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
-		rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+		rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 		
 		if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 			MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
@@ -805,7 +805,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	rc.left += 200;
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
-	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_SUCCESS_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
 	for(int i=0;i<52;i++)
@@ -837,7 +837,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 			ss << std::setw(3) << std::right << SkillDiffer(skill_) << "%";
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			
-			RECT rc2={rc.left, rc.top,  (LONG)(rc.left + PrintCharWidth(ss.str())*fontDesc.width),  rc.bottom};
+			RECT rc2={50, rc.top,  (LONG)(rc.left + PrintCharWidth(ss.str())*fontDesc.Width), (LONG)(rc.top+fontDesc.Height)};
 		
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
@@ -939,7 +939,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	{
 		for(i = 0;i<1;i++)
 		{
-			RECT rc2={ rc.left, rc.top,  rc.right,  rc.bottom};
+			RECT rc2={ rc.left, rc.top,  rc.right, (LONG)(rc.top+fontDesc.Height)};
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
@@ -988,19 +988,19 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 				ss << std::fixed << std::setw(3) << std::setprecision(1) << value_;
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 			
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 			}
 			else if (you.pure_skill == skt)
 			{
 				DrawTextUTF8(pfont,pSprite,  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
 			
-				rc2.right = rc.left + PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA))*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA))*fontDesc.Width;
 			}
 			else
 			{
 				ss << " -";
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
-				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 			}
 			
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
@@ -1010,11 +1010,11 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 				if(isClicked(LEFT_CLICK)) {						
 					MSG msg;
 					msg.message = WM_CHAR;
-					msg.wParam = convertClickable(sk_char);
+					msg.wParam = convertClickable(sk_char-1);
 					g_keyQueue->push(InputedKey(msg));
 				}
 				else if(isClicked(RIGHT_CLICK)) {
-					g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,sk_char,0));
+					g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,sk_char-1,0));
 				}
 			}
 			
@@ -2783,7 +2783,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						equip_ = (you.isequip(it)>0);
 						throw_ = (you.throw_weapon == &(*it));
 						curse = it->curse;
-						if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent()) {
+						if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
 							evokable = true;
 						}
 					}
@@ -3538,7 +3538,12 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
 	} else if(isClicked(MIDDLE_DOWN)) {
 		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
-	}
+	} else if (isClicked(RIGHT_CLICK)) {
+		MSG msg;
+		msg.message = WM_CHAR;
+		msg.wParam = VK_ESCAPE;
+		g_keyQueue->push(InputedKey(msg));
+	} 
 }
 
 void display_manager::start_spellview(LOCALIZATION_ENUM_KEY message_)

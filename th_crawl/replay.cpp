@@ -347,7 +347,7 @@ bool replay_menu(int value_)
 		sort(file_vector.begin(),file_vector.end());
 		int page=0;
 		int file_num=file_vector.size();
-		int max_page=(file_num+9)/10;
+		int max_page=(file_num+6)/7;
 
 		while(1)
 		{
@@ -356,7 +356,6 @@ bool replay_menu(int value_)
 
 			deletesub();
 
-			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
@@ -369,9 +368,9 @@ bool replay_menu(int value_)
 			if(file_num)
 			{
 				char char_ = 'a'; 
-				for(int i=0;i<10;i++)
+				for(int i=0;i<7;i++)
 				{
-					int line_ = 0, cur= page*10+i;
+					int cur= page*7+i;
 
 					if(cur+1>file_num)
 						break;
@@ -435,9 +434,9 @@ bool replay_menu(int value_)
 			int input_ = waitkeyinput(inputedKey,true);
 
 			bool out_ = false;
-			if(input_ >= 'a' && input_ <= 'l')
+			if(input_ >= 'a' && input_ <= 'h')
 			{
-				int select_ = page*10+ (input_ - 'a');
+				int select_ = page*7+ (input_ - 'a');
 
 				if(select_<file_num)
 				{
@@ -459,7 +458,14 @@ bool replay_menu(int value_)
 					page++;
 			}
 			else if(input_ == -1) {
-				if(inputedKey.isRightClick()) {
+				if(inputedKey.mouse == MKIND_SCROLL_UP) {
+					if(page>0)
+						page--;
+				} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+					if(max_page>page+1)
+						page++;
+				}
+				else if(inputedKey.isRightClick()) {
 					out_ = true;
 				}
 			}
@@ -474,7 +480,7 @@ bool replay_menu(int value_)
 
 
 	}
-	changedisplay(DT_TEXT);
+	changedisplay(DT_SUB_TEXT);
 
 	return false;
 }

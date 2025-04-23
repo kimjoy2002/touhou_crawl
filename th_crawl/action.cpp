@@ -1967,7 +1967,8 @@ void view_log()
 	changedisplay(DT_LOG);
 	while(1)
 	{
-		switch(waitkeyinput(true))
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey, true))
 		{
 		case VK_UP:
 			changemove(1);  //위
@@ -1981,6 +1982,16 @@ void view_log()
 		case VK_NEXT:
 			changemove(-DisplayManager.log_length);
 			continue;
+		case -1:
+		{
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);
+				continue;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);
+				continue;
+			} 
+		}
 		}
 		break;
 	}
@@ -1996,7 +2007,8 @@ void skill_view()
 	{
 		while(1)
 		{
-			int key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
@@ -2009,6 +2021,15 @@ void skill_view()
 			{
 				changemove(move_);
 				move_ = move_==1?-1:1;
+			}
+			else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_SCROLL_UP) {
+					changemove(-32);  //아래
+				} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+					changemove(32);  //위
+				} else if (inputedKey.isRightClick()) {
+					break;
+				}
 			}
 			else if(!key_)
 			{

@@ -368,7 +368,7 @@ bool replay_menu(int value_)
 
 			if(file_num)
 			{
-				char char_[2] = "a"; 
+				char char_ = 'a'; 
 				for(int i=0;i<10;i++)
 				{
 					int line_ = 0, cur= page*10+i;
@@ -376,19 +376,18 @@ bool replay_menu(int value_)
 					if(cur+1>file_num)
 						break;
 
-						
+					ostringstream ss;
+					ss << char_ << " - " << file_vector[cur].path;
 					SYSTEMTIME stC;
 					memset(&stC, 0, sizeof(stC));
 					FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
-					line_ += printsub(blank,false,CL_warning);				
-					line_ += printsub(char_,false,CL_danger);
-					line_ += printarraysub(false, CL_normal, 2, " - ",file_vector[cur].path.c_str());
+					printsub(ss.str(),false,CL_normal,char_);
 
 				
-					{
-						char temp[128] = "                                                     ";
-						temp[line_<60?60-line_:1] = 0;
-						printsub(temp,false,CL_normal);
+					if(60 - PrintCharWidth(ss.str()) > 0) {
+						printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, CL_normal);
+					} else {
+						printsub(" ", false, CL_normal);
 					}
 
 					{
@@ -404,11 +403,11 @@ bool replay_menu(int value_)
 
 
 					
-					line_ += printsub(blank,false,CL_warning);		
+					printsub(blank,false,CL_warning);		
 					printsub(file_vector[cur].infor,true,CL_green);
 
 					printsub("",true,CL_normal);
-					char_[0]++;
+					char_++;
 				}
 			}
 			else
@@ -422,10 +421,15 @@ bool replay_menu(int value_)
 			
 			{
 				printsub(blank,false,CL_warning);
-				printsub(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(to_string(page+1))),true,CL_help);
+				printsub("←",false,CL_danger, VK_LEFT);
+				printsub("  ",false,CL_warning);
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(to_string(page+1))),false,CL_help);
+				printsub("  ",false,CL_warning);
+				printsub("→",true,CL_danger, VK_RIGHT);
 			}
-
-
+			printsub("",true,CL_normal);
+			printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
+		
 			changedisplay(DT_SUB_TEXT);
 			InputedKey inputedKey;
 			int input_ = waitkeyinput(inputedKey,true);

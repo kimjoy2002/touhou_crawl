@@ -1034,11 +1034,11 @@ bool option_menu(int value_)
 		printsub("======",true,CL_help);
 		printsub("",true,CL_normal);
 		printsub("",true,CL_normal);
-		printsub("a - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE) + ": " + LocalzationManager::langString(lang),true,CL_normal);
-		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": " + to_string(width_) +" X " +  to_string(height_),true,CL_normal);
-		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal);
+		printsub("a - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_LANGUAGE) + ": " + LocalzationManager::langString(lang),true,CL_normal,'a');
+		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": " + to_string(width_) +" X " +  to_string(height_),true,CL_normal,'b');
+		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal,'c');
 		printsub("",true,CL_normal);
-		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal);
+		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
 		
 		changedisplay(DT_SUB_TEXT);
 		InputedKey inputedKey;
@@ -1058,12 +1058,7 @@ bool option_menu(int value_)
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
 			}
 		}
-		else if(input_ == -1) {
-			if(inputedKey.isRightClick()) {
-				break;
-			}
-		}
-		else if(input_ == VK_ESCAPE)
+		else if(input_ == VK_ESCAPE || (input_ == -1 && inputedKey.isRightClick()))
 		{
 			if(lang != LocalzationManager::current_lang) {
 				LocalzationManager::init(LocalzationManager::baseLang(), true);
@@ -1095,6 +1090,8 @@ bool option_menu(int value_)
 
 			
 			break;
+		}
+		else if(input_ == -1) {
 		}
 
 	}

@@ -363,6 +363,11 @@ void display_manager::text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		image->draw(pSprite,255);
 	RECT rc={50, 50-move, option_mg.getWidth(), option_mg.getHeight()};
 	DrawTextUTF8(pfont, pSprite, text.c_str(), -1, &rc, DT_NOCLIP,D3DCOLOR_XRGB(200,200,200));
+	if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
 }
 
 void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
@@ -389,6 +394,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	{
 		if(you.MemorizeSpell[i])
 		{
+			RECT rc2={ rc.left, rc.top,  rc.right,  rc.bottom};
 			spell_list spell_ = (spell_list)you.MemorizeSpell[i];
 			int miscast_level_ = SpellMiscastingLevel(SpellLevel(spell_), 100-you.GetSpellSuccess(spell_));
 			D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
@@ -417,6 +423,23 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			ss.clear();
 			ss << SpellLevel(spell_);
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
+			
+			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;			
+			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				
+				if(isClicked(LEFT_CLICK)) {						
+					MSG msg;
+					msg.message = WM_CHAR;
+					msg.wParam = convertClickable(sp_char);
+					g_keyQueue->push(InputedKey(msg));
+				}
+				else if(isClicked(RIGHT_CLICK)) {
+					g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,sp_char,0));
+				}
+			}
+			
 			rc.top += fontDesc.Height;
 			rc.left = 50;
 		}
@@ -434,6 +457,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	bool first_ = false;
 	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
+		RECT rc2={ two_, rc.top,  rc.right,  rc.bottom};
 		char index = 'a', current;
 		D3DCOLOR font_color_ = iden_list.autopickup[i]?CL_normal:CL_bad;
 		for (current = num; current >= 26; current -= 26) {
@@ -464,6 +488,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				img_item_potion[iden_list.potion_list[cur_].color].draw(pSprite, rc.left-24, rc.top+6, 255);
 				img_item_potion_kind[min(PT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left-24, rc.top+6, 255);
 
@@ -472,6 +497,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(potion_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -496,6 +522,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				img_item_scroll.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				
@@ -504,6 +531,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(scroll_iden_string[cur_]);
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -528,6 +556,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				img_item_ring[iden_list.ring_list[cur_].type].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_ring_kind[min(RGT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				
@@ -535,6 +564,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -559,6 +589,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				img_item_amulet.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				img_item_amulet_kind[min(AMT_MAX - 1, max(0, cur_))].draw(pSprite, rc.left - 24, rc.top + 6, 255);
 				
@@ -567,6 +598,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(amulet_iden_string[cur_]);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -591,12 +623,14 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
 
 				ss.str("");
 				ss.clear();
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << SpellcardName((spellcard_evoke_type)cur_) << LocalzationManager::locString(LOC_SYSTEM_SPELLCARD);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -621,6 +655,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				rc.left = two_;
+				rc2=rc;
 				ss.str("");
 				ss.clear();
 				if (cur_ == 0)
@@ -634,6 +669,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(static_book_list[cur_ - 1].key);
 				}
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -655,6 +691,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				first_ = false;
 			}
 			rc.left = two_;
+			rc2=rc;
 
 			ss.str("");
 			ss.clear();
@@ -674,9 +711,24 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(GetTanmacKey(cur_-2));
 			}
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
+			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 			rc.top += 2 * fontDesc.Height;
 			num++;
 
+		}
+		
+		
+			
+		if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+			MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+			DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+			
+			if(isClicked(LEFT_CLICK)) {						
+				MSG msg;
+				msg.message = WM_CHAR;
+				msg.wParam = convertClickable(index);
+				g_keyQueue->push(InputedKey(msg));
+			}
 		}
 	}
 
@@ -688,6 +740,11 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	rc.top += move + 64;
 	max_y = (rc.top - option_mg.getHeight()>0 ? rc.top - option_mg.getHeight() : 0);
+	if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
 }
 void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {	
@@ -702,10 +759,26 @@ void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
+		RECT rc2={rc.left, rc.top,  rc.right,  rc.bottom};
 		stringstream ss;
 		char sp_char = (i<26)?('a'+i):('A'+i-26);
 		ss << sp_char << " - " << it->GetInfor();
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, it->getColor());
+		rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
+		
+		if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+			MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+			DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+			
+			if(isClicked(LEFT_CLICK) || isClicked(RIGHT_CLICK)) {						
+				MSG msg;
+				msg.message = WM_CHAR;
+				msg.wParam = convertClickable(sp_char);
+				g_keyQueue->push(InputedKey(msg));
+			}
+		}
+		
+		
 		rc.top += fontDesc.Height;
 		rc.left = 50;
 		i++;
@@ -739,6 +812,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	{
 		if(you.MemorizeSkill[i])
 		{
+			
 			skill_list skill_ = (skill_list)you.MemorizeSkill[i];
 			char sp_char = i>=26?('A'+i-26):('a'+i);
 			ss.str("");
@@ -762,6 +836,24 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 			ss.clear();
 			ss << std::setw(3) << std::right << SkillDiffer(skill_) << "%";
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			
+			RECT rc2={rc.left, rc.top,  (LONG)(rc.left + PrintCharWidth(ss.str())*fontDesc.width),  rc.bottom};
+		
+			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				
+				if(isClicked(LEFT_CLICK)) {						
+					MSG msg;
+					msg.message = WM_CHAR;
+					msg.wParam = convertClickable(sp_char);
+					g_keyQueue->push(InputedKey(msg));
+				}
+				else if(isClicked(RIGHT_CLICK)) {
+					g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,sp_char,0));
+				}
+			}
+			
 			rc.top += fontDesc.Height;
 			rc.left = 50;
 		}
@@ -847,6 +939,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	{
 		for(i = 0;i<1;i++)
 		{
+			RECT rc2={ rc.left, rc.top,  rc.right,  rc.bottom};
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
@@ -894,16 +987,38 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 				ss << std::fixed << std::setw(3) << std::setprecision(1) << value_;
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+			
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 			}
 			else if (you.pure_skill == skt)
 			{
 				DrawTextUTF8(pfont,pSprite,  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
+			
+				rc2.right = rc.left + PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA))*fontDesc.width;
 			}
 			else
 			{
 				ss << " -";
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.width;
 			}
+			
+			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				
+				if(isClicked(LEFT_CLICK)) {						
+					MSG msg;
+					msg.message = WM_CHAR;
+					msg.wParam = convertClickable(sk_char);
+					g_keyQueue->push(InputedKey(msg));
+				}
+				else if(isClicked(RIGHT_CLICK)) {
+					g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,sk_char,0));
+				}
+			}
+			
+			
 
 			if(sk_char == 'z'+1)
 				sk_char = 'A';
@@ -3349,6 +3464,12 @@ void display_manager::log_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_
 			}
 		}
 	}
+	
+	if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
 }
 
 void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
@@ -3393,6 +3514,8 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 						msg.message = WM_CHAR;
 						msg.wParam = (*it)->clickable;
 						g_keyQueue->push(InputedKey(msg));
+					} else if(isClicked(RIGHT_CLICK)) {
+						g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,(*it)->clickable,0));
 					}
 				}
 			}
@@ -3409,6 +3532,12 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 				x+=(*it)->width;
 			}
 		}
+	}
+	
+	if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
 	}
 }
 

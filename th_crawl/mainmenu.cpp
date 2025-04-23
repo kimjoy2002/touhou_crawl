@@ -37,15 +37,24 @@ typedef struct menu_input
 		:input(input_), output(output_), text(text_), infor(infor_),f(f_),value(value_){}
 }menu_input;
 
+struct menu_string {
+	string text;
+	bool enter;
+	D3DCOLOR color;
+	int clickable;
+	menu_string(string text, bool enter, D3DCOLOR color, int clickable = 0): text(text), enter(enter), color(color), clickable(clickable){}
+};
+
+
 class menu
 {
 	int id; //아이디
-	string text;
+	unique_ptr<vector<menu_string>> textmg;
 
 	list<menu_input> input_list;
 	
 public:
-	menu::menu(int id_, string text_):id(id_),text(text_){}
+	menu::menu(int id_, unique_ptr<vector<menu_string>>& textmg):id(id_),textmg(std::move(textmg)){}
 
 	
 	void input_puls(int input_, int output_, string text_, bool infor_, bool (*f_)(int), int value_)
@@ -57,6 +66,10 @@ public:
 	void View()
 	{
 		WaitForSingleObject(mutx, INFINITE);
+		deletesub();
+		for(const auto& text : *textmg) {
+			printsub(text.text, text.enter, text.color, text.clickable);
+		}
 		SetText() = text;
 		ReleaseMutex(mutx);
 	}
@@ -76,7 +89,11 @@ public:
 				if((*it).text.length() > 0)
 				{
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() += (*it).text;
+					std::istringstream iss((*it).text);
+					std::string line;
+					while (std::getline(iss, line)) {
+						printsub(line, true, CL_normal);
+					}
 					ReleaseMutex(mutx);
 					if((*it).infor)
 					{
@@ -120,9 +137,9 @@ public:
 	}
 
 
-	void menu_puls(int id_, string text_)
+	void menu_puls(int id_, unique_ptr<vector<menu_string>>&& textmg)
 	{
-		menu_list.push_back(new menu(id_,text_));
+		menu_list.push_back(new menu(id_,std::move(textmg)));
 	}
 
 
@@ -341,34 +358,26 @@ void start_mainmenu()
 	while (retry_) {
 		retry_ = false;
 		menu_manager m_mgr;
-		string temp;
+		string tempstr;
 		
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME);
-		temp += "\n\n";
-		temp += "a - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_GAMESTART);
-		temp += "\n";
-		temp += "b - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_TUTORIAL);
-		temp += "\n";
-		temp += "\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MINIGAME);
-		temp += "\n\n";
-		temp += "c - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ARENA);
-		temp += "\n";
-		temp += "d - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SPRINT);
-		temp += "\n";
-		temp += "\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ETC);
-		temp += "\n\n";
-		temp += "e - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION);
-		temp += "\n";
-		temp += "R - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY);
-		m_mgr.menu_puls(0,temp);
+		unique_ptr<vector<menu_string>> temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("a - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_GAMESTART), true, CL_normal, 'a'));
+		temp->push_back(menu_string("b - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_TUTORIAL), true, CL_normal, 'b'));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MINIGAME), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("c - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ARENA), true, CL_normal, 'c'));
+		temp->push_back(menu_string("d - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SPRINT), true, CL_normal, 'd'));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ETC), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("e - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'e'));
+		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'R'));
+		m_mgr.menu_puls(0,std::move(temp));
 		m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 		m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
 		//m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
@@ -377,23 +386,25 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0,'e',-3,"",false,option_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 		
-
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT);
-		temp += "\n\n\n";
-		temp += "a - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY);
-		temp += "\n\n";
-		temp += "b - ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL);
-		temp += "\n\n";
-		m_mgr.menu_puls(1,temp);
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("a - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY), true, CL_normal, 'a'));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("b - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL), true, CL_normal, 'b'));
+		temp->push_back(menu_string("", true, CL_normal));
+		m_mgr.menu_puls(1,std::move(temp));
 		m_mgr.menu_input_puls(1,'a',2,LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY_SELECT) + "\n",false,NULL,0);
 		m_mgr.menu_input_puls(1,'b',3,LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL_SELECT) + "\n",false,NULL,0);
 		m_mgr.menu_input_puls(1,VK_ESCAPE,0,"",false,NULL,0);
 
 		
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL);
-		temp += "\n\n\n\n";
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
 
 		LOCALIZATION_ENUM_KEY charlist[8][3] = {
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_REIMU},
@@ -414,145 +425,154 @@ void start_mainmenu()
 				ss << " " << LocalzationManager::locString(charlist[i][1]);
 			}
 			ss << " " << LocalzationManager::locString(charlist[i][2]);
+			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
 
 			if(i%2 == 1) {
-				ss << "\n\n";
+				temp->push_back(menu_string("", true, CL_normal));
+				temp->push_back(menu_string("", true, CL_normal));
 			}
 			else if(40 - PrintCharWidth(ss.str()) > 0) {
-				ss << string(40 - PrintCharWidth(ss.str()), ' ');
+				temp->push_back(menu_string(string(40 - PrintCharWidth(ss.str()), ' '), false, CL_normal));
 			} else {
-				ss << ' ';
+				temp->push_back(menu_string(" ", false, CL_normal));
 			}
-			temp += ss.str();
 		}
 
-		temp += "\n\n";	
-		m_mgr.menu_puls(2,temp);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_REIMU);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'a',2,temp,true,select_named,0);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MARISA);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'b',2,temp,true,select_named,1);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SANAE);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'c',2,temp,true,select_named,2);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOMIZI);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3);
-		temp += "\n\n ";	
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'d',2,temp,true,select_named,3);	
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_KOISHI);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4);
-		temp += "\n\n\n";	
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'e',2,temp,true,select_named,4);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4);
-		temp += "\n\n\n";	
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'f',2,temp,true,select_named,5);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_NITORI);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4);
-		temp += "\n\n\n";	
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2,'g',2,temp,true,select_named,6);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_THREE_FAIRIES);
-		temp += " : ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2);
-		temp += "\n\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(2, 'h', 5, temp, true, select_named, 7);
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		m_mgr.menu_puls(2,std::move(temp));
+		
+		
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_REIMU);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'a',2,tempstr,true,select_named,0);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MARISA);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'b',2,tempstr,true,select_named,1);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SANAE);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'c',2,tempstr,true,select_named,2);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOMIZI);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3);
+		tempstr += "\n\n ";	
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'d',2,tempstr,true,select_named,3);	
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_KOISHI);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4);
+		tempstr += "\n\n\n";	
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'e',2,tempstr,true,select_named,4);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4);
+		tempstr += "\n\n\n";	
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'f',2,tempstr,true,select_named,5);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_NITORI);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4);
+		tempstr += "\n\n\n";	
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'g',2,tempstr,true,select_named,6);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_THREE_FAIRIES);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2);
+		tempstr += "\n\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2, 'h', 5, tempstr, true, select_named, 7);
 		m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 		
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT);
-		temp += "\n\n\n";
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT), true, CL_help));
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
 		for(int i=0;i<TRI_MAX-1;i++)
 		{
-			char tempchar[64];
-			sprintf_s(tempchar,"%c - %s",'a'+i,LocalzationManager::locString(tribe_type_string[i]).c_str());
-			int remain_num_ = 23-strlen(tempchar);
-			temp += tempchar;
-			if(i%2 ==0)
-			{
-				for(int j=0;j<remain_num_;j++)
-					temp += " ";
+			char hotkey_ = 'a' + i;
+			ostringstream ss;
+			ss << hotkey_ << " - " << LocalzationManager::locString(tribe_type_string[i]);
+
+			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
+
+			if(i%2 == 1  || i == TRI_MAX-2) {
+				temp->push_back(menu_string("", true, CL_normal));
 			}
-			if(i%2 == 1 || i == TRI_MAX-2)
-			{
-				temp += "\n";
+			else if(23 - PrintCharWidth(ss.str()) > 0) {
+				temp->push_back(menu_string(string(23 - PrintCharWidth(ss.str()), ' '), false, CL_normal));
+			} else {
+				temp->push_back(menu_string(" ", false, CL_normal));
 			}
 		}
-		temp += "\n\n\n";
-		m_mgr.menu_puls(3,temp);
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		m_mgr.menu_puls(3,std::move(temp));
 
 
 
@@ -574,38 +594,44 @@ void start_mainmenu()
 
 		for (int i = 0; i < 13; i++) {
 			char hotkey_ = 'a' + i;
-			temp = LocalzationManager::locString(tribelist[i][0]);
-			temp += ": ";
-			temp += LocalzationManager::locString(tribelist[i][1]);
-			temp += "\n\n\n";
-			temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-			temp += "\n";
-			m_mgr.menu_input_puls(3,hotkey_,4,temp,true,select_char,i);
+			tempstr = LocalzationManager::locString(tribelist[i][0]);
+			tempstr += ": ";
+			tempstr += LocalzationManager::locString(tribelist[i][1]);
+			tempstr += "\n\n\n";
+			tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+			tempstr += "\n";
+			m_mgr.menu_input_puls(3,hotkey_,4,tempstr,true,select_char,i);
 
 		}
 		m_mgr.menu_input_puls(3,VK_ESCAPE,1,"",false,NULL,0);
 
 		
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT);
-		temp += "\n\n\n";
+		
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT), true, CL_help));
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
 		for(int i=0;i<JOB_MAX;i++)
 		{
-			char tempchar[64];
-			sprintf_s(tempchar,"%c - %s",'a'+i,LocalzationManager::locString(job_type_string[i]).c_str());
-			int remain_num_ = 23-strlen(tempchar);
-			temp += tempchar;
-			if(i%2 ==0)
-			{
-				for(int j=0;j<remain_num_;j++)
-					temp += " ";
+			char hotkey_ = 'a' + i;
+			ostringstream ss;
+			ss << hotkey_ << " - " << LocalzationManager::locString(job_type_string[i]);
+			
+			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
+
+			if(i%2 == 1  || i == JOB_MAX-1) {
+				temp->push_back(menu_string("", true, CL_normal));
 			}
-			if(i%2 == 1 || i == JOB_MAX-1)
-			{
-				temp += "\n";
+			else if(23 - PrintCharWidth(ss.str()) > 0) {
+				temp->push_back(menu_string(string(23 - PrintCharWidth(ss.str()), ' '), false, CL_normal));
+			} else {
+				temp->push_back(menu_string(" ", false, CL_normal));
 			}
 		}
-		temp += "\n\n\n";
-		m_mgr.menu_puls(4,temp);
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		m_mgr.menu_puls(4,std::move(temp));
 
 
 
@@ -636,20 +662,23 @@ void start_mainmenu()
 
 		for (int i = 0; i < 21; i++) {
 			char hotkey_ = 'a' + i;
-			temp = LocalzationManager::locString(joblist[i][0]);
-			temp += ": ";
-			temp += LocalzationManager::locString(joblist[i][1]);
-			temp += "\n\n\n";
-			temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-			temp += "\n";
-			m_mgr.menu_input_puls(4,hotkey_,5,temp,true,select_job,i);
+			tempstr = LocalzationManager::locString(joblist[i][0]);
+			tempstr += ": ";
+			tempstr += LocalzationManager::locString(joblist[i][1]);
+			tempstr += "\n\n\n";
+			tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+			tempstr += "\n";
+			m_mgr.menu_input_puls(4,hotkey_,5,tempstr,true,select_job,i);
 
 		}
 		m_mgr.menu_input_puls(4,VK_ESCAPE,3,"",false,NULL,0);
 
 
-		temp = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT);
-		temp += "\n\n\n\n";
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT), true, CL_help));
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
 
 		LOCALIZATION_ENUM_KEY fariylist[3][3] = {
 			{LOC_SYSTEM_TRIBE_FAIRY,LOC_SYSTEM_JOB_WIZARD,LOC_SYSTEM_PLAYER_SUNNY},
@@ -664,68 +693,69 @@ void start_mainmenu()
 			ss << hotkey_ << " - " << LocalzationManager::locString(fariylist[i][0]);
 			ss << " " << LocalzationManager::locString(fariylist[i][1]);
 			ss << " " << LocalzationManager::locString(fariylist[i][2]);
-			ss << "\n\n";
-			temp += ss.str();
+			temp->push_back(ss.str(), true, CL_normal, hotkey_));
+			temp->push_back("", true, CL_normal));
 		}
 
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
+		temp->push_back("", true, CL_normal));
+		m_mgr.menu_puls(5, std::move(temp));
 
-		temp += "\n\n\n";
-		m_mgr.menu_puls(5, temp);
 
 
 
-
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SUNNY);
-		temp += ": ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1);
-		temp += "\n\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(5,'a',6,temp,true,select_fairy,0);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_STAR);
-		temp += ": ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1);
-		temp += "\n\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(5,'b',6,temp,true, select_fairy,1);
-		temp = LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
-		temp += ": ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1);
-		temp += "\n\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3);
-		temp += "\n\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
-		temp += "\n ";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
-		temp += "\n\n\n";
-		temp += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
-		temp += "\n";
-		m_mgr.menu_input_puls(5, 'c', 6, temp, true, select_fairy, 2);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SUNNY);
+		tempstr += ": ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1);
+		tempstr += "\n\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(5,'a',6,tempstr,true,select_fairy,0);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_STAR);
+		tempstr += ": ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1);
+		tempstr += "\n\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(5,'b',6,tempstr,true, select_fairy,1);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
+		tempstr += ": ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1);
+		tempstr += "\n\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(5, 'c', 6, tempstr, true, select_fairy, 2);
 		m_mgr.menu_input_puls(5,VK_ESCAPE,2,"",false,NULL,0);
 
 

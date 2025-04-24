@@ -17,6 +17,8 @@
 #include "beam.h"
 #include "mon_infor.h"
 #include "monster_texture.h"
+#include "tribe.h"
+#include "dump.h"
 #include "Astar.h"
 #include "rect.h"
 #include "potion.h"
@@ -1231,7 +1233,8 @@ void Close_door()
 		
 		while(door_num>1)
 		{
-			switch(waitkeyinput())
+			InputedKey inputedKey;
+			switch(waitkeyinput(inputedKey))
 			{
 			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
@@ -1335,7 +1338,8 @@ void Open_door()
 		
 		while(door_num>1)
 		{
-			switch(waitkeyinput())
+			InputedKey inputedKey;
+			switch(waitkeyinput(inputedKey))
 			{
 			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
@@ -2214,8 +2218,15 @@ void stat_view()
 	changedisplay(DT_STATE);
 	while(1)
 	{
-		waitkeyinput(true);
-		break;
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
+		if(key_ == -1) {
+			if (inputedKey.isLeftClick() || inputedKey.isRightClick()) {
+				break;
+			}
+		} else {
+			break;
+		}
 	}
 	changedisplay(DT_GAME);
 }
@@ -2323,8 +2334,8 @@ void Iden_Show()
 	changedisplay(DT_IDEN);
 	while(1)
 	{
-		
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
 		int offseta_ = max(((DisplayManager.move + 1000) / 2000),0)*52;
 		int offsetb_ = max((DisplayManager.move / 2000), 0) * 52;
 		if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
@@ -2350,7 +2361,16 @@ void Iden_Show()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----이동키끝-------
+		}	//-----이동키끝-------
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if (inputedKey.isRightClick()) {
+				break;
+			}
+		}
 		else
 			break;
 
@@ -3332,53 +3352,54 @@ void More_Item_Action()
 	selectionList.push_back(VK_ESCAPE);
 	bool loop_ = true;
 	startSelection(selectionList);
-	while(loop_) {		
-		int key_ = waitkeyinput(true);
+	while(loop_) {
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
 		switch(key_)
 		{
 		case 'i':
 			endSelection();
-			enterlog();
+			deletelog();
 			iteminfor();
 			return;
 		case 'd':
 			endSelection();
-			enterlog();
+			deletelog();
 			iteminfor_discard();
 			return;
 		case 'e':
 			endSelection();
-			enterlog();
+			deletelog();
 			Eatting(0);
 			return;
 		case 'r':
 			endSelection();
-			enterlog();
+			deletelog();
 			Reading(0);
 			return;
 		case 'q':
 			endSelection();
-			enterlog();
+			deletelog();
 			Drinking(0);
 			return;
 		case 'F':
 			endSelection();
-			enterlog();
+			deletelog();
 			Select_Throw();
 			return;
 		case 'V':
 			endSelection();
-			enterlog();
+			deletelog();
 			Spelllcard_Evoke(0);
 			return;
 		case 'w':
 			endSelection();
-			enterlog();
+			deletelog();
 			Equip_Weapon();
 			return;
 		case '-':
 			endSelection();
-			enterlog();
+			deletelog();
 			if(!you.unequip(ET_WEAPON))
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
@@ -3386,38 +3407,47 @@ void More_Item_Action()
 			return;
 		case 'W':
 			endSelection();
-			enterlog();
+			deletelog();
 			Equip_Armor();
 			return;
 		case 'T':
 			endSelection();
-			enterlog();
+			deletelog();
 			Unequip_Armor();
 			return;
 		case 'P':
 			endSelection();
-			enterlog();
+			deletelog();
 			Equip_Jewelry();
 			return;
 		case 'R':
 			endSelection();
-			enterlog();
+			deletelog();
 			Unequip_Jewelry();
 			return;
+		case -1:
+			{
+				if(inputedKey.isRightClick()) {
+					//breakthrough
+				} else {
+					break;
+				}
+			}
 		case VK_ESCAPE:
 			loop_ = false;
 			break;
 		default:
 			break;
+		}
 	}
 	endSelection();
-	enterlog();
+	deletelog();
 }
 
 
 void More_Information_List()
 {
-	const int max_command = 8;
+	const int max_command = 9;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
 		make_pair(make_pair('%','%'),LOC_SYSTEM_INFORMATION_CHARACTER),
@@ -3425,6 +3455,7 @@ void More_Information_List()
 		make_pair(make_pair('\\','\\'),LOC_SYSTEM_INFORMATION_INDENTIFY),
 		make_pair(make_pair('A','A'),LOC_SYSTEM_INFORMATION_PROPERTY),
 		make_pair(make_pair('I','I'),LOC_SYSTEM_INFORMATION_SPELL),
+		make_pair(make_pair('M','M'),LOC_SYSTEM_INFORMATION_LEARN_SPELL),
 		make_pair(make_pair(']',']'),LOC_SYSTEM_INFORMATION_RUNE),
 		make_pair(make_pair('O','O'),LOC_SYSTEM_INFORMATION_DUNGEON),
 		make_pair(make_pair('#','#'),LOC_SYSTEM_INFORMATION_DUMP)
@@ -3435,6 +3466,8 @@ void More_Information_List()
 	
 	bool first_ = true;
 	for(int i = 0; i < max_command; i++) {
+		if(!isNormalGame() && command_list[i].second == LOC_SYSTEM_INFORMATION_DUNGEON)
+			continue;
 		if(!first_)
 			printlog(" ",false,false,true,CL_normal);
 		ostringstream ss;
@@ -3447,62 +3480,75 @@ void More_Information_List()
 	bool loop_ = true;
 	startSelection(selectionList);
 	while(loop_) {		
-		int key_ = waitkeyinput(true);
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
 		switch(key_)
 		{
 		case '%':
 			endSelection();
-			enterlog();
+			deletelog();
 			stat_view();
 			return;
 		case '^':
 			endSelection();
-			enterlog();
+			deletelog();
 			God_show();
 			return;
 		case '\\':
 			endSelection();
-			enterlog();
+			deletelog();
 			Iden_Show();
 			return;
 		case 'A':
 			endSelection();
-			enterlog();
+			deletelog();
 			PropertyView();
 			return;
 		case 'I':
 			endSelection();
-			enterlog();
+			deletelog();
 			SpellView();
+			return;
+		case 'M':
+			endSelection();
+			deletelog();
+			run_spell();
 			return;
 		case ']':
 			endSelection();
-			enterlog();
+			deletelog();
 			rune_Show();
 			return;
 		case 'O':
 			endSelection();
-			enterlog();
-			Open_door();
+			deletelog();
+			if(isNormalGame())
+				dungeonView();
 			return;
 		case '#':
 			endSelection();
-			enterlog();
+			deletelog();
 			if(Dump(0,NULL))
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DUMP_SUCCESS),true,false,false,CL_normal);
 			return;
+		case -1:
+			{
+				if(inputedKey.isRightClick()) {
+					//breakthrough
+				} else {
+					break;
+				}
+			}
 		case VK_ESCAPE:
 			loop_ = false;
 			break;
 		default:
 			break;
+		}
 	}
 	endSelection();
-	enterlog();
+	deletelog();
 }
-
-
-
 
 
 
@@ -3598,28 +3644,33 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		if(!you.CanMemorizeSpell(it->second)) {
 			spell_color_ = CL_bad;
 		}
+		ostringstream oss;
 
-		cur_ = printsub_blank(0, offset[0]);
-		cur_ += printsub_utf8witdh(std::string(1, sp_char),false,spell_color_);
-		cur_ = printsub_blank(cur_, offset[1]);
-		cur_ += printsub_utf8witdh("- " + SpellString((spell_list)it->second),false,spell_color_);
-		cur_ = printsub_blank(cur_, offset[2]);
+		add_stringblank(oss, offset[0]);
+		oss << std::string(1, sp_char);
+		add_stringblank(oss, offset[1]);
+		oss << "- " << SpellString((spell_list)it->second);
+		add_stringblank(oss, offset[2]);
 		for(int j=0;j<3 && SpellSchool((spell_list)it->second,j) != SKT_ERROR;j++)
 		{
 			if(j)
 			{
-				cur_ += printsub_utf8witdh("/",false,spell_color_);
+				oss << "/";
 			}
-			cur_ += printsub_utf8witdh(skill_string(SpellSchool((spell_list)it->second,j)),false,spell_color_);
+			oss << skill_string(SpellSchool((spell_list)it->second,j));
 		}
-		cur_ = printsub_blank(cur_, offset[3]);
+		add_stringblank(oss, offset[3]);
 		{
-			std::ostringstream oss;
 			oss << std::setw(3) << it->first << '%';
-			cur_ += printsub_utf8witdh(oss.str(),false,spell_color_);
 		}
-		cur_ = printsub_blank(cur_, offset[4]);
-		printsub(to_string(SpellLevel((spell_list)it->second)),true,spell_color_);
+		add_stringblank(oss, offset[4]);
+		oss << to_string(SpellLevel((spell_list)it->second));
+		printsub(oss.str(),true,spell_color_, sp_char);
+
+
+
+
+
 		if(sp_char=='z')
 			sp_char = 'A';
 		else if(sp_char=='Z')
@@ -3672,7 +3723,33 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			changemove(-DisplayManager.log_length);
 		}
 		else if( key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {				
+				int num = asctonum(inputedKey.val1);
+				int spell_ = SPL_NONE;
+				for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+				{
+					if(!(num--))
+					{
+						spell_ = it->second;
+						break;
+					}
+				}
+				if(spell_ != SPL_NONE)
+				{
+					WaitForSingleObject(mutx, INFINITE);					
+					int get_item_move_ = getDisplayMove();
+					SetText() = GetSpellInfor((spell_list)spell_);
+					ReleaseMutex(mutx);
+					changedisplay(DT_TEXT);
+					waitkeyinput();
+					changedisplay(DT_SUB_TEXT);
+					setDisplayMove(get_item_move_);
+				}
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //위
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1); //아래
+			} else if(inputedKey.isRightClick()) {
 				break;
 			}
 		}
@@ -3683,7 +3760,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 	}
 	changedisplay(DT_GAME);
 	deletesub();
-}	
+}
 void shout(char auto_)
 {	
 	if(env[current_level].isSilence(you.position))

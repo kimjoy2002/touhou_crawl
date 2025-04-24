@@ -3967,8 +3967,15 @@ void God_show()
 	ReleaseMutex(mutx);
 	while(1)
 	{
-		waitkeyinput(true);
-		break;
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
+		if(key_ == -1) {
+			if (inputedKey.isLeftClick() || inputedKey.isRightClick()) {
+				break;
+			}
+		} else {
+			break;
+		}
 	}
 	changedisplay(DT_GAME);
 	SetDisplayTexture(NULL);

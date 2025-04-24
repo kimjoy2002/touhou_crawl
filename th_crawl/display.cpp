@@ -429,7 +429,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
 				
-				if(isClicked(LEFT_CLICK)) {						
+				if(isClicked(LEFT_CLICK)) {
 					MSG msg;
 					msg.message = WM_CHAR;
 					msg.wParam = convertClickable(sp_char);
@@ -457,7 +457,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	bool first_ = false;
 	for (int i = IDEN_CHECK_START; i < IDEN_CHECK_END; i++) {
-		RECT rc2={ two_, rc.top,  rc.right,  rc.bottom};
+		RECT rc2={ 0, 0, 0,0};
 		char index = 'a', current;
 		D3DCOLOR font_color_ = iden_list.autopickup[i]?CL_normal:CL_bad;
 		for (current = num; current >= 26; current -= 26) {
@@ -498,6 +498,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -532,6 +533,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -565,6 +567,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(ring_iden_string[cur_], PlaceHolderHelper(""));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -599,6 +602,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(amulet_iden_string[cur_]);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -631,6 +635,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << SpellcardName((spellcard_evoke_type)cur_) << LocalzationManager::locString(LOC_SYSTEM_SPELLCARD);
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -670,6 +675,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+				rc2.bottom = rc2.top + fontDesc.Height;
 				rc.top += 2*fontDesc.Height;
 				num++;
 			}
@@ -712,22 +718,24 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+			rc2.bottom = rc2.top + fontDesc.Height;
 			rc.top += 2 * fontDesc.Height;
 			num++;
 
 		}
 		
 		
-			
-		if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
-			MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
-			DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
-			
-			if(isClicked(LEFT_CLICK)) {						
-				MSG msg;
-				msg.message = WM_CHAR;
-				msg.wParam = convertClickable(index);
-				g_keyQueue->push(InputedKey(msg));
+		if(rc2.left != 0) {
+			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+				
+				if(isClicked(LEFT_CLICK)) {						
+					MSG msg;
+					msg.message = WM_CHAR;
+					msg.wParam = convertClickable(index);
+					g_keyQueue->push(InputedKey(msg));
+				}
 			}
 		}
 	}
@@ -759,7 +767,7 @@ void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
-		RECT rc2={rc.left, rc.top,  rc.right,  rc.bottom};
+		RECT rc2={rc.left, rc.top,  rc.right, (LONG)(rc.top+fontDesc.Height)};
 		stringstream ss;
 		char sp_char = (i<26)?('a'+i):('A'+i-26);
 		ss << sp_char << " - " << it->GetInfor();

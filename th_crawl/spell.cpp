@@ -2013,11 +2013,22 @@ void SpellUse(char auto_, int auto_direc_)
 					use_ = true;
 				}
 			}
-			else if(key_ == -1) {
-				if(inputedKey.isRightClick()) {
-					break;
+			else if(key_ == -1) {				
+				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+					if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
+					{
+						WaitForSingleObject(mutx, INFINITE);
+						SetText() = GetSpellInfor((spell_list)spell__);
+						ReleaseMutex(mutx);
+						changedisplay(DT_TEXT);
+						waitkeyinput();
+
+						view_spell(use_?LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL:LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL);
+					}
+				}  else if(inputedKey.isRightClick()) {
+						break;
+					}
 				}
-			}
 			else if(key_ == VK_ESCAPE)
 				break;
 		}
@@ -2057,7 +2068,17 @@ void SpellView()
 				}
 			}
 			else if(key_ == -1) {
-				if(inputedKey.isRightClick()) {
+				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+					if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
+					{
+						WaitForSingleObject(mutx, INFINITE);
+						SetText() = GetSpellInfor((spell_list)spell__);
+						ReleaseMutex(mutx);
+						changedisplay(DT_TEXT);
+						waitkeyinput();
+						view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE);
+					}
+				}  else if(inputedKey.isRightClick()) {
 					break;
 				}
 			}

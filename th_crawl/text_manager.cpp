@@ -185,6 +185,16 @@ int printsub_blank(int final_index, int next_index)
 	return next_index;
 }
 
+
+void add_stringblank(ostringstream& oss, int next_index)
+{
+	int size = PrintCharWidth(oss.str());
+	int remain = next_index - size;
+	for(int i=0;i<remain;i++)
+		oss << " ";
+}
+
+
 int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_)
 {
 	printsub(text_, enter_, color_);

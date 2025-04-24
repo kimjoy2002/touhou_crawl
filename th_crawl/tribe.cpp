@@ -935,7 +935,7 @@ void PropertyView()
 				break;
 		}
 		else if(key_ == -1) {
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.isLeftClick() || inputedKey.isRightClick()) {
 				break;
 			}
 		}

@@ -705,6 +705,8 @@ LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_SOME,There are some items here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_MANY,There are several items here. (Press ',' to pick up)
+LOC_SYSTEM_ASK_DOOR,어느 쪽 문을 여닫을거지?
+LOC_SYSTEM_DOOR_NONE,근처에 여닫을만한 것이 없다.
 LOC_SYSTEM_ASK_CLOSE_DOOR,Which door do you want to close?
 LOC_SYSTEM_CLOSE_DOOR,You closed the door.
 LOC_SYSTEM_CLOSE_DOOR_FAIL,Something is blocking you from closing it.

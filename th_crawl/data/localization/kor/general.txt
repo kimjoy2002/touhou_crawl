@@ -706,6 +706,8 @@ LOC_SYSTEM_ON_THE_ITEM_SINGLE,여기엔 {0:이|가} 있다. (,키로 줍기)
 LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,여기엔 {0:이|가} 있다. (,키로 줍기)
 LOC_SYSTEM_ON_THE_ITEM_SOME,여기엔 다음과 같은 물건이 있다. (,키로 줍기)
 LOC_SYSTEM_ON_THE_ITEM_MANY,여기엔 여러개의 물건이 있다. (,키로 줍기)
+LOC_SYSTEM_ASK_DOOR,어느 쪽 문을 여닫을거지?
+LOC_SYSTEM_DOOR_NONE,근처에 여닫을만한 것이 없다.
 LOC_SYSTEM_ASK_CLOSE_DOOR,어느 쪽 문을 닫을꺼지?
 LOC_SYSTEM_CLOSE_DOOR,문을 닫았다.
 LOC_SYSTEM_CLOSE_DOOR_FAIL,무엇인가가 닫을려는데 방해되고 있다.

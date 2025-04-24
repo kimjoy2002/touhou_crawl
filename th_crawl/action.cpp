@@ -1098,8 +1098,116 @@ void escape() //행동들을 취소함
 
 void Open_Close_door()
 {
-	//TODO)IMPLEMENT
-	Close_door();
+	int door_num= 0;
+	coord_def temp;
+	rect_iterator it(you.position,1,1);
+	for(;!it.end();it++)
+	{
+		if((*it) == you.position)
+			continue;
+		if(env[current_level].isOpenDoor((*it).x,(*it).y) || env[current_level].isCloseDoor((*it).x,(*it).y))
+		{
+			temp = (*it);
+			door_num++;
+		}
+	}
+	if(door_num>1)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_DOOR),true,false,false,CL_help);
+		
+		while(door_num>1)
+		{
+			InputedKey inputedKey;
+			switch(waitkeyinput(inputedKey))
+			{
+			case 'k':
+				temp = coord_def(you.position.x,you.position.y-1);
+				door_num = 1;
+				break;
+			case 'j':
+				temp = coord_def(you.position.x,you.position.y+1);
+				door_num = 1;
+				break;
+			case 'h':
+				temp = coord_def(you.position.x-1,you.position.y);
+				door_num = 1;
+				break;
+			case 'l':
+				temp = coord_def(you.position.x+1,you.position.y);
+				door_num = 1;
+				break;
+			case 'y':
+				temp = coord_def(you.position.x-1,you.position.y-1);
+				door_num = 1;
+				break;
+			case 'u':
+				temp = coord_def(you.position.x+1,you.position.y-1);
+				door_num = 1;
+				break;
+			case 'b':
+				temp = coord_def(you.position.x-1,you.position.y+1);
+				door_num = 1;
+				break;
+			case 'n':
+				temp = coord_def(you.position.x+1,you.position.y+1);
+				door_num = 1;
+				break;
+			case VK_ESCAPE:
+			case -1:
+				{
+					if(inputedKey.mouse == MKIND_MAP) {
+						coord_def target_pos(inputedKey.val1, inputedKey.val2);
+						int target_abs_ = (target_pos - you.position).abs();
+						if(target_abs_ > 0 && target_abs_ <= 2) {							
+							temp = target_pos;
+							door_num = 1;
+						}
+					} else if (inputedKey.isRightClick()) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_normal);
+						return;
+					}
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	if(door_num==1 && env[current_level].isCloseDoor(temp.x,temp.y))
+	{
+		int close_= 0;
+		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
+		{				
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
+			you.time_delay += you.GetNormalDelay();
+			you.TurnEnd();
+		}
+		else if(close_ == -1)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR_FAIL),true,false,false,CL_normal);
+		}
+		else
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR_EMPTY),true,false,false,CL_normal);
+		}
+		you.SetPrevAction('C');
+	}
+	if(door_num==1 && env[current_level].isOpenDoor(temp.x,temp.y))
+	{
+		int result = you.OpenDoor(temp, false);
+		if(result == 0)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR_EMPTY),true,false,false,CL_normal);
+		}		
+		else if(result > 0)
+			you.TurnEnd();
+		you.SetPrevAction('O');
+	}
+	else
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DOOR_NONE),true,false,false,CL_normal);
+	}
 }
 
 void Close_door()
@@ -1156,6 +1264,24 @@ void Close_door()
 			case 'n':
 				temp = coord_def(you.position.x+1,you.position.y+1);
 				door_num = 1;
+				break;
+			case VK_ESCAPE:
+			case -1:
+				{
+					if(inputedKey.mouse == MKIND_MAP) {
+						coord_def target_pos(inputedKey.val1, inputedKey.val2);
+						int target_abs_ = (target_pos - you.position).abs();
+						if(target_abs_ > 0 && target_abs_ <= 2) {							
+							temp = target_pos;
+							door_num = 1;
+						}
+					} else if (inputedKey.isRightClick()) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_normal);
+						return;
+					}
+				}
+				break;
+			default:
 				break;
 			}
 		}
@@ -1242,6 +1368,24 @@ void Open_door()
 			case 'n':
 				temp = coord_def(you.position.x+1,you.position.y+1);
 				door_num = 1;
+				break;
+			case VK_ESCAPE:
+			case -1:
+				{
+					if(inputedKey.mouse == MKIND_MAP) {
+						coord_def target_pos(inputedKey.val1, inputedKey.val2);
+						int target_abs_ = (target_pos - you.position).abs();
+						if(target_abs_ > 0 && target_abs_ <= 2) {							
+							temp = target_pos;
+							door_num = 1;
+						}
+					} else if (inputedKey.isRightClick()) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_normal);
+						return;
+					}
+				}
+				break;
+			default:
 				break;
 			}
 		}

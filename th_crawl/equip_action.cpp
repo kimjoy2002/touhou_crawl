@@ -69,7 +69,6 @@ void Equip_Weapon()
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 		else if(key_ == '-')
 		{
-			
 			if(!you.unequip(ET_WEAPON))
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);

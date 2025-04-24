@@ -1413,6 +1413,10 @@ textures img_command_Y(&texture_item03, 80, 255);
 textures img_command_N(&texture_item03, 84, 255);
 textures img_command_empty(&texture_item03, 83, 255);
 textures img_command_X(&texture_item03, 81, 255);
+textures img_command_door(&texture_item03, 78, 255);
+textures img_command_pray(&texture_item03, 78, 255);
+textures img_command_more_item(&texture_item03, 78, 255);
+textures img_command_more_view(&texture_item03, 78, 255);
 
 
 textures img_command_alphabet_small[26] = {

@@ -731,20 +731,32 @@ void MainLoop()
 						case SYSCMD_MAGIC:
 							SpellUse(0, 0);
 							break;
-						case SYSCMD_SKILL:						
+						case SYSCMD_SKILL:
 							SkillUse(0);
 							break;
 						case SYSCMD_SHOUT:
 							shout(0);
 							break;
-						case SYSCMD_SKILL_VIEW:
-							skill_view();
+						case SYSCMD_DOOR_OPENCLOSE:
+							Open_Close_door();
+							break;
+						case SYSCMD_PRAY:
+							Pray();
+							break;
+						case SYSCMD_MORE_ITEM:
+							More_Item_Action();
 							break;
 						case SYSCMD_AUTOPICKUP:
 							auto_pick_onoff(false);
 							break;
 						case SYSCMD_AUTOTANMAC:
 							auto_tanmac_onoff();
+							break;
+						case SYSCMD_SKILL_VIEW:
+							skill_view();
+							break;
+						case SYSCMD_MORE_VIEW:
+							More_Information_List();
 							break;
 						case SYSCMD_HELP:
 							Help_Show();

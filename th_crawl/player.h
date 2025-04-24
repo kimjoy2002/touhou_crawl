@@ -638,6 +638,7 @@ void Equip_Armor(); //방어구장착
 void Unequip_Armor(); //방어구해제
 void Equip_Jewelry(); //장신구장착
 void Unequip_Jewelry();
+void Open_Close_door();
 void Close_door();
 void Open_door();
 void Stair_move(bool down);
@@ -654,6 +655,8 @@ void Simple_State_Show();
 void Experience_Show();
 //bool Eat_Power();
 void dungeonView();
+void More_Item_Action();
+void More_Information_List();
 void run_spell();
 void shout(char auto_);
 void auto_pick_onoff(bool auto_);

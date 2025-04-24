@@ -26,9 +26,9 @@ void Help_Show()
 	WaitForSingleObject(mutx, INFINITE);
 	printsub("<" + LocalzationManager::locString(LOC_SYSTEM_TOUHOUCRAWL_HELP) + ">",true,CL_normal);
 	printsub("",true,CL_normal);
-	printsub("?. " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST),true,CL_normal);
-	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal);
-	printsub("0. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_CREDIT),true,CL_normal);
+	printsub("?. " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST),true,CL_normal, '?');
+	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal. ':');
+	printsub("0. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_CREDIT),true,CL_normal, '0');
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);
 	while(loop_)
@@ -66,7 +66,11 @@ void Help_Show()
 					changemove(-DisplayManager.log_length);
 					continue;
 				case -1:
-					if(inputedKey.isRightClick()) {
+					if(inputedKey.mouse == MKIND_SCROLL_UP) {
+						changemove(1);  //아래
+					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+						changemove(-1);  //위
+					} else if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -131,7 +135,11 @@ void Help_Show()
 						changemove(-DisplayManager.log_length);
 						continue;						
 					case -1:
-						if(inputedKey.isRightClick()) {
+						if(inputedKey.mouse == MKIND_SCROLL_UP) {
+							changemove(1);  //아래
+						} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+							changemove(-1);  //위
+						} else if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
 						else {
@@ -175,7 +183,11 @@ void Help_Show()
 					changemove(-DisplayManager.log_length);
 					continue;
 				case -1:
-					if(inputedKey.isRightClick()) {
+					if(inputedKey.mouse == MKIND_SCROLL_UP) {
+						changemove(1);  //아래
+					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+						changemove(-1);  //위
+					} else if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {

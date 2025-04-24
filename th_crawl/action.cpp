@@ -1096,6 +1096,11 @@ void escape() //행동들을 취소함
 	}
 }
 
+void Open_Close_door()
+{
+	//TODO)IMPLEMENT
+	Close_door();
+}
 
 void Close_door()
 {
@@ -3144,6 +3149,216 @@ void dungeonView()
 	deletesub();
 
 }
+
+
+void More_Item_Action()
+{
+	const int max_command = 13;
+	vector<int> selectionList;
+	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
+		make_pair(make_pair('i','i'),LOC_SYSTEM_INVENTORY),
+		make_pair(make_pair('d','d'),LOC_SYSTEM_DISCARD),
+		make_pair(make_pair('e','e'),LOC_SYSTEM_EAT),
+		make_pair(make_pair('r','r'),LOC_SYSTEM_READ),
+		make_pair(make_pair('q','q'),LOC_SYSTEM_DRINK),
+		make_pair(make_pair('F','F'),LOC_SYSTEM_THROW),
+		make_pair(make_pair('V','V'),LOC_SYSTEM_EVOKE),		
+		make_pair(make_pair('w','w'),LOC_SYSTEM_EQUIP_WEAPON),
+		make_pair(make_pair('-','-'),LOC_SYSTEM_UNEQUIP_WEAPON),
+		make_pair(make_pair('W','W'),LOC_SYSTEM_EQUIP_ARMOUR),
+		make_pair(make_pair('T','T'),LOC_SYSTEM_UNEQUIP_ARMOUR),
+		make_pair(make_pair('P','P'),LOC_SYSTEM_EQUIP_JEWELRY),
+		make_pair(make_pair('R','R'),LOC_SYSTEM_UNEQUIP_JEWELRY)
+	};
+	
+	enterlog();
+	printlog("<<<" + LocalzationManager::locString(LOC_SYSTEM_ITEM_COMMAND) + ">>>",true,false,true,CL_help);
+	
+	bool first_ = true;
+	for(int i = 0; i < max_command; i++) {
+		if(!first_)
+			printlog(" ",false,false,true,CL_normal);
+		ostringstream ss;
+		ss << command_list[i].first.second << "-" <<  LocalzationManager::locString(command_list[i].second);
+		printlog(ss.str(),false,false,true,CL_normal,command_list[i].first.second);
+		first_ = false;
+		selectionList.push_back(command_list[i].first.first);
+	}
+	
+	selectionList.push_back(VK_ESCAPE);
+	bool loop_ = true;
+	startSelection(selectionList);
+	while(loop_) {		
+		int key_ = waitkeyinput(true);
+		switch(key_)
+		{
+		case 'i':
+			endSelection();
+			enterlog();
+			iteminfor();
+			return;
+		case 'd':
+			endSelection();
+			enterlog();
+			iteminfor_discard();
+			return;
+		case 'e':
+			endSelection();
+			enterlog();
+			Eatting(0);
+			return;
+		case 'r':
+			endSelection();
+			enterlog();
+			Reading(0);
+			return;
+		case 'q':
+			endSelection();
+			enterlog();
+			Drinking(0);
+			return;
+		case 'F':
+			endSelection();
+			enterlog();
+			Select_Throw();
+			return;
+		case 'V':
+			endSelection();
+			enterlog();
+			Spelllcard_Evoke(0);
+			return;
+		case 'w':
+			endSelection();
+			enterlog();
+			Equip_Weapon();
+			return;
+		case '-':
+			endSelection();
+			enterlog();
+			if(!you.unequip(ET_WEAPON))
+			{				
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
+			}
+			return;
+		case 'W':
+			endSelection();
+			enterlog();
+			Equip_Armor();
+			return;
+		case 'T':
+			endSelection();
+			enterlog();
+			Unequip_Armor();
+			return;
+		case 'P':
+			endSelection();
+			enterlog();
+			Equip_Jewelry();
+			return;
+		case 'R':
+			endSelection();
+			enterlog();
+			Unequip_Jewelry();
+			return;
+		case VK_ESCAPE:
+			loop_ = false;
+			break;
+		default:
+			break;
+	}
+	endSelection();
+	enterlog();
+}
+
+
+void More_Information_List()
+{
+	const int max_command = 8;
+	vector<int> selectionList;
+	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
+		make_pair(make_pair('%','%'),LOC_SYSTEM_INFORMATION_CHARACTER),
+		make_pair(make_pair('^','^'),LOC_SYSTEM_INFORMATION_FAITH),
+		make_pair(make_pair('\\','\\'),LOC_SYSTEM_INFORMATION_INDENTIFY),
+		make_pair(make_pair('A','A'),LOC_SYSTEM_INFORMATION_PROPERTY),
+		make_pair(make_pair('I','I'),LOC_SYSTEM_INFORMATION_SPELL),
+		make_pair(make_pair(']',']'),LOC_SYSTEM_INFORMATION_RUNE),
+		make_pair(make_pair('O','O'),LOC_SYSTEM_INFORMATION_DUNGEON),
+		make_pair(make_pair('#','#'),LOC_SYSTEM_INFORMATION_DUMP)
+	};
+	
+	enterlog();
+	printlog("<<<" + LocalzationManager::locString(LOC_SYSTEM_INFORMATION_COMMAND) + ">>>",true,false,true,CL_help);
+	
+	bool first_ = true;
+	for(int i = 0; i < max_command; i++) {
+		if(!first_)
+			printlog(" ",false,false,true,CL_normal);
+		ostringstream ss;
+		ss << command_list[i].first.second << "-" <<  LocalzationManager::locString(command_list[i].second);
+		printlog(ss.str(),false,false,true,CL_normal,command_list[i].first.second);
+		first_ = false;
+		selectionList.push_back(command_list[i].first.first);
+	}
+	selectionList.push_back(VK_ESCAPE);
+	bool loop_ = true;
+	startSelection(selectionList);
+	while(loop_) {		
+		int key_ = waitkeyinput(true);
+		switch(key_)
+		{
+		case '%':
+			endSelection();
+			enterlog();
+			stat_view();
+			return;
+		case '^':
+			endSelection();
+			enterlog();
+			God_show();
+			return;
+		case '\\':
+			endSelection();
+			enterlog();
+			Iden_Show();
+			return;
+		case 'A':
+			endSelection();
+			enterlog();
+			PropertyView();
+			return;
+		case 'I':
+			endSelection();
+			enterlog();
+			SpellView();
+			return;
+		case ']':
+			endSelection();
+			enterlog();
+			rune_Show();
+			return;
+		case 'O':
+			endSelection();
+			enterlog();
+			Open_door();
+			return;
+		case '#':
+			endSelection();
+			enterlog();
+			if(Dump(0,NULL))
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DUMP_SUCCESS),true,false,false,CL_normal);
+			return;
+		case VK_ESCAPE:
+			loop_ = false;
+			break;
+		default:
+			break;
+	}
+	endSelection();
+	enterlog();
+}
+
+
+
 
 
 

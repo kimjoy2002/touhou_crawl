@@ -472,6 +472,10 @@ extern textures img_command_Y;
 extern textures img_command_N;
 extern textures img_command_empty;
 extern textures img_command_X;
+extern textures img_command_door;
+extern textures img_command_pray;
+extern textures img_command_more_item;
+extern textures img_command_more_view;
 
 extern textures img_command_alphabet_small[26];
 extern textures img_command_alphabet_large[26];

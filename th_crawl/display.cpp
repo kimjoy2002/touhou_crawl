@@ -2757,9 +2757,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
 							case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
 							case SYSCMD_SHOUT: pixel_ = &img_command_shout; break;
-							case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
+							case SYSCMD_DOOR_OPENCLOSE: pixel_ = &img_command_door; break;
+							case SYSCMD_PRAY: pixel_ = &img_command_pray; break;
+							case SYSCMD_MORE_ITEM: pixel_ = &img_command_more_item; break;
 							case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
 							case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
+							case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
+							case SYSCMD_MORE_VIEW: pixel_ = &img_command_more_view; break;
 							case SYSCMD_HELP: pixel_ = &img_command_help; break;
 							case SYSCMD_QUIT: pixel_ = &img_command_quit; break;
 							default: break;

@@ -1176,7 +1176,7 @@ void Open_Close_door()
 		}
 	}
 	
-	if(door_num==1 && env[current_level].isCloseDoor(temp.x,temp.y))
+	if(door_num==1 && env[current_level].isOpenDoor(temp.x,temp.y))
 	{
 		int close_= 0;
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
@@ -1195,7 +1195,7 @@ void Open_Close_door()
 		}
 		you.SetPrevAction('C');
 	}
-	if(door_num==1 && env[current_level].isOpenDoor(temp.x,temp.y))
+	else if(door_num==1 && env[current_level].isCloseDoor(temp.x,temp.y))
 	{
 		int result = you.OpenDoor(temp, false);
 		if(result == 0)
@@ -3320,19 +3320,19 @@ void More_Item_Action()
 	const int max_command = 13;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
-		make_pair(make_pair('i','i'),LOC_SYSTEM_INVENTORY),
-		make_pair(make_pair('d','d'),LOC_SYSTEM_DISCARD),
-		make_pair(make_pair('e','e'),LOC_SYSTEM_EAT),
-		make_pair(make_pair('r','r'),LOC_SYSTEM_READ),
-		make_pair(make_pair('q','q'),LOC_SYSTEM_DRINK),
-		make_pair(make_pair('F','F'),LOC_SYSTEM_THROW),
-		make_pair(make_pair('V','V'),LOC_SYSTEM_EVOKE),		
-		make_pair(make_pair('w','w'),LOC_SYSTEM_EQUIP_WEAPON),
-		make_pair(make_pair('-','-'),LOC_SYSTEM_UNEQUIP_WEAPON),
-		make_pair(make_pair('W','W'),LOC_SYSTEM_EQUIP_ARMOUR),
-		make_pair(make_pair('T','T'),LOC_SYSTEM_UNEQUIP_ARMOUR),
-		make_pair(make_pair('P','P'),LOC_SYSTEM_EQUIP_JEWELRY),
-		make_pair(make_pair('R','R'),LOC_SYSTEM_UNEQUIP_JEWELRY)
+		make_pair(make_pair(SPECIAL_CLINKABLE_INVENTORY,'i'),LOC_SYSTEM_INVENTORY),
+		make_pair(make_pair(SPECIAL_CLINKABLE_DISCARD,'d'),LOC_SYSTEM_DISCARD),
+		make_pair(make_pair(SPECIAL_CLINKABLE_EAT,'e'),LOC_SYSTEM_EAT),
+		make_pair(make_pair(SPECIAL_CLINKABLE_READ,'r'),LOC_SYSTEM_READ),
+		make_pair(make_pair(SPECIAL_CLINKABLE_DRINK,'q'),LOC_SYSTEM_DRINK),
+		make_pair(make_pair(SPECIAL_CLINKABLE_THROW,'F'),LOC_SYSTEM_THROW),
+		make_pair(make_pair(SPECIAL_CLINKABLE_EVOKE,'V'),LOC_SYSTEM_EVOKE),		
+		make_pair(make_pair(SPECIAL_CLINKABLE_EQUIP_WEAPON,'w'),LOC_SYSTEM_EQUIP_WEAPON),
+		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_WEAPON,'-'),LOC_SYSTEM_UNEQUIP_WEAPON),
+		make_pair(make_pair(SPECIAL_CLINKABLE_EQUIP_ARMOUR,'W'),LOC_SYSTEM_EQUIP_ARMOUR),
+		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_ARMOUR,'T'),LOC_SYSTEM_UNEQUIP_ARMOUR),
+		make_pair(make_pair(SPECIAL_CLINKABLE_EQUIP_JEWELRY,'P'),LOC_SYSTEM_EQUIP_JEWELRY),
+		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_JEWELRY,'R'),LOC_SYSTEM_UNEQUIP_JEWELRY)
 	};
 	
 	enterlog();
@@ -3450,15 +3450,15 @@ void More_Information_List()
 	const int max_command = 9;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
-		make_pair(make_pair('%','%'),LOC_SYSTEM_INFORMATION_CHARACTER),
-		make_pair(make_pair('^','^'),LOC_SYSTEM_INFORMATION_FAITH),
-		make_pair(make_pair('\\','\\'),LOC_SYSTEM_INFORMATION_INDENTIFY),
-		make_pair(make_pair('A','A'),LOC_SYSTEM_INFORMATION_PROPERTY),
-		make_pair(make_pair('I','I'),LOC_SYSTEM_INFORMATION_SPELL),
-		make_pair(make_pair('M','M'),LOC_SYSTEM_INFORMATION_LEARN_SPELL),
-		make_pair(make_pair(']',']'),LOC_SYSTEM_INFORMATION_RUNE),
-		make_pair(make_pair('O','O'),LOC_SYSTEM_INFORMATION_DUNGEON),
-		make_pair(make_pair('#','#'),LOC_SYSTEM_INFORMATION_DUMP)
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_CHARACTER,'%'),LOC_SYSTEM_INFORMATION_CHARACTER),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_FAITH,'^'),LOC_SYSTEM_INFORMATION_FAITH),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_INDENTIFY,'\\'),LOC_SYSTEM_INFORMATION_INDENTIFY),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_PROPERTY,'A'),LOC_SYSTEM_INFORMATION_PROPERTY),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_SPELL,'I'),LOC_SYSTEM_INFORMATION_SPELL),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL,'M'),LOC_SYSTEM_INFORMATION_LEARN_SPELL),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_RUNE,']'),LOC_SYSTEM_INFORMATION_RUNE),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_DUNGEON,'O'),LOC_SYSTEM_INFORMATION_DUNGEON),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_DUMP,'#'),LOC_SYSTEM_INFORMATION_DUMP)
 	};
 	
 	enterlog();

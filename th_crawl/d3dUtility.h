@@ -126,6 +126,7 @@ struct InputedKey {
 	}
 };
 
+
 struct TimedKey {
     InputedKey key;
     std::chrono::steady_clock::time_point timestamp;

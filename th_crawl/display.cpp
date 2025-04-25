@@ -185,6 +185,50 @@ int display_manager::convertClickable(int id) {
 			return 'Y';
 		case SPECIAL_CLINKABLE_N:
 			return 'N';
+		case SPECIAL_CLINKABLE_INFORMATION_CHARACTER: 
+			return '%';
+		case SPECIAL_CLINKABLE_INFORMATION_FAITH: 
+			return '^';
+		case SPECIAL_CLINKABLE_INFORMATION_INDENTIFY: 
+			return '\\';
+		case SPECIAL_CLINKABLE_INFORMATION_PROPERTY: 
+			return 'A';
+		case SPECIAL_CLINKABLE_INFORMATION_SPELL: 
+			return 'I';
+		case SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL: 
+			return 'M';
+		case SPECIAL_CLINKABLE_INFORMATION_RUNE: 
+			return ']';
+		case SPECIAL_CLINKABLE_INFORMATION_DUNGEON: 
+			return 'O';
+		case SPECIAL_CLINKABLE_INFORMATION_DUMP: 
+			return '#';
+		case SPECIAL_CLINKABLE_INVENTORY: 
+			return 'i';
+		case SPECIAL_CLINKABLE_DISCARD: 
+			return 'd';
+		case SPECIAL_CLINKABLE_EAT: 
+			return 'e';
+		case SPECIAL_CLINKABLE_READ: 
+			return 'r';
+		case SPECIAL_CLINKABLE_DRINK: 
+			return 'q';
+		case SPECIAL_CLINKABLE_THROW: 
+			return 'F';
+		case SPECIAL_CLINKABLE_EVOKE: 
+			return 'V';		
+		case SPECIAL_CLINKABLE_EQUIP_WEAPON: 
+			return 'w';
+		case SPECIAL_CLINKABLE_UNEQUIP_WEAPON: 
+			return '-';
+		case SPECIAL_CLINKABLE_EQUIP_ARMOUR: 
+			return 'W';
+		case SPECIAL_CLINKABLE_UNEQUIP_ARMOUR: 
+			return 'T';
+		case SPECIAL_CLINKABLE_EQUIP_JEWELRY: 
+			return 'P';
+		case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
+			return 'R';
 		default:
 			return id;
 	}
@@ -207,6 +251,50 @@ textures* display_manager::getSelectTexure(int id) {
 			return &img_command_Y;
 		case SPECIAL_CLINKABLE_N:
 			return &img_command_N;
+		case SPECIAL_CLINKABLE_INFORMATION_CHARACTER: 
+			return &img_command_info_character;
+		case SPECIAL_CLINKABLE_INFORMATION_FAITH: 
+			return &img_command_info_faith;
+		case SPECIAL_CLINKABLE_INFORMATION_INDENTIFY: 
+			return &img_command_info_iden;
+		case SPECIAL_CLINKABLE_INFORMATION_PROPERTY: 
+			return &img_command_info_property;
+		case SPECIAL_CLINKABLE_INFORMATION_SPELL: 
+			return &img_command_info_spell;
+		case SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL: 
+			return &img_command_info_learn_spell;
+		case SPECIAL_CLINKABLE_INFORMATION_RUNE: 
+			return &img_command_info_rune;
+		case SPECIAL_CLINKABLE_INFORMATION_DUNGEON: 
+			return &img_command_info_dungeon;
+		case SPECIAL_CLINKABLE_INFORMATION_DUMP: 
+			return &img_command_info_dump;
+		case SPECIAL_CLINKABLE_INVENTORY: 
+			return &img_command_inventory;
+		case SPECIAL_CLINKABLE_DISCARD: 
+			return &img_command_discard;
+		case SPECIAL_CLINKABLE_EAT: 
+			return &img_command_eat;
+		case SPECIAL_CLINKABLE_READ: 
+			return &img_command_read;
+		case SPECIAL_CLINKABLE_DRINK: 
+			return &img_command_drink;
+		case SPECIAL_CLINKABLE_THROW: 
+			return &img_command_throw;
+		case SPECIAL_CLINKABLE_EVOKE: 
+			return &img_command_evoke;		
+		case SPECIAL_CLINKABLE_EQUIP_WEAPON: 
+			return &img_command_equip_weapon;
+		case SPECIAL_CLINKABLE_UNEQUIP_WEAPON: 
+			return &img_command_unequip_weapon;
+		case SPECIAL_CLINKABLE_EQUIP_ARMOUR: 
+			return &img_command_equip_armour;
+		case SPECIAL_CLINKABLE_UNEQUIP_ARMOUR: 
+			return &img_command_unequip_armour;
+		case SPECIAL_CLINKABLE_EQUIP_JEWELRY: 
+			return &img_command_equip_jewelry;
+		case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
+			return &img_command_unequip_jewelry;
 		case 'Y':
 			return &img_command_Y;
 		case 'N':
@@ -301,7 +389,7 @@ void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<
 	common_mouse_logic();
 }
 
-int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color, bool drawOutline = false, D3DCOLOR outlineColor = 0xFF000000) {
     if (!pFont || !text || !pRect) {
         return 0;
     }
@@ -315,6 +403,7 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
 
     // 색상 변환
     DirectX::XMVECTOR colorVec = D3DCOLOR_to_XMVECTOR(color);
+    DirectX::XMVECTOR outlineColorVec = D3DCOLOR_to_XMVECTOR(outlineColor);
 
     // 문자열 크기 측정
     DirectX::XMVECTOR sizeVec = pFont->MeasureString(wtext.c_str());
@@ -325,22 +414,48 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
     float x = (float)pRect->left;
     float y = (float)pRect->top;
 
-    if (format & DT_CENTER)
+    if (format & DT_CENTER) {
         x = (pRect->left + pRect->right - size.x) / 2.0f;
-    else if (format & DT_RIGHT)
+	}
+    else if (format & DT_RIGHT) {
         x = (float)pRect->right - size.x;
+	}
 
-    if (format & DT_VCENTER)
+    if (format & DT_VCENTER) {
         y = (pRect->top + pRect->bottom - size.y) / 2.0f;
-    else if (format & DT_BOTTOM)
+	}
+    else if (format & DT_BOTTOM) {
         y = (float)pRect->bottom - size.y;
+	}
 
+	if (drawOutline) {
+		DirectX::XMFLOAT2 pos = { x, y };
+		static const DirectX::XMFLOAT2 offsets[] = {
+			{ -2,  0 }, { 2,  0 }, { 0, -2 }, { 0,  2 },
+			{ -1, -1 }, { 1, -1 }, { -1, 1 }, { 1, 1 }
+		};
+		for (const auto& offset : offsets) {
+			DirectX::XMFLOAT2 outlinePos = { pos.x + offset.x, pos.y + offset.y };
+			pFont->DrawString(pSprite.get(), wtext.c_str(), outlinePos, outlineColorVec);
+		}
+	}
     // Draw
     pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
 
     return (int)wtext.size();  // 반환값은 출력한 글자 수
 }
 
+
+int DrawTextUTF8_OutLine(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
+    if (!pFont || !text || !pRect) {
+        return 0;
+    }
+
+    // UTF-8 → UTF-16 변환
+    std::wstring wtext = ConvertUTF8ToUTF16(text);
+    if (wtext.empty()) return 0;
+	return DrawTextUTF8(pFont, pSprite, wtext.c_str(), count, pRect, format, color, true);
+}
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
     if (!pFont || !text || !pRect) {
@@ -1742,19 +1857,38 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 		int pow_ = min(you.power,500);
-		img_item_food_p_item.draw(pSprite,rc.left+7,rc.top+7,255);
+		img_item_food_p_item.draw(pSprite,rc.left+16,rc.top+7,255);
 
 		ss.str("");
 		ss.clear();
 		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
 		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
-		//임시		
-		//rc.left += fontDesc.Width*left_;
-		//sprintf_s(temp,50,"%6d",you.hunger);
-		//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.s_might?CL_white_blue:CL_STAT);
+
+		if(PrintCharWidth(ss.str()) < 25) {
+			rc.left += fontDesc.Width*(25-PrintCharWidth(ss.str()));	
+		} else {
+			rc.left += fontDesc.Width;
+		}
+
+		if(you.GetNeedExp(you.level-1) > 0)
+		{
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_REMAIN_EXP);
+			ss << ":" ;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+		
+			ss.str("");
+			ss.clear();
+			ss << (you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)) << "%";
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
+		}
+		else
+		{
+			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
+		}
 		rc.left = 32*(sight_x*2)+50;
-
-
 
 
 		rc.top += fontDesc.Height;
@@ -1911,22 +2045,21 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss.str("");
 			ss.clear();
 			item* _item = you.equipment[ET_NECK];
-			if (_item->type == ITM_AMULET)
-			{
-				//ss << you.equipment[ET_NECK]->id << ") " << LocalzationManager::formatString(iden_list.amulet_list[_item->value1].iden == 2 ? amulet_iden_string[_item->value1] : amulet_uniden_string[iden_list.amulet_list[_item->value1].type], PlaceHolderHelper(""))
-				// << "(" << to_string(you.getAmuletPercent()) << "%)";
-				ss << _item->id << ") " << _item->GetName();
-			} else {
-				ss << _item->id << ") " << _item->GetName();
+			ss << _item->id << ") " << _item->GetName(-1, true);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
+
+			for (const string& token : tokens ) {
+				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,_item->item_color());
+				rc.left = 32*(sight_x*2)+50;
+				rc.top +=fontDesc.Height;
 			}
-			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, _item->item_color());
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+			rc.left = 32*(sight_x*2) + 50;
+			rc.top += fontDesc.Height;
 		}
-		rc.left = 32*(sight_x*2) + 50;
-		rc.top += fontDesc.Height;
 		
 		ss.str("");
 		ss.clear();
@@ -1938,9 +2071,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		{
 			ss.str("");
 			ss.clear();
-			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName();
+			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName(-1, true);
 
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 26, 34);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
@@ -1967,45 +2100,22 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		{
 			ss.str("");
 			ss.clear();
-			ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName();
+			ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName(-1, true);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
 
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+			for (const string& token : tokens ) {
+				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+				rc.left = 32*(sight_x*2)+50;
+				rc.top +=fontDesc.Height;
+			}
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
-		}
-		rc.left = 32*(sight_x*2)+50;
-
-
-
-
-		
-		if(you.GetNeedExp(you.level-1) > 0)
-		{
+			rc.left = 32*(sight_x*2) + 50;
 			rc.top += fontDesc.Height;
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_REMAIN_EXP);
-			ss << ":" ;
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+		}
 		
-			ss.str("");
-			ss.clear();
-			ss << (you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)) << "%";
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
-			rc.left = 32*(sight_x*2)+50;
-		}
-		else
-		{
-			rc.top += fontDesc.Height;
-			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
-
-		}
-
-
-		rc.top += fontDesc.Height;
 		ss.str("");
 		ss.clear();
 		ss << CurrentLevelString();
@@ -2661,6 +2771,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 	}
 
+	string mouseInfo;
+	D3DCOLOR mouseColor = CL_normal;
 
 	list<item>::iterator floor_items = env[current_level].item_list.end(); 
 
@@ -2685,6 +2797,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						if((*temp).isautopick())
 							auto_pick_ = true;
 						(*temp).draw(pSprite,pfont,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f);
+
+						if (MousePoint.x >  ((*temp).position.x-x_)*32.0f +4 && MousePoint.x <= ((*temp).position.x-x_)*32.0f + 36 &&
+								MousePoint.y > ((*temp).position.y - y_)*32.0f+4 && MousePoint.y <= ((*temp).position.y-y_)*32.0f + 36){
+							mouseInfo = (*temp).GetName();
+							mouseColor = (*temp).item_color();
+						}
+
+
 
 						if(many_item)
 						{
@@ -2747,6 +2867,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								
+								mouseInfo = getCilnkableString(selection_vector[tile_count]);
+								mouseColor = CL_help;
 								if(isClicked(LEFT_CLICK)) {
 									MSG msg;
 									msg.message = WM_CHAR;
@@ -2758,23 +2881,60 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					} else {					
 						//명령어들
 						textures* pixel_ = &img_command_empty;
+						int value_ = 0;
 						switch(tile_count) {
-							case SYSCMD_AUTOTRAVEL: pixel_ = &img_command_autotravel; break;
-							case SYSCMD_AUTOATTACK: pixel_ = &img_command_autoattack; break;
-							case SYSCMD_100REST: pixel_ = &img_command_100sleep; break;
-							case SYSCMD_MAGIC: pixel_ = &img_command_magic; break;
-							case SYSCMD_SKILL: pixel_ = &img_command_skill; break;
-							case SYSCMD_SHOUT: pixel_ = &img_command_shout; break;
-							case SYSCMD_DOOR_OPENCLOSE: pixel_ = &img_command_door; break;
-							case SYSCMD_PRAY: pixel_ = &img_command_pray; break;
-							case SYSCMD_MORE_ITEM: pixel_ = &img_command_more_item; break;
-							case SYSCMD_AUTOPICKUP: pixel_ = (you.auto_pickup>0?&img_command_pickon:&img_command_pickoff); break;
-							case SYSCMD_AUTOTANMAC: pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:(you.useMouseTammac==1?&img_command_tanmac_on:&img_command_tanmac_off)); break;
-							case SYSCMD_SKILL_VIEW: pixel_ = &img_command_skill_view; break;
-							case SYSCMD_MORE_VIEW: pixel_ = &img_command_more_view; break;
-							case SYSCMD_HELP: pixel_ = &img_command_help; break;
-							case SYSCMD_QUIT: pixel_ = &img_command_quit; break;
-							default: break;
+							case SYSCMD_AUTOTRAVEL:
+								pixel_ = &img_command_autotravel;
+								break;
+							case SYSCMD_AUTOATTACK:
+								pixel_ = &img_command_autoattack;
+								break;
+							case SYSCMD_100REST:
+								pixel_ = &img_command_100sleep;
+								break;
+							case SYSCMD_MAGIC:
+								pixel_ = &img_command_magic;
+								break;
+							case SYSCMD_SKILL:
+								pixel_ = &img_command_skill;
+								break;
+							case SYSCMD_SHOUT:
+								pixel_ = &img_command_shout;
+								break;
+							case SYSCMD_DOOR_OPENCLOSE:
+								pixel_ = &img_command_door;
+								break;
+							case SYSCMD_PRAY:
+								pixel_ = &img_command_pray;
+								break;
+							case SYSCMD_MORE_ITEM:
+								pixel_ = &img_command_more_item; 
+								break;
+							case SYSCMD_AUTOPICKUP:
+								pixel_ = (you.auto_pickup>0?&img_command_pickon:
+								&img_command_pickoff);
+								value_ = you.auto_pickup;
+								break;
+							case SYSCMD_AUTOTANMAC:
+								pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:
+								(you.useMouseTammac==1?&img_command_tanmac_on:
+								&img_command_tanmac_off));
+								value_ = you.useMouseTammac;
+								break;
+							case SYSCMD_SKILL_VIEW:
+								pixel_ = &img_command_skill_view; 
+								break;
+							case SYSCMD_MORE_VIEW:
+								pixel_ = &img_command_more_view;
+								break;
+							case SYSCMD_HELP:
+								pixel_ = &img_command_help;
+								break;
+							case SYSCMD_QUIT:
+								pixel_ = &img_command_quit;
+								break;
+							default:
+								 break;
 						}
 						int x_ = start_x+i*32, y_ = start_y+j*32;
 
@@ -2782,6 +2942,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+							mouseInfo = getCommandString(tile_count, value_);
+							mouseColor = CL_help;
 							if(isClicked(LEFT_CLICK)) {
 								g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
 							}
@@ -2794,7 +2956,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					if(it != you.item_list.end()) {
 						equip_ = (you.isequip(it)>0);
 						throw_ = (you.throw_weapon == &(*it));
-						curse = it->curse;
+						curse = (it->identify_curse || equip_) && it->curse;
 						if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
 							evokable = true;
 						}
@@ -2813,7 +2975,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					else if(throw_) {
 						img_item_select_itembox.draw(pSprite,x_,y_,255);
 					} else {
-						img_item_empty_itembox.draw(pSprite,x_,y_,255);
+						if(curse) {
+							img_item_maycurse_itembox.draw(pSprite,x_,y_,255);
+						}
+						else {
+							img_item_empty_itembox.draw(pSprite,x_,y_,255);
+						}
+
 					}
 					if(it != you.item_list.end()) {
 						it->draw(pSprite,pfont,x_,y_);						
@@ -2821,6 +2989,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								mouseInfo = string(1,it->id) + " - " + it->GetName();
+								mouseColor = it->item_color();
+
 								if(isClicked(LEFT_CLICK)) {
 									g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
 								}
@@ -2841,6 +3012,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+								mouseInfo = floor_items->GetName();
+								mouseColor = floor_items->item_color();
+
 								if(isClicked(LEFT_CLICK)) {
 									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
 								}
@@ -3092,13 +3267,20 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		vector<monster>::iterator it;
 		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 		{
-			if ((*it).isLive() && (*it).isYourShight() && ((*it).isUnique() || (*it).image == &img_mons_default)) //더 추가해야할거. 볼수있다(투명아님).
+			if ((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
 			{
 				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
 				{
-					RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
-					rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
-					DrawTextUTF8(pfont,pSprite, (*it).GetName()->getName().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+					if(((*it).isUnique() || (*it).image == &img_mons_default)) {
+
+						RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
+						rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
+						DrawTextUTF8(pfont,pSprite, (*it).GetName()->getName().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+					} else if (MousePoint.x > ((*it).position.x - x_)*32.0f - 4 && MousePoint.x <= ((*it).position.x - x_)*32.0f + 36 &&
+							MousePoint.y > ((*it).position.y - y_)*32.0f - 4 && MousePoint.y <= ((*it).position.y - y_)*32.0f + 36){
+						mouseInfo = (*it).GetName()->getName();
+						mouseColor = CL_normal;
+					}
 				}
 			}
 		}
@@ -3167,6 +3349,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	drawInfoBox(pSprite, pfont);
 
+	
+	if(!mouseInfo.empty()) {
+		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width;
+		RECT rc = {MousePoint.x-strWidth/2,  (LONG)(MousePoint.y-fontDesc.Height), MousePoint.x+strWidth/2 ,MousePoint.y}; 
+	
+
+		DrawTextUTF8_OutLine(pfont,pSprite,mouseInfo.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, mouseColor);
+	}
+
 }
 extern POINT MousePoint;
 
@@ -3210,12 +3401,20 @@ void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 		}
 
 
-		dot_floor.draw(pSprite, (float)rc_.left, (float)rc_.top, 0.0f, infobox.x_size / 3.0f, infobox.y_size / 3.0f, D3DCOLOR_ARGB(200, 255, 255, 255));
-		rc_.left -= infobox.x_size / 2 - infobox.x_comma;
-		rc_.top -= infobox.y_size / 2 - infobox.y_comma;
-		rc_.right -= infobox.x_size / 2 + infobox.x_comma;
-		rc_.bottom -= infobox.y_size / 2 + infobox.y_comma;
-		DrawTextUTF8(pfont,pSprite, infobox.info.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
+		dot_floor.draw(pSprite, (float)rc_.left, (float)rc_.top, 0.0f, infobox.x_size, infobox.y_size, D3DCOLOR_ARGB(200, 255, 255, 255));
+		// rc_.left -= infobox.x_comma;
+		// rc_.top -= infobox.y_comma;
+		// rc_.right -= infobox.x_comma;
+		// rc_.bottom -= infobox.y_comma;
+
+		int max_len = infobox.x_size/fontDesc.Width;
+
+		vector<string> tokens = SplitStringByFontWidth(infobox.info, max_len, max_len);
+
+		for(const string& token : tokens) {
+			DrawTextUTF8(pfont,pSprite, token.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);
+			rc_.top+=fontDesc.Height;
+		}
 	}
 }
 void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
@@ -3610,6 +3809,94 @@ bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spri
 }
 
 
+string getCilnkableString(int kind) {
+
+	switch(kind) {
+	case SPECIAL_CLINKABLE_INFORMATION_CHARACTER:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_CHARACTER);
+	case SPECIAL_CLINKABLE_INFORMATION_FAITH:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_FAITH);
+	case SPECIAL_CLINKABLE_INFORMATION_INDENTIFY:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_INDENTIFY);
+	case SPECIAL_CLINKABLE_INFORMATION_PROPERTY:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_PROPERTY);
+	case SPECIAL_CLINKABLE_INFORMATION_SPELL:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_SPELL);
+	case SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_LEARN_SPELL);
+	case SPECIAL_CLINKABLE_INFORMATION_RUNE:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_RUNE);
+	case SPECIAL_CLINKABLE_INFORMATION_DUNGEON:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_DUNGEON);
+	case SPECIAL_CLINKABLE_INFORMATION_DUMP:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_DUMP);
+	case SPECIAL_CLINKABLE_INVENTORY:
+		return LocalzationManager::locString(LOC_SYSTEM_INVENTORY);
+	case SPECIAL_CLINKABLE_DISCARD:
+		return LocalzationManager::locString(LOC_SYSTEM_DISCARD);
+	case SPECIAL_CLINKABLE_EAT:
+		return LocalzationManager::locString(LOC_SYSTEM_EAT);
+	case SPECIAL_CLINKABLE_READ:
+		return LocalzationManager::locString(LOC_SYSTEM_READ);
+	case SPECIAL_CLINKABLE_DRINK:
+		return LocalzationManager::locString(LOC_SYSTEM_DRINK);
+	case SPECIAL_CLINKABLE_THROW:
+		return LocalzationManager::locString(LOC_SYSTEM_THROW);
+	case SPECIAL_CLINKABLE_EVOKE:
+	return LocalzationManager::locString(LOC_SYSTEM_THROW);
+	case SPECIAL_CLINKABLE_EQUIP_WEAPON:
+		return LocalzationManager::locString(LOC_SYSTEM_EQUIP_WEAPON);
+	case SPECIAL_CLINKABLE_UNEQUIP_WEAPON:
+		return LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_WEAPON);
+	case SPECIAL_CLINKABLE_EQUIP_ARMOUR:
+		return LocalzationManager::locString(LOC_SYSTEM_EQUIP_ARMOUR);
+	case SPECIAL_CLINKABLE_UNEQUIP_ARMOUR:
+		return LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_ARMOUR);
+	case SPECIAL_CLINKABLE_EQUIP_JEWELRY:
+		return LocalzationManager::locString(LOC_SYSTEM_EQUIP_JEWELRY);
+	case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
+		return LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_JEWELRY);
+	default:
+		return "";
+	}
+}
+
+string getCommandString(int kind, int value) {
+	switch(kind) {
+	case SYSCMD_AUTOTRAVEL:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_AUTOTRAVEL);
+	case SYSCMD_AUTOATTACK:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_AUTOATTACK);
+	case SYSCMD_100REST:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_HUNDRED_TRUN);
+	case SYSCMD_MAGIC:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_MAGIC);
+	case SYSCMD_SKILL:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_SKILL);
+	case SYSCMD_SHOUT:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_SHOUT);
+	case SYSCMD_DOOR_OPENCLOSE:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_DOOR);
+	case SYSCMD_PRAY:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_PRAY);
+	case SYSCMD_MORE_ITEM:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_MORE_ITEM);
+	case SYSCMD_AUTOPICKUP:
+		return LocalzationManager::locString(value!=0?LOC_SYSTEM_CMD_AUTOPICKUP_ON:LOC_SYSTEM_CMD_AUTOPICKUP_OFF);
+	case SYSCMD_AUTOTANMAC:
+		return LocalzationManager::locString(value==2?LOC_SYSTEM_CMD_AUTOTANMAC_AUTO:(value==1?LOC_SYSTEM_CMD_AUTOTANMAC_ON:LOC_SYSTEM_CMD_AUTOTANMAC_OFF));
+	case SYSCMD_SKILL_VIEW:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_SKILL_VIEW);
+	case SYSCMD_MORE_VIEW:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_MORE_VIEW);
+	case SYSCMD_HELP:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_HELP);
+	case SYSCMD_QUIT:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_QUIT);
+	default:
+		return "";
+	}
+}
 
 void changedisplay(display_type set)
 {

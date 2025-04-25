@@ -238,7 +238,7 @@ void item::LoadDatas(FILE *fp)
 	}
 }
 
-string item::GetName(int num_)
+string item::GetName(int num_, bool simple_)
 {
 	bool overwriteName = false;
 	string temp;
@@ -346,9 +346,11 @@ string item::GetName(int num_)
 				if(curse) {
 					temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_CURSED,
 						PlaceHolderHelper(temp));
-				} else {					
-					temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_UNCURSED,
-						PlaceHolderHelper(temp));
+				} else {		
+					if(!simple_) {
+						temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_UNCURSED,
+							PlaceHolderHelper(temp));
+					}
 				}
 			}
 		}

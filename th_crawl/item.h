@@ -200,7 +200,7 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	
-	string GetName(int num_ = -1);
+	string GetName(int num_ = -1, bool simple_ = false);
 	string GetNameString();
 	name_infor GetNameInfor();
 	textures *GetEquipTexture();

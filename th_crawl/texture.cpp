@@ -1394,6 +1394,7 @@ textures img_item_equip_itembox(&texture_item03, 63, 255);
 textures img_item_curse_itembox(&texture_item03, 64, 255);
 textures img_item_evokable_itembox(&texture_item03, 65, 255);
 textures img_item_speciel_itembox(&texture_item03, 66, 255);
+textures img_item_maycurse_itembox(&texture_item03, 189, 255);
 
 textures img_command_autotravel(&texture_item03, 67, 255);
 textures img_command_autoattack(&texture_item03, 68, 255);
@@ -1413,10 +1414,32 @@ textures img_command_Y(&texture_item03, 80, 255);
 textures img_command_N(&texture_item03, 84, 255);
 textures img_command_empty(&texture_item03, 83, 255);
 textures img_command_X(&texture_item03, 81, 255);
-textures img_command_door(&texture_item03, 78, 255);
-textures img_command_pray(&texture_item03, 78, 255);
-textures img_command_more_item(&texture_item03, 78, 255);
-textures img_command_more_view(&texture_item03, 78, 255);
+textures img_command_door(&texture_item03, 163, 255);
+textures img_command_pray(&texture_item03, 164, 255);
+textures img_command_more_item(&texture_item03, 165, 255);
+textures img_command_more_view(&texture_item03, 166, 255);
+textures img_command_info_character(&texture_item03, 167, 255);
+textures img_command_info_faith(&texture_item03, 168, 255);
+textures img_command_info_iden(&texture_item03, 169, 255);
+textures img_command_info_property(&texture_item03, 170, 255);
+textures img_command_info_spell(&texture_item03, 171, 255);
+textures img_command_info_learn_spell(&texture_item03, 172, 255);
+textures img_command_info_rune(&texture_item03, 173, 255);
+textures img_command_info_dungeon(&texture_item03, 174, 255);
+textures img_command_info_dump(&texture_item03, 175, 255);
+textures img_command_inventory(&texture_item03, 176, 255);
+textures img_command_discard(&texture_item03, 177, 255);
+textures img_command_eat(&texture_item03, 178, 255);
+textures img_command_read(&texture_item03, 179, 255);
+textures img_command_drink(&texture_item03, 180, 255);
+textures img_command_throw(&texture_item03, 181, 255);
+textures img_command_evoke(&texture_item03, 182, 255);
+textures img_command_equip_weapon(&texture_item03, 183, 255);
+textures img_command_unequip_weapon(&texture_item03, 184, 255);
+textures img_command_equip_armour(&texture_item03, 185, 255);
+textures img_command_unequip_armour(&texture_item03, 186, 255);
+textures img_command_equip_jewelry(&texture_item03, 187, 255);
+textures img_command_unequip_jewelry(&texture_item03, 188, 255);
 
 
 textures img_command_alphabet_small[26] = {

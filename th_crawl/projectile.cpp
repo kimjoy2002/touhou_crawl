@@ -117,7 +117,6 @@ bool refreshPath(const coord_def &c, beam_iterator& beam, list<item>::iterator i
 
 
 
-
 int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_iterator& beam, projectile_infor* infor_, int m_len_ , float sector_, bool auto_)
 {
 	you.search_pos = you.position;
@@ -212,7 +211,19 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	while(1)
 	{
 		InputedKey inputedKey;
-		int key_ = auto_? VK_RETURN : waitkeyinput(inputedKey);
+		vector<int> selection_list;
+		selection_list.push_back('+');
+		selection_list.push_back('-');
+		if(infor_->isitem)
+		{
+			selection_list.push_back('(');
+			selection_list.push_back(')');
+			selection_list.push_back('i');
+		}
+		selection_list.push_back(VK_ESCAPE);
+		startSelection(selection_list);
+		int key_ = auto_? VK_RETURN : waitkeyinput(inputedKey, false, false, true);
+		endSelection();
 		switch(key_)
 		{
 		case 'k':
@@ -378,7 +389,36 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				return 2;
 			}
 		case -1:
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_MAP_CURSOR) {
+				you.search_pos = coord_def(inputedKey.val1, inputedKey.val2);
+				good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
+				break;
+			}
+			else if(inputedKey.mouse == MKIND_MAP) {
+				you.search_pos = coord_def(inputedKey.val1, inputedKey.val2);
+				good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
+				paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_); 
+				if(good_path || sukima_)
+				{
+					deletelog();
+					you.search = false;
+					return 1;
+				}
+			}
+			else if(inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+				if(unit *unit_ = env[current_level].isMonsterPos(inputedKey.val1, inputedKey.val2))
+				{
+					if(!unit_->isplayer())
+					{
+						GetMonsterInfor((monster*)unit_);
+						changedisplay(DT_SUB_TEXT);
+						waitkeyinput();
+						changedisplay(DT_GAME);
+					}
+				}
+				break;	
+			}
+			else if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {

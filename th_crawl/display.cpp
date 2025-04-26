@@ -2735,41 +2735,63 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				if(env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))
 				{
+					int x_ = GetDotX(i+offset_.x,sight_x,dot_size);
+					int y_ = GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size);
 					switch(env[current_level].dgtile[i][j].GetDot())
 					{
 					case DOT_FLOOR:
 						if(env[current_level].isExplore(i,j))
-							dot_floor.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+							dot_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						else
-							dot_mapping_floor.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+							dot_mapping_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_WALL:
 						if(env[current_level].isExplore(i,j))
-							dot_wall.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+							dot_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						else
-							dot_mapping_wall.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+							dot_mapping_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_DOOR:
-						dot_door.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+						dot_door.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_UP:
-						dot_up.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+						dot_up.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_DOWN:
-						dot_down.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+						dot_down.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_TEMPLE:
-						dot_temple.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+						dot_temple.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					case DOT_SEA:
-						dot_sea.draw(pSprite,GetDotX(i+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+						dot_sea.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
 					default:
 						break;
 					}
 				}
 			}
+			if (MousePoint.x >= GetDotX(offset_.x,sight_x,dot_size) && MousePoint.x < GetDotX(offset_.x,sight_x,dot_size) + DG_MAX_X*dot_size &&
+				MousePoint.y >= GetDotY(dot_start_y,offset_.y,sight_y,dot_size) && MousePoint.y <= GetDotY(dot_start_y,offset_.y,sight_y,dot_size) + DG_MAX_Y*dot_size )
+			{
+				int i=0, j=0;
+				i = (MousePoint.x-GetDotX(offset_.x,sight_x,dot_size))/dot_size;
+				j = (MousePoint.y-GetDotY(dot_start_y,offset_.y,sight_y,dot_size))/dot_size;
+				if(i < 0)
+					i = 0;
+				if(i >= DG_MAX_X)
+					i = DG_MAX_X - 1;
+				if(j < 0)
+					j = 0;
+				if(j >= DG_MAX_Y)
+					j = DG_MAX_Y - 1;
+				if(isClicked(LEFT_CLICK) && (env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))) {
+					g_keyQueue->push(InputedKey(MKIND_MAP,i,j));
+				}
+			}
+
 		}
+
 	}
 
 	string mouseInfo;

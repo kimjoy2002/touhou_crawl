@@ -2205,7 +2205,12 @@ void Pray()
 				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),true,CL_help);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,CL_help);
+				printsub(" (",false,CL_help);
+				printsub("y",false,CL_help, 'y');
+				printsub("/",false,CL_help);
+				printsub("n",false,CL_help, 'n');
+				printsub(") ",true,CL_help);
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);
 				bool ok_= true;

@@ -79,7 +79,8 @@ enum MOUSE_KIND {
 	MKIND_RCLICK,
 	MKIND_MCLICK,
 	MKIND_SCROLL_UP,
-	MKIND_SCROLL_DOWN
+	MKIND_SCROLL_DOWN,
+	MKIND_MAP_CURSOR //맵위에 마우스를 올린다(리플레이에서 저장하면 안되는 정보.)
 };
 
 

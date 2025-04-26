@@ -149,6 +149,7 @@ public:
 	int max_y;
 	int sight_type;
 	int spell_sight;
+	coord_def prev_map_view;
 
 	infoBox infobox;
 

@@ -26,20 +26,27 @@ extern std::atomic<bool> g_shutdownRequested;
 
 std::unique_ptr<KeyInputQueue> g_keyQueue;
 
-bool isKeyinput()
+bool isKeyinput(bool ablecursor)
 {
-	InputedKey temp;
-	if(g_keyQueue->try_pop(temp))
-		return true;
-	else 
-		return false;
+	while(1) {
+		InputedKey inputedKey;
+		if(g_keyQueue->try_pop(inputedKey)) {
+			if(!ablecursor && inputedKey.mouse == MKIND_MAP_CURSOR) {
+			}
+			else {
+				return true;
+			}
+		}
+		else 
+			return false;
+	}
 }
 
-int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_)
+int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, bool ablecursor)
 {
 	if(immedity_)
 	{
-		if(isKeyinput())
+		if(isKeyinput(ablecursor))
 			return 1;
 		else
 			return 0;
@@ -50,7 +57,10 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_)
 		throw 0;
 	while(!g_shutdownRequested) 
 	{
-		inputedKey = g_keyQueue->pop();
+		do {
+			inputedKey = g_keyQueue->pop();
+		} while(!ablecursor && inputedKey.mouse == MKIND_MAP_CURSOR);
+
 		if(inputedKey.mouse == MKIND_NONE) {
 
 			MSG msg = inputedKey.key;
@@ -167,23 +177,22 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_)
 	return 0;
 }
 
-int waitkeyinput(bool direction_, bool immedity_) {
+int waitkeyinput(bool direction_, bool immedity_, bool ablecursor) {
 	InputedKey temp;
-	return waitkeyinput(temp, direction_,  immedity_);
+	return waitkeyinput(temp, direction_,  immedity_, ablecursor);
 }
 
-int waitkeyinput(InputedKey& key, bool direction_, bool immedity_)
+int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor)
 {
-
 	if(ReplayClass.auto_key == false)
 	{
 		DWORD time_ = timeGetTime();
 
-		int return_ = waitkeyinput_inter(key, direction_,immedity_);
+		int return_ = waitkeyinput_inter(key, direction_,immedity_, ablecursor);
 	
 		DWORD time2_ = timeGetTime();
 
-		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_), return_, key);
+		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_) , return_, key);
 
 		return return_;
 	}

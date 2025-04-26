@@ -4451,7 +4451,7 @@ LOC_SYSTEM_GOD_PRAY1,당신은 {0}에게 기도헀다.
 LOC_SYSTEM_GOD_PRAY2,{0:은|는} 심기가 불편해보인다.
 LOC_SYSTEM_GOD_PRAY_AHTEISM,당신은 삶의 의미에 대해 잠시 생각했다.
 LOC_SYSTEM_GOD_PRAY_TEMPLE,당신은 제단에 기도를 드렸다.
-LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,신도가 되려면 Y키를, 취소하려면 N키를 누른다.
+LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,신도가 되시겠습니까?
 LOC_SYSTEM_GOD_GIFT,{0}: 유용하게 쓰도록!
 LOC_SYSTEM_GOD_GIFT_APPEAR,당신의 발밑에 무언가 나타났다!
 LOC_SYSTEM_GOD_WRATH,{0}의 분노를 느꼈다.

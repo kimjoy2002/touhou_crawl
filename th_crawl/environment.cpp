@@ -875,6 +875,7 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 	}
 }
 
+extern display_manager DisplayManager;
 void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, bool sight, bool onlyTile, bool draw_mouse)
 {
 	if (!isExplore(tile_x, tile_y))
@@ -914,6 +915,12 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 			}
 			else if(isClicked(RIGHT_CLICK)) {
 				g_keyQueue->push(InputedKey(MKIND_MAP_DESCRIPTION,tile_x,tile_y));
+			}
+			coord_def tile_coorddef(tile_x, tile_y); 
+
+			if(DisplayManager.prev_map_view != tile_coorddef) {
+				DisplayManager.prev_map_view = tile_coorddef;
+				g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,tile_x,tile_y));
 			}
 		}
 	}

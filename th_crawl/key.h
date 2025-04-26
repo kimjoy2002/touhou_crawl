@@ -14,8 +14,8 @@
 
 struct InputedKey;
 
-int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = false);
-int waitkeyinput(bool direction_ = false, bool immedity_ = false);
+int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
+int waitkeyinput(bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
 int MoreWait();
 bool isKeyinput();
 

@@ -301,8 +301,8 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			{
 				if(!unit_->isplayer())
 				{
-					SetText() = GetMonsterInfor((monster*)unit_);
-					changedisplay(DT_TEXT);
+					GetMonsterInfor((monster*)unit_);
+					changedisplay(DT_SUB_TEXT);
 					waitkeyinput();
 					changedisplay(DT_GAME);
 				}

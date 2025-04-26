@@ -107,6 +107,7 @@ extern ID3D11Device* g_pd3dDevice;
 extern ID3D11DeviceContext* g_pImmediateContext;
 extern IDXGISwapChain*         g_pSwapChain;
 extern ID3D11RenderTargetView* g_pRenderTargetView;
+extern Microsoft::WRL::ComPtr<ID3D11BlendState> g_pAlphaBlendState;
 
 extern Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
 
@@ -135,7 +136,7 @@ bool Display(float timeDelta)
 
 		g_pSprite->Begin(
             DirectX::SpriteSortMode_Deferred,
-            nullptr,
+            g_pAlphaBlendState.Get(),
             g_pPointSampler.Get(), // ✅ POINT filtering
             nullptr, nullptr);
 
@@ -3070,31 +3071,28 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			you.Draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 20.0f);
 			if (you.GetHp() != you.GetMaxHp())
 			{
-				float max_rate_ = (1 / 3.0f);
+				float max_rate_ = 32.0f;
 
 				int temp1_ = max(0, you.GetHp()) * 32 / you.GetMaxHp();
-				float hp_rate_ = (max_rate_ * temp1_);
-				int hp_offset_ = (temp1_ + 1) / 2 - 16;
+				int hp_rate_ = (max_rate_ * temp1_) / 32.0f;
 
 
 				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * 32 / you.GetMaxHp();
-				float p_hp_rate_ = (max_rate_ * temp2_);
-				int p_hp_offset_ = (temp2_ + 1) / 2 - 16;
+				int p_hp_rate_ = (max_rate_ * temp2_) / 32.0f;
 
-				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, max_rate_ * 32.0f, 0.5f, 255);
-				dot_monster.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + p_hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, p_hp_rate_, 0.5f, 255);
-				dot_item.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + hp_offset_, (you.position.y - y_)*32.0f + 36.0f, 0.0f, hp_rate_, 0.5f, 255);
+				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, max_rate_, 2.0f, 255);
+				dot_monster.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, p_hp_rate_, 2.0f, 255);
+				dot_item.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, hp_rate_, 2.0f, 255);
 			}
 			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
 			{
-				float max_rate_ = (1 / 3.0f);
+				float max_rate_ = 32.0f;
 
 				int temp1_ = max(0, you.GetMp()) * 32 / you.GetMaxMp();
-				float mp_rate_ = (max_rate_ * temp1_);
-				int mp_offset_ = (temp1_ + 1) / 2 - 16;
+				float mp_rate_ = (max_rate_ * temp1_)/ 32.0f;
 
-				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, max_rate_ * 32.0f, 0.5f, 255);
-				dot_up.draw(pSprite, (you.position.x - x_)*32.0f + 20.0f + mp_offset_, (you.position.y - y_)*32.0f + 38.0f, 0.0f, mp_rate_, 0.5f, 255);
+				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, max_rate_, 2.0f, 255);
+				dot_up.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, mp_rate_, 2.0f, 255);
 			}
 
 		}
@@ -3354,6 +3352,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width;
 		RECT rc = {MousePoint.x-strWidth/2,  (LONG)(MousePoint.y-fontDesc.Height), MousePoint.x+strWidth/2 ,MousePoint.y}; 
 	
+		if (rc.right  > option_mg.getWidth()) {
+			int i = rc.right - option_mg.getWidth();
+			rc.left -= i;
+			rc.right -= i;
+		} else if(rc.left - strWidth / 2 < 0) {
+			int i = -(rc.left - strWidth / 2);
+			rc.left += i;
+			rc.right += i;
+		}
 
 		DrawTextUTF8_OutLine(pfont,pSprite,mouseInfo.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, mouseColor);
 	}
@@ -3843,7 +3850,7 @@ string getCilnkableString(int kind) {
 	case SPECIAL_CLINKABLE_THROW:
 		return LocalzationManager::locString(LOC_SYSTEM_THROW);
 	case SPECIAL_CLINKABLE_EVOKE:
-	return LocalzationManager::locString(LOC_SYSTEM_THROW);
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_SKILL);
 	case SPECIAL_CLINKABLE_EQUIP_WEAPON:
 		return LocalzationManager::locString(LOC_SYSTEM_EQUIP_WEAPON);
 	case SPECIAL_CLINKABLE_UNEQUIP_WEAPON:

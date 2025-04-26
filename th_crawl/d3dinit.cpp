@@ -67,6 +67,7 @@ extern ID3D11Device* g_pd3dDevice;
 extern ID3D11DeviceContext* g_pImmediateContext;
 shared_ptr<DirectX::SpriteBatch> g_pSprite = NULL; //스프라이트포인터 
 shared_ptr<DirectX::SpriteFont> g_pfont = NULL;
+Microsoft::WRL::ComPtr<ID3D11BlendState> g_pAlphaBlendState;
 //
 // 초기화 함수
 //
@@ -99,6 +100,18 @@ bool Setup()
 	// SpriteBatch 생성
 	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
 
+
+	D3D11_BLEND_DESC desc = {};
+    desc.RenderTarget[0].BlendEnable = TRUE;
+    desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+    desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+    desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+    desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+    desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+    desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+
+    g_pd3dDevice->CreateBlendState(&desc, &g_pAlphaBlendState);
 	
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
 	if(!texture_title.loading(g_pd3dDevice, g_pImmediateContext))

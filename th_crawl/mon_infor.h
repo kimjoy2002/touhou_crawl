@@ -97,6 +97,6 @@ struct unique_infor
 extern vector<unique_infor> unique_list;
 void SetResistMonster(monster* mon);
 
-string GetMonsterInfor(monster *it);
+void GetMonsterInfor(monster *it);
 
 #endif // __MON_INFOR_H__

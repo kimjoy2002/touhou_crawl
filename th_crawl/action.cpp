@@ -757,9 +757,9 @@ void search_monspell_view(monster* mon_)
 	{
 		loop_ = false;
 		WaitForSingleObject(mutx, INFINITE);
-		SetText() = GetMonsterInfor(mon_);
+		GetMonsterInfor(mon_);
 		ReleaseMutex(mutx);
-		changedisplay(DT_TEXT);
+		changedisplay(DT_SUB_TEXT);
 		int key_ = waitkeyinput(true);
 						
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
@@ -774,6 +774,7 @@ void search_monspell_view(monster* mon_)
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();
+					changedisplay(DT_SUB_TEXT);
 					loop_ = true;
 					break;
 				}

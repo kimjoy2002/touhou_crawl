@@ -1,0 +1,3 @@
+﻿ENG,English
+KOR,한국어
+JPN,日本語

@@ -32,6 +32,7 @@ enum SPECIAL_CLINKABLE {
 	SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL,
 	SPECIAL_CLINKABLE_INFORMATION_RUNE,
 	SPECIAL_CLINKABLE_INFORMATION_DUNGEON,
+	SPECIAL_CLINKABLE_INFORMATION_LOG,
 	SPECIAL_CLINKABLE_INFORMATION_DUMP,
 	SPECIAL_CLINKABLE_INVENTORY,
 	SPECIAL_CLINKABLE_DISCARD,
@@ -143,6 +144,7 @@ public:
 	textures *image;
 	
 	vector<int> selection_vector;
+	vector<int> spell_skill_vector;
 
 	int log_length;
 	int move;
@@ -216,6 +218,8 @@ void deletesub();
 void entersub();
 void startSelection(vector<int> select_list);
 void endSelection();
+void startAbilGrid(vector<int> select_list);
+void endAbilGrid();
 
 int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...);
 

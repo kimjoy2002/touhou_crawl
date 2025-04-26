@@ -1426,6 +1426,7 @@ textures img_command_info_spell(&texture_item03, 171, 255);
 textures img_command_info_learn_spell(&texture_item03, 172, 255);
 textures img_command_info_rune(&texture_item03, 173, 255);
 textures img_command_info_dungeon(&texture_item03, 174, 255);
+textures img_command_info_log(&texture_item03, 190, 255);
 textures img_command_info_dump(&texture_item03, 175, 255);
 textures img_command_inventory(&texture_item03, 176, 255);
 textures img_command_discard(&texture_item03, 177, 255);

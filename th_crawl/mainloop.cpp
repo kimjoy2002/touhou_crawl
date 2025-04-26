@@ -729,7 +729,7 @@ void MainLoop()
 							long_rest();
 							break;
 						case SYSCMD_MAGIC:
-							SpellUse(0, 0);
+							SimpleSpellUse();
 							break;
 						case SYSCMD_SKILL:
 							SkillUse(0);
@@ -965,8 +965,10 @@ void MainLoop()
 			if(Dump(0,NULL))
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DUMP_SUCCESS),true,false,false,CL_normal);
 			break;
-		case 'Z':
 		case 'z':
+			SimpleSpellUse();
+			break;
+		case 'Z':
 			SpellUse(0, 0);
 			break;
 		case 'I':

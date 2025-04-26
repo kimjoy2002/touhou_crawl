@@ -335,6 +335,7 @@ public:
 	int MemorizeSpell[52];
 	int remainSpellPoiont;
 	int currentSpellNum;
+	int prevSpell;
 
 	int MemorizeSkill[52];
 	int MemorizeSkill_num[52];

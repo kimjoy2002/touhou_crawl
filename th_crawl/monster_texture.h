@@ -485,6 +485,7 @@ extern textures img_command_info_spell;
 extern textures img_command_info_learn_spell;
 extern textures img_command_info_rune;
 extern textures img_command_info_dungeon;
+extern textures img_command_info_log;
 extern textures img_command_info_dump;
 extern textures img_command_inventory;
 extern textures img_command_discard;

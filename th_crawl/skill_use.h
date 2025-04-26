@@ -231,6 +231,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
 bool CheckDangerSpell(int danger_);
 bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite);
 int UseSkill(skill_list skill, bool short_, coord_def &target);
+void SimpleSpellUse();
 void SpellUse(char auto_, int auto_direc_);
 void SpellView();
 void SkillUse(char auto_);

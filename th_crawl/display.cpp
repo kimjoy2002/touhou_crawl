@@ -200,8 +200,10 @@ int display_manager::convertClickable(int id) {
 			return 'M';
 		case SPECIAL_CLINKABLE_INFORMATION_RUNE: 
 			return ']';
-		case SPECIAL_CLINKABLE_INFORMATION_DUNGEON: 
+		case SPECIAL_CLINKABLE_INFORMATION_DUNGEON:
 			return 'O';
+		case SPECIAL_CLINKABLE_INFORMATION_LOG:
+			return 'P';
 		case SPECIAL_CLINKABLE_INFORMATION_DUMP: 
 			return '#';
 		case SPECIAL_CLINKABLE_INVENTORY: 
@@ -268,6 +270,8 @@ textures* display_manager::getSelectTexure(int id) {
 			return &img_command_info_rune;
 		case SPECIAL_CLINKABLE_INFORMATION_DUNGEON: 
 			return &img_command_info_dungeon;
+		case SPECIAL_CLINKABLE_INFORMATION_LOG:
+			return &img_command_info_log;
 		case SPECIAL_CLINKABLE_INFORMATION_DUMP: 
 			return &img_command_info_dump;
 		case SPECIAL_CLINKABLE_INVENTORY: 
@@ -2974,57 +2978,103 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					}
 				}
 				else if(tile_count>=20 && tile_count < 72) {
-					bool equip_ = false, curse = false, throw_ = false, evokable = false;
-					int x_ = start_x+i*32, y_ = start_y+j*32+10;
-					if(it != you.item_list.end()) {
-						equip_ = (you.isequip(it)>0);
-						throw_ = (you.throw_weapon == &(*it));
-						curse = (it->identify_curse || equip_) && it->curse;
-						if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
-							evokable = true;
+					if(spell_skill_vector.size() > 0) {
+						int spell_tile_count = tile_count - 20;
+					    int id_ = 0;
+						textures* pixel_ = &img_item_empty_itembox;
+						
+						if(spell_skill_vector.size() > spell_tile_count) {
+							id_ = spell_skill_vector[spell_tile_count];
+							pixel_ = getSelectTexure(id_);
 						}
-					}
-					if(equip_) {
-						if(evokable) {
-							img_item_evokable_itembox.draw(pSprite,x_,y_,255);
-						}
-						else if(curse) {
-							img_item_curse_itembox.draw(pSprite,x_,y_,255);
-						} 
-						else {
-							img_item_equip_itembox.draw(pSprite,x_,y_,255);
-						}
-					} 
-					else if(throw_) {
-						img_item_select_itembox.draw(pSprite,x_,y_,255);
-					} else {
-						if(curse) {
-							img_item_maycurse_itembox.draw(pSprite,x_,y_,255);
-						}
-						else {
-							img_item_empty_itembox.draw(pSprite,x_,y_,255);
-						}
+						int x_ = start_x+i*32, y_ = start_y+j*32+10;
 
-					}
-					if(it != you.item_list.end()) {
-						it->draw(pSprite,pfont,x_,y_);						
-						{ //마우스
+						pixel_->draw(pSprite,x_,y_,255);
+						
+						if(pixel_ != &img_command_empty && id_ != 0) {
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-								mouseInfo = string(1,it->id) + " - " + it->GetName();
-								mouseColor = it->item_color();
-
+								if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
+									spell_list focus_spell_id = (spell_list)you.MemorizeSpell[asctonum(id_)];
+									if(focus_spell_id != SPL_NONE) {
+										int miscast_level_ = SpellMiscastingLevel(SpellLevel(focus_spell_id), 100-you.GetSpellSuccess(focus_spell_id));
+										D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
+											(miscast_level_==2?CL_small_danger:
+											(miscast_level_==1?CL_warning:CL_STAT)));
+										ostringstream ss;
+										ss << SpellString(focus_spell_id) << " (" << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ":" << (100 -you.GetSpellSuccess(focus_spell_id))<< "%)";
+										mouseInfo = ss.str();
+										mouseColor = spell_color_;
+									}
+								}
 								if(isClicked(LEFT_CLICK)) {
-									g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+									MSG msg;
+									msg.message = WM_CHAR;
+									msg.wParam = convertClickable(id_);
+									g_keyQueue->push(InputedKey(msg));
 								}
 								else if(isClicked(RIGHT_CLICK)) {
-									g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));
+									if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,id_,0));
+									}
 								}
+							}
+						}
+					}
+					else {
+						bool equip_ = false, curse = false, throw_ = false, evokable = false;
+						int x_ = start_x+i*32, y_ = start_y+j*32+10;
+						if(it != you.item_list.end()) {
+							equip_ = (you.isequip(it)>0);
+							throw_ = (you.throw_weapon == &(*it));
+							curse = (it->identify_curse || equip_) && it->curse;
+							if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
+								evokable = true;
+							}
+						}
+						if(equip_) {
+							if(evokable) {
+								img_item_evokable_itembox.draw(pSprite,x_,y_,255);
+							}
+							else if(curse) {
+								img_item_curse_itembox.draw(pSprite,x_,y_,255);
+							} 
+							else {
+								img_item_equip_itembox.draw(pSprite,x_,y_,255);
+							}
+						} 
+						else if(throw_) {
+							img_item_select_itembox.draw(pSprite,x_,y_,255);
+						} else {
+							if(curse) {
+								img_item_maycurse_itembox.draw(pSprite,x_,y_,255);
+							}
+							else {
+								img_item_empty_itembox.draw(pSprite,x_,y_,255);
 							}
 
 						}
-						it++;
+						if(it != you.item_list.end()) {
+							it->draw(pSprite,pfont,x_,y_);						
+							{ //마우스
+								if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+									MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+									mouseInfo = string(1,it->id) + " - " + it->GetName();
+									mouseColor = it->item_color();
+
+									if(isClicked(LEFT_CLICK)) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+									}
+									else if(isClicked(RIGHT_CLICK)) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));
+									}
+								}
+
+							}
+							it++;
+						}
 					}
 				} else {
 					int x_ = start_x+i*32, y_ = start_y+j*32+10;
@@ -3857,6 +3907,8 @@ string getCilnkableString(int kind) {
 		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_RUNE);
 	case SPECIAL_CLINKABLE_INFORMATION_DUNGEON:
 		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_DUNGEON);
+	case SPECIAL_CLINKABLE_INFORMATION_LOG:
+		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_LOG);
 	case SPECIAL_CLINKABLE_INFORMATION_DUMP:
 		return LocalzationManager::locString(LOC_SYSTEM_INFORMATION_DUMP);
 	case SPECIAL_CLINKABLE_INVENTORY:

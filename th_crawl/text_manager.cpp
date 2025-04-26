@@ -228,6 +228,18 @@ void endSelection() {
 	ReleaseMutex(mutx);	
 }
 
+void startAbilGrid(vector<int> select_list) {
+	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.spell_skill_vector.clear();
+	DisplayManager.spell_skill_vector = select_list;
+	ReleaseMutex(mutx);
+}
+void endAbilGrid() {
+	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.text_log.removeClickable();
+	DisplayManager.spell_skill_vector.clear();
+	ReleaseMutex(mutx);	
+}
 
 int printarraysub(bool enter_, D3DCOLOR color_, int num_, ...)
 {

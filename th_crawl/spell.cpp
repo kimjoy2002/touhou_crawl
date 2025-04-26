@@ -1810,41 +1810,154 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 
 void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
-void SpellUse(char auto_, int auto_direc_)
-{
+bool spell_prev_fail() {
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SPELL),true,false,false,CL_danger);
-		return;
+		return true;
 	}
 	if (you.s_evoke_ghost) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_SPELL), true, false, false, CL_normal);
-		return;
+		return true;
 	}
 	if (you.drowned)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_MAGIC), true, false, false, CL_danger);
-		return;
+		return true;
 	}
 	bool sion_ = (you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION) && you.god_value[GT_JOON_AND_SION][0] == 2);
 	if (!sion_ && you.power < 100)
 	{ //파워 100이하에선 마법을 쓸 수 없다. (시온일 경우 가능)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NEED_POWER), true, false, false, CL_danger);
-		return;
+		return true;
 	}
 	if(you.currentSpellNum)
 	{
 		if(!you.GetProperty(TPT_FINGER_MAGIC) && silence_)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SILENCE_PENALTY),true,false,false,CL_normal);
-			return;
+			return true;
 		}
 		if(you.s_confuse)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_normal);
+			return true;
+		}
+	}
+	return false;
+}
+
+
+void SimpleSpellUse()
+{
+	if(spell_prev_fail()) {
+		return;
+	}
+	int prevSpell_ = you.prevSpell;
+	spell_list prev_spell_id = SPL_NONE;
+	if(prevSpell_ != 0) {
+		prev_spell_id = (spell_list)you.MemorizeSpell[asctonum(prevSpell_)];
+		if(prev_spell_id == SPL_NONE) {
+			prevSpell_ = 0;
+		}
+	}
+
+	vector<int> select_list;
+	for(int i = 'a'; (i >= 'a' && i <= 'z') || (i >= 'A' && i <= 'Z') ;) {
+		if(you.MemorizeSpell[asctonum(i)])
+			select_list.push_back(i);
+		if(i=='z')
+			i = 'A';
+		else
+			i++;
+	}
+	if(select_list.size() < 52)
+		select_list.push_back('*');
+	if(select_list.size() < 52)
+		select_list.push_back(VK_ESCAPE);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD), false, false, true, CL_help);
+
+	printlog(" (",false,false,true,CL_help);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_LETTER) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
+	printlog(" ",false,false,true,CL_help);
+	if(prevSpell_) {
+		printlog(SpellString(prev_spell_id)+":"+LocalzationManager::locString(LOC_SYSTEM_ENTER),false,false,true,CL_help, VK_RETURN);
+		printlog(" ",false,false,true,CL_help);
+	}
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ALL_SPELL) + ":*",false,false,true,CL_help, '*');
+	printlog(") ",true,false,true,CL_help);
+	while(1)
+	{
+
+		InputedKey inputedKey;
+		startAbilGrid(select_list);
+		int key_ = waitkeyinput(inputedKey,true);
+		endAbilGrid();
+
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			int num = asctonum(key_);
+			if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+			{
+				deletelog();
+				SpellUse(key_, 0);
+				return;
+			}
+		}
+		else if(key_ == VK_RETURN) {
+			deletelog();
+			if(prevSpell_) {
+				SpellUse(prevSpell_, 0);
+			}
 			return;
 		}
+		else if(key_ == '*') {
+			deletelog();
+			SpellUse(0, 0);
+			return;
+		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_MENU || inputedKey.val1 == SYSCMD_MAGIC) {
+				deletelog();
+				if(prevSpell_) {
+					SpellUse(prevSpell_, 0);
+				}
+				return;
+			}
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
+				{
+					WaitForSingleObject(mutx, INFINITE);
+					SetText() = GetSpellInfor((spell_list)spell__);
+					ReleaseMutex(mutx);
+					changedisplay(DT_TEXT);
+					waitkeyinput();
+					changedisplay(DT_GAME);
+				}
+			} else if(inputedKey.isRightClick()) {
+				deletelog();
+				return;
+			}
+		}
+		else if(key_ == VK_ESCAPE) {
+			deletelog();
+			return;
+		}
+	}
+
+}
+
+
+
+void SpellUse(char auto_, int auto_direc_)
+{
+	bool silence_ = env[current_level].isSilence(you.position);
+	if(spell_prev_fail()) {
+		return;
+	}
+	if(you.currentSpellNum)
+	{
 		bool blood_ = false;
 		bool use_ = true;
 		view_spell(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL);
@@ -1889,7 +2002,8 @@ void SpellUse(char auto_, int auto_direc_)
 							if(direc_)
 							{
 								if(PlayerUseSpell(spell_, false, target_))
-								{	
+								{
+									you.prevSpell = key_;
 									GodAccpect_UseSpell(spell_);
 									if(blood_)
 										you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
@@ -1929,6 +2043,7 @@ void SpellUse(char auto_, int auto_direc_)
 									you.youAttack(unit_);
 								if(PlayerUseSpell(spell_, short_==2, you.search_pos))
 								{		
+									you.prevSpell = key_;
 									GodAccpect_UseSpell(spell_);
 									if(blood_)
 										you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		
@@ -1959,6 +2074,7 @@ void SpellUse(char auto_, int auto_direc_)
 							changedisplay(DT_GAME);
 							if(PlayerUseSpell(spell_, false, you.position))
 							{
+								you.prevSpell = key_;
 								GodAccpect_UseSpell(spell_);
 								if(blood_)
 									you.HpUpDown(-2*SpellLevel(spell_),DR_EFFECT);		

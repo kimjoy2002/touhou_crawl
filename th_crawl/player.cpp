@@ -352,6 +352,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, *MemorizeSpell,52);
 	SaveData<int>(fp, remainSpellPoiont);
 	SaveData<int>(fp, currentSpellNum);
+	SaveData<int>(fp, prevSpell);
 	SaveData<int>(fp, *MemorizeSkill,52);
 	SaveData<int>(fp, *MemorizeSkill_num,52);
 	SaveData<int>(fp, currentSkillNum);
@@ -597,6 +598,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, *MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
+	LoadData<int>(fp, prevSpell);
 	LoadData<int>(fp, *MemorizeSkill);
 	LoadData<int>(fp, *MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);

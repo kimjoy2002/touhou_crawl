@@ -3448,7 +3448,7 @@ void More_Item_Action()
 
 void More_Information_List()
 {
-	const int max_command = 9;
+	const int max_command = 10;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_CHARACTER,'%'),LOC_SYSTEM_INFORMATION_CHARACTER),
@@ -3459,6 +3459,7 @@ void More_Information_List()
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_LEARN_SPELL,'M'),LOC_SYSTEM_INFORMATION_LEARN_SPELL),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_RUNE,']'),LOC_SYSTEM_INFORMATION_RUNE),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_DUNGEON,'O'),LOC_SYSTEM_INFORMATION_DUNGEON),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_LOG,'P'),LOC_SYSTEM_INFORMATION_LOG),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_DUMP,'#'),LOC_SYSTEM_INFORMATION_DUMP)
 	};
 	
@@ -3525,6 +3526,11 @@ void More_Information_List()
 			deletelog();
 			if(isNormalGame())
 				dungeonView();
+			return;
+		case 'P':
+			endSelection();
+			deletelog();
+			view_log();
 			return;
 		case '#':
 			endSelection();

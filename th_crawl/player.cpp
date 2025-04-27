@@ -1655,7 +1655,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			for (list<item>::iterator it = item_list.begin(); it != item_list.end(); it++)
 			{
 				if (&(*it) == equipment[ET_NECK]) {
-					you.resetAmuletPercent((amulet_type)equipment[ET_NECK]->value1);
+					you.resetAmuletPercent((amulet_type)equipment[ET_NECK]->value1, true);
 					DeleteItem(it);
 					break;
 				}
@@ -4535,7 +4535,7 @@ bool players::Evoke(char id_, bool auto_)
 				if (evokeAmulet((amulet_type)(*it).value1, (*it).value2)) {
 					(*it).value3++;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
-					resetAmuletPercent((amulet_type)(*it).value1);
+					resetAmuletPercent((amulet_type)(*it).value1, true);
 					return true;
 				}
 				else
@@ -5057,7 +5057,7 @@ bool players::isGrazeAmulet()
 	}
 	return false;
 }
-void players::resetAmuletPercent(amulet_type type_)
+void players::resetAmuletPercent(amulet_type type_, bool use_)
 {
 	int level_ = level;
 	if (level_ == 27)
@@ -5065,7 +5065,9 @@ void players::resetAmuletPercent(amulet_type type_)
 	system_exp.value = (GetNeedExp(max(level_ - 1, 0)) - GetNeedExp(max(level_ - 2, 0))) + 10;
 	system_exp.value *= getAmuletCharge(type_);
 	system_exp.maxi = system_exp.value;
-	chargingFinish(type_, -1);
+	if(use_) {
+		chargingFinish(type_, -1);
+	}
 }
 bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 {
@@ -5126,7 +5128,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		}
 		if (type_ == ET_NECK)
 		{
-			resetAmuletPercent((amulet_type)(*it).value1);
+			resetAmuletPercent((amulet_type)(*it).value1, false);
 		}
 
 		if(type_ != ET_WEAPON || ((*it).type >= ITM_WEAPON_FIRST && (*it).type < ITM_WEAPON_LAST)) //무기를 장착했을때

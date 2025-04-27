@@ -151,14 +151,14 @@ bool chargingFinish(amulet_type kind, int value)
 		if (value > 0) {
 			if (you.god == GT_NONE) {
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL), true, false, false, CL_blue);
-				you.resetAmuletPercent(kind);
+				you.resetAmuletPercent(kind, true);
 			}
 			else {
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING), true, false, false, CL_blue);
 				if (you.god != GT_SEIJA)
 					you.PietyUpDown(10);
 				you.GiftCount(10);
-				you.resetAmuletPercent(kind);
+				you.resetAmuletPercent(kind, true);
 			}
 		}
 		break;

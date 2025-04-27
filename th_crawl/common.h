@@ -59,6 +59,7 @@ float GetBaseAngle(float angle);
 
 int GetPosToDirec(const coord_def &start, const coord_def &target);
 coord_def GetDirecToPos(int pos_);
+int GetDirecToChar(int pos_);
 int GetAngleToDirec(int angle);
 
 float GetPositionGap(float start_x, float start_y, float target_x, float target_y);
@@ -70,7 +71,6 @@ float GetMaxY();
 float GetCenterX();
 
 float GetCenterY();
-
 //float round(float x);
 
 float round_down(float x);
@@ -78,6 +78,8 @@ float round_down(float x);
 float round_up(float x);
 
 float ceil_up(float x);
+
+string float_to_string(float value, int precision = 3);
 
 unsigned char asctonum(char a);
 

@@ -3713,6 +3713,8 @@ bool monster::SetGlow(int glow_, bool no_speak)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_GLOW,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 		}
+		if(s_invisible && you.auto_pickup==0)
+			auto_pick_onoff(true);
 	}
 	s_glow += glow_;
 	if(s_glow>100)

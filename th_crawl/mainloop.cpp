@@ -38,7 +38,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.0";
+const char *version_string = "ver1.1";
 
 
 void Initialize();
@@ -969,7 +969,7 @@ void MainLoop()
 			SimpleSpellUse();
 			break;
 		case 'Z':
-			SpellUse(0, 0);
+			SpellUse(0, 0, false);
 			break;
 		case 'I':
 			SpellView();

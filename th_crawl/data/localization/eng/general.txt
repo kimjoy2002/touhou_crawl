@@ -365,44 +365,44 @@ LOC_SYSTEM_READ,Read
 LOC_SYSTEM_EAT,Eat
 LOC_SYSTEM_EVOKE,Evoke
 LOC_SYSTEM_DISCARD,Discard
-LOC_SYSTEM_THROW,탄막/던지기
-LOC_SYSTEM_EQUIP_WEAPON,무기장착
-LOC_SYSTEM_UNEQUIP_WEAPON,무기해제
-LOC_SYSTEM_EQUIP_ARMOUR,방어구장착
-LOC_SYSTEM_UNEQUIP_ARMOUR,방어구해제
-LOC_SYSTEM_EQUIP_JEWELRY,장신구장착
-LOC_SYSTEM_UNEQUIP_JEWELRY,장신구해제
-LOC_SYSTEM_ITEM_COMMAND,아이템 관련 명령어
-LOC_SYSTEM_CMD_AUTOTRAVEL,자동 탐색
-LOC_SYSTEM_CMD_AUTOATTACK,자동 공격
-LOC_SYSTEM_CMD_HUNDRED_TRUN,100턴 휴식
-LOC_SYSTEM_CMD_MAGIC,마법 사용
-LOC_SYSTEM_CMD_SKILL,권능 혹은 발동
-LOC_SYSTEM_CMD_SHOUT,외치기
-LOC_SYSTEM_CMD_DOOR,문 여닫기
-LOC_SYSTEM_CMD_PRAY,기도하기
-LOC_SYSTEM_CMD_MORE_ITEM,더 많은 아이템 명령어
-LOC_SYSTEM_CMD_AUTOPICKUP_ON,아이템 자동줍기중
-LOC_SYSTEM_CMD_AUTOPICKUP_OFF,아이템 수동줍기중
-LOC_SYSTEM_CMD_AUTOTANMAC_ON,자동전투시 항상 탄막 사용중
-LOC_SYSTEM_CMD_AUTOTANMAC_OFF,자동전투시 탄막 금지중 
-LOC_SYSTEM_CMD_AUTOTANMAC_AUTO,자동전투시 멀어지면 탄막 사용중
-LOC_SYSTEM_CMD_SKILL_VIEW,스킬창 표시 및 경험치 분배
-LOC_SYSTEM_CMD_MORE_VIEW,더 많은 정보창 명령어
-LOC_SYSTEM_CMD_HELP,도움말
-LOC_SYSTEM_CMD_QUIT,저장후 종료
-LOC_SYSTEM_INFORMATION_COMMAND,추가 정보창
-LOC_SYSTEM_INFORMATION_CHARACTER,캐릭터 정보
-LOC_SYSTEM_INFORMATION_FAITH,신앙 정보
-LOC_SYSTEM_INFORMATION_INDENTIFY,식별된 아이템 정보
-LOC_SYSTEM_INFORMATION_PROPERTY,특성 정보
-LOC_SYSTEM_INFORMATION_SPELL,배운 마법
-LOC_SYSTEM_INFORMATION_LEARN_SPELL,마법 배우기
-LOC_SYSTEM_INFORMATION_SKILL,스킬창 표시
-LOC_SYSTEM_INFORMATION_RUNE,획득한 룬
-LOC_SYSTEM_INFORMATION_DUNGEON,던전 진행도
-LOC_SYSTEM_INFORMATION_LOG,지난 로그
-LOC_SYSTEM_INFORMATION_DUMP,게임 덤프
+LOC_SYSTEM_THROW,Danmaku / Throw
+LOC_SYSTEM_EQUIP_WEAPON,Equip Weapon
+LOC_SYSTEM_UNEQUIP_WEAPON,Unequip Weapon
+LOC_SYSTEM_EQUIP_ARMOUR,Equip Armor
+LOC_SYSTEM_UNEQUIP_ARMOUR,Unequip Armor
+LOC_SYSTEM_EQUIP_JEWELRY,Equip Jewelry
+LOC_SYSTEM_UNEQUIP_JEWELRY,Unequip Jewelry
+LOC_SYSTEM_ITEM_COMMAND,Item Commands
+LOC_SYSTEM_CMD_AUTOTRAVEL,Auto Explore
+LOC_SYSTEM_CMD_AUTOATTACK,Auto Attack
+LOC_SYSTEM_CMD_HUNDRED_TRUN,Rest for 100 Turns
+LOC_SYSTEM_CMD_MAGIC,Use Magic
+LOC_SYSTEM_CMD_SKILL,Activation
+LOC_SYSTEM_CMD_SHOUT,Shout
+LOC_SYSTEM_CMD_DOOR,Open/Close Door
+LOC_SYSTEM_CMD_PRAY,Pray
+LOC_SYSTEM_CMD_MORE_ITEM,More Item Commands
+LOC_SYSTEM_CMD_AUTOPICKUP_ON,Auto Item Pickup Enabled
+LOC_SYSTEM_CMD_AUTOPICKUP_OFF,Manual Item Pickup Enabled
+LOC_SYSTEM_CMD_AUTOTANMAC_ON,Auto Battle: Always Using Danmaku
+LOC_SYSTEM_CMD_AUTOTANMAC_OFF,Auto Battle: Danmaku Disabled
+LOC_SYSTEM_CMD_AUTOTANMAC_AUTO,Auto Battle: Danmaku at Long Range
+LOC_SYSTEM_CMD_SKILL_VIEW,Display Skills and Allocate Experience
+LOC_SYSTEM_CMD_MORE_VIEW,More Information Commands
+LOC_SYSTEM_CMD_HELP,Help
+LOC_SYSTEM_CMD_QUIT,Save and Quit
+LOC_SYSTEM_INFORMATION_COMMAND,Additional Information Window
+LOC_SYSTEM_INFORMATION_CHARACTER,Character Information
+LOC_SYSTEM_INFORMATION_FAITH,Faith Information
+LOC_SYSTEM_INFORMATION_INDENTIFY,Identified Items
+LOC_SYSTEM_INFORMATION_PROPERTY,Property Information
+LOC_SYSTEM_INFORMATION_SPELL,Learned Spells
+LOC_SYSTEM_INFORMATION_LEARN_SPELL,Learn New Spell
+LOC_SYSTEM_INFORMATION_SKILL,Skill Window
+LOC_SYSTEM_INFORMATION_RUNE,Acquired Runes
+LOC_SYSTEM_INFORMATION_DUNGEON,Dungeon Progress
+LOC_SYSTEM_INFORMATION_LOG,Past Logs
+LOC_SYSTEM_INFORMATION_DUMP,Game Dump
 LOC_SYSTEM_LEFT_HAND,Left Hand
 LOC_SYSTEM_RIGHT_HAND,Right Hand
 LOC_SYSTEM_EQUIP_TANMAC,Danmaku
@@ -2063,49 +2063,49 @@ LOC_SYSTEM_SPELL_CAST_PANALTY3,You suffered severe brain pain from magical backl
 LOC_SYSTEM_SPELL_NEED_POWER,Your brain took terrible damage from magical backlash.
 LOC_SYSTEM_SPELL_EXIST_POS,You need at least 1 Power to use magic!
 LOC_SYSTEM_SPELL_EXIST_SMOKE,You can't use that where someone already stands.
-LOC_SYSTEM_SPELL_CURE_POISON,You can't use that where someone already stands.
-LOC_SYSTEM_SPELL_SHOULD_POISON,The poison has been cured.
-LOC_SYSTEM_SPELL_CANT_BRAND,Can only be used while poisoned.
-LOC_SYSTEM_SPELL_ELEC_FAIL,The spell has no effect.
-LOC_SYSTEM_SPELL_SANTUARY,No electrified enemy in that direction.
-LOC_SYSTEM_SPELL_WHIRLWIND,A sanctuary has unfolded!
-LOC_SYSTEM_SPELL_SELF_INJURY_SLEEP,A whirlwind surges!
-LOC_SYSTEM_SPELL_SELF_INJURY_CANT,Sleeping enemies can't self-harm.
-LOC_SYSTEM_SPELL_SHOULD_UNARMED,This enemy can't self-harm.
-LOC_SYSTEM_SPELL_CANT_TRAP,Can't be used while holding something.
-LOC_SYSTEM_SPELL_STONE_TRAP,You can't set that up here.
-LOC_SYSTEM_SPELL_TEWI_HORN,You laid sharp rocks on the ground.
-LOC_SYSTEM_SPELL_RABBIT_HORN,Tewi is loudly summoning rabbits.
-LOC_SYSTEM_SPELL_FIRESTORM,A loud horn gathers the rabbits.
-LOC_SYSTEM_SPELL_BLIZZARD,A firestorm has erupted!
-LOC_SYSTEM_SPELL_P_COLLECT,A blizzard rages!
-LOC_SYSTEM_SPELL_P_COLLECT_NONE,{0} P items were collected at once.
-LOC_SYSTEM_SPELL_ONLY_ONE_FILED,No P items in sight.
-LOC_SYSTEM_SPELL_FILED_VIOLET,Only one wave can be controlled per floor.
-LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL,A violet wave has emerged!
-LOC_SYSTEM_SPELL_TOO_CLOSE,In the Dreamworld, teleportation can't be controlled. Are you sure?
-LOC_SYSTEM_SPELL_CANT_LEAP,Too close to use on the target.
-LOC_SYSTEM_SPELL_ONLY_ONE_NAMAZ,You can't leap there.
-LOC_SYSTEM_SPELL_NAMAZ_READY,Only one catfish can be dropped per floor.
-LOC_SYSTEM_SPELL_NAMAZ,You hear the sound of wind from the sky!
-LOC_SYSTEM_SPELL_UNLUCKY1,A giant catfish has fallen!
-LOC_SYSTEM_SPELL_UNLUCKY2,You felt a bit unlucky.
-LOC_SYSTEM_SPELL_UNLUCKY3,You feel quite unlucky.
-LOC_SYSTEM_SPELL_MACRO_BURST_NEED_SPACE,You sense the malice of the world!
-LOC_SYSTEM_SPELL_MACRO_BURST,You need enough space behind you to use this spell.
-LOC_SYSTEM_SPELL_MACRO_BURST_TARGET_MOVABLE,You leapt backward with a powerful gust.
-LOC_SYSTEM_SPELL_EARTHQUAKE,Not enough footing space behind.
-LOC_SYSTEM_SPELL_ACNHOR,Ka-crash!
-LOC_SYSTEM_SPELL_PSYCHOKINESIS_FAIL,A giant anchor slammed into the ground!
-LOC_SYSTEM_SPELL_TRASH_RUSH,This target can't be moved with psychokinesis.
-LOC_SYSTEM_SPELL_MYSTIA_SONG,A pile of trash starts flying your way!
-LOC_SYSTEM_SPELL_DREAM_CALL,You hear the song of the night sparrow!
-LOC_SYSTEM_SPELL_REIMU_BARRIER,Enemies have surrounded you in an instant!
-LOC_SYSTEM_SPELL_TOO_DANGEROURS,A barrier set by Reimu prevents escape!
-LOC_SYSTEM_SPELL_SELF_HURT,This spell is too dangerous to use. Still want to use it?
-LOC_SYSTEM_SPELL_BLOCK,This attack will hurt you too. Still want to use it?
-LOC_SYSTEM_SPELL_EXHAUST,This place is blocked.
-LOC_SYSTEM_SPELL_CAST_FAIL,You're too exhausted to use this spell.
+LOC_SYSTEM_SPELL_CURE_POISON,The poison has been cured.
+LOC_SYSTEM_SPELL_SHOULD_POISON,Can only be used while poisoned.
+LOC_SYSTEM_SPELL_CANT_BRAND,The spell has no effect.
+LOC_SYSTEM_SPELL_ELEC_FAIL,No electrified enemy in that direction.
+LOC_SYSTEM_SPELL_SANTUARY,A sanctuary has unfolded!
+LOC_SYSTEM_SPELL_WHIRLWIND,A whirlwind surges!
+LOC_SYSTEM_SPELL_SELF_INJURY_SLEEP,Sleeping enemies can't self-harm.
+LOC_SYSTEM_SPELL_SELF_INJURY_CANT,This enemy can't self-harm.
+LOC_SYSTEM_SPELL_SHOULD_UNARMED,Can't be used while holding something.
+LOC_SYSTEM_SPELL_CANT_TRAP,You can't set that up here.
+LOC_SYSTEM_SPELL_STONE_TRAP,You laid sharp rocks on the ground.
+LOC_SYSTEM_SPELL_TEWI_HORN,Tewi is loudly summoning rabbits.
+LOC_SYSTEM_SPELL_RABBIT_HORN,A loud horn gathers the rabbits.
+LOC_SYSTEM_SPELL_FIRESTORM,A firestorm has erupted!
+LOC_SYSTEM_SPELL_BLIZZARD,A blizzard rages!
+LOC_SYSTEM_SPELL_P_COLLECT,{0} P items were collected at once.
+LOC_SYSTEM_SPELL_P_COLLECT_NONE,No P items in sight.
+LOC_SYSTEM_SPELL_ONLY_ONE_FILED,Only one wave can be controlled per floor.
+LOC_SYSTEM_SPELL_FILED_VIOLET,A violet wave has emerged!
+LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL,In the Dreamworld, teleportation can't be controlled. Are you sure?
+LOC_SYSTEM_SPELL_TOO_CLOSE,Too close to use on the target.
+LOC_SYSTEM_SPELL_CANT_LEAP,You can't leap there.
+LOC_SYSTEM_SPELL_ONLY_ONE_NAMAZ,Only one catfish can be dropped per floor.
+LOC_SYSTEM_SPELL_NAMAZ_READY,You hear the sound of wind from the sky!
+LOC_SYSTEM_SPELL_NAMAZ,A giant catfish has fallen!
+LOC_SYSTEM_SPELL_UNLUCKY1,You felt a bit unlucky.
+LOC_SYSTEM_SPELL_UNLUCKY2,You feel quite unlucky.
+LOC_SYSTEM_SPELL_UNLUCKY3,You sense the malice of the world!
+LOC_SYSTEM_SPELL_MACRO_BURST_NEED_SPACE,You need enough space behind you to use this spell.
+LOC_SYSTEM_SPELL_MACRO_BURST,You leapt backward with a powerful gust.
+LOC_SYSTEM_SPELL_MACRO_BURST_TARGET_MOVABLE,Not enough footing space behind.
+LOC_SYSTEM_SPELL_EARTHQUAKE,Ka-crash!
+LOC_SYSTEM_SPELL_ACNHOR,A giant anchor slammed into the ground!
+LOC_SYSTEM_SPELL_PSYCHOKINESIS_FAIL,This target can't be moved with psychokinesis.
+LOC_SYSTEM_SPELL_TRASH_RUSH,A pile of trash starts flying your way!
+LOC_SYSTEM_SPELL_MYSTIA_SONG,You hear the song of the night sparrow!
+LOC_SYSTEM_SPELL_DREAM_CALL,Enemies have surrounded you in an instant!
+LOC_SYSTEM_SPELL_REIMU_BARRIER,A barrier set by Reimu prevents escape!
+LOC_SYSTEM_SPELL_TOO_DANGEROURS,This spell is too dangerous to use. Still want to use it?
+LOC_SYSTEM_SPELL_SELF_HURT,This attack will hurt you too. Still want to use it?
+LOC_SYSTEM_SPELL_BLOCK,This place is blocked.
+LOC_SYSTEM_SPELL_EXHAUST,You're too exhausted to use this spell.
+LOC_SYSTEM_SPELL_CAST_FAIL,You failed to cast the spell.
 LOC_SYSTEM_SPELL_ALCHEMY_LONG,The buff from your alchemy has been extended.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_ON,Your fists have become as hard as stone.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_OFF,Your fists have returned to normal.
@@ -4560,8 +4560,8 @@ LOC_SYSTEM_REPLAY_NOTEXIST,The file doesn't exist!
 LOC_SYSTEM_REPLAY_PAGE,Page {0}
 LOC_SYSTEM_REPLAYING,Replaying Mode
 LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
-LOC_SYSTEM_STEAM_INIT_SUCCESS,스팀연동 성공
-LOC_SYSTEM_STEAM_INIT_FAIL,스팀연동 실패
+LOC_SYSTEM_STEAM_INIT_SUCCESS,Steam integration successful
+LOC_SYSTEM_STEAM_INIT_FAIL,Steam integration failed
 LOC_SYSTEM_DEBUG_WARN,Warning! Wizard Mode disables score submission and significantly reduces the fun.
 LOC_SYSTEM_DEBUG_WARN_YN,Are you really going to enable it?
 LOC_SYSTEM_DEBUG_WIZARD_CANCLE,Cancel Wizard Mode

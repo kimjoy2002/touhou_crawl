@@ -561,7 +561,7 @@ public:
 	list<item>::iterator GetItemIterator(char id_);
 	void auto_equip_iden();
 	bool isGrazeAmulet();
-	void resetAmuletPercent(amulet_type type_);
+	void resetAmuletPercent(amulet_type type_, bool use_);
 	bool equip(char id_, equip_type type_, bool speak_ = true);
 	bool equip(list<item>::iterator &it, equip_type type_, bool speak_ = true);
 	bool equiparmor(char id_, bool speak_ = true);

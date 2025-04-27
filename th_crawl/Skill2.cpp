@@ -1934,7 +1934,18 @@ void SkillUse(char auto_)
 				changemove(0);
 			}
 			else if(key_ == -1) {
-				if(inputedKey.isRightClick()) {
+				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+					if(skill_list skill_ = (skill_list)you.MemorizeSkill[asctonum(inputedKey.val1)])
+					{
+						WaitForSingleObject(mutx, INFINITE);
+						SetText() = GetSkillInfor(skill_);
+						changedisplay(DT_TEXT);
+						ReleaseMutex(mutx);
+						waitkeyinput();
+						changedisplay(DT_SKILL_USE);
+						changemove(0);
+					}
+				} else if(inputedKey.isRightClick()) {
 					break;
 				}
 			}

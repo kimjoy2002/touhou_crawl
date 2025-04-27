@@ -114,7 +114,7 @@ void Long_Move(const coord_def &c)
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
-	if(!PathSearch(you.position,c,you.will_move,ST_NORMAL))
+	if(!PathSearch(you.position,c,you.will_move,ST_NORMAL,current_level,you.isFly(),you.isSwim()))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
 	}
@@ -188,7 +188,7 @@ void repeat_action()
 		Pray(); 
 		break;
 	case 'z':
-		SpellUse(you.prev_action_key.item, you.prev_action_key.num); //TODO
+		SpellUse(you.prev_action_key.item, you.prev_action_key.num, false); //TODO
 		break;
 	case 'a':
 		SkillUse(you.prev_action_key.item); //TODO
@@ -312,6 +312,7 @@ void auto_Move()
 						return;
 					}
 					back_ = true;
+					break;
 				}
 			}
 		}

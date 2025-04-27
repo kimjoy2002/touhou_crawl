@@ -36,7 +36,13 @@ endif()
 
 set(DirectXTK "F:/Download/DirectXTK-main/DirectXTK-main/")
 include_directories(${DirectXTK}/Inc)
-link_directories(${DirectXTK}/Bin/Desktop_2019/x64/Debug)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    link_directories(${DirectXTK}/Bin/Desktop_2019/x64/Debug)
+else()
+    message("Release Desktop_2019 Build")
+    link_directories(${DirectXTK}/Bin/Desktop_2019/x64/Release)
+endif()
+
 set(DirectXTK_LIB DirectXTK)
 
 
@@ -96,21 +102,15 @@ else()
         -Od
         -Zi
     )
-    target_link_options(${PROJECT_NAME} PRIVATE
-        -fsanitize=address
-        -Zi
-    )
-
     execute_process(COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Release)
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/Release)
 endif()
 
+
 set(DLL_FILES
-    "${CMAKE_SOURCE_DIR}/dll/msvcp100.dll"
-    "${CMAKE_SOURCE_DIR}/dll/msvcr100.dll"
-    "${CMAKE_SOURCE_DIR}/dll/D3DX9_43.dll"
-    "${CMAKE_SOURCE_DIR}/dll/steam_api64.dll"
+"${CMAKE_SOURCE_DIR}/dll/steam_api64.dll"
 )
+
 foreach(DLL ${DLL_FILES})
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different

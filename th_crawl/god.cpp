@@ -2665,7 +2665,10 @@ void God_show()
 	printsub("",true,CL_normal);
 	ss << LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ":";
 	string cost = "(" + LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ")";
-	ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+	if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 
 	printsub(ss.str(),true,CL_normal);
 	printsub("",true,CL_normal);
@@ -2684,7 +2687,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_joon_and_sion);
 			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
 				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1), true, CL_joon_and_sion);
@@ -2706,7 +2712,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ACTIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
 			printsub("", true, CL_normal);
 		}
@@ -2717,7 +2726,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
@@ -2726,7 +2738,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
@@ -2735,7 +2750,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
@@ -2747,7 +2765,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
@@ -2756,7 +2777,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
@@ -2765,7 +2789,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
@@ -2777,7 +2804,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_joon);
 				printsub("", true, CL_normal);
 			}
@@ -2786,7 +2816,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_sion);
 				printsub("", true, CL_normal);
 			}
@@ -2795,7 +2828,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
@@ -2807,7 +2843,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_joon_and_sion);
 				printsub("", true, CL_normal);
 			}
@@ -2816,7 +2855,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_bad);
 				printsub("", true, CL_normal);
 			}
@@ -2829,7 +2871,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
@@ -2839,7 +2884,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
@@ -2849,7 +2897,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
@@ -2859,7 +2910,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
@@ -2869,7 +2923,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_blue);
 			printsub("",true,CL_normal);
 		}
@@ -2881,7 +2938,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2891,7 +2951,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2901,7 +2964,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2913,7 +2979,10 @@ void God_show()
 			ss.clear();
 			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR);
 			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_COST);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2921,9 +2990,12 @@ void God_show()
 		{
 			ss.str("");
 			ss.clear();
-			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][1], SWAKO_COST);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			ss << GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_COST);
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2931,9 +3003,12 @@ void God_show()
 		{
 			ss.str("");
 			ss.clear();
-			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][2], SWAKO_COST);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			ss << GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_COST);
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2941,9 +3016,12 @@ void God_show()
 		{
 			ss.str("");
 			ss.clear();
-			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][3], SWAKO_COST);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			ss << GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_COST);
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2951,9 +3029,12 @@ void God_show()
 		{
 			ss.str("");
 			ss.clear();
-			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][4], SWAKO_COST);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			ss << GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR);
+			cost = GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_COST);
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_help);
 			printsub("",true,CL_normal);
 		}
@@ -2965,7 +3046,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -2975,7 +3059,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -2985,7 +3072,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -2995,7 +3085,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -3005,7 +3098,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -3015,7 +3111,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_warning);
 			printsub("",true,CL_normal);
 		}
@@ -3027,7 +3126,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
@@ -3037,7 +3139,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
@@ -3047,7 +3152,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
@@ -3057,7 +3165,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_green);
 			printsub("",true,CL_normal);
 		}
@@ -3069,7 +3180,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
@@ -3079,7 +3193,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
@@ -3089,7 +3206,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
@@ -3099,7 +3219,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
@@ -3109,7 +3232,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_white_puple);
 			printsub("",true,CL_normal);
 		}
@@ -3121,7 +3247,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3131,7 +3260,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3141,7 +3273,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3151,7 +3286,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3161,7 +3299,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3171,7 +3312,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3181,7 +3325,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuigi);
 			printsub("",true,CL_normal);
 		}
@@ -3193,7 +3340,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3203,14 +3353,20 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 			ss.str("");
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3220,7 +3376,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3230,7 +3389,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3240,7 +3402,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3250,7 +3415,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_autumn);
 			printsub("",true,CL_normal);
 		}
@@ -3262,7 +3430,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3272,7 +3443,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3282,7 +3456,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3292,7 +3469,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3302,7 +3482,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3312,7 +3495,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3322,7 +3508,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_hina);
 			printsub("",true,CL_normal);
 		}
@@ -3334,7 +3523,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3344,7 +3536,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3354,7 +3549,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3364,7 +3562,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3374,7 +3575,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3384,7 +3588,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yukari);
 			printsub("",true,CL_normal);
 		}
@@ -3396,14 +3603,20 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 			ss.str("");
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 			if(level_ >= 1)
@@ -3412,7 +3625,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(),true,CL_small_danger);
 				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1),true,CL_small_danger);
 				if(level_ >= 2)
@@ -3433,7 +3649,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_POTION);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3443,7 +3662,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3453,7 +3675,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_small_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3465,7 +3690,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
@@ -3475,7 +3703,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
@@ -3485,7 +3716,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
@@ -3495,7 +3729,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_yuyuko);
 			printsub("",true,CL_normal);
 		}
@@ -3507,7 +3744,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3517,7 +3757,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3527,7 +3770,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3537,7 +3783,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3547,7 +3796,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal);
 		}
@@ -3557,7 +3809,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_danger);
 			printsub("",true,CL_normal); 
 		}
@@ -3576,7 +3831,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
@@ -3586,7 +3844,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_seija);
 			printsub("", true, CL_normal);
 		}
@@ -3596,7 +3857,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
@@ -3606,7 +3870,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_seija);
 			printsub("",true,CL_normal);
 		}
@@ -3665,7 +3932,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
@@ -3675,7 +3945,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
@@ -3685,7 +3958,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
@@ -3695,7 +3971,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
@@ -3705,7 +3984,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(),true,CL_lilly);
 			printsub("",true,CL_normal);
 		}
@@ -3728,7 +4010,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, CL_miko);
 			}
 			printsub("", true, CL_normal);
@@ -3739,7 +4024,10 @@ void God_show()
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2);
 				popcost << std::setw(3) << (getMikoPiety(0) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
 			}
 			printsub("", true, CL_normal);
@@ -3750,7 +4038,10 @@ void God_show()
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3);
 				popcost << std::setw(3) << (getMikoPiety(1) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
 			}
 			printsub("", true, CL_normal);
@@ -3761,7 +4052,10 @@ void God_show()
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4);
 				popcost << std::setw(3) << (getMikoPiety(2) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
 			}
 			printsub("", true, CL_normal);
@@ -3772,7 +4066,10 @@ void God_show()
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5);
 				popcost << std::setw(3) << (getMikoPiety(3) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
 			}
 			printsub("", true, CL_normal);
@@ -3783,7 +4080,10 @@ void God_show()
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6);
 				popcost << std::setw(3) << (getMikoPiety(4) / 2);
 				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 				printsub(ss.str(), true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
 			}
 			printsub("", true, CL_normal);
@@ -3796,7 +4096,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3806,7 +4109,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3816,7 +4122,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3826,7 +4135,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3836,7 +4148,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3846,7 +4161,10 @@ void God_show()
 			ss.clear();
 			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6);
 			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+			else
+				ss << ' ';
+			ss << cost;
 			printsub(ss.str(), true, CL_okina);
 			printsub("", true, CL_normal);
 		}
@@ -3863,7 +4181,10 @@ void God_show()
 					ss.clear();
 					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1);
 					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+					else
+						ss << ' ';
+					ss << cost;
 					printsub(ss.str(), true, CL_junko);
 					if (you.god_value[GT_JUNKO][3] == 7)
 						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
@@ -3878,7 +4199,10 @@ void God_show()
 					ss.clear();
 					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1);
 					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+					else
+						ss << ' ';
+					ss << cost;
 					printsub(ss.str(), true, CL_junko);
 					if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
 					{
@@ -3895,7 +4219,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+				else
+					ss << ' ';
+				ss << cost;
 				printsub(ss.str(), true, already_pure? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
@@ -3905,7 +4232,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+				else
+					ss << ' ';
+				ss << cost;
 				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
@@ -3915,7 +4245,10 @@ void God_show()
 				ss.clear();
 				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4);
 				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+				else
+					ss << ' ';
+				ss << cost;
 				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
 				printsub("", true, CL_normal);
 			}
@@ -3960,7 +4293,10 @@ void God_show()
 					ss.clear();
 					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5);
 					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-					ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ') << cost;
+					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+					else
+						ss << ' ';
+					ss << cost;
 					printsub(ss.str(), true, CL_junko);
 				}
 				printsub("", true, CL_normal);

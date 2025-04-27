@@ -143,26 +143,26 @@ bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag)
 }
 
 
-std::string SpellcardName(spellcard_evoke_type skill)
+LOCALIZATION_ENUM_KEY SpellcardName(spellcard_evoke_type skill)
 {
 	switch(skill)
 	{
 	case SPC_V_INVISIBLE: //월-투명+회피
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_INVISIBLE);
+		return LOC_SYSTEM_SPELLCARD_INVISIBLE;
 	case SPC_V_FIRE: //화-구름생성
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_FIRE);
+		return LOC_SYSTEM_SPELLCARD_FIRE;
 	case SPC_V_ICE: //수-관통형볼트
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_ICE);
+		return LOC_SYSTEM_SPELLCARD_ICE;
 	case SPC_V_AIR: //목-밀쳐내기
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_AIR);
+		return LOC_SYSTEM_SPELLCARD_AIR;
 	case SPC_V_METAL://금-
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_METAL);
+		return LOC_SYSTEM_SPELLCARD_METAL;
 	case SPC_V_EARTH: //토-벽파괴
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_EARTH);
+		return LOC_SYSTEM_SPELLCARD_EARTH;
 	case SPC_V_SUN://일-주변 몬스터 혼란+투명해제
-		return LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_SUN);
+		return LOC_SYSTEM_SPELLCARD_SUN;
 	default:
-		return "";
+		return LOC_NONE;
 	}
 }
 int SpellcardMaxCharge(spellcard_evoke_type skill)

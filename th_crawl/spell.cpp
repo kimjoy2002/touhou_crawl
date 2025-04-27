@@ -1901,27 +1901,27 @@ void SimpleSpellUse()
 			if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
 			{
 				deletelog();
-				SpellUse(key_, 0);
+				SpellUse(key_, 0, true);
 				return;
 			}
 		}
 		else if(key_ == VK_RETURN) {
 			deletelog();
 			if(prevSpell_) {
-				SpellUse(prevSpell_, 0);
+				SpellUse(prevSpell_, 0, true);
 			}
 			return;
 		}
 		else if(key_ == '*') {
 			deletelog();
-			SpellUse(0, 0);
+			SpellUse(0, 0, false);
 			return;
 		}
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_MENU || inputedKey.val1 == SYSCMD_MAGIC) {
 				deletelog();
 				if(prevSpell_) {
-					SpellUse(prevSpell_, 0);
+					SpellUse(prevSpell_, 0, true);
 				}
 				return;
 			}
@@ -1950,7 +1950,7 @@ void SimpleSpellUse()
 
 
 
-void SpellUse(char auto_, int auto_direc_)
+void SpellUse(char auto_, int auto_direc_, bool only_char)
 {
 	bool silence_ = env[current_level].isSilence(you.position);
 	if(spell_prev_fail()) {
@@ -2036,7 +2036,7 @@ void SpellUse(char auto_, int auto_direc_)
 							beam_iterator beam(you.position,you.position);
 							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
 							auto it = you.item_list.end();
-							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), auto_>0))
+							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), (auto_>0 && !only_char)))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)
@@ -2129,7 +2129,7 @@ void SpellUse(char auto_, int auto_direc_)
 					use_ = true;
 				}
 			}
-			else if(key_ == -1) {				
+			else if(key_ == -1) {
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 					if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
 					{

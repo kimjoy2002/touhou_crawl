@@ -174,10 +174,6 @@ bool Setup()
 	endmutx=CreateMutex(NULL, FALSE, NULL);
 	mutx=CreateMutex(NULL, FALSE, NULL);
 	DisplayManager.Getfontinfor();
-	
-	map_list.random_number = (unsigned long)time(NULL);
-	init_nonlogic_seed((unsigned long)time(NULL));
-	srand((unsigned int)map_list.random_number);
 	return return_;
 }
 
@@ -229,6 +225,10 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   PSTR cmdLine,
 				   int showCmd)
 {
+	map_list.random_number = (unsigned long)time(NULL);
+	init_nonlogic_seed((unsigned long)time(NULL));
+	srand((unsigned int)map_list.random_number);
+
 	g_keyQueue = std::make_unique<KeyInputQueue>();
 	init_save_paths();
 	//random_number = (unsigned int)time(NULL);

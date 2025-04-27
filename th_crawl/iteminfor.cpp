@@ -23,6 +23,7 @@
 #include "god.h"
 #include "mon_infor.h"
 #include <set>
+#include <iomanip> 
 
 extern HANDLE mutx;
 extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
@@ -727,7 +728,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 			if (shieldPanaltyOfWeapon(it->type, it->value0)) {
 				ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO2, 
-					PlaceHolderHelper(to_string(shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f)));
+					PlaceHolderHelper(float_to_string(shieldPanaltyOfWeapon(it->type, it->value0) / 10.0f)));
 			}
 			_infor_(ss.str());
 		}
@@ -739,7 +740,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3));
 			_infor_("\n");
 			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
-					PlaceHolderHelper(to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
+					PlaceHolderHelper(float_to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
 					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true)))));
 		}
 

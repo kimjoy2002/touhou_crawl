@@ -8,6 +8,7 @@
 #include <ctime>
 #include <iostream>
 #include <DirectXMath.h> 
+#include <iomanip>
 using namespace std;
 
 
@@ -259,6 +260,31 @@ coord_def GetDirecToPos(int pos_)
 	}
 	return coord_def(0,0);
 }
+
+int GetDirecToChar(int pos_)
+{
+	switch((pos_+8)%8)
+	{
+	case 7:
+		return 'y';
+	case 0:
+		return 'k';
+	case 1:
+		return 'u';
+	case 6:
+		return 'h';
+	case 2:
+		return 'l';
+	case 5:
+		return 'b';
+	case 4:
+		return 'j';
+	case 3:
+		return 'n';
+	}
+	return VK_RETURN;
+}
+
 int GetAngleToDirec(int angle)
 {
 	if(angle>=22 && angle <67)
@@ -321,6 +347,24 @@ float ceil_up(float x)
 {
    return ((x>0) ? floor(x+0.999f) : ceil(x-0.001f));
 }
+
+string float_to_string(float value, int precision) {
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(precision) << value;
+    std::string result = oss.str();
+
+    // 뒤에 붙은 불필요한 0 제거
+    result.erase(result.find_last_not_of('0') + 1, std::string::npos);
+
+    // 소수점만 남으면 삭제
+    if (!result.empty() && result.back() == '.') {
+        result.pop_back();
+    }
+
+    return result;
+}
+
+
 unsigned char asctonum(char a)
 {
 	return (a>='a'&&a<='z')?(a-'a'):((a>='A'&&a<='Z')?(a-'A'+26):0);

@@ -752,7 +752,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << SpellcardName((spellcard_evoke_type)cur_) << LocalzationManager::locString(LOC_SYSTEM_SPELLCARD);
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(LOC_SYSTEM_SPELLCARD_IDENTIFY, PlaceHolderHelper(SpellcardName((spellcard_evoke_type)cur_)));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc2.bottom = rc2.top + fontDesc.Height;
@@ -2051,7 +2051,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss.clear();
 			item* _item = you.equipment[ET_NECK];
 			ss << _item->id << ") " << _item->GetName(-1, true);
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,_item->item_color());
@@ -2078,7 +2078,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss.clear();
 			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName(-1, true);
 
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
@@ -2106,7 +2106,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss.str("");
 			ss.clear();
 			ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName(-1, true);
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 30, 36);
+			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
@@ -3421,7 +3421,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	
 	if(!mouseInfo.empty()) {
-		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width;
+		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width+fontDesc.Width;
 		RECT rc = {MousePoint.x-strWidth/2,  (LONG)(MousePoint.y-fontDesc.Height), MousePoint.x+strWidth/2 ,MousePoint.y}; 
 	
 		if (rc.right  > option_mg.getWidth()) {
@@ -3473,8 +3473,8 @@ void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	if (infobox.draw)
 	{
 		RECT rc_ = { infobox.x, infobox.y, infobox.x + infobox.x_size, infobox.y + infobox.y_size };
-		if (rc_.left + infobox.x_size / 2  > option_mg.getWidth()) {
-			int i = rc_.left + infobox.x_size / 2 - option_mg.getWidth();
+		if (rc_.left + infobox.x_size  > option_mg.getWidth()) {
+			int i = rc_.left + infobox.x_size - option_mg.getWidth();
 			rc_.left -= i;
 			rc_.right -= i;
 		}
@@ -3963,7 +3963,7 @@ string getCommandString(int kind, int value) {
 	case SYSCMD_MORE_ITEM:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_MORE_ITEM);
 	case SYSCMD_AUTOPICKUP:
-		return LocalzationManager::locString(value!=0?LOC_SYSTEM_CMD_AUTOPICKUP_ON:LOC_SYSTEM_CMD_AUTOPICKUP_OFF);
+		return LocalzationManager::locString(value>0?LOC_SYSTEM_CMD_AUTOPICKUP_ON:LOC_SYSTEM_CMD_AUTOPICKUP_OFF);
 	case SYSCMD_AUTOTANMAC:
 		return LocalzationManager::locString(value==2?LOC_SYSTEM_CMD_AUTOTANMAC_AUTO:(value==1?LOC_SYSTEM_CMD_AUTOTANMAC_ON:LOC_SYSTEM_CMD_AUTOTANMAC_OFF));
 	case SYSCMD_SKILL_VIEW:

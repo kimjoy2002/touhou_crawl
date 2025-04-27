@@ -472,7 +472,24 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 			(*c) = coord_def(you.position.x,you.position.y);
 			return VK_RETURN;
 		case -1:
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_MAP) {
+				(*c) = coord_def(inputedKey.val1, inputedKey.val2);				
+				return GetDirecToChar(GetPosToDirec(you.position, *c));
+			}
+			else if(inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+				if(unit *unit_ = env[current_level].isMonsterPos(inputedKey.val1, inputedKey.val2))
+				{
+					if(!unit_->isplayer())
+					{
+						GetMonsterInfor((monster*)unit_);
+						changedisplay(DT_SUB_TEXT);
+						waitkeyinput();
+						changedisplay(DT_GAME);
+					}
+				}
+				break;	
+			}
+			else if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {

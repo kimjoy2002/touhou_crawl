@@ -478,24 +478,48 @@ void InputInitialize(HINSTANCE hinstance)
 
 bool one_turn_click = true;
 
+bool isInScreen() {
+	POINT cursorPos;
+	GetCursorPos(&cursorPos);
+	RECT clientRect;
+	GetClientRect(hwnd, &clientRect);
+		POINT clientPos = cursorPos;
+	ScreenToClient(hwnd, &clientPos);
+	if (clientPos.x < 0 || clientPos.y < 0 || clientPos.x >= clientRect.right || clientPos.y >= clientRect.bottom) {
+		return true; // 밖이면 무시
+	}
+	return false;
+
+}
+
 bool isClicked(MOUSE_BUTTON button) {
 	if(!one_turn_click || GetForegroundWindow() != hwnd) {
 		return false;
 	}
 
+
 	if(button == LEFT_CLICK) {
+		if(isInScreen()) {
+			return false;
+		}
 		if((!(PreviousMouseState.rgbButtons[0] & 0x80) && (CurrentMouseState.rgbButtons[0] & 0x80))) {
 			one_turn_click = false;
 			return true;
 		}
 	}
 	else if(button == RIGHT_CLICK) {
+		if(isInScreen()) {
+			return false;
+		}
 		if((!(PreviousMouseState.rgbButtons[1] & 0x80) && (CurrentMouseState.rgbButtons[1] & 0x80))) {
 			one_turn_click = false;
 			return true;
 		}
 	}
 	else if(button == MIDDLE_CLICK) {
+		if(isInScreen()) {
+			return false;
+		}
 		if((!(PreviousMouseState.rgbButtons[2] & 0x80) && (CurrentMouseState.rgbButtons[2] & 0x80))) {
 			one_turn_click = false;
 			return true;

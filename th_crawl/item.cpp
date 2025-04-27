@@ -298,7 +298,7 @@ string item::GetName(int num_, bool simple_)
 					temp += LocalzationManager::formatString(ring_uniden_string[iden_list.ring_list[value1].type], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));				
 				}
 			} else if(iden_list.ring_list[value1].iden == 2)  {
-				temp += LocalzationManager::locString(ring_iden_string[value1]);
+				temp += LocalzationManager::formatString(ring_iden_string[value1],"");
 			} else {
 				temp += LocalzationManager::locString(ring_uniden_string[iden_list.ring_list[value1].type]);				
 			}
@@ -316,8 +316,10 @@ string item::GetName(int num_, bool simple_)
 
 	if(type==ITM_SPELL)
 	{
-		if(iden_list.spellcard_list[value2].iden == 2)
-			temp+=SpellcardName((spellcard_evoke_type)value2);
+		if(iden_list.spellcard_list[value2].iden == 2) {
+			temp+=LocalzationManager::formatString(LOC_SYSTEM_SPELLCARD_IDENTIFY, SpellcardName((spellcard_evoke_type)value2));
+			overwriteName = true;
+		}
 	}
 	if(type==ITM_AMULET)
 	{

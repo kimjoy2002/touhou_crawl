@@ -1,0 +1,1526 @@
+SPEAK_FOUND,{0}は叫んだ。
+SPEAK_NORMAL,{0}は叫んだ。
+SPEAK_MAGIC,{0}が呪文を唱えた。
+SPEAK_CONFUSE,{0}は混乱している。
+SPEAK_CAMERA,{0}はポーズを取った。
+SPEAK_YUKKURI_NORMAL,{0}は叫んだ。「ゆっくりしていってね！！！」
+SPEAK_RUMIA_NORMAL1,{0}は叫んだ。「そうなのかー」
+SPEAK_RUMIA_NORMAL2,{0}は叫んだ。「{1}を食べてもいい{2}？」
+SPEAK_RUMIA_NORMAL3,{0}は叫んだ。「ダンジョン狭いー！壁にすぐぶつかるよー！」
+SPEAK_RUMIA_NORMAL4,{0}は叫んだ。「何のためにダンジョンを探検してるの？」
+SPEAK_RUMIA_NORMAL5,{0}は叫んだ。「私の闇から出ていけ！」
+SPEAK_RUMIA_NORMAL6,{0}は叫んだ。「最近人間を全然食べてないなぁ…」
+SPEAK_RUMIA_NORMAL7,{0}は叫んだ。「そうなのか？」
+SPEAK_RUMIA_NORMAL8,{0}はぼんやりと空を見上げた。
+SPEAK_RUMIA_NORMAL9,{0}はじっとこちらを見つめた。
+SPEAK_RUMIA_NORMAL10,{0}は叫んだ。「この前{1}に襲われかけたんだよ。」
+SPEAK_RUMIA_CONFUSE1,{0}は叫んだ。「そうだったっけ？」
+SPEAK_RUMIA_CONFUSE2,{0}は叫んだ。「どこだーーー！？」
+SPEAK_RUMIA_CONFUSE3,{0}は叫んだ。「目がぐるぐるするー！」
+SPEAK_RUMIA_CONFUSE4,{0}は腕を前に伸ばしてポーズを取った。
+SPEAK_RUMIA_CAMERA,{0}は叫んだ。「それは何？」
+SPEAK_MISTIA_NORMAL1,{0}は叫んだ。「一曲聴いていかない？」
+SPEAK_MISTIA_NORMAL2,{0}は叫んだ。「次の曲は君へのレクイエムだよ。」
+SPEAK_MISTIA_NORMAL3,{0}は叫んだ。「歌詞なんて覚えなくていいよ、即興だから！」
+SPEAK_MISTIA_NORMAL4,{0}は叫んだ。「邪魔するつもり？」
+SPEAK_MISTIA_NORMAL5,{0}は叫んだ。「逃げたら歌を聴かせられないじゃん！」
+SPEAK_MISTIA_NORMAL6,{0}は叫んだ。「よし、観客は十分だね。」
+SPEAK_MISTIA_NORMAL7,{0}は叫んだ。「巻物が落ちてたけど、読めなかったよ。」
+SPEAK_MISTIA_NORMAL8,{0}は叫んだ。「君の歌うパートはないよ！」
+SPEAK_MISTIA_NORMAL9,{0}が{速いビートの|落ち着いた|悲しいメロディの|リズムの合わない|センスのない歌詞の}歌を歌った。
+SPEAK_MISTIA_CONFUSE1,{0}は叫んだ。「ふらふら～」
+SPEAK_MISTIA_CONFUSE2,{0}は叫んだ。「羽が麻痺しちゃったー！」
+SPEAK_MISTIA_CONFUSE3,{0}は叫んだ。「うわぁぁ」
+SPEAK_MISTIA_CONFUSE4,{0}がリズムも音程もめちゃくちゃな歌を歌った。
+SPEAK_MISTIA_MAGIC1,{0}が神秘的な歌声を響かせた。
+SPEAK_MISTIA_MAGIC2,{0}が誘惑するような歌を歌った。
+SPEAK_MISTIA_MAGIC3,{0}が精神に影響を与える歌を歌った。
+SPEAK_MISTIA_CAMERA,{0}は叫んだ。「もしかして私のファン？」
+SPEAK_WRIGGLE_NORMAL1,{0}は叫んだ。「ここを通ろうなんていい度胸だね！」
+SPEAK_WRIGGLE_NORMAL2,{0}は叫んだ。「暗くて湿った場所は虫たちの楽園だよ！」
+SPEAK_WRIGGLE_NORMAL3,{0}は叫んだ。「虫たちを無視するつもり？」
+SPEAK_WRIGGLE_NORMAL4,{0}は叫んだ。「一人で戦う気？」
+SPEAK_WRIGGLE_NORMAL5,{0}は叫んだ。「そこ！足元に気をつけて！踏むところだったじゃないか！」
+SPEAK_WRIGGLE_NORMAL6,{0}は叫んだ。「ああ～退屈だなぁ。」
+SPEAK_WRIGGLE_NORMAL7,{0}は叫んだ。「大軍相手に勝てると思ってるの？」
+SPEAK_WRIGGLE_NORMAL8,{0}は叫んだ。「こんな場所も悪くないね。」
+SPEAK_WRIGGLE_NORMAL9,{0}は触角を動かした。
+SPEAK_WRIGGLE_NORMAL10,{0}がマントをひらめかせた。
+SPEAK_WRIGGLE_NORMAL11,{0}の周りに様々な虫たちが集まり始めた。
+SPEAK_WRIGGLE_CONFUSE1,{0}は叫んだ。「私は蝶だったっけ？」
+SPEAK_WRIGGLE_CONFUSE2,{0}は叫んだ。「ちゃんと歩けないよー！」
+SPEAK_WRIGGLE_CONFUSE3,{0}はふらふらとよろめいた。
+SPEAK_WRIGGLE_CONFUSE4,{0}の触角が絡まってしまった。
+SPEAK_WRIGGLE_MAGIC1,{0}が虫の群れを呼び寄せた。
+SPEAK_WRIGGLE_MAGIC2,{0}が呪文を唱えた。
+SPEAK_WRIGGLE_MAGIC3,{0}が虫たちを集めるジェスチャーをした。
+SPEAK_WRIGGLE_MAGIC4,{0}が虫たちと会話をした。
+SPEAK_WRIGGLE_CAMERA,{0}は叫んだ。「何してるの！」
+SPEAK_CIRNO_NORMAL1,{0}は叫んだ。「死ねーっ！」
+SPEAK_CIRNO_NORMAL2,{0}は叫んだ。「凍らせてやる！」
+SPEAK_CIRNO_NORMAL3,{0}は叫んだ。「妖精だからって舐めないでよ！」
+SPEAK_CIRNO_NORMAL4,{0}は叫んだ。「ダンジョンのゴールは9階だって聞いたよ！」
+SPEAK_CIRNO_NORMAL5,{0}は叫んだ。「目の前に強敵がいるんだよ？もっと緊張して！」
+SPEAK_CIRNO_NORMAL6,{0}は叫んだ。「そろそろ諦めたら？」
+SPEAK_CIRNO_NORMAL7,{0}は叫んだ。「カエルがいないから、代わりに君を凍らせてあげる！」
+SPEAK_CIRNO_NORMAL8,{0}は威嚇するように大きく腕を広げた。
+SPEAK_CIRNO_NORMAL9,{0}の周りに氷のかけらが現れた。
+SPEAK_CIRNO_NORMAL10,{0}は腕を組み、得意げに立っている。
+SPEAK_CIRNO_CONFUSE1,{0}はつぶやいた。「3.14159265358979....」
+SPEAK_CIRNO_CONFUSE2,{0}は叫んだ。「今、妖精の生き様について真剣に考えてるんだ。」
+SPEAK_CIRNO_CONFUSE3,{0}は叫んだ。「頭がすっきりした気がする！」
+SPEAK_CIRNO_CONFUSE4,{0}は叫んだ。「あっ、リボンが曲がってた！」
+SPEAK_CIRNO_MAGIC1,{0}が勢いよく技名を叫んだ。
+SPEAK_CIRNO_MAGIC2,{0}の手のひらに冷気が集まった。
+SPEAK_CIRNO_MAGIC3,{0}は冷気の流れを制御した。
+SPEAK_CIRNO_MAGIC4,{0}は大きく腕を広げた後、相手に向かって手を伸ばした。
+SPEAK_CIRNO_MAGIC5,{0}は冷気の呪文を唱えた。
+SPEAK_CIRNO_CAMERA,{0}は叫んだ。「カメラ？まとめて凍らせるよ！」
+SPEAK_CIRNO_FREIND1,{0}は言った。「ついてきて！」
+SPEAK_CIRNO_FREIND2,{0}は言った。「もっと強い敵が欲しいな！」
+SPEAK_CIRNO_FREIND3,{0}は言った。「私の本当の力を見せてあげる！」
+SPEAK_CIRNO_FREIND4,{0}はあなたに冷凍されたカエルを誇らしげに差し出した。
+SPEAK_CIRNO_FREIND5,{0}は言った。「私が君を守ってあげる！」
+SPEAK_CIRNO_FREIND6,{0}は言った。「この私の後ろにいれば安心だよ！」
+SPEAK_CIRNO_ENTER,{0}は叫んだ。「特別に私の部下にしてあげる！」
+SPEAK_CIRNO_FAIRY_WAR,{0}は叫んだ。「こんなの一人で十分だよ！」
+SPEAK_CIRNO_REVIVE,{0}は叫んだ。「さっきのはミスだ！あのヤツはどこだ！？」
+SPEAK_MEDICINE_NORMAL1,{0}は叫んだ。「スズラン、やっちゃえー！」
+SPEAK_MEDICINE_NORMAL2,{0}は叫んだ。「どうして毒に平気なの！？」
+SPEAK_MEDICINE_NORMAL3,{0}は叫んだ。「毒が強すぎたのかな…？」
+SPEAK_MEDICINE_NORMAL4,{0}は叫んだ。「強がらないでよ。もう毒でふらふらしてるじゃん！」
+SPEAK_MEDICINE_NORMAL5,{0}は叫んだ。「安心するのはまだ早いよ！」
+SPEAK_MEDICINE_NORMAL6,{0}は叫んだ。「スズラン畑に帰りたいなぁ…」
+SPEAK_MEDICINE_NORMAL7,{0}は叫んだ。「まだ毒はたっぷりあるよ。」
+SPEAK_MEDICINE_NORMAL8,{0}は叫んだ。「ガスと霧は全然違うんだからね！」
+SPEAK_MEDICINE_NORMAL9,{0}は叫んだ。「スズラン、{1}が現れたよ！」
+SPEAK_MEDICINE_NORMAL10,{0}は叫んだ。「スズラン、近くに新しい毒の花はないかな？」
+SPEAK_MEDICINE_NORMAL11,{0}は叫んだ。「私に近づいた奴はみんな毒で死んじゃった！」
+SPEAK_MEDICINE_NORMAL12,{0}は腕を広げてくるっと一回転した。
+SPEAK_MEDICINE_NORMAL13,{0}は笑いながら毒を撒き散らしている。
+SPEAK_MEDICINE_NORMAL14,{0}の周りに毒の霧が広がっている。
+SPEAK_MEDICINE_CONFUSE1,{0}は叫んだ。「スズラン！どこにいるの！」
+SPEAK_MEDICINE_CONFUSE2,{0}は叫んだ。「うう、頭が痛い…」
+SPEAK_MEDICINE_CONFUSE3,{0}は叫んだ。「体が思うように動かないよ！」
+SPEAK_MEDICINE_CONFUSE4,{0}は叫んだ。「こわいよ！」
+SPEAK_MEDICINE_MAGIC1,{0}は叫んだ。「コンパロ～コンパロ～毒よ集まれ～！」
+SPEAK_MEDICINE_MAGIC2,{0}は腕を高く掲げた。
+SPEAK_MEDICINE_MAGIC3,{0}は毒を集めた。
+SPEAK_MEDICINE_CAMERA,{0}は叫んだ。「それ何？」
+SPEAK_DIEFAIRY_NORMAL1,{0}は威嚇するようなポーズを取った。
+SPEAK_DIEFAIRY_NORMAL2,{0}はこっちの様子を伺っている。
+SPEAK_DIEFAIRY_NORMAL3,{0}は羽をぱたぱたさせた。
+SPEAK_DIEFAIRY_NORMAL4,{0}は持っている花を振り回した。
+SPEAK_DIEFAIRY_NORMAL5,{0}はうなずいた。
+SPEAK_DIEFAIRY_NORMAL6,{0}は今にも泣きそうだった。
+SPEAK_DIEFAIRY_NORMAL7,{0}は手に弾幕を集めた。
+SPEAK_DIEFAIRY_CONFUSE1,{0}は困惑しているようだ。
+SPEAK_DIEFAIRY_CONFUSE2,{0}は泣いている。
+SPEAK_DIEFAIRY_CONFUSE3,{0}は方向を見失ってふらついた。
+SPEAK_DIEFAIRY_CONFUSE4,{0}はまっすぐ飛べない。
+SPEAK_DIEFAIRY_MAGIC1,{0}は呪文を唱えた。
+SPEAK_DIEFAIRY_CAMERA,{0}はびっくりして後ずさりした。
+SPEAK_DIEFAIRY_FREIND1,{0}はあなたに花をプレゼントした。
+SPEAK_DIEFAIRY_FREIND2,{0}はあなたに微笑みかけた。
+SPEAK_DIEFAIRY_FREIND3,{0}は恥ずかしそうに顔をそむけた。
+SPEAK_DIEFAIRY_FREIND4,{0}は羽をぱたぱたさせた。
+SPEAK_DIEFAIRY_FREIND5,{0}はあなたに手を振った。
+SPEAK_DIEFAIRY_FREIND6,{0}は花を拾っている。
+SPEAK_DIEFAIRY_ENTER,{0}は花を拾っている。
+SPEAK_DIEFAIRY_FAIRY_WAR,{0}は決意を固めたようだ。
+SPEAK_DIEFAIRY_REVIVE,{0}は嬉しそうに挨拶した。
+SPEAK_KISUME_NORMAL1,{0}は頭を振った。
+SPEAK_KISUME_NORMAL2,{0}はこっちを見ている。
+SPEAK_KISUME_NORMAL3,{0}はガタガタと音を立てた.
+SPEAK_KISUME_NORMAL4,{0}は桶の中に顔を隠した。
+SPEAK_KISUME_NORMAL5,{0}はひょっこり顔を出した。
+SPEAK_KISUME_NORMAL6,{0}は桶と一緒に揺れている。
+SPEAK_KISUME_NORMAL7,{0}は一瞬怖い顔をした。
+SPEAK_KISUME_CAMERA,{0}は桶の中に隠れた。
+SPEAK_CHEN_NORMAL1,{0}は叫んだ。「ここで迷ったら最期だよ！」
+SPEAK_CHEN_NORMAL2,{0}は叫んだ。「ここは私たちの家になるんだから、出てってくれない？」
+SPEAK_CHEN_NORMAL3,{0}は叫んだ。「猫を集めるのにカラスウリがたくさん必要だったよ！」
+SPEAK_CHEN_NORMAL4,{0}は叫んだ。「ここ、迷い家より迷いやすい気がする…」
+SPEAK_CHEN_NORMAL5,{0}は叫んだ。「猫に引っかかれた傷さえなければ…！」
+SPEAK_CHEN_NORMAL6,{0}は叫んだ。「みんな、攻撃だーっ！」
+SPEAK_CHEN_NORMAL7,{0}は叫んだ。「お前くらいなら式神化なんていらないよ！」
+SPEAK_CHEN_NORMAL8,{0}は叫んだ。「にゃーん！」
+SPEAK_CHEN_NORMAL9,{0}は叫んだ。「にゃにゃん！！」
+SPEAK_CHEN_NORMAL10,{0}は叫んだ。「ふぎゃっ！！！」
+SPEAK_CHEN_NORMAL11,{0}は爪を立てた。
+SPEAK_CHEN_NORMAL12,{0}は猫の目をして大きく口を開けて威嚇した。
+SPEAK_CHEN_NORMAL13,{0}は腕をめちゃくちゃに振り回した。
+SPEAK_CHEN_CONFUSE1,{0}は叫んだ。「にゃ、にゃにゃん！？」
+SPEAK_CHEN_CONFUSE2,{0}は叫んだ。「カ、カラスウリ！？」
+SPEAK_CHEN_CONFUSE3,{0}は叫んだ。「地面が動いてるよ！」
+SPEAK_CHEN_CONFUSE4,{0}は宙を無意味に手でかいた。
+SPEAK_CHEN_CAMERA,{0}は叫んだ。「にゃにゃん！」
+SPEAK_KOGASA_NORMAL1,{0}は叫んだ。「恨めしい！」
+SPEAK_KOGASA_NORMAL2,{0}は叫んだ。「わっ！」
+SPEAK_KOGASA_NORMAL3,{0}は叫んだ。「驚かなかった？」
+SPEAK_KOGASA_NORMAL4,{0}は叫んだ。「最近の人間は驚かないからつまらないなぁ…」
+SPEAK_KOGASA_NORMAL5,{0}は叫んだ。「このダンジョンには恐怖の巻物って伝説のアイテムがあるんだって。すごいね！」
+SPEAK_KOGASA_NORMAL6,{0}は叫んだ。「寂しく捨てられた道具たちの痛みを感じるのが好き！」
+SPEAK_KOGASA_NORMAL7,{0}は叫んだ。「君もどうせいらない道具はダンジョンに捨てるんだろう？」
+SPEAK_KOGASA_NORMAL8,{0}は叫んだ。「酸性雨で溶けちゃえー！」
+SPEAK_KOGASA_NORMAL9,{0}は叫んだ。「恨んでやるー！」
+SPEAK_KOGASA_NORMAL10,{0}は叫んだ。「びっくりした！」
+SPEAK_KOGASA_NORMAL11,{0}は傘をくるくる回した。
+SPEAK_KOGASA_NORMAL12,{0}は片目をつぶって舌を出した。
+SPEAK_KOGASA_NORMAL13,{0}が持っている傘の舌が動いた。
+SPEAK_KOGASA_CONFUSE1,{0}は叫んだ。「恨めしいかい？」
+SPEAK_KOGASA_CONFUSE2,{0}は叫んだ。「目がぐるぐるするー！」
+SPEAK_KOGASA_CONFUSE3,{0}の傘についている目玉がぐるぐる回っている。
+SPEAK_KOGASA_CONFUSE4,{0}は傘をぐらぐらと揺らした。
+SPEAK_KOGASA_CAMERA,{0}は叫んだ。「びっくりした！」
+SPEAK_SUNNY_NORMAL1,{0}は叫んだ。「妖精の力を侮るなよ！」
+SPEAK_SUNNY_NORMAL2,{0}は叫んだ。「見えない敵と戦えるかな？」
+SPEAK_SUNNY_NORMAL3,{0}は叫んだ。「ここだよーん！」
+SPEAK_SUNNY_NORMAL4,{0}は叫んだ。「あっ、こっちがバレちゃった！」
+SPEAK_SUNNY_NORMAL5,{0}は叫んだ。「こんな場所じゃ日光浴できないよ！」
+SPEAK_SUNNY_NORMAL6,{0}は叫んだ。「チームプレイってやつを見せてあげる！」
+SPEAK_SUNNY_NORMAL7,{0}は叫んだ。「さあ、攻撃だ！」
+SPEAK_SUNNY_NORMAL8,{0}は叫んだ。「どうだ！どこにいるか分からないだろう？」
+SPEAK_SUNNY_NORMAL9,{0}は叫んだ。「なんで私が見えてるの！？」
+SPEAK_SUNNY_NORMAL10,{0}は叫んだ。「ここで光をこう屈折させれば……」
+SPEAK_SUNNY_CONFUSE1,{0}は叫んだ。「あれ？地面がぐらぐらしてる！」
+SPEAK_SUNNY_CONFUSE2,{0}は叫んだ。「君、なんで大きくなったり小さくなったりしてるの？」
+SPEAK_SUNNY_MAGIC1,{0}は両手を合わせた。
+SPEAK_SUNNY_MAGIC2,{0}は光を発し始めた。
+SPEAK_SUNNY_MAGIC3,{0}は光を屈折させた。
+SPEAK_SUNNY_CAMERA,{0}は叫んだ。「うわっ！私、見えてる？」
+SPEAK_SUNNY_FREIND1,{0}は言った。「見えなければこっそり近づけるんだよ！」
+SPEAK_SUNNY_FREIND2,{0}は言った。「これからは妖精の時代だよ！」
+SPEAK_SUNNY_FREIND3,{0}は言った。「妖精の力を集める時が来たんだ！」
+SPEAK_SUNNY_FREIND4,{0}は言った。「負ける気がしないね！」
+SPEAK_SUNNY_FREIND5,{0}は言った。「今が一番楽しいかも！」
+SPEAK_SUNNY_FREIND6,{0}は言った。「どんどん強くなってる気がするよ！」
+SPEAK_SUNNY_ENTER,{0}は言った。「妖精の力を集められるなら、仲間になるよ！」
+SPEAK_SUNNY_FAIRY_WAR,{0}は叫んだ。「本当のチームワークを見せてやる！」
+SPEAK_SUNNY_REVIVE,{0}は叫んだ。「サニー到着！」
+SPEAK_SUNNY_BETRAY_LUNAR,{0}は叫んだ。「諦めるの早いよ、ルナ！」
+SPEAK_SUNNY_BETRAY_STAR,{0}は叫んだ。「スター！？」
+SPEAK_LUNAR_NORMAL1,{0}は叫んだ。「戦うしかないのか…」
+SPEAK_LUNAR_NORMAL2,{0}は叫んだ。「ここからじゃ月が見えない…」
+SPEAK_LUNAR_NORMAL3,{0}は叫んだ。「音が聞こえないはずなのに、どうして？」
+SPEAK_LUNAR_NORMAL4,{0}は叫んだ。「巻物は声に出して読まないと効果ないって知ってるよね？」
+SPEAK_LUNAR_NORMAL5,{0}は叫んだ。「逃げたりしないよ！」
+SPEAK_LUNAR_NORMAL6,{0}は叫んだ。「私の口は夜じゃないんだからね！」
+SPEAK_LUNAR_CONFUSE1,{0}は叫んだ。「目が回る！こういう時は音を抑えないと…」
+SPEAK_LUNAR_CONFUSE2,{0}は叫んだ。「うるさい！」
+SPEAK_LUNAR_MAGIC1,{0}は静かにささやいた。
+SPEAK_LUNAR_MAGIC2,{0}の周囲が静まり始めた。
+SPEAK_LUNAR_CAMERA,{0}は叫んだ。「わっ！」
+SPEAK_LUNAR_FREIND1,{0}は言った。「たまには静かにコーヒーでも飲みたいな。」
+SPEAK_LUNAR_FREIND2,{0}は言った。「チームを組めば妖精でも結構強いね。」
+SPEAK_LUNAR_FREIND3,{0}は言った。「こんなに奥まで来たのは初めてだよ。」
+SPEAK_LUNAR_FREIND4,{0}は言った。「音を消せば面倒な魔法も防げるんだよ。」
+SPEAK_LUNAR_FREIND5,{0}は言った。「ちょっと座って本でも読まない？」
+SPEAK_LUNAR_FREIND6,{0}は言った。「やっぱり妖精は数が勝負だよね。」
+SPEAK_LUNAR_ENTER,{0}は言った。「仲間になったら叩かないでくれる？」
+SPEAK_LUNAR_FAIRY_WAR,{0}は叫んだ。「私だってやる時はやるんだから！」
+SPEAK_LUNAR_REVIVE,{0}は言った。「痛いのは嫌い…」
+SPEAK_LUNAR_BETRAY_SUNNY,{0}は叫んだ。「サニー？冗談だよね？」
+SPEAK_LUNAR_BETRAY_STAR,{0}は叫んだ。「え？スター、本気なの？」
+SPEAK_STAR_NORMAL1,{0}は叫んだ。「キャラ作成の時からこうなるってわかってたよ！」
+SPEAK_STAR_NORMAL2,{0}は叫んだ。「こんなダンジョンじゃ感知能力は便利だよ。ズルいって？」
+SPEAK_STAR_NORMAL3,{0}は叫んだ。「私たちは三人チームだよ！」
+SPEAK_STAR_NORMAL4,{0}は叫んだ。「透明になっても見えてるよ！」
+SPEAK_STAR_NORMAL5,{0}は叫んだ。「逃げても隠れても見えるよ。諦めたほうがいいって！」
+SPEAK_STAR_NORMAL6,{0}は叫んだ。「サニーの透明よりもバレバレじゃん！」
+SPEAK_STAR_NORMAL7,{0}は叫んだ。「かくれんぼなら絶対負けない！」
+SPEAK_STAR_NORMAL8,{0}は叫んだ。「姿を隠しても意味ないよ？」
+SPEAK_STAR_NORMAL9,{0}は叫んだ。「戦いは得意じゃないけどね。」
+SPEAK_STAR_CONFUSE1,{0}は叫んだ。「二人…いや、三人？！」
+SPEAK_STAR_CONFUSE2,{0}は叫んだ。「目が回って逃げられないよ～」
+SPEAK_STAR_MAGIC1,{0}は呪文を唱えた。
+SPEAK_STAR_CAMERA,{0}は叫んだ。「妖精を撮るなんて、変な趣味だね！」
+SPEAK_STAR_FREIND1,{0}は言った。「妖精が集まればこんなに強いんだ！」
+SPEAK_STAR_FREIND2,{0}は言った。「あ、ちょっと待って、この辺にいい食材が…」
+SPEAK_STAR_FREIND3,{0}は言った。「周りにたくさん反応があるから気をつけてね！」
+SPEAK_STAR_FREIND4,{0}が言った。「なんだか宝探しみたいで楽しいね！」
+SPEAK_STAR_FREIND5,{0}が言った。「私の探知能力じゃ正確な敵はわからないけどね。」
+SPEAK_STAR_FREIND6,{0}が言った。「何か食べたいものある？たまには料理しようかなって。」
+SPEAK_STAR_ENTER,{0}が言った。「あなたの味方になった方が得しそうね。」
+SPEAK_STAR_FAIRY_WAR,{0}が叫んだ。「妖精たちの本当の恐ろしさを見せてあげるわ！」
+SPEAK_STAR_REVIVE,{0}が言った。「やっと戻ってきたわ。次はもっと気をつけないと…」
+SPEAK_STAR_BETRAY_SUNNY,{0}が叫んだ。「サニー、裏切るつもりなの？」
+SPEAK_STAR_BETRAY_LUNAR,{0}が叫んだ。「騙されないで、ルナ！」
+SPEAK_YAMABIKO_NORMAL1,{0}がとてつもない音の反響で注意を引いた。
+SPEAK_KYOUKO_NORMAL1,{0}が大声で叫んだ。「こんにちはー!!!」
+SPEAK_KYOUKO_NORMAL2,{0}がつぶやいた。「あ〜ぜ〜、あ〜ぜ〜」
+SPEAK_KYOUKO_NORMAL3,{0}がつぶやいた。「し〜む〜、とう〜とう〜じゅ〜」
+SPEAK_KYOUKO_NORMAL4,{0}が大声で叫んだ。「ダンジョンに{1}の悲鳴を響かせるぞ！」
+SPEAK_KYOUKO_NORMAL5,{0}が大声で叫んだ。「声が小さいよ！」
+SPEAK_KYOUKO_NORMAL6,{0}が大声で叫んだ。「こんな無駄な殺生を繰り返すなんて！」
+SPEAK_KYOUKO_NORMAL7,{0}が大声で叫んだ。「ダンジョンの反響は全部ヤマビコのせいだよ！」
+SPEAK_KYOUKO_NORMAL8,{0}が叫んだ。「ああもう、掃除してるのに床にどうしてこんなに無駄なものが…」
+SPEAK_KYOUKO_NORMAL9,{0}が大声で叫んだ。「反響が単なる自然現象だなんて、迷信だよ！」
+SPEAK_KYOUKO_NORMAL10,{0}が耳をパタパタさせた。
+SPEAK_KYOUKO_NORMAL11,{0}がお経を唱えた。
+SPEAK_KYOUKO_NORMAL12,{0}がものすごい大声で叫んだ。
+SPEAK_KYOUKO_CONFUSE1,{0}が大声で叫んだ。「助けてー！！！」
+SPEAK_KYOUKO_CONFUSE2,{0}が大声で叫んだ。「や、ら、れ、たー！！！」
+SPEAK_KYOUKO_CONFUSE3,{0}が大声で叫んだ。「うわあああー！！！」
+SPEAK_KYOUKO_CONFUSE4,{0}が耳をバタバタと激しく動かした。
+SPEAK_KYOUKO_MAGIC1,{0}が轟音を響かせた。
+SPEAK_KYOUKO_MAGIC2,{0}がものすごい音で挨拶した。
+SPEAK_KYOUKO_MAGIC3,{0}が耳をつんざく声でお経を唱えた。
+SPEAK_KYOUKO_CAMERA,{0}が叫んだ。「カシャッ！！！」
+SPEAK_FORTUNE_TELLER_NORMAL1,{0}が叫んだ。「またか！君も私を退治しに来たのか！」
+SPEAK_FORTUNE_TELLER_NORMAL2,{0}が叫んだ。「人間としての生活は虚しいな！」
+SPEAK_FORTUNE_TELLER_NORMAL3,{0}が叫んだ。「私はもう妖怪に生まれ変わったんだ！」
+SPEAK_FORTUNE_TELLER_NORMAL4,{0}が叫んだ。「幻想郷で人間として生きる苦労を知ってるか！」
+SPEAK_FORTUNE_TELLER_NORMAL5,{0}が叫んだ。「そうだ！死こそが答えだ！」
+SPEAK_FORTUNE_TELLER_NORMAL6,{0}が叫んだ。「邪魔をするならお前も眠らせてやる！」
+SPEAK_FORTUNE_TELLER_NORMAL7,{0}が叫んだ。「お前も私の頭を狙っているのか！」
+SPEAK_FORTUNE_TELLER_NORMAL8,{0}が叫んだ。「私は人間をやめるぞ！」
+SPEAK_FORTUNE_TELLER_NORMAL9,{0}が狂ったように笑った。
+SPEAK_FORTUNE_TELLER_NORMAL10,{0}が歯ぎしりをした。
+SPEAK_MOMIZI_NORMAL1,{0}は頭を抱えた。
+SPEAK_MOMIZI_NORMAL2,{0}は遠吠えした。
+SPEAK_MOMIZI_NORMAL3,{0}は剣を振った。
+SPEAK_MOMIZI_NORMAL4,{0}は盾を構えた。
+SPEAK_MOMIZI_NORMAL5,{0}は牙をむき出しにした。
+SPEAK_MOMIZI_NORMAL6,{0}は吠えた。
+SPEAK_MOMIZI_NORMAL7,{0}は鋭い目でにらみつけた。
+SPEAK_MOMIZI_CONFUSE1,{0}は混乱しているようだ。
+SPEAK_MOMIZI_CONFUSE2,{0}は助けを求めた。
+SPEAK_MOMIZI_CAMERA,{0}は盾で顔を隠そうとした。
+SPEAK_AYA_NORMAL1_H,{0}が叫んだ。「人間が妖怪の山に入ったのですか？」
+SPEAK_AYA_NORMAL2_H,{0}が叫んだ。「手加減してあげるから、本気でかかってきなさい！」
+SPEAK_AYA_NORMAL3_H,{0}が叫んだ。「吹っ飛んでいきなさい！」
+SPEAK_AYA_NORMAL4_H,{0}が叫んだ。「記事になりそうな話題はありませんか？」
+SPEAK_AYA_NORMAL5_H,{0}が叫んだ。「最新情報満載の文々。新聞！一度購読してみませんか！」
+SPEAK_AYA_NORMAL6_H,{0}が叫んだ。「このダンジョンについて何かご存知ですか？」
+SPEAK_AYA_NORMAL7_H,{0}が叫んだ。「逃げられると困ります！」
+SPEAK_AYA_NORMAL8_H,{0}が叫んだ。「侵入者は人間だったのですか？肝が据わってますね！」
+SPEAK_AYA_NORMAL9_H,{0}が叫んだ。「妖怪の山は無断立ち入り禁止です！」
+SPEAK_AYA_NORMAL1_T,{0}が叫んだ。「ああ、君の名前は…{1}だったかな？」
+SPEAK_AYA_NORMAL2_T,{0}が叫んだ。「君の新聞、読んだことあるけど、面白い記事はなかったよ。」
+SPEAK_AYA_NORMAL3_T,{0}が叫んだ。「何やってるの？君の取材魂はその程度かい？」
+SPEAK_AYA_NORMAL4_T,{0}が叫んだ。「どうせ私の文々。新聞には勝てないけどね！」
+SPEAK_AYA_NORMAL5_T,{0}が叫んだ。「今回の異変の記事化は譲れない！」
+SPEAK_AYA_NORMAL6_T,{0}が叫んだ。「スピードでは負けないから！」
+SPEAK_AYA_NORMAL7_T,{0}が叫んだ。「新聞大会が近いからって、こんな卑怯な手を使うなんて！」
+SPEAK_AYA_NORMAL8_T,{0}が叫んだ。「集団を裏切るつもりか！」
+SPEAK_AYA_NORMAL9_T,{0}が叫んだ。「妖怪の山で暴れている烏天狗の噂は聞いているよ。」
+SPEAK_AYA_NORMAL10_T,{0}が叫んだ。「天狗同士の争いか…」
+SPEAK_AYA_NORMAL1_W,{0}が叫んだ。「あれ？警備はどうなっているんですか？」
+SPEAK_AYA_NORMAL2_W,{0}が叫んだ。「警備を守る者がこんなことを…」
+SPEAK_AYA_NORMAL3_W,{0}が叫んだ。「白狼天狗は私たち烏天狗を侮っているのか？」
+SPEAK_AYA_NORMAL4_W,{0}が叫んだ。「侵入者がいるって聞いたけど、まさか白狼天狗だったとは。」
+SPEAK_AYA_NORMAL5_W,{0}が叫んだ。「警備してた白狼天狗はどうなったの？ああ、君か。」
+SPEAK_AYA_NORMAL6_W,{0}が叫んだ。「集団を裏切るつもりですか？」
+SPEAK_AYA_NORMAL1_K,{0}が叫んだ。「前に作ってもらったカメラ、ちょっとテストしてみますね！」
+SPEAK_AYA_NORMAL2_K,{0}が叫んだ。「次はカメラに自爆機能を付けないでほしいな。」
+SPEAK_AYA_NORMAL3_K,{0}が叫んだ。「カッパが私たち烏天狗に勝てると思ってるの？」
+SPEAK_AYA_NORMAL4_K,{0}が叫んだ。「私は空を飛べるんだから、水の中で戦う必要ないよ！」
+SPEAK_AYA_NORMAL5_K,{0}が叫んだ。「妖怪の山を騒がせているカッパはあなたでしたか。」
+SPEAK_AYA_NORMAL6_K,{0}が叫んだ。「カッパなのにここまで来るとは、ただ者じゃないですね。」
+SPEAK_AYA_NORMAL1_O,{0}が叫んだ。「いやあ、これは大変なことになりましたね。」
+SPEAK_AYA_NORMAL2_O,{0}が叫んだ。「まさか侵入者が鬼だったなんて…」
+SPEAK_AYA_NORMAL3_O,{0}が叫んだ。「あややや、なぜあなたがここに？」
+SPEAK_AYA_NORMAL4_O,{0}が叫んだ。「あなたが勝手に山に来ると皆が困りますよ。」
+SPEAK_AYA_NORMAL5_O,{0}が叫んだ。「あっ、仕方のない正当防衛です。」
+SPEAK_AYA_NORMAL6_O,{0}が叫んだ。「ここで引いてもらうのが山の妖怪たちのためです。」
+SPEAK_AYA_NORMAL7_O,{0}が叫んだ。「いえいえ、先に攻撃するつもりはありませんでしたが。」
+SPEAK_AYA_NORMAL8_O,{0}が叫んだ。「あやややや！」
+SPEAK_AYA_NORMAL1,{0}が叫んだ。「清く正しい射命丸です！」
+SPEAK_AYA_NORMAL2,{0}が叫んだ。「何か記事になりそうな話題はありませんか？」
+SPEAK_AYA_NORMAL3,{0}がつぶやいた。「カメラが変だな…カッパに見てもらうべきかな？」
+SPEAK_AYA_NORMAL4,{0}が叫んだ。「ああ、困りましたね。」
+SPEAK_AYA_NORMAL5,{0}が叫んだ。「最新情報満載の文々。新聞！一度購読してみませんか！」
+SPEAK_AYA_NORMAL6,{0}が叫んだ。「このダンジョンについて何かご存知ですか？」
+SPEAK_AYA_NORMAL7,{0}が叫んだ。「逃げられると困ります！」
+SPEAK_AYA_CONFUSE1,{0}が叫んだ。「制御できません！」
+SPEAK_AYA_CONFUSE2,{0}が叫んだ。「あややや？」
+SPEAK_AYA_CONFUSE3,{0}が叫んだ。「ちゃんと飛べてますか？」
+SPEAK_AYA_CONFUSE4,{0}が叫んだ。「山がまるでダンジョンみたいに見えますね！」
+SPEAK_AYA_CONFUSE5,{0}が叫んだ。「あなたは誰ですか？」
+SPEAK_AYA_MAGIC1,{0}が扇子を振った。
+SPEAK_AYA_MAGIC2,{0}の周囲で風がうねり始めた。
+SPEAK_AYA_CAMERA,{0}が叫んだ。「あなたも新聞記者をしているんですか？」
+SPEAK_WAKASAGI_NORMAL1,{0}が叫んだ。「水を汚さないで！」
+SPEAK_WAKASAGI_NORMAL2,{0}が叫んだ。「他の場所はどうなっているんだろう？」
+SPEAK_WAKASAGI_NORMAL3,{0}が叫んだ。「周りの妖精たちがはしゃいでる…」
+SPEAK_WAKASAGI_NORMAL4,{0}が叫んだ。「水の中なら負けないよ！」
+SPEAK_WAKASAGI_NORMAL5,{0}が叫んだ。「ここに集めた小石たちはどこへ行ったのかな。」
+SPEAK_WAKASAGI_NORMAL6,{0}が叫んだ。「水に落ちて命を落とす人もいるんだよ。」
+SPEAK_WAKASAGI_NORMAL7,{0}が優雅に泳いだ。
+SPEAK_WAKASAGI_NORMAL8,{0}が威嚇するように水を跳ねさせた。
+SPEAK_WAKASAGI_CONFUSE1,{0}が叫んだ。「助けて！」
+SPEAK_WAKASAGI_CONFUSE2,{0}が叫んだ。「痛い！痛いよ！」
+SPEAK_WAKASAGI_CONFUSE3,{0}はもがいた。
+SPEAK_WAKASAGI_CONFUSE4,{0}は生き延びようともがいている。
+SPEAK_WAKASAGI_MAGIC1,{0}は神秘的な旋律で歌った。
+SPEAK_WAKASAGI_MAGIC2,{0}は美しい旋律で歌った。
+SPEAK_WAKASAGI_CAMERA,{0}が叫んだ。「ああっ！」
+SPEAK_YAMAME_NORMAL1,{0}が叫んだ。「私はこの場所が気に入ったよ！」
+SPEAK_YAMAME_NORMAL2,{0}が叫んだ。「そんなふうにしてたら妖怪に食べられちゃうよ？」
+SPEAK_YAMAME_NORMAL3,{0}が笑った。「大丈夫？顔色が悪いよ？」
+SPEAK_YAMAME_NORMAL4,{0}が叫んだ。「さて、君にぴったりの病気は…」
+SPEAK_YAMAME_NORMAL5,{0}が叫んだ。「そんな状態で戦えるの？」
+SPEAK_YAMAME_NORMAL6,{0}が叫んだ。「回復薬はちゃんと持ってるよね？」
+SPEAK_YAMAME_NORMAL7,{0}が叫んだ。「その病気、いいスパイスになりそうだね。」
+SPEAK_YAMAME_NORMAL8,{0}が叫んだ。「私の能力を知ってるの？」
+SPEAK_YAMAME_NORMAL9,{0}が叫んだ。「カッパたちはうるさいね。」
+SPEAK_YAMAME_NORMAL10,{0}が叫んだ。「久しぶりの獲物だね。」
+SPEAK_YAMAME_NORMAL11,{0}が叫んだ。「病気と毒…最高の組み合わせだよね？」
+SPEAK_YAMAME_NORMAL12,{0}が叫んだ。「遊びに来たの？それとも死にに来たの？」
+SPEAK_YAMAME_NORMAL13,{0}が叫んだ。「少しは健康を考えたらどうだい？」
+SPEAK_YAMAME_NORMAL14,{0}の周囲に不運な空気が漂っている。
+SPEAK_YAMAME_CONFUSE1,{0}が叫んだ。「これは新しい病気かな？」
+SPEAK_YAMAME_CONFUSE2,{0}が叫んだ。「目が回るー！」
+SPEAK_YAMAME_CONFUSE3,{0}がぐるぐる回っている。
+SPEAK_YAMAME_CONFUSE4,{0}が地面を転げ回っている。
+SPEAK_YAMAME_MAGIC1,{0}が手を高く掲げた。
+SPEAK_YAMAME_MAGIC2,{0}が呪文を唱えた。
+SPEAK_YAMAME_CAMERA,{0}が叫んだ。「地底でもよく撮られるからね！」
+SPEAK_NAZRIN_NORMAL1,{0}が叫んだ。「何の宝物を探しているんだい？」
+SPEAK_NAZRIN_NORMAL2,{0}が叫んだ。「あれ？私と同じものを探しているのか？」
+SPEAK_NAZRIN_NORMAL3,{0}が叫んだ。「ダウジングが反応している…ルーンを持っているのかな？」
+SPEAK_NAZRIN_NORMAL4,{0}が叫んだ。「君もルーンを探しているのか？」
+SPEAK_NAZRIN_NORMAL5,{0}が叫んだ。「オーブらしきものを拾ったけど、これは違うかな。」
+SPEAK_NAZRIN_NORMAL6,{0}が叫んだ。「ネズミたちを甘く見ると痛い目に遭うよ！」
+SPEAK_NAZRIN_NORMAL7,{0}が叫んだ。「ねえ、{1}。こんな物を見かけなかった？」
+SPEAK_NAZRIN_NORMAL8,{0}が叫んだ。「困ったな。道がこんなに入り組んでいるなんて。」
+SPEAK_NAZRIN_NORMAL9,{0}が叫んだ。「そうだな、子ネズミたちもお腹を空かせてるし、ここで食事にしようか。」
+SPEAK_NAZRIN_NORMAL10,{0}が叫んだ。「今回も外れか。」
+SPEAK_NAZRIN_NORMAL11,{0}が叫んだ。「面白いな。ネズミを甘く見てるのか。」
+SPEAK_NAZRIN_CONFUSE1,{0}が叫んだ。「ごめん！」
+SPEAK_NAZRIN_CONFUSE2,{0}が叫んだ。「もう二度としないから！」
+SPEAK_NAZRIN_CONFUSE3,{0}がダウジングロッドを振り回している。
+SPEAK_NAZRIN_CONFUSE4,{0}が自分の尻尾を噛んだ。
+SPEAK_NAZRIN_MAGIC1,{0}がダウジングロッドを整えた。
+SPEAK_NAZRIN_MAGIC2,{0}がペンデュラムを振動させた。
+SPEAK_NAZRIN_CAMERA,{0}が叫んだ。「そのカメラもなかなかの宝だね、私に譲らない？」
+SPEAK_YOSIKA_NORMAL1,{0}が叫んだ。「ち〜か〜づ〜く〜な〜」
+SPEAK_YOSIKA_NORMAL2,{0}が叫んだ。「な〜ん〜だ〜っけ？」
+SPEAK_YOSIKA_NORMAL3,{0}が叫んだ。「う〜ああ〜」
+SPEAK_YOSIKA_NORMAL4,{0}が叫んだ。「痛くないよ〜」
+SPEAK_YOSIKA_NORMAL5,{0}が叫んだ。「ゾンビは永遠不滅だよ！」
+SPEAK_YOSIKA_NORMAL6,{0}が叫んだ。「私はここを守るよう命令されたんだ！」
+SPEAK_YOSIKA_NORMAL7,{0}が叫んだ。「キョンシーには小細工は通じないよ！」
+SPEAK_YOSIKA_NORMAL8,{0}が叫んだ。「君も私たちの仲間になるんだよ！」
+SPEAK_YOSIKA_CONFUSE1,{0}が叫んだ。「や〜ら〜れ〜た〜」
+SPEAK_YOSIKA_CONFUSE2,{0}が叫んだ。「う、う…う、あ…」
+SPEAK_YOSIKA_CONFUSE3,{0}が詩を詠んでいる。
+SPEAK_YOSIKA_CONFUSE4,{0}があちこち走り回っている。
+SPEAK_YOSIKA_CAMERA,{0}が叫んだ。「撮〜ら〜な〜い〜で〜」
+SPEAK_SEKIBANKI_NORMAL1,{0}が叫んだ。「怖くて歩けなくしてやるよ！」
+SPEAK_SEKIBANKI_NORMAL2,{0}が叫んだ。「恐怖に震えろ！」
+SPEAK_SEKIBANKI_NORMAL3,{0}が叫んだ。「私を見ても平然としていられるかな？」
+SPEAK_SEKIBANKI_NORMAL4,{0}が叫んだ。「そう、私はろくろ首だよ。」
+SPEAK_SEKIBANKI_NORMAL5,{0}が叫んだ。「何をしてるんだ、胴体！さっさとくっつけ！」
+SPEAK_SEKIBANKI_NORMAL6,{0}が叫んだ。「私は首が取れても死なないよ！」
+SPEAK_SEKIBANKI_NORMAL7,{0}が叫んだ。「いいだろう、私が行ってやる！」
+SPEAK_SEKIBANKI_NORMAL8,{0}が叫んだ。「ふふ、私の能力を見て驚かないでいられるか？」
+SPEAK_SEKIBANKI_NORMAL9,{0}が叫んだ。「ゆっくりって生き物…一体何なんだ？」
+SPEAK_SEKIBANKI_NORMAL10,{0}が叫んだ。「前に{1}にゆっくりと間違えられたことがあるんだ…」
+SPEAK_SEKIBANKI_NORMAL11,{0}が叫んだ。「誰だって私を恐れるさ！」
+SPEAK_SEKIBANKI_NORMAL12,{0}の頭がふらふらと揺れている。
+SPEAK_SEKIBANKI_CONFUSE1,{0}が叫んだ。「私の胴体、私の胴体はどこだ？」
+SPEAK_SEKIBANKI_CONFUSE2,{0}が叫んだ。「頭がくらくらする！新しい頭をちょうだい！」
+SPEAK_SEKIBANKI_CONFUSE3,{0}が叫んだ。「だめだ！」
+SPEAK_SEKIBANKI_CONFUSE4,{0}が危なっかしく動いている。
+SPEAK_SEKIBANKI_CONFUSE5,{0}がぐるぐる回っている。
+SPEAK_SEKIBANKI_MAGIC1,{0}が自分の首を浮かせた。
+SPEAK_SEKIBANKI_MAGIC2,{0}の首が空中を飛び始めた。
+SPEAK_SEKIBANKI_CAMERA,{0}が叫んだ。「浮かぶ顔の写真でも撮るつもりか？」
+SPEAK_NITORI_NORMAL1_H,{0}が叫んだ。「げげっ、人間？」
+SPEAK_NITORI_NORMAL2_H,{0}が叫んだ。「人間がどうしてここに入り込んだんだ？」
+SPEAK_NITORI_NORMAL3_H,{0}が叫んだ。「おい人間！この道具を一つ買っていかないか？」
+SPEAK_NITORI_NORMAL4_H,{0}が叫んだ。「尻子玉を捧げに来たのか？」
+SPEAK_NITORI_NORMAL5_H,{0}が叫んだ。「昔から人間と河童は盟友だったから、今回は見逃してあげるよ！」
+SPEAK_NITORI_NORMAL6_H,{0}が叫んだ。「新しい道具のテストができそうだな！」
+SPEAK_NITORI_NORMAL1_T,{0}が叫んだ。「またカメラが必要なのかい？」
+SPEAK_NITORI_NORMAL2_T,{0}が叫んだ。「カメラをそんな雑に扱わないでよ！」
+SPEAK_NITORI_NORMAL3_T,{0}が叫んだ。「天狗の取材は遠慮するよ！」
+SPEAK_NITORI_NORMAL4_T,{0}が叫んだ。「なんで急に攻撃するんだ！」
+SPEAK_NITORI_NORMAL5_T,{0}が叫んだ。「今度は私が一手見せてあげる！」
+SPEAK_NITORI_NORMAL6_T,{0}が叫んだ。「今回発明した天狗のスピードにも追いつけるロケット…あれ？動かない？」
+SPEAK_NITORI_NORMAL7_T,{0}が叫んだ。「腕前を見せてもらおうか！」
+SPEAK_NITORI_NORMAL1_K,{0}が叫んだ。「技術力なら私のほうが上だと思うけど？」
+SPEAK_NITORI_NORMAL2_K,{0}が叫んだ。「玄武の沢を捨てないで！」
+SPEAK_NITORI_NORMAL3_K,{0}が叫んだ。「カッパが外に出て何をしようというんだ？」
+SPEAK_NITORI_NORMAL4_K,{0}が叫んだ。「お前か！周囲を無差別に攻撃してるカッパは！」
+SPEAK_NITORI_NORMAL5_K,{0}が叫んだ。「ぼーっとしてないでシステム修理を手伝わないか？」
+SPEAK_NITORI_NORMAL6_K,{0}が叫んだ。「ここは人手不足なんだ！君でも助かるよ！」
+SPEAK_NITORI_NORMAL7_K,{0}が叫んだ。「技術交換か！」
+SPEAK_NITORI_NORMAL1_O,{0}が叫んだ。「ひいっ！？」
+SPEAK_NITORI_NORMAL2_O,{0}がつぶやいた。「危ない…危ない…」
+SPEAK_NITORI_NORMAL3_O,{0}がつぶやいた。「まさかここで鬼に会うとは…」
+SPEAK_NITORI_NORMAL4_O,{0}が叫んだ。「早く光学迷彩装置を…！」
+SPEAK_NITORI_NORMAL5_O,{0}が叫んだ。「違うんです、私は戦いたくて戦ってるわけじゃ…」
+SPEAK_NITORI_NORMAL6_O,{0}が叫んだ。「見逃してもらえませんか？」
+SPEAK_NITORI_NORMAL7_O,{0}は汗を流している。
+SPEAK_NITORI_NORMAL8_O,{0}の瞳が揺れている。
+SPEAK_NITORI_NORMAL1,{0}が叫んだ。「カッパの技術力を見せてやる！」
+SPEAK_NITORI_NORMAL2,{0}が叫んだ。「あれ、この光学迷彩壊れてる？」
+SPEAK_NITORI_NORMAL3,{0}が叫んだ。「光学迷彩の実験をする時が来たな！」
+SPEAK_NITORI_NORMAL4,{0}がつぶやいた。「キュウリが食べたくなったな…」
+SPEAK_NITORI_NORMAL5,{0}が叫んだ。「最近商売がうまくいかなくてさ、君も一つ買っていかない？」
+SPEAK_NITORI_NORMAL6,{0}が叫んだ。「買わないなら出て行け！」
+SPEAK_NITORI_NORMAL7,{0}が叫んだ。「ここは私のホームグラウンドだ！」
+SPEAK_NITORI_NORMAL8,{0}が叫んだ。「君も宗教なんて信じてるのか？弱いなあ！」
+SPEAK_NITORI_NORMAL9,{0}が叫んだ。「やっぱり君も宗教は不要だと思うんだね！」
+SPEAK_NITORI_NORMAL10,{0}が叫んだ。「今回新しく作った新製品だよ。キュウリでの支払いもOK！」
+SPEAK_NITORI_CONFUSE1,{0}が叫んだ。「ひいっ！」
+SPEAK_NITORI_CONFUSE2,{0}が叫んだ。「助けてください！」
+SPEAK_NITORI_CONFUSE3,{0}が悲鳴を上げる。
+SPEAK_NITORI_CONFUSE4,{0}のカバンから正体不明の道具が飛び出す。
+SPEAK_NITORI_MAGIC1,{0}がカバンから新しい道具を取り出した。
+SPEAK_NITORI_MAGIC2,{0}がスイッチを押した。
+SPEAK_NITORI_CAMERA,{0}が叫んだ。「そのカメラ、私に任せてくれたら改良できるよ！」
+SPEAK_KEGERO_NORMAL1,{0}が叫んだ。「私と戦うつもり？」
+SPEAK_KEGERO_NORMAL2,{0}が叫んだ。「噛まれたいのか？」
+SPEAK_KEGERO_NORMAL3,{0}が叫んだ。「毛皮の手入れが大変になりそう…」
+SPEAK_KEGERO_NORMAL4,{0}が叫んだ。「静かにしていたかったのに。」
+SPEAK_KEGERO_NORMAL5,{0}が叫んだ。「私は犬じゃない！」
+SPEAK_KEGERO_NORMAL6,{0}が叫んだ。「オオカミから逃げ切れると思う？」
+SPEAK_KEGERO_NORMAL7,{0}が遠吠えした。
+SPEAK_KEGERO_NORMAL8,{0}が爪を立てた。
+SPEAK_KEGERO_CONFUSE1,{0}が叫んだ。「すごく目が回る！」
+SPEAK_KEGERO_CONFUSE2,{0}が叫んだ。「落ち着かなきゃ！」
+SPEAK_KEGERO_CONFUSE3,{0}が頭を抱えている。
+SPEAK_KEGERO_CONFUSE4,{0}が頭を振っている。
+SPEAK_KEGERO_CAMERA,{0}が叫んだ。「キャイン！」
+SPEAK_PARSI_NORMAL1,{0}が叫んだ。「羨ましい羨ましい羨ましい！」
+SPEAK_PARSI_NORMAL2,{0}がつぶやいた。「パルパルパルパルパル…」
+SPEAK_PARSI_NORMAL3,{0}が叫んだ。「死んでもまたやり直せるの？うらやましい！」
+SPEAK_PARSI_NORMAL4,{0}が叫んだ。「プレイヤーに操作されるなんて、うらやましい！」
+SPEAK_PARSI_NORMAL5,{0}が叫んだ。「私より幸せそうだね！うらやましい！」
+SPEAK_PARSI_NORMAL6,{0}が叫んだ。「どうやってそんなにアイテムを持ち歩いてるの？うらやましい！」
+SPEAK_PARSI_NORMAL7,{0}が叫んだ。「自由に階段を使えるなんて、うらやましい！」
+SPEAK_PARSI_NORMAL8,{0}が叫んだ。「強いじゃん！うらやましい！」
+SPEAK_PARSI_NORMAL9,{0}が叫んだ。「君に恨みはないけど、攻撃する理由くらい簡単に作れるよ。」
+SPEAK_PARSI_GOD_BUG,{0}が叫んだ。「それはバグの神様じゃん！バグはうらやましくない！」
+SPEAK_PARSI_GOD_NONE1,{0}が叫んだ。「無神論者か？」
+SPEAK_PARSI_GOD_NONE2,{0}が叫んだ。「神の力なしで強いなんて、うらやましい！」
+SPEAK_PARSI_GOD_NONE3,{0}が叫んだ。「もしかして神の信じ方知らないの？Pキー押して、P！」
+SPEAK_PARSI_GOD_NONE4,{0}が叫んだ。「神様って要求ばかり多くて制限も多いよね…」
+SPEAK_PARSI_GOD_NONE5,{0}が叫んだ。「とにかくうらやましい！」
+SPEAK_PARSI_GOD_NONE6,{0}が叫んだ。「たまに勧誘してくる宗教人たち、うっとうしいよね…君もそうだろ？」
+SPEAK_PARSI_GOD_NONE7,{0}が叫んだ。「君に恨みはないけど、攻撃する理由くらいはいくらでも作れるよ。」
+SPEAK_PARSI_GOD_JOON_AND_SION1,{0}が叫んだ。「なんであんな神を信じようと思ったの？」
+SPEAK_PARSI_GOD_JOON_AND_SION2,{0}が叫んだ。「私、そんなにお金持ちじゃないのに！」
+SPEAK_PARSI_GOD_JOON_AND_SION3,{0}が叫んだ。「どうして貧乏神を背負って戦おうとするの？」
+SPEAK_PARSI_GOD_JOON_AND_SION4,{0}が叫んだ。「最凶最悪の噂は聞いたことあるけど、必勝戦略って何？」
+SPEAK_PARSI_GOD_JOON_AND_SION5,{0}が叫んだ。「結局お金稼いでるのは、君に憑いてる疫病神でしょ？」
+SPEAK_PARSI_GOD_JOON_AND_SION6,{0}が叫んだ。「君の後ろに貧乏神が見えるんだけど…じゃあ私にも勝てるかも！」
+SPEAK_PARSI_GOD_JOON_AND_SION7,{0}が叫んだ。「誰にでも憑依できるなんて、うらやましい！」
+SPEAK_PARSI_GOD_JOON_AND_SION8,{0}が叫んだ。「そんなに後先考えずに浪費できるなんて、のんきでうらやましい！」
+SPEAK_PARSI_GOD_JOON_AND_SION9,{0}が叫んだ。「貧乏自体はあんまりうらやましくないけどね。」
+SPEAK_PARSI_GOD_JOON_AND_SION10,{0}が叫んだ。「で、君はどっちを信仰してるの？」
+SPEAK_PARSI_GOD_JOON_AND_SION11,{0}が叫んだ。「どうやったらそんなに無駄遣いできるの？うらやましい！」
+SPEAK_PARSI_GOD_JOON_AND_SION12,{0}が叫んだ。「貧乏がうつる！近寄らないで！」
+SPEAK_PARSI_GOD_JOON_AND_SION13,{0}が叫んだ。「あいつらを憑依させるのって、あまりいい考えじゃない気がする。」
+SPEAK_PARSI_GOD_BYAKUREN1,{0}が叫んだ。「魔法使いの力？うらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN2,{0}が叫んだ。「あの筋肉なら魔法使いじゃなくて戦士になったほうがよくない？うらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN3,{0}が叫んだ。「本がたくさんあるね！私にも一冊ちょうだい！うらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN4,{0}が叫んだ。「仏教信じてるのにお酒飲めるの？うらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN5,{0}が叫んだ。「仏教って妖怪も受け入れるんだ？うらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN6,{0}が叫んだ。「魔法を上手に使えてうらやましい！」
+SPEAK_PARSI_GOD_BYAKUREN7,{0}が叫んだ。「脚がめちゃくちゃ速いじゃん！うらやましい！」
+SPEAK_PARSI_GOD_KANAKO1,{0}が叫んだ。「あの単純で強力な神の力、うらやましい！」
+SPEAK_PARSI_GOD_KANAKO2,{0}が叫んだ。「かっこいい柱だね！うらやましい！」
+SPEAK_PARSI_GOD_KANAKO3,{0}が叫んだ。「その神様らしい個性的な髪型、うらやましい！」
+SPEAK_PARSI_GOD_KANAKO4,{0}が叫んだ。「私に突っ込んでくるつもり？その無謀さ、うらやましい！」
+SPEAK_PARSI_GOD_KANAKO5,{0}が叫んだ。「一人で複数を相手にする気？その図太さ、うらやましい！」
+SPEAK_PARSI_GOD_KANAKO6,{0}が叫んだ。「神の肉ってどんな味？うらやましい！」
+SPEAK_PARSI_GOD_SUWAKO1,{0}が叫んだ。「あの神様の帽子、かわいいじゃん！うらやましい！」
+SPEAK_PARSI_GOD_SUWAKO2,{0}が叫んだ。「災厄の神を信仰するの？大丈夫？とにかくうらやましい！」
+SPEAK_PARSI_GOD_SUWAKO3,{0}が叫んだ。「カエルって気持ち悪くない？その耐性がうらやましい！」
+SPEAK_PARSI_GOD_SUWAKO4,{0}が叫んだ。「どんな権能を求めたの？分からなくてうらやましい！」
+SPEAK_PARSI_GOD_SUWAKO5,{0}が叫んだ。「地面でも泳げるの？うらやましい！」
+SPEAK_PARSI_GOD_SUWAKO6,{0}が叫んだ。「このダンジョンのカエルたち、意外と強いね！うらやましい！」
+SPEAK_PARSI_GOD_MINORIKO1,{0}が叫んだ。「サツマイモ、美味しそう！うらやましい！」
+SPEAK_PARSI_GOD_MINORIKO2,{0}が叫んだ。「私にもサツマイモ一つちょうだい！うらやましい！」
+SPEAK_PARSI_GOD_MINORIKO3,{0}が叫んだ。「美味しそうな匂いがする！うらやましい！」
+SPEAK_PARSI_GOD_MINORIKO4,{0}が叫んだ。「やっぱり食べ物をくれる神様ってうらやましい！」
+SPEAK_PARSI_GOD_MINORIKO5,{0}が叫んだ。「ダンジョンで農業でもするつもり？うらやましい！」
+SPEAK_PARSI_GOD_MINORIKO6,{0}が叫んだ。「そのあり得ない回復力は何！？うらやましい！」
+SPEAK_PARSI_GOD_MIMA1,{0}が叫んだ。「強力な魔法だね！うらやましい！」
+SPEAK_PARSI_GOD_MIMA2,{0}が叫んだ。「魔法って何かを壊すために使うの？無鉄砲でうらやましい！」
+SPEAK_PARSI_GOD_MIMA3,{0}が叫んだ。「マナ切れになったらどうなるんだろう？そのギリギリ感、うらやましい！」
+SPEAK_PARSI_GOD_MIMA4,{0}が叫んだ。「そんな危険な魔法を私に向けないでよ！うらやましい！」
+SPEAK_PARSI_GOD_MIMA5,{0}が叫んだ。「君たちの神の名前聞いたことないけど、マニアックでうらやましい！」
+SPEAK_PARSI_GOD_MIMA6,{0}が叫んだ。「何年も同じネタで人気があるなんて、あの粘り強さうらやましい！」
+SPEAK_PARSI_GOD_MIMA7,{0}が叫んだ。「旧作から新作に来たかったの？私も旧作出演がうらやましい！」
+SPEAK_PARSI_GOD_SHINKI1,{0}が叫んだ。「神なら創造もするんだね、うらやましい！」
+SPEAK_PARSI_GOD_SHINKI2,{0}が叫んだ。「旧作結界って何？私はいつも2面ボスなのに！うらやましい！」
+SPEAK_PARSI_GOD_SHINKI3,{0}が叫んだ。「友達が多そうだね！うらやましい！」
+SPEAK_PARSI_GOD_SHINKI4,{0}が叫んだ。「パンデモニウムって長すぎない？その粘り強さ、うらやましい！」
+SPEAK_PARSI_GOD_SHINKI5,{0}が叫んだ。「悪魔を使役できると思ってるの？そのポジティブさ、うらやましい！」
+SPEAK_PARSI_GOD_SHINKI6,{0}が叫んだ。「悪魔に裏切られても言い訳できるね、うらやましい！」
+SPEAK_PARSI_GOD_SHINKI7,{0}が叫んだ。「私にもPアイテムを持っていくつもり？収集癖うらやましい！」
+SPEAK_PARSI_GOD_YUUGI1,{0}が叫んだ。「なんで勇儀と仲がいいの？うらやましい！」
+SPEAK_PARSI_GOD_YUUGI2,{0}が叫んだ。「ちょっと待って！投げないで！」
+SPEAK_PARSI_GOD_YUUGI3,{0}が叫んだ。「レスラーなの？うらやましい！」
+SPEAK_PARSI_GOD_YUUGI4,{0}が叫んだ。「私は勇儀の味方だと思ってたのに、うらやましい！」
+SPEAK_PARSI_GOD_YUUGI5,{0}が叫んだ。「えっ？君がなんで勇儀の力を使ってるの？」
+SPEAK_PARSI_GOD_YUUGI6,{0}が叫んだ。「ちょっと、何度も掴まないでよ！」
+SPEAK_PARSI_GOD_YUUGI7,{0}が叫んだ。「戦いながらお酒を飲める余裕、うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA1,{0}が叫んだ。「来るなんて思わなかった！静かでうらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA2,{0}が叫んだ。「暗殺しようとしたの？セリフも言えなかったよ、うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA3,{0}が叫んだ。「寝てたのに、君の嫉妬で目が覚めた。うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA4,{0}が叫んだ。「紅葉きれいだね。一枚くれない？うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA5,{0}が叫んだ。「バレたら逃げるの？その速さ、うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA6,{0}が叫んだ。「秋の気分に浸ってるの？その孤独感、うらやましい！」
+SPEAK_PARSI_GOD_SHIZUHA7,{0}が叫んだ。「ちょっと待って、紅葉で周りが汚れたよ。掃除しなくていいなんて、うらやましい！」
+SPEAK_PARSI_GOD_HINA1,{0}が叫んだ。「呪いが好きなの？その考え方、うらやましい！」
+SPEAK_PARSI_GOD_HINA2,{0}が叫んだ。「私も昔呪われた短剣拾ったよ。そんなの好きになれるなんて、うらやましい！」
+SPEAK_PARSI_GOD_HINA3,{0}が叫んだ。「来ないで！呪いがうつるじゃん！」
+SPEAK_PARSI_GOD_HINA4,{0}が叫んだ。「君たちの神はあんなに回って目が回らないの？耳が強くてうらやましい！」
+SPEAK_PARSI_GOD_HINA5,{0}が叫んだ。「2面ボスの先輩！うらやましい！」
+SPEAK_PARSI_GOD_HINA6,{0}が叫んだ。「呪われても怖がらないなんて、その勇気うらやましい！」
+SPEAK_PARSI_GOD_HINA7,{0}が叫んだ。「私の厄も払ってくれない？うらやましい！」
+SPEAK_PARSI_GOD_YUKARI1,{0}が叫んだ。「使わない空間転移の巻物を分けてくれない？うらやましい！」
+SPEAK_PARSI_GOD_YUKARI2,{0}が叫んだ。「私も動くのが面倒な時に瞬間移動してみたい。うらやましい！」
+SPEAK_PARSI_GOD_YUKARI3,{0}が叫んだ。「やられたらすぐ逃げるの？うらやましい！」
+SPEAK_PARSI_GOD_YUKARI4,{0}が叫んだ。「式神として生きるってどんな感じ？楽そうでうらやましい！」
+SPEAK_PARSI_GOD_YUKARI5,{0}が叫んだ。「あれ、ポータルってゲームで見たことあるよ！うらやましい！」
+SPEAK_PARSI_GOD_YUKARI6,{0}が叫んだ。「地底にも看板持ってる子がいたよ。看板うらやましい！」
+SPEAK_PARSI_GOD_YUKARI7,{0}が叫んだ。「私もその隙間に入ってみたい。うらやましい！」
+SPEAK_PARSI_GOD_EIRIN1,{0}が叫んだ。「自ら実験台になるなんて、その勇気うらやましい！」
+SPEAK_PARSI_GOD_EIRIN2,{0}が叫んだ。「その毒薬って美味しいの？なんだか美味しそうでうらやましい！」
+SPEAK_PARSI_GOD_EIRIN3,{0}が叫んだ。「危機で麻痺薬を飲む発想、その自信うらやましい！」
+SPEAK_PARSI_GOD_EIRIN4,{0}が叫んだ。「ここでステータス低下薬を拾ったよ。回復薬と交換しない？」
+SPEAK_PARSI_GOD_EIRIN5,{0}が叫んだ。「薬中なの？ちょっと悪っぽくてうらやましい！」
+SPEAK_PARSI_GOD_EIRIN6,{0}が叫んだ。「ポーションたくさん持ってるね！私にも分けてよ、うらやましい！」
+SPEAK_PARSI_GOD_EIRIN7,{0}が叫んだ。「蓬莱の薬は作れないの？不老不死うらやましい！」
+SPEAK_PARSI_GOD_YUYUKO1,{0}が叫んだ。「仲間が多そうだね、うらやましい！」
+SPEAK_PARSI_GOD_YUYUKO2,{0}が叫んだ。「幽霊って冷たいね、夏に涼しそうでうらやましい！」
+SPEAK_PARSI_GOD_YUYUKO3,{0}が叫んだ。「殺してまで魂を使役してるの？うらやましい！」
+SPEAK_PARSI_GOD_YUYUKO4,{0}が叫んだ。「幽霊として暮らすの、快適そうでうらやましい！」
+SPEAK_PARSI_GOD_YUYUKO5,{0}が叫んだ。「心霊現象マニア？楽しそうでうらやましい！」
+SPEAK_PARSI_GOD_YUYUKO6,{0}が叫んだ。「まさか私を魂にする気？ちょっとだけうらやましい！」
+SPEAK_PARSI_GOD_YUYUKO7,{0}が叫んだ。「ゾクゾクするね。ホラーに強いなんてうらやましい！」
+SPEAK_PARSI_GOD_SATORI1,{0}が叫んだ。「ペット扱いされてるの？かわいがられてうらやましい！」
+SPEAK_PARSI_GOD_SATORI2,{0}が叫んだ。「心を読まれても平気なの？その純粋な心、うらやましい！」
+SPEAK_PARSI_GOD_SATORI3,{0}が叫んだ。「私の心を読もうとしても嫉妬しかないよ！」
+SPEAK_PARSI_GOD_SATORI4,{0}が叫んだ。「ペットになると新しい名前もらえるの？うらやましい！」
+SPEAK_PARSI_GOD_SATORI5,{0}が叫んだ。「サトリの新しいペット？友達たくさんいそうでうらやましい！」
+SPEAK_PARSI_GOD_SATORI6,{0}が叫んだ。「ペットって気楽そうでうらやましい！」
+SPEAK_PARSI_GOD_TENSI1,{0}が叫んだ。「君、マゾなの？痛みも楽しめるなんてうらやましい！」
+SPEAK_PARSI_GOD_TENSI2,{0}が叫んだ。「君と戦ったら何が起こるか分からない！あっち行って！」
+SPEAK_PARSI_GOD_TENSI3,{0}が叫んだ。「そんな神を信じてよくここまで来たね。その運がうらやましい！」
+SPEAK_PARSI_GOD_TENSI4,{0}が叫んだ。「いつも神様を信じてスリル満点だね。羨ましいよ！」
+SPEAK_PARSI_GOD_TENSI5,{0}が叫んだ。「非想の剣、羨ましいな！でも神様を信じるのはゴメンだね。」
+SPEAK_PARSI_GOD_TENSI6,{0}が叫んだ。「頭の上に石が落ちてくるの見えないの？その鈍感さが羨ましい！」
+SPEAK_PARSI_GOD_TENSI7,{0}が叫んだ。「地面が揺れてるよ！あの制御不能な神様になんとか言ってよ！」
+SPEAK_PARSI_GOD_SEIJA1,{0}が叫んだ。「あの指名手配中のアマノジャクを信じるの？変わった趣味だね。」
+SPEAK_PARSI_GOD_SEIJA2,{0}が叫んだ。「その品物、全部他の神様から盗んできたの？羨ましい！」
+SPEAK_PARSI_GOD_SEIJA3,{0}が叫んだ。「逃亡者ってなんだか映画みたいで羨ましいね！」
+SPEAK_PARSI_GOD_SEIJA4,{0}が叫んだ。「アマノジャクの言葉、ほんとに信じられるの？」
+SPEAK_PARSI_GOD_SEIJA5,{0}が叫んだ。「今は別にひっくり返されたい気分じゃないな。」
+SPEAK_PARSI_GOD_SEIJA6,{0}が叫んだ。「どんどん信仰心が下がっていくのが目に見えてるよ。」
+SPEAK_PARSI_GOD_SEIJA7,{0}が叫んだ。「私だったらアマノジャクなんて信じないね。」
+SPEAK_PARSI_GOD_LILLY1,{0}が叫んだ。「妖精って何も考えずに生きてるみたいで羨ましいな！」
+SPEAK_PARSI_GOD_LILLY2,{0}が叫んだ。「妖精って死んでも蘇るんでしょ？羨ましい！」
+SPEAK_PARSI_GOD_LILLY3,{0}が叫んだ。「妖精たち、強いって言ってもたかが知れてるでしょ？」
+SPEAK_PARSI_GOD_LILLY4,{0}が叫んだ。「戦いを後ろから眺めるだけでいいなんて羨ましいな！」
+SPEAK_PARSI_GOD_LILLY5,{0}が叫んだ。「別に妖精たちと仲良くなりたいとは思わないけどね。」
+SPEAK_PARSI_GOD_LILLY6,{0}が叫んだ。「友達が多そうで羨ましいな！ほんと羨ましいよ！」
+SPEAK_PARSI_GOD_LILLY7,{0}が叫んだ。「友達のために命を捨てられる？いや、命のために友達を捨てるでしょ。」
+SPEAK_PARSI_GOD_MIKO1,{0}が叫んだ。「人気者みたいだね！羨ましい！」
+SPEAK_PARSI_GOD_MIKO2,{0}が叫んだ。「君には身代わりを頼む人もいないみたいだね？」
+SPEAK_PARSI_GOD_MIKO3,{0}が叫んだ。「不老不死って憧れるなぁ。もし叶うならだけどね。」
+SPEAK_PARSI_GOD_MIKO4,{0}が叫んだ。「私は小さい方のマントが好きだな。」
+SPEAK_PARSI_GOD_MIKO5,{0}が叫んだ。「じゃあ私は階段使って逃げればいいのかな？」
+SPEAK_PARSI_GOD_MIKO6,{0}が叫んだ。「まさか階段が嫌いなの？」
+SPEAK_PARSI_GOD_MIKO7,{0}が叫んだ。「政治家なんて信用できないよ。でも権力は羨ましいけどね。」
+SPEAK_PARSI_GOD_OKINA1,{0}が叫んだ。「背後がなんだか怪しいんだけど……？」
+SPEAK_PARSI_GOD_OKINA2,{0}が叫んだ。「ドア開けの達人だね！羨ましい！」
+SPEAK_PARSI_GOD_OKINA3,{0}が叫んだ。「もしかして鍵開け専門の職人だったりするの？」
+SPEAK_PARSI_GOD_OKINA4,{0}が叫んだ。「専属バックダンサーだなんて、まるでアイドルみたい！羨ましい！」
+SPEAK_PARSI_GOD_OKINA5,{0}が叫んだ。「どうしてドアの向こうでそんなにコソコソしてるの？」
+SPEAK_PARSI_GOD_OKINA6,{0}が叫んだ。「そこ、通るの大変だからさ。ドア、開けてくれない？」
+SPEAK_PARSI_GOD_OKINA7,{0}が叫んだ。「手を使わずにドアを開けられるの？羨ましい！」
+SPEAK_PARSI_GOD_JUNKO1,{0}が叫んだ。「消耗品、余ってたらちょっと貸してくれない？」
+SPEAK_PARSI_GOD_JUNKO2,{0}が叫んだ。「単純で力強そうで羨ましいな！」
+SPEAK_PARSI_GOD_JUNKO3,{0}が叫んだ。「一体何にそんなに恨みを抱いてるの？嫉妬なら負けないけどね。」
+SPEAK_PARSI_GOD_JUNKO4,{0}が叫んだ。「純粋そうで羨ましいな！」
+SPEAK_PARSI_GOD_JUNKO5,{0}が叫んだ。「その殺気、私に向けないでくれる？」
+SPEAK_PARSI_GOD_JUNKO6,{0}が叫んだ。「それを本当に祝福だと思ってるの？」
+SPEAK_PARSI_GOD_JUNKO7,{0}が叫んだ。「純粋な力って羨ましいな！」
+SPEAK_PARSI_GOD_JUNKO8,{0}が叫んだ。「浄化するって、あんまり良い考えには思えないけど……」
+SPEAK_PARSI_GOD_JUNKO9,{0}が叫んだ。「スキル浄化？努力しなくてもプロ級になるなんて羨ましい！」
+SPEAK_PARSI_GOD_JUNKO10,{0}が叫んだ。「耐性浄化？アイテム運が悪いのかな？」
+SPEAK_PARSI_GOD_JUNKO11,{0}が叫んだ。「魔力浄化？自分のマナを制御できずに死んだあの魔法使いを思い出すよ。」
+SPEAK_PARSI_GOD_JUNKO12,{0}が叫んだ。「パワー浄化？それで力は強くなったの？」
+SPEAK_PARSI_GOD_JUNKO13,{0}が叫んだ。「生命浄化？そんなものを手に入れたら絶対に怠け者になるよ！」
+SPEAK_PARSI_GOD_JUNKO14,{0}が叫んだ。「装備浄化？たかが装備のために自分を犠牲にしたの？」
+SPEAK_PARSI_GOD_JUNKO15,{0}が叫んだ。「システム浄化？何を言ってるのかさっぱりわからないよ。」
+SPEAK_PARSI_DUNGEON_NORMAL1,{0}が叫んだ。「ダンジョンにはアイテムがたくさん落ちてて羨ましいな！」
+SPEAK_PARSI_DUNGEON_NORMAL2,{0}が叫んだ。「私も別の階層に行ってみたい！羨ましい！他のダンジョンに連れてって！」
+SPEAK_PARSI_DUNGEON_NORMAL3,{0}が叫んだ。「地上世界って羨ましいな！」
+SPEAK_PARSI_DUNGEON_NORMAL4,{0}が叫んだ。「河童も人間も群れて行動するでしょ？羨ましいよ！」
+SPEAK_PARSI_DUNGEON_NORMAL5,{0}が叫んだ。「このダンジョン、すごく雑に作られてるね。他のゲームの綺麗なダンジョン生成が羨ましい！」
+SPEAK_PARSI_DUNGEON_NORMAL6,{0}が叫んだ。「oキー押してみた？自動探索アルゴリズム、ほんとおバカさん！他のゲームのパスファインディングが羨ましい！」
+SPEAK_PARSI_DUNGEON_NORMAL7,{0}が叫んだ。「大地のスペルカード持ってる？壁を壊せるなんて羨ましいな！」
+SPEAK_PARSI_DUNGEON_TEMPLE1,{0}が叫んだ。「祭壇がいっぱいあるね。君は何を信じるの？羨ましい！」
+SPEAK_PARSI_DUNGEON_TEMPLE2,{0}が叫んだ。「私を神殿まで連れてきてくれるなんて、その優しさが羨ましい！」
+SPEAK_PARSI_DUNGEON_TEMPLE3,{0}が叫んだ。「神殿まで送ってくれても、私は神様なんか信じないけどね。」
+SPEAK_PARSI_DUNGEON_TEMPLE4,{0}が叫んだ。「ここ、誰もいなくて静かだね。倉庫にでもできそう！羨ましい！」
+SPEAK_PARSI_DUNGEON_TEMPLE5,{0}が叫んだ。「なんで私をここに連れてきたの？」
+SPEAK_PARSI_DUNGEON_TEMPLE6,{0}が叫んだ。「ここは羨ましいものだらけだよ！」
+SPEAK_PARSI_DUNGEON_TEMPLE7,{0}が叫んだ。「神様たち、羨ましいなぁ！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE1,{0}が叫んだ。「霧の湖にはのんびりした妖精がたくさんいるね。羨ましい！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE2,{0}が叫んだ。「なんでこんなに水が多いの？泳げるやつらが羨ましい！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE3,{0}が叫んだ。「霧でよく見えないよ。視力がいい奴らが羨ましい！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE4,{0}が叫んだ。「妖精たちが羨ましいな！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE5,{0}が叫んだ。「ここ、きれいな水がいっぱいで羨ましい！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE6,{0}が叫んだ。「妖精たちは空を飛べるんだね。落ちないなんて羨ましい！」
+SPEAK_PARSI_DUNGEON_MISTY_LAKE7,{0}が叫んだ。「水の中を泳ぐ人魚たちも羨ましいな！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN1,{0}が叫んだ。「天狗や河童たちは友達が多そうで羨ましい！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN2,{0}が叫んだ。「サラリーマンって羨ましい！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN3,{0}が叫んだ。「組織生活って現実的な奴らっぽくて羨ましい！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN4,{0}が叫んだ。「河童たちの道具、羨ましいな！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN5,{0}が叫んだ。「天狗たちのスピード、羨ましい！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN6,{0}が叫んだ。「さっきすごい河童たちの飛行機を見たよ！羨ましいな！」
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN7,{0}が叫んだ。「私はこの河童と天狗たちが羨ましいよ！」
+SPEAK_PARSI_DUNGEON_SCARLET1,{0}が叫んだ。「こんな大きな屋敷の主なら働かなくてもいいんだろうな！羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET2,{0}が叫んだ。「メイド服、可愛くて羨ましいな！」
+SPEAK_PARSI_DUNGEON_SCARLET3,{0}が叫んだ。「このホブゴブリンたちは何？仕事を代わりにしてくれるなんて羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET4,{0}が叫んだ。「さっきチュパカブラを見たよ。あんな珍しいものを飼えるなんて羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET5,{0}が叫んだ。「メイド妖精たち、仕事もせずに遊んでたよ！遊びながら働くなんて羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET6,{0}が叫んだ。「地底にも屋敷を持つ妖怪がいるんだね。屋敷持ちなんて羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET7,{0}が叫んだ。「メイド妖精たちが紅茶を飲んでたよ。紅茶、羨ましいな！」
+SPEAK_PARSI_DUNGEON_LIBRARY1,{0}が叫んだ。「本が山ほどあるね。羨ましい！」
+SPEAK_PARSI_DUNGEON_LIBRARY2,{0}が叫んだ。「さっき本が私の知らない魔法を使ってた！羨ましい！」
+SPEAK_PARSI_DUNGEON_LIBRARY3,{0}が叫んだ。「本、ちょっと拾って行ってもいいかな？羨ましいな！」
+SPEAK_PARSI_DUNGEON_LIBRARY4,{0}が叫んだ。「こんなに広い図書館だなんて、羨ましいよ！」
+SPEAK_PARSI_DUNGEON_LIBRARY5,{0}が叫んだ。「本のくせに強いじゃん！羨ましい！」
+SPEAK_PARSI_DUNGEON_LIBRARY6,{0}が叫んだ。「さっき図書館の主に会ったよ。クールで羨ましいな！」
+SPEAK_PARSI_DUNGEON_SCARLET_UNDER1,{0}が叫んだ。「なんで私ここにいるんだろう？」
+SPEAK_PARSI_DUNGEON_SCARLET_UNDER2,{0}が叫んだ。「悪魔の妹がここにいるんだって！」
+SPEAK_PARSI_DUNGEON_SCARLET_UNDER3,{0}が叫んだ。「さっきこてんぱんにやられたよ。あの強さが羨ましい！」
+SPEAK_PARSI_DUNGEON_SCARLET_UNDER4,{0}が叫んだ。「こんな場所から出ないのに人気者だなんて！羨ましい！」
+SPEAK_PARSI_DUNGEON_BAMBOO1,{0}が叫んだ。「迷子になっちゃった！ちょっと助けてくれない？」
+SPEAK_PARSI_DUNGEON_BAMBOO2,{0}が叫んだ。「ウサギたちは道を知ってるのかな？羨ましいな！」
+SPEAK_PARSI_DUNGEON_BAMBOO3,{0}が叫んだ。「さっき竹槍に刺されそうになった！あんな武器羨ましい！」
+SPEAK_PARSI_DUNGEON_BAMBOO4,{0}が叫んだ。「さっき幸運の白ウサギに会ったよ。その運の良さ、羨ましい！」
+SPEAK_PARSI_DUNGEON_BAMBOO5,{0}が叫んだ。「あれ？なんだか同じところをぐるぐる回ってる気がする……」
+SPEAK_PARSI_DUNGEON_BAMBOO6,{0}が叫んだ。「さっきウサギたちが仲間を呼んでたよ。友達多いんだね、羨ましい！」
+SPEAK_PARSI_DUNGEON_BAMBOO7,{0}が叫んだ。「ウサギが多すぎて手に負えない！範囲魔法持ってないの？」
+SPEAK_PARSI_DUNGEON_BAMBOO8,{0}が叫んだ。「さっき大きな爆弾を背負ったウサギが自爆したよ！あの無茶っぷり羨ましい！」
+SPEAK_PARSI_DUNGEON_EIENTEI1,{0}が叫んだ。「なんだか変なところに入り込んじゃった。」
+SPEAK_PARSI_DUNGEON_EIENTEI2,{0}が叫んだ。「こんなところに立派な屋敷があるなんて！羨ましい！」
+SPEAK_PARSI_DUNGEON_EIENTEI3,{0}が叫んだ。「ここから見る月は大きいね！羨ましい！」
+SPEAK_PARSI_DUNGEON_EIENTEI4,{0}が叫んだ。「ここにもウサギがいっぱいいるじゃん！」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN1,{0}が叫んだ。「ようこそ、地底へ！」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN2,{0}が叫んだ。「どこにそんなに急いで行くの？楽しそうで羨ましいな。」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN3,{0}が叫んだ。「わざわざこんな冒険する必要ある？引き返した方がいいと思うけど。」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN4,{0}が叫んだ。「今、地下666階……くらいかな？」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN5,{0}が叫んだ。「なんか地底の奴ら、私より強くなってる気がする……羨ましい！」
+SPEAK_PARSI_DUNGEON_SUBTERRANEAN6,{0}が叫んだ。「ここでどれくらい耐えられるかな……？」
+SPEAK_PARSI_DUNGEON_YUKKURI1,{0}が叫んだ。「あの変な生き物たちは何なの？」
+SPEAK_PARSI_DUNGEON_YUKKURI2,{0}が叫んだ。「あいつら、悩みなさそうに生きてるね。羨ましいなぁ。」
+SPEAK_PARSI_DUNGEON_YUKKURI3,{0}が叫んだ。「意外と強いじゃん、頭しかないのに！羨ましい！」
+SPEAK_PARSI_DUNGEON_YUKKURI4,{0}が叫んだ。「なんか、美味しそうな匂いがする……」
+SPEAK_PARSI_DUNGEON_YUKKURI5,{0}が叫んだ。「こうして見ると、ちょっと気持ち悪いかも。」
+SPEAK_PARSI_DUNGEON_YUKKURI6,{0}が叫んだ。「「ゆっくり」って言うの？うるさすぎるよ！」
+SPEAK_PARSI_DUNGEON_DEPTH1,{0}が叫んだ。「もうこんなところまで来たんだ！羨ましい！」
+SPEAK_PARSI_DUNGEON_DEPTH2,{0}が叫んだ。「ここにはあらゆる妖怪がうようよいるよ。」
+SPEAK_PARSI_DUNGEON_DEPTH3,{0}が叫んだ。「変な世界に繋がるポータルがいっぱいあるね。」
+SPEAK_PARSI_DUNGEON_DEPTH4,{0}が叫んだ。「ここには地底に通じる道もあるよ。君には無理かもしれないけどね！」
+SPEAK_PARSI_DUNGEON_DEPTH5,{0}が叫んだ。「UFOだって？なんかミステリアスで羨ましいな。」
+SPEAK_PARSI_DUNGEON_DEPTH6,{0}が叫んだ。「鬼？なんでこんなに地上に鬼がいるの？」
+SPEAK_PARSI_DUNGEON_DREAM1,{0}が叫んだ。「ここは夢の世界だって？私、今夢を見てるのかな？」
+SPEAK_PARSI_DUNGEON_DREAM2,{0}が叫んだ。「アリクイみたいなやつ、めっちゃ強いじゃん！羨ましい！」
+SPEAK_PARSI_DUNGEON_DREAM3,{0}が叫んだ。「夢の世界ならどこでも行けるの？便利そうで羨ましいな！」
+SPEAK_PARSI_DUNGEON_DREAM4,{0}が叫んだ。「あのふわふわ浮いてる幽霊、何？初めて見た！」
+SPEAK_PARSI_DUNGEON_DREAM5,{0}が叫んだ。「さっきから霊力が尽きそうだよ！まあ、使わないけどね。」
+SPEAK_PARSI_DUNGEON_DREAM6,{0}が叫んだ。「さっきまでこの道、塞がってなかった？」
+SPEAK_PARSI_DUNGEON_MOON1,{0}が叫んだ。「この大量の水は何？羨ましいな！」
+SPEAK_PARSI_DUNGEON_MOON2,{0}が叫んだ。「変なウサギたちに追いかけられてるんだけど！」
+SPEAK_PARSI_DUNGEON_MOON3,{0}が叫んだ。「みんなハイテクすぎて羨ましい！」
+SPEAK_PARSI_DUNGEON_MOON4,{0}が叫んだ。「月？もしかして私、月に来ちゃったの？」
+SPEAK_PARSI_DUNGEON_MOON5,{0}が叫んだ。「なんだか頭がクラクラする……」
+SPEAK_PARSI_DUNGEON_MOON6,{0}が叫んだ。「こんなことなら飛び方くらい覚えておくんだった！」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM1,{0}が叫んだ。「魔界だって？意外とちゃんと発展してるじゃん！羨ましい！」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM2,{0}が叫んだ。「同じ顔の奴らが多い気がするけど……気のせいかな？」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM3,{0}が叫んだ。「さっき道を聞いたら運だって言われたよ。あり得る？」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM4,{0}が叫んだ。「あの変な目玉たち、敵味方関係なく攻撃してるよ！狂ってる！」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM5,{0}が叫んだ。「魔界も案外住みやすそうだね。羨ましい！」
+SPEAK_PARSI_DUNGEON_PANDEMONIUM6,{0}が叫んだ。「魔界って本当に広いんだね。そのスケール、羨ましい！」
+SPEAK_PARSI_DUNGEON_HAKUREI1,{0}が叫んだ。「神社だと思ったら妖怪だらけじゃん！」
+SPEAK_PARSI_DUNGEON_HAKUREI2,{0}が叫んだ。「もうそんなにルーンを集めたの？羨ましい！」
+SPEAK_PARSI_DUNGEON_HAKUREI3,{0}が叫んだ。「変な戦車たちに追いかけられて逃げてきたよ！戦車、羨ましいな！」
+SPEAK_PARSI_DUNGEON_HAKUREI4,{0}が叫んだ。「私はさ、あの陰陽玉ってそんなに苦労する価値あるのかなって思うよ。」
+SPEAK_PARSI_DUNGEON_HAKUREI5,{0}が叫んだ。「陰陽玉って結局何？ルーンって一体何なの？」
+SPEAK_PARSI_DUNGEON_HAKUREI6,{0}が叫んだ。「ここまで来たその強さ、素直に羨ましいよ！」
+SPEAK_PARSI_DUNGEON_OKINA,{0}が叫んだ。「扉を通ったら変なところに来ちゃった！」
+SPEAK_PARSI_DUNGEON_ZIGURRAT,{0}が叫んだ。「死ぬ覚悟はできてる？」
+SPEAK_PARSI_DUNGEON_BUG,{0}が叫んだ。「ここ、バグダンジョンだよ。もしくは作者が追加するの忘れたとか？」
+SPEAK_PARSI_CONFUSE1,{0}が叫んだ。「羨ましくなんかない！」
+SPEAK_PARSI_CONFUSE2,{0}が叫んだ。「私は幸せだもん！」
+SPEAK_PARSI_CONFUSE3,{0}は混乱している。
+SPEAK_PARSI_MAGIC1,{0}はパルパルと呟いた。
+SPEAK_PARSI_MAGIC2,{0}の緑色の瞳が輝き、呪文を唱える。
+SPEAK_PARSI_CAMERA,{0}が叫んだ。「君……そんな仕事してるの……？」
+SPEAK_BENBEN_NORMAL1,{0}が叫んだ。「付喪神をバカにする気？」
+SPEAK_BENBEN_NORMAL2,{0}が叫んだ。「私の音楽に耐えられるかな？」
+SPEAK_BENBEN_NORMAL3,{0}が叫んだ。「最強の道具が誰か、教えてあげるよ！」
+SPEAK_BENBEN_NORMAL4,{0}が叫んだ。「君も道具を捨てる気？」
+SPEAK_BENBEN_NORMAL5,{0}は琵琶を演奏している。
+SPEAK_BENBEN_NORMAL6,{0}は演奏に集中している。
+SPEAK_BENBEN_CONFUSE1,{0}が叫んだ。「クラクラする！」
+SPEAK_BENBEN_CONFUSE2,{0}が叫んだ。「不協和音だ！」
+SPEAK_BENBEN_CONFUSE3,{0}はデタラメな演奏をしている。
+SPEAK_BENBEN_CONFUSE4,{0}は不協和音を奏でている。
+SPEAK_BENBEN_MAGIC1,{0}は神秘的な旋律を奏でた。
+SPEAK_BENBEN_MAGIC2,{0}はまっすぐな旋律を奏でた。
+SPEAK_BENBEN_CAMERA,{0}は周囲を気にせず演奏に集中している。
+SPEAK_YATHASI_NORMAL1,{0}が叫んだ。「私と勝負しない？」
+SPEAK_YATHASI_NORMAL2,{0}が叫んだ。「君の相手は私だよ！」
+SPEAK_YATHASI_NORMAL3,{0}が叫んだ。「お姉ちゃんの分かりやすい音楽じゃダメだからね！」
+SPEAK_YATHASI_NORMAL4,{0}が叫んだ。「どこ見てるの？相手は私だよ！」
+SPEAK_YATHASI_NORMAL5,{0}は箏を演奏している。
+SPEAK_YATHASI_NORMAL6,{0}は演奏に集中している。
+SPEAK_YATHASI_CONFUSE1,{0}が叫んだ。「ダメだ！」
+SPEAK_YATHASI_CONFUSE2,{0}が叫んだ。「集中できない！」
+SPEAK_YATHASI_CONFUSE3,{0}はリズムを外した演奏をしている。
+SPEAK_YATHASI_CONFUSE4,{0}はデタラメな演奏をしている。
+SPEAK_YATHASI_MAGIC1,{0}は技巧的な旋律を奏でた。
+SPEAK_YATHASI_MAGIC2,{0}は美しい旋律を奏でた。
+SPEAK_YATHASI_CAMERA,{0}が叫んだ。「そのカメラもいつか付喪神になるって？」
+SPEAK_ORIN_NORMAL1_SATORI,{0}が叫んだ。「じゃじゃーん！」
+SPEAK_ORIN_NORMAL2_SATORI,{0}が叫んだ。「君、さとり様の新しいペットなの？」
+SPEAK_ORIN_NORMAL3_SATORI,{0}が叫んだ。「誰がさとり様にふさわしいペットか勝負してみようよ！」
+SPEAK_ORIN_NORMAL4_SATORI,{0}が叫んだ。「おくうとはもう会った？」
+SPEAK_ORIN_NORMAL5_SATORI,{0}が叫んだ。「それで君は猫？犬？それともカラス？」
+SPEAK_ORIN_NORMAL6_SATORI,{0}が叫んだ。「新入りペット用のスケジュール表だよ。まず朝はね……」
+SPEAK_ORIN_NORMAL7_SATORI,{0}が叫んだ。「猫たちがご飯催促してるよ！」
+SPEAK_ORIN_NORMAL8_SATORI,{0}は尻尾を振りながら鳴いた。
+SPEAK_ORIN_NORMAL1,{0}が叫んだ。「じゃじゃーん！」
+SPEAK_ORIN_NORMAL2,{0}が叫んだ。「お姉さん、どれくらい強いの？死んだら遺体、もらうね！」
+SPEAK_ORIN_NORMAL3,{0}が叫んだ。「幽霊って食べたら美味しいかな？」
+SPEAK_ORIN_NORMAL4,{0}が叫んだ。「死んだらオリン運送を呼んでね！」
+SPEAK_ORIN_NORMAL5,{0}が叫んだ。「もう死んでるの？幽霊ライフ、快適？」
+SPEAK_ORIN_NORMAL6,{0}が叫んだ。「このダンジョン、死体だらけで幸せだよ！」
+SPEAK_ORIN_NORMAL7,{0}が叫んだ。「お姉さん、結構強そうじゃん！」
+SPEAK_ORIN_NORMAL8,{0}が叫んだ。「強い死体は運ぶ価値あるからね！」
+SPEAK_ORIN_NORMAL9,{0}が叫んだ。「ねえねえ、お姉さんの遺体どこ？一緒に運んであげるよ！」
+SPEAK_ORIN_NORMAL10,{0}は嬉しそうにしている。
+SPEAK_ORIN_NORMAL11,{0}はニャーニャー鳴いている。
+SPEAK_ORIN_CONFUSE1,{0}が混乱して「ワンワン！」と叫んだ。
+SPEAK_ORIN_CONFUSE2,{0}が混乱して「カーカー！」と叫んだ。
+SPEAK_ORIN_CONFUSE3,{0}は混乱している。
+SPEAK_ORIN_CONFUSE4,{0}の両目がぐるぐる回っている。
+SPEAK_ORIN_MAGIC1,{0}は怨霊を集め始めた。
+SPEAK_ORIN_MAGIC2,{0}は手を高く掲げた。
+SPEAK_ORIN_CAMERA,{0}が叫んだ。「じゃじゃーん！」
+SPEAK_ICHIRIN_NORMAL1_BYAKUREN,{0}が叫んだ。「もしかして今回新しく命蓮寺に加わった仲間の方ですか？」
+SPEAK_ICHIRIN_NORMAL2_BYAKUREN,{0}が叫んだ。「この勝負は修行のための決闘ですよ！」
+SPEAK_ICHIRIN_NORMAL3_BYAKUREN,{0}が叫んだ。「命蓮寺最強を賭けて挑みます！」
+SPEAK_ICHIRIN_NORMAL4_BYAKUREN,{0}が叫んだ。「いいでしょう！かかってきなさい！」
+SPEAK_ICHIRIN_NORMAL5_BYAKUREN,{0}が叫んだ。「久しぶりの修行ですね。」
+SPEAK_ICHIRIN_NORMAL1,{0}が叫んだ。「問答無用！」
+SPEAK_ICHIRIN_NORMAL2,{0}が叫んだ。「力で語るなら負けないよ！」
+SPEAK_ICHIRIN_NORMAL3,{0}が叫んだ。「雲山の拳を正面から受けて耐えられるかな？」
+SPEAK_ICHIRIN_NORMAL4,{0}が叫んだ。「今、布教活動中です！まずは拳で話そうか！」
+SPEAK_ICHIRIN_NORMAL5,{0}が叫んだ。「運山がまず一発食らわせろって言ってるよ！」
+SPEAK_ICHIRIN_NORMAL6,{0}が叫んだ。「なぜ無駄な殺生をするんだ！」
+SPEAK_ICHIRIN_NORMAL7,{0}が叫んだ。「これ以上の乱暴はこの一輪が許さない！」
+SPEAK_ICHIRIN_CONFUSE1,{0}が叫んだ。「急に酔いが……」
+SPEAK_ICHIRIN_CONFUSE2,{0}が叫んだ。「昨日飲みすぎたかも……」
+SPEAK_ICHIRIN_CONFUSE3,{0}は頭を抱えている。
+SPEAK_ICHIRIN_CONFUSE4,{0}は変な方向にパンチを繰り出した。
+SPEAK_ICHIRIN_MAGIC1,{0}は雲山を呼び出した。
+SPEAK_ICHIRIN_CAMERA,{0}が叫んだ。「お寺の中では撮影禁止だよ！」
+SPEAK_PACHU_NORMAL1,{0}が呟いた。「{1}を処理するのに最適な魔法は……」
+SPEAK_PACHU_NORMAL2,{0}が言った。「……図書館では静かにして」
+SPEAK_PACHU_NORMAL3,{0}が言った。「ちょうど試したい魔法があったんだ」
+SPEAK_PACHU_NORMAL4,{0}が言った。「耐性は十分？全属性に備えてる？」
+SPEAK_PACHU_NORMAL5,{0}が言った。「ちょっと待って、必要な魔法が書かれた本を探してるから」
+SPEAK_PACHU_NORMAL6,{0}が言った。「今回はこの魔法にしようかな？」
+SPEAK_PACHU_NORMAL7,{0}が呟いた。「今日の邪魔者は{1}か……試したい魔法があったんだ」
+SPEAK_PACHU_NORMAL8,{0}が言った。「ここでは気をつけて、本が傷むから。」
+SPEAK_PACHU_NORMAL9,{0}が言った。「もしかして本を盗りに来た？でも警備対策は万全よ。」
+SPEAK_PACHU_NORMAL10,{0}が言った。「ちょっと待って、今弱点を探してるから」
+SPEAK_PACHU_NORMAL11,{0}はこっちを無視して本を読み続けている。
+SPEAK_PACHU_CONFUSE1,{0}が呟いた。「……油断した」
+SPEAK_PACHU_CONFUSE2,{0}が呟いた。「喘息がひどくて……」
+SPEAK_PACHU_CONFUSE3,{0}は激しく咳き込んでいる。
+SPEAK_PACHU_CONFUSE4,{0}は本を逆さまに持っている。
+SPEAK_PACHU_MAGIC1,{0}は本を読みながら呪文を唱えた。
+SPEAK_PACHU_MAGIC2,{0}は指で標的を指し示した。
+SPEAK_PACHU_MAGIC3,{0}は本を広げて相手に向けた。
+SPEAK_PACHU_MAGIC5,{0}は空に向かって手を掲げた。
+SPEAK_PACHU_MAGIC4,{0}の本から光が溢れ出した。
+SPEAK_PACHU_MAGIC6,{0}の手から小さな炎が立ち上った。
+SPEAK_PACHU_CAMERA,{0}が言った。「図書館では撮影は控えてほしいな。」
+SPEAK_KOAKUMA_NORMAL1,{0}は威嚇するポーズを取った。
+SPEAK_KOAKUMA_NORMAL2,{0}はこっちの様子をうかがっている。
+SPEAK_KOAKUMA_NORMAL3,{0}は翼をパタパタさせた。
+SPEAK_KOAKUMA_NORMAL4,{0}は持っている本を振り回した。
+SPEAK_KOAKUMA_NORMAL5,{0}はこくりとうなずいた。
+SPEAK_KOAKUMA_NORMAL6,{0}はにっこりと笑った。
+SPEAK_KOAKUMA_NORMAL7,{0}は手に弾幕を集めた。
+SPEAK_KOAKUMA_CONFUSE1,{0}は混乱している様子だ。
+SPEAK_KOAKUMA_CONFUSE2,{0}の目がぐるぐる回っている。
+SPEAK_KOAKUMA_CONFUSE3,{0}はふらふらして方向感覚を失っている。
+SPEAK_KOAKUMA_CONFUSE4,{0}はまっすぐ飛べない。
+SPEAK_KOAKUMA_MAGIC1,{0}は呪文を唱えた。
+SPEAK_KOAKUMA_CAMERA,{0}は微笑んだ。
+SPEAK_MEIRIN_NORMAL1,{0}が叫んだ。「侵入者？ここは通さないよ！」
+SPEAK_MEIRIN_NORMAL2,{0}が叫んだ。「手合わせするまでもないかな。」
+SPEAK_MEIRIN_NORMAL3,{0}が叫んだ。「あっ……ちょっと目を閉じてただけだよ。」
+SPEAK_MEIRIN_NORMAL4,{0}が叫んだ。「門番をなめないでよ！」
+SPEAK_MEIRIN_NORMAL5,{0}が叫んだ。「太歳星君の手下か！」
+SPEAK_MEIRIN_NORMAL6,{0}は気合を入れている。
+SPEAK_MEIRIN_NORMAL7,{0}は太極拳を舞っている。
+SPEAK_MEIRIN_CONFUSE1,{0}が叫んだ。「目がぐるぐるする～！」
+SPEAK_MEIRIN_CONFUSE2,{0}が叫んだ。「ごめんなさい、咲夜さん！」
+SPEAK_MEIRIN_CONFUSE3,{0}の目がぐるぐる回っている。
+SPEAK_MEIRIN_CONFUSE4,{0}は空中に蹴りを入れている。
+SPEAK_MEIRIN_CAMERA,{0}が叫んだ。「もしかしてこの前話してた太極拳取材？」
+SPEAK_SAKUYA_NORMAL1,{0}が叫んだ。「まったく、お掃除の邪魔ですね……」
+SPEAK_SAKUYA_NORMAL2,{0}が叫んだ。「また掃除の邪魔をするつもりですか？」
+SPEAK_SAKUYA_NORMAL3,{0}が叫んだ。「これも掃除の一環にしておきますね。」
+SPEAK_SAKUYA_NORMAL4,{0}が叫んだ。「もうすぐ、あなたの時間は止まります。」
+SPEAK_SAKUYA_NORMAL5,{0}が叫んだ。「これはトリックなしのマジックですよ。」
+SPEAK_SAKUYA_NORMAL6,{0}が叫んだ。「お嬢様のもとへ行こうというのですか？時間を止めてでも阻止します。」
+SPEAK_SAKUYA_NORMAL7,{0}が叫んだ。「時間を止めれば、時間くらい稼げますから。」
+SPEAK_SAKUYA_NORMAL8,{0}が叫んだ。「あなたもこの館に雇われた者ですか？」
+SPEAK_SAKUYA_NORMAL9,{0}はナイフをこちらに向けた。
+SPEAK_SAKUYA_CONFUSE1,{0}が叫んだ。「ああ……お嬢様……」
+SPEAK_SAKUYA_CONFUSE2,{0}が叫んだ。「ああ、目の前がぐるぐるする……」
+SPEAK_SAKUYA_CONFUSE3,{0}はナイフを落とした。
+SPEAK_SAKUYA_CONFUSE4,{0}はふらついている。
+SPEAK_SAKUYA_MAGIC1,{0}の姿が一瞬消えた。
+SPEAK_SAKUYA_MAGIC2,{0}は懐中時計を手に取った。
+SPEAK_SAKUYA_CAMERA,{0}が叫んだ。「まあ……やるじゃない。」
+SPEAK_REMILIA_NORMAL1,{0}が叫んだ。「楽しい夜になりそうね。」
+SPEAK_REMILIA_NORMAL2,{0}が叫んだ。「吸血鬼に勝てると思ってるの？」
+SPEAK_REMILIA_NORMAL3,{0}が叫んだ。「うちのペットにちょっかい出したのは、あなた？」
+SPEAK_REMILIA_NORMAL4,{0}が叫んだ。「今見せてる力は、私の十分の一よ。」
+SPEAK_REMILIA_NORMAL5,{0}が叫んだ。「もう、あなたが勝つ運命はなさそうね。」
+SPEAK_REMILIA_NORMAL6,{0}が叫んだ。「悪いけど、近接戦なら負けないわ。」
+SPEAK_REMILIA_NORMAL7,{0}が叫んだ。「この館で騒いでる侵入者は、あなただったのね？」
+SPEAK_REMILIA_NORMAL8,{0}が叫んだ。「ちょうどいい暇つぶしになりそうね。」
+SPEAK_REMILIA_NORMAL9,{0}は大きく翼を広げた。
+SPEAK_REMILIA_CONFUSE1,{0}が叫んだ。「うーっ」
+SPEAK_REMILIA_CONFUSE2,{0}が叫んだ。「目が回る！」
+SPEAK_REMILIA_CONFUSE3,{0}はしゃがみ込んで頭を抱えた。
+SPEAK_REMILIA_MAGIC1,{0}は手に赤いオーラを集めた。
+SPEAK_REMILIA_MAGIC2,{0}は手振りをした。
+SPEAK_REMILIA_CAMERA,{0}が叫んだ。「もっと威厳のあるポーズで撮ってよ！」
+SPEAK_KASEN_NORMAL1,{0}が叫んだ。「もっと修行を積んでから来なさい！」
+SPEAK_KASEN_NORMAL2,{0}が叫んだ。「力を粗末に扱えば、いつか大きな災いを招くよ。」
+SPEAK_KASEN_NORMAL3,{0}が叫んだ。「もう好き勝手はさせない！」
+SPEAK_KASEN_NORMAL4,{0}が叫んだ。「神駄！あの子を捕まえなさい！」
+SPEAK_KASEN_NORMAL5,{0}が叫んだ。「説教が必要みたいだね。」
+SPEAK_KASEN_NORMAL6,{0}が叫んだ。「こんなところで昔の仲間に会いたくなかったんだけど……」
+SPEAK_KASEN_NORMAL7,{0}が叫んだ。「どうだい？私の下で修行してみないか？」
+SPEAK_KASEN_NORMAL8,{0}が叫んだ。「この力……勇儀の力！？」
+SPEAK_KASEN_CONFUSE1,{0}が叫んだ。「ち、違う！私は鬼じゃないから！」
+SPEAK_KASEN_CONFUSE2,{0}が叫んだ。「やめろー！」
+SPEAK_KASEN_CONFUSE3,{0}の腕に巻かれていた包帯が緩んだ。
+SPEAK_KASEN_MAGIC1,{0}は呪文を唱えた。
+SPEAK_KASEN_CAMERA,{0}が叫んだ。「修行中にサボるな！」
+SPEAK_YUMEKO_NORMAL1,{0}が叫んだ。「神綺様！ここからは私にお任せください！」
+SPEAK_YUMEKO_NORMAL2,{0}が叫んだ。「魔界を乱す者はお前か！」
+SPEAK_YUMEKO_NORMAL3,{0}が叫んだ。「我々を侮辱した罪は、死でしか償えない！」
+SPEAK_YUMEKO_NORMAL4,{0}が叫んだ。「汚物の掃除なら得意なんだけどね！」
+SPEAK_YUMEKO_NORMAL5,{0}が叫んだ。「あなたも神綺様の配下なら、魔界の掃除を手伝ってくれる？」
+SPEAK_YUMEKO_NORMAL6,{0}が叫んだ。「この巨大な剣が刺さっても動けるかな？」
+SPEAK_YUMEKO_NORMAL7,{0}が叫んだ。「神綺様はなぜこんな者を……」
+SPEAK_YUMEKO_NORMAL8,{0}が叫んだ。「神綺様の手を煩わせるわけにはいかない！」
+SPEAK_YUMEKO_NORMAL9,{0}が叫んだ。「あなたも神綺様の創造物なの？」
+SPEAK_YUMEKO_CONFUSE1,{0}が叫んだ。「わ、私は本当はメイドの仕事が嫌いだったの！」
+SPEAK_YUMEKO_CONFUSE2,{0}は剣をあちこちに投げている。
+SPEAK_YUMEKO_MAGIC1,{0}は大剣を片手で投げた。
+SPEAK_YUMEKO_CAMERA,{0}が叫んだ。「産業スパイだったの？！」
+SPEAK_FLAN_NORMAL1,{0}が叫んだ。「ここに人間が来るの、珍しいね！」
+SPEAK_FLAN_NORMAL2,{0}が叫んだ。「あれ、迷子になったの？」
+SPEAK_FLAN_NORMAL3,{0}が叫んだ。「それで、誰もいなくなっちゃうかな？」
+SPEAK_FLAN_NORMAL4,{0}が叫んだ。「コンティニューは禁止だよ！」
+SPEAK_FLAN_NORMAL5,{0}が叫んだ。「人間ってケーキの形でしか見たことなかったけど！」
+SPEAK_FLAN_NORMAL6,{0}が叫んだ。「もっと頑張って粘ってみなよ！」
+SPEAK_FLAN_NORMAL7,{0}が叫んだ。「おもちゃが入ってきた！」
+SPEAK_FLAN_NORMAL8,{0}が叫んだ。「あれ？ちょっと無謀じゃない？」
+SPEAK_FLAN_NORMAL9,{0}が叫んだ。「どこを壊したら一番きれいに爆発するかな？」
+SPEAK_FLAN_NORMAL10,{0}が叫んだ。「火耐性なんて無駄だよ！」
+SPEAK_FLAN_NORMAL11,{0}が叫んだ。「いくら鎧でぐるぐる巻きにしても、逃げても……逃げられないよ！」
+SPEAK_FLAN_NORMAL12,{0}が叫んだ。「今度は反対側だよ！」
+SPEAK_FLAN_NORMAL13,{0}の翼がキラキラ輝いている。
+SPEAK_FLAN_CONFUSE1,{0}は乱暴に杖を振り回している。
+SPEAK_FLAN_CONFUSE2,{0}はゾクゾクするような笑い声を上げた。「あはは！」
+SPEAK_FLAN_CONFUSE3,{0}は周りのものを無差別に破壊している。
+SPEAK_FLAN_MAGIC1,{0}はこちらに向かって手を伸ばした。
+SPEAK_FLAN_MAGIC2,{0}は手振りをした。
+SPEAK_FLAN_CAMERA,{0}はクスクス笑っている。
+SPEAK_RABIT_SUPPORT,{0}は思い切りラッパを吹いた。
+SPEAK_TEWI_NORMAL1,{0}が叫んだ。「道に迷ったの？」
+SPEAK_TEWI_NORMAL2,{0}が叫んだ。「ウサギたち、集まれー！」
+SPEAK_TEWI_NORMAL3,{0}が叫んだ。「私はそんなに強くないから無視して通った方がいいよ～」
+SPEAK_TEWI_NORMAL4,{0}が叫んだ。「ウサギたちが騒いでたと思ったら、君が原因だったんだね。」
+SPEAK_TEWI_NORMAL5,{0}が叫んだ。「ここから{北|東|南|西|北東|北西|南東|南西}に行けば、目的地に着けるよ～」
+SPEAK_TEWI_NORMAL6,{0}が叫んだ。「待って！私を倒したら竹林から出られなくなるよ！」
+SPEAK_TEWI_NORMAL7,{0}が叫んだ。「竹を切ってると、低確率で隠しアイテムが出るって知ってた？」
+SPEAK_TEWI_NORMAL8,{0}が叫んだ。「もちろん全部ウソぴょん～！」
+SPEAK_TEWI_CONFUSE1,{0}が叫んだ。「嘘ついてごめんなさい！」
+SPEAK_TEWI_CONFUSE2,{0}が叫んだ。「私は嘘なんかついてないよ！」
+SPEAK_TEWI_CONFUSE3,{0}が叫んだ。「これからは真面目に生きるから！助けて～！」
+SPEAK_TEWI_CONFUSE4,{0}は泣きそうになっている。
+SPEAK_TEWI_MAGIC1,{0}は大声で応援を呼びかけた。
+SPEAK_TEWI_CAMERA,{0}が叫んだ。「ごめんね、幸運は写真には残せないんだ～」
+SPEAK_CLOWNPIECE_NORMAL1,{0}が叫んだ。「It’s Lunatic Time！」
+SPEAK_CLOWNPIECE_NORMAL2,{0}が叫んだ。「妖精たち！もっとスピード上げて行こう！」
+SPEAK_CLOWNPIECE_NORMAL3,{0}が叫んだ。「その顔、最高だよ！」
+SPEAK_CLOWNPIECE_NORMAL4,{0}が叫んだ。「ここ、昔に比べたらずっと住みやすくなったね！」
+SPEAK_CLOWNPIECE_NORMAL5,{0}が叫んだ。「きゃはは！」
+SPEAK_CLOWNPIECE_NORMAL6,{0}が叫んだ。「いいね！狂ってる姿が最高だよ！」
+SPEAK_CLOWNPIECE_NORMAL7,{0}が叫んだ。「この松明を見て、正気でいられるかな？」
+SPEAK_CLOWNPIECE_NORMAL8,{0}が叫んだ。「もう君は狂ってるよ！」
+SPEAK_CLOWNPIECE_NORMAL9,{0}が叫んだ。「すぐ狂っちゃうからね！」
+SPEAK_CLOWNPIECE_CONFUSE1,{0}は混乱して息を荒げている。「はぁ、はぁ……」
+SPEAK_CLOWNPIECE_CONFUSE2,{0}が言った。「どうして！？」
+SPEAK_CLOWNPIECE_CONFUSE3,{0}が言った。「狂うのは私じゃないはずなのに……」
+SPEAK_CLOWNPIECE_MAGIC1,{0}は松明を荒々しく振り回した。
+SPEAK_CLOWNPIECE_CAMERA,{0}はこれ見よがしに松明を振り回している。
+SPEAK_CLOWNPIECE_FREIND1,{0}が言った。「この火を見て無事だった人はいないよ！」
+SPEAK_CLOWNPIECE_FREIND2,{0}が言った。「もっと狂気を！」
+SPEAK_CLOWNPIECE_FREIND3,{0}が言った。「本当に楽しいね！」
+SPEAK_CLOWNPIECE_FREIND4,{0}は松明をあちこち振り回している。
+SPEAK_CLOWNPIECE_FREIND5,{0}が言った。「もっとスピード上げて行こう！」
+SPEAK_CLOWNPIECE_FREIND6,{0}が言った。「妖精たちの世界だよ！」
+SPEAK_CLOWNPIECE_ENTER,{0}が叫んだ。「わかった！そっちの方が楽しそうだね！」
+SPEAK_CLOWNPIECE_FAIRY_WAR,{0}が叫んだ。「It’s! Lunatic Time！」
+SPEAK_CLOWNPIECE_REVIVE,{0}が叫んだ。「ようこそ！」
+SPEAK_DOREMI_NORMAL1,{0}が叫んだ。「とりあえず眠りなさい、甘い夢を見せてあげるから」
+SPEAK_DOREMI_NORMAL2,{0}が叫んだ。「悪夢にどれだけ耐えられるかな？」
+SPEAK_DOREMI_NORMAL3,{0}が叫んだ。「そろそろ眠くなってきたんじゃない？」
+SPEAK_DOREMI_NORMAL4,{0}が叫んだ。「永遠の夢へ……」
+SPEAK_DOREMI_NORMAL5,{0}が叫んだ。「目覚めるにはまだ早いよ。」
+SPEAK_DOREMI_CONFUSE1,{0}が叫んだ。「これは新しい悪夢か……」
+SPEAK_DOREMI_CONFUSE2,{0}が叫んだ。「やめて！」
+SPEAK_DOREMI_CONFUSE3,{0}は混乱している。
+SPEAK_DOREMI_MAGIC1,{0}は呪文を唱えた。
+SPEAK_DOREMI_CAMERA,{0}が叫んだ。「夢を写真に残そうとしてるの？」
+SPEAK_HELL_HOUND_NORMAL,{0}が吠えた。
+SPEAK_HELL_HOUND_MAGIC,{0}は空に向かって長く遠吠えした。
+SPEAK_LETTY_NORMAL1,{0}が叫んだ。「黒幕登場～！」
+SPEAK_LETTY_NORMAL2,{0}が叫んだ。「なに？太ったって？まだそんなこと言うの！」
+SPEAK_LETTY_NORMAL3,{0}が叫んだ。「地下は涼しくていいわ～。地底は暑すぎるけどね。」
+SPEAK_LETTY_NORMAL4,{0}が叫んだ。「秋なんてとっくに終わってるよ！」
+SPEAK_LETTY_NORMAL5,{0}が叫んだ。「冬の力を見せてあげる！」
+SPEAK_LETTY_NORMAL6,{0}が叫んだ。「秋の何がそんなにいいの？理解できないわ。」
+SPEAK_LETTY_NORMAL7,{0}が叫んだ。「私を甘く見ない方がいいわよ。」
+SPEAK_LETTY_CONFUSE1,{0}が叫んだ。「もう春になったの？」
+SPEAK_LETTY_CONFUSE2,{0}が叫んだ。「ダメ！冬はまだ終わってない！」
+SPEAK_LETTY_CONFUSE3,{0}は混乱している。
+SPEAK_LETTY_MAGIC1,{0}は呪文を唱えた。
+SPEAK_LETTY_CAMERA,{0}が叫んだ。「冬の美しさを撮るといいわ！」
+SPEAK_YORIHIME_NORMAL1,{0}が叫んだ。「侵入者？月兎たちは何をしてたんだ！」
+SPEAK_YORIHIME_NORMAL2,{0}が叫んだ。「私が直接出るしかないか。」
+SPEAK_YORIHIME_NORMAL3,{0}が叫んだ。「また地上人か。」
+SPEAK_YORIHIME_NORMAL4,{0}が叫んだ。「お前の目的は何だ？」
+SPEAK_YORIHIME_NORMAL5,{0}が叫んだ。「部隊！目標を攻撃せよ！」
+SPEAK_YORIHIME_CONFUSE1,{0}は剣を振り回している。
+SPEAK_YORIHIME_CONFUSE2,{0}が叫んだ。「くっ、ここまでか……！」
+SPEAK_YORIHIME_CONFUSE3,{0}が叫んだ。「少し時間をもらえれば……」
+SPEAK_YORIHIME_MAGIC1,{0}は神霊を呼び出し始めた。
+SPEAK_YORIHIME_CAMERA,{0}が叫んだ。「地上の奇妙な道具か……」
+SPEAK_TOYOHIME_NORMAL1,{0}が叫んだ。「汚れを持つ地上の罪人ですね。」
+SPEAK_TOYOHIME_NORMAL2,{0}が叫んだ。「生きること、死ぬこと、それ自体があなたの罪です。」
+SPEAK_TOYOHIME_NORMAL3,{0}が叫んだ。「月の最新兵器を前に、あなたに何ができるのかしら？」
+SPEAK_TOYOHIME_NORMAL4,{0}が叫んだ。「汚れた者よ、早くここから立ち去りなさい。」
+SPEAK_TOYOHIME_NORMAL5,{0}が叫んだ。「笑っていられるのも今のうちよ。」
+SPEAK_TOYOHIME_CONFUSE1,{0}は混乱している。
+SPEAK_TOYOHIME_CONFUSE2,{0}が叫んだ。「一体、どうして……」
+SPEAK_TOYOHIME_CONFUSE3,{0}が叫んだ。「こんなことが起こるなんて……」
+SPEAK_TOYOHIME_MAGIC1,{0}は扇子を軽く振った。
+SPEAK_TOYOHIME_CAMERA,{0}が叫んだ。「ふふ、月にはもっと凄いカメラもあるのよ？」
+SPEAK_UTSUHO_NORMAL1,{0}が叫んだ。「侵入者発見！核融合炉の反応を停止して侵入者を排除する！」
+SPEAK_UTSUHO_NORMAL2,{0}が叫んだ。「フュージョンしない？」
+SPEAK_UTSUHO_NORMAL3,{0}が叫んだ。「難しいことはわかんないけど、とりあえずドカンとやればいいよね！」
+SPEAK_UTSUHO_NORMAL4,{0}が叫んだ。「でっかい一発、いっくよー！」
+SPEAK_UTSUHO_NORMAL5,{0}が叫んだ。「サトリ様にはナイショだよ！」
+SPEAK_UTSUHO_NORMAL6,{0}が叫んだ。「君を倒したら、次は地上を目指すんだ！」
+SPEAK_UTSUHO_NORMAL7,{0}が叫んだ。「君の名前、なんだったっけ？」
+SPEAK_UTSUHO_NORMAL8,{0}が叫んだ。「核エネルギーで跡形もなく溶かしてやる！」
+SPEAK_UTSUHO_NORMAL9,{0}が叫んだ。「君みたいな弱いペットより、私の方が強いんだから！」
+SPEAK_UTSUHO_CONFUSE1,{0}が叫んだ。「うにゅ？」
+SPEAK_UTSUHO_CONFUSE2,{0}が叫んだ。「核反応制御不能！制御不能！」
+SPEAK_UTSUHO_CONFUSE3,{0}はあちこちに弾幕を撃っている。
+SPEAK_UTSUHO_MAGIC1,{0}は制御棒をターゲットに向けた。
+SPEAK_UTSUHO_CAMERA,{0}が叫んだ。「うにゅ？」
+SPEAK_SUIKA_NORMAL1,{0}が叫んだ。「お？一緒に一杯やるかい？」
+SPEAK_SUIKA_NORMAL2,{0}が叫んだ。「つまみが欲しかったんだ、軽く運動してくれるかな？」
+SPEAK_SUIKA_NORMAL3,{0}が叫んだ。「結局みんな集まるもんさ、君もその一人だよ。」
+SPEAK_SUIKA_NORMAL4,{0}が叫んだ。「見ない顔だね……どこの出身？」
+SPEAK_SUIKA_NORMAL5,{0}が叫んだ。「鬼の力を侮ったら、もう終わりだよ。」
+SPEAK_SUIKA_NORMAL6,{0}が叫んだ。「お！勇儀じゃん？今度一緒に飲もうね！」
+SPEAK_SUIKA_NORMAL7,{0}が叫んだ。「久々に宴でも開こうか！」
+SPEAK_SUIKA_NORMAL8,{0}が叫んだ。「鬼は嘘つかないんだ！……たまに、つくかもね！」
+SPEAK_SUIKA_CONFUSE1,{0}が叫んだ。「あはは～酔っぱらっちゃった～」
+SPEAK_SUIKA_CONFUSE2,{0}が叫んだ。「私はいつも酔ってるからね！」
+SPEAK_SUIKA_CONFUSE3,{0}はふらふらしている。
+SPEAK_SUIKA_MAGIC1,{0}は霧を集め始めた。
+SPEAK_SUIKA_CAMERA,{0}は気にせず酒を飲んでいる。
+SPEAK_REIMU_NORMAL1_REIMU,{0}が叫んだ。「本物は私だよ！」
+SPEAK_REIMU_NORMAL2_REIMU,{0}が叫んだ。「楽園の素敵な巫女は私だけで十分よ！」
+SPEAK_REIMU_NORMAL3_REIMU,{0}が叫んだ。「青い服を着た巫女が本物だって！」
+SPEAK_REIMU_NORMAL4_REIMU,{0}が叫んだ。「努力は絶対に裏切らない！」
+SPEAK_REIMU_NORMAL5_REIMU,{0}が叫んだ。「あなた……私なの？」
+SPEAK_REIMU_NORMAL1_MARISA,{0}が叫んだ。「魔理沙って、肝が据わってるよね？」
+SPEAK_REIMU_NORMAL2_MARISA,{0}が叫んだ。「いつも手癖が悪いと思ってたけど、まさか陰陽玉まで盗むとは！」
+SPEAK_REIMU_NORMAL3_MARISA,{0}が叫んだ。「今回もいつも通り勝たせてもらうわ！」
+SPEAK_REIMU_NORMAL4_MARISA,{0}が叫んだ。「あなたの魔法なんて、見飽きたわよ！」
+SPEAK_REIMU_NORMAL5_MARISA,{0}が叫んだ。「どんな強力な弾幕でも、当たらなきゃ意味ないって知ってるでしょ？」
+SPEAK_REIMU_NORMAL6_MARISA,{0}が叫んだ。「手加減する気ないから、うまく逃げなさい！」
+SPEAK_REIMU_NORMAL1_SANAE,{0}が叫んだ。「幻想郷に巫女は一人で十分よ！」
+SPEAK_REIMU_NORMAL2_SANAE,{0}が叫んだ。「また神社を奪いに来たの？」
+SPEAK_REIMU_NORMAL3_SANAE,{0}が叫んだ。「あなたたちの神様っていつも厄介ね。」
+SPEAK_REIMU_NORMAL4_SANAE,{0}が叫んだ。「本当に懲りないわね！」
+SPEAK_REIMU_NORMAL5_SANAE,{0}が叫んだ。「そっちの神様も退治されたいのかしら？」
+SPEAK_REIMU_NORMAL1,{0}が叫んだ。「それを持って逃げ切れると思ってるの？」
+SPEAK_REIMU_NORMAL2,{0}が叫んだ。「私は退治する側。あなたは退治される側。」
+SPEAK_REIMU_NORMAL3,{0}が叫んだ。「何があっても陰陽玉は守ってみせる！」
+SPEAK_REIMU_NORMAL4,{0}が叫んだ。「この幻想郷ダンジョンを管理するのは私よ。諦めなさい！」
+SPEAK_REIMU_NORMAL5,{0}が叫んだ。「悪いけど、このまま帰すわけにはいかない！」
+SPEAK_REIMU_NORMAL6,{0}が叫んだ。「みんな失敗した、そして君も失敗する！」
+SPEAK_REIMU_NORMAL7,{0}が叫んだ。「私に勝てるなんて思わないでね。私はいつでも戻ってこれる！」
+SPEAK_REIMU_NORMAL8,{0}が叫んだ。「その陰陽玉を渡しなさい！」
+SPEAK_REIMU_NORMAL9,{0}が叫んだ。「せっかくお茶してたのに、誰が邪魔したの！」
+SPEAK_REIMU_NORMAL10,{0}が叫んだ。「どこへ逃げても無駄よ！」
+SPEAK_REIMU_CONFUSE1,{0}が叫んだ。「私を怒らせる気！？」
+SPEAK_REIMU_MAGIC1,{0}が御幣を掲げた。
+SPEAK_REIMU_CAMERA,{0}が叫んだ。「ずいぶん余裕じゃない！」
+SPEAK_REIMU_DEAD1,{0}が叫んだ。「これで終わったと思ってないよね？」
+SPEAK_REIMU_DEAD2,{0}が叫んだ。「作戦的撤退よ！また会いましょう！」
+SPEAK_REIMU_DEAD3,{0}が叫んだ。「ちょっと装備を整えてくる……」
+SPEAK_REIMU_DEAD4,{0}が叫んだ。「私を倒せると思うなよ！」
+SPEAK_REIMU_DEAD5,{0}が叫んだ。「パターンはもう見切った！」
+SPEAK_REIMU_DEAD6,{0}が叫んだ。「その弾幕、覚えたから次は当たらない！」
+SPEAK_REIMU_DEAD7,{0}が叫んだ。「ミスった！コンティニューするしかないね！」
+SPEAK_REIMU_DEAD8,{0}が叫んだ。「ノーミスは無理だったか……」
+SPEAK_REIMU_DEAD9,{0}が叫んだ。「遠くに行かないで待ってなさい！」
+SPEAK_REIMU_DEAD10,{0}が叫んだ。「なかなかやるじゃない！次も期待してるよ！」
+SPEAK_REIMU_DEAD11,{0}が叫んだ。「勝つまでやるわ！」
+SPEAK_REIMU_DEAD12,{0}が叫んだ。「まだ根性値は十分よ。やり直す！」
+SPEAK_ALICE_NORMAL1,{0}が叫んだ。「新しい人形のテストにはちょうどいいわ！」
+SPEAK_ALICE_NORMAL2,{0}が叫んだ。「弾幕は頭脳戦よ、当然のことを言ってるだけよ」
+SPEAK_ALICE_NORMAL3,{0}が叫んだ。「全力なんて出さないわ。追い詰められるのは嫌だからね。」
+SPEAK_ALICE_NORMAL4,{0}が叫んだ。「魔法使いは無駄な戦いをしない。それが召喚師の基本よ。」
+SPEAK_ALICE_NORMAL5,{0}が叫んだ。「一部の人たちは人形より私のブーツを怖がってるらしいね……」
+SPEAK_ALICE_CONFUSE1,{0}が叫んだ。「早く逃げなきゃ！」
+SPEAK_ALICE_CONFUSE2,{0}が叫んだ。「うまく人形を操れない！」
+SPEAK_ALICE_CONFUSE3,{0}が叫んだ。「助けて、上海！」
+SPEAK_ALICE_MAGIC1,{0}が呪文を唱えた。
+SPEAK_ALICE_CAMERA,{0}が叫んだ。「人形の撮影ならいいわよ。」
+SPEAK_SEIRAN_NORMAL1,{0}が叫んだ。「これより浄化活動に入る！」
+SPEAK_SEIRAN_NORMAL2,{0}が叫んだ。「とりあえず撃つ！」
+SPEAK_SEIRAN_NORMAL3,{0}が叫んだ。「こちらセイラン、敵と接触！」
+SPEAK_SEIRAN_NORMAL4,{0}が叫んだ。「イーグルラビット先遣隊、セイラン、ターゲットと接触、浄化作業に入る！」
+SPEAK_SEIRAN_NORMAL5,{0}がぼやいた。「給料は安いし、仕事はきついし……」
+SPEAK_SEIRAN_CONFUSE1,{0}が叫んだ。「メイデイ！メイデイ！」
+SPEAK_SEIRAN_CONFUSE2,{0}が叫んだ。「月兎部隊は支援まだか！」
+SPEAK_SEIRAN_CONFUSE3,{0}が混乱している。
+SPEAK_SEIRAN_CAMERA,{0}が叫んだ。「こちらセイラン、地上の変な機械に狙われている！」
+SPEAK_RINGO_NORMAL1,{0}が叫んだ。「地上にも強い奴がいるって噂だったけど」
+SPEAK_RINGO_NORMAL2,{0}が叫んだ。「偵察兵が言ってたのは君かな？」
+SPEAK_RINGO_NORMAL3,{0}が叫んだ。「こちらイーグルラビット調査隊、ターゲット確保に動く！」
+SPEAK_RINGO_NORMAL4,{0}が叫んだ。「物知りでも大変なことは変わらないよね～」
+SPEAK_RINGO_NORMAL5,{0}が叫んだ。「この勤務条件なら地上で暮らすのも悪くないかも！」
+SPEAK_RINGO_NORMAL6,{0}が叫んだ。「下っ端生活にはうんざり～」
+SPEAK_RINGO_CONFUSE1,{0}が叫んだ。「こちらリンゴ！危機的状況だ！」
+SPEAK_RINGO_CONFUSE2,{0}が呟いた。「こりゃまずいな……」
+SPEAK_RINGO_CONFUSE3,{0}が顔を覆った。
+SPEAK_RINGO_MAGIC1,{0}は団子を食べながら呪文を唱えた。
+SPEAK_RINGO_CAMERA,{0}が叫んだ。「余裕あるね～」
+SPEAK_UDONGE_NORMAL1,{0}が叫んだ。「私の目を見て正気でいられるかな？」
+SPEAK_UDONGE_NORMAL2,{0}が叫んだ。「地上のウサギたちは頼りないから、私が出るよ！」
+SPEAK_UDONGE_NORMAL3,{0}が叫んだ。「この道は通さないよ！」
+SPEAK_UDONGE_NORMAL4,{0}が叫んだ。「君が見ているのは本物じゃないよ！」
+SPEAK_UDONGE_NORMAL5,{0}が叫んだ。「私も分身とか幻覚とか、いろいろやりたかったんだ！」
+SPEAK_UDONGE_CONFUSE1,{0}が叫んだ。「なんで私が混乱してるの！？」
+SPEAK_UDONGE_CONFUSE2,{0}が叫んだ。「そんなはずない！私は狂わないはずなのに！」
+SPEAK_UDONGE_CONFUSE3,{0}は混乱している。
+SPEAK_UDONGE_MAGIC1,{0}は目から狂気を放った。
+SPEAK_UDONGE_CAMERA,{0}が叫んだ。「カメラの波長も乱してやるよ！」
+SPEAK_KAGUYA_NORMAL1,{0}が叫んだ。「こんなところまで来るなんて、歓迎してあげるわ」
+SPEAK_KAGUYA_NORMAL2,{0}が叫んだ。「イナバたちは何してるのよ、もう」
+SPEAK_KAGUYA_NORMAL3,{0}が叫んだ。「まさか君もルーンを盗みにきたの？」
+SPEAK_KAGUYA_NORMAL4,{0}が叫んだ。「あんまり動きたくないんだけど……すぐ倒れてくれる？」
+SPEAK_KAGUYA_NORMAL5,{0}が叫んだ。「どれだけ難題を解けるか試してあげる！」
+SPEAK_KAGUYA_NORMAL6,{0}が叫んだ。「ずっと苦しみ続けなさい」
+SPEAK_KAGUYA_CONFUSE1,{0}が叫んだ。「助けてエイリン！」
+SPEAK_KAGUYA_CONFUSE2,{0}が叫んだ。「いやだ！働きたくない！」
+SPEAK_KAGUYA_CONFUSE3,{0}は頭を抱えて混乱している。
+SPEAK_KAGUYA_MAGIC1,{0}は呪文を唱えた。
+SPEAK_KAGUYA_CAMERA,{0}が言った。「なんだか変な侵入者ね」
+SPEAK_TOKIKO_NORMAL1,{0}が叫んだ。「読書の邪魔をした罪、償わせる！」
+SPEAK_TOKIKO_NORMAL2,{0}が叫んだ。「この本は絶対に渡さない！」
+SPEAK_TOKIKO_NORMAL3,{0}が叫んだ。「君もこの本を狙ってるんでしょ？渡さないから！」
+SPEAK_TOKIKO_NORMAL4,{0}が叫んだ。「あの店主にも本を取り返さないといけないのに！」
+SPEAK_TOKIKO_NORMAL5,{0}が叫んだ。「名前？そんなのどうでもいいじゃない！」
+SPEAK_TOKIKO_NORMAL6,{0}が叫んだ。「私だって静かにしていたいんだ！」
+SPEAK_TOKIKO_CONFUSE1,{0}が泣きそうに言った。「私にも名前があれば……」
+SPEAK_TOKIKO_CONFUSE2,{0}が泣きそうに言った。「まだ出番があるかもって……！」
+SPEAK_TOKIKO_CONFUSE3,{0}が翼をばたつかせて混乱している。
+SPEAK_TOKIKO_CAMERA,{0}が叫んだ。「本を盗みに来たんじゃないの？」
+SPEAK_TOZIKO_NORMAL1,{0}が叫んだ。「主君の新しい家臣か？」
+SPEAK_TOZIKO_NORMAL2,{0}が叫んだ。「成敗してくれよう！」
+SPEAK_TOZIKO_NORMAL4,{0}が叫んだ。「フートよりはまともそうだな……」
+SPEAK_TOZIKO_NORMAL3,{0}が叫んだ。「愚かな者め！」
+SPEAK_TOZIKO_NORMAL6,{0}が叫んだ。「主君への忠誠心を試してやろうか！」
+SPEAK_TOZIKO_NORMAL5,{0}がぼやいた。「やれやれ……」
+SPEAK_TOZIKO_NORMAL7,{0}がぼやいた。「まだ続けるつもりか？」
+SPEAK_TOZIKO_NORMAL8,{0}が叫んだ。「さて、どれだけ電気に耐えられるかな？」
+SPEAK_TOZIKO_NORMAL9,{0}が叫んだ。「亡霊の身も悪くないな！」
+SPEAK_TOZIKO_CONFUSE1,{0}が混乱している。「ここはどこだ！」
+SPEAK_TOZIKO_CONFUSE2,{0}が混乱している。「またフートの仕業か！」
+SPEAK_TOZIKO_CONFUSE3,{0}が空に雷を放っている。
+SPEAK_TOZIKO_MAGIC1,{0}が雷を集めている。
+SPEAK_TOZIKO_CAMERA,{0}が叫んだ。「まだやるつもりか？」
+SPEAK_FUTO_NORMAL1,{0}が叫んだ。「そなた、我が復活を祝うために来たのか？」
+SPEAK_FUTO_NORMAL2,{0}が叫んだ。「うむ、そなたの運勢を占ってやろう。」
+SPEAK_FUTO_NORMAL3,{0}が叫んだ。「風水を読む者に不可能はないぞ！」
+SPEAK_FUTO_NORMAL4,{0}が叫んだ。「ふむ……そなたの運、歪んでおるな。」
+SPEAK_FUTO_NORMAL5,{0}が叫んだ。「騙されたと思って運勢を占わせてみないか？」
+SPEAK_FUTO_NORMAL6,{0}が叫んだ。「近いうちに大きな厄災が降りかかるぞ！」
+SPEAK_FUTO_NORMAL7,{0}が叫んだ。「そなた、太子様のために命を捧げられるか？」
+SPEAK_FUTO_NORMAL8,{0}が叫んだ。「皿を割ったら大変なことになるぞ！」
+SPEAK_FUTO_NORMAL9,{0}が叫んだ。「太子様はなぜこんな間抜けな者を……」
+SPEAK_FUTO_NORMAL10,{0}が叫んだ。「皿をいくら数えても一枚足りない……」
+SPEAK_FUTO_NORMAL11,{0}が叫んだ。「そなた、火に強いか試してみてもいいか？」
+SPEAK_FUTO_NORMAL12,{0}が叫んだ。「新しい秘術を試してみてもいいか？ちょっと不吉かもしれんがな！」
+SPEAK_FUTO_NORMAL13,{0}が叫んだ。「少し待っていてくれ！福を呼ぶ術を施してやろう！」
+SPEAK_FUTO_NORMAL14,{0}が叫んだ。「おっと、うっかりそなたの運を弄ってしまった。すぐ戻すぞ！」
+SPEAK_FUTO_CONFUSE1,{0}が叫んだ。「トジコ！どこだ！早く助けに来い！」
+SPEAK_FUTO_CONFUSE2,{0}が叫んだ。「目の前に仏が……燃やさねば……！」
+SPEAK_FUTO_CONFUSE3,{0}が叫んだ。「動くのがしんどいんだが、ちょっと助けてくれんか？」
+SPEAK_FUTO_MAGIC1,{0}が皿に力を集めている。
+SPEAK_FUTO_CAMERA,{0}が叫んだ。「それは……魂を捕える道具か？」
+SPEAK_MAMIZO_NORMAL1,{0}が叫んだ。「ふむ、まったく愚かじゃのう」
+SPEAK_MAMIZO_NORMAL2,{0}が叫んだ。「さぁ、弾幕勝負、十番勝負じゃ！始めるぞい！」
+SPEAK_MAMIZO_NORMAL3,{0}が叫んだ。「新しい練習相手になってくれるかえ？」
+SPEAK_MAMIZO_NORMAL4,{0}が叫んだ。「何かを成すには、強くなくてはいかんのじゃよ」
+SPEAK_MAMIZO_NORMAL5,{0}が叫んだ。「面白いのう！なかなかやるではないか！」
+SPEAK_MAMIZO_NORMAL6,{0:은|는} 외쳤다. "방심 때린건 가짜인디 말여"
+SPEAK_MAMIZO_CONFUSE1,{0:은|는} 혼란하고 있다. "오랫만이 움직였더니 허리가..."
+SPEAK_MAMIZO_CONFUSE2,{0:은|는} 혼란하고 있다. "뭐시여 이게!"
+SPEAK_MAMIZO_CONFUSE3,{0:은|는} 곰방대를 거꾸로 피려고하고있다.
+SPEAK_MAMIZO_MAGIC1,{0:은|는} 나뭇잎에 기운을 불어넣는다.
+SPEAK_MAMIZO_MAGIC2,{0:은|는} 곰방대를 물고 크게 연기를 만들었다.
+SPEAK_MAMIZO_CAMERA,{0:은|는} 외쳤다. "변신한 모습이라도 괜찮은겨?"
+SPEAK_SEIGA_NORMAL1,{0:은|는} 외쳤다. "재밌는 분이네요. 어디 실력을 시험해볼까요?"
+SPEAK_SEIGA_NORMAL2,{0:은|는} 외쳤다. "새로운 술법의 실험대가 필요했는데, 딱 좋을때 오셨어요."
+SPEAK_SEIGA_NORMAL3,{0:은|는} 외쳤다. "시해선에 관심이 있으세요? 제가 도와드리죠."
+SPEAK_SEIGA_NORMAL4,{0:은|는} 외쳤다. "강시도 잘 보면 귀엽다고요. 강시가 되보시는건 어떤가요?"
+SPEAK_SEIGA_NORMAL5,{0:은|는} 외쳤다. "제 요시카는 꽤 튼튼하답니다. 몇번이고 상대해보셔도 좋아요."
+SPEAK_SEIGA_NORMAL6,{0:은|는} 외쳤다. "강한 힘이 보고 싶을뿐이에요. 한번 겨뤄볼까요?"
+SPEAK_SEIGA_CONFUSE1,{0:은|는} 혼란하고 있다. "제법이시네요..."
+SPEAK_SEIGA_CONFUSE2,{0:은|는} 혼란하고 있다. "연단으로 단련한 저를 이렇게 몰아붙이시다니..."
+SPEAK_SEIGA_CONFUSE3,{0:은|는} 바닥에 구멍을 뚫으려고 시도했다.
+SPEAK_SEIGA_MAGIC1,{0:은|는} 술법을 부렸다.
+SPEAK_SEIGA_CAMERA,{0:은|는} 외쳤다. "귀여운 요시카를 찍어보는건 어떨까요?"
+SPEAK_MURASA_NORMAL1,{0:은|는} 외쳤다. "승선을 환영합니다. 목적지는 저승이 되겠습니다."
+SPEAK_MURASA_NORMAL2,{0:은|는} 외쳤다. "닻에 묶여있는 모습이 보기 좋네요."
+SPEAK_MURASA_NORMAL3,{0:은|는} 외쳤다. "잠시만 거기 멈춰주시겠어요? 정박하겠습니다!"
+SPEAK_MURASA_NORMAL4,{0:은|는} 외쳤다. "닻이 있는 한 도망칠 순 없을겁니다."
+SPEAK_MURASA_NORMAL5,{0:은|는} 외쳤다. "이 쯤에서 닻을 내려볼까요?"
+SPEAK_MURASA_NORMAL6,{0:은|는} 외쳤다. "수영은 할 줄 아시나요?"
+SPEAK_MURASA_NORMAL7,{0:은|는} 외쳤다. "피의 연못... 그리워지네요."
+SPEAK_MURASA_NORMAL8,{0:은|는} 외쳤다. "구명조끼는 챙기셨나요?"
+SPEAK_MURASA_CONFUSE1,{0:은|는} 외쳤다. "배가... 기울어졌다...!"
+SPEAK_MURASA_CONFUSE2,{0:은|는} 외쳤다. "하필 이럴때 배 멀미가..."
+SPEAK_MURASA_CONFUSE3,{0:은|는} 국자를 이리저리 휘두르고 있다.
+SPEAK_MURASA_MAGIC1,{0:은|는} 닻을 높이 들었다.
+SPEAK_MURASA_CAMERA,{0:은|는} 외쳤다. "고약한 취미시군요."
+SPEAK_KEINE_NORMAL1,{0:은|는} 외쳤다. "과제 검사를 하겠어. 없을때마다 박치기 한번이야?"
+SPEAK_KEINE_NORMAL2,{0:은|는} 외쳤다. "오늘의 역사 수업은 온 몸으로 느끼는게 좋을거야."
+SPEAK_KEINE_NORMAL3,{0:은|는} 외쳤다. "서당의 학생을 지키기 위해서라면 누구든 용서하지않아."
+SPEAK_KEINE_NORMAL4,{0:은|는} 외쳤다. "너의 역사는 받아가겠어."
+SPEAK_KEINE_NORMAL5,{0:은|는} 외쳤다. "모코우, 또 싸우고 다니는거야?"
+SPEAK_KEINE_NORMAL6,{0:은|는} 외쳤다. "인간과 싸우는건 꺼림직하지만... 어쩔 수 없지."
+SPEAK_KEINE_NORMAL7,{0:은|는} 외쳤다. "그 인간에겐 손도 못대게 해주겠어!"
+SPEAK_KEINE_NORMAL8,{0:은|는} 외쳤다. "네가 이기는 역사는 없을거야!"
+SPEAK_KEINE_CONFUSE1,{0:은|는} 혼란하고 있다. "큭, 봉인이 풀려버려!"
+SPEAK_KEINE_CONFUSE2,{0:은|는} 혼란하고 있다. "내가 제정신일때 도망쳐!"
+SPEAK_KEINE_CONFUSE3,{0:은|는} 머리를 쥐어뜯고 있다.
+SPEAK_KEINE_MAGIC1,{0:은|는} 두루마리를 펼쳐 읽고있다.
+SPEAK_KEINE_CAMERA,{0:은|는} 외쳤다. "수업중엔 카메라를 꺼내지말도록!"
+SPEAK_KEINE2_NORMAL1,{0:은|는} 외쳤다. "이 모습을 봤으니 살려보낼 수 없겠지."
+SPEAK_KEINE2_NORMAL2,{0:은|는} 외쳤다. "뿔에 받혀본 적 있어?"
+SPEAK_KEINE2_NORMAL3,{0:은|는} 외쳤다. "이제 내가 이길 역사를 만들면 될 뿐이야."
+SPEAK_KEINE2_NORMAL4,{0:은|는} 외쳤다. "엉덩이를 내밀어라!"
+SPEAK_KEINE2_NORMAL5,{0:은|는} 외쳤다. "벌받을 시간이다!"
+SPEAK_KEINE2_NORMAL6,{0:은|는} 외쳤다. "태도가 나쁜 학생에겐 박치기형이다!"
+SPEAK_KEINE2_CONFUSE1,{0:은|는} 혼란하고 있다. "이 상태에선 정신이 민감해서..."
+SPEAK_KEINE2_CONFUSE2,{0:은|는} 혼란하고 있다. "얼른 진정하지 않으면..."
+SPEAK_KEINE2_CONFUSE3,{0:은|는} 머리를 흔들면서 울부짖고 있다.
+SPEAK_KEINE2_MAGIC1,{0:은|는} 두루마리를 펼쳐 읽고있다.
+SPEAK_KEINE2_CAMERA,{0:은|는} 외쳤다. "이런 모습은 찍지마!"
+SPEAK_YOUMU_NORMAL1,{0:은|는} 외쳤다. "요괴가 제련한 이 누관검이 벨 수 없는건, {거의|별로|아주 조금밖에} 없어!"
+SPEAK_YOUMU_NORMAL2,{0:은|는} 외쳤다. "일단 벤다!"
+SPEAK_YOUMU_NORMAL3,{0:은|는} 외쳤다. "마침 손질할 나무가 필요했던거야!"
+SPEAK_YOUMU_NORMAL4,{0:은|는} 외쳤다. "이번에 수행한 검술을 시험해봐야겠어!"
+SPEAK_YOUMU_NORMAL5,{0:은|는} 외쳤다. "가까이 붙는다! 그리고 벤다!"
+SPEAK_YOUMU_NORMAL6,{0:은|는} 외쳤다. "쫄래 쫄래 도망치지마!"
+SPEAK_YOUMU_CONFUSE1,{0:은|는} 혼란하고 있다. "유유코님! 어디 계세요!?"
+SPEAK_YOUMU_CONFUSE2,{0:은|는} 땅에 넘어졌다.
+SPEAK_YOUMU_CONFUSE3,{0:은|는} 사방에 검을 휘두르고 있다.
+SPEAK_YOUMU_MAGIC1,{0:은|는} 검을 눈앞으로 모았다.
+SPEAK_YOUMU_CAMERA,{0:은|는} 외쳤다. "아앗!"
+SPEAK_LYRICA_NORMAL1,{0:은|는} 외쳤다. "나는 손대지 않고도 연주할 수 있어. 장기전이라면 내가 이기지."
+SPEAK_LYRICA_NORMAL2,{0:은|는} 외쳤다. "이번 연주의 관객은 너 혼자일까?"
+SPEAK_LYRICA_NORMAL3,{0:은|는} 외쳤다. "가끔씩은 혼자서 라이브도 하고 싶어."
+SPEAK_LYRICA_NORMAL4,{0:은|는} 외쳤다. "언니들보단 내가 더 잘하지?"
+SPEAK_LYRICA_NORMAL5,{0:은|는} 외쳤다. "이 곡이 끝날때까진 살아남아줘~"
+SPEAK_LYRICA_NORMAL6,{0}의 키보드가 하늘에 떠다니면서 곡을 연주하고 있다.
+SPEAK_LYRICA_CONFUSE1,{0:은|는} 혼란하고 있다. "어라, 박자를 맞출수가 없어."
+SPEAK_LYRICA_CONFUSE2,{0:은|는} 혼란하고 있다. "어라 방금 쳤던 악보가 어디갔지?"
+SPEAK_LYRICA_CONFUSE3,{0:은|는} 불협화음으로 연주하고 있다.
+SPEAK_LYRICA_MAGIC1,{0}의 건반이 저절로 연주되고 있다.
+SPEAK_LYRICA_CAMERA,{0:은|는} 외쳤다. "아직 팬미팅 날짜는 아닌데."
+SPEAK_MERLIN_NORMAL1,{0:은|는} 외쳤다. "내 연주를 듣고 무사했던 식량은 없지."
+SPEAK_MERLIN_NORMAL2,{0:은|는} 외쳤다. "즐거워 보이는데~"
+SPEAK_MERLIN_NORMAL3,{0:은|는} 외쳤다. "아직 내 음악을 듣고 멀쩡한거야?"
+SPEAK_MERLIN_NORMAL4,{0:은|는} 외쳤다. "내 음악을 들으면 조울증에 걸릴거야."
+SPEAK_MERLIN_NORMAL5,{0:은|는} 외쳤다. "좀 만 귀 기울여줄래?"
+SPEAK_MERLIN_NORMAL6,{0:은|는} 외쳤다. "좀 더 신나는 곡을 연주할테니까 기다려~"
+SPEAK_MERLIN_NORMAL7,{0:은|는} 외쳤다. "이번 합주는 대 성공이야!"
+SPEAK_MERLIN_NORMAL8,{0}의 트럼펫이 마음을 울리는 소리를 내고 있다.
+SPEAK_MERLIN_CONFUSE1,{0:은|는} 혼란하고 있다. "행복해~"
+SPEAK_MERLIN_CONFUSE2,{0:은|는} 혼란하고 있다. "이런 기분 오랫만이야."
+SPEAK_MERLIN_CONFUSE3,{0}의 트럼펫이 시끄러운 나팔소리를 지르고 있다.
+SPEAK_MERLIN_MAGIC1,{0}의 트럼펫이 저절로 연주되고 있다.
+SPEAK_MERLIN_CAMERA,{0:은|는} 외쳤다. "이쁘게 찍어줘~"
+SPEAK_LUNASA_NORMAL1,{0:은|는} 외쳤다. "식량 역할이 등장했나."
+SPEAK_LUNASA_NORMAL2,{0:은|는} 외쳤다. "그래, 그대로 침착하고 있으라고."
+SPEAK_LUNASA_NORMAL3,{0:은|는} 외쳤다. "좀 더 차분하게 있는게 어때?"
+SPEAK_LUNASA_NORMAL4,{0:은|는} 외쳤다. "내 음악을 들은 이상 도망칠 순 없을거야."
+SPEAK_LUNASA_NORMAL5,{0:은|는} 외쳤다. "너무 들떠있는건 좋지않아."
+SPEAK_LUNASA_NORMAL6,{0:은|는} 외쳤다. "뭐가 그렇게 급한거지?"
+SPEAK_LUNASA_NORMAL7,{0:은|는} 외쳤다. "이번 합주는 관객이 시시한걸."
+SPEAK_LUNASA_NORMAL8,{0}의 바이올린이 소름끼치는 소리를 낸다.
+SPEAK_LUNASA_CONFUSE1,{0:은|는} 혼란하고 있다. "언니로서 침착해야할 내가..."
+SPEAK_LUNASA_CONFUSE2,{0:은|는} 혼란하고 있다. "바이올린의 선이 느슨해진것같아..."
+SPEAK_LUNASA_CONFUSE3,{0}의 바이올린이 유리가 깨질듯한 소음을 낸다.
+SPEAK_LUNASA_MAGIC1,{0}의 바이올린이 저절로 연주되고 있다.
+SPEAK_LUNASA_CAMERA,{0:은|는} 외쳤다. "사진 촬영은 공연이 끝나고나서로 해줘."
+SPEAK_KOMACHI_NORMAL1,{0:은|는} 외쳤다. "시간떼우기 좋은 상대인걸?"
+SPEAK_KOMACHI_NORMAL2,{0:은|는} 외쳤다. "아냐, 벼, 별로 땡땡이치고있던건 아니라고"
+SPEAK_KOMACHI_NORMAL3,{0:은|는} 외쳤다. "어디 사신다운 일도 가끔씩은 해볼까?"
+SPEAK_KOMACHI_NORMAL4,{0:은|는} 외쳤다. "혹시 도망칠 생각은 아니겠지?"
+SPEAK_KOMACHI_NORMAL5,{0:은|는} 외쳤다. "혹시 새로운 자살 희망자일까?"
+SPEAK_KOMACHI_NORMAL6,{0:은|는} 외쳤다. "뱃사공 일은 지루하단말이지, 가끔씩은 몸쓰는 일도 하고싶어진다고"
+SPEAK_KOMACHI_CONFUSE1,{0:은|는} 혼란하고 있다. "꺙!"
+SPEAK_KOMACHI_CONFUSE2,{0:은|는} 혼란하고 있다. "시... 시키 에이키님?! 땡땡이 치고 있지않았어요!"
+SPEAK_KOMACHI_CONFUSE3,{0:은|는} 바닥에 굴러 넘어졌다.
+SPEAK_KOMACHI_MAGIC1,{0:은|는} 낫을 크게 들었다.
+SPEAK_KOMACHI_CAMERA,{0:은|는} 외쳤다. "안돼! 땡땡이치고 있는 증거가!"
+SPEAK_IKU_NORMAL1,{0:은|는} 외쳤다. "또 큰 아씨는 이상한 장난감을 주워서는..."
+SPEAK_IKU_NORMAL2,{0:은|는} 외쳤다. "곧 있으면 큰 지진이 일어날거에요."
+SPEAK_IKU_NORMAL3,{0:은|는} 외쳤다. "큰 아씨에게 휘둘리는게 즐거우신가요?"
+SPEAK_IKU_NORMAL4,{0:은|는} 외쳤다. "좀 짜릿할텐데 괜찮겠나요?"
+SPEAK_IKU_NORMAL5,{0:은|는} 외쳤다. "큰 아씨에겐 조금 벌이 필요할 것 같군요."
+SPEAK_IKU_NORMAL6,{0:은|는} 외쳤다. "오늘 던전의 날씨는 천둥 번개가 치겠습니다."
+SPEAK_IKU_NORMAL7,{0:은|는} 외쳤다. "던전은 좀 답답하네요. 얼른 하늘위로 날고싶은데 말이죠."
+SPEAK_IKU_NORMAL8,{0:은|는} 외쳤다. "이런 던전에 지진이 나면 어떻게 될까요?"
+SPEAK_IKU_NORMAL9,{0:은|는} 외쳤다. "던전안에서도 번개를 만드는건 생각보다 어렵지 않아요."
+SPEAK_IKU_CONFUSE1,{0:은|는} 혼란하고 있다. "지진이... 아니 지진이 아니야?"
+SPEAK_IKU_CONFUSE2,{0:은|는} 혼란하고 있다. "공기의 흐름을 얼른 타지않으면..."
+SPEAK_IKU_CONFUSE3,{0:은|는} 하늘을 부자연스럽게 날고 있다.
+SPEAK_IKU_MAGIC1,{0}의 주변에 정전기가 일어나고 있다.
+SPEAK_IKU_MAGIC2,{0:은|는} 하늘 높이 손을 뻗었다.
+SPEAK_IKU_CAMERA,{0:은|는} 하늘 높이 손을 뻗는 포즈를 취했다.
+SPEAK_LARVA_NORMAL1,{0:은|는} 외쳤다. "신세계의 신이라도 될 것 같아!"
+SPEAK_LARVA_NORMAL2,{0:은|는} 외쳤다. "우와! 싸움이다 싸움!"
+SPEAK_LARVA_NORMAL3,{0:은|는} 외쳤다. "한여름밤의 전쟁이다!"
+SPEAK_LARVA_NORMAL4,{0:은|는} 외쳤다. "오늘따라 힘이 넘쳐흘러!"
+SPEAK_LARVA_NORMAL5,{0:은|는} 외쳤다. "오늘은 마음껏 날뛰겠어!"
+SPEAK_LARVA_NORMAL6,{0:은|는} 외쳤다. "누구에게도 질 것 같지 않아!"
+SPEAK_LARVA_CONFUSE1,{0:은|는} 혼란하고 있다. "어~라?"
+SPEAK_LARVA_CONFUSE2,{0:은|는} 혼란하고 있다. "항복!"
+SPEAK_LARVA_CONFUSE3,{0}의 더듬이가 혼란스럽게 흔들리고 있다.
+SPEAK_LARVA_MAGIC1,{0:은|는} 주문을 외웠다.
+SPEAK_LARVA_CAMERA,{0:은|는} 외쳤다. "뭐야 뭐야 그건?"
+SPEAK_LARVA_FREIND1,{0:은|는} 말했다. "와아! 모두 돌격!"
+SPEAK_LARVA_FREIND2,{0:은|는} 말했다. "오늘따라 힘이 넘쳐흘러!"
+SPEAK_LARVA_FREIND3,{0:은|는} 말했다. "요정부대 출격이다!"
+SPEAK_LARVA_FREIND4,{0:은|는} 당신의 앞에서 날개 춤을 추었다.
+SPEAK_LARVA_FREIND5,{0:은|는} 말했다. "점점 강해지는 것 같아!"
+SPEAK_LARVA_FREIND6,{0:은|는} 말했다. "다음엔 어디서 놀까?"
+SPEAK_LARVA_ENTER,{0:은|는} 외쳤다. "너 정말 강하구나! 잘 부탁해!"
+SPEAK_LARVA_FAIRY_WAR,{0:은|는} 외쳤다. "한 여름밤의 전쟁이다!"
+SPEAK_LARVA_REVIVE,{0:은|는} 외쳤다. "부우활!"
+SPEAK_NEMUNO_NORMAL1,{0:은|는} 외쳤다. "여기는 내 영역이다! 얼른 꺼져!"
+SPEAK_NEMUNO_NORMAL2,{0:은|는} 외쳤다. "볼일 없으면 얼른 내 집에서 나가!"
+SPEAK_NEMUNO_NORMAL3,{0:은|는} 외쳤다. "나가지않는다면 배를 갈라주겠어."
+SPEAK_NEMUNO_NORMAL4,{0:은|는} 외쳤다. "어떻게 이런 곳까지 들어온거지?"
+SPEAK_NEMUNO_NORMAL5,{0:은|는} 외쳤다. "텐구라고? 불가침 조약을 맺었을 터인데?"
+SPEAK_NEMUNO_NORMAL6,{0:은|는} 외쳤다. "네가 누군지 알바 아니야. 얼른 나가!"
+SPEAK_NEMUNO_NORMAL7,{0:은|는} 외쳤다. "무력으로라도 쫓아내겠어!"
+SPEAK_NEMUNO_NORMAL8,{0:은|는} 외쳤다. "누가 누굴보고 야만적이라는거지?"
+SPEAK_NEMUNO_CONFUSE1,{0:은|는} 혼란하고 있다. "무... 무슨일이야!"
+SPEAK_NEMUNO_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러워!"
+SPEAK_NEMUNO_CONFUSE3,{0:은|는} 칼을 마구 휘두르고 있다.
+SPEAK_NEMUNO_MAGIC1,{0:은|는} 주문을 외웠다.
+SPEAK_NEMUNO_CAMERA,{0:은|는} 외쳤다. "이상한 물건을 들이대지말라고!"
+SPEAK_AUNN_NORMAL1,{0:은|는} 외쳤다. "이 제단은 내가 지키겠어!"
+SPEAK_AUNN_NORMAL2,{0:은|는} 외쳤다. "가까워지면 물어버리겠어!"
+SPEAK_AUNN_NORMAL3,{0:은|는} 외쳤다. "칩입자 발견! 제단을 지키겠어요!"
+SPEAK_AUNN_NORMAL4,{0:은|는} 외쳤다. "제단은 이상무!"
+SPEAK_AUNN_NORMAL5,{0:은|는} 으르렁거리고 있다.
+SPEAK_AUNN_NORMAL6,{0:은|는} 사납게 짖고 있다.
+SPEAK_AUNN_CONFUSE1,{0:은|는} 혼란하고 있다. "왜 이렇게 어지럽지?"
+SPEAK_AUNN_CONFUSE2,{0:은|는} 혼란하고 있다. "나는 수호신으로서 제단을 지켜야..."
+SPEAK_AUNN_CONFUSE3,{0:은|는} 바닥에 뒹굴고 있다.
+SPEAK_AUNN_MAGIC,{0:은|는} 주문을 외웠다.
+SPEAK_AUNN_CAMERA,{0:은|는} 외쳤다. "왕!"
+SPEAK_NARUMI_NORMAL1,{0:은|는} 외쳤다. "내 마법을 시험해볼 상대를 찾고 있어!"
+SPEAK_NARUMI_NORMAL2,{0:은|는} 외쳤다. "너는 이 마법을 버틸 수 있을까?"
+SPEAK_NARUMI_NORMAL3,{0:은|는} 외쳤다. "뒈져라 {1}자식아!"
+SPEAK_NARUMI_NORMAL4,{0:은|는} 외쳤다. "잔념무념, 또 다음 생애에!"
+SPEAK_NARUMI_NORMAL5,{0:은|는} 외쳤다. "이 곳에서 쭉 혼자 있었어..."
+SPEAK_NARUMI_NORMAL6,{0:은|는} 외쳤다. "오늘따라 적을 한방에 날려버릴 마법을 쓸 수 있을 것 같아!"
+SPEAK_NARUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "어라~ 여긴 어디?"
+SPEAK_NARUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "뭐야~ 이거"
+SPEAK_NARUMI_CONFUSE3,{0:은|는} 빙글빙글 돌고 있다.
+SPEAK_NARUMI_MAGIC1,{0:은|는} 주문을 외웠다.
+SPEAK_NARUMI_CAMERA,{0:은|는} 외쳤다. "그런 여유가 있을까?"
+SPEAK_MAI2_NORMAL1,{0:은|는} 외쳤다. "오늘의 춤은 이거야!"
+SPEAK_MAI2_NORMAL2,{0:은|는} 외쳤다. "직접 싸울 필요도 없어!"
+SPEAK_MAI2_NORMAL3,{0:은|는} 외쳤다. "테스트를 시작해볼까!"
+SPEAK_MAI2_NORMAL4,{0:은|는} 외쳤다. "네 상대는 내가 아니지!"
+SPEAK_MAI2_NORMAL5,{0:은|는} 외쳤다. "오키나님에게 거역할 셈이야?"
+SPEAK_MAI2_NORMAL6,{0:은|는} 외쳤다. "너도 곧 동료가 될지도 모르겠네!"
+SPEAK_MAI2_MAGIC1,{0:은|는} 주문을 외웠다.
+SPEAK_MAI2_CAMERA,{0:은|는} 신경쓰지않고 춤을 추고 있다.
+SPEAK_MAI2_CHEERING,{0:은|는} 외쳤다. "그럼 바로 응원을 시작하겠어!"
+SPEAK_SATONO_NORMAL1,{0:은|는} 외쳤다. "스승님에 눈밖에 난건 너야? 불쌍하네~"
+SPEAK_SATONO_NORMAL2,{0:은|는} 외쳤다. "날 잡아도 소용없을거야~"
+SPEAK_SATONO_NORMAL3,{0:은|는} 외쳤다. "오늘 춤도 완벽한걸"
+SPEAK_SATONO_NORMAL4,{0:은|는} 외쳤다. "힘내라 힘내라!"
+SPEAK_SATONO_NORMAL5,{0:은|는} 외쳤다. "백댄서는 직접 싸우지않지~"
+SPEAK_SATONO_NORMAL6,{0:은|는} 외쳤다. "직접 상대할 필요가 없을뿐이야"
+SPEAK_SATONO_MAGIC1,{0:은|는} 주문을 외웠다.
+SPEAK_SATONO_CAMERA,{0:은|는} 신경쓰지않고 춤을 추고 있다.
+SPEAK_SATONO_CHEERING,{0:은|는} 외쳤다. "뒤에서 응원할게!"
+SPEAK_KOKORO_NORMAL1,{0:은|는} 외쳤다. "희망의 가면은 어디있지?"
+SPEAK_KOKORO_NORMAL2,{0:은|는} 외쳤다. "최강의 자리를 두고 나와 겨뤄라!"
+SPEAK_KOKORO_NORMAL3,{0:은|는} 외쳤다. "오늘의 가면은 무엇을 사용하지?"
+SPEAK_KOKORO_NORMAL4,{0:은|는} 외쳤다. "넌 감정이 뭔지 알고 있어?"
+SPEAK_KOKORO_NORMAL5,{0:은|는} 외쳤다. "가면극이라면 준비되어있어"
+SPEAK_KOKORO_NORMAL6,{0:은|는} 외쳤다. "다음 가면은 이걸로 해볼까..."
+SPEAK_KOKORO_CONFUSE1,{0:은|는} 혼란하고 있다. "이건 혼란할때 쓰는 가면!"
+SPEAK_KOKORO_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러울땐 이 가면... 아 아닌가?"
+SPEAK_KOKORO_CONFUSE3,{0:은|는} 가면을 세 개 정도 겹쳐써버렸다.
+SPEAK_KOKORO_MAGIC1,{0:은|는} 가지고 있는 가면 중 하나를 썼다.
+SPEAK_KOKORO_CAMERA,{0:은|는} 외쳤다. "아 잠깐 가면 좀 쓰고..."
+SPEAK_KOKORO1_NORMAL1,{0:은|는} 외쳤다. "그대로 끝장내주마!"
+SPEAK_KOKORO1_NORMAL2,{0:은|는} 외쳤다. "최강의 자리를 두고 나와 겨뤄라!"
+SPEAK_KOKORO1_NORMAL3,{0:은|는} 외쳤다. "불타버려라! 이 자식!"
+SPEAK_KOKORO1_NORMAL4,{0:은|는} 외쳤다. "활활 타올라라!"
+SPEAK_KOKORO1_NORMAL5,{0:은|는} 외쳤다. "이것은 분노할때 쓰는 가면!"
+SPEAK_KOKORO1_NORMAL6,{0:은|는} 외쳤다. "이 끓어오르는 감정을 주체할 수 없어!"
+SPEAK_KOKORO1_CONFUSE1,{0:은|는} 혼란하고 있다. "이건 혼란할때 쓰는 가면!"
+SPEAK_KOKORO1_CONFUSE2,{0:은|는} 혼란하고 있다. "너무 분노해서 앞이 안보여!"
+SPEAK_KOKORO1_CONFUSE3,{0:은|는} 가면을 거꾸로 쓰고 있다.
+SPEAK_KOKORO1_MAGIC1,{0}의 가면에서 불이 뿜어져나온다.
+SPEAK_KOKORO1_CAMERA,{0:은|는} 외쳤다. "분노한 모습. 멋지게 찍어줘!"
+SPEAK_KOKORO2_NORMAL1,{0:은|는} 외쳤다. "이런 약골이 상대라니 정말 슬프구나"
+SPEAK_KOKORO2_NORMAL2,{0:은|는} 외쳤다. "너의 죽음은 미리 슬퍼해주지"
+SPEAK_KOKORO2_NORMAL3,{0:은|는} 외쳤다. "뼈 속까지 얼어붙어라!"
+SPEAK_KOKORO2_NORMAL4,{0:은|는} 우는척했다. "흑흑흑..."
+SPEAK_KOKORO2_NORMAL5,{0:은|는} 외쳤다. "이건 슬플때 쓰는 가면!"
+SPEAK_KOKORO2_NORMAL6,{0:은|는} 외쳤다. "슬픈 표정은 어떻게 짓는 거지?"
+SPEAK_KOKORO2_CONFUSE1,{0:은|는} 혼란하고 있다. "이건 혼란할때 쓰는 가면!"
+SPEAK_KOKORO2_CONFUSE2,{0:은|는} 혼란하고 있다. "눈물로 앞이 보이질않아!"
+SPEAK_KOKORO2_CONFUSE3,{0:은|는} 가면이 어긋나 있다.
+SPEAK_KOKORO2_MAGIC1,{0}의 가면에서 싸늘한 냉기가 뿜어져나온다.
+SPEAK_KOKORO2_CAMERA,{0:은|는} 말했다. "사진 찍을 기분이 아니야..."
+SPEAK_KOKORO3_NORMAL1,{0:은|는} 외쳤다. "벌써부터 승리의 기쁨이 넘쳐나는구나"
+SPEAK_KOKORO3_NORMAL2,{0:은|는} 외쳤다. "오랫만에 싸울 상대를 찾아 기쁘구나!"
+SPEAK_KOKORO3_NORMAL3,{0:은|는} 외쳤다. "이건 승리의 포즈!"
+SPEAK_KOKORO3_NORMAL4,{0:은|는} 외쳤다. "해냈다!"
+SPEAK_KOKORO3_NORMAL5,{0:은|는} 외쳤다. "전기 통구이가 되어라!"
+SPEAK_KOKORO3_NORMAL6,{0:은|는} 외쳤다. "같이 가면극을 하지않을래?"
+SPEAK_KOKORO3_CONFUSE1,{0:은|는} 혼란하고 있다. "이건 혼란할때 쓰는 가면!"
+SPEAK_KOKORO3_CONFUSE2,{0:은|는} 혼란하고 있다. "너무 기뻐서 시야가 흔들리고있어!"
+SPEAK_KOKORO3_CONFUSE3,{0:은|는} 가면을 땅에 떨어뜨렸다.
+SPEAK_KOKORO3_MAGIC1,{0}의 가면에서 정전기가 생겨나고 있다.
+SPEAK_KOKORO3_CAMERA,{0:은|는} 외쳤다. "이 것은 사진에 찍힐때 쓰는 가면!"
+SPEAK_SUMIREKO_NORMAL1,{0:은|는} 외쳤다. "오랫만에 환상향에 도착했어!"
+SPEAK_SUMIREKO_NORMAL2,{0:은|는} 외쳤다. "역시 환상향에도 인간은 있는거구나~"
+SPEAK_SUMIREKO_NORMAL3,{0:은|는} 외쳤다. "오호, {1}라 흥미깊은데"
+SPEAK_SUMIREKO_NORMAL4,{0:은|는} 외쳤다. "비봉클럽 회장의 명예를 걸고 이겨주마"
+SPEAK_SUMIREKO_NORMAL5,{0:은|는} 외쳤다. "여고생이란게 얼마나 강한 생물인지 알고 있어?"
+SPEAK_SUMIREKO_NORMAL6,{0:은|는} 외쳤다. "환상향의 주민은 전부 호전적이구나..."
+SPEAK_SUMIREKO_NORMAL7,{0:은|는} 외쳤다. "초능력을 쓰는 인간을 본적 있어?"
+SPEAK_SUMIREKO_NORMAL8,{0:은|는} 기세 좋은 포즈를 취하고 있다.
+SPEAK_SUMIREKO_CONFUSE1,{0:은|는} 혼란하고 있다. "집에 가고 싶어!"
+SPEAK_SUMIREKO_CONFUSE2,{0:은|는} 혼란하고 있다. "얼른 도망쳐야해!"
+SPEAK_SUMIREKO_CONFUSE3,{0:은|는} 혼란하고 있다. "엄마 살려줘!"
+SPEAK_SUMIREKO_MAGIC1,{0:은|는} 숟가락을 들고 힘을 집중했다.
+SPEAK_SUMIREKO_CAMERA,{0:은|는} 외쳤다. "요즘 시대엔 스마트폰으로 충분히 찍잖아?"
+SPEAK_HATATE_NORMAL1_MOMIZI,{0:은|는} 외쳤다. "경계는 땡땡이 치고있는거야? 아야에게 또 혼날거라고?"
+SPEAK_HATATE_NORMAL2_MOMIZI,{0:은|는} 외쳤다. "아야랑은 화해한거야?"
+SPEAK_HATATE_NORMAL3_MOMIZI,{0:은|는} 외쳤다. "설마 소문으로 들은 칩입자가 너일줄이야!"
+SPEAK_HATATE_NORMAL4_MOMIZI,{0:은|는} 외쳤다. "안녕 모미지! 경비 임무라도 질린거야?"
+SPEAK_HATATE_NORMAL5_MOMIZI,{0:은|는} 외쳤다. "아야에게 화풀이할거라면 나는 빼줬으면 하는데!"
+SPEAK_HATATE_NORMAL1,{0:은|는} 외쳤다. "취재하러 돌아다닐 필요가 없다니깐!"
+SPEAK_HATATE_NORMAL2,{0:은|는} 외쳤다. "스마트폰이란게 뭐야?"
+SPEAK_HATATE_NORMAL3,{0:은|는} 외쳤다. "잠깐! 기사 작업중에 함부로 들어오지말라고!"
+SPEAK_HATATE_NORMAL4,{0:은|는} 외쳤다. "아! 저번에 염사로 본적 있는 %s인데!"
+SPEAK_HATATE_NORMAL5,{0:은|는} 외쳤다. "잠시 움직이지 말아줄래? 초점이 흐려져서 말이지"
+SPEAK_HATATE_NORMAL6,{0:은|는} 외쳤다. "내 카메라는 연사기능이 붙어있어! 도망쳐도 소용없어!"
+SPEAK_HATATE_NORMAL7,{0:은|는} 핸드폰을 빠르게 누르고 있다.
+SPEAK_HATATE_CONFUSE1,{0:은|는} 혼란하고 있다. "핸드폰 충전하는걸 까먹었어!"
+SPEAK_HATATE_CONFUSE2,{0:은|는} 혼란하고 있다. "핸드폰 초점이 전혀 맞질 않잖아!"
+SPEAK_HATATE_CONFUSE3,{0:은|는} 혼란하여 자기 자신을 자해하려고 있다.
+SPEAK_HATATE_MAGIC1,{0:은|는} 핸드폰 카메라를 적에게 향했다.
+SPEAK_HATATE_CAMERA,{0:은|는} 외쳤다. "역 취재당했다!"
+SPEAK_FAIRY_COMMON_FREIND1,{0:은|는} 말했다. "장난을 싫어하는 요정은 없어."
+SPEAK_FAIRY_COMMON_FREIND2,{0:은|는} 말했다. "가끔씩은 나도 메이드를 해볼까 생각이 들곤해."
+SPEAK_FAIRY_COMMON_FREIND3,{0:은|는} 말했다. "어떤 장난을 칠때보다 지금이 제일 재밌어!"
+SPEAK_FAIRY_COMMON_FREIND4,{0:은|는} 말했다. "우린 최고의 팀이야!"
+SPEAK_FAIRY_COMMON_FREIND5,{0:은|는} 말했다. "새로운 친구들과 만나는건 항상 설레여!"
+SPEAK_FAIRY_COMMON_FREIND6,{0:은|는} 외쳤다. "요정이 핍박받지 않은 시대를 위하여!"
+SPEAK_FAIRY_COMMON_ENTER,{0:은|는} 말했다. "나라도 도움이 될 수 있을까?"
+SPEAK_FAIRY_COMMON_FAIRY_WAR,{0:은|는} 외쳤다. "요정을 위하여!"
+SPEAK_FAIRY_COMMON_REVIVE,{0:은|는} 말했다. "요정은 죽지않아!"
+SPEAK_FAIRY_SHY_FREIND1,{0:은|는} 말했다. "저기... 고마워"
+SPEAK_FAIRY_SHY_FREIND2,{0:은|는} 얼굴을 붉히고 있다.
+SPEAK_FAIRY_SHY_FREIND3,{0:은|는} 조심스럽게 말했다. "나도 힘이 되고 있지?"
+SPEAK_FAIRY_SHY_FREIND4,{0:은|는} 당신에게 존경의 시선을 날린다.
+SPEAK_FAIRY_SHY_FREIND5,{0:은|는} 말했다. "무리하지마..."
+SPEAK_FAIRY_SHY_FREIND6,{0:은|는} 근처에서 꽃을 따고 있다.
+SPEAK_FAIRY_SHY_ENTER,{0:은|는} 수줍게 고개를 끄덕였다.
+SPEAK_FAIRY_SHY_FAIRY_WAR,{0:은|는} 외쳤다. "...열심히 해볼게!"
+SPEAK_FAIRY_SHY_REVIVE,{0:은|는} 말했다. "부활할 수 있어도 죽는건 싫어..."
+SPEAK_FAIRY_BRAVE_FREIND1,{0:은|는} 말했다. "누구도 우릴 막을 순 없어!"
+SPEAK_FAIRY_BRAVE_FREIND2,{0:은|는} 말했다. "지금 질 것 같은 생각이 들지 않아!"
+SPEAK_FAIRY_BRAVE_FREIND3,{0:은|는} 말했다. "난 싸우는게 제일 재밌어!"
+SPEAK_FAIRY_BRAVE_FREIND4,{0:은|는} 말했다. "자, 다음 상대는 누구야?"
+SPEAK_FAIRY_BRAVE_FREIND5,{0:은|는} 말했다. "난 최강이 될거야!"
+SPEAK_FAIRY_BRAVE_FREIND6,{0:은|는} 외쳤다. "요정이 세상을 지배하는거야!"
+SPEAK_FAIRY_BRAVE_ENTER,{0:은|는} 자신있게 외쳤다. "이제부턴 나한테 맡겨!"
+SPEAK_FAIRY_BRAVE_FAIRY_WAR,{0:은|는} 외쳤다. "돌격 앞으로!"
+SPEAK_FAIRY_BRAVE_REVIVE,{0:은|는} 말했다. "이젠 걱정마! 내가 돌아왔어!"
+SPEAK_FAIRY_COLD_FREIND1,{0:은|는} 말했다. "이젠 요정도 머리를 쓰는 시대야."
+SPEAK_FAIRY_COLD_FREIND2,{0:은|는} 가지고 있던 책을 읽고 있다.
+SPEAK_FAIRY_COLD_FREIND3,{0:은|는} 말했다. "적의 정보를 알면 상대도 쉬울거야."
+SPEAK_FAIRY_COLD_FREIND4,{0:은|는} 말했다. "가지고 있는 물건은 항상 체크하고있어?"
+SPEAK_FAIRY_COLD_FREIND5,{0:은|는} 말했다. "난 널 믿고있어."
+SPEAK_FAIRY_COLD_FREIND6,{0:은|는} 외쳤다. "동료는 많을 수록 좋아."
+SPEAK_FAIRY_COLD_ENTER,{0:은|는} 말했다. "좋아. 힘을 빌려줄게"
+SPEAK_FAIRY_COLD_FAIRY_WAR,{0:은|는} 말했다. "알겠어 그 작전대로 하자"
+SPEAK_FAIRY_COLD_REVIVE,{0:은|는} 말했다. "방금 전엔 실수였어."
+SPEAK_FAIRY_ANNOY_FREIND1,{0:은|는} 말했다. "놀자! 놀자!"
+SPEAK_FAIRY_ANNOY_FREIND2,{0:은|는} 정신없이 비행하고있다.
+SPEAK_FAIRY_ANNOY_FREIND3,{0:은|는} 당신에게 돌멩이를 내밀었다. "내가 주운 돌멩이!"
+SPEAK_FAIRY_ANNOY_FREIND4,{0:은|는} 말했다. "재밌는 장난이 떠올랐어!"
+SPEAK_FAIRY_ANNOY_FREIND5,{0:은|는} 말했다. "저기저기, 숨박꼭질하지 않을래?"
+SPEAK_FAIRY_ANNOY_FREIND6,{0:은|는} 외쳤다. "재밌어! 재밌어!"
+SPEAK_FAIRY_ANNOY_ENTER,{0:은|는} 말했다. "저기저기, 뭐하고 놀꺼야??"
+SPEAK_FAIRY_ANNOY_FAIRY_WAR,{0:은|는} 말했다. "새로운 놀이야? 나도 낄래 낄래!"
+SPEAK_FAIRY_ANNOY_REVIVE,{0:은|는} 말했다. "아직 안 끝났지? 계속 놀자!"

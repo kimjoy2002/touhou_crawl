@@ -83,7 +83,7 @@ int Move(const coord_def &c)
 
 
 
-void Long_Move(const coord_def &c)
+void Long_Move(const coord_def &c, bool speak_)
 {
 	while(!you.will_move.empty())
 		you.will_move.pop();
@@ -116,7 +116,8 @@ void Long_Move(const coord_def &c)
 	}
 	if(!PathSearch(you.position,c,you.will_move,ST_NORMAL,current_level,you.isFly(),you.isSwim()))
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
+		if(speak_)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
 	}
 	stack_move(false);
 }
@@ -694,7 +695,7 @@ int Player_Move(const coord_def &c)
 					}
 					else
 					{
-						if(!PickUpNum(temp,1,false))
+						if(PickUpNum(temp,1,false))
 							break;
 						pick_ups = true;
 						{ //아이템을 주울때 P가 사라지면 튕길 가능성이 있다.
@@ -863,7 +864,7 @@ void Search()
 		case '.': 
 		case VK_RETURN:
 			you.search = false;
-			Long_Move(you.search_pos);
+			Long_Move(you.search_pos, true);
 			break;
 		case -1:
 			if(inputedKey.isRightClick()) {
@@ -1066,7 +1067,7 @@ void Wide_Search()
 			widesearch = false;
 			you.search = false;
 			deletelog();
-			Long_Move(you.search_pos);
+			Long_Move(you.search_pos, true);
 			return;
 		default:
 			deletelog();
@@ -4141,7 +4142,7 @@ void floorMove()
 				}
 			}
 
-			Long_Move(next_);
+			Long_Move(next_, true);
 			if (you.position == next_) {
 				switch (env[current_level].getStairKind(you.position.x, you.position.y)) 
 				{

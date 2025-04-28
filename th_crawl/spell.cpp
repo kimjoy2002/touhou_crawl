@@ -1845,6 +1845,10 @@ bool spell_prev_fail() {
 			return true;
 		}
 	}
+	else {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_NOT_REMEMBER_SPELL),true,false,false,CL_normal);
+		return true;
+	}
 	return false;
 }
 

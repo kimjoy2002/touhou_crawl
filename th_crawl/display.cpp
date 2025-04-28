@@ -2613,7 +2613,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	bool already_draw = false;
 	//텍스트 클릭용 사전 루프
-	if(!text_log.text_list.empty())
+
+
+	//텍스트(위쪽에 숏로그)그리기
+	unique_ptr<vector<log_text_box>> enter_draw = make_unique<vector<log_text_box>>();
+	if(!text_log.text_list.empty() && list_draw.empty())
 	{
 		list<text_dummy*>::iterator it;
 		it = text_log.text_list.end();
@@ -2634,43 +2638,88 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 			}
 		}
-		float x = 0, y = 0;
+
+
+		float x = 0;
+		int max_length = 32*(sight_x*2+1)+16, cuting = 0;
 		for(;it != text_log.text_list.end();)
 		{
-			if((*it)->clickable > 0) {
-				RECT rc2={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
+			if(cuting == 0 && (*it)->width > max_length) {
+				cuting = max_length/fontDesc.Width;
+			}
+
+			if(cuting > 0) {
+				vector<string> tokens = SplitStringByFontWidth((*it)->text, cuting, max_length/fontDesc.Width);
+				bool first_ = true;
+				for(string& token : tokens) {
+					if(!first_) {
+						list_draw.push_back(std::move(enter_draw));
+						enter_draw = make_unique<vector<log_text_box>>(); 
+						x = 0;
+					}
+					first_ = false;
+					enter_draw->push_back(log_text_box(x, ConvertUTF8ToUTF16(token), (*it)->color, (*it)->clickable));
+					cuting = PrintCharWidth(token);
+				}
+			} else {
+				enter_draw->push_back(log_text_box(x, (*it)->text, (*it)->color, (*it)->clickable));
+				cuting = 0;
+			}
+
+			if((*it)->enter)
+			{
+				x = 0;
+				list_draw.push_back(std::move(enter_draw));
+				enter_draw = make_unique<vector<log_text_box>>(); 
+				cuting = 0;
+				it++;
+			}
+			else
+			{
+				x+=cuting>0?(cuting*fontDesc.Width):((*it)->width);
+				cuting = 0;
+				it++;
+				if(it != text_log.text_list.end() && (x+(*it)->width) > max_length) {
+					if(max_length - x < 30) { //너무 작은 경우 그냥 다음으로 보냄
+						x = 0;
+						list_draw.push_back(std::move(enter_draw));
+						enter_draw = make_unique<vector<log_text_box>>(); 
+					} else { //남는 경우엔 반씩 잘라서 남은거만 전달
+						cuting = (max_length - x)/fontDesc.Width;
+					}
+				}
+			}
+		}
+		if(enter_draw != nullptr) {
+			list_draw.push_back(std::move(enter_draw));
+		}
+
+		while(list_draw.size() > text_log.short_len) {
+			list_draw.pop_front();
+		}
+	}
+
+	
+	float y = 0;
+	for(auto& draw_vector : list_draw) {
+		for(auto& draw_dummy : *draw_vector) {
+			if(draw_dummy.clickable > 0) {
+				RECT rc2={ (LONG)draw_dummy.start_x, (LONG)y, (LONG)(draw_dummy.start_x+PrintCharWidth(draw_dummy.text)*fontDesc.Width), (LONG)(y+fontDesc.Height)};
 				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 					if(isClicked(LEFT_CLICK)) {
 						MSG msg;
 						msg.message = WM_CHAR;
-						msg.wParam =(*it)->clickable;
+						msg.wParam = draw_dummy.clickable;
 						g_keyQueue->push(InputedKey(msg));
 					}
 					already_draw = true;
 				}
 			}
-			if((*it)->enter)
-			{
-				x = 0;
-				y+=fontDesc.Height;
-				it++;
-			}
-			else
-			{
-				bool first_ = (x == 0);
-				x+=(*it)->width;
-				it++;
-				if(!first_ && it != text_log.text_list.end() && (x+(*it)->width) > 32*(sight_x*2+1)+16) {
-					x = 0;
-					y+=fontDesc.Height;
-				}
-			}
 		}
+		y+=fontDesc.Height;
 	}
-	
-	
-	
+
 
 	//바탕 타일 그리기
 	int x_ = you.GetDisplayPos().x-sight_x;
@@ -3346,8 +3395,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
 						rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
 						DrawTextUTF8(pfont,pSprite, (*it).GetName()->getName().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-					} else if (MousePoint.x > ((*it).position.x - x_)*32.0f - 4 && MousePoint.x <= ((*it).position.x - x_)*32.0f + 36 &&
-							MousePoint.y > ((*it).position.y - y_)*32.0f - 4 && MousePoint.y <= ((*it).position.y - y_)*32.0f + 36){
+					} else if (MousePoint.x > ((*it).position.x - x_)*32.0f + 4 && MousePoint.x <= ((*it).position.x - x_)*32.0f + 36 &&
+							MousePoint.y > ((*it).position.y - y_)*32.0f + 4 && MousePoint.y <= ((*it).position.y - y_)*32.0f + 36){
 						mouseInfo = (*it).GetName()->getName();
 						mouseColor = CL_normal;
 					}
@@ -3356,57 +3405,28 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 	}
 
-	//텍스트(위쪽에 숏로그)그리기
-	if(!text_log.text_list.empty())
 	{
-		list<text_dummy*>::iterator it;
-		it = text_log.text_list.end();
-		it--;
-		int i = text_log.short_len;
-		while(i)
-		{
-			if(it == text_log.text_list.begin())
-				break;
-			it--;
-			if((*it)->enter)
-			{
-				i--;
-				if(i<=0)
-				{
-					it++;
-					break;
+
+		int max_length = 32*(sight_x*2+1)+16;
+		float y = 0;
+		for(auto& draw_vector : list_draw) {
+			for(auto& draw_dummy : *draw_vector) {
+				RECT rc={ (LONG)draw_dummy.start_x, (LONG)y, (LONG)(max_length), (LONG)(y+fontDesc.Height)};
+
+				DrawTextUTF8(pfont,pSprite, draw_dummy.text.c_str(), -1, &rc, DT_SINGLELINE , draw_dummy.color);
+				if(draw_dummy.clickable > 0) {
+					RECT rc2={ (LONG)draw_dummy.start_x, (LONG)y, (LONG)(draw_dummy.start_x+PrintCharWidth(draw_dummy.text)*fontDesc.Width), (LONG)(y+fontDesc.Height)};
+					if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+						MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+						DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+					}
 				}
 			}
+			y+=fontDesc.Height;
+
 		}
-		float x = 0, y = 0;
-		for(;it != text_log.text_list.end();)
-		{			
-			RECT rc={ (LONG)x, (LONG)y, 32*(sight_x*2+1)+16, (LONG)(y+fontDesc.Height)};
-			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE , (*it)->color);
-			if((*it)->clickable > 0) {
-				RECT rc2={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
-				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
-					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
-					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
-				}
-			}
-			if((*it)->enter)
-			{
-				x = 0;
-				y+=fontDesc.Height;
-				it++;
-			}
-			else
-			{
-				bool first_ = (x == 0);
-				x+=(*it)->width;
-				it++;
-				if(!first_ && it != text_log.text_list.end() && (x+(*it)->width) > 32*(sight_x*2+1)+16) {
-					x = 0;
-					y+=fontDesc.Height;
-				}
-			}
-		}
+
+
 	}
 
 

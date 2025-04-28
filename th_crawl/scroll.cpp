@@ -1211,6 +1211,7 @@ bool brand_weapon_scroll(bool pre_iden_)
 			
 			LocalzationManager::printLogWithKey(weapon_type,true,false,false,CL_magic,
 				PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
+			you.equipment[ET_WEAPON]->value5 = brand_;
 			you.equipment[ET_WEAPON]->value6 = -1;
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON) + " ", false, false, false, CL_normal);
 			return true;

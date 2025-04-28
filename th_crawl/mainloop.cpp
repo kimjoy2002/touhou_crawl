@@ -577,7 +577,7 @@ void MainLoop()
 							}
 						}
 					} else {
-						Long_Move(coord_def(inputedKey.val1, inputedKey.val2));
+						Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
 					}
 				} else if (inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
 					coord_def target_pos(inputedKey.val1, inputedKey.val2);
@@ -997,7 +997,14 @@ void MainLoop()
 			wiz_mode();
 			break;
 		case '_': //스팀 디버깅
-			steam_mg.debugText();
+			printlog("이 텍스트는 과도한 줄길이를 출력하였을때 제대로 짤리는지 확인하기위한 긴 텍스트입니다. 확인을 위해 더 길게 하겠습니다. 아주 길쭉해요.", false, false, false, CL_help);
+			//steam_mg.debugText();
+			break;
+		case '0':
+			for(int i = 0; i < 10; i++) {
+				printlog("테스트 텍스트입니다. ", false, false, false, CL_help);
+			}
+			//steam_mg.debugText();
 			break;
 		case 0x8B:
 			auto_pick_onoff(false);

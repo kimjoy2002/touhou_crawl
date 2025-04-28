@@ -126,6 +126,9 @@ void optionManager::calcTileXY() {
 	tile_max_x=1;
 	tile_max_y=1;
 	int minimum_check = 320;
+	if(width <= 800) {
+		minimum_check = 310; //800 보정
+	}
 	while(width > 32*((tile_max_x+1)*2+1)+minimum_check) {
 		tile_max_x++;
 	}

@@ -451,10 +451,8 @@ bool IsCJKWideChar(wchar_t ch)
 		(ch >= 0xFFE0 && ch <= 0xFFE6)	 // 전각 기호 (￥ 등)
 	);
 }
-
-int PrintCharWidth(const string& text)
+int PrintCharWidth(const wstring& wtext)
 {
-	wstring wtext = ConvertUTF8ToUTF16(text);
 	int len = 0;
 	for (wchar_t ch : wtext)
 	{
@@ -468,8 +466,14 @@ int PrintCharWidth(const string& text)
 	return len;
 }
 
-vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength) {
-    wstring wtext = ConvertUTF8ToUTF16(text); 
+int PrintCharWidth(const string& text)
+{
+	wstring wtext = ConvertUTF8ToUTF16(text);
+	return PrintCharWidth(wtext);
+}
+
+
+vector<string> SplitStringByFontWidth(const wstring& wtext, int firstLength, int nextLength) {
     vector<string> result;
     string currentToken;
     int currentLength = 0;
@@ -496,6 +500,12 @@ vector<string> SplitStringByFontWidth(const string& text, int firstLength, int n
     }
 
     return result;
+}
+
+
+vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength) {
+    wstring wtext = ConvertUTF8ToUTF16(text); 
+    return SplitStringByFontWidth(wtext, firstLength, nextLength);
 }
 
 wstring PreserveTrailingSpaces(const wstring& text)

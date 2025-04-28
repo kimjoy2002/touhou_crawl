@@ -73,18 +73,19 @@ public:
 	void calculateWitdh();
 };
 
+
+
 class text_manager
 {
 public:
 	list<text_dummy*> text_list;
 	int length;
-	int short_len;
+	int short_len = 6;
 	bool enter;
 
-	text_manager():length(0),short_len(0),enter(true){};
+	text_manager():length(0),short_len(6),enter(true){};
 	~text_manager();
 	bool add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_ = 0);
-	void SetShowLength(int num){if(short_len>num){short_len = num;}};
 	void DeleteTemp();	
 	void SetEnter();
 	void reset();
@@ -125,6 +126,17 @@ struct FontInfo {
 
 class display_manager
 {
+	class log_text_box
+	{
+		public:
+		int start_x;
+		wstring text;
+		D3DCOLOR color;
+		int clickable;
+		log_text_box(int start_x, wstring text, D3DCOLOR color, int clickable):
+			start_x(start_x), text(text),color(color),clickable(clickable){}
+	};
+
 public:
 	int tile_type;
 	text_manager text_log;
@@ -140,6 +152,7 @@ public:
 	int item_num[52];
 	item_view_type item_vt;
 	LOCALIZATION_ENUM_KEY item_view_message;
+	list<unique_ptr<vector<log_text_box>>> list_draw;
 
 	textures *image;
 	

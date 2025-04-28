@@ -358,8 +358,10 @@ int distan_coord(const coord_def& a, const coord_def& b);
 wstring ConvertUTF8ToUTF16(const string& utf8Str);
 string ConvertUTF16ToUTF8(const wstring& utf16Str);
 
+int PrintCharWidth(const wstring& text);
 int PrintCharWidth(const string& text);
 wstring PreserveTrailingSpaces(const wstring& text);
+vector<string> SplitStringByFontWidth(const wstring& wtext, int firstLength, int nextLength);
 vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength);
 
 void replaceAll(string& str, const string& from, const string& to);

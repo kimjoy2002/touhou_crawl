@@ -1943,7 +1943,6 @@ void SkillUse(char auto_)
 						ReleaseMutex(mutx);
 						waitkeyinput();
 						changedisplay(DT_SKILL_USE);
-						changemove(0);
 					}
 				} else if(inputedKey.isRightClick()) {
 					break;

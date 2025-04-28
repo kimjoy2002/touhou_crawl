@@ -42,8 +42,6 @@ bool text_manager::add_text(string text_, bool enter_, bool log_, bool temp_, D3
 			if((*it)->enter)
 			{				
 				length--;
-				if(short_len>0)
-				short_len--;
 			}
 			delete *it;
 			text_list.erase(it);
@@ -54,8 +52,6 @@ bool text_manager::add_text(string text_, bool enter_, bool log_, bool temp_, D3
 	text_list.push_back(new text_dummy(text_,enter_,log_,temp_,color_,char_));
 	if(enter)
 	{
-		if(short_len<6)
-			short_len++;
 		enter = false;
 	}
 	if(enter_)
@@ -80,8 +76,6 @@ void text_manager::DeleteTemp()
 			if((*it)->enter)
 			{				
 				length--;
-				if(short_len>0)
-				short_len--;
 			}
 			delete *it;
 			text_list.erase(it);
@@ -109,7 +103,7 @@ void text_manager::reset()
 	WaitForSingleObject(mutx, INFINITE);
 	text_list.clear();
 	length=0;
-	short_len=0;
+	short_len=6;
 	ReleaseMutex(mutx);
 }
 void text_manager::removeClickable() {
@@ -126,22 +120,30 @@ string& SetText()
 }
 void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_)
 {
+	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_);
+	DisplayManager.list_draw.clear();
+	ReleaseMutex(mutx);
 }
 void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_)
 {
+	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_, char_);
+	DisplayManager.list_draw.clear();
+	ReleaseMutex(mutx);
 }
 void deletelog()
 {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.DeleteTemp();
+	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);
 }
 void enterlog()
 {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.SetEnter();
+	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);
 }
 void printarray(bool enter_, bool log_, bool temp_, D3DCOLOR color_, int num_, ...)
@@ -225,6 +227,7 @@ void endSelection() {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.removeClickable();
 	DisplayManager.selection_vector.clear();
+	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);	
 }
 
@@ -238,6 +241,7 @@ void endAbilGrid() {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_log.removeClickable();
 	DisplayManager.spell_skill_vector.clear();
+	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);	
 }
 

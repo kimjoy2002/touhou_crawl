@@ -607,7 +607,7 @@ extern players you;
 
 int action_Move(int key, const coord_def &c); //메인루프에서의 이동
 int Move(const coord_def &c); //이동한다.
-void Long_Move(const coord_def &c); //길게 이동한다.
+void Long_Move(const coord_def &c, bool speak_); //길게 이동한다.
 void repeat_action();
 void auto_battle();//자동전투
 void auto_Move(); //자동으로 이동한다.

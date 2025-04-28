@@ -2053,19 +2053,20 @@ bool GodAccpect_turn(int turn)
 	case GT_YUKARI:
 		if(turn%10 == 0)
 		{
+			int sight_ = 7;
 			if(1/*randA(100)<20pietyLevel(you.piety) >=1*/)
 			{
-				dif_rect_iterator rit(you.position,8,true);
+				dif_rect_iterator rit(you.position,7,true);
 				while(!rit.end())
 				{
 					coord_def check_pos_ = (*rit);
 
 					if(you.s_dimension)
 					{
-						if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
-							check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
-						if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
-							check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
+						if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>sight_)
+							check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?(sight_*2+1):-(sight_*2+1);
+						if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>sight_)
+							check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?(sight_*2+1):-(sight_*2+1);
 					}
 
 

@@ -765,6 +765,7 @@ coord_def players::GetDisplayPos()
 }
 int players::move(short_move x_mov, short_move y_mov)
 {
+	int sight_ = 7;
 	if(!x_mov && !y_mov)
 		return 0;
 	int drunken_ = randA(10);
@@ -781,17 +782,17 @@ int players::move(short_move x_mov, short_move y_mov)
 	
 	if(you.s_dimension && (you.god == GT_YUKARI))
 	{
-		if(abs(move_x_ - you.god_value[GT_YUKARI][0])>8)
+		if(abs(move_x_ - you.god_value[GT_YUKARI][0])>sight_)
 		{
-			    move_x_ +=move_x_ - you.god_value[GT_YUKARI][0]>0?-17:17;
+			    move_x_ +=move_x_ - you.god_value[GT_YUKARI][0]>0?-(sight_*2+1):(sight_*2+1);
 		}
-		if(abs(move_y_ - you.god_value[GT_YUKARI][1])>8)
+		if(abs(move_y_ - you.god_value[GT_YUKARI][1])>sight_)
 		{
-			    move_y_ +=move_y_ - you.god_value[GT_YUKARI][1]>0?-17:17;
+			    move_y_ +=move_y_ - you.god_value[GT_YUKARI][1]>0?-(sight_*2+1):(sight_*2+1);
 		}
 	}
 
-	if(env[current_level].isMove(position.x+x_mov,position.y+y_mov,true))
+	if(env[current_level].isMove(move_x_,move_y_,true))
 	{
 
 		monster* mon_ = (monster*)env[current_level].isMonsterPos(move_x_,move_y_,this);
@@ -3796,6 +3797,7 @@ vector<monster>::iterator players::GetTargetIter()
 
 interupt_type players::resetLOS(bool speak_)
 {
+	int sight = 7;
 	interupt_type interrupt_ = IT_NONE;
 	for(int x=0;x<DG_MAX_X;x++)
 	{
@@ -3803,7 +3805,7 @@ interupt_type players::resetLOS(bool speak_)
 		{
 			//if(abs(position.x-x)+abs(position.y-y)>8)
 
-			bool out_of_sight = pow((float)abs(position.x-x),2)+pow((float)abs(position.y-y),2)>64;
+			bool out_of_sight = pow((float)abs(position.x-x),2)+pow((float)abs(position.y-y),2)>((sight+1)*(sight+1)-1);
 			if((out_of_sight && !(you.s_dimension && you.god == GT_YUKARI)) || env[current_level].DisableMove(coord_def(x,y),true))
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
@@ -3821,12 +3823,12 @@ interupt_type players::resetLOS(bool speak_)
 					coord_def goal_ = coord_def(x,y);
 					if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 					{
-						if(abs(position.x - goal_.x)>8)
-							goal_.x += (position.x - goal_.x)>0?17:-17;
-						if(abs(position.y - goal_.y)>8)
-							goal_.y += (position.y - goal_.y)>0?17:-17;
+						if(abs(position.x - goal_.x)>sight)
+							goal_.x += (position.x - goal_.x)>0?(sight*2+1):-(sight*2+1);
+						if(abs(position.y - goal_.y)>sight)
+							goal_.y += (position.y - goal_.y)>0?(sight*2+1):-(sight*2+1);
 					}
-					if(distan_coord(position,goal_)>64)
+					if(distan_coord(position,goal_)>((sight+1)*(sight+1)-1))
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 						if(env[current_level].isBamboo())
@@ -3849,10 +3851,10 @@ interupt_type players::resetLOS(bool speak_)
 						
 						if((you.s_dimension && you.god == GT_YUKARI) && out_of_sight)
 						{
-							if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
-								check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
-							if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
-								check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
+							if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>sight)
+								check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?(sight*2+1):-(sight*2+1);
+							if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>sight)
+								check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?(sight*2+1):-(sight*2+1);
 						}
 
 

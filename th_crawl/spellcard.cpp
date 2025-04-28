@@ -215,9 +215,9 @@ int SpellcardLength(spellcard_evoke_type skill)
 	case SPC_V_FIRE:
 	case SPC_V_ICE:
 	case SPC_V_EARTH:
-		return 8;
-	case SPC_V_AIR:
 		return 7;
+	case SPC_V_AIR:
+		return 6;
 	case SPC_V_INVISIBLE:
 	case SPC_V_SUN:
 		return 0;

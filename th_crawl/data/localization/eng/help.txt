@@ -13,7 +13,7 @@
 §yX§d      - Open dungeon map                           §y[§d - View equipped armor
 §y<,>§d    - Use stairs (up/down)                       §y}§d - View current weapon
 §yO,C§d    - Open/close doors                           §y"§d - View current accessory
-                                                    §yE§d - View experience
+§cctrl-G§d - Global Travel                              §yE§d - View experience
                                                     §ym§d - View skill list
 §b<Item Management>§d                                   §y]§d - View collected runes
 §yi§d      - Inventory                                  §cctrl-O§d - Dungeon progression
@@ -25,7 +25,7 @@
 §yq§d      - Drink (potions)                            §cctrl-S§d - Save and quit (no prompt)
 §yf/F§d    - Quick/targeted throw                       §cctrl-Q§d - Quit without saving
 §yv,V§d    - Use spell cards                            §y#§d - Create game dump
-§yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Toggle sound (if available)
+§yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Toggle sound
 §yW/T§d    - Equip/unequip armor
 §yP/R§d    - Equip/unequip accessory
 §cctrl-A§d - Toggle auto-pickup                         §b<Cheat Mode>§d

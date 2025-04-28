@@ -2739,7 +2739,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					if(spell_sight)
 					{
 							
-						if(sight_type == 1 && length_ >spell_sight*spell_sight)
+						if(sight_type == 1 && length_ >(spell_sight+1)*(spell_sight+1)-1)
 							sight = false;
 						else if(sight_type == 2 && spell_sight<max(abs(i+x_-you.position.x) ,abs(j+y_-you.position.y)))
 						{

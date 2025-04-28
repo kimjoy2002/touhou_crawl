@@ -1100,6 +1100,7 @@ bool players::isEnemyMonster(const monster* monster_info)
 }	
 bool players::isSightnonblocked(coord_def c)
 {
+	int sight_ = 7;
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
@@ -1112,10 +1113,10 @@ bool players::isSightnonblocked(coord_def c)
 						
 			if(you.s_dimension && you.god == GT_YUKARI)
 			{
-				if(abs(god_value[GT_YUKARI][0] - check_pos_.x)>8)
-					check_pos_.x += (god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
-				if(abs(god_value[GT_YUKARI][1] - check_pos_.y)>8)
-					check_pos_.y += (god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
+				if(abs(god_value[GT_YUKARI][0] - check_pos_.x)>sight_)
+					check_pos_.x += (god_value[GT_YUKARI][0] - check_pos_.x)>0?(sight_*2+1):-(sight_*2+1);
+				if(abs(god_value[GT_YUKARI][1] - check_pos_.y)>sight_)
+					check_pos_.y += (god_value[GT_YUKARI][1] - check_pos_.y)>0?(sight_*2+1):-(sight_*2+1);
 			}
 
 

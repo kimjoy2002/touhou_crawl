@@ -461,22 +461,23 @@ bool stack_move(bool auto_)
 
 int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 {
+	int sight_ = 7;
 	int return_ = 1;
 	if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + 8)
-		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + 8))
+		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + sight_)
+		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + sight_))
 		you.search_pos.x+= c.x - you.position.x;
 	else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - 8)
-		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - 8))
+		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - sight_)
+		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - sight_))
 		you.search_pos.x-= you.position.x - c.x ;
 	if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + 8)
-		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + 8))
+		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + sight_)
+		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + sight_))
 		you.search_pos.y+= c.y - you.position.y;
 	else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - 8)
-		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - 8))
+		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - sight_)
+		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - sight_))
 		you.search_pos.y-= you.position.y -c.y;
 
 

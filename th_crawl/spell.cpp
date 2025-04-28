@@ -288,7 +288,7 @@ int SpellLength(spell_list skill)
 	case SPL_THROW_KNIFE:	
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
-		return 8;
+		return 7;
 	case SPL_FLAME:	
 	case SPL_STING:
 	case SPL_ICE_BOLT:
@@ -303,7 +303,6 @@ int SpellLength(spell_list skill)
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
 	case SPL_THUNDER_BOLT:
-		return 7;
 	case SPL_TWIST:
 	case SPL_FIRE_BOLT:
 	case SPL_VENOM_BOLT:

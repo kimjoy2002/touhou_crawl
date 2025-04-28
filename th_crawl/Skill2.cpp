@@ -156,13 +156,12 @@ int SkillLength(skill_list skill)
 		return 5;
 	case SKL_PHILOSOPHERS_3:
 	case SKL_OKINA_3:
-		return 6;
 	case SKL_KANAKO_1:
 	case SKL_EIRIN_0:
 	case SKL_YUUGI_3_THROW:
 	case SKL_PHILOSOPHERS_5:
 	case SKL_JUNKO_1:
-		return 7;
+		return 6;
 	case SKL_SATORI_1:
 	case SKL_SATORI_2:
 	case SKL_YUYUKO_1:
@@ -181,7 +180,7 @@ int SkillLength(skill_list skill)
 	case SKL_OKINA_1:
 	case SKL_OKINA_2:
 	case SKL_JOON_AND_SION_4:
-		return 8;
+		return 7;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
 		return 1;

@@ -169,12 +169,13 @@ public:
 	bool MakeMap(bool return_); //return_ 은 되돌아오는 계단일때 전용(이때는 대나무숲을 만들지 않는다.)
 	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0));
 	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false)
-	{		
+	{
+		int sight_ = 7;
 		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 			return false;
 		if(you.s_dimension)
 		{			
-			if(abs(x_ - you.god_value[GT_YUKARI][0])>8 || abs(y_ - you.god_value[GT_YUKARI][1])>8)
+			if(abs(x_ - you.god_value[GT_YUKARI][0])>sight_ || abs(y_ - you.god_value[GT_YUKARI][1])>sight_)
 				return false; //차원고정의 범위 밖에 있다.
 		}
 

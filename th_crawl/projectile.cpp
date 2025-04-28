@@ -96,7 +96,7 @@ bool refreshPath_after(const coord_def &c, beam_iterator& beam, list<item>::iter
 	if(length_<3)
 		length_ = 1;
 	int type_ = rect_?2:1;
-	if(type_ == 1 && length_>infor_->length*infor_->length)
+	if(type_ == 1 && length_>(infor_->length+1)*(infor_->length+1)-1)
 		good_path = false;
 	else if(type_ == 2 && infor_->length<max(abs(you.search_pos.x-you.position.x) ,abs(you.search_pos.y-you.position.y)))
 		good_path = false;
@@ -152,7 +152,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			if(infor_->length)
 			{
 				int type_ = rect_?2:1;
-				if(type_ == 1 && length_ > infor_->length*infor_->length)
+				if(type_ == 1 && length_ > (infor_->length+1)*(infor_->length+1)-1)
 					it2 = env[current_level].mon_vector.end();
 				else if(type_ == 2 && infor_->length<max(abs(it2->position.x-you.position.x) ,abs(it2->position.y-you.position.y)))
 					it2 = env[current_level].mon_vector.end();
@@ -171,7 +171,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 					int length_ = pow((float)abs(it3->position.x-you.position.x),2)+pow((float)abs(it3->position.y-you.position.y),2);
 					if(length_<3)
 						length_ = 1;
-					if(!infor_->length || length_ <= infor_->length*infor_->length)
+					if(!infor_->length || length_ <= (infor_->length+1)*(infor_->length+1)-1)
 					{						
 						it2 = env[current_level].mon_vector.end();
 						you.search_pos = it3->position;
@@ -193,7 +193,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 						break;
 					{
 						int type_ = rect_?2:1;
-						if(type_ == 1 && length_ <= infor_->length*infor_->length)
+						if(type_ == 1 && length_ <= (infor_->length+1)*(infor_->length+1)-1)
 							break;
 						else if(type_ == 2 && infor_->length >= max(abs(it2->position.x-you.position.x) ,abs(it2->position.y-you.position.y)))
 							break;
@@ -265,7 +265,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 						int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);
 						if(length_<3)
 							length_ = 1;
-						if(!infor_->length || length_ <= infor_->length*infor_->length)
+						if(!infor_->length || length_ <= (infor_->length+1)*(infor_->length+1)-1)
 							break;
 					}
 					i++;
@@ -295,7 +295,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 						int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);
 						if(length_<3)
 							length_ = 1;
-						if(!infor_->length || length_ <= infor_->length*infor_->length)
+						if(!infor_->length || length_ <= (infor_->length+1)*(infor_->length+1)-1)
 							break;
 					}
 					i++;
@@ -415,8 +415,10 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 						waitkeyinput();
 						changedisplay(DT_GAME);
 					}
+					break;	
+				} else {
+					//ESC PASSTHORUGH
 				}
-				break;	
 			}
 			else if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH

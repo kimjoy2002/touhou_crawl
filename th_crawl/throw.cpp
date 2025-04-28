@@ -421,7 +421,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 				env[current_level].MakeEffect(postion_,item_->image,false);
 			Sleep(16);
 			length++;
-			if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>infor_.length*infor_.length)
+			if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>(infor_.length+1)*(infor_.length+1)-1)
 				break;
 			if(infor_.type1 == BMT_NORMAL || infor_.type1 == BMT_WALL)
 				env[current_level].ClearEffect();
@@ -570,7 +570,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 			{
 				for(int j = -infor_.length; j <= infor_.length;j++)
 				{
-					if(i*i+j*j>infor_.length*infor_.length || (i==0 && j==0))
+					if(i*i+j*j>(infor_.length+1)*(infor_.length+1)-1 || (i==0 && j==0))
 						continue;
 
 					float angle2_ = atan2((float)j, (float)i);
@@ -731,7 +731,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 		{
 			for(int j = -m_len_; j <= m_len_;j++)
 			{
-				if(i*i+j*j>m_len_*m_len_ || (i==0 && j==0))
+				if(i*i+j*j>(m_len_+1)*(m_len_+1)-1 || (i==0 && j==0))
 					continue;
 
 				float angle2_ = atan2((float)j, (float)i);
@@ -924,7 +924,7 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 		return;
 	}
 	beam_iterator beam(you.position,you.position);
-	projectile_infor infor(8,true,false);
+	projectile_infor infor(7,true,false);
 	int short_ = Common_Throw(it, it2, beam, &infor, -1,  0, auto_);
 	if(short_)
 	{

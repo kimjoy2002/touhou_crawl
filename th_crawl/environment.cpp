@@ -1668,9 +1668,10 @@ bool environment::ActionItem(int delay_)
 }
 bool environment::DisableMove(coord_def pos_, bool view_)
 {
+	int sight_ = 7;
 	if(you.s_dimension)
 	{
-		if(abs(pos_.x - you.god_value[GT_YUKARI][0])>8 || abs(pos_.y - you.god_value[GT_YUKARI][1])>8)
+		if(abs(pos_.x - you.god_value[GT_YUKARI][0])>sight_ || abs(pos_.y - you.god_value[GT_YUKARI][1])>sight_)
 			return true; //차원고정의 범위 밖에 있다.
 	}
 	return false;
@@ -1916,6 +1917,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 }
 bool environment::PostoCheckSight(coord_def center_, coord_def target_, int lengths_, bool s_dimension_)
 {
+	int sight_ = 7;
 	//나중에 시야처리 루틴은 전부 이걸 호출하도록하자
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
@@ -1929,10 +1931,10 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 						
 			if(s_dimension_)
 			{
-				if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>8)
-					check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?17:-17;
-				if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>8)
-					check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?17:-17;
+				if(abs(you.god_value[GT_YUKARI][0] - check_pos_.x)>sight_)
+					check_pos_.x += (you.god_value[GT_YUKARI][0] - check_pos_.x)>0?(sight_*2+1):-(sight_*2+1);
+				if(abs(you.god_value[GT_YUKARI][1] - check_pos_.y)>sight_)
+					check_pos_.y += (you.god_value[GT_YUKARI][1] - check_pos_.y)>0?(sight_*2+1):-(sight_*2+1);
 			}
 
 

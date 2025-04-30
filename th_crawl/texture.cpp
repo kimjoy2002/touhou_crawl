@@ -1418,6 +1418,7 @@ textures img_command_door(&texture_item03, 163, 255);
 textures img_command_pray(&texture_item03, 164, 255);
 textures img_command_more_item(&texture_item03, 165, 255);
 textures img_command_more_view(&texture_item03, 166, 255);
+textures img_command_wide_search(&texture_item03, 191, 255);
 textures img_command_info_character(&texture_item03, 167, 255);
 textures img_command_info_faith(&texture_item03, 168, 255);
 textures img_command_info_iden(&texture_item03, 169, 255);

@@ -752,6 +752,9 @@ void MainLoop()
 						case SYSCMD_AUTOTANMAC:
 							auto_tanmac_onoff();
 							break;
+						case SYSCMD_WIDE_SEARCH:
+							Wide_Search();
+							break;
 						case SYSCMD_SKILL_VIEW:
 							skill_view();
 							break;

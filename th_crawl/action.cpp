@@ -462,21 +462,23 @@ bool stack_move(bool auto_)
 int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 {
 	int sight_ = 7;
+	int sight_x = option_mg.getTileMaxX();
+	int sight_y = option_mg.getTileMaxY();
 	int return_ = 1;
 	if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + sight_)
+		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + sight_x)
 		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + sight_))
 		you.search_pos.x+= c.x - you.position.x;
 	else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - sight_)
+		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - sight_x)
 		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - sight_))
 		you.search_pos.x-= you.position.x - c.x ;
 	if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + sight_)
+		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + sight_y)
 		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + sight_))
 		you.search_pos.y+= c.y - you.position.y;
 	else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - sight_)
+		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - sight_y)
 		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - sight_))
 		you.search_pos.y-= you.position.y -c.y;
 
@@ -795,7 +797,7 @@ void Search()
 	while(1)
 	{
 		InputedKey inputedKey;
-		switch(waitkeyinput(inputedKey))
+		switch(waitkeyinput(inputedKey,false,false, true))
 		{
 		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //위
@@ -864,11 +866,36 @@ void Search()
 			break;
 		case '.': 
 		case VK_RETURN:
+			deletelog();
 			you.search = false;
 			Long_Move(you.search_pos, true);
-			break;
+			return;
 		case -1:
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_MAP_CURSOR) {
+				you.search_pos = coord_def(inputedKey.val1, inputedKey.val2);
+				Move(coord_def(you.position.x,you.position.y));
+				break;
+			}
+			else if(inputedKey.mouse == MKIND_MAP) {
+				deletelog();
+				you.search = false;
+				Long_Move(you.search_pos, true);
+				return;
+			}
+			else if(inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+				if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
+				{
+					if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
+					{					
+						search_monspell_view((monster*)unit_);
+						changedisplay(DT_GAME);
+						break;
+					}
+				} else {
+					//ESC PASSTHORUGH
+				}
+			}
+			else if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {
@@ -901,7 +928,8 @@ void Wide_Search()
 	list<stair_struct> down_distans,up_distans;
 	while(1)
 	{
-		switch(waitkeyinput())
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey))
 		{
 		case '0':
 		case '1':
@@ -1070,6 +1098,41 @@ void Wide_Search()
 			deletelog();
 			Long_Move(you.search_pos, true);
 			return;
+		case -1:
+			if(inputedKey.mouse == MKIND_MAP) {
+				coord_def mouse_position = coord_def(inputedKey.val1, inputedKey.val2);
+				if(you.search_pos == mouse_position) {
+					widesearch = false;
+					you.search = false;
+					deletelog();
+					Long_Move(you.search_pos, true);
+					return;
+				} else {
+					you.search_pos = mouse_position;
+					Move(coord_def(you.position.x,you.position.y));
+					break;
+				}
+			}
+			else if(inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+				coord_def mouse_position = coord_def(inputedKey.val1, inputedKey.val2);
+				if(unit *unit_ = env[current_level].isMonsterPos(mouse_position.x,mouse_position.y))
+				{
+					if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(mouse_position))
+					{
+						search_monspell_view((monster*)unit_);
+						changedisplay(DT_GAME);
+					}
+					break;
+				} else {
+					//ESC PASSTHORUGH
+				}
+			}
+			else if(inputedKey.isRightClick()) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
 		default:
 			deletelog();
 			widesearch = false;

@@ -477,6 +477,7 @@ extern textures img_command_door;
 extern textures img_command_pray;
 extern textures img_command_more_item;
 extern textures img_command_more_view;
+extern textures img_command_wide_search;
 extern textures img_command_info_character;
 extern textures img_command_info_faith;
 extern textures img_command_info_iden;

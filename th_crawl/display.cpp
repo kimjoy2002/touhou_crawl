@@ -2913,247 +2913,6 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 	}
 
-	//아이템 박스 그리기
-	{
-		// scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidth();
-		// scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeight();
-		// infobox.init();
-		// {
-		// 	int i=0;
-		// 	RECT rc={32*(sight_x*2)+50, 10, option_mg.getWidth(), option_mg.getHeight()};
-		int start_x = 32*(sight_x*2)+52;
-		int start_y = max_minimap_y+16;
-
-		int tile_count = 0;
-		auto it = you.item_list.begin();
-		for(int j = 0; j < greed_max_y; j++) {
-			for(int i = 0; i < greed_max_x; i++) {
-				if(tile_count < 20) {
-					if(selection_vector.size() > 0) {
-						textures* pixel_ = &img_command_empty;
-						
-						if(selection_vector.size() > tile_count) {
-							pixel_ = getSelectTexure(selection_vector[tile_count]);
-						}
-						int x_ = start_x+i*32, y_ = start_y+j*32;
-
-						pixel_->draw(pSprite,x_,y_,255);
-						
-						if(pixel_ != &img_command_empty) {
-							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-								
-								mouseInfo = getCilnkableString(selection_vector[tile_count]);
-								mouseColor = CL_help;
-								if(isClicked(LEFT_CLICK)) {
-									MSG msg;
-									msg.message = WM_CHAR;
-									msg.wParam = convertClickable(selection_vector[tile_count]);
-									g_keyQueue->push(InputedKey(msg));
-								}
-							}
-						}
-					} else {					
-						//명령어들
-						textures* pixel_ = &img_command_empty;
-						int value_ = 0;
-						switch(tile_count) {
-							case SYSCMD_AUTOTRAVEL:
-								pixel_ = &img_command_autotravel;
-								break;
-							case SYSCMD_AUTOATTACK:
-								pixel_ = &img_command_autoattack;
-								break;
-							case SYSCMD_100REST:
-								pixel_ = &img_command_100sleep;
-								break;
-							case SYSCMD_MAGIC:
-								pixel_ = &img_command_magic;
-								break;
-							case SYSCMD_SKILL:
-								pixel_ = &img_command_skill;
-								break;
-							case SYSCMD_SHOUT:
-								pixel_ = &img_command_shout;
-								break;
-							case SYSCMD_DOOR_OPENCLOSE:
-								pixel_ = &img_command_door;
-								break;
-							case SYSCMD_PRAY:
-								pixel_ = &img_command_pray;
-								break;
-							case SYSCMD_MORE_ITEM:
-								pixel_ = &img_command_more_item; 
-								break;
-							case SYSCMD_AUTOPICKUP:
-								pixel_ = (you.auto_pickup>0?&img_command_pickon:
-								&img_command_pickoff);
-								value_ = you.auto_pickup;
-								break;
-							case SYSCMD_AUTOTANMAC:
-								pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:
-								(you.useMouseTammac==1?&img_command_tanmac_on:
-								&img_command_tanmac_off));
-								value_ = you.useMouseTammac;
-								break;
-							case SYSCMD_SKILL_VIEW:
-								pixel_ = &img_command_skill_view; 
-								break;
-							case SYSCMD_MORE_VIEW:
-								pixel_ = &img_command_more_view;
-								break;
-							case SYSCMD_HELP:
-								pixel_ = &img_command_help;
-								break;
-							case SYSCMD_QUIT:
-								pixel_ = &img_command_quit;
-								break;
-							default:
-								 break;
-						}
-						int x_ = start_x+i*32, y_ = start_y+j*32;
-
-						pixel_->draw(pSprite,x_,y_,255);
-						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-							mouseInfo = getCommandString(tile_count, value_);
-							mouseColor = CL_help;
-							if(isClicked(LEFT_CLICK)) {
-								g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
-							}
-						}
-					}
-				}
-				else if(tile_count>=20 && tile_count < 72) {
-					if(spell_skill_vector.size() > 0) {
-						int spell_tile_count = tile_count - 20;
-					    int id_ = 0;
-						textures* pixel_ = &img_item_empty_itembox;
-						
-						if(spell_skill_vector.size() > spell_tile_count) {
-							id_ = spell_skill_vector[spell_tile_count];
-							pixel_ = getSelectTexure(id_);
-						}
-						int x_ = start_x+i*32, y_ = start_y+j*32+10;
-
-						pixel_->draw(pSprite,x_,y_,255);
-						
-						if(pixel_ != &img_command_empty && id_ != 0) {
-							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-								if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
-									spell_list focus_spell_id = (spell_list)you.MemorizeSpell[asctonum(id_)];
-									if(focus_spell_id != SPL_NONE) {
-										int miscast_level_ = SpellMiscastingLevel(SpellLevel(focus_spell_id), 100-you.GetSpellSuccess(focus_spell_id));
-										D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
-											(miscast_level_==2?CL_small_danger:
-											(miscast_level_==1?CL_warning:CL_STAT)));
-										ostringstream ss;
-										ss << SpellString(focus_spell_id) << " (" << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ":" << (100 -you.GetSpellSuccess(focus_spell_id))<< "%)";
-										mouseInfo = ss.str();
-										mouseColor = spell_color_;
-									}
-								}
-								if(isClicked(LEFT_CLICK)) {
-									MSG msg;
-									msg.message = WM_CHAR;
-									msg.wParam = convertClickable(id_);
-									g_keyQueue->push(InputedKey(msg));
-								}
-								else if(isClicked(RIGHT_CLICK)) {
-									if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
-										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,id_,0));
-									}
-								}
-							}
-						}
-					}
-					else {
-						bool equip_ = false, curse = false, throw_ = false, evokable = false;
-						int x_ = start_x+i*32, y_ = start_y+j*32+10;
-						if(it != you.item_list.end()) {
-							equip_ = (you.isequip(it)>0);
-							throw_ = (you.throw_weapon == &(*it));
-							curse = (it->identify_curse || equip_) && it->curse;
-							if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
-								evokable = true;
-							}
-						}
-						if(equip_) {
-							if(evokable) {
-								img_item_evokable_itembox.draw(pSprite,x_,y_,255);
-							}
-							else if(curse) {
-								img_item_curse_itembox.draw(pSprite,x_,y_,255);
-							} 
-							else {
-								img_item_equip_itembox.draw(pSprite,x_,y_,255);
-							}
-						} 
-						else if(throw_) {
-							img_item_select_itembox.draw(pSprite,x_,y_,255);
-						} else {
-							if(curse) {
-								img_item_maycurse_itembox.draw(pSprite,x_,y_,255);
-							}
-							else {
-								img_item_empty_itembox.draw(pSprite,x_,y_,255);
-							}
-
-						}
-						if(it != you.item_list.end()) {
-							it->draw(pSprite,pfont,x_,y_);						
-							{ //마우스
-								if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-									MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-									mouseInfo = string(1,it->id) + " - " + it->GetName();
-									mouseColor = it->item_color();
-
-									if(isClicked(LEFT_CLICK)) {
-										g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
-									}
-									else if(isClicked(RIGHT_CLICK)) {
-										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));
-									}
-								}
-
-							}
-							it++;
-						}
-					}
-				} else {
-					int x_ = start_x+i*32, y_ = start_y+j*32+10;
-					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true, false);
-					if(floor_items != env[current_level].item_list.end()) {
-						if(floor_items->position == you.position ) {
-							floor_items->draw(pSprite,pfont,x_,y_);
-							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
-								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
-
-								mouseInfo = floor_items->GetName();
-								mouseColor = floor_items->item_color();
-
-								if(isClicked(LEFT_CLICK)) {
-									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
-								}
-								else if(isClicked(RIGHT_CLICK)) {
-									g_keyQueue->push(InputedKey(MKIND_PICK_DESCRIPTION,tile_count-72,0));
-								}
-							}
-							floor_items++;
-						}
-					}
-				}
-				tile_count++;
-			}
-		}
-	}
-
 
 	//바닥 효과 그리기
 	{
@@ -3341,6 +3100,255 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			sight_rect.draw(pSprite,GetDotX(x_+sight_x,sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
 		}
 	}
+
+
+
+
+	//아이템 박스 그리기
+	{
+		// scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidth();
+		// scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeight();
+		// infobox.init();
+		// {
+		// 	int i=0;
+		// 	RECT rc={32*(sight_x*2)+50, 10, option_mg.getWidth(), option_mg.getHeight()};
+		int start_x = 32*(sight_x*2)+52;
+		int start_y = max_minimap_y+16;
+
+		int tile_count = 0;
+		auto it = you.item_list.begin();
+		for(int j = 0; j < greed_max_y; j++) {
+			for(int i = 0; i < greed_max_x; i++) {
+				if(tile_count < 20) {
+					if(selection_vector.size() > 0) {
+						textures* pixel_ = &img_command_empty;
+						
+						if(selection_vector.size() > tile_count) {
+							pixel_ = getSelectTexure(selection_vector[tile_count]);
+						}
+						int x_ = start_x+i*32, y_ = start_y+j*32;
+
+						pixel_->draw(pSprite,x_,y_,255);
+						
+						if(pixel_ != &img_command_empty) {
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								
+								mouseInfo = getCilnkableString(selection_vector[tile_count]);
+								mouseColor = CL_help;
+								if(isClicked(LEFT_CLICK)) {
+									MSG msg;
+									msg.message = WM_CHAR;
+									msg.wParam = convertClickable(selection_vector[tile_count]);
+									g_keyQueue->push(InputedKey(msg));
+								}
+							}
+						}
+					} else {					
+						//명령어들
+						textures* pixel_ = &img_command_empty;
+						int value_ = 0;
+						switch(tile_count) {
+							case SYSCMD_AUTOTRAVEL:
+								pixel_ = &img_command_autotravel;
+								break;
+							case SYSCMD_AUTOATTACK:
+								pixel_ = &img_command_autoattack;
+								break;
+							case SYSCMD_100REST:
+								pixel_ = &img_command_100sleep;
+								break;
+							case SYSCMD_MAGIC:
+								pixel_ = &img_command_magic;
+								break;
+							case SYSCMD_SKILL:
+								pixel_ = &img_command_skill;
+								break;
+							case SYSCMD_SHOUT:
+								pixel_ = &img_command_shout;
+								break;
+							case SYSCMD_DOOR_OPENCLOSE:
+								pixel_ = &img_command_door;
+								break;
+							case SYSCMD_PRAY:
+								pixel_ = &img_command_pray;
+								break;
+							case SYSCMD_MORE_ITEM:
+								pixel_ = &img_command_more_item; 
+								break;
+							case SYSCMD_AUTOPICKUP:
+								pixel_ = (you.auto_pickup>0?&img_command_pickon:
+								&img_command_pickoff);
+								value_ = you.auto_pickup;
+								break;
+							case SYSCMD_AUTOTANMAC:
+								pixel_ = (you.useMouseTammac==2?&img_command_tanmac_auto:
+								(you.useMouseTammac==1?&img_command_tanmac_on:
+								&img_command_tanmac_off));
+								value_ = you.useMouseTammac;
+								break;
+							case SYSCMD_WIDE_SEARCH:
+								pixel_ = &img_command_wide_search;
+								break;
+							case SYSCMD_SKILL_VIEW:
+								pixel_ = &img_command_skill_view; 
+								break;
+							case SYSCMD_MORE_VIEW:
+								pixel_ = &img_command_more_view;
+								break;
+							case SYSCMD_HELP:
+								pixel_ = &img_command_help;
+								break;
+							case SYSCMD_QUIT:
+								pixel_ = &img_command_quit;
+								break;
+							default:
+								 break;
+						}
+						int x_ = start_x+i*32, y_ = start_y+j*32;
+
+						pixel_->draw(pSprite,x_,y_,255);
+						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+							mouseInfo = getCommandString(tile_count, value_);
+							mouseColor = CL_help;
+							if(isClicked(LEFT_CLICK)) {
+								g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
+							}
+						}
+					}
+				}
+				else if(tile_count>=20 && tile_count < 72) {
+					if(spell_skill_vector.size() > 0) {
+						int spell_tile_count = tile_count - 20;
+					    int id_ = 0;
+						textures* pixel_ = &img_item_empty_itembox;
+						
+						if(spell_skill_vector.size() > spell_tile_count) {
+							id_ = spell_skill_vector[spell_tile_count];
+							pixel_ = getSelectTexure(id_);
+						}
+						int x_ = start_x+i*32, y_ = start_y+j*32+10;
+
+						pixel_->draw(pSprite,x_,y_,255);
+						
+						if(pixel_ != &img_command_empty && id_ != 0) {
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+								if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
+									spell_list focus_spell_id = (spell_list)you.MemorizeSpell[asctonum(id_)];
+									if(focus_spell_id != SPL_NONE) {
+										int miscast_level_ = SpellMiscastingLevel(SpellLevel(focus_spell_id), 100-you.GetSpellSuccess(focus_spell_id));
+										D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
+											(miscast_level_==2?CL_small_danger:
+											(miscast_level_==1?CL_warning:CL_STAT)));
+										ostringstream ss;
+										ss << SpellString(focus_spell_id) << " (" << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ":" << (100 -you.GetSpellSuccess(focus_spell_id))<< "%)";
+										mouseInfo = ss.str();
+										mouseColor = spell_color_;
+									}
+								}
+								if(isClicked(LEFT_CLICK)) {
+									MSG msg;
+									msg.message = WM_CHAR;
+									msg.wParam = convertClickable(id_);
+									g_keyQueue->push(InputedKey(msg));
+								}
+								else if(isClicked(RIGHT_CLICK)) {
+									if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,id_,0));
+									}
+								}
+							}
+						}
+					}
+					else {
+						bool equip_ = false, curse = false, throw_ = false, evokable = false;
+						int x_ = start_x+i*32, y_ = start_y+j*32+10;
+						if(it != you.item_list.end()) {
+							equip_ = (you.isequip(it)>0);
+							throw_ = (you.throw_weapon == &(*it));
+							curse = (it->identify_curse || equip_) && it->curse;
+							if(it->type == ITM_AMULET && equip_ /* && isCanEvoke((amulet_type)(*it).value1) 발동하지않아도 표시하면 좋을듯*/ && you.getAmuletPercent() >= 100) {
+								evokable = true;
+							}
+						}
+						if(equip_) {
+							if(evokable) {
+								img_item_evokable_itembox.draw(pSprite,x_,y_,255);
+							}
+							else if(curse) {
+								img_item_curse_itembox.draw(pSprite,x_,y_,255);
+							} 
+							else {
+								img_item_equip_itembox.draw(pSprite,x_,y_,255);
+							}
+						} 
+						else if(throw_) {
+							img_item_select_itembox.draw(pSprite,x_,y_,255);
+						} else {
+							if(curse) {
+								img_item_maycurse_itembox.draw(pSprite,x_,y_,255);
+							}
+							else {
+								img_item_empty_itembox.draw(pSprite,x_,y_,255);
+							}
+
+						}
+						if(it != you.item_list.end()) {
+							it->draw(pSprite,pfont,x_,y_);						
+							{ //마우스
+								if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+									MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+									mouseInfo = string(1,it->id) + " - " + it->GetName();
+									mouseColor = it->item_color();
+
+									if(isClicked(LEFT_CLICK)) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+									}
+									else if(isClicked(RIGHT_CLICK)) {
+										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));
+									}
+								}
+
+							}
+							it++;
+						}
+					}
+				} else {
+					int x_ = start_x+i*32, y_ = start_y+j*32+10;
+					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true, false);
+					if(floor_items != env[current_level].item_list.end()) {
+						if(floor_items->position == you.position ) {
+							floor_items->draw(pSprite,pfont,x_,y_);
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+								mouseInfo = floor_items->GetName();
+								mouseColor = floor_items->item_color();
+
+								if(isClicked(LEFT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
+								}
+								else if(isClicked(RIGHT_CLICK)) {
+									g_keyQueue->push(InputedKey(MKIND_PICK_DESCRIPTION,tile_count-72,0));
+								}
+							}
+							floor_items++;
+						}
+					}
+				}
+				tile_count++;
+			}
+		}
+	}
+
+
 
 
 
@@ -3986,6 +3994,8 @@ string getCommandString(int kind, int value) {
 		return LocalzationManager::locString(value>0?LOC_SYSTEM_CMD_AUTOPICKUP_ON:LOC_SYSTEM_CMD_AUTOPICKUP_OFF);
 	case SYSCMD_AUTOTANMAC:
 		return LocalzationManager::locString(value==2?LOC_SYSTEM_CMD_AUTOTANMAC_AUTO:(value==1?LOC_SYSTEM_CMD_AUTOTANMAC_ON:LOC_SYSTEM_CMD_AUTOTANMAC_OFF));
+	case SYSCMD_WIDE_SEARCH:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_WIDE_SEARCH);
 	case SYSCMD_SKILL_VIEW:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_SKILL_VIEW);
 	case SYSCMD_MORE_VIEW:

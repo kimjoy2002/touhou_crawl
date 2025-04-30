@@ -212,6 +212,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 	{
 		InputedKey inputedKey;
 		vector<int> selection_list;
+		selection_list.push_back('.');
 		selection_list.push_back('+');
 		selection_list.push_back('-');
 		if(infor_->isitem)

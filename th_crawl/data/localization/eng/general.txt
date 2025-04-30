@@ -387,6 +387,7 @@ LOC_SYSTEM_CMD_AUTOPICKUP_OFF,Manual Item Pickup Enabled
 LOC_SYSTEM_CMD_AUTOTANMAC_ON,Auto Battle: Always Using Danmaku
 LOC_SYSTEM_CMD_AUTOTANMAC_OFF,Auto Battle: Danmaku Disabled
 LOC_SYSTEM_CMD_AUTOTANMAC_AUTO,Auto Battle: Danmaku at Long Range
+LOC_SYSTEM_CMD_WIDE_SEARCH,Wide Search
 LOC_SYSTEM_CMD_SKILL_VIEW,Display Skills and Allocate Experience
 LOC_SYSTEM_CMD_MORE_VIEW,More Information Commands
 LOC_SYSTEM_CMD_HELP,Help

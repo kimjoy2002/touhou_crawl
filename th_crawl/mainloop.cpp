@@ -560,11 +560,13 @@ void MainLoop()
 							int target_abs_ = (target_pos - you.position).abs();
 							int abs_ = ((*beam) - you.position).abs();
 							bool unable_throw = throw_prev_fail(true);
-							if(env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you) 
+							unit *mon_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you);
+							if((mon_ != nullptr) && mon_->isplayer() == false
 							 && you.useMouseTammac > 0
 							 && !unable_throw 
 							 && you.throw_weapon
 							 && (target_abs_ > 2 || you.useMouseTammac == 1) ) {
+								you.target = ((monster*)mon_)->map_id;
 								Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
 							} else if(abs_ == 1 || abs_ == 2) {
 								action_Move(0, (*beam));

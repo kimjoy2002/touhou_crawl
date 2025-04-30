@@ -367,6 +367,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	
 	SaveData<int>(fp, *rune, RUNE_MAX);
+	SaveData<int>(fp, target);
 	SaveData<int>(fp, useMouseTammac);
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 }
@@ -612,7 +613,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<lilly_ally>(fp, *lilly_allys);	
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
-	LoadData<int>(fp, *rune);		
+	LoadData<int>(fp, *rune);
+	LoadData<int>(fp, target);
 	LoadData<int>(fp, useMouseTammac);
 	{
 		char temp_id_=0;

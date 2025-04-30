@@ -209,6 +209,7 @@ void repeat_action()
 }
 
 
+bool throw_prev_fail(bool no_speak);
 
 void auto_battle()
 {
@@ -231,18 +232,25 @@ void auto_battle()
 
 	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
 	if(mon_)
-	{		
-		for(int i=RT_BEGIN;i!=RT_END;i++)
-		{
-			beam_iterator it(you.position,mon_->position,(round_type)i);
-			if(env[current_level].dgtile[(*it).x][(*it).y].isMove(true,false,false))
+	{
+		int target_abs_ = (mon_->position - you.position).abs();
+		bool unable_throw = throw_prev_fail(true);
+		if(you.useMouseTammac > 0
+		 && !unable_throw 
+		 && you.throw_weapon
+		 && (target_abs_ > 2 || you.useMouseTammac == 1) ) {
+			you.target = ((monster*)mon_)->map_id;
+			Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
+		 } else {
+			for(int i=RT_BEGIN;i!=RT_END;i++)
 			{
-				Move((*it));
-				you.SetPrevAction(VK_TAB);
-				return;
-			}
-			else
-			{
+				beam_iterator it(you.position,mon_->position,(round_type)i);
+				if(env[current_level].dgtile[(*it).x][(*it).y].isMove(true,false,false))
+				{
+					Move((*it));
+					you.SetPrevAction(VK_TAB);
+					return;
+				}
 			}
 		}
 	}
@@ -1102,6 +1110,15 @@ void Wide_Search()
 			if(inputedKey.mouse == MKIND_MAP) {
 				coord_def mouse_position = coord_def(inputedKey.val1, inputedKey.val2);
 				if(you.search_pos == mouse_position) {
+					if(unit *unit_ = env[current_level].isMonsterPos(mouse_position.x,mouse_position.y))
+					{
+						if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(mouse_position))
+						{
+							search_monspell_view((monster*)unit_);
+							changedisplay(DT_GAME);
+							break;
+						}
+					} 
 					widesearch = false;
 					you.search = false;
 					deletelog();

@@ -195,13 +195,12 @@ public:
 class stateBox
 {
 	shared_ptr<DirectX::SpriteBatch> pSprite;
-	shared_ptr<DirectX::SpriteFont> pfont;
 	RECT start_rc;
 	RECT rc;
 	int width;
 	int current;
 public:
-	stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, shared_ptr<DirectX::SpriteFont> pfont_, RECT start_rc_);
+	stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, RECT start_rc_);
 	void addState(string name, D3DCOLOR color, string info, display_manager* display);
 	void enter(display_manager* display);
 };

@@ -19,6 +19,7 @@
 #include "FSM.h"
 #include "option_manager.h"
 #include "soundmanager.h"
+#include "steam_api.h"
 #include <wrl/client.h>  
 
 
@@ -68,6 +69,21 @@ extern ID3D11DeviceContext* g_pImmediateContext;
 shared_ptr<DirectX::SpriteBatch> g_pSprite = NULL; //스프라이트포인터 
 shared_ptr<DirectX::SpriteFont> g_pfont = NULL;
 Microsoft::WRL::ComPtr<ID3D11BlendState> g_pAlphaBlendState;
+
+
+
+bool loading_font(string font_name) {
+	std::wstring path = ConvertUTF8ToUTF16("./data/font/" + font_name + "_m.spritefont");
+	shared_ptr<DirectX::SpriteFont> temp_font = std::make_shared<DirectX::SpriteFont>(
+		g_pd3dDevice,
+		path.c_str());
+	if(temp_font != nullptr) {
+		g_pfont = temp_font;
+		return true;
+	}
+	return false;
+}
+
 //
 // 초기화 함수
 //
@@ -77,9 +93,7 @@ bool Setup()
 
 	InitSampler(g_pd3dDevice);
 	// 글꼴 로드 (.spritefont 방식)
-	g_pfont = std::make_shared<DirectX::SpriteFont>(
-		g_pd3dDevice,
-		L"./data/font/D2Coding_14.spritefont");
+	loading_font(LocalzationManager::getCurrentFont());
 
 	// SpriteBatch 생성
 	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
@@ -219,6 +233,9 @@ extern void init_save_paths();
 //
 // 윈메인
 //
+void init_localization();
+
+
 
 int WINAPI WinMain(HINSTANCE hinstance,
 				   HINSTANCE prevInstance, 
@@ -230,7 +247,9 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	srand((unsigned int)map_list.random_number);
 
 	g_keyQueue = std::make_unique<KeyInputQueue>();
+	steam_mg.steamInit();
 	init_save_paths();
+	init_localization();
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D11(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), !option_mg.getFullscreen()))

@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "option_manager.h"
+#include "steam_api.h"
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -26,6 +27,7 @@ vector<screen_info> able_screens = {
 };
 
 void optionManager::init(string fileName) {
+	this->steam_lang = steam_mg.getSteamLang();
 	this->fileName = fileName;
 	struct stat stStat = { 0 };
 
@@ -79,7 +81,7 @@ void optionManager::init(string fileName) {
 		// GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		// server_port = _tstoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("language"), _T("ENG"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		GetPrivateProfileString(_T("config"), _T("language"), _T(steam_lang.c_str()), szBuf, MAX_STR_SIZE, fileName.c_str());
 		lang = TCHARToString(szBuf);
 	}
 }
@@ -117,7 +119,7 @@ void optionManager::createNewFile(string fileName) {
 	// tchr = (TCHAR*)(LPCTSTR)strString;
 	// WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
 
-	strString = _T("ENG");
+	strString = _T(steam_lang.c_str());
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("language"), tchr, fileName.c_str());
 }

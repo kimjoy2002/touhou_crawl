@@ -116,7 +116,7 @@ public:
         if (it != map_.end()) {
             return it->second;
         }
-        return "";
+        return V();
     }
 
 private:

@@ -452,7 +452,6 @@ unsigned int WINAPI GameLoop(void *arg)
 
 unsigned int WINAPI GameInnerLoop()
 {
-	init_localization();
 	charter_selete();
 	MainLoop();
 	return 0;

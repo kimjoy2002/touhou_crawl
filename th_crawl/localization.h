@@ -50,11 +50,15 @@ public:
     TextHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
 };
 
+struct localizationInfo {
+    std::string name;
+    std::string font;
+};
 
 
 class LocalzationManager {
 private:
-    static OrderedMap<string, string> localization_type;
+    static OrderedMap<string, localizationInfo> localization_type;
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
@@ -168,6 +172,7 @@ public:
 
 	static string langString(string key);
 	static string getNextLang(string cur);
+	static string getCurrentFont();
 	static const string& locString(LOCALIZATION_ENUM_KEY key);
 	static const string& speakString(SPEAK_ENUM_KEY key);
 	static const string& monString(monster_index key);

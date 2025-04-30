@@ -18,7 +18,7 @@
 
 
 string LocalzationManager::current_lang = "ENG";
-OrderedMap<string, string> LocalzationManager::localization_type;
+OrderedMap<string, localizationInfo> LocalzationManager::localization_type;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_enum_reverse_map = createEnumReverseMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
@@ -131,17 +131,24 @@ void LocalzationManager::initLocalization() {
 					line = line.substr(3); // BOM 제거
 				}
 			}
-			int pos = line.find(",");
 
-			if(pos != string::npos && pos + 1 < line.size()) {
-				localization_type.insert(line.substr(0,pos),line.substr(pos+1));
-			}
+            vector<string> tokens;
+            size_t start = 0, end;
+            while ((end = line.find(",", start)) != string::npos) {
+                tokens.push_back(line.substr(start, end - start));
+                start = end + 1;
+            }
+            tokens.push_back(line.substr(start)); // 마지막 항목
+
+            if (tokens.size() >= 3) {
+                localization_type.insert(tokens[0], localizationInfo{tokens[1], tokens[2]});
+            }
 		}
 	}
 	if(localization_type.empty()) {
 		//기본값
-		localization_type.insert("ENG","English");
-		localization_type.insert("KOR","한국어");
+		localization_type.insert("ENG", {"English", "D2Coding"});
+		localization_type.insert("KOR", {"한국어", "D2Coding"});
 		if(!file) {
 			std::ofstream outfile(filepath, std::ios::binary);
 			if (outfile.is_open()) {
@@ -150,7 +157,7 @@ void LocalzationManager::initLocalization() {
 				outfile.write(reinterpret_cast<const char*>(bom), sizeof(bom));
 				
 				for (auto it : localization_type.ordered_entries()) {
-					outfile << it.first << "," << it.second << "\n";
+                    outfile << it.first << "," << it.second.name << "," << it.second.font << "\n";
 				}
 				outfile.close();
 			}
@@ -186,13 +193,13 @@ void LocalzationManager::initFileSimple(const string& path, const string& filena
 }
 
 string LocalzationManager::langString(string key) {
-	return localization_type.find(key);
+	return localization_type.find(key).name;
 }
 
 string LocalzationManager::getNextLang(string cur) {
 	bool next_ = false;
 	string first_;
-	for(pair<string, string> pair_ : localization_type.ordered_entries()) {
+	for(pair<string, localizationInfo> pair_ : localization_type.ordered_entries()) {
 		if(first_.empty()){
 			first_ = pair_.first;
 		}
@@ -204,6 +211,9 @@ string LocalzationManager::getNextLang(string cur) {
 		}
 	}
 	return first_;
+}
+string LocalzationManager::getCurrentFont() {
+	return localization_type.find(current_lang).font;
 }
 
 const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO) {} 문법이 이쓰면 formatString으로 바꾸기

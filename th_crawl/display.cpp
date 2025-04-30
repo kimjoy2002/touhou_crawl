@@ -81,8 +81,8 @@ infoBox::infoBox()
 	draw = false;
 
 }	
-stateBox::stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, shared_ptr<DirectX::SpriteFont> pfont_, RECT start_rc_):
-pSprite(pSprite_), pfont(pfont_), start_rc(start_rc_), rc(start_rc_),
+stateBox::stateBox(shared_ptr<DirectX::SpriteBatch> pSprite_, RECT start_rc_):
+pSprite(pSprite_), start_rc(start_rc_), rc(start_rc_),
 width(34), current(0)
 {
 }
@@ -1831,7 +1831,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				rc.left += fontDesc.Width;
 			}
 		}
-		rc.left -= fontDesc.Width*32;
+		rc.left = 32*(sight_x*2)+50;
 
 
 		rc.top += fontDesc.Height;
@@ -1854,10 +1854,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					DrawTextUTF8(pfont,pSprite, "=", -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_bad);
 					rc.left += fontDesc.Width;
 				}
-				rc.left -= fontDesc.Width * 32;
 			}
 			rc.top += fontDesc.Height;
 		}
+		rc.left = 32*(sight_x*2)+50;
 
 
 
@@ -2136,7 +2136,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		rc.top += fontDesc.Height;
 		buff_start_y = rc.top;
 		{ 
-			stateBox stateDraw(pSprite, pfont, rc);
+			stateBox stateDraw(pSprite, rc);
 
 
 			if(wiz_list.wizard_mode == 1)
@@ -3467,8 +3467,8 @@ void stateBox::addState(string name, D3DCOLOR color, string info, display_manage
 	{
 		enter(display);
 	}
-	DrawTextUTF8(pfont,pSprite, name, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color);
-	display->CheckMouseInfo(pSprite, pfont, rc, display->fontDesc.Width * sizeOfName, display->fontDesc.Height, info);
+	DrawTextUTF8(g_pfont,pSprite, name, -1, &rc, DT_SINGLELINE | DT_NOCLIP, color);
+	display->CheckMouseInfo(pSprite, g_pfont, rc, display->fontDesc.Width * sizeOfName, display->fontDesc.Height, info);
 	rc.left += display->fontDesc.Width * (sizeOfName+1);
 	current += (sizeOfName + 1);
 }

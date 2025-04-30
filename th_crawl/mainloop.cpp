@@ -281,7 +281,7 @@ void charter_selete()
 	for(int i = 0; i<MAXLEVEL; i++)
 		env[i].floor = i;
 	
-	bool isSteamInit = steam_mg.steamInit();
+	bool isSteamInit = steam_mg.isInit();
 
 	WaitForSingleObject(mutx, INFINITE);
 	SetText() = LocalzationManager::locString(LOC_SYSTEM_TITLE_TOUHOUCRAWL);
@@ -997,14 +997,7 @@ void MainLoop()
 			wiz_mode();
 			break;
 		case '_': //스팀 디버깅
-			printlog("이 텍스트는 과도한 줄길이를 출력하였을때 제대로 짤리는지 확인하기위한 긴 텍스트입니다. 확인을 위해 더 길게 하겠습니다. 아주 길쭉해요.", false, false, false, CL_help);
-			//steam_mg.debugText();
-			break;
-		case '0':
-			for(int i = 0; i < 10; i++) {
-				printlog("테스트 텍스트입니다. ", false, false, false, CL_help);
-			}
-			//steam_mg.debugText();
+			steam_mg.debugText();
 			break;
 		case 0x8B:
 			auto_pick_onoff(false);
@@ -1028,6 +1021,9 @@ void MainLoop()
 }
 
 bool g_changefullscreen = false;
+extern display_manager DisplayManager;
+
+bool loading_font(string font_name);
 
 bool option_menu(int value_)
 {
@@ -1091,6 +1087,10 @@ bool option_menu(int value_)
 					LocalzationManager::init(lang, false);
 				}
 				option_mg.setLang(lang);
+				if(!LocalzationManager::getCurrentFont().empty()) {
+					loading_font(LocalzationManager::getCurrentFont());
+				}
+				DisplayManager.Getfontinfor();
 			}
 			bool should_reload = false;
 			if( origin_w != width_ || origin_h != height_) {

@@ -76,6 +76,51 @@ const char* steam_manager::getAchievementId(achievement_enum enum_) {
     }
 }
 
+std::string mapSteamLangToIso3(const std::string& steamLang) {
+    static const std::unordered_map<std::string, std::string> langMap = {
+        {"english", "ENG"},
+        {"koreana", "KOR"},
+        {"japanese", "JPN"},
+        {"schinese", "ZHS"},
+        {"tchinese", "ZHT"},
+        {"german", "DEU"},
+        {"french", "FRA"},
+        {"spanish", "SPA"},
+        {"russian", "RUS"},
+        {"portuguese", "POR"},
+        {"brazilian", "POR"},
+        {"polish", "POL"},
+        {"thai", "THA"},
+        {"vietnamese", "VIE"},
+        {"italian", "TIE"},
+        {"turkish", "TUR"}
+    };
+
+    auto it = langMap.find(steamLang);
+    if(it != langMap.end()) {
+		return it->second;
+	}
+	else if (steamLang.length() >= 3){
+		std::string result = steamLang.substr(0, 3); 
+		std::transform(result.begin(), result.end(), result.begin(), ::toupper);
+		return result;
+	} else {
+		return "ENG";
+	}
+}
+
+
+string steam_manager::getSteamLang() {
+	if(!init)
+		return "ENG";
+
+    const char* lang = SteamApps()->GetCurrentGameLanguage();
+	if(lang != nullptr) {
+		return mapSteamLangToIso3(lang);
+	}
+	return "ENG";
+}
+
 void steam_manager::achievement(achievement_enum achievement) {
 	if(!init)
 		return;
@@ -96,6 +141,7 @@ void steam_manager::achievement(achievement_enum achievement) {
 void steam_manager::debugText() {
 	if(!init) {
 		printlog("스팀에 연결되어있지않습니다.",true,false,false,CL_help);
+		return;
 	}
     printlog("=== 현재 스팀 정보 ===", true, false, false, CL_help);
 
@@ -108,6 +154,10 @@ void steam_manager::debugText() {
     // 언어 설정
     const char* lang = SteamApps()->GetCurrentGameLanguage();
     printlog(" 게임 언어: " + std::string(lang), false, false, false, CL_help);
+
+    // 언어 설정
+    const char* langs = SteamApps()->GetAvailableGameLanguages();
+    printlog(" 가능한 게임 언어: " + std::string(langs), false, false, false, CL_help);
 
 	enterlog();
 

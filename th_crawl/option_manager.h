@@ -28,6 +28,7 @@ struct screen_info {
 class optionManager {
 	string fileName;
 	string name;
+	string steam_lang;
 
 	int current_pos;
 	int height;

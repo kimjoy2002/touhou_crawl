@@ -29,10 +29,12 @@ private:
 
 public:
 	bool steamInit();
+	bool isInit(){return init;};
 	string getSteamUserName();
 	void setCurrentInfo();
 	void setCurrentMainMenuInfo();
 	void setCurrentInfo(string tribe, string job, string charname, int level, string which);
+	string getSteamLang();
 	void achievement(achievement_enum achievement);
 	
 	void debugText();

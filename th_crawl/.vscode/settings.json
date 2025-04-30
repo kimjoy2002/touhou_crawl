@@ -60,7 +60,8 @@
         "ratio": "cpp",
         "mutex": "cpp",
         "thread": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "xutility": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

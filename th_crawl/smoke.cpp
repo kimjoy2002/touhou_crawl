@@ -258,7 +258,7 @@ int smoke::danger(unit* unit_, bool first_)
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_POISON:
 	case SMT_SLOW:
-		danger_ = unit_->isplayer()?(unit_->GetPoisonResist()>0?999:0):(unit_->GetPoisonResist()>0?30:0);
+		danger_ = unit_->isplayer()?(unit_->GetPoisonResist()>0?0:999):(unit_->GetPoisonResist()>0?0:30);
 		return (danger_>prev_danger)?danger_:0;
 	case SMT_TWIST:
 		danger_ = unit_->isplayer()?50:(unit_->GetCloudResist()?0:25);

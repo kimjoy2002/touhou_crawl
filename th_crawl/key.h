@@ -11,6 +11,9 @@
 
 #include <queue>
 #include <chrono>
+#include <string>
+
+using namespace std;
 
 struct InputedKey;
 
@@ -18,7 +21,7 @@ int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = fals
 int waitkeyinput(bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
 int MoreWait();
 bool isKeyinput();
-
+string getKeyboardInputString();
 
 extern bool game_over;
 

@@ -1034,6 +1034,10 @@ void MainLoop()
 			//waitkeyinput();
 			wiz_mode();
 			break;
+		case '0': //입력 디버깅
+			getKeyboardInputString();
+			enterlog();
+			break;
 		case '_': //스팀 디버깅
 			steam_mg.debugText();
 			break;

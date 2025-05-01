@@ -20,6 +20,9 @@
 #include <mutex>
 #include <queue>
 #include <condition_variable>
+#include <imm.h>
+
+#pragma comment(lib, "imm32.lib")
 
 #pragma comment(lib,"d3d11.lib")
 #pragma comment(lib, "steam_api64")

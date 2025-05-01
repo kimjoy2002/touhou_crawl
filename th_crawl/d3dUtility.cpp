@@ -12,7 +12,9 @@
 #include "option_manager.h"
 #include "key.h"
 #include "soundmanager.h"
-#include <wrl/client.h>  
+#include <wrl/client.h>
+#include <imm.h>
+
 
 
 ID3D11Device*           g_pd3dDevice = nullptr;
@@ -285,6 +287,7 @@ int d3d::EnterMsgLoop()
 	unsigned int thid_sound;
 	unsigned int thid_draw;
 
+	int g_ignoreWMCharCount = 0;
 	g_ThreadCnt = 4;
 	_beginthreadex(NULL, 0, GameLoop,NULL,0,&thid);
 	_beginthreadex(NULL, 0, SoundLoop, NULL, 0, &thid_sound);
@@ -300,8 +303,36 @@ int d3d::EnterMsgLoop()
 			} else {
 				if (msg.message == WM_QUIT)
 					break;
-				if(msg.message == WM_KEYDOWN || msg.message == WM_CHAR || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
-					  g_keyQueue->push(msg);
+				if(msg.message == WM_KEYDOWN || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
+					g_keyQueue->push(msg);
+
+			    if(msg.message == WM_CHAR && g_ignoreWMCharCount == 0)
+			 		g_keyQueue->push(msg);
+				else if(msg.message == WM_CHAR && g_ignoreWMCharCount > 0) {
+					g_ignoreWMCharCount--;
+				}
+				if(msg.message == WM_IME_COMPOSITION) {
+					if (msg.lParam & GCS_RESULTSTR) {
+						HIMC hIMC = ImmGetContext(hwnd);
+						if (hIMC) {
+							LONG len = ImmGetCompositionStringW(hIMC, GCS_RESULTSTR, nullptr, 0);
+							if (len > 0) {
+								std::wstring resultStr(len / sizeof(wchar_t), 0);
+								ImmGetCompositionStringW(hIMC, GCS_RESULTSTR, &resultStr[0], len);
+				
+								// UTF-8로 변환해서 큐에 넣기
+								MSG fake_msg = {};
+								fake_msg.message = WM_CHAR; // 우리는 내부적으로 WM_CHAR처럼 처리
+								for (wchar_t ch : resultStr) {
+									fake_msg.wParam = ch;
+									g_keyQueue->push(fake_msg);
+								}
+								g_ignoreWMCharCount = len;
+							}
+							ImmReleaseContext(hwnd, hIMC);
+						}
+					}
+				}
 				::TranslateMessage(&msg);
 				::DispatchMessage(&msg);
 			}

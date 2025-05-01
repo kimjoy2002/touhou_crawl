@@ -12,8 +12,8 @@
 #include "key.h"
 #include "replay.h"
 #include <conio.h>
-#include <windows.h> 
-
+#include <windows.h>
+#include <string>
 
 extern HWND hwnd;
 
@@ -264,6 +264,66 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 	}
 }
 
+void EraseLastUTF8Char(string& s) {
+    if (s.empty()) return;
+    size_t i = s.size() - 1;
+    while (i > 0 && (s[i] & 0xC0) == 0x80) --i;
+    s.erase(i);
+}
+
+
+string GetClipboardTextUTF8() {
+    if (!IsClipboardFormatAvailable(CF_UNICODETEXT)) return "";
+    if (!OpenClipboard(nullptr)) return "";
+
+    string result;
+    HANDLE hData = GetClipboardData(CF_UNICODETEXT);
+    if (hData) {
+        wchar_t* pszText = static_cast<wchar_t*>(GlobalLock(hData));
+        if (pszText) {
+            wstring wideText(pszText);
+            GlobalUnlock(hData);
+            result = ConvertUTF16ToUTF8(wideText);
+        }
+    }
+    CloseClipboard();
+    return result;
+}
+
+string getKeyboardInputString() {
+    string temp;
+
+    while (true) {
+        InputedKey inputed;
+        int input_ = waitkeyinput(inputed);
+
+
+		if(input_ == -1) {
+			//무시
+		}
+        else if (input_ == VK_RETURN) {
+			deletelog();
+			printlog(temp, false, false, false, CL_normal);
+            return temp;
+        }
+        else if (input_ == VK_BACK) {
+            EraseLastUTF8Char(temp);
+        }
+        else {
+            wchar_t wc = static_cast<wchar_t>(input_);
+            if (wc >= 1 && wc <= 26) continue; // Ctrl + 문자 무시
+            temp += ConvertUTF16ToUTF8(wstring(1, wc));
+        }
+        // else if (inputed.key.message == WM_KEYDOWN) { 리플레이에서 쓸 수 없음
+        //     if (inputed.key.wParam == 'V' && ctrl_check) {
+        //         string clipText = GetClipboardTextUTF8();
+        //         temp += clipText;
+        //     }
+        // }
+        deletelog();
+        printlog(temp, false, false, true, CL_normal);
+    }
+}
 
 void KeyInputQueue::push(InputedKey key) {
 	std::unique_lock<std::mutex> lock(mutex_);

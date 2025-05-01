@@ -4755,6 +4755,7 @@ int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 	}
 	return 0;
 }
+void abandon_god();
 bool players::Belief(god_type god_, int piety_, bool speak_)
 {
 
@@ -4775,19 +4776,13 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	if(god == GT_SEIJA && you.level >= 10)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG),true,false,false,CL_small_danger);
+		return false;
 	}
 
 
 	if(god != GT_NONE)
 	{
-		if(god == god_)
-		{
-			if(speak_)
-				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_ALREADY_GOD),true,false,false,CL_normal);
-			return false;
-		}		
-		PietyUpDown(0,true);
-		PunishUpDown(GetGodAbandonValue(god),god);
+		abandon_god();
 	}
 	else	
 		PietyUpDown(0,true);
@@ -4920,7 +4915,8 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 	if(god_ == GT_NONE)
 		god_ = god;
 	punish[god_].number = absolutely_?punish_:punish_+punish[god_].number;
-	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_WRATH, PlaceHolderHelper(GetGodString(god_))),true,false,false,CL_danger);
+	if (god_ != GT_SATORI)
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_WRATH, PlaceHolderHelper(GetGodString(god_))),true,false,false,CL_danger);
 	return true;
 	
 }

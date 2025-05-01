@@ -4458,6 +4458,8 @@ LOC_SYSTEM_GOD_PRAY2,{0} seems displeased.
 LOC_SYSTEM_GOD_PRAY_AHTEISM,You took a moment to contemplate the meaning of life.
 LOC_SYSTEM_GOD_PRAY_TEMPLE,You prayed at the altar.
 LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,Would you like to be a believer?
+LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN,Do you want to abandon all the blessings of your current god and convert to a different one?
+LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY,This action will incur the wrath of your current god. Are you sure?
 LOC_SYSTEM_GOD_GIFT,{0}: Use this well!
 LOC_SYSTEM_GOD_GIFT_APPEAR,Something appeared beneath your feet!
 LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.

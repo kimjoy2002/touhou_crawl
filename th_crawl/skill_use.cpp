@@ -2165,42 +2165,9 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-
-bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
-{
+void abandon_god() {
 	bool sanae_ = (you.char_type == UNIQ_START_SANAE) && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
-
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
-	for (int i = 0; i < (junko_ ? 2 : 1); i++)
-	{
-		if (i == 1)
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION), false, false, false, CL_danger);
-		else if (sanae_)
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_SANAE), false, false, false, CL_danger);
-		else
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK), false, false, false, CL_danger);
-		printlog(" (",false,false,false,CL_danger);
-		printlog("Y",false,false,false,CL_danger, 'Y');
-		printlog("/",false,false,false,CL_danger);
-		printlog("N",false,false,false,CL_danger, 'N');
-		printlog(") ",false,false,false,CL_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		switch (waitkeyinput())
-		{
-		case 'Y':
-			enterlog();
-			endSelection();
-			break;
-		case 'N':
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX), true, false, false, CL_normal);
-			endSelection();
-			return false;
-		}
-	}
-
-
-
 	if (sanae_) {
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON_SANAE,true,false,false,CL_small_danger,
 			 PlaceHolderHelper(GetGodString(you.god)),
@@ -2238,13 +2205,46 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	godAutoPickUp(you.god, false);
 
 
-
-
-
 	you.god = GT_NONE;
 
 	if (junko_) {
 		you.HpUpDown(-you.GetMaxHp(), DR_JUNKO, NULL);
+	}
+
+}
+
+
+bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
+{
+	bool sanae_ = (you.char_type == UNIQ_START_SANAE) && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
+
+	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
+	for (int i = 0; i < (junko_ ? 2 : 1); i++)
+	{
+		if (i == 1)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION), false, false, false, CL_danger);
+		else if (sanae_)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_SANAE), false, false, false, CL_danger);
+		else
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK), false, false, false, CL_danger);
+		printlog(" (",false,false,false,CL_danger);
+		printlog("Y",false,false,false,CL_danger, 'Y');
+		printlog("/",false,false,false,CL_danger);
+		printlog("N",false,false,false,CL_danger, 'N');
+		printlog(") ",false,false,false,CL_danger);
+		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
+		switch (waitkeyinput())
+		{
+		case 'Y':
+			enterlog();
+			endSelection();
+			break;
+		case 'N':
+		default:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX), true, false, false, CL_normal);
+			endSelection();
+			return false;
+		}
 	}
 
 

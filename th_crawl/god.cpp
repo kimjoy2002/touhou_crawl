@@ -2152,12 +2152,20 @@ int satori_sight()
 {
 	return pietyLevel(you.piety)*2;
 }
-
+void abandon_god();
 
 void Pray()
 {
-	if(you.god != GT_NONE)
-	{	
+	bool altar = false;
+	dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;		
+	if(type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST) {
+		altar = true;
+		if(you.god == (god_type)(type-DG_TEMPLE_FIRST) || you.god == GT_SEIJA) {
+			altar = false;
+		}
+	}
+	if(you.god != GT_NONE && !altar)
+	{
 		bool sacrifice = false;
 		int num = 0;
 		for(list<item>::iterator it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
@@ -2182,79 +2190,107 @@ void Pray()
 			}
 		}
 	}
-	else
+	else if(altar)
 	{
 		enterlog();
-		dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;		
-		if(type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE),true,false,false,CL_warning);
+		MoreWait();
+
+		if(type != DG_TEMPLE_SATORI && you.GetPunish((god_type)(type-DG_TEMPLE_FIRST)))
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE),true,false,false,CL_warning);
-			MoreWait();
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_NOT_YET_FORGIVE,true,false,false,CL_warning,
+				 PlaceHolderHelper(GetGodString((god_type)(type-DG_TEMPLE_FIRST))));
 
-
-			if(type != DG_TEMPLE_SATORI && you.GetPunish((god_type)(type-DG_TEMPLE_FIRST)))
-			{
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_NOT_YET_FORGIVE,true,false,false,CL_warning,
-					 PlaceHolderHelper(GetGodString((god_type)(type-DG_TEMPLE_FIRST))));
-
-			}
-			else
-			{
-				WaitForSingleObject(mutx, INFINITE);
-				deletesub();
-				SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
-				GodInfor((god_type)(type-DG_TEMPLE_FIRST));
-				printsub("",true,CL_normal);
-				printsub("",true,CL_normal);
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,CL_help);
-				printsub(" (",false,CL_help);
-				printsub("y",false,CL_help, 'y');
-				printsub("/",false,CL_help);
-				printsub("n",false,CL_help, 'n');
-				printsub(") ",true,CL_help);
-				changedisplay(DT_SUB_TEXT);
-				ReleaseMutex(mutx);
-				bool ok_= true;
-				while(ok_)
-				{
-					InputedKey inputedKey;
-					int select = waitkeyinput(inputedKey);
-					switch(select)
-					{
-					default:
-					case '?':
-						break;
-					case 'Y':
-					case 'y':
-						changedisplay(DT_GAME);
-						SetDisplayTexture(NULL);
-						you.Belief((god_type)(type-DG_TEMPLE_FIRST),15);
-						steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
-						MoreWait();
-						ok_ = false;
-						break;
-					case -1:
-						if(inputedKey.isRightClick()) {
-							//ESC PASSTHORUGH
-						}
-						else {
-							break;
-						}
-					case 'N':
-					case 'n':
-					case VK_ESCAPE:
-						ok_ = false;
-						break;
-					}
-				}
-				changedisplay(DT_GAME);
-				SetDisplayTexture(NULL);
-			}
 		}
 		else
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_AHTEISM),true,false,false,CL_warning);
+			WaitForSingleObject(mutx, INFINITE);
+			deletesub();
+			SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
+			GodInfor((god_type)(type-DG_TEMPLE_FIRST));
+			printsub("",true,CL_normal);
+			printsub("",true,CL_normal);
+			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
+			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
+			printsub(" (",false,color_);
+			printsub("y",false,color_, 'y');
+			printsub("/",false,color_);
+			printsub("n",false,color_, 'n');
+			printsub(") ",true,color_);
+			changedisplay(DT_SUB_TEXT);
+			ReleaseMutex(mutx);
+			bool ok_= true;
+			bool onemore = false;
+			bool serious = false;
+			if(you.god != GT_NONE) {
+				onemore = true;
+				if((you.char_type == UNIQ_START_SANAE && (you.god == GT_KANAKO || you.god == GT_SUWAKO)) || //사나에 전입 자유 
+					(you.god == GT_SATORI))//사토리는 무시함
+				{
+					onemore = false;
+				}
+			}
+				
+			while(ok_)
+			{
+				InputedKey inputedKey;
+				int select = waitkeyinput(inputedKey);
+				switch(select)
+				{
+				default:
+				case '?':
+					break;
+				case 'y':
+					if(serious) {
+						break;
+					}
+				case 'Y':
+					if(onemore) {
+						bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
+						endSelection();
+						printsub(LocalzationManager::locString(junko_?LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION:LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY),false,CL_danger);
+						printsub(" (",false,CL_danger);
+						printsub("Y",false,CL_danger, 'Y');
+						printsub("/",false,CL_danger);
+						printsub("n",false,CL_danger, 'n');
+						printsub(") ",true,CL_danger);
+						onemore = false;
+						serious = true;
+					}
+					else {
+						changedisplay(DT_GAME);
+						SetDisplayTexture(NULL);
+						if(you.god != GT_NONE) {
+							abandon_god();
+						}
+						if(you.Belief((god_type)(type-DG_TEMPLE_FIRST),15)) {
+							steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
+							MoreWait();
+						}
+						ok_ = false;
+					}
+					break;
+				case -1:
+					if(inputedKey.isRightClick()) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
+				case 'N':
+				case 'n':
+				case VK_ESCAPE:
+					ok_ = false;
+					break;
+				}
+			}
+			changedisplay(DT_GAME);
+			SetDisplayTexture(NULL);
 		}
+	}
+	else
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_AHTEISM),true,false,false,CL_warning);
 	}
 	you.time_delay += you.GetNormalDelay();
 	you.TurnEnd();

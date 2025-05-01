@@ -957,5 +957,8 @@ void Select_Throw()
 		return;
 	}
 	list<item>::iterator it = ThrowSelect();
+	if(it==you.item_list.end() && you.GetThrowIter() == you.item_list.end() ) {
+		return;
+	}
 	Quick_Throw(it!=you.item_list.end()?it:you.GetThrowIter(),you.GetTargetIter(), false);
 }

@@ -2216,7 +2216,7 @@ void Pray()
 				ReleaseMutex(mutx);
 				bool ok_= true;
 				while(ok_)
-				{			
+				{
 					InputedKey inputedKey;
 					int select = waitkeyinput(inputedKey);
 					switch(select)

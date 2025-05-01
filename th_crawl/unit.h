@@ -184,6 +184,7 @@ public:
 	virtual bool isEnemyUnit(unit* unit_info){return unit_info->isUserAlly();};
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}
+	virtual bool isCompleteNeutral() const {return false;}
 	virtual bool isPassedBullet(unit* order){return false;}; //해당 총이 이 캐릭터에게 관통 가능한지.
 	virtual parent_type GetParentType() = 0;
 	virtual bool isSightnonblocked(coord_def c) = 0;//보이는 이 위치가 실제로 공격가능한지?(유리벽)

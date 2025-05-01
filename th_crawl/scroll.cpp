@@ -635,6 +635,7 @@ bool blink_scroll(bool pre_iden_)
 	you.search_pos = you.position;
 	you.search = true;
 	bool is_move = false;
+	startSelection({'v',VK_ESCAPE});
 	Search_Move(coord_def(you.position.x,you.position.y), false,VT_BLINK);
 	while(1)
 	{
@@ -671,6 +672,7 @@ bool blink_scroll(bool pre_iden_)
 				if(!you.Tele_check(pre_iden_, true))
 				{
 					deletelog();
+					endSelection();
 					you.search = false;
 					return false;
 				}
@@ -678,6 +680,7 @@ bool blink_scroll(bool pre_iden_)
 				{
 					you.search = false;
 					deletelog();
+					endSelection();
 					return true;
 				}
 			}

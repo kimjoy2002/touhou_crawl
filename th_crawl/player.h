@@ -354,7 +354,7 @@ public:
 
 	bool sight_reset;
 	int target;
-	int useMouseTammac = 2;
+	int useMouseTammac = 0;
 	item *throw_weapon;
 
 	attack_infor *dead_order;

@@ -210,6 +210,7 @@ void repeat_action()
 
 
 bool throw_prev_fail(bool no_speak);
+bool useAutoTanmac(unit* mon_);
 
 void auto_battle()
 {
@@ -233,15 +234,11 @@ void auto_battle()
 	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
 	if(mon_)
 	{
-		int target_abs_ = (mon_->position - you.position).abs();
-		bool unable_throw = throw_prev_fail(true);
-		if(you.useMouseTammac > 0
-		 && !unable_throw 
-		 && you.throw_weapon
-		 && (target_abs_ > 2 || you.useMouseTammac == 1) ) {
-			you.target = ((monster*)mon_)->map_id;
-			Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
-		 } else {
+		if(useAutoTanmac(mon_)) {
+			you.SetPrevAction(VK_TAB);
+			return;
+		}
+		else {
 			for(int i=RT_BEGIN;i!=RT_END;i++)
 			{
 				beam_iterator it(you.position,mon_->position,(round_type)i);
@@ -495,15 +492,34 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	if(type_ == VT_NORMAL)
 	{	
 		deletelog();
-		if(!wide)
-			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5} - {6})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
-		else
-			printlog(LocalzationManager::formatString("({0}: {1} - {2}   {3} - {4}   {5},{6} - {7}   {8} - {9})", PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v",PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION), ".",PlaceHolderHelper(LOC_SYSTEM_EXPLORE), "<", ">", PlaceHolderHelper(LOC_SYSTEM_STAIR_TRAVEL), "e",PlaceHolderHelper(LOC_SYSTEM_DANGER)),true,false,true,CL_help);	
-
+		if(!wide) {
+			printlog(LocalzationManager::formatString("({0}: ",PlaceHolderHelper(LOC_SYSTEM_COMMAND)),false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("v"), PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),false,false,true,CL_help, 'v');
+			printlog("   ",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("."), PlaceHolderHelper(LOC_SYSTEM_EXPLORE)),false,false,true,CL_help, '.');
+			printlog("   ",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("e"), PlaceHolderHelper(LOC_SYSTEM_DANGER)),false,false,true,CL_help, 'e');
+			printlog(")",true,false,true,CL_help);
+		}
+		else {
+			printlog(LocalzationManager::formatString("({0}: ",PlaceHolderHelper(LOC_SYSTEM_COMMAND)),false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("v"), PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),false,false,true,CL_help, 'v');
+			printlog("   ",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("."), PlaceHolderHelper(LOC_SYSTEM_EXPLORE)),false,false,true,CL_help, '.');
+			printlog("   ",false,false,true,CL_help);
+			printlog("<",false,false,true,CL_help,'<');
+			printlog(",",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("> - {0}", PlaceHolderHelper(LOC_SYSTEM_STAIR_TRAVEL)),false,false,true,CL_help, '>');
+			printlog("   ",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper("e"), PlaceHolderHelper(LOC_SYSTEM_DANGER)),false,false,true,CL_help, 'e');
+			printlog(")",true,false,true,CL_help);
+		}
 	}
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
 	{
-		printlog(LocalzationManager::formatString("({0}: {1} - {2})",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v", PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),true,false,true,CL_help);	
+		printlog(LocalzationManager::formatString("({0}: ",PlaceHolderHelper(LOC_SYSTEM_COMMAND)),false,false,true,CL_help);
+		printlog(LocalzationManager::formatString("{1} - {2}",PlaceHolderHelper(LOC_SYSTEM_COMMAND), "v", PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),false,false,true,CL_help, 'v');	
+		printlog(")",true,false,true,CL_help);
 	}
 	else
 		deletelog();
@@ -801,6 +817,7 @@ void Search()
 {
 	you.search_pos = you.position;
 	you.search = true;
+	startSelection({'v', '.', 'e', VK_ESCAPE});
 	Search_Move(coord_def(you.position.x,you.position.y), false);
 	while(1)
 	{
@@ -886,6 +903,7 @@ void Search()
 			}
 			else if(inputedKey.mouse == MKIND_MAP) {
 				deletelog();
+				endSelection();
 				you.search = false;
 				Long_Move(you.search_pos, true);
 				return;
@@ -912,6 +930,7 @@ void Search()
 		case VK_ESCAPE:
 		case 'x':
 			deletelog();
+			endSelection();
 			you.search = false;
 			return;
 		}
@@ -937,6 +956,7 @@ void Wide_Search()
 	while(1)
 	{
 		InputedKey inputedKey;
+		startSelection({'v', '.', '<', '>', 'e', VK_ESCAPE});
 		switch(waitkeyinput(inputedKey))
 		{
 		case '0':
@@ -1104,6 +1124,7 @@ void Wide_Search()
 			widesearch = false;
 			you.search = false;
 			deletelog();
+			endSelection();
 			Long_Move(you.search_pos, true);
 			return;
 		case -1:
@@ -1122,6 +1143,7 @@ void Wide_Search()
 					widesearch = false;
 					you.search = false;
 					deletelog();
+					endSelection();
 					Long_Move(you.search_pos, true);
 					return;
 				} else {
@@ -1152,6 +1174,7 @@ void Wide_Search()
 			}
 		default:
 			deletelog();
+			endSelection();
 			widesearch = false;
 			you.search = false;
 			return;

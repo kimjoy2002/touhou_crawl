@@ -4221,7 +4221,7 @@ bool monster::isEnemyUnit(unit* unit_info)
 {
 	if(unit_info->isplayer())
 	{
-		return !isUserAlly();
+		return !isUserAlly() && !isCompleteNeutral();
 	}
 	else
 	{
@@ -4239,6 +4239,11 @@ bool monster::isEnemyMonster(const monster* monster_info)
 	if(!isUserAlly() && !(monster_info->isUserAlly()))
 	{
 		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
+			return true;
+		return false;
+	}
+	if(isCompleteNeutral() || monster_info->isCompleteNeutral()) {
+		if(s_lunatic)
 			return true;
 		return false;
 	}

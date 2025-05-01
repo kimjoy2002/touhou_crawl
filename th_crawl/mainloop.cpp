@@ -472,6 +472,46 @@ void evoke_logic(int key_, char auto_);
 void auto_tanmac_onoff();
 void PickUpSelect_logic(list<item>::iterator& it);
 
+bool useAutoTanmac(unit* mon_) {
+	if(mon_ == nullptr)
+		return false;
+
+	if(!mon_->isEnemyUnit(&you) || mon_->isPassedBullet(&you))
+		return false;
+
+	int target_abs_ = (mon_->position - you.position).abs();
+	bool unable_throw = throw_prev_fail(true);
+	beam_iterator beam(you.position,mon_->position);
+	bool cantShoot = true;
+	bool canSuicide = you.throw_weapon?(you.throw_weapon->value4 == TMT_KIKU_COMPRESSER):false;
+	if(you.useMouseTammac > 0
+	 && !unable_throw 
+	 && you.throw_weapon
+	 && (target_abs_ > 2 || (you.useMouseTammac == 1 && !canSuicide)) 
+	 && CheckThrowPath(you.position,mon_->position, beam, false) ) {
+		cantShoot = false;
+		beam.init();
+		while(!beam.end())
+		{
+			if(monster *unit_ = (monster*)env[current_level].isMonsterPos(beam->x,beam->y, &you))
+			{
+				if(unit_->isUserAlly() && !unit_->isPassedBullet(&you))						
+					cantShoot = true;
+				break;
+			}
+			beam++;
+		}
+		if(!cantShoot) {
+			you.target = ((monster*)mon_)->map_id;
+			Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
+			return true;
+		}
+	} 
+	return false;
+}
+
+
+
 void MainLoop()
 {
 	while(1)
@@ -557,17 +597,10 @@ void MainLoop()
 						beam_iterator beam(you.position,target_pos);
 						if(CheckThrowPath(you.position,target_pos,beam, true)) {
 							beam.init();
-							int target_abs_ = (target_pos - you.position).abs();
-							int abs_ = ((*beam) - you.position).abs();
-							bool unable_throw = throw_prev_fail(true);
 							unit *mon_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you);
-							if((mon_ != nullptr) && mon_->isplayer() == false
-							 && you.useMouseTammac > 0
-							 && !unable_throw 
-							 && you.throw_weapon
-							 && (target_abs_ > 2 || you.useMouseTammac == 1) ) {
-								you.target = ((monster*)mon_)->map_id;
-								Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), true);
+							int abs_ = ((*beam) - you.position).abs();
+							if(useAutoTanmac(mon_)) {
+								//do nothing
 							} else if(abs_ == 1 || abs_ == 2) {
 								action_Move(0, (*beam));
 							} else {

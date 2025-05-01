@@ -2748,6 +2748,24 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					}
 					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, 1.0f, you.turn, sight, false, !already_draw);
 				}
+				else {
+					int x = i*32.0f + 20.0f;
+					int y = j*32.0f + 20.0f;
+					if (MousePoint.x > x - 16 && MousePoint.x <= x + 16 &&
+					MousePoint.y > y - 16 && MousePoint.y <= y+ 16
+					)
+					{
+						img_effect_select.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
+						if(isClicked(LEFT_CLICK)) {
+							g_keyQueue->push(InputedKey(MKIND_MAP,i + x_,j + y_));
+						}
+						coord_def tile_coorddef(i + x_, j + y_); 				
+						if(DisplayManager.prev_map_view != tile_coorddef) {
+							DisplayManager.prev_map_view = tile_coorddef;
+							g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,i + x_,j + y));
+						}
+					}
+				}
 				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
 				{
 					if (env[current_level].dgtile[i + x_][j + y_].forbid_count2)

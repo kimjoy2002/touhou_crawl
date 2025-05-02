@@ -2612,16 +2612,16 @@ LOC_SYSTEM_SKL_DESCRIBE_YUUGI_2,密着している相手を掴み、ジャーマ
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3,密着している相手を持ち上げて遠くに投げ飛ばす。\n着弾地点には衝撃波が発生し、周囲にも範囲ダメージを与える。\nプレイヤーはこの衝撃波の影響を受けない。\n掴み状態なら信仰心を消費せず使用可能。\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4,鬼の力を借りて大声で咆哮する。\n視界内の敵は確率で気を呑まれて沈黙状態になる。\n沈黙中の敵はしばらく魔法を使えなくなる。\n掴んでいる敵には必ず沈黙を与える。\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,鬼の究極技「三歩必殺」を使用する。3ターンに渡って爆発が順に発生する。\n爆発の範囲は徐々に拡大し、ほぼ視界全体を覆う。\n掴んでいる敵には通常の2倍のダメージを与える。\n
-LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,상대의 마음을 읽고 트라우마를 일깨운다.\n성공하면 상대는 공포 상태가 되어 이쪽으로부터 도망치기 시작한다.\n좀 더 낮은 확률로 상대는 공포를 넘어서서 완전한 전의상실할 가능성이 생긴다.\n전의상실한 순간 경험치의 절반을 얻을 수 있으며 상대는 영구적인 공포상태로 변한다.\n이렇게 전의상실한 상대는 죽여도 경험치를 주지않으며 시야밖으로 나가면 사라진다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,상대의 마음을 읽어낸다. 사용한 상대의 모든 생각을 읽게 된다.\n만약 대상이 동물형인경우 호감을 사서 영구적인 아군이 된다. 그러나 계단이용은 불가능해진다.\n동물형이 아닌 경우엔 명중과 회피가 매우 큰 폭으로 떨어지며 디버프에 대한 저항력이 사라진다.\n사용할때 적의 마법저항력에 비례해서 시전 턴수가 필요하며 그동안 아무행동도 할 수 없다.\n시간동안 시야에서 사라지거나 혼란,마비가 걸리면 실패하고 자신의 레벨이 올라갈수록 턴수는 줄어든다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,하급 마족들의 작은 무리를 소환한다.\n하급 마족들은 전투엔 별다른 도움은 안되겠지만 신앙심소모가 매우 적고 양으로 승부할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2,중급 마족 1명을 무작위로 소환한다.\n사라, 루이즈, 엘리스중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3,상급 마족 1명을 무작위로 소환한다.\n유키, 마이, 유겐마간중에 무작위로 소환되어 당신을 도와준다.\n4%의 확률로 당신을 배신할 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON,유령의 소환을 시작한다.\n유령의 소환에는 비용이 들지않으며 한번 발동해두면 끝없이 유령을 불러들인다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF,유령의 소환을 종료한다.\n언제든지 원할때 다시 유령을 불러들일 수 있다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1,유령을 원하는 위치로 이동시킬 수 있다.\n지정한 위치로 주변에 있는 유령들이 한꺼번에 이동된다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2,유령의 소환을 잠시간 가속한다.\n일정시간동안 어마어마한 속도로 유령의 수가 불어난다.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3,1명의 영혼을 구속시켜서 자신의 노예로 삼는다.\n영혼이 구속된 상대를 일정시간 내에 잡으면 영구적인 아군으로 삼을 수 있다.\n구속된 영혼은 원본보다는 약해지지만 원본이 쓰는 마법이나 특징을 그대로 가지고 있다.\n또한 구속된 영혼은 1체까지 밖에 들고다닐 수 없다. 2번째 대상을 포획하면 원래가지고있던 영혼이 풀려난다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,相手の心を読み、トラウマを呼び覚ます。\n成功すると相手は恐怖状態になり、こちらから逃げ始める。\nさらに低い確率で、恐怖を超えて完全に戦意喪失することもある。\n戦意喪失した瞬間に経験値の半分を獲得でき、相手は永続的な恐怖状態になる。\nこのような相手は倒しても経験値を得られず、視界から消えると消滅する。\n
+LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,相手の思考を完全に読み取る。対象のすべての考えが明らかになる。\n対象が動物型であれば、好感を得て永続的な味方になるが、階段の利用ができなくなる。\n動物型でない場合、命中率と回避率が大幅に低下し、デバフへの抵抗も失われる。\n詠唱には敵の魔法抵抗に比例したターン数が必要で、その間は行動できない。\n詠唱中に視界から外れたり、混乱や麻痺になると失敗する。使用者のレベルが上がるほど詠唱ターンは短縮される。\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,下級魔族の小さな群れを召喚する。\n戦闘ではあまり役に立たないが、信仰心の消費が非常に少なく、数で勝負できる。\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_2,中級魔族を1体ランダムで召喚する。\nサラ、ルイーズ、エリスの中から1体が召喚され、あなたを助ける。\n4％の確率で裏切る可能性がある。\n
+LOC_SYSTEM_SKL_DESCRIBE_SHINKI_3,上級魔族を1体ランダムで召喚する。\nユキ、マイ、幽幻魔眼の中から1体が召喚され、あなたを助ける。\n4％の確率で裏切る可能性がある。\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_ON,幽霊の召喚を開始する。\n召喚にはコストがかからず、一度発動すれば無限に呼び出すことができる。\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_OFF,幽霊の召喚を終了する。\nいつでも再度呼び出すことが可能である。\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_1,幽霊を指定した位置に移動させることができる。\n周囲の幽霊が一斉に指定した位置に移動する。\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_2,幽霊の召喚を一時的に加速させる。\n一定時間、非常に速いペースで幽霊が増殖する。\n
+LOC_SYSTEM_SKL_DESCRIBE_YUYUKO_3,1体の魂を拘束して自身の奴隷とする。\n拘束された魂を一定時間内に捕獲すれば、永続的な味方として使役できる。\n拘束された魂は元の存在よりも弱いが、使用する魔法や特徴はそのまま引き継ぐ。\nまた、拘束できる魂は1体までで、2体目を捕獲すると前の魂は解放される。\n
 LOC_SYSTEM_SKL_DESCRIBE_YUKARI_1,視界内の隙間に支援射撃を要請する。\n隙間から異形の目が現れ、敵を攻撃する。\n異形の目は耐久力が低いため注意が必要。\n
 LOC_SYSTEM_SKL_DESCRIBE_YUKARI_2,視界内の好きな隙間に空間移動する。使用済みの隙間は閉じる。\n信仰心とMP以外のデメリットなく即座に移動可能。\n
 LOC_SYSTEM_SKL_DESCRIBE_YUKARI_3,攻撃を防ぐ結界を一定時間召喚する。\n結界は盾のように使え、装備中の盾も強化される。\n結界由来の盾は魔法ペナルティを受けない。\n
@@ -3244,1017 +3244,1017 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD_INFO1,現在のスキルでは、防御力は
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG,弾幕遊びの基本となる弾幕。敵に向かって投げて当てる。\n問題は、これはバグ弾幕だということ。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET,霊夢が使うこのずるいアミュレットには高性能なホーミング性能がついている。\n特筆すべき特徴はないが、命中率の高さが自慢。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE,投げて相手に刺さる手裏剣。\nダメージは低いが、特別に毒が塗られているようだ。\n
-LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,캇파들의 발명품중 하나다. 물을 가득 압축하고있는 폭탄이다.\n상대에게 던지면 압축되어있던 물이 한번에 터진다.\n넓은 범위 공격할 수 있을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,불교의 승려들이 수행할때 사용했다고 하는 고대 인도의 무기.\n평소엔 평범한 손잡이처럼 생겼지만 강한 힘으로 던지면 마력이 방출된다.\n다른 탄막과 다르게 적들을 관통하여 공격이 가능하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,평상시에 입는 편한 옷.\n천이 아닌 재질의 갑옷 기본패널티가 상당히 내려간다.\n그러나 최소패널티는 다른 옷과 동일하므로 갑옷에 익숙해지면 이점이 없어진다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,무녀들이 입는 옷.\n신의 가호를 받아서 정신을 보호해준다. 입고있는 동안 혼란저항이 생긴다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING,용궁의 사자들이 입는다는 날개옷.\n전기를 흘려보내는 특징을 가지고 있다. 입고있는 동안 전기저항이 생긴다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,캇파들이 유니폼처럼 입고 있는 파란색 옷이다.\n강의 추위에도 견딜 수 있게 디자인 되어있다. 입고있는 동안 냉기저항이 생긴다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE,불쥐의 기운이 서려있는 옷이다.\n뜨거운 열에도 견딜 수 있을 것 같다. 입고있는 동안 화염저항이 생긴다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID,홍마관의 메이드들이 입는 옷.\n홍마관 도서관표 특수한 마법적 처리가 되어있다. 입고있는 동안 마법저항이 올라간다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,은방울 꽃밭의 인형이 입고 있던 옷이지만 꽤 사이즈가 커서 입을 수 있을 것 같다.\n은방울 꽃의 기운이 당신을 보호해준다. 입고있는 동안 독저항이 생긴다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,단풍으로 만들어진 옷. 의외로 제대로된 옷이다.\n시즈하를 믿고있을때 주변의 풍경에 동화되어서 은밀이 급격하게 올라간다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,움직이기 편하게 천으로 되어있는 옷.\n잦은 그레이즈에도 끄덕없는 질긴 옷감으로 되어있다!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,질긴 재질로 되어있는 옷.\n천보단 움직이기 불편하지만 꽤 가볍다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,사슬로 얽혀있는 갑옷.\n꽤 단단하지만 판금으로된 갑옷보다는 못하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,강철로 된 판금을 덧댄 갑옷.\n마법과 움직임을 방해하지만 당신의 안전을 책임진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n상대의 탄막을 막는 반칙적인 활용도 가능하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,머리에 달 수 있는 장신구. 패션의 기본\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,몸에 두르는 폼나는 망토.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,손에 낄 수 있는 장갑이다. 장갑에 저주가 걸려있으면 반지를 빼고 낄 수 없다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,발을 보호하는 신발. 던전의 바닥을 맨발로 다니고 싶지않으면 꼭 착용하자.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,단순한 물이 들어간 병이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,치료 물약이다. 마시면 혼란, 독, 병으로부터 회복되고 체력도 소량 회복된다.\n효과도 마신 즉시 발휘되는 신비의 물약\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,독이 들어있는 물약이다. 역겨운 맛이 나고 마시면 끔찍한 독에 걸린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,상처를 치료하는 물약이다. 먹으면 순간적으로 많은 체력을 치료한다.\n다만 상태이상을 치료하지는 못한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,순간적으로 강한 근력을 발휘하게 되는 물약. 공격력도 강해진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE,빠른 속도로 움직이게 도와주는 물약. 이동, 행동 모두 2배속이 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE,마시면 정신에 혼란을 가져다주는 물약.\n혼란이 가라앉을때까지 제자리에 서서 가만히 기다리는 것도 방법이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW,움직임이 둔해지는 물약. 모든 이동, 행동이 1/2배속이 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS,마시면 몇턴간 몸이 마비되는 물약. 위험하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER,마시면 일시적으로 지능이 높아지는 물약.\n지능과 함께 마법성공률, 마법파워도 같이 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,마시면 일시적으로 민첩이 높아지는 물약.\n민첩과 함께 회피도 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC,마시면 영력을 순식간에 채워주는 마력의 물약.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION,마시면 일시적으로 비행상태가 되는 물약. 비행상태에서는 깊은물따위를 건널 수 있게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER,마시면 파워가 상승하는 파워의 물약.\n마신 즉시 P가 1.00증가하게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT,마시면 일시적으로 능력치가 감소하게 되는 역겨운 물약.\n힘 지능 민첩중 무작위 능력치가 일시적으로 감소된다. 시간이 지나면 되돌아 온다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT,마시면 일시적으로 잃어버린 능력치를 일정량 회복시켜주는 물약.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,이것은 술이다. 마시면 취한다.\n술에 취한 상태면 똑바로 움직이기 힘들어 진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG,이건 버그 물약이다. 끔찍하군!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN,뭔가 의심스러운 액체가 들어있는 병. 마셔보지 않고선 알 수 없을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_FOOD,먹을 수 있는 음식이다. 던전에 이런 음식들이 떨어져있는 것도 수상하지만 먹을 순 있어 보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL,소리내어서 읽으면 두루마리에 담겨진 미지의 힘을 끌어낼 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT,읽으면 이상한 공간이동을 일으키는 두루마리. 단, 읽자마자 공간이동이 되진 않는다.\n몇턴의 준비기간이 필요하다. 공간이동이 걸린 상태에서 읽으면 그 힘을 중화시켜 억제할 수 도 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY,식별의 두루마리. 읽고나서 손에 댄 물건을 식별할 수 있게 된다. 매우 중요한 두루마리\n모 반요 가게주인의 능력과 매우 흡사하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE,장난꾸러기 요정들이 의미없이 써놓은 낙서군!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON,들고있는 무기에 저주를 건다. 저주에 걸린 장비는 저주가 풀리기전까지 해제할 수 없게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,들고있는 방어구에 저주를 건다. 저주에 걸린 장비는 저주가 풀리기전까지 해제할 수 없게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE,들고있는 장비의 저주를 해제한다. 기분 나쁨도 사라진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK,시야내의 임의의 위치에 순간이동을 하게 도와주는 두루마리.\n위기탈출용으로 최고의 두루마리다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING,현재 있는 층의 맵을 밝혀주는 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_,현재 장착되어있는 무기의 공격력과 명중력을 강화시킬 수 있다. 또한 저주도 없애준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,선택한 방어구의 방어력을 강화시킬 수 있다. 또한 저주도 없애준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG,연기를 만들어 내는 두루마리.\n연기는 상대와 자신의 시야를 가려준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,소지품중에 저주가 걸린 아이템을 탐지하는 두루마리.\n탐지할 아이템이 없어도 식별은 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,장착하고 있는 장신구에 저주를 거는 두루마리.\n반지와 목걸이중 무작위 한개의 장신구에 저주가 걸린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,주변의 소음을 줄이는 두루마리. 일시적으로 정적상태가 된다.\n정적범위안에 있는 적은 마법을 사용하지못하며 범위는 시간이 지나면 점점 줄어든다.\n단, 자신도 소리를 내야하는 마법과 두루마리, 권능을 사용하지 못하게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,영격을 사용하는 두루마리, 주변의 적에게 저항할 수 없는 짧은 마비를 건다.\n효과는 절대적이지만 P를 한칸 강제로 소모하게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,스펠카드를 충전하는 두루마리. 어느정도 사용한 스펠카드의 충전양을 충전한다.\n스펠카드의 최대치가 높을수록 충전하는 양도 늘어난다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,배운 마법을 잊는 망각의 두루마리. 사용시 배우고 있는 마법중에 하나를 선택하여 잊는다.\n마법을 배울때 사용한 레벨은 돌려받는다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,읽은 순간 넓은 성역을 펼치는 두루마리. 성역에서는 모든 공격의 데미지를 무효로 한다.\n산 속에 사는 어느 야만바가 만들었다고 하는 귀한 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,지금 들고 있는 무기에 마법적인 힘을 부여하는 두루마리.\n어떤 마법이 부여될지는 알 수 없으며 기존에 부여된 마법적인 힘은 덮어씌워진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,버그의 두루마리. 얼른 제작자에게 버그로 신고해버리자!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,알 수 없는 문자들이 나열되어있는 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,스펠카드는 정해진 횟수내에서 마음대로 사용할 수 있으나 초과하면 더이상 사용할 수 없게된다.\n정확한 남은 갯수는 식별을 해야 확인할 수 있다. 스펠카드는 발동술에 비례해서 위력이 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,화염의 기운을 담은 스펠카드다.\n사용하면 원하는 방향의 넓은 범위로 화염구름을 생성한다.\n발동스킬이 높으면 구름의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,냉기의 기운을 담은 스펠카드다.\n상대에게 강력한 냉기공격을 가한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,대지의 기운을 담은 스펠카드다.\n자체 위력은 낮지만 벽에 부딪히면 벽을 폭발시켜 높은 범위 데미지를 입힌다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,대기의 기운을 담은 스펠카드다.\n부채꼴의 넓은 범위에 탄막을 날려 범위내의 적들을 날려버린다.\n발동스킬이 높으면 날리는 정도와 위력이 강해진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,달빛의 기운을 담은 스펠카드다.\n사용한 사람을 일정시간 투명하게 만든다.\n발동스킬이 높으면 투명의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,금속의 기운을 담은 스펠카드다.\n사용하면 전방으로 철가시를 3연속으로 발사한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,태양의 기운을 담은 스펠카드다.\n사용하면 큰 빛을 발산하여 주변의 적을 빛나게 하고 혼란을 건다.\n혼란은 강할수록 저항할 수 있으며 무생물에겐 걸리지않는다.\n또한, 흡혈귀에겐 단순한 혼란효과 이상의 데미지를 줄 수 있다고 한다.\n발동스킬이 높으면 지속시간과 혼란이 걸릴 확률이 늘어난다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,버그의 스펠카드다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,미지의 힘이 담겨있는 부적. 기본적으론 아무런 힘도 가지고 있지않는 평범한 부적이지만\n착용한 채로 경험치를 얻으면 부적의 충전량이 점점 충전되며 100%가 되면 힘을 발휘한다.\n만약 착용하고있는 부적을 벗으면 그 즉시 충전량이 0%로 떨어지므로 주의해야한다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,미래를 체험한다고 하는 에이린의 감주약의 효능이 녹아들어있는 부적.\n다른 부적에 비해 아주 느린 속도로 충전이 되지만 힘이 모이면 죽음을 회피할 수 있다.\n100%가 된 부적을 착용한 채로 죽게되면 체력이 전부 회복되어 부활한다.\n단, 이 방법으로 부활하게되면 부적은 불타 사라지게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,춘설이변에 쓰인 봄의 기운을 모아서 특수한 결계를 발동시킬 수 있는 부적.\n착용하고 있으면 주변의 봄의 기운이 모이고 충전이 되면 영격을 발동할 수 있게 된다.\n100%가 된 부적을 착용한 채로 v를 누르면 영격이 발동되어 주변의 적을 일정시간 마비시킨다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 주변에 파워아이템이 떨어진다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,모리야신사에서 개발한 신앙의 힘을 모을 수 있는 부적.\n착용하고 있으면 주변의 신앙이 모이고 충전이 되면 신들과의 관계가 좋아진다.\n100%가 되면 자동으로 현재 신앙심이 조금 오른후 충전치가 다시 0%이 된다.\n몇몇 신은 신앙을 모으지않기때문에 이 부적의 효능이 없을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 스펠카드에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 스펠카드 1장을 충전할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 무작위 날씨가 발현되며 체력재생력을 높게 올린다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,손에 낀 착용자의 근력을 강화시키거나 약화시키는 힘의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX,손에 낀 착용자의 민첩성을 강화시키거나 약화시키는 민첩의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT,손에 낀 착용자의 지능을 강화시키거나 약화시키는 지능의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY,착용한 자의 자연적인 P템 소모가 빠르게 되는 배고픔의 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL,미노리코님의 축복이 담겨있는 반지로 착용한 자가 포만감을 느끼게 된다.\n신진대사가 느려져서 착용자는 자연적인 P템 소모가 느려지게 된다.\n가속이나 투명상태에서의 P소모 가속도 줄여준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT,착용자에게 공간이동의 능력을 부여하는 반지.\n그 부작용으로 끼고 있는 동안 무작위의 공간이동이 간간히 발생하게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,독에 대한 내성을 얻는 반지. 거의 모든 독에 내성이 생긴다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,화염에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,냉기에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,착용하고 있으면 투명한 적을 볼 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,비행을 사용할 수 있는 반지. 착용하면 능력사용에서 비행발동이 생긴다.\n비행상태에서는 깊은물따위를 건널 수 있게된다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,투명을 사용할 수 있는 반지. 착용하면 능력사용에서 투명발동이 생긴다.\n투명상태에서는 적에게 들킬 확률이 매우 낮아지게 된다.\n투명상태에서는 P의 소모량이 가속되는 단점이 있다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,착용시 최대마나가 증가하는 반지.\n착용해제시 원래대로 돌아온다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,착용시 마법성공률과 마법파워를 상승시키는 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,착용시 방어가 증감하는 반지.\n증감 되는 수치는 반지에 적혀진 숫자와 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV,착용시 회피가 증가하는 반지.\n증감 되는 수치는 반지에 적혀진 숫자와 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS,착용시 혼란과 광기에 저항이 생기는 반지.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS,착용시 전기저항이 올라가는 반지.\n완벽하게 막아주진 않지만 상당한 데미지를 줄여준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS,착용시 마법저항이 올라가는 반지.\n마법저항은 데미지를 줄여주진 못하지만 디버프같은 마법으로부터 보호해준다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG,버그의 힘이 깃든 반지다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN,미지의 힘이 담겨있는 반지.\n착용시 바로 그 힘을 알 수 있는 반지도 있는 반면. 눈치채기 힘든 반지도 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,다양한 마법이 들어 있는 책.\n이름있는 책은 아닌 것 같지만 배울만한 마법은 있어보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,화염에 대한 기초적인 마법이 들어 있는 책\n화염마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,냉기에 대한 기초적인 마법이 들어 있는 책\n냉기마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,독에 대한 기초적인 마법이 들어 있는 책\n독마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,다양하고 가성비 좋은 저레벨 마법들이 들어 있는 책\n고레벨은 없지만 구성이 알차다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,대지에 대한 기초적인 마법이 들어 있는 책\n대지마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,대기에 대한 기초적인 마법이 들어 있는 책\n대기마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,소환에 대한 기초적인 마법이 들어 있는 책\n소환마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,연금술을 가르치는 책\n마법을 통해서 간단한 연금술을 시험해볼 수 있는 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,정신을 조종하는 기초적인 마법이 들어 있는 책\n심리마법에 입문하고 싶은 당신에게 추천\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,초보 마전사를 위해 만들어진 마법책\n전사들에게 유용한 마법들로 구성이 되어있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,메이드들이 기본적으로 가져야할 소양이라고 적혀있다. 홍마관에서 배포중이다.\n메이드의 길은 멀고도 험하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,다양한 전기마법이 적혀있는 마법책\n만지기만해도 짜릿짜릿하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,간단한 원소연습을 할 수 있게 되어있는 마법책\n하지만 빅토리댄스는 이제 없다고!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,다양한 보조마법이 적혀있는 마법책.\n마법사 입문에 좋아보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,마법암살자를 꿈꾸는 사람들을 위한 마법책\n아직은 마법이 모자라보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,구름을 만드는 노하우가 적혀있는 마법책\n왠지 책도 축축해보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,강력한 파괴의 기초 마법이 적혀있는 책\n탄막은 파워!\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,정신마법계열의 마법이 적혀있는 책\n요괴들은 정신공격에 약하다고들 한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,다양한 방어 주문이 들어있는 책\n살아남는 것은 제일 중요하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,풍수지리에 해박한 모노노베노 후토가 편찬한 책.\n바람을 다루는 것부터 대지를 일으키는 일, 물을 다루면서 운기를 다루는 법이 적혀있다\n왜인지 방화하는 법에 대한 세세한 부록이 끼워져있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,전이에 관련된 마법이 적혀있는 마법책\n시공간을 다루는 것엔 큰 위험이 따른다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,불량천인 텐시가 직접 자필한 마법책\n예측불가인 그녀지만 그녀의 대지를 다루는 기술은 배울만하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,미마가 적은 궁극의 파괴술서\n모든 파괴법사가 꿈꾸고있는 그 책이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,지저세계에 살고있는 사토리가 적은 정신을 지배하는 법\n왠지 책에게 마음을 읽히고 있는 듯한 느낌이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,홍마관의 메이드장이 유능한 메이드를 길러내기 위해 만들었다는 그 책이다.\n홍마관엔 사쿠야이외에 유능한 메이드가 없을뿐더러 아무도 책을 이해하지 못했기에 전설로만 남겨진 책이다.\n마법 뿐만이 아니라 청소하는 법, 빨래하는 법등이 부록으로 적혀있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,호수에 살고있는 모 얼음 요정이 직접 자신의 최강을 증명하기위해 적은 책이다.\n책은 그림책처럼 그림과 함께 구불구불한 글씨로 설명이 되어있다.\n굉장히 추상적으로 설명되어있기에 오히려 이해하기 어렵다. 이해하려면 놀라운 이해력이 있어야될것같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘치는 모험 만화.\n내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n발동 스킬이 높아지면 회복되는 영력이 많아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n폭탄은 한 칸을 차지하며 적에 의해 파괴되면 폭파하지않고 파괴되어버린다.\n발동템이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n발동 스킬이 높아지면 데미지와 폭탄의 체력이 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n만약 당신이 어떤 이유로 파워가 낮아지지 않는다면 오쿠리쵸친은 다른 무언가를 대신 가져갈 것이다.\n발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n잘 생각해보면 미사일과 별반 다를게 없다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,소인족이 다룬다고 하는 요술망치. 본래 주인은 오니라고 한다.\n사용하면 실로 엄청난 효과들을 원하는대로 파워 1칸만으로 사용할 수 있게 된다.\n단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,환상향에 떨어지기전에 우연히 들고오게된 카메라.\n기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 발동템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 템은 횟수제한없이 발동이 가능한 템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,V키로 파워를 소모하여 발동할 수 있다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 
-LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,이것은 각종 던전을 정복한 증거인 룬이다.\n3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,이것은 강대한 힘을 가진 음양옥이다. 신사 내부에 정중하게 모셔져 있다.\n이 것을 가지고 탈출하면 이 이변을 끝내거나 엄청난 힘을 얻을 수 있을 것 같다.\n어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,"잃어버린 애완동물을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n당신의 사진이 붙어있다...\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,"잃어버린 물건을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,개다래 나무다. 그렇게 유용하진않아보이지만 고양이과들은 맥을 못 추는듯하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,부셔져있는 텐구의 카메라다. 아무래도 캇파들이 수리를 위해 보관하고 있는 듯 하다.\n심하게 부셔져있기때문에 쓰임새는 전혀 없어보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,캇파들이 쓰고 남은 재료와 공구들이다. 쓰임새는 없을 것 같다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BUG,버그템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0:이|가} 찍혀있는 사진이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,미소녀가 찍혀있는 사진이다.\
-LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\
-LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,꿈의 세계에 살고 있는 주민\n환상향의 주민과 똑같이 닮았지만 꿈의 세계에 살고있는 다른 존재.\n원본에서 좀 더 욕망에 충실한 성격을 지녔다고 한다.\n
-LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,이 레이무는 %d번 컨티뉴했다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,이 상대는 무시해도 될 정도로 약해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,이 상대는 약해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,이 상대는 위험해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_STRONGER,이 상대는 위험해보인다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_RESIST,독에 대한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_WEAKNESS,독에 대한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_IMMUN,화염을 완벽하게 방어한다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST_MORE,화염에 대한 상당한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST,화염에 대한 약간의 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_WEAKNESS,화염에 취약하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_IMMUN,냉기를 완벽하게 방어한다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST_MORE,냉기에 대한 상당한 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST,냉기에 대한 약간의 저항력이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_WEAKNESS,냉기에 취약하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_IMMUN,절연이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST_MORE,전기가 거의 통하지않는다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST,전기가 잘 통하지 않는다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_WEAKNESS,전기에 취약하다
-LOC_SYSTEM_MONSTER_DESCRIPTION_CONFUSE_RESIST,혼란과 광기에 대해 면역이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_WIND_RESIST,회오리 바람에 면역이 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED1,행동이 매우 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED2,행동이 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED3,행동이 약간 빠르다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED4,행동이 약간 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,행동이 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,행동이 매우 느리다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,하늘을 날 수 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,수영을 할 수 있다
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,투명을 볼 수 있다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,무생물이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,눈보라에 면역이 있다. 달자매의 힘으로
-LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,디버프 마법에 대한 면역력이 무한이다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,침묵된 상태에서도 마법이 사용가능하다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,이 몬스터는 소환된 상태로 시간이 지나면 사라진다. 또한 경험치를 주지도 않는다
-LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,이 몬스터는 꿈의 주민이기에 당신의 동료권유나 영혼을 빼앗는 것이 불가능할지도 모른다.
-LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,사용하는 마법
-LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,이 몬스터의 마법은 고정되어있지 않다. 무슨 마법을 쓸지 몰라!
-LOC_SYSTEM_ENSLAVE_GHOST,{0}의 영혼
-LOC_SYSTEM_GOD_ERROR,알수없는신
-LOC_SYSTEM_GOD_JOON_AND_SION,죠온&시온
-LOC_SYSTEM_GOD_JOON,죠온
-LOC_SYSTEM_GOD_SION,시온
-LOC_SYSTEM_GOD_BYAKUREN,뱌쿠렌
-LOC_SYSTEM_GOD_KANAKO,카나코
-LOC_SYSTEM_GOD_SUWAKO,스와코
-LOC_SYSTEM_GOD_MINORIKO,미노리코
-LOC_SYSTEM_GOD_MIMA,미마
-LOC_SYSTEM_GOD_SHINKI,신키
-LOC_SYSTEM_GOD_YUUGI,유우기
-LOC_SYSTEM_GOD_SHIZUHA,시즈하
-LOC_SYSTEM_GOD_HINA,히나
-LOC_SYSTEM_GOD_YUKARI,유카리
-LOC_SYSTEM_GOD_EIRIN,에이린
-LOC_SYSTEM_GOD_YUYUKO,유유코
-LOC_SYSTEM_GOD_SATORI,사토리
-LOC_SYSTEM_GOD_TENSI,텐시
-LOC_SYSTEM_GOD_SEIJA,세이자
-LOC_SYSTEM_GOD_LILLY,릴리
-LOC_SYSTEM_GOD_MIKO,미코
-LOC_SYSTEM_GOD_OKINA,오키나
-LOC_SYSTEM_GOD_JUNKO,순호
-LOC_SYSTEM_GOD_SUWAKO_TITLE,모리야 스와코 - 토착신의 정점
-LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.\n스와코는 신자들에게 변덕스러운 권능을 준다.\n그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.
-LOC_SYSTEM_GOD_MIMA_TITLE,미마 - 아득한 꿈에 운명을 맡긴 정신
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,미마는 재앙신격인 존재로 악령이다.\n신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.\n특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.
-LOC_SYSTEM_GOD_YUYUKO_TITLE,사이교우지 유유코 - 저승누각의 망령소녀
-LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,유유코는 백옥루에 사는 사이교우지의 아가씨이다.\n그녀는 죽음을 조종 할 수 있는 강력한 능력을 가지고 있어서 신도들에게 죽음의 힘을 선물해준다.\n그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.
-LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,요리가미 죠온 & 시온 - 최흉최악의 자매
-LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,낭비와 빈곤의 자매 신으로 믿는 신자에게 불운을 가져다준다.\n죠온은 재산을 낭비시키는 역병신, 시온은 믿는 자를 빈곤하게 만드는 빈곤신으로서\n믿는 것만으로도 소모품을 낭비하고 잃어버리는 불행이 생기게 될 것이다.\n그럼에도 둘을 신앙한다면 직접 빙의하는 것으로 직접적으로 그녀들의 권능들을 사용하게 된다.\n그녀들의 권능은 강력하지만, 빙의와 동시에 그에 따른 그녀들의 불운도 더욱 강해질것이다.\n신도들은 다른 적들을 죽여서 그들의 돈을 갈취하는 것으로 신앙심을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHINKI_TITLE,신키 - 마계의 신
-LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,신키는 마계의 주인이자 마계를 창조한 마계의 신이다.\n창조의 능력을 이용해서 신키는 신도들에게 강력한 마족들을 선물한다.\n또한 신키는 당신을 적대적인 소환수로부터 지켜주거나 P를 모을때마다 체력과 영력을 회복시켜준다.\n일정수준 이상의 마족들은 당신을 언제라도 배신할 수 있는 걸 염두해야된다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
-LOC_SYSTEM_GOD_MINORIKO_TITLE,아키 미노리코 - 풍족과 수확의 상징
-LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,미노리코는 가을의 수확을 상징하는 신으로 신도에게 풍족함을 선사한다.\n신도들은 미노리코에게 풍족한 음식을 내려받게 되고 포만감과 체력을 보장받는다.\n신도들은 P템을 줍는 것으로 신앙심을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHIZUHA_TITLE,아키 시즈하 - 외로움과 임종의 상징
-LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,아키 시즈하는 단풍의 신이다.\n시즈하는 신도들의 당신의 존재감을 낮추어 은밀하게 다닐 수 있게 도와준다.\n그녀의 권능은 암살자들에게 큰 혜택을 주며 중갑옷의 패널티도 크게 상쇄받을 수 있다.\n시즈하는 시끄러운 자들의 시체가 낙엽처럼 떨어지는 것을 기뻐한다.
-LOC_SYSTEM_GOD_EIRIN_TITLE,야고코로 에이린 - 달의 두뇌
-LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,그녀는 모든 약을 제조할 수 있는 달의 최고의 현자로 천재 약사이다.\n그녀의 신도로 들어가면 여러가지 물약들을 받게되고 추가적인 효과를 얻게 된다.\n또한 자신의 몸을 개조하거나 부작용을 감당하는 극적인 치료도 가능해진다.\n신도는 그녀의 실험대상이 될 각오를 할 수 있다면 그만큼의 보답을 받을 수 있을 것이다.\n신도는 이로운 물약의 위에서 기도를 하여 포션을 바치거나 물약을 마시는 것으로 신앙심을 얻을 수 있다.\n또한 자주는 아니지만 적을 죽였을때 가끔씩 신앙심을 얻을 수 도 있다.
-LOC_SYSTEM_GOD_KANAKO_TITLE,야사카 카나코 - 산판과 호수의 권화
-LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,카나코는 건(하늘)을 창조하는 능력을 가진 신으로 본래는 바람의 신이지만 산의 신으로 모셔지고 있다.\n그녀는 신자들에게 신앙을 받는 것으로 강력한 전투 능력을 보답한다.\n특히 근접전사와 원거리탄막으로 싸우는 자에게 큰 도움이 될 것이다.\n신자들은 계속되는 전투로 그녀에게 신앙을 바쳐야한다.
-LOC_SYSTEM_GOD_YUKARI_TITLE,야쿠모 유카리 - 경계속에 숨은 요괴
-LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,야쿠모 유카리는 환상향에서도 이름있는 강력한 경계의 요괴다.\n유카리의 식신으로 들어가게 되면 그녀에게 경계와 관련된 능력을 얻을 수 있다.\n강력한 전이능력을 제공받지만 권능을 제외한 다른 전이능력을 금지하고\n제어하기 힘든 강력한 전이 능력은 역으로 신도를 위험하게 만들수도 있다.
-LOC_SYSTEM_GOD_HINA_TITLE,카기야마 히나 - 숨어있는 액막이 인형 신
-LOC_SYSTEM_GOD_HINA_DESCRIPTION,히나는 액을 모아서 재앙을 방지하는 재앙신이다.\n그녀로부터 액을 받아서 저주를 몸에 지니는 것으로 그녀의 권능을 얻을 수 있다.\n던전을 탐험하는 것으로 신앙심을 얻을 수 있다.
-LOC_SYSTEM_GOD_SATORI_TITLE,코메이지 사토리 - 원령도 두려워하는 소녀
-LOC_SYSTEM_GOD_SATORI_DESCRIPTION,사토리는 지령전의 주인으로 마음을 읽는 요괴이다.\n사토리를 믿는다는 것은 그녀의 펫이 된다는 얘기와도 같고 그녀의 힘을 받을 수 있게 된다.\n사토리는 방임주의이기때문에 전투에 직접 관련된 능력은 별로 주진 않는다.\n그러나 그녀의 마음을 읽는 능력으로 던전의 지형 정보를 얻거나 위치를 알아낼 수 있다.\n또한 상대의 마음 속으로부터 트라우마를 읽어내거나 상대의 생각을 통째로 읽어내 농락할수도 있다.\n생각을 간파당한 상대는 모든 디버프 마법에 취약해지므로 정신술을 연마한 사람에게 도움이 될 것이다.\n그녀의 애완동물들은 던전을 탐험하는 것으로 그녀의 호감을 얻을 수 있다.
-LOC_SYSTEM_GOD_YUUGI_TITLE,호시구마 유우기 - 일컬어지는 괴력난신
-LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,유우기는 지하의 옛도시에 살고 있는 오니이다. 유우기는 괴력난신의 오니로 강력한 힘을 신도에게 준다.\n그녀의 힘은 근접 전투를 하면서 상대를 매치거나 집어던지는 등 레슬링같은 전투를 해낼 수 있다.\n또한 오니의 힘으로 포효를 하여 상대를 벙어리로 만들거나 오니의 궁극기 또한 사용할 수 있게 된다.\n단, 유우기는 신도가 마법의 힘에 의지해 싸우는 것을 싫어한다.\n그녀의 신앙심은 전투에서 승리하는 것으로 얻을 수 있다.
-LOC_SYSTEM_GOD_TENSI_TITLE,히나나이 텐시 - 비상비비상천의 아가씨
-LOC_SYSTEM_GOD_TENSI_DESCRIPTION,텐시는 유정천의 제멋대로인 천인 아가씨이다.\n그녀는 지루한 천계생활에 따분해하던차 이 이변을 계기로 자신을 믿고자하는 신도들을 장난감처럼 취급한다.\n텐시는 신도에게 어떠한 권능도 내려주지않는다. 모든 행동은 그녀의 변덕대로 이루어진다. \n신도가 항상 위험천만한 전투를 반복하여 그녀의 흥미를 최대한으로 끌어낸다면 강력한 도움을 받을 수 있다.\n하지만 신도가 안이한 안전을 바란다면 곧 자신의 생각을 후회하게 될 것이다.
-LOC_SYSTEM_GOD_BYAKUREN_TITLE,히지리 뱌쿠렌 - 봉인된 대마법사
-LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,뱌쿠렌은 마계에 봉인되어있었던 대마법사로 환상향에 절인 명련사를 세워 불교의 가르침을 전한다.\n그녀의 특기는 마법(특히 신체능력을 올리는 마법)이므로 신자들에게 마법을 주로 가르친다.\n그녀의 권능으로 높은 수준의 지능을 얻거나 빠른 이동이 가능하거나 마법패널티를 상쇄받는다.\n신도는 만나보지못한 새로운 사람들을 만나는 것으로 신앙심을 얻을 수 있다.
-LOC_SYSTEM_GOD_SEIJA_TITLE,키진 세이자 - 역습의 아마노자쿠
-LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,세이자는 공개수배되어있는 아마노자쿠로 다양한 물건들을 들고 도망중이다.\n세이자와 손을 잡는 것으로 그녀가 훔친 강력한 아이템들을 선물 받을 수 있다.\n현재 궁지에 몰린 그녀는 세이자는 당신이 한편이 되는 것 자체를 최고로 환영할 것이다.\n그러나 세이자는 어디까지나 신도를 이용할 생각이므로 당신을 방패로 삼을 것이고\n그녀는 당신이 이용가치가 없어지면 언제든지 버릴 것이며 그녀를 믿으면 영원히 다른 신들의 질타를 받을 것이다.\n그녀는 의심이 많고 강자를 싫어하므로 레벨이 9를 넘어가면 더이상 그녀를 믿을 수 없게 된다.
-LOC_SYSTEM_GOD_LILLY_TITLE,릴리 화이트 - 봄을 나르는 요정
-LOC_SYSTEM_GOD_LILLY_DESCRIPTION,릴리 화이트는 봄을 알리는 요정으로 지나가는 것만으로도 봄꽃을 개화시킨다고한다.\n그녀는 요정의 권리를 신장시키기 위해 요정들에게 자신의 힘을 나눠주고있다.\n그녀를 믿는 것으로 떠돌이 요정들을 자신의 동료로 끌어모을 수 있다.\n동료가 된 요정은 당신이 죽을때까지 죽어도 되살아나면서 당신을 따를 것이다.\n당신은 얻은 경험치를 일부를 동료 요정들에 나눠줘야하며 경험치를 받은 요정들은 당신과 함께 성장한다. \n본래 릴리화이트는 요정만의 신이지만 자발적인 다른 종족의 입교는 거부하지않는다.\n릴리화이트는 이 세상을 탐험하는 것을 좋아한다.
-LOC_SYSTEM_GOD_MIKO_TITLE,토요사토미미노 미코 - 우주를 관장하는 전능 도사
-LOC_SYSTEM_GOD_MIKO_DESCRIPTION,토요사토미미노 미코는 몽전대사묘의 성인으로 욕망을 읽는 능력을 지녔다.\n그녀를 믿는 신도는 신앙심이 아닌 인기도를 자원으로 사용하게된다.\n인기도는 빠른 속도로 오르며 적들의 욕망을 읽거나 죽임으로서 인기도를 모을 수 있지만\n층을 올라가거나 서브던전이 바뀌면 인기도가 떨어지며 권능은 인기도를 크게 소모하게 된다.\n미코의 권능인 도술은 반영구적이며 지속시간없이 유지되지만 층을 이동할 경우 사라진다.
-LOC_SYSTEM_GOD_OKINA_TITLE,마타라 오키나 - 궁극의 절대비신
-LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.\n그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.\n그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.\n문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.\n또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.\n그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.
-LOC_SYSTEM_GOD_JUNKO_TITLE,순호
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
-LOC_SYSTEM_GOD_BUG_TITLE,버그신
-LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,당신은 이제 죠온이나 시온을 빙의할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,더 이상 당신은 이제 죠온이나 시온을 빙의할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_ADD,빙의상태에서 빙의된 신에 따라 파워를 이용한 효과를 얻게 된다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_REMOVE,더 이상 빙의상태에서 파워를 이용한 효과를 얻을 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_ADD,빙의상태에서 빙의된 신에 따라 소모품을 이용한 효과를 얻게 된다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_REMOVE,더 이상 빙의상태에서 소모품을 이용한 효과를 얻을 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_ADD,빙의할때마다 한번만 빙의된 신의 필살기를 사용할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_REMOVE,더 이상 빙의된 신의 필살기를 사용할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_ADD,이제 당신은 무조건 이길 수 있는 최흉최악의 전법을 사용할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_REMOVE,더 이상 최흉최악의 전법을 사용할 수 없다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_ADD,히지리는 당신의 배울 수 있는 마법레벨 한계를 늘려준다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_REMOVE,더 이상 당신의 배울 수 있는 마법레벨 한계를 늘려주지않는다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_ADD,당신은 순간적으로 지력을 강화시킬 수 있다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_REMOVE,더 이상 순간적인 지력강화를 사용할 수 없다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,당신은 이제 강화된 근력으로 낮은 갑옷패널티의 마법실패율을 무시한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_REMOVE,더 이상 근력강화의 축복을 받지 못한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_ADD,히지리는 이제 당신의 강화마법들을 보조해준다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_REMOVE,더 이상 강화마법들을 보조받지 못한다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_ADD,당신은 이제 히지리의 축복으로 초인같은 각력으로 달릴 수 있게 된다.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_REMOVE,더 이상 초인같은 각력을 사용할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_ADD,당신은 순간적으로 상대에게 돌진할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_REMOVE,더 이상 순간적인 돌진을 사용할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_ADD,당신은 기둥을 소환 할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_REMOVE,더 이상 기둥을 소환 할 수 없다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_ADD,당신은 이제 바람을 감은 공격을 할 수 있다.
-LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_REMOVE,더 이상 바람을 감아 공격할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_JUMP_ADD,당신은 이제 짧은 거리를 점프할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_JUMP_REMOVE,당신은 더 이상 짧은 거리를 점프할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TEMPLE_ADD,당신은 이제 신전을 세울 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TEMPLE_REMOVE,당신은 더 이상 신전을 세울 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_WATER_GUN_ADD,당신은 이제 물총을 날릴 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_WATER_GUN_REMOVE,당신은 더 이상 물총을 날릴 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TONGUE_ADD,당신은 이제 멀리있는 적을 끌어당길 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TONGUE_REMOVE,당신은 더 이상 적을 끌어당길 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_HP_ADD,당신은 이제 적을 죽임으로 체력을 회복할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_HP_REMOVE,당신은 더 이상 적을 죽여서 체력을 회복할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_MP_ADD,당신은 이제 적을 죽임으로 영력을 회복할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_MP_REMOVE,당신은 더 이상 적을 죽여서 영력을 회복할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_POWER_ADD,당신은 이제 적을 죽임으로 파워를 회복할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_POWER_REMOVE,당신은 더 이상 적을 죽여서 파워를 회복할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_SWIM_ADD,당신은 이제 수영할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_SWIM_REMOVE,당신은 이제 맥주병이다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_DEAD_PROTECT_ADD,당신은 이제 스와코로부터 보호받는다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_DEAD_PROTECT_REMOVE,당신은 더 이상 스와코로부터 보호받을 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_CURSE_ADD,당신은 이제 상대를 저주할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_CURSE_REMOVE,당신은 더 이상 저주를 걸 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_DIGGING_ADD,당신은 이제 벽을 무너뜨릴 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_DIGGING_REMOVE,당신은 더 이상 벽을 무너뜨릴 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_SUMMON_FLOG_ADD,당신은 이제 개구리를 소환할 수 있다
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_SUMMON_FLOG_REMOVE,당신은 더 이상 개구리를 소환할 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_STATUE_ADD,당신은 이제 귀여운 개구리 석상을 세울 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_STATUE_REMOVE,당신은 더 이상 개구리 석상을 세울 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_COLD_RESIST_ADD,당신은 이제 냉기에 강하다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_COLD_RESIST_REMOVE,당신은 더 이상 냉기에 강하지 않다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_FIRE_RESIST_ADD,당신은 이제 화염에 강하다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_FIRE_RESIST_REMOVE,당신은 더 이상 화염에 강하지 않다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_AC_ADD,당신은 이제 피부가 단단해졌다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_AC_REMOVE,당신의 피부는 물렁해졌다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_CONFUSE_RESIST_ADD,당신은 이제 멀미를 하지 않는다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_CONFUSE_RESIST_REMOVE,당신은 더 이상 멀미에 강하지 않다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_POISON_RESIST_ADD,당신은 이제 독에 강하다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_POISON_RESIST_REMOVE,당신은 더 이상 독에 강하지 않다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_RAIN_ADD,당신은 이제 거대한 비를 내리게 할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_RAIN_REMOVE,당신은 더 이상 비를 내릴 수 없다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_SLEEP_ADD,당신은 이제 동면을 한다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_SLEEP_REMOVE,당신은 더 이상 동면을 하지 않는다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_MISYAGUZI_ADD,당신은 이제 무시무시한 미샤구지님을 소환할 수 있다.
-LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_MISYAGUZI_REMOVE,당신은 더 이상 미샤구지님을 소환할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_ADD,당신은 파워가 높을수록 체력과 영력회복속도가 빨라진다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_REMOVE,더 이상 체력과 영력회복속도가 빨라지지않는다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_ADD,당신은 이제 상태이상과 능력치저하를 회복할 수 있다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_REMOVE,더 이상 상태이상과 능력치저하를 회복할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_ADD,당신은 이제 음식을 빨리 먹을 수 있고 영력을 조금 회복한다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_REMOVE,더 이상 음식을 빨리 먹지 못한다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_ADD,당신은 이제 음식과 P를 소모하여 체력을 크게 회복할 수 있다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_REMOVE,더 이상 음식으로 체력을 회복할 수 없다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_ADD,당신은 이제 음식을 먹은 직후 화염과 냉기에 강해진다.
-LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_REMOVE,더 이상 음식을 먹어도 화염과 냉기에 강하지않다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_ADD,당신은 최대영력이 신앙심에 비례해서 증가한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_REMOVE,당신의 최대영력은 감소했다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_ADD,당신은 적을 죽였을때 영력을 얻는다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_REMOVE,더 이상 적을 죽였을때 영력을 얻지 못한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_ADD,미마는 이제 파괴술이 들어간 마법의 위력을 보조한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE,더 이상 파괴술 위력을 보조받지 못한다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_ADD,미마는 이제 파괴술이 들어간 마법의 성공율을 올려준다.
-LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE,더 이상 파괴술 성공율을 보정받지 못한다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_ADD,당신은 하급 마족의 작은 무리를 소환할 수 있다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_REMOVE,더 이상 하급 마족의 작은 무리를 소환할 수 없다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_ADD,당신은 위험을 무릅쓰고 신키의 중급 마족을 소환할 수 있다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_REMOVE,더 이상 중급 마족을 소환할 수 없다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_ADD,신키는 당신을 적대적인 소환수로부터 지켜준다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_REMOVE,더 이상 적대적인 소환수로부터 보호받지 못한다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_ADD,당신은 위험을 무릅쓰고 신키의 상급 마족을 소환할 수 있다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_REMOVE,더 이상 상급 마족을 소환할 수 없다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD,이제 당신은 P로부터 힘을 얻는다.
-LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE,더 이상 P로부터 힘을 얻지 못한다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_ADD,당신은 취했을때 잘 피할 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_REMOVE,더 이상 취해도 피하지 못한다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_ADD,당신은 물약을 술로 바꿔 마실 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_REMOVE,더 이상 물약을 술로 바꿔 마실 수 없다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_ADD,당신은 적에게 저먼 스플렉스를 걸 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_REMOVE,더 이상 적에게 저먼 스플렉스를 걸 수 없다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_ADD,당신은 적을 집어 던질 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_REMOVE,더 이상 적을 집어 던질 수 없다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_ADD,당신은 오니의 포효를 외칠 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_REMOVE,더 이상 포효할 수 없다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_ADD,당신은 드디어 삼보필살을 사용할 수 있다.
-LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_REMOVE,더 이상 삼보필살을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_ADD,시즈하는 잠에서 깬 적들이 외치는 확률을 크게 줄여준다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_REMOVE,더 이상 시즈하는 적의 외침을 줄여주지 않는다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_ADD,당신은 은밀하게 움직일 수 있는 단풍의 발자취를 남긴다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_REMOVE,더 이상 당신은 발자취에 단풍을 남기지 못한다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_ADD,당신은 단풍위에 있는 몬스터들에게 혼란을 걸 수 있다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_REMOVE,더 이상 당신은 단풍위의 몬스터들에게 혼란을 걸 수 없다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD,당신은 끼고있는 방어구를 단풍 방어구로 만들 수 있다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE,더 이상 당신은 끼고있는 방어구를 단풍 방어구로 만들 수 없다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_ADD,당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_REMOVE,더 이상 당신은 단풍 위에서 빠르게 움직일 수 없다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_ADD,당신은 딱 한번 당신의 무기에 단풍의 힘을 불어넣을 수 있다.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_REMOVE,더 이상 당신은 당신의 무기에 단풍의 힘을 불어넣을 수 없다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY0_ADD,당신은 이제 아이템의 저주를 탐지할 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_ADD,당신은 저주걸린 아이템의 마이너스 인챈트를 플러스로 바꿀 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_REMOVE,더 이상 저주걸린 아이템의 인챈트를 역전할 수 없다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_ADD,당신은 무기에 저주를 걸어서 강력한 힘을 얻을 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_REMOVE,더 이상 무기에 저주를 걸어서 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD,당신은 방어구에 저주를 걸어서 모든 데미지를 반사시킬 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE,더 이상 방어구에 저주를 걸어서 데미지를 반사시킬 수 없다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_ADD,당신은 장신구에 저주를 걸어서 체력과 영력을 회복할 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_REMOVE,더 이상 장신구에 저주를 걸어서 체력과 영력을 회복할 수 없다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_ADD,당신은 이제 저주를 흩뿌리고 다닌다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_REMOVE,더 이상 저주를 흩뿌리고 다니지 않는다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_ADD,당신은 딱 한번 당신의 무기에 저주의 힘을 불어넣을 수 있다.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_REMOVE,더 이상 당신은 당신의 무기에 저주의 힘을 불어넣을 수 없다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_ADD,당신은 일정 데미지를 받으면 가끔 순간이동된다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_REMOVE,더 이상 데미지를 받을때 순간이동되지 않는다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_ADD,당신은 경계로부터 지원사격을 요청할 수 있다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_REMOVE,더 이상 지원사격을 요청할 수 없다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_ADD,당신은 경계를 타고 이동할 수 있다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_REMOVE,더 이상 경계를 타고 이동할 수 없다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_ADD,당신은 결계를 만들 수 있다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_REMOVE,더 이상 결계를 만들 수 없다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_ADD,당신은 차원을 고정시킬 수 있다.
-LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_REMOVE,더 이상 차원을 고정시킬 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_ADD,에이린은 물약작용을 올려준다. 좋은물약위에서 기도하여 나쁜물약을 만들 수 있다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_REMOVE,더 이상 물약의 작용을 올려주지 않는다. 더이상 나쁜 물약을 만들 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_ADD,당신은 독물약에서 새로운 힘을 얻는다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_REMOVE,더 이상 독물약에서 새로운 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_ADD,당신은 물약을 던질 수 있다. 이제 능력치감소물약에서 새로운 힘을 얻는다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_REMOVE,더 이상 물약을 던질 수 없다. 능력치감소물약에서 새로운 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_ADD,당신은 신체개조를 할 수 있다. 당신은 이제 혼란물약에서 새로운 힘을 얻는다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_REMOVE,더 이상 신체개조를 할 수 없다. 더 이상 혼란물약에서 새로운 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_ADD,당신은 감속물약에서 새로운 힘을 얻는다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_REMOVE,더 이상 감속물약에서 새로운 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_ADD,이제 긴급수혈이 가능하다. 이제 마비물약에서 새로운 힘을 얻는다.
-LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_REMOVE,더이상 긴급수혈을 할 수 없다. 더 이상 마비물약에서 새로운 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_ADD,당신 주변엔 항상 유령이 모여든다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_REMOVE,더 이상 당신 주변에 유령이 모여들지 않는다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_ADD,유령을 원하는 곳으로 이동시킬 수 있다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_REMOVE,더 이상 유령을 이동시킬 수 없다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_ADD,잠시동안 유령의 빈도를 증가시킬 수 있다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_REMOVE,더 이상 유령의 빈도를 증가시킬 수 없다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_ADD,적 한명의 영혼을 속박할 수 있다.
-LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_REMOVE,더 이상 영혼을 속박할 수 없다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_ADD,당신은 이제 투명을 감지할 수 있다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_REMOVE,더 이상 투명을 감지할 수 없다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_ADD,당신은 적에게 트라우마를 보여줄 수 있다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_REMOVE,더 이상 적에게 트라우마를 보여줄 수 없다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_ADD,당신은 적으로부터 던전의 모양을 읽어낼 수 있다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_REMOVE,더 이상 적으로부터 던전의 모양을 읽지 못한다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_ADD,당신은 주변의 적의 기척을 읽을 수 있다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_REMOVE,더 이상 주변의 적의 기척을 읽을 수 없다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_ADD,당신은 적의 생각을 읽어낼 수 있다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_REMOVE,더 이상 생각을 읽을 수 없다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_ADD,당신은 사토리님의 관리를 직접 받는 소중한 애완동물이다.
-LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_REMOVE,더 이상 사토리님은 당신을 직접 관리하지않는다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_ADD,세이자는 당신의 징벌로부터의 도주를 돕는다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_REMOVE,세이자는 더 이상 징벌로부터 당신을 돕지 않는다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_ADD,당신은 위치를 뒤집을 수 있다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_REMOVE,더 이상 위치를 뒤집을 수 없다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_ADD,당신은 이제 모두의 시야를 뒤집을 수 있다.
-LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_REMOVE,더 이상 모두의 시야를 뒤집을 수 없다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_ADD,당신은 이제 요정들을 동료로 권유할 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_REMOVE,더 이상 요정을 동료로 권유할 수 없다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_ADD,당신은 이제 요정들을 근처로 호출할 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_REMOVE,더 이상 요정을 호출할 수 없다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD,당신은 이제 한명의 요정을 더 권유할 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_FINAL_ADD,당신은 마지막 동료가 될 요정을 권유할 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_ADD,당신은 이제 요정을 치유 할 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_REMOVE,더 이상 요정을 치유 할 수 없다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_ADD,당신은 이제 일시적으로 자신의 힘을 요정들에게 나눠줄 수 있다.
-LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_REMOVE,더 이상 요정대전쟁을 벌일 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_ADD,당신은 이제 문을 자유자재로 넘나들며 투시할 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_REMOVE,더 이상 문을 자유자재로 드나들 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_ADD,당신은 이제 원하는 벽에 문을 만들 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_REMOVE,더 이상 문을 만들어 낼 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_ADD,당신은 이제 멀리 떨어진 열린 문을 강제로 닫아 잠글 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_REMOVE,더 이상 문을 강제로 닫을 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_ADD,당신은 이제 적의 등 뒤에 백도어를 만들어 이동할 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_REMOVE,더 이상 적의 등뒤에 백도어를 만들 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_ADD,당신은 이제 크레이지 백댄서즈를 호출할 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_REMOVE,더 이상 크레이지 백댄서즈를 호출할 수 없다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_ADD,당신은 이제 등 뒤의 문을 열고 도망칠 수 있다.
-LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_REMOVE,더 이상 등 뒤의 문으로 도망칠 수 없다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_ADD,당신은 이제 단순한 탄막을 쏠 수 있다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_REMOVE,더 이상 당신은 단순한 탄막을 쏠 수 없다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_ADD,당신은 이제 순수한 힘을 얻을 수 있다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_REMOVE,더 이상 당신은 순수한 힘을 얻을 수 없다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_ADD,당신은 이제 순수한 살의를 지닐 수 있다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_REMOVE,더 이상 당신은 순수한 살의를 지닐 수 없다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_ADD,당신은 이제 순화할 수 있다.
-LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE,더 이상 당신은 순화할 수 없다.
-LOC_SYSTEM_GOD_SHOW_AHTEISM,당신은 아직 신을 믿고 있지 않다.
-LOC_SYSTEM_GOD_SHOW_PASSIVE,(패시브)
-LOC_SYSTEM_GOD_SHOW_ACTIVE,(액티브)
-LOC_SYSTEM_GOD_SHOW_NONE,(없음)
-LOC_SYSTEM_GOD_SHOW_PIETY,(신앙)
-LOC_SYSTEM_GOD_SHOW_MP,(영력)
-LOC_SYSTEM_GOD_SHOW_MP_N,(영력 {0})
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,河童の発明品のひとつ。水を高圧で圧縮した爆弾である。\n敵に投げつけると圧縮された水が一気に爆発する。\n広範囲の攻撃ができそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,仏教僧が修行に用いたとされる古代インドの武器。\n普段はただの柄のように見えるが、強く投げると魔力が放出される。\n他の弾幕と異なり、敵を貫通して攻撃できる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,普段着のような快適な服。\n布以外の素材でできているため、通常の鎧のペナルティが大きく軽減されている。\nただし、最低限のペナルティは他の服と同じため、鎧に慣れると特に利点はない。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,巫女たちが着る装束。\n神の加護を受けており、精神を守ってくれる。装備中は混乱耐性が得られる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING,龍宮の使いが着用しているという羽衣。\n電気を通す性質を持ち、装備中は電気耐性が得られる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,河童たちが制服のように着ている青い服。\n川の寒さにも耐えられるよう設計されており、装備中は冷気耐性が得られる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE,火鼠の気が宿る服。\n高熱にも耐えられそうだ。装備中は火炎耐性が得られる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID,紅魔館のメイドたちが着ている制服。\n紅魔館図書館製の特別な魔法加工が施されており、装備中は魔法耐性が上がる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,鈴蘭畑の人形が着ていた服だが、サイズが大きめなので着られそうだ。\n鈴蘭の力があなたを守ってくれる。装備中は毒耐性が得られる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,紅葉で作られた服。意外にもきちんとした衣装である。\nシズハを信仰していると周囲の風景に溶け込み、隠密性が急激に上昇する。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,動きやすい布製の服。\n頻繁なグレイズにも耐えられる丈夫な生地でできている！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,頑丈な素材で作られた服。\n布よりは動きにくいが、かなり軽い。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,鎖で編まれた鎧。\nかなり硬いが、プレートアーマーほどではない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,鋼鉄のプレートを重ねた鎧。\n魔法や動きを妨げるが、あなたの安全は保証される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,敵の攻撃を防ぐための盾。両手武器を装備していると使えない。\n弾幕を防ぐという反則的な使い方も可能。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,頭に付けるアクセサリー。ファッションの基本。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,体にまとって格好良さを演出するマント。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,手にはめる手袋。手袋に呪いがかかっていると指輪を外さないと装備できない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,足を守る靴。ダンジョンの床を裸足で歩きたくないなら、ぜひ装備しよう。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,ただの水が入った瓶だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,治癒のポーション。飲むと混乱、毒、病気から回復し、体力も少し回復する。\n効果は即座に発揮される不思議な薬。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,毒が入ったポーション。吐き気を催す味で、飲めば恐ろしい毒にかかる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,傷を癒すポーション。飲むと瞬時に多くの体力を回復する。\nただし状態異常は治せない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,一時的に強い筋力を得られるポーション。攻撃力も上がる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HASTE,高速で行動できるようになるポーション。移動も行動も2倍速になる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE,飲むと精神が混乱するポーション。\n混乱が収まるまでその場でじっとしているのも手だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW,動きが遅くなるポーション。移動も行動も1/2速になる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS,飲むと数ターン体が麻痺するポーション。危険だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER,飲むと一時的に知性が上がるポーション。\n知性とともに魔法成功率と魔法威力も上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,飲むと一時的に敏捷性が上がるポーション。\n敏捷性と共に回避も向上する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC,飲むと霊力が瞬時に回復する魔力のポーション。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION,飲むと一時的に飛行状態になるポーション。飛行中は深い水などを渡れるようになる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER,飲むとパワーが上昇するポーション。\n飲んだ瞬間にPが1.00増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT,飲むと一時的に能力値が下がる不快なポーション。\n力・知能・敏捷のうち1つがランダムで一時的に減少するが、時間が経てば元に戻る。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT,飲むと失われた能力値を一時的に回復してくれるポーション。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,これはお酒だ。飲むと酔っ払う。\n酔っ払うとまっすぐに動くのが難しくなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG,これはバグポーションだ。恐ろしい！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN,何か怪しい液体が入った瓶。\n飲んでみないと何かは分からない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD,食べられる食料。\nダンジョンにこんな食べ物が落ちているのは怪しいが、一応食べられそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL,声に出して読むと巻物に込められた未知の力を引き出せる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT,読むと奇妙なテレポートが発生する巻物。\nただしすぐにテレポートするわけではなく、数ターンの準備が必要。\nテレポート状態のときに読めばその効果を打ち消すことも可能。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY,識別の巻物。\n読んだ後に触れたアイテムを識別できる。非常に重要な巻物。\n某半妖の店主の能力にそっくり。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE,いたずら妖精が意味もなく書き殴った落書きだ！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON,持っている武器に呪いをかける。\n呪われた装備は解除されるまで外せなくなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,持っている防具に呪いをかける。\n呪われた装備は解除されるまで外せなくなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE,装備中の呪いを解除する。\n嫌な気分も消えていく。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK,視界内の任意の位置に瞬間移動できる巻物。\n緊急回避に最適な巻物だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING,現在いる階のマップを明らかにする巻物。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_,装備中の武器の攻撃力と命中率を強化できる。\nさらに呪いも解除される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,選択した防具の防御力を強化できる。\nさらに呪いも解除される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG,煙を発生させる巻物。\n煙は敵と自分の視界を遮る。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,所持品の中にある呪われたアイテムを探知する巻物。\n対象がなくても識別はされる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,装備中の装飾品に呪いをかける巻物。\n指輪かネックレスのいずれか一つにランダムで呪いがかかる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,周囲の音を抑える巻物。一時的に静寂状態になる。\n静寂の範囲内にいる敵は魔法が使えず、範囲は時間とともに縮小する。\nただし、自分も音を使う魔法や巻物、権能を使用できなくなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,霊撃を使う巻物。周囲の敵に抵抗不能の短時間麻痺を与える。\n効果は絶対だが、Pを1段階強制的に消費する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,スペルカードを充電する巻物。ある程度消費されたスペルカードの充電量を回復する。\nスペルカードの最大値が高いほど充電量も増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,覚えた魔法を忘れさせる忘却の巻物。使用すると覚えている魔法の中から一つを選んで忘れる。\n魔法を習得した際に消費したレベルは返却される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,読むと同時に広範囲に聖域を展開する巻物。\n聖域内ではすべての攻撃ダメージが無効になる。\n山に住むある鬼婆が作ったという貴重な巻物。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,現在装備している武器に魔法の力を付与する巻物。\nどんな魔法が付くかは不明で、既存の魔力は上書きされる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,バグの巻物。早く製作者にバグとして報告しよう！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,解読不能な文字が並ぶ巻物。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,スペルカードは決められた回数内で自由に使用可能だが、\n限界を超えるとそれ以上使えなくなる。\n正確な残り回数は識別しないと確認できない。発動術のスキルが高いほど威力も増す。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,火炎の気を込めたスペルカード。\n使用すると指定方向の広範囲に火炎の雲を発生させる。\n発動スキルが高いと持続時間が長くなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,冷気の気を込めたスペルカード。\n敵に強力な冷気攻撃を与える。\n発動スキルが高いとダメージが増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,大地の気を込めたスペルカード。\n威力自体は低いが、壁に当たると爆発して広範囲にダメージを与える。\n発動スキルが高いとダメージが増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,大気の気を込めたスペルカード。\n扇状の広範囲に弾幕を放ち、範囲内の敵を吹き飛ばす。\n発動スキルが高いと吹き飛ばしの距離と威力が増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,月光の気を込めたスペルカード。\n使用者を一定時間透明にする。\n発動スキルが高いと持続時間が長くなる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,金属の気を込めたスペルカード。\n前方に鉄の棘を3連続で発射する。\n発動スキルが高いとダメージが増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,太陽の気を込めたスペルカード。\n強い光を放ち、周囲の敵を光らせて混乱させる。\n混乱は強力になるほど抵抗されやすく、無生物には効かない。\nまた、吸血鬼にはただの混乱以上のダメージを与えるとされている。\n発動スキルが高いと持続時間と混乱の確率が上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,バグのスペルカードだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,未知の力が込められたお守り。基本的には何の力もない普通のお守りだが、\n装備したまま経験値を得ると徐々に充電され、100％になると効果を発揮する。\n一度でも外してしまうと充電は0％に戻るので注意。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,永琳の甘酒薬の効果が染み込んだ未来体験のお守り。\n他のお守りより充電は非常に遅いが、満タンになれば死を回避できる。\n100％の状態で死亡すると体力全快で復活する。\nただし、この方法で復活するとお守りは燃えて消滅する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,春雪異変で使われた春の気を集め、特殊な結界を発動するお守り。\n装備していると周囲の春の気を吸収し、100％になると霊撃を使えるようになる。\n満タンの状態でvキーを押すと、周囲の敵を一定時間麻痺させる。\n使用後は充電が0％に戻り、再充電が可能になる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,永夜異変を解決した呪術の力が込められたお守り。\n装備中、周囲から刻符を集め、100％になるとパワーアイテムを生成できる。\n満タンでvキーを押すと、周囲にパワーアイテムが出現する。\n使用後は再充電が可能。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,守矢神社で開発された信仰を集めるためのお守り。\n装備中に周囲の信仰を吸収し、満タンになると神々との関係が改善する。\n100％になると自動的に信仰心が少し上昇し、再び0％に戻る。\n一部の神は信仰を集めないため、効果が発揮されないこともある。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,地底のような場所でも遠距離通信が可能なよう改造されたお守り。\n装備中は電波受信感度が上がり、充電が満タンになると霊力が回復する。\n満タンの状態では霊力の回復速度が上昇し、vキーを押すと瞬間的に霊力を回復できる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,夢殿大祀廟で太子を復活させる際に使われたという神霊を宿せるお守り。\n装備中は周囲の神霊を吸収し、満タンになるとスペルカードに神霊を吹き込む。\nvキーを押すと所持中のスペルカード1枚を回復できる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,あらゆる異変で重要なグレイズの力が込められたお守り。\n装備中に徐々に充電され、100％になると弾幕モンスターと化す。\n常にグレイズが発動し遠距離弾幕を回避でき、vキーを押すとしばらくの間攻撃を100％回避する。\nグレイズ音が心地よい。グレイズが意味なかった作品も…？\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,ある問題児の天人が剣の力を注いだお守り。彼女の気まぐれが表れている。\n装備中に周囲の気質玉を吸収し、満タンになると隠された天候の力が発動する。\nvキーでランダムな天候が発現し、体力回復速度が大きく上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,都市伝説を具現化するオカルトボールの力を秘めたお守り。\n装備中にオカルトの気を吸収し、満タンになるとその力を解放する。\nvキーで視界内の敵対召喚体を追放し、お守り内に潜むオカルトの力を妖怪として具現化する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,このバグお守りには見た目も効果もない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,このお守りにはどんな力があるかまだ分かっていない。\n装備すれば何か隠された力が分かるかもしれない。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,装着者の筋力を強化または弱化する力の指輪。\nその変動量は指輪の数値に依存する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX,装着者の敏捷性を強化または弱化する敏捷の指輪。\nその変動量は指輪の数値に依存する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT,装着者の知能を強化または弱化する知性の指輪。\nその変動量は指輪の数値に依存する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY,装着者の自然なPアイテム消費速度を速める空腹の指輪。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL,ミノリコ様の加護が込められた満腹感を与える指輪。\n新陳代謝が遅くなり、自然なP消費が遅くなる。\n加速や透明状態でのP消費も軽減される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT,装着者にテレポート能力を付与する指輪。\nただし副作用で、装備中はランダムなテレポートが発生することがある。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,毒への耐性を得る指輪。ほとんどの毒に耐性を持つようになる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,炎への耐性を得る指輪。最大で3段階まで重ねて耐性を得られる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,冷気に対する耐性を得る指輪。最大で3段階まで重ねて耐性を得ることができる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,装備中は透明な敵が見えるようになる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,飛行を使用できる指輪。装備すると能力使用に「飛行」が追加される。\n飛行中は深い水などを越えることができる。\n使用には発動スキルが必要で、少量のPを消費する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,透明化を使用できる指輪。装備すると能力使用に「透明」が追加される。\n透明状態では敵に発見されにくくなる。\nただし透明中はPの消費が加速する。使用には発動スキルと少量のPが必要。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,装備すると最大マナが増加する指輪。\n解除すると元に戻る。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,装備すると魔法成功率と魔法威力が上昇する指輪。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,装備すると防御力が変化する指輪。\n変化量は指輪に記された数値と同じ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV,装備すると回避率が上昇する指輪。\n変化量は指輪に記された数値と同じ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS,装備すると混乱と狂気に耐性が付く指輪。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS,装備すると電気耐性が上昇する指輪。\n完全ではないが、かなりのダメージを軽減する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS,装備すると魔法耐性が上昇する指輪。\nダメージ軽減はできないが、デバフなどの魔法から守ってくれる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG,バグの力が宿った指輪だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN,未知の力が宿る指輪。\n装備してすぐに力が分かるものもあれば、気付きにくい指輪もある。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,さまざまな魔法が詰まった本。\n有名な書物ではないが、習得する価値はありそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,火炎に関する基本的な魔法が書かれた本。\n火炎魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,冷気に関する基本的な魔法が書かれた本。\n冷気魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,毒に関する基本的な魔法が書かれた本。\n毒魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,多様でコスパの良い低レベル魔法が詰まった本。\n高レベル魔法はないが、内容は充実している。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,大地に関する基本的な魔法が書かれた本。\n大地魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,大気に関する基本的な魔法が書かれた本。\n大気魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,召喚に関する基本的な魔法が書かれた本。\n召喚魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,錬金術を教えるための書物。\n魔法を使って簡単な錬金術の実験ができるようだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,精神操作に関する基本的な魔法が書かれた本。\n心理魔法を始めたいあなたにおすすめ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,初心者魔戦士のために作られた魔法書。\n戦士に役立つ魔法が揃っている。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,メイドが基本的に身につけるべき素養と書かれている。紅魔館で配布中。\nメイド道は険しい。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,様々な電気魔法が記された魔法書。\n触るだけでビリビリする。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,簡単な元素練習ができるよう構成された魔法書。\nただしビクトリーダンスはもう無いらしい！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,多様な補助魔法が記された魔法書。\n魔法入門に良さそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,魔法暗殺者を夢見る人のための魔法書。\nまだ魔法が足りないようだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,雲を作るノウハウが記された魔法書。\nなんだか本まで湿っている気がする。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,強力な破壊の基本魔法が書かれた本。\n弾幕こそパワー！\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,精神魔法系の魔法が記された書物。\n妖怪は精神攻撃に弱いと言われている。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,様々な防御呪文が記された本。\n生き残ることが何よりも大事。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,風水に詳しい物部布都によって編纂された書。\n風を操る方法から大地を起こす術、水を扱うことで運気を操作する方法まで書かれている。\nなぜか放火のやり方が詳しく書かれた付録が付いている。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,転移に関連する魔法が記された魔法書。\n時空を操るには大きなリスクが伴う。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,問題児な天人・天子が自ら筆を執った魔法書。\n予測不可能な彼女だが、大地を操る技術は学ぶ価値あり。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,ミマが記した究極の破壊術書。\nすべての破壊魔導士が夢見るあの書物だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,地底に住むサトリが記した精神支配の法。\nなぜか本に心を読まれているような感覚になる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,紅魔館のメイド長が優秀なメイドを育てるために作ったとされる書。\n紅魔館では咲夜以外に優秀なメイドが存在せず、誰も理解できなかったため伝説となった。\n魔法だけでなく掃除や洗濯の仕方なども付録に書かれている。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,湖に住むとある氷の妖精が、自身の最強を証明するために書いた本。\n絵本のようにイラストとぐにゃぐにゃの文字で説明されている。\n非常に抽象的に書かれており、理解には驚くべき読解力が必要。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,魔法の森に住む人形遣いがよく持ち歩いている本だという。\n精巧かつ繊細に書かれた人形の扱い方は、召喚術にも応用できそうだ。\n恐ろしいことに爆薬の扱い方や呪いのかけ方まで書かれている。そこは見なかったことにしよう。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,天狗が主人公のスリル満点な冒険漫画。\n内容も面白いが、主人公の技を真似してみる価値はありそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,ある館の大図書館に収められていた錬金術のすべてが記された魔道書。\n読みづらく曖昧に書かれており、錬金術の大家でなければ理解は難しい。\n落書きの跡からして、元の持ち主も理解できていなかったようだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,誰かが失くした宝塔。強力な力が込められている。\n発動すると中に蓄えられた力がレーザーとして放たれる。\n発動スキルが高いとダメージが増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,どこかの住職が使っていた経典。魔法の力が込められている。\n発動するとパワーを代償に霊力を瞬時に回復する。\n発動スキルが高いと回復量が増加する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,夢の世界を彷徨っていた魂。\n使用すると幻の具現化がしばらく可能になる。\nある場所にいたモンスターたちが味方として召喚される。\n発動スキルが高いとより強い味方が現れる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,非常に巨大な爆弾。魔法の力で点火可能。\n発動すると目標地点に向けて投げられる。\n投げられた爆弾は数ターン後に大爆発を起こす。\n爆弾はマスを占有し、敵に壊されると爆発せず破壊される。\n発動アイテムのため使用しても消費されない。何か不思議な力が働いているようだ。\n発動スキルが高いとダメージと耐久力が上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,人のいない場所を漂うという怪談に登場する幽霊の提灯。\n発動して手に持つと誰にも見えず攻撃されない幽霊化状態になる。\n発動時、現在HPの30％～70％が減少する。\n発動中は完全無敵だがHPは回復せず、パワーが急速に減る。\n再度発動か、パワーが0になると自動的に解除される。\n幽霊化中は移動しかできず、アイテム・魔法・攻撃は全て使用不可。\nもし何らかの理由でパワーが減らなければ、送り提灯は代わりに別の何かを奪っていく。\n発動スキルが高いとHP減少量やパワー消費が軽減される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,河童が陸上でも撃てるように改造した魚雷。\nよく考えたらミサイルと大差ない。\n発動スキルが高いとダメージが上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,小人族が使うという妖術のハンマー。本来の持ち主は鬼らしい。\n使うと様々な効果をパワー1だけで発揮できる。\nただし使用にはリスクがあり、使用者が自滅することもある。\n10％の確率で正反対の効果が発動する可能性がある。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,幻想郷に来る前に偶然持ってきたカメラ。\n不思議な力によりフィルムがなくても撮影できそうだ。\n生存には全く役立たないが、美少女たちを記念に撮影して保管できる。\n高性能ではないため遠くの対象は撮影が難しい。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,バグが詰まった発動アイテムだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,このアイテムは回数制限なく発動可能なアイテムだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,このアイテムは回数制限なく発動可能で、発動スキルに応じて効果が強化される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Vキーでパワーを消費して発動できる。\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,この発動アイテムを使うたびに必要な
+LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,これは各ダンジョンを攻略した証であるルーンだ。\n3つ集めると最深部・博麗神社の扉を開くことができる。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,これは強大な力を持つ陰陽玉だ。神社の中に大切に祀られている。\nこれを持って脱出すれば異変を終わらせたり、とてつもない力を得られるかもしれない。\n使い方はあなたの自由！ だが脱出するまでは油断禁物！\n特に紅白の巫女が目を光らせてあなたを追ってくるだろう。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,「失くしたペットを探しています。- 古明地さとり」と書かれた紙。\nあなたの写真が貼られている……。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,「失くした物を探しています。- 古明地さとり」と書かれた紙。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,マタタビの木。あまり役には立たなそうだが、猫科の生き物にはたまらないようだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,壊れた天狗のカメラ。どうやら河童たちが修理のために保管しているようだ。\nひどく壊れていて使い道はまったくなさそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,河童たちが使い終えた素材や工具類。\n特に使い道はなさそうだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BUG,バグアイテムだ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0}が写っている写真だ。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,美少女が写っている写真だ。\
+LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,特に意味はないが、コレクションには良さそうだ。\
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,夢の世界に住む住人。\n幻想郷の住人とそっくりだが、夢の中の別の存在。\n本物よりも欲望に忠実な性格だという。\n
+LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,この霊夢は%d回コンティニューした。
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,この相手は無視できるほど弱そうだ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,この相手は弱そうだ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,この相手は危険そうだ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_STRONGER,この相手は非常に危険そうだ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_RESIST,毒に対する耐性がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_POISON_WEAKNESS,毒に対する耐性がない。
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_IMMUN,火炎を完全に防ぐ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST_MORE,火炎に対してかなりの耐性がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_RESIST,火炎に対して多少の耐性がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_FIRE_WEAKNESS,火炎に弱い。
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_IMMUN,冷気を完全に防ぐ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST_MORE,冷気に対してかなりの耐性がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_RESIST,冷気に対して多少の耐性がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_COLD_WEAKNESS,冷気に弱い。
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_IMMUN,完全に絶縁されている。
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST_MORE,電気がほとんど効かない。
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_RESIST,電気が効きにくい。
+LOC_SYSTEM_MONSTER_DESCRIPTION_ELEC_WEAKNESS,電気に弱い。
+LOC_SYSTEM_MONSTER_DESCRIPTION_CONFUSE_RESIST,混乱と狂気に対して免疫がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_WIND_RESIST,竜巻に対して免疫がある。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED1,非常に素早く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED2,素早く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED3,やや素早く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED4,やや遅く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,遅く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,非常に遅く行動する。
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,空を飛ぶことができる。
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,泳ぐことができる。
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,透明なものを見ることができる。
+LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,無生物である。
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,吹雪に対して免疫がある。月の姉妹の力によるもの。
+LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,デバフ魔法に対して完全な免疫を持つ。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,沈黙状態でも魔法が使用可能。
+LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,このモンスターは召喚された存在で、時間が経つと消滅する。経験値も得られない。
+LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,このモンスターは夢の住人であるため、仲間にしたり魂を奪うことはできないかもしれない。
+LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,使用する魔法
+LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,このモンスターの魔法は固定されていない。何を使うか分からない！
+LOC_SYSTEM_ENSLAVE_GHOST,{0}の魂
+LOC_SYSTEM_GOD_ERROR,未知の神
+LOC_SYSTEM_GOD_JOON_AND_SION,ジュオン＆シオン
+LOC_SYSTEM_GOD_JOON,ジュオン
+LOC_SYSTEM_GOD_SION,シオン
+LOC_SYSTEM_GOD_BYAKUREN,白蓮
+LOC_SYSTEM_GOD_KANAKO,神奈子
+LOC_SYSTEM_GOD_SUWAKO,諏訪子
+LOC_SYSTEM_GOD_MINORIKO,ミノリコ
+LOC_SYSTEM_GOD_MIMA,魅魔
+LOC_SYSTEM_GOD_SHINKI,神綺
+LOC_SYSTEM_GOD_YUUGI,勇儀
+LOC_SYSTEM_GOD_SHIZUHA,静葉
+LOC_SYSTEM_GOD_HINA,雛
+LOC_SYSTEM_GOD_YUKARI,紫
+LOC_SYSTEM_GOD_EIRIN,永琳
+LOC_SYSTEM_GOD_YUYUKO,幽々子
+LOC_SYSTEM_GOD_SATORI,さとり
+LOC_SYSTEM_GOD_TENSI,天子
+LOC_SYSTEM_GOD_SEIJA,正邪
+LOC_SYSTEM_GOD_LILLY,リリーホワイト
+LOC_SYSTEM_GOD_MIKO,神子
+LOC_SYSTEM_GOD_OKINA,オキナ
+LOC_SYSTEM_GOD_JUNKO,純狐
+LOC_SYSTEM_GOD_SUWAKO_TITLE,洩矢諏訪子 - 土着神の頂点
+LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,諏訪子は「こん（土）」を創造する能力を持つ土着の神である。\n信者に対して気まぐれな権能を授けるため、様々な力を得られるが、望むものとは限らない。
+LOC_SYSTEM_GOD_MIMA_TITLE,魅魔 - 遥かな夢に運命を委ねる精神
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,魅魔は災厄をもたらす悪霊である。\n信者はそのもとに入り、強力な破壊魔法の支援と伝授を受ける。\n特に忠実な信徒になれば、究極の破壊魔法「スパーク」を伝授される。
+LOC_SYSTEM_GOD_YUYUKO_TITLE,西行寺幽々子 - 冥界楼閣の亡霊少女
+LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,幽々子は白玉楼に住む西行寺の令嬢である。\n死を操る力を持ち、信者には死の力を授ける。\n信者となれば、死を操る力と多くの魂を得ることができる。
+LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,依神女苑＆紫苑 - 最凶最悪の姉妹
+LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,浪費と貧困の姉妹神であり、信者に不運をもたらす。\n女苑は財を浪費させる疫病神、紫苑は信者を貧しくする貧乏神として\n信仰するだけでアイテムを浪費・喪失する不幸が訪れる。\nそれでも信仰すれば、彼女たちが憑依し、強力な権能を使えるようになる。\nその力は強大だが、同時に不幸もより強くなる。\n信者は敵を倒して金を奪うことで信仰心を得ることができる。
+LOC_SYSTEM_GOD_SHINKI_TITLE,神綺 - 魔界の神
+LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,神綺は魔界の創造主であり、支配者である。\nその創造の力で信者に強力な魔族を授ける。\nまた敵対的な召喚獣から守り、Pを集めるごとにHPとMPを回復してくれる。\n高位の魔族は裏切る可能性があることに注意が必要。\n信者はPアイテムを拾うことで信仰心を得られる。
+LOC_SYSTEM_GOD_MINORIKO_TITLE,秋 穣子 - 豊穣と収穫の象徴
+LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,穣子は秋の実りを象徴する神であり、信者に豊かさを授ける。\n信者は彼女から豊富な食料を与えられ、満腹感と体力を得られる。\nPアイテムを拾うことで信仰心を得ることができる。
+LOC_SYSTEM_GOD_SHIZUHA_TITLE,秋 静葉 - 孤独と終焉の象徴
+LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,静葉は紅葉の神である。\n信者の存在感を薄め、隠密行動を助ける。\n彼女の権能は暗殺者に有利で、重装鎧のペナルティも軽減される。\n静葉は騒がしい者たちの死体が紅葉のように散るのを喜ぶ。
+LOC_SYSTEM_GOD_EIRIN_TITLE,八意 永琳 - 月の頭脳
+LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,永琳はあらゆる薬を調合できる月の天才薬師。\n信者になると様々なポーションを受け取り、追加効果も得られる。\n体の改造や副作用を伴う劇的な治療も可能。\n実験台になる覚悟があれば相応の見返りがある。\n有益なポーションを奉納・使用することで信仰心を得られる。\n稀に敵を倒して信仰心が得られることもある。
+LOC_SYSTEM_GOD_KANAKO_TITLE,八坂 神奈子 - 山と湖の権化
+LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,神奈子は「けん（天）」を創造する力を持つ神。元々は風の神だったが今は山の神として祀られている。\n信者に強力な戦闘能力を授け、近接戦士や遠距離弾幕使いに恩恵が大きい。\n信者は絶え間ない戦闘を通じて信仰を捧げなければならない。
+LOC_SYSTEM_GOD_YUKARI_TITLE,八雲 紫 - 境界に潜む妖怪
+LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,八雲紫は幻想郷でも名のある境界を操る強大な妖怪。\n彼女の式神になると境界に関する力を得られる。\n強力な転移能力を授かるが、他の転移は禁じられる。\n制御しきれない転移は信者を危険にさらす可能性がある。
+LOC_SYSTEM_GOD_HINA_TITLE,鍵山 雛 - 隠れ住まう厄除け人形神
+LOC_SYSTEM_GOD_HINA_DESCRIPTION,雛は厄を集めて災いを防ぐ神。\n彼女から厄を受け取り、呪いを身に宿すことで権能を得られる。\nダンジョンを探索することで信仰心が得られる。
+LOC_SYSTEM_GOD_SATORI_TITLE,古明地 さとり - 亡霊も恐れる少女
+LOC_SYSTEM_GOD_SATORI_DESCRIPTION,さとりは地霊殿の主で心を読む妖怪。\n彼女を信じることは彼女のペットになることでもあり、その力を得ることになる。\n戦闘向きの力はあまり与えられないが、\n心を読む力でダンジョンの地形や位置情報を得たり、\n敵のトラウマや考えを読み取り、デバフへの耐性を崩すことができる。\n彼女のペットたちはダンジョン探索で好感度を得られる。
+LOC_SYSTEM_GOD_YUUGI_TITLE,星熊 勇儀 - 怪力乱神と呼ばれし者
+LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,勇儀は地底の旧都に住む鬼であり、怪力乱神として信者に力を授ける。\n近接戦で敵を掴んで投げるなど、レスリング的な戦闘が可能。\n鬼の咆哮で沈黙させたり、奥義を使うことも可能。\nただし魔法に頼る戦いを嫌うため、信者は肉弾戦で戦う必要がある。\n信仰心は戦闘で勝利することで得られる。
+LOC_SYSTEM_GOD_TENSI_TITLE,比那名居 天子 - 非想非非想天の姫
+LOC_SYSTEM_GOD_TENSI_DESCRIPTION,天子は気まぐれな天界の住人。\n退屈な天界生活の代わりに、異変を機に信者をおもちゃのように扱う。\n彼女は信者に何の権能も与えず、すべては気分次第である。\n信者が危険な戦いを繰り返し、彼女の興味を惹けば助けを得られる。\n安全を望む者はその考えをすぐ後悔することになるだろう。
+LOC_SYSTEM_GOD_BYAKUREN_TITLE,聖 白蓮 - 封印されし大魔法使い
+LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,白蓮は魔界に封印されていた大魔法使いで、幻想郷に命蓮寺を建て仏教を広めている。\n身体能力を高める魔法に長けており、主に魔法を教える。\n彼女の権能で高い知性や高速移動、魔法ペナルティの軽減を得られる。\n信者は新たな人々と出会うことで信仰心を得ることができる。
+LOC_SYSTEM_GOD_SEIJA_TITLE,鬼人 正邪 - 反逆のアマノジャク
+LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,正邪は指名手配中のアマノジャクで、様々な物を盗んで逃走中である。\n彼女と手を組むことで、盗んだ強力なアイテムを受け取ることができる。\n追い詰められた彼女は、あなたが味方になること自体を大歓迎するだろう。\nしかし、彼女はあくまで信者を利用するつもりであり、あなたを盾として使い、\n利用価値がなくなれば容赦なく切り捨てる。彼女を信仰すれば他の神々からの非難も免れない。\n疑い深く、強者を嫌うため、レベルが9を超えると彼女を信仰できなくなる。
+LOC_SYSTEM_GOD_LILLY_TITLE,リリーホワイト - 春を告げる妖精
+LOC_SYSTEM_GOD_LILLY_DESCRIPTION,リリーホワイトは春を運ぶ妖精で、通るだけで花を咲かせるという。\n妖精たちの権利向上のため、自らの力を仲間たちに分け与えている。\n彼女を信仰することで、さまよえる妖精を仲間にすることができる。\n仲間になった妖精は死んでも蘇り、永遠にあなたに従う。\n得た経験値の一部は仲間の妖精に分配され、共に成長する。\n本来彼女は妖精のための神だが、自発的な他種族の信仰を拒むことはない。\nリリーホワイトはこの世界を探検するのが大好きである。
+LOC_SYSTEM_GOD_MIKO_TITLE,豊聡耳 神子 - 宇宙を司る万能道士
+LOC_SYSTEM_GOD_MIKO_DESCRIPTION,神子は夢殿大祀廟の聖人であり、欲望を読む能力を持つ。\n彼女を信仰する信者は「信仰心」ではなく「人気度」を資源として使用する。\n人気度は急速に上昇し、敵の欲望を読んだり倒すことで蓄積できる。\nただしフロアを移動したりサブダンジョンが変わると人気度が減少する。\n彼女の権能である道術は半永続的に持続するが、フロア移動で解除される。
+LOC_SYSTEM_GOD_OKINA_TITLE,摩多羅 隠岐奈 - 究極の絶対秘神
+LOC_SYSTEM_GOD_OKINA_DESCRIPTION,隠岐奈は背後に潜む秘神で、その正体は明らかにされていない。\n彼女は自分の仕事を任せられる部下を探しており、あなたがその役を担うかもしれない。\n信者になることで、扉を創る力を使った権能を得られる。\n自由に扉を通って移動したり、敵の背後に現れたりすることができる。\n仲間を呼び寄せて生命力と精神力を高めることも可能。\n戦闘で勝利し、神の存在感を広めることが彼女の望みである。
+LOC_SYSTEM_GOD_JUNKO_TITLE,純狐
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,純狐は怨念が浄化された神霊で、自らの怨みを晴らすため信者を募っている。\n信者になると、単純ながら強力な「純化」の力を得ることができる。\n彼女の権能は信仰心を消費しないが、使用すると一時的に純化状態になり、\n段階が進むと消耗品の使用が制限されるペナルティが生じる。\n通常は時間経過で戻るが、特別な信者には永久的な純化が与えられる。\nその祝福は重く、ペナルティも大きいが、それに見合う加護を受けられる。\n彼女は怨みを晴らすため、目に見える敵をすべて倒すのを好む。
+LOC_SYSTEM_GOD_BUG_TITLE,バグ神
+LOC_SYSTEM_GOD_BUG_DESCRIPTION,この神はバグだ！\nバグ神は東方クロールにおいて最も悪質な神である。\nゲームプレイに深刻な影響を与え、あなたに多大なストレスを与える。\n存在するだけでゲームがクラッシュする可能性があり、キャラクターが削除されるかもしれない。\nこの神の怒りを鎮める唯一の方法は、開発者に報告することだ。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,あなたは疫病神と貧乏神の呪いで消耗品を浪費し、失う。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,あなたは今、女苑または紫苑に憑依できる。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,もはや女苑または紫苑に憑依することはできない。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_ADD,憑依中、憑依している神に応じてパワーを使用した効果が得られる。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY2_REMOVE,もはや憑依中にパワーを使った効果は得られない。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_ADD,憑依中、憑依している神に応じて消耗品を使った効果が得られる。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY4_REMOVE,もはや憑依中に消耗品の効果は得られない。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_ADD,憑依のたびに、一度だけ憑依した神の必殺技が使える。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY5_REMOVE,もはや憑依した神の必殺技を使うことはできない。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_ADD,あなたは最凶最悪の必勝戦術を使えるようになった。
+LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY6_REMOVE,もはや最凶最悪の戦術を使うことはできない。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_ADD,白蓮はあなたの習得可能な魔法レベルの上限を引き上げる。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_REMOVE,もはや魔法レベルの上限を引き上げてもらえない。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_ADD,あなたは瞬間的に知力を強化できる。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_REMOVE,もはや知力の瞬間強化を使用できない。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,あなたは強化された筋力で軽装鎧の魔法失敗率を無視できる。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_REMOVE,もはや筋力強化の加護を受けられない。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_ADD,白蓮はあなたの強化魔法を支援してくれる。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_REMOVE,もはや強化魔法の支援は得られない。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_ADD,あなたは白蓮の加護により、超人的な脚力で疾走できるようになる。
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY5_REMOVE,もはや超人的な脚力を使うことはできない。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_ADD,あなたは一瞬で敵に突進できるようになる。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY1_REMOVE,もはや瞬間的な突進を使えない。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_ADD,あなたは柱を召喚することができる。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_REMOVE,もはや柱を召喚できない。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_ADD,あなたは風をまとった攻撃ができるようになる。
+LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_REMOVE,もはや風をまとった攻撃はできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_JUMP_ADD,あなたは短距離をジャンプできるようになる。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_JUMP_REMOVE,もはや短距離ジャンプはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TEMPLE_ADD,あなたは神殿を建てることができるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TEMPLE_REMOVE,もはや神殿を建てることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_WATER_GUN_ADD,あなたは水鉄砲を発射できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_WATER_GUN_REMOVE,もはや水鉄砲を使うことはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TONGUE_ADD,あなたは遠くの敵を引き寄せることができるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY1_TONGUE_REMOVE,もはや敵を引き寄せることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_HP_ADD,敵を倒すことで体力を回復できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_HP_REMOVE,もはや敵を倒して体力を回復することはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_MP_ADD,敵を倒すことで霊力を回復できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_MP_REMOVE,もはや敵を倒して霊力を回復することはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_POWER_ADD,敵を倒すことでパワーを回復できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_KILL_POWER_REMOVE,もはや敵を倒してパワーを回復することはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_SWIM_ADD,あなたは泳げるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_SWIM_REMOVE,あなたはもうカナヅチだ。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_DEAD_PROTECT_ADD,あなたは諏訪子の加護を受けるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY2_DEAD_PROTECT_REMOVE,もはや諏訪子の加護を受けることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_CURSE_ADD,あなたは敵に呪いをかけることができるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_CURSE_REMOVE,もはや呪いをかけることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_DIGGING_ADD,あなたは壁を壊すことができるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_DIGGING_REMOVE,もはや壁を壊すことはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_SUMMON_FLOG_ADD,あなたはカエルを召喚できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_SUMMON_FLOG_REMOVE,もはやカエルを召喚できない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_STATUE_ADD,あなたは可愛いカエルの像を建てることができる。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY3_STATUE_REMOVE,もはやカエルの像を建てることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_COLD_RESIST_ADD,あなたは冷気に強くなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_COLD_RESIST_REMOVE,もはや冷気に強くない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_FIRE_RESIST_ADD,あなたは炎に強くなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_FIRE_RESIST_REMOVE,もはや炎に強くない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_AC_ADD,あなたの皮膚は硬くなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_AC_REMOVE,あなたの皮膚は柔らかくなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_CONFUSE_RESIST_ADD,あなたは酔いや混乱に強くなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_CONFUSE_RESIST_REMOVE,もはや酔いや混乱に強くない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_POISON_RESIST_ADD,あなたは毒に強くなった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY4_POISON_RESIST_REMOVE,もはや毒に強くない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_RAIN_ADD,あなたは巨大な雨を降らせることができる。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_RAIN_REMOVE,もはや雨を降らせることはできない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_SLEEP_ADD,あなたは冬眠に入る。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_SLEEP_REMOVE,もはや冬眠しない。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_MISYAGUZI_ADD,あなたは恐ろしいミシャグジ様を召喚できるようになった。
+LOC_SYSTEM_GOD_SWAKO_GAIN_ABLILITY5_MISYAGUZI_REMOVE,もはやミシャグジ様を召喚できない。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_ADD,あなたはパワーが高いほどHPとMPの回復速度が上昇する。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY1_REMOVE,もはやHPとMPの回復速度は上がらない。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_ADD,あなたは状態異常と能力低下を回復できるようになった。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY2_REMOVE,もはや状態異常と能力低下を回復できない。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_ADD,あなたは食べ物を素早く食べることができ、MPを少し回復する。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY3_REMOVE,もはや素早く食べることはできない。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_ADD,あなたは食べ物とPを消費してHPを大きく回復できるようになる。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_REMOVE,もはや食べ物でHPを回復できない。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_ADD,あなたは食後に炎と冷気への耐性が上がる。
+LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY5_REMOVE,もはや食後に炎や冷気への耐性は得られない。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_ADD,あなたの最大MPは信仰心に比例して増加する。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY0_REMOVE,あなたの最大MPが減少した。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_ADD,敵を倒すとMPを得るようになる。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY1_REMOVE,もはや敵を倒してMPを得られない。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_ADD,ミマは破壊術系魔法の威力を強化してくれる。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE,もはや破壊術の威力強化を受けられない。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_ADD,ミマは破壊術系魔法の成功率を向上させてくれる。
+LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE,もはや破壊術の成功率補正は受けられない。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_ADD,あなたは下級魔族の小集団を召喚できるようになる。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_REMOVE,もはや下級魔族の小集団を召喚できない。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_ADD,あなたはリスクを伴いながら中級魔族を召喚できるようになった。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY2_REMOVE,もはや中級魔族を召喚できない。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_ADD,神綺はあなたを敵対的な召喚獣から守ってくれる。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY3_REMOVE,もはや敵対的な召喚獣から守られない。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_ADD,あなたはリスクを伴いながら上級魔族を召喚できるようになった。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY4_REMOVE,もはや上級魔族を召喚できない。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_ADD,あなたはPアイテムから力を得るようになった。
+LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY5_REMOVE,もはやPアイテムから力を得られない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_ADD,酔ったときに回避能力が上昇するようになった。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY0_REMOVE,もはや酔っても回避能力は上がらない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_ADD,あなたはポーションを酒に変えて飲めるようになった。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY1_REMOVE,もはやポーションを酒として飲めない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_ADD,あなたは敵にジャーマンスープレックスをかけられる。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY2_REMOVE,もはやジャーマンスープレックスはできない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_ADD,あなたは敵をつかんで投げ飛ばすことができる。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY3_REMOVE,もはや敵を投げることはできない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_ADD,あなたは鬼の咆哮を叫ぶことができる。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY4_REMOVE,もはや咆哮することはできない。
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_ADD,ついに三歩必殺を使えるようになった！
+LOC_SYSTEM_GOD_YUUGI_GAIN_ABLILITY5_REMOVE,もはや三歩必殺を使うことはできない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_ADD,静葉は眠りから覚めた敵が叫ぶ確率を大きく下げてくれる。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY0_REMOVE,もはや敵の叫びに対する加護はない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_ADD,あなたは忍び足のように静かに移動できる紅葉の足跡を残す。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_REMOVE,もはや紅葉の足跡を残すことはできない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_ADD,あなたは紅葉の上にいるモンスターを混乱させることができる。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_REMOVE,もはや紅葉の上のモンスターに混乱を与えられない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD,装備している防具を紅葉の鎧に変化させることができる。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE,もはや防具を紅葉の鎧に変えることはできない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_ADD,紅葉の上を歩くと非常に素早く移動できる。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_REMOVE,もはや紅葉の上を素早く移動できない。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_ADD,一度だけ武器に紅葉の力を宿すことができる。
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_REMOVE,もはや武器に紅葉の力を宿すことはできない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY0_ADD,アイテムにかかった呪いを見抜くことができるようになる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_ADD,呪われたアイテムのマイナスエンチャントをプラスに変換できる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_REMOVE,もはや呪いのエンチャントを反転できない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_ADD,武器に呪いをかけて大きな力を得ることができる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_REMOVE,もはや武器に呪いをかけて力を得ることはできない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD,防具に呪いをかけてすべてのダメージを反射することができる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE,もはや防具に呪いをかけてダメージを反射できない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_ADD,あなたはアクセサリーに呪いをかけて体力と霊力を回復できる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_REMOVE,もはやアクセサリーに呪いをかけて回復することはできない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_ADD,あなたは呪いをまき散らすようになった。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_REMOVE,もはや呪いをまき散らさない。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_ADD,あなたは一度だけ武器に呪いの力を宿すことができる。
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY6_REMOVE,もはや武器に呪いの力を宿せない。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_ADD,あなたはダメージを受けたとき、時々瞬間移動する。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY1_REMOVE,もはやダメージを受けても瞬間移動しない。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_ADD,あなたは境界からの支援射撃を要請できる。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY2_REMOVE,もはや支援射撃を要請できない。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_ADD,あなたは境界を伝って移動することができる。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY3_REMOVE,もはや境界を伝って移動できない。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_ADD,あなたは結界を作ることができる。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY4_REMOVE,もはや結界を作ることはできない。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_ADD,あなたは次元を固定することができる。
+LOC_SYSTEM_GOD_YUKARI_GAIN_ABLILITY5_REMOVE,もはや次元を固定できない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_ADD,永琳はポーションの効果を高めてくれる。優れたポーションの上で祈ることで悪いポーションも作れる。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY0_REMOVE,もはやポーションの効果を高めてもらえず、悪いポーションも作れない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_ADD,あなたは毒ポーションから新たな力を得る。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY1_REMOVE,もはや毒ポーションから新たな力を得ることはできない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_ADD,あなたはポーションを投げることができ、能力低下ポーションから新たな力を得る。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY2_REMOVE,もはやポーションを投げることはできず、能力低下ポーションから力も得られない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_ADD,あなたは身体改造を行うことができ、混乱ポーションから新たな力を得る。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY3_REMOVE,もはや身体改造はできず、混乱ポーションから力も得られない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_ADD,あなたは減速ポーションから新たな力を得る。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY4_REMOVE,もはや減速ポーションから力を得ることはできない。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_ADD,緊急輸血が可能になり、麻痺ポーションから新たな力を得る。
+LOC_SYSTEM_GOD_EIRIN_GAIN_ABLILITY5_REMOVE,もはや緊急輸血はできず、麻痺ポーションからも力を得られない。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_ADD,あなたの周囲には常に幽霊が集まるようになる。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY1_REMOVE,もはやあなたの周囲に幽霊は集まらない。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_ADD,幽霊を任意の場所に移動させることができる。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY2_REMOVE,もはや幽霊を移動させることはできない。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_ADD,一定時間、幽霊の出現頻度を高めることができる。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY3_REMOVE,もはや幽霊の出現頻度を高めることはできない。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_ADD,敵一体の魂を縛りつけることができる。
+LOC_SYSTEM_GOD_YUYUKO_GAIN_ABLILITY5_REMOVE,もはや魂を縛ることはできない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_ADD,あなたは透明を感知できるようになった。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY0_REMOVE,もはや透明を感知できない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_ADD,敵にトラウマを見せることができる。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY1_REMOVE,もはや敵にトラウマを見せることはできない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_ADD,あなたは敵からダンジョンの形状を読み取ることができる。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY2_REMOVE,もはや敵からダンジョンの形状を読み取ることはできない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_ADD,あなたは周囲の敵の気配を読み取ることができる。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY3_REMOVE,もはや敵の気配を読み取ることはできない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_ADD,あなたは敵の思考を読み取ることができる。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY4_REMOVE,もはや敵の思考を読み取ることはできない。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_ADD,あなたはさとり様に直接管理される大切なペットである。
+LOC_SYSTEM_GOD_SATORI_GAIN_ABLILITY5_REMOVE,もはやさとり様の直接管理下にはない。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_ADD,正邪はあなたが天罰から逃げられるように助けてくれる。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY2_REMOVE,もはや正邪は天罰からあなたを助けてくれない。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_ADD,あなたは位置を反転させることができる。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY3_REMOVE,もはや位置を反転できない。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_ADD,あなたはすべての者の視界を反転させることができる。
+LOC_SYSTEM_GOD_SEIJA_GAIN_ABLILITY5_REMOVE,もはや視界を反転させることはできない。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_ADD,あなたは妖精を仲間に勧誘できるようになった。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_1_REMOVE,もはや妖精を仲間にできない。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_ADD,あなたは妖精たちを近くに呼び寄せることができる。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY1_2_REMOVE,もはや妖精を呼び寄せることはできない。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_ADD,あなたはさらに1体の妖精を仲間に勧誘できる。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY_FAIRY_FINAL_ADD,あなたは最後の妖精を仲間に勧誘できるようになった。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_ADD,あなたは妖精を回復させることができるようになった。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY3_REMOVE,もはや妖精を回復させることはできない。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_ADD,あなたは一時的に自分の力を妖精たちに分け与えることができる。
+LOC_SYSTEM_GOD_LILLY_GAIN_ABLILITY5_REMOVE,もはや妖精大戦争を引き起こすことはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_ADD,あなたは自由に扉を越えて透視することができるようになった。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY0_REMOVE,もはや扉を自由に出入りすることはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_ADD,あなたは任意の壁に扉を作り出すことができる。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY1_REMOVE,もはや扉を作り出すことはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_ADD,あなたは遠く離れた開かれた扉を強制的に閉じることができる。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY2_REMOVE,もはや扉を強制的に閉じることはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_ADD,あなたは敵の背後にバックドアを作って移動することができる。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY3_REMOVE,もはや敵の背後にバックドアを作ることはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_ADD,あなたはクレイジー・バックダンサーズを召喚することができる。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY4_REMOVE,もはやクレイジー・バックダンサーズを召喚することはできない。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_ADD,あなたは背後の扉を開けて逃げることができる。
+LOC_SYSTEM_GOD_OKINA_GAIN_ABLILITY5_REMOVE,もはや背後の扉から逃げることはできない。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_ADD,あなたは単純な弾幕を放つことができるようになった。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY1_REMOVE,もはや単純な弾幕を放つことはできない。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_ADD,あなたは純粋な力を得ることができるようになった。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY2_REMOVE,もはや純粋な力を得ることはできない。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_ADD,あなたは純粋な殺意を宿すことができるようになった。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY4_REMOVE,もはや純粋な殺意を宿すことはできない。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_ADD,あなたは純化することができるようになった。
+LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE,もはや純化することはできない。
+LOC_SYSTEM_GOD_SHOW_AHTEISM,あなたはまだ神を信仰していない。
+LOC_SYSTEM_GOD_SHOW_PASSIVE,(パッシブ)
+LOC_SYSTEM_GOD_SHOW_ACTIVE,(アクティブ)
+LOC_SYSTEM_GOD_SHOW_NONE,(なし)
+LOC_SYSTEM_GOD_SHOW_PIETY,(信仰)
+LOC_SYSTEM_GOD_SHOW_MP,(霊力)
+LOC_SYSTEM_GOD_SHOW_MP_N,(霊力 {0})
 LOC_SYSTEM_GOD_SHOW_P,(P)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE,(P 소량)
-LOC_SYSTEM_GOD_SHOW_P_SOME,(P 약간)
-LOC_SYSTEM_GOD_SHOW_P_BIG,(P 대량)
-LOC_SYSTEM_GOD_SHOW_POTION,(물약)
-LOC_SYSTEM_GOD_SHOW_CURSE,(저주)
-LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(영력, 신앙)
-LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N,(영력 {0}, 신앙)
-LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(시간, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_PIETY,(P, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_PIETY,(P 소량, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY,(P 약간, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY,(P 대량, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_POTION,(P, 물약)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_POTION,(P 소량, 물약)
-LOC_SYSTEM_GOD_SHOW_P_SOME_AND_POTION,(P 약간, 물약)
-LOC_SYSTEM_GOD_SHOW_P_BIG_AND_POTION,(P 대량, 물약)
-LOC_SYSTEM_GOD_SHOW_P_AND_MP,(P, 영력)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N,(P 소량, 영력 {0})
-LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N,(P 약간, 영력 {0})
-LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N,(P 대량, 영력 {0})
-LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY,(물약, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY,(P, 영력, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_PIETY_N,(P 소량, 영력 {0}, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_PIETY_N,(P 약간, 영력 {0}, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_PIETY_N,(P 대량, 영력 {0}, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY,(P, 음식, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_FOOD_AND_PIETY,(P 소량, 음식, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_SOME_AND_FOOD_AND_PIETY,(P 약간, 음식, 신앙)
-LOC_SYSTEM_GOD_SHOW_P_BIG_AND_FOOD_AND_PIETY,(P 대량, 음식, 신앙)
-LOC_SYSTEM_GOD_SHOW_ONCE_UPON,(한번만)
-LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR,(층마다 한번만)
-LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(영력, 빙의시 한번만)
-LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N,(영력 {0}, 빙의시 한번만)
-LOC_SYSTEM_GOD_SHOW_POPULAR,(인기도 {0}%)
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,당신은 역병신과 빈곤신의 저주를 받고 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,당신은 소모품을 사용할때 가끔 2~3개를 한번에 소모한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,줍지않은 소모품은 천천히 사라져간다. 소모품을 버리면 일정 확률로 사라진다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,줍지않은 소모품은 빠른 속도로 사라져간다. 소모품을 버리면 무조건 사라진다. (강화됨)
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,당신은 잠시동안 죠온이나 시온을 빙의할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3,빙의를 하게되면 죠온이나 시온이 당신의 파워를 이용한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1,죠온이 빙의한 동안엔 모든 데미지가 증폭되며 데미지를 줄때마다 파워가 소모된다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2,시온이 빙의한 동안엔 파워를 주워도 파워가 오르지 않는 대신 체력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4,빙의를 하게되면 죠온이나 시온이 당신의 소모품을 이용한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1,죠온이 빙의한 동안엔 소모품을 낭비하면 무작위 버프를 얻는다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2,시온이 빙의한 동안엔 사망시 소모품을 대량으로 잃는 대신 죽음을 무효로 한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5,빙의를 하게되면 죠온이나 시온의 범위 권능을 사용할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1,당신은 시야내 적에게 혼란과 데미지를 줄 수 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2,당신은 시야내 적에게 감속을 건 후에 시야를 가리는 안개를 뿌릴 수 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6,빙의를 하게되면 최흉최악의 전략을 사용할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,당신은 빈곤신을 상대에 빙의시키는 필승의 전략을 사용할 수 있다.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1,히지리는 당신이 배울 수 있는 마법레벨의 한계를 늘린다.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,당신은 순간적으로 지능을 강화시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,당신은 근력이 강화되어 낮은 수준의 갑옷패널티의 마법실패율을 무시한다.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,히지리는 당신의 강화 마법들을 보조해준다.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,당신은 순간적으로 각력을 강화시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,당신은 카나코님의 힘으로 돌진할 수 있다.
-LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,당신은 카나코님의 기둥을 구현할 수 있다.
-LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,당신은 카나코님의 바람의 힘을 휘감을 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,당신은 짧은 거리를 점프할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,당신은 신전을 세워 신앙심을 벌 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,당신은 멀리있는 적에 물의 탄막을 날릴 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TONGUE,당신은 멀리있는 적을 끌어 당길 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_HP,당신은 적을 죽일때마다 확률적으로 체력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_MP,당신은 적을 죽일때마다 영력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_POWER,당신은 적을 죽일때마다 확률적으로 파워를 회복한다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_SWIM,당신은 수영할 수 있다. 물에서 회피 보너스를 얻는다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_DEAD_PROTECT,스와코가 가끔 당신을 죽음으로부터 보호한다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_CURSE,당신은 상대에 재앙을 걸 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_DIGGING,당신은 벽을 무너뜨릴 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_SUMMON_FLOG,당신은 개구리 동료를 소환할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_STATUE,당신은 일정시간동안 석상을 세울 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_COLD_RESIST,당신은 냉기에 저항이 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_FIRE_RESIST,당신은 화염에 저항이 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_AC,당신은 AC가 증가한다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_CONFUSE_RESIST,당신은 혼란에 저항이 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_POISON_RESIST,당신은 독에 저항이 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_RAIN,당신은 주변을 물바다로 만들 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SLEEP,당신은 땅속에 숨어서 동면을 취할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_MISYAGUZI,당신은 미샤구지님을 소환할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT,당신은 스와코님의 귀여운 모자를 받았다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,파워가 가득차도 음식을 먹을 수 있고 최대 파워를 오래 유지할 수 있다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,당신이 파워가 가득차있을수록 체력과 영력회복속도가 빨라진다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,미노리코는 당신에게 걸린 상태이상과 능력저하를 회복시켜준다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,당신은 음식을 더 빨리 먹을 수 있고 먹을때 영력도 조금 회복한다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,미노리코는 당신이 가진 음식을 소모하여 체력을 크게 회복할 수 있다.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,미노리코는 당신이 음식을 먹은 직후 일시적으로 불,냉기저항을 1단계 준다.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1,신앙심에 비례해서 최대영력이 올라간다.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2,적을 죽였을때 적의 세기에 따라 영력을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,미마는 파괴술이 들어간 마법의 위력을 증가시킨다.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,미마는 파괴술이 들어간 마법의 성공율을 증가시킨다.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,당신은 하급 마족 무리를 소환할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,당신은 중급 마족을 소환할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,적대적인 소환수의 행동을 일정확률로 방해한다.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,당신은 상급 마족을 소환할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,당신은 P를 주울때마다 체력과 영력이 차오른다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,취기가 오른 상태에서 약간의 체력회복력과 높은 회피를 얻는다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,물약 1개를 술로 바꿔서 마실 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,전투중 가끔 상대를 잡는다. 잡는 동안엔 권능이 강화됩니다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4,상대를 잡아 저먼 스플렉스를 걸 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5,상대를 잡아 집어 던질 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6,주변의 상대를 침묵시키는 강력한 포효를 할 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7,오니의 궁극기, 삼보필살을 쓸 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1,시즈하는 적들이 잠에서 깨면서 외치는 확률을 줄여준다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2,당신은 움직이거나 적을 죽였을때 단풍잎의 자취를 남긴다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3,단풍 위를 걸으면 매우 은밀하게 움직일 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4,당신은 단풍 위에 서있는 모든 적에 혼란을 걸 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5,당신은 방어구를 단풍방어구로 바꿀 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6,당신은 단풍 위를 걸을때 매우 빠르게 움직일 수 있다.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7,당신은 딱 한번 당신의 무기에 단풍브랜드를 부여할 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1,당신은 시야내의 장비에 저주가 걸려있는지 확인하고 식별할 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2,당신은 장착중인 저주가 걸린 장비의 마이너스 인챈트를 플러스로 바꿀 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3,당신은 무기에 잠시동안 저주의 힘을 담아 강화 시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4,당신은 방어구에 잠시동안 저주의 힘을 담아 모든 공격을 반사시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5,당신은 장신구에 잠시동안 저주의 힘을 담아 생명력을 치유 할 수 있다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6,당신은 저주된 아이템을 끼고 있으면 저주를 흩뿌리고 다닌다.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7,당신은 딱 한번 당신의 무기에 저주브랜드를 부여할 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1,틈새가 당신을 지켜본다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2,당신은 일정 데미지를 입으면 공간이동이 일어난다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3,당신은 틈새로부터 사격지원을 받을 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4,당신은 틈새를 타고다닐 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5,당신은 결계를 만들 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6,당신은 잠시동안 차원을 고정시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1,에이린은 물약들의 효과를 상승시켜준다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2,좋은 물약위에서 기도하는 것으로 나쁜 물약을 만들 수 있다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3,당신은 다음의 물약을 마실때 추가 효과를 받는다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1,*1)독물약 : 이동속도가 빨라진다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2,*2)능력치감소물약 : 체력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3)혼란물약 : 영력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4)감속물약 : 투명해진다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)마비물약 : 마비시간이 줄어들고 영격을 사용한다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,당신의 물약을 던질 수 있다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,당신은 신체개조를 통해 능력치를 조절할 수 있다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,당신은 부작용을 대가로 몸을 재생할 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,당신은 유령을 불러들인다.
-LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2,원하는 위치에 유령들을 보낼 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3,잠시동안 유령을 불러들이는 빈도를 높힐 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4,적 한명의 영혼을 잡을 수 있다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1,당신은 투명을 볼 수 있다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2,당신은 상대의 트라우마를 끌어낼 수 있다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3,당신은 적의 기억속에서 맵의 형태를 읽어낸다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4,당신은 몹의 기척을 탐지할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5,적 한명의 생각을 완벽하게 독파할 수 있다.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6,사토리는 가끔 당신에게 먹이를 준다. 위험할수록 자주 준다.
-LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY,텐시의 행동은 예측할 수 없다!
-LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,당신은 세이자로부터 스탯을 강화받고있다.
-LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,징벌에 의한 추격으로부터 당신을 돕는다.
-LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3,원하는 상대방과 위치를 뒤집을 수 있다.
-LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4,모든 적, 아군의 시야를 뒤집을 수 있다.
-LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1,요정에 경험치를 나눠주며 죽은 요정도 경험치를 먹으면 부활한다.
-LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2,당신은 요정들을 동료로 권유할 수 있다.
-LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,당신은 요정들을 근처로 호출할 수 있다.
-LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4,당신은 동료 요정을 치유할 수 있다.
-LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5,당신은 요정들에게 힘을 나눠줄 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1,인기도는 다음 행동을 할 경우 올라간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,적을 죽인다. 강할수록 더 많이 올라간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,욕망모으기를 이용해 시야내의 적들의 욕망을 모은다
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,새로운 서브던전에 입장한다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,인기도는 다음 행동을 할 경우 내려간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,층을 옮긴다. 올라갈수록 더 많은 인기도가 떨어진다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,서브던전을 옮긴다. 모든 인기도가 잃는다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,미코의 권능을 사용한다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,주변의 적들로부터 인기도를 모을 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,빠른 속도로 랜덤한 순간이동을 할 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3,해당 층에서 주변을 비추는 후광을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4,해당 층에서 원하는 저항을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5,해당 층에서 원하는 전투능력을 강화시킬 수 있다.
-LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6,해당 층에서의 궁극의 축복을 받을 수 있다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1,당신은 자유자재로 문의 이동과 투시가 가능하다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2,당신은 원하는 벽에 문을 만들 수 있다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,당신은 문을 강제로 닫고 잠글 수 있다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,당신은 적의 등뒤로 이동할 수 있다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,당신은 크레이지 백댄서를 불러올 수 있다.
-LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,당신은 순호의 축복에 의해 영구적으로 순화되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,당신은 일부 두루마리, 물약을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,당신은 모든 스탯이 5 증가한다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,1단계: 당신은 스펠카드를 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,3단계: 당신은 물약의 효과를 받지 않는다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,당신은 단순하지만 강력한 탄막을 날릴 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,당신은 순수한 힘을 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,당신은 순수한 살의를 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,당신은 순호의 축복으로 영구적으로 순화할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,당신은 순호의 축복으로 영구적으로 순화되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,스킬순화: 당신의 {0} 스킬레벨은 캐릭터 레벨과 항상 같다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,저항순화: 당신의 {0:은|는} 무한대다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,마력순화: 당신의 체력과 영력은 동일시된다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,파워순화: 당신은 항상 풀파워다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,생명순화: 당신은 추가 목숨을 받았다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,장비순화: 당신은 가지고 있던 장비를 순화했다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,알수없는 버그 순화
-LOC_SYSTEM_GOD_ABLILITES,권능들
-LOC_SYSTEM_GOD_COMMON_ACCECPT,{0:은|는} 당신의 살생을 기뻐했다.
-LOC_SYSTEM_GOD_COMMON_PROTECT,보호되었다!
-LOC_SYSTEM_GOD_COMMON_RAGE,{0:은|는} 당신의 행동에 분노했다. 참회하라!
-LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,존재하지 않는 신입니다.
-LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,배신자에겐 입교란 없다!
-LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.
-LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,이미 믿고 있는 신입니다.
-LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,죠온: 한푼도 남김없이 모두 털어버리자고!
-LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,시온: 배고파...
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,죠온: 새로운 호구... 아니 고객이 왔네!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK2,시온: 배고프다...
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK3,죠온: 좀 더 팍팍 써도 된다고
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK4,시온: 밥은 어딨어?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK5,죠온: 저기 새 명품 핸드백이 사고싶은데 말이야
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK6,시온: 왜 역병신인 우리를 믿고있는거야?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK7,죠온: 응? 카드가 필요해?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK8,시온: 불우이웃돕기는 어때?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK9,죠온: 아끼다 죽을바엔 모두 써버려!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK10,시온: 최근엔 배고파도 즐거워
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK11,죠온: 우리들이라면 모두를 털어버릴 수 있어!
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK12,시온: 나도 도움이 될 수 있을까?
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,죠온&시온: 최흉최악의 자매의 힘을 보여주지! 
-LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,죠온과 시온은 적의 지갑을 강탈하는 것을 기뻐했다.
-LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,역병신의 저주로 인해 {0}개의 {1:을|를} 낭비하여 사용하였다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,당신은 다시 빙의를 할 수 있다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK,어느 신을 빙의할거지?
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1,a - 요리가미 죠온: 빙의시 즉시 파워를 가득 채워준다. 다만 해제시엔 낭비된다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2,또한 소모품을 사용하면 무조건 2~3개씩 낭비한다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3,b - 요리가미 시온: 빙의시 즉시 체력과 영력을 회복한다. 버린 소모품이 사라짐.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4,땅에 떨어진 소모품 고갈속도증가. 파워패널티를 받지않는다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1,죠온: 송두리채 빼앗아라!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK2,죠온: 값 나가는건 모조리 훔쳐!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3,죠온: 힘을 줄테니 모두 나에게 바치는거야!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK4,죠온: 수금 시간이야!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK1,시온: 자, 이제 베풀어주지 않을래?
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK2,시온: 가난은 더 이상 싫어!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK3,시온: 최흉최악은 나 혼자로도 충분해!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4,시온: 모두가 평등하게 불행한 시대가 올거야
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0:은|는} 무생물이기에 빙의할 수 없다.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,{0}에 빈곤신이 빙의하였다!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END,당신의 빙의가 끝났다.
-LOC_SYSTEM_GOD_JOON_AND_SION_JOON_AOE,화려한 불빛과 폭죽이 주변의 적들에게 몰아친다!
-LOC_SYSTEM_GOD_JOON_AND_SION_SION_AOE,거대한 불운의 소용돌이가 휘몰아친다!
-LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,죠온이 당신에게 강제로 빙의하였다! 파워가 감소하였다!
-LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,시온이 당신에게 강제로 빙의하였다! 체력과 영력을 잃었다!
-LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,시온이 당신의 소모품을 대가로 당신을 부활시켰다!
-LOC_SYSTEM_GOD_BYAKUREN_WELCOME,히지리: 어서오세요. 신도여
-LOC_SYSTEM_GOD_BYAKUREN_TALK1,히지리: 아아, 법의 세계에 빛이 가득해
-LOC_SYSTEM_GOD_BYAKUREN_TALK2,히지리: 우리 절은 인간과 요괴를 차별하지않는답니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK3,히지리: 고된 수행은 마음을 깨끗하게 하지요.
-LOC_SYSTEM_GOD_BYAKUREN_TALK4,히지리: 당신의 노력은 결실을 맺을거랍니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK5,히지리: 비록 마법을 쓰는자라도 몸을 단련해야합니다.
-LOC_SYSTEM_GOD_BYAKUREN_TALK6,히지리: 당신이 배운 불교의 가르침을 모두에게 전하세요.
-LOC_SYSTEM_GOD_BYAKUREN_TALK7,히지리: 어서오세요. 진정한 부처님의 제자여
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_MP,히지리의 분노로 당신의 영력이 흡수되었다!
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_BYAKUREN,히지리의 분노로 당신의 스탯이 감소되었다!
-LOC_SYSTEM_GOD_BYAKUREN_PUNISH_SLOW,히지리의 분노로 당신은 느려졌다!
-LOC_SYSTEM_GOD_KANAKO_WELCOME,카나코: 끊임없는 전투로 신앙을 보이도록 하여라!
-LOC_SYSTEM_GOD_KANAKO_WELCOME_SANAE,카나코: 앞으로 나아가거라, 사나에!
-LOC_SYSTEM_GOD_KANAKO_TALK1,카나코: 너무 무리는 하지말렴. 사나에
-LOC_SYSTEM_GOD_KANAKO_TALK2,카나코: 끊임없는 전투로 신앙을 증명하거라
-LOC_SYSTEM_GOD_KANAKO_TALK3,카나코: 나를 부른 이는 누구인가?
-LOC_SYSTEM_GOD_KANAKO_TALK4,카나코: 신앙을 방해하는 자는 모두 제거하라
-LOC_SYSTEM_GOD_KANAKO_TALK5,카나코: 그대의 신앙에는 힘으로서 보답하지
-LOC_SYSTEM_GOD_KANAKO_TALK6,카나코: 산의 신앙을 더욱 더 퍼트리도록
-LOC_SYSTEM_GOD_KANAKO_TALK7,카나코: 한때 전투의 신으로 불렸던 몸. 그 힘을 느끼게해주지
-LOC_SYSTEM_GOD_KANAKO_TALK8,카나코: 진정한 전투의 화신이여 앞으로 나아가라!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,카나코는 당신에게 강력한 일격을 날렸다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,카나코는 당신에게 강력한 일격을 날렸다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL,카나코는 당신을 전투로 강제로 이끌었다!
-LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL,카나코는 당신을 전투로 이끌려했지만 적당한 적이 없었다.
-LOC_SYSTEM_GOD_SWAWKO_WELCOME,스와코: 하하하! 재밌어졌어
-LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,스와코: 사나에! 요즘은 어때, 익숙해졌어?
-LOC_SYSTEM_GOD_SUWAKO_TALK1,스와코: 요괴퇴치의 시간이야 사나에!
-LOC_SYSTEM_GOD_SUWAKO_TALK2,스와코: 응? 나 불렀어?
-LOC_SYSTEM_GOD_SUWAKO_TALK3,스와코: 최근의 신도들은 원하는게 많다니깐
-LOC_SYSTEM_GOD_SUWAKO_TALK4,스와코: 내가 재앙신인걸 잊지말아~
-LOC_SYSTEM_GOD_SUWAKO_TALK5,스와코: 좀 더 노력하라고~
-LOC_SYSTEM_GOD_SUWAKO_TALK6,스와코: 걱정하지마, 충분히 힘은 줄테니깐
-LOC_SYSTEM_GOD_SWAWKO_HAT,스와코의 모자
-LOC_SYSTEM_GOD_SWAWKO_JUMP,점프!
-LOC_SYSTEM_GOD_SWAWKO_ALTAR1,당신은 발밑에 스와코님의 신전을 세웠다.
-LOC_SYSTEM_GOD_SWAWKO_ALTAR2,신앙심이 풍족해지는 것을 느꼈다.
-LOC_SYSTEM_GOD_SWAWKO_ALTAR_FAIL,여기엔 신전을 세울 수 없다.
-LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,{0:을|를} 끌어당겼다.
-LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FAIL,끌어 당길 수 없는 위치입니다.
-LOC_SYSTEM_GOD_SWAWKO_STATUE_FAIL,여기엔 석상을 세울 수 없다.
-LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,{0}에 재앙을 내렸다.
-LOC_SYSTEM_GOD_SWAWKO_RAIN,당신의 주변이 물바다가 되었다.
-LOC_SYSTEM_GOD_SWAWKO_TIMESTEP_END,당신은 동면을 끝냈다. 아직 잠에서 덜 깼다.
-LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,스와코는 당신에게 저주를 내렸다!
-LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,스와코는 당신에게 적대적인 개구리 무리를 선물했다!
-LOC_SYSTEM_GOD_MINORIKO_WELCOME,미노리코: 이 땅에 가을의 축복을!
-LOC_SYSTEM_GOD_MINORIKO_TALK1,미노리코: 당신도 가을에 반한거야?
-LOC_SYSTEM_GOD_MINORIKO_TALK2,미노리코: 수확을 위해선 그만큼의 노력이 필요한거야
-LOC_SYSTEM_GOD_MINORIKO_TALK3,미노리코: 가을은 정말 아름다운 계절이야!
-LOC_SYSTEM_GOD_MINORIKO_TALK4,미노리코: 내가 준 고구마는 입맛에 맞아?
-LOC_SYSTEM_GOD_MINORIKO_TALK5,미노리코: 배는 든든하게 하고 다니지?
-LOC_SYSTEM_GOD_MINORIKO_TALK6,미노리코: 쌓아올린 모든 노력을 풍년으로 보답할때야!
-LOC_SYSTEM_GOD_MINORIKO_TALK7,미노리코: 가을의 사도여! 나아가서 가을의 위대함을 알려라!
-LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT,미노리코는 흥분한 상태로 외쳤다. "바로 그거야!"
-LOC_SYSTEM_GOD_MINORIKO_CURE,당신은 상태를 회복하였다.
-LOC_SYSTEM_GOD_MINORIKO_CURE_FAIL,당신은 회복할 상태가 없다.
-LOC_SYSTEM_GOD_MINORIKO_FOOD_HEAL,당신은 상태를 회복하였다.
-LOC_SYSTEM_GOD_MINORIKO_FOOD_FAIL,당신은 상태를 회복하였다.
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER,미노리코는 당신의 배고픔을 가속시켰다!
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK,미노리코는 당신의 건강을 빼앗아갔다!
-LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT,미노리코는 당신의 능력치를 깍아내렸다!
-LOC_SYSTEM_GOD_MIMA_WELCOME,미마: 압도적인 마법으로!
-LOC_SYSTEM_GOD_MIMA_TALK1,미마: 오랫만이네, 잘 지내고 있어?
-LOC_SYSTEM_GOD_MIMA_TALK2,미마: 새로운 입교 희망자인가?
-LOC_SYSTEM_GOD_MIMA_TALK3,미마: 사실 최근엔 제자는 받지않았었지만 특별케이스야
-LOC_SYSTEM_GOD_MIMA_TALK4,미마: 마법의 기본은 파워다. 적어두도록
-LOC_SYSTEM_GOD_MIMA_TALK5,미마: 선수필승. 먼저 공격한 쪽이 이긴다.
-LOC_SYSTEM_GOD_MIMA_TALK6,미마: 내 궁극의 마법이 궁금한가?
-LOC_SYSTEM_GOD_MIMA_TALK7,미마: 더 이상 내가 가르쳐줄 마법은 없다.
-LOC_SYSTEM_GOD_MIMA_TALK8,미마: 마법의 힘으로 길을 열어라!
-LOC_SYSTEM_GOD_MIMA_PUNISH_SPELLDOWN,미마는 당신이 쓰는 마법의 위력을 반감시켰다!
-LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,미마가 강력한 {0:을|를} 당신에 겨냥했다!
-LOC_SYSTEM_GOD_SHINKI_WELCOME,신키에게 P와 영혼을!
-LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P,P로부터 회복하였다.
-LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,마계의 졸개들이 당신에게 소환되었다.
-LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0}의 기분이 썩 좋아보이지 않는다.
-LOC_SYSTEM_GOD_SHINKI_PUNISH_SUMMON,신키가 적대적인 마계인을 창조해냈다!
-LOC_SYSTEM_GOD_YUUGI_WELCOME,유우기: 더 강한 상대를 찾아라!
-LOC_SYSTEM_GOD_YUUGI_TALK1,유우기: 넌 얼마나 강하지?
-LOC_SYSTEM_GOD_YUUGI_TALK2,유우기: 강한 적과 붙어서 너의 강함을 증명해!
-LOC_SYSTEM_GOD_YUUGI_TALK3,유우기: 난 거짓말을 하는 녀석이 싫어
-LOC_SYSTEM_GOD_YUUGI_TALK4,유우기: 술은 많이 마실 수 있어?
-LOC_SYSTEM_GOD_YUUGI_TALK5,유우기: 네가 싸우는걸 보면 왠지 즐거운데!
-LOC_SYSTEM_GOD_YUUGI_TALK6,유우기: 나중에 나랑 한번 싸워보지않을래?
-LOC_SYSTEM_GOD_YUUGI_TALK7,유우기: 다음엔 술자리에 초대할테니 꼭 살아서 돌아오라고!
-LOC_SYSTEM_GOD_YUUGI_ACCECPT,유우기는 당신의 승리를 기뻐했다.
-LOC_SYSTEM_GOD_YUUGI_CATCH,{0:을|를} 잡았다.
-LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE,적에게 저먼 스플렉스를 걸 지면이 부족하다.
-LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_SOMEONE,저먼 스플렉스를 쓰는데 방해되는 누군가가 있다.
-LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX,저먼 스플렉스!
-LOC_SYSTEM_GOD_YUUGI_THROW,날라가라!
-LOC_SYSTEM_GOD_YUUGI_SHOUT,침묵하라!
-LOC_SYSTEM_GOD_YUUGI_SHOUT_FAIL,포효를 들을 상대가 없다.
-LOC_SYSTEM_GOD_YUUGI_THREE_STEP,삼보필살!
-LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC,유우기는 당신의 마법에 분노했다!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK,유우기가 강한 술을 당신에게 강제로 먹였다!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW,유우기가 당신을 집어던졌다!
-LOC_SYSTEM_GOD_YUUGI_PUNISH_ONI,유우기가 당신을 벌하기위해 동료 오니들을 불러냈다!
-LOC_SYSTEM_GOD_SHIZUHA_WELCOME,시즈하: 인기 있는 녀석은 모두 죽여라...
-LOC_SYSTEM_GOD_SHIZUHA_TALK1,시즈하는 조용히 당신을 보고있다.
-LOC_SYSTEM_GOD_SHIZUHA_TALK2,시즈하는 당신의 기도에 고개를 끄덕였다.
-LOC_SYSTEM_GOD_SHIZUHA_TALK3,시즈하: ...이제 우리들의 차례야...
-LOC_SYSTEM_GOD_SHIZUHA_TALK4,시즈하: 다음 인기투표는 꼭 부탁할게
-LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,시즈하는 당신의 적이 낙엽처럼 쓰러져가는 것을 기뻐했다.
-LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,시즈하는 박수를 쳤다. "훌륭해"
-LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL,시야안 단풍위에 있는 적이 없다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,아티팩트는 변화할 수 없다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,이 아이템은 이미 단풍으로 되어있다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,당신은 방어구를 끼고 있지 않다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD,갑옷을 끼고 사용하여야 한다.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,{0:을|를} 단풍방어구로 강화하시겠습니까?
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,당신의 방어구는 커다란 단풍잎으로 변했다!
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,딱 한번만 현재 무기에 단풍 브랜드를 부여할 수 있다. 할래?
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0}에서 쓸쓸하고도 종말적인 기운이 느껴진다.
-LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,단풍잎을 밟을때 바스락거리는 시끄러운 소리가 났다.
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,시즈하는 당신에 광기의 낙엽을 흩날렸다!
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_BACKSTAB,시즈하가 당신의 등 뒤를 찔렀다!
-LOC_SYSTEM_GOD_SHIZUHA_PUNISH_NOISE_AND_DEBUFF,시즈하가 엄청난 소음과 함께 당신을 지목했다!
-LOC_SYSTEM_GOD_HINA_WELCOME,히나: 그럼 액땜작업을 계속 하겠어
-LOC_SYSTEM_GOD_HINA_TALK1,히나: 이 곳엔 재액이 가득해
-LOC_SYSTEM_GOD_HINA_TALK2,히나: 조금씩 조금씩 액땜을 해나가자
-LOC_SYSTEM_GOD_HINA_TALK3,히나: 액땜을 방해하는 녀석들은 배제해도 좋아
-LOC_SYSTEM_GOD_HINA_TALK4,히나: 더욱 더 많은 저주를 모으도록 해
-LOC_SYSTEM_GOD_HINA_TALK5,히나: 나에겐 그동안 누구도 말을 걸어주지않았어
-LOC_SYSTEM_GOD_HINA_TALK6,히나: 저주를 모으는 작업은 외로운거지
-LOC_SYSTEM_GOD_HINA_TALK7,히나: 너는 나와 끝까지 같이 있어줄거지?
-LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,히나는 당신의 장비에 액을 주입했다!
-LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,장착하고 있던 {0:이|가} 검게 빛났다.
-LOC_SYSTEM_GOD_HINA_ABIL_WEAPON_MINUS_TO_PLUS,히나는 당신의 무기의 액땜을 해주었다.
-LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS,히나는 당신의 방어구의 액땜을 해주었다.
-LOC_SYSTEM_GOD_HINA_ABIL_ONLY_MINUS,마이너스 인챈트가 되어있는 아이템만 선택할 수 있다.
-LOC_SYSTEM_GOD_HINA_ABIL_ONLY_CURSE,저주 걸려있는 아이템에만 사용할 수 있다.
-LOC_SYSTEM_GOD_HINA_ABIL_CANT_ARTIFACT,아티팩트엔 사용할 수 없다.
-LOC_SYSTEM_GOD_HINA_ABIL_INCORRECT_TARGET,올바르지 않은 대상이다.
-LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE,이미 저주에 걸려있다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0:은|는} 저주의 힘으로 가득 차있다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL,이 무기는 저주를 걸 수 없다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,장착하고 있던 {0:이|가} 검게 빛나면서 당신에게 신비한 힘이 들어온다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,이 방어구에는 저주를 걸 수 없다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,방어구에만 사용이 가능하다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 모든 데미지를 반사한다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,이 장신구에는 저주를 걸 수 없다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,장신구에만 사용이 가능하다.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,장착하고 있던 {0:이|가} 검게 빛나면서 당신은 회복한다.
-LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,딱 한번만 현재 무기에 저주 브랜드를 부여할 수 있다. 할래?
-LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0}에서 차갑고 공허한 저주의 기운이 느껴진다.
-LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON,무기를 끼고 사용하여야 한다.
-LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,히나는 액을 당신에게 직접 주입했다!
-LOC_SYSTEM_GOD_HINA_PUNISH_SPIN,히나는 당신을 빙빙 돌렸다!
-LOC_SYSTEM_GOD_YUKARI_WELCOME,유카리: 돌아왔구나
-LOC_SYSTEM_GOD_YUKARI_TALK1,유카리: 환상향의 무녀의 본분이 뭔지 기억하고있지?
-LOC_SYSTEM_GOD_YUKARI_TALK2,유카리: 당신이 나의 새로운 식신?
-LOC_SYSTEM_GOD_YUKARI_TALK3,유카리: 환상향은 모든 것을 수용해
-LOC_SYSTEM_GOD_YUKARI_TALK4,유카리: 결계의 보수작업이 필요해
-LOC_SYSTEM_GOD_YUKARI_TALK5,유카리: 사태의 원인을 알기위해서라도 더 많은 정보가 필요해
-LOC_SYSTEM_GOD_YUKARI_TALK6,유카리: 당신만 믿고있어. 도움이 필요하면 말해
-LOC_SYSTEM_GOD_YUKARI_TALK7,유카리: 내 힘을 받으면 더 이상 경계의 유무는 무의미해
-LOC_SYSTEM_GOD_YUKARI_TALK8,유카리: 당신만이 할 수 있는 일이야
-LOC_SYSTEM_GOD_YUKARI_CANT_CREATE,생성할 수 없는 위치다.
-LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA,틈새를 대상으로 지정해야한다.
-LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK,틈새를 타고 이동하였다.
-LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK_FAIL,이동할 수 없는 위치다.
-LOC_SYSTEM_GOD_YUKARI_SHIELD,결계가 당신을 보호하고 있다.
-LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO,이 곳에서는 차원을 고정할 수 없다!
-LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN,이 위치로 차원을 고정할까?
-LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX,차원이 고정되었다!
-LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,유카리는 위험한 전이를 금지하고있다. 그래도 쓸건가?
-LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,유카리는 당신의 위험한 전이도구 사용을 한번만 봐주기로 하였다.
-LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,유카리는 당신의 위험한 전이마법 사용에 분노했다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,유카리는 당신을 강제로 텔레포트 시켰다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,유카리는 당신의 주변에 몹들을 강제로 이동시켰다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_STASIS,유카리는 당신의 공간이동을 막았다!
-LOC_SYSTEM_GOD_YUKARI_PUNISH_EYES,유카리는 당신을 감시하는 이형의 눈을 소환했다!
-LOC_SYSTEM_GOD_EIRIN_WELCOME,에이린: 새로운 실험체가 필요해졌어
-LOC_SYSTEM_GOD_EIRIN_TALK1,에이린: 최근에도 공주님과는 사이좋게 지내나요?
-LOC_SYSTEM_GOD_EIRIN_TALK2,에이린: 새로운 실험체가 필요해...
-LOC_SYSTEM_GOD_EIRIN_TALK3,에이린: 이 약을 먹어보고 부작용은 없었어?
-LOC_SYSTEM_GOD_EIRIN_TALK4,에이린: 좀 더 많은 표본이 필요해
-LOC_SYSTEM_GOD_EIRIN_TALK5,에이린: 독을 알면 약도 만들 수 있는거야
-LOC_SYSTEM_GOD_EIRIN_TALK6,에이린: 부작용을 두려워하지마. 효과는 확실해
-LOC_SYSTEM_GOD_EIRIN_TALK7,에이린: 내가 준 약이라면 실패하지않을거야
-LOC_SYSTEM_GOD_EIRIN_TALK8,에이린: 이것이 너의 새로운 모습이야
-LOC_SYSTEM_GOD_EIRIN_ACCECPT,에이린은 당신의 강함에 관심을 가졌다.
-LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0:은|는} {연기를 내며|고약한 냄새를 풍기며|빛을 내면서} {1:으로|로} 바뀌었다.
-LOC_SYSTEM_GOD_EIRIN_PRAY_2,에이린은 흡족히 여겼다.
-LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,치유로 인한 부작용이 시작되었다!
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,당신의 올릴 능력치를 고르세요.
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)eturn - 복구
-LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,당신은 이미 그 능력치로 개조되어있다!
-LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,당신은 개조되어있는 몸이 아니다!
-LOC_SYSTEM_GOD_EIRIN_BOOST,에이린이 당신의 몸을 개조하였다!
-LOC_SYSTEM_GOD_EIRIN_BOOST_RETURN,에이린은 당신의 몸을 원래대로 되돌렸다.
-LOC_SYSTEM_GOD_EIRIN_MAYBE,아마도...
-LOC_SYSTEM_GOD_EIRIN_POTION_POWER,에이린은 당신이 물약에서 새로운 힘을 끌어오게했다.
-LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,에이린은 물약으로부터의 마비를 막아주고 새로운 힘을 끌어오게했다.
-LOC_SYSTEM_GOD_EIRIN_HEAL,당신은 에이린의 임시 수혈로 회복되었다.
-LOC_SYSTEM_GOD_EIRIN_HEAL_WARN,이 수혈은 시간이 지나면 큰 부작용을 불러올것이다!
-LOC_SYSTEM_GOD_EIRIN_HEAL_MAX,이미 체력이 가득 차 있다.
-LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,에이린이 당신이 마실 물약을 그냥 물로 만들어버렸다!
-LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,에이린은 당신에게 억지로 {0:을|를} 먹였다!
-LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,에이린이 당신의 몸에 강제로 실험을 했다!
-LOC_SYSTEM_GOD_YUYUKO_WELCOME,유유코: 차라도 한잔 할래?
-LOC_SYSTEM_GOD_YUYUKO_TALK1,유유코: 불로불사인 당신이 왜 날 믿는거야?
-LOC_SYSTEM_GOD_YUYUKO_TALK2,유유코: 새로운 식단은 아직이니?
-LOC_SYSTEM_GOD_YUYUKO_TALK3,유유코: 좀 더 느긋하게 있어도 좋아.
-LOC_SYSTEM_GOD_YUYUKO_TALK4,유유코: 유령은 차갑고 귀엽지않아?
-LOC_SYSTEM_GOD_YUYUKO_TALK5,유유코: 친구들은 마음에 들어?
-LOC_SYSTEM_GOD_YUYUKO_TALK6,유유코: 물론 죽더라도 영혼은 함께란다
-LOC_SYSTEM_GOD_YUYUKO_RECALL,{0}에게 유령을 내보냈다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_START,유령을 불러들이기 시작한다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_ALREADY,이미 유령을 모으고 있다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_STOP,유령 소환을 멈췄다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_NOT_EXIST,유령이 없다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT,유닛을 대상으로 사용해야한다.
-LOC_SYSTEM_GOD_YUYUKO_GHOST_BOOST,당신은 대량의 유령을 불러들이기 시작한다!
-LOC_SYSTEM_GOD_YUYUKO_GHOST_END,유령의 빈도가 정상이 되었다.
-LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0:이|가} 당신의 동료가 되었다.
-LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,유유코는 당신의 주변에 유령을 끌어모았다!
-LOC_SYSTEM_GOD_SATORI_WELCOME,사토리: 마음대로 뛰어 노세요. 던전은 넓으니까요.
-LOC_SYSTEM_GOD_SATORI_TALK1,사토리는 당신에게 큰 관심이 없다. 
-LOC_SYSTEM_GOD_SATORI_TALK2,사토리는 당신에게 미소지었다. 
-LOC_SYSTEM_GOD_SATORI_TALK3,사토리: 애완동물의 재롱은 언제나 보기 좋군요.
-LOC_SYSTEM_GOD_SATORI_TALK4,사토리는 당신을 쓰다듬었다. 
-LOC_SYSTEM_GOD_SATORI_TALK5,사토리: 오늘의 사료는 입맛에 맞나요?
-LOC_SYSTEM_GOD_SATORI_TALK6,사토리: 다음에 같이 산책하러 가지 않을래요?
-LOC_SYSTEM_GOD_SATORI_KOISHI,동생의 마음은 닫혀있다.
-LOC_SYSTEM_GOD_SATORI_MINDREADING_TOO_COMPLEX,이 상대의 마음은 너무 복잡해서 읽을 수 없다.
-LOC_SYSTEM_GOD_SATORI_MINDREADING_ALREADY,이미 마음을 간파한 대상이다.
-LOC_SYSTEM_GOD_SATORI_MINDREADING,마음을 읽는중...
-LOC_SYSTEM_GOD_SATORI_MINDREADING_INTERRUPT,방해를 받아 마음을 읽는데 실패했다.
-LOC_SYSTEM_GOD_SATORI_MINDREADING_DISAPPREAR,대상이 시야에 사라져서 실패했다.
-LOC_SYSTEM_GOD_SATORI_FEED,사토리님이 당신에게 먹이를 주셨다!
-LOC_SYSTEM_GOD_SATORI_REUNION,사토리는 당신과의 재회를 기뻐했다.
-LOC_SYSTEM_GOD_SATORI_BELIEVE,사토리의 애완동물이 되었다.
-LOC_SYSTEM_GOD_TENSI_WELCOME,텐시: 천계는 지루해! 넌 날 재밌게 해줄거지?
-LOC_SYSTEM_GOD_TENSI_TALK1,텐시: 뭐야! 지금 바빠!
-LOC_SYSTEM_GOD_TENSI_TALK2,텐시: 기도하는거만으로 요행을 바라는건 너무 이기적이지 않아?
-LOC_SYSTEM_GOD_TENSI_TALK3,텐시: 재미있는 일은 없는거야?
-LOC_SYSTEM_GOD_TENSI_TALK4,텐시: 오랫만에 지진을 일으켜볼까...
-LOC_SYSTEM_GOD_TENSI_TALK5,텐시: 한번만 더 귀찮게하면 돌을 던질꺼야!
-LOC_SYSTEM_GOD_TENSI_TALK6,텐시는 당신에게 돌을 던졌다.
-LOC_SYSTEM_GOD_TENSI_TALK7,텐시는 당신을 보고 키득키득 웃고있다.
-LOC_SYSTEM_GOD_TENSI_TALK8,텐시는 당신을 보고 따분한듯 하품하고 있다.
-LOC_SYSTEM_GOD_TENSI_TALK9,텐시는 당신의 기도를 무시했다.
-LOC_SYSTEM_GOD_TENSI_TALK10,텐시는 산갈치로 당신의 머리를 때렸다.
-LOC_SYSTEM_GOD_SEIJA_WELCOME,세이자: 자, 레지스탕스 활동의 개시다!
-LOC_SYSTEM_GOD_SEIJA_TALK1,세이자는 당신의 기도를 무시했다.
-LOC_SYSTEM_GOD_SEIJA_TALK2,세이자는 당신에 큰 관심이 없어보인다.
-LOC_SYSTEM_GOD_SEIJA_TALK3,세이자의 표정은 그다지 안 좋아보인다.
-LOC_SYSTEM_GOD_SEIJA_TALK4,세이자: 반칙이라도 살아남는다면 그걸로 충분해
-LOC_SYSTEM_GOD_SEIJA_TALK5,세이자: 레지스탕스 생활은 마음에 들어?
-LOC_SYSTEM_GOD_SEIJA_TALK6,세이자: 우린 최고의 파트너야 친구!
-LOC_SYSTEM_GOD_SEIJA_PUNISH,세이자는 당신과 {0}의 관계를 이간질했다!
-LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,당신은 {0:와|과} 자리를 뒤집었다.
-LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM,세이자는 모두의 시야를 뒤집어버렸다.
-LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM_FAIL,시야내에 뒤집어버릴 상대가 없다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_ON,이제 세이자로부터 선물을 요구할 수 있다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,({0}키로 선물을 요청)
-LOC_SYSTEM_GOD_SEIJA_GIFT_ASK,세이자: 어느 신으로부터 훔친 선물을 줄까?
-LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE,마음이 변하기전에 고르는게 좋을걸?
-LOC_SYSTEM_GOD_SEIJA_GIFT_YN,이 신의 보물을 요구하겠습니까?
-LOC_SYSTEM_GOD_SEIJA_GIFT_ALREADY,이미 한번 보물을 받았던 신이다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT,선물을 받지않은지 너무 오랜시간이 지나서 선물이 취소되었다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,뱌쿠렌: 무작위 마법책을 몇 권 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,뱌쿠렌은 징벌로 당신을 느리게하거나 영력이나 스탯을 일시적으로 감소시킵니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN3,또한 뱌쿠렌의 징벌중엔 항상 일정 확률로 시전한 마법이 실패합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION1,죠온&시온: 무작위 부적을 약간 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION2,죠온과 시온은 당신의 아이템을 낭비하고 잃어버리도록 만듭니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,또한 징벌로 당신에게 강제로 빙의되어 체력, 영력이나 파워를 잃게 만듭니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,카나코: 무작위 무작위 무기를 여럿을 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,카나코는 징벌로 당신에게 데미지를 주거나 온바시라를 꽂아서 발을 묶거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,던전의 적대적인 몬스터들을 당신의 주위로 불러들이기도 합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,스와코: 스펠카드를 몇 개 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,스와코는 당신에게 저주를 걸어 저항할 수 없는 감속과 독을 걸거나
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,당신의 주변에 적대적인 개구리들을 소환합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,미노리코: 다수의 고구마를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO2,미노리코는 징벌로 당신의 파워를 절반으로 만들거나 건강을 빼앗아
-LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO3,병에 걸리게하기도하며 능력치를 일시적으로 감소시킬 수 있습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA1,미마: 미마의 봉인서를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA2,미마는 징벌로 당신에게 다양한 속성의 파괴마법을 직접 날립니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA3,또한 미마에 징벌을 받는 동안엔 모든 마법의 파워가 절반이 됩니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI1,신키: 영격두루마리 몇개를 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI2,신키는 징벌로 당신의 주변에 적대적인 마계인들을 소환합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI3,또한 징벌중엔 적이 P아이템을 떨어뜨릴 확률을 낮춥니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,유우기: 무작위 방어구를 여럿 받습니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI2,유우기는 당신을 강제로 취하게 만들거나 데미지와 함께 집어던지거나
+LOC_SYSTEM_GOD_SHOW_P_LITTLE,(P 少量)
+LOC_SYSTEM_GOD_SHOW_P_SOME,(P やや多め)
+LOC_SYSTEM_GOD_SHOW_P_BIG,(P 大量)
+LOC_SYSTEM_GOD_SHOW_POTION,(ポーション)
+LOC_SYSTEM_GOD_SHOW_CURSE,(呪い)
+LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(霊力、信仰)
+LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N,(霊力 {0}、信仰)
+LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(時間、信仰)
+LOC_SYSTEM_GOD_SHOW_P_AND_PIETY,(P、信仰)
+LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_PIETY,(P 少量、信仰)
+LOC_SYSTEM_GOD_SHOW_P_SOME_AND_PIETY,(P やや多め、信仰)
+LOC_SYSTEM_GOD_SHOW_P_BIG_AND_PIETY,(P 大量、信仰)
+LOC_SYSTEM_GOD_SHOW_P_AND_POTION,(P、ポーション)
+LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_POTION,(P 少量、ポーション)
+LOC_SYSTEM_GOD_SHOW_P_SOME_AND_POTION,(P やや多め、ポーション)
+LOC_SYSTEM_GOD_SHOW_P_BIG_AND_POTION,(P 大量、ポーション)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP,(P、霊力)
+LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N,(P 少量、霊力 {0})
+LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N,(P やや多め、霊力 {0})
+LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N,(P 大量、霊力 {0})
+LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY,(ポーション、信仰)
+LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY,(P、霊力、信仰)
+LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_PIETY_N,(P 少量、霊力 {0}、信仰)
+LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_PIETY_N,(P やや多め、霊力 {0}、信仰)
+LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_PIETY_N,(P 大量、霊力 {0}、信仰)
+LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY,(P、食べ物、信仰)
+LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_FOOD_AND_PIETY,(P 少量、食べ物、信仰)
+LOC_SYSTEM_GOD_SHOW_P_SOME_AND_FOOD_AND_PIETY,(P やや多め、食べ物、信仰)
+LOC_SYSTEM_GOD_SHOW_P_BIG_AND_FOOD_AND_PIETY,(P 大量、食べ物、信仰)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON,(一度だけ)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR,(各階で一度だけ)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(霊力、憑依中一度だけ)
+LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N,(霊力 {0}、憑依中一度だけ)
+LOC_SYSTEM_GOD_SHOW_POPULAR,(人気度 {0}%)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,あなたは疫病神と貧乏神の呪いを受けている。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,消耗品を使うと時々2～3個同時に消費する。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,消耗品を使うと必ず2～3個同時に消費する（強化）。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,拾っていない消耗品は徐々に消えていく。捨てると一定確率で消滅。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,拾っていない消耗品はすぐに消える。捨てると必ず消滅する（強化）。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,あなたは一時的に女苑または紫苑に憑依できる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3,憑依中、女苑または紫苑があなたのパワーを利用する。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1,女苑に憑依中はすべてのダメージが増加し、攻撃するたびにパワーを消費。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2,紫苑に憑依中はパワーを拾っても増えない代わりにHPが回復する。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4,憑依中、女苑または紫苑があなたの消耗品を利用する。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1,女苑に憑依中は消耗品を無駄にすることでランダムバフを得られる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2,紫苑に憑依中は死亡時に大量の消耗品を失うが、死を回避できる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5,憑依中、範囲権能を使用できる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1,視界内の敵を混乱させ、ダメージを与えることができる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2,視界内の敵を鈍足にし、視界を遮る霧を発生させることができる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6,憑依すると最凶最悪の戦術を使用できる。
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,貧乏神を敵に憑依させる必勝の戦術を使える。
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1,白蓮はあなたの習得可能な魔法レベルの上限を引き上げる。
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,あなたは瞬間的に知力を強化できる。
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,あなたは強化された筋力で軽装鎧の魔法失敗率を無視できる。
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,白蓮はあなたの強化魔法を支援してくれる。
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,あなたは瞬間的に脚力を強化できる。
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,あなたは神奈子の力で突進することができる。
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,あなたは神奈子の柱を顕現させることができる。
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,あなたは神奈子の風の力をまとえる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,あなたは短距離をジャンプできる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,あなたは神殿を建てて信仰心を得ることができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,あなたは遠くの敵に水の弾幕を放つことができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TONGUE,あなたは遠くの敵を引き寄せることができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_HP,敵を倒すたびに確率で体力が回復する。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_MP,敵を倒すたびに霊力を回復する。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_KILL_POWER,敵を倒すたびに確率でパワーを回復する。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_SWIM,あなたは泳ぐことができ、水中で回避ボーナスを得る。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY2_DEAD_PROTECT,スワコが時々あなたを死から守ってくれる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_CURSE,あなたは敵に災厄をかけることができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_DIGGING,あなたは壁を壊すことができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_SUMMON_FLOG,あなたはカエルの仲間を召喚できる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY3_STATUE,あなたは一定時間カエルの像を建てることができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_COLD_RESIST,あなたは冷気に耐性がある。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_FIRE_RESIST,あなたは火炎に耐性がある。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_AC,あなたのACが上昇する。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_CONFUSE_RESIST,あなたは混乱に耐性がある。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY4_POISON_RESIST,あなたは毒に耐性がある。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_RAIN,あなたは周囲を水浸しにすることができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SLEEP,あなたは地中に潜って冬眠することができる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_MISYAGUZI,あなたはミシャグジ様を召喚できる。
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT,あなたはスワコ様の可愛い帽子を手に入れた。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,パワーが満タンでも食べ物を食べられ、最大パワーを長く維持できる。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,パワーが多いほど体力と霊力の回復速度が上昇する。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,ミノリコは状態異常や能力低下を回復してくれる。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,あなたは食べ物を早く食べられ、少量の霊力も回復できる。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,ミノリコは食べ物を消費して大量の体力を回復してくれる。
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,ミノリコは食後に一時的に火と冷気耐性を1段階付与する。
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1,信仰心に比例して最大霊力が上昇する。
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2,敵を倒すとその強さに応じて霊力を得られる。
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,ミマは破壊術系の魔法の威力を高めてくれる。
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,ミマは破壊術系の魔法の成功率を上げてくれる。
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,あなたは下級魔族の群れを召喚できる。
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,あなたは中級魔族を召喚できる。
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,敵対的な召喚수の行動を一定確率で妨害する。
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,あなたは上級魔族を召喚できる。
+LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,Pを拾うたびに体力と霊力が回復する。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,酔っている間、少しの体力回復と高い回避力を得る。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,ポーション1個を酒として飲むことができる。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,戦闘中、時々相手を掴む。掴んでいる間、権能が強化される。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4,相手を掴んでジャーマンスープレックスをかけることができる。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5,相手を掴んで投げ飛ばすことができる。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6,周囲の敵を沈黙させる強力な咆哮を放つことができる。
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7,鬼の奥義「三歩必殺」を使える。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1,シズハは敵が眠りから目覚めたときに叫ぶ確率を下げてくれる。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2,移動や敵を倒した際に紅葉の痕跡を残す。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3,紅葉の上を歩くと非常に静かに移動できる。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4,紅葉の上にいるすべての敵を混乱させることができる。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5,装備中の防具を紅葉防具に変えることができる。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6,紅葉の上を歩くと非常に素早く移動できる。
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7,一度だけ武器に紅葉のブランドを付与できる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1,視界内の装備に呪いがかかっているかを見抜き識別できる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2,装備中の呪われた装備のマイナスエンチャントをプラスに変換できる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3,武器に一時的に呪いの力を込めて強化することができる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4,防具に一時的に呪いの力を込めて全ての攻撃を反射することができる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5,アクセサリーに一時的に呪いの力を込めて生命力を回復することができる。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6,呪われたアイテムを装備していると呪いを撒き散らす。
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7,一度だけ武器に呪いのブランドを付与できる。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1,スキマがあなたを見守っている。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2,一定のダメージを受けると空間移動が発生する。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3,スキマからの射撃支援を受けることができる。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4,スキマを通って移動できる。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5,結界を作ることができる。
+LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6,一時的に次元を固定することができる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1,永琳はポーションの効果を高めてくれる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2,良いポーションの上で祈ると悪いポーションを生成できる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3,次のポーションを飲むと追加効果を得られる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1,*1) 毒ポーション：移動速度が上昇する。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2,*2) 能力低下ポーション：体力が回復する。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3) 混乱ポーション：霊力が回復する。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4) 減速ポーション：透明になる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5) 麻痺ポーション：麻痺時間が短くなり、霊撃を放つ。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,ポーションを投げることができる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,身体改造でステータスを調整できる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,副作用と引き換えに体を再生できる。
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,あなたは幽霊を呼び寄せる。
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2,任意の位置に幽霊を送ることができる。
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3,一時的に幽霊の出現頻度を高めることができる。
+LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4,敵一体の魂を捕えることができる。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1,あなたは透明な存在を視認できる。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2,あなたは敵のトラウマを引き出せる。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3,敵の記憶からマップの形状を読み取る。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4,敵の気配を探知できる。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5,敵の思考を完全に読み取ることができる。
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6,サトリは時々あなたに餌を与える。危険なほど頻度が上がる。
+LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY,天子の行動は予測不可能だ！
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,あなたは正邪からステータス強化を受けている。
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,追撃の天罰からあなたを助けてくれる。
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3,指定した相手と位置を入れ替えることができる。
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4,すべての敵・味方の視界を反転できる。
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1,妖精に経験値を分け与え、死亡した妖精も経験値を得ると復活する。
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2,あなたは妖精たちを仲間に勧誘することができる。
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,あなたは妖精たちを近くに呼び寄せることができる。
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4,あなたは仲間の妖精を回復させることができる。
+LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5,あなたは妖精たちに力を分け与えることができる。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1,人気度は次の行動で上昇する。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,敵を倒す。強い敵ほど人気度の上昇量が多い。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,欲望集めを使って視界内の敵の欲望を集める。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,新しいサブダンジョンに入場する。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,人気度は次の行動で減少する。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,フロアを移動する。深い階層ほど多く減少する。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,サブダンジョンを移動する。すべての人気度が失われる。
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,ミコの権能を使用する。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,周囲の敵から人気度を集めることができる。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,高速でランダムな瞬間移動ができる。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3,その階層で周囲を照らす後光を得られる。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4,その階層で任意の耐性を得られる。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5,その階層で任意の戦闘能力を強化できる。
+LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6,その階層で究極の祝福を受けることができる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1,あなたは自由に扉の移動と透視ができる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2,あなたは任意の壁に扉を作ることができる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,あなたは扉を強制的に閉じて施錠することができる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,あなたは敵の背後に移動できる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,あなたはクレイジー・バックダンサーズを召喚できる。
+LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,あなたはいつでも背後の扉を開けて逃げることができる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,あなたは純狐の祝福によって永久に純化された。
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,あなたは一部の巻物とポーションを使用できない。
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,あなたはスペルカードおよび一部の巻物・ポーションを使用できない。
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,あなたのすべてのステータスが5上昇する。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,純狐の力は強力だが、あなたを一時的に純化状態にする。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,段階1: あなたはスペルカードを使用できない。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,段階2: あなたは一部の巻物の効果を使えない。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,段階3: あなたはポーションの効果を受けない。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,あなたは単純だが強力な弾幕を放つことができる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,あなたは純粋な力を得ることができる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,あなたは純粋な殺意を得ることができる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,あなたは純狐の祝福により永久に純化できる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,あなたは純狐の祝福により永久に純化された。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,スキル純化: あなたの{0}スキルレベルは常にキャラクターレベルと等しい。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,抵抗純化: あなたの{0}は無限大である。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,魔力純化: あなたの体力と霊力は同一化される。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,パワー純化: あなたは常にフルパワー状態である。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,生命純化: あなたは追加の命を授かった。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,装備純化: あなたは所持していた装備を純化した。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,システム純化: スペルカードの使用が許可され、お札のチャージ速度が3倍になる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,未知のバグによる純化
+LOC_SYSTEM_GOD_ABLILITES,権能一覧
+LOC_SYSTEM_GOD_COMMON_ACCECPT,{0}はあなたの殺戮を喜んだ。
+LOC_SYSTEM_GOD_COMMON_PROTECT,守られた！
+LOC_SYSTEM_GOD_COMMON_RAGE,{0}はあなたの行動に激怒した。懺悔せよ！
+LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,存在しない神です。
+LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,裏切者に入信の資格はない！
+LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,正邪はレベル9を超えた強者を信者として受け入れない。
+LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,すでに信仰している神です。
+LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,女苑: 一文無しにしてやるわよ！
+LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,紫苑: お腹すいた……
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,女苑: 新しいカモ……じゃなかった、お客様が来たわ！
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK2,紫苑: お腹すいた……
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK3,女苑: もっとパーッと使っていいのよ
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK4,紫苑: ごはんはどこ……？
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK5,女苑: あのね、新しいブランドバッグが欲しいのよ。
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK6,紫苑: なんで私たち疫病神を信仰してるの……？
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK7,女苑: ん？カードが欲しいの？
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK8,紫苑: 恵まれない者を助けるのはどう……？
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK9,女苑: 使わなきゃ意味ないじゃない！全部使っちゃえ！
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK10,紫苑: 最近はお腹が空いててもなんか楽しいの。
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK11,女苑: 私たちなら、全部奪い取ってやれる！
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK12,紫苑: 私にも何かできるかな……
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,女苑＆紫苑: 最凶最悪の姉妹の力、見せてあげる！
+LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,女苑と紫苑は敵の財布を強奪することに喜びを感じた。
+LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,疫病神の呪いで{0}個の{1}を浪費して使ってしまった。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,再び憑依できるようになった。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK,どちらの神に憑依する？
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1,a - ヨリガミ 女苑：憑依時にパワーが最大まで回復。解除時に浪費される。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2,また、消耗品使用時に必ず2～3個浪費する。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3,b - ヨリガミ 紫苑：憑依時にHPとMPが回復。捨てた消耗品が消える。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4,地面の消耗品がすぐに消滅。パワーペナルティを受けない。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1,女苑: 根こそぎ奪ってやるわ！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK2,女苑: 高く売れそうなのは全部盗って！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3,女苑: 力をあげるから全部私に捧げなさい！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK4,女苑: 集金の時間よ！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK1,紫苑: ねえ、そろそろ施してくれない？
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK2,紫苑: 貧乏はもう嫌っ！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK3,紫苑: 最凶最悪は私一人で十分！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4,紫苑: 誰もが平等に不幸な時代が来るわ……
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_FAIL,{0}は無生物のため憑依できない。
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_SUCCESS,{0}に貧乏神が憑依した！
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_END,あなたの憑依が解けた。
+LOC_SYSTEM_GOD_JOON_AND_SION_JOON_AOE,派手な光と花火が周囲の敵を襲う！
+LOC_SYSTEM_GOD_JOON_AND_SION_SION_AOE,巨大な不運の渦が吹き荒れる！
+LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_JOON,女苑が強制的に憑依した！パワーが減少した！
+LOC_SYSTEM_GOD_JOON_AND_SION_PUNISH_SION,紫苑が強制的に憑依した！HPとMPを失った！
+LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE,紫苑が消耗品と引き換えにあなたを復活させた！
+LOC_SYSTEM_GOD_BYAKUREN_WELCOME,白蓮: ようこそ、信徒よ。
+LOC_SYSTEM_GOD_BYAKUREN_TALK1,白蓮: ああ、法の世界は光に満ちている……
+LOC_SYSTEM_GOD_BYAKUREN_TALK2,白蓮: 私たちの寺は人間も妖怪も差別しませんよ。
+LOC_SYSTEM_GOD_BYAKUREN_TALK3,白蓮: 厳しい修行は心を清めます。
+LOC_SYSTEM_GOD_BYAKUREN_TALK4,白蓮: あなたの努力は実を結びますよ。
+LOC_SYSTEM_GOD_BYAKUREN_TALK5,白蓮: 魔法を使う者でも肉体を鍛えるべきです。
+LOC_SYSTEM_GOD_BYAKUREN_TALK6,白蓮: あなたが学んだ仏の教えを皆に伝えてください。
+LOC_SYSTEM_GOD_BYAKUREN_TALK7,白蓮: いらっしゃいませ、真の仏弟子よ。
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_MP,白蓮の怒りであなたの霊力が吸収された！
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_BYAKUREN,白蓮の怒りであなたのステータスが低下した！
+LOC_SYSTEM_GOD_BYAKUREN_PUNISH_SLOW,白蓮の怒りであなたの動きが鈍くなった！
+LOC_SYSTEM_GOD_KANAKO_WELCOME,神奈子: 絶え間ない戦いで信仰を示しなさい！
+LOC_SYSTEM_GOD_KANAKO_WELCOME_SANAE,神奈子: 進むのです、早苗！
+LOC_SYSTEM_GOD_KANAKO_TALK1,神奈子: 無理は禁物よ、早苗。
+LOC_SYSTEM_GOD_KANAKO_TALK2,神奈子: 絶え間ない戦いで信仰を証明しなさい。
+LOC_SYSTEM_GOD_KANAKO_TALK3,神奈子: 我を呼んだのは誰だ？
+LOC_SYSTEM_GOD_KANAKO_TALK4,神奈子: 信仰を妨げる者はすべて排除せよ。
+LOC_SYSTEM_GOD_KANAKO_TALK5,神奈子: あなたの信仰には力で応えよう。
+LOC_SYSTEM_GOD_KANAKO_TALK6,神奈子: 山の信仰をさらに広めなさい。
+LOC_SYSTEM_GOD_KANAKO_TALK7,神奈子: かつて戦神と呼ばれたこの身……その力、見せてやろう。
+LOC_SYSTEM_GOD_KANAKO_TALK8,神奈子: 真の戦の化身よ、前へ進め！
+LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,神奈子があなたに強烈な一撃を放った！
+LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,神奈子があなたに強烈な一撃を放った！
+LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL,神奈子があなたを戦場へと強制的に呼び戻した！
+LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL,神奈子は戦いに呼び戻そうとしたが、適当な敵がいなかった。
+LOC_SYSTEM_GOD_SWAWKO_WELCOME,諏訪子: ははは！面白くなってきたね。
+LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,諏訪子: 早苗！最近はどう？もう慣れた？
+LOC_SYSTEM_GOD_SUWAKO_TALK1,諏訪子: 妖怪退治の時間だよ、早苗！
+LOC_SYSTEM_GOD_SUWAKO_TALK2,諏訪子: ん？ 呼んだ？
+LOC_SYSTEM_GOD_SUWAKO_TALK3,諏訪子: 最近の信者は欲が深いね〜
+LOC_SYSTEM_GOD_SUWAKO_TALK4,諏訪子: 私が災厄の神だってこと、忘れてないよね？
+LOC_SYSTEM_GOD_SUWAKO_TALK5,諏訪子: もっと努力してみなよ〜
+LOC_SYSTEM_GOD_SUWAKO_TALK6,諏訪子: 心配しないで、力はちゃんとあげるからさ。
+LOC_SYSTEM_GOD_SWAWKO_HAT,諏訪子の帽子
+LOC_SYSTEM_GOD_SWAWKO_JUMP,ジャンプ！
+LOC_SYSTEM_GOD_SWAWKO_ALTAR1,あなたは足元に諏訪子の神殿を築いた。
+LOC_SYSTEM_GOD_SWAWKO_ALTAR2,信仰心が満ちあふれてくるのを感じた。
+LOC_SYSTEM_GOD_SWAWKO_ALTAR_FAIL,ここには神殿を築けない。
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,{0}を引き寄せた。
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FAIL,この位置では引き寄せられない。
+LOC_SYSTEM_GOD_SWAWKO_STATUE_FAIL,ここには像を建てられない。
+LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,{0}に災厄を下した。
+LOC_SYSTEM_GOD_SWAWKO_RAIN,あなたの周囲が水浸しになった。
+LOC_SYSTEM_GOD_SWAWKO_TIMESTEP_END,あなたは冬眠から目覚めた。まだ少し眠い。
+LOC_SYSTEM_GOD_SWAWKO_PUNISH_CURSE,諏訪子があなたに呪いをかけた！
+LOC_SYSTEM_GOD_SWAWKO_PUNISH_FROG,諏訪子があなたに敵対的なカエルの群れを送り込んだ！
+LOC_SYSTEM_GOD_MINORIKO_WELCOME,ミノリコ: この地に秋の恵みを！
+LOC_SYSTEM_GOD_MINORIKO_TALK1,ミノリコ: あなたも秋の魅力に気づいたのね？
+LOC_SYSTEM_GOD_MINORIKO_TALK2,ミノリコ: 収穫のためには、それ相応の努力が必要なのよ。
+LOC_SYSTEM_GOD_MINORIKO_TALK3,ミノリコ: 秋って本当に美しい季節だよね！
+LOC_SYSTEM_GOD_MINORIKO_TALK4,ミノリコ: 私があげたサツマイモ、口に合った？
+LOC_SYSTEM_GOD_MINORIKO_TALK5,ミノリコ: ちゃんとお腹いっぱいにしてる？
+LOC_SYSTEM_GOD_MINORIKO_TALK6,ミノリコ: 積み重ねた努力を豊作で報いる時だよ！
+LOC_SYSTEM_GOD_MINORIKO_TALK7,ミノリコ: 秋の使徒よ！秋の偉大さを世に広めて！
+LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT,ミノリコは興奮して叫んだ。「それよ！それなのよ！」
+LOC_SYSTEM_GOD_MINORIKO_CURE,あなたの状態異常は回復した。
+LOC_SYSTEM_GOD_MINORIKO_CURE_FAIL,回復すべき状態がなかった。
+LOC_SYSTEM_GOD_MINORIKO_FOOD_HEAL,あなたの状態異常は回復した。
+LOC_SYSTEM_GOD_MINORIKO_FOOD_FAIL,あなたの状態異常は回復した。
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER,ミノリコはあなたの空腹を加速させた！
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_SICK,ミノリコはあなたの健康を奪った！
+LOC_SYSTEM_GOD_MINORIKO_PUNISH_STAT,ミノリコはあなたの能力値を削った！
+LOC_SYSTEM_GOD_MIMA_WELCOME,ミマ: 圧倒的な魔法の力で！
+LOC_SYSTEM_GOD_MIMA_TALK1,ミマ: 久しぶりだね、元気にしてた？
+LOC_SYSTEM_GOD_MIMA_TALK2,ミマ: 新しい弟子志望者かい？
+LOC_SYSTEM_GOD_MIMA_TALK3,ミマ: 実は最近は弟子は取ってなかったんだけど、今回は特別。
+LOC_SYSTEM_GOD_MIMA_TALK4,ミマ: 魔法の基本はパワーよ。しっかり覚えておきなさい。
+LOC_SYSTEM_GOD_MIMA_TALK5,ミマ: 先手必勝。先に仕掛けた者が勝つのよ。
+LOC_SYSTEM_GOD_MIMA_TALK6,ミマ: 私の究極魔法、見てみたい？
+LOC_SYSTEM_GOD_MIMA_TALK7,ミマ: もうあなたに教える魔法は残ってないわ。
+LOC_SYSTEM_GOD_MIMA_TALK8,ミマ: 魔法の力で道を切り開きなさい！
+LOC_SYSTEM_GOD_MIMA_PUNISH_SPELLDOWN,ミマはあなたの魔法の威力を半減させた！
+LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC,ミマが強力な{0}をあなたに放った！
+LOC_SYSTEM_GOD_SHINKI_WELCOME,神綺にPと魂を！
+LOC_SYSTEM_GOD_SHINKI_HEAL_FROM_P,Pから回復した。
+LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS,魔界の手下たちがあなたのもとに召喚された。
+LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,{0}の機嫌があまり良くなさそうだ。
+LOC_SYSTEM_GOD_SHINKI_PUNISH_SUMMON,神綺が敵対的な魔界の者を創造した！
+LOC_SYSTEM_GOD_YUUGI_WELCOME,勇儀: もっと強い相手を探してこい！
+LOC_SYSTEM_GOD_YUUGI_TALK1,勇儀: お前、どれくらい強いんだ？
+LOC_SYSTEM_GOD_YUUGI_TALK2,勇儀: 強敵と戦って、自分の強さを見せてみろ！
+LOC_SYSTEM_GOD_YUUGI_TALK3,勇儀: 嘘つきは嫌いなんだよ。
+LOC_SYSTEM_GOD_YUUGI_TALK4,勇儀: 酒、どのくらい飲めるんだ？
+LOC_SYSTEM_GOD_YUUGI_TALK5,勇儀: お前の戦いを見てると、なんか楽しいな！
+LOC_SYSTEM_GOD_YUUGI_TALK6,勇儀: そのうち私と一戦交えてみないか？
+LOC_SYSTEM_GOD_YUUGI_TALK7,勇儀: 今度の宴には必ず生きて帰って来いよ！
+LOC_SYSTEM_GOD_YUUGI_ACCECPT,勇儀はあなたの勝利を喜んだ。
+LOC_SYSTEM_GOD_YUUGI_CATCH,{0}を掴んだ。
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE,敵にジャーマンスープレックスをかけるには地形が狭すぎる。
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_SOMEONE,誰かが邪魔でジャーマンスープレックスができない。
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX,ジャーマンスープレックス！
+LOC_SYSTEM_GOD_YUUGI_THROW,ぶっ飛べ！
+LOC_SYSTEM_GOD_YUUGI_SHOUT,黙れッ！
+LOC_SYSTEM_GOD_YUUGI_SHOUT_FAIL,咆哮を浴びせる相手がいない。
+LOC_SYSTEM_GOD_YUUGI_THREE_STEP,三歩必殺！
+LOC_SYSTEM_GOD_YUUGI_RAGE_MAGIC,ユウギはあなたの魔法に激怒した！
+LOC_SYSTEM_GOD_YUUGI_PUNISH_DRINK,ユウギが強烈な酒をあなたに無理やり飲ませた！
+LOC_SYSTEM_GOD_YUUGI_PUNISH_THROW,ユウギがあなたを放り投げた！
+LOC_SYSTEM_GOD_YUUGI_PUNISH_ONI,ユウギがあなたを罰するため仲間の鬼を呼び出した！
+LOC_SYSTEM_GOD_SHIZUHA_WELCOME,シズハ: 人気者はみんな倒れてもらうよ……
+LOC_SYSTEM_GOD_SHIZUHA_TALK1,シズハは静かにあなたを見つめている。
+LOC_SYSTEM_GOD_SHIZUHA_TALK2,シズハはあなたの祈りにうなずいた。
+LOC_SYSTEM_GOD_SHIZUHA_TALK3,シズハ: ……さあ、今度は私たちの番だよ……
+LOC_SYSTEM_GOD_SHIZUHA_TALK4,シズハ: 次の人気投票、よろしくね。
+LOC_SYSTEM_GOD_SHIZUHA_ACCECPT,シズハはあなたの敵が枯葉のように倒れる様子に喜んだ。
+LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,シズハは拍手した。「見事だよ」
+LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL,視界内の紅葉の上に敵がいない。
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,アーティファクトは変化できない。
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,このアイテムはすでに紅葉になっている。
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,あなたは防具を装備していない。
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD,防具を装備して使用してください。
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,{0}を紅葉防具に変化させますか？
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,あなたの防具は大きな紅葉の葉に変化した！
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,一度だけ現在の武器に紅葉ブランドを付与できます。付与しますか？
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0}から物悲しくも終焉的な気配が感じられる。
+LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,紅葉の上を歩くとカサカサとうるさい音がした。
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_CONFUSE,シズハがあなたに狂気の落葉を舞わせた！
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_BACKSTAB,シズハがあなたの背後を突いた！
+LOC_SYSTEM_GOD_SHIZUHA_PUNISH_NOISE_AND_DEBUFF,シズハが大きな音と共にあなたを標的にした！
+LOC_SYSTEM_GOD_HINA_WELCOME,ヒナ: それじゃあ厄払い作業を続けるよ。
+LOC_SYSTEM_GOD_HINA_TALK1,ヒナ: この場所には厄が満ちている。
+LOC_SYSTEM_GOD_HINA_TALK2,ヒナ: 少しずつ、少しずつ厄を払っていこう。
+LOC_SYSTEM_GOD_HINA_TALK3,ヒナ: 厄払いの邪魔をする者は排除しても構わないよ。
+LOC_SYSTEM_GOD_HINA_TALK4,ヒナ: もっともっと多くの呪いを集めて。
+LOC_SYSTEM_GOD_HINA_TALK5,ヒナ: 私には今まで誰も話しかけてくれなかった。
+LOC_SYSTEM_GOD_HINA_TALK6,ヒナ: 呪いを集める仕事って、孤独なものだよ。
+LOC_SYSTEM_GOD_HINA_TALK7,ヒナ: 君は最後まで私と一緒にいてくれるよね？
+LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,ヒナはあなたの装備に呪いを注いだ！
+LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,装備していた{0}が黒く輝いた。
+LOC_SYSTEM_GOD_HINA_ABIL_WEAPON_MINUS_TO_PLUS,ヒナはあなたの武器の呪いを浄化してくれた。
+LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS,ヒナはあなたの防具の呪いを浄化してくれた。
+LOC_SYSTEM_GOD_HINA_ABIL_ONLY_MINUS,マイナスエンチャントがついたアイテムしか選べません。
+LOC_SYSTEM_GOD_HINA_ABIL_ONLY_CURSE,呪われたアイテムにしか使えません。
+LOC_SYSTEM_GOD_HINA_ABIL_CANT_ARTIFACT,アーティファクトには使用できません。
+LOC_SYSTEM_GOD_HINA_ABIL_INCORRECT_TARGET,対象が正しくありません。
+LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE,すでに呪われています。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0}は呪いの力で満たされた。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL,この武器には呪いをかけられない。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,装備していた{0}が黒く輝き、神秘的な力が流れ込んできた。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,この防具には呪いをかけられない。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,防具にのみ使用可能です。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,装備していた{0}が黒く輝き、全てのダメージを反射するようになった。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,このアクセサリーには呪いをかけられない。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,アクセサリーにのみ使用可能です。
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,装備していた{0}が黒く輝き、あなたは回復した。
+LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,一度だけ現在の武器に呪いのブランドを付与できます。付与しますか？
+LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0}から冷たく空虚な呪いの気配が漂っている。
+LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON,武器を装備して使用してください。
+LOC_SYSTEM_GOD_HINA_PUNISH_CURSE_SMOKE,ヒナは厄をあなたに直接注ぎ込んだ！
+LOC_SYSTEM_GOD_HINA_PUNISH_SPIN,ヒナはあなたをぐるぐる回した！
+LOC_SYSTEM_GOD_YUKARI_WELCOME,ユカリ: 戻ってきたのね。
+LOC_SYSTEM_GOD_YUKARI_TALK1,ユカリ: 幻想郷の巫女の本分、ちゃんと覚えているわよね？
+LOC_SYSTEM_GOD_YUKARI_TALK2,ユカリ: あなたが私の新しい式神かしら？
+LOC_SYSTEM_GOD_YUKARI_TALK3,ユカリ: 幻想郷はすべてを受け入れるのよ。
+LOC_SYSTEM_GOD_YUKARI_TALK4,ユカリ: 結界の補修が必要ね。
+LOC_SYSTEM_GOD_YUKARI_TALK5,ユカリ: 事態の原因を知るには、もっと情報が必要だわ。
+LOC_SYSTEM_GOD_YUKARI_TALK6,ユカリ: あなたを信じているわ。助けが必要なら言いなさい。
+LOC_SYSTEM_GOD_YUKARI_TALK7,ユカリ: 私の力を受ければ、境界の有無なんて意味をなさないわ。
+LOC_SYSTEM_GOD_YUKARI_TALK8,ユカリ: あなたにしかできないことよ。
+LOC_SYSTEM_GOD_YUKARI_CANT_CREATE,この位置には生成できない。
+LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA,スキマを対象に指定してください。
+LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK,スキマを通って移動した。
+LOC_SYSTEM_GOD_YUKARI_SCHEMA_BLINK_FAIL,この位置には移動できない。
+LOC_SYSTEM_GOD_YUKARI_SHIELD,結界があなたを守っている。
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO,ここでは次元を固定できない！
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN,この位置に次元を固定しますか？
+LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX,次元が固定された！
+LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN,ユカリは危険な転移を禁止している。本当に使用しますか？
+LOC_SYSTEM_GOD_YUKARI_TRANSITEM_FORGIVE,ユカリはあなたの危険な転移道具の使用を一度だけ許した。
+LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE,ユカリはあなたの危険な転移魔法の使用に激怒した！
+LOC_SYSTEM_GOD_YUKARI_PUNISH_TELEPORT,ユカリはあなたを強制的にテレポートさせた！
+LOC_SYSTEM_GOD_YUKARI_PUNISH_RECALL,ユカリは周囲に敵を強制的に転移させた！
+LOC_SYSTEM_GOD_YUKARI_PUNISH_STASIS,ユカリはあなたの空間移動を封じた！
+LOC_SYSTEM_GOD_YUKARI_PUNISH_EYES,ユカリはあなたを監視する異形の目を召喚した！
+LOC_SYSTEM_GOD_EIRIN_WELCOME,エイリン: 新しい実験体が必要なのよ。
+LOC_SYSTEM_GOD_EIRIN_TALK1,エイリン: 最近もお姫様と仲良くしてる？
+LOC_SYSTEM_GOD_EIRIN_TALK2,エイリン: 新しい実験体が必要でね……
+LOC_SYSTEM_GOD_EIRIN_TALK3,エイリン: この薬、飲んでみて副作用はなかった？
+LOC_SYSTEM_GOD_EIRIN_TALK4,エイリン: もっとたくさんのサンプルが必要よ。
+LOC_SYSTEM_GOD_EIRIN_TALK5,エイリン: 毒を知れば、薬も作れるのよ。
+LOC_SYSTEM_GOD_EIRIN_TALK6,エイリン: 副作用を恐れないで。効果は確かだから。
+LOC_SYSTEM_GOD_EIRIN_TALK7,エイリン: 私が作った薬なら失敗しないはず。
+LOC_SYSTEM_GOD_EIRIN_TALK8,エイリン: これがあなたの新しい姿よ。
+LOC_SYSTEM_GOD_EIRIN_ACCECPT,エイリンはあなたの強さに興味を持った。
+LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0}は{煙を上げながら|悪臭を放ちながら|光を放ちながら}{1}に変化した。
+LOC_SYSTEM_GOD_EIRIN_PRAY_2,エイリンは満足そうに微笑んだ。
+LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,治療による副作用が始まった！
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,強化する能力値を選択してください。
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)eturn - 元に戻す
+LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,あなたの身体はすでにその能力に改造されています！
+LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,あなたは改造された身体ではありません！
+LOC_SYSTEM_GOD_EIRIN_BOOST,エイリンがあなたの身体を改造した！
+LOC_SYSTEM_GOD_EIRIN_BOOST_RETURN,エイリンがあなたの身体を元に戻した。
+LOC_SYSTEM_GOD_EIRIN_MAYBE,たぶんね……
+LOC_SYSTEM_GOD_EIRIN_POTION_POWER,エイリンはあなたがポーションから新たな力を引き出せるようにした。
+LOC_SYSTEM_GOD_EIRIN_PARALYSIS_POTION_POWER,エイリンは麻痺を防ぎつつ新たな力を引き出せるようにした。
+LOC_SYSTEM_GOD_EIRIN_HEAL,エイリンの臨時輸血であなたは回復した。
+LOC_SYSTEM_GOD_EIRIN_HEAL_WARN,この輸血は後に大きな副作用をもたらすかもしれない！
+LOC_SYSTEM_GOD_EIRIN_HEAL_MAX,すでに体力は満タンです。
+LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE,エイリンはあなたの飲もうとしていたポーションをただの水に変えてしまった！
+LOC_SYSTEM_GOD_EIRIN_PUNISH_POTION,エイリンはあなたに無理やり{0}を飲ませた！
+LOC_SYSTEM_GOD_EIRIN_PUNISH_EXPERIMENT,エイリンがあなたの身体に強引に実験を施した！
+LOC_SYSTEM_GOD_YUYUKO_WELCOME,ユユコ: お茶でも一杯どうかしら？
+LOC_SYSTEM_GOD_YUYUKO_TALK1,ユユコ: 不老不死のあなたが、どうして私を信じてるの？
+LOC_SYSTEM_GOD_YUYUKO_TALK2,ユユコ: 新しい食事プランはまだなの？
+LOC_SYSTEM_GOD_YUYUKO_TALK3,ユユコ: もっとのんびりしてもいいのよ。
+LOC_SYSTEM_GOD_YUYUKO_TALK4,ユユコ: 幽霊って冷たくて、でもかわいくない？
+LOC_SYSTEM_GOD_YUYUKO_TALK5,ユユコ: お友達は気に入ったかしら？
+LOC_SYSTEM_GOD_YUYUKO_TALK6,ユユコ: もちろん死んでも魂は一緒よ。
+LOC_SYSTEM_GOD_YUYUKO_RECALL,{0}に幽霊を送り出した。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_START,幽霊を呼び始めた。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_ALREADY,すでに幽霊を呼び出している。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_STOP,幽霊の召喚を止めた。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_NOT_EXIST,幽霊がいない。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT,ユニットを対象に使用してください。
+LOC_SYSTEM_GOD_YUYUKO_GHOST_BOOST,大量の幽霊を呼び始めた！
+LOC_SYSTEM_GOD_YUYUKO_GHOST_END,幽霊の頻度が正常に戻った。
+LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,{0}はあなたの仲間になった。
+LOC_SYSTEM_GOD_YUYUKO_PUNISH_GHOST,ユユコはあなたの周囲に幽霊を集めた！
+LOC_SYSTEM_GOD_SATORI_WELCOME,サトリ: ご自由にどうぞ。このダンジョンは広いですから。
+LOC_SYSTEM_GOD_SATORI_TALK1,サトリはあなたに特に関心を示していない。
+LOC_SYSTEM_GOD_SATORI_TALK2,サトリはあなたに微笑んだ。
+LOC_SYSTEM_GOD_SATORI_TALK3,サトリ: ペットの仕草っていつ見ても癒されますね。
+LOC_SYSTEM_GOD_SATORI_TALK4,サトリはあなたを撫でた。
+LOC_SYSTEM_GOD_SATORI_TALK5,サトリ: 今日のごはんは口に合いましたか？
+LOC_SYSTEM_GOD_SATORI_TALK6,サトリ: 今度、一緒にお散歩に行きませんか？
+LOC_SYSTEM_GOD_SATORI_KOISHI,妹の心は閉ざされている。
+LOC_SYSTEM_GOD_SATORI_MINDREADING_TOO_COMPLEX,この相手の心は複雑すぎて読めない。
+LOC_SYSTEM_GOD_SATORI_MINDREADING_ALREADY,すでに心を読んだ相手です。
+LOC_SYSTEM_GOD_SATORI_MINDREADING,心を読んでいます…
+LOC_SYSTEM_GOD_SATORI_MINDREADING_INTERRUPT,邪魔が入って心を読むのに失敗した。
+LOC_SYSTEM_GOD_SATORI_MINDREADING_DISAPPREAR,対象が視界から消えて失敗した。
+LOC_SYSTEM_GOD_SATORI_FEED,サトリ様があなたに餌を与えた！
+LOC_SYSTEM_GOD_SATORI_REUNION,サトリはあなたとの再会を喜んだ。
+LOC_SYSTEM_GOD_SATORI_BELIEVE,あなたはサトリのペットになった。
+LOC_SYSTEM_GOD_TENSI_WELCOME,テンシ: 天界は退屈！あなた、私を楽しませてよね！
+LOC_SYSTEM_GOD_TENSI_TALK1,テンシ: 何よ！今忙しいんだけど！
+LOC_SYSTEM_GOD_TENSI_TALK2,テンシ: 祈るだけで都合よくいこうなんて甘くない？
+LOC_SYSTEM_GOD_TENSI_TALK3,テンシ: 面白いことないの？
+LOC_SYSTEM_GOD_TENSI_TALK4,テンシ: 久しぶりに地震でも起こしちゃおうかな…
+LOC_SYSTEM_GOD_TENSI_TALK5,テンシ: もう一度でもうるさくしたら石を投げるわよ！
+LOC_SYSTEM_GOD_TENSI_TALK6,テンシはあなたに石を投げた。
+LOC_SYSTEM_GOD_TENSI_TALK7,テンシはあなたを見てクスクス笑っている。
+LOC_SYSTEM_GOD_TENSI_TALK8,テンシはあなたを見て退屈そうにあくびしている。
+LOC_SYSTEM_GOD_TENSI_TALK9,テンシはあなたの祈りを無視した。
+LOC_SYSTEM_GOD_TENSI_TALK10,テンシはサンマであなたの頭を殴った。
+LOC_SYSTEM_GOD_SEIJA_WELCOME,セイジャ: さあ、レジスタンス活動を始めよう！
+LOC_SYSTEM_GOD_SEIJA_TALK1,セイジャはあなたの祈りを無視した。
+LOC_SYSTEM_GOD_SEIJA_TALK2,セイジャはあなたにあまり関心がなさそうだ。
+LOC_SYSTEM_GOD_SEIJA_TALK3,セイジャの表情はあまり良くない。
+LOC_SYSTEM_GOD_SEIJA_TALK4,セイジャ: 反則でも生き残れればそれでいいのよ。
+LOC_SYSTEM_GOD_SEIJA_TALK5,セイジャ: レジスタンスの生活、気に入ってる？
+LOC_SYSTEM_GOD_SEIJA_TALK6,セイジャ: 私たち、最高のパートナーでしょ、友よ！
+LOC_SYSTEM_GOD_SEIJA_PUNISH,セイジャはあなたと{0}の仲を引き裂いた！
+LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,あなたは{0}と位置を入れ替えた。
+LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM,セイジャは全員の視界をひっくり返した！
+LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM_FAIL,視界内にひっくり返す相手がいない。
+LOC_SYSTEM_GOD_SEIJA_GIFT_ON,これでセイジャにプレゼントを要求できる。
+LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,（{0}キーでプレゼントを要求）
+LOC_SYSTEM_GOD_SEIJA_GIFT_ASK,セイジャ: どの神から盗んだ宝物が欲しい？
+LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE,気が変わる前に選んだほうがいいわよ？
+LOC_SYSTEM_GOD_SEIJA_GIFT_YN,この神の宝を要求しますか？
+LOC_SYSTEM_GOD_SEIJA_GIFT_ALREADY,すでに一度プレゼントをもらった神です。
+LOC_SYSTEM_GOD_SEIJA_GIFT_TIMEOUT,長時間プレゼントを受け取らなかったため、プレゼントが取り消された。
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN1,白蓮: ランダムな魔法書を数冊受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN2,白蓮は罰としてあなたを鈍足にしたり、霊力やステータスを一時的に下げます。
+LOC_SYSTEM_GOD_SEIJA_GIFT_BYAKUREN3,また、白蓮の罰では一定確率で魔法詠唱が失敗します。
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION1,ジョオン＆シオン: ランダムなお札をいくつか受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION2,ジョオンとシオンはあなたのアイテムを浪費させたり失わせたりします。
+LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,さらに罰として強制的に憑依して体力、霊力、またはパワーを奪います。
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,カナコ: ランダムな武器を複数受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,カナコは罰としてあなたにダメージを与えたりオンバシラを突き刺して移動を封じたりします。
+LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,また、ダンジョンの敵をあなたの周囲に呼び寄せることもあります。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,スワコ: スペルカードを数枚受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,スワコは呪いによって抵抗できない鈍足や毒を与えます。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,また、周囲に敵対的なカエルを召喚します。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,ミノリコ: たくさんのサツマイモを受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO2,ミノリコは罰としてあなたのパワーを半減させたり健康を奪います。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO3,病気にしたり、一時的にステータスを減少させることもあります。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA1,ミマ: ミマの封印書を受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA2,ミマは罰として様々な属性の破壊魔法をあなたに直撃させます。
+LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA3,また、ミマから罰を受けている間はすべての魔法の威力が半減します。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI1,シンキ: 霊撃の巻物を数本受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI2,シンキは罰としてあなたの周囲に敵対的な魔界の住人を召喚します。
+LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI3,さらに罰の間は敵がPアイテムを落とす確率が下がります。
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,ユウギ: ランダムな防具を複数受け取る。
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI2,ユウギはあなたを強制的に酔わせたり、ダメージを与えて投げ飛ばしたりします。
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI3,당신 주변에 강력한 오니를 소환하기도 합니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA1,시즈하: 단풍브랜드의 무기를 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA2,시즈하는 징벌로 당신을 혼란시키거나 큰 데미지를 주거나 큰 소음과 함께

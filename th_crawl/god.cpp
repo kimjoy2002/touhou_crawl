@@ -24,10 +24,12 @@
 #include "lilly.h"
 #include "tribe.h"
 #include "localization.h"
+#include "option_manager.h"
 #include <iomanip>
 #include <string>
 
 extern HANDLE mutx;
+extern display_manager DisplayManager;
 
 string GetGodString(god_type god)
 {
@@ -2154,6 +2156,8 @@ int satori_sight()
 }
 void abandon_god();
 
+void God_AblilityShow(god_type god);
+
 void Pray()
 {
 	bool altar = false;
@@ -2208,8 +2212,6 @@ void Pray()
 			deletesub();
 			SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
 			GodInfor((god_type)(type-DG_TEMPLE_FIRST));
-			printsub("",true,CL_normal);
-			printsub("",true,CL_normal);
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
 			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
 			printsub(" (",false,color_);
@@ -2217,7 +2219,10 @@ void Pray()
 			printsub("/",false,color_);
 			printsub("n",false,color_, 'n');
 			printsub(") ",true,color_);
+			printsub("",true,CL_normal);
+			God_AblilityShow((god_type)(type-DG_TEMPLE_FIRST));
 			changedisplay(DT_SUB_TEXT);
+			changemove(DisplayManager.log_length);
 			ReleaseMutex(mutx);
 			bool ok_= true;
 			bool onemore = false;
@@ -2234,9 +2239,21 @@ void Pray()
 			while(ok_)
 			{
 				InputedKey inputedKey;
-				int select = waitkeyinput(inputedKey);
+				int select = waitkeyinput(inputedKey,true);
 				switch(select)
 				{
+				case VK_UP:
+					changemove(1);  //위
+					continue;
+				case VK_DOWN:
+					changemove(-1); //아래
+					continue;
+				case VK_PRIOR:
+					changemove(DisplayManager.log_length);
+					continue;
+				case VK_NEXT:
+					changemove(-DisplayManager.log_length);
+					continue;
 				default:
 				case '?':
 					break;
@@ -2254,6 +2271,7 @@ void Pray()
 						printsub("/",false,CL_danger);
 						printsub("n",false,CL_danger, 'n');
 						printsub(") ",true,CL_danger);
+						changemove(-DisplayManager.max_y);
 						onemore = false;
 						serious = true;
 					}
@@ -2271,7 +2289,13 @@ void Pray()
 					}
 					break;
 				case -1:
-					if(inputedKey.isRightClick()) {
+					if(inputedKey.mouse == MKIND_SCROLL_UP) {
+						changemove(1);  //아래
+						break;
+					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+						changemove(-1);  //위
+						break;
+					} else if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
 					else {
@@ -2301,7 +2325,9 @@ void Pray()
 
 void GodInfor(god_type god)
 {
-	printsub("                                                    " + LocalzationManager::locString(LOC_SYSTEM_FAITH),true,CL_normal);
+	ostringstream blank;
+	blank << string((option_mg.getWidth() / DisplayManager.fontDesc.Width -PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_FAITH)))/2 -1, ' ');
+	printsub(blank.str() + LocalzationManager::locString(LOC_SYSTEM_FAITH),true,CL_normal);
 	switch(god)
 	{
 	case GT_SUWAKO:
@@ -2413,7 +2439,7 @@ void GodInfor(god_type god)
 	}
 	case GT_SHIZUHA: 
 	{
-		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TITLE), true, CL_small_danger);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_TITLE), true, CL_autumn);
 		printsub("", true, CL_normal);
 		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION);
 		size_t pos = 0;
@@ -2684,22 +2710,67 @@ void GodInfor(god_type god)
 	}
 }
 
+struct subability {
+	string info;
+	int require_piety;
+	D3DCOLOR color;
+	subability(string info, int require_piety, D3DCOLOR color):info(info), require_piety(require_piety), color(color){};
+	subability(LOCALIZATION_ENUM_KEY infokey, int require_piety, D3DCOLOR color):info(LocalzationManager::locString(infokey)), require_piety(require_piety), color(color){};
+};
 
-void God_show()
-{
-	const int cost_pos = 90;
+
+void printGodAbility(god_type god, int current_piety, int require_piety, bool able_punish, string ablilitystr, vector<subability> sublist, string coststr, bool more_condition = true, int value = 0) {
+	int cost_pos = 88;
 	ostringstream ss;
-	if(you.god == GT_NONE)
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_AHTEISM),true,false,false,CL_normal);
-		return;
+	ss.str("");
+	ss.clear();
+	if(god != GT_MIKO && god != GT_TENSI) {
+		ss << "*" << require_piety << ")";
 	}
-	deletesub();
-	WaitForSingleObject(mutx, INFINITE);
-	SetDisplayTexture(&img_god_background[you.god]);
-	GodInfor(you.god);
+	ss << ablilitystr;
+	string cost = coststr;
+	if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+	else
+		ss << ' ';
+	ss << cost;
+
+	D3DCOLOR color = GetGodColor(god, value);
+	if(!able_punish && you.GetPunish(god)) {
+		color = CL_punish_bad;
+	}
+	if(!more_condition || god != you.god || require_piety > current_piety) {
+		color = CL_verybad;
+	}
+
+	printsub(ss.str(),true,color);
+
+	for(auto& subabil : sublist) {
+		D3DCOLOR subcolor = subabil.color;
+		if(!able_punish && you.GetPunish(god)) {
+			subcolor = CL_punish_bad;
+		}
+		if(!more_condition || god != you.god || require_piety > current_piety) {
+			subcolor = CL_verybad;
+		}
+		printsub("  └",false,subcolor);
+		printsub(subabil.info,true,subcolor);
+
+	}
+
 	printsub("",true,CL_normal);
-	printsub("",true,CL_normal);
+}
+
+
+void printGodAbility(god_type god, int current_piety, int require_piety, bool able_punish, LOCALIZATION_ENUM_KEY ablilitykey, vector<subability> sublist, LOCALIZATION_ENUM_KEY costkey, bool more_condition = true, int value = 0) {
+	printGodAbility(god, current_piety, require_piety, able_punish, LocalzationManager::locString(ablilitykey), sublist, LocalzationManager::locString(costkey), more_condition, value);
+}
+
+
+
+
+void God_AblilityShow(god_type god) {
+	int cost_pos = 88;
+	ostringstream ss;
 	ss << LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ":";
 	string cost = "(" + LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ")";
 	if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
@@ -2709,8 +2780,8 @@ void God_show()
 
 	printsub(ss.str(),true,CL_normal);
 	printsub("",true,CL_normal);
-	int level_ = pietyLevel(you.piety);
-	switch(you.god)
+	int level_ = (god == you.god)?pietyLevel(you.piety):0;
+	switch(god)
 	{
 	case GT_ERROR:
 	default:
@@ -2718,1205 +2789,184 @@ void God_show()
 	case GT_NONE:
 		break;
 	case GT_JOON_AND_SION:
-		if (level_ >= 0)
 		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_joon_and_sion);
+			vector<subability> abillist;
 			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1), true, CL_joon_and_sion);
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1, 0, CL_joon_and_sion));
 			}
 			else {
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2), true, CL_joon);
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2, 0, CL_joon));
 			}
-			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3), true, CL_joon_and_sion);
+			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3, 0, CL_joon_and_sion));
 			}
 			else {
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4), true, CL_sion);
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4, 0, CL_sion));
 			}
-			printsub("", true, CL_normal);
+			printGodAbility(GT_JOON_AND_SION, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
+
 		}
-		if (level_ >= 1 && !you.GetPunish(GT_JOON_AND_SION))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ACTIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, you.god_value[GT_JOON_AND_SION][0] == 0?CL_joon_and_sion:CL_bad);
-			printsub("", true, CL_normal);
+		printGodAbility(GT_JOON_AND_SION, level_, 1, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ACTIVE, you.god_value[GT_JOON_AND_SION][0] == 0);
+		
+		if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+			printGodAbility(GT_JOON_AND_SION, level_, 2, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE, true, 1);
+		} else if(you.god_value[GT_JOON_AND_SION][0] == 2) {
+			printGodAbility(GT_JOON_AND_SION, level_, 2, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE, true, 2);
+		} else {
+			printGodAbility(GT_JOON_AND_SION, level_, 2, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		}
-		if (level_ >= 2 && !you.GetPunish(GT_JOON_AND_SION))
-		{
-			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_joon);
-				printsub("", true, CL_normal);
-			}
-			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_2);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_sion);
-				printsub("", true, CL_normal);
-			}
-			else {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_bad);
-				printsub("", true, CL_normal);
-			}
+		if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+			printGodAbility(GT_JOON_AND_SION, level_, 4, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE, true, 1);
+		} else if(you.god_value[GT_JOON_AND_SION][0] == 2) {
+			printGodAbility(GT_JOON_AND_SION, level_, 4, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE, true, 2);
+		} else {
+			printGodAbility(GT_JOON_AND_SION, level_, 4, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		}
-		if (level_ >= 4 && !you.GetPunish(GT_JOON_AND_SION))
-		{
-			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_1);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_joon);
-				printsub("", true, CL_normal);
-			}
-			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4_2);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_sion);
-				printsub("", true, CL_normal);
-			}
-			else {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY4);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_bad);
-				printsub("", true, CL_normal);
-			}
+		if (you.god_value[GT_JOON_AND_SION][0] == 1) {
+			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION, true, 1);
+		} else if(you.god_value[GT_JOON_AND_SION][0] == 2) {
+			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION, true, 2);
+		} else {
+			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
 		}
-		if (level_ >= 5 && !you.GetPunish(GT_JOON_AND_SION))
-		{
-			if (you.god_value[GT_JOON_AND_SION][0] == 1) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_joon);
-				printsub("", true, CL_normal);
-			}
-			else if (you.god_value[GT_JOON_AND_SION][0] == 2) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_sion);
-				printsub("", true, CL_normal);
-			}
-			else {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_bad);
-				printsub("", true, CL_normal);
-			}
-		}
-		if (level_ >= 6 && !you.GetPunish(GT_JOON_AND_SION))
-		{
-			if (you.god_value[GT_JOON_AND_SION][0] != 0) {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_joon_and_sion);
-				printsub("", true, CL_normal);
-			}
-			else {
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_bad);
-				printsub("", true, CL_normal);
-			}
+		if (you.god_value[GT_JOON_AND_SION][0] != 0) {
+			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
+		} else {
+			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
 		}
 		break;
 	case GT_BYAKUREN:
-		if(level_ >= 1 && !you.GetPunish(GT_BYAKUREN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_blue);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_BYAKUREN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_blue);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_BYAKUREN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_blue);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_BYAKUREN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_blue);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_BYAKUREN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_blue);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_BYAKUREN, level_, 1, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_BYAKUREN, level_, 2, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_BYAKUREN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_BYAKUREN, level_, 4, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_BYAKUREN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		break;
 	case GT_KANAKO:
-		if(level_ >= 1 && !you.GetPunish(GT_KANAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_KANAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_KANAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_KANAKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_KANAKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_KANAKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		break;
 	case GT_SUWAKO:
-		if(level_ >= 1 && !you.GetPunish(GT_SUWAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_COST);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_SUWAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_COST);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_SUWAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_COST);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_SUWAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_COST);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_SUWAKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR);
-			cost = GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_COST);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_help);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_SUWAKO, level_, 1, false, 
+			GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_SIMPLE_INFOR), 
+			vector<subability>(),
+			GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_COST));
+		printGodAbility(GT_SUWAKO, level_, 2, false, 
+			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR), 
+			vector<subability>(),
+			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][2], SWAKO_COST));
+		printGodAbility(GT_SUWAKO, level_, 3, false, 
+			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR), 
+			vector<subability>(),
+			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][3], SWAKO_COST));
+		printGodAbility(GT_SUWAKO, level_, 4, false, 
+			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR), 
+			vector<subability>(),
+			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][4], SWAKO_COST));
+		printGodAbility(GT_SUWAKO, level_, 5, false, 
+			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][5], SWAKO_SIMPLE_INFOR), 
+			vector<subability>(),
+			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][5], SWAKO_COST));
 		break;
 	case GT_MINORIKO:
-		if(level_ >= 0)
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_MINORIKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_MINORIKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_MINORIKO))
-		{ //이때부터 고구마 선물을 해준다.
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_MINORIKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_MINORIKO))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_warning);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_MINORIKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MINORIKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MINORIKO, level_, 2, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_MINORIKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MINORIKO, level_, 4, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY);
+		printGodAbility(GT_MINORIKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		break;
 	case GT_MIMA:
-		if(level_ >= 0 && !you.GetPunish(GT_MIMA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_green);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_MIMA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_green);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_MIMA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_green);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_MIMA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_green);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_MIMA, level_, 0, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MIMA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MIMA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MIMA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		break;
 	case GT_SHINKI:
-		if(level_ >= 1 && !you.GetPunish(GT_SHINKI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_puple);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_SHINKI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_puple);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_SHINKI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_puple);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_SHINKI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_puple);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_SHINKI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_white_puple);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_SHINKI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_SHINKI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_SHINKI, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SHINKI, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_SHINKI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		break;
 	case GT_YUUGI:
-		if(level_ >= 0 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_YUUGI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuigi);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_YUUGI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_YUUGI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_POTION_AND_PIETY);
+		printGodAbility(GT_YUUGI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_YUUGI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_YUUGI, level_, 3, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_YUUGI, level_, 4, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
+		printGodAbility(GT_YUUGI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
 		break;
 	case GT_SHIZUHA:
-		if(level_ >= 0 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 6 && you.god_value[GT_SHIZUHA][0]==0 && !you.GetPunish(GT_SHIZUHA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_autumn);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_SHIZUHA, level_, 0, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SHIZUHA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SHIZUHA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SHIZUHA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_SHIZUHA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_SHIZUHA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_SHIZUHA, level_, 6, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON, you.god_value[GT_SHIZUHA][0]==0);
 		break;
 	case GT_HINA:
-		if(level_ >= 0)
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_HINA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_HINA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_HINA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_HINA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_CURSE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_HINA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 6 && you.god_value[GT_HINA][0]==0 && !you.GetPunish(GT_HINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_hina);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_HINA, level_, 0, true, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_HINA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
+		printGodAbility(GT_HINA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_CURSE);
+		printGodAbility(GT_HINA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_CURSE);
+		printGodAbility(GT_HINA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_CURSE);
+		printGodAbility(GT_HINA, level_, 5, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_HINA, level_, 6, false, LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON, you.god_value[GT_HINA][0]==0);
 		break;
 	case GT_YUKARI:
-		if(level_ >= 0 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_YUKARI))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yukari);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_YUKARI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_YUKARI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_YUKARI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_YUKARI, level_, 3, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_YUKARI, level_, 4, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_YUKARI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		break;
 	case GT_EIRIN:
-		if(!you.GetPunish(GT_EIRIN))
+		printGodAbility(GT_EIRIN, level_, 0, true, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_EIRIN, level_, 0, true, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_POTION);
 		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_small_danger);
-			printsub("",true,CL_normal);
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_POTION);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_small_danger);
-			printsub("",true,CL_normal);
-			if(level_ >= 1)
-			{
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(),true,CL_small_danger);
-				printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1),true,CL_small_danger);
-				if(level_ >= 2)
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2),true,CL_small_danger);
-				if(level_ >= 3)
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3),true,CL_small_danger);
-				if(level_ >= 4)
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4),true,CL_small_danger);
-				if(level_ >= 5)
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5),true,CL_small_danger);
-				entersub();
-				printsub("",true,CL_normal);
-			}
+			vector<subability> abillist;
+			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1, 1, CL_small_danger));
+			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2, 2, CL_small_danger));
+			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3, 3, CL_small_danger));
+			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4, 4, CL_small_danger));
+			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5, 5, CL_small_danger));
+			printGodAbility(GT_JOON_AND_SION, level_, 1, true, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
+
 		}
-		if(level_ >= 2 && !you.GetPunish(GT_EIRIN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_POTION);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_small_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_EIRIN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_small_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_EIRIN))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_small_danger);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_EIRIN, level_, 2, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_POTION);
+		printGodAbility(GT_EIRIN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_EIRIN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
 		break;
 	case GT_YUYUKO:
-		if(level_ >= 1 && !you.GetPunish(GT_YUYUKO))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuyuko);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_YUYUKO))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuyuko);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_YUYUKO))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuyuko);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_YUYUKO))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_yuyuko);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_YUYUKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_YUYUKO, level_, 2, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+		printGodAbility(GT_YUYUKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_YUYUKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		break;
 	case GT_SATORI:
-		if(level_ >= 0 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 2 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 4 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_SATORI))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_danger);
-			printsub("",true,CL_normal); 
-		}
+		printGodAbility(GT_SATORI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SATORI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_SATORI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SATORI, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SATORI, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
+		printGodAbility(GT_SATORI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		break;
 	case GT_TENSI:
-		if(level_ >= 0 && !you.GetPunish(GT_TENSI))
-		{ 
-			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY),true,CL_tensi);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_TENSI, level_, 0, true, LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY, vector<subability>(), LOC_EMPTYSTRING);
 		break;
 	case GT_SEIJA:
-		if(level_ >= 1 && !you.GetPunish(GT_SEIJA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_seija);
-			printsub("",true,CL_normal);
-		}
-		if (level_ >= 2 && !you.GetPunish(GT_SEIJA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_seija);
-			printsub("", true, CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_SEIJA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_seija);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_SEIJA))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_seija);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_SEIJA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SEIJA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SEIJA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
+		printGodAbility(GT_SEIJA, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
 		break;
 	case GT_LILLY:
-		if(level_ >= 1 )
+		if(level_ >= 1)
 		{ 
 			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1),true,CL_lilly);
 			printsub("",true,CL_normal);
@@ -3929,29 +2979,38 @@ void God_show()
 					if(mondata[you.lilly_allys[i].id].flag & M_FLAG_UNIQUE)
 					{
 						printsub(mondata[you.lilly_allys[i].id].name.getName() + " ",false,CL_normal);
+						lenght_ += PrintCharWidth(mondata[you.lilly_allys[i].id].name.getName() + " ");
 					}
 					else
 					{
 						ostringstream oss;
 						oss << LocalzationManager::locString(fairy_name[you.lilly_allys[i].name]) << "(" << mondata[you.lilly_allys[i].id].name.getName() << ") ";
 						printsub(oss.str(),false,CL_normal);
+						lenght_ += PrintCharWidth(oss.str());
 					}
-					for(;lenght_<25;lenght_++)
+					if(25-lenght_>0) {
+						printsub(string(25-lenght_,' '),false,CL_normal);
+					} else {
 						printsub(" ",false,CL_normal);
+					}
 					{
-						
+						lenght_ = 25;
 						ostringstream oss;
 						oss << LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1_LEVEL) << " ";
-						lenght_ += printsub(oss.str(),false,CL_warning);
+						printsub(oss.str(),false,CL_warning);
+						lenght_ += PrintCharWidth(oss.str());
 						oss.clear();
 						oss.str("");
 						oss << std::setw(2) << std::setfill(' ') << you.lilly_allys[i].level;
-						lenght_ += printsub(oss.str(),false,CL_normal);
+						printsub(oss.str(),false,CL_normal);
+						lenght_ += PrintCharWidth(oss.str());
 
 					}
-
-					for(;lenght_<40;lenght_++)
+					if(50-lenght_>0) {
+						printsub(string(50-lenght_,' '),false,CL_normal);
+					} else {
 						printsub(" ",false,CL_normal);
+					}
 					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_LILLY1_STATE) + " ",false,CL_warning);
 					printsub(LocalzationManager::locString(you.god_value[GT_LILLY][i]==1?LOC_SYSTEM_GOD_UI_LILLY1_LIVE:LOC_SYSTEM_GOD_UI_LILLY1_REVIVE),true,you.god_value[GT_LILLY][i]==1?CL_white_blue:CL_danger);
 				}
@@ -3963,74 +3022,13 @@ void God_show()
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 		}
-		if(level_ >= 0 && !you.GetPunish(GT_LILLY))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_lilly);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_lilly);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 1 && !you.GetPunish(GT_LILLY))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_lilly);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 3 && !you.GetPunish(GT_LILLY))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_lilly);
-			printsub("",true,CL_normal);
-		}
-		if(level_ >= 5 && !you.GetPunish(GT_LILLY))
-		{ 
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(),true,CL_lilly);
-			printsub("",true,CL_normal);
-		}
+		printGodAbility(GT_LILLY, level_, 0, true, LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_LILLY, level_, 1, false, LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_NONE);
+		printGodAbility(GT_LILLY, level_, 1, false, LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP);
+		printGodAbility(GT_LILLY, level_, 3, false, LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+		printGodAbility(GT_LILLY, level_, 5, false, LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
 		break;
 	case GT_MIKO:
-		if (level_ >= 0 && !you.GetPunish(GT_MIKO))
 		{
 			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1), true, CL_normal);
 			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1), true, CL_miko);
@@ -4042,313 +3040,173 @@ void God_show()
 			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2), true, CL_miko);
 			printsub("    " + LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3), true, CL_miko);
 			printsub("", true, CL_normal);
-			{
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, CL_miko);
-			}
-			printsub("", true, CL_normal);
-			{
-				std::ostringstream popcost;
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2);
-				popcost << std::setw(3) << (getMikoPiety(0) / 2);
-				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, you.piety >= getMikoPiety(0) ? CL_miko : CL_bad);
-			}
-			printsub("", true, CL_normal);
-			{
-				std::ostringstream popcost;
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3);
-				popcost << std::setw(3) << (getMikoPiety(1) / 2);
-				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, you.piety >= getMikoPiety(1) ? CL_miko : CL_bad);
-			}
-			printsub("", true, CL_normal);
-			{
-				std::ostringstream popcost;
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4);
-				popcost << std::setw(3) << (getMikoPiety(2) / 2);
-				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, you.piety >= getMikoPiety(2) ? CL_miko : CL_bad);
-			}
-			printsub("", true, CL_normal);
-			{
-				std::ostringstream popcost;
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5);
-				popcost << std::setw(3) << (getMikoPiety(3) / 2);
-				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, you.piety >= getMikoPiety(3) ? CL_miko : CL_bad);
-			}
-			printsub("", true, CL_normal);
-			{
-				std::ostringstream popcost;
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6);
-				popcost << std::setw(3) << (getMikoPiety(4) / 2);
-				cost = LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str()) );
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-				printsub(ss.str(), true, you.piety >= getMikoPiety(4) ? CL_miko : CL_bad);
-			}
-			printsub("", true, CL_normal);
+		}
+		printGodAbility(GT_MIKO, you.piety, 0, false, LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON_FLOOR);
+		{
+			std::ostringstream popcost;
+			popcost << std::setw(3) << (getMikoPiety(0) / 2);
+			printGodAbility(GT_MIKO, you.piety, getMikoPiety(0), false, 
+				LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2),
+				vector<subability>(),
+				LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str())));
+		}
+		{
+			std::ostringstream popcost;
+			popcost << std::setw(3) << (getMikoPiety(1) / 2);
+			printGodAbility(GT_MIKO, you.piety, getMikoPiety(1), false, 
+				LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY3),
+				vector<subability>(),
+				LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str())));
+		}
+		{
+			std::ostringstream popcost;
+			popcost << std::setw(3) << (getMikoPiety(2) / 2);
+			printGodAbility(GT_MIKO, you.piety, getMikoPiety(2), false, 
+				LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY4),
+				vector<subability>(),
+				LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str())));
+		}
+		{
+			std::ostringstream popcost;
+			popcost << std::setw(3) << (getMikoPiety(3) / 2);
+			printGodAbility(GT_MIKO, you.piety, getMikoPiety(3), false, 
+				LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY5),
+				vector<subability>(),
+				LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str())));
+		}
+		{
+			std::ostringstream popcost;
+			popcost << std::setw(3) << (getMikoPiety(4) / 2);
+			printGodAbility(GT_MIKO, you.piety, getMikoPiety(4), false, 
+				LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY6),
+				vector<subability>(),
+				LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(popcost.str())));
 		}
 		break;
 	case GT_OKINA:
-		if (level_ >= 0 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 1 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 2 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 3 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 4 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
-		if (level_ >= 5 && !you.GetPunish(GT_OKINA))
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6);
-			cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-			if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-			else
-				ss << ' ';
-			ss << cost;
-			printsub(ss.str(), true, CL_okina);
-			printsub("", true, CL_normal);
-		}
+		printGodAbility(GT_OKINA, level_, 0, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_OKINA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+		printGodAbility(GT_OKINA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_OKINA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_OKINA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_OKINA, level_, 5, false, LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		break;
 	case GT_JUNKO:
 		{
-
 			bool already_pure = you.god_value[GT_JUNKO][3] != 0;
 			if (level_ >= 0)
 			{
 				if (already_pure)
 				{
-					ss.str("");
-					ss.clear();
-					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1);
-					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-					else
-						ss << ' ';
-					ss << cost;
-					printsub(ss.str(), true, CL_junko);
+					vector<subability> abillist;
 					if (you.god_value[GT_JUNKO][3] == 7)
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
 					else
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3), true, CL_junko);
-					printsub("", true, CL_normal);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
+					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4, 0, (you.god == GT_JUNKO?CL_junko:CL_bad)));
+					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
 				}
 				else
 				{
-					ss.str("");
-					ss.clear();
-					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1);
-					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE);
-					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-					else
-						ss << ' ';
-					ss << cost;
-					printsub(ss.str(), true, CL_junko);
-					if (level_ >= 0 && !you.GetPunish(GT_JUNKO))
-					{
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1), true, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad);
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2), true, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad);
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3), true, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad);
-						printsub("", true, CL_normal);
-					}
+					vector<subability> abillist;
+					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
+					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2, 0, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad));
+					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3, 0, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad));
+					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
 				}
 			}
-			if (level_ >= 1 && !you.GetPunish(GT_JUNKO))
-			{
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_AND_MP);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-				else
-					ss << ' ';
-				ss << cost;
-				printsub(ss.str(), true, already_pure? CL_bad : CL_junko);
-				printsub("", true, CL_normal);
-			}
-			if (level_ >= 2 && !you.GetPunish(GT_JUNKO))
-			{
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-				else
-					ss << ' ';
-				ss << cost;
-				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
-				printsub("", true, CL_normal);
-			}
-			if (level_ >= 4 && !you.GetPunish(GT_JUNKO))
-			{
-				ss.str("");
-				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4);
-				cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PIETY);
-				if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-				else
-					ss << ' ';
-				ss << cost;
-				printsub(ss.str(), true, already_pure ? CL_bad : CL_junko);
-				printsub("", true, CL_normal);
-			}
-			if (level_ >= 5 && !you.GetPunish(GT_JUNKO))
+			printGodAbility(GT_JUNKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
+			printGodAbility(GT_JUNKO, level_, 2, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+			printGodAbility(GT_JUNKO, level_, 4, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
 			{
 				if (already_pure)
 				{
-					printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1), true, CL_junko);
+
+					vector<subability> abillist;
+
 					switch (you.god_value[GT_JUNKO][3])
 					{
 					case 1:
-						printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, PlaceHolderHelper(skill_string((skill_type)you.pure_skill))), true, CL_junko);
+						abillist.push_back(subability(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, PlaceHolderHelper(skill_string((skill_type)you.pure_skill))), 0, CL_junko));
 						break;
 					case 2:
 					{
-						printsub(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, PlaceHolderHelper(you.GetProperty(TPT_FIRE_IMUNE)?LOC_SYSTEM_SHORT_FIRE_RESIST:(you.GetProperty(TPT_COLD_IMUNE) ? LOC_SYSTEM_SHORT_COLD_RESIST : (you.GetProperty(TPT_ELEC_IMUNE) ? LOC_SYSTEM_SHORT_ELEC_RESIST : LOC_SYSTEM_BUG)))), true, CL_junko);
+						abillist.push_back(subability(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, PlaceHolderHelper(you.GetProperty(TPT_FIRE_IMUNE)?LOC_SYSTEM_SHORT_FIRE_RESIST:(you.GetProperty(TPT_COLD_IMUNE) ? LOC_SYSTEM_SHORT_COLD_RESIST : (you.GetProperty(TPT_ELEC_IMUNE) ? LOC_SYSTEM_SHORT_ELEC_RESIST : LOC_SYSTEM_BUG)))), 0, CL_junko));
 						break;
 					}
 					case 3:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4, 0, CL_junko));
 						break;
 					case 4:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5, 0, CL_junko));
 						break;
 					case 5:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6, 0, CL_junko));
 						break;
 					case 6:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7, 0, CL_junko));
 						break;
 					case 7:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8, 0, CL_junko));
 						break;
 					default:
-						printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG), true, CL_junko);
+						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG, 0, CL_junko));
 						break;
 					}
+					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1, abillist, LOC_EMPTYSTRING);
 				}
-				else
-				{
-					ss.str("");
-					ss.clear();
-					ss << LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5);
-					cost = LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
-					if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-					else
-						ss << ' ';
-					ss << cost;
-					printsub(ss.str(), true, CL_junko);
+				else {
+					printGodAbility(GT_JUNKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 				}
-				printsub("", true, CL_normal);
 			}
 			break;
 		}
 	}
+
+}
+
+void God_show()
+{
+	ostringstream ss;
+	if(you.god == GT_NONE)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_AHTEISM),true,false,false,CL_normal);
+		return;
+	}
+	deletesub();
+	WaitForSingleObject(mutx, INFINITE);
+	SetDisplayTexture(&img_god_background[you.god]);
+	GodInfor(you.god);
+	printsub("",true,CL_normal);
+	God_AblilityShow(you.god);
+
 	changedisplay(DT_SUB_TEXT);
 	ReleaseMutex(mutx);
 	while(1)
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
-		if(key_ == -1) {
-			if (inputedKey.isLeftClick() || inputedKey.isRightClick()) {
+		if(key_ == VK_UP)
+		{
+			changemove(1);  //위
+		}
+		else if(key_ == VK_DOWN)
+		{
+			changemove(-1); //아래
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(DisplayManager.log_length);
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(-DisplayManager.log_length);
+		} if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //위
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1); //아래
+			} else if (inputedKey.isLeftClick() || inputedKey.isRightClick()) {
 				break;
 			}
 		} else {

@@ -68,6 +68,62 @@ int GetGodGiftTime(god_type god)
 	}
 	return 0;
 }
+
+
+
+D3DCOLOR GetGodColor(god_type god, int value)
+{	
+	switch(god)
+	{
+	case GT_ERROR:
+	case GT_NONE:
+	case GT_LAST:
+		return CL_normal;
+	case GT_SUWAKO:
+		return CL_swako;
+	case GT_JOON_AND_SION:
+		return value == 0?CL_joon_and_sion:(value==1?CL_joon:CL_sion);
+	case GT_MINORIKO:
+		return CL_warning;
+	case GT_SHINKI:
+		return CL_white_puple;
+	case GT_YUUGI:
+		return CL_yuigi;
+	case GT_SHIZUHA:
+		return CL_autumn;
+	case GT_HINA:
+		return CL_hina;
+	case GT_YUKARI:
+		return CL_yukari;
+	case GT_YUYUKO:
+		return CL_yuyuko;
+	case GT_SATORI:
+		return CL_danger;
+	case GT_TENSI:
+		return CL_tensi;
+	case GT_BYAKUREN:
+		return CL_white_blue;
+	case GT_KANAKO:
+		return CL_help;
+	case GT_MIMA:
+		return CL_green;
+	case GT_EIRIN:
+		return CL_small_danger;
+	case GT_SEIJA:
+		return CL_seija;
+	case GT_LILLY:
+		return CL_lilly;
+	case GT_OKINA:
+		return CL_okina;
+	case GT_JUNKO:
+		return CL_junko;
+	case GT_MIKO:
+		return CL_miko;
+	}
+	return CL_normal;
+}
+
+
 bool GodGift(god_type god, int piety)
 {
 	switch(god)

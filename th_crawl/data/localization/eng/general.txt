@@ -3761,10 +3761,10 @@ LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(MP, Once upon Possession)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N,(MP {0}, Once upon Possession)
 LOC_SYSTEM_GOD_SHOW_POPULAR,(Popularity {0}%)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,You are cursed by the gods of pestilence and poverty.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,└ Sometimes you consume 2–3 consumables at once.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,└ You always consume 2–3 consumables at once. (Enhanced)
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,└ Uncollected consumables slowly disappear. Discarded items have a chance to vanish.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,└ Uncollected consumables disappear quickly. Discarded items always vanish. (Enhanced)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,Sometimes you consume 2–3 consumables at once.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,You always consume 2–3 consumables at once. (Enhanced)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,Uncollected consumables slowly disappear. Discarded items have a chance to vanish.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,Uncollected consumables disappear quickly. Discarded items always vanish. (Enhanced)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,You can temporarily become possessed by Joon or Shion.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3,While possessed, Joon or Shion uses your power.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1,While Joon is in control, all damage is amplified, but power is consumed each time.
@@ -3824,7 +3824,7 @@ LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,You can summon high-tier demons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,You recover HP and MP whenever you pick up P.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,While drunk, you recover HP slightly and gain high evasion.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,You can convert a potion into booze and drink it.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,You sometimes grab enemies in battle, letting you use grab skills without faith cost.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,You occasionally grab your opponent during battle. While grabbing them, ability is enhanced.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4,You can grab and perform a German Suplex.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5,You can grab and throw enemies.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6,You can let out a mighty roar that silences nearby enemies.
@@ -3852,11 +3852,11 @@ LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6,You can temporarily lock dimensions.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1,Eirin enhances the effects of potions.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2,Praying over a good potion can create a bad one.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3,You receive bonus effects from the following potions:
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1, └Poison Potion: Increases movement speed.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2, └Stat-Down Potion: Restores HP.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3, └Confusion Potion: Restores MP.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4, └Slow Potion: Grants invisibility.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5, └Paralysis Potion: Reduces paralysis duration and unleashes a spirit blast.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1,*1)Poison Potion: Increases movement speed.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2,*2)Stat-Down Potion: Restores HP.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3)Confusion Potion: Restores MP.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4)Slow Potion: Grants invisibility.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)Paralysis Potion: Reduces paralysis duration and unleashes a spirit blast.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,You can throw your potions.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,You can modify your body to adjust your stats.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,You can regenerate at the cost of side effects.
@@ -3901,26 +3901,26 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,You can teleport behind an enemy.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,You can summon the Crazy Back Dancer.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,You can open a door behind you to escape anytime.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You are permanently purified by Junko’s blessing.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,└You cannot use certain scrolls and potions.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,└You cannot use spell cards, and some scrolls and potions.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,└All your stats are increased by 5.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,You cannot use certain scrolls and potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,You cannot use spell cards, and some scrolls and potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,All your stats are increased by 5.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,Junko’s power is strong, but temporarily purifies you.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,└Stage 1: You cannot use spell cards.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,└Stage 2: You cannot use the effects of some scrolls.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,└Stage 3: You are unaffected by potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,Stage 1: You cannot use spell cards.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,Stage 2: You cannot use the effects of some scrolls.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,Stage 3: You are unaffected by potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,You can unleash simple but powerful danmaku.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,You can gain pure power.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,You can gain pure murderous intent.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can be permanently purified by Junko's blessing.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You have been permanently purified by Junko’s blessing.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, └Skill Purity: Your {0} skill level always matches your character level.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, └Resistance Purity: Your {0} is infinite.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4, └Magic Purity: Your HP and MP are treated as the same.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5, └Power Purity: You are always at full power.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6, └Life Purity: You received an extra life.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7, └Equipment Purity: Your gear has been purified.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8, └System Purity: You can now use spell cards, and amulet charge rate is tripled.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,└Unknown Bug Purity
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,Skill Purity: Your {0} skill level always matches your character level.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,Resistance Purity: Your {0} is infinite.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,Magic Purity: Your HP and MP are treated as the same.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,Power Purity: You are always at full power.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,Life Purity: You received an extra life.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,Equipment Purity: Your gear has been purified.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,System Purity: You can now use spell cards, and amulet charge rate is tripled.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,Unknown Bug Purity
 LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} rejoiced at your kill.
 LOC_SYSTEM_GOD_COMMON_PROTECT,You were protected!

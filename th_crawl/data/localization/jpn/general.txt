@@ -3761,10 +3761,10 @@ LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(영력, 빙의시 한번만)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N,(영력 {0}, 빙의시 한번만)
 LOC_SYSTEM_GOD_SHOW_POPULAR,(인기도 {0}%)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,당신은 역병신과 빈곤신의 저주를 받고 있다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1, └ 당신은 소모품을 사용할때 가끔 2~3개를 한번에 소모한다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2, └ 당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3, └ 줍지않은 소모품은 천천히 사라져간다. 소모품을 버리면 일정 확률로 사라진다.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4, └ 줍지않은 소모품은 빠른 속도로 사라져간다. 소모품을 버리면 무조건 사라진다. (강화됨)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,당신은 소모품을 사용할때 가끔 2~3개를 한번에 소모한다.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,당신은 소모품을 사용할때 무조건 2~3개를 한번에 소모한다. (강화됨)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,줍지않은 소모품은 천천히 사라져간다. 소모품을 버리면 일정 확률로 사라진다.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,줍지않은 소모품은 빠른 속도로 사라져간다. 소모품을 버리면 무조건 사라진다. (강화됨)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,당신은 잠시동안 죠온이나 시온을 빙의할 수 있다.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3,빙의를 하게되면 죠온이나 시온이 당신의 파워를 이용한다.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY3_1,죠온이 빙의한 동안엔 모든 데미지가 증폭되며 데미지를 줄때마다 파워가 소모된다.
@@ -3824,7 +3824,7 @@ LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY4,당신은 상급 마족을 소환할 수 �
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY5,당신은 P를 주울때마다 체력과 영력이 차오른다.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY1,취기가 오른 상태에서 약간의 체력회복력과 높은 회피를 얻는다.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY2,물약 1개를 술로 바꿔서 마실 수 있다.
-LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,전투중 가끔 상대를 잡는다. 잡으면 잡기기술을 신앙소모없이 쓸 수 있다.
+LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY3,전투중 가끔 상대를 잡는다. 잡는 동안엔 권능이 강화됩니다.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY4,상대를 잡아 저먼 스플렉스를 걸 수 있다.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY5,상대를 잡아 집어 던질 수 있다.
 LOC_SYSTEM_GOD_SHOW_YUUGI_ABLILITY6,주변의 상대를 침묵시키는 강력한 포효를 할 수 있다.
@@ -3852,11 +3852,11 @@ LOC_SYSTEM_GOD_SHOW_YUKARI_ABLILITY6,당신은 잠시동안 차원을 고정시�
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY1,에이린은 물약들의 효과를 상승시켜준다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY2,좋은 물약위에서 기도하는 것으로 나쁜 물약을 만들 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3,당신은 다음의 물약을 마실때 추가 효과를 받는다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1, └독물약 : 이동속도가 빨라진다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2, └능력치감소물약 : 체력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3, └혼란물약 : 영력을 회복한다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4, └감속물약 : 투명해진다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5, └마비물약 : 마비시간이 줄어들고 영격을 사용한다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_1,*1)독물약 : 이동속도가 빨라진다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_2,*2)능력치감소물약 : 체력을 회복한다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3)혼란물약 : 영력을 회복한다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4)감속물약 : 투명해진다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)마비물약 : 마비시간이 줄어들고 영격을 사용한다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,당신의 물약을 던질 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,당신은 신체개조를 통해 능력치를 조절할 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,당신은 부작용을 대가로 몸을 재생할 수 있다.
@@ -3901,26 +3901,26 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,당신은 적의 등뒤로 이동할 수 있
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,당신은 크레이지 백댄서를 불러올 수 있다.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,당신은 순호의 축복에 의해 영구적으로 순화되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2, └당신은 일부 두루마리, 물약을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3, └당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4, └당신은 모든 스탯이 5 증가한다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,당신은 일부 두루마리, 물약을 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,당신은 모든 스탯이 5 증가한다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1, └1단계: 당신은 스펠카드를 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2, └2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3, └3단계: 당신은 물약의 효과를 받지 않는다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,1단계: 당신은 스펠카드를 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,3단계: 당신은 물약의 효과를 받지 않는다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,당신은 단순하지만 강력한 탄막을 날릴 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,당신은 순수한 힘을 얻을 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,당신은 순수한 살의를 얻을 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,당신은 순호의 축복으로 영구적으로 순화할 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,당신은 순호의 축복으로 영구적으로 순화되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2, └스킬순화: 당신의 {0} 스킬레벨은 캐릭터 레벨과 항상 같다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3, └저항순화: 당신의 {0:은|는} 무한대다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4, └마력순화: 당신의 체력과 영력은 동일시된다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5, └파워순화: 당신은 항상 풀파워다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6, └생명순화: 당신은 추가 목숨을 받았다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7, └장비순화: 당신은 가지고 있던 장비를 순화했다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8, └시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG, └알수없는 버그 순화
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,스킬순화: 당신의 {0} 스킬레벨은 캐릭터 레벨과 항상 같다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,저항순화: 당신의 {0:은|는} 무한대다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,마력순화: 당신의 체력과 영력은 동일시된다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,파워순화: 당신은 항상 풀파워다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,생명순화: 당신은 추가 목숨을 받았다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,장비순화: 당신은 가지고 있던 장비를 순화했다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,알수없는 버그 순화
 LOC_SYSTEM_GOD_ABLILITES,권능들
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0:은|는} 당신의 살생을 기뻐했다.
 LOC_SYSTEM_GOD_COMMON_PROTECT,보호되었다!

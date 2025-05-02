@@ -30,6 +30,7 @@ string GetGodString(god_type god);
 int GetGodAbandonValue(god_type god);
 int pietyLevel(int piety);
 int GetGodGiftTime(god_type god);
+D3DCOLOR GetGodColor(god_type god, int value = 0);
 void mima_gift(book_list book_);
 void satori_gift();
 bool GodGift(god_type god, int piety);

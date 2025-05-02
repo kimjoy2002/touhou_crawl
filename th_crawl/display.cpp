@@ -176,7 +176,7 @@ void display_manager::Getfontinfor()
 	fontDesc.Size = fontDesc.Height; // 실제 폰트 크기와 거의 일치
 
 	// 로그 영역 크기 계산
-	log_length = (option_mg.getHeight() - 50) / fontDesc.Height;
+	log_length = (option_mg.getHeight() - 25) / fontDesc.Height;
 }
 
 
@@ -3835,7 +3835,16 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 				}
 			}
 		}
-		float x = 0, y = 0;
+
+		if(it != text_sub.text_list.begin()) {
+			RECT rc={ 0, 0, (LONG)(option_mg.getWidth()), (LONG)(fontDesc.Height)};
+			ostringstream ss;
+			int blank = option_mg.getWidth() / fontDesc.Width /2 -1;
+			ss << string(blank, ' ') << "↑";
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
+		}
+
+		float x = 0, y = fontDesc.Height;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{			
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
@@ -3867,6 +3876,14 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 			{
 				x+=(*it)->width;
 			}
+		}
+		
+		if(it != text_sub.text_list.end()) {
+			RECT rc={ 0, (LONG)(option_mg.getHeight()-fontDesc.Height), (LONG)(option_mg.getWidth()), option_mg.getHeight()};
+			ostringstream ss;
+			int blank = option_mg.getWidth() / fontDesc.Width /2 -1;
+			ss << string(blank, ' ') << "↓";
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 		}
 	}
 	

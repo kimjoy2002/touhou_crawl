@@ -2772,7 +2772,7 @@ void God_AblilityShow(god_type god) {
 	int cost_pos = 88;
 	ostringstream ss;
 	ss << LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ":";
-	string cost = "(" + LocalzationManager::locString(LOC_SYSTEM_GOD_ABLILITES) + ")";
+	string cost = "(" + LocalzationManager::locString(LOC_SYSTEM_COST) + ")";
 	if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
 			else
 				ss << ' ';

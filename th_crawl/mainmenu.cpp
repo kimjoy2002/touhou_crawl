@@ -278,7 +278,10 @@ bool select_fairy(int value_)
 		break;
 	}
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() += "\n\n\nKill Them All!\n";
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("Kill Them All!", true, CL_normal);
+	printsub("", true, CL_normal);
 	ReleaseMutex(mutx);
 	Sleep(300);
 	return true;
@@ -334,7 +337,10 @@ bool select_named(int value_)
 		return false;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
-	SetText() += "\n\n\nKill Them All!\n";
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("Kill Them All!", true, CL_normal);
+	printsub("", true, CL_normal);
 	ReleaseMutex(mutx);
 	Sleep(300);
 	return true;
@@ -414,7 +420,6 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
 
 		LOCALIZATION_ENUM_KEY charlist[8][3] = {
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_REIMU},
@@ -448,7 +453,6 @@ void start_mainmenu()
 			}
 		}
 
-		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(2,temp);
 		
@@ -549,7 +553,7 @@ void start_mainmenu()
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1);
 		tempstr += "\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2);
-		tempstr += "\n\n\n ";
+		tempstr += "\n\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3);
 		tempstr += "\n\n\n";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
@@ -579,7 +583,6 @@ void start_mainmenu()
 				temp->push_back(menu_string(" ", false, CL_normal));
 			}
 		}
-		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(3,temp);
@@ -640,7 +643,6 @@ void start_mainmenu()
 		}
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(4,temp);
 
 
@@ -688,7 +690,6 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
 
 		LOCALIZATION_ENUM_KEY fariylist[3][3] = {
 			{LOC_SYSTEM_TRIBE_FAIRY,LOC_SYSTEM_JOB_WIZARD,LOC_SYSTEM_PLAYER_SUNNY},
@@ -709,7 +710,6 @@ void start_mainmenu()
 
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(5, temp);
 
 
@@ -718,7 +718,7 @@ void start_mainmenu()
 		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SUNNY);
 		tempstr += ": ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1);
-		tempstr += "\n\n\n ";
+		tempstr += "\n\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2);
 		tempstr += "\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3);
@@ -735,7 +735,7 @@ void start_mainmenu()
 		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_STAR);
 		tempstr += ": ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1);
-		tempstr += "\n\n\n ";
+		tempstr += "\n\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2);
 		tempstr += "\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3);
@@ -752,7 +752,7 @@ void start_mainmenu()
 		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
 		tempstr += ": ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1);
-		tempstr += "\n\n\n ";
+		tempstr += "\n\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2);
 		tempstr += "\n ";
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3);

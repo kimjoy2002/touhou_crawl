@@ -21,6 +21,7 @@
 
 
 
+extern HANDLE mutx;
 
 extern int armour_stat[5][3];
 
@@ -65,81 +66,99 @@ void MakeStartItem(start_item_type select_, int num);
 
 skill_type WeaponSelect(int num)
 {
-		SetText() = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON);
-		SetText() += "\n\n\n";
-		SetText() += "a - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE);
-		SetText() += "\n";
-		SetText() += "b - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE);
-		SetText() += "\n";
-		SetText() += "c - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE);
-		SetText() += "\n";
-		SetText() += "d - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR);
-		SetText() += "\n";
-		SetText() += "e - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE);
-		SetText() += "\n";
+	string blank(12,' ');
+	WaitForSingleObject(mutx, INFINITE);
+	deletesub();
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub(blank, false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_WEAPON), true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub(blank, false, CL_normal);
+	printsub("a - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE), true, CL_normal, 'a');
+	printsub(blank, false, CL_normal);
+	printsub("b - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE), true, CL_normal, 'b');
+	printsub(blank, false, CL_normal);
+	printsub("c - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE), true, CL_normal, 'c');
+	printsub(blank, false, CL_normal);
+	printsub("d - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR), true, CL_normal, 'd');
+	printsub(blank, false, CL_normal);
+	printsub("e - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE), true, CL_normal, 'e');
+	ReleaseMutex(mutx);
 
-		while(1)
+	while(1)
+	{
+		int select = waitkeyinput(true);
+		if(select>='a' && select<='e')
 		{
-			int select = waitkeyinput(true);
-			if(select>='a' && select<='e')
+			switch(select)
 			{
-				switch(select)
-				{
-				case 'a':
-					MakeStartItem(SIT_SHORTBLADE,num);
-					return SKT_SHORTBLADE;
-				case 'b':
-					MakeStartItem(SIT_AXE,num);
-					return SKT_AXE;
-				case 'c':
-					MakeStartItem(SIT_MACE,num);
-					return SKT_MACE;
-				case 'd':
-					MakeStartItem(SIT_SPEAR,num);
-					return SKT_SPEAR;
-				case 'e':
-					MakeStartItem(SIT_LONGBLADE1,num);
-					return SKT_LONGBLADE;
-				}
-				break;
+			case 'a':
+				MakeStartItem(SIT_SHORTBLADE,num);
+				return SKT_SHORTBLADE;
+			case 'b':
+				MakeStartItem(SIT_AXE,num);
+				return SKT_AXE;
+			case 'c':
+				MakeStartItem(SIT_MACE,num);
+				return SKT_MACE;
+			case 'd':
+				MakeStartItem(SIT_SPEAR,num);
+				return SKT_SPEAR;
+			case 'e':
+				MakeStartItem(SIT_LONGBLADE1,num);
+				return SKT_LONGBLADE;
 			}
+			break;
 		}
-		return SKT_ERROR;
+	}
+	return SKT_ERROR;
 }
 
 
 god_type FanaticSelect()
 {
-		SetText() = LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC);
-		SetText() += "\n\n\n";
-		SetText() += "a - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI);
-		SetText() += "\n";
-		SetText() += "b - ";
-		SetText() += LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI);
-		SetText() += "\n";
+	string blank(12,' ');
+	WaitForSingleObject(mutx, INFINITE);
+	deletesub();
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub(blank, false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_SELECT_FANATIC), true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub("", true, CL_normal);
+	printsub(blank, false, CL_normal);
+	printsub("a - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_TENSI), true, CL_normal, 'a');
+	printsub(blank, false, CL_normal);
+	printsub("b - ", false, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI), true, CL_normal, 'b');
+	ReleaseMutex(mutx);
 
-		while(1)
+	while(1)
+	{
+		int select = waitkeyinput(true);
+		if(select>='a' && select<='b')
 		{
-			int select = waitkeyinput(true);
-			if(select>='a' && select<='b')
+			switch(select)
 			{
-				switch(select)
-				{
-				case 'a':
-					return GT_TENSI;
-				case 'b':
-					return GT_YUKARI;
-				}
-				break;
+			case 'a':
+				return GT_TENSI;
+			case 'b':
+				return GT_YUKARI;
 			}
+			break;
 		}
-		return GT_TENSI;
+	}
+	return GT_TENSI;
 }
 
 

@@ -32,6 +32,8 @@
 extern players you;
 extern HANDLE mutx;
 
+extern display_manager DisplayManager;
+
 bool CheckMonsterPassive(int turn)
 {
 	for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
@@ -1333,9 +1335,7 @@ void GameOver()
 					else
 						printsub(LocalzationManager::locString(LOC_SYSTEM_WIN),true,CL_magic);
 				}
-				printsub("",true,CL_help);
 				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_MORGUE),true,CL_help);
-				printsub("",true,CL_help);
 				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_ESC),true,CL_help);
 				bool end_ = false;
 				while(!end_)
@@ -1344,10 +1344,28 @@ void GameOver()
 					int key_ = waitkeyinput(inputedKey, true);
 					switch(key_)
 					{
+					case VK_UP:
+						changemove(1);  //위
+						continue;
+					case VK_DOWN:
+						changemove(-1); //아래
+						continue;
+					case VK_PRIOR:
+						changemove(DisplayManager.log_length);
+						continue;
+					case VK_NEXT:
+						changemove(-DisplayManager.log_length);
+						continue;
 					default:
 						break;
 					case -1:
-						if(inputedKey.isLeftClick() ||
+						if(inputedKey.mouse == MKIND_SCROLL_UP) {
+							changemove(1);  //아래
+							break;
+						} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+							changemove(-1);  //위
+							break;
+						} else if(inputedKey.isLeftClick() ||
 							inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}

@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "E:\\steamworks_sdk\\sdk\\public",
+                "F:/Download/DirectXTK-main/DirectXTK-main/Inc",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/um",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/shared",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.18362.0/winrt"

@@ -431,6 +431,7 @@ LOC_SYSTEM_SAVEREMAIN_MODE,Save Retention
 LOC_SYSTEM_TOUHOUCRAWL_HELP,Touhou Crawl Help List
 LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_COMMAND_LIST,Command List
+LOC_SYSTEM_CHARACTER_HELP,Tribe & Job Help
 LOC_SYSTEM_PROCESS_NOTE,Progress Notes
 LOC_SYSTEM_PROCESS_CREDIT,Credits
 LOC_SYSTEM_DESCRIPTION,Description
@@ -3402,7 +3403,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,It doesn’t mean much, but it seems worth collecting.\n
 LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,Resident of the dream world.\nLooks like a Gensokyo native, but is a different entity.\nSaid to be more desire-driven than their original.\n
-LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,This Reimu has continued %d times.
+LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,This Reimu has continued {0} times.
 LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,This enemy looks weak enough to ignore.
 LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,This enemy looks weak.
 LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,This enemy looks dangerous.

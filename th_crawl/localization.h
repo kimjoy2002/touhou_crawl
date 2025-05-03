@@ -72,6 +72,8 @@ private:
 	static vector<TextHelper> help_command;
 	static vector<TextHelper> help_credit;
 	static vector<TextHelper> help_wizard;
+	static vector<TextHelper> help_character;
+	static vector<int> helpline_character;
 
 	static unordered_set<string> korean_verbs;
 	static unordered_set<string> english_verbs;
@@ -79,9 +81,9 @@ private:
 
 private:
     static D3DCOLOR getColorFromCode(const string& code);
-    static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor);
+    static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline);
     static pair<string, D3DCOLOR> parseColorTag(const string& line);
-    static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector);
+    static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
 
     template<typename EnumType>
     static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
@@ -180,6 +182,8 @@ public:
 	static const vector<TextHelper>& getHelpCommand(){return help_command;};
 	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
 	static const vector<TextHelper>& getHelpWizard(){return help_wizard;};
+	static const vector<TextHelper>& getHelpCharacter(){return help_character;};
+    
 
     static const string& getMonsterEnumString(monster_index key);
     static monster_index getMonsterEnumKey(const string& str);

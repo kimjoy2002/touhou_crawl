@@ -27,7 +27,7 @@ SPEAK_MISTIA_NORMAL5,{0}は言った。「逃げたら歌を聴かせられな�
 SPEAK_MISTIA_NORMAL6,{0}は言った。「よし、観客は十分だね。」
 SPEAK_MISTIA_NORMAL7,{0}は言った。「巻物が落ちてたけど、読めなかったよ。」
 SPEAK_MISTIA_NORMAL8,{0}は言った。「君の歌うパートはないよ！」
-SPEAK_MISTIA_NORMAL9,{0}が{速いビートの|落ち着いた|悲しいメロディの|リズムの合わない|センスのない歌詞の}歌を歌った。
+SPEAK_MISTIA_NORMAL9,{0}が{テンポの速い|落ち着いた|悲しげな|リズムのずれた|歌詞のセンスがない|音程の不安定な|スタッカートの|引き伸ばすような|平凡な|正体不明の|陽気な|どこかで聞いたような|叫び声のような|電波系の|ノリのいい|ゆっくりした|かわいらしい}{ロック|バラード|ヒップホップ|ラップ|童謡|R&B|ジャズ|メタル|ブルース|ダンス曲|演歌|クラシック声楽|子守唄|ジャンル不明の曲}を歌った。
 SPEAK_MISTIA_CONFUSE1,{0}は言った。「ふらふら～」
 SPEAK_MISTIA_CONFUSE2,{0}は言った。「羽が麻痺しちゃったー！」
 SPEAK_MISTIA_CONFUSE3,{0}は言った。「うわぁぁ」
@@ -658,7 +658,7 @@ SPEAK_PARSI_DUNGEON_NORMAL2,{0}が言った。「私も別の階層に行って�
 SPEAK_PARSI_DUNGEON_NORMAL3,{0}が言った。「地上世界って羨ましいな！」
 SPEAK_PARSI_DUNGEON_NORMAL4,{0}が言った。「河童も人間も群れて行動するでしょ？羨ましいよ！」
 SPEAK_PARSI_DUNGEON_NORMAL5,{0}が言った。「このダンジョン、すごく雑に作られてるね。他のゲームの綺麗なダンジョン生成が羨ましい！」
-SPEAK_PARSI_DUNGEON_NORMAL6,{0}が言った。「oキー押してみた？自動探索アルゴリズム、ほんとおバカさん！他のゲームのパスファインディングが羨ましい！」
+SPEAK_PARSI_DUNGEON_NORMAL6,{0}が言った。「oキー押してみた？他のゲームのパスファインディングが羨ましい！」
 SPEAK_PARSI_DUNGEON_NORMAL7,{0}が言った。「大地のスペルカード持ってる？壁を壊せるなんて羨ましいな！」
 SPEAK_PARSI_DUNGEON_TEMPLE1,{0}が言った。「祭壇がいっぱいあるね。君は何を信じるの？羨ましい！」
 SPEAK_PARSI_DUNGEON_TEMPLE2,{0}が言った。「私を神殿まで連れてきてくれるなんて、その優しさが羨ましい！」
@@ -721,7 +721,7 @@ SPEAK_PARSI_DUNGEON_YUKKURI2,{0}が言った。「あいつら、悩みなさそ
 SPEAK_PARSI_DUNGEON_YUKKURI3,{0}が言った。「意外と強いじゃん、頭しかないのに！羨ましい！」
 SPEAK_PARSI_DUNGEON_YUKKURI4,{0}が言った。「なんか、美味しそうな匂いがする……」
 SPEAK_PARSI_DUNGEON_YUKKURI5,{0}が言った。「こうして見ると、ちょっと気持ち悪いかも。」
-SPEAK_PARSI_DUNGEON_YUKKURI6,{0}が言った。「「ゆっくり」って言うの？うるさすぎるよ！」
+SPEAK_PARSI_DUNGEON_YUKKURI6,{0}が言った。「ゆっくりって言うの？うるさすぎるよ！」
 SPEAK_PARSI_DUNGEON_DEPTH1,{0}が言った。「もうこんなところまで来たんだ！羨ましい！」
 SPEAK_PARSI_DUNGEON_DEPTH2,{0}が言った。「ここにはあらゆる妖怪がうようよいるよ。」
 SPEAK_PARSI_DUNGEON_DEPTH3,{0}が言った。「変な世界に繋がるポータルがいっぱいあるね。」
@@ -760,7 +760,7 @@ SPEAK_PARSI_CONFUSE2,{0}が言った。「私は幸せだもん！」
 SPEAK_PARSI_CONFUSE3,{0}は混乱している。
 SPEAK_PARSI_MAGIC1,{0}はパルパルと呟いた。
 SPEAK_PARSI_MAGIC2,{0}の緑色の瞳が輝き、呪文を唱える。
-SPEAK_PARSI_CAMERA,{0}が言った。「君……そんな仕事してるの……？」
+SPEAK_PARSI_CAMERA,{0}が言った。「君……そんな職業してるの……？」
 SPEAK_BENBEN_NORMAL1,{0}が言った。「付喪神をバカにする気？」
 SPEAK_BENBEN_NORMAL2,{0}が言った。「私の音楽に耐えられるかな？」
 SPEAK_BENBEN_NORMAL3,{0}が言った。「最強の道具が誰か、教えてあげるよ！」
@@ -903,7 +903,7 @@ SPEAK_REMILIA_NORMAL6,{0}が言った。「悪いけど、近接戦なら負け�
 SPEAK_REMILIA_NORMAL7,{0}が言った。「この館で騒いでる侵入者は、あなただったのね？」
 SPEAK_REMILIA_NORMAL8,{0}が言った。「ちょうどいい暇つぶしになりそうね。」
 SPEAK_REMILIA_NORMAL9,{0}は大きく翼を広げた。
-SPEAK_REMILIA_CONFUSE1,{0}が言った。「うーっ」
+SPEAK_REMILIA_CONFUSE1,{0}が言った。「うー」
 SPEAK_REMILIA_CONFUSE2,{0}が言った。「目が回る！」
 SPEAK_REMILIA_CONFUSE3,{0}はしゃがみ込んで頭を抱えた。
 SPEAK_REMILIA_MAGIC1,{0}は手に赤いオーラを集めた。
@@ -962,7 +962,7 @@ SPEAK_TEWI_NORMAL4,{0}が言った。「ウサギたちが騒いでたと思っ�
 SPEAK_TEWI_NORMAL5,{0}が言った。「ここから{北|東|南|西|北東|北西|南東|南西}に行けば、目的地に着けるよ～」
 SPEAK_TEWI_NORMAL6,{0}が言った。「待って！私を倒したら竹林から出られなくなるよ！」
 SPEAK_TEWI_NORMAL7,{0}が言った。「竹を切ってると、低確率で隠しアイテムが出るって知ってた？」
-SPEAK_TEWI_NORMAL8,{0}が言った。「もちろん全部ウソぴょん～！」
+SPEAK_TEWI_NORMAL8,{0}が言った。「もちろん全部ウソウサ～！」
 SPEAK_TEWI_CONFUSE1,{0}が言った。「嘘ついてごめんなさい！」
 SPEAK_TEWI_CONFUSE2,{0}が言った。「私は嘘なんかついてないよ！」
 SPEAK_TEWI_CONFUSE3,{0}が言った。「これからは真面目に生きるから！助けて～！」

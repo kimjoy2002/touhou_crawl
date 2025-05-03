@@ -2803,7 +2803,7 @@ void God_AblilityShow(god_type god) {
 			else {
 				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2, 0, CL_joon));
 			}
-			if (you.god_value[GT_JOON_AND_SION][0] != 1) {
+			if (you.god_value[GT_JOON_AND_SION][0] != 2) {
 				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3, 0, CL_joon_and_sion));
 			}
 			else {
@@ -2953,7 +2953,6 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_EIRIN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
 		printGodAbility(GT_EIRIN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		printGodAbility(GT_EIRIN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
-		
 		break;
 	case GT_YUYUKO:
 		printGodAbility(GT_YUYUKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);

@@ -65,11 +65,11 @@ int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 void text_dummy::calculateWitdh() {
 	if (!g_pfont) return;
 
-	DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(PreserveTrailingSpaces(text).c_str());
-	DirectX::XMFLOAT2 size;
-	DirectX::XMStoreFloat2(&size, sizeVec);
-
-	width = size.x;
+	//부정확해
+	//DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(PreserveTrailingSpaces(text).c_str());
+	//DirectX::XMFLOAT2 size;
+	//DirectX::XMStoreFloat2(&size, sizeVec);
+	width = PrintCharWidth(PreserveTrailingSpaces(text))*DisplayManager.fontDesc.Width;
 }
 
 infoBox::infoBox() 
@@ -171,8 +171,8 @@ void display_manager::Getfontinfor()
 
 	// 폰트 높이 = 문자열 높이
 	// 폰트 폭 = 평균 글자 폭 = 전체 폭 / 글자 수
-	fontDesc.Height = size.y;
-	fontDesc.Width = size.x / sample.length();
+	fontDesc.Height = (int)(size.y);
+	fontDesc.Width = (int)(size.x / sample.length());
 	fontDesc.Size = fontDesc.Height; // 실제 폰트 크기와 거의 일치
 
 	// 로그 영역 크기 계산

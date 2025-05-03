@@ -1985,7 +1985,7 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 						}
 						else if(SpellLevel(spell_)>you.GetMp())
 						{
-							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)<=you.GetHp())
+							if(you.GetProperty(TPT_BLOOD_MAGIC) && SpellLevel(spell_)*2<you.GetHp())
 							{
 								printlog(LocalzationManager::locString(LOC_SYSTEM_BLOOD_MAGIC),true,false,false,CL_danger);	
 								blood_ = true;

@@ -27,6 +27,7 @@ void Help_Show()
 	printsub("<" + LocalzationManager::locString(LOC_SYSTEM_TOUHOUCRAWL_HELP) + ">",true,CL_normal);
 	printsub("",true,CL_normal);
 	printsub("?. " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST),true,CL_normal, '?');
+	printsub("c. " + LocalzationManager::locString(LOC_SYSTEM_CHARACTER_HELP),true,CL_normal, 'c');
 	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal, ':');
 	printsub("0. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_CREDIT),true,CL_normal, '0');
 	changedisplay(DT_SUB_TEXT);
@@ -48,28 +49,30 @@ void Help_Show()
 			changedisplay(DT_SUB_TEXT);
 			setDisplayMove(DisplayManager.max_y);
 			ReleaseMutex(mutx);
-			while(1)
+			while(loop_)
 			{
 				InputedKey inputedKey;
 				switch(waitkeyinput(inputedKey,true))
 				{
 				case VK_UP:
 					changemove(1);  //위
-					continue;
+					break;
 				case VK_DOWN:
 					changemove(-1); //아래
-					continue;
+					break;
 				case VK_PRIOR:
 					changemove(DisplayManager.log_length);
-					continue;
+					break;
 				case VK_NEXT:
 					changemove(-DisplayManager.log_length);
-					continue;
+					break;
 				case -1:
 					if(inputedKey.mouse == MKIND_SCROLL_UP) {
 						changemove(1);  //아래
+						break;
 					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
 						changemove(-1);  //위
+						break;
 					} else if(inputedKey.isRightClick()) {
 						//ESC PASSTHORUGH
 					}
@@ -80,9 +83,56 @@ void Help_Show()
 					loop_ = false;
 					break;
 				default:
-					continue;
+					break;
 				}
-				break;
+			}
+			break;
+		case 'C':
+		case 'c':
+			WaitForSingleObject(mutx, INFINITE);
+			deletesub();
+			for(TextHelper text_ : LocalzationManager::getHelpCharacter()) {
+				printsub(text_.text,text_.enter,text_.color);
+			}
+			changedisplay(DT_SUB_TEXT);
+			setDisplayMove(DisplayManager.max_y);
+			ReleaseMutex(mutx);
+			while(loop_)
+			{
+				InputedKey inputedKey;
+				switch(waitkeyinput(inputedKey,true))
+				{
+				case VK_UP:
+					changemove(1);  //위
+					break;
+				case VK_DOWN:
+					changemove(-1); //아래
+					break;
+				case VK_PRIOR:
+					changemove(DisplayManager.log_length);
+					break;
+				case VK_NEXT:
+					changemove(-DisplayManager.log_length);
+					break;
+				case -1:
+					if(inputedKey.mouse == MKIND_SCROLL_UP) {
+						changemove(1);  //아래
+						break;
+					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+						changemove(-1);  //위
+						break;
+					} else if(inputedKey.isRightClick()) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
+				case VK_ESCAPE:
+					loop_ = false;
+					break;
+				default:
+					break;
+				}
 			}
 			break;
 		case ':':

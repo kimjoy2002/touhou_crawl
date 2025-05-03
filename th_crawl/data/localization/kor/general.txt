@@ -431,6 +431,7 @@ LOC_SYSTEM_SAVEREMAIN_MODE,세이브 보존
 LOC_SYSTEM_TOUHOUCRAWL_HELP,동방 크롤 도움말 목록
 LOC_SYSTEM_COMMAND,명령어
 LOC_SYSTEM_COMMAND_LIST,명령어 목록
+LOC_SYSTEM_CHARACTER_HELP,종족&직업 도움말
 LOC_SYSTEM_PROCESS_NOTE,진행 노트
 LOC_SYSTEM_PROCESS_CREDIT,크레딧
 LOC_SYSTEM_DESCRIPTION,설명
@@ -3402,7 +3403,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0:이|가} 찍혀있는 사진이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,미소녀가 찍혀있는 사진이다.\
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3,딱히 큰 의미는 없지만 소장용으로는 좋을 것 같다.\
 LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM,꿈의 세계에 살고 있는 주민\n환상향의 주민과 똑같이 닮았지만 꿈의 세계에 살고있는 다른 존재.\n원본에서 좀 더 욕망에 충실한 성격을 지녔다고 한다.\n
-LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,이 레이무는 %d번 컨티뉴했다.
+LOC_SYSTEM_MONSTER_DESCRIPTION_REIMU_CONTINUE,이 레이무는 {0}번 컨티뉴했다.
 LOC_SYSTEM_MONSTER_DESCRIPTION_WEAKER,이 상대는 무시해도 될 정도로 약해보인다.
 LOC_SYSTEM_MONSTER_DESCRIPTION_WEAK,이 상대는 약해보인다.
 LOC_SYSTEM_MONSTER_DESCRIPTION_STRONG,이 상대는 위험해보인다.
@@ -3893,12 +3894,12 @@ LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,당신은 요정들을 근처로 호출할 �
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4,당신은 동료 요정을 치유할 수 있다.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5,당신은 요정들에게 힘을 나눠줄 수 있다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1,인기도는 다음 행동을 할 경우 올라간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,적을 죽인다. 강할수록 더 많이 올라간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,욕망모으기를 이용해 시야내의 적들의 욕망을 모은다
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,적을 죽인다. - 강할수록 더 많이 올라간다.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,욕망모으기를 이용해 시야내의 적들의 욕망을 모은다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,새로운 서브던전에 입장한다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,인기도는 다음 행동을 할 경우 내려간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,층을 옮긴다 - 올라갈수록 더 많은 인기도가 떨어진다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,새로운 던전에 입장하거나 나간다 - 모든 인기도를 잃는다.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,층을 옮긴다. - 올라갈수록 더 많은 인기도가 떨어진다.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,새로운 던전에 입장하거나 나간다. - 모든 인기도를 잃는다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,미코의 권능을 사용한다.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,주변의 적들로부터 인기도를 모을 수 있다.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,빠른 속도로 랜덤한 순간이동을 할 수 있다.

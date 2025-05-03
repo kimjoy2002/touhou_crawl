@@ -31,6 +31,8 @@ unordered_map<monster_index, string> LocalzationManager::monster_description_map
 vector<TextHelper> LocalzationManager::help_command;
 vector<TextHelper> LocalzationManager::help_credit;
 vector<TextHelper> LocalzationManager::help_wizard;
+vector<TextHelper> LocalzationManager::help_character;
+vector<int> LocalzationManager::helpline_character;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
 	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
@@ -60,9 +62,10 @@ void LocalzationManager::init(string type, bool init_) {
 	
 	filePath = "./data/localization/" +  type + "/";
 
-	initFileSimple(filePath, "help.txt", help_command);
-	initFileSimple(filePath, "credit.txt", help_credit);
-	initFileSimple(filePath, "wizardhelp.txt", help_wizard);
+	initFileSimple(filePath, "help.txt", help_command, nullptr);
+	initFileSimple(filePath, "credit.txt", help_credit, nullptr);
+	initFileSimple(filePath, "wizardhelp.txt", help_wizard, nullptr);
+	initFileSimple(filePath, "character.txt", help_character, &helpline_character);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localization_map[key] = values[0];
@@ -81,10 +84,14 @@ void LocalzationManager::init(string type, bool init_) {
 }
 
 D3DCOLOR LocalzationManager::getColorFromCode(const string& code) {
+	if (code == "§p") return D3DCOLOR_RGBA(220, 150, 150, 255);     // pink
 	if (code == "§r") return D3DCOLOR_RGBA(220, 80, 80, 255);     // Red
+	if (code == "§R") return D3DCOLOR_RGBA(220, 20, 20, 255);     // *Red*
 	if (code == "§g") return D3DCOLOR_RGBA(100, 200, 100, 255);   // Green
 	if (code == "§y") return D3DCOLOR_RGBA(240, 200, 100, 255);   // Yellow
-	if (code == "§b") return D3DCOLOR_RGBA(100, 160, 240, 255);   // Blue
+	if (code == "§s") return D3DCOLOR_RGBA(150, 150, 240, 255);   // Sky
+	if (code == "§b") return D3DCOLOR_RGBA(80, 80, 240, 255);   // Blue
+	if (code == "§B") return D3DCOLOR_RGBA(20, 20, 220, 255);   // *Blue*
 	if (code == "§m") return D3DCOLOR_RGBA(200, 120, 220, 255);   // Magenta
 	if (code == "§c") return D3DCOLOR_RGBA(100, 220, 220, 255);   // Cyan
 	if (code == "§w") return D3DCOLOR_RGBA(255, 255, 255, 255);  // White
@@ -92,12 +99,31 @@ D3DCOLOR LocalzationManager::getColorFromCode(const string& code) {
 }
 
 
-D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor) {
+D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline) {
 	size_t i = 0;
 	string currentText;
 
 	while (i < line.size()) {
-		if (i + 2 < line.size() && line.substr(i, 2) == "§") {
+		if(i + 2 < line.size() && line.substr(i, 2) == "§" && line.at(2) >= '0' && line.at(2) <= '9') {
+			if(helpline) {
+				//숫자 = 북마크
+				if(i + 3 < line.size() && line.at(3) >= '0' && line.at(3) <= '9') {
+					int val = stoi(line.substr(i+2, 2));
+					while((*helpline).size() <= val)
+						(*helpline).push_back(0);
+					(*helpline)[val] = current_line;
+					i += 4;
+				}
+				else {
+					int val = stoi(line.substr(i+2, 1));
+					while((*helpline).size() <= val)
+						(*helpline).push_back(0);
+					(*helpline)[val] = current_line;
+					i += 3;
+				}
+			}
+		}
+		else if (i + 2 < line.size() && line.substr(i, 2) == "§") {
 			if (!currentText.empty()) {
 				outVector.emplace_back(currentText, false, currentColor);
 				currentText.clear();
@@ -166,7 +192,7 @@ void LocalzationManager::initLocalization() {
 
 }
 
-void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector) {
+void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline) {
 	ifstream file(path + filename);
 	if (!file) {
 		return;
@@ -176,6 +202,7 @@ void LocalzationManager::initFileSimple(const string& path, const string& filena
 	string line;
 	bool first_line = true;
 	D3DCOLOR color_ = CL_normal;
+	int current_line = 0;
 	while (getline(file, line)) {
 		if (first_line) {
 			//BOM제거
@@ -188,7 +215,8 @@ void LocalzationManager::initFileSimple(const string& path, const string& filena
 			}
 		}
 
-		color_ = parseMultiColorLine(line, saveVector, color_);
+		color_ = parseMultiColorLine(line, saveVector, color_, current_line, helpline);
+		current_line++;
 	}
 }
 

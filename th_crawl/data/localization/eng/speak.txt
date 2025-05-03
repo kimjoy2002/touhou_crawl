@@ -27,7 +27,7 @@ SPEAK_MISTIA_NORMAL5,{0} shouted."You can’t hear my song if you run!"
 SPEAK_MISTIA_NORMAL6,{0} shouted."Perfect, we’ve got an audience."
 SPEAK_MISTIA_NORMAL7,{0} shouted."I found a scroll on the ground but couldn’t read it."
 SPEAK_MISTIA_NORMAL8,{0} shouted."No lines for you to sing!"
-SPEAK_MISTIA_NORMAL9,{0} sang a {random style} {random genre} song.
+SPEAK_MISTIA_NORMAL9,{0} sang a {fast‑beat|calm|melancholic|off‑beat|lyrically senseless|pitch‑shifting|staccato|drawn‑out|ordinary|indescribable|lively|familiar‑sounding|screeching|denpa‑style|upbeat|slow|cute} {rock|ballad|hip‑hop|rap|children’s song|R&B|jazz|metal|blues|dance track|trot|classical vocal piece|lullaby|genre‑less song}.
 SPEAK_MISTIA_CONFUSE1,{0} shouted."Dizzy~"
 SPEAK_MISTIA_CONFUSE2,{0} shouted."My wings are paralyzed—"
 SPEAK_MISTIA_CONFUSE3,{0} shouted."Wah!"

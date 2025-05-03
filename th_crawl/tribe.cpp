@@ -1513,6 +1513,10 @@ void LevelUpTribe(int level_)
 		}
 		break;
 	case TRI_VAMPIRE:
+		if(level_%7 == 0)
+		{
+			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
 		if(level_%5 == 0)
 		{
 			you.max_mp--;

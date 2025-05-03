@@ -334,7 +334,7 @@ void arena_event(int num)
 	
 	if(map_list.bamboo_count == 130)
 	{
-		printlog(LocalzationManager::formatString(LOC_SYSTEM_ARENA_TIMEOVER,
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_ARENA_GAMEOVER,
 			PlaceHolderHelper(to_string(you.level)),
 			PlaceHolderHelper("?:")),true,false,false,CL_help);
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_ARENA_FINAL_SCORE, PlaceHolderHelper(to_string(you.level))),CL_danger);
@@ -364,6 +364,9 @@ void map_algorithms_arena(int num)
 			}
 			else 
 				env[num].dgtile[x][y].tile = DG_WALL;
+			if(abs(x-DG_MAX_X/2) == 7 && y-DG_MAX_Y/2 == 0) {
+				env[num].dgtile[x][y].tile = DG_UP_STAIR;
+			}
 			
 			if( x-DG_MAX_X/2 >= -5 && x-DG_MAX_X/2 <= 5)
 			{
@@ -390,6 +393,10 @@ void map_algorithms_arena(int num)
 	
 	env[num].stair_up[0].x = DG_MAX_X/2;
 	env[num].stair_up[0].y = DG_MAX_Y/2+5;
+	env[num].stair_up[1].x = DG_MAX_X/2-7;
+	env[num].stair_up[1].y = DG_MAX_Y/2;
+	env[num].stair_up[2].x = DG_MAX_X/2+7;
+	env[num].stair_up[2].y = DG_MAX_Y/2;
 	map_list.god_num=0;
 	env[num].MakeEvent(EVL_ARENA,coord_def(0,0),EVT_ALWAYS);
 }

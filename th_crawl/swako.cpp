@@ -16,6 +16,14 @@
 
 string GetSwakoString1(swako_1_power power, swako_string kind)
 {
+	if(you.god_value[GT_SUWAKO][5] < 1) {
+		if(kind == SWAKO_SIMPLE_INFOR) {
+			return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN);
+		}
+		else if(kind == SWAKO_COST) {
+			return "";
+		}
+	}
 	switch(power)
 	{
 	case SWAKO_1_JUMP:		
@@ -66,6 +74,14 @@ string GetSwakoString1(swako_1_power power, swako_string kind)
 
 string GetSwakoString2(swako_2_power power, swako_string kind)
 {
+	if(you.god_value[GT_SUWAKO][5] < 2) {
+		if(kind == SWAKO_SIMPLE_INFOR) {
+			return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN);
+		}
+		else if(kind == SWAKO_COST) {
+			return "";
+		}
+	}
 	switch(power)
 	{
 	case SWAKO_2_KILL_HP:		
@@ -126,6 +142,14 @@ string GetSwakoString2(swako_2_power power, swako_string kind)
 
 string GetSwakoString3(swako_3_power power, swako_string kind)
 {
+	if(you.god_value[GT_SUWAKO][5] < 3) {
+		if(kind == SWAKO_SIMPLE_INFOR) {
+			return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN);
+		}
+		else if(kind == SWAKO_COST) {
+			return "";
+		}
+	}
 	switch(power)
 	{
 	case SWAKO_3_CURSE:		
@@ -176,6 +200,15 @@ string GetSwakoString3(swako_3_power power, swako_string kind)
 
 string GetSwakoString4(swako_4_power power, swako_string kind)
 {
+	if(you.god_value[GT_SUWAKO][5] < 4) {
+		if(kind == SWAKO_SIMPLE_INFOR) {
+			return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN);
+		}
+		else if(kind == SWAKO_COST) {
+			return "";
+		}
+	}
+
 	switch(power)
 	{
 	case SWAKO_4_COLD_RESIST:		
@@ -236,6 +269,14 @@ string GetSwakoString4(swako_4_power power, swako_string kind)
 
 string GetSwakoString5(swako_5_power power, swako_string kind)
 {
+	if(you.god_value[GT_SUWAKO][5] < 5) {
+		if(kind == SWAKO_SIMPLE_INFOR) {
+			return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN);
+		}
+		else if(kind == SWAKO_COST) {
+			return "";
+		}
+	}
 	switch(power)
 	{
 	case SWAKO_5_RAIN:		
@@ -289,6 +330,8 @@ bool GetSwakoAbility(int level, bool plus)
 	switch(level)
 	{
 	case 1:
+		if(you.god_value[GT_SUWAKO][5] < 1)
+			you.god_value[GT_SUWAKO][5] = 1;
 		switch(you.god_value[GT_SUWAKO][0])
 		{
 		case SWAKO_1_JUMP:	
@@ -310,6 +353,8 @@ bool GetSwakoAbility(int level, bool plus)
 			printlog(GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 2:
+		if(you.god_value[GT_SUWAKO][5] < 2)
+			you.god_value[GT_SUWAKO][5] = 2;
 		switch(you.god_value[GT_SUWAKO][1])
 		{
 		case SWAKO_2_KILL_HP:	
@@ -329,6 +374,8 @@ bool GetSwakoAbility(int level, bool plus)
 			printlog(GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 3:
+		if(you.god_value[GT_SUWAKO][5] < 3)
+			you.god_value[GT_SUWAKO][5] = 3;
 		switch(you.god_value[GT_SUWAKO][2])
 		{
 		case SWAKO_3_CURSE:	
@@ -350,6 +397,8 @@ bool GetSwakoAbility(int level, bool plus)
 			printlog(GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 4:
+		if(you.god_value[GT_SUWAKO][5] < 4)
+			you.god_value[GT_SUWAKO][5] = 4;
 		switch(you.god_value[GT_SUWAKO][3])
 		{
 		case SWAKO_4_COLD_RESIST:	
@@ -374,6 +423,8 @@ bool GetSwakoAbility(int level, bool plus)
 			printlog(GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3],SWAKO_UNGET_STRING),true,false,false,CL_swako);
 		break;
 	case 5:
+		if(you.god_value[GT_SUWAKO][5] < 5)
+			you.god_value[GT_SUWAKO][5] = 5;
 		switch(you.god_value[GT_SUWAKO][4])
 		{
 		case SWAKO_5_RAIN:	

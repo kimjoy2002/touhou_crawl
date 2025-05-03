@@ -3721,6 +3721,7 @@ LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE,더 이상 당신은 순화할 수 �
 LOC_SYSTEM_GOD_SHOW_AHTEISM,당신은 아직 신을 믿고 있지 않다.
 LOC_SYSTEM_GOD_SHOW_PASSIVE,(패시브)
 LOC_SYSTEM_GOD_SHOW_ACTIVE,(액티브)
+LOC_SYSTEM_GOD_SHOW_SOMETIME,(때때로)
 LOC_SYSTEM_GOD_SHOW_NONE,(없음)
 LOC_SYSTEM_GOD_SHOW_PIETY,(신앙)
 LOC_SYSTEM_GOD_SHOW_MP,(영력)
@@ -3731,6 +3732,7 @@ LOC_SYSTEM_GOD_SHOW_P_SOME,(P 약간)
 LOC_SYSTEM_GOD_SHOW_P_BIG,(P 대량)
 LOC_SYSTEM_GOD_SHOW_POTION,(물약)
 LOC_SYSTEM_GOD_SHOW_CURSE,(저주)
+LOC_SYSTEM_GOD_SHOW_PUNISH_AND_PIETY,(징벌, 신앙)
 LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(영력, 신앙)
 LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N,(영력 {0}, 신앙)
 LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(시간, 신앙)
@@ -3782,9 +3784,11 @@ LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,당신은 순간적으로 지능을 강�
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,당신은 근력이 강화되어 낮은 수준의 갑옷패널티의 마법실패율을 무시한다.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,히지리는 당신의 강화 마법들을 보조해준다.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,당신은 순간적으로 각력을 강화시킬 수 있다.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY6,당신은 가끔씩 히지리로부터 마법책을 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,당신은 카나코님의 힘으로 돌진할 수 있다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,당신은 카나코님의 기둥을 구현할 수 있다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,당신은 카나코님의 바람의 힘을 휘감을 수 있다.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,당신은 가끔씩 카나코로부터 무기를 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,당신은 짧은 거리를 점프할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,당신은 신전을 세워 신앙심을 벌 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,당신은 멀리있는 적에 물의 탄막을 날릴 수 있다.
@@ -3807,16 +3811,22 @@ LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_RAIN,당신은 주변을 물바다로 만들
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SLEEP,당신은 땅속에 숨어서 동면을 취할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_MISYAGUZI,당신은 미샤구지님을 소환할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT,당신은 스와코님의 귀여운 모자를 받았다.
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN,이 능력은 아직 밝혀지지않았다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,파워가 가득차도 음식을 먹을 수 있고 최대 파워를 오래 유지할 수 있다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,당신이 파워가 가득차있을수록 체력과 영력회복속도가 빨라진다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,미노리코는 당신에게 걸린 상태이상과 능력저하를 회복시켜준다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,당신은 음식을 더 빨리 먹을 수 있고 먹을때 영력도 조금 회복한다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,미노리코는 당신이 가진 음식을 소모하여 체력을 크게 회복할 수 있다.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,미노리코는 당신이 음식을 먹은 직후 일시적으로 불,냉기저항을 1단계 준다.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY7,미노리코는 가끔씩 당신에게 수확한 음식을 준다.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1,신앙심에 비례해서 최대영력이 올라간다.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2,적을 죽였을때 적의 세기에 따라 영력을 얻을 수 있다.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,미마는 파괴술이 들어간 마법의 위력을 증가시킨다.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,미마는 파괴술이 들어간 마법의 성공율을 증가시킨다.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5,미마는 당신에게 파괴술 마법이 담긴 마법책을 선물한다.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5_1,당신은 미마로부터 파괴 마법서를 받았다.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6,미마는 당신에게 자신의 비술이 봉인된 마법책을 선물한다.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6_1,당신은 미마로부터 봉인서를 받았다.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,당신은 하급 마족 무리를 소환할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,당신은 중급 마족을 소환할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,적대적인 소환수의 행동을 일정확률로 방해한다.
@@ -3860,6 +3870,7 @@ LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)마비물약 : 마비시간이 줄어�
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,당신의 물약을 던질 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,당신은 신체개조를 통해 능력치를 조절할 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,당신은 부작용을 대가로 몸을 재생할 수 있다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7,당신은 가끔씩 에이린으로부터 물약을 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,당신은 유령을 불러들인다.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2,원하는 위치에 유령들을 보낼 수 있다.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3,잠시동안 유령을 불러들이는 빈도를 높힐 수 있다.
@@ -3875,6 +3886,7 @@ LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,당신은 세이자로부터 스탯을 강�
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,징벌에 의한 추격으로부터 당신을 돕는다.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3,원하는 상대방과 위치를 뒤집을 수 있다.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4,모든 적, 아군의 시야를 뒤집을 수 있다.
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY5,주기적으로 다른 신들로부터 훔친 보물들을 선물받는다.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1,요정에 경험치를 나눠주며 죽은 요정도 경험치를 먹으면 부활한다.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2,당신은 요정들을 동료로 권유할 수 있다.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,당신은 요정들을 근처로 호출할 수 있다.
@@ -3885,8 +3897,8 @@ LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,적을 죽인다. 강할수록 더 많이 올라
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,욕망모으기를 이용해 시야내의 적들의 욕망을 모은다
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,새로운 서브던전에 입장한다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,인기도는 다음 행동을 할 경우 내려간다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,층을 옮긴다. 올라갈수록 더 많은 인기도가 떨어진다.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,서브던전을 옮긴다. 모든 인기도가 잃는다.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,층을 옮긴다 - 올라갈수록 더 많은 인기도가 떨어진다.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,새로운 던전에 입장하거나 나간다 - 모든 인기도를 잃는다.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,미코의 권능을 사용한다.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,주변의 적들로부터 인기도를 모을 수 있다.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,빠른 속도로 랜덤한 순간이동을 할 수 있다.

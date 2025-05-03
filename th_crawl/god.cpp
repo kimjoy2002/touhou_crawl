@@ -374,7 +374,10 @@ bool GetGodAbility(int level, bool plus)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY2_REMOVE),true,false,false,CL_green);
 				break;
 			case 3:
-				mima_gift(BOOK_CONJURE);
+				if(you.god_value[GT_MIMA][0] == 0) {
+					mima_gift(BOOK_CONJURE);
+					you.god_value[GT_MIMA][0] = 1;
+				}
 				you.max_mp+=plus;
 				break;
 			case 4:
@@ -385,10 +388,13 @@ bool GetGodAbility(int level, bool plus)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE),true,false,false,CL_green);
 				break;
 			case 5:
-				mima_gift(BOOK_TEST_ANNIHILATE);
 				you.max_mp+=plus;
 				break;
 			case 6:
+				if(you.god_value[GT_MIMA][1] == 0) {
+					mima_gift(BOOK_TEST_ANNIHILATE);
+					you.god_value[GT_MIMA][1] = 1;
+				}
 				you.max_mp+=plus;
 				break;
 		}
@@ -2841,11 +2847,13 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_BYAKUREN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_BYAKUREN, level_, 4, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_BYAKUREN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_BYAKUREN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		break;
 	case GT_KANAKO:
 		printGodAbility(GT_KANAKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		printGodAbility(GT_KANAKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		printGodAbility(GT_KANAKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_KANAKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		break;
 	case GT_SUWAKO:
 		printGodAbility(GT_SUWAKO, level_, 1, false, 
@@ -2853,27 +2861,28 @@ void God_AblilityShow(god_type god) {
 			vector<subability>(),
 			GetSwakoString1((swako_1_power)you.god_value[GT_SUWAKO][0], SWAKO_COST));
 		printGodAbility(GT_SUWAKO, level_, 2, false, 
-			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR), 
+			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_SIMPLE_INFOR), 
 			vector<subability>(),
-			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][2], SWAKO_COST));
+			GetSwakoString2((swako_2_power)you.god_value[GT_SUWAKO][1], SWAKO_COST));
 		printGodAbility(GT_SUWAKO, level_, 3, false, 
-			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR), 
+			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_SIMPLE_INFOR), 
 			vector<subability>(),
-			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][3], SWAKO_COST));
+			GetSwakoString3((swako_3_power)you.god_value[GT_SUWAKO][2], SWAKO_COST));
 		printGodAbility(GT_SUWAKO, level_, 4, false, 
-			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR), 
+			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_SIMPLE_INFOR), 
 			vector<subability>(),
-			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][4], SWAKO_COST));
+			GetSwakoString4((swako_4_power)you.god_value[GT_SUWAKO][3], SWAKO_COST));
 		printGodAbility(GT_SUWAKO, level_, 5, false, 
-			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][5], SWAKO_SIMPLE_INFOR), 
+			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_SIMPLE_INFOR), 
 			vector<subability>(),
-			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][5], SWAKO_COST));
+			GetSwakoString5((swako_5_power)you.god_value[GT_SUWAKO][4], SWAKO_COST));
 		break;
 	case GT_MINORIKO:
 		printGodAbility(GT_MINORIKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_MINORIKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_MINORIKO, level_, 2, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
 		printGodAbility(GT_MINORIKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MINORIKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		printGodAbility(GT_MINORIKO, level_, 4, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_FOOD_AND_PIETY);
 		printGodAbility(GT_MINORIKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		break;
@@ -2881,7 +2890,9 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_MIMA, level_, 0, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_MIMA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_MIMA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MIMA, level_, 3, false, you.god_value[GT_MIMA][0] ? LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5_1:LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 		printGodAbility(GT_MIMA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_MIMA, level_, 6, false, you.god_value[GT_MIMA][0] ? LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6_1:LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 		break;
 	case GT_SHINKI:
 		printGodAbility(GT_SHINKI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);
@@ -2905,7 +2916,7 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_SHIZUHA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_SHIZUHA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		printGodAbility(GT_SHIZUHA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
-		printGodAbility(GT_SHIZUHA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_SHIZUHA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_SHIZUHA, level_, 6, false, LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON, you.god_value[GT_SHIZUHA][0]==0);
 		break;
 	case GT_HINA:
@@ -2940,7 +2951,9 @@ void God_AblilityShow(god_type god) {
 		}
 		printGodAbility(GT_EIRIN, level_, 2, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_POTION);
 		printGodAbility(GT_EIRIN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+		printGodAbility(GT_EIRIN, level_, 3, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		printGodAbility(GT_EIRIN, level_, 5, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
+		
 		break;
 	case GT_YUYUKO:
 		printGodAbility(GT_YUYUKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
@@ -2954,16 +2967,17 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_SATORI, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_SATORI, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_SATORI, level_, 4, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY);
-		printGodAbility(GT_SATORI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SATORI, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		break;
 	case GT_TENSI:
 		printGodAbility(GT_TENSI, level_, 0, true, LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY, vector<subability>(), LOC_EMPTYSTRING);
 		break;
 	case GT_SEIJA:
-		printGodAbility(GT_SEIJA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
-		printGodAbility(GT_SEIJA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
-		printGodAbility(GT_SEIJA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
 		printGodAbility(GT_SEIJA, level_, 5, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
+		printGodAbility(GT_SEIJA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P);
+		printGodAbility(GT_SEIJA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SEIJA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_SEIJA, level_, 0, false, LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PUNISH_AND_PIETY);
 		break;
 	case GT_LILLY:
 		if(level_ >= 1)
@@ -3201,7 +3215,7 @@ void God_show()
 		else if(key_ == VK_NEXT)
 		{
 			changemove(-DisplayManager.log_length);
-		} if(key_ == -1) {
+		} else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_SCROLL_UP) {
 				changemove(1);  //위
 			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {

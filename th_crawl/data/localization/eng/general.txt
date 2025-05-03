@@ -3721,6 +3721,7 @@ LOC_SYSTEM_GOD_JUNKO_GAIN_ABLILITY6_REMOVE,You can no longer purify.
 LOC_SYSTEM_GOD_SHOW_AHTEISM,You do not believe in any god yet.
 LOC_SYSTEM_GOD_SHOW_PASSIVE,(Passive)
 LOC_SYSTEM_GOD_SHOW_ACTIVE,(Active)
+LOC_SYSTEM_GOD_SHOW_SOMETIME,(Sometimes)
 LOC_SYSTEM_GOD_SHOW_NONE,(None)
 LOC_SYSTEM_GOD_SHOW_PIETY,(Faith)
 LOC_SYSTEM_GOD_SHOW_MP,(MP)
@@ -3731,6 +3732,7 @@ LOC_SYSTEM_GOD_SHOW_P_SOME,(P Medium)
 LOC_SYSTEM_GOD_SHOW_P_BIG,(P Large)
 LOC_SYSTEM_GOD_SHOW_POTION,(Potion)
 LOC_SYSTEM_GOD_SHOW_CURSE,(Curse)
+LOC_SYSTEM_GOD_SHOW_PUNISH_AND_PIETY,(Punishment, Faith)
 LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY,(MP, Faith)
 LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N,(MP {0}, Faith)
 LOC_SYSTEM_GOD_SHOW_TIME_AND_PIETY,(Time, Faith)
@@ -3782,9 +3784,11 @@ LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,You can momentarily boost your intelligen
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,Your strength increases, allowing you to ignore magic failure from low-tier armor penalties.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,Byakuren supports your enhancement spells.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,You can momentarily boost your willpower.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY6,You sometimes get a magic book from Byakuren.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,You can charge forward with Kanako's power.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,You can manifest Kanako’s pillar.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,You can be enveloped in Kanako’s wind power.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,You sometimes get a gift of weapons from Kanako.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,You can perform short jumps.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,You can build shrines to earn faith.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,You can fire water danmaku at distant enemies.
@@ -3807,16 +3811,22 @@ LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_RAIN,You can flood the surroundings.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SLEEP,You can hibernate underground.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_MISYAGUZI,You can summon Mishaguji.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT,You have received Suwako's adorable hat.
+LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN,This ability is not yet known.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,You can eat even at full power and maintain max power longer.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,The fuller your power, the faster your HP and MP recover.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,Minoriko cures your status ailments and stat reductions.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,You eat faster and recover a bit of MP when doing so.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,Minoriko consumes your food to greatly restore HP.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,After eating, Minoriko briefly grants 1 level of fire and cold resistance.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY7,Minoriko sometimes gives you harvested food.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY1,Max MP increases with your faith.
 LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY2,You gain MP from slain enemies based on their strength.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,Mima increases the power of destruction-type spells.
-LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,Mima boosts the success rate of destruction-type spells.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3,Mima increases the power of destructive spells.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4,Mima boosts the success rate of destructive spells.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5,Mima presents you with a magic book of destructive spells.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5_1,You received a destruction spellbook from Mima.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6,Mima presents you with a spellbook with her secret magic sealed.
+LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6_1,You received a sealed spellbook from Mima.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1,You can summon a horde of lesser demons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY2,You can summon mid-tier demons.
 LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY3,You can occasionally disrupt hostile summons.
@@ -3860,6 +3870,7 @@ LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)Paralysis Potion: Reduces paralysis dur
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,You can throw your potions.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,You can modify your body to adjust your stats.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,You can regenerate at the cost of side effects.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7,You sometimes get potions from Eirin.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,You attract spirits.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY2,You can send spirits to a desired location.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY3,You can temporarily increase spirit spawn rate.
@@ -3875,6 +3886,7 @@ LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,You are receiving stat boosts from Seija.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,She helps you escape divine punishment chases.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY3,You can swap positions with a target of your choice.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY4,You can invert the vision of all enemies and allies.
+LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY5,Periodically presented with stolen treasures from other gods.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY1,You can share EXP with fairies; dead ones revive if they gain EXP.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY2,You can recruit fairies as allies.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,You can summon fairies nearby.

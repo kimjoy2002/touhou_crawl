@@ -118,27 +118,29 @@ void Help_Show()
 				}
 				changedisplay(DT_SUB_TEXT);
 				ReleaseMutex(mutx);	
-				while(1)
+				while(loop_)
 				{
 					switch(waitkeyinput(inputedKey, true))
 					{
 					case VK_UP:
 						changemove(1);  //위
-						continue;
+						break;
 					case VK_DOWN:
 						changemove(-1); //아래
-						continue;
+						break;
 					case VK_PRIOR:
 						changemove(DisplayManager.log_length);
-						continue;
+						break;
 					case VK_NEXT:
 						changemove(-DisplayManager.log_length);
-						continue;						
+						break;						
 					case -1:
 						if(inputedKey.mouse == MKIND_SCROLL_UP) {
 							changemove(1);  //아래
+							break;
 						} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
 							changemove(-1);  //위
+							break;
 						} else if(inputedKey.isRightClick()) {
 							//ESC PASSTHORUGH
 						}
@@ -149,9 +151,8 @@ void Help_Show()
 						loop_ = false;
 						break;
 					default:
-						continue;
+						break;
 					}
-					break;
 				}
 			}
 			break;

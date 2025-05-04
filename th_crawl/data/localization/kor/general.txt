@@ -49,6 +49,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,요정대전쟁! 빛의 삼요정. �
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,보너스) 릴리를 믿고 다른 두 요정과 동료가 되어 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,종족을 선택합니다.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,?로 종족 적성표를 봅니다.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,각각 대문자로 종족 설명을 봅니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,평범한 스탯과 평범한 적성. 레벨업이 빠르다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,종족으로서의 마법사. 근접전투에 약하고 마법을 잘 다룬다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 무거운 갑옷을 입지 못한다.\n빠른 체력, 영력 재생력과 높은 스텔스를 들고 시작하며 구름의 데미지를 반감해서 받는다.
@@ -63,6 +65,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,성장이 느리고 적성이 골�
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,냉기저항과 독저항을 들고 시작하고 높은 은신치를 가졌다.\n전체적인 적성이 나쁜대신 다른 종족에 비해 체력적성은 괜찮은 편이다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,높은 체력재생력과 낮은 영력재생력을 지녔고 체력을 소모하여 마법을 쓸 수 있다.\n좋은 전투,은밀,회피적성을 지녔지만 무기,갑옷적성이 나쁘다. 마법적성은 전체적으로 나쁘지않지만\n연금술은 잘 못다루는 편이고 소환술 적성이 높다. 투명보기가 있고 P의 자연소모가 빠른 편이다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,직업을 선택합니다.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,각각 대문자로 직업 설명을 봅니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,전형적인 근접 전투를 선호하는 중갑 전사\n선택한 무기와 무거운 방패, 갑옷을 끼고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,다양한 상황에서 응용할 수 있는 마법을 골고루 사용한다.\n초보 마법사의 책을 들고 마법의 탄막을 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,카나코의 무녀로 카나코의 힘을 사용하여 전투하는 근접전투 직업이다.\n무기로는 고헤이(둔기)를 들며 무녀복과 카나코를 믿고 시작한다.
@@ -432,6 +435,7 @@ LOC_SYSTEM_TOUHOUCRAWL_HELP,동방 크롤 도움말 목록
 LOC_SYSTEM_COMMAND,명령어
 LOC_SYSTEM_COMMAND_LIST,명령어 목록
 LOC_SYSTEM_CHARACTER_HELP,종족&직업 도움말
+LOC_SYSTEM_GODS_HELP,신 도움말
 LOC_SYSTEM_PROCESS_NOTE,진행 노트
 LOC_SYSTEM_PROCESS_CREDIT,크레딧
 LOC_SYSTEM_DESCRIPTION,설명

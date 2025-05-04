@@ -74,6 +74,8 @@ private:
 	static vector<TextHelper> help_wizard;
 	static vector<TextHelper> help_character;
 	static vector<int> helpline_character;
+	static vector<TextHelper> help_gods;
+	static vector<int> helpline_gods;
 
 	static unordered_set<string> korean_verbs;
 	static unordered_set<string> english_verbs;
@@ -183,6 +185,9 @@ public:
 	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
 	static const vector<TextHelper>& getHelpWizard(){return help_wizard;};
 	static const vector<TextHelper>& getHelpCharacter(){return help_character;};
+	static int getHelpCharacterLine(int index);
+	static const vector<TextHelper>& getHelpGods(){return help_gods;};
+	static int getHelpGodsLine(int index);
     
 
     static const string& getMonsterEnumString(monster_index key);

@@ -2836,9 +2836,9 @@ void God_AblilityShow(god_type god) {
 			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION);
 		}
 		if (you.god_value[GT_JOON_AND_SION][0] != 0) {
-			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
+			printGodAbility(GT_JOON_AND_SION, level_, 6, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP_PIETY);
 		} else {
-			printGodAbility(GT_JOON_AND_SION, level_, 5, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
+			printGodAbility(GT_JOON_AND_SION, level_, 6, false, LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);
 		}
 		break;
 	case GT_BYAKUREN:

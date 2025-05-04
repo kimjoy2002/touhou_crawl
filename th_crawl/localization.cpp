@@ -9,6 +9,8 @@
 
 #include "const.h"
 #include "localization.h"
+#include "item.h"
+#include "god.h"
 #include <iostream>
 #include <regex>
 #include <iostream>
@@ -33,6 +35,8 @@ vector<TextHelper> LocalzationManager::help_credit;
 vector<TextHelper> LocalzationManager::help_wizard;
 vector<TextHelper> LocalzationManager::help_character;
 vector<int> LocalzationManager::helpline_character;
+vector<TextHelper> LocalzationManager::help_gods;
+vector<int> LocalzationManager::helpline_gods;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
 	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
@@ -66,6 +70,7 @@ void LocalzationManager::init(string type, bool init_) {
 	initFileSimple(filePath, "credit.txt", help_credit, nullptr);
 	initFileSimple(filePath, "wizardhelp.txt", help_wizard, nullptr);
 	initFileSimple(filePath, "character.txt", help_character, &helpline_character);
+	initFileSimple(filePath, "gods.txt", help_gods, &helpline_gods);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localization_map[key] = values[0];
@@ -88,6 +93,7 @@ D3DCOLOR LocalzationManager::getColorFromCode(const string& code) {
 	if (code == "§r") return D3DCOLOR_RGBA(220, 80, 80, 255);     // Red
 	if (code == "§R") return D3DCOLOR_RGBA(220, 20, 20, 255);     // *Red*
 	if (code == "§g") return D3DCOLOR_RGBA(100, 200, 100, 255);   // Green
+	if (code == "§G") return D3DCOLOR_RGBA(20, 220, 20, 255);   // *Green*
 	if (code == "§y") return D3DCOLOR_RGBA(240, 200, 100, 255);   // Yellow
 	if (code == "§s") return D3DCOLOR_RGBA(150, 150, 240, 255);   // Sky
 	if (code == "§b") return D3DCOLOR_RGBA(80, 80, 240, 255);   // Blue
@@ -104,10 +110,10 @@ D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<Text
 	string currentText;
 
 	while (i < line.size()) {
-		if(i + 2 < line.size() && line.substr(i, 2) == "§" && line.at(2) >= '0' && line.at(2) <= '9') {
+		if(i + 2 < line.size() && line.substr(i, 2) == "§" && line.at(i+2) >= '0' && line.at(i+2) <= '9') {
 			if(helpline) {
 				//숫자 = 북마크
-				if(i + 3 < line.size() && line.at(3) >= '0' && line.at(3) <= '9') {
+				if(i + 3 < line.size() && line.at(i+3) >= '0' && line.at(i+3) <= '9') {
 					int val = stoi(line.substr(i+2, 2));
 					while((*helpline).size() <= val)
 						(*helpline).push_back(0);
@@ -115,7 +121,11 @@ D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<Text
 					i += 4;
 				}
 				else {
-					int val = stoi(line.substr(i+2, 1));
+					int val = 0;
+					try {
+						val = stoi(line.substr(i+2, 1));
+					} catch (...) {
+					}
 					while((*helpline).size() <= val)
 						(*helpline).push_back(0);
 					(*helpline)[val] = current_line;
@@ -128,9 +138,20 @@ D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<Text
 				outVector.emplace_back(currentText, false, currentColor);
 				currentText.clear();
 			}
-			string tag = line.substr(i, 3); 
-			currentColor = getColorFromCode(tag);
-			i += 3;
+			if(i + 4 < line.size() && line.at(i+2) == '_') { //신 전용 색깔
+				int val = 0;
+				try {
+					val = stoi(line.substr(i+3, 2));
+				} catch (...) {
+				}
+				currentColor = GetGodColor((god_type)val);
+				i += 5;
+			}
+			else {
+				string tag = line.substr(i, 3); 
+				currentColor = getColorFromCode(tag);
+				i += 3;
+			}
 		} else {
 			currentText += line[i++];
 		}
@@ -383,6 +404,22 @@ const string& LocalzationManager::monDecsriptionString(monster_index key) {
 	}
 	return monster_description_map[MON_REIMUYUKKURI];
 }
+
+int LocalzationManager::getHelpCharacterLine(int index) {
+	if(helpline_character.size() > index) {
+		return helpline_character[index];
+	} else {
+		return 0;
+	}
+}
+int LocalzationManager::getHelpGodsLine(int index) {
+	if(helpline_gods.size() > index) {
+		return helpline_gods[index];
+	} else {
+		return 0;
+	}
+}
+
 string LocalzationManager::getCorrectParticle(const string& word, const string& opt1, const string& opt2) {
     if (word.empty() || word.size() <= 1) return opt1;
 

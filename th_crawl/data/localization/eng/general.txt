@@ -49,6 +49,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Ligh
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your race.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the racial aptitude chart
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,See the race descriptions in capital letters.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,Balanced stats and aptitude. Levels up quickly.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by race. Weak in melee but excels at magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armor.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
@@ -63,6 +65,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,Grows slowly and has poor overall 
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other races.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armor aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude. Can see invisibility and has fast MP drain.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,Choose your job.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,View job descriptions in capital letters.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,A typical heavy-armored melee fighter.\nStarts with a chosen weapon, heavy shield, and armor.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,Uses a wide variety of spells adaptable to many situations.\nStarts with a beginner’s spellbook and learns magic danmaku.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,A melee fighter who uses Kanako’s power as her shrine maiden.\nWields a gohei (blunt weapon) and starts with shrine maiden clothes and Kanako’s blessing.
@@ -432,6 +435,7 @@ LOC_SYSTEM_TOUHOUCRAWL_HELP,Touhou Crawl Help List
 LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_COMMAND_LIST,Command List
 LOC_SYSTEM_CHARACTER_HELP,Tribe & Job Help
+LOC_SYSTEM_GODS_HELP,Gods Help
 LOC_SYSTEM_PROCESS_NOTE,Progress Notes
 LOC_SYSTEM_PROCESS_CREDIT,Credits
 LOC_SYSTEM_DESCRIPTION,Description

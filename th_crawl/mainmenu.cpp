@@ -22,7 +22,7 @@
 extern bool saveexit;
 
 extern HANDLE mutx;
-
+extern display_manager DisplayManager;
 
 extern const char *version_string;
 typedef struct menu_input
@@ -186,7 +186,21 @@ public:
 					(*it)->View();
 					while(1)
 					{
-						int input_ = waitkeyinput();
+						InputedKey inputedKey;
+						int input_ = waitkeyinput(inputedKey);
+						if(input_ == -1) {
+							if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+								if(inputedKey.val1 >= 'a' && inputedKey.val1 <= 'z' ) {
+									input_ = inputedKey.val1 + 'A' - 'a';
+								} else if(inputedKey.val1 >= 'A' && inputedKey.val1 <= 'Z' ) {
+									input_ = inputedKey.val1 - ('A' - 'a');
+								} else {
+									input_ = inputedKey.val1;
+								}
+							}
+						}
+						
+
 						(*it)->View();
 						if(input_ == VK_RETURN && prev_input_ != -1)
 							output_= (*it)->Check(prev_input_, true);
@@ -348,6 +362,60 @@ bool select_named(int value_)
 bool select_char(int value_)
 {
 	you.tribe = (tribe_type)(value_);
+	return false;
+}
+bool show_help(int value_)
+{
+	WaitForSingleObject(mutx, INFINITE);
+	deletesub();
+	for(TextHelper text_ : LocalzationManager::getHelpCharacter()) {
+		printsub(text_.text,text_.enter,text_.color);
+	}
+	changedisplay(DT_SUB_TEXT);
+	setDisplayMove(DisplayManager.max_y-LocalzationManager::getHelpCharacterLine(value_));
+	ReleaseMutex(mutx);
+	bool loop_ = true;
+	while(loop_)
+	{
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey,true))
+		{
+		case VK_UP:
+			changemove(1);  //위
+			break;
+		case VK_DOWN:
+			changemove(-1); //아래
+			break;
+		case VK_PRIOR:
+			changemove(DisplayManager.log_length);
+			break;
+		case VK_NEXT:
+			changemove(-DisplayManager.log_length);
+			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //아래
+				break;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);  //위
+				break;
+			} else if(inputedKey.isRightClick()) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
+		case VK_ESCAPE:
+			loop_ = false;
+			break;
+		default:
+			continue;
+		}
+	}
+
+	WaitForSingleObject(mutx, INFINITE);
+	
+	ReleaseMutex(mutx);
 	return false;
 }
 bool select_job(int value_)
@@ -566,7 +634,9 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		for(int i=0;i<TRI_MAX-1;i++)
+
+		const int max_tribe = TRI_MAX-1; //요괴 제외
+		for(int i=0;i<max_tribe;i++)
 		{
 			char hotkey_ = 'a' + i;
 			ostringstream ss;
@@ -574,7 +644,7 @@ void start_mainmenu()
 
 			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
 
-			if(i%2 == 1  || i == TRI_MAX-2) {
+			if(i%2 == 1  || i == max_tribe-1) {
 				temp->push_back(menu_string("", true, CL_normal));
 			}
 			else if(23 - PrintCharWidth(ss.str()) > 0) {
@@ -584,12 +654,13 @@ void start_mainmenu()
 			}
 		}
 		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT), true, CL_normal, '?'));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP), true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(3,temp);
 
 
-
-		LOCALIZATION_ENUM_KEY tribelist[13][2] = {
+		LOCALIZATION_ENUM_KEY tribelist[max_tribe][2] = {
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN},
 			{LOC_SYSTEM_TRIBE_WIZARD,LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD},
 			{LOC_SYSTEM_TRIBE_FAIRY,LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY},
@@ -605,7 +676,7 @@ void start_mainmenu()
 			{LOC_SYSTEM_TRIBE_VAMPIRE,LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE}
 		};
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < max_tribe; i++) {
 			char hotkey_ = 'a' + i;
 			tempstr = LocalzationManager::locString(tribelist[i][0]);
 			tempstr += ": ";
@@ -614,8 +685,10 @@ void start_mainmenu()
 			tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
 			tempstr += "\n";
 			m_mgr.menu_input_puls(3,hotkey_,4,tempstr,true,select_char,i);
+			m_mgr.menu_input_puls(3,hotkey_+ 'A'-'a',3,"",false,show_help,i+1);
 
 		}
+		m_mgr.menu_input_puls(3,'?',3,"",false,show_help,0);
 		m_mgr.menu_input_puls(3,VK_ESCAPE,1,"",false,NULL,0);
 
 		
@@ -642,9 +715,10 @@ void start_mainmenu()
 			}
 		}
 		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP), true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		m_mgr.menu_puls(4,temp);
-
+		
 
 
 		LOCALIZATION_ENUM_KEY joblist[21][2] = {
@@ -681,8 +755,10 @@ void start_mainmenu()
 			tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
 			tempstr += "\n";
 			m_mgr.menu_input_puls(4,hotkey_,5,tempstr,true,select_job,i);
+			m_mgr.menu_input_puls(4,hotkey_+ 'A'-'a',4,"",false,show_help,i+1+max_tribe);
 
 		}
+		m_mgr.menu_input_puls(3,'?',3,"",false,show_help,0);
 		m_mgr.menu_input_puls(4,VK_ESCAPE,3,"",false,NULL,0);
 
 

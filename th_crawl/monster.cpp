@@ -1917,7 +1917,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
-				if(((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH)) //적일때
+				if((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH) //적일때
 				{
 					if(only_move)
 						return 0;

@@ -66,6 +66,7 @@ const char *imgfile_god[GT_LAST] =
 
 TextureFile texture_dungeon01(imgfile_dungeon01);
 TextureFile texture_monster01(imgfile_monster01);
+TextureFile texture_monster02(imgfile_monster02);
 TextureFile texture_players01(imgfile_players01);
 TextureFile texture_item01(imgfile_item01);
 TextureFile texture_item02(imgfile_item02);
@@ -871,6 +872,13 @@ textures img_mons_desire_green(&texture_monster01, 234, 255);
 textures img_mons_desire_blue(&texture_monster01, 235, 255);
 
 
+textures img_mons_stonetower[] =
+{
+	textures(&texture_monster01, 237, 255),
+	textures(&texture_monster01, 238, 255),
+	textures(&texture_monster01, 239, 255)
+};
+
 
 textures img_named_rumia(&texture_monster01, 13, 255);
 textures img_named_mistia(&texture_monster01, 14, 255);
@@ -950,6 +958,20 @@ textures img_named_kokoro[] =
 textures img_named_sumireko(&texture_monster01, 215, 255);
 textures img_named_reimu2(&texture_monster01, 198, 255);
 textures img_mons_misyaguzi(&texture_monster01, 199, 255);
+
+textures img_mons_eika(&texture_monster01, 236, 255);
+textures img_mons_urumi(&texture_monster02, 0, 255);
+textures img_mons_kutaka(&texture_monster02, 1, 255);
+textures img_mons_yachie(&texture_monster02, 2, 255);
+textures img_mons_mayumi(&texture_monster02, 3, 255);
+textures img_mons_saki(&texture_monster02, 4, 255);
+textures img_mons_yuma(&texture_monster02, 5, 255);
+textures img_mons_yuma_drainform(&texture_monster02, 6, 255);
+textures img_mons_enoko(&texture_monster02, 7, 255);
+textures img_mons_chiyari(&texture_monster02, 8, 255);
+textures img_mons_sonbiten(&texture_monster02, 9, 255);
+textures img_mons_hisami(&texture_monster02, 10, 255);
+textures img_mons_tsukasa(&texture_monster02, 11, 255);
 
 
 
@@ -3176,6 +3198,38 @@ int texturetoint(textures* input)
 		return 504;
 	else if (input == &img_mons_misyaguzi)
 		return 505;
+	else if (input == &img_mons_eika)
+		return 506;
+	else if (input == &img_mons_stonetower[0])
+		return 507;
+	else if (input == &img_mons_stonetower[1])
+		return 508;
+	else if (input == &img_mons_stonetower[2])
+		return 509;
+	else if (input == &img_mons_urumi)
+		return 510;
+	else if (input == &img_mons_kutaka)
+		return 511;
+	else if (input == &img_mons_yachie)
+		return 512;
+	else if (input == &img_mons_mayumi)
+		return 513;
+	else if (input == &img_mons_saki)
+		return 514;
+	else if (input == &img_mons_yuma)
+		return 515;
+	else if (input == &img_mons_yuma_drainform)
+		return 516;
+	else if (input == &img_mons_enoko)
+		return 517;
+	else if (input == &img_mons_chiyari)
+		return 518;
+	else if (input == &img_mons_sonbiten)
+		return 519;
+	else if (input == &img_mons_hisami)
+		return 520;
+	else if (input == &img_mons_tsukasa)
+		return 521;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4216,6 +4270,38 @@ textures* inttotexture(int input)
 		return &img_play_item_hat[6];
 	case 505:
 		return &img_mons_misyaguzi;
+	case 506:
+		return &img_mons_eika;
+	case 507:
+		return &img_mons_stonetower[0];
+	case 508:
+		return &img_mons_stonetower[1];
+	case 509:
+		return &img_mons_stonetower[2];
+	case 510:
+		return &img_mons_urumi;
+	case 511:
+		return &img_mons_kutaka;
+	case 512:
+		return &img_mons_yachie;
+	case 513:
+		return &img_mons_mayumi;
+	case 514:
+		return &img_mons_saki;
+	case 515:
+		return &img_mons_yuma;
+	case 516:
+		return &img_mons_yuma_drainform;
+	case 517:
+		return &img_mons_enoko;
+	case 518:
+		return &img_mons_chiyari;
+	case 519:
+		return &img_mons_sonbiten;
+	case 520:
+		return &img_mons_hisami;
+	case 521:
+		return &img_mons_tsukasa;
 	default:
 		return &img_mons_default;
 	}

@@ -142,6 +142,8 @@ bool Setup()
 		return_ = false;
 	if(!texture_monster01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
+	if(!texture_monster02.loading(g_pd3dDevice, g_pImmediateContext))
+		return_ = false;
 	if(!texture_players01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 	if(!texture_item01.loading(g_pd3dDevice, g_pImmediateContext))

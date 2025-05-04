@@ -52,6 +52,7 @@ public:
 
 extern TextureFile texture_dungeon01;
 extern TextureFile texture_monster01;
+extern TextureFile texture_monster02;
 extern TextureFile texture_players01;
 extern TextureFile texture_item01;
 extern TextureFile texture_item02;

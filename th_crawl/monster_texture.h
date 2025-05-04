@@ -171,7 +171,7 @@ extern textures img_mons_curiosity;
 extern textures img_mons_desire_red;
 extern textures img_mons_desire_green;
 extern textures img_mons_desire_blue;
-
+extern textures img_mons_stonetower[];
 
 
 
@@ -256,7 +256,19 @@ extern textures img_named_kokoro[4];
 extern textures img_named_sumireko;
 extern textures img_named_reimu2; 
 extern textures img_mons_misyaguzi;
-
+extern textures img_mons_eika;
+extern textures img_mons_urumi;
+extern textures img_mons_kutaka;
+extern textures img_mons_yachie;
+extern textures img_mons_mayumi;
+extern textures img_mons_saki;
+extern textures img_mons_yuma;
+extern textures img_mons_yuma_drainform;
+extern textures img_mons_enoko;
+extern textures img_mons_chiyari;
+extern textures img_mons_sonbiten;
+extern textures img_mons_hisami;
+extern textures img_mons_tsukasa;
 
 
 

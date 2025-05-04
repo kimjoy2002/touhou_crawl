@@ -13,6 +13,7 @@
 const char imgfile_dungeon01[] = "./data/floor.png";
 
 const char imgfile_monster01[] = "./data/monster.png";
+const char imgfile_monster02[] = "./data/monster2.png";
 
 const char imgfile_players01[] = "./data/players.png";
 

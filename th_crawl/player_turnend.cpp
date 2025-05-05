@@ -1146,6 +1146,7 @@ bool players::isSightnonblocked(coord_def c)
 	}
 	return true;
 }
+
 bool players::isMemorizeSpell(int spell_)
 {
 	for(int i=0;i<52;i++)

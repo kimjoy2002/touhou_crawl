@@ -108,6 +108,55 @@ bool refreshPath_after(const coord_def &c, beam_iterator& beam, list<item>::iter
 }
 
 
+bool canHurtAlly(const coord_def &target, projectile_infor* infor_) {
+	//별다른건 아니고 자동타겟팅만 방지함
+	if(infor_->smite)
+		return false;
+	bool buf = (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_OTHER_BUF):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_OTHER_BUF);
+	//버프는 반대로 해야함
+	
+	bool pentan =  (infor_->skill)?SkillFlagCheck((skill_list) infor_->spell, S_FLAG_PENETRATE):SpellFlagCheck((spell_list) infor_->spell, S_FLAG_PENETRATE);
+
+	beam_iterator beam(you.position,target);
+	if(CheckThrowPath(you.position,target,beam)) {
+		beam.init();
+		bool loop_ = true;
+		while (loop_)
+		{
+			if (beam.end())
+				loop_ = false;
+
+			monster *unit_ = (monster *)env[current_level].isMonsterPos(beam->x, beam->y, &you);
+			if (unit_)
+			{
+				if ((*beam) != target && unit_->isView()) {
+					if(buf) {
+						if(you.isEnemyMonster(unit_) && !unit_->isPassedBullet(&you)) {
+							return true;
+						}
+					} else {
+						if(!you.isEnemyMonster(unit_) && !unit_->isPassedBullet(&you)) {
+							if(!pentan) {
+								 return true;
+							}
+							if((*unit_).flag & M_FLAG_UNHARM) {
+								//관통되고 무해하면 때릴수있음
+							} else {
+								return true;
+							}
+						}
+					}
+				}
+
+			}
+			beam++;
+		}
+	}
+
+	return false;
+}
+
+
 bool refreshPath(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
 {
 	refreshPath_before(c, beam,  it, infor_, m_len_, sector_);
@@ -140,7 +189,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 
 	if(it2 != env[current_level].mon_vector.end())
 	{
-		if(no_target_ || !(*it2).isLive() || !(*it2).isYourShight())
+		if(no_target_ || !(*it2).isLive() || !(*it2).isYourShight() || !you.isSightnonblocked(it2->position) || canHurtAlly(it2->position, infor_))
 		{
 			it2 = env[current_level].mon_vector.end();
 		}
@@ -166,7 +215,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		{
 			for(auto it3=env[current_level].floor_list.begin(); it3 != env[current_level].floor_list.end(); it3++)
 			{
-				if((*it3).type == FLOORT_SCHEMA && env[current_level].isInSight(it3->position))
+				if((*it3).type == FLOORT_SCHEMA && env[current_level].isInSight(it3->position) && you.isSightnonblocked(it3->position))
 				{
 					int length_ = pow((float)abs(it3->position.x-you.position.x),2)+pow((float)abs(it3->position.y-you.position.y),2);
 					if(length_<3)
@@ -182,24 +231,33 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		}
 		else
 		{
+
+			vector<monster>::iterator current_it = it2;
+			int close_  = 99999;
 			for(it2=env[current_level].mon_vector.begin(); it2 != env[current_level].mon_vector.end(); it2++)
 			{
-				if((*it2).isLive() && !((*it2).flag & M_FLAG_UNHARM) && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) )
+				if((*it2).isLive() && !((*it2).flag & M_FLAG_UNHARM) && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) && you.isSightnonblocked(it2->position)  && !canHurtAlly(it2->position, infor_) )
 				{
+					bool yes_ = false;
 					int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);
 					if(length_<3)
 						length_ = 1;
 					if(!infor_->length)
-						break;
+						yes_ = true;
 					{
 						int type_ = rect_?2:1;
 						if(type_ == 1 && length_ <= (infor_->length+1)*(infor_->length+1)-1)
-							break;
+							yes_ = true;
 						else if(type_ == 2 && infor_->length >= max(abs(it2->position.x-you.position.x) ,abs(it2->position.y-you.position.y)))
-							break;
+							yes_ = true;
+					}
+					if(yes_ && close_ > length_) {
+						current_it = it2;
+						close_ = length_;
 					}
 				}
 			}
+			it2 = current_it;
 		}
 	}
 	if(it2 != env[current_level].mon_vector.end())

@@ -789,9 +789,29 @@ void search_monspell_view(monster* mon_)
 		GetMonsterInfor(mon_);
 		ReleaseMutex(mutx);
 		changedisplay(DT_SUB_TEXT);
-		int key_ = waitkeyinput(true);
-						
-		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
+
+		if(key_ == VK_UP)
+		{
+			changemove(1);  //위
+			loop_ = true;
+		}
+		else if(key_ == VK_DOWN)
+		{
+			changemove(-1); //아래
+			loop_ = true;
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(DisplayManager.log_length);
+			loop_ = true;
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(-DisplayManager.log_length);
+			loop_ = true;
+		} else if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
 			for(auto it = mon_->spell_lists.begin();it != mon_->spell_lists.end();it++)
@@ -808,9 +828,17 @@ void search_monspell_view(monster* mon_)
 					break;
 				}
 				num--;
-			}
-							
-		}
+			}			
+		} 
+		else if (key_ == -1) {
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //아래
+				loop_ = true;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);  //위
+				loop_ = true;
+			} 
+		}	
 	}
 }
 void Search()

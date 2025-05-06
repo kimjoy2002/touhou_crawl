@@ -109,6 +109,7 @@ FSMstate state_atack(MS_ATACK);
 FSMstate state_rest(MS_REST);
 FSMstate state_follow(MS_FOLLOW);
 FSMstate state_find(MS_FIND);
+FSMstate state_wait(MS_WAIT);
 
 
 void init_state()
@@ -119,7 +120,8 @@ void init_state()
 	state_normal.AddTransition(MSI_NOISE,MS_ATACK);
 	state_normal.AddTransition(MSI_REST,MS_REST);
 	state_normal.AddTransition(MSI_SEARCH, MS_FIND);
-
+	state_normal.AddTransition(MSI_FOLLOW, MS_FOLLOW);
+	
 	//상태 수면: 한 자리에서 자는 상태
 	state_sleep.AddTransition(MSI_NOISE,MS_ATACK);
 	state_sleep.AddTransition(MSI_ATACKED,MS_ATACK);
@@ -142,11 +144,19 @@ void init_state()
 	state_follow.AddTransition(MSI_ATACKED,MS_ATACK);
 	state_follow.AddTransition(MSI_LOST,MS_NORMAL);
 	state_follow.AddTransition(MSI_FOUND,MS_ATACK);
-
+	state_follow.AddTransition(MSI_SEARCH,MS_FIND);
+	
+	//상태 탐색: 특정 위치로 이동하는 기능
 	state_find.AddTransition(MSI_ATACKED, MS_ATACK);
 	state_find.AddTransition(MSI_FOUND, MS_ATACK);
 	state_find.AddTransition(MSI_LOST, MS_NORMAL);
 	state_find.AddTransition(MSI_REST, MS_NORMAL);
+	state_find.AddTransition(MSI_FOLLOW, MS_FOLLOW);
+
+	//상태 대기: (주로) 동맹이 자신의 위치를 지키면서 주변 몹들을 정리하는 상태
+	state_wait.AddTransition(MSI_ATACKED, MS_ATACK);
+	state_wait.AddTransition(MSI_SEARCH, MS_FIND);
+	state_wait.AddTransition(MSI_FOLLOW, MS_FOLLOW);
 	
 }
 
@@ -158,6 +168,7 @@ void base_state_setup(FSMclass& state, monster_state first_state)
 	state.AddState(&state_rest);
 	state.AddState(&state_follow);
 	state.AddState(&state_find);
+	state.AddState(&state_wait);
 
 	state.SetState(first_state);
 }

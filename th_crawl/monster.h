@@ -120,6 +120,7 @@ public:
 	FSMclass state;
 	list<spell> spell_lists;
 	bool random_spell; //이 몬스터가 고정된 스펠셋을 들고있지않다.
+	bool wait; //대기상태
 	
 	vector<item_infor> item_lists; //드랍하는 아이템목록
 

@@ -52,11 +52,12 @@ public:
 		forbid_count = 0;
 		forbid_count2 = 0;
 	}
-	bool isMove(bool fly_, bool swim_, bool no_ground_)
+	bool isMove(bool fly_, bool swim_, bool no_ground_, bool seiga_ = false)
 	{
 		return ((!no_ground_ && tile<DG_NONE_MOVE )|| 
 			((fly_ || swim_) && tile == DG_SEA) ||
-			((fly_) && tile == DG_LAVA));
+			((fly_) && tile == DG_LAVA)) || 
+			(seiga_ && tile == DG_NONE_MOVE);
 	
 	};
 	bool isOpenDoor(){return (tile==DG_OPEN_DOOR);};
@@ -168,7 +169,7 @@ public:
 	void LoadDatas(FILE *fp);
 	bool MakeMap(bool return_); //return_ 은 되돌아오는 계단일때 전용(이때는 대나무숲을 만들지 않는다.)
 	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0));
-	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false)
+	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false, bool seiga_ = false)
 	{
 		int sight_ = 7;
 		if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
@@ -179,11 +180,11 @@ public:
 				return false; //차원고정의 범위 밖에 있다.
 		}
 
-		return dgtile[x_][y_].isMove(fly_, swim_, no_ground_);
+		return dgtile[x_][y_].isMove(fly_, swim_, no_ground_,seiga_);
 	}
-	bool isMove(const coord_def &c, bool fly_ = false, bool swim_ = false, bool no_ground_ = false)
+	bool isMove(const coord_def &c, bool fly_ = false, bool swim_ = false, bool no_ground_ = false, bool seiga_ = false)
 	{
-		return isMove(c.x,c.y, fly_, swim_, no_ground_);
+		return isMove(c.x,c.y, fly_, swim_, no_ground_,seiga_);
 	}
 	bool isInSight(const coord_def &c, bool monster_sight_ = false)
 	{

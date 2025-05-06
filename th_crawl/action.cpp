@@ -4003,6 +4003,7 @@ void shout(char auto_)
 							
 								it->FoundTarget(target, it->FoundTime());
 								it->state.SetState(MS_ATACK);
+								it->will_move.clear();
 							}
 						}
 					}
@@ -4023,6 +4024,7 @@ void shout(char auto_)
 				it->target = NULL;
 				it->target_pos = you.position;
 				it->state.SetState(MS_NORMAL);
+				it->will_move.clear();
 			}
 		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_STOP),true,false,false,CL_normal);
@@ -4039,7 +4041,8 @@ void shout(char auto_)
 				it->target = NULL;
 				it->first_position = it->position;
 				//it->target_pos = you.position;
-				it->state.SetState(MS_NORMAL);
+				it->state.SetState(MS_WAIT);
+				it->will_move.clear();
 			}
 		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_WAIT),true,false,false,CL_normal);
@@ -4053,6 +4056,7 @@ void shout(char auto_)
 			if (it->isLive() && it->isUserAlly() && env[current_level].isInSight(it->position))
 			{
 				it->state.SetState(MS_FOLLOW);
+				it->will_move.clear();
 			}
 		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_COME),true,false,false,CL_normal);

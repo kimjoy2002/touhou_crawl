@@ -173,6 +173,8 @@ enum search_type
 {
 	ST_NORMAL=0,
 	ST_SEARCH,
+	ST_MONSTER_NORMAL_CANPASSWALL,
+	ST_MONSTER_NORMAL_CANDOOR,
 	ST_MONSTER_NORMAL,
 	ST_MAP
 };
@@ -845,7 +847,8 @@ enum monster_state
 	MS_ATACK,
 	MS_REST,
 	MS_FOLLOW,
-	MS_FIND
+	MS_FIND,
+	MS_WAIT
 };
 
 enum monster_state_simple //표시용 상태
@@ -909,7 +912,8 @@ enum monster_state_input
 	MSI_NOISE, //소음
 	MSI_REST,//휴식
 	MSI_WAKE,//깸
-	MSI_SEARCH //탐색
+	MSI_SEARCH, //탐색
+	MSI_FOLLOW //플레이어를 추종
 };
 
 enum monster_speak_type

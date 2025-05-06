@@ -3416,7 +3416,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
 				{
-					if(((*it).isUnique() || (*it).image == &img_mons_default)) {
+					if((((*it).isUnique() && !(*it).isUserAlly() ) || (*it).image == &img_mons_default)) {
 
 						RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
 						rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;

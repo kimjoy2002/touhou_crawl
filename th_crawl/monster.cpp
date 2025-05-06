@@ -157,7 +157,8 @@ void monster::SaveDatas(FILE *fp)
 	{
 		SaveData<spell>(fp,(*it));
 	}
-	SaveData<bool>(fp, random_spell);	
+	SaveData<bool>(fp, random_spell);
+	SaveData<bool>(fp, wait);
 	
 	SaveData<int>(fp, item_lists.size());
 	for(auto it=item_lists.begin();it!=item_lists.end();it++)
@@ -281,7 +282,8 @@ void monster::LoadDatas(FILE *fp)
 		LoadData<spell>(fp, temp);
 		spell_lists.push_back(temp);
 	}
-	LoadData<bool>(fp, random_spell);	
+	LoadData<bool>(fp, random_spell);
+	LoadData<bool>(fp, wait);
 	
 	size_=0;
 	LoadData<int>(fp, size_);
@@ -1870,7 +1872,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 	}
 
 	if(!(flag & M_FLAG_NONE_MOVE) &&
-		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/))
+		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/, id == MON_SEIGA))
 	{
 		if(env[current_level].isSmokePos(position.x+x_mov,position.y+y_mov))
 		{
@@ -1975,7 +1977,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 			}
 		}
-		if(flag & M_FLAG_CANT_GROUND && !env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+		if(flag & M_FLAG_CANT_GROUND && !env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
 		{
 			if(s_confuse)
 			{
@@ -2068,7 +2070,7 @@ int monster::longmove()
 		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<8;i++)
 		{
-			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND)) //나는 몹은 2번째인자
+			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA)) //나는 몹은 2번째인자
 			{
 				direction = dq[i];
 			}
@@ -2208,8 +2210,14 @@ int monster::atkmove(int is_sight, bool only_move)
 		//}
 		else if(target_pos == position/* && !target*/)
 		{
-			target_pos = target_pos+c;
-			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+			if(target && memory_time) {
+				//메모리 타임에 따른 위치 갱신
+				target_pos = target->position;
+			} else {
+				target_pos = target_pos+c;
+			}
+
+			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
 			{ //벽에 막히면 8방향 랜덤으로 방향틈
 				deque<int> dq;
 				for(int i=0;i<8;i++)
@@ -2217,7 +2225,7 @@ int monster::atkmove(int is_sight, bool only_move)
 				rand_shuffle(dq.begin(),dq.end());
 				for(int i=0;i<8;i++)
 				{
-					if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+					if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
 					{
 						target_pos = inttodirec(dq[i],position.x,position.y);
 						break;
@@ -2482,7 +2490,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	return true;
 }
 int monster::action(int delay_)
-{	
+{
 	bool is_sight = false;
 	if(env[current_level].isInSight(position, true))
 	{
@@ -2942,7 +2950,11 @@ int monster::action(int delay_)
 						CheckSightNewTarget();
 					if(!target)
 					{
-						state.SetState(MS_FOLLOW);
+						if(wait) {
+							state.SetState(MS_WAIT);
+						} else {
+							state.SetState(MS_FOLLOW);
+						}
 					}
 				}
 				else
@@ -2961,29 +2973,43 @@ int monster::action(int delay_)
 					state.SetState(MS_FOLLOW);
 				}
 			}
-			if(state.GetState() == MS_ATACK && isUserAlly() && (target == NULL ||target == &you))
+			if(state.GetState() == MS_ATACK && isUserAlly() && (target == NULL || target == &you))
 			{
 				target = &you;
-				state.SetState(MS_FOLLOW);
+				if(wait) {
+					state.SetState(MS_WAIT);
+				} else {
+					state.SetState(MS_FOLLOW);
+				}
 			}
 			if((flag & M_FLAG_SUMMON)  && isUserAlly() && !env[current_level].isInSight(target_pos, true) )
 			{
-				state.SetState(MS_FOLLOW);
+				if(wait) {
+					state.SetState(MS_WAIT);
+				} else {
+					state.SetState(MS_FOLLOW);
+				}
+			}
 
+
+		  	search_type search_type_ = (flag & M_FLAG_OPEN_DOOR)?ST_MONSTER_NORMAL_CANDOOR:ST_MONSTER_NORMAL;
+			if(id == MON_SEIGA) {
+				search_type_ = ST_MONSTER_NORMAL_CANPASSWALL;
 			}
 
 			switch (state.GetState())
 			{
 			case MS_NORMAL:
 			default:
+				wait = false;
 				longmove();
-				if (flag & M_FLAG_SHIELD || isUserAlly()) {
+				if (flag & M_FLAG_SHIELD) {
 					if (distan_coord(position, first_position) > 4 * 4)
 					{
 						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
 						stack<coord_def> will_move_;
 						will_move.clear();
-						if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
+						if (PathSearch(position, first_position, will_move_, search_type_, current_level, isFly(), isSwim()))
 						{
 							while (!will_move_.empty())
 							{
@@ -3006,7 +3032,11 @@ int monster::action(int delay_)
 			case MS_REST:
 				if (isUserAlly())
 				{
-					state.SetState(MS_FOLLOW);
+					if(wait) {
+						state.SetState(MS_WAIT);
+					} else {
+						state.SetState(MS_FOLLOW);
+					}
 					break;
 				}
 				target = NULL;
@@ -3039,6 +3069,7 @@ int monster::action(int delay_)
 				}
 				else if (is_sight && you.isView(this) && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
+					will_move.clear();
 					if (!s_fear)
 						CheckSightNewTarget();
 					//FoundTarget(&you,FoundTime());
@@ -3072,6 +3103,20 @@ int monster::action(int delay_)
 					{
 						if (!s_fear)
 							CheckSightNewTarget();
+
+						if(will_move.empty() && target != nullptr && id != MON_SEIGA) { //세이가는 일직선!
+							stack<coord_def> will_move_;
+							will_move.clear();
+							if (PathSearch(position, target->position, will_move_, search_type_, current_level, isFly(), isSwim()))
+							{
+								while (!will_move_.empty())
+								{
+									will_move.push_front(will_move_.top());
+									will_move_.pop();
+								}
+							}
+						}
+
 						memory_time--;
 					}
 					else
@@ -3082,7 +3127,7 @@ int monster::action(int delay_)
 							//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
 							stack<coord_def> will_move_;
 							will_move.clear();
-							if (PathSearch(position, first_position, will_move_, ST_MONSTER_NORMAL, current_level, isFly(), isSwim()))
+							if (PathSearch(position, first_position, will_move_, search_type_, current_level, isFly(), isSwim()))
 							{
 								while (!will_move_.empty())
 								{
@@ -3103,7 +3148,21 @@ int monster::action(int delay_)
 				{
 					memory_time = FoundTime();
 				}
-				if (state.GetState() != MS_FIND)
+				if(!will_move.empty()) {
+					coord_def c_ = will_move.back();
+					will_move.pop_back();
+					int success_ = MoveToPos(c_, false);
+					if (success_ != 2) //이동실패
+					{
+						will_move.push_back(c_);
+					}
+					if (!is_sight && env[current_level].isInSight(position, true))
+					{ //플레이어를 발견하게된다.
+						if (target == &you)
+							FoundTarget(target, FoundTime());
+					}
+				}
+				else if (state.GetState() != MS_FIND)
 				{
 					atkmove(is_sight);
 					if (!is_sight && env[current_level].isInSight(position, true))
@@ -3114,6 +3173,7 @@ int monster::action(int delay_)
 				}
 				break;
 			case MS_FOLLOW:
+				wait = false;
 				if(you.s_timestep && sm_info.parent_map_id < 0)
 				{	
 					state.StateTransition(MSI_LOST);
@@ -3135,15 +3195,48 @@ int monster::action(int delay_)
 						state.StateTransition(MSI_LOST);
 					}
 				}
-				else
-					MoveToPos(you.position, false);				
+				else {
+					//1단계: 시야에 안보이면 바로 찾기 모드로 이행
+					if(!is_sight) {
+						stack<coord_def> will_move_;
+						will_move.clear();
+						if (PathSearch(position, you.position, will_move_, search_type_, current_level, isFly(), isSwim()))
+						{
+							while (!will_move_.empty())
+							{
+								will_move.push_front(will_move_.top());
+								will_move_.pop();
+							}
+							state.StateTransition(MSI_SEARCH);
+						} else {
+							state.StateTransition(MSI_LOST); //길을 찾지못한다면... 헤메일예정
+						}
+					} else {
+						MoveToPos(you.position, false);	
+					}
+				}
 				sightcheck(is_sight);
 				break;
 			case MS_FIND:
 				{
 					if (will_move.empty())
 					{
-						state.StateTransition(MSI_REST);
+						if(isUserAlly()) {
+							stack<coord_def> will_move_;
+							will_move.clear();
+							if (PathSearch(position, you.position, will_move_, search_type_, current_level, isFly(), isSwim()))
+							{
+								while (!will_move_.empty())
+								{
+									will_move.push_front(will_move_.top());
+									will_move_.pop();
+								}
+							} else {
+								state.StateTransition(MSI_LOST); //길을 찾지못한다면... 헤메일예정
+							}
+						} else {
+							state.StateTransition(MSI_REST);
+						}
 					}
 					else {
 						coord_def c_ = will_move.back();
@@ -3151,9 +3244,15 @@ int monster::action(int delay_)
 						int success_ = MoveToPos(c_, false);
 						if (success_ != 2) //이동실패
 						{
-							will_move.push_back(c_);
+							if(randA(9))
+								will_move.push_back(c_);
+							else
+								will_move.clear();//가끔씩은 포기(자연스러운 움직임을 위해
 						}
-						if (is_sight && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
+						if(isUserAlly()) {
+							sightcheck(is_sight);
+						}
+						else if (is_sight && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
 						{
 							FoundTarget(&you, FoundTime());
 							int percent_ = 1;
@@ -3171,6 +3270,40 @@ int monster::action(int delay_)
 					}
 				}
 				break;
+			case MS_WAIT:{
+				wait = true;
+				if(!will_move.empty()) {
+					coord_def c_ = will_move.back();
+					will_move.pop_back();
+					int success_ = MoveToPos(c_, false);
+					if (success_ != 2) //이동실패
+					{
+						will_move.clear();
+					}
+				}
+				else {
+					longmove();
+					if (distan_coord(position, first_position) > 4 * 4)
+					{
+						//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
+						stack<coord_def> will_move_;
+						will_move.clear();
+						if (PathSearch(position, first_position, will_move_, search_type_, current_level, isFly(), isSwim()))
+						{
+							while (!will_move_.empty())
+							{
+								will_move.push_front(will_move_.top());
+								will_move_.pop();
+							}
+						}
+						else {
+							first_position = position;
+						}
+					}
+				}
+				CheckSightNewTarget();
+				break;
+			}
 			}
 		}
 		special_action(is_sight, false);
@@ -3224,11 +3357,16 @@ int monster::action(int delay_)
 }
 void monster::sightcheck(bool is_sight_)
 {	
-	if(!isUserAlly() )
+	if(!isUserAlly())
 	{
 		if(is_sight_ && you_detect())//시야 안에 있을때 스텔스 체크
 		{
 			FoundTarget(&you, FoundTime());
+		}
+	} else if(isUserAlly() && (state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)) {
+		if(is_sight_)
+		{
+			state.StateTransition(MSI_FOLLOW);
 		}
 	}
 }
@@ -4118,6 +4256,7 @@ bool monster::AttackedTarget(unit *order_)
 		}
 
 		state.StateTransition(MSI_ATACKED);
+		will_move.clear();
 	}
 	else
 	{

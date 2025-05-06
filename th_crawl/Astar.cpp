@@ -57,10 +57,10 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 {
 	coord_def ano_goal = start;
 	bool is_mapping = env[floor_].isMapping(goal.x,goal.y);
-	bool is_explore = (env[floor_].isExplore(goal.x,goal.y) || type >= ST_MONSTER_NORMAL || type == ST_SEARCH);
+	bool is_explore = (env[floor_].isExplore(goal.x,goal.y) || type >= ST_MONSTER_NORMAL_CANPASSWALL || type == ST_SEARCH);
 	bool is_passable_door = (env[floor_].isDoor(goal.x,goal.y) && type < ST_MONSTER_NORMAL);//열수있는 문이냐
 	bool is_move = (env[floor_].isMove(goal.x,goal.y,alway_fly_,alway_swim_) || type == ST_SEARCH);
-	bool is_block = env[floor_].isBlockPos(goal.x, goal.y) && type < ST_MONSTER_NORMAL;
+	bool is_block = env[floor_].isBlockPos(goal.x, goal.y) && type < ST_MONSTER_NORMAL_CANPASSWALL;
 	if(!((is_explore || is_mapping) && (is_move || is_passable_door)  && !is_block))
 	{
 		return false;
@@ -125,10 +125,10 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 				bool is_open = (newnode->opcl & 1);
 				bool is_close = (newnode->opcl & 2);
 				bool is_mapping = env[floor_].isMapping(it->x,it->y);
-				bool is_explore = (env[floor_].isExplore(it->x,it->y) || type >= ST_MONSTER_NORMAL);
+				bool is_explore = (env[floor_].isExplore(it->x,it->y) || type >= ST_MONSTER_NORMAL_CANPASSWALL);
 				bool is_door = (env[floor_].isDoor(it->x,it->y) && type < ST_MONSTER_NORMAL);//열수있는 문이냐
-				bool is_forbid = env[floor_].isForbidZone(it->x, it->y) && type < ST_MONSTER_NORMAL;
-				bool is_block = env[floor_].isBlockPos(it->x, it->y) && type < ST_MONSTER_NORMAL;
+				bool is_forbid = env[floor_].isForbidZone(it->x, it->y) && type < ST_MONSTER_NORMAL_CANPASSWALL;
+				bool is_block = ( env[floor_].isBlockPos(it->x, it->y) && type <= ST_MONSTER_NORMAL) && type != ST_MONSTER_NORMAL_CANPASSWALL;
 				
 				bool is_move = ((is_explore || is_mapping) && (env[floor_].isMove(it->x,it->y,alway_fly_,alway_swim_) || is_door) && !is_forbid && !is_block);
 				if(!is_move)

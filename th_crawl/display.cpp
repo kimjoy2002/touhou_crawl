@@ -1720,6 +1720,8 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 }
 
+int g_tile_size = 32;
+
 void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	int sight_x = option_mg.getTileMaxX();
@@ -1729,10 +1731,576 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	GetClientRect(hwnd, &windowSize);
 	scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidth();
 	scale_y = (windowSize.bottom - windowSize.top) / (float)option_mg.getHeight();
+	int info_minX = 32*(sight_x*2)+50;
+	int calc_tile_size = g_tile_size;
+	float calc_tile_scale = g_tile_size/32.0f;
+	sight_x = (int)(sight_x/calc_tile_scale);
+	sight_y = (int)(sight_y/calc_tile_scale+0.3f);
+	//이때부터 sight바꿀일 있으면 바꾸기
+
+
+
 	infobox.init();
+
+	{
+		int line_count = 0;
+	
+		line_count += 1; // Level + Name + Replay/Wizard Mode
+		line_count += 1; // Tribe/Job or CharName
+		line_count += 1; // God
+		line_count += 1; // HP
+		if (!you.pure_mp) line_count += 1; // MP
+		line_count += 1; // Power + EXP
+		line_count += 1; // AC/EV/SH
+		line_count += 1; // STR/DEX/INT
+	
+		// Equipment: amulet
+		if (you.equipment[ET_NECK])
+			line_count += max(1, (int)SplitStringByFontWidth(
+				you.equipment[ET_NECK]->GetName(-1, true), 28, 34).size());
+		else
+			line_count += 1;
+	
+		// Equipment: weapon
+		if (you.equipment[ET_WEAPON])
+			line_count += max(1, (int)SplitStringByFontWidth(
+				you.equipment[ET_WEAPON]->GetName(-1, true), 28, 34).size());
+		else
+			line_count += 1;
+	
+		// Equipment: throw_weapon
+		if (you.throw_weapon)
+			line_count += max(1, (int)SplitStringByFontWidth(
+				you.throw_weapon->GetName(-1, true), 28, 34).size());
+		else
+			line_count += 1;
+	
+		line_count += 1; // 층/턴 표시
+	
+		buff_start_y = 10 + fontDesc.Height * line_count;
+	}
+
+
+	bool already_draw = false;
+	//텍스트 클릭용 사전 루프
+
+
+	//텍스트(위쪽에 숏로그)그리기
+	unique_ptr<vector<log_text_box>> enter_draw = make_unique<vector<log_text_box>>();
+	if(!text_log.text_list.empty() && list_draw.empty())
+	{
+		list<text_dummy*>::iterator it;
+		it = text_log.text_list.end();
+		it--;
+		int i = text_log.short_len;
+		while(i)
+		{
+			if(it == text_log.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+
+
+		float x = 0;
+		int max_length = info_minX, cuting = 0;
+		for(;it != text_log.text_list.end();)
+		{
+			if(cuting == 0 && (*it)->width > max_length) {
+				cuting = max_length/fontDesc.Width;
+			}
+
+			if(cuting > 0) {
+				vector<string> tokens = SplitStringByFontWidth((*it)->text, cuting, max_length/fontDesc.Width);
+				bool first_ = true;
+				for(string& token : tokens) {
+					if(!first_) {
+						list_draw.push_back(std::move(enter_draw));
+						enter_draw = make_unique<vector<log_text_box>>(); 
+						x = 0;
+					}
+					first_ = false;
+					enter_draw->push_back(log_text_box(x, ConvertUTF8ToUTF16(token), (*it)->color, (*it)->clickable));
+					cuting = PrintCharWidth(token);
+				}
+			} else {
+				enter_draw->push_back(log_text_box(x, (*it)->text, (*it)->color, (*it)->clickable));
+				cuting = 0;
+			}
+
+			if((*it)->enter)
+			{
+				x = 0;
+				list_draw.push_back(std::move(enter_draw));
+				enter_draw = make_unique<vector<log_text_box>>(); 
+				cuting = 0;
+				it++;
+			}
+			else
+			{
+				x+=cuting>0?(cuting*fontDesc.Width):((*it)->width);
+				cuting = 0;
+				it++;
+				if(it != text_log.text_list.end() && (x+(*it)->width) > max_length) {
+					if(max_length - x < 30) { //너무 작은 경우 그냥 다음으로 보냄
+						x = 0;
+						list_draw.push_back(std::move(enter_draw));
+						enter_draw = make_unique<vector<log_text_box>>(); 
+					} else { //남는 경우엔 반씩 잘라서 남은거만 전달
+						cuting = (max_length - x)/fontDesc.Width;
+					}
+				}
+			}
+		}
+		if(enter_draw != nullptr) {
+			list_draw.push_back(std::move(enter_draw));
+		}
+
+		while(list_draw.size() > text_log.short_len) {
+			list_draw.pop_front();
+		}
+	}
+
+	
+	float y = 0;
+	for(auto& draw_vector : list_draw) {
+		for(auto& draw_dummy : *draw_vector) {
+			if(draw_dummy.clickable > 0) {
+				RECT rc2={ (LONG)draw_dummy.start_x, (LONG)y, (LONG)(draw_dummy.start_x+PrintCharWidth(draw_dummy.text)*fontDesc.Width), (LONG)(y+fontDesc.Height)};
+				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
+					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
+					if(isClicked(LEFT_CLICK)) {
+						MSG msg;
+						msg.message = WM_CHAR;
+						msg.wParam = draw_dummy.clickable;
+						g_keyQueue->push(InputedKey(msg));
+					}
+					already_draw = true;
+				}
+			}
+		}
+		y+=fontDesc.Height;
+	}
+
+
+	//바탕 타일 그리기
+	int x_ = you.GetDisplayPos().x-sight_x;
+	int y_ = you.GetDisplayPos().y-sight_y;
+	int tile_x_offset = 4.0f+calc_tile_size/2;
+	for(int i=0;i<(sight_x*2+1);i++)
+	{
+		for(int j=0;j<(sight_y*2+1);j++)
+		{
+			if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
+			{
+				if((env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_)))
+				{	
+					bool sight = true;	
+					int length_ = (i+x_-you.position.x)*(i+x_-you.position.x)+(j+y_-you.position.y)*(j+y_-you.position.y);
+					if(length_<3)
+						length_ = 1;
+					if(spell_sight)
+					{
+							
+						if(sight_type == 1 && length_ >(spell_sight+1)*(spell_sight+1)-1)
+							sight = false;
+						else if(sight_type == 2 && spell_sight<max(abs(i+x_-you.position.x) ,abs(j+y_-you.position.y)))
+						{
+							sight = false;
+						}
+					}
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset, calc_tile_scale, you.turn, info_minX, sight, false, !already_draw);
+				}
+				else {
+					int x = i*calc_tile_size + tile_x_offset;
+					int y = j*calc_tile_size + tile_x_offset;
+					if ( MousePoint.x < info_minX &&
+						MousePoint.x > x - calc_tile_scale*16 && MousePoint.x <= x + calc_tile_scale*16 &&
+					MousePoint.y > y - calc_tile_scale*16 && MousePoint.y <= y+ calc_tile_scale*16
+					)
+					{
+						img_effect_select.draw(pSprite, x, y,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(80, 0, 255, 255));
+						if(isClicked(LEFT_CLICK)) {
+							g_keyQueue->push(InputedKey(MKIND_MAP,i + x_,j + y_));
+						}
+						coord_def tile_coorddef(i + x_, j + y_); 				
+						if(DisplayManager.prev_map_view != tile_coorddef) {
+							DisplayManager.prev_map_view = tile_coorddef;
+							g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,i + x_,j + y));
+						}
+					}
+				}
+				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
+				{
+					if (env[current_level].dgtile[i + x_][j + y_].forbid_count2)
+						explore_forbid_big.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(120, 255, 255, 255));
+					else if (env[current_level].dgtile[i + x_][j + y_].forbid_count)
+						explore_forbid_small.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(80, 255, 255, 255));
+				}
+			}
+		}
+	}
+	
+	coord_def offset_ = coord_def();
+	if(env[current_level].isBamboo())
+	{
+		offset_.x = DG_MAX_X/2 - you.position.x;
+		offset_.y = DG_MAX_Y/2 - you.position.y;
+	}
+	int dot_start_y = buff_start_y + 2*fontDesc.Height;
+	int dot_size = 0;
+	int greed_max_x = 10;
+	int greed_max_y = 8;
+	int max_minimap_y = buff_start_y + 2*fontDesc.Height;
+
+	for(int dot_size_= 1; dot_size_ <=4; dot_size_++) {
+		int start_y = option_mg.getHeight() - (32*greed_max_y+10);
+		if(start_y > GetDotY(dot_start_y, DG_MAX_Y, dot_size_)) {
+			dot_size = dot_size_;
+			max_minimap_y = GetDotY(dot_start_y, DG_MAX_Y, dot_size_);
+		}
+	}
+
+	//미니맵 그리기
+	if(dot_size > 0)
+	{
+		for(int i=0;i<DG_MAX_X;i++)
+		{
+			for(int j=0;j<DG_MAX_Y;j++)
+			{
+				if(env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))
+				{
+					int x_ = GetDotX(info_minX,i+offset_.x,dot_size);
+					int y_ = GetDotY(dot_start_y,j+offset_.y,dot_size);
+					switch(env[current_level].dgtile[i][j].GetDot())
+					{
+					case DOT_FLOOR:
+						if(env[current_level].isExplore(i,j))
+							dot_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						else
+							dot_mapping_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_WALL:
+						if(env[current_level].isExplore(i,j))
+							dot_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						else
+							dot_mapping_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_DOOR:
+						dot_door.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_UP:
+						dot_up.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_DOWN:
+						dot_down.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_TEMPLE:
+						dot_temple.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					case DOT_SEA:
+						dot_sea.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+			if (MousePoint.x >= GetDotX(info_minX,offset_.x,dot_size) && MousePoint.x < GetDotX(info_minX,offset_.x,dot_size) + DG_MAX_X*dot_size &&
+				MousePoint.y >= GetDotY(dot_start_y,offset_.y,dot_size) && MousePoint.y <= GetDotY(dot_start_y,offset_.y,dot_size) + DG_MAX_Y*dot_size )
+			{
+				int i=0, j=0;
+				i = (MousePoint.x-GetDotX(info_minX,offset_.x,dot_size))/dot_size;
+				j = (MousePoint.y-GetDotY(dot_start_y,offset_.y,dot_size))/dot_size;
+				if(i < 0)
+					i = 0;
+				if(i >= DG_MAX_X)
+					i = DG_MAX_X - 1;
+				if(j < 0)
+					j = 0;
+				if(j >= DG_MAX_Y)
+					j = DG_MAX_Y - 1;
+				if(isClicked(LEFT_CLICK) && (env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))) {
+					g_keyQueue->push(InputedKey(MKIND_MAP,i,j));
+				}
+			}
+
+		}
+
+	}
+
+	string mouseInfo;
+	D3DCOLOR mouseColor = CL_normal;
+
+	list<item>::iterator floor_items = env[current_level].item_list.end(); 
+
+	//아이템그리기
+	{
+		list<item>::iterator it; 
+		bool many_item = false;
+		bool auto_pick_ = false;
+		for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
+		{
+			list<item>::iterator temp = it++; 
+			
+			if((*temp).position == you.position && floor_items == env[current_level].item_list.end()) {
+				floor_items = temp;
+			}
+			if(it == env[current_level].item_list.end() || (*temp).position != (*it).position)
+			{
+				if(env[current_level].isInSight((*temp).position))
+				{
+					if(abs((*temp).position.x - x_-sight_x)<=sight_x && abs((*temp).position.y - y_-sight_y)<=sight_y)
+					{
+						if((*temp).isautopick())
+							auto_pick_ = true;
+						(*temp).draw(pSprite,pfont,((*temp).position.x-x_)*calc_tile_size+tile_x_offset,((*temp).position.y-y_)*calc_tile_size+tile_x_offset, calc_tile_scale);
+
+						int xx =((*temp).position.x-x_)*calc_tile_size +tile_x_offset;
+						int yy = ((*temp).position.y - y_)*calc_tile_size+tile_x_offset;
+						if (MousePoint.x <= info_minX &&
+							MousePoint.x >  xx - calc_tile_size/2 && MousePoint.x <= xx + calc_tile_size/2 &&
+								MousePoint.y > yy - calc_tile_size/2 && MousePoint.y <= yy + calc_tile_size/2){
+							mouseInfo = (*temp).GetName();
+							mouseColor = (*temp).item_color();
+						}
+
+
+
+						if(many_item)
+						{
+							if(!env[current_level].isMonsterPos((*temp).position.x,(*temp).position.y))
+							{
+								img_state_wardering.draw(pSprite,((*temp).position.x-x_)*calc_tile_size+tile_x_offset,((*temp).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,255);
+							}
+						}
+						if(auto_pick_)
+						{
+							unit* unit_ = env[current_level].isMonsterPos((*temp).position.x, (*temp).position.y);
+							if(!unit_ || (!unit_->isView()))
+							{
+								img_effect_auto_pick.draw(pSprite, ((*temp).position.x - x_)*calc_tile_size + tile_x_offset, ((*temp).position.y - y_)*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 255);
+							}
+						}
+					}
+					if(dot_size > 0)
+						dot_item.draw(pSprite, GetDotX(info_minX, (*temp).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*temp).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+				}
+				many_item = false;
+				auto_pick_ = false;
+			}
+			else
+			{
+				many_item = true;
+				if (it == env[current_level].item_list.end() && (*temp).isautopick())
+					auto_pick_ = true;
+			}
+		}
+	}
+
+
+	//바닥 효과 그리기
+	{
+	list<floor_effect>::iterator it;
+	for (it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end(); it++)
+	{
+		if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+		{
+			if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
+			{
+				it->draw(pSprite, pfont, ((*it).position.x - x_)*calc_tile_size + tile_x_offset, ((*it).position.y - y_)*calc_tile_size + tile_x_offset,calc_tile_scale);
+			}
+		}
+	}
+	}
+
+	//연기그리기
+	{
+		list<smoke>::iterator it;
+		for (it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end(); it++)
+		{
+			if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
+			{
+				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
+				{
+					it->draw(pSprite, pfont, ((*it).position.x - x_)*calc_tile_size + tile_x_offset, ((*it).position.y - y_)*calc_tile_size + tile_x_offset, calc_tile_scale);
+				}
+			}
+		}
+	}
+
+	//플레이어 그리기
+	{
+		if (!you.s_timestep && abs(you.position.x - x_ - sight_x) <= sight_x && abs(you.position.y - y_ - sight_y) <= sight_y)
+		{
+			you.Draw(pSprite, (you.position.x - x_)*calc_tile_size + tile_x_offset, (you.position.y - y_)*calc_tile_size + tile_x_offset,calc_tile_scale);
+			if (you.GetHp() != you.GetMaxHp())
+			{
+				float max_rate_ = 32.0f;
+
+				int temp1_ = max(0, you.GetHp()) * calc_tile_size / you.GetMaxHp();
+				int hp_rate_ = (max_rate_ * temp1_) / calc_tile_size;
+
+
+				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * calc_tile_size / you.GetMaxHp();
+				int p_hp_rate_ = (max_rate_ * temp2_) / calc_tile_size;
+
+				dot_floor.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
+				dot_monster.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, p_hp_rate_, 2.0f*calc_tile_scale, 255);
+				dot_item.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, hp_rate_, 2.0f*calc_tile_scale, 255);
+			}
+			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
+			{
+				float max_rate_ = calc_tile_size;
+
+				int temp1_ = max(0, you.GetMp()) * calc_tile_size / you.GetMaxMp();
+				float mp_rate_ = (max_rate_ * temp1_)/ calc_tile_size;
+
+				dot_floor.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
+				dot_up.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, mp_rate_, 2.0f*calc_tile_scale, 255);
+			}
+
+		}
+		if(dot_size > 0)
+			dot_player.draw(pSprite, GetDotX(info_minX, you.position.x + offset_.x,dot_size), GetDotY(dot_start_y,you.position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+	}
+
+
+	//몹그리기
+	{
+		vector<monster>::iterator it;
+
+		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+		{
+			if ((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
+			{
+				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
+				{
+					(*it).draw(pSprite, pfont, ((*it).position.x - x_)*calc_tile_size + tile_x_offset, ((*it).position.y - y_)*calc_tile_size + tile_x_offset,calc_tile_scale);
+				}
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					if(dot_size > 0) {
+						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+					}
+				}
+			}
+			else if(it->isLive() &&	you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3
+				&& GetPositionGap((*it).position.x, (*it).position.y, you.position.x, you.position.y) <= satori_sight()
+				)
+			{
+				if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
+				{
+					(*it).simple_draw(pSprite,pfont,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,calc_tile_scale);
+				}
+				if (!((*it).flag & M_FLAG_UNHARM))
+				{
+					if(dot_size > 0) {
+						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+					}
+				}
+			}
+		}
+	}
+	//그림자 그리기
+	{
+		list<shadow>::iterator it;
+		
+		for(it = env[current_level].shadow_list.begin(); it != env[current_level].shadow_list.end(); it++)
+		{
+			if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
+			{
+				if(!env[current_level].isInSight((*it).position)) 
+				{
+					(*it).image->draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(128,128,128));
+				}
+			}
+			if(dot_size > 0) {
+				switch((*it).type)
+				{
+				case SWT_MONSTER:
+					if (!(*it).unharm) {
+						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+					}
+					break;
+				case SWT_ITEM:
+					dot_item.draw(pSprite,GetDotX(info_minX, (*it).position.x+offset_.x,dot_size),GetDotY(dot_start_y,(*it).position.y+offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+					break;
+				}
+			}
+		}
+	}
+
+	//안개그리기
+	if(you.s_weather >= 1 && you.s_weather_turn > 0)
+	{
+		for (int i = 0; i < (sight_x*2+1); i++)
+		{
+			for (int j = 0; j < (sight_y*2+1); j++)
+			{
+				if (i + x_ >= 0 && j + y_ >= 0 && i + x_ < DG_MAX_X && j + y_ < DG_MAX_Y)
+				{
+					if (env[current_level].isSight(coord_def(i + x_, j + y_)) && env[current_level].isInSight(coord_def(i + x_, j + y_)))
+					{
+						switch (you.s_weather) {
+						case 1:
+							img_effect_fog.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(100, 255, 255, 255));
+							break;
+						case 2:
+							img_effect_rain.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(50, 255, 255, 255));
+							break;
+						case 3:
+							img_effect_sun.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(20, 255, 255, 255));
+							break;
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+	//이펙트그리기
+	{
+		list<effect>::iterator it;		
+		for(it = env[current_level].effect_list.begin(); it != env[current_level].effect_list.end(); it++)
+		{
+			if((*it).over_sight || env[current_level].isInSight((*it).position))
+			{
+				if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
+				{
+					(*it).image->draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 255);
+				}
+			}
+		}
+	}
+
+	if(you.search)
+	{
+		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*calc_tile_size+tile_x_offset,(you.search_pos.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(255,255,255));
+	}
+
+	{ //테두리
+		if(!env[current_level].isBamboo() && dot_size > 0) {
+			sight_rect.draw(pSprite,GetDotX(info_minX, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
+		}
+	}
+
+
+
+
+
 	{
 		int i=0;
-		RECT rc={32*(sight_x*2)+50, 10, option_mg.getWidth(), option_mg.getHeight()};
+		RECT rc={info_minX, 10, option_mg.getWidth(), option_mg.getHeight()};
 		ss.str("");
 		ss.clear();
 		ss << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.level)));
@@ -1742,7 +2310,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		
 		if(ReplayClass.play)
 		{
-			rc.left = 32*(sight_x*2)+180;
+			rc.left += fontDesc.Width*(2 + PrintCharWidth(you.user_name));
 			ss.str("");
 			ss.clear();
 			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_REPLAY_MODE) << "*";
@@ -1750,7 +2318,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 		else if(wiz_list.wizard_mode == 1)
 		{
-			rc.left = 32*(sight_x*2)+180;
+			rc.left += fontDesc.Width*(2 + PrintCharWidth(you.user_name));
 			ss.str("");
 			ss.clear();
 			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*";
@@ -1758,7 +2326,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 		else if(wiz_list.wizard_mode == 2)
 		{
-			rc.left = 32*(sight_x*2)+180;
+			rc.left += fontDesc.Width*(2 + PrintCharWidth(you.user_name));
 			ss.str("");
 			ss.clear();
 			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*";			
@@ -1769,7 +2337,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 		rc.top += fontDesc.Height;
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 		if(you.char_type == UNIQ_START_NONE) {
 			string tribe_string = LocalzationManager::locString(tribe_type_string[you.tribe]);
 			DrawTextUTF8(pfont,pSprite,tribe_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -1802,7 +2370,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.');
 		}
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 		rc.top += fontDesc.Height;
 
 		ss.str("");
@@ -1831,7 +2399,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				rc.left += fontDesc.Width;
 			}
 		}
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 
 
 		rc.top += fontDesc.Height;
@@ -1857,7 +2425,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 			rc.top += fontDesc.Height;
 		}
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 
 
 
@@ -1893,7 +2461,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		{
 			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 		}
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 
 
 		rc.top += fontDesc.Height;
@@ -1944,7 +2512,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 		rc.top += fontDesc.Height;
 
 		ss.str("");
@@ -2032,7 +2600,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				you.s_stat_boost==3?CL_white_puple:
 				(you.s_int != you.m_int)?CL_warning:CL_STAT;
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,color_);
-			rc.left = 32*(sight_x*2)+50;
+			rc.left = info_minX;
 		}
 
 		rc.top += fontDesc.Height;
@@ -2055,14 +2623,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,_item->item_color());
-				rc.left = 32*(sight_x*2)+50;
+				rc.left = info_minX;
 				rc.top +=fontDesc.Height;
 			}
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-			rc.left = 32*(sight_x*2) + 50;
+			rc.left = info_minX;
 			rc.top += fontDesc.Height;
 		}
 		
@@ -2082,14 +2650,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
-				rc.left = 32*(sight_x*2)+50;
+				rc.left = info_minX;
 				rc.top +=fontDesc.Height;
 			}
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
-			rc.left = 32*(sight_x*2)+50;
+			rc.left = info_minX;
 			rc.top +=fontDesc.Height;
 		}
 		//rc.left -= fontDesc.Width*6;
@@ -2110,14 +2678,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 			for (const string& token : tokens ) {
 				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
-				rc.left = 32*(sight_x*2)+50;
+				rc.left = info_minX;
 				rc.top +=fontDesc.Height;
 			}
 		}
 		else
 		{
 			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
-			rc.left = 32*(sight_x*2) + 50;
+			rc.left = info_minX;
 			rc.top += fontDesc.Height;
 		}
 		
@@ -2132,7 +2700,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss.clear();
 		ss << LocalzationManager::locString(LOC_SYSTEM_TURNS) << ": " << you.real_turn/10.0f << " (" << you.prev_real_turn/10.0f << ")"; 
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);	
-		rc.left = 32*(sight_x*2)+50;
+		rc.left = info_minX;
 		rc.top += fontDesc.Height;
 		buff_start_y = rc.top;
 		{ 
@@ -2611,514 +3179,6 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 		}
 	}
-	bool already_draw = false;
-	//텍스트 클릭용 사전 루프
-
-
-	//텍스트(위쪽에 숏로그)그리기
-	unique_ptr<vector<log_text_box>> enter_draw = make_unique<vector<log_text_box>>();
-	if(!text_log.text_list.empty() && list_draw.empty())
-	{
-		list<text_dummy*>::iterator it;
-		it = text_log.text_list.end();
-		it--;
-		int i = text_log.short_len;
-		while(i)
-		{
-			if(it == text_log.text_list.begin())
-				break;
-			it--;
-			if((*it)->enter)
-			{
-				i--;
-				if(i<=0)
-				{
-					it++;
-					break;
-				}
-			}
-		}
-
-
-		float x = 0;
-		int max_length = 32*(sight_x*2+1)+16, cuting = 0;
-		for(;it != text_log.text_list.end();)
-		{
-			if(cuting == 0 && (*it)->width > max_length) {
-				cuting = max_length/fontDesc.Width;
-			}
-
-			if(cuting > 0) {
-				vector<string> tokens = SplitStringByFontWidth((*it)->text, cuting, max_length/fontDesc.Width);
-				bool first_ = true;
-				for(string& token : tokens) {
-					if(!first_) {
-						list_draw.push_back(std::move(enter_draw));
-						enter_draw = make_unique<vector<log_text_box>>(); 
-						x = 0;
-					}
-					first_ = false;
-					enter_draw->push_back(log_text_box(x, ConvertUTF8ToUTF16(token), (*it)->color, (*it)->clickable));
-					cuting = PrintCharWidth(token);
-				}
-			} else {
-				enter_draw->push_back(log_text_box(x, (*it)->text, (*it)->color, (*it)->clickable));
-				cuting = 0;
-			}
-
-			if((*it)->enter)
-			{
-				x = 0;
-				list_draw.push_back(std::move(enter_draw));
-				enter_draw = make_unique<vector<log_text_box>>(); 
-				cuting = 0;
-				it++;
-			}
-			else
-			{
-				x+=cuting>0?(cuting*fontDesc.Width):((*it)->width);
-				cuting = 0;
-				it++;
-				if(it != text_log.text_list.end() && (x+(*it)->width) > max_length) {
-					if(max_length - x < 30) { //너무 작은 경우 그냥 다음으로 보냄
-						x = 0;
-						list_draw.push_back(std::move(enter_draw));
-						enter_draw = make_unique<vector<log_text_box>>(); 
-					} else { //남는 경우엔 반씩 잘라서 남은거만 전달
-						cuting = (max_length - x)/fontDesc.Width;
-					}
-				}
-			}
-		}
-		if(enter_draw != nullptr) {
-			list_draw.push_back(std::move(enter_draw));
-		}
-
-		while(list_draw.size() > text_log.short_len) {
-			list_draw.pop_front();
-		}
-	}
-
-	
-	float y = 0;
-	for(auto& draw_vector : list_draw) {
-		for(auto& draw_dummy : *draw_vector) {
-			if(draw_dummy.clickable > 0) {
-				RECT rc2={ (LONG)draw_dummy.start_x, (LONG)y, (LONG)(draw_dummy.start_x+PrintCharWidth(draw_dummy.text)*fontDesc.Width), (LONG)(y+fontDesc.Height)};
-				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
-					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
-					if(isClicked(LEFT_CLICK)) {
-						MSG msg;
-						msg.message = WM_CHAR;
-						msg.wParam = draw_dummy.clickable;
-						g_keyQueue->push(InputedKey(msg));
-					}
-					already_draw = true;
-				}
-			}
-		}
-		y+=fontDesc.Height;
-	}
-
-
-	//바탕 타일 그리기
-	int x_ = you.GetDisplayPos().x-sight_x;
-	int y_ = you.GetDisplayPos().y-sight_y;
-	for(int i=0;i<(sight_x*2+1);i++)
-	{
-		for(int j=0;j<(sight_y*2+1);j++)
-		{
-			if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
-			{
-				if((env[current_level].isExplore(i+x_,j+y_) || env[current_level].isMapping(i+x_,j+y_)))
-				{	
-					bool sight = true;	
-					int length_ = (i+x_-you.position.x)*(i+x_-you.position.x)+(j+y_-you.position.y)*(j+y_-you.position.y);
-					if(length_<3)
-						length_ = 1;
-					if(spell_sight)
-					{
-							
-						if(sight_type == 1 && length_ >(spell_sight+1)*(spell_sight+1)-1)
-							sight = false;
-						else if(sight_type == 2 && spell_sight<max(abs(i+x_-you.position.x) ,abs(j+y_-you.position.y)))
-						{
-							sight = false;
-						}
-					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*32.0f + 20.0f, j*32.0f + 20.0f, 1.0f, you.turn, sight, false, !already_draw);
-				}
-				else {
-					int x = i*32.0f + 20.0f;
-					int y = j*32.0f + 20.0f;
-					if (MousePoint.x > x - 16 && MousePoint.x <= x + 16 &&
-					MousePoint.y > y - 16 && MousePoint.y <= y+ 16
-					)
-					{
-						img_effect_select.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
-						if(isClicked(LEFT_CLICK)) {
-							g_keyQueue->push(InputedKey(MKIND_MAP,i + x_,j + y_));
-						}
-						coord_def tile_coorddef(i + x_, j + y_); 				
-						if(DisplayManager.prev_map_view != tile_coorddef) {
-							DisplayManager.prev_map_view = tile_coorddef;
-							g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,i + x_,j + y));
-						}
-					}
-				}
-				if (env[current_level].dgtile[i + x_][j + y_].flag & FLAG_FORBID)
-				{
-					if (env[current_level].dgtile[i + x_][j + y_].forbid_count2)
-						explore_forbid_big.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(120, 255, 255, 255));
-					else if (env[current_level].dgtile[i + x_][j + y_].forbid_count)
-						explore_forbid_small.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 255, 255, 255));
-				}
-			}
-		}
-	}
-	
-	coord_def offset_ = coord_def();
-	if(env[current_level].isBamboo())
-	{
-		offset_.x = DG_MAX_X/2 - you.position.x;
-		offset_.y = DG_MAX_Y/2 - you.position.y;
-	}
-	int dot_start_y = buff_start_y + 2*fontDesc.Height;
-	int dot_size = 0;
-	int greed_max_x = 10;
-	int greed_max_y = 8;
-	int max_minimap_y = buff_start_y + 2*fontDesc.Height;
-
-	for(int dot_size_= 1; dot_size_ <=4; dot_size_++) {
-		int start_y = option_mg.getHeight() - (32*greed_max_y+10);
-		if(start_y > GetDotY(dot_start_y, DG_MAX_Y, sight_y, dot_size_)) {
-			dot_size = dot_size_;
-			max_minimap_y = GetDotY(dot_start_y, DG_MAX_Y, sight_y, dot_size_);
-		}
-	}
-
-	//미니맵 그리기
-	if(dot_size > 0)
-	{
-		for(int i=0;i<DG_MAX_X;i++)
-		{
-			for(int j=0;j<DG_MAX_Y;j++)
-			{
-				if(env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))
-				{
-					int x_ = GetDotX(i+offset_.x,sight_x,dot_size);
-					int y_ = GetDotY(dot_start_y,j+offset_.y,sight_y,dot_size);
-					switch(env[current_level].dgtile[i][j].GetDot())
-					{
-					case DOT_FLOOR:
-						if(env[current_level].isExplore(i,j))
-							dot_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						else
-							dot_mapping_floor.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_WALL:
-						if(env[current_level].isExplore(i,j))
-							dot_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						else
-							dot_mapping_wall.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_DOOR:
-						dot_door.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_UP:
-						dot_up.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_DOWN:
-						dot_down.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_TEMPLE:
-						dot_temple.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					case DOT_SEA:
-						dot_sea.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
-						break;
-					default:
-						break;
-					}
-				}
-			}
-			if (MousePoint.x >= GetDotX(offset_.x,sight_x,dot_size) && MousePoint.x < GetDotX(offset_.x,sight_x,dot_size) + DG_MAX_X*dot_size &&
-				MousePoint.y >= GetDotY(dot_start_y,offset_.y,sight_y,dot_size) && MousePoint.y <= GetDotY(dot_start_y,offset_.y,sight_y,dot_size) + DG_MAX_Y*dot_size )
-			{
-				int i=0, j=0;
-				i = (MousePoint.x-GetDotX(offset_.x,sight_x,dot_size))/dot_size;
-				j = (MousePoint.y-GetDotY(dot_start_y,offset_.y,sight_y,dot_size))/dot_size;
-				if(i < 0)
-					i = 0;
-				if(i >= DG_MAX_X)
-					i = DG_MAX_X - 1;
-				if(j < 0)
-					j = 0;
-				if(j >= DG_MAX_Y)
-					j = DG_MAX_Y - 1;
-				if(isClicked(LEFT_CLICK) && (env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))) {
-					g_keyQueue->push(InputedKey(MKIND_MAP,i,j));
-				}
-			}
-
-		}
-
-	}
-
-	string mouseInfo;
-	D3DCOLOR mouseColor = CL_normal;
-
-	list<item>::iterator floor_items = env[current_level].item_list.end(); 
-
-	//아이템그리기
-	{
-		list<item>::iterator it; 
-		bool many_item = false;
-		bool auto_pick_ = false;
-		for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
-		{
-			list<item>::iterator temp = it++; 
-			
-			if((*temp).position == you.position && floor_items == env[current_level].item_list.end()) {
-				floor_items = temp;
-			}
-			if(it == env[current_level].item_list.end() || (*temp).position != (*it).position)
-			{
-				if(env[current_level].isInSight((*temp).position))
-				{
-					if(abs((*temp).position.x - x_-sight_x)<=sight_x && abs((*temp).position.y - y_-sight_y)<=sight_y)
-					{
-						if((*temp).isautopick())
-							auto_pick_ = true;
-						(*temp).draw(pSprite,pfont,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f);
-
-						if (MousePoint.x >  ((*temp).position.x-x_)*32.0f +4 && MousePoint.x <= ((*temp).position.x-x_)*32.0f + 36 &&
-								MousePoint.y > ((*temp).position.y - y_)*32.0f+4 && MousePoint.y <= ((*temp).position.y-y_)*32.0f + 36){
-							mouseInfo = (*temp).GetName();
-							mouseColor = (*temp).item_color();
-						}
-
-
-
-						if(many_item)
-						{
-							if(!env[current_level].isMonsterPos((*temp).position.x,(*temp).position.y))
-							{
-								img_state_wardering.draw(pSprite,((*temp).position.x-x_)*32.0f+20.0f,((*temp).position.y-y_)*32.0f+20.0f,255);
-							}
-						}
-						if(auto_pick_)
-						{
-							unit* unit_ = env[current_level].isMonsterPos((*temp).position.x, (*temp).position.y);
-							if(!unit_ || (!unit_->isView()))
-							{
-								img_effect_auto_pick.draw(pSprite, ((*temp).position.x - x_)*32.0f + 20.0f, ((*temp).position.y - y_)*32.0f + 20.0f, 255);
-							}
-						}
-					}
-					if(dot_size > 0)
-						dot_item.draw(pSprite, GetDotX((*temp).position.x + offset_.x,sight_x,dot_size), GetDotY(dot_start_y,(*temp).position.y + offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
-				}
-				many_item = false;
-				auto_pick_ = false;
-			}
-			else
-			{
-				many_item = true;
-				if (it == env[current_level].item_list.end() && (*temp).isautopick())
-					auto_pick_ = true;
-			}
-		}
-	}
-
-
-	//바닥 효과 그리기
-	{
-	list<floor_effect>::iterator it;
-	for (it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end(); it++)
-	{
-		if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
-		{
-			if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
-			{
-				it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
-			}
-		}
-	}
-	}
-
-	//연기그리기
-	{
-		list<smoke>::iterator it;
-		for (it = env[current_level].smoke_list.begin(); it != env[current_level].smoke_list.end(); it++)
-		{
-			if (env[current_level].isInSight((*it).position)) //더 추가해야할거. 볼수있다(투명아님).
-			{
-				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
-				{
-					it->draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
-				}
-			}
-		}
-	}
-
-	//플레이어 그리기
-	{
-		if (!you.s_timestep && abs(you.position.x - x_ - sight_x) <= sight_x && abs(you.position.y - y_ - sight_y) <= sight_y)
-		{
-			you.Draw(pSprite, (you.position.x - x_)*32.0f + 20.0f, (you.position.y - y_)*32.0f + 20.0f);
-			if (you.GetHp() != you.GetMaxHp())
-			{
-				float max_rate_ = 32.0f;
-
-				int temp1_ = max(0, you.GetHp()) * 32 / you.GetMaxHp();
-				int hp_rate_ = (max_rate_ * temp1_) / 32.0f;
-
-
-				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * 32 / you.GetMaxHp();
-				int p_hp_rate_ = (max_rate_ * temp2_) / 32.0f;
-
-				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, max_rate_, 2.0f, 255);
-				dot_monster.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, p_hp_rate_, 2.0f, 255);
-				dot_item.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 36.0f, 0.0f, hp_rate_, 2.0f, 255);
-			}
-			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
-			{
-				float max_rate_ = 32.0f;
-
-				int temp1_ = max(0, you.GetMp()) * 32 / you.GetMaxMp();
-				float mp_rate_ = (max_rate_ * temp1_)/ 32.0f;
-
-				dot_floor.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, max_rate_, 2.0f, 255);
-				dot_up.draw(pSprite, (you.position.x - x_)*32.0f + 5.0f, (you.position.y - y_)*32.0f + 38.0f, 0.0f, mp_rate_, 2.0f, 255);
-			}
-
-		}
-		if(dot_size > 0)
-			dot_player.draw(pSprite, GetDotX(you.position.x + offset_.x,sight_x,dot_size), GetDotY(dot_start_y,you.position.y + offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
-	}
-
-
-	//몹그리기
-	{
-		vector<monster>::iterator it;
-
-		for (it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
-		{
-			if ((*it).isLive() && (*it).isYourShight()) //더 추가해야할거. 볼수있다(투명아님).
-			{
-				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
-				{
-					(*it).draw(pSprite, pfont, ((*it).position.x - x_)*32.0f + 20.0f, ((*it).position.y - y_)*32.0f + 20.0f);
-				}
-				if (!((*it).flag & M_FLAG_UNHARM))
-				{
-					if(dot_size > 0) {
-						dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x,sight_x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
-					}
-				}
-			}
-			else if(it->isLive() &&	you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3
-				&& GetPositionGap((*it).position.x, (*it).position.y, you.position.x, you.position.y) <= satori_sight()
-				)
-			{
-				if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
-				{
-					(*it).simple_draw(pSprite,pfont,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f);
-				}
-				if (!((*it).flag & M_FLAG_UNHARM))
-				{
-					if(dot_size > 0) {
-						dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x,sight_x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
-					}
-				}
-			}
-		}
-	}
-	//그림자 그리기
-	{
-		list<shadow>::iterator it;
-		
-		for(it = env[current_level].shadow_list.begin(); it != env[current_level].shadow_list.end(); it++)
-		{
-			if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
-			{
-				if(!env[current_level].isInSight((*it).position)) 
-				{
-					(*it).image->draw(pSprite,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f,D3DCOLOR_XRGB(128,128,128));
-				}
-			}
-			if(dot_size > 0) {
-				switch((*it).type)
-				{
-				case SWT_MONSTER:
-					if (!(*it).unharm) {
-						dot_monster.draw(pSprite, GetDotX((*it).position.x + offset_.x,sight_x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
-					}
-					break;
-				case SWT_ITEM:
-					dot_item.draw(pSprite,GetDotX((*it).position.x+offset_.x,sight_x,dot_size),GetDotY(dot_start_y,(*it).position.y+offset_.y,sight_y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
-					break;
-				}
-			}
-		}
-	}
-
-	//안개그리기
-	if(you.s_weather >= 1 && you.s_weather_turn > 0)
-	{
-		for (int i = 0; i < (sight_x*2+1); i++)
-		{
-			for (int j = 0; j < (sight_y*2+1); j++)
-			{
-				if (i + x_ >= 0 && j + y_ >= 0 && i + x_ < DG_MAX_X && j + y_ < DG_MAX_Y)
-				{
-					if (env[current_level].isSight(coord_def(i + x_, j + y_)) && env[current_level].isInSight(coord_def(i + x_, j + y_)))
-					{
-						switch (you.s_weather) {
-						case 1:
-							img_effect_fog.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(100, 255, 255, 255));
-							break;
-						case 2:
-							img_effect_rain.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(50, 255, 255, 255));
-							break;
-						case 3:
-							img_effect_sun.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(20, 255, 255, 255));
-							break;
-						}
-
-					}
-				}
-			}
-		}
-	}
-
-	//이펙트그리기
-	{
-		list<effect>::iterator it;		
-		for(it = env[current_level].effect_list.begin(); it != env[current_level].effect_list.end(); it++)
-		{
-			if((*it).over_sight || env[current_level].isInSight((*it).position))
-			{
-				if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
-				{
-					(*it).image->draw(pSprite,((*it).position.x-x_)*32.0f+20.0f,((*it).position.y-y_)*32.0f+20.0f, 255);
-				}
-			}
-		}
-	}
-
-	if(you.search)
-	{
-		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*32.0f+20.0f,(you.search_pos.y-y_)*32.0f+20.0f,D3DCOLOR_XRGB(255,255,255));
-	}
-
-	{ //테두리
-		if(!env[current_level].isBamboo() && dot_size > 0) {
-			sight_rect.draw(pSprite,GetDotX(x_+sight_x,sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
-		}
-	}
-
 
 
 
@@ -3129,8 +3189,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		// infobox.init();
 		// {
 		// 	int i=0;
-		// 	RECT rc={32*(sight_x*2)+50, 10, option_mg.getWidth(), option_mg.getHeight()};
-		int start_x = 32*(sight_x*2)+52;
+		// 	RECT rc={info_minX, 10, option_mg.getWidth(), option_mg.getHeight()};
+		int start_x = info_minX+4;
 		int start_y = max_minimap_y+16;
 
 		int tile_count = 0;
@@ -3339,7 +3399,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					}
 				} else {
 					int x_ = start_x+i*32, y_ = start_y+j*32+10;
-					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, true, true, false);
+					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, 99999, true, true, false);
 					if(floor_items != env[current_level].item_list.end()) {
 						if(floor_items->position == you.position ) {
 							floor_items->draw(pSprite,pfont,x_,y_);
@@ -3386,18 +3446,18 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					{					
 						//if(!env[current_level].isExplore(i+x_,j+y_))
 						if(map_effect==1)
-							img_effect_freeze.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+							img_effect_freeze.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,80);
 						else if (you.s_sleep < 0)
-							img_effect_sleep.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, 100);
+							img_effect_sleep.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 100);
 						else if(you.s_lunatic)
-							img_effect_lunatic.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+							img_effect_lunatic.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,80);
 						else if(map_effect==2)
-							img_effect_gold.draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,80);
+							img_effect_gold.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,80);
 						else if (map_effect == 3)
-							img_effect_sion.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, 80);
+							img_effect_sion.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 80);
 						else if (you.s_evoke_ghost)
-							img_effect_white.draw(pSprite, i*32.0f + 20.0f, j*32.0f + 20.0f, D3DCOLOR_ARGB(80, 80, 0, 100));
-							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+20.0f,j*32.0f+20.0f,D3DCOLOR_XRGB(160,160,255));
+							img_effect_white.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(80, 80, 0, 100));
+							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+tile_x_offset,j*32.0f+tile_x_offset,D3DCOLOR_XRGB(160,160,255));
 					}
 				}
 			}
@@ -3416,13 +3476,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				if (abs((*it).position.x - x_ - sight_x) <= sight_x && abs((*it).position.y - y_ - sight_y) <= sight_y)
 				{
-					if((((*it).isUnique() && !(*it).isUserAlly() ) || (*it).image == &img_mons_default)) {
+					if((((*it).isUnique() && !(*it).isUserAlly() ) || (*it).image == &img_mons_default) && calc_tile_size >= 32) {
 
-						RECT rc = { (LONG)(((*it).position.x - x_)*32.0f + 20.0f),(LONG)(((*it).position.y - y_)*32.0f - 10.0f), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
-						rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
+						RECT rc = { (LONG)(((*it).position.x - x_)*calc_tile_size + tile_x_offset - calc_tile_size/2),(LONG)(((*it).position.y - y_)*calc_tile_size + tile_x_offset - calc_tile_size/2-fontDesc.Height), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
+						//rc.left -= fontDesc.Width*(*it).GetName()->getName().size() / 2;
 						DrawTextUTF8(pfont,pSprite, (*it).GetName()->getName().c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-					} else if (MousePoint.x > ((*it).position.x - x_)*32.0f + 4 && MousePoint.x <= ((*it).position.x - x_)*32.0f + 36 &&
-							MousePoint.y > ((*it).position.y - y_)*32.0f + 4 && MousePoint.y <= ((*it).position.y - y_)*32.0f + 36){
+					} else if (MousePoint.x > ((*it).position.x - x_)*calc_tile_size + 4 && MousePoint.x <= ((*it).position.x - x_)*calc_tile_size + 4+calc_tile_size &&
+							MousePoint.y > ((*it).position.y - y_)*calc_tile_size + 4 && MousePoint.y <= ((*it).position.y - y_)*calc_tile_size + 4+calc_tile_size){
 						mouseInfo = (*it).GetName()->getName();
 						mouseColor = CL_normal;
 					}
@@ -3433,7 +3493,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	{
 
-		int max_length = 32*(sight_x*2+1)+16;
+		int max_length = calc_tile_size*(sight_x*2+1)+16;
 		float y = 0;
 		for(auto& draw_vector : list_draw) {
 			for(auto& draw_dummy : *draw_vector) {
@@ -3482,7 +3542,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		DrawTextUTF8_OutLine(pfont,pSprite,mouseInfo.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, mouseColor);
 	}
-
+	if(isClicked(MIDDLE_UP)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));
+	} else if(isClicked(MIDDLE_DOWN)) {
+		g_keyQueue->push(InputedKey(MKIND_SCROLL_DOWN,0,0));
+	}
 }
 extern POINT MousePoint;
 

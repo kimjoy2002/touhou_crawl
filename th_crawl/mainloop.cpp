@@ -39,7 +39,7 @@ extern bool saveexit;
 extern HANDLE mutx;
 
 const char *version_string = "ver1.1";
-
+extern int g_tile_size;
 
 void Initialize();
 
@@ -49,7 +49,7 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_);
 skill_type itemtoskill(item_type type_);
 
 
-void Test_char_init(item_type item_, int bonus)
+void Test_char_init(item_type item_, int bonus)	
 {
 
 	item_infor t;
@@ -510,6 +510,44 @@ bool useAutoTanmac(unit* mon_) {
 	return false;
 }
 
+void scrollup(bool down) {
+	vector<int> ablesize = {23,32,47,64,95,128};
+
+
+
+
+
+
+	bool next_ = false;
+	if(!down) {
+		for(int i = 0; i < ablesize.size();i++) {
+			if(g_tile_size == ablesize[i]) {
+				next_ = true;
+			} else if(next_) {
+				int sight_x = option_mg.getTileMaxX();
+				int sight_y = option_mg.getTileMaxY();
+				float calc_tile_scale = ablesize[i]/32.0f;
+				sight_x = (int)(sight_x/calc_tile_scale);
+				sight_y = (int)(sight_y/calc_tile_scale+0.3f);
+				if(sight_x >= 3 && sight_y > 3) {
+					g_tile_size = ablesize[i];
+				}
+				break;
+			}
+		}
+	} else {
+		for(int i = ablesize.size()-1; i >= 0;i--) {
+			if(g_tile_size == ablesize[i]) {
+				next_ = true;
+			} else if(next_) {
+				g_tile_size = ablesize[i];
+				break;
+			}
+		}
+
+
+	}
+}
 
 
 void MainLoop()
@@ -833,6 +871,10 @@ void MainLoop()
 							changedisplay(DT_GAME);
 						}
 					}
+				} else if (inputedKey.mouse == MKIND_SCROLL_UP) {
+					scrollup(false);
+				} else if (inputedKey.mouse == MKIND_SCROLL_DOWN) {
+					scrollup(true);
 				}
 				//마우스
 			}
@@ -994,10 +1036,12 @@ void MainLoop()
 			Pray();
 			break;
 		case '+':
-			VolumeUp();
+			scrollup(false);
+			//VolumeUp();
 			break;
 		case '-':
-			VolumeDown();
+			scrollup(true);
+			//VolumeDown();
 			break;
 		case '#':
 			if(Dump(0,NULL))

@@ -25,7 +25,7 @@
 §yq§d      - Drink (potions)                            §cctrl-S§d - Save and quit (no prompt)
 §yf/F§d    - Quick/targeted throw                       §cctrl-Q§d - Quit without saving
 §yv,V§d    - Use spell cards                            §y#§d - Create game dump
-§yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Toggle sound
+§yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Zoom In/Out screen
 §yW/T§d    - Equip/unequip armor
 §yP/R§d    - Equip/unequip accessory
 §cctrl-A§d - Toggle auto-pickup                         §b<Cheat Mode>§d

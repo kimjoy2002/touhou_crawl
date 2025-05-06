@@ -29,7 +29,7 @@ public:
 	smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_ = PRT_NEUTRAL);
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);
 	bool clear(const coord_def move_ = coord_def());
 	bool action(int delay_);
 	bool offsetmove(const coord_def &c);

@@ -830,86 +830,87 @@ void environment::allCalculateAutoTile()
 	}
 }
 
-void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, int count_, D3DCOLOR color_, bool sight)
+void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, D3DCOLOR color_, bool sight)
 {
 	if (dgtile[tile_x][tile_y].tile == DG_WALL) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+		img_auto_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_METAL_WALL) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_metal_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+		img_auto_metal_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_STONE_WALL) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_mountain_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+		img_auto_mountain_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_RED_WALL) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_red_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+		img_auto_red_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_HELL_WALL) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_hell_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y, color_);
+		img_auto_hell_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_SEA) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_water[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y, color_);
+		img_auto_water[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_LAVA) {
-		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y, color_);
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
-		img_auto_lava[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y, color_);
+		img_auto_lava[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (!dgtile[tile_x][tile_y].isNormal()) {
-		dgtile[tile_x][tile_y].draw(pSprite, x, y, color_, count_);
+		dgtile[tile_x][tile_y].draw(pSprite, x, y, scale, color_, count_);
 	}
 	else {
-		dgtile[tile_x][tile_y].draw(pSprite, env[current_level].base_floor, x, y, color_, count_);
+		dgtile[tile_x][tile_y].draw(pSprite, env[current_level].base_floor, x, y, scale, color_, count_);
 	}
 }
 
 extern display_manager DisplayManager;
-void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, bool sight, bool onlyTile, bool draw_mouse)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse)
 {
 	if (!isExplore(tile_x, tile_y))
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(160, 160, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(160, 160, 255), sight);
 	}
 	else if (dgtile[tile_x][tile_y].flag & FLAG_LIGHT)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
 		if(!onlyTile){
-			img_effect_gold.draw(pSprite, x, y, 100);
+			img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 100);
 		}
 	}
 	else if (isInSight(coord_def(tile_x, tile_y)) && sight)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
 	}
 	else
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, count_, D3DCOLOR_XRGB(128, 128, 128), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(128, 128, 128), sight);
 	}
 
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SILENCE)
-		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
+		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 0, 255, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_VIOLET)
-		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 128, 255));
+		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 128, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SANCTUARY)
-		img_effect_slience.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 255, 255, 0));
+		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 255, 0));
 	if(!onlyTile && draw_mouse){
-		if (MousePoint.x > x - scale*16 && MousePoint.x <= x + scale*16 &&
+		if (MousePoint.x <= max_mouseX &&
+			MousePoint.x > x - scale*16 && MousePoint.x <= x + scale*16 &&
 		MousePoint.y > y - scale*16 && MousePoint.y <= y+ scale*16
 		)
 		{
-			img_effect_select.draw(pSprite, x, y, D3DCOLOR_ARGB(80, 0, 255, 255));
+			img_effect_select.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 0, 255, 255));
 			if(isClicked(LEFT_CLICK)) {
 				g_keyQueue->push(InputedKey(MKIND_MAP,tile_x,tile_y));
 			}
@@ -2440,11 +2441,11 @@ void LoadFile()
 	ReleaseMutex(mutx);
 }
 
-float GetDotX(int x, int dungeon_x, int magnification)
+float GetDotX(int offset_, int x, int magnification)
 {
-	return 43 + (32*(dungeon_x*2))+x*magnification;
+	return offset_+x*magnification;
 }
-float GetDotY(int offset_, int y, int dungeon_y, int magnification)
+float GetDotY(int offset_, int y, int magnification)
 {
 	return offset_+y*magnification;
 }

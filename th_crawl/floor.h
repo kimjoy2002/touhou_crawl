@@ -41,7 +41,7 @@ public:
 	
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_);
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_,float scale_);
 	void prev_check();
 	bool action(int delay_);
 	bool offsetmove(const coord_def &c);

@@ -43,18 +43,18 @@ void floor_effect::LoadDatas(FILE *fp)
 	LoadData<int>(fp, time);
 	LoadData<parent_type>(fp, parent);
 }
-bool floor_effect::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
+bool floor_effect::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_,float scale_)
 {
 	bool return_ = false;
 	if(time>0)
 	{
 		if(image)
-			return_ = image->draw(pSprite, x_, y_,255);
+			return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,255);
 	}
 	else
 	{
 		if(image2)
-			return_ = image2->draw(pSprite, x_, y_,255);
+			return_ = image2->draw(pSprite, x_, y_,0.0f,scale_,scale_,255);
 	}
 	return return_;
 }

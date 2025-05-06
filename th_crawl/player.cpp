@@ -633,18 +633,18 @@ void players::LoadDatas(FILE *fp)
 	}
 }
 
-bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_)
+bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_)
 {
 	if (s_glow || you.GetBuffOk(BUFFSTAT_HALO)) {
-		img_effect_halo.draw(pSprite, x_, y_, 127);
+		img_effect_halo.draw(pSprite, x_, y_, 0.0f, scale_,scale_, 127);
 	}
 	if (s_veiling) {
-		img_effect_veiling.draw(pSprite, x_, y_, 255);
+		img_effect_veiling.draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 	}
 	if (!GetCharNameString().empty())
 	{
 		if (you.image) {
-			return you.image->draw(pSprite, x_, y_, 255);
+			return you.image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		}
 	}
 	else if (you.tribe == TRI_FAIRY)
@@ -652,47 +652,47 @@ bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_)
 		item* t;
 		t = you.equipment[ET_CLOAK];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		if (you.image) {
-			you.image->draw(pSprite, x_, y_, 255);
+			you.image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		}
 		t = you.equipment[ET_HELMET];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_WEAPON];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_SHIELD];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 	}
 	else
 	{
 		item* t;
 		t = you.equipment[ET_CLOAK];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		if (you.image) {
-			you.image->draw(pSprite, x_, y_, 255);
+			you.image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		}
 		t = you.equipment[ET_GLOVE];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_BOOTS];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_ARMOR];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_HELMET];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_WEAPON];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 		t = you.equipment[ET_SHIELD];
 		if (t && t->equip_image)
-			t->equip_image->draw(pSprite, x_, y_, 255);
+			t->equip_image->draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 	}
 	return false;
 }

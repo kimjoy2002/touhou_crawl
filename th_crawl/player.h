@@ -364,7 +364,7 @@ public:
 	~players();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
-	bool Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_);
+	bool Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_);
 	bool isLive();
 	bool isFly(){return s_levitation!=0;}
 	bool isSwim();

@@ -56,10 +56,10 @@ void smoke::LoadDatas(FILE *fp)
 	LoadData<int>(fp, expand);
 	LoadData<parent_type>(fp, parent);
 }
-bool smoke::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
+bool smoke::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
 	bool return_ = false;
-	return_ = image[time>2?(time%2?0:1):(time==1?3:2)].draw(pSprite, x_, y_,200);
+	return_ = image[time>2?(time%2?0:1):(time==1?3:2)].draw(pSprite, x_, y_,0.0f,scale_,scale_,200);
 	return return_;
 }
 bool smoke::clear(const coord_def move_)

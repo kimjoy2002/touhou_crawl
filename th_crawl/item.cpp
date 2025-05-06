@@ -583,29 +583,29 @@ const D3DCOLOR item::item_color()
 
 
 
-bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
+bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
 	if (image) {
-		bool return_ = image->draw(pSprite, x_, y_, 255);
+		bool return_ = image->draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 		if (type == ITM_POTION) {
 			if (iden_list.potion_list[value1].iden) {
-				img_item_potion_kind[min(PT_MAX-1,max(0,value1))].draw(pSprite, x_, y_, 255);
+				img_item_potion_kind[min(PT_MAX-1,max(0,value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 			}
 
 		}
 		else if (type == ITM_SCROLL) {
 			if (iden_list.scroll_list[value1].iden == 3) {
-				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 			}
 		}
 		else if (type == ITM_AMULET) {
 			if (iden_list.amulet_list[value1].iden) {
-				img_item_amulet_kind[min(AMT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+				img_item_amulet_kind[min(AMT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 			}
 		}
 		else if (type == ITM_RING) {
 			if (iden_list.ring_list[value1].iden && !isArtifact()) {
-				img_item_ring_kind[min(RGT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 255);
+				img_item_ring_kind[min(RGT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 			}
 		}
 		return return_;

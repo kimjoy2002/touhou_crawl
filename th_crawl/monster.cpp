@@ -1760,25 +1760,25 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	}
 	return true;
 }
-bool monster::simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
+bool monster::simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
 	bool return_ = false;
-	return_ = image->draw(pSprite, x_, y_,D3DCOLOR_XRGB(120,120,255));
+	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,D3DCOLOR_XRGB(120,120,255));
 	return return_;
 }
-bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_)
+bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
 	bool return_ = false;
 	if (s_glow) {
-		img_effect_halo.draw(pSprite, x_, y_, 127);
+		img_effect_halo.draw(pSprite, x_, y_,0.0f,scale_,scale_, 127);
 	}
 	if (s_veiling) {
-		img_effect_veiling.draw(pSprite, x_, y_, 255);
+		img_effect_veiling.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
 
-	return_ = image->draw(pSprite, x_, y_,id == MON_ENSLAVE_GHOST?128:255);
+	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,id == MON_ENSLAVE_GHOST?128:255);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
-		img_mons_dancing_weapon.draw(pSprite, x_, y_, 255);
+		img_mons_dancing_weapon.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
 	if (return_ && !(flag & M_FLAG_NO_STATE))
 	{
@@ -1789,7 +1789,7 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 			if (isSimpleState(mss))
 			{
 				if (statetotexture(mss)) {
-					return_ = statetotexture(mss)->draw(pSprite, x_ + offset_, y_, 255);
+					return_ = statetotexture(mss)->draw(pSprite, x_ + offset_, y_,0.0f,scale_,scale_, 255);
 					offset_ -= 5;
 				}
 			}
@@ -1799,7 +1799,7 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	{
 		int hp_ = hp*5/max_hp;
 		if(hp_>=0 && hp_<5)
-			return_ = img_hp_graphic[hp_].draw(pSprite,x_,y_+12,255);
+			return_ = img_hp_graphic[hp_].draw(pSprite,x_,y_+12*scale_,0.0f,scale_,scale_,255);
 	}
 	return return_;
 }

@@ -54,7 +54,25 @@ void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 }
 
 
+int create_bamboo_mon() {
+	random_extraction<int> percent_;
+	percent_.push(MON_RABIT_BOMB,5+max(map_list.bamboo_count/50-10,0));//파밍방지 폭탄병의 수가 점점 많아진다
 
+	if(map_list.bamboo_rate<=200)
+	{
+		percent_.push(MON_RABIT_SPEAR,60);//창병
+		percent_.push(MON_RABIT_SUPPORT,15);//지원병
+		percent_.push(MON_RABIT_MAGIC,20);//마법사
+	}
+	else
+	{ //토끼들이 많아지면 지원병은 적어짐
+		percent_.push(MON_RABIT_SPEAR,65);//창병
+		percent_.push(MON_RABIT_SUPPORT,5);//지원병
+		percent_.push(MON_RABIT_MAGIC,25);//마법사
+
+	}
+	return percent_.pop();
+}
 
 void bamboo_count(int num)
 { //플레이어가 맵을 벗어날거같으면 바로 중앙으로 끌어온다.
@@ -194,24 +212,7 @@ void bamboo_count(int num)
 	if(randA(1000)<map_list.bamboo_rate)
 	{ //몬스터를 생성하기시작한다.
 		
-		random_extraction<int> percent_;
-		percent_.push(MON_RABIT_BOMB,5+max(map_list.bamboo_count/50-10,0));//파밍방지 폭탄병의 수가 점점 많아진다
-
-		if(map_list.bamboo_rate<=200)
-		{
-			percent_.push(MON_RABIT_SPEAR,60);//창병
-			percent_.push(MON_RABIT_SUPPORT,15);//지원병
-			percent_.push(MON_RABIT_MAGIC,20);//마법사
-		}
-		else
-		{ //토끼들이 많아지면 지원병은 적어짐
-			percent_.push(MON_RABIT_SPEAR,65);//창병
-			percent_.push(MON_RABIT_SUPPORT,5);//지원병
-			percent_.push(MON_RABIT_MAGIC,25);//마법사
-
-		}
-		int id_ = percent_.pop();
-
+		int id_ = create_bamboo_mon();
 
 		dif_rect_iterator rit(you.position,12,true);
 		while(!rit.end())

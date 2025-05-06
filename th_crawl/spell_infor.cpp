@@ -476,6 +476,9 @@ string GetSpellInfor(spell_list spell)
 			oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI);
 		}
 		break;
+	case SPL_TOUGUE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TOUGUE);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

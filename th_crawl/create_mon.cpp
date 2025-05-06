@@ -128,6 +128,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 1}, //깃발 요정 호위부대
 	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 2, 1}, //요정영웅부대
 	
+	{ 63,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2, 1, 5}, //큰두꺼비
 	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 5, 5}, //큰두꺼비
 
 	{ 66,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 5}, //요정소서러

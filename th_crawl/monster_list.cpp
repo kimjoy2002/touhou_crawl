@@ -86,15 +86,15 @@ const mon_infor mondata[] = {
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'f' },
 
-	{MON_RUMIA,6,240,name_infor(MON_RUMIA),&img_named_rumia,40,1,10,
-	{14,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_RUMIA,6,240,name_infor(MON_RUMIA),&img_named_rumia,45,1,10,
+	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'&' },
 
-	{MON_MISTIA,8,535,name_infor(MON_MISTIA),&img_named_mistia,55,1,12,
-	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_MISTIA,8,535,name_infor(MON_MISTIA),&img_named_mistia,55,1,15,
+	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,8,'&' },
 
-	{MON_WRIGGLE,7,350,name_infor(MON_WRIGGLE),&img_named_wriggle,50,3,10,
+	{MON_WRIGGLE,7,350,name_infor(MON_WRIGGLE),&img_named_wriggle,55,3,12,
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10,'&' },
 
@@ -102,11 +102,11 @@ const mon_infor mondata[] = {
 	{15,25,0},{ATT_NORMAL,ATT_COLD,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_COLD),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,0,10,'&' },
 
-	{MON_MEDICINE,9,1066,name_infor(MON_MEDICINE),&img_named_medicine,75,2,10,
+	{MON_MEDICINE,9,1066,name_infor(MON_MEDICINE),&img_named_medicine,80,2,12,
 	{8,12,0},{ATT_S_POISON,ATT_M_POISON,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_POISON),name_infor(LOC_SYSTEM_ATT_POISON),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{MON_DIEFAIRY,6,570,name_infor(MON_DIEFAIRY),&img_named_diefairy,50,0,15,
+	{MON_DIEFAIRY,6,570,name_infor(MON_DIEFAIRY),&img_named_diefairy,55,0,18,
 	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'&' },
 
@@ -162,16 +162,16 @@ const mon_infor mondata[] = {
 	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SWIM | M_FLAG_ANIMAL,0,0,9,'f' },
 	
-	{MON_BLACK_CAT,8,237,name_infor(MON_BLACK_CAT),&img_mons_black_cat,40,0,15,
-	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{MON_BLACK_CAT,8,237,name_infor(MON_BLACK_CAT),&img_mons_black_cat,50,0,15,
+	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c'},
 	
-	{MON_ORANGE_CAT,8,237,name_infor(MON_ORANGE_CAT),&img_mons_orange_cat,40,0,15,
-	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{MON_ORANGE_CAT,8,237,name_infor(MON_ORANGE_CAT),&img_mons_orange_cat,50,0,15,
+	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c' },
 
-	{MON_WHITE_CAT,8,237,name_infor(MON_WHITE_CAT),&img_mons_white_cat,40,0,15,
-	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{MON_WHITE_CAT,8,237,name_infor(MON_WHITE_CAT),&img_mons_white_cat,50,0,15,
+	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c' },
 
 	{MON_CROW_TENGU,10,532,name_infor(MON_CROW_TENGU),&img_mons_crow_tengu,70,3,12,
@@ -183,26 +183,26 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
 	{MON_KISUME,5,220,name_infor(MON_KISUME),&img_named_kisume,30,1,10,
-	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,1,10,'&' },
 
-	{MON_CHEN,11,1325,name_infor(MON_CHEN),&img_named_chen,85,0,15,
-	{15,15,20},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW)},
+	{MON_CHEN,11,1325,name_infor(MON_CHEN),&img_named_chen,95,0,15,
+	{16,16,20},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,8,'&' },
 
-	{MON_KOGASA,7,550,name_infor(MON_KOGASA),&img_named_kogasa,50,1,14,
-	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_KOGASA,7,550,name_infor(MON_KOGASA),&img_named_kogasa,55,1,14,
+	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 
-	{MON_SUNNY,4,129,name_infor(MON_SUNNY),&img_named_sunny,35,1,10,
+	{MON_SUNNY,4,129,name_infor(MON_SUNNY),&img_named_sunny,38,1,10,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'&' },
 
-	{MON_LUNAR,4,129,name_infor(MON_LUNAR),&img_named_lunar,30,1,10,
+	{MON_LUNAR,4,129,name_infor(MON_LUNAR),&img_named_lunar,33,1,10,
 	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,0,10,'&' },
 
-	{MON_STAR,4,129,name_infor(MON_STAR),&img_named_star,25,1,10,
+	{MON_STAR,4,129,name_infor(MON_STAR),&img_named_star,28,1,10,
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,10,10,'&' },
 
@@ -232,20 +232,20 @@ const mon_infor mondata[] = {
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR,0,0,10,'d' },
 
 	{MON_KATPA_SPEAR,9,730,name_infor(MON_KATPA_SPEAR),&img_mons_new_kappa_spear,70,5,10,
-	{24,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{28,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM,0,0,10,'K' },
 
 	{MON_KATPA_WATER_WIZARD,10,860,name_infor(MON_KATPA_WATER_WIZARD),&img_mons_new_kappa_wizard,45,4,10,
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM | M_FLAG_CAN_SEE_INVI,2,1,10,'K' },
 
-	{MON_YAMABUSH_TENGU,11,1062,name_infor(MON_YAMABUSH_TENGU),&img_mons_yamabush_tengu,60,3,10,
+	{MON_YAMABUSH_TENGU,11,1062,name_infor(MON_YAMABUSH_TENGU),&img_mons_yamabush_tengu,70,3,10,
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI,1,1,10,'T' },
 
 
-	{MON_HANATACA_TENGU,12,1183,name_infor(MON_HANATACA_TENGU),&img_mons_hanataca_tengu,78,5,13,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_HANATACA_TENGU,12,1183,name_infor(MON_HANATACA_TENGU),&img_mons_hanataca_tengu,88,5,16,
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'T' },
 
 
@@ -253,16 +253,16 @@ const mon_infor mondata[] = {
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
-	{MON_MUSHROOM,8,272,name_infor(MON_MUSHROOM),&img_mons_mushroom,30,6,0,
-	{9,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_MUSHROOM,8,272,name_infor(MON_MUSHROOM),&img_mons_mushroom,40,6,0,
+	{11,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,0,12,'m' },
 
-	{MON_KYOUKO,6,500,name_infor(MON_KYOUKO),&img_named_kyouko,30,1,11,
+	{MON_KYOUKO,6,500,name_infor(MON_KYOUKO),&img_named_kyouko,32,1,12,
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 
 
-	{MON_FORTUNE_TELLER,3,154,name_infor(MON_FORTUNE_TELLER),&img_named_sigmund,30,0,11,
+	{MON_FORTUNE_TELLER,3,154,name_infor(MON_FORTUNE_TELLER),&img_named_sigmund,36,0,11,
 	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,1,1,10,'&' },
 
@@ -270,11 +270,11 @@ const mon_infor mondata[] = {
 	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,2,13,'t' },
 
-	{MON_MOMIZI,12,1923,name_infor(MON_MOMIZI),&img_named_momizi,142,12,2,
-	{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_MOMIZI,12,1923,name_infor(MON_MOMIZI),&img_named_momizi,162,12,2,
+	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,3,10,'&' },
 
-	{MON_AYA,15,3421,name_infor(MON_AYA),&img_named_aya,118,1,14,
+	{MON_AYA,15,3421,name_infor(MON_AYA),&img_named_aya,118,1,18,
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,8,'&' },
 
@@ -287,27 +287,27 @@ const mon_infor mondata[] = {
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SWIM | M_FLAG_CANT_NETURAL | M_FLAG_SPEAK | M_FLAG_CANT_GROUND,0,1,10,'&' },
 
-	{MON_YAMAME,8,854,name_infor(MON_YAMAME),&img_named_yamame,95,3,11,
+	{MON_YAMAME,8,854,name_infor(MON_YAMAME),&img_named_yamame,115,4,11,
 	{15,16,28},{ATT_NORMAL,ATT_NONE,ATT_SICK},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_POISON)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
-	{MON_NAZRIN,7,570,name_infor(MON_NAZRIN),&img_named_nazrin,45,0,10,
-	{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_NAZRIN,7,570,name_infor(MON_NAZRIN),&img_named_nazrin,55,0,16,
+	{19,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,1,10,'&' },
 
 	{MON_DAUZING,10,1,name_infor(MON_DAUZING),&img_mons_dauzing,80,8,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,8,'*' },
 	
-	{MON_YOSIKA,9,0,name_infor(MON_YOSIKA),&img_named_yosika,150,3,3,
+	{MON_YOSIKA,9,0,name_infor(MON_YOSIKA),&img_named_yosika,150,5,3,
 	{22,30,30},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_CRUNCH),name_infor(LOC_SYSTEM_ATT_CRUNCH)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,0,10,'&' },
 	
-	{MON_SEKIBANKI,8,824,name_infor(MON_SEKIBANKI),&img_named_sekibanki,78,3,9,
+	{MON_SEKIBANKI,8,824,name_infor(MON_SEKIBANKI),&img_named_sekibanki,98,3,9,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,1,10,'&' },
 	
-	{MON_SEKIBANKI_BODY,8,824,name_infor(MON_SEKIBANKI_BODY),&img_named_sekibanki_body,78,10,0,
+	{MON_SEKIBANKI_BODY,8,824,name_infor(MON_SEKIBANKI_BODY),&img_named_sekibanki_body,98,10,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL,1,0,10,'&' },
 	
@@ -315,40 +315,40 @@ const mon_infor mondata[] = {
 	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL,0,1,10,'*' },
 	
-	{MON_NITORI,13,2188,name_infor(MON_NITORI),&img_named_nitori,105,8,12,
+	{MON_NITORI,13,2188,name_infor(MON_NITORI),&img_named_nitori,115,8,12,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10,'&' },
 	
-	{MON_KEGERO,10,1297,name_infor(MON_KEGERO),&img_named_kagero,130,3,12,
-	{36,25,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor()},
+	{MON_KEGERO,10,1297,name_infor(MON_KEGERO),&img_named_kagero,150,3,15,
+	{37,26,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
-	{MON_PARSI,9,925,name_infor(MON_PARSI),&img_named_parsi,130,8,15,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_PARSI,9,925,name_infor(MON_PARSI),&img_named_parsi,140,8,15,
+	{27,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
-	{MON_BENBEN,6,520,name_infor(MON_BENBEN),&img_named_benben,67,3,3,
-	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_BENBEN,6,520,name_infor(MON_BENBEN),&img_named_benben,77,4,3,
+	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_NONE_STAIR,2,1,10,'&' },
 	
-	{MON_YATHASI,6,520,name_infor(MON_YATHASI),&img_named_yathasi,58,0,8,
-	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_YATHASI,6,520,name_infor(MON_YATHASI),&img_named_yathasi,68,0,9,
+	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_NONE_STAIR,2,1,10,'&' },
 	
-	{MON_ORIN,13,2310,name_infor(MON_ORIN),&img_named_orin,115,1,12,
+	{MON_ORIN,13,2310,name_infor(MON_ORIN),&img_named_orin,135,1,12,
 	{29,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10,'&' },
 	
-	{MON_ORIN_CAT,13,2310,name_infor(MON_ORIN_CAT),&img_named_orin_cat,70,0,25,
-	{21,21,0},{ATT_NORMAL,ATT_FIRE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor()},
+	{MON_ORIN_CAT,13,2310,name_infor(MON_ORIN_CAT),&img_named_orin_cat,80,0,25,
+	{23,23,0},{ATT_NORMAL,ATT_FIRE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,1,1,5,'c' },
 	
 	{MON_ZOMBIE_FAIRY,7,183,name_infor(MON_ZOMBIE_FAIRY),&img_mons_zombiefairy,35,0,12,
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'z' },
 	
-	{MON_ICHIRIN,13,3240,name_infor(MON_ICHIRIN),&img_named_ichirin,128,9,2,
-	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_ICHIRIN,13,3240,name_infor(MON_ICHIRIN),&img_named_ichirin,148,9,2,
+	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
 	{MON_UNZAN,13,1,name_infor(MON_UNZAN),&img_named_unzan,150,0,0,
@@ -356,10 +356,10 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_CANT_NETURAL,99,1,10,'U' },
 	
 	{MON_UNZAN_PUNCH,13,1,name_infor(MON_UNZAN_PUNCH),&img_named_unzan_punch[0],30,0,6,
-	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SMASH),name_infor(),name_infor()},
+	{45,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SMASH),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY  | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL,99,1,15,'P' },
 	
-	{MON_PACHU,13,1923,name_infor(MON_PACHU),&img_named_pachu,70,1,5,
+	{MON_PACHU,13,1923,name_infor(MON_PACHU),&img_named_pachu,80,1,5,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,99,1,10,'&' },
 	
@@ -367,15 +367,15 @@ const mon_infor mondata[] = {
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,8,':' },
 	 
-	{MON_HOBGOBRIN,6,142,name_infor(MON_HOBGOBRIN),&img_mons_hobgobrin,40,1,6,
+	{MON_HOBGOBRIN,6,142,name_infor(MON_HOBGOBRIN),&img_mons_hobgobrin,40,2,6,
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'h' },
 	
-	{MON_HOBGOBRIN_MAID,8,692,name_infor(MON_HOBGOBRIN_MAID),&img_mons_hobgobrin_maid,80,6,6,
-	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_HOBGOBRIN_MAID,9,692,name_infor(MON_HOBGOBRIN_MAID),&img_mons_hobgobrin_maid,90,6,6,
+	{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10,'h' },
 
-	{MON_HOBGOBRIN_LIBRARIAN,11,1120,name_infor(MON_HOBGOBRIN_LIBRARIAN),&img_mons_hobgobrin_librarian,70,1,10,
+	{MON_HOBGOBRIN_LIBRARIAN,12,1120,name_infor(MON_HOBGOBRIN_LIBRARIAN),&img_mons_hobgobrin_librarian,70,1,10,
 	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,1,10,'h' },
 	
@@ -387,55 +387,55 @@ const mon_infor mondata[] = {
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'m' },
 	
-	{MON_CHUPARCABRA,12,1384,name_infor(MON_CHUPARCABRA),&img_mons_chuparcabra,122,3,14,
-	{23,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_CHUPARCABRA,12,1384,name_infor(MON_CHUPARCABRA),&img_mons_chuparcabra,132,3,14,
+	{30,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,1,7,'C' },
 	
-	{MON_KOAKUMA,11,1615,name_infor(MON_KOAKUMA),&img_named_koakuma,68,1,8,
+	{MON_KOAKUMA,11,1615,name_infor(MON_KOAKUMA),&img_named_koakuma,82,1,8,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10,'&' },
 	
-	{MON_MEIRIN,8,850,name_infor(MON_MEIRIN),&img_named_meirin,105,8,6,
-	{30,14,14},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BODYCHECK),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
+	{MON_MEIRIN,8,850,name_infor(MON_MEIRIN),&img_named_meirin,135,8,6,
+	{35,18,18},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BODYCHECK),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,1,10,'&' },
 	
-	{MON_SAKUYA,13,3072,name_infor(MON_SAKUYA),&img_named_sakuya,130,1,20,
+	{MON_SAKUYA,13,3072,name_infor(MON_SAKUYA),&img_named_sakuya,140,1,20,
 	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'&' },
 	
-	{MON_REMILIA,15,4521,name_infor(MON_REMILIA),&img_named_remilia,200,1,22,
-	{34,24,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRAIN),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
+	{MON_REMILIA,15,4521,name_infor(MON_REMILIA),&img_named_remilia,220,1,22,
+	{37,27,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRAIN),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,3,1,9,'&' },
 	
 	{MON_EAGLE,9,921,name_infor(MON_EAGLE),&img_mons_eagle,80,1,10,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,0,1,10,'C'},
 	
-	{MON_TIGER,11,1180,name_infor(MON_TIGER),&img_mons_tiger,93,3,6,
-	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_TIGER,11,1180,name_infor(MON_TIGER),&img_mons_tiger,103,4,6,
+	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL ,0,1,10,'C'},
 	
-	{MON_RAIJUU,10,950,name_infor(MON_RAIJUU),&img_mons_raijuu,60,1,12,
+	{MON_RAIJUU,10,950,name_infor(MON_RAIJUU),&img_mons_raijuu,60,1,15,
 	{18,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,8,'C'},
 	
-	{MON_DRAGON_BABY,15,1260,name_infor(MON_DRAGON_BABY),&img_mons_dragon_baby,90,10,6,
+	{MON_DRAGON_BABY,15,1260,name_infor(MON_DRAGON_BABY),&img_mons_dragon_baby,110,10,6,
 	{14,14,27},{ATT_NORMAL,ATT_NONE,ATT_FIRE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_BITE)},
 	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,1,1,10,'D' },
 	
-	{MON_KASEN,16,5872,name_infor(MON_KASEN),&img_named_kasen,210,7,6,
-	{38,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_KASEN,16,5872,name_infor(MON_KASEN),&img_named_kasen,235,8,7,
+	{42,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'&' },
 	
 	{MON_YAMAWARO_NINJA,8,593,name_infor(MON_YAMAWARO_NINJA),&img_mons_yamawaro_ninja,62,5,7,
 	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'Y' },
 	
-	{MON_YAMAWARO_WAWRRIOR,9,943,name_infor(MON_YAMAWARO_WAWRRIOR),&img_mons_yamawaro_warrior,75,5,6,
-	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_YAMAWARO_WAWRRIOR,9,943,name_infor(MON_YAMAWARO_WAWRRIOR),&img_mons_yamawaro_warrior,85,5,6,
+	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'Y' },
 	
-	{MON_YAMAWARO_FLAG,11,1110,name_infor(MON_YAMAWARO_FLAG),&img_mons_yamawaro_flag,60,7,5,
+	{MON_YAMAWARO_FLAG,11,1110,name_infor(MON_YAMAWARO_FLAG),&img_mons_yamawaro_flag,65,8,5,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10,'Y' },
 		
@@ -444,32 +444,32 @@ const mon_infor mondata[] = {
 	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'!' },
 	
 	{MON_RED_UFO,12,1280,name_infor(MON_RED_UFO),&img_mons_red_ufo,76,5,10,
-	{25,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{27,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9,'U' },
 	
 	{MON_GREEN_UFO,12,1280,name_infor(MON_GREEN_UFO),&img_mons_green_ufo,76,5,10,
-	{25,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{27,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9,'U' },
 		
 	{MON_BLUE_UFO,12,1280,name_infor(MON_BLUE_UFO),&img_mons_blue_ufo,76,5,10,
-	{25,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{27,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_INANIMATE,1,1,9,'U' },
 		
 	
-	{MON_KOISHI,13,3880,name_infor(MON_KOISHI),&img_named_koishi,75,3,18,
-	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_KOISHI,13,3880,name_infor(MON_KOISHI),&img_named_koishi,85,3,18,
+	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_INVISIBLE | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,3,1,7,'&' },
-	{MON_NUE,14,4140,name_infor(MON_NUE),&img_named_nue,140,10,6,
+	{MON_NUE,14,4140,name_infor(MON_NUE),&img_named_nue,160,10,6,
 	{18,25,0},{ATT_SPEAR,ATT_ELEC,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'&' },
-	{MON_SANPEI_FIGHTER,12,1601,name_infor(MON_SANPEI_FIGHTER),&img_mons_sanpei_fighter,120,15,6,
-	{26,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRILL),name_infor(),name_infor()},
+	{MON_SANPEI_FIGHTER,12,1601,name_infor(MON_SANPEI_FIGHTER),&img_mons_sanpei_fighter,130,15,6,
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRILL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_INANIMATE,99,1,8,'8' },
-	{MON_VAMPIER_BAT,9,824,name_infor(MON_VAMPIER_BAT),&img_mons_vamp_bat,60,0,20,
-	{14,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_VAMPIER_BAT,9,824,name_infor(MON_VAMPIER_BAT),&img_mons_vamp_bat,65,0,20,
+	{18,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_ANIMAL,0,1,5,'b' },
-	{MON_DEAGAMA,12,800,name_infor(MON_DEAGAMA),&img_mons_dagama,90,10,2,
-	{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_DEAGAMA,12,800,name_infor(MON_DEAGAMA),&img_mons_dagama,110,10,2,
+	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_SWIM,3,1,10,'C' },
 	{MON_RABBIT,3,5,name_infor(MON_RABBIT),&img_mons_rabit,20,0,15,
 	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -477,17 +477,17 @@ const mon_infor mondata[] = {
 	{MON_YOKAI_RABBIT,1,1,name_infor(MON_YOKAI_RABBIT),&img_mons_youkai_rabit,10,0,6,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CANT_NETURAL,1,1,10,'R' },
-	{MON_NAMAZ,16,1650,name_infor(MON_NAMAZ),&img_mons_namaz,90,12,2,
+	{MON_NAMAZ,16,1650,name_infor(MON_NAMAZ),&img_mons_namaz,100,12,2,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_SWIM,1,1,12,'N' },
 	{MON_HELL_CROW,9,374,name_infor(MON_HELL_CROW),&img_mons_hell_crow,48,1,10,
 	{20,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,0,7,'c' },
-	{MON_RACCON,7,224,name_infor(MON_RACCON),&img_mons_raccoon,60,1,16,
+	{MON_RACCON,7,224,name_infor(MON_RACCON),&img_mons_raccoon,65,1,16,
 	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'X' },
-	{MON_LANTERN_YOUKAI,15,1333,name_infor(MON_LANTERN_YOUKAI),&img_mons_lantern_youkai,88,8,8,
-	{25,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_LANTERN_YOUKAI,15,1333,name_infor(MON_LANTERN_YOUKAI),&img_mons_lantern_youkai,92,8,8,
+	{28,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'P' },
 	{MON_YINYAN,30,8000,name_infor(MON_YINYAN),&img_mons_yinyan,300,0,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -552,8 +552,8 @@ const mon_infor mondata[] = {
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,9,'R' },
 	
-	{MON_RABIT_SPEAR,11,240,name_infor(MON_RABIT_SPEAR),&img_mons_spear_rabbit,35,5,15,
-	{28,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_RABIT_SPEAR,11,240,name_infor(MON_RABIT_SPEAR),&img_mons_spear_rabbit,45,5,15,
+	{33,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'R' },
 	
 	{MON_RABIT_SUPPORT,12,440,name_infor(MON_RABIT_SUPPORT),&img_mons_support_rabbit,25,3,15,
@@ -565,51 +565,51 @@ const mon_infor mondata[] = {
 	M_FLAG_ANIMAL |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10,'R' },
 
 	
-	{MON_TEWI,13,2150,name_infor(MON_TEWI),&img_named_tewi,70,3,22,
+	{MON_TEWI,13,2150,name_infor(MON_TEWI),&img_named_tewi,85,3,22,
 	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,8,'&' },
 
-	{MON_CLOWNPIECE,15,3220,name_infor(MON_CLOWNPIECE),&img_named_clownpiece,120,3,18,
-	{22,22,0},{ATT_FIRE,ATT_LUNATIC,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_TORCH),name_infor(),name_infor()},
+	{MON_CLOWNPIECE,15,3220,name_infor(MON_CLOWNPIECE),&img_named_clownpiece,130,3,18,
+	{26,26,0},{ATT_FIRE,ATT_LUNATIC,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_TORCH),name_infor(),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,1,1,8,'&' },
 	
-	{ MON_DOREMI,14,3904,name_infor(MON_DOREMI),&img_named_doremi,120,8,10,
+	{ MON_DOREMI,14,3904,name_infor(MON_DOREMI),&img_named_doremi,130,8,10,
 	{12,12,0},{ATT_SLEEP,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DREAM),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
 	M_FLAG_UNIQUE | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_OPEN_DOOR | M_FLAG_SPEAK, 3, 1, 12,'&' },
 
-	{MON_FAIRY_HERO,12,977,name_infor(MON_FAIRY_HERO),&img_mons_fairy_green_hero,120,10,8,
-	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_FAIRY_HERO,12,977,name_infor(MON_FAIRY_HERO),&img_mons_fairy_green_hero,130,10,8,
+	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,0,0,10,'F' },
 	
-	{MON_FAIRY_SOCERER,10,651,name_infor(MON_FAIRY_SOCERER),&img_mons_fairy_green_socerer,49,5,12,
+	{MON_FAIRY_SOCERER,10,651,name_infor(MON_FAIRY_SOCERER),&img_mons_fairy_green_socerer,49,5,15,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'F' },
 	
-	{MON_FAIRY_SUN_FLOWER,13,1180,name_infor(MON_FAIRY_SUN_FLOWER),&img_mons_fairy_green_himawari,90,8,12,
-	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_FAIRY_SUN_FLOWER,13,1180,name_infor(MON_FAIRY_SUN_FLOWER),&img_mons_fairy_green_himawari,100,8,12,
+	{22,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,1,2,10,'F' },
 	
-	{MON_MOON_RABIT_SUPPORT,9,675,name_infor(MON_MOON_RABIT_SUPPORT),&img_mons_moon_rabbit_supporter,49,5,8,
+	{MON_MOON_RABIT_SUPPORT,9,675,name_infor(MON_MOON_RABIT_SUPPORT),&img_mons_moon_rabbit_supporter,54,5,8,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10,'R' },
 	
-	{MON_MOON_RABIT_ATTACK,12,334,name_infor(MON_MOON_RABIT_ATTACK),&img_mons_moon_rabbit_attack,85,10,6,
-	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_MOON_RABIT_ATTACK,12,334,name_infor(MON_MOON_RABIT_ATTACK),&img_mons_moon_rabbit_attack,95,10,6,
+	{33,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,1,10,'R' },
 
-	{MON_MOON_RABIT_ELITE,16,1678,name_infor(MON_MOON_RABIT_ELITE),&img_mons_moon_rabbit_elite,128,15,10,
-	{39,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_MOON_RABIT_ELITE,16,1678,name_infor(MON_MOON_RABIT_ELITE),&img_mons_moon_rabbit_elite,148,15,10,
+	{42,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10,'R' },
 	
-	{MON_MAC,12,1230,name_infor(MON_MAC),&img_mons_mac,60,5,10,
+	{MON_MAC,12,1230,name_infor(MON_MAC),&img_mons_mac,60,5,12,
 	{21,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,2,10,'D' },
 	
-	{MON_NIGHTMARE,15,1712,name_infor(MON_NIGHTMARE),&img_mons_nightmare,112,12,5,
+	{MON_NIGHTMARE,15,1712,name_infor(MON_NIGHTMARE),&img_mons_nightmare,122,12,5,
 	{33,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10,'%' },
 	
-	{MON_LUNATIC,13,1374,name_infor(MON_LUNATIC),&img_mons_lunatic,90,12,5,
+	{MON_LUNATIC,13,1374,name_infor(MON_LUNATIC),&img_mons_lunatic,95,14,5,
 	{26,0,0},{ATT_LUNATIC,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,1,10,'%' },
 	
@@ -617,24 +617,24 @@ const mon_infor mondata[] = {
 	{14,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_SPEAK,0,1,8,'g' },
 
-	{MON_FIRE_CAR,16,1782,name_infor(MON_FIRE_CAR),&img_mons_fire_car,150,15,2,
-	{40,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_FIRE_CAR,16,1782,name_infor(MON_FIRE_CAR),&img_mons_fire_car,155,15,2,
+	{42,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,8,'8' },
 	
-	{MON_HELL_SPIDER,11,782,name_infor(MON_HELL_SPIDER),&img_mons_hell_spider,80,5,10,
-	{25,0,0},{ATT_SICK,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_VENOM_TEETH),name_infor(),name_infor()},
+	{MON_HELL_SPIDER,11,782,name_infor(MON_HELL_SPIDER),&img_mons_hell_spider,95,8,10,
+	{32,0,0},{ATT_SICK,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_VENOM_TEETH),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10,'S' },
 	
 	{MON_BLOOD_HAUNT,12,835,name_infor(MON_BLOOD_HAUNT),&img_mons_blood_haunt,55,0,12,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'G' },
 	
-	{MON_HELL_HOUND,9,512,name_infor(MON_HELL_HOUND),&img_mons_hell_dog,68,4,15,
+	{MON_HELL_HOUND,9,512,name_infor(MON_HELL_HOUND),&img_mons_hell_dog,72,4,16,
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D' },
 	
 	{MON_DESIRE,9,297,name_infor(MON_DESIRE),&img_mons_desire_red,40,1,20,
-	{18,0,0},{ ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{23,0,0},{ ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_SPEAK,0,1,7,'%' },
 
 	{MON_FLOWER_TANK,18,3220,name_infor(MON_FLOWER_TANK),&img_mons_flower_tank[1],90,10,10,
@@ -646,54 +646,54 @@ const mon_infor mondata[] = {
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,2,9,'8' },
 	
 	{MON_SNOW_GIRL,14,1464,name_infor(MON_SNOW_GIRL),&img_mons_snow_girl,77,2,16,
-	{27,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{28,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'G' },
 	
-	{MON_LETTY,14,1832,name_infor(MON_LETTY),&img_named_letty,150,11,6,
+	{MON_LETTY,14,1832,name_infor(MON_LETTY),&img_named_letty,160,11,6,
 	{19,0,0},{ATT_COLD,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,1,10,'&' },
 	
-	{MON_YORIHIME,20,7682,name_infor(MON_YORIHIME),&img_named_yorihime,250,8,18,
+	{MON_YORIHIME,20,7682,name_infor(MON_YORIHIME),&img_named_yorihime,270,8,20,
 	{52,52,0},{ ATT_FIRE,ATT_ELEC,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_FIRE_SWORD),name_infor(LOC_SYSTEM_ATT_ELEC_SWORD),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_RESIST_BLIZARD | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,5,3,8,'&' },
 
-	{MON_TOYOHIME,20,7682,name_infor(MON_TOYOHIME),&img_named_toyohime,260,18,8,
+	{MON_TOYOHIME,20,7682,name_infor(MON_TOYOHIME),&img_named_toyohime,280,20,8,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI | M_FLAG_RESIST_BLIZARD | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,5,3,10,'&' },
 	
 	{MON_UTSUHO,24,13456,name_infor(MON_UTSUHO),&img_named_utsuho,450,30,2,
-	{50,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{52,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_CAN_SEE_INVI  | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,4,3,10,'&' },
 	
-	{MON_SUIKA,23,9760,name_infor(MON_SUIKA),&img_named_suika,350,28,5,
-	{60,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_SUIKA,23,9760,name_infor(MON_SUIKA),&img_named_suika,380,28,5,
+	{65,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,10,'&' },
 	
 	{MON_REIMU,20,0,name_infor(MON_REIMU),&img_named_reimu,190,5,40,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNIQUE | M_FLAG_SPEAK,99,4,8,'&' },
 	
-	{MON_ALICE,18,8467,name_infor(MON_ALICE),&img_named_alice,160,10,15,
+	{MON_ALICE,18,8467,name_infor(MON_ALICE),&img_named_alice,180,10,15,
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,2,10,'&' },
 
-	{MON_SEIRAN,8,573,name_infor(MON_SEIRAN),&img_named_seiran,64,2,11,
+	{MON_SEIRAN,8,573,name_infor(MON_SEIRAN),&img_named_seiran,74,2,11,
 	{19,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,2,10,'&' },
 	
-	{MON_RINGO,13,1585,name_infor(MON_RINGO),&img_named_ringo,110,14,6,
+	{MON_RINGO,13,1585,name_infor(MON_RINGO),&img_named_ringo,125,14,6,
 	{22,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,2,10,'&' },
 	
-	{MON_UDONGE,15,1973,name_infor(MON_UDONGE),&img_named_udonge,150,4,16,
+	{MON_UDONGE,15,1973,name_infor(MON_UDONGE),&img_named_udonge,170,4,16,
 	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE,2,1,10,'&' },
 	
-	{MON_KAGUYA,18,3437,name_infor(MON_KAGUYA),&img_named_kaguya,202,20,1,
+	{MON_KAGUYA,18,3437,name_infor(MON_KAGUYA),&img_named_kaguya,302,20,1,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_PASSED_ALLY | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,12,'&' },
 	
-	{MON_MOKOU,16,2735,name_infor(MON_MOKOU),&img_mons_default,180,6,15,
+	{MON_MOKOU,16,2735,name_infor(MON_MOKOU),&img_mons_default,200,6,15,
 	{50,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10,'&' },
 	
@@ -717,24 +717,24 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,1,10,'d' },
 	
-	{MON_TOKIKO,11,1205,name_infor(MON_TOKIKO),&img_mons_tokiko,112,1,15,
+	{MON_TOKIKO,11,1205,name_infor(MON_TOKIKO),&img_mons_tokiko,125,1,15,
 	{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10,'&' },
 
 	
-	{MON_TOZIKO,15,3905,name_infor(MON_TOZIKO),&img_mons_toziko,135,5,15,
+	{MON_TOZIKO,15,3905,name_infor(MON_TOZIKO),&img_mons_toziko,145,5,15,
 	{29,0,0},{ATT_ELEC,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_ELEC),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10,'&' },
 
-	{MON_FUTO,16,4605,name_infor(MON_FUTO),&img_mons_futo,145,1,20,
+	{MON_FUTO,16,4605,name_infor(MON_FUTO),&img_mons_futo,165,1,20,
 	{14,25,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DISH),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,1,1,8,'&' },
 
-	{MON_MAMIZO,19,7205,name_infor(MON_MAMIZO),&img_mons_mamizo,210,15,2,
+	{MON_MAMIZO,19,7205,name_infor(MON_MAMIZO),&img_mons_mamizo,225,15,2,
 	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10,'&' },
 
-	{MON_SEIGA,17,6205,name_infor(MON_SEIGA),&img_mons_seiga,170,12,10,
+	{MON_SEIGA,17,6205,name_infor(MON_SEIGA),&img_mons_seiga,185,12,10,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12,'&' },
 
@@ -742,56 +742,56 @@ const mon_infor mondata[] = {
 	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
 	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 ,'&' },
 
-	{ MON_MURASA,17, 6510,name_infor(MON_MURASA),&img_named_murasa,180,5,15,
+	{ MON_MURASA,17, 6510,name_infor(MON_MURASA),&img_named_murasa,200,5,15,
 	{ 22,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_KEINE,15,4212,name_infor(MON_KEINE),&img_named_keine,150,12,5,
+	{ MON_KEINE,15,4212,name_infor(MON_KEINE),&img_named_keine,165,12,5,
 	{ 14,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,3,3,10,'&' },
 
-	{ MON_KEINE2,15,4212,name_infor(MON_KEINE2),&img_named_keine2,150,0,18,
+	{ MON_KEINE2,15,4212,name_infor(MON_KEINE2),&img_named_keine2,165,0,18,
 	{ 30,30,55 },{ ATT_NORMAL,ATT_NORMAL,ATT_NORMAL },{ name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(LOC_SYSTEM_ATT_HEADBUTT) },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,0,7,'&' },
 
-	{ MON_YOUMU,21,9465,name_infor(MON_YOUMU),&img_named_youmu,250,0,20,
+	{ MON_YOUMU,21,9465,name_infor(MON_YOUMU),&img_named_youmu,270,0,20,
 	{ 38,46,0 },{ ATT_NORMAL,ATT_NORMAL,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_HAKUROUKEN),name_infor(LOC_SYSTEM_ATT_ROUKANKEN),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,5,'&' },
 
-	{ MON_LYRICA,13,1624,name_infor(MON_LYRICA),&img_named_lyrica,72,1,15,
+	{ MON_LYRICA,13,1624,name_infor(MON_LYRICA),&img_named_lyrica,82,1,15,
 	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10,'&' },
 
 	//메를랑과 루나사는 디버프를 위한 HD 보정
-	{ MON_MERLIN,16,1642,name_infor(MON_MERLIN),&img_named_merlin,75,5,5,
+	{ MON_MERLIN,16,1642,name_infor(MON_MERLIN),&img_named_merlin,85,5,5,
 	{ 12,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10,'&' },
 
-	{ MON_LUNASA,17,1890,name_infor(MON_LUNASA),&img_named_lunasa,85,2,10,
+	{ MON_LUNASA,17,1890,name_infor(MON_LUNASA),&img_named_lunasa,95,2,10,
 	{ 15,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_NONE_STAIR | M_FLAG_FLY | M_FLAG_SPEAK,3,1,10,'&' },
 
-	{ MON_KOMACHI,21,9218,name_infor(MON_KOMACHI),&img_named_komachi,310,15,3,
-	{ 42,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_SICKLE),name_infor(),name_infor() },
+	{ MON_KOMACHI,21,9218,name_infor(MON_KOMACHI),&img_named_komachi,330,15,3,
+	{ 46,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_SICKLE),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,0,13,'&' },
 
-	{ MON_IKU,15,4162,name_infor(MON_IKU),&img_named_iku,115,10,20,
-	{ 20,30,0 },{ ATT_NORMAL,ATT_ELEC,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_ROBE),name_infor() },
+	{ MON_IKU,15,4162,name_infor(MON_IKU),&img_named_iku,125,10,20,
+	{ 20,35,0 },{ ATT_NORMAL,ATT_ELEC,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_ROBE),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_LARVA,6,1,name_infor(MON_LARVA),&img_named_larva,35,2,7,
+	{ MON_LARVA,6,1,name_infor(MON_LARVA),&img_named_larva,45,2,8,
 	{ 7,0,0 },{ ATT_S_POISON,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_UNIQUE | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'&' },
 
-	{ MON_NEMUNO,10,1221,name_infor(MON_NEMUNO),&img_named_nemuno,105,15,2,
-	{ 18,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_CLEAVER),name_infor(),name_infor() },
+	{ MON_NEMUNO,10,1221,name_infor(MON_NEMUNO),&img_named_nemuno,125,15,2,
+	{ 21,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_CLEAVER),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 
-	{ MON_AUNN,6,350,name_infor(MON_AUNN),&img_named_aunn,38,15,2,
+	{ MON_AUNN,6,350,name_infor(MON_AUNN),&img_named_aunn,38,18,2,
 	{ 8,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SHIELD | M_FLAG_SPEAK,3,1,10,'&' },
 
-	{ MON_NARUMI,10,1405,name_infor(MON_NARUMI),&img_named_narumi,70,30,0,
+	{ MON_NARUMI,10,1405,name_infor(MON_NARUMI),&img_named_narumi,72,30,0,
 	{ 19,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,12,'&' },
 
@@ -803,23 +803,23 @@ const mon_infor mondata[] = {
 	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_NO_ATK | M_FLAG_UNIQUE | M_FLAG_CANT_NETURAL | M_FLAG_CONFUSE | M_FLAG_FLY | M_FLAG_SPEAK, 2, 1, 10,'&' },
 
-	{ MON_KOKORO,17,1,name_infor(MON_KOKORO),&img_named_kokoro[0],190,9,12,
+	{ MON_KOKORO,17,1,name_infor(MON_KOKORO),&img_named_kokoro[0],210,9,12,
 	{ 20,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_KOKORO1,17,1,name_infor(MON_KOKORO1),&img_named_kokoro[1],190,9,12,
-	{ 30,0,0 },{ ATT_FIRE,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
+	{ MON_KOKORO1,17,1,name_infor(MON_KOKORO1),&img_named_kokoro[1],210,9,15,
+	{ 35,0,0 },{ ATT_FIRE,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_KOKORO2,17,1,name_infor(MON_KOKORO2),&img_named_kokoro[2],190,9,12,
-	{ 30,0,0 },{ ATT_COLD,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
+	{ MON_KOKORO2,17,1,name_infor(MON_KOKORO2),&img_named_kokoro[2],210,9,15,
+	{ 35,0,0 },{ ATT_COLD,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_KOKORO3,17,1,name_infor(MON_KOKORO3),&img_named_kokoro[3],190,9,12,
-	{ 30,0,0 },{ ATT_ELEC,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
+	{ MON_KOKORO3,17,1,name_infor(MON_KOKORO3),&img_named_kokoro[3],210,9,15,
+	{ 35,0,0 },{ ATT_ELEC,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_FAN),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_SUMIREKO,20,9429,name_infor(MON_SUMIREKO),&img_named_sumireko,200,1,15,
+	{ MON_SUMIREKO,20,9429,name_infor(MON_SUMIREKO),&img_named_sumireko,220,1,17,
 	{ 16,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SILENCE | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10 ,'&' },
 
@@ -863,7 +863,7 @@ const mon_infor mondata[] = {
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_NONE_MOVE | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,1,1,10,'*' },
 
-	{ MON_SHEEP,10,675,name_infor(MON_SHEEP),&img_mons_sheep,55,1,10,
+	{ MON_SHEEP,10,675,name_infor(MON_SHEEP),&img_mons_sheep,60,1,10,
 	{ 8,0,0 },{ ATT_SLEEP,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_ANIMAL | M_FLAG_SPEAK, 0, 1, 10 ,'Y' },
 
@@ -896,7 +896,7 @@ const mon_infor mondata[] = {
 		M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CONFUSE |
 		M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' },
 
-	{ MON_HATATE, 10, 1221, name_infor(MON_HATATE), &img_named_hatate, 85, 2, 22,
+	{ MON_HATATE, 10, 1221, name_infor(MON_HATATE), &img_named_hatate, 95, 2, 22,
 		{ 7,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 		M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 

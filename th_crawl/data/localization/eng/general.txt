@@ -4598,7 +4598,7 @@ LOC_SYSTEM_DEBUG_CREATE_WEATHER,Which weather would you like to manifest?
 LOC_SYSTEM_DEBUG_CREATE_ALTAR,Which shrine would you like to create?
 LOC_SYSTEM_DEBUG_CREATE_MONSTER,Create Monster
 LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER,Cancel monster creation
-LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} cleared, Level: {1} (EXP gained: {1})
+LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} cleared, Level: {1} (EXP gained: {2})
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CURRENT_POSITION,Current coordinates <{0},{1}>
 LOC_SYSTEM_DEBUG_SPELLPOWER,Spell Power {0}/{1}

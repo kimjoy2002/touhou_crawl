@@ -2133,6 +2133,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,당신의 현자의 돌은 이윽고 �
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,현자의 돌은 거의 사라져가고있다.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
+LOC_SYSTEM_SPELL_TOUGUE,{0:은|는} {1:을|를} 끌어당겼다.
 LOC_SYSTEM_SPL_MON_TANMAC_SMALL,소형 탄막
 LOC_SYSTEM_SPL_MON_TANMAC_MIDDLE,중형 탄막
 LOC_SYSTEM_SPL_MON_WATER_GUN,물총
@@ -2283,6 +2284,7 @@ LOC_SYSTEM_SPL_THROW_PLAYER,천수력남 던지기
 LOC_SYSTEM_SPL_THROW_AMULET,부적 던지기
 LOC_SYSTEM_SPL_WARP_KICK,아공혈
 LOC_SYSTEM_SPL_REIMU_BARRIER,봉마진
+LOC_SYSTEM_SPL_TOUGUE,혀로 당기기
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2436,6 +2438,7 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,요괴를 퇴치하는 부적을 던진다.
 LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,레이무가 틈새를 이용해서 적의 옆으로 순식간에 날라가서 차버린다.\n멀어져도 방심할 수 없는 이유중 하나. 생각보다 발차기가 아프다.\n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,레이무가 잠시 결계를 고정시켜서 상대를 도망가지 못하게 막는다.\n결계가 고정된 상태에서 결계 밖으로 나갈 수 없게된다. \n기본적으로 예방법은 없지만 지속시간이 짧으며 한번 사용하면 당분간은 사용할 수 없는 듯하다. \n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI,단, 유카리라면 이 주문을 잘 알고있어서 사전에 막아줄 수 있을듯하다.\n
+LOC_SYSTEM_SPL_DESCRIBE_TOUGUE,혀를 내밀어 먼거리에 있는 눈앞으로 적을 당긴다.\n끈적끈적해서 기분이 나빠진다.
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n
@@ -4599,6 +4602,7 @@ LOC_SYSTEM_DEBUG_CREATE_ALTAR,어떤 신전을 만들까?
 LOC_SYSTEM_DEBUG_CREATE_MONSTER,몬스터만들기
 LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER,몬스터 생성을 취소
 LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} 클리어, 레벨: {1} (경험치양: {1})
+LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE,계속해?
 LOC_SYSTEM_DEBUG_CLEVER,디버그) {0} 마법 강화
 LOC_SYSTEM_DEBUG_CURRENT_POSITION,현재좌표 <{0},{1}>
 LOC_SYSTEM_DEBUG_SPELLPOWER,스펠파워 {0}/{1}

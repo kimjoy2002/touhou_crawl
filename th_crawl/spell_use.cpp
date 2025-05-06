@@ -4677,6 +4677,37 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+
+bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
+{
+	if (order->isplayer())
+		return false;
+
+
+	if(unit* hit_ = DebufBeam(SPL_TOUGUE, order, target))
+	{
+		beam_iterator beam(order->position,target);
+		if(CheckThrowPath(order->position,target,beam))
+		{
+			beam.init();
+
+			if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_->isFly(),hit_->isSwim(),false))
+			{
+				soundmanager.playSound("debuf");
+				if (env[current_level].isInSight(*beam) || env[current_level].isInSight(hit_->position)) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_TOUGUE,true,false,false,CL_normal,
+						PlaceHolderHelper(order->GetName()->getName()),
+						PlaceHolderHelper(hit_->GetName()->getName()));
+				}
+				hit_->SetXY(*beam);
+				hit_->AttackedTarget(order);
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -4868,8 +4899,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		}
 		break;
 	case MON_YAMABUSH_TENGU:
-		list->push_back(spell(SPL_HASTE, 20));
-		list->push_back(spell(SPL_AIR_STRIKE, 20));
+		list->push_back(spell(SPL_HASTE, 25));
+		list->push_back(spell(SPL_AIR_STRIKE, 25));
 		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
 	case MON_FORTUNE_TELLER:
@@ -4926,9 +4957,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_NITORI:
 	{
-		list->push_back(spell(SPL_WATER_CANNON, 30));
-		list->push_back(spell(SPL_INVISIBLE, 15));
-		list->push_back(spell(SPL_MON_WATER_GUN, 25));
+		list->push_back(spell(SPL_WATER_CANNON, 32));
+		list->push_back(spell(SPL_INVISIBLE, 20));
+		list->push_back(spell(SPL_MON_WATER_GUN, 27));
 		item_infor t;
 		makeitem((item_type)((int)ITM_ARMOR_BODY_ARMOUR_0 + randA(3)), 1, &t, AMK_KAPPA);
 		item_list_->push_back(t);
@@ -4984,12 +5015,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_PACHU:
 		list->push_back(spell(SPL_HASTE, 15));
-		list->push_back(spell(SPL_FIRE_BOLT, 10));
-		list->push_back(spell(SPL_ICE_BOLT, 10));
-		list->push_back(spell(SPL_VENOM_BOLT, 10));
-		list->push_back(spell(SPL_CHAIN_LIGHTNING, 10));
-		list->push_back(spell(SPL_WATER_CANNON, 20));
-		list->push_back(spell(SPL_BLINK, 15));
+		list->push_back(spell(SPL_FIRE_BOLT, 12));
+		list->push_back(spell(SPL_ICE_BOLT, 12));
+		list->push_back(spell(SPL_VENOM_BOLT, 12));
+		list->push_back(spell(SPL_CHAIN_LIGHTNING, 12));
+		list->push_back(spell(SPL_WATER_CANNON, 22));
+		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_MAGIC_BOOK:
 	{
@@ -5049,12 +5080,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SMITE, 10));
 		break;
 	case MON_KOAKUMA:
-		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 10)); //악마소환으로 바꾸기
+		list->push_back(spell(SPL_SUMMON_LESSOR_DEMON, 12)); //악마소환으로 바꾸기
 		list->push_back(spell(SPL_FIRE_BOLT, 15));
 		list->push_back(spell(SPL_BLINK, 20));
 		break;
 	case MON_MAID_FAIRY:
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 40));
 		if (randA(19) == 0)
 		{
 			item_infor t;
@@ -5068,7 +5099,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 10));
 		list->push_back(spell(SPL_STASIS, 15));
 		list->push_back(spell(SPL_TELEPORT_SELF, 10));
-		list->push_back(spell(SPL_THROW_KNIFE, 25));
+		list->push_back(spell(SPL_THROW_KNIFE, 35));
 		list->push_back(spell(SPL_BLINK, 20));
 		{
 			item_infor t;
@@ -5092,7 +5123,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUMMON_BIRD, 30));
 		break;
 	case MON_YAMAWARO_NINJA:
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 30));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 40));
 		if(randA(2)==0)
 		{
 			item_infor t;
@@ -5115,6 +5146,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_NUE:
 		list->push_back(spell(SPL_SUMMON_UFO, 20));
 		list->push_back(spell(SPL_CHAIN_LIGHTNING, 20));
+		break;
+	case MON_DEAGAMA:
+		list->push_back(spell(SPL_TOUGUE, 33));
 		break;
 	case MON_NAMAZ:
 		list->push_back(spell(SPL_STONE_UPLIFT, 10));
@@ -5275,12 +5309,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_CANNON, 21));
 		break;
 	case MON_SNOW_GIRL:
-		list->push_back(spell(SPL_FREEZE, 20));
-		list->push_back(spell(SPL_COLD_BEAM, 15));
+		list->push_back(spell(SPL_FREEZE, 30));
+		list->push_back(spell(SPL_COLD_BEAM, 18));
 		break;
 	case MON_LETTY:
-		list->push_back(spell(SPL_FREEZE, 25));
-		list->push_back(spell(SPL_ICE_CLOUD, 15));
+		list->push_back(spell(SPL_FREEZE, 35));
+		list->push_back(spell(SPL_ICE_CLOUD, 25));
 		break;
 	case MON_YORIHIME:
 		break;
@@ -5326,7 +5360,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_MOKOU:
 		break;
 	case MON_NESI:
-		list->push_back(spell(SPL_NESY_CANNON, 30));
+		list->push_back(spell(SPL_NESY_CANNON, 35));
 		break;
 	case MON_SANGHAI:
 	case MON_FAKE_SANGHAI:
@@ -5446,8 +5480,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	}
 	case MON_NARUMI:
-		list->push_back(spell(SPL_STONE_ARROW, 20));
-		list->push_back(spell(SPL_KANAME_DRILL, 10));
+		list->push_back(spell(SPL_STONE_ARROW, 25));
+		list->push_back(spell(SPL_KANAME_DRILL, 12));
 		break;
 	case MON_MISTIA:
 		list->push_back(spell(SPL_MISTIA_SONG, 50));
@@ -5506,7 +5540,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	break;
 	case MON_HATATE:
 		list->push_back(spell(SPL_VEILING, 20));
-		list->push_back(spell(SPL_AIR_STRIKE, 25));
+		list->push_back(spell(SPL_AIR_STRIKE, 30));
 		list->push_back(spell(SPL_BLINK, 25));
 		break;
 	case MON_DOREKING:
@@ -5538,7 +5572,18 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	}
 }
 
+float monster_enhance_magic(int id_) {
+	//수치로 조절하기 어려운 부분 강화시키기
+	switch(id_) {
+	case MON_MAID_FAIRY:
+	case MON_YAMAWARO_NINJA:
+		return 1.5f;
+	default:
+		break;
+	}
 
+	return 0;
+}
 
 
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
@@ -5560,6 +5605,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 				PlaceHolderHelper(order->GetName()->getName()));
 		}
 
+	}
+
+	if(monster_enhance_magic(order->id) > 0) {
+		power *= monster_enhance_magic(order->id);
 	}
 	power=max(0,min(SpellCap(skill),power));
 	switch(skill)
@@ -5852,6 +5901,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_warp_kick(power, short_, order, target);
 	case SPL_REIMU_BARRIER:
 		return skill_reimu_barrier(power, short_, order, target);
+	case SPL_TOUGUE:
+		return skill_tougue(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -6340,6 +6391,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_warp_kick(power, short_, &you, target);
 	case SPL_REIMU_BARRIER:
 		return skill_reimu_barrier(power, short_, &you, target);
+	case SPL_TOUGUE:
+		return skill_tougue(power, short_, &you, target);
 	default:
 		return false;
 	}

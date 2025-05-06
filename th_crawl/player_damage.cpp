@@ -48,7 +48,7 @@ int players::GetAttack(bool max_)
 		skill_ = itemtoskill(equipment[ET_WEAPON]->type);
 		if(skill_>SKT_ERROR)
 		{
-			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/15.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
+			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/18.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
 			min_atk_ = 0;//min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
 		}
 		else //여기는 버그 처리. 데미지가 없으면 버그임을 알수있음
@@ -60,7 +60,7 @@ int players::GetAttack(bool max_)
 	else if(!equipment[ET_WEAPON]) //맨손임
 	{
 		skill_ = SKT_UNWEAPON;
-		max_atk_ = base_atk_+ GetSkillLevel(skill_, true);
+		max_atk_ = base_atk_+ GetSkillLevel(skill_, true)*15.0f/20.0f;
 		if(GetProperty(TPT_CLAW)>0)
 			max_atk_ += 3*GetProperty(TPT_CLAW);
 		min_atk_ = 0;
@@ -167,7 +167,7 @@ int players::GetAttack(bool max_)
 
 int players::GetHit()
 {
-	int hit_ = 3+s_dex/2+ GetSkillLevel(SKT_FIGHT, true)/2;
+	int hit_ = 2+s_dex/2+ GetSkillLevel(SKT_FIGHT, true)/2;
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
 		skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
@@ -277,11 +277,11 @@ int players::GetThrowAttack(const item* it, bool max_)
 	
 	if(!(it->type>=ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
-		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true)/15.0f+it->value4/10.0f);
+		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true)/20.0f+it->value4/10.0f);
 	}
 	else
 	{
-		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true) /15.0f);
+		max_atk_ = 1+it->value2*(1+base_atk_/10.0f+ GetSkillLevel(SKT_TANMAC, true) /20.0f);
 	}
 
 	min_atk_ = min(it->value2/2, GetSkillLevel(SKT_TANMAC, true) /4);

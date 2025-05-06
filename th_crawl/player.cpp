@@ -1371,8 +1371,6 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 		power_ *= 1.5f;
 	}
 
-	power_*=1.5f; //마법인헨서 기본으로 딸려있도록
-
 
 	return power_;
 }

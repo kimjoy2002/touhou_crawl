@@ -179,6 +179,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
 	case SPL_WARP_KICK:
+	case SPL_TOUGUE:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_MACRO_BURST:
 		return (S_FLAG_CLOUD | S_FLAG_SPEAK | S_FLAG_DIREC ) & flag;
@@ -316,6 +317,7 @@ int SpellLength(spell_list skill)
 	case SPL_TARGET_ELEC:
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
+	case SPL_TOUGUE:
 		return 6;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
@@ -708,6 +710,8 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_WARP_KICK);
 	case SPL_REIMU_BARRIER:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_REIMU_BARRIER);
+	case SPL_TOUGUE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_TOUGUE);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -786,6 +790,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SLEEP_SMITE:
 	case SPL_THROW_KNIFE:
 	case SPL_WARP_KICK:
+	case SPL_TOUGUE:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -1008,6 +1013,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_TRASH:
 	case SPL_DREAM_CALL:
 	case SPL_THROW_PLAYER:
+	case SPL_TOUGUE:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1379,6 +1385,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_REIMU_BARRIER:
 		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_TOUGUE:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1539,6 +1547,7 @@ int SpellCap(spell_list skill)
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
 	case SPL_REIMU_BARRIER:
+	case SPL_TOUGUE:
 		return 200;
 	default:
 	case SPL_BLINK:

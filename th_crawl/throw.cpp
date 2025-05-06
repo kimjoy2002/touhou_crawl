@@ -137,7 +137,7 @@ void MakeTanmac(item_infor* t, int select_)
 	{
 	case TMT_AMULET:
 		t->value1 = 15;
-		t->value2 = 8;
+		t->value2 = 7;
 		t->value3 = 0;
 		t->value4 = TMT_AMULET;
 		t->value5 = 0;
@@ -182,7 +182,7 @@ void MakeTanmac(item_infor* t, int select_)
 		break;
 	case TMT_DOGGOJEO:
 		t->value1 = 6;
-		t->value2 = 10;
+		t->value2 = 9;
 		t->value3 = 0;
 		t->value4 = TMT_DOGGOJEO;
 		t->value5 = 0;

@@ -10,6 +10,7 @@
 #include "display.h"
 #include "smoke.h"
 #include "key.h"
+#include "rect.h"
 #include "mon_infor.h"
 
 #include "spellcard.h"
@@ -23,9 +24,18 @@
 
 extern HANDLE mutx;
 wiz_infor wiz_list;
-
+extern int create_bamboo_mon();
 
 bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
+
+void create_and_kill(int floor, float percent_ = 1.0f) {
+	env[floor].MakeMap(true);				
+	for(vector<monster>::iterator it = env[floor].mon_vector.begin(); it != env[floor].mon_vector.end(); it++)
+	{
+		if(it->isLive() && percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
+			it->dead(PRT_PLAYER,false);
+	}
+}
 
 void wiz_mode()
 {
@@ -882,15 +892,11 @@ void wiz_mode()
 			break;
 		case 'E':
 			{
+				//---------------------------------------일반던전(안개호수 입구까지)--------------------------------------------
 				int prevexp_=0, exp_ = 0;
 				for(int i = 0; i <= map_list.dungeon_enter[MISTY_LAKE].floor; i++)
 				{
-					env[i].MakeMap(true);				
-					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-					{
-						if(it->isLive())
-							it->dead(PRT_PLAYER,false);
-					}
+					create_and_kill(i);
 				}
 				exp_ = you.exper;
 				{
@@ -901,16 +907,19 @@ void wiz_mode()
 						PlaceHolderHelper(to_string(exp_-prevexp_)));
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
+
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//---------------------------------------안개호수--------------------------------------------
+
 				prevexp_ = exp_;
 				 
 				for(int i = MISTY_LAKE_LEVEL; i <= MISTY_LAKE_LAST_LEVEL; i++)
 				{
-					env[i].MakeMap(true);				
-					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-					{
-						if(it->isLive())
-							it->dead(PRT_PLAYER,false);
-					}
+					create_and_kill(i);
 				}
 				exp_ = you.exper;
 				{
@@ -923,15 +932,16 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//----------------------------------------------나머지 던전 (9~15)-------------------------------------------------
 
 				for(int i = map_list.dungeon_enter[MISTY_LAKE].floor+1; i <= MAX_DUNGEUN_LEVEL; i++)
 				{
-					env[i].MakeMap(true);				
-					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-					{
-						if(it->isLive())
-							it->dead(PRT_PLAYER,false);
-					}
+					create_and_kill(i);
 				}
 				exp_ = you.exper;
 				ostringstream oss_;
@@ -943,14 +953,16 @@ void wiz_mode()
 				prevexp_ = exp_;
 
 
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//----------------------------------------------요괴산-------------------------------------------------
+
 				for(int i = YOUKAI_MOUNTAIN_LEVEL; i <= YOUKAI_MOUNTAIN_LAST_LEVEL; i++)
 				{
-					env[i].MakeMap(true);				
-					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-					{
-						if(it->isLive())
-							it->dead(PRT_PLAYER,false);
-					}
+					create_and_kill(i);
 				}
 				exp_ = you.exper;
 				{
@@ -963,15 +975,21 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 
+
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//----------------------------------------------홍마관-------------------------------------------------
+
+
 				for(int i = SCARLET_LEVEL; i <= SCARLET_LEVEL_LAST_LEVEL; i++)
 				{
-					env[i].MakeMap(true);				
-					for(vector<monster>::iterator it = env[i].mon_vector.begin(); it != env[i].mon_vector.end(); it++)
-					{
-						if(it->isLive())
-							it->dead(PRT_PLAYER,false);
-					}
+					create_and_kill(i);
 				}
+				create_and_kill(SCARLET_LIBRARY_LEVEL);
+
 				exp_ = you.exper;
 				{
 					ostringstream oss;
@@ -982,6 +1000,192 @@ void wiz_mode()
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 				prevexp_ = exp_;
+				
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//----------------------------------------------영원정-------------------------------------------------
+
+				{
+					env[EIENTEI_LEVEL].MakeMap(true);
+					for(int i =0; i < 40;i++) {
+						//좀운이 나빴다 치고 40마리 생성
+						int id_ = create_bamboo_mon();
+						dif_rect_iterator rit(you.position,5,true);
+						monster *temp = env[current_level].AddMonster(id_,0,*rit);
+						temp->dead(PRT_PLAYER,false);
+					}
+					create_and_kill(EIENTEI_LEVEL);
+				}
+				exp_ = you.exper;
+				{
+					ostringstream oss;
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_EINENTEI),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
+				prevexp_ = exp_;
+				
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+				//-----------------------------------------------짐승길--------------------------------------------------
+
+				for(int i = DEPTH_LEVEL; i <= DEPTH_LAST_LEVEL; i++)
+				{
+					create_and_kill(i);
+				}
+
+				exp_ = you.exper;
+				{
+					ostringstream oss;
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_DEPTH),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
+				prevexp_ = exp_;
+				
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+				key_ = waitkeyinput(true);
+				if(key_ != 'y') {
+					break;
+				}
+
+				random_extraction<int> rand_ext;
+				rand_ext.push(0);
+				rand_ext.push(1);
+				rand_ext.push(2);
+				
+				bool end_ = false;
+				while(rand_ext.GetSize() > 0) {
+					int pop_ = rand_ext.pop();
+					switch (pop_) {
+						default:
+							break;
+						case 0:
+						{
+							//-----------------------------------------------달도시--------------------------------------------------
+
+							create_and_kill(DREAM_LEVEL);
+							create_and_kill(MOON_LEVEL);
+
+							exp_ = you.exper;
+							{
+								ostringstream oss;
+								oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+									PlaceHolderHelper(LOC_SYSTEM_DUNGEON_MOON),
+									PlaceHolderHelper(to_string(you.level)),
+									PlaceHolderHelper(to_string(exp_-prevexp_)));
+								printlog(oss.str(),true,false,false,CL_normal);
+							}
+							prevexp_ = exp_;
+							
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+							key_ = waitkeyinput(true);
+							if(key_ != 'y') {
+								end_ =  true;
+								break;
+							}
+							break;
+						}
+						case 1:
+						{
+							//-----------------------------------------------지저--------------------------------------------------
+
+							for(int i = SUBTERRANEAN_LEVEL; i < SUBTERRANEAN_LEVEL_LAST_LEVEL; i++)
+							{
+								create_and_kill(i, 0.5f); //절반정도 정리?
+							}
+							create_and_kill(SUBTERRANEAN_LEVEL_LAST_LEVEL);
+
+							exp_ = you.exper;
+							{
+								ostringstream oss;
+								oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+									PlaceHolderHelper(LOC_SYSTEM_DUNGEON_SUBTERRANEAN),
+									PlaceHolderHelper(to_string(you.level)),
+									PlaceHolderHelper(to_string(exp_-prevexp_)));
+								printlog(oss.str(),true,false,false,CL_normal);
+							}
+							prevexp_ = exp_;
+							
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+							key_ = waitkeyinput(true);
+							if(key_ != 'y') {
+								end_ =  true;
+								break;
+							}
+							break;
+						}
+						case 2:
+						{
+							//-----------------------------------------------마계--------------------------------------------------
+							int allrune_ = 3;
+							while(allrune_)
+							{
+								env[PANDEMONIUM_LEVEL].ClearFloor();
+								env[PANDEMONIUM_LEVEL].make = false;
+								if(randA(3)==1) {
+									allrune_--;
+								} else {
+									create_and_kill(PANDEMONIUM_LEVEL, 0.2f); //아주조금만 정리하고 진행
+								}
+							}
+							create_and_kill(PANDEMONIUM_LEVEL+1, 0.8f);
+							create_and_kill(PANDEMONIUM_LEVEL+2, 0.8f);
+							create_and_kill(PANDEMONIUM_LEVEL+3, 0.8f);
+
+							exp_ = you.exper;
+							{
+								ostringstream oss;
+								oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+									PlaceHolderHelper(LOC_SYSTEM_DUNGEON_PANDEMONIUM),
+									PlaceHolderHelper(to_string(you.level)),
+									PlaceHolderHelper(to_string(exp_-prevexp_)));
+								printlog(oss.str(),true,false,false,CL_normal);
+							}
+							prevexp_ = exp_;
+							
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
+							key_ = waitkeyinput(true);
+							if(key_ != 'y') {
+								end_ =  true;
+								break;
+							}
+							break;
+						}
+					}
+				}
+				if(end_)
+					break;
+
+
+				//-----------------------------------------------하쿠레이--------------------------------------------------
+				for(int i = HAKUREI_LEVEL; i <= HAKUREI_LAST_LEVEL; i++)
+				{
+					create_and_kill(i);
+				}
+
+				exp_ = you.exper;
+				{
+					ostringstream oss;
+					oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,
+						PlaceHolderHelper(LOC_SYSTEM_DUNGEON_HAKUREI),
+						PlaceHolderHelper(to_string(you.level)),
+						PlaceHolderHelper(to_string(exp_-prevexp_)));
+					printlog(oss.str(),true,false,false,CL_normal);
+				}
+				prevexp_ = exp_;
+				
+				//끝!!
 			}
 			break;
 		case 'B':

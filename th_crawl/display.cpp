@@ -2144,7 +2144,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			you.Draw(pSprite, (you.position.x - x_)*calc_tile_size + tile_x_offset, (you.position.y - y_)*calc_tile_size + tile_x_offset,calc_tile_scale);
 			if (you.GetHp() != you.GetMaxHp())
 			{
-				float max_rate_ = 32.0f;
+				float max_rate_ = calc_tile_size;
 
 				int temp1_ = max(0, you.GetHp()) * calc_tile_size / you.GetMaxHp();
 				int hp_rate_ = (max_rate_ * temp1_) / calc_tile_size;

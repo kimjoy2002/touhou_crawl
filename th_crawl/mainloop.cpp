@@ -514,10 +514,6 @@ void scrollup(bool down) {
 	vector<int> ablesize = {23,32,47,64,95,128};
 
 
-
-
-
-
 	bool next_ = false;
 	if(!down) {
 		for(int i = 0; i < ablesize.size();i++) {
@@ -529,7 +525,7 @@ void scrollup(bool down) {
 				float calc_tile_scale = ablesize[i]/32.0f;
 				sight_x = (int)(sight_x/calc_tile_scale);
 				sight_y = (int)(sight_y/calc_tile_scale+0.3f);
-				if(sight_x >= 3 && sight_y > 3) {
+				if(sight_x >= 3 && sight_y >= 3) {
 					g_tile_size = ablesize[i];
 				}
 				break;

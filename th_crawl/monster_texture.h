@@ -269,6 +269,12 @@ extern textures img_mons_chiyari;
 extern textures img_mons_sonbiten;
 extern textures img_mons_hisami;
 extern textures img_mons_tsukasa;
+extern textures img_mons_ubame;
+extern textures img_mons_chimi;
+extern textures img_mons_nareko;
+extern textures img_mons_mike;
+extern textures img_mons_takane;
+extern textures img_mons_sannyo;
 
 
 

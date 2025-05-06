@@ -972,6 +972,12 @@ textures img_mons_chiyari(&texture_monster02, 8, 255);
 textures img_mons_sonbiten(&texture_monster02, 9, 255);
 textures img_mons_hisami(&texture_monster02, 10, 255);
 textures img_mons_tsukasa(&texture_monster02, 11, 255);
+textures img_mons_ubame(&texture_monster02, 12, 255);
+textures img_mons_chimi(&texture_monster02, 13, 255);
+textures img_mons_nareko(&texture_monster02, 14, 255);
+textures img_mons_mike(&texture_monster02, 15, 255);
+textures img_mons_takane(&texture_monster02, 16, 255);
+textures img_mons_sannyo(&texture_monster02, 17, 255);
 
 
 
@@ -3230,6 +3236,18 @@ int texturetoint(textures* input)
 		return 520;
 	else if (input == &img_mons_tsukasa)
 		return 521;
+	else if (input == &img_mons_ubame)
+		return 522;
+	else if (input == &img_mons_chimi)
+		return 523;
+	else if (input == &img_mons_nareko)
+		return 524;
+	else if (input == &img_mons_mike)
+		return 525;
+	else if (input == &img_mons_takane)
+		return 526;
+	else if (input == &img_mons_sannyo)
+		return 527;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4300,8 +4318,18 @@ textures* inttotexture(int input)
 		return &img_mons_sonbiten;
 	case 520:
 		return &img_mons_hisami;
-	case 521:
-		return &img_mons_tsukasa;
+	case 522:
+		return &img_mons_ubame;
+	case 523:
+		return &img_mons_chimi;
+	case 524:
+		return &img_mons_nareko;
+	case 525:
+		return &img_mons_mike;
+	case 526:
+		return &img_mons_takane;
+	case 527:
+		return &img_mons_sannyo;
 	default:
 		return &img_mons_default;
 	}

@@ -717,7 +717,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.max_hp+=1;
 		you.max_hp+=1;
 		you.StatUpDown(2,STAT_STR);
-		you.StatUpDown(4,STAT_INT);
+		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(2,STAT_DEX);
 		MakeStartItem(SIT_SICKLE,0);
 		MakeStartItem(SIT_ROBE,1);

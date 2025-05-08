@@ -78,7 +78,7 @@ void monster::SaveDatas(FILE *fp)
 		SaveData<attack_type>(fp, atk_type[i]);
 		atk_name[i].SaveDatas(fp);
 	}
-	SaveData<int>(fp, flag);
+	SaveData<uint64_t>(fp, flag);
 	SaveData<int>(fp, resist);
 	SaveData<int>(fp, sense);
 	SaveData<bool>(fp, dream);
@@ -130,6 +130,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, memory_time);
 	SaveData<bool>(fp, first_contact);
 	SaveData<int>(fp, strong);
+	SaveData<int>(fp, special_value);
 	SaveData<int>(fp, delay_turn);
 
 	SaveData<int>(fp, will_move.size());
@@ -196,7 +197,7 @@ void monster::LoadDatas(FILE *fp)
 		LoadData<attack_type>(fp, atk_type[i]);
 		atk_name[i].LoadDatas(fp);
 	}
-	LoadData<int>(fp, flag);
+	LoadData<uint64_t>(fp, flag);
 	LoadData<int>(fp, resist);
 	LoadData<int>(fp, sense);
 	LoadData<bool>(fp, dream);
@@ -248,6 +249,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, memory_time);
 	LoadData<bool>(fp, first_contact);
 	LoadData<int>(fp, strong);
+	LoadData<int>(fp, special_value);
 	LoadData<int>(fp, delay_turn);
 
 
@@ -367,6 +369,7 @@ void monster::init()
 	memory_time = 0; 
 	first_contact = true;
 	strong = 1;
+	special_value = 0;
 	delay_turn = 0;
 	while(!will_move.empty())
 		will_move.pop_back();
@@ -380,7 +383,7 @@ void monster::init()
 	random_spell = false;
 	item_lists.clear();
 }
-bool monster::SetMonster(int map_num_, int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_)
+bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int time_, coord_def position_, bool init_)
 {
 	if(id_ < 0 || id_ > MON_MAX)
 		return false;
@@ -460,7 +463,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, int flag_, int time
 	SetSpell((monster_index)id_, this,&item_lists,&random_spell);
 	return true;
 }	
-bool monster::ChangeMonster( int id_, int flag_)
+bool monster::ChangeMonster( int id_, uint64_t flag_)
 {
 	float hp_per_ = (float)(hp) / max_hp;
 	bool summon_ = (flag & M_FLAG_SUMMON)?true:false;
@@ -3841,6 +3844,10 @@ bool monster::SetGlow(int glow_, bool no_speak)
 {
 	if(!glow_)
 		return false;
+	if(isYourShight()) {
+		if(s_invisible && you.auto_pickup==0)
+			auto_pick_onoff(true);
+	}
 	if(isYourShight() && !no_speak)
 	{
 		if(!s_glow) {
@@ -3851,8 +3858,6 @@ bool monster::SetGlow(int glow_, bool no_speak)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_MORE_GLOW,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 		}
-		if(s_invisible && you.auto_pickup==0)
-			auto_pick_onoff(true);
 	}
 	s_glow += glow_;
 	if(s_glow>100)
@@ -4597,7 +4602,7 @@ int monster::GetAttack(int num_, bool max_)
 }
 int monster::GetHit()
 {
-	int hit_ = level/3+8;
+	int hit_ = level*1.5f+8;
 	return hit_;
 }
 int monster::GetEv()

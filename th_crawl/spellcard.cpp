@@ -253,7 +253,9 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			ThrowSector(0, beam, temp_infor, GetSpellSector(SPL_FIRE_SPREAD), [&](coord_def c_) {
 				if (you.isSightnonblocked(c_))
 				{
-					env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(2, 5) + power / 10, 0, &you);
+					if(randA(60)+ power > 20) {
+						env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(1, 5) + power / 15, 0, &you);
+					}
 				}
 			}, false);
 			return true;

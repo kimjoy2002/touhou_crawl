@@ -3079,7 +3079,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 	}
 	beam_iterator beam(order->position, order->position);
 	int damage_ = 4 + power / 10;
-	int multi_ = 4;
+	int multi_ = 3;
 	int hit_ = 10 + power / 15;
 	if (CheckThrowPath(order->position, target, beam))
 	{

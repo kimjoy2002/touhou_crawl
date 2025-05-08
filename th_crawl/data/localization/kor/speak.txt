@@ -3,6 +3,8 @@ SPEAK_NORMAL,{0:은|는} 외쳤다.
 SPEAK_MAGIC,{0:이|가} 주문을 외웠다.
 SPEAK_CONFUSE,{0:은|는} 혼란스러워 하고있다.
 SPEAK_CAMERA,{0:은|는} 포즈를 취했다.
+SPEAK_PROPOSAL,{0:은|는} 팔기위한 상품을 나열했다.
+SPEAK_PROPOSAL_ACCEPT,{0:은|는} 상품을 팔았다.
 SPEAK_YUKKURI_NORMAL,{0:은|는} 외쳤다. "느긋하게 있으라구!!!"
 SPEAK_RUMIA_NORMAL1,{0:은|는} 외쳤다. "그런건가-"
 SPEAK_RUMIA_NORMAL2,{0:은|는} 외쳤다. "{1:은|는} 먹어도 되는 {2}?"
@@ -1483,14 +1485,15 @@ SPEAK_EIKA_NORMAL1,{0:은|는} 외쳤다. "여기서 날뛰지마!"
 SPEAK_EIKA_NORMAL2,{0:은|는} 외쳤다. "거기 옆에 돌탑 무너지지않게 조심해!"
 SPEAK_EIKA_NORMAL3,{0:은|는} 외쳤다. "너 같은건 지옥에 떨어져야해!"
 SPEAK_EIKA_NORMAL4,{0:은|는} 외쳤다. "조심해!"
-SPEAK_EIKA_NORMAL5,{0:은|는} 외쳤다. "넌 지금까지 부순 돌탑의 갯수를 기억해? 난 알아 {0}개다!"
+SPEAK_EIKA_NORMAL5,{0:은|는} 외쳤다. "넌 지금까지 부순 돌탑의 갯수를 기억해? 난 알아 {1}개다!"
 SPEAK_EIKA_NORMAL6,{0:은|는} 외쳤다. "좀 조심히 다녀줄래?"
-SPEAK_EIKA_NORMAL7,{0:은|는} 외쳤다. "돌탑 {0}개의 원수 용서못해! 죽어라!"
+SPEAK_EIKA_NORMAL7,{0:은|는} 외쳤다. "돌탑 {1}개의 원수 용서못해! 죽어라!"
 SPEAK_EIKA_NORMAL8,{0:은|는} 외쳤다. "돌쌓기 콘테스트 같이 할래?"
 SPEAK_EIKA_NORMAL9,{0:은|는} 근처 돌탑을 바로 세우고있다.
 SPEAK_EIKA_CONFUSE1,{0:은|는} 혼란하고 있다. "어라~ 돌탑이 움직이고 있어~"
 SPEAK_EIKA_CONFUSE2,{0:은|는} 혼란하고 있다. "돌탑이 나에게 말을 걸고있어!"
 SPEAK_EIKA_CONFUSE3,{0:은|는} 혼란하여 돌탑을 제대로 쌓지못하고있다.
+SPEAK_EIKA_MAGIC1,{0:은|는} 돌탑을 쌓기 시작했다.
 SPEAK_EIKA_CAMERA,{0:은|는} 외쳤다. "돌탑을 배경으로 찍어줘!"
 SPEAK_URUMI_NORMAL1,{0:은|는} 외쳤다. "키우던 물고기가 배가 고프던 참인데"
 SPEAK_URUMI_NORMAL2,{0:은|는} 외쳤다. "나 대신 잠깐 이 아이 좀 맡아주겠어?"
@@ -1502,7 +1505,7 @@ SPEAK_URUMI_NORMAL7,{0:은|는} 돌로 된 아이를 안은채로 웃고있다.
 SPEAK_URUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "여기가 어디지?"
 SPEAK_URUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "물고기 먹이 줄 시간인데!"
 SPEAK_URUMI_CONFUSE3,{0:은|는} 혼란하여 이리저리 움직이고 있다.
-SPEAK_URUMI_MAGIC,{0:은|는} 주문을 외웠다.
+SPEAK_URUMI_MAGIC1,{0:은|는} 주문을 외웠다.
 SPEAK_URUMI_CAMERA,{0:은|는} 외쳤다. "이상한걸 들고 있구나."
 SPEAK_KUTAKA_NORMAL1,{0:은|는} 말했다. "당신의 사명감을 테스트해보겠습니다."
 SPEAK_KUTAKA_NORMAL2,{0:은|는} 말했다. "실력이 좋으시네요."
@@ -1524,8 +1527,8 @@ SPEAK_YACHIE_NORMAL5,{0:은|는} 말했다. "혹시라도 매복과 기습에 �
 SPEAK_YACHIE_NORMAL6,{0:은|는} 말했다. "곧 지상도 우리 귀걸조의 손에 들어오게될겁니다."
 SPEAK_YACHIE_NORMAL7,{0:은|는} 커다란 꼬리를 흔들고있다.
 SPEAK_YACHIE_CONFUSE1,{0:은|는} 혼란하고 있다. "키-! 머리가 아파!"
-SPEAK_YACHIE_CONFUSE1,{0:은|는} 혼란하고 있다. "내 말이 통하지않는거야?"
-SPEAK_YACHIE_CONFUSE1,{0:은|는} 자기 자신의 꼬리를 물었다.
+SPEAK_YACHIE_CONFUSE2,{0:은|는} 혼란하고 있다. "내 말이 통하지않는거야?"
+SPEAK_YACHIE_CONFUSE3,{0:은|는} 자기 자신의 꼬리를 물었다.
 SPEAK_YACHIE_MAGIC1,{0}의 거스를 수 없는 목소리가 울려퍼진다. 
 SPEAK_YACHIE_CAMERA,{0:은|는} 말했다. "아, 꼬리도 같이 찍어주세요."
 SPEAK_MAYUMI_NORMAL1,{0:은|는} 외쳤다. "병사들! 모두 칩입자를 공격하라!"
@@ -1566,7 +1569,7 @@ SPEAK_YUMA_NORMAL9,{0:은|는} 이빨을 드러내며 웃었다
 SPEAK_YUMA_CONFUSE1,{0:은|는} 혼란하고 있다. "배고파!"
 SPEAK_YUMA_CONFUSE2,{0:은|는} 혼란하고 있다. "이상한 재주를 부리는군!"
 SPEAK_YUMA_CONFUSE3,{0:은|는} 허공에 큰 숟가락을 휘두르고있다.
-SPEAK_YUMA_MAGIC,{0:은|는} 숟가락으로 바닥의 석유를 크게 퍼올렸다.
+SPEAK_YUMA_MAGIC1,{0:은|는} 숟가락으로 바닥의 석유를 크게 퍼올렸다.
 SPEAK_YUMA_CAMERA,{0:은|는} 외쳤다. "안돼! 사진으로라도 이 곳의 욕망을 가져가게 할 순 없어
 SPEAK_YUMA2_NORMAL1,{0:은|는} 외쳤다. "저주, 희열, 증오... 욕망!"
 SPEAK_YUMA2_NORMAL2,{0:은|는} 외쳤다. "느껴진다... 모두의 원망이 느껴져!"
@@ -1577,7 +1580,7 @@ SPEAK_YUMA2_NORMAL6,{0:은|는} 주변의 모든 것을 빨아들이고 있다.
 SPEAK_YUMA2_CONFUSE1,{0:은|는} 혼란하고 있다. "상관없어!"
 SPEAK_YUMA2_CONFUSE2,{0:은|는} 혼란하고 있다. "참을 수 없어! 널 잡아먹을거야!"
 SPEAK_YUMA2_CONFUSE3,{0:은|는} 제정신이 아닌것 같다.
-SPEAK_YUMA2_MAGIC,{0:은|는} 입을 크게 벌렸다.
+SPEAK_YUMA2_MAGIC1,{0:은|는} 입을 크게 벌렸다.
 SPEAK_YUMA2_CAMERA,{0:은|는} 카메라에 반응하지 않는다.
 SPEAK_ENOKO_NORMAL1,{0:은|는} 외쳤다. "이 세상은 약육강식이다! 약하다면 죽어!"
 SPEAK_ENOKO_NORMAL2,{0:은|는} 말했다. "제법 강해졌네, 울면서 숲으로 도망치던 그 소녀론 보이지않아."
@@ -1603,7 +1606,7 @@ SPEAK_CHIYARI_NORMAL8,{0:은|는} 외쳤다. "일하기 싫어!"
 SPEAK_CHIYARI_CONFUSE1,{0:은|는} 혼란하고 있다. "난 츄파카브라야!"
 SPEAK_CHIYARI_CONFUSE2,{0:은|는} 혼란하고 있다. "일하고 싶어!"
 SPEAK_CHIYARI_CONFUSE3,{0:은|는} 뻣뻣하게 섰다.
-SPEAK_CHIYARI_MAGIC,{0:은|는} 손위에 피를 모으고있다.
+SPEAK_CHIYARI_MAGIC1,{0:은|는} 손위에 피를 모으고있다.
 SPEAK_CHIYARI_CAMERA,{0:은|는} 외쳤다. "눈부셔!"
 SPEAK_SONBITEN_NORMAL1,{0:은|는} 외쳤다. "환상향의 제천대성 등장!"
 SPEAK_SONBITEN_NORMAL2,{0:은|는} 외쳤다. "아앙? 여기가 어디라고 들락거리는거야!"
@@ -1615,7 +1618,7 @@ SPEAK_SONBITEN_NORMAL7,{0:은|는} 봉을 현란하게 휘두르고 있다.
 SPEAK_SONBITEN_CONFUSE1,{0:은|는} 혼란하고 있다. "머리가 아파!"
 SPEAK_SONBITEN_CONFUSE2,{0:은|는} 혼란하고 있다. "우끼!"
 SPEAK_SONBITEN_CONFUSE3,{0:은|는} 머리를 감싸고있다.
-SPEAK_SONBITEN_MAGIC,{0:은|는} 봉을 머리위에서 돌렸다.
+SPEAK_SONBITEN_MAGIC1,{0:은|는} 봉을 머리위에서 돌렸다.
 SPEAK_SONBITEN_CAMERA,{0:은|는} 외쳤다. "깜짝이야!"
 SPEAK_HISAMI_NORMAL1,{0:은|는} 중얼거렸다. "아아, 잔무님 어디 계시나요..."
 SPEAK_HISAMI_NORMAL2,{0:은|는} 외쳤다. "저한테 도망칠 수 있을거라 생각하시나요?"
@@ -1627,7 +1630,7 @@ SPEAK_HISAMI_NORMAL7,{0:은|는} 외쳤다. "더 깊은 곳으로 가려고하�
 SPEAK_HISAMI_CONFUSE1,{0:은|는} 혼란하고 있다. "하아하아 잔무님.."
 SPEAK_HISAMI_CONFUSE2,{0:은|는} 혼란하고 있다. "저를 벌해주세요 잔무님!"
 SPEAK_HISAMI_CONFUSE3,{0:은|는} 빙글빙글 돌고 있다.
-SPEAK_HISAMI_MAGIC,{0:은|는} 팔을 벌리며 주문을 시전했다.
+SPEAK_HISAMI_MAGIC1,{0:은|는} 팔을 벌리며 주문을 시전했다.
 SPEAK_HISAMI_CAMERA,{0:은|는} 외쳤다. "지옥에선 기념촬영도 웰컴이에요~"
 SPEAK_TSUKASA_NORMAL1,{0:은|는} 외쳤다. "이야기를 안 듣는 성격인가보네~"
 SPEAK_TSUKASA_NORMAL2,{0:은|는} 외쳤다. "가능하다면 말로 풀고 싶었지만... 어쩔 수 없네."
@@ -1638,7 +1641,7 @@ SPEAK_TSUKASA_NORMAL6,{0:은|는} 외쳤다. "그렇게 쉽게 흘러가진않�
 SPEAK_TSUKASA_CONFUSE1,{0:은|는} 혼란하고 있다. "미안해!"
 SPEAK_TSUKASA_CONFUSE2,{0:은|는} 혼란하고 있다. "도망쳐야해!"
 SPEAK_TSUKASA_CONFUSE3,{0:은|는} 귀를 숨기고 있다.
-SPEAK_TSUKASA_MAGIC,{0:은|는} 달콤한 말을 속삭이고 있다.
+SPEAK_TSUKASA_MAGIC1,{0:은|는} 달콤한 말을 속삭이고 있다.
 SPEAK_TSUKASA_CAMERA,{0:은|는} 말했다. "사진은 갑자기 왜?"
 SPEAK_TSUKASA_PROPOSAL1,{0:은|는} 말했다. "여기 좋은 제안이 있어요~"
 SPEAK_TSUKASA_PROPOSAL2,{0:은|는} 말했다. "이거 볼래요? 들어서 손해는 없어요."
@@ -1656,7 +1659,7 @@ SPEAK_MIKE_NORMAL7,{0:은|는} 한 손을 흔들고 있다.
 SPEAK_MIKE_CONFUSE1,{0:은|는} 혼란하고 있다. "냐냥!"
 SPEAK_MIKE_CONFUSE2,{0:은|는} 혼란하고 있다. "그엑!"
 SPEAK_MIKE_CONFUSE3,{0:은|는} 손을 휘젓고 있다.
-SPEAK_MIKE_MAGIC,{0:은|는} 두 손을 흔들고 있다.
+SPEAK_MIKE_MAGIC1,{0:은|는} 두 손을 흔들고 있다.
 SPEAK_MIKE_CAMERA,{0:은|는} 말했다. "냥?"
 SPEAK_MIKE_PROPOSAL1,{0:은|는} 말했다. "거기 언니! 상품 좀 보지않을래?"
 SPEAK_MIKE_PROPOSAL2,{0:은|는} 말했다. "둘러보고가!"
@@ -1676,7 +1679,7 @@ SPEAK_TAKANE_NORMAL9,{0:은|는} 상품을 정리하고있다.
 SPEAK_TAKANE_CONFUSE1,{0:은|는} 혼란하고 있다. "내 돈이!"
 SPEAK_TAKANE_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러워!"
 SPEAK_TAKANE_CONFUSE3,{0:은|는} 넘어졌다.
-SPEAK_TAKANE_MAGIC,{0:은|는} 주문을 외웠다.
+SPEAK_TAKANE_MAGIC1,{0:은|는} 주문을 외웠다.
 SPEAK_TAKANE_CAMERA,{0:은|는} 말했다. "사진을 찍으려면 돈을 내!"
 SPEAK_TAKANE_PROPOSAL1,{0:은|는} 말했다. "자 여기에 있는걸 골라봐!"
 SPEAK_TAKANE_PROPOSAL2,{0:은|는} 말했다. "모두 희귀품목이야! 지금 안 사면 후회한다!"
@@ -1694,7 +1697,7 @@ SPEAK_SANNYO_NORMAL7,{0:은|는} 불편한 표정으로 담뱃재를 털고 있�
 SPEAK_SANNYO_CONFUSE1,{0:은|는} 혼란하고 있다. "콜록콜록!"
 SPEAK_SANNYO_CONFUSE2,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
 SPEAK_SANNYO_CONFUSE3,{0:은|는} 담뱃대를 떨어뜨렸다.
-SPEAK_SANNYO_MAGIC,{0:은|는} 담배 연기를 내뿜었다.
+SPEAK_SANNYO_MAGIC1,{0:은|는} 담배 연기를 내뿜었다.
 SPEAK_SANNYO_CAMERA,{0:은|는} 말했다. "우리 도박장에선 사진기 반입 금지야!"
 SPEAK_FAIRY_COMMON_FREIND1,{0:은|는} 말했다. "장난을 싫어하는 요정은 없어."
 SPEAK_FAIRY_COMMON_FREIND2,{0:은|는} 말했다. "가끔씩은 나도 메이드를 해볼까 생각이 들곤해."

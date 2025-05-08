@@ -76,6 +76,8 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t)
 	t->value4 = (int)mon_id;
 	t->value5 = rand_int(10,20);
 	t->value6 = 0;
+	t->value7 = 0;
+	t->value8 = 0;
 	t->is_pile = true;
 	t->can_throw = false;
 	t->image = &img_item_food_p_item;
@@ -152,6 +154,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = (randA(3) == 1 ? rand_int(1, 2)*(good_bad >= 0 ? 1 : -1) : 0);
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_armor_helmet[type_];
@@ -168,6 +172,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_armor_cloak;
@@ -183,6 +189,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_armor_glove;
@@ -198,6 +206,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = (randA(3)==1?rand_int(1,2)*(good_bad>=0?1:-1):0);
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_armor_boot;
@@ -220,6 +230,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_ring[iden_list.ring_list[t->value1].type];
@@ -234,6 +246,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_spellcard;
@@ -250,6 +264,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_amulet;
@@ -268,6 +284,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value4 = 0;
 			t->value5 = 100;
 			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
 			t->is_pile = true;
 			t->can_throw = false;
 			t->image = &img_item_food_bread;
@@ -282,6 +300,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value4 = 0;
 			t->value5 = 30;
 			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
 			t->is_pile = true;
 			t->can_throw = false;
 			t->num = rand_int(1,3);
@@ -297,6 +317,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value4 = 0;
 			t->value5 = 10;
 			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
 			t->is_pile = true;
 			t->can_throw = false;
 			t->num = 2;
@@ -312,6 +334,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value4 = 0;
 			t->value5 = 10;
 			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
 			t->is_pile = true;
 			t->can_throw = false;
 			t->num = 1;
@@ -329,6 +353,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_potion[iden_list.potion_list[t->value1].color];
@@ -343,6 +369,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_scroll;
@@ -382,6 +410,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_item_rune;
@@ -396,6 +426,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = &img_mons_yinyan;
@@ -410,6 +442,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value4 = 0;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
 		t->image = etcList[select_].tex;
@@ -598,7 +632,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 {
 	t->value0 = 0;
 	//t->value3 = randA(1)?0:randA(5*good_bad);
-	t->value4 = good_bad?randA_1(5)*(good_bad>=0?1:-1):0;
+	t->value4 = good_bad?randA_1(randA_1(4))*(good_bad>=0?1:-1):0;
 	t->value5 = (good_bad>0 && randA(2)>1)?GetNewBrand(15):0;
 	t->name2 = name_infor();
 	if(good_bad)
@@ -960,6 +994,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value6 = 0;
 	t->value5 = 10;
 	t->value6 = 10;
+	t->value7 = 13;
+	t->value8 = 7;
 	t->can_throw = true;
 	t->image = &img_item_weapon_knife;
 	t->name = name_infor(LOC_SYSTEM_BUG);
@@ -990,6 +1026,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->value2 = -1;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->can_throw = false;
 		t->image = &img_item_weapon_roundshield;
 		t->equip_image = &img_play_item_shield[0];
@@ -1004,6 +1042,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->value2 = -3;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->can_throw = false;
 		t->image = &img_item_weapon_shield;
 		t->equip_image = &img_play_item_shield[1];
@@ -1018,6 +1058,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 		t->value2 = -6;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->can_throw = false;
 		t->image = &img_item_weapon_kiteshield;
 		t->equip_image = &img_play_item_shield[3];
@@ -1030,6 +1072,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	t->value2 = 0;
 	t->value5 = 0;
 	t->value6 = 0;
+	t->value7 = 0;
+	t->value8 = 0;
 	t->can_throw = true;
 	t->image = &img_item_weapon_roundshield;
 	t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHIELD_BUGSHIELD);

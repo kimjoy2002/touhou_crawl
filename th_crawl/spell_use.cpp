@@ -4690,18 +4690,22 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 		if(CheckThrowPath(order->position,target,beam))
 		{
 			beam.init();
+			
+			while(beam.end() && (*beam) == hit_->position) {
 
-			if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_->isFly(),hit_->isSwim(),false))
-			{
-				soundmanager.playSound("debuf");
-				if (env[current_level].isInSight(*beam) || env[current_level].isInSight(hit_->position)) {
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_TOUGUE,true,false,false,CL_normal,
-						PlaceHolderHelper(order->GetName()->getName()),
-						PlaceHolderHelper(hit_->GetName()->getName()));
+				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_->isFly(),hit_->isSwim(),false))
+				{
+					soundmanager.playSound("debuf");
+					if (env[current_level].isInSight(*beam) || env[current_level].isInSight(hit_->position)) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_TOUGUE,true,false,false,CL_normal,
+							PlaceHolderHelper(order->GetName()->getName()),
+							PlaceHolderHelper(hit_->GetName()->getName()));
+					}
+					hit_->SetXY(*beam);
+					hit_->AttackedTarget(order);
+					return true;
 				}
-				hit_->SetXY(*beam);
-				hit_->AttackedTarget(order);
-				return true;
+				beam++;
 			}
 		}
 	}
@@ -4951,9 +4955,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SUMMON_SEKIBANKI, 15));
 		break;
 	case MON_SEKIBANKI_HEAD:
-		list->push_back(spell(SPL_FLAME, 15));
-		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 10));
-		list->push_back(spell(SPL_BLINK, 15));
+		list->push_back(spell(SPL_FLAME, 25));
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 20));
+		list->push_back(spell(SPL_BLINK, 25));
 		break;
 	case MON_NITORI:
 	{

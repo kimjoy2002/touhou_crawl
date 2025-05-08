@@ -142,6 +142,8 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_AMULET;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->num = (select_ != -1)?10:rand_int(2,8);
 		t->is_pile = true;
 		t->can_throw = true;
@@ -157,6 +159,8 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_POISON_NEEDLE;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->num = (select_ != -1)?8:rand_int(3,15);
 		t->is_pile = true;
 		t->can_throw = true;
@@ -172,6 +176,8 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_KIKU_COMPRESSER;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->num = (select_ != -1)?10:rand_int(3,15);
 		t->is_pile = true;
 		t->can_throw = true;
@@ -187,6 +193,8 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value4 = TMT_DOGGOJEO;
 		t->value5 = 0;
 		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
 		t->num = (select_ != -1) ? 10 : rand_int(2, 8);
 		t->is_pile = true;
 		t->can_throw = true;

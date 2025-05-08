@@ -34,7 +34,7 @@ struct mon_infor
 };
 
 
-enum monster_flag
+enum monster_flag : uint64_t
 {
 	M_FLAG_OPEN_DOOR = 1<<0, //문을 열 수 있는가?
 	M_FLAG_FAIRY = 1<<1, //요정인가?

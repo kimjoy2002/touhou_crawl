@@ -48,7 +48,7 @@ public:
 	int atk[3];
 	attack_type atk_type[3];
 	name_infor atk_name[3];
-	int flag;
+	uint64_t flag;
 	int resist;
 	int sense;
 	bool dream;
@@ -105,6 +105,7 @@ public:
 	int memory_time; //기억력
 	bool first_contact; //이 몬스터를 처음 보았다.
 	int strong; //강하기
+	int special_value;//캐릭터별 전용 밸류
 
 	int delay_turn; //다른층으로 도망친 턴. 이 턴만큼 회복등등...
 
@@ -131,8 +132,8 @@ public:
 	void LoadDatas(FILE *fp);
 	void ReTarget();
 	void init();
-	bool SetMonster(int map_num_, int map_id_, int id_, int flag_, int time_, coord_def position_, bool init_ = true);
-	bool ChangeMonster(int id_, int flag_);
+	bool SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int time_, coord_def position_, bool init_ = true);
+	bool ChangeMonster(int id_, uint64_t flag_);
 	void FirstContact();
 	coord_def GetPrevPos(){return prev_position;};
 	coord_def GetFirstPos() { return first_position; };

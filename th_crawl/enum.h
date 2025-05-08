@@ -923,6 +923,8 @@ enum monster_speak_type
 	MST_MAGIC,
 	MST_CONFUSE,
 	MST_CAMERA,
+	MST_PROPOSAL,
+	MST_PROPOSAL_ACCEPT,
 	MST_DEAD
 };
 

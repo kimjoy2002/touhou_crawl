@@ -1894,10 +1894,10 @@ void SimpleSpellUse()
 	printlog(LocalzationManager::locString(LOC_SYSTEM_LETTER) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
 	printlog(" ",false,false,true,CL_help);
 	if(prevSpell_) {
-		printlog(SpellString(prev_spell_id)+":"+LocalzationManager::locString(LOC_SYSTEM_ENTER),false,false,true,CL_help, VK_RETURN);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ENTER)+":"+SpellString(prev_spell_id),false,false,true,CL_help, VK_RETURN);
 		printlog(" ",false,false,true,CL_help);
 	}
-	printlog(LocalzationManager::locString(LOC_SYSTEM_ALL_SPELL) + ":*",false,false,true,CL_help, '*');
+	printlog("*:" + LocalzationManager::locString(LOC_SYSTEM_ALL_SPELL) ,false,false,true,CL_help, '*');
 	printlog(") ",true,false,true,CL_help);
 	while(1)
 	{

@@ -1273,7 +1273,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		else if(type == MST_MAGIC)
 		{
 			if(mon_id == MON_SEKIBANKI_HEAD)
-				return NULL;
+				return "";
 			switch(randA(1))
 			{
 			case 0:
@@ -4972,6 +4972,861 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HATATE_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
 		}
 		break;
+	case MON_EIKA:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(5))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				if(monster_info->special_value > 0) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+				else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 3:
+				if(monster_info->special_value > 0) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(to_string(monster_info->special_value)));
+				}
+				else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 4:
+				if(monster_info->special_value > 0) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(to_string(monster_info->special_value)));
+				}
+				else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_EIKA_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_URUMI:	
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_URUMI_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_KUTAKA:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KUTAKA_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_YACHIE:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YACHIE_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_MAYUMI:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				if (you.tribe == TRI_HUMAN)
+				{
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+				else
+				{
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 4:
+				if (you.tribe == TRI_HUMAN)
+				{
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+				else
+				{
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAYUMI_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_SAKI:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SAKI_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_YUMA:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(8))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 7:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 8:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_YUMA2:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(5))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_YUMA2_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+
+	case MON_ENOKO:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(4))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				if(you.char_type == UNIQ_START_MARISA) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 2:
+				if(false) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 3:
+				if(false) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 4:
+				if(false) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_ENOKO_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+
+	case MON_CHIYARI:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				if(you.tribe == TRI_VAMPIRE) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CHIYARI_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_SONBITEN:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SONBITEN_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_HISAMI:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HISAMI_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
+	case MON_TSUKASA:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(5))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if (type == MST_PROPOSAL)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_PROPOSAL_ACCEPT)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL_ACCEPT1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL_ACCEPT2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TSUKASA_PROPOSAL_ACCEPT3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		break;
+	case MON_MIKE:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if (type == MST_PROPOSAL)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_PROPOSAL_ACCEPT)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL_ACCEPT1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL_ACCEPT2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MIKE_PROPOSAL_ACCEPT3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		break;
+	case MON_TAKANE:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(5))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				if(you.char_type == UNIQ_START_MARISA) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 3:
+				if(you.tribe == TRI_KAPPA) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 4:
+				if(you.char_type == UNIQ_START_MARISA) {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+				} else {
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if (type == MST_PROPOSAL)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_PROPOSAL_ACCEPT)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL_ACCEPT1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL_ACCEPT2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_TAKANE_PROPOSAL_ACCEPT3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		break;
+	case MON_SANNYO:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		break;
 	default:
 		break;
 	}
@@ -4985,6 +5840,14 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	else if (type == MST_CAMERA)
 	{
 		return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+	}
+	else if (type == MST_PROPOSAL)
+	{
+		return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PROPOSAL), PlaceHolderHelper(monster_info->GetName()->getName()));
+	}
+	else if (type == MST_PROPOSAL_ACCEPT)
+	{
+		return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PROPOSAL_ACCEPT), PlaceHolderHelper(monster_info->GetName()->getName()));
 	}
 	else if (type == MST_DEAD)
 	{

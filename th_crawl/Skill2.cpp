@@ -1487,7 +1487,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			return false;
 		}
 		if (!check_)
-			you.PowUpDown(-(10 + randA(5)), true);
+			you.PowUpDown(-(5 + randA(5)), true);
 		return true;
 	case SKL_JUNKO_2:
 		if (check_ && you.power<100)

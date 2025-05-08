@@ -174,7 +174,7 @@ const mon_infor mondata[] = {
 	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c' },
 
-	{MON_CROW_TENGU,10,532,name_infor(MON_CROW_TENGU),&img_mons_crow_tengu,70,3,12,
+	{MON_CROW_TENGU,10,532,name_infor(MON_CROW_TENGU),&img_mons_crow_tengu,75,3,15,
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'t' },
 

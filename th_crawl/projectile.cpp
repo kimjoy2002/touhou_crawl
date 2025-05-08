@@ -236,7 +236,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			int close_  = 99999;
 			for(it2=env[current_level].mon_vector.begin(); it2 != env[current_level].mon_vector.end(); it2++)
 			{
-				if((*it2).isLive() && !((*it2).flag & M_FLAG_UNHARM) && (*it2).isYourShight() && (other_buff_ ^ !(*it2).isUserAlly()) && you.isSightnonblocked(it2->position)  && !canHurtAlly(it2->position, infor_) )
+				if((*it2).isLive() && !((*it2).flag & M_FLAG_UNHARM) && (*it2).isYourShight() && ((other_buff_ && (*it2).isUserAlly()) || (!other_buff_ && !(*it2).isUserAlly())) && you.isSightnonblocked(it2->position)  && !canHurtAlly(it2->position, infor_) )
 				{
 					bool yes_ = false;
 					int length_ = pow((float)abs(it2->position.x-you.position.x),2)+pow((float)abs(it2->position.y-you.position.y),2);

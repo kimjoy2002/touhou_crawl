@@ -646,7 +646,18 @@ void MainLoop()
 							}
 						}
 					} else {
-						Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
+						beam_iterator beam(you.position,target_pos);
+						if(CheckThrowPath(you.position,target_pos,beam, true)) {
+							beam.init();
+							int abs_ = ((*beam) - you.position).abs();
+							if(abs_ == 1 || abs_ == 2) {
+								action_Move(0, (*beam));
+							} else {
+								Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
+							}
+						} else {
+							Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
+						}
 					}
 				} else if (inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
 					coord_def target_pos(inputedKey.val1, inputedKey.val2);

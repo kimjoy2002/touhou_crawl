@@ -1646,6 +1646,56 @@ SPEAK_TSUKASA_PROPOSAL3,{0:은|는} 말했다. "이정도면 꽤 남는 장사�
 SPEAK_TSUKASA_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "훌륭한 생각입니다."
 SPEAK_TSUKASA_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "제가 말한 대로죠?"
 SPEAK_TSUKASA_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "탁월한 선택입니다."
+SPEAK_MIKE_NORMAL1,{0:은|는} 외쳤다. "마네키네코가 흰색이 아닌게 무슨 상관이야?"
+SPEAK_MIKE_NORMAL2,{0:은|는} 외쳤다. "손님이 왔네~ 뭐 돈이 없어? 그럼 줄건 없어!"
+SPEAK_MIKE_NORMAL3,{0:은|는} 외쳤다. "이봐 언니~ 잠깐 나 좀 보지않을래?"
+SPEAK_MIKE_NORMAL4,{0:은|는} 외쳤다. "여기저기 아이템을 줍고있어, 누군가 사주지않을까?"
+SPEAK_MIKE_NORMAL5,{0:은|는} 외쳤다. "내가 손을 흔들면 복이온다며? 그럼 두 손을 흔들어볼까."
+SPEAK_MIKE_NORMAL6,{0:은|는} 외쳤다. "저번에 다른 고양이 요괴가 싸움을 걸어왔어!"
+SPEAK_MIKE_NORMAL7,{0:은|는} 한 손을 흔들고 있다.
+SPEAK_MIKE_CONFUSE1,{0:은|는} 혼란하고 있다. "냐냥!"
+SPEAK_MIKE_CONFUSE2,{0:은|는} 혼란하고 있다. "그엑!"
+SPEAK_MIKE_CONFUSE3,{0:은|는} 손을 휘젓고 있다.
+SPEAK_MIKE_MAGIC,{0:은|는} 두 손을 흔들고 있다.
+SPEAK_MIKE_CAMERA,{0:은|는} 말했다. "냥?"
+SPEAK_MIKE_PROPOSAL1,{0:은|는} 말했다. "거기 언니! 상품 좀 보지않을래?"
+SPEAK_MIKE_PROPOSAL2,{0:은|는} 말했다. "둘러보고가!"
+SPEAK_MIKE_PROPOSAL3,{0:은|는} 말했다. "후후, 시장이 열렸어!"
+SPEAK_MIKE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "복받아!"
+SPEAK_MIKE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "여기 물건!"
+SPEAK_MIKE_PROPOSAL_ACCEPT3,{0:은|는} 기뻐서 손을 흔들고 있다.
+SPEAK_TAKANE_NORMAL1,{0:은|는} 외쳤다. "지금 장사를 방해하는거야?"
+SPEAK_TAKANE_NORMAL2,{0:은|는} 외쳤다. "돈이 없으면 빨랑 빨랑 나가!"
+SPEAK_TAKANE_NORMAL3,{0:은|는} 외쳤다. "니토리, 우리 장사를 방해할 셈이야?"
+SPEAK_TAKANE_NORMAL4,{0:은|는} 외쳤다. "여기는 우리 상권이야!"
+SPEAK_TAKANE_NORMAL5,{0:은|는} 외쳤다. "흥, 강에서 벗어나지못한 캇파가 산속경제에 대해 뭘 알겠어?"
+SPEAK_TAKANE_NORMAL6,{0:은|는} 외쳤다. "이... 탄막광이!"
+SPEAK_TAKANE_NORMAL7,{0:은|는} 외쳤다. "이러지말고 정정당당하게 장사로 승부를 보자고 니토리!"
+SPEAK_TAKANE_NORMAL8,{0:은|는} 외쳤다. "난 쓸데없는 싸움보단 돈 버는 쪽이 좋은데"
+SPEAK_TAKANE_NORMAL9,{0:은|는} 상품을 정리하고있다.
+SPEAK_TAKANE_CONFUSE1,{0:은|는} 혼란하고 있다. "내 돈이!"
+SPEAK_TAKANE_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러워!"
+SPEAK_TAKANE_CONFUSE3,{0:은|는} 넘어졌다.
+SPEAK_TAKANE_MAGIC,{0:은|는} 주문을 외웠다.
+SPEAK_TAKANE_CAMERA,{0:은|는} 말했다. "사진을 찍으려면 돈을 내!"
+SPEAK_TAKANE_PROPOSAL1,{0:은|는} 말했다. "자 여기에 있는걸 골라봐!"
+SPEAK_TAKANE_PROPOSAL2,{0:은|는} 말했다. "모두 희귀품목이야! 지금 안 사면 후회한다!"
+SPEAK_TAKANE_PROPOSAL3,{0:은|는} 말했다. "야마와로 특제 상품이야!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "고마워!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "돈이 최고야!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "우수 고객 스탬프를 찍어줄게!"
+SPEAK_SANNYO_NORMAL1,{0:은|는} 외쳤다. "꺼져! 담배 맛 떨어진다."
+SPEAK_SANNYO_NORMAL2,{0:은|는} 외쳤다. "여긴 편하게 담배필 장소도 없나..."
+SPEAK_SANNYO_NORMAL3,{0:은|는} 외쳤다. "거기 우리 업소에서 난동피우지말라고"
+SPEAK_SANNYO_NORMAL4,{0:은|는} 외쳤다. "이런 진상을 냅둬서는 우리 가게 매상도 안 오르겠어"
+SPEAK_SANNYO_NORMAL5,{0:은|는} 외쳤다. "흥 손님이 아니잖아."
+SPEAK_SANNYO_NORMAL6,{0:은|는} 담배를 들이마시고 있다.
+SPEAK_SANNYO_NORMAL7,{0:은|는} 불편한 표정으로 담뱃재를 털고 있다.
+SPEAK_SANNYO_CONFUSE1,{0:은|는} 혼란하고 있다. "콜록콜록!"
+SPEAK_SANNYO_CONFUSE2,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
+SPEAK_SANNYO_CONFUSE3,{0:은|는} 담뱃대를 떨어뜨렸다.
+SPEAK_SANNYO_MAGIC,{0:은|는} 담배 연기를 내뿜었다.
+SPEAK_SANNYO_CAMERA,{0:은|는} 말했다. "우리 도박장에선 사진기 반입 금지야!"
 SPEAK_FAIRY_COMMON_FREIND1,{0:은|는} 말했다. "장난을 싫어하는 요정은 없어."
 SPEAK_FAIRY_COMMON_FREIND2,{0:은|는} 말했다. "가끔씩은 나도 메이드를 해볼까 생각이 들곤해."
 SPEAK_FAIRY_COMMON_FREIND3,{0:은|는} 말했다. "어떤 장난을 칠때보다 지금이 제일 재밌어!"

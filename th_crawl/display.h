@@ -80,10 +80,10 @@ class text_manager
 public:
 	list<text_dummy*> text_list;
 	int length;
-	int short_len = 6;
+	int short_len;
 	bool enter;
 
-	text_manager():length(0),short_len(6),enter(true){};
+	text_manager():length(0),short_len(7),enter(true){};
 	~text_manager();
 	bool add_text(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_ = 0);
 	void DeleteTemp();	

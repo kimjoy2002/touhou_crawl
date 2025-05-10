@@ -4130,6 +4130,7 @@ void players::MakeLOSPattern()
 }
 
 
+extern bool g_auto;
 
 int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실패
 {
@@ -4267,6 +4268,11 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	else
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_LIMIT),true,false,false,CL_normal);
+		you.SetInter(IT_MAX_ITEM);
+		if(g_auto) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_AUTOPICKUP_OFF, PlaceHolderHelper("Ctrl + a")),true,false,false,CL_small_danger);
+			you.auto_pickup = false;
+		}
 		ReleaseMutex(mutx);
 		return 0;
 	}

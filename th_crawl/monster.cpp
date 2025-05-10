@@ -3844,13 +3844,15 @@ bool monster::SetGlow(int glow_, bool no_speak)
 {
 	if(!glow_)
 		return false;
+	bool _prev_glow = s_glow;
+	s_glow += glow_;
 	if(isYourShight()) {
 		if(s_invisible && you.auto_pickup==0)
 			auto_pick_onoff(true);
 	}
 	if(isYourShight() && !no_speak)
 	{
-		if(!s_glow) {
+		if(!_prev_glow) {
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GLOW,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 		}
@@ -3859,7 +3861,6 @@ bool monster::SetGlow(int glow_, bool no_speak)
 				PlaceHolderHelper(GetName()->getName()));
 		}
 	}
-	s_glow += glow_;
 	if(s_glow>100)
 		s_glow = 100;
 	return true;

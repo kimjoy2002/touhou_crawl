@@ -696,8 +696,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 			temp << LocalzationManager::locString(LOC_SYSTEM_ATTACK_VALUE) << ": " << it->value2;;
 			ss << temp.str();
-			if(PrintCharWidth(temp.str()) < 30)
-				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+			if(PrintCharWidth(temp.str()) < 20)
+				ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+			else
+				ss << " ";
 
 			temp.str("");
 			temp.clear();
@@ -709,16 +711,20 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			temp.clear();
 			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f);
 			ss << temp.str();
-			if(PrintCharWidth(temp.str()) < 30)
-				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+			if(PrintCharWidth(temp.str()) < 20)
+				ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+			else
+				ss << " ";
 
 
 			temp.str("");
 			temp.clear();
 			temp << "( " << LocalzationManager::locString(LOC_SYSTEM_BASE_ATTACK_SPEED) << ": " << (it->value7 / 10.0f);
 			ss << temp.str();
-			if(PrintCharWidth(temp.str()) < 30)
-				ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+			if(PrintCharWidth(temp.str()) < 20)
+				ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+			else
+				ss << " ";
 
 
 			temp.str("");
@@ -799,8 +805,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		ss << "\n\n";
 		temp << LocalzationManager::locString(LOC_SYSTEM_ATTACK_VALUE) << ": " << it->value2;;
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 
 		temp.str("");
 		temp.clear();
@@ -812,8 +820,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		temp.clear();
 		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay((*it).type, false) / 10.0f);
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 
 		temp.str("");
 		temp.clear();
@@ -889,15 +899,19 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_DEFENSE) << ": " << it->value1;;
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 
 		temp.str("");
 		temp.clear();
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << it->value2;
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 
 		temp.str("");
 		temp.clear();
@@ -957,15 +971,19 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_SHIELD) << ": " << it->value1;;
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 		
 		temp.str("");
 		temp.clear();
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << it->value2;
 		ss << temp.str();
-		if(PrintCharWidth(temp.str()) < 30)
-			ss << std::string(30-PrintCharWidth(temp.str()), ' ');
+		if(PrintCharWidth(temp.str()) < 20)
+			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
+		else
+			ss << " ";
 
 		temp.str("");
 		temp.clear();

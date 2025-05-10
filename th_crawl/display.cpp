@@ -1071,7 +1071,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
 				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
 
-				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_bad))) :
+				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_verybad))) :
 				you.pure_skill == skt ? CL_junko : CL_warning;
 			ss.str("");
 			ss.clear();
@@ -1738,6 +1738,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	sight_y = (int)(sight_y/calc_tile_scale+0.3f);
 	//이때부터 sight바꿀일 있으면 바꾸기
 
+	bool amulet_viewing = option_mg.getHeight() > 720;
+	bool tanmac_viewing = option_mg.getHeight() > 600;
+	bool weapon_viewing = option_mg.getHeight() > 600;
 
 
 	infobox.init();
@@ -1754,26 +1757,32 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		line_count += 1; // AC/EV/SH
 		line_count += 1; // STR/DEX/INT
 	
-		// Equipment: amulet
-		if (you.equipment[ET_NECK])
-			line_count += max(1, (int)SplitStringByFontWidth(
-				you.equipment[ET_NECK]->GetName(-1, true), 28, 34).size());
-		else
-			line_count += 1;
+		if(amulet_viewing) {
+			// Equipment: amulet
+			if (you.equipment[ET_NECK])
+				line_count += max(1, (int)SplitStringByFontWidth(
+					you.equipment[ET_NECK]->GetName(-1, true), 28, 34).size());
+			else
+				line_count += 1;
+		}
 	
-		// Equipment: weapon
-		if (you.equipment[ET_WEAPON])
-			line_count += max(1, (int)SplitStringByFontWidth(
-				you.equipment[ET_WEAPON]->GetName(-1, true), 28, 34).size());
-		else
-			line_count += 1;
+		if(weapon_viewing) {
+			// Equipment: weapon
+			if (you.equipment[ET_WEAPON])
+				line_count += max(1, (int)SplitStringByFontWidth(
+					you.equipment[ET_WEAPON]->GetName(-1, true), 28, 34).size());
+			else
+				line_count += 1;
+		}
 	
-		// Equipment: throw_weapon
-		if (you.throw_weapon)
-			line_count += max(1, (int)SplitStringByFontWidth(
-				you.throw_weapon->GetName(-1, true), 28, 34).size());
-		else
-			line_count += 1;
+		if(tanmac_viewing) { 
+			// Equipment: throw_weapon
+			if (you.throw_weapon)
+				line_count += max(1, (int)SplitStringByFontWidth(
+					you.throw_weapon->GetName(-1, true), 28, 34).size());
+			else
+				line_count += 1;
+		}
 	
 		line_count += 1; // 층/턴 표시
 	
@@ -2437,30 +2446,29 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
 		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
 
-		if(PrintCharWidth(ss.str()) < 25) {
-			rc.left += fontDesc.Width*(25-PrintCharWidth(ss.str()));	
+		int power_blank_ = PrintCharWidth(ss.str());
+		rc.left += power_blank_*fontDesc.Width;
+
+		ss.str("");
+		ss.clear();
+		if(you.GetNeedExp(you.level-1) > 0)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_REMAIN_EXP);
+			ss << ":" ;
+			ss << (you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)) << "%";
+		} else {
+			ss << LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL);
+		}
+		power_blank_ += PrintCharWidth(ss.str());
+		int remain_blank = (option_mg.getWidth()-info_minX)/fontDesc.Width;
+		
+		if(power_blank_ < remain_blank) {
+			rc.left += fontDesc.Width*(remain_blank-power_blank_);	
 		} else {
 			rc.left += fontDesc.Width;
 		}
 
-		if(you.GetNeedExp(you.level-1) > 0)
-		{
-			ss.str("");
-			ss.clear();
-			ss << LocalzationManager::locString(LOC_SYSTEM_REMAIN_EXP);
-			ss << ":" ;
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
-		
-			ss.str("");
-			ss.clear();
-			ss << (you.exper-you.GetNeedExp(you.level-2))*100/(you.GetNeedExp(you.level-1)-you.GetNeedExp(you.level-2)) << "%";
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
-		}
-		else
-		{
-			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
-		}
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_STAT);
 		rc.left = info_minX;
 
 
@@ -2606,87 +2614,96 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		rc.top += fontDesc.Height;
 
 
-		ss.str("");
-		ss.clear();
-		ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET);
-		ss << ": " ;
-		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width * PrintCharWidth(ss.str());
-
-		if (you.equipment[ET_NECK])
-		{
+		if(amulet_viewing) {
 			ss.str("");
 			ss.clear();
-			item* _item = you.equipment[ET_NECK];
-			ss << _item->id << ") " << _item->GetName(-1, true);
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
+			ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET);
+			ss << ": " ;
+			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width * PrintCharWidth(ss.str());
 
-			for (const string& token : tokens ) {
-				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,_item->item_color());
-				rc.left = info_minX;
-				rc.top +=fontDesc.Height;
+		
+			if (you.equipment[ET_NECK])
+			{
+				ss.str("");
+				ss.clear();
+				item* _item = you.equipment[ET_NECK];
+				ss << _item->id << ") " << _item->GetName(-1, true);
+				vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
+
+				for (const string& token : tokens ) {
+					DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,_item->item_color());
+					rc.left = info_minX;
+					rc.top +=fontDesc.Height;
+				}
 			}
-		}
-		else
-		{
-			DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-			rc.left = info_minX;
-			rc.top += fontDesc.Height;
+			else
+			{
+				DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+				rc.left = info_minX;
+				rc.top += fontDesc.Height;
+			}
 		}
 		
-		ss.str("");
-		ss.clear();
-		ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON);
-		ss << ": " ;
-		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
-		if(you.equipment[ET_WEAPON])
-		{
+		
+		if(weapon_viewing) {
 			ss.str("");
 			ss.clear();
-			ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName(-1, true);
+			ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON);
+			ss << ": " ;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+			if(you.equipment[ET_WEAPON])
+			{
+				ss.str("");
+				ss.clear();
+				ss << you.equipment[ET_WEAPON]->id << ") " << you.equipment[ET_WEAPON]->GetName(-1, true);
 
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
+				vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
 
-			for (const string& token : tokens ) {
-				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+				for (const string& token : tokens ) {
+					DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_WEAPON]->item_color());
+					rc.left = info_minX;
+					rc.top +=fontDesc.Height;
+				}
+			}
+			else
+			{
+				DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 				rc.left = info_minX;
 				rc.top +=fontDesc.Height;
 			}
-		}
-		else
-		{
-			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
-			rc.left = info_minX;
-			rc.top +=fontDesc.Height;
 		}
 		//rc.left -= fontDesc.Width*6;
 
-		//rc.top += fontDesc.Height;
-		ss.str("");
-		ss.clear();
-		ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC);
-		ss << ": " ;
-		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
-		if(you.throw_weapon)
-		{
+		
+		if(tanmac_viewing) {
+			//rc.top += fontDesc.Height;
 			ss.str("");
 			ss.clear();
-			ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName(-1, true);
-			vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
+			ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC);
+			ss << ": " ;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+			if(you.throw_weapon)
+			{
+				ss.str("");
+				ss.clear();
+				ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName(-1, true);
+				vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
 
-			for (const string& token : tokens ) {
-				DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
-				rc.left = info_minX;
-				rc.top +=fontDesc.Height;
+				for (const string& token : tokens ) {
+					DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.throw_weapon->item_color());
+					rc.left = info_minX;
+					rc.top +=fontDesc.Height;
+				}
 			}
-		}
-		else
-		{
-			DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
-			rc.left = info_minX;
-			rc.top += fontDesc.Height;
+			else
+			{
+				DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+				rc.left = info_minX;
+				rc.top += fontDesc.Height;
+			}
 		}
 		
 		ss.str("");

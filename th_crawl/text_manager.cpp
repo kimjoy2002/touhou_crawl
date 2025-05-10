@@ -103,7 +103,6 @@ void text_manager::reset()
 	WaitForSingleObject(mutx, INFINITE);
 	text_list.clear();
 	length=0;
-	short_len=6;
 	ReleaseMutex(mutx);
 }
 void text_manager::removeClickable() {

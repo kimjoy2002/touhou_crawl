@@ -194,14 +194,28 @@ bool PickUpNum(list<item>::iterator it, int num, bool no_delay)
 					case IT_SMOKE:
 					case IT_EVENT:
 					case IT_DAMAGE:
+					case IT_MAX_ITEM:
 						return true;
 					default:
 						break;
 					}
 				}
 			}
-			else
+			else {
+				switch(you.inter)
+				{
+				case IT_POISON:
+				case IT_TELE:
+				case IT_SMOKE:
+				case IT_EVENT:
+				case IT_DAMAGE:
+				case IT_MAX_ITEM:
+					return true;
+				default:
+					break;
+				}
 				return false;
+			}
 			num--;
 		}
 	}

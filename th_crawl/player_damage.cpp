@@ -167,13 +167,13 @@ int players::GetAttack(bool max_)
 
 int players::GetHit()
 {
-	int hit_ = 2+s_dex/2+ GetSkillLevel(SKT_FIGHT, true)/2;
+	int hit_ = 2+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
 		skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
 		if(skill_>SKT_ERROR)
 		{
-			hit_ += equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + GetSkillLevel(skill_, true)/3;
+			hit_ += 1 + (equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + GetSkillLevel(skill_, true)/3)*3/4;
 		}
 		else
 		{

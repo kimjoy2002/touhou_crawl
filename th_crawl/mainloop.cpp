@@ -646,13 +646,14 @@ void MainLoop()
 							}
 						}
 					} else {
-						beam_iterator beam(you.position,target_pos);
-						if(CheckThrowPath(you.position,target_pos,beam, true)) {
-							beam.init();
-							int abs_ = ((*beam) - you.position).abs();
-							if(abs_ == 1 || abs_ == 2) {
+						int abs_ = (target_pos - you.position).abs();
+						if(abs_ == 1 || abs_ == 2) {
+							beam_iterator beam(you.position,target_pos);
+							if(CheckThrowPath(you.position,target_pos,beam, true)) {
+								beam.init();
 								action_Move(0, (*beam));
-							} else {
+							}
+							else {
 								Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
 							}
 						} else {

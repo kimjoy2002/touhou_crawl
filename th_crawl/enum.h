@@ -202,6 +202,7 @@ enum interupt_type //아래로갈수록 인터럽트 우선순위가 증가한�
 	//IT_HUNGRY,
 	IT_MAP_FIND,
 	IT_STAT,
+	IT_MAX_ITEM,
 	IT_POISON,
 	IT_TELE,
 	IT_SMOKE,

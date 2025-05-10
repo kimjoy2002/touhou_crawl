@@ -421,26 +421,30 @@ int LocalzationManager::getHelpGodsLine(int index) {
 }
 
 string LocalzationManager::getCorrectParticle(const string& word, const string& opt1, const string& opt2) {
-    if (word.empty() || word.size() <= 1) return opt1;
+    if (word.empty()) return opt1;
 
-    unsigned char first = word[word.length() - 2];
-    unsigned char second = word[word.length() - 1];
+    wstring u32str = ConvertUTF8ToUTF16(word);
+    for (auto it = u32str.rbegin(); it != u32str.rend(); ++it) {
+        wchar_t lastChar = *it;
+        if (lastChar == U'\0') continue; // 널 문자 건너뜀
+		if (lastChar < 0xAC00 || lastChar > 0xD7A3) {
+			return opt1; 
+		}
 
-    if (first < 0xB0 || first > 0xC8) {
-        return opt1;
-    }
+		int localCode = lastChar - 0xAC00; // 가~ 이후
+		int jongCode = localCode % 28;
 
-    int index = (first - 0xB0) * 94 + (second - 0xA1);
+		if (jongCode == 0)
+			return opt2;
 
-    if (index < 0 || index >= 2350) {
-        return opt1; 
-    }
-
-    //int cho = index / (21 * 28);
-   // int jung = (index % (21 * 28)) / 28;
-    int jong = index % 28;
-
-    return jong?opt2:opt1;
+		if (opt1 == "으" && opt2 == "로")
+		{
+			if (jongCode == 8) // ㄹ 종성 예외 처리
+				return opt2;
+		}
+   		return opt1;
+	}
+	return opt1;
 }
 
 string LocalzationManager::getIndefiniteArticle(const string& word,const string& opt1, const string& opt2) {

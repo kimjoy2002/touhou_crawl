@@ -159,7 +159,7 @@ int isGoodScroll(scroll_type kind)
 
 bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 {
-	if (you.s_pure_turn && you.s_pure >= 10)
+	if (you.s_pure_turn && you.s_pure >= 20)
 	{
 		if (kind != SCT_ENCHANT_WEAPON_1 &&
 			kind != SCT_ENCHANT_WEAPON_2 &&

@@ -3506,13 +3506,16 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 {
 	int god_ = 0;
 	bool loop_ = true;
+	bool short_info =  option_mg.getWidth() < 1000;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK), true, false, false, CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), true, false, false, CL_joon);
-		printlog("                   ", false, false, false, CL_joon);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), short_info?false:true, false, false, CL_joon);
+		if(!short_info)
+			printlog("                   ", false, false, false, CL_joon);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon,'a');
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), true, false, false, CL_sion);
-		printlog("                   ", false, false, false, CL_sion);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), short_info?false:true, false, false, CL_sion);
+		if(!short_info)
+			printlog("                   ", false, false, false, CL_sion);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion,'b');
 		
 		startSelection({'a', 'b', VK_ESCAPE});

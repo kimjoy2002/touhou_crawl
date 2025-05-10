@@ -260,8 +260,10 @@ void auto_battle()
 
 }
 
+bool g_auto = false;
+
 void auto_Move()
-{	
+{
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
@@ -298,6 +300,7 @@ void auto_Move()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
+	g_auto = true;
 	you.SetPrevAction('o');
 	while(1)
 	{
@@ -315,6 +318,7 @@ void auto_Move()
 				else{
 					if(!stack_move(true))
 					{
+						g_auto = false;
 						return;
 					}
 					back_ = true;
@@ -329,6 +333,7 @@ void auto_Move()
 		{
 			if(!stack_move(true))
 			{
+				g_auto = false;
 				return;
 			}
 		}
@@ -337,6 +342,7 @@ void auto_Move()
 	}
 	while(!you.will_move.empty()){you.will_move.pop();}
 	printlog(LocalzationManager::locString(LOC_SYSTEM_DONE_EXPLORE),true,false,false,CL_normal);
+	g_auto = false;
 }
 
 void long_rest()
@@ -373,6 +379,7 @@ void long_rest()
 		case IT_SMOKE:
 		case IT_EVENT:
 		case IT_DAMAGE:
+		case IT_MAX_ITEM:
 			return;
 		default:
 			break;
@@ -431,6 +438,7 @@ bool stack_move(bool auto_)
 		case IT_SMOKE:
 		case IT_EVENT:
 		case IT_DAMAGE:
+		case IT_MAX_ITEM:
 			return false;
 		default:
 			break;
@@ -2892,7 +2900,7 @@ void dungeonView()
 						LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("3"));
 					printsub(oss.str(),true,CL_STAT);
 					printsub(blank.str(),false,CL_warning);
-					printsub("│",true,CL_normal);
+					printsub("││",true,CL_normal);
 				}
 
 
@@ -3443,7 +3451,45 @@ void dungeonView()
 	ReleaseMutex(mutx);
 	
 	changedisplay(DT_SUB_TEXT);
-	waitkeyinput(true);
+	
+	setDisplayMove(DisplayManager.max_y);
+	
+	while(1)
+	{
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
+		if(key_ == VK_UP)
+		{
+			changemove(1);  //위
+		}
+		else if(key_ == VK_DOWN)
+		{
+			changemove(-1); //아래
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(DisplayManager.log_length);
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(-DisplayManager.log_length);
+		}
+		else if( key_ == -1) {
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //위
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1); //아래
+			} else if(inputedKey.isLeftClick() || inputedKey.isRightClick()) {
+				break;
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+
+
 	changedisplay(DT_GAME);
 	deletesub();
 

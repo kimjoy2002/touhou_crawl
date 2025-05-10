@@ -573,7 +573,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 						oss.precision(0);
 						oss << std::fixed; 
 						oss << "(";
-						oss << LocalzationManager::locString(LOC_SYSTEM_SUCCESS_PERCENT) << ": " << std::round(percent_) << "%";
+						oss << LocalzationManager::locString(LOC_SYSTEM_SUCCESS_PERCENT) << ": " << std::round(100-percent_) << "%";
 						oss << ")";
 						printlog(oss.str(), false, false, true, CL_normal);
 					}

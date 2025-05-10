@@ -665,8 +665,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			else if(i<=20)
 			{
 				t->value0 = 1;
-				t->value1 = 4;
-				t->value2 = 4;
+				t->value1 = 5;
+				t->value2 = 6;
 				t->value5 = 0;
 				t->value6 = 0;
 				t->value7 = 10;

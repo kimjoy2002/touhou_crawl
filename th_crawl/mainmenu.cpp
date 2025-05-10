@@ -434,6 +434,11 @@ bool select_job(int value_)
 
 bool replay_menu(int value_);
 
+bool quit_menu(int value_)
+{
+	throw 0;
+}
+
 
 void start_mainmenu()
 {
@@ -461,6 +466,8 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("e - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'e'));
 		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY), true, CL_normal, 'R'));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("X - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_QUIT), true, CL_normal, 'X'));
 		m_mgr.menu_puls(0,temp);
 		m_mgr.menu_input_puls(0,'a',1,"",false,checkSavefile,0);
 		m_mgr.menu_input_puls(0,'b',0,"",false,tutorials,0);
@@ -469,6 +476,7 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0, 'd', 1, "", false, sprint2s, 0);
 		m_mgr.menu_input_puls(0,'e',-3,"",false,option_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
+		m_mgr.menu_input_puls(0,'X',0,"",false,quit_menu,0);
 		
 		temp = make_unique<vector<menu_string>>();
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT), true, CL_help));

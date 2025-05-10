@@ -87,9 +87,46 @@ void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::ite
 		paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
 }
 
+
+//오로지 텍스트용
+void refreshThrowString(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
+{
+	throwstring(it, infor_);
+	if (infor_->spell == -2 && SpellcardFlagCheck((spellcard_evoke_type)infor_->spell, S_FLAG_DEBUF))
+	{
+		spell_list sp_ = (spell_list)infor_->spell;
+		int power_ = min(SpellCap(sp_), you.GetSpellPower(SpellSchool(sp_, 0), SpellSchool(sp_, 1), SpellSchool(sp_, 2)));
+		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
+	}
+	else if (infor_->spell > -2 && infor_->skill == false && SpellFlagCheck((spell_list)infor_->spell, S_FLAG_DEBUF))
+	{
+		spell_list sp_ = (spell_list)infor_->spell;
+		int power_ = min(SpellCap(sp_), you.GetSpellPower(SpellSchool(sp_, 0), SpellSchool(sp_, 1), SpellSchool(sp_, 2)));
+		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
+	}
+	else if (infor_->spell > -2 && infor_->skill == true && SkillFlagCheck((skill_list)infor_->spell, S_FLAG_DEBUF))
+	{
+		skill_list sp_ = (skill_list)infor_->spell;
+		int power_ = min(SkillCap(sp_), SkillPow(sp_));
+		Search_Move(c, false, VT_DEBUF, GetDebufPower(sp_, power_));
+	}
+	else if (infor_->spell > -2 && infor_->skill == true && infor_->spell == SKL_SATORI_2)
+	{
+		Search_Move(c, false, VT_SATORI);
+
+	}
+	else
+		Search_Move(c, false, VT_THROW);
+}
+
+
 bool refreshPath_after(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
 {
 	bool rect_ = (infor_->skill) ? SkillFlagCheck((skill_list)infor_->spell, S_FLAG_RECT) : SpellFlagCheck((spell_list)infor_->spell, S_FLAG_RECT);
+
+
+
+
 
 	bool good_path = (!infor_->smite)?CheckThrowPath(you.position,you.search_pos,beam):env[current_level].isMove(you.search_pos.x,you.search_pos.y,true);
 	int length_ = pow((float)abs(you.search_pos.x-you.position.x),2)+pow((float)abs(you.search_pos.y-you.position.y),2);
@@ -397,6 +434,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				}
 				if(i>=you.item_list.size())
 					it = you.item_list.end();
+				refreshThrowString(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
 				good_path = refreshPath_after(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 			}
 			break;
@@ -420,6 +458,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				}
 				if(i>=you.item_list.size())
 					it = you.item_list.end();
+				refreshThrowString(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
 				good_path = refreshPath_after(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 			}
 			break;
@@ -428,6 +467,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			{
 				refreshPath_before(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
 				it = ThrowSelect();
+				refreshThrowString(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
 				good_path = refreshPath_after(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 			}
 			break;

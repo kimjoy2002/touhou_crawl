@@ -276,42 +276,46 @@ void init_localization() {
 
 
 
-void charter_selete()
+void charter_selete(bool first)
 {//인간,마법사,요정,카라스텐구,백랑텐구,캇파,반요,츠구모가미,흡혈귀,오니,사신, 달토끼, 천인, 용궁의사자, 유 령, 망령, 소령
 	for(int i = 0; i<MAXLEVEL; i++)
 		env[i].floor = i;
 	
 	bool isSteamInit = steam_mg.isInit();
 
-	WaitForSingleObject(mutx, INFINITE);
-	SetText() = LocalzationManager::locString(LOC_SYSTEM_TITLE_TOUHOUCRAWL);
-	SetText() += " ";
-	SetText() += version_string;
-	SetText() += "\n";
-	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
-	SetText() += "\n\n";
-	string user_name = steam_mg.getSteamUserName();
-	steam_mg.setCurrentMainMenuInfo();
-	if (user_name.size() != 0)
-	{
-		you.user_name = user_name;
+	if(first){
+		WaitForSingleObject(mutx, INFINITE);
+		SetText() = LocalzationManager::locString(LOC_SYSTEM_TITLE_TOUHOUCRAWL);
+		SetText() += " ";
+		SetText() += version_string;
+		SetText() += "\n";
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_SHORTINFO);
+		SetText() += "\n\n";
+		string user_name = steam_mg.getSteamUserName();
+		steam_mg.setCurrentMainMenuInfo();
+		if (user_name.size() != 0)
+		{
+			you.user_name = user_name;
+		}
+
+		SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
+		SetText() += "\n";
+		SetText() += LocalzationManager::locString(isSteamInit?LOC_SYSTEM_STEAM_INIT_SUCCESS:LOC_SYSTEM_STEAM_INIT_FAIL);
+		SetText() += "\n";
+
+		SetDisplayTexture(&img_title);
+		changedisplay(DT_TEXT);
+		ReleaseMutex(mutx);
+		waitkeyinput();	
+		WaitForSingleObject(mutx, INFINITE);
+		SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_START);
+		SetText() += "\n";
+		ReleaseMutex(mutx);
+		Sleep(500);
+		SetDisplayTexture(NULL);
+	} else {
+		steam_mg.setCurrentMainMenuInfo();
 	}
-
-	SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
-	SetText() += "\n";
-	SetText() += LocalzationManager::locString(isSteamInit?LOC_SYSTEM_STEAM_INIT_SUCCESS:LOC_SYSTEM_STEAM_INIT_FAIL);
-	SetText() += "\n";
-
-	SetDisplayTexture(&img_title);
-	ReleaseMutex(mutx);
-	waitkeyinput();	
-	WaitForSingleObject(mutx, INFINITE);
-	SetText() += LocalzationManager::locString(LOC_SYSTEM_TITLE_START);
-	SetText() += "\n";
-	ReleaseMutex(mutx);
-	Sleep(500);
-	SetDisplayTexture(NULL);
-	
 	
 	{
 		ReplayClass.init_class();
@@ -544,12 +548,51 @@ void scrollup(bool down) {
 
 	}
 }
+extern bool shift_check;
+extern bool ctrl_check;
+extern int replay_speed;
+extern int map_effect;
+extern bool widesearch;
+extern display_manager DisplayManager;
+void init_alldata() {
+	map_list.random_number = (unsigned long)time(NULL);
+	init_nonlogic_seed((unsigned long)time(NULL));
+	srand((unsigned int)map_list.random_number);
+
+	you.init();
+	for(int i = 0; i < MAXLEVEL; i++) {
+		env[i].init();
+	}
+	current_level=0;
+	unique_list.clear();
+	wiz_list.wizard_mode = false;
+	shift_check = false;
+	ctrl_check = false;
+	widesearch = false;
+	saveexit = false;
+	map_effect = 0;
+	replay_speed = 1;
+	//불필요할수있지만 깔끔하게 하기위해서
+
+	iden_list = Iden_collect(); 
+ 	map_list = map_infor();	
+	unique_list.clear();
+	DisplayManager.initText();
+	game_over = false;
+}
+
 
 
 void MainLoop()
 {
 	while(1)
 	{
+		if(game_over == true) {
+			//초기화 로직
+			init_alldata();
+			return;
+		}
+
 		you.player_move = true;
 
 		if(you.s_timestep)

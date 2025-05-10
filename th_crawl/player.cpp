@@ -122,8 +122,8 @@ s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evo
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0),currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
-sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
 		prev_hp[i] = hp;
@@ -141,8 +141,10 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 		penalty_turn[i] = 0;
 	//for(int i=0;i<GT_LAST;i++)
 	//	punish[i]=0;
+	for(int i=0;i<5;i++)
+	    lilly_allys[i] = lilly_ally();
 	for(int i=0;i<GT_LAST;i++)
-		for(int j=0;j<5;j++)
+		for(int j=0;j<6;j++)
 			god_value[i][j]=0;
 	for(int i=0;i<4;i++)
 		half_youkai[i]=0;
@@ -155,6 +157,206 @@ sight_reset(false), target(NULL), throw_weapon(NULL),dead_order(NULL), dead_reas
 
 players::~players()
 {
+}
+void players::init() {
+
+	prev_position = coord_def(0,0);
+	name = name_infor(LOC_SYSTEM_YOU);
+	char_type = UNIQ_START_NONE;
+	//user_name = "-"; //유저네임은 굳이 초기화 필요없음
+	image = NULL;
+	tribe = TRI_FIRST;
+	job = JOB_FIRST;
+
+	hp = 10;
+	for(int i=0;i<2;i++)
+		prev_hp[i] = hp;
+	max_hp = 10;
+	hp_recov = 0;
+	mp = 0;
+	for(int i=0;i<2;i++)
+		prev_mp[i] = mp;
+	max_mp = 0;
+	mp_recov = 0;
+	pure_mp = false;
+	power = 300;
+	power_decre = 0;
+	level = 1;
+	exper = 0;
+	exper_recovery = 10;
+	exper_aptit = 10;
+	skill_exper =0;
+	system_exp = current_max(1,1);
+	ac = 0;
+	ev = 10;
+	sh = 0;
+	real_ac = 0;
+	bonus_ac = 0;
+	real_ev = 10;
+	bonus_ev = 0;
+	real_sh = 0;
+	bonus_sh = 0;
+	s_str = 10;
+	s_dex = 10;
+	s_int = 10;
+	m_str = 10;
+	m_dex = 10;
+	m_int = 10;
+	acc_plus = 0;
+	dam_plus = 0;
+	as_penalty = 0;
+	magic_resist = 0;
+	tension_gauge = 0;
+	tension_turn = false;
+	already_swap = false;
+	ziggurat_level = 0;
+	reimu_level = 0;
+	reimu_turn = 0;
+	search = false;
+	search_pos = coord_def(0,0);
+	buff_list.clear();
+	item_list.clear();
+	property_vector.clear();
+	action_vector.clear();
+	item_weight = 0;
+	max_item_weight = 350;
+	prev_action = ACTT_NONE;
+	prev_action_key = prev_action_struct();
+	for(int i=0;i<ET_LAST;i++)
+		equipment[i] = NULL;
+	time_delay = 0;
+	speed = 10;
+	turn = 0;
+	real_turn = 0;
+	prev_real_turn = 0;
+	player_move = false;
+	explore_map = 0;
+	for (int i = 0; i<4; i++)
+		penalty_turn[i] = 0;
+	final_item = 0;
+	final_num = 0;
+	while (!will_move.empty())
+    	will_move.pop();
+	auto_pickup = 1;
+	inter = IT_NONE;
+	s_poison = 0;
+	s_tele = 0;
+	s_might = 0;
+	s_clever = 0;
+	s_agility = 0;
+	s_haste = 0;
+	s_pure_haste = 0;
+	s_confuse = 0;
+	s_slow = 0;
+	s_frozen = 0;
+	s_elec = 0;
+	s_paralyse = 0;
+	s_levitation = 0;
+	s_glow = 0;
+	s_graze = 0;
+	s_silence = 0;
+	s_silence_range = 0;
+	s_sick = 0;
+	s_veiling = 0;
+	s_value_veiling = 0;
+	s_invisible = 0;
+	s_swift = 0;
+	s_mana_regen = 0;
+	s_superman = 0;
+	s_spellcard = 0;
+	s_slaying = 0;
+	s_autumn = 0;
+	s_wind = 0;
+	s_knife_collect = 0;
+	s_drunken = 0;
+	s_catch = 0;
+	s_ghost = 0;
+	s_dimension = 0;
+	s_timestep = 0;
+	s_mirror = 0;	
+	s_lunatic = 0;
+	s_paradox = 0;
+	s_trans_panalty = 0;
+	s_the_world = 0;
+	s_mana_delay = 0;
+	s_stat_boost = 0;
+	s_stat_boost_value = 0;
+	s_eirin_poison = 0;
+	s_eirin_poison_time = 0;
+	s_exhausted = 0;
+	s_stasis = 0;
+	force_strong = false;
+	force_turn = 0;
+	s_unluck = 0;
+	s_super_graze = 0;
+	s_none_move = 0;
+	s_night_sight = 0;
+	s_night_sight_turn = 0;
+	s_sleep = 0;
+	s_pure = 0;
+	s_pure_turn = 0;
+	drowned = false;
+	s_weather = 0;
+	s_weather_turn = 0;
+	s_evoke_ghost = 0;
+	alchemy_buff = ALCT_NONE;
+	alchemy_time = 0;
+	teleport_curse = false;
+	magician_bonus = 0;
+	poison_resist = 0;
+	fire_resist = 0;
+	ice_resist = 0;
+	elec_resist = 0;
+	confuse_resist = 0;
+	invisible_view = 0;
+	power_keep = 0;
+	togle_invisible = false;
+	battle_count = 0;
+	youMaxiExp = false;
+	uniden_poison_resist = 0;
+	uniden_fire_resist = 0;
+	uniden_ice_resist = 0;
+	uniden_elec_resist = 0;
+	uniden_confuse_resist = 0;
+	uniden_invisible_view = 0;
+	uniden_power_keep = 0;
+	total_skill_exp = 0;
+	for (int i = 0; i<SKT_MAX; i++) {
+		skill[i] = skill_exp_infor();
+		bonus_skill[i] = 0;
+	}
+	pure_skill = -1;
+	for(int i=0;i<52;i++)
+		MemorizeSpell[i] = 0;
+	remainSpellPoiont = 1;
+	currentSpellNum = 0;
+	prevSpell = 0;
+	for(int i=0;i<52;i++)
+		MemorizeSkill[i] = 0;
+	for(int i=0;i<52;i++)
+		MemorizeSkill_num[i] = 0;
+	currentSkillNum = 0;
+	god = GT_NONE;
+	piety = 0;
+	gift_count = 0;
+	punish_struct punish[GT_LAST];
+	god_turn = 0;
+	for(int i=0;i<GT_LAST;i++)
+		for(int j=0;j<6;j++)
+			god_value[i][j]=0;
+	for(int i=0;i<5;i++)
+	    lilly_allys[i] = lilly_ally();
+	suwako_meet = 0;
+	for(int i=0;i<4;i++)
+		half_youkai[i]=0;
+	for(int i=0;i<RUNE_MAX;i++)
+		rune[i]=0;
+	sight_reset = false;
+	target = NULL;
+	useMouseTammac = 0;
+	throw_weapon  = NULL;
+	dead_order = NULL;
+	dead_reason = DR_NONE;
 }
 void players::SaveDatas(FILE *fp)
 {
@@ -362,7 +564,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<punish_struct>(fp, *punish, GT_LAST);
 	SaveData<int>(fp, god_turn);
 	for(int i=0;i<GT_LAST;i++)
-		SaveData<int>(fp, *(god_value[i]), 5);
+		SaveData<int>(fp, *(god_value[i]), 6);
 	SaveData<lilly_ally>(fp, *lilly_allys, 5);	
 	SaveData<int>(fp, suwako_meet);
 	SaveData<int>(fp, *half_youkai, 4);	

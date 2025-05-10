@@ -159,6 +159,11 @@ log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
 	for(int i=0;i<52;i++)
 		item_view[i] = 0;
 }
+void display_manager::initText() {
+	//가벼운 초기화 (이 부분은 게임초기화시 중요치않음)
+	text_log.reset();
+	text_sub.reset();
+}
 void display_manager::Getfontinfor()
 {
 	if (!g_pfont) return;

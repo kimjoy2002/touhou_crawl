@@ -54,7 +54,7 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 
 	
 	if(game_over)
-		throw 0;
+		return VK_RETURN;
 	while(!g_shutdownRequested) 
 	{
 		do {

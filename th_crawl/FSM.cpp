@@ -114,6 +114,15 @@ FSMstate state_wait(MS_WAIT);
 
 void init_state()
 {
+	state_normal = FSMstate(MS_NORMAL);
+	state_sleep = FSMstate(MS_SLEEP);
+	state_atack = FSMstate(MS_ATACK);
+	state_rest = FSMstate(MS_REST);
+	state_follow = FSMstate(MS_FOLLOW);
+	state_find = FSMstate(MS_FIND);
+	state_wait = FSMstate(MS_WAIT);
+
+
 	//상태 노말: 적을 발견하지않고 떠도는 상태
 	state_normal.AddTransition(MSI_FOUND,MS_ATACK);
 	state_normal.AddTransition(MSI_ATACKED,MS_ATACK);

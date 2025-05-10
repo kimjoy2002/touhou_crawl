@@ -165,6 +165,7 @@ public:
 
 	environment();
 	~environment();
+	void init();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	bool MakeMap(bool return_); //return_ 은 되돌아오는 계단일때 전용(이때는 대나무숲을 만들지 않는다.)

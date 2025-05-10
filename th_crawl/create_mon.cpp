@@ -417,6 +417,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 
 void init_monster()
 {
+	unique_list.clear();
 	int i=0;
 	while(unigue_group[i].id != -1)
 	{

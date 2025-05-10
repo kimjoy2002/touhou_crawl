@@ -29,7 +29,7 @@ extern const char *version_string;
 extern HANDLE endmutx;
 extern bool Display(float timeDelta);
 extern void init_localization();
-extern void charter_selete();
+extern void charter_selete(bool first);
 extern void MainLoop();
 extern void Initialize();
 std::atomic<bool> g_shutdownRequested = false;
@@ -483,8 +483,12 @@ unsigned int WINAPI GameLoop(void *arg)
 
 unsigned int WINAPI GameInnerLoop()
 {
-	charter_selete();
-	MainLoop();
+	bool first = true;
+	while(1) {
+		charter_selete(first);
+		MainLoop();
+		first = false;
+	}
 	return 0;
 }
 

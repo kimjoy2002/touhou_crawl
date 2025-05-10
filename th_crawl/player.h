@@ -362,6 +362,7 @@ public:
 
 	players();
 	~players();
+	void init();
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	bool Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_);

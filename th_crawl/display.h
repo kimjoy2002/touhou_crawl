@@ -169,6 +169,7 @@ public:
 	infoBox infobox;
 
 	display_manager();
+	void initText();
 	void Getfontinfor();
 	int convertClickable(int id);
 	textures* getSelectTexure(int id);

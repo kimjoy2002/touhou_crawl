@@ -19,11 +19,11 @@
 */
 const mon_infor mondata[] = {
 	{MON_REIMUYUKKURI,2,4,name_infor(MON_REIMUYUKKURI),&img_mons_reimu_yukkuri,25,0,5,
-	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15,'y'},
 
 	{MON_REIMUYUKKURI,2,70,name_infor(MON_REIMUYUKKURI),&img_mons_reimu_yukkuri,25,0,5,
-	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{6,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
 
 	{MON_RAT,1,1,name_infor(MON_RAT),&img_mons_rat,10,0,6,
@@ -55,7 +55,7 @@ const mon_infor mondata[] = {
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,7,'c' },
 
 	{MON_CRANE,5,116,name_infor(MON_CRANE),&img_mons_crane,30,3,10,
-	{8,8,20},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PECK)},
+	{8,8,18},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PECK)},
 	M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10,'C' },
 
 	{MON_SPIDER,3,11,name_infor(MON_SPIDER),&img_mons_spider,18,1,10,

@@ -57,7 +57,34 @@ base_floor(DG_FLOOR), base_wall(DG_WALL)
 environment::~environment()
 {
 }
-
+void environment::init() {
+	floor = 0;
+	make = false;
+	all_monster_id = 1;
+	popular = 1;
+	base_floor = DG_FLOOR;
+	base_wall = DG_WALL;
+	for(int i = 0; i < DG_MAX_X; i++) {
+		for(int j = 0; j < DG_MAX_Y; j++) {
+			dgtile[i][j] = dungeon_tile();
+		}
+	}
+	for(int i = 0; i < 3; i++) {
+		stair_up[i] = coord_def(0,0);
+ 		stair_down[i] = coord_def(0,0);
+	}
+	stair_vector.clear();
+	mon_vector.clear();
+	mon_vector.reserve(MON_MAX_IN_FLOOR);
+	shadow_list.clear();
+	item_list.clear();
+	effect_list.clear();
+	smoke_list.clear();
+	floor_list.clear();
+	event_list.clear();
+	speciel_map_name.clear();
+	forbid_list.clear();
+}
 void environment::SaveDatas(FILE *fp)
 {
 	SaveData<int>(fp, floor);

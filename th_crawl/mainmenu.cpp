@@ -237,8 +237,11 @@ bool checkSavefile(int value_)
 	return false;
 }
 
+extern vector<int> g_selected;
+
 bool tutorials(int value_)
 {
+	g_selected[0] = 'b';
 	map_list.tutorial = GM_TUTORIAL;
 	return true;
 }
@@ -246,6 +249,7 @@ bool tutorials(int value_)
 
 bool tutorial2(int value_)
 {
+	g_selected[0] = 'b';
 	map_list.tutorial = GM_TUTORIAL2;
 	return true;
 }
@@ -253,6 +257,7 @@ bool tutorial2(int value_)
 
 bool sprint1s(int value_)
 {
+	g_selected[0] = 'c';
 	map_list.tutorial = GM_SPRINT1_AREANA;
 	return true;
 }
@@ -260,6 +265,7 @@ bool sprint1s(int value_)
 
 bool sprint2s(int value_)
 {
+	g_selected[0] = 'd';
 	map_list.tutorial = GM_SPRINT2_MINISTAGE;
 	return false;
 }
@@ -268,6 +274,7 @@ bool option_menu(int value_);
 
 bool select_fairy(int value_)
 {
+	g_selected[3] = value_;
 
 	switch (value_)
 	{
@@ -294,7 +301,7 @@ bool select_fairy(int value_)
 	WaitForSingleObject(mutx, INFINITE);
 	printsub("", true, CL_normal);
 	printsub("", true, CL_normal);
-	printsub("Kill Them All!", true, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_KILLTHENALL), true, CL_normal);
 	printsub("", true, CL_normal);
 	ReleaseMutex(mutx);
 	Sleep(300);
@@ -302,6 +309,9 @@ bool select_fairy(int value_)
 }
 bool select_named(int value_)
 {
+	g_selected[0] = 'a';
+	g_selected[1] = 'a';
+	g_selected[2] = value_;
 	switch( value_ )
 	{
 	case 0:						
@@ -353,7 +363,7 @@ bool select_named(int value_)
 	WaitForSingleObject(mutx, INFINITE);
 	printsub("", true, CL_normal);
 	printsub("", true, CL_normal);
-	printsub("Kill Them All!", true, CL_normal);
+	printsub(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_KILLTHENALL), true, CL_normal);
 	printsub("", true, CL_normal);
 	ReleaseMutex(mutx);
 	Sleep(300);
@@ -361,6 +371,9 @@ bool select_named(int value_)
 }
 bool select_char(int value_)
 {
+	g_selected[0] = 'a';
+	g_selected[1] = 'b';
+	g_selected[2] = value_;
 	you.tribe = (tribe_type)(value_);
 	return false;
 }
@@ -420,9 +433,10 @@ bool show_help(int value_)
 }
 bool select_job(int value_)
 {
+	g_selected[3] = value_;
 	you.job = (job_type)(value_);
-	int sytle = ((you.tribe == TRI_FAIRY)?3:randA(2));
-	int color = randA(10);
+	int sytle = ((you.tribe == TRI_FAIRY)?3:randA_nonlogic(2));
+	int color = randA_nonlogic(10);
 	if (you.tribe == TRI_KAPPA)
 		color = 10;
 	else if (you.tribe == TRI_WOLFTENGU)

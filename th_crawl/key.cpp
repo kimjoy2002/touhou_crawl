@@ -24,6 +24,7 @@ int replay_speed = 1;
 extern std::atomic<bool> g_shutdownRequested;
 
 
+void saveReplay_cpp();
 std::unique_ptr<KeyInputQueue> g_keyQueue;
 
 bool isKeyinput(bool ablecursor)

@@ -273,8 +273,17 @@ void init_localization() {
 		LocalzationManager::init(defaultLang, false);
 	}
 }
+vector<int> g_selected;
 
 
+
+bool tutorials(int value_);
+bool sprint1s(int value_);
+bool sprint2s(int value_);
+bool select_named(int value_);
+bool select_char(int value_);
+bool select_fairy(int value_);
+bool select_job(int value_);
 
 void charter_selete(bool first)
 {//인간,마법사,요정,카라스텐구,백랑텐구,캇파,반요,츠구모가미,흡혈귀,오니,사신, 달토끼, 천인, 용궁의사자, 유 령, 망령, 소령
@@ -317,16 +326,55 @@ void charter_selete(bool first)
 		steam_mg.setCurrentMainMenuInfo();
 	}
 	
-	{
-		ReplayClass.init_class();
-		ReplayClass.SaveReplayStart();
-	}
+
 	
 	init_state();
 	MapNode::initMapNode();
 	map_list.tutorial = GM_TITLE;
 
-	start_mainmenu();
+	if(!ReplayClass.play)
+	{
+		g_selected.clear();
+		g_selected.assign(4, 0);
+		start_mainmenu();
+		if(game_over) {
+			return;
+		}
+		if(!saveexit) {
+			ReplayClass.init_class(g_selected);
+			ReplayClass.SaveReplayStart();
+		}
+	} else {
+		game_over = false;
+		switch(ReplayClass.infor.starting[0]) {
+			case 'b':
+				tutorials(0);
+				break;
+			case 'c':
+				sprint1s(0);
+				break;
+			case 'd':
+				sprint2s(0);
+				//1안씀
+				select_char(ReplayClass.infor.starting[2]);
+				select_job(ReplayClass.infor.starting[3]);
+				break;
+			case 'a'://메인게임
+			default:
+				if(ReplayClass.infor.starting[1] == 'b') { //직접픽
+					select_char(ReplayClass.infor.starting[2]);
+					select_job(ReplayClass.infor.starting[3]);
+
+				} else { //'a'와 기본
+					select_named(ReplayClass.infor.starting[2]);
+					if(ReplayClass.infor.starting[2] == 7) { //삼월정
+						select_fairy(ReplayClass.infor.starting[3]);
+					}
+				}
+				break;
+		}
+	}
+
 
 	if(!saveexit)
 	{
@@ -555,9 +603,10 @@ extern int map_effect;
 extern bool widesearch;
 extern display_manager DisplayManager;
 void init_alldata() {
-	map_list.random_number = (unsigned long)time(NULL);
-	init_nonlogic_seed((unsigned long)time(NULL));
-	srand((unsigned int)map_list.random_number);
+	WaitForSingleObject(mutx, INFINITE);
+	//map_list.random_number = (unsigned long)time(NULL);
+	//init_nonlogic_seed((unsigned long)time(NULL));
+	//srand((unsigned int)map_list.random_number);
 
 	you.init();
 	for(int i = 0; i < MAXLEVEL; i++) {
@@ -575,10 +624,15 @@ void init_alldata() {
 	//불필요할수있지만 깔끔하게 하기위해서
 
 	iden_list = Iden_collect(); 
+	int temp = map_list.random_number;
  	map_list = map_infor();	
+	ReplayClass.replay_string = "";
+	map_list.random_number = temp;
 	unique_list.clear();
 	DisplayManager.initText();
 	game_over = false;
+	changedisplay(DT_TEXT);
+	ReleaseMutex(mutx);
 }
 
 

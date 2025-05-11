@@ -41,8 +41,8 @@ public:
 	char forbid_count;
 	char forbid_count2;
 	unsigned char autotile_bitmap[AUTOTILE_MAX]; //하나는 벽, 하나는 물
-	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0){};
-	dungeon_tile(dungeon_tile_type tile_, char flag_){tile = tile_;flag = flag_;};
+	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0),santuary_count(0),forbid_count(0),forbid_count2(0){init();};
+	dungeon_tile(dungeon_tile_type tile_, char flag_){init();tile = tile_;flag = flag_;};
 	void init()
 	{
 		tile = DG_FLOOR;
@@ -51,6 +51,9 @@ public:
 		violet_count = 0;
 		forbid_count = 0;
 		forbid_count2 = 0;
+		for(int i = 0; i<AUTOTILE_MAX;i++) {
+			autotile_bitmap[i] = 0;
+		}
 	}
 	bool isMove(bool fly_, bool swim_, bool no_ground_, bool seiga_ = false)
 	{

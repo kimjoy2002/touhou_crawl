@@ -63,11 +63,11 @@ const mon_infor mondata[] = {
 	M_FLAG_ANIMAL,0,1,10,'s'},
 
 	{MON_SNAKE,4,21,name_infor(MON_SNAKE),&img_mons_snake,22,1,10,
-	{4,3,0},{ATT_S_POISON,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
+	{4,2,0},{ATT_S_POISON,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'s'},
 
 	{MON_KATPA,2,7,name_infor(MON_KATPA),&img_mons_new_kappa,20,2,10,
-	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_SWIM,0,1,10,'k'},
 
 	{MON_KATPA_GUN,5,65,name_infor(MON_KATPA_GUN),&img_mons_katpa_gun,40,1,10,

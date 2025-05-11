@@ -339,7 +339,8 @@ void players::init() {
 	god = GT_NONE;
 	piety = 0;
 	gift_count = 0;
-	punish_struct punish[GT_LAST];
+	for(int i=0;i<GT_LAST;i++)
+		punish[i] = punish_struct(); 
 	god_turn = 0;
 	for(int i=0;i<GT_LAST;i++)
 		for(int j=0;j<6;j++)

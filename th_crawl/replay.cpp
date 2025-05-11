@@ -35,11 +35,11 @@ replay_class::~replay_class()
 
 void replay_class::DeleteRpy()
 {
-	
 	if(!replay_string.empty()){		
 		remove(replay_string.c_str());
 		replay_string.clear();
 	}
+    input_buffer.clear();
 }
 
 void replay_class::SaveDatas(FILE *fp)
@@ -52,8 +52,8 @@ void replay_class::SaveDatas(FILE *fp)
 	
 	SaveData<bool>(fp,init);
 	SaveData<bool>(fp,play);
-	SaveData<bool>(fp,auto_key);	
-
+	SaveData<bool>(fp,auto_key);
+	FlushReplayInput();
 }
 void replay_class::LoadDatas(FILE *fp)
 {
@@ -66,17 +66,15 @@ void replay_class::LoadDatas(FILE *fp)
 	
 	LoadData<bool>(fp,init);
 	LoadData<bool>(fp,play);
-	LoadData<bool>(fp,auto_key);	
+	LoadData<bool>(fp,auto_key);
 }
 
 
 
 
-void replay_class::init_class()
+void replay_class::init_class(std::vector<int>& init_starting)
 {
 	DeleteRpy();
-
-
 	struct tm t;
 	time_t now;
 	time(&now);
@@ -85,16 +83,19 @@ void replay_class::init_class()
 	sprintf_s(filename,512, (replay_path + "/%s-%04d%02d%02d-%02d%02d%02d.rpy").c_str(),you.user_name.c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
 	
 	replay_string = filename;
-	sprintf_s(infor.name,32,"%s",you.user_name.c_str());
+	sprintf_s(infor.name,64,"%s",you.user_name.c_str());
 	sprintf_s(infor.version,32,"%s",version_string);
 	memset(infor.infor,0,256);
 	infor.rand_num = map_list.random_number;
+    infor.starting[0] = init_starting[0];
+	infor.starting[1] = init_starting[1];
+	infor.starting[2] = init_starting[2];
+	infor.starting[3] = init_starting[3];
 	init = true;
 }
 void replay_class::init_replay(const char* name)
 {
 	DeleteRpy();
-
 
 	replay_string = name;
 	
@@ -139,23 +140,35 @@ bool replay_class::SaveReplayInput(DWORD time_, int key_, InputedKey inputedkey)
     if (!init || play)
         return false;
 
-    if (!replay_string.empty()) {
-        FILE* fp = nullptr;
-        std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
-
-        if (_wfopen_s(&fp, wfilename.c_str(), L"ab") == 0 && fp) {
-            fwrite(&time_, sizeof(DWORD), 1, fp);
-            fwrite(&key_, sizeof(int), 1, fp);
-			if(key_ == -1) {
-				fwrite(&inputedkey.mouse, sizeof(int), 1, fp);
-				fwrite(&inputedkey.val1, sizeof(int), 1, fp);
-				fwrite(&inputedkey.val2, sizeof(int), 1, fp);
-			}
-            fclose(fp);
-        }
-    }
+    input_buffer.push_back({time_, key_, inputedkey});
     return true;
 }
+bool replay_class::FlushReplayInput()
+{
+    if (input_buffer.empty() || replay_string.empty())
+        return false;
+
+    FILE* fp = nullptr;
+    std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
+
+    if (_wfopen_s(&fp, wfilename.c_str(), L"ab") != 0 || !fp)
+        return false;
+
+    for (const auto& entry : input_buffer) {
+        fwrite(&entry.time_, sizeof(DWORD), 1, fp);
+        fwrite(&entry.key_, sizeof(int), 1, fp);
+        if (entry.key_ == -1) {
+            fwrite(&entry.inputedkey.mouse, sizeof(int), 1, fp);
+            fwrite(&entry.inputedkey.val1, sizeof(int), 1, fp);
+            fwrite(&entry.inputedkey.val2, sizeof(int), 1, fp);
+        }
+    }
+
+    fclose(fp);
+    input_buffer.clear();
+    return true;
+}
+
 
 
 
@@ -254,6 +267,7 @@ bool replay_class::StopReplay(string str)
 	}
 	else if(init)
 	{//그게 아니면 리플레이 저장중일것이다.
+		FlushReplayInput();
 		strcpy_s(infor.infor,256,str.c_str());
 		
 		char filename[512];
@@ -268,6 +282,7 @@ bool replay_class::StopReplay(string str)
 			fwrite(&infor,sizeof(base_infor),1,fp);
 			//rewind(fp);
 			fclose(fp);
+			replay_string = "";
 		}
 	}
 	return true;
@@ -444,7 +459,8 @@ bool replay_menu(int value_)
 					sprintf_s(temp,512,(replay_path + "/%s").c_str(),file_vector[select_].path.c_str());
 					ReplayClass.init_replay(temp);
 					ReplayClass.LoadReplayStart();
-					out_ = true;
+					game_over = true;
+					return true;
 				}
 			}
 			else if(input_ == VK_LEFT)

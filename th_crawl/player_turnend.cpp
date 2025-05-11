@@ -1218,6 +1218,7 @@ void resurectionlog(string reason)
 
 int caculScore();
 
+void saveReplay_cpp();
 
 
 void GameOver()
@@ -1386,8 +1387,9 @@ void GameOver()
 
 
 	}
-
+	saveReplay_cpp();
 	game_over = true;
+	ReplayClass.play = false;
 }
 
 

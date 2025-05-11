@@ -53,11 +53,15 @@ void delete_file()
 	saveexit = false;
 
 }
+void saveReplay_cpp();
 void saveandexit()
 {
-	if(!ReplayClass.ReplayMode())
-		g_saveandexit = true;
+	if(!ReplayClass.ReplayMode()) {
+		saveReplay_cpp();
+		game_over = true;
+	}
 }
+void saveReplay_cpp();
 void saveandcheckexit()
 {
 	while(1)
@@ -75,8 +79,10 @@ void saveandcheckexit()
 		{
 		case 'Y':
 			enterlog();	
-			if(!ReplayClass.ReplayMode())
-				g_saveandexit = true;
+			if(!ReplayClass.ReplayMode()) {
+				saveReplay_cpp();
+				game_over = true;
+			}
 			endSelection();
 			return;			
 		case -1:

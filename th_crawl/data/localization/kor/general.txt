@@ -12,6 +12,7 @@ LOC_SYSTEM_MAINMENU_ETC,기타
 LOC_SYSTEM_MAINMENU_OPTION,옵션
 LOC_SYSTEM_MAINMENU_REPLAY,리플레이
 LOC_SYSTEM_MAINMENU_QUIT,게임종료
+LOC_SYSTEM_MAINMENU_KILLTHENALL,Kill Them All!
 LOC_SYSTEM_MAINMENU_MAINGAME_MODE_SELECT,무슨 모드로 시작할거야?
 LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY,동방 캐릭터로 시작하기 (EASY)
 LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY_SELECT,제일 좋은 것을 부탁해.
@@ -28,7 +29,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,보너스) +2,+2 빗자루, 영력의 
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,초보자팁) z키로 마법을 쓰고 M키로 마법을 배웁니다. 항상 5키로 마나를 가득 채우고 다닙시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,고위력 & 광범위 작렬형. 스와코님의 말씀대로!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스)  대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스) 대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 스펠카드가 사용가능합니다. 대지의 스펠카드는 벽에 맞춰서 폭발데미지를 줍시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,자동탐색 & 자동공격형. O와 TAB이 당신을 지켜줄지어니
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,적성보너스) 장검적성 +1
@@ -43,7 +44,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,적성보너스) 체력 +20%, 전투적
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 2번까지 부활가능(9레벨, 18레벨에 다다르면 삭제)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 죽어도 2번에 한해서 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n 죽지않고 9레벨, 18레벨에 다다르면 부활능력이 1개씩 사라집니다. 그러니 죽는 것에 두려워하지마세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2  발동적성 +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2, 발동적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 천 캇파옷과 공중어뢰, 네시의 오컬트 부적을 들고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 이용하여 발동템을 사용 가능합니다. 공중어뢰는 장거리 탄막을 발사합니다.\n 장착중인 오컬트 부적은 경험치를 모아서 충전이 가능합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!\n 발동템은 영구적인 템이지만 P의 소모가 격렬하니 남용은 금물입니다. 위험한 적과 싸울때 사용합시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,요정대전쟁! 빛의 삼요정. 혼자보단 같이 싸워라!
@@ -3090,7 +3091,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY_SHORT,성역
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON_SHORT,마법무기
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN1,닳아 해진 양피지 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN2,삐뚤빼뚤한 나무껍질 두루마리
-LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN3,희미한 잉크의 천  두루마리
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN3,희미한 잉크의 천 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN4,마모된 금실 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN5,깨알같이 적힌 양피지 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN6,불에 그을린 천 조각 두루마리

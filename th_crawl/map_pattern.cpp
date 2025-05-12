@@ -53,7 +53,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 63; i++)
+	for (int i = 0; i <= 70; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
@@ -319,11 +319,11 @@ $$$...$$$";
 				}
 				map->name = "KOGASA_FALL";
 				return  "\
-####.\
-#....\
-#...#\
-#...#\
-..###";			
+.....\
+.....\
+.....\
+.....\
+.....";			
 			}
 		case 10: //요정대전쟁
 			if(floor_ < 5)
@@ -1747,7 +1747,7 @@ TT.....TT\
 			map->m_entrance.x = 0;
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
-			map->m_exit.y = map->size_y;
+			map->m_exit.y = -map->size_y;
 			map->name = "COMMON_DIAMOND_ROOM";
 			return  "\
 ```#.#```\
@@ -1773,6 +1773,158 @@ TT.....TT\
 ........`#.....\
 .....##```#....\
 ...##``````#...";
+		}
+		case 64:
+		{
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			map->name = "COMMON_WATERTREE_ROOM";
+			return  "\
+`T`.``T\
+`~~.~T`\
+`.~.~~`\
+`~.T.~`\
+`~~.~.`\
+`T.~.~`\
+`~`.``~";
+		}
+		case 65:
+		{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "COMMON_MANYSTATUE_ROOM";
+			return  "\
+..B...B\
+.B..B..\
+...B...\
+B....B.\
+...BB.B\
+.B.....\
+..B...B";
+		}
+		case 66:
+		{
+			if(floor_ > 5)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "COMMON_EARLY_REWARD_ROOM";
+			map->flag = FLAG_NO_ITEM;
+			return  "\
+.........\
+.###.###.\
+.#m#.#i#.\
+.##...##.\
+....&....\
+.##...##.\
+.#i#.#m#.\
+.###.###.\
+...........";
+		}
+		case 67:
+		{
+			if(floor_ > 5)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "COMMON_ITEM_IN_THE_WATER";
+			return  "\
+.....\
+.~~~.\
+.~i~.\
+.~~~.\
+.....";
+		}
+		case 68:
+		{
+			map->size_x = 4;
+			map->size_y = 3;
+			map->m_entrance.x = -3;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 3;
+			map->m_exit.y = map->size_y;
+			map->name = "COMMON_S_WATER_ROOM";
+			return  "\
+#########\
+#...#...#\
+#.#.~.#.#\
+#.~.#.~.#\
+#.#.~.#.#\
+#.~...~.#\
+#.#####.#";
+		}
+		case 69:
+		{
+			if(floor_ < 9 || floor_ > 15)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 7;
+			map->size_y = 7;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "COMMON_BIG_GLASS_WATER_LAVA_ROOM";
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			return  "\
+...............\
+.======.======.\
+.=...........=.\
+.=.~~~~~~~~~.=.\
+.=.~.......~.=.\
+.=.~.;;.;;.~.=.\
+.=.~.;mim;.~.=.\
+.=.~.;iMi;.~.=.\
+.=.~.;mim;.~.=.\
+.=.~.;;;;;.~.=.\
+.=.~.......~.=.\
+.=.~~~~.~~~~.=.\
+.=...........=.\
+.=============.\
+...............";
+		}
+		case 70:
+		{
+			if(floor_ > 5)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "COMMON_EARLY_SUNFLOWER";
+			return  "\
+.....\
+.._..\
+._f_.\
+.._..\
+.....";
 		}
 		}
 	}

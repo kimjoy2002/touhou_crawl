@@ -2061,7 +2061,7 @@ int players::AcUpDown(int value_, int bonus_)
 {
 	real_ac += value_;
 	bonus_ac += bonus_;
-	float temp_ac = (float)real_ac*(1.0f+ GetSkillLevel(SKT_ARMOUR, true)/15.0f);
+	float temp_ac = (float)real_ac*(1.0f+ GetSkillLevel(SKT_ARMOUR, true)/22.0f);
 	ac = (int)temp_ac+bonus_ac; 
 	return ac;
 }

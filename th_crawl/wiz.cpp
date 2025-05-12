@@ -29,11 +29,27 @@ extern int create_bamboo_mon();
 bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
 
 void create_and_kill(int floor, float percent_ = 1.0f) {
-	env[floor].MakeMap(true);				
+	env[floor].MakeMap(true);
 	for(vector<monster>::iterator it = env[floor].mon_vector.begin(); it != env[floor].mon_vector.end(); it++)
 	{
 		if(it->isLive() && percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
 			it->dead(PRT_PLAYER,false);
+	}
+	if(floor != current_level) {
+		for(list<item>::iterator it = env[floor].item_list.begin(); it != env[floor].item_list.end(); )
+		{
+			list<item>::iterator temp = it++;
+			if(percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
+			{
+				env[current_level].AddItem(you.position, &(*temp));
+				env[floor].DeleteItem(&(*temp));
+			}
+		}
+	} else {
+		for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
+		{
+			it->position = you.position;
+		}
 	}
 }
 
@@ -84,12 +100,6 @@ void wiz_mode()
 			for (int i = 0; i < DG_MAX_X; i++)
 				for (int j = 0; j < DG_MAX_Y; j++)
 					env[current_level].magicmapping(i, j);
-			break;
-		case 'f': //연기
-			//for(int i = -1;i<2;i++)
-			//	for(int j = -1;j<2;j++)
-			//		env[current_level].MakeSmoke(coord_def(i+you.position.x,j+you.position.y),img_fog_fire,SMT_NORMAL,10,0,&you);
-			MakeCloud(you.position, img_fog_thunder, SMT_ELEC, rand_int(8, 10), rand_int(80, 120), 0, 5, &you);
 			break;
 		case 'A':
 		{
@@ -457,13 +467,6 @@ void wiz_mode()
 				//you.resetLOS(false);
 			}
 			break;
-		case 'n':
-		{
-			item_infor t;
-			makeitem(ITM_ETC, 0, &t, EIT_CAT_TREE);
-			env[current_level].MakeItem(you.position, t);
-		}
-		return;
 		case 'G': //던전이동	
 		{
 			deque<monster*> dq;

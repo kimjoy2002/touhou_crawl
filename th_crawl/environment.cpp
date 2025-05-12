@@ -84,6 +84,7 @@ void environment::init() {
 	event_list.clear();
 	speciel_map_name.clear();
 	forbid_list.clear();
+
 }
 void environment::SaveDatas(FILE *fp)
 {
@@ -2558,12 +2559,14 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 0* multi_;
 		else if(level_ >= DREAM_LEVEL && level_ <= DREAM_LAST_LEVEL)
 			return 6 * multi_;
-		else if(level_ >= MISTY_LAKE_LEVEL && level_ <= MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
-			return 7 * multi_;
+		else if(level_ >= MISTY_LAKE_LEVEL && level_ < MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
+			return 10;
+		else if(level_ == MISTY_LAKE_LEVEL+MAX_MISTY_LAKE_LEVEL)
+			return 15;
 		else if(level_ >= YUKKURI_LEVEL && level_ <= YUKKURI_LAST_LEVEL)
-			return 18 * multi_;
+			return 18;
 		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
-			return 15 * multi_;
+			return 15;
 		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 12 * multi_;
 		else

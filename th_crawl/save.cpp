@@ -84,7 +84,7 @@ void saveandcheckexit()
 				game_over = true;
 			}
 			endSelection();
-			return;			
+			return;
 		case -1:
 			if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH

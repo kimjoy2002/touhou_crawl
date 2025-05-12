@@ -109,32 +109,29 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 15,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  8,  1}, //초록요정2 파랑요정1 빨강요정1
 	{ 21,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10,  1}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  10, 1}, //깃발 요정 호위부대
-	{  3,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  1}, //초록요정 1
 	{  5,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+1,  1,  2}, //빨간요정 1
 	{  6,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //파랑요정 1
 	{  7,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //초록요정 2~3
-	{  0,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //모옥 1
-	{ 29,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //주황모옥
-	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  1}, //초록모옥
-	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+3,  2,  1}, //회색모옥
+	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //초록모옥
+	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //회색모옥
 	{ 65,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  1,  5}, //요정영웅부대(가끔!)
 	
 	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  1}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 1}, //깃발 요정 호위부대
-	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  2,  1}, //캇파2~3
+	{ 14,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 2,  1}, //캇파2~3
 	{ 17,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4, 2,  3}, //캇파창병
 	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 3}, //개구리
-	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 3}, //버섯요괴
+	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 3}, //버섯요괴
 		
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 1}, //깃발 요정 호위부대
 	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 1, 5}, //요정영웅부대
 	
-	{ 63,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL, 1, 5}, //큰두꺼비
-	{ 63,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+2, 2, 5}, //큰두꺼비
+	{ 63,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL, 2, 5}, //큰두꺼비
+	{ 63,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+2, 3, 5}, //큰두꺼비
 	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 6, 5}, //큰두꺼비
 
-	{ 66,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 5}, //요정소서러
-	{ 67,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 2, 5}, //요정해바라기
+	{ 66,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 3, 5}, //요정소서러
+	{ 67,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 3, 5}, //요정해바라기
 
 	//YOUKAI_MOUNTAIN_LEVEL
 

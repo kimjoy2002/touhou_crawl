@@ -1984,6 +1984,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 
 	//미니맵 그리기
+	int minimap_offset_x = info_minX+(option_mg.getWidth() - info_minX)/2 - DG_MAX_X*dot_size/2;
+
 	if(dot_size > 0)
 	{
 		for(int i=0;i<DG_MAX_X;i++)
@@ -1992,7 +1994,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				if(env[current_level].isExplore(i,j) || env[current_level].isMapping(i,j))
 				{
-					int x_ = GetDotX(info_minX,i+offset_.x,dot_size);
+					
+					int x_ = GetDotX(minimap_offset_x,i+offset_.x,dot_size);
 					int y_ = GetDotY(dot_start_y,j+offset_.y,dot_size);
 					switch(env[current_level].dgtile[i][j].GetDot())
 					{
@@ -2028,11 +2031,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					}
 				}
 			}
-			if (MousePoint.x >= GetDotX(info_minX,offset_.x,dot_size) && MousePoint.x < GetDotX(info_minX,offset_.x,dot_size) + DG_MAX_X*dot_size &&
+			if (MousePoint.x >= GetDotX(minimap_offset_x,offset_.x,dot_size) && MousePoint.x < GetDotX(minimap_offset_x,offset_.x,dot_size) + DG_MAX_X*dot_size &&
 				MousePoint.y >= GetDotY(dot_start_y,offset_.y,dot_size) && MousePoint.y <= GetDotY(dot_start_y,offset_.y,dot_size) + DG_MAX_Y*dot_size )
 			{
 				int i=0, j=0;
-				i = (MousePoint.x-GetDotX(info_minX,offset_.x,dot_size))/dot_size;
+				i = (MousePoint.x-GetDotX(minimap_offset_x,offset_.x,dot_size))/dot_size;
 				j = (MousePoint.y-GetDotY(dot_start_y,offset_.y,dot_size))/dot_size;
 				if(i < 0)
 					i = 0;
@@ -2106,7 +2109,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						}
 					}
 					if(dot_size > 0)
-						dot_item.draw(pSprite, GetDotX(info_minX, (*temp).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*temp).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+						dot_item.draw(pSprite, GetDotX(minimap_offset_x, (*temp).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*temp).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
 				}
 				many_item = false;
 				auto_pick_ = false;
@@ -2153,9 +2156,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	//플레이어 그리기
 	{
-		if (!you.s_timestep && abs(you.position.x - x_ - sight_x) <= sight_x && abs(you.position.y - y_ - sight_y) <= sight_y)
+		int you_x_ = (you.s_dimension || widesearch) ? you.position.x - x_ : sight_x;
+		int you_y_ = (you.s_dimension || widesearch) ? you.position.y - y_ : sight_y;
+
+		
+		if (!you.s_timestep && abs(you_x_ - sight_x) <= sight_x && abs(you_y_ - sight_y) <= sight_y)
 		{
-			you.Draw(pSprite, (you.position.x - x_)*calc_tile_size + tile_x_offset, (you.position.y - y_)*calc_tile_size + tile_x_offset,calc_tile_scale);
+			you.Draw(pSprite, you_x_*calc_tile_size + tile_x_offset, you_y_*calc_tile_size + tile_x_offset,calc_tile_scale);
 			if (you.GetHp() != you.GetMaxHp())
 			{
 				float max_rate_ = calc_tile_size;
@@ -2167,9 +2174,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				int temp2_ = max(0, min(you.prev_hp[0], you.GetMaxHp())) * calc_tile_size / you.GetMaxHp();
 				int p_hp_rate_ = (max_rate_ * temp2_) / calc_tile_size;
 
-				dot_floor.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
-				dot_monster.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, p_hp_rate_, 2.0f*calc_tile_scale, 255);
-				dot_item.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, hp_rate_, 2.0f*calc_tile_scale, 255);
+				dot_floor.draw(pSprite, you_x_*calc_tile_size + 5.0f, you_y_*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
+				dot_monster.draw(pSprite, you_x_*calc_tile_size + 5.0f, you_y_*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, p_hp_rate_, 2.0f*calc_tile_scale, 255);
+				dot_item.draw(pSprite, you_x_*calc_tile_size + 5.0f, you_y_*calc_tile_size + 4.0f + 32.0f*calc_tile_scale, 0.0f, hp_rate_, 2.0f*calc_tile_scale, 255);
 			}
 			if (!you.pure_mp && you.GetMp() != you.GetMaxMp())
 			{
@@ -2178,13 +2185,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				int temp1_ = max(0, you.GetMp()) * calc_tile_size / you.GetMaxMp();
 				float mp_rate_ = (max_rate_ * temp1_)/ calc_tile_size;
 
-				dot_floor.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
-				dot_up.draw(pSprite, (you.position.x - x_)*calc_tile_size + 5.0f, (you.position.y - y_)*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, mp_rate_, 2.0f*calc_tile_scale, 255);
+				dot_floor.draw(pSprite, you_x_*calc_tile_size + 5.0f, you_y_*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, max_rate_, 2.0f*calc_tile_scale, 255);
+				dot_up.draw(pSprite, you_x_*calc_tile_size + 5.0f, you_y_*calc_tile_size + 4.0f + 34.0f*calc_tile_scale, 0.0f, mp_rate_, 2.0f*calc_tile_scale, 255);
 			}
 
 		}
 		if(dot_size > 0)
-			dot_player.draw(pSprite, GetDotX(info_minX, you.position.x + offset_.x,dot_size), GetDotY(dot_start_y,you.position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+			dot_player.draw(pSprite, GetDotX(minimap_offset_x, you.position.x + offset_.x,dot_size), GetDotY(dot_start_y,you.position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
 	}
 
 
@@ -2203,7 +2210,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				if (!((*it).flag & M_FLAG_UNHARM))
 				{
 					if(dot_size > 0) {
-						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+						dot_monster.draw(pSprite, GetDotX(minimap_offset_x, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
 					}
 				}
 			}
@@ -2218,7 +2225,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				if (!((*it).flag & M_FLAG_UNHARM))
 				{
 					if(dot_size > 0) {
-						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+						dot_monster.draw(pSprite, GetDotX(minimap_offset_x, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
 					}
 				}
 			}
@@ -2242,11 +2249,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				{
 				case SWT_MONSTER:
 					if (!(*it).unharm) {
-						dot_monster.draw(pSprite, GetDotX(info_minX, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
+						dot_monster.draw(pSprite, GetDotX(minimap_offset_x, (*it).position.x + offset_.x,dot_size), GetDotY(dot_start_y,(*it).position.y + offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size, 255);
 					}
 					break;
 				case SWT_ITEM:
-					dot_item.draw(pSprite,GetDotX(info_minX, (*it).position.x+offset_.x,dot_size),GetDotY(dot_start_y,(*it).position.y+offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
+					dot_item.draw(pSprite,GetDotX(minimap_offset_x, (*it).position.x+offset_.x,dot_size),GetDotY(dot_start_y,(*it).position.y+offset_.y,dot_size),0.0f,(float)dot_size,(float)dot_size,255);
 					break;
 				}
 			}
@@ -2304,7 +2311,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	{ //테두리
 		if(!env[current_level].isBamboo() && dot_size > 0) {
-			sight_rect.draw(pSprite,GetDotX(info_minX, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
+			sight_rect.draw(pSprite,GetDotX(minimap_offset_x, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
 		}
 	}
 
@@ -2465,7 +2472,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss << LocalzationManager::locString(LOC_SYSTEM_MAX_LEVEL);
 		}
 		power_blank_ += PrintCharWidth(ss.str());
-		int remain_blank = (option_mg.getWidth()-info_minX)/fontDesc.Width;
+		int remain_blank = (option_mg.getWidth()-info_minX)/fontDesc.Width-1;
 		
 		if(power_blank_ < remain_blank) {
 			rc.left += fontDesc.Width*(remain_blank-power_blank_);	

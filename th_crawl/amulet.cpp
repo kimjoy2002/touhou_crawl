@@ -76,7 +76,7 @@ float getAmuletCharge(amulet_type kind)
 	switch (kind)
 	{
 	case AMT_PERFECT:
-		return 2.0f;
+		return 3.0f;
 	case AMT_OCCULT:
 		return 1.5f;
 	case AMT_BLOSSOM:
@@ -98,6 +98,7 @@ bool isCanCharge(amulet_type kind)
 	switch (kind) {
 	case AMT_FAITH:
 	case AMT_PERFECT:
+	case AMT_TIMES:
 		return false;
 	default:
 		break;
@@ -109,6 +110,7 @@ bool isCanEvoke(amulet_type kind)
 	switch (kind) {
 	case AMT_FAITH:
 	case AMT_PERFECT:
+	case AMT_TIMES:
 		return false;
 	default:
 		break;
@@ -162,6 +164,24 @@ bool chargingFinish(amulet_type kind, int value)
 			}
 		}
 		break;
+	case AMT_TIMES:
+	{
+		soundmanager.playSound("buff");
+		rand_rect_iterator rand_(you.position,2,2);
+		int rand_num_ = rand_int(2, 4);
+		while (!rand_.end()) {
+			if (env[current_level].isMove(*rand_)) {
+				item_infor temp;
+				env[current_level].MakeItem(*rand_, makePitem(MON_MOOK, 1, &temp));
+				rand_num_--;
+				if (rand_num_ == 0)
+					break;
+			}
+			rand_++;
+		}
+		you.resetAmuletPercent(kind, true);
+		break;
+	}
 	default:
 		break;
 	}
@@ -184,6 +204,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 	{
 	case AMT_PERFECT:
 	case AMT_FAITH:
+	case AMT_TIMES:
 		//발동하지않음
 		break;
 	case AMT_BLOSSOM:
@@ -191,23 +212,6 @@ bool evokeAmulet(amulet_type kind, int value_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
 		skill_soul_shot(0, &you, you.position);
 		break;
-	case AMT_TIMES:
-	{
-		soundmanager.playSound("buff");
-		rand_rect_iterator rand_(you.position,2,2);
-		int rand_num_ = rand_int(3, 6);
-		while (!rand_.end()) {
-			if (env[current_level].isMove(*rand_)) {
-				item_infor temp;
-				env[current_level].MakeItem(*rand_, makePitem(MON_MOOK, 1, &temp));
-				rand_num_--;
-				if (rand_num_ == 0)
-					break;
-			}
-			rand_++;
-		}
-		break;
-	}
 	case AMT_WAVE:
 		soundmanager.playSound("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL) + " ", false, false, false, CL_normal);

@@ -888,6 +888,7 @@ enum monster_state_simple //표시용 상태
 	MSS_FORCE,
 	MSS_CHANGED,
 	MSS_INVINCIBILITY,
+	MSS_NEUTRAL,
 	MSS_HP,
 	MSS_MAX
 };

@@ -53,7 +53,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 70; i++)
+	for (int i = 0; i <= 71; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
@@ -1925,6 +1925,38 @@ B....B.\
 ._f_.\
 .._..\
 .....";
+		}
+		case 71: //루미아 댄서
+		{
+			if (is_exist_named(MON_RUMIA))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if (!is_exist_named(MON_RUMIA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_RUMIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
+				set_exist_named(MON_RUMIA);
+			}
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR7));
+			for (int i = -map->size_x; i <= map->size_x; i++)
+			{
+				for (int j = -map->size_y; j <= map->size_y; j++)
+				{
+					map->event_list.push_back(mapdummy_event(abs(i+j)%2? EVL_RUMIA_DANCER1:EVL_RUMIA_DANCER2, coord_def(i, j), EVT_ALWAYS));
+				}
+			}
+			map->name = "RUMIA_DANCER";
+			return  "\
+.0.0.\
+0.0.0\
+.0.0.\
+0.0.0\
+.0.0.";
 		}
 		}
 	}

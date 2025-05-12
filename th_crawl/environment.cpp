@@ -1921,7 +1921,7 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 	it = mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
 	{
-		if((*it).isLive() && !(*it).isUserAlly() && !(*it).target && distan_coord((*it).position, center_) <= length_*length_ && &(*it) != excep_)
+		if((*it).isLive() && !(*it).isUserAlly() && !(*it).target && !(*it).isCompleteNeutral() && distan_coord((*it).position, center_) <= length_*length_ && &(*it) != excep_)
 		{
 			int block_length_ = length_;
 			beam_iterator it2((*it).position,center_);

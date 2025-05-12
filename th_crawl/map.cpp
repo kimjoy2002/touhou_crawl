@@ -215,6 +215,7 @@ void make_lake(int num, int repeat, boolean lava);
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_, int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
+void map_algorithms04(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 void map_algorithms_bamboo(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
@@ -334,7 +335,7 @@ void map_algorithms(int num)
 		}
 		else if(num >= SCARLET_LEVEL && num <= SCARLET_LEVEL_LAST_LEVEL)
 		{
-			map_algorithms01(num,DG_FLOOR,DG_RED_WALL);
+			map_algorithms04(num,DG_FLOOR,DG_RED_WALL);
 		}
 		else if(num == DREAM_LEVEL)
 		{			
@@ -615,7 +616,7 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex 	,
 	vector<map_dummy*> &vec_map,
 	vector<map_dummy*> &vec_special_map , 
-	bool check_room_mask_, bool first_path_, bool make_path_, bool make_wall_, int door_percent_)
+	bool check_room_mask_, bool first_path_, bool make_path_, bool make_wall_, int door_percent_, int path_size)
 {
 	vector<map_dummy*>::iterator it;
 
@@ -722,7 +723,21 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 			while(!path_stack.empty())
 			{
 				coord_def path_temp = path_stack.top();
-				env[num].dgtile[path_temp.x][path_temp.y].tile = floor_tex; //저장한 도로를 칠하기
+				if(path_size == 0) {
+					env[num].dgtile[path_temp.x][path_temp.y].tile = floor_tex; //저장한 도로를 칠하기
+				}
+				else {
+					for(int x_ = path_temp.x-path_size; x_ <= path_temp.x+path_size; x_++) {
+						for(int y_ = path_temp.y-path_size; y_ <= path_temp.y+path_size; y_++) {
+							int abs_ = (int)sqrt((x_-path_temp.x)*(x_-path_temp.x) + (y_-path_temp.y)*(y_-path_temp.y));
+							if(abs_ <= path_size && x_ >= 0 && x_ < DG_MAX_X && y_ >= 0 && y_ < DG_MAX_Y ) {
+								env[num].dgtile[x_][y_].tile = floor_tex; //저장한 도로를 칠하기
+							}
+
+						}
+					}
+				}
+				
 				path_stack.pop();
 			}
 		}
@@ -1128,7 +1143,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
-		true,true, true, true, you.god == GT_OKINA ? 0 : randA(10));
+		true,true, true, true, you.god == GT_OKINA ? 0 : randA(10), 0);
 }
 void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
@@ -1308,7 +1323,7 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 		floor_tex,wall_tex,
 		vec_map,
 		vec_special_map, 
-		false, false, true, false, 11);
+		false, false, true, false, 11, 0);
 
 
 
@@ -1487,10 +1502,98 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 	floor_tex,wall_tex,
 	vec_map,
 	vec_special_map, 
-	false, false, false, false, 11);
+	false, false, false, false, 11, 0);
 
 
 }
+
+
+void map_algorithms04(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
+{
+	vector<map_dummy*> vec_map;
+	vector<map_dummy*> vec_special_map;
+	vector<int> special_enter;
+	calcul_spe_enter(num,special_enter);
+	
+	vec_map.reserve(32);
+
+	int rand_dummy = rand_int(20,30);
+	int check_ = special_enter.size();
+	for(int i=0;i<rand_dummy;i++) //rand_dummy만큼의 맵더미를 생산
+	{
+		int repeat = 10;
+		int pattern_ = 0;
+		bool special_ = false;
+		if(!special_enter.empty())
+		{
+			special_ = true;
+			repeat = 9999;//특수패턴은 (거의)무한반복시킴
+			pattern_ = special_enter.back();
+			special_enter.pop_back();
+		}
+		for(int j=0;j<repeat;j++) //무한반복 제거용
+		{
+			bool success= true;	
+			int r_size_x = rand_int(3,8);
+			int r_size_y = rand_int(3,8);
+			int m_size=5;
+			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
+			
+			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
+
+			vector<map_dummy*>::iterator it;
+			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
+			{
+				if((*it)->collution(temp_coord,temp->size_x+1,temp->size_y+1) || (*it)->plus_collution(temp_coord,temp->size_x+1,temp->size_y+1)) //맵더미충돌시엔 만들지 않음
+				{
+					success = false;
+					break;
+				}
+			}	
+			for (it=vec_map.begin();it!=vec_map.end();it++) 
+			{
+				if((*it)->collution(temp_coord,temp->size_x+1,temp->size_y+1) || (*it)->plus_collution(temp_coord,temp->size_x+1,temp->size_y+1)) //맵더미충돌시엔 만들지 않음
+				{
+					success = false;
+					break;
+				}
+			}	
+			if(success) //겹치지 않을때 맵더미푸쉬
+			{
+				if (special_) {
+					vec_special_map.push_back(temp);
+					check_--;
+				}
+				else
+					vec_map.push_back(temp);
+				break;
+			}
+			else
+			{
+				delete temp; //겹치면 메모리 해제하고 다시 맵더미 생성
+				continue;
+			}
+		}
+	}
+	if (check_ != 0) {
+		//무조건 특수지형은 만들어져야한다. 안 만들어지면 아예 처음부터 시작
+		for (auto it = vec_special_map.begin(); it != vec_special_map.end(); it++)
+			delete *it;
+		for (auto it = vec_map.begin(); it != vec_map.end(); it++)
+			delete *it;
+		return map_algorithms04(num, floor_tex, wall_tex);
+	}
+	print_special_map(num, vec_special_map);
+	setBaseFloorWall(num, floor_tex, wall_tex);
+
+	common_map_make_last(num, 	
+	floor_tex,wall_tex,
+	vec_map,
+	vec_special_map, 
+	true,true, true, true, 0, 1);
+}
+
+
 
 void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {

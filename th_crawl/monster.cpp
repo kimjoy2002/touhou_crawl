@@ -420,6 +420,9 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	{
 		summon_time = time_;
 		direction = rand_int(0,7);
+		if(flag & M_FLAG_WAKE) {
+			state.SetState(MS_NORMAL);
+		}
 		if(flag & M_FLAG_SUMMON)
 		{
 			if(flag & M_FLAG_LEADER_SUMMON)
@@ -442,9 +445,19 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 			target_pos = you.position;
 			state.SetState(MS_ATACK);
 		}
+		if(flag & M_FLAG_EVENT)
+		{
+			target = &you;
+			target_pos = you.position;
+			state.SetState(MS_ATACK);
+		}
 		if(flag & M_FLAG_NETURALY)
 		{
 			s_neutrality = 1;
+		}
+		if(flag &M_FLAG_COMPLETE_NETURALY)
+		{
+			s_neutrality = -1;
 		}
 		if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
 		{
@@ -794,7 +807,10 @@ int monster::FoundTime()
 }
 void monster::CheckSightNewTarget()
 {
-	if(isUserAlly())
+	if(isCompleteNeutral())
+	{	
+
+	}else if(isUserAlly())
 	{		
 		if(target && !target->isplayer())
 		{//적이 이미 있는 경우
@@ -3064,7 +3080,7 @@ int monster::action(int delay_)
 				{
 					target_pos = target->position;
 				}
-				if (you.s_timestep && (target == &you || !target) && !isUserAlly())
+				if ((you.s_timestep && (target == &you || !target) && !isUserAlly()) || isCompleteNeutral())
 				{
 					memory_time = 0;
 					target = NULL;
@@ -3177,7 +3193,7 @@ int monster::action(int delay_)
 				break;
 			case MS_FOLLOW:
 				wait = false;
-				if(you.s_timestep && sm_info.parent_map_id < 0)
+				if((you.s_timestep && sm_info.parent_map_id < 0) || isCompleteNeutral())
 				{	
 					state.StateTransition(MSI_LOST);
 				}
@@ -3360,7 +3376,10 @@ int monster::action(int delay_)
 }
 void monster::sightcheck(bool is_sight_)
 {	
-	if(!isUserAlly())
+	if(isCompleteNeutral() ){
+		//난 놀아!
+	}
+	else if(!isUserAlly())
 	{
 		if(is_sight_ && you_detect())//시야 안에 있을때 스텔스 체크
 		{
@@ -3380,10 +3399,13 @@ void monster::special_action(int delay_, bool smoke_)
 	switch (id)
 	{
 	case MON_RUMIA:
-		if (smoke_){
-			for (int i = -1; i < 2; i++)
-				for (int j = -1; j < 2; j++)
-					env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, this);
+		if(!(s_neutrality == -1))
+		{
+			if (smoke_){
+				for (int i = -1; i < 2; i++)
+					for (int j = -1; j < 2; j++)
+						env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, this);
+			}
 		}
 		break;
 	case MON_FIRE_CAR:
@@ -3549,6 +3571,49 @@ void monster::special_action(int delay_, bool smoke_)
 				summon_time = 0;
 				hp = 0;
 				env[current_level].SummonClear(map_id);
+			}
+		}
+	}
+	break;
+	case MON_EIKA:
+	{
+		if (!smoke_){
+			if (!s_exhausted  && state.GetState() == MS_NORMAL && randA(10) == 0) {
+				
+				dif_rect_iterator rit(position,1,true);
+				//rand_rect_iterator rit(target,range_,range_);
+				while(!rit.end())
+				{
+					if(summon_check(coord_def(rit->x,rit->y), position, false, false))
+					{
+						int space = 0;
+						
+						rect_iterator rectit(*rit,1,true);
+						//rand_rect_iterator rit(target,range_,range_);
+						while(!rectit.end())
+						{
+							if(env[current_level].isMove(rectit->x, rectit->y, true, true)) {
+								space++;
+							}
+							unit* unit_ = env[current_level].isMonsterPos(rectit->x,rectit->y);
+							if(unit_ && unit_->GetId() == MON_STONETOWER) {
+								space = 0;
+								break;
+							}
+							rectit++;
+						}
+						if(space >= 5) {
+							if (monster* mon_ = BaseSummon(MON_STONETOWER, -1, false, false, 1, this, *rit, SKD_OTHER, -1))
+							{
+								mon_->image = &img_mons_stonetower[randA(2)];
+								mon_->flag &= ~M_FLAG_SUMMON;
+								s_exhausted = 10;
+								break;
+							}
+						}
+					}
+					rit++;
+				}
 			}
 		}
 	}
@@ -4226,6 +4291,9 @@ bool monster::AttackedTarget(unit *order_)
 	{
 		if(order_->isplayer())
 		{
+			if(isCompleteNeutral()) {
+				s_neutrality = 0;
+			}
 			//if(back_stab)
 			//	you.SkillTraining(SKT_BACKSTAB,1);
 			if(state.GetState() != MS_ATACK || !target)
@@ -4236,6 +4304,10 @@ bool monster::AttackedTarget(unit *order_)
 		}
 		else
 		{
+			if(isCompleteNeutral() && order_->isUserAlly()) {
+				s_neutrality = 0;
+			}
+
 			if(state.GetState() != MS_ATACK || !target)
 			{
 				target = order_;
@@ -4381,14 +4453,14 @@ bool monster::isEnemyMonster(const monster* monster_info)
 			return true;
 		return false;
 	}
-	if(!isUserAlly() && !(monster_info->isUserAlly()))
-	{
-		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
+	if(isCompleteNeutral() || monster_info->isCompleteNeutral()) {
+		if(s_lunatic)
 			return true;
 		return false;
 	}
-	if(isCompleteNeutral() || monster_info->isCompleteNeutral()) {
-		if(s_lunatic)
+	if(!isUserAlly() && !(monster_info->isUserAlly()))
+	{
+		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
 			return true;
 		return false;
 	}
@@ -4445,6 +4517,10 @@ bool monster::isAllyMonster(const monster* monster_info)
 bool monster::isUserAlly() const
 {
 	return s_ally;
+}
+bool monster::isCompleteNeutral() const
+{
+	return s_neutrality == -1;
 }
 bool monster::isSightnonblocked(coord_def c)
 {
@@ -4694,8 +4770,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 	switch (state_)
 	{
 		case MSS_WANDERING:
-			return (!isUserAlly() && state.GetState() == MS_NORMAL) || (!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
-				|| (!isUserAlly() && state.GetState() == MS_FIND);
+			return ((!isUserAlly() && state.GetState() == MS_NORMAL) || (!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
+				|| (!isUserAlly() && state.GetState() == MS_FIND)) && !isCompleteNeutral();
 		case MSS_SLOW:
 			return (s_slow != 0) && s_haste == 0;
 		case MSS_HASTE:
@@ -4714,6 +4790,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_paralyse != 0);
 		case MSS_SUMMON:
 			return ((flag & M_FLAG_SUMMON) != 0);
+		case MSS_NEUTRAL:
+			return (isCompleteNeutral());
 		case MSS_ALLY:
 			return (isUserAlly());
 		default:
@@ -4749,6 +4827,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_PARALYSE;
 	if(flag & M_FLAG_SUMMON)
 		temp = MSS_SUMMON;
+	if(isCompleteNeutral())
+		temp = MSS_NEUTRAL;
 	if(isUserAlly())
 		temp = MSS_ALLY;
 	return temp;
@@ -5009,6 +5089,13 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if (s_invincibility)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_INVINCIBILITY);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_NEUTRAL:
+		if(isCompleteNeutral())
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_NEUTRAL);
 			return CL_normal;
 		}
 		return CL_none;

@@ -321,6 +321,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  1,  2,  4,  30,  1}, //리글
 	{  9,  2,  4,  30,  2}, //삼월정
 	{  10, 2,  4,  25,  2}, //쿄코
+	{  67,  2,  5,  30,  1}, //에이카
 	{  8,  3,  5,  10,  2}, //코가사
 	{  2,  4,  6,  30,  2}, //미스티아
 	{  7,  6,  9,  30,  3}, //첸
@@ -1368,6 +1369,9 @@ void create_id_to_unique(int id, int level)
 	case 66:
 		index.push_back(MON_HATATE);
 		break;
+	case 67:
+		index.push_back(MON_EIKA);
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -2050,6 +2054,9 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist = 1;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_EIKA:
+		mon->elec_resist = 1;
 		break;
 	case MON_STONETOWER:
 		mon->ice_resist = 3;

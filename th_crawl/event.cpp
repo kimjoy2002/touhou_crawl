@@ -932,6 +932,24 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	}
+	case EVL_RUMIA_DANCER1:
+	{
+		if (event_->count == -1)
+		{
+			event_->count = 11;
+		}
+		env[current_level].changeTile(event_->position, event_->count % 2?DG_FLOOR:DG_PANDE_FLOOR7);
+		return 0;
+	}
+	case EVL_RUMIA_DANCER2:
+	{
+		if (event_->count == -1)
+		{
+			event_->count = 11;
+		}
+		env[current_level].changeTile(event_->position, event_->count % 2?DG_PANDE_FLOOR4:DG_FLOOR);
+		return 0;
+	}
 	default:
 		break;
 	}

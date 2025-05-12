@@ -936,11 +936,11 @@ const mon_infor mondata[] = {
 	{ 49,0,0 },{ ATT_CURSE,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM,99,1,10,'8' },
 	
-	{MON_EIKA,2,4,name_infor(MON_EIKA),&img_mons_eika,25,0,5,
+	{MON_EIKA,7,250,name_infor(MON_EIKA),&img_mons_eika,52,4,8,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_WAKE,0,0,10,'e'},
 
-	{ MON_STONETOWER,1,0,name_infor(MON_STONETOWER),&img_mons_stonetower[0],50,0,0,
+	{ MON_STONETOWER,1,0,name_infor(MON_STONETOWER),&img_mons_stonetower[0],10,0,0,
 		{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
 		 M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,1,10,'W' },
 

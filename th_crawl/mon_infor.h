@@ -63,7 +63,9 @@ enum monster_flag : uint64_t
 	M_FLAG_NO_STATE = 1<<24, //상태 표시 안됨
 	M_FLAG_SILENCE = 1 << 25, //침묵에 면역이다.
 	M_FLAG_SHIELD = 1 << 26, //지역을 지킨다.
-	M_FLAG_RESIST_BLIZARD = 1 << 27
+	M_FLAG_RESIST_BLIZARD = 1 << 27,
+	M_FLAG_COMPLETE_NETURALY = 1 << 28,  //때리기 전까진 완전 중립
+	M_FLAG_WAKE = 1<<29 //잠에서 깬 상태
 };
 
 

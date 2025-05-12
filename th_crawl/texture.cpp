@@ -640,10 +640,12 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255) }, //미코
 				{textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255) }, //오키나
 				{textures(&texture_item02, 169, 255), textures(&texture_item02, 170, 255), textures(&texture_item02, 171, 255) }, //순호
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},  //시키에이키
 
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //케이키
+				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //텐큐
+//textures img_command_wide_search(&texture_item03, 192, 255);
+//textures img_command_wide_search(&texture_item03, 193, 255);
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //벽
@@ -1976,6 +1978,7 @@ textures img_state_summon(&texture_item01, 109, 255);
 textures img_state_haste(&texture_item01, 110, 255);
 textures img_state_lunatic(&texture_item01, 219, 255);
 textures img_state_slow(&texture_item01, 239, 255);
+textures img_state_neutral(&texture_item03, 194, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 1, 1, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 1, 1, 255);
@@ -4364,6 +4367,8 @@ textures* statetotexture(monster_state_simple state_)
 		return &img_state_scary;
 	case MSS_LUNATIC:
 		return &img_state_lunatic;
+	case MSS_NEUTRAL:
+		return &img_state_neutral;
 	default:
 		return &img_state_sleep;
 	}

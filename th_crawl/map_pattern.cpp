@@ -53,7 +53,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 71; i++)
+	for (int i = 0; i <= 80; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
@@ -733,9 +733,9 @@ $$$...$$$";
 
 			
 			int id_ = MON_RED_UFO;
-			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(-1,0)));
-			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(0,0)));
-			map->monster_list.push_back(mapdummy_mon(id_,0,coord_def(1,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(-1,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(0,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(1,0)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
 			map->name = "EARLY_UFO_BLINKER";
 			return  "\
@@ -1555,13 +1555,13 @@ $$$$$$$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			if (randA(1))
 			{
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, 0, coord_def(-1, -1)));
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, 0, coord_def(0, 0)));
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, 0, coord_def(1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(-1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(0, 0)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(1, -1)));
 			}
 			else
 			{
-				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, 0, coord_def(0, 0)));
+				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, M_FLAG_COMPLETE_NETURALY, coord_def(0, 0)));
 			}
 			map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->name = "SCARLET_PET_HOUSE";
@@ -1835,7 +1835,7 @@ B....B.\
 .##...##.\
 .#i#.#m#.\
 .###.###.\
-...........";
+.........";
 		}
 		case 67:
 		{
@@ -1957,6 +1957,252 @@ B....B.\
 .0.0.\
 0.0.0\
 .0.0.";
+		}
+		case 72:
+		{
+			if(floor_ > 5)
+				break;
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = -2;
+			map->m_entrance.y = 0;
+			map->m_exit.x = 2;
+			map->m_exit.y = 0;
+			map->name = "COMMON_EARLY_BAMBOO";
+			return  "\
+[[[[[\
+[___[\
+_____\
+[___[\
+[[[[[";
+		}
+		case 73:
+		{
+			if (is_exist_named(MON_MEDICINE))
+				break;
+			if (!(floor_ >= 8 && floor_ <= 14) && !(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if (!is_exist_named(MON_MEDICINE)) {
+				map->monster_list.push_back(mapdummy_mon(MON_MEDICINE, M_FLAG_SHIELD, coord_def(0, 0)));
+				set_exist_named(MON_MEDICINE);
+			}
+			map->monster_list.push_back(mapdummy_mon(MON_DANCING_ARMOUR,0,coord_def(2,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_DANCING_WEAPON,0,coord_def(-2,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_CURSE_DOLL,0,coord_def(0,2)));
+			map->monster_list.push_back(mapdummy_mon(MON_CURSE_DOLL,0,coord_def(0,-2)));
+			
+			map->name = "MEDICINE_FLOWER";
+			return  "\
+.........\
+...___.f.\
+.f_____..\
+._ff__f_.\
+.______f.\
+.f______.\
+..__f__f.\
+.f.___...\
+.........";
+		}
+		case 74:
+		{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_entrance.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_exit.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			random_extraction<int> rand_;
+			rand_.push(DG_BAMBOO_WALL);
+			rand_.push(DG_WALL);
+			rand_.push(DG_METAL_WALL);
+			rand_.push(DG_SEA);
+			rand_.push(DG_LAVA);
+			rand_.push(DG_BOOK_WALL);
+			rand_.push(DG_GLASS);
+			rand_.push(DG_SUN_FLOWER);
+			rand_.push(DG_TREE);
+			map->sp_tile_list.push_back(rand_.pop());
+			map->sp_tile_list.push_back(rand_.pop());
+			map->sp_tile_list.push_back(rand_.pop());
+			map->sp_tile_list.push_back(rand_.pop());
+			map->name = "COMMON_EARLY_FOUR_WALL";
+			return  "\
+00.11\
+0...1\
+.....\
+3...2\
+33.22";
+		}
+		case 75:
+		{
+			if (is_exist_named(MON_EIKA))
+				break;
+			if(floor_ > 6)
+				break;
+			map->size_x = 8;
+			map->size_y = 4;
+			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if (!is_exist_named(MON_EIKA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_EIKA, M_FLAG_SHIELD, coord_def(0, 0)));
+				set_exist_named(MON_EIKA);
+			}
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(3,-3)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-3,-3)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(2,2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-2,2)));
+			
+			map->name = "EIKA_RIVER";
+			return  "\
+~~~~~~~~~~~~~~~~~\
+~~~~~~~~~~~~~~~~~\
+~~~~~~__B__~~~~~~\
+~~~_____i_____~~~\
+~_______________~\
+~_______________~\
+_____..._..._____\
+_.._.._...____.._\
+....__...........\
+._.........._....\
+.................";
+		}
+		case 76:
+		{
+			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			
+			random_extraction<int> rand_;
+			rand_.push(MON_FIREFLY);
+			rand_.push(MON_BUTTERFLY,3);
+			map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD ,coord_def(2,-2)));
+			map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD ,coord_def(-2,2)));
+			map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD ,coord_def(2,2)));
+			map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD ,coord_def(-2,-2)));
+			
+			map->name = "MISTY_LAKE_NEUTRAL_INSECT";
+			return  "\
+_______\
+_______\
+___f___\
+__f~f__\
+___f___\
+_______\
+_______";
+		}
+		case 77:
+		{
+			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+
+			map->name = "MISTY_LAKE_TREE_SANCTUARY";
+			return "\
+..T.T..\
+.T.f.T.\
+T.....T\
+.f...f.\
+T.....T\
+.T.f.T.\
+..T.T..";
+		}
+		case 78:
+		{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_entrance.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_exit.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			
+			map->name = "COMMON_EARLY_H_ROOM";
+		return "\
+###...###\
+#.......#\
+#.#####.#\
+...###...\
+#.#####.#\
+#.......#\
+###...###";
+		}
+		case 79:
+		{
+			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_entrance.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : 0;
+			map->m_exit.y = hw_ ? 0 : (randA(1) ? -map->size_y : map->size_y);
+			
+			map->name = "MISTY_LAKE_WATER_CROSSROAD";
+		return "\
+~~.....~~\
+~.~~~~~.~\
+..~...~..\
+~~..~..~~\
+..~...~..\
+~.~~~~~.~\
+~~.....~~";
+		}
+		case 80:
+		{
+			if(floor_ > 14)
+				break;
+			map->size_x = 3;
+			map->size_y = 4;
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = -map->size_x;
+			map->m_exit.y = map->size_y;
+			map->name = "COMMON_EARLY_BELLIED_PATH";
+	return "\
+.##```\
+..##```\
+...##``\
+....##`\
+.....##\
+......#\
+......#\
+.....##\
+....##`";
 		}
 		}
 	}

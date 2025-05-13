@@ -165,6 +165,7 @@ bool chargingFinish(amulet_type kind, int value)
 		}
 		break;
 	case AMT_TIMES:
+	if (value > 0)
 	{
 		soundmanager.playSound("buff");
 		rand_rect_iterator rand_(you.position,2,2);

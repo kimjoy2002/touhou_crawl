@@ -2026,6 +2026,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					case DOT_SEA:
 						dot_sea.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,255);
 						break;
+					case DOT_OIL:
+						dot_sea.draw(pSprite,x_,y_,0.0f,(float)dot_size,(float)dot_size,D3DCOLOR_RGBA(128,128,128,255));
+						break;
 					default:
 						break;
 					}

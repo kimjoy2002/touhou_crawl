@@ -242,8 +242,10 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_PANDE_FLOOR7,
     DG_DREAM_FLOOR2,
 	DG_HELL_FLOOR,
+	DG_OIL,
+	DG_SNOW,
 	DG_FLOOR_END = DG_HELL_FLOOR,
-	DG_FLOOR_OBJECT = 15,
+	DG_FLOOR_OBJECT = 25,
 	DG_OPEN_DOOR = DG_FLOOR_OBJECT, //오브젝트는 바닥+덮어쓰기 식일때
 	DG_DOWN_STAIR,
 	DG_UP_STAIR,
@@ -288,8 +290,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_TEMPLE_OKINA,
 	DG_TEMPLE_JUNKO,
 	DG_TEMPLE_LAST = DG_TEMPLE_JUNKO,
-	DG_NONE_MOVE = 60,
-	DG_WALL = 60,
+	DG_NONE_MOVE = 70,
+	DG_WALL = 70,
 	DG_STONE_WALL,
 	DG_RED_WALL,
 	DG_BOOK_WALL,
@@ -312,7 +314,10 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_GLASS,
 	DG_STATUE,
 	DG_STATUE2,
-	DG_SEA,
+	DG_IZAKAYA,
+	DG_GRAVE,
+	DG_SNOWMAN,
+	DG_SEA, //여기부터 바다
 	DG_LAVA,
 	DG_OBJECT_END = DG_LAVA,
     MAX_NUM_DG
@@ -329,7 +334,8 @@ enum dot_tile_type
 	DOT_ITEM,
 	DOT_DOOR,
 	DOT_TEMPLE,	
-	DOT_SEA
+	DOT_SEA,
+	DOT_OIL
 };
 
 

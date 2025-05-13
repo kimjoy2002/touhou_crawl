@@ -11,6 +11,7 @@
 #define MAX_TITLE 6
 
 const char imgfile_dungeon01[] = "./data/floor.png";
+const char imgfile_dungeon02[] = "./data/floor2.png";
 
 const char imgfile_monster01[] = "./data/monster.png";
 const char imgfile_monster02[] = "./data/monster2.png";

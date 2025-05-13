@@ -487,6 +487,12 @@ bool PixedMap(map_dummy* map, const char *temp)
 			case 'B':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_STATUE2;
 				break;
+			case 'G':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_GRAVE;
+				break;
+			case 'X':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SNOWMAN;
+				break;
 			case 'E':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_BOOK_WALL;
 				break;
@@ -495,6 +501,12 @@ bool PixedMap(map_dummy* map, const char *temp)
 				break;
 			case ';':
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_LAVA;
+				break;
+			case ')':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_SNOW;
+				break;
+			case '%':
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_OIL;
 				break;
 			case 'i': //각 던전에서 드랍되는 아이템을 넣음
 			case 'I': //여러개

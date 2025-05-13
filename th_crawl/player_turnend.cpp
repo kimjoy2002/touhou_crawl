@@ -520,6 +520,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
 				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_LAVA) + " ", false, false, false, CL_danger);
 			}
+			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_OIL){
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_OIL) + " ", false, false, false, CL_blue);
+			}
 			else {
 				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END) + " ", false, false, false, CL_blue);
 			}

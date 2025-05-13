@@ -53,7 +53,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 80; i++)
+	for (int i = 0; i <= 82; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
@@ -2034,10 +2034,10 @@ _____\
 			rand_.push(DG_GLASS);
 			rand_.push(DG_SUN_FLOWER);
 			rand_.push(DG_TREE);
-			map->sp_tile_list.push_back(rand_.pop());
-			map->sp_tile_list.push_back(rand_.pop());
-			map->sp_tile_list.push_back(rand_.pop());
-			map->sp_tile_list.push_back(rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
 			map->name = "COMMON_EARLY_FOUR_WALL";
 			return  "\
 00.11\
@@ -2203,6 +2203,51 @@ T.....T\
 ......#\
 .....##\
 ....##`";
+		}
+		case 81:
+		{
+			if (!(floor_ >= MISTY_LAKE_LEVEL && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->name = "MISTY_LAKE_SNOW_SIMPLE";
+			return  "\
+..)..\
+.))).\
+))X))\
+.))).\
+..)..";
+		}
+		case 82: //미스티아
+		{
+			if (is_exist_named(MON_MISTIA))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if (!is_exist_named(MON_MISTIA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_MISTIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
+				set_exist_named(MON_MISTIA);
+			}
+			map->sp_tile_list.push_back(DG_IZAKAYA);
+			map->name = "MISTIA_IZAKAYA";
+			return  "\
+.....\
+..0..\
+.....\
+.....\
+.....";
 		}
 		}
 	}

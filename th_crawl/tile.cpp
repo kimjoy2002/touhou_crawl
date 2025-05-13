@@ -27,6 +27,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_PANDE_FLOOR7:
 	case DG_DREAM_FLOOR2:
 	case DG_HELL_FLOOR:
+	case DG_SNOW:
 		return DOT_FLOOR;
 	case DG_WALL:
 	case DG_GLASS:
@@ -48,6 +49,9 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_TREE:
 	case DG_SUN_FLOWER:
 	case DG_HELL_WALL:
+	case DG_SNOWMAN:
+	case DG_GRAVE:
+	case DG_IZAKAYA:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:
@@ -97,6 +101,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_SEA:
 	case DG_LAVA:
 		return DOT_SEA;
+	case DG_OIL:
+		return DOT_OIL;
 	default:
 		return DOT_FLOOR;
 	}

@@ -140,6 +140,8 @@ bool Setup()
 
 	if(!texture_dungeon01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
+	if(!texture_dungeon02.loading(g_pd3dDevice, g_pImmediateContext))
+		return_ = false;
 	if(!texture_monster01.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 	if(!texture_monster02.loading(g_pd3dDevice, g_pImmediateContext))

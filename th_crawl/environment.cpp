@@ -637,6 +637,10 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_SEA:
 	case DG_LAVA:
 		return '~';
+	case DG_OIL:
+		return ';';
+	case DG_SNOW:
+		return '^';
 	default:
 		return ' ';
 	}
@@ -895,8 +899,22 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_lava[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WATER])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
+	else if (dgtile[tile_x][tile_y].tile == DG_OIL) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_oil[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_OIL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_SNOW) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
+		//img_auto_wall[0].draw(pSprite, x, y, color_);
+		img_auto_snow[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_SNOW])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
 	else if (!dgtile[tile_x][tile_y].isNormal()) {
 		dgtile[tile_x][tile_y].draw(pSprite, x, y, scale, color_, count_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_SNOWMAN) {
+		//특수 예외
+		dgtile[tile_x][tile_y].draw(pSprite, DG_SNOWMAN, x, y, scale, color_, count_);
 	}
 	else {
 		dgtile[tile_x][tile_y].draw(pSprite, env[current_level].base_floor, x, y, scale, color_, count_);

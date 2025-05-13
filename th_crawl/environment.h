@@ -27,6 +27,8 @@ enum floor_type;
 enum AUTOTILE_KIND {
 	AUTOTILE_WALL = 0,
 	AUTOTILE_WATER,
+	AUTOTILE_OIL,
+	AUTOTILE_SNOW,
 	AUTOTILE_MAX
 };
 
@@ -102,11 +104,19 @@ public:
 		switch (i)
 		{
 		case AUTOTILE_WALL:
-			if ((tile >= DG_WALL && tile <= DG_GLASS) || tile == DG_OPEN_DOOR)
+			if ((tile >= DG_WALL && tile <= DG_GLASS) || (tile == DG_OPEN_DOOR))
 				return true;
 			break;
 		case AUTOTILE_WATER:
-			if (tile == DG_SEA || tile == DG_LAVA)
+			if ((tile == DG_SEA) || (tile == DG_LAVA))
+				return true;
+			break;
+		case AUTOTILE_OIL:
+			if (tile == DG_OIL)
+				return true;
+			break;
+		case AUTOTILE_SNOW:
+			if (tile == DG_SNOW || tile == DG_SNOWMAN)
 				return true;
 			break;
 		}

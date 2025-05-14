@@ -4415,7 +4415,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 						sprintf_s(temp,2,"%c",it->id);
 						printlog(temp,false,false,false,it->item_color());
 						printlog(" - ",false,false,false,it->item_color());
-						printlog(it->GetName(),false,false,false,it->item_color());
+						printlog(it->GetName() + " ",false,false,false,it->item_color());
 
 						if(t->num)
 						{
@@ -4455,7 +4455,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			sprintf_s(temp, 2,"%c",(*t).id);
 			printlog(temp,false,false,false,(*t).item_color());
 			printlog(" - ",false,false,false,(*t).item_color());
-			printlog((*t).GetName(),false,false,false,(*t).item_color());
+			printlog((*t).GetName()+ " ",false,false,false,(*t).item_color());
 		}
 		if (it_temp->pick()) {
 			throw_weapon = &(*it_temp);

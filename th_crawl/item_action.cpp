@@ -26,11 +26,15 @@ bool iteminfor_(int key_, bool gameover);
 bool pickup_prev_fail(bool no_speak) {
 	if(you.s_lunatic)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_PICKUP),true,false,false,CL_danger);
+		if(!no_speak) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_PICKUP),true,false,false,CL_danger);
+		}
 		return true;
 	}
 	if (you.s_evoke_ghost) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_PICKUP), true, false, false, CL_normal);
+		if(!no_speak) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_PICKUP), true, false, false, CL_normal);
+		}
 		return true;
 	}
 	return false;

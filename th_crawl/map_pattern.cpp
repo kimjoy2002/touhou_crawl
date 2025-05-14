@@ -59,8 +59,6 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 		int base_pe = 1;
 		if (i == 39 || i == 41)
 			base_pe = 3; //몇몇 특수 지형보정
-		if (i == 92)
-			base_pe = 999; //테스트
 		randomPattern.push(i,base_pe);
 	}
 	while(randomPattern.GetSize())
@@ -2430,32 +2428,32 @@ T.....T\
 			random_extraction<int> rand_;
 			switch(randA(2)) {
 			case 0:
-				map->sp_tile_list.push_back(DG_GRASS);
+				map->sp_tile_list.push_back((dungeon_tile_type)DG_GRASS);
 				rand_.push(DG_GLASS, 2);
 				rand_.push(DG_SUN_FLOWER, 6);
 				rand_.push(DG_TREE, 1);
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
 				break;
 			case 1:
 				map->sp_tile_list.push_back(DG_SNOW);
 				rand_.push(DG_SNOW, 2);
 				rand_.push(DG_SNOWMAN, 6);
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
 				break;
 			case 2:
 				map->sp_tile_list.push_back(DG_FLOOR);
 				rand_.push(DG_FLOOR, 2);
 				rand_.push(DG_GRAVE, 6);
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
-				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
+				map->sp_tile_list.push_back((dungeon_tile_type)rand_.choice());
 				break;
 			}
 			map->name = "SCARLET_GARDEN_ROOM";
@@ -2502,7 +2500,7 @@ T.....T\
 			if (is_exist_named(MON_YOSIKA))
 				break;
 			if(!((floor_ >= 8 && floor_ <=10) ||
-				(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL-1))
+				(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL-1)))
 				break;
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -2532,8 +2530,8 @@ T.....T\
 				break;
 			if(floor_ < 9)
 				break;
-			map->size_x = (DG_MAX_X-1)/2; //파르시의 다리는 맵을 양분해버린다.
-			map->size_y = 3;
+			map->size_x = 10;
+			map->size_y = 7;
 			map->m_entrance.x = 0;
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = 0;

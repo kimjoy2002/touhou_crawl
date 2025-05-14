@@ -596,6 +596,7 @@ bool remove_curse_scroll(bool pre_iden_)
 	}
 }
 
+void search_monspell_view(monster* mon_);
 
 bool blink_scroll(bool pre_iden_)
 {
@@ -615,7 +616,7 @@ bool blink_scroll(bool pre_iden_)
 			{
 			case 'Y':
 			case 'y':
-				break;				
+				break;
 			case -1:
 			case 'N':
 			case 'n':
@@ -635,7 +636,6 @@ bool blink_scroll(bool pre_iden_)
 	you.search_pos = you.position;
 	you.search = true;
 	bool is_move = false;
-	startSelection({'v',VK_ESCAPE});
 	Search_Move(coord_def(you.position.x,you.position.y), false,VT_BLINK);
 	while(1)
 	{
@@ -668,11 +668,10 @@ bool blink_scroll(bool pre_iden_)
 			break;
 		case VK_RETURN:
 			if(is_move)
-			{				
+			{
 				if(!you.Tele_check(pre_iden_, true))
 				{
 					deletelog();
-					endSelection();
 					you.search = false;
 					return false;
 				}
@@ -680,13 +679,60 @@ bool blink_scroll(bool pre_iden_)
 				{
 					you.search = false;
 					deletelog();
-					endSelection();
 					return true;
 				}
 			}
 			break;			
 		case -1:
-			if(inputedKey.isRightClick()) {
+			if(inputedKey.mouse == MKIND_MAP) {
+				coord_def target_pos(inputedKey.val1, inputedKey.val2);
+				if(target_pos != you.position) {
+					if(!you.Tele_check(pre_iden_, true))
+					{
+						deletelog();
+						you.search = false;
+						return false;
+					}
+					if(you.control_blink(target_pos))
+					{
+						you.search = false;
+						deletelog();
+						return true;
+					}
+				}
+				break;
+			}
+			else if (inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
+				coord_def target_pos(inputedKey.val1, inputedKey.val2);
+				if(unit *unit_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y, &you))
+				{
+					if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(target_pos))
+					{
+						search_monspell_view((monster*)unit_);
+						changedisplay(DT_GAME);
+					} 
+				} else {
+						//아이템 있는지 확인
+						list<item>::iterator last = env[current_level].item_list.end();
+						list<item>::iterator it;
+
+						for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+						{
+							if(it->position == target_pos) {
+								last = it;
+							} else if(last != env[current_level].item_list.end()) {
+								break;
+							}
+						}
+						
+						if(last != env[current_level].item_list.end()) {
+							iteminfor_(&(*last), true);
+							changedisplay(DT_GAME);
+						}
+					}
+				break;
+			}
+			else if(inputedKey.isRightClick()) {
 				//ESC PASSTHORUGH
 			}
 			else {

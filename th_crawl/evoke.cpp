@@ -517,6 +517,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 			you.PowUpDown(-50, true);
 			you.SetEvokeGhost(-1);
 		}
+		return true;
 	}
 	case EVK_SKY_TORPEDO:
 	{

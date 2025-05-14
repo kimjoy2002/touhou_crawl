@@ -47,17 +47,20 @@ const char* common_enter_pattern(map_dummy* map)
 
 const char* common_base_pattern(int floor_, map_dummy* map)
 {
+	static string temp_returnString;
 	if (floor_ >= PANDEMONIUM_LEVEL && floor_ <= PANDEMONIUM_LAST_LEVEL)
 		return pande_pattern(map);
 
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 82; i++)
+	for (int i = 0; i <= 92; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
 			base_pe = 3; //몇몇 특수 지형보정
+		if (i == 92)
+			base_pe = 999; //테스트
 		randomPattern.push(i,base_pe);
 	}
 	while(randomPattern.GetSize())
@@ -1942,6 +1945,10 @@ B....B.\
 				map->monster_list.push_back(mapdummy_mon(MON_RUMIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
 				set_exist_named(MON_RUMIA);
 			}
+			if (!is_exist_named(MON_DIEFAIRY)) {
+				map->monster_list.push_back(mapdummy_mon(MON_DIEFAIRY, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 1)));
+				set_exist_named(MON_DIEFAIRY);
+			}
 			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR7));
 			for (int i = -map->size_x; i <= map->size_x; i++)
 			{
@@ -2053,23 +2060,25 @@ _____\
 			if(floor_ > 6)
 				break;
 			map->size_x = 8;
-			map->size_y = 4;
+			map->size_y = 5;
 			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = rand_int(-map->size_x, map->size_x);
 			map->m_exit.y = map->size_y;
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			if (!is_exist_named(MON_EIKA)) {
-				map->monster_list.push_back(mapdummy_mon(MON_EIKA, M_FLAG_SHIELD, coord_def(0, 0)));
+				map->monster_list.push_back(mapdummy_mon(MON_EIKA, M_FLAG_SHIELD, coord_def(0, 1)));
 				set_exist_named(MON_EIKA);
 			}
-			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(3,-3)));
-			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-3,-3)));
-			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(2,2)));
-			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-2,2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(3,-2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-3,-2)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(2,3)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,0,coord_def(-2,3)));
 			
 			map->name = "EIKA_RIVER";
 			return  "\
+#################\
+~~~~~~~~~~~~~~~~~\
 ~~~~~~~~~~~~~~~~~\
 ~~~~~~~~~~~~~~~~~\
 ~~~~~~__B__~~~~~~\
@@ -2248,6 +2257,310 @@ T.....T\
 .....\
 .....\
 .....";
+		}
+		case 83:
+		{
+			if(floor_ > 14)
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			
+			map->name = "COMMON_EARLY_GRAVE";
+		return "\
+.........\
+..G.G.G..\
+.........\
+..G.G.G..\
+.........\
+..G.G.G..\
+.........";
+		}
+		case 84:
+		{
+			if (!(floor_ >= 8 && floor_ <= 14))
+				break;
+			map->size_x = 2;
+			map->size_y = 6;
+			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = map->size_y;
+			map->name = "COMMON_EARLY_SNOW_PATH";
+			return  "\
+.....\
+.))).\
+.)X).\
+..)..\
+...).\
+..)..\
+..)..\
+.)...\
+..)..\
+..)..\
+..)..\
+...).\
+..)..";
+		}
+		case 85:
+		{
+			if (!(floor_ >= 8 && floor_ <= 14))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(0, 0), EVT_ALWAYS));
+			map->name = "EARLY_OIL_FIRE";
+			return  "\
+.....\
+.%%%.\
+.%%%.\
+.%%%.\
+.....";
+		}
+		case 86:
+		{
+			if (!(floor_ >= MISTY_LAKE_LEVEL+1 && floor_ <= MISTY_LAKE_LAST_LEVEL))
+				break;
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			for (int i = -2; i <= 2; i++) {
+				for (int j = 1; j <= 2; j++) {
+					if(randA(10) > 2) {
+						map->monster_list.push_back(mapdummy_mon(MON_BUSH, 0, coord_def(i, j)));
+					}
+				}
+			}
+			map->name = "MISTY_LAKE_BUSH_AND_REWARD";
+			return  "\
+`````````\
+``TTTTT``\
+`TTiiiTT`\
+`T.mMm.T`\
+`TM.m.MT`\
+`T.....T`\
+`T.....T`\
+`T.....T`\
+.........";
+		}
+		case 87:
+		{
+			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL+1 && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
+				break;
+			map->size_x = 6;
+			map->size_y = 4;
+			map->m_entrance.x = rand_int(-map->size_x, -map->size_x+2);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = -map->size_x;
+			map->m_exit.y = rand_int(map->size_y-1, map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			for (int i = -2; i <= 2; i++) {
+				for (int j = 1; j <= 2; j++) {
+					if(randA(10) > 2) {
+						map->monster_list.push_back(mapdummy_mon(MON_BUSH, 0, coord_def(i, j)));
+					}
+				}
+			}
+			map->name = "YOUKAI_MOUNTAIN_CAVE_REWARD";
+			return  "\
+`````````````\
+```````####``\
+````####ii##`\
+``###..mMmi#`\
+`##....mmmM#`\
+........####`\
+...######````";
+		}
+		case 88:
+		{
+			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL-1))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			for(int i = 0; i < 5 ; i++) {
+				map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def((i*2)%3, (i*2)/3), EVT_ALWAYS));
+			}
+			rand_rect_iterator rand_rect(coord_def(0,0), 1,1,false);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			for(int i = 0; i < 3 ; i++) {
+				item_infor t;
+				makeitem(ITM_ETC, 0, &t, EIT_BROKEN_CAMERA);
+				map->item_list.push_back(mapdummy_item(t, *rand_rect));
+				rand_rect++;
+			}
+			map->name = "YOUKAI_MOUNTAIN_BURN_CAMERA";
+			return  "\
+.....\
+.....\
+.....\
+.....\
+.....";
+		}
+		case 89:
+		{
+			if (!(floor_ >= SCARLET_LEVEL && floor_ <= SCARLET_LEVEL_LAST_LEVEL))
+				break;
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			random_extraction<int> rand_;
+			switch(randA(2)) {
+			case 0:
+				map->sp_tile_list.push_back(DG_GRASS);
+				rand_.push(DG_GLASS, 2);
+				rand_.push(DG_SUN_FLOWER, 6);
+				rand_.push(DG_TREE, 1);
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				break;
+			case 1:
+				map->sp_tile_list.push_back(DG_SNOW);
+				rand_.push(DG_SNOW, 2);
+				rand_.push(DG_SNOWMAN, 6);
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				break;
+			case 2:
+				map->sp_tile_list.push_back(DG_FLOOR);
+				rand_.push(DG_FLOOR, 2);
+				rand_.push(DG_GRAVE, 6);
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				map->sp_tile_list.push_back(rand_.choice());
+				break;
+			}
+			map->name = "SCARLET_GARDEN_ROOM";
+			return  "\
+#########\
+#_______#\
+#__000__#\
+#_01020_#\
+#_00000_#\
+#_03040_#\
+#__000__#\
+#_______#\
+####+####";
+		}
+		case 90:
+		{
+			if (!(floor_ >= SCARLET_LEVEL && floor_ <= SCARLET_LEVEL_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if(randA(2) < 2) {
+				item_infor t;
+				makeitem(ITM_BOOK, 0, &t, -1);
+				map->item_list.push_back(mapdummy_item(t, coord_def(0, 0)));
+			} else {
+				map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK, 0, coord_def(0, 0)));
+			}
+			map->name = "SCARLET_TINYBOOK_ROOM";
+			return  "\
+.....\
+.EEE.\
+.E.E.\
+.E+E.\
+.....";
+		}
+		case 91:
+		{
+			if (is_exist_named(MON_YOSIKA))
+				break;
+			if(!((floor_ >= 8 && floor_ <=10) ||
+				(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL-1))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if (!is_exist_named(MON_YOSIKA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_YOSIKA, M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
+				set_exist_named(MON_YOSIKA);
+			}
+			map->name = "YOSIKA_GRAVE";
+			return  "\
+.......\
+.G._.G.\
+..___..\
+._____.\
+..___..\
+.G._.G.\
+.......";
+		}
+		case 92:
+		{
+			if (is_exist_named(MON_PARSI))
+				break;
+			if(floor_ < 9)
+				break;
+			map->size_x = (DG_MAX_X-1)/2; //파르시의 다리는 맵을 양분해버린다.
+			map->size_y = 3;
+			map->m_entrance.x = 0;
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_STAIR;
+			if (!is_exist_named(MON_PARSI)) {
+				map->monster_list.push_back(mapdummy_mon(MON_PARSI, M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(-1, 0)));
+				if(randA(5) == 0) {
+					//파르시 2배!
+					map->monster_list.push_back(mapdummy_mon(MON_PARSI, M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(1, 0)));
+				}
+				set_exist_named(MON_PARSI);
+			}
+			map->name = "PARSI_BRIDGE";
+			ostringstream oss;
+			for(int j = 0; j < map->size_y*2+1; j++) {
+				for(int i = 0; i < map->size_x*2+1; i++) {
+					if(i < map->size_x-1 || i > map->size_x+1) {
+						oss<<'~';
+					} else {
+						oss<<'.';
+					}
+				}
+			}
+			temp_returnString = oss.str();
+			
+			return temp_returnString.c_str();
 		}
 		}
 	}

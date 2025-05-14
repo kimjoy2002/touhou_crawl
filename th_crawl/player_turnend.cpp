@@ -1226,6 +1226,8 @@ void saveReplay_cpp();
 
 void GameOver()
 {
+	string temp = "죽었다!";
+	LOG_MESSAGE(temp);
 	StopCurrentBGM();
 	bool replay_mode_ = ReplayClass.ReplayMode();
 	

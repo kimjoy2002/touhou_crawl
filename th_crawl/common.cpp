@@ -7,6 +7,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <fstream>
 #include <DirectXMath.h> 
 #include <iomanip>
 using namespace std;
@@ -110,11 +111,48 @@ int CutSelect(int min, int max, int cur)
 	return ((cur>max)?max:((cur<min)?min:cur));
 
 }
-float rand_float(float min, float max)
+
+void log_replay_event(const std::string& message)
+{
+    //static std::ofstream replay_log("replay_debug.log", std::ios::app);
+    //replay_log << message;
+}
+void init_replay_log() {
+   // std::ofstream replay_log("replay_debug.log", std::ios::trunc); // 덮어쓰기
+   // replay_log << "----------게임시작-----------";
+    // 파일 열어서 비우기만 함
+}
+
+inline const char* filename_only(const char* path) {
+    const char* slash1 = strrchr(path, '/');
+    const char* slash2 = strrchr(path, '\\');
+    const char* slash = (slash1 > slash2) ? slash1 : slash2;
+    return slash ? slash + 1 : path;
+}
+void log_message(const char* file, int line, const std::string& message)
+{
+   // std::ostringstream oss;
+   // oss << "[" << filename_only(file) << ":" << line << "] " << message << "\n";
+    //log_replay_event(oss.str());
+}
+void log_key_input(const char* file, int line, const std::string& key_name)
+{
+   // std::ostringstream oss;
+   // oss << "[KEYINPUT] " << key_name << " 입력\n";
+    //log_replay_event(oss.str());
+}
+
+
+float rand_float_impl(const char* file, int line, float min, float max)
 {
 	//char temp_str[64];
 	//sprintf_s(temp_str,64,"rand_float(%f,%f)",min,max);
 	//test_rand(temp_str);
+	
+    // 로그 출력 (파일명, 라인번호, 인자, 결과 포함)
+    //std::ostringstream oss;
+    //oss << "[" << filename_only(file) << ":" << line << "][" << map_list.random_number << "] rand_float(" << min << ","<< max << ") 호출 \n";
+    //log_replay_event(oss.str());  // 이건 너가 정의하는 함수로
 
 
 	if(min == max)
@@ -138,13 +176,16 @@ float rand_float(float min, float max)
 	return min;
 }
 
-int rand_int(int min, int max)
+int rand_int_impl(const char* file, int line, int min, int max)
 {
 	//char temp_str[64];
 	//sprintf_s(temp_str,64,"rand_int(%d,%d)",min,max);
 	//test_rand(temp_str);
 
 
+    //std::ostringstream oss;
+   // oss << "[" << filename_only(file) << ":" << line << "][" << map_list.random_number << "] rand_int(" << min << ","<< max << ") 호출 \n";
+    //log_replay_event(oss.str());  // 이건 너가 정의하는 함수로
 
 	if(min == max)
 		return min;

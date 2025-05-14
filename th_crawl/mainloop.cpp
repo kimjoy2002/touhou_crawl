@@ -374,7 +374,7 @@ void charter_selete(bool first)
 				break;
 		}
 	}
-
+	init_replay_log();
 
 	if(!saveexit)
 	{
@@ -408,6 +408,7 @@ void charter_selete(bool first)
 		you.CalcuHP();
 		Initialize();
 		steam_mg.setCurrentInfo();
+		LOG_MESSAGE("게임시작!");
 	}
 	else if(map_list.tutorial == GM_TUTORIAL)
 	{		

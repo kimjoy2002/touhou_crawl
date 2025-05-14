@@ -50,6 +50,7 @@ bool saveexit = false;
 HWND hwnd = 0;
 
 
+
 void GetWindowSizeFromClientSize(DWORD dwStyle, BOOL bMenuFlag, int cx, int cy, int& wx, int& wy) {
 	RECT rc;
 	SetRect(&rc, 0, 0, cx, cy);

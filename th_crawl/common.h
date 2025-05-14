@@ -44,12 +44,24 @@ int CutSelect(int min, int max, int cur);
 void rand_seed(unsigned int seed_);
 void init_nonlogic_seed(unsigned int seed_);
 
+void log_replay_event(const std::string& message);
+void log_message(const char* file, int line, const std::string& message);
+#define LOG_MESSAGE(message) log_message(__FILE__, __LINE__, (message))
+
+void init_replay_log();
+void log_key_input(const char* file, int line, const std::string& key_name);
+
+#define LOG_KEY_INPUT(key_name) log_key_input(__FILE__, __LINE__, key_name)
 
 
-float rand_float(float min, float max);
+float rand_float_impl(const char* file, int line, float min, float max);
+#define rand_float(x, y) rand_float_impl(__FILE__, __LINE__, (x), (y))
 
-int rand_int(int min, int max);
+int rand_int_impl(const char* file, int line, int min, int max);
+#define rand_int(x, y) rand_int_impl(__FILE__, __LINE__, (x), (y))
 int rand_int_with_nonlogic(int min, int max); //이 무작위는 게임에 영향을 주지않아야함
+
+
 
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y);
 

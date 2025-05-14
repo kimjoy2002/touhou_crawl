@@ -2201,7 +2201,7 @@ T.....T\
 			map->m_exit.y = map->size_y;
 			map->name = "COMMON_EARLY_BELLIED_PATH";
 	return "\
-.##```\
+.##````\
 ..##```\
 ...##``\
 ....##`\

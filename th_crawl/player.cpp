@@ -3845,6 +3845,8 @@ void players::LevelUp(bool speak_)
 	{
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_LEVELUP_MESSGE, PlaceHolderHelper(to_string(you.level))),true,false,false,CL_good);
 		soundmanager.playSound("levelup");
+		string temp = "레벨업! (" + to_string( you.level) +")";
+		LOG_MESSAGE(temp);
 		MoreWait();
 	}
 	if(level%3 == 0)

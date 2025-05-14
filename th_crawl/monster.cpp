@@ -35,20 +35,24 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
-: map_id(-1), id(0), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
+: map_id(-1), id(0), id2(0), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
 ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
-	speed(10), memory_time(0), first_contact(true), strong(1), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
-	direction(0), sm_info(), state(MS_NORMAL), random_spell(false)
+	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
+	direction(0), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
 	for(int i = 0; i < 3; i++) {
+		atk[i] = 0;
 		atk_type[i] = ATT_NONE;
 		atk_name[i] = name_infor();
 	}
+	spell_lists.clear();
+	item_lists.clear();
+	will_move.clear();
 	base_state_setup(state,MS_SLEEP);
 }
 void monster::SaveDatas(FILE *fp)
@@ -304,8 +308,10 @@ void monster::init()
 { 
 	map_id=-1;
 	id=0;
+	id2=0;
 	level=1;
 	exper=0;
+	name = name_infor(LOC_SYSTEM_NONE_STRING);
 	image = NULL;
 	hp = 0;
 	hp_recov =0;
@@ -317,6 +323,11 @@ void monster::init()
 	prev_sight = false;
 	ac = 0;
 	ev = 0;
+	for(int i = 0; i<3; i++) {
+		atk[i] = 0;
+		atk_type[i] = ATT_NONE;
+		atk_name[i] = name_infor();
+	}
 	flag = 0;
 	resist = 0;
 	sense = 0; 
@@ -365,7 +376,7 @@ void monster::init()
 	confuse_resist = 0;
 	wind_resist = 0;
 	time_delay = 0;
-	speed = 0; 
+	speed = 10; 
 	memory_time = 0; 
 	first_contact = true;
 	strong = 1;
@@ -377,10 +388,12 @@ void monster::init()
 	temp_target_map_id = -1;
 	target_pos.x = 0;
 	target_pos.y = 0;
-	direction =0;
+	direction = 0;
+	sm_info.init();
 	state.SetState(MS_SLEEP);
 	spell_lists.clear();
 	random_spell = false;
+	wait = false;
 	item_lists.clear();
 }
 bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int time_, coord_def position_, bool init_)

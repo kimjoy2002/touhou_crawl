@@ -183,6 +183,57 @@ int waitkeyinput(bool direction_, bool immedity_, bool ablecursor) {
 	return waitkeyinput(temp, direction_,  immedity_, ablecursor);
 }
 
+
+
+std::string utf8_from_codepoint(int codepoint) {
+    std::string result;
+    if (codepoint <= 0x7F) {
+        // 1바이트 UTF-8 (ASCII)
+        result.push_back(static_cast<char>(codepoint));
+    } else if (codepoint <= 0x7FF) {
+        // 2바이트 UTF-8
+        result.push_back(static_cast<char>(0xC0 | ((codepoint >> 6) & 0x1F)));
+        result.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    } else if (codepoint <= 0xFFFF) {
+        // 3바이트 UTF-8
+        result.push_back(static_cast<char>(0xE0 | ((codepoint >> 12) & 0x0F)));
+        result.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
+        result.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    } else if (codepoint <= 0x10FFFF) {
+        // 4바이트 UTF-8
+        result.push_back(static_cast<char>(0xF0 | ((codepoint >> 18) & 0x07)));
+        result.push_back(static_cast<char>(0x80 | ((codepoint >> 12) & 0x3F)));
+        result.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
+        result.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    }
+    return result;
+}
+
+
+std::string inputedkey_to_string(int key_, const InputedKey& input) {
+    std::ostringstream oss;
+
+    if (key_ == -1) {
+        // 마우스 입력
+        oss << "Mouse["
+            << static_cast<int>(input.mouse) << "]("
+            << input.val1 << ", "
+            << input.val2 << ")";
+    } else {
+        // 키보드 입력 (key_는 int이므로 유니코드로 취급)
+        oss << "Key[" << key_;
+
+        std::string utf8Char = utf8_from_codepoint(key_);
+        if (!utf8Char.empty()) {  // 변환 결과가 있으면
+            oss << " ('" << utf8Char << "')";
+        }
+        oss << "]";
+    }
+
+    return oss.str();
+}
+
+
 int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor)
 {
 	if(ReplayClass.auto_key == false)
@@ -194,6 +245,7 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 		DWORD time2_ = timeGetTime();
 
 		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_) , return_, key);
+		LOG_KEY_INPUT(inputedkey_to_string(return_,key));
 
 		return return_;
 	}
@@ -251,12 +303,13 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 			throw 0;
 		}
 		if(ReplayClass.LoadReplayInput(&delay_,&return_, key))
-		{		
+		{
 			if(delay_>0)
 			{
 				for(int i = 0; i <(replay_speed==1?min(1000,(int)delay_):0); i++)
 					Sleep(1);
 			}
+			LOG_KEY_INPUT(inputedkey_to_string(return_,key));
 
 			return return_;
 		}

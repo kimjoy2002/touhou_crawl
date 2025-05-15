@@ -57,7 +57,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	for (int i = 0; i <= 102; i++)
 	{
 		int base_pe = 1;
-		if (i == 39 || i == 41)
+		if (i == 39 || i == 41 || i == 96)
 			base_pe = 3; //몇몇 특수 지형보정
 		randomPattern.push(i,base_pe);
 	}
@@ -2668,43 +2668,39 @@ T.....T\
 		}
 		case 96:
 		{
-			if (is_exist_named(MON_LUNASA) && is_exist_named(MON_MERLIN) && is_exist_named(MON_LYRICA))
+			if (is_exist_named(MON_LUNASA))
 				break;
 			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
 				break;
 			map->size_x = 8;
-			map->size_y = 5;
+			map->size_y = 6;
 			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = rand_int(-map->size_x, map->size_x);
 			map->m_exit.y = map->size_y;
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			if (!is_exist_named(MON_LUNASA)) {
-				map->monster_list.push_back(mapdummy_mon(MON_LUNASA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(-2, -3)));
-				set_exist_named(MON_LUNASA);
-			}
-			if (!is_exist_named(MON_MERLIN)) {
-				map->monster_list.push_back(mapdummy_mon(MON_MERLIN, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(0, -3)));
-				set_exist_named(MON_MERLIN);
-			}
-			if (!is_exist_named(MON_LUNASA)) {
-				map->monster_list.push_back(mapdummy_mon(MON_LUNASA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(2, -3)));
+				map->monster_list.push_back(mapdummy_mon(MON_LUNASA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(-2, -4)));
+				map->monster_list.push_back(mapdummy_mon(MON_MERLIN, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(0, -4)));
+				map->monster_list.push_back(mapdummy_mon(MON_LYRICA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(2, -4)));
 				set_exist_named(MON_LUNASA);
 			}
 			if (!is_exist_named(MON_KOKORO)) {
-				map->monster_list.push_back(mapdummy_mon(MON_KOKORO, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_KOKORO, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -2)));
 				set_exist_named(MON_KOKORO);
 			} else if(!is_exist_named(MON_MISTIA)) {
-				map->monster_list.push_back(mapdummy_mon(MON_MISTIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_MISTIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -2)));
 				set_exist_named(MON_MISTIA);
 			} 
-			for (int i = -map->size_x-1; i <= map->size_x-1; i++)
+			for (int i = -map->size_x+1; i <= map->size_x-1; i++)
 			{
-				for (int j = -map->size_y+2; j <= 0; j++)
+				for (int j = -map->size_y+2; j <= 2; j++)
 				{
-					if(j == -map->size_y+2 && (i < -2 || i > 2)) 
+					if((j == -map->size_y+4 || j == -map->size_y+5) && (i < -6 || i > 6)) 
 						continue;
-					if(j == -map->size_y+1 && (i < -5 || i > 5)) 
+					if((j == -map->size_y+2 || j == -map->size_y+3) && (i < -5 || i > 5)) 
+						continue;
+					if(j == -map->size_y+1 && (i < -2 || i > 2)) 
 						continue;
 					map->event_list.push_back(mapdummy_event(((int)GetPositionGap(0,1,i,j)/2)%2? EVL_RUMIA_DANCER1:EVL_RUMIA_DANCER2, coord_def(i, j), EVT_ALWAYS));
 				}
@@ -2716,7 +2712,9 @@ T.....T\
 #$$$$$$$$$$$$$$$#\
 #$$$$$_____$$$$$#\
 #$$___________$$#\
-#_______________#\
+#$$___________$$#\
+#$_____________$#\
+#$_____________$#\
 #_______________#\
 #_______________#\
 #...............#\

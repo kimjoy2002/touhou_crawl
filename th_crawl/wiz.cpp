@@ -596,6 +596,10 @@ void wiz_mode()
 		}
 		case 'R': //맵 재생성	
 		{
+			for(int m_id = 0;  m_id < MON_MAX; m_id++) {
+				if(mondata[m_id].flag & M_FLAG_UNIQUE)
+					unset_exist_named((monster_index)m_id);
+			}
 			deque<monster*> dq;
 			env[current_level].ClearFloor();
 			env[current_level].make = false;

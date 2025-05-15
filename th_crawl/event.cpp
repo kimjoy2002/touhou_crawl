@@ -950,6 +950,24 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		env[current_level].changeTile(event_->position, event_->count % 2?DG_PANDE_FLOOR4:DG_FLOOR);
 		return 0;
 	}
+	case EVL_DIEFAIRY:
+	{
+		dif_rect_iterator rit(you.position, 5);
+		int i = 5;
+		you.SetWeather(1, 50);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DAIYOUSEI_WITH_FOG), true, false, false, CL_small_danger);
+		MoreWait();
+		for (; !rit.end() && i > 0; rit++)
+		{
+			if (env[current_level].isMove(rit->x, rit->y, true) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit)
+				&& min(abs(rit->x-you.position.x),abs(rit->y-you.position.y)) > 2)
+			{
+				monster *mon_ = env[current_level].AddMonster(i == 5?(MON_DIEFAIRY):(randA(2)?MON_FAIRY_BLUE_MAGICIAN:MON_FAIRY_BLUE), M_FLAG_EVENT, (*rit));
+				i--;
+			}
+		}
+		return 1;
+	}
 	default:
 		break;
 	}

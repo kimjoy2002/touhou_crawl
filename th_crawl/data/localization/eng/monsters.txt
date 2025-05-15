@@ -21,7 +21,7 @@ MON_MISTIA,Mystia,Mystia is a night sparrow yokai whose song induces night-blind
 MON_WRIGGLE,Wriggle,A bug yokai that commands insects. Summons swarms of bugs.
 MON_CIRNO,Cirno,Self-proclaimed strongest ice fairy. Has the ability to control cold.\nStrong for a fairy and shoots powerful cold blasts from afar. But she's a fool.
 MON_MEDICINE,Medicine,A discarded doll turned yokai, a type of tsukumogami. Uses deadly poison.\nThough newly awakened, her poison is extremely dangerous.\nOften uses the poison of lily-of-the-valley, which also slows victims.
-MON_DIEFAIRY,Great Fairy,A fairy stronger than most, hence the title. Her real name is unknown.
+MON_DIEFAIRY,Daiyousei,A fairy stronger than most, hence the title. Her real name is unknown.
 MON_HUMAM_WOMAN,Human Woman,A powerless human female.
 MON_HUMAM_MAN,Human Man,A human male.\nAfter Gensokyo turned into a dungeon, they began moving in groups to defend themselves.
 MON_HUMAM_YINYANG,Onmyoji,An exorcist from the human village who used to banish yokai.\nNow defends themselves in groups after Gensokyo became a dungeon.

@@ -54,7 +54,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 92; i++)
+	for (int i = 0; i <= 102; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41)
@@ -2319,6 +2319,7 @@ T.....T\
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(0, 0), EVT_ALWAYS));
 			map->name = "EARLY_OIL_FIRE";
+			map->flag = FLAG_NO_STAIR;
 			return  "\
 .....\
 .%%%.\
@@ -2487,6 +2488,7 @@ T.....T\
 			} else {
 				map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK, 0, coord_def(0, 0)));
 			}
+			map->flag = FLAG_NO_STAIR;
 			map->name = "SCARLET_TINYBOOK_ROOM";
 			return  "\
 .....\
@@ -2514,6 +2516,7 @@ T.....T\
 				map->monster_list.push_back(mapdummy_mon(MON_YOSIKA, M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
 				set_exist_named(MON_YOSIKA);
 			}
+			map->flag = FLAG_NO_STAIR;
 			map->name = "YOSIKA_GRAVE";
 			return  "\
 .......\
@@ -2559,6 +2562,318 @@ T.....T\
 			temp_returnString = oss.str();
 			
 			return temp_returnString.c_str();
+		}
+		case 93:
+		{
+			if (is_exist_named(MON_CIRNO))
+				break;
+			if(!(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_STAIR;
+			if (!is_exist_named(MON_CIRNO)) {
+				map->monster_list.push_back(mapdummy_mon(MON_CIRNO, M_FLAG_SHIELD, coord_def(0, 0)));
+				set_exist_named(MON_CIRNO);
+			}
+			random_extraction<int> rand_;
+			rand_.push(DG_SNOW, 1);
+			rand_.push(DG_SNOWMAN, 1);
+			rand_.push(DG_SNOWMAN, 1);
+			rand_.push(DG_SNOWMAN, 1);
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			map->name = "CIRNO_HOUSE";
+			return  "\
+.))))).\
+)XX0XX)\
+)X)))X)\
+)1)))2)\
+)X)))X)\
+)XX3XX)\
+.))))).";
+		}
+		case 94:
+		{
+			if (is_exist_named(MON_DIEFAIRY))
+				break;
+			if(!(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+
+			if(!is_exist_named(MON_DIEFAIRY)){
+				map->event_list.push_back(mapdummy_event(EVL_DIEFAIRY,coord_def(0,0),EVT_APPROACH_SMALL));
+				set_exist_named(MON_DIEFAIRY);
+			}
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR;
+			
+			map->name = "DAIYOUSEI_APPEAR_WITH_FOG";
+			return  "\
+.......\
+.......\
+.......\
+.......\
+.......\
+.......\
+.......";
+		}
+		case 95:
+		{
+			if (is_exist_named(MON_TOKIKO))
+				break;
+			if(!((floor_ >= 8 && floor_ <=15) ||
+				(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL) ||
+				(floor_ >= YOUKAI_MOUNTAIN_LEVEL && floor_ <=YOUKAI_MOUNTAIN_LAST_LEVEL)))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if (!is_exist_named(MON_TOKIKO)) {
+				map->monster_list.push_back(mapdummy_mon(MON_TOKIKO, M_FLAG_SHIELD, coord_def(2, 0)));
+				set_exist_named(MON_TOKIKO);
+			}
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			item_infor t;
+			makeitem(ITM_BOOK, 0, &t, -1);
+			map->item_list.push_back(mapdummy_item(t, coord_def(3, 0)));
+			map->name = "TOKIKO_HOUSE";
+			return  "\
+...........\
+.f_f.#####.\
+.f_f.#EEE#.\
+.....+,,,#.\
+.___.#,,,#.\
+.___.#####.\
+...........";
+		}
+		case 96:
+		{
+			if (is_exist_named(MON_LUNASA) && is_exist_named(MON_MERLIN) && is_exist_named(MON_LYRICA))
+				break;
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			map->size_x = 8;
+			map->size_y = 5;
+			map->m_entrance.x = rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if (!is_exist_named(MON_LUNASA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_LUNASA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(-2, -3)));
+				set_exist_named(MON_LUNASA);
+			}
+			if (!is_exist_named(MON_MERLIN)) {
+				map->monster_list.push_back(mapdummy_mon(MON_MERLIN, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(0, -3)));
+				set_exist_named(MON_MERLIN);
+			}
+			if (!is_exist_named(MON_LUNASA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_LUNASA, M_FLAG_SHIELD | M_FLAG_COMPLETE_NETURALY | M_FLAG_WAKE, coord_def(2, -3)));
+				set_exist_named(MON_LUNASA);
+			}
+			if (!is_exist_named(MON_KOKORO)) {
+				map->monster_list.push_back(mapdummy_mon(MON_KOKORO, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -1)));
+				set_exist_named(MON_KOKORO);
+			} else if(!is_exist_named(MON_MISTIA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_MISTIA, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, -1)));
+				set_exist_named(MON_MISTIA);
+			} 
+			for (int i = -map->size_x-1; i <= map->size_x-1; i++)
+			{
+				for (int j = -map->size_y+2; j <= 0; j++)
+				{
+					if(j == -map->size_y+2 && (i < -2 || i > 2)) 
+						continue;
+					if(j == -map->size_y+1 && (i < -5 || i > 5)) 
+						continue;
+					map->event_list.push_back(mapdummy_event(((int)GetPositionGap(0,1,i,j)/2)%2? EVL_RUMIA_DANCER1:EVL_RUMIA_DANCER2, coord_def(i, j), EVT_ALWAYS));
+				}
+			}
+			//프리즘리버는 완전 중립때 큰 소음을 내기
+			map->name = "PRISMRIVER_CONCERT";
+			return  "\
+#################\
+#$$$$$$$$$$$$$$$#\
+#$$$$$_____$$$$$#\
+#$$___________$$#\
+#_______________#\
+#_______________#\
+#_______________#\
+#...............#\
+#..m.m.m.m.m.m..#\
+#...............#\
+.................";
+		}
+		case 97:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			map->size_x = 6;
+			map->size_y = 5;
+			map->m_entrance.x = -map->size_x;
+			map->m_entrance.y = 0;
+			map->m_exit.x = map->size_x;
+			map->m_exit.y = 0;
+			map->flag = FLAG_NO_STAIR;
+			map->name = "DEPTH_GRAVE_ROOM";
+			return  "\
+#############\
+#G_G..m..G_G#\
+#_M_....._m_#\
+#G_G.....G_G#\
++...........+\
++...........+\
++...........+\
+#G_G.....G_G#\
+#_m_....._M_#\
+#G_G..m..G_G#\
+#############";
+		}
+		case 98:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 7;
+			map->size_y = 5;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->name = "DEPTH_REWARD_ROOM_1";
+			return  "\
+...............\
+.==#########==.\
+.=ii#.MmM.#ii=.\
+.#i+#.....#+i#.\
+.###.mmMmm.###.\
+.#.#.......#.#.\
+.#.+..m.m..+.#.\
+.#.+#######+.#.\
+.#...........#.\
+.#####+++#####.\
+...............";
+		}
+		case 99:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->sp_tile_list.push_back(DG_HELL_WALL);
+			map->sp_tile_list.push_back(randA(1)?DG_OIL:DG_LAVA);
+			map->name = "DEPTH_HELLMONSTER_WITH_LAVA";
+			return  "\
+...........\
+.....00000.\
+....001110.\
+....111110.\
+..hH..1000.\
+..hh.......\
+...........";
+		}
+		case 100:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_WALL1+(randA(6))));
+			map->sp_tile_list.push_back((dungeon_tile_type)(DG_PANDE_FLOOR1+(randA(6))));
+			map->name = "DEPTH_PANDEMONSTER_WITH_PANFLOOR";
+			return  "\
+...........\
+......qqq..\
+.0001..Qq..\
+.011111.q..\
+.011100....\
+.00000.....\
+...........";
+		}
+		case 101:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 3;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->monster_list.push_back(mapdummy_mon(MON_MAC,M_FLAG_NETURALY,coord_def(3,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_MOON_RABIT_ATTACK,M_FLAG_NETURALY,coord_def(3,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_MOON_RABIT_ATTACK,M_FLAG_NETURALY,coord_def(3,1)));
+			map->name = "DEPTH_DREAM_INVADER";
+			return  "\
+...........\
+.##.::::::.\
+.#m...^^^:.\
+.#M....^^:.\
+.#m...^^^:.\
+.####..:::.\
+...........";
+		}
+		case 102:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			map->size_x = 6;
+			map->size_y = 3;
+			map->m_entrance.x = map->size_x-2;
+			map->m_entrance.y = -map->size_y;
+			map->m_exit.x = -map->size_x+2;
+			map->m_exit.y = map->size_y;
+			map->flag = FLAG_NO_STAIR;
+			map->name = "DEPTH_FIRE_AND_ICE";
+			map->monster_list.push_back(mapdummy_mon(MON_SNOW_GIRL,M_FLAG_NETURALY,coord_def(-5,-2)));
+			map->monster_list.push_back(mapdummy_mon(MON_LANTERN_YOUKAI,M_FLAG_NETURALY,coord_def(5,2)));
+			return  "\
+##########+##\
+#)))))))....#\
+#))))).....;#\
+#))).....;;;#\
+#).....;;;;;#\
+#....;;;;;;;#\
+##+##########";
 		}
 		}
 	}

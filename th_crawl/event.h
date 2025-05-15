@@ -51,7 +51,8 @@ enum event_list
 	EVL_SION_DELETE,
 	EVL_WATER, //임시로 물이 된다.
 	EVL_RUMIA_DANCER1,
-	EVL_RUMIA_DANCER2
+	EVL_RUMIA_DANCER2,
+	EVL_DIEFAIRY
 };
 
 class events

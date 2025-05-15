@@ -585,8 +585,19 @@ bool PixedMap(map_dummy* map, const char *temp)
 			case 'H':
 			{
 				//지저몹
-				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = DG_PANDE_FLOOR1;
-				int mon_ = getMonsterFromFloor(SUBTERRANEAN_LEVEL, (temp[j] == 'd' ? GMFF_FLAG_ALL : (temp[j] == 'D' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+				int mon_ = getMonsterFromFloor(SUBTERRANEAN_LEVEL, (temp[j] == 'h' ? GMFF_FLAG_ALL : (temp[j] == 'H' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
+				if (mon_ != -1) {
+					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
+				}
+				break;
+			}
+			case 'q':
+			case 'Q':
+			{
+				//판데몹
+				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
+				int mon_ = getMonsterFromFloor(PANDEMONIUM_LEVEL, (temp[j] == 'q' ? GMFF_FLAG_ALL : (temp[j] == 'Q' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL)));
 				if (mon_ != -1) {
 					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
 				}

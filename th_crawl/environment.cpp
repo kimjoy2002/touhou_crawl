@@ -22,6 +22,7 @@
 #include "replay.h"
 #include "forbid.h"
 #include "soundmanager.h"
+#include "option_manager.h"
 #include "steam_api.h"
 #include <set>
 
@@ -31,6 +32,7 @@ environment env[MAXLEVEL];
 int current_level=0;
 extern HANDLE mutx;
 
+extern optionManager option_mg;
 extern POINT MousePoint;
 
 
@@ -2414,17 +2416,20 @@ void SaveFile()
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
 
-	std::wstring wfilename = ConvertUTF8ToUTF16(save_file);
+	std::wstring wfilename = ConvertUTF8ToUTF16(save_file[option_mg.getSaveSlot()-1]);
     if (_wfopen_s(&fp, wfilename.c_str(), L"wb") != 0 || !fp) {
         return;
     }
 
 	SaveData<int>(fp, current_level);
+	//최소한의 정보
+
+
+	you.SaveDatas(fp);
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
 		env[i].SaveDatas(fp);
 	}
-	you.SaveDatas(fp);
 	SaveData<Iden_collect>(fp,iden_list);
 	SaveData<int>(fp, unique_list.size());
 	for(vector<unique_infor>::iterator it=unique_list.begin();it!=unique_list.end();it++)
@@ -2451,18 +2456,18 @@ void LoadFile()
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
 
-	std::wstring wfilename = ConvertUTF8ToUTF16(save_file);
+	std::wstring wfilename = ConvertUTF8ToUTF16(save_file[option_mg.getSaveSlot()-1]);
     if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
         return;
     }
 
 	LoadData<int>(fp, current_level);
 
+	you.LoadDatas(fp);
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
 		env[i].LoadDatas(fp);	
 	}
-	you.LoadDatas(fp);
 	LoadData<Iden_collect>(fp,iden_list);
 	
 	unique_list.clear();

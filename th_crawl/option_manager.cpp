@@ -46,6 +46,15 @@ void optionManager::init(string fileName) {
 
 		GetPrivateProfileString(_T("config"), _T("width"), _T("1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		width = _tstoi(szBuf);
+		
+		GetPrivateProfileString(_T("config"), _T("saveslot"), _T("1"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		current_saveslot = _tstoi(szBuf);
+
+		if(current_saveslot > 3) {
+			current_saveslot = 3;
+		} else if(current_saveslot < 1) {
+			current_saveslot = 1;
+		}
 
 		current_pos = -1;
 		int pos_ = -1;
@@ -99,6 +108,10 @@ void optionManager::createNewFile(string fileName) {
 	tchr = (TCHAR*)(LPCTSTR)strString;
 	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
 	
+	strString = _T("1");
+	tchr = (TCHAR*)(LPCTSTR)strString;
+	WritePrivateProfileString(_T("config"), _T("saveslot"), tchr, fileName.c_str());
+
 	strString = _T("false");
 	fullscreen = (_tcscmp((LPCTSTR)strString, _T("true")) == 0 || _tcscmp((LPCTSTR)strString, _T("1")) == 0);
 	WritePrivateProfileString(_T("config"), _T("fullscreen"), tchr, fileName.c_str());
@@ -156,6 +169,14 @@ void optionManager::setFullscreen(bool full_value) {
 	}
 }
 
+void optionManager::setSaveSlot(int currentsaveslot) {
+    current_saveslot = currentsaveslot; 
+
+	if(!fileName.empty()) {
+		CString str(to_string(current_saveslot).c_str());
+		WritePrivateProfileString(_T("config"), _T("false"), str, fileName.c_str());
+	}
+}
 
 void optionManager::setWidth(int w_value) {
     width = w_value;  // lang이 string일 경우

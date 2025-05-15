@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-extern std::string save_file;
+extern std::string save_file[3];
 extern std::string user_name_file;
 
 template <typename T>

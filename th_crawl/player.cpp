@@ -361,20 +361,23 @@ void players::init() {
 }
 void players::SaveDatas(FILE *fp)
 {
+	//최소한의 정보만
+	SaveData<int>(fp, level);
+	SaveData<tribe_type>(fp, tribe);
+	SaveData<job_type>(fp, job);
+	SaveData<unique_starting_type>(fp, char_type);
+
 	SaveData<int>(fp, position.x);
 	SaveData<int>(fp, position.y);
 	SaveData<int>(fp, prev_position.x);
 	SaveData<int>(fp, prev_position.y);
 	name.SaveDatas(fp);
-	SaveData<unique_starting_type>(fp, char_type);
 	{
 		char temp[100];
 		sprintf_s(temp,100,"%s",user_name.c_str());
 		SaveData<char>(fp,*temp, strlen(temp)+1);
 	}
 	SaveData<int>(fp, texturetoint(image));
-	SaveData<tribe_type>(fp, tribe);
-	SaveData<job_type>(fp, job);
 	SaveData<int>(fp, hp);
 	SaveData<int>(fp, max_hp);
 	SaveData<int>(fp, hp_recov);
@@ -384,7 +387,6 @@ void players::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, pure_mp);
 	SaveData<int>(fp, power);
 	SaveData<int>(fp, power_decre);
-	SaveData<int>(fp, level);
 	SaveData<int>(fp, exper);
 	SaveData<int>(fp, exper_recovery);
 	SaveData<int>(fp, exper_aptit);
@@ -578,12 +580,18 @@ void players::LoadDatas(FILE *fp)
 {
 	item_list.clear();
 
+	//필수 정보
+	LoadData<int>(fp, level);
+	LoadData<tribe_type>(fp, tribe);
+	LoadData<job_type>(fp, job);
+	LoadData<unique_starting_type>(fp, char_type);
+
+
 	LoadData<int>(fp, position.x);
 	LoadData<int>(fp, position.y);
 	LoadData<int>(fp, prev_position.x);
 	LoadData<int>(fp, prev_position.y);
 	name.LoadDatas(fp);
-	LoadData<unique_starting_type>(fp, char_type);
 	{
 		char temp[100];
 		LoadData<char>(fp, *temp);
@@ -592,8 +600,6 @@ void players::LoadDatas(FILE *fp)
 	int it;
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
-	LoadData<tribe_type>(fp, tribe);
-	LoadData<job_type>(fp, job);
 	LoadData<int>(fp, hp);
 	prev_hp[0] = hp;
 	prev_hp[1] = hp;
@@ -607,7 +613,6 @@ void players::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, pure_mp);
 	LoadData<int>(fp, power);
 	LoadData<int>(fp, power_decre);
-	LoadData<int>(fp, level);
 	LoadData<int>(fp, exper);
 	LoadData<int>(fp, exper_recovery);	
 	LoadData<int>(fp, exper_aptit);

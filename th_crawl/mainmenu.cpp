@@ -16,6 +16,7 @@
 #include "note.h"
 #include "tribe.h"
 #include "network.h"
+#include "option_manager.h"
 #include "replay.h"
 
 
@@ -23,6 +24,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 extern display_manager DisplayManager;
+extern optionManager option_mg;
 
 extern const char *version_string;
 typedef struct menu_input
@@ -228,7 +230,7 @@ bool checkSavefile(int value_)
 	if(ReplayClass.ReplayMode() == true)
 		return false;
 
-	if(load_data(save_file.c_str()))
+	if(load_data(save_file[option_mg.getSaveSlot()-1].c_str()))
 	{
 		steam_mg.setCurrentInfo();
 		saveexit = true;
@@ -447,6 +449,7 @@ bool select_job(int value_)
 }
 
 bool replay_menu(int value_);
+bool save_menu(int value_);
 
 bool quit_menu(int value_)
 {
@@ -479,6 +482,7 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ETC), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("e - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'e'));
+		temp->push_back(menu_string("s - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SAVE), true, CL_normal, 's'));
 		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY), true, CL_normal, 'R'));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("X - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_QUIT), true, CL_normal, 'X'));
@@ -489,6 +493,7 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0,'c',0,"",false,sprint1s,0);
 		m_mgr.menu_input_puls(0, 'd', 1, "", false, sprint2s, 0);
 		m_mgr.menu_input_puls(0,'e',-3,"",false,option_menu,0);
+		m_mgr.menu_input_puls(0,'s',0,"",false,save_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 		m_mgr.menu_input_puls(0,'X',0,"",false,quit_menu,0);
 		

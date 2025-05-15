@@ -1110,6 +1110,24 @@ int get_unique_to_id(int m_id)
 	case MON_AUNN:  return 64;
 	case MON_NARUMI:  return 65;
 	case MON_HATATE: return 66;
+	case MON_EIKA: return 67;
+	case MON_URUMI: return 68;
+	case MON_KUTAKA: return 69;
+	case MON_YACHIE: return 70;
+	case MON_MAYUMI: return 71;
+	case MON_SAKI: return 72;
+	case MON_YUMA: case MON_YUMA2: return 73;
+	case MON_ENOKO: return 74;
+	case MON_CHIYARI: return 75;
+	case MON_SONBITEN: return 76;
+	case MON_HISAMI: return 77;
+	case MON_TSUKASA: return 78;
+	case MON_UBAME: return 79;
+	case MON_CHIMI: return 80;
+	case MON_NAREKO: return 81;
+	case MON_MIKE: return 82;
+	case MON_TAKANE: return 83;
+	case MON_SANNYO: return 84;
 	}
 }
 
@@ -1371,6 +1389,57 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 67:
 		index.push_back(MON_EIKA);
+		break;
+	case 68:
+		index.push_back(MON_URUMI);
+		break;
+	case 69:
+		index.push_back(MON_KUTAKA);
+		break;
+	case 70:
+		index.push_back(MON_YACHIE);
+		break;
+	case 71:
+		index.push_back(MON_MAYUMI);
+		break;
+	case 72:
+		index.push_back(MON_SAKI);
+		break;
+	case 73:
+		index.push_back(MON_YUMA);
+		break;
+	case 74:
+		index.push_back(MON_ENOKO);
+		break;
+	case 75:
+		index.push_back(MON_CHIYARI);
+		break;
+	case 76:
+		index.push_back(MON_SONBITEN);
+		break;
+	case 77:
+		index.push_back(MON_HISAMI);
+		break;
+	case 78:
+		index.push_back(MON_TSUKASA);
+		break;
+	case 79:
+		index.push_back(MON_UBAME);
+		break;
+	case 80:
+		index.push_back(MON_CHIMI);
+		break;
+	case 81:
+		index.push_back(MON_NAREKO);
+		break;
+	case 82:
+		index.push_back(MON_MIKE);
+		break;
+	case 83:
+		index.push_back(MON_TAKANE);
+		break;
+	case 84:
+		index.push_back(MON_SANNYO);
 		break;
 	}
 

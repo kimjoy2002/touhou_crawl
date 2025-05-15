@@ -35,6 +35,7 @@ class optionManager {
 	int width;
 	int tile_max_x = 8;
 	int tile_max_y = 8;
+	int current_saveslot;
 	bool fullscreen;
 
 	int bgm_volume;
@@ -62,6 +63,8 @@ public:
 	int getCurrentPos() { return current_pos; };
 	bool getFullscreen() { return fullscreen; };
 	void setFullscreen(bool lang_value);
+	int getSaveSlot() { return current_saveslot; };
+	void setSaveSlot(int current_saveslot);
 
 
 	int getBgmVolume() { return bgm_volume; };

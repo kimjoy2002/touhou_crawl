@@ -703,12 +703,12 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01, 448, 0, 480, 32, 255),//벽2
 					textures(&texture_dungeon01, 480, 0, 512, 32, 255),//벽3
 					textures(&texture_item01, 3, 255), //닫힌문
-					textures(&texture_dungeon01),//유리
-					textures(&texture_dungeon01),//석상
-					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
 					textures(&texture_dungeon01), //포장마차
 					textures(&texture_dungeon01), //묘비
 					textures(&texture_dungeon02), //눈사람
+					textures(&texture_dungeon01),//유리
+					textures(&texture_dungeon01),//석상
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
 					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//바다
 					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//용암
 };
@@ -733,7 +733,7 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단달
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단마계
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단히쿠레이
-				{ textures(&texture_item03, 29, 255), textures(&texture_item03, 29, 255),textures(&texture_item03, 29, 255) }, //계단꿈의포탈
+				{textures(&texture_item03, 29, 255), textures(&texture_item03, 29, 255),textures(&texture_item03, 29, 255) }, //계단꿈의포탈
 				{textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255),textures(&texture_item01, 6, 255)},//계단
 				{textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255),textures(&texture_item03, 25, 255)}, //죠온&시온
 
@@ -786,12 +786,12 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
-				{textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255)},
-				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
-				{textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255)},
 				{textures(&texture_item03, 195, 255),textures(&texture_item03, 195, 255),textures(&texture_item03, 195, 255)},
 				{textures(&texture_item03, 196, 255),textures(&texture_item03, 196, 255),textures(&texture_item03, 196, 255)},
 				{textures(&texture_item03, 197, 255),textures(&texture_item03, 197, 255),textures(&texture_item03, 197, 255)},
+				{textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255),textures(&texture_item01, 168, 255)},
+				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
+				{textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 			{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
 };
@@ -2035,6 +2035,26 @@ textures img_thunder[] = {textures(&texture_laser, 64, 255),
 							    textures(&texture_laser, 95, 255)
 
 };
+
+textures img_border[] = {textures(&texture_laser, 116, 255),
+	textures(&texture_laser, 117, 255),
+	textures(&texture_laser, 118, 255),
+	textures(&texture_laser, 119, 255),
+	textures(&texture_laser, 120, 255),
+	textures(&texture_laser, 121, 255),
+	textures(&texture_laser, 122, 255),
+	textures(&texture_laser, 123, 255),
+	textures(&texture_laser, 124, 255),
+	textures(&texture_laser, 125, 255),
+	textures(&texture_laser, 126, 255),
+	textures(&texture_laser, 127, 255),
+	textures(&texture_laser, 128, 255),
+	textures(&texture_laser, 129, 255),
+	textures(&texture_laser, 130, 255),
+	textures(&texture_laser, 131, 255)
+};
+
+
 textures img_laser_small[] = {
 	textures(&texture_laser, 32, 255),
 	textures(&texture_laser, 33, 255),

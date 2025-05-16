@@ -40,6 +40,7 @@
 
 extern HANDLE mutx;
 extern bool widesearch; //X커맨드용
+extern bool sample_dimention;
 extern int map_effect;
 
 bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
@@ -1392,6 +1393,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.search_pos = target;
 		widesearch = true;
 		you.search = true;
+		sample_dimention = true;
 
 	
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN),false,false,false,CL_danger);
@@ -1413,6 +1415,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 			printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_normal);
 			widesearch = false;
 			you.search = false;
+			sample_dimention = false;
 			endSelection();
 			return false;
 		}
@@ -1420,6 +1423,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 
 		widesearch = false;
 		you.search = false;
+		sample_dimention = false;
 
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;

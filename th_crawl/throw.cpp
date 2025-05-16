@@ -337,6 +337,39 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 	}
 }
 
+textures* GetBorderGraphic(coord_def center, coord_def target, int size_x, int size_y, int count)
+{
+    int dx = target.x - center.x;
+    int dy = target.y - center.y;
+
+    bool isWhiteTile = (center.x + center.y + count) % 2 == 0;
+
+	if(!(((abs(dx) - size_x == 0 || abs(dx) - size_x == 1) && size_y >= abs(dy)) ||
+      ((abs(dy) - size_y == 0 || abs(dy) - size_y == 1) && size_x >= abs(dx)))) {
+        return nullptr;
+	}
+	
+	int direction = 0;
+    if (dx > 0 && dy < 0 && abs(dx) == abs(dy)) direction = 4; // ↗
+    else if (dx > 0 && dy > 0 && abs(dx) == abs(dy)) direction = 5;  // ↘
+    else if (dx < 0 && dy > 0 && abs(dx) == abs(dy)) direction = 6; // ↙
+    else if (dx < 0 && dy < 0 && abs(dx) == abs(dy)) direction = 7; // ↖
+    else if (abs(dy) > abs(dx) && (dy == -size_y || dy == 1+size_y)) direction = 0;     // ↑
+    else if (abs(dy) < abs(dx) && (dx == size_x || dx == -1-size_x)) direction = 1; // →
+    else if (abs(dy) > abs(dx) && (dy == size_y || dy == -1-size_y)) direction = 2; // ↓
+    else if (abs(dy) < abs(dx) && (dx == -size_x || dx == 1+size_x)) direction = 3; // ←
+    else
+        return nullptr; 
+
+    int index = isWhiteTile ? direction : direction + 8;
+
+    if (index < 0 || index >= 16) {
+        return nullptr;
+	}		
+
+	return &img_border[index];
+}
+
 textures* GetTanmacBaseGraphic(int type)
 {
 	switch(type)

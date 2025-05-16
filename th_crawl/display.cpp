@@ -54,7 +54,7 @@ float TimeElapsed = 0;
 float FPS = 0;
 
 extern bool widesearch; //X커맨드용
-
+extern bool sample_dimention;
 
 int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
 
@@ -2305,6 +2305,29 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 			}
 		}
+	}
+
+	//경계그리기
+	
+	if(you.s_dimension || sample_dimention)
+	{
+		for(int i=0;i<(sight_x*2+1);i++)
+		{
+			for(int j=0;j<(sight_y*2+1);j++)
+			{
+				if(i+x_>=0 && j+y_>=0 && i+x_<DG_MAX_X && j+y_<DG_MAX_Y)
+				{
+					textures* border_ =  GetBorderGraphic(you.s_dimension?coord_def(you.god_value[GT_YUKARI][0],you.god_value[GT_YUKARI][1]):you.search_pos, coord_def(i+x_,j+y_), 7, 7, you.turn);
+					if(border_) {
+						int x = i*calc_tile_size + tile_x_offset;
+						int y = j*calc_tile_size + tile_x_offset;
+						border_->draw(pSprite, x, y,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(you.s_dimension?255:128, 255, 255, 255));
+					}
+				}
+			}
+		}
+
+
 	}
 
 	if(you.search)

@@ -29,6 +29,7 @@ int Search_Move(const coord_def &c, bool wide, view_type type_ = VT_NORMAL, int 
 
 int GetTanmacGraphicType(tanmac_type type);
 textures* GetTanmacBaseGraphic(int type);
+textures* GetBorderGraphic(coord_def center, coord_def target, int size_x, int size_y, int count);
 LOCALIZATION_ENUM_KEY GetTanmacKey(int type);
 attack_type GetTanmacAttackType(tanmac_type type);
 attack_type GetWeapontoTanmac(weapon_brand brand);

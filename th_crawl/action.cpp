@@ -57,6 +57,7 @@ bool stack_move(bool auto_);
 
 extern display_manager DisplayManager;
 bool widesearch = false;
+bool sample_dimention = false;
 
 int action_Move(int command, const coord_def &c)
 {
@@ -1950,16 +1951,16 @@ void Stair_move(bool down)
 					break;
 				case DG_SCARLET_STAIR:
 					next_ = SCARLET_LEVEL;
-					break;					
+					break;
 				case DG_SCARLET_L_STAIR:
 					next_ = SCARLET_LIBRARY_LEVEL;
 					break;			
 				case DG_SCARLET_U_STAIR:
 					next_ = SCARLET_UNDER_LEVEL;
 					break;			
-				case DG_BAMBOO_STAIR:					
+				case DG_BAMBOO_STAIR:
 					next_ = BAMBOO_LEVEL;
-					break;			
+					break;
 				case DG_EIENTEI_STAIR:					
 					next_ = EIENTEI_LEVEL;
 					break;			

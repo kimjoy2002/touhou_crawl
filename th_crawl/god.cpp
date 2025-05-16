@@ -120,10 +120,10 @@ int getPietyPercent(int type, int strong) {
 		switch (strong)
 		{
 		default:
-		case 1: return percen_<10 ? 1 : 0;
-		case 2: return percen_<20 ? 1 : 0;
-		case 3: return percen_<40 ? 1 : 0;
-		case 4: return percen_<60 ? 1 : 0;
+		case 1: return percen_<18 ? 1 : 0;
+		case 2: return percen_<25 ? 1 : 0;
+		case 3: return percen_<50 ? 1 : 0;
+		case 4: return percen_<66 ? 1 : 0;
 		case 5: return percen_<100 ? 1 : 0;
 		}
 	case 3: //미코 전용
@@ -275,7 +275,7 @@ bool GetGodAbility(int level, bool plus)
 			else
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY3_REMOVE),true,false,false,CL_help);
 			break;
-		case 5:
+		case 4:
 			you.Ability(SKL_KANAKO_3,true,!plus);
 			if(plus)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KANAKO_GAIN_ABLILITY5_ADD),true,false,false,CL_help);
@@ -1716,7 +1716,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (50 > randA(100))
+			if (60 > randA(100))
 			{
 				you.GiftCount(1);
 				you.PietyUpDown(1);
@@ -1737,7 +1737,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (50 > randA(100))
+			if (70 > randA(100))
 			{
 				you.PietyUpDown(1);
 				return_ = true;
@@ -2221,9 +2221,9 @@ void Pray()
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
 			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
 			printsub(" (",false,color_);
-			printsub("y",false,color_, 'y');
+			printsub(" y ",false,color_, 'y');
 			printsub("/",false,color_);
-			printsub("n",false,color_, 'n');
+			printsub(" n ",false,color_, 'n');
 			printsub(") ",true,color_);
 			printsub("",true,CL_normal);
 			God_AblilityShow((god_type)(type-DG_TEMPLE_FIRST));
@@ -2735,11 +2735,6 @@ void printGodAbility(god_type god, int current_piety, int require_piety, bool ab
 	}
 	ss << ablilitystr;
 	string cost = coststr;
-	if(PrintCharWidth(ss.str() + cost) < cost_pos) ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
-	else
-		ss << ' ';
-	ss << cost;
-
 	D3DCOLOR color = GetGodColor(god, value);
 	if(!able_punish && you.GetPunish(god)) {
 		color = CL_punish_bad;
@@ -2747,6 +2742,17 @@ void printGodAbility(god_type god, int current_piety, int require_piety, bool ab
 	if(!more_condition || god != you.god || require_piety > current_piety) {
 		color = CL_verybad;
 	}
+	if(PrintCharWidth(ss.str() + cost) < cost_pos) {
+		ss << string(cost_pos - PrintCharWidth(ss.str() + cost), ' ');
+	}
+	else {
+		printsub(ss.str(),true,color);
+		ss.str("");
+		ss.clear();
+		ss << string(cost_pos - PrintCharWidth(cost), ' ');
+	}
+	ss << cost;
+
 
 	printsub(ss.str(),true,color);
 
@@ -2852,7 +2858,8 @@ void God_AblilityShow(god_type god) {
 	case GT_KANAKO:
 		printGodAbility(GT_KANAKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		printGodAbility(GT_KANAKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
-		printGodAbility(GT_KANAKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
+		printGodAbility(GT_KANAKO, level_, 3, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
+		printGodAbility(GT_KANAKO, level_, 4, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY);
 		printGodAbility(GT_KANAKO, level_, 5, false, LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		break;
 	case GT_SUWAKO:

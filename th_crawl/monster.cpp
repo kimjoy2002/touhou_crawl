@@ -557,6 +557,9 @@ void monster::FirstContact()
 	{
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_UNIQUE_FIND,PlaceHolderHelper(name.getName())),CL_normal);
 	}
+	if(flag & M_FLAG_DECORATE) {
+		you.SetInter(IT_DECO_MONSTER_FIND);
+	}
 	first_contact = false;
 }
 void monster::TurnSave()
@@ -1446,8 +1449,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	if (player_joon_punch_)
 	{
-		//죠온 데미지 부스트 1.3~1.9배 (신앙심비례)
-		float multi_= rand_float(1.3f, 1.3f + 0.1f*pietyLevel(you.piety));
+		//죠온 데미지 부스트 1.3~1.6배 (신앙심비례)
+		float multi_= rand_float(1.3f, 1.3f + 0.05f*pietyLevel(you.piety));
 		a.damage *= multi_;
 		a.max_damage *= multi_;
 	}
@@ -1491,7 +1494,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	name_infor name_;
 	if(a.order)
 		name_ = (*a.order->GetName());
-	int percent_ = min(100,max(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
+	int percent_ = min<int>(100,max<int>(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
 
 
 
@@ -1924,7 +1927,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				return 0;
 			if(you.s_timestep)
 				return 0;
-			if(isUserAlly())
+			if(isUserAlly() || isCompleteNeutral())
 				return 0;
 			if(flag & M_FLAG_NO_ATK)
 				return 1;
@@ -2461,11 +2464,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
 	{
-		if (reason_ == PRT_PLAYER && s_fear != -1) //플레이어가 죽였다.
+		if (reason_ == PRT_PLAYER && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //플레이어가 죽였다.
 		{
 			you.GetExp(exper);
 		}
-		else if (reason_ == PRT_ALLY && s_fear != -1) //동맹이 죽였다.
+		else if (reason_ == PRT_ALLY && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //동맹이 죽였다.
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}

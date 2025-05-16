@@ -15,6 +15,8 @@
 #include "projectile.h"
 #include "god.h"
 #include "dump.h"
+#include <algorithm>
+using namespace std;
 extern HANDLE mutx;
 
 
@@ -895,7 +897,7 @@ int SkillDiffer_simple(int differ, skill_type s1, skill_type s2, skill_type s3)
 	if(num)
 		success_/=num;
 	
-	success_ = max(0,(success_-differ<=14)?(success_-differ)*(2*14+(success_-differ-1)*-1.07)/2:99);
+	success_ = max<float>(0,(success_-differ<=14)?(success_-differ)*(2*14+(success_-differ-1)*-1.07)/2:99);
 	return success_;
 }
 

@@ -512,7 +512,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL), true, false, false, CL_magic);
 			float bonus_ = 1.0f - (1.0f * level_ / 27);
-			int hp_ = min(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
+			int hp_ = min<int>(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
 			you.HpUpDown(-hp_, DR_EFFECT);
 			you.PowUpDown(-50, true);
 			you.SetEvokeGhost(-1);

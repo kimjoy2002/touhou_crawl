@@ -78,8 +78,8 @@ float getAmuletCharge(amulet_type kind)
 	case AMT_PERFECT:
 		return 3.0f;
 	case AMT_OCCULT:
-		return 1.5f;
 	case AMT_BLOSSOM:
+		return 1.5f;
 	case AMT_FAITH:
 	case AMT_SPIRIT:
 	case AMT_GRAZE:

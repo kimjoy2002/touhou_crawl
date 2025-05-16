@@ -29,6 +29,7 @@ add_compile_options(/utf-8 /wd4819 /FS)
 if (MSVC)
     add_definitions(-D_HAS_STD_BYTE=0)
 endif()
+add_definitions(-DNOMINMAX)
 
 
 

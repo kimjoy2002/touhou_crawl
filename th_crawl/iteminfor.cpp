@@ -709,7 +709,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 			temp.str("");
 			temp.clear();
-			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f);
+			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max<float>((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f);
 			ss << temp.str();
 			if(PrintCharWidth(temp.str()) < 20)
 				ss << std::string(20-PrintCharWidth(temp.str()), ' ');

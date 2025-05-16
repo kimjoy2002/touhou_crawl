@@ -1646,7 +1646,7 @@ int players::GetSpellSuccess(int spell_)
 		}
 	}
 
-	success_ = max(0,(success_-differ_<=14)?(success_-differ_)*(2*14+(success_-differ_-1)*-1.07)/2:99);
+	success_ = max<int>(0,(success_-differ_<=14)?(success_-differ_)*(2*14+(success_-differ_-1)*-1.07)/2:99);
 	if(you.GetPunish(GT_BYAKUREN))
 		success_ = success_*95/100;
 	return success_;
@@ -2373,7 +2373,7 @@ bool players::GetExp(int exper_, bool speak_)
 	}
 	if(you.god == GT_LILLY)
 	{
-		exper_ = max(1,exper_*0.7f);
+		exper_ = max<int>(1,exper_*0.7f);
 		GetFairyExp(max(1,exper_/2));
 	} 
 

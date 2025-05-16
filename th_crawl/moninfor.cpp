@@ -187,15 +187,33 @@ void GetMonsterInfor(monster *it)
 	}
 
 
-	
+	bool enter_ = false;
 	if(it->flag & M_FLAG_SUMMON)
 	{
-		_infor_("\n\n");
+		if(!enter_) {
+			_infor_("\n");
+			enter_ = true;
+		}
+		_infor_("\n");
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED));
+		_infor_("\n");
+	}
+	if(it->flag & M_FLAG_COMPLETE_NETURALY)
+	{
+		if(!enter_) {
+			_infor_("\n");
+			enter_ = true;
+		}
+		_infor_("\n");
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_COMPLETE_NATURAL));
 		_infor_("\n");
 	}
 	if (it->dream)
 	{
+		if(!enter_) {
+			_infor_("\n");
+			enter_ = true;
+		}
 		_infor_("\n");
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN));
 		_infor_("\n");

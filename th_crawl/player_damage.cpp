@@ -211,7 +211,7 @@ int players::GetAtkDelay()
 	int delay_ = 6;
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
-		float real_delay_ = max((equipment[ET_WEAPON]->value8) , 
+		float real_delay_ = max<float>((equipment[ET_WEAPON]->value8) , 
 			(equipment[ET_WEAPON]->value7- GetSkillLevel(itemtoskill(equipment[ET_WEAPON]->type), true)/2.0f));
 
 		if (equipment[ET_SHIELD])

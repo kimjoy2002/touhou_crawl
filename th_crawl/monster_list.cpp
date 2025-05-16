@@ -736,7 +736,7 @@ const mon_infor mondata[] = {
 
 	{MON_SEIGA,17,6205,name_infor(MON_SEIGA),&img_mons_seiga,185,12,10,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR,1,1,12,'&' },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_NONE_STAIR | M_FLAG_CANT_NETURAL,1,1,12,'&' },
 
 	{ MON_CLOSE_DOOR, 1, 0, name_infor(MON_CLOSE_DOOR), &img_mons_close_door, 1, 10, 0,
 	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },

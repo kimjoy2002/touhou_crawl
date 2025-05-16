@@ -149,7 +149,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 				map->m_exit.y = map->size_y;
 				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 				if(!is_exist_named(MON_CLOWNPIECE)){
-					map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE,0,coord_def(0,1)));
+					map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE,M_FLAG_DECORATE,coord_def(0,1)));
 					set_exist_named(MON_CLOWNPIECE);
 				}
 				for(int i = 0; i<5 ; i++)
@@ -659,7 +659,7 @@ $$$...$$$";
 			hw_ = randA(1);
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
-			map->flag = FLAG_NO_ITEM;
+			map->flag = FLAG_NO_ITEM | FLAG_NO_MONSTER;
 			map->name = "EARLY_IRON_ITEMBOX";
 			return  "\
 .......\
@@ -734,9 +734,9 @@ $$$...$$$";
 
 			
 			int id_ = MON_RED_UFO;
-			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(-1,0)));
-			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(0,0)));
-			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_COMPLETE_NETURALY,coord_def(1,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_DECORATE,coord_def(-1,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_DECORATE,coord_def(0,0)));
+			map->monster_list.push_back(mapdummy_mon(id_,M_FLAG_DECORATE,coord_def(1,0)));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
 			map->name = "EARLY_UFO_BLINKER";
 			return  "\
@@ -856,7 +856,7 @@ $$$...$$$";
 				map->m_exit.y = map->size_y;
 				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 				if(!is_exist_named(MON_KOGASA)){
-					map->monster_list.push_back(mapdummy_mon(MON_KOGASA,0,coord_def(0,1)));
+					map->monster_list.push_back(mapdummy_mon(MON_KOGASA,M_FLAG_DECORATE,coord_def(0,1)));
 					set_exist_named(MON_KOGASA);
 				}
 				for(int i = 0; i<5 ; i++)
@@ -1556,13 +1556,13 @@ $$$$$$$";
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			if (randA(1))
 			{
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(-1, -1)));
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(0, 0)));
-				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_COMPLETE_NETURALY, coord_def(1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_DECORATE, coord_def(-1, -1)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_DECORATE, coord_def(0, 0)));
+				map->monster_list.push_back(mapdummy_mon(MON_VAMPIER_BAT, M_FLAG_DECORATE, coord_def(1, -1)));
 			}
 			else
 			{
-				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, M_FLAG_COMPLETE_NETURALY, coord_def(0, 0)));
+				map->monster_list.push_back(mapdummy_mon(MON_CHUPARCABRA, M_FLAG_DECORATE, coord_def(0, 0)));
 			}
 			map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->name = "SCARLET_PET_HOUSE";

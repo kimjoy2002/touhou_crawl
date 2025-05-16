@@ -65,7 +65,7 @@ int GetHazard()
 
 				
 				
-				danger_ = max(danger_,min_);
+				danger_ = max<float>(danger_,min_);
 
 				if(!you.isSightnonblocked(it->position))
 					danger_ = 1;

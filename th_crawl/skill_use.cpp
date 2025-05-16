@@ -2433,7 +2433,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM),true,false,false,CL_normal);
 
 			it->SetConfuse(rand_int(20+2*offset_,5),true);
-			it->hp = max(1,it->hp*rand_float(0.3f,0.7f));
+			it->hp = max<int>(1,it->hp*rand_float(0.3f,0.7f));
 			enter_++;
 			if(enter_==3)
 			{
@@ -2538,6 +2538,8 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				you.lilly_allys[i].cooldown = 0;
 				
 				hit_mon->flag |= M_FLAG_ALLY;
+				hit_mon->flag &= ~M_FLAG_COMPLETE_NETURALY;
+				hit_mon->s_neutrality = 0;
 				hit_mon->s_ally = -1;
 				hit_mon->state.SetState(MS_FOLLOW);
 
@@ -3509,11 +3511,11 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 	bool short_info =  option_mg.getWidth() < 1000;
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK), true, false, false, CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), short_info?false:true, false, false, CL_joon);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1), short_info?false:true, false, false, CL_joon,'a');
 		if(!short_info)
 			printlog("                   ", false, false, false, CL_joon);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2), true, false, false, CL_joon,'a');
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), short_info?false:true, false, false, CL_sion);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3), short_info?false:true, false, false, CL_sion,'b');
 		if(!short_info)
 			printlog("                   ", false, false, false, CL_sion);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4), true, false, false, CL_sion,'b');
@@ -3757,8 +3759,9 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 		}
 		if (you.god_value[GT_JOON_AND_SION][0] == 2) {
 			//빙의된 신이 시온일때는 죠온으로 바뀐다.
-			you.Ability(SKL_JOON_AND_SION_3, true, true);
-			you.Ability(SKL_JOON_AND_SION_2, true, false);
+			if(you.Ability(SKL_JOON_AND_SION_3, true, true)) {
+				you.Ability(SKL_JOON_AND_SION_2, true, false);
+			}
 			you.god_value[GT_JOON_AND_SION][0] = 1;
 		}
 		you.Ability(SKL_JOON_AND_SION_4, true, true);

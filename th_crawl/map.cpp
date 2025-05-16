@@ -373,7 +373,12 @@ void map_algorithms(int num)
 	}
 	else if (isSprint())
 	{
-		map_algorithms_sprint(num);
+		if (num == OKINA_LEVEL)
+		{
+			map_algorithms_okina(num, DG_FLOOR, DG_METAL_WALL);
+		} else {
+			map_algorithms_sprint(num);
+		}
 	}
 }
 

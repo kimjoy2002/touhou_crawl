@@ -372,6 +372,7 @@ void long_rest()
 			printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 			return;
 		case IT_MAP_FIND:
+		case IT_DECO_MONSTER_FIND:
 		//case IT_HUNGRY:
 		case IT_STAT:
 		case IT_POISON:
@@ -431,6 +432,7 @@ bool stack_move(bool auto_)
 			return false;
 		case IT_ITEM_PICKUP:
 		case IT_MAP_FIND:
+		case IT_DECO_MONSTER_FIND:
 		//case IT_HUNGRY:
 		case IT_STAT:
 		case IT_POISON:

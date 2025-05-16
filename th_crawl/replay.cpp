@@ -242,7 +242,8 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_, InputedKey& inputedk
 		{
 			auto_key = false;
 			init = false;
-			g_saveandexit = true;
+			game_over = true;
+			play = false;
 			return false;
 		}
 	}
@@ -250,7 +251,8 @@ bool replay_class::LoadReplayInput(DWORD *time_, int *key_, InputedKey& inputedk
 	{
 		auto_key = false;
 		init = false;
-		g_saveandexit = true;
+		game_over = true;
+		play = false;
 		return false;
 	}
 	return true;

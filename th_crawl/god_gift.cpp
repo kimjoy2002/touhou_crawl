@@ -56,7 +56,7 @@ int GetGodGiftTime(god_type god)
 	case GT_BYAKUREN:
 		return 40;
 	case GT_KANAKO:
-		return 40;
+		return 15;
 	case GT_MIMA:
 		return 30;
 	case GT_EIRIN:
@@ -173,12 +173,19 @@ bool GodGift(god_type god, int piety)
 		}
 		return false;
 	case GT_KANAKO:
-		if(pietyLevel(you.piety)>=5)
+	{
+		int temp =  randA(2);
+		if(temp > 0 && pietyLevel(you.piety)>=3) {
+			kanako_tanmac_gift(true);
+			return true;
+		}
+		if(temp == 0 && pietyLevel(you.piety)>=5)
 		{
 			kanako_gift(true);
 			return true;
 		}
 		return false;
+	}
 	case GT_MIMA:
 		return true;
 	case GT_EIRIN:
@@ -373,7 +380,22 @@ void satori_gift()
 }
 
 
+void kanako_tanmac_gift(bool speak_)
+{
+	item_infor t;
+	item* it = env[current_level].MakeItem(you.position,makeitem(ITM_THROW_TANMAC, 1, &t));
+	it->num = max(1, it->num/2);
 
+	if(speak_)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
+
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)),CL_help);
+
+		MoreWait();
+	}
+
+}
 void kanako_gift(bool speak_)
 {
 	

@@ -1426,6 +1426,15 @@ textures(&texture_item02, 62, 255),
 textures(&texture_item02, 63, 255),
 textures(&texture_item02, 64, 255) };
 
+
+textures img_item_spellcard_kind[] = { textures(&texture_item02, 65, 255),
+textures(&texture_item02, 66, 255),
+textures(&texture_item02, 67, 255),
+textures(&texture_item02, 68, 255),
+textures(&texture_item02, 69, 255),
+textures(&texture_item02, 70, 255),
+textures(&texture_item02, 71, 255)};
+
 textures img_item_scroll_kind[] = { textures(&texture_item02, 80, 255),
 textures(&texture_item02, 81, 255),
 textures(&texture_item02, 82, 255),

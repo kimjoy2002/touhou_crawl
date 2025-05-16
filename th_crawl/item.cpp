@@ -593,6 +593,11 @@ bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::Sp
 			}
 
 		}
+		else if(type == ITM_SPELL) {
+			if (iden_list.spellcard_list[value2].iden) {
+				img_item_spellcard_kind[min(SPC_V_MAX-1,max(0,value2))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
+			}
+		}
 		else if (type == ITM_SCROLL) {
 			if (iden_list.scroll_list[value1].iden == 3) {
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);

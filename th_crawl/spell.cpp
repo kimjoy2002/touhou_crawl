@@ -80,7 +80,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_VENOM_BOLT:
 	case SPL_LASER:
 	case SPL_SPARK:
-	case  SPL_FIRE_SPREAD:
+	case SPL_FIRE_SPREAD:
 	case SPL_THUNDER_BOLT:
 		return (S_FLAG_PENETRATE | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_HYPER_BEAM:
@@ -106,10 +106,12 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_SUMMON_NAMAZ:
+	case SPL_SUMMON_GHOST:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;
 	case SPL_SUMMON_UNZAN_PUNCH:
 	case SPL_SUMMON_ANCHOR:
 	case SPL_KAGUYA_SPELL:
+	case SPL_GROW_VINE:
 		return (S_FLAG_SUMMON | S_FLAG_SMITE) & flag;
 	case SPL_FLAN_BUSIN:
 		return (S_FLAG_SUMMON | S_FLAG_IMMEDIATELY) & flag;
@@ -121,11 +123,16 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SELF_INJURY:
 	case SPL_ANIMAL_CHANGE:
 	case SPL_STASIS:
+	case SPL_TRACKING:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;
 	case SPL_MIND_BENDING:
 		return (S_FLAG_DEBUF | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_SMOKING:
+		return (S_FLAG_DEBUF | S_FLAG_SMITE | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_INSANE:
 		return (S_FLAG_DEBUF) & flag;
+	case SPL_MEGATON_KICK:
+		return ((S_FLAG_DELAYED) & flag);
 	case SPL_MUTE:		
 	case SPL_CHARM:
 		return (S_FLAG_NO_COM | S_FLAG_DEBUF | S_FLAG_SPEAK) & flag;		
@@ -147,7 +154,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SLEEP_SMITE:
 	case SPL_TARGET_ELEC:
 	case SPL_REIMU_BARRIER:
-		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);	
+		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
+	case SPL_WINDFLAW:
+		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_DELAYED) & flag);	
 	case SPL_MERMAID_SONG:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
 	case SPL_BURST:
@@ -172,6 +181,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SCHEMA_TANMAC:
 	case SPL_AIR_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_THROW_OIL:
+		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CANNON:
 	case SPL_NESY_CANNON:
 	case SPL_THROW_DISH:
@@ -205,6 +216,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_PHILOSOPHERS_STONE:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_HASTE_ALL:
+	case SPL_DISCORD:
 		return ((S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
 	case SPL_HEAL_ALL:
 		return ((S_FLAG_HEAL | S_FLAG_OTHER_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag);
@@ -223,11 +235,16 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_PRISM_CALL:
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
-	case SPL_MESS_CONFUSION: 
-		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
+	case SPL_MESS_CONFUSION:
+		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
+	case SPL_HEAVENLY_STORM:
+	case SPL_SPEAKER_PHONE:
+		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_DELAYED) & flag;	
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
 	case SPL_KOKORO_CHANGE:
+	case SPL_CREATE_FOG:
+	case SPL_CLOSE_DOOR:
 		return (S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
 	case SPL_FIRE_BRAND:
@@ -289,6 +306,7 @@ int SpellLength(spell_list skill)
 	case SPL_THROW_KNIFE:	
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
+	case SPL_TRACKING:
 		return 7;
 	case SPL_FLAME:	
 	case SPL_STING:
@@ -331,12 +349,19 @@ int SpellLength(spell_list skill)
 	case SPL_THUNDER:
 	case SPL_AFTERLITE:
 	case SPL_PSYCHOKINESIS:
+	case SPL_WINDFLAW:
+	case SPL_THROW_OIL:
+	case SPL_GROW_VINE:
+	case SPL_SUMMON_GHOST:
 		return 5;
+	case SPL_SMOKING:
+		return 4;
 	case SPL_BURN:
 	case SPL_FREEZE:
 		return 2;
 	case SPL_FROZEN:
 	case SPL_THROW_PLAYER:
+	case SPL_MEGATON_KICK:
 		return 1;
 	case SPL_SUMMON_BUG:
 	case SPL_SELF_HEAL:
@@ -401,6 +426,11 @@ int SpellLength(spell_list skill)
 	case SPL_MESS_CONFUSION:
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_REIMU_BARRIER:
+	case SPL_HEAVENLY_STORM:
+	case SPL_DISCORD:
+	case SPL_CREATE_FOG:
+	case SPL_CLOSE_DOOR:
+	case SPL_SPEAKER_PHONE:
 	default:
 		return 0;		
 	}
@@ -712,6 +742,30 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_REIMU_BARRIER);
 	case SPL_TOUGUE:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_TOUGUE);
+	case SPL_WINDFLAW:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_WINDFLAW);
+	case SPL_SUMMON_GHOST:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_SUMMON_GHOST);
+	case SPL_MEGATON_KICK:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_MEGATON_KICK);
+	case SPL_THROW_OIL:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_OIL);
+	case SPL_HEAVENLY_STORM:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_HEAVENLY_STORM);
+	case SPL_TRACKING:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_TRACKING);
+	case SPL_DISCORD:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_DISCORD);
+	case SPL_SMOKING:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_SMOKING);
+	case SPL_CREATE_FOG:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_CREATE_FOG);
+	case SPL_GROW_VINE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_GROW_VINE);
+	case SPL_CLOSE_DOOR:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_CLOSE_DOOR);
+	case SPL_SPEAKER_PHONE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_SPEAKER_PHONE);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -753,6 +807,7 @@ int SpellLevel(spell_list skill)
 	case SPL_STONE_ARROW: 
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_DRAW_POWER:
+	case SPL_SPEAKER_PHONE:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -770,6 +825,7 @@ int SpellLevel(spell_list skill)
 	case SPL_MERMAID_SONG:
 	case SPL_PRISM_CALL:
 	case SPL_TARGET_ELEC:
+	case SPL_GROW_VINE:
 		return 3;
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -791,6 +847,9 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_KNIFE:
 	case SPL_WARP_KICK:
 	case SPL_TOUGUE:
+	case SPL_WINDFLAW:
+	case SPL_CREATE_FOG:
+	case SPL_CLOSE_DOOR:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -813,6 +872,7 @@ int SpellLevel(spell_list skill)
 	case SPL_PSYCHOKINESIS:
 	case SPL_SUMMON_TRASH:
 	case SPL_THROW_AMULET:
+	case SPL_TRACKING:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -838,6 +898,9 @@ int SpellLevel(spell_list skill)
 	case SPL_THUNDER_BOLT:
 	case SPL_MESS_CONFUSION:
 	case SPL_THROW_SWORD:
+	case SPL_SUMMON_GHOST:
+	case SPL_DISCORD:
+	case SPL_SMOKING:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -854,6 +917,7 @@ int SpellLevel(spell_list skill)
 	case SPL_REAPER_MET:
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_THROW_PLAYER:
+	case SPL_THROW_OIL:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
@@ -868,6 +932,8 @@ int SpellLevel(spell_list skill)
 	case SPL_DREAM_CALL:
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
+	case SPL_HEAVENLY_STORM:
+	case SPL_MEGATON_KICK:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -955,6 +1021,8 @@ int SpellNoise(spell_list skill)
 	case SPL_THROW_KNIFE:
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
+	case SPL_SMOKING:
+	case SPL_GROW_VINE:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1014,6 +1082,11 @@ int SpellNoise(spell_list skill)
 	case SPL_DREAM_CALL:
 	case SPL_THROW_PLAYER:
 	case SPL_TOUGUE:
+	case SPL_WINDFLAW:
+	case SPL_SUMMON_GHOST:
+	case SPL_TRACKING:
+	case SPL_DISCORD:
+	case SPL_CLOSE_DOOR:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1035,6 +1108,9 @@ int SpellNoise(spell_list skill)
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
+	case SPL_MEGATON_KICK:
+	case SPL_THROW_OIL:
+	case SPL_CREATE_FOG:
 		return 12; //상당한 소음 시야밖까지 영향
 	case SPL_KYOKO_SMITE:
 	case SPL_SPARK:
@@ -1042,6 +1118,8 @@ int SpellNoise(spell_list skill)
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
 	case SPL_REIMU_BARRIER:
+	case SPL_HEAVENLY_STORM:
+	case SPL_SPEAKER_PHONE:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1387,6 +1465,30 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_TOUGUE:
 		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_WINDFLAW:
+		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_SUMMON_GHOST:
+		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_MEGATON_KICK:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_OIL:
+		return num == 0 ? (SKT_FIRE) : num == 1 ? (SKT_ALCHEMY) : (SKT_CONJURE);
+	case SPL_HEAVENLY_STORM:
+		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_TRACKING:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_DISCORD:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_SMOKING:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_CREATE_FOG:
+		return num == 0 ? (SKT_AIR) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_GROW_VINE:
+		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_CLOSE_DOOR:
+		return num == 0 ? (SKT_EARTH) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_SPEAKER_PHONE:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1548,6 +1650,18 @@ int SpellCap(spell_list skill)
 	case SPL_WARP_KICK:
 	case SPL_REIMU_BARRIER:
 	case SPL_TOUGUE:
+	case SPL_WINDFLAW:
+	case SPL_SUMMON_GHOST:
+	case SPL_MEGATON_KICK:
+	case SPL_THROW_OIL:
+	case SPL_HEAVENLY_STORM:
+	case SPL_TRACKING:
+	case SPL_DISCORD:
+	case SPL_SMOKING:
+	case SPL_CREATE_FOG:
+	case SPL_GROW_VINE:
+	case SPL_CLOSE_DOOR:
+	case SPL_SPEAKER_PHONE:
 		return 200;
 	default:
 	case SPL_BLINK:

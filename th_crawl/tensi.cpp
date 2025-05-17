@@ -307,7 +307,7 @@ void tensi_summon(int good_)
 		{
 			if(summon_check(coord_def(rit->x,rit->y), you.position, false, false))
 			{
-				int flag_=M_FLAG_SUMMON;
+				uint64_t flag_=M_FLAG_SUMMON;
 				if(good_>0)
 					flag_ |= M_FLAG_ALLY;
 				int id_ = summon_vector[randA(summon_vector.size()-1)] ;
@@ -330,7 +330,7 @@ void tensi_kaname(int good_)
 	soundmanager.playSound("summon");
 	for (int i = rand_int(1 + 2 * abs(good_), 1 + 3 * abs(good_));  i> 0; i--)
 	{
-		int flag_ = M_FLAG_SUMMON;
+		uint64_t flag_ = M_FLAG_SUMMON;
 		if (good_>0)
 			flag_ |= M_FLAG_ALLY;
 		int id_ = MON_KANAME;

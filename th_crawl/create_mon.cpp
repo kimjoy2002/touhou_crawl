@@ -336,6 +336,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	//{  17,  9,  14,  15,  3}, //요시카
 	{  18,  9,  14,  15,  3}, //세키반키
 	{  20,  9,  14,  15,  3}, //카게로
+	{ 69,  9,  14,  15,  3}, //쿠타카
 	{  21,  9,  14,  10,  3}, //파르시
 	{  22,  9,  14,  20,  3}, //츠쿠모
 	{  31,  9,  14,  25,  3}, //코이시
@@ -362,6 +363,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
 	//{  13,  YOUKAI_MOUNTAIN_LEVEL+4,  YOUKAI_MOUNTAIN_LEVEL+4,  100,  5}, //아야(현재버젼에선 벌트로 등장)
 	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
+	{ 69,  YOUKAI_MOUNTAIN_LEVEL,   YOUKAI_MOUNTAIN_LEVEL + 3,  10,  3}, //쿠타카
 	//{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리(현재버젼에선 벌트로 등장)
 
 
@@ -370,6 +372,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
+	{ 69,  SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  10,  3}, //쿠타카
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
 	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  50,  4}, //사쿠야
 	//{  29,  SCARLET_LEVEL+4,  SCARLET_LEVEL+4,  60,  5}, //레밀리아 아마 벌트 고정
@@ -398,6 +401,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 56,  DEPTH_LEVEL+ 2,  DEPTH_LAST_LEVEL,  15,  3 }, //요우무
 	{ 58,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //코마치
 	{ 59,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //스미레코
+	{ 72,  DEPTH_LEVEL + 3, DEPTH_LAST_LEVEL, 10,  28 }, //사키
 	
 	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
@@ -405,9 +409,11 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
 	{ 54,  SUBTERRANEAN_LEVEL + 2, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //무라사
 	{ 58,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //코마치
+	{ 72,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 25,  28 }, //사키
 
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
 	{ 59,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  20,  3 }, //스미레코
+	{ 72,  HAKUREI_LEVEL+ 1,  HAKUREI_LAST_LEVEL-1, 10,  3 }, //사키
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -2133,6 +2139,14 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_KUTAKA:
+		mon->wind_resist=1;
+		break;
+	case MON_SAKI:
+		mon->fire_resist=2;
+		mon->ice_resist=2;
+		mon->poison_resist=1;
 		break;
 	}
 }

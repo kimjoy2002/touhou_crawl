@@ -198,6 +198,8 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 		return false;
 	if(SpellFlagCheck(skill, S_FLAG_HEAL) && !SpellFlagCheck(skill, S_FLAG_OTHER_BUF) && order->hp >= order->max_hp)
 		return false;
+	if(SpellFlagCheck(skill, S_FLAG_DELAYED) && order->s_exhausted)
+		return false;
 	if(!SpellAiCondition(skill, order))
 		return false;
 	
@@ -371,7 +373,7 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 	{
 		if(summon_check(coord_def(rit->x,rit->y), target, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
 		{
-			int flag_=M_FLAG_SUMMON;
+			uint64_t flag_=M_FLAG_SUMMON;
 			if(order)
 			{
 				if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
@@ -2787,7 +2789,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 				
 				if(!hit_mon->isplayer() && (order->isplayer() || order->isUserAlly()))
 				{
-					int flag_ = ((monster*)hit_mon)->flag;
+					uint64_t flag_ = ((monster*)hit_mon)->flag;
 					if(!(flag_ & M_FLAG_SUMMON))
 					{
 						you.GetExp(((monster*)hit_mon)->exper);
@@ -4712,6 +4714,146 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_windflaw(int pow, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+
+	if (target_unit)
+	{
+		if (!target_unit->isplayer()) {
+			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
+				return false; //이동불가인 적엔 사용 불가
+			}
+		} 
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("wind");
+		}
+		target_unit->Blink(10);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_WINDFLAW,true,false,false,CL_normal,
+			 PlaceHolderHelper(target_unit->GetName()->getName()));
+		int damage_ = 7+pow/6;
+		attack_infor temp_att(randC(2,damage_), 2*damage_, 99, order, order->GetParentType(), ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_WIND));
+		target_unit->damage(temp_att, true);
+		order->SetExhausted(rand_int(10,15));
+		return true;
+	}
+	return false;
+}
+
+bool skill_summon_ghost(int pow, bool short_, unit* order, coord_def target)
+{
+	bool return_=false;
+	
+	int i = rand_int(3,4); 
+	for(; i>0 ; i--)
+	{
+		if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(8,15)+pow/20, true, false, 3, order, target, SKD_SUMMON_GHOST, GetSummonMaxNumber(SPL_SUMMON_GHOST)))
+		{
+			mon_->LevelUpdown(pow/12,3.0f,1.5f);
+			mon_->image = &img_mons_ghost[randA(2)];
+			return_ = true;
+		}
+	} 
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("summon");
+		}
+	}
+	return return_;
+}
+
+bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
+{
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{
+		int damage_ = 22+pow/14;
+		attack_infor temp_att(randC(4,damage_),4*(damage_),20+pow/10,order,order->GetParentType(),ATT_HOOF,name_infor(LOC_SYSTEM_ATT_HOOF));
+		bool hit_ = target_unit->damage(temp_att, true);
+		if(hit_) {
+			if (env[current_level].isInSight(order->position) || env[current_level].isInSight(target)) {
+				soundmanager.playSound("shoot_heavy");
+			}
+			beam_iterator beam(order->position, order->position);
+			if (CheckThrowPath(order->position, target, beam))
+			{
+				int knockback = 2;
+				int real_knock_ = 0;
+				while(knockback)
+				{
+					if(env[current_level].isMove(coord_def(beam->x,beam->y),target_unit->isFly(),target_unit->isSwim(),false))
+					{
+						if(!env[current_level].isMonsterPos(beam->x,beam->y))
+						{
+							target_unit->SetXY(coord_def(beam->x,beam->y));
+							real_knock_++;
+						}
+					}
+					else
+						break;
+					beam++;
+					knockback--;
+				}
+				if(real_knock_)
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_KICK_KNOCKBACK,true,false,false,CL_normal,
+						PlaceHolderHelper(target_unit->GetName()->getName()));
+				}
+			}
+		}
+		order->PlusTimeDelay(-2*order->GetWalkDelay());
+		order->SetExhausted(rand_int(8,12));
+		return true;
+	}
+	return false;
+}
+
+bool skill_throw_oil(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_discord(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_close_door(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -4904,6 +5046,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_YAMABUSH_TENGU:
 		list->push_back(spell(SPL_HASTE, 25));
+		list->push_back(spell(SPL_WINDFLAW, 35));
 		list->push_back(spell(SPL_AIR_STRIKE, 25));
 		list->push_back(spell(SPL_SELF_HEAL, 10));
 		break;
@@ -5103,7 +5246,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_SLOW, 10));
 		list->push_back(spell(SPL_STASIS, 15));
 		list->push_back(spell(SPL_TELEPORT_SELF, 10));
-		list->push_back(spell(SPL_THROW_KNIFE, 35));
+		list->push_back(spell(SPL_THROW_KNIFE, 40));
 		list->push_back(spell(SPL_BLINK, 20));
 		{
 			item_infor t;
@@ -5453,8 +5596,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	}
 	case MON_SUMIREKO:
-		list->push_back(spell(SPL_SUMMON_TRASH, 30));
-		list->push_back(spell(SPL_TRASH_RUSH, 20));
+		list->push_back(spell(SPL_SUMMON_TRASH, 35));
+		list->push_back(spell(SPL_TRASH_RUSH, 25));
 		list->push_back(spell(SPL_PSYCHOKINESIS, 20));
 		list->push_back(spell(SPL_BLINK, 30));
 		break;
@@ -5471,9 +5614,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_THUNDER_BOLT, 40));
 		break;
 	case MON_IKU:
-		list->push_back(spell(SPL_THUNDER, 20));
-		list->push_back(spell(SPL_THUNDER_BOLT, 25));
-		list->push_back(spell(SPL_SUMMON_ELEC_BALL, 10));
+		list->push_back(spell(SPL_THUNDER, 25));
+		list->push_back(spell(SPL_THUNDER_BOLT, 30));
+		list->push_back(spell(SPL_SUMMON_ELEC_BALL, 20));
 		break;
 	case MON_NEMUNO:
 	{
@@ -5570,6 +5713,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_KAGUYA_QUIZ_4:
 		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 15));
+		break;
+	case MON_KUTAKA:
+		list->push_back(spell(SPL_SUMMON_GHOST, 35));
+		list->push_back(spell(SPL_SMITE, 20));
+		list->push_back(spell(SPL_BLINK, 15));
+		break;
+	case MON_SAKI:
+		list->push_back(spell(SPL_MEGATON_KICK, 30));
 		break;
 	default:
 		break;
@@ -5907,6 +6058,30 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_reimu_barrier(power, short_, order, target);
 	case SPL_TOUGUE:
 		return skill_tougue(power, short_, order, target);
+	case SPL_WINDFLAW:
+		return skill_windflaw(power, short_, order, target);
+	case SPL_SUMMON_GHOST:
+		return skill_summon_ghost(power, short_, order, target);
+	case SPL_MEGATON_KICK:
+		return skill_megaton_kick(power, short_, order, target);
+	case SPL_THROW_OIL:
+		return skill_throw_oil(power, short_, order, target);
+	case SPL_HEAVENLY_STORM:
+		return skill_heavenly_storm(power, short_, order, target);
+	case SPL_TRACKING:
+		return skill_tracking(power, short_, order, target);
+	case SPL_DISCORD:
+		return skill_discord(power, short_, order, target);
+	case SPL_SMOKING:
+		return skill_smoking(power, short_, order, target);
+	case SPL_CREATE_FOG:
+		return skill_create_fog(power, short_, order, target);
+	case SPL_GROW_VINE:
+		return skill_grow_vine(power, short_, order, target);
+	case SPL_CLOSE_DOOR:
+		return skill_close_door(power, short_, order, target);
+	case SPL_SPEAKER_PHONE:
+		return skill_speaker_phone(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -6397,6 +6572,30 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_reimu_barrier(power, short_, &you, target);
 	case SPL_TOUGUE:
 		return skill_tougue(power, short_, &you, target);
+	case SPL_WINDFLAW:
+		return skill_windflaw(power, short_, &you, target);
+	case SPL_SUMMON_GHOST:
+		return skill_summon_ghost(power, short_, &you, target);
+	case SPL_MEGATON_KICK:
+		return skill_megaton_kick(power, short_, &you, target);
+	case SPL_THROW_OIL:
+		return skill_throw_oil(power, short_, &you, target);
+	case SPL_HEAVENLY_STORM:
+		return skill_heavenly_storm(power, short_, &you, target);
+	case SPL_TRACKING:
+		return skill_tracking(power, short_, &you, target);
+	case SPL_DISCORD:
+		return skill_discord(power, short_, &you, target);
+	case SPL_SMOKING:
+		return skill_smoking(power, short_, &you, target);
+	case SPL_CREATE_FOG:
+		return skill_create_fog(power, short_, &you, target);
+	case SPL_GROW_VINE:
+		return skill_grow_vine(power, short_, &you, target);
+	case SPL_CLOSE_DOOR:
+		return skill_close_door(power, short_, &you, target);
+	case SPL_SPEAKER_PHONE:
+		return skill_speaker_phone(power, short_, &you, target);
 	default:
 		return false;
 	}

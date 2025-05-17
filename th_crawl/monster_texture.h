@@ -173,6 +173,24 @@ extern textures img_mons_curiosity;
 extern textures img_mons_desire_red;
 extern textures img_mons_desire_green;
 extern textures img_mons_desire_blue;
+extern textures img_mons_fog_fairy;
+extern textures img_mons_tsuchinoko;
+extern textures img_mons_vine;
+extern textures img_mons_security_fairy_maid;
+extern textures img_mons_big_slime;
+extern textures img_mons_small_slime;
+extern textures img_mons_new_yamabush_tengu;
+extern textures img_mons_new_hanataca_tengu;
+extern textures img_mons_haniwa;
+extern textures img_mons_horse_haniwa;
+extern textures img_mons_haniwa_spearman;
+extern textures img_mons_haniwa_archer;
+extern textures img_mons_haniwa_cavalry;
+extern textures img_mons_wolf_spirit;
+extern textures img_mons_eagle_spirit;
+extern textures img_mons_otter_spirit;
+
+extern textures img_mons_haniwa_equipments[];
 extern textures img_mons_stonetower[];
 
 
@@ -269,6 +287,7 @@ extern textures img_mons_yuma_drainform;
 extern textures img_mons_enoko;
 extern textures img_mons_chiyari;
 extern textures img_mons_sonbiten;
+extern textures img_mons_sonbiten_spintowin;
 extern textures img_mons_hisami;
 extern textures img_mons_tsukasa;
 extern textures img_mons_ubame;

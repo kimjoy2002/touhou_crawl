@@ -72,10 +72,10 @@ public:
 typedef struct mapdummy_mon
 {
 	int id;
-	int flag;
+	uint64_t flag;
 	coord_def pos;
 	mapdummy_mon():id(0),flag(0),pos(0,0){};
-	mapdummy_mon(int id_, int flag_, coord_def pos_):id(id_),flag(flag_),pos(pos_){};
+	mapdummy_mon(int id_, uint64_t flag_, coord_def pos_):id(id_),flag(flag_),pos(pos_){};
 }mapdummy_mon;
 
 

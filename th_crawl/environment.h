@@ -275,9 +275,9 @@ public:
 	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse);
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
-	monster* AddMonster(int id_, int flag_, coord_def position_, int time_ = 0);
+	monster* AddMonster(int id_, uint64_t flag_, coord_def position_, int time_ = 0);
 	monster* AddMonster(monster *mon_, coord_def position_, int time_ = 0);
-	monster* AddMonster_Summon(int id_, int flag_, coord_def position_, summon_info &info_ , int time_);
+	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_);
 	void SummonClear(int map_id_);
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL);

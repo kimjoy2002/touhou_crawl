@@ -18,12 +18,14 @@
 #include "smoke.h"
 #include "floor.h"
 #include "note.h"
+#include "throw.h"
 #include "tensi.h"
 #include "map.h"
 #include "rect.h"
 #include "tribe.h"
 #include "rand_shuffle.h"
 #include "soundmanager.h"
+#include <set>
 
 
 
@@ -1001,6 +1003,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 			damage_ = 0;
 		break;
 	case ATT_AC_REDUCE_BLAST:
+	case ATT_HOOF:
 		damage_ -= randA(ac/2);
 		if(damage_<0)
 			damage_ = 0;
@@ -1190,6 +1193,13 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			if (a.order)
 			{
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMASH,false,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
+			break;
+		case ATT_HOOF:
+			if (a.order)
+			{
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_HOOF,false,false,false,CL_normal,
 					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
@@ -1838,7 +1848,44 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	}
 	return return_;
 }
-bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
+
+std::vector<coord_def> get_forward_5_tiles(coord_def my_pos, coord_def target_pos)
+{
+    int dx = target_pos.x - my_pos.x;
+    int dy = target_pos.y - my_pos.y;
+
+    // 방향 정규화
+    if(dx != 0) dx /= abs(dx);
+    if(dy != 0) dy /= abs(dy);
+
+    std::vector<coord_def> result;
+
+    // 기본 방향 포함
+    result.push_back(coord_def(my_pos.x + dx, my_pos.y + dy));
+
+    // 좌우로 흐른 대각선 (측면 접근)
+    if(dx != 0 && dy != 0) {
+        result.push_back(coord_def(my_pos.x + dx, my_pos.y));     // 수평
+        result.push_back(coord_def(my_pos.x, my_pos.y + dy));     // 수직
+        result.push_back(coord_def(my_pos.x + dx, my_pos.y + dy));  // 정 대각선
+        result.push_back(coord_def(my_pos.x - dx, my_pos.y + dy));  // 대각 반대쪽
+    } else if(dx == 0) { // 수직 진행
+        result.push_back(coord_def(my_pos.x + 1, my_pos.y + dy));
+        result.push_back(coord_def(my_pos.x - 1, my_pos.y + dy));
+        result.push_back(coord_def(my_pos.x + 1, my_pos.y));
+        result.push_back(coord_def(my_pos.x - 1, my_pos.y));
+    } else if(dy == 0) { // 수평 진행
+        result.push_back(coord_def(my_pos.x + dx, my_pos.y + 1));
+        result.push_back(coord_def(my_pos.x + dx, my_pos.y - 1));
+        result.push_back(coord_def(my_pos.x, my_pos.y + 1));
+        result.push_back(coord_def(my_pos.x, my_pos.y - 1));
+    }
+
+    return result;
+}
+
+
+bool monster::smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& already_move)
 {
 	if(num_<=0)
 		return false;
@@ -1849,14 +1896,30 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 	{//공격상태이면서
 		if(target)
 		{//타겟이 정해져있고
-			if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))<=1)
-			{//타겟과 거리가 1칸미만일때
+			if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))<=1
+				|| (flag & M_FLAG_RANGE_ATTACK))
+			{//타겟과 거리가 1칸미만일때 + 내가 원거리 유닛일때
+				bool range_attack = false;
 				rand_rect_iterator new_pos_(target->position,1,1,true);
+				if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))>1 && (flag & M_FLAG_RANGE_ATTACK)) {
+					//원거리: 난 대신 옆으로 살짝 피해줘!
+					new_pos_ = rand_rect_iterator(position,1,1,true);
+					range_attack = true;
+				}
 
 				while(!new_pos_.end())
 				{
 					if(max(abs(position.x - new_pos_->x),abs(position.y -  new_pos_->y))<=1)
 					{//움직일수있는 위치
+						if(range_attack) {
+							auto set_ = get_forward_5_tiles(position, target->position, randA(1));
+							//멀어지는 거리로 가긴 싫어!
+							if(set_.find(*new_pos_) != set_.end()) {
+								new_pos_++;
+								continue;
+							}
+						}
+
 						if(env[current_level].isMove(new_pos_->x, new_pos_->y, isFly(), isSwim(),flag & M_FLAG_CANT_GROUND))
 						{ //이동할수있는 위치다.				
 							unit *unit_ = env[current_level].isMonsterPos(new_pos_->x, new_pos_->y);
@@ -1864,8 +1927,11 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 							{//비킬 수 있는 유닛인지
 								if(unit_ != this && !unit_->isplayer() && ((monster*)unit_)->isAllyMonster(this))
 								{
-									if(!((monster*)unit_)->smartmove(x_mov,y_mov, num_-1)){ //비키지 못함
-										
+									if(already_move.find(unit_->GetMapId()) != already_move.end()) {
+										new_pos_++;
+										continue;
+									}
+									if(!((monster*)unit_)->smartmove(x_mov,y_mov, num_-1, already_move)){ //비키지 못함
 										new_pos_++;
 										continue;
 									}
@@ -1879,6 +1945,7 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_)
 
 							//움직일 수 있으면 움직인다.
 							SetXY(coord_def(new_pos_->x,new_pos_->y));
+							already_move.insert(map_id);
 							PlusTimeDelay(-GetSpeed());
 							return true;
 						}
@@ -2002,7 +2069,9 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				{
 					if(!(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
 					{
-						if(!(*it).smartmove(x_mov, y_mov, 2))
+						set<int> already_move;
+						already_move.insert(map_id);
+						if(!(*it).smartmove(x_mov, y_mov, 2, already_move))
 						{
 							return 0;
 						}
@@ -2187,6 +2256,28 @@ int monster::atkmove(int is_sight, bool only_move)
 		}
 	}
 
+	bool range_attack = false;
+	if(flag & M_FLAG_RANGE_ATTACK) {
+		if (!only_move && !s_confuse && !s_fear && !s_lunatic && target && target->position == target_pos) {
+			list<spell>::iterator it = spell_lists.begin();
+			for(;it != spell_lists.end();it++)
+			{
+				spell_list id_ = (spell_list)(it->num);
+				if(isMonSafeSkill(id_,this,target_pos))
+				{
+					float gap = GetPositionGap(position.x, position.y, target_pos.x, target_pos.y);
+					if(randA(4) >= max<int>(0,gap-3)) {
+						//3 : 100
+						//4 : 80
+						//5 : 60
+						//6 : 20
+						//정도?
+						range_attack = true;
+					}
+				}
+			}
+		}
+	}
 	if (flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON)
 	{
 		if(sm_info.parent_map_id >= 0)
@@ -2219,7 +2310,7 @@ int monster::atkmove(int is_sight, bool only_move)
 			//}
 		}
 		coord_def c = target_pos-position;
-		if(!s_fear)
+		if(!s_fear && !range_attack)
 			move_ = MoveToPos(target_pos, only_move);
 		if(s_fear)
 		{

@@ -115,6 +115,8 @@ int GetSummonMaxNumber(spell_list skill)
 		return 1;
 	case SPL_KAGUYA_SPELL:
 		return 5;
+	case SPL_SUMMON_GHOST:
+		return 8;
 	default:
 		return -1;
 	}
@@ -171,6 +173,8 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_MASK;
 	case SPL_KAGUYA_SPELL:
 		return SKD_SUMMON_KAGUYA_SPELL;
+	case SPL_SUMMON_GHOST:
+		return SKD_SUMMON_GHOST;
 	default:
 		return SKD_OTHER;
 	}

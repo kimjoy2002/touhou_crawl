@@ -306,6 +306,8 @@ int d3d::EnterMsgLoop()
 					break;
 				if(msg.message == WM_KEYDOWN || (msg.message == WM_KEYUP && (msg.wParam == VK_SHIFT || msg.wParam == VK_CONTROL)))
 					g_keyQueue->push(msg);
+				if(msg.message == WM_KILLFOCUS)
+					g_keyQueue->push(msg);
 
 			    if(msg.message == WM_CHAR && g_ignoreWMCharCount == 0)
 			 		g_keyQueue->push(msg);

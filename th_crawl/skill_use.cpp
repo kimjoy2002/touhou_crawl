@@ -852,7 +852,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 			SetSpellSight(throw_length_, 1);
 			beam_iterator beam(you.position,you.position);
 			projectile_infor infor(throw_length_,false,false,SKL_YUUGI_3_THROW,true);
-			int temp_flag = mon_->flag;
+			uint64_t temp_flag = mon_->flag;
 			mon_->flag |= M_FLAG_PASSED_ENEMY;
 			auto it = you.item_list.end();
 			if(Common_Throw(it, you.GetTargetIter(), beam, &infor, throw_length_, 0.0f))
@@ -2251,6 +2251,9 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 		}
 	}
 
+	if(you.god != GT_NONE) {
+		abandon_god();
+	}
 
 	return true;
 }

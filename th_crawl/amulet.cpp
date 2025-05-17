@@ -319,7 +319,7 @@ bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def tar
 	{
 		if (summon_check(coord_def(drit->x, drit->y), order->position, false, true))
 		{
-			int flag_ = M_FLAG_SUMMON;
+			uint64_t flag_ = M_FLAG_SUMMON;
 			if (order->isplayer())
 				flag_ |= M_FLAG_ALLY;
 			int id_ = MON_NESI;

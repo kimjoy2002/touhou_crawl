@@ -194,9 +194,9 @@ bool Dump(int type, string *filename_)
 					break;
 				case ATT_SMASH:
 					if (you.dead_order->order) {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
-						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE, PlaceHolderHelper(CurrentLevelString()));
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_BLOOD:
@@ -235,6 +235,13 @@ bool Dump(int type, string *filename_)
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL, PlaceHolderHelper(CurrentLevelString()));
+					}
+					break;
+				case ATT_HOOF:
+					if (you.dead_order->order) {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
+					} else {
+						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF, PlaceHolderHelper(CurrentLevelString()));
 					}
 					break;
 				case ATT_VAMP:

@@ -26,7 +26,7 @@ struct mon_infor
 	int atk[3];
 	attack_type atk_type[3];
 	name_infor atk_name[3];
-	int flag;
+	uint64_t flag;
 	int resist;
 	int sense;
 	int speed;
@@ -66,7 +66,8 @@ enum monster_flag : uint64_t
 	M_FLAG_RESIST_BLIZARD = 1 << 27,
 	M_FLAG_COMPLETE_NETURALY = 1 << 28,  //때리기 전까진 완전 중립
 	M_FLAG_WAKE = 1<<29, //잠에서 깬 상태
-	M_FLAG_DECORATE = 1<<30 //장식품. (자동탐색을 건드리지않음)
+	M_FLAG_DECORATE = 1<<30, //장식품. (자동탐색을 건드리지않음)
+	M_FLAG_RANGE_ATTACK = 1ull << 31 //원거리 공격 위주로 싸움 (거리를 유지하려함)
 };
 
 

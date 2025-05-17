@@ -924,7 +924,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			PlaceHolderHelper(LOC_SYSTEM_SKILL_ARMOUR)) << "\n";		
 
 		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO2, 
-			PlaceHolderHelper(to_string((it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 15.0f)))),
+			PlaceHolderHelper(to_string((it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 22.0f)))),
 			PlaceHolderHelper(to_string(min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3))),
 			PlaceHolderHelper(LOC_SYSTEM_SKILL_ARMOUR),
 			PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_ARMOUR, true)))) << "\n\n";

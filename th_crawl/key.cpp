@@ -167,6 +167,10 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 				if(msg.wParam == VK_CONTROL)
 					ctrl_check = false;
 			}
+			else if(msg.message == WM_KILLFOCUS) {
+				shift_check = false;
+				ctrl_check = false;
+			}
 		} else {
 			return -1; //키보드 입력
 		}

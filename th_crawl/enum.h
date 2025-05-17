@@ -799,6 +799,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_VAMP,
 	ATT_LUNATIC,
 	ATT_SLEEP,
+	ATT_HOOF,
 	ATT_THROW_NORMAL, //여기부터 그레이즈가 됨
 	ATT_THROW_NONE_MASSAGE,
 	ATT_THROW_NONE_DAMAGE,

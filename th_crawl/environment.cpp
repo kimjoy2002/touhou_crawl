@@ -1029,7 +1029,7 @@ int environment::CloseDoor(int x_,int y_)
 	else
 		return 0;
 }
-monster* environment::AddMonster(int id_, int flag_, coord_def position_, int time_)
+monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	vector<monster>::iterator it;
@@ -1088,7 +1088,7 @@ monster* environment::AddMonster(monster *mon_, coord_def position_, int time_)
 	ReleaseMutex(mutx);
 	return nullptr;
 }
-monster* environment::AddMonster_Summon(int id_, int flag_, coord_def position_, summon_info &info_, int time_ = 0)
+monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_ = 0)
 {
 	monster* mon_ = AddMonster(id_, flag_, position_, time_);
 	if(mon_)

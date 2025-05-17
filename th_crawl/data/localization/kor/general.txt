@@ -1066,6 +1066,7 @@ LOC_SYSTEM_MAGIC_POISON_BRAND,{0:은|는} 독을 떨어뜨리기 시작했다.
 LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,{0:은|는} 더욱 독이 진해졌다.
 LOC_SYSTEM_MAGIC_RECALL,{0:은|는} 리콜되었다.
 LOC_SYSTEM_MAGIC_KNOCKBACK,{0:은|는} 튕겨져나갔다.
+LOC_SYSTEM_MAGIC_KICK_KNOCKBACK,{0:은|는} 발굽에 차여서 밀려났다.
 LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0:은|는} 최면에 걸린채로 움직였다.
 LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0:은|는} 이미 동물이기에 변신에 걸리지않는다.
 LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,{0:은|는} 동물로 변해버렸다.
@@ -1095,6 +1096,7 @@ LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_BLUE,{0:은|는} 슬픔의 가면을 착용했�
 LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_GREEN,{0:은|는} 기쁨의 가면을 착용했다.
 LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0:은|는} {1:을|를} 꿈으로 인도했다.
 LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0:은|는} {1}에게 순간적으로 이동하며 발차기를 날렸다.
+LOC_SYSTEM_MAGIC_WINDFLAW,{0:은|는} 강한 바람에 의해 튕겨져나갔다.
 LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
 LOC_SYSTEM_HIT_DREAM,{0:은|는} {1}의 꿈을 먹었다.
 LOC_SYSTEM_HIT_FIRE,{0}의 {1:은|는} {2}에게 명중하고 불타올랐다.
@@ -1103,6 +1105,7 @@ LOC_SYSTEM_HIT_ELEC,{0}의 {1:은|는} {2}에게 명중하고 감전되었다.
 LOC_SYSTEM_HIT_GERMAN_SUPLEX,{0}의 {1:은|는} {2}에게 들어갔다.
 LOC_SYSTEM_HIT_SMITE,무엇인가 {0:을|를} 강타했다.
 LOC_SYSTEM_HIT_SMASH,{0:은|는} 집어던져진후 바닥에 내팽겨쳐졌다.
+LOC_SYSTEM_HIT_HOOF,{0:은|는} 발굽에 차였다.
 LOC_SYSTEM_HIT_BLOOD,{0}의 피가 터져나왔다.
 LOC_SYSTEM_HIT_NOISE,굉음이 {0}의 달팽이관을 강타했다.
 LOC_SYSTEM_HIT_CLOUD_FIRE,{0:은|는} 화염에 휩싸였다.
@@ -1622,6 +1625,8 @@ LOC_SYSTEM_ATT_KNIFE,나이프
 LOC_SYSTEM_ATT_THROWING_ATLAS,천수력남 던지기
 LOC_SYSTEM_ATT_BILL,부적
 LOC_SYSTEM_ATT_DIMENSIONAL_RIFT,아공혈
+LOC_SYSTEM_ATT_WIND,강풍
+LOC_SYSTEM_ATT_HOOF,발굽
 LOC_SYSTEM_THAT,그것
 LOC_SYSTEM_SOMETHING,무언가
 LOC_SYSTEM_FIND_ONE,{0:을|를} 발견했다.
@@ -2306,6 +2311,18 @@ LOC_SYSTEM_SPL_THROW_AMULET,부적 던지기
 LOC_SYSTEM_SPL_WARP_KICK,아공혈
 LOC_SYSTEM_SPL_REIMU_BARRIER,봉마진
 LOC_SYSTEM_SPL_TOUGUE,혀로 당기기
+LOC_SYSTEM_SPL_WINDFLAW,돌풍
+LOC_SYSTEM_SPL_SUMMON_GHOST,유령 출몰
+LOC_SYSTEM_SPL_MEGATON_KICK,메가톤 킥
+LOC_SYSTEM_SPL_THROW_OIL,석유 분출
+LOC_SYSTEM_SPL_HEAVENLY_STORM,천풍
+LOC_SYSTEM_SPL_TRACKING,표식
+LOC_SYSTEM_SPL_DISCORD,이간질
+LOC_SYSTEM_SPL_SMOKING,스모킹 드래곤
+LOC_SYSTEM_SPL_CREATE_FOG,안개 생성
+LOC_SYSTEM_SPL_GROW_VINE,덩굴 소환
+LOC_SYSTEM_SPL_CLOSE_DOOR,문 잠그기
+LOC_SYSTEM_SPL_SPEAKER_PHONE,침입자 경보
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2459,7 +2476,19 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,요괴를 퇴치하는 부적을 던진다.
 LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,레이무가 틈새를 이용해서 적의 옆으로 순식간에 날라가서 차버린다.\n멀어져도 방심할 수 없는 이유중 하나. 생각보다 발차기가 아프다.\n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,레이무가 잠시 결계를 고정시켜서 상대를 도망가지 못하게 막는다.\n결계가 고정된 상태에서 결계 밖으로 나갈 수 없게된다. \n기본적으로 예방법은 없지만 지속시간이 짧으며 한번 사용하면 당분간은 사용할 수 없는 듯하다. \n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI,단, 유카리라면 이 주문을 잘 알고있어서 사전에 막아줄 수 있을듯하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_TOUGUE,혀를 내밀어 먼거리에 있는 눈앞으로 적을 당긴다.\n끈적끈적해서 기분이 나빠진다.
+LOC_SYSTEM_SPL_DESCRIBE_TOUGUE,혀를 내밀어 먼거리에 있는 눈앞으로 적을 당긴다.\n끈적끈적해서 기분이 나빠진다.\n
+LOC_SYSTEM_SPL_DESCRIBE_WINDFLAW,텐구의 힘으로 강한 바람을 일으켜서 물리 데미지를 준다.\n또한 강한 바람을 통해 상대를 무작위 위치로 날려버린다.\n다만 강한 위력때문에 연달아 쓰지는 못한다고 한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_GHOST,유령들을 상대 근처에 소환하는 능력.\n유령들은 순식간에 상대방 주변에 직접 소환되어 퇴로를 막는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_MEGATON_KICK,아주 강력한 다리 힘을 이용하여 힘껏 찬다.\n이 엄청난 다리힘은 회피할 수 없으며 방어력의 절반을 쉽게 관통하여 몸의 내부에 큰 데미지를 입힌다.\n강력한 피해량을 지녔지만 뒤로 튕겨져나가고 시전자에게 잠깐의 경직을 주기에 그 틈에 도망칠 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL,석유를 한 웅큼 퍼다가 상대에게 던지는 기술.\n석유를 뒤집어쓰면 화염 공격에 추가 데미지를 입을 수 있다.\n석유는 지저의 뜨거운 열기로 끓고있기때문에 화염저항으로 어느정도 피해를 줄일 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM,어느 신적인 동양 무술의 협회에서 전수 받았다는 궁극의 기술.\n그녀가 이 기술을 어떻게 배운진 모르겠지만 몸과 함께 봉을 회전시켜서 천상의 폭풍을 만들어낸다.\n일정시간 황금빛 구름에 휩싸이면서 주변의 모든 적에게 피해를 입힌다.\n다만 아직은 수련이 완벽하진않았는지 정상적인 컨트롤을 하지못하는 것 같다.\n
+LOC_SYSTEM_SPL_DESCRIBE_TRACKING,히사미의 절대로 놓치지않는 능력에 의해 표식을 부여받는다.\n이 표식이 찍힌 플레이어는 모든 맵의 몬스터에게 자신의 위치를 들키게 된다.\n
+LOC_SYSTEM_SPL_DESCRIBE_DISCORD,츠카사의 감언이설로 주변의 몬스터들을 꼬드긴다.\n이 효과를 받은 몬스터들은 랜덤한 버프를 얻거나 심지어 아군이었던 몬스터도 적대적이 될 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_SMOKING,야마조로인 산뇨의 담배에서 나오는 연기를 상대에게 뿜는다.\n이 담배 연기를 맡게되면 정신을 조작하는 산뇨에 의해 랜덤한 디버프를 받게된다.\n산뇨는 이 능력을 이용해서 도박장에서 날뛰는 요괴들을 진정시킨다고 한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_CREATE_FOG,일정시간 주변의 날씨를 안개로 바꿔서 시야를 극단적으로 줄인다.\n안개의 호수의 요정들은 안개에 익숙하기에 안개에서도 멀쩡하게 타겟을 공격할 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_GROW_VINE,적의 주변에 빠른 속도로 덩쿨을 자라게한다.\n이 덩쿨은 주변의 적을 묶어서 이동 속도를 늦춘다.\n
+LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,홍마관의 비상 방범시스템을 작동시켜서 시야 내의 모든 문을 닫는다.\n계단에도 방범시스템이 설치되어있기에 계단에서도 문이 닫히며, 위에 유닛이 있다면 비켜낼 수 밌다.\n이렇게 닫힌 문은 피해를 줘서 강제로 파괴할 수 도 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,큰 확성기를 이용해 아군에게 경보를 울린다.\n내부 홍마관 경비시스템에 연동되어있어서 아주 먼거리에 있는 일부 그룹이 듣고 찾아오게 된다.\n다만 단순히 경보를 울리는것이기때문에 어디까지나 걸어서 오기때문에 그 전에 도망칠 수 있다.\n소문에 의하면 같은 층의 메이드장은 마치 순간이동을 한 것마냥 찾아온다고 한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n
@@ -4595,6 +4624,8 @@ LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,{0}에서 순화한 영력이 전부 소모
 LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,{0}에서 순호에 의해 사예가 순화되어 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,{0}에서 행복한 꿈을 꾸다 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,{0}에서 {1}에 의해 행복한 꿈을 꾸다 죽었다.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF,{0}에서 밟혀 죽었다.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY,{0}에서 {1}에게 밟혀 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_GHOST,{0}에서 오쿠리쵸친에 생명력이 빨려 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,{0}에서 부작용에 의해 죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_WIN,음양옥과 {0}개의 룬을 들고 탈출하는데 성공했다.
@@ -4624,7 +4655,7 @@ LOC_SYSTEM_DEBUG_CREATE_WEATHER,어느 날씨를 발현할건가?
 LOC_SYSTEM_DEBUG_CREATE_ALTAR,어떤 신전을 만들까?
 LOC_SYSTEM_DEBUG_CREATE_MONSTER,몬스터만들기
 LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER,몬스터 생성을 취소
-LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} 클리어, 레벨: {1} (경험치양: {1})
+LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} 클리어, 레벨: {1} (경험치양: {2})
 LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE,계속해?
 LOC_SYSTEM_DEBUG_CLEVER,디버그) {0} 마법 강화
 LOC_SYSTEM_DEBUG_CURRENT_POSITION,현재좌표 <{0},{1}>

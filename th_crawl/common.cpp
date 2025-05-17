@@ -351,6 +351,42 @@ float GetPositionGap(float start_x, float start_y, float target_x, float target_
 	return sqrt((target_x - start_x)*(target_x - start_x)+ (target_y - start_y)*(target_y - start_y));
 
 }
+std::set<coord_def> get_forward_5_tiles(coord_def my_pos, coord_def target_pos, bool main_line)
+{
+    int dx = target_pos.x - my_pos.x;
+    int dy = target_pos.y - my_pos.y;
+
+    // 방향 정규화
+    if(dx != 0) dx /= abs(dx);
+    if(dy != 0) dy /= abs(dy);
+
+    std::set<coord_def> result;
+
+    // 기본 방향 포함
+	if(main_line)
+	    result.insert(coord_def(my_pos.x + dx, my_pos.y + dy));
+
+    // 좌우로 흐른 대각선 (측면 접근)
+    if(dx != 0 && dy != 0) {
+        result.insert(coord_def(my_pos.x + dx, my_pos.y));     // 수평
+        result.insert(coord_def(my_pos.x, my_pos.y + dy));     // 수직
+        result.insert(coord_def(my_pos.x + dx, my_pos.y + dy));  // 정 대각선
+        result.insert(coord_def(my_pos.x - dx, my_pos.y + dy));  // 대각 반대쪽
+    } else if(dx == 0) { // 수직 진행
+        result.insert(coord_def(my_pos.x + 1, my_pos.y + dy));
+        result.insert(coord_def(my_pos.x - 1, my_pos.y + dy));
+        result.insert(coord_def(my_pos.x + 1, my_pos.y));
+        result.insert(coord_def(my_pos.x - 1, my_pos.y));
+    } else if(dy == 0) { // 수평 진행
+        result.insert(coord_def(my_pos.x + dx, my_pos.y + 1));
+        result.insert(coord_def(my_pos.x + dx, my_pos.y - 1));
+        result.insert(coord_def(my_pos.x, my_pos.y + 1));
+        result.insert(coord_def(my_pos.x, my_pos.y - 1));
+    }
+
+    return result;
+}
+
 
 float GetMaxX()
 {

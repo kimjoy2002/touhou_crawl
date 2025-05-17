@@ -479,6 +479,42 @@ string GetSpellInfor(spell_list spell)
 	case SPL_TOUGUE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TOUGUE);
 		break;
+	case SPL_WINDFLAW:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WINDFLAW);
+		break;
+	case SPL_SUMMON_GHOST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SUMMON_GHOST);
+		break;	
+	case SPL_MEGATON_KICK:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_MEGATON_KICK);
+		break;	
+	case SPL_THROW_OIL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL);
+		break;	
+	case SPL_HEAVENLY_STORM:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM);
+		break;	
+	case SPL_TRACKING:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TRACKING);
+		break;	
+	case SPL_DISCORD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DISCORD);
+		break;	
+	case SPL_SMOKING:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SMOKING);
+		break;	
+	case SPL_CREATE_FOG:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CREATE_FOG);
+		break;	
+	case SPL_GROW_VINE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_GROW_VINE);
+		break;	
+	case SPL_CLOSE_DOOR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR);
+		break;	
+	case SPL_SPEAKER_PHONE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE);
+		break;	
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

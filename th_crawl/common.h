@@ -14,6 +14,7 @@
 #include <list>
 #include <stack>
 #include <math.h>
+#include <set>
 #include <DirectXMath.h>
 #include <DirectXColors.h>
 using namespace std;
@@ -75,7 +76,7 @@ int GetDirecToChar(int pos_);
 int GetAngleToDirec(int angle);
 
 float GetPositionGap(float start_x, float start_y, float target_x, float target_y);
-
+std::set<coord_def> get_forward_5_tiles(coord_def my_pos, coord_def target_pos, bool main_line);
 float GetMaxX();
 
 float GetMaxY();

@@ -477,10 +477,17 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		}
 		break;		
 	case ATT_AC_REDUCE_BLAST:
+	case ATT_HOOF:
 		{
 			float percent_ = 1.0f;
+			int ac_dec=0;
 			for(int i = ac/2; i>0; i--)
 				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+			ac_dec = (ac/2+1)/3;
+			damage_ = (int)round(damage_*percent_) - randA(ac_dec);
+			//damage_ = randA_1((int)round(damage_*percent_)) - randA(ac_dec);
+			if(damage_<0)
+				damage_ = 0;
 		}
 		break;
 	case ATT_SUN_BLAST:
@@ -678,6 +685,13 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		if (a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SMASH,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		break;
+	case ATT_HOOF:
+		if (a.order)
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_HOOF,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;

@@ -993,12 +993,52 @@ textures img_mons_desire_red(&texture_monster01, 233, 255);
 textures img_mons_desire_green(&texture_monster01, 234, 255);
 textures img_mons_desire_blue(&texture_monster01, 235, 255);
 
+textures img_mons_fog_fairy(&texture_monster02, 20, 255);
+textures img_mons_tsuchinoko(&texture_monster02, 21, 255);
+textures img_mons_vine(&texture_monster02, 22, 255);
+textures img_mons_security_fairy_maid(&texture_monster02, 23, 255);
+textures img_mons_big_slime(&texture_monster02, 24, 255);
+textures img_mons_small_slime(&texture_monster02, 25, 255);
+textures img_mons_new_yamabush_tengu(&texture_monster02, 26, 255);
+textures img_mons_new_hanataca_tengu(&texture_monster02, 27, 255);
+textures img_mons_haniwa(&texture_monster02, 28, 255);
+textures img_mons_horse_haniwa(&texture_monster02, 36, 255);
+
+textures img_mons_haniwa_spearman(&texture_monster02, 43, 255);
+textures img_mons_haniwa_archer(&texture_monster02, 44, 255);
+textures img_mons_haniwa_cavalry(&texture_monster02, 45, 255);
+
+textures img_mons_wolf_spirit(&texture_monster02, 49, 255);
+textures img_mons_eagle_spirit(&texture_monster02, 50, 255);
+textures img_mons_otter_spirit(&texture_monster02, 51, 255);
+
+textures img_mons_haniwa_equipments[] =
+{
+	textures(&texture_monster02, 29, 255), //칼 (R)
+	textures(&texture_monster02, 30, 255), //방패 (L)
+	textures(&texture_monster02, 31, 255), //보조칼 (L)
+	textures(&texture_monster02, 32, 255), //지팡이 (R)
+	textures(&texture_monster02, 33, 255), //헬멧
+	textures(&texture_monster02, 34, 255), //활(LR)
+	textures(&texture_monster02, 35, 255), //창(LR)
+	textures(&texture_monster02, 46, 255), //응급상자(R)
+	textures(&texture_monster02, 48, 255), //황금방패(L)
+	textures(&texture_monster02, 37, 255), //칼 (R, 승마)
+	textures(&texture_monster02, 38, 255), //보조칼 (L, 승마)
+	textures(&texture_monster02, 39, 255), //지팡이 (R, 승마)
+	textures(&texture_monster02, 40, 255), //헬멧 (승마)
+	textures(&texture_monster02, 41, 255), //활 (LR, 승마)
+	textures(&texture_monster02, 42, 255), //창 (LR, 승마)
+	textures(&texture_monster02, 47, 255), //응급상자(R, 승마)
+};
 
 textures img_mons_stonetower[] =
 {
 	textures(&texture_monster01, 237, 255),
 	textures(&texture_monster01, 238, 255),
-	textures(&texture_monster01, 239, 255)
+	textures(&texture_monster01, 239, 255),
+	textures(&texture_monster02, 18, 255),
+	textures(&texture_monster02, 19, 255)
 };
 
 
@@ -1092,6 +1132,7 @@ textures img_mons_yuma_drainform(&texture_monster02, 6, 255);
 textures img_mons_enoko(&texture_monster02, 7, 255);
 textures img_mons_chiyari(&texture_monster02, 8, 255);
 textures img_mons_sonbiten(&texture_monster02, 9, 255);
+textures img_mons_sonbiten_spintowin(&texture_monster02, 52, 255);
 textures img_mons_hisami(&texture_monster02, 10, 255);
 textures img_mons_tsukasa(&texture_monster02, 11, 255);
 textures img_mons_ubame(&texture_monster02, 12, 255);
@@ -3400,6 +3441,44 @@ int texturetoint(textures* input)
 		return 526;
 	else if (input == &img_mons_sannyo)
 		return 527;
+	else if (input == &img_mons_stonetower[3])
+		return 528;
+	else if (input == &img_mons_stonetower[4])
+		return 529;
+	else if (input == &img_mons_fog_fairy)
+		return 530;
+	else if (input == &img_mons_tsuchinoko)
+		return 531;
+	else if (input == &img_mons_vine)
+		return 532;
+	else if (input == &img_mons_security_fairy_maid)
+		return 533;
+	else if (input == &img_mons_big_slime)
+		return 534;
+	else if (input == &img_mons_small_slime)
+		return 535;
+	else if (input == &img_mons_new_yamabush_tengu)
+		return 536;
+	else if (input == &img_mons_new_hanataca_tengu)
+		return 537;
+	else if (input == &img_mons_haniwa)
+		return 538;
+	else if (input == &img_mons_horse_haniwa)
+		return 539;
+	else if (input == &img_mons_haniwa_spearman)
+		return 540;
+	else if (input == &img_mons_haniwa_archer)
+		return 541;
+	else if (input == &img_mons_haniwa_cavalry)
+		return 542;
+	else if (input == &img_mons_wolf_spirit)
+		return 543;
+	else if (input == &img_mons_eagle_spirit)
+		return 544;
+	else if (input == &img_mons_otter_spirit)
+		return 545;
+	else if (input == &img_mons_sonbiten_spintowin)
+		return 546;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4482,6 +4561,44 @@ textures* inttotexture(int input)
 		return &img_mons_takane;
 	case 527:
 		return &img_mons_sannyo;
+	case 528:
+		return &img_mons_stonetower[3];
+	case 529:
+		return &img_mons_stonetower[4];
+	case 530:
+		return &img_mons_fog_fairy;
+	case 531:
+		return &img_mons_tsuchinoko;
+	case 532:
+		return &img_mons_vine;
+	case 533:
+		return &img_mons_security_fairy_maid;
+	case 534:
+		return &img_mons_big_slime;
+	case 535:
+		return &img_mons_small_slime;
+	case 536:
+		return &img_mons_new_yamabush_tengu;
+	case 537:
+		return &img_mons_new_hanataca_tengu;
+	case 538:
+		return &img_mons_haniwa;
+	case 539:
+		return &img_mons_horse_haniwa;
+	case 540:
+		return &img_mons_haniwa_spearman;
+	case 541:
+		return &img_mons_haniwa_archer;
+	case 542:
+		return &img_mons_haniwa_cavalry;
+	case 543:
+		return &img_mons_wolf_spirit;
+	case 544:
+		return &img_mons_eagle_spirit;
+	case 545:
+		return &img_mons_otter_spirit;
+	case 546:
+		return &img_mons_sonbiten_spintowin;
 	default:
 		return &img_mons_default;
 	}

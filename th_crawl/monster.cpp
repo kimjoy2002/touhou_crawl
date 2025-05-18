@@ -42,7 +42,7 @@ ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_re
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
-force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), debuf_boost(0),
+force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(0), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
@@ -122,6 +122,9 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, force_turn);
 	SaveData<int>(fp, s_changed);
 	SaveData<int>(fp, s_invincibility);
+	SaveData<int>(fp, s_oil);
+	SaveData<int>(fp, s_fire);
+	SaveData<parent_type>(fp,fire_reason);
 	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
@@ -241,6 +244,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, force_turn);
 	LoadData<int>(fp, s_changed);
 	LoadData<int>(fp, s_invincibility);
+	LoadData<int>(fp, s_oil);
+	LoadData<int>(fp, s_fire);
+	LoadData<parent_type>(fp,fire_reason);
 	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
@@ -368,6 +374,9 @@ void monster::init()
 	force_turn=0;
 	s_changed = 0;
 	s_invincibility = 0;
+	s_oil = 0;
+	s_fire = 0;
+	fire_reason = PRT_NEUTRAL;
 	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
@@ -720,6 +729,17 @@ void monster::TurnLoad()
 			s_invincibility = 0;
 	}
 
+
+	if(s_oil-temp_turn>0)
+		s_oil-=temp_turn;
+	else
+		s_oil = 0;
+	
+	if(s_fire-temp_turn>0)
+		s_fire-=temp_turn;
+	else
+		force_turn =0;
+
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
@@ -903,9 +923,11 @@ void monster::CheckSightNewTarget()
 
 
 
-		if(env[current_level].isInSight(position, true) && you.isView(this) && !you.s_timestep)
+		if((env[current_level].isInSight(position, true) || 
+			isSpecialSight(position)) && 
+			you.isView(this) && !you.s_timestep)
 		{
-			if(state.GetState() == MS_ATACK ||  you_detect())
+			if(state.GetState() == MS_ATACK || you_detect())
 			{
 				int temp = max(s_lunatic?1:0,distan_coord(you.position, position)-(s_lunatic?0:30)+(isSightnonblocked(you.position)?0:60));
 				if(distant_ == 999 || temp  < distant_)
@@ -948,6 +970,28 @@ bool monster::isFly()
 bool monster::isSwim()
 {
 	return (flag & M_FLAG_SWIM);
+}
+bool monster::isMultipleAttack(bool canAttackFreindly) {
+	if(id == MON_YUMA2) {
+		return true;
+	}
+	if(id == MON_SONBITEN_SPINTOWIN) {
+		return canAttackFreindly?false:true;
+	}
+	return false;
+}
+void monster::multipleAttack(unit* except, attack_infor& att_infor) {
+	if(isMultipleAttack(false)) {
+		auto it = env[current_level].mon_vector.begin();
+		for( ;it != env[current_level].mon_vector.end();it++)
+		{
+			if(it->isLive() && &(*it) != this && except != &(*it) && (isMultipleAttack(true) || isEnemyMonster(&(*it))) && distan_coord(it->position, position) < 4)
+			{
+				it->damage(att_infor);
+				break;
+			}
+		}
+	}
 }
 int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back_stab)
 {
@@ -997,6 +1041,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_OIL_BLAST:
 	default:
 		damage_ -= randA(ac);
 		if(damage_<0)
@@ -1081,6 +1126,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 		damage_ *= GetPoisonResist()>0?0.5:(GetPoisonResist()<0?1.5:1);
 		break;
 	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_OIL_BLAST:
 		damage_ = damage_/2.0f + damage_*GetFireResist()/2.0f;
 		break;
 	case ATT_COLD_PYSICAL_BLAST:
@@ -1240,6 +1286,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_FIRE_PYSICAL_BLAST:
 		case ATT_ELEC_BLAST:
 		case ATT_POISON_BLAST:
+		case ATT_OIL_BLAST:
 			if(a.order)
 			{
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
@@ -1775,6 +1822,20 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		}
 
+		if(a.type == ATT_OIL_BLAST) { 
+			SetOil(10, 50);
+		}
+
+		if(s_oil > 0 && (a.type == ATT_FIRE ||
+			a.type == ATT_FIRE_WEAK ||
+			a.type == ATT_THROW_FIRE ||
+			a.type == ATT_CLOUD_FIRE ||
+			a.type == ATT_FIRE_BLAST ||
+			a.type == ATT_FIRE_PYSICAL_BLAST)) { 
+			SetFire(s_oil, a.p_type, true);
+			s_oil = 0;
+		}
+
 		//잠자는건 공격당한 후에 적용됨
 		if (a.type == ATT_SLEEP) {
 			SetSleep(rand_int(10, 25));
@@ -2011,7 +2072,8 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			{
 				num_ = randA(num_-1);
 				attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
-				you.damage(temp_att);			
+				you.damage(temp_att);
+				multipleAttack(&you, temp_att);
 				enterlog();
 				return 1;
 			}
@@ -2041,6 +2103,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 						num_ = randA(num_-1);
 						attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
 						(*it).damage(temp_att);
+						multipleAttack(&(*it), temp_att);
 						enterlog();
 						return 1;
 					}
@@ -2397,13 +2460,13 @@ int monster::MoveToPos(coord_def pos_, bool only_move)
 }
 bool monster::isView()
 {
-	if(!s_glow && s_invisible && !you.invisible_view && !s_ally)
+	if(!s_glow && !s_oil && !s_fire && s_invisible && !you.invisible_view && !s_ally)
 		return false;
 	return true;
 }
 bool monster::isView(const monster* monster_info)
 {
-	if(!s_glow && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
+	if(!s_glow && !s_oil && !s_fire && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
 		return false;
 	return true;
 
@@ -2617,12 +2680,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 }
 int monster::action(int delay_)
 {
-	bool is_sight = false;
+	bool is_sight = false, is_sight_for_monster = false;
 	if(env[current_level].isInSight(position, true))
 	{
 		if(first_contact)
 			FirstContact();
 		is_sight = true; //현재 눈에 보이는지
+		is_sight_for_monster = true; //몬스터가 보는 시야(일반적으론 동일)
 	}
 	else
 	{
@@ -2633,8 +2697,9 @@ int monster::action(int delay_)
 			env[current_level].ClearShadow(position, SWT_MONSTER);
 		}
 	}
-
-
+	if(isSpecialSight(you.position)) {
+		is_sight_for_monster = true;
+	}
 
 
 	time_delay+=delay_ * rand_int(9,11) / 10; //움직임 randomizing
@@ -2990,6 +3055,46 @@ int monster::action(int delay_)
 		}
 
 
+		if (s_oil > 0)
+		{
+			s_oil--;
+			if (!s_oil)
+			{
+				if (is_sight && isView())
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_OIL,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			}
+		}
+
+
+		if (s_fire > 0)
+		{
+			s_fire--;
+			if (!s_fire)
+			{
+				if (is_sight && isView())
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_FIRE,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			} else {
+				float damage_ = rand_int(3,4)*GetFireResist(true);
+				int damage_add =  (int)(damage_ + rand_float(0,0.99f));
+				if (damage_add > 0 && !s_invincibility)
+				{
+					hp -= damage_add;
+					if(hp<=0)
+					{
+						dead(fire_reason, true);
+						return 1;
+					}
+				}
+			}
+		}
+
+
 		if(s_communication)
 		{
 			s_communication--;
@@ -3150,7 +3255,7 @@ int monster::action(int delay_)
 					}
 				}
 				if (randA(9)) //보통은 플레이어만 찾는다.(빠른 처리를 위해)
-					sightcheck(is_sight);
+					sightcheck(is_sight_for_monster);
 				else
 					CheckSightNewTarget();
 				break;
@@ -3166,7 +3271,7 @@ int monster::action(int delay_)
 					break;
 				}
 				target = NULL;
-				if (is_sight && you_detect())//시야 안에 있을때 스텔스 체크
+				if (is_sight_for_monster && you_detect())//시야 안에 있을때 스텔스 체크
 				{
 					FoundTarget(&you, FoundTime());
 					int percent_ = 1;
@@ -3193,7 +3298,7 @@ int monster::action(int delay_)
 					target = NULL;
 					state.StateTransition(MSI_LOST);
 				}
-				else if (is_sight && you.isView(this) && !isUserAlly())
+				else if (is_sight_for_monster && you.isView(this) && !isUserAlly())
 				{ //적인데 시야 안에 있으면서 플레이어가 보이는 상태
 					will_move.clear();
 					if (!s_fear)
@@ -3282,7 +3387,7 @@ int monster::action(int delay_)
 					{
 						will_move.push_back(c_);
 					}
-					if (!is_sight && env[current_level].isInSight(position, true))
+					if (!is_sight_for_monster && env[current_level].isInSight(position, true))
 					{ //플레이어를 발견하게된다.
 						if (target == &you)
 							FoundTarget(target, FoundTime());
@@ -3290,8 +3395,8 @@ int monster::action(int delay_)
 				}
 				else if (state.GetState() != MS_FIND)
 				{
-					atkmove(is_sight);
-					if (!is_sight && env[current_level].isInSight(position, true))
+					atkmove(is_sight_for_monster);
+					if (!is_sight_for_monster && env[current_level].isInSight(position, true))
 					{ //플레이어를 발견하게된다.
 						if (target == &you)
 							FoundTarget(target, FoundTime());
@@ -3323,7 +3428,7 @@ int monster::action(int delay_)
 				}
 				else {
 					//1단계: 시야에 안보이면 바로 찾기 모드로 이행
-					if(!is_sight) {
+					if(!is_sight_for_monster) {
 						stack<coord_def> will_move_;
 						will_move.clear();
 						if (PathSearch(position, you.position, will_move_, search_type_, current_level, isFly(), isSwim()))
@@ -3341,7 +3446,7 @@ int monster::action(int delay_)
 						MoveToPos(you.position, false);	
 					}
 				}
-				sightcheck(is_sight);
+				sightcheck(is_sight_for_monster);
 				break;
 			case MS_FIND:
 				{
@@ -3376,9 +3481,9 @@ int monster::action(int delay_)
 								will_move.clear();//가끔씩은 포기(자연스러운 움직임을 위해
 						}
 						if(isUserAlly()) {
-							sightcheck(is_sight);
+							sightcheck(is_sight_for_monster);
 						}
-						else if (is_sight && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
+						else if (is_sight_for_monster && !isUserAlly() && you_detect())//시야 안에 있을때 스텔스 체크
 						{
 							FoundTarget(&you, FoundTime());
 							int percent_ = 1;
@@ -3432,9 +3537,9 @@ int monster::action(int delay_)
 			}
 			}
 		}
-		special_action(is_sight, false);
+		special_action(is_sight_for_monster, false);
 		time_delay-=GetSpeed();
-		if (!is_sight && s_fear == -1) {
+		if (!is_sight_for_monster && s_fear == -1) {
 			//전의상실한 몬스터는 시야밖에 나가면 사라짐
 			dead(PRT_NEUTRAL, false, true);
 		}
@@ -3460,6 +3565,13 @@ int monster::action(int delay_)
 
 
 	prev_position = position;
+
+
+	if (env[current_level].dgtile[position.x][position.y].tile == DG_OIL &&
+		!isFly())
+	{
+		SetOil(3, 10);
+	}
 
 	if (env[current_level].dgtile[position.x][position.y].tile == DG_SEA &&
 		!isFly() && !isSwim())
@@ -3725,9 +3837,100 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 	}
 	break;
+	case MON_YUMA:
+		if (!smoke_){
+			AbsorbItem();
+			if (hp <= max_hp / 2) {
+				if (env[current_level].isInSight(position)) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,true,false,false,CL_magic);
+				}
+				ChangeMonster(MON_YUMA2, 0);
+			}
+		}
+		break;
+	case MON_YUMA2:
+		if (!smoke_){
+			if (randA(1) == 0) {
+				DrainAll(true, true);
+			}
+			AbsorbItem();
+			if (hp == max_hp) {
+				ChangeMonster(MON_YUMA, 0);
+			}
+		}
+		break;
 	default:
 		break;
 	}
+}
+void monster::DrainAll(bool item_, bool unit_) {
+	for(list<item>::iterator it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
+	{
+		list<item>::iterator temp = it++;
+		if(!((*temp).position == position) && isMonsterSight((*temp).position))
+		{
+			if(temp->isBreakable()) {
+				beam_iterator beam(temp->position,position);
+				if(CheckThrowPath(temp->position,position,beam))
+				{
+					beam.init();
+					if(env[current_level].isMove(coord_def(beam->x,beam->y),false,false,false))
+					{
+						temp->position = (*beam);
+					}
+				}
+			}
+		}
+	}
+
+	vector<monster>::iterator it = env[current_level].mon_vector.begin();
+	for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
+	{
+		if((*it).isLive() && !(it->position == position))
+		{
+			if(!(it->flag & M_FLAG_NONE_MOVE)) {
+				beam_iterator beam(it->position,position);
+				if(CheckThrowPath(it->position,position,beam))
+				{
+					beam.init();
+					if(env[current_level].isMove(coord_def(beam->x,beam->y),it->isFly(),it->isSwim(),false && !env[current_level].isMonsterPos(beam->x, beam->y)))
+					{
+						it->SetXY(*beam);
+					}
+				}
+			}
+		}
+	}
+
+}
+
+void monster::AbsorbItem() {
+	list<item>::iterator it;
+	int number = 0;
+	string item_;
+	for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
+	{
+		list<item>::iterator temp = it++;
+		if((*temp).position.x == position.x && (*temp).position.y == position.y)
+		{
+			if(temp->isBreakable()) {
+				item_ = temp->GetName();
+				env[current_level].DeleteItem(temp);
+				number++;
+			}
+		}
+	}
+	if(number > 0) {
+		if (env[current_level].isInSight(position)) {
+			printlog(number>1?
+				LocalzationManager::formatString(LOC_SYSTEM_UNIQUE_YUMA_ABSORB_MANY, PlaceHolderHelper(name.getName()), PlaceHolderHelper(to_string(number))) + " ":
+				LocalzationManager::formatString(LOC_SYSTEM_UNIQUE_YUMA_ABSORB, PlaceHolderHelper(name.getName()), PlaceHolderHelper(item_)) + " ",
+				 false, false, false, CL_small_danger);
+		}
+		int heal = max_hp / 40;
+		HpUpDown(heal * number, DR_NONE);
+	}
+	
 }
 bool monster::SetPoisonReason(parent_type type_)
 {
@@ -4392,6 +4595,60 @@ bool monster::SetSleep(int s_sleep_)
 	}
 	return false;
 }
+
+bool monster::SetOil(int oil_, int max_) {
+	if(max_ < s_oil + oil_){ 
+		oil_ = min(0, max_-s_oil);
+	}
+	if(!oil_)
+		return false;
+	if(s_fire) {
+		return SetFire(oil_, PRT_MAX, true);
+	}
+	if(isYourShight())
+	{
+		if(s_invisible && you.auto_pickup==0)
+			auto_pick_onoff(true);
+		if(!s_oil) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_OIL,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+	}
+
+	s_oil = oil_;
+	if(s_oil>30)
+		s_oil = 30;
+	return true;
+}
+
+bool monster::SetFire(int fire_, parent_type type_, bool from_oil) {
+	if(!fire_)
+		return false;
+	if(fire_resist == 3)
+		return false;
+	if(type_ != PRT_MAX)
+		fire_reason = type_;
+
+	if(isYourShight())
+	{
+		if(s_invisible && you.auto_pickup==0)
+			auto_pick_onoff(true);
+		if(!s_fire) {
+			LocalzationManager::printLogWithKey(from_oil?LOC_SYSTEM_MON_FIRE_FROM_OIL:LOC_SYSTEM_MON_FIRE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+		else {
+			LocalzationManager::printLogWithKey(from_oil?LOC_SYSTEM_MON_MORE_FIRE_FROM_OIL:LOC_SYSTEM_MON_MORE_FIRE,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+	}
+
+	s_fire += fire_;
+	if(s_fire>30)
+		s_fire = 30;
+	return true;
+}
+
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -4665,12 +4922,17 @@ bool monster::isSightnonblocked(coord_def c)
 	}
 	return true;
 }
+bool monster::isSpecialSight(coord_def c) {
+	if(you.s_weather == 1 && you.s_weather_turn > 0 && flag & M_FLAG_FAIRY && (current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL) && isMonsterSight(c))
+		return true;
+	return false;
+}
 bool monster::isMonsterSight(coord_def c, boolean okina)
 {	
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
-		int length_ = 8;
+		int length_ = 7;
 		beam_iterator it(position,c,(round_type)i);
 		int block_cloud = 2;
 		while(!intercept && !it.end())
@@ -4686,8 +4948,10 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 				intercept = true;
 				break;
 			}
-			if (you.s_weather == 1 && you.s_weather_turn > 0) {
+			if (you.s_weather == 1 && you.s_weather_turn > 0 &&
+				!(flag & M_FLAG_FAIRY && (current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL)))  {
 				//안개효과로 항상 시야를 줄임
+				//(안개의 호수 요정들은 시야감소에 면역)
 				block_cloud--;
 				if (block_cloud < 0)
 				{
@@ -4897,6 +5161,10 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_paralyse != 0);
 		case MSS_SUMMON:
 			return ((flag & M_FLAG_SUMMON) != 0);
+		case MSS_OIL:
+			return s_oil>0;
+		case MSS_FIRE:
+			return s_fire>0;
 		case MSS_NEUTRAL:
 			return (isCompleteNeutral());
 		case MSS_ALLY:
@@ -4920,8 +5188,12 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_SLOW;
 	if((s_haste != 0) && s_slow == 0)
 		temp = MSS_HASTE;
+	if(s_oil)
+		temp = MSS_OIL;
 	if(s_poison)
 		temp = MSS_POISON;
+	if(s_fire)
+		temp = MSS_FIRE;
 	if(s_fear)
 		temp = MSS_FEAR;
 	if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
@@ -5196,6 +5468,20 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if (s_invincibility)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_INVINCIBILITY);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_OIL:
+		if (s_oil)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_OIL);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_FIRE:
+		if (s_fire)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_STICKY_FIRE);
 			return CL_normal;
 		}
 		return CL_none;

@@ -88,6 +88,9 @@ public:
 	int force_turn; //강화/약화턴
 	int s_changed; //둔갑시간. 시간이 지나면 너구리로 돌아온다.
 	int s_invincibility;
+	int s_oil;
+	int s_fire;
+	parent_type fire_reason;
 	int debuf_boost;
 	int summon_time;
 	parent_type summon_parent;
@@ -158,6 +161,8 @@ public:
 	bool isLive(){return (hp>0);}
 	bool isFly();
 	bool isSwim();
+	bool isMultipleAttack(bool canAttackFreindly);
+	void multipleAttack(unit* except, attack_infor& att_infor);
 	bool simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);
 	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);
 	bool smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& already_move); //아군이 자리를 잡을 수 있게 길을 비켜주는 인공지능
@@ -181,6 +186,8 @@ public:
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
 	void special_action(int delay_, bool smoke_);
+	void DrainAll(bool item_, bool unit_);
+	void AbsorbItem();
 	bool SetPoisonReason(parent_type type_);
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();
@@ -219,6 +226,8 @@ public:
 	bool SetInvincibility(int s_invincibility, bool speak_);
 	bool SetDebufPlus(int s_debuf_);
 	bool SetSleep(int s_sleep_);
+	bool SetOil(int oil_, int max_);
+	bool SetFire(int fire_, parent_type type_, bool from_oil);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;
@@ -244,6 +253,7 @@ public:
 	bool isUserAlly() const; //유저에 친밀한가?
 	bool isCompleteNeutral() const; //완전한 중립인가?
 	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지
+	bool isSpecialSight(coord_def c);//몬스터 특수시야
 	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 몬스터의 시야에 들어왔는가?
 	bool CanChase();
 	parent_type GetParentType();

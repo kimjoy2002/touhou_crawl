@@ -14,6 +14,8 @@
 #include "soundmanager.h"
 #include <wrl/client.h>
 #include <imm.h>
+#include <XInput.h>
+#pragma comment(lib, "xinput9_1_0.lib")
 
 
 
@@ -276,6 +278,117 @@ void ToggleFullscreen(bool fullscreen)
 }
 
 
+SHORT g_gamepad_xlx[2];
+SHORT g_gamepad_xly[2];
+boolean g_gamepad_on[2];
+WORD prev_buttons;
+
+void ProcessGamepadInput()
+{
+    XINPUT_STATE state;
+    ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+    if (XInputGetState(0, &state) == ERROR_SUCCESS)
+    {
+        WORD buttons = state.Gamepad.wButtons;
+
+        // 아날로그 스틱 (예시: 좌측)
+        g_gamepad_xlx[0] = state.Gamepad.sThumbLX;
+        g_gamepad_xly[0] = state.Gamepad.sThumbLY;
+        if (abs(g_gamepad_xlx[0]) > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE || abs(g_gamepad_xly[0]) > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+			g_gamepad_on[0] = true;
+		else 
+			g_gamepad_on[0] = false;
+        g_gamepad_xlx[1] = state.Gamepad.sThumbRX;
+        g_gamepad_xly[1] = state.Gamepad.sThumbRY;
+        if (abs(g_gamepad_xlx[1]) > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE || abs(g_gamepad_xly[1]) > XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+			g_gamepad_on[1] = true;
+		else 
+			g_gamepad_on[1] = false;
+
+
+        if (buttons & XINPUT_GAMEPAD_A && !(prev_buttons & XINPUT_GAMEPAD_A)) {
+			if(g_gamepad_on[0]) {
+				float angle = atan2f((float)g_gamepad_xly[0], (float)g_gamepad_xlx[0]); // 라디안: -π ~ π
+
+				// 8방향 분할
+				char vi_key = 0;
+				if (angle >= -3.14159f * 7/8 && angle < -3.14159f * 5/8)       vi_key = 'b'; // 좌상
+				else if (angle >= -3.14159f * 5/8 && angle < -3.14159f * 3/8)  vi_key = 'j'; // 상
+				else if (angle >= -3.14159f * 3/8 && angle < -3.14159f * 1/8)  vi_key = 'n'; // 우상
+				else if (angle >= -3.14159f * 1/8 && angle <  3.14159f * 1/8)  vi_key = 'l'; // 우
+				else if (angle >=  3.14159f * 1/8 && angle <  3.14159f * 3/8)  vi_key = 'u'; // 우하
+				else if (angle >=  3.14159f * 3/8 && angle <  3.14159f * 5/8)  vi_key = 'k'; // 하
+				else if (angle >=  3.14159f * 5/8 && angle <  3.14159f * 7/8)  vi_key = 'y'; // 좌하
+				else                                                         vi_key = 'h'; // 좌
+
+				if (vi_key) {
+					MSG fake_msg = {};
+					fake_msg.message = WM_CHAR;
+					fake_msg.wParam = vi_key;
+					g_keyQueue->push(fake_msg);
+				}
+			} else {
+				MSG fake_msg = {};
+				fake_msg.message = WM_CHAR;
+				fake_msg.wParam = GVK_BUTTON_A;
+				g_keyQueue->push(fake_msg);
+			}
+		}
+
+        // if (buttons & XINPUT_GAMEPAD_B)
+        //     printf("B 버튼이 눌렸습니다\n");
+
+        // if (buttons & XINPUT_GAMEPAD_X)
+        //     printf("X 버튼이 눌렸습니다\n");
+
+        // if (buttons & XINPUT_GAMEPAD_Y)
+        //     printf("Y 버튼이 눌렸습니다\n");
+
+        // if (buttons & XINPUT_GAMEPAD_START) {
+		// }
+
+        // if (buttons & XINPUT_GAMEPAD_BACK)
+        //     printf("Back 버튼이 눌렸습니다\n");
+
+        if (buttons & XINPUT_GAMEPAD_DPAD_UP && !(prev_buttons & XINPUT_GAMEPAD_DPAD_UP)) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = VK_UP;
+			g_keyQueue->push(fake_msg);
+		}
+
+        if (buttons & XINPUT_GAMEPAD_DPAD_DOWN && !(prev_buttons & XINPUT_GAMEPAD_DPAD_DOWN)) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = VK_DOWN;
+		}
+
+        if (buttons & XINPUT_GAMEPAD_DPAD_LEFT && !(prev_buttons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = VK_LEFT;
+		}
+
+        if (buttons & XINPUT_GAMEPAD_DPAD_RIGHT && !(prev_buttons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = VK_RIGHT;
+		}
+
+        // // 아날로그 트리거
+        // if (state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+        //     printf("좌측 트리거\n");
+
+        // if (state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+        //     printf("우측 트리거\n");
+
+			
+		prev_buttons = buttons;
+    }
+}
+
+
 
 extern bool g_changefullscreen;
 int d3d::EnterMsgLoop()
@@ -340,6 +453,7 @@ int d3d::EnterMsgLoop()
 				::DispatchMessage(&msg);
 			}
         }
+		ProcessGamepadInput();
 		Sleep(1);
 		if(g_ThreadCnt < 3)
 			break;
@@ -354,6 +468,10 @@ int d3d::EnterMsgLoop()
 		::MessageBox(0, "Thread Exit Fail", 0, 0);
 	return msg.wParam;
 }
+
+
+
+
 
 
 unsigned int WINAPI DrawLoop(void *arg)

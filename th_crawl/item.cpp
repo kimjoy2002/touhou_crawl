@@ -965,6 +965,12 @@ bool item::isEvokable()
 	return false;
 
 }
+bool item::isBreakable(){
+	if(isArtifact() || type == ITM_ORB || type == ITM_GOAL)
+		return false;
+	return true;
+
+}
 void item::Identify()
 {
 	bool prev_iden = identify;

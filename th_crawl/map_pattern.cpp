@@ -2608,8 +2608,8 @@ T.....T\
 			if(!(floor_ >= MISTY_LAKE_LEVEL && floor_ <=MISTY_LAKE_LAST_LEVEL))
 				break;
 			bool hw_ = randA(1);
-			map->size_x = 3;
-			map->size_y = 3;
+			map->size_x = 4;
+			map->size_y = 4;
 			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			hw_ = randA(1);
@@ -2617,20 +2617,22 @@ T.....T\
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 
 			if(!is_exist_named(MON_DIEFAIRY)){
-				map->event_list.push_back(mapdummy_event(EVL_DIEFAIRY,coord_def(0,0),EVT_APPROACH_SMALL));
+				map->event_list.push_back(mapdummy_event(EVL_DIEFAIRY,coord_def(0,0),EVT_APPROACH_MIDDLE));
 				set_exist_named(MON_DIEFAIRY);
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR;
 			
 			map->name = "DAIYOUSEI_APPEAR_WITH_FOG";
 			return  "\
-.......\
-.......\
-.......\
-.......\
-.......\
-.......\
-.......";
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........";
 		}
 		case 95:
 		{

@@ -449,6 +449,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_POISON_BLAST:
 	case ATT_FIRE_PYSICAL_BLAST:
 	case ATT_COLD_PYSICAL_BLAST:
+	case ATT_OIL_BLAST:
 	case ATT_THROW_FIRE:
 	case ATT_THROW_FREEZING:
 	case ATT_THROW_COLD:
@@ -567,6 +568,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		damage_ *= GetElecResist(true);
 		break;
 	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_OIL_BLAST:
 		damage_ = damage_/2.0f + damage_*GetFireResist()/2.0f;
 		break;
 	case ATT_COLD_PYSICAL_BLAST:
@@ -739,6 +741,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_FIRE_PYSICAL_BLAST:
 	case ATT_ELEC_BLAST:
 	case ATT_POISON_BLAST:
+	case ATT_OIL_BLAST:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
@@ -1046,7 +1049,18 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if (a.type == ATT_ELEC_WEAK) {
 				you.SetBuff(BUFFSTAT_RE, BUFF_WEAK_RE, -1, rand_int(30, 50));
 			}
-
+			if(a.type == ATT_OIL_BLAST) {
+				you.SetOil(10, 50);
+			}
+			if(s_oil > 0 && (a.type == ATT_FIRE ||
+				a.type == ATT_FIRE_WEAK ||
+				a.type == ATT_THROW_FIRE ||
+				a.type == ATT_CLOUD_FIRE ||
+				a.type == ATT_FIRE_BLAST ||
+				a.type == ATT_FIRE_PYSICAL_BLAST)) { 
+				you.SetFire(s_oil, true);
+				s_oil = 0;
+			}
 
 
 			if(a.type == ATT_CURSE && randA(1))

@@ -298,6 +298,8 @@ public:
 	int s_weather;
 	int s_weather_turn;
 	int s_evoke_ghost;
+	int s_oil;
+	int s_fire;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -515,6 +517,8 @@ public:
 	bool SetPureTurn(int value_, int turn_);
 	bool SetWeather(int value_, int turn_);
 	bool SetEvokeGhost(int turn_);
+	bool SetOil(int value_, int max_);
+	bool SetFire(int value_, bool from_oil);
 
 	int GetInvisible();
 	int GetSaved(){return true;};

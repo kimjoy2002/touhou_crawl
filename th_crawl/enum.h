@@ -758,7 +758,8 @@ enum damage_reason
 	DR_MP,
 	DR_JUNKO,
 	DR_SLEEP,
-	DR_GHOST
+	DR_GHOST,
+	DR_FIRE
 };
 
 
@@ -826,6 +827,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_POISON_BLAST,
 	ATT_FIRE_PYSICAL_BLAST, 
 	ATT_COLD_PYSICAL_BLAST, 
+	ATT_OIL_BLAST,
 	ATT_THROW_FREEZING,
 	ATT_BURST, 
 	ATT_VEILING,
@@ -898,6 +900,8 @@ enum monster_state_simple //표시용 상태
 	MSS_INVINCIBILITY,
 	MSS_NEUTRAL,
 	MSS_HP,
+	MSS_OIL,
+	MSS_FIRE,
 	MSS_MAX
 };
 

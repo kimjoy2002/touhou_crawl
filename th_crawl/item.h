@@ -226,6 +226,7 @@ public:
 	bool isArtifact();
 	bool isChargable();
 	bool isEvokable();
+	bool isBreakable();
 
 	bool Curse(bool equip_,equip_type kind_);
 	bool isEnhantable();

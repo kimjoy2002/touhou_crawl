@@ -380,6 +380,9 @@ bool Dump(int type, string *filename_)
 		case DR_POISON:
 			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION, PlaceHolderHelper(CurrentLevelString()));
 			break;
+		case DR_FIRE:
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString()));
+			break;
 		case DR_POTION:
 			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POTION, PlaceHolderHelper(CurrentLevelString()));
 			if (you.dead_order) {

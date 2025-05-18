@@ -439,6 +439,7 @@ extern textures img_item_rune;
 
 extern textures img_tanmac_bill[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_amulet[]; //0씀
+extern textures img_tanmac_oil_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_small[];//아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_ice[]; //0씀

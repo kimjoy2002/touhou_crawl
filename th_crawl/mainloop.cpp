@@ -506,7 +506,7 @@ void Initialize()
 	//you.resetLOS(false);
 	you.FairyRevive(false);
 }
-
+void stand_action();
 void search_monspell_view(monster* mon_);
 bool iteminfor_(int key_, bool gameover);
 bool weapon_prev_fail();
@@ -680,49 +680,7 @@ void MainLoop()
 				if(inputedKey.mouse == MKIND_MAP) {
 					coord_def target_pos(inputedKey.val1, inputedKey.val2);
 					if(target_pos == you.position) {
-						dungeon_tile_type tile_type = env[current_level].dgtile[you.position.x][you.position.y].tile;
-						stair_kind stair_kind = env[current_level].getStairKind(target_pos.x, target_pos.y);
-
-						bool unable_pickup = pickup_prev_fail(true);
-						int pick_num=0;
-						list<item>::iterator it;
-						for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
-						{
-							list<item>::iterator temp = it++;
-							if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
-							{
-								if(isPick(&(*temp)))
-								{
-									pick_num++;
-								}
-							}
-							else if(pick_num)
-								break;
-						}
-
-						//우선순위(아이템>계단>신전>1턴휴식)
-						if(!unable_pickup && pick_num > 0) {
-							PickUp();
-						} else if(stair_kind != STAIR_KIND_NOT_STAIR) {
-							switch(stair_kind) {
-							case STAIR_KIND_DOWN_BASE:
-							case STAIR_KIND_DOWN_SPECIAL:
-								Stair_move(true);
-								break;
-							case STAIR_KIND_UP_BASE:
-							case STAIR_KIND_UP_SPECIAL:
-								Stair_move(false);
-								break;
-							default:
-								break;
-							}
-						}
-						else if(tile_type >= DG_TEMPLE_FIRST && tile_type <= DG_TEMPLE_LAST)
-						{ 
-							Pray();
-						} else {
-							action_turn_skip();
-						}
+						stand_action();
 					}
 					else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || you.resetLOS() == IT_MAP_DANGER) {
 						//한칸씩 이동 
@@ -1205,6 +1163,9 @@ void MainLoop()
 			break;
 		case '`':
 			repeat_action();
+			break;
+		case GVK_BUTTON_A://패드 A
+			stand_action();
 			break;
 		default:
 			break;

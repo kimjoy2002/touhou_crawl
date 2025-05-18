@@ -777,7 +777,7 @@ const mon_infor mondata[] = {
 
 	{ MON_IKU,15,4162,name_infor(MON_IKU),&img_named_iku,125,10,20,
 	{ 20,35,0 },{ ATT_NORMAL,ATT_ELEC,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_ROBE),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,1,10,'&' },
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_SPEAK,2,3,10,'&' },
 
 	{ MON_LARVA,6,1,name_infor(MON_LARVA),&img_named_larva,45,2,8,
 	{ 9,0,0 },{ ATT_S_POISON,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
@@ -950,7 +950,7 @@ const mon_infor mondata[] = {
 	
 	{MON_KUTAKA,10,1180,name_infor(MON_KUTAKA),&img_mons_kutaka,120,2,16,
 	{9,18,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PECK),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,0,0,10,'&'},	
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'&'},	
 
 	{MON_YACHIE,2,4,name_infor(MON_YACHIE),&img_mons_yachie,25,0,5,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -961,18 +961,17 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
 
 	{MON_SAKI,22,12050,name_infor(MON_SAKI),&img_mons_saki,380,10,12,
-	{32,32,50},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_HOOF)},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,0,8,'&'},
+	{32,32,55},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_HOOF)},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,8,'&'},
 
+	{MON_YUMA,24,14126,name_infor(MON_YUMA),&img_mons_yuma,330,20,10,
+	{28,29,47},{ATT_NORMAL,ATT_NORMAL,ATT_VAMP},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
+	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK ,3,3,10,'&'},
 
-	{MON_YUMA,2,4,name_infor(MON_YUMA),&img_mons_yuma,25,0,5,
-	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_YUMA2,24,14126,name_infor(MON_YUMA2),&img_mons_yuma_drainform,410,20,10,
+		{40,43,61},{ATT_VAMP,ATT_VAMP,ATT_VAMP},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
+		M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK ,3,3,10,'&'},
 
-	{MON_YUMA2,2,4,name_infor(MON_YUMA2),&img_mons_yuma_drainform,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
-	
 	{MON_ENOKO,2,4,name_infor(MON_ENOKO),&img_mons_enoko,25,0,5,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
@@ -1021,9 +1020,9 @@ const mon_infor mondata[] = {
 		{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
 		 M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,1,10,'8' },
 
-	{MON_FOG_FAIRY,2,4,name_infor(MON_FOG_FAIRY),&img_mons_fog_fairy,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_FOG_FAIRY,8,160,name_infor(MON_FOG_FAIRY),&img_mons_fog_fairy,30,1,20,
+		{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'f'},
 
 	{MON_TSUCHINOKO,2,4,name_infor(MON_TSUCHINOKO),&img_mons_tsuchinoko,25,0,5,
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

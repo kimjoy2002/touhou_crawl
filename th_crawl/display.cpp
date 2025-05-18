@@ -34,6 +34,7 @@
 #include "localization.h"
 #include <sstream>
 #include <iomanip>
+#include <Xinput.h>
 #include <wrl/client.h>  
 
 extern ID3D11Device* g_pd3dDevice;
@@ -48,6 +49,10 @@ extern HWND hwnd;
 extern POINT MousePoint;
 
 display_manager DisplayManager;
+
+extern SHORT g_gamepad_xlx[2];
+extern SHORT g_gamepad_xly[2];
+extern boolean g_gamepad_on[2];
 
 DWORD FrameCnt = 0;
 float TimeElapsed = 0;
@@ -2335,6 +2340,40 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*calc_tile_size+tile_x_offset,(you.search_pos.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(255,255,255));
 	}
 
+	if(g_gamepad_on[0]) {
+		float lx = (float)g_gamepad_xlx[0];
+		float ly = (float)g_gamepad_xly[0];
+
+		if (lx != 0 || ly != 0) {
+			float angle = atan2f(ly, lx);
+			int dx = 0, dy = 0;
+
+			if (angle >= -3.14159f * 7 / 8 && angle < -3.14159f * 5 / 8)      { dx = -1; dy = -1; } // 좌상
+			else if (angle >= -3.14159f * 5 / 8 && angle < -3.14159f * 3 / 8) { dx =  0; dy = -1; } // 상
+			else if (angle >= -3.14159f * 3 / 8 && angle < -3.14159f * 1 / 8) { dx =  1; dy = -1; } // 우상
+			else if (angle >= -3.14159f * 1 / 8 && angle <  3.14159f * 1 / 8) { dx =  1; dy =  0; } // 우
+			else if (angle >=  3.14159f * 1 / 8 && angle <  3.14159f * 3 / 8) { dx =  1; dy =  1; } // 우하
+			else if (angle >=  3.14159f * 3 / 8 && angle <  3.14159f * 5 / 8) { dx =  0; dy =  1; } // 하
+			else if (angle >=  3.14159f * 5 / 8 && angle <  3.14159f * 7 / 8) { dx = -1; dy =  1; } // 좌하
+			else { dx = -1; dy =  0; } // 좌
+
+			coord_def draw_pos = (you.search) ? you.search_pos : you.position;
+			draw_pos += coord_def(dx, dy);
+
+			img_effect_select.draw(
+				pSprite,
+				(draw_pos.x - x_) * calc_tile_size + tile_x_offset,
+				(draw_pos.y - y_) * calc_tile_size + tile_x_offset,
+				0.0f,
+				calc_tile_scale,
+				calc_tile_scale,
+				D3DCOLOR_XRGB(255, 0, 0)
+			);
+		}
+	}
+
+
+
 	{ //테두리
 		if(!env[current_level].isBamboo() && dot_size > 0) {
 			sight_rect.draw(pSprite,GetDotX(minimap_offset_x, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
@@ -3167,7 +3206,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if(you.s_invisible || you.togle_invisible)
 			{
 				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), glow_? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+				bool oil_ = (you.s_oil);
+				bool fire_ = (you.s_fire);
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_) ? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
 					glow_? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE), this);
 			}
 			if(you.s_swift)
@@ -3231,6 +3272,16 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					((you.s_pure_turn == -1) || you.s_pure >= 30) ?LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2) :
 					(you.s_pure >= 20) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3) :
 					(you.s_pure >= 10) ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0) , this);
+			}
+			if (you.s_oil)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_OIL), CL_bad,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_OIL), this);
+			}
+			if (you.s_fire)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_FIRE), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE), this);
 			}
 		}
 	}

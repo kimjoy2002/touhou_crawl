@@ -1823,6 +1823,7 @@ int GetSpellBombRange(spell_list spell)
 	case SPL_STONE_TRAP:
 	case SPL_STONE_UPLIFT:
 	case SPL_THUNDER:
+	case SPL_THROW_OIL:
 		return 1;
 	default:
 		break;

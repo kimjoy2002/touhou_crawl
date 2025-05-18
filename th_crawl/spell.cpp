@@ -165,6 +165,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_AFTERLITE:
 	case SPL_DREAM_CALL:
 	case SPL_THROW_PLAYER:
+	case SPL_CREATE_FOG:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_REAPER_MET:
 		return ((S_FLAG_CLOSE_DANGER)& flag);
@@ -243,7 +244,6 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MOON_COMMUNICATION:
 	case SPL_CHANGE:
 	case SPL_KOKORO_CHANGE:
-	case SPL_CREATE_FOG:
 	case SPL_CLOSE_DOOR:
 		return (S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_CURE_POISON:
@@ -1921,6 +1921,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (mon->s_exhausted ? false : (mon->hp>mon->max_hp*0.3f ? false : true));
 	case SPL_REIMU_BARRIER:
 		return (!mon->s_exhausted && you.god != GT_YUKARI && you.s_dimension == 0);
+	case SPL_CREATE_FOG:
+		return (you.s_weather>0 || !(current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL)?false:true);
 	default:
 		return true;
 	}

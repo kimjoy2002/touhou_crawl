@@ -209,9 +209,57 @@ void repeat_action()
 	}
 }
 
-
 bool throw_prev_fail(bool no_speak);
 bool useAutoTanmac(unit* mon_);
+bool pickup_prev_fail(bool no_speak);
+
+void stand_action()
+{
+	dungeon_tile_type tile_type = env[current_level].dgtile[you.position.x][you.position.y].tile;
+	stair_kind stair_kind = env[current_level].getStairKind(you.position.x, you.position.y);
+
+	bool unable_pickup = pickup_prev_fail(true);
+	int pick_num=0;
+	list<item>::iterator it;
+	for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
+	{
+		list<item>::iterator temp = it++;
+		if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
+		{
+			if(isPick(&(*temp)))
+			{
+				pick_num++;
+			}
+		}
+		else if(pick_num)
+			break;
+	}
+
+	//우선순위(아이템>계단>신전>1턴휴식)
+	if(!unable_pickup && pick_num > 0) {
+		PickUp();
+	} else if(stair_kind != STAIR_KIND_NOT_STAIR) {
+		switch(stair_kind) {
+		case STAIR_KIND_DOWN_BASE:
+		case STAIR_KIND_DOWN_SPECIAL:
+			Stair_move(true);
+			break;
+		case STAIR_KIND_UP_BASE:
+		case STAIR_KIND_UP_SPECIAL:
+			Stair_move(false);
+			break;
+		default:
+			break;
+		}
+	}
+	else if(tile_type >= DG_TEMPLE_FIRST && tile_type <= DG_TEMPLE_LAST)
+	{ 
+		Pray();
+	} else {
+		action_turn_skip();
+	}
+}
+
 
 void auto_battle()
 {

@@ -1204,6 +1204,9 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	case ATT_POISON_BLAST:
 		image_ = &img_blast[3];
 		break;
+	case ATT_OIL_BLAST:
+		image_ = &img_blast[6];
+		break;
 	default:
 		break;
 	}
@@ -4809,8 +4812,29 @@ bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_oil(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	length_ = min(length_,SpellLength(SPL_THROW_OIL));
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_OIL_BALL));
+
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+		{
+			coord_def pos = throwtanmac(49,beam,temp_infor,NULL);
+			int damage = 10+power/15;
+			attack_infor temp_att(randC(3,damage),3*(damage),99,order,order->GetParentType(),ATT_OIL_BLAST,name_infor(LOC_SYSTEM_ATT_OIL_BALL));
+			
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("bomb");
+			}
+			BaseBomb(pos, &img_blast[6],temp_att, order);
+		}
+		order->SetParadox(0); 
+		return true;
+	}
 	return false;
 }
 
@@ -4836,6 +4860,11 @@ bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
 {
+	if(target == you.position) {
+		soundmanager.playSound("spellcard");
+		you.SetWeather(1, 30);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC_FOG), true, false, false, CL_small_danger);
+	}
 	return false;
 }
 
@@ -5470,7 +5499,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BLIZZARD, 20));
 		break;
 	case MON_UTSUHO:
-		list->push_back(spell(SPL_FIRE_STORM, 6));
+		list->push_back(spell(SPL_FIRE_STORM, 7));
 		list->push_back(spell(SPL_HASTE, 15));
 		break;
 	case MON_SUIKA:
@@ -5722,6 +5751,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SAKI:
 		list->push_back(spell(SPL_MEGATON_KICK, 30));
 		break;
+	case MON_FOG_FAIRY:
+		list->push_back(spell(SPL_CREATE_FOG, 50));
+		break;
+	case MON_YUMA:
+		list->push_back(spell(SPL_THROW_OIL, 25));
+		list->push_back(spell(SPL_FIRE_BALL, 15));
+		break;
+
 	default:
 		break;
 	}

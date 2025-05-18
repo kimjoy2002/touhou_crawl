@@ -954,7 +954,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	{
 		dif_rect_iterator rit(you.position, 5);
 		int i = 5;
-		you.SetWeather(1, 50);
+		you.SetWeather(1, 30);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DAIYOUSEI_WITH_FOG), true, false, false, CL_small_danger);
 		MoreWait();
 		for (; !rit.end() && i > 0; rit++)

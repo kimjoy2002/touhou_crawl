@@ -334,6 +334,8 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_tanmac_sword[direc];
 	case 48:
 		return &img_tanmac_knife[direc];
+	case 49:
+		return &img_tanmac_oil_big[direc];
 	}
 }
 

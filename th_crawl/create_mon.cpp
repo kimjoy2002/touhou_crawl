@@ -115,6 +115,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //초록모옥
 	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //회색모옥
 	{ 65,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  1,  5}, //요정영웅부대(가끔!)
+	{ 102,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  8,  1}, //안개요정
 	
 	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  1}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 1}, //깃발 요정 호위부대
@@ -997,6 +998,9 @@ void create_id_to_mon(int id, int level, int strong)
 		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
 			index.push_back(pair<monster_index, int>(MON_DESIRE, strong));
 		break;
+	case 102:
+		index.push_back(pair<monster_index, int>(MON_FOG_FAIRY, strong));
+		break;	
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -2147,6 +2151,13 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=2;
 		mon->ice_resist=2;
 		mon->poison_resist=1;
+		break;
+	case MON_YUMA:
+	case MON_YUMA2:
+		mon->poison_resist=1;
+		mon->ice_resist=1;
+		mon->elec_resist=1;
+		mon->fire_resist=3;
 		break;
 	}
 }

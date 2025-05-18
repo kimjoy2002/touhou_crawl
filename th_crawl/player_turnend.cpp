@@ -936,6 +936,36 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 
 	}
+	if(s_oil)
+	{
+		s_oil--;
+
+		if(s_oil == 0)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_OIL_END) + " ",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	if(s_fire)
+	{
+		s_fire--;
+
+		if(s_fire == 0)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FIRE_END) + " ",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		} else {
+			ReleaseMutex(mutx);
+			float damage_ = rand_int(3,4)*GetFireResist(true);
+			int damage_add =  (int)(damage_ + rand_float(0,0.99f));
+			if(damage_add > 0)  {
+				damage_ = HpUpDown(-damage_add,DR_FIRE);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DAMAGED_BY_FIRE) + " ",false,false,false,CL_normal);
+				SetInter(IT_DAMAGE);
+			}
+			WaitForSingleObject(mutx, INFINITE);
+		}
+	}
 
 	if(battle_count)
 	{
@@ -987,6 +1017,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 	ReleaseMutex(mutx);
 
+
+	if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_OIL &&
+		!you.isFly())
+	{
+		you.SetOil(3, 10);
+	}
 
 	if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA &&
 		!you.isFly() && !you.isSwim())
@@ -1206,6 +1242,8 @@ void deadlog()
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_ESCAPE),CL_normal);
 		else if(you.dead_reason == DR_POISON)
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_POISON),CL_normal);
+		else if(you.dead_reason == DR_FIRE)
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_FIRE),CL_normal);
 		else if(you.dead_reason == DR_EFFECT)
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_DEAD_EFFECT),CL_normal);
 		else

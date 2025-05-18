@@ -118,7 +118,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -299,6 +299,8 @@ void players::init() {
 	s_weather = 0;
 	s_weather_turn = 0;
 	s_evoke_ghost = 0;
+	s_oil = 0;
+	s_fire = 0;
 	alchemy_buff = ALCT_NONE;
 	alchemy_time = 0;
 	teleport_curse = false;
@@ -527,6 +529,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_weather);
 	SaveData<int>(fp, s_weather_turn);
 	SaveData<int>(fp, s_evoke_ghost);
+	SaveData<int>(fp, s_oil);
+	SaveData<int>(fp, s_fire);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -776,6 +780,8 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_weather);
 	LoadData<int>(fp, s_weather_turn);
 	LoadData<int>(fp, s_evoke_ghost);
+	LoadData<int>(fp, s_oil);
+	LoadData<int>(fp, s_fire);
 	
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
@@ -3571,7 +3577,7 @@ bool players::SetStasis(int s_stasis_)
 {
 	if(!s_stasis_)
 		return false;
-	if(!s_drunken)
+	if(!s_stasis_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_STASIS) + " ",false,false,false,CL_small_danger);
 	else
 	{
@@ -3676,6 +3682,39 @@ bool players::SetEvokeGhost(int turn_)
 	return true;
 }
 
+bool players::SetOil(int value_, int max_) {
+	if(max_ < s_oil + value_){ 
+		value_ = min(0, max_-s_oil);
+	}
+	if(!value_)
+		return false;
+	if(s_fire) {
+		return SetFire(value_, true);
+	} else if(!s_oil)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_OIL) + " ",false,false,false,CL_small_danger);
+	else if(max_ > 10)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_OIL) + " ",false,false,false,CL_small_danger);
+	}
+	s_oil += value_;
+	if(s_oil>50)
+		s_oil = 50;
+	return true;
+}
+bool players::SetFire(int value_, bool from_oil) {
+	if(!value_)
+		return false;
+	if(!s_fire)
+		printlog(LocalzationManager::locString(from_oil?LOC_SYSTEM_YOU_FIRE_FROM_OIL:LOC_SYSTEM_YOU_FIRE) + " ",false,false,false,CL_danger);
+	else
+	{
+		printlog(LocalzationManager::locString(from_oil?LOC_SYSTEM_YOU_MORE_FIRE_FROM_OIL:LOC_SYSTEM_YOU_MORE_FIRE) + " ",false,false,false,CL_danger);
+	}
+	s_fire += value_;
+	if(s_fire>50)
+		s_fire = 50;
+	return true;
+}
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -6086,6 +6125,8 @@ bool players::isView(const monster* monster_info)
 		return false;
 	if((you.s_invisible || you.togle_invisible) && 
 		!(you.s_glow && you.GetBuffOk(BUFFSTAT_HALO)) &&
+		!(you.s_oil) &&
+		!(you.s_fire) &&
 		!(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?
 		return false;
 	return true;

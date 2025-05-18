@@ -1820,6 +1820,15 @@ textures(&texture_item03, 12, 255) }
 
 
 
+textures img_tanmac_oil_big[] = {textures(&texture_laser, 133, 255),
+								textures(&texture_laser, 134, 255),
+							    textures(&texture_laser, 135, 255),
+							    textures(&texture_laser, 136, 255),
+								textures(&texture_laser, 137, 255),
+								textures(&texture_laser, 138, 255),
+							    textures(&texture_laser, 139, 255),
+							    textures(&texture_laser, 140, 255)
+};
 
 textures img_tanmac_fire_big[] = {textures(&texture_item01, 88, 255),
 								textures(&texture_item01, 89, 255),
@@ -1987,7 +1996,8 @@ textures img_blast[] = {textures(&texture_laser, 100, 255),
 								textures(&texture_laser, 102, 255),
 								textures(&texture_laser, 103, 255),
 								textures(&texture_laser, 104, 255),
-								textures(&texture_laser, 105, 255)};
+								textures(&texture_laser, 105, 255),
+								textures(&texture_laser, 132, 255)};
 textures img_autumn_edge[] = { textures(&texture_laser, 106, 255),
 			textures(&texture_laser, 107, 255),
 			textures(&texture_laser, 108, 255),
@@ -3479,6 +3489,8 @@ int texturetoint(textures* input)
 		return 545;
 	else if (input == &img_mons_sonbiten_spintowin)
 		return 546;
+	else if(input == &img_tanmac_oil_big[1])
+		return 547;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -3655,9 +3667,9 @@ textures* inttotexture(int input)
 	case 73:
 		return &img_named_diefairy;
 	case 74:
-		return &img_tanmac_fire_big[0];
+		return &img_tanmac_fire_big[1];
 	case 75:
-		return &img_tanmac_fire_small[0];
+		return &img_tanmac_fire_small[1];
 	case 76:
 		return &img_tanmac_ice[0];
 	case 77:
@@ -4599,6 +4611,8 @@ textures* inttotexture(int input)
 		return &img_mons_otter_spirit;
 	case 546:
 		return &img_mons_sonbiten_spintowin;
+	case 547:
+		return &img_tanmac_oil_big[1];
 	default:
 		return &img_mons_default;
 	}
@@ -4636,6 +4650,6 @@ textures* statetotexture(monster_state_simple state_)
 	case MSS_NEUTRAL:
 		return &img_state_neutral;
 	default:
-		return &img_state_sleep;
+		return nullptr;
 	}
 }

@@ -2348,13 +2348,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			float angle = atan2f(ly, lx);
 			int dx = 0, dy = 0;
 
-			if (angle >= -3.14159f * 7 / 8 && angle < -3.14159f * 5 / 8)      { dx = -1; dy = -1; } // 좌상
-			else if (angle >= -3.14159f * 5 / 8 && angle < -3.14159f * 3 / 8) { dx =  0; dy = -1; } // 상
-			else if (angle >= -3.14159f * 3 / 8 && angle < -3.14159f * 1 / 8) { dx =  1; dy = -1; } // 우상
+			if (angle >= -3.14159f * 7 / 8 && angle < -3.14159f * 5 / 8)      { dx = -1; dy = 1; } // 좌하
+			else if (angle >= -3.14159f * 5 / 8 && angle < -3.14159f * 3 / 8) { dx =  0; dy = 1; } // 하
+			else if (angle >= -3.14159f * 3 / 8 && angle < -3.14159f * 1 / 8) { dx =  1; dy = 1; } // 우하
 			else if (angle >= -3.14159f * 1 / 8 && angle <  3.14159f * 1 / 8) { dx =  1; dy =  0; } // 우
-			else if (angle >=  3.14159f * 1 / 8 && angle <  3.14159f * 3 / 8) { dx =  1; dy =  1; } // 우하
-			else if (angle >=  3.14159f * 3 / 8 && angle <  3.14159f * 5 / 8) { dx =  0; dy =  1; } // 하
-			else if (angle >=  3.14159f * 5 / 8 && angle <  3.14159f * 7 / 8) { dx = -1; dy =  1; } // 좌하
+			else if (angle >=  3.14159f * 1 / 8 && angle <  3.14159f * 3 / 8) { dx =  1; dy =  -1; } // 우상
+			else if (angle >=  3.14159f * 3 / 8 && angle <  3.14159f * 5 / 8) { dx =  0; dy =  -1; } // 상
+			else if (angle >=  3.14159f * 5 / 8 && angle <  3.14159f * 7 / 8) { dx = -1; dy =  -1; } // 좌상
 			else { dx = -1; dy =  0; } // 좌
 
 			coord_def draw_pos = (you.search) ? you.search_pos : you.position;

@@ -27,8 +27,8 @@ events::events()
 {
 }
 
-events::events(int id_, coord_def position_, event_type type_, int count_)
-:id(id_),position(position_),type(type_), count(count_),prev_sight(false), value(0)
+events::events(int id_, coord_def position_, event_type type_, int count_, int value)
+:id(id_),position(position_),type(type_), count(count_),prev_sight(false), value(value)
 {
 	start();
 }
@@ -968,6 +968,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	}
+	case EVL_CHANGE_TILE:
+	{
+		env[current_level].changeTile(event_->position, value);
+	}
+	return 1;
 	default:
 		break;
 	}

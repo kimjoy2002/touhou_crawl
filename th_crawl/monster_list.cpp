@@ -869,7 +869,7 @@ const mon_infor mondata[] = {
 
 	{ MON_BEE,1,1,name_infor(MON_BEE),&img_mons_bee,1,0,0,
 	{ 1,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,1,1,10,'b' },
+	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,1,1,10,'b' },
 
 	{ MON_BUSH,1,0,name_infor(MON_BUSH),&img_mons_bush,50,0,0,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },

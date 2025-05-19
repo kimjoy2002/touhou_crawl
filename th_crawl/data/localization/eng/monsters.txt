@@ -148,8 +148,8 @@ MON_MOON_RABIT_SUPPORT,Moon Rabbit Supporter,A moon rabbit handling various chor
 MON_MOON_RABIT_ATTACK,Moon Rabbit Scout,A moon rabbit handling various chores on the Moon.\nAssigned to scouting and reconnaissance, taking on the riskiest missions.
 MON_MOON_RABIT_ELITE,Moon Rabbit Elite,A moon rabbit handling various chores on the Moon.\nAn elite among the usually unorganized moon rabbits, guarding the Lunar Capital.\nRapidly calls allies. Since they aren't summons, defeating the original won’t stop them.
 MON_MAC,Mac,A dream-eating youkai.\nLooks like an anteater. Quite formidable in the dream world.\nSummons dangerous illusions from various places.
-MON_NIGHTMARE,Nightmare Fragment,A being formed of nightmares. Created as a placeholder due to a lack of proper mooks in Touhou.\nAbsorbs spiritual energy and spreads fear and destruction.
-MON_LUNATIC,Fragment of Madness,A being formed of concentrated madness. Another placeholder due to a lack of proper mooks.\nDrives its foes insane. Madness builds up and makes normal behavior impossible.\nIf you just want to break things, being mad might actually help.
+MON_NIGHTMARE,Nightmare Fragment,A being formed of nightmares.\nAbsorbs spiritual energy and spreads fear and destruction.
+MON_LUNATIC,Fragment of Madness,A being formed of concentrated madness.\nDrives its foes insane. Madness builds up and makes normal behavior impossible.\nIf you just want to break things, being mad might actually help.
 MON_HAUNT,Wraith,A vengeful spirit formed from hatred.\nFar more threatening than a typical ghost.
 MON_FIRE_CAR,Fire Cart,A cart from the Underworld said to carry corpses.\nIts wheels emit flames — getting too close might burn you.
 MON_HELL_SPIDER,Tsuchigumo,A spider youkai known as a Tsuchigumo.\nIts bite causes severe poison and illness. It also pollutes rivers.

@@ -120,7 +120,7 @@ void initMap()
 	map_list.dungeon_enter[ZIGURRAT].set(false, 0, 0, DEPTH_LEVEL + rand_int(2, MAX_DEPTH_LEVEL));
 	map_list.dungeon_enter[HAKUREI_D].set(false,0,0,DEPTH_LAST_LEVEL);
 
-	map_list.god_num = 10;
+	map_list.god_num = 8;
 	map_list.bamboo_count = 0;
 	map_list.bamboo_rate = 0;
 	//map_list.tutorial = 0;

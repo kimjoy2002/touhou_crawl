@@ -52,7 +52,8 @@ enum event_list
 	EVL_WATER, //임시로 물이 된다.
 	EVL_RUMIA_DANCER1,
 	EVL_RUMIA_DANCER2,
-	EVL_DIEFAIRY
+	EVL_DIEFAIRY,
+	EVL_CHANGE_TILE
 };
 
 class events
@@ -66,7 +67,7 @@ public:
 	int value;
 
 	events();
-	events(int id_, coord_def position_, event_type type_, int count_ = -1);
+	events(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	int start();

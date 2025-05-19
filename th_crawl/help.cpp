@@ -27,6 +27,7 @@ void Help_Show()
 	printsub("<" + LocalzationManager::locString(LOC_SYSTEM_TOUHOUCRAWL_HELP) + ">",true,CL_normal);
 	printsub("",true,CL_normal);
 	printsub("?. " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST),true,CL_normal, '?');
+	printsub("p. " + LocalzationManager::locString(LOC_SYSTEM_PAD_COMMAND_LIST),true,CL_normal, 'p');
 	printsub("c. " + LocalzationManager::locString(LOC_SYSTEM_CHARACTER_HELP),true,CL_normal, 'c');
 	printsub("g. " + LocalzationManager::locString(LOC_SYSTEM_GODS_HELP),true,CL_normal, 'g');	
 	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal, ':');
@@ -40,12 +41,23 @@ void Help_Show()
 		switch(input_)
 		{
 		case '?':
+		case 'p':
+		{
+			bool isPadHelp = (input_=='p');
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST) + " ---",true,CL_normal);
-			printsub("",true,CL_normal);
-			for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
-				printsub(text_.text,text_.enter,text_.color);
+			if(isPadHelp) {
+				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_PAD_COMMAND_LIST) + " ---",true,CL_normal);
+				printsub("",true,CL_normal);
+				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
+					printsub(text_.text,text_.enter,text_.color);
+				}
+			} else {
+				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST) + " ---",true,CL_normal);
+				printsub("",true,CL_normal);
+				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
+					printsub(text_.text,text_.enter,text_.color);
+				}
 			}
 			changedisplay(DT_SUB_TEXT);
 			setDisplayMove(DisplayManager.max_y);
@@ -88,6 +100,7 @@ void Help_Show()
 				}
 			}
 			break;
+		}
 		case 'C':
 		case 'c':
 			WaitForSingleObject(mutx, INFINITE);

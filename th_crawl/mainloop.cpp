@@ -1167,6 +1167,38 @@ void MainLoop()
 		case GVK_BUTTON_A://패드 A
 			stand_action();
 			break;
+		case GVK_BUTTON_A_LONG: //패드 A 길게
+			long_rest();
+			break;
+		case GVK_BUTTON_B://패드 B
+			escape();
+			break;
+		case GVK_BUTTON_A_LONG: //패드 B 길게
+			Wide_Search();
+			break;
+		case GVK_BUTTON_X://패드 X
+			SimpleSpellUse();
+			break;
+		case GVK_BUTTON_X_LONG: //패드 X 길게
+			SkillUse(0);
+			break;
+		case GVK_BUTTON_Y://패드 X
+			break;
+		case GVK_BUTTON_Y_LONG: //패드 X 길게
+			iteminfor();
+			break;
+		case GVK_LEFT_BUMPER: //왼쪽 범퍼
+			auto_battle();
+			break;
+		case GVK_RIGHT_BUMPER://오른쪽 범퍼
+			auto_Move();
+			break;
+		case GVK_LT: //왼쪽 트리거
+			scrollup(true);
+			break;
+		case GVK_RT://오른쪽 트리거
+			scrollup(false);
+			break;
 		default:
 			break;
 		}

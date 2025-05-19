@@ -70,6 +70,7 @@ private:
 	static unordered_map<monster_index, string> monster_name_map;
 	static unordered_map<monster_index, string> monster_description_map;
 	static vector<TextHelper> help_command;
+	static vector<TextHelper> help_pad_command;
 	static vector<TextHelper> help_credit;
 	static vector<TextHelper> help_wizard;
 	static vector<TextHelper> help_character;
@@ -182,6 +183,7 @@ public:
 	static const string& monString(monster_index key);
     static const string& monDecsriptionString(monster_index key);
 	static const vector<TextHelper>& getHelpCommand(){return help_command;};
+	static const vector<TextHelper>& getHelpPadCommand(){return help_pad_command;};
 	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
 	static const vector<TextHelper>& getHelpWizard(){return help_wizard;};
 	static const vector<TextHelper>& getHelpCharacter(){return help_character;};

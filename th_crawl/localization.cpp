@@ -67,6 +67,7 @@ void LocalzationManager::init(string type, bool init_) {
 	filePath = "./data/localization/" +  type + "/";
 
 	initFileSimple(filePath, "help.txt", help_command, nullptr);
+	initFileSimple(filePath, "help_pad.txt", help_pad_command, nullptr);
 	initFileSimple(filePath, "credit.txt", help_credit, nullptr);
 	initFileSimple(filePath, "wizardhelp.txt", help_wizard, nullptr);
 	initFileSimple(filePath, "character.txt", help_character, &helpline_character);

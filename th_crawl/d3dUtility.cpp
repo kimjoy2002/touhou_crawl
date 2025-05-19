@@ -18,6 +18,7 @@
 #pragma comment(lib, "xinput9_1_0.lib")
 
 
+using namespace std::chrono;
 
 ID3D11Device*           g_pd3dDevice = nullptr;
 ID3D11DeviceContext*    g_pImmediateContext = nullptr;
@@ -278,10 +279,36 @@ void ToggleFullscreen(bool fullscreen)
 }
 
 
+
+steady_clock::time_point g_button_press_time[4] = {};
 SHORT g_gamepad_xlx[2];
 SHORT g_gamepad_xly[2];
 boolean g_gamepad_on[2];
+steady_clock::time_point g_repeat_start_time[6] = {};
+steady_clock::time_point g_last_repeat_emit[6] = {};
 WORD prev_buttons;
+constexpr WORD BUTTON_MASKS[6] = {
+    XINPUT_GAMEPAD_A, XINPUT_GAMEPAD_B, XINPUT_GAMEPAD_X, XINPUT_GAMEPAD_Y, XINPUT_GAMEPAD_LEFT_SHOULDER, XINPUT_GAMEPAD_RIGHT_SHOULDER
+};
+constexpr wchar_t SHORT_KEYS[4] = {
+    GVK_BUTTON_A, GVK_BUTTON_B, GVK_BUTTON_X, GVK_BUTTON_Y, GVK_LEFT_BUMPER, GVK_RIGHT_BUMPER
+};
+constexpr wchar_t LONG_KEYS[4] = {
+    GVK_BUTTON_A_LONG, GVK_BUTTON_B_LONG, GVK_BUTTON_X_LONG, GVK_BUTTON_Y_LONG, GVK_LEFT_BUMPER, GVK_RIGHT_BUMPER
+};
+// 눌렀다 뗐을 때 500ms 이상이면 롱프레스
+constexpr int LONG_PRESS_THRESHOLD_MS = 500;
+constexpr int INITIAL_REPEAT_DELAY_MS = 400;  // 첫 입력 이후 대기 시간
+constexpr int REPEAT_INTERVAL_MS = 50;        // 반복 주기
+constexpr bool ENABLE_REPEAT_FOR[6] = {
+    true,  // A
+    false, // B
+    false, // X
+    false, // Y
+    true,  // LB
+    false  // RB
+};
+
 
 void ProcessGamepadInput()
 {
@@ -306,50 +333,93 @@ void ProcessGamepadInput()
 		else 
 			g_gamepad_on[1] = false;
 
+        // ABXY 버튼 처리 (짧게/길게)
+        for (int i = 0; i < 6; ++i) {
+            bool now_pressed = (buttons & BUTTON_MASKS[i]);
+            bool was_pressed = (prev_buttons & BUTTON_MASKS[i]);
 
-        if (buttons & XINPUT_GAMEPAD_A && !(prev_buttons & XINPUT_GAMEPAD_A)) {
-			if(g_gamepad_on[0]) {
-				float angle = atan2f((float)g_gamepad_xly[0], (float)g_gamepad_xlx[0]); // 라디안: -π ~ π
+			if (now_pressed && was_pressed && ENABLE_REPEAT_FOR[i]) {
+				auto now = steady_clock::now();
+				auto held_duration = duration_cast<milliseconds>(now - g_button_press_time[i]).count();
+				
+				// 최초 반복 조건 충족
+				if (held_duration >= INITIAL_REPEAT_DELAY_MS) {
+					auto since_last_emit = duration_cast<milliseconds>(now - g_last_repeat_emit[i]).count();
+					if (since_last_emit >= REPEAT_INTERVAL_MS) {
+						g_last_repeat_emit[i] = now;
 
-				// 8방향 분할
-				char vi_key = 0;
-				if (angle >= -3.14159f * 7/8 && angle < -3.14159f * 5/8)       vi_key = 'b'; // 좌상
-				else if (angle >= -3.14159f * 5/8 && angle < -3.14159f * 3/8)  vi_key = 'j'; // 상
-				else if (angle >= -3.14159f * 3/8 && angle < -3.14159f * 1/8)  vi_key = 'n'; // 우상
-				else if (angle >= -3.14159f * 1/8 && angle <  3.14159f * 1/8)  vi_key = 'l'; // 우
-				else if (angle >=  3.14159f * 1/8 && angle <  3.14159f * 3/8)  vi_key = 'u'; // 우하
-				else if (angle >=  3.14159f * 3/8 && angle <  3.14159f * 5/8)  vi_key = 'k'; // 하
-				else if (angle >=  3.14159f * 5/8 && angle <  3.14159f * 7/8)  vi_key = 'y'; // 좌하
-				else                                                         vi_key = 'h'; // 좌
+						if(BUTTON_MASKS[i] == GVK_BUTTON_A) {
+							if(g_gamepad_on[0] && (duration < LONG_PRESS_THRESHOLD_MS)) {
+								float angle = atan2f((float)g_gamepad_xly[0], (float)g_gamepad_xlx[0]); // 라디안: -π ~ π
 
-				if (vi_key) {
+								// 8방향 분할
+								char vi_key = 0;
+								if (angle >= -3.14159f * 7/8 && angle < -3.14159f * 5/8)       vi_key = 'b'; // 좌상
+								else if (angle >= -3.14159f * 5/8 && angle < -3.14159f * 3/8)  vi_key = 'j'; // 상
+								else if (angle >= -3.14159f * 3/8 && angle < -3.14159f * 1/8)  vi_key = 'n'; // 우상
+								else if (angle >= -3.14159f * 1/8 && angle <  3.14159f * 1/8)  vi_key = 'l'; // 우
+								else if (angle >=  3.14159f * 1/8 && angle <  3.14159f * 3/8)  vi_key = 'u'; // 우하
+								else if (angle >=  3.14159f * 3/8 && angle <  3.14159f * 5/8)  vi_key = 'k'; // 하
+								else if (angle >=  3.14159f * 5/8 && angle <  3.14159f * 7/8)  vi_key = 'y'; // 좌하
+								else                                                         vi_key = 'h'; // 좌
+
+								if (vi_key) {
+									MSG fake_msg = {};
+									fake_msg.message = WM_CHAR;
+									fake_msg.wParam = vi_key;
+									g_keyQueue->push(fake_msg);
+								}
+							} 
+						} 
+						else {
+							MSG fake_msg = {};
+							fake_msg.message = WM_CHAR;
+							fake_msg.wParam = SHORT_KEYS[i];
+							g_keyQueue->push(fake_msg);
+						}
+					}
+				}
+			}
+
+
+            if (now_pressed && !was_pressed) {
+                // 버튼을 처음 누름 → 시간 기록
+                g_button_press_time[i] = steady_clock::now();
+            }
+            else if (!now_pressed && was_pressed) {
+                // 버튼을 뗌 → 경과 시간 계산
+                auto now = steady_clock::now();
+                auto duration = duration_cast<milliseconds>(now - g_button_press_time[i]).count();
+                g_button_press_time[i] = steady_clock::time_point(); // 초기화
+
+				if(BUTTON_MASKS[i] == GVK_BUTTON_A && g_gamepad_on[0] && (duration < LONG_PRESS_THRESHOLD_MS)) {
+					float angle = atan2f((float)g_gamepad_xly[0], (float)g_gamepad_xlx[0]); // 라디안: -π ~ π
+
+					// 8방향 분할
+					char vi_key = 0;
+					if (angle >= -3.14159f * 7/8 && angle < -3.14159f * 5/8)       vi_key = 'b'; // 좌상
+					else if (angle >= -3.14159f * 5/8 && angle < -3.14159f * 3/8)  vi_key = 'j'; // 상
+					else if (angle >= -3.14159f * 3/8 && angle < -3.14159f * 1/8)  vi_key = 'n'; // 우상
+					else if (angle >= -3.14159f * 1/8 && angle <  3.14159f * 1/8)  vi_key = 'l'; // 우
+					else if (angle >=  3.14159f * 1/8 && angle <  3.14159f * 3/8)  vi_key = 'u'; // 우하
+					else if (angle >=  3.14159f * 3/8 && angle <  3.14159f * 5/8)  vi_key = 'k'; // 하
+					else if (angle >=  3.14159f * 5/8 && angle <  3.14159f * 7/8)  vi_key = 'y'; // 좌하
+					else                                                         vi_key = 'h'; // 좌
+
+					if (vi_key) {
+						MSG fake_msg = {};
+						fake_msg.message = WM_CHAR;
+						fake_msg.wParam = vi_key;
+						g_keyQueue->push(fake_msg);
+					}
+				} else {	
 					MSG fake_msg = {};
 					fake_msg.message = WM_CHAR;
-					fake_msg.wParam = vi_key;
+					fake_msg.wParam = (duration >= LONG_PRESS_THRESHOLD_MS) ? LONG_KEYS[i] : SHORT_KEYS[i];
 					g_keyQueue->push(fake_msg);
 				}
-			} else {
-				MSG fake_msg = {};
-				fake_msg.message = WM_CHAR;
-				fake_msg.wParam = GVK_BUTTON_A;
-				g_keyQueue->push(fake_msg);
-			}
-		}
-
-        // if (buttons & XINPUT_GAMEPAD_B)
-        //     printf("B 버튼이 눌렸습니다\n");
-
-        // if (buttons & XINPUT_GAMEPAD_X)
-        //     printf("X 버튼이 눌렸습니다\n");
-
-        // if (buttons & XINPUT_GAMEPAD_Y)
-        //     printf("Y 버튼이 눌렸습니다\n");
-
-        // if (buttons & XINPUT_GAMEPAD_START) {
-		// }
-
-        // if (buttons & XINPUT_GAMEPAD_BACK)
-        //     printf("Back 버튼이 눌렸습니다\n");
+            }
+        }
 
         if (buttons & XINPUT_GAMEPAD_DPAD_UP && !(prev_buttons & XINPUT_GAMEPAD_DPAD_UP)) {
 			MSG fake_msg = {};
@@ -375,14 +445,18 @@ void ProcessGamepadInput()
 			fake_msg.message = WM_CHAR;
 			fake_msg.wParam = VK_RIGHT;
 		}
+		
+        if (state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = GVK_LT;
+		}
 
-        // // 아날로그 트리거
-        // if (state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-        //     printf("좌측 트리거\n");
-
-        // if (state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-        //     printf("우측 트리거\n");
-
+        if (state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD) {
+			MSG fake_msg = {};
+			fake_msg.message = WM_CHAR;
+			fake_msg.wParam = GVK_RT;
+		}
 			
 		prev_buttons = buttons;
     }

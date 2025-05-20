@@ -481,6 +481,14 @@ void iteminfor(bool gameover)
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+		if(!gameover && (key_ == VK_RETURN || key_ == GVK_BUTTON_A)) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				key_ = char_;
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int get_item_move_ = getDisplayMove();
@@ -493,11 +501,13 @@ void iteminfor(bool gameover)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
+			//changemove(32);  //위
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
+			//changemove(-32); //아래
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -526,8 +536,9 @@ void iteminfor(bool gameover)
 		}
 		else if(key_ == VK_ESCAPE ||
 				key_ == GVK_BUTTON_B ||
-				key_ == GVK_BUTTON_B_LONG || (key_ == VK_RETURN && gameover))
+				key_ == GVK_BUTTON_B_LONG || (key_ == VK_RETURN && gameover)) {
 			break;
+		}
 	}
 	changedisplay(DT_GAME);
 }

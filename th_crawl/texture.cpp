@@ -1981,6 +1981,20 @@ textures img_tanmac_small[6][4] =
 	{textures(&texture_laser, 52, 255),textures(&texture_laser, 53, 255),textures(&texture_laser, 54, 255), textures(&texture_laser, 55, 255)},
 	{textures(&texture_laser, 56, 255),textures(&texture_laser, 57, 255),textures(&texture_laser, 58, 255), textures(&texture_laser, 59, 255)}
 };
+
+
+textures img_joypad_arrow[] = {textures(&texture_item03, 198, 255),
+								textures(&texture_item03, 199, 255),
+							    textures(&texture_item03, 200, 255),
+							    textures(&texture_item03, 201, 255),
+								textures(&texture_item03, 202, 255),
+								textures(&texture_item03, 203, 255),
+							    textures(&texture_item03, 204, 255),
+							    textures(&texture_item03, 205, 255)
+};
+
+
+
 textures img_blizzard[] = {textures(&texture_item01, 215, 255),
 							    textures(&texture_item01, 216, 255),
 								textures(&texture_item01, 217, 255),

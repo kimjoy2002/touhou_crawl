@@ -8,6 +8,7 @@
 
 #include "enum.h"
 #include "player.h"
+#include "display.h"
 #include "key.h"
 #include "book.h"
 #include "monster_texture.h"
@@ -96,6 +97,14 @@ skill_type WeaponSelect(int num)
 	while(1)
 	{
 		int select = waitkeyinput(true);
+ 		if(select == VK_UP) {
+			DisplayManager.addPosition(-1);
+		} else if(select == VK_DOWN)  {
+			DisplayManager.addPosition(1);
+		} else if(select == VK_RETURN || select == GVK_BUTTON_A) {
+			select = DisplayManager.positionToChar();
+		}
+		//not else
 		if(select>='a' && select<='e')
 		{
 			switch(select)
@@ -118,6 +127,10 @@ skill_type WeaponSelect(int num)
 			}
 			break;
 		}
+
+
+
+
 	}
 	return SKT_ERROR;
 }

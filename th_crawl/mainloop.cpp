@@ -47,6 +47,7 @@ void Initialize();
 
 void SetJobs(job_type select_, unique_starting_type type);
 void TouhouPlayerble(unique_starting_type type, bool aptit_);
+void rightmenu_control();
 skill_type itemtoskill(item_type type_);
 
 
@@ -638,6 +639,275 @@ void init_alldata() {
 }
 
 
+void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
+	if(mouse_type == MKIND_MAP) {
+		coord_def target_pos(val1, val2);
+		if(target_pos == you.position) {
+			stand_action();
+		}
+		else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || you.resetLOS() == IT_MAP_DANGER) {
+			//한칸씩 이동 
+			beam_iterator beam(you.position,target_pos);
+			if(CheckThrowPath(you.position,target_pos,beam, true)) {
+				beam.init();
+				unit *mon_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you);
+				int abs_ = ((*beam) - you.position).abs();
+				if(useAutoTanmac(mon_)) {
+					//do nothing
+				} else if(abs_ == 1 || abs_ == 2) {
+					action_Move(0, (*beam));
+				} else {
+					printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_POSITION_BUG,
+					   PlaceHolderHelper(to_string(you.position.x)),
+					   PlaceHolderHelper(to_string(you.position.y)),
+					   PlaceHolderHelper(to_string((*beam).x)),
+					   PlaceHolderHelper(to_string((*beam).y))) ,true,false,false,CL_danger);
+				}
+			}
+		} else {
+			int abs_ = (target_pos - you.position).abs();
+			if(abs_ == 1 || abs_ == 2) {
+				beam_iterator beam(you.position,target_pos);
+				if(CheckThrowPath(you.position,target_pos,beam, true)) {
+					beam.init();
+					action_Move(0, (*beam));
+				}
+				else {
+					Long_Move(coord_def(val1, val2), false);
+				}
+			} else {
+				Long_Move(coord_def(val1, val2), false);
+			}
+		}
+	} else if (mouse_type == MKIND_MAP_DESCRIPTION) {
+		coord_def target_pos(val1, val2);
+		if(unit *unit_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y, &you))
+		{
+			if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(target_pos))
+			{
+				search_monspell_view((monster*)unit_);
+				changedisplay(DT_GAME);
+			}
+		} else {
+			//아이템 있는지 확인
+			list<item>::iterator last = env[current_level].item_list.end();
+			list<item>::iterator it;
+
+			for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+			{
+				if(it->position == target_pos) {
+					last = it;
+				} else if(last != env[current_level].item_list.end()) {
+					break;
+				}
+			}
+			
+			if(last != env[current_level].item_list.end()) {
+				iteminfor_(&(*last), true);
+				changedisplay(DT_GAME);
+			}
+		}
+	} else if (mouse_type == MKIND_ITEM) {
+		int key_ = val1;
+		item *item_ = you.GetItem(key_);
+		if(item_)
+		{
+			if(item_->isSimpleType(ITMS_WEAPON))
+			{
+				if(weapon_prev_fail())
+				{
+					return;
+				}
+				//무기->장착
+				else if(you.isequip(item_)>0) {
+					you.unequip(ET_WEAPON);
+				} else {
+					you.equip(key_,ET_WEAPON);
+				}
+			}
+			else if(item_->isSimpleType(ITMS_ARMOR)) {
+				//방어구->장착
+				if(armor_prev_fail()) {
+					return;
+				}
+				else if(you.isequip(item_)>0) {
+					you.unequiparmor(key_);
+				}
+				else {
+					you.equiparmor(key_);
+				}
+			}
+			else if(item_->isSimpleType(ITMS_JEWELRY)) {
+				//목걸이,반지->장착
+				//충전된 목걸이는 발동
+				if(item_->type == ITM_AMULET && 
+					you.equipment[ET_NECK] == item_ &&
+					isCanEvoke((amulet_type)(*item_).value1) &&
+					you.getAmuletPercent()) {
+					evoke_logic(key_, 0);
+					return;
+				}
+				if(jewelry_prev_fail()) {
+					return;
+				}
+				else if(you.isequip(item_)>0) {
+					you.unequipjewerly(key_);
+				}
+				else {
+					you.equipjewerly(key_);
+				}
+			}
+			else if(item_->isSimpleType(ITMS_THROW)) {
+				//탄막->주탄막으로 교체
+				if(you.throw_weapon == item_) {
+					you.throw_weapon = nullptr;
+				} else {
+					you.throw_weapon = item_;
+				}
+			}
+			else if(item_->isSimpleType(ITMS_POTION)) {
+				//포션->마시기
+				if(drink_prev_fail()) {
+					return;
+				}
+				else {
+					drink_logic(key_);
+				}
+			}
+			else if(item_->isSimpleType(ITMS_BOOK)) {
+				//책->읽기
+				if(read_prev_fail()) {
+					return;
+				} else{
+					Memorize_book(key_);
+					changedisplay(DT_GAME);
+				}
+			} else if(item_->isSimpleType(ITMS_SCROLL)) {
+				//두루마리->읽기
+				if(read_prev_fail()) {
+					return;
+				} else{
+					Reading_logic(key_);
+				}
+			} else if(item_->isSimpleType(ITMS_FOOD)) {
+				//음식->먹기
+				if(eat_prev_fail()) {
+					return;
+				} else{
+					you.Eat(key_);
+				}
+			} else if(item_->isSimpleType(ITMS_SPELL)) {
+				//스펠카드->발동
+				if(evoke_prev_fail()) {
+					return;
+				} else{
+					evoke_logic(key_, 0);
+				}
+			} else if(item_->isSimpleType(ITMS_MISCELLANEOUS)) {
+				//발동템
+				if(evoke_prev_fail()) {
+					return;
+				} else{
+					evoke_logic(key_, 0);
+				}
+			}
+		}
+	} else if (mouse_type == MKIND_ITEM_DESCRIPTION) {
+		int key_ = val1;
+		iteminfor_(key_, false);
+		changedisplay(DT_GAME);
+	} else if(mouse_type == MKIND_SYSTEM) {
+		int key_ = val1;
+		switch(key_) {
+			case SYSCMD_AUTOTRAVEL:
+				auto_Move();
+				break;
+			case SYSCMD_AUTOATTACK:
+				auto_battle();
+				break;
+			case SYSCMD_100REST:
+				long_rest();
+				break;
+			case SYSCMD_MAGIC:
+				SimpleSpellUse();
+				break;
+			case SYSCMD_SKILL:
+				SkillUse(0);
+				break;
+			case SYSCMD_SHOUT:
+				shout(0);
+				break;
+			case SYSCMD_DOOR_OPENCLOSE:
+				Open_Close_door();
+				break;
+			case SYSCMD_PRAY:
+				Pray();
+				break;
+			case SYSCMD_MORE_ITEM:
+				More_Item_Action();
+				break;
+			case SYSCMD_AUTOPICKUP:
+				auto_pick_onoff(false);
+				break;
+			case SYSCMD_AUTOTANMAC:
+				auto_tanmac_onoff();
+				break;
+			case SYSCMD_WIDE_SEARCH:
+				Wide_Search();
+				break;
+			case SYSCMD_SKILL_VIEW:
+				skill_view();
+				break;
+			case SYSCMD_MORE_VIEW:
+				More_Information_List();
+				break;
+			case SYSCMD_HELP:
+				Help_Show();
+				break;
+			case SYSCMD_QUIT:
+				saveandcheckexit();
+				break;
+			default: 
+				break;
+		}
+
+	} else if (mouse_type == MKIND_PICK  || mouse_type == MKIND_PICK_DESCRIPTION) {
+		if(mouse_type == MKIND_PICK && pickup_prev_fail(false)) {
+			return;
+		}
+
+		int key_ = val1;
+		list<item>::iterator it;
+
+		for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+		{
+			if(it->position == you.position) {
+				if(key_ == 0) {
+					break;
+				} else {
+					key_--;
+				}
+			}
+		}
+		if(it != env[current_level].item_list.end()) {
+			if(mouse_type == MKIND_PICK) {
+				PickUpSelect_logic(it);
+			}
+			else if(mouse_type == MKIND_PICK_DESCRIPTION) {
+				iteminfor_(&(*it), true);
+				changedisplay(DT_GAME);
+			}
+		}
+	} else if (mouse_type == MKIND_SCROLL_UP) {
+		scrollup(false);
+	} else if (mouse_type == MKIND_SCROLL_DOWN) {
+		scrollup(true);
+	}
+}
+
+
+
+
 
 void MainLoop()
 {
@@ -678,269 +948,7 @@ void MainLoop()
 		{
 		case -1:
 			{
-				if(inputedKey.mouse == MKIND_MAP) {
-					coord_def target_pos(inputedKey.val1, inputedKey.val2);
-					if(target_pos == you.position) {
-						stand_action();
-					}
-					else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || you.resetLOS() == IT_MAP_DANGER) {
-						//한칸씩 이동 
-						beam_iterator beam(you.position,target_pos);
-						if(CheckThrowPath(you.position,target_pos,beam, true)) {
-							beam.init();
-							unit *mon_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y,&you);
-							int abs_ = ((*beam) - you.position).abs();
-							if(useAutoTanmac(mon_)) {
-								//do nothing
-							} else if(abs_ == 1 || abs_ == 2) {
-								action_Move(0, (*beam));
-							} else {
-								printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_POSITION_BUG,
-								   PlaceHolderHelper(to_string(you.position.x)),
-								   PlaceHolderHelper(to_string(you.position.y)),
-								   PlaceHolderHelper(to_string((*beam).x)),
-								   PlaceHolderHelper(to_string((*beam).y))) ,true,false,false,CL_danger);
-							}
-						}
-					} else {
-						int abs_ = (target_pos - you.position).abs();
-						if(abs_ == 1 || abs_ == 2) {
-							beam_iterator beam(you.position,target_pos);
-							if(CheckThrowPath(you.position,target_pos,beam, true)) {
-								beam.init();
-								action_Move(0, (*beam));
-							}
-							else {
-								Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
-							}
-						} else {
-							Long_Move(coord_def(inputedKey.val1, inputedKey.val2), false);
-						}
-					}
-				} else if (inputedKey.mouse == MKIND_MAP_DESCRIPTION) {
-					coord_def target_pos(inputedKey.val1, inputedKey.val2);
-					if(unit *unit_ = env[current_level].isMonsterPos(target_pos.x,target_pos.y, &you))
-					{
-						if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(target_pos))
-						{
-							search_monspell_view((monster*)unit_);
-							changedisplay(DT_GAME);
-						}
-					} else {
-						//아이템 있는지 확인
-						list<item>::iterator last = env[current_level].item_list.end();
-						list<item>::iterator it;
-
-						for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
-						{
-							if(it->position == target_pos) {
-								last = it;
-							} else if(last != env[current_level].item_list.end()) {
-								break;
-							}
-						}
-						
-						if(last != env[current_level].item_list.end()) {
-							iteminfor_(&(*last), true);
-							changedisplay(DT_GAME);
-						}
-					}
-				} else if (inputedKey.mouse == MKIND_ITEM) {
-					int key_ = inputedKey.val1;
-					item *item_ = you.GetItem(key_);
-					if(item_)
-					{
-						if(item_->isSimpleType(ITMS_WEAPON))
-						{
-							if(weapon_prev_fail())
-							{
-								return;
-							}
-							//무기->장착
-							else if(you.isequip(item_)>0) {
-								you.unequip(ET_WEAPON);
-							} else {
-								you.equip(key_,ET_WEAPON);
-							}
-						}
-						else if(item_->isSimpleType(ITMS_ARMOR)) {
-							//방어구->장착
-							if(armor_prev_fail()) {
-								break;
-							}
-							else if(you.isequip(item_)>0) {
-								you.unequiparmor(key_);
-							}
-							else {
-								you.equiparmor(key_);
-							}
-						}
-						else if(item_->isSimpleType(ITMS_JEWELRY)) {
-							//목걸이,반지->장착
-							//충전된 목걸이는 발동
-							if(item_->type == ITM_AMULET && 
-								you.equipment[ET_NECK] == item_ &&
-								isCanEvoke((amulet_type)(*item_).value1) &&
-								you.getAmuletPercent()) {
-								evoke_logic(key_, 0);
-								break;
-							}
-							if(jewelry_prev_fail()) {
-								break;
-							}
-							else if(you.isequip(item_)>0) {
-								you.unequipjewerly(key_);
-							}
-							else {
-								you.equipjewerly(key_);
-							}
-						}
-						else if(item_->isSimpleType(ITMS_THROW)) {
-							//탄막->주탄막으로 교체
-							if(you.throw_weapon == item_) {
-								you.throw_weapon = nullptr;
-							} else {
-								you.throw_weapon = item_;
-							}
-						}
-						else if(item_->isSimpleType(ITMS_POTION)) {
-							//포션->마시기
-							if(drink_prev_fail()) {
-								break;
-							}
-							else {
-								drink_logic(key_);
-							}
-						}
-						else if(item_->isSimpleType(ITMS_BOOK)) {
-							//책->읽기
-							if(read_prev_fail()) {
-								break;
-							} else{
-								Memorize_book(key_);
-								changedisplay(DT_GAME);
-							}
-						} else if(item_->isSimpleType(ITMS_SCROLL)) {
-							//두루마리->읽기
-							if(read_prev_fail()) {
-								break;
-							} else{
-								Reading_logic(key_);
-							}
-						} else if(item_->isSimpleType(ITMS_FOOD)) {
-							//음식->먹기
-							if(eat_prev_fail()) {
-								break;
-							} else{
-								you.Eat(key_);
-							}
-						} else if(item_->isSimpleType(ITMS_SPELL)) {
-							//스펠카드->발동
-							if(evoke_prev_fail()) {
-								break;
-							} else{
-								evoke_logic(key_, 0);
-							}
-						} else if(item_->isSimpleType(ITMS_MISCELLANEOUS)) {
-							//발동템
-							if(evoke_prev_fail()) {
-								break;
-							} else{
-								evoke_logic(key_, 0);
-							}
-						}
-					}
-				} else if (inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
-					int key_ = inputedKey.val1;
-					iteminfor_(key_, false);
-					changedisplay(DT_GAME);
-				} else if(inputedKey.mouse == MKIND_SYSTEM) {
-					int key_ = inputedKey.val1;
-					switch(key_) {
-						case SYSCMD_AUTOTRAVEL:
-							auto_Move();
-							break;
-						case SYSCMD_AUTOATTACK:
-							auto_battle();
-							break;
-						case SYSCMD_100REST:
-							long_rest();
-							break;
-						case SYSCMD_MAGIC:
-							SimpleSpellUse();
-							break;
-						case SYSCMD_SKILL:
-							SkillUse(0);
-							break;
-						case SYSCMD_SHOUT:
-							shout(0);
-							break;
-						case SYSCMD_DOOR_OPENCLOSE:
-							Open_Close_door();
-							break;
-						case SYSCMD_PRAY:
-							Pray();
-							break;
-						case SYSCMD_MORE_ITEM:
-							More_Item_Action();
-							break;
-						case SYSCMD_AUTOPICKUP:
-							auto_pick_onoff(false);
-							break;
-						case SYSCMD_AUTOTANMAC:
-							auto_tanmac_onoff();
-							break;
-						case SYSCMD_WIDE_SEARCH:
-							Wide_Search();
-							break;
-						case SYSCMD_SKILL_VIEW:
-							skill_view();
-							break;
-						case SYSCMD_MORE_VIEW:
-							More_Information_List();
-							break;
-						case SYSCMD_HELP:
-							Help_Show();
-							break;
-						case SYSCMD_QUIT:
-							saveandcheckexit();
-							break;
-						default: 
-							break;
-					}
-
-				} else if (inputedKey.mouse == MKIND_PICK  || inputedKey.mouse == MKIND_PICK_DESCRIPTION) {
-					if(inputedKey.mouse == MKIND_PICK && pickup_prev_fail(false)) {
-						break;
-					}
-
-					int key_ = inputedKey.val1;
-					list<item>::iterator it;
-
-					for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
-					{
-						if(it->position == you.position) {
-							if(key_ == 0) {
-								break;
-							} else {
-								key_--;
-							}
-						}
-					}
-					if(it != env[current_level].item_list.end()) {
-						if(inputedKey.mouse == MKIND_PICK) {
-							PickUpSelect_logic(it);
-						}
-						else if(inputedKey.mouse == MKIND_PICK_DESCRIPTION) {
-							iteminfor_(&(*it), true);
-							changedisplay(DT_GAME);
-						}
-					}
-				} else if (inputedKey.mouse == MKIND_SCROLL_UP) {
-					scrollup(false);
-				} else if (inputedKey.mouse == MKIND_SCROLL_DOWN) {
-					scrollup(true);
-				}
+				ForMouseClick(inputedKey.mouse, inputedKey.val1, inputedKey.val2);
 				//마우스
 			}
 			break;
@@ -1183,7 +1191,9 @@ void MainLoop()
 		case GVK_BUTTON_X_LONG: //패드 X 길게
 			SkillUse(0);
 			break;
+		case 'B': //테스트용
 		case GVK_BUTTON_Y://패드 X
+			rightmenu_control();
 			break;
 		case GVK_BUTTON_Y_LONG: //패드 X 길게
 			iteminfor();

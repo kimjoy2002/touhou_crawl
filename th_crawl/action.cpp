@@ -59,6 +59,9 @@ bool stack_move(bool auto_);
 extern display_manager DisplayManager;
 bool widesearch = false;
 bool sample_dimention = false;
+extern int g_menu_select;
+extern int greed_max_x;
+extern int greed_max_y;
 
 int action_Move(int command, const coord_def &c)
 {
@@ -2449,6 +2452,116 @@ void stat_view()
 	changedisplay(DT_GAME);
 }
 
+void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2);
+
+
+void rightmenu_control()
+{
+	g_menu_select = you.lastSelectMenu;
+	while(1)
+	{
+		InputedKey inputedKey;
+		int input = waitkeyinput(inputedKey, true);
+		switch(input)
+		{
+		case VK_UP:
+			if(g_menu_select >= greed_max_x) {
+				g_menu_select -= greed_max_x;
+			}
+			continue;
+		case VK_DOWN:
+			if(g_menu_select < greed_max_x*(greed_max_y-1)-1) {
+				g_menu_select += greed_max_x;
+			}
+			continue;
+		case VK_LEFT:
+			if(g_menu_select > 0) {
+				g_menu_select--;
+			}
+			continue;
+		case VK_RIGHT:
+			if(g_menu_select < greed_max_x*greed_max_y-1) {
+				g_menu_select++;
+			}
+			continue;
+		case VK_RETURN:
+		case '?':
+		case GVK_BUTTON_A://패드 A
+		case GVK_BUTTON_A_LONG: //패드 A 길게
+		{
+			if(g_menu_select == -1){
+				break;
+			}
+			bool long_ = (input == GVK_BUTTON_A_LONG) || (input == '?');
+			if(g_menu_select < 20 && !long_) {
+				int temp = g_menu_select;
+				you.lastSelectMenu = g_menu_select;
+				g_menu_select = -1;
+				if(temp == SYSCMD_MORE_ITEM || temp == SYSCMD_MORE_VIEW) {
+					g_menu_select = 0;
+				}
+				ForMouseClick(MKIND_SYSTEM, temp, 0);
+				return;
+			} else if(g_menu_select>=20 && g_menu_select < 72) {
+				int item_index = g_menu_select-20;
+				for(auto it = you.item_list.begin(); it != you.item_list.end(); it++) {
+					if(item_index-- == 0) {
+						you.lastSelectMenu = g_menu_select;
+						g_menu_select = -1;
+						ForMouseClick(long_?MKIND_ITEM_DESCRIPTION:MKIND_ITEM, it->id, 0);
+						return;
+					}
+				}
+			} else {
+				int item_index = g_menu_select-72;
+				//땅에 떨어진거 줍기
+				list<item>::iterator floor_items = env[current_level].item_list.end(); 
+				for(auto it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
+				{
+					list<item>::iterator temp = it++; 
+					
+					if((*temp).position == you.position) {
+						floor_items = temp;
+						break;
+					}
+				}
+				
+				if(floor_items != env[current_level].item_list.end()) {
+					if(floor_items->position == you.position ) {
+						if(item_index-- == 0) {
+							you.lastSelectMenu = g_menu_select;
+							g_menu_select = -1;
+							ForMouseClick(long_?MKIND_PICK_DESCRIPTION:MKIND_PICK, item_index+1, 0);
+							return;
+						}
+						floor_items++;
+					}
+				}
+			}
+			break;
+		}
+		case VK_ESCAPE:
+		default:
+			break;
+		case -1:
+			ForMouseClick(inputedKey.mouse, inputedKey.val1, inputedKey.val2);
+			break;
+		// {
+		// 	if(inputedKey.mouse == MKIND_SCROLL_UP) {
+		// 		changemove(1);
+		// 		continue;
+		// 	} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+		// 		changemove(-1);
+		// 		continue;
+		// 	} 
+		// }
+		}
+		break;
+	}
+	g_menu_select = -1;
+}
+
+
 
 void rune_Show()
 {
@@ -3611,47 +3724,96 @@ void More_Item_Action()
 	while(loop_) {
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+
+		if(key_ == VK_RETURN || key_ == '?' || key_ == GVK_BUTTON_A)
+		{
+			if(g_menu_select != -1 && g_menu_select <= max_command) {
+				if(g_menu_select == max_command) {
+					key_ = VK_ESCAPE;
+				}
+				else {
+					key_ = command_list[g_menu_select].first.second;
+				}
+			} 
+		}
+
 		switch(key_)
 		{
+		case VK_UP:
+			if(g_menu_select >= greed_max_x) {
+				g_menu_select -= greed_max_x;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_DOWN:
+			if(g_menu_select >= 0 && g_menu_select < greed_max_x-1) {
+				g_menu_select += greed_max_x;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_LEFT:
+			if(g_menu_select > 0) {
+				g_menu_select--;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_RIGHT:
+			if(g_menu_select >= 0 && g_menu_select < greed_max_x*2-1) {
+				g_menu_select++;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
 		case 'i':
 			endSelection();
 			deletelog();
 			iteminfor();
+			g_menu_select = -1;
 			return;
 		case 'd':
 			endSelection();
 			deletelog();
 			iteminfor_discard();
+			g_menu_select = -1;
 			return;
 		case 'e':
 			endSelection();
 			deletelog();
 			Eatting(0);
+			g_menu_select = -1;
 			return;
 		case 'r':
 			endSelection();
 			deletelog();
 			Reading(0);
+			g_menu_select = -1;
 			return;
 		case 'q':
 			endSelection();
 			deletelog();
 			Drinking(0);
+			g_menu_select = -1;
 			return;
 		case 'F':
 			endSelection();
 			deletelog();
 			Select_Throw();
+			g_menu_select = -1;
 			return;
 		case 'V':
 			endSelection();
 			deletelog();
 			Spelllcard_Evoke(0);
+			g_menu_select = -1;
 			return;
 		case 'w':
 			endSelection();
 			deletelog();
 			Equip_Weapon();
+			g_menu_select = -1;
 			return;
 		case '-':
 			endSelection();
@@ -3660,26 +3822,31 @@ void More_Item_Action()
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 			}
+			g_menu_select = -1;
 			return;
 		case 'W':
 			endSelection();
 			deletelog();
 			Equip_Armor();
+			g_menu_select = -1;
 			return;
 		case 'T':
 			endSelection();
 			deletelog();
 			Unequip_Armor();
+			g_menu_select = -1;
 			return;
 		case 'P':
 			endSelection();
 			deletelog();
 			Equip_Jewelry();
+			g_menu_select = -1;
 			return;
 		case 'R':
 			endSelection();
 			deletelog();
 			Unequip_Jewelry();
+			g_menu_select = -1;
 			return;
 		case -1:
 			{
@@ -3700,6 +3867,7 @@ void More_Item_Action()
 	}
 	endSelection();
 	deletelog();
+	g_menu_select = -1;
 }
 
 
@@ -3708,7 +3876,7 @@ void More_Information_List()
 	const int max_command = 10;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
-		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_CHARACTER,'%'),LOC_SYSTEM_INFORMATION_CHARACTER),
+		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_CHARACTER,'@'),LOC_SYSTEM_INFORMATION_CHARACTER),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_FAITH,'^'),LOC_SYSTEM_INFORMATION_FAITH),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_INDENTIFY,'\\'),LOC_SYSTEM_INFORMATION_INDENTIFY),
 		make_pair(make_pair(SPECIAL_CLINKABLE_INFORMATION_PROPERTY,'A'),LOC_SYSTEM_INFORMATION_PROPERTY),
@@ -3741,59 +3909,110 @@ void More_Information_List()
 	while(loop_) {		
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+		if(key_ == VK_RETURN || key_ == '?' || key_ == GVK_BUTTON_A)
+		{
+			if(g_menu_select != -1 && g_menu_select <= max_command) {
+				if(g_menu_select == max_command) {
+					key_ = VK_ESCAPE;
+				}
+				else {
+					key_ = command_list[g_menu_select].first.second;
+				}
+			} 
+		}
+
 		switch(key_)
 		{
-		case '%':
+		case VK_UP:
+			if(g_menu_select >= greed_max_x) {
+				g_menu_select -= greed_max_x;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_DOWN:
+			if(g_menu_select >= 0 && g_menu_select < greed_max_x-1) {
+				g_menu_select += greed_max_x;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_LEFT:
+			if(g_menu_select > 0) {
+				g_menu_select--;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case VK_RIGHT:
+			if(g_menu_select >= 0 && g_menu_select < greed_max_x*2-1) {
+				g_menu_select++;
+			}
+			if(g_menu_select==-1)
+				g_menu_select = 0;
+			continue;
+		case '@':
 			endSelection();
 			deletelog();
 			stat_view();
+			g_menu_select = -1;
 			return;
 		case '^':
 			endSelection();
 			deletelog();
 			God_show();
+			g_menu_select = -1;
 			return;
 		case '\\':
 			endSelection();
 			deletelog();
 			Iden_Show();
+			g_menu_select = -1;
 			return;
 		case 'A':
 			endSelection();
 			deletelog();
 			PropertyView();
+			g_menu_select = -1;
 			return;
 		case 'I':
 			endSelection();
 			deletelog();
 			SpellView();
+			g_menu_select = -1;
 			return;
 		case 'M':
 			endSelection();
 			deletelog();
 			run_spell();
+			g_menu_select = -1;
 			return;
 		case ']':
 			endSelection();
 			deletelog();
 			rune_Show();
+			g_menu_select = -1;
 			return;
 		case 'O':
 			endSelection();
 			deletelog();
 			if(isNormalGame())
 				dungeonView();
+			g_menu_select = -1;
 			return;
 		case 'P':
 			endSelection();
 			deletelog();
 			view_log();
+			g_menu_select = -1;
 			return;
 		case '#':
 			endSelection();
 			deletelog();
 			if(Dump(0,NULL))
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DUMP_SUCCESS),true,false,false,CL_normal);
+			g_menu_select = -1;
 			return;
 		case -1:
 			{
@@ -3814,6 +4033,7 @@ void More_Information_List()
 	}
 	endSelection();
 	deletelog();
+	g_menu_select = -1;
 }
 
 

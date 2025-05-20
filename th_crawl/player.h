@@ -338,6 +338,7 @@ public:
 	int remainSpellPoiont;
 	int currentSpellNum;
 	int prevSpell;
+	int lastSelectMenu; //마지막에 선택했던 메뉴
 
 	int MemorizeSkill[52];
 	int MemorizeSkill_num[52];

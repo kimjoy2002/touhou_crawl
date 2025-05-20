@@ -69,7 +69,7 @@ public:
 	{
 		string blank(12,' ');
 		WaitForSingleObject(mutx, INFINITE);
-		deletesub();
+		deletesub(false);
 		printsub("", true, CL_normal);
 		printsub("", true, CL_normal);
 		printsub("", true, CL_normal);
@@ -112,7 +112,7 @@ public:
 						return -1;
 					}
 					else
-					{						
+					{
 						Sleep(300);
 						if((*it).f && (*it).f((*it).value))
 							return -2;
@@ -185,6 +185,7 @@ public:
 				{
 					int prev_input_ = -1;						
 					int output_ = -1;
+					DisplayManager.setPosition(0);
 					(*it)->View();
 					while(1)
 					{
@@ -227,13 +228,13 @@ public:
 						// if(input_ == VK_RETURN && prev_input_ != -1)
 						// 	output_= (*it)->Check(prev_input_, true);
 						// else
-							output_= (*it)->Check(input_, prev_input_ == input_);
+						output_= (*it)->Check(input_, prev_input_ == input_);
 						if(output_ != -1)
 						{
 							break;
 						}
 						prev_input_ = input_;
-						DisplayManager.setPositionToChar(input_);
+						//DisplayManager.setPositionToChar(input_);
 					}
 					current_id = output_;
 					break;					

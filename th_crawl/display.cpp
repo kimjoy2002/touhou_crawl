@@ -62,7 +62,9 @@ extern bool widesearch; //X커맨드용
 extern bool sample_dimention;
 
 int map_effect=0;//잠깐 나오는 맵의 반짝 이벤트
-
+int g_menu_select = -1;
+int greed_max_x = 10;
+int greed_max_y = 8;
 
 
 
@@ -1976,8 +1978,6 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	int dot_start_y = buff_start_y + 2*fontDesc.Height;
 	int dot_size = 0;
-	int greed_max_x = 10;
-	int greed_max_y = 8;
 	int max_minimap_y = buff_start_y + 2*fontDesc.Height;
 
 	for(int dot_size_= 1; dot_size_ <=4; dot_size_++) {
@@ -2358,9 +2358,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			else { dx = -1; dy =  0; } // 좌
 
 			coord_def draw_pos = (you.search) ? you.search_pos : you.position;
-			draw_pos += coord_def(dx, dy);
+			coord_def arrow_offset = coord_def(dx, dy);
+			draw_pos += arrow_offset;
+			 
 
-			img_effect_select.draw(
+			img_joypad_arrow[GetPosToDirec(coord_def(0,0), arrow_offset)].draw(
 				pSprite,
 				(draw_pos.x - x_) * calc_tile_size + tile_x_offset,
 				(draw_pos.y - y_) * calc_tile_size + tile_x_offset,
@@ -3313,7 +3315,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						int x_ = start_x+i*32, y_ = start_y+j*32;
 
 						pixel_->draw(pSprite,x_,y_,255);
-						
+
+						if(g_menu_select == tile_count) {
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+						}
+
 						if(pixel_ != &img_command_empty) {
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
@@ -3393,6 +3399,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						int x_ = start_x+i*32, y_ = start_y+j*32;
 
 						pixel_->draw(pSprite,x_,y_,255);
+
+						if(g_menu_select == tile_count) {
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+						}
+
 						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -3418,6 +3429,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 						pixel_->draw(pSprite,x_,y_,255);
 						
+
+						if(g_menu_select == tile_count) {
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+						}
+
 						if(pixel_ != &img_command_empty && id_ != 0) {
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
@@ -3483,7 +3499,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 						}
 						if(it != you.item_list.end()) {
-							it->draw(pSprite,pfont,x_,y_);						
+							it->draw(pSprite,pfont,x_,y_);
+							
+
+							if(g_menu_select == tile_count) {
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							}
+
 							{ //마우스
 								if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 									MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
@@ -3501,6 +3523,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 							}
 							it++;
+						} else {
+							if(g_menu_select == tile_count) {
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							}
 						}
 					}
 				} else {
@@ -3509,6 +3535,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					if(floor_items != env[current_level].item_list.end()) {
 						if(floor_items->position == you.position ) {
 							floor_items->draw(pSprite,pfont,x_,y_);
+
+
+							if(g_menu_select == tile_count) {
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							}
+
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
@@ -3524,6 +3556,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								}
 							}
 							floor_items++;
+						}
+						else {
+							if(g_menu_select == tile_count) {
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							}
+						}
+					} else {
+						if(g_menu_select == tile_count) {
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
 						}
 					}
 				}
@@ -3751,90 +3792,15 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	rc.top += fontDesc.Height*2;
 	rc.left += 32;
 
-	list<item>::iterator first,end; //여기서 아이템반복자의 시작과 끝을 결정해준다. 좀 무식함
-	int error_ = false;
-	switch(item_vt)
-	{
-	case IVT_INFOR:
-	case IVT_DISCARD:
-	case IVT_SELECT:
-	case IVT_EQ_WEAPON:
-	case IVT_EQ_ARMOR:
-	case IVT_UEQ_ARMOR:
-	case IVT_FOOD:
-	case IVT_POTION:
-	case IVT_SCROLL:
-	case IVT_EQ_JEWELRY:
-	case IVT_UEQ_JEWELRY:
-	case IVT_UNIDEN:
-	case IVT_THROW:
-	case IVT_ARMOR:
-	case IVT_ARMOR_ENCHANT:
-	case IVT_PURE_ITEM:
-	case IVT_SPELLCARD:
-	case IVT_EVOKE:
-	case IVT_CURSE_ENCHANT:
-		first = you.item_list.begin();
-		end = you.item_list.end();
-		break;
-	case IVT_PICK:
-		{
-			bool s = false;
-			char id_='a';
-			list<item>::iterator temp;
-			for(temp = env[current_level].item_list.begin();temp != env[current_level].item_list.end();temp++)
-			{
-				if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
-				{
-					if(!s)
-					{
-						first = temp;
-						s = true;
-					}
-					(*temp).id = id_;
-					id_++;
-					if(id_ == 'Z'+1)
-						id_ = 'a';
-					if(id_ == 'z'+1)
-						id_ = 'A';
-				}
-				else if(s)
-					break;
-			}
-			if(!s)
-				error_ = true;
-			end = temp;
-			break;
-		}
-	default:
-		return;
-		break;
-	}
+	int next_item_ = current_position;
+
+	list<item>::iterator first,end; //여기서 아이템반복자의 시작과 끝을 결정해준다.
+	int error_ = makeItemForItemDraw(first, end);
 
 	for(item_type_simple i = ITMS_FIRST ; !error_ && i != ITMS_LAST ; i=(item_type_simple)(i+1))
 	{
-		if(((item_vt == IVT_EQ_WEAPON)&& i != ITMS_WEAPON) ||
-			((item_vt == IVT_EQ_ARMOR || item_vt == IVT_UEQ_ARMOR || item_vt == IVT_ARMOR || item_vt == IVT_ARMOR_ENCHANT)  && i != ITMS_ARMOR)
-			)
+		if(!checkVaildItemView(i))
 			continue;
-		if(item_vt == IVT_PURE_ITEM && (i != ITMS_WEAPON && i != ITMS_ARMOR))
-			continue;
-		if(item_vt == IVT_FOOD && i != ITMS_FOOD)
-			continue;
-		if(item_vt == IVT_POTION && i != ITMS_POTION)
-			continue;
-		if(item_vt == IVT_SCROLL && i != ITMS_SCROLL && i != ITMS_BOOK)
-			continue;
-		if( (item_vt == IVT_EQ_JEWELRY || item_vt == IVT_UEQ_JEWELRY ) && i != ITMS_JEWELRY)
-			continue;
-		if (item_vt == IVT_SPELLCARD && i != ITMS_SPELL) {
-			continue;
-		}
-		if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY)
-			continue;
-		if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
-			continue;
-
 
 		bool exist = false;
 		list<item>::iterator it;
@@ -3843,21 +3809,7 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if((*it).isSimpleType(i))
 			{
 				int equip = you.isequip(it);
-				if(item_vt == IVT_UEQ_ARMOR && !equip)
-					continue;
-				if(item_vt == IVT_UEQ_JEWELRY && !equip)
-					continue;
-				if(item_vt == IVT_UNIDEN && (*it).isiden())
-					continue;
-				if(item_vt == IVT_THROW && !(*it).can_throw)
-					continue;
-				if(item_vt == IVT_SPELLCARD && !(*it).isChargable())
-					continue;				
-				if(item_vt == IVT_ARMOR_ENCHANT && !(*it).isEnhantable())
-					continue;				
-				if (item_vt == IVT_CURSE_ENCHANT && (!(it->curse) || !(it->identify_curse)))
-					continue;
-				if (item_vt == IVT_EVOKE && !(*it).isEvokable())
+				if(!checkItemSimpleType(it))
 					continue;
 
 
@@ -3887,6 +3839,11 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				DrawTextUTF8(pfont,pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
 
 				RECT rc2={ rc.left - 40, rc.top - 8, (LONG)(rc.left+PrintCharWidth(temp)*fontDesc.Width)+8,  rc.top + 24};
+
+				if(next_item_-- == 0) {
+					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+				}
+
 				if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 					MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
@@ -4102,6 +4059,7 @@ void display_manager::start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY 
 		item_num[i] = 0;
 	state = DT_ITEM;
 	move= 0;
+	current_position = 0;
 	item_vt = type;
 	item_view_message = message_;
 	ReleaseMutex(mutx);
@@ -4124,25 +4082,170 @@ bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spri
 
     return true;
 }
+
+bool display_manager::makeItemForItemDraw(list<item>::iterator& first, list<item>::iterator& end) {
+	int error_ = false;
+
+	switch(item_vt)
+	{
+	case IVT_INFOR:
+	case IVT_DISCARD:
+	case IVT_SELECT:
+	case IVT_EQ_WEAPON:
+	case IVT_EQ_ARMOR:
+	case IVT_UEQ_ARMOR:
+	case IVT_FOOD:
+	case IVT_POTION:
+	case IVT_SCROLL:
+	case IVT_EQ_JEWELRY:
+	case IVT_UEQ_JEWELRY:
+	case IVT_UNIDEN:
+	case IVT_THROW:
+	case IVT_ARMOR:
+	case IVT_ARMOR_ENCHANT:
+	case IVT_PURE_ITEM:
+	case IVT_SPELLCARD:
+	case IVT_EVOKE:
+	case IVT_CURSE_ENCHANT:
+		first = you.item_list.begin();
+		end = you.item_list.end();
+		break;
+	case IVT_PICK:
+		{
+			bool s = false;
+			char id_='a';
+			list<item>::iterator temp;
+			for(temp = env[current_level].item_list.begin();temp != env[current_level].item_list.end();temp++)
+			{
+				if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
+				{
+					if(!s)
+					{
+						first = temp;
+						s = true;
+					}
+					(*temp).id = id_;
+					id_++;
+					if(id_ == 'Z'+1)
+						id_ = 'a';
+					if(id_ == 'z'+1)
+						id_ = 'A';
+				}
+				else if(s)
+					break;
+			}
+			if(!s)
+				error_ = true;
+			end = temp;
+			break;
+		}
+	default:
+		return false;
+		break;
+	}
+	return error_;
+}
+
+
+bool display_manager::checkVaildItemView(item_type_simple i) {
+	if(((item_vt == IVT_EQ_WEAPON)&& i != ITMS_WEAPON) ||
+		((item_vt == IVT_EQ_ARMOR || item_vt == IVT_UEQ_ARMOR || item_vt == IVT_ARMOR || item_vt == IVT_ARMOR_ENCHANT)  && i != ITMS_ARMOR)
+		)
+		return false;
+	if(item_vt == IVT_PURE_ITEM && (i != ITMS_WEAPON && i != ITMS_ARMOR))
+		return false;
+	if(item_vt == IVT_FOOD && i != ITMS_FOOD)
+		return false;
+	if(item_vt == IVT_POTION && i != ITMS_POTION)
+		return false;
+	if(item_vt == IVT_SCROLL && i != ITMS_SCROLL && i != ITMS_BOOK)
+		return false;
+	if( (item_vt == IVT_EQ_JEWELRY || item_vt == IVT_UEQ_JEWELRY ) && i != ITMS_JEWELRY)
+		return false;
+	if (item_vt == IVT_SPELLCARD && i != ITMS_SPELL) {
+		return false;
+	}
+	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY)
+		return false;
+	if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
+		return false;
+	return true;
+}
+
+bool display_manager::checkItemSimpleType(list<item>::iterator it) {
+	int equip = you.isequip(it);
+	if(item_vt == IVT_UEQ_ARMOR && !equip)
+		return false;
+	if(item_vt == IVT_UEQ_JEWELRY && !equip)
+		return false;
+	if(item_vt == IVT_UNIDEN && (*it).isiden())
+		return false;
+	if(item_vt == IVT_THROW && !(*it).can_throw)
+		return false;
+	if(item_vt == IVT_SPELLCARD && !(*it).isChargable())
+		return false;				
+	if(item_vt == IVT_ARMOR_ENCHANT && !(*it).isEnhantable())
+		return false;				
+	if (item_vt == IVT_CURSE_ENCHANT && (!(it->curse) || !(it->identify_curse)))
+		return false;
+	if (item_vt == IVT_EVOKE && !(*it).isEvokable())
+		return false;
+	return true;
+}
+
 void display_manager::setPosition(int value_, int char_) {
 	int max_position = -1;
-	for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
-	{
-		if((*it)->clickable > 0) {
-			max_position++;
-			if(char_ != -1 && (*it)->clickable == char_) {
-				current_position = max_position;
-				return;
+	if(state == DT_SUB_TEXT) {
+		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		{
+			if((*it)->clickable > 0) {
+				max_position++;
+				if(char_ != -1 && (*it)->clickable == char_) {
+					current_position = max_position;
+					return;
+				}
 			}
 		}
+		if(char_ == -1) {
+			if(value_ <= -1)
+				value_ = max_position;
+			if(value_ > max_position)
+				value_ = 0;
+			current_position = value_;
+		} 
+	} else if(state == DT_ITEM) {
+		list<item>::iterator first,end;
+		int error_ = makeItemForItemDraw(first, end);
+
+		for(item_type_simple i = ITMS_FIRST ; !error_ && i != ITMS_LAST ; i=(item_type_simple)(i+1))
+		{
+			if(!checkVaildItemView(i))
+				continue;
+			list<item>::iterator it;
+			for(it = first; it!=end;it++)
+			{
+				if((*it).isSimpleType(i))
+				{
+					if(!checkItemSimpleType(it))
+						continue;
+					max_position++;
+					if(char_ != -1 && (*it).id == char_) {
+						current_position = max_position;
+						return;
+					}
+				}
+			}
+
+		}
+		
+		if(char_ == -1) {
+			if(value_ <= -1)
+				value_ = max_position;
+			if(value_ > max_position)
+				value_ = 0;
+			current_position = value_;
+		} 
 	}
-	if(char_ == -1) {
-		if(value_ < -1)
-			value_ = max_position;
-		if(value_ > max_position)
-			value_ = max_position;
-		current_position = value_;
-	} 
 }
 void display_manager::setPositionToChar(int char_) {
 	setPosition(0, char_);
@@ -4152,13 +4255,37 @@ void display_manager::addPosition(int value_) {
 }
 int display_manager::positionToChar() {
 	int max_position = 0;
-	for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
-	{
-		if((*it)->clickable > 0) {
-			if(max_position == current_position) {
-				return (*it)->clickable;
+	if(state == DT_SUB_TEXT) {
+		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		{
+			if((*it)->clickable > 0) {
+				if(max_position == current_position) {
+					return (*it)->clickable;
+				}
+				max_position++;
 			}
-			max_position++;
+		}
+	}  else if(state == DT_ITEM) {
+		list<item>::iterator first,end;
+		int error_ = makeItemForItemDraw(first, end);
+
+		for(item_type_simple i = ITMS_FIRST ; !error_ && i != ITMS_LAST ; i=(item_type_simple)(i+1))
+		{
+			if(!checkVaildItemView(i))
+				continue;
+			list<item>::iterator it;
+			for(it = first; it!=end;it++)
+			{
+				if((*it).isSimpleType(i))
+				{
+					if(!checkItemSimpleType(it))
+						continue;
+					if(max_position == current_position) {
+						return (*it).id;
+					}
+					max_position++;
+				}
+			}
 		}
 	}
 	return 0;

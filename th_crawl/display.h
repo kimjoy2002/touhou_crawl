@@ -73,7 +73,7 @@ public:
 	void calculateWitdh();
 };
 
-
+class item;
 
 class text_manager
 {
@@ -136,6 +136,10 @@ class display_manager
 		log_text_box(int start_x, wstring text, D3DCOLOR color, int clickable):
 			start_x(start_x), text(text),color(color),clickable(clickable){}
 	};
+private:
+	bool makeItemForItemDraw(list<item>::iterator& first, list<item>::iterator& end);
+	bool checkVaildItemView(item_type_simple i);
+	bool checkItemSimpleType(list<item>::iterator it);
 
 public:
 	int tile_type;
@@ -233,7 +237,7 @@ int printsub(string text_, bool enter_, D3DCOLOR color_, int char_);
 int printsub_blank(int final_index, int next_index);
 void add_stringblank(ostringstream& oss, int next_index);
 int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_);
-void deletesub();
+void deletesub(bool reset_position = true);
 void entersub();
 void startSelection(vector<int> select_list);
 void endSelection();
@@ -253,4 +257,5 @@ void view_spell(LOCALIZATION_ENUM_KEY message_);
 void view_skill(LOCALIZATION_ENUM_KEY message_);
 void CheckKey(char key_, int num_ = 0);
 void AllCheckKey();
+extern display_manager DisplayManager;
 #endif // __DISPLAY_H__

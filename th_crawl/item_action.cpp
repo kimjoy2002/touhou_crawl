@@ -384,17 +384,30 @@ void iteminfor_discard()
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+		if(key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			CheckKey(key_,i);
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -408,7 +421,7 @@ void iteminfor_discard()
 		{
 			i= i*10+key_-'0';
 		}
-		else if(key_ == VK_RETURN)
+		else if(key_ == VK_RETURN || key_ == GVK_BUTTON_B)
 		{
 			list<item>::iterator it = you.item_list.begin();
 			list<item>::iterator end = you.item_list.end();
@@ -445,9 +458,7 @@ void iteminfor_discard()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE||
-				key_ == GVK_BUTTON_B ||
-				key_ == GVK_BUTTON_B_LONG)
+		else if(key_ == VK_ESCAPE || key_ == GVK_BUTTON_B_LONG)
 			break;
 
 	}

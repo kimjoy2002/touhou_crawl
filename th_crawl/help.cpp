@@ -55,7 +55,7 @@ void Help_Show()
 			} else {
 				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST) + " ---",true,CL_normal);
 				printsub("",true,CL_normal);
-				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
+				for(TextHelper text_ : LocalzationManager::getHelpPadCommand()) {
 					printsub(text_.text,text_.enter,text_.color);
 				}
 			}

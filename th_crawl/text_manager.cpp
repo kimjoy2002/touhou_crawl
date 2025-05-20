@@ -203,10 +203,13 @@ int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_)
 	return PrintCharWidth(text_);
 }
 
-void deletesub()
+void deletesub(bool reset_position)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.text_sub.reset();
+	if(reset_position) {
+		DisplayManager.current_position = 0;
+	}
 	ReleaseMutex(mutx);
 }
 void entersub()

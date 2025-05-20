@@ -13,6 +13,7 @@
 #include "display.h"
 #include "localization.h"
 #include "key.h"
+#include "joypad.h"
 #include "player.h"
 #include "beam.h"
 #include "mon_infor.h"
@@ -1015,6 +1016,8 @@ void Search()
 				break;
 			}
 		case VK_ESCAPE:
+   		case GVK_BUTTON_B:
+   		case GVK_BUTTON_B_LONG:
 		case 'x':
 			deletelog();
 			endSelection();
@@ -1349,6 +1352,8 @@ void Open_Close_door()
 				door_num = 1;
 				break;
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 			case -1:
 				{
 					if(inputedKey.mouse == MKIND_MAP) {
@@ -1463,6 +1468,8 @@ void Close_door()
 				door_num = 1;
 				break;
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 			case -1:
 				{
 					if(inputedKey.mouse == MKIND_MAP) {
@@ -1568,6 +1575,8 @@ void Open_door()
 				door_num = 1;
 				break;
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 			case -1:
 				{
 					if(inputedKey.mouse == MKIND_MAP) {
@@ -1629,6 +1638,7 @@ bool CheckDimension()
 		switch(waitkeyinput())
 		{
 		case 'Y':
+    	case GVK_BUTTON_A_LONG:
 			you.s_dimension = 0;
 			enterlog();
 			endSelection();
@@ -1660,6 +1670,8 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				return true;
@@ -1685,6 +1697,8 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				return true;
@@ -1710,6 +1724,8 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				return true;
@@ -1737,6 +1753,8 @@ bool warning(dungeon_tile_type type, bool down)
 				{
 				case 'Y':
 				case 'y':
+				case GVK_BUTTON_A:
+				case GVK_BUTTON_A_LONG:
 					enterlog();
 					endSelection();
 					return true;
@@ -1767,6 +1785,8 @@ bool warning(dungeon_tile_type type, bool down)
 					{
 					case 'Y':
 					case 'y':
+					case GVK_BUTTON_A:
+					case GVK_BUTTON_A_LONG:
 						enterlog();
 						endSelection();
 						return true;
@@ -1794,6 +1814,8 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				if (you.ziggurat_level) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY), true, false, false, CL_help);
 					endSelection();
@@ -1824,6 +1846,8 @@ bool warning(dungeon_tile_type type, bool down)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				return true;
@@ -2143,7 +2167,7 @@ void Stair_move(bool down)
 				
 				int direc = waitkeyinput(true);
 				endSelection();
-				if(direc == 'Y')
+				if(direc == 'Y'  || direc == GVK_BUTTON_A_LONG)
 				{
 					you.dead_reason = DR_ESCAPE;
 					GameOver();
@@ -3666,6 +3690,8 @@ void More_Item_Action()
 				}
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			loop_ = false;
 			break;
 		default:
@@ -3778,6 +3804,8 @@ void More_Information_List()
 				}
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			loop_ = false;
 			break;
 		default:
@@ -3991,7 +4019,9 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE || 
+			key_ ==GVK_BUTTON_B ||
+			key_ ==GVK_BUTTON_B_LONG)
 		{
 			break;
 		}
@@ -4162,6 +4192,8 @@ void shout(char auto_)
 		you.SetPrevAction('t', 'f');
 		break;
 	default:
+	case GVK_BUTTON_B:
+	case GVK_BUTTON_B_LONG:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_CANCLE),true,false,false,CL_normal);
 		break;
 	}

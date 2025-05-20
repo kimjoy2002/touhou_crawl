@@ -92,8 +92,9 @@ typedef struct mapdummy_event
 	int id;	
 	coord_def position;
 	event_type type;
+	int value;	
 	mapdummy_event():id(),position(0,0),type(EVT_ABOVE){};
-	mapdummy_event(int id_, coord_def position_, event_type type_):id(id_),position(position_),type(type_){};
+	mapdummy_event(int id_, coord_def position_, event_type type_, int value = 0):id(id_),position(position_),type(type_),value(value){};
 }mapdummy_event;
 
 

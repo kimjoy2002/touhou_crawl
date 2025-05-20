@@ -159,7 +159,7 @@ bool Display(float timeDelta)
 
 display_manager::display_manager():tile_type(0),text_log(),text_sub(),state(DT_TEXT),
 scale_x(0), scale_y(0),item_view(), item_vt(IVT_INFOR), item_view_message(LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM), image(NULL),
-log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
+current_position(0), log_length(1), move(0), max_y(1), sight_type(0), spell_sight(0)
 {
 	for(int i=0;i<52;i++)
 		item_view[i] = 0;
@@ -3980,6 +3980,7 @@ void display_manager::log_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_
 
 void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
+	int able_text_pos = 0;
 	if (image)
 		image->draw(pSprite, 255);
 	//텍스트(위쪽에 숏로그)그리기
@@ -4016,11 +4017,15 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 
 		float x = 0, y = fontDesc.Height;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
-		{			
+		{
 			RECT rc={ (LONG)x, (LONG)y, (LONG)(x+(*it)->width), (LONG)(y+fontDesc.Height)};
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			
-			if((*it)->clickable > 0) {				
+			if((*it)->clickable > 0) {
+				if(able_text_pos == current_position) {
+					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+				}
+				able_text_pos++;
 				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
 					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
 					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
@@ -4118,6 +4123,45 @@ bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spri
     dot_player.draw(spriteBatch, right, top, 0.0f, (float)thickness, height+1, color);
 
     return true;
+}
+void display_manager::setPosition(int value_, int char_) {
+	int max_position = -1;
+	for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+	{
+		if((*it)->clickable > 0) {
+			max_position++;
+			if(char_ != -1 && (*it)->clickable == char_) {
+				current_position = max_position;
+				return;
+			}
+		}
+	}
+	if(char_ == -1) {
+		if(value_ < -1)
+			value_ = max_position;
+		if(value_ > max_position)
+			value_ = max_position;
+		current_position = value_;
+	} 
+}
+void display_manager::setPositionToChar(int char_) {
+	setPosition(0, char_);
+}
+void display_manager::addPosition(int value_) {
+	setPosition(current_position+value_);
+}
+int display_manager::positionToChar() {
+	int max_position = 0;
+	for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+	{
+		if((*it)->clickable > 0) {
+			if(max_position == current_position) {
+				return (*it)->clickable;
+			}
+			max_position++;
+		}
+	}
+	return 0;
 }
 
 
@@ -4219,6 +4263,7 @@ void changedisplay(display_type set)
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.state = set;
 	DisplayManager.move = 0;
+	DisplayManager.current_position = 0;
 	if(set == DT_LOG)
 		DisplayManager.max_y = DisplayManager.text_log.length-DisplayManager.log_length;
 	else if(set == DT_SUB_TEXT)

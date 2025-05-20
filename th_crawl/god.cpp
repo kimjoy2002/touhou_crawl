@@ -2264,10 +2264,12 @@ void Pray()
 				case '?':
 					break;
 				case 'y':
+    			case GVK_BUTTON_A:
 					if(serious) {
 						break;
 					}
 				case 'Y':
+    			case GVK_BUTTON_A_LONG:
 					if(onemore) {
 						bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 						endSelection();
@@ -2310,6 +2312,8 @@ void Pray()
 				case 'N':
 				case 'n':
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					ok_ = false;
 					break;
 				}

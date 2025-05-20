@@ -487,7 +487,9 @@ bool replay_menu(int value_)
 					out_ = true;
 				}
 			}
-			else if(input_ == VK_ESCAPE)
+			else if(input_ == VK_ESCAPE ||
+				input_ ==  GVK_BUTTON_B ||
+				input_ ==  GVK_BUTTON_B_LONG)
 
 			{
 				out_= true;

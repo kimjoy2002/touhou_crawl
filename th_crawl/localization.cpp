@@ -31,6 +31,7 @@ unordered_map<monster_index, string> LocalzationManager::monster_enum_reverse_ma
 unordered_map<monster_index, string> LocalzationManager::monster_name_map;
 unordered_map<monster_index, string> LocalzationManager::monster_description_map;
 vector<TextHelper> LocalzationManager::help_command;
+vector<TextHelper> LocalzationManager::help_pad_command;
 vector<TextHelper> LocalzationManager::help_credit;
 vector<TextHelper> LocalzationManager::help_wizard;
 vector<TextHelper> LocalzationManager::help_character;

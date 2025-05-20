@@ -60,6 +60,8 @@ void memorize_action(int spell_)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				you.Memorize(spell_);
 				endSelection();
 				ok_ = false;
@@ -74,6 +76,8 @@ void memorize_action(int spell_)
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 				endSelection();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_help);
 				ok_ = false;
@@ -520,7 +524,9 @@ void iteminfor(bool gameover)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE || (key_ == VK_RETURN && gameover))
+		else if(key_ == VK_ESCAPE ||
+				key_ == GVK_BUTTON_B ||
+				key_ == GVK_BUTTON_B_LONG || (key_ == VK_RETURN && gameover))
 			break;
 	}
 	changedisplay(DT_GAME);

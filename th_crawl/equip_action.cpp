@@ -90,7 +90,9 @@ void Equip_Weapon()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+		key_ == GVK_BUTTON_B ||
+		key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -224,7 +226,9 @@ void Equip_Armor()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+		key_ == GVK_BUTTON_B ||
+		key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -281,7 +285,9 @@ void Unequip_Armor()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+		key_ == GVK_BUTTON_B ||
+		key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -350,7 +356,9 @@ void Equip_Jewelry()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+		key_ == GVK_BUTTON_B ||
+		key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -406,7 +414,9 @@ void Unequip_Jewelry()
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+		key_ == GVK_BUTTON_B ||
+		key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);

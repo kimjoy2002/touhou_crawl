@@ -54,24 +54,6 @@ enum MOUSE_BUTTON {
 	MIDDLE_DOWN
 };
 
-enum GamepadVirtualKey : wchar_t
-{
-    GVK_BUTTON_A       = 0xE001,
-    GVK_BUTTON_A_LONG  = 0xE002,
-    GVK_BUTTON_B       = 0xE003,
-    GVK_BUTTON_B_LONG  = 0xE004,
-    GVK_BUTTON_X       = 0xE005,
-    GVK_BUTTON_X_LONG  = 0xE006,
-    GVK_BUTTON_Y       = 0xE007,
-    GVK_BUTTON_X_LONG  = 0xE008,
-    GVK_LEFT_BUMPER    = 0xE009,
-    GVK_RIGHT_BUMPER   = 0xE00A,
-    GVK_LT             = 0xE00B, // Left Trigger
-    GVK_RT             = 0xE00C, // Right Trigger
-    GVK_BACK           = 0xE00D,
-    GVK_START          = 0xE00E
-};
-
 struct Vertex{
 	Vertex(){}
 	Vertex(float x, float y, float z)

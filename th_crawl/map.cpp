@@ -139,7 +139,7 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	}
 	for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
 	{
-		env_pointer.MakeEvent(it->id,it->position+pos,it->type);
+		env_pointer.MakeEvent(it->id,it->position+pos,it->type, -1, it->value);
 	}
 
 

@@ -93,6 +93,8 @@ void Help_Show()
 						break;
 					}
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					break;
 				default:
@@ -142,6 +144,8 @@ void Help_Show()
 						break;
 					}
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					break;
 				default:
@@ -190,6 +194,8 @@ void Help_Show()
 						break;
 					}
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					break;
 				default:
@@ -260,6 +266,8 @@ void Help_Show()
 							break;
 						}
 					case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 						loop_ = false;
 						break;
 					default:
@@ -309,6 +317,8 @@ void Help_Show()
 						break;
 					}
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					break;
 				default:
@@ -324,6 +334,8 @@ void Help_Show()
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			loop_ = false;
 			break;
 		default:

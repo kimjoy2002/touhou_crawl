@@ -189,7 +189,18 @@ public:
 					while(1)
 					{
 						InputedKey inputedKey;
-						int input_ = waitkeyinput(inputedKey);
+						int input_ = 0;
+						while(1) {
+							input_ = waitkeyinput(inputedKey, true);
+							if(input_ == VK_UP) {
+								DisplayManager.addPosition(-1);
+							} else if(input_ == VK_DOWN)  {
+								DisplayManager.addPosition(1);
+							} else {
+								break;
+							}
+						}
+
 						if(input_ == -1) {
 							if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 								if(inputedKey.val1 >= 'a' && inputedKey.val1 <= 'z' ) {
@@ -201,18 +212,28 @@ public:
 								}
 							}
 						}
+						if(input_ == VK_RETURN || input_ == GVK_BUTTON_A) {
+							input_ = DisplayManager.positionToChar();
+						}
+						else if(input_ == GVK_BUTTON_A_LONG) {
+							input_ = std::toupper(DisplayManager.positionToChar());
+						}
+						else if(input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG) {
+							input_ = VK_ESCAPE;
+						}
 						
 
 						(*it)->View();
-						if(input_ == VK_RETURN && prev_input_ != -1)
-							output_= (*it)->Check(prev_input_, true);
-						else
+						// if(input_ == VK_RETURN && prev_input_ != -1)
+						// 	output_= (*it)->Check(prev_input_, true);
+						// else
 							output_= (*it)->Check(input_, prev_input_ == input_);
 						if(output_ != -1)
 						{
 							break;
 						}
 						prev_input_ = input_;
+						DisplayManager.setPositionToChar(input_);
 					}
 					current_id = output_;
 					break;					
@@ -421,6 +442,8 @@ bool show_help(int value_)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			loop_ = false;
 			break;
 		default:

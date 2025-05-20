@@ -474,7 +474,9 @@ bool identity_scroll(bool pre_iden_)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE ||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -616,11 +618,15 @@ bool blink_scroll(bool pre_iden_)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				break;
 			case -1:
 			case 'N':
 			case 'n':
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 			default:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
 				endSelection();
@@ -739,6 +745,8 @@ bool blink_scroll(bool pre_iden_)
 				break;
 			}
 		case VK_ESCAPE:	
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			if(pre_iden_){
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),false,true,false,CL_help);
 			}
@@ -758,6 +766,8 @@ bool blink_scroll(bool pre_iden_)
 				{
 				case 'Y':
 				case 'y':
+				case GVK_BUTTON_A:
+				case GVK_BUTTON_A_LONG:
 					deletelog();
 					you.search = false;
 					endSelection();
@@ -958,7 +968,9 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	if (!waste_) {
@@ -1128,7 +1140,9 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 		{
 			break;
 		}
@@ -1174,6 +1188,8 @@ bool amnesia_scroll(bool pre_iden_)
 					{
 					case 'Y':
 					case 'y':
+					case GVK_BUTTON_A:
+					case GVK_BUTTON_A_LONG:
 						{
 							endSelection();
 							changedisplay(DT_GAME);
@@ -1200,7 +1216,9 @@ bool amnesia_scroll(bool pre_iden_)
 					break;
 				}
 			}
-			else if(key_ == VK_ESCAPE)
+			else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 				break;
 		}
 		changedisplay(DT_GAME);

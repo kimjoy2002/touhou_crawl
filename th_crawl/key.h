@@ -9,6 +9,7 @@
 #ifndef  __KEY_H__
 #define  __KEY_H__
 
+#include "joypad.h"
 #include <queue>
 #include <chrono>
 #include <string>

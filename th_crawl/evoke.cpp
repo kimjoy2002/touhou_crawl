@@ -458,6 +458,8 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							break;
 						}
 					case VK_ESCAPE:
+					case GVK_BUTTON_B:
+					case GVK_BUTTON_B_LONG:
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 						return false;
 					default:

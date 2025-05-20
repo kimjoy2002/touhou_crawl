@@ -159,6 +159,7 @@ public:
 	vector<int> selection_vector;
 	vector<int> spell_skill_vector;
 
+	int current_position;
 	int log_length;
 	int move;
 	int max_y;
@@ -191,6 +192,11 @@ public:
 	void CheckMouseInfo(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, RECT& rc, int width_, int height_, string message);
 	void drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont);
 	bool DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spriteBatch, const RECT& rc, int thickness, D3DCOLOR color);
+
+	void setPosition(int value_, int char_ = -1);
+	void setPositionToChar(int char_);
+	void addPosition(int value_);
+	int positionToChar();
 };
 
 class stateBox

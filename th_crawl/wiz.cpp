@@ -74,6 +74,7 @@ void wiz_mode()
 		switch(key_)
 		{
 		case 'Y':
+    	case GVK_BUTTON_A_LONG:
 			enterlog();
 			endSelection();
 			break;
@@ -843,6 +844,8 @@ void wiz_mode()
 						break;
 					}
 				case VK_ESCAPE://esc
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					enterlog();
 					printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER), true, false, false, CL_help);
 					return;
@@ -917,7 +920,7 @@ void wiz_mode()
 
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//---------------------------------------안개호수--------------------------------------------
@@ -941,7 +944,7 @@ void wiz_mode()
 
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//----------------------------------------------나머지 던전 (9~15)-------------------------------------------------
@@ -962,7 +965,7 @@ void wiz_mode()
 
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//----------------------------------------------요괴산-------------------------------------------------
@@ -985,7 +988,7 @@ void wiz_mode()
 
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//----------------------------------------------홍마관-------------------------------------------------
@@ -1010,7 +1013,7 @@ void wiz_mode()
 				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//----------------------------------------------영원정-------------------------------------------------
@@ -1039,7 +1042,7 @@ void wiz_mode()
 				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 				//-----------------------------------------------짐승길--------------------------------------------------
@@ -1062,7 +1065,7 @@ void wiz_mode()
 				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 				key_ = waitkeyinput(true);
-				if(key_ != 'y') {
+				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 					break;
 				}
 
@@ -1097,7 +1100,7 @@ void wiz_mode()
 							
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 							key_ = waitkeyinput(true);
-							if(key_ != 'y') {
+							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 								end_ =  true;
 								break;
 							}
@@ -1126,7 +1129,7 @@ void wiz_mode()
 							
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 							key_ = waitkeyinput(true);
-							if(key_ != 'y') {
+							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 								end_ =  true;
 								break;
 							}
@@ -1163,7 +1166,7 @@ void wiz_mode()
 							
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
 							key_ = waitkeyinput(true);
-							if(key_ != 'y') {
+							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
 								end_ =  true;
 								break;
 							}

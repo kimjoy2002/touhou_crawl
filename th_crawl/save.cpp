@@ -92,6 +92,7 @@ void saveandcheckexit()
 		switch(waitkeyinput(inputedKey))
 		{
 		case 'Y':
+    	case GVK_BUTTON_A_LONG:
 			enterlog();	
 			if(!ReplayClass.ReplayMode()) {
 				saveReplay_cpp();
@@ -108,6 +109,8 @@ void saveandcheckexit()
 			}
 		case 'N':
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
 			endSelection();
 			return;
@@ -134,6 +137,7 @@ void nosaveandexit()
 		switch(waitkeyinput(inputedKey))
 		{
 		case 'Y':
+    	case GVK_BUTTON_A_LONG:
 			enterlog();
 			you.dead_reason = DR_QUIT;
 			GameOver();
@@ -150,6 +154,8 @@ void nosaveandexit()
 			}
 		case 'N':
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
 			endSelection();
 			return;
@@ -363,7 +369,7 @@ bool save_menu(int value_)
 				continue;
 			}
 		}
-		else if(input_ == 'Y')
+		else if(input_ == 'Y' || input_ == GVK_BUTTON_A_LONG)
 		{
 			if(delete_mode == 2 && (last_pick_delete>=1 && last_pick_delete <=3)) {
 				delete_file(last_pick_delete);
@@ -380,7 +386,9 @@ bool save_menu(int value_)
 				continue;
 			}
 		}
-		else if(input_ == VK_ESCAPE || (input_ == -1 && inputedKey.isRightClick()))
+		else if(input_ == VK_ESCAPE || 
+			input_ == GVK_BUTTON_B || 
+			input_ == GVK_BUTTON_B_LONG || (input_ == -1 && inputedKey.isRightClick()))
 		{
 			if(delete_mode == 2) {
 				delete_mode = 1;

@@ -1145,6 +1145,8 @@ int players::move(short_move x_mov, short_move y_mov)
 				{
 				case 'Y':
 				case 'y':
+				case GVK_BUTTON_A:
+				case GVK_BUTTON_A_LONG:
 					loop_ = false;
 					enterlog();
 					endSelection();
@@ -1159,6 +1161,8 @@ int players::move(short_move x_mov, short_move y_mov)
 				case 'N':
 				case 'n':
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
 					endSelection();
@@ -1189,6 +1193,8 @@ int players::move(short_move x_mov, short_move y_mov)
 					{
 					case 'Y':
 					case 'y':
+					case GVK_BUTTON_A:
+					case GVK_BUTTON_A_LONG:
 						loop_ = false;
 						enterlog();
 						endSelection();
@@ -1203,6 +1209,8 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'N':
 					case 'n':
 					case VK_ESCAPE:
+					case GVK_BUTTON_B:
+					case GVK_BUTTON_B_LONG:
 						loop_ = false;
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
 						endSelection();
@@ -1234,6 +1242,8 @@ int players::move(short_move x_mov, short_move y_mov)
 					{
 					case 'Y':
 					case 'y':
+					case GVK_BUTTON_A:
+					case GVK_BUTTON_A_LONG:
 						loop_ = false;
 						enterlog();
 						endSelection();
@@ -1248,6 +1258,8 @@ int players::move(short_move x_mov, short_move y_mov)
 					case 'N':
 					case 'n':
 					case VK_ESCAPE:
+					case GVK_BUTTON_B:
+					case GVK_BUTTON_B_LONG:
 						loop_ = false;
 						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
 						endSelection();
@@ -1389,6 +1401,8 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 				{
 				case 'Y':
 				case 'y':
+				case GVK_BUTTON_A:
+				case GVK_BUTTON_A_LONG:
 					loop_ = false;
 					enterlog();
 					endSelection();
@@ -1403,6 +1417,8 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 				case 'N':
 				case 'n':
 				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
 					loop_ = false;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
 					endSelection();
@@ -1954,6 +1970,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			switch(key_)
 			{
 			case 'Y':
+    		case GVK_BUTTON_A_LONG:
 				break;
 			default:
 				hp = max_hp;
@@ -3862,6 +3879,8 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 			{
 			case 'Y':
 			case 'y':
+			case GVK_BUTTON_A:
+			case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				if(you.god == GT_YUKARI)
@@ -5572,7 +5591,9 @@ bool players::equipjewerly(char id_)
 								return 0;
 							}
 						}
-						else if(key_ == VK_ESCAPE)
+						else if(key_ == VK_ESCAPE ||
+							key_ == GVK_BUTTON_B ||
+							key_ == GVK_BUTTON_B_LONG)
 						{
 							endSelection();
 							return 0;
@@ -5743,6 +5764,8 @@ bool players::unequip(equip_type type_, bool force_)
 				{
 				case 'Y':
 				case 'y':
+				case GVK_BUTTON_A:
+				case GVK_BUTTON_A_LONG:
 					repeat_ = false;
 					endSelection();
 					break;

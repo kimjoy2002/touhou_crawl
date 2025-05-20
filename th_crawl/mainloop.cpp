@@ -11,6 +11,7 @@
 #include "display.h"
 #include "key.h"
 #include "save.h"
+#include "joypad.h"
 #include "player.h"
 #include "beam.h"
 #include "monster_texture.h"
@@ -1173,7 +1174,7 @@ void MainLoop()
 		case GVK_BUTTON_B://패드 B
 			escape();
 			break;
-		case GVK_BUTTON_A_LONG: //패드 B 길게
+		case GVK_BUTTON_B_LONG: //패드 B 길게
 			Wide_Search();
 			break;
 		case GVK_BUTTON_X://패드 X
@@ -1264,7 +1265,9 @@ bool option_menu(int value_)
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
 			}
 		}
-		else if(input_ == VK_ESCAPE || (input_ == -1 && inputedKey.isRightClick()))
+		else if(input_ == VK_ESCAPE ||
+		input_ == GVK_BUTTON_B ||
+		input_ == GVK_BUTTON_B_LONG  || (input_ == -1 && inputedKey.isRightClick()))
 		{
 			if(lang != LocalzationManager::current_lang) {
 				LocalzationManager::init(LocalzationManager::baseLang(), true);

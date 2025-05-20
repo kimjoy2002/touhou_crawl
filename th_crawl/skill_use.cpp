@@ -353,7 +353,9 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 					break;
 				}
 			}
-			else if(key_ == VK_ESCAPE)
+			else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 				break;
 		}
 		changedisplay(DT_GAME);
@@ -408,6 +410,8 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 					break;
 				}
 			case VK_ESCAPE:
+			case GVK_BUTTON_B:
+			case GVK_BUTTON_B_LONG:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_help);
 				endSelection();
 				return false;
@@ -538,6 +542,8 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		{
 		case 'Y':
 		case 'y':
+    	case GVK_BUTTON_A:
+    	case GVK_BUTTON_A_LONG:
 			break;
 		default:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_help);
@@ -731,7 +737,9 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -805,7 +813,9 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 					break;
 				}
 			}
-			else if(key_ == VK_ESCAPE)
+			else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 				break;
 		}
 		changedisplay(DT_GAME);
@@ -1417,6 +1427,8 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		{
 		case 'Y':
 		case 'y':
+    	case GVK_BUTTON_A:
+    	case GVK_BUTTON_A_LONG:
 			enterlog();
 			endSelection();
 			break;
@@ -1774,7 +1786,9 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -1913,7 +1927,9 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -2012,7 +2028,9 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 				break;
 			}
 		}
-		else if(key_ == VK_ESCAPE)
+		else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			break;
 	}
 	changedisplay(DT_GAME);
@@ -2031,6 +2049,8 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 	case 'Y':
 	case 'y':
+    case GVK_BUTTON_A:
+    case GVK_BUTTON_A_LONG:
 		enterlog();
 		endSelection();
 		break;
@@ -2074,6 +2094,8 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 	{
 	case 'Y':
 	case 'y':
+	case GVK_BUTTON_A:
+	case GVK_BUTTON_A_LONG:
 		enterlog();
 		endSelection();
 		break;
@@ -2250,6 +2272,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 		switch (waitkeyinput())
 		{
 		case 'Y':
+    	case GVK_BUTTON_A_LONG:
 			enterlog();
 			endSelection();
 			break;
@@ -2355,6 +2378,8 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		{
 		case 'Y':
 		case 'y':
+    	case GVK_BUTTON_A:
+    	case GVK_BUTTON_A_LONG:
 			loop_ = false;
 			endSelection();
 			break;
@@ -3012,6 +3037,8 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			endSelection();
 			return false;
@@ -3235,6 +3262,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			{
 			case 'y':
 			case 'Y':
+    		case GVK_BUTTON_A:
+    		case GVK_BUTTON_A_LONG:
 				endSelection();
 				you.PietyUpDown(-(you.piety-140));
 				you.god_value[GT_JUNKO][0] = 0;
@@ -3262,6 +3291,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			endSelection();
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			return false;
@@ -3305,7 +3336,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 						int key__ = waitkeyinput(true);
 						endSelection();
-						if (key__ == 'y' || key__ == 'Y')
+						if (key__ == 'y' || key__ == 'Y' || key__ == GVK_BUTTON_A || key__ == GVK_BUTTON_A_LONG)
 						{
 							you.SetPureSkill(num);
 							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS, PlaceHolderHelper(skill_string((skill_type)num))), true, false, false, CL_junko);
@@ -3408,7 +3439,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 						int key__ = waitkeyinput(true);
 						endSelection();
-						if (key__ == 'y' || key__ == 'Y')
+						if (key__ == 'y' || key__ == 'Y' || key__ == GVK_BUTTON_A || key__ == GVK_BUTTON_A_LONG)
 						{
 							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH, PlaceHolderHelper(item_->GetName())), true, false, false, CL_junko);
 							AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM, PlaceHolderHelper(item_->GetName())), CL_junko);
@@ -3490,7 +3521,9 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					return false;
 				}
 			}
-			else if (key_ == VK_ESCAPE)
+			else if (key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), true, false, false, CL_normal);
 				changedisplay(DT_GAME);
@@ -3569,6 +3602,8 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			endSelection();
 			return false;
@@ -3946,6 +3981,8 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			endSelection();
 			return false;
@@ -4024,6 +4061,8 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			endSelection();
 			return false;
@@ -4094,6 +4133,8 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
 			endSelection();
 			return false;

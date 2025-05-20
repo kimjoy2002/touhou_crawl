@@ -439,7 +439,11 @@ int MoreWait()
 		InputedKey inputedKey;
 		int select = waitkeyinput(inputedKey);
 		//마우스도 지정
-		if(select==VK_ESCAPE || select==VK_RETURN || select == -1) 
+		if(select==VK_ESCAPE || select==VK_RETURN || 
+		select== GVK_BUTTON_A ||
+		select== GVK_BUTTON_A_LONG ||
+		select== GVK_BUTTON_B || 
+		select== GVK_BUTTON_B_LONG || select == -1) 
 		{
 			break;
 		}

@@ -48,10 +48,14 @@ bool isGodTemple(int id_, god_type god_)
 	case 28:
 	case 29:
 	case 30:
+	case 31:
+	case 32:
+	case 33:
+	case 34:
 		//공용 신
 		return true;
 	case 9:
-	case 31:
+	case 35:
 		//뱌쿠렌
 		return (god_ == GT_BYAKUREN);
 	case 12:
@@ -60,7 +64,7 @@ bool isGodTemple(int id_, god_type god_)
 	case 15:
 		//스와코
 		return (!is_exist_named(MON_CIRNO) && god_ == GT_SUWAKO);
-	case 32:
+	case 36:
 		//카나코
 		return (god_ == GT_KANAKO);
 	case 14:
@@ -101,13 +105,13 @@ bool isGodTemple(int id_, god_type god_)
 	case 20:
 		//조온시온
 		return (god_ == GT_JOON_AND_SION);
-	case 33:
+	case 37:
 		//릴리
 		return (god_ == GT_LILLY);
-	case 34:
+	case 38:
 		//미코
 		return (god_ == GT_MIKO);
-	case 35:
+	case 39:
 		//세이자
 		return (god_ == GT_SEIJA);
 	case 36:
@@ -921,7 +925,7 @@ T_T\
 ####...####";
 			break;
 		}
-	case 24: //전부
+	case 28: //전부
 		{
 			map->size_x = 1;
 			map->size_y = 4;
@@ -943,7 +947,7 @@ T_T\
 ###";
 			break;
 		}
-	case 25: //전부
+	case 29: //전부
 		{
 			bool hw_ = randA(1);
 			map->size_x = 1;
@@ -961,7 +965,7 @@ B.B\
 B.B";
 			break;
 		}
-	case 26: //전부
+	case 30: //전부
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;
@@ -1056,7 +1060,7 @@ B.B";
 .......";
 			break;
 		}
-	case 27: //전부
+	case 31: //전부
 		{
 			bool hw_ = randA(1);
 			map->size_x = 1;
@@ -1074,7 +1078,7 @@ B.B";
 .&.";
 			break;
 		}
-	case 28: //전부
+	case 32: //전부
 		{
 			bool hw_ = randA(1);
 			map->size_x = 2;
@@ -1096,7 +1100,7 @@ B.B";
 .....";
 			break;
 		}
-	case 29: //전부
+	case 33: //전부
 		{
 			bool hw_ = randA(1);
 			map->size_x = 7;
@@ -1114,9 +1118,9 @@ B.B";
 			rand_.push(god_tile);
 			rand_.push(DG_STATUE);
 			rand_.push(DG_STATUE2);
-			int i1 = rand_.pop();
-			int i2 = rand_.pop();
-			int i3 = rand_.pop();
+			dungeon_tile_type i1 = rand_.pop();
+			dungeon_tile_type i2 = rand_.pop();
+			dungeon_tile_type i3 = rand_.pop();
 			map->sp_tile_list.push_back(i1);
 			if(i1 != DG_STATUE && i1 != DG_STATUE2)
 				makeAunnTemple(map, coord_def(-5, 0));
@@ -1135,7 +1139,7 @@ B.B";
 ...............";
 			break;
 		}
-	case 30: //전부
+	case 34: //전부
 		{
 			map->size_x = 2;
 			map->size_y = 3;	
@@ -1155,7 +1159,7 @@ B.B";
 .....";
 			break;
 		}
-	case 31: //뱌쿠렌 도서관
+	case 35: //뱌쿠렌 도서관
 		{
 			map->size_x = 5;
 			map->size_y = 4;
@@ -1179,7 +1183,7 @@ B.B";
 #####+#####";
 			break;
 		}
-	case 32: //카나코 온바시라
+	case 36: //카나코 온바시라
 		{
 			bool hw_ = randA(1);
 			map->size_x = 2;
@@ -1206,7 +1210,7 @@ B.B";
 .....";
 			break;
 		}
-	case 33: //릴리 꽃밭
+	case 37: //릴리 꽃밭
 		{
 			map->size_x = 5;
 			map->size_y = 4;	
@@ -1236,7 +1240,7 @@ B.B";
 ###########";
 			break;
 		}
-	case 34: //미코 10개의 욕망
+	case 38: //미코 10개의 욕망
 		{
 			map->size_x = 5;
 			map->size_y = 3;
@@ -1264,7 +1268,7 @@ B.B";
 ...........";
 			break;
 		}
-	case 35: //세이자 신전 바꾸기
+	case 39: //세이자 신전 바꾸기
 		{
 			map->size_x = 3;
 			map->size_y = 4;	
@@ -1281,7 +1285,7 @@ B.B";
 				if(it != map->sp_tile_list.end())
 					continue;
 				map->sp_tile_list.push_back(dg_t_);
-				map->event_list.push_back(mapdummy_event(EVL_CHANGE_TILE, coord_def(-2+(i%3)*2,-3+(i/3)*2), EVT_APPROACH_SMALL,0,DG_TEMPLE_SEIJA));
+				map->event_list.push_back(mapdummy_event(EVL_CHANGE_TILE, coord_def(-2+(i%3)*2,-3+(i/3)*2), EVT_APPROACH_SMALL,DG_TEMPLE_SEIJA));
 				i--;
 			}
 			map->name = "ALTAR_SEIJA_CHANGE_TILE";

@@ -2887,12 +2887,16 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 		{
 		case 'Y':
 		case 'y':
+    	case GVK_BUTTON_A:
+    	case GVK_BUTTON_A_LONG:
 			break;			
 		case -1:
 		default:
 		case 'N':
 		case 'n':
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
 			endSelection();
 			return false;
@@ -6139,6 +6143,8 @@ bool CheckDangerSpell(int danger_)
 		{
 		case 'Y':
 		case 'y':
+    	case GVK_BUTTON_A:
+    	case GVK_BUTTON_A_LONG:
 			enterlog();
 			endSelection();
 			break;
@@ -6243,6 +6249,8 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 			{
 			case 'Y':
 			case 'y':
+    		case GVK_BUTTON_A:
+    		case GVK_BUTTON_A_LONG:
 				enterlog();
 				endSelection();
 				break;

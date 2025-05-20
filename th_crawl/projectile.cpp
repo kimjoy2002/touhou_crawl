@@ -526,6 +526,8 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			deletelog();
 			paintpath(you.search_pos, beam, it, false,infor_, m_len_, sector_);
 			deletelog();
@@ -597,6 +599,8 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 				break;
 			}
 		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
 			deletelog();
 			return 0;
 		default:

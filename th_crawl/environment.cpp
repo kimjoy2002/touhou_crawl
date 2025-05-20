@@ -1225,9 +1225,9 @@ bool environment::MakeFloorEffect(const coord_def &c, textures *t, textures *t2,
 }
 
 
-bool environment::MakeEvent(int id_, coord_def position_, event_type type_, int count_)
+bool environment::MakeEvent(int id_, coord_def position_, event_type type_, int count_, int value)
 {
-	event_list.push_back(events(id_,position_,type_,count_));
+	event_list.push_back(events(id_,position_,type_,count_, value));
 	return true;
 }
 

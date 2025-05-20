@@ -282,7 +282,7 @@ public:
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
-	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1);
+	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
 	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
 	void ClearAllShadow();

@@ -1950,7 +1950,9 @@ void SkillUse(char auto_)
 					break;
 				}
 			}
-			else if(key_ == VK_ESCAPE)
+			else if(key_ == VK_ESCAPE||
+			key_ == GVK_BUTTON_B || 
+			key_ == GVK_BUTTON_B_LONG)
 				break;
 		}
 		changedisplay(DT_GAME);

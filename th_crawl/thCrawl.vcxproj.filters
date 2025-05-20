@@ -111,6 +111,9 @@
     <ClCompile Include="item_action.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="joypad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="key.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -348,6 +351,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="joypad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="key.h">

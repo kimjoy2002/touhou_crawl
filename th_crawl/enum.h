@@ -371,6 +371,7 @@ enum event_type
 	EVT_SIGHT, //시야에 들어오다.
 	EVT_APPROACH_SMALL, //근처에 도착했다. (밀착시)
 	EVT_APPROACH_MIDDLE, //근처에 도착했다. (적당히)
+	EVT_APPROACH_BIG, //근처에 도착했다. (꽤나)
 	EVT_COUNT, //턴
 	EVT_ALWAYS, //항상
 	EVT_MAX

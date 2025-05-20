@@ -5214,7 +5214,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		//보조스킬
 
 		int add_ = arr_[randA(10)];
-		list->push_back(spell(add_, 25));
+		list->push_back(spell(add_, 35));
 		t.value1 = add_;
 		int color_ = randA(3);
 		mon_->image = &img_mons_magic_book[color_];
@@ -5229,7 +5229,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			else
 			{
 				add_ = arr2_[randA(7)];
-				list->push_back(spell(add_, 15));
+				list->push_back(spell(add_, 20));
 				t.value2 = add_;
 			}
 		}

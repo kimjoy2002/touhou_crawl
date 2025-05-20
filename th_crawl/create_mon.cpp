@@ -375,7 +375,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
 	{ 69,  SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  10,  3}, //쿠타카
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
-	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  50,  4}, //사쿠야
+	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  100,  4}, //사쿠야
 	//{  29,  SCARLET_LEVEL+4,  SCARLET_LEVEL+4,  60,  5}, //레밀리아 아마 벌트 고정
 	
 	

@@ -108,12 +108,27 @@ bool isGodTemple(int id_, god_type god_)
 		//미코
 		return (god_ == GT_MIKO);
 	case 35:
-		//미코
+		//세이자
 		return (god_ == GT_SEIJA);
+	case 36:
+		//오키나
+		return (god_ == GT_OKINA);
+	case 37:
+		//순호
+		return !is_exist_named(MON_CLOWNPIECE) && (god_ == GT_JUNKO);
+	case 38:
+		//미마
+		return (god_ == GT_MIMA);
+	case 39:
+		//텐시
+		return (god_ == GT_TENSI);
+	case 40:
+		//유유코
+		return (god_ == GT_YUYUKO);
 	}
 }
 
-int GetMaxAlter(){return 21;};
+int GetMaxAlter(){return 41;};
 
 
 void makeAunnTemple(map_dummy* map, coord_def c)
@@ -122,8 +137,8 @@ void makeAunnTemple(map_dummy* map, coord_def c)
 
 	if (is_exist_named(MON_AUNN))
 		return;
-	if (randA(99) < 1) 
-	{//확률 1% (그러나 실제로 신전은 16개정도 생기므로 대략 15%정도 확률로 아운이 등장한다.
+	if (randA(99) < 2) 
+	{//확률 2% (그러나 실제로 신전은 8개정도 생기므로 대략 15%정도 확률로 아운이 등장한다.
 		if (!is_exist_named(MON_AUNN)) {
 			map->monster_list.push_back(mapdummy_mon(MON_AUNN, 0, c));
 			set_exist_named(MON_AUNN);
@@ -292,16 +307,27 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 						
-			random_extraction<int> rand_;
-			rand_.push(DG_SNOWMAN);
+			dungeon_tile_type god_tile = DG_FLOOR;
+			if(map->sp_tile_list.size() > 0)
+				god_tile = map->sp_tile_list[0];
+			map->sp_tile_list.clear();
+			random_extraction<dungeon_tile_type> rand_;
+			random_extraction<dungeon_tile_type> rand_2;
 			rand_.push(DG_GRAVE);
 			rand_.push(DG_STATUE);
 			rand_.push(DG_STATUE2);
 			rand_.push(DG_SUN_FLOWER);
 			rand_.push(DG_TREE);
-			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
-			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
-			map->sp_tile_list.push_back((dungeon_tile_type)rand_.pop());
+			rand_.push(DG_LAVA);
+			rand_.push(DG_WATER);
+			rand_2.push(god_tile);
+			rand_2.push(rand_.pop());
+			rand_2.push(rand_.pop());
+			rand_2.push(rand_.pop());
+			map->sp_tile_list.push_back(rand_2.pop());
+			map->sp_tile_list.push_back(rand_2.pop());
+			map->sp_tile_list.push_back(rand_2.pop());
+			map->sp_tile_list.push_back(rand_2.pop());
 			makeAunnTemple(map, coord_def(0, 0));
 			map->name = "COMMON_ALTAR_NSEW";
 			return  "\
@@ -1050,12 +1076,14 @@ B.B";
 		}
 	case 28: //전부
 		{
+			bool hw_ = randA(1);
 			map->size_x = 2;
-			map->size_y = 3;	
-			map->m_entrance.x = 0;
-			map->m_entrance.y = -map->size_y;
-			map->m_exit.x = 0;
-			map->m_exit.y = map->size_y;
+			map->size_y = 3;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			makeAunnTemple(map, coord_def(0, 0));
 			map->name = "COMMON_ALTAR_WATER_";
 			return  "\
@@ -1070,15 +1098,18 @@ B.B";
 		}
 	case 29: //전부
 		{
+			bool hw_ = randA(1);
 			map->size_x = 7;
 			map->size_y = 2;	
-			map->m_entrance.x = 0;
-			map->m_entrance.y = -map->size_y;
-			map->m_exit.x = 0;
-			map->m_exit.y = map->size_y;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			dungeon_tile_type god_tile = DG_FLOOR;
 			if(map->sp_tile_list.size() > 0)
 				god_tile = map->sp_tile_list[0];
+			 map->sp_tile_list.clear();
 			random_extraction<dungeon_tile_type> rand_;
 			rand_.push(god_tile);
 			rand_.push(DG_STATUE);
@@ -1127,7 +1158,7 @@ B.B";
 	case 31: //뱌쿠렌 도서관
 		{
 			map->size_x = 5;
-			map->size_y = 4;	
+			map->size_y = 4;
 			map->m_entrance.x = 0;
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = 0;
@@ -1152,12 +1183,12 @@ B.B";
 		{
 			bool hw_ = randA(1);
 			map->size_x = 2;
-			map->size_y = 2;	
-			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):0;
-			map->m_entrance.y = hw_?0:(randA(1)?-map->size_y:map->size_y);
+			map->size_y = 2;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			hw_ = randA(1);
-			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):0;
-			map->m_exit.y = hw_?0:(randA(1)?-map->size_y:map->size_y);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_KANAKO);
 			makeAunnTemple(map, coord_def(0, 0));
@@ -1208,7 +1239,7 @@ B.B";
 	case 34: //미코 10개의 욕망
 		{
 			map->size_x = 5;
-			map->size_y = 2;
+			map->size_y = 3;
 			map->m_entrance.x = rand_int(-map->size_x,map->size_x);
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = rand_int(-map->size_x,map->size_x);
@@ -1216,6 +1247,7 @@ B.B";
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_MIKO);
 			makeAunnTemple(map, coord_def(0, 2));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			for(int i = 0; i<9;i++) {
 				map->monster_list.push_back(mapdummy_mon(MON_DESIRE,M_FLAG_DECORATE,coord_def(1-map->size_x+i,-1)));
 			}
@@ -1223,15 +1255,17 @@ B.B";
 			
 			map->name = "ALTAR_MIKO_10_DESIRE";
 			return  "\
+```````````\
 ===========\
 =.........=\
 =====.=====\
 ....===....\
-.....0.....";
+.....0.....\
+...........";
 			break;
 		}
 	case 35: //세이자 신전 바꾸기
-	{
+		{
 			map->size_x = 3;
 			map->size_y = 4;	
 			map->m_entrance.x = 0;
@@ -1261,6 +1295,146 @@ B.B";
 #.....#\
 #.....#\
 ###+###";
+			break;
+		}
+	case 36: //오키나 많은 문
+		{
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			makeAunnTemple(map,coord_def(0, 0));
+			map->name = "ALTAR_OKINA_MANY_DOOR";
+			return  "\
++++++\
++++++\
+++0++\
++++++\
++++++";
+		}
+	case 37: //순호와 클라운피스
+		{
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_JUNKO);
+			makeAunnTemple(map, coord_def(0, -2));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if (!is_exist_named(MON_CLOWNPIECE)) {
+				map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE, M_FLAG_DECORATE | M_FLAG_COMPLETE_NETURALY, c));
+				set_exist_named(MON_CLOWNPIECE);
+			}
+			
+			map->name = "ALTAR_JUNKO_CLOWNPIECE";
+			return  "\
+.........\
+....0....\
+.=======.\
+.=f___T=.\
+.=_____=.\
+.=____~=.\
+.=======.\
+.........\
+.........";
+			break;
+		}
+	case 38: //미마
+		{
+			map->size_x = 6;
+			map->size_y = 4;
+			map->m_entrance.x = 0;
+			map->m_entrance.y = map->size_y;
+			map->m_exit.x = 0;
+			map->m_exit.y = -map->size_y;
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_MIMA);
+			makeAunnTemple(map, coord_def(0, 3));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->monster_list.push_back(mapdummy_mon(MON_TRASH,M_FLAG_DECORATE | M_FLAG_NETURALY,coord_def(-2,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_TRASH,M_FLAG_DECORATE | M_FLAG_NETURALY,coord_def(-3,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_TRASH,M_FLAG_DECORATE | M_FLAG_NETURALY,coord_def(-3,1)));
+			map->monster_list.push_back(mapdummy_mon(MON_TRASH,M_FLAG_DECORATE | M_FLAG_NETURALY,coord_def(-1,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_TRASH,M_FLAG_DECORATE | M_FLAG_NETURALY,coord_def(-1,1)));
+			map->event_list.push_back(mapdummy_event(EVL_MIMA_SPARK_BOOK,coord_def(3,0),EVT_SIGHT));
+			map->name = "ALTAR_MIMA_SPARK_BOOK";
+			return  "\
+######+######\
+#...........#\
+#.=========.#\
+#.=.......=.#\
+#.=.......=.#\
+#.=.......=.#\
+#.=========.#\
+#.....0.....#\
+######+######";
+			break;
+		}
+	case 39: //텐시
+		{
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 5;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_TENSI);
+			makeAunnTemple(map, coord_def(0, 0));
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->event_list.push_back(mapdummy_event(EVL_TENSI_EARTHQUAKE,coord_def(3,0),EVT_SIGHT));
+			map->name = "ALTAR_TENSI_COLLAPSING_WALL";
+			return  "\
+...........\
+.#########.\
+.#########.\
+.#########.\
+.#########.\
+.####0####.\
+.#########.\
+.#########.\
+.#########.\
+.#########.\
+...........";
+			break;
+		}
+	case 40: //유유코
+		{
+			bool hw_ = randA(1);
+			map->size_x = 3;
+			map->size_y = 3;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			map->sp_tile_list.clear();
+			map->sp_tile_list.push_back(DG_TEMPLE_YUYUKO);
+			makeAunnTemple(map, coord_def(0, 0));
+			map->flag = FLAG_NO_STAIR;
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE,coord_def(-1,0)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE,coord_def(-1,-1)));
+			map->monster_list.push_back(mapdummy_mon(MON_GHOST,M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE,coord_def(1,1)));
+			map->name = "ALTAR_YUYUKO_GHOST";
+			return  "\
+.......\
+.......\
+.......\
+...0...\
+.......\
+.......\
+.......";
 			break;
 		}
 	}

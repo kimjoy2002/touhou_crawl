@@ -112,6 +112,11 @@ int events::action(int delay_)
 		if(EventOccur(id,this))
 			return 0;
 	}
+	if(type == EVT_APPROACH_BIG && distan_coord(position,you.position)<=8)
+	{
+		if(EventOccur(id,this))
+			return 0;
+	}
 	if(type == EVT_ALWAYS)
 	{
 		if(EventOccur(id,this))
@@ -973,6 +978,59 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		env[current_level].changeTile(event_->position, value);
 	}
 	return 1;
+	case EVL_MIMA_SPARK_BOOK:
+	{
+		monster *book_ = env[current_level].AddMonster(MON_MAGIC_BOOK, M_FLAG_DECORATE, event_->position);
+		book_->spell_lists.clear();
+		book_->item_lists.clear();
+		
+		{
+			item_infor t;
+			makeCustomBook(&t);
+			(*random_spell) = true;
+			book_->spell_lists.push_back(spell(SPL_SPARK, 35));
+			book_->spell_lists.push_back(spell(SPL_BLINK, 15));
+			t.value1 = SPL_SPARK;
+			book_->item_lists.push_back(SPL_SPARK);
+		}
+		return 1;
+	}
+	case EVL_TENSI_EARTHQUAKE:
+	{
+		if (event_->count == -1)
+		{
+			event_->type = EVT_ALWAYS;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_TENSI_EARTHQUAKE) + " ", false, false, false, CL_small_danger);
+			event_->count = 12;
+			env[current_level].MakeNoise(event_->position, 12, NULL);
+		}
+		if (event_->count == 9 || event_->count == 6 || event_->count == 3 || event_->count == 1)
+		{
+			for(int i = -4; i <= 4; i++) {
+				for(int j = -4; j <= 4; j++) {
+					if(!(i == 0 && j == 1) && (randA(2) == 0 || event_->count == 1)) {
+						env[current_level].changeTile(coord_def(event_->position.x+ i, event_->position.y+), env[current_level].base_floor);						
+					}
+				}
+			}
+			env[current_level].MakeNoise(event_->position, 12, NULL);
+			if(event_->count == 1)
+				return 1;
+		}
+	}
+	return 0;
+	case EVL_TWIST:
+	{
+		for (int i = -3; i < 4; i++)
+		{
+			for (int j = -3; j < 4; j++)
+			{
+				if (randA(4) == 0)
+					env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_normal, SMT_TWIST, rand_int(2, 3), 0, NULL);
+			}
+		}
+		return 0;
+	}
 	default:
 		break;
 	}

@@ -114,25 +114,25 @@ bool isGodTemple(int id_, god_type god_)
 	case 39:
 		//세이자
 		return (god_ == GT_SEIJA);
-	case 36:
+	case 40:
 		//오키나
 		return (god_ == GT_OKINA);
-	case 37:
+	case 41:
 		//순호
 		return !is_exist_named(MON_CLOWNPIECE) && (god_ == GT_JUNKO);
-	case 38:
+	case 42:
 		//미마
 		return (god_ == GT_MIMA);
-	case 39:
+	case 43:
 		//텐시
 		return (god_ == GT_TENSI);
-	case 40:
+	case 44:
 		//유유코
 		return (god_ == GT_YUYUKO);
 	}
 }
 
-int GetMaxAlter(){return 41;};
+int GetMaxAlter(){return 45;};
 
 
 void makeAunnTemple(map_dummy* map, coord_def c)
@@ -323,7 +323,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			rand_.push(DG_SUN_FLOWER);
 			rand_.push(DG_TREE);
 			rand_.push(DG_LAVA);
-			rand_.push(DG_WATER);
+			rand_.push(DG_SEA);
 			rand_2.push(god_tile);
 			rand_2.push(rand_.pop());
 			rand_2.push(rand_.pop());
@@ -1046,7 +1046,7 @@ B.B";
 			}
 			
 			if(god_tile != DG_FLOOR) {
-				map->monster_list.push_back(mapdummy_mon(mon_,M_FLAG_DECORATE,coord_def(0,-1)));
+				map->monster_list.push_back(mapdummy_mon(mon_,M_FLAG_DECORATE,coord_def(0,0)));
 			}
 			makeAunnTemple(map, coord_def(0, 2));
 			map->name = "COMMON_ALTAR_INTHE_GLASS";
@@ -1134,7 +1134,7 @@ B.B";
 			return  "\
 ...............\
 .###..###..###.\
-.#1#..#2#..#3#.\
+.#0#..#1#..#2#.\
 .#+#..#+#..#+#.\
 ...............";
 			break;
@@ -1147,8 +1147,9 @@ B.B";
 			map->m_entrance.y = -map->size_y;
 			map->m_exit.x = -rand_int(-map->size_x,-map->size_x);
 			map->m_exit.y = -map->size_y;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			makeAunnTemple(map, coord_def(0, 0));
-			map->name = "COMMON_ALTAR_WATER_";
+			map->name = "COMMON_ALTAR_GLASS_SHOPPING";
 			return  "\
 .....\
 ##+##\
@@ -1301,7 +1302,7 @@ B.B";
 ###+###";
 			break;
 		}
-	case 36: //오키나 많은 문
+	case 40: //오키나 많은 문
 		{
 			bool hw_ = randA(1);
 			map->size_x = 2;
@@ -1320,7 +1321,7 @@ B.B";
 +++++\
 +++++";
 		}
-	case 37: //순호와 클라운피스
+	case 41: //순호와 클라운피스
 		{
 			bool hw_ = randA(1);
 			map->size_x = 4;
@@ -1335,7 +1336,7 @@ B.B";
 			makeAunnTemple(map, coord_def(0, -2));
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			if (!is_exist_named(MON_CLOWNPIECE)) {
-				map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE, M_FLAG_DECORATE | M_FLAG_COMPLETE_NETURALY, c));
+				map->monster_list.push_back(mapdummy_mon(MON_CLOWNPIECE, M_FLAG_DECORATE | M_FLAG_COMPLETE_NETURALY, coord_def(0, 0)));
 				set_exist_named(MON_CLOWNPIECE);
 			}
 			
@@ -1352,7 +1353,7 @@ B.B";
 .........";
 			break;
 		}
-	case 38: //미마
+	case 42: //미마
 		{
 			map->size_x = 6;
 			map->size_y = 4;
@@ -1383,7 +1384,7 @@ B.B";
 ######+######";
 			break;
 		}
-	case 39: //텐시
+	case 43: //텐시
 		{
 			bool hw_ = randA(1);
 			map->size_x = 5;
@@ -1413,7 +1414,7 @@ B.B";
 ...........";
 			break;
 		}
-	case 40: //유유코
+	case 45: //유유코
 		{
 			bool hw_ = randA(1);
 			map->size_x = 3;

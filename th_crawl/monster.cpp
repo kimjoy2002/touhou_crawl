@@ -2879,7 +2879,7 @@ int monster::action(int delay_)
 		}
 		else if ((is_sight && you.GetBuffOk(BUFFSTAT_HALO)) || (is_sight && you.s_weather == 3 && you.s_weather_turn>0))
 		{
-			s_glow = 1;
+			SetGlow(1, true);
 		}
 
 		if(s_graze>0)

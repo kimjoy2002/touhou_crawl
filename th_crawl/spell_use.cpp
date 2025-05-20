@@ -5553,7 +5553,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_TOKIKO:
 	{
-		list->push_back(spell(SPL_TWIST, 15));
+		list->push_back(spell(SPL_TWIST, 50));
 		list->push_back(spell(SPL_VEILING, 25));
 		random_extraction<int> arr_;
 
@@ -5720,7 +5720,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	break;
 	case MON_HATATE:
 		list->push_back(spell(SPL_VEILING, 20));
-		list->push_back(spell(SPL_AIR_STRIKE, 30));
+		list->push_back(spell(SPL_AIR_STRIKE, 40));
 		list->push_back(spell(SPL_BLINK, 25));
 		break;
 	case MON_DOREKING:
@@ -5768,20 +5768,6 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	}
 }
 
-float monster_enhance_magic(int id_) {
-	//수치로 조절하기 어려운 부분 강화시키기
-	switch(id_) {
-	case MON_MAID_FAIRY:
-	case MON_YAMAWARO_NINJA:
-		return 1.5f;
-	default:
-		break;
-	}
-
-	return 0;
-}
-
-
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
 {
 	int power=(order->level-3)*8;
@@ -5803,8 +5789,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 
 	}
 
-	if(monster_enhance_magic(order->id) > 0) {
-		power *= monster_enhance_magic(order->id);
+	if(order->flag & M_FLAG_MAGICIAN) {
+		power *= 1.5f;
 	}
 	power=max(0,min(SpellCap(skill),power));
 	switch(skill)

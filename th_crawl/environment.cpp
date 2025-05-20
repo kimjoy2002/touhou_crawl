@@ -2247,6 +2247,8 @@ int environment::insight_mon(monster_enemy_type type_) //타입은 동맹,적등
 				if((*it).flag & M_FLAG_DECORATE && !((*it).flag & M_FLAG_UNHARM || (*it).isUserAlly() || (*it).isCompleteNeutral())) {	
 					if((*it).isSightnonblocked(you.position)) {
 						(*it).flag = (*it).flag & ~M_FLAG_DECORATE; //더 이상 안전하지않음
+					} else {
+						continue;
 					}
 				} else {
 					continue;

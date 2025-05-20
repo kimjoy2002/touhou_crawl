@@ -3750,6 +3750,7 @@ const char* lake_enter_pattern(map_dummy* map)
 	{
 	default:
 	case 0:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 3;
 		map->size_y = 3;
@@ -3775,7 +3776,9 @@ const char* lake_enter_pattern(map_dummy* map)
 .......\
 .......\
 .......";
+	}
 	case 1:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 4;
 		map->size_y = 4;
@@ -3796,8 +3799,8 @@ const char* lake_enter_pattern(map_dummy* map)
 		rand_.push(MON_FAIRY_RED_COMMANDER, 1);
 		rand_rect_iterator rand_coord(coord_def(0, 0), map->size_x-1, map->size_y-1);
 		for (int i = 0; i < 7; i++) {
+			map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_SHIELD | M_FLAG_WAKE, (*rand_coord)));
 			if ((++rand_coord).end())
-				map->monster_list.push_back(mapdummy_mon(rand_.choice(), M_FLAG_SHIELD | M_FLAG_WAKE, (*rand_coord)));
 				break;
 		}
 		map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(0, 0), EVT_ALWAYS));
@@ -3811,7 +3814,9 @@ const char* lake_enter_pattern(map_dummy* map)
 .~_____~.\
 .._____..\
 .........";
+	}
 	case 2:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 2;
 		map->size_y = 2;
@@ -3829,7 +3834,9 @@ const char* lake_enter_pattern(map_dummy* map)
 __0__\
 .T_T.\
 .._..";
+	}
 	case 3:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 4;
 		map->size_y = 4;
@@ -3851,7 +3858,9 @@ __0__\
 .~~__~~..\
 .~._.~...\
 .........";
+	}
 	case 4:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 3;
 		map->size_y = 3;
@@ -3880,10 +3889,10 @@ __0__\
 			rand_unique.push(MON_CLOWNPIECE,1);
 		}
 		
-		if(rand_unique.size() > 0) {
+		if(rand_unique.GetSize() > 0) {
 			int unique_ = rand_unique.pop();
 			map->monster_list.push_back(mapdummy_mon(unique_, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
-			set_exist_named(unique_);
+			set_exist_named((monster_index)unique_);
 			if(unique_ == MON_SUNNY) {
 				map->monster_list.push_back(mapdummy_mon(MON_STAR, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(1, 0)));
 				map->monster_list.push_back(mapdummy_mon(MON_LUNAR, M_FLAG_COMPLETE_NETURALY | M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(-1, 0)));
@@ -3902,6 +3911,7 @@ __0__\
 .f___f.\
 .......";
 	}
+	}
 }
 
 
@@ -3911,6 +3921,7 @@ const char* youkai_enter_pattern(map_dummy* map)
 	{
 	default:
 	case 0:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 4;
 		map->size_y = 4;
@@ -3931,7 +3942,9 @@ const char* youkai_enter_pattern(map_dummy* map)
 .**...**.\
 ..**.**..\
 .........";
+	}
 	case 1:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 4;
 		map->size_y = 4;
@@ -3952,7 +3965,9 @@ const char* youkai_enter_pattern(map_dummy* map)
 .~.~.~.~.\
 .~.~.~.~.\
 .........";
+	}
 	case 2:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 4;
 		map->size_y = 4;
@@ -3976,7 +3991,9 @@ const char* youkai_enter_pattern(map_dummy* map)
 *..**..*`\
 **...***`\
 `*****```";
+	}
 	case 3:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 3;
 		map->size_y = 3;
@@ -3996,6 +4013,7 @@ const char* youkai_enter_pattern(map_dummy* map)
 .......\
 .......\
 .......";
+	}
 	}
 }
 
@@ -4146,7 +4164,7 @@ const char* scarlet_pattern(map_dummy* map)
 	default:
 	case 0:
 		map->size_x = 3;
-		map->size_y = 3;	
+		map->size_y = 3;
 		map->m_entrance.x = 0;
 		map->m_entrance.y = map->size_y;
 		map->m_exit.x = 0;
@@ -4190,7 +4208,7 @@ const char* scarlet_pattern(map_dummy* map)
 `````~~~~~~";
 	case 2:
 		map->size_x = 3;
-		map->size_y = 4;	
+		map->size_y = 4;
 		map->m_entrance.x = rand_int(-map->size_x, map->size_x);
 		map->m_entrance.y = map->size_y;
 		map->m_exit.x = rand_int(-map->size_x, map->size_x);
@@ -4309,7 +4327,7 @@ const char* youkai_last_vault_pattern(map_dummy* map)
 #...............#\
 ##.............##\
 ###...........###\
-#######...#######";	
+#######...#######";
 		break;
 		}
 	case 1:
@@ -4372,7 +4390,7 @@ const char* youkai_last_vault_pattern(map_dummy* map)
 ..$.i$$$+$$$i.$..\
 ..$$$$.....$$$$..\
 .................\
-.................";	
+.................";
 		break;
 		}
 	}
@@ -4388,6 +4406,7 @@ const char* scarlet_last_vault_pattern(map_dummy* map)
 	{
 	default:
 	case 0:
+	{
 		map->size_x = 8;
 		map->size_y = 8;	
 		map->m_entrance.x = 0;
@@ -4437,9 +4456,10 @@ const char* scarlet_last_vault_pattern(map_dummy* map)
 #...............#\
 ##.............##\
 ###...........###\
-#################";	
-		break;
+#################";
+	}
 	case 1:
+	{
 		map->size_x = 8;
 		map->size_y = 8;	
 		map->m_entrance.x = 0;
@@ -4493,8 +4513,8 @@ const char* scarlet_last_vault_pattern(map_dummy* map)
 #...............#\
 ##.............##\
 ###...........###\
-#######+++#######";	
-		break;
+#######+++#######";
+	}
 	}
 }
 

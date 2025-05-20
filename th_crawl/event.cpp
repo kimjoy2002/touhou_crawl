@@ -987,11 +987,10 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		{
 			item_infor t;
 			makeCustomBook(&t);
-			(*random_spell) = true;
 			book_->spell_lists.push_back(spell(SPL_SPARK, 35));
 			book_->spell_lists.push_back(spell(SPL_BLINK, 15));
 			t.value1 = SPL_SPARK;
-			book_->item_lists.push_back(SPL_SPARK);
+			book_->item_lists.push_back(t);
 		}
 		return 1;
 	}
@@ -1009,7 +1008,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			for(int i = -4; i <= 4; i++) {
 				for(int j = -4; j <= 4; j++) {
 					if(!(i == 0 && j == 1) && (randA(2) == 0 || event_->count == 1)) {
-						env[current_level].changeTile(coord_def(event_->position.x+ i, event_->position.y+), env[current_level].base_floor);						
+						env[current_level].changeTile(coord_def(event_->position.x+ i, event_->position.y+j), env[current_level].base_floor);						
 					}
 				}
 			}

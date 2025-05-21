@@ -3688,8 +3688,8 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 		break;
 	case MON_MISTIA:
-		if(!smoke) {
-			if(isCompleteNeutral() && randA(100) < 10) { //그냥 틈날때 불러
+		if(!smoke_) {
+			if(isCompleteNeutral() && randA(100) < 5) { //그냥 틈날때 불러
 				if (!env[current_level].isSilence(position)  && !s_mute)
 				{
 					string str_ = Get_Speak(id, this, MST_MAGIC);
@@ -3700,7 +3700,6 @@ void monster::special_action(int delay_, bool smoke_)
 					if(MonsterUseSpell(SPL_MISTIA_SONG,false,this,position))
 					{
 						Noise(position,SpellNoise(SPL_MISTIA_SONG),this);
-						return true;
 					}
 				}
 			}	
@@ -3709,8 +3708,8 @@ void monster::special_action(int delay_, bool smoke_)
 	case MON_LUNASA:
 	case MON_MERLIN:
 	case MON_LYRICA:
-		if(!smoke) {
-			if(isCompleteNeutral() && randA(100) < 5) { //노 래 조 아
+		if(!smoke_) {
+			if(isCompleteNeutral() && randA(100) < 3) { //노 래 조 아
 				if (!env[current_level].isSilence(position)  && !s_mute)
 				{
 					string str_ = Get_Speak(id, this, MST_MAGIC);

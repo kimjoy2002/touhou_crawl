@@ -1576,9 +1576,9 @@ textures img_item_cucumber(&texture_item02, 165, 255);
 textures img_item_broken_camera(&texture_item02, 166, 255);
 textures img_item_kappa_trash(&texture_item02, 167, 255);
 
-textures img_item_skeleton[] = { textures(&texture_item02, 206, 255),
-textures(&texture_item02, 207, 255),
-textures(&texture_item02, 208, 255)
+textures img_item_skeleton[] = { textures(&texture_item03, 206, 255),
+textures(&texture_item03, 207, 255),
+textures(&texture_item03, 208, 255)
 };
 
 textures img_effect_select(&texture_item01, 1, 255);

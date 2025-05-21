@@ -51,8 +51,8 @@ etcStruct etcList[EIT_LAST] = {
 	etcStruct(LOC_SYSTEM_ITEM_ETC_CATNIP, &img_item_cat_tree),
 	etcStruct(LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA, &img_item_broken_camera),
 	etcStruct(LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH, &img_item_kappa_trash),
-	etcStruct(LOC_SYSTEM_ITEM_ETC_PHOTO, &img_item_goal)
-	etcStruct(LOC_SYSTEM_ITEM_ETC_SKELETON, &img_item_skeleton[0]),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_PHOTO, &img_item_goal),
+	etcStruct(LOC_SYSTEM_ITEM_ETC_SKELETON, &img_item_skeleton[0])
 };
 
 
@@ -449,7 +449,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->can_throw = false;
 		t->image = etcList[select_].tex;
 		if(select_ == EIT_SKELETON) {
-			t->image = img_item_skeleton[randA(2)];
+			t->image = &img_item_skeleton[randA(2)];
 		}
 		t->name = name_infor(etcList[select_].key);
 		t->weight = 1.0f;

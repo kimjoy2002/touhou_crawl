@@ -729,7 +729,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_HOJOK:
 	{
 		bool toziko_ = true;
-		unit* target_unit = env[current_level].isMonsterPos(event_->position.x - 4, event_->position.y - 1);
+		unit* target_unit = env[current_level].isMonsterPos(event_->position.x - 4, event_->position.y - 1, &you);
 		if (target_unit)
 		{
 			env[current_level].changeTile(coord_def(event_->position.x - 4, event_->position.y), env[current_level].base_floor);
@@ -741,7 +741,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK1,true,false,false,CL_speak,
 					 PlaceHolderHelper(target_unit->GetName()->getName()));
 			}
-			if(target_unit->id != MON_TOZIKO) {
+			if(target_unit->GetId() != MON_TOZIKO) {
 				 toziko_ = false;
 			}
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
@@ -749,7 +749,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
 			}
 		}
-		target_unit = env[current_level].isMonsterPos(event_->position.x + 4, event_->position.y - 1);
+		target_unit = env[current_level].isMonsterPos(event_->position.x + 4, event_->position.y - 1, &you);
 		if (target_unit)
 		{
 			env[current_level].changeTile(coord_def(event_->position.x + 4, event_->position.y), env[current_level].base_floor);
@@ -1044,27 +1044,16 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (event_->count == -1)
 		{
 			event_->type = EVT_ALWAYS;
-			monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_SHIELD, event_->position);
+			env[current_level].AddMonster(MON_KISUME, M_FLAG_SHIELD, event_->position);
 			event_->count = 12;
 			you.SetInter(IT_EVENT);
-		}
-		if (event_->count <= 9)
-		{
-			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
-			{
-				if (it->isLive() && it->id == MON_KISUME && state.GetState() == MS_ATACK && env[current_level].isInSight(position)){
-					event_->count = 2;
-					return 0;
-				}
-			}
-			event_->count = 12;
 		}
 		if (event_->count >= 1 && event_->count <= 2)
 		{
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
 				if (it->isLive() && it->id == MON_KISUME){
-					if(env[current_level].isInSight(position)) {
+					if(env[current_level].isInSight(it->position)) {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KISME_RUN), true, false, false, CL_normal);
 						you.SetInter(IT_EVENT);
 					}
@@ -1072,19 +1061,32 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					while(1)
 					{
 						int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-						if(env[current_level].isMove(x_,y_,false, false) && env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER && !env[current_level].isInSight(coord_def(x_,y_))
+						if(env[current_level].isMove(x_,y_,false, false) && env[current_level].dgtile[x_][y_].flag & FLAG_NO_MONSTER && !env[current_level].isInSight(coord_def(x_,y_)))
 						{
 							env[current_level].MakeEvent(EVL_KISME, coord_def(x_, y_), EVT_APPROACH_SMALL);
+							env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, NULL);
 							it->dead(PRT_NEUTRAL, false, true);
 							return 1;
 						}
 						if(maximum-- <= 0) {
 							it->dead(PRT_NEUTRAL, false, true);
+							env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, NULL);
 							return 1;
 						}
 					}
 				}
 			}
+		}
+		else if (event_->count <= 10)
+		{
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && it->id == MON_KISUME && it->state.GetState() == MS_ATACK && env[current_level].isInSight(it->position)){
+					event_->count = 2;
+					return 0;
+				}
+			}
+			event_->count = 12;
 		}
 		return 0;
 	}

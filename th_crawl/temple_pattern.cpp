@@ -1286,8 +1286,8 @@ B.B";
 				if(it != map->sp_tile_list.end())
 					continue;
 				map->sp_tile_list.push_back(dg_t_);
-				map->event_list.push_back(mapdummy_event(EVL_CHANGE_TILE, coord_def(-2+(i%3)*2,-3+(i/3)*2), EVT_APPROACH_SMALL,DG_TEMPLE_SEIJA));
 				i--;
+				map->event_list.push_back(mapdummy_event(EVL_CHANGE_TILE, coord_def(-2+(i%3)*2,-3+(i/3)*2), EVT_APPROACH_SMALL,DG_TEMPLE_SEIJA));
 			}
 			map->name = "ALTAR_SEIJA_CHANGE_TILE";
 			return  "\

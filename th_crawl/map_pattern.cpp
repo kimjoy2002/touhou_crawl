@@ -2894,7 +2894,7 @@ T.....T\
 			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 			if (!is_exist_named(MON_KISUME)) {
-				map->event_list.push_back(mapdummy_event(MON_KISUME, coord_def(0, 0), EVT_SIGHT));
+				map->event_list.push_back(mapdummy_event(EVL_KISUME_UP, coord_def(0, 0), EVT_SIGHT));
 				set_exist_named(MON_KISUME);
 			}
 			rand_rect_iterator rand_rect(coord_def(0,0), 2,2,false);
@@ -4208,15 +4208,14 @@ const char* dream_enter_pattern(map_dummy* map)
 		map->m_exit.y = 0;
 		map->name = "DREAM_TWIST_ENTER";
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->sp_tile_list.push_back(DG_DREAM_WALL);
 		return "\
-`111111^1\
-`1^^^^1^1\
-`1^11^1^1\
-`1^10^1^1\
-`1^1111^1\
-`1^^^^^^1\
-`11111111";
+`::::::^:\
+`:^^^^:^:\
+`:^::^:^:\
+`:^:0^:^:\
+`:^::::^:\
+`:^^^^^^:\
+`::::::::";
 		break;
 	}
 	}
@@ -5110,9 +5109,9 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 			return  "\
 .....................\
 .......#######.......\
-.....##.......##.....\
+.....##..m.m..##.....\
 ....#...........#....\
-...#.$$$.....$$$.#...\
+...#.$$$..M..$$$.#...\
 ..#.$$i$$...$$i$$.#..\
 ..#.$iii$$.$$iii$.#..\
 .#.$$.i..$.$..i.$$.#.\
@@ -5120,9 +5119,9 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 .#.$i....$.$....i$.#.\
 .#.$$$$$$...$$$$$$.#.\
 .#.......$.$.......#.\
-.#......$.$.$......#.\
+.#m..M..$.$.$..M..m#.\
 .#.....$$...$$.....#.\
-..#...$$.....$$...#..\
+..#m..$$.....$$..m#..\
 ..#..$$iiiiiii$$..#..\
 ...#.$$$ii.ii$$$.#...\
 ....#..$$$$$$$..#....\
@@ -5151,7 +5150,7 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 			{
 				item_infor t;
 				makeitem(ITM_GOAL, 0, &t, RUNE_SUBTERRANEAN);
-				map->item_list.push_back(mapdummy_item(t,coord_def(0,10))));		
+				map->item_list.push_back(mapdummy_item(t,coord_def(0,-10)));		
 			}
 
 			if(!is_exist_named(MON_YUMA)){

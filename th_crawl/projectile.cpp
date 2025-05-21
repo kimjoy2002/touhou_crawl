@@ -348,6 +348,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			break;
 		case '+':
 		case '=':
+		case GVK_RT:
 			{
 				int i = 0;
 				while(i < env[current_level].mon_vector.size())
@@ -375,6 +376,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				break;
 			}
 		case '-':
+		case GVK_LT:
 			{
 				int i = 0;
 				while(i < env[current_level].mon_vector.size()) //나중에 빠른 던지기 무기로 바꾸기
@@ -404,6 +406,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				break;
 			}
 		case 'v':
+		case GVK_BUTTON_A_LONG:
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{
 				if(!unit_->isplayer())
@@ -418,6 +421,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 
 			//아이템 던지기 전용
 		case ')':
+		case GVK_RIGHT_BUMPER:
 			if(infor_->isitem)
 			{
 				int i = 0;
@@ -439,6 +443,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			}
 			break;
 		case '(':
+		case GVK_LEFT_BUMPER:
 			if(infor_->isitem)
 			{
 				int i = 0;
@@ -463,6 +468,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			}
 			break;
 		case 'i':
+		case GVK_BUTTON_Y://패드 X
 			if(infor_->isitem)
 			{
 				refreshPath_before(coord_def(you.position.x, you.position.y), beam, it, infor_, m_len_, sector_);
@@ -472,6 +478,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			}
 			break;
 		case VK_RETURN:
+		case GVK_BUTTON_A:
 			paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_); 
 			if (good_path || sukima_ || no_target_)
 			{
@@ -480,6 +487,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 				return 1;
 			}
 		case '.':
+		case GVK_BUTTON_X:
 			paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_); 
 			if(good_path || sukima_)
 			{

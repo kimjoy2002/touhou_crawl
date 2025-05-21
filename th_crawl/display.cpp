@@ -522,6 +522,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
+	int spell_draw_ = 0;
 	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSpell[i])
@@ -556,7 +557,11 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			ss << SpellLevel(spell_);
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
 			
-			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;			
+			rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
+			if(spell_draw_++ == current_position) {
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+			}
+			
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
@@ -948,6 +953,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_SUCCESS_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
+	int skill_draw_= 0;
 	for(int i=0;i<52;i++)
 	{
 		if(you.MemorizeSkill[i])
@@ -979,6 +985,9 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 			
 			RECT rc2={50, rc.top,  (LONG)(rc.left + PrintCharWidth(ss.str())*fontDesc.Width), (LONG)(rc.top+fontDesc.Height)};
 		
+			if(skill_draw_++ == current_position) {
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+			}
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
 				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
@@ -4195,7 +4204,28 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 
 void display_manager::setPosition(int value_, int char_) {
 	int max_position = -1;
-	if(state == DT_SUB_TEXT) {
+	if(state == DT_SKILL_USE || state == DT_SPELL) {
+		
+		for(int i=0;i<52;i++)
+		{
+			if(state == DT_SKILL_USE?you.MemorizeSkill[i]:you.MemorizeSpell[i])
+			{
+				max_position++;
+				if(char_ != -1 && i == asctonum(char_)) {
+					current_position = max_position;
+					return;
+				}
+			}
+		}
+		if(char_ == -1) {
+			if(value_ <= -1)
+				value_ = max_position;
+			if(value_ > max_position)
+				value_ = 0;
+			current_position = value_;
+		} 
+	}
+	else if(state == DT_SUB_TEXT) {
 		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {
@@ -4214,28 +4244,41 @@ void display_manager::setPosition(int value_, int char_) {
 			current_position = value_;
 		} 
 	} else if(state == DT_ITEM) {
+		int current_y = 10-move;
 		list<item>::iterator first,end;
 		int error_ = makeItemForItemDraw(first, end);
-
+		current_y += fontDesc.Height*3;
+		vector<int> item_pos;
 		for(item_type_simple i = ITMS_FIRST ; !error_ && i != ITMS_LAST ; i=(item_type_simple)(i+1))
 		{
 			if(!checkVaildItemView(i))
 				continue;
 			list<item>::iterator it;
+			bool exist = false;
 			for(it = first; it!=end;it++)
 			{
 				if((*it).isSimpleType(i))
 				{
+					if(!exist)
+					{
+						current_y += 48;
+						exist = true;
+					}
 					if(!checkItemSimpleType(it))
 						continue;
+					current_y += 32;
+					item_pos.push_back(current_y);
 					max_position++;
 					if(char_ != -1 && (*it).id == char_) {
 						current_position = max_position;
+						if(current_y-48 < 0)
+							move += current_y-48;
+						else if(current_y > option_mg.getHeight())
+							move += current_y - option_mg.getHeight();
 						return;
 					}
 				}
 			}
-
 		}
 		
 		if(char_ == -1) {
@@ -4243,6 +4286,10 @@ void display_manager::setPosition(int value_, int char_) {
 				value_ = max_position;
 			if(value_ > max_position)
 				value_ = 0;
+			if(item_pos[value_]-48 < 0)
+				move += item_pos[value_]-48;
+			else if(item_pos[value_] > option_mg.getHeight())
+				move += item_pos[value_] - option_mg.getHeight();
 			current_position = value_;
 		} 
 	}
@@ -4255,7 +4302,19 @@ void display_manager::addPosition(int value_) {
 }
 int display_manager::positionToChar() {
 	int max_position = 0;
-	if(state == DT_SUB_TEXT) {
+	if(state == DT_SKILL_USE || state == DT_SPELL) {
+		for(int i=0;i<52;i++)
+		{
+			if(state == DT_SKILL_USE?you.MemorizeSkill[i]:you.MemorizeSpell[i])
+			{
+				if(max_position == current_position) {
+					return numtoasc(i);
+				}
+				max_position++;
+			}
+		}
+	}  
+	else if(state == DT_SUB_TEXT) {
 		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {

@@ -241,17 +241,31 @@ void iteminfor_pick()
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+
+		if(key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			CheckKey(key_);
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -384,6 +398,7 @@ void iteminfor_discard()
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+		
 		if(key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
 			int char_ = DisplayManager.positionToChar();
 			if(char_) {
@@ -528,6 +543,21 @@ void Eatting(char auto_)
 		InputedKey inputedKey;
 		if (key_ == 0)
 			key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -537,11 +567,11 @@ void Eatting(char auto_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -627,6 +657,21 @@ void Drinking(char auto_)
 		InputedKey inputedKey;
 		if(key_ == 0 )
 			key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			drink_logic(key_);
@@ -634,11 +679,11 @@ void Drinking(char auto_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -706,6 +751,19 @@ void Spelllcard_Evoke(char auto_)
 		InputedKey inputedKey;
 		if (key_ == 0)
 			key_ = waitkeyinput(inputedKey,true);
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			evoke_logic(key_,auto_);
@@ -714,11 +772,11 @@ void Spelllcard_Evoke(char auto_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -869,6 +927,21 @@ void Reading(char auto_)
 		InputedKey inputedKey;
 		if (key_ == 0)
 			key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			item* item_ = you.GetItem(key_);
@@ -886,11 +959,11 @@ void Reading(char auto_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{

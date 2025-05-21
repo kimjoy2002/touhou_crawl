@@ -95,6 +95,7 @@ float ceil_up(float x);
 string float_to_string(float value, int precision = 3);
 
 unsigned char asctonum(char a);
+char numtoasc(int a);
 
 int randA(int x); /*0부터 X까지의 랜덤난수 리턴*/
 

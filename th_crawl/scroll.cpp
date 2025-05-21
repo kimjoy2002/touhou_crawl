@@ -417,6 +417,22 @@ bool identity_scroll(bool pre_iden_)
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			item *item_ = you.GetItem(key_);
@@ -435,11 +451,11 @@ bool identity_scroll(bool pre_iden_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -892,6 +908,22 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		}
 		else
 			return false;
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			prev_key = key_;
@@ -929,11 +961,11 @@ bool enchant_armour_scroll(bool pre_iden_, bool waste_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1071,6 +1103,21 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		}
 		else
 			return false;
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			prev_key = key_;
@@ -1101,11 +1148,11 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{

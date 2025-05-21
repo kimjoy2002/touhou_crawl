@@ -56,7 +56,8 @@ void memorize_action(int spell_)
 			
 			printlog(ss.str(),true,false,false,CL_warning);
 			InputedKey inputedKey;
-			switch(waitkeyinput(inputedKey))
+			int key_ = waitkeyinput(inputedKey);
+			switch(key_)
 			{
 			case 'Y':
 			case 'y':
@@ -118,6 +119,7 @@ void _infor_(string str);
 bool iteminfor_(item *item_, bool onlyinfor) {
 	int get_item_move_ = getDisplayMove();
 	string blank(12,' ');
+	int save_position = -1;
 	while(1)
 	{
 		set<char> ket_list;
@@ -129,8 +131,17 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 		GetItemInfor(item_, !onlyinfor, &ket_list);
 		ReleaseMutex(mutx);
 		changedisplay(DT_SUB_TEXT);
+		if(save_position != -1) {
+			DisplayManager.setPosition(save_position);
+		}
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			key_ = DisplayManager.positionToChar();
+		}		
+
 		if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
 		{
 			if(int spell_ = item_->GetValue(key_ - 'a'+1))
@@ -150,7 +161,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				ReleaseMutex(mutx);
 				int memory_ = waitkeyinput();
 
-				if(memory_ == 'm' && !onlyinfor)
+				if((memory_ == 'm' || memory_ == VK_RETURN ||  memory_ == GVK_BUTTON_A || memory_ == GVK_BUTTON_A_LONG ) && !onlyinfor)
 				{
 					if (you.isMemorize(spell_)) {
 						changedisplay(DT_GAME);
@@ -162,6 +173,18 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				}
 				continue;
 			}
+		}
+		else if(key_ == VK_DOWN)
+		{
+			DisplayManager.addPosition(1);
+			save_position = DisplayManager.current_position;
+			continue;
+		}
+		else if(key_ == VK_UP)
+		{
+			DisplayManager.addPosition(-1);
+			save_position = DisplayManager.current_position;
+			continue;
 		}
 		else if (!ket_list.empty())
 		{
@@ -502,12 +525,10 @@ void iteminfor(bool gameover)
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
 			DisplayManager.addPosition(1);
-			//changemove(32);  //위
 		}
 		else if(key_ == VK_UP)
 		{
 			DisplayManager.addPosition(-1);
-			//changemove(-32); //아래
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -575,11 +596,6 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	printsub("",true,CL_normal);
 	printsub(blank,false,CL_normal);
 
-	if (can_use_)
-	{
-		use_text_.push_back({"(=)" + LocalzationManager::locString(LOC_SYSTEM_HOTKEYCHANGE), '='});
-		if (key) key->insert('=');
-	}
 	switch (it->type)
 	{
 		//case ITM_WEAPON_DAGGER:
@@ -1533,8 +1549,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 					printsub(ss.str(), false, CL_normal, sp_char);
 					sp_char++;
-					printsub("", true, CL_normal, sp_char);
-					printsub(blank, false, CL_normal, sp_char);
+					printsub("", true, CL_normal);
+					printsub(blank, false, CL_normal);
 				}
 			}
 		}
@@ -1657,6 +1673,11 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 
 
+	if (can_use_)
+	{
+		use_text_.push_back({"(=)" + LocalzationManager::locString(LOC_SYSTEM_HOTKEYCHANGE), '='});
+		if (key) key->insert('=');
+	}
 
 	if(it->isArtifact() && it->identify)
 	{

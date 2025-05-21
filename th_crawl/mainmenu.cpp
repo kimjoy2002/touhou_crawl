@@ -193,9 +193,9 @@ public:
 						int input_ = 0;
 						while(1) {
 							input_ = waitkeyinput(inputedKey, true);
-							if(input_ == VK_UP) {
+							if(input_ == VK_UP || input_ == VK_LEFT) {
 								DisplayManager.addPosition(-1);
-							} else if(input_ == VK_DOWN)  {
+							} else if(input_ == VK_DOWN  || input_ == VK_RIGHT)  {
 								DisplayManager.addPosition(1);
 							} else {
 								break;

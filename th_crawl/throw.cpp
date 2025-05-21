@@ -895,7 +895,23 @@ list<item>::iterator ThrowSelect()
 	while(1)
 	{
 		InputedKey inputedKey;
-		int key_ = waitkeyinput(inputedKey);
+		int key_ = waitkeyinput(inputedKey, true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			list<item>::iterator it = you.GetItemIterator(key_);
@@ -907,11 +923,11 @@ list<item>::iterator ThrowSelect()
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{

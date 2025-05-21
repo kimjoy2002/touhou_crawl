@@ -2033,14 +2033,14 @@ void SimpleSpellUse()
 				return;
 			}
 		}
-		else if(key_ == VK_RETURN) {
+		else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 			deletelog();
 			if(prevSpell_) {
 				SpellUse(prevSpell_, 0, true);
 			}
 			return;
 		}
-		else if(key_ == '*') {
+		else if(key_ == '*' || key_ == GVK_BUTTON_A_LONG) {
 			deletelog();
 			SpellUse(0, 0, false);
 			return;
@@ -2098,6 +2098,20 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 			InputedKey inputedKey;
 			if (key_ == 0)
 				key_ = waitkeyinput(inputedKey,true);
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				int char_ = DisplayManager.positionToChar();
+				if(char_) {
+					if(key_ == GVK_BUTTON_A_LONG) {
+						key_ = -1;
+						inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+						inputedKey.val1 = char_;
+					} else {
+						key_ = char_;
+					}
+				}
+			}
+
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -2245,6 +2259,14 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 						}
 					}
 				}
+			}
+			else if(key_ == VK_DOWN)//-----이동키-------
+			{
+				DisplayManager.addPosition(1);
+			}
+			else if(key_ == VK_UP)
+			{
+				DisplayManager.addPosition(-1);
 			}
 			else if(key_ == '?')
 			{

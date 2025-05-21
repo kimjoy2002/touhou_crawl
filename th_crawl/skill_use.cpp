@@ -248,6 +248,21 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 		{
 			InputedKey inputedKey;
 			int key_ = waitkeyinput(inputedKey,true);
+
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				int char_ = DisplayManager.positionToChar();
+				if(char_) {
+					if(key_ == GVK_BUTTON_A_LONG) {
+						key_ = -1;
+						inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+						inputedKey.val1 = char_;
+					} else {
+						key_ = char_;
+					}
+				}
+			}
+
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				changedisplay(DT_GAME);
@@ -322,11 +337,11 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 			}
 			else if(key_ == VK_DOWN)//-----이동키-------
 			{
-				changemove(32);  //위
+				DisplayManager.addPosition(1);
 			}
 			else if(key_ == VK_UP)
 			{
-				changemove(-32); //아래
+				DisplayManager.addPosition(-1);
 			}
 			else if(key_ == VK_PRIOR)
 			{
@@ -677,6 +692,23 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -706,11 +738,11 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -754,6 +786,22 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 		{
 			InputedKey inputedKey;
 			int key_ = waitkeyinput(inputedKey,true);
+
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				int char_ = DisplayManager.positionToChar();
+				if(char_) {
+					if(key_ == GVK_BUTTON_A_LONG) {
+						key_ = -1;
+						inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+						inputedKey.val1 = char_;
+					} else {
+						key_ = char_;
+					}
+				}
+			}
+
+
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				changedisplay(DT_GAME);
@@ -782,11 +830,11 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 			}
 			else if(key_ == VK_DOWN)//-----이동키-------
 			{
-				changemove(32);  //위
+				DisplayManager.addPosition(1);
 			}
 			else if(key_ == VK_UP)
 			{
-				changemove(-32); //아래
+				DisplayManager.addPosition(-1);
 			}
 			else if(key_ == VK_PRIOR)
 			{
@@ -1690,6 +1738,22 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1755,11 +1819,11 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1840,6 +1904,21 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1896,11 +1975,11 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -1942,6 +2021,37 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					key_ = -1;
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
+
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
@@ -1997,11 +2107,11 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
 		{
-			changemove(32);  //위
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(-32); //아래
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_PRIOR)
 		{
@@ -3484,13 +3594,13 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 				}
 			}
-			else if (key_ == VK_DOWN)//-----이동키-------
+			else if(key_ == VK_DOWN)//-----이동키-------
 			{
-				changemove(32);  //위
+				DisplayManager.addPosition(1);
 			}
-			else if (key_ == VK_UP)
+			else if(key_ == VK_UP)
 			{
-				changemove(-32); //아래
+				DisplayManager.addPosition(-1);
 			}
 			else if (key_ == VK_PRIOR)
 			{

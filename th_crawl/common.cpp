@@ -447,6 +447,13 @@ unsigned char asctonum(char a)
 	return (a>='a'&&a<='z')?(a-'a'):((a>='A'&&a<='Z')?(a-'A'+26):0);
 }
 
+char numtoasc(int a)
+{
+	if(a<0 || a >= 52)
+		return 0;
+	return a<26?a+'a':a+'A';
+}
+
 int randA(int x)
 {
 	if(x>0)

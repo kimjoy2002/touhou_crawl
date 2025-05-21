@@ -54,7 +54,7 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 102; i++)
+	for (int i = 0; i <= 105; i++)
 	{
 		int base_pe = 1;
 		if (i == 39 || i == 41 || i == 96)
@@ -1125,7 +1125,8 @@ _______\
 			}
 		case 41:
 		{//호족난무
-			if (is_exist_named(MON_FUTO) || is_exist_named(MON_TOZIKO))
+			if ((is_exist_named(MON_FUTO) || is_exist_named(MON_TOZIKO)) &&
+			    (is_exist_named(MON_KOGASA) || is_exist_named(MON_FUTO)))
 				break;
 			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
 				break;
@@ -1138,11 +1139,14 @@ _______\
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->sp_tile_list.push_back(DG_TEMPLE_MIKO);
 
-			if (true || !is_exist_named(MON_TOZIKO)) {
+			if (!is_exist_named(MON_TOZIKO)) {
 				map->monster_list.push_back(mapdummy_mon(MON_TOZIKO, 0, coord_def(-4, -3)));
 				set_exist_named(MON_TOZIKO);
+			} else if(!is_exist_named(MON_KOGASA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_KOGASA, 0, coord_def(-4, -3)));
+				set_exist_named(MON_KOGASA);				
 			}
-			if (true || !is_exist_named(MON_FUTO)) {
+			if (!is_exist_named(MON_FUTO)) {
 				map->monster_list.push_back(mapdummy_mon(MON_FUTO, 0, coord_def(4, -3)));
 				set_exist_named(MON_FUTO);
 			}
@@ -2875,6 +2879,122 @@ T.....T\
 #....;;;;;;;#\
 ##+##########";
 		}
+		case 103: //키스메 도망
+		{
+			if (is_exist_named(MON_KISUME))
+				break;
+			if (!(floor_ >= 1 && floor_ <= 3))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 2;
+			map->size_y = 2;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			if (!is_exist_named(MON_KISUME)) {
+				map->event_list.push_back(mapdummy_event(MON_KISUME, coord_def(0, 0), EVT_SIGHT));
+				set_exist_named(MON_KISUME);
+			}
+			rand_rect_iterator rand_rect(coord_def(0,0), 2,2,false);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			for(int i = 0; i < 5 ; i++) {
+				item_infor t;
+				makeitem(ITM_ETC, 0, &t, EIT_SKELETON);
+				map->item_list.push_back(mapdummy_item(t, *rand_rect));
+				rand_rect++;
+			}
+			map->name = "KISUME_RUN_AWAY";
+			return  "\
+.....\
+.....\
+.....\
+.....\
+.....";
+		}
+		case 104: //코가사 탑 쌓기
+		{
+			if (is_exist_named(MON_KOGASA))
+				break;
+			if (!(floor_ >= 3 && floor_ <= 5))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 4;
+			map->size_y = 4;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if (!is_exist_named(MON_KOGASA)) {
+				map->monster_list.push_back(mapdummy_mon(MON_KOGASA, M_FLAG_SHIELD | M_FLAG_WAKE, coord_def(0, 0)));
+				set_exist_named(MON_KOGASA);
+			}
+			rand_rect_iterator rand_rect(coord_def(0,0), 2,2,false);
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			for(int i = 0; i < 3 ; i++) {
+				if(*rand_rect == coord_def(0,0)) {
+					i--;
+					rand_rect++;
+					continue;
+				}
+				map->event_list.push_back(mapdummy_event(EVL_CREATE_KOGASA_STONE, *rand_rect, EVT_ALWAYS));
+				rand_rect++;
+			}
+			map->name = "KOGASA_STONE_TOWER";
+			return  "\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........\
+.........";
+		}
+		case 105:
+		{
+			if (!(floor_ >= DEPTH_LEVEL && floor_ <= DEPTH_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 6;
+			map->size_y = 6;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-1, 1);
+			map->m_entrance.y = hw_ ? rand_int(-1, 1) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-1, 1);
+			map->m_exit.y = hw_ ? rand_int(-1,1) : (randA(1) ? -map->size_y : map->size_y);
+			map->flag = FLAG_NO_STAIR;
+			map->monster_list.push_back(mapdummy_mon(MON_FAIRY_RED_COMMANDER,0,coord_def(-4,-5)));
+			map->monster_list.push_back(mapdummy_mon(MON_FAIRY_HERO,0,coord_def(-5,-4)));
+			
+			map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_TEMP,0,coord_def(4,-5)));
+			map->monster_list.push_back(mapdummy_mon(MON_HOBGOBRIN_LIBRARIAN,0,coord_def(5,-4)));
+			
+			map->monster_list.push_back(mapdummy_mon(MON_CROW_TENGU,0,coord_def(-4,5)));
+			map->monster_list.push_back(mapdummy_mon(MON_KATPA_WATER_WIZARD,0,coord_def(-5,4)));
+			
+			map->monster_list.push_back(mapdummy_mon(MON_RABIT_SPEAR,0,coord_def(4,5)));
+			map->monster_list.push_back(mapdummy_mon(MON_RABIT_MAGIC,0,coord_def(5,4)));
+			map->name = "DEPTH_FOUR_MINI_DUNGEON";
+			return  "\
+#####...(((((\
+#~~_#...(..E(\
+#~__........(\
+#___........(\
+##.........((\
+.............\
+.............\
+.............\
+**.........[[\
+*___.....___[\
+*___.....___[\
+*___*...[__[[\
+*****...[[[[[";
+		}
 		}
 	}
 	return NULL;
@@ -4057,6 +4177,7 @@ const char* dream_enter_pattern(map_dummy* map)
 	{
 	default:
 	case 0:
+	{
 		bool hw_ = randA(1);
 		map->size_x = 3;
 		map->size_y = 3;
@@ -4076,6 +4197,28 @@ const char* dream_enter_pattern(map_dummy* map)
 ^...^..\
 ..^...^";
 		break;
+	}
+	case 1:
+	{
+		map->size_x = 4;
+		map->size_y = 3;
+		map->m_entrance.x = map->size_x-1;
+		map->m_entrance.y = 0;
+		map->m_exit.x = map->size_x-1;
+		map->m_exit.y = 0;
+		map->name = "DREAM_TWIST_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->sp_tile_list.push_back(DG_DREAM_WALL);
+		return "\
+`111111^1\
+`1^^^^1^1\
+`1^11^1^1\
+`1^10^1^1\
+`1^1111^1\
+`1^^^^^^1\
+`11111111";
+		break;
+	}
 	}
 }
 
@@ -4538,7 +4681,7 @@ const char* eientei_vault_pattern(map_dummy* map)
 		map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, RUNE_EIENTEI);
-		map->item_list.push_back(mapdummy_item(t,coord_def(28,2)));		
+		map->item_list.push_back(mapdummy_item(t,coord_def(23,2)));		
 		//map->event_list.push_back(mapdummy_event(22,coord_def(28,2),EVT_SIGHT));
 
 
@@ -4562,9 +4705,15 @@ const char* eientei_vault_pattern(map_dummy* map)
 			set_exist_named(MON_UDONGE);
 		}		
 		if(!is_exist_named(MON_KAGUYA)){
-			map->monster_list.push_back(mapdummy_mon(MON_KAGUYA,0,coord_def(23,1)));
+			map->monster_list.push_back(mapdummy_mon(MON_KAGUYA,M_FLAG_SHIELD,coord_def(23,1)));
 			set_exist_named(MON_KAGUYA);
 		}
+		
+		map->monster_list.push_back(mapdummy_mon(MON_RABIT_SPEAR,0,coord_def(20,0)));	
+		map->monster_list.push_back(mapdummy_mon(MON_RABIT_SPEAR,0,coord_def(26,0)));	
+		map->monster_list.push_back(mapdummy_mon(MON_RABIT_SPEAR,0,coord_def(19,-1)));	
+		map->monster_list.push_back(mapdummy_mon(MON_RABIT_SPEAR,0,coord_def(26,-1)));
+
 
 
 		map->name = "EIENTEI_KAGUYA_RUNE";
@@ -4574,10 +4723,10 @@ const char* eientei_vault_pattern(map_dummy* map)
 .......................................................................\
 .....$$$$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$$$$$$$$$$$$......\
 .....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
-.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$$$$$$$$$$+$......\
-.....$,,,,,,+,,,,,,,,,+,,,,,,,,,,,,,,,,,+,,,,,,,,,,,,$,,,,,,,,,,$......\
+.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
+.....$,,,,,,+,,,,,,,,,+,,,,,,,,,,,,,,,,,+,,,,,,,,,,,,$$$$$$$$$++$......\
 .....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
-.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$+$$$$$$$$$$......\
+.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
 .....$$+$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$,,,,,,,,,,$......\
 .....$,,,,,,,,,,$....................................$,,,,,,,,,,$......\
 .....$,,,,,,,,,,$........................[...........$,,,,,,,,,,$......\
@@ -4920,7 +5069,7 @@ const char* moon_last_vault_pattern(map_dummy* map)
 	
 const char* subterranean_last_vault_pattern(map_dummy* map)
 {
-	switch(randA(0))
+	switch(randA(1))
 	{
 	default:
 	case 0:
@@ -4980,6 +5129,71 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 .....##.......##.....\
 .......#######.......\
 .....................";	
+		break;
+		}
+	case 1:
+		{
+			bool hw_ = randA(1);
+			map->size_x = 19;
+			map->size_y = 12;
+			map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			random_extraction<dungeon_tile_type> rand_;
+			rand_.push(DG_CLOSE_DOOR);
+			rand_.push(DG_METAL_WALL);
+			map->sp_tile_list.push_back(rand_.pop());
+			map->sp_tile_list.push_back(rand_.pop());
+			{
+				item_infor t;
+				makeitem(ITM_GOAL, 0, &t, RUNE_SUBTERRANEAN);
+				map->item_list.push_back(mapdummy_item(t,coord_def(0,10))));		
+			}
+
+			if(!is_exist_named(MON_YUMA)){
+				map->monster_list.push_back(mapdummy_mon(MON_YUMA,M_FLAG_SHIELD,coord_def(0,-5)));
+				set_exist_named(MON_YUMA);
+			}
+			
+			rand_rect_iterator rand_rect(coord_def(0,-5), 5,3,false);
+			for(int i = 0; i < 12 ; i++) {
+				item_infor t;
+				makeitem(ITM_ETC, 0, &t, EIT_SKELETON);
+				map->item_list.push_back(mapdummy_item(t, *rand_rect));
+				rand_rect++;
+			}
+
+			map->name = "SUBTERRANEAN_YUMA_RUNE";
+			return  "\
+.......................................\
+.........$$$$$$$$$$$$$$$$$$$$$.........\
+......$$$$+iiiiiiii.iiiiiiii+$$$$......\
+....$$$...+$$$$$$$===$$$$$$$+...$$$....\
+...$$.$.........................$.$$...\
+...$..$.;;...............%%%....$..$...\
+...$..$..;;...............%.....$..$...\
+...$..$.........................$..$...\
+...$..0.%%%..................;..1..$...\
+...$..0..%%%................;;;.1..$...\
+...$..0......................;..1..$...\
+...$.M$$$$$$$$$$$$$$$$$$$$$$$$$$$M.$...\
+...$..$%%%%%%%%%%$...$..$...M...$..$...\
+...$..$.%%%%%%%%.$m.m$..$...m...$..$...\
+...$..$...%%%%...+...+..$..$..$$$..$...\
+...$..$....m.....+...+..$ii$..$.$..$...\
+...$..$..........+...+..$ii$..$.$..$...\
+...$..$..m...m...$m.m$..$ii$..$.$..$...\
+...$..$i.........$...$..$==$..$.$..$...\
+...$..+ii..M.....$...$..........+..$...\
+...$$.+iii.......$...$..........+.$$...\
+....$$$$$$$$$$$$$$+++$$$$$$$$$$$$$$....\
+.....%%%%%%%%%%%%%%%%%%%%%%%%%%%%%.....\
+......%%%%%%%%%%%%%%%%%%%%%%%%%%%......\
+.......%%%%%%%%%%%%%%%%%%%%%%%%%.......";	
 		break;
 		}
 	}

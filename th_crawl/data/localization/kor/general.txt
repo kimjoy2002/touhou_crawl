@@ -1263,6 +1263,9 @@ LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,허기를 참지 못한 유마가 그리드몬�
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0:이|가} 바닥에 있는 {1:을|를} 흡수하고 회복했다.
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB_MANY,{0:이|가} 바닥에 있는 {1}개의 아이템들을 흡수하고 회복했다.
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0:이|가} 바닥에 있는 {1:을|를} 흡수하고 회복했다.
+LOC_SYSTEM_UNIQUE_EIKA_REGA_DISTANCE,멀리있는 누군가의 분노가 느껴진다.
+LOC_SYSTEM_UNIQUE_EIKA_REGA,{0:이|가} 분노했다! {0:이|가} 강해졌다.
+LOC_SYSTEM_UNIQUE_KOGASA_REGA,{0:이|가} 당신의 행동에 분노했다! ...그러나 아무런 일도 일어나지 않았다.
 LOC_SYSTEM_TENSI_GOOD1,텐시가 당신에게 호의적인 시선을 주었다.
 LOC_SYSTEM_TENSI_GOOD2,텐시의 힘이 당신에게 닿았다.
 LOC_SYSTEM_TENSI_GOOD3,텐시: 힘들어보이네!
@@ -1736,6 +1739,7 @@ LOC_SYSTEM_EVENT_KOGASA_TIME1,It's SURPRISE TIME!!
 LOC_SYSTEM_EVENT_KOGASA_TIME2,...그러나 코가사는 무언가 잘못되었음을 느꼈다.
 LOC_SYSTEM_EVENT_HOJOK1,{0:은|는} 외쳤다. "해치워주마!"
 LOC_SYSTEM_EVENT_HOJOK2,{0:은|는} 외쳤다. "저에게 맡겨주시길!"
+LOC_SYSTEM_EVENT_HOJOK3,{0:은|는} 외쳤다. "저에게 맡겨주시... 누군가 자네!"
 LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0:은|는} 외쳤다. "원망스럽...콜록, 콜록!"
 LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...코가사는 준비해둔 연기를 너무 들이마신듯하다.
 LOC_SYSTEM_EVENT_SION_ITEM,아이템
@@ -1743,6 +1747,7 @@ LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0:이|가} 가까이가자 사라졌다.
 LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,아이템들이 가까이가자 사라졌다.
 LOC_SYSTEM_EVENT_DAIYOUSEI_WITH_FOG,갑자기 안개가 짙어졌다... 요정들의 습격이다!
 LOC_SYSTEM_EVENT_TENSI_EARTHQUAKE,갑자기 벽에 금이 가기 시작했다!
+LOC_SYSTEM_EVENT_KISME_RUN,당신을 눈치챈 키스메가 공중으로 도망쳤다!
 LOC_SYSTEM_MON_DREAM_UNIQUE,꿈의 주민 {0}
 LOC_SYSTEM_EVOKE_AIRSCROLL,에어두루마리로부터 영력을 얻었다!
 LOC_SYSTEM_EVOKE_DREAM_SOUL,당신은 {0}의 꿈을 불러냈다!
@@ -3292,6 +3297,7 @@ LOC_SYSTEM_ITEM_ETC_SATORI,실종 포스터
 LOC_SYSTEM_ITEM_ETC_CATNIP,개다래 나무
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,부셔진 카메라
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,잡동사니
+LOC_SYSTEM_ITEM_ETC_SKELETON,해골
 LOC_SYSTEM_ITEM_ETC_PHOTO,사진
 LOC_SYSTEM_ITEM_ETC_CATNIP_CONFUSE,당신은 개다래나무의 향기에 취했다!
 LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT,이 아이템은 {0}까지 인챈트가 가능하다.
@@ -3488,6 +3494,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,"잃어버린 물건을 찾습니�
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,개다래 나무다. 그렇게 유용하진않아보이지만 고양이과들은 맥을 못 추는듯하다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,부셔져있는 텐구의 카메라다. 아무래도 캇파들이 수리를 위해 보관하고 있는 듯 하다.\n심하게 부셔져있기때문에 쓰임새는 전혀 없어보인다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,캇파들이 쓰고 남은 재료와 공구들이다. 쓰임새는 없을 것 같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SKELETON,요괴들에게 습격을 당한 불쌍한 인간의 해골이다.\n쓰임새는 없을 것 같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BUG,버그템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,{0:이|가} 찍혀있는 사진이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,미소녀가 찍혀있는 사진이다.\

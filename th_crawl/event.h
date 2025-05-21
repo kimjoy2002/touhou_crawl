@@ -56,7 +56,9 @@ enum event_list
 	EVL_CHANGE_TILE,
 	EVL_MIMA_SPARK_BOOK,
 	EVL_TENSI_EARTHQUAKE,
-	EVL_TWIST //트위스트
+	EVL_TWIST, //트위스트
+	EVL_KISUME_UP,
+	EVL_CREATE_KOGASA_STONE
 };
 
 class events

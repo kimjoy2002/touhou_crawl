@@ -1576,6 +1576,10 @@ textures img_item_cucumber(&texture_item02, 165, 255);
 textures img_item_broken_camera(&texture_item02, 166, 255);
 textures img_item_kappa_trash(&texture_item02, 167, 255);
 
+textures img_item_skeleton[] = { textures(&texture_item02, 206, 255),
+textures(&texture_item02, 207, 255),
+textures(&texture_item02, 208, 255)
+};
 
 textures img_effect_select(&texture_item01, 1, 255);
 textures img_effect_slience(&texture_item01, 111, 255);
@@ -3505,6 +3509,12 @@ int texturetoint(textures* input)
 		return 546;
 	else if(input == &img_tanmac_oil_big[1])
 		return 547;
+	else if(input == &img_item_skeleton[0])
+		return 548;
+	else if(input == &img_item_skeleton[1])
+		return 549;
+	else if(input == &img_item_skeleton[2])
+		return 550;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4627,6 +4637,12 @@ textures* inttotexture(int input)
 		return &img_mons_sonbiten_spintowin;
 	case 547:
 		return &img_tanmac_oil_big[1];
+	case 548:
+		return &img_item_skeleton[0];
+	case 549:
+		return &img_item_skeleton[1];
+	case 550:
+		return &img_item_skeleton[2];
 	default:
 		return &img_mons_default;
 	}

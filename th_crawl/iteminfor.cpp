@@ -1632,6 +1632,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO3));
 			break;
 		}
+		case EIT_SKELETON:
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SKELETON));
+			break;
 		}
 		break;
 	default:

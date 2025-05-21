@@ -728,6 +728,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	return 1;
 	case EVL_HOJOK:
 	{
+		bool toziko_ = true;
 		unit* target_unit = env[current_level].isMonsterPos(event_->position.x - 4, event_->position.y - 1);
 		if (target_unit)
 		{
@@ -736,8 +737,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x - 3, event_->position.y - 1), env[current_level].base_floor);
 
 			you.resetLOS();
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK1,true,false,false,CL_speak,
-				 PlaceHolderHelper(target_unit->GetName()->getName()));
+			if(env[current_level].isInSight(coord_def(event_->position.x - 4, event_->position.y - 1))) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK1,true,false,false,CL_speak,
+					 PlaceHolderHelper(target_unit->GetName()->getName()));
+			}
+			if(target_unit->id != MON_TOZIKO) {
+				 toziko_ = false;
+			}
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer()) {
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
@@ -751,8 +757,10 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			env[current_level].changeTile(coord_def(event_->position.x + 3, event_->position.y - 1), env[current_level].base_floor);
 
 			you.resetLOS();
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_HOJOK2,true,false,false,CL_speak,
-				 PlaceHolderHelper(target_unit->GetName()->getName()));
+			if(env[current_level].isInSight(coord_def(event_->position.x + 4, event_->position.y - 1))) {
+				LocalzationManager::printLogWithKey(toziko_?LOC_SYSTEM_EVENT_HOJOK2:LOC_SYSTEM_EVENT_HOJOK3,true,false,false,CL_speak,
+					 PlaceHolderHelper(target_unit->GetName()->getName()));
+			}
 			target_unit->PlusTimeDelay(-target_unit->GetWalkDelay());
 			if (!target_unit->isplayer())
 				((monster*)target_unit)->FoundTarget(&you, ((monster*)target_unit)->FoundTime());
@@ -1002,6 +1010,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_TENSI_EARTHQUAKE) + " ", false, false, false, CL_small_danger);
 			event_->count = 12;
 			env[current_level].MakeNoise(event_->position, 12, NULL);
+			you.SetInter(IT_EVENT);
 		}
 		if (event_->count == 9 || event_->count == 6 || event_->count == 3 || event_->count == 1)
 		{
@@ -1029,6 +1038,61 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			}
 		}
 		return 0;
+	}
+	case EVL_KISUME_UP:
+	{
+		if (event_->count == -1)
+		{
+			event_->type = EVT_ALWAYS;
+			monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_SHIELD, event_->position);
+			event_->count = 12;
+			you.SetInter(IT_EVENT);
+		}
+		if (event_->count <= 9)
+		{
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && it->id == MON_KISUME && state.GetState() == MS_ATACK && env[current_level].isInSight(position)){
+					event_->count = 2;
+					return 0;
+				}
+			}
+			event_->count = 12;
+		}
+		if (event_->count >= 1 && event_->count <= 2)
+		{
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && it->id == MON_KISUME){
+					if(env[current_level].isInSight(position)) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KISME_RUN), true, false, false, CL_normal);
+						you.SetInter(IT_EVENT);
+					}
+					int maximum = 1000;
+					while(1)
+					{
+						int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
+						if(env[current_level].isMove(x_,y_,false, false) && env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER && !env[current_level].isInSight(coord_def(x_,y_))
+						{
+							env[current_level].MakeEvent(EVL_KISME, coord_def(x_, y_), EVT_APPROACH_SMALL);
+							it->dead(PRT_NEUTRAL, false, true);
+							return 1;
+						}
+						if(maximum-- <= 0) {
+							it->dead(PRT_NEUTRAL, false, true);
+							return 1;
+						}
+					}
+				}
+			}
+		}
+		return 0;
+	}
+	case EVL_CREATE_KOGASA_STONE:
+	{
+		monster *tower_ = env[current_level].AddMonster(MON_CLUMSY_STONE_TOWER, 0, event_->position);
+		tower_->image = &img_mons_stonetower[3+randA(1)];
+		return 1;
 	}
 	default:
 		break;

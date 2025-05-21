@@ -2138,6 +2138,7 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist = 1;
 		break;
 	case MON_STONETOWER:
+	case MON_CLUMSY_STONE_TOWER:
 		mon->ice_resist = 3;
 		mon->fire_resist = 1;
 		mon->elec_resist = 3;

@@ -2302,10 +2302,11 @@ int monster::atkmove(int is_sight, bool only_move)
 							}
 							else
 							{
-								enterlog();
 								string str_ = Get_Speak(id, this, MST_MAGIC);
-								if (!str_.empty() && (env[current_level].isInSight(position)))
+								if (!str_.empty() && (env[current_level].isInSight(position))) {
+									enterlog();
 									printlog(str_, true, false, false, CL_magic);
+								}
 							}
 						}
 						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
@@ -2600,6 +2601,52 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
+	if((id == MON_STONETOWER || id == MON_CLUMSY_STONE_TOWER) && (reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !remove_)
+	{
+		int owner_ = (id == MON_STONETOWER)?MON_EIKA:MON_KOGASA;
+		
+		for(auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end();it++)
+		{
+			if(it->id == owner_ && it->isLive() && it->isEnemyUnit(&you))
+			{
+				if(it->isYourShight())
+				{
+					if(owner_ == MON_EIKA) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_EIKA_REGA,true,false,false,CL_small_danger,
+							PlaceHolderHelper(it->name.getName()));
+					}
+					else if(owner_ == MON_KOGASA) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_KOGASA_REGA,true,false,false,CL_normal,
+							PlaceHolderHelper(it->name.getName()));
+					}
+				}
+				else
+				{
+					if(owner_ == MON_EIKA) {
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_BENYATH_RAGE_DISTANCE,true,false,false,CL_normal);
+					}
+				}
+				if(owner_ == MON_EIKA) {
+					it->special_value++;
+					if(special_value < 5) {
+						it->LevelUpdown(1,5.0f,1.0f);
+					}
+					if(special_value < 10 && special_value %2 == 0) {
+						it->LevelUpdown(1,5.0f,1.0f);
+					}
+					if(special_value >= 10 && special_value %5 == 0) {
+						it->LevelUpdown(1,5.0f,1.0f);
+					} else {
+						it->hp+=5;
+						it->max_hp+=5;
+					}
+					if(it->isYourShight()) {
+						it->SetHaste(20);
+					}
+				}
+			}
+		}		
+	}
 
 
 	for(int i = 0; i < 5; i++)
@@ -3640,6 +3687,42 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_MISTIA:
+		if(!smoke) {
+			if(isCompleteNeutral() && randA(100) < 10) { //그냥 틈날때 불러
+				if (!env[current_level].isSilence(position)  && !s_mute)
+				{
+					string str_ = Get_Speak(id, this, MST_MAGIC);
+					if (!str_.empty() && (env[current_level].isInSight(position))) {
+						enterlog();
+						printlog(str_, true, false, false, CL_magic);
+					}
+					if(MonsterUseSpell(SPL_MISTIA_SONG,false,this,position))
+					{
+						Noise(position,SpellNoise(SPL_MISTIA_SONG),this);
+						return true;
+					}
+				}
+			}	
+		}
+		break;
+	case MON_LUNASA:
+	case MON_MERLIN:
+	case MON_LYRICA:
+		if(!smoke) {
+			if(isCompleteNeutral() && randA(100) < 5) { //노 래 조 아
+				if (!env[current_level].isSilence(position)  && !s_mute)
+				{
+					string str_ = Get_Speak(id, this, MST_MAGIC);
+					if (!str_.empty() && (env[current_level].isInSight(position))) {
+						enterlog();
+						printlog(str_, true, false, false, CL_magic);
+					}
+					Noise(position,20,this);
+				}
+			}	
+		}
+		break;
 	case MON_YAMAME:
 		if (!smoke_){
 			if (env[current_level].isInSight(position, true) && randA(2) == 0 && !isArena() && !isUserAlly())
@@ -3839,7 +3922,9 @@ void monster::special_action(int delay_, bool smoke_)
 	break;
 	case MON_YUMA:
 		if (!smoke_){
-			AbsorbItem();
+			if (hp != max_hp) {
+				AbsorbItem();
+			}
 			if (hp <= max_hp / 2) {
 				if (env[current_level].isInSight(position)) {
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,true,false,false,CL_magic);

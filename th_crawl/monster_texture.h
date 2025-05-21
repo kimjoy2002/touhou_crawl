@@ -430,7 +430,7 @@ extern textures img_item_chocolet;
 extern textures img_item_cucumber;
 extern textures img_item_broken_camera;
 extern textures img_item_kappa_trash;
-
+extern textures img_item_skeleton[];
 
 extern textures img_item_scroll;
 extern textures img_item_goal;
